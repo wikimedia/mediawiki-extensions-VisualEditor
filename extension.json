@@ -1688,7 +1688,6 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWMetaDialogTool.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/pages/ve.ui.MWCategoriesPage.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryInputWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryItemWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.css",
