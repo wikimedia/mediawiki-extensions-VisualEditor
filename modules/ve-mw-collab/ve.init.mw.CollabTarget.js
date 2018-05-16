@@ -124,6 +124,13 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			{ server: this.rebaserUrl }
 		);
 
+		// TODO: server could communicate with MW (via oauth?) to know the
+		// current-user's name. Disable changing name if logged in?
+		// Communicate an I-am-a-valid-user flag to other clients?
+		if ( !mw.user.isAnon() ) {
+			synchronizer.changeName( mw.user.getName() );
+		}
+
 		surfaceView.setSynchronizer( synchronizer );
 	}
 
