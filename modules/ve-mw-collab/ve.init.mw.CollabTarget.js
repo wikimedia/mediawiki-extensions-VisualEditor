@@ -111,7 +111,7 @@ ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
-	var synchronizer, surfaceView;
+	var synchronizer, surfaceView, defaultName;
 
 	if ( surface !== this.surface ) {
 		this.$editableContent.after( surface.$element );
@@ -123,12 +123,22 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			this.title.toString(),
 			{ server: this.rebaserUrl }
 		);
+		synchronizer.on( 'authorNameChange', function ( authorId ) {
+			var newName = synchronizer.authorNames[ authorId ];
+			if ( authorId === synchronizer.getAuthorId() ) {
+				mw.storage.session.set( 've-collab-username', newName );
+			}
+		} );
 
 		// TODO: server could communicate with MW (via oauth?) to know the
 		// current-user's name. Disable changing name if logged in?
 		// Communicate an I-am-a-valid-user flag to other clients?
-		if ( !mw.user.isAnon() ) {
-			synchronizer.changeName( mw.user.getName() );
+		defaultName = mw.storage.session.get( 've-collab-username' );
+		if ( !defaultName && !mw.user.isAnon() ) {
+			defaultName = mw.user.getName();
+		}
+		if ( defaultName ) {
+			synchronizer.changeName( defaultName );
 		}
 
 		surfaceView.setSynchronizer( synchronizer );
