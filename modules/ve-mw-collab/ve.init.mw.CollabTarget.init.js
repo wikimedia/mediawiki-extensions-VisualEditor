@@ -15,9 +15,11 @@
 			.concat( conf.pluginModules.filter( mw.loader.getState ) ),
 		loadingPromise = mw.loader.using( modules ),
 		progressBar = OO.ui.infuse( $( '.ve-init-mw-collabTarget-loading' ) ),
-		documentNameField = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameField' ) ),
+		form = OO.ui.infuse( $( '.ve-init-mw-collabTarget-form' ) ),
 		documentNameInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameInput' ) ),
-		submitButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) );
+		documentNameButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) ),
+		importInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importInput' ) ),
+		importButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importButton' ) );
 
 	if ( !VisualEditorSupportCheck() ) {
 		// VE not supported - say something?
@@ -33,7 +35,7 @@
 		setTitle( mw.msg( 'collabpad-doctitle', title.getPrefixedText() ) );
 
 		progressBar.toggle( true );
-		documentNameField.toggle( false );
+		form.toggle( false );
 
 		loadingPromise.done( function () {
 			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl );
@@ -47,7 +49,7 @@
 
 			target.documentReady( ve.createDocumentFromHtml( '' ) );
 		} ).always( function () {
-			documentNameField.toggle( false );
+			form.toggle( false );
 			progressBar.toggle( false );
 		} ).fail( function () {
 			// eslint-disable-next-line no-use-before-define
@@ -67,33 +69,40 @@
 		}
 
 		progressBar.toggle( false );
-		documentNameField.toggle( true );
+		form.toggle( true );
 	}
 
-	function onChange() {
+	function loadTitle( title, params ) {
+		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
+		if ( history.pushState ) {
+			// TODO: Handle popstate
+			history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl( params ) );
+			showPage( title );
+		} else {
+			location.href = specialTitle.getUrl();
+		}
+	}
+
+	function getRandomTitle() {
+		return Math.random().toString( 36 ).slice( 2 );
+	}
+
+	function onNameChange() {
 		documentNameInput.getValidity().then( function () {
-			submitButton.setDisabled( false );
+			documentNameButton.setDisabled( false );
 		}, function () {
-			submitButton.setDisabled( true );
+			documentNameButton.setDisabled( true );
 		} );
 	}
 
-	function onSubmit() {
+	function loadFromName() {
 		documentNameInput.getValidity().then( function () {
-			var specialTitle,
-				title = mw.Title.newFromText(
-					documentNameInput.getValue().trim() || Math.random().toString( 36 ).slice( 2 )
-				);
+			var title = mw.Title.newFromText(
+				documentNameInput.getValue().trim() || getRandomTitle()
+			);
 
 			if ( title ) {
-				specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
-				if ( history.pushState ) {
-					// TODO: Handle popstate
-					history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl() );
-					showPage( title );
-				} else {
-					location.href = specialTitle.getUrl();
-				}
+				loadTitle( title );
 			} else {
 				documentNameInput.focus();
 			}
@@ -104,12 +113,41 @@
 		// Empty input will create a random document name, otherwise must be valid
 		return value === '' || !!mw.Title.newFromText( value );
 	} );
-	submitButton.setDisabled( false );
+	documentNameButton.setDisabled( false );
 
-	documentNameInput.on( 'change', onChange );
-	documentNameInput.on( 'enter', onSubmit );
-	submitButton.on( 'click', onSubmit );
-	onChange();
+	documentNameInput.on( 'change', onNameChange );
+	documentNameInput.on( 'enter', loadFromName );
+	documentNameButton.on( 'click', loadFromName );
+	onNameChange();
+
+	function onImportChange() {
+		documentNameInput.getValidity().then( function () {
+			importButton.setDisabled( false );
+		}, function () {
+			importButton.setDisabled( true );
+		} );
+	}
+
+	function importTitle() {
+		importInput.getValidity().then( function () {
+			var title = mw.Title.newFromText( importInput.getValue().trim() );
+
+			if ( title ) {
+				loadTitle( mw.Title.newFromText( getRandomTitle() ), { 'import': title.toString() } );
+			} else {
+				documentNameInput.focus();
+			}
+		} );
+	}
+
+	importInput.setValidation( function ( value ) {
+		// TODO: Check page exists?
+		return !!mw.Title.newFromText( value );
+	} );
+	importInput.on( 'enter', importTitle );
+	importButton.on( 'click', importTitle );
+	importButton.setDisabled( false );
+	onImportChange();
 
 	if ( pageTitle ) {
 		showPage( pageTitle );

@@ -407,6 +407,8 @@
 	"visualeditor-preference-visualdiffpage-info-link": "\/\/www.mediawiki.org\/wiki\/VisualEditor\/Diffs",
 	"visualeditor-preference-visualdiffpage-label": "Visual differences",
 	"visualeditor-quick-access-characters.json": "null",
+	"visualeditor-rebase-client-import": "Import",
+	"visualeditor-rebase-client-import-name": "Page title",
 	"visualeditor-recreate": "The page has been deleted since you started editing. Press \"$1\" to recreate it.",
 	"visualeditor-redirect-description": "Redirect to $1",
 	"visualeditor-savedialog-error-badtoken": "We could not save your edit because the session was no longer valid.",

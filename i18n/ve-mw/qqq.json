@@ -421,6 +421,8 @@
 	"visualeditor-preference-visualdiffpage-info-link": "{{optional|Used on [[Special:Preferences]] as a link to a page where users can learn about this Beta Feature. Defaults to a page on MediaWiki.org.}}",
 	"visualeditor-preference-visualdiffpage-label": "Used in [[Special:Preferences]].\n\nUsed as label for checkbox to enable the new visual difference mode.\n\nThe description for this checkbox is {{msg-mw|Visualeditor-preference-visualdiffpage-description}}",
 	"visualeditor-quick-access-characters.json": "JSON object mapping character labels to actual characters that can be inserted using the special character inserter.\n{{Identical|Null}}",
+	"visualeditor-rebase-client-import": "Label for button to import a document from the wiki",
+	"visualeditor-rebase-client-import-name": "Label import document input",
 	"visualeditor-recreate": "Text shown when the editor fails to save the page due to it having been deleted since they opened VE. $1 is the message {{msg-mw|ooui-dialog-process-continue}}.",
 	"visualeditor-redirect-description": "Title shown as the description of redirect nodes.\n\nParameters:\n* $1 - Target title of redirect",
 	"visualeditor-savedialog-error-badtoken": "Error displayed in the save dialog if saving the edit failed due to an invalid edit token (likely due to the user having logged out in a separate window, or logged in again)",
