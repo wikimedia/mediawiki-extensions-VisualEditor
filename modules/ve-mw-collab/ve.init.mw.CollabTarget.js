@@ -130,7 +130,7 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			{ server: this.rebaserUrl }
 		);
 		synchronizer.on( 'authorNameChange', function ( authorId ) {
-			var newName = synchronizer.authorNames[ authorId ];
+			var newName = synchronizer.getAuthorName( authorId );
 			if ( authorId === synchronizer.getAuthorId() ) {
 				mw.storage.session.set( 've-collab-username', newName );
 			}
