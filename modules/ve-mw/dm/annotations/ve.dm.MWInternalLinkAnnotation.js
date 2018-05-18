@@ -118,7 +118,7 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	// Check if this matches the server's article path
 	matches = relativeHref.match( relativeBaseRegex );
 
-	if ( matches && matches[ 1 ].indexOf( '?' ) === -1 ) {
+	if ( matches && matches[ 1 ].split( '#' )[ 0 ].indexOf( '?' ) === -1 ) {
 		// Take the relative path
 		href = matches[ 1 ];
 		isInternal = true;
