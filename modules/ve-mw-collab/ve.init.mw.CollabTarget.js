@@ -51,6 +51,12 @@ ve.init.mw.CollabTarget.static.name = 'collab';
 
 ve.init.mw.CollabTarget.static.trackingName = 'collab';
 
+ve.init.mw.CollabTarget.static.toolbarGroups = ve.copy( ve.init.mw.CollabTarget.static.toolbarGroups );
+ve.init.mw.CollabTarget.static.toolbarGroups.splice( 4, 0, {
+	name: 'commentAnnotation',
+	include: [ 'commentAnnotation' ]
+} );
+
 ve.init.mw.CollabTarget.static.actionGroups = [
 	{
 		name: 'help',
