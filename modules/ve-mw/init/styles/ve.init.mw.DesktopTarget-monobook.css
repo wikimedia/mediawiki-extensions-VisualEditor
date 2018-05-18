@@ -10,7 +10,7 @@
 	font-size: 1.28em; /* 0.8em / x-small */
 }
 
-.mw-body a.external.ve-ce-linkAnnotation-active {
+.mw-body a.external.ve-ce-linkAnnotation.ve-ce-annotation-active {
 	/* Reset -2px from VE-core */
 	margin-right: 0;
 	/* Monobook sets a background:url(); rule which overrides the colour. TODO: Fix upstream */

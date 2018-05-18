@@ -4,7 +4,7 @@
  * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-.plainlinks a.ve-ce-linkAnnotation-active.external {
+.plainlinks a.ve-ce-linkAnnotation.ve-ce-annotation-active.external {
 	/*
 	 * plainlinks is a MW core class which tries to suppress the normal
 	 * external-link appearance; we don't want it to also suppress the

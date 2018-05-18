@@ -29,7 +29,7 @@
 	margin: 0.5em 0;
 }
 
-.mw-body .external.ve-ce-linkAnnotation-active {
+.mw-body .external.ve-ce-linkAnnotation.ve-ce-annotation-active {
 	/* Reset -2px from VE-core */
 	margin-right: 0;
 }
