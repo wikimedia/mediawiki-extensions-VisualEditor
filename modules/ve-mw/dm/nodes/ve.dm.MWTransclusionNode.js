@@ -134,6 +134,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var els, i, len, span, value,
+		modelNode, viewNode,
 		store = converter.getStore(),
 		originalMw = dataElement.attributes.originalMw,
 		originalDomElements = store.value( dataElement.originalDomElementsHash );
@@ -202,6 +203,19 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 			// Wrap plain text nodes so we can give them an attribute
 			els[ i ] = wrapTextNode( els[ i ] );
 			els[ i ].setAttribute( 'data-ve-ignore', 'true' );
+		}
+	} else if ( converter.isForPreview() ) {
+		modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
+		modelNode.setDocument( converter.internalList.getDocument() );
+		viewNode = ve.ce.nodeFactory.create( modelNode.getType(), modelNode );
+		if ( !viewNode.hasRendering() ) {
+			viewNode.onSetup();
+			viewNode.$element
+				.append( viewNode.createInvisibleIcon() )
+				.attr( 'title', dataElement.attributes.text );
+			els = viewNode.$element.toArray();
+			viewNode.destroy();
+			return els;
 		}
 	}
 	return els;
