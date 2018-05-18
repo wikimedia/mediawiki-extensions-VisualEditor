@@ -43,6 +43,36 @@ QUnit.test( 'toDataElement', function ( assert ) {
 						title: 'Foo?'
 					}
 				}
+			},
+			{
+				// The fragment should make it into some parts of this, and not others
+				msg: 'Fragments',
+				element: internalLink( 'Foo#bar' ),
+				expected: {
+					type: 'link/mwInternal',
+					attributes: {
+						hrefPrefix: '',
+						lookupTitle: 'Foo',
+						normalizedTitle: 'Foo#bar',
+						origTitle: 'Foo#bar',
+						title: 'Foo#bar'
+					}
+				}
+			},
+			{
+				// Question marks in the fragment shouldn't confuse this
+				msg: 'Question marks in fragments',
+				element: internalLink( 'Foo#bar?' ),
+				expected: {
+					type: 'link/mwInternal',
+					attributes: {
+						hrefPrefix: '',
+						lookupTitle: 'Foo',
+						normalizedTitle: 'Foo#bar.3F',
+						origTitle: 'Foo#bar.3F',
+						title: 'Foo#bar.3F'
+					}
+				}
 			}
 		],
 		converter = new ve.dm.Converter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory, ve.dm.metaItemFactory );
