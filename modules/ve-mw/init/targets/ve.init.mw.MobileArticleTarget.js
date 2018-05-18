@@ -38,9 +38,12 @@ OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.ArticleTarget );
 
 ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	// History
-	{ include: [ 'undo' ] },
+	{
+		name: 'history',
+		include: [ 'undo' ] },
 	// Style
 	{
+		name: 'style',
 		classes: [ 've-test-toolbar-style' ],
 		type: 'list',
 		icon: 'textStyle',
@@ -51,9 +54,15 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
 	// Link
-	{ include: [ 'link' ] },
+	{
+		name: 'link',
+		include: [ 'link' ]
+	},
 	// Done with editing toolbar
-	{ include: [ 'done' ] }
+	{
+		name: 'done',
+		include: [ 'done' ]
+	}
 ];
 
 ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
@@ -169,8 +178,12 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 
 	this.pageToolbar.setup( [
 		// Back
-		{ include: [ 'back' ] },
 		{
+			name: 'save-back',
+			include: [ 'back' ]
+		},
+		{
+			name: 'edit-modes',
 			type: 'list',
 			icon: 'edit',
 			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
