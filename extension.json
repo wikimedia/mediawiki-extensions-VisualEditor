@@ -899,6 +899,8 @@
 				"lib/ve/src/ui/tools/ve.ui.WindowTool.js",
 				"lib/ve/src/ui/tools/ve.ui.FragmentWindowTool.js",
 				"lib/ve/src/ui/tools/ve.ui.FragmentInspectorTool.js",
+				"lib/ve/src/ui/tools/ve.ui.LinkInspectorTool.js",
+				"lib/ve/src/ui/tools/ve.ui.CommentInspectorTool.js",
 				"lib/ve/src/ui/tools/ve.ui.ToolbarDialogTool.js",
 				"lib/ve/src/ui/tools/ve.ui.FormatTool.js",
 				"lib/ve/src/ui/tools/ve.ui.HistoryTool.js",
@@ -1147,6 +1149,21 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.commentAnnotation": {
+			"scripts": [
+				"lib/ve/src/dm/annotations/ve.dm.CommentAnnotation.js",
+				"lib/ve/src/ce/annotations/ve.ce.CommentAnnotation.js",
+				"lib/ve/src/ui/contextitems/ve.ui.CommentAnnotationContextItem.js",
+				"lib/ve/src/ui/tools/ve.ui.CommentAnnotationInspectorTool.js",
+				"lib/ve/src/ui/inspectors/ve.ui.CommentAnnotationInspector.js"
+			],
+			"styles": [
+				"lib/ve/src/ce/styles/annotations/ve.ce.CommentAnnotation.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.core"
+			]
+		},
 		"ext.visualEditor.rebase": {
 			"scripts": [
 				"lib/ve/src/dm/ve.dm.RebaseClient.js",
@@ -1162,7 +1179,8 @@
 				"dompurify",
 				"socket.io",
 				"color-picker",
-				"oojs-ui.styles.icons-user"
+				"oojs-ui.styles.icons-user",
+				"ext.visualEditor.commentAnnotation"
 			],
 			"messages": [
 				"visualeditor-rebase-client-author-name"
