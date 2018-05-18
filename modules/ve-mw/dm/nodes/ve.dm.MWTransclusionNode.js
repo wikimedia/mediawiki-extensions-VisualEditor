@@ -207,7 +207,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 	} else if ( converter.isForPreview() ) {
 		modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
 		modelNode.setDocument( converter.internalList.getDocument() );
-		viewNode = ve.ce.nodeFactory.create( modelNode.getType(), modelNode );
+		viewNode = ve.ce.nodeFactory.createFromModel( modelNode );
 		if ( !viewNode.hasRendering() ) {
 			viewNode.onSetup();
 			viewNode.$element
