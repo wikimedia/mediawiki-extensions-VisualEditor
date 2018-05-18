@@ -171,10 +171,9 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.getSurfaceConfig = function ( config ) {
-	return ve.init.mw.DesktopArticleTarget.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
-		$overlayContainer: $( '#content' )
-	}, config ) );
+ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config ) {
+	config = ve.extendObject( { $overlayContainer: $( '#content' ) }, config );
+	return ve.init.mw.DesktopArticleTarget.parent.prototype.addSurface.call( this, dmDoc, config );
 };
 
 /**
