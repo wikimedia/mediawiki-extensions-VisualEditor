@@ -908,11 +908,17 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 
 	if ( e.which === OO.ui.Keys.ESCAPE ) {
 		setTimeout( function () {
+			var toolbarDialogs;
 			// Listeners should stopPropagation if they handle the escape key, but
 			// also check they didn't fire after this event, as would be the case if
 			// they were bound to the document.
 			if ( !e.isPropagationStopped() ) {
-				target.tryTeardown( false, 'navigate-read' );
+				toolbarDialogs = target.surface.getToolbarDialogs();
+				if ( toolbarDialogs.getCurrentWindow() ) {
+					toolbarDialogs.getCurrentWindow().close();
+				} else {
+					target.tryTeardown( false, 'navigate-read' );
+				}
 			}
 		} );
 		e.preventDefault();
