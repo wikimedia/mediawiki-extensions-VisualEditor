@@ -20,12 +20,6 @@
  * than .external, so we need to re-override right padding
  */
 
-/* TODO: Make these consistent across skins */
 .ve-ce-linkAnnotation.ve-ce-annotation-active.external {
-	padding-right: 15px;
-}
-
-.skin-vector .ve-ce-linkAnnotation.ve-ce-annotation-active.external,
-.skin-minerva .ve-ce-linkAnnotation.ve-ce-annotation-active.external {
 	padding-right: 13px;
 }
