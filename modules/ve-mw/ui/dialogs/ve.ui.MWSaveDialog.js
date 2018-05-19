@@ -564,7 +564,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Byte counter in edit summary
 	this.editSummaryCountLabel = new OO.ui.LabelWidget( {
 		classes: [ 've-ui-mwSaveDialog-editSummary-count' ],
-		label: String( this.editSummaryCodePointLimit || this.editSummaryByteLimit ),
+		label: '',
 		title: ve.msg( this.editSummaryCodePointLimit ?
 			'visualeditor-editsummary-characters-remaining' : 'visualeditor-editsummary-bytes-remaining' )
 	} );
@@ -599,26 +599,27 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Limit length, and display the remaining bytes/characters
 	if ( this.editSummaryCodePointLimit ) {
 		this.editSummaryInput.$input.codePointLimit( this.editSummaryCodePointLimit );
-		this.editSummaryInput.on( 'change', function () {
-			dialog.changedEditSummary = true;
-			dialog.editSummaryCountLabel.setLabel(
-				String( dialog.editSummaryCodePointLimit -
-					mwString.codePointLength( dialog.editSummaryInput.getValue() ) )
-			);
-		} );
 	} else {
 		this.editSummaryInput.$input.byteLimit( this.editSummaryByteLimit );
-		this.editSummaryInput.on( 'change', function () {
-			// TODO: This looks a bit weird, there is no unit in the UI, just numbers
-			// Users likely assume characters but then it seems to count down quicker
-			// than expected. Facing users with the word "byte" is bad? (bug 40035)
-			dialog.changedEditSummary = true;
-			dialog.editSummaryCountLabel.setLabel(
-				String( dialog.editSummaryByteLimit -
-					mwString.byteLength( dialog.editSummaryInput.getValue() ) )
-			);
-		} );
 	}
+	this.editSummaryInput.on( 'change', function () {
+		var remaining;
+		if ( dialog.editSummaryCodePointLimit ) {
+			remaining = dialog.editSummaryCodePointLimit - mwString.codePointLength( dialog.editSummaryInput.getValue() );
+		} else {
+			remaining = dialog.editSummaryByteLimit - mwString.byteLength( dialog.editSummaryInput.getValue() );
+		}
+		// TODO: This looks a bit weird, there is no unit in the UI, just
+		// numbers Users likely assume characters but then it seems to count
+		// down quicker than expected if it's byteLimit. Facing users with the
+		// word "byte" is bad? (bug 40035)
+		dialog.changedEditSummary = true;
+		if ( remaining > 99 ) {
+			dialog.editSummaryCountLabel.setLabel( '' );
+		} else {
+			dialog.editSummaryCountLabel.setLabel( mw.language.convertNumber( remaining ) );
+		}
+	} );
 
 	this.$saveCheckboxes = $( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' );
 	this.$saveOptions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
