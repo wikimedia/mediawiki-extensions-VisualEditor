@@ -459,6 +459,7 @@
 				]
 			},
 			"dependencies": [
+				"ext.visualEditor.targetLoader",
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.core.desktop",
@@ -472,7 +473,8 @@
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.init.js"
 			],
 			"dependencies": [
-				"oojs-ui"
+				"oojs-ui",
+				"mediawiki.widgets"
 			],
 			"messages" : [
 				"collabpad",

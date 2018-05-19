@@ -117,9 +117,13 @@ ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
-	var synchronizer, surfaceView, defaultName;
+	var synchronizer, surfaceView, defaultName,
+		target = this;
 
 	if ( surface !== this.surface ) {
+		// TODO: Show 'connecting' progress bar until doc is ready
+		surface.getModel().setNullSelection();
+
 		this.$editableContent.after( surface.$element );
 
 		surfaceView = surface.getView();
@@ -134,6 +138,39 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			if ( authorId === synchronizer.getAuthorId() ) {
 				mw.storage.session.set( 've-collab-username', newName );
 			}
+		} );
+
+		synchronizer.once( 'initDoc', function () {
+			var initPromise,
+				importTitle = new mw.Uri( location.href ).query.import;
+			if ( importTitle && !surface.getModel().getDocument().getCompleteHistoryLength() ) {
+				initPromise = mw.libs.ve.targetLoader.requestParsoidData( importTitle, { targetName: 'collabpad' } ).then( function ( response ) {
+					var doc, dmDoc,
+						content = ve.getProp( response, 'visualeditor', 'content' );
+
+					if ( content ) {
+						doc = target.constructor.static.parseDocument( content );
+						dmDoc = target.constructor.static.createModelFromDom( doc );
+						surface.getModel().getLinearFragment( new ve.Range( 0, 2 ) ).insertDocument( dmDoc );
+						surface.getModel().selectFirstContentOffset();
+					} else {
+						// Import failed
+						return $.Deferred().reject( 'No content for ' + importTitle ).promise();
+					}
+				} );
+			} else {
+				// No import, or history already exists
+				initPromise = $.Deferred().resolve().promise();
+			}
+			initPromise.fail( function ( err ) {
+				setTimeout( function () {
+					throw new Error( err );
+				} );
+			} );
+			initPromise.always( function () {
+				surface.getModel().selectFirstContentOffset();
+				// TODO: Hide 'connecting' progress bar
+			} ); // TODO: Handle .fail
 		} );
 
 		// TODO: server could communicate with MW (via oauth?) to know the
