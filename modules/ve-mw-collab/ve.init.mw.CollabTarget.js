@@ -56,6 +56,10 @@ ve.init.mw.CollabTarget.static.toolbarGroups.splice( 4, 0, {
 	name: 'commentAnnotation',
 	include: [ 'commentAnnotation' ]
 } );
+// Temporarily disable references until they are properly supported (T194838)
+ve.init.mw.CollabTarget.static.toolbarGroups = ve.init.mw.CollabTarget.static.toolbarGroups.filter( function ( group ) {
+	return group.name !== 'reference';
+} );
 
 ve.init.mw.CollabTarget.static.actionGroups = [
 	{
