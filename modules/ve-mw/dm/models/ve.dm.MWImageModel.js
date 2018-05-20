@@ -994,7 +994,7 @@ ve.dm.MWImageModel.prototype.setType = function ( type ) {
 ve.dm.MWImageModel.prototype.resetDefaultDimensions = function () {
 	var originalDimensions = this.scalable.getOriginalDimensions();
 
-	if ( !$.isEmptyObject( originalDimensions ) ) {
+	if ( !ve.isEmptyObject( originalDimensions ) ) {
 		if ( this.getType() === 'thumb' || this.getType() === 'frameless' ) {
 			// Default is thumb size
 			if ( originalDimensions.width <= this.defaultThumbSize ) {
@@ -1162,7 +1162,7 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 			// We have to adjust the details in the initial hash if the original
 			// image was 'default' since we didn't have default until now and the
 			// default dimensions that were 'recorded' were wrong
-			if ( !$.isEmptyObject( imageModel.initialHash ) && imageModel.initialHash.scalable.isDefault ) {
+			if ( !ve.isEmptyObject( imageModel.initialHash ) && imageModel.initialHash.scalable.isDefault ) {
 				imageModel.initialHash.scalable.currentDimensions = imageModel.scalable.getDefaultDimensions();
 			}
 
