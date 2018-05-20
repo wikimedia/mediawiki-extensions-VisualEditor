@@ -112,10 +112,12 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
-			var sessionState, request, dataPromise,
-				apiRequest = mode === 'source' ?
-					this.requestWikitext.bind( this, pageName, options ) :
-					this.requestParsoidData.bind( this, pageName, options );
+			var sessionState, request, dataPromise, apiRequest;
+
+			options = options || {};
+			apiRequest = mode === 'source' ?
+				this.requestWikitext.bind( this, pageName, options ) :
+				this.requestParsoidData.bind( this, pageName, options );
 
 			if ( options.sessionStore ) {
 				try {
@@ -185,20 +187,20 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data,
 				switched = false,
-				fromEditedState = false,
-				data = {
-					action: 'visualeditor',
-					paction: ( conf.fullRestbaseUrl || conf.restbaseUrl ) ? 'metadata' : 'parse',
-					page: pageName,
-					uselang: mw.config.get( 'wgUserLanguage' ),
-					editintro: uri.query.editintro,
-					preload: options.preload,
-					preloadparams: options.preloadparams
-				};
+				fromEditedState = false;
 
 			options = options || {};
+			data = {
+				action: 'visualeditor',
+				paction: ( conf.fullRestbaseUrl || conf.restbaseUrl ) ? 'metadata' : 'parse',
+				page: pageName,
+				uselang: mw.config.get( 'wgUserLanguage' ),
+				editintro: uri.query.editintro,
+				preload: options.preload,
+				preloadparams: options.preloadparams
+			};
 
 			// Only request the API to explicitly load the currently visible revision if we're restoring
 			// from oldid. Otherwise we should load the latest version. This prevents us from editing an
@@ -340,7 +342,10 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestWikitext: function ( pageName, options ) {
-			var data = {
+			var data;
+
+			options = options || {};
+			data = {
 				action: 'visualeditor',
 				paction: 'wikitext',
 				page: pageName,
