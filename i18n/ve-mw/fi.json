@@ -324,6 +324,8 @@
 	"visualeditor-preference-tabs-remember-last": "Muista viimeksi käyttämäni muokkain",
 	"visualeditor-preference-visualdiffpage-description": "Ota käyttöön uusi visuaalinen tila erilaisten sivujen tarkistamisessa",
 	"visualeditor-preference-visualdiffpage-label": "Visuaaliset eroavaisuudet",
+	"visualeditor-rebase-client-import": "Tuo",
+	"visualeditor-rebase-client-import-name": "Sivun otsikko",
 	"visualeditor-recreate": "Sivu on poistettu sillä aikaa, kun muokkasit sitä. Napsauta \"$1\" luodaksesi sivun uudelleen.",
 	"visualeditor-redirect-description": "Uudelleenohjaus sivulle $1",
 	"visualeditor-savedialog-error-badtoken": "Emme voineet tallentaa muokkaustasi, koska istunto ei ole enää voimassa.",

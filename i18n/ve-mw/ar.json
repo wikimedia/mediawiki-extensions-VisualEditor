@@ -24,7 +24,8 @@
 			"Maroen1990",
 			"Moud hosny",
 			"Aboulouei1",
-			"ديفيد"
+			"ديفيد",
+			"محمد عصام"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "خطأ أثناء استعلام MediaWiki API",
@@ -404,6 +405,8 @@
 	"visualeditor-preference-tabs-remember-last": "تذكر آخر محرر عدلت به",
 	"visualeditor-preference-visualdiffpage-description": "تفعيل النمط المرئي الجديد على صفحات فروقات المراجعات.",
 	"visualeditor-preference-visualdiffpage-label": "فروقات مرئية",
+	"visualeditor-rebase-client-import": "استورد",
+	"visualeditor-rebase-client-import-name": "عنوان الصفحة",
 	"visualeditor-recreate": "لقد تم حذف هذه الصفحة بعد أن بدأت بتحريرها. اضغط على «$1» لإعادة إنشائها.",
 	"visualeditor-redirect-description": "تحويل إلى $1",
 	"visualeditor-savedialog-error-badtoken": "لم نتمكن من حفظ تعديلك لأن الجلسة لم تعد صالحة.",

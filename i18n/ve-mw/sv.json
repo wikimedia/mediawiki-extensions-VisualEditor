@@ -400,6 +400,8 @@
 	"visualeditor-preference-tabs-remember-last": "Kom ihåg min senaste redigerare",
 	"visualeditor-preference-visualdiffpage-description": "Aktivera det nya visuella läget på sidor med sidversionsskillnader.",
 	"visualeditor-preference-visualdiffpage-label": "Visuella skillnader",
+	"visualeditor-rebase-client-import": "Importera",
+	"visualeditor-rebase-client-import-name": "Sidtitel",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",
 	"visualeditor-redirect-description": "Omdirigerar till $1",
 	"visualeditor-savedialog-error-badtoken": "Vi kunde inte spara din redigering eftersom sessionen inte längre var giltig.",

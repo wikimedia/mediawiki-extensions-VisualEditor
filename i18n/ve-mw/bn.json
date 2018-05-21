@@ -342,6 +342,8 @@
 	"visualeditor-preference-tabs-prefer-wt": "সবসময় উৎস সম্পাদক ব্যবহার করুন",
 	"visualeditor-preference-tabs-remember-last": "আমার সর্বশেষ সম্পাদক মনে রেখো",
 	"visualeditor-preference-visualdiffpage-label": "দৃশ্যমান পার্থক্য",
+	"visualeditor-rebase-client-import": "আমদানি করুন",
+	"visualeditor-rebase-client-import-name": "পাতার শিরোনাম",
 	"visualeditor-recreate": "আপনি সম্পাদনা শুরু করার পর পাতাটি অপসারণ করা হয়েছে। এটি পুনঃতৈরি করতে \"$1\" চাপুন।",
 	"visualeditor-redirect-description": "$1-এ পুনঃনির্দেশিত",
 	"visualeditor-savedialog-error-badtoken": "সেশনের মেয়াদ শেষ হয়ে যাওয়ার কারণে আমরা আপনার সম্পাদনাটি সংরক্ষণ করতে পারিনি।",

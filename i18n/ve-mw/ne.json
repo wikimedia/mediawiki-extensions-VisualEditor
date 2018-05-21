@@ -107,6 +107,8 @@
 	"visualeditor-mwlanguagevariantcontextitem-title-twoway": "भाषा परिवर्तन नियम",
 	"visualeditor-pagemenu-tooltip": "पृष्ठको विकल्पहरू",
 	"visualeditor-preference-core-label": "दृष्टि सम्पादिका",
+	"visualeditor-rebase-client-import": "आयात",
+	"visualeditor-rebase-client-import-name": "पृष्ठ शीर्षक",
 	"visualeditor-savedialog-label-error": "त्रुटि",
 	"visualeditor-savedialog-label-warning": "चेतावनीहरू:",
 	"visualeditor-savedialog-review-visual": "दृश्यात्मक (बिटा)",

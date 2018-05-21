@@ -356,6 +356,8 @@
 	"visualeditor-preference-tabs-remember-last": "Ricorda il mio ultimo editor",
 	"visualeditor-preference-visualdiffpage-description": "Abilita la nuova modalità visuale nella revisione delle pagine delle differenze.",
 	"visualeditor-preference-visualdiffpage-label": "Differenze visuali",
+	"visualeditor-rebase-client-import": "Importa",
+	"visualeditor-rebase-client-import-name": "Titolo della pagina",
 	"visualeditor-recreate": "Questa pagina è stata eliminata dopo che hai iniziato a modificarla. Premi \"$1\" per ricrearla.",
 	"visualeditor-redirect-description": "Reindirizzamento a $1",
 	"visualeditor-savedialog-error-badtoken": "Non è possibile salvare la tua modifica poiché la sessione non è più valida.",
