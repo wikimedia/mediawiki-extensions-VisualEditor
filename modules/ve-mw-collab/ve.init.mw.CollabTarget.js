@@ -15,6 +15,7 @@
  * @param {mw.Title} title Page sub-title
  * @param {rebaserUrl} string Rebaser server URL
  * @param {Object} [config] Configuration options
+ * @cfg {mw.Title} [importTitle] Title to import
  */
 ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, config ) {
 	config = config || {};
@@ -26,6 +27,7 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 
 	this.title = title;
 	this.rebaserUrl = rebaserUrl;
+	this.importTitle = config.importTitle;
 
 	// Parent constructor
 	ve.init.mw.CollabTarget.super.call( this, config );
@@ -143,10 +145,10 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 		} );
 
 		synchronizer.once( 'initDoc', function () {
-			var initPromise,
-				importTitle = new mw.Uri( location.href ).query.import;
-			if ( importTitle && !surface.getModel().getDocument().getCompleteHistoryLength() ) {
-				initPromise = mw.libs.ve.targetLoader.requestParsoidData( importTitle, { targetName: 'collabpad' } ).then( function ( response ) {
+			var initPromise;
+
+			if ( target.importTitle && !surface.getModel().getDocument().getCompleteHistoryLength() ) {
+				initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
 					var doc, dmDoc,
 						content = ve.getProp( response, 'visualeditor', 'content' );
 
@@ -157,7 +159,7 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 						surface.getModel().selectFirstContentOffset();
 					} else {
 						// Import failed
-						return $.Deferred().reject( 'No content for ' + importTitle ).promise();
+						return $.Deferred().reject( 'No content for ' + target.importTitle ).promise();
 					}
 				} );
 			} else {

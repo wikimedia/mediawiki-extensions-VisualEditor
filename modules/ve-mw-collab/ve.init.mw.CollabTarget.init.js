@@ -31,14 +31,14 @@
 		document.title = title;
 	}
 
-	function showPage( title ) {
+	function showPage( title, importTitle ) {
 		setTitle( mw.msg( 'collabpad-doctitle', title.getPrefixedText() ) );
 
 		progressBar.toggle( true );
 		form.toggle( false );
 
 		loadingPromise.done( function () {
-			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl );
+			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle: importTitle } );
 
 			$( 'body' ).addClass( 've-activated ve-active' );
 
@@ -73,12 +73,12 @@
 		form.toggle( true );
 	}
 
-	function loadTitle( title, params ) {
+	function loadTitle( title, importTitle ) {
 		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
 		if ( history.pushState ) {
 			// TODO: Handle popstate
-			history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl( params ) );
-			showPage( title );
+			history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl() );
+			showPage( title, importTitle );
 		} else {
 			location.href = specialTitle.getUrl();
 		}
@@ -134,7 +134,7 @@
 			var title = mw.Title.newFromText( importInput.getValue().trim() );
 
 			if ( title ) {
-				loadTitle( mw.Title.newFromText( getRandomTitle() ), { 'import': title.toString() } );
+				loadTitle( mw.Title.newFromText( getRandomTitle() ), title );
 			} else {
 				documentNameInput.focus();
 			}
