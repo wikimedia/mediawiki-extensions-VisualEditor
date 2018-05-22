@@ -214,11 +214,19 @@
 		"socket.io": {
 			"scripts": [
 				"lib/ve/lib/socket.io-client/socket.io.min.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"dompurify": {
 			"scripts": [
 				"lib/ve/lib/dompurify/purify.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"color-picker": {
@@ -227,6 +235,10 @@
 			],
 			"styles": [
 				"lib/ve/lib/color-picker/color-picker.css"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"unicodejs": {
@@ -444,7 +456,23 @@
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css",
+				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.targetLoader",
+				"ext.visualEditor.base",
+				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.rebase",
+				"oojs-ui.styles.icons-interactions",
+				"oojs-ui.styles.icons-layout"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.collabTarget.desktop": {
+			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
 			],
 			"skinStyles": {
@@ -459,13 +487,37 @@
 				]
 			},
 			"dependencies": [
-				"ext.visualEditor.targetLoader",
-				"ext.visualEditor.base",
-				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.collabTarget",
 				"ext.visualEditor.core.desktop",
 				"ext.visualEditor.mwextensions.desktop",
-				"ext.visualEditor.desktopTarget",
-				"ext.visualEditor.rebase"
+				"ext.visualEditor.desktopTarget"
+			],
+			"targets": [
+				"desktop"
+			]
+		},
+		"ext.visualEditor.collabTarget.mobile": {
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
+			],
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
+				],
+				"apex": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-apex.css"
+				],
+				"monobook": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
+				]
+			},
+			"dependencies": [
+				"ext.visualEditor.collabTarget",
+				"ext.visualEditor.core.mobile",
+				"ext.visualEditor.mwextensions"
+			],
+			"targets": [
+				"mobile"
 			]
 		},
 		"ext.visualEditor.collabTarget.init": {
@@ -474,11 +526,16 @@
 			],
 			"dependencies": [
 				"oojs-ui",
-				"mediawiki.widgets"
+				"mediawiki.widgets",
+				"ext.visualEditor.supportCheck"
 			],
 			"messages" : [
 				"collabpad",
 				"collabpad-doctitle"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.collabTarget.init.styles": {
@@ -1164,6 +1221,10 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.rebase": {
@@ -1186,6 +1247,10 @@
 			],
 			"messages": [
 				"visualeditor-rebase-client-author-name"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.core.desktop": {
