@@ -1068,7 +1068,6 @@ class VisualEditorHooks {
 				'lib/ve/tests/dm/ve.dm.Change.test.js',
 				'lib/ve/tests/dm/ve.dm.TreeModifier.test.js',
 				'lib/ve/tests/dm/ve.dm.TransactionProcessor.test.js',
-				'lib/ve/tests/dm/ve.dm.APIResultsQueue.test.js',
 				'lib/ve/tests/dm/ve.dm.Surface.test.js',
 				'lib/ve/tests/dm/ve.dm.SurfaceFragment.test.js',
 				'modules/ve-mw/tests/dm/ve.dm.SurfaceFragment.test.js',
