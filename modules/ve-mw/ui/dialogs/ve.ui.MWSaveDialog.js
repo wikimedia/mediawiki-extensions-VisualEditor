@@ -274,7 +274,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				ve.init.platform.linkCache.styleParsoidElements( $categories, baseDoc );
 			} );
 		} else {
-			deferred = $.Deferred.resolve();
+			deferred = $.Deferred().resolve();
 		}
 		deferred.done( function () {
 			// Run hooks so other things can alter the document
