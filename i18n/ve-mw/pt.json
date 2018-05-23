@@ -404,6 +404,8 @@
 	"visualeditor-preference-tabs-remember-last": "Relembrar o meu último editor",
 	"visualeditor-preference-visualdiffpage-description": "Ativa o novo modo visual na revisão das diferenças entre páginas.",
 	"visualeditor-preference-visualdiffpage-label": "Diferenças visuais",
+	"visualeditor-rebase-client-import": "Importar",
+	"visualeditor-rebase-client-import-name": "Título da página",
 	"visualeditor-recreate": "A página que começou a editar foi eliminada entretanto. Pressione \"$1\" para recriá-la.",
 	"visualeditor-redirect-description": "Redirecionar para $1",
 	"visualeditor-savedialog-error-badtoken": "Não podemos gravar a sua edição porque a sessão expirou.",
