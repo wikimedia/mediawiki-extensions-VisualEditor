@@ -616,28 +616,21 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.articleTarget": {
+		"ext.visualEditor.mwsave": {
 			"scripts": [
-				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
-				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
-				"modules/ve-mw/ui/actions/ve.ui.MWSaveDialogAction.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
+				"modules/ve-mw/ui/actions/ve.ui.MWSaveDialogAction.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css"
 			],
 			"dependencies": [
 				"mediawiki.String",
 				"jquery.lengthLimit",
-				"ext.visualEditor.mediawiki",
-				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
-				"ext.visualEditor.mwextensions",
 				"oojs-ui.styles.icons-accessibility",
 				"oojs-ui.styles.icons-editing-advanced",
-				"oojs-ui.styles.icons-layout"
+				"oojs-ui.styles.icons-interactions"
 			],
 			"messages": [
 				"accesskey-diff",
@@ -647,18 +640,44 @@
 				"accesskey-watch",
 				"colon-separator",
 				"newsectionsummary",
+				"hidden-categories",
+				"parentheses",
+				"tooltip-minoredit",
+				"tooltip-watch",
+				"visualeditor-diff-no-changes"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.articleTarget": {
+			"scripts": [
+				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
+				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
+			],
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.mediawiki",
+				"ext.visualEditor.core",
+				"ext.visualEditor.mwcore",
+				"ext.visualEditor.mwextensions",
+				"ext.visualEditor.mwsave"
+			],
+			"messages": [
+				"accesskey-save",
+				"colon-separator",
 				"pagecategories",
 				"pagecategorieslink",
 				"hidden-categories",
-				"parentheses",
 				"redirectto",
-				"tooltip-minoredit",
-				"tooltip-watch",
 				"visualeditor-autosave-not-recovered-text",
 				"visualeditor-autosave-not-recovered-title",
 				"visualeditor-autosave-recovered-text",
 				"visualeditor-autosave-recovered-title",
-				"visualeditor-diff-no-changes",
 				"visualeditor-redirect-description"
 			],
 			"targets": [
