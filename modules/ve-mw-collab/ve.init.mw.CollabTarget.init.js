@@ -10,7 +10,7 @@
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pageName = mw.config.get( 'collabPadPageName' ) || '',
 		pageTitle = mw.Title.newFromText( pageName ),
-		modules = [ 'ext.visualEditor.collabTarget' ]
+		modules = [ OO.ui.isMobile() ? 'ext.visualEditor.collabTarget.mobile' : 'ext.visualEditor.collabTarget.desktop' ]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) ),
 		loadingPromise = mw.loader.using( modules ),
@@ -51,7 +51,8 @@
 		} ).always( function () {
 			form.toggle( false );
 			progressBar.toggle( false );
-		} ).fail( function () {
+		} ).fail( function ( err ) {
+			mw.log.error( err );
 			// eslint-disable-next-line no-use-before-define
 			showForm();
 		} );
