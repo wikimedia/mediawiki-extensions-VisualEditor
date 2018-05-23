@@ -160,16 +160,24 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 	}
 
 	function processResult( data ) {
-		var pageid, page, processedPage,
+		var i, pageid, page, processedPage, redirects,
 			pages = ( data.query && data.query.pages ) || data.pages,
 			processed = {};
 
+		redirects = data.query.redirects || [];
 		if ( pages ) {
 			for ( pageid in pages ) {
 				page = pages[ pageid ];
 				processedPage = cache.constructor.static.processPage( page );
 				if ( processedPage !== undefined ) {
 					processed[ page.title ] = processedPage;
+				}
+			}
+			for ( i = 0; i < redirects.length; i++ ) {
+				// Locate the title in redirects, if any.
+				if ( redirects[ i ].to === page.title ) {
+					processed[ redirects[ i ].from ] = processedPage;
+					break;
 				}
 			}
 			cache.set( processed );
