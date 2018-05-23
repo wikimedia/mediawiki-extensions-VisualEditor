@@ -122,12 +122,10 @@ ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 	var synchronizer, surfaceView, defaultName,
+		importDeferred = $.Deferred(),
 		target = this;
 
 	if ( surface !== this.surface ) {
-		// TODO: Show 'connecting' progress bar until doc is ready
-		surface.getModel().setNullSelection();
-
 		this.$editableContent.after( surface.$element );
 
 		surfaceView = surface.getView();
@@ -173,8 +171,9 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			} );
 			initPromise.always( function () {
 				surface.getModel().selectFirstContentOffset();
-				// TODO: Hide 'connecting' progress bar
-			} ); // TODO: Handle .fail
+				// Resolve progress bar
+				importDeferred.resolve();
+			} );
 		} );
 
 		// TODO: server could communicate with MW (via oauth?) to know the
@@ -188,7 +187,7 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			synchronizer.changeName( defaultName );
 		}
 
-		surfaceView.setSynchronizer( synchronizer );
+		surfaceView.setSynchronizer( synchronizer, importDeferred.promise() );
 	}
 
 	// Parent method
