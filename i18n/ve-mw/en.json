@@ -459,5 +459,9 @@
 	"visualeditor-wikitext-progress": "Converting wikitext",
 	"visualeditor-wikitext-warning": "You are using the visual editor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] does not work here. To switch to source editing at any time without losing your changes, click on the switch button.",
 	"visualeditor-wikitext-warning-link": "mediawikiwiki:Special:MyLanguage/Help:Formatting",
-	"visualeditor-wikitext-warning-title": "Wikitext markup detected"
+	"visualeditor-wikitext-warning-title": "Wikitext markup detected",
+	"visualeditor-wikitextconvert-title": "Convert formatting to wikitext?",
+	"visualeditor-wikitextconvert-message": "Your pasted content contains formatting. Should it be converted to wikitext, or inserted as plain text?",
+	"visualeditor-wikitextconvert-plain": "Use plain text",
+	"visualeditor-wikitextconvert-convert": "Convert to wikitext"
 }
