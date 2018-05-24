@@ -392,6 +392,7 @@
 	"visualeditor-preference-visualdiffpage-description": "Activa la modalidad visual nueva en las páginas de diferencias entre revisiones.",
 	"visualeditor-preference-visualdiffpage-label": "Diferencias visuales",
 	"visualeditor-rebase-client-import": "Importar",
+	"visualeditor-rebase-client-import-name": "Título de página",
 	"visualeditor-recreate": "La página fue borrada después de que comenzaste a editarla. Pulsa en «$1» para crearla de nuevo.",
 	"visualeditor-redirect-description": "Redirigir a $1",
 	"visualeditor-savedialog-error-badtoken": "No pudimos guardar tu edición porque la sesión ya no es válida.",

@@ -446,5 +446,9 @@
 	"visualeditor-viewpage-savewarning-title": "Bist du sicher?",
 	"visualeditor-wikitext-progress": "Konvertiere Wikitext",
 	"visualeditor-wikitext-warning": "Du benutzt den visuellen Editor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zurückzukehren, klicke auf den Wechseln-Button.",
-	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
+	"visualeditor-wikitext-warning-title": "Wikitext entdeckt",
+	"visualeditor-wikitextconvert-title": "Formatierung in Wikitext konvertieren?",
+	"visualeditor-wikitextconvert-message": "Du hast Inhalt eingefügt, der Formatierungen enthält. Soll er in Wikitext konvertiert oder als Klartext eingefügt werden?",
+	"visualeditor-wikitextconvert-plain": "Klartext verwenden",
+	"visualeditor-wikitextconvert-convert": "In Wikitext konvertieren"
 }
