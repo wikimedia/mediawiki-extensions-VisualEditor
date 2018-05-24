@@ -58,6 +58,10 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		name: 'link',
 		include: [ 'link' ]
 	},
+	// Placeholder for reference tools (e.g. Cite and/or Citoid)
+	{
+		name: 'reference'
+	},
 	// Done with editing toolbar
 	{
 		name: 'done',
