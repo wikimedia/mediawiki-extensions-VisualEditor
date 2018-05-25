@@ -1344,6 +1344,11 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			if ( $section.length && $section.attr( 'id' ) ) {
 				uri.fragment = $section.attr( 'id' );
 				this.viewUri.fragment = uri.fragment;
+
+				// Scroll the page to the edited section
+				setTimeout( function () {
+					$section[ 0 ].scrollIntoView( true );
+				} );
 			}
 			delete uri.query.section;
 		}
@@ -1416,7 +1421,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
 	var $content = $( $.parseHTML( html ) ),
-		$categories, $sections, editedSectionHeader;
+		$categories;
 
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
@@ -1450,23 +1455,6 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	mw.libs.ve.setupEditLinks();
-
-	// Scroll the page to the edited section, if any
-	if ( this.section !== null ) {
-		$sections = $( '#mw-content-text' )
-			.find( 'h1, h2, h3, h4, h5, h6' )
-			.not( '#toc h2' );
-		if ( this.section === 'new' ) {
-			editedSectionHeader = $sections.last().get( 0 );
-		} else if ( this.section > 0 ) {
-			editedSectionHeader = $sections.get( this.section - 1 );
-		}
-		if ( editedSectionHeader ) {
-			setTimeout( function () {
-				OO.ui.Element.static.scrollIntoView( editedSectionHeader );
-			}, 0 );
-		}
-	}
 };
 
 /**
