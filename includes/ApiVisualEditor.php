@@ -348,7 +348,8 @@ class ApiVisualEditor extends ApiBase {
 							$content = false;
 							if ( isset( $result['query']['pages'][$pid]['revisions'] ) ) {
 								foreach ( $result['query']['pages'][$pid]['revisions'] as $revArr ) {
-									if ( $revArr['revid'] === $oldid ) {
+									// Check 'revisions' is an array (T193718)
+									if ( is_array( $revArr ) && $revArr['revid'] === $oldid ) {
 										$content = $revArr['content'];
 									}
 								}
