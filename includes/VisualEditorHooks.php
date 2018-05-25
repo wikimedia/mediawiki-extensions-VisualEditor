@@ -86,8 +86,8 @@ class VisualEditorHooks {
 	 * Handler for the DiffViewHeader hook, to add visual diffs code as configured
 	 *
 	 * @param DifferenceEngine $diff The difference engine
-	 * @param Revision $oldRev The old revision
-	 * @param Revision $newRev The new revision
+	 * @param Revision|null $oldRev The old revision
+	 * @param Revision|null $newRev The new revision
 	 * @return bool Always true
 	 */
 	public static function onDiffViewHeader(
