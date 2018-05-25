@@ -31,7 +31,8 @@
 			"Dgstranz",
 			"Luzcaru",
 			"Javiersanp",
-			"MarcoAurelio"
+			"MarcoAurelio",
+			"Adjen"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Error al consultar la API de MediaWiki",
@@ -442,5 +443,9 @@
 	"visualeditor-viewpage-savewarning-title": "¿Lo confirmas?",
 	"visualeditor-wikitext-progress": "Convirtiendo wikitexto",
 	"visualeditor-wikitext-warning": "Estás utilizando el editor visual, donde el [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexto]] no funciona. Para cambiar a la edición de fuente en cualquier momento sin perder tus cambios, haz clic en el botón de cambio.",
-	"visualeditor-wikitext-warning-title": "Se ha detectado wikitexto"
+	"visualeditor-wikitext-warning-title": "Se ha detectado wikitexto",
+	"visualeditor-wikitextconvert-title": "Convertir formateo a wikitext?",
+	"visualeditor-wikitextconvert-message": "Su contenido publicado contiene formateo. Deberia ser convertido a wikitext, o insertado como texto simple?",
+	"visualeditor-wikitextconvert-plain": "Usar texto simple",
+	"visualeditor-wikitextconvert-convert": "Conviertir a wikitext"
 }

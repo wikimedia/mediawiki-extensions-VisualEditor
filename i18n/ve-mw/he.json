@@ -447,5 +447,9 @@
 	"visualeditor-viewpage-savewarning-title": "בטוח?",
 	"visualeditor-wikitext-progress": "המרת קוד ויקי",
 	"visualeditor-wikitext-warning": "זהו עורך חזותי – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|קוד ויקי]] לא יעבוד כאן. כדי לעבור למצב עריכת קוד מקור בכל עת מבלי לאבד את השינויים שלך, יש ללחוץ על הכפתור \"החלפה\".",
-	"visualeditor-wikitext-warning-title": "נראה שיש כאן קוד ויקי"
+	"visualeditor-wikitext-warning-title": "נראה שיש כאן קוד ויקי",
+	"visualeditor-wikitextconvert-title": "להמיר עיצוב לקוד ויקי?",
+	"visualeditor-wikitextconvert-message": "הדבקת תוכן שמכיל עיצוב. האם ברצונך להמיר אותו לקוד ויקי, או להוסיפו כטקסט רגיל?",
+	"visualeditor-wikitextconvert-plain": "להשתמש בטקסט רגיל",
+	"visualeditor-wikitextconvert-convert": "להמיר לקוד ויקי"
 }

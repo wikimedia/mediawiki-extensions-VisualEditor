@@ -462,5 +462,9 @@
 	"visualeditor-viewpage-savewarning-title": "Tem certeza?",
 	"visualeditor-wikitext-progress": "Convertendo código-fonte",
 	"visualeditor-wikitext-warning": "Você está usando o editor visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexto]] não funciona aqui. Para alternar ao editor de código-fonte a qualquer hora sem perder suas alterações, clique no botão.",
-	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado"
+	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado",
+	"visualeditor-wikitextconvert-title": "Converter formatação para wikitext?",
+	"visualeditor-wikitextconvert-message": "Seu conteúdo colado contém formatação. Deve ser convertido em wikitexto ou inserido como texto simples?",
+	"visualeditor-wikitextconvert-plain": "Use texto simples",
+	"visualeditor-wikitextconvert-convert": "Converta em wikitexto"
 }

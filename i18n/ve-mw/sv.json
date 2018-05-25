@@ -451,5 +451,9 @@
 	"visualeditor-viewpage-savewarning-title": "Är du säker?",
 	"visualeditor-wikitext-progress": "Konverterar wikitext",
 	"visualeditor-wikitext-warning": "Du använder den visuella redigeraren - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] fungerar inte här. För att när som helst växla till wikitext-läge utan att förlora dina ändringar, klicka på växla-knappen.",
-	"visualeditor-wikitext-warning-title": "Wikitext upptäckt"
+	"visualeditor-wikitext-warning-title": "Wikitext upptäckt",
+	"visualeditor-wikitextconvert-title": "Omvandla formatering till wikitext?",
+	"visualeditor-wikitextconvert-message": "Ditt inklistrade innehåll innehåller formatering. Ska den omvandlas till wikitext eller infogas som vanlig text?",
+	"visualeditor-wikitextconvert-plain": "Använd vanlig text",
+	"visualeditor-wikitextconvert-convert": "Omvandla till wikitext"
 }
