@@ -6,7 +6,8 @@
 			"PiRSquared17",
 			"C.R.",
 			"Candalua",
-			"Macofe"
+			"Macofe",
+			"Ruthven"
 		]
 	},
 	"apihelp-visualeditor-description": "Tuorna HTML5 pe na pàggena 'a 'o servizio Parsoid.",
@@ -206,7 +207,7 @@
 	"visualeditor-editnotices-tooltip": "Mmasciate 'avviso p' 'e cagnamiente",
 	"visualeditor-editsummary": "Descrive ch'avite cagnato",
 	"visualeditor-editsummary-bytes-remaining": "'O nummero 'e byte ca restano",
-	"visualeditor-educationpopup-dismiss": "Ok, mò 'o ssaccio",
+	"visualeditor-educationpopup-dismiss": "Ok, mo 'o ssaccio",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulo d\"a paggena",
 	"visualeditor-formatdropdown-format-mw-heading2": "'Ntestazzione",

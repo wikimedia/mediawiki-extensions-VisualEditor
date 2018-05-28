@@ -455,5 +455,9 @@
 	"visualeditor-viewpage-savewarning-title": "Tem a certeza?",
 	"visualeditor-wikitext-progress": "A converter o texto wiki",
 	"visualeditor-wikitext-warning": "Está a utilizar o Editor Visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|códigos wiki]] não funcionam aqui. Para regressar ao modo de edição do código a qualquer momento sem perder as suas alterações, selecione o botão de alteração.",
-	"visualeditor-wikitext-warning-title": "Notação de texto wiki detetada"
+	"visualeditor-wikitext-warning-title": "Notação de texto wiki detetada",
+	"visualeditor-wikitextconvert-title": "Converter a formatação para texto wiki?",
+	"visualeditor-wikitextconvert-message": "O conteúdo que inseriu contém formatação. Ela deva ser convertida para texto wiki, ou inserida como texto simples?",
+	"visualeditor-wikitextconvert-plain": "Usar texto simples",
+	"visualeditor-wikitextconvert-convert": "Converter para texto wiki"
 }

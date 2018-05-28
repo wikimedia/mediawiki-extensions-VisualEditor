@@ -438,5 +438,9 @@
 	"visualeditor-viewpage-savewarning-title": "Дали сте сигурни?",
 	"visualeditor-wikitext-progress": "Го претворам викитекстот",
 	"visualeditor-wikitext-warning": "Го користите нагледниот уредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, стиснете на копчето за префрлање.",
-	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст"
+	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст",
+	"visualeditor-wikitextconvert-title": "Да го претворам форматирањето во викитекст?",
+	"visualeditor-wikitextconvert-message": "Прекопиравте содржина која е форматирана. Дали да ја претворам во викитекст, или да ја ставам просто?",
+	"visualeditor-wikitextconvert-plain": "Користи прост текст",
+	"visualeditor-wikitextconvert-convert": "Претвори во викитекст"
 }

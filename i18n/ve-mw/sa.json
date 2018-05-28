@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Shubha",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Charunandan16"
 		]
 	},
 	"apihelp-visualeditoredit-param-summary": "सारांशः सम्पाद्यताम्",
@@ -108,5 +109,6 @@
 	"visualeditor-savedialog-label-error": "दोषः",
 	"visualeditor-savedialog-label-warning": "पूर्वसूचना",
 	"visualeditor-toolbar-savedialog": "पृष्ठं रक्ष्यताम्",
-	"visualeditor-version-label": "संस्करणम्"
+	"visualeditor-version-label": "संस्करणम्",
+	"visualeditor-wikitextconvert-plain": "साधारणपाठः प्रयुज्यताम्"
 }

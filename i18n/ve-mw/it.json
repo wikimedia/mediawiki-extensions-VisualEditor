@@ -403,5 +403,7 @@
 	"visualeditor-viewpage-savewarning-title": "Sei sicuro?",
 	"visualeditor-wikitext-progress": "Conversione wikitesto",
 	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, clicca il pulsante commutativo.",
-	"visualeditor-wikitext-warning-title": "Rilevato wikitesto"
+	"visualeditor-wikitext-warning-title": "Rilevato wikitesto",
+	"visualeditor-wikitextconvert-plain": "Usa testo semplice",
+	"visualeditor-wikitextconvert-convert": "Converti in wikitesto"
 }

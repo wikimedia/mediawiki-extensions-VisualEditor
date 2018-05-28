@@ -25,7 +25,8 @@
 			"Jdforrester",
 			"The Polish",
 			"Doctore",
-			"Anwar2"
+			"Anwar2",
+			"Railfail536"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Błąd podczas odpytywania API MediaWiki",
@@ -408,5 +409,7 @@
 	"visualeditor-viewpage-savewarning-title": "Na pewno?",
 	"visualeditor-wikitext-progress": "Konwertowanie wikitekstu",
 	"visualeditor-wikitext-warning": "Używasz teraz edytora wizualnego – a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego, klikając przycisk przełączający.",
-	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego"
+	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego",
+	"visualeditor-wikitextconvert-title": "Przekonwertować formatowanie do wikitekstu?",
+	"visualeditor-wikitextconvert-convert": "Przekonwertuj do wikitekstu"
 }

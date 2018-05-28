@@ -374,5 +374,7 @@
 	"visualeditor-viewpage-savewarning-title": "Sidd Dir sécher?",
 	"visualeditor-wikitext-progress": "Wikitext ëmwandelen",
 	"visualeditor-wikitext-warning": "Dir benotzt de visuellen Editeur - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktionéiert hei net. Fir all Ament an d'Ännere vum Quellcode ze wiesselen ouni Är Ännerungen ze verléieren,klickt op de Knäppche Wiesselen",
-	"visualeditor-wikitext-warning-title": "Wikitext entdeckt"
+	"visualeditor-wikitext-warning-title": "Wikitext entdeckt",
+	"visualeditor-wikitextconvert-title": "Formatéierung a Wikitext ëmwandelen?",
+	"visualeditor-wikitextconvert-convert": "A Wikitext ëmwandelen"
 }
