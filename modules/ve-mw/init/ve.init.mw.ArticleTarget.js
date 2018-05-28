@@ -1948,6 +1948,8 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 	if ( surface ) {
 		// If target is closed cleanly (after save or deliberate close) then remove autosave state
 		surface.getModel().removeDocStateAndChanges();
+		// Disconnect history listener
+		surface.getModel().disconnect( this );
 	}
 	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
 };
