@@ -222,7 +222,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 };
 
 ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) {
-	var change, params, param, $paramChanges,
+	var change, params, param, $paramChanges, from, to,
 		descriptions = [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
 
 	// This method assumes that the behavior of isDiffComparable above remains
@@ -259,8 +259,11 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 			// All we know is that *something* changed, without the normal
 			// helpful just-being-given-the-changed-bits, so we have to filter
 			// this ourselves.
-			if ( params[ param ].from !== params[ param ].to ) {
-				change = this.describeChange( param, params[ param ] );
+			// Trim string values, and convert empty strings to undefined
+			from = ( params[ param ].from || '' ).trim() || undefined;
+			to = ( params[ param ].to || '' ).trim() || undefined;
+			if ( from !== to ) {
+				change = this.describeChange( param, { from: from, to: to } );
 				if ( change ) {
 					if ( !$paramChanges ) {
 						$paramChanges = $( '<ul>' );
