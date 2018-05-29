@@ -30,7 +30,6 @@ ve.ce.MWLanguageVariantNode = function VeCeMWLanguageVariantNode( model, config 
 
 	// Events
 	this.model.connect( this, { update: 'onUpdate' } );
-	this.model.connect( this, { update: 'updateInvisibleIcon' } );
 
 	// Initialization
 	this.onUpdate();
@@ -45,8 +44,6 @@ OO.mixinClass( ve.ce.MWLanguageVariantNode, ve.ce.FocusableNode );
 /* Static Properties */
 
 ve.ce.MWLanguageVariantNode.static.iconWhenInvisible = 'language';
-
-ve.ce.MWLanguageVariantNode.static.maxPreviewLength = 20;
 
 /* Static Methods */
 
@@ -78,27 +75,6 @@ ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 	return ve.msg( messageKey, languageString );
 };
 
-/**
- * Create a preview-safe version of some text
- *
- * The text preview is a trimmed down version of the actual rule. This
- * means that we strip whitespace and newlines, and truncate to a
- * fairly short length. The goal is to provide a fair representation of
- * typical short rules, and enough context for long rules that the
- * user can tell whether they want to see the full view by focusing the
- * node / hovering.
- *
- * @param  {string} text
- * @return {string|OO.ui.HtmlSnippet}
- */
-ve.ce.MWLanguageVariantNode.static.getTextPreview = function ( text ) {
-	text = text.trim().replace( /\s+/, ' ' );
-	if ( text.length > this.maxPreviewLength ) {
-		text = new OO.ui.HtmlSnippet( ve.escapeHtml( ve.graphemeSafeSubstring( text, 0, this.maxPreviewLength ) ) + '&hellip;' );
-	}
-	return text;
-};
-
 /* Methods */
 
 /**
@@ -107,9 +83,28 @@ ve.ce.MWLanguageVariantNode.static.getTextPreview = function ( text ) {
  * @method
  */
 ve.ce.MWLanguageVariantNode.prototype.onUpdate = function () {
-	var variantInfo = this.model.getVariantInfo(),
-		$element,
-		html;
+	if ( !this.model.isHidden() ) {
+		this.model.constructor.static.insertPreviewElements(
+			this.$holder[ 0 ], this.model.getVariantInfo()
+		);
+	}
+	this.updateInvisibleIconLabel();
+};
+
+/**
+ * @inheritdoc
+ *
+ * The text preview is a trimmed down version of the actual rule. This
+ * means that we strip whitespace and newlines, and truncate to a
+ * fairly short length. The goal is to provide a fair representation of
+ * typical short rules, and enough context for long rules that the
+ * user can tell whether they want to see the full view by focusing the
+ * node / hovering.
+ */
+ve.ce.MWLanguageVariantNode.prototype.getInvisibleIconLabel = function () {
+	var $element,
+		variantInfo = this.model.getVariantInfo();
+
 	if ( this.model.isHidden() ) {
 		$element = $( '<div>' );
 		this.model.constructor.static.insertPreviewElements(
@@ -117,19 +112,9 @@ ve.ce.MWLanguageVariantNode.prototype.onUpdate = function () {
 			// current variant output.
 			$element[ 0 ], variantInfo
 		);
-		// Create plain-text summary of this rule (ellipsize if necessary)
-		html = this.constructor.static.getTextPreview( $element.text() );
-		if ( this.icon ) {
-			this.icon.setLabel( html );
-		}
-	} else {
-		this.model.constructor.static.insertPreviewElements(
-			this.$holder[ 0 ], variantInfo
-		);
-		if ( this.icon ) {
-			this.icon.setLabel( null );
-		}
+		return $element.text().trim().replace( /\s+/, ' ' );
 	}
+	return null;
 };
 
 /**
@@ -145,21 +130,6 @@ ve.ce.MWLanguageVariantNode.prototype.appendHolder = function () {
 	$holder.addClass( 've-ce-mwLanguageVariantNode-holder' );
 	this.$element.append( $holder );
 	return $holder;
-};
-
-/**
- * @inheritdoc
- */
-ve.ce.MWLanguageVariantNode.prototype.createInvisibleIcon = function () {
-	// Unlike ancestor method, this adds a label to the (unframed) icon.
-	var icon = new OO.ui.ButtonWidget( {
-		classes: [ 've-ce-focusableNode-invisibleIcon' ],
-		framed: false,
-		icon: this.constructor.static.iconWhenInvisible
-	} );
-	this.icon = icon;
-	this.onUpdate(); // update label of icon
-	return icon.$element;
 };
 
 /**

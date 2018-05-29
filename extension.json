@@ -2109,8 +2109,7 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLanguageVariantInspector.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWLanguageVariantNodeContextItem.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWLanguageVariantNode.css"
+				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWLanguageVariantNodeContextItem.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
