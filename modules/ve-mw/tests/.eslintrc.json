@@ -1,0 +1,11 @@
+{
+	"extends": [
+		"../../../.eslintrc.json",
+		"plugin:qunit/recommended",
+		"plugin:qunit/two"
+	],
+	"rules": {
+		"qunit/require-expect": 0
+	},
+	"plugins": [ "qunit" ]
+}
