@@ -21,6 +21,8 @@ ve.ui.MWNumberedExternalLinkNodeContextItem = function VeUiMWNumberedExternalLin
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwNumberedExternalLinkNodeContextItem' );
+
+	this.labelButton.setLabel( OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' ) );
 };
 
 /* Inheritance */
@@ -42,6 +44,44 @@ ve.ui.MWNumberedExternalLinkNodeContextItem.static.deletable = true;
 ve.ui.MWNumberedExternalLinkNodeContextItem.prototype.isDeletable = function () {
 	// We don't care about whether the context wants to show delete buttons, so override the check.
 	return this.constructor.static.deletable;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWNumberedExternalLinkNodeContextItem.prototype.onLabelButtonClick = function () {
+	var annotation, annotations, content,
+		surfaceModel = this.context.getSurface().getModel(),
+		surfaceView = this.context.getSurface().getView(),
+		doc = surfaceModel.getDocument(),
+		nodeRange = this.model.getOuterRange();
+
+	// TODO: this is very similar to part of
+	// ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess, and should
+	// perhaps be consolidated into a reusable "replace node with annotated
+	// text and select that text" method somewhere appropriate.
+
+	annotation = new ve.dm.MWExternalLinkAnnotation( {
+		type: 'link/mwExternal',
+		attributes: {
+			href: this.model.getHref()
+		}
+	} );
+	annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
+	annotations.push( annotation );
+	content = this.model.getHref().split( '' );
+	ve.dm.Document.static.addAnnotationsToData( content, annotations );
+	surfaceModel.change(
+		ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
+	);
+	setTimeout( function () {
+		// Note: we can't rely on surfaceView.activeAnnotations, because the selection-focus created
+		// by the transaction might be outside the link node. As such, get the node immediately
+		// after the offset where we inserted the annotation, and then get the closest link
+		// annotation to it.
+		var node = surfaceView.getDocument().getNodeAndOffset( nodeRange.start + 1 ).node;
+		surfaceView.selectNodeContents( $( node ).closest( '.ve-ce-linkAnnotation' )[ 0 ] );
+	} );
 };
 
 /* Registration */
