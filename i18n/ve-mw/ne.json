@@ -116,5 +116,7 @@
 	"visualeditor-version-label": "संस्करणहरू",
 	"visualeditor-viewpage-savewarning-discard": "सम्पादन रद्द गर्नु",
 	"visualeditor-viewpage-savewarning-keep": "सम्पादन जारी राख्ने",
-	"visualeditor-viewpage-savewarning-title": "निश्चित हुनुहुन्छ ?"
+	"visualeditor-viewpage-savewarning-title": "निश्चित हुनुहुन्छ ?",
+	"visualeditor-wikitextconvert-plain": "सादा पाठ प्रयोग गर्नुहोस्",
+	"visualeditor-wikitextconvert-convert": "wikitext मा रूपान्तरण गर्नुहोस्"
 }
