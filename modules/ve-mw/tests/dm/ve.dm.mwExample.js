@@ -346,7 +346,7 @@ ve.dm.mwExample.withMeta = [
 	{
 		type: 'comment',
 		attributes: {
-			text: ' No content conversion '
+			text: ' No conversion '
 		}
 	},
 	{ type: '/comment' },
@@ -439,7 +439,7 @@ ve.dm.mwExample.withMetaRealData = [
 	{
 		type: 'comment',
 		attributes: {
-			text: ' No content conversion '
+			text: ' No conversion '
 		}
 	},
 	{ type: '/comment' },
@@ -526,7 +526,7 @@ ve.dm.mwExample.withMetaMetaData = [
 	[
 		{
 			type: 'alienMeta',
-			originalDomElements: $( '<!-- No content conversion -->' ).toArray()
+			originalDomElements: $( '<!-- No conversion -->' ).toArray()
 		},
 		{
 			type: 'mwAlienMeta',
@@ -796,7 +796,8 @@ ve.dm.mwExample.domToDataCases = {
 		storeItems: ve.dm.mwExample.MWTransclusion.blockStoreItems,
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromData,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenClipboard + ve.dm.mwExample.MWTransclusion.blockContentClipboard
+		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenClipboard + ve.dm.mwExample.MWTransclusion.blockContentClipboard,
+		previewBody: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent
 	},
 	'mw:Transclusion (block level - modified)': {
 		body: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
@@ -812,7 +813,8 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenModifiedClipboard
+		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenModifiedClipboard,
+		previewBody: false
 	},
 	'mw:Transclusion (inline)': {
 		body: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
@@ -827,7 +829,8 @@ ve.dm.mwExample.domToDataCases = {
 		storeItems: ve.dm.mwExample.MWTransclusion.inlineStoreItems,
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromData + ve.dm.mwExample.MWTransclusion.inlineClose,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenClipboard + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose
+		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenClipboard + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
+		previewBody: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose
 	},
 	'mw:Transclusion (inline - modified)': {
 		body: ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose,
@@ -845,12 +848,14 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenModifiedClipboard + ve.dm.mwExample.MWTransclusion.inlineClose
+		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenModifiedClipboard + ve.dm.mwExample.MWTransclusion.inlineClose,
+		previewBody: false
 	},
 	'two mw:Transclusion nodes with identical params but different htmlAttributes': {
 		body: ve.dm.mwExample.MWTransclusion.pairOne + ve.dm.mwExample.MWTransclusion.pairTwo,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.pairFromData + ve.dm.mwExample.MWTransclusion.pairFromData,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.pairClipboard + ve.dm.mwExample.MWTransclusion.pairClipboard,
+		previewBody: ve.dm.mwExample.MWTransclusion.pairOne + ve.dm.mwExample.MWTransclusion.pairOne,
 		data: [
 			{
 				type: 'mwTransclusionBlock',
@@ -913,6 +918,7 @@ ve.dm.mwExample.domToDataCases = {
 		body: ve.dm.mwExample.MWTransclusion.meta,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.metaFromData,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.metaClipboard,
+		previewBody: false,
 		data: [
 			{
 				internal: { generated: 'wrapper' },
@@ -961,7 +967,8 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		clipboardBody: '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}" data-ve-no-generated-contents="true">content</span>'
+		clipboardBody: '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}" data-ve-no-generated-contents="true">content</span>',
+		previewBody: false
 	},
 	'mw:AlienBlockExtension': {
 		body:
@@ -1251,7 +1258,8 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		]
+		],
+		previewBody: '<p><a rel="mw:ExtLink" class="external" href="https://www.mediawiki.org/">mw</a></p>'
 	}, /* FIXME T185902: Temporarily commented out failing test case
 	'whitespace preservation with wrapped comments and language links': {
 		body: 'Foo\n' +
@@ -1318,16 +1326,22 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},*/
 	'document with meta elements': {
-		body: '<!-- No content conversion --><meta property="mw:ThisIsAnAlien" /><p>Foo' +
+		body: '<!-- No conversion --><meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
 			'<meta property="mw:foo" content="bar" />Ba<!-- inline -->z</p>' +
 			'<meta property="mw:bar" content="baz" /><!--barbaz-->' +
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
-		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" No content conversion ">&nbsp;</span><meta property="mw:ThisIsAnAlien" /><p>Foo' +
+		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" No conversion ">&nbsp;</span><meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
 			'<meta property="mw:foo" content="bar" />Ba<span rel="ve:Comment" data-ve-comment=" inline ">&nbsp;</span>z</p>' +
 			'<meta property="mw:bar" content="baz" /><span rel="ve:Comment" data-ve-comment="barbaz">&nbsp;</span>' +
+			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
+			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
+		previewBody: ve.dm.example.commentNodePreview( ' No conversion ' ) + '<meta property="mw:ThisIsAnAlien" /><p>Foo' +
+			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
+			'<meta property="mw:foo" content="bar" />Ba' + ve.dm.example.commentNodePreview( ' inline ' ) + 'z</p>' +
+			'<meta property="mw:bar" content="baz" />' + ve.dm.example.commentNodePreview( 'barbaz' ) +
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		head: '<base href="http://example.com" />',
@@ -1338,6 +1352,7 @@ ve.dm.mwExample.domToDataCases = {
 		body: ve.dm.mwExample.MWTransclusion.mixed,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.mixedFromData,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.mixedClipboard,
+		previewBody: ve.dm.mwExample.MWTransclusion.mixed,
 		data: [
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			ve.dm.mwExample.MWTransclusion.mixedDataOpen,
@@ -1600,7 +1615,8 @@ ve.dm.mwExample.domToDataCases = {
 				type: '/internalList'
 			}
 		],
-		normalizedBody: '<a href="https://www.mediawiki.org/" rel="mw:ExtLink">ab</a>'
+		normalizedBody: '<a href="https://www.mediawiki.org/" rel="mw:ExtLink">ab</a>',
+		previewBody: '<a href="https://www.mediawiki.org/" class="external" rel="mw:ExtLink">ab</a>'
 	},
 	'plain internal links (e.g. on paste) are converted to link/mwInternal': {
 		body: '<a href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">ab</a>',
