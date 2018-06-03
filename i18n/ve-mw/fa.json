@@ -405,6 +405,8 @@
 	"visualeditor-preference-tabs-remember-last": "آخرین ویرایشگری که استفاده کردم را به خاطر بسپار",
 	"visualeditor-preference-visualdiffpage-description": "فعال‌کردن حالت نمایشی جدید بر روی نسخه تفاوت صفحه.",
 	"visualeditor-preference-visualdiffpage-label": "تفاوت دیداری",
+	"visualeditor-rebase-client-import": "درون‌ریزی",
+	"visualeditor-rebase-client-import-name": "عنوان صفحه",
 	"visualeditor-recreate": "صفحه از زمانی که شما مشغول ویرایش شدید حذف شد. برای ساخت مجدد صفحه \"$1\" را فشار دهید.",
 	"visualeditor-redirect-description": "تغییرمسیر به $1",
 	"visualeditor-savedialog-error-badtoken": "ذخیرهٔ ویرایش شما مقدور نیست چون بخش مورد نظر وجود ندارد.",
@@ -454,5 +456,8 @@
 	"visualeditor-viewpage-savewarning-title": "آیا مطمئن هستید؟",
 	"visualeditor-wikitext-progress": "تبدیل منبع",
 	"visualeditor-wikitext-warning": "شما از این ویرایشگر استفاده می‌کنید - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ویکی‌متن]] در اینجا عمل نخواهد کرد. برای رفتن به ویرایش کد در هر زمان بدون گم‌شدن تغییراتتان، بر روی دکمهٔ تغییر وضعیت کلیک کنید.",
-	"visualeditor-wikitext-warning-title": "نشانه‌گذاری ویکی‌متن شناسایی شد"
+	"visualeditor-wikitext-warning-title": "نشانه‌گذاری ویکی‌متن شناسایی شد",
+	"visualeditor-wikitextconvert-title": "تبدیل قالب‌بندی به ویکی‌تکست؟",
+	"visualeditor-wikitextconvert-plain": "استفاده از متن خالی",
+	"visualeditor-wikitextconvert-convert": "تبدیل به ویکی‌تکست"
 }
