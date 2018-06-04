@@ -388,6 +388,8 @@
 	"visualeditor-preference-tabs-remember-last": "Alcordase del mio últimu editor",
 	"visualeditor-preference-visualdiffpage-description": "Activar el nuevu mou visual nes páxines de revisión de diferencies.",
 	"visualeditor-preference-visualdiffpage-label": "Diferencies en mou visual",
+	"visualeditor-rebase-client-import": "Importar",
+	"visualeditor-rebase-client-import-name": "Títulu de la páxina",
 	"visualeditor-recreate": "La páxina desanicióse desque principiasti a editala. Calca «$1» pa volver a creala.",
 	"visualeditor-redirect-description": "Redirixir a $1",
 	"visualeditor-savedialog-error-badtoken": "Nun pudimos guardar la edición porque la sesión yá nun ye válida.",
@@ -437,5 +439,9 @@
 	"visualeditor-viewpage-savewarning-title": "¿Tas seguru?",
 	"visualeditor-wikitext-progress": "Convirtiendo testu wiki",
 	"visualeditor-wikitext-warning": "Tas usando l'editor visual - el[[{{MediaWiki:visualeditor-wikitext-warning-link}}|testu wiki]] equí nun funciona. Pa cambiar en cualquier momentu a la edición de la fonte sin perder los cambios, fai click nel botón de cambiu.",
-	"visualeditor-wikitext-warning-title": "Detectaronse marques de testu wiki"
+	"visualeditor-wikitext-warning-title": "Detectaronse marques de testu wiki",
+	"visualeditor-wikitextconvert-title": "¿Quies convertir el formatu en testu wiki?",
+	"visualeditor-wikitextconvert-message": "El conteníu que pegasti contien formatu. ¿Quies convertilo en testu wiki o insertalo como testu planu?",
+	"visualeditor-wikitextconvert-plain": "Usar testu planu",
+	"visualeditor-wikitextconvert-convert": "Convertir a testu wiki"
 }
