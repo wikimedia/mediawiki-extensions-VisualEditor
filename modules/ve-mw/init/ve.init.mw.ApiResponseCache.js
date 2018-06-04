@@ -164,7 +164,7 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 			pages = ( data.query && data.query.pages ) || data.pages,
 			processed = {};
 
-		redirects = data.query.redirects || [];
+		redirects = ( data.query && data.query.redirects ) || [];
 		if ( pages ) {
 			for ( pageid in pages ) {
 				page = pages[ pageid ];
