@@ -38,6 +38,8 @@ ve.ui.MWWikitextConvertConfirmDialog.static.actions = [
 	{ action: 'plain', label: OO.ui.deferMsg( 'visualeditor-wikitextconvert-plain' ), flags: [ 'primary', 'progressive' ] }
 ];
 
+ve.ui.MWWikitextConvertConfirmDialog.static.escapable = false;
+
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.MWWikitextConvertConfirmDialog );
