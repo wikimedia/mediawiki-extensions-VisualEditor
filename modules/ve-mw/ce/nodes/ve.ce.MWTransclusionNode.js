@@ -137,19 +137,6 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
 /**
  * @inheritdoc
  */
-ve.ce.MWTransclusionNode.prototype.createInvisibleIcon = function () {
-	var icon = new OO.ui.ButtonWidget( {
-		classes: [ 've-ce-focusableNode-invisibleIcon' ],
-		framed: false,
-		icon: this.constructor.static.iconWhenInvisible,
-		label: this.constructor.static.getDescription( this.getModel() )
-	} );
-	return icon.$element;
-};
-
-/**
- * @inheritdoc
- */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 	var xhr, deferred = $.Deferred();
 	xhr = ve.init.target.parseWikitextFragment(
