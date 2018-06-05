@@ -456,5 +456,9 @@
 	"visualeditor-viewpage-savewarning-title": "متأكد؟",
 	"visualeditor-wikitext-progress": "جار تحويل نص الويكي",
 	"visualeditor-wikitext-warning": "أنت تستخدم المحرر المرئي، و[[{{MediaWiki:visualeditor-wikitext-warning-link}}|نص الويكي]] لا يعمل هنا. للاحتفاظ بتعديلاتك وإكمال التحرير عن طريق المصدر، اضغط على زر التحويل.",
-	"visualeditor-wikitext-warning-title": "يوجد نص ويكي"
+	"visualeditor-wikitext-warning-title": "يوجد نص ويكي",
+	"visualeditor-wikitextconvert-title": "تحويل التنسيق إلى نص الويكي؟",
+	"visualeditor-wikitextconvert-message": "يحتوي المحتوى الملصق الخاص بك على تنسيق، هل يجب تحويله إلى نص الويكي، أم إدراجه كنص عادي؟",
+	"visualeditor-wikitextconvert-plain": "استخدم نص عادي",
+	"visualeditor-wikitextconvert-convert": "تحويل إلى نص الويكي"
 }
