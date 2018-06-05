@@ -52,15 +52,15 @@ ve.dm.MWInlineImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, attributes, types,
-		$figureInline = $( domElements[ 0 ] ),
-		$firstChild = $figureInline.children().first(), // could be <span> or <a>
-		$img = $firstChild.children().first(),
-		typeofAttrs = $figureInline.attr( 'typeof' ).split( ' ' ),
-		classes = $figureInline.attr( 'class' ),
+		figureInline = domElements[ 0 ],
+		imgWrapper = figureInline.children[ 0 ], // could be <span> or <a>
+		img = imgWrapper.children[ 0 ],
+		typeofAttrs = ( figureInline.getAttribute( 'typeof' ) || '' ).split( ' ' ),
+		classes = figureInline.getAttribute( 'class' ),
 		recognizedClasses = [],
 		errorIndex = typeofAttrs.indexOf( 'mw:Error' ),
-		width = $img.attr( 'width' ),
-		height = $img.attr( 'height' );
+		width = img.getAttribute( 'width' ),
+		height = img.getAttribute( 'height' );
 
 	if ( errorIndex !== -1 ) {
 		typeofAttrs.splice( errorIndex, 1 );
@@ -71,22 +71,15 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	attributes = {
 		mediaClass: types.mediaClass,
 		type: types.frameType,
-		src: $img.attr( 'src' ),
-		resource: $img.attr( 'resource' ),
-		originalClasses: classes
+		src: img.getAttribute( 'src' ),
+		href: imgWrapper.getAttribute( 'href' ),
+		resource: img.getAttribute( 'resource' ),
+		originalClasses: classes,
+		width: width !== null && width !== '' ? +width : null,
+		height: height !== null && height !== '' ? +height : null,
+		alt: img.getAttribute( 'alt' ),
+		isError: errorIndex !== -1
 	};
-
-	if ( errorIndex !== -1 ) {
-		attributes.isError = true;
-	}
-
-	attributes.width = width !== undefined && width !== '' ? Number( width ) : null;
-	attributes.height = height !== undefined && height !== '' ? Number( height ) : null;
-
-	attributes.isLinked = $firstChild.is( 'a' );
-	if ( attributes.isLinked ) {
-		attributes.href = $firstChild.attr( 'href' );
-	}
 
 	// Extract individual classes
 	classes = typeof classes === 'string' ? classes.trim().split( /\s+/ ) : [];
@@ -169,7 +162,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 		figureInline.className = classes.join( ' ' );
 	}
 
-	if ( data.attributes.isLinked ) {
+	if ( data.attributes.href ) {
 		firstChild = doc.createElement( 'a' );
 		firstChild.setAttribute( 'href', data.attributes.href );
 	} else {

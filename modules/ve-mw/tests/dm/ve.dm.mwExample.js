@@ -267,6 +267,8 @@ ve.dm.mwExample.MWBlockImage = {
 				src: ve.ce.minImgDataUri,
 				width: 1,
 				height: 2,
+				alt: null,
+				isError: false,
 				resource: 'FooBar',
 				originalClasses: 'mw-halign-right foobar',
 				unrecognizedClasses: [ 'foobar' ]
@@ -299,7 +301,8 @@ ve.dm.mwExample.MWInlineImage = {
 			mediaClass: 'Image',
 			width: 135,
 			height: 155,
-			isLinked: true,
+			alt: null,
+			isError: false,
 			valign: 'text-top',
 			resource: './File:Wiki.png',
 			type: 'none',
@@ -1491,6 +1494,8 @@ ve.dm.mwExample.domToDataCases = {
 					src: ve.ce.minImgDataUri,
 					width: 1,
 					height: 2,
+					alt: null,
+					isError: false,
 					resource: 'FooBar'
 				}
 			},
