@@ -1186,7 +1186,7 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},
 	'numbered external link (empty mw:Extlink)': {
-		body: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com"></a>Bar</p>',
+		body: '<p>Foo<a rel="mw:ExtLink" href="http://www.example.com"></a>Bar</p>',
 		data: [
 			{ type: 'paragraph' },
 			'F', 'o', 'o',
@@ -1202,10 +1202,10 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		clipboardBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>'
+		clipboardBody: '<p>Foo<a rel="ve:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>'
 	},
 	'numbered external link (non-empty mw:Extlink as cross-document paste)': {
-		body: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>',
+		body: '<p>Foo<a rel="ve:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>',
 		data: [
 			{ type: 'paragraph' },
 			'F', 'o', 'o',
@@ -1221,8 +1221,8 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		clipboardBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>',
-		normalizedBody: '<p>Foo<a rel="mw:ExtLink mw:NumberedLink" href="http://www.example.com"></a>Bar</p>'
+		clipboardBody: '<p>Foo<a rel="ve:NumberedLink" href="http://www.example.com">[1]</a>Bar</p>',
+		normalizedBody: '<p>Foo<a rel="mw:ExtLink" href="http://www.example.com"></a>Bar</p>'
 	},
 	'URL link': {
 		body: '<p><a rel="mw:ExtLink" href="https://www.mediawiki.org/">mw</a></p>',
