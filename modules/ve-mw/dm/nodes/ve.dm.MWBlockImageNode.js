@@ -68,26 +68,17 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, newDimensions, attributes,
 		figure, imgWrapper, img, caption,
-		classAttr, typeofAttrs, errorIndex, width, height, altText, types;
-
-	// Workaround for jQuery's .children() being expensive due to
-	// https://github.com/jquery/sizzle/issues/311
-	function findChildren( parent, nodeNames ) {
-		return Array.prototype.filter.call( parent.childNodes, function ( element ) {
-			return nodeNames.indexOf( element.nodeName.toLowerCase() ) !== -1;
-		} );
-	}
+		classAttr, typeofAttrs, errorIndex, width, height, types;
 
 	figure = domElements[ 0 ];
-	imgWrapper = findChildren( figure, [ 'a', 'span' ] )[ 0 ] || null;
-	img = imgWrapper && findChildren( imgWrapper, [ 'img', 'video' ] )[ 0 ] || null;
-	caption = findChildren( figure, [ 'figcaption' ] )[ 0 ] || null;
+	imgWrapper = figure.children[ 0 ]; // <a> or <span>
+	img = imgWrapper.children[ 0 ]; // <img> or <video>
+	caption = figure.children[ 1 ]; // <figcaption> or undefined
 	classAttr = figure.getAttribute( 'class' );
 	typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' );
 	errorIndex = typeofAttrs.indexOf( 'mw:Error' );
-	width = img && img.getAttribute( 'width' );
-	height = img && img.getAttribute( 'height' );
-	altText = img && img.getAttribute( 'alt' );
+	width = img.getAttribute( 'width' );
+	height = img.getAttribute( 'height' );
 
 	if ( errorIndex !== -1 ) {
 		typeofAttrs.splice( errorIndex, 1 );
@@ -98,24 +89,18 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	attributes = {
 		mediaClass: types.mediaClass,
 		type: types.frameType,
-		href: ( imgWrapper && imgWrapper.getAttribute( 'href' ) ) || '',
-		src: ( img && ( img.getAttribute( 'src' ) || img.getAttribute( 'poster' ) ) ) || '',
-		resource: img && img.getAttribute( 'resource' )
+		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
+		href: imgWrapper.getAttribute( 'href' ),
+		resource: img.getAttribute( 'resource' ),
+		width: width !== null && width !== '' ? +width : null,
+		height: height !== null && height !== '' ? +height : null,
+		alt: img.getAttribute( 'alt' ),
+		isError: errorIndex !== -1
 	};
-
-	if ( altText !== null ) {
-		attributes.alt = altText;
-	}
-	if ( errorIndex !== -1 ) {
-		attributes.isError = true;
-	}
 
 	this.setClassAttributes( attributes, classAttr );
 
 	attributes.align = attributes.align || 'default';
-
-	attributes.width = width !== null && width !== '' ? Number( width ) : null;
-	attributes.height = height !== null && height !== '' ? Number( height ) : null;
 
 	// Default-size
 	if ( attributes.defaultSize ) {
@@ -166,7 +151,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		dataElement = data[ 0 ],
 		mediaClass = dataElement.attributes.mediaClass,
 		figure = doc.createElement( 'figure' ),
-		imgWrapper = doc.createElement( dataElement.attributes.href !== '' ? 'a' : 'span' ),
+		imgWrapper = doc.createElement( dataElement.attributes.href ? 'a' : 'span' ),
 		img = doc.createElement( mediaClass === 'Image' ? 'img' : 'video' ),
 		wrapper = doc.createElement( 'div' ),
 		classAttr = this.getClassAttrFromAttributes( dataElement.attributes ),
@@ -179,7 +164,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		figure.className = classAttr;
 	}
 
-	if ( dataElement.attributes.href !== '' ) {
+	if ( dataElement.attributes.href ) {
 		imgWrapper.setAttribute( 'href', dataElement.attributes.href );
 	}
 
@@ -200,7 +185,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	img.setAttribute( 'width', width );
 	img.setAttribute( 'height', height );
 	img.setAttribute( 'resource', dataElement.attributes.resource );
-	if ( dataElement.attributes.alt !== undefined ) {
+	if ( typeof dataElement.attributes.alt === 'string' ) {
 		img.setAttribute( 'alt', dataElement.attributes.alt );
 	}
 	figure.appendChild( imgWrapper );
