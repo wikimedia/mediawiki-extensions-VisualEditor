@@ -41,6 +41,10 @@
 	margin: 0 1.5em 0 0;
 }
 
+.ve-ui-mwSaveDialog-checkboxes .oo-ui-fieldLayout:last-child {
+	margin-right: 0;
+}
+
 .ve-ui-mwSaveDialog-editSummary-count {
 	position: absolute;
 	right: 0;
