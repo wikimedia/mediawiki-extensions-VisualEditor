@@ -190,27 +190,6 @@
 		]
 	},
 	"ResourceModules": {
-		"easy-deflate.core": {
-			"scripts": [
-				"lib/Easy-Deflate/easydeflate.js"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
-		"easy-deflate.deflate": {
-			"scripts": [
-				"lib/Easy-Deflate/deflate.js"
-			],
-			"dependencies": [
-				"easy-deflate.core"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
 		"socket.io": {
 			"scripts": [
 				"lib/ve/lib/socket.io-client/socket.io.min.js"
