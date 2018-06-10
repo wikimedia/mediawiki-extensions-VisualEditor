@@ -540,6 +540,12 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	surfaceModel.startStoringChanges();
 	// TODO: Listen to autosaveFailed event to notify user
 
+	// Start loading easy-deflate module in the background, so it's
+	// already loaded when the save dialog is opened.
+	setTimeout( function () {
+		mw.loader.load( 'easy-deflate.deflate' );
+	}, 500 );
+
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 };
