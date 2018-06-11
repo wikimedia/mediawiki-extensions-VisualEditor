@@ -16,7 +16,8 @@
 			"SimmeD",
 			"Kenn.jensen",
 			"Jorn Ari",
-			"Joedalton"
+			"Joedalton",
+			"Matěj Suchánek"
 		]
 	},
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
@@ -158,7 +159,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Sideindstillinger",
 	"visualeditor-dialogbutton-template-tooltip": "Skabelon",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Indlejring",
-	"visualeditor-editconflict": "Dine ændringer kunne ikke gemmes på grund af en redigeringskonflikt. Vil {{GENDER|du}} løse konflikten manuelt?",
+	"visualeditor-editconflict": "Dine ændringer kunne ikke gemmes på grund af en redigeringskonflikt. Vil {{GENDER:|du}} løse konflikten manuelt?",
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|en meddelelse|$1 meddelelser}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsbemærkninger",
 	"visualeditor-editsummary": "Beskriv hvad du har ændret",

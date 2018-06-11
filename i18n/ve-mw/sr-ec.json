@@ -214,7 +214,7 @@
 	"visualeditor-editingtabdialog-title": "Уређивање картице",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|напомена|напомене}}",
 	"visualeditor-editnotices-tooltip": "Напомене",
-	"visualeditor-editsummary": "Опишите ваше измене",
+	"visualeditor-editsummary": "Опишите шта сте променили",
 	"visualeditor-editsummary-bytes-remaining": "Преостало бајтова",
 	"visualeditor-educationpopup-dismiss": "Разумео",
 	"visualeditor-feedback-defaultmessage": "Адреса: $1",

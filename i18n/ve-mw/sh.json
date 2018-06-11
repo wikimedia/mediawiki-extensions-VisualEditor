@@ -6,7 +6,8 @@
 			"Sf",
 			"Conquistador",
 			"Srdjan m",
-			"Zoranzoki21"
+			"Zoranzoki21",
+			"Matěj Suchánek"
 		]
 	},
 	"apihelp-visualeditor-description": "Vraća HTML5 za stranicu sa servisa Parsoid.",
@@ -61,7 +62,7 @@
 	"visualeditor-dialog-media-content-section": "Oznaka",
 	"visualeditor-dialog-media-content-section-help": "Ovo možete koristiti koja oznaku koja se pokazuje kraj stavke za sve čitatelje. To se često koristi kako bi objasnilo zašto je stavka relevantna za kontekst u kome se prikazuje. Trebala bi biti sažeta i informativna.",
 	"visualeditor-dialog-media-goback": "Nazad",
-	"visualeditor-dialog-media-info-artist": "{{GENDER|Postavio|Postavila}} $1",
+	"visualeditor-dialog-media-info-artist": "{{GENDER:$1|Postavio|Postavila}} $1",
 	"visualeditor-dialog-media-info-audiofile": "Audio datoteka",
 	"visualeditor-dialog-media-info-created": "Stvoreno: $1",
 	"visualeditor-dialog-media-info-credit": "Zasluge",
@@ -70,7 +71,7 @@
 	"visualeditor-dialog-media-info-meta-artist": "Umjetnik: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Više informacija",
 	"visualeditor-dialog-media-info-readmore": "Pročitaj više",
-	"visualeditor-dialog-media-info-uploaded": "{{GENDER|Postavio|Postavila}} $1",
+	"visualeditor-dialog-media-info-uploaded": "Postavio: $1",
 	"visualeditor-dialog-media-noresults": "Nisu nađeni rezultati",
 	"visualeditor-dialog-media-originaldimensions": "Originalne dimenzije",
 	"visualeditor-dialog-media-page-advanced": "Napredne postavke",

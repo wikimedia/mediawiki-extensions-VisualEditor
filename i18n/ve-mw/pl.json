@@ -299,7 +299,7 @@
 	"visualeditor-mweditmodeve-tool-unavailable": "Edycja wizualna nie jest tutaj dostępna",
 	"visualeditor-mweditmodeve-warning": "Przełączasz się na edycję w edytorze wizualnym.\nCzy chcesz kontynuować?",
 	"visualeditor-mweditmodewt-popup-body": "Możesz przełączyć się z powrotem na edycję kodu źródłowego w dowolnym momencie, klikając na tę ikonę.",
-	"visualeditor-mweditmodewt-popup-title": "Przestawiłeś się w tryb edycji wizualnej",
+	"visualeditor-mweditmodewt-popup-title": "Przełączyłeś na tryb edycji wizualnej",
 	"visualeditor-mwgallerydialog-caption-field-label": "Podpis galerii",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "Podpis dla całej galerii",
 	"visualeditor-mwgallerydialog-card-images": "Obrazy",
@@ -336,6 +336,7 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Cel",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Tekst",
 	"visualeditor-mwlanguagevariantcontextitem-title-name": "Nazwa języka",
+	"visualeditor-mwlanguagevariantcontextitem-title-twoway": "Reguła konwersji języka",
 	"visualeditor-mwlanguagevariantcontextitem-title-unknown": "Wariant językowy",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Języki",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Kod języka",
@@ -394,6 +395,7 @@
 	"visualeditor-savedialog-title-save": "Zapisywanie zmian",
 	"visualeditor-savedialog-warning-dirty": "Twoja edycja mogła zostać uszkodzona - przejrzyj ją przed zapisaniem.",
 	"visualeditor-saveerror": "Błąd podczas zapisywania danych na serwerze: $1.",
+	"visualeditor-saveerror-hookaborted": "Błąd podczas zapisywania strony: rozszerzenie na serwerze uniemożliwiło zapisanie.",
 	"visualeditor-saveerror-titleblacklist": "Błąd zapisywania strony: Tytuł tej strony znajduje się na czarnej liście",
 	"visualeditor-section-body-placeholder": "Nowa sekcja",
 	"visualeditor-section-title-placeholder": "Temat",
@@ -415,5 +417,6 @@
 	"visualeditor-wikitext-warning": "Używasz teraz edytora wizualnego – a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego, klikając przycisk przełączający.",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego",
 	"visualeditor-wikitextconvert-title": "Przekonwertować formatowanie do wikitekstu?",
+	"visualeditor-wikitextconvert-plain": "Użyj zwykłego tekstu",
 	"visualeditor-wikitextconvert-convert": "Przekonwertuj do wikitekstu"
 }
