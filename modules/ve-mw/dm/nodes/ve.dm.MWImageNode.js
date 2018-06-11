@@ -104,6 +104,11 @@ ve.dm.MWImageNode.static.getMatchRdfaTypes = function () {
 
 ve.dm.MWImageNode.static.allowedRdfaTypes = [ 'mw:Error' ];
 
+ve.dm.MWImageNode.static.isDiffComparable = function ( element, other ) {
+	// Images with different src's shouldn't be diffed
+	return element.type === other.type && element.attributes.resource === other.attributes.resource;
+};
+
 ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attributes ) {
 	var key, sizeFrom, sizeTo, change,
 		customKeys = [ 'width', 'height', 'defaultSize', 'src', 'href' ],
