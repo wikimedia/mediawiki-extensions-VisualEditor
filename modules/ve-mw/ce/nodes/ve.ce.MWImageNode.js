@@ -36,9 +36,7 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $focusable, $image, config ) {
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this, $focusable, config );
-	if ( this.$image.length ) {
-		ve.ce.MWResizableNode.call( this, this.$image, config );
-	}
+	ve.ce.MWResizableNode.call( this, this.$image, config );
 
 	// Events
 	this.model.connect( this, { attributeChange: 'onAttributeChange' } );
