@@ -160,11 +160,14 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 	}
 
 	function processResult( data ) {
-		var i, pageid, page, processedPage, redirects,
+		var i, pageid, page, processedPage, from, mappedTitles = [],
 			pages = ( data.query && data.query.pages ) || data.pages,
 			processed = {};
 
-		redirects = ( data.query && data.query.redirects ) || [];
+		[ 'redirects', 'normalized', 'converted' ].forEach( function ( map ) {
+			mappedTitles = mappedTitles.concat( ( data.query && data.query[ map ] ) || [] );
+		} );
+
 		if ( pages ) {
 			for ( pageid in pages ) {
 				page = pages[ pageid ];
@@ -173,10 +176,13 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 					processed[ page.title ] = processedPage;
 				}
 			}
-			for ( i = 0; i < redirects.length; i++ ) {
-				// Locate the title in redirects, if any.
-				if ( redirects[ i ].to === page.title ) {
-					processed[ redirects[ i ].from ] = processedPage;
+			for ( i = 0; i < mappedTitles.length; i++ ) {
+				// Locate the title in mapped titles, if any.
+				if ( mappedTitles[ i ].to === page.title ) {
+					from = mappedTitles[ i ].fromencoded === '' ?
+						decodeURIComponent( mappedTitles[ i ].from ) :
+						mappedTitles[ i ].from;
+					processed[ from ] = processedPage;
 					break;
 				}
 			}
