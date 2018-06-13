@@ -23,6 +23,22 @@ ve.ui.MWWikitextConvertConfirmDialog = function VeUiMWWikitextConvertConfirmDial
 
 OO.inheritClass( ve.ui.MWWikitextConvertConfirmDialog, OO.ui.MessageDialog );
 
+/* Methods */
+
+ve.ui.MWWikitextConvertConfirmDialog.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.MWWikitextConvertConfirmDialog.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			this.deferred = data.deferred;
+		}, this );
+};
+
+ve.ui.MWWikitextConvertConfirmDialog.prototype.getActionProcess = function ( action ) {
+	return new OO.ui.Process( function () {
+		this.deferred.resolve( action === 'plain' );
+		this.close( { action: action } );
+	}, this );
+};
+
 /* Static Properties */
 
 ve.ui.MWWikitextConvertConfirmDialog.static.name = 'wikitextconvertconfirm';
