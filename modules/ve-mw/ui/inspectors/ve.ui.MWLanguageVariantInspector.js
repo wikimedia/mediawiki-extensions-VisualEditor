@@ -623,7 +623,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.createItem = function ( lang, c
 	) );
 	clearButton = new OO.ui.ButtonInputWidget( {
 		icon: 'clear',
-		iconTitle: OO.ui.deferMsg(
+		title: OO.ui.deferMsg(
 			'visualeditor-mwlanguagevariantinspector-twoway-clear-button'
 		),
 		framed: false
@@ -777,7 +777,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.createItem = function ( from, l
 	) );
 	clearButton = new OO.ui.ButtonInputWidget( {
 		icon: 'clear',
-		iconTitle: OO.ui.deferMsg(
+		title: OO.ui.deferMsg(
 			'visualeditor-mwlanguagevariantinspector-oneway-clear-button'
 		),
 		framed: false
