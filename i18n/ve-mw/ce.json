@@ -171,6 +171,8 @@
 	"visualeditor-preference-enable": "Латае БӀаьран тадар. И лело йиш хира ю цӀерийн {{PLURAL:$2|анахь|анашкахь}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Лата бе вики-йозан керла дӀахӀоттам. Оцу тӀехь бу дукха БӀаьра тадаран гӀирсаш.",
 	"visualeditor-preference-newwikitexteditor-label": "Вики-йозан керла дӀахӀоттам",
+	"visualeditor-rebase-client-import": "Импорт ян",
+	"visualeditor-rebase-client-import-name": "АгӀона корта",
 	"visualeditor-redirect-description": "ДӀасахьажор тӀе $1",
 	"visualeditor-savedialog-label-create": "АгӀо кхолла",
 	"visualeditor-savedialog-label-error": "ГӀалат",
