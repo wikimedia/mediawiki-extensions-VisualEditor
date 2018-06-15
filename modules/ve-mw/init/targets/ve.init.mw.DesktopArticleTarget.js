@@ -443,6 +443,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.saveScrollPosition();
 
 		// User interface changes
+		this.changeDocumentTitle();
 		this.transformPage();
 		this.setupLocalNoticeMessages();
 
@@ -629,13 +630,13 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 
 	// User interface changes
 	this.restorePage();
+	this.restoreDocumentTitle();
 
 	mw.user.options.set( 'editondblclick', this.originalEditondbclick );
 	this.originalEditondbclick = undefined;
 
 	// TODO: Use better checks to see if these restorations are required.
 	if ( this.getSurface() ) {
-		this.restoreDocumentTitle();
 		if ( this.active ) {
 			this.teardownUnloadHandlers();
 		}
@@ -797,8 +798,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		remove: 'onMetaItemRemoved'
 	} );
 
-	// Update UI
-	this.changeDocumentTitle();
 	// Support: IE<=11
 	// IE requires us to defer before restoring the scroll position
 	setTimeout( function () {
