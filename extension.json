@@ -411,7 +411,6 @@
 				"creating",
 				"editing",
 				"lastmodifiedat",
-				"apierror-readonly",
 				"redirectpagesub",
 				"subject",
 				"visualeditor-loadwarning",
@@ -668,6 +667,7 @@
 			],
 			"messages": [
 				"accesskey-save",
+				"apierror-readonly",
 				"colon-separator",
 				"pagecategories",
 				"pagecategorieslink",
