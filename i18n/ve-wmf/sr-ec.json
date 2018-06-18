@@ -10,13 +10,13 @@
 			"BadDog"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелно уређивање]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелни уређивач]]",
 	"tag-visualeditor-description": "Измена начињена [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелним уређивачем]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелно уређивање: проверити]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелни уређивач: проверити]]",
 	"tag-visualeditor-needcheck-description": "Измена начињена [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелним уређивачем]] где је систем детектовао викитекст с могућим нежељеним изменама.",
 	"tag-visualeditor-wikitext": "уређивање кôда (2017)",
 	"tag-visualeditor-wikitext-description": "Измена направљена уређивачем викитекста  (2017)",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуелно уређивање: пребачено]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелни уређивач: пребачен]]",
 	"tag-visualeditor-switched-description": "Уређивање започето Визуелним уређивачем, па настављено уређивачем викитекста.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-tool": "Оставите повратну информацију",
@@ -25,7 +25,7 @@
 	"visualeditor-welcomedialog-action": "Почни уређивање",
 	"visualeditor-welcomedialog-content": "Сви могу да уређују и свако унапређење помаже.",
 	"visualeditor-welcomedialog-content-thanks": "Хвала на помоћи!",
-	"visualeditor-welcomedialog-switch": "Пребаци ме на изворно уређивање",
-	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на визуелно уређивање",
+	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивање кôда",
+	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на Визуелни уређивач",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на $2"
 }
