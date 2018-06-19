@@ -19,6 +19,26 @@
 	};
 	ve.test.utils.MWDummyTarget = MWDummyTarget;
 
+	function MWDummyPlatform() {
+		MWDummyPlatform.super.apply( this, arguments );
+		// Disable some API requests from platform
+		this.imageInfoCache = null;
+	}
+	OO.inheritClass( MWDummyPlatform, ve.init.mw.Platform );
+	MWDummyPlatform.prototype.getMessage = function () { return Array.prototype.join.call( arguments, ',' ); };
+	MWDummyPlatform.prototype.getHtmlMessage = function () {
+		var $wrapper = $( '<div>' );
+		Array.prototype.forEach.call( arguments, function ( arg, i, args ) {
+			$wrapper.append( arg );
+			if ( i < args.length - 1 ) {
+				$wrapper.append( ',' );
+			}
+		} );
+		// Re-parse HTML to merge text nodes
+		return $( $.parseHTML( $wrapper.html() ) );
+	};
+	ve.test.utils.MWDummyPlatform = MWDummyPlatform;
+
 	// Unregister MW override nodes.
 	// They are temporarily registered in setup/teardown.
 	ve.dm.modelRegistry.unregister( ve.dm.MWHeadingNode );
@@ -44,9 +64,7 @@
 
 		corePlatform = ve.init.platform;
 		coreTarget = ve.init.target;
-		mwPlatform = new ve.init.mw.Platform();
-		// Disable some API requests from platform
-		mwPlatform.imageInfoCache = null;
+		mwPlatform = new ve.test.utils.MWDummyPlatform();
 		// Unregister mwPlatform
 		ve.init.platform = corePlatform;
 

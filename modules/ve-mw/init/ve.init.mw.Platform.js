@@ -71,6 +71,13 @@ ve.init.mw.Platform.prototype.addMessages = function ( messages ) {
 ve.init.mw.Platform.prototype.getMessage = mw.msg.bind( mw );
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.getHtmlMessage = function () {
+	return mw.message.apply( mw.message, arguments ).parseDom();
+};
+
+/**
  * @method
  * @inheritdoc
  */

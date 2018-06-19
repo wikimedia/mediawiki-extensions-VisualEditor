@@ -212,7 +212,7 @@ ve.dm.MWInternalLinkAnnotation.static.getFragment = function ( original ) {
 
 ve.dm.MWInternalLinkAnnotation.static.describeChange = function ( key, change ) {
 	if ( key === 'title' ) {
-		return ve.msg( 'visualeditor-changedesc-link-href', change.from, change.to );
+		return ve.htmlMsg( 'visualeditor-changedesc-link-href', $( '<del>' ).text( change.from ), $( '<ins>' ).text( change.to ) );
 	}
 	return null;
 };

@@ -49,7 +49,7 @@ ve.dm.MWRedirectMetaItem.static.toDomElements = function ( dataElement, doc ) {
 
 ve.dm.MWRedirectMetaItem.static.describeChange = function ( key, change ) {
 	if ( key === 'title' ) {
-		return ve.msg( 'visualeditor-changedesc-mwredirect', change.from, change.to );
+		return ve.htmlMsg( 'visualeditor-changedesc-mwredirect', $( '<del>' ).text( change.from ), $( '<ins>' ).text( change.to ) );
 	}
 	return null;
 };
