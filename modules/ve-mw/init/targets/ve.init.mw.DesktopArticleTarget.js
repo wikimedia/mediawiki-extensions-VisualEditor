@@ -931,7 +931,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
-	if ( !ve.isUnmodifiedLeftClick( e ) ) {
+	if ( ( !this.active && !this.activating ) || !ve.isUnmodifiedLeftClick( e ) ) {
 		return;
 	}
 	this.tryTeardown( false, 'navigate-read' );
@@ -1104,11 +1104,11 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 		}
 		// Allow instant switching back to view mode, without refresh
 		$( '#ca-view a, #ca-nstab-' + namespaceKey + ' a' )
-			.on( 'click', this.onViewTabClick.bind( this ) );
+			.on( 'click.ve-target', this.onViewTabClick.bind( this ) );
 
 	}
 	if ( !mw.libs.ve.isSingleEditTab ) {
-		$( '#ca-viewsource, #ca-edit' ).on( 'click', function ( e ) {
+		$( '#ca-viewsource, #ca-edit' ).on( 'click.ve-target', function ( e ) {
 			if ( !target.active || !ve.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
