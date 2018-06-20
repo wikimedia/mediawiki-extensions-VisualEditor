@@ -3,7 +3,8 @@
 		"authors": [
 			"Katxis",
 			"Cgboeree",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Mafcadio"
 		]
 	},
 	"tooltip-ca-ve-edit": "Edita esta paje",
@@ -12,10 +13,16 @@
 	"visualeditor-ca-editsource": "Edita la fonte",
 	"visualeditor-ca-editsource-section": "edita la fonte",
 	"visualeditor-descriptionpagelink": "Project:EditadorVidal",
+	"visualeditor-dialog-media-page-advanced": "Ajustas avansada",
+	"visualeditor-dialog-media-page-general": "Ajustas jeneral",
+	"visualeditor-dialog-media-position-center": "Sentro",
+	"visualeditor-dialog-media-position-left": "Sinistra",
+	"visualeditor-dialog-media-position-right": "Destra",
 	"visualeditor-dialog-meta-languages-label": "Linguas",
 	"visualeditor-dialog-meta-languages-name-label": "Lingua",
 	"visualeditor-dialog-meta-languages-section": "Linguas",
 	"visualeditor-languages-tool": "Linguas",
+	"visualeditor-linkinspector-educationpopup-title": "Lias",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Lingua",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Linguas"
 }
