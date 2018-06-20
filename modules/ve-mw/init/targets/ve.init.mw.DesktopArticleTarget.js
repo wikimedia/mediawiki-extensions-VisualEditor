@@ -955,7 +955,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		this.teardown().then( function () {
 
 			// This is a page creation or restoration, refresh the page
-			newUrlParams = newid === undefined ? {} : { venotify: this.restoring ? 'restored' : 'created' };
+			newUrlParams = newid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' };
 
 			if ( isRedirect ) {
 				newUrlParams.redirect = 'no';
