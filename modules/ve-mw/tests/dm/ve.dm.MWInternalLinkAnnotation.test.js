@@ -131,6 +131,6 @@ QUnit.test( 'getFragment', function ( assert ) {
 		];
 
 	for ( i = 0, l = cases.length; i < l; i++ ) {
-		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( cases[ i ].original ), cases[ i ].expected, cases[ i ].msg );
+		assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( cases[ i ].original ), cases[ i ].expected, cases[ i ].msg );
 	}
 } );
