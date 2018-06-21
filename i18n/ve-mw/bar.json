@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Matthias Klostermayr",
-			"Joe Watzmo"
+			"Joe Watzmo",
+			"Alexx"
 		]
 	},
+	"tooltip-ca-ve-edit": "Dé Saiten mi'm VisualEditor beórwaten",
 	"visualeditor-ca-createsource": "Artike olegn",
 	"visualeditor-ca-editsource": "Weakln",
-	"visualeditor-ca-editsource-section": "Weakln"
+	"visualeditor-ca-editsource-section": "Weakln",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
