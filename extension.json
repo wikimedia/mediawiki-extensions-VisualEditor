@@ -1262,7 +1262,8 @@
 				"ext.visualEditor.commentAnnotation"
 			],
 			"messages": [
-				"visualeditor-rebase-client-author-name"
+				"visualeditor-rebase-client-author-name",
+				"visualeditor-rebase-client-connecting"
 			],
 			"targets": [
 				"desktop",
