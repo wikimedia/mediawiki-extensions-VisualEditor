@@ -481,6 +481,8 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.showFilenameCheckbox.connect( this, { change: 'updateActions' } );
 			this.classesInput.connect( this, { change: 'updateActions' } );
 			this.stylesInput.connect( this, { change: 'updateActions' } );
+
+			return this.imagesPromise;
 		}, this );
 };
 
@@ -511,7 +513,6 @@ ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			this.searchWidget.getQuery().focus().select();
-			return this.imagesPromise;
 		}, this );
 };
 
