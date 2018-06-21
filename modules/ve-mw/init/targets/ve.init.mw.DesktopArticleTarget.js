@@ -675,6 +675,12 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
 			mw.hook( 've.deactivationComplete' ).fire( target.edited );
+
+			if ( !target.isViewPage ) {
+				location.href = target.viewUri.clone().extend( {
+					redirect: mw.config.get( 'wgIsRedirect' ) ? 'no' : undefined
+				} );
+			}
 		} );
 	} );
 };
