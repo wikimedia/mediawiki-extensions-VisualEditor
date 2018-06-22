@@ -278,6 +278,19 @@
 				"mobile"
 			]
 		},
+		"ext.visualEditor.sanitize": {
+			"scripts": [
+				"lib/ve/src/ve.sanitize.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.base",
+				"dompurify"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.tempWikitextEditorWidget": {
 			"scripts": "modules/ve-mw/init/ve.init.mw.TempWikitextEditorWidget.js",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.TempWikitextEditorWidget.less",
@@ -1255,7 +1268,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
-				"dompurify",
+				"ext.visualEditor.sanitize",
 				"socket.io",
 				"color-picker",
 				"oojs-ui.styles.icons-user",
