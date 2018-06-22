@@ -236,9 +236,10 @@
 			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
 				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );
 
-				// Should be synchronised with ApiVisualEditor.php
 				headers = {
-					Accept: 'text/html; charset=utf-8; profile="mediawiki.org/specs/html/1.7.0"',
+					// Should be synchronised with ApiVisualEditor.php
+					Accept: 'text/html; charset=utf-8;' +
+						' profile="https://www.mediawiki.org/wiki/Specs/HTML/1.7.0"',
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
 
