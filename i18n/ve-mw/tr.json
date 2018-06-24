@@ -26,9 +26,11 @@
 			"Alikaan",
 			"Katpatuka",
 			"Bulgu",
-			"Diyapazon"
+			"Diyapazon",
+			"Hedda"
 		]
 	},
+	"apierror-visualeditor-api-langlinks-error": "MediaWiki API'sı sorgulanırken hata oluştu",
 	"apihelp-visualeditor-param-basetimestamp": "Kaydederken, düzenlendiği revizyon damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
 	"apihelp-visualeditor-param-etag": "Gönderilecek ETag.",
 	"apihelp-visualeditor-param-oldid": "Sürüm numarası (en son revizyon için varsayılan).",

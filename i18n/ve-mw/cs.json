@@ -22,7 +22,8 @@
 			"Marek Pavlica",
 			"Teslaton",
 			"Martin Urbanec",
-			"Ilimanaq29"
+			"Ilimanaq29",
+			"Evica"
 		]
 	},
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService pro server dokumentu není definováno; vizte https://www.mediawiki.org/wiki/Extension:VisualEditor",
@@ -72,14 +73,14 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Editovat zdroj místního popisu",
 	"visualeditor-ca-editsource": "Editovat zdroj",
 	"visualeditor-ca-editsource-section": "editovat zdroj",
-	"visualeditor-ca-ve-create": "VisualEditor",
-	"visualeditor-ca-ve-edit": "VisualEditor",
-	"visualeditor-ca-ve-edit-section": "VisualEditor",
+	"visualeditor-ca-ve-create": "Vizuální editor",
+	"visualeditor-ca-ve-edit": "Vizuální editor",
+	"visualeditor-ca-ve-edit-section": "Vizuální editor",
 	"visualeditor-categories-tool": "Kategorie",
 	"visualeditor-changedesc-mwredirect": "Cíl přesměrování změněn z $1 na $2",
 	"visualeditor-changedesc-mwtransclusion": "Změněny parametry šablony",
 	"visualeditor-desc": "Vizuální editor pro MediaWiki",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-descriptionpagelink": "Project:Vizuální editor",
 	"visualeditor-dialog-media-alttext-section": "Alternativní text",
 	"visualeditor-dialog-media-alttext-section-help": "Pomocí tohoto můžete zadat textový popis pro lidi, kteří nemohou položku vidět. Popis by měl být dostatečný k tomu, aby pochopili účel a informace, které tato mediální položka poskytuje. Je to zásadní pro nevidomé uživatele a další uživatele používající čtečky obrazovky nebo čistě textové prohlížeče.",
 	"visualeditor-dialog-media-change-image": "Vybrat jiný obrázek",
