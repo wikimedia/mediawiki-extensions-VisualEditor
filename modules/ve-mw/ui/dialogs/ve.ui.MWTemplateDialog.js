@@ -235,12 +235,15 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 	var page = this.bookletLayout.getPage( param.getId() ),
 		reselect = this.bookletLayout.findClosestPage( page );
 
-	this.bookletLayout.removePages( [ page ] );
-	if ( this.loaded ) {
-		if ( !this.preventReselection ) {
-			this.setPageByName( reselect.getName() );
-		}
+	// Select the desired page first. Otherwise, if the page we are removing is selected,
+	// OOUI will try to select the first page after it is removed, and scroll to the top.
+	if ( this.loaded && !this.preventReselection ) {
+		this.setPageByName( reselect.getName() );
+	}
 
+	this.bookletLayout.removePages( [ page ] );
+
+	if ( this.loaded ) {
 		this.altered = true;
 		this.setApplicableStatus();
 	}
