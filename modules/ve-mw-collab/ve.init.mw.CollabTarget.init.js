@@ -15,11 +15,15 @@
 			.concat( conf.pluginModules.filter( mw.loader.getState ) ),
 		loadingPromise = mw.loader.using( modules ),
 		progressBar = OO.ui.infuse( $( '.ve-init-mw-collabTarget-loading' ) ),
-		form = OO.ui.infuse( $( '.ve-init-mw-collabTarget-form' ) ),
 		documentNameInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameInput' ) ),
 		documentNameButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) ),
-		importInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importInput' ) ),
-		importButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importButton' ) );
+		importInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importInput' ), {
+			showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
+			showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions
+		} ),
+		importButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importButton' ) ),
+		// Infuse the form last to avoid recursive infusion with no config
+		form = OO.ui.infuse( $( '.ve-init-mw-collabTarget-form' ) );
 
 	if ( !VisualEditorSupportCheck() ) {
 		// VE not supported - say something?
