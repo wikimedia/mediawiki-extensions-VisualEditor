@@ -1357,7 +1357,8 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			}
 			delete uri.query.section;
 		}
-		if ( 'action' in uri.query && $( '#wpTextbox1' ).length === 0 ) {
+		if ( 'action' in uri.query && $( '#wpTextbox1:not(.ve-dummyTextbox)' ).length === 0 ) {
+			// If we're not overlaid on an edit page, remove action=edit
 			delete uri.query.action;
 			mw.config.set( 'wgAction', 'view' );
 		}
