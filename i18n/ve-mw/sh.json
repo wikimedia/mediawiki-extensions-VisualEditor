@@ -7,7 +7,8 @@
 			"Conquistador",
 			"Srdjan m",
 			"Zoranzoki21",
-			"Matěj Suchánek"
+			"Matěj Suchánek",
+			"BadDog"
 		]
 	},
 	"apihelp-visualeditor-description": "Vraća HTML5 za stranicu sa servisa Parsoid.",
@@ -35,7 +36,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Kada snimate, postavite ovo za vremenski pečat trenutka kada je revizija učitana. Koristi se za otkrivanje sukoba uređivanja.",
 	"apihelp-visualeditoredit-param-summary": "Sažetak izmjene",
 	"tooltip-ca-createsource": "Stvorite izvorni kod ove stranice",
-	"tooltip-ca-edit": "Uredite ovu stranicu koristeći wikitekst",
+	"tooltip-ca-edit": "Uredi ovu stranicu koristeći wikitekst",
 	"tooltip-ca-editsource": "Uredite izvorni kod ove stranice",
 	"tooltip-ca-ve-edit": "Uredite ovu stranicu",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",

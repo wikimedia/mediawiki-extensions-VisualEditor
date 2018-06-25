@@ -399,5 +399,9 @@
 	"visualeditor-viewpage-savewarning-title": "Jste si {{GENDER:|jist|jista|jisti}}?",
 	"visualeditor-wikitext-progress": "Wikitext se převádí",
 	"visualeditor-wikitext-warning": "Používáte vizuální editor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kdykoli můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že kliknete na „Přepnout“.",
-	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu"
+	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu",
+	"visualeditor-wikitextconvert-title": "Převést formátování do wikitextu?",
+	"visualeditor-wikitextconvert-message": "Vložil(a) jste obsah obsahující formátování. Měl by být převeden do wikitextu, nebo vložen jako prostý text?",
+	"visualeditor-wikitextconvert-plain": "Jako prostý text",
+	"visualeditor-wikitextconvert-convert": "Převést do wikitextu"
 }
