@@ -39,7 +39,7 @@ ve.dm.MWInlineImageNode.static.isContent = true;
 ve.dm.MWInlineImageNode.static.name = 'mwInlineImage';
 
 ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = function ( attribute ) {
-	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href' ];
+	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'data-mw' ];
 	return attributes.indexOf( attribute ) === -1;
 };
 
@@ -56,6 +56,8 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		imgWrapper = figureInline.children[ 0 ], // could be <span> or <a>
 		img = imgWrapper.children[ 0 ],
 		typeofAttrs = ( figureInline.getAttribute( 'typeof' ) || '' ).split( ' ' ),
+		mwDataJSON = figureInline.getAttribute( 'data-mw' ),
+		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		classes = figureInline.getAttribute( 'class' ),
 		recognizedClasses = [],
 		errorIndex = typeofAttrs.indexOf( 'mw:Error' ),
@@ -78,6 +80,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		width: width !== null && width !== '' ? +width : null,
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),
+		mw: mwData,
 		isError: errorIndex !== -1
 	};
 
@@ -136,6 +139,9 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 
 	// RDFa type
 	figureInline.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
+	if ( !ve.isEmptyObject( data.attributes.mw ) ) {
+		figureInline.setAttribute( 'data-mw', JSON.stringify( figureInline.attributes.mw ) );
+	}
 
 	if ( data.attributes.defaultSize ) {
 		classes.push( 'mw-default-size' );
