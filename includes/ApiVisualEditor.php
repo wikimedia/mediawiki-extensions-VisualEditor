@@ -78,13 +78,14 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Accessor function for all RESTbase requests
 	 *
+	 * @param Title $title The title of the page to use as the parsing context
 	 * @param string $method The HTTP method, either 'GET' or 'POST'
 	 * @param string $path The RESTbase api path
 	 * @param Array $params Request parameters
 	 * @param Array $reqheaders Request headers
 	 * @return string Body of the RESTbase server's response
 	 */
-	protected function requestRestbase( $method, $path, $params, $reqheaders = [] ) {
+	protected function requestRestbase( Title $title, $method, $path, $params, $reqheaders = [] ) {
 		global $wgVersion;
 		$request = [
 			'method' => $method,
@@ -98,6 +99,7 @@ class ApiVisualEditor extends ApiBase {
 		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
 		$reqheaders['Accept'] = 'text/html; charset=utf-8;' .
 			' profile="https://www.mediawiki.org/wiki/Specs/HTML/1.7.0"';
+		$reqheaders['Accept-Language'] = self::getPageLanguage( $title )->getCode();
 		$reqheaders['User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
 		$reqheaders['Api-User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
 		$request['headers'] = $reqheaders;
@@ -156,6 +158,7 @@ class ApiVisualEditor extends ApiBase {
 	 */
 	protected function parseWikitextFragment( Title $title, $wikitext, $bodyOnly ) {
 		return $this->requestRestbase(
+			$title,
 			'POST',
 			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
 			[
@@ -306,6 +309,7 @@ class ApiVisualEditor extends ApiBase {
 					// If requested, request HTML from Parsoid/RESTBase
 					if ( $params['paction'] === 'parse' ) {
 						$content = $this->requestRestbase(
+							$title,
 							'GET',
 							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid . '?redirect=false',
 							[]
@@ -720,6 +724,23 @@ class ApiVisualEditor extends ApiBase {
 		);
 		return isset( $availableContentModels[$contentModel] ) &&
 			$availableContentModels[$contentModel];
+	}
+
+	/**
+	 * Get the page language from a title, using the content language as fallback on special pages
+	 * @param Title $title Title
+	 * @return Language Content language
+	 */
+	public static function getPageLanguage( Title $title ) {
+		global $wgContLang;
+		if ( $title->isSpecial( 'CollabPad' ) ) {
+			// Use the site language for CollabPad, as getPageLanguage just
+			// returns the interface language for special pages.
+			// TODO: Let the user change the document language on multi-lingual sites.
+			return $wgContLang;
+		} else {
+			return $title->getPageLanguage();
+		}
 	}
 
 	/**

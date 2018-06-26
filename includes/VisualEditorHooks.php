@@ -869,17 +869,8 @@ class VisualEditorHooks {
 	 * @return bool Always true
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
-		global $wgContLang;
+		$pageLanguage = ApiVisualEditor::getPageLanguage( $out->getTitle() );
 
-		$title = $out->getTitle();
-		if ( $title->isSpecial( 'CollabPad' ) ) {
-			// Use the site language for CollabPad, as getPageLanguage just
-			// returns the interface language for special pages.
-			// TODO: Let the user change the document language on multi-lingual sites.
-			$pageLanguage = $wgContLang;
-		} else {
-			$pageLanguage = $out->getTitle()->getPageLanguage();
-		}
 		$fallbacks = $pageLanguage->getConverter()->getVariantFallbacks(
 			$pageLanguage->getPreferredVariant()
 		);

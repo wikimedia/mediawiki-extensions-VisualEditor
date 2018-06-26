@@ -263,6 +263,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$path .= '/' . $parserParams['oldid'];
 		}
 		return $this->requestRestbase(
+			$title,
 			'POST', $path, $data,
 			[ 'If-Match' => $etag ]
 		);
