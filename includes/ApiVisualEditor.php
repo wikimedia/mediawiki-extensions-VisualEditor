@@ -132,11 +132,11 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Run wikitext through the parser's Pre-Save-Transform
 	 *
-	 * @param string $title The title of the page to use as the parsing context
+	 * @param Title $title The title of the page to use as the parsing context
 	 * @param string $wikitext The wikitext to transform
 	 * @return string The transformed wikitext
 	 */
-	protected function pstWikitext( $title, $wikitext ) {
+	protected function pstWikitext( Title $title, $wikitext ) {
 		return ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT )
 			->preSaveTransform(
 				$title,
@@ -170,11 +170,11 @@ class ApiVisualEditor extends ApiBase {
 	 *
 	 * @param string $preload The title of the page to use as the preload content
 	 * @param string[] $params The preloadTransform parameters to pass in, if any
-	 * @param string $contextTitle The contextual page title against which to parse the preload
+	 * @param Title $contextTitle The contextual page title against which to parse the preload
 	 * @param bool $parse Whether to parse the preload content
 	 * @return string The parsed content
 	 */
-	protected function getPreloadContent( $preload, $params, $contextTitle, $parse = false ) {
+	protected function getPreloadContent( $preload, $params, Title $contextTitle, $parse = false ) {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
 		// Check for existence to avoid getting MediaWiki:Noarticletext
@@ -725,11 +725,11 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Gets the relevant HTML for the latest log entry on a given title, including a full log link.
 	 *
-	 * @param $title Title
+	 * @param Title $title Title
 	 * @param $types array|string
 	 * @return string
 	 */
-	private function getLastLogEntry( $title, $types = '' ) {
+	private function getLastLogEntry( Title $title, $types = '' ) {
 		$lp = new LogPager(
 			new LogEventsList( $this->getContext() ),
 			$types,
