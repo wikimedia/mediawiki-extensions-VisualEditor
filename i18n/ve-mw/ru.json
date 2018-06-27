@@ -44,7 +44,8 @@
 			"Helpau",
 			"Smigles",
 			"Happy13241",
-			"Movses"
+			"Movses",
+			"Stjn"
 		]
 	},
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
