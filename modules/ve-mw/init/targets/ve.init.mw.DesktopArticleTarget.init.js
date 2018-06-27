@@ -801,15 +801,27 @@
 
 			if ( active ) {
 				targetPromise.done( function ( target ) {
-					if ( mode === 'visual' && target.getDefaultMode() === 'source' ) {
-						target.switchToVisualEditor();
-					} else if (
-						mode === 'source'
-					) {
-						// Requested section may have changed, or we may need
-						// to switch from visual mode to source mode with a
-						// section.
-						target.switchToWikitextSection( section );
+					if ( target.getDefaultMode() === 'source' ) {
+						if ( mode === 'visual' ) {
+							target.switchToVisualEditor();
+						} else if ( mode === 'source' ) {
+							// Requested section may have changed --
+							// switchToWikitextSection will do nothing if the
+							// section is unchanged.
+							target.switchToWikitextSection( section );
+						}
+					} else if ( target.getDefaultMode() === 'visual' ) {
+						if ( mode === 'source' ) {
+							if ( section ) {
+								// switching from visual via the "add section" tab
+								target.switchToWikitextSection( section );
+							} else {
+								target.editSource();
+							}
+						}
+						// Visual-to-visual doesn't need to do anything,
+						// because we don't have any section concerns. Just
+						// no-op it.
 					}
 				} );
 			} else {
