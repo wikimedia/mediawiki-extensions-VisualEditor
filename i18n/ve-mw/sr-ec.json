@@ -11,7 +11,8 @@
 			"Obsuser",
 			"Prevodim",
 			"Acamicamacaraca",
-			"BadDog"
+			"BadDog",
+			"Zoranzoki21"
 		]
 	},
 	"apierror-visualeditor-difffailed": "Разлика неуспешна",
@@ -42,9 +43,9 @@
 	"apihelp-visualeditoredit-param-summary": "Опис измене.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad": "CollabPad",
-	"tooltip-ca-createsource": "Направи изворни кôд ове странице",
+	"tooltip-ca-createsource": "Направите изворни кôд ове странице",
 	"tooltip-ca-edit": "Уредите ову страницу помоћу викитекста",
-	"tooltip-ca-editsource": "Уреди изворни кôд ове странице",
+	"tooltip-ca-editsource": "Уредите изворни кôд ове странице",
 	"tooltip-ca-ve-edit": "Уреди ову страницу",
 	"visualeditor-advancedsettings-tool": "Напредна подешавања",
 	"visualeditor-backbutton-tooltip": "Назад",
@@ -54,8 +55,8 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Додај локални опис (изворно)",
 	"visualeditor-ca-createsource": "Направи изворни кôд",
 	"visualeditor-ca-editlocaldescriptionsource": "Уреди локални опис (изворно)",
-	"visualeditor-ca-editsource": "Уреди изворни кôд",
-	"visualeditor-ca-editsource-section": "уреди изворни кôд",
+	"visualeditor-ca-editsource": "Уреди извор",
+	"visualeditor-ca-editsource-section": "уреди извор",
 	"visualeditor-ca-ve-create": "Визуелни уређивач",
 	"visualeditor-ca-ve-edit": "Визуелни уређивач",
 	"visualeditor-ca-ve-edit-section": "Визуелни уређивач",
