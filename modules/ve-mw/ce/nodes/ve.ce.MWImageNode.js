@@ -94,16 +94,24 @@ ve.ce.MWImageNode.prototype.onGeneratedContentNodeUpdate = function () {
  * @inheritdoc ve.ce.GeneratedContentNode
  */
 ve.ce.MWImageNode.prototype.generateContents = function () {
-	var xhr,
+	var xhr, params,
 		model = this.getModel(),
 		width = model.getAttribute( 'width' ),
 		height = model.getAttribute( 'height' ),
-		thumbTime = ( model.getAttribute( 'mw' ) || {} ).thumbtime,
+		mwData = model.getAttribute( 'mw' ),
 		deferred = $.Deferred();
 
 	// If the current rendering is larger don't fetch a new image, just let the browser resize
 	if ( this.renderedDimensions && this.renderedDimensions.width > width ) {
 		return deferred.reject().promise();
+	}
+
+	if ( mwData.thumbtime !== undefined ) {
+		params = 'seek=' + mwData.thumbtime;
+	} else if ( mwData.page !== undefined ) {
+		params = 'page' + mwData.page + '-' + width + 'px';
+		// Don't send width twice
+		width = undefined;
 	}
 
 	xhr = ve.init.target.getContentApi( this.getModel().getDocument() ).get( {
@@ -112,7 +120,7 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 		iiprop: 'url',
 		iiurlwidth: width,
 		iiurlheight: height,
-		iiurlparam: thumbTime !== undefined ? 'seek=' + thumbTime : undefined,
+		iiurlparam: params,
 		titles: this.getModel().getFilename()
 	} )
 		.done( this.onParseSuccess.bind( this, deferred ) )
