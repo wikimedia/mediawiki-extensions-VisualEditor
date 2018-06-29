@@ -95,8 +95,10 @@ ve.ce.MWImageNode.prototype.onGeneratedContentNodeUpdate = function () {
  */
 ve.ce.MWImageNode.prototype.generateContents = function () {
 	var xhr,
-		width = this.getModel().getAttribute( 'width' ),
-		height = this.getModel().getAttribute( 'height' ),
+		model = this.getModel(),
+		width = model.getAttribute( 'width' ),
+		height = model.getAttribute( 'height' ),
+		thumbTime = ( model.getAttribute( 'mw' ) || {} ).thumbtime,
 		deferred = $.Deferred();
 
 	// If the current rendering is larger don't fetch a new image, just let the browser resize
@@ -110,6 +112,7 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 		iiprop: 'url',
 		iiurlwidth: width,
 		iiurlheight: height,
+		iiurlparam: thumbTime !== undefined ? 'seek=' + thumbTime : undefined,
 		titles: this.getModel().getFilename()
 	} )
 		.done( this.onParseSuccess.bind( this, deferred ) )

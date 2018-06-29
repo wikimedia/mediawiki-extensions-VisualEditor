@@ -270,6 +270,7 @@ ve.dm.mwExample.MWBlockImage = {
 				alt: null,
 				isError: false,
 				resource: 'FooBar',
+				mw: {},
 				originalClasses: 'mw-halign-right foobar',
 				unrecognizedClasses: [ 'foobar' ]
 			}
@@ -305,6 +306,7 @@ ve.dm.mwExample.MWInlineImage = {
 			isError: false,
 			valign: 'text-top',
 			resource: './File:Wiki.png',
+			mw: {},
 			type: 'none',
 			originalClasses: 'foo mw-valign-text-top',
 			unrecognizedClasses: [ 'foo' ]
@@ -1510,6 +1512,7 @@ ve.dm.mwExample.domToDataCases = {
 					width: 1,
 					height: 2,
 					alt: null,
+					mw: {},
 					isError: false,
 					resource: 'FooBar'
 				}

@@ -42,7 +42,7 @@ OO.mixinClass( ve.dm.MWBlockImageNode, ve.dm.ClassAttributeNode );
 ve.dm.MWBlockImageNode.static.name = 'mwBlockImage';
 
 ve.dm.MWBlockImageNode.static.preserveHtmlAttributes = function ( attribute ) {
-	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel' ];
+	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel', 'data-mw' ];
 	return attributes.indexOf( attribute ) === -1;
 };
 
@@ -68,7 +68,8 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, newDimensions, attributes,
 		figure, imgWrapper, img, caption,
-		classAttr, typeofAttrs, errorIndex, width, height, types;
+		classAttr, typeofAttrs, errorIndex, width, height, types,
+		mwDataJSON, mwData;
 
 	figure = domElements[ 0 ];
 	imgWrapper = figure.children[ 0 ]; // <a> or <span>
@@ -76,6 +77,8 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	caption = figure.children[ 1 ]; // <figcaption> or undefined
 	classAttr = figure.getAttribute( 'class' );
 	typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' );
+	mwDataJSON = figure.getAttribute( 'data-mw' );
+	mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 	errorIndex = typeofAttrs.indexOf( 'mw:Error' );
 	width = img.getAttribute( 'width' );
 	height = img.getAttribute( 'height' );
@@ -95,6 +98,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		width: width !== null && width !== '' ? +width : null,
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),
+		mw: mwData,
 		isError: errorIndex !== -1
 	};
 
@@ -159,6 +163,9 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 
 	// RDFa type
 	figure.setAttribute( 'typeof', this.getRdfa( mediaClass, dataElement.attributes.type ) );
+	if ( !ve.isEmptyObject( dataElement.attributes.mw ) ) {
+		figure.setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
+	}
 
 	if ( classAttr ) {
 		figure.className = classAttr;
