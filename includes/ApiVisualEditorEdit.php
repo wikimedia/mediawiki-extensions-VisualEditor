@@ -215,7 +215,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
-		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
+		$key = $wgMemc->makeKey( 'visualeditor', 'serialization', $hash );
 		$wgMemc->set( $key, $wikitext,
 			$this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
 
@@ -243,7 +243,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 */
 	protected function trySerializationCache( $hash ) {
 		global $wgMemc;
-		$key = wfMemcKey( 'visualeditor', 'serialization', $hash );
+		$key = $wgMemc->makeKey( 'visualeditor', 'serialization', $hash );
 		return $wgMemc->get( $key );
 	}
 
