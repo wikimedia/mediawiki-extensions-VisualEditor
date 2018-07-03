@@ -6,6 +6,7 @@
 			"Исмаил Садуев"
 		]
 	},
+	"apihelp-visualeditor-param-etag": "ETag дӀаяхьийта.",
 	"tooltip-ca-createsource": "Кхолла агӀо чухулара тадар чохь",
 	"tooltip-ca-editsource": "Нисде агӀона дӀадолалун йоза",
 	"tooltip-ca-ve-edit": "хӀара агӀо таяр",
@@ -171,6 +172,8 @@
 	"visualeditor-preference-enable": "Латае БӀаьран тадар. И лело йиш хира ю цӀерийн {{PLURAL:$2|анахь|анашкахь}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Лата бе вики-йозан керла дӀахӀоттам. Оцу тӀехь бу дукха БӀаьра тадаран гӀирсаш.",
 	"visualeditor-preference-newwikitexteditor-label": "Вики-йозан керла дӀахӀоттам",
+	"visualeditor-preference-visualdiffpage-description": "Латае бӀаьран раж версеш юсташ йолу агӀонашкахь.",
+	"visualeditor-preference-visualdiffpage-label": "Версеш бӀаьран юстар",
 	"visualeditor-rebase-client-import": "Импорт ян",
 	"visualeditor-rebase-client-import-name": "АгӀона корта",
 	"visualeditor-redirect-description": "ДӀасахьажор тӀе $1",
