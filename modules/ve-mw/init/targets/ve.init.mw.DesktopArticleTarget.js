@@ -1100,8 +1100,7 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
  * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
-	var namespaceKey,
-		target = this;
+	var namespaceKey;
 	if ( this.isViewPage ) {
 		// Mimics getNamespaceKey in Title.php
 		namespaceKey = mw.config.get( 'wgCanonicalNamespace' ).toLowerCase() || 'main';
@@ -1112,21 +1111,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 		$( '#ca-view a, #ca-nstab-' + namespaceKey + ' a' )
 			.on( 'click.ve-target', this.onViewTabClick.bind( this ) );
 
-	}
-	if ( !mw.libs.ve.isSingleEditTab ) {
-		$( '#ca-viewsource, #ca-edit' ).on( 'click.ve-target', function ( e ) {
-			if ( !target.active || !ve.isUnmodifiedLeftClick( e ) ) {
-				return;
-			}
-
-			if ( target.getSurface() && !target.deactivating && target.getDefaultMode() !== 'source' ) {
-				target.editSource();
-
-				if ( target.getSurface().getModel().hasBeenModified() || target.fromEditedState ) {
-					e.preventDefault();
-				}
-			}
-		} );
 	}
 
 	mw.hook( 've.skinTabSetupComplete' ).fire();

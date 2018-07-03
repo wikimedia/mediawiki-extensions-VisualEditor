@@ -2501,7 +2501,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
  * Switch to a different wikitext section
  *
  * @param {number|string|null} section New section, number, 'new' or null (whole document)
- * @param {boolean} noConfirm Swtich without prompting (changes will be lost either way)
+ * @param {boolean} noConfirm Switch without prompting (changes will be lost either way)
  */
 ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section, noConfirm ) {
 	var promise,
