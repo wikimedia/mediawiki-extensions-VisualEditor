@@ -896,7 +896,7 @@
 				// Not an edit action
 				!( 'action' in uri.query || 'veaction' in uri.query ) ||
 				// Edit target is on another host (e.g. commons file)
-				uri.host !== location.host ||
+				uri.getHostPort() !== location.host ||
 				// Title param doesn't match current page
 				title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText()
 			) {
