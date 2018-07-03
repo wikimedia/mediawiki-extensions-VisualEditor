@@ -888,7 +888,7 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	}
 	if ( action === 'report' ) {
 		return new OO.ui.Process( function () {
-			window.open( this.constructor.static.feedbackUrl, '_new' );
+			window.open( this.constructor.static.feedbackUrl );
 		}, this );
 	}
 
