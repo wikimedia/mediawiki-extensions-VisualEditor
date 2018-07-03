@@ -63,7 +63,8 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 	addTemplateActionFieldLayout = new OO.ui.ActionFieldLayout(
 		this.addTemplateInput,
-		this.addTemplateButton
+		this.addTemplateButton,
+		{ align: 'top' }
 	);
 
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( {
