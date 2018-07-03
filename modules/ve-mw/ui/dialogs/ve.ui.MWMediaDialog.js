@@ -897,18 +897,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 				},
 				info
 			);
-			// Update filename
-			this.filenameFieldset.setLabel(
-				$( '<span>' ).append(
-					document.createTextNode( this.imageModel.getFilename() + ' ' ),
-					$( '<a>' )
-						.addClass( 'visualeditor-dialog-media-content-description-link' )
-						.attr( 'href', ve.resolveUrl( title, this.getFragment().getDocument().getHtmlDocument() ) )
-						.attr( 'target', '_blank' )
-						.attr( 'rel', 'noopener' )
-						.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
-				)
-			);
+			this.updateFilenameFieldset();
 		}
 
 		// Cache
@@ -925,6 +914,23 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 		this.checkChanged();
 		this.switchPanels( 'edit' );
 	}
+};
+
+/**
+ * Update the filename fieldset (link to media page)
+ */
+ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
+	this.filenameFieldset.setLabel(
+		$( '<span>' ).append(
+			document.createTextNode( this.imageModel.getFilename() + ' ' ),
+			$( '<a>' )
+				.addClass( 'visualeditor-dialog-media-content-description-link' )
+				.attr( 'href', ve.resolveUrl( this.imageModel.getResourceName(), this.getFragment().getDocument().getHtmlDocument() ) )
+				.attr( 'target', '_blank' )
+				.attr( 'rel', 'noopener' )
+				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
+		)
+	);
 };
 
 /**
@@ -1207,17 +1213,7 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	this.isSettingUpModel = true;
 
 	// Filename
-	this.filenameFieldset.setLabel(
-		$( '<span>' ).append(
-			document.createTextNode( this.imageModel.getFilename() + ' ' ),
-			$( '<a>' )
-				.addClass( 'visualeditor-dialog-media-content-description-link' )
-				.attr( 'href', ve.resolveUrl( this.imageModel.getResourceName(), this.getFragment().getDocument().getHtmlDocument() ) )
-				.attr( 'target', '_blank' )
-				.attr( 'rel', 'noopener' )
-				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
-		)
-	);
+	this.updateFilenameFieldset();
 
 	// Size widget
 	this.sizeErrorLabel.toggle( false );
