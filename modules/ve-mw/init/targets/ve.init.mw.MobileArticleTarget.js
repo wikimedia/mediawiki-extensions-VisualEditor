@@ -183,11 +183,11 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 	this.pageToolbar.setup( [
 		// Back
 		{
-			name: 'save-back',
+			name: 'back',
 			include: [ 'back' ]
 		},
 		{
-			name: 'edit-modes',
+			name: 'editMode',
 			type: 'list',
 			icon: 'edit',
 			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
