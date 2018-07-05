@@ -5,10 +5,15 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.visualeditor-welcomedialog-content {
-	background: url( images/welcomeSplash-ltr.png ) 50% -1em no-repeat;
+.visualeditor-welcomedialog-content:before {
+	content: '';
+	background: url( images/welcomeSplash-ltr.png ) center no-repeat;
 	background-size: contain;
 	display: block;
+	height: 12em;
+}
+
+.visualeditor-welcomedialog-content {
+	display: block;
 	text-align: center;
-	padding-top: 12em;
 }
