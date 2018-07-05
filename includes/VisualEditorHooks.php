@@ -1094,6 +1094,7 @@ class VisualEditorHooks {
 				// VisualEditor UI Tests
 				'lib/ve/tests/ui/ve.ui.Trigger.test.js',
 				'lib/ve/tests/ui/ve.ui.DiffElement.test.js',
+				'lib/ve/tests/ui/ve.ui.PreviewElement.test.js',
 				'modules/ve-mw/tests/ui/ve.ui.DiffElement.test.js',
 				// VisualEditor Actions Tests
 				'lib/ve/tests/ui/actions/ve.ui.AnnotationAction.test.js',
