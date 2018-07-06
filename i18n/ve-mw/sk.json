@@ -27,6 +27,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Kategórie",
+	"visualeditor-changedesc-mwredirect": "Cieľ presmerovania zmenený z $1 na $2",
 	"visualeditor-changedesc-mwtransclusion": "Zmenené parametre šablóny",
 	"visualeditor-desc": "Vizuálny editor pre MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
