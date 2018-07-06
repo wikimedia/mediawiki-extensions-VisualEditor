@@ -17,7 +17,6 @@
 	"rules": {
 		"dot-notation": [ "error", { "allowKeywords": true } ],
 		"max-len": 0,
-		"no-prototype-builtins": 0,
 		"valid-jsdoc": 0
 	}
 }
