@@ -90,6 +90,7 @@
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Kategorier",
 	"visualeditor-changedesc-mwlanguagevariant": "Oppmerking for språkvariant endret",
+	"visualeditor-changedesc-mwredirect": "Omdirigeringsmål endret fra $1 til $2",
 	"visualeditor-changedesc-mwtransclusion": "Malparametere endret",
 	"visualeditor-desc": "Visuell redigering for MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
@@ -395,6 +396,8 @@
 	"visualeditor-preference-tabs-remember-last": "Husk min sist brukte editor",
 	"visualeditor-preference-visualdiffpage-description": "Aktiver den nye visuelle modusen for sammenligning av revisjoner.",
 	"visualeditor-preference-visualdiffpage-label": "Visuelle forskjeller",
+	"visualeditor-rebase-client-import": "Importer",
+	"visualeditor-rebase-client-import-name": "Sidetittel",
 	"visualeditor-recreate": "Siden har blitt slettet etter at du begynte å redigere. Trykk \"$1\" for å gjenopprette den.",
 	"visualeditor-redirect-description": "Omdiriger til $1",
 	"visualeditor-savedialog-error-badtoken": "Vi kunne ikke lagre redigeringen din fordi sesjonen ikke lenger er gyldig.",
@@ -444,5 +447,8 @@
 	"visualeditor-viewpage-savewarning-title": "Er du sikker?",
 	"visualeditor-wikitext-progress": "Konverterer wikitekst",
 	"visualeditor-wikitext-warning": "Du bruker VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] virker ikke her. For å bytte til kilderedigering uten å miste endringene du har gjort, trykk på veksle-knappen.",
-	"visualeditor-wikitext-warning-title": "Wikitekst påvist"
+	"visualeditor-wikitext-warning-title": "Wikitekst påvist",
+	"visualeditor-wikitextconvert-title": "Konverter formatering til wikitekst?",
+	"visualeditor-wikitextconvert-plain": "Bruk vanlig tekst",
+	"visualeditor-wikitextconvert-convert": "Konverter til wikitekst"
 }
