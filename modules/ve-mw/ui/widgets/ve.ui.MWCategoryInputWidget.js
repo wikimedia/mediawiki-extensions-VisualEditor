@@ -85,13 +85,16 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 	$.each( query.pages || [], function ( pageId, categoryPage ) {
 		result.push( mw.Title.newFromText( categoryPage.title ).getMainText() );
 		linkCacheUpdate[ categoryPage.title ] = {
-			missing: categoryPage.hasOwnProperty( 'missing' ),
-			hidden: categoryPage.categoryinfo && categoryPage.categoryinfo.hasOwnProperty( 'hidden' )
+			missing: Object.prototype.hasOwnProperty.call( categoryPage, 'missing' ),
+			hidden: (
+				categoryPage.categoryinfo &&
+				Object.prototype.hasOwnProperty.call( categoryPage.categoryinfo, 'missing' )
+			)
 		};
 	} );
 
 	$.each( query.redirects || [], function ( index, redirect ) {
-		if ( !linkCacheUpdate.hasOwnProperty( redirect.to ) ) {
+		if ( !Object.prototype.hasOwnProperty.call( linkCacheUpdate, redirect.to ) ) {
 			linkCacheUpdate[ redirect.to ] = ve.init.platform.linkCache.getCached( redirect.to ) ||
 				{ missing: false, redirectFrom: [ redirect.from ] };
 		}

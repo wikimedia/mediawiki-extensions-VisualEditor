@@ -984,7 +984,7 @@
 		conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
 
 		// Only for pages with a supported content model
-		conf.contentModels.hasOwnProperty( mw.config.get( 'wgPageContentModel' ) )
+		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) )
 	);
 
 	// Duplicated in VisualEditor.hooks.php#isWikitextAvailable()

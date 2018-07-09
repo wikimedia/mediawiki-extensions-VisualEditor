@@ -683,7 +683,7 @@ ve.ui.MWGalleryDialog.prototype.updateHighlightedItem = function () {
 ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
 	var title = mw.Title.newFromText( item.getData().title ).getPrefixedText();
 
-	if ( !Object.prototype.hasOwnProperty( this.selectedFilenames, title ) ) {
+	if ( !Object.prototype.hasOwnProperty.call( this.selectedFilenames, title ) ) {
 		this.addNewImage( title );
 	}
 
