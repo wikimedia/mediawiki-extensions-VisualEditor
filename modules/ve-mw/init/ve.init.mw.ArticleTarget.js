@@ -2624,19 +2624,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			}
 			return $list;
 		}
-		function categorySort( a, b ) {
-			var sortA = a.sortkey || a.category,
-				sortB = b.sortkey || b.category;
-			if ( sortA < sortB ) {
-				return -1;
-			}
-			if ( sortA > sortB ) {
-				return 1;
-			}
-			return 0;
-		}
 		if ( categories.normal.length ) {
-			categories.normal.sort( categorySort );
 			$normal = $( '<div class="mw-normal-catlinks" />' );
 			$normal.append(
 				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categories.normal.length ) ),
@@ -2646,7 +2634,6 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			$output.append( $normal );
 		}
 		if ( categories.hidden.length ) {
-			categories.hidden.sort( categorySort );
 			$hidden = $( '<div class="mw-hidden-catlinks" />' );
 			if ( mw.user.options.get( 'showhiddencats' ) ) {
 				$hidden.addClass( 'mw-hidden-cats-user-shown' );
