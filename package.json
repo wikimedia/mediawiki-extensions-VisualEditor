@@ -22,10 +22,10 @@
 		"grunt-mocha-test": "0.12.7",
 		"grunt-stylelint": "0.10.0",
 		"grunt-tyops": "0.1.0",
-		"jimp": "0.2.24",
-		"mocha": "2.5.3",
-		"selenium-webdriver": "2.53.2",
-		"stylelint": "9.2.0",
+		"jimp": "0.2.28",
+		"mocha": "5.2.0",
+		"selenium-webdriver": "3.6.0",
+		"stylelint": "9.3.0",
 		"stylelint-config-wikimedia": "0.4.3"
 	}
 }
