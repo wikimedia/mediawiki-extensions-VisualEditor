@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"ArmenBakkalian"
+			"ArmenBakkalian",
+			"Azniv Stepanian"
 		]
 	},
-	"tooltip-ca-ve-edit": "Խմբագրէ՛ այս էջը",
+	"tooltip-ca-ve-edit": "Խմբագրել այս էջը",
 	"visualeditor-ca-editsource": "խմբագրել աղբիւրը",
 	"visualeditor-ca-editsource-section": "խմբագրել աղբիւրը"
 }
