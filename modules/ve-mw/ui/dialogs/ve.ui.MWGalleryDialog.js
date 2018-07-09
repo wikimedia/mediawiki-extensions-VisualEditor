@@ -643,7 +643,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 /**
  * Request a new image and highlight it
  *
- * @param {string} title File name for the new image
+ * @param {string} title Normalized title of the new image
  */
 ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 	var dialog = this;
@@ -683,6 +683,8 @@ ve.ui.MWGalleryDialog.prototype.updateHighlightedItem = function () {
 ve.ui.MWGalleryDialog.prototype.onSearchResultsChoose = function ( item ) {
 	var title = mw.Title.newFromText( item.getData().title ).getPrefixedText();
 
+	// Check title against pending insertions
+	// TODO: Prevent two 'choose' events firing from the UI
 	if ( !Object.prototype.hasOwnProperty.call( this.selectedFilenames, title ) ) {
 		this.addNewImage( title );
 	}
