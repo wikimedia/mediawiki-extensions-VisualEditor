@@ -2601,8 +2601,9 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 	var $normal, $hidden,
 		promises = [],
 		categories = { hidden: [], normal: [] };
-	categoryItems.forEach( function ( categoryItem ) {
+	categoryItems.forEach( function ( categoryItem, index ) {
 		var attributes = ve.cloneObject( ve.getProp( categoryItem, 'element', 'attributes' ) );
+		attributes.index = index;
 		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( function ( result ) {
 			if ( result.hidden ) {
 				categories.hidden.push( attributes );
@@ -2624,7 +2625,11 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			}
 			return $list;
 		}
+		function categorySort( a, b ) {
+			return a.index - b.index;
+		}
 		if ( categories.normal.length ) {
+			categories.normal.sort( categorySort );
 			$normal = $( '<div class="mw-normal-catlinks" />' );
 			$normal.append(
 				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categories.normal.length ) ),
@@ -2634,6 +2639,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			$output.append( $normal );
 		}
 		if ( categories.hidden.length ) {
+			categories.hidden.sort( categorySort );
 			$hidden = $( '<div class="mw-hidden-catlinks" />' );
 			if ( mw.user.options.get( 'showhiddencats' ) ) {
 				$hidden.addClass( 'mw-hidden-cats-user-shown' );
