@@ -391,6 +391,8 @@
 	"visualeditor-preference-tabs-prefer-wt": "Sempre mostrarme o editor de código",
 	"visualeditor-preference-tabs-remember-last": "Lembrar o último editor usado",
 	"visualeditor-preference-visualdiffpage-label": "Diferenzas visuais",
+	"visualeditor-rebase-client-import": "Importar",
+	"visualeditor-rebase-client-import-name": "Título da páxina",
 	"visualeditor-recreate": "Alguén borrou a páxina desde que comezou a editala. Prema en \"$1\" para creala de novo.",
 	"visualeditor-redirect-description": "Redirixir a $1",
 	"visualeditor-savedialog-error-badtoken": "Non se puido gardar a súa edición porque a sesión expirou.",
@@ -440,5 +442,6 @@
 	"visualeditor-viewpage-savewarning-title": "Está seguro?",
 	"visualeditor-wikitext-progress": "Convertendo o texto wiki",
 	"visualeditor-wikitext-warning": "Está usando o editor visual; o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|texto wiki]] non funciona aquí. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, prema no botón de intercambio.",
-	"visualeditor-wikitext-warning-title": "Detectouse texto wiki"
+	"visualeditor-wikitext-warning-title": "Detectouse texto wiki",
+	"visualeditor-wikitextconvert-convert": "Converter a texto wiki"
 }

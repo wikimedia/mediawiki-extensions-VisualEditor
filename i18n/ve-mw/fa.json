@@ -99,6 +99,7 @@
 	"visualeditor-ca-ve-edit-section": "ویرایشگر دیداری",
 	"visualeditor-categories-tool": "رده‌ها",
 	"visualeditor-changedesc-mwlanguagevariant": "متغییر بالابردن زبان تغییر یافت",
+	"visualeditor-changedesc-mwredirect": "هدف تغییرمسیر از $1 به $2 تغییر یافت",
 	"visualeditor-changedesc-mwtransclusion": "متغییرهای الگو تغییریافت",
 	"visualeditor-desc": "ویرایشگر دیداری برای مدیاویکی",
 	"visualeditor-descriptionpagelink": "Project:ویرایشگر دیداری",
