@@ -431,6 +431,20 @@ class ApiVisualEditor extends ApiBase {
 					if ( $title->getRestrictions( 'create' ) ) {
 						$notices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock();
 					}
+					// From EditPage#showIntro, checking if the page has previously been deleted:
+					$dbr = wfGetDB( DB_REPLICA );
+					LogEventsList::showLogExtract( $out, [ 'delete', 'move' ], $title,
+						'',
+						[
+							'lim' => 10,
+							'conds' => [ 'log_action != ' . $dbr->addQuotes( 'revision' ) ],
+							'showIfEmpty' => false,
+							'msgKey' => [ 'recreate-moveddeleted-warn' ]
+						]
+					);
+					if ( $out ) {
+						$notices[] = $out;
+					}
 				}
 
 				// Look at protection status to set up notices + surface class(es)
