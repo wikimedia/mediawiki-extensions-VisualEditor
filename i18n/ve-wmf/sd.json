@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Mehtab ahmed",
-			"Indus Asia"
+			"Indus Asia",
+			"Tweety"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|وزيوئل ترميم]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|وزيوئل‌ايڊيٽر: تبديل]]",
 	"visualeditor-feedback-link": "رٿا:وزيوئل ايڊيٽر/پذيرائي",
 	"visualeditor-feedback-tool": "ھن سافٽويئر بابت پذيرائي ڇڏيو",
 	"visualeditor-help-label": "واپرائيندڙ جو رھنما پڙھو",
