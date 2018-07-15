@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Khalid Mahmood"
+			"Khalid Mahmood",
+			"BukhariSaeed"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویول ایڈیٹر]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ویول ایڈیٹر]]",
+	"tag-visualeditor-wikitext": "2017 سورس ایڈیٹ"
 }

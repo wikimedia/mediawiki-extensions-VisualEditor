@@ -449,6 +449,7 @@
 	"visualeditor-wikitext-warning": "Du bruker VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] virker ikke her. For å bytte til kilderedigering uten å miste endringene du har gjort, trykk på veksle-knappen.",
 	"visualeditor-wikitext-warning-title": "Wikitekst påvist",
 	"visualeditor-wikitextconvert-title": "Konverter formatering til wikitekst?",
+	"visualeditor-wikitextconvert-message": "Det innlimte innholdet inneholder formatering. Skal det konverteres til wikitekst, eller settes inn som ren tekst?",
 	"visualeditor-wikitextconvert-plain": "Bruk vanlig tekst",
 	"visualeditor-wikitextconvert-convert": "Konverter til wikitekst"
 }
