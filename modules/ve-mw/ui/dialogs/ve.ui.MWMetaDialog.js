@@ -122,6 +122,22 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 
 			// Force all previous transactions to be separate from this history state
 			surfaceModel.pushStaging();
+
+			// Let each page set itself up ('languages' page doesn't need this yet)
+			this.categoriesPage.setup( surfaceModel.metaList, data );
+			this.settingsPage.setup( surfaceModel.metaList, data );
+			this.advancedSettingsPage.setup( surfaceModel.metaList, data );
+
+			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
+				// HACK: Prevent the setPage() call from focussing stuff in the selected page. For the
+				// 'categories' page, this causes a dropdown to appear, and if it's done in the setup
+				// process, the dropdown will be misaligned (T185944). We don't pass `autoFocus: false`
+				// in the config because we want the auto-focus behavior when the user changes the page
+				// after the dialog is open. We focus in getReadyProcess() anyway.
+				this.bookletLayout.autoFocus = false;
+				this.bookletLayout.setPage( data.page );
+				this.bookletLayout.autoFocus = true;
+			}
 		}, this );
 };
 
@@ -132,18 +148,9 @@ ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			var surfaceModel = this.getFragment().getSurface();
-
-			// Call setPage in ready as setPage triggers PageLayout#focus
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
-				this.bookletLayout.setPage( data.page );
 				this.bookletLayout.getPage( data.page ).focus();
 			}
-
-			// Let each page set itself up ('languages' page doesn't need this yet)
-			this.categoriesPage.setup( surfaceModel.metaList, data );
-			this.settingsPage.setup( surfaceModel.metaList, data );
-			this.advancedSettingsPage.setup( surfaceModel.metaList, data );
 		}, this );
 };
 
