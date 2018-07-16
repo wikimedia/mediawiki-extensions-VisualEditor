@@ -126,7 +126,7 @@
 	onNameChange();
 
 	function onImportChange() {
-		documentNameInput.getValidity().then( function () {
+		importInput.getValidity().then( function () {
 			importButton.setDisabled( false );
 		}, function () {
 			importButton.setDisabled( true );
@@ -149,9 +149,9 @@
 		// TODO: Check page exists?
 		return !!mw.Title.newFromText( value );
 	} );
+	importInput.on( 'change', onImportChange );
 	importInput.on( 'enter', importTitle );
 	importButton.on( 'click', importTitle );
-	importButton.setDisabled( false );
 	onImportChange();
 
 	if ( pageTitle ) {
