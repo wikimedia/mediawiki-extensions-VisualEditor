@@ -10,7 +10,8 @@
 			"Srdjan m",
 			"Ex13",
 			"Ivi104",
-			"Bugoslav"
+			"Bugoslav",
+			"Janezdrilc"
 		]
 	},
 	"tooltip-ca-createsource": "Napravi izvorni kod ove stranice",
@@ -280,7 +281,7 @@
 	"visualeditor-preference-core-label": "Vizualno uređivanje",
 	"visualeditor-preference-enable": "Omogući vizualni uređivač. Bit će dostupan u {{PLURAL:$2|imenskom prostoru|sljedećim imenskim prostorima}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Omogućava uređivanje wikiteksta unutar vizualnog uređivača. Sadrži većinu alata iz vizualnog uređivača, rabi sličan izgled i omogućava bolje prebacivanje između ova dva načina uređivanja.",
-	"visualeditor-preference-newwikitexteditor-label": "Novi način uređivanja wikiteksta",
+	"visualeditor-preference-newwikitexteditor-label": "Preglednejši način urejanja wikibesedila",
 	"visualeditor-preference-tabs": "Način uređivanja:",
 	"visualeditor-preference-tabs-multi-tab": "Prikaži kartice oba uređivača",
 	"visualeditor-preference-tabs-prefer-ve": "Uvijek otvori vizualni uređivač (ako je moguće)",

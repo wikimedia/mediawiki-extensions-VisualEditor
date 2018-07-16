@@ -69,6 +69,8 @@
 	"visualeditor-advancedsettings-tool": "Zaawansowane",
 	"visualeditor-autosave-modified-prompt-accept": "Wznów edycję",
 	"visualeditor-autosave-modified-prompt-reject": "Rozpocznij nową edycję",
+	"visualeditor-autosave-modified-prompt-title": "Wznowić {{GENDER:|Twoją}} edycję?",
+	"visualeditor-autosave-recovered-title": "Zmiany odzyskane",
 	"visualeditor-backbutton-tooltip": "Wróć",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Jeśli napotkasz problemy techniczne podczas edycji, zgłoś je.",
