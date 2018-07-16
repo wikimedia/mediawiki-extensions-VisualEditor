@@ -467,9 +467,6 @@
 			"scripts": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js"
 			],
-			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css"
-			],
 			"dependencies": [
 				"ext.visualEditor.targetLoader",
 				"ext.visualEditor.base",
@@ -604,6 +601,9 @@
 				"modules/ve-mw/init/ve.init.mw.Target.js",
 				"modules/ve-mw/init/ve.init.mw.trackSubscriber.js"
 			],
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.Target.css"
+			],
 			"dependencies": [
 				"mediawiki.String",
 				"jquery.client",
@@ -667,9 +667,6 @@
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
-			],
-			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.mediawiki",
