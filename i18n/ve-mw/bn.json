@@ -392,7 +392,7 @@
 	"visualeditor-viewpage-savewarning-discard": "সম্পাদনা বাতিল করুন",
 	"visualeditor-viewpage-savewarning-keep": "সম্পাদনা অব্যাহত রাখুন",
 	"visualeditor-viewpage-savewarning-title": "আপনি কি নিশ্চিত?",
-	"visualeditor-wikitext-progress": "উইকিটেক্সট রূপান্তর হচ্ছে",
+	"visualeditor-wikitext-progress": "উইকিপাঠ্য রূপান্তর হচ্ছে",
 	"visualeditor-wikitext-warning": "আপনি দৃশ্যমান সম্পাদনা ব্যবহার করছেন - এখানে [[{{MediaWiki:visualeditor-wikitext-warning-link}}|উইকিপাঠ্য]] কাজ করে না। আপনার করা পরিবর্তন হারানো ছাড়াই যে কোন সময়ে উৎস সম্পাদনায় যাওয়ার জন্য, পাল্টান বোতামে ক্লিক করুন।",
 	"visualeditor-wikitext-warning-title": "উইকিটেক্সট মার্কআপ সনাক্ত"
 }
