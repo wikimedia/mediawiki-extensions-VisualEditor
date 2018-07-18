@@ -1152,6 +1152,9 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/imetests/leftarrow-chromium-ubuntu-none.js',
 				'lib/ve/tests/ce/imetests/leftarrow-firefox-ubuntu-none.js',
 				'lib/ve/tests/ce/imetests/leftarrow-ie9-win7-none.js',
+				// Rebaser infrastructure
+				'lib/ve/tests/dm/ve.dm.TestRebaseClient.js',
+				'lib/ve/tests/dm/ve.dm.TestRebaseServer.js',
 			],
 			'dependencies' => [
 				'unicodejs',

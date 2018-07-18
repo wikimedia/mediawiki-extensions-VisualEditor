@@ -1261,6 +1261,7 @@
 		"ext.visualEditor.rebase": {
 			"scripts": [
 				"lib/ve/src/dm/ve.dm.RebaseClient.js",
+				"lib/ve/src/dm/ve.dm.RebaseServer.js",
 				"lib/ve/src/dm/ve.dm.SurfaceSynchronizer.js",
 				"lib/ve/src/ui/widgets/ve.ui.AuthorItemWidget.js",
 				"lib/ve/src/ui/tools/ve.ui.AuthorListPopupTool.js"
