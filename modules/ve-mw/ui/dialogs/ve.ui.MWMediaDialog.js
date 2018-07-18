@@ -1128,7 +1128,13 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.search.setup();
 
+			// Set initial values
+			this.search.getQuery().setValue( this.pageTitle );
 			this.resetCaption();
+
+			// Pass `true` to avoid focussing. If we focus the image caption widget during dialog
+			// opening, and it wants to display a context menu, it will be mispositioned.
+			this.switchPanels( this.selectedNode ? 'edit' : 'search', true );
 
 			// Reset upload booklet
 			// The first time this is called, it will try to switch panels,
@@ -1148,10 +1154,9 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
  * Switch between the edit and insert/search panels
  *
  * @param {string} panel Panel name
- * @param {boolean} [stopSearchRequery] Do not re-query the API for the search panel
+ * @param {boolean} [noFocus] Do not put focus into the default field of the panel
  */
-ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery ) {
-	var dialog = this;
+ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, noFocus ) {
 	switch ( panel ) {
 		case 'edit':
 			this.setSize( 'large' );
@@ -1161,21 +1166,22 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, stopSearchRequery
 			this.mediaSettingsBooklet.setPage( 'general' );
 			// Hide/show buttons
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
-			// Focus the caption surface
-			this.captionTarget.focus();
+			if ( !noFocus ) {
+				// Focus the caption surface
+				this.captionTarget.focus();
+			}
 			break;
 		case 'search':
 			this.setSize( 'larger' );
 			this.selectedImageInfo = null;
-			if ( !stopSearchRequery ) {
-				this.search.getQuery().setValue( dialog.pageTitle );
-				this.search.getQuery().focus().select();
-			}
 			// Set the edit panel
 			this.panels.setItem( this.mediaSearchPanel );
 			this.searchTabs.setTabPanel( 'search' );
 			this.searchTabs.toggleMenu( true );
 			this.actions.setMode( this.imageModel ? 'change' : 'select' );
+			if ( !noFocus ) {
+				this.search.getQuery().focus().select();
+			}
 			// Layout pending items
 			this.search.runLayoutQueue();
 			break;
@@ -1297,7 +1303,6 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			// #switchPanels triggers field focus, so do this in the ready process
 			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 			// Revalidate size
 			this.sizeWidget.validateDimensions();
@@ -1347,7 +1352,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 			break;
 		case 'cancelchoose':
 			handler = function () {
-				this.switchPanels( 'search', true );
+				this.switchPanels( 'search' );
 				// Reset upload booklet, in case we got here by uploading a file
 				return this.mediaUploadBooklet.initialize();
 			};
