@@ -13,24 +13,3 @@
 .ve-ce-mwTableNode.jquery-tablesorter th.ve-ce-tableCellNode-header.ve-ce-tableCellNode-editing.headerSort {
 	cursor: text;
 }
-
-/* Prevent jQuery.makeCollapsible from hiding the rows, even if collapsed by default */
-.client-js .ve-ce-mwTableNode.mw-collapsed:not( .mw-made-collapsible ) tr:not( :first-child ) {
-	display: table-row;
-}
-
-.client-js .ve-ce-mwTableNode.mw-collapsed:not( .mw-made-collapsible ) > thead + tbody {
-	display: table-row-group;
-}
-
-/*
- * Grey out the fake toggles to make it more obvious they are not interactive.
- * Don't bother trying to float the toggles, as the text they are floating around
- * is now paragraph wrapped. Making these paragraphs display:inline would fix the
- * rendering but causes them to be destroyed by the CE when empty (T197987).
- */
-.ve-ce-mwTableNode.mw-collapsible :first-child tr:first-child th:last-child:before,
-.ve-ce-mwTableNode.mw-collapsible > caption:first-child:after {
-	color: #999;
-	float: none;
-}
