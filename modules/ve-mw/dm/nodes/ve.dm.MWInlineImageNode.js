@@ -140,7 +140,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	// RDFa type
 	figureInline.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
 	if ( !ve.isEmptyObject( data.attributes.mw ) ) {
-		figureInline.setAttribute( 'data-mw', JSON.stringify( figureInline.attributes.mw ) );
+		figureInline.setAttribute( 'data-mw', JSON.stringify( data.attributes.mw ) );
 	}
 
 	if ( data.attributes.defaultSize ) {
