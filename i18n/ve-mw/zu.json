@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Irus"
+			"Irus",
+			"Mtonihouse"
 		]
 	},
-	"visualeditor-ca-editsource": "Hlela umthombo"
+	"visualeditor-ca-editsource": "Hlela umthombo",
+	"visualeditor-ca-editsource-section": "Hlela umthombo"
 }
