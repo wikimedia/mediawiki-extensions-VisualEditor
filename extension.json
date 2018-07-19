@@ -875,6 +875,7 @@
 				"lib/ve/src/ce/nodes/ve.ce.BlockImageNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.BlockImageCaptionNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.InlineImageNode.js",
+				"lib/ve/src/ce/annotations/ve.ce.NailedAnnotation.js",
 				"lib/ve/src/ce/annotations/ve.ce.LinkAnnotation.js",
 				"lib/ve/src/ce/annotations/ve.ce.TextStyleAnnotation.js",
 				"lib/ve/src/ce/annotations/ve.ce.AbbreviationAnnotation.js",
