@@ -1,8 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"SAgbley"
+			"SAgbley",
+			"Celestinesucess",
+			"Ed g2s"
 		]
 	},
-	"visualeditor-dialog-media-position-right": "twee kor nifa"
+	"apihelp-visualeditoredit-param-summary": "Sesa asɛm tiawa",
+	"tooltip-ca-ve-edit": "Sesa ɛfa yi",
+	"visualeditor-backbutton-tooltip": "Kɔ akyire",
+	"visualeditor-dialog-media-change-image": "Sesa ahoni",
+	"visualeditor-dialog-media-position-right": "Twee kor nifa",
+	"visualeditor-dialogbutton-media-tooltip": "Mfonini",
+	"visualeditor-formatdropdown-format-mw-heading3": "Asɛmti ketewaa 1",
+	"visualeditor-formatdropdown-format-mw-heading4": "Asɛmti ketewaa 2",
+	"visualeditor-formatdropdown-format-mw-heading5": "Asɛmti ketewaa 3",
+	"visualeditor-formatdropdown-format-mw-heading6": "Asɛmti ketewaa 4",
+	"visualeditor-languages-tool": "Nkasa",
+	"visualeditor-media-input-placeholder": "Hwehwɛ mfonini"
 }
