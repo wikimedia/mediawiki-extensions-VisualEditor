@@ -448,7 +448,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var template, promise;
+			var template, promise,
+				bookletLayout = this.bookletLayout;
 
 			// Properties
 			this.loaded = false;
@@ -462,7 +463,10 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			} );
 
 			// Detach the form while building for performance
-			this.bookletLayout.$element.detach();
+			bookletLayout.$element.detach();
+			// HACK: Prevent any setPage() calls (from #onReplacePart) from focussing stuff, it messes
+			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
+			bookletLayout.autoFocus = false;
 
 			// Initialization
 			if ( !this.selectedNode ) {
@@ -495,9 +499,11 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.loaded = true;
 			this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
-			this.$body.append( this.bookletLayout.$element );
+			this.$body.append( bookletLayout.$element );
 
-			return promise;
+			return promise.then( function () {
+				bookletLayout.autoFocus = true;
+			} );
 		}, this );
 };
 
