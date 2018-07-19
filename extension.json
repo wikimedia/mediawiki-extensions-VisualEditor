@@ -1278,6 +1278,8 @@
 				"ext.visualEditor.commentAnnotation"
 			],
 			"messages": [
+				"visualeditor-missing-document-error",
+				"visualeditor-missing-document-title",
 				"visualeditor-rebase-client-author-name",
 				"visualeditor-rebase-client-connecting"
 			],
