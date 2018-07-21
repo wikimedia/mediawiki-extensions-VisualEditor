@@ -1116,6 +1116,7 @@
 				"visualeditor-debugbar-showtransactions",
 				"visualeditor-debugbar-startfilibuster",
 				"visualeditor-debugbar-stopfilibuster",
+				"visualeditor-debugbar-testsquasher",
 				"visualeditor-debugbar-updatemodel",
 				"visualeditor-dialog-action-apply",
 				"visualeditor-dialog-action-cancel",
