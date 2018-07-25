@@ -879,7 +879,7 @@ class VisualEditorHooks {
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'pageVariantFallbacks' => $fallbacks,
-			'usePageImages' => defined( 'PAGE_IMAGES_INSTALLED' ),
+			'usePageImages' => ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => defined( 'WBC_VERSION' ),
 		];
 
