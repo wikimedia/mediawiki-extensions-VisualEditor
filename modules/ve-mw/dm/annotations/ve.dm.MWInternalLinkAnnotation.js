@@ -51,13 +51,13 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 };
 
 /**
- * Build a ve.dm.MWInternalLinkAnnotation from a given mw.Title.
+ * Build element from a given mw.Title and raw title
  *
  * @param {mw.Title} title The title to link to.
  * @param {string} [rawTitle] String from which the title was created
- * @return {ve.dm.MWInternalLinkAnnotation} The annotation.
+ * @return {Object} The element.
  */
-ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle ) {
+ve.dm.MWInternalLinkAnnotation.static.dataElementFromTitle = function ( title, rawTitle ) {
 	var element,
 		target = title.toText(),
 		namespaceIds = mw.config.get( 'wgNamespaceIds' );
@@ -73,16 +73,31 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle 
 	}
 
 	element = {
-		type: 'link/mwInternal',
+		type: this.name,
 		attributes: {
 			title: target,
-			normalizedTitle: ve.dm.MWInternalLinkAnnotation.static.normalizeTitle( title ),
-			lookupTitle: ve.dm.MWInternalLinkAnnotation.static.getLookupTitle( title )
+			normalizedTitle: this.normalizeTitle( title ),
+			lookupTitle: this.getLookupTitle( title )
 		}
 	};
+
 	if ( rawTitle ) {
 		element.attributes.origTitle = rawTitle;
 	}
+
+	return element;
+};
+
+/**
+ * Build a ve.dm.MWInternalLinkAnnotation from a given mw.Title.
+ *
+ * @param {mw.Title} title The title to link to.
+ * @param {string} [rawTitle] String from which the title was created
+ * @return {ve.dm.MWInternalLinkAnnotation} The annotation.
+ */
+ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle ) {
+	var element = this.dataElementFromTitle( title, rawTitle );
+
 	return new ve.dm.MWInternalLinkAnnotation( element );
 };
 

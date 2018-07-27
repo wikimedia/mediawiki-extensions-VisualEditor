@@ -48,8 +48,8 @@ ve.ui.MWLinkAnnotationInspector.static.actions = ve.ui.MWLinkAnnotationInspector
 ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	// Properties
 	this.allowProtocolInInternal = false;
-	this.internalAnnotationInput = new ve.ui.MWInternalLinkAnnotationWidget();
-	this.externalAnnotationInput = new ve.ui.MWExternalLinkAnnotationWidget();
+	this.internalAnnotationInput = this.createInternalAnnotationInput();
+	this.externalAnnotationInput = this.createExternalAnnotationInput();
 
 	this.linkTypeIndex = new OO.ui.IndexLayout( {
 		expanded: false
@@ -95,6 +95,20 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.linkTypeIndex.getTabPanel( 'internal' ).$element.append( this.internalAnnotationInput.$element );
 	this.linkTypeIndex.getTabPanel( 'external' ).$element.append( this.externalAnnotationInput.$element );
 	this.form.$element.append( this.linkTypeIndex.$element );
+};
+
+/**
+ * @return {ve.ui.MWInternalLinkAnnotationWidget}
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.createInternalAnnotationInput = function () {
+	return new ve.ui.MWInternalLinkAnnotationWidget();
+};
+
+/**
+ * @return {ve.ui.MWExternalLinkAnnotationWidget}
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.createExternalAnnotationInput = function () {
+	return new ve.ui.MWExternalLinkAnnotationWidget();
 };
 
 /**
@@ -323,7 +337,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 	// Figure out if this is an internal or external link
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( target ) ) {
 		// External link
-		return new ve.dm.MWExternalLinkAnnotation( {
+		return this.newExternalLinkAnnotation( {
 			type: 'link/mwExternal',
 			attributes: {
 				href: target
@@ -331,12 +345,28 @@ ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function (
 		} );
 	} else if ( title ) {
 		// Internal link
-		return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
+		return this.newInternalLinkAnnotationFromTitle( title );
 	} else {
 		// Doesn't look like an external link and mw.Title considered it an illegal value,
 		// for an internal link.
 		return null;
 	}
+};
+
+/**
+ * @param {mw.Title} title The title to link to.
+ * @return {ve.dm.MWInternalLinkAnnotation} The annotation.
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.newInternalLinkAnnotationFromTitle = function ( title ) {
+	return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );
+};
+
+/**
+ * @param {Object} element
+ * @return {ve.dm.MWExternalLinkAnnotation} The annotation.
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.newExternalLinkAnnotation = function ( element ) {
+	return new ve.dm.MWExternalLinkAnnotation( element );
 };
 
 /**
