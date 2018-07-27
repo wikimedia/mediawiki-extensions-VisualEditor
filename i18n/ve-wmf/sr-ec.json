@@ -14,7 +14,7 @@
 	"tag-visualeditor-description": "Измена начињена [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелним уређивачем]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелни уређивач: проверити]]",
 	"tag-visualeditor-needcheck-description": "Измена начињена [[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелним уређивачем]] где је систем детектовао викитекст с могућим нежељеним изменама.",
-	"tag-visualeditor-wikitext": "уређивање изворног кôда (2017)",
+	"tag-visualeditor-wikitext": "уређивач изворника (2017)",
 	"tag-visualeditor-wikitext-description": "Измена направљена уређивачем викитекста  (2017)",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуелни уређивач: пребачен]]",
 	"tag-visualeditor-switched-description": "Уређивање започето Визуелним уређивачем, па настављено уређивачем викитекста.",
@@ -25,7 +25,7 @@
 	"visualeditor-welcomedialog-action": "Почни уређивање",
 	"visualeditor-welcomedialog-content": "Свако може да уређује и свако унапређење помаже.",
 	"visualeditor-welcomedialog-content-thanks": "Хвала Вам што помажете да свет открије више!",
-	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивање изворног кôда",
+	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивач изворника",
 	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на Визуелни уређивач",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на пројекат $2"
 }
