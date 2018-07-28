@@ -39,7 +39,6 @@
 	"apierror-visualeditor-docserver-http": "{{doc-apierror}}\n\nParameters:\n* $1 - HTTP status code (numeric)",
 	"apierror-visualeditor-docserver-unconfigured": "{{doc-apierror}}",
 	"apierror-visualeditor-docserver": "{{doc-apierror}}",
-	"apierror-visualeditor-invaliddeflate": "{{doc-apierror}}",
 	"apierror-visualeditor-latestnotfound": "{{doc-apierror}}",
 	"apihelp-visualeditor-description": "{{doc-apihelp-description|visualeditor}}",
 	"apihelp-visualeditor-param-basetimestamp": "{{doc-apihelp-param|visualeditor|basetimestamp}}",

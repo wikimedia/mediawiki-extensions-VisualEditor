@@ -127,11 +127,6 @@ Base64.js
  – DWTFYWT licence
  – David Chambers, based off gist by yahiko
 
-Easy-Deflate
- – https://github.com/Jacob-Christian-Munch-Andersen/Easy-Deflate
- – BSD license
- – Jacob Christian Munch-Andersen for the package; Gildas Lormeau for the Deflate utility
-
 jQuery
  – https://jquery.com/
  – MIT license

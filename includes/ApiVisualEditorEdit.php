@@ -136,31 +136,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	}
 
 	/**
-	 * Attempt to compress a given text string via deflate
-	 *
-	 * @param string $content The string to compress
-	 * @return string The compressed string, or the original if deflating failed
-	 */
-	public static function tryDeflate( $content ) {
-		if ( substr( $content, 0, 11 ) === 'rawdeflate,' ) {
-			$deflated = base64_decode( substr( $content, 11 ) );
-			Wikimedia\suppressWarnings();
-			$inflated = gzinflate( $deflated );
-			Wikimedia\restoreWarnings();
-			if ( $deflated === $inflated || $inflated === false ) {
-				// Static equivalent of $this->dieWithError
-				throw ApiUsageException::newWithMessage(
-					null,
-					'apierror-visualeditor-invaliddeflate',
-					'invaliddeflate'
-				);
-			}
-			return $inflated;
-		}
-		return $content;
-	}
-
-	/**
 	 * Create and load the parsed wikitext of an edit, or from the serialisation cache if available.
 	 *
 	 * @param Title $title The title of the page
@@ -190,8 +165,12 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 */
 	protected function getWikitextNoCache( Title $title, $params, $parserParams ) {
 		$this->requireOnlyOneParameter( $params, 'html' );
+		$html = EasyDeflate::inflate( $params['html'] );
+		if ( !$html->isGood() ) {
+			$this->dieWithError( 'easydeflate-invaliddeflate', 'invaliddeflate' );
+		}
 		$wikitext = $this->postHTML(
-			$title, self::tryDeflate( $params['html'] ), $parserParams, $params['etag']
+			$title, $html->getValue(), $parserParams, $params['etag']
 		);
 		if ( $wikitext === false ) {
 			$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );

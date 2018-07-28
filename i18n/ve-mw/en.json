@@ -25,7 +25,6 @@
 	"apierror-visualeditor-docserver-http": "HTTP $1",
 	"apierror-visualeditor-docserver-unconfigured": "The VirtualRESTService for the document server is not defined; see https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Error contacting the Parsoid/RESTbase server",
-	"apierror-visualeditor-invaliddeflate": "Content provided is not properly deflated",
 	"apierror-visualeditor-latestnotfound": "Could not find latest revision for title",
 	"apihelp-visualeditor-description": "Returns HTML5 for a page from the Parsoid service.",
 	"apihelp-visualeditor-param-basetimestamp": "When saving, set this to the timestamp of the revision that was edited. Used to detect edit conflicts.",
