@@ -444,7 +444,8 @@
 		},
 		"ext.visualEditor.collabTarget": {
 			"scripts": [
-				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js"
+				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js",
+				"modules/ve-mw-collab/ve.ui.MWExportWikitextDialog.js"
 			],
 			"dependencies": [
 				"ext.visualEditor.targetLoader",
