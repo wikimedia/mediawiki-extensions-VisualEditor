@@ -19,7 +19,6 @@
 	"apierror-visualeditor-badcachekey": "Ena kilit vinayışi dı rêzen nêbiya",
 	"apierror-visualeditor-difffailed": "Ferq xırabo",
 	"apierror-visualeditor-docserver": "Rovıter dê Parsoid/RESTbase irtibat nebı",
-	"apierror-visualeditor-invaliddeflate": "Gıroten zerrek raşt usula nêşiyo hewna",
 	"apierror-visualeditor-latestnotfound": "Revizyonê sernameyo peyên nêvêniyo.",
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
 	"apihelp-visualeditor-param-basetimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı peamyayış tesbit biyo.",

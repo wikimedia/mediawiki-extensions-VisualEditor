@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"ArmenBakkalian",
-			"Azniv Stepanian"
+			"Azniv Stepanian",
+			"Rajemian"
 		]
 	},
 	"tooltip-ca-ve-edit": "Խմբագրել այս էջը",
+	"visualeditor-ca-createlocaldescriptionsource": "Աւելցնել տեղական նկարագրութեան աղբիւր",
+	"visualeditor-ca-createsource": "Ստեղծել աղբիւրը",
 	"visualeditor-ca-editsource": "խմբագրել աղբիւրը",
 	"visualeditor-ca-editsource-section": "խմբագրել աղբիւրը"
 }

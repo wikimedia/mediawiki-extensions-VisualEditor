@@ -12,7 +12,6 @@
 	"apierror-visualeditor-difffailed": "Разликата не успеа",
 	"apierror-visualeditor-docserver-unconfigured": "Не е зададен VirtualRESTService за документен опслужувач; погл. https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Грешка при поврзувањето со опслжувачот Parsoid/RESTbas",
-	"apierror-visualeditor-invaliddeflate": "Содржината не е соодветно прочистена",
 	"apierror-visualeditor-latestnotfound": "Не можев да ја најдам последната преработка за насловот",
 	"apihelp-visualeditor-description": "Дава HTML5 за страница од службата Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Кога зачувувате, на ова задајте му го датумот и времето на уредената преработка. Се користи за утврдување на спротиставености во уредувањето.",

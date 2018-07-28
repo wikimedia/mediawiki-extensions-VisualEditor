@@ -13,7 +13,6 @@
 	"apierror-visualeditor-difffailed": "Falló diff",
 	"apierror-visualeditor-docserver-unconfigured": "El VirtualRESTService pal sirvidor de documentos nun ta definíu; visita https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Error al comunicase col sirvidor Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "El conteníu dau nun ta descomprimíu correutamente",
 	"apierror-visualeditor-latestnotfound": "Nun s'alcontró la cabera revisión del títulu",
 	"apihelp-visualeditor-description": "Devuelve HTML5 pa una páxina dende'l serviciu Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Al guardar,establez esto como la marca horaria de la revisión que s'editó. Utilizao pa detectar conflictos d'edición.",

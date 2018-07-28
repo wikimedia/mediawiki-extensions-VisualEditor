@@ -18,7 +18,7 @@
 	"visualeditor-beta-warning": "Vizual redaktor beta-versiyadadır. Proqram təminatı ilə bağlı problemlər üzə çıxa bilər və siz səhifənin bəzi hissələrini redaktə edə bilməzsiniz. İstənilən vaxt etdiyiniz dəyişiklikləri itirmədən \"Əsas redaktə\" rejiminə keçmək üçün \"{{int:visualeditor-toolbar-savedialog}}\" bölməsinin yanındakı siyahını açın və \"{{int:visualeditor-mweditmodesource-tool}}\" düyməsini vurun.",
 	"visualeditor-browserwarning": "Siz Vizual redaktora rəsmi istinadı olmayan brauzerdən istifadə edirsiniz.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lokal mənbə izahı əlavə et",
-	"visualeditor-ca-createsource": "Qaynaq kodu kimi yarat",
+	"visualeditor-ca-createsource": "Əsas redaktə ilə yarat",
 	"visualeditor-ca-editsource": "Əsas redaktə",
 	"visualeditor-ca-editsource-section": "əsas redaktə",
 	"visualeditor-ca-ve-create": "Vizual redaktor",

@@ -28,7 +28,6 @@
 	"apierror-visualeditor-badcachekey": "Не знайдено кешованої серіалізованої інформації з таким ключем",
 	"apierror-visualeditor-difffailed": "Не вдалося отримати різницю версій",
 	"apierror-visualeditor-docserver": "Не вдалося зв'язатися із сервером Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "Наданий вміст не спустошений належним чином",
 	"apierror-visualeditor-latestnotfound": "Не вдалося знайти останню версію для цієї назви",
 	"apihelp-visualeditor-description": "Повертає HTML5 для сторінки від сервісу Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "При збереженні, встановіть тут мітку часу, коли сторінка була редагована. Використовується для виявлення конфліктів редагування.",

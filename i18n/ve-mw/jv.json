@@ -11,7 +11,6 @@
 	},
 	"apierror-visualeditor-api-langlinks-error": "Masalah nalika nakoni API MediaWiki",
 	"apierror-visualeditor-docserver": "Masalah nalika nggayut paladèn Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "Isi sing cumepak ora pener olèhé disuda",
 	"apierror-visualeditor-latestnotfound": "Ora nemu révisi pungkasané sesirah",
 	"apihelp-visualeditor-description": "Mbalèkaké HTML5 marang kaca sing asal saka paladèn Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Nalika nyimpen, setèl ing cap-wektu kapan nalikané kacané dimot. Kanggo ngertèni yèn ana tabrakan besutan.",

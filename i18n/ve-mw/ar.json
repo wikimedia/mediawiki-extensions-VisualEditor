@@ -33,7 +33,6 @@
 	"apierror-visualeditor-difffailed": "فشل الفرق",
 	"apierror-visualeditor-docserver-unconfigured": "لم يتم تعريف VirtualRESTService لملقم المستند، انظر https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "خطأ أثناء الاتصال بخادم Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "المحتوى الموفر لم يتم تفريغه بشكل صحيح",
 	"apierror-visualeditor-latestnotfound": "لم يمكن العثور على أحدث نسخة للعنوان",
 	"apihelp-visualeditor-description": "يرجع HTML5 لصفحة من الخدمة بارسويد (Parsoid).",
 	"apihelp-visualeditor-param-basetimestamp": "عندما تحفظ، وتعيين هذا إلى الطابع الزمني للمراجعة التي تم تحريرها. تستخدم لكشف الصراعات تحرير.",

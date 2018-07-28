@@ -59,7 +59,6 @@
 	"apierror-visualeditor-difffailed": "Erreur dans Diff",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService n'est pas définit pour le serveur de documents; voir https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Erreur d'accès au serveur Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "Le contenu fourni n'a pas été développé proprement",
 	"apierror-visualeditor-latestnotfound": "Ne pouvait pas trouver la dernière révision pour le titre",
 	"apihelp-visualeditor-description": "Renvoie du HTML5 pour une page depuis le service Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Lors de l’enregistrement, règlez ceci avec l’horodatage de la version éditée de la page. Utilisé pour détecter les conflits d’édition.",

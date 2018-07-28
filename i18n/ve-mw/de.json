@@ -23,7 +23,6 @@
 	"apierror-visualeditor-difffailed": "Unterschied fehlgeschlagen",
 	"apierror-visualeditor-docserver-unconfigured": "Der VirtualRESTService für den Dokumentenserver ist nicht definiert; siehe https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Fehler beim Kontaktieren des Parsoid-/RESTbase-Servers",
-	"apierror-visualeditor-invaliddeflate": "Der angegebene Inhalt wurde nicht ordnungsgemäß geleert",
 	"apierror-visualeditor-latestnotfound": "Die aktuellste Version für den Titel konnte nicht gefunden werden",
 	"apihelp-visualeditor-description": "Gibt HTML5 für eine Seite von dem Parsoid-Dienst zurück.",
 	"apihelp-visualeditor-param-basetimestamp": "Lege dies beim Speichern auf den Zeitstempel der Version fest, die bearbeitet wurde. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",

@@ -34,7 +34,6 @@
 	"apierror-visualeditor-difffailed": "Diff falhou",
 	"apierror-visualeditor-docserver-unconfigured": "O VirtualRESTService para o servidor de documentos não está definido; consulte https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Erro ao contactar o servidor Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "O conteúdo fornecido não está devidamente deflacionado",
 	"apierror-visualeditor-latestnotfound": "Não foi possível encontrar a última revisão para o título",
 	"apihelp-visualeditor-description": "Retorna código HTML5 a uma página através do serviço Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Ao salvar, define isto à data e hora da revisão que foi editada. Usado para detectar conflitos de edição.",

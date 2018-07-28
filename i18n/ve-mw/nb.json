@@ -23,7 +23,6 @@
 	"apierror-visualeditor-difffailed": "Diff feilet",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService for dokumentservern er ikke definert; se https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Feil under kontakt med Parsoid/RESTbase-tjeneren",
-	"apierror-visualeditor-invaliddeflate": "Angitt innhold er ikke riktig dekomprimert",
 	"apierror-visualeditor-latestnotfound": "Kunne ikke finne siste revisjon for tittelen",
 	"apihelp-visualeditor-description": "Returnerer HTML5 for en side fra Parsoid-tjenesten.",
 	"apihelp-visualeditor-param-basetimestamp": "Ved lagring, sett denne til tidsstempelet for revisjonen som ble redigert. Brukes for å oppdage redigeringskonflikter.",

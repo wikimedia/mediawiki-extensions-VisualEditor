@@ -24,7 +24,6 @@
 	"apierror-visualeditor-difffailed": "ההשוואה נכשלה",
 	"apierror-visualeditor-docserver-unconfigured": "ה־VirtualRESTService של שרת המסמך אינו מוגדר; למידע נוסף: https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "שגיאה ביצירת קשר עם שרת Parsoid/RESTbase",
-	"apierror-visualeditor-invaliddeflate": "התוכן שסופק לא כווץ בהלכה",
 	"apierror-visualeditor-latestnotfound": "לא נמצאה הגרסה האחרונה של הכותרת",
 	"apihelp-visualeditor-description": "החזרת HTML5 של דף משירות parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "בעת שמירה, להגדיר את זה בתור חותם־הזמן של הגרסה שנשמרת. זה משמש לזיהוי התנגשויות.",
