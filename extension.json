@@ -1257,7 +1257,8 @@
 				"socket.io",
 				"color-picker",
 				"oojs-ui.styles.icons-user",
-				"ext.visualEditor.commentAnnotation"
+				"ext.visualEditor.commentAnnotation",
+				"ext.visualEditor.checkList"
 			],
 			"messages": [
 				"visualeditor-missing-document-error",
@@ -1988,6 +1989,28 @@
 		"diffMatchPatch": {
 			"scripts": [
 				"lib/ve/lib/diff-match-patch/diff_match_patch_uncompressed.js"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.checkList": {
+			"scripts": [
+				"lib/ve/src/dm/nodes/ve.dm.CheckListNode.js",
+				"lib/ve/src/dm/nodes/ve.dm.CheckListItemNode.js",
+				"lib/ve/src/ce/nodes/ve.ce.CheckListNode.js",
+				"lib/ve/src/ce/nodes/ve.ce.CheckListItemNode.js",
+				"lib/ve/src/ui/tools/ve.ui.CheckListTool.js"
+			],
+			"styles": [
+				"lib/ve/src/ce/styles/nodes/ve.ce.CheckListNode.css"
+			],
+			"dependencies": [
+				"ext.visualEditor.core"
+			],
+			"messages":[
+				"visualeditor-listbutton-check-tooltip"
 			],
 			"targets": [
 				"desktop",
