@@ -67,14 +67,14 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, newDimensions, attributes,
-		figure, imgWrapper, img, caption,
+		figure, imgWrapper, img, captionNode, caption,
 		classAttr, typeofAttrs, errorIndex, width, height, types,
 		mwDataJSON, mwData;
 
 	figure = domElements[ 0 ];
 	imgWrapper = figure.children[ 0 ]; // <a> or <span>
 	img = imgWrapper.children[ 0 ]; // <img> or <video>
-	caption = figure.children[ 1 ]; // <figcaption> or undefined
+	captionNode = figure.children[ 1 ]; // <figcaption> or undefined
 	classAttr = figure.getAttribute( 'class' );
 	typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' );
 	mwDataJSON = figure.getAttribute( 'data-mw' );
@@ -130,22 +130,24 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		}
 	}
 
+	if ( captionNode ) {
+		caption = converter.getDataFromDomClean( captionNode, { type: 'mwImageCaption' } );
+	} else {
+		caption = [
+			{ type: 'mwImageCaption' },
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			{ type: '/paragraph' },
+			{ type: '/mwImageCaption' }
+		];
+	}
+
 	dataElement = { type: this.name, attributes: attributes };
 
 	this.storeGeneratedContents( dataElement, dataElement.attributes.src, converter.getStore() );
 
-	if ( caption ) {
-		return [ dataElement ]
-			.concat( converter.getDataFromDomClean( caption, { type: 'mwImageCaption' } ) )
-			.concat( [ { type: '/' + this.name } ] );
-	} else {
-		return [
-			dataElement,
-			{ type: 'mwImageCaption' },
-			{ type: '/mwImageCaption' },
-			{ type: '/' + this.name }
-		];
-	}
+	return [ dataElement ]
+		.concat( caption )
+		.concat( { type: '/' + this.name } );
 };
 
 // TODO: At this moment node is not resizable but when it will be then adding defaultSize class

@@ -438,7 +438,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
  * @throws {Error} Unknown image node type
  */
 ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
-	var captionDoc, offset, contentToInsert, selectedNode,
+	var offset, contentToInsert, selectedNode,
 		nodeType = this.getImageNodeType(),
 		surfaceModel = fragment.getSurface();
 
@@ -479,18 +479,14 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 				fragment = fragment.clone( new ve.dm.LinearSelection( fragment.getDocument(), new ve.Range( offset ) ) );
 			}
 			fragment.insertContent( contentToInsert );
-			// Check if there is caption document and insert it
-			captionDoc = this.getCaptionDocument();
-			if ( captionDoc.data.hasContent() ) {
-				// Add contents of new caption
-				surfaceModel.change(
-					ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
-						surfaceModel.getDocument(),
-						fragment.getSelection().getRange().start + 2,
-						this.getCaptionDocument()
-					)
-				);
-			}
+			// Add contents of new caption
+			surfaceModel.change(
+				ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
+					surfaceModel.getDocument(),
+					fragment.getSelection().getRange().start + 2,
+					this.getCaptionDocument()
+				)
+			);
 			return fragment;
 
 		default:
