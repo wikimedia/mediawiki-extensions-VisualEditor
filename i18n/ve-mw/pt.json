@@ -144,7 +144,7 @@
 	"visualeditor-dialog-media-size-section": "Tamanho da imagem",
 	"visualeditor-dialog-media-size-section-help": "Pode definir o tamanho do item multimédia que aparece na página. Este deve ser quase sempre o tamanho normal, pois um tamanho personalizado pode interferir com o modelo da página e torná-la inconsistente para os leitores.",
 	"visualeditor-dialog-media-thumbdimensions": "Dimensões da miniatura",
-	"visualeditor-dialog-media-title": "Configurações de média",
+	"visualeditor-dialog-media-title": "Configurações multimédia",
 	"visualeditor-dialog-media-type-border": "Borda",
 	"visualeditor-dialog-media-type-frame": "Moldura",
 	"visualeditor-dialog-media-type-frameless": "Sem moldura",
