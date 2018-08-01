@@ -82,6 +82,7 @@ class SpecialCollabPad extends SpecialPage {
 					new OOUI\ButtonWidget( [
 						'classes' => [ 've-init-mw-collabTarget-nameButton' ],
 						'label' => $this->msg( 'visualeditor-rebase-client-document-create-edit' )->text(),
+						'flags' => [ 'primary', 'progressive' ],
 						// Only enable once JS has loaded
 						'disabled' => true,
 						'infusable' => true
