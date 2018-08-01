@@ -2466,6 +2466,12 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 	var dataPromise, windowManager, switchWindow,
 		target = this;
 
+	if ( !this.edited ) {
+		this.section = null;
+		this.reloadSurface( 'visual' );
+		return;
+	}
+
 	// Show a discard-only confirm dialog, and then reload the whole page, if:
 	if (
 		// * section editing in WT, as WT -> VE is not yet supported, or
