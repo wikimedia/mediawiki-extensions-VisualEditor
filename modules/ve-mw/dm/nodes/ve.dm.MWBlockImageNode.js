@@ -73,7 +73,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 
 	figure = domElements[ 0 ];
 	imgWrapper = figure.children[ 0 ]; // <a> or <span>
-	img = imgWrapper.children[ 0 ]; // <img> or <video>
+	img = imgWrapper.children[ 0 ]; // <img>, <video> or <audio>
 	captionNode = figure.children[ 1 ]; // <figcaption> or undefined
 	classAttr = figure.getAttribute( 'class' );
 	typeofAttrs = figure.getAttribute( 'typeof' ).split( ' ' );
@@ -122,7 +122,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 			// rather than default MediaWiki configuration dimensions.
 			// We must force local wiki default in edit mode for default
 			// size images.
-			newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( attributes );
+			newDimensions = this.scaleToThumbnailSize( attributes );
 			if ( newDimensions ) {
 				attributes.width = newDimensions.width;
 				attributes.height = newDimensions.height;
@@ -153,12 +153,12 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 // TODO: At this moment node is not resizable but when it will be then adding defaultSize class
 // should be more conditional.
 ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) {
-	var width, height,
+	var width, height, srcAttr,
 		dataElement = data[ 0 ],
 		mediaClass = dataElement.attributes.mediaClass,
 		figure = doc.createElement( 'figure' ),
 		imgWrapper = doc.createElement( dataElement.attributes.href ? 'a' : 'span' ),
-		img = doc.createElement( mediaClass === 'Image' ? 'img' : 'video' ),
+		img = doc.createElement( this.typesToTags[ mediaClass ] ),
 		wrapper = doc.createElement( 'div' ),
 		classAttr = this.getClassAttrFromAttributes( dataElement.attributes ),
 		captionData = data.slice( 1, -1 );
@@ -190,7 +190,10 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		}
 	}
 
-	img.setAttribute( mediaClass === 'Image' ? 'src' : 'poster', dataElement.attributes.src );
+	srcAttr = this.typesToSrcAttrs[ mediaClass ];
+	if ( srcAttr ) {
+		img.setAttribute( srcAttr, dataElement.attributes.src );
+	}
 	img.setAttribute( 'width', width );
 	img.setAttribute( 'height', height );
 	img.setAttribute( 'resource', dataElement.attributes.resource );

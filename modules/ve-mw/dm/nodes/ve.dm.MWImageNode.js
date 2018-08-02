@@ -85,6 +85,26 @@ ve.dm.MWImageNode.static.getRdfa = function ( mediaClass, frameType ) {
 };
 
 /**
+ * Map media types to tag names
+ * @type {Object}
+ */
+ve.dm.MWImageNode.static.typesToTags = {
+	Image: 'img',
+	Audio: 'audio',
+	Video: 'video'
+};
+
+/**
+ * Map media types to source attributes
+ * @type {Object}
+ */
+ve.dm.MWImageNode.static.typesToSrcAttrs = {
+	Image: 'src',
+	Audio: null,
+	Video: 'poster'
+};
+
+/**
  * @inheritdoc ve.dm.GeneratedContentNode
  */
 ve.dm.MWImageNode.static.getHashObjectForRendering = function ( dataElement ) {

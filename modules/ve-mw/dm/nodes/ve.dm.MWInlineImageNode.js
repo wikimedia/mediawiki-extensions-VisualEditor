@@ -53,8 +53,8 @@ ve.dm.MWInlineImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, attributes, types,
 		figureInline = domElements[ 0 ],
-		imgWrapper = figureInline.children[ 0 ], // could be <span> or <a>
-		img = imgWrapper.children[ 0 ],
+		imgWrapper = figureInline.children[ 0 ], // <a> or <span>
+		img = imgWrapper.children[ 0 ], // <img>, <video> or <audio>
 		typeofAttrs = ( figureInline.getAttribute( 'typeof' ) || '' ).split( ' ' ),
 		mwDataJSON = figureInline.getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
@@ -73,7 +73,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	attributes = {
 		mediaClass: types.mediaClass,
 		type: types.frameType,
-		src: img.getAttribute( 'src' ),
+		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 		href: imgWrapper.getAttribute( 'href' ),
 		resource: img.getAttribute( 'resource' ),
 		originalClasses: classes,
@@ -127,15 +127,18 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 };
 
 ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
-	var firstChild,
+	var firstChild, srcAttr,
 		mediaClass = data.attributes.mediaClass,
 		figureInline = doc.createElement( 'figure-inline' ),
-		img = doc.createElement( mediaClass === 'Image' ? 'img' : 'video' ),
+		img = doc.createElement( this.typesToTags[ mediaClass ] ),
 		classes = [],
 		originalClasses = data.attributes.originalClasses;
 
 	ve.setDomAttributes( img, data.attributes, [ 'width', 'height', 'resource' ] );
-	img.setAttribute( mediaClass === 'Image' ? 'src' : 'poster', data.attributes.src );
+	srcAttr = this.typesToSrcAttrs[ mediaClass ];
+	if ( srcAttr ) {
+		img.setAttribute( srcAttr, data.attributes.src );
+	}
 
 	// RDFa type
 	figureInline.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
