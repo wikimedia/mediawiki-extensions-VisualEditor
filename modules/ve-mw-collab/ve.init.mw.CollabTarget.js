@@ -153,7 +153,7 @@ ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
-	var synchronizer, surfaceView, defaultName,
+	var synchronizer, surfaceView,
 		importDeferred = $.Deferred(),
 		target = this;
 
@@ -165,14 +165,14 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 		synchronizer = new ve.dm.SurfaceSynchronizer(
 			surface.getModel(),
 			this.title.toString(),
-			{ server: this.rebaserUrl }
-		);
-		synchronizer.on( 'authorNameChange', function ( authorId ) {
-			var newName = synchronizer.getAuthorName( authorId );
-			if ( authorId === synchronizer.getAuthorId() ) {
-				mw.storage.session.set( 've-collab-username', newName );
+			{
+				server: this.rebaserUrl,
+				// TODO: server could communicate with MW (via oauth?) to know the
+				// current-user's name. Disable changing name if logged in?
+				// Communicate an I-am-a-valid-user flag to other clients?
+				defaultName: mw.user.isAnon() ? mw.user.getName() : undefined
 			}
-		} );
+		);
 
 		synchronizer.once( 'initDoc', function () {
 			var initPromise;
@@ -207,17 +207,6 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 				importDeferred.resolve();
 			} );
 		} );
-
-		// TODO: server could communicate with MW (via oauth?) to know the
-		// current-user's name. Disable changing name if logged in?
-		// Communicate an I-am-a-valid-user flag to other clients?
-		defaultName = mw.storage.session.get( 've-collab-username' );
-		if ( !defaultName && !mw.user.isAnon() ) {
-			defaultName = mw.user.getName();
-		}
-		if ( defaultName ) {
-			synchronizer.changeName( defaultName );
-		}
 
 		surfaceView.setSynchronizer( synchronizer, importDeferred.promise() );
 	}
