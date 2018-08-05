@@ -980,15 +980,13 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 	captionInsertionOffset = innerRange.from + data.length - 2;
 	// Update image captions. In reverse order to avoid having to adjust offsets for each insertion.
 	for ( i = items.length - 1; i >= 0; i-- ) {
-		if ( items[ i ].captionDocument.data.hasContent() ) {
-			surfaceModel.change(
-				ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
-					surfaceModel.getDocument(),
-					captionInsertionOffset,
-					items[ i ].captionDocument
-				)
-			);
-		}
+		surfaceModel.change(
+			ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
+				surfaceModel.getDocument(),
+				captionInsertionOffset,
+				items[ i ].captionDocument
+			)
+		);
 		// Skip past </mwGalleryImageCaption></mwGalleryImage><mwGalleryImage><mwGalleryImageCaption>
 		captionInsertionOffset -= 4;
 	}

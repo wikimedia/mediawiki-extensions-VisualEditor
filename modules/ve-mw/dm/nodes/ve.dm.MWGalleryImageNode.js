@@ -41,30 +41,32 @@ ve.dm.MWGalleryImageNode.static.matchFunction = function ( element ) {
 ve.dm.MWGalleryImageNode.static.parentNodeTypes = [ 'mwGallery' ];
 
 ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converter ) {
-	var li, img, captionDiv, caption, filename, dataElement;
+	var li, img, captionNode, caption, filename, dataElement;
 
 	// TODO: Improve handling of missing files. See 'isError' in MWBlockImageNode#toDataElement
 	li = domElements[ 0 ];
 	img = li.querySelector( 'img,audio,video' );
 
 	// Get caption (may be missing for mode="packed-hover" galleries)
-	captionDiv = li.querySelector( '.gallerytext' );
-	if ( captionDiv ) {
-		captionDiv = captionDiv.cloneNode( true );
+	captionNode = li.querySelector( '.gallerytext' );
+	if ( captionNode ) {
+		captionNode = captionNode.cloneNode( true );
 		// If showFilename is 'yes', the filename is also inside the caption, so throw this out
-		filename = captionDiv.querySelector( '.galleryfilename' );
+		filename = captionNode.querySelector( '.galleryfilename' );
 		if ( filename ) {
 			filename.remove();
 		}
 	}
 
-	// If the caption is empty, treat it like no caption at all. The two cases for gallery image
-	// captions are equivalent, but it is convenient for us to have an actual empty node here
-	// (rather than a node containing <paragraph></paragraph>), same as for MWBlockImageNode.
-	if ( captionDiv && captionDiv.childNodes.length ) {
-		caption = converter.getDataFromDomClean( captionDiv, { type: 'mwGalleryImageCaption' } );
+	if ( captionNode ) {
+		caption = converter.getDataFromDomClean( captionNode, { type: 'mwGalleryImageCaption' } );
 	} else {
-		caption = [ { type: 'mwGalleryImageCaption' }, { type: '/mwGalleryImageCaption' } ];
+		caption = [
+			{ type: 'mwGalleryImageCaption' },
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			{ type: '/paragraph' },
+			{ type: '/mwGalleryImageCaption' }
+		];
 	}
 
 	dataElement = {
