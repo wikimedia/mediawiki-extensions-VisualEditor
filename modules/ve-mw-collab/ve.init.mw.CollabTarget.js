@@ -36,6 +36,11 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	ve.ui.commandRegistry.unregister( 'undo' );
 	ve.ui.commandRegistry.unregister( 'redo' );
 
+	// HACK: Disable references until supported (T194838)
+	ve.ui.commandRegistry.unregister( 'reference' );
+	ve.ui.commandRegistry.unregister( 'referencesList' );
+	ve.ui.commandRegistry.unregister( 'citefromid' );
+
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
 	this.$editableContent = $( '#mw-content-text' );
 
@@ -58,7 +63,7 @@ ve.init.mw.CollabTarget.static.toolbarGroups.splice( 4, 0, {
 	name: 'commentAnnotation',
 	include: [ 'commentAnnotation' ]
 } );
-// Temporarily disable references until they are properly supported (T194838)
+// HACK: Disable references until supported (T194838)
 ve.init.mw.CollabTarget.static.toolbarGroups = ve.init.mw.CollabTarget.static.toolbarGroups.filter( function ( group ) {
 	return group.name !== 'reference';
 } );
