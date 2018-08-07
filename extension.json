@@ -1402,6 +1402,7 @@
 				"modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWAceEditorWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWLazyMultilineTextInputWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTargetWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionDialog.js",

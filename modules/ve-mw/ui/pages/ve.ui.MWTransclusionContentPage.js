@@ -28,7 +28,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 
 	// Properties
 	this.content = content;
-	this.textInput = new OO.ui.MultilineTextInputWidget( {
+	this.textInput = new ve.ui.MWLazyMultilineTextInputWidget( {
 		autosize: true,
 		classes: [ 've-ui-mwTransclusionDialog-input' ]
 	} )
