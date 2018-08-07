@@ -161,7 +161,7 @@
 	"visualeditor-dialog-media-upload": "上傳",
 	"visualeditor-dialog-meta-advancedsettings-label": "進階設定",
 	"visualeditor-dialog-meta-advancedsettings-section": "進階設定",
-	"visualeditor-dialog-meta-categories-addcategory-label": "添加分類至此頁面",
+	"visualeditor-dialog-meta-categories-addcategory-label": "加入分類至此頁面",
 	"visualeditor-dialog-meta-categories-category": "分類",
 	"visualeditor-dialog-meta-categories-data-label": "分類",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "您可以透過設定替代的索引名稱來覆蓋在分類中顯示此頁面的排序方式。 這經常用於要依姓氏排序，但名字會顯示在前面的頁面。",

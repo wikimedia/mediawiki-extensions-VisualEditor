@@ -12,7 +12,8 @@
 			"Vivaelcelta",
 			"Banjo",
 			"Macofe",
-			"Navhy"
+			"Navhy",
+			"Maria zaos"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Erro ó consultar a API de MediaWiki",
@@ -447,7 +448,7 @@
 	"visualeditor-wikitext-warning": "Está usando o editor visual; o [[{{MediaWiki:visualeditor-wikitext-warning-link}}|texto wiki]] non funciona aquí. Para cambiar ao modo de edición de texto wiki en calquera momento sen perder os cambios, prema no botón de intercambio.",
 	"visualeditor-wikitext-warning-title": "Detectouse texto wiki",
 	"visualeditor-wikitextconvert-title": "Converter o formateo a texto wiki?",
-	"visualeditor-wikitextconvert-message": "O contido pegado contén formato. Debería converterse a texto wiki, ou insertarse como texto plano?",
+	"visualeditor-wikitextconvert-message": "O contido pegado contén formato. Debería converterse a texto wiki ou insertarse como texto plano?",
 	"visualeditor-wikitextconvert-plain": "Usar texto plano",
 	"visualeditor-wikitextconvert-convert": "Converter a texto wiki"
 }

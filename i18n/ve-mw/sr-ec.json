@@ -103,7 +103,7 @@
 	"visualeditor-dialog-media-size-choosecustom": "Прилагођена",
 	"visualeditor-dialog-media-size-choosedefault": "Постави на подразумевану величину",
 	"visualeditor-dialog-media-size-choosefull": "Пуна величина",
-	"visualeditor-dialog-media-size-originalsize-error": "Изворна величина датотеке није доступна.",
+	"visualeditor-dialog-media-size-originalsize-error": "Не могу да преузмем првобитну величину датотеке.",
 	"visualeditor-dialog-media-size-section": "Величина слике",
 	"visualeditor-dialog-media-size-section-help": "Можете да поставите које величине ће се медијска ставка појавити на страници. Ово би скоро увек требало да буде нормална величина јер ће прилагођена величина читаоцима ометати распоред странице и направиће га неконзистентним.",
 	"visualeditor-dialog-media-thumbdimensions": "Величина минијатуре",
