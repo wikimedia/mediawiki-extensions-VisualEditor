@@ -1862,8 +1862,11 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 		wpStarttime: this.startTimeStamp,
 		wpEdittime: this.baseTimeStamp,
 		wpTextbox1: wikitext,
+		wpEditToken: this.editToken,
+		// MediaWiki function-verification parameters, mostly relevant to the
+		// classic editpage, but still required here:
 		wpUnicodeCheck: 'ℳ𝒲♥𝓊𝓃𝒾𝒸ℴ𝒹ℯ',
-		wpEditToken: this.editToken
+		wpUltimateParam: true
 	}, fields );
 	// Add params as hidden fields
 	for ( key in params ) {
