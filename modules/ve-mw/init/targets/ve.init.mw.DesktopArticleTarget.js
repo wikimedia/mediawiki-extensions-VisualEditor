@@ -1370,7 +1370,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 
 	if ( !this.verifyPopState( e.state ) ) {
 		// Ignore popstate events fired for states not created by us
-		// This also filters out the initial fire in Chrome (bug 57901).
+		// This also filters out the initial fire in Chrome (T59901).
 		return;
 	}
 

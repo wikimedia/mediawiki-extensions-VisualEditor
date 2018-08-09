@@ -610,9 +610,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 			remaining = dialog.editSummaryByteLimit - mwString.byteLength( dialog.editSummaryInput.getValue() );
 		}
 		// TODO: This looks a bit weird, there is no unit in the UI, just
-		// numbers Users likely assume characters but then it seems to count
+		// numbers. Users likely assume characters but then it seems to count
 		// down quicker than expected if it's byteLimit. Facing users with the
-		// word "byte" is bad? (bug 40035)
+		// word "byte" is bad? (T42035)
 		dialog.changedEditSummary = true;
 		if ( remaining > 99 ) {
 			dialog.editSummaryCountLabel.setLabel( '' );
