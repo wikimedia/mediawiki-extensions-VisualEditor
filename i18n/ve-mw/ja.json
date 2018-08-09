@@ -27,7 +27,8 @@
 			"Rxy",
 			"Yusuke1109",
 			"Omotecho",
-			"Delim"
+			"Delim",
+			"Kkairri"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -126,6 +127,7 @@
 	"visualeditor-dialog-media-upload": "アップロード",
 	"visualeditor-dialog-meta-advancedsettings-label": "高度な設定",
 	"visualeditor-dialog-meta-advancedsettings-section": "高度な設定",
+	"visualeditor-dialog-meta-categories-addcategory-label": "このページにカテゴリを追加する",
 	"visualeditor-dialog-meta-categories-category": "カテゴリ",
 	"visualeditor-dialog-meta-categories-data-label": "カテゴリ",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "ソート用の見出し語（デフォルトソートキー）を設定することにより、カテゴリー内の表示において、このページのソート順を変更できます。これはしばしば、人物名のページにおいて、名（ファーストネーム）が氏名の始めにあるが、姓ごとに並べて表示を行いたい場合に使われます。",
