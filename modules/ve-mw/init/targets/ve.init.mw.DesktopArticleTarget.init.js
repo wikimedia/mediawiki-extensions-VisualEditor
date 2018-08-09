@@ -686,8 +686,14 @@
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'visual' ) );
 			}
+			if ( pageCanLoadEditor ) {
+				// Always bind "Edit source" tab, because we want to handle switching with changes
+				$caEdit.off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
+			}
 			if ( pageCanLoadEditor && init.isWikitextAvailable ) {
-				$caEdit.add( '#ca-addsection' ).off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
+				// Only bind "Add topic" tab if NWE is available, because VE doesn't support section
+				// so we never have to switch from it when editing a section
+				$( '#ca-addsection' ).off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
 			// Alter the edit tab (#ca-edit)
@@ -789,6 +795,12 @@
 		onEditTabClick: function ( mode, e ) {
 			var section;
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
+				return;
+			}
+			if ( !active && mode === 'source' && !init.isWikitextAvailable ) {
+				// We're not active so we don't need to manage a switch, and
+				// we don't have source mode available so we don't need to
+				// activate VE. Just follow the link.
 				return;
 			}
 			e.preventDefault();
