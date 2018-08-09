@@ -741,8 +741,7 @@
 					$divider
 						.addClass( 'mw-editsection-divider' )
 						.text( dividerText );
-					// Don't mess with section edit links on foreign file description pages
-					// (bug 54259)
+					// Don't mess with section edit links on foreign file description pages (T56259)
 					if ( !$( '#ca-view-foreign' ).length ) {
 						$editLink
 							.attr( 'href', new mw.Uri( veEditUri ) )
@@ -761,7 +760,7 @@
 				// Only init without refresh if we're on a view page. Though section edit links
 				// are rarely shown on non-view pages, they appear in one other case, namely
 				// when on a diff against the latest version of a page. In that case we mustn't
-				// init without refresh as that'd initialise for the wrong rev id (bug 50925)
+				// init without refresh as that'd initialise for the wrong rev id (T52925)
 				// and would preserve the wrong DOM with a diff on top.
 				$editsections.find( '.mw-editsection-visualeditor' )
 					.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) );
@@ -1007,7 +1006,7 @@
 
 	enabledForUser = (
 		// Allow disabling for anonymous users separately from changing the
-		// default preference (bug 50000)
+		// default preference (T52000)
 		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
 
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)

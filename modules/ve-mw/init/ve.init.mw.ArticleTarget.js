@@ -37,7 +37,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.toolbarSaveButton = null;
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
-	// A workaround, as default URI does not get updated after pushState (bug 72334)
+	// A workaround, as default URI does not get updated after pushState (T74334)
 	this.currentUri = new mw.Uri( location.href );
 	this.section = null;
 	this.sectionTitle = null;

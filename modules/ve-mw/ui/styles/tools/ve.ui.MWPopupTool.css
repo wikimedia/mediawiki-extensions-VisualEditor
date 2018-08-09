@@ -50,7 +50,7 @@
 /*
  * Bidi-isolate the version number,
  * so it won't mess up the date after it.
- * Bug 68688
+ * T70688
  */
 .ve-ui-mwHelpPopupTool-version-link {
 	unicode-bidi: embed;

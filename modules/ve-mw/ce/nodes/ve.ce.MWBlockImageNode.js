@@ -186,7 +186,7 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
  * @return {string} CSS class
  */
 ve.ce.MWBlockImageNode.prototype.getCssClass = function ( type, alignment ) {
-	// TODO use this.model.getAttribute( 'type' ) etc., see bug 52065
+	// TODO use this.model.getAttribute( 'type' ) etc., see T54065
 	// Default is different between RTL and LTR wikis:
 	if ( type === 'default' && alignment === 'default' ) {
 		if ( this.getModel().getDocument().getDir() === 'rtl' ) {

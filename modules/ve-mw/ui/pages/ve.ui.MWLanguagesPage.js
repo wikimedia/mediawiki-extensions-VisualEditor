@@ -131,7 +131,7 @@ ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred,
  * @return {Object} item
  */
 ve.ui.MWLanguagesPage.prototype.getLanguageItemFromMetaListItem = function ( metaItem ) {
-	// TODO: get real values from metaItem once Parsoid actually provides them - bug 48970
+	// TODO: get real values from metaItem once Parsoid actually provides them - T50970
 	return {
 		lang: 'lang',
 		langname: 'langname',
