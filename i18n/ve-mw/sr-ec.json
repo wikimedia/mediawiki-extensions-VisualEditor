@@ -342,7 +342,7 @@
 	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
 	"visualeditor-redirect-description": "Преусмерава на „$1”",
 	"visualeditor-savedialog-error-badtoken": "Нисмо могли сачувати вашу измену зато што сесија више није важећа.",
-	"visualeditor-savedialog-identify-anon": "Желите ли сачувати ову страницу као анониман корисник? Ваша ИП адреса ће бити забележена у историји измена ове странице.",
+	"visualeditor-savedialog-identify-anon": "Желите ли сачувати ову страницу као анониман корисник? Ваша IP адреса ће бити забележена у историји измена ове странице.",
 	"visualeditor-savedialog-identify-trylogin": "Више нисте пријављени. Молимо пријавите се у другој картици и покушајте поново.",
 	"visualeditor-savedialog-identify-user": "Сада сте пријављени као [[User:$1|$1]]. Ваше измене ће бити повезане са овим налогом ако сачувате ову измену.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Можете притисните $1 да бисте сачували измену.",

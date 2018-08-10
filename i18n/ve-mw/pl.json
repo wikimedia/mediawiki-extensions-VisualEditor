@@ -346,6 +346,8 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Kod języka",
 	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "Tekst źródłowy",
 	"visualeditor-mwlanguagevariantinspector-title-name": "Nazwa języka",
+	"visualeditor-mwlanguagevariantinspector-twoway-add-button": "Dodaj nowy przypadek",
+	"visualeditor-mwlanguagevariantinspector-twoway-clear-button": "Usuń przypadek",
 	"visualeditor-mwpredialog-convert": "Pozwól na stosowanie stylów tekstu",
 	"visualeditor-mwpredialog-title": "Preformatowany czysty tekst",
 	"visualeditor-mwsignature-tool": "Twój podpis",
