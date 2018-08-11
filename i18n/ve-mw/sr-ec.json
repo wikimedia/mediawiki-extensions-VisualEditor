@@ -304,7 +304,7 @@
 	"visualeditor-mwlanguagevariant-name": "Назив језика: $1",
 	"visualeditor-mwlanguagevariantcontextitem-flag-hidden": "Ово је скривено правило.",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Код језика",
-	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<неисправно>",
+	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<неважеће>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Језик",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Извор",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Одредиште",
