@@ -72,12 +72,14 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			var dialog = this;
 			this.wikitext.pushPending();
-			// TODO: Handle API errors
 			ve.init.target.getWikitextFragment( data.surface.getModel().getDocument() ).then( function ( wikitext ) {
 				dialog.wikitext.setValue( wikitext.trim() ).select();
 				dialog.wikitext.$input.scrollTop( 0 );
 				dialog.wikitext.popPending();
 				dialog.updateSize();
+			}, function () {
+				// TODO: Display API errors
+				dialog.wikitext.popPending();
 			} );
 		}, this );
 };
