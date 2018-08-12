@@ -66,6 +66,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "Wikitexten att arbeta med.",
 	"apihelp-visualeditoredit-summary": "Spara en HTML5-sida till MediaWiki (konverterad till wikitext via Parsoid-tjänsten).",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importerad från $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Skapa den här sidan med wikitext",
 	"tooltip-ca-edit": "Redigera denna sida med wikitext",

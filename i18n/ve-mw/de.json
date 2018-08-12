@@ -61,6 +61,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "Der Wikitext, mit dem gearbeitet werden soll.",
 	"apihelp-visualeditoredit-summary": "Speichert eine HTML5-Seite zu MediaWiki (konvertiert zu Wikitext mithilfe des Parsoid-Dienstes).",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importiert von $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Den Quelltext dieser Seite erstellen",
 	"tooltip-ca-edit": "Diese Seite mithilfe Wikitext bearbeiten",
