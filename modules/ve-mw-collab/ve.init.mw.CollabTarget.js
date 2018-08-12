@@ -27,7 +27,7 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 
 	this.title = title;
 	this.rebaserUrl = rebaserUrl;
-	this.importTitle = config.importTitle;
+	this.importTitle = config.importTitle || null;
 
 	// Parent constructor
 	ve.init.mw.CollabTarget.super.call( this, config );
@@ -101,6 +101,7 @@ ve.init.mw.CollabTarget.prototype.transformPage = function () {
  */
 ve.init.mw.CollabTarget.prototype.restorePage = function () {
 	this.$element.parent().append( this.$originalContent.children() );
+	$( '#contentSub' ).empty();
 };
 
 /**
@@ -175,17 +176,25 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 		);
 
 		synchronizer.once( 'initDoc', function () {
-			var initPromise;
+			var initPromise, title;
 
 			if ( target.importTitle && !surface.getModel().getDocument().getCompleteHistoryLength() ) {
 				initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
-					var doc, dmDoc,
+					var doc, dmDoc, fragment,
 						content = ve.getProp( response, 'visualeditor', 'content' );
 
 					if ( content ) {
 						doc = target.constructor.static.parseDocument( content );
 						dmDoc = target.constructor.static.createModelFromDom( doc );
-						surface.getModel().getLinearFragment( new ve.Range( 0, 2 ) ).insertDocument( dmDoc );
+						fragment = surface.getModel().getLinearFragment( new ve.Range( 0, 2 ) );
+						fragment.insertDocument( dmDoc );
+						// Store the importTitle as a hidden meta item
+						if ( target.importTitle ) {
+							fragment.collapseToEnd().insertContent( [
+								{ type: 'alienMeta', attributes: { importTitle: target.importTitle.toString() } },
+								{ type: '/alienMeta' }
+							] );
+						}
 						surface.getModel().selectFirstContentOffset();
 					} else {
 						// Import failed
@@ -205,6 +214,17 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 				surface.getModel().selectFirstContentOffset();
 				// Resolve progress bar
 				importDeferred.resolve();
+				if ( ( title = target.getImportTitle() ) ) {
+					$( '#contentSub' ).html(
+						ve.htmlMsg(
+							'collabpad-import-subtitle',
+							$( '<a>' ).attr( 'href', title.getUrl() ).text( title.getMainText() )
+						)
+					);
+					ve.targetLinksToNewWindow( $( '#contentSub' )[ 0 ] );
+				} else {
+					$( '#contentSub' ).empty();
+				}
 			} );
 		} );
 
@@ -213,6 +233,28 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 
 	// Parent method
 	ve.init.mw.CollabTarget.super.prototype.setSurface.apply( this, arguments );
+};
+
+/**
+ * Get the title of the imported document, if there was one
+ *
+ * @return {mw.Title|null} Title of imported document
+ */
+ve.init.mw.CollabTarget.prototype.getImportTitle = function () {
+	var surfaceModel,
+		target = this;
+
+	if ( !this.importTitle ) {
+		surfaceModel = this.getSurface().getModel();
+		surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
+			var importTitle = item.getAttribute( 'importTitle' );
+			if ( importTitle ) {
+				target.importTitle = mw.Title.newFromText( importTitle );
+				return true;
+			}
+		} );
+	}
+	return this.importTitle;
 };
 
 /* Registration */

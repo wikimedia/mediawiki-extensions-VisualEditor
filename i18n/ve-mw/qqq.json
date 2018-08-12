@@ -77,6 +77,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "{{doc-apihelp-param|visualeditoredit|wikitext}}",
 	"apihelp-visualeditoredit-summary": "{{doc-apihelp-summary|visualeditoredit}}",
 	"collabpad-doctitle": "Name of CollabPad special page with a document subtitle",
+	"collabpad-import-subtitle": "Subtitle of CollabPad page, linking to the page the content was imported from",
 	"collabpad": "Name of CollabPad special page",
 	"tooltip-ca-createsource": "Tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist.\n\nSee also:\n* {{msg-mw|Tooltip-ca-editsource}} - tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists",
 	"tooltip-ca-edit": "Over-ridden tooltip of the wikitext \"Edit source\" tab.",
