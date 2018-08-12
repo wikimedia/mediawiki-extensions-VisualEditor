@@ -520,7 +520,8 @@
 			],
 			"messages" : [
 				"collabpad",
-				"collabpad-doctitle"
+				"collabpad-doctitle",
+				"collabpad-import-subtitle"
 			],
 			"targets": [
 				"desktop",
