@@ -746,12 +746,11 @@ class ApiVisualEditor extends ApiBase {
 	 * @return Language Content language
 	 */
 	public static function getPageLanguage( Title $title ) {
-		global $wgContLang;
 		if ( $title->isSpecial( 'CollabPad' ) ) {
 			// Use the site language for CollabPad, as getPageLanguage just
 			// returns the interface language for special pages.
 			// TODO: Let the user change the document language on multi-lingual sites.
-			return $wgContLang;
+			return MediaWikiServices::getInstance()->getContentLanguage();
 		} else {
 			return $title->getPageLanguage();
 		}
