@@ -176,25 +176,40 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 		);
 
 		synchronizer.once( 'initDoc', function () {
-			var initPromise, title;
+			var surfaceModel, initPromise, title;
 
 			if ( target.importTitle && !surface.getModel().getDocument().getCompleteHistoryLength() ) {
 				initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
 					var doc, dmDoc, fragment,
-						content = ve.getProp( response, 'visualeditor', 'content' );
+						data = response.visualeditor;
 
-					if ( content ) {
-						doc = target.constructor.static.parseDocument( content );
+					if ( data && data.content ) {
+						doc = target.constructor.static.parseDocument( data.content );
 						dmDoc = target.constructor.static.createModelFromDom( doc );
 						fragment = surface.getModel().getLinearFragment( new ve.Range( 0, 2 ) );
 						fragment.insertDocument( dmDoc );
-						// Store the importTitle as a hidden meta item
-						if ( target.importTitle ) {
-							fragment.collapseToEnd().insertContent( [
-								{ type: 'alienMeta', attributes: { importTitle: target.importTitle.toString() } },
-								{ type: '/alienMeta' }
-							] );
-						}
+
+						target.etag = data.etag;
+						target.baseTimeStamp = data.basetimestamp;
+						target.startTimeStamp = data.starttimestamp;
+						target.revid = data.oldid;
+
+						// Store the document metadata as a hidden meta item
+						fragment.collapseToEnd().insertContent( [
+							{
+								type: 'alienMeta',
+								attributes: {
+									importedDocument: {
+										title: target.importTitle.toString(),
+										etag: target.etag,
+										baseTimeStamp: target.baseTimeStamp,
+										startTimeStamp: target.startTimeStamp,
+										revid: target.revid
+									}
+								}
+							},
+							{ type: '/alienMeta' }
+						] );
 						surface.getModel().selectFirstContentOffset();
 					} else {
 						// Import failed
@@ -204,6 +219,20 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
 			} else {
 				// No import, or history already exists
 				initPromise = $.Deferred().resolve().promise();
+
+				// Look for import metadata in document
+				surfaceModel = target.getSurface().getModel();
+				surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
+					var importedDocument = item.getAttribute( 'importedDocument' );
+					if ( importedDocument ) {
+						target.importTitle = mw.Title.newFromText( importedDocument.title );
+						target.etag = importedDocument.etag;
+						target.baseTimeStamp = importedDocument.baseTimeStamp;
+						target.startTimeStamp = importedDocument.startTimeStamp;
+						target.revid = importedDocument.revid;
+						return true;
+					}
+				} );
 			}
 			initPromise.fail( function ( err ) {
 				setTimeout( function () {
@@ -241,20 +270,14 @@ ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
  * @return {mw.Title|null} Title of imported document
  */
 ve.init.mw.CollabTarget.prototype.getImportTitle = function () {
-	var surfaceModel,
-		target = this;
-
-	if ( !this.importTitle ) {
-		surfaceModel = this.getSurface().getModel();
-		surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
-			var importTitle = item.getAttribute( 'importTitle' );
-			if ( importTitle ) {
-				target.importTitle = mw.Title.newFromText( importTitle );
-				return true;
-			}
-		} );
-	}
 	return this.importTitle;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.CollabTarget.prototype.getPageName = function () {
+	return this.getImportTitle() || this.pageName;
 };
 
 /* Registration */
