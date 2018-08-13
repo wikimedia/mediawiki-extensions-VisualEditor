@@ -46,7 +46,8 @@
 			"Happy13241",
 			"Movses",
 			"Stjn",
-			"Evs"
+			"Evs",
+			"Vlad5250"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Ошибка запроса к API MediaWiki",
@@ -92,6 +93,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "Викитекст для действий.",
 	"apihelp-visualeditoredit-summary": "Сохранить HTML5-страницу в MediaWiki (сконвертированную в викитекст с помощью Parsoid).",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Импортировано из $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Создать страницу в редакторе исходного текста",
 	"tooltip-ca-edit": "Редактировать эту страницу в режиме вики-текста",

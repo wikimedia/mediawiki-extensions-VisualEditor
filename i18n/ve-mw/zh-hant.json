@@ -76,6 +76,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "要操作的 wiki 文字。",
 	"apihelp-visualeditoredit-summary": "儲存一個 HTML5 頁面至 MediaWiki (透過 Parsoid 服務轉換爲 WikiText)。",
 	"collabpad-doctitle": "CollabPad：$1",
+	"collabpad-import-subtitle": "匯入自$1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "建立此頁面的原始碼",
 	"tooltip-ca-edit": "使用 Wikitext 編輯此頁面",

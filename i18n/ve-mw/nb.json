@@ -61,6 +61,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "Wikiteksten det jobbes på.",
 	"apihelp-visualeditoredit-summary": "Lagre en HTML5-side til MediaWiki (konvertert til wikitekst med Parsoid-tjenesten).",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importert fra $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Opprett kildekoden for denne siden",
 	"tooltip-ca-edit": "Rediger denne siden som wikitekst",

@@ -72,6 +72,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "扮演的wiki文本。",
 	"apihelp-visualeditoredit-summary": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。",
 	"collabpad-doctitle": "CollabPad：$1",
+	"collabpad-import-subtitle": "继承自$1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "创建本页面的源代码",
 	"tooltip-ca-edit": "使用wiki文本编辑本页",

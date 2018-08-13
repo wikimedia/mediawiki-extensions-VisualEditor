@@ -62,6 +62,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "עם איזה קוד ויקי לפעול.",
 	"apihelp-visualeditoredit-summary": "שמירת דף HTML5 למדיה־ויקי (מומר לקוד ויקי דרך שירות פרסואיד).",
 	"collabpad-doctitle": "פנקס משותף: $1",
+	"collabpad-import-subtitle": "יובא מתוך $1",
 	"collabpad": "פנקס שיתופי",
 	"tooltip-ca-createsource": "יצירת קוד המקור של הדף הזה",
 	"tooltip-ca-edit": "עריכת הדף הזה באמצעות קוד ויקי",

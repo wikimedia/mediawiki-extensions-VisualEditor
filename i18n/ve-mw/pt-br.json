@@ -72,6 +72,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "O texto wiki para ser utilizado.",
 	"apihelp-visualeditoredit-summary": "Salva uma página HTML5 em MediaWiki (convertida para texto wiki através do serviço Parsoid).",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importado de $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Criar o código-fonte desta página",
 	"tooltip-ca-edit": "Editar esta página usando wikitexto",

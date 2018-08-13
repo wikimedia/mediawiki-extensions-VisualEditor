@@ -72,6 +72,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "동작을 적용할 위키텍스트입니다.",
 	"apihelp-visualeditoredit-summary": "HTML5 페이지를 미디어위키로 저장합니다. (Parsoid 서비스를 통해 위키텍스트로 변환)",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "$1에서 가져옴",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "이 문서의 원본 코드를 만들기",
 	"tooltip-ca-edit": "위키텍스트를 사용하여 이 문서 편집",
