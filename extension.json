@@ -455,6 +455,10 @@
 				"oojs-ui.styles.icons-interactions",
 				"oojs-ui.styles.icons-layout"
 			],
+			"messages": [
+				"visualeditor-rebase-client-export",
+				"visualeditor-rebase-client-import-name"
+			],
 			"targets": [
 				"desktop",
 				"mobile"

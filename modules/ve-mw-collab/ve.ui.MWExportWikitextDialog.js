@@ -45,9 +45,25 @@ ve.ui.MWExportWikitextDialog.static.size = 'larger';
  * @inheritdoc
  */
 ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
-	var panel;
+	var panel,
+		$content = $( '<div>' );
+
 	// Parent method
 	ve.ui.MWExportWikitextDialog.super.prototype.initialize.call( this );
+
+	this.titleInput = new mw.widgets.TitleInputWidget( {
+		value: ve.init.target.getImportTitle()
+	}, { api: ve.init.target.getContentApi() } );
+	this.titleButton = new OO.ui.ButtonWidget( {
+		label: ve.msg( 'visualeditor-rebase-client-export' ),
+		flags: [ 'primary', 'progressive' ]
+	} );
+	this.titleField = new OO.ui.ActionFieldLayout( this.titleInput, this.titleButton, {
+		align: 'top',
+		label: ve.msg( 'visualeditor-rebase-client-import-name' )
+	} );
+
+	this.titleButton.on( 'click', this.export.bind( this ) );
 
 	this.wikitext = new OO.ui.MultilineTextInputWidget( {
 		classes: [ 'mw-editfont-' + mw.user.options.get( 'editfont' ) ],
@@ -55,11 +71,25 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 		readOnly: true,
 		rows: 20
 	} );
-	this.wikitext.$element.css( 'max-width', 'none' ); // Move to CSS
+	this.wikitextField = new OO.ui.FieldLayout( this.wikitext, {
+		align: 'top',
+		label: ve.msg( 'visualeditor-savedialog-review-wikitext' )
+	} );
+
+	// Move to CSS
+	this.titleField.$element.css( 'max-width', 'none' );
+	this.titleInput.$element.css( 'max-width', 'none' );
+	this.wikitext.$element.css( 'max-width', 'none' );
+
+	$content.append(
+		this.titleField.$element,
+		this.wikitextField.$element
+	);
+
 	panel = new OO.ui.PanelLayout( {
 		padded: true,
 		expanded: false,
-		$content: this.wikitext.$element
+		$content: $content
 	} );
 	this.$body.append( panel.$element );
 };
@@ -71,11 +101,13 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var dialog = this;
+			this.titleButton.setDisabled( true );
 			this.wikitext.pushPending();
 			ve.init.target.getWikitextFragment( data.surface.getModel().getDocument() ).then( function ( wikitext ) {
-				dialog.wikitext.setValue( wikitext.trim() ).select();
+				dialog.wikitext.setValue( wikitext.trim() );
 				dialog.wikitext.$input.scrollTop( 0 );
 				dialog.wikitext.popPending();
+				dialog.titleButton.setDisabled( false );
 				dialog.updateSize();
 			}, function () {
 				// TODO: Display API errors
@@ -87,11 +119,62 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
+	return ve.ui.MWExportWikitextDialog.super.prototype.getReadyProcess.call( this, data )
+		.next( function () {
+			this.titleInput.focus();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWExportWikitextDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
 			this.wikitext.setValue( '' );
 		}, this );
+};
+
+/**
+ * Export the document to a specific title
+ */
+ve.ui.MWExportWikitextDialog.prototype.export = function () {
+	var key, $form, params,
+		wikitext = this.wikitext.getValue(),
+		title = this.titleInput.getMWTitle(),
+		submitUrl = ( new mw.Uri( title.getUrl() ) )
+			.extend( {
+				action: 'submit',
+				veswitched: 1
+			} );
+
+	$form = $( '<form>' ).attr( { method: 'post', enctype: 'multipart/form-data' } ).addClass( 'oo-ui-element-hidden' );
+	params = {
+		format: 'text/x-wiki',
+		model: 'wikitext',
+		wpTextbox1: wikitext,
+		wpEditToken: ve.init.target.editToken,
+		// MediaWiki function-verification parameters, mostly relevant to the
+		// classic editpage, but still required here:
+		wpUnicodeCheck: 'ℳ𝒲♥𝓊𝓃𝒾𝒸ℴ𝒹ℯ',
+		wpUltimateParam: true,
+		wpDiff: true
+	};
+	if ( ve.init.target.getImportTitle().toString() === title.toString() ) {
+		params = ve.extendObject( {
+			oldid: ve.init.target.revid,
+			basetimestamp: ve.init.target.baseTimeStamp,
+			starttimestamp: ve.init.target.startTimeStamp
+		}, params );
+	}
+	// Add params as hidden fields
+	for ( key in params ) {
+		$form.append( $( '<input>' ).attr( { type: 'hidden', name: key, value: params[ key ] } ) );
+	}
+	// Submit the form, mimicking a traditional edit
+	// Firefox requires the form to be attached
+	$form.attr( 'action', submitUrl ).appendTo( 'body' ).submit();
 };
 
 /* Registration */

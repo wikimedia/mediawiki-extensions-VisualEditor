@@ -1614,7 +1614,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			this.getDocToSave(),
 			function ( wikitext ) {
 				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
-				target.submitWithSaveFields( { wpDiff: 1, wpAutoSummary: '' }, wikitext );
+				target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, wikitext );
 			}
 		);
 	}

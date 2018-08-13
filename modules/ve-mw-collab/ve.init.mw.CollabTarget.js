@@ -118,8 +118,7 @@ ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
 	this.getSurface().getView().focus();
 
 	exportButton = new OO.ui.ButtonWidget( {
-		icon: 'wikiText',
-		label: ve.msg( 'visualeditor-savedialog-review-wikitext' ),
+		label: ve.msg( 'visualeditor-rebase-client-export' ),
 		flags: [ 'progressive', 'primary' ]
 	} );
 	exportButton.connect( this, { click: 'onExportButtonClick' } );
