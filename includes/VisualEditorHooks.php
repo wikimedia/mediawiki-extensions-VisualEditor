@@ -1093,6 +1093,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/nodes/ve.ce.TableNode.test.js',
 				// VisualEditor UI Tests
 				'lib/ve/tests/ui/ve.ui.Trigger.test.js',
+				'lib/ve/tests/ui/ve.ui.Sequence.test.js',
 				'lib/ve/tests/ui/ve.ui.DiffElement.test.js',
 				'lib/ve/tests/ui/ve.ui.PreviewElement.test.js',
 				'modules/ve-mw/tests/ui/ve.ui.DiffElement.test.js',

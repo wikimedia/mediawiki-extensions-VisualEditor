@@ -40,9 +40,6 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextComment', 'comment', '<!--', 4 )
 );
-ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextHorizontalRule', 'insertHorizontalRule', [ { type: 'paragraph' }, '-', '-', '-', '-' ], 4 )
-);
 
 /* Help registrations */
 
