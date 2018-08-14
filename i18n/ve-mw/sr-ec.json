@@ -15,6 +15,7 @@
 			"Zoranzoki21"
 		]
 	},
+	"apierror-visualeditor-api-langlinks-error": "Грешка при упиту Медијавики API-ја",
 	"apierror-visualeditor-difffailed": "Разлика неуспешна",
 	"apierror-visualeditor-latestnotfound": "Не могу да пронађем најновију измену за наслов.",
 	"apihelp-visualeditor-description": "Приказује HTML5 за страницу користећи услугу Parsoid.",
@@ -42,6 +43,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Када чувате, поставите ово на временски потпис тренутка када је измена учитана. Користи се за откривање сукоба измена.",
 	"apihelp-visualeditoredit-param-summary": "Опис измене.",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Увезено из странице $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Направите изворни код ове странице",
 	"tooltip-ca-edit": "Уредите ову страницу помоћу викитекста",
@@ -254,6 +256,7 @@
 	"visualeditor-magiclinknodeinspector-title-rfc": "RFC веза",
 	"visualeditor-mainnamespacepagelink": "Project:Main namespace",
 	"visualeditor-media-input-placeholder": "Претрага датотека",
+	"visualeditor-media-title-image": "Слика",
 	"visualeditor-meta-tool": "Опције",
 	"visualeditor-mweditmode-tooltip": "Промените уређивач",
 	"visualeditor-mweditmodesource-progress": "Пребацујем на уређивање изворника...",
@@ -355,6 +358,7 @@
 	"visualeditor-savedialog-label-review": "Прегледај измене",
 	"visualeditor-savedialog-label-review-good": "Назад на чување измена",
 	"visualeditor-savedialog-label-save-short": "Сачувај",
+	"visualeditor-savedialog-label-save-short-start": "Сачувај...",
 	"visualeditor-savedialog-label-visual-diff-report": "Пријави неисправан приказ ове измене",
 	"visualeditor-savedialog-label-warning": "Упозорење",
 	"visualeditor-savedialog-review-nosummary": "Нема описа измене",

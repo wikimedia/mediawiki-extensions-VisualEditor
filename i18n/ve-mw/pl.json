@@ -61,6 +61,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Zaimportowano z $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Tworzenie kodu źródłowego strony",
 	"tooltip-ca-edit": "Edytuj tę stronę używając edytora kodu źródłowego",
