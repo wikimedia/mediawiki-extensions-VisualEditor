@@ -70,7 +70,7 @@ ve.ui.MWPageSettingsDialogTool = function VeUiMWPageSettingsDialogTool() {
 OO.inheritClass( ve.ui.MWPageSettingsDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWPageSettingsDialogTool.static.name = 'settings';
 ve.ui.MWPageSettingsDialogTool.static.group = 'utility';
-ve.ui.MWPageSettingsDialogTool.static.icon = 'settings';
+ve.ui.MWPageSettingsDialogTool.static.icon = 'pageSettings';
 ve.ui.MWPageSettingsDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-settings-tool' );
 ve.ui.MWPageSettingsDialogTool.static.commandName = 'meta/settings';
