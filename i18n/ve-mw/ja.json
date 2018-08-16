@@ -28,7 +28,8 @@
 			"Yusuke1109",
 			"Omotecho",
 			"Delim",
-			"Kkairri"
+			"Kkairri",
+			"Suyama"
 		]
 	},
 	"apihelp-visualeditor-description": "ParsoidサービスからHTML5ページを返す",
@@ -53,6 +54,7 @@
 	"apihelp-visualeditoredit-param-page": "操作を実行したいページ",
 	"apihelp-visualeditoredit-param-starttimestamp": "保存する際に、ページが読み込まれた時のタイムスタンプとしてこれがセットされます。編集競合を検出するのに利用されます。",
 	"apihelp-visualeditoredit-param-summary": "編集の要約",
+	"collabpad-import-subtitle": "$1 からインポートしました",
 	"tooltip-ca-createsource": "このページのソースコードを作成する",
 	"tooltip-ca-edit": "ウィキテキストでページを編集",
 	"tooltip-ca-editsource": "このページのソースコードを編集する",

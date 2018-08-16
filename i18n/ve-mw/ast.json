@@ -51,6 +51,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "El testu wiki col qu'hai qu'actuar.",
 	"apihelp-visualeditoredit-summary": "Guardar una páxina HTML5 en MediaWiki (convertida en testu wiki mediante'l serviciu Parsoid).",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importao dende $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Crear el códigu fonte d'esta páxina",
 	"tooltip-ca-edit": "Editar esta páxina usando testu wiki",
