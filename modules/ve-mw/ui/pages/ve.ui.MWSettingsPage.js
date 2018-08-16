@@ -31,7 +31,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 
 	this.settingsFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-meta-settings-label' ),
-		icon: 'settings'
+		icon: 'pageSettings'
 	} );
 
 	// Initialization
