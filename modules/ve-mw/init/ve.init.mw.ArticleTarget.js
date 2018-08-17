@@ -1208,15 +1208,16 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 		}
 
 		if ( target.getSurface().getMode() === 'source' ) {
-			newRevPromise = mw.libs.ve.targetLoader.requestParsoidData(
-				mw.config.get( 'wgRelevantPageName' ),
-				{
-					oldId: target.revid,
-					targetName: 'diff',
-					modified: true,
-					wikitext: ve.init.target.getSurface().getDom()
-				}
-			).then( mw.libs.ve.diffLoader.getModelFromResponse );
+			newRevPromise = target.getContentApi().post( {
+				action: 'visualeditor',
+				paction: 'parsedoc',
+				page: target.getPageName(),
+				wikitext: ve.init.target.getSurface().getDom(),
+				pst: true
+			} ).then( function ( response ) {
+				// Use anonymous function to avoid passing through API promise argument
+				return mw.libs.ve.diffLoader.getModelFromResponse( response );
+			} );
 
 			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
 		} else {
