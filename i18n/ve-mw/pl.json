@@ -371,6 +371,7 @@
 	"visualeditor-preference-tabs-remember-last": "Zapamiętaj ostatnio używany edytor",
 	"visualeditor-preference-visualdiffpage-description": "Włącza tryb wizualnego porównywania zmian.",
 	"visualeditor-preference-visualdiffpage-label": "Różnice wizualne",
+	"visualeditor-rebase-client-export": "Eksport",
 	"visualeditor-rebase-client-import": "Importuj",
 	"visualeditor-rebase-client-import-name": "Tytuł strony",
 	"visualeditor-recreate": "Strona została usunięta od czasu rozpoczęcia twojej edycji. Naciśnij „$1”, aby ją powtórnie utworzyć.",

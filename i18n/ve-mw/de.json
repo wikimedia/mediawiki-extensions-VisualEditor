@@ -395,6 +395,7 @@
 	"visualeditor-preference-tabs-remember-last": "Den zuletzt genutzten Editor merken und anbieten",
 	"visualeditor-preference-visualdiffpage-description": "Den neuen visuellen Modus auf Versionsvergleichsseiten aktivieren.",
 	"visualeditor-preference-visualdiffpage-label": "Visuelle Unterschiede",
+	"visualeditor-rebase-client-export": "Exportieren",
 	"visualeditor-rebase-client-import": "Importieren",
 	"visualeditor-rebase-client-import-name": "Seitentitel",
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem du zum Bearbeiten angefangen hast. Wähle „$1“, um sie neu zu erstellen.",

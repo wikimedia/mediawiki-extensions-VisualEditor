@@ -70,6 +70,7 @@
 	"apihelp-visualeditoredit-param-wikitext": "برای کار با ویکی‌متن.",
 	"apihelp-visualeditoredit-summary": "ذخیره صفحه HTML5 به مدیاویکی (تبدیل به متن ویکی با سرویس پارسوید)",
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "درون‌ریزی شده از $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "ساخت کد متن این صفحه.",
 	"tooltip-ca-edit": "این صفحه را با استفاده از ویکی‌متن ویرایش کنید",
