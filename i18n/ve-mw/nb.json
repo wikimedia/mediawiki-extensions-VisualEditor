@@ -396,6 +396,7 @@
 	"visualeditor-preference-tabs-remember-last": "Husk min sist brukte editor",
 	"visualeditor-preference-visualdiffpage-description": "Aktiver den nye visuelle modusen for sammenligning av revisjoner.",
 	"visualeditor-preference-visualdiffpage-label": "Visuelle forskjeller",
+	"visualeditor-rebase-client-export": "Eksporter",
 	"visualeditor-rebase-client-import": "Importer",
 	"visualeditor-rebase-client-import-name": "Sidetittel",
 	"visualeditor-recreate": "Siden har blitt slettet etter at du begynte å redigere. Trykk \"$1\" for å gjenopprette den.",

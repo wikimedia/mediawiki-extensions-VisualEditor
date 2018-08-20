@@ -47,7 +47,8 @@
 			"Movses",
 			"Stjn",
 			"Evs",
-			"Vlad5250"
+			"Vlad5250",
+			"Lega4"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Ошибка запроса к API MediaWiki",
@@ -434,6 +435,7 @@
 	"visualeditor-preference-visualdiffpage-discussion-link": "//www.mediawiki.org/wiki/Talk:VisualEditor/Diffs",
 	"visualeditor-preference-visualdiffpage-info-link": "//www.mediawiki.org/wiki/VisualEditor/Diffs",
 	"visualeditor-preference-visualdiffpage-label": "Визуальное сравнение версий",
+	"visualeditor-rebase-client-export": "Экспорт",
 	"visualeditor-rebase-client-import": "Импортировать",
 	"visualeditor-rebase-client-import-name": "Заголовок страницы",
 	"visualeditor-recreate": "Эта страница была удалена, когда вы начали её редактировать. Нажмите «$1», чтобы создать её заново.",

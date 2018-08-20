@@ -387,6 +387,7 @@
 	"visualeditor-preference-tabs-remember-last": "Запомни го последниот употребен уредувач",
 	"visualeditor-preference-visualdiffpage-description": "Овозможи нов нагледен режим за разликите во преработки на страниците.",
 	"visualeditor-preference-visualdiffpage-label": "Нагледни разлики",
+	"visualeditor-rebase-client-export": "Извези",
 	"visualeditor-rebase-client-import": "Увези",
 	"visualeditor-rebase-client-import-name": "Наслов на страницата",
 	"visualeditor-recreate": "Некој ја има избришано страницата откако почнавте да ја уредувате. Стиснете на „$1“ за да ја пресоздадете.",

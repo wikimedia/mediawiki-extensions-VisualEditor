@@ -384,6 +384,7 @@
 	"visualeditor-preference-tabs-remember-last": "마지막으로 사용한 편집기 기억하기",
 	"visualeditor-preference-visualdiffpage-description": "판 차이 문서에 새로운 시각 모드를 사용합니다.",
 	"visualeditor-preference-visualdiffpage-label": "시각 차이",
+	"visualeditor-rebase-client-export": "내보내기",
 	"visualeditor-rebase-client-import": "가져오기",
 	"visualeditor-rebase-client-import-name": "문서 제목",
 	"visualeditor-recreate": "문서가 편집을 시작한 이후로 삭제되었습니다. 다시 만드려면 \"$1\"을 누르세요.",

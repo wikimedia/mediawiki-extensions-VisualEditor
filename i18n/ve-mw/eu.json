@@ -338,7 +338,11 @@
 	"visualeditor-preference-tabs-prefer-ve": "Aukeran, eman beti ikusizko editorea",
 	"visualeditor-preference-tabs-prefer-wt": "Eman beti iturburu kode editorea",
 	"visualeditor-preference-tabs-remember-last": "Gogoratu nire azken editorea",
+	"visualeditor-preference-visualdiffpage-description": "Aktibatu ikusizko modu berria orrien arteko aldeak ikusteko",
 	"visualeditor-preference-visualdiffpage-label": "Ikusizko desberdintasunak",
+	"visualeditor-rebase-client-export": "Esportatu",
+	"visualeditor-rebase-client-import": "Inportatu",
+	"visualeditor-rebase-client-import-name": "Orriaren izenburua",
 	"visualeditor-recreate": "Orria ezabatua izan da aldatzen hasi zinenetik. Sakatu \"$1\" berriro sortzeko.",
 	"visualeditor-redirect-description": "$1ra birzuzendu",
 	"visualeditor-savedialog-error-badtoken": "Ezin izan dugu zure edizioa gorde, saioa dagoeneko ez zelako baliozkoa.",
@@ -388,5 +392,9 @@
 	"visualeditor-viewpage-savewarning-title": "Ziur zaude?",
 	"visualeditor-wikitext-progress": "Wikitestu bihurtzen",
 	"visualeditor-wikitext-warning": "Ikusizko Editorea erabiltzen ari zara - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitestuak]] ez du funtzionatzen hemen. Iturburu kodera editatzea uneoro joateko aldaketak galdu gabe, klik egin aldatu botoian.",
-	"visualeditor-wikitext-warning-title": "Wikitext markatzailea detektatua"
+	"visualeditor-wikitext-warning-title": "Wikitext markatzailea detektatua",
+	"visualeditor-wikitextconvert-title": "Formatua wikitestura aldatu?",
+	"visualeditor-wikitextconvert-message": "Itsasi duzun testuak formatua du. Wikitestu bihurtu ala testu soil gisa txertatu?",
+	"visualeditor-wikitextconvert-plain": "Testu soila erabili",
+	"visualeditor-wikitextconvert-convert": "Wikitestu bihurtu"
 }

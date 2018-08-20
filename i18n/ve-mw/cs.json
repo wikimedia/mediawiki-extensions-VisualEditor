@@ -23,7 +23,8 @@
 			"Teslaton",
 			"Martin Urbanec",
 			"Ilimanaq29",
-			"Evica"
+			"Evica",
+			"Korytaacheck"
 		]
 	},
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService pro server dokumentu není definováno; vizte https://www.mediawiki.org/wiki/Extension:VisualEditor",
@@ -350,6 +351,7 @@
 	"visualeditor-preference-tabs-remember-last": "Pamatujte si můj poslední editor",
 	"visualeditor-preference-visualdiffpage-description": "Povolit nový vizuální režim při porovnávání rozdílu mezi verzemi stránky.",
 	"visualeditor-preference-visualdiffpage-label": "Vizuální rozdíly verzí",
+	"visualeditor-rebase-client-export": "Export",
 	"visualeditor-recreate": "Zatímco tuto stránku editujete, byla smazána. Pokud ji chcete znovu založit, klikněte na „$1“.",
 	"visualeditor-redirect-description": "Přesměrování na $1",
 	"visualeditor-savedialog-error-badtoken": "Vaši editaci jsme nemohli zpracovat, protože vypršela vaše relace.",

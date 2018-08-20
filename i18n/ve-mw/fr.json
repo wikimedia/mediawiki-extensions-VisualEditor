@@ -434,6 +434,7 @@
 	"visualeditor-preference-tabs-remember-last": "Se souvenir du dernier éditeur utilisé",
 	"visualeditor-preference-visualdiffpage-description": "Activer le nouveau mode visuel sur les pages de différence de révision.",
 	"visualeditor-preference-visualdiffpage-label": "Différences visuelles",
+	"visualeditor-rebase-client-export": "Exporter",
 	"visualeditor-rebase-client-import": "Importer",
 	"visualeditor-rebase-client-import-name": "Titre de la page",
 	"visualeditor-recreate": "Cette page a été supprimée depuis que vous avez commencé la modification. Cliquez sur « $1 » pour la recréer.",

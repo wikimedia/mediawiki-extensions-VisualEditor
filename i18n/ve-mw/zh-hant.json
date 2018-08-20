@@ -410,6 +410,7 @@
 	"visualeditor-preference-tabs-remember-last": "記住我最後使用的編輯器",
 	"visualeditor-preference-visualdiffpage-description": "在修訂差異頁面啟用新的視覺化模式。",
 	"visualeditor-preference-visualdiffpage-label": "視覺化差異",
+	"visualeditor-rebase-client-export": "匯出",
 	"visualeditor-rebase-client-import": "匯入",
 	"visualeditor-rebase-client-import-name": "頁面標題",
 	"visualeditor-recreate": "此頁面在您編輯的這段期間已被刪除，請點選 \"$1\" 重新建立頁面。",

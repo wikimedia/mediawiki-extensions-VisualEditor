@@ -359,6 +359,7 @@
 	"visualeditor-preference-tabs-remember-last": "Ricorda il mio ultimo editor",
 	"visualeditor-preference-visualdiffpage-description": "Abilita la nuova modalità visuale nella revisione delle pagine delle differenze.",
 	"visualeditor-preference-visualdiffpage-label": "Differenze visuali",
+	"visualeditor-rebase-client-export": "Esporta",
 	"visualeditor-rebase-client-import": "Importa",
 	"visualeditor-rebase-client-import-name": "Titolo della pagina",
 	"visualeditor-recreate": "Questa pagina è stata eliminata dopo che hai iniziato a modificarla. Premi \"$1\" per ricrearla.",
