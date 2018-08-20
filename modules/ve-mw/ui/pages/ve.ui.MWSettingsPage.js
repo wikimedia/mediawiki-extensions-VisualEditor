@@ -178,7 +178,7 @@ ve.ui.MWSettingsPage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'settings' )
+			.setIcon( 'pageSettings' )
 			.setLabel( ve.msg( 'visualeditor-dialog-meta-settings-section' ) );
 	}
 };
