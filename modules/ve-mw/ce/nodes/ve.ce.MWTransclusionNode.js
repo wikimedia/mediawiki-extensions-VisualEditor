@@ -208,6 +208,15 @@ ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ce.MWTransclusionNode.prototype.filterRenderedDomElements = function ( domElements ) {
+	// We want to remove all styles and links which aren't from TemplateStyles.
+	var selector = 'style:not([data-mw-deduplicate^="TemplateStyles:"]), link:not([rel="mw-deduplicated-inline-style"][href^="mw-data:TemplateStyles:"])';
+	return $( domElements ).find( selector ).addBack( selector ).remove().end().end().toArray();
+};
+
+/**
  * Handle an unsuccessful response from the parser for the wikitext fragment.
  *
  * @param {jQuery.Deferred} deferred The promise object created by #generateContents

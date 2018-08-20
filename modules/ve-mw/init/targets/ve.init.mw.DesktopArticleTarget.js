@@ -670,7 +670,9 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			$( 'html' ).removeClass( 've-deactivating' );
 
 			// Move original content back out of the target
-			target.$element.parent().append( target.$originalContent.children() );
+			target.$element.parent().append( target.$originalContent.children() )
+				// Restore TemplateStyles within it
+				.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', false );
 			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
@@ -1212,6 +1214,10 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// Move all native content inside the target
 	// Exclude notification area to work around T143837
 	this.$originalContent.append( this.$element.siblings().not( '.mw-notification-area' ) );
+
+	// Disable TemplateStyles in originalContent
+	this.$originalContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', true );
+
 	this.$originalCategories = $( '#catlinks' ).clone( true );
 
 	// Mark every non-direct ancestor between editableContent and the container as uneditable
