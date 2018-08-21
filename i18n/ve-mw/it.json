@@ -66,6 +66,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titolo per la nuova sezione.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Quando salvi, imposta questo parametro al timestamp di quando la pagina è stata caricata. È utilizzato per rilevare i conflitti di modifica.",
 	"apihelp-visualeditoredit-param-summary": "Oggetto della modifica.",
+	"collabpad-import-subtitle": "Importato da $1",
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
 	"tooltip-ca-edit": "Modifica questa pagina utilizzando il wikitesto",
 	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",

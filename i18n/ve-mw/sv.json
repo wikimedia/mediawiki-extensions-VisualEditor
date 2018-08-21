@@ -20,7 +20,8 @@
 			"Warrakkk",
 			"Thurs",
 			"Bengtsson96",
-			"Rotsee"
+			"Rotsee",
+			"Umeaboy"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Fel uppstod när förfrågan skickades till MediaWiki API",
@@ -400,6 +401,7 @@
 	"visualeditor-preference-tabs-remember-last": "Kom ihåg min senaste redigerare",
 	"visualeditor-preference-visualdiffpage-description": "Aktivera det nya visuella läget på sidor med sidversionsskillnader.",
 	"visualeditor-preference-visualdiffpage-label": "Visuella skillnader",
+	"visualeditor-rebase-client-export": "Exportera",
 	"visualeditor-rebase-client-import": "Importera",
 	"visualeditor-rebase-client-import-name": "Sidtitel",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",

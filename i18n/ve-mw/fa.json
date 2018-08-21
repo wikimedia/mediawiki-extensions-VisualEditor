@@ -407,6 +407,7 @@
 	"visualeditor-preference-tabs-remember-last": "آخرین ویرایشگری که استفاده کردم را به خاطر بسپار",
 	"visualeditor-preference-visualdiffpage-description": "فعال‌کردن حالت نمایشی جدید بر روی نسخه تفاوت صفحه.",
 	"visualeditor-preference-visualdiffpage-label": "تفاوت دیداری",
+	"visualeditor-rebase-client-export": "برون‌ریزی",
 	"visualeditor-rebase-client-import": "درون‌ریزی",
 	"visualeditor-rebase-client-import-name": "عنوان صفحه",
 	"visualeditor-recreate": "صفحه از زمانی که شما مشغول ویرایش شدید حذف شد. برای ساخت مجدد صفحه \"$1\" را فشار دهید.",
