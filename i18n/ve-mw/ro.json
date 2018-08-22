@@ -12,7 +12,8 @@
 			"Wintereu",
 			"Reception123",
 			"Strainu",
-			"Andrei Stroe"
+			"Andrei Stroe",
+			"Kyouko"
 		]
 	},
 	"apihelp-visualeditor-description": "Întoarce pentru HTML5 pagina cu servicii Parsoid.",
@@ -39,6 +40,7 @@
 	"apihelp-visualeditoredit-param-page": "Pagina asupra căreia să se efectueze acțiunile.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Cand salvați, setați timestampul pentru revisia care a fost editată. Folosit ca să detecteze conflicturi de editare.",
 	"apihelp-visualeditoredit-param-summary": "Descrierea modificării.",
+	"collabpad-import-subtitle": "Importat de pe $1",
 	"tooltip-ca-createsource": "Creați codul sursă al acestei pagini",
 	"tooltip-ca-edit": "Modificați această pagină folosind text wiki",
 	"tooltip-ca-editsource": "Modificați codul sursă al acestei pagini",
@@ -293,6 +295,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "Oferă-mi întotdeauna editorul vizual atunci când este posibil",
 	"visualeditor-preference-tabs-prefer-wt": "Oferă-mi întotdeauna editorul de text wiki",
 	"visualeditor-preference-tabs-remember-last": "Reține ultimul editor folosit",
+	"visualeditor-rebase-client-export": "Exportare",
 	"visualeditor-recreate": "Pagina a fost ștearsă de la momentul în care ați început s-o modificați. Apăsați „$1” pentru a o recrea.",
 	"visualeditor-redirect-description": "Redirecționează către $1",
 	"visualeditor-savedialog-error-badtoken": "Nu v-am putut salva modificarea, deoarece sesiunea nu mai era validă.",
@@ -316,7 +319,6 @@
 	"visualeditor-saveerror-titleblacklist": "Eroare la salvarea paginii: titlu paginii se află pe lista neagră.",
 	"visualeditor-serializeerror": "Eroare la încărcarea datelor de pe server: $1.",
 	"visualeditor-settings-tool": "Setări pagină",
-	"visualeditor-shortcuts-insert": "Inserare",
 	"visualeditor-special-characters-group-other": "Adesea utilizate",
 	"visualeditor-toload": "Editorul va fi încărcat. Dacă tot vedeți acest mesaj după câteva secunde, vă rugăm să [$1 reîncărcați pagina].",
 	"visualeditor-toolbar-savedialog": "Salvare pagină",

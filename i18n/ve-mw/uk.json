@@ -420,7 +420,6 @@
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Помилка при завантаженні даних із сервера: $1.",
 	"visualeditor-settings-tool": "Налаштування сторінки",
-	"visualeditor-shortcuts-insert": "Вставити",
 	"visualeditor-special-characters-group-other": "Часто використовуване",
 	"visualeditor-templatesused-tool": "Використані шаблони",
 	"visualeditor-toload": "Зараз завантажиться редактор. Якщо через кілька секунд Ви все ще бачитимете це повідомлення, будь ласка, [$1 перезавантажте сторінку].",

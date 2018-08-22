@@ -449,7 +449,6 @@
 	"visualeditor-section-title-placeholder": "Assunto",
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
 	"visualeditor-settings-tool": "Configurações da página",
-	"visualeditor-shortcuts-insert": "Inserir",
 	"visualeditor-special-characters-group-other": "Usado frequentemente",
 	"visualeditor-templatesused-tool": "Predefinições usadas",
 	"visualeditor-toload": "O editor agora será carregado. Se você ainda vê esta mensagem após alguns segundos, por favor [$1 recarregue a página].",

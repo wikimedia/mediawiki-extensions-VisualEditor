@@ -387,7 +387,6 @@
 	"visualeditor-section-title-placeholder": "Předmět",
 	"visualeditor-serializeerror": "Chyba při načítání dat ze serveru: $1.",
 	"visualeditor-settings-tool": "Nastavení stránky",
-	"visualeditor-shortcuts-insert": "Vložit",
 	"visualeditor-special-characters-group-other": "Často používané",
 	"visualeditor-templatesused-tool": "Použité šablony",
 	"visualeditor-toload": "Editor se nyní načte. Pokud tuto zprávu stále vidíte po několika sekundách, prosím [$1 obnovte stránku].",

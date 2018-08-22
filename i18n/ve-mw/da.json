@@ -247,7 +247,6 @@
 	"visualeditor-saveerror": "Fejl under lagring af data til serveren: $1.",
 	"visualeditor-serializeerror": "Fejl ved indlæsning af data fra server: $1.",
 	"visualeditor-settings-tool": "Sideindstillinger",
-	"visualeditor-shortcuts-insert": "Indsæt",
 	"visualeditor-special-characters-group-other": "Ofte brugte",
 	"visualeditor-toolbar-savedialog": "Gem side",
 	"visualeditor-toolbar-savedialog-short": "Gem",

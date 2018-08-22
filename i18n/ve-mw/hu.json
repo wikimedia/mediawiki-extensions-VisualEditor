@@ -382,7 +382,6 @@
 	"visualeditor-section-title-placeholder": "Tárgy",
 	"visualeditor-serializeerror": "Hiba a kiszolgálóról való letöltés közben: $1",
 	"visualeditor-settings-tool": "Oldalbeállítások",
-	"visualeditor-shortcuts-insert": "Beillesztés",
 	"visualeditor-special-characters-group-other": "Gyakran használt",
 	"visualeditor-templatesused-tool": "Használt sablonok",
 	"visualeditor-toload": "A szerkesztő most be fog tölteni. Ha még pár másodperc múlva is ezt az üzenetet látod, [$1 töltsd újra a lapot].",

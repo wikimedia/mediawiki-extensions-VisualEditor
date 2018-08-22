@@ -473,7 +473,6 @@
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",
 	"visualeditor-settings-tool": "Параметры страницы",
-	"visualeditor-shortcuts-insert": "Вставить",
 	"visualeditor-special-characters-group-other": "Часто используемые",
 	"visualeditor-templatesused-tool": "Использованные шаблоны",
 	"visualeditor-toload": "Редактор сейчас загрузится. Если через несколько секунд вы будете по-прежнему видеть это сообщение, пожалуйста, [$1 перезагрузите страницу].",

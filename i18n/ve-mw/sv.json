@@ -439,7 +439,6 @@
 	"visualeditor-section-title-placeholder": "Ämne",
 	"visualeditor-serializeerror": "Fel uppstod vid inläsning av data från server: $1.",
 	"visualeditor-settings-tool": "Sidinställningar",
-	"visualeditor-shortcuts-insert": "Infoga",
 	"visualeditor-special-characters-group-other": "Används ofta",
 	"visualeditor-templatesused-tool": "Mallar som används",
 	"visualeditor-toload": "Editorn kommer nu laddas. Prova att [$1 ladda om sidan] om du fortfarande ser det här meddelandet efter några sekunder.",

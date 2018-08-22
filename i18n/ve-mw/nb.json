@@ -434,7 +434,6 @@
 	"visualeditor-section-title-placeholder": "Emne",
 	"visualeditor-serializeerror": "Feil ved henting av data fra serveren: $1.",
 	"visualeditor-settings-tool": "Sideinnstillinger",
-	"visualeditor-shortcuts-insert": "Sett inn",
 	"visualeditor-special-characters-group-other": "Ofte brukt",
 	"visualeditor-templatesused-tool": "Maler brukt",
 	"visualeditor-toload": "Editoren lastes nå inn. Hvis du fremdeles ser denne meldingen etter et par sekunder, prøv å [$1 laste siden på nytt].",

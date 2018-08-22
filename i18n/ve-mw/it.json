@@ -395,7 +395,6 @@
 	"visualeditor-section-title-placeholder": "Soggetto",
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-settings-tool": "Impostazioni pagina",
-	"visualeditor-shortcuts-insert": "Inserisci",
 	"visualeditor-special-characters-group-other": "Usato spesso",
 	"visualeditor-templatesused-tool": "Template utilizzati",
 	"visualeditor-toload": "Verrà caricato l'editor. Se vedi ancora questo messaggio dopo alcuni secondi, [$1 ricarica la pagina].",

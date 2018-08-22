@@ -240,7 +240,6 @@
 	"visualeditor-saveerror": "Greška prilikom čuvanja podataka na server: $1.",
 	"visualeditor-serializeerror": "Greška prilikom učitavanja podataka sa servera: $1.",
 	"visualeditor-settings-tool": "Podešavanje stranice",
-	"visualeditor-shortcuts-insert": "Ubaci",
 	"visualeditor-templatesused-tool": "Korišćeni šabloni",
 	"visualeditor-toolbar-savedialog": "Pretpregled/Čuvanje",
 	"visualeditor-toolbar-savedialog-short": "Sačuvaj",

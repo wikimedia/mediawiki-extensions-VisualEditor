@@ -320,7 +320,6 @@
 	"visualeditor-saveerror-titleblacklist": "Tõrge lehekülje salvestamisel: lehekülje pealkiri on mustas nimekirjas.",
 	"visualeditor-serializeerror": "Tõrge serverist andmete laadimisel: $1.",
 	"visualeditor-settings-tool": "Lehekülje sätted",
-	"visualeditor-shortcuts-insert": "Lisamine",
 	"visualeditor-special-characters-group-other": "Sageli vajaminev",
 	"visualeditor-templatesused-tool": "Kasutatud mallid",
 	"visualeditor-toload": "Toimetit laaditakse. Kui näed mõne sekundi pärast ikka seda sõnumit, siis palun [$1 laadi lehekülg uuesti].",

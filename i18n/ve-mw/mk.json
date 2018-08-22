@@ -425,7 +425,6 @@
 	"visualeditor-section-title-placeholder": "Наслов",
 	"visualeditor-serializeerror": "Грешка при вчитувањето на податоците од опслужувачот: $1.",
 	"visualeditor-settings-tool": "Поставки за страницата",
-	"visualeditor-shortcuts-insert": "Вметни",
 	"visualeditor-special-characters-group-other": "Често користени",
 	"visualeditor-templatesused-tool": "Користени шаблони",
 	"visualeditor-toload": "Уредникот сега ќе се вчита. Ако ја гледате поракава по неколку секунди, тогаш [$1 превчитајте ја страницата].",

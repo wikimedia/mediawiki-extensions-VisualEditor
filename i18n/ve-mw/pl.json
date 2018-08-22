@@ -409,7 +409,6 @@
 	"visualeditor-section-title-placeholder": "Temat",
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",
 	"visualeditor-settings-tool": "Ustawienia strony",
-	"visualeditor-shortcuts-insert": "Wstaw",
 	"visualeditor-special-characters-group-other": "Często używane",
 	"visualeditor-templatesused-tool": "Użyte szablony",
 	"visualeditor-toload": "Teraz uruchomi się edytor. Jeśli po kilku sekundach widzisz jeszcze ten komunikat, [$1 odśwież stronę].",

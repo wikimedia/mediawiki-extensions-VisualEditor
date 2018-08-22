@@ -441,7 +441,6 @@
 	"visualeditor-section-title-placeholder": "الموضوع",
 	"visualeditor-serializeerror": "خطأ في تحميل البيانات من الخادم: $1.",
 	"visualeditor-settings-tool": "إعدادات الصفحة",
-	"visualeditor-shortcuts-insert": "إدراج",
 	"visualeditor-special-characters-group-other": "مستخدمة عادة",
 	"visualeditor-templatesused-tool": "القوالب المستخدمة",
 	"visualeditor-toload": "المحرر سيُحمَّل الآن. إذا كنت لا تزال ترى هذه الرسالة بعد بضع ثوان، يرجى [$1 إعادة تحميل الصفحة].",

@@ -433,7 +433,6 @@
 	"visualeditor-section-title-placeholder": "Betreff",
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",
 	"visualeditor-settings-tool": "Seiteneinstellungen",
-	"visualeditor-shortcuts-insert": "Einfügen",
 	"visualeditor-special-characters-group-other": "Oft verwendet",
 	"visualeditor-templatesused-tool": "Verwendete Vorlagen",
 	"visualeditor-toload": "Der Editor wird jetzt geladen. Wenn du diese Meldung nach einigen Sekunden noch siehst, [$1 lade bitte die Seite] neu.",

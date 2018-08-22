@@ -422,7 +422,6 @@
 	"visualeditor-section-title-placeholder": "제목",
 	"visualeditor-serializeerror": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1.",
 	"visualeditor-settings-tool": "문서 설정",
-	"visualeditor-shortcuts-insert": "넣기",
 	"visualeditor-special-characters-group-other": "자주 사용됨",
 	"visualeditor-templatesused-tool": "사용된 틀",
 	"visualeditor-toload": "편집기가 지금 로드됩니다. 몇 초 후에도 이 메시지가 여전히 보이면, [$1 문서를 다시 로드]해 주십시오.",

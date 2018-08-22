@@ -446,7 +446,6 @@
 	"visualeditor-section-title-placeholder": "主题",
 	"visualeditor-serializeerror": "从服务器加载数据时出错：$1。",
 	"visualeditor-settings-tool": "页面设置",
-	"visualeditor-shortcuts-insert": "插入",
 	"visualeditor-special-characters-group-other": "经常使用",
 	"visualeditor-templatesused-tool": "使用的模板",
 	"visualeditor-toload": "现在将加载编辑器。如果您在几秒钟后仍然看见这条消息，请[$1 重新加载]页面。",

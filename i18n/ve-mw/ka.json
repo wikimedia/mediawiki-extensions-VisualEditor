@@ -336,7 +336,6 @@
 	"visualeditor-section-title-placeholder": "თემა",
 	"visualeditor-serializeerror": "შეცდომა სერვერიდან ინფორმაციის ჩატვრითვისას: $1.",
 	"visualeditor-settings-tool": "გვერდის პარამეტრები",
-	"visualeditor-shortcuts-insert": "ჩასმა",
 	"visualeditor-special-characters-group-other": "ხშირად გამოყენებადი",
 	"visualeditor-toload": "რედაქტორი ახლა ჩაიტვირთება. თუ რამდენიმე წამის შემდეგ, თქვენ დაინახავთ იგივე შეტყობინებას, გთხოვთ, [$1 გადატვირთეთ გვერდი].",
 	"visualeditor-toolbar-savedialog": "გვერდის შენახვა",

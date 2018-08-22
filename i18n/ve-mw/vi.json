@@ -411,7 +411,6 @@
 	"visualeditor-section-title-placeholder": "Tiêu đề",
 	"visualeditor-serializeerror": "Lỗi khi tải dữ liệu từ máy chủ: $1.",
 	"visualeditor-settings-tool": "Tùy chọn trang",
-	"visualeditor-shortcuts-insert": "Chèn",
 	"visualeditor-special-characters-group-other": "Sử dụng thường xuyên",
 	"visualeditor-templatesused-tool": "Bản mẫu được sử dụng",
 	"visualeditor-toload": "Trình soạn thảo sẽ tải bây giờ. Nếu một chốc nữa thông điệp này vẫn xuất hiện, xin hãy [$1 tải lại trang].",

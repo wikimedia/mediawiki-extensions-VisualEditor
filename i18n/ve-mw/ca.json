@@ -346,7 +346,6 @@
 	"visualeditor-section-title-placeholder": "Tema",
 	"visualeditor-serializeerror": "Error en carregar dades des del servidor: $1.",
 	"visualeditor-settings-tool": "Configuració de la pàgina",
-	"visualeditor-shortcuts-insert": "Insereix",
 	"visualeditor-special-characters-group-other": "Més utilitzats",
 	"visualeditor-templatesused-tool": "Plantilles utilitzades",
 	"visualeditor-toload": "L'editor ara es carregarà. Si encara veieu aquest missatge després que uns quants segons, si us plau [$1 carregueu de nou]",

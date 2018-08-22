@@ -322,7 +322,6 @@
 	"visualeditor-section-title-placeholder": "Predmet",
 	"visualeditor-serializeerror": "Pogreška pri učitavanju podataka s poslužitelja: $1.",
 	"visualeditor-settings-tool": "Postavke stranice",
-	"visualeditor-shortcuts-insert": "Umetni",
 	"visualeditor-special-characters-group-other": "Često korišten",
 	"visualeditor-templatesused-tool": "Predlošci u uporabi",
 	"visualeditor-toload": "Učitavanje uređivača. Ako i nakon nekoliko sekundi budete vidjeli ovu poruku, molimo [$1 ponovno učitajte stranicu].",

@@ -356,7 +356,6 @@
 	"visualeditor-section-title-placeholder": "विषय",
 	"visualeditor-serializeerror": "सर्वर से डाटा लोड करने में त्रुटि: $1।",
 	"visualeditor-settings-tool": "पृष्ठ विकल्प",
-	"visualeditor-shortcuts-insert": "जोड़ें",
 	"visualeditor-special-characters-group-other": "प्रायः प्रयुक्त",
 	"visualeditor-templatesused-tool": "इस्तेमाल किया गया साँचा",
 	"visualeditor-toload": "संपादक अभी लोड हो रहा है। यदि कुछ मिनट तक यह संदेश दिखाई दे तो इसे [$1 फिर खोलें]।",
