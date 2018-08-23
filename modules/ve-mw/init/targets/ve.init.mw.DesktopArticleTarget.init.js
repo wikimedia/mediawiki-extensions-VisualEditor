@@ -1220,6 +1220,8 @@
 		if (
 			pageCanLoadEditor &&
 			showWikitextWelcome &&
+			// At least one editor is available (T201928)
+			( init.isVisualAvailable || init.isWikitextAvailable || $( '#wpTextbox1' ).length ) &&
 			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
 			[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
 			!urlSaysHideWelcome &&
