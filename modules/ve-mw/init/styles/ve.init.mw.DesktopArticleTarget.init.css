@@ -33,9 +33,9 @@
 	display: none;
 }
 
-/* The surface needs to be measurable while being setup
-   as some nodes render based on their dimensions, e.g.
-   ve.ce.FocusableNode#updateInvisibleIcon */
+/* The surface needs to be measurable but not visible while
+   being setup as some nodes render based on their dimensions,
+   e.g. ve.ce.FocusableNode#updateInvisibleIcon */
 .ve-activating .ve-ui-surface {
 	height: 0;
 	padding: 0 !important; /* stylelint-disable-line declaration-no-important */
