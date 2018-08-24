@@ -103,6 +103,15 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 	}
 };
 
+ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
+	// Parent method
+	ve.ui.MWTemplatePlaceholderPage.super.prototype.focus.apply( this, arguments );
+
+	// HACK: Set the width of the lookupMenu to the width of the input
+	// TODO: This should be handled upstream in OOUI
+	this.addTemplateInput.lookupMenu.width = this.addTemplateInput.$input[ 0 ].clientWidth;
+};
+
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	var part, name,
 		transclusion = this.placeholder.getTransclusion(),
