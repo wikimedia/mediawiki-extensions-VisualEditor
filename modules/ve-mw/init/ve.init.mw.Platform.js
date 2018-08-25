@@ -48,6 +48,11 @@ ve.init.mw.Platform.prototype.getUnanchoredExternalLinkUrlProtocolsRegExp = func
 	return this.unanchoredExternalLinkUrlProtocolsRegExp;
 };
 
+/** @inheritdoc */
+ve.init.mw.Platform.prototype.notify = function ( message, title, options ) {
+	return mw.notify( message, ve.extendObject( { title: title }, options ) );
+};
+
 /**
  * Regular expression matching RESTBase IDs
  *

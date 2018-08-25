@@ -510,15 +510,17 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		// Restore auto-saved transactions if document state was recovered
 		try {
 			surfaceModel.restoreChanges();
-			mw.notify( ve.msg( 'visualeditor-autosave-recovered-text' ), {
-				title: ve.msg( 'visualeditor-autosave-recovered-title' )
-			} );
+			ve.init.platform.notify(
+				ve.msg( 'visualeditor-autosave-recovered-text' ),
+				ve.msg( 'visualeditor-autosave-recovered-title' )
+			);
 		} catch ( e ) {
 			mw.log.warn( e );
-			mw.notify( ve.msg( 'visualeditor-autosave-not-recovered-text' ), {
-				title: ve.msg( 'visualeditor-autosave-not-recovered-title' ),
-				type: 'error'
-			} );
+			ve.init.platform.notify(
+				ve.msg( 'visualeditor-autosave-not-recovered-text' ),
+				ve.msg( 'visualeditor-autosave-not-recovered-title' ),
+				{ type: 'error' }
+			);
 		}
 	} else {
 		// ...otherwise store this document state for later recovery
