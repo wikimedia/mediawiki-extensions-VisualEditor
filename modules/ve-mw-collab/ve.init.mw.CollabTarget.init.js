@@ -13,7 +13,7 @@
 		modules = [ OO.ui.isMobile() ? 'ext.visualEditor.collabTarget.mobile' : 'ext.visualEditor.collabTarget.desktop' ]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) ),
-		loadingPromise = mw.loader.using( modules ),
+		modulePromise = mw.loader.using( modules ),
 		progressBar = OO.ui.infuse( $( '.ve-init-mw-collabTarget-loading' ) ),
 		documentNameInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameInput' ) ),
 		documentNameButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) ),
@@ -41,7 +41,10 @@
 		progressBar.toggle( true );
 		form.toggle( false );
 
-		loadingPromise.done( function () {
+		modulePromise.done( function () {
+			var dummySurface, surfaceModel,
+				progressDeferred = $.Deferred();
+
 			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle: importTitle } );
 
 			$( 'body' ).addClass( 've-activated ve-active' );
@@ -51,7 +54,112 @@
 			target.transformPage();
 			$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
-			target.documentReady( ve.createDocumentFromHtml( '' ) );
+			// Add a dummy surface while the doc is loading
+			dummySurface = target.addSurface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
+			dummySurface.setDisabled( true );
+
+			// TODO: Create the correct model surface type (ve.ui.Surface#createModel)
+			surfaceModel = new ve.dm.Surface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
+			surfaceModel.createSynchronizer(
+				title.toString(),
+				{
+					server: conf.rebaserUrl,
+					// TODO: server could communicate with MW (via oauth?) to know the
+					// current-user's name. Disable changing name if logged in?
+					// Communicate an I-am-a-valid-user flag to other clients?
+					defaultName: mw.user.isAnon() ? mw.user.getName() : undefined
+				}
+			);
+
+			dummySurface.createProgress( progressDeferred.promise(), ve.msg( 'visualeditor-rebase-client-connecting' ), true );
+
+			surfaceModel.synchronizer.once( 'initDoc', function () {
+				var initPromise, title;
+
+				progressDeferred.resolve();
+				target.clearSurfaces();
+				// Don't add the surface until the history has been applied
+				target.addSurface( surfaceModel );
+				// target.getSurface().getView().focus();
+
+				if ( target.importTitle && !surfaceModel.getDocument().getCompleteHistoryLength() ) {
+					initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
+						var doc, dmDoc, fragment,
+							data = response.visualeditor;
+
+						if ( data && data.content ) {
+							doc = target.constructor.static.parseDocument( data.content );
+							dmDoc = target.constructor.static.createModelFromDom( doc );
+							fragment = surfaceModel.getLinearFragment( new ve.Range( 0, 2 ) );
+							fragment.insertDocument( dmDoc );
+
+							target.etag = data.etag;
+							target.baseTimeStamp = data.basetimestamp;
+							target.startTimeStamp = data.starttimestamp;
+							target.revid = data.oldid;
+
+							// Store the document metadata as a hidden meta item
+							fragment.collapseToEnd().insertContent( [
+								{
+									type: 'alienMeta',
+									attributes: {
+										importedDocument: {
+											title: target.importTitle.toString(),
+											etag: target.etag,
+											baseTimeStamp: target.baseTimeStamp,
+											startTimeStamp: target.startTimeStamp,
+											revid: target.revid
+										}
+									}
+								},
+								{ type: '/alienMeta' }
+							] );
+						} else {
+							// Import failed
+							return $.Deferred().reject( 'No content for ' + target.importTitle ).promise();
+						}
+					} );
+				} else {
+					// No import, or history already exists
+					initPromise = $.Deferred().resolve().promise();
+
+					// Look for import metadata in document
+					surfaceModel = target.getSurface().getModel();
+					surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
+						var importedDocument = item.getAttribute( 'importedDocument' );
+						if ( importedDocument ) {
+							target.importTitle = mw.Title.newFromText( importedDocument.title );
+							target.etag = importedDocument.etag;
+							target.baseTimeStamp = importedDocument.baseTimeStamp;
+							target.startTimeStamp = importedDocument.startTimeStamp;
+							target.revid = importedDocument.revid;
+							return true;
+						}
+					} );
+				}
+				initPromise.fail( function ( err ) {
+					setTimeout( function () {
+						throw new Error( err );
+					} );
+				} );
+				initPromise.always( function () {
+					surfaceModel.selectFirstContentOffset();
+					// Resolve progress bar
+					// importDeferred.resolve();
+					if ( ( title = target.getImportTitle() ) ) {
+						$( '#contentSub' ).html(
+							ve.htmlMsg(
+								'collabpad-import-subtitle',
+								$( '<a>' ).attr( 'href', title.getUrl() ).text( title.getMainText() )
+							)
+						);
+						ve.targetLinksToNewWindow( $( '#contentSub' )[ 0 ] );
+					} else {
+						$( '#contentSub' ).empty();
+					}
+				} );
+			} );
+
 		} ).always( function () {
 			form.toggle( false );
 			progressBar.toggle( false );

@@ -44,6 +44,11 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
 	this.$editableContent = $( '#mw-content-text' );
 
+	this.toolbarExportButton = new OO.ui.ButtonWidget( {
+		label: ve.msg( 'visualeditor-rebase-client-export' ),
+		flags: [ 'progressive', 'primary' ]
+	} ).connect( this, { click: 'onExportButtonClick' } );
+
 	// Initialization
 	this.$element.addClass( 've-init-mw-articleTarget ve-init-mw-desktopArticleTarget ve-init-mw-collabTarget' ).append( this.$originalContent );
 };
@@ -107,26 +112,11 @@ ve.init.mw.CollabTarget.prototype.restorePage = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.CollabTarget.prototype.surfaceReady = function () {
-	var exportButton,
-		surfaceView = this.getSurface().getView(),
-		toolbar = this.getToolbar();
-
+ve.init.mw.CollabTarget.prototype.setupToolbar = function () {
 	// Parent method
-	ve.init.mw.CollabTarget.super.prototype.surfaceReady.apply( this, arguments );
+	ve.init.mw.CollabTarget.super.prototype.setupToolbar.apply( this, arguments );
 
-	this.getSurface().getView().focus();
-
-	exportButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-rebase-client-export' ),
-		flags: [ 'progressive', 'primary' ]
-	} );
-	exportButton.connect( this, { click: 'onExportButtonClick' } );
-
-	toolbar.$actions.append( exportButton.$element );
-	toolbar.initialize();
-
-	surfaceView.focus();
+	this.getToolbar().$actions.append( this.toolbarExportButton.$element );
 };
 
 /**
@@ -142,121 +132,23 @@ ve.init.mw.CollabTarget.prototype.onExportButtonClick = function () {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
-	this.toolbar.$element.addClass(
+	var toolbar = this.getToolbar();
+
+	// Parent method
+	ve.init.mw.CollabTarget.super.prototype.attachToolbar.apply( this, arguments );
+
+	toolbar.$element.addClass(
 		've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-open ve-init-mw-desktopArticleTarget-toolbar-opened'
 	);
-	this.$element.prepend( this.toolbar.$element );
-	this.toolbar.initialize();
+	this.$element.prepend( toolbar.$element );
 };
 
 /**
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
-	var synchronizer, surfaceView,
-		importDeferred = $.Deferred(),
-		target = this;
-
 	if ( surface !== this.surface ) {
 		this.$editableContent.after( surface.$element );
-
-		surfaceView = surface.getView();
-
-		synchronizer = new ve.dm.SurfaceSynchronizer(
-			surface.getModel(),
-			this.title.toString(),
-			{
-				server: this.rebaserUrl,
-				// TODO: server could communicate with MW (via oauth?) to know the
-				// current-user's name. Disable changing name if logged in?
-				// Communicate an I-am-a-valid-user flag to other clients?
-				defaultName: mw.user.isAnon() ? mw.user.getName() : undefined
-			}
-		);
-
-		synchronizer.once( 'initDoc', function () {
-			var surfaceModel, initPromise, title;
-
-			if ( target.importTitle && !surface.getModel().getDocument().getCompleteHistoryLength() ) {
-				initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
-					var doc, dmDoc, fragment,
-						data = response.visualeditor;
-
-					if ( data && data.content ) {
-						doc = target.constructor.static.parseDocument( data.content );
-						dmDoc = target.constructor.static.createModelFromDom( doc );
-						fragment = surface.getModel().getLinearFragment( new ve.Range( 0, 2 ) );
-						fragment.insertDocument( dmDoc );
-
-						target.etag = data.etag;
-						target.baseTimeStamp = data.basetimestamp;
-						target.startTimeStamp = data.starttimestamp;
-						target.revid = data.oldid;
-
-						// Store the document metadata as a hidden meta item
-						fragment.collapseToEnd().insertContent( [
-							{
-								type: 'alienMeta',
-								attributes: {
-									importedDocument: {
-										title: target.importTitle.toString(),
-										etag: target.etag,
-										baseTimeStamp: target.baseTimeStamp,
-										startTimeStamp: target.startTimeStamp,
-										revid: target.revid
-									}
-								}
-							},
-							{ type: '/alienMeta' }
-						] );
-						surface.getModel().selectFirstContentOffset();
-					} else {
-						// Import failed
-						return $.Deferred().reject( 'No content for ' + target.importTitle ).promise();
-					}
-				} );
-			} else {
-				// No import, or history already exists
-				initPromise = $.Deferred().resolve().promise();
-
-				// Look for import metadata in document
-				surfaceModel = target.getSurface().getModel();
-				surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
-					var importedDocument = item.getAttribute( 'importedDocument' );
-					if ( importedDocument ) {
-						target.importTitle = mw.Title.newFromText( importedDocument.title );
-						target.etag = importedDocument.etag;
-						target.baseTimeStamp = importedDocument.baseTimeStamp;
-						target.startTimeStamp = importedDocument.startTimeStamp;
-						target.revid = importedDocument.revid;
-						return true;
-					}
-				} );
-			}
-			initPromise.fail( function ( err ) {
-				setTimeout( function () {
-					throw new Error( err );
-				} );
-			} );
-			initPromise.always( function () {
-				surface.getModel().selectFirstContentOffset();
-				// Resolve progress bar
-				importDeferred.resolve();
-				if ( ( title = target.getImportTitle() ) ) {
-					$( '#contentSub' ).html(
-						ve.htmlMsg(
-							'collabpad-import-subtitle',
-							$( '<a>' ).attr( 'href', title.getUrl() ).text( title.getMainText() )
-						)
-					);
-					ve.targetLinksToNewWindow( $( '#contentSub' )[ 0 ] );
-				} else {
-					$( '#contentSub' ).empty();
-				}
-			} );
-		} );
-
-		surfaceView.setSynchronizer( synchronizer, importDeferred.promise() );
 	}
 
 	// Parent method
