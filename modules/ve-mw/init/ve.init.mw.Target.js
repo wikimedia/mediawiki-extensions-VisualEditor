@@ -230,7 +230,7 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
  * @param {HTMLDocument} doc HTML document
  */
 ve.init.mw.Target.prototype.documentReady = function ( doc ) {
-	this.setupSurface( doc, this.surfaceReady.bind( this ) );
+	this.setupSurface( doc );
 };
 
 /**
@@ -355,9 +355,8 @@ ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
  *
  * @method
  * @param {HTMLDocument} doc HTML document
- * @param {Function} [callback] Callback to call when done
  */
-ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
+ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
 	var target = this;
 	setTimeout( function () {
 		// Build model
@@ -373,36 +372,49 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc, callback ) {
 		target.track( 'trace.buildModelTree.exit' );
 
 		setTimeout( function () {
-			var surface;
-			// Clear dummy surfaces
-			target.clearSurfaces();
-
-			// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
-			target.track( 'trace.createSurface.enter' );
-			surface = target.addSurface( dmDoc );
-			// Add classes specific to surfaces attached directly to the target,
-			// as opposed to TargetWidget surfaces
-			surface.$element.addClass( 've-init-mw-target-surface' );
-			target.track( 'trace.createSurface.exit' );
-
-			target.dummyToolbar = false;
-
-			target.setSurface( surface );
-
-			setTimeout( function () {
-				// Initialize surface
-				target.track( 'trace.initializeSurface.enter' );
-
-				target.active = true;
-				// Now that the surface is attached to the document and ready,
-				// let it initialize itself
-				surface.initialize();
-
-				target.track( 'trace.initializeSurface.exit' );
-				setTimeout( callback );
-			} );
+			target.addSurface( doc );
 		} );
 	} );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Target.prototype.addSurface = function () {
+	var surface,
+		target = this;
+
+	// Clear dummy surfaces
+	// TODO: Move to DesktopArticleTarget
+	this.clearSurfaces();
+
+	// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
+	this.track( 'trace.createSurface.enter' );
+	// Parent method
+	surface = ve.init.mw.Target.super.prototype.addSurface.apply( this, arguments );
+	// Add classes specific to surfaces attached directly to the target,
+	// as opposed to TargetWidget surfaces
+	surface.$element.addClass( 've-init-mw-target-surface' );
+	this.track( 'trace.createSurface.exit' );
+
+	this.dummyToolbar = false;
+
+	this.setSurface( surface );
+
+	setTimeout( function () {
+		// Initialize surface
+		target.track( 'trace.initializeSurface.enter' );
+
+		target.active = true;
+		// Now that the surface is attached to the document and ready,
+		// let it initialize itself
+		surface.initialize();
+
+		target.track( 'trace.initializeSurface.exit' );
+		target.surfaceReady();
+	} );
+
+	return surface;
 };
 
 /**
