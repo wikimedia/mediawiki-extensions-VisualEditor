@@ -448,7 +448,8 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.setupLocalNoticeMessages();
 
 		// Create dummy surface to show toolbar while loading
-		surface = this.addSurface( new ve.dm.Document( [
+		// Call ve.init.Target directly to avoid firing surfaceReady
+		surface = ve.init.Target.prototype.addSurface.call( this, new ve.dm.Document( [
 			{ type: 'paragraph' }, { type: '/paragraph' },
 			{ type: 'internalList' }, { type: '/internalList' }
 		] ) );
