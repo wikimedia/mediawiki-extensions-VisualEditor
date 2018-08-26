@@ -300,8 +300,8 @@
 	"visualeditor-mweditmodeve-progress": "Przełączanie do edycji wizualnej...",
 	"visualeditor-mweditmodeve-showagain": "Nie pokazuj ponownie tego komunikatu",
 	"visualeditor-mweditmodeve-title": "Przełączyć na edycję w edytorze wizualnym?",
-	"visualeditor-mweditmodeve-tool-current": "Edycja w edytorze wizualnym",
-	"visualeditor-mweditmodeve-tool-unavailable": "Edycja wizualna nie jest tutaj dostępna",
+	"visualeditor-mweditmodeve-tool-current": "Edytowanie w edytorze wizualnym",
+	"visualeditor-mweditmodeve-tool-unavailable": "Edycja wizualna jest tutaj niedostępna",
 	"visualeditor-mweditmodeve-warning": "Przełączasz się na edycję w edytorze wizualnym.\nCzy chcesz kontynuować?",
 	"visualeditor-mweditmodewt-popup-body": "Możesz przełączyć się z powrotem na edycję kodu źródłowego w dowolnym momencie, klikając na tę ikonę.",
 	"visualeditor-mweditmodewt-popup-title": "Przełączyłeś na tryb edycji wizualnej",
@@ -424,6 +424,7 @@
 	"visualeditor-wikitext-warning": "Używasz teraz edytora wizualnego – a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego, klikając przycisk przełączający.",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego",
 	"visualeditor-wikitextconvert-title": "Przekonwertować formatowanie do wikitekstu?",
+	"visualeditor-wikitextconvert-message": "Wklejana treść zawiera formatowanie. Czy ma zostać ono przekonwertowane na wikikod czy wklejone jako czysty tekst?",
 	"visualeditor-wikitextconvert-plain": "Użyj zwykłego tekstu",
 	"visualeditor-wikitextconvert-convert": "Przekonwertuj do wikitekstu"
 }
