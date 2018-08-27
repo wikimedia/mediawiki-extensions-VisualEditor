@@ -18,5 +18,7 @@
 	"visualeditor-dialog-meta-languages-label": "ဘာသာစကားများ",
 	"visualeditor-dialog-template-title": "တမ်းပလိတ်",
 	"visualeditor-dialogbutton-template-tooltip": "တမ်းပလိတ်",
-	"visualeditor-languages-tool": "ဘာသာစကားများ"
+	"visualeditor-formatdropdown-format-mw-heading1": "စာမျက်နှာ ခေါင်းစဉ်",
+	"visualeditor-languages-tool": "ဘာသာစကားများ",
+	"visualeditor-mweditmodesource-warning-cancel": "မလုပ်တော့ပါ"
 }
