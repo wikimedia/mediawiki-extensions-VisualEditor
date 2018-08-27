@@ -281,7 +281,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		return ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget( valueInputConfig );
 	} else if ( type !== 'line' ) {
 		this.rawValueInput = true;
-		return new OO.ui.MultilineTextInputWidget( valueInputConfig );
+		return new ve.ui.MWLazyMultilineTextInputWidget( valueInputConfig );
 	}
 
 	return new OO.ui.TextInputWidget( valueInputConfig );
