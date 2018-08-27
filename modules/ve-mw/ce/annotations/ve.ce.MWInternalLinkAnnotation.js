@@ -16,15 +16,13 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWInternalLinkAnnotation = function VeCeMWInternalLinkAnnotation() {
-	var annotation = this;
 	// Parent constructor
 	ve.ce.MWInternalLinkAnnotation.super.apply( this, arguments );
 
 	// DOM changes
 	this.$anchor.addClass( 've-ce-mwInternalLinkAnnotation' );
 
-	// Style based on link cache information
-	ve.init.platform.linkCache.styleElement( this.model.getAttribute( 'lookupTitle' ), annotation.$anchor, this.model.getFragment() );
+	this.updateClasses();
 };
 
 /* Inheritance */
@@ -42,6 +40,21 @@ ve.ce.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
  */
 ve.ce.MWInternalLinkAnnotation.static.getDescription = function ( model ) {
 	return model.getAttribute( 'title' );
+};
+
+/* Methods */
+
+/**
+ * Update CSS classes form model state
+ */
+ve.ce.MWInternalLinkAnnotation.prototype.updateClasses = function () {
+	var model = this.getModel();
+
+	ve.init.platform.linkCache.styleElement(
+		model.getAttribute( 'lookupTitle' ),
+		this.$anchor,
+		!!model.getFragment()
+	);
 };
 
 /* Registration */
