@@ -16,9 +16,13 @@
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-meta-categories-missing": "ဒီခေါင်းစီးအောက်မှာ ဖော်ပြချက်စာမျက်နှာ မပါရှိပါ။",
 	"visualeditor-dialog-meta-languages-label": "ဘာသာစကားများ",
+	"visualeditor-dialog-meta-settings-index-force": "လုပ်မည်",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "လုပ်မည်",
 	"visualeditor-dialog-template-title": "တမ်းပလိတ်",
 	"visualeditor-dialogbutton-template-tooltip": "တမ်းပလိတ်",
 	"visualeditor-formatdropdown-format-mw-heading1": "စာမျက်နှာ ခေါင်းစဉ်",
 	"visualeditor-languages-tool": "ဘာသာစကားများ",
-	"visualeditor-mweditmodesource-warning-cancel": "မလုပ်တော့ပါ"
+	"visualeditor-mweditmodesource-warning-cancel": "မလုပ်တော့ပါ",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "ရင်းမြစ်",
+	"visualeditor-section-title-placeholder": "အကြောင်းအရာ"
 }

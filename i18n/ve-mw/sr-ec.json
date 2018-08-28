@@ -354,6 +354,7 @@
 	"visualeditor-preference-tabs-remember-last": "Запамти мој последњи уређивач",
 	"visualeditor-preference-visualdiffpage-description": "Омогући нови визуелни режим на страницама разлика ревизија.",
 	"visualeditor-preference-visualdiffpage-label": "Визуелне разлике",
+	"visualeditor-rebase-client-export": "Извоз",
 	"visualeditor-rebase-client-import": "Увези",
 	"visualeditor-rebase-client-import-name": "Наслов странице",
 	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
