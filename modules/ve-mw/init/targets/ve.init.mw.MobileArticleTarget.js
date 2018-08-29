@@ -103,8 +103,7 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
  * Handle surface blur events
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
-	var toolbar = this.getToolbar();
-	toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
+	this.getToolbar().$group.addClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
 	this.pageToolbar.$element.removeClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
 };
 
@@ -112,8 +111,7 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
  * Handle surface focus events
  */
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
-	var toolbar = this.getToolbar();
-	toolbar.$group.removeClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
+	this.getToolbar().$group.removeClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
 	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
 };
 
@@ -218,6 +216,9 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
 
 	this.pageToolbar.$group.addClass( 've-init-mw-mobileArticleTarget-pageTools' );
 	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
+
+	// Don't wait for the first surface focus/blur event to hide one of the toolbars
+	this.onSurfaceBlur();
 };
 
 /**
