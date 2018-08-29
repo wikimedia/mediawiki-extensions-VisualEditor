@@ -325,6 +325,7 @@
 	"visualeditor-preference-tabs-remember-last": "Mäi leschten Auteur verhalen",
 	"visualeditor-preference-visualdiffpage-description": "Den neie visuelle Modus fir d'Säite mat de Versiounsënnerscheeder aktivéieren.",
 	"visualeditor-preference-visualdiffpage-label": "Visuell Ënnerscheeder",
+	"visualeditor-rebase-client-export": "Exportéieren",
 	"visualeditor-rebase-client-import": "Importéieren",
 	"visualeditor-rebase-client-import-name": "Titel vun der Säit",
 	"visualeditor-recreate": "D'Säit gouf geläscht zanter datt Dir ugefaang hutt se z'änneren. Klickt op \"$1\" fir se nees unzeleeën.",
