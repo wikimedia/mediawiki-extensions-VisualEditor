@@ -93,12 +93,6 @@
 					"<",
 					12
 				]
-			],
-			"msie": [
-				[
-					"<",
-					11
-				]
 			]
 		},
 		"VisualEditorEnableTocWidget": false,
