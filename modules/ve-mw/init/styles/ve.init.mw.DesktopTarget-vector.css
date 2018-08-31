@@ -36,6 +36,9 @@
 
 .ve-ui-surface .ve-ui-surface-placeholder {
 	opacity: 1;
+}
+
+.ve-ui-surface .ve-ui-surface-placeholder > * {
 	color: #72777d;
 }
 
