@@ -2272,6 +2272,7 @@
 			"messages": [
 				"visualeditor-dialog-media-alttext-section",
 				"visualeditor-dialog-media-content-filename",
+				"visualeditor-dialog-media-content-description-link",
 				"visualeditor-dialog-media-content-section",
 				"visualeditor-mwgallerydialog-caption-field-label",
 				"visualeditor-mwgallerydialog-caption-input-placeholder",
