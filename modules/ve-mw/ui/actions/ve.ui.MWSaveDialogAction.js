@@ -183,6 +183,7 @@ ve.ui.commandRegistry.register(
 				trigger: shortcut.command,
 				label: shortcut.label
 			} );
+			ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote = ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote || [];
 			ve.ui.MWCommandHelpDialog.static.commandGroups.other.demote.push( shortcut.command );
 		}
 	} );
