@@ -372,7 +372,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
 		target.track( 'trace.buildModelTree.exit' );
 
 		setTimeout( function () {
-			target.addSurface( doc );
+			target.addSurface( dmDoc );
 		} );
 	} );
 };
