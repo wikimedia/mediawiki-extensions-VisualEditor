@@ -35,7 +35,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 		return 've.init.platform.addParsedMessages(' . FormatJson::encode(
 				$parsedMessages,
 				ResourceLoader::inDebugMode()
-			) . ');'.
+			) . ');' .
 			've.init.platform.addMessages(' . FormatJson::encode(
 				$plainMessages,
 				ResourceLoader::inDebugMode()
