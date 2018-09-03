@@ -72,6 +72,16 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 				expectedRangeOrSelection: new ve.Range( 5 ),
 				expectedHtml: '<p><span typeof="mw:Entity">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span></p>',
 				msg: 'RESTBase IDs stripped'
+			},
+			{
+				documentHtml: '<p></p>',
+				rangeOrSelection: new ve.Range( 1 ),
+				pasteHtml: '<span typeof="mw:Entity" id="mwAB">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span>',
+				pasteTargetHtml: '<span>-</span><span>-</span>',
+				fromVe: true,
+				expectedRangeOrSelection: new ve.Range( 5 ),
+				expectedHtml: '<p><span typeof="mw:Entity">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span></p>',
+				msg: 'RESTBase IDs still stripped if used when important attributes dropped'
 			}
 		];
 
