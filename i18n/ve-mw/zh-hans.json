@@ -26,7 +26,8 @@
 			"EagerLin",
 			"Yejianfei",
 			"飞舞回堂前",
-			"Hanyanbo98"
+			"Hanyanbo98",
+			"夢蝶葬花"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "查询MediaWiki API时出错",
@@ -409,6 +410,7 @@
 	"visualeditor-preference-tabs-remember-last": "记住我上次使用的编辑器",
 	"visualeditor-preference-visualdiffpage-description": "在修订差异页面启用新的可视化模式。",
 	"visualeditor-preference-visualdiffpage-label": "可视化差异",
+	"visualeditor-rebase-client-export": "导出",
 	"visualeditor-rebase-client-import": "导入",
 	"visualeditor-rebase-client-import-name": "页面标题",
 	"visualeditor-recreate": "此页面自从您开始编辑以来已被删除。请点击“$1”以重新创建。",

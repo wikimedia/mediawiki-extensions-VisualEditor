@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Geopoet",
-			"Sky Harbor"
+			"Sky Harbor",
+			"ShimunUfesoj"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Biswal-na-Paraliwat]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Biswal-na-Pagliwat]]",
 	"tag-visualeditor-description": "An pagliwat pinaghimo na ginagamit an [[{{MediaWiki:visualeditor-descriptionpagelink}}|Biswal-na-Paraliwat]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Biswal-na-Paraliwat: Rikisaron]]",
 	"tag-visualeditor-needcheck-description": "An pagliwat pinaghimo na ginagamit an [[{{MediaWiki:visualeditor-descriptionpagelink}}|Biswal na Paraliwat]] kun saen an sistema namangnohan na an wikiteksto posibleng nagkaigwa nin bakong pinagtutuyong mga kaliwatan.",

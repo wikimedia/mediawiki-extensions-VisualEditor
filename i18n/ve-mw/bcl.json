@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Geopoet",
-			"Sky Harbor"
+			"Sky Harbor",
+			"ShimunUfesoj"
 		]
 	},
 	"tooltip-ca-createsource": "Muknaon an kodigong gikanan kaining pahina",
@@ -11,6 +12,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Ining paraliwat yaon pa sa 'beta'. Sa pagribay pasiring sa ginikanan kaining pagliliwat sa arinman na pagkakataon na dae mawawara an saimong mga kaliwatan, bukasi na pahulog na lista sunod sa \"{{int:visualeditor-toolbar-savedialog}}\" asin pilion an \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Ika naggagamit nin sarong parabuklat na bakong opisyal na suportado kaining paraliwat.",
+	"visualeditor-ca-createlocaldescriptionsource": "Idugang an lokal na deskripsyon",
 	"visualeditor-ca-createsource": "Muknaon an gikanan",
 	"visualeditor-ca-editsource": "Liwaton an gikanan",
 	"visualeditor-ca-editsource-section": "liwaton an gikanan",
