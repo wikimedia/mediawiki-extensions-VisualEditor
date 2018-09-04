@@ -312,10 +312,10 @@
 
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
 		if ( mw.user.isAnon() ) {
-			return $.Deferred().resolve();
+			return $.Deferred().resolve().promise();
 		}
 		if ( mw.user.options.get( 'visualeditor-editor' ) === editor ) {
-			return $.Deferred().resolve();
+			return $.Deferred().resolve().promise();
 		}
 		// Same as ve.init.target.getLocalApi()
 		return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
