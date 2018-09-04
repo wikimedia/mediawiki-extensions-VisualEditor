@@ -11,11 +11,12 @@
 			"Ex13",
 			"Ivi104",
 			"Bugoslav",
-			"Janezdrilc"
+			"Janezdrilc",
+			"BadDog"
 		]
 	},
-	"tooltip-ca-createsource": "Napravi izvorni kod ove stranice",
-	"tooltip-ca-editsource": "Uredi izvorni kod ove stranice",
+	"tooltip-ca-createsource": "Napravite izvorni kod ove stranice",
+	"tooltip-ca-editsource": "Uredite izvorni kod ove stranice",
 	"tooltip-ca-ve-edit": "Uredi ovu stranicu",
 	"visualeditor-advancedsettings-tool": "Napredne postavke",
 	"visualeditor-autosave-not-recovered-text": "Vaše nespremljene promjene ne mogu biti oporavljene.",
