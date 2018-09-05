@@ -70,7 +70,6 @@
 		function insertNode( isInline, generatedContents ) {
 			var hash, store, nodeClass,
 				type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType,
-				range = surfaceFragment.getSelection().getCoveringRange(),
 				data = [
 					{
 						type: type,
@@ -90,16 +89,8 @@
 				store.hash( generatedContents, hash );
 			}
 
-			if ( range.isCollapsed() ) {
-				surfaceFragment.insertContent( data );
-			} else {
-				// Generate a replacement transaction instead of using surfaceFragment.insertContent
-				// (which generates a removal and insertion) as blanking a reference triggers T135127.
-				// TODO: Once T135127 is fixed, revert to using surfaceFragment.insert.
-				surfaceFragment.getSurface().change(
-					ve.dm.TransactionBuilder.static.newFromReplacement( surfaceFragment.getDocument(), range, data )
-				);
-			}
+			surfaceFragment.insertContent( data );
+
 			deferred.resolve();
 		}
 
