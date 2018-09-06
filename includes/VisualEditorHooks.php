@@ -1045,6 +1045,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/dm/ve.dm.NodeFactory.test.js',
 				'lib/ve/tests/dm/ve.dm.Node.test.js',
 				'lib/ve/tests/dm/ve.dm.Converter.test.js',
+				'lib/ve/tests/dm/ve.dm.SourceConverter.test.js',
 				'lib/ve/tests/dm/ve.dm.BranchNode.test.js',
 				'lib/ve/tests/dm/ve.dm.LeafNode.test.js',
 				'lib/ve/tests/dm/nodes/ve.dm.TextNode.test.js',

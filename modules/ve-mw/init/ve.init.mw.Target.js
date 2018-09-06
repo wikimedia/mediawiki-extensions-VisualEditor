@@ -157,34 +157,18 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
 };
 
 /**
- * Create a document model from an HTML document.
- *
- * @param {HTMLDocument} doc HTML document
- * @param {string} mode Editing mode
- * @return {ve.dm.Document} Document model
+ * @inheritdoc
  */
-ve.init.mw.Target.static.createModelFromDom = function ( doc, mode ) {
-	var i, l, children, data,
-		conf = mw.config.get( 'wgVisualEditor' );
+ve.init.mw.Target.static.createModelFromDom = function ( doc, mode, options ) {
+	var conf = mw.config.get( 'wgVisualEditor' );
 
-	if ( mode === 'source' ) {
-		children = doc.body.children;
-		data = [];
+	options = ve.extendObject( {
+		lang: conf.pageLanguageCode,
+		dir: conf.pageLanguageDir
+	}, options );
 
-		// Wikitext documents are just plain text paragraphs, so we can just do a simple manual conversion.
-		for ( i = 0, l = children.length; i < l; i++ ) {
-			data.push( { type: 'paragraph' } );
-			ve.batchPush( data, children[ i ].textContent.split( '' ) );
-			data.push( { type: '/paragraph' } );
-		}
-		data.push( { type: 'internalList' }, { type: '/internalList' } );
-		return new ve.dm.Document( data, doc, null, null, null, conf.pageLanguageCode, conf.pageLanguageDir );
-	} else {
-		return ve.dm.converter.getModelFromDom( doc, {
-			lang: conf.pageLanguageCode,
-			dir: conf.pageLanguageDir
-		} );
-	}
+	// Parent method
+	return ve.init.mw.Target.super.static.createModelFromDom.call( this, doc, mode, options );
 };
 
 // Deprecated alias
@@ -215,9 +199,9 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		ve.unwrapParsoidSections( doc.body );
 		// Strip legacy IDs, for example in section headings
 		ve.stripParsoidFallbackIds( doc.body );
+		// Fix relative or missing base URL if needed
+		this.fixBase( doc );
 	}
-	// Fix relative or missing base URL if needed
-	this.fixBase( doc );
 
 	return doc;
 };
@@ -227,7 +211,7 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 /**
  * Handle both DOM and modules being loaded and ready.
  *
- * @param {HTMLDocument} doc HTML document
+ * @param {HTMLDocument|string} doc HTML document or source text
  */
 ve.init.mw.Target.prototype.documentReady = function ( doc ) {
 	this.setupSurface( doc );
@@ -354,7 +338,7 @@ ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
  * Switch to editing mode.
  *
  * @method
- * @param {HTMLDocument} doc HTML document
+ * @param {HTMLDocument|string} doc HTML document or source text
  */
 ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
 	var target = this;

@@ -362,7 +362,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 
 		this.initialSourceRange = data.initialSourceRange;
 
-		aboutDoc = this.doc.documentElement.getAttribute( 'about' );
+		aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
 		if ( aboutDoc ) {
 			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
 			if ( docRevIdMatches.length >= 2 ) {

@@ -726,6 +726,7 @@
 				"lib/ve/src/dm/ve.dm.LinearData.js",
 				"lib/ve/src/dm/ve.dm.HashValueStore.js",
 				"lib/ve/src/dm/ve.dm.Converter.js",
+				"lib/ve/src/dm/ve.dm.SourceConverter.js",
 				"lib/ve/src/dm/selections/ve.dm.LinearSelection.js",
 				"lib/ve/src/dm/selections/ve.dm.NullSelection.js",
 				"lib/ve/src/dm/selections/ve.dm.TableSelection.js",
