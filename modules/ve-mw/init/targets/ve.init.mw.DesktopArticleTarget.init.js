@@ -852,6 +852,11 @@
 				$( '.ui-dialog-content' ).dialog( 'close' );
 			}
 
+			// Release the edit warning on #wpTextbox1 which was setup in mediawiki.action.edit.editWarning.js
+			function releaseOldEditWarning() {
+				$( window ).off( 'beforeunload.editwarning' );
+			}
+
 			if (
 				mw.config.get( 'wgAction' ) === 'submit' ||
 				(
@@ -875,8 +880,10 @@
 							var oldUri;
 							// TODO: windowManager.destroy()?
 							if ( data && data.action === 'keep' ) {
+								releaseOldEditWarning();
 								activatePageTarget( mode, true );
 							} else if ( data && data.action === 'discard' ) {
+								releaseOldEditWarning();
 								setEditorPreference( 'visualeditor' );
 								oldUri = veEditUri.clone();
 								delete oldUri.query.veswitched;
@@ -885,6 +892,7 @@
 						} );
 				} );
 			} else {
+				releaseOldEditWarning();
 				activatePageTarget( mode, false );
 			}
 		},
