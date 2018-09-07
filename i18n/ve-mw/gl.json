@@ -134,7 +134,7 @@
 	"visualeditor-dialog-media-size-choosefull": "Establecer o tamaño completo",
 	"visualeditor-dialog-media-size-originalsize-error": "Non se puido recuperar o tamaño orixinal do ficheiro.",
 	"visualeditor-dialog-media-size-section": "Tamaño da imaxe",
-	"visualeditor-dialog-media-size-section-help": "Pode establecer o tamaño do elemento multimedia que se mostra na páxina. Case sempre debe ser o tamaño normal, dado que un tamaño personalizado pode interferir co deseño da páxina para os lectores e romper a súa coherencia.",
+	"visualeditor-dialog-media-size-section-help": "Pode establecer o tamaño do elemento multimedia que se amosa na páxina. Case sempre debe ser o tamaño normal, dado que un tamaño personalizado pode interferir co deseño da páxina para os lectores e romper a súa coherencia.",
 	"visualeditor-dialog-media-thumbdimensions": "Dimensións da miniatura",
 	"visualeditor-dialog-media-title": "Configuración dos ficheiros multimedia",
 	"visualeditor-dialog-media-type-border": "Bordo",

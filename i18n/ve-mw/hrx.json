@@ -3,11 +3,13 @@
 		"authors": [
 			"Midnight Gambler",
 			"Paul Beppler",
-			"Macofe"
+			"Macofe",
+			"Ghiutun"
 		]
 	},
 	"tooltip-ca-edit": "Seit beoorbeite. Bitte voar dem Speichre die Voarschaufunktion benutze.",
 	"tooltip-ca-ve-edit": "Die Seit beoorbeite",
+	"visualeditor-ca-editsource": "Quelltext beoorbeite",
 	"visualeditor-ca-editsource-section": "Quelltext beoorbeite",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
