@@ -100,7 +100,7 @@ ve.ui.MWAdvancedPageSettingsDialogTool = function VeUiMWAdvancedPageSettingsDial
 OO.inheritClass( ve.ui.MWAdvancedPageSettingsDialogTool, ve.ui.MWVeOnlyDialogTool );
 ve.ui.MWAdvancedPageSettingsDialogTool.static.name = 'advancedSettings';
 ve.ui.MWAdvancedPageSettingsDialogTool.static.group = 'utility';
-ve.ui.MWAdvancedPageSettingsDialogTool.static.icon = 'advanced';
+ve.ui.MWAdvancedPageSettingsDialogTool.static.icon = 'settings';
 ve.ui.MWAdvancedPageSettingsDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-advancedsettings-tool' );
 ve.ui.MWAdvancedPageSettingsDialogTool.static.commandName = 'meta/advanced';
