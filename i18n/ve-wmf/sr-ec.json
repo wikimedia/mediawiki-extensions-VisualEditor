@@ -24,8 +24,8 @@
 	"visualeditor-help-title": "Водич за употребу уређивача",
 	"visualeditor-welcomedialog-action": "Започни уређивање",
 	"visualeditor-welcomedialog-content": "Свако може да уређује и свако унапређење помаже.",
-	"visualeditor-welcomedialog-content-thanks": "Хвала Вам што помажете да свет открије више!",
-	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивање изворника",
+	"visualeditor-welcomedialog-content-thanks": "Хвала вам што помажете да свет открије више!",
+	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивач изворника",
 	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на Визуелни уређивач",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на пројекат $2"
 }
