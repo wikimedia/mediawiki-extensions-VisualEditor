@@ -350,5 +350,9 @@
 	"visualeditor-viewpage-savewarning-title": "Ar tikrai?",
 	"visualeditor-wikitext-progress": "Vikitekstas konvertuojamas",
 	"visualeditor-wikitext-warning": "Jūs naudojate vizualų redaktorių, todėl [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikisintaksė]] čia neveikia. Bet kuriuo metu galite persijungti į išeities teksto redaktorių neprarasdami pakeitimų, spauskite perjungimo mygtuką.",
-	"visualeditor-wikitext-warning-title": "Aptikta vikisintaksė"
+	"visualeditor-wikitext-warning-title": "Aptikta vikisintaksė",
+	"visualeditor-wikitextconvert-title": "Pakeisti formatavimą į vikitekstą?",
+	"visualeditor-wikitextconvert-message": "Jūsų įklijuotas turinys yra suformatuotas. Ar jis turėtų būti pakeistas į vikitekstą, ar įklijuoti kaip paprastą tekstą?",
+	"visualeditor-wikitextconvert-plain": "Naudoti paprastą tekstą",
+	"visualeditor-wikitextconvert-convert": "Perdaryti į vikitekstą"
 }
