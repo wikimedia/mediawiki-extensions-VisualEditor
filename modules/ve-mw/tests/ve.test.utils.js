@@ -51,6 +51,8 @@
 
 	ve.test.utils.mwEnvironment = ( function () {
 		var mwPlatform, corePlatform, mwTarget, coreTarget,
+			setEditorPreference = mw.libs.ve.setEditorPreference,
+			dummySetEditorPreference = function () { return $.Deferred().resolve().promise(); },
 			overrides = [
 				ve.dm.MWHeadingNode,
 				ve.dm.MWPreformattedNode,
@@ -82,6 +84,7 @@
 			}
 			ve.init.platform = mwPlatform;
 			ve.init.target = mwTarget;
+			mw.libs.ve.setEditorPreference = dummySetEditorPreference;
 			// Ensure the current target is appended to the current fixture
 			$( '#qunit-fixture' ).append( ve.init.target.$element );
 		}
@@ -96,6 +99,7 @@
 			}
 			ve.init.platform = corePlatform;
 			ve.init.target = coreTarget;
+			mw.libs.ve.setEditorPreference = setEditorPreference;
 		}
 
 		// On load, teardown overrides so the first core tests run correctly
