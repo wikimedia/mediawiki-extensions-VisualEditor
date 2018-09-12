@@ -29,7 +29,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 	this.advancedSettingsFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-meta-advancedsettings-label' ),
-		icon: 'advanced'
+		icon: 'settings'
 	} );
 
 	// Initialization
@@ -157,7 +157,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'advanced' )
+			.setIcon( 'settings' )
 			.setLabel( ve.msg( 'visualeditor-dialog-meta-advancedsettings-section' ) );
 	}
 };
