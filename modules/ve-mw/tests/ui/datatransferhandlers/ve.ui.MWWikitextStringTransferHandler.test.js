@@ -10,9 +10,14 @@ QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
 	setup: function () {
 		// Mock XHR for mw.Api()
 		this.server = window.MWWIKITEXT_MOCK_API ? this.sandbox.useFakeServer() : null;
+		// Random number, chosen by a fair dice roll
+		this.randomStub = sinon.stub( Math, 'random' ).returns( 0.04 );
 		ve.test.utils.mwEnvironment.setup.call( this );
 	},
-	teardown: ve.test.utils.mwEnvironment.teardown
+	teardown: function () {
+		this.randomStub.restore();
+		ve.test.utils.mwEnvironment.teardown.call( this );
+	}
 } ) );
 
 /* Tests */
@@ -153,6 +158,25 @@ QUnit.test( 'convert', function ( assert ) {
 					{ type: '/paragraph' },
 					{ type: '/listItem' },
 					{ type: '/list' },
+					{ type: 'internalList' },
+					{ type: '/internalList' }
+				]
+			},
+			{
+				msg: 'Simple template',
+				pasteString: '{{Template}}',
+				pasteType: 'text/plain',
+				parsoidResponse: '<div typeof="mw:Transclusion" about="#mwt1">Template</div>',
+				assertDom: true,
+				expectedData: [
+					{
+						type: 'mwTransclusionBlock',
+						attributes: {
+							mw: {}
+						},
+						originalDomElements: $( '<div typeof="mw:Transclusion" about="#mwt40000000">Template</div>' ).toArray()
+					},
+					{ type: '/mwTransclusionBlock' },
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				]

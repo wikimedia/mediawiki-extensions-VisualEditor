@@ -146,6 +146,9 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 			}
 		}
 
+		// Clone elements to avoid about attribute conflicts (T204007)
+		doc.data.cloneElements( true );
+
 		if ( !doc.data.hasContent() ) {
 			return failure();
 		}
