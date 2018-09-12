@@ -95,11 +95,20 @@
 			delete data.mode;
 		}
 
+		if ( !data.platform ) {
+			if ( ve.init && ve.init.target && ve.init.target.constructor.static.platformType ) {
+				data.platform = ve.init.target.constructor.static.platformType;
+			} else {
+				data.platform = 'other';
+				// TODO: outright abort in this case, once we think we've caught everything
+				mw.log.warn( 've.init.mw.trackSubscriber: no target available and no platform specified', action );
+			}
+		}
+
 		event = $.extend( {
 			version: 1,
 			action: action,
 			editor: 'visualeditor',
-			platform: ve.init && ve.init.target && ve.init.target.constructor.static.platformType || 'other',
 			integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
 			'page.id': mw.config.get( 'wgArticleId' ),
 			'page.title': mw.config.get( 'wgPageName' ),

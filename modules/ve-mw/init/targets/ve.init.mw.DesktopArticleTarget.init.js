@@ -282,6 +282,10 @@
 
 	function trackActivateStart( initData ) {
 		ve.track( 'trace.activate.enter', { mode: initData.mode } );
+		// ve.track normally tries to guess the current platform based on
+		// ve.init.target. We're in a pre-target-loaded state, so have it
+		// hardcode desktop here.
+		initData.platform = 'desktop';
 		ve.track( 'mwedit.init', initData );
 		mw.libs.ve.activationStart = ve.now();
 	}
