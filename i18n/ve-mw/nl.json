@@ -377,6 +377,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Waar mogelijk de visuele tekstverwerker gebruiken",
 	"visualeditor-preference-tabs-prefer-wt": "Altijd wikitekst bewerken",
 	"visualeditor-preference-tabs-remember-last": "Laatste tekstverwerker onthouden",
+	"visualeditor-preference-visualdiffpage-label": "Visuele wijzigingen",
+	"visualeditor-rebase-client-export": "Exporteren",
 	"visualeditor-rebase-client-import": "Importeren",
 	"visualeditor-rebase-client-import-name": "Paginanaam",
 	"visualeditor-recreate": "De pagina is verwijderd sinds u bent begonnen met bewerken. Klik op \"$1\" om de pagina opnieuw aan te maken.",
