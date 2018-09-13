@@ -1107,8 +1107,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 	if ( this.isViewPage ) {
 		namespaceNumber = mw.config.get( 'wgNamespaceNumber' );
 		namespaceName = mw.config.get( 'wgCanonicalNamespace' );
-		// MWNamespace::isTalk()
-		isTalkNamespace = namespaceNumber > 0 && namespaceNumber % 2 !== 0;
+		isTalkNamespace = mw.Title.isTalkNamespace( namespaceNumber );
 		// Title::getNamespaceKey()
 		namespaceKey = namespaceName.toLowerCase() || 'main';
 		if ( namespaceKey === 'file' ) {
