@@ -1103,17 +1103,26 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
  * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
-	var namespaceKey;
+	var namespaceNumber, namespaceName, isTalkNamespace, namespaceKey, namespaceTabId;
 	if ( this.isViewPage ) {
-		// Mimics getNamespaceKey in Title.php
-		namespaceKey = mw.config.get( 'wgCanonicalNamespace' ).toLowerCase() || 'main';
+		namespaceNumber = mw.config.get( 'wgNamespaceNumber' );
+		namespaceName = mw.config.get( 'wgCanonicalNamespace' );
+		// MWNamespace::isTalk()
+		isTalkNamespace = namespaceNumber > 0 && namespaceNumber % 2 !== 0;
+		// Title::getNamespaceKey()
+		namespaceKey = namespaceName.toLowerCase() || 'main';
 		if ( namespaceKey === 'file' ) {
 			namespaceKey = 'image';
 		}
+		// SkinTemplate::buildContentNavigationUrls()
+		if ( isTalkNamespace ) {
+			namespaceTabId = 'ca-talk';
+		} else {
+			namespaceTabId = 'ca-nstab-' + namespaceKey;
+		}
 		// Allow instant switching back to view mode, without refresh
-		$( '#ca-view a, #ca-nstab-' + namespaceKey + ' a' )
+		$( '#ca-view a, #' + namespaceTabId + ' a' )
 			.on( 'click.ve-target', this.onViewTabClick.bind( this ) );
-
 	}
 
 	mw.hook( 've.skinTabSetupComplete' ).fire();
