@@ -80,7 +80,11 @@
 				target.clearSurfaces();
 				// Don't add the surface until the history has been applied
 				target.addSurface( surfaceModel );
-				// target.getSurface().getView().focus();
+				target.once( 'surfaceReady', function () {
+					initPromise.then( function () {
+						surfaceModel.selectFirstContentOffset();
+					} );
+				} );
 
 				if ( target.importTitle && !surfaceModel.getDocument().getCompleteHistoryLength() ) {
 					initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
@@ -143,7 +147,6 @@
 					} );
 				} );
 				initPromise.always( function () {
-					surfaceModel.selectFirstContentOffset();
 					// Resolve progress bar
 					// importDeferred.resolve();
 					if ( ( title = target.getImportTitle() ) ) {
