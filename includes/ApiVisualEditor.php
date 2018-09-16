@@ -261,7 +261,7 @@ class ApiVisualEditor extends ApiBase {
 		$title = Title::newFromText( $params['page'] );
 		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
 			// Convert Special:CollabPad/MyPage to MyPage so we can parsefragment properly
-			$title = Title::newFromText( preg_replace( '`^([^/]+/)`', '', $params['page'] ) );
+			$title = SpecialCollabPad::getSubPage( $title );
 		}
 		if ( !$title ) {
 			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );

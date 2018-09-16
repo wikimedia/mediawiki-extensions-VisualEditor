@@ -161,6 +161,9 @@
 		"SkinTemplateNavigation": [
 			"VisualEditorHooks::onSkinTemplateNavigation"
 		],
+		"SkinTemplateNavigation::SpecialPage": [
+			"SpecialCollabPad::onSkinTemplateNavigationSpecialPage"
+		],
 		"ParserTestGlobals": [
 			"VisualEditorHooks::onParserTestGlobals"
 		],
