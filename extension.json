@@ -462,6 +462,9 @@
 			]
 		},
 		"ext.visualEditor.collabTarget.desktop": {
+			"scripts": [
+				"modules/ve-mw-collab/ve.init.mw.DesktopCollabTarget.js"
+			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
 			],
@@ -482,25 +485,22 @@
 				"ext.visualEditor.mwextensions.desktop",
 				"ext.visualEditor.desktopTarget"
 			],
+			"messages" : [
+				"collabpad",
+				"collabpad-doctitle",
+				"collabpad-import-subtitle"
+			],
 			"targets": [
 				"desktop"
 			]
 		},
 		"ext.visualEditor.collabTarget.mobile": {
-			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
+			"scripts": [
+				"modules/ve-mw-collab/ve.init.mw.MobileCollabTarget.js"
 			],
-			"skinStyles": {
-				"vector": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
-				],
-				"apex": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-apex.css"
-				],
-				"monobook": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
-				]
-			},
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.less"
+			],
 			"dependencies": [
 				"ext.visualEditor.collabTarget",
 				"ext.visualEditor.core.mobile",
@@ -521,8 +521,7 @@
 			],
 			"messages" : [
 				"collabpad",
-				"collabpad-doctitle",
-				"collabpad-import-subtitle"
+				"collabpad-doctitle"
 			],
 			"targets": [
 				"desktop",
@@ -532,6 +531,10 @@
 		"ext.visualEditor.collabTarget.init.styles": {
 			"styles": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.css"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.ve": {
@@ -1614,6 +1617,9 @@
 			"skinStyles": {
 				"vector": [
 					"modules/ve-mw/ui/themes/vector/ve.ui.MWFormatTool.css"
+				],
+				"minerva": [
+					"modules/ve-mw/ui/themes/minerva/ve.ui.MWFormatTool.css"
 				]
 			},
 			"dependencies": [
