@@ -7,6 +7,8 @@
 
 ( function () {
 	var target,
+		$specialTab = $( '#ca-nstab-special' ),
+		$padTab = $( '#ca-pad' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pageName = mw.config.get( 'collabPadPageName' ) || '',
 		pageTitle = mw.Title.newFromText( pageName ),
@@ -36,7 +38,20 @@
 	}
 
 	function showPage( title, importTitle ) {
+		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
+
 		setTitle( mw.msg( 'collabpad-doctitle', title.getPrefixedText() ) );
+
+		mw.config.set( 'wgRelevantPageName', specialTitle.getPrefixedText() );
+		mw.config.set( 'wgPageName', specialTitle.getPrefixedText() );
+		if ( !$padTab.length ) {
+			$padTab = $( '<li>' ).attr( 'id', 'ca-pad' ).addClass( 'selected' ).append(
+				$( '<span>' ).append(
+					$( '<a>' ).attr( 'href', '' ).text( title.getPrefixedText() )
+				)
+			);
+		}
+		$padTab.insertAfter( $specialTab.removeClass( 'selected' ) );
 
 		progressBar.toggle( true );
 		form.toggle( false );
@@ -174,7 +189,7 @@
 	}
 
 	function showForm() {
-		setTitle( mw.msg( 'collabpad' ) );
+		var specialTitle = mw.Title.newFromText( 'Special:CollabPad' );
 
 		if ( target ) {
 			$( '#firstHeading' ).removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -183,6 +198,14 @@
 
 			$( 'body' ).removeClass( 've-activated ve-active' );
 		}
+
+		setTitle( mw.msg( 'collabpad' ) );
+		mw.config.set( 'wgRelevantPageName', specialTitle.getPrefixedText() );
+		mw.config.set( 'wgPageName', specialTitle.getPrefixedText() );
+		if ( $padTab ) {
+			$padTab.detach();
+		}
+		$specialTab.addClass( 'selected' );
 
 		progressBar.toggle( false );
 		form.toggle( true );
