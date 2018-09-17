@@ -429,7 +429,6 @@
 				"ext.visualEditor.core.mobile",
 				"ext.visualEditor.articleTarget",
 				"ext.visualEditor.mwextensions",
-				"ext.visualEditor.mwimage.core",
 				"ext.visualEditor.mwlink"
 			],
 			"messages" : [
@@ -1578,6 +1577,7 @@
 				"ext.visualEditor.data",
 				"ext.visualEditor.mwtransclusion",
 				"ext.visualEditor.mwgallery",
+				"ext.visualEditor.mwimage",
 				"ext.visualEditor.mwalienextension",
 				"ext.visualEditor.language",
 				"ext.visualEditor.mwlanguage",
@@ -1591,8 +1591,8 @@
 		"ext.visualEditor.mwextensions.desktop": {
 			"dependencies": [
 				"ext.visualEditor.mwextensions",
-				"ext.visualEditor.mwimage",
-				"ext.visualEditor.mwmeta"
+				"ext.visualEditor.mwmeta",
+				"mediawiki.ForeignStructuredUpload.BookletLayout"
 			]
 		},
 		"ext.visualEditor.mwformatting": {
@@ -1666,7 +1666,6 @@
 				"mediawiki.widgets.MediaSearch",
 				"oojs-ui.styles.icons-media",
 				"oojs-ui.styles.icons-wikimedia",
-				"mediawiki.ForeignStructuredUpload.BookletLayout",
 				"moment"
 			],
 			"messages": [
@@ -1726,7 +1725,8 @@
 				"visualeditor-media-title-video"
 			],
 			"targets": [
-				"desktop"
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.mwlink": {

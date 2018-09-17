@@ -23,6 +23,12 @@
 	padding: 1em 2em;
 }
 
+@media ( max-width: 400px ) {
+	.ve-ui-mwMediaDialog-panel-imageinfo-info {
+		padding: 1em 0;
+	}
+}
+
 .ve-ui-mwMediaDialog-panel-imageinfo-main {
 	margin-bottom: 1em;
 }

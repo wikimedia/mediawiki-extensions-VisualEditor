@@ -40,7 +40,7 @@ ve.ui.MWMediaDialog.static.name = 'media';
 ve.ui.MWMediaDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-media-title' );
 
-ve.ui.MWMediaDialog.static.size = 'large';
+ve.ui.MWMediaDialog.static.size = 'medium';
 
 ve.ui.MWMediaDialog.static.actions = [
 	{
@@ -173,44 +173,44 @@ ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.initialize = function () {
-	var altTextFieldset, positionFieldset, borderField, positionField;
+	var altTextFieldset, positionFieldset, borderField,
+		positionField, positionSelectField;
 
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
 
 	this.panels = new OO.ui.StackLayout();
 
-	// Set up the booklet layout
-	this.mediaSettingsBooklet = new OO.ui.BookletLayout( {
-		classes: [ 've-ui-mwMediaDialog-panel-settings' ],
-		outlined: true
+	// Set up the index layout
+	this.mediaSettingsLayout = new OO.ui.IndexLayout( {
+		classes: [ 've-ui-mwMediaDialog-panel-settings' ]
 	} );
 
-	this.mediaSearchPanel = new OO.ui.PanelLayout( {
+	this.mediaSearchPanel = new OO.ui.TabPanelLayout( {
 		classes: [ 've-ui-mwMediaDialog-panel-search' ],
 		scrollable: true
 	} );
 
-	this.mediaUploadBooklet = new mw.ForeignStructuredUpload.BookletLayout( { $overlay: this.$overlay } );
+	if ( mw.ForeignStructuredUpload && mw.ForeignStructuredUpload.BookletLayout ) {
+		this.mediaUploadBooklet = new mw.ForeignStructuredUpload.BookletLayout( { $overlay: this.$overlay } );
+	}
 
-	this.mediaImageInfoPanel = new OO.ui.PanelLayout( {
+	this.mediaImageInfoPanel = new OO.ui.TabPanelLayout( {
 		classes: [ 've-ui-mwMediaDialog-panel-imageinfo' ],
 		scrollable: false
 	} );
 
 	this.$infoPanelWrapper = $( '<div>' ).addClass( 've-ui-mwMediaDialog-panel-imageinfo-wrapper' );
 
-	this.generalSettingsPage = new OO.ui.PageLayout( 'general' );
-	this.advancedSettingsPage = new OO.ui.PageLayout( 'advanced' );
-	this.mediaSettingsBooklet.addPages( [
+	this.generalSettingsPage = new OO.ui.TabPanelLayout( 'general', {
+		label: ve.msg( 'visualeditor-dialog-media-page-general' )
+	} );
+	this.advancedSettingsPage = new OO.ui.TabPanelLayout( 'advanced', {
+		label: ve.msg( 'visualeditor-dialog-media-page-advanced' )
+	} );
+	this.mediaSettingsLayout.addTabPanels( [
 		this.generalSettingsPage, this.advancedSettingsPage
 	] );
-	this.generalSettingsPage.getOutlineItem()
-		.setIcon( 'parameter' )
-		.setLabel( ve.msg( 'visualeditor-dialog-media-page-general' ) );
-	this.advancedSettingsPage.getOutlineItem()
-		.setIcon( 'parameter' )
-		.setLabel( ve.msg( 'visualeditor-dialog-media-page-advanced' ) );
 
 	// Define the media search page
 	this.searchTabs = new OO.ui.IndexLayout();
@@ -218,14 +218,21 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.searchTabs.addTabPanels( [
 		new OO.ui.TabPanelLayout( 'search', {
 			label: ve.msg( 'visualeditor-dialog-media-search-tab-search' )
-		} ),
-		new OO.ui.TabPanelLayout( 'upload', {
-			label: ve.msg( 'visualeditor-dialog-media-search-tab-upload' ),
-			content: [ this.mediaUploadBooklet ]
 		} )
 	] );
 
-	this.search = new mw.widgets.MediaSearchWidget();
+	if ( this.mediaUploadBooklet ) {
+		this.searchTabs.addTabPanels( [
+			new OO.ui.TabPanelLayout( 'upload', {
+				label: ve.msg( 'visualeditor-dialog-media-search-tab-upload' ),
+				content: this.mediaUploadBooklet ? [ this.mediaUploadBooklet ] : []
+			} )
+		] );
+	}
+
+	this.search = new mw.widgets.MediaSearchWidget( {
+		rowHeight: OO.ui.isMobile() ? 120 : 200
+	} );
 
 	// Define fieldsets for image settings
 
@@ -249,7 +256,6 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
-		icon: 'parameter',
 		classes: [ 've-ui-mwMediaDialog-caption-fieldset' ]
 	} );
 	this.captionFieldset.$element.append( this.captionTarget.$element );
@@ -258,8 +264,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	altTextFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
-		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' ),
-		icon: 'parameter'
+		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' )
 	} );
 
 	this.altTextInput = new OO.ui.TextInputWidget( { spellcheck: true } );
@@ -274,6 +279,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.positionSelect = new ve.ui.AlignWidget( {
 		dir: this.getDir()
 	} );
+	positionSelectField = new OO.ui.FieldLayout( this.positionSelect );
 
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget();
 	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
@@ -286,22 +292,20 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	positionFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-position-section' ),
-		help: ve.msg( 'visualeditor-dialog-media-position-section-help' ),
-		icon: 'parameter'
+		help: ve.msg( 'visualeditor-dialog-media-position-section-help' )
 	} );
 
 	// Build position fieldset
 	positionFieldset.$element.append(
 		positionField.$element,
-		this.positionSelect.$element
+		positionSelectField.$element
 	);
 
 	// Type
 	this.typeFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
-		help: ve.msg( 'visualeditor-dialog-media-type-section-help' ),
-		icon: 'parameter'
+		help: ve.msg( 'visualeditor-dialog-media-type-section-help' )
 	} );
 
 	this.typeSelectDropdown = new OO.ui.DropdownWidget( { $overlay: this.$overlay } );
@@ -347,7 +351,6 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-size-section' ),
-		icon: 'parameter',
 		help: ve.msg( 'visualeditor-dialog-media-size-section-help' )
 	} );
 
@@ -355,7 +358,9 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
 	} );
 
-	this.sizeWidget = new ve.ui.MediaSizeWidget();
+	this.sizeWidget = new ve.ui.MediaSizeWidget( undefined, {
+		dimensionsAlign: 'top'
+	} );
 
 	this.$sizeWidgetElements = $( '<div>' ).append(
 		this.sizeWidget.$element,
@@ -376,11 +381,13 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.searchTabs.connect( this, {
 		set: 'onSearchTabsSet'
 	} );
-	this.mediaUploadBooklet.connect( this, {
-		set: 'onMediaUploadBookletSet',
-		uploadValid: 'onUploadValid',
-		infoValid: 'onInfoValid'
-	} );
+	if ( this.mediaUploadBooklet ) {
+		this.mediaUploadBooklet.connect( this, {
+			set: 'onMediaUploadBookletSet',
+			uploadValid: 'onUploadValid',
+			infoValid: 'onInfoValid'
+		} );
+	}
 
 	// Initialization
 	this.searchTabs.getTabPanel( 'search' ).$element.append( this.search.$element );
@@ -400,7 +407,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.panels.addItems( [
 		this.mediaSearchPanel,
 		this.mediaImageInfoPanel,
-		this.mediaSettingsBooklet
+		this.mediaSettingsLayout
 	] );
 
 	this.$body.append( this.panels.$element );
@@ -1155,7 +1162,10 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			// Reset upload booklet
 			// The first time this is called, it will try to switch panels,
 			// so the this.switchPanels() call has to be later.
-			return this.mediaUploadBooklet.initialize().then( function () {
+			return ( this.mediaUploadBooklet ?
+				this.mediaUploadBooklet.initialize() :
+				$.Deferred().resolve().promise()
+			).then( function () {
 				dialog.actions.setAbilities( { upload: false, save: false, insert: false, apply: false } );
 
 				if ( data.file ) {
@@ -1175,11 +1185,11 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, noFocus ) {
 	switch ( panel ) {
 		case 'edit':
-			this.setSize( 'large' );
+			this.setSize( this.constructor.static.size );
 			// Set the edit panel
-			this.panels.setItem( this.mediaSettingsBooklet );
+			this.panels.setItem( this.mediaSettingsLayout );
 			// Focus the general settings page
-			this.mediaSettingsBooklet.setPage( 'general' );
+			this.mediaSettingsLayout.setTabPanel( 'general' );
 			// Hide/show buttons
 			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
 			if ( !noFocus ) {
@@ -1368,8 +1378,10 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 		case 'cancelchoose':
 			handler = function () {
 				this.switchPanels( 'search' );
-				// Reset upload booklet, in case we got here by uploading a file
-				return this.mediaUploadBooklet.initialize();
+				if ( this.mediaUploadBooklet ) {
+					// Reset upload booklet, in case we got here by uploading a file
+					return this.mediaUploadBooklet.initialize();
+				}
 			};
 			break;
 		case 'cancelupload':
