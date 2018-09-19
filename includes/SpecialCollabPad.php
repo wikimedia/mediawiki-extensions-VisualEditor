@@ -164,16 +164,19 @@ class SpecialCollabPad extends SpecialPage {
 	 * @return bool Always true.
 	 */
 	public static function onSkinTemplateNavigationSpecialPage( SkinTemplate &$skin, array &$links ) {
-		$subPage = self::getSubPage( $skin->getTitle() );
-		$links['namespaces']['special']['text'] = $skin->msg( 'collabpad' )->text();
-		if ( $subPage ) {
-			$links['namespaces']['special']['href'] =
-				Title::newFromText( 'Special:CollabPad' )->getLocalURL();
-			$links['namespaces']['special']['class'] = '';
+		$title = $skin->getTitle();
+		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
+			$subPage = self::getSubPage( $title );
+			$links['namespaces']['special']['text'] = $skin->msg( 'collabpad' )->text();
+			if ( $subPage ) {
+				$links['namespaces']['special']['href'] =
+					Title::newFromText( 'Special:CollabPad' )->getLocalURL();
+				$links['namespaces']['special']['class'] = '';
 
-			$links['namespaces']['pad']['text'] = $subPage->getPrefixedText();
-			$links['namespaces']['pad']['href'] = '';
-			$links['namespaces']['pad']['class'] = 'selected';
+				$links['namespaces']['pad']['text'] = $subPage->getPrefixedText();
+				$links['namespaces']['pad']['href'] = '';
+				$links['namespaces']['pad']['class'] = 'selected';
+			}
 		}
 		return true;
 	}
