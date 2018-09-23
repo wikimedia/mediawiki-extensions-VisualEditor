@@ -1392,12 +1392,16 @@
 				"modules/ve-mw/ve.MWutils.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWExtensionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWBlockExtensionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWInlineExtensionNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWPreNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWTableNode.js",
 				"modules/ve-mw/dm/annotations/ve.dm.MWNowikiAnnotation.js",
 				"modules/ve-mw/dm/metaitems/ve.dm.MWAlienMetaItem.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWEntityNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWExtensionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWBlockExtensionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWInlineExtensionNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWPreNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWTableNode.js",
 				"modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js",
@@ -1888,7 +1892,13 @@
 		"ext.visualEditor.mwtransclusion": {
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionBlockNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionInlineNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionTableCellNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionBlockNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionInlineNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWTransclusionTableCellNode.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTransclusionModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTransclusionPartModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTransclusionContentModel.js",
@@ -2194,7 +2204,11 @@
 		"ext.visualEditor.mwalienextension": {
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWAlienExtensionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWAlienBlockExtensionNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWAlienInlineExtensionNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWAlienExtensionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWAlienBlockExtensionNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWAlienInlineExtensionNode.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWAlienExtensionInspector.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWAlienExtensionContextItem.js"
 			],
