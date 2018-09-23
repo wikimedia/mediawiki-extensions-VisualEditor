@@ -552,6 +552,7 @@
 		"ext.visualEditor.base": {
 			"scripts": [
 				"lib/ve/src/ve.utils.js",
+				"lib/ve/src/ve.utils.client.js",
 				"lib/ve/src/ve.TriggerListener.js",
 				"lib/ve/src/init/ve.init.js",
 				"lib/ve/src/init/ve.init.Platform.js",
