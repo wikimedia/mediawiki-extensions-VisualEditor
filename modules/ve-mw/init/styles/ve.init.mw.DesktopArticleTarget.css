@@ -26,6 +26,11 @@
 	opacity: 1;
 }
 
+.ve-init-mw-desktopArticleTarget-toolbar-opened > .oo-ui-toolbar-bar {
+	/* Turn off transforms when done to avoid Safari rendering bugs (T202935) */
+	transform: none;
+}
+
 .ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar,
 .ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
 	transition: none;
