@@ -38,5 +38,9 @@ ve.ce.MWResizableNode.prototype.getAttributeChanges = function ( width, height )
 	if ( !ve.isEmptyObject( attrChanges ) ) {
 		attrChanges.defaultSize = false;
 	}
+	// type=frame is not resizeable, so change it to type=thumb
+	if ( this.getModel().getAttribute( 'type' ) === 'frame' ) {
+		attrChanges.type = 'thumb';
+	}
 	return attrChanges;
 };

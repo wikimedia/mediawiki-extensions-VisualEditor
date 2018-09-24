@@ -1041,8 +1041,24 @@ ve.ui.MWMediaDialog.prototype.onTypeSelectChoose = function ( item ) {
 		this.checkChanged();
 	}
 
-	// If type is 'frame', disable the size input widget completely
-	this.sizeWidget.setDisabled( type === 'frame' );
+	// If type is 'frame', custom size is ignored
+	if ( type === 'frame' ) {
+		this.sizeWidget.setSizeType( 'default' );
+	}
+};
+
+/**
+ * Handle changeSizeType events from the MediaSizeWidget
+ *
+ * @param {string} sizeType Size type
+ */
+ve.ui.MWMediaDialog.prototype.onChangeSizeType = function ( sizeType ) {
+	// type=frame is not resizeable, so change it to type=thumb
+	if ( sizeType === 'custom' && this.imageModel.getType() === 'frame' ) {
+		this.imageModel.setType( 'thumb' );
+	}
+
+	this.checkChanged();
 };
 
 /**
@@ -1225,14 +1241,13 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	this.sizeErrorLabel.toggle( false );
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
 	this.sizeWidget.connect( this, {
-		changeSizeType: 'checkChanged',
+		changeSizeType: 'onChangeSizeType',
 		change: 'checkChanged',
 		valid: 'checkChanged'
 	} );
 
 	// Initialize size
 	this.sizeWidget.setSizeType( this.imageModel.isDefaultSize() ? 'default' : 'custom' );
-	this.sizeWidget.setDisabled( this.imageModel.getType() === 'frame' );
 
 	// Update default dimensions
 	this.sizeWidget.updateDefaultDimensions();
