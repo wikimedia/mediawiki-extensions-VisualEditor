@@ -139,7 +139,7 @@
 		// Resize the textarea to fit content. We could do this more often (e.g. on change)
 		// but hopefully this temporary textarea won't be visible for too long.
 		tempWikitextEditor.adjustSize().moveCursorToStart();
-		ve.track( 'mwedit.ready', { mode: 'source' } );
+		ve.track( 'mwedit.ready', { mode: 'source', platform: 'desktop' } );
 		mw.libs.ve.tempWikitextEditor = tempWikitextEditor;
 		mw.hook( 've.wikitextInteractive' ).fire();
 	}
