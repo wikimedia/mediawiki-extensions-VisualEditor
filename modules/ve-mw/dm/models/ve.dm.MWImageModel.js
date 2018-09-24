@@ -643,7 +643,8 @@ ve.dm.MWImageModel.prototype.setMediaType = function ( type ) {
  * @return {boolean} Default size flag on or off
  */
 ve.dm.MWImageModel.prototype.isDefaultSize = function () {
-	return this.scalable.isDefault();
+	// An image with 'frame' always ignores the size specification
+	return this.scalable.isDefault() || this.getType() === 'frame';
 };
 
 /**
