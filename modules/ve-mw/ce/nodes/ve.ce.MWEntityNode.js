@@ -48,7 +48,7 @@ ve.ce.MWEntityNode.static.name = 'mwEntity';
 ve.ce.MWEntityNode.prototype.onUpdate = function () {
 	var
 		chr = this.model.getAttribute( 'character' ),
-		whitespaceHtmlChars = ve.ce.nodeFactory.lookup( 'text' ).static.whitespaceHtmlCharacters,
+		whitespaceHtmlChars = ve.visibleWhitespaceCharacters,
 		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();
 
 	if ( !significantWhitespace && Object.prototype.hasOwnProperty.call( whitespaceHtmlChars, chr ) ) {
