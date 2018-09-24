@@ -121,7 +121,7 @@
 
 			if ( options.sessionStore ) {
 				try {
-					// ve.init.platform.getSession is not available yet
+					// ve.init.platform.getSessionObject is not available yet
 					sessionState = JSON.parse( mw.storage.session.get( 've-docstate' ) );
 				} catch ( e ) {}
 
