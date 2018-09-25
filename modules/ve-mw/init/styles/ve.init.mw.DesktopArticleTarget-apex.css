@@ -14,11 +14,6 @@
 	font-size: 0.8em;
 }
 
-.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-documentNode,
-.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
-	padding: 0;
-}
-
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
 	/* Fix margin overlap */
 	margin-top: 0;
