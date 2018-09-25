@@ -112,6 +112,7 @@
 		"VisualEditor": [
 			"lib/ve/i18n",
 			"i18n/ve-mw",
+			"i18n/ve-mw/api",
 			"i18n/ve-wmf"
 		]
 	},

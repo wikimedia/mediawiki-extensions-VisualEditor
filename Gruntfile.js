@@ -163,7 +163,7 @@ module.exports = function ( grunt ) {
 		},
 		banana: {
 			all: [
-				'i18n/{ve-mw,ve-wmf}'
+				'i18n/{ve-mw,ve-mw/api,ve-wmf}'
 			]
 		},
 		jsonlint: {
