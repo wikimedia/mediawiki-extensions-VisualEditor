@@ -1,4 +1,4 @@
-/*
+/*!
  * VisualEditor user interface MWCancelConfirmDialog class.
  *
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt

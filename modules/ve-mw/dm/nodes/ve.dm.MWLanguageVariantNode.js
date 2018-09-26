@@ -317,7 +317,7 @@ ve.dm.MWLanguageVariantNode.static.matchLanguage = function ( items ) {
 
 /* Methods */
 
-/*
+/**
  * Helper function to get the description object for this markup node.
  *
  * @method

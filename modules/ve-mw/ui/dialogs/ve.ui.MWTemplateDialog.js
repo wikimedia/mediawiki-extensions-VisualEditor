@@ -1,4 +1,4 @@
-/*
+/*!
  * VisualEditor user interface MWTemplateDialog class.
  *
  * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
