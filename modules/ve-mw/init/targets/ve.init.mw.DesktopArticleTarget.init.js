@@ -1076,7 +1076,8 @@
 		requiredSkinElements =
 			$( '#content' ).length &&
 			$( '#mw-content-text' ).length &&
-			$( '#ca-edit' ).length;
+			// A link to open the editor is technically not necessary if it's going to open itself
+			( isEditPage || $( '#ca-edit' ).length );
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
