@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Acamicamacaraca",
+			"BadDog",
+			"Milicevic01"
+		]
+	},
+	"apierror-visualeditor-api-langlinks-error": "Грешка при упиту Медијавики API-ја",
+	"apierror-visualeditor-badcachekey": "Није пронађена кеширана серијализација са тим кључем",
+	"apierror-visualeditor-difffailed": "Приказ разлике није успео",
+	"apierror-visualeditor-latestnotfound": "Није могуће пронаћи најновију измену за наслов.",
+	"apihelp-visualeditor-description": "Враћа HTML5 за страницу са услуге Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Када чувате, поставите ово на временску ознаку измене која је била уређена. Користи се за откривање сукоба измена.",
+	"apihelp-visualeditor-param-etag": "ETag за слање.",
+	"apihelp-visualeditor-param-html": "HTML кôд за слање Parsoid-у како би се конвертовао у викитекст.",
+	"apihelp-visualeditor-param-oldid": "Број измене коју треба коритити (подразумевана је последња измена).",
+	"apihelp-visualeditor-param-paction": "Радња за извршавање.",
+	"apihelp-visualeditor-param-page": "Страница на коју треба извршити радње.",
+	"apihelp-visualeditor-param-pst": "Пре-сачувај трансформирани викитекст пре његовог слања Parsoid-у (paction=parsefragment).",
+	"apihelp-visualeditor-param-starttimestamp": "Када чувате, поставите ово на временски потпис тренутка када је измена учитана. Користи се за откривање сукоба измена.",
+	"apihelp-visualeditor-param-wikitext": "Викитекст који се треба послати Parsoid-у за конвертовање у HTML (paction=parsefragment).",
+	"apihelp-visualeditor-summary": "Приказује HTML5 за страницу користећи услугу Parsoid.",
+	"apihelp-visualeditoredit-description": "Сачувај страницу у HTML5 формату на Медијавики (конвертована у викитекст уз помоћ услуге Parsoid).",
+	"apihelp-visualeditoredit-param-basetimestamp": "Када чувате, поставите ово на временску ознаку измене која је била уређена. Користи се за откривање сукоба измена.",
+	"apihelp-visualeditoredit-param-cachekey": "Користите резултат претходног захтева за serializeforcache с овим кључем. Надјачава $1html.",
+	"apihelp-visualeditoredit-param-captchaid": "ID капче (када сачувавате са капча одговором).",
+	"apihelp-visualeditoredit-param-captchaword": "Одговор на капчу (када сачувавате са капча одговором).",
+	"apihelp-visualeditoredit-param-etag": "ETag за слање.",
+	"apihelp-visualeditoredit-param-html": "HTML кôд за слање Parsoid-у за викитекст.",
+	"apihelp-visualeditoredit-param-minor": "Ознака за мању измену.",
+	"apihelp-visualeditoredit-param-oldid": "Број измене коју треба користити. Подразумевана је последња измена. Користите 0 за нову страницу.",
+	"apihelp-visualeditoredit-param-paction": "Радња за извршавање.",
+	"apihelp-visualeditoredit-param-page": "Страница на коју треба извршити радње.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Наслов за нови одељак.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Када чувате, поставите ово на временски потпис тренутка када је измена учитана. Користи се за откривање сукоба измена.",
+	"apihelp-visualeditoredit-param-summary": "Опис измене."
+}

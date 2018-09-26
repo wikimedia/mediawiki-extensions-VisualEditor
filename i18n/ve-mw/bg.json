@@ -14,17 +14,6 @@
 			"ShockD"
 		]
 	},
-	"apihelp-visualeditor-description": "Връща HTML5 за страница от услугата Parsoid.",
-	"apihelp-visualeditor-param-etag": "ETag за изпращане.",
-	"apihelp-visualeditor-param-paction": "Действие за извършване.",
-	"apihelp-visualeditor-param-page": "Страница, върху която да се извършат действията.",
-	"apihelp-visualeditoredit-param-etag": "ETag за изпращане.",
-	"apihelp-visualeditoredit-param-minor": "Маркиране като малка редакция.",
-	"apihelp-visualeditoredit-param-paction": "Действие за извършване.",
-	"apihelp-visualeditoredit-param-page": "Страница, върху която да се извършат действията.",
-	"apihelp-visualeditoredit-param-section": "Раздел, върху който да се извършат действията.",
-	"apihelp-visualeditoredit-param-sectiontitle": "Заглавие на новия раздел.",
-	"apihelp-visualeditoredit-param-summary": "Резюме на редакцията.",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Създаване на изходния код на страницата",
 	"tooltip-ca-edit": "Редактиране на страницата с помощта на уикитекст",

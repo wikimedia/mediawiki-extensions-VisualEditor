@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liridon",
+			"Techlik"
+		]
+	},
+	"apihelp-visualeditor-description": "Kthen një faqe HTML5 prej një shërbimi Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Kur ruani, vendosni këtë kohë të momentit të redaktimit. Përdoret për të detektuar konfliktet e redaktimit.",
+	"apihelp-visualeditor-param-cachekey": "Për serializim ose diferencim, përdorni rezultatin e një serializimi të kaluar për kërkesën me këtë çelës. Mbishkruan $1html.",
+	"apihelp-visualeditor-param-etag": "ETag për të dërguar.",
+	"apihelp-visualeditor-param-paction": "Veprim për tu kryer.",
+	"apihelp-visualeditor-param-page": "Faqja do të kryej veprime në."
+}

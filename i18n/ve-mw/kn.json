@@ -11,9 +11,6 @@
 			"Vikashegde"
 		]
 	},
-	"apihelp-visualeditor-description": "Parsoid ಸೇವೆಯಿಂದ ಪುಟವೊಂದಕ್ಕೆ HTML5 ಹಿಂದಿರುಗಿಸುತ್ತದೆ.",
-	"apihelp-visualeditor-param-paction": "ಕ್ರಿಯಾ ಪ್ರಯೋಗ",
-	"apihelp-visualeditoredit-param-summary": "ಸಂಪಾದನೆಯ ಸಾರಾಂಶ",
 	"tooltip-ca-createsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸೃಷ್ಟಿಸಿ",
 	"tooltip-ca-edit": "ಈ ಪುಟವನ್ನು ನೀವು ಸಂಪಾದಿಸಬಹುದು. ಉಳಿಸುವ ಮುನ್ನ ಮುನ್ನೋಟವನ್ನು ಉಪಯೋಗಿಸಿ.",
 	"tooltip-ca-editsource": "ಈ ಪುಟದ ಸೋರ್ಸ್ ಕೋಡ್ ಸಂಪಾದಿಸಿ",

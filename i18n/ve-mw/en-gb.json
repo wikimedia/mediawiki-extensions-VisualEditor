@@ -10,7 +10,6 @@
 			"Pierpao"
 		]
 	},
-	"apihelp-visualeditor-param-cachekey": "For serialise or diff, use the result of a previous serializeforcache request with this key. Overrides $1html.",
 	"tooltip-ca-ve-edit": "Edit this page",
 	"visualeditor-ca-editsource": "Edit source",
 	"visualeditor-ca-editsource-section": "edit source",

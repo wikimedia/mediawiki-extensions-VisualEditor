@@ -10,9 +10,6 @@
 			"Cumbril"
 		]
 	},
-	"apihelp-visualeditor-description": "Tagastab teenusest Parsoid lehekülje HTML5-koodi.",
-	"apihelp-visualeditor-param-basetimestamp": "Salvestamisel määra siin redigeeritud redaktsiooni ajatempel. Seda kasutatakse redigeerimiskonfliktide tuvastamiseks.",
-	"apihelp-visualeditor-param-html": "HTML, mis saadetakse Parsoidile, et teisendada see vikitekstiks.",
 	"tooltip-ca-createsource": "Loo selle lehekülje lähtetekst",
 	"tooltip-ca-edit": "Redigeeri lehekülge vikiteksti vahendusel",
 	"tooltip-ca-editsource": "Redigeeri selle lehekülje lähteteksti",

@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gombang",
+			"William Surya Permana"
+		]
+	},
+	"apihelp-visualeditor-description": "Mengembalikan HTML5 untuk halaman yang berasal dari layanan parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat revisi ini dibuat. Digunakan untuk mendeteksi konflik penyuntingan.",
+	"apihelp-visualeditor-param-cachekey": "Untuk serialize atau diff, gunakan hasil dari permintaan serializeforcache dengan kunci ini sebelumnya. Menimpa $1.",
+	"apihelp-visualeditor-param-format": "Format keluaran.",
+	"apihelp-visualeditor-param-html": "HTML untuk mengirim ke Parsoid untuk mengkonversi menjadi teks wiki.",
+	"apihelp-visualeditor-param-oldid": "Nomor revisi yang diinginkan (secara baku: versi terkini).",
+	"apihelp-visualeditor-param-paction": "Tindakan untuk dilakukan.",
+	"apihelp-visualeditor-param-page": "Halaman di mana tindakan akan dilakukan.",
+	"apihelp-visualeditor-param-pst": "Pra-simpan mengubah teks wiki sebelum mengirimkannya ke Parsoid (paction=parsefragment).",
+	"apihelp-visualeditor-param-starttimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat halaman ini dimuat. Digunakan untuk mendeteksi konflik penyuntingan.",
+	"apihelp-visualeditor-param-wikitext": "Teks wiki untuk mengirim ke Parsoid untuk mengkonversi menjadi HTML (paction=parsefragment).",
+	"apihelp-visualeditoredit-description": "Simpan halaman HTML5 ke MediaWiki (dikonversi menjadi teks wiki melalui layanan Parsoid).",
+	"apihelp-visualeditoredit-param-basetimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat revisi ini dibuat. Digunakan untuk mendeteksi konflik penyuntingan.",
+	"apihelp-visualeditoredit-param-cachekey": "Gunakan hasil dari permintaan serializeforcache dengan kunci ini sebelumnya. Menimpa $1html.",
+	"apihelp-visualeditoredit-param-captchaid": "ID Captcha (ketika menyimpan dengan respons captcha).",
+	"apihelp-visualeditoredit-param-captchaword": "Jawaban captcha (ketika menyimpan dengan respons captcha).",
+	"apihelp-visualeditoredit-param-html": "HTML untuk mengirim ke Parsoid sebagai pengganti teks wiki.",
+	"apihelp-visualeditoredit-param-minor": "Tandai sebagai suntingan kecil.",
+	"apihelp-visualeditoredit-param-needcheck": "Ketika menyimpan, atur parameter ini jika revisi tersebut mungkin memiliki permasalahan berputar. Hal ini akan menyebabkan hasil dalam suntingan tersebut menjadi bertanda.",
+	"apihelp-visualeditoredit-param-oldid": "Nomor revisi yang diinginkan. Secara baku: versi terkini. Gunakan 0 untuk halaman baru.",
+	"apihelp-visualeditoredit-param-paction": "Tindakan untuk dilakukan.",
+	"apihelp-visualeditoredit-param-page": "Halaman di mana tindakan akan dilakukan.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Judul untuk bagian baru.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat halaman ini dimuat. Digunakan untuk mendeteksi konflik penyuntingan.",
+	"apihelp-visualeditoredit-param-summary": "Ringkasan suntingan",
+	"apihelp-visualeditoredit-summary": "Simpan halaman HTML5 ke MediaWiki (dikonversi menjadi teks wiki melalui layanan Parsoid)."
+}

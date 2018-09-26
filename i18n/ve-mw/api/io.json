@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Idojc",
+			"Joao Xavier"
+		]
+	},
+	"apierror-visualeditor-api-langlinks-error": "Eroro dum questionar MediaWiki API",
+	"apihelp-visualeditor-param-paction": "Ago exekutenda.",
+	"apihelp-visualeditor-param-page": "La pagino ube agi esas exekutenda.",
+	"apihelp-visualeditor-param-section": "La segmento ube agi esas exekutenda.",
+	"apihelp-visualeditoredit-param-oldid": "Nombro di la revizo por uzar. Maxim ofte, ol esas la lasta revizo. Uzez la nombro '0' por nova pagino.",
+	"apihelp-visualeditoredit-param-paction": "Ago exekutenda.",
+	"apihelp-visualeditoredit-param-page": "La pagino ube agi esas exekutenda.",
+	"apihelp-visualeditoredit-param-section": "La segmento ube agi esas exekutenda.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Titulo di nova segmento."
+}

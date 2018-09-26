@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"KuboF",
+			"Kvardek du",
+			"NMaia",
+			"Psychoslave"
+		]
+	},
+	"apierror-visualeditor-api-langlinks-error": "Eraro pridemandante la MediaWiki-API",
+	"apierror-visualeditor-difffailed": "Diff malsukcesita",
+	"apihelp-visualeditor-description": "Liveras HTML5an kodon por paĝo el la servo de Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Kiam konservigu, asignu tempindikon de la redaktita revizio. Tio estas uzata por rekoni konflikoj pri redakto.",
+	"apihelp-visualeditor-param-cachekey": "Por vicigo aŭ diferencaĵo, uzu rezulton de antaŭa porkaŝmemorviciga peto (''serializeforcache request'') kun tiu vokilo. Transpasu $1html.",
+	"apihelp-visualeditor-param-etag": "[https://eo.wikipedia.org/wiki/HTTP_ETag ETag] Sendenda",
+	"apihelp-visualeditor-param-html": "La HTMLa kodo sendendas al Parsoid por vikitekstigado.",
+	"apihelp-visualeditor-param-oldid": "La numero de revizio uzenda (defaŭlte uzas la lastan revizion).",
+	"apihelp-visualeditor-param-paction": "Plenumenda ago.",
+	"apihelp-visualeditor-param-page": "La paĝo, kiun agoj plenumendas.",
+	"apihelp-visualeditor-param-pst": "Prekonserve transformigi vikitekston (''Pre-save transform'') antaŭ sendi ĝin al Parsoid\" (<code>paction=parsefragment</code>, sintaksanalizago=sintakspeco).",
+	"apihelp-visualeditor-param-starttimestamp": "Kiam konservanta, asignas tiun al tempindiko de la paĝŝarga dato. Tio estas uzata por rekoni konflikojn pri redakto.",
+	"apihelp-visualeditor-param-wikitext": "La vikiteksto sendendas al Parsoid por HTMLigado (<code>paction=parsefragment</code>, sintaksanalizago=sintakspeco).",
+	"apihelp-visualeditoredit-description": "Konservi HTML5an pâgon al MediaWiki (tradukita al vikiteksto per servico de Parsoid).",
+	"apihelp-visualeditoredit-param-basetimestamp": "Kiam konservigu, asignu tempindikon de la redaktita revizio. Tio estas uzata por rekoni konflikoj pri redakto.",
+	"apihelp-visualeditoredit-param-cachekey": "Uzi la rezulton de  antaŭa porkaŝmemorovicigo (''serializeforcache'') peto kun ĉi tiu vokanto. Ĝi transpasas $1html.",
+	"apihelp-visualeditoredit-param-captchaid": "Identigilo de homultesto Captcha (por konservi kun homultest-respondo).",
+	"apihelp-visualeditoredit-param-captchaword": "Respondo al homultesto Captcha (por konservi kun homultesto-respondo).",
+	"apihelp-visualeditoredit-param-etag": "[https://eo.wikipedia.org/wiki/HTTP_ETag ETag] Sendenda",
+	"apihelp-visualeditoredit-param-html": "La HTMLa kodo sendendas al Parsoid interŝanĝe por vikiteksto.",
+	"apihelp-visualeditoredit-param-minor": "Flago por redakteto.",
+	"apihelp-visualeditoredit-param-needcheck": "Flago pri redakteto.",
+	"apihelp-visualeditoredit-param-oldid": "La uzenda numero de revizio. Defaŭltas al la lasta revizio. Uzi 0 por nova paĝo.",
+	"apihelp-visualeditoredit-param-paction": "Plenumenda ago.",
+	"apihelp-visualeditoredit-param-page": "La paĝo, kiun agoj plenumendas.",
+	"apihelp-visualeditoredit-param-section": "La sekcio sur kiu agi.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Titolo por nova sekcio.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Kiam konservanta, asignas tiun al tempindiko de la paĝŝarga dato. Tio estas uzata por rekoni konflikojn pri redakto.",
+	"apihelp-visualeditoredit-param-summary": "Redakta resumo."
+}

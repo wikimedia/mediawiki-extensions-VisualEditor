@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"apihelp-visualeditor-description": "Retorna HTML pro un pagina ab le servicio Parsoid.",
+	"apihelp-visualeditor-param-basetimestamp": "Quando tu salveguarda, insere hic le data e hora del version que ha essite modificate. Isto es pro deteger conflictos de modification.",
+	"apihelp-visualeditor-param-cachekey": "Pro serialisar o comparar le versiones, usar le resultato de un previe requesta \"serializeforcache\" con iste clave. Supplanta $1html.",
+	"apihelp-visualeditor-param-oldid": "Le numero del version a usar (predefinite le ultime version).",
+	"apihelp-visualeditor-param-paction": "Action a exequer.",
+	"apihelp-visualeditor-param-page": "Le pagina sur le qual exequer actiones."
+}
