@@ -354,17 +354,12 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		help: ve.msg( 'visualeditor-dialog-media-size-section-help' )
 	} );
 
-	this.sizeErrorLabel = new OO.ui.LabelWidget( {
-		label: ve.msg( 'visualeditor-dialog-media-size-originalsize-error' )
-	} );
-
 	this.sizeWidget = new ve.ui.MediaSizeWidget( undefined, {
 		dimensionsAlign: 'top'
 	} );
 
 	this.$sizeWidgetElements = $( '<div>' ).append(
-		this.sizeWidget.$element,
-		this.sizeErrorLabel.$element
+		this.sizeWidget.$element
 	);
 	this.sizeFieldset.$element.append(
 		this.$sizeWidgetElements
@@ -1248,7 +1243,6 @@ ve.ui.MWMediaDialog.prototype.attachImageModel = function () {
 	this.updateFilenameFieldset();
 
 	// Size widget
-	this.sizeErrorLabel.toggle( false );
 	this.sizeWidget.setScalable( this.imageModel.getScalable() );
 	this.sizeWidget.connect( this, {
 		changeSizeType: 'onChangeSizeType',
