@@ -137,7 +137,7 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 		}
 
 		descriptions.push(
-			ve.htmlMsg( 'visualeditor-changedesc-image-size', $( '<del>' ).text( sizeFrom ), $( '<ins>' ).text( sizeTo ) )
+			ve.htmlMsg( 'visualeditor-changedesc-image-size', this.wrapText( 'del', sizeFrom ), this.wrapText( 'ins', sizeTo ) )
 		);
 	}
 	for ( key in attributeChanges ) {
@@ -161,8 +161,8 @@ ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
 				// visualeditor-align-desc-left, visualeditor-align-desc-right,
 				// visualeditor-align-desc-center, visualeditor-align-desc-default,
 				// visualeditor-align-desc-none
-				$( '<del>' ).text( ve.msg( 'visualeditor-align-desc-' + change.from ) ),
-				$( '<ins>' ).text( ve.msg( 'visualeditor-align-desc-' + change.to ) )
+				this.wrapText( 'del', ve.msg( 'visualeditor-align-desc-' + change.from ) ),
+				this.wrapText( 'ins', ve.msg( 'visualeditor-align-desc-' + change.to ) )
 			);
 		case 'originalClasses':
 		case 'unrecognizedClasses':
