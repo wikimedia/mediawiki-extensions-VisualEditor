@@ -40,7 +40,7 @@ ve.ui.MWExtensionDialog.static.actions = ve.ui.MWExtensionDialog.super.static.ac
 	},
 	{
 		action: 'done',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-done' ),
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
 		flags: [ 'progressive', 'primary' ],
 		modes: 'edit'
 	},
