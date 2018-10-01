@@ -2152,7 +2152,13 @@
 		"ext.visualEditor.mwlanguage": {
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantBlockNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantHiddenNode.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantInlineNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantBlockNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantHiddenNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWLanguageVariantInlineNode.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWLanguageVariantNodeContextItem.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLanguageVariantInspector.js"
 			],
