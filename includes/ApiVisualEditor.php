@@ -98,7 +98,7 @@ class ApiVisualEditor extends ApiBase {
 		}
 		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
 		$reqheaders['Accept'] = 'text/html; charset=utf-8;' .
-			' profile="https://www.mediawiki.org/wiki/Specs/HTML/1.7.0"';
+			' profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"';
 		$reqheaders['Accept-Language'] = self::getPageLanguage( $title )->getCode();
 		$reqheaders['User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
 		$reqheaders['Api-User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
