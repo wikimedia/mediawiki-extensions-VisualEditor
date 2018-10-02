@@ -35,7 +35,7 @@ ve.dm.MWGalleryImageNode.static.childNodeTypes = [ 'mwGalleryImageCaption' ];
 ve.dm.MWGalleryImageNode.static.matchFunction = function ( element ) {
 	var parentTypeof = ( element.parentNode && element.parentNode.getAttribute( 'typeof' ) ) || '';
 	return element.getAttribute( 'class' ) === 'gallerybox' &&
-		parentTypeof.split( ' ' ).indexOf( 'mw:Extension/gallery' ) !== -1;
+		parentTypeof.trim().split( /\s+/ ).indexOf( 'mw:Extension/gallery' ) !== -1;
 };
 
 ve.dm.MWGalleryImageNode.static.parentNodeTypes = [ 'mwGallery' ];

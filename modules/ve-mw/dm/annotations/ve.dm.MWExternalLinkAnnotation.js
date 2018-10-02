@@ -39,7 +39,7 @@ ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, co
 	var dataElement, annotation,
 		domElement = domElements[ 0 ],
 		type = domElement.getAttribute( 'rel' ) || domElement.getAttribute( 'typeof' ) || domElement.getAttribute( 'property' ) || '',
-		types = type.split( ' ' );
+		types = type.trim().split( /\s+/ );
 
 	// If the link doesn't have a known RDFa type, auto-convert it to the correct type (internal/external/span)
 	if ( types.indexOf( 'mw:ExtLink' ) === -1 && types.indexOf( 'mw:WikiLink/Interwiki' ) === -1 ) {
