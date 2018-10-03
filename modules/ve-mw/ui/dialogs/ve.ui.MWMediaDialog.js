@@ -173,9 +173,10 @@ ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaDialog.prototype.initialize = function () {
-	var altTextFieldset, positionFieldset, borderField,
-		positionField, positionSelectField, searchPanel,
-		uploadPanel;
+	var captionField, altTextField, altTextFieldset,
+		positionSelectField, positionCheckboxField,
+		positionFieldset, typeSelectField, borderField,
+		sizeWidgetField, searchPanel, uploadPanel;
 
 	// Parent method
 	ve.ui.MWMediaDialog.super.prototype.initialize.call( this );
@@ -211,26 +212,31 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		inDialog: this.constructor.static.name,
 		multiline: false
 	} );
+	captionField = new OO.ui.FieldLayout( this.captionTarget, {
+		align: 'top'
+	} );
 	this.captionFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		classes: [ 've-ui-mwMediaDialog-caption-fieldset' ]
 	} );
-	this.captionFieldset.$element.append( this.captionTarget.$element );
+	this.captionFieldset.addItems( captionField );
 
 	// Alt text
 	this.altTextInput = new OO.ui.TextInputWidget( {
 		spellcheck: true,
 		classes: [ 've-ui-mwMediaDialog-altText' ]
 	} );
+	altTextField = new OO.ui.FieldLayout( this.altTextInput, {
+		align: 'top'
+	} );
 	altTextFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' )
 	} );
-	altTextFieldset.$element
-		.append( this.altTextInput.$element );
+	altTextFieldset.addItems( altTextField );
 
 	// Advanced settings
 
@@ -240,7 +246,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	} );
 	positionSelectField = new OO.ui.FieldLayout( this.positionSelect );
 	this.positionCheckbox = new OO.ui.CheckboxInputWidget();
-	positionField = new OO.ui.FieldLayout( this.positionCheckbox, {
+	positionCheckboxField = new OO.ui.FieldLayout( this.positionCheckbox, {
 		$overlay: this.$overlay,
 		align: 'inline',
 		label: ve.msg( 'visualeditor-dialog-media-position-checkbox' ),
@@ -251,17 +257,12 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-position-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-position-section-help' )
 	} );
-	positionFieldset.$element.append(
-		positionField.$element,
-		positionSelectField.$element
-	);
+	positionFieldset.addItems( [
+		positionCheckboxField,
+		positionSelectField
+	] );
 
 	// Type
-	this.typeFieldset = new OO.ui.FieldsetLayout( {
-		$overlay: this.$overlay,
-		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
-		help: ve.msg( 'visualeditor-dialog-media-type-section-help' )
-	} );
 	this.typeSelectDropdown = new OO.ui.DropdownWidget( { $overlay: this.$overlay } );
 	this.typeSelect = this.typeSelectDropdown.getMenu();
 	this.typeSelect.addItems( [
@@ -287,31 +288,37 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 			label: ve.msg( 'visualeditor-dialog-media-type-none' )
 		} )
 	] );
+	typeSelectField = new OO.ui.FieldLayout( this.typeSelectDropdown, {
+		align: 'top'
+	} );
 	this.borderCheckbox = new OO.ui.CheckboxInputWidget();
 	borderField = new OO.ui.FieldLayout( this.borderCheckbox, {
 		align: 'inline',
 		label: ve.msg( 'visualeditor-dialog-media-type-border' )
 	} );
-	this.typeFieldset.$element.append(
-		this.typeSelectDropdown.$element,
-		borderField.$element
-	);
+	this.typeFieldset = new OO.ui.FieldsetLayout( {
+		$overlay: this.$overlay,
+		label: ve.msg( 'visualeditor-dialog-media-type-section' ),
+		help: ve.msg( 'visualeditor-dialog-media-type-section-help' )
+	} );
+	this.typeFieldset.addItems( [
+		typeSelectField,
+		borderField
+	] );
 
 	// Size
+	this.sizeWidget = new ve.ui.MediaSizeWidget( undefined, {
+		dimensionsAlign: 'top'
+	} );
+	sizeWidgetField = new OO.ui.FieldLayout( this.sizeWidget );
 	this.sizeFieldset = new OO.ui.FieldsetLayout( {
 		$overlay: this.$overlay,
 		label: ve.msg( 'visualeditor-dialog-media-size-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-size-section-help' )
 	} );
-	this.sizeWidget = new ve.ui.MediaSizeWidget( undefined, {
-		dimensionsAlign: 'top'
-	} );
-	this.$sizeWidgetElements = $( '<div>' ).append(
-		this.sizeWidget.$element
-	);
-	this.sizeFieldset.$element.append(
-		this.$sizeWidgetElements
-	);
+	this.sizeFieldset.addItems( [
+		sizeWidgetField
+	] );
 
 	// Search, upload and info layouts
 	this.mediaSearchPanel = new OO.ui.TabPanelLayout( {
