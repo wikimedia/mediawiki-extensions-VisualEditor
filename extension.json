@@ -1046,6 +1046,9 @@
 				"vector": [
 					"lib/ve/src/themes/wikimediaui.css"
 				],
+				"minerva": [
+					"lib/ve/src/themes/wikimediaui.css"
+				],
 				"apex": [
 					"lib/ve/src/themes/apex.css"
 				],
@@ -1455,6 +1458,12 @@
 			"skinStyles": {
 				"vector": [
 					"modules/ve-mw/themes/wikimediaui.css"
+				],
+				"minerva": [
+					"modules/ve-mw/themes/wikimediaui.css"
+				],
+				"apex": [
+					"modules/ve-mw/themes/apex.css"
 				],
 				"monobook": [
 					"modules/ve-mw/themes/apex.css"
