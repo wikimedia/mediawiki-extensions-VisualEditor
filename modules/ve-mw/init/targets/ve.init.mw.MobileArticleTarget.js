@@ -61,12 +61,9 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	// Placeholder for reference tools (e.g. Cite and/or Citoid)
 	{
 		name: 'reference'
-	},
-	// Done with editing toolbar
-	{
-		name: 'done',
-		include: [ 'done' ]
 	}
+	// "Done" tool is added in setupToolbar as it not part of the
+	// standard config (i.e. shouldn't be inhertied by TargetWidget)
 ];
 
 ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
@@ -153,6 +150,17 @@ ve.init.mw.MobileArticleTarget.prototype.createTargetWidget = function ( config 
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
+
+	this.getToolbar().setup(
+		this.constructor.static.toolbarGroups.concat( [
+			// Done with editing toolbar
+			{
+				name: 'done',
+				include: [ 'done' ]
+			}
+		] ),
+		surface
+	);
 
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
 	// Append the context to the toolbar
@@ -305,6 +313,7 @@ ve.ui.MWDoneTool = function VeUiMWDoneTool() {
 OO.inheritClass( ve.ui.MWDoneTool, ve.ui.Tool );
 ve.ui.MWDoneTool.static.name = 'done';
 ve.ui.MWDoneTool.static.group = 'navigation';
+ve.ui.MWDoneTool.static.group.autoAddToCatchall = false;
 ve.ui.MWDoneTool.static.icon = 'check';
 ve.ui.MWDoneTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-donebutton-tooltip' );
