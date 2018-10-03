@@ -129,7 +129,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		innerMenuLayout, innerMenuPanel, innerContentPanel,
 		modeField, captionField, widthsField, heightsField,
 		perrowField, showFilenameField, classesField, stylesField,
-		highlightedCaptionFieldset, highlightedAltTextFieldset;
+		highlightedCaptionField, highlightedCaptionFieldset,
+		highlightedAltTextField, highlightedAltTextFieldset;
 
 	// Parent method
 	ve.ui.MWGalleryDialog.super.prototype.initialize.call( this );
@@ -227,17 +228,21 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		classes: [ 've-ui-mwGalleryDialog-remove-button' ]
 	} );
 
+	highlightedCaptionField = new OO.ui.FieldLayout( this.highlightedCaptionTarget, {
+		align: 'top'
+	} );
 	highlightedCaptionFieldset = new OO.ui.FieldsetLayout( {
-		label: ve.msg( 'visualeditor-dialog-media-content-section' ),
-		icon: 'parameter'
+		label: ve.msg( 'visualeditor-dialog-media-content-section' )
 	} );
-	highlightedCaptionFieldset.$element.append( this.highlightedCaptionTarget.$element );
+	highlightedCaptionFieldset.addItems( highlightedCaptionField );
 
-	highlightedAltTextFieldset = new OO.ui.FieldsetLayout( {
-		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
-		icon: 'parameter'
+	highlightedAltTextField = new OO.ui.FieldLayout( this.highlightedAltTextInput, {
+		align: 'top'
 	} );
-	highlightedAltTextFieldset.$element.append( this.highlightedAltTextInput.$element );
+	highlightedAltTextFieldset = new OO.ui.FieldsetLayout( {
+		label: ve.msg( 'visualeditor-dialog-media-alttext-section' )
+	} );
+	highlightedAltTextFieldset.addItems( highlightedAltTextField );
 
 	// Search panel
 	this.searchWidget = new mw.widgets.MediaSearchWidget( {
