@@ -14,13 +14,15 @@
 			"아라",
 			"Ribewiki",
 			"Peter Alberti",
-			"SimmeD"
+			"SimmeD",
+			"Saederup92"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering]]",
 	"tag-visualeditor-description": "Redigeret ved hjælp af [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuel redigering]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering: Tjek]]",
 	"tag-visualeditor-needcheck-description": "Redigering gjort med [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuel redigering]], hvor systemet har registreret at wikiteksten muligvis har utilsigtede ændringer.",
+	"tag-visualeditor-wikitext": "2017-kilderedigering",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-tool": "Giv tilbagemelding om denne software",
 	"visualeditor-help-label": "Læs brugervejledningen",

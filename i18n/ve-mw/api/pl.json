@@ -5,7 +5,8 @@
 			"Rezonansowy",
 			"Tar Lócesilion",
 			"The Polish",
-			"Woytecr"
+			"Woytecr",
+			"Railfail536"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "Błąd podczas odpytywania API MediaWiki",
@@ -23,6 +24,7 @@
 	"apihelp-visualeditor-param-section": "Sekcja, na której działać.",
 	"apihelp-visualeditor-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditor-param-wikitext": "Wikikod wysyłany do usługi Parsoid, do przekonwertowania na HTML (paction=parsefragment).",
+	"apihelp-visualeditor-summary": "Zwraca kod HTML5 strony za pośrednictwem usługi Parsoid.",
 	"apihelp-visualeditoredit-description": "Zapisz stronę HTML5 w MediaWiki (konwertowana na wikikod przez usługę Parsoid).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy wersja była edytowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditoredit-param-cachekey": "Wykorzystaj wynik poprzedniego żądania serializeforcache z tym kluczem. Zastępuje $1html.",

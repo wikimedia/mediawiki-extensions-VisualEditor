@@ -10,7 +10,8 @@
 			"Anh88",
 			"Quenhitran",
 			"Nguyên Lê",
-			"Harriettruong3"
+			"Harriettruong3",
+			"Nhatminh01"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -70,9 +71,8 @@
 	"visualeditor-dialog-media-info-separator": "·",
 	"visualeditor-dialog-media-info-uploaded": "Đã tải lên: $1",
 	"visualeditor-dialog-media-noresults": "Không tìm thấy kết quả.",
-	"visualeditor-dialog-media-originaldimensions": "Kích thước gốc",
-	"visualeditor-dialog-media-page-advanced": "Tùy chọn nâng cao",
-	"visualeditor-dialog-media-page-general": "Tùy chọn chung",
+	"visualeditor-dialog-media-page-advanced": "Nâng cao",
+	"visualeditor-dialog-media-page-general": "Chung",
 	"visualeditor-dialog-media-position-center": "Giữa",
 	"visualeditor-dialog-media-position-checkbox": "Bao văn bản chung quanh đối tượng này",
 	"visualeditor-dialog-media-position-checkbox-help": "Bạn có thể làm cho mục phương tiện này xuất hiện ngang hàng với văn bản của trang thay vì để nó trôi nổi. Bạn nên ít khi sử dụng tùy chọn này, bởi vì nó sẽ chèn nhiều khoảng cách ở giữa văn bản nếu bạn bỏ đánh dấu hộp kiểm này.",
@@ -88,7 +88,6 @@
 	"visualeditor-dialog-media-size-choosecustom": "Đặt kích thước tùy chọn",
 	"visualeditor-dialog-media-size-choosedefault": "Đặt thành kích thước mặc định",
 	"visualeditor-dialog-media-size-choosefull": "Đặt thành kích thước đầy đủ",
-	"visualeditor-dialog-media-size-originalsize-error": "Không thể lấy kích thước tập tin gốc.",
 	"visualeditor-dialog-media-size-section": "Kích thước hình",
 	"visualeditor-dialog-media-size-section-help": "Bạn có thể thiết lập độ lớn của mục phương tiện trên trang. Mục phương tiện hầu như nên luôn luôn ở kích thước mặc định, vì các kích thước tùy chỉnh có thể ảnh hưởng đến bố cục trang đối với người đọc và khiến trang mất cân đối.",
 	"visualeditor-dialog-media-thumbdimensions": "Kích thước hình thu nhỏ (thumbnail)",
