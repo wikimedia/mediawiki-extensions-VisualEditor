@@ -146,20 +146,15 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
 
 	// Images and options tab panels
-	this.indexLayout = new OO.ui.IndexLayout( {
-		scrollable: false,
-		expanded: true
-	} );
+	this.indexLayout = new OO.ui.IndexLayout();
 	imagesTabPanel = new OO.ui.TabPanelLayout( 'images', {
 		label: ve.msg( 'visualeditor-mwgallerydialog-card-images' ),
-		expandable: false,
+		// Contains a menu layout which handles its own scrolling
 		scrollable: false,
 		padded: true
 	} );
 	optionsTabPanel = new OO.ui.TabPanelLayout( 'options', {
 		label: ve.msg( 'visualeditor-mwgallerydialog-card-options' ),
-		expandable: false,
-		scrollable: false,
 		padded: true
 	} );
 
