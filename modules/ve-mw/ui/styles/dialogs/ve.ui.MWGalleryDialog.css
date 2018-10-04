@@ -53,11 +53,11 @@
 	right: 14em;
 }
 
-.ve-ui-mwGalleryDialog-innerMenuLayout > .oo-ui-menuLayout-content {
+.ve-ui-mwGalleryDialog-imageListMenuLayout > .oo-ui-menuLayout-content {
 	bottom: 5em;
 }
 
-.ve-ui-mwGalleryDialog-innerMenuLayout > .oo-ui-menuLayout-menu {
+.ve-ui-mwGalleryDialog-imageListMenuLayout > .oo-ui-menuLayout-menu {
 	height: 5em;
 	border-top: 1px solid #eaecf0;
 	box-shadow: 0 -1px 0 0 rgba( 0, 0, 0, 0.05 );
