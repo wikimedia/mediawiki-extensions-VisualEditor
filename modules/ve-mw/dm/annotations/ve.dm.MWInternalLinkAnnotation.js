@@ -172,6 +172,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
 
 ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 	var href,
+		prefix = './',
 		title = dataElement.attributes.title,
 		origTitle = dataElement.attributes.origTitle;
 	if ( origTitle !== undefined && ve.decodeURIComponentIntoArticleTitle( origTitle ) === title ) {
@@ -179,7 +180,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 		href = origTitle;
 		// Only use hrefPrefix if restoring from origTitle
 		if ( dataElement.attributes.hrefPrefix ) {
-			href = dataElement.attributes.hrefPrefix + href;
+			prefix = dataElement.attributes.hrefPrefix;
 		}
 	} else {
 		// Don't escape slashes in the title; they represent subpages.
@@ -191,7 +192,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 			}
 		} ).join( '' );
 	}
-	return href;
+	return prefix + href;
 };
 
 /**
