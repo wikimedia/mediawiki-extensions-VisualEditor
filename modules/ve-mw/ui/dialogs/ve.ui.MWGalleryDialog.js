@@ -187,6 +187,9 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		expanded: true,
 		scrollable: true
 	} ).toggle( false );
+	this.editSearchStack = new OO.ui.StackLayout( {
+		items: [ this.editPanel, this.searchPanel ]
+	} );
 
 	// Menu
 	this.$emptyGalleryMessage = $( '<div>' )
@@ -356,15 +359,16 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		imageListMenuLayout.$element
 	);
 	menuLayout.$content.append(
-		this.editPanel.$element.append(
-			this.filenameFieldset.$element,
-			highlightedCaptionFieldset.$element,
-			highlightedAltTextFieldset.$element,
-			this.removeButton.$element
-		),
-		this.searchPanel.$element.append(
-			this.searchWidget.$element
-		)
+		this.editSearchStack.$element
+	);
+	this.editPanel.$element.append(
+		this.filenameFieldset.$element,
+		highlightedCaptionFieldset.$element,
+		highlightedAltTextFieldset.$element,
+		this.removeButton.$element
+	);
+	this.searchPanel.$element.append(
+		this.searchWidget.$element
 	);
 	imagesTabPanel.$element.append(
 		menuLayout.$element
@@ -808,8 +812,7 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 	this.searchPanelVisible = visible;
 
 	// Toggle the search panel, and do the opposite for the edit panel
-	this.searchPanel.toggle( visible );
-	this.editPanel.toggle( !visible );
+	this.editSearchStack.setItem( visible ? this.searchPanel : this.editPanel );
 
 	// If the edit panel is visible, focus the caption target
 	if ( !visible ) {
