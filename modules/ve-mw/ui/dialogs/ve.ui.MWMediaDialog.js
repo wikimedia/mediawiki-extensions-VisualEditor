@@ -1327,6 +1327,7 @@ ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
+			this.mediaSettingsLayout.resetScroll();
 			// Cleanup
 			this.search.getQuery().setValue( '' );
 			this.search.teardown();

@@ -125,7 +125,7 @@ ve.ui.MWGalleryDialog.static.getImportRules = function () {
  * @inheritdoc
  */
 ve.ui.MWGalleryDialog.prototype.initialize = function () {
-	var imagesTabPanel, optionsTabPanel, menuLayout,
+	var imagesTabPanel, optionsTabPanel,
 		imageListMenuLayout, imageListMenuPanel, imageListContentPanel,
 		modeField, captionField, widthsField, heightsField,
 		perrowField, showFilenameField, classesField, stylesField,
@@ -162,20 +162,6 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// Images tab panel
 
 	// General layout
-	menuLayout = new OO.ui.MenuLayout( {
-		menuPosition: this.isMobile ? 'top' : 'before',
-		classes: [
-			've-ui-mwGalleryDialog-menuLayout',
-			've-ui-mwGalleryDialog-menuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
-		]
-	} );
-	imageListMenuLayout = new OO.ui.MenuLayout( {
-		menuPosition: this.isMobile ? 'after' : 'bottom',
-		classes: [
-			've-ui-mwGalleryDialog-imageListMenuLayout',
-			've-ui-mwGalleryDialog-imageListMenuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
-		]
-	} );
 	imageListContentPanel = new OO.ui.PanelLayout( {
 		padded: true,
 		expanded: true,
@@ -184,6 +170,15 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	imageListMenuPanel = new OO.ui.PanelLayout( {
 		padded: true,
 		expanded: true
+	} );
+	imageListMenuLayout = new OO.ui.MenuLayout( {
+		menuPosition: this.isMobile ? 'after' : 'bottom',
+		classes: [
+			've-ui-mwGalleryDialog-imageListMenuLayout',
+			've-ui-mwGalleryDialog-imageListMenuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
+		],
+		contentPanel: imageListContentPanel,
+		menuPanel: imageListMenuPanel
 	} );
 	this.editPanel = new OO.ui.PanelLayout( {
 		padded: true,
@@ -197,6 +192,15 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} ).toggle( false );
 	this.editSearchStack = new OO.ui.StackLayout( {
 		items: [ this.editPanel, this.searchPanel ]
+	} );
+	this.imageTabMenuLayout = new OO.ui.MenuLayout( {
+		menuPosition: this.isMobile ? 'top' : 'before',
+		classes: [
+			've-ui-mwGalleryDialog-menuLayout',
+			've-ui-mwGalleryDialog-menuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
+		],
+		menuPanel: imageListMenuLayout,
+		contentPanel: this.editSearchStack
 	} );
 
 	// Menu
@@ -358,22 +362,12 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 
 	// Append everything
-	imageListMenuLayout.$menu.append(
-		imageListMenuPanel.$element.append(
-			this.showSearchPanelButton.$element
-		)
+	imageListMenuPanel.$element.append(
+		this.showSearchPanelButton.$element
 	);
-	imageListMenuLayout.$content.append(
-		imageListContentPanel.$element.append(
-			this.$emptyGalleryMessage,
-			this.galleryGroup.$element
-		)
-	);
-	menuLayout.$menu.append(
-		imageListMenuLayout.$element
-	);
-	menuLayout.$content.append(
-		this.editSearchStack.$element
+	imageListContentPanel.$element.append(
+		this.$emptyGalleryMessage,
+		this.galleryGroup.$element
 	);
 	this.editPanel.$element.append(
 		this.filenameFieldset.$element,
@@ -385,7 +379,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		this.searchWidget.$element
 	);
 	imagesTabPanel.$element.append(
-		menuLayout.$element
+		this.imageTabMenuLayout.$element
 	);
 	optionsTabPanel.$element.append(
 		modeField.$element,
@@ -540,6 +534,11 @@ ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
+			// Layouts
+			this.indexLayout.setTabPanel( 'images' );
+			this.indexLayout.resetScroll();
+			this.imageTabMenuLayout.resetScroll();
+
 			// Widgets
 			this.galleryGroup.clearItems();
 			this.searchWidget.getQuery().setValue( '' );

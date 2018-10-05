@@ -279,6 +279,9 @@ ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
 			this.categoriesPage.teardown( { action: data.action } );
 			this.settingsPage.teardown( { action: data.action } );
 			this.advancedSettingsPage.teardown( { action: data.action } );
+
+			this.bookletLayout.setPage( 'categories' );
+			this.bookletLayout.resetScroll();
 		}, this );
 };
 
