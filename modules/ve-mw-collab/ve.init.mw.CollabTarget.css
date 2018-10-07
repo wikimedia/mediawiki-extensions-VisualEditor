@@ -5,10 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-init-mw-collabTarget-loading,
+.ve-init-mw-collabTarget-loading.oo-ui-progressBarWidget,
 .ve-init-mw-collabTarget-form {
 	margin: 0 auto;
-	width: 40em;
+	max-width: 40em;
 	margin-top: 2em !important; /* stylelint-disable-line declaration-no-important */
 }
 
@@ -22,4 +22,9 @@
 	max-width: 15em;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+/* Mobile */
+.mw-body .heading-holder {
+	display: none;
 }

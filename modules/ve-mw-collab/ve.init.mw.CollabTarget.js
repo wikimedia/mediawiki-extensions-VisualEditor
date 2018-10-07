@@ -41,7 +41,6 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	ve.ui.commandRegistry.unregister( 'referencesList' );
 	ve.ui.commandRegistry.unregister( 'citefromid' );
 
-	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
 	this.$editableContent = $( '#mw-content-text' );
 
 	this.toolbarExportButton = new OO.ui.ButtonWidget( {
@@ -50,7 +49,7 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	} ).connect( this, { click: 'onExportButtonClick' } );
 
 	// Initialization
-	this.$element.addClass( 've-init-mw-articleTarget ve-init-mw-desktopArticleTarget ve-init-mw-collabTarget' ).append( this.$originalContent );
+	this.$element.addClass( 've-init-mw-articleTarget ve-init-mw-collabTarget' );
 };
 
 /* Inheritance */
@@ -98,15 +97,12 @@ ve.init.mw.CollabTarget.static.actionGroups = [
  * Page modifications after editor load.
  */
 ve.init.mw.CollabTarget.prototype.transformPage = function () {
-	this.$originalContent.append( this.$element.siblings() );
 };
 
 /**
  * Page modifications after editor teardown.
  */
 ve.init.mw.CollabTarget.prototype.restorePage = function () {
-	this.$element.parent().append( this.$originalContent.children() );
-	$( '#contentSub' ).empty();
 };
 
 /**
@@ -126,33 +122,6 @@ ve.init.mw.CollabTarget.prototype.onExportButtonClick = function () {
 	var surface = this.getSurface(),
 		windowAction = ve.ui.actionFactory.create( 'window', surface );
 	windowAction.open( 'mwExportWikitext', { surface: surface } );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.CollabTarget.prototype.attachToolbar = function () {
-	var toolbar = this.getToolbar();
-
-	// Parent method
-	ve.init.mw.CollabTarget.super.prototype.attachToolbar.apply( this, arguments );
-
-	toolbar.$element.addClass(
-		've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-open ve-init-mw-desktopArticleTarget-toolbar-opened'
-	);
-	this.$element.prepend( toolbar.$element );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.CollabTarget.prototype.setSurface = function ( surface ) {
-	if ( surface !== this.surface ) {
-		this.$editableContent.after( surface.$element );
-	}
-
-	// Parent method
-	ve.init.mw.CollabTarget.super.prototype.setSurface.apply( this, arguments );
 };
 
 /**

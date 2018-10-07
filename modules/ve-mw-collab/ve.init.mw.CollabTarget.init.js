@@ -64,7 +64,7 @@
 
 			$( 'body' ).addClass( 've-activated ve-active' );
 
-			$( '#content' ).append( target.$element );
+			$( '#content' ).prepend( target.$element );
 
 			target.transformPage();
 			$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -89,92 +89,84 @@
 			dummySurface.createProgress( progressDeferred.promise(), ve.msg( 'visualeditor-rebase-client-connecting' ), true );
 
 			surfaceModel.synchronizer.once( 'initDoc', function () {
-				var initPromise, title;
+				var initPromise;
 
 				progressDeferred.resolve();
-				target.clearSurfaces();
-				// Don't add the surface until the history has been applied
-				target.addSurface( surfaceModel );
-				target.once( 'surfaceReady', function () {
-					initPromise.then( function () {
-						surfaceModel.selectFirstContentOffset();
+				// Resolving the progress bar doesn't close the window in this cycle,
+				// so wait until we call clearSurfaces which destroys the window manager.
+				setTimeout( function () {
+					target.clearSurfaces();
+					// Don't add the surface until the history has been applied
+					target.addSurface( surfaceModel );
+					target.once( 'surfaceReady', function () {
+						initPromise.then( function () {
+							surfaceModel.selectFirstContentOffset();
+						} );
 					} );
-				} );
 
-				if ( target.importTitle && !surfaceModel.getDocument().getCompleteHistoryLength() ) {
-					initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
-						var doc, dmDoc, fragment,
-							data = response.visualeditor;
+					if ( target.importTitle && !surfaceModel.getDocument().getCompleteHistoryLength() ) {
+						initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
+							var doc, dmDoc, fragment,
+								data = response.visualeditor;
 
-						if ( data && data.content ) {
-							doc = target.constructor.static.parseDocument( data.content );
-							dmDoc = target.constructor.static.createModelFromDom( doc );
-							fragment = surfaceModel.getLinearFragment( new ve.Range( 0, 2 ) );
-							fragment.insertDocument( dmDoc );
+							if ( data && data.content ) {
+								doc = target.constructor.static.parseDocument( data.content );
+								dmDoc = target.constructor.static.createModelFromDom( doc );
+								fragment = surfaceModel.getLinearFragment( new ve.Range( 0, 2 ) );
+								fragment.insertDocument( dmDoc );
 
-							target.etag = data.etag;
-							target.baseTimeStamp = data.basetimestamp;
-							target.startTimeStamp = data.starttimestamp;
-							target.revid = data.oldid;
+								target.etag = data.etag;
+								target.baseTimeStamp = data.basetimestamp;
+								target.startTimeStamp = data.starttimestamp;
+								target.revid = data.oldid;
 
-							// Store the document metadata as a hidden meta item
-							fragment.collapseToEnd().insertContent( [
-								{
-									type: 'alienMeta',
-									attributes: {
-										importedDocument: {
-											title: target.importTitle.toString(),
-											etag: target.etag,
-											baseTimeStamp: target.baseTimeStamp,
-											startTimeStamp: target.startTimeStamp,
-											revid: target.revid
+								// Store the document metadata as a hidden meta item
+								fragment.collapseToEnd().insertContent( [
+									{
+										type: 'alienMeta',
+										attributes: {
+											importedDocument: {
+												title: target.importTitle.toString(),
+												etag: target.etag,
+												baseTimeStamp: target.baseTimeStamp,
+												startTimeStamp: target.startTimeStamp,
+												revid: target.revid
+											}
 										}
-									}
-								},
-								{ type: '/alienMeta' }
-							] );
-						} else {
-							// Import failed
-							return $.Deferred().reject( 'No content for ' + target.importTitle ).promise();
-						}
-					} );
-				} else {
-					// No import, or history already exists
-					initPromise = $.Deferred().resolve().promise();
-
-					// Look for import metadata in document
-					surfaceModel = target.getSurface().getModel();
-					surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
-						var importedDocument = item.getAttribute( 'importedDocument' );
-						if ( importedDocument ) {
-							target.importTitle = mw.Title.newFromText( importedDocument.title );
-							target.etag = importedDocument.etag;
-							target.baseTimeStamp = importedDocument.baseTimeStamp;
-							target.startTimeStamp = importedDocument.startTimeStamp;
-							target.revid = importedDocument.revid;
-							return true;
-						}
-					} );
-				}
-				initPromise.fail( function ( err ) {
-					setTimeout( function () {
-						throw new Error( err );
-					} );
-				} );
-				initPromise.always( function () {
-					// Resolve progress bar
-					// importDeferred.resolve();
-					if ( ( title = target.getImportTitle() ) ) {
-						$( '#contentSub' ).html(
-							ve.htmlMsg(
-								'collabpad-import-subtitle',
-								$( '<a>' ).attr( 'href', title.getUrl() ).text( title.getMainText() )
-							)
-						);
-						ve.targetLinksToNewWindow( $( '#contentSub' )[ 0 ] );
+									},
+									{ type: '/alienMeta' }
+								] );
+							} else {
+								// Import failed
+								return $.Deferred().reject( 'No content for ' + target.importTitle ).promise();
+							}
+						} );
 					} else {
-						$( '#contentSub' ).empty();
+						// No import, or history already exists
+						initPromise = $.Deferred().resolve().promise();
+
+						// Look for import metadata in document
+						surfaceModel = target.getSurface().getModel();
+						surfaceModel.getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
+							var importedDocument = item.getAttribute( 'importedDocument' );
+							if ( importedDocument ) {
+								target.importTitle = mw.Title.newFromText( importedDocument.title );
+								target.etag = importedDocument.etag;
+								target.baseTimeStamp = importedDocument.baseTimeStamp;
+								target.startTimeStamp = importedDocument.startTimeStamp;
+								target.revid = importedDocument.revid;
+								return true;
+							}
+						} );
 					}
+					initPromise.fail( function ( err ) {
+						setTimeout( function () {
+							throw new Error( err );
+						} );
+					} );
+					initPromise.always( function () {
+						progressDeferred.resolve();
+					} );
 				} );
 			} );
 
