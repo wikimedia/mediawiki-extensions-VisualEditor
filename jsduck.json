@@ -22,11 +22,8 @@
 		"lib/ve/lib/unicodejs/unicodejs.js",
 		"lib/ve/lib/treeDiffer/treeDiffer-dist.js",
 		"lib/ve/src",
+		"lib/ve/rebaser/src/dm",
 		"lib/ve/tests",
 		"modules/ve-mw"
-	],
-	"--exclude": [
-		"lib/ve/src/ve.utils-es6.js",
-		"lib/ve/tests/ve.utils-es6.test.js"
 	]
 }
