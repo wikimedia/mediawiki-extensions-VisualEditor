@@ -13,6 +13,7 @@
 	"tooltip-ca-ve-edit": "Cange sta pàgene cu VisualEditor",
 	"visualeditor-advancedsettings-tool": "'Mbostaziune avanzate",
 	"visualeditor-autosave-modified-prompt-accept": "Repigghie 'u cangiamende",
+	"visualeditor-autosave-modified-prompt-message": "Sta pàgene ha state cangiate apprisse ca l'è carecate. {{GENDER:|Vuè}} repigghià 'u cangiamende d'a versiona vecchie o accumenzà 'nu cangiamende nuève sus a l'urtema versione d'a pàgene?",
 	"visualeditor-autosave-modified-prompt-reject": "Accuminze 'nu cangiamende nuève",
 	"visualeditor-autosave-modified-prompt-title": "Arrepigghie 'u cangiamende {{GENDER:|tune}}?",
 	"visualeditor-autosave-not-recovered-text": "Le cangiaminde non reggistrate non ge ponne essere arrepigghiate.",
