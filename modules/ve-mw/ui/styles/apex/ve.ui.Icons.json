@@ -20,9 +20,6 @@
 		},
 		"public-domain": {
 			"file": "../images/icons/public-domain.svg"
-		},
-		"profile": {
-			"file": "../images/icons/profile.svg"
 		}
 	}
 }

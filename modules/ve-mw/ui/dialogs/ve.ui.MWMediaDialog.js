@@ -519,21 +519,21 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 				view: {
 					// "Artist" label
 					label: 'visualeditor-dialog-media-info-meta-artist',
-					icon: 'profile'
+					icon: 'userAvatar'
 				}
 			},
 			{
 				name: 'Credit',
 				value: ve.getProp( metadata, 'Credit', 'value' ),
 				data: {},
-				view: { icon: 'profile' }
+				view: { icon: 'userAvatar' }
 			},
 			{
 				name: 'user',
 				value: imageinfo.user,
 				data: { skipProcessing: true },
 				view: {
-					icon: 'profile',
+					icon: 'userAvatar',
 					// This is 'uploaded by'
 					label: 'visualeditor-dialog-media-info-artist'
 				}
