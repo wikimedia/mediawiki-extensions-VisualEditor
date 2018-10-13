@@ -10,12 +10,6 @@
 ( function () {
 	var timing, editingSessionId;
 
-	if ( mw.loader.getState( 'schema.Edit' ) === null ) {
-		// Only route any events into the Edit schema if the module is actually available.
-		// It won't be if EventLogging is installed but WikimediaEvents is not.
-		return;
-	}
-
 	timing = {};
 	editingSessionId = mw.user.generateRandomSessionId();
 
@@ -58,7 +52,7 @@
 		return -1;
 	}
 
-	ve.trackSubscribe( 'mwedit.', function ( topic, data, timeStamp ) {
+	function mwEditHandler( topic, data, timeStamp ) {
 		var action = topic.split( '.' )[ 1 ],
 			event;
 
@@ -148,9 +142,9 @@
 			mw.track( 'event.Edit', event );
 		}
 
-	} );
+	}
 
-	ve.trackSubscribe( 'mwtiming.', function ( topic, data ) {
+	function mwTimingHandler( topic, data ) {
 		// Add type for save errors; not in the topic for stupid historical reasons
 		if ( topic === 'mwtiming.performance.user.saveError' ) {
 			topic = topic + '.' + data.type;
@@ -159,6 +153,34 @@
 		// Map mwtiming.foo --> timing.ve.foo.mobile
 		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
 		mw.track( topic, data.duration );
-	} );
+	}
+
+	function activityHandler( topic, data ) {
+		var feature = topic.split( '.' )[ 1 ],
+			event;
+
+		event = {
+			feature: feature,
+			action: data.action,
+			editingSessionId: editingSessionId
+		};
+
+		// Sample at 6.25%
+		if ( event.editingSessionId && event.editingSessionId[ 0 ] === '0' ) {
+			mw.track( 'event.VisualEditorFeatureUse', event );
+		}
+	}
+
+	if ( mw.loader.getState( 'schema.Edit' ) !== null ) {
+		// Only route any events into the Edit schema if the module is actually available.
+		// It won't be if EventLogging is installed but WikimediaEvents is not.
+		ve.trackSubscribe( 'mwedit.', mwEditHandler );
+		ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
+	}
+
+	if ( mw.loader.getState( 'schema.VisualEditorFeatureUse' ) !== null ) {
+		// Similarly for the VisualEditorFeatureUse schema
+		ve.trackSubscribe( 'activity.', activityHandler );
+	}
 
 }() );
