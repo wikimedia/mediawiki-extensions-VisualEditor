@@ -321,7 +321,7 @@
 			}
 
 			$( '#ca-edit a' ).text( mw.msg( tabMsg ) );
-			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] || 'editsection' ) );
+			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] ) );
 		}
 
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
@@ -752,12 +752,9 @@
 						$divider = $( '<span>' ),
 						dividerText = mw.msg( 'pipe-separator' );
 
-					if ( tabMessages.editsectionsource !== null ) {
-						$editSourceLink.text( mw.msg( tabMessages.editsectionsource ) );
-					}
-					if ( tabMessages.editsection !== null ) {
-						$editLink.text( mw.msg( tabMessages.editsection ) );
-					}
+					$editSourceLink.text( mw.msg( tabMessages.editsectionsource ) );
+					$editLink.text( mw.msg( tabMessages.editsection ) );
+
 					$divider
 						.addClass( 'mw-editsection-divider' )
 						.text( dividerText );
