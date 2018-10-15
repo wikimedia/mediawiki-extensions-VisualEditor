@@ -61,7 +61,14 @@
 		if ( action === 'init' ) {
 			// Regenerate editingSessionId
 			editingSessionId = mw.user.generateRandomSessionId();
-		} else if (
+		}
+
+		// Sample at 6.25% (via hex digit)
+		if ( editingSessionId.charAt( 0 ) > '0' ) {
+			return;
+		}
+
+		if (
 			action === 'abort' &&
 			( data.type === 'unknown' || data.type === 'unknown-edited' )
 		) {
@@ -137,11 +144,7 @@
 			timing[ action ] = timeStamp;
 		}
 
-		// Sample at 6.25%
-		if ( event.editingSessionId && event.editingSessionId[ 0 ] === '0' ) {
-			mw.track( 'event.Edit', event );
-		}
-
+		mw.track( 'event.Edit', event );
 	}
 
 	function mwTimingHandler( topic, data ) {
@@ -159,16 +162,18 @@
 		var feature = topic.split( '.' )[ 1 ],
 			event;
 
+		// Sample at 6.25% (via hex digit)
+		if ( editingSessionId.charAt( 0 ) > '0' ) {
+			return;
+		}
+
 		event = {
 			feature: feature,
 			action: data.action,
 			editingSessionId: editingSessionId
 		};
 
-		// Sample at 6.25%
-		if ( event.editingSessionId && event.editingSessionId[ 0 ] === '0' ) {
-			mw.track( 'event.VisualEditorFeatureUse', event );
-		}
+		mw.track( 'event.VisualEditorFeatureUse', event );
 	}
 
 	if ( mw.loader.getState( 'schema.Edit' ) !== null ) {
