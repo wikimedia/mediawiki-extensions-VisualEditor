@@ -21,6 +21,9 @@
 	"apihelp-visualeditoredit-param-etag": "ETag da mannà.",
 	"apihelp-visualeditoredit-param-minor": "Signe cumme cangiamende stuèdeche.",
 	"apihelp-visualeditoredit-param-paction": "Azione da fà.",
+	"apihelp-visualeditoredit-param-page": "'A pàgene sus a quale fà l'azione.",
+	"apihelp-visualeditoredit-param-section": "'A sezione addò aggì.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Titole pa seziona nove.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Quanne ste reggistre, 'mboste quiste cumme orarie de quanne 'a pàgene ha state carecate. Ausate pe acchià conflitte de cangiaminde.",
 	"apihelp-visualeditoredit-param-summary": "Cange 'u riepiloghe."
 }
