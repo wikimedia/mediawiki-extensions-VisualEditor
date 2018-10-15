@@ -34,6 +34,7 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 
 	this.$element
 		.addClass( 've-ui-mwGalleryDialog-image-container' ) // TODO: put in new CSS file?
+		.addClass( 've-ui-mwGalleryDialog-image-container' + ( config.isMobile ? '-mobile' : '-desktop' ) )
 		.css( 'background-image', 'url(' + this.thumbUrl + ')' );
 
 	// Mixin constructors

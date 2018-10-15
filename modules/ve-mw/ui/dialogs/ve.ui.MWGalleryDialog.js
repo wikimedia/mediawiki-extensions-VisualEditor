@@ -141,6 +141,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.selectedFilenames = {};
 	this.initialImageData = [];
 	this.imageData = {};
+	this.isMobile = OO.ui.isMobile();
 
 	// Default settings
 	this.defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
@@ -162,11 +163,18 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 
 	// General layout
 	menuLayout = new OO.ui.MenuLayout( {
-		classes: [ 've-ui-mwGalleryDialog-menuLayout' ]
+		menuPosition: this.isMobile ? 'top' : 'before',
+		classes: [
+			've-ui-mwGalleryDialog-menuLayout',
+			've-ui-mwGalleryDialog-menuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
+		]
 	} );
 	imageListMenuLayout = new OO.ui.MenuLayout( {
-		menuPosition: 'bottom',
-		classes: [ 've-ui-mwGalleryDialog-imageListMenuLayout' ]
+		menuPosition: this.isMobile ? 'after' : 'bottom',
+		classes: [
+			've-ui-mwGalleryDialog-imageListMenuLayout',
+			've-ui-mwGalleryDialog-imageListMenuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
+		]
 	} );
 	imageListContentPanel = new OO.ui.PanelLayout( {
 		padded: true,
@@ -195,9 +203,13 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.$emptyGalleryMessage = $( '<div>' )
 		.addClass( 'oo-ui-element-hidden' )
 		.text( ve.msg( 'visualeditor-mwgallerydialog-empty-gallery-message' ) );
-	this.galleryGroup = new ve.ui.MWGalleryGroupWidget();
+	this.galleryGroup = new ve.ui.MWGalleryGroupWidget( {
+		orientation: this.isMobile ? 'horizontal' : 'vertical'
+	} );
 	this.showSearchPanelButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-mwgallerydialog-search-button-label' ),
+		label: this.isMobile ? undefined : ve.msg( 'visualeditor-mwgallerydialog-search-button-label' ),
+		icon: 'add',
+		framed: false,
 		flags: [ 'progressive' ],
 		classes: [ 've-ui-mwGalleryDialog-show-search-panel-button' ]
 	} );
@@ -222,6 +234,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-mwgallerydialog-remove-button-label' ),
+		icon: 'trash',
 		flags: [ 'destructive' ],
 		classes: [ 've-ui-mwGalleryDialog-remove-button' ]
 	} );
@@ -244,7 +257,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 
 	// Search panel
 	this.searchWidget = new mw.widgets.MediaSearchWidget( {
-		rowHeight: 150
+		rowHeight: this.isMobile ? 100 : 150
 	} );
 
 	// Options tab panel
@@ -322,7 +335,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-mwgallerydialog-mode-field-label' )
 	} );
 	captionField = new OO.ui.FieldLayout( this.captionTarget, {
-		label: ve.msg( 'visualeditor-mwgallerydialog-caption-field-label' )
+		label: ve.msg( 'visualeditor-mwgallerydialog-caption-field-label' ),
+		align: this.isMobile ? 'top' : 'left'
 	} );
 	widthsField = new OO.ui.FieldLayout( this.widthsInput, {
 		label: ve.msg( 'visualeditor-mwgallerydialog-widths-field-label' )
@@ -605,7 +619,8 @@ ve.ui.MWGalleryDialog.prototype.requestImages = function ( options ) {
 ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 	var title,
 		thumbUrls = {},
-		items = [];
+		items = [],
+		config = { isMobile: this.isMobile };
 
 	for ( title in response ) {
 		thumbUrls[ title ] = {
@@ -618,7 +633,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 	if ( this.initialImageData.length > 0 ) {
 		this.initialImageData.forEach( function ( image ) {
 			image.thumbUrl = thumbUrls[ image.resource ].thumbUrl;
-			items.push( new ve.ui.MWGalleryItemWidget( image ) );
+			items.push( new ve.ui.MWGalleryItemWidget( image, config ) );
 		} );
 		this.initialImageData = [];
 	} else {
@@ -632,7 +647,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 					width: thumbUrls[ title ].width,
 					thumbUrl: thumbUrls[ title ].thumbUrl,
 					captionDocument: this.createCaptionDocument( null )
-				} ) );
+				}, config ) );
 				delete this.selectedFilenames[ title ];
 			}
 		}
