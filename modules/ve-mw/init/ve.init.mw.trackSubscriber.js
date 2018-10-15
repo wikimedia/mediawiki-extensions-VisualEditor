@@ -13,6 +13,14 @@
 	timing = {};
 	editingSessionId = mw.user.generateRandomSessionId();
 
+	function inSample() {
+		// Not using mw.eventLog.inSample() because we need to be able to pass our own editingSessionId
+		return mw.eventLog.randomTokenMatch(
+			1 / mw.config.get( 'wgWMESchemaEditSamplingRate' ),
+			editingSessionId
+		);
+	}
+
 	function computeDuration( action, event, timeStamp ) {
 		if ( event.timing !== undefined ) {
 			return event.timing;
@@ -63,8 +71,7 @@
 			editingSessionId = mw.user.generateRandomSessionId();
 		}
 
-		// Sample at 6.25% (via hex digit)
-		if ( editingSessionId.charAt( 0 ) > '0' ) {
+		if ( !inSample() ) {
 			return;
 		}
 
@@ -162,8 +169,7 @@
 		var feature = topic.split( '.' )[ 1 ],
 			event;
 
-		// Sample at 6.25% (via hex digit)
-		if ( editingSessionId.charAt( 0 ) > '0' ) {
+		if ( !inSample() ) {
 			return;
 		}
 
@@ -179,13 +185,18 @@
 	if ( mw.loader.getState( 'schema.Edit' ) !== null ) {
 		// Only route any events into the Edit schema if the module is actually available.
 		// It won't be if EventLogging is installed but WikimediaEvents is not.
-		ve.trackSubscribe( 'mwedit.', mwEditHandler );
-		ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
+		// Also load ext.eventLogging.subscriber to provide mw.eventLog.randomTokenMatch().
+		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {
+			ve.trackSubscribe( 'mwedit.', mwEditHandler );
+			ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
+		} );
 	}
 
 	if ( mw.loader.getState( 'schema.VisualEditorFeatureUse' ) !== null ) {
 		// Similarly for the VisualEditorFeatureUse schema
-		ve.trackSubscribe( 'activity.', activityHandler );
+		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {
+			ve.trackSubscribe( 'activity.', activityHandler );
+		} );
 	}
 
 }() );
