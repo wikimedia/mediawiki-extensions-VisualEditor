@@ -30,13 +30,26 @@ OO.inheritClass( ve.dm.MWInternalLinkAnnotation, ve.dm.LinkAnnotation );
 
 ve.dm.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
 
-ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:WikiLink' ];
+ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:WikiLink', 'mw:MediaLink' ];
 
 ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
-	var targetData = this.getTargetDataFromHref(
-		domElements[ 0 ].getAttribute( 'href' ),
-		converter.getTargetHtmlDocument()
-	);
+	var targetData, data,
+		resource = domElements[ 0 ].getAttribute( 'resource' );
+
+	if ( resource ) {
+		data = ve.parseParsoidResourceName( resource );
+
+		targetData = {
+			title: data.title,
+			rawTitle: data.rawTitle,
+			hrefPrefix: data.hrefPrefix
+		};
+	} else {
+		targetData = this.getTargetDataFromHref(
+			domElements[ 0 ].getAttribute( 'href' ),
+			converter.getTargetHtmlDocument()
+		);
+	}
 
 	return {
 		type: this.name,
