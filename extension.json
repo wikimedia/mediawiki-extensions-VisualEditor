@@ -1614,10 +1614,10 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/ui/themes/vector/ve.ui.MWFormatTool.css"
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-vector.css"
 				],
 				"minerva": [
-					"modules/ve-mw/ui/themes/minerva/ve.ui.MWFormatTool.css"
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-minerva.css"
 				]
 			},
 			"dependencies": [
@@ -1954,11 +1954,11 @@
 			],
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/ui/themes/default/pages/ve.ui.MWParameterPage.css",
-					"modules/ve-mw/ui/themes/default/pages/ve.ui.MWTemplatePage.css"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-default.css",
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-default.css"
 				],
 				"minerva": [
-					"modules/ve-mw/ui/themes/minerva/pages/ve.ui.MWParameterPage.css"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.css"
 				]
 			},
 			"dependencies": [
