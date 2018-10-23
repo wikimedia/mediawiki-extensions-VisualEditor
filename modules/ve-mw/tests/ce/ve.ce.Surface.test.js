@@ -10,7 +10,8 @@ QUnit.module( 've.ce.Surface (MW)', ve.test.utils.mwEnvironment );
 /* Tests */
 
 QUnit.test( 'handleLinearDelete', function ( assert ) {
-	var i,
+	var done = assert.async(),
+		promise = Promise.resolve(),
 		blocklength = ve.dm.mwExample.MWBlockImage.data.length,
 		cases = [
 			// This asserts that getRelativeRange (via getRelativeOffset) doesn't try to
@@ -53,12 +54,14 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 			}
 		];
 
-	for ( i = 0; i < cases.length; i++ ) {
-		ve.test.utils.runSurfaceHandleSpecialKeyTest(
-			assert, cases[ i ].htmlOrDoc, cases[ i ].rangeOrSelection, cases[ i ].keys,
-			cases[ i ].expectedData, cases[ i ].expectedRangeOrSelection, cases[ i ].msg
-		);
-	}
+	cases.forEach( function ( caseItem ) {
+		promise = promise.then( function () {
+			return ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, caseItem );
+		} );
+	} );
+
+	// VE-MW CI doesn't support finally yet
+	promise.then( function () { done(); }, function () { done(); } );
 } );
 
 QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
