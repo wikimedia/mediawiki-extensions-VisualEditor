@@ -1019,6 +1019,8 @@ class VisualEditorHooks {
 				'lib/ve/lib/jsdifflib/diffview.css',
 			],
 			'scripts' => [
+				// Promise.finally polyfill. Can be removed when CI uses Chrome >= 64
+				'lib/proposal-promise-finally/polyfill.js',
 				// MW config preload
 				'modules/ve-mw/tests/mw-preload.js',
 				// jsdifflib
@@ -1091,14 +1093,13 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/ve.ce.ContentBranchNode.test.js',
 				'modules/ve-mw/tests/ce/ve.ce.ContentBranchNode.test.js',
 				'lib/ve/tests/ce/ve.ce.LeafNode.test.js',
-				// FIXME: These are breaking VE-MW CI tests
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearArrowKeyDownHandler.test.js',
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.test.js',
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearEnterKeyDownHandler.test.js',
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearEscapeKeyDownHandler.test.js',
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.test.js',
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.TableDeleteKeyDownHandler.test.js',
-				// 'lib/ve/tests/ce/keydownhandlers/ve.ce.TableEnterKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearArrowKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearEnterKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearEscapeKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableDeleteKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableEnterKeyDownHandler.test.js',
 				'lib/ve/tests/ce/nodes/ve.ce.TextNode.test.js',
 				'lib/ve/tests/ce/nodes/ve.ce.TableNode.test.js',
 				// VisualEditor UI Tests

@@ -60,8 +60,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 		} );
 	} );
 
-	// VE-MW CI doesn't support finally yet
-	promise.then( function () { done(); }, function () { done(); } );
+	promise.finally( function () { done(); } );
 } );
 
 QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
