@@ -1093,6 +1093,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/ve.ce.ContentBranchNode.test.js',
 				'modules/ve-mw/tests/ce/ve.ce.ContentBranchNode.test.js',
 				'lib/ve/tests/ce/ve.ce.LeafNode.test.js',
+				'lib/ve/tests/ce/ve.ce.Selection.test.js',
 				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearArrowKeyDownHandler.test.js',
 				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.test.js',
 				'lib/ve/tests/ce/keydownhandlers/ve.ce.LinearEnterKeyDownHandler.test.js',
