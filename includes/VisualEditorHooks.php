@@ -1101,6 +1101,7 @@ class VisualEditorHooks {
 				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.test.js',
 				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableDeleteKeyDownHandler.test.js',
 				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableEnterKeyDownHandler.test.js',
+				'lib/ve/tests/ce/keydownhandlers/ve.ce.TableF2KeyDownHandler.test.js',
 				'lib/ve/tests/ce/nodes/ve.ce.TextNode.test.js',
 				'lib/ve/tests/ce/nodes/ve.ce.TableNode.test.js',
 				// VisualEditor UI Tests
