@@ -82,6 +82,8 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			tool.$stillDot.hide();
 			tool.popup.toggle( true );
 			$shield.remove();
+
+			ve.track( 'activity.' + tool.constructor.static.name + 'EducationPopup', { action: 'show' } );
 		}
 	} );
 };

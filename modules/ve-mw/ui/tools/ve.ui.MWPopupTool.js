@@ -25,11 +25,27 @@ ve.ui.MWPopupTool = function VeUiMWPopupTool( title, toolGroup, config ) {
 	ve.ui.MWPopupTool.super.call( this, toolGroup, config );
 
 	this.$element.addClass( 've-ui-mwPopupTool' );
+
+	this.$link.on( 'click', this.onToolLinkClick.bind( this ) );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWPopupTool, OO.ui.PopupTool );
+
+/**
+ * Handle clicks on the main tool button.
+ *
+ * @param {jQuery.Event} e Click event
+ */
+ve.ui.MWPopupTool.prototype.onToolLinkClick = function () {
+	if ( this.popup.isVisible() ) {
+		// Popup will be visible if this just opened, thanks to sequencing.
+		// Can't just track this with toggle, because the notices popup is auto-opened and we
+		// want to know about deliberate interactions.
+		ve.track( 'activity.' + this.constructor.static.name + 'Popup', { action: 'show' } );
+	}
+};
 
 /**
  * MediaWiki UserInterface notices popup tool.
