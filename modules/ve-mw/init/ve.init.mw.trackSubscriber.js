@@ -71,7 +71,7 @@
 			editingSessionId = mw.user.generateRandomSessionId();
 		}
 
-		if ( !inSample() ) {
+		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditOversample' ) ) {
 			return;
 		}
 
@@ -116,6 +116,7 @@
 		event = $.extend( {
 			version: 1,
 			action: action,
+			isOversample: !inSample(),
 			editor: 'visualeditor',
 			integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
 			'page.id': mw.config.get( 'wgArticleId' ),
