@@ -3,12 +3,13 @@
 		"authors": [
 			"Paulu",
 			"Nemo bis",
-			"Macofe"
+			"Macofe",
+			"Jumpy01"
 		]
 	},
 	"tooltip-ca-createsource": "Creà u codice fonte di 'ssa pagina",
 	"tooltip-ca-editsource": "Edità u codice fonte di 'ssa pagina",
-	"tooltip-ca-ve-edit": "Edità 'ssa pagina incù VisualEditor",
+	"tooltip-ca-ve-edit": "Edità 'ssa pagina",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Creà a fonte",
 	"visualeditor-ca-editsource": "Edità a fonte",

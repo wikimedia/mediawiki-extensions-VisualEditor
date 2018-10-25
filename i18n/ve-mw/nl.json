@@ -42,6 +42,7 @@
 			"KlaasZ4usV"
 		]
 	},
+	"collabpad-import-subtitle": "Geïmporteerd van $1",
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
 	"tooltip-ca-edit": "Deze pagina bewerken via wikitekst",
 	"tooltip-ca-editsource": "Broncode van deze pagina bewerken",
@@ -302,7 +303,7 @@
 	"visualeditor-mwgallerydialog-mode-field-label": "Weergavemodus",
 	"visualeditor-mwgallerydialog-perrow-field-label": "Afbeeldingen per rij",
 	"visualeditor-mwgallerydialog-remove-button-label": "Afbeelding verwijderen",
-	"visualeditor-mwgallerydialog-search-button-label": "Nieuwe afbeelding toevoegen",
+	"visualeditor-mwgallerydialog-search-button-label": "Afbeelding toevoegen",
 	"visualeditor-mwgallerydialog-show-filename-field-label": "Bestandsnamen weergeven",
 	"visualeditor-mwgallerydialog-styles-field-label": "CSS-stijlen",
 	"visualeditor-mwgallerydialog-styles-input-placeholder": "CSS-regels, gescheiden door een puntkomma",
