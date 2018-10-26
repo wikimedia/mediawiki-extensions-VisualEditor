@@ -8,7 +8,13 @@
  */
 
 ( function () {
-	var timing, editingSessionId;
+	var timing, editingSessionId,
+		actionPrefixMap = {
+			saveIntent: 'save_intent',
+			saveAttempt: 'save_attempt',
+			saveSuccess: 'save_success',
+			saveFailure: 'save_failure'
+		};
 
 	timing = {};
 	editingSessionId = mw.user.generateRandomSessionId();
@@ -16,7 +22,7 @@
 	function inSample() {
 		// Not using mw.eventLog.inSample() because we need to be able to pass our own editingSessionId
 		return mw.eventLog.randomTokenMatch(
-			1 / mw.config.get( 'wgWMESchemaEditSamplingRate' ),
+			1 / mw.config.get( 'wgWMESchemaEditAttemptStepSamplingRate' ),
 			editingSessionId
 		);
 	}
@@ -62,6 +68,7 @@
 
 	function mwEditHandler( topic, data, timeStamp ) {
 		var action = topic.split( '.' )[ 1 ],
+			actionPrefix = actionPrefixMap[ action ] || action,
 			event;
 
 		timeStamp = timeStamp || this.timeStamp; // I8e82acc12 back-compat
@@ -71,7 +78,7 @@
 			editingSessionId = mw.user.generateRandomSessionId();
 		}
 
-		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditOversample' ) ) {
+		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) ) {
 			return;
 		}
 
@@ -97,9 +104,10 @@
 			}
 		}
 
-		// Convert mode=source/visual to editor name
+		// Convert mode=source/visual to interface name
 		if ( data && data.mode ) {
-			data.editor = data.mode === 'source' ? 'wikitext-2017' : 'visualeditor';
+			// eslint-disable-next-line camelcase
+			data.editor_interface = data.mode === 'source' ? 'wikitext-2017' : 'visualeditor';
 			delete data.mode;
 		}
 
@@ -113,32 +121,36 @@
 			}
 		}
 
+		/* eslint-disable camelcase */
 		event = $.extend( {
 			version: 1,
 			action: action,
-			isOversample: !inSample(),
-			editor: 'visualeditor',
+			is_oversample: !inSample(),
+			editor_interface: 'visualeditor',
 			integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
-			'page.id': mw.config.get( 'wgArticleId' ),
-			'page.title': mw.config.get( 'wgPageName' ),
-			'page.ns': mw.config.get( 'wgNamespaceNumber' ),
-			'page.revid': mw.config.get( 'wgRevisionId' ),
-			editingSessionId: editingSessionId,
-			'user.id': mw.user.getId(),
-			'user.editCount': mw.config.get( 'wgUserEditCount', 0 ),
-			'mediawiki.version': mw.config.get( 'wgVersion' )
+			page_id: mw.config.get( 'wgArticleId' ),
+			page_title: mw.config.get( 'wgPageName' ),
+			page_ns: mw.config.get( 'wgNamespaceNumber' ),
+			revision_id: mw.config.get( 'wgRevisionId' ),
+			editing_session_id: editingSessionId,
+			page_token: mw.user.getPageviewToken(),
+			session_token: mw.user.sessionId(),
+			user_id: mw.user.getId(),
+			user_editcount: mw.config.get( 'wgUserEditCount', 0 ),
+			mw_version: mw.config.get( 'wgVersion' )
 		}, data );
 
 		if ( mw.user.isAnon() ) {
-			event[ 'user.class' ] = 'IP';
+			event.user_class = 'IP';
 		}
 
-		event[ 'action.' + action + '.type' ] = event.type;
-		event[ 'action.' + action + '.mechanism' ] = event.mechanism;
+		event[ actionPrefix + '_type' ] = event.type;
+		event[ actionPrefix + '_mechanism' ] = event.mechanism;
 		if ( action !== 'init' ) {
-			event[ 'action.' + action + '.timing' ] = Math.round( computeDuration( action, event, timeStamp ) );
+			event[ actionPrefix + '_timing' ] = Math.round( computeDuration( action, event, timeStamp ) );
 		}
-		event[ 'action.' + action + '.message' ] = event.message;
+		event[ actionPrefix + '_message' ] = event.message;
+		/* eslint-enable camelcase */
 
 		// Remove renamed properties
 		delete event.type;
@@ -152,7 +164,7 @@
 			timing[ action ] = timeStamp;
 		}
 
-		mw.track( 'event.Edit', event );
+		mw.track( 'event.EditAttemptStep', event );
 	}
 
 	function mwTimingHandler( topic, data ) {
@@ -183,8 +195,8 @@
 		mw.track( 'event.VisualEditorFeatureUse', event );
 	}
 
-	if ( mw.loader.getState( 'schema.Edit' ) !== null ) {
-		// Only route any events into the Edit schema if the module is actually available.
+	if ( mw.loader.getState( 'schema.EditAttemptStep' ) !== null ) {
+		// Only route any events into the EditAttemptStep schema if the module is actually available.
 		// It won't be if EventLogging is installed but WikimediaEvents is not.
 		// Also load ext.eventLogging.subscriber to provide mw.eventLog.randomTokenMatch().
 		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {

@@ -115,7 +115,8 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( content, ca
 	this.timings.saveRetries = 0;
 	this.track( 'mwedit.saveSuccess', {
 		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 ),
-		'page.revid': newRevId
+		// eslint-disable-next-line camelcase
+		revision_id: newRevId
 	} );
 };
 
