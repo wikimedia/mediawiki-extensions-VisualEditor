@@ -21,6 +21,7 @@
 	"visualeditor-desc": "Ngön andam visual keu MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-content-section": "Hareutoë",
+	"visualeditor-dialog-media-save": "Keubah",
 	"visualeditor-dialog-media-title": "Atô mèdia",
 	"visualeditor-dialog-meta-categories-category": "Kawan",
 	"visualeditor-dialog-meta-categories-data-label": "Kawan",
@@ -66,5 +67,11 @@
 	"visualeditor-parameter-input-placeholder": "Nan paramètèr",
 	"visualeditor-parameter-search-no-unused": "Hana paramètèr nyang hana geungui",
 	"visualeditor-parameter-search-unknown": "Parameter hana geuturi",
-	"visualeditor-preference-core-label": "VisualEditor"
+	"visualeditor-preference-core-label": "VisualEditor",
+	"visualeditor-savedialog-label-review": "Kalön lom atra neupeusaneut",
+	"visualeditor-savedialog-label-save-short-start": "Keubah...",
+	"visualeditor-savedialog-title-review": "Kalön lom atra neupeusaneut",
+	"visualeditor-savedialog-title-save": "Keubah neuubah Droëneuh",
+	"visualeditor-toolbar-savedialog": "Keubah laman",
+	"visualeditor-viewpage-savewarning-keep": "Lanjut peusaneut"
 }
