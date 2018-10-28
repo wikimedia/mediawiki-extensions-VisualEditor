@@ -381,3 +381,9 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 	this.metaList = null;
 };
+
+ve.ui.MWSettingsPage.prototype.getFieldsets = function () {
+	return [
+		this.settingsFieldset
+	];
+};

@@ -79,6 +79,113 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		this.languagesPage,
 		this.templatesUsedPage
 	] );
+
+	this.oldSettings = null;
+	this.widgetList = this.getAllWidgets();
+};
+
+/**
+ * @returns {boolean} Whether settings were changed.
+ */
+ve.ui.MWMetaDialog.prototype.compareSettings = function () {
+
+	var newSettings = this.extractSettings();
+	return !ve.compare( newSettings, this.oldSettings );
+};
+
+/**
+ * @returns {Object[]} An array of objects
+ * {
+ * 	widget:Object,
+ *  name:string,
+ * 	hasChildren:boolean
+ * }
+ */
+ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
+	var widgetList = [];
+
+	$.each( this.bookletLayout.pages, function ( indexA, value ) {
+		var fieldsets = value.getFieldsets();
+		$.each( fieldsets, function ( indexB, value ) {
+			$.each( value.items, function ( indexC, value ) {
+				var widget = value.fieldWidget;
+				// we can recheck the value
+				widgetList.push( {
+					widget: widget,
+					name: indexA + '/' + indexB + '/' + indexC,
+					hasChildren: widget.items !== undefined
+				} );
+			} );
+		} );
+	} );
+
+	return widgetList;
+};
+
+/**
+ * Assigns updateActions to all widget updates.
+ */
+ve.ui.MWMetaDialog.prototype.assignEvents = function () {
+	var widgetList = this.getAllWidgets(),
+		dialog = this;
+	$.each( widgetList, function ( index, value ) {
+		value.widget.connect( dialog, {
+			change: 'updateActions',
+			select: 'updateActions'
+		} );
+	} );
+};
+
+/**
+ * @returns {Object[]} An array of all widgets with their current value.
+ * {
+ * 	name:string,
+ * 	value:string|boolean
+ * }
+ */
+ve.ui.MWMetaDialog.prototype.extractSettings = function () {
+	var
+		ret = [], // return value
+		extractValue = function ( field ) {
+			if ( field instanceof OO.ui.TextInputWidget ) {
+				return field.getValue();
+			} else if ( field instanceof OO.ui.CheckboxInputWidget ) {
+				return field.isSelected();
+			} else if ( field instanceof OO.ui.ButtonOptionWidget ) {
+				return field.selected;
+			} else if ( field instanceof ve.ui.MWCategoryItemWidget ) {
+				return field.value;
+			} else {
+				throw new Error( 'Unhandled widget type', field );
+			}
+		};
+
+	$.each( this.widgetList, function ( index, value ) {
+		if ( value.hasChildren ) {
+			$.each( value.widget.items, function ( index, value ) {
+				ret.push( {
+					name: value.name + '/' + index,
+					value: extractValue( value )
+				} );
+			} );
+		} else {
+			ret.push( {
+				name: value.name,
+				value: extractValue( value.widget )
+			} );
+		}
+	} );
+
+	return ret;
+};
+
+/**
+ * Compares oldSetting with new settings and toggles the apply button accordingly.
+ */
+ve.ui.MWMetaDialog.prototype.updateActions = function () {
+	this.actions.setAbilities( {
+		apply: this.compareSettings()
+	} );
 };
 
 /**
@@ -138,6 +245,13 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 				this.bookletLayout.setPage( data.page );
 				this.bookletLayout.autoFocus = true;
 			}
+
+			if ( this.oldSettings === null ) {
+				this.assignEvents();
+			}
+			this.oldSettings = this.extractSettings(); // setting that were just loaded
+
+			this.actions.setAbilities( { apply: false } );
 		}, this );
 };
 
