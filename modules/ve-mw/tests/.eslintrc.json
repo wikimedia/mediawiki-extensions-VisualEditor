@@ -6,5 +6,8 @@
 	"env": {
 		"qunit": true,
 		"es6": true
+	},
+	"globals": {
+		"sinon": false
 	}
 }
