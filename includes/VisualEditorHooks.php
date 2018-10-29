@@ -593,8 +593,7 @@ class VisualEditorHooks {
 		) {
 			// Don't add ve-edit, but do update the edit tab (e.g. "Edit source").
 			$tabMessages = $config->get( 'VisualEditorTabMessages' );
-			$sourceEditSection = $tabMessages['editsectionsource'] !== null ?
-				$tabMessages['editsectionsource'] : 'editsection';
+			$sourceEditSection = $tabMessages['editsectionsource'];
 			$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
 		}
 
@@ -608,8 +607,7 @@ class VisualEditorHooks {
 
 		// add VE edit section in VE available namespaces
 		if ( ApiVisualEditor::isAllowedNamespace( $config, $title->getNamespace() ) ) {
-			$veEditSection = $tabMessages['editsection'] !== null ?
-				$tabMessages['editsection'] : 'editsection';
+			$veEditSection = $tabMessages['editsection'];
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
 				'targetTitle' => $title,

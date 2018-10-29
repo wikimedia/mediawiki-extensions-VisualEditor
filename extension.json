@@ -64,7 +64,7 @@
 			"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
 			"createlocaldescription": "create-local",
 			"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
-			"editsection": null,
+			"editsection": "editsection",
 			"editsectionsource": "visualeditor-ca-editsource-section"
 		},
 		"VisualEditorAutoAccountEnable": false,
