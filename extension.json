@@ -564,7 +564,8 @@
 				"lib/ve/src/init/ve.init.Target.js"
 			],
 			"debugScripts": [
-				"lib/ve/src/ve.debug.js"
+				"lib/ve/src/ve.debug.js",
+				"lib/ve/src/ve.freeze.js"
 			],
 			"dependencies": [
 				"oojs",
