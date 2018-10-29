@@ -292,7 +292,8 @@
 
 	function setEditorPreference( editor ) {
 		var key = pageExists ? 'edit' : 'create',
-			sectionKey = 'editsection';
+			sectionKey = 'editsection',
+			tabMsg;
 
 		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
 			throw new Error( 'setEditorPreference called with invalid option: ', editor );
@@ -310,7 +311,16 @@
 				sectionKey += 'source';
 			}
 
-			$( '#ca-edit a' ).text( mw.msg( tabMessages[ key ] || 'edit' ) );
+			tabMsg = tabMessages[ key ];
+			if ( !tabMsg && ( key === 'edit' || key === 'create' ) ) {
+				// e.g. vector-view-edit, vector-view-create
+				tabMsg = mw.config.get( 'skin' ) + '-view-' + key;
+				if ( !mw.message( tabMsg ).exists() ) {
+					tabMsg = key;
+				}
+			}
+
+			$( '#ca-edit a' ).text( mw.msg( tabMsg ) );
 			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] || 'editsection' ) );
 		}
 
