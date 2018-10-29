@@ -25,7 +25,9 @@
 		this.imageInfoCache = null;
 	}
 	OO.inheritClass( MWDummyPlatform, ve.init.mw.Platform );
-	MWDummyPlatform.prototype.getMessage = function () { return Array.prototype.join.call( arguments, ',' ); };
+	MWDummyPlatform.prototype.getMessage = function () {
+		return Array.prototype.join.call( arguments, ',' );
+	};
 	MWDummyPlatform.prototype.getHtmlMessage = function () {
 		var $wrapper = $( '<div>' );
 		Array.prototype.forEach.call( arguments, function ( arg, i, args ) {

@@ -595,7 +595,8 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getDefaultVariantInfo = functio
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantTwoWayInspector.super.prototype.getSetupProcess.call( this, data ).next( function () {
 		var variantInfo = this.variantNode.getVariantInfo();
-		this.layout.clearItems(); this.items = [];
+		this.layout.clearItems();
+		this.items = [];
 		variantInfo.twoway.forEach( function ( tw, idx ) {
 			this.items[ idx ] = this.createItem( tw.l, tw.t );
 			this.layout.addItems( [ this.items[ idx ].layout ] );
@@ -745,7 +746,8 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getDefaultVariantInfo = functio
 ve.ui.MWLanguageVariantOneWayInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantOneWayInspector.super.prototype.getSetupProcess.call( this, data ).next( function () {
 		var variantInfo = this.variantNode.getVariantInfo();
-		this.layout.clearItems(); this.items = [];
+		this.layout.clearItems();
+		this.items = [];
 		variantInfo.oneway.forEach( function ( ow, idx ) {
 			this.items[ idx ] = this.createItem( ow.f, ow.l, ow.t );
 			this.layout.addItems( [ this.items[ idx ].layout ] );
