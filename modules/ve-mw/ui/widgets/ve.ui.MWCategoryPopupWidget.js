@@ -165,6 +165,8 @@ ve.ui.MWCategoryPopupWidget.prototype.closePopup = function () {
 	this.toggle( false );
 	this.popupOpen = false;
 	this.category = null;
+	this.origSortkey = null;
+	this.removed = false;
 };
 
 /**
