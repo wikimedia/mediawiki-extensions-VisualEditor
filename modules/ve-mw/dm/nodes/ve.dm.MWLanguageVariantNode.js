@@ -359,10 +359,20 @@ ve.dm.MWLanguageVariantNode.prototype.getRuleType = function () {
  * @return {string}
  */
 ve.dm.MWLanguageVariantNode.static.getRuleType = function ( variantInfo ) {
-	if ( variantInfo.disabled ) { return 'disabled'; }
-	if ( variantInfo.filter ) { return 'filter'; }
-	if ( variantInfo.name ) { return 'name'; }
-	if ( variantInfo.twoway ) { return 'twoway'; }
-	if ( variantInfo.oneway ) { return 'oneway'; }
+	if ( variantInfo.disabled ) {
+		return 'disabled';
+	}
+	if ( variantInfo.filter ) {
+		return 'filter';
+	}
+	if ( variantInfo.name ) {
+		return 'name';
+	}
+	if ( variantInfo.twoway ) {
+		return 'twoway';
+	}
+	if ( variantInfo.oneway ) {
+		return 'oneway';
+	}
 	return 'unknown'; // should never happen
 };

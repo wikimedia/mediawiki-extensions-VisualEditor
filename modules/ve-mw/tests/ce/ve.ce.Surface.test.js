@@ -60,7 +60,9 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 		} );
 	} );
 
-	promise.finally( function () { done(); } );
+	promise.finally( function () {
+		done();
+	} );
 } );
 
 QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
