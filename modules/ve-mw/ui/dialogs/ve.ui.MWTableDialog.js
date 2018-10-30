@@ -84,7 +84,9 @@ ve.ui.MWTableDialog.prototype.initialize = function () {
 ve.ui.MWTableDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTableDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var tableNode = this.getFragment().getSelection().getTableNode(),
+			var tableNode = this.getFragment().getSelection().getTableNode(
+					this.getFragment().getDocument()
+				),
 				wikitable = !!tableNode.getAttribute( 'wikitable' ),
 				sortable = !!tableNode.getAttribute( 'sortable' ),
 				collapsible = !!tableNode.getAttribute( 'collapsible' ),
