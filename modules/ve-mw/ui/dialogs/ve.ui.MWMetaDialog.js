@@ -215,6 +215,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMetaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var surfaceModel = this.getFragment().getSurface(),
+				promises = [],
 				selectWidget = this.bookletLayout.outlineSelectWidget,
 				visualOnlyPages = [ 'categories', 'settings', 'advancedSettings', 'languages' ],
 				isSource = ve.init.target.getSurface().getMode() === 'source';
@@ -231,10 +232,12 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			surfaceModel.pushStaging();
 
 			// Let each page set itself up ('languages' page doesn't need this yet)
-			this.categoriesPage.setup( surfaceModel.metaList, data );
-			this.settingsPage.setup( surfaceModel.metaList, data );
-			this.advancedSettingsPage.setup( surfaceModel.metaList, data );
-
+			promises.push( this.categoriesPage.setup( surfaceModel.metaList, data ) );
+			promises.push( this.settingsPage.setup( surfaceModel.metaList, data ) );
+			promises.push( this.advancedSettingsPage.setup( surfaceModel.metaList, data ) );
+			return $.when.apply( $, promises );
+		}, this )
+		.next( function () {
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
 				// HACK: Prevent the setPage() call from focussing stuff in the selected page. For the
 				// 'categories' page, this causes a dropdown to appear, and if it's done in the setup

@@ -254,6 +254,7 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
  *
  * @param {ve.dm.MetaList} metaList Meta list
  * @param {Object} [data] Dialog setup data
+ * @return {jQuery.Promise}
  */
 ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	var tableOfContentsMetaItem, tableOfContentsField, tableOfContentsMode,
@@ -285,6 +286,8 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 		var isSelected = !!settingsPage.getMetaItem( this.metaName );
 		this.fieldLayout.getField().setSelected( isSelected );
 	} );
+
+	return $.Deferred().resolve().promise();
 };
 
 /**
