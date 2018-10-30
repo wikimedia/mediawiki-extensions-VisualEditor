@@ -26,7 +26,7 @@
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯]]",
 	"tag-visualeditor-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]]完成的編輯",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器：需要檢查]]",
-	"tag-visualeditor-needcheck-description": "使用 [[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]] 完成的編輯。系統偵測到 WikiText 可能發生預期外的變更。",
+	"tag-visualeditor-needcheck-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]]完成的編輯。系統偵測到 WikiText 可能發生預期外的變更。",
 	"tag-visualeditor-wikitext": "2017 原始碼編輯",
 	"tag-visualeditor-wikitext-description": "用 2017 wikitext 編輯器做的編輯",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器：已切換]]",
