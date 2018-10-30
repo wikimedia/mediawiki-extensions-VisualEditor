@@ -467,7 +467,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 				offset = fragment.getDocument().data.getNearestContentOffset( fragment.getSelection().getRange().start );
 			}
 			if ( offset > -1 ) {
-				fragment = fragment.clone( new ve.dm.LinearSelection( new ve.Range( offset ) ) );
+				fragment = fragment.clone( new ve.dm.LinearSelection( fragment.getDocument(), new ve.Range( offset ) ) );
 			}
 			fragment.insertContent( contentToInsert );
 			return fragment;
@@ -476,7 +476,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 			// Try to put the image in front of the structural node
 			offset = fragment.getDocument().data.getNearestStructuralOffset( fragment.getSelection().getRange().start, -1 );
 			if ( offset > -1 ) {
-				fragment = fragment.clone( new ve.dm.LinearSelection( new ve.Range( offset ) ) );
+				fragment = fragment.clone( new ve.dm.LinearSelection( fragment.getDocument(), new ve.Range( offset ) ) );
 			}
 			fragment.insertContent( contentToInsert );
 			// Add contents of new caption
