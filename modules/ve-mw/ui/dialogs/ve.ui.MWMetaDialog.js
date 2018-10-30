@@ -154,7 +154,7 @@ ve.ui.MWMetaDialog.prototype.extractSettings = function () {
 			} else if ( field instanceof OO.ui.ButtonOptionWidget ) {
 				return field.selected;
 			} else if ( field instanceof ve.ui.MWCategoryItemWidget ) {
-				return field.value;
+				return { value: field.value, sortKey: field.sortKey };
 			} else {
 				throw new Error( 'Unhandled widget type', field );
 			}
