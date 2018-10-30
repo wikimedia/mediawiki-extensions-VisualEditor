@@ -344,3 +344,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	this.metaList = null;
 };
+
+ve.ui.MWAdvancedSettingsPage.prototype.getFieldsets = function () {
+	return [
+		this.advancedSettingsFieldset
+	];
+};

@@ -69,3 +69,9 @@ ve.ui.MWTemplatesUsedPage.prototype.focus = function () {
 	// No controls, just focus the whole page instead of the first link
 	this.$element.focus();
 };
+
+ve.ui.MWTemplatesUsedPage.prototype.getFieldsets = function () {
+	return [
+		this.templatesUsedFieldset
+	];
+};

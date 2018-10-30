@@ -313,3 +313,10 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 	this.metaList.disconnect( this );
 	this.metaList = null;
 };
+
+ve.ui.MWCategoriesPage.prototype.getFieldsets = function () {
+	return [
+		this.categoriesFieldset,
+		this.categoryOptionsFieldset
+	];
+};

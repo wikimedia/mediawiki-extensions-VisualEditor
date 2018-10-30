@@ -183,3 +183,9 @@ ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
  * TODO: This error function should probably not be empty.
  */
 ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsError = function () {};
+
+ve.ui.MWLanguagesPage.prototype.getFieldsets = function () {
+	return [
+		this.languagesFieldset
+	];
+};
