@@ -1981,7 +1981,7 @@ ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMecha
 	if ( noPrompt || !this.edited ) {
 		return this.teardown( trackMechanism );
 	} else {
-		return this.getSurface().dialogs.openWindow( 'cancelconfirm' )
+		return this.getSurface().dialogs.openWindow( 'abandonedit' )
 			.closed.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
 					return target.teardown( trackMechanism );
@@ -2670,3 +2670,8 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		return $output;
 	} );
 };
+
+/* Registration */
+
+// Used in tryTeardown
+ve.ui.windowFactory.register( mw.widgets.AbandonEditDialog );
