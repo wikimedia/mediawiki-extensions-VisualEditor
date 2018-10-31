@@ -257,7 +257,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 	this.categoryWidget.addItems( this.getCategoryItems() );
 
 	this.defaultSortInput.setValue(
-		defaultSortKeyItem ? defaultSortKeyItem.getAttribute( 'content' ) : ''
+		defaultSortKeyItem ? defaultSortKeyItem.getAttribute( 'content' ) : this.fallbackDefaultSortKey
 	);
 	this.defaultSortKeyTouched = false;
 
@@ -290,7 +290,7 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 	if ( data && data.action === 'apply' ) {
 		// Alter the default sort key iff it's been touched & is actually different
 		if ( this.defaultSortKeyTouched ) {
-			if ( newDefaultSortKey === '' ) {
+			if ( newDefaultSortKey === '' || newDefaultSortKey === this.fallbackDefaultSortKey ) {
 				if ( currentDefaultSortKeyItem ) {
 					currentDefaultSortKeyItem.remove();
 				}
