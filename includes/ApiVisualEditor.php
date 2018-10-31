@@ -81,8 +81,8 @@ class ApiVisualEditor extends ApiBase {
 	 * @param Title $title The title of the page to use as the parsing context
 	 * @param string $method The HTTP method, either 'GET' or 'POST'
 	 * @param string $path The RESTbase api path
-	 * @param Array $params Request parameters
-	 * @param Array $reqheaders Request headers
+	 * @param array $params Request parameters
+	 * @param array $reqheaders Request headers
 	 * @return string Body of the RESTbase server's response
 	 */
 	protected function requestRestbase( Title $title, $method, $path, $params, $reqheaders = [] ) {
