@@ -137,6 +137,26 @@ ve.ui.MWMetaDialog.prototype.assignEvents = function () {
 };
 
 /**
+ * @param {Object} field Widget
+ * @returns {string|boolean} Value of the field
+ */
+ve.ui.MWMetaDialog.prototype.extractValue = function ( field ) {
+	if ( field instanceof OO.ui.TextInputWidget ) {
+		return field.getValue();
+	} else if ( field instanceof OO.ui.CheckboxInputWidget ) {
+		return field.isSelected();
+	} else if ( field instanceof OO.ui.ButtonOptionWidget ) {
+		return field.selected;
+	} else if ( field instanceof ve.ui.MWCategoryItemWidget ) {
+		return {
+			value: field.value,
+			sortKey: field.sortKey };
+	} else {
+		throw new Error( 'Unhandled widget type', field );
+	}
+};
+
+/**
  * @returns {Object[]} An array of all widgets with their current value.
  * {
  * 	name:string,
@@ -144,34 +164,21 @@ ve.ui.MWMetaDialog.prototype.assignEvents = function () {
  * }
  */
 ve.ui.MWMetaDialog.prototype.extractSettings = function () {
-	var
-		ret = [], // return value
-		extractValue = function ( field ) {
-			if ( field instanceof OO.ui.TextInputWidget ) {
-				return field.getValue();
-			} else if ( field instanceof OO.ui.CheckboxInputWidget ) {
-				return field.isSelected();
-			} else if ( field instanceof OO.ui.ButtonOptionWidget ) {
-				return field.selected;
-			} else if ( field instanceof ve.ui.MWCategoryItemWidget ) {
-				return { value: field.value, sortKey: field.sortKey };
-			} else {
-				throw new Error( 'Unhandled widget type', field );
-			}
-		};
+	var ret = [],
+		dialog = this; // return value
 
 	$.each( this.widgetList, function ( index, value ) {
 		if ( value.hasChildren ) {
 			$.each( value.widget.items, function ( index, value ) {
 				ret.push( {
 					name: value.name + '/' + index,
-					value: extractValue( value )
+					value: dialog.extractValue( value )
 				} );
 			} );
 		} else {
 			ret.push( {
 				name: value.name,
-				value: extractValue( value.widget )
+				value: dialog.extractValue( value.widget )
 			} );
 		}
 	} );
@@ -183,8 +190,10 @@ ve.ui.MWMetaDialog.prototype.extractSettings = function () {
  * Compares oldSetting with new settings and toggles the apply button accordingly.
  */
 ve.ui.MWMetaDialog.prototype.updateActions = function () {
+
 	this.actions.setAbilities( {
-		apply: this.compareSettings()
+		apply:	this.settingsPage.checkValidRedirect() &&
+				this.compareSettings()
 	} );
 };
 

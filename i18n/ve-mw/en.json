@@ -401,6 +401,7 @@
 	"visualeditor-settings-tool": "Page settings",
 	"visualeditor-special-characters-group-other": "Often used",
 	"visualeditor-templatesused-tool": "Templates used",
+	"visualeditor-title-error": "Invalid title.",
 	"visualeditor-toload": "The editor will now load. If you still see this message after a few seconds, please [$1 reload the page].",
 	"visualeditor-toolbar-savedialog": "Save page",
 	"visualeditor-toolbar-savedialog-short": "Save",
