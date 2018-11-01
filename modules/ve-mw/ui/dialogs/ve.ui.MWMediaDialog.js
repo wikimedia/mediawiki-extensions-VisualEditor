@@ -1315,7 +1315,9 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			this.switchPanels( this.selectedNode ? 'edit' : 'search' );
+			if ( !data.file ) {
+				this.switchPanels( this.selectedNode ? 'edit' : 'search' );
+			}
 			// Revalidate size
 			this.sizeWidget.validateDimensions();
 		}, this );
