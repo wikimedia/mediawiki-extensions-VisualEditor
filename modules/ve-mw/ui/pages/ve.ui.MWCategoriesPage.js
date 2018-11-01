@@ -241,9 +241,11 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, 
  *
  * @param {ve.dm.MetaList} metaList Meta list
  * @param {Object} [data] Dialog setup data
+ * @return {jQuery.Promise}
  */
 ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 	var defaultSortKeyItem,
+		promise,
 		page = this;
 
 	this.metaList = metaList;
@@ -254,7 +256,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 
 	defaultSortKeyItem = this.getDefaultSortKeyItem();
 
-	this.categoryWidget.addItems( this.getCategoryItems() );
+	promise = this.categoryWidget.addItems( this.getCategoryItems() );
 
 	this.defaultSortInput.setValue(
 		defaultSortKeyItem ? defaultSortKeyItem.getAttribute( 'content' ) : this.fallbackDefaultSortKey
@@ -265,6 +267,8 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 	setTimeout( function () {
 		page.categoryWidget.fitInput();
 	}, OO.ui.theme.getDialogTransitionDuration() );
+
+	return promise;
 };
 
 /**

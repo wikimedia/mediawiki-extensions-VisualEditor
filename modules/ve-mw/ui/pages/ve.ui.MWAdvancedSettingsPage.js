@@ -195,6 +195,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = functi
  *
  * @param {ve.dm.MetaList} metaList Meta list
  * @param {Object} [data] Dialog setup data
+ * @return {jQuery.Promise}
  */
 ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	var indexingField, indexingOption, indexingType,
@@ -232,6 +233,8 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 		var isSelected = !!advancedSettingsPage.getMetaItem( this.metaName );
 		this.fieldLayout.getField().setSelected( isSelected );
 	} );
+
+	return $.Deferred().resolve().promise();
 };
 
 /**
