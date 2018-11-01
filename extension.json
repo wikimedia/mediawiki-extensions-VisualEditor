@@ -1622,6 +1622,9 @@
 				],
 				"minerva": [
 					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-minerva.css"
+				],
+				"monobook": [
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-monobook.css"
 				]
 			},
 			"dependencies": [
