@@ -8,7 +8,8 @@
 			"Sator",
 			"Macofe",
 			"Mikel Ibaiba",
-			"Iñaki LL"
+			"Iñaki LL",
+			"Asierog"
 		]
 	},
 	"tooltip-ca-createsource": "Sortu orri honen iturburu kodea",
@@ -64,8 +65,8 @@
 	"visualeditor-dialog-media-info-separator": "·",
 	"visualeditor-dialog-media-info-uploaded": "Noiz igota:$1",
 	"visualeditor-dialog-media-noresults": "Ez da emaitzarik aurkitu.",
-	"visualeditor-dialog-media-page-advanced": "Ezarpen aurreratuak",
-	"visualeditor-dialog-media-page-general": "Konfigurazio orokorra",
+	"visualeditor-dialog-media-page-advanced": "Aurreratua",
+	"visualeditor-dialog-media-page-general": "Orokorra",
 	"visualeditor-dialog-media-position-center": "Erdian",
 	"visualeditor-dialog-media-position-checkbox": "Egokitu testua elementuaren inguruan",
 	"visualeditor-dialog-media-position-checkbox-help": "Multimedia fitxategia, era mugikorrean agertu beharrean, testuarekin lerrokatua dezakezu. Ez duzu maiz egin behar hau, izan ere, testuaren fluxua hautsi egiten da kaxa hori desgaitzean.",
