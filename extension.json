@@ -1908,7 +1908,8 @@
 				"visualeditor-languages-tool",
 				"visualeditor-meta-tool",
 				"visualeditor-settings-tool",
-				"visualeditor-templatesused-tool"
+				"visualeditor-templatesused-tool",
+				"visualeditor-title-error"
 			],
 			"targets": [
 				"desktop",

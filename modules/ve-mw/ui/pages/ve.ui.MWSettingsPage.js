@@ -226,6 +226,36 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 };
 
 /**
+ * @returns {boolean} Whether redirect link is valid.
+ */
+ve.ui.MWSettingsPage.prototype.checkValidRedirect = function () {
+	var title;
+	if ( this.enableRedirectInput.isSelected() ) {
+		title = this.redirectTargetInput.getValue();
+
+		if ( !mw.Title.newFromText( title ) ) {
+
+			/*
+			 * TODO more precise error message. Modify the Title.newFromText method in Title.js
+			 * my idea is to in the parse method instead of a boolean return a string with an error message (not an error code since the error string can have parameters),
+			 * then in Title.newFromText instead of returning null, return the error string. Use that string there in setErrors.
+			 * Problem: some methods might depend on it returning null.
+			 * Solution: either make it a new metohd (Title.newFromTextThrow), or add a an optional parameter to return the error message.
+			 */
+			this.redirectTargetField.setErrors( [ mw.msg( 'visualeditor-title-error' ) ] );
+			return false;
+
+		} else {
+			this.redirectTargetField.setErrors( [] );
+		}
+	} else {
+		this.redirectTargetField.setErrors( [] );
+	}
+
+	return true;
+};
+
+/**
  * Handle redirect target change events.
  */
 ve.ui.MWSettingsPage.prototype.onRedirectTargetChange = function () {
