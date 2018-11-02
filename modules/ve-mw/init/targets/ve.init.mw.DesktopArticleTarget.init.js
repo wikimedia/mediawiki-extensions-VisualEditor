@@ -507,15 +507,8 @@
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
 	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
-	pageCanLoadEditor = (
-		isViewPage ||
-		mw.config.get( 'wgAction' ) === 'edit' ||
-		mw.config.get( 'wgAction' ) === 'submit'
-	);
-	isEditPage = (
-		uri.query.action === 'edit' ||
-		uri.query.action === 'submit'
-	);
+	isEditPage = mw.config.get( 'wgAction' ) === 'edit' || mw.config.get( 'wgAction' ) === 'submit';
+	pageCanLoadEditor = isViewPage || isEditPage;
 
 	// Cast "0" (T89513)
 	enable = !!+mw.user.options.get( 'visualeditor-enable' );
