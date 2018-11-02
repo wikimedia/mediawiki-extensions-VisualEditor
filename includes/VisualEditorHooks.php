@@ -1229,7 +1229,7 @@ class VisualEditorHooks {
 		Title $title, $article, OutputPage $output,
 		User $user, WebRequest $request, MediaWiki $mediaWiki
 	) {
-		if ( $request->getVal( 'veaction' ) === 'edit' ) {
+		if ( $request->getVal( 'veaction' ) ) {
 			$request->setVal( 'redirect', 'no' );
 		}
 		return true;
