@@ -553,10 +553,9 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.panels = new OO.ui.StackLayout( { scrollable: true } );
+	this.panels = new OO.ui.StackLayout( { scrollable: false } );
 	this.savePanel = new OO.ui.PanelLayout( {
 		expanded: false,
-		scrollable: true,
 		padded: true,
 		classes: [ 've-ui-mwSaveDialog-savePanel' ]
 	} );
@@ -643,7 +642,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Review panel
 	this.reviewPanel = new OO.ui.PanelLayout( {
 		expanded: false,
-		scrollable: true,
 		padded: true
 	} );
 
@@ -675,7 +673,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Preview panel
 	this.previewPanel = new OO.ui.PanelLayout( {
 		expanded: false,
-		scrollable: true,
 		padded: true
 	} );
 	this.$previewViewer = $( '<div>' ).addClass( 'mw-body-content mw-parser-output' );
@@ -687,7 +684,6 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Conflict panel
 	this.conflictPanel = new OO.ui.PanelLayout( {
 		expanded: false,
-		scrollable: true,
 		padded: true
 	} );
 	this.$conflict = $( '<div>' ).addClass( 've-ui-mwSaveDialog-conflict' )
