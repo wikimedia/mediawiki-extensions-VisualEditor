@@ -51,7 +51,8 @@
 			"Thibaut120094",
 			"DePlusJean",
 			"Trizek (WMF)",
-			"Od1n"
+			"Od1n",
+			"Zarisi"
 		]
 	},
 	"collabpad-doctitle": "CollabPad : $1",
@@ -84,7 +85,7 @@
 	"visualeditor-ca-ve-edit-section": "ÉditeurVisuel",
 	"visualeditor-categories-tool": "Catégories",
 	"visualeditor-changedesc-mwlanguagevariant": "Marquage de la variante de langue modifié",
-	"visualeditor-changedesc-mwredirect": "Cible de redirection modifiée de $1 en $2",
+	"visualeditor-changedesc-mwredirect": "Cible de redirection modifiée de $1 vers $2",
 	"visualeditor-changedesc-mwtransclusion": "Paramètres du modèle modifiés",
 	"visualeditor-desc": "Éditeur visuel pour MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:ÉditeurVisuel",
@@ -430,6 +431,7 @@
 	"visualeditor-settings-tool": "Paramètres de la page",
 	"visualeditor-special-characters-group-other": "Souvent utilisé",
 	"visualeditor-templatesused-tool": "Modèles utilisés",
+	"visualeditor-title-error": "Titre invalide.",
 	"visualeditor-toload": "L’éditeur va maintenant se charger. Si vous voyez encore ce message après quelques secondes, veuillez [$1 recharger la page].",
 	"visualeditor-toolbar-savedialog": "Enregistrer la page",
 	"visualeditor-toolbar-savedialog-short": "Enregistrer",

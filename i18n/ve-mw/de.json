@@ -392,6 +392,7 @@
 	"visualeditor-settings-tool": "Seiteneinstellungen",
 	"visualeditor-special-characters-group-other": "Oft verwendet",
 	"visualeditor-templatesused-tool": "Verwendete Vorlagen",
+	"visualeditor-title-error": "Ungültiger Titel.",
 	"visualeditor-toload": "Der Editor wird jetzt geladen. Wenn du diese Meldung nach einigen Sekunden noch siehst, [$1 lade bitte die Seite] neu.",
 	"visualeditor-toolbar-savedialog": "Seite speichern",
 	"visualeditor-toolbar-savedialog-short": "Speichern",

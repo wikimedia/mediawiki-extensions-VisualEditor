@@ -406,6 +406,7 @@
 	"visualeditor-settings-tool": "頁面設定",
 	"visualeditor-special-characters-group-other": "經常使用",
 	"visualeditor-templatesused-tool": "使用的模板",
+	"visualeditor-title-error": "無效標題。",
 	"visualeditor-toload": "現在將載入編輯器，若您再幾秒過後仍看到此訊息，請 [$1 重新載入此頁面]。",
 	"visualeditor-toolbar-savedialog": "儲存頁面",
 	"visualeditor-toolbar-savedialog-short": "儲存",

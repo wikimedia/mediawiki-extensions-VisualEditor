@@ -401,6 +401,7 @@
 	"visualeditor-settings-tool": "إعدادات الصفحة",
 	"visualeditor-special-characters-group-other": "مستخدمة عادة",
 	"visualeditor-templatesused-tool": "القوالب المستخدمة",
+	"visualeditor-title-error": "عنوان غير صحيح.",
 	"visualeditor-toload": "المحرر سيُحمَّل الآن. إذا كنت لا تزال ترى هذه الرسالة بعد بضع ثوان، يرجى [$1 إعادة تحميل الصفحة].",
 	"visualeditor-toolbar-savedialog": "احفظ الصفحة",
 	"visualeditor-toolbar-savedialog-short": "احفظ",
