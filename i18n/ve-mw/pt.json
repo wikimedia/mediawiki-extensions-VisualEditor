@@ -400,6 +400,7 @@
 	"visualeditor-settings-tool": "Configurações da página",
 	"visualeditor-special-characters-group-other": "Utilizados frequentemente",
 	"visualeditor-templatesused-tool": "Predefinições utilizadas",
+	"visualeditor-title-error": "Título inválido.",
 	"visualeditor-toload": "O editor será agora carregado. Se continuar a ver esta mensagem após alguns segundos, [$1 atualize a página], por favor.",
 	"visualeditor-toolbar-savedialog": "Gravar página",
 	"visualeditor-toolbar-savedialog-short": "Gravar",

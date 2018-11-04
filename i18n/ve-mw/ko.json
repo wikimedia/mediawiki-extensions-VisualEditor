@@ -381,6 +381,7 @@
 	"visualeditor-settings-tool": "문서 설정",
 	"visualeditor-special-characters-group-other": "자주 사용됨",
 	"visualeditor-templatesused-tool": "사용된 틀",
+	"visualeditor-title-error": "제목이 잘못되었습니다.",
 	"visualeditor-toload": "편집기가 지금 로드됩니다. 몇 초 후에도 이 메시지가 여전히 보이면, [$1 문서를 다시 로드]해 주십시오.",
 	"visualeditor-toolbar-savedialog": "문서 저장",
 	"visualeditor-toolbar-savedialog-short": "저장",

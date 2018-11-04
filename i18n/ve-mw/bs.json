@@ -108,7 +108,7 @@
 	"visualeditor-dialog-meta-languages-name-label": "Jezik",
 	"visualeditor-dialog-meta-languages-readonlynote": "Ovo je spisak stranica na drugim jezicima koje su povezane s ovom. Zasad se može mijenjati u uređivaču izvornog koda ili na Wikipodacima.",
 	"visualeditor-dialog-meta-languages-section": "Jezici",
-	"visualeditor-dialog-meta-settings-displaytitle": "Alternativni naslov",
+	"visualeditor-dialog-meta-settings-displaytitle": "Naslov za prikaz",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "Alternativni prikaz naslova",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Možete postaviti prikaz drukčijeg naslova stranice od samog naziva stranice.",
 	"visualeditor-dialog-meta-settings-hiddencat-help": "Možete spriječiti da se ova kategorija pojavi u spisku kategorija na stranicama na kojima se nalazi. Ovo je korisno za kategorije koje su zanimljive urednicima ali ne i većini čitaoca, kao naprimjer stranice koje trebaju sliku.",
