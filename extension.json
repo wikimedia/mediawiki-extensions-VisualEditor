@@ -662,7 +662,8 @@
 				"ext.visualEditor.core",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mwextensions",
-				"ext.visualEditor.mwsave"
+				"ext.visualEditor.mwsave",
+				"mediawiki.widgets.AbandonEditDialog"
 			],
 			"messages": [
 				"accesskey-save",
@@ -1435,7 +1436,6 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionPreviewDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWCancelConfirmDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWWikitextSwitchConfirmDialog.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWPreTextInputWidget.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWPreDialog.js",
@@ -1572,10 +1572,6 @@
 				"visualeditor-toolbar-savedialog",
 				"visualeditor-toolbar-savedialog-short",
 				"visualeditor-version-label",
-				"visualeditor-viewpage-savewarning",
-				"visualeditor-viewpage-savewarning-discard",
-				"visualeditor-viewpage-savewarning-keep",
-				"visualeditor-viewpage-savewarning-title",
 				"visualeditor-wikitext-progress",
 				"visualeditor-wikitext-warning-title"
 			],
