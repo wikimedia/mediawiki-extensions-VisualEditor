@@ -32,10 +32,11 @@
 .ve-ui-mwParameterResultWidget-names {
 	float: right;
 	font-size: 0.9em;
+	padding: 0.2em 0;
 }
 
 .ve-ui-mwParameterResultWidget-name {
-	padding: 0.125em 0.25em;
+	padding: 0.1em 0.25em;
 	margin-left: 0.5em;
 	color: #54595d;
 	background-color: #eaecf0;
