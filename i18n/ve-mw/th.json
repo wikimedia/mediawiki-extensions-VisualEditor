@@ -155,7 +155,6 @@
 	"visualeditor-templatesused-tool": "แม่แบบที่ใช้",
 	"visualeditor-toolbar-savedialog": "บันทึกหน้า",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
-	"visualeditor-viewpage-savewarning": "คุณแน่ใจว่าต้องการกลับไป view mode โดยไม่บันทึกข้อมูลเอาไว้ก่อน ?",
 	"visualeditor-wikitext-warning": "คุณกำลังใช้ VisualEditor-[[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] ทำงานไม่ได้ที่นี่ คลิก \"{{MediaWiki:visualeditor-ca-editsource}}\" เพื่อแก้ไขหน้านี้ในโหมด wikitext – การเปลี่ยนแปลงที่ยังไม่ได้บันทึกจะสูญหาย",
 	"visualeditor-wikitext-warning-title": "ตรวจพบ Wikitext markup"
 }

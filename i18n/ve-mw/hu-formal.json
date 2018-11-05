@@ -176,8 +176,5 @@
 	"visualeditor-special-characters-group-other": "Gyakran használt",
 	"visualeditor-toolbar-savedialog": "Oldal mentése",
 	"visualeditor-version-label": "Verzió",
-	"visualeditor-viewpage-savewarning-discard": "Változtatások elvetése",
-	"visualeditor-viewpage-savewarning-keep": "Szerkesztés folytatása",
-	"visualeditor-viewpage-savewarning-title": "Biztos benne?",
 	"visualeditor-wikitext-warning": "Most a vizuális szerkesztővel szerkeszt – a [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiszöveg]] itt nem működik. A forráskód nézetre való váltáshoz – ha nem akarja elveszíteni a változtatásait – kattintson a lenyíló menüre a „{{int:visualeditor-toolbar-savedialog}}” gomb mellett, és válassza a „{{int:visualeditor-mweditmodesource-title}}” lehetőséget."
 }

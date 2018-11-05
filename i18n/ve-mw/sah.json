@@ -283,10 +283,6 @@
 	"visualeditor-toolbar-savedialog-short": "Бигэргэт",
 	"visualeditor-usernamespacepagelink": "Project:Тус эйгэ",
 	"visualeditor-version-label": "Торум",
-	"visualeditor-viewpage-savewarning": "Уларытыыгын бигэргэппэккэ эрэ көрүү эрэсиимигэр төннөҕүн дуо?",
-	"visualeditor-viewpage-savewarning-discard": "Уларытыылары суох гын",
-	"visualeditor-viewpage-savewarning-keep": "Салгыы уларыт",
-	"visualeditor-viewpage-savewarning-title": "Кырдьык дуо?",
 	"visualeditor-wikitext-progress": "биики-тиэкиһи уларыт",
 	"visualeditor-wikitext-warning": "Эн көрөн уларытар эрэдээктэргэ үлэлии олороҕун — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|биики-разметка]] манна үлэлээбэт. Төрүт тиэкиһи уларытыыга көһөргө бу аттыгар бар түһэн кэлэр тиһилиги арый «{{int:visualeditor-toolbar-savedialog}}» уонна «{{int:visualeditor-mweditmodesource-title}}» тал.",
 	"visualeditor-wikitext-warning-title": "Биики-разметка көһүннэ"

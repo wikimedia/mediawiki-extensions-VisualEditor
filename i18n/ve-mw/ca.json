@@ -327,10 +327,6 @@
 	"visualeditor-toolbar-savedialog-short": "Desa",
 	"visualeditor-usernamespacepagelink": "Project:Espai d'usuari",
 	"visualeditor-version-label": "Versió",
-	"visualeditor-viewpage-savewarning": "Esteu segurd que voleu tornar a la pàgina sense desar abans?",
-	"visualeditor-viewpage-savewarning-discard": "Descarta les edicions",
-	"visualeditor-viewpage-savewarning-keep": "Continua editant",
-	"visualeditor-viewpage-savewarning-title": "N'esteu segur?",
 	"visualeditor-wikitext-progress": "S'està convertint el wikitext",
 	"visualeditor-wikitext-warning": "Esteu utilitzant l'Editor Visual. El [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] no funciona en aquest espai. Per canviar a l'editor en wikitext en qualsevol moment sense perdre els canvis, feu clic al botó de canvi.",
 	"visualeditor-wikitext-warning-title": "S'ha detectat sintaxi wiki"

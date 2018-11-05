@@ -265,10 +265,6 @@
 	"visualeditor-toolbar-savedialog-short": "Kaydet",
 	"visualeditor-usernamespacepagelink": "Project:Kullanıcı sayfası",
 	"visualeditor-version-label": "Sürüm",
-	"visualeditor-viewpage-savewarning": "Kaydetmeden önce ilk görüntüleme moduna geri dönmek istediğinizden emin misiniz?",
-	"visualeditor-viewpage-savewarning-discard": "Düzenlemeler silinsin",
-	"visualeditor-viewpage-savewarning-keep": "Düzenlemeye devam",
-	"visualeditor-viewpage-savewarning-title": "Emin misiniz?",
 	"visualeditor-wikitext-warning": "Görsel Düzenleyici'yi kullanmaktasınız - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|viki metin editörü]] burada çalışmamaktadır. Herhangi bir anda, değişikliklerinizi kaybetmeden kaynak düzenlemeye geçmek için, \"{{int:visualeditor-toolbar-savedialog}}\" yanındaki aşağı açılır menüden \"{{int:visualeditor-mweditmodesource-title}}\" seçeneğine tıklayın.",
 	"visualeditor-wikitext-warning-title": "Vikimetin biçimlendirmesi algılandı"
 }

@@ -279,10 +279,6 @@
 	"visualeditor-toolbar-savedialog-short": "Vista",
 	"visualeditor-usernamespacepagelink": "Project:Notandanafnrými",
 	"visualeditor-version-label": "Útgáfa",
-	"visualeditor-viewpage-savewarning": "Ertu viss um að þú viljir hætta í breytingarham án þess að vista fyrst ?",
-	"visualeditor-viewpage-savewarning-discard": "Sleppa breytingum",
-	"visualeditor-viewpage-savewarning-keep": "Halda áfram að breyta",
-	"visualeditor-viewpage-savewarning-title": "Ert þú viss?",
 	"visualeditor-wikitext-progress": "Umbreyti wikitexta",
 	"visualeditor-wikitext-warning": "Þú ert að nota Visual Editor — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexti]] virkar ekki hér. Til að breyta wikitexta síðunnar án þess að missa breytingarnar þínar, ýttu á skipta takkann.",
 	"visualeditor-wikitext-warning-title": "Wixitextakóði fannst"

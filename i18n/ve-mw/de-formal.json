@@ -55,7 +55,5 @@
 	"visualeditor-savedialog-warning-dirty": "Ihre Bearbeitung ist eventuell beschädigt. Bitte vor dem Speichern überprüfen.",
 	"visualeditor-saveerror-hookaborted": "Fehler beim Speichern der Seite: Eine Erweiterung auf dem Server hat Sie am Speichern gehindert.",
 	"visualeditor-toload": "Der Editor wird jetzt geladen. Wenn Sie diese Meldung nach einigen Sekunden noch sehen, [$1 laden Sie bitte die Seite] neu.",
-	"visualeditor-viewpage-savewarning": "Sind Sie sicher, dass Sie zum Ansichtsmodus wechseln möchten, ohne vorher zu speichern?",
-	"visualeditor-viewpage-savewarning-title": "Sind Sie sicher?",
 	"visualeditor-wikitext-warning": "Sie benutzen den visuellen Editor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] funktioniert hier nicht. Um jederzeit ohne Verlust deiner Änderungen zur Quelltextbearbeitung zurückzukehren, klicken Sie auf den Wechseln-Button."
 }

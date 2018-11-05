@@ -228,9 +228,5 @@
 	"visualeditor-toolbar-savedialog-short": "هیشتن(ذخیره)",
 	"visualeditor-usernamespacepagelink": "Project:صفحه‌های کاربری",
 	"visualeditor-version-label": "نسخه",
-	"visualeditor-viewpage-savewarning": "مطمئنید که می‌خواهید بدون ذخیره‌سازی به حالت نمایش بازگردید؟",
-	"visualeditor-viewpage-savewarning-discard": "درنظر نگرفتن ویرایش‌ها",
-	"visualeditor-viewpage-savewarning-keep": "ادامه دادن به ویرایش",
-	"visualeditor-viewpage-savewarning-title": "آیا مطمئن هستید؟",
 	"visualeditor-wikitext-progress": "تبدیل منبع"
 }

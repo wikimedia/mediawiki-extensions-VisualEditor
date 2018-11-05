@@ -243,10 +243,6 @@
 	"visualeditor-toolbar-savedialog-short": "Sačuvaj",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-version-label": "Verzija",
-	"visualeditor-viewpage-savewarning": "Da li ste sigurni da želite da se vratite na prikaz bez prethodnog čuvanja?",
-	"visualeditor-viewpage-savewarning-discard": "Zanemari izmene",
-	"visualeditor-viewpage-savewarning-keep": "Nastavi sa uređivanjem",
-	"visualeditor-viewpage-savewarning-title": "Jeste li sigurni?",
 	"visualeditor-wikitext-warning": "Koristite Vizuelni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikitekst]] ovde ne radi. U svakom trenutku možete da se prebacite na izvorno uređivanje bez gubitka izmena klikom na odgovarajuće dugme.",
 	"visualeditor-wikitext-warning-title": "Detektovan vikitekst"
 }

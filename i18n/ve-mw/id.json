@@ -361,10 +361,6 @@
 	"visualeditor-toolbar-savedialog-short": "Simpan",
 	"visualeditor-usernamespacepagelink": "Project:Ruang nama pengguna",
 	"visualeditor-version-label": "Versi",
-	"visualeditor-viewpage-savewarning": "Apakah Anda yakin meninggalkan mode penyuntingan tanpa menyimpan terlebih dahulu?",
-	"visualeditor-viewpage-savewarning-discard": "Buang suntingan",
-	"visualeditor-viewpage-savewarning-keep": "Lanjutkan penyuntingan",
-	"visualeditor-viewpage-savewarning-title": "Apakah Anda yakin?",
 	"visualeditor-wikitext-progress": "Mengkonversi teks wiki",
 	"visualeditor-wikitext-warning": "Anda menggunakan editor visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|teks wiki]] tidak berfungsi di sini. Untuk beralih kembali ke penyuntingan sumber tanpa kehilangan perubahan Anda, klik tombol alih.",
 	"visualeditor-wikitext-warning-title": "Markah teks wiki terdeteksi"

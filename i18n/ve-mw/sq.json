@@ -207,10 +207,6 @@
 	"visualeditor-toolbar-savedialog": "Kryej ndryshimet",
 	"visualeditor-usernamespacepagelink": "Project:Main namespace",
 	"visualeditor-version-label": "Versioni",
-	"visualeditor-viewpage-savewarning": "Dësironi të ktheheni në modalitetin e vizualizimit pa kryer ndryshimet?",
-	"visualeditor-viewpage-savewarning-discard": "Mos merrni parasysh redaktimet",
-	"visualeditor-viewpage-savewarning-keep": "Vazhdoni redaktimin",
-	"visualeditor-viewpage-savewarning-title": "A jeni i sigurt?",
 	"visualeditor-wikitext-warning": "Jeni duke përdorur VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] nuk suprtohet nga ky mjet. Shtyp \"{{int:visualeditor-ca-editsource}}\" për të redaktuar tekstin burimor të faqes – ndryshimet e paruajtura do të fshihen.",
 	"visualeditor-wikitext-warning-title": "U zbulua wikitekst"
 }

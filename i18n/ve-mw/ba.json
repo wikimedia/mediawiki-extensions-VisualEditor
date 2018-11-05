@@ -280,10 +280,6 @@
 	"visualeditor-toolbar-savedialog-short": "Һаҡларға",
 	"visualeditor-usernamespacepagelink": "Project:Шәхси исемдәр арауығы",
 	"visualeditor-version-label": "Юрау",
-	"visualeditor-viewpage-savewarning": "Һеҙ ысынлап та үҙгәртеүҙәрҙе һаҡламайынса ҡарау режимына ҡайтырға теләйһегеҙме?",
-	"visualeditor-viewpage-savewarning-discard": "Үҙгәртеүҙәрҙе кире алырға",
-	"visualeditor-viewpage-savewarning-keep": "Мөхәррирләүҙе дауам итергә",
-	"visualeditor-viewpage-savewarning-title": "Ышанаһығыҙмы?",
 	"visualeditor-wikitext-progress": "Вики-тексты үҙгәртеү",
 	"visualeditor-wikitext-warning": "Һеҙ ҡулланған күҙләгес мөхәррир -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-тамға]] бында эшләмәй. Теләгән ваҡытта индерелгән үҙгәрештәрҙе юғалтмайынса артҡа күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
 	"visualeditor-wikitext-warning-title": "Тамғаланған Викияҙма табылған"

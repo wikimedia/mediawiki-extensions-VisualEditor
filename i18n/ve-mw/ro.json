@@ -299,10 +299,6 @@
 	"visualeditor-toolbar-savedialog-short": "Salvare",
 	"visualeditor-usernamespacepagelink": "Project:Spațiul de nume utilizator",
 	"visualeditor-version-label": "Versiunea",
-	"visualeditor-viewpage-savewarning": "Sunteți sigur(ă) că doriți să părăsiți modul editare fără ca mai întâi să salvați?",
-	"visualeditor-viewpage-savewarning-discard": "Renunță la modificări",
-	"visualeditor-viewpage-savewarning-keep": "Continuă editarea",
-	"visualeditor-viewpage-savewarning-title": "Sunteți sigur(ă)?",
 	"visualeditor-wikitext-progress": "Se convertește textul wiki",
 	"visualeditor-wikitext-warning": "Folosiți editorul vizual — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|textul wiki]] nu funcționează aici. Pentru a reveni în orice moment la editarea codului sursă fără a pierde modificările, faceți clic pe butonul de comutare.",
 	"visualeditor-wikitext-warning-title": "Limbaj de text wiki detectat"

@@ -263,10 +263,6 @@
 	"visualeditor-toolbar-savedialog-short": "Snimi",
 	"visualeditor-usernamespacepagelink": "Project:Imenski prostori",
 	"visualeditor-version-label": "Verzija",
-	"visualeditor-viewpage-savewarning": "Da li ste sigurni da želite napustiti mod uređivanja prije nego što snimite?",
-	"visualeditor-viewpage-savewarning-discard": "Odbaci izmjene",
-	"visualeditor-viewpage-savewarning-keep": "Nastavi s uređivanjem",
-	"visualeditor-viewpage-savewarning-title": "Da li ste sigurni?",
 	"visualeditor-wikitext-progress": "Pretvaranje wikiteksta",
 	"visualeditor-wikitext-warning": "Koristite vizualni uređivač - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] ovdje ne radi. Kako bi se prebacili u uređivanje izvornog koda u bilo koje vrijeme bez da se promjene izgube, otvorite padajući meni pored \"{{int:visualeditor-toolbar-savedialog}}\" i izaberite \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Zamijećen wikitext markup"

@@ -385,10 +385,6 @@
 	"visualeditor-toolbar-savedialog-short": "Зберегти",
 	"visualeditor-usernamespacepagelink": "Project:Простір назв користувача",
 	"visualeditor-version-label": "Версія",
-	"visualeditor-viewpage-savewarning": "Ви дійсно хочете припинити редагування, не зберігши зміни?",
-	"visualeditor-viewpage-savewarning-discard": "Відкинути редагування",
-	"visualeditor-viewpage-savewarning-keep": "Продовжити редагування",
-	"visualeditor-viewpage-savewarning-title": "Ви впевнені?",
 	"visualeditor-wikitext-progress": "Перетворення вікі-тексту",
 	"visualeditor-wikitext-warning": "Ви використовуєте візуальний редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікірозмітка]] тут не працює. Щоб у будь-який час перемкнутися на редагування коду без втрати своїх змін, натисніть на кнопку перемикача.",
 	"visualeditor-wikitext-warning-title": "Виявлена вікірозмітка"

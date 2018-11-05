@@ -275,10 +275,6 @@
 	"visualeditor-toolbar-savedialog-short": "儲存",
 	"visualeditor-usernamespacepagelink": "Project:User namespace",
 	"visualeditor-version-label": "版本",
-	"visualeditor-viewpage-savewarning": "你肯定你要離開改文模式，唔記好修改先？",
-	"visualeditor-viewpage-savewarning-discard": "放棄修改",
-	"visualeditor-viewpage-savewarning-keep": "繼續改",
-	"visualeditor-viewpage-savewarning-title": "你肯定？",
 	"visualeditor-wikitext-warning": "你而家用緊 VisualEditor。[[{{MediaWiki:visualeditor-wikitext-warning-link}}|維基代碼]]喺呢度用唔到。你可以隨時轉去改源碼，撳個掣就得，你改咗嘅嘢唔會唔見。",
 	"visualeditor-wikitext-warning-title": "偵測到維基代碼"
 }

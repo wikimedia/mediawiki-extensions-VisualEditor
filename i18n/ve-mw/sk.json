@@ -228,10 +228,6 @@
 	"visualeditor-toolbar-savedialog-short": "Uložiť",
 	"visualeditor-usernamespacepagelink": "Project:Menný priestor Používateľ",
 	"visualeditor-version-label": "Verzia",
-	"visualeditor-viewpage-savewarning": "Naozaj se chcete vrátiť späť do režimu prehliadania bez uloženia zmien?",
-	"visualeditor-viewpage-savewarning-discard": "Zahodiť úpravy",
-	"visualeditor-viewpage-savewarning-keep": "Pokračovať v úpravách",
-	"visualeditor-viewpage-savewarning-title": "Ste si istí?",
 	"visualeditor-wikitext-warning": "Používate VisualEditor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] sa tu nepoužíva. Kedykoľvek sa však môžete bez straty vykonaných úprav prepnúť do režimu editácie zdrojového kódu, kliknutím na tlačidlo „Prepnúť“.",
 	"visualeditor-wikitext-warning-title": "Zistená syntax wikitextu"
 }

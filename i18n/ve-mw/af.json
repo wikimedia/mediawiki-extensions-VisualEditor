@@ -252,10 +252,6 @@
 	"visualeditor-toolbar-savedialog-short": "Stoor",
 	"visualeditor-usernamespacepagelink": "Project:Gebruikersnaamruimte",
 	"visualeditor-version-label": "Weergawe",
-	"visualeditor-viewpage-savewarning": "Wil u definitief redigeermodus verlaat sonder om eers te stoor?",
-	"visualeditor-viewpage-savewarning-discard": "Gooi wysigings weg",
-	"visualeditor-viewpage-savewarning-keep": "Redigeer verder",
-	"visualeditor-viewpage-savewarning-title": "Is u seker?",
 	"visualeditor-wikitext-progress": "Skakel tans wikiteks om",
 	"visualeditor-wikitext-warning": "U gebruik die visuele redigeerder - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteks]] werk nie hier nie. Skakel enige tyd om na bronredigering sonder om veranderinge te verloor, deur op die oorskakelknop te druk.",
 	"visualeditor-wikitext-warning-title": "Wikiteks is bespeur"

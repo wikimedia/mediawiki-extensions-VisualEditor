@@ -81,7 +81,5 @@
 	"visualeditor-savedialog-warning-dirty": "بالك تحريرك صرالو عطب – مادا بيك راجع قبل الحفظ.",
 	"visualeditor-saveerror": "صرات غلطه وقت حفظ المعلومات للخادم: $1.",
 	"visualeditor-toolbar-savedialog": "سجل الباجة",
-	"visualeditor-version-label": "نسخة",
-	"visualeditor-viewpage-savewarning-keep": "واصل التعديل",
-	"visualeditor-viewpage-savewarning-title": "متأكد؟"
+	"visualeditor-version-label": "نسخة"
 }

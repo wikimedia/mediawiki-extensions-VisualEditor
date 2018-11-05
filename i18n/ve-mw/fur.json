@@ -148,8 +148,5 @@
 	"visualeditor-serializeerror": "Erôr cjamant i dâts dal servidôr: $1.",
 	"visualeditor-settings-tool": "Impuestazions de pagjine",
 	"visualeditor-toolbar-savedialog": "Salve la pagjine",
-	"visualeditor-version-label": "Version",
-	"visualeditor-viewpage-savewarning-discard": "Abandone i cambiaments",
-	"visualeditor-viewpage-savewarning-keep": "Continue a fâ i cambiaments",
-	"visualeditor-viewpage-savewarning-title": "Sêstu sigûr?"
+	"visualeditor-version-label": "Version"
 }

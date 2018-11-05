@@ -155,7 +155,6 @@
 	"visualeditor-toolbar-savedialog": "Stronu składować",
 	"visualeditor-usernamespacepagelink": "Project:Wužiwarski mjenowy rum",
 	"visualeditor-version-label": "Wersija",
-	"visualeditor-viewpage-savewarning": "Chceš so woprawdźe k napohladowemu modusej wróćić, bjeztoho zo by prjedy składował?",
 	"visualeditor-wikitext-warning": "Wužiwaš VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] tu njefunguje. Zo by kóždy čas k wobdźěłowanju žórłoweho teksta přešoł, bjeztoho zo by swoje změny zhubił, wočiń padacy meni pódla \"{{int:visualeditor-toolbar-savedialog}}\" a wubjer \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Wikitekst namakany"
 }

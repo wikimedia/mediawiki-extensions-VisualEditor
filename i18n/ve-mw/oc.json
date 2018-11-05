@@ -248,10 +248,6 @@
 	"visualeditor-toolbar-savedialog-short": "Enregistrar",
 	"visualeditor-usernamespacepagelink": "Project:Espaci de noms Utilizaire",
 	"visualeditor-version-label": "Version",
-	"visualeditor-viewpage-savewarning": "Sètz segur que volètz quitar lo mòde de modificacion sens enregistrar d'en primièr ?",
-	"visualeditor-viewpage-savewarning-discard": "Ignorar las modificacions",
-	"visualeditor-viewpage-savewarning-keep": "Contunhar de modificar",
-	"visualeditor-viewpage-savewarning-title": "Sètz segur ?",
 	"visualeditor-wikitext-progress": "Conversion del wikitèxte",
 	"visualeditor-wikitext-warning": "Utilizatz l'Editor Visual - lo [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikicòdi]] fonciona pas aicí. Per bascular a tot moment cap a l’edicion en wikicòdi sens pèrdre vòstras modificacions, dobrissètz la lista desenrotlanta prèp de « {{int:visualeditor-toolbar-savedialog}} » e seleccionatz « {{int:visualeditor-mweditmodesource-title}} ».",
 	"visualeditor-wikitext-warning-title": "Balisatge de Wikitèxte detectat"

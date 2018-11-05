@@ -179,8 +179,5 @@
 	"visualeditor-templatesused-tool": "တမ်းပလိတ်များ သုံးထားသည်",
 	"visualeditor-toolbar-savedialog": "စာမျက်နှာကို သိမ်းရန်",
 	"visualeditor-toolbar-savedialog-short": "သိမ်းရန်",
-	"visualeditor-version-label": "ဗားရှင်း",
-	"visualeditor-viewpage-savewarning-discard": "တည်းဖြတ်မှုများကို စွန့်လွတ်ရန်",
-	"visualeditor-viewpage-savewarning-keep": "တည်းဖြတ်ခြင်းကို ဆက်လုပ်ရန်",
-	"visualeditor-viewpage-savewarning-title": "သေချာပါသလား"
+	"visualeditor-version-label": "ဗားရှင်း"
 }

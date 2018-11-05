@@ -361,10 +361,6 @@
 	"visualeditor-toolbar-savedialog-short": "Αποθήκευση",
 	"visualeditor-usernamespacepagelink": "Project:Σελίδα χρήστη",
 	"visualeditor-version-label": "Έκδοση",
-	"visualeditor-viewpage-savewarning": "Είστε βέβαιοι ότι θέλετε να αφήσετε την κατάσταση επεξεργασίας χωρίς να αποθηκεύσετε πρώτα;",
-	"visualeditor-viewpage-savewarning-discard": "Απόρριψη επεξεργασιών",
-	"visualeditor-viewpage-savewarning-keep": "Συνεχίστε την επεξεργασία",
-	"visualeditor-viewpage-savewarning-title": "Είσαι σίγουρος;",
 	"visualeditor-wikitext-progress": "Μετατροπή κώδικα wiki",
 	"visualeditor-wikitext-warning": "Χρησιμοποιείτε τον οπτικό επεξεργαστή - ο [[{{MediaWiki:visualeditor-wikitext-warning-link}}|κώδικας wiki]] δεν λειτουργεί εδώ. Για να γυρίσετε σε επεξεργασία κώδικα σε οποιαδήποτε στιγμή χωρίς να χάσετε τις αλλαγές σας, κάντε κλικ στο κουμπί εναλλαγής.",
 	"visualeditor-wikitext-warning-title": "Ανιχνεύθηκε πηγαίος κώδικας (wikitext)"

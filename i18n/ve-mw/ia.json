@@ -173,9 +173,6 @@
 	"visualeditor-toolbar-savedialog": "Salveguardar pagina",
 	"visualeditor-usernamespacepagelink": "Project:Spatio de nomines usator",
 	"visualeditor-version-label": "Version",
-	"visualeditor-viewpage-savewarning": "Es tu secur de voler quitar le modo de modification sin salveguardar primo?",
-	"visualeditor-viewpage-savewarning-discard": "Abandonar modificationes",
-	"visualeditor-viewpage-savewarning-keep": "Continuar a modificar",
 	"visualeditor-wikitext-warning": "Tu usa le editor visual; le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexto]] non functiona hic. Pro cambiar al modification in modo de codice fonte a omne tempore sin perder tu modificationes, clicca sur le button de cambio.",
 	"visualeditor-wikitext-warning-title": "Marcation wikitexto detegite"
 }

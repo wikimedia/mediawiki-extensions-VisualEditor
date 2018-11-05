@@ -355,10 +355,6 @@
 	"visualeditor-toolbar-savedialog-short": "Հիշել",
 	"visualeditor-usernamespacepagelink": "Project:Մասնակցային անվանատարածք",
 	"visualeditor-version-label": "Վարկած",
-	"visualeditor-viewpage-savewarning": "Համոզվա՞ծ եք որ ցանկանում եք լքել խմբագրումը, առանց փոփոխությունները պահպանելու։",
-	"visualeditor-viewpage-savewarning-discard": "Չեղարկել խմբագրումները",
-	"visualeditor-viewpage-savewarning-keep": "Շարունակել խմբագրելը",
-	"visualeditor-viewpage-savewarning-title": "Համոզվա՞ծ եք:",
 	"visualeditor-wikitext-progress": "Փոխարկել վիքիտեքստը",
 	"visualeditor-wikitext-warning": "Դուք օգտագործում եք Վիզուալ խմբագրիչը. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|վիքիտեքստը]] այստեղ չի աշխատում: Ելատեքստի խմբագրմանն առանց տվյալների կորստի անցնելու համար՝ սեղմեք անցնելու կոճակին։",
 	"visualeditor-wikitext-warning-title": "Օգտագործվել է Վիքիգծանշում"

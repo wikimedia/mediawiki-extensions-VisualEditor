@@ -112,7 +112,6 @@
 	"visualeditor-toolbar-savedialog": "Sarba la pàggina",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utenti",
 	"visualeditor-version-label": "Virsioni",
-	"visualeditor-viewpage-savewarning": "Vossia è sicuru ca voli arriturnari â mudalitati littura senza arriggistrari?",
 	"visualeditor-wikitext-warning": "Stai adupirannu lu VisualEditor - lu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitestu]] nun funziona. Pi passari a canciari la surgenti quannnu voi voi, senza pèrdiri li tò canciamenti, grapi lu menù a scinnuta a latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghi \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Wikitestu rilivatu"
 }

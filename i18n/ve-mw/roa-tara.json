@@ -221,14 +221,11 @@
 	"visualeditor-serializeerror": "Errore carecanne le date da 'u server: $1.",
 	"visualeditor-settings-tool": "'Mbostaziune d'a pàgene",
 	"visualeditor-special-characters-group-other": "Ausate assaije",
+	"visualeditor-title-error": "Titole invalide.",
 	"visualeditor-toolbar-savedialog": "Reggistre 'a vôsce",
 	"visualeditor-toolbar-savedialog-short": "Reggìstre",
 	"visualeditor-usernamespacepagelink": "Project:Namespace utende",
 	"visualeditor-version-label": "Versione",
-	"visualeditor-viewpage-savewarning": "Sì secure ca vuè ccu tuèrne rrete a 'u mode de 'ndrucà senze ca è reggistrate?",
-	"visualeditor-viewpage-savewarning-discard": "Scitte le cangiaminde",
-	"visualeditor-viewpage-savewarning-keep": "Condinue a cangià",
-	"visualeditor-viewpage-savewarning-title": "Sì secure?",
 	"visualeditor-wikitext-warning": "Tu ste ause VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|uicchiteste]] non ge funzione aqquà. Pe cangià 'a pàgene jndr'à 'u mode uicchiteste senze ca pirde le cangiaminde tune non reggistrate, cazze 'u buttone de cangiamende.",
 	"visualeditor-wikitext-warning-title": "Segnaposte de uicchiteste acchiate"
 }

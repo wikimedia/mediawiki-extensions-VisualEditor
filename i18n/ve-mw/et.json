@@ -322,10 +322,6 @@
 	"visualeditor-toolbar-savedialog-short": "Salvesta",
 	"visualeditor-usernamespacepagelink": "Project:Kasutajanimeruum",
 	"visualeditor-version-label": "Versioon",
-	"visualeditor-viewpage-savewarning": "Kas oled kindel, et tahad redigeerimist lõpetada ilma kõigepealt salvestamata?",
-	"visualeditor-viewpage-savewarning-discard": "Loobu muudatustest",
-	"visualeditor-viewpage-savewarning-keep": "Jätka redigeerimist",
-	"visualeditor-viewpage-savewarning-title": "Kas oled kindel?",
 	"visualeditor-wikitext-progress": "Vikiteksti teisendamine",
 	"visualeditor-wikitext-warning": "Kasutad visuaaltoimetit. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Vikitekst]] siin ei tööta. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, klõpsa ümberlülitusnuppu.",
 	"visualeditor-wikitext-warning-title": "Tuvastatud vikiteksti märgistus"

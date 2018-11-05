@@ -214,10 +214,6 @@
 	"visualeditor-toolbar-savedialog-short": "Сакъла",
 	"visualeditor-usernamespacepagelink": "Project:Энчи алам",
 	"visualeditor-version-label": "Версия",
-	"visualeditor-viewpage-savewarning": "Тюрлендириулени сакълатмагъанлай къарау режимге къайтыргъа ажымсыз излеймисе?",
-	"visualeditor-viewpage-savewarning-discard": "Тюрлениулени ызына ал",
-	"visualeditor-viewpage-savewarning-keep": "Редакторлукъ этиуню бардыр",
-	"visualeditor-viewpage-savewarning-title": "Ишексизмисе?",
 	"visualeditor-wikitext-warning": "Сиз визуал редакторну хайырландырасыз — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-текст]] былайда ишлемейди. Тюрлендириуле да сакъланыб, вики-текст режимге кёчер ючюн «{{int:visualeditor-toolbar-savedialog}}» къаты бла ачылыучу тизмени ач да  «{{int:visualeditor-mweditmodesource-title}}» сайла.",
 	"visualeditor-wikitext-warning-title": "Вики-текст табылды"
 }

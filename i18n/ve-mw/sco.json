@@ -207,10 +207,6 @@
 	"visualeditor-toolbar-savedialog": "Hain page",
 	"visualeditor-usernamespacepagelink": "Project:Uiser namespace",
 	"visualeditor-version-label": "Version",
-	"visualeditor-viewpage-savewarning": "Ar ye sair that ye want tae gang back til see mode wioot hainin first?",
-	"visualeditor-viewpage-savewarning-discard": "Get rid o chynges",
-	"visualeditor-viewpage-savewarning-keep": "Conteena eeditin",
-	"visualeditor-viewpage-savewarning-title": "Ye shuir?",
 	"visualeditor-wikitext-warning": "Ye'r uisin VeesualEediter - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] disna wairk here. Tae switch tae soorce eeditin at onie time wioot tintin yer chynges, apen the drapdoun menu nex tae \"{{int:visualeditor-toolbar-savedialog}}\" n clap oan \"{{int:visualeditor-mweditmodesource-title}}\".",
 	"visualeditor-wikitext-warning-title": "Wikitex maurup detectit"
 }

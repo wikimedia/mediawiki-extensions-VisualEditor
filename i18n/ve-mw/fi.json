@@ -344,10 +344,6 @@
 	"visualeditor-toolbar-savedialog-short": "Tallenna",
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
 	"visualeditor-version-label": "Versio",
-	"visualeditor-viewpage-savewarning": "Oletko varma, että haluat lopettaa muokkaamisen tallentamatta ensin?",
-	"visualeditor-viewpage-savewarning-discard": "Hylkää muutokset",
-	"visualeditor-viewpage-savewarning-keep": "Jatka muokkaamista",
-	"visualeditor-viewpage-savewarning-title": "Oletko varma?",
 	"visualeditor-wikitext-progress": "Muunnetaan wikitekstiä",
 	"visualeditor-wikitext-warning": "Käytät visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Napsauta \"vaihda\"-painiketta vaihtaaksesi wikitekstin muokkaustilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia.",
 	"visualeditor-wikitext-warning-title": "Wikikoodia havaittu"
