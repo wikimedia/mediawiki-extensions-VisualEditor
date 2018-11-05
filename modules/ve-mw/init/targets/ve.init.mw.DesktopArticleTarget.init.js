@@ -993,10 +993,7 @@
 
 		// Not on the edit conflict page of the TwoColumnConflict extension (T156251)
 		// TODO: Allow the TwoColumnConflict extension to do this itself (T174180)
-		mw.config.get( 'wgTwoColConflict' ) !== 'true' &&
-
-		// Not on Special:Undelete (T173154)
-		mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'Undelete'
+		mw.config.get( 'wgTwoColConflict' ) !== 'true'
 	);
 
 	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
