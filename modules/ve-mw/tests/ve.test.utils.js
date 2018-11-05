@@ -36,8 +36,9 @@
 				$wrapper.append( ',' );
 			}
 		} );
-		// Re-parse HTML to merge text nodes
-		return $( $.parseHTML( $wrapper.html() ) );
+		// Merge text nodes
+		$wrapper[ 0 ].normalize();
+		return $wrapper.contents().toArray();
 	};
 	ve.test.utils.MWDummyPlatform = MWDummyPlatform;
 

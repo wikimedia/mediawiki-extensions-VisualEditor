@@ -222,7 +222,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 };
 
 ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) {
-	var change, params, param, $paramChanges, from, to,
+	var change, params, param, paramChanges, listItem, from, to,
 		descriptions = [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
 
 	// This method assumes that the behavior of isDiffComparable above remains
@@ -265,15 +265,20 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 			if ( from !== to ) {
 				change = this.describeChange( param, { from: from, to: to } );
 				if ( change ) {
-					if ( !$paramChanges ) {
-						$paramChanges = $( '<ul>' );
-						descriptions.push( $paramChanges );
+					if ( !paramChanges ) {
+						paramChanges = document.createElement( 'ul' );
+						descriptions.push( paramChanges );
 					}
-					if ( change instanceof jQuery ) {
-						$paramChanges.append( $( '<li>' ).append( change ) );
+					listItem = document.createElement( 'li' );
+					if ( typeof change === 'string' ) {
+						listItem.appendChild( document.createTextNode( change ) );
 					} else {
-						$paramChanges.append( $( '<li>' ).text( change ) );
+						// eslint-disable-next-line no-loop-func
+						change.forEach( function ( node ) {
+							listItem.appendChild( node );
+						} );
 					}
+					paramChanges.appendChild( listItem );
 				}
 			}
 		}
