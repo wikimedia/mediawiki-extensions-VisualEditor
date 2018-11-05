@@ -764,23 +764,10 @@ class ApiVisualEditor extends ApiBase {
 	 * @return string
 	 */
 	private function getLastLogEntry( Title $title, $types = '' ) {
-		$lp = new LogPager(
-			new LogEventsList( $this->getContext() ),
-			$types,
-			'',
-			$title->getPrefixedDbKey()
-		);
-		$lp->mLimit = 1;
-
-		return $lp->getBody() . MediaWikiServices::getInstance()->getLinkRenderer()->makeLink(
-			SpecialPage::getTitleFor( 'Log' ),
-			$this->msg( 'log-fulllog' )->text(),
-			[],
-			[
-				'page' => $title->getPrefixedDBkey(),
-				'type' => is_string( $types ) ? $types : null
-			]
-		);
+		$outString = '';
+		LogEventsList::showLogExtract( $outString, $types, $title, '',
+			[ 'lim' => 1 ] );
+		return $outString;
 	}
 
 	/**
