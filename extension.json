@@ -288,6 +288,10 @@
 				"default": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css"
 				],
+				"vector": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css",
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-vector.css"
+				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
 				],
