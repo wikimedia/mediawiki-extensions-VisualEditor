@@ -523,22 +523,25 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Blocked user notice
-				if (
-					$user->isBlockedFrom( $title, true ) &&
-					$user->getBlock()->prevents( 'edit' ) !== false
-				) {
-					$notices[] = call_user_func_array(
-						[ $this, 'msg' ],
-						$user->getBlock()->getPermissionsError( $this->getContext() )
-					)->parseAsBlock();
-				}
+				if ( $user->isBlockedFrom( $title, true ) || $user->isBlockedGlobally() ) {
+					if ( $user->isBlockedFrom( $title, true ) ) {
+						$notices[] = call_user_func_array(
+							[ $this, 'msg' ],
+							$user->getBlock()->getPermissionsError( $this->getContext() )
+						)->parseAsBlock();
+					}
 
-				// Blocked user notice for global blocks
-				if ( $user->isBlockedGlobally() ) {
-					$notices[] = call_user_func_array(
-						[ $this, 'msg' ],
-						$user->getGlobalBlock()->getPermissionsError( $this->getContext() )
-					)->parseAsBlock();
+					if ( $user->isBlockedGlobally() ) {
+						$notices[] = call_user_func_array(
+							[ $this, 'msg' ],
+							$user->getGlobalBlock()->getPermissionsError( $this->getContext() )
+						)->parseAsBlock();
+					}
+
+					if ( $this->veConfig->get( 'VisualEditorTrackBlockNotices' ) ) {
+						$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
+						$statsd->increment( 'MediaWiki.BlockNotices.' . wfWikiID() . '.VisualEditor.returned' );
+					}
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
