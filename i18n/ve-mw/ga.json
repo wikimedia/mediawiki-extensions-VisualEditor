@@ -5,12 +5,13 @@
 			"Kscanne",
 			"Tem",
 			"Moilleadóir",
-			"Nmacu"
+			"Nmacu",
+			"Kwekubo"
 		]
 	},
-	"tooltip-ca-ve-edit": "Athraigh an lch seo",
-	"visualeditor-ca-editsource": "Cuir vicithéacs in eagar",
-	"visualeditor-ca-editsource-section": "athraigh vicithéacs",
+	"tooltip-ca-ve-edit": "Cuir an leathanach seo in eagar",
+	"visualeditor-ca-editsource": "Cuir foinse in eagar",
+	"visualeditor-ca-editsource-section": "athraigh foinse",
 	"visualeditor-ca-ve-create": "EagarthóirAmhairc",
 	"visualeditor-ca-ve-edit": "EagarthóirAmhairc",
 	"visualeditor-ca-ve-edit-section": "EagarthóirAmhairc",

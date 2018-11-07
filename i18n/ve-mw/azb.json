@@ -14,7 +14,7 @@
 	"visualeditor-ca-createsource": "یازی کوکون یارات",
 	"visualeditor-ca-editsource": "قایناغی دَییشدیر",
 	"visualeditor-ca-editsource-section": "قایناغی دَییشدیر",
-	"visualeditor-ca-ve-create": "گؤرسل‌ائدیتوْر",
+	"visualeditor-ca-ve-create": "گؤرونوشلو دَییشدیریجی",
 	"visualeditor-ca-ve-edit": "گؤرسل‌ائدیتوْر",
 	"visualeditor-ca-ve-edit-section": "گؤرسل‌ائدیتوْر",
 	"visualeditor-categories-tool": "بؤلوم‌لر",
@@ -23,5 +23,8 @@
 	"visualeditor-dialog-media-upload": "یوکله",
 	"visualeditor-dialog-meta-languages-label": "دیل‌لر",
 	"visualeditor-dialog-meta-languages-section": "دیل‌لر",
-	"visualeditor-languages-tool": "دیل‌لر"
+	"visualeditor-languages-tool": "دیل‌لر",
+	"visualeditor-mweditmode-tooltip": "دییشدیریجینی دَییش",
+	"visualeditor-mweditmodesource-tool-current": "یازی دییشدیریجی",
+	"visualeditor-pagemenu-tooltip": "صفحه سئچمه‌لری"
 }
