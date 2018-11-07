@@ -1,0 +1,48 @@
+/*!
+ * VisualEditor MediaWiki DesktopArticleTarget Minerva skin init styles.
+ *
+ * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* stylelint-disable selector-max-id */
+
+.ve-edit-source .mw-ui-icon,
+.ve-edit-visual .mw-ui-icon {
+	position: absolute;
+	opacity: 0.65;
+	transform: scale( 0.6 );
+	right: 0.5em;
+	bottom: 0;
+	transform-origin: bottom right;
+}
+
+.ve-edit-source .mw-ui-icon:before,
+.ve-edit-visual .mw-ui-icon:before {
+	/* Override weird styles from MW-UI */
+	margin-right: 0;
+}
+
+/* Silly selector for high specificity to override Minerva styles */
+#page-actions li#ca-edit {
+	margin-right: 0;
+}
+
+#page-actions li#ca-edit:first-child,
+#page-actions li#ca-ve-edit:first-child {
+	margin-right: -0.5em;
+}
+
+.mw-editsection-divider {
+	display: none;
+}
+
+/* Swap the order to visually match the order in the actions menu */
+/* Silly selector for high specificity to override Minerva styles */
+.content .mw-parser-output > * > span.mw-editsection {
+	display: flex;
+}
+
+.content .mw-parser-output > * > span.mw-editsection .ve-edit-visual {
+	order: 2;
+}

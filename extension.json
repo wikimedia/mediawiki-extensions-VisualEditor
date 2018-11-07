@@ -295,6 +295,10 @@
 				],
 				"apex": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
+				],
+				"minerva": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css",
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init-minerva.css"
 				]
 			},
 			"dependencies": [

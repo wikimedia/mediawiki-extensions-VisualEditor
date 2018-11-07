@@ -626,7 +626,10 @@
 		setupMultiTabs: function () {
 			var caVeEdit,
 				action = pageExists ? 'edit' : 'create',
-				pTabsId = $( '#p-views' ).length ? 'p-views' : 'p-cactions',
+				isMinerva = mw.config.get( 'skin' ) === 'minerva',
+				// HACK: Minerva doesn't have a normal tabs container, this only kind of works
+				pTabsId = isMinerva ? 'mw-mf-page-center' :
+					$( '#p-views' ).length ? 'p-views' : 'p-cactions',
 				$caSource = $( '#ca-viewsource' ),
 				$caEdit = $( '#ca-edit' ),
 				$caVeEdit = $( '#ca-ve-edit' ),
@@ -668,6 +671,10 @@
 					);
 
 					$caVeEdit = $( caVeEdit );
+					// HACK: Copy the 'class' attribute, otherwise the link is invisible on Minerva
+					if ( isMinerva ) {
+						$caVeEdit.attr( 'class', $caEdit.attr( 'class' ) );
+					}
 					$caVeEditLink = $caVeEdit.find( 'a' );
 				}
 			} else if ( $caEdit.length && $caVeEdit.length ) {
@@ -714,6 +721,19 @@
 				}
 			}
 
+			if ( isMinerva ) {
+				// Minerva hides the link text - display tiny icons instead
+				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
+				$caEdit.find( 'a' ).each( function () {
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-wikiText' );
+					$( this ).addClass( 've-edit-source' ).prepend( $icon );
+				} );
+				$caVeEdit.find( 'a' ).each( function () {
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-eye' );
+					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
+				} );
+			}
+
 			if ( init.isVisualAvailable ) {
 				if ( conf.tabPosition === 'before' ) {
 					$caEdit.addClass( 'collapsible' );
@@ -725,6 +745,7 @@
 
 		setupMultiSectionLinks: function () {
 			var $editsections = $( '#mw-content-text .mw-editsection' ),
+				isMinerva = mw.config.get( 'skin' ) === 'minerva',
 				bodyDir = $( 'body' ).css( 'direction' );
 
 			// Match direction of the user interface
@@ -763,6 +784,19 @@
 							$editSourceLink.after( $divider, $editLink );
 						}
 					}
+				} );
+			}
+
+			if ( isMinerva ) {
+				// Minerva hides the link text - display tiny icons instead
+				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
+				$( '#mw-content-text .mw-editsection a:not(.mw-editsection-visualeditor)' ).each( function () {
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-wikiText' );
+					$( this ).addClass( 've-edit-source' ).prepend( $icon );
+				} );
+				$( '#mw-content-text .mw-editsection a.mw-editsection-visualeditor' ).each( function () {
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-eye' );
+					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
 				} );
 			}
 
