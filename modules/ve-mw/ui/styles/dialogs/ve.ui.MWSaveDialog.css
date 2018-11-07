@@ -69,8 +69,8 @@
 
 .ve-ui-mwSaveDialog-messages {
 	/* Make a top border that spans the whole width of the dialog */
-	margin: 0 -1.25em;
-	padding: 0 1.25em;
+	margin: 0 -1.14285714em;
+	padding: 0 1.14285714em;
 	border-top: 1px solid rgba( 0, 0, 0, 0.2 );
 	/* Ew */
 	margin-top: 1em;
