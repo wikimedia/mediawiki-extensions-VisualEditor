@@ -502,7 +502,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 ve.dm.MWImageModel.prototype.getData = function () {
 	var data,
 		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
-		editAttributes = $.extend( originalAttrs, this.getUpdatedAttributes() ),
+		editAttributes = ve.extendObject( originalAttrs, this.getUpdatedAttributes() ),
 		nodeType = this.getImageNodeType();
 
 	// Remove old classes
