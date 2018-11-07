@@ -389,6 +389,9 @@
 				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
+				],
+				"minerva": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-minerva.css"
 				]
 			},
 			"dependencies": [
@@ -483,6 +486,9 @@
 				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
+				],
+				"minerva": [
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-minerva.css"
 				]
 			},
 			"dependencies": [
