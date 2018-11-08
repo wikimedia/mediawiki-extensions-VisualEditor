@@ -331,9 +331,7 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
  * @param {string} status Text status message
  */
 ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevId, docRevIdMatches,
-		name, options, accesskey, title, $label, checkbox,
-		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
+	var data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data || typeof data.content !== 'string' ) {
 		this.loadFail( 've-api', 'No HTML content in response from server' );
@@ -344,73 +342,13 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.fromEditedState = data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, this.getDefaultMode() );
-		this.preloaded = data.preloaded;
 
-		this.remoteNotices = ve.getObjectValues( data.notices );
-		this.protectedClasses = data.protectedClasses;
+		// Parse data this not available in RESTBase
+		this.parseMetadata( response );
 
-		this.baseTimeStamp = data.basetimestamp;
-		this.startTimeStamp = data.starttimestamp;
-		this.revid = data.oldid;
-		this.recovered = data.recovered;
-
-		this.checkboxesDef = data.checkboxesDef;
-		this.checkboxesMessages = data.checkboxesMessages;
-		mw.messages.set( data.checkboxesMessages );
-		this.$templatesUsed = $( data.templates );
-		this.links = data.links;
-
+		// Properties that don't come from the API
 		this.initialSourceRange = data.initialSourceRange;
-
-		aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
-		if ( aboutDoc ) {
-			docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
-			if ( docRevIdMatches.length >= 2 ) {
-				docRevId = parseInt( docRevIdMatches[ 1 ] );
-			}
-		}
-		if ( docRevId && docRevId !== this.revid ) {
-			if ( this.retriedRevIdConflict ) {
-				// Retried already, just error the second time.
-				this.loadFail(
-					've-api',
-					'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
-						'returned by server do not match'
-				);
-			} else {
-				this.retriedRevIdConflict = true;
-				// TODO this retries both requests, in RESTbase mode we should only retry
-				// the request that gave us the lower revid
-				this.loading = false;
-				// HACK: Load with explicit revid to hopefully prevent this from happening again
-				this.requestedRevId = Math.max( docRevId, this.revid );
-				this.load();
-			}
-			return;
-		} else {
-			// Set this to false after a successful load, so we don't immediately give up
-			// if a subsequent load mismatches again
-			this.retriedRevIdConflict = false;
-		}
-
-		// Populate link cache
-		if ( this.links ) {
-			// Format from the API: { missing: [titles], known: 1|[titles] }
-			// Format expected by LinkCache: { title: { missing: true|false } }
-			linkData = {};
-			for ( i = 0, len = this.links.missing.length; i < len; i++ ) {
-				linkData[ this.links.missing[ i ] ] = { missing: true };
-			}
-			if ( this.links.known === 1 ) {
-				// Set back to false by surfaceReady()
-				ve.init.platform.linkCache.setAssumeExistence( true );
-			} else {
-				for ( i = 0, len = this.links.known.length; i < len; i++ ) {
-					linkData[ this.links.known[ i ] ] = { missing: false };
-				}
-			}
-			ve.init.platform.linkCache.setMissing( linkData );
-		}
+		this.recovered = data.recovered;
 
 		this.track( 'trace.parseResponse.exit' );
 
@@ -418,13 +356,94 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.documentReady( this.doc );
 	}
 
-	this.checkboxFields = [];
-	this.checkboxesByName = {};
 	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
 		$( '#firstHeading' ).text(
 			mw.Title.newFromText( this.getPageName() ).getPrefixedText()
 		);
 	}
+};
+
+/**
+ * Parse document metadata from the API response
+ *
+ * @param {Object} response API response data
+ */
+ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
+	var i, len, linkData, aboutDoc, docRevIdMatches, docRevId,
+		name, options, accesskey, title, $label, checkbox,
+		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
+
+	if ( !data ) {
+		this.loadFail( 've-api', 'No metadata content in response from server' );
+		return;
+	}
+
+	this.remoteNotices = ve.getObjectValues( data.notices );
+	this.protectedClasses = data.protectedClasses;
+
+	this.baseTimeStamp = data.basetimestamp;
+	this.startTimeStamp = data.starttimestamp;
+	this.revid = data.oldid;
+	this.preloaded = data.preloaded;
+
+	this.checkboxesDef = data.checkboxesDef;
+	this.checkboxesMessages = data.checkboxesMessages;
+	mw.messages.set( data.checkboxesMessages );
+	this.$templatesUsed = $( data.templates );
+	this.links = data.links;
+
+	// Populate link cache
+	if ( this.links ) {
+		// Format from the API: { missing: [titles], known: 1|[titles] }
+		// Format expected by LinkCache: { title: { missing: true|false } }
+		linkData = {};
+		for ( i = 0, len = this.links.missing.length; i < len; i++ ) {
+			linkData[ this.links.missing[ i ] ] = { missing: true };
+		}
+		if ( this.links.known === 1 ) {
+			// Set back to false by surfaceReady()
+			ve.init.platform.linkCache.setAssumeExistence( true );
+		} else {
+			for ( i = 0, len = this.links.known.length; i < len; i++ ) {
+				linkData[ this.links.known[ i ] ] = { missing: false };
+			}
+		}
+		ve.init.platform.linkCache.setMissing( linkData );
+	}
+
+	aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
+	if ( aboutDoc ) {
+		docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
+		if ( docRevIdMatches.length >= 2 ) {
+			docRevId = parseInt( docRevIdMatches[ 1 ] );
+		}
+	}
+	if ( docRevId && docRevId !== this.revid ) {
+		if ( this.retriedRevIdConflict ) {
+			// Retried already, just error the second time.
+			this.loadFail(
+				've-api',
+				'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
+					'returned by server do not match'
+			);
+		} else {
+			this.retriedRevIdConflict = true;
+			// TODO this retries both requests, in RESTbase mode we should only retry
+			// the request that gave us the lower revid
+			this.loading = false;
+			// HACK: Load with explicit revid to hopefully prevent this from happening again
+			this.requestedRevId = Math.max( docRevId, this.revid );
+			this.load();
+		}
+		return;
+	} else {
+		// Set this to false after a successful load, so we don't immediately give up
+		// if a subsequent load mismatches again
+		this.retriedRevIdConflict = false;
+	}
+
+	this.checkboxFields = [];
+	this.checkboxesByName = {};
 
 	if ( this.checkboxesDef ) {
 		for ( name in this.checkboxesDef ) {
