@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Amir a57",
-			"Mousa"
+			"Mousa",
+			"Alp Er Tunqa"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|گورمه‌لی دَییشدیرمک]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|گورمه‌لی دَییشدیرمک]]",
+	"visualeditor-help-label": "ایشلدن کؤمگینی اوْخویون"
 }

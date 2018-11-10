@@ -261,6 +261,7 @@
 	"visualeditor-serializeerror": "Sunucudan veri yüklenirken hata oluştu: $1.",
 	"visualeditor-settings-tool": "Sayfa ayarları",
 	"visualeditor-special-characters-group-other": "Sık kullanılan",
+	"visualeditor-title-error": "Geçersiz başlık.",
 	"visualeditor-toolbar-savedialog": "Sayfayı kaydet",
 	"visualeditor-toolbar-savedialog-short": "Kaydet",
 	"visualeditor-usernamespacepagelink": "Project:Kullanıcı sayfası",
