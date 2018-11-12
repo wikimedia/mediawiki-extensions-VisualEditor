@@ -132,6 +132,8 @@
 	"visualeditor-mweditmodeve-tool-current": "Візуальная праўка",
 	"visualeditor-mweditmodeve-tool-unavailable": "Візуальная праўка тут недаступна",
 	"visualeditor-mweditmodeve-warning": "Вы пераходзіце да візуальнай праўкі.\nХочаце працягнуць?",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Мова",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Мовы",
 	"visualeditor-preference-betatempdisable": "Часова адключыць візуальны рэдактар, пакуль ён знаходзіцца ў бэта-версіі",
 	"visualeditor-preference-core-label": "Візуальная праўка",
 	"visualeditor-preference-enable": "Уключыць VisualEditor (толькі ў [[{{MediaWiki:Visualeditor-mainnamespacepagelink}}|асноўнай]] і [[{{MediaWiki:Visualeditor-usernamespacepagelink}}|асабістай]] прасторах імёнаў).",
