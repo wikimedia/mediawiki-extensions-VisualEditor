@@ -491,7 +491,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.searchWidget.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 			this.showSearchPanelButton.connect( this, { click: 'onShowSearchPanelButtonClick' } );
 			this.galleryGroup.connect( this, { editItem: 'onHighlightItem' } );
-			this.galleryGroup.once( 'reorder', this.onChange.bind( this ) );
 			this.removeButton.connect( this, { click: 'onRemoveItem' } );
 			this.modeDropdown.getMenu().connect( this, { choose: 'onModeDropdownChange' } );
 			this.widthsInput.connect( this, { change: 'updateActions' } );
@@ -536,6 +535,7 @@ ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 			this.captionTarget.once( 'change', this.onChange.bind( this ) );
 			this.highlightedAltTextInput.once( 'change', this.onChange.bind( this ) );
 			this.highlightedCaptionTarget.once( 'change', this.onChange.bind( this ) );
+			this.galleryGroup.once( 'change', this.onChange.bind( this ) );
 		}, this );
 };
 
@@ -567,7 +567,7 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.searchWidget.getResults().disconnect( this );
 			this.showSearchPanelButton.disconnect( this );
 			this.galleryGroup.disconnect( this );
-			this.galleryGroup.off( 'reorder' );
+			this.galleryGroup.off( 'change' );
 			this.removeButton.disconnect( this );
 			this.modeDropdown.disconnect( this );
 			this.widthsInput.disconnect( this );
@@ -736,8 +736,6 @@ ve.ui.MWGalleryDialog.prototype.onRemoveItem = function () {
 
 	// Highlight another item, or show the search panel if the gallery is now empty
 	this.onHighlightItem();
-
-	this.onChange();
 };
 
 /**
