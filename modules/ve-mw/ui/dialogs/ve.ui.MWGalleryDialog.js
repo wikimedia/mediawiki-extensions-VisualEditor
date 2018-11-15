@@ -141,6 +141,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.selectedFilenames = {};
 	this.initialImageData = [];
 	this.originalMwDataNormalized = null;
+	this.originalGalleryGroupItems = null;
 	this.imageData = {};
 	this.isMobile = OO.ui.isMobile();
 
@@ -417,7 +418,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				imageNodes = this.selectedNode && this.selectedNode.getImageNodes();
 
 			this.actions.setMode( this.fragment.getSelectedModels().length ? 'edit' : 'insert' );
-			this.modified = false;
+			this.anyItemModified = false;
 
 			// Images tab panel
 			// If editing an existing gallery, populate with the images...
@@ -491,6 +492,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.searchWidget.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 			this.showSearchPanelButton.connect( this, { click: 'onShowSearchPanelButtonClick' } );
 			this.galleryGroup.connect( this, { editItem: 'onHighlightItem' } );
+			this.galleryGroup.connect( this, { change: 'updateActions' } );
 			this.removeButton.connect( this, { click: 'onRemoveItem' } );
 			this.modeDropdown.getMenu().connect( this, { choose: 'onModeDropdownChange' } );
 			this.widthsInput.connect( this, { change: 'updateActions' } );
@@ -499,6 +501,9 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.showFilenameCheckbox.connect( this, { change: 'updateActions' } );
 			this.classesInput.connect( this, { change: 'updateActions' } );
 			this.stylesInput.connect( this, { change: 'updateActions' } );
+			this.captionTarget.connect( this, { change: 'updateActions' } );
+			this.highlightedAltTextInput.connect( this, { change: 'updateActions' } );
+			this.highlightedCaptionTarget.connect( this, { change: 'updateActions' } );
 
 			return this.imagesPromise;
 		}, this );
@@ -531,11 +536,6 @@ ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			this.searchWidget.getQuery().focus().select();
-			// These are connected after the inputs have been populated on setup
-			this.captionTarget.once( 'change', this.onChange.bind( this ) );
-			this.highlightedAltTextInput.once( 'change', this.onChange.bind( this ) );
-			this.highlightedCaptionTarget.once( 'change', this.onChange.bind( this ) );
-			this.galleryGroup.once( 'change', this.onChange.bind( this ) );
 		}, this );
 };
 
@@ -561,13 +561,13 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.selectedFilenames = {};
 			this.initialImageData = [];
 			this.originalMwDataNormalized = null;
+			this.originalGalleryGroupItems = null;
 
 			// Disconnect events
 			this.indexLayout.disconnect( this );
 			this.searchWidget.getResults().disconnect( this );
 			this.showSearchPanelButton.disconnect( this );
 			this.galleryGroup.disconnect( this );
-			this.galleryGroup.off( 'change' );
 			this.removeButton.disconnect( this );
 			this.modeDropdown.disconnect( this );
 			this.widthsInput.disconnect( this );
@@ -576,9 +576,9 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.showFilenameCheckbox.disconnect( this );
 			this.classesInput.disconnect( this );
 			this.stylesInput.disconnect( this );
-			this.highlightedAltTextInput.off( 'change' );
-			this.captionTarget.off( 'change' );
-			this.highlightedCaptionTarget.off( 'change' );
+			this.highlightedAltTextInput.disconnect( this );
+			this.captionTarget.disconnect( this );
+			this.highlightedCaptionTarget.disconnect( this );
 
 		}, this );
 };
@@ -651,6 +651,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 			items.push( new ve.ui.MWGalleryItemWidget( image, config ) );
 		} );
 		this.initialImageData = [];
+		this.originalGalleryGroupItems = ve.copy( items );
 	} else {
 		for ( title in this.selectedFilenames ) {
 			if ( Object.prototype.hasOwnProperty.call( thumbUrls, title ) ) {
@@ -667,6 +668,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 			}
 		}
 	}
+
 	this.galleryGroup.addItems( items );
 
 	// Gallery is no longer empty
@@ -703,6 +705,8 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
  * in this dialog (currently only the image caption).
  */
 ve.ui.MWGalleryDialog.prototype.updateHighlightedItem = function () {
+	this.anyItemModified = this.anyItemModified || this.isHighlightedItemModified();
+
 	// TODO: Support link, page and lang
 	if ( this.highlightedItem ) {
 		// No need to call setCaptionDocument(), the document object is updated on every change
@@ -899,34 +903,61 @@ ve.ui.MWGalleryDialog.prototype.updateActions = function () {
 };
 
 /**
- * Set modified flag to true
- */
-ve.ui.MWGalleryDialog.prototype.onChange = function () {
-	this.modified = true;
-	this.updateActions();
-};
-
-/**
- * Check if modified flag is true or if gallery mwData would be modified if window
- * contents were applied.
+ * Check if gallery attributes or contents would be modified if changes were applied.
  *
- * @return {boolean} modified flag is true, or mwData would be modified
+ * @return {boolean}
  */
 ve.ui.MWGalleryDialog.prototype.isModified = function () {
-	var mwDataCopy, modified;
+	var mwDataCopy, i;
 
-	if ( this.modified ) {
-		return true;
-	}
-
+	// Check attributes
 	if ( this.originalMwDataNormalized ) {
 		mwDataCopy = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
 		this.updateMwData( mwDataCopy );
-		modified = !ve.compare( mwDataCopy, this.originalMwDataNormalized );
-	} else {
-		modified = true;
+		if ( !ve.compare( mwDataCopy, this.originalMwDataNormalized ) ) {
+			return true;
+		}
 	}
-	return modified;
+	if ( this.captionTarget.hasBeenModified() ) {
+		return true;
+	}
+
+	// Check contents: each image's attributes and contents (caption)
+	if ( this.anyItemModified || this.isHighlightedItemModified() ) {
+		return true;
+	}
+
+	// Check contents: added/removed/reordered images
+	if ( this.originalGalleryGroupItems ) {
+		if ( this.galleryGroup.items.length !== this.originalGalleryGroupItems.length ) {
+			return true;
+		}
+		for ( i = 0; i < this.galleryGroup.items.length; i++ ) {
+			if ( this.galleryGroup.items[ i ] !== this.originalGalleryGroupItems[ i ] ) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+};
+
+/**
+ * Check if currently highlighted item's attributes or contents would be modified if changes were
+ * applied.
+ *
+ * @return {boolean}
+ */
+ve.ui.MWGalleryDialog.prototype.isHighlightedItemModified = function () {
+	if ( this.highlightedItem ) {
+		if ( this.highlightedAltTextInput.getValue() !== this.highlightedItem.altText ) {
+			return true;
+		}
+		if ( this.highlightedCaptionTarget.hasBeenModified() ) {
+			return true;
+		}
+	}
+	return false;
 };
 
 /**
