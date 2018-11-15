@@ -14,5 +14,6 @@
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальная праўка: Пераключана]]",
 	"tag-visualeditor-switched-description": "Удзельнік пачаў правіць з дапамогай візуальнага рэдактара, а потым пераключыўся на рэдактар вікітэксту.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Водгукі",
-	"visualeditor-feedback-tool": "Пакінуць водгук"
+	"visualeditor-feedback-tool": "Пакінуць водгук",
+	"visualeditor-help-label": "Чытаць кіраўніцтва карыстальніка"
 }
