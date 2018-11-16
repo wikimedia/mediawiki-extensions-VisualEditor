@@ -1527,7 +1527,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 		// Pop out the notices when the welcome dialog is closed
 		this.welcomeDialogPromise
 			.always( function () {
-				var popup;
+				var popup, wiki;
 				if (
 					target.switched &&
 					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
@@ -1539,6 +1539,14 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 				} else if ( target.actionsToolbar.tools.notices ) {
 					// Show notices
 					target.actionsToolbar.tools.notices.getPopup().toggle( true );
+					if ( mw.config.get( 'wgVisualEditorConfig' ).trackBlockNotices &&
+						target.actionsToolbar.tools.notices.noticeItems.some( function ( item ) {
+							return item.type === 'block';
+						} )
+					) {
+						wiki = mw.config.get( 'wgWikiID' );
+						mw.track( 'counter.MediaWiki.BlockNotices.' + wiki + '.VisualEditor.shown', 1 );
+					}
 				}
 			} );
 	}

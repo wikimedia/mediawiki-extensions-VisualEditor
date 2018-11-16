@@ -12,7 +12,13 @@ QUnit.test( 'init', function ( assert ) {
 		response = {
 			visualeditor: {
 				result: 'success',
-				notices: [],
+				notices: [
+					'<b>HTML string notice</b> message',
+					{
+						type: 'object notice',
+						message: '<b>object notice</b> message'
+					}
+				],
 				checkboxesDef: {
 					wpMinoredit: {
 						id: 'wpMinoredit',
@@ -79,10 +85,24 @@ QUnit.test( 'init', function ( assert ) {
 	target.on( 'surfaceReady', function () {
 		assert.strictEqual( target.getSurface().getModel().getDocument().getLang(), 'he', 'Page language is passed through from config' );
 		assert.strictEqual( target.getSurface().getModel().getDocument().getDir(), 'rtl', 'Page direction is passed through from config' );
-		target.destroy();
 		mw.config.get( 'wgVisualEditor' ).pageLanguageCode = 'en';
 		mw.config.get( 'wgVisualEditor' ).pageLanguageDir = 'ltr';
-		done();
+		target.activatingDeferred.then( function () {
+			assert.equalDomElement(
+				target.actionsToolbar.tools.notices.noticeItems[ 0 ].$element[ 0 ],
+				$( '<div class="ve-ui-mwNoticesPopupTool-item"><b>HTML string notice</b> message</div>' )[ 0 ],
+				'HTML string notice message is passed through from API'
+			);
+			assert.strictEqual( target.actionsToolbar.tools.notices.noticeItems[ 0 ].type, undefined, 'Plain text notice type is undefined' );
+			assert.equalDomElement(
+				target.actionsToolbar.tools.notices.noticeItems[ 1 ].$element[ 0 ],
+				$( '<div class="ve-ui-mwNoticesPopupTool-item"><b>object notice</b> message</div>' )[ 0 ],
+				'Object notice message is passed through from API'
+			);
+			assert.strictEqual( target.actionsToolbar.tools.notices.noticeItems[ 1 ].type, 'object notice', 'Object notice type is passed through from API' );
+			target.destroy();
+			done();
+		} );
 	} );
 	mw.config.get( 'wgVisualEditor' ).pageLanguageCode = 'he';
 	mw.config.get( 'wgVisualEditor' ).pageLanguageDir = 'rtl';

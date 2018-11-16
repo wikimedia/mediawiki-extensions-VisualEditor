@@ -940,6 +940,7 @@ class VisualEditorHooks {
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
+			'trackBlockNotices' => $veConfig->get( 'VisualEditorTrackBlockNotices' ),
 		];
 
 		return true;
