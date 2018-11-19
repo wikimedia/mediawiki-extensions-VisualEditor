@@ -449,7 +449,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var template, promise,
-				bookletLayout = this.bookletLayout;
+				dialog = this;
 
 			// Properties
 			this.loaded = false;
@@ -463,10 +463,10 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			} );
 
 			// Detach the form while building for performance
-			bookletLayout.$element.detach();
+			this.bookletLayout.$element.detach();
 			// HACK: Prevent any setPage() calls (from #onReplacePart) from focussing stuff, it messes
 			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
-			bookletLayout.autoFocus = false;
+			this.bookletLayout.autoFocus = false;
 
 			// Initialization
 			if ( !this.selectedNode ) {
@@ -494,15 +494,15 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			this.actions.setAbilities( { apply: false, insert: false } );
 
-			// Add missing required and suggested parameters to each transclusion.
-			this.transclusionModel.addPromptedParameters();
-
-			this.loaded = true;
-			this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
-			this.$body.append( bookletLayout.$element );
-
 			return promise.then( function () {
-				bookletLayout.autoFocus = true;
+				// Add missing required and suggested parameters to each transclusion.
+				dialog.transclusionModel.addPromptedParameters();
+
+				dialog.loaded = true;
+				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+				dialog.$body.append( dialog.bookletLayout.$element );
+
+				dialog.bookletLayout.autoFocus = true;
 			} );
 		}, this );
 };
