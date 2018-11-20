@@ -69,7 +69,7 @@ ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem
-			.setIcon( 'source' )
+			.setIcon( 'wikiText' )
 			.setMovable( true )
 			.setRemovable( true )
 			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-content' ) );
