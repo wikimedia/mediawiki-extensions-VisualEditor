@@ -77,7 +77,7 @@ ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 			.fail( this.onParseError.bind( this, deferred ) );
 		return deferred.promise( { abort: xhr.abort } );
 	} else {
-		deferred.resolve( $( '<span>&nbsp;</span>' ).get() );
+		deferred.resolve( $( '<span>' ).text( '\u00a0' ).get() );
 		return deferred.promise();
 	}
 };
