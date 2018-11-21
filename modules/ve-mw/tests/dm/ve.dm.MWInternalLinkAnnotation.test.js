@@ -91,7 +91,7 @@ QUnit.test( 'toDataElement', function ( assert ) {
 } );
 
 QUnit.test( 'getFragment', function ( assert ) {
-	var	i, l,
+	var i, l,
 		cases = [
 			{
 				msg: 'No fragment returns null',
