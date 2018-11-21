@@ -2644,7 +2644,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		} ) );
 	} );
 	return $.when.apply( $, promises ).then( function () {
-		var $output = $( '<div class="catlinks" />' );
+		var $output = $( '<div>' ).addClass( 'catlinks' );
 		function renderPageLink( page ) {
 			var title = mw.Title.newFromText( page.category || page );
 			return $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() );
@@ -2661,7 +2661,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		}
 		if ( categories.normal.length ) {
 			categories.normal.sort( categorySort );
-			$normal = $( '<div class="mw-normal-catlinks" />' );
+			$normal = $( '<div>' ).addClass( 'mw-normal-catlinks' );
 			$normal.append(
 				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categories.normal.length ) ),
 				ve.msg( 'colon-separator' ),
@@ -2671,7 +2671,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		}
 		if ( categories.hidden.length ) {
 			categories.hidden.sort( categorySort );
-			$hidden = $( '<div class="mw-hidden-catlinks" />' );
+			$hidden = $( '<div>' ).addClass( 'mw-hidden-catlinks' );
 			if ( mw.user.options.get( 'showhiddencats' ) ) {
 				$hidden.addClass( 'mw-hidden-cats-user-shown' );
 			} else if ( mw.config.get( 'wgNamespaceIds' ).category === mw.config.get( 'wgNamespaceNumber' ) ) {
