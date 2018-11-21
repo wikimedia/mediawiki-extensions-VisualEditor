@@ -172,13 +172,15 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 	}
 
 	// TODO: Show progress bar without breaking WindowAction
-	// ve.init.target.getSurface().createProgress(
-	// 	parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
-	// ).done( function ( progressBar, cancelPromise ) {
-	// 	cancelPromise.fail( function () {
-	// 		parsePromise.abort();
-	// 	} );
-	// } );
+	/*
+	ve.init.target.getSurface().createProgress(
+		parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
+	).done( function ( progressBar, cancelPromise ) {
+		cancelPromise.fail( function () {
+			parsePromise.abort();
+		} );
+	} );
+	*/
 
 	return parsePromise;
 };

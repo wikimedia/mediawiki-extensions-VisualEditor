@@ -89,11 +89,11 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	// ImageNode:
 	// <li> li (gallerybox)
-	// 	<div> outerDiv
-	// 		<div> thumbDiv
-	// 			<div> innerDiv
-	// 				<a> a
-	// 					<img> img
+	//   <div> outerDiv
+	//     <div> thumbDiv
+	//       <div> innerDiv
+	//         <a> a
+	//           <img> img
 	var model = data,
 		li = doc.createElement( 'li' ),
 		outerDiv = doc.createElement( 'div' ),

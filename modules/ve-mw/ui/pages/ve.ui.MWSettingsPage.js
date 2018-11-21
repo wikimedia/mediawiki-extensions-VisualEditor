@@ -131,6 +131,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.tableOfContents
 	] );
 
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.metaItemCheckboxes, function () {
 		this.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
@@ -312,6 +313,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.redirectOptionsTouched = false;
 
 	// Simple checkbox items
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.metaItemCheckboxes, function () {
 		var isSelected = !!settingsPage.getMetaItem( this.metaName );
 		this.fieldLayout.getField().setSelected( isSelected );
@@ -401,6 +403,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.metaItemCheckboxes, function () {
 		var currentItem = settingsPage.getMetaItem( this.metaName ),
 			isSelected = this.fieldLayout.getField().isSelected();

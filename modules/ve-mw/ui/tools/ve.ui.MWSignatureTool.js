@@ -32,9 +32,8 @@ ve.ui.MWSignatureTool.static.commandName = 'mwSignature';
 ve.ui.toolFactory.register( ve.ui.MWSignatureTool );
 
 if (
-	$.inArray(
-		new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId(),
-		mw.config.get( 'wgVisualEditorConfig' ).signatureNamespaces
+	mw.config.get( 'wgVisualEditorConfig' ).signatureNamespaces.indexOf(
+		new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId()
 	) !== -1
 ) {
 	// Command to insert signature node.

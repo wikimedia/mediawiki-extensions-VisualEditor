@@ -37,6 +37,7 @@
 			}
 		} );
 		// Merge text nodes
+		// eslint-disable-next-line no-restricted-properties
 		$wrapper[ 0 ].normalize();
 		return $wrapper.contents().toArray();
 	};

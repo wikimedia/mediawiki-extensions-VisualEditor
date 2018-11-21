@@ -26,7 +26,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	this.maps = {};
 
 	// Initialization
-	this.fill();
+	this.fillFromTemplate();
 };
 
 OO.initClass( ve.dm.MWTemplateSpecModel );
@@ -93,7 +93,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
  * after a parameter is added to ensure it's still complete, and this is safe because existing data
  * is never overwritten.
  */
-ve.dm.MWTemplateSpecModel.prototype.fill = function () {
+ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 	var key;
 
 	for ( key in this.template.getParameters() ) {

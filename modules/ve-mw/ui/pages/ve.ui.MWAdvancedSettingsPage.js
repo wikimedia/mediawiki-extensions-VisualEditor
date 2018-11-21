@@ -117,6 +117,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		);
 	}
 
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.metaItemCheckboxes, function () {
 		this.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
@@ -229,6 +230,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	this.displayTitleTouched = false;
 
 	// Simple checkbox items
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.metaItemCheckboxes, function () {
 		var isSelected = !!advancedSettingsPage.getMetaItem( this.metaName );
 		this.fieldLayout.getField().setSelected( isSelected );
@@ -334,6 +336,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.metaItemCheckboxes, function () {
 		var currentItem = advancedSettingsPage.getMetaItem( this.metaName ),
 			isSelected = this.fieldLayout.getField().isSelected();

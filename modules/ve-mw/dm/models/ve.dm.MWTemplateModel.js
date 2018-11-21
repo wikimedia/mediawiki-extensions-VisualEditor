@@ -265,7 +265,7 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	var name = param.getName();
 	this.sequence = null;
 	this.params[ name ] = param;
-	this.spec.fill();
+	this.spec.fillFromTemplate();
 	param.connect( this, { change: [ 'emit', 'change' ] } );
 	this.emit( 'add', param );
 	this.emit( 'change' );

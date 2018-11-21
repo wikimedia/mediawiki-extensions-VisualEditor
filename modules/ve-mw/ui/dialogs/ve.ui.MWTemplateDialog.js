@@ -369,6 +369,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 	var blankRequired = [],
 		deferred = $.Deferred();
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( this.bookletLayout.pages, function () {
 		if ( !( this instanceof ve.ui.MWParameterPage ) ) {
 			return true;

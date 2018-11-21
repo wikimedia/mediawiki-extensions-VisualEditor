@@ -66,7 +66,7 @@
 		addPlugin: function ( plugin ) {
 			if ( typeof plugin === 'string' ) {
 				modules.push( plugin );
-			} else if ( $.isFunction( plugin ) ) {
+			} else {
 				pluginCallbacks.push( plugin );
 			}
 		},
