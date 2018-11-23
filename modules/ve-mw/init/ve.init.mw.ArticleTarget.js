@@ -731,18 +731,11 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
-	editApi = data && data.visualeditoredit && data.visualeditoredit.edit;
+	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || {};
 
 	// Handle spam blacklist error (either from core or from Extension:SpamBlacklist)
-	if ( editApi && editApi.spamblacklist ) {
+	if ( editApi.spamblacklist ) {
 		this.saveErrorSpamBlacklist( editApi );
-		return;
-	}
-
-	// Handle warnings/errors from Extension:AbuseFilter
-	// TODO: Move this to a plugin
-	if ( editApi && editApi.info && editApi.info.indexOf( 'Hit AbuseFilter:' ) === 0 && editApi.warning ) {
-		this.saveErrorAbuseFilter( editApi );
 		return;
 	}
 
@@ -782,7 +775,15 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
+	// Handle warnings/errors from Extension:AbuseFilter
+	// TODO: Move this to a plugin
+	if ( editApi.abusefilter ) {
+		this.saveErrorAbuseFilter( editApi );
+		return;
+	}
+
 	// Handle captcha
+	// TODO: Move this to a plugin
 	// Captcha "errors" usually aren't errors. We simply don't know about them ahead of time,
 	// so we save once, then (if required) we get an error with a captcha back and try again after
 	// the user solved the captcha.
@@ -790,12 +791,14 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 	// "question" or "fancy" type of captcha. They all expose differently named properties in the
 	// API for different things in the UI. At this point we only support the SimpleCaptcha and FancyCaptcha
 	// which we very intuitively detect by the presence of a "url" property.
-	if ( editApi && editApi.captcha && (
-		editApi.captcha.url ||
-		editApi.captcha.type === 'simple' ||
-		editApi.captcha.type === 'math' ||
-		editApi.captcha.type === 'question'
-	) ) {
+	if (
+		editApi.captcha && (
+			editApi.captcha.url ||
+			editApi.captcha.type === 'simple' ||
+			editApi.captcha.type === 'math' ||
+			editApi.captcha.type === 'question'
+		)
+	) {
 		this.saveErrorCaptcha( editApi );
 		return;
 	}
