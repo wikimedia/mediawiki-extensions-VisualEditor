@@ -146,7 +146,9 @@ ve.dm.MWExtensionNode.static.getExtensionName = function () {
 
 ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, attributes, element ) {
 	var tools, change,
-		descriptions = [];
+		descriptions = [],
+		fromBody = attributeChanges.mw.from.body,
+		toBody = attributeChanges.mw.to.body;
 
 	if ( attributeChanges.mw ) {
 		// HACK: Try to generate an '<Extension> has changed' message using the associated tool's title
@@ -157,10 +159,10 @@ ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, attr
 			) );
 		}
 		// Compare body - default behaviour in #describeChange does nothing
-		if ( !ve.compare( attributeChanges.mw.from.body, attributeChanges.mw.to.body ) ) {
+		if ( !ve.compare( fromBody, toBody ) ) {
 			change = this.describeChange( 'body', {
-				from: attributeChanges.mw.from.body.extsrc,
-				to: attributeChanges.mw.to.body.extsrc
+				from: fromBody && fromBody.extsrc,
+				to: toBody && toBody.extsrc
 			} );
 			if ( change ) {
 				descriptions.push( change );
