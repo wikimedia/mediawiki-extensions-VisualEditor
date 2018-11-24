@@ -30,7 +30,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	// Properties
 	this.saveDialog = null;
 	this.saveDeferred = null;
-	this.captcha = null;
+	this.saveFields = {};
 	this.docToSave = null;
 	this.originalDmDocPromise = null;
 	this.originalHtml = null;
@@ -105,11 +105,13 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 /**
  * @event saveErrorSpamBlacklist
  * Fired when save is considered spam or blacklisted
+ * TODO: Move this to the extension
  */
 
 /**
  * @event saveErrorAbuseFilter
  * Fired when AbuseFilter throws warnings
+ * TODO: Move this to the extension
  */
 
 /**
@@ -127,6 +129,7 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 /**
  * @event saveErrorCaptcha
  * Fired when saveError indicates captcha field is required
+ * TODO: Move this to the extension
  */
 
 /**
@@ -719,7 +722,8 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
  * @param {Object|null} data API response data
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
-	var editApi,
+	var editApi, name, handler,
+		saveErrorHandlerRegistry = ve.init.mw.saveErrorHandlerRegistry,
 		target = this;
 
 	this.saving = false;
@@ -732,12 +736,6 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 	}
 
 	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || {};
-
-	// Handle spam blacklist error (either from core or from Extension:SpamBlacklist)
-	if ( editApi.spamblacklist ) {
-		this.saveErrorSpamBlacklist( editApi );
-		return;
-	}
 
 	// Handle token errors
 	if ( data.error && data.error.code === 'badtoken' ) {
@@ -775,32 +773,12 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
-	// Handle warnings/errors from Extension:AbuseFilter
-	// TODO: Move this to a plugin
-	if ( editApi.abusefilter ) {
-		this.saveErrorAbuseFilter( editApi );
-		return;
-	}
-
-	// Handle captcha
-	// TODO: Move this to a plugin
-	// Captcha "errors" usually aren't errors. We simply don't know about them ahead of time,
-	// so we save once, then (if required) we get an error with a captcha back and try again after
-	// the user solved the captcha.
-	// TODO: ConfirmEdit API is horrible, there is no reliable way to know whether it is a "math",
-	// "question" or "fancy" type of captcha. They all expose differently named properties in the
-	// API for different things in the UI. At this point we only support the SimpleCaptcha and FancyCaptcha
-	// which we very intuitively detect by the presence of a "url" property.
-	if (
-		editApi.captcha && (
-			editApi.captcha.url ||
-			editApi.captcha.type === 'simple' ||
-			editApi.captcha.type === 'math' ||
-			editApi.captcha.type === 'question'
-		)
-	) {
-		this.saveErrorCaptcha( editApi );
-		return;
+	for ( name in saveErrorHandlerRegistry.registry ) {
+		handler = saveErrorHandlerRegistry.lookup( name );
+		if ( handler( editApi, this ) ) {
+			// Error was handled
+			return;
+		}
 	}
 
 	// Handle (other) unknown and/or unrecoverable errors
@@ -830,36 +808,6 @@ ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply,
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
 	this.emit( 'saveErrorEmpty' );
-};
-
-/**
- * Handle spam blacklist error
- *
- * @method
- * @param {Object} editApi
- * @fires saveErrorSpamBlacklist
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorSpamBlacklist = function ( editApi ) {
-	this.showSaveError(
-		$( $.parseHTML( editApi.sberrorparsed ) ),
-		false // prevents reapply
-	);
-	this.emit( 'saveErrorSpamBlacklist' );
-};
-
-/**
- * Handel abuse filter error
- *
- * @method
- * @param {Object} editApi
- * @fires saveErrorAbuseFilter
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorAbuseFilter = function ( editApi ) {
-	this.showSaveError( $( $.parseHTML( editApi.warning ) ) );
-	// Don't disable the save button. If the action is not disallowed the user may save the
-	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
-	// between filter triggers that are and aren't disallowing the action.
-	this.emit( 'saveErrorAbuseFilter' );
 };
 
 /**
@@ -934,96 +882,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data )
 		false // prevents reapply
 	);
 	this.emit( 'saveErrorUnknown', errorCode || errorMsg || unknown );
-};
-
-/**
- * Handle captcha error
- *
- * @method
- * @param {Object} editApi
- * @fires saveErrorCaptcha
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorCaptcha = function ( editApi ) {
-	var $captchaImg, msg, question,
-		captchaData = editApi.captcha,
-		captchaInput = new OO.ui.TextInputWidget( { classes: [ 've-ui-saveDialog-captchaInput' ] } ),
-		$captchaDiv = $( '<div>' ),
-		$captchaParagraph = $( '<p>' ),
-		target = this;
-
-	function onCaptchaLoad() {
-		target.saveDialog.updateSize();
-		captchaInput.focus();
-		captchaInput.scrollElementIntoView();
-	}
-
-	// Save when pressing 'Enter' in captcha field as it is single line.
-	captchaInput.on( 'enter', function () {
-		target.saveDialog.executeAction( 'save' );
-	} );
-
-	this.captcha = {
-		input: captchaInput,
-		id: captchaData.id
-	};
-	$captchaDiv.append( $captchaParagraph );
-	$captchaParagraph.append(
-		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
-		document.createTextNode( mw.msg( 'colon-separator' ) )
-	);
-
-	if ( captchaData.url ) {
-		// FancyCaptcha
-		// Based on FancyCaptcha::getFormInformation() (https://git.io/v6mml) and
-		// ext.confirmEdit.fancyCaptcha.js in the ConfirmEdit extension.
-		mw.loader.load( 'ext.confirmEdit.fancyCaptcha' );
-		$captchaDiv.addClass( 'fancycaptcha-captcha-container' );
-		$captchaParagraph.append(
-			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
-				.filter( 'a' ).attr( 'target', '_blank' ).end()
-		);
-		$captchaImg = $( '<img>' )
-			.attr( 'src', captchaData.url )
-			.addClass( 'fancycaptcha-image' )
-			.on( 'load', onCaptchaLoad );
-		$captchaDiv.append(
-			$captchaImg,
-			' ',
-			$( '<a>' ).addClass( 'fancycaptcha-reload' ).text( mw.msg( 'fancycaptcha-reload-text' ) )
-		);
-	} else {
-		if ( captchaData.type === 'simple' || captchaData.type === 'math' ) {
-			// SimpleCaptcha and MathCaptcha
-			msg = 'captcha-edit';
-		} else if ( captchaData.type === 'question' ) {
-			// QuestyCaptcha
-			msg = 'questycaptcha-edit';
-		}
-
-		if ( msg ) {
-			switch ( captchaData.mime ) {
-				case 'text/html':
-					question = $.parseHTML( captchaData.question );
-					// TODO: Search for images and wait for them to load
-					setTimeout( onCaptchaLoad );
-					break;
-				case 'text/plain':
-					question = document.createTextNode( captchaData.question );
-					setTimeout( onCaptchaLoad );
-					break;
-			}
-			$captchaParagraph.append( mw.message( msg ).parse(), '<br>', question );
-		}
-	}
-
-	$captchaDiv.append( captchaInput.$element );
-
-	// ProcessDialog's error system isn't great for this yet.
-	this.saveDialog.clearMessage( 'api-save-error' );
-	this.saveDialog.showMessage( 'api-save-error', $captchaDiv );
-	this.saveDialog.popPending();
-
-	this.emit( 'saveErrorCaptcha' );
 };
 
 /**
@@ -1650,11 +1508,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 
 	saveOptions = this.getSaveOptions();
 
-	// Reset any old captcha data
-	if ( this.captcha ) {
-		delete this.captcha;
-	}
-
 	if (
 		+mw.user.options.get( 'forceeditsummary' ) &&
 		( saveOptions.summary === '' || saveOptions.summary === this.initialEditSummary ) &&
@@ -1691,10 +1544,16 @@ ve.init.mw.ArticleTarget.prototype.startSave = function ( saveOptions ) {
 ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
 	var name,
 		fields = {
-			wpSummary: this.saveDialog ? this.saveDialog.editSummaryInput.getValue() : ( this.editSummaryValue || this.initialEditSummary ),
-			wpCaptchaId: this.captcha && this.captcha.id,
-			wpCaptchaWord: this.captcha && this.captcha.input.getValue()
+			wpSummary: this.saveDialog ?
+				this.saveDialog.editSummaryInput.getValue() :
+				( this.editSummaryValue || this.initialEditSummary )
 		};
+
+	// Extra save fields added by extensions
+	for ( name in this.saveFields ) {
+		fields[ name ] = this.saveFields[ name ]();
+	}
+
 	if ( this.recreating ) {
 		fields.wpRecreate = true;
 	}
@@ -2692,6 +2551,171 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		return $output;
 	} );
 };
+
+/* Save error registry */
+
+/*
+ * Extensions can add methods to this registry.
+ *
+ * The method takes the editApi result object, and the target instance as arguments
+ * and should return a boolean indicating if the error was handled.
+ *
+ * Example:
+ *  ve.init.mw.saveErrorHandlerRegistry.register( 'blocked', function ( editApi, target ) {
+ *    if ( !editApi.blocked ) {
+ *      return false;
+ *    }
+ *    target.showSaveError( $( $.parseHTML( editApi.blockedMessage ) ) );
+ *    return true;
+ *  } );
+ */
+ve.init.mw.saveErrorHandlerRegistry = new OO.Registry();
+
+// TODO: Move these to their respective extensions
+
+// Extension:AbuseFitler
+ve.init.mw.saveErrorHandlerRegistry.register( 'abuseFitler', function ( editApi, target ) {
+	// Handle warnings/errors from Extension:AbuseFilter
+	if ( !editApi.abusefilter ) {
+		return false;
+	}
+	target.showSaveError( $( $.parseHTML( editApi.warning ) ) );
+	// Don't disable the save button. If the action is not disallowed the user may save the
+	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
+	// between filter triggers that are and aren't disallowing the action.
+	// Emit event for tracking. TODO: This is a bad design
+	target.emit( 'saveErrorAbuseFilter' );
+	return true;
+} );
+
+// Extension:SpamBlacklist
+ve.init.mw.saveErrorHandlerRegistry.register( 'spamBlacklist', function ( editApi, target ) {
+	// Handle spam blacklist error from Extension:SpamBlacklist
+	if ( !editApi.spamblacklist ) {
+		return false;
+	}
+	target.showSaveError(
+		$( $.parseHTML( editApi.sberrorparsed ) ),
+		false // prevents reapply
+	);
+	// Emit event for tracking. TODO: This is a bad design
+	target.emit( 'saveErrorSpamBlacklist' );
+	return true;
+} );
+
+// Extension:ConfirmEdit
+// Captcha "errors" usually aren't errors. We simply don't know about them ahead of time,
+// so we save once, then (if required) we get an error with a captcha back and try again after
+// the user solved the captcha.
+// TODO: ConfirmEdit API is horrible, there is no reliable way to know whether it is a "math",
+// "question" or "fancy" type of captcha. They all expose differently named properties in the
+// API for different things in the UI. At this point we only support the SimpleCaptcha and FancyCaptcha
+// which we very intuitively detect by the presence of a "url" property.
+ve.init.mw.saveErrorHandlerRegistry.register( 'confirmEditCaptchas', function ( editApi, target ) {
+	var $captchaImg, msg, question,
+		captchaInput, $captchaDiv, $captchaParagraph,
+		captchaData = editApi.captcha;
+
+	if ( !(
+		captchaData && (
+			captchaData.url ||
+			captchaData.type === 'simple' ||
+			captchaData.type === 'math' ||
+			captchaData.type === 'question'
+		)
+	) ) {
+		return false;
+	}
+
+	captchaInput = new OO.ui.TextInputWidget( { classes: [ 've-ui-saveDialog-captchaInput' ] } );
+
+	function onCaptchaLoad() {
+		target.saveDialog.updateSize();
+		captchaInput.focus();
+		captchaInput.scrollElementIntoView();
+	}
+
+	// Save when pressing 'Enter' in captcha field as it is single line.
+	captchaInput.on( 'enter', function () {
+		target.saveDialog.executeAction( 'save' );
+	} );
+
+	// Register extra fields
+	target.saveFields.wpCaptchaId = function () {
+		return captchaData.id;
+	};
+	target.saveFields.wpCaptchaWord = function () {
+		return captchaInput.getValue();
+	};
+
+	target.saveDialog.once( 'save', function () {
+		// Unregister extra fields on save attempt
+		delete target.saveFields.wpCaptchaId;
+		delete target.saveFields.wpCaptchaWord;
+	} );
+
+	$captchaParagraph = $( '<p>' ).append(
+		$( '<strong>' ).text( mw.msg( 'captcha-label' ) ),
+		document.createTextNode( mw.msg( 'colon-separator' ) )
+	);
+	$captchaDiv = $( '<div>' ).append( $captchaParagraph );
+
+	if ( captchaData.url ) {
+		// FancyCaptcha
+		// Based on FancyCaptcha::getFormInformation() (https://git.io/v6mml) and
+		// ext.confirmEdit.fancyCaptcha.js in the ConfirmEdit extension.
+		mw.loader.load( 'ext.confirmEdit.fancyCaptcha' );
+		$captchaDiv.addClass( 'fancycaptcha-captcha-container' );
+		$captchaParagraph.append(
+			$( $.parseHTML( mw.message( 'fancycaptcha-edit' ).parse() ) )
+				.filter( 'a' ).attr( 'target', '_blank' ).end()
+		);
+		$captchaImg = $( '<img>' )
+			.attr( 'src', captchaData.url )
+			.addClass( 'fancycaptcha-image' )
+			.on( 'load', onCaptchaLoad );
+		$captchaDiv.append(
+			$captchaImg,
+			' ',
+			$( '<a>' ).addClass( 'fancycaptcha-reload' ).text( mw.msg( 'fancycaptcha-reload-text' ) )
+		);
+	} else {
+		if ( captchaData.type === 'simple' || captchaData.type === 'math' ) {
+			// SimpleCaptcha and MathCaptcha
+			msg = 'captcha-edit';
+		} else if ( captchaData.type === 'question' ) {
+			// QuestyCaptcha
+			msg = 'questycaptcha-edit';
+		}
+
+		if ( msg ) {
+			switch ( captchaData.mime ) {
+				case 'text/html':
+					question = $.parseHTML( captchaData.question );
+					// TODO: Search for images and wait for them to load
+					setTimeout( onCaptchaLoad );
+					break;
+				case 'text/plain':
+					question = document.createTextNode( captchaData.question );
+					setTimeout( onCaptchaLoad );
+					break;
+			}
+			$captchaParagraph.append( mw.message( msg ).parse(), '<br>', question );
+		}
+	}
+
+	$captchaDiv.append( captchaInput.$element );
+
+	// ProcessDialog's error system isn't great for this yet.
+	target.saveDialog.clearMessage( 'api-save-error' );
+	target.saveDialog.showMessage( 'api-save-error', $captchaDiv );
+	target.saveDialog.popPending();
+
+	// Emit event for tracking. TODO: This is a bad design
+	target.emit( 'saveErrorCaptcha' );
+
+	return true;
+} );
 
 /* Registration */
 
