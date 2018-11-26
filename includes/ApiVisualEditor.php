@@ -525,22 +525,29 @@ class ApiVisualEditor extends ApiBase {
 				// Blocked user notice
 				if ( $user->isBlockedFrom( $title, true ) || $user->isBlockedGlobally() ) {
 					if ( $user->isBlockedFrom( $title, true ) ) {
-						$notices[] = call_user_func_array(
-							[ $this, 'msg' ],
-							$user->getBlock()->getPermissionsError( $this->getContext() )
-						)->parseAsBlock();
+						$notices[] = [
+							'type' => 'block',
+							'message' => call_user_func_array(
+								[ $this, 'msg' ],
+								$user->getBlock()->getPermissionsError( $this->getContext() )
+							)->parseAsBlock(),
+						];
 					}
 
 					if ( $user->isBlockedGlobally() ) {
-						$notices[] = call_user_func_array(
-							[ $this, 'msg' ],
-							$user->getGlobalBlock()->getPermissionsError( $this->getContext() )
-						)->parseAsBlock();
+						$notices[] = [
+							'type' => 'block',
+							'message' => call_user_func_array(
+								[ $this, 'msg' ],
+								$user->getGlobalBlock()->getPermissionsError( $this->getContext() )
+							)->parseAsBlock(),
+						];
 					}
 
-					if ( $this->veConfig->get( 'VisualEditorTrackBlockNotices' ) ) {
+					if ( $this->getConfig()->get( 'EnableBlockNoticeStats' ) ) {
 						$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
-						$statsd->increment( 'MediaWiki.BlockNotices.' . wfWikiID() . '.VisualEditor.returned' );
+						$wiki = $this->getConfig()->get( 'DBname' );
+						$statsd->increment( 'BlockNotices.' . $wiki . '.VisualEditor.returned' );
 					}
 				}
 

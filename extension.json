@@ -98,8 +98,7 @@
 			]
 		},
 		"VisualEditorEnableTocWidget": false,
-		"VisualEditorRebaserURL": false,
-		"VisualEditorTrackBlockNotices": false
+		"VisualEditorRebaserURL": false
 	},
 	"APIModules": {
 		"visualeditor": {
