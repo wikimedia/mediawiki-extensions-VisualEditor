@@ -100,16 +100,22 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	}
 
 	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
+	this.noticeItems = [];
 
-	notices.forEach( function ( itemHtml ) {
-		var $node = $( '<div>' )
+	notices.forEach( function ( item ) {
+		var $element = $( '<div>' )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )
-			.append( $.parseHTML( itemHtml ) );
+			.append( $.parseHTML( typeof item === 'string' ? item : item.message ) );
+
+		tool.noticeItems.push( {
+			$element: $element,
+			type: item.type
+		} );
 
 		// Ensure that any links in the notices open in a new tab/window
-		$node.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
+		$element.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
 
-		tool.$items.append( $node );
+		tool.$items.append( $element );
 	} );
 
 	this.popup.$body.append( this.$items );
