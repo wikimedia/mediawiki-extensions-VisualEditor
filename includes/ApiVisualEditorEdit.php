@@ -60,6 +60,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$api = new ApiMain(
 			new DerivativeRequest(
 				$this->getRequest(),
+				// Pass any unrecognized query parameters to the internal action=edit API request. This is
+				// necessary to support extensions that add extra stuff to the edit form (e.g. FlaggedRevs)
+				// and allows passing any other query parameters to be used for edit tagging (e.g. T209132).
 				$apiParams + $this->getRequest()->getValues(),
 				/* was posted? */ true
 			),
