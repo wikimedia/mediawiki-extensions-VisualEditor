@@ -26,7 +26,7 @@
 	"tag-visualeditor-wikitext": "2017 wikitekstin muokkaus",
 	"tag-visualeditor-wikitext-description": "Muokattu wikitekstin muokkausohjelmalla 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalinen muokkaus: vaihdettu]]",
-	"tag-visualeditor-switched-description": "Käyttäjä aloitti muokkaamisen visuaalisella muokkaimella, ja vaihtoi sitten wikitekstin muokkaustilaan.",
+	"tag-visualeditor-switched-description": "Käyttäjä aloitti muokkaamisen visuaalisella muokkaimella; sen jälkeen vaihtoi wikitekstin muokkaustilaan.",
 	"visualeditor-feedback-link": "Project:Visuaalinen muokkain/Palaute",
 	"visualeditor-feedback-tool": "Anna tästä ohjelmistosta palautetta",
 	"visualeditor-help-label": "Lue käyttöopas",
