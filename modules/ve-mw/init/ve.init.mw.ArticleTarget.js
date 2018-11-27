@@ -2573,8 +2573,8 @@ ve.init.mw.saveErrorHandlerRegistry = new OO.Registry();
 
 // TODO: Move these to their respective extensions
 
-// Extension:AbuseFitler
-ve.init.mw.saveErrorHandlerRegistry.register( 'abuseFitler', function ( editApi, target ) {
+// Extension:AbuseFilter
+ve.init.mw.saveErrorHandlerRegistry.register( 'abuseFilter', function ( editApi, target ) {
 	// Handle warnings/errors from Extension:AbuseFilter
 	if ( !editApi.abusefilter ) {
 		return false;
