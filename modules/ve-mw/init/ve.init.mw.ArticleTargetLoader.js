@@ -17,6 +17,7 @@
 ( function () {
 	var prefName, prefValue,
 		uri = new mw.Uri(),
+		namespaces = mw.config.get( 'wgNamespaceIds' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
 		modules = [ 'ext.visualEditor.articleTarget' ]
@@ -35,8 +36,13 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
-	// Allow signing posts in select namespaces
-	if ( conf.signatureNamespaces.length ) {
+	// Load signature tool if *any* namespace supports it.
+	// It will be shown disabled on namespaces that don't support it.
+	if (
+		Object.keys( namespaces ).some( function ( name ) {
+			return mw.Title.wantSignaturesNamespace( namespaces[ name ] );
+		} )
+	) {
 		modules.push( 'ext.visualEditor.mwsignature' );
 	}
 

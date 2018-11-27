@@ -22,7 +22,7 @@
 	"license-name": "MIT",
 	"type": "editor",
 	"requires": {
-		"MediaWiki": ">= 1.32.0"
+		"MediaWiki": ">= 1.33.0"
 	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
