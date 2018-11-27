@@ -392,13 +392,18 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						.addClass( 'mw-ajax-loader' );
 					this.editSummaryXhr = ve.init.target.getContentApi().post( {
 						action: 'parse',
+						title: ve.init.target.getPageName(),
+						prop: '',
 						summary: currentEditSummaryWikitext
 					} ).done( function ( result ) {
 						if ( result.parse.parsedsummary[ '*' ] === '' ) {
 							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						} else {
-							// Intentionally treated as HTML
-							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
+							dialog.$reviewEditSummary
+								// Intentionally treated as HTML
+								.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) )
+								// Make any links open in a new window
+								.find( 'a' ).prop( 'target', '_blank' ).attr( 'rel', 'noopener' );
 						}
 					} ).fail( function () {
 						dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
