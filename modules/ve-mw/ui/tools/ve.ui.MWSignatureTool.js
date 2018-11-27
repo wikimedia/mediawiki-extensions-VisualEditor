@@ -31,11 +31,9 @@ ve.ui.MWSignatureTool.static.commandName = 'mwSignature';
 
 ve.ui.toolFactory.register( ve.ui.MWSignatureTool );
 
-if (
-	mw.config.get( 'wgVisualEditorConfig' ).signatureNamespaces.indexOf(
-		new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId()
-	) !== -1
-) {
+// Commands and sequences are only registered on supported namespaces.
+// On other namespaces the tool is still shown, but disabled.
+if ( mw.Title.wantSignaturesNamespace( mw.config.get( 'wgNamespaceNumber' ) ) ) {
 	// Command to insert signature node.
 	ve.ui.commandRegistry.register(
 		new ve.ui.Command( 'mwSignature', 'content', 'insert', {

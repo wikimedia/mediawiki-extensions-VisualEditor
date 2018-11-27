@@ -909,9 +909,6 @@ class VisualEditorHooks {
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
-			'signatureNamespaces' => array_values(
-				array_filter( MWNamespace::getValidNamespaces(), 'MWNamespace::wantSignatures' )
-			),
 			'pluginModules' => array_merge(
 				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
 				// @todo deprecate the global setting
