@@ -14,7 +14,8 @@
 			saveAttempt: 'save_attempt',
 			saveSuccess: 'save_success',
 			saveFailure: 'save_failure'
-		};
+		},
+		trackdebug = !!mw.Uri().query.trackdebug;
 
 	timing = {};
 	editingSessionId = mw.user.generateRandomSessionId();
@@ -78,7 +79,7 @@
 			editingSessionId = mw.user.generateRandomSessionId();
 		}
 
-		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) ) {
+		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
 			return;
 		}
 
@@ -164,7 +165,11 @@
 			timing[ action ] = timeStamp;
 		}
 
-		mw.track( 'event.EditAttemptStep', event );
+		if ( trackdebug ) {
+			ve.log( topic, event );
+		} else {
+			mw.track( 'event.EditAttemptStep', event );
+		}
 	}
 
 	function mwTimingHandler( topic, data ) {
@@ -175,14 +180,18 @@
 
 		// Map mwtiming.foo --> timing.ve.foo.mobile
 		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
-		mw.track( topic, data.duration );
+		if ( trackdebug ) {
+			ve.log( topic, data.duration );
+		} else {
+			mw.track( topic, data.duration );
+		}
 	}
 
 	function activityHandler( topic, data ) {
 		var feature = topic.split( '.' )[ 1 ],
 			event;
 
-		if ( !inSample() ) {
+		if ( !inSample() && !trackdebug ) {
 			return;
 		}
 
@@ -192,7 +201,11 @@
 			editingSessionId: editingSessionId
 		};
 
-		mw.track( 'event.VisualEditorFeatureUse', event );
+		if ( trackdebug ) {
+			ve.log( topic, event );
+		} else {
+			mw.track( 'event.VisualEditorFeatureUse', event );
+		}
 	}
 
 	if ( mw.loader.getState( 'schema.EditAttemptStep' ) !== null ) {
