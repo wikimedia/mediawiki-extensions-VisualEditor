@@ -401,9 +401,9 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						} else {
 							dialog.$reviewEditSummary
 								// Intentionally treated as HTML
-								.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) )
-								// Make any links open in a new window
-								.find( 'a' ).prop( 'target', '_blank' ).attr( 'rel', 'noopener' );
+								.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
+							// Make any links open in a new window
+							ve.targetLinksToNewWindow( dialog.$reviewEditSummary[ 0 ] );
 						}
 					} ).fail( function () {
 						dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
