@@ -70,6 +70,7 @@
 	function mwEditHandler( topic, data, timeStamp ) {
 		var action = topic.split( '.' )[ 1 ],
 			actionPrefix = actionPrefixMap[ action ] || action,
+			duration = 0,
 			event;
 
 		timeStamp = timeStamp || this.timeStamp; // I8e82acc12 back-compat
@@ -148,7 +149,8 @@
 		event[ actionPrefix + '_type' ] = event.type;
 		event[ actionPrefix + '_mechanism' ] = event.mechanism;
 		if ( action !== 'init' ) {
-			event[ actionPrefix + '_timing' ] = Math.round( computeDuration( action, event, timeStamp ) );
+			duration = Math.round( computeDuration( action, event, timeStamp ) );
+			event[ actionPrefix + '_timing' ] = timing;
 		}
 		event[ actionPrefix + '_message' ] = event.message;
 		/* eslint-enable camelcase */
@@ -166,7 +168,7 @@
 		}
 
 		if ( trackdebug ) {
-			ve.log( topic, event );
+			ve.log( topic, duration + 'ms', event );
 		} else {
 			mw.track( 'event.EditAttemptStep', event );
 		}
@@ -181,7 +183,7 @@
 		// Map mwtiming.foo --> timing.ve.foo.mobile
 		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
 		if ( trackdebug ) {
-			ve.log( topic, data.duration );
+			ve.log( topic, Math.round( data.duration ) + 'ms' );
 		} else {
 			mw.track( topic, data.duration );
 		}
