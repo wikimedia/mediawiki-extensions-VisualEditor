@@ -208,7 +208,7 @@
 		}
 	}
 
-	if ( mw.loader.getState( 'schema.EditAttemptStep' ) !== null ) {
+	if ( mw.loader.getState( 'schema.EditAttemptStep' ) !== null || trackdebug ) {
 		// Only route any events into the EditAttemptStep schema if the module is actually available.
 		// It won't be if EventLogging is installed but WikimediaEvents is not.
 		// Also load ext.eventLogging.subscriber to provide mw.eventLog.randomTokenMatch().
@@ -218,7 +218,7 @@
 		} );
 	}
 
-	if ( mw.loader.getState( 'schema.VisualEditorFeatureUse' ) !== null ) {
+	if ( mw.loader.getState( 'schema.VisualEditorFeatureUse' ) !== null || trackdebug ) {
 		// Similarly for the VisualEditorFeatureUse schema
 		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {
 			ve.trackSubscribe( 'activity.', activityHandler );
