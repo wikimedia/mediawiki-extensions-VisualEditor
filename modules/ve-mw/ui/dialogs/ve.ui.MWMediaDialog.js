@@ -643,9 +643,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			$main.prop( 'dir', contentDirection ),
 			$details
 		);
-
-	// Make sure all links open in a new window
-	$info.find( 'a' ).prop( 'target', '_blank' ).attr( 'rel', 'noopener' );
+	ve.targetLinksToNewWindow( $info[ 0 ] );
 
 	// Initialize thumb container
 	$thumbContainer

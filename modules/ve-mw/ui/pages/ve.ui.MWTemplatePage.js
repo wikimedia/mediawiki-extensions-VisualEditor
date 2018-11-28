@@ -68,8 +68,8 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 							'visualeditor-dialog-transclusion-more-template-description',
 							title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template )
 						).parseDom() )
-				)
-				.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
+				);
+			ve.targetLinksToNewWindow( this.$description[ 0 ] );
 		}
 	} else {
 		// The transcluded page may be dynamically generated or unspecified in the DOM
@@ -84,8 +84,8 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.append( mw.message( messageKey, title.getPrefixedText() ).parseDom() )
-				.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
+				.append( mw.message( messageKey, title.getPrefixedText() ).parseDom() );
+			ve.targetLinksToNewWindow( this.$description[ 0 ] );
 		}
 	}
 
