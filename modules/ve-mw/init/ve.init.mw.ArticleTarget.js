@@ -346,12 +346,15 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, this.getDefaultMode() );
 
-		// Parse data this not available in RESTBase
-		this.parseMetadata( response );
-
 		// Properties that don't come from the API
 		this.initialSourceRange = data.initialSourceRange;
 		this.recovered = data.recovered;
+
+		// Parse data this not available in RESTBase
+		if ( !this.parseMetadata( response ) ) {
+			// Invalid metadata, loadFail() or load() has been called
+			return;
+		}
 
 		this.track( 'trace.parseResponse.exit' );
 
@@ -370,6 +373,8 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
  * Parse document metadata from the API response
  *
  * @param {Object} response API response data
+ * @return {boolean} Whether metadata was loaded successfully. If true, you should call
+ *   loadSuccess(). If false, either that loadFail() has been called or we're retrying via load().
  */
 ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	var i, len, linkData, aboutDoc, docRevIdMatches, docRevId,
@@ -378,7 +383,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 
 	if ( !data ) {
 		this.loadFail( 've-api', 'No metadata content in response from server' );
-		return;
+		return false;
 	}
 
 	this.remoteNotices = ve.getObjectValues( data.notices );
@@ -438,7 +443,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			this.requestedRevId = Math.max( docRevId, this.revid );
 			this.load();
 		}
-		return;
+		return false;
 	} else {
 		// Set this to false after a successful load, so we don't immediately give up
 		// if a subsequent load mismatches again
@@ -480,6 +485,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			this.checkboxesByName[ name ] = checkbox;
 		}
 	}
+
+	return true;
 };
 
 /**
