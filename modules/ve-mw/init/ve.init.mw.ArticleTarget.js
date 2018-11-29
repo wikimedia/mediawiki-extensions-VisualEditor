@@ -723,7 +723,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
 	var editApi, name, handler,
-		saveErrorHandlerRegistry = ve.init.mw.saveErrorHandlerRegistry,
+		saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
 		target = this;
 
 	this.saving = false;
@@ -773,9 +773,10 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
-	for ( name in saveErrorHandlerRegistry.registry ) {
-		handler = saveErrorHandlerRegistry.lookup( name );
-		if ( handler( editApi, this ) ) {
+	for ( name in saveErrorHandlerFactory.registry ) {
+		handler = saveErrorHandlerFactory.lookup( name );
+		if ( handler.static.matchFunction( editApi ) ) {
+			handler.static.process( editApi, this );
 			// Error was handled
 			return;
 		}
@@ -2559,51 +2560,56 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
  *
  * The method takes the editApi result object, and the target instance as arguments
  * and should return a boolean indicating if the error was handled.
- *
- * Example:
- *  ve.init.mw.saveErrorHandlerRegistry.register( 'blocked', function ( editApi, target ) {
- *    if ( !editApi.blocked ) {
- *      return false;
- *    }
- *    target.showSaveError( $( $.parseHTML( editApi.blockedMessage ) ) );
- *    return true;
- *  } );
  */
-ve.init.mw.saveErrorHandlerRegistry = new OO.Registry();
+ve.init.mw.saveErrorHandlerFactory = new OO.Factory();
 
 // TODO: Move these to their respective extensions
 
 // Extension:AbuseFilter
-ve.init.mw.saveErrorHandlerRegistry.register( 'abuseFilter', function ( editApi, target ) {
+ve.init.mw.AbuseFilterSaveErrorHandler = function () {};
+
+OO.inheritClass( ve.init.mw.AbuseFilterSaveErrorHandler, ve.init.mw.SaveErrorHandler );
+
+ve.init.mw.AbuseFilterSaveErrorHandler.static.name = 'abuseFilter';
+
+ve.init.mw.AbuseFilterSaveErrorHandler.static.matchFunction = function ( editApi ) {
+	return !!editApi.abusefilter;
+};
+
+ve.init.mw.AbuseFilterSaveErrorHandler.static.process = function ( editApi, target ) {
 	// Handle warnings/errors from Extension:AbuseFilter
-	if ( !editApi.abusefilter ) {
-		return false;
-	}
 	target.showSaveError( $( $.parseHTML( editApi.warning ) ) );
 	// Don't disable the save button. If the action is not disallowed the user may save the
 	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
 	// between filter triggers that are and aren't disallowing the action.
 	// Emit event for tracking. TODO: This is a bad design
 	target.emit( 'saveErrorAbuseFilter' );
-	return true;
-} );
+};
+
+ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.AbuseFilterSaveErrorHandler );
 
 // Extension:SpamBlacklist
-ve.init.mw.saveErrorHandlerRegistry.register( 'spamBlacklist', function ( editApi, target ) {
+ve.init.mw.SpamBlacklistSaveErrorHandler = function () {};
+
+OO.inheritClass( ve.init.mw.SpamBlacklistSaveErrorHandler, ve.init.mw.SaveErrorHandler );
+
+ve.init.mw.SpamBlacklistSaveErrorHandler.static.name = 'spamBlacklist';
+
+ve.init.mw.SpamBlacklistSaveErrorHandler.static.matchFunction = function ( editApi ) {
+	return !!editApi.spamblacklist;
+};
+
+ve.init.mw.SpamBlacklistSaveErrorHandler.static.process = function ( editApi, target ) {
 	// Handle spam blacklist error from Extension:SpamBlacklist
-	if ( !editApi.spamblacklist ) {
-		return false;
-	}
 	target.showSaveError(
 		$( $.parseHTML( editApi.sberrorparsed ) ),
 		false // prevents reapply
 	);
 	// Emit event for tracking. TODO: This is a bad design
 	target.emit( 'saveErrorSpamBlacklist' );
-	return true;
-} );
+};
 
-/* Registration */
+ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.SpamBlacklistSaveErrorHandler );
 
 // Used in tryTeardown
 ve.ui.windowFactory.register( mw.widgets.AbandonEditDialog );
