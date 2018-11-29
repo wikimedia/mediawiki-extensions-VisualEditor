@@ -677,8 +677,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
-			mw.hook( 've.deactivationComplete' ).fire( target.edited );
-
 			if ( !target.isViewPage ) {
 				location.href = target.viewUri.clone().extend( {
 					redirect: mw.config.get( 'wgIsRedirect' ) ? 'no' : undefined
@@ -841,8 +839,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 
 	this.activatingDeferred.resolve();
 	this.events.trackActivationComplete();
-
-	mw.hook( 've.activationComplete' ).fire();
 };
 
 /**
@@ -1124,6 +1120,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 			.on( 'click.ve-target', this.onViewTabClick.bind( this ) );
 	}
 
+	// Used by Extension:GuidedTour
 	mw.hook( 've.skinTabSetupComplete' ).fire();
 };
 
@@ -1218,6 +1215,8 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	this.updateTabs( true );
 	this.emit( 'transformPage' );
 
+	// TODO: Deprecate in favour of ve.activationComplete
+	// Only used by one gadget
 	mw.hook( 've.activate' ).fire();
 
 	// Move all native content inside the target
@@ -1319,6 +1318,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		$( '#catlinks' ).replaceWith( this.$originalCategories );
 	}
 
+	// TODO: Deprecate in favour of ve.deactivationComplete
 	mw.hook( 've.deactivate' ).fire();
 	this.emit( 'restorePage' );
 

@@ -342,7 +342,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
 		this.etag = data.etag;
-		this.fromEditedState = data.fromEditedState;
+		this.fromEditedState = !!data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, this.getDefaultMode() );
 
@@ -392,7 +392,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	this.baseTimeStamp = data.basetimestamp;
 	this.startTimeStamp = data.starttimestamp;
 	this.revid = data.oldid;
-	this.preloaded = data.preloaded;
+	this.preloaded = !!data.preloaded;
 
 	this.checkboxesDef = data.checkboxesDef;
 	this.checkboxesMessages = data.checkboxesMessages;
@@ -579,6 +579,8 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
+
+	mw.hook( 've.activationComplete' ).fire();
 };
 
 /**
@@ -1841,7 +1843,8 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.teardown = function () {
-	var surface;
+	var surface,
+		target = this;
 	if ( !this.teardownPromise ) {
 		surface = this.getSurface();
 
@@ -1857,7 +1860,9 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 			surface.getModel().disconnect( this );
 		}
 		// Parent method
-		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
+		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( this ).then( function () {
+			mw.hook( 've.deactivationComplete' ).fire( target.edited );
+		} );
 	}
 	return this.teardownPromise;
 };
@@ -1981,7 +1986,7 @@ ve.init.mw.ArticleTarget.prototype.isSaveable = function () {
 		// Document was edited
 		surface.getModel().hasBeenModified() ||
 		// Section title (if it exists) was edited
-		( this.sectionTitle && this.sectionTitle.getValue() !== '' );
+		( !!this.sectionTitle && this.sectionTitle.getValue() !== '' );
 
 	return this.edited || this.restoring;
 };
