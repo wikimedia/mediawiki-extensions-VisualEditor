@@ -22,7 +22,8 @@
 			"Pyscowicz",
 			"Olimar",
 			"01miki10",
-			"Hopea"
+			"Hopea",
+			"Valtlait"
 		]
 	},
 	"tooltip-ca-createsource": "Luo sivun lähdekoodi",
@@ -164,7 +165,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Kenttä on vanhentunut. $1",
 	"visualeditor-dialog-transclusion-loading": "Ladataan...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Näytä valinnat",
-	"visualeditor-dialog-transclusion-no-template-description": "Mallineella \"$1\" ei ole vielä kuvausta, mutta jotain tietoa saattaa olla [[$1|mallineen sivulla]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Mallineella ”$1” ei ole vielä kuvausta, mutta jotain tietoa saattaa olla [[$1|mallineen sivulla]].",
 	"visualeditor-dialog-transclusion-options": "Asetukset",
 	"visualeditor-dialog-transclusion-param-default": "Oletusarvo: $1",
 	"visualeditor-dialog-transclusion-param-example": "Esimerkkiarvo: $1",
@@ -305,7 +306,7 @@
 	"visualeditor-preference-visualdiffpage-label": "Visuaaliset eroavaisuudet",
 	"visualeditor-rebase-client-import": "Tuo",
 	"visualeditor-rebase-client-import-name": "Sivun otsikko",
-	"visualeditor-recreate": "Sivu on poistettu sillä aikaa, kun muokkasit sitä. Napsauta \"$1\" luodaksesi sivun uudelleen.",
+	"visualeditor-recreate": "Sivu on poistettu sillä aikaa kun muokkasit sitä. Luo sivu uudelleen painamalla ”$1”.",
 	"visualeditor-redirect-description": "Uudelleenohjaus sivulle $1",
 	"visualeditor-savedialog-error-badtoken": "Emme voineet tallentaa muokkaustasi, koska istunto ei ole enää voimassa.",
 	"visualeditor-savedialog-identify-anon": "Haluatko tallentaa sivun kirjautumattomana käyttäjänä? IP-osoitteesi kirjataan tämän sivun muutoshistoriaan.",
@@ -345,6 +346,6 @@
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
 	"visualeditor-version-label": "Versio",
 	"visualeditor-wikitext-progress": "Muunnetaan wikitekstiä",
-	"visualeditor-wikitext-warning": "Käytät visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Napsauta \"vaihda\"-painiketta vaihtaaksesi wikitekstin muokkaustilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia.",
+	"visualeditor-wikitext-warning": "Käytät visuaalista muokkainta – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiteksti]] ei toimi täällä. Napsauta ”vaihda”-painiketta vaihtaaksesi wikitekstin muokkaustilaan milloin tahansa ilman, että menetät tekemiäsi muutoksia.",
 	"visualeditor-wikitext-warning-title": "Wikikoodia havaittu"
 }
