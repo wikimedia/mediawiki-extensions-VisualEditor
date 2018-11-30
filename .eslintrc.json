@@ -14,7 +14,10 @@
 		"require": false
 	},
 	"rules": {
-		"max-len": 0,
-		"valid-jsdoc": 0
+		"jquery/no-hide": "error",
+		"jquery/no-show": "error",
+		"jquery/no-toggle": "error",
+		"max-len": "off",
+		"valid-jsdoc": "off"
 	}
 }
