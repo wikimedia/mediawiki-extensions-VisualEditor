@@ -10,7 +10,8 @@
 			"Psychoslave",
 			"Renardo",
 			"Orikrin1998",
-			"NMaia"
+			"NMaia",
+			"YvesNevelsteen"
 		]
 	},
 	"tooltip-ca-createsource": "Krei fontan kodon de tiu ĉi paĝo",
@@ -136,8 +137,8 @@
 	"visualeditor-dialog-transclusion-remove-content": "Forigi enhavon",
 	"visualeditor-dialog-transclusion-remove-param": "Forigi kampon",
 	"visualeditor-dialog-transclusion-remove-template": "Forigi ŝablonon",
-	"visualeditor-dialog-transclusion-required-parameter": "Nepra kampo",
-	"visualeditor-dialog-transclusion-required-parameter-description": "La kampo estas nepra.",
+	"visualeditor-dialog-transclusion-required-parameter": "Deviga kampo",
+	"visualeditor-dialog-transclusion-required-parameter-description": "La kampo estas deviga.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Reen",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Tamen daŭrigi",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Mankas {{PLURAL:$1|nepran parametron|Mankantajn neprajn parametrojn}}.",
