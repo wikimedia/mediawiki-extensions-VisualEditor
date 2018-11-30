@@ -159,7 +159,7 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
-	var single, label;
+	var single;
 
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
 
@@ -169,13 +169,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	}
 
 	single = this.isSingleTemplateTransclusion();
-	label = ve.msg( 'visualeditor-dialog-action-insert' );
-
-	this.actions
-		.setAbilities( { mode: single } )
-		.forEach( { actions: 'insert' }, function ( action ) {
-			action.setLabel( label );
-		} );
+	this.actions.setAbilities( { mode: single } );
 };
 
 /**
