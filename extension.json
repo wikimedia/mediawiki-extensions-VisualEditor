@@ -667,6 +667,7 @@
 		},
 		"ext.visualEditor.articleTarget": {
 			"scripts": [
+				"modules/ve-mw/init/ve.init.mw.SaveErrorHandler.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
