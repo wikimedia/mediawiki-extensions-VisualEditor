@@ -79,18 +79,22 @@
 		transform: scale( 0 );
 		opacity: 0;
 	}
+
 	25% {
 		transform: scale( 0 );
 		opacity: 0.1;
 	}
+
 	50% {
 		transform: scale( 0.1 );
 		opacity: 0.3;
 	}
+
 	75% {
 		transform: scale( 0.5 );
 		opacity: 0.5;
 	}
+
 	100% {
 		transform: scale( 1 );
 		opacity: 0;
@@ -102,18 +106,22 @@
 		transform: scale( 0 );
 		opacity: 0;
 	}
+
 	25% {
 		transform: scale( 0 );
 		opacity: 0.1;
 	}
+
 	50% {
 		transform: scale( 0.1 );
 		opacity: 0.3;
 	}
+
 	75% {
 		transform: scale( 0.5 );
 		opacity: 0.5;
 	}
+
 	100% {
 		transform: scale( 1 );
 		opacity: 0;
@@ -125,18 +133,22 @@
 		transform: scale( 0 );
 		opacity: 0;
 	}
+
 	25% {
 		transform: scale( 0 );
 		opacity: 0.1;
 	}
+
 	50% {
 		transform: scale( 0.1 );
 		opacity: 0.3;
 	}
+
 	75% {
 		transform: scale( 0.5 );
 		opacity: 0.5;
 	}
+
 	100% {
 		transform: scale( 1 );
 		opacity: 0;

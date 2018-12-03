@@ -34,10 +34,11 @@
 	@new: #39b79c;
 	@old: #d73c34;
 
-	.mw-revslider-pointer-line  {
+	.mw-revslider-pointer-line {
 		.mw-revslider-upper-color {
 			border-color: @new;
 		}
+
 		.mw-revslider-lower-color {
 			border-color: @old;
 		}
@@ -46,17 +47,18 @@
 	.mw-revslider-revision-new .mw-revslider-revision-border-box {
 		border-bottom-color: @new;
 	}
+
 	.mw-revslider-revision-old .mw-revslider-revision-border-box {
 		border-bottom-color: @old;
 	}
 
 	.mw-revslider-revision-hovered {
-		&.mw-revslider-revision-wrapper-up .mw-revslider-pointer-ghost  {
+		&.mw-revslider-revision-wrapper-up .mw-revslider-pointer-ghost {
 			background-color: lighten( @new, 30% );
 			border-color: @new;
 		}
 
-		&.mw-revslider-revision-wrapper-down .mw-revslider-pointer-ghost  {
+		&.mw-revslider-revision-wrapper-down .mw-revslider-pointer-ghost {
 			background-color: lighten( @old, 30% );
 			border-color: @old;
 		}
@@ -66,6 +68,7 @@
 		&.mw-revslider-revision-wrapper-up {
 			background-color: fade( @new, 30% );
 		}
+
 		&.mw-revslider-revision-wrapper-down {
 			background-color: fade( @old, 30% );
 		}
@@ -95,6 +98,7 @@
 		.mw-revslider-slider-line {
 			border-bottom-color: fade( @new, 50% );
 		}
+
 		&:hover .mw-revslider-slider-line {
 			border-bottom-color: fade( @new, 80% );
 		}
@@ -104,9 +108,9 @@
 		.mw-revslider-slider-line {
 			border-top-color: fade( @old, 50% );
 		}
+
 		&:hover .mw-revslider-slider-line {
 			border-top-color: fade( @old, 80% );
 		}
 	}
-
 }

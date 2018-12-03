@@ -55,6 +55,7 @@
 	padding: 0 1em;
 	color: #54595d;
 }
+
 .ve-ui-mwSaveDialog-editSummary-count:empty {
 	visibility: hidden;
 }
