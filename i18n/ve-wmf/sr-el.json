@@ -22,5 +22,5 @@
 	"visualeditor-welcomedialog-content-thanks": "Hvala vam što pomažete u širenju znanja!",
 	"visualeditor-welcomedialog-switch": "Prebaci na uređivanje izvora",
 	"visualeditor-welcomedialog-switch-ve": "Prebaci na vizuelni uređivač",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobro došli}} na projekat $2"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobro došli}} na {{GRAMMAR:akuzativ|$2}}"
 }
