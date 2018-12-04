@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jawadywn"
+			"Jawadywn",
+			"Masjawad99"
 		]
 	},
-	"tooltip-ca-ve-edit": "Robah karangan ni",
+	"tooltip-ca-ve-edit": "Robah laman ni",
 	"visualeditor-ca-editsource": "Robah sumber",
-	"visualeditor-ca-editsource-section": "robah sumbér",
+	"visualeditor-ca-editsource-section": "robah sumber",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
