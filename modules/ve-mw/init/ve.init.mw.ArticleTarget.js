@@ -2570,53 +2570,5 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
  */
 ve.init.mw.saveErrorHandlerFactory = new OO.Factory();
 
-// TODO: Move these to their respective extensions
-
-// Extension:AbuseFilter
-ve.init.mw.AbuseFilterSaveErrorHandler = function () {};
-
-OO.inheritClass( ve.init.mw.AbuseFilterSaveErrorHandler, ve.init.mw.SaveErrorHandler );
-
-ve.init.mw.AbuseFilterSaveErrorHandler.static.name = 'abuseFilter';
-
-ve.init.mw.AbuseFilterSaveErrorHandler.static.matchFunction = function ( editApi ) {
-	return !!editApi.abusefilter;
-};
-
-ve.init.mw.AbuseFilterSaveErrorHandler.static.process = function ( editApi, target ) {
-	// Handle warnings/errors from Extension:AbuseFilter
-	target.showSaveError( $( $.parseHTML( editApi.warning ) ) );
-	// Don't disable the save button. If the action is not disallowed the user may save the
-	// edit by pressing Save again. The AbuseFilter API currently has no way to distinguish
-	// between filter triggers that are and aren't disallowing the action.
-	// Emit event for tracking. TODO: This is a bad design
-	target.emit( 'saveErrorAbuseFilter' );
-};
-
-ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.AbuseFilterSaveErrorHandler );
-
-// Extension:SpamBlacklist
-ve.init.mw.SpamBlacklistSaveErrorHandler = function () {};
-
-OO.inheritClass( ve.init.mw.SpamBlacklistSaveErrorHandler, ve.init.mw.SaveErrorHandler );
-
-ve.init.mw.SpamBlacklistSaveErrorHandler.static.name = 'spamBlacklist';
-
-ve.init.mw.SpamBlacklistSaveErrorHandler.static.matchFunction = function ( editApi ) {
-	return !!editApi.spamblacklist;
-};
-
-ve.init.mw.SpamBlacklistSaveErrorHandler.static.process = function ( editApi, target ) {
-	// Handle spam blacklist error from Extension:SpamBlacklist
-	target.showSaveError(
-		$( $.parseHTML( editApi.sberrorparsed ) ),
-		false // prevents reapply
-	);
-	// Emit event for tracking. TODO: This is a bad design
-	target.emit( 'saveErrorSpamBlacklist' );
-};
-
-ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.SpamBlacklistSaveErrorHandler );
-
 // Used in tryTeardown
 ve.ui.windowFactory.register( mw.widgets.AbandonEditDialog );
