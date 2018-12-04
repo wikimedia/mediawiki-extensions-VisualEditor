@@ -150,7 +150,7 @@
 		event[ actionPrefix + '_mechanism' ] = event.mechanism;
 		if ( action !== 'init' ) {
 			duration = Math.round( computeDuration( action, event, timeStamp ) );
-			event[ actionPrefix + '_timing' ] = timing;
+			event[ actionPrefix + '_timing' ] = duration;
 		}
 		event[ actionPrefix + '_message' ] = event.message;
 		/* eslint-enable camelcase */
