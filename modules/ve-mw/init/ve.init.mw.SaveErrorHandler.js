@@ -41,3 +41,10 @@ ve.init.mw.SaveErrorHandler.static.matchFunction = null;
  * @param {ve.init.mw.ArticleTarget} target Target
  */
 ve.init.mw.SaveErrorHandler.static.process = null;
+
+/* Save error registry */
+
+/*
+ * Extensions can add SaveErrorHandler sub-classes to this registry.
+ */
+ve.init.mw.saveErrorHandlerFactory = new OO.Factory();

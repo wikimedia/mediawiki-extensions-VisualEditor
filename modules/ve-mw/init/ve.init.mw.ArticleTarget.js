@@ -2560,15 +2560,5 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 	} );
 };
 
-/* Save error registry */
-
-/*
- * Extensions can add methods to this registry.
- *
- * The method takes the editApi result object, and the target instance as arguments
- * and should return a boolean indicating if the error was handled.
- */
-ve.init.mw.saveErrorHandlerFactory = new OO.Factory();
-
 // Used in tryTeardown
 ve.ui.windowFactory.register( mw.widgets.AbandonEditDialog );
