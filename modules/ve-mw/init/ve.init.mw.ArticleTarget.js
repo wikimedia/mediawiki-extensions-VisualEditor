@@ -1227,6 +1227,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
 	this.recovered = false;
+	this.teardownPromise = null;
 };
 
 /**
@@ -1840,19 +1841,25 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
  * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.teardown = function () {
-	var surface = this.getSurface();
-	// Restore access keys
-	if ( this.$saveAccessKeyElements ) {
-		this.$saveAccessKeyElements.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
-		this.$saveAccessKeyElements = null;
+	var surface;
+	if ( !this.teardownPromise ) {
+		surface = this.getSurface();
+
+		// Restore access keys
+		if ( this.$saveAccessKeyElements ) {
+			this.$saveAccessKeyElements.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
+			this.$saveAccessKeyElements = null;
+		}
+		if ( surface ) {
+			// If target is closed cleanly (after save or deliberate close) then remove autosave state
+			surface.getModel().removeDocStateAndChanges();
+			// Disconnect history listener
+			surface.getModel().disconnect( this );
+		}
+		// Parent method
+		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
 	}
-	if ( surface ) {
-		// If target is closed cleanly (after save or deliberate close) then remove autosave state
-		surface.getModel().removeDocStateAndChanges();
-		// Disconnect history listener
-		surface.getModel().disconnect( this );
-	}
-	return ve.init.mw.ArticleTarget.super.prototype.teardown.call( this );
+	return this.teardownPromise;
 };
 
 /**
