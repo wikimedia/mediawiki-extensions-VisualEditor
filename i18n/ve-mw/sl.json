@@ -6,7 +6,8 @@
 			"Pinky sl",
 			"Yerpo",
 			"HairyFotr",
-			"Janezdrilc"
+			"Janezdrilc",
+			"Upwinxp"
 		]
 	},
 	"collabpad-import-subtitle": "Uvoženo iz $1",
@@ -37,7 +38,7 @@
 	"visualeditor-desc": "Grafični urejevalnik za MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-alttext-section": "Nadomestno besedilo",
-	"visualeditor-dialog-media-change-image": "Spremeni sliko",
+	"visualeditor-dialog-media-change-image": "Zamenjaj sliko",
 	"visualeditor-dialog-media-choose-image": "Uporabite to sliko",
 	"visualeditor-dialog-media-content-description-link": "(stran z opisom)",
 	"visualeditor-dialog-media-content-filename": "Ime datoteke",
