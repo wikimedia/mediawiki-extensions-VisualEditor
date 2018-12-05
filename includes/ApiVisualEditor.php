@@ -503,6 +503,7 @@ class ApiVisualEditor extends ApiBase {
 						$targetUsername,
 						/* allow IP users*/ false
 					);
+					$block = $targetUser->getBlock();
 
 					if (
 						!( $targetUser && $targetUser->isLoggedIn() ) &&
@@ -512,8 +513,13 @@ class ApiVisualEditor extends ApiBase {
 						$notices[] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) ) .
 							"\n</div>";
-					} elseif ( $targetUser->isBlocked() ) {
-						// Show log extract if the user is currently blocked
+					} elseif (
+						!is_null( $block ) &&
+						$block->getType() != Block::TYPE_AUTO &&
+						( $block->isSitewide() || $targetUser->isBlockedFrom( $title ) )
+					) {
+						// Show log extract if the user is sitewide blocked or is partially
+						// blocked and not allowed to edit their user page or user talk page
 						$notices[] = $this->msg(
 							'blocked-notice-logextract',
 							// Support GENDER in notice
