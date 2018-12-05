@@ -5,7 +5,7 @@
  */
 
 /**
- * Data transfer handler.
+ * Save error handler.
  *
  * @class
  * @abstract
@@ -21,7 +21,7 @@ OO.initClass( ve.init.mw.SaveErrorHandler );
 /* Static methods */
 
 /**
- * Test if this handler should handle as specific API response
+ * Test if this handler should handle a specific API response
  *
  * @static
  * @inheritable
