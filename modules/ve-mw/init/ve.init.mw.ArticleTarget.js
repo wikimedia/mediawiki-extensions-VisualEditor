@@ -744,8 +744,6 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
-	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || {};
-
 	// Handle token errors
 	if ( data.error && data.error.code === 'badtoken' ) {
 		if ( wasRetry ) {
@@ -781,6 +779,8 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		this.saveErrorReadOnly();
 		return;
 	}
+
+	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || data.error || {};
 
 	for ( name in saveErrorHandlerFactory.registry ) {
 		handler = saveErrorHandlerFactory.lookup( name );
