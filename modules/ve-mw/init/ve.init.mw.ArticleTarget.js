@@ -769,9 +769,6 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 	} else if ( data.error && data.error.code === 'pagedeleted' ) {
 		this.saveErrorPageDeleted();
 		return;
-	} else if ( data.error && data.error.code === 'titleblacklist-forbidden' ) {
-		this.saveErrorTitleBlacklist();
-		return;
 	} else if ( data.error && data.error.code === 'hookaborted' ) {
 		this.saveErrorHookAborted();
 		return;
@@ -818,17 +815,6 @@ ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply,
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
 	this.emit( 'saveErrorEmpty' );
-};
-
-/**
- * Handle title blacklist save error
- *
- * @method
- * @fires saveErrorTitleBlacklist
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorTitleBlacklist = function () {
-	this.showSaveError( mw.msg( 'visualeditor-saveerror-titleblacklist' ) );
-	this.emit( 'saveErrorTitleBlacklist' );
 };
 
 /**
