@@ -640,13 +640,6 @@
 						$caEdit.get( 0 ) :
 						$caEdit.next().get( 0 );
 
-			// HACK: Remove this when the Education Program offers a proper way to detect and disable.
-			if (
-				mw.config.get( 'wgNamespaceIds' ).education_program === mw.config.get( 'wgNamespaceNumber' )
-			) {
-				return;
-			}
-
 			if ( !$caVeEdit.length ) {
 				// The below duplicates the functionality of VisualEditorHooks::onSkinTemplateNavigation()
 				// in case we're running on a cached page that doesn't have these tabs yet.
