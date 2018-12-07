@@ -82,6 +82,9 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			'visualeditor-quick-access-characters.json' =>
 				$context->msg( 'visualeditor-quick-access-characters.json' )
 				->inContentLanguage(),
+			'visualeditor-template-tools-definition.json' =>
+				$context->msg( 'visualeditor-template-tools-definition.json' )
+				->inContentLanguage(),
 		];
 
 		return [
