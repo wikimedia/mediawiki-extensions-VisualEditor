@@ -257,7 +257,6 @@
 	"visualeditor-savedialog-title-save": "Değişikliklerinizi kaydedin",
 	"visualeditor-savedialog-warning-dirty": "Değişiklikleriniz bozulmuş olabilir - lütfen kaydetmeden önce inceleme yapınız.",
 	"visualeditor-saveerror": "Sunucuya veri kaydedilirken hata: $1.",
-	"visualeditor-saveerror-titleblacklist": "Kaydetme hatası sayfa: Bu sayfanın adı kara listeye alındı",
 	"visualeditor-serializeerror": "Sunucudan veri yüklenirken hata oluştu: $1.",
 	"visualeditor-settings-tool": "Sayfa ayarları",
 	"visualeditor-special-characters-group-other": "Sık kullanılan",

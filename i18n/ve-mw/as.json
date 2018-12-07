@@ -260,7 +260,6 @@
 	"visualeditor-savedialog-title-save": "আপুনি কৰা সালসলনি সাঁচি থওক",
 	"visualeditor-savedialog-warning-dirty": "আপোনাৰ সম্পাদনাৰ হয়তো ক্ষতি হৈছে – অনুগ্ৰহ কৰা সাঁচি থোৱাৰ আগতে পুনৰীক্ষণ কৰক।",
 	"visualeditor-saveerror": "ছাৰ্ভাৰত তথ্য সাঁচি থওঁতে ত্ৰুটি হৈছে: $1।",
-	"visualeditor-saveerror-titleblacklist": "পৃষ্ঠা সংৰক্ষণৰ ত্ৰুটি: এই পৃষ্ঠাৰ শিৰোনাম ক'লাতালিকাভুক্ত",
 	"visualeditor-section-body-placeholder": "নতুন পৰিচ্ছেদ",
 	"visualeditor-section-title-placeholder": "বিষয়",
 	"visualeditor-serializeerror": "ছাৰ্ভাৰৰ পৰা তথ্য ল'ড হওঁতে ত্ৰুটি হৈছে: $1।",

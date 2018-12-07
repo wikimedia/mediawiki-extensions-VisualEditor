@@ -338,7 +338,6 @@
 	"visualeditor-savedialog-warning-dirty": "Är Ännerung ass eventuell korrupt - kuckt w.e.g. alles no ier Dir späichert.",
 	"visualeditor-saveerror": "Feeler beim Späichere vun den Donnéeën op de Server: $1.",
 	"visualeditor-saveerror-hookaborted": "Feeler beim Späichere vun der Säit: Eng Erweiderung um Server huet d'Späichere verhënnert.",
-	"visualeditor-saveerror-titleblacklist": "Feeler beim Späichere vun der Säit: Den Titel vun der Säit steet op eiser schwaarzer Lëscht",
 	"visualeditor-section-body-placeholder": "Neien Abschnitt",
 	"visualeditor-section-title-placeholder": "Sujet",
 	"visualeditor-serializeerror": "Feeler beim Luede vun Date vum Server: $1.",

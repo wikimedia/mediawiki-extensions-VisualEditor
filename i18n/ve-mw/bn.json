@@ -362,7 +362,6 @@
 	"visualeditor-savedialog-warning-dirty": "আপনার সম্পাদনা ক্ষতিগ্রস্ত হয়ে থাকতে পারে – সংরক্ষণ করার আগে দয়া করে পর্যালোচনা করুন।",
 	"visualeditor-saveerror": "সার্ভারে ডাটা সংরক্ষণে ত্রুটি: $1।",
 	"visualeditor-saveerror-hookaborted": "পাতা সংরক্ষণের সময় ত্রুটি: সার্ভারের একটি এক্সটেনশন আপনাকে সংরক্ষণ করা থেকে বাধা দিয়েছে।",
-	"visualeditor-saveerror-titleblacklist": "পাতা সংরক্ষণে ত্রুটি: এই পাতার শিরোনামটি কালোতালিকাভুক্ত",
 	"visualeditor-section-body-placeholder": "নতুন অনুচ্ছেদ",
 	"visualeditor-section-title-placeholder": "বিষয়",
 	"visualeditor-serializeerror": "সার্ভার থেকে ডাটা লোডে ত্রুটি: $1।",

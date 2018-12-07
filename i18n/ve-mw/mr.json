@@ -352,7 +352,6 @@
 	"visualeditor-savedialog-warning-dirty": "आपले संपादन बिघडल्याची शक्यता दिसते-कृपया जतन करण्यापूर्वी झलक पहा",
 	"visualeditor-saveerror": "विदा (डाटा) विदागारावर (सर्व्हरवर) जतन करण्यात त्रुटी: $1.",
 	"visualeditor-saveerror-hookaborted": "हे पान साठवताना चुक झाली: सर्व्हरवरील एक्सटेन्शन तुम्हांला मजकूर साठवण्यापासून थांबवत आहे.",
-	"visualeditor-saveerror-titleblacklist": "पान जतन करतांना त्रुटी:या पानाचे शीर्षक काळ्या यादीत आहे",
 	"visualeditor-section-body-placeholder": "नविन मथळा",
 	"visualeditor-section-title-placeholder": "विषय",
 	"visualeditor-serializeerror": "विदागाराकडून (सर्व्हर) विदा (डाटा) चढवण्यात त्रुटी: $1.",

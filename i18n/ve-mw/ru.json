@@ -424,7 +424,6 @@
 	"visualeditor-savedialog-warning-dirty": "Ваши изменения могут быть некорректными — пожалуйста, проверьте их перед сохранением.",
 	"visualeditor-saveerror": "Ошибка при сохранении данных: $1.",
 	"visualeditor-saveerror-hookaborted": "Ошибка: расширение сервера предотвратило сохранение правки.",
-	"visualeditor-saveerror-titleblacklist": "Ошибка сохранения страницы: название этой страницы занесено в чёрный список",
 	"visualeditor-section-body-placeholder": "Новый раздел",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",

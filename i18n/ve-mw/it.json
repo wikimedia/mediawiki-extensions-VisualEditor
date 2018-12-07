@@ -360,7 +360,6 @@
 	"visualeditor-savedialog-title-save": "Salva le modifiche",
 	"visualeditor-savedialog-warning-dirty": "La modifica potrebbe essere stata danneggiata - si prega di rivederla prima di salvare.",
 	"visualeditor-saveerror": "Errore durante il salvataggio dei dati sul server: $1.",
-	"visualeditor-saveerror-titleblacklist": "Errore nel salvataggio della pagina: il titolo della pagina è stato inserito in una lista nera",
 	"visualeditor-section-body-placeholder": "Nuova sezione",
 	"visualeditor-section-title-placeholder": "Soggetto",
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",

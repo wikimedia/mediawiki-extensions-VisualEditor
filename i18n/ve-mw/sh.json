@@ -255,7 +255,6 @@
 	"visualeditor-savedialog-title-save": "Snimite svoje izmjene",
 	"visualeditor-savedialog-warning-dirty": "Vaše uređivanje može biti oštećeno – molimo pregledajte prije snimanja.",
 	"visualeditor-saveerror": "Pogreška pri snimanju podataka na server: $1.",
-	"visualeditor-saveerror-titleblacklist": "Pogreška pri snimanju stranice: Naslov ove stranice je na crnoj listi",
 	"visualeditor-serializeerror": "Pogreška pri učitavanju podataka sa servera: $1.",
 	"visualeditor-settings-tool": "Postavke stranice",
 	"visualeditor-special-characters-group-other": "Često korišteno",

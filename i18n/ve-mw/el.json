@@ -348,7 +348,6 @@
 	"visualeditor-savedialog-title-save": "Αποθήκευση των αλλαγών σας",
 	"visualeditor-savedialog-warning-dirty": "Η επεξεργασία σας ίσως έχει αλλοιωθεί - παρακαλούμε ελέγξτε πριν την αποθηκεύσετε.",
 	"visualeditor-saveerror": "Σφάλμα κατά την αποθήκευση δεδομένων σε διακομιστή: $1.",
-	"visualeditor-saveerror-titleblacklist": "Σφάλμα κατά την αποθήκευση σελίδας: Αυτή η σελίδα τίτλου είναι στη μαύρη λίστα",
 	"visualeditor-section-body-placeholder": "Νέα ενότητα",
 	"visualeditor-section-title-placeholder": "Θέμα",
 	"visualeditor-serializeerror": "Σφάλμα κατά τη φόρτωση δεδομένων από τον διακομιστή: $1.",

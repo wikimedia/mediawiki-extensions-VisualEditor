@@ -399,7 +399,6 @@
 	"visualeditor-savedialog-warning-dirty": "您的編輯可能已損毀，在儲存前請先複核。",
 	"visualeditor-saveerror": "儲存資料至伺服器時發生錯誤：$1。",
 	"visualeditor-saveerror-hookaborted": "儲存頁面錯誤：伺服器上的某個擴充套件導致您無法儲存。",
-	"visualeditor-saveerror-titleblacklist": "儲存頁面錯誤：此頁面標題已被列入封鎖清單。",
 	"visualeditor-section-body-placeholder": "新章節",
 	"visualeditor-section-title-placeholder": "主題",
 	"visualeditor-serializeerror": "讀取伺服器資料發生錯誤：$1 。",

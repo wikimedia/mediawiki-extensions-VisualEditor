@@ -319,7 +319,6 @@
 	"visualeditor-savedialog-title-save": "Shranite vnesene spremembe",
 	"visualeditor-savedialog-warning-dirty": "Vaše urejanje je morda pokvarjeno – prosimo, da ga pred shranitvijo pregledate.",
 	"visualeditor-saveerror": "Napaka pri shranjevanju na strežnik: $1",
-	"visualeditor-saveerror-titleblacklist": "Napaka shranjevanja strani: Naslov te strani je na črnem seznamu",
 	"visualeditor-section-body-placeholder": "Nov razdelek",
 	"visualeditor-section-title-placeholder": "Zadeva",
 	"visualeditor-serializeerror": "Napaka pri prenašanju s strežnika: $1",

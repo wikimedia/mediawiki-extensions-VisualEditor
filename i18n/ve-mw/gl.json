@@ -384,7 +384,6 @@
 	"visualeditor-savedialog-warning-dirty": "A súa edición pode estar corrompida; por favor, revísea antes de gardala.",
 	"visualeditor-saveerror": "Erro ao gardar os datos no servidor: $1.",
 	"visualeditor-saveerror-hookaborted": "Erro ó gardar a páxina: unha extensión no servidor impediu o gardado.",
-	"visualeditor-saveerror-titleblacklist": "Erro ao gardar a páxina: O título desta páxina está na lista negra",
 	"visualeditor-section-body-placeholder": "Nova sección",
 	"visualeditor-section-title-placeholder": "Asunto",
 	"visualeditor-serializeerror": "Erro ao cargar os datos desde o servidor: $1.",

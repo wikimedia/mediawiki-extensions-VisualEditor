@@ -271,7 +271,6 @@
 	"visualeditor-savedialog-title-save": "Үҙгәртеүҙәрҙе һаҡларға",
 	"visualeditor-savedialog-warning-dirty": "Һеҙҙең үҙгәтеүҙәрегеҙ дөрөҫ булмауы мөмкин — зинһар, һаҡлар алдынан ҡарап сығығыҙ.",
 	"visualeditor-saveerror": "Мәғлүмәт яҙҙырыу ваҡытында хата: $1",
-	"visualeditor-saveerror-titleblacklist": "Битте һаҡлауҙа хата: был биттең атамһы ҡара исемлектә",
 	"visualeditor-serializeerror": "Серверҙан мәғлүмәт алыу ваҡытында хата: $1",
 	"visualeditor-settings-tool": "Бит көйләүҙәре",
 	"visualeditor-special-characters-group-other": "Йыш ҡулланылған",

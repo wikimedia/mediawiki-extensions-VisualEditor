@@ -385,7 +385,6 @@
 	"visualeditor-savedialog-warning-dirty": "Redigeringen din kan ha blitt skadet – vennligst gjennomgå endringene før lagring.",
 	"visualeditor-saveerror": "Det oppsto et problem ved lagring av data til serveren: $1.",
 	"visualeditor-saveerror-hookaborted": "Feil under lagring av siden: En utvidelse på serveren forhindret deg i å lagre.",
-	"visualeditor-saveerror-titleblacklist": "Kunne ikke lagre siden: Denne sidens tittel er svartelistet",
 	"visualeditor-section-body-placeholder": "Nytt avsnitt",
 	"visualeditor-section-title-placeholder": "Emne",
 	"visualeditor-serializeerror": "Feil ved henting av data fra serveren: $1.",

@@ -234,7 +234,6 @@
 	"visualeditor-savedialog-title-save": "Өзгертулеріңізді сақтаңыз",
 	"visualeditor-savedialog-warning-dirty": "Сіздің өңдемеңіз бүлінген – сақтау алдында қарап шығыңыз.",
 	"visualeditor-saveerror": "Серверге деректер сақтауда қате кетті: $1.",
-	"visualeditor-saveerror-titleblacklist": "Бетті сақтаудағы қате: Бұл бет атауы қара тізімге енген",
 	"visualeditor-serializeerror": "Серверден деректерді жүктеуде қате кетті: $1.",
 	"visualeditor-settings-tool": "Бет баптаулары",
 	"visualeditor-special-characters-group-other": "Жиі қолданатын",

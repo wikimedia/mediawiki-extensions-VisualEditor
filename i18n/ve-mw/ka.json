@@ -302,7 +302,6 @@
 	"visualeditor-savedialog-title-save": "თქვენი ცვლილებების შენახვა",
 	"visualeditor-savedialog-warning-dirty": "თქვენი რედაქტირება შეიძლება დამახინჯდა – გთხოვთ, გადახედეთ, სანამ შეინახავთ.",
 	"visualeditor-saveerror": "შეცდომა სერვერიდან ინფორმაციის შენახვისას: $1.",
-	"visualeditor-saveerror-titleblacklist": "გვერდის შენახვის შეცდომა: ამ გვერდის სათაური შავ სიაშია",
 	"visualeditor-section-body-placeholder": "ახალი სექცია",
 	"visualeditor-section-title-placeholder": "თემა",
 	"visualeditor-serializeerror": "შეცდომა სერვერიდან ინფორმაციის ჩატვრითვისას: $1.",

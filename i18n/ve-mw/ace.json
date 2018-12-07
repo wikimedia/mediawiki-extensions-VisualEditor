@@ -6,7 +6,7 @@
 		]
 	},
 	"tooltip-ca-createsource": "Peugöt kode nè laman nyoë",
-	"tooltip-ca-editsource": "Andam kode nè laman nyoë",
+	"tooltip-ca-editsource": "Peusaneut kode nè laman nyoë",
 	"tooltip-ca-ve-edit": "Peusaneut laman nyoë",
 	"visualeditor-autosave-modified-prompt-accept": "Peusaneut lom",
 	"visualeditor-beta-label": "beta",
@@ -19,7 +19,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Kawan",
-	"visualeditor-desc": "Ngön andam visual keu MediaWiki",
+	"visualeditor-desc": "Peusaneut visual keu MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-content-section": "Hareutoë",
 	"visualeditor-dialog-media-save": "Keubah",

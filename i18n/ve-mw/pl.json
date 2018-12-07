@@ -399,7 +399,6 @@
 	"visualeditor-savedialog-warning-dirty": "Twoja edycja mogła zostać uszkodzona - przejrzyj ją przed zapisaniem.",
 	"visualeditor-saveerror": "Błąd podczas zapisywania danych na serwerze: $1.",
 	"visualeditor-saveerror-hookaborted": "Błąd podczas zapisywania strony: rozszerzenie na serwerze uniemożliwiło zapisanie.",
-	"visualeditor-saveerror-titleblacklist": "Błąd zapisywania strony: Tytuł tej strony znajduje się na czarnej liście",
 	"visualeditor-section-body-placeholder": "Nowa sekcja",
 	"visualeditor-section-title-placeholder": "Temat",
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",

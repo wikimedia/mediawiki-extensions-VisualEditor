@@ -200,7 +200,6 @@
 	"visualeditor-savedialog-title-save": "Kryej ndryshimet",
 	"visualeditor-savedialog-warning-dirty": "Redaktimi juaj mund të ketë qënë i dëmtuar – ju lutem shikojeni para se të kryeni ndryshimet.",
 	"visualeditor-saveerror": "Gabim gjatë ruajtjes së të dhënave nga serveri: $1.",
-	"visualeditor-saveerror-titleblacklist": "Gabim në ruajtje të faqes: Titulli i faqes është në listë të zezë",
 	"visualeditor-serializeerror": "Gabim gjatë ngarkimit të të dhënave nga serveri: $1.",
 	"visualeditor-settings-tool": "Konfigurimet e faqes",
 	"visualeditor-special-characters-group-other": "Shpesh përdoret",

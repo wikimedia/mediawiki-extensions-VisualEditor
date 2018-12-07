@@ -317,7 +317,6 @@
 	"visualeditor-savedialog-title-save": "अपने बदलाव सहेजें",
 	"visualeditor-savedialog-warning-dirty": "संभवतः आपके बदलाव खराब हो गए हैं – कृपया सहेजने से पहले जाँच लें।",
 	"visualeditor-saveerror": "सर्वर पर डाटा सहेजने में त्रुटि: $1।",
-	"visualeditor-saveerror-titleblacklist": "पृष्ठ सहेजने में त्रुटि: इस पृष्ठ का शीर्षक काली सूची में है",
 	"visualeditor-section-body-placeholder": "नया अनुभाग",
 	"visualeditor-section-title-placeholder": "विषय",
 	"visualeditor-serializeerror": "सर्वर से डाटा लोड करने में त्रुटि: $1।",

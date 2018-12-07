@@ -390,7 +390,6 @@
 	"visualeditor-savedialog-warning-dirty": "Din redigering kan ha blivit skadad – kontrollera innan du sparar.",
 	"visualeditor-saveerror": "Fel uppstod vid sparande av data till server: $1.",
 	"visualeditor-saveerror-hookaborted": "Fel när sidan sparades: Ett tillägg på servern förhindrar dig från att spara.",
-	"visualeditor-saveerror-titleblacklist": "Fel vid sparande av sidan: Denna sidtitel är svartlistad",
 	"visualeditor-section-body-placeholder": "Nytt avsnitt",
 	"visualeditor-section-title-placeholder": "Ämne",
 	"visualeditor-serializeerror": "Fel uppstod vid inläsning av data från server: $1.",

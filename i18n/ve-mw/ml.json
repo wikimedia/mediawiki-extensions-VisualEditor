@@ -330,7 +330,6 @@
 	"visualeditor-savedialog-title-save": "താങ്കൾ ചെയ്ത മാറ്റങ്ങൾ സേവ് ചെയ്യുക",
 	"visualeditor-savedialog-warning-dirty": "താങ്കളുടെ തിരുത്തലിനിടെ പ്രശ്നമുണ്ടായിട്ടുണ്ടാകാം - ദയവായി സേവ് ചെയ്യുന്നതിനു മുമ്പ് സംശോധനം ചെയ്യുക.",
 	"visualeditor-saveerror": "സെർവറിൽ വിവരങ്ങൾ ശേഖരിക്കുന്നതിൽ പിഴവുണ്ടായി: $1",
-	"visualeditor-saveerror-titleblacklist": "താൾ സേവ് ചെയ്യുന്നതിൽ പിഴവുണ്ടായി: ഈ താളിന്റെ തലക്കെട്ട് കരിമ്പട്ടികയിൽ ഉൾപ്പെട്ടിരിക്കുന്നു",
 	"visualeditor-section-body-placeholder": "പുതിയ വിഭാഗം",
 	"visualeditor-section-title-placeholder": "വിഷയം",
 	"visualeditor-serializeerror": "സെർവറിൽ നിന്നും ഡേറ്റ എടുക്കുന്നതിൽ പിഴവുണ്ടായി: $1",

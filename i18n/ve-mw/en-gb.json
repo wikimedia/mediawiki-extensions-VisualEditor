@@ -25,6 +25,5 @@
 	"visualeditor-dialog-meta-settings-displaytitle-help": "You can over-ride how this page's title is displayed by setting a different label to show instead.",
 	"visualeditor-loadwarning": "Error loading data from server: $1. Would you like to try again?",
 	"visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to try again?",
-	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Language code",
-	"visualeditor-saveerror-titleblacklist": "Error saving page: This page's title is black-listed"
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Language code"
 }

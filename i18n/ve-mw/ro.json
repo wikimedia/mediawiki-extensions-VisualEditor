@@ -290,7 +290,6 @@
 	"visualeditor-savedialog-title-save": "Salvați-vă modificările",
 	"visualeditor-savedialog-warning-dirty": "Este posibil ca modificarea dumneavoastră să fi fost coruptă — vă rugăm s-o revizualizați înainte de a salva.",
 	"visualeditor-saveerror": "Eroare la salvarea datelor pe server: $1.",
-	"visualeditor-saveerror-titleblacklist": "Eroare la salvarea paginii: titlu paginii se află pe lista neagră.",
 	"visualeditor-serializeerror": "Eroare la încărcarea datelor de pe server: $1.",
 	"visualeditor-settings-tool": "Setări pagină",
 	"visualeditor-special-characters-group-other": "Adesea utilizate",

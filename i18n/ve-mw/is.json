@@ -269,7 +269,6 @@
 	"visualeditor-savedialog-title-save": "Vista breytingar þínar",
 	"visualeditor-savedialog-warning-dirty": "Breytingin þín hefur hugsanlega skemmst — vinsamlegast farðu yfir hana áður en þú vistar.",
 	"visualeditor-saveerror": "Villa við að vista gögn á vefþjóni: $1.",
-	"visualeditor-saveerror-titleblacklist": "Villa við vistun síðu: Titill síðunnar er á svörtum lista",
 	"visualeditor-section-body-placeholder": "Nýr hluti",
 	"visualeditor-section-title-placeholder": "Viðfangsefni",
 	"visualeditor-serializeerror": "Villa við að hlaða gögnum frá vefþjóni: $1.",

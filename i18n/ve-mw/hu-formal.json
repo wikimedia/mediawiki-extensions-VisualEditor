@@ -170,7 +170,6 @@
 	"visualeditor-savedialog-title-save": "Változtatások mentése",
 	"visualeditor-savedialog-warning-dirty": "A változások megsérülhettek, kérem ellenőrizze.",
 	"visualeditor-saveerror": "Hiba a kiszolgálóra való mentés közben: $1.",
-	"visualeditor-saveerror-titleblacklist": "Hiba a lap mentésekor: A lap címe feketelistán van",
 	"visualeditor-serializeerror": "Hiba a kiszolgálóról való letöltés közben: $1",
 	"visualeditor-settings-tool": "Oldalbeállítások",
 	"visualeditor-special-characters-group-other": "Gyakran használt",

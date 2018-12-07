@@ -315,7 +315,6 @@
 	"visualeditor-savedialog-title-save": "Deseu el canvis",
 	"visualeditor-savedialog-warning-dirty": "La seva edició pot estar corrompuda. Si us plau, reviseu-la abans de desar-la.",
 	"visualeditor-saveerror": "Error en desar dades al servidor: $1.",
-	"visualeditor-saveerror-titleblacklist": "Error en desar la pàgina: Aquest títol de pàgina es troba en una llista negra",
 	"visualeditor-section-body-placeholder": "Secció nova",
 	"visualeditor-section-title-placeholder": "Tema",
 	"visualeditor-serializeerror": "Error en carregar dades des del servidor: $1.",
