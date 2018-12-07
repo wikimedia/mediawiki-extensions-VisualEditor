@@ -777,18 +777,17 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
-	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || data.error || {};
-
 	for ( name in saveErrorHandlerFactory.registry ) {
 		handler = saveErrorHandlerFactory.lookup( name );
-		if ( handler.static.matchFunction( editApi ) ) {
-			handler.static.process( editApi, this );
+		if ( handler.static.matchFunction( data ) ) {
+			handler.static.process( data, this );
 			// Error was handled
 			return;
 		}
 	}
 
 	// Handle (other) unknown and/or unrecoverable errors
+	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || {};
 	this.saveErrorUnknown( editApi, data );
 };
 
