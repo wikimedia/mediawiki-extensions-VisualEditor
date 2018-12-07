@@ -405,11 +405,6 @@ class VisualEditorHooks {
 		// change "Edit" to "Edit source".
 		$isAvailable = $namespaceEnabled && $contentModelEnabled;
 
-		// HACK: Exit if we're in the Education Program namespace (even though it's content)
-		if ( defined( 'EP_NS' ) && $title->inNamespace( EP_NS ) ) {
-			return true;
-		}
-
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
