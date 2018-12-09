@@ -88,7 +88,7 @@ class VisualEditorHooks {
 	 * @param DifferenceEngine $diff The difference engine
 	 * @param Revision|null $oldRev The old revision
 	 * @param Revision|null $newRev The new revision
-	 * @return bool Always true
+	 * @return void
 	 */
 	public static function onDiffViewHeader(
 		DifferenceEngine $diff,
