@@ -116,7 +116,8 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 			name: name,
 			label: label,
 			aliases: aliases,
-			description: description
+			description: description,
+			deprecated: spec.isParameterDeprecated( name )
 		} );
 	}
 
@@ -146,6 +147,10 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 			nameMatch = item.names.indexOf( query ) >= 0;
 		}
 		if ( !hasQuery || textMatch || nameMatch ) {
+			// Only show exact matches for deprecated params
+			if ( item.deprecated && query !== item.name && item.aliases.indexOf( query ) === -1 ) {
+				continue;
+			}
 			items.push( new ve.ui.MWParameterResultWidget( { data: item } ) );
 			if ( hasQuery && nameMatch ) {
 				exactMatch = true;
