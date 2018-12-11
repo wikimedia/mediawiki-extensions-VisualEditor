@@ -20,6 +20,13 @@
 	timing = {};
 	editingSessionId = mw.user.generateRandomSessionId();
 
+	function log() {
+		// mw.log is a no-op unless resource loader is in debug mode, so
+		// this allows trackdebug to work independently (T211698)
+		// eslint-disable-next-line no-console
+		console.log.apply( console, arguments );
+	}
+
 	function inSample() {
 		// Not using mw.eventLog.inSample() because we need to be able to pass our own editingSessionId
 		return mw.eventLog.randomTokenMatch(
@@ -168,7 +175,7 @@
 		}
 
 		if ( trackdebug ) {
-			ve.log( topic, duration + 'ms', event );
+			log( topic, duration + 'ms', event );
 		} else {
 			mw.track( 'event.EditAttemptStep', event );
 		}
@@ -183,7 +190,7 @@
 		// Map mwtiming.foo --> timing.ve.foo.mobile
 		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
 		if ( trackdebug ) {
-			ve.log( topic, Math.round( data.duration ) + 'ms' );
+			log( topic, Math.round( data.duration ) + 'ms' );
 		} else {
 			mw.track( topic, data.duration );
 		}
@@ -204,7 +211,7 @@
 		};
 
 		if ( trackdebug ) {
-			ve.log( topic, event );
+			log( topic, event );
 		} else {
 			mw.track( 'event.VisualEditorFeatureUse', event );
 		}
