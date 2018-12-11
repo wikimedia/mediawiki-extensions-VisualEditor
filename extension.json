@@ -2402,7 +2402,8 @@
 				"oojs-ui.styles.icons-user",
 				"oojs-ui.styles.indicators",
 				"oojs-ui.styles.textures",
-				"ext.visualEditor.moduleIcons"
+				"ext.visualEditor.moduleIcons",
+				"ext.visualEditor.moduleIndicators"
 			],
 			"targets": [
 				"desktop",
@@ -2415,6 +2416,17 @@
 			"rootPath": "modules/ve-mw/ui/styles",
 			"selectorWithoutVariant": ".oo-ui-icon-{name}",
 			"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-icon-{name}",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.moduleIndicators": {
+			"class": "ResourceLoaderOOUIImageModule",
+			"name": "ve.ui.Indicators",
+			"rootPath": "modules/ve-mw/ui/styles",
+			"selectorWithoutVariant": ".oo-ui-indicator-{name}",
+			"selectorWithVariant": ".oo-ui-image-{variant}.oo-ui-indicator-{name}",
 			"targets": [
 				"desktop",
 				"mobile"
