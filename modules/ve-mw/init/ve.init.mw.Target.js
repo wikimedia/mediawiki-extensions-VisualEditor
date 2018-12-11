@@ -259,21 +259,21 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 
 	// Filter out junk that may have been added by browser plugins
 	$( newDoc )
-		.find(
-			'script, ' + // T54884, T65229, T96533, T103430
-			'noscript, ' + // T144891
-			'object, ' + // T65229
-			'style:not( [ data-mw ] ), ' + // T55252, but allow <style data-mw/> e.g. TemplateStyles T188143
-			'embed, ' + // T53521, T54791, T65121
-			'a[href^="javascript:"], ' + // T200971
-			'img[src^="data:"], ' + // T192392
-			'div[id="myEventWatcherDiv"], ' + // T53423
-			'div[id="sendToInstapaperResults"], ' + // T63776
-			'div[id="kloutify"], ' + // T69006
-			'div[id^="mittoHidden"], ' + // T70900
-			'div.hon.certificateLink, ' + // HON (T209619)
+		.find( [
+			'script', // T54884, T65229, T96533, T103430
+			'noscript', // T144891
+			'object', // T65229
+			'style:not( [ data-mw ] )', // T55252, but allow <style data-mw/> e.g. TemplateStyles T188143
+			'embed', // T53521, T54791, T65121
+			'a[href^="javascript:"]', // T200971
+			'img[src^="data:"]', // T192392
+			'div[id="myEventWatcherDiv"]', // T53423
+			'div[id="sendToInstapaperResults"]', // T63776
+			'div[id="kloutify"]', // T69006
+			'div[id^="mittoHidden"]', // T70900
+			'div.hon.certificateLink', // HON (T209619)
 			'div.donut-container' // Web of Trust (T189148)
-		)
+		].join( ',' ) )
 		.remove();
 	// Add doctype manually
 	return '<!doctype html>' + ve.serializeXhtml( newDoc );
