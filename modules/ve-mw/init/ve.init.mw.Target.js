@@ -271,7 +271,7 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 			'div[id="sendToInstapaperResults"], ' + // T63776
 			'div[id="kloutify"], ' + // T69006
 			'div[id^="mittoHidden"], ' + // T70900
-			'div.hon.certificateLink', // HON (T209619)
+			'div.hon.certificateLink, ' + // HON (T209619)
 			'div.donut-container' // Web of Trust (T189148)
 		)
 		.remove();
