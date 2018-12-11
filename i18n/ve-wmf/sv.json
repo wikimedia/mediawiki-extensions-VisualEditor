@@ -24,6 +24,8 @@
 	"tag-visualeditor-description": "Redigering gjord med hjälp av [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuell redigering]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell redigering: Kontrollera]]",
 	"tag-visualeditor-needcheck-description": "Redigering gjord med [[{{MediaWiki:visualeditor-descriptionpagelink}}|den visuella redigeraren]] där systemet upptäckte att wikitexten möjligen hade oavsiktliga ändringar.",
+	"tag-visualeditor-wikitext": "2017-källredigering",
+	"tag-visualeditor-wikitext-description": "Redigering som gjordes med wikitextredigeraren från 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell redigering: Växlade]]",
 	"tag-visualeditor-switched-description": "Användaren började redigera med den visuella redigeraren men växlade sedan till wikitext-läge.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Återkoppling",
