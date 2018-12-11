@@ -30,8 +30,8 @@
 
 .ve-ui-mwTransclusionDialog-removeButton {
 	position: absolute;
+	top: 0.85714286em; /* Equals ≈`12px` */
 	right: 1.5em;
-	top: 1.5em;
 }
 
 .ve-ui-mwTransclusionDialog-addButton {
