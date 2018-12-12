@@ -468,9 +468,10 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 		} else {
 			$message.append( message );
 		}
-		this.$saveMessages.append( $message );
+		this.$saveMessages.append( $message.css( 'display', 'none' ) );
 
 		$message.slideDown( {
+			duration: 250,
 			progress: this.updateSize.bind( this )
 		} );
 
