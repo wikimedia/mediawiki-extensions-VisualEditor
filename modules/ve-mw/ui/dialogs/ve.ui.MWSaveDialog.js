@@ -399,10 +399,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						if ( result.parse.parsedsummary[ '*' ] === '' ) {
 							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						} else {
-							dialog.$reviewEditSummary
-								// Intentionally treated as HTML
-								.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
-							// Make any links open in a new window
+							// Intentionally treated as HTML
+							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
 							ve.targetLinksToNewWindow( dialog.$reviewEditSummary[ 0 ] );
 						}
 					} ).fail( function () {
@@ -576,8 +574,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// Save panel
 	this.$editSummaryLabel = $( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )
-		.html( ve.init.platform.getParsedMessage( 'summary' ) )
-		.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' ).end();
+		.html( ve.init.platform.getParsedMessage( 'summary' ) );
+	ve.targetLinksToNewWindow( this.$editSummaryLabel[ 0 ] );
 	this.editSummaryInput = new OO.ui.MultilineTextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-editsummary' ),
 		classes: [ 've-ui-mwSaveDialog-summary' ],
@@ -635,8 +633,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append(
 		$( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
 			.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) )
-			.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' ).end()
 	);
+	ve.targetLinksToNewWindow( this.$saveFoot[ 0 ] );
 	this.savePanel.$element.append(
 		this.$editSummaryLabel,
 		this.editSummaryInput.$element,
@@ -693,8 +691,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		padded: true
 	} );
 	this.$conflict = $( '<div>' ).addClass( 've-ui-mwSaveDialog-conflict' )
-		.html( ve.init.platform.getParsedMessage( 'visualeditor-editconflict' ) )
-		.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' ).end();
+		.html( ve.init.platform.getParsedMessage( 'visualeditor-editconflict' ) );
+	ve.targetLinksToNewWindow( this.$conflict[ 0 ] );
 	this.conflictPanel.$element.append( this.$conflict );
 
 	// Panel stack

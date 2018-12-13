@@ -105,15 +105,13 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	notices.forEach( function ( item ) {
 		var $element = $( '<div>' )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )
-			.append( $.parseHTML( typeof item === 'string' ? item : item.message ) );
+			.html( typeof item === 'string' ? item : item.message );
+		ve.targetLinksToNewWindow( $element[ 0 ] );
 
 		tool.noticeItems.push( {
 			$element: $element,
 			type: item.type
 		} );
-
-		// Ensure that any links in the notices open in a new tab/window
-		$element.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
 
 		tool.$items.append( $element );
 	} );
@@ -192,7 +190,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 				.append( this.keyboardShortcutsButton.$element )
 				.append( this.feedbackButton.$element )
 		);
-	this.$items.find( 'a' ).attr( 'target', '_blank' ).attr( 'rel', 'noopener' );
+	ve.targetLinksToNewWindow( this.$items[ 0 ] );
 	this.popup.$body.append( this.$items );
 };
 
