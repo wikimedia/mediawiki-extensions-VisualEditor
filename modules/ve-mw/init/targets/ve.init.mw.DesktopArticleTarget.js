@@ -343,7 +343,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 		$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 		// Set up a temporary window manager
 		windowManager = new OO.ui.WindowManager();
-		$( 'body' ).append( windowManager.$element );
+		$( document.body ).append( windowManager.$element );
 		this.editingTabDialog = new mw.libs.ve.EditingTabDialog();
 		windowManager.addWindows( [ this.editingTabDialog ] );
 		windowManager.openWindow( this.editingTabDialog )

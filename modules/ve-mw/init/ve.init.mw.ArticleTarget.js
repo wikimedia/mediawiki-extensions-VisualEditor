@@ -2373,7 +2373,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 	) {
 		windowManager = new OO.ui.WindowManager();
 		switchWindow = new mw.libs.ve.SwitchConfirmDialog();
-		$( 'body' ).append( windowManager.$element );
+		$( document.body ).append( windowManager.$element );
 		windowManager.addWindows( [ switchWindow ] );
 		windowManager.openWindow( switchWindow, { mode: 'simple' } )
 			.closed.then( function ( data ) {
