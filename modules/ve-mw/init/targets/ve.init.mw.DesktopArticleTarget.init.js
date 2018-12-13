@@ -739,7 +739,7 @@
 		setupMultiSectionLinks: function () {
 			var $editsections = $( '#mw-content-text .mw-editsection' ),
 				isMinerva = mw.config.get( 'skin' ) === 'minerva',
-				bodyDir = $( 'body' ).css( 'direction' );
+				bodyDir = $( document.body ).css( 'direction' );
 
 			// Match direction of the user interface
 			// TODO: Why is this needed? It seems to work fine without.
@@ -904,7 +904,7 @@
 					// Prompt if either we're on action=submit (the user has previewed) or
 					// the wikitext hash is different to the value observed upon page load.
 
-					$( 'body' ).append( windowManager.$element );
+					$( document.body ).append( windowManager.$element );
 					windowManager.addWindows( [ switchWindow ] );
 					windowManager.openWindow( switchWindow )
 						.closed.then( function ( data ) {
@@ -1167,7 +1167,7 @@
 			) {
 				// In single edit tab mode we never have an edit tab
 				// with accesskey 'v' so create one
-				$( 'body' ).append(
+				$( document.body ).append(
 					$( '<a>' )
 						.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUri } )
 						// Accesskey fires a click event
@@ -1223,7 +1223,7 @@
 							$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 							// Set up a temporary window manager
 							windowManager = new OO.ui.WindowManager();
-							$( 'body' ).append( windowManager.$element );
+							$( document.body ).append( windowManager.$element );
 							editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
 							windowManager.openWindow( editingTabDialog )
@@ -1279,7 +1279,7 @@
 			mw.loader.using( 'ext.visualEditor.welcome' ).done( function () {
 				var windowManager = new OO.ui.WindowManager(),
 					welcomeDialog = new mw.libs.ve.WelcomeDialog();
-				$( 'body' ).append( windowManager.$element );
+				$( document.body ).append( windowManager.$element );
 				windowManager.addWindows( [ welcomeDialog ] );
 				windowManager.openWindow(
 					welcomeDialog,
