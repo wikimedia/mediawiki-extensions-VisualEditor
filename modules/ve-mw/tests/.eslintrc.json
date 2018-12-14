@@ -4,7 +4,6 @@
 		"../../../.eslintrc.json"
 	],
 	"env": {
-		"qunit": true,
 		"es6": true
 	},
 	"globals": {
