@@ -18,7 +18,8 @@
 			"Jorn Ari",
 			"Joedalton",
 			"Matěj Suchánek",
-			"Saederup92"
+			"Saederup92",
+			"Weblars"
 		]
 	},
 	"collabpad-import-subtitle": "Importeret fra $1",
@@ -170,7 +171,9 @@
 	"visualeditor-media-title-image": "Billede",
 	"visualeditor-media-title-video": "Video",
 	"visualeditor-meta-tool": "Indstillinger",
+	"visualeditor-mweditmode-tooltip": "Skift editor",
 	"visualeditor-mweditmodesource-title": "Skift til redigering af kilde?",
+	"visualeditor-mweditmodesource-tool-current": "Wikikode",
 	"visualeditor-mweditmodesource-warning": "Du er ved at skifte til redigering af kilde.\nVil du fortsætte?",
 	"visualeditor-mweditmodesource-warning-cancel": "Afbryd",
 	"visualeditor-mweditmodesource-warning-switch": "Skift",
@@ -208,6 +211,7 @@
 	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "Kildetekst",
 	"visualeditor-mwlanguagevariantinspector-title-name": "Sprognavn",
 	"visualeditor-mwsignature-tool": "Din signatur",
+	"visualeditor-pagemenu-tooltip": "Sideindstillinger",
 	"visualeditor-parameter-input-placeholder": "Feltnavn",
 	"visualeditor-parameter-search-no-unused": "Ingen ubrugte felter",
 	"visualeditor-parameter-search-unknown": "Ukendt feldt",
