@@ -99,6 +99,7 @@
 	"visualeditor-dialog-media-upload": "Lataa",
 	"visualeditor-dialog-meta-advancedsettings-label": "Lisäasetukset",
 	"visualeditor-dialog-meta-advancedsettings-section": "Lisäasetukset",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Lisää tälle sivulle luokka",
 	"visualeditor-dialog-meta-categories-category": "Luokka",
 	"visualeditor-dialog-meta-categories-data-label": "Luokat",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Voit muuttaa tämän artikkelin nimeä aakkosjärjestystä varten. Tämä on hyödyllistä esimerkiksi henkilönimien tapauksessa, jolloin listauksessa etunimi näkyy ensin, mutta aakkostus tehdään sukunimen perusteella.",
