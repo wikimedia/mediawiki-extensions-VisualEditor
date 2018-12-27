@@ -32,10 +32,12 @@
 			"Luzcaru",
 			"Javiersanp",
 			"MarcoAurelio",
-			"Adjen"
+			"Adjen",
+			"Tiberius1701"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importado de $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Crear el código fuente de esta página",
 	"tooltip-ca-edit": "Editar esta página usando wikitexto",
@@ -54,7 +56,7 @@
 	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Si encuentras algún problema técnico mientras editas, informa de ello.",
 	"visualeditor-browserwarning": "Estás utilizando un navegador que no es oficialmente compatible con este editor.",
-	"visualeditor-ca-createlocaldescriptionsource": "Añadir descripción local en código",
+	"visualeditor-ca-createlocaldescriptionsource": "Añadir fuente de descripción local",
 	"visualeditor-ca-createsource": "Crear fuente",
 	"visualeditor-ca-editlocaldescriptionsource": "Editar código de descripción local",
 	"visualeditor-ca-editsource": "Editar código",
@@ -352,6 +354,7 @@
 	"visualeditor-preference-tabs-remember-last": "Recordar mi último editor",
 	"visualeditor-preference-visualdiffpage-description": "Activa la modalidad visual nueva en las páginas de diferencias entre revisiones.",
 	"visualeditor-preference-visualdiffpage-label": "Diferencias visuales",
+	"visualeditor-rebase-client-export": "Exportar",
 	"visualeditor-rebase-client-import": "Importar",
 	"visualeditor-rebase-client-import-name": "Título de página",
 	"visualeditor-recreate": "La página fue borrada después de que comenzaste a editarla. Pulsa en «$1» para crearla de nuevo.",

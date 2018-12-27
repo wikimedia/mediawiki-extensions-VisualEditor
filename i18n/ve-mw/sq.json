@@ -15,7 +15,11 @@
 			"Arianit"
 		]
 	},
+	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importuar nga $1",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Krijo tekstin burimor të kësaj faqeje",
+	"tooltip-ca-edit": "Edito këtë faqe duke përdorur wikitext",
 	"tooltip-ca-editsource": "Redakto tekstin burimor të kësaj faqeje",
 	"tooltip-ca-ve-edit": "Redakto këtë faqe",
 	"visualeditor-advancedsettings-tool": "Konfigurimet e avancuara",
