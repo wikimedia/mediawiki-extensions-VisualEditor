@@ -8,15 +8,16 @@
 			"StanProg",
 			"Лорд Бъмбъри",
 			"Vodnokon4e",
-			"Spiritia"
+			"Spiritia",
+			"Vlad5250"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуален редактор]]",
-	"tag-visualeditor-description": "Редакция, направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]]",
+	"tag-visualeditor-description": "Редакцията е направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуална редакция за проверка]]",
 	"tag-visualeditor-needcheck-description": "Редакция, направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]], за която системата откри възможно нежелани промени по уикикода.",
 	"tag-visualeditor-wikitext": "Уикитекстов редактор – 2017",
-	"tag-visualeditor-wikitext-description": "Редакция, извършена чрез уикитекстов редактор – 2017",
+	"tag-visualeditor-wikitext-description": "Редакцията е извършена чрез уикитекстов редактор – 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуално редактиране: Превключено]]",
 	"tag-visualeditor-switched-description": "Потребителят започва да редактира чрез визуалния редактор и след това преминава към уикитекст редактора.",
 	"visualeditor-feedback-link": "Project:Визуален редактор/Мнения",

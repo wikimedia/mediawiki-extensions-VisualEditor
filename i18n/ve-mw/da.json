@@ -22,7 +22,9 @@
 			"Weblars"
 		]
 	},
+	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Importeret fra $1",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Opret kildekoden til denne side",
 	"tooltip-ca-editsource": "Rediger kildekoden for denne side",
 	"tooltip-ca-ve-edit": "Redigér denne side",

@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Iwan Novirion",
-			"Jagwar"
+			"Jagwar",
+			"Muhraz"
 		]
 	},
 	"tooltip-ca-createsource": "Buek kode sumber laman ko",
 	"tooltip-ca-editsource": "Suntiang kode sumber laman ko",
-	"tooltip-ca-ve-edit": "Suntiang laman ko jo VisualEditor",
+	"tooltip-ca-ve-edit": "MediaWiki:Tooltip-ca-ve-edit/min",
 	"visualeditor-advancedsettings-tool": "Pangaturan lanjuik",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createlocaldescriptionsource": "Tambah sumber deskripsi lokal",
