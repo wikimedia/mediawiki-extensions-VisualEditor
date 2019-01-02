@@ -19,6 +19,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						( ve.dm.mwExample.MWTransclusion.blockOpenModified + ve.dm.mwExample.MWTransclusion.blockContent )
+							// FIXME: Use DOM modification instead of string replaces
 							.replace( /#mwt1"/g, '#mwt1" data-diff-action="structural-change" data-diff-id="0"' ) +
 					'</div>',
 				expectedDescriptions: [
@@ -33,6 +34,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						ve.dm.mwExample.MWBlockImage.html
+							// FIXME: Use DOM modification instead of string replaces
 							.replace( 'width="1"', 'width="3"' )
 							.replace( 'href="Foo"', 'href="' + ve.resolveUrl( 'Foo', ve.dm.example.base ) + '"  rel="noopener" target="_blank"' )
 							.replace( 'foobar"', 'foobar" data-diff-action="structural-change" data-diff-id="0"' ) +

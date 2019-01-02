@@ -60,6 +60,9 @@ ve.dm.MWTransclusionNode.static.matchFunction = function () {
 
 ve.dm.MWTransclusionNode.static.enableAboutGrouping = true;
 
+// We handle rendering ourselves, no need to render attributes from originalDomElements (T207325)
+ve.dm.MWTransclusionNode.static.preserveHtmlAttributes = false;
+
 ve.dm.MWTransclusionNode.static.getHashObject = function ( dataElement ) {
 	return {
 		type: dataElement.type,

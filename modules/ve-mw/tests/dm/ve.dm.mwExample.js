@@ -1173,7 +1173,7 @@ ve.dm.mwExample.domToDataCases = {
 		modify: function ( model ) {
 			model.data.data[ 0 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = 'Hello, globe!';
 		},
-		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified,
+		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified.replace( /about="#mwt1"/, '' ),
 		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenModifiedClipboard,
 		previewBody: false
@@ -1208,7 +1208,7 @@ ve.dm.mwExample.domToDataCases = {
 		modify: function ( model ) {
 			model.data.data[ 1 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = '5,678';
 		},
-		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified + ve.dm.mwExample.MWTransclusion.inlineClose,
+		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified.replace( /about="#mwt1"/, '' ) + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose,
 		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenModifiedClipboard + ve.dm.mwExample.MWTransclusion.inlineClose,
 		previewBody: false
