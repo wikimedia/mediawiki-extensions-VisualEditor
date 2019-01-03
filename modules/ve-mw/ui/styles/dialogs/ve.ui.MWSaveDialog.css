@@ -69,14 +69,11 @@
 }
 
 .ve-ui-mwSaveDialog-messages {
-	/* Make a top border that spans the whole width of the dialog */
-	margin: 0 -1.14285714em;
-	padding: 0 1.14285714em;
-	border-top: 1px solid rgba( 0, 0, 0, 0.2 );
-	/* Ew */
-	margin-top: 1em;
-	padding-top: 0.5em;
-	margin-bottom: -0.5em;
+	/* Make a border that spans the whole width of the dialog */
+	margin: 1em -1.14285714em;
+	padding: 0.5em 1.14285714em;
+	border: 1px solid rgba( 0, 0, 0, 0.2 );
+	border-width: 1px 0;
 }
 
 .ve-ui-mwSaveDialog-messages:empty {

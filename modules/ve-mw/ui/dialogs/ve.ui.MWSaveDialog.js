@@ -639,8 +639,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$editSummaryLabel,
 		this.editSummaryInput.$element,
 		this.$saveOptions,
-		this.$saveFoot,
-		this.$saveMessages
+		this.$saveMessages,
+		this.$saveFoot
 	);
 
 	// Review panel
