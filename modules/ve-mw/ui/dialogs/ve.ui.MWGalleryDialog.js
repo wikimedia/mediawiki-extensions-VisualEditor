@@ -141,7 +141,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.selectedFilenames = {};
 	this.initialImageData = [];
 	this.originalMwDataNormalized = null;
-	this.originalGalleryGroupItems = null;
+	this.originalGalleryGroupItems = [];
 	this.imageData = {};
 	this.isMobile = OO.ui.isMobile();
 
@@ -561,7 +561,7 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.selectedFilenames = {};
 			this.initialImageData = [];
 			this.originalMwDataNormalized = null;
-			this.originalGalleryGroupItems = null;
+			this.originalGalleryGroupItems = [];
 
 			// Disconnect events
 			this.indexLayout.disconnect( this );
