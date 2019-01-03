@@ -3,12 +3,13 @@
 		"authors": [
 			"Iwan Novirion",
 			"Jagwar",
-			"Muhraz"
+			"Muhraz",
+			"Matma Rex"
 		]
 	},
 	"tooltip-ca-createsource": "Buek kode sumber laman ko",
 	"tooltip-ca-editsource": "Suntiang kode sumber laman ko",
-	"tooltip-ca-ve-edit": "MediaWiki:Tooltip-ca-ve-edit/min",
+	"tooltip-ca-ve-edit": "Suntiang laman ko jo VisualEditor",
 	"visualeditor-advancedsettings-tool": "Pangaturan lanjuik",
 	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createlocaldescriptionsource": "Tambah sumber deskripsi lokal",
