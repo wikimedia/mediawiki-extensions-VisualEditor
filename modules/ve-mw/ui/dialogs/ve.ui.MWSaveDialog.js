@@ -144,7 +144,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 
 	function createDiffElement( visualDiff ) {
 		var diffElement = new ve.ui.DiffElement( visualDiff );
-		diffElement.$document.addClass( 'mw-body-content mw-parser-output' );
+		diffElement.$document.addClass( 'mw-body-content mw-parser-output mw-content-' + visualDiff.newDoc.getDir() );
 		// Run styles so links render with their appropriate classes
 		ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
 		return diffElement;
