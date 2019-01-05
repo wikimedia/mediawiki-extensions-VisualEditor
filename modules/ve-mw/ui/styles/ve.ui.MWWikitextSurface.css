@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwWikitextSurface .ve-ce-documentNode {
+.ve-ui-mwWikitextSurface .ve-ce-rootNode {
 	/* Inherit mw-editfont setting instead of default source mode setting */
 	font-family: inherit;
 }
