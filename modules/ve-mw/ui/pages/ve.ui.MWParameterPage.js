@@ -61,7 +61,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	if ( this.parameter.isRequired() ) {
 		this.statusIndicator
 			.setIndicator( 'required' )
-			.setTitle(
+			.setIndicatorTitle(
 				ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 			);
 		this.$description.append(
@@ -74,7 +74,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	} else if ( this.parameter.isDeprecated() ) {
 		this.statusIndicator
 			.setIndicator( 'alert' )
-			.setTitle(
+			.setIndicatorTitle(
 				ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
 			);
 		this.$description.append(
@@ -377,14 +377,14 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function () {
 		if ( this.parameter.isRequired() ) {
 			this.outlineItem
 				.setIndicator( 'required' )
-				.setTitle(
+				.setIndicatorTitle(
 					ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 				);
 		}
 		if ( this.parameter.isDeprecated() ) {
 			this.outlineItem
 				.setIndicator( 'alert' )
-				.setTitle(
+				.setIndicatorTitle(
 					ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
 				);
 		}
