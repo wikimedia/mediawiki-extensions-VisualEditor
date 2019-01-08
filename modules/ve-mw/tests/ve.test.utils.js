@@ -90,6 +90,7 @@
 			ve.init.target = mwTarget;
 			mw.libs.ve.setEditorPreference = dummySetEditorPreference;
 			// Ensure the current target is appended to the current fixture
+			// eslint-disable-next-line jquery/no-global-selector
 			$( '#qunit-fixture' ).append( ve.init.target.$element );
 		}
 

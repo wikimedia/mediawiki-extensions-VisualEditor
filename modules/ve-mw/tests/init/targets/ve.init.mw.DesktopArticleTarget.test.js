@@ -26,7 +26,7 @@ QUnit.test( 'init', function ( assert ) {
 						tooltip: 'minoredit',
 						'label-id': 'mw-editpage-minoredit',
 						'legacy-name': 'minor',
-						'default': false
+						default: false
 					},
 					wpWatchthis: {
 						id: 'wpWatchthis',
@@ -34,7 +34,7 @@ QUnit.test( 'init', function ( assert ) {
 						tooltip: 'watch',
 						'label-id': 'mw-editpage-watch',
 						'legacy-name': 'watch',
-						'default': true
+						default: true
 					}
 				},
 				checkboxesMessages: {

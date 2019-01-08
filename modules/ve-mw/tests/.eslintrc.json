@@ -8,5 +8,8 @@
 	},
 	"globals": {
 		"sinon": false
+	},
+	"rules": {
+		"jquery/no-parse-html-literal": "off"
 	}
 }
