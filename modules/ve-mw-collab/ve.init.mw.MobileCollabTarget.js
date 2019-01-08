@@ -24,7 +24,7 @@ ve.init.mw.MobileCollabTarget = function VeInitMwMobileCollabTarget( title, reba
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget ve-init-mw-mobileCollabTarget' );
 
-	$( 'body' ).removeClass( 'ns-special' );
+	$( document.body ).removeClass( 'ns-special' );
 };
 
 /* Inheritance */

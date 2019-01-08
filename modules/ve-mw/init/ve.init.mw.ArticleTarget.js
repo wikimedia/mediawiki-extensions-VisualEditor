@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* eslint-disable jquery/no-global-selector */
+
 /* global EasyDeflate */
 
 /**
@@ -63,7 +65,11 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 			action: 'submit',
 			veswitched: 1
 		} );
-	this.events = { track: $.noop, trackActivationStart: $.noop, trackActivationComplete: $.noop };
+	this.events = {
+		track: function () {},
+		trackActivationStart: function () {},
+		trackActivationComplete: function () {}
+	};
 
 	this.welcomeDialog = null;
 	this.welcomeDialogPromise = null;
@@ -1754,7 +1760,7 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 	}
 	// Submit the form, mimicking a traditional edit
 	// Firefox requires the form to be attached
-	$form.attr( 'action', this.submitUrl ).appendTo( 'body' ).submit();
+	$form.attr( 'action', this.submitUrl ).appendTo( 'body' ).trigger( 'submit' );
 	return true;
 };
 

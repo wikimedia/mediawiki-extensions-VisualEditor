@@ -41,6 +41,7 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	ve.ui.commandRegistry.unregister( 'referencesList' );
 	ve.ui.commandRegistry.unregister( 'citefromid' );
 
+	// eslint-disable-next-line jquery/no-global-selector
 	this.$editableContent = $( '#mw-content-text' );
 
 	this.toolbarExportButton = new OO.ui.ButtonWidget( {

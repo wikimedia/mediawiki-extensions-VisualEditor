@@ -9,6 +9,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* eslint-disable jquery/no-global-selector */
+
 /**
  * Platform preparation for the MediaWiki view page. This loads (when user needs it) the
  * actual MediaWiki integration and VisualEditor library.

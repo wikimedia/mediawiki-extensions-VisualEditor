@@ -86,7 +86,7 @@ ve.ce.MWBlockImageNode.static.renderHtmlAttributes = false;
 ve.ce.MWBlockImageNode.static.transition = false;
 
 ve.ce.MWBlockImageNode.static.cssClasses = {
-	'default': {
+	default: {
 		left: 'mw-halign-left',
 		right: 'mw-halign-right',
 		center: 'mw-halign-center',

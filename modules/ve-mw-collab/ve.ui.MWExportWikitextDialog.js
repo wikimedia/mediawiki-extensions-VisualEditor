@@ -174,7 +174,7 @@ ve.ui.MWExportWikitextDialog.prototype.export = function () {
 	}
 	// Submit the form, mimicking a traditional edit
 	// Firefox requires the form to be attached
-	$form.attr( 'action', submitUrl ).appendTo( 'body' ).submit();
+	$form.attr( 'action', submitUrl ).appendTo( 'body' ).trigger( 'submit' );
 };
 
 /* Registration */
