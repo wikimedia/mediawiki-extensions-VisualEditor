@@ -375,6 +375,7 @@
 	"visualeditor-wikitext-progress": "Conversione wikitesto",
 	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, clicca il pulsante commutativo.",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto",
+	"visualeditor-wikitextconvert-message": "Il contenuto incollato contiene della formattazione. Vuoi convertirlo in wikitesto o inserirlo come testo semplice?",
 	"visualeditor-wikitextconvert-plain": "Usa testo semplice",
 	"visualeditor-wikitextconvert-convert": "Converti in wikitesto"
 }
