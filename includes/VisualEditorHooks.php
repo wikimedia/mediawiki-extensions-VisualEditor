@@ -528,7 +528,7 @@ class VisualEditorHooks {
 	 */
 	public static function onRecentChangeSave( RecentChange $rc ) {
 		$request = RequestContext::getMain()->getRequest();
-		if ( $request->getBool( 'veswitched' ) && $rc->mAttribs['rc_this_oldid'] ) {
+		if ( $request->getBool( 'veswitched' ) && $rc->getAttribute( 'rc_this_oldid' ) ) {
 			$rc->addTags( 'visualeditor-switched' );
 		}
 		return true;
