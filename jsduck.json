@@ -23,7 +23,6 @@
 		"lib/ve/lib/treeDiffer/treeDiffer-dist.js",
 		"lib/ve/src",
 		"lib/ve/rebaser/src/dm",
-		"lib/ve/tests",
 		"modules/ve-mw"
 	]
 }

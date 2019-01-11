@@ -190,17 +190,6 @@
 					"ve.ui.*Dialog",
 					"ve.ui.*Inspector"
 				]
-			},
-			{
-				"name": "Tests",
-				"classes": [
-					"ve.QUnit",
-					"ve.QUnit.assert",
-					"ve.ce.TestOffset",
-					"ve.ce.TestRunner",
-					"ve.dm.TestRebaseClient",
-					"ve.dm.TestRebaseServer"
-				]
 			}
 		]
 	},
