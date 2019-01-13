@@ -25,6 +25,7 @@
 }
 
 /* Mobile */
+/* stylelint-disable-next-line selector-class-pattern */
 .mw-body .heading-holder {
 	display: none;
 }

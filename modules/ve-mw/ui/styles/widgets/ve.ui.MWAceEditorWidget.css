@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* stylelint-disable selector-class-pattern */
+
 .ve-ui-mwAceEditorWidget .ace_editor {
 	border: 1px solid #c8ccd1;
 	margin: 1px;

@@ -39,10 +39,13 @@
 
 /* Swap the order to visually match the order in the actions menu */
 /* Silly selector for high specificity to override Minerva styles */
+
+/* stylelint-disable-next-line selector-class-pattern */
 .content .mw-parser-output > * > span.mw-editsection {
 	display: flex;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .content .mw-parser-output > * > span.mw-editsection .ve-edit-visual {
 	order: 2;
 }

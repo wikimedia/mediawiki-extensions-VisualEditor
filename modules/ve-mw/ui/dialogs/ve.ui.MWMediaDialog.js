@@ -917,7 +917,7 @@ ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
 		$( '<span>' ).append(
 			document.createTextNode( this.imageModel.getFilename() + ' ' ),
 			$( '<a>' )
-				.addClass( 'visualeditor-dialog-media-content-description-link' )
+				.addClass( 've-ui-mwMediaDialog-description-link' )
 				.attr( 'href', ve.resolveUrl( this.imageModel.getResourceName(), this.getFragment().getDocument().getHtmlDocument() ) )
 				.attr( 'target', '_blank' )
 				.attr( 'rel', 'noopener' )
