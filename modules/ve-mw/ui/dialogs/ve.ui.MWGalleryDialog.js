@@ -783,7 +783,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 		$( '<span>' ).append(
 			document.createTextNode( title.getMainText() + ' ' ),
 			$( '<a>' )
-				.addClass( 'visualeditor-dialog-media-content-description-link' )
+				.addClass( 've-ui-mwMediaDialog-description-link' )
 				.attr( 'href', title.getUrl() )
 				.attr( 'target', '_blank' )
 				.attr( 'rel', 'noopener' )

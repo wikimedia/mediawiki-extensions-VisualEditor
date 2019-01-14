@@ -10,6 +10,7 @@
 	font-size: 1.28em; /* 0.8em / x-small */
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .mw-body a.external.ve-ce-linkAnnotation.ve-ce-annotation-active {
 	/* Reset -2px from VE-core */
 	margin-right: 0;

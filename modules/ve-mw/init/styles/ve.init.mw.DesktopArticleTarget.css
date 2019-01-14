@@ -54,6 +54,7 @@
 	cursor: pointer;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .ve-init-mw-desktopArticleTarget .redirectMsg a:hover {
 	text-decoration: none;
 }

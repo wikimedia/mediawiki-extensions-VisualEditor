@@ -1,1 +1,6 @@
-lib/ve/.stylelintrc.json
+{
+	"extends": "stylelint-config-wikimedia",
+	"rules": {
+		"selector-class-pattern": "^(ve|mw|oo-ui|client)-"
+	}
+}

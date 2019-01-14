@@ -4,6 +4,7 @@
  * @copyright 2011-2019 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* stylelint-disable-next-line selector-class-pattern */
 .plainlinks a.ve-ce-linkAnnotation.ve-ce-annotation-active.external {
 	/*
 	 * plainlinks is a MW core class which tries to suppress the normal
@@ -19,7 +20,7 @@
  * .ve-ce-linkAnnotation.ve-ce-annotation-active has as higher specificity
  * than .external, so we need to re-override right padding
  */
-
+/* stylelint-disable-next-line selector-class-pattern */
 .ve-ce-linkAnnotation.ve-ce-annotation-active.external {
 	padding-right: 13px;
 }
