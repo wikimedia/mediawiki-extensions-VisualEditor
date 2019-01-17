@@ -38,6 +38,8 @@ OO.mixinClass( ve.ce.MWTransclusionNode, ve.ce.FocusableNode );
 
 ve.ce.MWTransclusionNode.static.name = 'mwTransclusion';
 
+ve.ce.MWTransclusionNode.static.renderHtmlAttributes = false;
+
 ve.ce.MWTransclusionNode.static.primaryCommandName = 'transclusion';
 
 ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'puzzle';
