@@ -189,6 +189,7 @@
 	"visualeditor-linkinspector-convert-link-rfc": "Pārvērst par RFC saiti",
 	"visualeditor-linkinspector-educationpopup-title": "Saites",
 	"visualeditor-linkinspector-illegal-title": "Nederīgs lapas nosaukums",
+	"visualeditor-linknodeinspector-add-label": "Pievienot nosaukumu",
 	"visualeditor-linknodeinspector-title": "Vienkārša saite",
 	"visualeditor-loaderror-message": "Kļūda datu ielādē no servera: $1.",
 	"visualeditor-loaderror-title": "Redaktoru nevarēja ielādēt",
