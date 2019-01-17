@@ -60,6 +60,12 @@ ve.dm.MWTransclusionNode.static.matchFunction = function () {
 
 ve.dm.MWTransclusionNode.static.enableAboutGrouping = true;
 
+// We handle rendering ourselves, no need to render attributes from originalDomElements (T207325),
+// except for data-parsoid/RESTBase ID (T207325)
+ve.dm.MWTransclusionNode.static.preserveHtmlAttributes = function ( attribute ) {
+	return [ 'data-parsoid', 'id' ].indexOf( attribute ) !== -1;
+};
+
 ve.dm.MWTransclusionNode.static.getHashObject = function ( dataElement ) {
 	return {
 		type: dataElement.type,
