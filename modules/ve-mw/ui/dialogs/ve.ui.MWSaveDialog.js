@@ -262,6 +262,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		ve.targetLinksToNewWindow( this.$previewViewer[ 0 ] );
 		// Add styles so links render with their appropriate classes
 		ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
+		ve.fixFragmentLinks( this.$previewViewer[ 0 ], mw.Title.newFromText( ve.init.target.getPageName() ), 'mw-save-preview-' );
 
 		if ( categories.length ) {
 			// If there are categories, we need to render them. This involves
