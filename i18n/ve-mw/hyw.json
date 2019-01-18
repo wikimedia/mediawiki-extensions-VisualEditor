@@ -3,13 +3,14 @@
 		"authors": [
 			"ArmenBakkalian",
 			"Azniv Stepanian",
-			"Rajemian"
+			"Rajemian",
+			"Դավիթ Սարոյան"
 		]
 	},
 	"tooltip-ca-ve-edit": "Խմբագրել այս էջը",
 	"visualeditor-ca-createlocaldescriptionsource": "Աւելցնել տեղական նկարագրութեան աղբիւր",
 	"visualeditor-ca-createsource": "Ստեղծել աղբիւրը",
-	"visualeditor-ca-editsource": "խմբագրել աղբիւրը",
-	"visualeditor-ca-editsource-section": "խմբագրել աղբիւրը",
+	"visualeditor-ca-editsource": "Խմբագրել աղբիւրը",
+	"visualeditor-ca-editsource-section": "Խմբագրել աղբիւրը",
 	"visualeditor-descriptionpagelink": "Project:ՏեսողականԽմբագրիչ"
 }
