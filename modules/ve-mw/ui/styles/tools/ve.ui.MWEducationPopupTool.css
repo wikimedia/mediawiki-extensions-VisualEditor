@@ -20,10 +20,10 @@
 }
 
 .ve-ui-pulsatingDot {
-	width: 2.5em;
-	height: 2.5em;
-	margin-bottom: -1.25em;
-	margin-left: -1.25em;
+	width: 36px;
+	height: 36px;
+	margin-bottom: -18px;
+	margin-left: -18px;
 	opacity: 0;
 	-webkit-animation: pulse 3s ease-out;
 	-moz-animation: pulse 3s ease-out;
@@ -34,10 +34,11 @@
 }
 
 .ve-ui-stillDot {
-	width: 0.8em;
-	height: 0.8em;
-	margin-bottom: -0.4em;
-	margin-left: -0.4em;
+	/* Use whole pixel values to improve rendering (T214203) */
+	width: 12px;
+	height: 12px;
+	margin-bottom: -6px;
+	margin-left: -6px;
 }
 
 .ve-ui-educationPopup-shield {
