@@ -74,12 +74,12 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			if ( ve.init.target.openEducationPopupTool ) {
 				ve.init.target.openEducationPopupTool.popup.toggle( false );
 				ve.init.target.openEducationPopupTool.setActive( false );
-				ve.init.target.openEducationPopupTool.$pulsatingDot.show();
-				ve.init.target.openEducationPopupTool.$stillDot.show();
+				ve.init.target.openEducationPopupTool.$pulsatingDot.removeClass( 'oo-ui-element-hidden' );
+				ve.init.target.openEducationPopupTool.$stillDot.removeClass( 'oo-ui-element-hidden' );
 			}
 			ve.init.target.openEducationPopupTool = tool;
-			tool.$pulsatingDot.hide();
-			tool.$stillDot.hide();
+			tool.$pulsatingDot.addClass( 'oo-ui-element-hidden' );
+			tool.$stillDot.addClass( 'oo-ui-element-hidden' );
 			tool.popup.toggle( true );
 			$shield.remove();
 

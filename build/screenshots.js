@@ -90,7 +90,7 @@
 								}
 
 								if ( highlight ) {
-									tool.$link.focus();
+									tool.$link[ 0 ].focus();
 								}
 
 								setTimeout( function () {

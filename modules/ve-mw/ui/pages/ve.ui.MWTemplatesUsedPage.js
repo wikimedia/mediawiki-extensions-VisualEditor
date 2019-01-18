@@ -66,7 +66,7 @@ ve.ui.MWTemplatesUsedPage.prototype.setOutlineItem = function () {
  */
 ve.ui.MWTemplatesUsedPage.prototype.focus = function () {
 	// No controls, just focus the whole page instead of the first link
-	this.$element.focus();
+	this.$element[ 0 ].focus();
 };
 
 ve.ui.MWTemplatesUsedPage.prototype.getFieldsets = function () {
