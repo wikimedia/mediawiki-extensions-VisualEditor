@@ -1161,6 +1161,14 @@ class VisualEditorHooks {
 			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
 		];
+
+		$testModules['qunit']['test.VisualEditor'] = [
+			'dependencies' => [
+				'ext.visualEditor.test'
+			],
+			'localBasePath' => dirname( __DIR__ ),
+			'remoteExtPath' => 'VisualEditor',
+		];
 	}
 
 	/**
