@@ -383,8 +383,6 @@ ve.init.mw.Target.prototype.addSurface = function () {
 	surface.$element.addClass( 've-init-mw-target-surface' );
 	this.track( 'trace.createSurface.exit' );
 
-	this.dummyToolbar = false;
-
 	this.setSurface( surface );
 
 	setTimeout( function () {
