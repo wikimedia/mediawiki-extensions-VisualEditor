@@ -77,8 +77,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.internalAnnotationInput.input.getResults().connect( this, { choose: 'onFormSubmit' } );
 	// Form submit only auto triggers on enter when there is one input
 	this.internalAnnotationInput.getTextInputWidget().connect( this, { change: 'onInternalLinkInputChange' } );
-	this.internalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
-	this.externalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
+	this.internalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onLinkInputEnter' } );
+	this.externalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onLinkInputEnter' } );
 
 	this.internalAnnotationInput.input.results.connect( this, {
 		add: 'onInternalLinkChangeResultsChange'
@@ -146,6 +146,22 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChangeResultsChange = fu
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkChange = function () {
 	this.updateActions();
+};
+
+/**
+ * Handle enter events on the external/internal link inputs
+ *
+ * @param {jQuery.Event} e Key press event
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onLinkInputEnter = function () {
+	var inspector = this;
+	if ( this.annotationInput.getTextInputWidget().getValue().trim() === '' ) {
+		this.executeAction( 'done' );
+	}
+	this.annotationInput.getTextInputWidget().getValidity()
+		.done( function () {
+			inspector.executeAction( 'done' );
+		} );
 };
 
 /**
