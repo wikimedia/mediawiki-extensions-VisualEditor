@@ -8,10 +8,15 @@
 			"Nirjal stha",
 			"NehalDaveND",
 			"राम प्रसाद जोशी",
-			"Nirajan pant"
+			"Nirajan pant",
+			"पर्वत सुबेदी"
 		]
 	},
 	"tooltip-ca-ve-edit": "यो पृष्ठ सम्पादन गर्ने",
+	"visualeditor-advancedsettings-tool": "उन्नत सेटिङ्गहरू",
+	"visualeditor-autosave-modified-prompt-accept": "सम्पादन पुनः सुरु गर्नुहोस्",
+	"visualeditor-autosave-modified-prompt-reject": "नयाँ सम्पादन सुरू गर्नुहोस्",
+	"visualeditor-autosave-not-recovered-title": "पुनःप्राप्ति परिवर्तन असफल भयो",
 	"visualeditor-beta-label": "बेटा",
 	"visualeditor-ca-createlocaldescriptionsource": "स्थानीय वर्णन थप्नुहोस",
 	"visualeditor-ca-createsource": "श्रोत बनाउने",
@@ -88,8 +93,10 @@
 	"visualeditor-linkinspector-button-link-external": "बाह्य लिंक",
 	"visualeditor-linkinspector-button-link-internal": "खोजपृष्ठहरू",
 	"visualeditor-meta-tool": "विकल्पहरू",
+	"visualeditor-mweditmodesource-tool-current": "स्रोत सम्पादन",
 	"visualeditor-mweditmodesource-warning-cancel": "रद्द गर्ने",
 	"visualeditor-mweditmodesource-warning-switch": "परिवर्तन सङ्ग्रह गर्ने",
+	"visualeditor-mweditmodeve-tool-current": "दृश्य सम्पादन",
 	"visualeditor-mwgallerydialog-title": "ग्यालरीबाट",
 	"visualeditor-mwlanguagevariant-oneway": "एकतर्फी परिवर्तन: $1",
 	"visualeditor-mwlanguagevariant-twoway": "भाषा परिवर्तन: $1",
