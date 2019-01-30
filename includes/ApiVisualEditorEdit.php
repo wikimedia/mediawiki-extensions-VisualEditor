@@ -412,8 +412,10 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 				if ( class_exists( 'FlaggablePageView' ) ) {
 					$view = FlaggablePageView::singleton();
 
-					$originalRequest = $view->getContext()->getRequest();
+					$originalContext = $view->getContext();
 					$originalTitle = RequestContext::getMain()->getTitle();
+
+					$newContext = new DerivativeContext( $originalContext );
 					// Defeat !$this->isPageView( $request ) || $request->getVal( 'oldid' ) check in setPageContent
 					$newRequest = new DerivativeRequest(
 						$this->getRequest(),
@@ -424,7 +426,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 							'action' => 'view'
 						] + $this->getRequest()->getValues()
 					);
-					$view->getContext()->setRequest( $newRequest );
+					$newContext->setRequest( $newRequest );
+					$newContext->setTitle( $title );
+					$view->setContext( $newContext );
 					RequestContext::getMain()->setTitle( $title );
 
 					// The two parameters here are references but we don't care
@@ -433,7 +437,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					$useParserCache = null;
 					$view->setPageContent( $outputDone, $useParserCache );
 					$view->displayTag();
-					$view->getContext()->setRequest( $originalRequest );
+					$view->setContext( $originalContext );
 					RequestContext::getMain()->setTitle( $originalTitle );
 				}
 
