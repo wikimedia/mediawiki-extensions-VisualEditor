@@ -45,7 +45,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	/**
 	 * @param ResourceLoaderContext $context Object containing information about the state of this
 	 *   specific loader request.
-	 * @return string[] Messages in various states of parsing
+	 * @return array[] Messages in various states of parsing
 	 */
 	protected function getMessageInfo( ResourceLoaderContext $context ) {
 		$editSubmitButtonLabelPublish = $context->getResourceLoader()->getConfig()

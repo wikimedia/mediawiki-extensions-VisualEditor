@@ -78,7 +78,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * Load into an array the output of MediaWiki's parser for a given revision
 	 *
 	 * @param int $newRevId The revision to load
-	 * @return array The parsed of the save attempt
+	 * @return array|false The parsed of the save attempt
 	 */
 	protected function parseWikitext( $newRevId ) {
 		$apiParams = [

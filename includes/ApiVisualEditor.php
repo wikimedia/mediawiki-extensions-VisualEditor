@@ -212,7 +212,7 @@ class ApiVisualEditor extends ApiBase {
 	 * Provide the current language links for a given page title
 	 *
 	 * @param Title $title The page title for which to get the current language links
-	 * @return string[] The language links
+	 * @return string[]|false The language links
 	 */
 	protected function getLangLinks( Title $title ) {
 		$apiParams = [
