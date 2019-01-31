@@ -1986,6 +1986,7 @@
 			],
 			"messages": [
 				"quotation-marks",
+				"templatedata-doc-subpage",
 				"visualeditor-changedesc-mwtransclusion",
 				"visualeditor-dialog-template-title",
 				"visualeditor-dialog-transclusion-add-content",

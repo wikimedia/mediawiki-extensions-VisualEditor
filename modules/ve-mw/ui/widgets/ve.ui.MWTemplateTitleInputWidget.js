@@ -48,12 +48,15 @@ OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, mw.widgets.TitleInputWidget )
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	var widget = this,
 		originalResponse,
+		templateDataMessage = mw.message( 'templatedata-doc-subpage' ),
+		templateDataInstalled = templateDataMessage.exists(),
+		templateDocPageFragment = '/' + templateDataMessage.text(),
 		promise = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
 
 	if ( this.showTemplateDescriptions ) {
 		return promise
 			.then( function ( response ) {
-				var xhr, pageId, index, redirIndex,
+				var xhr, pageId, redirIndex,
 					redirects = ( response.query && response.query.redirects ) || {},
 					origPages = ( response.query && response.query.pages ) || {},
 					newPages = [],
@@ -77,9 +80,23 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					}
 				}
 
-				for ( index in newPages ) {
-					titles.push( newPages[ index ].title );
+				// T54448: Filter out matches which end in /doc or as configured on-wiki
+				if ( templateDataInstalled ) {
+					newPages = newPages.filter( function ( page ) {
+						// Can't use String.endsWith() as that's ES6.
+						// page.title.endsWith( templateDocPageFragment )
+						return page.title.slice( 0 - templateDocPageFragment.length ) !== templateDocPageFragment;
+					} );
+				} else {
+					// Even if not filtering /doc, collapse the sparse array
+					newPages = newPages.filter( function ( page ) {
+						return page;
+					} );
 				}
+
+				titles = newPages.map( function ( page ) {
+					return page.title;
+				} );
 
 				ve.setProp( response, 'query', 'pages', newPages );
 				originalResponse = response; // lie!
@@ -105,6 +122,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				// Look for descriptions and cache them
 				for ( index in pages ) {
 					page = pages[ index ];
+
 					if ( page.missing ) {
 						// Remmeber templates that don't exist in the link cache
 						// { title: { missing: true|false }
