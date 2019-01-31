@@ -47,5 +47,5 @@
 	"apihelp-visualeditoredit-param-summary": "ملخص التعديل.",
 	"apihelp-visualeditoredit-param-watch": "أضف الصفحة لقائمة مراقبة المستخدم الحالي.",
 	"apihelp-visualeditoredit-param-wikitext": "نص الويكي للعمل معه.",
-	"apihelp-visualeditoredit-summary": "احفظ صفحة HTML5 لميدياويكي (محولة إلى نص الويكي عبر خدمة Parsoid)."
+	"apihelp-visualeditoredit-summary": "حفظ صفحة HTML5 لميدياويكي (محولة إلى نص الويكي عبر خدمة Parsoid)."
 }
