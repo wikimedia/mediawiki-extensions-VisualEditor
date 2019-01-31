@@ -204,6 +204,11 @@
 			return;
 		}
 
+		if ( ve.init.target.constructor.static.platformType === 'phone' ) {
+			// handled in MobileFrontend for session-identification reasons
+			return;
+		}
+
 		event = {
 			feature: feature,
 			action: data.action,
