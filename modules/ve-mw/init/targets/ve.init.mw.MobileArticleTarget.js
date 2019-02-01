@@ -49,7 +49,8 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	// History
 	{
 		name: 'history',
-		include: [ 'undo' ] },
+		include: [ 'undo' ]
+	},
 	// Style
 	{
 		name: 'style',

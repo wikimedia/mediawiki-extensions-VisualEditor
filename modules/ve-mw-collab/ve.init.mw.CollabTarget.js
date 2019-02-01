@@ -136,10 +136,15 @@ ve.init.mw.targetFactory.register( ve.init.mw.CollabTarget );
 ve.ui.MWExportTool = function VeUiMWExportTool() {
 	// Parent constructor
 	ve.ui.MWExportTool.super.apply( this, arguments );
+
+	if ( OO.ui.isMobile() ) {
+		this.setIcon( 'upload' );
+		this.setTitle( null );
+	}
 };
 OO.inheritClass( ve.ui.MWExportTool, ve.ui.Tool );
 ve.ui.MWExportTool.static.name = 'export';
-ve.ui.MWExportTool.static.displayBothIconAndLabel = true;
+ve.ui.MWExportTool.static.displayBothIconAndLabel = !OO.ui.isMobile();
 ve.ui.MWExportTool.static.group = 'export';
 ve.ui.MWExportTool.static.autoAddToCatchall = false;
 ve.ui.MWExportTool.static.flags = [ 'progressive', 'primary' ];
