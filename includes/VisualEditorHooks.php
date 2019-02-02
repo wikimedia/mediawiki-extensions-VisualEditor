@@ -627,7 +627,7 @@ class VisualEditorHooks {
 	/**
 	 * Convert a namespace index to the local text for display to the user.
 	 *
-	 * @param $nsIndex int
+	 * @param int $nsIndex
 	 * @return string
 	 */
 	private static function convertNs( $nsIndex ) {
