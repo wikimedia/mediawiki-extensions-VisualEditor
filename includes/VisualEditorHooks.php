@@ -56,7 +56,6 @@ class VisualEditorHooks {
 	 *
 	 * @param OutputPage &$output The page view.
 	 * @param Skin &$skin The skin that's going to build the UI.
-	 * @return bool Always true.
 	 */
 	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
 		$output->addModules( [
@@ -79,7 +78,6 @@ class VisualEditorHooks {
 			'wgEditSubmitButtonLabelPublish',
 			$veConfig->get( 'EditSubmitButtonLabelPublish' )
 		);
-		return true;
 	}
 
 	/**
@@ -336,14 +334,13 @@ class VisualEditorHooks {
 	 *
 	 * @param SkinTemplate &$skin The skin template on which the UI is built.
 	 * @param array &$links Navigation links.
-	 * @return bool Always true.
 	 */
 	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
 		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
-			return true;
+			return;
 		}
 
 		$user = $skin->getUser();
@@ -351,7 +348,7 @@ class VisualEditorHooks {
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			$user->getOption( 'visualeditor-tabs' ) === 'prefer-wt'
 		) {
-			return true;
+			return;
 		}
 
 		if (
@@ -394,7 +391,7 @@ class VisualEditorHooks {
 			$user->getOption( 'visualeditor-autodisable' ) ||
 			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
 		) {
-			return true;
+			return;
 		}
 
 		$title = $skin->getRelevantTitle();
@@ -500,7 +497,6 @@ class VisualEditorHooks {
 			}
 		}
 		$links['views'] = $newViews;
-		return true;
 	}
 
 	/**
@@ -509,14 +505,12 @@ class VisualEditorHooks {
 	 *
 	 * @param EditPage $editPage The edit page view.
 	 * @param OutputPage $output The page view.
-	 * @return bool Always true.
 	 */
 	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
 		$request = $output->getRequest();
 		if ( $request->getBool( 'veswitched' ) ) {
 			$output->addHTML( Html::hidden( 'veswitched', '1' ) );
 		}
-		return true;
 	}
 
 	/**
@@ -524,14 +518,12 @@ class VisualEditorHooks {
 	 * Adds 'visualeditor-switched' tag to the edit if requested
 	 *
 	 * @param RecentChange $rc The new RC entry.
-	 * @return bool Always true.
 	 */
 	public static function onRecentChangeSave( RecentChange $rc ) {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getBool( 'veswitched' ) && $rc->getAttribute( 'rc_this_oldid' ) ) {
 			$rc->addTags( 'visualeditor-switched' );
 		}
-		return true;
 	}
 
 	/**
@@ -545,7 +537,6 @@ class VisualEditorHooks {
 	 * @param string $tooltip The default tooltip.
 	 * @param array &$result All link detail arrays.
 	 * @param Language $lang The user interface language.
-	 * @return bool Always true.
 	 */
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
 		$tooltip, &$result, $lang
@@ -554,7 +545,7 @@ class VisualEditorHooks {
 
 		// Exit if we're in parserTests
 		if ( isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ) {
-			return true;
+			return;
 		}
 
 		$user = $skin->getUser();
@@ -565,7 +556,7 @@ class VisualEditorHooks {
 			$user->getOption( 'visualeditor-autodisable' ) ||
 			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
 		) {
-			return true;
+			return;
 		}
 
 		// Exit if we're on a foreign file description page
@@ -574,7 +565,7 @@ class VisualEditorHooks {
 			WikiPage::factory( $title ) instanceof WikiFilePage &&
 			!WikiPage::factory( $title )->isLocal()
 		) {
-			return true;
+			return;
 		}
 
 		$editor = self::getLastEditor( $user, RequestContext::getMain()->getRequest() );
@@ -597,7 +588,7 @@ class VisualEditorHooks {
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			$user->getOption( 'visualeditor-tabs' ) !== 'multi-tab'
 		) {
-			return true;
+			return;
 		}
 
 		// add VE edit section in VE available namespaces
@@ -621,7 +612,6 @@ class VisualEditorHooks {
 				// ... wfArrayInsertBefore?
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -644,7 +634,6 @@ class VisualEditorHooks {
 	 *
 	 * @param User $user The user object
 	 * @param array &$preferences Their preferences object
-	 * @return bool Always true
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
@@ -730,7 +719,6 @@ class VisualEditorHooks {
 		$preferences['visualeditor-findAndReplace-regex'] = $api;
 		$preferences['visualeditor-findAndReplace-matchCase'] = $api;
 		$preferences['visualeditor-findAndReplace-word'] = $api;
-		return true;
 	}
 
 	/**
@@ -843,7 +831,6 @@ class VisualEditorHooks {
 	 * core Special:Tags with the change tags in use by VisualEditor.
 	 *
 	 * @param array &$tags Available change tags.
-	 * @return bool Always true.
 	 */
 	public static function onListDefinedTags( &$tags ) {
 		$tags[] = 'visualeditor';
@@ -851,7 +838,6 @@ class VisualEditorHooks {
 		$tags[] = 'visualeditor-needcheck';
 		$tags[] = 'visualeditor-switched';
 		$tags[] = 'visualeditor-wikitext';
-		return true;
 	}
 
 	/**
@@ -859,7 +845,6 @@ class VisualEditorHooks {
 	 *
 	 * @param array &$vars Global variables object
 	 * @param OutputPage $out The page view.
-	 * @return bool Always true
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$pageLanguage = ApiVisualEditor::getPageLanguage( $out->getTitle() );
@@ -875,15 +860,12 @@ class VisualEditorHooks {
 			'usePageImages' => ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => defined( 'WBC_VERSION' ),
 		];
-
-		return true;
 	}
 
 	/**
 	 * Adds extra variables to the global config
 	 *
 	 * @param array &$vars Global variables object
-	 * @return bool Always true
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
@@ -934,8 +916,6 @@ class VisualEditorHooks {
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
 			'enableBlockNoticeStats' => $coreConfig->get( 'EnableBlockNoticeStats' ),
 		];
-
-		return true;
 	}
 
 	/**
@@ -943,7 +923,6 @@ class VisualEditorHooks {
 	 * been registered by the UniversalLanguageSelector extension or the TemplateData extension.
 	 *
 	 * @param ResourceLoader &$resourceLoader Client-side code and assets to be loaded.
-	 * @return bool Always true.
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
 		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
@@ -989,8 +968,6 @@ class VisualEditorHooks {
 				'targets' => [ 'desktop', 'mobile' ],
 			]
 		] );
-
-		return true;
 	}
 
 	/**
@@ -998,7 +975,6 @@ class VisualEditorHooks {
 	 *
 	 * @param array &$testModules The ResourceLoader test modules array
 	 * @param ResourceLoader &$resourceLoader The ResourceLoader controller
-	 * @return bool Always true
 	 */
 	public static function onResourceLoaderTestModules(
 		array &$testModules,
@@ -1185,8 +1161,6 @@ class VisualEditorHooks {
 			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
 		];
-
-		return true;
 	}
 
 	/**
@@ -1201,12 +1175,9 @@ class VisualEditorHooks {
 	/**
 	 * @param array &$redirectParams Parameters preserved on special page redirects
 	 *   to wiki pages
-	 * @return bool Always true
 	 */
 	public static function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
 		array_push( $redirectParams, 'veaction' );
-
-		return true;
 	}
 
 	/**
@@ -1218,7 +1189,6 @@ class VisualEditorHooks {
 	 * @param User $user The user-specific settings.
 	 * @param WebRequest $request The request.
 	 * @param MediaWiki $mediaWiki Helper class.
-	 * @return bool Always true
 	 */
 	public static function onBeforeInitialize(
 		Title $title, $article, OutputPage $output,
@@ -1227,7 +1197,6 @@ class VisualEditorHooks {
 		if ( $request->getVal( 'veaction' ) ) {
 			$request->setVal( 'redirect', 'no' );
 		}
-		return true;
 	}
 
 	/**
@@ -1246,7 +1215,6 @@ class VisualEditorHooks {
 	 *
 	 * @param User $user The user-specific settings.
 	 * @param bool $autocreated True if the user was auto-created (not a new global user).
-	 * @return bool Always true
 	 */
 	public static function onLocalUserCreated( $user, $autocreated ) {
 		$config = RequestContext::getMain()->getConfig();
@@ -1275,15 +1243,12 @@ class VisualEditorHooks {
 			$user->setOption( 'visualeditor-enable', 1 );
 			$user->saveSettings();
 		}
-
-		return true;
 	}
 
 	/**
 	 * On login, if user has a VEE cookie, set their preference equal to it.
 	 *
 	 * @param User $user The user-specific settings.
-	 * @return bool Always true.
 	 */
 	public static function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
@@ -1303,7 +1268,5 @@ class VisualEditorHooks {
 				}
 			) );
 		}
-
-		return true;
 	}
 }
