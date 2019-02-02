@@ -301,10 +301,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	} );
 	this.captionTarget = ve.init.target.createTargetWidget( {
 		tools: ve.init.target.constructor.static.toolbarGroups,
-		// PHP parser only allows internal links in gallery captions (T187958).
-		// Perhaps that will be changed to something more reasonable, but in the meantime, do this.
-		includeCommands: [ 'undo', 'redo', 'clear', 'link', 'specialCharacter' ],
-		excludeCommands: [],
+		includeCommands: this.constructor.static.includeCommands,
+		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
 		multiline: false
 	} );
