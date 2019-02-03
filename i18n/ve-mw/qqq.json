@@ -28,7 +28,8 @@
 			"Metalhead64",
 			"Tacsipacsi",
 			"Woytecr",
-			"BadDog"
+			"BadDog",
+			"Ans"
 		]
 	},
 	"accesskey-ca-editsource": "{{doc-accesskey}}",
@@ -271,7 +272,7 @@
 	"visualeditor-mweditmodesource-warning": "Warning message show before changing edit mode to source editing. It may allow the user to keep the changes using the message {{msg-mw|Visualeditor-mweditmodesource-warning-switch}} or cancel.",
 	"visualeditor-mweditmodesource-warning-cancel": "Label for the button on the confirmation dialog for switching to source editing to cancel and return to editing.\n{{Identical|Cancel}}",
 	"visualeditor-mweditmodesource-warning-switch": "Label for the button on the confirmation dialog for switching to source editing to continue and switch editors.\n{{Identical|Switch}}",
-	"visualeditor-mweditmodesource-warning-switch-discard": "Label for the button on the confirmation dialog for switching to source editing to continue and switch editors when doing so will throw away your changes.",
+	"visualeditor-mweditmodesource-warning-switch-discard": "Label for the button on the confirmation dialog for switching to visual editing to continue and switch editors when doing so will throw away your changes.",
 	"visualeditor-mweditmodeve-popup-body": "Body text of popup shown after switching to source mode from visual mode",
 	"visualeditor-mweditmodeve-popup-title": "Title of popup shown after switching to source mode from visual mode",
 	"visualeditor-mweditmodeve-progress": "Title of progress bar shown while switching to visual mode.",

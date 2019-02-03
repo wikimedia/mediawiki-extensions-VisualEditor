@@ -353,6 +353,7 @@
 	"visualeditor-parameter-search-unknown": "Neznámé pole",
 	"visualeditor-preference-betatempdisable": "Dočasně zakázat Vizuální editor, dokud je ve verzi „beta“",
 	"visualeditor-preference-core-description": "Povolit Vizuální editor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
+	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-label": "Vizuální editace",
 	"visualeditor-preference-enable": "Povolit Vizuální editor. Bude k dispozici v {{PLURAL:$2|následujícím jmenném prostoru|následujících jmenných prostorech}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Povolí nový režim wikitextu uvnitř Vizuálního editoru. Obsahuje mnoho nástrojů z Vizuálního editoru, má podobný vzhled a umožňuje lepší přepínání mezi nimi.",

@@ -33,7 +33,8 @@
 			"Javiersanp",
 			"MarcoAurelio",
 			"Adjen",
-			"Tiberius1701"
+			"Tiberius1701",
+			"Carlosmg.dg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -92,8 +93,8 @@
 	"visualeditor-dialog-media-info-separator": "·",
 	"visualeditor-dialog-media-info-uploaded": "Subido el: $1",
 	"visualeditor-dialog-media-noresults": "No se encontraron resultados",
-	"visualeditor-dialog-media-page-advanced": "Configuraciones avanzadas",
-	"visualeditor-dialog-media-page-general": "Configuraciones generales",
+	"visualeditor-dialog-media-page-advanced": "Avanzado",
+	"visualeditor-dialog-media-page-general": "General",
 	"visualeditor-dialog-media-position-center": "Centrar",
 	"visualeditor-dialog-media-position-checkbox": "Ajustar texto alrededor de este elemento",
 	"visualeditor-dialog-media-position-checkbox-help": "Puedes hacer que el elemento multimedia aparezca en línea con el texto de la página en lugar de flotar. Raramente debes hacer esto, ya que se rompe el flujo del texto si desactivas esta casilla.",

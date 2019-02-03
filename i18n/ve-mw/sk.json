@@ -7,7 +7,8 @@
 			"TomášPolonec",
 			"Kusavica",
 			"Helix84",
-			"Lexected"
+			"Lexected",
+			"Patriccck"
 		]
 	},
 	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
@@ -22,9 +23,9 @@
 	"visualeditor-ca-createsource": "Vytvoriť zdroj",
 	"visualeditor-ca-editsource": "Upraviť zdroj",
 	"visualeditor-ca-editsource-section": "upraviť zdroj",
-	"visualeditor-ca-ve-create": "VisualEditor",
-	"visualeditor-ca-ve-edit": "VisualEditor",
-	"visualeditor-ca-ve-edit-section": "VisualEditor",
+	"visualeditor-ca-ve-create": "Vizuálny editor",
+	"visualeditor-ca-ve-edit": "Vizuálny editor",
+	"visualeditor-ca-ve-edit-section": "Vizuálny editor",
 	"visualeditor-categories-tool": "Kategórie",
 	"visualeditor-changedesc-mwredirect": "Cieľ presmerovania zmenený z $1 na $2",
 	"visualeditor-changedesc-mwtransclusion": "Zmenené parametre šablóny",
