@@ -77,6 +77,14 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 /**
  * @inheritdoc
  */
+ve.ui.LinearContextItem.prototype.renderDescription = function () {
+	// No "Generated from" prefix in mobile context
+	this.$description.text( ve.ce.MWTransclusionNode.static.getDescription( this.model ) );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 	var surfaceModel = this.context.getSurface().getModel(),
 		selection = surfaceModel.getSelection();
