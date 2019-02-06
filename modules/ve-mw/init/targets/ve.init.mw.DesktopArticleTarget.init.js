@@ -29,12 +29,6 @@
 		},
 		active = false,
 		targetLoaded = false,
-		progressStep = 0,
-		progressSteps = [
-			[ 30, 3000 ],
-			[ 70, 2000 ],
-			[ 100, 1000 ]
-		],
 		plugins = [];
 
 	function showLoading( mode ) {
@@ -48,13 +42,10 @@
 
 		$( 'html' ).addClass( 've-activated ve-loading' );
 		if ( !init.$loading ) {
-			init.$loading = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-loading-overlay' ).append(
-				// Can't use OO.ui.ProgressBarWidget yet
-				$( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-progress' ).append(
-					// Stylesheets might not have processed yet, so manually set starting width to 0
-					$( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-progress-bar' ).css( 'width', 0 )
-				)
-			);
+			init.progressBar = new mw.libs.ve.ProgressBarWidget();
+			init.$loading = $( '<div>' )
+				.addClass( 've-init-mw-desktopArticleTarget-loading-overlay' )
+				.append( init.progressBar.$element );
 		}
 		// eslint-disable-next-line no-use-before-define
 		$( document ).on( 'keydown', onDocumentKeyDown );
@@ -75,25 +66,12 @@
 		$content.prepend( init.$loading );
 	}
 
-	function setLoadingProgress( target, duration ) {
-		var $bar = init.$loading.find( '.ve-init-mw-desktopArticleTarget-progress-bar' ).stop();
-		$bar.css( 'transition', 'width ' + duration + 'ms ease-in' );
-		setTimeout( function () {
-			$bar.css( 'width', target + '%' );
-		} );
-	}
-
 	function incrementLoadingProgress() {
-		var step = progressSteps[ progressStep ];
-		if ( step ) {
-			setLoadingProgress( step[ 0 ], step[ 1 ] );
-			progressStep++;
-		}
+		init.progressBar.incrementLoadingProgress();
 	}
 
 	function clearLoading() {
-		progressStep = 0;
-		setLoadingProgress( 0, 0 );
+		init.progressBar.clearLoading();
 		isLoading = false;
 		// eslint-disable-next-line no-use-before-define
 		$( document ).off( 'keydown', onDocumentKeyDown );
