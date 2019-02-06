@@ -77,7 +77,7 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 /**
  * @inheritdoc
  */
-ve.ui.LinearContextItem.prototype.renderDescription = function () {
+ve.ui.MWTransclusionContextItem.prototype.renderDescription = function () {
 	// No "Generated from" prefix in mobile context
 	this.$description.text( ve.ce.MWTransclusionNode.static.getDescription( this.model ) );
 };
