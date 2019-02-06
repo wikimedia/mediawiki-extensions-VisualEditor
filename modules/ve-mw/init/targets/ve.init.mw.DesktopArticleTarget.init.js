@@ -68,6 +68,8 @@
 			bottom = Math.min( clientTop + $content[ 0 ].offsetHeight, windowHeight );
 			middle = ( bottom - top ) / 2;
 			init.$loading.css( 'top', middle + Math.max( -clientTop, 0 ) );
+		} else {
+			init.$loading.css( 'top', '' );
 		}
 
 		$content.prepend( init.$loading );
