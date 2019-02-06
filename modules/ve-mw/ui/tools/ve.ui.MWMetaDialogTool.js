@@ -13,7 +13,7 @@
  * @extends ve.ui.WindowTool
  * @constructor
  */
-ve.ui.MWVeOnlyDialogTool = function VeUiMWMetaDialogTool() {
+ve.ui.MWVeOnlyDialogTool = function VeUiMWVeOnlyDialogTool() {
 	ve.ui.MWVeOnlyDialogTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.MWVeOnlyDialogTool, ve.ui.WindowTool );
