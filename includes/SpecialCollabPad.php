@@ -37,7 +37,7 @@ class SpecialCollabPad extends SpecialPage {
 	 */
 	public function userCanExecute( User $user ) {
 		global $wgVisualEditorRebaserURL;
-		return !!$wgVisualEditorRebaserURL && parent::userCanExecute( $user );
+		return (bool)$wgVisualEditorRebaserURL && parent::userCanExecute( $user );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class SpecialCollabPad extends SpecialPage {
 	 */
 	public function isListed() {
 		global $wgVisualEditorRebaserURL;
-		return !!$wgVisualEditorRebaserURL;
+		return (bool)$wgVisualEditorRebaserURL;
 	}
 
 	/**
