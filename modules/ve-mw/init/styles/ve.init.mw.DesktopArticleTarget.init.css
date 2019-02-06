@@ -62,8 +62,6 @@
 	opacity: 1;
 }
 
-/* Progress bar mimicking OOUI */
-
 .ve-activated #content {
 	position: relative;
 }
@@ -76,17 +74,6 @@
 	right: 0;
 	z-index: 1;
 	margin-top: -0.5em;
-}
-
-.ve-init-mw-desktopArticleTarget-progress {
-	height: 1em;
-	overflow: hidden;
-	margin: 0 25%;
-}
-
-.ve-init-mw-desktopArticleTarget-progress-bar {
-	height: 1em;
-	width: 0;
 }
 
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {

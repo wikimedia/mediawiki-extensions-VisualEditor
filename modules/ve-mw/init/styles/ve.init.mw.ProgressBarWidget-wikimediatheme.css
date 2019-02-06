@@ -1,0 +1,19 @@
+/*!
+ * VisualEditor progress bar widget WikimediaUI theme styles.
+ *
+ * @copyright 2011-2019 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-init-mw-progressBarWidget {
+	height: 0.75em;
+	border: 1px solid #36c;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 0.1em 0 0 rgba( 0, 0, 0, 0.15 );
+}
+
+.ve-init-mw-progressBarWidget-bar {
+	height: 0.75em;
+	background: #36c;
+}

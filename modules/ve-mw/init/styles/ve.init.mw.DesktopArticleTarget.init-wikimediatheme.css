@@ -5,19 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-init-mw-desktopArticleTarget-progress {
-	height: 0.75em;
-	border: 1px solid #36c;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 0.1em 0 0 rgba( 0, 0, 0, 0.15 );
-}
-
-.ve-init-mw-desktopArticleTarget-progress-bar {
-	height: 0.75em;
-	background: #36c;
-}
-
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
 	border-bottom: 1px solid #c8ccd1;
 	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
