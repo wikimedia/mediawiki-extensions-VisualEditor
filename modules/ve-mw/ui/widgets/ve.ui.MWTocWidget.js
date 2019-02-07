@@ -101,15 +101,18 @@ ve.ui.MWTocWidget.prototype.onMetaListRemove = function ( metaItem ) {
 ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
 	var i = 0,
 		items = this.metaList.getItemsInGroup( 'mwTOC' ),
-		len = items.length;
+		len = items.length,
+		property;
 	if ( len > 0 ) {
 		for ( ; i < len; i++ ) {
-			if ( items[ i ] instanceof ve.dm.MWTOCForceMetaItem ) {
-				this.mwTOCForce = true;
-			}
-			// Needs testing
-			if ( items[ i ] instanceof ve.dm.MWTOCDisableMetaItem ) {
-				this.mwTOCDisable = true;
+			if ( items[ i ] instanceof ve.dm.MWTOCMetaItem ) {
+				property = items[ i ].getAttribute( 'property' );
+				if ( property === 'mw:PageProp/forcetoc' ) {
+					this.mwTOCForce = true;
+				}
+				if ( property === 'mw:PageProp/notoc' ) {
+					this.mwTOCDisable = true;
+				}
 			}
 		}
 		this.updateVisibility();
