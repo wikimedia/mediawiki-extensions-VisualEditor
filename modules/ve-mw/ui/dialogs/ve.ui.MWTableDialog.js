@@ -90,12 +90,13 @@ ve.ui.MWTableDialog.prototype.getSetupProcess = function ( data ) {
 				wikitable = !!tableNode.getAttribute( 'wikitable' ),
 				sortable = !!tableNode.getAttribute( 'sortable' ),
 				collapsible = !!tableNode.getAttribute( 'collapsible' ),
-				collapsed = !!tableNode.getAttribute( 'collapsed' );
+				collapsed = !!tableNode.getAttribute( 'collapsed' ),
+				isReadOnly = this.isReadOnly();
 
-			this.wikitableToggle.setValue( wikitable );
-			this.sortableToggle.setValue( sortable );
-			this.collapsibleToggle.setValue( collapsible );
-			this.collapsedToggle.setValue( collapsed );
+			this.wikitableToggle.setValue( wikitable ).setDisabled( isReadOnly );
+			this.sortableToggle.setValue( sortable ).setDisabled( isReadOnly );
+			this.collapsibleToggle.setValue( collapsible ).setDisabled( isReadOnly );
+			this.collapsedToggle.setValue( collapsed ).setDisabled( isReadOnly );
 
 			ve.extendObject( this.initialValues, {
 				wikitable: wikitable,

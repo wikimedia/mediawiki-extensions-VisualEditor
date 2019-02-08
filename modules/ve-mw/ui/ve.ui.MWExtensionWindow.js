@@ -108,6 +108,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 
 		dir = this.constructor.static.dir || data.dir;
 		this.input.setDir( dir );
+		this.input.setReadOnly( this.isReadOnly() );
 
 		this.actions.setAbilities( { done: false } );
 		this.input.connect( this, { change: 'onChangeHandler' } );

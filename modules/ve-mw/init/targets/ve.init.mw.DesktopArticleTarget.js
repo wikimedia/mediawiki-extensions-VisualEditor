@@ -455,7 +455,7 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 			{ type: 'paragraph' }, { type: '/paragraph' },
 			{ type: 'internalList' }, { type: '/internalList' }
 		] ) );
-		surface.setDisabled( true );
+		surface.setReadOnly( true );
 		// setSurface creates dummy toolbar
 		this.setSurface( surface );
 		// Disconnect the tool factory listeners so the toolbar

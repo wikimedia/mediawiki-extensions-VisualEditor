@@ -393,7 +393,8 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				mwData = this.selectedNode && this.selectedNode.getAttribute( 'mw' ),
 				attributes = mwData && mwData.attrs,
 				captionNode = this.selectedNode && this.selectedNode.getCaptionNode(),
-				imageNodes = this.selectedNode && this.selectedNode.getImageNodes();
+				imageNodes = this.selectedNode && this.selectedNode.getImageNodes(),
+				isReadOnly = this.isReadOnly();
 
 			this.anyItemModified = false;
 
@@ -454,12 +455,22 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.stylesInput.setValue( styles );
 			// Caption
 			this.captionTarget.setDocument( this.captionDocument );
+			this.captionTarget.setReadOnly( isReadOnly );
 			this.captionTarget.initialize();
 
 			if ( mwData ) {
 				this.originalMwDataNormalized = ve.copy( mwData );
 				this.updateMwData( this.originalMwDataNormalized );
 			}
+
+			this.highlightedAltTextInput.setReadOnly( isReadOnly );
+			this.modeDropdown.setDisabled( isReadOnly );
+			this.widthsInput.setReadOnly( isReadOnly );
+			this.heightsInput.setReadOnly( isReadOnly );
+			this.perrowInput.setReadOnly( isReadOnly );
+			this.showFilenameCheckbox.setDisabled( isReadOnly );
+			this.classesInput.setReadOnly( isReadOnly );
+			this.stylesInput.setReadOnly( isReadOnly );
 
 			// Disable fields depending on mode
 			this.onModeDropdownChange();
@@ -770,6 +781,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	this.$highlightedImage
 		.css( 'background-image', 'url(' + item.thumbUrl + ')' );
 	this.highlightedCaptionTarget.setDocument( item.captionDocument );
+	this.highlightedCaptionTarget.setReadOnly( this.isReadOnly() );
 	this.highlightedCaptionTarget.initialize();
 	this.highlightedAltTextInput.setValue( item.altText );
 };

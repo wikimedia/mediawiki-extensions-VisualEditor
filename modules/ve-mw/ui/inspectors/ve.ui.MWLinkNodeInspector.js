@@ -79,6 +79,7 @@ ve.ui.MWLinkNodeInspector.prototype.getSetupProcess = function ( data ) {
 			this.targetInput.setValue(
 				this.selectedNode ? this.selectedNode.getAttribute( 'href' ) : ''
 			);
+			this.targetInput.setReadOnly( this.isReadOnly() );
 		}, this );
 };
 

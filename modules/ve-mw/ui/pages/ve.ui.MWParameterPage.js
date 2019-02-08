@@ -16,6 +16,7 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
+ * @cfg {boolean} [readOnly] Parameter is read-only
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
 	var paramName = parameter.getName();
@@ -47,6 +48,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.valueInput = this.createValueInput()
 		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
+
+	if ( config.readOnly && this.valueInput.setReadOnly ) {
+		this.valueInput.setReadOnly( true );
+	}
 
 	this.statusIndicator = new OO.ui.IndicatorWidget( {
 		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
@@ -145,7 +150,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	this.$actions.append( this.infoButton.$element );
 
-	if ( !this.parameter.isRequired() ) {
+	if ( !this.parameter.isRequired() && !config.readOnly ) {
 		this.removeButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			icon: 'trash',
@@ -188,7 +193,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
-		.append( this.$info, this.$field, this.$actions, this.$more );
+		.append( this.$info, this.$field, this.$actions );
+	if ( !config.readOnly ) {
+		this.$element.append( this.$more );
+	}
 };
 
 /* Inheritance */

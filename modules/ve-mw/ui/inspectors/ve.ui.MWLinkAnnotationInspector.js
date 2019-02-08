@@ -238,10 +238,13 @@ ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
 ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var isReadOnly = this.isReadOnly();
 			this.linkTypeIndex.setTabPanel(
 				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
+			this.internalAnnotationInput.setReadOnly( isReadOnly );
+			this.externalAnnotationInput.setReadOnly( isReadOnly );
 		}, this );
 };
 

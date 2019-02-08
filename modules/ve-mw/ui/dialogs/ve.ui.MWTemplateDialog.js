@@ -173,7 +173,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	var page;
 
 	if ( param.getName() ) {
-		page = new ve.ui.MWParameterPage( param, param.getId(), { $overlay: this.$overlay } );
+		page = new ve.ui.MWParameterPage( param, param.getId(), { $overlay: this.$overlay, readOnly: this.isReadOnly() } );
 	} else {
 		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {
 			$overlay: this.$overlay,
@@ -349,15 +349,15 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 	var blankRequired = [],
 		deferred = $.Deferred();
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.bookletLayout.pages, function () {
-		if ( !( this instanceof ve.ui.MWParameterPage ) ) {
-			return true;
+
+	this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+		if ( !( page instanceof ve.ui.MWParameterPage ) ) {
+			return;
 		}
-		if ( this.parameter.isRequired() && !this.valueInput.getValue() ) {
+		if ( page.parameter.isRequired() && !page.valueInput.getValue() ) {
 			blankRequired.push( mw.msg(
 				'quotation-marks',
-				this.parameter.template.getSpec().getParameterLabel( this.parameter.getName() )
+				page.parameter.template.getSpec().getParameterLabel( page.parameter.getName() )
 			) );
 		}
 	} );

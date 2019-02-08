@@ -208,6 +208,23 @@ ve.ui.MWAceEditorWidget.prototype.setMinRows = function ( minRows ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWAceEditorWidget.prototype.setReadOnly = function ( readOnly ) {
+	var widget = this;
+
+	// Parent method
+	ve.ui.MWAceEditorWidget.super.prototype.setReadOnly.call( this, readOnly );
+
+	this.loadingPromise.done( function () {
+		widget.editor.setReadOnly( widget.isReadOnly() );
+	} );
+
+	this.$element.toggleClass( 've-ui-mwAceEditorWidget-readOnly', !!this.isReadOnly() );
+	return this;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWAceEditorWidget.prototype.getRange = function () {
 	var selection, range, lines, start, end, isBackwards;
 

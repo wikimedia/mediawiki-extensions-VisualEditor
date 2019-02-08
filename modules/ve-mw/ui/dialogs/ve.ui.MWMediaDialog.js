@@ -93,7 +93,7 @@ ve.ui.MWMediaDialog.static.actions = [
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		flags: [ 'safe', 'back' ],
-		modes: [ 'edit', 'insert', 'select', 'search', 'upload-upload' ]
+		modes: [ 'readonly', 'edit', 'insert', 'select', 'search', 'upload-upload' ]
 	},
 	{
 		action: 'back',
@@ -1104,7 +1104,8 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				dialog = this,
 				pageTitle = mw.config.get( 'wgTitle' ),
 				namespace = mw.config.get( 'wgNamespaceNumber' ),
-				namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
+				namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages,
+				isReadOnly = this.isReadOnly();
 
 			// Read the page title
 			if ( namespacesWithSubpages[ namespace ] ) {
@@ -1140,6 +1141,14 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			// Set initial values
 			this.search.getQuery().setValue( this.pageTitle );
 			this.resetCaption();
+
+			this.altTextInput.setReadOnly( isReadOnly );
+			this.positionCheckbox.setDisabled( isReadOnly );
+			// TODO: This widget is not readable when disabled
+			this.positionSelect.setDisabled( isReadOnly );
+			this.typeSelectDropdown.setDisabled( isReadOnly );
+			this.borderCheckbox.setDisabled( isReadOnly );
+			this.sizeWidget.setDisabled( isReadOnly );
 
 			// Pass `true` to avoid focussing. If we focus the image caption widget during dialog
 			// opening, and it wants to display a context menu, it will be mispositioned.
@@ -1304,6 +1313,7 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 
 	// Set document
 	this.captionTarget.setDocument( captionDocument );
+	this.captionTarget.setReadOnly( this.isReadOnly() );
 	this.captionTarget.initialize();
 };
 
