@@ -985,9 +985,6 @@
 
 		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
 
-		// Not on protected pages, or if the user doesn't have permission to edit
-		( mw.config.get( 'wgIsProbablyEditable' ) || mw.config.get( 'wgRelevantPageIsProbablyEditable' ) ) &&
-
 		// Not on pages which are outputs of the Translate extensions
 		// TODO: Allow the Translate extension to do this itself (T174180)
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
@@ -1075,7 +1072,7 @@
 			$( '#content' ).length &&
 			$( '#mw-content-text' ).length &&
 			// A link to open the editor is technically not necessary if it's going to open itself
-			( isEditPage || $( '#ca-edit' ).length );
+			( isEditPage || $( '#ca-edit, #ca-viewsource' ).length );
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
