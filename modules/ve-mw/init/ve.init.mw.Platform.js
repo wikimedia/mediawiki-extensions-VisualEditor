@@ -236,7 +236,8 @@ ve.init.mw.Platform.prototype.getUserLanguages = mw.language.getFallbackLanguage
  */
 ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( function () {
-		var characters = {},
+		var specialCharacterGroups = require( 'mediawiki.language.specialCharacters' ),
+			characters = {},
 			otherGroupName = mw.msg( 'visualeditor-special-characters-group-other' ),
 			otherMsg = mw.message( 'visualeditor-quick-access-characters.json' ).plain(),
 			// TODO: This information should be available upstream in mw.language.specialCharacters
@@ -255,7 +256,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 		}
 
 		// eslint-disable-next-line jquery/no-each-util
-		$.each( mw.language.specialCharacters, function ( groupName, groupCharacters ) {
+		$.each( specialCharacterGroups, function ( groupName, groupCharacters ) {
 			groupObject = {}; // button label => character data to insert
 			// eslint-disable-next-line jquery/no-each-util
 			$.each( groupCharacters, function ( charKey, charVal ) {
