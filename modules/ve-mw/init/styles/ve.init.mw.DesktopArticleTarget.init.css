@@ -54,6 +54,17 @@
 	opacity: 0.5;
 }
 
+.ve-activated #firstHeading {
+	/* Override the styles above to allow the heading to be selected, because people enjoy
+	   copy-pasting it. Overriding pointer-events is surprisingly not required, and not desirable,
+	   because of section 0 edit links and other stuff inserted inside this element by gadgets,
+	   which should remain inactive. */
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
 .ve-activated #catlinks {
 	cursor: pointer;
 }
