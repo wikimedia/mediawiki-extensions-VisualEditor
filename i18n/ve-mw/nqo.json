@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Youssoufkadialy"
+			"Youssoufkadialy",
+			"Lanciné.kounfantoh.fofana"
 		]
 	},
-	"visualeditor-ca-editsource-section": "ߥߞߌߞߐߘ ߛߎ߲ ߡߊߝߊ߬ߟߋ߲߬"
+	"tooltip-ca-ve-edit": "ߞߐߜߍ ߣߌ߲߬ ߡߊߦߟߍ߬ߡߊ߲߬",
+	"visualeditor-ca-editsource": "ߊ߬ ߛߎ߲ ߡߊߦߟߍ߬ߡߊ߲߬",
+	"visualeditor-ca-editsource-section": "ߥߞߌߞߐߘ ߛߎ߲ ߡߊߝߊ߬ߟߋ߲߬",
+	"visualeditor-descriptionpagelink": "ߊ߬ ߦߋߢߊ ߡߊߦߟߍ߬ߡߊ߲߬"
 }
