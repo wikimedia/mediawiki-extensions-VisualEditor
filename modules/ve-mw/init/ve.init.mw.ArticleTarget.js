@@ -2498,28 +2498,30 @@ ve.init.mw.ArticleTarget.prototype.updateRedirectInterface = function ( $sub, $m
 /**
  * Render a list of categories
  *
+ * Duplicate items are not shown.
+ *
  * @param {ve.dm.MetaItem[]} categoryItems Array of category metaitems to display
  * @return {jQuery.Promise} A promise which will be resolved with the rendered categories
  */
 ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems ) {
-	var $normal, $hidden,
+	var $normal, $hidden, categoriesNormal, categoriesHidden,
 		promises = [],
-		categories = { hidden: [], normal: [] };
+		categories = { hidden: {}, normal: {} };
 	categoryItems.forEach( function ( categoryItem, index ) {
 		var attributes = ve.cloneObject( ve.getProp( categoryItem, 'element', 'attributes' ) );
 		attributes.index = index;
 		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( function ( result ) {
-			if ( result.hidden ) {
-				categories.hidden.push( attributes );
-			} else {
-				categories.normal.push( attributes );
+			var group = result.hidden ? categories.hidden : categories.normal;
+			// In case of duplicates, first entry wins (like in MediaWiki)
+			if ( !group[ attributes.category ] || group[ attributes.category ].index > attributes.index ) {
+				group[ attributes.category ] = attributes;
 			}
 		} ) );
 	} );
 	return $.when.apply( $, promises ).then( function () {
 		var $output = $( '<div>' ).addClass( 'catlinks' );
 		function renderPageLink( page ) {
-			var title = mw.Title.newFromText( page.category || page );
+			var title = mw.Title.newFromText( page );
 			return $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() );
 		}
 		function renderPageLinks( pages ) {
@@ -2529,21 +2531,23 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			}
 			return $list;
 		}
-		function categorySort( a, b ) {
-			return a.index - b.index;
+		function categorySort( group, a, b ) {
+			return group[ a ].index - group[ b ].index;
 		}
-		if ( categories.normal.length ) {
-			categories.normal.sort( categorySort );
+		categoriesNormal = Object.keys( categories.normal );
+		if ( categoriesNormal.length ) {
+			categoriesNormal.sort( categorySort.bind( null, categories.normal ) );
 			$normal = $( '<div>' ).addClass( 'mw-normal-catlinks' );
 			$normal.append(
-				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categories.normal.length ) ),
+				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categoriesNormal.length ) ),
 				ve.msg( 'colon-separator' ),
-				renderPageLinks( categories.normal )
+				renderPageLinks( categoriesNormal )
 			);
 			$output.append( $normal );
 		}
-		if ( categories.hidden.length ) {
-			categories.hidden.sort( categorySort );
+		categoriesHidden = Object.keys( categories.hidden );
+		if ( categoriesHidden.length ) {
+			categoriesHidden.sort( categorySort.bind( null, categories.hidden ) );
 			$hidden = $( '<div>' ).addClass( 'mw-hidden-catlinks' );
 			if ( mw.user.options.get( 'showhiddencats' ) ) {
 				$hidden.addClass( 'mw-hidden-cats-user-shown' );
@@ -2553,9 +2557,9 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 				$hidden.addClass( 'mw-hidden-cats-hidden' );
 			}
 			$hidden.append(
-				ve.msg( 'hidden-categories', categories.hidden.length ),
+				ve.msg( 'hidden-categories', categoriesHidden.length ),
 				ve.msg( 'colon-separator' ),
-				renderPageLinks( categories.hidden )
+				renderPageLinks( categoriesHidden )
 			);
 			$output.append( $hidden );
 		}
