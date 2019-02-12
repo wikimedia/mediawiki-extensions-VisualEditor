@@ -274,7 +274,7 @@ ve.ui.MWBackTool = function VeUiMwBackTool() {
 OO.inheritClass( ve.ui.MWBackTool, ve.ui.Tool );
 ve.ui.MWBackTool.static.name = 'back';
 ve.ui.MWBackTool.static.group = 'navigation';
-ve.ui.MWBackTool.static.icon = 'previous';
+ve.ui.MWBackTool.static.icon = 'close';
 ve.ui.MWBackTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
 ve.ui.MWBackTool.static.commandName = 'back';
