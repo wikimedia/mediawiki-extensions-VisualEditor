@@ -182,8 +182,8 @@
 	function parseSection( section ) {
 		var parsedSection = section;
 		// Section must be a number, 'new' or 'T-' prefixed
-		if ( section !== 'new' && section.indexOf( 'T-' ) !== 0 ) {
-			parsedSection = +section;
+		if ( section !== 'new' ) {
+			parsedSection = section.indexOf( 'T-' ) === 0 ? +section.slice( 2 ) : +section;
 			if ( isNaN( parsedSection ) ) {
 				parsedSection = null;
 			}
@@ -951,19 +951,11 @@
 				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
 			}
 
-			if ( mode === 'visual' ) {
-				// Get section based on heading count (may differ from wikitext section count)
-				targetPromise = getTarget( mode ).then( function ( target ) {
-					target.saveEditSection( $( e.target ).closest( 'h1, h2, h3, h4, h5, h6' ).get( 0 ) );
-					return target;
-				} );
-			} else {
-				// Use section from URL
-				if ( section === undefined ) {
-					section = parseSection( uri.query.section );
-				}
-				targetPromise = getTarget( mode, section );
+			// Use section from URL
+			if ( section === undefined ) {
+				section = parseSection( uri.query.section );
 			}
+			targetPromise = getTarget( mode, section );
 			activateTarget( mode, section, targetPromise );
 		}
 	};

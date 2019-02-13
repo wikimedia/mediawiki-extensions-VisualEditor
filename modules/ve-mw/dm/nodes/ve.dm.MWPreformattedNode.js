@@ -29,7 +29,7 @@ OO.inheritClass( ve.dm.MWPreformattedNode, ve.dm.PreformattedNode );
 ve.dm.MWPreformattedNode.static.name = 'mwPreformatted';
 
 // Indent-pre in wikitext only works in some contexts, it's impossible e.g. in list items
-ve.dm.MWPreformattedNode.static.suggestedParentNodeTypes = [ 'document', 'tableCell' ];
+ve.dm.MWPreformattedNode.static.suggestedParentNodeTypes = [ 'document', 'tableCell', 'div', 'section' ];
 
 /* Registration */
 

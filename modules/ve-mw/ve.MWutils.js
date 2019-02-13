@@ -34,10 +34,19 @@ ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscores ) {
  * Unwrap Parsoid sections
  *
  * @param {HTMLElement} element Parent element, e.g. document body
+ * @param {number} [keepSection] Section to keep
  */
-ve.unwrapParsoidSections = function ( element ) {
+ve.unwrapParsoidSections = function ( element, keepSection ) {
 	Array.prototype.forEach.call( element.querySelectorAll( 'section[data-mw-section-id]' ), function ( section ) {
-		var parent = section.parentNode;
+		var parent = section.parentNode,
+			sectionId = section.getAttribute( 'data-mw-section-id' );
+		// Copy section ID to first child (should be a heading)
+		if ( sectionId > 0 ) {
+			section.firstChild.setAttribute( 'data-mw-section-id', sectionId );
+		}
+		if ( keepSection !== undefined && +sectionId === keepSection ) {
+			return;
+		}
 		while ( section.firstChild ) {
 			parent.insertBefore( section.firstChild, section );
 		}

@@ -50,3 +50,13 @@
 	color: #999;
 	float: none;
 }
+
+/* Reset section node styles */
+.ve-init-mw-target .ve-ce-sectionNode:before,
+.ve-init-mw-target .ve-ce-sectionNode:after {
+	content: normal;
+}
+
+.ve-init-mw-target .ve-ce-surface-enabled .ve-ce-sectionNode:not( .ve-ce-activeNode-active ) {
+	opacity: 1;
+}

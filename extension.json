@@ -52,6 +52,7 @@
 		"VisualEditorEnableWikitextBetaFeature": false,
 		"VisualEditorEnableDiffPage": false,
 		"VisualEditorEnableDiffPageBetaFeature": false,
+		"VisualEditorEnableVisualSectionEditing": false,
 		"VisualEditorUseSingleEditTab": false,
 		"VisualEditorSingleEditTabSwitchTime": 20160101000000,
 		"VisualEditorTabPosition": "before",

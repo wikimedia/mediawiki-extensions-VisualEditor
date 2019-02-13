@@ -899,6 +899,7 @@ class VisualEditorHooks {
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
+			'enableVisualSectionEditing' => $veConfig->get( 'VisualEditorEnableVisualSectionEditing' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
 			'enableWikitext' => (
