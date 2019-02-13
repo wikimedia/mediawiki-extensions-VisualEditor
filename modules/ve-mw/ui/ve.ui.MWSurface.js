@@ -23,7 +23,7 @@ ve.ui.MWSurface = function VeUiMWSurface() {
 	this.onDocumentViewLangChange();
 	this.$element.addClass( 've-ui-mwSurface' );
 	// T164790
-	this.getView().$documentNode.addClass( 'mw-parser-output' );
+	this.getView().$attachedRootNode.addClass( 'mw-parser-output' );
 };
 
 /* Inheritance */
@@ -37,7 +37,7 @@ OO.inheritClass( ve.ui.MWSurface, ve.ui.Surface );
  */
 ve.ui.MWSurface.prototype.onDocumentViewLangChange = function () {
 	// Add appropriately mw-content-ltr or mw-content-rtl class
-	this.getView().$documentNode
+	this.getView().$attachedRootNode
 		.removeClass( 'mw-content-ltr mw-content-rtl' )
 		.addClass( 'mw-content-' + this.getView().getDocument().getDir() );
 };

@@ -75,7 +75,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		// setTimeout: postpone until after the default copy action
 		setTimeout( function () {
 			// Change focus back
-			view.$documentNode[ 0 ].focus();
+			view.$attachedRootNode[ 0 ].focus();
 			view.showSelectionState( originalSelection );
 			// Restore scroll position
 			view.$window.scrollTop( scrollTop );

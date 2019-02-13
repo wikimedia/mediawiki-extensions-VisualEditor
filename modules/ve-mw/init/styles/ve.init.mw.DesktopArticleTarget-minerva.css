@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-rootNode,
+.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-attachedRootNode,
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 	padding: 0;
 	/* Provide clickable gutter */
