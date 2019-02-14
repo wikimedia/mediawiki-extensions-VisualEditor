@@ -19,9 +19,9 @@
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|تحرير مرئي]]",
-	"tag-visualeditor-description": "أجر التعديل باستخدام [[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
+	"tag-visualeditor-description": "تم التعديل باستخدام [[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي: تحقق]]",
-	"tag-visualeditor-needcheck-description": "تعديل تمّ [[{{MediaWiki:visualeditor-descriptionpagelink}}|بالمحرر المرئي]] حيث اكتشف النظام تغييرات ربما تكون غير مقصودة على نص الويكي.",
+	"tag-visualeditor-needcheck-description": "تم التعديل [[{{MediaWiki:visualeditor-descriptionpagelink}}|بالمحرر المرئي]] حيث اكتشف النظام تغييرات ربما تكون غير مقصودة على نص الويكي.",
 	"tag-visualeditor-wikitext": "تعديل مصدر 2017",
 	"tag-visualeditor-wikitext-description": "التعديل تم باستخدام محرر نص الويكي 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي: تبديل]]",
