@@ -155,10 +155,15 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
  * @param {Object} [dimensions] Dimension object containing width & height
  */
 ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
-	var
+	var isError = this.model.getAttribute( 'isError' ),
 		type = this.model.getAttribute( 'type' ),
 		borderImage = this.model.getAttribute( 'borderImage' ),
 		hasBorderOrFrame = ( type !== 'none' && type !== 'frameless' ) || borderImage;
+
+	if ( isError ) {
+		this.$element.css( { width: '', height: '' } );
+		return;
+	}
 
 	if ( !dimensions ) {
 		dimensions = {
