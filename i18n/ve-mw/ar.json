@@ -25,7 +25,8 @@
 			"Moud hosny",
 			"Aboulouei1",
 			"ديفيد",
-			"محمد عصام"
+			"محمد عصام",
+			"علاء"
 		]
 	},
 	"collabpad-doctitle": "كولاب باد: $1",
@@ -47,7 +48,7 @@
 	"visualeditor-backbutton-tooltip": "رجوع",
 	"visualeditor-beta-label": "بيتا",
 	"visualeditor-beta-warning": "إذا واجهت أي مشاكل تقنية أثناء التحرير، يرجى الإبلاغ عنها.",
-	"visualeditor-browserwarning": "المحرر المرئي التی كنت تستخدم لا يدعم رسميا المتصفح الذي تستخدمه.",
+	"visualeditor-browserwarning": "أنت تستخدم متصفحًا غير معتمدٍ رسميًا بواسطة هذا المحرر.",
 	"visualeditor-ca-createlocaldescriptionsource": "إضافة مصدر وصف محلي",
 	"visualeditor-ca-createsource": "أنشئ المصدر",
 	"visualeditor-ca-editlocaldescriptionsource": "تعديل مصدر الوصف المحلي",

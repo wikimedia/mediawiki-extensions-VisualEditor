@@ -271,11 +271,17 @@
 	"visualeditor-mwgallerydialog-title": "Galeriya",
 	"visualeditor-mwgallerydialog-widths-field-label": "Herayeya resimi",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Hesıbyaye herayey:$1 px",
+	"visualeditor-mwlanguagevariant-name": "Nameyê zıwani: $1",
+	"visualeditor-mwlanguagevariant-unknown": "Diyalektê zıwani",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Kodê zıwani",
 	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<Invalid>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Zıwan",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Çıme",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "İstiqamet",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Metın",
+	"visualeditor-mwlanguagevariantcontextitem-title-filter": "Parzûnê varyanti",
+	"visualeditor-mwlanguagevariantcontextitem-title-name": "Nameyê zıwani",
+	"visualeditor-mwlanguagevariantcontextitem-title-unknown": "Diyalektê zıwani",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Zıwani",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Kodê zıwani",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Zerrek",
@@ -346,5 +352,6 @@
 	"visualeditor-version-label": "Versiyon",
 	"visualeditor-wikitext-progress": "Wikimetin açarnayış",
 	"visualeditor-wikitext-warning": "Şımayê vurnayışê asayi karnenê.  - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikimetin]] nêxebtèno tiya dı. Çı weğt iıma wazenê kı ravêrê vurnayış çımi,  corra ikonê kıliti bıploğnê.",
-	"visualeditor-wikitext-warning-title": "Timaryayışa wiki metini vineyé"
+	"visualeditor-wikitext-warning-title": "Timaryayışa wiki metini vineyé",
+	"visualeditor-wikitextconvert-convert": "raçarne be wikimetın"
 }
