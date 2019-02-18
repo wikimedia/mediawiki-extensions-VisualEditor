@@ -4,13 +4,16 @@
 			"Supasate",
 			"Taweetham",
 			"Horus",
-			"Pilarbini"
+			"Pilarbini",
+			"Aefgh39622"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
 	"tag-visualeditor-description": "แก้ไขโดยใช้ [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: ตรวจสอบ]]",
 	"tag-visualeditor-needcheck-description": "การแก้ไขโดยใช้ [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] ระบบตรวจพบ wikitext ที่อาจถูกเปลี่ยนแปลงโดยไม่ได้ตั้งใจ",
+	"tag-visualeditor-wikitext": "การแก้ไขต้นฉบับปี 2560",
+	"tag-visualeditor-wikitext-description": "การแก้ไขที่ทำโดยใช้ตัวแก้ไขข้อความวิกิปี 2560",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor:เปลี่ยน]]",
 	"tag-visualeditor-switched-description": "ผู้ใช้เริ่มแก้ไขโดยใช้ VisualEditor จากนั้นจึงเปลี่ยนเป็น wikitext editor",
 	"visualeditor-feedback-link": "Project:VisualEditor/ความคิดเห็น",
