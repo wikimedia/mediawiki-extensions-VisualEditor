@@ -32,18 +32,6 @@ ve.ui.MWMetaDialog.static.title =
 
 ve.ui.MWMetaDialog.static.size = 'large';
 
-ve.ui.MWMetaDialog.static.actions = [
-	{
-		action: 'apply',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: [ 'progressive', 'primary' ]
-	},
-	{
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ]
-	}
-];
-
 /* Methods */
 
 /**
@@ -197,8 +185,16 @@ ve.ui.MWMetaDialog.prototype.extractSettings = function () {
  */
 ve.ui.MWMetaDialog.prototype.updateActions = function () {
 	this.actions.setAbilities( {
-		apply: this.settingsPage.checkValidRedirect() && this.compareSettings()
+		done: this.settingsPage.checkValidRedirect() && this.compareSettings()
 	} );
+};
+
+/**
+ * @inheritdoc ve.ui.FragmentWindow
+ */
+ve.ui.MWMetaDialog.prototype.isEditing = function () {
+	// Always in editing mode, used for setting 'done' button label.
+	return true;
 };
 
 /**
@@ -207,7 +203,7 @@ ve.ui.MWMetaDialog.prototype.updateActions = function () {
 ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 	var surfaceModel = this.getFragment().getSurface();
 
-	if ( action === 'apply' ) {
+	if ( action === 'done' ) {
 		return new OO.ui.Process( function () {
 			surfaceModel.applyStaging();
 			this.close( { action: action } );
@@ -267,7 +263,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			this.oldSettings = this.extractSettings(); // setting that were just loaded
 
-			this.actions.setAbilities( { apply: false } );
+			this.actions.setAbilities( { done: false } );
 		}, this );
 };
 

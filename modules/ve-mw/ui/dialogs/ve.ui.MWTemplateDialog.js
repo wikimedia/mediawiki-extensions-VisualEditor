@@ -40,26 +40,6 @@ OO.inheritClass( ve.ui.MWTemplateDialog, ve.ui.NodeDialog );
 
 ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
-ve.ui.MWTemplateDialog.static.actions = [
-	{
-		action: 'apply',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: [ 'progressive', 'primary' ],
-		modes: 'edit'
-	},
-	{
-		action: 'insert',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		flags: [ 'primary', 'progressive' ],
-		modes: 'insert'
-	},
-	{
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ],
-		modes: [ 'insert', 'edit' ]
-	}
-];
-
 /**
  * Configuration for booklet layout.
  *
@@ -254,10 +234,10 @@ ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
 	if ( parts.length && !( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
-		this.actions.setAbilities( { apply: this.altered, insert: true } );
+		this.actions.setAbilities( { done: this.altered, insert: true } );
 	} else {
 		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
-		this.actions.setAbilities( { apply: parts.length === 0 && this.altered, insert: false } );
+		this.actions.setAbilities( { done: parts.length === 0 && this.altered, insert: false } );
 	}
 };
 
@@ -410,7 +390,7 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
  */
 ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 	var dialog = this;
-	if ( action === 'apply' || action === 'insert' ) {
+	if ( action === 'done' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			var deferred = $.Deferred();
 			dialog.checkRequiredParameters().done( function () {
@@ -471,7 +451,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 			// Initialization
 			if ( !this.selectedNode ) {
-				this.actions.setMode( 'insert' );
 				if ( data.template ) {
 					// New specified template
 					template = ve.dm.MWTemplateModel.newFromName(
@@ -487,13 +466,12 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					);
 				}
 			} else {
-				this.actions.setMode( 'edit' );
 				// Load existing template
 				promise = this.transclusionModel
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) )
 					.then( this.initializeTemplateParameters.bind( this ) );
 			}
-			this.actions.setAbilities( { apply: false, insert: false } );
+			this.actions.setAbilities( { done: false, insert: false } );
 
 			return promise.then( function () {
 				// Add missing required and suggested parameters to each transclusion.

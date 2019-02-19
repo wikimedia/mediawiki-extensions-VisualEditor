@@ -965,6 +965,7 @@
 				"lib/ve/src/ui/ve.ui.DataTransferHandlerFactory.js",
 				"lib/ve/src/ui/ve.ui.DataTransferItem.js",
 				"lib/ve/src/ui/ve.ui.WindowManager.js",
+				"lib/ve/src/ui/ve.ui.FragmentWindow.js",
 				"lib/ve/src/ui/ve.ui.NodeWindow.js",
 				"lib/ve/src/ui/ve.ui.TabIndexScope.js",
 				"lib/ve/src/ui/windowmanagers/ve.ui.SurfaceWindowManager.js",

@@ -30,28 +30,6 @@ OO.inheritClass( ve.ui.MWExtensionDialog, ve.ui.NodeDialog );
 
 OO.mixinClass( ve.ui.MWExtensionDialog, ve.ui.MWExtensionWindow );
 
-/* Static Properties */
-
-ve.ui.MWExtensionDialog.static.actions = ve.ui.MWExtensionDialog.super.static.actions.concat( [
-	{
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ],
-		modes: [ 'edit', 'insert' ]
-	},
-	{
-		action: 'done',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: [ 'progressive', 'primary' ],
-		modes: 'edit'
-	},
-	{
-		action: 'done',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		flags: [ 'progressive', 'primary' ],
-		modes: 'insert'
-	}
-] );
-
 /* Methods */
 
 /**
@@ -77,9 +55,7 @@ ve.ui.MWExtensionDialog.prototype.getSetupProcess = function ( data ) {
 	// Parent process
 	process = ve.ui.MWExtensionDialog.super.prototype.getSetupProcess.call( this, data );
 	// Mixin process
-	return ve.ui.MWExtensionWindow.prototype.getSetupProcess.call( this, data, process ).next( function () {
-		this.actions.setMode( this.fragment.getSelectedModels().length ? 'edit' : 'insert' );
-	}, this );
+	return ve.ui.MWExtensionWindow.prototype.getSetupProcess.call( this, data, process );
 };
 
 /**

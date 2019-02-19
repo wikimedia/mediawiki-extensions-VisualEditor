@@ -27,26 +27,6 @@ OO.inheritClass( ve.ui.MWGalleryDialog, ve.ui.NodeDialog );
 
 /* Static properties */
 
-ve.ui.MWGalleryDialog.static.actions = [
-	{
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ],
-		modes: [ 'edit', 'insert' ]
-	},
-	{
-		action: 'done',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: [ 'progressive', 'primary' ],
-		modes: 'edit'
-	},
-	{
-		action: 'done',
-		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
-		flags: [ 'progressive', 'primary' ],
-		modes: 'insert'
-	}
-];
-
 ve.ui.MWGalleryDialog.static.name = 'gallery';
 
 ve.ui.MWGalleryDialog.static.size = 'large';
@@ -415,7 +395,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				captionNode = this.selectedNode && this.selectedNode.getCaptionNode(),
 				imageNodes = this.selectedNode && this.selectedNode.getImageNodes();
 
-			this.actions.setMode( this.fragment.getSelectedModels().length ? 'edit' : 'insert' );
 			this.anyItemModified = false;
 
 			// Images tab panel

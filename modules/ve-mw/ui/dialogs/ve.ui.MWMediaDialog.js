@@ -44,7 +44,7 @@ ve.ui.MWMediaDialog.static.size = 'medium';
 
 ve.ui.MWMediaDialog.static.actions = [
 	{
-		action: 'apply',
+		action: 'done',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
 		flags: [ 'progressive', 'primary' ],
 		modes: 'edit'
@@ -1087,9 +1087,9 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 				this.imageModel.hasBeenModified()
 			)
 		) {
-			this.actions.setAbilities( { insert: true, apply: true } );
+			this.actions.setAbilities( { insert: true, done: true } );
 		} else {
-			this.actions.setAbilities( { insert: false, apply: false } );
+			this.actions.setAbilities( { insert: false, done: false } );
 		}
 	}
 };
@@ -1152,7 +1152,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				this.mediaUploadBooklet.initialize() :
 				$.Deferred().resolve().promise()
 			).then( function () {
-				dialog.actions.setAbilities( { upload: false, save: false, insert: false, apply: false } );
+				dialog.actions.setAbilities( { upload: false, save: false, insert: false, done: false } );
 
 				if ( data.file ) {
 					dialog.searchTabs.setTabPanel( 'upload' );
@@ -1176,8 +1176,8 @@ ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, noFocus ) {
 			this.panels.setItem( this.mediaSettingsLayout );
 			// Focus the general settings page
 			this.mediaSettingsLayout.setTabPanel( 'general' );
-			// Hide/show buttons
-			this.actions.setMode( this.selectedNode ? 'edit' : 'insert' );
+			// Parent functionality (edit/insert/readonly)
+			this.actions.setMode( this.getMode() );
 			if ( !noFocus ) {
 				// Focus the caption surface
 				this.captionTarget.focus();
@@ -1383,7 +1383,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 			return new OO.ui.Process( this.mediaUploadBooklet.uploadFile() );
 		case 'save':
 			return new OO.ui.Process( this.mediaUploadBooklet.saveFile() );
-		case 'apply':
+		case 'done':
 		case 'insert':
 			handler = function () {
 				var surfaceModel = this.getFragment().getSurface();

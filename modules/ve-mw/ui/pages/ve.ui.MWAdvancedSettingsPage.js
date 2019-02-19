@@ -253,7 +253,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 
 	// Data initialization
 	data = data || {};
-	if ( data.action !== 'apply' ) {
+	if ( data.action !== 'done' ) {
 		return;
 	}
 

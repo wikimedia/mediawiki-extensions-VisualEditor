@@ -291,7 +291,7 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 			attributes: { content: newDefaultSortKey }
 		};
 
-	if ( data && data.action === 'apply' ) {
+	if ( data && data.action === 'done' ) {
 		// Alter the default sort key iff it's been touched & is actually different
 		if ( this.defaultSortKeyTouched ) {
 			if ( newDefaultSortKey === '' || newDefaultSortKey === this.fallbackDefaultSortKey ) {

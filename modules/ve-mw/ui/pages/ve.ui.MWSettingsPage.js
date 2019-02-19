@@ -335,7 +335,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 
 	// Data initialisation
 	data = data || {};
-	if ( data.action !== 'apply' ) {
+	if ( data.action !== 'done' ) {
 		return;
 	}
 
