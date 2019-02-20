@@ -1138,7 +1138,7 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function ()
  * Remember the window's scroll position.
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveScrollPosition = function () {
-	if ( this.getDefaultMode() === 'source' && this.section !== null ) {
+	if ( ( this.getDefaultMode() === 'source' || this.enableVisualSectionEditing ) && this.section !== null ) {
 		// Reset scroll to top if doing real section editing
 		this.scrollTop = 0;
 	} else {
@@ -1306,7 +1306,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
  * Page modifications for switching back to view mode.
  */
 ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
-	var uri, keys, section, $section;
+	var uri, keys, fragment, target;
 
 	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
 	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
@@ -1330,30 +1330,22 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		if ( 'veaction' in uri.query ) {
 			delete uri.query.veaction;
 		}
-		if ( 'section' in uri.query ) {
+		if ( this.section !== null ) {
 			// Translate into a fragment for the new URI:
 			// This should be after replacePageContent if this is post-save, so we can just look
 			// at the headers on the page.
-			section = uri.query.section.toString().indexOf( 'T-' ) === 0 ? +uri.query.section.slice( 2 ) : uri.query.section;
-			$section = this.$editableContent.find( 'h1, h2, h3, h4, h5, h6' )
-				// Ignore headings inside TOC
-				.filter( function () {
-					return $( this ).closest( '#toc' ).length === 0;
-				} );
-			if ( section === 'new' ) {
-				// A new section is appended to the end, so take the last one.
-				section = $section.length;
-			}
-			$section = $section.eq( section - 1 ).find( '.mw-headline' );
+			fragment = this.getSectionFragmentFromPage();
+			if ( fragment ) {
+				uri.fragment = fragment;
+				this.viewUri.fragment = fragment;
+				target = document.getElementById( fragment );
 
-			if ( $section.length && $section.attr( 'id' ) ) {
-				uri.fragment = $section.attr( 'id' );
-				this.viewUri.fragment = uri.fragment;
-
-				// Scroll the page to the edited section
-				setTimeout( function () {
-					$section[ 0 ].scrollIntoView( true );
-				} );
+				if ( target ) {
+					// Scroll the page to the edited section
+					setTimeout( function () {
+						target.scrollIntoView( true );
+					} );
+				}
 			}
 			delete uri.query.section;
 		}
@@ -1461,34 +1453,6 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	mw.libs.ve.setupEditLinks();
-};
-
-/**
- * Get the numeric index of a section in the page.
- *
- * @method
- * @param {HTMLElement} heading Heading element of section
- */
-ve.init.mw.DesktopArticleTarget.prototype.getEditSection = function ( heading ) {
-	var $page = $( '#mw-content-text' ),
-		section = 0;
-	$page.find( 'h1, h2, h3, h4, h5, h6' ).not( '#toc h2' ).each( function () {
-		section++;
-		if ( this === heading ) {
-			return false;
-		}
-	} );
-	return section;
-};
-
-/**
- * Store the section for which the edit link has been triggered.
- *
- * @method
- * @param {HTMLElement} heading Heading element of section
- */
-ve.init.mw.DesktopArticleTarget.prototype.saveEditSection = function ( heading ) {
-	this.section = this.getEditSection( heading );
 };
 
 /**

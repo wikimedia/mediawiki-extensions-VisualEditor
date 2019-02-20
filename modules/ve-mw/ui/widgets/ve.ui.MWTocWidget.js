@@ -171,9 +171,9 @@ ve.ui.MWTocWidget.prototype.build = function () {
 		return $list.children( 'li' ).length + ( n === stack.length - 1 ? 1 : 0 );
 	}
 
-	function linkClickHandler( heading ) {
+	function linkClickHandler( /* heading */ ) {
 		surfaceView.focus();
-		ve.init.target.goToHeading( heading );
+		// TODO: Impement heading scroll
 		return false;
 	}
 

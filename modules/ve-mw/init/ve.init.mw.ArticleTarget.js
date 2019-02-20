@@ -19,6 +19,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
+	var enableVisualSectionEditing;
+
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		shadow: true,
@@ -38,6 +40,8 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.originalHtml = null;
 	this.toolbarSaveButton = null;
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
+	enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
+	this.enableVisualSectionEditing = enableVisualSectionEditing === true || enableVisualSectionEditing === this.constructor.static.trackingName;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	// A workaround, as default URI does not get updated after pushState (T74334)
 	this.currentUri = new mw.Uri( location.href );
@@ -224,7 +228,7 @@ ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.supe
 /**
  * @inheritdoc
  */
-ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode, section ) {
+ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode, section, onlySection ) {
 	// Add trailing linebreak to non-empty wikitext documents for consistency
 	// with old editor and usability. Will be stripped on save. T156609
 	if ( mode === 'source' && documentString ) {
@@ -232,7 +236,7 @@ ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode,
 	}
 
 	// Parent method
-	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode, section );
+	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode, section, onlySection );
 };
 
 /**
@@ -340,7 +344,8 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
  * @param {string} status Text status message
  */
 ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
-	var data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
+	var mode, section,
+		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data || typeof data.content !== 'string' ) {
 		this.loadFail( 've-api', 'No HTML content in response from server' );
@@ -350,7 +355,9 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.etag = data.etag;
 		this.fromEditedState = !!data.fromEditedState;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
-		this.doc = this.constructor.static.parseDocument( this.originalHtml, this.getDefaultMode() );
+		mode = this.getDefaultMode();
+		section = ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null;
+		this.doc = this.constructor.static.parseDocument( this.originalHtml, mode, section );
 
 		// Properties that don't come from the API
 		this.initialSourceRange = data.initialSourceRange;
@@ -600,8 +607,8 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 		request: {
 			pageName: this.getPageName(),
 			mode: mode,
-			// Only source mode fetches data by section
-			section: mode === 'source' ? this.section : null
+			// Check true section editing is in use
+			section: ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null
 		},
 		response: {
 			etag: this.etag,
@@ -1024,7 +1031,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
 				doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
 				target.saveDialog.showPreview( doc, baseDoc );
-
 			} else {
 				target.saveDialog.showPreview(
 					ve.msg(
@@ -2101,35 +2107,36 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
  * @method
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
-	var headingText,
-		section,
+	var dmDoc, headingModel, headingView, headingText,
+		section = this.section,
 		surface = this.getSurface(),
-		mode = surface.getMode(),
-		surfaceView, $documentNode, $section, headingNode;
+		mode = surface.getMode();
 
-	if ( this.section !== null && this.section !== 'new' && this.section !== 0 && this.section !== 'T-0' ) {
+	if ( section !== null && section !== 'new' && section !== 0 && section !== 'T-0' ) {
 		if ( mode === 'visual' ) {
-			// Get numerical part of section (strip 'T-'' if present)
-			section = this.section.toString().indexOf( 'T-' ) === 0 ? +this.section.slice( 2 ) : this.section;
-			surfaceView = surface.getView();
-			$documentNode = surfaceView.getDocument().getDocumentNode().$element;
-			// Find all headings including those inside templates, not just HeadingNodes
-			$section = $documentNode.find( 'h1, h2, h3, h4, h5, h6' )
-				// Ignore headings inside TOC
-				.filter( function () {
-					return $( this ).closest( '.ve-ui-mwTocWidget' ).length === 0;
-				} )
-				.eq( section - 1 );
-			headingNode = $section.data( 'view' );
-
-			if ( $section.length && new mw.Uri().query.summary === undefined ) {
-				// Due to interactions with Translate, strip out mw-
-				// editsection from the heading.
-				headingText = $section.clone().find( 'span.mw-editsection' ).remove().end().text();
-			}
-
-			if ( headingNode ) {
-				this.goToHeading( headingNode );
+			dmDoc = surface.getModel().getDocument();
+			// In ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
+			// to the heading. Iterate over headings to find the one with the correct attribute
+			// in originalDomElements.
+			dmDoc.getNodesByType( 'mwHeading' ).some( function ( heading ) {
+				var domElements = heading.getOriginalDomElements( dmDoc.getStore() );
+				if (
+					domElements && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
+					+domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
+				) {
+					headingModel = heading;
+					return true;
+				}
+				return false;
+			} );
+			if ( headingModel ) {
+				headingView = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
+				if ( new mw.Uri().query.summary === undefined ) {
+					headingText = headingView.$element.text();
+				}
+				if ( !this.enableVisualSectionEditing ) {
+					this.goToHeading( headingView );
+				}
 			}
 		} else if ( mode === 'source' ) {
 			// With elements of extractSectionTitle + stripSectionName TODO:
@@ -2214,6 +2221,36 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 	var $window = $( OO.ui.Element.static.getWindow( this.$element ) );
 
 	$window.scrollTop( headingNode.$element.offset().top - this.getToolbar().$element.height() );
+};
+
+/**
+ * Get the section ID's hash fragment using the page's PHP HTML
+ *
+ * TODO: Do this in a less skin-dependent way
+ *
+ * @param {number} section Section ID
+ * @return {string} Hash fragment, or null if not found
+ */
+ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function () {
+	var section, $sections, $section;
+
+	// Assume there are section edit links, as the user just did a section edit. This also means
+	// that the section numbers line up correctly, as not every H_ tag is a numbered section.
+	$sections = $( '.mw-editsection' );
+	if ( this.section === 'new' ) {
+		// A new section is appended to the end, so take the last one.
+		section = $sections.length;
+	} else {
+		section = this.section;
+	}
+	if ( section > 0 ) {
+		$section = $sections.eq( section - 1 ).parent().find( '.mw-headline' );
+
+		if ( $section.length && $section.attr( 'id' ) ) {
+			return $section.attr( 'id' ) || '';
+		}
+	}
+	return '';
 };
 
 /**

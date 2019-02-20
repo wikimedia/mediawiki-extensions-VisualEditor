@@ -178,9 +178,11 @@ ve.init.mw.Target.prototype.createModelFromDom = function () {
 
 /**
  * @inheritdoc
- * @param {number} [section] Section
+ * @param {number|string|null} section Section
+ * @param {boolean} [onlySection] Only return the requested section, otherwise returns the
+ *  whole document with just the requested section still wrapped (visual mode only).
  */
-ve.init.mw.Target.static.parseDocument = function ( documentString, mode, section ) {
+ve.init.mw.Target.static.parseDocument = function ( documentString, mode, section, onlySection ) {
 	var doc, sectionNode;
 	if ( mode === 'source' ) {
 		// Parent method
@@ -189,14 +191,17 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
 		doc = ve.parseXhtml( documentString );
 		if ( section !== undefined ) {
-			sectionNode = doc.body.querySelector( '[data-mw-section-id="' + section + '"]' );
-			doc.body.innerHTML = '';
-			if ( sectionNode ) {
-				doc.body.appendChild( sectionNode );
+			if ( onlySection ) {
+				sectionNode = doc.body.querySelector( '[data-mw-section-id="' + section + '"]' );
+				doc.body.innerHTML = '';
+				if ( sectionNode ) {
+					doc.body.appendChild( sectionNode );
+				}
+			} else {
+				// Strip Parsoid sections
+				ve.unwrapParsoidSections( doc.body, section );
 			}
 		}
-		// Strip Parsoid sections
-		ve.unwrapParsoidSections( doc.body );
 		// Strip legacy IDs, for example in section headings
 		ve.stripParsoidFallbackIds( doc.body );
 		// Fix relative or missing base URL if needed
@@ -275,6 +280,11 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 			'div.donut-container' // Web of Trust (T189148)
 		].join( ',' ) )
 		.remove();
+
+	// data-mw-section-id is copied to headings by ve.unwrapParsoidSections
+	// Remove these to avoid triggering selser.
+	$( newDoc ).find( '[data-mw-section-id]:not( section )' ).removeAttr( 'data-mw-section-id' );
+
 	// Add doctype manually
 	return '<!doctype html>' + ve.serializeXhtml( newDoc );
 };

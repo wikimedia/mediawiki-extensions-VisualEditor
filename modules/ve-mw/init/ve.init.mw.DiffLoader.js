@@ -31,7 +31,7 @@
 				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
-				doc = targetClass.static.parseDocument( data.content, 'visual', section );
+				doc = targetClass.static.parseDocument( data.content, 'visual', section, true );
 				// Strip RESTBase IDs
 				Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
 					if ( element.id.match( metadataIdRegExp ) ) {

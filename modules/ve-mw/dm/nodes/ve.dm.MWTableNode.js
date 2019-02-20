@@ -43,7 +43,7 @@ ve.dm.MWTableNode.static.classAttributes = {
 
 // Tables in wikitext only work in some contexts, they're impossible e.g. in list items
 ve.dm.MWTableNode.static.suggestedParentNodeTypes = [
-	'document', 'div', 'tableCell', 'tableCaption', 'mwImageCaption',
+	'document', 'div', 'tableCell', 'tableCaption', 'mwImageCaption', 'section',
 	// TODO: `paragraph` isn't really a suggested table parent. However,
 	// allowing it here interacts with our post-insertion cleanup for block
 	// nodes so that empty paragraphs get properly removed. We should find a

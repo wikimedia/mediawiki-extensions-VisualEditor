@@ -108,7 +108,7 @@
 		 * @param {string} pageName Page name to request
 		 * @param {Object} [options] Options
 		 * @param {boolean} [options.sessionStore] Store result in session storage (by page+mode+section) for auto-save
-		 * @param {number|string} [options.section] Section to edit, number or 'new' (currently just source mode)
+		 * @param {number|null|string} [options.section] Section to edit; number, null or 'new' (currently just source mode)
 		 * @param {number} [options.oldId] Old revision ID. Current if omitted.
 		 * @param {string} [options.targetName] Optional target name for tracking
 		 * @param {boolean} [options.modified] The page was been modified before loading (e.g. in source mode)
@@ -118,7 +118,7 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
-			var sessionState, request, dataPromise, apiRequest;
+			var sessionState, request, section, dataPromise, apiRequest, enableVisualSectionEditing;
 
 			options = options || {};
 			apiRequest = mode === 'source' ?
@@ -133,12 +133,15 @@
 
 				if ( sessionState ) {
 					request = sessionState.request || {};
+					// Check true section editing is in use
+					enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
+					section = request.mode === 'source' || enableVisualSectionEditing === true || enableVisualSectionEditing === options.targetName ?
+						options.section : null;
 					// Check the requested page, mode and section match the stored one
 					if (
 						request.pageName === pageName &&
 						request.mode === mode &&
-						// Only check sections in source mode
-						( request.mode !== 'source' || request.section === options.section )
+						request.section === section
 						// NB we don't cache by oldid so that cached results can be recovered
 						// even if the page has been since edited
 					) {
