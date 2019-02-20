@@ -54,23 +54,26 @@ ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'puzzle';
  * @return {string[]} List of template part descriptions
  */
 ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions = function ( model ) {
-	var i, len, part, title,
-		parts = model.getPartsList(),
-		words = [];
+	return model.getPartsList().map( this.getTemplatePartDescription );
+};
 
-	for ( i = 0, len = parts.length; i < len; i++ ) {
-		part = parts[ i ];
-		// Ignore parts that are just content
-		if ( part.templatePage ) {
-			title = mw.Title.newFromText( part.templatePage );
-			words.push( title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template ) );
-		} else if ( part.template ) {
-			// Not actually a template, but e.g. a parser function
-			words.push( part.template );
-		}
+/**
+ * Get a description of a template part in a transclusion node
+ *
+ * @static
+ * @param {Object} part Template part
+ * @return {string} Template part description
+ */
+ve.ce.MWTransclusionNode.static.getTemplatePartDescription = function ( part ) {
+	var title;
+	// Ignore parts that are just content
+	if ( part.templatePage ) {
+		title = mw.Title.newFromText( part.templatePage );
+		return title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
+	} else if ( part.template ) {
+		// Not actually a template, but e.g. a parser function
+		return part.template;
 	}
-
-	return words;
 };
 
 /**

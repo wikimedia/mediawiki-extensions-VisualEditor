@@ -67,10 +67,11 @@ ve.ui.MWTransclusionContextItem.static.isCompatibleWith =
  * @inheritdoc
  */
 ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
+	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
 	return ve.msg(
 		'visualeditor-dialog-transclusion-contextitem-description',
-		ve.ce.MWTransclusionNode.static.getDescription( this.model ),
-		ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions( this.model ).length
+		nodeClass.static.getDescription( this.model ),
+		nodeClass.static.getTemplatePartDescriptions( this.model ).length
 	);
 };
 
@@ -78,8 +79,9 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.MWTransclusionContextItem.prototype.renderDescription = function () {
+	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
 	// No "Generated from" prefix in mobile context
-	this.$description.text( ve.ce.MWTransclusionNode.static.getDescription( this.model ) );
+	this.$description.text( nodeClass.static.getDescription( this.model ) );
 };
 
 /**
