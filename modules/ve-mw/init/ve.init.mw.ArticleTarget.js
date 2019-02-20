@@ -2224,12 +2224,11 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
 };
 
 /**
- * Get the section ID's hash fragment using the page's PHP HTML
+ * Get the hash fragment for the current section's ID using the page's PHP HTML.
  *
  * TODO: Do this in a less skin-dependent way
  *
- * @param {number} section Section ID
- * @return {string} Hash fragment, or null if not found
+ * @return {string} Hash fragment, or empty string if not found
  */
 ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function () {
 	var section, $sections, $section;
