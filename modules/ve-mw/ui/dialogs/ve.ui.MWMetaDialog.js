@@ -104,12 +104,12 @@ ve.ui.MWMetaDialog.prototype.compareSettings = function () {
 ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
 	var widgetList = [];
 
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( this.bookletLayout.pages, function ( indexA, value ) {
 		var fieldsets = value.getFieldsets();
-		// eslint-disable-next-line jquery/no-each-util
+		// eslint-disable-next-line no-jquery/no-each-util
 		$.each( fieldsets, function ( indexB, value ) {
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( value.items, function ( indexC, value ) {
 				var widget = value.fieldWidget;
 				// we can recheck the value
@@ -131,7 +131,7 @@ ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
 ve.ui.MWMetaDialog.prototype.assignEvents = function () {
 	var widgetList = this.getAllWidgets(),
 		dialog = this;
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( widgetList, function ( index, value ) {
 		value.widget.connect( dialog, {
 			change: 'updateActions',
@@ -171,10 +171,10 @@ ve.ui.MWMetaDialog.prototype.extractSettings = function () {
 	var ret = [],
 		dialog = this; // return value
 
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( this.widgetList, function ( index, value ) {
 		if ( value.hasChildren ) {
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( value.widget.items, function ( index, value ) {
 				ret.push( {
 					name: value.name + '/' + index,

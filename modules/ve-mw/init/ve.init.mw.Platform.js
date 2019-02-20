@@ -255,10 +255,10 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			ve.log( err );
 		}
 
-		// eslint-disable-next-line jquery/no-each-util
+		// eslint-disable-next-line no-jquery/no-each-util
 		$.each( specialCharacterGroups, function ( groupName, groupCharacters ) {
 			groupObject = {}; // button label => character data to insert
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( groupCharacters, function ( charKey, charVal ) {
 				// VE has a different format and it would be a pain to change it now
 				if ( typeof charVal === 'string' ) {

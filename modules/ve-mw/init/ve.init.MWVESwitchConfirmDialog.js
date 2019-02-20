@@ -67,7 +67,7 @@ mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function ( data ) {
 				this.actions.setMode( data.mode );
 			} else if (
 				mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl &&
-				// eslint-disable-next-line jquery/no-global-selector
+				// eslint-disable-next-line no-jquery/no-global-selector
 				!$( 'input[name=wpSection]' ).val()
 			) {
 				this.actions.setMode( 'restbase' );

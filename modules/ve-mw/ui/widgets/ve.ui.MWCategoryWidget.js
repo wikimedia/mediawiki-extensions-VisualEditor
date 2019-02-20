@@ -284,7 +284,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 			var linkCacheUpdate = {},
 				normalizedTitles = {};
 			if ( result && result.query && result.query.pages ) {
-				// eslint-disable-next-line jquery/no-each-util
+				// eslint-disable-next-line no-jquery/no-each-util
 				$.each( result.query.pages, function ( index, pageInfo ) {
 					linkCacheUpdate[ pageInfo.title ] = {
 						missing: Object.prototype.hasOwnProperty.call( pageInfo, 'missing' ),
@@ -294,7 +294,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 				} );
 			}
 			if ( result && result.query && result.query.redirects ) {
-				// eslint-disable-next-line jquery/no-each-util
+				// eslint-disable-next-line no-jquery/no-each-util
 				$.each( result.query.redirects, function ( index, redirectInfo ) {
 					widget.categoryRedirects[ redirectInfo.from ] = redirectInfo.to;
 				} );
@@ -302,7 +302,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 			ve.init.platform.linkCache.set( linkCacheUpdate );
 
 			if ( result.query && result.query.normalized ) {
-				// eslint-disable-next-line jquery/no-each-util
+				// eslint-disable-next-line no-jquery/no-each-util
 				$.each( result.query.normalized, function ( index, normalisation ) {
 					normalizedTitles[ normalisation.from ] = normalisation.to;
 				} );
@@ -330,7 +330,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 	var i, len, item, categoryItem, hadFocus,
 		categoryItems = [],
 		existingCategoryItems = [],
-		// eslint-disable-next-line jquery/no-map-util
+		// eslint-disable-next-line no-jquery/no-map-util
 		categoryNames = $.map( items, function ( item ) {
 			return item.name;
 		} ),

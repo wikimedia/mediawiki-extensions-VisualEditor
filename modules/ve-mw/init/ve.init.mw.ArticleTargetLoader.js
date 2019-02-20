@@ -256,7 +256,7 @@
 				if (
 					// wikitext can be an empty string
 					options.wikitext !== undefined &&
-					// eslint-disable-next-line jquery/no-global-selector
+					// eslint-disable-next-line no-jquery/no-global-selector
 					!$( '[name=wpSection]' ).val()
 				) {
 					if ( conf.fullRestbaseUrl ) {

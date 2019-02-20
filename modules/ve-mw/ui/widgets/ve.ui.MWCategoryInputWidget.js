@@ -82,7 +82,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 		linkCacheUpdate = {},
 		query = data.query || {};
 
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( query.pages || [], function ( pageId, categoryPage ) {
 		result.push( mw.Title.newFromText( categoryPage.title ).getMainText() );
 		linkCacheUpdate[ categoryPage.title ] = {
@@ -94,7 +94,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 		};
 	} );
 
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( query.redirects || [], function ( index, redirect ) {
 		if ( !Object.prototype.hasOwnProperty.call( linkCacheUpdate, redirect.to ) ) {
 			linkCacheUpdate[ redirect.to ] = ve.init.platform.linkCache.getCached( redirect.to ) ||
@@ -141,7 +141,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 		canonicalQueryValue = canonicalQueryValue.getMainText();
 	}
 
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( data, function ( index, suggestedCategory ) {
 		var suggestedCategoryTitle = mw.Title.newFromText(
 				suggestedCategory,
@@ -166,7 +166,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	} );
 
 	// Existing categories
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( existingCategories, function ( index, existingCategory ) {
 		if ( existingCategory === canonicalQueryValue ) {
 			exactMatch = true;
@@ -186,7 +186,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	ve.init.platform.linkCache.set( linkCacheUpdate );
 
 	// Add sections for non-empty groups. Each section consists of an id, a label and items
-	// eslint-disable-next-line jquery/no-each-util
+	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( [
 		{
 			id: 'newCategory',
@@ -214,7 +214,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 				data: sectionData.id,
 				label: sectionData.label
 			} ) );
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( sectionData.items, function ( index, categoryItem ) {
 				itemWidgets.push( widget.getCategoryWidgetFromName( categoryItem ) );
 			} );

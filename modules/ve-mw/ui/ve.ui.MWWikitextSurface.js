@@ -26,7 +26,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	this.$element.addClass( 've-ui-mwWikitextSurface' );
 	this.getView().$element.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 	this.$placeholder.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
-	// eslint-disable-next-line jquery/no-global-selector
+	// eslint-disable-next-line no-jquery/no-global-selector
 	this.$textbox = $( '#wpTextbox1' );
 
 	if ( !this.$textbox.length ) {

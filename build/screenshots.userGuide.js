@@ -1,5 +1,5 @@
 /* global seleniumUtils, langs */
-/* eslint-disable jquery/no-global-selector */
+/* eslint-disable no-jquery/no-global-selector */
 
 ( function () {
 	'use strict';

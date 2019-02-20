@@ -470,7 +470,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 		this.$saveMessages.append( $message.css( 'display', 'none' ) );
 
 		// FIXME: Use CSS transitions
-		// eslint-disable-next-line jquery/no-slide
+		// eslint-disable-next-line no-jquery/no-slide
 		$message.slideDown( {
 			duration: 250,
 			progress: this.updateSize.bind( this )
