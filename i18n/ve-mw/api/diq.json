@@ -3,12 +3,14 @@
 		"authors": [
 			"1917 Ekim Devrimi",
 			"Gırd",
-			"Kumkumuk"
+			"Kumkumuk",
+			"Mirzali"
 		]
 	},
 	"apierror-visualeditor-api-langlinks-error": "MediaWiki API weynayışi dı xırabin",
 	"apierror-visualeditor-badcachekey": "Ena kilit vinayışi dı rêzen nêbiya",
 	"apierror-visualeditor-difffailed": "Ferq xırabo",
+	"apierror-visualeditor-docserver-unconfigured": "Seba VirtualRESTService ra dokumanê serveri nêşınasiyeno; https://www.mediawiki.org/wiki/Extension:VisualEditor ra bıvênê",
 	"apierror-visualeditor-docserver": "Rovıter dê Parsoid/RESTbase irtibat nebı",
 	"apierror-visualeditor-latestnotfound": "Revizyonê sernameyo peyên nêvêniyo.",
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
@@ -16,14 +18,18 @@
 	"apihelp-visualeditor-param-cachekey": "Ena kılita rezer yana ferqi, verdê neticey  serializerforce kariya yo.  $1html kemi mendo",
 	"apihelp-visualeditor-param-editintro": "Cıkerdışê pêhesnayışan rê şınasnayış (cıkewtış) cı kı.",
 	"apihelp-visualeditor-param-etag": "ETag'a ke bırışê yo.",
+	"apihelp-visualeditor-param-format": "Formatê veciyayışi.",
 	"apihelp-visualeditor-param-html": "Parsoid rıştış ra mikimetini HTML  açarn",
 	"apihelp-visualeditor-param-oldid": "Nunrey revizyoni bıkarnê  (hesabyaye peyên revizyoni de)",
 	"apihelp-visualeditor-param-paction": "Fiili kerdışi rê",
 	"apihelp-visualeditor-param-page": "Ena perer sero fiili kerdışi rê",
+	"apihelp-visualeditor-param-preload": "Zerrekê pela gırewtiye ke hewna çıniyo, pela ke zerrekê cı bıgureniyo.",
+	"apihelp-visualeditor-param-preloadparams": "Ravêrdışê verbarkerdışê pele rê parametreyi, eke estê.",
 	"apihelp-visualeditor-param-pst": "Verdê tasaruf da Parsoidi transforma wiki rışiyayış (=paction parsefragment).",
 	"apihelp-visualeditor-param-section": "Çewder kamci hereket dera",
 	"apihelp-visualeditor-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
 	"apihelp-visualeditor-param-wikitext": "Wikimetini bırış Parsoidi çerxê HTMLi kı",
+	"apihelp-visualeditor-summary": "Servisê Parsoidi ra vêreno ra pela HTML5.",
 	"apihelp-visualeditoredit-description": "Perra MediaWiki HTML5i dı qeyd kı (serwisa Parsoidi dı wikinetin çerx biyo).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı peamyayış tesbit biyo.",
 	"apihelp-visualeditoredit-param-cachekey": "Verdê neticey  serializerforce kariya yo.  $1html kemi mendo",
@@ -39,5 +45,8 @@
 	"apihelp-visualeditoredit-param-section": "Çewdee kamci hereket dera",
 	"apihelp-visualeditoredit-param-sectiontitle": "Letey newey rê sername",
 	"apihelp-visualeditoredit-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
-	"apihelp-visualeditoredit-param-summary": "Xulasay vurnayışi"
+	"apihelp-visualeditoredit-param-summary": "Xulasay vurnayışi",
+	"apihelp-visualeditoredit-param-watch": "Pele lista seyrkerdışiya mewcude kerê.",
+	"apihelp-visualeditoredit-param-wikitext": "Wikimetıno ke bıgureniyo.",
+	"apihelp-visualeditoredit-summary": "Pela HTML5 MediaWiki de bışevekne (servisê Parsoidi de wikimetın çarniya)."
 }
