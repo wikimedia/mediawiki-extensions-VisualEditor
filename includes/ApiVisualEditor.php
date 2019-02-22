@@ -601,47 +601,6 @@ class ApiVisualEditor extends ApiBase {
 				}
 				$templates = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 
-				// HACK: Find out which red links are on the page
-				// We do the lookup for the current version. This might not be entirely complete
-				// if we're loading an oldid, but it'll probably be close enough, and LinkCache
-				// will automatically request any additional data it needs.
-				// We only do this for visual edits, as the wikitext editor doesn't need to know
-				// about redlinks on the page. If the user switches to VE, they will do a fresh
-				// metadata request at that point.
-				$links = null;
-				if ( $params['paction'] !== 'wikitext' ) {
-					$wikipage = WikiPage::factory( $title );
-					$popts = $wikipage->makeParserOptions( 'canonical' );
-					$cached = MediaWikiServices::getInstance()->getParserCache()->get( $article, $popts, true );
-					$links = [
-						// Array of linked pages that are missing
-						'missing' => [],
-						// For current revisions: 1 (treat all non-missing pages as known)
-						// For old revisions: array of linked pages that are known
-						'known' => $restoring || !$cached ? [] : 1,
-					];
-					if ( $cached ) {
-						foreach ( $cached->getLinks() as $namespace => $cachedTitles ) {
-							foreach ( $cachedTitles as $cachedTitleText => $exists ) {
-								$cachedTitle = Title::makeTitle( $namespace, $cachedTitleText );
-								if ( !$cachedTitle->isKnown() ) {
-									$links['missing'][] = $cachedTitle->getPrefixedText();
-								} elseif ( $links['known'] !== 1 ) {
-									$links['known'][] = $cachedTitle->getPrefixedText();
-								}
-							}
-						}
-					}
-					// Add information about current page
-					if ( !$title->isKnown() ) {
-						$links['missing'][] = $title->getPrefixedText();
-					} elseif ( $links['known'] !== 1 ) {
-						$links['known'][] = $title->getPrefixedText();
-					}
-				}
-
-				// On parser cache miss, just don't bother populating red link data
-
 				foreach ( $checkboxesDef as &$value ) {
 					// Don't convert the boolean to empty string with formatversion=1
 					$value[ApiResult::META_BC_BOOLS] = [ 'default' ];
@@ -652,7 +611,6 @@ class ApiVisualEditor extends ApiBase {
 					'checkboxesDef' => $checkboxesDef,
 					'checkboxesMessages' => $checkboxesMessages,
 					'templates' => $templates,
-					'links' => $links,
 					'protectedClasses' => implode( ' ', $protectedClasses ),
 					'basetimestamp' => $baseTimestamp,
 					'starttimestamp' => wfTimestampNow(),

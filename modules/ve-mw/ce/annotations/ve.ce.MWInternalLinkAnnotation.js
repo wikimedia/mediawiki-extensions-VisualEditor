@@ -48,13 +48,25 @@ ve.ce.MWInternalLinkAnnotation.static.getDescription = function ( model ) {
  * Update CSS classes form model state
  */
 ve.ce.MWInternalLinkAnnotation.prototype.updateClasses = function () {
-	var model = this.getModel();
+	var entry,
+		model = this.getModel();
 
-	ve.init.platform.linkCache.styleElement(
-		model.getAttribute( 'lookupTitle' ),
-		this.$anchor,
-		!!model.getFragment()
-	);
+	if ( model.element.originalDomElementsHash ) {
+		// If the link came from Parsoid, use the 'new' class to
+		// determine if this is a 'missing' link.
+		entry = {};
+		entry[ model.getAttribute( 'lookupTitle' ) ] = {
+			missing: this.$anchor.hasClass( 'new' )
+		};
+		ve.init.platform.linkCache.setMissing( entry );
+	} else {
+		// otherwise do an API/cache lookup
+		ve.init.platform.linkCache.styleElement(
+			model.getAttribute( 'lookupTitle' ),
+			this.$anchor,
+			!!model.getFragment()
+		);
+	}
 };
 
 /* Registration */

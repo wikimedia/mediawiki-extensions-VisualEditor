@@ -390,7 +390,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
  *   loadSuccess(). If false, either that loadFail() has been called or we're retrying via load().
  */
 ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
-	var i, len, linkData, aboutDoc, docRevIdMatches, docRevId,
+	var aboutDoc, docRevIdMatches, docRevId,
 		name, options, accesskey, title, $label, checkbox,
 		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
@@ -411,26 +411,6 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	this.checkboxesMessages = data.checkboxesMessages;
 	mw.messages.set( data.checkboxesMessages );
 	this.$templatesUsed = $( data.templates );
-	this.links = data.links;
-
-	// Populate link cache
-	if ( this.links ) {
-		// Format from the API: { missing: [titles], known: 1|[titles] }
-		// Format expected by LinkCache: { title: { missing: true|false } }
-		linkData = {};
-		for ( i = 0, len = this.links.missing.length; i < len; i++ ) {
-			linkData[ this.links.missing[ i ] ] = { missing: true };
-		}
-		if ( this.links.known === 1 ) {
-			// Set back to false by surfaceReady()
-			ve.init.platform.linkCache.setAssumeExistence( true );
-		} else {
-			for ( i = 0, len = this.links.known.length; i < len; i++ ) {
-				linkData[ this.links.known[ i ] ] = { missing: false };
-			}
-		}
-		ve.init.platform.linkCache.setMissing( linkData );
-	}
 
 	aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
 	if ( aboutDoc ) {
@@ -623,8 +603,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			checkboxesDef: this.checkboxesDef,
 			checkboxesMessages: this.checkboxesMessages,
 			// Use $.prop as $templatesUsed may be empty
-			templates: this.$templatesUsed.prop( 'outerHTML' ) || '',
-			links: this.links
+			templates: this.$templatesUsed.prop( 'outerHTML' ) || ''
 		}
 	}, html );
 };
