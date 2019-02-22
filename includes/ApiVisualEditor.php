@@ -599,7 +599,6 @@ class ApiVisualEditor extends ApiBase {
 					$message = $this->msg( $messageSpecifier );
 					$checkboxesMessages[ $message->getKey() ] = $message->plain();
 				}
-				$templates = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 
 				foreach ( $checkboxesDef as &$value ) {
 					// Don't convert the boolean to empty string with formatversion=1
@@ -610,7 +609,6 @@ class ApiVisualEditor extends ApiBase {
 					'notices' => $notices,
 					'checkboxesDef' => $checkboxesDef,
 					'checkboxesMessages' => $checkboxesMessages,
-					'templates' => $templates,
 					'protectedClasses' => implode( ' ', $protectedClasses ),
 					'basetimestamp' => $baseTimestamp,
 					'starttimestamp' => wfTimestampNow(),
@@ -632,6 +630,14 @@ class ApiVisualEditor extends ApiBase {
 						$result['preloaded'] = $params['preload'];
 					}
 				}
+				break;
+
+			case 'templatesused':
+				// HACK: Build a fake EditPage so we can get checkboxes from it
+				// Deliberately omitting ,0 so oldid comes from request
+				$article = new Article( $title );
+				$editPage = new EditPage( $article );
+				$result = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 				break;
 
 			case 'parsedoc':
@@ -761,6 +767,7 @@ class ApiVisualEditor extends ApiBase {
 				ApiBase::PARAM_TYPE => [
 					'parse',
 					'metadata',
+					'templatesused',
 					'wikitext',
 					'parsefragment',
 					'parsedoc',

@@ -17,6 +17,9 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
+	var page = this,
+		target = ve.init.target;
+
 	// Parent constructor
 	ve.ui.MWTemplatesUsedPage.super.apply( this, arguments );
 
@@ -26,16 +29,26 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 		icon: 'puzzle'
 	} );
 
-	if ( ve.init.target.$templatesUsed && ve.init.target.$templatesUsed.find( 'li' ).length ) {
-		this.templatesUsedFieldset.$element.append(
-			ve.init.target.$templatesUsed.clone()
-		);
-		ve.targetLinksToNewWindow( this.templatesUsedFieldset.$element[ 0 ] );
-	} else {
-		this.templatesUsedFieldset.$element.append(
+	target.getContentApi().get( {
+		action: 'visualeditor',
+		paction: 'templatesused',
+		page: target.getPageName(),
+		uselang: mw.config.get( 'wgUserLanguage' )
+	} ).then( function ( response ) {
+		var templatesUsed = $.parseHTML( response.visualeditor );
+		if ( templatesUsed.length && $( templatesUsed ).find( 'li' ).length ) {
+			return templatesUsed;
+		} else {
+			return $.Deferred().reject().promise();
+		}
+	} ).then( function ( templatesUsed ) {
+		page.templatesUsedFieldset.$element.append( templatesUsed );
+		ve.targetLinksToNewWindow( page.templatesUsedFieldset.$element[ 0 ] );
+	}, function () {
+		page.templatesUsedFieldset.$element.append(
 			$( '<em>' ).text( ve.msg( 'visualeditor-dialog-meta-templatesused-noresults' ) )
 		);
-	}
+	} );
 
 	// Initialization
 	this.$element.append( this.templatesUsedFieldset.$element );
