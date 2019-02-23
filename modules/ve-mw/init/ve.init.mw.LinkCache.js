@@ -104,36 +104,21 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 };
 
 /**
- * Given a chunk of Parsoid HTML, requests information about each link's title, then adds classes
- * to each such element as appropriate.
+ * Given a chunk of Parsoid HTML, applies style transformations.
  *
- * TODO: Most/all of this code should be done upstream, either by Parsoid itself or by an
- * intermediary service – see T64803 and others.
+ * Previously this was used for applying red-link styles, but that
+ * has since been upstreamed to Parsoid.
+ *
+ * TODO: Evaluate if this method should be renamed/removed as it
+ * now has nothing to do with the link cache.
  *
  * @param {jQuery} $element Elements to style
  * @param {HTMLDocument} doc Base document to use for normalisation
  */
-ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements, doc ) {
-	var cache = this;
+ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements ) {
 	if ( ve.dm.MWLanguageVariantNode ) {
 		// Render the user's preferred variant in language converter markup
 		ve.dm.MWLanguageVariantNode.static.processVariants( $elements );
-	}
-
-	// TODO: Remove when moved upstream into Parsoid or another service (T64803)
-	// If the element isn't attached, doc will be null, so we don't know how to normalise titles
-	if ( doc ) {
-		$elements
-			.find( 'a[rel~="mw:WikiLink"]' ).addBack( 'a[rel~="mw:WikiLink"]' )
-			.each( function () {
-				var title,
-					href = this.href || mw.config.get( 'wgArticlePath' );
-
-				title = cache.constructor.static.normalizeTitle(
-					ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, doc ).title
-				);
-				cache.styleElement( title, $( this ), href.indexOf( '#' ) !== -1 );
-			} );
 	}
 };
 
