@@ -256,7 +256,7 @@ ve.ui.MWTemplateDialog.prototype.getBodyHeight = function () {
  */
 ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 	if ( part instanceof ve.dm.MWTemplateModel ) {
-		return new ve.ui.MWTemplatePage( part, part.getId(), { $overlay: this.$overlay } );
+		return new ve.ui.MWTemplatePage( part, part.getId(), { $overlay: this.$overlay, isReadOnly: this.isReadOnly() } );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		return new ve.ui.MWTemplatePlaceholderPage(
 			part,

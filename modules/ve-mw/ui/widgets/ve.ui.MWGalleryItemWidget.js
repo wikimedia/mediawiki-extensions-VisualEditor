@@ -38,7 +38,7 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 		.css( 'background-image', 'url(' + this.thumbUrl + ')' );
 
 	// Mixin constructors
-	OO.ui.mixin.DraggableElement.call( this, ve.extendObject( { $handle: this.$element }, this.config ) );
+	OO.ui.mixin.DraggableElement.call( this, ve.extendObject( { $handle: this.$element }, config ) );
 	OO.ui.mixin.TabIndexedElement.call( this, config );
 
 	this.$element.on( {

@@ -120,7 +120,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getSetupProcess = function ( data ) {
 			// Initialization
 			this.targetInput.setValue(
 				this.selectedNode ? this.selectedNode.getAttribute( 'content' ) : ''
-			);
+			).setReadOnly( this.isReadOnly() );
 		}, this );
 };
 

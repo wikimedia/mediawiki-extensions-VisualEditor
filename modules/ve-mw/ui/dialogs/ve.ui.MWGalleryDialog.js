@@ -472,6 +472,11 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.classesInput.setReadOnly( isReadOnly );
 			this.stylesInput.setReadOnly( isReadOnly );
 
+			this.showSearchPanelButton.setDisabled( isReadOnly );
+			this.removeButton.setDisabled( isReadOnly );
+
+			this.galleryGroup.toggleDraggable( !isReadOnly );
+
 			// Disable fields depending on mode
 			this.onModeDropdownChange();
 
@@ -623,7 +628,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 	var title,
 		thumbUrls = {},
 		items = [],
-		config = { isMobile: this.isMobile };
+		config = { isMobile: this.isMobile, draggable: !this.isReadOnly() };
 
 	for ( title in response ) {
 		thumbUrls[ title ] = {
