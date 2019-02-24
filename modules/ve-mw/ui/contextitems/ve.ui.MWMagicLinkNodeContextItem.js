@@ -52,6 +52,15 @@ ve.ui.MWMagicLinkNodeContextItem.prototype.getDescription = function () {
 	return this.model.getAttribute( 'content' );
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.MWMagicLinkNodeContextItem.prototype.renderBody = function () {
+	// Parent method
+	ve.ui.MWMagicLinkNodeContextItem.super.prototype.renderBody.apply( this, arguments );
+
+	this.$labelLayout.remove();
+};
 /* Registration */
 
 ve.ui.contextItemFactory.register( ve.ui.MWMagicLinkNodeContextItem );
