@@ -81,6 +81,9 @@ ve.ce.MWTransclusionNode.static.getTemplatePartDescription = function ( part ) {
  */
 ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
 	return this.getTemplatePartDescriptions( model )
+		.filter( function ( desc ) {
+			return desc;
+		} )
 		.join( ve.msg( 'comma-separator' ) );
 };
 
