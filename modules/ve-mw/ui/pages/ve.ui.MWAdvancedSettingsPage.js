@@ -118,18 +118,17 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		);
 	}
 
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.metaItemCheckboxes, function () {
-		this.fieldLayout = new OO.ui.FieldLayout(
+	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+		metaItemCheckbox.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
 			{
 				$overlay: config.$overlay,
 				align: 'inline',
-				label: this.label,
-				help: this.help
+				label: metaItemCheckbox.label,
+				help: metaItemCheckbox.help
 			}
 		);
-		advancedSettingsPage.advancedSettingsFieldset.addItems( [ this.fieldLayout ] );
+		advancedSettingsPage.advancedSettingsFieldset.addItems( [ metaItemCheckbox.fieldLayout ] );
 	} );
 
 	this.$element.append( this.advancedSettingsFieldset.$element );
@@ -231,10 +230,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	this.displayTitleTouched = false;
 
 	// Simple checkbox items
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.metaItemCheckboxes, function () {
-		var isSelected = !!advancedSettingsPage.getMetaItem( this.metaName );
-		this.fieldLayout.getField().setSelected( isSelected );
+	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+		var isSelected = !!advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName );
+		metaItemCheckbox.fieldLayout.getField().setSelected( isSelected );
 	} );
 
 	return $.Deferred().resolve().promise();
@@ -337,15 +335,14 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.metaItemCheckboxes, function () {
-		var currentItem = advancedSettingsPage.getMetaItem( this.metaName ),
-			isSelected = this.fieldLayout.getField().isSelected();
+	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+		var currentItem = advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName ),
+			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {
 			currentItem.remove();
 		} else if ( !currentItem && isSelected ) {
-			advancedSettingsPage.metaList.insertMeta( { type: this.metaName } );
+			advancedSettingsPage.metaList.insertMeta( { type: metaItemCheckbox.metaName } );
 		}
 	} );
 

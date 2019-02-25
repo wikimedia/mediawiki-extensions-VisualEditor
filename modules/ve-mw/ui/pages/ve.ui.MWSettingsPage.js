@@ -131,19 +131,18 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.tableOfContents
 	] );
 
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.metaItemCheckboxes, function () {
-		this.fieldLayout = new OO.ui.FieldLayout(
+	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+		metaItemCheckbox.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
 			{
 				$overlay: config.$overlay,
-				classes: this.classes,
+				classes: metaItemCheckbox.classes,
 				align: 'inline',
-				label: this.label,
-				help: this.help || ''
+				label: metaItemCheckbox.label,
+				help: metaItemCheckbox.help || ''
 			}
 		);
-		settingsPage.settingsFieldset.addItems( [ this.fieldLayout ] );
+		settingsPage.settingsFieldset.addItems( [ metaItemCheckbox.fieldLayout ] );
 	} );
 
 	this.$element.append( this.settingsFieldset.$element );
@@ -313,10 +312,9 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	this.redirectOptionsTouched = false;
 
 	// Simple checkbox items
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.metaItemCheckboxes, function () {
-		var isSelected = !!settingsPage.getMetaItem( this.metaName );
-		this.fieldLayout.getField().setSelected( isSelected );
+	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+		var isSelected = !!settingsPage.getMetaItem( metaItemCheckbox.metaName );
+		metaItemCheckbox.fieldLayout.getField().setSelected( isSelected );
 	} );
 
 	return $.Deferred().resolve().promise();
@@ -403,15 +401,14 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
-	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.metaItemCheckboxes, function () {
-		var currentItem = settingsPage.getMetaItem( this.metaName ),
-			isSelected = this.fieldLayout.getField().isSelected();
+	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+		var currentItem = settingsPage.getMetaItem( metaItemCheckbox.metaName ),
+			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {
 			currentItem.remove();
 		} else if ( !currentItem && isSelected ) {
-			settingsPage.metaList.insertMeta( { type: this.metaName } );
+			settingsPage.metaList.insertMeta( { type: metaItemCheckbox.metaName } );
 		}
 	} );
 
