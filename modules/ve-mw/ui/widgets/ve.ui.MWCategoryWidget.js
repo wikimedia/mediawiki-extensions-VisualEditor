@@ -231,6 +231,29 @@ ve.ui.MWCategoryWidget.prototype.setDefaultSortKey = function ( value ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWCategoryWidget.prototype.setDisabled = function () {
+	var isDisabled;
+	// Parent method
+	ve.ui.MWCategoryWidget.super.prototype.setDisabled.apply( this, arguments );
+
+	isDisabled = this.isDisabled();
+
+	if ( this.input ) {
+		this.input.setDisabled( isDisabled );
+	}
+	if ( this.items ) {
+		this.items.forEach( function ( item ) {
+			item.setDisabled( isDisabled );
+		} );
+	}
+	if ( this.popup ) {
+		this.popup.closePopup();
+	}
+};
+
+/**
  * Get list of category names.
  *
  * @method
@@ -362,6 +385,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			}
 			config.hidden = cachedData.hidden;
 			config.missing = cachedData.missing;
+			config.disabled = widget.disabled;
 
 			categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( widget, {
