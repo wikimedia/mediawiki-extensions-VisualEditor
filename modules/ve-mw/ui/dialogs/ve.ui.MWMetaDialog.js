@@ -223,7 +223,8 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var surfaceModel = this.getFragment().getSurface(),
+			var config,
+				surfaceModel = this.getFragment().getSurface(),
 				promises = [],
 				selectWidget = this.bookletLayout.outlineSelectWidget,
 				visualOnlyPages = [ 'categories', 'settings', 'advancedSettings', 'languages' ],
@@ -240,10 +241,15 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			// Force all previous transactions to be separate from this history state
 			surfaceModel.pushStaging();
 
+			config = {
+				data: data,
+				isReadOnly: this.isReadOnly()
+			};
+
 			// Let each page set itself up ('languages' page doesn't need this yet)
-			promises.push( this.categoriesPage.setup( surfaceModel.metaList, data ) );
-			promises.push( this.settingsPage.setup( surfaceModel.metaList, data ) );
-			promises.push( this.advancedSettingsPage.setup( surfaceModel.metaList, data ) );
+			promises.push( this.categoriesPage.setup( surfaceModel.metaList, config ) );
+			promises.push( this.settingsPage.setup( surfaceModel.metaList, config ) );
+			promises.push( this.advancedSettingsPage.setup( surfaceModel.metaList, config ) );
 			return $.when.apply( $, promises );
 		}, this )
 		.next( function () {
