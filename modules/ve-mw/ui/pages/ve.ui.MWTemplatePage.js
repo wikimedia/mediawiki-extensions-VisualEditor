@@ -16,6 +16,7 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
+ * @cfg {boolean} [isReadOnly] Page is read-only
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	var linkData, messageKey,
@@ -95,7 +96,10 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwTemplatePage' )
-		.append( this.infoFieldset.$element, this.removeButton.$element, this.$more );
+		.append( this.infoFieldset.$element );
+	if ( !config.isReadOnly ) {
+		this.$element.append( this.removeButton.$element, this.$more );
+	}
 };
 
 /* Inheritance */

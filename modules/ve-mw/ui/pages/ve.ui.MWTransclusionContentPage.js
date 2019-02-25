@@ -16,6 +16,7 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
+ * @cfg {boolean} [isReadOnly] Page is read-only
  */
 ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( content, name, config ) {
 	// Configuration initialization
@@ -33,6 +34,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		classes: [ 've-ui-mwTransclusionDialog-input' ]
 	} )
 		.setValue( this.content.getValue() )
+		.setReadOnly( config.isReadOnly )
 		.connect( this, { change: 'onTextInputChange' } );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -51,7 +53,11 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 	// Initialization
 	this.$element
 		.addClass( 've-ui-mwTransclusionContentPage' )
-		.append( this.valueFieldset.$element, this.removeButton.$element );
+		.append( this.valueFieldset.$element );
+
+	if ( !config.isReadOnly ) {
+		this.$element.append( this.removeButton.$element );
+	}
 };
 
 /* Inheritance */
