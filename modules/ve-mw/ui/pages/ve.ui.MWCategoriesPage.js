@@ -240,10 +240,12 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, 
  * Setup categories page.
  *
  * @param {ve.dm.MetaList} metaList Meta list
- * @param {Object} [data] Dialog setup data
+ * @param {Object} [config] Configuration options
+ * @param {Object} [config.data] Dialog setup data
+ * @param {boolean} [config.isReadOnly] Dialog is in read-only mode
  * @return {jQuery.Promise}
  */
-ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
+ve.ui.MWCategoriesPage.prototype.setup = function ( metaList, config ) {
 	var defaultSortKeyItem,
 		promise,
 		page = this;
@@ -256,11 +258,13 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( metaList ) {
 
 	defaultSortKeyItem = this.getDefaultSortKeyItem();
 
-	promise = this.categoryWidget.addItems( this.getCategoryItems() );
+	promise = this.categoryWidget.addItems( this.getCategoryItems() ).then( function () {
+		page.categoryWidget.setDisabled( config.isReadOnly );
+	} );
 
 	this.defaultSortInput.setValue(
 		defaultSortKeyItem ? defaultSortKeyItem.getAttribute( 'content' ) : this.fallbackDefaultSortKey
-	);
+	).setReadOnly( config.isReadOnly );
 	this.defaultSortKeyTouched = false;
 
 	// Update input position after transition

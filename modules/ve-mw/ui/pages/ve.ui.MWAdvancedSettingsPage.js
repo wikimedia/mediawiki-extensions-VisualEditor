@@ -195,10 +195,12 @@ ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = functi
  * Setup settings page.
  *
  * @param {ve.dm.MetaList} metaList Meta list
- * @param {Object} [data] Dialog setup data
+ * @param {Object} [config] Configuration options
+ * @param {Object} [config.data] Dialog setup data
+ * @param {boolean} [config.isReadOnly] Dialog is in read-only mode
  * @return {jQuery.Promise}
  */
-ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
+ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList, config ) {
 	var indexingField, indexingOption, indexingType,
 		newSectionEditField, newSectionEditLinkOption, newSectionEditLinkType,
 		displayTitleItem, displayTitle,
@@ -210,14 +212,18 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	indexingField = this.indexing.getField();
 	indexingOption = this.getMetaItem( 'mwIndex' );
 	indexingType = indexingOption && indexingOption.getAttribute( 'property' ) || 'default';
-	indexingField.selectItemByData( indexingType );
+	indexingField
+		.selectItemByData( indexingType )
+		.setDisabled( config.isReadOnly );
 	this.indexingOptionTouched = false;
 
 	// New section edit link items
 	newSectionEditField = this.newEditSectionLink.getField();
 	newSectionEditLinkOption = this.getMetaItem( 'mwNewSectionEdit' );
 	newSectionEditLinkType = newSectionEditLinkOption && newSectionEditLinkOption.getAttribute( 'property' ) || 'default';
-	newSectionEditField.selectItemByData( newSectionEditLinkType );
+	newSectionEditField
+		.selectItemByData( newSectionEditLinkType )
+		.setDisabled( config.isReadOnly );
 	this.newSectionEditLinkOptionTouched = false;
 
 	// Display title items
@@ -226,13 +232,17 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( metaList ) {
 	if ( !displayTitle ) {
 		displayTitle = mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText();
 	}
-	this.displayTitleInput.setValue( displayTitle );
+	this.displayTitleInput
+		.setValue( displayTitle )
+		.setReadOnly( config.isReadOnly );
 	this.displayTitleTouched = false;
 
 	// Simple checkbox items
 	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
 		var isSelected = !!advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName );
-		metaItemCheckbox.fieldLayout.getField().setSelected( isSelected );
+		metaItemCheckbox.fieldLayout.getField()
+			.setSelected( isSelected )
+			.setDisabled( config.isReadOnly );
 	} );
 
 	return $.Deferred().resolve().promise();

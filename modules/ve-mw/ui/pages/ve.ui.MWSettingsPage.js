@@ -283,10 +283,12 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
  * Setup settings page.
  *
  * @param {ve.dm.MetaList} metaList Meta list
- * @param {Object} [data] Dialog setup data
+ * @param {Object} [config] Configuration options
+ * @param {Object} [config.data] Dialog setup data
+ * @param {boolean} [config.isReadOnly] Dialog is in read-only mode
  * @return {jQuery.Promise}
  */
-ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
+ve.ui.MWSettingsPage.prototype.setup = function ( metaList, config ) {
 	var tableOfContentsMetaItem, tableOfContentsField, tableOfContentsMode,
 		redirectTargetItem, redirectTarget, redirectStatic,
 		settingsPage = this;
@@ -297,24 +299,33 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList ) {
 	tableOfContentsField = this.tableOfContents.getField();
 	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
 	tableOfContentsMode = tableOfContentsMetaItem && tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
-	tableOfContentsField.selectItemByData( tableOfContentsMode );
+	tableOfContentsField
+		.selectItemByData( tableOfContentsMode )
+		.setDisabled( config.isReadOnly );
 	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)
 	redirectTargetItem = this.getMetaItem( 'mwRedirect' );
 	redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '';
 	redirectStatic = this.getMetaItem( 'mwStaticRedirect' );
-	this.enableRedirectInput.setSelected( !!redirectTargetItem );
-	this.redirectTargetInput.setValue( redirectTarget );
-	this.redirectTargetInput.setDisabled( !redirectTargetItem );
-	this.enableStaticRedirectInput.setSelected( !!redirectStatic );
-	this.enableStaticRedirectInput.setDisabled( !redirectTargetItem );
+	this.enableRedirectInput
+		.setSelected( !!redirectTargetItem )
+		.setDisabled( config.isReadOnly );
+	this.redirectTargetInput
+		.setValue( redirectTarget )
+		.setDisabled( !redirectTargetItem )
+		.setReadOnly( config.isReadOnly );
+	this.enableStaticRedirectInput
+		.setSelected( !!redirectStatic )
+		.setDisabled( !redirectTargetItem || config.isReadOnly );
 	this.redirectOptionsTouched = false;
 
 	// Simple checkbox items
 	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
 		var isSelected = !!settingsPage.getMetaItem( metaItemCheckbox.metaName );
-		metaItemCheckbox.fieldLayout.getField().setSelected( isSelected );
+		metaItemCheckbox.fieldLayout.getField()
+			.setSelected( isSelected )
+			.setDisabled( config.isReadOnly );
 	} );
 
 	return $.Deferred().resolve().promise();
