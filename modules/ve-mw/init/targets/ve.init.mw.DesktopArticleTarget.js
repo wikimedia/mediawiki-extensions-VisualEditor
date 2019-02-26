@@ -892,7 +892,16 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 		// Clone the existing catlinks for any specific properties which might
 		// be needed by the rest of the page. Also gives us a not-attached
 		// version, which we can pass to wikipage.categories as it requests.
-		var $catlinks = $( '#catlinks' ).clone().empty().append( $categories.children() );
+		var $catlinks = $( '#catlinks' ).clone().empty().removeClass( 'categories-allhidden' )
+			.append( $categories.children() );
+		// If all categories are hidden, we need to hide the box.
+		$catlinks.toggleClass( 'catlinks-allhidden',
+			$catlinks.find( '.mw-normal-catlinks' ).length === 0 &&
+			// Some situations make the hidden-categories visible (a user
+			// preference, and being on a category page) so rather than
+			// encoding that logic here just check whether they're visible:
+			$catlinks.find( '.mw-hidden-catlinks:visible' ).length === 0
+		);
 		target.transformCategoryLinks( $catlinks );
 		mw.hook( 'wikipage.categories' ).fire( $catlinks );
 		$( '#catlinks' ).replaceWith( $catlinks );
