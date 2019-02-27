@@ -104,7 +104,7 @@ ve.init.mw.Target.static.importRules = {
 	external: {
 		blacklist: [
 			// Annotations
-			'link/mwExternal', 'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language', 'textStyle/datetime',
+			'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language', 'textStyle/datetime',
 			// Nodes
 			'article', 'section', 'div', 'alienInline', 'alienBlock', 'comment'
 		],
@@ -118,6 +118,12 @@ ve.init.mw.Target.static.importRules = {
 	},
 	all: null
 };
+
+if ( !mw.config.get( 'wgVisualEditorConfig' ).allowExternalLinkPaste ) {
+	ve.init.mw.Target.static.importRules.external.blacklist.push(
+		'link/mwExternal'
+	);
+}
 
 /**
  * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.

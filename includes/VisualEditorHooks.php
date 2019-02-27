@@ -901,6 +901,7 @@ class VisualEditorHooks {
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
 			'enableVisualSectionEditing' => $veConfig->get( 'VisualEditorEnableVisualSectionEditing' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
+			'allowExternalLinkPaste' => $veConfig->get( 'VisualEditorAllowExternalLinkPaste' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
 			'enableWikitext' => (
 				$veConfig->get( 'VisualEditorEnableWikitext' ) ||
