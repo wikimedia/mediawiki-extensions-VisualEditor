@@ -288,6 +288,11 @@
 		showForm();
 	}
 
+	$specialTab.on( 'click', function ( e ) {
+		showForm();
+		e.preventDefault();
+	} );
+
 	// Tag current state
 	if ( history.replaceState ) {
 		history.replaceState( { tag: 'collabTarget', title: pageName }, document.title, location.href );
