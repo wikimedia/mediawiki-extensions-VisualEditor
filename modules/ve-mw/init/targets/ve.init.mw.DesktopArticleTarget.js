@@ -458,12 +458,6 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		surface.setReadOnly( true );
 		// setSurface creates dummy toolbar
 		this.setSurface( surface );
-		// Disconnect the tool factory listeners so the toolbar
-		// doesn't start showing new tools as they load, too
-		// much flickering
-		this.getToolbar().getToolFactory().off( 'register' );
-		// Disable all the tools
-		this.getToolbar().updateToolState();
 
 		this.load( dataPromise );
 	}
