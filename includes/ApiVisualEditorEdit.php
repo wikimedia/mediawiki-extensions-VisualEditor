@@ -26,7 +26,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @param Title $title The title of the page to write
 	 * @param string $wikitext The wikitext to write
 	 * @param array $params The edit parameters
-	 * @return Status The result of the save attempt
+	 * @return mixed The result of the save attempt
 	 */
 	protected function saveWikitext( Title $title, $wikitext, $params ) {
 		$apiParams = [
