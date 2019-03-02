@@ -639,7 +639,7 @@ class VisualEditorHooks {
 		global $wgLang;
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
-		if ( !class_exists( BetaFeatures::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' ) ) {
 			// Config option for visual editing "alpha" state (no Beta Feature)
 			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 
