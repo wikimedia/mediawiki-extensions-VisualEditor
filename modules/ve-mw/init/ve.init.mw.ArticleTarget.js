@@ -50,7 +50,6 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.editSummaryValue = null;
 	this.initialEditSummary = null;
 
-	this.$templatesUsed = null;
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
 	this.$saveAccessKeyElements = null;
@@ -410,7 +409,6 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	this.checkboxesDef = data.checkboxesDef;
 	this.checkboxesMessages = data.checkboxesMessages;
 	mw.messages.set( data.checkboxesMessages );
-	this.$templatesUsed = $( data.templates );
 
 	aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
 	if ( aboutDoc ) {
@@ -609,9 +607,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			starttimestamp: this.startTimeStamp,
 			oldid: this.revid,
 			checkboxesDef: this.checkboxesDef,
-			checkboxesMessages: this.checkboxesMessages,
-			// Use $.prop as $templatesUsed may be empty
-			templates: this.$templatesUsed.prop( 'outerHTML' ) || ''
+			checkboxesMessages: this.checkboxesMessages
 		}
 	}, html );
 };
