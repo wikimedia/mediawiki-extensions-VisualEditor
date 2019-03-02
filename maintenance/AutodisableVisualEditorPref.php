@@ -70,5 +70,5 @@ class AutodisableVisualEditorPref extends Maintenance {
 	}
 }
 
-$maintClass = "AutodisableVisualEditorPref";
+$maintClass = AutodisableVisualEditorPref::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

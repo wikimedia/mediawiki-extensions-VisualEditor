@@ -639,7 +639,7 @@ class VisualEditorHooks {
 		global $wgLang;
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 
-		if ( !class_exists( 'BetaFeatures' ) ) {
+		if ( !class_exists( BetaFeatures::class ) ) {
 			// Config option for visual editing "alpha" state (no Beta Feature)
 			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 
@@ -950,15 +950,15 @@ class VisualEditorHooks {
 		}
 
 		$extensionMessages = [];
-		if ( class_exists( 'ConfirmEditHooks' ) ) {
+		if ( class_exists( ConfirmEditHooks::class ) ) {
 			$extensionMessages[] = 'captcha-edit';
 			$extensionMessages[] = 'captcha-label';
 
-			if ( class_exists( 'QuestyCaptcha' ) ) {
+			if ( class_exists( QuestyCaptcha::class ) ) {
 				$extensionMessages[] = 'questycaptcha-edit';
 			}
 
-			if ( class_exists( 'FancyCaptcha' ) ) {
+			if ( class_exists( FancyCaptcha::class ) ) {
 				$extensionMessages[] = 'fancycaptcha-edit';
 				$extensionMessages[] = 'fancycaptcha-reload-text';
 			}

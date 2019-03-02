@@ -409,7 +409,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 				$result['isRedirect'] = (string)$title->isRedirect();
 
-				if ( class_exists( 'FlaggablePageView' ) ) {
+				if ( class_exists( FlaggablePageView::class ) ) {
 					$view = FlaggablePageView::singleton();
 
 					$originalRequest = $view->getContext()->getRequest();
