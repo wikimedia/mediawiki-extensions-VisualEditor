@@ -30,7 +30,7 @@ OO.inheritClass( ve.ui.MWExportWikitextDialog, OO.ui.ProcessDialog );
 
 ve.ui.MWExportWikitextDialog.static.name = 'mwExportWikitext';
 
-ve.ui.MWExportWikitextDialog.static.title = ve.msg( 'visualeditor-savedialog-review-wikitext' );
+ve.ui.MWExportWikitextDialog.static.title = ve.msg( 'visualeditor-rebase-client-export' );
 
 ve.ui.MWExportWikitextDialog.static.actions = [
 	{
