@@ -182,8 +182,12 @@
 		} );
 	}
 
-	function showForm() {
+	function showForm( pushState ) {
 		var specialTitle = mw.Title.newFromText( 'Special:CollabPad' );
+
+		if ( pushState ) {
+			history.pushState( { tag: 'collabTarget' }, mw.msg( 'collabpad' ), specialTitle.getUrl() );
+		}
 
 		if ( target ) {
 			$( '#firstHeading' ).removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -289,7 +293,7 @@
 	}
 
 	$specialTab.on( 'click', function ( e ) {
-		showForm();
+		showForm( true );
 		e.preventDefault();
 	} );
 
