@@ -21,6 +21,7 @@ ve.dm.MWTransclusionBlockNode = function VeDmMWTransclusionBlockNode() {
 
 OO.inheritClass( ve.dm.MWTransclusionBlockNode, ve.dm.MWTransclusionNode );
 
+/* Only ve.dm.MWTransclusionNode matches, then creates block/inline nodes dynamically */
 ve.dm.MWTransclusionBlockNode.static.matchTagNames = [];
 
 ve.dm.MWTransclusionBlockNode.static.name = 'mwTransclusionBlock';
