@@ -145,7 +145,7 @@
 	"visualeditor-dialog-table-sortable": "Ordenatzeko aukera",
 	"visualeditor-dialog-table-wikitable": "Estiloduna (wikitaula)",
 	"visualeditor-dialog-template-title": "Txantiloia",
-	"visualeditor-dialog-transclusion-absent-template": "\"$1\" txantiloirik ez dago oraindik.",
+	"visualeditor-dialog-transclusion-absent-template": "Oraindik ez dago «$1» izeneko txantiloirik.",
 	"visualeditor-dialog-transclusion-add-content": "Edukia gehitu",
 	"visualeditor-dialog-transclusion-add-param": "Informazioa gehitu",
 	"visualeditor-dialog-transclusion-add-template": "Txantiloia gehitu",
