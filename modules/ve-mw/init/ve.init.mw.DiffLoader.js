@@ -22,7 +22,7 @@
 		 * Get a ve.dm.Document model from a Parsoid response
 		 *
 		 * @param {Object} response Parsoid response from the VisualEditor API
-		 * @param {number} [section] Section
+		 * @param {number|null} section Section. Null for the whole document.
 		 * @return {ve.dm.Document|null} Document, or null if an invalid response
 		 */
 		getModelFromResponse: function ( response, section ) {
@@ -31,7 +31,7 @@
 				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
-				doc = targetClass.static.parseDocument( data.content, 'visual', section, true );
+				doc = targetClass.static.parseDocument( data.content, 'visual', section, section !== null );
 				// Strip RESTBase IDs
 				Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
 					if ( element.id.match( metadataIdRegExp ) ) {
@@ -48,15 +48,18 @@
 		 *
 		 * @param {number} revId Revision ID
 		 * @param {string} [pageName] Page name, defaults to wgRelevantPageName
+		 * @param {number|null} [section=null] Section. Null for the whole document.
 		 * @param {jQuery.Promise} [parseDocumentModulePromise] Promise which resolves when Target#parseDocument is available
-		 * @param {number} [section] Section
 		 * @return {jQuery.Promise} Promise which resolves with a document model
 		 */
-		fetchRevision: function ( revId, pageName, parseDocumentModulePromise, section ) {
-			var cacheKey = revId + ( section !== undefined ? '/' + section : '' );
+		fetchRevision: function ( revId, pageName, section, parseDocumentModulePromise ) {
+			var cacheKey;
 
-			parseDocumentModulePromise = parseDocumentModulePromise || $.Deferred().resolve().promise();
 			pageName = pageName || mw.config.get( 'wgRelevantPageName' );
+			parseDocumentModulePromise = parseDocumentModulePromise || $.Deferred().resolve().promise();
+			section = section !== undefined ? section : null;
+
+			cacheKey = revId + ( section !== null ? '/' + section : '' );
 
 			revCache[ cacheKey ] = revCache[ cacheKey ] ||
 				mw.libs.ve.targetLoader.requestParsoidData( pageName, { oldId: revId, targetName: 'diff' } ).then( function ( response ) {
@@ -84,8 +87,8 @@
 			parseDocumentModulePromise = parseDocumentModulePromise || $.Deferred().resolve().promise();
 			oldPageName = oldPageName || mw.config.get( 'wgRelevantPageName' );
 
-			oldRevPromise = typeof oldIdOrPromise === 'number' ? this.fetchRevision( oldIdOrPromise, oldPageName, parseDocumentModulePromise ) : oldIdOrPromise;
-			newRevPromise = typeof newIdOrPromise === 'number' ? this.fetchRevision( newIdOrPromise, newPageName, parseDocumentModulePromise ) : newIdOrPromise;
+			oldRevPromise = typeof oldIdOrPromise === 'number' ? this.fetchRevision( oldIdOrPromise, oldPageName, null, parseDocumentModulePromise ) : oldIdOrPromise;
+			newRevPromise = typeof newIdOrPromise === 'number' ? this.fetchRevision( newIdOrPromise, newPageName, null, parseDocumentModulePromise ) : newIdOrPromise;
 
 			return $.when( oldRevPromise, newRevPromise, parseDocumentModulePromise ).then( function ( oldDoc, newDoc ) {
 				// TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.
