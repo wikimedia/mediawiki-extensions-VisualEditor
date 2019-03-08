@@ -105,7 +105,7 @@
 		 * Parsoid or RESTBase).
 		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
-		 * @param {string} pageName Page name to request
+		 * @param {string} pageName Page name to request, in prefixed DB key form (underscores instead of spaces)
 		 * @param {Object} [options] Options
 		 * @param {boolean} [options.sessionStore] Store result in session storage (by page+mode+section) for auto-save
 		 * @param {number|null|string} [options.section] Section to edit; number, null or 'new' (currently just source mode)
