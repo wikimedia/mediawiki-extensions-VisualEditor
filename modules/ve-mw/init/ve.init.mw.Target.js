@@ -178,7 +178,7 @@ ve.init.mw.Target.prototype.createModelFromDom = function () {
 
 /**
  * @inheritdoc
- * @param {number|string|null} section Section
+ * @param {number|string|null} section Section. Use null to unwrap all sections.
  * @param {boolean} [onlySection] Only return the requested section, otherwise returns the
  *  whole document with just the requested section still wrapped (visual mode only).
  */

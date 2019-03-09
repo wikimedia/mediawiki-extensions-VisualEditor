@@ -1075,7 +1075,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				// re-fetch the HTML
 				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( target.doc, 'visual' ) ).promise();
 			} else {
-				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), undefined, target.section !== null ? target.section : undefined );
+				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), target.section );
 			}
 		}
 
