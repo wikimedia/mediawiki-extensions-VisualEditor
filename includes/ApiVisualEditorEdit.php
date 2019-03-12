@@ -101,21 +101,18 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			/* Add back-compat subelements */ 'Types' => [],
 			/* Remove any metadata keys from the links array */ 'Strip' => 'all',
 		] );
-		$content = isset( $result['parse']['text']['*'] ) ? $result['parse']['text']['*'] : false;
-		$categorieshtml = isset( $result['parse']['categorieshtml']['*'] ) ?
-			$result['parse']['categorieshtml']['*'] : false;
-		$links = isset( $result['parse']['links'] ) ? $result['parse']['links'] : [];
+		$content = $result['parse']['text']['*'] ?? false;
+		$categorieshtml = $result['parse']['categorieshtml']['*'] ?? false;
+		$links = $result['parse']['links'] ?? [];
 		$revision = Revision::newFromId( $result['parse']['revid'] );
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
-		$displaytitle = isset( $result['parse']['displaytitle'] ) ?
-			$result['parse']['displaytitle'] : false;
+		$displaytitle = $result['parse']['displaytitle'] ?? false;
 		$modules = array_merge(
-			isset( $result['parse']['modulescripts'] ) ? $result['parse']['modulescripts'] : [],
-			isset( $result['parse']['modules'] ) ? $result['parse']['modules'] : [],
-			isset( $result['parse']['modulestyles'] ) ? $result['parse']['modulestyles'] : []
+			$result['parse']['modulescripts'] ?? [],
+			$result['parse']['modules'] ?? [],
+			$result['parse']['modulestyles'] ?? []
 		);
-		$jsconfigvars = isset( $result['parse']['jsconfigvars'] ) ?
-			$result['parse']['jsconfigvars'] : [];
+		$jsconfigvars = $result['parse']['jsconfigvars'] ?? [];
 
 		if ( $content === false || ( strlen( $content ) && $revision === null ) ) {
 			return false;
@@ -360,7 +357,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			);
 			$result = [ 'result' => 'success', 'cachekey' => $key ];
 		} elseif ( $params['paction'] === 'diff' ) {
-			$section = isset( $params['section'] ) ? $params['section'] : null;
+			$section = $params['section'] ?? null;
 			$diff = $this->diffWikitext( $title, $params['oldid'], $wikitext, $section );
 			if ( $diff['result'] === 'fail' ) {
 				$this->dieWithError( 'apierror-visualeditor-difffailed', 'difffailed' );
