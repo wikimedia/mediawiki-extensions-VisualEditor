@@ -21,7 +21,6 @@
 			"Yuki Shira"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Error querying MediaWiki API",
 	"apierror-visualeditor-badcachekey": "No cached serialization found with that key",
 	"apierror-visualeditor-difffailed": "Diff failed",
 	"apierror-visualeditor-docserver-http-error": "$1",
