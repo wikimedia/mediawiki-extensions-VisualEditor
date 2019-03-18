@@ -242,7 +242,8 @@ class ApiVisualEditor extends ApiBase {
 		$langlinks = $page['langlinks'];
 		$langnames = Language::fetchLanguageNames();
 		foreach ( $langlinks as $i => $lang ) {
-			if ( isset( $langnames[$lang['lang']] ) ) {
+			// Check is_array() to filter out API metadata (T218464)
+			if ( is_array( $lang ) && isset( $langnames[$lang['lang']] ) ) {
 				$langlinks[$i]['langname'] = $langnames[$lang['lang']];
 			}
 		}
