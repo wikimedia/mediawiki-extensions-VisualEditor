@@ -184,40 +184,7 @@ ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config 
  * @return {jQuery} Editable DOM selection
  */
 ve.init.mw.DesktopArticleTarget.prototype.getEditableContent = function () {
-	var $editableContent, $content, $before,
-		namespaceIds = mw.config.get( 'wgNamespaceIds' );
-
-	if ( mw.config.get( 'wgAction' ) === 'view' ) {
-		switch ( mw.config.get( 'wgNamespaceNumber' ) ) {
-			case namespaceIds.category:
-				// Put contents in a single wrapper
-				// TODO: Fix upstream
-				$content = $( '#mw-content-text > :not( .mw-category-generated )' );
-				$editableContent = $( '<div>' ).prependTo( $( '#mw-content-text' ) ).append( $content );
-				break;
-			case namespaceIds.file:
-				$editableContent = $( '#mw-imagepage-content' );
-				if ( !$editableContent.length ) {
-					// No image content, file doesn't exist, or is on Commons?
-					$editableContent = $( '<div>' ).attr( 'id', 'mw-imagepage-content' );
-					$before = $( '.sharedUploadNotice, #mw-imagepage-nofile' );
-					if ( $before.length ) {
-						$before.first().after( $editableContent );
-					} else {
-						// Nothing to anchor to, just prepend inside #mw-content-text
-						$( '#mw-content-text' ).prepend( $editableContent );
-					}
-				}
-				break;
-			default:
-				$editableContent = $( '#mw-content-text' );
-		}
-	} else {
-		// TODO: Load view page content if switching from edit source
-		$editableContent = $( '#mw-content-text' );
-	}
-
-	return $editableContent;
+	return $( '#mw-content-text' );
 };
 
 /**
@@ -1441,7 +1408,8 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	mw.hook( 'wikipage.content' ).fire( this.$editableContent.empty().append( $content ) );
+	this.$editableContent.find( '.mw-parser-output' ).replaceWith( $content );
+	mw.hook( 'wikipage.content' ).fire( this.$editableContent );
 	if ( displayTitle ) {
 		$( '#firstHeading' ).html( displayTitle );
 	}
