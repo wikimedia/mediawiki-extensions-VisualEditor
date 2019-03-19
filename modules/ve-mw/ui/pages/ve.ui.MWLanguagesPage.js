@@ -110,13 +110,13 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
  */
 ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred, response ) {
 	var i, iLen, languages = [],
-		langlinks = response && response.visualeditor && response.visualeditor.langlinks;
+		langlinks = OO.getProp( response, 'query', 'pages', 0, 'langlinks' );
 	if ( langlinks ) {
 		for ( i = 0, iLen = langlinks.length; i < iLen; i++ ) {
 			languages.push( {
 				lang: langlinks[ i ].lang,
-				langname: langlinks[ i ].langname,
-				title: langlinks[ i ][ '*' ],
+				langname: langlinks[ i ].autonym,
+				title: langlinks[ i ].title,
 				metaItem: null
 			} );
 		}
@@ -168,9 +168,13 @@ ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 	var deferred = $.Deferred();
 	// TODO: Detect paging token if results exceed limit
 	ve.init.target.getContentApi().get( {
-		action: 'visualeditor',
-		paction: 'getlanglinks',
-		page: ve.init.target.getPageName()
+		format: 'json',
+		formatversion: 2,
+		action: 'query',
+		prop: 'langlinks',
+		llprop: 'autonym',
+		lllimit: 500,
+		titles: ve.init.target.getPageName()
 	} )
 		.done( this.onAllLanguageItemsSuccess.bind( this, deferred ) )
 		.fail( this.onAllLanguageItemsError.bind( this, deferred ) );

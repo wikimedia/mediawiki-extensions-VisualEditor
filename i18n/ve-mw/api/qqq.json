@@ -30,7 +30,6 @@
 			"Woytecr"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "{{doc-apierror}}",
 	"apierror-visualeditor-badcachekey": "{{doc-apierror}}",
 	"apierror-visualeditor-difffailed": "{{doc-apierror}}",
 	"apierror-visualeditor-docserver-http-error": "{{Ignored}}\n{{doc-apierror}}\n\nParameters:\n* $1 - Error message, probably in English",

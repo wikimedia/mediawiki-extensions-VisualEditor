@@ -209,48 +209,6 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	/**
-	 * Provide the current language links for a given page title
-	 *
-	 * @param Title $title The page title for which to get the current language links
-	 * @return string[]|false The language links
-	 */
-	protected function getLangLinks( Title $title ) {
-		$apiParams = [
-			'action' => 'query',
-			'prop' => 'langlinks',
-			'lllimit' => 500,
-			'titles' => $title->getPrefixedDBkey(),
-		];
-		$api = new ApiMain(
-			new DerivativeRequest(
-				$this->getRequest(),
-				$apiParams,
-				/* was posted? */ false
-			),
-			/* enable write? */ true
-		);
-
-		$api->execute();
-		$result = $api->getResult()->getResultData();
-		if ( !isset( $result['query']['pages'][$title->getArticleID()] ) ) {
-			return false;
-		}
-		$page = $result['query']['pages'][$title->getArticleID()];
-		if ( !isset( $page['langlinks'] ) ) {
-			return [];
-		}
-		$langlinks = $page['langlinks'];
-		$langnames = Language::fetchLanguageNames();
-		foreach ( $langlinks as $i => $lang ) {
-			// Check is_array() to filter out API metadata (T218464)
-			if ( is_array( $lang ) && isset( $langnames[$lang['lang']] ) ) {
-				$langlinks[$i]['langname'] = $langnames[$lang['lang']];
-			}
-		}
-		return $langlinks;
-	}
-
-	/**
 	 * @inheritDoc
 	 */
 	public function execute() {
@@ -660,15 +618,6 @@ class ApiVisualEditor extends ApiBase {
 					];
 				}
 				break;
-
-			case 'getlanglinks':
-				$langlinks = $this->getLangLinks( $title );
-				if ( $langlinks === false ) {
-					$this->dieWithError( 'apierror-visualeditor-api-langlinks-error', 'api-langlinks-error' );
-				} else {
-					$result = [ 'result' => 'success', 'langlinks' => $langlinks ];
-				}
-				break;
 		}
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
@@ -772,7 +721,6 @@ class ApiVisualEditor extends ApiBase {
 					'wikitext',
 					'parsefragment',
 					'parsedoc',
-					'getlanglinks',
 				],
 			],
 			'wikitext' => null,
