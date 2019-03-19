@@ -237,23 +237,6 @@ ve.init.mw.MobileArticleTarget.prototype.goToHeading = function ( headingNode ) 
 };
 
 /**
- * @inheritdoc
- */
-ve.init.mw.MobileArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
-	var position,
-		target = this;
-
-	setTimeout( function () {
-		if ( ve.init.platform.constructor.static.isIos() ) {
-			position = headingNode.$element.offset().top - target.toolbar.$element.height();
-			target.surface.$element.closest( '.overlay-content' ).scrollTop( position );
-		} else {
-			ve.init.mw.MobileArticleTarget.super.prototype.scrollToHeading.call( target, headingNode );
-		}
-	} );
-};
-
-/**
  * Done with the editing toolbar
  */
 ve.init.mw.MobileArticleTarget.prototype.done = function () {
