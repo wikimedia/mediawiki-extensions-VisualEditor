@@ -5,7 +5,6 @@
 			"William Surya Permana"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Galat mengkueri API MediaWiki",
 	"apierror-visualeditor-badcachekey": "Tidak ditemukan serialisasi tembolok dengan kunci tersebut",
 	"apierror-visualeditor-difffailed": "Beda gagal",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService untuk peladen dokumen tidak ditentukan; lihat https://www.mediawiki.org/wiki/Extension:VisualEditor",

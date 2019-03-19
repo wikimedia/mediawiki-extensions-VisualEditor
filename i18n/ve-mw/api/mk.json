@@ -4,7 +4,6 @@
 			"Bjankuloski06"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Грешка при побарувањето од приложникот на МедијаВики",
 	"apierror-visualeditor-badcachekey": "Не најдов меѓускладирана серијализација за тој клуч",
 	"apierror-visualeditor-difffailed": "Разликата не успеа",
 	"apierror-visualeditor-docserver-unconfigured": "Не е зададен VirtualRESTService за документен опслужувач; погл. https://www.mediawiki.org/wiki/Extension:VisualEditor",

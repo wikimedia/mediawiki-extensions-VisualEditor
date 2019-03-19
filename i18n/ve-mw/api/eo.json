@@ -7,7 +7,6 @@
 			"Psychoslave"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Eraro pridemandante la MediaWiki-API",
 	"apierror-visualeditor-difffailed": "Diff malsukcesita",
 	"apihelp-visualeditor-description": "Liveras HTML5an kodon por paĝo el la servo de Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Kiam konservigu, asignu tempindikon de la redaktita revizio. Tio estas uzata por rekoni konflikoj pri redakto.",

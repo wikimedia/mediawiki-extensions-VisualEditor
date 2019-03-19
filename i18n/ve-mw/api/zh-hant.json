@@ -7,7 +7,6 @@
 			"Liuxinyu970226"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "查詢 MediaWiki API 錯誤",
 	"apierror-visualeditor-badcachekey": "使用該金鑰查無已快取的序列化內容",
 	"apierror-visualeditor-difffailed": "比較差異失敗",
 	"apierror-visualeditor-docserver-unconfigured": "用於文件伺服器的 VirtualRESTService 尚未定義，請查看\n https://www.mediawiki.org/wiki/Extension:VisualEditor",

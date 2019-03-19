@@ -1,6 +1,5 @@
 {
 	"@metadata": [],
-	"apierror-visualeditor-api-langlinks-error": "Greška pri upitu API-ja Medijavikija",
 	"apierror-visualeditor-badcachekey": "Nije pronađena keširana serijalizacija sa tim ključem",
 	"apierror-visualeditor-difffailed": "Prikaz razlike nije uspeo",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService za server dokumenata nije definisan; pogledajte https://www.mediawiki.org/wiki/Extension:VisualEditor",

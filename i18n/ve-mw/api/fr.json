@@ -9,7 +9,6 @@
 			"Zetud"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Erreur de l'interrogation de l'API MediaWiki",
 	"apierror-visualeditor-badcachekey": "Pas de mise en cache de sérialisation trouvée avec cette clé",
 	"apierror-visualeditor-difffailed": "Erreur dans Diff",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService n'est pas définit pour le serveur de documents; voir https://www.mediawiki.org/wiki/Extension:VisualEditor",

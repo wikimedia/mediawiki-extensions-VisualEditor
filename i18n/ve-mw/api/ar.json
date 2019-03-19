@@ -6,7 +6,6 @@
 			"فلورانس"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "خطأ أثناء استعلام MediaWiki API",
 	"apierror-visualeditor-badcachekey": "لا cached serialization تم العثور عليه مع هذا المفتاح",
 	"apierror-visualeditor-difffailed": "فشل الفرق",
 	"apierror-visualeditor-docserver-unconfigured": "لم يتم تعريف VirtualRESTService لملقم المستند، انظر https://www.mediawiki.org/wiki/Extension:VisualEditor",

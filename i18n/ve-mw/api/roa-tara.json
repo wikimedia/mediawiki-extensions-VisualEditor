@@ -4,7 +4,6 @@
 			"Joetaras"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Errore mendre ca 'nderroghe le API de MediaUicchi",
 	"apierror-visualeditor-badcachekey": "Nisciuna serializzazzione cesciate ha state acchiate cu sta chiave",
 	"apierror-visualeditor-difffailed": "Diff fallite",
 	"apierror-visualeditor-docserver-unconfigured": "'U servizie VirtualRESTService pe server d'u documende non g'è definite; 'ndruche https://www.mediawiki.org/wiki/Extension:VisualEditor",

@@ -6,7 +6,6 @@
 			"Toliño"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Erro ó consultar a API de MediaWiki",
 	"apierror-visualeditor-badcachekey": "Non foi atopada ningunha serialización en caché con esa chave",
 	"apierror-visualeditor-difffailed": "Erro no dif",
 	"apierror-visualeditor-docserver-unconfigured": "Non se definiu o VirtualRESTService para o servidor de documentos; vexa https://www.mediawiki.org/wiki/Extension:VisualEditor",

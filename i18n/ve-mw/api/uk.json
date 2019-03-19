@@ -7,7 +7,6 @@
 			"Ата"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Помилка запиту до MediaWiki API",
 	"apierror-visualeditor-badcachekey": "Не знайдено кешованої серіалізованої інформації з таким ключем",
 	"apierror-visualeditor-difffailed": "Не вдалося отримати різницю версій",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService для сервера документа не визначено; див. https://www.mediawiki.org/wiki/Extension:VisualEditor",

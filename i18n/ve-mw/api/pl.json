@@ -10,7 +10,6 @@
 			"Sutan"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Błąd podczas odpytywania API MediaWiki",
 	"apierror-visualeditor-badcachekey": "Nie znaleziono seryjnej pamięci podręcznej dla tego klucza",
 	"apierror-visualeditor-difffailed": "Porównywanie nie powiodło się",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService dla serwera dokumentów nie jest zdefiniowany; zobacz https://www.mediawiki.org/wiki/Extension:VisualEditor",

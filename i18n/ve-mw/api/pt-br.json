@@ -6,7 +6,6 @@
 			"TheGabrielZaum"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Erro ao consultar API MediaWiki",
 	"apierror-visualeditor-badcachekey": "Nenhuma serialização em cache encontrada com essa chave",
 	"apierror-visualeditor-difffailed": "Diff falhou",
 	"apierror-visualeditor-docserver-unconfigured": "O VirtualRESTService para o servidor de documentos não está definido; consulte https://www.mediawiki.org/wiki/Extension:VisualEditor",

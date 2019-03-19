@@ -7,7 +7,6 @@
 			"WikiPhoenix"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Fel uppstod när förfrågan skickades till MediaWiki API",
 	"apierror-visualeditor-badcachekey": "Ingen cachelagrad serialisering hittades med nyckeln",
 	"apierror-visualeditor-difffailed": "Diff misslyckades",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService för dokumentservern är inte definierad; se https://www.mediawiki.org/wiki/Extension:VisualEditor",

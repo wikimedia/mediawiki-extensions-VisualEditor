@@ -4,7 +4,6 @@
 			"Papuass"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Kļūda, veicot MediaWiki API vaicājumu",
 	"apierror-visualeditor-docserver": "Kļūda, savienojoties ar Parsoid/RESTbase serveri",
 	"apihelp-visualeditor-description": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
 	"apihelp-visualeditor-param-etag": "Nosūtāmais ETag.",

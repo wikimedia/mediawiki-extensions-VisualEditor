@@ -6,7 +6,6 @@
 			"Milicevic01"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Грешка при упиту API-ја Медијавикија",
 	"apierror-visualeditor-badcachekey": "Није пронађена кеширана серијализација са тим кључем",
 	"apierror-visualeditor-difffailed": "Приказ разлике није успео",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService за сервер докумената није дефинисан; погледајте https://www.mediawiki.org/wiki/Extension:VisualEditor",

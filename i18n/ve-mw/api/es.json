@@ -9,7 +9,6 @@
 			"Tiberius1701"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Error al consultar la API de MediaWiki",
 	"apierror-visualeditor-difffailed": "Falló la generación de las diferencias",
 	"apierror-visualeditor-docserver": "Error al ponerse en contacto con el servidor Parsoid/RESTbase",
 	"apierror-visualeditor-latestnotfound": "No se pudo encontrar la última revisión para ese título",

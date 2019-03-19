@@ -27,7 +27,8 @@
 			"Katpatuka",
 			"Bulgu",
 			"Diyapazon",
-			"Hedda"
+			"Hedda",
+			"Karduelis"
 		]
 	},
 	"tooltip-ca-createsource": "Bu sayfanın kaynak kodunu oluşturun",
@@ -206,7 +207,7 @@
 	"visualeditor-loaderror-title": "Editör yüklenemedi",
 	"visualeditor-loadwarning": "Sunucudan veri yüklenirken hata: $1. Yeniden denemek ister misiniz?",
 	"visualeditor-loadwarning-token": "Sunucudan düzenleme belirteci yüklenmesinde hata: $1. Yeniden denemek ister misiniz?",
-	"visualeditor-mainnamespacepagelink": "Project:Main namespace",
+	"visualeditor-mainnamespacepagelink": "Project:Ana ad alanı",
 	"visualeditor-media-input-placeholder": "Dosya ara",
 	"visualeditor-meta-tool": "Seçenekler",
 	"visualeditor-mweditmodesource-title": "Kaynak üzerinde düzenlemeye geçilsin mi?",

@@ -4,7 +4,6 @@
 			"Silovan"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "MediaWiki API-შ მოთხირიშ ჩლათა",
 	"apihelp-visualeditor-description": "HTML5-იშ დორთინაფა ხასჷლაშო parsoid სერვისშე.",
 	"apihelp-visualeditor-param-basetimestamp": "მუჟამსჷთ დოჩუანთჷნ, ქიგიორინეთ თე დორედაქტირაფილი გინომორსებაშ ნიშანო. გჷმირინუაფუ რედაქტირაფაშ კონფლიქტიშ გიოგორაფალო.",
 	"apihelp-visualeditor-param-cachekey": "დოფორმატირაფაშ ვარდა გიშაკერძაფეფშო, გიმირინეთ ქეშიშ წიმოხიანი დოფორმატაფაშ მოთხირიშ მოღალი თე კილაწკმა ართო. $1html-იშ მიოჯინშა ვემეღებათ.",

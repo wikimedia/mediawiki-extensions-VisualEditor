@@ -7,7 +7,6 @@
 			"Silovan"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "MediaWiki API-ს მოთხოვნის შეცდომა",
 	"apihelp-visualeditor-description": "HTML5-ის დაბრუნება გვერდისთვის parsoid სერვისიდან.",
 	"apihelp-visualeditor-param-basetimestamp": "როდესაც შეინახავთ, დააყენეთ ეს დარედაქტირებული გადასინჯვის ნიშნულად. გამოიყენება რედაქტირების კონფლიქტის აღმოსაჩენად.",
 	"apihelp-visualeditor-param-cachekey": "დაფორმატირების ან განსხვავებისათვის, გამოიყენეთ ქეშის წინა დაფორმატების მოთხოვნის შედეგი ამ გასაღებთან ერთად. $1html-ის მხედველობაში არმიღება.",

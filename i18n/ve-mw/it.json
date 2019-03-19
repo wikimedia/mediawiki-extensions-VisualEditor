@@ -35,7 +35,8 @@
 			"Greis",
 			"Segaz3",
 			"S4b1nuz E.656",
-			"Sarah Bernabei"
+			"Sarah Bernabei",
+			"Daimona Eaytoy"
 		]
 	},
 	"collabpad-import-subtitle": "Importato da $1",
@@ -55,7 +56,7 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Aggiungi descrizione locale con wikitesto",
 	"visualeditor-ca-createsource": "Crea con wikitesto",
 	"visualeditor-ca-editlocaldescriptionsource": "Modifica wikitesto locale",
-	"visualeditor-ca-editsource": "Modifica wikitesto",
+	"visualeditor-ca-editsource": "Modifica sorgente",
 	"visualeditor-ca-editsource-section": "modifica wikitesto",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",

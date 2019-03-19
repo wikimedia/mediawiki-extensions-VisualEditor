@@ -13,7 +13,6 @@
 			"Smigles"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Ошибка запроса к API MediaWiki",
 	"apierror-visualeditor-badcachekey": "Не найдено кэшированной сериализации с этим ключом",
 	"apierror-visualeditor-difffailed": "Сравнение не удалось",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService для сервера документов не определён; см. раздел https://www.mediawiki.org/wiki/Extension:VisualEditor",

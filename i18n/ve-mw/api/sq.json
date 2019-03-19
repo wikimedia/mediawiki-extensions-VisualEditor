@@ -6,7 +6,6 @@
 			"Besnik b"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Gabim në bërje kërkese ndaj API-t MediaWiki",
 	"apierror-visualeditor-difffailed": "Diff-i dështoi",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService për shërbyesin e dokumenteve s’është përcaktuar; shihni https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Gabim në lidhjen me shërbyesin Parsoid/RESTbase",

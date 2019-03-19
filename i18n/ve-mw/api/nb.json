@@ -8,7 +8,6 @@
 			"Kingu"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Feil under spørring mot MediaWikis API",
 	"apierror-visualeditor-badcachekey": "Ingen mellomlagret serialisering funnet med den nøkkelen",
 	"apierror-visualeditor-difffailed": "Diff feilet",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService for dokumentservern er ikke definert; se https://www.mediawiki.org/wiki/Extension:VisualEditor",

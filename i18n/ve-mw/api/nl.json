@@ -8,7 +8,6 @@
 			"Sjoerddebruin"
 		]
 	},
-	"apierror-visualeditor-api-langlinks-error": "Fout bij het opvragen van MediaWiki API",
 	"apierror-visualeditor-difffailed": "Wijz mislukt",
 	"apierror-visualeditor-docserver": "Fout met contact opnemen van de Parsoid/RESTbase server",
 	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
