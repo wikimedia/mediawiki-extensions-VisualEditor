@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"ⲁϩⲙⲉⲧ",
-			"Ⲁϩⲙⲉⲧ"
+			"Ⲁϩⲙⲉⲧ",
+			"Bloomaround"
 		]
 	},
-	"tooltip-ca-ve-edit": "ⲫⲱⲛϩ `ⲛⲧⲁⲓⲥⲉⲗⲓⲥ",
-	"visualeditor-ca-editsource": "ⲫⲱⲛϩ `ⲛϯⲡⲏⲅⲏ",
-	"visualeditor-ca-editsource-section": "ⲫⲱⲛϩ `ⲛϯⲡⲏⲅⲏ"
+	"tooltip-ca-ve-edit": "ⲫⲱⲛϩ ⲛ̀ⲧⲁⲓⲥⲉⲗⲓⲥ",
+	"visualeditor-ca-editsource": "ⲫⲱⲛϩ ⲛ̀ϯⲡⲏⲅⲏ",
+	"visualeditor-ca-editsource-section": "ⲫⲱⲛϩ ⲛ̀ϯⲡⲏⲅⲏ"
 }
