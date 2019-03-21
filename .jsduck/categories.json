@@ -63,6 +63,12 @@
 					"mw.Title",
 					"mw.widgets.*Widget"
 				]
+			},
+			{
+				"name": "MobileFrontend",
+				"classes": [
+					"VisualEditorOverlay"
+				]
 			}
 		]
 	},

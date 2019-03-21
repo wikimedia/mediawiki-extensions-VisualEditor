@@ -12,10 +12,15 @@
  * @extends ve.init.mw.ArticleTarget
  *
  * @constructor
+ * @param {VisualEditorOverlay} overlay Mobile frontend overlay
  * @param {Object} [config] Configuration options
  * @cfg {number} [section] Number of the section target should scroll to
  */
-ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( config ) {
+ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, config ) {
+	this.overlay = overlay;
+	this.$overlay = overlay.$el;
+	this.$overlaySurface = overlay.$el.find( '.surface' );
+
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		actions: false
@@ -71,13 +76,106 @@ ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
 // FIXME Some of these users will be on tablets, check for this
 ve.init.mw.MobileArticleTarget.static.platformType = 'phone';
 
+/* Static Methods */
+
+// FIXME This method is overridden in the MobileFrontend extension,
+// figure out a way to make it public there so that we can use it here
+/**
+ * @method
+ */
+ve.init.mw.MobileArticleTarget.static.parseSaveError = null;
+
 /* Methods */
+
+/**
+ * Destroy the target
+ */
+ve.init.mw.MobileArticleTarget.prototype.destroy = function () {
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.destroy.call( this );
+
+	this.$overlay.css( 'padding-top', '' );
+};
+
+// FIXME Method looks unused
+ve.init.mw.MobileArticleTarget.prototype.isToolbarOverSurface = function () {
+	return true;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
+	// MF provides the toolbar so there is no need to float the toolbar
+};
+
+/**
+ * Handle surface scroll events
+ */
+ve.init.mw.MobileArticleTarget.prototype.onSurfaceScroll = function () {
+	var nativeSelection, range;
+
+	if ( ve.init.platform.constructor.static.isIos() ) {
+		// iOS has a bug where if you change the scroll offset of a
+		// contentEditable or textarea with a cursor visible, it disappears.
+		// This function works around it by removing and reapplying the selection.
+		nativeSelection = this.getSurface().getView().nativeSelection;
+		if ( nativeSelection.rangeCount && document.activeElement.contentEditable === 'true' ) {
+			range = nativeSelection.getRangeAt( 0 );
+			nativeSelection.removeAllRanges();
+			nativeSelection.addRange( range );
+		}
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
+	var surface;
+	if ( this.overlay.isNewPage ) {
+		config = ve.extendObject( {
+			placeholder: this.overlay.options.placeholder
+		}, config );
+	}
+
+	// Parent method
+	surface = ve.init.mw.MobileArticleTarget
+		.super.prototype.createSurface.call( this, dmDoc, config );
+
+	surface.connect( this, { scroll: 'onSurfaceScroll' } );
+
+	return surface;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.setSurface = function ( surface ) {
+	var changed = surface !== this.surface;
+
+	// Parent method
+	// FIXME This actually skips ve.init.mw.Target.prototype.setSurface. Why?
+	ve.init.mw.Target.super.prototype.setSurface.apply( this, arguments );
+
+	if ( changed ) {
+		surface.$element.addClass( 'content' );
+		this.$overlaySurface.append( surface.$element );
+	}
+};
 
 /**
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
-	var surfaceModel;
+	var surfaceModel,
+		surface = this.getSurface();
+
+	if ( this.teardownPromise ) {
+		// Loading was cancelled, the overlay is already closed at this point. Do nothing.
+		// Otherwise e.g. scrolling from #goToHeading would kick in and mess things up.
+		return;
+	}
 
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
@@ -90,6 +188,24 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	this[ surfaceModel.getSelection().isNull() ? 'onSurfaceBlur' : 'onSurfaceFocus' ]();
 
 	this.events.trackActivationComplete();
+
+	this.overlay.hideSpinner();
+
+	surface.getContext().connect( this, { resize: 'adjustContentPadding' } );
+	this.adjustContentPadding();
+
+	this.maybeShowWelcomeDialog();
+};
+
+/**
+ * Match the content padding to the toolbar height
+ */
+ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
+	var toolbarHeight = this.getToolbar().$element.outerHeight(),
+		surface = this.getSurface();
+	surface.setToolbarHeight( toolbarHeight );
+	this.$overlay.css( 'padding-top', toolbarHeight );
+	this.getSurface().scrollCursorIntoView();
 };
 
 /**
@@ -144,6 +260,8 @@ ve.init.mw.MobileArticleTarget.prototype.createTargetWidget = function ( config 
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
+	var $header = this.overlay.$el.find( '.overlay-header-container' );
+
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
@@ -161,6 +279,18 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
 	// Append the context to the toolbar
 	this.toolbar.$bar.append( surface.getContext().$element );
+
+	// Animate the toolbar sliding into place.
+	// Do not animate if we're replacing the wikitext editor toolbar.
+	if ( !this.overlay.options.switched ) {
+		$header.addClass( 'toolbar-hidden' );
+		setTimeout( function () {
+			$header.addClass( 'toolbar-shown' );
+			setTimeout( function () {
+				$header.addClass( 'toolbar-shown-done' );
+			}, 250 );
+		} );
+	}
 };
 
 /**
@@ -168,7 +298,7 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
  */
 ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to the overlay header
-	this.toolbar.$element.appendTo( '.overlay-header > .toolbar' );
+	this.overlay.$el.find( '.overlay-header > .toolbar' ).append( this.toolbar.$element );
 	this.toolbar.initialize();
 };
 
