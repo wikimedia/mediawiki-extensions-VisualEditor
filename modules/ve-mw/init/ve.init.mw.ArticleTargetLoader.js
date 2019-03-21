@@ -55,6 +55,15 @@
 		}
 	}
 
+	// T218851: Section editing A/B test
+	if ( conf.enableVisualSectionEditing === 'mobile-ab' ) {
+		if ( !mw.user.isAnon() && mw.user.getId() % 2 ) {
+			conf.enableVisualSectionEditing = 'mobile';
+		} else {
+			conf.enableVisualSectionEditing = false;
+		}
+	}
+
 	mw.libs.ve = mw.libs.ve || {};
 
 	mw.libs.ve.targetLoader = {
@@ -134,7 +143,7 @@
 				if ( sessionState ) {
 					request = sessionState.request || {};
 					// Check true section editing is in use
-					enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
+					enableVisualSectionEditing = conf.enableVisualSectionEditing;
 					section = request.mode === 'source' || enableVisualSectionEditing === true || enableVisualSectionEditing === options.targetName ?
 						options.section : null;
 					// Check the requested page, mode and section match the stored one
