@@ -97,11 +97,6 @@ ve.init.mw.MobileArticleTarget.prototype.destroy = function () {
 	this.$overlay.css( 'padding-top', '' );
 };
 
-// FIXME Method looks unused
-ve.init.mw.MobileArticleTarget.prototype.isToolbarOverSurface = function () {
-	return true;
-};
-
 /**
  * @inheritdoc
  */
