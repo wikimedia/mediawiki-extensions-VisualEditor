@@ -259,6 +259,111 @@ ve.init.mw.MobileArticleTarget.prototype.createTargetWidget = function ( config 
 /**
  * @inheritdoc
  */
+ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( key, text ) {
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.loadFail.apply( this, arguments );
+
+	this.overlay.reportError( text );
+	this.overlay.hide();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.editSource = function () {
+	var target = this;
+	// If changes have been made tell the user they have to save first
+	if ( !this.getSurface().getModel().hasBeenModified() ) {
+		this.overlay.switchToSourceEditor();
+	} else {
+		OO.ui.confirm( mw.msg( 'mobile-frontend-editor-switch-confirm' ) ).then( function ( confirmed ) {
+			if ( confirmed ) {
+				target.showSaveDialog();
+			}
+		} );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.save = function () {
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.save.apply( this, arguments );
+
+	this.overlay.log( {
+		action: 'saveAttempt'
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.showSaveDialog.apply( this, arguments );
+
+	this.overlay.log( {
+		action: 'saveIntent'
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.saveComplete = function () {
+	var fragment = this.getSectionFragmentFromPage();
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
+
+	this.overlay.sectionId = fragment;
+	this.overlay.onSaveComplete();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, response ) {
+
+	// parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.saveFail.apply( this, arguments );
+
+	this.overlay.onSaveFailure( this.constructor.static.parseSaveError( response, status ) );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.tryTeardown.apply( this, arguments )
+		.then( function () {
+			window.history.back();
+		} );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.load = function () {
+	var surface;
+
+	// Create dummy surface to show toolbar while loading
+	// Call ve.init.Target directly to avoid firing surfaceReady
+	surface = ve.init.Target.prototype.addSurface.call( this, new ve.dm.Document( [
+		{ type: 'paragraph' }, { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] ) );
+	surface.setReadOnly( true );
+	// setSurface creates dummy toolbar
+	this.setSurface( surface );
+
+	return ve.init.mw.MobileArticleTarget.super.prototype.load.apply( this, arguments );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var $header = this.overlay.$el.find( '.overlay-header-container' );
 
