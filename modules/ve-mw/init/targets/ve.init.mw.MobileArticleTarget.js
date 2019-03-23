@@ -101,7 +101,94 @@ ve.init.mw.MobileArticleTarget.prototype.destroy = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
-	// MF provides the toolbar so there is no need to float the toolbar
+	var surfaceView, isActiveWithKeyboard, $header, $overlaySurface;
+	// Editor may not have loaded yet, in which case `this.surface` is undefined
+	surfaceView = this.surface && this.surface.getView();
+	isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.deactivated;
+
+	$header = this.overlay.$el.find( '.overlay-header-container' );
+	$overlaySurface = this.$overlaySurface;
+
+	// On iOS Safari, when the keyboard is open, the layout viewport reported by the browser is not
+	// updated to match the real viewport reduced by the keyboard (diagram: T218414#5027607). On all
+	// modern non-iOS browsers the layout viewport is updated to match real viewport.
+	//
+	// This allows the fixed toolbar to be scrolled out of view, ignoring `position: fixed` (because
+	// it refers to the layout viewport).
+	//
+	// When this happens, bring it back in by scrolling down a bit and back up until the top of the
+	// fake viewport is aligned with the top of the real viewport.
+
+	clearTimeout( this.onContainerScrollTimer );
+	if ( !isActiveWithKeyboard ) {
+		return;
+	}
+	// Wait until after the scroll, because 'scroll' events are not emitted for every frame the
+	// browser paints, so the toolbar would lag behind in a very unseemly manner. Additionally,
+	// getBoundingClientRect returns incorrect values during scrolling, so make sure to calculate
+	// it only after the scrolling ends (https://openradar.appspot.com/radar?id=6668472289329152).
+	this.onContainerScrollTimer = setTimeout( function () {
+		var pos, viewportHeight, scrollPos, headerHeight, headerTranslateY;
+
+		// Check if toolbar is offscreen. In a better world, this would reject all negative values
+		// (pos >= 0), but getBoundingClientRect often returns funny small fractional values after
+		// this function has done its job (which triggers another 'scroll' event) and before the
+		// user scrolled again. If we allowed it to run, it would trigger a hilarious loop! Toolbar
+		// being 1px offscreen is not a big deal anyway.
+		pos = $header[ 0 ].getBoundingClientRect().top;
+		if ( pos >= -1 ) {
+			return;
+		}
+
+		// We don't know how much we have to scroll because we don't know how large the real
+		// viewport is, but it's no larger than the layout viewport.
+		viewportHeight = window.innerHeight;
+		scrollPos = document.body.scrollTop;
+
+		// Scroll down and translate the surface by the same amount, otherwise the content at new
+		// scroll position visibly flashes.
+		$overlaySurface.css( 'transform', 'translateY( ' + viewportHeight + 'px )' );
+		document.body.scrollTop += viewportHeight;
+
+		// (Note that the scrolling we just did will naturally trigger another 'scroll' event,
+		// and run this handler again after 250ms. This is okay.)
+
+		// Prepate to animate toolbar sliding into view
+		$header.removeClass( 'toolbar-shown toolbar-shown-done' );
+		headerHeight = $header[ 0 ].offsetHeight;
+		headerTranslateY = Math.max( -headerHeight, pos );
+		$header.css( 'transform', 'translateY( ' + headerTranslateY + 'px )' );
+
+		// The scroll back up must be after a delay, otherwise no scrolling happens and the
+		// viewports are not aligned. requestAnimationFrame() seems to minimize weird flashes
+		// of white (although they still happen and I have no explanation for them).
+		requestAnimationFrame( function () {
+			// Scroll back up
+			$overlaySurface.css( 'transform', '' );
+			document.body.scrollTop = scrollPos;
+
+			this.onContainerScrollTimer = setTimeout( function () {
+				// Recheck, because weird things happen when you scroll to the bottom of the page.
+				// window.innerHeight *actually changes to accomodate the keyboard*, like it should, except
+				// it is off by a few pixels so we can't actually use it, and also nothing else in the
+				// browser seems to be aware of that, so positioning puts our toolbar offscreen again.
+				pos = $header[ 0 ].getBoundingClientRect().top - headerTranslateY;
+				if ( pos < -1 ) {
+					// `pos` is negative, so this scrolls up
+					$( document.body ).animate( { scrollTop: scrollPos + pos }, 250 );
+				}
+
+				// Animate toolbar sliding into view
+				$header.addClass( 'toolbar-shown' ).css( 'transform', '' );
+				setTimeout( function () {
+					$header.addClass( 'toolbar-shown-done' );
+				}, 250 );
+
+			// There has to be a delay here as well. If this is 0, then the getBoundingClientRect call
+			// returns bogus values and we scroll crazily all over the place.
+			}, 50 );
+		} );
+	}, 250 );
 };
 
 /**
@@ -209,6 +296,10 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 	this.getToolbar().$group.addClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
 	this.pageToolbar.$element.removeClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
+
+	if ( ve.init.platform.constructor.static.isIos() ) {
+		this.getSurface().$element.css( 'padding-bottom', '' );
+	}
 };
 
 /**
@@ -217,6 +308,10 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
 	this.getToolbar().$group.removeClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
 	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
+
+	if ( ve.init.platform.constructor.static.isIos() ) {
+		this.getSurface().$element.css( 'padding-bottom', this.$element.height() - this.getToolbar().$element.height() );
+	}
 };
 
 /**
