@@ -48,7 +48,8 @@
 			"Stjn",
 			"Evs",
 			"Vlad5250",
-			"Lega4"
+			"Lega4",
+			"Diralik"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -168,13 +169,13 @@
 	"visualeditor-dialog-meta-settings-index-default": "По умолчанию",
 	"visualeditor-dialog-meta-settings-index-disable": "Нет",
 	"visualeditor-dialog-meta-settings-index-force": "Да",
-	"visualeditor-dialog-meta-settings-index-help": "Принудительное индексировать страницу поисковыми движками, или наоборот, игнорировать ее. Не влияет на поиск в пределах сайта.",
+	"visualeditor-dialog-meta-settings-index-help": "Принудительное индексировать страницу поисковыми движками, или наоборот, игнорировать её. Не влияет на поиск в пределах сайта.",
 	"visualeditor-dialog-meta-settings-index-label": "Разрешить поисковым системам индексировать эту страницу",
 	"visualeditor-dialog-meta-settings-label": "Параметры страницы",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "По умолчанию",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Нет",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Да",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Принудительно отобразить дополнительную вкладку возле вкладки «$1» на этой странице, что упростит добавление нового раздела, или принудительно скрыть ее.",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "Принудительно отобразить дополнительную вкладку возле вкладки «$1» на этой странице, что упростит добавление нового раздела, или принудительно скрыть её.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Показать на этой странице вкладку для добавления нового раздела",
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Предотвратить автоматическую конвертацию содержания.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Не конвертируйте содержимое между языковыми вариантами",
