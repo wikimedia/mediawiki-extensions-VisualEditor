@@ -12,40 +12,30 @@
 	position: absolute;
 	opacity: 0.65;
 	transform: scale( 0.6 );
-	right: 0.5em;
+	right: 0;
 	bottom: 0;
 	transform-origin: bottom right;
 }
 
 .ve-edit-source .mw-ui-icon:before,
-.ve-edit-visual .mw-ui-icon:before {
+.ve-edit-source.mw-ui-icon:before,
+.ve-edit-visual .mw-ui-icon:before,
+.ve-edit-visual.mw-ui-icon:before {
 	/* Override weird styles from MW-UI */
 	margin-right: 0;
-}
-
-/* Silly selector for high specificity to override Minerva styles */
-#page-actions li#ca-edit {
-	margin-right: 0;
-}
-
-#page-actions li#ca-edit:first-child,
-#page-actions li#ca-ve-edit:first-child {
-	margin-right: -0.5em;
+	background-size: contain;
 }
 
 .mw-editsection-divider {
 	display: none;
 }
 
-/* Swap the order to visually match the order in the actions menu */
-/* Silly selector for high specificity to override Minerva styles */
-
-/* stylelint-disable-next-line selector-class-pattern */
-.content .mw-parser-output > * > span.mw-editsection {
-	display: flex;
+.mw-editsection .ve-edit-source,
+.mw-editsection .ve-edit-visual {
+	display: inline-block;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
-.content .mw-parser-output > * > span.mw-editsection .ve-edit-visual {
-	order: 2;
+#page-actions .ve-edit-source,
+#page-actions .ve-edit-visual {
+	padding-right: 0.5em;
 }

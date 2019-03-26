@@ -607,9 +607,10 @@
 				// HACK: Minerva doesn't have a normal tabs container, this only kind of works
 				pTabsId = isMinerva ? 'mw-mf-page-center' :
 					$( '#p-views' ).length ? 'p-views' : 'p-cactions',
-				$caSource = $( '#ca-viewsource' ),
-				$caEdit = $( '#ca-edit' ),
-				$caVeEdit = $( '#ca-ve-edit' ),
+				// Minerva puts the '#ca-...' ids on <a> nodes
+				$caSource = $( 'li#ca-viewsource' ),
+				$caEdit = $( 'li#ca-edit, li#page-actions-edit' ),
+				$caVeEdit = $( 'li#ca-ve-edit' ),
 				$caEditLink = $caEdit.find( 'a' ),
 				$caVeEditLink = $caVeEdit.find( 'a' ),
 				caVeEditNextnode =
@@ -641,11 +642,12 @@
 					);
 
 					$caVeEdit = $( caVeEdit );
+					$caVeEditLink = $caVeEdit.find( 'a' );
 					// HACK: Copy the 'class' attribute, otherwise the link is invisible on Minerva
 					if ( isMinerva ) {
 						$caVeEdit.attr( 'class', $caEdit.attr( 'class' ) );
+						$caVeEditLink.attr( 'class', $caEditLink.attr( 'class' ) );
 					}
-					$caVeEditLink = $caVeEdit.find( 'a' );
 				}
 			} else if ( $caEdit.length && $caVeEdit.length ) {
 				// Make the state of the page consistent with the config if needed
@@ -745,7 +747,11 @@
 					// Don't mess with section edit links on foreign file description pages (T56259)
 					if ( !$( '#ca-view-foreign' ).length ) {
 						$editLink
-							.attr( 'href', new mw.Uri( veEditUri ) )
+							.attr( 'href', function ( i, href ) {
+								var veUri = new mw.Uri( veEditUri );
+								veUri.query.section = ( new mw.Uri( href ) ).query.section;
+								return veUri.toString();
+							} )
 							.addClass( 'mw-editsection-visualeditor' );
 
 						if ( conf.tabPosition === 'before' ) {
