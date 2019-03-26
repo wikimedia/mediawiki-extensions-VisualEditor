@@ -8,7 +8,8 @@
 			"Kusavica",
 			"Helix84",
 			"Lexected",
-			"Patriccck"
+			"Patriccck",
+			"Robert Važan"
 		]
 	},
 	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
@@ -203,6 +204,11 @@
 	"visualeditor-preference-core-description": "Povoliť Vizuálny editor (nebude k dispozícii v diskusiách a niektorých ďalších menných priestoroch).",
 	"visualeditor-preference-core-label": "Vizuálna úprava",
 	"visualeditor-preference-enable": "Povoliť Vizuálny editor. Bude k dispozícii v týchto menných priestoroch: $1",
+	"visualeditor-preference-tabs": "Režim úprav:",
+	"visualeditor-preference-tabs-multi-tab": "Zobraziť záložky pre oba editory",
+	"visualeditor-preference-tabs-prefer-ve": "Vždy použiť vizuálny editor, ak je to možné",
+	"visualeditor-preference-tabs-prefer-wt": "Vždy použiť editor zdrojového kódu",
+	"visualeditor-preference-tabs-remember-last": "Zapamätať naposledy použitý editor",
 	"visualeditor-recreate": "Počas vašich úprav bola stránka zmazaná. Tlačidlom $1 ju obnovíte.",
 	"visualeditor-savedialog-error-badtoken": "Vašu úpravu nebolo možné spracovať, protože doba platnosti návštevy vyprašala.",
 	"visualeditor-savedialog-identify-anon": "Chcete stránku uložiť ako anonymný redaktor? Vaša IP adresa bude zverejnená v histórii úprav stránky.",
