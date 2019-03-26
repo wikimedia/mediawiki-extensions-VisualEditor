@@ -2211,14 +2211,15 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
  *
  * TODO: Do this in a less skin-dependent way
  *
+ * @param {jQuery} [context] Page context to search in, if narrowing down the content is required
  * @return {string} Hash fragment, or empty string if not found
  */
-ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function () {
+ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function ( context ) {
 	var section, $sections, $section;
 
 	// Assume there are section edit links, as the user just did a section edit. This also means
 	// that the section numbers line up correctly, as not every H_ tag is a numbered section.
-	$sections = $( '.mw-editsection' );
+	$sections = $( '.mw-editsection', context );
 	if ( this.section === 'new' ) {
 		// A new section is appended to the end, so take the last one.
 		section = $sections.length;
