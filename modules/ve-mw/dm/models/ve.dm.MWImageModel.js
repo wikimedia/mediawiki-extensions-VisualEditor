@@ -54,7 +54,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 
 	// Get wiki default thumbnail size
 	this.defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
-		.defaultUserOptions.defaultthumbsize;
+		.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
 
 	if ( config.resourceName ) {
 		this.setImageResourceName( config.resourceName );
@@ -123,7 +123,8 @@ ve.dm.MWImageModel.static.infoCache = {};
  */
 ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 	var attrs, newNode, newDimensions,
-		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' ).defaultUserOptions.defaultthumbsize;
+		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+			.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
 
 	attrs = ve.extendObject( {
 		mediaClass: 'Image',

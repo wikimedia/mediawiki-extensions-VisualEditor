@@ -869,8 +869,6 @@ class VisualEditorHooks {
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
-		$defaultUserOptions = $coreConfig->get( 'DefaultUserOptions' );
-		$thumbLimits = $coreConfig->get( 'ThumbLimits' );
 		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 		$availableContentModels = array_filter(
@@ -891,9 +889,7 @@ class VisualEditorHooks {
 				// @todo deprecate the global setting
 				$veConfig->get( 'VisualEditorPluginModules' )
 			),
-			'defaultUserOptions' => [
-				'defaultthumbsize' => $thumbLimits[ $defaultUserOptions['thumbsize'] ]
-			],
+			'thumbLimits' => $coreConfig->get( 'ThumbLimits' ),
 			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
 			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
