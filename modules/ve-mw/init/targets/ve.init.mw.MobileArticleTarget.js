@@ -401,8 +401,11 @@ ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.saveComplete = function () {
-	var fragment = this.getSectionFragmentFromPage();
+ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( html ) {
+	// TODO: parsing this is expensive just for the section details. We should
+	// change MobileFrontend+this to behave like desktop does and just rerender
+	// the page with the provided HTML (T219420).
+	var fragment = this.getSectionFragmentFromPage( $.parseHTML( html ) );
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
