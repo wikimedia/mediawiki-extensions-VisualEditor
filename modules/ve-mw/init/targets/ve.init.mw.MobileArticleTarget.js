@@ -93,8 +93,6 @@ ve.init.mw.MobileArticleTarget.static.parseSaveError = null;
 ve.init.mw.MobileArticleTarget.prototype.destroy = function () {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.destroy.call( this );
-
-	this.$overlay.css( 'padding-top', '' );
 };
 
 /**
@@ -286,7 +284,7 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	var toolbarHeight = this.getToolbar().$element.outerHeight(),
 		surface = this.getSurface();
 	surface.setToolbarHeight( toolbarHeight );
-	this.$overlay.css( 'padding-top', toolbarHeight );
+	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'padding-top', toolbarHeight );
 	this.getSurface().scrollCursorIntoView();
 };
 
