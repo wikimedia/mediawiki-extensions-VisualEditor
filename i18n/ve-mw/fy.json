@@ -4,7 +4,8 @@
 			"Kening Aldgilles",
 			"Robin0van0der0vliet",
 			"Robin van der Vliet",
-			"Sjoerddebruin"
+			"Sjoerddebruin",
+			"PiefPafPier"
 		]
 	},
 	"tooltip-ca-ve-edit": "Dizze side bewurkje",
@@ -13,6 +14,7 @@
 	"visualeditor-ca-editsource": "Boarne bewurkje",
 	"visualeditor-ca-editsource-section": "boarne bewurkje",
 	"visualeditor-categories-tool": "Kategoryen",
+	"visualeditor-changedesc-mwredirect": "Trochferwizingsdoel feroare fan $1 nei $2",
 	"visualeditor-descriptionpagelink": "Project:Fisuele tekstferwurker",
 	"visualeditor-dialog-media-position-none": "Gjin",
 	"visualeditor-dialog-media-title": "Media ynstellingen",

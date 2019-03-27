@@ -36,7 +36,8 @@
 			"Segaz3",
 			"S4b1nuz E.656",
 			"Sarah Bernabei",
-			"Daimona Eaytoy"
+			"Daimona Eaytoy",
+			"Sakretsu"
 		]
 	},
 	"collabpad-import-subtitle": "Importato da $1",
@@ -344,6 +345,7 @@
 	"visualeditor-savedialog-label-create": "Crea pagina",
 	"visualeditor-savedialog-label-error": "Errore",
 	"visualeditor-savedialog-label-publish-short": "Pubblica",
+	"visualeditor-savedialog-label-publish-short-start": "Pubblica…",
 	"visualeditor-savedialog-label-report": "Segnala un problema",
 	"visualeditor-savedialog-label-resolve-conflict": "Risolvi il conflitto",
 	"visualeditor-savedialog-label-resume-editing": "Riprendi a modificare",
