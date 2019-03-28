@@ -648,9 +648,12 @@ class ApiVisualEditor extends ApiBase {
 			(array)ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
 		return array_values( array_unique( array_map( function ( $namespace ) {
 			// Convert canonical namespace names to IDs
-			return is_numeric( $namespace ) ?
-				$namespace :
-				MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
+			$idFromName = MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
+			if ( $idFromName !== null ) {
+				return $idFromName;
+			}
+			// Allow namespaces to be specified by ID as well
+			return MWNamespace::exists( $namespace ) ? $namespace : null;
 		}, array_keys( array_filter( $availableNamespaces ) ) ) ) );
 	}
 
