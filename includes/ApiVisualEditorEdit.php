@@ -12,6 +12,8 @@ use \MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditorEdit extends ApiVisualEditor {
+	const MAX_CACHE_RECENT = 2;
+	const MAX_CACHE_TTL = 900;
 
 	/**
 	 * @inheritDoc
@@ -201,8 +203,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
 		$key = $cache->makeKey( 'visualeditor', 'serialization', $hash );
-		$ok = $cache->set( $key, $wikitext,
-			$this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
+		$ok = $cache->set( $key, $wikitext, self::MAX_CACHE_TTL );
+		if ( $ok ) {
+			$this->pruneExcessStashedEntries( $cache, $this->getUser(), $key );
+		}
+
 		$status = $ok ? 'ok' : 'failed';
 		$statsd->increment( "editstash.ve_serialization_cache.set_" . $status );
 
@@ -218,6 +223,24 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$statsd->increment( "editstash.ve_cache_stores.$status" );
 
 		return $hash;
+	}
+
+	/**
+	 * @param BagOStuff $cache
+	 * @param User $user
+	 * @param string $newKey
+	 */
+	private function pruneExcessStashedEntries( BagOStuff $cache, User $user, $newKey ) {
+		$key = $cache->makeKey( 'visualeditor-serialization-recent', $user->getName() );
+
+		$keyList = $cache->get( $key ) ?: [];
+		if ( count( $keyList ) >= self::MAX_CACHE_RECENT ) {
+			$oldestKey = array_shift( $keyList );
+			$cache->delete( $oldestKey );
+		}
+
+		$keyList[] = $newKey;
+		$cache->set( $key, $keyList, 2 * self::MAX_CACHE_TTL );
 	}
 
 	/**
