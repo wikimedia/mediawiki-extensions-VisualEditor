@@ -55,14 +55,18 @@
 }
 
 .ve-activated #firstHeading {
-	/* Override the styles above to allow the heading to be selected, because people enjoy
-	   copy-pasting it. Overriding pointer-events is surprisingly not required, and not desirable,
-	   because of section 0 edit links and other stuff inserted inside this element by gadgets,
-	   which should remain inactive. */
+	/* Override the styles above to allow the heading to be selected, for copy-pasting */
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
+	pointer-events: auto;
+	cursor: text;
+}
+
+.ve-activated #firstHeading a {
+	/* Re-disable any gadget-added links inside the heading, e.g. section 0 edit links */
+	pointer-events: none;
 }
 
 .ve-activated #catlinks {
