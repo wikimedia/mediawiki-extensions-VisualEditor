@@ -282,10 +282,12 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	var toolbarHeight = this.getToolbar().$element.outerHeight(),
-		surface = this.getSurface();
+		surface = this.getSurface(),
+		surfaceView = surface.getView();
 	surface.setToolbarHeight( toolbarHeight );
-	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'padding-top', toolbarHeight );
-	this.getSurface().scrollCursorIntoView();
+	surfaceView.getDocument().getDocumentNode().$element.css( 'padding-top', toolbarHeight );
+	surfaceView.emit( 'position' );
+	surface.scrollCursorIntoView();
 };
 
 /**
