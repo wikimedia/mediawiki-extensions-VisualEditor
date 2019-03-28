@@ -191,17 +191,20 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @return string The key of the wikitext in the serialisation cache
 	 */
 	protected function storeInSerializationCache( Title $title, $wikitext ) {
-		global $wgMemc;
-
 		if ( $wikitext === false ) {
 			return false;
 		}
 
+		$cache = ObjectCache::getLocalClusterInstance();
+		$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
+
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
-		$key = $wgMemc->makeKey( 'visualeditor', 'serialization', $hash );
-		$wgMemc->set( $key, $wikitext,
+		$key = $cache->makeKey( 'visualeditor', 'serialization', $hash );
+		$ok = $cache->set( $key, $wikitext,
 			$this->veConfig->get( 'VisualEditorSerializationCacheTimeout' ) );
+		$status = $ok ? 'ok' : 'failed';
+		$statsd->increment( "editstash.ve_serialization_cache.set_" . $status );
 
 		// Also parse and prepare the edit in case it might be saved later
 		$page = WikiPage::factory( $title );
@@ -212,9 +215,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$logger = LoggerFactory::getInstance( 'StashEdit' );
 			$logger->debug( "Cached parser output for VE content key '$key'." );
 		}
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			"editstash.ve_cache_stores.$status"
-		);
+		$statsd->increment( "editstash.ve_cache_stores.$status" );
 
 		return $hash;
 	}
@@ -226,9 +227,15 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @return string|null The wikitext
 	 */
 	protected function trySerializationCache( $hash ) {
-		global $wgMemc;
-		$key = $wgMemc->makeKey( 'visualeditor', 'serialization', $hash );
-		return $wgMemc->get( $key );
+		$cache = ObjectCache::getLocalClusterInstance();
+		$key = $cache->makeKey( 'visualeditor', 'serialization', $hash );
+		$value = $cache->get( $key );
+
+		$status = ( $value !== false ) ? 'hit' : 'miss';
+		$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$statsd->increment( "editstash.ve_serialization_cache.get_$status" );
+
+		return $value;
 	}
 
 	/**
