@@ -253,7 +253,7 @@ ve.dm.mwExample.MWInternalSectionLink.absoluteData = {
 ve.dm.mwExample.MWBlockImage = {
 	html:
 		'<figure typeof="mw:Image/Thumb" class="mw-halign-right foobar">' +
-			'<a href="Foo"><img src="' + ve.ce.minImgDataUri + '" width="1" height="2" resource="FooBar"></a>' +
+			'<a href="Foo"><img src="' + ve.ce.minImgDataUri + '" width="1" height="2" resource="FooBar" alt="alt text"></a>' +
 			'<figcaption>abc</figcaption>' +
 		'</figure>',
 	data: [
@@ -267,7 +267,7 @@ ve.dm.mwExample.MWBlockImage = {
 				src: ve.ce.minImgDataUri,
 				width: 1,
 				height: 2,
-				alt: null,
+				alt: 'alt text',
 				isError: false,
 				resource: 'FooBar',
 				mw: {},
@@ -291,7 +291,7 @@ ve.dm.mwExample.MWInlineImage = {
 	html:
 		'<figure-inline typeof="mw:Image" class="foo mw-valign-text-top">' +
 			'<a href="./File:Wiki.png">' +
-				'<img resource="./File:Wiki.png" src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" height="155" width="135">' +
+				'<img resource="./File:Wiki.png" src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" height="155" width="135" alt="alt text">' +
 			'</a>' +
 		'</figure-inline>',
 	data: {
@@ -302,7 +302,7 @@ ve.dm.mwExample.MWInlineImage = {
 			mediaClass: 'Image',
 			width: 135,
 			height: 155,
-			alt: null,
+			alt: 'alt text',
 			isError: false,
 			valign: 'text-top',
 			resource: './File:Wiki.png',

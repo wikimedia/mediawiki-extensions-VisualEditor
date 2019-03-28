@@ -140,6 +140,10 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 		img.setAttribute( srcAttr, data.attributes.src );
 	}
 
+	if ( typeof data.attributes.alt === 'string' ) {
+		img.setAttribute( 'alt', data.attributes.alt );
+	}
+
 	// RDFa type
 	figureInline.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
 	if ( !ve.isEmptyObject( data.attributes.mw ) ) {
