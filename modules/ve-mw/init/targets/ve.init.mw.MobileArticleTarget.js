@@ -191,26 +191,11 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 			$overlaySurface.css( 'transform', '' );
 			document.body.scrollTop = scrollPos;
 
-			this.onContainerScrollTimer = setTimeout( function () {
-				// Recheck, because weird things happen when you scroll to the bottom of the page.
-				// window.innerHeight *actually changes to accomodate the keyboard*, like it should, except
-				// it is off by a few pixels so we can't actually use it, and also nothing else in the
-				// browser seems to be aware of that, so positioning puts our toolbar offscreen again.
-				pos = $header[ 0 ].getBoundingClientRect().top - headerTranslateY;
-				if ( pos < -1 ) {
-					// `pos` is negative, so this scrolls up
-					$( document.body ).animate( { scrollTop: scrollPos + pos }, 250 );
-				}
-
-				// Animate toolbar sliding into view
-				$header.addClass( 'toolbar-shown' ).css( 'transform', '' );
-				setTimeout( function () {
-					$header.addClass( 'toolbar-shown-done' );
-				}, 250 );
-
-			// There has to be a delay here as well. If this is 0, then the getBoundingClientRect call
-			// returns bogus values and we scroll crazily all over the place.
-			}, 50 );
+			// Animate toolbar sliding into view
+			$header.addClass( 'toolbar-shown' ).css( 'transform', '' );
+			setTimeout( function () {
+				$header.addClass( 'toolbar-shown-done' );
+			}, 250 );
 		} );
 	}, 250 );
 };
