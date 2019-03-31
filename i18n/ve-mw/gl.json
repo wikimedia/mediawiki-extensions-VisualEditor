@@ -17,6 +17,7 @@
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Importado de $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Crear o código fonte desta páxina",
 	"tooltip-ca-edit": "Editar esta páxina mediante texto wiki",
@@ -72,8 +73,8 @@
 	"visualeditor-dialog-media-info-separator": "·",
 	"visualeditor-dialog-media-info-uploaded": "Subido o $1",
 	"visualeditor-dialog-media-noresults": "Non se atopou ningún resultado.",
-	"visualeditor-dialog-media-page-advanced": "Configuración avanzada",
-	"visualeditor-dialog-media-page-general": "Configuración xeral",
+	"visualeditor-dialog-media-page-advanced": "Avanzado",
+	"visualeditor-dialog-media-page-general": "Xeral",
 	"visualeditor-dialog-media-position-center": "Centro",
 	"visualeditor-dialog-media-position-checkbox": "Axustar o texto ao redor deste elemento",
 	"visualeditor-dialog-media-position-checkbox-help": "Pode facer que este elemento multimedia apareza en liña co texto da páxina, no canto de que apareza como elemento flotante. Isto faise en raras ocasións, dado que se romperá a fluidez do texto se desmarca esta caixa.",
