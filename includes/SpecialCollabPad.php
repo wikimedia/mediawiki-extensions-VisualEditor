@@ -55,8 +55,6 @@ class SpecialCollabPad extends SpecialPage {
 		$this->setHeaders();
 		$this->checkPermissions();
 
-		$request = $this->getRequest();
-
 		$output = $this->getOutput();
 
 		$output->addJsConfigVars( 'collabPadPageName', $subPage );
