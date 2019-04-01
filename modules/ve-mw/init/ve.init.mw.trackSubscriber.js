@@ -153,13 +153,22 @@
 			event.user_class = 'IP';
 		}
 
-		event[ actionPrefix + '_type' ] = event.type;
-		event[ actionPrefix + '_mechanism' ] = event.mechanism;
+		// Schema's kind of a mess of special properties
+		if ( action === 'init' || action === 'abort' || action === 'saveFailure' ) {
+			event[ actionPrefix + '_type' ] = event.type;
+		}
+		if ( action === 'init' || action === 'abort' ) {
+			event[ actionPrefix + '_mechanism' ] = event.mechanism;
+		}
 		if ( action !== 'init' ) {
+			// Schema actually does have an init_timing field, but we don't want to
+			// store it because it's not meaningful.
 			duration = Math.round( computeDuration( action, event, timeStamp ) );
 			event[ actionPrefix + '_timing' ] = duration;
 		}
-		event[ actionPrefix + '_message' ] = event.message;
+		if ( action === 'saveFailure' ) {
+			event[ actionPrefix + '_message' ] = event.message;
+		}
 		/* eslint-enable camelcase */
 
 		// Remove renamed properties
