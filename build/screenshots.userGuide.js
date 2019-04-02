@@ -49,7 +49,8 @@
 					function () {
 						var done = arguments[ arguments.length - 1 ],
 							surface = ve.init.target.surface;
-						ve.init.target.toolbar.tools.citefromid.onSelect();
+						// citefromid is being renamed (T219512)
+						( ve.init.target.toolbar.tools.citoid || ve.init.target.toolbar.tools.citefromid ).onSelect();
 						setTimeout( function () {
 							done(
 								seleniumUtils.getBoundingRect( [
@@ -261,7 +262,8 @@
 						setTimeout( function () {
 							done(
 								seleniumUtils.getBoundingRect( [
-									ve.init.target.toolbar.tools.citefromid.$element[ 0 ]
+									// citefromid is being renamed (T219512)
+									( ve.init.target.toolbar.tools.citoid || ve.init.target.toolbar.tools.citefromid ).$element[ 0 ]
 								] )
 							);
 						} );
