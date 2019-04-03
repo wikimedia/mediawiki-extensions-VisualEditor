@@ -21,7 +21,6 @@ QUnit.test( 'toDataElement', function ( assert ) {
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
-						hrefPrefix: '',
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
 						origTitle: 'Foo',
@@ -36,7 +35,6 @@ QUnit.test( 'toDataElement', function ( assert ) {
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
-						hrefPrefix: '',
 						lookupTitle: 'Foo?',
 						normalizedTitle: 'Foo?',
 						origTitle: 'Foo%3F',
@@ -51,7 +49,6 @@ QUnit.test( 'toDataElement', function ( assert ) {
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
-						hrefPrefix: '',
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo#bar',
 						origTitle: 'Foo#bar',
@@ -66,7 +63,6 @@ QUnit.test( 'toDataElement', function ( assert ) {
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
-						hrefPrefix: '',
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo#bar.3F',
 						origTitle: 'Foo#bar.3F',

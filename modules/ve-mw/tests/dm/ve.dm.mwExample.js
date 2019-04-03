@@ -229,8 +229,7 @@ ve.dm.mwExample.MWInternalLink.absoluteData = {
 		title: 'Foo/Bar',
 		origTitle: 'Foo/Bar',
 		normalizedTitle: 'Foo/Bar',
-		lookupTitle: 'Foo/Bar',
-		hrefPrefix: ''
+		lookupTitle: 'Foo/Bar'
 	}
 };
 
@@ -245,8 +244,7 @@ ve.dm.mwExample.MWInternalSectionLink.absoluteData = {
 		title: 'Foo#Bar',
 		origTitle: 'Foo#Bar',
 		normalizedTitle: 'Foo#Bar',
-		lookupTitle: 'Foo',
-		hrefPrefix: ''
+		lookupTitle: 'Foo'
 	}
 };
 
@@ -368,7 +366,6 @@ ve.dm.mwExample.withMeta = [
 	{
 		type: 'mwCategory',
 		attributes: {
-			hrefPrefix: './',
 			category: 'Category:Bar',
 			origCategory: 'Category:Bar',
 			sortkey: '',
@@ -417,7 +414,6 @@ ve.dm.mwExample.withMeta = [
 	{
 		type: 'mwCategory',
 		attributes: {
-			hrefPrefix: './',
 			category: 'Category:Foo foo',
 			origCategory: 'Category:Foo_foo',
 			sortkey: 'Bar baz#quux',
@@ -475,7 +471,6 @@ ve.dm.mwExample.withMetaRealData = [
 	{
 		type: 'mwCategory',
 		attributes: {
-			hrefPrefix: './',
 			category: 'Category:Bar',
 			origCategory: 'Category:Bar',
 			sortkey: '',
@@ -510,7 +505,6 @@ ve.dm.mwExample.withMetaRealData = [
 	{
 		type: 'mwCategory',
 		attributes: {
-			hrefPrefix: './',
 			category: 'Category:Foo foo',
 			origCategory: 'Category:Foo_foo',
 			sortkey: 'Bar baz#quux',
@@ -545,7 +539,6 @@ ve.dm.mwExample.withMetaMetaData = [
 		{
 			type: 'mwCategory',
 			attributes: {
-				hrefPrefix: './',
 				category: 'Category:Bar',
 				origCategory: 'Category:Bar',
 				sortkey: '',
@@ -583,7 +576,6 @@ ve.dm.mwExample.withMetaMetaData = [
 		{
 			type: 'mwCategory',
 			attributes: {
-				hrefPrefix: './',
 				category: 'Category:Foo foo',
 				origCategory: 'Category:Foo_foo',
 				sortkey: 'Bar baz#quux',
@@ -1409,55 +1401,6 @@ ve.dm.mwExample.domToDataCases = {
 			model.data.data[ 1 ].attributes.mw.body.extsrc = '\\relative c\' { d d d e e e }';
 		}
 	},
-	'internal link with ./ and ../': {
-		body: '<p><a rel="mw:WikiLink" href="./../../../Foo/Bar">Foo</a></p>',
-		head: '<base href="http://example.com/one/two/three/four/five" />',
-		data: [
-			{ type: 'paragraph' },
-			[
-				'F',
-				[ {
-					type: 'link/mwInternal',
-					attributes: {
-						title: 'Foo/Bar',
-						origTitle: 'Foo/Bar',
-						normalizedTitle: 'Foo/Bar',
-						lookupTitle: 'Foo/Bar',
-						hrefPrefix: './../../../'
-					}
-				} ]
-			],
-			[
-				'o',
-				[ {
-					type: 'link/mwInternal',
-					attributes: {
-						title: 'Foo/Bar',
-						origTitle: 'Foo/Bar',
-						normalizedTitle: 'Foo/Bar',
-						lookupTitle: 'Foo/Bar',
-						hrefPrefix: './../../../'
-					}
-				} ]
-			],
-			[
-				'o',
-				[ {
-					type: 'link/mwInternal',
-					attributes: {
-						title: 'Foo/Bar',
-						origTitle: 'Foo/Bar',
-						normalizedTitle: 'Foo/Bar',
-						lookupTitle: 'Foo/Bar',
-						hrefPrefix: './../../../'
-					}
-				} ]
-			],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
-		]
-	},
 	'internal link with absolute path': {
 		body: '<p>' + ve.dm.mwExample.MWInternalLink.absoluteOpen + 'Foo</a></p>',
 		data: [
@@ -1521,8 +1464,7 @@ ve.dm.mwExample.domToDataCases = {
 						title: '',
 						origTitle: '',
 						normalizedTitle: '',
-						lookupTitle: '',
-						hrefPrefix: './'
+						lookupTitle: ''
 					}
 				} ]
 			],
@@ -1544,8 +1486,7 @@ ve.dm.mwExample.domToDataCases = {
 						title: 'Foo?+%&Bar',
 						origTitle: 'Foo%3F+%25&Bar',
 						normalizedTitle: 'Foo?+%&Bar',
-						lookupTitle: 'Foo?+%&Bar',
-						hrefPrefix: './'
+						lookupTitle: 'Foo?+%&Bar'
 					}
 				} ]
 			],
@@ -1885,8 +1826,7 @@ ve.dm.mwExample.domToDataCases = {
 						title: 'Bar',
 						origTitle: 'Bar',
 						normalizedTitle: 'Bar',
-						lookupTitle: 'Bar',
-						hrefPrefix: './'
+						lookupTitle: 'Bar'
 					}
 				} ]
 			],
@@ -1898,8 +1838,7 @@ ve.dm.mwExample.domToDataCases = {
 						title: 'Bar',
 						origTitle: 'Bar',
 						normalizedTitle: 'Bar',
-						lookupTitle: 'Bar',
-						hrefPrefix: './'
+						lookupTitle: 'Bar'
 					}
 				} ]
 			],
@@ -1911,8 +1850,7 @@ ve.dm.mwExample.domToDataCases = {
 						title: 'Bar',
 						origTitle: 'Bar',
 						normalizedTitle: 'Bar',
-						lookupTitle: 'Bar',
-						hrefPrefix: './'
+						lookupTitle: 'Bar'
 					}
 				} ]
 			],

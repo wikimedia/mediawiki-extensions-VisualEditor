@@ -102,7 +102,6 @@ QUnit.test( 'convert', function ( assert ) {
 				annotations: [ {
 					type: 'link/mwInternal',
 					attributes: {
-						hrefPrefix: './',
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
 						origTitle: 'Foo',
@@ -135,7 +134,6 @@ QUnit.test( 'convert', function ( assert ) {
 				annotations: [ {
 					type: 'link/mwInternal',
 					attributes: {
-						hrefPrefix: './',
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
 						origTitle: 'Foo',

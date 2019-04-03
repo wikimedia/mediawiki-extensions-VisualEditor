@@ -157,21 +157,18 @@ ve.expandModuleNames = function ( moduleNames ) {
  * @param {string} resourceName Resource name, from a `href` or `resource` attribute
  * @return {Object} Object with the following properties:
  * @return {string} return.title Full page title in text form (with namespace, and spaces instead of underscores)
- * @return {string} return.hrefPrefix Href prefix like './' or '../'
- * @return {string} return.rawTitle Everything following `hrefPrefix` in input, unprocessed
+ * @return {string} return.rawTitle The title without URL decoding and underscore normalization applied
  */
 ve.parseParsoidResourceName = function ( resourceName ) {
 	// Resource names are always prefixed with './' to prevent the MediaWiki namespace from being
-	// interpreted as a URL protocol, consider e.g. 'href="./File:Foo.png"'. If this resource name
-	// came from a page that is a subpage, it is also prefixed with appropriate number of '../'.
+	// interpreted as a URL protocol, consider e.g. 'href="./File:Foo.png"'.
 	// (We accept input without the prefix, so this can also take plain page titles.)
-	var matches = resourceName.match( /^((?:\.\.?\/)*)(.*)$/ );
+	var matches = resourceName.match( /^(\.\/|)(.*)$/ );
 	return {
 		// '%' and '?' are valid in page titles, but normally URI-encoded. This also changes underscores
 		// to spaces.
 		title: ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] ),
-		rawTitle: matches[ 2 ],
-		hrefPrefix: matches[ 1 ]
+		rawTitle: matches[ 2 ]
 	};
 };
 

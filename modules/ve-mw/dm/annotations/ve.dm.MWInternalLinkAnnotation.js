@@ -33,17 +33,11 @@ ve.dm.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
 ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:WikiLink', 'mw:MediaLink' ];
 
 ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
-	var targetData, data,
+	var targetData,
 		resource = domElements[ 0 ].getAttribute( 'resource' );
 
 	if ( resource ) {
-		data = ve.parseParsoidResourceName( resource );
-
-		targetData = {
-			title: data.title,
-			rawTitle: data.rawTitle,
-			hrefPrefix: data.hrefPrefix
-		};
+		targetData = ve.parseParsoidResourceName( resource );
 	} else {
 		targetData = this.getTargetDataFromHref(
 			domElements[ 0 ].getAttribute( 'href' ),
@@ -54,7 +48,6 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 	return {
 		type: this.name,
 		attributes: {
-			hrefPrefix: targetData.hrefPrefix,
 			title: targetData.title,
 			normalizedTitle: this.normalizeTitle( targetData.title ),
 			lookupTitle: this.getLookupTitle( targetData.title ),
@@ -124,8 +117,6 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle 
  *    The title of the internal link, else the original href if href is external
  * @return {string} return.rawTitle
  *    The title without URL decoding and underscore normalization applied
- * @return {string} return.hrefPrefix
- *    Any ./ or ../ prefixes on a relative link
  * @return {boolean} return.isInternal
  *    True if the href pointed to the local wiki, false if href is external
  */
@@ -155,13 +146,8 @@ ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, d
 	// This href doesn't necessarily come from Parsoid (and it might not have the "./" prefix), but
 	// this method will work fine.
 	data = ve.parseParsoidResourceName( href );
-
-	return {
-		title: data.title,
-		rawTitle: data.rawTitle,
-		hrefPrefix: data.hrefPrefix,
-		isInternal: isInternal
-	};
+	data.isInternal = isInternal;
+	return data;
 };
 
 ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
@@ -171,20 +157,15 @@ ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
 };
 
 ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
-	var href,
-		prefix = './',
+	var encodedTitle,
 		title = dataElement.attributes.title,
 		origTitle = dataElement.attributes.origTitle;
 	if ( origTitle !== undefined && ve.decodeURIComponentIntoArticleTitle( origTitle ) === title ) {
 		// Restore href from origTitle
-		href = origTitle;
-		// Only use hrefPrefix if restoring from origTitle
-		if ( dataElement.attributes.hrefPrefix ) {
-			prefix = dataElement.attributes.hrefPrefix;
-		}
+		encodedTitle = origTitle;
 	} else {
 		// Don't escape slashes in the title; they represent subpages.
-		href = title.split( /(\/|#)/ ).map( function ( part ) {
+		encodedTitle = title.split( /(\/|#)/ ).map( function ( part ) {
 			if ( part === '/' || part === '#' ) {
 				return part;
 			} else {
@@ -192,7 +173,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 			}
 		} ).join( '' );
 	}
-	return prefix + href;
+	return './' + encodedTitle;
 };
 
 /**
