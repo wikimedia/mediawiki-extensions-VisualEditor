@@ -227,6 +227,15 @@ ve.dm.MWBlockImageNode.prototype.getCaptionNode = function () {
 	return node instanceof ve.dm.MWImageCaptionNode ? node : null;
 };
 
+/**
+ * @inheritdoc
+ */
+ve.dm.MWBlockImageNode.prototype.suppressSlugType = function () {
+	// TODO: Have alignment attribute changes trigger a parent branch node re-render
+	var align = this.getAttribute( 'align' );
+	return align !== 'none' && align !== 'center' ? 'float' : null;
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.unregister( ve.dm.BlockImageNode );
