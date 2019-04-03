@@ -1182,10 +1182,21 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 /**
  * Switch to edit source mode
  *
- * @abstract
- * @method
+ * Opens a confirmation dialog if the document is modified or VE wikitext mode
+ * is not available.
  */
-ve.init.mw.ArticleTarget.prototype.editSource = null;
+ve.init.mw.ArticleTarget.prototype.editSource = function () {
+	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
+
+	if ( ve.init.target.isModeAvailable( 'source' ) ) {
+		this.switchToWikitextEditor( false, modified );
+	} else if ( !modified ) {
+		this.switchToWikitextEditor( true, modified );
+	} else {
+		ve.ui.actionFactory.create( 'window', this.getSurface() )
+			.open( 'wikitextswitchconfirm', { target: this } );
+	}
+};
 
 /**
  * Get a document to save, cached until the surface is modified
@@ -2299,7 +2310,8 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 	var dataPromise,
 		target = this;
 
-	// We may have this.section but VE is always full page at the moment
+	// When switching we always pass the full page as changes in visual section mode
+	// can still affect the whole document (e.g. removing a reference)
 	this.section = null;
 
 	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
@@ -2319,25 +2331,36 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 				}
 			);
 		} else {
-			this.serialize( this.getDocToSave() );
-			dataPromise = this.serializing.then( function ( response ) {
-				// HACK - add parameters the API doesn't provide for a VE->WT switch
-				var data = response.visualeditoredit;
-				data.etag = target.etag;
-				data.fromEditedState = modified;
-				data.notices = target.remoteNotices;
-				data.protectedClasses = target.protectedClasses;
-				data.basetimestamp = target.baseTimeStamp;
-				data.starttimestamp = target.startTimeStamp;
-				data.oldid = target.revid;
-				data.checkboxesDef = target.checkboxesDef;
-				return response;
-			} );
+			dataPromise = this.getWikitextDataPromiseForDoc( modified );
 		}
 		this.reloadSurface( 'source', dataPromise );
 	} else {
 		this.switchToFallbackWikitextEditor( discardChanges, modified );
 	}
+};
+
+/**
+ * Get a data promise for wikitext editing based on the current doc state
+ *
+ * @param {boolean} modified Whether there were any changes
+ * @return {jQuery.Promise} Data promise
+ */
+ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( modified ) {
+	var target = this;
+	this.serialize( this.getDocToSave() );
+	return this.serializing.then( function ( response ) {
+		// HACK - add parameters the API doesn't provide for a VE->WT switch
+		var data = response.visualeditoredit;
+		data.etag = target.etag;
+		data.fromEditedState = modified;
+		data.notices = target.remoteNotices;
+		data.protectedClasses = target.protectedClasses;
+		data.basetimestamp = target.baseTimeStamp;
+		data.starttimestamp = target.startTimeStamp;
+		data.oldid = target.revid;
+		data.checkboxesDef = target.checkboxesDef;
+		return response;
+	} );
 };
 
 /**

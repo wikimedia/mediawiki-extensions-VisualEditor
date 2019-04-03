@@ -377,17 +377,23 @@ ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( key, text ) {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.editSource = function () {
-	var target = this;
-	// If changes have been made tell the user they have to save first
-	if ( !this.getSurface().getModel().hasBeenModified() ) {
-		this.overlay.switchToSourceEditor();
-	} else {
-		OO.ui.confirm( mw.msg( 'mobile-frontend-editor-switch-confirm' ) ).then( function ( confirmed ) {
-			if ( confirmed ) {
-				target.showSaveDialog();
-			}
+	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
+
+	this.switchToWikitextEditor( false, modified );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
+	var dataPromise;
+	if ( modified ) {
+		dataPromise = this.getWikitextDataPromiseForDoc( modified ).then( function ( response ) {
+			var content = ve.getProp( response, 'visualeditoredit', 'content' );
+			return { text: content };
 		} );
 	}
+	this.overlay.switchToSourceEditor( dataPromise );
 };
 
 /**

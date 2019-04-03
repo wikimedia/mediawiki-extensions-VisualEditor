@@ -1041,25 +1041,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
 };
 
 /**
- * Open the dialog to switch to edit source mode with the current wikitext, or just do it straight
- * away if the document is unmodified.
- *
- * @inheritdoc
- */
-ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
-	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
-
-	if ( ve.init.target.isModeAvailable( 'source' ) ) {
-		this.switchToWikitextEditor( false, modified );
-	} else if ( !modified ) {
-		this.switchToWikitextEditor( true, modified );
-	} else {
-		ve.ui.actionFactory.create( 'window', this.getSurface() )
-			.open( 'wikitextswitchconfirm', { target: this } );
-	}
-};
-
-/**
  * Modify tabs in the skin to support in-place editing.
  *
  * 'Read' and 'Edit source' (when not using single edit tab) bound here,
