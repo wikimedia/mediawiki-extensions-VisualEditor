@@ -61,7 +61,6 @@ ve.ui.MWWikitextSwitchConfirmDialog.prototype.getActionProcess = function ( acti
 	} else if ( action === 'cancel' ) {
 		return new OO.ui.Process( function () {
 			this.close( { action: action } );
-			this.target.resetDocumentOpacity();
 		}, this );
 	}
 

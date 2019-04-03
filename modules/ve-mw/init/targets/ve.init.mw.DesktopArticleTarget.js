@@ -1022,7 +1022,6 @@ ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, stat
 	OO.ui.alert( ve.msg( 'visualeditor-serializeerror', status ) );
 
 	this.getSurface().getDialogs().closeWindow( 'wikitextswitchconfirm' );
-	this.resetDocumentOpacity();
 
 	// It's possible to get here while the save dialog has never been opened (if the user uses
 	// the switch to source mode option)
@@ -1043,8 +1042,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
 
 /**
  * Open the dialog to switch to edit source mode with the current wikitext, or just do it straight
- * away if the document is unmodified. If we open the dialog, the document opacity will be set to
- * half, which can be reset with the resetDocumentOpacity function.
+ * away if the document is unmodified.
  *
  * @inheritdoc
  */
@@ -1056,8 +1054,6 @@ ve.init.mw.DesktopArticleTarget.prototype.editSource = function () {
 	} else if ( !modified ) {
 		this.switchToWikitextEditor( true, modified );
 	} else {
-		this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 0.5 );
-
 		ve.ui.actionFactory.create( 'window', this.getSurface() )
 			.open( 'wikitextswitchconfirm', { target: this } );
 	}
@@ -1591,13 +1587,6 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 		target.setupTriggerListeners();
 	} );
 	this.toolbarSetupDeferred.resolve();
-};
-
-/**
- * Resets the document opacity when we've decided to cancel switching to the wikitext editor.
- */
-ve.init.mw.DesktopArticleTarget.prototype.resetDocumentOpacity = function () {
-	this.getSurface().getView().getDocument().getDocumentNode().$element.css( 'opacity', 1 );
 };
 
 /**
