@@ -3,9 +3,15 @@
 		"authors": [
 			"OC Ripper",
 			"Sf",
-			"Zoranzoki21"
+			"Zoranzoki21",
+			"Vlad5250"
 		]
 	},
+	"apierror-visualeditor-badcachekey": "Nisam našao međuspremljenu serijalizaciju za taj ključ",
+	"apierror-visualeditor-difffailed": "Prikaz razlike nije uspjeo",
+	"apierror-visualeditor-docserver-unconfigured": "Nije određen VirtualRESTService za dokumentan server; pogl. https://www.mediawiki.org/wiki/Extension:VisualEditor",
+	"apierror-visualeditor-docserver": "Greška pri kontaktiranju servera Parsoid/RESTbase",
+	"apierror-visualeditor-latestnotfound": "Nisam mogao naći posljednje uređivanje naslova",
 	"apihelp-visualeditor-description": "Vraća HTML5 za stranicu sa servisa Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Kada snimate, postavite ovo za vremenski pečat revizije koja je bila uređena. Koristi se za otkrivanje sukoba uređivanja.",
 	"apihelp-visualeditor-param-cachekey": "Za serialize ili diff, koristite rezultat prethodnog serializeforcache zahtjeva sa ovim ključem. Premošćuje $1html.",
