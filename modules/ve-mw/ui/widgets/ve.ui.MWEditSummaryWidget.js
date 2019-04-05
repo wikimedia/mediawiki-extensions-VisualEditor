@@ -170,3 +170,23 @@ ve.ui.MWEditSummaryWidget.prototype.getLookupMenuOptionsFromData = function ( da
 		} );
 	} );
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWEditSummaryWidget.prototype.onLookupInputFocus = function () {
+	this.lookupInputFocused = true;
+	// Don't open menu on focus.
+	// TODO: Make this an option upstream (T169484)
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWEditSummaryWidget.prototype.onLookupInputMouseDown = function () {
+	// Always open the menu on mousedown, even if not focused.
+	if ( !this.lookupMenu.isVisible() ) {
+		this.populateLookupMenu();
+	}
+	// TODO: Make this an option upstream (T169484)
+};
