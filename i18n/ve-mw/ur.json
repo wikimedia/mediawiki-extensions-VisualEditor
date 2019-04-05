@@ -8,7 +8,8 @@
 			"عرفان ارشد",
 			"Obaid Raza",
 			"Muhammad Shuaib",
-			"Abdulq"
+			"Abdulq",
+			"Hmfs.ind"
 		]
 	},
 	"collabpad-doctitle": "مشترکہ پیڈ: $1",
@@ -97,6 +98,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "طے شدہ",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "نہیں",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "ہاں",
+	"visualeditor-dialog-meta-settings-nogallery-label": "نگار خانہ کو غیر فعال کریں",
 	"visualeditor-dialog-meta-settings-section": "صفحہ کی ترتیبات",
 	"visualeditor-dialog-meta-settings-toc-default": "اگر ضرورت ہو",
 	"visualeditor-dialog-meta-settings-toc-disable": "کبھی نہ دکھائیں",
@@ -118,6 +120,7 @@
 	"visualeditor-meta-tool": "اختیارات",
 	"visualeditor-mweditmodesource-tool-current": "ماخذی ترمیم",
 	"visualeditor-mweditmodeve-tool-current": "بصری ترمیم",
+	"visualeditor-mweditmodewt-popup-body": "آپ اس آئیکن پر کلک کرکے کسی بھی وقت مآخذی ترمیم میں جا سکتے ہیں۔",
 	"visualeditor-mwgallerydialog-caption-field-label": "نگارخانے کا عنوان",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "پورے نگارخانہ کا عنوان",
 	"visualeditor-mwgallerydialog-card-images": "تصویریں",
