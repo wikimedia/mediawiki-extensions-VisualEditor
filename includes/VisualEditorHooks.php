@@ -71,7 +71,11 @@ class VisualEditorHooks {
 		if ( isset( $skinsToolbarScrollOffset[$skinName] ) ) {
 			$toolbarScrollOffset = $skinsToolbarScrollOffset[$skinName];
 		}
-		$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
+		// T220158: Don't add this unless it's non-default
+		// TODO: Move this to packageFiles as it's not relevant to the HTML request.
+		if ( $toolbarScrollOffset !== 0 ) {
+			$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
+		}
 		$output->addJsConfigVars( 'wgVisualEditorUnsupportedEditParams', self::$unsupportedEditParams );
 
 		$output->addJsConfigVars(
