@@ -86,7 +86,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param string $path The RESTbase api path
 	 * @param array $params Request parameters
 	 * @param array $reqheaders Request headers
-	 * @return string Body of the RESTbase server's response
+	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
 	protected function requestRestbase( Title $title, $method, $path, $params, $reqheaders = [] ) {
 		global $wgVersion;
@@ -131,7 +131,7 @@ class ApiVisualEditor extends ApiBase {
 				'apierror-visualeditor-docserver-http'
 			);
 		}
-		return $response['body'];
+		return $response;
 	}
 
 	/**
@@ -157,16 +157,22 @@ class ApiVisualEditor extends ApiBase {
 	 * @param Title $title The title of the page to use as the parsing context
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
-	 * @return string The parsed content HTML
+	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
+	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
+	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
-	protected function parseWikitextFragment( Title $title, $wikitext, $bodyOnly ) {
+	protected function parseWikitextFragment(
+		Title $title, $wikitext, $bodyOnly, $oldid = null, $stash = false
+	) {
 		return $this->requestRestbase(
 			$title,
 			'POST',
-			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ),
+			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ) .
+				( $oldid === null ? '' : '/' . $oldid ),
 			[
 				'wikitext' => $wikitext,
 				'body_only' => $bodyOnly ? 1 : 0,
+				'stash' => $stash ? 1 : 0
 			]
 		);
 	}
@@ -205,7 +211,7 @@ class ApiVisualEditor extends ApiBase {
 
 			if ( $parse ) {
 				// We need to turn this transformed wikitext into parsoid html
-				$content = $this->parseWikitextFragment( $contextTitle, $content, true );
+				$content = $this->parseWikitextFragment( $contextTitle, $content, true )['body'];
 			}
 		}
 		return $content;
@@ -270,13 +276,34 @@ class ApiVisualEditor extends ApiBase {
 
 					// If requested, request HTML from Parsoid/RESTBase
 					if ( $params['paction'] === 'parse' ) {
-						$content = $this->requestRestbase(
-							$title,
-							'GET',
-							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid .
-								'?redirect=false&stash=true',
-							[]
-						);
+						$wikitext = $params['wikitext'] ?? null;
+						if ( $wikitext !== null ) {
+							$stash = $params['stash'];
+							$section = $section = $params['section'] ?? null;
+							if ( $params['pst'] ) {
+								$wikitext = $this->pstWikitext( $title, $wikitext );
+							}
+							if ( $section !== null ) {
+								$sectionContent = new WikitextContent( $wikitext );
+								$page = WikiPage::factory( $title );
+								$wikitext = $page->replaceSectionAtRev(
+									$section, $sectionContent, '', $oldid
+								)->getText();
+							}
+							$response = $this->parseWikitextFragment(
+								$title, $wikitext, false, $oldid, $stash
+							);
+							$content = $response['body'];
+							$restbaseHeaders = $response['headers'];
+						} else {
+							$content = $this->requestRestbase(
+								$title,
+								'GET',
+								'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid .
+									'?redirect=false&stash=true',
+								[]
+							)['body'];
+						}
 						if ( $content === false ) {
 							$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 						}
@@ -332,7 +359,7 @@ class ApiVisualEditor extends ApiBase {
 					$content = '';
 					Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
 					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
-						$content = $this->parseWikitextFragment( $title, $content, true );
+						$content = $this->parseWikitextFragment( $title, $content, true )['body'];
 					}
 					if ( $content === '' && !empty( $params['preload'] ) ) {
 						$content = $this->getPreloadContent(
@@ -580,6 +607,9 @@ class ApiVisualEditor extends ApiBase {
 					'oldid' => $oldid,
 					'blockinfo' => $blockinfo,
 				];
+				if ( $restbaseHeaders ) {
+					$result['etag'] = $restbaseHeaders['etag'];
+				}
 				if ( $params['paction'] === 'parse' ||
 					 $params['paction'] === 'wikitext' ||
 					 ( !empty( $params['preload'] ) && isset( $content ) )
@@ -614,7 +644,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 				$content = $this->parseWikitextFragment(
 					$title, $wikitext, $bodyOnly
-				);
+				)['body'];
 				if ( $content === false ) {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				} else {
@@ -734,6 +764,7 @@ class ApiVisualEditor extends ApiBase {
 			],
 			'wikitext' => null,
 			'section' => null,
+			'stash' => null,
 			'oldid' => null,
 			'editintro' => null,
 			'pst' => false,

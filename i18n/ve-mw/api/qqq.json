@@ -52,6 +52,7 @@
 	"apihelp-visualeditor-param-pst": "{{doc-apihelp-param|visualeditor|pst}}",
 	"apihelp-visualeditor-param-section": "{{doc-apihelp-param|visualeditor|section}}",
 	"apihelp-visualeditor-param-starttimestamp": "{{doc-apihelp-param|visualeditor|starttimestamp}}",
+	"apihelp-visualeditor-param-stash": "{{doc-apihelp-param|visualeditor|stash}}",
 	"apihelp-visualeditor-param-wikitext": "{{doc-apihelp-param|visualeditor|wikitext}}",
 	"apihelp-visualeditor-summary": "{{doc-apihelp-summary|visualeditor}}",
 	"apihelp-visualeditoredit-description": "{{doc-apihelp-description|visualeditoredit}}",
