@@ -7,7 +7,4 @@
 	<file>.</file>
 	<arg name="extensions" value="php,php5,inc"/>
 	<arg name="encoding" value="UTF-8"/>
-	<exclude-pattern>vendor</exclude-pattern>
-	<exclude-pattern>node_modules</exclude-pattern>
-	<exclude-pattern>lib/ve</exclude-pattern>
 </ruleset>
