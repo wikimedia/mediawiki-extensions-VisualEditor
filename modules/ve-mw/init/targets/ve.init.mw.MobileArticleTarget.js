@@ -132,7 +132,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	var surfaceView, isActiveWithKeyboard, $header, $overlaySurface;
 	// Editor may not have loaded yet, in which case `this.surface` is undefined
 	surfaceView = this.surface && this.surface.getView();
-	isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.deactivated;
+	isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
 
 	$header = this.overlay.$el.find( '.overlay-header-container' );
 	$overlaySurface = this.$overlaySurface;
