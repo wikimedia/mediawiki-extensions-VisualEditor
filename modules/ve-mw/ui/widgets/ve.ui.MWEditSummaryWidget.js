@@ -19,8 +19,9 @@
 ve.ui.MWEditSummaryWidget = function VeUiMWEditSummaryWidget( config ) {
 	config = config || {};
 
+	// HACK: Disable pending animation. Should be made an upstream option (T220204)
 	// Parent method
-	ve.ui.MWEditSummaryWidget.super.apply( this, arguments );
+	ve.ui.MWEditSummaryWidget.super.call( this, ve.extendObject( { $pending: $( [] ) }, config ) );
 
 	// Mixin method
 	OO.ui.mixin.LookupElement.call( this, ve.extendObject( { allowSuggestionsWhenEmpty: false }, config ) );
