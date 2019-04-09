@@ -71,6 +71,7 @@
 		"VisualEditorDisableForAnons": false,
 		"VisualEditorTransitionDefault": false,
 		"VisualEditorShowBetaWelcome": true,
+		"VisualEditorAllowExternalLinkPaste": false,
 
 		"VisualEditorNewAccountEnableProportion": false,
 		"VisualEditorFeedbackAPIURL": false,
