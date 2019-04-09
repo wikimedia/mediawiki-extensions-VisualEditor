@@ -22,6 +22,18 @@
 			display: block;
 		}
 	}
+
+	.ve-ce-attachedRootNode {
+		// Ensure whole page is focusable (T109508)
+		// Subtract toolbar height, margin-bottom and a little more
+		// to prevent scrolling.
+		min-height: ~'calc( 100vh - 5em )';
+
+		.ve-init-mw-mobileArticleTarget-ios & {
+			// More spacing required on iOS to prevent scrolling.
+			min-height: ~'calc( 100vh - 10em )';
+		}
+	}
 }
 
 /* stylelint-disable-next-line selector-class-pattern */

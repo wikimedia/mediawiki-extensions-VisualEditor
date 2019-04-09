@@ -33,6 +33,10 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget' );
+
+	if ( ve.init.platform.constructor.static.isIos() ) {
+		this.$element.addClass( 've-init-mw-mobileArticleTarget-ios' );
+	}
 };
 
 /* Inheritance */
