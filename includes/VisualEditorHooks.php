@@ -76,12 +76,21 @@ class VisualEditorHooks {
 		if ( $toolbarScrollOffset !== 0 ) {
 			$output->addJsConfigVars( 'wgVisualEditorToolbarScrollOffset', $toolbarScrollOffset );
 		}
-		$output->addJsConfigVars( 'wgVisualEditorUnsupportedEditParams', self::$unsupportedEditParams );
 
 		$output->addJsConfigVars(
 			'wgEditSubmitButtonLabelPublish',
 			$veConfig->get( 'EditSubmitButtonLabelPublish' )
 		);
+	}
+
+	/**
+	 * @internal For internal use in extension.json only.
+	 * @return array
+	 */
+	public static function getDataForDesktopArticleTargetInitModule() {
+		return [
+			'unsupportedEditParams' => self::$unsupportedEditParams,
+		];
 	}
 
 	/**
