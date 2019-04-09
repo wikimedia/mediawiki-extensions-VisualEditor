@@ -1822,6 +1822,15 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.ArticleTarget.prototype.getSurfaceConfig = function ( config ) {
+	return ve.init.mw.ArticleTarget.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
+		nullSelectionOnBlur: false
+	}, config ) );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.ArticleTarget.prototype.teardown = function () {
 	var surface,
 		target = this;
