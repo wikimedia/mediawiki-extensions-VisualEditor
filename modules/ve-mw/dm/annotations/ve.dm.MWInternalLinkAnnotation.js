@@ -173,6 +173,12 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 			}
 		} ).join( '' );
 	}
+	if ( encodedTitle.slice( 0, 1 ) === '#' ) {
+		// Special case: For a newly created link to a #fragment with
+		// no explicit title use the current title as prefix (T218581)
+		// TODO: Pass a 'doc' param to getPageName
+		encodedTitle = ve.init.target.getPageName() + encodedTitle;
+	}
 	return './' + encodedTitle;
 };
 
