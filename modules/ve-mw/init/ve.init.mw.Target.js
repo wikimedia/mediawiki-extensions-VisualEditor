@@ -100,30 +100,23 @@ ve.init.mw.Target.static.toolbarGroups = [
 	}
 ];
 
-ve.init.mw.Target.static.importRules = {
-	external: {
-		blacklist: [
-			// Annotations
-			'textStyle/span', 'textStyle/font', 'textStyle/underline', 'meta/language', 'textStyle/datetime',
-			// Nodes
-			'article', 'section', 'div', 'alienInline', 'alienBlock', 'comment'
-		],
-		htmlBlacklist: {
-			// Remove reference numbers copied from MW read mode (T150418)
-			remove: [ 'sup.reference:not( [typeof] )' ],
-			unwrap: [ 'fieldset', 'legend' ]
-		},
-		removeOriginalDomElements: true,
-		nodeSanitization: true
-	},
-	all: null
-};
+ve.init.mw.Target.static.importRules = ve.copy( ve.init.mw.Target.static.importRules );
 
-if ( !mw.config.get( 'wgVisualEditorConfig' ).allowExternalLinkPaste ) {
-	ve.init.mw.Target.static.importRules.external.blacklist.push(
-		'link/mwExternal'
-	);
-}
+ve.init.mw.Target.static.importRules.external.blacklist = ve.extendObject( {
+	// Annotations
+	'textStyle/underline': true,
+	'meta/language': true,
+	'textStyle/datetime': true,
+	'link/mwExternal': !mw.config.get( 'wgVisualEditorConfig' ).allowExternalLinkPaste,
+	// Node
+	article: true,
+	section: true
+}, ve.init.mw.Target.static.importRules.external.blacklist );
+
+ve.init.mw.Target.static.importRules.external.htmlBlacklist = ve.extendObject( {
+	// Remove reference numbers copied from MW read mode (T150418)
+	'sup.reference:not( [typeof] )': true
+}, ve.init.mw.Target.static.importRules.external.htmlBlacklist );
 
 /**
  * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.

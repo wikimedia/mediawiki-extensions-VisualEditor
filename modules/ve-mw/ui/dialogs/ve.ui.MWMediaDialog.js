@@ -137,23 +137,36 @@ ve.ui.MWMediaDialog.static.excludeCommands = [
  * @return {Object} Import rules
  */
 ve.ui.MWMediaDialog.static.getImportRules = function () {
+	var rules = ve.copy( ve.init.target.constructor.static.importRules );
 	return ve.extendObject(
-		ve.copy( ve.init.target.constructor.static.importRules ),
+		rules,
 		{
 			all: {
-				blacklist: OO.simpleArrayUnion(
-					ve.getProp( ve.init.target.constructor.static.importRules, 'all', 'blacklist' ) || [],
-					[
+				blacklist: ve.extendObject(
+					{
 						// Tables (but not lists) are possible in wikitext with a leading
 						// line break but we prevent creating these with the UI
-						'list', 'listItem', 'definitionList', 'definitionListItem',
-						'table', 'tableCaption', 'tableSection', 'tableRow', 'tableCell'
-					]
+						list: true,
+						listItem: true,
+						definitionList: true,
+						definitionListItem: true,
+						table: true,
+						tableCaption: true,
+						tableSection: true,
+						tableRow: true,
+						tableCell: true,
+						mwTable: true,
+						mwTransclusionTableCell: true
+					},
+					ve.getProp( rules, 'all', 'blacklist' )
 				),
 				// Headings are also possible, but discouraged
-				conversions: {
-					mwHeading: 'paragraph'
-				}
+				conversions: ve.extendObject(
+					{
+						mwHeading: 'paragraph'
+					},
+					ve.getProp( rules, 'all', 'conversions' )
+				)
 			}
 		}
 	);

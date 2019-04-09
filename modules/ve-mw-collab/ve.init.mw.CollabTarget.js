@@ -73,6 +73,9 @@ ve.init.mw.CollabTarget.static.toolbarGroups = ve.init.mw.CollabTarget.static.to
 	return group.name !== 'reference';
 } );
 
+ve.init.mw.CollabTarget.static.importRules = ve.copy( ve.init.mw.CollabTarget.static.importRules );
+ve.init.mw.CollabTarget.static.importRules.external.blacklist[ 'link/mwExternal' ] = false;
+
 ve.init.mw.CollabTarget.static.actionGroups = [
 	{
 		name: 'help',
