@@ -351,7 +351,10 @@
 				dataPromise = apiPromise.promise( { abort: apiXhr.abort } );
 			}
 
-			return dataPromise;
+			return dataPromise.then( function ( resp ) {
+				resp.veMode = 'visual';
+				return resp;
+			} );
 		},
 
 		/**
@@ -362,7 +365,7 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestWikitext: function ( pageName, options ) {
-			var data;
+			var data, dataPromise;
 
 			options = options || {};
 			data = {
@@ -384,7 +387,11 @@
 				data.oldid = options.oldId;
 			}
 
-			return new mw.Api().get( data );
+			dataPromise = new mw.Api().get( data );
+			return dataPromise.then( function ( resp ) {
+				resp.veMode = 'source';
+				return resp;
+			} );
 		}
 	};
 }() );
