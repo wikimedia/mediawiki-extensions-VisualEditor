@@ -580,6 +580,7 @@ ve.init.mw.MobileArticleTarget.prototype.goToHeading = function ( headingNode ) 
  * Done with the editing toolbar
  */
 ve.init.mw.MobileArticleTarget.prototype.done = function () {
+	this.getSurface().getModel().setNullSelection();
 	this.getSurface().getView().blur();
 };
 
