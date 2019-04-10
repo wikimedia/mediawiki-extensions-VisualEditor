@@ -4,7 +4,8 @@
 			"ArmenBakkalian",
 			"Azniv Stepanian",
 			"Rajemian",
-			"Դավիթ Սարոյան"
+			"Դավիթ Սարոյան",
+			"Kareyac"
 		]
 	},
 	"tooltip-ca-ve-edit": "Խմբագրել այս էջը",
@@ -12,5 +13,6 @@
 	"visualeditor-ca-createsource": "Ստեղծել աղբիւրը",
 	"visualeditor-ca-editsource": "Խմբագրել աղբիւրը",
 	"visualeditor-ca-editsource-section": "Խմբագրել աղբիւրը",
-	"visualeditor-descriptionpagelink": "Project:ՏեսողականԽմբագրիչ"
+	"visualeditor-descriptionpagelink": "Project:ՏեսողականԽմբագրիչ",
+	"visualeditor-mweditmodesource-warning-cancel": "Չեղարկել"
 }
