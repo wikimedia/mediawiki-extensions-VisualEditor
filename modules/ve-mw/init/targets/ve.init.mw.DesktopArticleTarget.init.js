@@ -25,9 +25,11 @@
 		tabPreference, enabledForUser, initialWikitext, oldId,
 		isLoading, tempWikitextEditor, tempWikitextEditorData, $toolbarPlaceholder,
 		data = require( './data.json' ),
-		editModes = {
-			edit: 'visual'
+		veactionToMode = {
+			edit: 'visual',
+			editsource: 'source'
 		},
+		availableModes = [],
 		active = false,
 		targetLoaded = false,
 		plugins = [];
@@ -224,8 +226,7 @@
 					return mw.libs.ve.targetLoader.loadModules( mode );
 				} )
 				.then( function () {
-					var target,
-						modes = [];
+					var target;
 
 					if ( !active ) {
 						// Loading was aborted
@@ -234,17 +235,9 @@
 						return $.Deferred().reject().promise();
 					}
 
-					if ( init.isVisualAvailable ) {
-						modes.push( 'visual' );
-					}
-
-					if ( init.isWikitextAvailable ) {
-						modes.push( 'source' );
-					}
-
 					target = ve.init.mw.targetFactory.create(
 						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ], {
-							modes: modes,
+							modes: availableModes,
 							defaultMode: mode
 						}
 					);
@@ -419,7 +412,7 @@
 		trackActivateStart( { type: 'page', mechanism: 'click', mode: mode } );
 
 		if ( !active ) {
-			if ( uri.query.action !== 'edit' && !( uri.query.veaction in editModes ) ) {
+			if ( uri.query.action !== 'edit' && !( uri.query.veaction in veactionToMode ) ) {
 				if ( history.pushState ) {
 					// Replace the current state with one that is tagged as ours, to prevent the
 					// back button from breaking when used to exit VE. FIXME: there should be a better
@@ -942,7 +935,7 @@
 
 			trackActivateStart( { type: 'section', mechanism: 'click', mode: mode } );
 
-			if ( history.pushState && !( uri.query.veaction in editModes ) ) {
+			if ( history.pushState && !( uri.query.veaction in veactionToMode ) ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
 				// back button from breaking when used to exit VE. FIXME: there should be a better
 				// way to do this. See also similar code in the DesktopArticleTarget constructor.
@@ -1020,8 +1013,12 @@
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
 
+	if ( init.isVisualAvailable ) {
+		availableModes.push( 'visual' );
+	}
+
 	if ( init.isWikitextAvailable ) {
-		editModes.editsource = 'source';
+		availableModes.push( 'source' );
 	}
 
 	enabledForUser = (
@@ -1087,8 +1084,9 @@
 
 		function getInitialEditMode() {
 			// On view pages if veaction is correctly set
-			if ( isViewPage && init.isAvailable && uri.query.veaction in editModes ) {
-				return editModes[ uri.query.veaction ];
+			var mode = veactionToMode[ uri.query.veaction ];
+			if ( isViewPage && init.isAvailable && availableModes.indexOf( mode ) !== -1 ) {
+				return mode;
 			}
 			// Edit pages
 			if ( isEditPage && isSupportedEditPage() ) {
