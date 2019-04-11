@@ -39,6 +39,8 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	// HACK: Disable references until supported (T194838)
 	ve.ui.commandRegistry.unregister( 'reference' );
 	ve.ui.commandRegistry.unregister( 'referencesList' );
+	ve.ui.commandRegistry.unregister( 'citoid' );
+	// citefromid is being renamed (T219512)
 	ve.ui.commandRegistry.unregister( 'citefromid' );
 
 	// eslint-disable-next-line no-jquery/no-global-selector
