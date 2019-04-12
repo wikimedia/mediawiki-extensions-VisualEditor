@@ -27,7 +27,7 @@
 		 */
 		getModelFromResponse: function ( response, section ) {
 			var doc,
-				targetClass = ve.init.mw.DesktopArticleTarget,
+				targetClass = ve.init.mw.ArticleTarget,
 				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
