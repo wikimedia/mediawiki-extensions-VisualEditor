@@ -753,6 +753,11 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	} else {
 		this.report.toggle( false );
 	}
+
+	// HACK: iOS Safari sometimes makes the entire panel completely disappear (T219680).
+	// Rebuilding it makes it reappear.
+	OO.ui.Element.static.reconsiderScrollbars( this.reviewPanel.$element[ 0 ] );
+
 	this.updateSize();
 };
 
