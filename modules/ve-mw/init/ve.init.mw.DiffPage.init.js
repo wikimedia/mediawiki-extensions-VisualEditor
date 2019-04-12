@@ -67,7 +67,7 @@
 			$visualDiff.empty();
 			progress.$element.removeClass( 'oo-ui-element-hidden' );
 			// TODO: Load a smaller subset of VE for computing the visual diff
-			modulePromise = mw.loader.using( [ 'ext.visualEditor.desktopArticleTarget' ].concat( pluginModules ) );
+			modulePromise = mw.loader.using( [ 'ext.visualEditor.articleTarget' ].concat( pluginModules ) );
 			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( function ( visualDiffGenerator ) {
 				diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
 
