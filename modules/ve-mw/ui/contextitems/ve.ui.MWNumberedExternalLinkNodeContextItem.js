@@ -75,12 +75,9 @@ ve.ui.MWNumberedExternalLinkNodeContextItem.prototype.onLabelButtonClick = funct
 		ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 	);
 	setTimeout( function () {
-		// Note: we can't rely on surfaceView.activeAnnotations, because the selection-focus created
-		// by the transaction might be outside the link node. As such, get the node immediately
-		// after the offset where we inserted the annotation, and then get the closest link
-		// annotation to it.
-		var node = surfaceView.getDocument().getNodeAndOffset( nodeRange.start + 1 ).node;
-		surfaceView.selectNodeContents( $( node ).closest( '.ve-ce-linkAnnotation' )[ 0 ] );
+		surfaceView.selectAnnotation( function ( view ) {
+			return view.model instanceof ve.dm.MWExternalLinkAnnotation;
+		} );
 	} );
 };
 
