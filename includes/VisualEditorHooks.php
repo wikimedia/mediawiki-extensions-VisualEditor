@@ -802,7 +802,7 @@ class VisualEditorHooks {
 	 * when the user it was set on explicitly enables VE.
 	 *
 	 * @param array $data User-submitted data
-	 * @param PreferencesForm $form A ContextSource
+	 * @param PreferencesFormOOUI $form A ContextSource
 	 * @param User $user User with new preferences already set
 	 * @param bool &$result Success or failure
 	 */
