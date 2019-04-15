@@ -11,8 +11,12 @@
 	"tooltip-ca-ve-edit": "Խմբագրել այս էջը",
 	"visualeditor-ca-createlocaldescriptionsource": "Աւելցնել տեղական նկարագրութեան աղբիւր",
 	"visualeditor-ca-createsource": "Ստեղծել աղբիւրը",
+	"visualeditor-ca-editlocaldescriptionsource": "Աւելցնել տեղական նկարագրութեան աղբիւր",
 	"visualeditor-ca-editsource": "Խմբագրել աղբիւրը",
 	"visualeditor-ca-editsource-section": "Խմբագրել աղբիւրը",
 	"visualeditor-descriptionpagelink": "Project:ՏեսողականԽմբագրիչ",
-	"visualeditor-mweditmodesource-warning-cancel": "Չեղարկել"
+	"visualeditor-dialog-media-position-left": "Ձախ",
+	"visualeditor-dialog-media-position-right": "Աջ",
+	"visualeditor-mweditmodesource-warning-cancel": "Չեղարկել",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Աղբիւր"
 }
