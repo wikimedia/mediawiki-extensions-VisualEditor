@@ -321,7 +321,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 				windowManager.destroy();
 
 				if ( data && data.action === 'prefer-wt' ) {
-					target.switchToWikitextEditor( true, false );
+					target.switchToWikitextEditor( false );
 				} else if ( data && data.action === 'multi-tab' ) {
 					location.reload();
 				}
@@ -715,7 +715,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			} else {
 				// TODO: Some sort of progress bar?
 				target.wikitextFallbackLoading = true;
-				target.switchToWikitextEditor( true, false );
+				target.switchToWikitextEditor( false );
 			}
 		} );
 	} else {
@@ -1512,7 +1512,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( discardChanges, modified ) {
+ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var uri, oldId, prefPromise,
 		target = this;
 
@@ -1522,16 +1522,14 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
 	prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
-	if ( discardChanges ) {
-		if ( modified ) {
-			ve.track( 'mwedit.abort', { type: 'switchwithout', mechanism: 'navigate', mode: 'visual' } );
-		} else {
-			ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate', mode: 'visual' } );
-		}
+	if ( !modified ) {
+		ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate', mode: 'visual' } );
 		this.submitting = true;
 		prefPromise.done( function () {
 			uri = target.viewUri.clone().extend( {
 				action: 'edit',
+				// No changes, safe to stay in section mode
+				section: target.section,
 				veswitched: 1
 			} );
 			if ( oldId ) {

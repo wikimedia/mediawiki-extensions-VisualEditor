@@ -1188,10 +1188,8 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 ve.init.mw.ArticleTarget.prototype.editSource = function () {
 	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
 
-	if ( ve.init.target.isModeAvailable( 'source' ) ) {
-		this.switchToWikitextEditor( false, modified );
-	} else if ( !modified ) {
-		this.switchToWikitextEditor( true, modified );
+	if ( ve.init.target.isModeAvailable( 'source' ) || !modified ) {
+		this.switchToWikitextEditor( modified );
 	} else {
 		ve.ui.actionFactory.create( 'window', this.getSurface() )
 			.open( 'wikitextswitchconfirm', { target: this } );
@@ -2267,13 +2265,11 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				.closed.then( function ( data ) {
 					target.welcomeDialogPromise.resolve();
 					target.welcomeDialog = null;
-					// switchToWikitextEditor and switchToVisualEditor are actually
-					// only defined in subclasses :/
 					if ( data && data.action === 'switch-wte' ) {
 						// TODO: Make this work on mobile - right now we can only
 						// get away with it because the button which triggers this
 						// action is hidden on mobile
-						target.switchToWikitextEditor( true, true );
+						target.switchToWikitextEditor( false );
 					} else if ( data && data.action === 'switch-ve' ) {
 						target.switchToVisualEditor();
 					}
@@ -2302,20 +2298,20 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 /**
  * Switches to the wikitext editor, either keeping (default) or discarding changes.
  *
- * @param {boolean} [discardChanges] Whether to discard changes or not.
  * @param {boolean} [modified] Whether there were any changes at all.
- * @param {boolean} [leaveVE] Leave VE, even if source mode is available
  */
-ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified, leaveVE ) {
+ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
 	var dataPromise,
 		target = this;
 
-	// When switching we always pass the full page as changes in visual section mode
+	// When switching with changes we always pass the full page as changes in visual section mode
 	// can still affect the whole document (e.g. removing a reference)
-	this.section = null;
+	if ( modified ) {
+		this.section = null;
+	}
 
-	if ( ve.init.target.isModeAvailable( 'source' ) && !leaveVE ) {
-		if ( discardChanges ) {
+	if ( ve.init.target.isModeAvailable( 'source' ) ) {
+		if ( !modified ) {
 			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.getPageName(), {
 				sessionStore: true,
 				section: this.section,
@@ -2325,7 +2321,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 				function ( response ) { return response; },
 				function () {
 					// TODO: Some sort of progress bar?
-					target.switchToWikitextEditor( discardChanges, modified, true );
+					target.switchToFallbackWikitextEditor( modified );
 					// Keep everything else waiting so our error handler can do its business
 					return $.Deferred().promise();
 				}
@@ -2335,7 +2331,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( discardCh
 		}
 		this.reloadSurface( 'source', dataPromise );
 	} else {
-		this.switchToFallbackWikitextEditor( discardChanges, modified );
+		this.switchToFallbackWikitextEditor( modified );
 	}
 };
 
@@ -2366,7 +2362,6 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
 /**
  * Switches to the fallback wikitext editor, either keeping (default) or discarding changes.
  *
- * @param {boolean} [discardChanges] Whether to discard changes or not.
  * @param {boolean} [modified] Whether there were any changes at all.
  */
 ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {
