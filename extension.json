@@ -698,7 +698,8 @@
 				"modules/ve-mw/init/ve.init.mw.SaveErrorHandler.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
+				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWSaveTool.js"
 			],
 			"dependencies": [
 				"ext.visualEditor.mediawiki",

@@ -175,7 +175,7 @@
 					// This function is converted to a string and executed in the browser
 					function () {
 						var done = arguments[ arguments.length - 1 ];
-						ve.init.target.toolbarSaveButton.emit( 'click' );
+						ve.init.target.toolbarSaveButton.onSelect();
 						setTimeout( function () {
 							done(
 								seleniumUtils.getBoundingRect( [

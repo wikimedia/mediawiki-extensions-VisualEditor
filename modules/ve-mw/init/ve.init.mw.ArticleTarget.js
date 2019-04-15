@@ -1878,7 +1878,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 	ve.init.mw.ArticleTarget.super.prototype.setupToolbar.apply( this, arguments );
 
 	this.setupToolbarSaveButton();
-	this.attachToolbarSaveButton();
+	this.updateToolbarSaveButtonState();
 
 	if ( this.saveDialog ) {
 		this.editSummaryValue = this.saveDialog.editSummaryInput.getValue();
@@ -1912,39 +1912,12 @@ ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess 
 };
 
 /**
- * Add content and event bindings to toolbar save button.
+ * Setup the toolbarSaveButton property to point to the save tool
  *
- * @param {Object} [config] Configuration options for the button
+ * @method
+ * @abstract
  */
-ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = function ( config ) {
-	if ( !this.toolbarSaveButton ) {
-		this.toolbarSaveButton = new OO.ui.ButtonWidget( ve.extendObject( {
-			label: this.getSaveButtonLabel( true ),
-			flags: [ 'progressive', 'primary' ],
-			disabled: !this.restoring
-		}, config ) );
-
-		// NOTE (phuedx, 2014-08-20): This class is used by the firsteditve guided
-		// tour to attach a guider to the "Save page" button.
-		this.toolbarSaveButton.$element.addClass( 've-ui-toolbar-saveButton' );
-
-		if ( ve.msg( 'accesskey-save' ) !== '-' && ve.msg( 'accesskey-save' ) !== '' ) {
-			// FlaggedRevs tries to use this - it's useless on VE pages because all that stuff gets hidden, but it will still conflict so get rid of it
-			this.$saveAccessKeyElements = $( '[accesskey="' + ve.msg( 'accesskey-save' ) + '"]' ).removeAttr( 'accesskey' );
-			this.toolbarSaveButton.$button.attr( 'accesskey', ve.msg( 'accesskey-save' ) );
-		}
-
-		this.toolbarSaveButton.connect( this, { click: 'onToolbarSaveButtonClick' } );
-	}
-	this.updateToolbarSaveButtonState();
-};
-
-/**
- * Add the save button to the user interface.
- */
-ve.init.mw.ArticleTarget.prototype.attachToolbarSaveButton = function () {
-	this.toolbar.$actions.append( this.toolbarSaveButton.$element );
-};
+ve.init.mw.ArticleTarget.prototype.setupToolbarSaveButton = null;
 
 /**
  * Re-evaluate whether the article can be saved
@@ -1973,20 +1946,9 @@ ve.init.mw.ArticleTarget.prototype.isSaveable = function () {
  * Update the toolbar save button to reflect if the article can be saved
  */
 ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
-	// Disable the save button if we can't save
-	var wasDisabled = this.toolbarSaveButton.isDisabled(),
-		isDisabled = !this.isSaveable();
-	if ( wasDisabled !== isDisabled ) {
-		this.toolbarSaveButton.setDisabled( isDisabled );
-		mw.hook( 've.toolbarSaveButton.stateChanged' ).fire( isDisabled );
-	}
-};
-
-/**
- * Handle clicks on the save button in the toolbar.
- */
-ve.init.mw.ArticleTarget.prototype.onToolbarSaveButtonClick = function () {
-	this.showSaveDialog();
+	// This should really be an emit('updateState') but that would cause
+	// every tool to be updated on every transaction.
+	this.toolbarSaveButton.onUpdateState();
 };
 
 /**

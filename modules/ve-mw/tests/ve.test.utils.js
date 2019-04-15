@@ -13,6 +13,9 @@
 	}
 	OO.inheritClass( MWDummyTarget, ve.test.utils.DummyTarget );
 	MWDummyTarget.prototype.setDefaultMode = function () {};
+	MWDummyTarget.prototype.isSaveable = function () {
+		return true;
+	};
 	MWDummyTarget.prototype.parseWikitextFragment = function () {
 		// Ensure a mock server is used (e.g. as in ve.ui.MWWikitextStringTransferHandler)
 		return new mw.Api().post();
