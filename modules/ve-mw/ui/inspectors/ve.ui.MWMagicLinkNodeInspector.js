@@ -142,6 +142,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 	return ve.ui.MWMagicLinkNodeInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			var content, annotation, annotations,
+				surfaceView = this.manager.getSurface().getView(),
 				surfaceModel = this.getFragment().getSurface(),
 				doc = surfaceModel.getDocument(),
 				nodeRange = this.selectedNode.getOuterRange(),
@@ -166,6 +167,11 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 					surfaceModel.change(
 						ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 					);
+					setTimeout( function () {
+						surfaceView.selectAnnotation( function ( view ) {
+							return view.model instanceof ve.dm.LinkAnnotation;
+						} );
+					} );
 				}
 			} else if ( done && this.validate( value ) ) {
 				surfaceModel.change(
