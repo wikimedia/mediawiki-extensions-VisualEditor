@@ -1096,10 +1096,7 @@
 				"lib/ve/src/ui/styles/ve.ui.DebugBar.css"
 			],
 			"skinStyles": {
-				"vector": [
-					"lib/ve/src/themes/wikimediaui.css"
-				],
-				"minerva": [
+				"default": [
 					"lib/ve/src/themes/wikimediaui.css"
 				],
 				"apex": [
@@ -1509,10 +1506,7 @@
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWEducationPopupTool.css"
 			],
 			"skinStyles": {
-				"vector": [
-					"modules/ve-mw/themes/wikimediaui.css"
-				],
-				"minerva": [
+				"default": [
 					"modules/ve-mw/themes/wikimediaui.css"
 				],
 				"apex": [
