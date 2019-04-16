@@ -24,6 +24,7 @@
 		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, enabledForUser, initialWikitext, oldId,
 		isLoading, tempWikitextEditor, tempWikitextEditorData, $toolbarPlaceholder,
+		data = require( './data.json' ),
 		editModes = {
 			edit: 'visual'
 		},
@@ -1079,7 +1080,7 @@
 		}
 
 		function isSupportedEditPage() {
-			return mw.config.get( 'wgVisualEditorUnsupportedEditParams' ).every( function ( param ) {
+			return data.unsupportedEditParams.every( function ( param ) {
 				return uri.query[ param ] === undefined;
 			} );
 		}

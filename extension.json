@@ -307,7 +307,13 @@
 		},
 		"ext.visualEditor.desktopArticleTarget.init": {
 			"class": "VisualEditorDesktopArticleTargetInitModule",
-			"scripts": "modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
+			"packageFiles": [
+				"modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
+				{
+					"name": "modules/ve-mw/init/targets/data.json",
+					"callback": "VisualEditorHooks::getDataForDesktopArticleTargetInitModule"
+				}
+			],
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.init.css",
 			"skinStyles": {
 				"default": [
