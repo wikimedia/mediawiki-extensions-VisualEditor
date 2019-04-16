@@ -275,17 +275,11 @@
 				"default": [
 					"modules/ve-mw/init/styles/ve.init.mw.ProgressBarWidget-wikimediatheme.css"
 				],
-				"vector": [
-					"modules/ve-mw/init/styles/ve.init.mw.ProgressBarWidget-wikimediatheme.css"
-				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.ProgressBarWidget-apextheme.css"
 				],
 				"apex": [
 					"modules/ve-mw/init/styles/ve.init.mw.ProgressBarWidget-apextheme.css"
-				],
-				"minerva": [
-					"modules/ve-mw/init/styles/ve.init.mw.ProgressBarWidget-wikimediatheme.css"
 				]
 			},
 			"targets": [
