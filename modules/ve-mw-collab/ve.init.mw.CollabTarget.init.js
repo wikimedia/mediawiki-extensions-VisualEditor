@@ -22,8 +22,8 @@
 		documentNameInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameInput' ) ),
 		documentNameButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-nameButton' ) ),
 		importInput = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importInput' ), {
-			showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
-			showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions
+			showImages: mw.config.get( 'wgVisualEditorConfig' ).usePageImages,
+			showDescriptions: mw.config.get( 'wgVisualEditorConfig' ).usePageDescriptions
 		} ),
 		importButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importButton' ) ),
 		// Infuse the form last to avoid recursive infusion with no config

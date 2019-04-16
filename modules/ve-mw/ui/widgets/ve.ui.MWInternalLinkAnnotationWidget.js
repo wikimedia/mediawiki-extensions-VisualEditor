@@ -58,8 +58,8 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 		icon: 'search',
 		showRedlink: true,
 		excludeCurrentPage: true,
-		showImages: mw.config.get( 'wgVisualEditor' ).usePageImages,
-		showDescriptions: mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
+		showImages: mw.config.get( 'wgVisualEditorConfig' ).usePageImages,
+		showDescriptions: mw.config.get( 'wgVisualEditorConfig' ).usePageDescriptions,
 		api: ve.init.target.getContentApi(),
 		cache: ve.init.platform.linkCache
 	}, config ) );

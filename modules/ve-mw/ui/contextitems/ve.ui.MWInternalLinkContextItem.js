@@ -50,8 +50,8 @@ ve.ui.MWInternalLinkContextItem.static.generateBody = function ( linkCache, mode
 		description = model.getAttribute( 'normalizedTitle' ),
 		href = model.getHref(),
 		fragment = model.getFragment(),
-		usePageImages = mw.config.get( 'wgVisualEditor' ).usePageImages,
-		usePageDescriptions = mw.config.get( 'wgVisualEditor' ).usePageDescriptions,
+		usePageImages = mw.config.get( 'wgVisualEditorConfig' ).usePageImages,
+		usePageDescriptions = mw.config.get( 'wgVisualEditorConfig' ).usePageDescriptions,
 		$wrapper = $( '<div>' ),
 		$link = $( '<a>' )
 			.addClass( 've-ui-mwInternalLinkContextItem-link' )

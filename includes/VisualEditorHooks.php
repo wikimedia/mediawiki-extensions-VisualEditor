@@ -870,8 +870,6 @@ class VisualEditorHooks {
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'pageVariantFallbacks' => $fallbacks,
-			'usePageImages' => ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ),
-			'usePageDescriptions' => defined( 'WBC_VERSION' ),
 		];
 	}
 
@@ -892,6 +890,8 @@ class VisualEditorHooks {
 		);
 
 		$vars['wgVisualEditorConfig'] = [
+			'usePageImages' => ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ),
+			'usePageDescriptions' => defined( 'WBC_VERSION' ),
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preloadModules' => $veConfig->get( 'VisualEditorPreloadModules' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
