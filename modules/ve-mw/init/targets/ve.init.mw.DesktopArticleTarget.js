@@ -518,6 +518,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onSectionTitleChange = function () {
 
 /**
  * Teardown new section inputs
+ *
+ * @param {ve.ui.Surface} surface Surface
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surface ) {
 	surface.setPlaceholder( '' );
@@ -1497,7 +1499,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 /**
  * Handle before unload event.
  *
- * @method
+ * @return {string} Message
  */
 ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 	var fallbackResult;

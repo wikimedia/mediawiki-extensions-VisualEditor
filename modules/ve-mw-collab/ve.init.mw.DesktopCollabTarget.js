@@ -15,7 +15,7 @@
  *
  * @constructor
  * @param {mw.Title} title Page sub-title
- * @param {rebaserUrl} string Rebaser server URL
+ * @param {string} rebaserUrl Rebaser server URL
  * @param {Object} [config] Configuration options
  * @cfg {mw.Title} [importTitle] Title to import
  */

@@ -132,7 +132,7 @@ ve.ui.MWTableDialog.prototype.getActionProcess = function ( action ) {
 /**
  * Handle change events from the collapsible toggle
  *
- * @param {boolean} New toggle value
+ * @param {boolean} collapsible New toggle value
  */
 ve.ui.MWTableDialog.prototype.onCollapsibleChange = function ( collapsible ) {
 	this.collapsedToggle.setDisabled( !collapsible );

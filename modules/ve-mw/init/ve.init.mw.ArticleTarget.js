@@ -1285,7 +1285,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 	}
 
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
-		return this.preparedCacheKeyPromise;
+		return;
 	}
 	this.clearPreparedCacheKey();
 
@@ -2083,6 +2083,8 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 /**
  * Get opening data to pass to the save dialog
+ *
+ * @return {Object} Opening data
  */
 ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 	var mode = this.getSurface().getMode();

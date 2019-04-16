@@ -226,7 +226,7 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 };
 
 /**
- * @returns {boolean} Whether redirect link is valid.
+ * @return {boolean} Whether redirect link is valid.
  */
 ve.ui.MWSettingsPage.prototype.checkValidRedirect = function () {
 	var title;

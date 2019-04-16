@@ -760,6 +760,8 @@ ve.dm.MWImageModel.prototype.getType = function () {
 
 /**
  * Get the image size type of the image
+ *
+ * @return {string} Size type
  */
 ve.dm.MWImageModel.prototype.getSizeType = function () {
 	return this.sizeType;
@@ -778,6 +780,8 @@ ve.dm.MWImageModel.prototype.getMediaType = function () {
 
 /**
  * Get Parsoid media class: Image, Video or Audio
+ *
+ * @return {string} Media class
  */
 ve.dm.MWImageModel.prototype.getMediaClass = function () {
 	var mediaType = this.getMediaType();

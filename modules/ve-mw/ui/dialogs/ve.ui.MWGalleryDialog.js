@@ -968,9 +968,7 @@ ve.ui.MWGalleryDialog.prototype.isHighlightedItemModified = function () {
 };
 
 /**
- * Get the current images and options data
- *
- * @return {Object} Images and options data
+ * Insert or update the node in the document model from the new values
  */
 ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 	var i, ilen, element, mwData, innerRange, captionInsertionOffset,
