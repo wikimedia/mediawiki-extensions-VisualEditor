@@ -1150,6 +1150,7 @@
 				"visualeditor-clipboard-cut",
 				"visualeditor-clipboard-paste",
 				"visualeditor-clipboard-paste-special",
+				"visualeditor-command-dialog-focus-context",
 				"visualeditor-command-dialog-cancel",
 				"visualeditor-command-dialog-confirm",
 				"visualeditor-commentinspector-edit",
