@@ -78,6 +78,8 @@ ve.dm.MWLanguageVariantNode.static.hiddenType = 'mwLanguageVariantHidden';
  * @static
  * @method
  * @private
+ * @param {Object} dataMwv
+ * @return {Object}
  */
 ve.dm.MWLanguageVariantNode.static.migrateFieldNames = function ( dataMwv ) {
 	// Field name migration: `bidir`=>`twoway`; `unidir`=>`oneway`
@@ -273,7 +275,9 @@ ve.dm.MWLanguageVariantNode.static.describeChanges = function () {
 	return ve.msg( 'visualeditor-changedesc-mwlanguagevariant' );
 };
 
-/** */
+/**
+ * @inheritdoc ve.dm.Node
+ */
 ve.dm.MWLanguageVariantNode.static.cloneElement = function () {
 	// Parent method
 	var clone = ve.dm.MWLanguageVariantNode.super.static.cloneElement.apply( this, arguments );

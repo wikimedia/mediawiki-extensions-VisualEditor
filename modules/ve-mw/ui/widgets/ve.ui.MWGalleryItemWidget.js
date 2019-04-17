@@ -73,6 +73,7 @@ ve.ui.MWGalleryItemWidget.prototype.onItemClick = function () {
  * Handle key press events
  *
  * @param {jQuery.Event} e Key press event
+ * @return {boolean}
  */
 ve.ui.MWGalleryItemWidget.prototype.onItemKeyPress = function ( e ) {
 	if ( e.which === OO.ui.Keys.ENTER ) {

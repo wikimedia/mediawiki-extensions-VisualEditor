@@ -72,6 +72,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type,
  * @param {string} after Text to go after selection
  * @param {Function|string} placeholder Placeholder text to insert at an empty selection
  * @param {boolean} forceWrap Force wrapping, even if matching wrapping exists
+ * @return {ve.dm.MWWikitextSurfaceFragment}
  * @chainable
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.wrapText = function ( before, after, placeholder, forceWrap ) {
@@ -116,6 +117,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.wrapText = function ( before, after, p
  *
  * @param {number} before Amount of text to remove from start
  * @param {number} after Amount of text to remove from end
+ * @return {ve.dm.MWWikitextSurfaceFragment}
  * @chainable
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.unwrapText = function ( before, after ) {

@@ -73,7 +73,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 };
 
 /**
- * @returns {boolean} Whether settings were changed.
+ * @return {boolean} Whether settings were changed.
  */
 ve.ui.MWMetaDialog.prototype.compareSettings = function () {
 
@@ -82,7 +82,7 @@ ve.ui.MWMetaDialog.prototype.compareSettings = function () {
 };
 
 /**
- * @returns {Object[]} An array of objects
+ * @return {Object[]} An array of objects
  * {
  *     widget: Object,
  *     name: string,
@@ -130,7 +130,7 @@ ve.ui.MWMetaDialog.prototype.assignEvents = function () {
 
 /**
  * @param {Object} field Widget
- * @returns {string|boolean} Value of the field
+ * @return {string|boolean} Value of the field
  */
 ve.ui.MWMetaDialog.prototype.extractValue = function ( field ) {
 	if ( field instanceof OO.ui.TextInputWidget ) {
@@ -149,7 +149,7 @@ ve.ui.MWMetaDialog.prototype.extractValue = function ( field ) {
 };
 
 /**
- * @returns {Object[]} An array of all widgets with their current value.
+ * @return {Object[]} An array of all widgets with their current value.
  * {
  *     name:string,
  *     value:string|boolean

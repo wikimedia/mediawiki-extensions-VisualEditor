@@ -112,7 +112,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
  * TODO: Evaluate if this method should be renamed/removed as it
  * now has nothing to do with the link cache.
  *
- * @param {jQuery} $element Elements to style
+ * @param {jQuery} $elements Elements to style
  * @param {HTMLDocument} doc Base document to use for normalisation
  */
 ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements ) {

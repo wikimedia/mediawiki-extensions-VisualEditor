@@ -42,9 +42,7 @@ OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, mw.widgets.TitleInputWidget )
 
 /* Methods */
 
-/**
- * See the parent documentation at <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.widgets.TitleInputWidget>
- */
+// @inheritdoc mw.widgets.TitleInputWidget
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	var widget = this,
 		originalResponse,
@@ -147,12 +145,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	return promise;
 };
 
-/**
- * See the parent documentation at <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.widgets.TitleInputWidget>
- *
- * @param {string} title
- * @return {Object}
- */
+// @inheritdoc mw.widgets.TitleInputWidget
 ve.ui.MWTemplateTitleInputWidget.prototype.getOptionWidgetData = function ( title ) {
 	return ve.extendObject(
 		ve.ui.MWTemplateTitleInputWidget.super.prototype.getOptionWidgetData.apply( this, arguments ),

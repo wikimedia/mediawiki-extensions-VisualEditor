@@ -17,12 +17,17 @@ mw.libs.ve = mw.libs.ve || {};
  * be loaded before any core VE code or dependencies, e.g. OOUI.
  *
  * @class
+ *
  * @constructor
+ * @param {Object} [config] Configuration options
+ * @cfg {string} [value] Initial value
  */
 mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget( config ) {
 	var conf = mw.config.get( 'wgVisualEditor' ),
 		dir = conf.pageLanguageDir,
 		lang = conf.pageLanguageCode;
+
+	config = config || {};
 
 	this.$element = $( '<textarea>' )
 		.addClass( 've-init-mw-tempWikitextEditorWidget ' )
@@ -38,6 +43,7 @@ mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget(
 /**
  * Focus the input and move the cursor to the start.
  *
+ * @return {mw.libs.ve.MWTempWikitextEditorWidget}
  * @chainable
  */
 mw.libs.ve.MWTempWikitextEditorWidget.prototype.moveCursorToStart = function () {
@@ -50,6 +56,7 @@ mw.libs.ve.MWTempWikitextEditorWidget.prototype.moveCursorToStart = function () 
 /**
  * Expand the height of the text to fit the contents
  *
+ * @return {mw.libs.ve.MWTempWikitextEditorWidget}
  * @chainable
  */
 mw.libs.ve.MWTempWikitextEditorWidget.prototype.adjustSize = function () {
@@ -61,6 +68,7 @@ mw.libs.ve.MWTempWikitextEditorWidget.prototype.adjustSize = function () {
 /**
  * Focus the input
  *
+ * @return {mw.libs.ve.MWTempWikitextEditorWidget}
  * @chainable
  */
 mw.libs.ve.MWTempWikitextEditorWidget.prototype.focus = function () {

@@ -286,7 +286,9 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 	return descriptions;
 };
 
-/** */
+/**
+ * @inheritdoc ve.dm.Node
+ */
 ve.dm.MWTransclusionNode.static.cloneElement = function () {
 	// Parent method
 	var clone = ve.dm.MWTransclusionNode.super.static.cloneElement.apply( this, arguments );

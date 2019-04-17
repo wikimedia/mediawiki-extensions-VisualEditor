@@ -75,8 +75,8 @@ ve.stripParsoidFallbackIds = function ( element ) {
  * Call this after ve.targetLinksToNewWindow, as it removes the target attribute.
  * Call this after LinkCache.styleParsoidElements, as it breaks that method by including the query string.
  *
- * @param {HTMLElement} element Parent element, e.g. document body
- * @param {mw.Title} title Current title, only links to this title will be normalized
+ * @param {HTMLElement} container Parent element, e.g. document body
+ * @param {mw.Title} docTitle Current title, only links to this title will be normalized
  * @param {string} [prefix] Prefix to add to fragment and target ID to avoid collisions
  */
 ve.fixFragmentLinks = function ( container, docTitle, prefix ) {

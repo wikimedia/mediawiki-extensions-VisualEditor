@@ -29,7 +29,11 @@ OO.inheritClass( ve.ui.MWNoParametersResultWidget, OO.ui.OptionWidget );
 
 /* Methods */
 
-/** */
+/**
+ * Build the label element
+ *
+ * @return {jQuery}
+ */
 ve.ui.MWNoParametersResultWidget.prototype.buildLabel = function () {
 	return $( '<div>' )
 		.addClass( 've-ui-mwNoParametersResultWidget-label' )

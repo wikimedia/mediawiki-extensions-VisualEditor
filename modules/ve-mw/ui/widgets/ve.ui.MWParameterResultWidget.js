@@ -32,7 +32,11 @@ OO.inheritClass( ve.ui.MWParameterResultWidget, OO.ui.DecoratedOptionWidget );
 
 /* Methods */
 
-/** */
+/**
+ * Build the label element
+ *
+ * @return {jQuery}
+ */
 ve.ui.MWParameterResultWidget.prototype.buildLabel = function () {
 	var i, len,
 		$label = $( '<div>' )

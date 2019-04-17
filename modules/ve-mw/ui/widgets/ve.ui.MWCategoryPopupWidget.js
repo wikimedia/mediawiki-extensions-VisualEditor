@@ -101,6 +101,7 @@ ve.ui.MWCategoryPopupWidget.prototype.onRemoveCategory = function () {
  *
  * @method
  * @param {jQuery.Event} e Form submit event
+ * @return {boolean}
  * @fires updateSortkey
  */
 ve.ui.MWCategoryPopupWidget.prototype.onSortKeySubmit = function () {

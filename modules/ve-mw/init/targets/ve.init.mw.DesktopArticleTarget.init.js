@@ -199,6 +199,7 @@
 	 *
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
+	 * @param {number|string} section Section to edit
 	 * @return {jQuery.Promise}
 	 */
 	function getTarget( mode, section ) {
