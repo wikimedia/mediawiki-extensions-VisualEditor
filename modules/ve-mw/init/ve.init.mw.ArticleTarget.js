@@ -506,7 +506,6 @@ ve.init.mw.ArticleTarget.prototype.documentReady = function () {
  */
 ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	var name, i, triggers,
-		target = this,
 		accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
 		accessKeyModifiers = new ve.ui.Trigger( accessKeyPrefix + '-' ).modifiers,
 		surfaceModel = this.getSurface().getModel();
@@ -536,41 +535,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		this.getSurface().setReadOnly( true );
 	} else {
 		// Auto-save
-		if ( this.recovered ) {
-			// Restore auto-saved transactions if document state was recovered
-			try {
-				surfaceModel.restoreChanges();
-				ve.init.platform.notify(
-					ve.msg( 'visualeditor-autosave-recovered-text' ),
-					ve.msg( 'visualeditor-autosave-recovered-title' )
-				);
-			} catch ( e ) {
-				mw.log.warn( e );
-				ve.init.platform.notify(
-					ve.msg( 'visualeditor-autosave-not-recovered-text' ),
-					ve.msg( 'visualeditor-autosave-not-recovered-title' ),
-					{ type: 'error' }
-				);
-			}
-		} else {
-			// ...otherwise store this document state for later recovery
-			if ( this.fromEditedState ) {
-				// Store immediately if the document was previously edited
-				// (e.g. in a different mode)
-				this.storeDocState( this.originalHtml );
-			} else {
-				// Only store after the first change if this is an unmodified document
-				surfaceModel.once( 'undoStackChange', function () {
-					// Check the surface hasn't been destroyed
-					if ( target.getSurface() ) {
-						target.storeDocState( target.originalHtml );
-					}
-				} );
-			}
-		}
-		// Start auto-saving transactions
-		surfaceModel.startStoringChanges();
-		// TODO: Listen to autosaveFailed event to notify user
+		this.initAutosave();
 
 		// Start loading easy-deflate module in the background, so it's
 		// already loaded when the save dialog is opened.
@@ -586,9 +551,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 };
 
 /**
- * Store a snapshot of the current document state.
- *
- * @param {string} [html] Document HTML, will generate from current state if not provided
+ * @inheritdoc
  */
 ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 	var mode = this.getSurface().getMode();
@@ -1847,8 +1810,6 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 			this.$saveAccessKeyElements = null;
 		}
 		if ( surface ) {
-			// If target is closed cleanly (after save or deliberate close) then remove autosave state
-			surface.getModel().removeDocStateAndChanges();
 			// Disconnect history listener
 			surface.getModel().disconnect( this );
 		}
@@ -2387,7 +2348,7 @@ ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () 
 	// Assume the fallback editor won't support VE auto-save. Changes need to
 	// be wiped in case the user makes changes in the other editor then comes
 	// back to VE.
-	this.getSurface().getModel().removeDocStateAndChanges();
+	this.clearDocState();
 };
 
 /**
