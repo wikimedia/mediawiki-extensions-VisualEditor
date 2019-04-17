@@ -936,19 +936,14 @@ class VisualEditorHooks {
 	 * @param ResourceLoader &$resourceLoader Client-side code and assets to be loaded.
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
-		$resourceModules = $resourceLoader->getConfig()->get( 'ResourceModules' );
-
 		$veResourceTemplate = [
 			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
 		];
 
-		// Only pull in VisualEditor core's local version of jquery.uls.data if it hasn't been
+		// Only register VisualEditor core's local version of jquery.uls.data if it hasn't been
 		// installed locally already (presumably, by the UniversalLanguageSelector extension).
-		if (
-			!isset( $resourceModules[ 'jquery.uls.data' ] ) &&
-			!$resourceLoader->isModuleRegistered( 'jquery.uls.data' )
-		) {
+		if ( !$resourceLoader->isModuleRegistered( 'jquery.uls.data' ) ) {
 			$resourceLoader->register( [
 				'jquery.uls.data' => $veResourceTemplate + [
 					'scripts' => [
