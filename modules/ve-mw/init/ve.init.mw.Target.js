@@ -21,6 +21,9 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 	this.active = false;
 	this.pageName = mw.config.get( 'wgRelevantPageName' );
 	this.editToken = mw.user.tokens.get( 'editToken' );
+	this.recovered = false;
+	this.fromEditedState = false;
+	this.originalHtml = null;
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-target' );
@@ -422,6 +425,79 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 
 	// Parent method
 	ve.init.mw.Target.super.prototype.setSurface.apply( this, arguments );
+};
+
+/**
+ * Intiailise autosave, recovering changes if applicable
+ */
+ve.init.mw.Target.prototype.initAutosave = function () {
+	var target = this,
+		surfaceModel = this.getSurface().getModel();
+	if ( this.recovered ) {
+		// Restore auto-saved transactions if document state was recovered
+		try {
+			surfaceModel.restoreChanges();
+			ve.init.platform.notify(
+				ve.msg( 'visualeditor-autosave-recovered-text' ),
+				ve.msg( 'visualeditor-autosave-recovered-title' )
+			);
+		} catch ( e ) {
+			mw.log.warn( e );
+			ve.init.platform.notify(
+				ve.msg( 'visualeditor-autosave-not-recovered-text' ),
+				ve.msg( 'visualeditor-autosave-not-recovered-title' ),
+				{ type: 'error' }
+			);
+		}
+	} else {
+		// ...otherwise store this document state for later recovery
+		if ( this.fromEditedState ) {
+			// Store immediately if the document was previously edited
+			// (e.g. in a different mode)
+			this.storeDocState( this.originalHtml );
+		} else {
+			// Only store after the first change if this is an unmodified document
+			surfaceModel.once( 'undoStackChange', function () {
+				// Check the surface hasn't been destroyed
+				if ( target.getSurface() ) {
+					target.storeDocState( target.originalHtml );
+				}
+			} );
+		}
+	}
+	// Start auto-saving transactions
+	surfaceModel.startStoringChanges();
+	// TODO: Listen to autosaveFailed event to notify user
+};
+
+/**
+ * Store a snapshot of the current document state.
+ *
+ * @param {string} [html] Document HTML, will generate from current state if not provided
+ */
+ve.init.mw.Target.prototype.storeDocState = function ( html ) {
+	var mode = this.getSurface().getMode();
+	this.getSurface().getModel().storeDocState( { mode: mode }, html );
+};
+
+/**
+ * Clear any stored document state
+ */
+ve.init.mw.Target.prototype.clearDocState = function () {
+	if ( this.getSurface() ) {
+		this.getSurface().getModel().removeDocStateAndChanges();
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Target.prototype.teardown = function () {
+	// If target is closed cleanly (after save or deliberate close) then remove autosave state
+	this.clearDocState();
+
+	// Parent method
+	return ve.init.mw.Target.super.prototype.teardown.call( this );
 };
 
 /**

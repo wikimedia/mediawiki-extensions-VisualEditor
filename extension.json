@@ -647,6 +647,10 @@
 				"jquery.uls.data"
 			],
 			"messages": [
+				"visualeditor-autosave-not-recovered-text",
+				"visualeditor-autosave-not-recovered-title",
+				"visualeditor-autosave-recovered-text",
+				"visualeditor-autosave-recovered-title",
 				"visualeditor-special-characters-group-other"
 			],
 			"targets": [
@@ -712,10 +716,6 @@
 				"pagecategorieslink",
 				"hidden-categories",
 				"redirectto",
-				"visualeditor-autosave-not-recovered-text",
-				"visualeditor-autosave-not-recovered-title",
-				"visualeditor-autosave-recovered-text",
-				"visualeditor-autosave-recovered-title",
 				"visualeditor-redirect-description"
 			],
 			"targets": [
