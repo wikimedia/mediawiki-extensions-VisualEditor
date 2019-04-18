@@ -38,20 +38,12 @@ mw.libs.ve.SwitchConfirmDialog.static.actions = [
 	{
 		action: 'cancel',
 		label: mw.msg( 'visualeditor-mweditmodesource-warning-cancel' ),
-		flags: [ 'safe', 'back' ],
-		modes: [ 'restbase', 'simple' ]
+		flags: [ 'safe', 'back' ]
 	},
 	{
 		action: 'discard',
 		label: mw.msg( 'visualeditor-mweditmodesource-warning-switch-discard' ),
-		flags: 'destructive',
-		modes: [ 'simple' ]
-	},
-	{
-		action: 'keep',
-		label: mw.msg( 'visualeditor-mweditmodesource-warning-switch' ),
-		flags: [ 'progressive', 'primary' ],
-		modes: [ 'restbase' ]
+		flags: 'destructive'
 	}
 ];
 
@@ -60,37 +52,11 @@ mw.libs.ve.SwitchConfirmDialog.static.actions = [
 /**
  * @inheritdoc
  */
-mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function ( data ) {
-	return mw.libs.ve.SwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
-		.next( function () {
-			var
-				config = mw.config.get( 'wgVisualEditorConfig' ),
-				canSwitch = config.fullRestbaseUrl || config.allowLossySwitching;
-			if ( data && data.mode ) {
-				this.actions.setMode( data.mode );
-			} else if ( canSwitch ) {
-				this.actions.setMode( 'restbase' );
-			} else {
-				this.actions.setMode( 'simple' );
-			}
-		}, this );
-};
-
-/**
- * @inheritdoc
- */
 mw.libs.ve.SwitchConfirmDialog.prototype.getActionProcess = function ( action ) {
-	if ( action === 'keep' ) {
+	if ( action === 'discard' ) {
 		return new OO.ui.Process( function () {
 			this.getActions()
-				.setAbilities( { cancel: false, discard: false } )
-				.get( { actions: 'keep' } )[ 0 ].pushPending();
-			this.close( { action: 'keep' } );
-		}, this );
-	} else if ( action === 'discard' ) {
-		return new OO.ui.Process( function () {
-			this.getActions()
-				.setAbilities( { cancel: false, keep: false } )
+				.setAbilities( { cancel: false } )
 				.get( { actions: 'discard' } )[ 0 ].pushPending();
 			this.close( { action: 'discard' } );
 		}, this );
