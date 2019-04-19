@@ -5,11 +5,12 @@
 			"Brest",
 			"Iwan Novirion",
 			"Amire80",
-			"아라"
+			"아라",
+			"Vlad5250"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Нагледно уредување]]",
-	"tag-visualeditor-description": "Уредувањето е направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|нагледниот уредник]]",
+	"tag-visualeditor-description": "Уредување направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|нагледниот уредник]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Нагледен уредник: Проверка]]",
 	"tag-visualeditor-needcheck-description": "Уредување направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|нагледниот уредник]] при кое системот утврдил дека викитекстот може да има ненамерни измени.",
 	"tag-visualeditor-wikitext": "Изворно уредување 2017",
