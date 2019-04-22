@@ -7,7 +7,8 @@
 			"Eminn",
 			"Wertuose",
 			"Dağlı95",
-			"AZISS"
+			"AZISS",
+			"Toghrul Rahimli"
 		]
 	},
 	"tooltip-ca-createsource": "Cari kod redaktorunda səhifəni yarat",
@@ -126,6 +127,7 @@
 	"visualeditor-parameter-input-placeholder": "Sahənin adı",
 	"visualeditor-parameter-search-no-unused": "İstifadə edilməmiş sahə yoxdur",
 	"visualeditor-parameter-search-unknown": "Naməlum sahə",
+	"visualeditor-preference-betatempdisable": "Vizual redaktoru beta mərhələsində olduğu üçün qeyri-aktiv et",
 	"visualeditor-preference-core-label": "Vizual redaktor",
 	"visualeditor-savedialog-label-create": "Səhifə yaradın",
 	"visualeditor-savedialog-label-error": "Xəta",
