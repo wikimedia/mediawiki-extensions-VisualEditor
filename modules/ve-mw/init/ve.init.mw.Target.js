@@ -105,6 +105,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 
 ve.init.mw.Target.static.importRules = ve.copy( ve.init.mw.Target.static.importRules );
 
+ve.init.mw.Target.static.importRules.external.removeOriginalDomElements = true;
+
 ve.init.mw.Target.static.importRules.external.blacklist = ve.extendObject( {
 	// Annotations
 	'textStyle/underline': true,
