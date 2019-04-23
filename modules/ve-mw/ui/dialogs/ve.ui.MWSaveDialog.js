@@ -437,6 +437,11 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		action.toggle( dialog.canReview );
 	} );
 
+	// Support: iOS
+	// HACK: iOS Safari sometimes makes the entire panel completely disappear (T221289).
+	// Rebuilding it makes it reappear.
+	OO.ui.Element.static.reconsiderScrollbars( panelObj.$element[ 0 ] );
+
 	mw.hook( 've.saveDialog.stateChanged' ).fire();
 };
 
@@ -754,6 +759,7 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 		this.report.toggle( false );
 	}
 
+	// Support: iOS
 	// HACK: iOS Safari sometimes makes the entire panel completely disappear (T219680).
 	// Rebuilding it makes it reappear.
 	OO.ui.Element.static.reconsiderScrollbars( this.reviewPanel.$element[ 0 ] );
