@@ -32,7 +32,7 @@ ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextDefinition', 'mwWikitextWarning', [ { type: 'paragraph' }, ';' ] )
 );
 ve.ui.sequenceRegistry.register(
-	new ve.ui.Sequence( 'wikitextDescription', 'blockquote', [ { type: 'paragraph' }, ':' ], 1 )
+	new ve.ui.Sequence( 'wikitextDescription', 'blockquoteWrap', [ { type: 'paragraph' }, ':' ], 1 )
 );
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'wikitextTable', 'insertTable', '{|', 2 )
