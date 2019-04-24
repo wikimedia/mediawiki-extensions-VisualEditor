@@ -503,7 +503,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 			} );
 			if ( this.recovered ) {
 				this.sectionTitle.setValue(
-					ve.init.platform.getSession( 've-docsectiontitle' ) || ''
+					ve.init.platform.sessionStorage.get( 've-docsectiontitle' ) || ''
 				);
 			}
 			this.sectionTitle.connect( this, { change: 'onSectionTitleChange' } );
@@ -516,7 +516,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 		}
 		surface.once( 'destroy', this.teardownNewSection.bind( this, surface ) );
 	} else {
-		ve.init.platform.removeSession( 've-docsectiontitle' );
+		ve.init.platform.sessionStorage.remove( 've-docsectiontitle' );
 	}
 };
 
@@ -524,7 +524,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
  * Handle section title changes
  */
 ve.init.mw.DesktopArticleTarget.prototype.onSectionTitleChange = function () {
-	ve.init.platform.setSession( 've-docsectiontitle', this.sectionTitle.getValue() );
+	ve.init.platform.sessionStorage.set( 've-docsectiontitle', this.sectionTitle.getValue() );
 	this.updateToolbarSaveButtonState();
 };
 
