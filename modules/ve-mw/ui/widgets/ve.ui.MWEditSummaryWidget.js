@@ -24,7 +24,10 @@ ve.ui.MWEditSummaryWidget = function VeUiMWEditSummaryWidget( config ) {
 	ve.ui.MWEditSummaryWidget.super.call( this, ve.extendObject( { $pending: $( [] ) }, config ) );
 
 	// Mixin method
-	OO.ui.mixin.LookupElement.call( this, ve.extendObject( { allowSuggestionsWhenEmpty: false }, config ) );
+	OO.ui.mixin.LookupElement.call( this, ve.extendObject( {
+		allowSuggestionsWhenEmpty: false,
+		highlightFirst: false
+	}, config ) );
 
 	this.limit = config.limit || 6;
 };
