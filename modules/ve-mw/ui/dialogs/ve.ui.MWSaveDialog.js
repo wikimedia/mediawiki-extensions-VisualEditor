@@ -221,9 +221,6 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		// TODO: This code is very similar to ve.ui.PreviewElement+ve.ui.MWPreviewElement
 		ve.resolveAttributes( body, docOrMsg, ve.dm.Converter.static.computedAttributes );
 
-		// Remove metadata
-		contents = ve.filterMetaElements( Array.prototype.slice.call( body.childNodes ) );
-
 		$heading = $( '<h1>' ).addClass( 'firstHeading' );
 
 		// Document title will only be set if wikitext contains {{DISPLAYTITLE}}
@@ -251,6 +248,9 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				).title
 			);
 		}
+
+		// Remove metadata
+		contents = ve.filterMetaElements( Array.prototype.slice.call( body.childNodes ) );
 
 		this.$previewViewer.empty().append(
 			// TODO: This won't work with formatted titles (T122976)
