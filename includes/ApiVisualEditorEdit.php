@@ -198,7 +198,10 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		}
 
 		$cache = ObjectCache::getLocalClusterInstance();
-		$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
+
+		$services = MediaWikiServices::getInstance();
+		$statsd = $services->getStatsdDataFactory();
+		$editStash = $services->getPageEditStash();
 
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
@@ -215,8 +218,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$page = WikiPage::factory( $title );
 		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
 
-		$status = ApiStashEdit::parseAndStash( $page, $content, $this->getUser(), '' );
-		if ( $status === ApiStashEdit::ERROR_NONE ) {
+		$status = $editStash->parseAndCache( $page, $content, $this->getUser(), '' );
+		if ( $status === $editStash::ERROR_NONE ) {
 			$logger = LoggerFactory::getInstance( 'StashEdit' );
 			$logger->debug( "Cached parser output for VE content key '$key'." );
 		}
