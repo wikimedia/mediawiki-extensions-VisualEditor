@@ -508,12 +508,6 @@ class ApiVisualEditor extends ApiBase {
 							)->parseAsBlock(),
 						];
 					}
-
-					if ( $this->getConfig()->get( 'EnableBlockNoticeStats' ) ) {
-						$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
-						$wiki = $this->getConfig()->get( 'DBname' );
-						$statsd->increment( 'BlockNotices.' . $wiki . '.VisualEditor.returned' );
-					}
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
