@@ -1032,14 +1032,27 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 	var target = this;
 
 	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( function () {
-		var newRevPromise;
+		var newRevPromise, doc;
 
 		if ( !target.originalDmDocPromise ) {
 			if ( !target.fromEditedState && target.getSurface().getMode() === 'visual' ) {
 				// If this.doc was loaded from an un-edited state and in visual mode,
 				// then just parse it to get originalDmDoc, otherwise we need to
 				// re-fetch the HTML
-				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( target.doc, 'visual' ) ).promise();
+				if ( target.section !== null ) {
+					// Create a document with just the section
+					doc = target.doc.cloneNode( true );
+					// Empty
+					while ( doc.body.firstChild ) {
+						doc.body.removeChild( doc.body.firstChild );
+					}
+					// Append section and unwrap
+					doc.body.appendChild( target.doc.body.querySelectorAll( 'section[data-mw-section-id]' )[ 0 ] );
+					ve.unwrapParsoidSections( doc.body );
+				} else {
+					doc = target.doc;
+				}
+				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( doc, 'visual' ) ).promise();
 			} else {
 				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), target.section );
 			}
@@ -1061,7 +1074,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 		} else {
 			return target.originalDmDocPromise.then( function ( originalDmDoc ) {
 				return function () {
-					return new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getDocument() );
+					return new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() );
 				};
 			} );
 		}
