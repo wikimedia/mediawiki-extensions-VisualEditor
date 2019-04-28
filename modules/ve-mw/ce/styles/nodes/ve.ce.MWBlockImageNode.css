@@ -14,3 +14,8 @@
 .ve-ce-mwBlockImageNode > a:after {
 	pointer-events: none;
 }
+
+.ve-ce-mwBlockImageNode-audioPlayer {
+	/* stylelint-disable-next-line declaration-no-important */
+	background: #fff url( images/audioPlayer.svg ) !important;
+}
