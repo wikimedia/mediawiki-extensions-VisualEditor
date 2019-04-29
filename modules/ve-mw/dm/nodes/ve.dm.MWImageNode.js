@@ -349,7 +349,8 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
  * @inheritdoc
  */
 ve.dm.MWImageNode.prototype.getScalable = function () {
-	var imageNode = this;
+	var oldMediaType,
+		imageNode = this;
 	if ( !this.scalablePromise ) {
 		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() );
 		// If the promise was already resolved before getScalablePromise returned, then jQuery will execute the done straight away.
@@ -360,6 +361,7 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 					width: info.width,
 					height: info.height
 				} );
+				oldMediaType = imageNode.mediaType;
 				// Update media type
 				imageNode.mediaType = info.mediatype;
 				// Update according to type
@@ -368,6 +370,7 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 					imageNode.mediaType,
 					imageNode.getScalable()
 				);
+				imageNode.emit( 'attributeChange', 'mediaType', oldMediaType, imageNode.mediaType );
 			}
 		} );
 	}
