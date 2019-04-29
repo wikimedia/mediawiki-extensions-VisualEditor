@@ -282,22 +282,22 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		// TODO: Inline images require a bit of further work, will be coming soon
 		new OO.ui.MenuOptionWidget( {
 			data: 'thumb',
-			icon: 'image-thumbnail',
+			icon: 'imageLayoutThumbnail',
 			label: ve.msg( 'visualeditor-dialog-media-type-thumb' )
 		} ),
 		new OO.ui.MenuOptionWidget( {
 			data: 'frameless',
-			icon: 'image-frameless',
+			icon: 'imageLayoutFrameless',
 			label: ve.msg( 'visualeditor-dialog-media-type-frameless' )
 		} ),
 		new OO.ui.MenuOptionWidget( {
 			data: 'frame',
-			icon: 'image-frame',
+			icon: 'imageLayoutFrame',
 			label: ve.msg( 'visualeditor-dialog-media-type-frame' )
 		} ),
 		new OO.ui.MenuOptionWidget( {
 			data: 'none',
-			icon: 'image-none',
+			icon: 'imageLayoutBasic',
 			label: ve.msg( 'visualeditor-dialog-media-type-none' )
 		} )
 	] );
