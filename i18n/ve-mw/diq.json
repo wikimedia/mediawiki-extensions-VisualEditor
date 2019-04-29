@@ -59,7 +59,7 @@
 	"visualeditor-dialog-media-info-imagedescription": "Tam akenayış",
 	"visualeditor-dialog-media-info-licenseshortname": "Lisans",
 	"visualeditor-dialog-media-info-meta-artist": "Artist: $1",
-	"visualeditor-dialog-media-info-moreinfo": "Dehana vêşi melumat",
+	"visualeditor-dialog-media-info-moreinfo": "Tayêna melumat",
 	"visualeditor-dialog-media-info-readmore": "Zewbi bıwan",
 	"visualeditor-dialog-media-info-uploaded": "Tarixê barkerdışi:$1",
 	"visualeditor-dialog-media-noresults": "Neticeyi nêvêniyayi.",
@@ -360,5 +360,6 @@
 	"visualeditor-wikitext-progress": "Wikimetin açarnayış",
 	"visualeditor-wikitext-warning": "Şımayê vurnayışê asayi karnenê.  - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikimetin]] nêxebtèno tiya dı. Çı weğt iıma wazenê kı ravêrê vurnayış çımi,  corra ikonê kıliti bıploğnê.",
 	"visualeditor-wikitext-warning-title": "Timaryayışa wiki metini vineyé",
+	"visualeditor-wikitextconvert-plain": "Metınê dûzi bıgurenê",
 	"visualeditor-wikitextconvert-convert": "raçarne be wikimetın"
 }

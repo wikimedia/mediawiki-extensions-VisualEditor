@@ -136,7 +136,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Feldo esas necesa.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Retroirar",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Durar tamen",
-	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Necesa {{PLURAL:$1|feldo|feldi}} mankas",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Mankas {{PLURAL:$1|feldo|feldi}} bezonata",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ka vu esas certa ke vu volas durar sen plenigar la $1 {{PLURAL:$2|feldo|feldi}}",
 	"visualeditor-dialog-transclusion-single-mode": "Celar selekti",
 	"visualeditor-dialog-transclusion-title": "Transkluzo",
