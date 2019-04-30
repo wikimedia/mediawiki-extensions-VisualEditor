@@ -645,6 +645,7 @@ ve.ui.MWDoneTool.static.name = 'done';
 ve.ui.MWDoneTool.static.group = 'navigation';
 ve.ui.MWDoneTool.static.group.autoAddToCatchall = false;
 ve.ui.MWDoneTool.static.icon = 'check';
+ve.ui.MWDoneTool.static.flags = [ 'progressive' ];
 ve.ui.MWDoneTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-donebutton-tooltip' );
 ve.ui.MWDoneTool.static.commandName = 'done';
