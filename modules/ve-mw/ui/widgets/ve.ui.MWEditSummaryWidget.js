@@ -106,14 +106,13 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 		if ( mw.user.isAnon() ) {
 			this.getSummariesPromise = $.Deferred().resolve( [] ).promise();
 		} else {
-			this.getSummariesPromise = new mw.Api().get( {
+			this.getSummariesPromise = ve.init.target.getLocalApi().get( {
 				action: 'query',
 				list: 'usercontribs',
 				ucuser: mw.user.getName(),
 				ucprop: 'comment|title',
 				uclimit: 500,
-				format: 'json',
-				formatversion: 2
+				format: 'json'
 			} ).then( function ( response ) {
 				var usedComments = {},
 					changes = ve.getProp( response, 'query', 'usercontribs' ) || [];

@@ -658,6 +658,8 @@ ve.init.mw.Target.prototype.getPageName = function () {
  * @return {mw.Api} API object
  */
 ve.init.mw.Target.prototype.getContentApi = function ( doc, options ) {
+	options = options || {};
+	options.parameters = ve.extendObject( { formatversion: 2 }, options.parameters );
 	return new mw.Api( options );
 };
 
@@ -671,5 +673,7 @@ ve.init.mw.Target.prototype.getContentApi = function ( doc, options ) {
  * @return {mw.Api} API object
  */
 ve.init.mw.Target.prototype.getLocalApi = function ( options ) {
+	options = options || {};
+	options.parameters = ve.extendObject( { formatversion: 2 }, options.parameters );
 	return new mw.Api( options );
 };

@@ -217,7 +217,8 @@
 				uselang: mw.config.get( 'wgUserLanguage' ),
 				editintro: uri.query.editintro,
 				preload: options.preload,
-				preloadparams: options.preloadparams
+				preloadparams: options.preloadparams,
+				formatversion: 2
 			};
 
 			// Only request the API to explicitly load the currently visible revision if we're restoring
@@ -375,7 +376,8 @@
 				uselang: mw.config.get( 'wgUserLanguage' ),
 				editintro: uri.query.editintro,
 				preload: options.preload,
-				preloadparams: options.preloadparams
+				preloadparams: options.preloadparams,
+				formatversion: 2
 			};
 
 			// section should never really be undefined, but check just in case

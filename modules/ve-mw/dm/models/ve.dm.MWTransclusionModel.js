@@ -303,7 +303,6 @@
 			titles: titles,
 			lang: mw.config.get( 'wgUserLanguage' ),
 			format: 'json',
-			formatversion: '2',
 			doNotIgnoreMissingTitles: '1',
 			redirects: '1'
 		} ).done( this.fetchRequestDone.bind( this, titles, specs ) );
