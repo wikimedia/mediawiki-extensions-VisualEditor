@@ -487,27 +487,24 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
+				$block = null;
+				$blockinfo = null;
+				$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 				// Blocked user notice
-				if ( $user->isBlockedFrom( $title, true ) || $user->isBlockedGlobally() ) {
-					if ( $user->isBlockedFrom( $title, true ) ) {
-						$notices[] = [
-							'type' => 'block',
-							'message' => call_user_func_array(
-								[ $this, 'msg' ],
-								$user->getBlock()->getPermissionsError( $this->getContext() )
-							)->parseAsBlock(),
-						];
-					}
-
-					if ( $user->isBlockedGlobally() ) {
-						$notices[] = [
-							'type' => 'block',
-							'message' => call_user_func_array(
-								[ $this, 'msg' ],
-								$user->getGlobalBlock()->getPermissionsError( $this->getContext() )
-							)->parseAsBlock(),
-						];
-					}
+				if ( $user->isBlockedGlobally() ) {
+					$block = $user->getGlobalBlock();
+				} elseif ( $permissionManager->isBlockedFrom( $user, $title, true ) ) {
+					$block = $user->getBlock();
+				}
+				if ( $block ) {
+					$notices[] = [
+						'type' => 'block',
+						'message' => call_user_func_array(
+							[ $this, 'msg' ],
+							$block->getPermissionsError( $this->getContext() )
+						)->parseAsBlock(),
+					];
+					$blockinfo = ApiQueryUserInfo::getBlockInfo( $block );
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
@@ -566,7 +563,7 @@ class ApiVisualEditor extends ApiBase {
 					'basetimestamp' => $baseTimestamp,
 					'starttimestamp' => wfTimestampNow(),
 					'oldid' => $oldid,
-
+					'blockinfo' => $blockinfo,
 				];
 				if ( $params['paction'] === 'parse' ||
 					 $params['paction'] === 'wikitext' ||
