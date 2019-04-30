@@ -169,7 +169,6 @@ ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
 	// TODO: Detect paging token if results exceed limit
 	ve.init.target.getContentApi().get( {
 		format: 'json',
-		formatversion: 2,
 		action: 'query',
 		prop: 'langlinks',
 		llprop: 'autonym',
