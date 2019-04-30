@@ -56,7 +56,7 @@ ve.ui.MWWikitextSwitchConfirmDialog.prototype.getActionProcess = function ( acti
 		return new OO.ui.Process( function () {
 			this.getActions().setAbilities( { cancel: false } );
 			this.getActions().get()[ 1 ].pushPending();
-			this.target.switchToWikitextEditor( false, true );
+			this.target.switchToWikitextEditor( true );
 		}, this );
 	} else if ( action === 'cancel' ) {
 		return new OO.ui.Process( function () {

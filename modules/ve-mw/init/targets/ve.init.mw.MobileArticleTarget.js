@@ -379,13 +379,13 @@ ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( key, text ) {
 ve.init.mw.MobileArticleTarget.prototype.editSource = function () {
 	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
 
-	this.switchToWikitextEditor( false, modified );
+	this.switchToWikitextEditor( modified );
 };
 
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.switchToWikitextEditor = function ( discardChanges, modified ) {
+ve.init.mw.MobileArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
 	var dataPromise;
 	if ( modified ) {
 		dataPromise = this.getWikitextDataPromiseForDoc( modified ).then( function ( response ) {
