@@ -482,8 +482,53 @@ ve.init.mw.MobileArticleTarget.prototype.load = function () {
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var $header = this.overlay.$el.find( '.overlay-header-container' );
 
+	if ( !this.pageToolbar ) {
+		this.pageToolbar = new ve.ui.TargetToolbar( this, { actions: true } );
+	}
+
+	this.pageToolbar.setup( [
+		// Back
+		{
+			name: 'back',
+			include: [ 'back' ]
+		},
+		{
+			name: 'editMode',
+			type: 'list',
+			icon: 'edit',
+			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+			include: [ 'editModeVisual', 'editModeSource' ]
+		},
+		{
+			name: 'save',
+			type: 'bar',
+			include: [ 'showSave' ]
+		}
+	], surface );
+
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
+
+	this.pageToolbar.emit( 'updateState' );
+
+	if ( !this.$title ) {
+		this.$title = $( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
+			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
+				new mw.Title( ve.init.target.getPageName() ).getMainText()
+			)
+		);
+	}
+
+	// Insert title between 'back' and 'advanced'
+	this.$title.insertAfter( this.pageToolbar.items[ 0 ].$element );
+
+	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar' );
+
+	this.toolbar.$element.append( this.pageToolbar.$element );
+	this.pageToolbar.initialize();
+
+	this.pageToolbar.$group.addClass( 've-init-mw-mobileArticleTarget-pageTools' );
+	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
 
 	this.getToolbar().setup(
 		this.constructor.static.toolbarGroups.concat( [
@@ -511,6 +556,9 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 			}, 250 );
 		} );
 	}
+
+	// Don't wait for the first surface focus/blur event to hide one of the toolbars
+	this.onSurfaceBlur();
 };
 
 /**
@@ -525,54 +573,8 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.attachToolbarSaveButton = function () {
-	var surface = this.getSurface();
-
-	if ( !this.pageToolbar ) {
-		this.pageToolbar = new ve.ui.TargetToolbar( this, { actions: true } );
-	}
-
-	this.pageToolbar.setup( [
-		// Back
-		{
-			name: 'back',
-			include: [ 'back' ]
-		},
-		{
-			name: 'editMode',
-			type: 'list',
-			icon: 'edit',
-			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-			include: [ 'editModeVisual', 'editModeSource' ]
-		}
-	], surface );
-
-	this.pageToolbar.emit( 'updateState' );
-
-	if ( !this.$title ) {
-		this.$title = $( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
-			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
-				new mw.Title( ve.init.target.getPageName() ).getMainText()
-			)
-		);
-	}
-
-	// Insert title between 'back' and 'advanced'
-	this.$title.insertAfter( this.pageToolbar.items[ 0 ].$element );
-
-	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar' );
-	this.pageToolbar.$actions.append(
-		this.toolbarSaveButton.$element
-	);
-
-	this.toolbar.$element.append( this.pageToolbar.$element );
-	this.pageToolbar.initialize();
-
-	this.pageToolbar.$group.addClass( 've-init-mw-mobileArticleTarget-pageTools' );
-	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
-
-	// Don't wait for the first surface focus/blur event to hide one of the toolbars
-	this.onSurfaceBlur();
+ve.init.mw.MobileArticleTarget.prototype.setupToolbarSaveButton = function () {
+	this.toolbarSaveButton = this.pageToolbar.getToolGroupByName( 'save' ).items[ 0 ];
 };
 
 /**

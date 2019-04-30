@@ -106,6 +106,11 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		icon: 'edit',
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
 		include: [ 'editModeVisual', 'editModeSource' ]
+	},
+	{
+		name: 'save',
+		type: 'bar',
+		include: [ 'showSave' ]
 	}
 ];
 
@@ -274,6 +279,13 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar' );
 		this.$element.prepend( this.toolbar.$element );
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.setupToolbarSaveButton = function () {
+	this.toolbarSaveButton = this.actionsToolbar.getToolGroupByName( 'save' ).items[ 0 ];
 };
 
 /**

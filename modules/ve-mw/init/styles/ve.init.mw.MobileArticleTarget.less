@@ -95,6 +95,26 @@
 	> .ve-init-mw-mobileArticleTarget-title-container {
 		display: table-cell;
 	}
+
+	.oo-ui-barToolGroup .oo-ui-tool-link {
+		min-height: 3em;
+	}
+
+	> .oo-ui-toolGroup {
+		&-empty {
+			display: none;
+		}
+
+		&:last-child {
+			border-right: 0;
+		}
+	}
+
+	.oo-ui-tool.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive {
+		// Sometimes rendering of fractional pixel widths leaves a 1px white bar on the side,
+		// this avoids it.
+		width: 100%;
+	}
 }
 
 /* Edit tools has no 100% width cells */
@@ -137,16 +157,6 @@
 					}
 				}
 			}
-		}
-	}
-
-	> .oo-ui-toolGroup {
-		&-empty {
-			display: none;
-		}
-
-		&:last-child {
-			border-right: 0;
 		}
 	}
 }

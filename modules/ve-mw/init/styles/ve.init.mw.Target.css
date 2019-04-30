@@ -60,3 +60,8 @@
 .ve-init-mw-target .ve-ce-surface-enabled .ve-ce-sectionNode:not( .ve-ce-activeNode-active ) {
 	opacity: 1;
 }
+
+/* Save button */
+.ve-ui-toolbar-saveButton {
+	font-weight: bold;
+}

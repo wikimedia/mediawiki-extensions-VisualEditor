@@ -100,8 +100,9 @@ QUnit.test( 'init', function ( assert ) {
 				'Object notice message is passed through from API'
 			);
 			assert.strictEqual( target.actionsToolbar.tools.notices.noticeItems[ 1 ].type, 'object notice', 'Object notice type is passed through from API' );
-			target.destroy();
-			done();
+			target.destroy().then( function () {
+				done();
+			} );
 		} );
 	} );
 	mw.config.get( 'wgVisualEditor' ).pageLanguageCode = 'he';
