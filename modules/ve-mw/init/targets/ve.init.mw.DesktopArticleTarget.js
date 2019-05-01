@@ -634,8 +634,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			// After teardown
 			target.active = false;
 
-			// If there is a load in progress, abort it
-			if ( target.loading ) {
+			// If there is a load in progress, try to abort it
+			if ( target.loading && target.loading.abort ) {
 				target.loading.abort();
 			}
 

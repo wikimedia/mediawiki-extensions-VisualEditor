@@ -1141,28 +1141,28 @@ ve.init.mw.ArticleTarget.prototype.deflateHtml = function ( newDoc ) {
  * in which case it waits for that promise instead.
  *
  * @param {jQuery.Promise} [dataPromise] Promise for pending request, if any
- * @return {boolean} Loading has been started
+ * @return {jQuery.Promise} Data promise
 */
 ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	// Prevent duplicate requests
 	if ( this.loading ) {
-		return false;
+		return this.loading;
 	}
 	this.events.trackActivationStart( mw.libs.ve.activationStart );
 	mw.libs.ve.activationStart = null;
 
-	this.loading = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.getPageName(), {
+	dataPromise = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.getPageName(), {
 		sessionStore: true,
 		section: this.section,
 		oldId: this.requestedRevId,
 		targetName: this.constructor.static.trackingName
 	} );
 
-	this.loading
+	this.loading = dataPromise
 		.done( this.loadSuccess.bind( this ) )
 		.fail( this.loadFail.bind( this ) );
 
-	return true;
+	return dataPromise;
 };
 
 /**
