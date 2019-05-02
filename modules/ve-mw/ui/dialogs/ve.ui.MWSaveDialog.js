@@ -867,6 +867,10 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 				// This includes a #focus call
 				this.editSummaryInput.moveCursorToEnd();
 			}
+
+			// HACK: iOS Safari sometimes makes the entire panel completely disappear (T221289).
+			// Rebuilding it makes it reappear.
+			OO.ui.Element.static.reconsiderScrollbars( this.panels.getCurrentItem().$element[ 0 ] );
 		}, this );
 };
 
