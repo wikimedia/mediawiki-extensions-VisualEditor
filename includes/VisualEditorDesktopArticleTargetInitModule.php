@@ -10,6 +10,8 @@
  * @license MIT
  */
 
+use MediaWiki\MediaWikiServices;
+
 class VisualEditorDesktopArticleTargetInitModule extends ResourceLoaderFileModule {
 
 	/**
@@ -17,8 +19,9 @@ class VisualEditorDesktopArticleTargetInitModule extends ResourceLoaderFileModul
 	 */
 	public function getMessages() {
 		$messages = parent::getMessages();
+		$services = MediaWikiServices::getInstance();
 
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$messages = array_merge(
 			$messages,
 			array_filter( $veConfig->get( 'VisualEditorTabMessages' ) )
@@ -28,7 +31,7 @@ class VisualEditorDesktopArticleTargetInitModule extends ResourceLoaderFileModul
 		// Check the localisation cache for which skins have a custom message for this.
 		// We only need this for the current skin, but ResourceLoader's message cache
 		// does not fragment by skin.
-		foreach ( SkinFactory::getDefaultInstance()->getSkinNames() as $skname => $unused ) {
+		foreach ( $services->getSkinFactory()->getSkinNames() as $skname => $unused ) {
 			foreach ( [ 'edit', 'create' ] as $msgKey ) {
 				// Messages: vector-view-edit, vector-view-create
 				// Disable database lookups for site-level message overrides as they
