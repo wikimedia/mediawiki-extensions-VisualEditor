@@ -2404,7 +2404,10 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 		return;
 	}
 	if ( !noConfirm && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
-		promise = OO.ui.confirm( mw.msg( 'visualeditor-viewpage-savewarning' ) );
+		promise = this.getSurface().dialogs.openWindow( 'abandonedit' )
+			.closed.then( function ( data ) {
+				return data && data.action === 'discard';
+			} );
 	} else {
 		promise = $.Deferred().resolve( true ).promise();
 	}
