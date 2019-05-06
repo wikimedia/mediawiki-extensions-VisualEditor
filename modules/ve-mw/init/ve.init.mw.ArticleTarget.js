@@ -1039,7 +1039,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				// If this.doc was loaded from an un-edited state and in visual mode,
 				// then just parse it to get originalDmDoc, otherwise we need to
 				// re-fetch the HTML
-				if ( target.section !== null ) {
+				if ( target.section !== null && target.enableVisualSectionEditing ) {
 					// Create a document with just the section
 					doc = target.doc.cloneNode( true );
 					// Empty
