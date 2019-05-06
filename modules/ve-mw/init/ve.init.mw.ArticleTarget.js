@@ -1158,7 +1158,8 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 		targetName: this.constructor.static.trackingName
 	} );
 
-	this.loading = dataPromise
+	this.loading = dataPromise;
+	dataPromise
 		.done( this.loadSuccess.bind( this ) )
 		.fail( this.loadFail.bind( this ) );
 
