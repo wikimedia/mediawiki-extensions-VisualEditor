@@ -37,7 +37,6 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-image' );
-	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-mocha-test' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
 	grunt.loadNpmTasks( 'grunt-tyops' );
@@ -147,11 +146,12 @@ module.exports = function ( grunt ) {
 		eslint: {
 			options: {
 				reportUnusedDisableDirectives: true,
+				extensions: [ '.js', '.json' ],
 				cache: true
 			},
 			all: [
-				'*.js',
-				'{build,modules}/**/*.js'
+				'*.js{,on}',
+				'{build,modules}/**/*.js{,on}'
 			]
 		},
 		stylelint: {
@@ -169,16 +169,6 @@ module.exports = function ( grunt ) {
 		banana: {
 			all: [
 				'i18n/{ve-mw,ve-mw/api,ve-wmf}'
-			]
-		},
-		jsonlint: {
-			all: [
-				'*.json',
-				'.{stylelintrc,eslintrc}.json',
-				'**/*.json',
-				'!**/node_modules/**',
-				'!lib/**',
-				'!vendor/**'
 			]
 		},
 		copy: {
@@ -219,7 +209,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'tyops', 'eslint', 'stylelint', 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'tyops', 'eslint', 'stylelint', 'banana' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
 	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en', 'image:pngs' ] );

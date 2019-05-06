@@ -10,14 +10,13 @@
 		"screenshots-all": "grunt screenshots-all"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.11.0",
+		"eslint-config-wikimedia": "0.12.0",
 		"grunt": "1.0.3",
 		"grunt-banana-checker": "0.7.0",
 		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-watch": "1.1.0",
 		"grunt-eslint": "21.0.0",
 		"grunt-image": "4.2.0",
-		"grunt-jsonlint": "1.1.0",
 		"grunt-mocha-test": "0.13.3",
 		"grunt-stylelint": "0.10.1",
 		"grunt-tyops": "0.1.0",
