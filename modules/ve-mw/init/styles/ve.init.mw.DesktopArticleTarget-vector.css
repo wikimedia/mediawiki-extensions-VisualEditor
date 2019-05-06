@@ -31,7 +31,7 @@
 
 .ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ce-attachedRootNode,
 .ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
-	padding: 0 1.2em; /* 1/ 16/13.3333 */
+	padding: 0 1.2em; /* 1/(13.3333/16) */
 }
 
 .mw-body .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
@@ -63,7 +63,7 @@
 
 	.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ce-attachedRootNode,
 	.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
-		padding: 0 1.8em; /* surface-margin-left (1.5em) / 16/13.3333 */
+		padding: 0 1.8em; /* surface-margin-left (1.5em) / (13.3333/16) */
 	}
 
 	/* Main document debug bar */
