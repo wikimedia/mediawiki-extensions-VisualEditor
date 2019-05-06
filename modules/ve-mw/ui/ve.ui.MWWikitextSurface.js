@@ -32,9 +32,15 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	if ( !this.$textbox.length ) {
 		this.$textbox = $( '<textarea>' )
 			.attr( 'id', 'wpTextbox1' )
-			.addClass( 've-dummyTextbox oo-ui-element-hidden' );
-		// Append a dummy textbox to the surface, so it gets destroyed with it
-		this.$element.append( this.$textbox );
+			.addClass( 've-dummyTextbox' );
+		// Append a dummy textbox to the surface, so it gets destroyed with it. Wrap it in a hidden
+		// element, so that UI of extensions/gadgets that add stuff to the real MediaWiki textbox
+		// (e.g. WikiEditor) remains mercifully hidden (T211898).
+		this.$element.append(
+			$( '<div>' )
+				.addClass( 've-dummyTextbox-wrapper oo-ui-element-hidden' )
+				.append( this.$textbox )
+		);
 	} else {
 		// Existing textbox may have an API registered
 		this.$textbox.textSelection( 'unregister' );
