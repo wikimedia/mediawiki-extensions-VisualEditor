@@ -300,7 +300,8 @@
 					}
 					restbaseXhr = $.ajax( {
 						url: pageHtmlUrl + encodeURIComponent( pageName ) +
-							( data.oldid === undefined ? '' : '/' + data.oldid ) + '?redirect=false',
+							( data.oldid === undefined ? '' : '/' + data.oldid ) +
+							'?redirect=false&stash=true',
 						type: 'GET',
 						headers: headers,
 						dataType: 'text'

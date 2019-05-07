@@ -270,7 +270,8 @@ class ApiVisualEditor extends ApiBase {
 						$content = $this->requestRestbase(
 							$title,
 							'GET',
-							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid . '?redirect=false',
+							'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid .
+								'?redirect=false&stash=true',
 							[]
 						);
 						if ( $content === false ) {
