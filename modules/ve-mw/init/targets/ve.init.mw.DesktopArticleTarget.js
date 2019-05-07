@@ -1502,7 +1502,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 		mw.user.options.get( 'useeditwarning' )
 	) {
 		// Return our message
-		return ve.msg( 'visualeditor-viewpage-savewarning' );
+		return ve.msg( 'mw-widgets-abandonedit' );
 	}
 };
 
