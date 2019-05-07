@@ -15,12 +15,16 @@
  * @param {ve.ce.ContentBranchNode} [parentNode] Node rendering this annotation
  * @param {Object} [config] Configuration options
  */
-ve.ce.MWExternalLinkAnnotation = function VeCeMWExternalLinkAnnotation() {
+ve.ce.MWExternalLinkAnnotation = function VeCeMWExternalLinkAnnotation( model ) {
 	// Parent constructor
 	ve.ce.MWExternalLinkAnnotation.super.apply( this, arguments );
 
 	// DOM changes
-	this.$anchor.addClass( 'external' );
+	if ( model.getAttribute( 'rel' ) === 'mw:WikiLink/Interwiki' ) {
+		this.$anchor.addClass( 'extiw' );
+	} else {
+		this.$anchor.addClass( 'external' );
+	}
 };
 
 /* Inheritance */
