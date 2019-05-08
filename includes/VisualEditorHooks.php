@@ -44,7 +44,8 @@ class VisualEditorHooks {
 	 * @return ApiVisualEditor|ApiVisualEditorEdit API class
 	 */
 	public static function getVisualEditorApiFactory( $main, $name ) {
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$config = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		$class = $name === 'visualeditor' ? 'ApiVisualEditor' : 'ApiVisualEditorEdit';
 		return new $class( $main, $name, $config );
 	}
@@ -54,17 +55,18 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'BeforePageDisplay' hook.
 	 *
-	 * @param OutputPage &$output The page view.
-	 * @param Skin &$skin The skin that's going to build the UI.
+	 * @param OutputPage $output The page view.
+	 * @param Skin $skin The skin that's going to build the UI.
 	 */
-	public static function onBeforePageDisplay( OutputPage &$output, Skin &$skin ) {
+	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
 		$output->addModules( [
 			'ext.visualEditor.desktopArticleTarget.init',
 			'ext.visualEditor.targetLoader'
 		] );
 		$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
 		// add scroll offset js variable to output
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		$skinsToolbarScrollOffset = $veConfig->get( 'VisualEditorSkinToolbarScrollOffset' );
 		$toolbarScrollOffset = 0;
 		$skinName = $skin->getSkinName();
@@ -106,13 +108,14 @@ class VisualEditorHooks {
 		Revision $oldRev = null,
 		Revision $newRev = null
 	) {
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		$output = RequestContext::getMain()->getOutput();
 		$user = RequestContext::getMain()->getUser();
 
 		if ( !(
 			// Enabled globally on wiki
-			$config->get( 'VisualEditorEnableDiffPage' ) ||
+			$veConfig->get( 'VisualEditorEnableDiffPage' ) ||
 			// Enabled as user beta feature
 			$user->getOption( 'visualeditor-visualdiffpage' ) ||
 			// Enabled by query param
@@ -121,7 +124,6 @@ class VisualEditorHooks {
 			return;
 		}
 
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $diff->getTitle()->getContentModel() ) ) {
 			return;
 		}
@@ -224,13 +226,13 @@ class VisualEditorHooks {
 	}
 
 	private static function isVisualAvailable( $title ) {
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		return ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) &&
 			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() );
 	}
 
 	private static function isWikitextAvailable( $title, $user ) {
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
 		return $user->getOption( 'visualeditor-newwikitext' ) &&
 			$title->getContentModel() === 'wikitext';
 	}
@@ -245,7 +247,8 @@ class VisualEditorHooks {
 	 */
 	public static function onCustomEditor( Article $article, User $user ) {
 		$req = $article->getContext()->getRequest();
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 
 		if (
 			!$user->getOption( 'visualeditor-enable' ) ||
@@ -301,7 +304,8 @@ class VisualEditorHooks {
 	}
 
 	private static function getPreferredEditor( User $user, WebRequest $req ) {
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$config = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext
 		if ( !$config->get( 'VisualEditorUseSingleEditTab' ) ) {
 			return 'wikitext';
@@ -345,11 +349,12 @@ class VisualEditorHooks {
 	 *
 	 * This is attached to the MediaWiki 'SkinTemplateNavigation' hook.
 	 *
-	 * @param SkinTemplate &$skin The skin template on which the UI is built.
+	 * @param SkinTemplate $skin The skin template on which the UI is built.
 	 * @param array &$links Navigation links.
 	 */
-	public static function onSkinTemplateNavigation( SkinTemplate &$skin, array &$links ) {
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+	public static function onSkinTemplateNavigation( SkinTemplate $skin, array &$links ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
@@ -554,7 +559,8 @@ class VisualEditorHooks {
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
 		$tooltip, &$result, $lang
 	) {
-		$config = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$config = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 
 		// Exit if we're in parserTests
 		if ( isset( $GLOBALS[ 'wgVisualEditorInParserTests' ] ) ) {
@@ -650,7 +656,8 @@ class VisualEditorHooks {
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		global $wgLang;
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' ) ) {
 			// Config option for visual editing "alpha" state (no Beta Feature)
@@ -744,7 +751,8 @@ class VisualEditorHooks {
 		$coreConfig = RequestContext::getMain()->getConfig();
 		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor/images";
 
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		$preferences['visualeditor-enable'] = [
 			'version' => '1.0',
 			'label-message' => 'visualeditor-preference-core-label',
@@ -816,7 +824,8 @@ class VisualEditorHooks {
 	 * @param bool &$result Success or failure
 	 */
 	public static function onPreferencesFormPreSave( $data, $form, $user, &$result ) {
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		// On a wiki where enable is hidden and set to 1, if user sets betatempdisable=0
 		// then set autodisable=0
 		// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=1
@@ -880,7 +889,8 @@ class VisualEditorHooks {
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
 		$coreConfig = RequestContext::getMain()->getConfig();
-		$veConfig = ConfigFactory::getDefaultInstance()->makeConfig( 'visualeditor' );
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
 		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 		$availableContentModels = array_filter(
 			array_merge(
@@ -932,9 +942,9 @@ class VisualEditorHooks {
 	 * Conditionally register the jquery.uls.data and jquery.i18n modules, in case they've already
 	 * been registered by the UniversalLanguageSelector extension or the TemplateData extension.
 	 *
-	 * @param ResourceLoader &$resourceLoader Client-side code and assets to be loaded.
+	 * @param ResourceLoader $resourceLoader Client-side code and assets to be loaded.
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader &$resourceLoader ) {
+	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$veResourceTemplate = [
 			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
@@ -989,7 +999,7 @@ class VisualEditorHooks {
 	 *   to wiki pages
 	 */
 	public static function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
-		array_push( $redirectParams, 'veaction' );
+		$redirectParams[] = 'veaction';
 	}
 
 	/**
@@ -1034,7 +1044,7 @@ class VisualEditorHooks {
 
 		if (
 			// Only act on actual accounts (avoid race condition bugs)
-			$user->isLoggedin() &&
+			$user->isLoggedIn() &&
 			// Only act if the default isn't already set
 			!User::getDefaultOption( 'visualeditor-enable' ) &&
 			// Act if either …
