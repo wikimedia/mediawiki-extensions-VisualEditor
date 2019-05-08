@@ -11,6 +11,9 @@
 use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditor extends ApiBase {
+
+	use ApiBlockInfoTrait;
+
 	/**
 	 * @var Config
 	 */
@@ -505,7 +508,7 @@ class ApiVisualEditor extends ApiBase {
 							$block->getPermissionsError( $this->getContext() )
 						)->parseAsBlock(),
 					];
-					$blockinfo = ApiQueryUserInfo::getBlockInfo( $block );
+					$blockinfo = $this->getBlockInfo( $block );
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
