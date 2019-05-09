@@ -540,18 +540,7 @@ class ApiVisualEditor extends ApiBase {
 						)->parseAsBlock(),
 					];
 
-					// HACK: Forward compatibility with changed method name.
-					// Remove this when no longer needed. The old method name was used
-					// only for a few days/weeks during development of MW 1.34.
-					// See discussion on <https://gerrit.wikimedia.org/r/c/mediawiki/core/+/506945>.
-					if ( method_exists( $this, 'getBlockInfo' ) ) {
-						// old name
-						/** @phan-suppress-next-line PhanUndeclaredMethod */
-						$blockinfo = $this->getBlockInfo( $block );
-					} else {
-						// new name
-						$blockinfo = $this->getBlockDetails( $block );
-					}
+					$blockinfo = $this->getBlockDetails( $block );
 				}
 
 				// Simplified EditPage::getEditPermissionErrors()
