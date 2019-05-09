@@ -46,11 +46,6 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	// eslint-disable-next-line no-jquery/no-global-selector
 	this.$editableContent = $( '#mw-content-text' );
 
-	this.toolbarExportButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-rebase-client-export' ),
-		flags: [ 'progressive', 'primary' ]
-	} ).connect( this, { click: 'onExportButtonClick' } );
-
 	// Initialization
 	this.$element.addClass( 've-init-mw-articleTarget ve-init-mw-collabTarget' );
 };
@@ -94,6 +89,10 @@ ve.init.mw.CollabTarget.static.actionGroups = [
 	{
 		name: 'authorList',
 		include: [ 'authorList' ]
+	},
+	{
+		name: 'export',
+		include: [ 'export' ]
 	}
 ];
 
@@ -109,25 +108,6 @@ ve.init.mw.CollabTarget.prototype.transformPage = function () {
  * Page modifications after editor teardown.
  */
 ve.init.mw.CollabTarget.prototype.restorePage = function () {
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.CollabTarget.prototype.setupToolbar = function () {
-	// Parent method
-	ve.init.mw.CollabTarget.super.prototype.setupToolbar.apply( this, arguments );
-
-	this.getToolbar().$actions.append( this.toolbarExportButton.$element );
-};
-
-/**
- * Handle click events from the export button
- */
-ve.init.mw.CollabTarget.prototype.onExportButtonClick = function () {
-	var surface = this.getSurface(),
-		windowAction = ve.ui.actionFactory.create( 'window', surface );
-	windowAction.open( 'mwExportWikitext', { surface: surface } );
 };
 
 /**
@@ -149,3 +129,28 @@ ve.init.mw.CollabTarget.prototype.getPageName = function () {
 /* Registration */
 
 ve.init.mw.targetFactory.register( ve.init.mw.CollabTarget );
+
+/**
+ * Export tool
+ */
+ve.ui.MWExportTool = function VeUiMWExportTool() {
+	// Parent constructor
+	ve.ui.MWExportTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.MWExportTool, ve.ui.Tool );
+ve.ui.MWExportTool.static.name = 'export';
+ve.ui.MWExportTool.static.displayBothIconAndLabel = true;
+ve.ui.MWExportTool.static.group = 'export';
+ve.ui.MWExportTool.static.autoAddToCatchall = false;
+ve.ui.MWExportTool.static.flags = [ 'progressive', 'primary' ];
+ve.ui.MWExportTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-rebase-client-export' );
+ve.ui.MWExportTool.static.commandName = 'mwExportWikitext';
+ve.ui.toolFactory.register( ve.ui.MWExportTool );
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'mwExportWikitext', 'window', 'open',
+		{ args: [ 'mwExportWikitext' ] }
+	)
+);
