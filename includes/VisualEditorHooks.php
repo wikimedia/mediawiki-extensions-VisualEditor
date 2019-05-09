@@ -213,22 +213,28 @@ class VisualEditorHooks {
 		}
 
 		if ( $req->getVal( 'wteswitched' ) ) {
-			return self::isVisualAvailable( $title );
+			return self::isVisualAvailable( $title, $req );
 		}
 
 		switch ( self::getPreferredEditor( $user, $req ) ) {
 			case 'visualeditor':
-				return self::isVisualAvailable( $title ) || self::isWikitextAvailable( $title, $user );
+				return self::isVisualAvailable( $title, $req ) || self::isWikitextAvailable( $title, $user );
 			case 'wikitext':
 				return self::isWikitextAvailable( $title, $user );
 		}
 		return false;
 	}
 
-	private static function isVisualAvailable( $title ) {
+	private static function isVisualAvailable( $title, $req ) {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
-		return ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) &&
+		return (
+				// Only in enabled namespaces
+				ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) ||
+				// Or if forced by the URL parameter (T221892)
+				$req->getVal( 'veaction' ) === 'edit'
+			) &&
+			// Only for pages with a supported content model
 			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() );
 	}
 
@@ -415,7 +421,7 @@ class VisualEditorHooks {
 		$title = $skin->getRelevantTitle();
 		// Don't exit if this page isn't VE-enabled, since we should still
 		// change "Edit" to "Edit source".
-		$isAvailable = self::isVisualAvailable( $title );
+		$isAvailable = self::isVisualAvailable( $title, $skin->getRequest() );
 
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
@@ -608,7 +614,7 @@ class VisualEditorHooks {
 		}
 
 		// add VE edit section in VE available namespaces
-		if ( self::isVisualAvailable( $title ) ) {
+		if ( self::isVisualAvailable( $title, $skin->getRequest() ) ) {
 			$veEditSection = $tabMessages['editsection'];
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
