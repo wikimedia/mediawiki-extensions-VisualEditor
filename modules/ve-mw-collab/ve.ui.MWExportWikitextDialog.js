@@ -100,10 +100,11 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var dialog = this;
+			var dialog = this,
+				surface = ve.init.target.getSurface();
 			this.titleButton.setDisabled( true );
 			this.wikitext.pushPending();
-			ve.init.target.getWikitextFragment( data.surface.getModel().getDocument() ).then( function ( wikitext ) {
+			ve.init.target.getWikitextFragment( surface.getModel().getDocument() ).then( function ( wikitext ) {
 				dialog.wikitext.setValue( wikitext.trim() );
 				dialog.wikitext.$input.scrollTop( 0 );
 				dialog.wikitext.popPending();
