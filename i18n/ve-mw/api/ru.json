@@ -21,7 +21,7 @@
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
 	"apihelp-visualeditor-param-cachekey": "Для сериализации или просмотра различий, использовать результат предыдущего запроса serializeforcache с этим ключом. Пренебрегает $1html.",
-	"apihelp-visualeditor-param-editintro": "Изменить введение, чтобы добавить к уведомлениям.",
+	"apihelp-visualeditor-param-editintro": "Изменение введения, которое добавляется к уведомлениям.",
 	"apihelp-visualeditor-param-etag": "ETag для отправки.",
 	"apihelp-visualeditor-param-format": "Формат вывода.",
 	"apihelp-visualeditor-param-html": "HTML для отправки в Parsoid для конвертации в вики-текст.",
