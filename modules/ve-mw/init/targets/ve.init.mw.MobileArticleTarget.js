@@ -645,7 +645,7 @@ ve.ui.MWDoneTool = function VeUiMWDoneTool() {
 OO.inheritClass( ve.ui.MWDoneTool, ve.ui.Tool );
 ve.ui.MWDoneTool.static.name = 'done';
 ve.ui.MWDoneTool.static.group = 'navigation';
-ve.ui.MWDoneTool.static.group.autoAddToCatchall = false;
+ve.ui.MWDoneTool.static.autoAddToCatchall = false;
 ve.ui.MWDoneTool.static.icon = 'check';
 ve.ui.MWDoneTool.static.flags = [ 'progressive' ];
 ve.ui.MWDoneTool.static.title =
