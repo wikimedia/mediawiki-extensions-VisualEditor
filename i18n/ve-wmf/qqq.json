@@ -21,7 +21,7 @@
 			"Guillom"
 		]
 	},
-	"tag-visualeditor": "Short description of the visualeditor tag.\n\nShown on lists of changes (history, recentchanges, etc.) for each edit made using VisualEditor.\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-needcheck}}\n{{Related|Tag-visualeditor}}\n{{Identical|VisualEditor}}",
+	"tag-visualeditor": "Short description of the visualeditor tag. Do not translate the link target, but do translate the words \"Visual edit\".\n\nShown on lists of changes (history, recentchanges, etc.) for each edit made using VisualEditor.\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-needcheck}}\n{{Related|Tag-visualeditor}}\n{{Identical|VisualEditor}}",
 	"tag-visualeditor-description": "Long description of the visualeditor tag ({{msg-mw|Tag-visualeditor}}).\n\nShown on [[Special:Tags]].\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-needcheck-description}}\n{{Related|Tag-visualeditor}}",
 	"tag-visualeditor-needcheck": "\"Check\" indicates \"Check needed\".\n\nSee {{msg-mw|Tag-visualeditor-needcheck-description}}.\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor|similar message}}\n{{Related|Tag-visualeditor}}",
 	"tag-visualeditor-needcheck-description": "Long description of the visualeditor-needcheck tag ({{msg-mw|Tag-visualeditor-needcheck}}).\n\nShown on [[Special:Tags]].\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-description}}\n{{Related|Tag-visualeditor}}",

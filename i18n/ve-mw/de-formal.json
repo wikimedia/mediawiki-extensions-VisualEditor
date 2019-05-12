@@ -6,7 +6,7 @@
 			"Hwboehm"
 		]
 	},
-	"visualeditor-autosave-modified-prompt-message": "Diese Seite wurde seit Ihrer letzten Ladung bearbeitet. Möchten {{GENDER:|Sie}} {{GENDER:|Ihre}} Bearbeitung auf die alte Version wiederherstellen oder eine neue Bearbeitung der aktuellen Version beginnen?",
+	"visualeditor-autosave-modified-prompt-message": "Diese Seite wurde bearbeitet, seit Sie sie das letzte mal geladen haben. Möchten {{GENDER:|Sie}} die Bearbeitung der alten Version fortsetzen oder die aktuelle Version bearbeiten?",
 	"visualeditor-autosave-modified-prompt-title": "{{GENDER:|Ihre}} Bearbeitung wiederherstellen?",
 	"visualeditor-autosave-not-recovered-text": "Ihre ungespeicherten Änderungen konnten nicht wiederhergestellt werden.",
 	"visualeditor-autosave-not-recovered-title": "Die Wiederherstellung Ihrer Änderungen ist fehlgeschlagen",
