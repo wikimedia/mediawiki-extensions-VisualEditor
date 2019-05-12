@@ -1067,7 +1067,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				pst: true
 			} ).then( function ( response ) {
 				// Use anonymous function to avoid passing through API promise argument
-				return mw.libs.ve.diffLoader.getModelFromResponse( response );
+				return mw.libs.ve.diffLoader.getModelFromResponse( response, target.section === null ? null : undefined );
 			} );
 
 			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
