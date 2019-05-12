@@ -399,11 +399,11 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						prop: '',
 						summary: currentEditSummaryWikitext
 					} ).done( function ( result ) {
-						if ( result.parse.parsedsummary[ '*' ] === '' ) {
+						if ( result.parse.parsedsummary === '' ) {
 							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						} else {
 							// Intentionally treated as HTML
-							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary[ '*' ] ) );
+							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary ) );
 							ve.targetLinksToNewWindow( dialog.$reviewEditSummary[ 0 ] );
 						}
 					} ).fail( function () {
