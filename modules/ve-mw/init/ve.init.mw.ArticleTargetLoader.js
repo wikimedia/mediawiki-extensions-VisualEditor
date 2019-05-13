@@ -205,14 +205,16 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data, fullDocExpand,
+				section = options.section !== undefined ? options.section : null,
+				useRestbase = ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
 				switched = false,
 				fromEditedState = false;
 
 			options = options || {};
 			data = {
 				action: 'visualeditor',
-				paction: ( conf.fullRestbaseUrl || conf.restbaseUrl ) ? 'metadata' : 'parse',
+				paction: useRestbase ? 'metadata' : 'parse',
 				page: pageName,
 				uselang: mw.config.get( 'wgUserLanguage' ),
 				editintro: uri.query.editintro,
@@ -232,10 +234,20 @@
 			start = ve.now();
 			ve.track( 'trace.apiLoad.enter', { mode: 'visual' } );
 
-			if ( data.paction === 'parse' && options.wikitext !== undefined ) {
+			if ( !useRestbase && options.wikitext !== undefined ) {
+				fullDocExpand = section !== null;
 				// Non-RESTBase custom wikitext parse
-				data.paction = 'parsefragment';
+				if ( fullDocExpand ) {
+					data.paction = 'parse';
+					data.stash = true;
+					switched = true;
+					fromEditedState = options.modified;
+				} else {
+					data.paction = 'parsefragment';
+				}
 				data.wikitext = options.wikitext;
+				data.section = options.section;
+				data.oldid = options.oldId;
 				apiXhr = new mw.Api().post( data );
 			} else {
 				apiXhr = new mw.Api().get( data );
@@ -249,10 +261,14 @@
 					targetName: options.targetName,
 					mode: 'visual'
 				} );
+				if ( data.visualeditor ) {
+					data.visualeditor.switched = switched;
+					data.visualeditor.fromEditedState = fromEditedState;
+				}
 				return data;
 			} );
 
-			if ( conf.fullRestbaseUrl || conf.restbaseUrl ) {
+			if ( useRestbase ) {
 				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );
 
 				headers = {
@@ -284,7 +300,6 @@
 						type: 'POST',
 						data: {
 							title: pageName,
-							oldid: data.oldid,
 							wikitext: options.wikitext,
 							stash: 'true'
 						},

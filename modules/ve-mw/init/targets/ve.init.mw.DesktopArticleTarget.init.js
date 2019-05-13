@@ -409,7 +409,7 @@
 			.always( clearLoading );
 	}
 
-	function activatePageTarget( mode, modified ) {
+	function activatePageTarget( mode, section, modified ) {
 		trackActivateStart( { type: 'page', mechanism: 'click', mode: mode } );
 
 		if ( !active ) {
@@ -427,7 +427,7 @@
 				uri = veEditUri;
 			}
 
-			activateTarget( mode, null, undefined, modified );
+			activateTarget( mode, section, undefined, modified );
 		}
 	}
 
@@ -859,7 +859,9 @@
 		},
 
 		activateVe: function ( mode ) {
-			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
+			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
+				sectionVal = $( 'input[name=wpSection]' ).val(),
+				section = sectionVal !== '' && sectionVal !== undefined ? +sectionVal : null;
 
 			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
 			if ( $.fn.dialog ) {
@@ -876,10 +878,7 @@
 				(
 					mw.config.get( 'wgAction' ) === 'edit' &&
 					wikitext !== initialWikitext
-				) ||
-				// switching from section editing must prompt because we can't
-				// keep changes from that (yet?)
-				$( 'input[name=wpSection]' ).val()
+				)
 			) {
 				mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
 					var windowManager = new OO.ui.WindowManager(),
@@ -895,7 +894,7 @@
 							// TODO: windowManager.destroy()?
 							if ( data && data.action === 'keep' ) {
 								releaseOldEditWarning();
-								activatePageTarget( mode, true );
+								activatePageTarget( mode, section, true );
 							} else if ( data && data.action === 'discard' ) {
 								releaseOldEditWarning();
 								setEditorPreference( 'visualeditor' );
@@ -907,7 +906,7 @@
 				} );
 			} else {
 				releaseOldEditWarning();
-				activatePageTarget( mode, false );
+				activatePageTarget( mode, section, false );
 			}
 		},
 

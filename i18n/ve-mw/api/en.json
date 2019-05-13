@@ -43,6 +43,7 @@
 	"apihelp-visualeditor-param-pst": "Pre-save transform wikitext before sending it to Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "The section on which to act.",
 	"apihelp-visualeditor-param-starttimestamp": "When saving, set this to the timestamp of when the page was loaded. Used to detect edit conflicts.",
+	"apihelp-visualeditor-param-stash": "When saving, set this true if you want to use the stashing API.",
 	"apihelp-visualeditor-param-wikitext": "Wikitext to send to Parsoid to convert to HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Returns HTML5 for a page from the Parsoid service.",
 	"apihelp-visualeditoredit-description": "Save an HTML5 page to MediaWiki (converted to wikitext via the Parsoid service).",

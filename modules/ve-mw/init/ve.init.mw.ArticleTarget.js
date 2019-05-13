@@ -2355,16 +2355,13 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 		target = this;
 
 	if ( !this.edited ) {
-		this.section = null;
 		this.reloadSurface( 'visual' );
 		return;
 	}
 
-	// Show a discard-only confirm dialog, and then reload the whole page, if:
+	// Show a discard-only confirm dialog, and then reload the whole page, if
+	// the server can't switch for us because that's not supported.
 	if (
-		// * section editing in WT, as WT -> VE is not yet supported, or
-		this.section !== null ||
-		// * the server can't switch for us because that's not supported.
 		!mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl
 	) {
 		windowManager = new OO.ui.WindowManager();
@@ -2384,7 +2381,8 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 			oldId: this.revid,
 			targetName: this.constructor.static.trackingName,
 			modified: this.edited,
-			wikitext: this.getDocToSave()
+			wikitext: this.getDocToSave(),
+			section: this.section
 		} );
 
 		this.reloadSurface( 'visual', dataPromise );
