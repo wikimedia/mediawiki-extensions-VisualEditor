@@ -732,10 +732,9 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
  */
 ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions ) {
 	var dialog = this,
-		apiObj = {
+		params = {
 			action: 'query',
 			prop: 'imageinfo',
-			indexpageids: '1',
 			iiprop: 'url',
 			titles: imageName
 		};
@@ -746,19 +745,14 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 	}
 
 	if ( dimensions.width ) {
-		apiObj.iiurlwidth = dimensions.width;
+		params.iiurlwidth = dimensions.width;
 	}
 	if ( dimensions.height ) {
-		apiObj.iiurlheight = dimensions.height;
+		params.iiurlheight = dimensions.height;
 	}
-	return ve.init.target.getContentApi( this.getFragment().getDocument() ).get( apiObj )
+	return ve.init.target.getContentApi( this.getFragment().getDocument() ).get( params )
 		.then( function ( response ) {
-			var thumburl = ve.getProp(
-				response.query.pages[ response.query.pageids[ 0 ] ],
-				'imageinfo',
-				0,
-				'thumburl'
-			);
+			var thumburl = ve.getProp( response.query.pages[ 0 ], 'imageinfo', 0, 'thumburl' );
 			// Cache
 			dialog.searchCache[ imageName ] = thumburl;
 			return thumburl;
