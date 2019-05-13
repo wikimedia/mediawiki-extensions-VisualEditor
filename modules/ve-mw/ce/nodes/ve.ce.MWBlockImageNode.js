@@ -304,8 +304,11 @@ ve.ce.MWBlockImageNode.prototype.onResizableResizing = function ( dimensions ) {
 	}
 };
 
+/**
+ * @inheritdoc ve.ce.MWResizableNode
+ */
 ve.ce.MWBlockImageNode.prototype.isResizable = function () {
-	return this.model.getMediaType() !== 'AUDIO';
+	return ve.ce.MWResizableNode.prototype.isResizable.call( this ) && this.model.getMediaType() !== 'AUDIO';
 };
 
 ve.ce.MWBlockImageNode.prototype.getDomPosition = function () {
