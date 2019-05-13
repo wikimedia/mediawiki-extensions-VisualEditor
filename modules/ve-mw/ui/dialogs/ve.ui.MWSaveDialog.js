@@ -859,6 +859,10 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
+			// HACK: iOS Safari sometimes makes the entire panel completely disappear (T221289).
+			// Rebuilding it makes it reappear.
+			OO.ui.Element.static.reconsiderScrollbars( this.panels.getCurrentItem().$element[ 0 ] );
+
 			// Support: Firefox
 			// In Firefox, trying to focus a hidden input will throw an
 			// exception. This would happen when opening the preview via
@@ -867,10 +871,6 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 				// This includes a #focus call
 				this.editSummaryInput.moveCursorToEnd();
 			}
-
-			// HACK: iOS Safari sometimes makes the entire panel completely disappear (T221289).
-			// Rebuilding it makes it reappear.
-			OO.ui.Element.static.reconsiderScrollbars( this.panels.getCurrentItem().$element[ 0 ] );
 		}, this );
 };
 
