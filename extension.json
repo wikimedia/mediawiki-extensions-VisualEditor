@@ -36,6 +36,7 @@
 		},
 		"VisualEditorRestbaseURL": false,
 		"VisualEditorFullRestbaseURL": false,
+		"VisualEditorAllowLossySwitching": true,
 		"VisualEditorAvailableNamespaces": {
 			"User": true,
 			"File": true,

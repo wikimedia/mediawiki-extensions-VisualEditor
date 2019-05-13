@@ -2355,6 +2355,8 @@ ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () 
  */
 ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 	var dataPromise, windowManager, switchWindow,
+		config = mw.config.get( 'wgVisualEditorConfig' ),
+		canSwitch = config.fullRestbaseUrl || config.allowLossySwitching,
 		target = this;
 
 	if ( !this.edited ) {
@@ -2364,9 +2366,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 
 	// Show a discard-only confirm dialog, and then reload the whole page, if
 	// the server can't switch for us because that's not supported.
-	if (
-		!mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl
-	) {
+	if ( !canSwitch ) {
 		windowManager = new OO.ui.WindowManager();
 		switchWindow = new mw.libs.ve.SwitchConfirmDialog();
 		$( document.body ).append( windowManager.$element );
