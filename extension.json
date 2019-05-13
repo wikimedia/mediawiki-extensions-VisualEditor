@@ -1255,6 +1255,8 @@
 				"visualeditor-specialcharacterinspector-title",
 				"visualeditor-table-caption",
 				"visualeditor-table-contextitem-properties",
+				"visualeditor-table-contextitem-selectionmode-cells",
+				"visualeditor-table-contextitem-selectionmode-contents",
 				"visualeditor-table-delete-col",
 				"visualeditor-table-delete-row",
 				"visualeditor-table-format-data",
