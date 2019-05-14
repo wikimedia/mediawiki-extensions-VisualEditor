@@ -1484,8 +1484,8 @@
 				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchPopupWidget.css"
 			],
 			"skinStyles": {
-				"monobook": [
-					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-monobook.css"
+				"default": [
+					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.css"
 				]
 			},
 			"dependencies": [
