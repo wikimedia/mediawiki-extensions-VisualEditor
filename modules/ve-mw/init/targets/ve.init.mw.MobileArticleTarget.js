@@ -21,6 +21,8 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	this.$overlay = overlay.$el;
 	this.$overlaySurface = overlay.$el.find( '.surface' );
 
+	ve.newMobileContext = mw.config.get( 'wgVisualEditorConfig' ).enableNewMobileContext;
+
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		actions: false
@@ -34,10 +36,6 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget' );
-
-	if ( ve.init.platform.constructor.static.isIos() ) {
-		this.$element.addClass( 've-init-mw-mobileArticleTarget-ios' );
-	}
 };
 
 /* Inheritance */
@@ -293,10 +291,16 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
  * Match the content padding to the toolbar height
  */
 ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
-	var toolbarHeight = this.getToolbar().$element.outerHeight(),
-		surface = this.getSurface(),
-		surfaceView = surface.getView();
-	surface.setPadding( { top: toolbarHeight } );
+	var surface = this.getSurface(),
+		surfaceView = surface.getView(),
+		toolbarHeight = this.getToolbar().$element[ 0 ].clientHeight,
+		contextHeight = ve.newMobileContext ?
+			surface.getContext().$element[ 0 ].clientHeight : 0;
+
+	surface.setPadding( {
+		top: toolbarHeight,
+		bottom: contextHeight
+	} );
 	surfaceView.$attachedRootNode.css( 'padding-top', toolbarHeight );
 	surface.$placeholder.css( 'padding-top', toolbarHeight );
 	surfaceView.emit( 'position' );
@@ -351,10 +355,12 @@ ve.init.mw.MobileArticleTarget.prototype.createTargetWidget = function ( config 
 	// Parent method
 	var targetWidget = ve.init.mw.MobileArticleTarget.super.prototype.createTargetWidget.call( this, config );
 
-	targetWidget.once( 'setup', function () {
-		// Append the context to the toolbar
-		targetWidget.getToolbar().$bar.append( targetWidget.getSurface().getContext().$element );
-	} );
+	if ( !ve.newMobileContext ) {
+		targetWidget.once( 'setup', function () {
+			// Append the context to the toolbar
+			targetWidget.getToolbar().$bar.append( targetWidget.getSurface().getContext().$element );
+		} );
+	}
 
 	return targetWidget;
 };
@@ -533,8 +539,10 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	);
 
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
-	// Append the context to the toolbar
-	this.toolbar.$bar.append( surface.getContext().$element );
+	if ( !ve.newMobileContext ) {
+		// Append the context to the toolbar
+		this.toolbar.$bar.append( surface.getContext().$element );
+	}
 
 	// Don't wait for the first surface focus/blur event to hide one of the toolbars
 	this.onSurfaceBlur();

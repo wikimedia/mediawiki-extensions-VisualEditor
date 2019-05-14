@@ -53,6 +53,7 @@
 		"VisualEditorEnableDiffPage": false,
 		"VisualEditorEnableDiffPageBetaFeature": false,
 		"VisualEditorEnableVisualSectionEditing": false,
+		"VisualEditorEnableNewMobileContext": false,
 		"VisualEditorUseSingleEditTab": false,
 		"VisualEditorSingleEditTabSwitchTime": 20160101000000,
 		"VisualEditorTabPosition": "before",
