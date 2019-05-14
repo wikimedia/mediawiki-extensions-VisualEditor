@@ -267,10 +267,22 @@
 		mw.libs.ve.activationStart = ve.now();
 	}
 
+	function getTabMessage( key ) {
+		var tabMsg = tabMessages[ key ];
+		if ( !tabMsg && ( key === 'edit' || key === 'create' ) ) {
+			// Some skins don't use the default 'edit' and 'create' message keys.
+			// e.g. vector-view-edit, vector-view-create
+			tabMsg = mw.config.get( 'skin' ) + '-view-' + key;
+			if ( !mw.message( tabMsg ).exists() ) {
+				tabMsg = key;
+			}
+		}
+		return tabMsg;
+	}
+
 	function setEditorPreference( editor ) {
 		var key = pageExists ? 'edit' : 'create',
-			sectionKey = 'editsection',
-			tabMsg;
+			sectionKey = 'editsection';
 
 		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
 			throw new Error( 'setEditorPreference called with invalid option: ', editor );
@@ -288,16 +300,7 @@
 				sectionKey += 'source';
 			}
 
-			tabMsg = tabMessages[ key ];
-			if ( !tabMsg && ( key === 'edit' || key === 'create' ) ) {
-				// e.g. vector-view-edit, vector-view-create
-				tabMsg = mw.config.get( 'skin' ) + '-view-' + key;
-				if ( !mw.message( tabMsg ).exists() ) {
-					tabMsg = key;
-				}
-			}
-
-			$( '#ca-edit a' ).text( mw.msg( tabMsg ) );
+			$( '#ca-edit a' ).text( mw.msg( getTabMessage( key ) ) );
 			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] ) );
 		}
 
@@ -634,7 +637,7 @@
 						// 2) when onEditTabClick is not bound (!pageCanLoadEditor) it will
 						// just work.
 						veEditUri,
-						tabMessages[ action ] !== null ? mw.msg( tabMessages[ action ] ) : $caEditLink.text(),
+						mw.msg( getTabMessage( action ) ),
 						'ca-ve-edit',
 						mw.msg( 'tooltip-ca-ve-edit' ),
 						mw.msg( 'accesskey-ca-ve-edit' ),
@@ -660,9 +663,7 @@
 						$caEdit.after( $caVeEdit );
 					}
 				}
-				if ( tabMessages[ action ] !== null ) {
-					$caVeEditLink.text( mw.msg( tabMessages[ action ] ) );
-				}
+				$caVeEditLink.text( mw.msg( getTabMessage( action ) ) );
 			}
 
 			// If the edit tab is hidden, remove it.
