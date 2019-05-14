@@ -998,8 +998,12 @@
 	init.isVisualAvailable = (
 		init.isAvailable &&
 
-		// Only in enabled namespaces
-		conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
+		(
+			// Only in enabled namespaces
+			conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 ||
+			// Or if forced by the URL parameter (T221892)
+			uri.query.veaction === 'edit'
+		) &&
 
 		// Only for pages with a supported content model
 		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) )
