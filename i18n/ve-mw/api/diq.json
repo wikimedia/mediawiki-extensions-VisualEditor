@@ -4,7 +4,8 @@
 			"1917 Ekim Devrimi",
 			"Gırd",
 			"Kumkumuk",
-			"Mirzali"
+			"Mirzali",
+			"Orbot707"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Ena kilit vinayışi dı rêzen nêbiya",
@@ -27,6 +28,7 @@
 	"apihelp-visualeditor-param-pst": "Verdê tasaruf da Parsoidi transforma wiki rışiyayış (=paction parsefragment).",
 	"apihelp-visualeditor-param-section": "Çewder kamci hereket dera",
 	"apihelp-visualeditor-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
+	"apihelp-visualeditor-param-stash": "Wexto ke şeveknenê, API qayılê ke bınımnê se eyarê cı raşt bıkerê",
 	"apihelp-visualeditor-param-wikitext": "Wikimetini bırış Parsoidi çerxê HTMLi kı",
 	"apihelp-visualeditor-summary": "Servisê Parsoidi ra vêreno ra pela HTML5.",
 	"apihelp-visualeditoredit-description": "Perra MediaWiki HTML5i dı qeyd kı (serwisa Parsoidi dı wikinetin çerx biyo).",

@@ -29,6 +29,7 @@
 	"apihelp-visualeditor-param-pst": "Pré-enregistrer le wikicode transformé avant de l’envoyer à Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "La section sur laquelle agir.",
 	"apihelp-visualeditor-param-starttimestamp": "Lors de l’enregistrement, initialise ceci avec l’horodatage du moment où la page a été chargée. Utilisé pour détecter les conflits d’édition.",
+	"apihelp-visualeditor-param-stash": "Lors de l’enregistrement, mettre cela à vrai si vous voulez utiliser l’API de réserve.",
 	"apihelp-visualeditor-param-wikitext": "Wikicode à envoyer à Parsoid pour être converti en HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Renvoie une page HTML5 du service Parsoid.",
 	"apihelp-visualeditoredit-description": "Enregistre une page HTML 5 vers Mediawiki (convertie en wikicode ''via'' le service Parsoid).",

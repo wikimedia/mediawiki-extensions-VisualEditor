@@ -3,7 +3,8 @@
 		"authors": [
 			"Byfserag",
 			"Liuxinyu970226",
-			"Yejianfei"
+			"Yejianfei",
+			"科劳"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "找不到带有该关键词的已缓存序列化内容",
@@ -26,6 +27,7 @@
 	"apihelp-visualeditor-param-pst": "在发送至Parsoid前预保存转换的wiki文本（paction=parsefragment）。",
 	"apihelp-visualeditor-param-section": "起作用的章节。",
 	"apihelp-visualeditor-param-starttimestamp": "当保存时，设置它作为页面加载时的时间戳。用于检测编辑冲突。",
+	"apihelp-visualeditor-param-stash": "若希望使用代码储藏界面来保存，请将此参数设定为True",
 	"apihelp-visualeditor-param-wikitext": "要发送至Parsoid以转换成HTML的Wiki文本（paction=parsefragment）。",
 	"apihelp-visualeditor-summary": "从Parsoid服务返回页面的HTML5。",
 	"apihelp-visualeditoredit-description": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。",

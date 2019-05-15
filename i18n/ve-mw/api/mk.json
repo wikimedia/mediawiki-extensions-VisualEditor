@@ -24,6 +24,7 @@
 	"apihelp-visualeditor-param-pst": "Предзачувување на преобразениот викитекст пред да му се испрати на Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "На кој поднаслов да се дејствува.",
 	"apihelp-visualeditor-param-starttimestamp": "Кога зачувувате, на ова задајте му го датумот и времето на вчитувањето на страницата. Се користи за утврдување на спротиставености во уредувањето.",
+	"apihelp-visualeditor-param-stash": "Кога зачувувате, задајте му точно (вистинито) ако сакате да го користите складишниот приложник.",
 	"apihelp-visualeditor-param-wikitext": "Викитекст за испраќање на Parsoid за да го претвори во HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Дава HTML5 за страница од службата Parsoid.",
 	"apihelp-visualeditoredit-description": "Зачувајте HTML5-страница во МедијаВики (се претвора во викитекст преку службата Parsoid).",

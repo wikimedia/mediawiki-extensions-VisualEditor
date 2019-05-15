@@ -24,6 +24,7 @@
 	"apihelp-visualeditor-param-pst": "Reggìstre 'u teste da trasfurmà jndr'à uicchiteste apprime de mannarle a 'u Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "?a sezzione addò s'adda fà quaccheccose.",
 	"apihelp-visualeditor-param-starttimestamp": "Quanne ste reggistre, 'mboste quiste cumme orarie de quanne 'a pàgene ha state carecate. Ausate pe acchià conflitte de cangiaminde.",
+	"apihelp-visualeditor-param-stash": "Quanne reggìstre, 'mboste quiste a true ce vue ccù ause le API de stashing.",
 	"apihelp-visualeditor-param-wikitext": "Wikitesto da inviare al Parsoid per essere convertito in HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Tuèrne HTML5 pe 'na pàgene da 'u servizie Parsoid.",
 	"apihelp-visualeditoredit-description": "Reggìstre 'na pàgene HTML5 sus a MediaUicchi (convertite jndr'à 'u uicchiteste ausanne 'u servizie Parsoid).",

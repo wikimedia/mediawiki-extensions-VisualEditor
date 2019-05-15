@@ -27,6 +27,7 @@
 	"apihelp-visualeditor-param-pst": "傳送至 Parsoid 前預先儲存要轉換的 wikitext (paction=parsefragment) 。",
 	"apihelp-visualeditor-param-section": "要處理的章節。",
 	"apihelp-visualeditor-param-starttimestamp": "在儲存時，請將此設定爲該頁面載入的時間戳記。 用於偵測編輯衝突。",
+	"apihelp-visualeditor-param-stash": "當儲存時，若您想使用存放 API 請設定此為 true。",
 	"apihelp-visualeditor-param-wikitext": "要傳送至 Parsoid 轉換成為 HTML 的 WikiText (paction=parsefragment)。",
 	"apihelp-visualeditor-summary": "從 Parsoid 服務回傳一個頁面的 HTML5。",
 	"apihelp-visualeditoredit-description": "儲存一個 HTML5 頁面至 MediaWiki (透過 Parsoid 服務轉換爲 WikiText)。",

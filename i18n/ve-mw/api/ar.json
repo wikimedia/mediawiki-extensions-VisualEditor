@@ -26,6 +26,7 @@
 	"apihelp-visualeditor-param-pst": "قبل حفظ تحويل نصوص ويكي WikiText قبل إرساله إلى Parsoid\n  (paction = parsefragment).",
 	"apihelp-visualeditor-param-section": "القسم للعمل عليه.",
 	"apihelp-visualeditor-param-starttimestamp": "عندما تحفظ، وتعيين هذا إلى الطابع الزمني عندما تم تحميل الصفحة. تستخدم لكشف الصراعات تحرير.",
+	"apihelp-visualeditor-param-stash": "عند الحفظ ، قم بتعيين ها كصحيح إذا كنت تريد استخدام stashing API.",
 	"apihelp-visualeditor-param-wikitext": "نصوص ويكي WikiText لإرسالها إلى Parsoid للتحويل إلى HTML\n(paction = parsefragment).",
 	"apihelp-visualeditor-summary": "يرجع HTML5 لصفحة من خدمة Parsoid.",
 	"apihelp-visualeditoredit-description": "حفظ الصفحة HTML5 إلى ميدياويكي\n(تحويلها إلى نصوص ويكي WikiText عبر خدمة Parsoid).",
