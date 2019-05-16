@@ -27,6 +27,7 @@
 	"apihelp-visualeditor-param-pst": "Gravar o texto wiki transformado, antes de enviá-lo ao Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "A secção na qual serão realizadas as operações.",
 	"apihelp-visualeditor-param-starttimestamp": "Ao gravar, defina aqui a data e hora a que a página foi carregada. Usado para detetar conflitos de edição.",
+	"apihelp-visualeditor-param-stash": "Ao gravar, defina este parâmetro como verdadeiro para usar a API da área de ficheiros escondidos.",
 	"apihelp-visualeditor-param-wikitext": "Texto wiki a enviar ao Parsoid, para converter em HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Devolve o HTML5 para uma página a partir do serviço Parsoid.",
 	"apihelp-visualeditoredit-description": "Gravar no MediaWiki uma página HTML5 (convertida para texto wiki através do serviço Parsoid).",

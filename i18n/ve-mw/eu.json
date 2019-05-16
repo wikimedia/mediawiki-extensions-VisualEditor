@@ -9,9 +9,13 @@
 			"Macofe",
 			"Mikel Ibaiba",
 			"Iñaki LL",
-			"Asierog"
+			"Asierog",
+			"Theklan"
 		]
 	},
+	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "$1(e)tik inportatua",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Sortu orri honen iturburu kodea",
 	"tooltip-ca-edit": "Artikulu hau aldatu dezakezu. Mesedez, aurrebista botoia erabil ezazu gorde baino lehen.",
 	"tooltip-ca-editsource": "Idatzi orri honen iturburu kodea",
@@ -95,6 +99,7 @@
 	"visualeditor-dialog-media-upload": "Igo",
 	"visualeditor-dialog-meta-advancedsettings-label": "Ezarpen aurreratuak",
 	"visualeditor-dialog-meta-advancedsettings-section": "Ezarpen aurreratuak",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Kategoria bat gehitu orrialde honi",
 	"visualeditor-dialog-meta-categories-category": "Kategoria",
 	"visualeditor-dialog-meta-categories-data-label": "Kategoriak",
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Besterik adierazi ezean, honela ordenatu orri hau:",
@@ -155,7 +160,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Eremua zaharkitua dago:$1",
 	"visualeditor-dialog-transclusion-loading": "Kargatzen...",
 	"visualeditor-dialog-transclusion-multiple-mode": "Erakutsi aukerak",
-	"visualeditor-dialog-transclusion-no-template-description": "$1 txantiloiak ez du oraindik deskribapenik, baian informazio gehiago aurkitu dezakezu [[$1|txantiloiaren dokumentazioan]].",
+	"visualeditor-dialog-transclusion-no-template-description": "$1 txantiloiak ez du oraindik deskribapenik, baina baliteke informazio gehiago egotea [[$1|txantiloiaren dokumentazioan]].",
 	"visualeditor-dialog-transclusion-options": "Aukerak",
 	"visualeditor-dialog-transclusion-param-default": "Lehenetsia: $1",
 	"visualeditor-dialog-transclusion-param-example": "Adibidez $1",

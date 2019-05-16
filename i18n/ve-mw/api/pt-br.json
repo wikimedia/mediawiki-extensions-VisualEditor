@@ -26,6 +26,7 @@
 	"apihelp-visualeditor-param-pst": "O pré-salvamento transforma o wikitexto antes de enviá-lo a Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "A seção sobre a qual agir.",
 	"apihelp-visualeditor-param-starttimestamp": "Ao salvar, define isto à data e hora de quando a página foi carregada. Usado para detectar conflitos de edição.",
+	"apihelp-visualeditor-param-stash": "Ao gravar, defina este parâmetro como verdadeiro para usar a API da área de ficheiros escondidos.",
 	"apihelp-visualeditor-param-wikitext": "Wikitexto para enviar a Parsoid e converter em HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Retorna código HTML5 a uma página através do serviço Parsoid.",
 	"apihelp-visualeditoredit-description": "Salva uma página HTML5 em MediaWiki (convertida para texto wiki através do serviço Parsoid).",
