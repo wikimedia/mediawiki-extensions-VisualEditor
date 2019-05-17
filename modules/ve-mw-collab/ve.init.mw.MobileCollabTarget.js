@@ -33,10 +33,59 @@ OO.inheritClass( ve.init.mw.MobileCollabTarget, ve.init.mw.CollabTarget );
 
 /* Static Properties */
 
+ve.init.mw.MobileCollabTarget.static.toolbarGroups = [
+	// History
+	{
+		name: 'history',
+		include: [ 'undo' ]
+	},
+	// Style
+	{
+		name: 'style',
+		classes: [ 've-test-toolbar-style' ],
+		type: 'list',
+		icon: 'textStyle',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		forceExpand: [ 'bold', 'italic', 'clear' ],
+		promote: [ 'bold', 'italic' ],
+		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
+	},
+	// Link
+	{
+		name: 'link',
+		include: [ 'link' ]
+	},
+	{
+		name: 'commentAnnotation',
+		include: [ 'commentAnnotation' ]
+	},
+	// Placeholder for reference tools (e.g. Cite and/or Citoid)
+	{
+		name: 'reference'
+	},
+	{
+		name: 'insert',
+		header: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		type: 'list',
+		icon: 'add',
+		label: '',
+		include: '*',
+		exclude: [ 'comment', 'indent', 'outdent', { group: 'format' } ]
+	}
+	// "Done" tool is added in setupToolbar as it not part of the
+	// standard config (i.e. shouldn't be inhertied by TargetWidget)
+];
+
 ve.init.mw.MobileCollabTarget.static.actionGroups = [
 	{
 		name: 'authorList',
 		include: [ 'authorList' ]
+	},
+	{
+		name: 'export',
+		include: [ 'export' ]
 	}
 ];
 
