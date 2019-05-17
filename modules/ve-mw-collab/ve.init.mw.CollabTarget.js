@@ -99,6 +99,15 @@ ve.init.mw.CollabTarget.static.actionGroups = [
 /* Methods */
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.CollabTarget.prototype.getSurfaceConfig = function ( config ) {
+	return ve.init.mw.CollabTarget.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
+		nullSelectionOnBlur: false
+	}, config ) );
+};
+
+/**
  * Page modifications after editor load.
  */
 ve.init.mw.CollabTarget.prototype.transformPage = function () {
