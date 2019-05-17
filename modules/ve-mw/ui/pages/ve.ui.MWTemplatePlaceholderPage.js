@@ -40,6 +40,10 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 			enter: 'onAddTemplate'
 		} );
 
+	this.addTemplateInput.getLookupMenu().connect( this, {
+		choose: 'onAddTemplate'
+	} );
+
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
 		flags: [ 'progressive' ],
