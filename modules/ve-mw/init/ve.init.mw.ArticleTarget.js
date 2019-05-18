@@ -413,6 +413,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	this.checkboxesMessages = data.checkboxesMessages;
 	mw.messages.set( data.checkboxesMessages );
 
+	this.canEdit = data.canEdit;
+
 	aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
 	if ( aboutDoc ) {
 		docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
@@ -527,11 +529,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		}
 	}
 
-	if (
-		!mw.config.get( 'wgIsProbablyEditable' ) &&
-		!mw.config.get( 'wgRelevantPageIsProbablyEditable' )
-	) {
-		// Protected page
+	if ( !this.canEdit ) {
 		this.getSurface().setReadOnly( true );
 	} else {
 		// Auto-save
