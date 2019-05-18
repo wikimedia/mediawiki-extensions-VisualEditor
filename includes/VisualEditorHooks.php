@@ -19,6 +19,9 @@ class VisualEditorHooks {
 	private static $unsupportedEditParams = [
 		'undo',
 		'undoafter',
+		// Only for WTE. This parameter is not supported right now, and NWE has a very different design
+		// for previews, so we might not want to support this at all.
+		'preview',
 		'veswitched'
 	];
 
