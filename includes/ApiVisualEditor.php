@@ -550,6 +550,13 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
+				// Simplified EditPage::getEditPermissionErrors()
+				// Will be false e.g. if user is blocked or page is protected
+				$canEdit = !(
+					$title->getUserPermissionsErrors( 'edit', $user, 'full' ) ||
+					( !$title->exists() && $title->getUserPermissionsErrors( 'create', $user, 'full' ) )
+				);
+
 				// HACK: Build a fake EditPage so we can get checkboxes from it
 				// Deliberately omitting ,0 so oldid comes from request
 				$article = new Article( $title );
@@ -607,6 +614,7 @@ class ApiVisualEditor extends ApiBase {
 					'starttimestamp' => wfTimestampNow(),
 					'oldid' => $oldid,
 					'blockinfo' => $blockinfo,
+					'canEdit' => $canEdit,
 				];
 				if ( $restbaseHeaders ) {
 					$result['etag'] = $restbaseHeaders['etag'];
