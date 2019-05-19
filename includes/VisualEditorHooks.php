@@ -315,8 +315,10 @@ class VisualEditorHooks {
 	private static function getPreferredEditor( User $user, WebRequest $req ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
-		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext
-		if ( !$config->get( 'VisualEditorUseSingleEditTab' ) ) {
+		$isRedLink = $req->getBool( 'redlink' );
+		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext,
+		// unless following a redlink
+		if ( !$config->get( 'VisualEditorUseSingleEditTab' ) && !$isRedLink ) {
 			return 'wikitext';
 		}
 		switch ( $user->getOption( 'visualeditor-tabs' ) ) {
@@ -330,7 +332,9 @@ class VisualEditorHooks {
 				// May have got here by switching from VE
 				// TODO: Make such an action explicitly request wikitext
 				// so we can use getLastEditor here instead.
-				return 'wikitext';
+				return $isRedLink ?
+					self::getLastEditor( $user, $req ) :
+					'wikitext';
 		}
 		return null;
 	}
