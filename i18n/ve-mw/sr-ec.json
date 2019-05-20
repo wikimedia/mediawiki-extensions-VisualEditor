@@ -331,7 +331,7 @@
 	"visualeditor-pagemenu-tooltip": "Опције странице",
 	"visualeditor-pagetranslationwarning": "Уређујете страницу коју је могуће превести. Уређивање оваквих страница у овом уређивачу није још увек званично подржано.",
 	"visualeditor-parameter-input-placeholder": "Име поља",
-	"visualeditor-parameter-search-more": "Прикажи још {{PLURAL:$1|једно поље|$1 поља}}",
+	"visualeditor-parameter-search-more": "Прикажи још {{PLURAL:$1|1=једно поље|$1 поље|$1 поља}}",
 	"visualeditor-parameter-search-no-unused": "Нема неискоришћених поља",
 	"visualeditor-parameter-search-unknown": "Непознато поље",
 	"visualeditor-preference-betatempdisable": "Привремено онемогући визуелни уређивач док је у бета-верзији",
