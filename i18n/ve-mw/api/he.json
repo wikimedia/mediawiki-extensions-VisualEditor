@@ -27,6 +27,7 @@
 	"apihelp-visualeditor-param-pst": "ביצוע התמרה לפני שמירה (pre-save transform) על קוד ויקי לפני שליחתו לפרסואיד (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "על איזו פסקה לפעול.",
 	"apihelp-visualeditor-param-starttimestamp": "בעת שמירה, להגדיר את זה בתור חותם־הזמן של הגרסה שנטענת. זה משמש לזיהוי התנגשויות.",
+	"apihelp-visualeditor-param-stash": "בעת השמירה נא להגדיר שזה true כדי להשתמש ב־API המאגר",
 	"apihelp-visualeditor-param-wikitext": "קוד ויקי שיישלח לפרסואיד כדי להמיר ל־HTML‏ (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "החזרת HTML5 עבור דף מתוך שירות פרסואיד.",
 	"apihelp-visualeditoredit-description": "שמירת דף HTML5 למדיה־ויקי (מומר לקוד ויקי דרך שירות פרסואיד).",
