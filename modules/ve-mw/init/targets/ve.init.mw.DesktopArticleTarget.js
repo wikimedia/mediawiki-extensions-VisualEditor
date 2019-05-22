@@ -1544,7 +1544,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 				section: target.section,
 				veswitched: 1
 			} );
-			if ( oldId ) {
+			if ( oldId && oldId !== mw.config.get( 'wgCurRevisionId' ) ) {
 				uri.extend( { oldid: oldId } );
 			}
 			location.href = uri.toString();
