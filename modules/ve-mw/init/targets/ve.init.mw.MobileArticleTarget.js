@@ -30,6 +30,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	ve.init.mw.MobileArticleTarget.super.call( this, config );
 
 	this.section = config.section;
+	this.adjustContentPaddingDebounced = OO.ui.debounce( this.adjustContentPadding.bind( this ) );
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget' );
@@ -286,7 +287,7 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 
 	this.overlay.hideSpinner();
 
-	surface.getContext().connect( this, { resize: 'adjustContentPadding' } );
+	surface.getContext().connect( this, { resize: 'adjustContentPaddingDebounced' } );
 	this.adjustContentPadding();
 
 	this.maybeShowWelcomeDialog();
