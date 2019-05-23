@@ -301,7 +301,7 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	var toolbarHeight = this.getToolbar().$element.outerHeight(),
 		surface = this.getSurface(),
 		surfaceView = surface.getView();
-	surface.setToolbarHeight( toolbarHeight );
+	surface.setPadding( { top: toolbarHeight } );
 	surfaceView.$attachedRootNode.css( 'padding-top', toolbarHeight );
 	surface.$placeholder.css( 'padding-top', toolbarHeight );
 	surfaceView.emit( 'position' );
