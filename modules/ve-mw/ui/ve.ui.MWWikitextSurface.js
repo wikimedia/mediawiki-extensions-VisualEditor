@@ -83,7 +83,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 		},
 		// encapsulateSelection works automatically when we implement the overrides above
 		scrollToCaretPosition: function () {
-			surface.scrollCursorIntoView();
+			surface.scrollSelectionIntoView();
 			return this;
 		}
 	} );
