@@ -45,6 +45,10 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 		);
 	}
 
+	if ( !targetData.isInternal ) {
+		return ve.dm.MWExternalLinkAnnotation.static.toDataElement( domElements, converter );
+	}
+
 	return {
 		type: this.name,
 		attributes: {
