@@ -570,6 +570,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			basetimestamp: this.baseTimeStamp,
 			starttimestamp: this.startTimeStamp,
 			oldid: this.revid,
+			canEdit: this.canEdit,
 			checkboxesDef: this.checkboxesDef,
 			checkboxesMessages: this.checkboxesMessages
 		}
@@ -2328,6 +2329,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
 		data.basetimestamp = target.baseTimeStamp;
 		data.starttimestamp = target.startTimeStamp;
 		data.oldid = target.revid;
+		data.canEdit = target.canEdit;
 		data.checkboxesDef = target.checkboxesDef;
 		return response;
 	} );
