@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Carma citrawati",
-			"Joseagush"
+			"Joseagush",
+			"NoiX180"
 		]
 	},
 	"tooltip-ca-ve-edit": "Sunting kaca iki. Nganggen tombol pratayang sadurunge nyimpen.",
-	"visualeditor-ca-editsource": "edit sumber",
-	"visualeditor-ca-editsource-section": "edit sumber",
+	"visualeditor-ca-createsource": "Karyanin wit",
+	"visualeditor-ca-editsource": "Uah wit",
+	"visualeditor-ca-editsource-section": "uah wit",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
