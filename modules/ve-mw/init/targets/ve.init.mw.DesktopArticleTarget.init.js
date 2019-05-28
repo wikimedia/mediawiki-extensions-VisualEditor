@@ -452,22 +452,28 @@
 	}
 
 	function getPreferredEditor() {
-		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext
-		if ( !mw.config.get( 'wgVisualEditorConfig' ).singleEditTab ) {
+		// This logic matches VisualEditorHooks::getPreferredEditor
+		// !!+ casts '0' to false
+		var isRedLink = !!+uri.query.redlink;
+		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext,
+		// unless following a redlink
+		if ( !mw.config.get( 'wgVisualEditorConfig' ).singleEditTab && !isRedLink ) {
 			return 'wikitext';
 		}
 
 		switch ( tabPreference ) {
-			case 'remember-last':
-				return getLastEditor();
 			case 'prefer-ve':
 				return 'visualeditor';
 			case 'prefer-wt':
 				return 'wikitext';
+			case 'remember-last':
+				return getLastEditor();
 			case 'multi-tab':
 				// 'multi-tab'
 				// TODO: See VisualEditor.hooks.php
-				return 'wikitext';
+				return isRedLink ?
+					getLastEditor() :
+					'wikitext';
 		}
 		return null;
 	}
