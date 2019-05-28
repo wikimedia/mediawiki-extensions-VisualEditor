@@ -1813,7 +1813,10 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function () {
  */
 ve.init.mw.ArticleTarget.prototype.getSurfaceConfig = function ( config ) {
 	return ve.init.mw.ArticleTarget.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
-		nullSelectionOnBlur: false
+		// Don't null selection on blur when editing a document.
+		// Do use it in new section mode as there are multiple inputs
+		// on the surface (header+content).
+		nullSelectionOnBlur: this.section === 'new'
 	}, config ) );
 };
 
