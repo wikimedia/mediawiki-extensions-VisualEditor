@@ -151,25 +151,12 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 	}
 };
 
-/**
- * @inheritdoc
- */
-ve.init.mw.Platform.prototype.getSession = function ( key ) {
-	return mw.storage.session.get( key );
+ve.init.mw.Platform.prototype.createLocalStorage = function () {
+	return this.createListStorage( mw.storage );
 };
 
-/**
- * @inheritdoc
- */
-ve.init.mw.Platform.prototype.setSession = function ( key, value ) {
-	return mw.storage.session.set( key, value );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.Platform.prototype.removeSession = function ( key ) {
-	return mw.storage.session.remove( key );
+ve.init.mw.Platform.prototype.createSessionStorage = function () {
+	return this.createListStorage( mw.storage.session );
 };
 
 /**
