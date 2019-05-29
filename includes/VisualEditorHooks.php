@@ -974,15 +974,16 @@ class VisualEditorHooks {
 		}
 
 		$extensionMessages = [];
-		if ( class_exists( ConfirmEditHooks::class ) ) {
+		$extensionRegistry = ExtensionRegistry::getInstance();
+		if ( $extensionRegistry->isLoaded( 'ConfirmEdit' ) ) {
 			$extensionMessages[] = 'captcha-edit';
 			$extensionMessages[] = 'captcha-label';
 
-			if ( class_exists( QuestyCaptcha::class ) ) {
+			if ( $extensionRegistry->isLoaded( 'QuestyCaptcha' ) ) {
 				$extensionMessages[] = 'questycaptcha-edit';
 			}
 
-			if ( class_exists( FancyCaptcha::class ) ) {
+			if ( $extensionRegistry->isLoaded( 'FancyCaptcha' ) ) {
 				$extensionMessages[] = 'fancycaptcha-edit';
 				$extensionMessages[] = 'fancycaptcha-reload-text';
 			}
