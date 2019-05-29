@@ -844,6 +844,7 @@
 				"lib/ve/src/dm/annotations/ve.dm.UserInputAnnotation.js",
 				"lib/ve/src/dm/annotations/ve.dm.VariableAnnotation.js",
 				"lib/ve/src/dm/metaitems/ve.dm.AlienMetaItem.js",
+				"lib/ve/src/dm/metaitems/ve.dm.RemovableAlienMetaItem.js",
 				"lib/ve/src/dm/metaitems/ve.dm.CommentMetaItem.js",
 				"lib/ve/src/ce/ve.ce.js",
 				"lib/ve/src/ce/ve.ce.TextStateChunk.js",
