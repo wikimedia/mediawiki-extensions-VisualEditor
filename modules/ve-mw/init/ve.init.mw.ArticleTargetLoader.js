@@ -205,7 +205,7 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data, fullDocExpand,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data,
 				section = options.section !== undefined ? options.section : null,
 				useRestbase = ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
 				switched = false,
@@ -235,16 +235,11 @@
 			ve.track( 'trace.apiLoad.enter', { mode: 'visual' } );
 
 			if ( !useRestbase && options.wikitext !== undefined ) {
-				fullDocExpand = section !== null;
 				// Non-RESTBase custom wikitext parse
-				if ( fullDocExpand ) {
-					data.paction = 'parse';
-					data.stash = true;
-					switched = true;
-					fromEditedState = options.modified;
-				} else {
-					data.paction = 'parsefragment';
-				}
+				data.paction = 'parse';
+				data.stash = true;
+				switched = true;
+				fromEditedState = options.modified;
 				data.wikitext = options.wikitext;
 				data.section = options.section;
 				data.oldid = options.oldId;

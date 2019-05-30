@@ -63,11 +63,12 @@ mw.libs.ve.SwitchConfirmDialog.static.actions = [
 mw.libs.ve.SwitchConfirmDialog.prototype.getSetupProcess = function ( data ) {
 	return mw.libs.ve.SwitchConfirmDialog.super.prototype.getSetupProcess.apply( this, arguments )
 		.next( function () {
+			var
+				config = mw.config.get( 'wgVisualEditorConfig' ),
+				canSwitch = config.fullRestbaseUrl || config.allowLossySwitching;
 			if ( data && data.mode ) {
 				this.actions.setMode( data.mode );
-			} else if (
-				mw.config.get( 'wgVisualEditorConfig' ).fullRestbaseUrl
-			) {
+			} else if ( canSwitch ) {
 				this.actions.setMode( 'restbase' );
 			} else {
 				this.actions.setMode( 'simple' );
