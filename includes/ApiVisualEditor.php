@@ -8,6 +8,7 @@
  * @license MIT
  */
 
+use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditor extends ApiBase {
@@ -506,7 +507,7 @@ class ApiVisualEditor extends ApiBase {
 							"\n</div>";
 					} elseif (
 						!is_null( $block ) &&
-						$block->getType() != Block::TYPE_AUTO &&
+						$block->getType() != DatabaseBlock::TYPE_AUTO &&
 						( $block->isSitewide() || $targetUser->isBlockedFrom( $title ) )
 					) {
 						// Show log extract if the user is sitewide blocked or is partially
