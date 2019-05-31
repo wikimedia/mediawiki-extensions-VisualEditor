@@ -288,9 +288,11 @@ class ApiVisualEditor extends ApiBase {
 							if ( $section !== null ) {
 								$sectionContent = new WikitextContent( $wikitext );
 								$page = WikiPage::factory( $title );
-								$wikitext = $page->replaceSectionAtRev(
+								$newSectionContent = $page->replaceSectionAtRev(
 									$section, $sectionContent, '', $oldid
-								)->getText();
+								);
+								'@phan-var WikitextContent $newSectionContent';
+								$wikitext = $newSectionContent->getText();
 							}
 							$response = $this->parseWikitextFragment(
 								$title, $wikitext, false, $oldid, $stash
@@ -544,6 +546,7 @@ class ApiVisualEditor extends ApiBase {
 					// See discussion on <https://gerrit.wikimedia.org/r/c/mediawiki/core/+/506945>.
 					if ( method_exists( $this, 'getBlockInfo' ) ) {
 						// old name
+						/** @phan-suppress-next-line PhanUndeclaredMethod */
 						$blockinfo = $this->getBlockInfo( $block );
 					} else {
 						// new name
@@ -587,7 +590,9 @@ class ApiVisualEditor extends ApiBase {
 							$options['title-message'] = $this->msg( $options['title-message'] )->getKey();
 						}
 					}
+					/** @phan-suppress-next-line PhanTypeArraySuspiciousNullable */
 					$checkboxesMessagesList[] = $options['label-message'];
+					/** @phan-suppress-next-line PhanTypeArraySuspiciousNullable */
 					if ( !is_string( $options['label-message'] ) ) {
 						// Extract only the key. Any parameters are included in the fake message definition
 						// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)

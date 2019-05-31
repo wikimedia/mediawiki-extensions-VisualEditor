@@ -626,6 +626,7 @@ class VisualEditorHooks {
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
 				'targetTitle' => $title,
+				/** @phan-suppress-next-line PhanTypeInvalidDimOffset */
 				'attribs' => $result['editsection']['attribs'] + [
 					'class' => 'mw-editsection-visualeditor'
 				],
