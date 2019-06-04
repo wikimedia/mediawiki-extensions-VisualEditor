@@ -452,11 +452,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wa
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
-	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.tryTeardown.apply( this, arguments )
-		.then( function () {
-			window.history.back();
-		} );
+	window.history.back();
 };
 
 /**
