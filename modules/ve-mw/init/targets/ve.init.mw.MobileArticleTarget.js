@@ -120,14 +120,6 @@ ve.init.mw.MobileArticleTarget.prototype.activateSurfaceForToolbar = function ()
 };
 
 /**
- * Destroy the target
- */
-ve.init.mw.MobileArticleTarget.prototype.destroy = function () {
-	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.destroy.call( this );
-};
-
-/**
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
