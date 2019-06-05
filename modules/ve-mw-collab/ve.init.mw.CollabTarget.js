@@ -32,8 +32,7 @@ ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, conf
 	// Parent constructor
 	ve.init.mw.CollabTarget.super.call( this, config );
 
-	// HACK: Disable history commands until supported (T185706)
-	ve.ui.commandRegistry.unregister( 'undo' );
+	// HACK: Disable redo command until supported (T185706)
 	ve.ui.commandRegistry.unregister( 'redo' );
 
 	// HACK: Disable references until supported (T194838)
