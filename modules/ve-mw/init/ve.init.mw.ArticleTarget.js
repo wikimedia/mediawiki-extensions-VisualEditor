@@ -1893,9 +1893,9 @@ ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess 
 	var suffix = startProcess ? '-start' : '';
 	// The following messages can be used here
 	// * publishpage
-	// * pubishhpage-start
+	// * publishpage-start
 	// * publishchanges
-	// * pubishhchanges-start
+	// * publishchanges-start
 	// * savearticle
 	// * savearticle-start
 	// * savechanges
