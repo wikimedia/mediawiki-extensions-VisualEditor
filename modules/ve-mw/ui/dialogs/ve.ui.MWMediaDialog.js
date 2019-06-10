@@ -92,7 +92,7 @@ ve.ui.MWMediaDialog.static.actions = [
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ],
+		flags: [ 'safe', 'close' ],
 		modes: [ 'readonly', 'edit', 'insert', 'select', 'search', 'upload-upload' ]
 	},
 	{
