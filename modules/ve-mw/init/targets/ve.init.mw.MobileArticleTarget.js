@@ -266,6 +266,10 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 		return;
 	}
 
+	// Calls scrollSelectionIntoView so must be called before parent,
+	// which calls goToHeading. (T225292)
+	this.adjustContentPadding();
+
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
@@ -281,7 +285,6 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	this.overlay.hideSpinner();
 
 	surface.getContext().connect( this, { resize: 'adjustContentPaddingDebounced' } );
-	this.adjustContentPadding();
 
 	this.maybeShowWelcomeDialog();
 };
