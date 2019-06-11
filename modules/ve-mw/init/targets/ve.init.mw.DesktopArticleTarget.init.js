@@ -868,7 +868,14 @@
 		activateVe: function ( mode ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
 				sectionVal = $( 'input[name=wpSection]' ).val(),
-				section = sectionVal !== '' && sectionVal !== undefined ? +sectionVal : null;
+				section = sectionVal !== '' && sectionVal !== undefined ? +sectionVal : null,
+				config = mw.config.get( 'wgVisualEditorConfig' ),
+				canSwitch = config.fullRestbaseUrl || config.allowLossySwitching,
+				modified = mw.config.get( 'wgAction' ) === 'submit' ||
+					(
+						mw.config.get( 'wgAction' ) === 'edit' &&
+						wikitext !== initialWikitext
+					);
 
 			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
 			if ( $.fn.dialog ) {
@@ -880,18 +887,10 @@
 				$( window ).off( 'beforeunload.editwarning' );
 			}
 
-			if (
-				mw.config.get( 'wgAction' ) === 'submit' ||
-				(
-					mw.config.get( 'wgAction' ) === 'edit' &&
-					wikitext !== initialWikitext
-				)
-			) {
+			if ( modified && !canSwitch ) {
 				mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
 					var windowManager = new OO.ui.WindowManager(),
 						switchWindow = new mw.libs.ve.SwitchConfirmDialog();
-					// Prompt if either we're on action=submit (the user has previewed) or
-					// the wikitext hash is different to the value observed upon page load.
 
 					$( document.body ).append( windowManager.$element );
 					windowManager.addWindows( [ switchWindow ] );
@@ -899,10 +898,7 @@
 						.closed.then( function ( data ) {
 							var oldUri;
 							// TODO: windowManager.destroy()?
-							if ( data && data.action === 'keep' ) {
-								releaseOldEditWarning();
-								activatePageTarget( mode, section, true );
-							} else if ( data && data.action === 'discard' ) {
+							if ( data && data.action === 'discard' ) {
 								releaseOldEditWarning();
 								setEditorPreference( 'visualeditor' );
 								oldUri = veEditUri.clone();
@@ -913,7 +909,7 @@
 				} );
 			} else {
 				releaseOldEditWarning();
-				activatePageTarget( mode, section, false );
+				activatePageTarget( mode, section, modified );
 			}
 		},
 

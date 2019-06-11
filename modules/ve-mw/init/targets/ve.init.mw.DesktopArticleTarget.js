@@ -1033,8 +1033,6 @@ ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, stat
 
 	OO.ui.alert( ve.msg( 'visualeditor-serializeerror', status ) );
 
-	this.getSurface().getDialogs().closeWindow( 'wikitextswitchconfirm' );
-
 	// It's possible to get here while the save dialog has never been opened (if the user uses
 	// the switch to source mode option)
 	if ( this.saveDialog ) {

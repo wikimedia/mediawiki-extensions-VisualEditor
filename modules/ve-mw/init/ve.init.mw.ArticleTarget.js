@@ -1201,12 +1201,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 ve.init.mw.ArticleTarget.prototype.editSource = function () {
 	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
 
-	if ( ve.init.target.isModeAvailable( 'source' ) || !modified ) {
-		this.switchToWikitextEditor( modified );
-	} else {
-		ve.ui.actionFactory.create( 'window', this.getSurface() )
-			.open( 'wikitextswitchconfirm', { target: this } );
-	}
+	this.switchToWikitextEditor( modified );
 };
 
 /**
