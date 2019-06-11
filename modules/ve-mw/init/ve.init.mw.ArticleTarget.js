@@ -517,7 +517,6 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	surfaceModel.connect( this, {
 		history: 'updateToolbarSaveButtonState'
 	} );
-	this.restoreEditSection();
 
 	// Iterate over the trigger registry and resolve any access key conflicts
 	for ( name in ve.ui.triggerRegistry.registry ) {
@@ -544,6 +543,10 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
+
+	// Do this after window is made scrollable on mobile
+	// ('surfaceReady' handler in VisualEditorOverlay in MobileFrontend)
+	this.restoreEditSection();
 
 	mw.hook( 've.activationComplete' ).fire();
 };
