@@ -55,15 +55,6 @@
 		}
 	}
 
-	// T218851: Section editing A/B test
-	if ( conf.enableVisualSectionEditing === 'mobile-ab' ) {
-		if ( !mw.user.isAnon() && mw.user.getId() % 2 ) {
-			conf.enableVisualSectionEditing = 'mobile';
-		} else {
-			conf.enableVisualSectionEditing = false;
-		}
-	}
-
 	mw.libs.ve = mw.libs.ve || {};
 
 	mw.libs.ve.targetLoader = {
