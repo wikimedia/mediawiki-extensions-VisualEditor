@@ -16,7 +16,6 @@
 	"tooltip-ca-editsource": "ਇਸ ਸਫ਼ੇ ਦੇ ਸਰੋਤ ਦਾ ਕੋਡ ਸੋਧੋ",
 	"tooltip-ca-ve-edit": "ਇਹ ਸਫ਼ਾ ਸੋਧੋ",
 	"visualeditor-backbutton-tooltip": "ਪਿੱਛੇ ਜਾਓ",
-	"visualeditor-beta-label": "ਬੀਟਾ",
 	"visualeditor-browserwarning": "আপনি এমন একটি ব্রাউজার ব্যবহার করছেন যেটি ভিজ্যুয়াল এডিটর সমর্থন করে না।",
 	"visualeditor-ca-createlocaldescriptionsource": "ਸਥਾਨਕ ਵੇਰਵੇ ਦਾ ਸਰੋਤ ਜੋੜੋ",
 	"visualeditor-ca-createsource": "ਸਰੋਤ ਬਣਾਉ",
@@ -126,7 +125,6 @@
 	"visualeditor-media-input-placeholder": "ਮੀਡੀਆ ਖੋਜੋ",
 	"visualeditor-meta-tool": "ਵਿਕਲਪ",
 	"visualeditor-mweditmodesource-warning-cancel": "ਰੱਦ ਕਰੋ",
-	"visualeditor-mweditmodesource-warning-switch": "ਤਬਦੀਲੀਆਂ ਰੱਖੋ",
 	"visualeditor-mweditmodesource-warning-switch-discard": "ਤਬਦੀਲੀਆਂ ਰੱਦ ਕਰੋ",
 	"visualeditor-mwgallerydialog-card-images": "ਤਸਵੀਰਾਂ",
 	"visualeditor-mwgallerydialog-card-options": "ਵਿਕਲਪ",
@@ -149,8 +147,6 @@
 	"visualeditor-savedialog-title-conflict": "ਟੱਕਰ",
 	"visualeditor-savedialog-title-save": "ਆਪਣੀਆਂ ਤਬਦੀਲੀਆਂ ਸਾਂਭੋ",
 	"visualeditor-settings-tool": "ਸਫ਼ੇ ਦੀਆਂ ਸੈਟਿੰਗਾਂ",
-	"visualeditor-toolbar-savedialog": "ਸਫ਼ਾ ਸਾਂਭੋ",
-	"visualeditor-toolbar-savedialog-short": "ਸਾਂਭੋ",
 	"visualeditor-version-label": "ਵਰਸ਼ਨ",
 	"visualeditor-wikitext-progress": "ਵਿਕੀਲਿਖਤ ਬਦਲੀ ਜਾ ਰਹੀ ਹੈ"
 }

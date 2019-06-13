@@ -14,7 +14,6 @@
 	"tooltip-ca-ve-edit": "Vê rûpelê biguherîne",
 	"visualeditor-advancedsettings-tool": "Hevyazên pêşketî",
 	"visualeditor-backbutton-tooltip": "Vegere",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Çavkanîye biafirîne",
 	"visualeditor-ca-editsource": "Çavkaniyê biguherîne",
 	"visualeditor-ca-editsource-section": "çavkaniyê biguherîne",
@@ -129,7 +128,6 @@
 	"visualeditor-magiclinknodeinspector-title-rfc": "Girêdana RFCyê",
 	"visualeditor-media-input-placeholder": "Li medyayê bigere",
 	"visualeditor-meta-tool": "Vebijark",
-	"visualeditor-mweditmodesource-title": "Tu dixwazî derbasî guherandina çavkaniyê bibî?",
 	"visualeditor-mweditmodesource-tool-current": "Guherandina çavkanî",
 	"visualeditor-mweditmodesource-warning-cancel": "Betal bike",
 	"visualeditor-mwgallerydialog-card-images": "Wêne",
@@ -155,7 +153,5 @@
 	"visualeditor-savedialog-label-warning": "Hişyarî",
 	"visualeditor-savedialog-title-save": "Guherandinên xwe tomar bike",
 	"visualeditor-settings-tool": "Hevyazên rûpelê",
-	"visualeditor-toolbar-savedialog": "Rûpelê tomar bike",
-	"visualeditor-toolbar-savedialog-short": "Tomar bike",
 	"visualeditor-version-label": "Guherto"
 }

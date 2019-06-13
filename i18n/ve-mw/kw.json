@@ -10,7 +10,6 @@
 	"tooltip-ca-createsource": "Gwruthyl koden bennfenten an folen-ma",
 	"tooltip-ca-editsource": "Chanjya koden bennfenten an folen-ma",
 	"tooltip-ca-ve-edit": "Chanjya an folen ma",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Yma an janjyel welesek yn 'beta'. Hwi a alsa dos erbynn kudynnow medhelweyth, ha martesen ny alsewgh chanjya rynnys a'n folen. Klyckyewgh \"{{int:visualeditor-ca-editsource}}\" rag skwychya dhe'n modh wikitekst – chanjyow heb aga gwitha a vydh kellys.",
 	"visualeditor-browserwarning": "Yth esowgh ow tevnydhya peurel nag yw skoodhys yn sodhogel gans an janjyel welesek.",
 	"visualeditor-ca-createsource": "Gwruthyl pennfenten",

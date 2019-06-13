@@ -8,7 +8,6 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "यो पाना सम्पादन गर",
-	"visualeditor-beta-label": "बेटा",
 	"visualeditor-ca-createlocaldescriptionsource": "स्थानिय वर्णन सम्पादन अर",
 	"visualeditor-ca-createsource": "श्रोत बनाउन्या",
 	"visualeditor-ca-editsource": "श्रोत सम्पादन अद्य्या",
@@ -75,6 +74,5 @@
 	"visualeditor-savedialog-label-error": "गल्ती",
 	"visualeditor-savedialog-label-save-short": "सङ्ग्रह गद्या",
 	"visualeditor-savedialog-label-warning": "चेतावनीहरू:",
-	"visualeditor-settings-tool": "पाना सेटिङ्गहरू",
-	"visualeditor-toolbar-savedialog": "सङ्ग्रह गर"
+	"visualeditor-settings-tool": "पाना सेटिङ्गहरू"
 }

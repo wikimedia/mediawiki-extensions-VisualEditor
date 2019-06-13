@@ -11,7 +11,6 @@
 	"tooltip-ca-editsource": "Вироиши манбаъи ин саҳифа",
 	"tooltip-ca-ve-edit": "Вироиши ин саҳифа",
 	"visualeditor-advancedsettings-tool": "Танзимоти пешрафта",
-	"visualeditor-beta-label": "бета",
 	"visualeditor-beta-warning": "ВироишгариВизуалӣ дар ҳоли 'бета' аст. Шумо шояд бо мушкилии нармафзор рӯ ба рӯ шавед ва баъзе аз қисмҳои саҳифаро вироиш карда наметавонед. Барои гузаштан ба намуди викиматн инҷо пахш \"{{int:visualeditor-ca-editsource}}\" кунед – тағийроти захиранашуда аз байн хоҳад рафт.",
 	"visualeditor-browserwarning": "Шумо аз мурургаре истифода мебаред, ки расман аз сӯи ВироишгариВизуалӣ пуштибонӣ намешавад.",
 	"visualeditor-ca-createlocaldescriptionsource": "Иловаи тавзеҳи маҳаллии манбаъ",
@@ -97,6 +96,5 @@
 	"visualeditor-savedialog-title-conflict": "Бархурд",
 	"visualeditor-savedialog-title-review": "Тағийроти худро баррасӣ кунед",
 	"visualeditor-savedialog-title-save": "Захираи тағийроти худ",
-	"visualeditor-settings-tool": "Танзимоти саҳифа",
-	"visualeditor-toolbar-savedialog": "Захираи саҳифа"
+	"visualeditor-settings-tool": "Танзимоти саҳифа"
 }

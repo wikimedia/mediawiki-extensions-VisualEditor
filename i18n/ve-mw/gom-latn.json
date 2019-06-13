@@ -6,7 +6,6 @@
 	},
 	"tooltip-ca-ve-edit": "Hem pan bodol",
 	"visualeditor-backbutton-tooltip": "Fattim voch",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createlocaldescriptionsource": "Thollavem vornonachem strot zod",
 	"visualeditor-ca-createsource": "Strot roch",
 	"visualeditor-ca-editsource": "Mull bodol",
@@ -73,7 +72,5 @@
 	"visualeditor-savedialog-label-save-short": "Samball",
 	"visualeditor-savedialog-title-save": "Tuje bodol samball",
 	"visualeditor-special-characters-group-other": "Zaite pautt upeog kel'le",
-	"visualeditor-toolbar-savedialog": "Pan samball",
-	"visualeditor-toolbar-savedialog-short": "Samball",
 	"visualeditor-version-label": "Avrutti"
 }

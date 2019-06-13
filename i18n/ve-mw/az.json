@@ -15,7 +15,6 @@
 	"tooltip-ca-editsource": "Səhifənin cari kodunu redaktə et",
 	"tooltip-ca-ve-edit": "Bu səhifəni redaktə et",
 	"visualeditor-advancedsettings-tool": "Əlavə parametrlər",
-	"visualeditor-beta-label": "Beta versiya",
 	"visualeditor-beta-warning": "Vizual redaktor beta-versiyadadır. Proqram təminatı ilə bağlı problemlər üzə çıxa bilər və siz səhifənin bəzi hissələrini redaktə edə bilməzsiniz. İstənilən vaxt etdiyiniz dəyişiklikləri itirmədən \"Əsas redaktə\" rejiminə keçmək üçün \"{{int:visualeditor-toolbar-savedialog}}\" bölməsinin yanındakı siyahını açın və \"{{int:visualeditor-mweditmodesource-tool}}\" düyməsini vurun.",
 	"visualeditor-browserwarning": "Siz Vizual redaktora rəsmi istinadı olmayan brauzerdən istifadə edirsiniz.",
 	"visualeditor-ca-createlocaldescriptionsource": "Lokal mənbə izahı əlavə et",
@@ -143,6 +142,5 @@
 	"visualeditor-savedialog-warning-dirty": "Etdiyiniz dəyişikliklərdə səhv ola bilər – lütfən yadda saxlamazdan əvvəl yoxlayın.",
 	"visualeditor-saveerror": "Yaddaşda qeyd edilərkən xəta oldu: $1.",
 	"visualeditor-serializeerror": "Yaddaşda yüklənərkən xəta oldu: $1.",
-	"visualeditor-toolbar-savedialog": "Səhifəni dərc et",
 	"visualeditor-version-label": "Versiya"
 }

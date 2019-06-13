@@ -9,7 +9,6 @@
 	"tooltip-ca-editsource": "Deasaich bun-tùs na duilleige seo",
 	"tooltip-ca-ve-edit": "Deasaich an duilleag seo",
 	"visualeditor-advancedsettings-tool": "Roghainnean adhartach",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-browserwarning": "Tha thu a' cleachdadh brabhsair ris nach cuir an deasaiche seo taic gu h-oifigeil.",
 	"visualeditor-ca-createlocaldescriptionsource": "Cuir tùs ris an tuairisgeul ionadail",
 	"visualeditor-ca-createsource": "Cruthaich tùs",
@@ -134,7 +133,6 @@
 	"visualeditor-loadwarning": "Mearachd le luchdadh an dàta on fhrithealaiche: $1. A bheil thu airson feuchainn ris a-rithist?",
 	"visualeditor-loadwarning-token": "Mearachd le luchdadh tòcan deasachaidh on fhrithealaiche: $1. A bheil thu airson feuchainn ris a-rithist?",
 	"visualeditor-mainnamespacepagelink": "Project:Prìomh ainm-spàs",
-	"visualeditor-toolbar-savedialog": "Sàbhail an duilleag",
 	"visualeditor-usernamespacepagelink": "Project:Ainm-spàs cleachdaiche",
 	"visualeditor-version-label": "Tionndadh",
 	"visualeditor-wikitext-warning": "Tha thu a' cleachdadh an deasaiche lèirsinneach - chan obraich [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] an-seo. 'S urrainn dut leum a ghearradh gu deasachadh an tùis uair sam bith gun a bhith a' call na dh'atharraich thu. Gus seo a dhèanamh, fosgail an clàr-taice teàrnaidh ri taobh \"{{int:visualeditor-toolbar-savedialog}}\" agus tagh \"{{int:visualeditor-mweditmodesource-title}}\"."

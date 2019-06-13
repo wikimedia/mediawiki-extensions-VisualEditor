@@ -9,7 +9,6 @@
 	"tooltip-ca-editsource": "Peusaneut kode nè laman nyoë",
 	"tooltip-ca-ve-edit": "Peusaneut ôn nyoe",
 	"visualeditor-autosave-modified-prompt-accept": "Peusaneut lom",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-browserwarning": "Droëneuh neungui ''browser'' nyang hana jidukông raseumi lé VisualEditor",
 	"visualeditor-ca-createlocaldescriptionsource": "Tamah nè surah ata droe",
 	"visualeditor-ca-createsource": "Peugöt nè",
@@ -73,6 +72,5 @@
 	"visualeditor-savedialog-label-review": "Pubandéng hasé peusaneut",
 	"visualeditor-savedialog-label-save-short-start": "Keubah...",
 	"visualeditor-savedialog-title-review": "Pubandéng hasé peusaneut",
-	"visualeditor-savedialog-title-save": "Keubah neuubah Droëneuh",
-	"visualeditor-toolbar-savedialog": "Keubah laman"
+	"visualeditor-savedialog-title-save": "Keubah neuubah Droëneuh"
 }

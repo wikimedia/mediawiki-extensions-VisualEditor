@@ -9,7 +9,6 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Dizze side bewurkje",
-	"visualeditor-beta-label": "bêta",
 	"visualeditor-ca-createsource": "Boarnekoade oanmeitsje",
 	"visualeditor-ca-editsource": "Boarne bewurkje",
 	"visualeditor-ca-editsource-section": "boarne bewurkje",
@@ -56,6 +55,5 @@
 	"visualeditor-savedialog-review-visual": "Fisueel",
 	"visualeditor-savedialog-review-wikitext": "Wikitekst",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
-	"visualeditor-toolbar-savedialog": "Side bewarje",
 	"visualeditor-version-label": "Ferzje"
 }

@@ -10,7 +10,6 @@
 	"tooltip-ca-createsource": "Creà u codice fonte di 'ssa pagina",
 	"tooltip-ca-editsource": "Edità u codice fonte di 'ssa pagina",
 	"tooltip-ca-ve-edit": "Edità 'ssa pagina",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Creà a fonte",
 	"visualeditor-ca-editsource": "Edità a fonte",
 	"visualeditor-ca-editsource-section": "edità a fonte",
@@ -74,6 +73,5 @@
 	"visualeditor-savedialog-label-warning": "Attentu",
 	"visualeditor-savedialog-title-conflict": "Cunflittu",
 	"visualeditor-savedialog-title-review": "Verificà i cambiamenti",
-	"visualeditor-savedialog-title-save": "Arrighjistrà i cambiamenti",
-	"visualeditor-toolbar-savedialog": "Arrighjistrà a pagina"
+	"visualeditor-savedialog-title-save": "Arrighjistrà i cambiamenti"
 }

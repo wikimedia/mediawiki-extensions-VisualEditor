@@ -6,7 +6,6 @@
 	},
 	"tooltip-ca-ve-edit": "Igliwat ini nga pakli",
 	"visualeditor-backbutton-tooltip": "Balik",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createlocaldescriptionsource": "Gindugngan hin lokal nga description source",
 	"visualeditor-ca-createsource": "Himua an titikangan",
 	"visualeditor-ca-editsource": "Igliwat an wikitext",
@@ -82,7 +81,5 @@
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulo han pakli",
 	"visualeditor-savedialog-label-create": "Paghimo hin pakli",
 	"visualeditor-savedialog-label-error": "Sayop",
-	"visualeditor-toolbar-savedialog": "Igtipig an pakli",
-	"visualeditor-toolbar-savedialog-short": "Igtipig",
 	"visualeditor-version-label": "Bersyon"
 }
