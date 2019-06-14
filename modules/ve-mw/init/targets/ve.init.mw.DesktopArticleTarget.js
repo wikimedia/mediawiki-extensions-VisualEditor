@@ -1539,7 +1539,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			uri = target.viewUri.clone().extend( {
 				action: 'edit',
 				// No changes, safe to stay in section mode
-				section: target.section,
+				section: target.section !== null ? target.section : undefined,
 				veswitched: 1
 			} );
 			if ( oldId && oldId !== mw.config.get( 'wgCurRevisionId' ) ) {
