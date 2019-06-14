@@ -35,7 +35,6 @@
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} merkt sich jetzt, welchen Editor Sie bevorzugen. Sie können zwischen Bearbeitungsmodi wechseln und Ihre Einstellung später ändern.",
 	"visualeditor-editsummary": "Beschreiben Sie, was Sie geändert haben.",
 	"visualeditor-loadwarning-token": "Fehler beim Laden des Bearbeitungstokens vom Server: $1. Wollen Sie es erneut versuchen?",
-	"visualeditor-mweditmodesource-warning": "Sie wechseln zur Quelltextbearbeitung.\nMöchten Sie fortfahren?",
 	"visualeditor-mweditmodeve-popup-body": "Sie können jederzeit zur visuellen Bearbeitung zurückkehren, indem Sie auf dieses Symbol klicken.",
 	"visualeditor-mweditmodeve-popup-title": "Sie haben zum Quelltext-Editor gewechselt",
 	"visualeditor-mweditmodeve-warning": "Sie wechseln zur visuellen Bearbeitung.\nMöchten Sie fortfahren?",

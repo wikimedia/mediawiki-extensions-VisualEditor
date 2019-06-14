@@ -8,7 +8,6 @@
 	},
 	"tooltip-ca-ve-edit": "Immodifika din il-paġna",
 	"visualeditor-advancedsettings-tool": "Konfigurazzjonijiet avvanzati",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "Il-VisualEditor qiegħed fuq 'beta'. Għalhekk tista' tiltaqa' ma' problemi ta' software u ma tkunx tista' timmodifika xi partijiet tal-paġna. Biex taqleb lura għall-modifika mis-sors mingħajr ma titlef il-bidliet li għamilt, iftaħ il-kexxun li jinżel maġenb \"{{int:visualeditor-toolbar-savedialog}}\" u agħżel \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Qiegħed tuża navigatur li mhuwiex uffiċjalemnt kompatibbli mal-VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Agħti s-sors tad-deskrizzjoni lokali",
@@ -89,7 +88,5 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Meħtieġa  {{PLURAL:$1| parametru obligatorju nieqes|parametri obligatorji nieqsa}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Żgur li tixtieq tkompli mingħajr ma tagħti l- {{PLURAL:$2|parametru|parametri}} $1?",
 	"visualeditor-languages-tool": "Lingwi",
-	"visualeditor-mweditmodesource-title": "Aqleb għall-editjar tas-sors",
-	"visualeditor-mweditmodesource-warning": "Ħa taqleb għall-editjar tas-sors. Il-bidliet li għamilt jistgħu jinżammu, imma ma tkunx tista' taqleb lura għall-VisualEditor mingħajr ma' tissejvja l-paġna jew terġa' ttellagħha.\nGħadek trid tkompli?",
 	"visualeditor-version-label": "Verżjoni"
 }

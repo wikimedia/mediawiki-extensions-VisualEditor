@@ -7,7 +7,6 @@
 	},
 	"tooltip-ca-ve-edit": "اي ولگه دچینواچین بۊکۊن",
 	"visualeditor-backbutton-tooltip": "پسا وگرد",
-	"visualeditor-beta-label": "آزميتي",
 	"visualeditor-ca-createlocaldescriptionsource": "محللي تؤضيحاته علاوه گۊدن",
 	"visualeditor-ca-createsource": "سربس چأگۊدن",
 	"visualeditor-ca-editsource": "سربسˇ دچينواچين",
@@ -60,7 +59,5 @@
 	"visualeditor-savedialog-label-error": "سأب",
 	"visualeditor-savedialog-label-save-short": "ذخيره",
 	"visualeditor-settings-tool": "ولگˇ تنظيمات",
-	"visualeditor-toolbar-savedialog": "ولگه ذخيره گۊدن",
-	"visualeditor-toolbar-savedialog-short": "ذخيره",
 	"visualeditor-version-label": "نۊسخه"
 }

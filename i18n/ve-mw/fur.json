@@ -9,7 +9,6 @@
 	"tooltip-ca-editsource": "Modifiche il codiç de pagjine",
 	"tooltip-ca-ve-edit": "Modifiche cheste pagjine.",
 	"visualeditor-advancedsettings-tool": "Impuestazions avanzadis",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor al è ancjemò in version beta. Al è pussibil cjatâ dai erôrs tal software e dai tocs a podaressin jessi no modificabîi. Par tornâ ae modifiche de sorzint in ogni moment, vierç il menù dongje di \"{{int:visualeditor-toolbar-savedialog}}\" e sielç \"{{int:visualeditor-mweditmodesource-tool}}\"",
 	"visualeditor-browserwarning": "Tu stâs doprant un browser che nol è uficialmentri compatibil cul VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Zonte une descrizion locâl cul wikitesto",
@@ -122,9 +121,7 @@
 	"visualeditor-linknodeinspector-title": "Leam sempliç",
 	"visualeditor-media-input-placeholder": "Cîr files multimediâi",
 	"visualeditor-meta-tool": "Opzions",
-	"visualeditor-mweditmodesource-title": "Vuelistu passâ al cambiament de sorzint?",
 	"visualeditor-mweditmodesource-warning-cancel": "Scancele",
-	"visualeditor-mweditmodesource-warning-switch": "Ten i cambiaments",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Abandone i cambiaments",
 	"visualeditor-mwgallerydialog-title": "Galarie",
 	"visualeditor-pagemenu-tooltip": "Opzions de pagjine",
@@ -147,6 +144,5 @@
 	"visualeditor-saveerror": "Erôr salvant i dâts tal servidôr: $1.",
 	"visualeditor-serializeerror": "Erôr cjamant i dâts dal servidôr: $1.",
 	"visualeditor-settings-tool": "Impuestazions de pagjine",
-	"visualeditor-toolbar-savedialog": "Salve la pagjine",
 	"visualeditor-version-label": "Version"
 }

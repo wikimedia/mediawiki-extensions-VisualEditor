@@ -5,7 +5,6 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "misinanot to inian a felih",
-	"visualeditor-beta-label": "lifet",
 	"visualeditor-ca-createlocaldescriptionsource": "Mikapot a micomod to itiniay mipakimaday a yin-se-ma",
 	"visualeditor-ca-createsource": "misanga’ to yin-se-ma",
 	"visualeditor-ca-editsource": "  o yin-se-ma no pisinanot",
@@ -23,6 +22,5 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "lalengatan",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "tanenengan",
 	"visualeditor-savedialog-review-nosummary": "awaay to misinanotan to nisa’amotoan a kimad",
-	"visualeditor-savedialog-title-save": " mina’ang to nifalican no miso",
-	"visualeditor-toolbar-savedialog": "mina’ang to felih"
+	"visualeditor-savedialog-title-save": " mina’ang to nifalican no miso"
 }

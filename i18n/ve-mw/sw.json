@@ -10,7 +10,6 @@
 	"tooltip-ca-createsource": "Anzisha chanzo msimbo za ukurasa huu",
 	"tooltip-ca-editsource": "Hariri chanzo msimbo za ukurasa huu",
 	"tooltip-ca-ve-edit": "Hariri ukurasa huu na VisualEditor",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "VisualEditor ipo katika 'beta'. Kwa hiyo labda utakuta matatizo ya bidhaa pepe unapohariri na kushindwa kuhariri mengine. Bonyeza \"{{int:visualeditor-ca-editsource}}\" ili kutumia njia ya kuhariri ya kimsingi - ila kumbuka kuhifadhi ulichofanya tayari kabla ya kubadilisha njia ya kuhariri, ili mabadiliko yako yasipotee.",
 	"visualeditor-browserwarning": "Unatumia kivinjari ambacho hakiendani rasmi na VisualEditor.",
 	"visualeditor-ca-createsource": "Weka chanzo",
@@ -80,8 +79,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:Eneo kuu la wiki",
 	"visualeditor-media-input-placeholder": "Tafuta mafaili",
 	"visualeditor-meta-tool": "Chaguzi",
-	"visualeditor-mweditmodesource-title": "Hamia katika uhariri wa chanzo",
-	"visualeditor-mweditmodesource-warning": "Unataka kuhamia katika uhariri wa chanzo. Mabadiliko yoyote uliyoyafanya katika hati hii yatatunzwa, lakini hutokuwa na uwezo wa kurudi tena katika VisualEditor bila ya kuhifadhi au kuzungusha ukurasa huu upya.\nJe, unataka kuendelea?",
 	"visualeditor-mweditmodesource-warning-cancel": "Batilisha",
 	"visualeditor-parameter-input-placeholder": "Jina la paramita",
 	"visualeditor-parameter-search-no-unused": "Hakuna paramita zisizotumiwa",
@@ -98,7 +95,6 @@
 	"visualeditor-savedialog-title-save": "Hifadhi mabadiliko yako",
 	"visualeditor-saveerror": "Hitilafu ya kuhifadhi data katika seva: $1.",
 	"visualeditor-serializeerror": "Hitilafu ya kupakua data kutoka katika seva: $1.",
-	"visualeditor-toolbar-savedialog": "Hifadhi ukurasa",
 	"visualeditor-usernamespacepagelink": "Project:Eneo la wiki la mtumiaji",
 	"visualeditor-version-label": "Toleo"
 }

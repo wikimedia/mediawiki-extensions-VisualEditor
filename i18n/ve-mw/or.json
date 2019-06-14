@@ -12,7 +12,6 @@
 	"tooltip-ca-createsource": "ଏହି ପୃଷ୍ଠା ପାଇଁ ମୂଳ କୋଡ଼ (source code) ଲେଖନ୍ତୁ",
 	"tooltip-ca-editsource": "ଏହି ପୃଷ୍ଠାର ମୂଳ କୋଡ଼ (source code) ସମ୍ପାଦନ କରନ୍ତୁ",
 	"tooltip-ca-ve-edit": "ଏହି ପୃଷ୍ଠାଟି ସମ୍ପାଦନ କରନ୍ତୁ",
-	"visualeditor-beta-label": "ବିଟା",
 	"visualeditor-ca-createlocaldescriptionsource": "ନିଜର ସ୍ଥାନୀୟ ବିବରଣ ଯୋଡ଼ନ୍ତୁ",
 	"visualeditor-ca-createsource": "ଉତ୍ସ ଗଢନ୍ତୁ",
 	"visualeditor-ca-editsource": "ଉତ୍ସ ସମ୍ପାଦନା",
@@ -47,6 +46,5 @@
 	"visualeditor-mwgallerydialog-remove-button-label": "ଚିତ୍ରଟି ବାହାର  କରାଯାଉ",
 	"visualeditor-savedialog-label-create": "ପୃଷ୍ଠାଟିଏ ତିଆରିବା",
 	"visualeditor-savedialog-label-error": "ଭୁଲ",
-	"visualeditor-savedialog-label-warning": "ସାବଧାନ",
-	"visualeditor-toolbar-savedialog": "ପୃଷ୍ଠାଟି ସାଇତିବେ"
+	"visualeditor-savedialog-label-warning": "ସାବଧାନ"
 }

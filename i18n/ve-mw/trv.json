@@ -6,7 +6,6 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "smmalu patas ruwahan patas nii",
-	"visualeditor-beta-label": "spung",
 	"visualeditor-ca-createlocaldescriptionsource": "mumal tmpusu pgkla ida nkiya sspgan",
 	"visualeditor-ca-createsource": "phiyug ida nkiya patas sspgan",
 	"visualeditor-ca-editsource": "Ida npatas sspgan ka smmalu patas.",
@@ -27,6 +26,5 @@
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "patas bngkgan",
 	"visualeditor-savedialog-label-save-short-start": "Smeku...",
 	"visualeditor-savedialog-review-nosummary": "ungat smmalu patas ramas kari",
-	"visualeditor-savedialog-title-save": "smku kmpriyux su",
-	"visualeditor-toolbar-savedialog": "skuun ruwahan patas"
+	"visualeditor-savedialog-title-save": "smku kmpriyux su"
 }

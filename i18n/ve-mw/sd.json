@@ -20,7 +20,6 @@
 	"visualeditor-autosave-recovered-text": "توھان جون اڻسانڍيل تبديليون خودڪار نموني سان بحال ڪيون ويون آھن.",
 	"visualeditor-autosave-recovered-title": "تبديليون بحال ڪيون ويون",
 	"visualeditor-backbutton-tooltip": "واپس وڃو",
-	"visualeditor-beta-label": "آزمائشي",
 	"visualeditor-browserwarning": "توھان اھڙو برائوزر استعمال ڪري رھيا آھيو جيڪو رسمي طور ھن ايڊيٽر طرفان سپورٽ نہ ڪيو ويندو آھي.",
 	"visualeditor-ca-createlocaldescriptionsource": "مقامي تشريحي ذريعو ڏيو",
 	"visualeditor-ca-createsource": "ذريعو سرجيو",
@@ -165,11 +164,8 @@
 	"visualeditor-media-input-placeholder": "ذريعات جي ڳولا ڪريو",
 	"visualeditor-meta-tool": "چارا",
 	"visualeditor-mweditmode-tooltip": "ايڊيٽر بدلايو",
-	"visualeditor-mweditmodesource-title": "ذريعو سرجڻ طرف وڃون؟",
 	"visualeditor-mweditmodesource-tool-current": "وسيلي جي سنوار",
-	"visualeditor-mweditmodesource-warning": "توھان ذريعو سرجڻ طرف وڃي رھيا آھيو.\nڇا توھان جاري رکڻ چاھيو ٿا؟",
 	"visualeditor-mweditmodesource-warning-cancel": "رد",
-	"visualeditor-mweditmodesource-warning-switch": "سوئچ ڪريو",
 	"visualeditor-mweditmodesource-warning-switch-discard": "منھنجون تبديليون ختم ڪريو ۽ سوئچ ڪريو",
 	"visualeditor-mweditmodeve-popup-body": "ھن نشان تي ڪلڪ ڪرڻ سان توھان ڪنھن بہ وقت وزيوئل سنوار طرف اچي سگھو ٿا.",
 	"visualeditor-mweditmodeve-popup-title": "توھان ذريعو سرجڻ طرف اچي چڪا آھيو",
@@ -228,8 +224,6 @@
 	"visualeditor-settings-tool": "صفحي جون ترتيبون",
 	"visualeditor-special-characters-group-other": "اڪثر استعمال ٿيندڙ",
 	"visualeditor-templatesused-tool": "استعمال ٿيل سانچا",
-	"visualeditor-toolbar-savedialog": "صفحو سانڍيو",
-	"visualeditor-toolbar-savedialog-short": "سانڍيو",
 	"visualeditor-version-label": "ورزن",
 	"visualeditor-wikitext-progress": "وڪيٽيڪسٽ بدلائيندي"
 }

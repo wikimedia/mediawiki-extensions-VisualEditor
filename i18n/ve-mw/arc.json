@@ -4,7 +4,6 @@
 			"Basharh"
 		]
 	},
-	"visualeditor-beta-label": "ܒܝܛܐ",
 	"visualeditor-dialog-meta-categories-category": "ܣܕܪܐ",
 	"visualeditor-dialog-meta-categories-data-label": "ܣܕܪ̈ܐ",
 	"visualeditor-dialog-meta-categories-input-placeholder": "ܐܘܣܦ ܣܕܪܐ",
@@ -16,6 +15,5 @@
 	"visualeditor-dialogbutton-meta-tooltip": "ܛܘܝܒ̈ܐ ܕܦܐܬܐ",
 	"visualeditor-dialogbutton-transclusion-tooltip": "ܡܚܫܫܬ̈ܐ",
 	"visualeditor-meta-tool": "ܓܒܝܬ̈ܐ",
-	"visualeditor-savedialog-label-error": "ܦܘܕܐ",
-	"visualeditor-toolbar-savedialog": "ܠܒܘܟ ܦܐܬܐ"
+	"visualeditor-savedialog-label-error": "ܦܘܕܐ"
 }

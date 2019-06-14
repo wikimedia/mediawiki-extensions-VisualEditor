@@ -15,7 +15,6 @@
 	"tooltip-ca-createsource": "Fontem huius paginae creare",
 	"tooltip-ca-editsource": "Fontem huius paginae recensere",
 	"tooltip-ca-ve-edit": "Hanc paginam recensere",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Fontem creare",
 	"visualeditor-ca-editsource": "Fontem recensere",
 	"visualeditor-ca-editsource-section": "fontem recensere",
@@ -78,7 +77,6 @@
 	"visualeditor-preference-core-label": "Editor visualis",
 	"visualeditor-savedialog-label-create": "Paginam creare",
 	"visualeditor-savedialog-label-save-short": "Servare",
-	"visualeditor-toolbar-savedialog-short": "Servare",
 	"visualeditor-version-label": "Versio",
 	"visualeditor-wikitext-progress": "Convertere vicitextum"
 }

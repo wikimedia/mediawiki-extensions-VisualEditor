@@ -10,7 +10,6 @@
 	"tooltip-ca-editsource": "Az oldal forráskódjának szerkesztése",
 	"tooltip-ca-ve-edit": "A lap szerkesztése",
 	"visualeditor-advancedsettings-tool": "Speciális beállítások",
-	"visualeditor-beta-label": "béta",
 	"visualeditor-beta-warning": "Ez a szerkesztő „béta” állapotban van. A forráskódnézetre való  váltáshoz – ha nem akarja elveszíteni az eddigi változtatásait – kattintson a lenyíló menüre a „{{int:visualeditor-toolbar-savedialog}}” gomb mellett, és válassza a „{{int:visualeditor-mweditmodesource-tool}}” lehetőséget.",
 	"visualeditor-browserwarning": "Olyan böngészőt használ, amit ez a szerkesztő hivatalosan nem támogat.",
 	"visualeditor-ca-createsource": "Forrás létrehozása",
@@ -141,9 +140,7 @@
 	"visualeditor-loadwarning-token": "Hiba a kiszolgálóról való szerkesztőtoken-letöltés közben: $1. Megpróbálja újra?",
 	"visualeditor-media-input-placeholder": "Média keresése",
 	"visualeditor-meta-tool": "Beállítások",
-	"visualeditor-mweditmodesource-title": "Átváltás forráskódra?",
 	"visualeditor-mweditmodesource-warning-cancel": "Mégse",
-	"visualeditor-mweditmodesource-warning-switch": "Változtatások megtartása",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Változtatások elvetése",
 	"visualeditor-mwgallerydialog-title": "Galéria",
 	"visualeditor-pagemenu-tooltip": "Lapbeállítások",
@@ -173,7 +170,6 @@
 	"visualeditor-serializeerror": "Hiba a kiszolgálóról való letöltés közben: $1",
 	"visualeditor-settings-tool": "Oldalbeállítások",
 	"visualeditor-special-characters-group-other": "Gyakran használt",
-	"visualeditor-toolbar-savedialog": "Oldal mentése",
 	"visualeditor-version-label": "Verzió",
 	"visualeditor-wikitext-warning": "Most a vizuális szerkesztővel szerkeszt – a [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikiszöveg]] itt nem működik. A forráskód nézetre való váltáshoz – ha nem akarja elveszíteni a változtatásait – kattintson a lenyíló menüre a „{{int:visualeditor-toolbar-savedialog}}” gomb mellett, és válassza a „{{int:visualeditor-mweditmodesource-title}}” lehetőséget."
 }

@@ -9,7 +9,6 @@
 	"tooltip-ca-createsource": "Үндезин сөзүглелдер \"эдикчизи\"-биле арынны чаяар",
 	"tooltip-ca-editsource": "Арынның үндезин сөзүглелин эдер",
 	"tooltip-ca-ve-edit": "Бо арынны эдер",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createsource": "Чаяар",
 	"visualeditor-ca-editsource": "Вики-сөзүглелди эдер",
 	"visualeditor-ca-editsource-section": "вики-сөзүглелди эдер",
@@ -33,13 +32,11 @@
 	"visualeditor-dialog-table-sortable": "Эде салыр",
 	"visualeditor-dialog-table-wikitable": "Стильчиткен (wikitable)",
 	"visualeditor-mweditmodesource-warning-cancel": "Ойталал",
-	"visualeditor-mweditmodesource-warning-switch": "Өскертилгелерни арттырар",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Өскертилгелерни ойталаар",
 	"visualeditor-mwgallerydialog-title": "Галерея",
 	"visualeditor-pagemenu-tooltip": "Арынның параметрлери",
 	"visualeditor-savedialog-label-create": "Арын чаяар",
 	"visualeditor-savedialog-label-error": "Алдаг",
 	"visualeditor-savedialog-label-warning": "Кичээңгей",
-	"visualeditor-savedialog-title-save": "Өскертилгеңер шыгжаар",
-	"visualeditor-toolbar-savedialog": "Арын шыгжаар"
+	"visualeditor-savedialog-title-save": "Өскертилгеңер шыгжаар"
 }

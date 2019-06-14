@@ -17,7 +17,6 @@
 	"tooltip-ca-ve-edit": "دەستکاری ئەم پەڕەیە بکە‌",
 	"visualeditor-advancedsettings-tool": "ڕێکخستنە پێشکەوتووەکان",
 	"visualeditor-backbutton-tooltip": "بگەڕێوە",
-	"visualeditor-beta-label": "بێتا",
 	"visualeditor-beta-warning": "دەستکاریکەری دیداری ھێشتا «بیتا»یە و ھەر بۆیە لەوانەیە نەکرێ ھەموو شتێک دەستکاری بکەی.",
 	"visualeditor-ca-createlocaldescriptionsource": "زیادکردنی سەرچاوەی وەسفی نێوخۆیی",
 	"visualeditor-ca-createsource": "سەرچاوە دروست بکە",
@@ -90,10 +89,7 @@
 	"visualeditor-mainnamespacepagelink": "Project:بۆشاییی ناوی سەرەکی",
 	"visualeditor-media-input-placeholder": "گەڕان بۆ میدیا",
 	"visualeditor-meta-tool": "ھەڵبژاردەکان",
-	"visualeditor-mweditmodesource-title": "گۆڕین بۆ دەستکاریکردنی سەرچاوە؟",
-	"visualeditor-mweditmodesource-warning": "تۆ خەریکە شێوازی دەستکاری دەگۆڕی بۆ دەستکاریی سەرچاوە.\nدەتەوێت بەردەوام بیت؟",
 	"visualeditor-mweditmodesource-warning-cancel": "ھەڵوەشاندنەوە",
-	"visualeditor-mweditmodesource-warning-switch": "گۆڕین",
 	"visualeditor-mwgallerydialog-title": "گالێری",
 	"visualeditor-mwsignature-tool": "واژووەکەت",
 	"visualeditor-pagemenu-tooltip": "بژاردەکانی پەڕە",
@@ -123,6 +119,5 @@
 	"visualeditor-savedialog-title-review": "بەسەر گۆڕانکارییەکانتدا بچۆوە",
 	"visualeditor-savedialog-title-save": "گۆڕانکارییەکانت پاشکەوت بکە",
 	"visualeditor-settings-tool": "ڕێکخستنەکانی پەڕە",
-	"visualeditor-toolbar-savedialog": "پەڕەکە پاشەکەوت بکە",
 	"visualeditor-usernamespacepagelink": "Project:بۆشاییی ناوی بەکارھێنەر"
 }

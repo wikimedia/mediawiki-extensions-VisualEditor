@@ -11,7 +11,6 @@
 	"tooltip-ca-editsource": "Suntiang kode sumber laman ko",
 	"tooltip-ca-ve-edit": "Suntiang laman ko jo VisualEditor",
 	"visualeditor-advancedsettings-tool": "Pangaturan lanjuik",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-ca-createlocaldescriptionsource": "Tambah sumber deskripsi lokal",
 	"visualeditor-ca-createsource": "Buek sumber",
 	"visualeditor-ca-editlocaldescriptionsource": "Suntiang sumber deskripsi lokal",
@@ -96,7 +95,6 @@
 	"visualeditor-savedialog-title-save": "Simpan nan diubah",
 	"visualeditor-saveerror": "Kasalahan panyimpanan data dari server: $1.",
 	"visualeditor-serializeerror": "Kasalahan pamuatan data dari server: $1.",
-	"visualeditor-toolbar-savedialog": "Simpan laman",
 	"visualeditor-usernamespacepagelink": "Project:Ruangnamo pangguno",
 	"visualeditor-version-label": "Versi"
 }

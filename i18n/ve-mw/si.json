@@ -17,7 +17,6 @@
 	"tooltip-ca-editsource": "මෙම පිටුවේ ප්‍රභව කේතයන් සංස්කරණය කරන්න",
 	"tooltip-ca-ve-edit": "මෙම පිටුව සංස්කරණය කරන්න",
 	"visualeditor-advancedsettings-tool": "උසස් සංස්කරණය",
-	"visualeditor-beta-label": "බීටා",
 	"visualeditor-beta-warning": "විෂුවල්එඩිටර් තවමත් 'බීටා' තත්‍වයේ පවතී. You may encounter software issues, and you may not be able to edit parts of the page. Click \"{{int:visualeditor-ca-editsource}}\" to switch to wikitext mode – unsaved changes will be lost.",
 	"visualeditor-browserwarning": "ඔබ දැනට සිටින වෙබ් බ්‍රවුසරය නිල වශයෙන් විෂුවල්එඩිටර් සඳහා සහාය නොදක්වයි.",
 	"visualeditor-ca-createlocaldescriptionsource": "ප්‍රාදේශීය විස්තරයේ මූලාශ්‍රය එක් කරන්න",
@@ -104,6 +103,5 @@
 	"visualeditor-savedialog-title-review": "ඔබ සිදුකල වෙනස්කම් සමාලෝචනය කරන්න",
 	"visualeditor-savedialog-title-save": "ඔබ කල වෙනස්කිරීම් සුරකින්න",
 	"visualeditor-saveerror": "ස'රවරය වෙත දත්ත සුරැකීමේ දෝෂය: $1.",
-	"visualeditor-toolbar-savedialog": "පිටුව සුරකින්න",
 	"visualeditor-usernamespacepagelink": "ව්‍යාපෘතිය:පරිශීලක නාමඅවකාශය"
 }

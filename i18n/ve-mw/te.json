@@ -19,7 +19,6 @@
 	"tooltip-ca-editsource": "ఈ పేజీ మూలపాఠ్యాన్ని సవరించు",
 	"tooltip-ca-ve-edit": "ఈ పేజీని విజువల్ ఎడిటర్ తో సవరించండి",
 	"visualeditor-advancedsettings-tool": "నిశిత అమరికలు",
-	"visualeditor-beta-label": "బీటా",
 	"visualeditor-beta-warning": "విజువల్ ఎడిటర్ బీటాస్థితిలోవున్నది. మీరు సాఫ్ట్‌వేర్ సమస్యలు ఎదుర్కొనవచ్చు లేక పేజీలో కొన్ని భాగాలు మార్చలేకపోవచ్చు. \"{{int:visualeditor-ca-editsource}}\" నొక్కి వికీపాఠ్య పద్ధతిలోకి మారవచ్చు. భద్రపరచని మార్పులువదలివేయబడతాయి.",
 	"visualeditor-browserwarning": "మీరు వాడే బ్రౌజర్ (విహరిణి)కి విజువల్ ఎడిటర్ అధికారిక తోడ్పాటు లేదు.",
 	"visualeditor-ca-createlocaldescriptionsource": "ప్రాంతీయ వివరణ మూలాన్ని చేర్చు",
@@ -148,7 +147,5 @@
 	"visualeditor-settings-tool": "పేజీ అమరికలు",
 	"visualeditor-special-characters-group-other": "తరచూ వాడేవి",
 	"visualeditor-toload": "ఇప్పుడు ఎడిటరు లోడవుతుంది. కొన్ని సెకండ్ల తరువాత కూడా ఈ సందేశం కనబడుతూంటే, [$1 పేజీని మళ్ళీ లోడు చెయ్యండి].",
-	"visualeditor-toolbar-savedialog": "పేజీని భద్రపరచు",
-	"visualeditor-toolbar-savedialog-short": "భద్రపరచు",
 	"visualeditor-version-label": "సంచిక"
 }

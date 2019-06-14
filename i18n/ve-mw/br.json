@@ -13,7 +13,6 @@
 	"tooltip-ca-ve-edit": "Kemmañ ar bajenn-mañ",
 	"visualeditor-advancedsettings-tool": "Arventennoù araokaet",
 	"visualeditor-backbutton-tooltip": "Distreiñ",
-	"visualeditor-beta-label": "beta",
 	"visualeditor-beta-warning": "E stumm 'beta' emañ ar Gwelaozer. E c'hallfe bezañ kudennoù gant ar meziant ha marteze ne viot ket evit kemmañ tammoù eus ar bajenn. Evit dont en-dro da gemm ar vammenn hep koll ar c'hemmoù, digorit ar roll disachañ e-kichen \"{{int:visualeditor-toolbar-savedialog}}\" ha dibabit \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Ober a rit gant ur merdeer ha n'eo ket embreget gant VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ouzhpennañ deskrivadur lec'hel ar vammenn",
@@ -184,10 +183,7 @@
 	"visualeditor-media-input-placeholder": "Klask ur media",
 	"visualeditor-meta-tool": "Arventennoù",
 	"visualeditor-mweditmodesource-progress": "Cheñch evit an aozañ dre ar c'hod...",
-	"visualeditor-mweditmodesource-title": "Mont da gemmañ ar vammenn ?",
-	"visualeditor-mweditmodesource-warning": "Emaoc'h o cheñch evit an aozañ dre ar c'hod.\nHa sur oc'h e fell deoc'h kenderc'hel ?",
 	"visualeditor-mweditmodesource-warning-cancel": "Nullañ",
-	"visualeditor-mweditmodesource-warning-switch": "Cheñch",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Dilezel ma c'hemmoù ha cheñch",
 	"visualeditor-mweditmodeve-popup-body": "Gallout a rit distreiñ d'an aozañ dre welet, pa garit, en ur glikañ war an arlun-mañ",
 	"visualeditor-mweditmodeve-popup-title": "Emaoc'h bremañ gant an aozañ dre ar c'hod",
@@ -243,8 +239,6 @@
 	"visualeditor-settings-tool": "Arventennoù ar bajenn",
 	"visualeditor-special-characters-group-other": "Implijet alies",
 	"visualeditor-templatesused-tool": "Patromoù implijet",
-	"visualeditor-toolbar-savedialog": "Enrollañ ar bajenn",
-	"visualeditor-toolbar-savedialog-short": "Enrollañ",
 	"visualeditor-usernamespacepagelink": "Project:Esaouenn-anv implijer",
 	"visualeditor-version-label": "Stumm"
 }

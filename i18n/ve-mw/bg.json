@@ -23,7 +23,6 @@
 	"tooltip-ca-ve-edit": "Редактиране на страницата",
 	"visualeditor-advancedsettings-tool": "Разширени настройки",
 	"visualeditor-backbutton-tooltip": "Връщане",
-	"visualeditor-beta-label": "бета",
 	"visualeditor-beta-warning": "Ако срещнете технически проблеми при редактирането, моля съобщете ги.",
 	"visualeditor-browserwarning": "Браузърът, който използвате, не е официално поддържан от този редактор.",
 	"visualeditor-ca-createlocaldescriptionsource": "Добавяне на източник на локалното описание",
@@ -172,11 +171,8 @@
 	"visualeditor-meta-tool": "Настройки",
 	"visualeditor-mweditmode-tooltip": "Превключване на редактора",
 	"visualeditor-mweditmodesource-progress": "Преминаване към редактиране на кода...",
-	"visualeditor-mweditmodesource-title": "Превключване към редактиране на кода?",
 	"visualeditor-mweditmodesource-tool-current": "Редактиране на кода",
-	"visualeditor-mweditmodesource-warning": "Превключвате към редактиране на кода. Искате ли да продължите?",
 	"visualeditor-mweditmodesource-warning-cancel": "Отказ",
-	"visualeditor-mweditmodesource-warning-switch": "Превключване",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Отмяна на промените и превключване",
 	"visualeditor-mweditmodeve-popup-body": "Можете във всеки момент да се върнете отново към визуалното редактиране, като щракнете на тази икона.",
 	"visualeditor-mweditmodeve-popup-title": "Превключили сте на режим редактиране на кода",
@@ -258,7 +254,5 @@
 	"visualeditor-settings-tool": "Настройки на страницата",
 	"visualeditor-special-characters-group-other": "Често използвани",
 	"visualeditor-templatesused-tool": "Използвани шаблони",
-	"visualeditor-toolbar-savedialog": "Съхраняване на страницата",
-	"visualeditor-toolbar-savedialog-short": "Съхраняване",
 	"visualeditor-version-label": "Версия"
 }
