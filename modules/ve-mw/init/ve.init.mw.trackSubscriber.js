@@ -231,19 +231,13 @@
 		}
 	}
 
-	if ( mw.loader.getState( 'schema.EditAttemptStep' ) !== null || trackdebug ) {
-		// Only route any events into the EditAttemptStep schema if the module is actually available.
-		// It won't be if EventLogging is installed but WikimediaEvents is not.
-		// Also load ext.eventLogging.subscriber to provide mw.eventLog.randomTokenMatch().
+	// Only log events if the WikimediaEvents extension is installed.
+	// It provides variables that the above code depends on and registers the schemas.
+	if ( mw.config.exists( 'wgWMESchemaEditAttemptStepSamplingRate' ) ) {
+		// Ensure 'ext.eventLogging.subscriber' first, it provides mw.eventLog.randomTokenMatch.
 		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {
 			ve.trackSubscribe( 'mwedit.', mwEditHandler );
 			ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
-		} );
-	}
-
-	if ( mw.loader.getState( 'schema.VisualEditorFeatureUse' ) !== null || trackdebug ) {
-		// Similarly for the VisualEditorFeatureUse schema
-		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {
 			ve.trackSubscribe( 'activity.', activityHandler );
 		} );
 	}
