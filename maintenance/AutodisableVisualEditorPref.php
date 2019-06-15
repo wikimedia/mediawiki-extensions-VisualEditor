@@ -23,7 +23,7 @@ class AutodisableVisualEditorPref extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->requireExtension( 'VisualEditor' );
-		$this->mDescription = "Sets the VisualEditor autodisable preference on appropriate users.";
+		$this->addDescription( "Sets the VisualEditor autodisable preference on appropriate users." );
 		$this->setBatchSize( 500 );
 	}
 
