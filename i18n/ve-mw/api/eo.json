@@ -4,7 +4,8 @@
 			"KuboF",
 			"Kvardek du",
 			"NMaia",
-			"Psychoslave"
+			"Psychoslave",
+			"Mirin"
 		]
 	},
 	"apierror-visualeditor-difffailed": "Diff malsukcesita",
@@ -34,5 +35,6 @@
 	"apihelp-visualeditoredit-param-section": "La sekcio sur kiu agi.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Titolo por nova sekcio.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kiam konservanta, asignas tiun al tempindiko de la paĝŝarga dato. Tio estas uzata por rekoni konflikojn pri redakto.",
-	"apihelp-visualeditoredit-param-summary": "Redakta resumo."
+	"apihelp-visualeditoredit-param-summary": "Redakta resumo.",
+	"apihelp-visualeditoredit-summary": "Konservi HTML5-paĝon en MediaVikion (kun konverto al vikiteksto per la servo Parsoid)."
 }
