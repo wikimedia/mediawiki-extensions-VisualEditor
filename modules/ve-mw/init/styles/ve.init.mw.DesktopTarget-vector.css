@@ -29,12 +29,6 @@
 	margin: 0.5em 0;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
-.mw-body .external.ve-ce-linkAnnotation.ve-ce-annotation-active {
-	/* Reset -2px from VE-core */
-	margin-right: 0;
-}
-
 .ve-ui-surface .ve-ui-surface-placeholder {
 	opacity: 1;
 }
