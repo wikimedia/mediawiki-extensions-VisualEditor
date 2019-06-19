@@ -234,8 +234,8 @@
 	// Only log events if the WikimediaEvents extension is installed.
 	// It provides variables that the above code depends on and registers the schemas.
 	if ( mw.config.exists( 'wgWMESchemaEditAttemptStepSamplingRate' ) ) {
-		// Ensure 'ext.eventLogging.subscriber' first, it provides mw.eventLog.randomTokenMatch.
-		mw.loader.using( 'ext.eventLogging.subscriber' ).done( function () {
+		// Ensure 'ext.eventLogging' first, it provides mw.eventLog.randomTokenMatch.
+		mw.loader.using( 'ext.eventLogging' ).done( function () {
 			ve.trackSubscribe( 'mwedit.', mwEditHandler );
 			ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
 			ve.trackSubscribe( 'activity.', activityHandler );
