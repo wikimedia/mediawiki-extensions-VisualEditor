@@ -63,5 +63,6 @@
 
 /* Save button */
 .ve-ui-toolbar-saveButton {
+	white-space: nowrap;
 	font-weight: bold;
 }
