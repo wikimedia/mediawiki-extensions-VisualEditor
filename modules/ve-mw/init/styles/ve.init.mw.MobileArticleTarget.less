@@ -53,9 +53,16 @@
 }
 
 .ve-ui-debugBar {
-	padding-top: 0.8em;
+	margin: 0 -16px;
+	padding: 0 16px;
 	border-top: 1px solid #c8ccd1;
 	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
+
+	@media screen and ( min-width: 720px ) {
+		margin: 0 -3.35em;
+		padding: 0 3.35em;
+	}
+	padding-top: 0.8em;
 }
 
 .ve-ui-debugBar-selectionLabel {
