@@ -375,49 +375,53 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		case 'preview':
 			size = 'full';
 			this.previewPanel.$element[ 0 ].focus();
+			this.previewPanel.$element.prepend( this.$previewEditSummaryContainer );
 			break;
 		case 'review':
 			size = 'larger';
-			currentEditSummaryWikitext = this.editSummaryInput.getValue();
-			if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
-				if ( this.editSummaryXhr ) {
-					this.editSummaryXhr.abort();
-				}
-				this.lastEditSummaryWikitext = currentEditSummaryWikitext;
-				this.$reviewEditSummary.empty();
-
-				if ( !currentEditSummaryWikitext || currentEditSummaryWikitext.trim() === '' ) {
-					// Don't bother with an API request for an empty summary
-					this.$reviewEditSummary.text( ve.msg( 'visualeditor-savedialog-review-nosummary' ) );
-				} else {
-					this.$reviewEditSummary.parent()
-						.removeClass( 'oo-ui-element-hidden' )
-						.addClass( 'mw-ajax-loader' );
-					this.editSummaryXhr = ve.init.target.getContentApi().post( {
-						action: 'parse',
-						title: ve.init.target.getPageName(),
-						prop: '',
-						summary: currentEditSummaryWikitext
-					} ).done( function ( result ) {
-						if ( result.parse.parsedsummary === '' ) {
-							dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
-						} else {
-							// Intentionally treated as HTML
-							dialog.$reviewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary ) );
-							ve.targetLinksToNewWindow( dialog.$reviewEditSummary[ 0 ] );
-						}
-					} ).fail( function () {
-						dialog.$reviewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
-					} ).always( function () {
-						dialog.$reviewEditSummary.parent().removeClass( 'mw-ajax-loader' );
-						dialog.updateSize();
-					} );
-				}
-			}
+			this.reviewModeButtonSelect.$element.after( this.$previewEditSummaryContainer );
 			setTimeout( function () {
 				dialog.updateReviewMode();
 			} );
 			break;
+	}
+	if ( panel === 'preview' || panel === 'review' ) {
+		currentEditSummaryWikitext = this.editSummaryInput.getValue();
+		if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
+			if ( this.editSummaryXhr ) {
+				this.editSummaryXhr.abort();
+			}
+			this.lastEditSummaryWikitext = currentEditSummaryWikitext;
+			this.$previewEditSummary.empty();
+
+			if ( !currentEditSummaryWikitext || currentEditSummaryWikitext.trim() === '' ) {
+				// Don't bother with an API request for an empty summary
+				this.$previewEditSummary.text( ve.msg( 'visualeditor-savedialog-review-nosummary' ) );
+			} else {
+				this.$previewEditSummary.parent()
+					.removeClass( 'oo-ui-element-hidden' )
+					.addClass( 'mw-ajax-loader' );
+				this.editSummaryXhr = ve.init.target.getContentApi().post( {
+					action: 'parse',
+					title: ve.init.target.getPageName(),
+					prop: '',
+					summary: currentEditSummaryWikitext
+				} ).done( function ( result ) {
+					if ( result.parse.parsedsummary === '' ) {
+						dialog.$previewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
+					} else {
+						// Intentionally treated as HTML
+						dialog.$previewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary ) );
+						ve.targetLinksToNewWindow( dialog.$previewEditSummary[ 0 ] );
+					}
+				} ).fail( function () {
+					dialog.$previewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
+				} ).always( function () {
+					dialog.$previewEditSummary.parent().removeClass( 'mw-ajax-loader' );
+					dialog.updateSize();
+				} );
+			}
+		}
 	}
 
 	// Show the target panel
@@ -672,14 +676,14 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	} );
 	this.reviewModeButtonSelect.connect( this, { select: 'updateReviewMode' } );
 
-	this.$reviewEditSummary = $( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
+	this.$previewEditSummary = $( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
+	this.$previewEditSummaryContainer = $( '<div>' )
+		.addClass( 'mw-summary-preview' )
+		.text( ve.msg( 'summary-preview' ) )
+		.append( $( '<br>' ), this.$previewEditSummary );
 	this.$reviewActions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-actions' );
 	this.reviewPanel.$element.append(
 		this.reviewModeButtonSelect.$element,
-		$( '<div>' )
-			.addClass( 'mw-summary-preview' )
-			.text( ve.msg( 'summary-preview' ) )
-			.append( $( '<br>' ), this.$reviewEditSummary ),
 		this.$reviewVisualDiff,
 		this.$reviewWikitextDiff,
 		this.$reviewActions
