@@ -2412,6 +2412,13 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 	}
 	promise.then( function ( confirmed ) {
 		if ( confirmed ) {
+			// Section has changed and edits have been discarded, so edit summary is no longer valid
+			// TODO: Preserve summary if document changes can be preserved
+			if ( target.saveDialog ) {
+				target.saveDialog.reset();
+			}
+			// TODO: If switching to a non-null section, get the new section title
+			target.initialEditSummary = null;
 			target.section = section;
 			target.reloadSurface( 'source' );
 			target.updateTabs( true );
