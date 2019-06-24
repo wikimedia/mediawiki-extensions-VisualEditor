@@ -24,7 +24,8 @@
 			"Huji",
 			"Arash.pt",
 			"Freshman404",
-			"Dejavu"
+			"Dejavu",
+			"FarsiNevis"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -163,7 +164,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "تغییرمسیر این صفحه به",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "صفحهٔ هدف برای تغییرمسیر",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "شما می‌توانید از اینکه این رده به‌صورت خودکار هنگامی که صفحه‌هایی که تغییر مسیر هستند منتقل شدند جلوگیری است، در حالت‌های بسیار نادری چنین چیزی نیاز است.",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "جلوگیری از به‌روز رسانی این تغییرمسیر  هنگامی که صفحه مورد نظر منتقل شده‌است.",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "جلوگیری از روزآمدسازی این تغییر مسیر، وقتی صفحهٔ مورد نظر منتقل شده است.",
 	"visualeditor-dialog-meta-settings-section": "تنظیمات صفحه",
 	"visualeditor-dialog-meta-settings-toc-default": "در صورت نیاز",
 	"visualeditor-dialog-meta-settings-toc-disable": "هرگز",
