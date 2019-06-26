@@ -42,7 +42,7 @@ ve.ui.MWInternalLinkAnnotationWidget.static.getAnnotationFromText = function ( v
  * @inheritdoc
  */
 ve.ui.MWInternalLinkAnnotationWidget.static.getTextFromAnnotation = function ( annotation ) {
-	return annotation ? annotation.getAttribute( 'origTitle' ) || annotation.getAttribute( 'normalizedTitle' ) : '';
+	return annotation ? annotation.getAttribute( 'normalizedTitle' ) : '';
 };
 
 /* Methods */
