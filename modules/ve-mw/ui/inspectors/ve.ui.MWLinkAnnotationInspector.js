@@ -406,7 +406,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
 			{ type: '/link/mwNumberedExternal' }
 		];
 	} else {
-		return ve.ui.MWLinkAnnotationInspector.super.prototype.getInsertionData.call( this );
+		// Use user input, not normalized annotation, to preserve case
+		return this.annotationInput.getTextInputWidget().getValue();
 	}
 };
 
