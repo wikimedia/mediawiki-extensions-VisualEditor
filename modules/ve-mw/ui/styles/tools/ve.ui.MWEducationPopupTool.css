@@ -9,21 +9,27 @@
 	cursor: pointer;
 }
 
-.ve-ui-pulsatingDot,
-.ve-ui-stillDot {
+.ve-ui-pulsatingDot {
 	position: absolute;
 	bottom: 0;
 	left: 50%;
 	z-index: 1;
+}
+
+.ve-ui-pulsatingDot:before,
+.ve-ui-pulsatingDot:after {
+	content: '';
+	display: block;
+	position: absolute;
 	border-radius: 50%;
 	background-color: #36c;
 }
 
-.ve-ui-pulsatingDot {
+.ve-ui-pulsatingDot:before {
 	width: 36px;
 	height: 36px;
-	margin-bottom: -18px;
-	margin-left: -18px;
+	top: -18px;
+	left: -18px;
 	opacity: 0;
 	-webkit-animation: pulse 3s ease-out;
 	-moz-animation: pulse 3s ease-out;
@@ -33,12 +39,12 @@
 	animation-iteration-count: infinite;
 }
 
-.ve-ui-stillDot {
+.ve-ui-pulsatingDot:after {
 	/* Use whole pixel values to improve rendering (T214203) */
 	width: 12px;
 	height: 12px;
-	margin-bottom: -6px;
-	margin-left: -6px;
+	top: -6px;
+	left: -6px;
 }
 
 .ve-ui-educationPopup-shield {
@@ -49,8 +55,7 @@
 	left: 0;
 }
 
-.oo-ui-widget-disabled .ve-ui-pulsatingDot,
-.oo-ui-widget-disabled .ve-ui-stillDot {
+.oo-ui-widget-disabled .ve-ui-pulsatingDot {
 	display: none;
 }
 
