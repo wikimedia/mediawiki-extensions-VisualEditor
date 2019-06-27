@@ -1522,6 +1522,40 @@ ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.switchToVisualEditor.apply( this, arguments );
+
+	if ( ve.init.target.isModeAvailable( 'visual' ) ) {
+		ve.track( 'activity.editor-switch', { action: 'visual-desktop' } );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function () {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.switchToWikitextEditor.apply( this, arguments );
+
+	if ( ve.init.target.isModeAvailable( 'source' ) ) {
+		ve.track( 'activity.editor-switch', { action: 'source-nwe-desktop' } );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextSection = function () {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.switchToWikitextSection.apply( this, arguments );
+
+	ve.track( 'activity.editor-switch', { action: 'source-nwe-desktop' } );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var uri, oldId, prefPromise,
 		target = this;
@@ -1533,6 +1567,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 	prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( !modified ) {
+		ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
 		ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate', mode: 'visual' } );
 		this.submitting = true;
 		prefPromise.done( function () {
@@ -1551,6 +1586,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 		this.serialize(
 			this.getDocToSave(),
 			function ( wikitext ) {
+				ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
 				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
 				target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, wikitext );
 			}
