@@ -64,22 +64,19 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 
 	this.shownEducationPopup = false;
 	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
-	this.$stillDot = $( '<div>' ).addClass( 've-ui-stillDot' );
 	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' );
 	this.$element
 		.addClass( 've-ui-educationPopup' )
-		.append( $shield, this.popup.$element, this.$stillDot, this.$pulsatingDot );
+		.append( $shield, this.popup.$element, this.$pulsatingDot );
 	this.$element.children().not( this.popup.$element ).on( 'click', function () {
 		if ( !tool.shownEducationPopup ) {
 			if ( ve.init.target.openEducationPopupTool ) {
 				ve.init.target.openEducationPopupTool.popup.toggle( false );
 				ve.init.target.openEducationPopupTool.setActive( false );
 				ve.init.target.openEducationPopupTool.$pulsatingDot.removeClass( 'oo-ui-element-hidden' );
-				ve.init.target.openEducationPopupTool.$stillDot.removeClass( 'oo-ui-element-hidden' );
 			}
 			ve.init.target.openEducationPopupTool = tool;
 			tool.$pulsatingDot.addClass( 'oo-ui-element-hidden' );
-			tool.$stillDot.addClass( 'oo-ui-element-hidden' );
 			tool.popup.toggle( true );
 			$shield.remove();
 
