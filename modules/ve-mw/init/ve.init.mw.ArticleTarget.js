@@ -96,6 +96,17 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 
 /**
  * @event save
+ * @param {string} html Rendered page HTML from server
+ * @param {string} categoriesHtml Rendered categories HTML from server
+ * @param {number} newid New revision id, undefined if unchanged
+ * @param {boolean} isRedirect Whether this page is a redirect or not
+ * @param {string} displayTitle What HTML to show as the page title
+ * @param {Object} lastModified Object containing user-formatted date
+ *  and time strings, or undefined if we made no change.
+ * @param {string} contentSub HTML to show as the content subtitle
+ * @param {Array} modules The modules to be loaded on the page
+ * @param {Object} jsconfigvars The mw.config values needed on the page
+ * Fired immediately after a save is successfully completed
  */
 
 /**
@@ -680,7 +691,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
 	this.initialEditSummary = null;
 
 	this.saveDeferred.resolve();
-	this.emit( 'save' );
+	this.emit.apply( this, [ 'save' ].concat( Array.prototype.slice.call( arguments ) ) );
 };
 
 /**
