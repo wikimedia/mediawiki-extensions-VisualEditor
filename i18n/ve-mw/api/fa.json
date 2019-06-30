@@ -31,6 +31,7 @@
 	"apihelp-visualeditor-param-pst": "پیش-ذخیره متن ویکی تبدیل شده پیش از ارسال آن به پارسوید (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "بخشی که برای انجم‌دادن است.",
 	"apihelp-visualeditor-param-starttimestamp": "در زمان ذخیره کردن، این را برای زمان بارگیری نسخه تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
+	"apihelp-visualeditor-param-stash": "در زمان ذخیره، اگر قصد استفاده از  API پنهان را دارید این را true تنظیم کنید.",
 	"apihelp-visualeditor-param-wikitext": "متن ویکی برای ارسال به پارسوید برای تبدیل به اچ‌تی‌ام‌ال (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "HTML5 یک صفحه را از خدمت پارسوید برمی‌گرداند.",
 	"apihelp-visualeditoredit-description": "ذخیره صفحه HTML5 به مدیاویکی (تبدیل به متن ویکی با سرویس پارسوید)",

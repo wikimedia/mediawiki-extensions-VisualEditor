@@ -27,7 +27,8 @@
 			"Yejianfei",
 			"飞舞回堂前",
 			"Hanyanbo98",
-			"夢蝶葬花"
+			"夢蝶葬花",
+			"神樂坂秀吉"
 		]
 	},
 	"collabpad-doctitle": "CollabPad：$1",
@@ -401,6 +402,7 @@
 	"visualeditor-settings-tool": "页面设置",
 	"visualeditor-special-characters-group-other": "经常使用",
 	"visualeditor-templatesused-tool": "使用的模板",
+	"visualeditor-title-error": "无效标题。",
 	"visualeditor-toload": "现在将加载编辑器。如果您在几秒钟后仍然看见这条消息，请[$1 重新加载]页面。",
 	"visualeditor-usernamespacepagelink": "Project:用户名字空间",
 	"visualeditor-version-label": "版本",
