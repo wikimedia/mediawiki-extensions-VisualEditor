@@ -63,8 +63,8 @@ ve.ui.MWSaveDialog.static.actions = [
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resume-editing' ),
-		flags: [ 'safe', 'back' ],
-		modes: [ 'save', 'review', 'preview', 'conflict' ]
+		flags: [ 'safe', 'close' ],
+		modes: [ 'save', 'conflict' ]
 	},
 	{
 		action: 'review',
@@ -79,6 +79,7 @@ ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'approve',
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review-good' ),
+		flags: [ 'safe', 'back' ],
 		modes: [ 'review', 'preview' ]
 	},
 	{
