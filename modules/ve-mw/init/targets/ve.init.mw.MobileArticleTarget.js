@@ -148,6 +148,18 @@ ve.init.mw.MobileArticleTarget.prototype.updateIosContextPadding = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.MobileArticleTarget.prototype.clearSurfaces = function () {
+	if ( ve.init.platform.constructor.static.isIos() && this.viewportZoomHandler ) {
+		this.viewportZoomHandler.detach();
+		this.viewportZoomHandler = null;
+	}
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.clearSurfaces.call( this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	var surfaceView, isActiveWithKeyboard, $header, $overlaySurface;
 	// Editor may not have loaded yet, in which case `this.surface` is undefined
@@ -317,6 +329,14 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	surface.getContext().connect( this, { resize: 'adjustContentPaddingDebounced' } );
 
 	this.maybeShowWelcomeDialog();
+
+	if ( ve.init.platform.constructor.static.isIos() ) {
+		if ( this.viewportZoomHandler ) {
+			this.viewportZoomHandler.detach();
+		}
+		this.viewportZoomHandler = new ve.init.mw.ViewportZoomHandler();
+		this.viewportZoomHandler.attach( this.getSurface() );
+	}
 };
 
 /**

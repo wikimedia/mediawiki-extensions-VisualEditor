@@ -456,6 +456,7 @@
 		"ext.visualEditor.mobileArticleTarget": {
 			"scripts": [
 				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js",
+				"modules/ve-mw/init/ve.init.mw.ViewportZoomHandler.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
 			],
