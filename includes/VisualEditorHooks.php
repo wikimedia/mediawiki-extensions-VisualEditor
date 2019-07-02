@@ -930,7 +930,6 @@ class VisualEditorHooks {
 			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
 			'enableVisualSectionEditing' => $veConfig->get( 'VisualEditorEnableVisualSectionEditing' ),
-			'enableNewMobileContext' => $veConfig->get( 'VisualEditorEnableNewMobileContext' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'allowExternalLinkPaste' => $veConfig->get( 'VisualEditorAllowExternalLinkPaste' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),

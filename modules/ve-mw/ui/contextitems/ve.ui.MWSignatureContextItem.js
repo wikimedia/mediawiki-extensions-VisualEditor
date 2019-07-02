@@ -22,7 +22,6 @@ ve.ui.MWSignatureContextItem = function VeUiMWSignatureContextItem() {
 	// Initialization
 	this.$element.addClass( 've-ui-mwSignatureContextItem' );
 	this.$body.remove();
-	this.$info.remove();
 	this.$actions.remove();
 };
 

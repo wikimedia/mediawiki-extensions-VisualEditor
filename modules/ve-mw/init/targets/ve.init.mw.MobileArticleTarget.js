@@ -21,8 +21,6 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	this.$overlay = overlay.$el;
 	this.$overlaySurface = overlay.$el.find( '.surface' );
 
-	ve.newMobileContext = mw.config.get( 'wgVisualEditorConfig' ).enableNewMobileContext;
-
 	config = config || {};
 	config.toolbarConfig = $.extend( {
 		actions: false
@@ -166,7 +164,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	surfaceView = this.surface && this.surface.getView();
 	isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
 
-	if ( ve.init.platform.constructor.static.isIos() && ve.newMobileContext ) {
+	if ( ve.init.platform.constructor.static.isIos() ) {
 		this.updateIosContextPadding();
 	}
 
@@ -354,8 +352,7 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	var surface = this.getSurface(),
 		surfaceView = surface.getView(),
 		toolbarHeight = this.getToolbar().$element[ 0 ].clientHeight,
-		contextHeight = ve.newMobileContext ?
-			surface.getContext().$element[ 0 ].clientHeight : 0;
+		contextHeight = surface.getContext().$element[ 0 ].clientHeight;
 
 	surface.setPadding( {
 		top: toolbarHeight,
@@ -406,23 +403,6 @@ ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function ( startPr
 	}
 
 	return OO.ui.deferMsg( 'visualeditor-savedialog-label-save-short' + suffix );
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.MobileArticleTarget.prototype.createTargetWidget = function ( config ) {
-	// Parent method
-	var targetWidget = ve.init.mw.MobileArticleTarget.super.prototype.createTargetWidget.call( this, config );
-
-	if ( !ve.newMobileContext ) {
-		targetWidget.once( 'setup', function () {
-			// Append the context to the toolbar
-			targetWidget.getToolbar().$bar.append( targetWidget.getSurface().getContext().$element );
-		} );
-	}
-
-	return targetWidget;
 };
 
 /**
@@ -599,10 +579,6 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	);
 
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
-	if ( !ve.newMobileContext ) {
-		// Append the context to the toolbar
-		this.toolbar.$bar.append( surface.getContext().$element );
-	}
 
 	// Don't wait for the first surface focus/blur event to hide one of the toolbars
 	this.onSurfaceBlur();

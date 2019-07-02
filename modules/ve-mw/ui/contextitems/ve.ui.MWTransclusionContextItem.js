@@ -78,15 +78,6 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWTransclusionContextItem.prototype.renderDescription = function () {
-	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
-	// No "Generated from" prefix in mobile context
-	this.$description.text( nodeClass.static.getDescription( this.model ) );
-};
-
-/**
- * @inheritdoc
- */
 ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 	var surfaceModel = this.context.getSurface().getModel(),
 		selection = surfaceModel.getSelection();
