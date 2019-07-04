@@ -76,14 +76,20 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
 	this.internalAnnotationInput.input.getResults().connect( this, { choose: 'onFormSubmit' } );
 	// Form submit only auto triggers on enter when there is one input
-	this.internalAnnotationInput.getTextInputWidget().connect( this, { change: 'onInternalLinkInputChange' } );
-	this.internalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onLinkInputEnter' } );
-	this.externalAnnotationInput.getTextInputWidget().connect( this, { enter: 'onLinkInputEnter' } );
+	this.internalAnnotationInput.getTextInputWidget().connect( this, {
+		change: 'onInternalLinkInputChange',
+		enter: 'onLinkInputEnter'
+	} );
+	this.externalAnnotationInput.getTextInputWidget().connect( this, {
+		change: 'onExternalLinkInputChange',
+		enter: 'onLinkInputEnter'
+	} );
 
 	this.internalAnnotationInput.input.results.connect( this, {
-		add: 'onInternalLinkChangeResultsChange'
+		add: 'onInternalLinkChangeResultsChange',
 		// Listening to remove causes a flicker, and is not required
 		// as 'add' is always trigger on a change too
+		choose: 'onInternalLinkSearchResultsChoose'
 	} );
 
 	// Parent method
@@ -137,6 +143,15 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function () {
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChangeResultsChange = function () {
 	this.updateSize();
+};
+
+/**
+ * Handle choose events from the result widget
+ *
+ * @param {OO.ui.OptionWidget} item Chosen item
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkSearchResultsChoose = function () {
+	ve.track( 'activity.' + this.constructor.static.name, { action: 'search-pages-choose' } );
 };
 
 /**
@@ -215,6 +230,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 	if ( this.internalAnnotationInput.getTextInputWidget().getValue() !== value ) {
 		return;
 	}
+	if ( this.isActive && !this.trackedInternalLinkInputChange && !this.switchingLinkTypes ) {
+		ve.track( 'activity.' + this.constructor.static.name, { action: 'search-pages-input' } );
+		this.trackedInternalLinkInputChange = true;
+	}
 	if (
 		!this.allowProtocolInInternal &&
 		/^(?:[a-z][a-z0-9$\-_@.&!*"'(),]*:)?\/\//i.test( value.trim() )
@@ -222,6 +241,18 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 		this.linkTypeIndex.setTabPanel( 'external' );
 		// Changing tabPanel focuses and selects the input, so collapse the cursor back to the end.
 		this.externalAnnotationInput.getTextInputWidget().moveCursorToEnd();
+	}
+};
+
+/**
+ * Handle change events on the external link widget's input
+ *
+ * @param {string} value Current value of input widget
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkInputChange = function () {
+	if ( this.isActive && !this.trackedExternalLinkInputChange && !this.switchingLinkTypes ) {
+		ve.track( 'activity.' + this.constructor.static.name, { action: 'external-link-input' } );
+		this.trackedExternalLinkInputChange = true;
 	}
 };
 
@@ -245,6 +276,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 			this.annotationInput.setAnnotation( this.initialAnnotation );
 			this.internalAnnotationInput.setReadOnly( isReadOnly );
 			this.externalAnnotationInput.setReadOnly( isReadOnly );
+
+			this.trackedInternalLinkInputChange = false;
+			this.trackedExternalLinkInputChange = false;
+			this.isActive = true;
 		}, this );
 };
 
@@ -269,6 +304,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 		.first( function () {
 			// Save the original fragment for later.
 			fragment = this.getFragment();
+
+			this.isActive = false;
 		}, this )
 		.next( function () {
 			var annotations, data,
@@ -316,6 +353,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 		isExternal = this.isExternal(),
 		inputHasProtocol = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( text );
 
+	this.switchingLinkTypes = true;
+
 	this.annotationInput = isExternal ? this.externalAnnotationInput : this.internalAnnotationInput;
 
 	this.updateSize();
@@ -338,6 +377,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	this.annotationInput.getTextInputWidget().setValidityFlag();
 
 	this.updateActions();
+
+	if ( this.isActive ) {
+		ve.track( 'activity.' + this.constructor.static.name, { action: 'panel-switch' } );
+	}
+
+	this.switchingLinkTypes = false;
 };
 
 /**
