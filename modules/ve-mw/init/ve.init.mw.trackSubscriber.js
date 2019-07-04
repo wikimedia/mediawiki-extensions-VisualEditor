@@ -213,7 +213,7 @@
 			return;
 		}
 
-		if ( ve.init.target.constructor.static.platformType === 'phone' ) {
+		if ( ve.init.target && ve.init.target.constructor.static.platformType === 'phone' ) {
 			// handled in MobileFrontend for session-identification reasons
 			return;
 		}
