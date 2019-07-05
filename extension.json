@@ -1288,6 +1288,8 @@
 				"visualeditor-linkcontext-label-label",
 				"visualeditor-linkcontext-remove",
 				"visualeditor-linkinspector-title",
+				"visualeditor-linkinspector-title-add",
+				"visualeditor-linkinspector-title-edit",
 				"visualeditor-listbutton-bullet-tooltip",
 				"visualeditor-listbutton-number-tooltip",
 				"visualeditor-mediasizewidget-label-defaulterror",
@@ -1808,7 +1810,6 @@
 			],
 			"messages": [
 				"visualeditor-linkinspector-button-link-external",
-				"visualeditor-linkinspector-button-link-internal",
 				"visualeditor-linkinspector-convert-link-isbn",
 				"visualeditor-linkinspector-convert-link-pmid",
 				"visualeditor-linkinspector-convert-link-rfc",

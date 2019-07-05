@@ -17,6 +17,8 @@
 ve.ui.MWLinkAnnotationInspector = function VeUiMWLinkAnnotationInspector( config ) {
 	// Parent constructor
 	ve.ui.MWLinkAnnotationInspector.super.call( this, ve.extendObject( { padded: false }, config ) );
+
+	this.$element.addClass( 've-ui-mwLinkAnnotationInspector' );
 };
 
 /* Inheritance */
@@ -52,12 +54,13 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.externalAnnotationInput = this.createExternalAnnotationInput();
 
 	this.linkTypeIndex = new OO.ui.IndexLayout( {
-		expanded: false
+		expanded: false,
+		framed: false
 	} );
 
 	this.linkTypeIndex.addTabPanels( [
 		new OO.ui.TabPanelLayout( 'internal', {
-			label: ve.msg( 'visualeditor-linkinspector-button-link-internal' ),
+			label: mw.config.get( 'wgSiteName' ),
 			expanded: false,
 			scrollable: false,
 			padded: true

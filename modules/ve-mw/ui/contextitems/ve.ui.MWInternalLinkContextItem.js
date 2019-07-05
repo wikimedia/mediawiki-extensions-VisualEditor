@@ -122,7 +122,10 @@ ve.ui.MWInternalLinkContextItem.prototype.renderBody = function () {
 		this.model,
 		this.context.getSurface().getModel().getDocument().getHtmlDocument(),
 		this.context
-	), this.$labelLayout );
+	) );
+	if ( !this.context.isMobile() ) {
+		this.$body.append( this.$labelLayout );
+	}
 	this.updateLabelPreview();
 };
 

@@ -17,8 +17,8 @@
 	border: 0;
 }
 
-.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query .oo-ui-textInputWidget {
-	margin: 0;
+.ve-ui-linkAnnotationWidget .oo-ui-textInputWidget {
+	margin: 0.5em 0;
 }
 
 .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-results {
@@ -29,4 +29,8 @@
 
 .ve-ui-linkAnnotationWidget .mw-widget-titleWidget-menu:not( :empty ) {
 	margin-top: 0.75em;
+}
+
+.ve-ui-mwLinkAnnotationInspector .oo-ui-tabSelectWidget-frameless {
+	margin: 0 0.75em;
 }
