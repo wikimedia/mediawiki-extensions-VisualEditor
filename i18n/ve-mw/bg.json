@@ -113,10 +113,13 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Да",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Изключване на галерия",
 	"visualeditor-dialog-meta-settings-redirect-label": "Пренасочване на страницата към",
+	"visualeditor-dialog-meta-settings-redirect-placeholder": "Целева страница за пренасочване",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Забраняване на това пренасочване да се актуализира, когато целевата страница е преместена.",
 	"visualeditor-dialog-meta-settings-section": "Настройки на страницата",
 	"visualeditor-dialog-meta-settings-toc-default": "Ако е необходимо",
 	"visualeditor-dialog-meta-settings-toc-disable": "Никога",
 	"visualeditor-dialog-meta-settings-toc-force": "Винаги",
+	"visualeditor-dialog-meta-settings-toc-label": "Показване на раздел Съдържание",
 	"visualeditor-dialog-meta-templatesused-noresults": "Не бяха открити шаблони.",
 	"visualeditor-dialog-meta-title": "Настройки",
 	"visualeditor-dialog-table-collapsed": "Свито по подразбиране",
@@ -244,6 +247,7 @@
 	"visualeditor-savedialog-label-resolve-conflict": "Разрешаване на конфликт",
 	"visualeditor-savedialog-label-resume-editing": "Продължете редактирането",
 	"visualeditor-savedialog-label-review": "Преглед на промените",
+	"visualeditor-savedialog-label-review-good": "Връщане към формата за съхранение",
 	"visualeditor-savedialog-label-save-short": "Съхраняване",
 	"visualeditor-savedialog-label-warning": "Внимание",
 	"visualeditor-savedialog-review-visual": "Визуален",
@@ -258,5 +262,6 @@
 	"visualeditor-settings-tool": "Настройки на страницата",
 	"visualeditor-special-characters-group-other": "Често използвани",
 	"visualeditor-templatesused-tool": "Използвани шаблони",
+	"visualeditor-toload": "Режимът на редактиране ще зареди всеки момент. Ако все още виждате това съобщение след няколко секунди, моля [$1 презаредете страницата].",
 	"visualeditor-version-label": "Версия"
 }
