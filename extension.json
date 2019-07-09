@@ -251,6 +251,7 @@
 			]
 		},
 		"ext.visualEditor.supportCheck": {
+			"group": "visualEditorA",
 			"scripts": "lib/ve/src/init/ve.init.SupportCheck.js",
 			"targets": [
 				"desktop",
@@ -258,6 +259,7 @@
 			]
 		},
 		"ext.visualEditor.sanitize": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ve.sanitize.js"
 			],
@@ -271,6 +273,7 @@
 			]
 		},
 		"ext.visualEditor.progressBarWidget": {
+			"group": "visualEditorA",
 			"scripts": "modules/ve-mw/init/ve.init.mw.ProgressBarWidget.js",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.ProgressBarWidget.css",
 			"skinStyles": {
@@ -290,6 +293,7 @@
 			]
 		},
 		"ext.visualEditor.tempWikitextEditorWidget": {
+			"group": "visualEditorA",
 			"scripts": "modules/ve-mw/init/ve.init.mw.TempWikitextEditorWidget.js",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.TempWikitextEditorWidget.less",
 			"dependencies": [
@@ -302,6 +306,7 @@
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.init": {
+			"group": "visualEditorA",
 			"class": "VisualEditorDesktopArticleTargetInitModule",
 			"packageFiles": [
 				"modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js",
@@ -367,9 +372,11 @@
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
+			"group": "visualEditorA",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.css"
 		},
 		"ext.visualEditor.targetLoader": {
+			"group": "visualEditorA",
 			"scripts": "modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js",
 			"dependencies": [
 				"ext.visualEditor.track",
@@ -394,6 +401,7 @@
 			]
 		},
 		"ext.visualEditor.desktopTarget": {
+			"group": "visualEditorA",
 			"skinStyles": {
 				"vector": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-vector.css"
@@ -404,6 +412,7 @@
 			}
 		},
 		"ext.visualEditor.desktopArticleTarget": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.js"
 			],
@@ -454,6 +463,7 @@
 			]
 		},
 		"ext.visualEditor.mobileArticleTarget": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ViewportZoomHandler.js",
@@ -481,6 +491,7 @@
 			]
 		},
 		"ext.visualEditor.collabTarget": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.js",
 				"modules/ve-mw-collab/ve.ui.MWExportWikitextDialog.js"
@@ -503,6 +514,7 @@
 			]
 		},
 		"ext.visualEditor.collabTarget.desktop": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw-collab/ve.init.mw.DesktopCollabTarget.js"
 			],
@@ -539,6 +551,7 @@
 			]
 		},
 		"ext.visualEditor.collabTarget.mobile": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw-collab/ve.init.mw.MobileCollabTarget.js"
 			],
@@ -555,6 +568,7 @@
 			]
 		},
 		"ext.visualEditor.collabTarget.init": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.init.js"
 			],
@@ -573,6 +587,7 @@
 			]
 		},
 		"ext.visualEditor.collabTarget.init.styles": {
+			"group": "visualEditorA",
 			"styles": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.css"
 			],
@@ -582,6 +597,7 @@
 			]
 		},
 		"ext.visualEditor.ve": {
+			"group": "visualEditorA",
 			"scripts": "lib/ve/src/ve.js",
 			"targets": [
 				"desktop",
@@ -589,6 +605,7 @@
 			]
 		},
 		"ext.visualEditor.track": {
+			"group": "visualEditorA",
 			"scripts": "lib/ve/src/ve.track.js",
 			"dependencies": "ext.visualEditor.ve",
 			"targets": [
@@ -597,6 +614,7 @@
 			]
 		},
 		"ext.visualEditor.base": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ve.utils.js",
 				"lib/ve/src/ve.utils.client.js",
@@ -623,6 +641,7 @@
 			]
 		},
 		"ext.visualEditor.mediawiki": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/ve.init.mw.js",
 				"modules/ve-mw/init/ve.init.mw.ApiResponseCache.js",
@@ -665,6 +684,7 @@
 			]
 		},
 		"ext.visualEditor.mwsave": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/ui/dialogs/ve.ui.MWSaveDialog.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWSaveDialogAction.js",
@@ -729,6 +749,7 @@
 			]
 		},
 		"ext.visualEditor.articleTarget": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/ve.init.mw.SaveErrorHandler.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTarget.js",
@@ -777,9 +798,11 @@
 			]
 		},
 		"ext.visualEditor.data": {
+			"group": "visualEditorA",
 			"class": "VisualEditorDataModule"
 		},
 		"ext.visualEditor.core": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ve.Range.js",
 				"lib/ve/src/ve.SelectionState.js",
@@ -1342,6 +1365,7 @@
 			]
 		},
 		"ext.visualEditor.commentAnnotation": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/dm/annotations/ve.dm.CommentAnnotation.js",
 				"lib/ve/src/ce/annotations/ve.ce.CommentAnnotation.js",
@@ -1361,6 +1385,7 @@
 			]
 		},
 		"ext.visualEditor.rebase": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/dm/ve.dm.RebaseClient.js",
 				"lib/ve/src/dm/ve.dm.SurfaceSynchronizer.js",
@@ -1391,6 +1416,7 @@
 			]
 		},
 		"ext.visualEditor.core.desktop": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ui/contexts/ve.ui.DesktopContext.js",
 				"lib/ve/src/ui/windowmanagers/ve.ui.DesktopInspectorWindowManager.js"
@@ -1406,6 +1432,7 @@
 			]
 		},
 		"ext.visualEditor.core.mobile": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ui/contexts/ve.ui.MobileContext.js",
 				"lib/ve/src/ui/windowmanagers/ve.ui.MobileWindowManager.js"
@@ -1424,6 +1451,7 @@
 			]
 		},
 		"ext.visualEditor.welcome": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/ve.init.MWWelcomeDialog.js"
 			],
@@ -1448,6 +1476,7 @@
 			]
 		},
 		"ext.visualEditor.switching": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/ve.init.MWVESwitchConfirmDialog.js",
 				"modules/ve-mw/init/ve.init.MWVESwitchPopupWidget.js",
@@ -1498,6 +1527,7 @@
 			]
 		},
 		"ext.visualEditor.mwcore": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/ve.MWutils.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js",
@@ -1612,6 +1642,7 @@
 			]
 		},
 		"ext.visualEditor.mwextensions": {
+			"group": "visualEditorA",
 			"dependencies": [
 				"ext.visualEditor.mwlink",
 				"ext.visualEditor.mwformatting",
@@ -1630,6 +1661,7 @@
 			]
 		},
 		"ext.visualEditor.mwextensions.desktop": {
+			"group": "visualEditorA",
 			"dependencies": [
 				"ext.visualEditor.mwextensions",
 				"ext.visualEditor.mwmeta",
@@ -1637,6 +1669,7 @@
 			]
 		},
 		"ext.visualEditor.mwformatting": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWHeadingNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWPreformattedNode.js",
@@ -1672,6 +1705,7 @@
 			]
 		},
 		"ext.visualEditor.mwimage.core": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWImageNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWInlineImageNode.js",
@@ -1696,6 +1730,7 @@
 			]
 		},
 		"ext.visualEditor.mwimage": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/models/ve.dm.MWImageModel.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWMediaInfoFieldWidget.js",
@@ -1775,6 +1810,7 @@
 			]
 		},
 		"ext.visualEditor.mwlink": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWMagicLinkNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWNumberedExternalLinkNode.js",
@@ -1827,6 +1863,7 @@
 			]
 		},
 		"ext.visualEditor.mwmeta": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/metaitems/ve.dm.MWCategoryMetaItem.js",
 				"modules/ve-mw/dm/metaitems/ve.dm.MWDefaultSortMetaItem.js",
@@ -1945,6 +1982,7 @@
 			]
 		},
 		"ext.visualEditor.mwtransclusion": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWTransclusionBlockNode.js",
@@ -2069,6 +2107,7 @@
 			]
 		},
 		"ext.visualEditor.checkList": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/dm/nodes/ve.dm.CheckListNode.js",
 				"lib/ve/src/dm/nodes/ve.dm.CheckListItemNode.js",
@@ -2091,6 +2130,7 @@
 			]
 		},
 		"ext.visualEditor.diffing": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ve.DiffTreeNode.js",
 				"lib/ve/src/ve.DiffMatchPatch.js",
@@ -2126,11 +2166,13 @@
 			]
 		},
 		"ext.visualEditor.diffPage.init.styles": {
+			"group": "visualEditorA",
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.DiffPage.less"
 			]
 		},
 		"ext.visualEditor.diffLoader": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/ve.init.mw.DiffLoader.js"
 			],
@@ -2143,6 +2185,7 @@
 			]
 		},
 		"ext.visualEditor.diffPage.init": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/init/ve.init.mw.DiffPage.init.js"
 			],
@@ -2159,6 +2202,7 @@
 			]
 		},
 		"ext.visualEditor.language": {
+			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/dm/annotations/ve.dm.LanguageAnnotation.js",
 				"lib/ve/src/ce/annotations/ve.ce.LanguageAnnotation.js",
@@ -2199,6 +2243,7 @@
 			]
 		},
 		"ext.visualEditor.mwlanguage": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWLanguageVariantBlockNode.js",
@@ -2264,6 +2309,7 @@
 			]
 		},
 		"ext.visualEditor.mwalienextension": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWAlienExtensionNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWAlienBlockExtensionNode.js",
@@ -2287,6 +2333,7 @@
 			]
 		},
 		"ext.visualEditor.mwwikitext": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/ve.dm.MWWikitextSurface.js",
 				"modules/ve-mw/dm/ve.dm.MWWikitextSurfaceFragment.js",
@@ -2322,6 +2369,7 @@
 			]
 		},
 		"ext.visualEditor.mwgallery": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryCaptionNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWGalleryImageCaptionNode.js",
@@ -2383,6 +2431,7 @@
 			]
 		},
 		"ext.visualEditor.mwsignature": {
+			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/dm/nodes/ve.dm.MWSignatureNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWSignatureNode.js",
@@ -2402,12 +2451,14 @@
 			]
 		},
 		"ext.visualEditor.experimental": {
+			"group": "visualEditorA",
 			"targets": [
 				"desktop",
 				"mobile"
 			]
 		},
 		"ext.visualEditor.icons": {
+			"group": "visualEditorA",
 			"dependencies": [
 				"oojs-ui.styles.icons-alerts",
 				"oojs-ui.styles.icons-content",
@@ -2430,6 +2481,7 @@
 			]
 		},
 		"ext.visualEditor.moduleIcons": {
+			"group": "visualEditorA",
 			"class": "ResourceLoaderOOUIImageModule",
 			"name": "ve.ui.Icons",
 			"rootPath": "modules/ve-mw/ui/styles",
@@ -2441,6 +2493,7 @@
 			]
 		},
 		"ext.visualEditor.moduleIndicators": {
+			"group": "visualEditorA",
 			"class": "ResourceLoaderOOUIImageModule",
 			"name": "ve.ui.Indicators",
 			"rootPath": "modules/ve-mw/ui/styles",
