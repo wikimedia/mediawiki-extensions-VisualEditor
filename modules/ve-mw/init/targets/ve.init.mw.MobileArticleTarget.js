@@ -340,6 +340,14 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
+	// Never show the dialog (T227670), but set up this promise in case something depends on it
+	this.welcomeDialogPromise = $.Deferred().reject();
+};
+
+/**
  * Match the content padding to the toolbar height
  */
 ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
