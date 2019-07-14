@@ -962,6 +962,7 @@
 				"lib/ve/src/ce/nodes/ve.ce.TableRowNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.TableSectionNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.TextNode.js",
+				"lib/ve/src/ce/nodes/ve.ce.UnrenderedNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.ImageNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.BlockImageNode.js",
 				"lib/ve/src/ce/nodes/ve.ce.BlockImageCaptionNode.js",
