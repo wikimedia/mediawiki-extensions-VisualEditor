@@ -280,6 +280,7 @@
 	"visualeditor-mweditmodeve-warning": "Warning message shown before changing edit mode to visual editing. Depending on site configuration, it may allow the user to keep the changes using the message {{msg-mw|visualeditor-mweditmodesource-warning-switch}}, or only start source editing from scratch using {{msg-mw|visualeditor-mweditmodesource-warning-switch-discard}}.",
 	"visualeditor-mweditmodewt-popup-body": "Body text of popup shown after switching to visual mode from source mode",
 	"visualeditor-mweditmodewt-popup-title": "Title of popup shown after switching to visual mode from source mode",
+	"visualeditor-mwgallerycontext-description": "Description of the gallery in the context",
 	"visualeditor-mwgallerydialog-caption-field-label": "Label for the caption field of the gallery dialog",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "Placeholder for the caption input of the gallery dialog",
 	"visualeditor-mwgallerydialog-card-images": "Title for the images card of the gallery dialog\n{{Identical|Image}}",
