@@ -51,6 +51,11 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.internalAnnotationInput = this.createInternalAnnotationInput();
 	this.externalAnnotationInput = this.createExternalAnnotationInput();
 
+	this.externalAnnotationField = new OO.ui.FieldLayout(
+		this.externalAnnotationInput,
+		{ align: 'top' }
+	);
+
 	this.linkTypeIndex = new OO.ui.IndexLayout( {
 		expanded: false
 	} );
@@ -99,7 +104,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	// HACK: IndexLayout is absolutely positioned, so place actions inside it
 	this.linkTypeIndex.$content.append( this.$otherActions );
 	this.linkTypeIndex.getTabPanel( 'internal' ).$element.append( this.internalAnnotationInput.$element );
-	this.linkTypeIndex.getTabPanel( 'external' ).$element.append( this.externalAnnotationInput.$element );
+	this.linkTypeIndex.getTabPanel( 'external' ).$element.append( this.externalAnnotationField.$element );
 	this.form.$element.empty().append( this.linkTypeIndex.$element );
 };
 
@@ -250,6 +255,17 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
  * @param {string} value Current value of input widget
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkInputChange = function () {
+	var inspector = this;
+
+	this.externalAnnotationInput.getTextInputWidget().getValidity()
+		.then(
+			function () {
+				inspector.externalAnnotationField.setErrors( [] );
+			}, function () {
+				inspector.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-invalid-external' ) ] );
+			}
+		);
+
 	if ( this.isActive && !this.trackedExternalLinkInputChange && !this.switchingLinkTypes ) {
 		ve.track( 'activity.' + this.constructor.static.name, { action: 'external-link-input' } );
 		this.trackedExternalLinkInputChange = true;
