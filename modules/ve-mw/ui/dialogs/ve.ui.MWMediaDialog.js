@@ -1109,7 +1109,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 		.next( function () {
 			var
 				dialog = this,
-				pageTitle = mw.config.get( 'wgTitle' ),
+				pageTitle = ve.init.target.getPageName( this.fragment.getDocument() ),
 				namespace = mw.config.get( 'wgNamespaceNumber' ),
 				namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages,
 				isReadOnly = this.isReadOnly();

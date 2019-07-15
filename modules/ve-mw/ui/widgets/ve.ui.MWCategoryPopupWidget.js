@@ -27,7 +27,7 @@ ve.ui.MWCategoryPopupWidget = function VeUiMWCategoryPopupWidget( config ) {
 	this.removed = false;
 	this.$title = $( '<label>' );
 	this.$menu = $( '<div>' );
-	this.fallbackSortKey = mw.config.get( 'wgTitle' );
+	this.fallbackSortKey = ve.init.target.getPageName();
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'trash',

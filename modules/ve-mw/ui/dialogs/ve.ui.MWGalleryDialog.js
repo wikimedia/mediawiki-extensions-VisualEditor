@@ -860,7 +860,7 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 		if ( !this.searchWidget.getQuery().getValue() ) {
 			// Wait until the search panel is visible before setting a default query
 			// as this triggers a request and render.
-			pageTitle = mw.config.get( 'wgTitle' );
+			pageTitle = ve.init.target.getPageName( this.fragment.getDocument() );
 			namespace = mw.config.get( 'wgNamespaceNumber' );
 			namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
 

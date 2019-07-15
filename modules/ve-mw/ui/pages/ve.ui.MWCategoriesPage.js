@@ -26,7 +26,7 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config ) {
 	// Properties
 	this.metaList = null;
 	this.defaultSortKeyTouched = false;
-	this.fallbackDefaultSortKey = mw.config.get( 'wgTitle' );
+	this.fallbackDefaultSortKey = ve.init.target.getPageName();
 	this.categoriesFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-meta-categories-data-label' ),
 		icon: 'tag'
