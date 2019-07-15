@@ -51,11 +51,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.internalAnnotationInput = this.createInternalAnnotationInput();
 	this.externalAnnotationInput = this.createExternalAnnotationInput();
 
-	this.externalAnnotationField = new OO.ui.FieldLayout(
-		this.externalAnnotationInput,
-		{ align: 'top' }
-	);
-
 	this.linkTypeIndex = new OO.ui.IndexLayout( {
 		expanded: false
 	} );
@@ -74,6 +69,20 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 			padded: true
 		} )
 	] );
+
+	// Parent method
+	// Parent requires createAnnotationInput to be callable, but tries to move
+	// inputs in the DOM, so call this before we restructure the DOM.
+	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
+
+	this.internalAnnotationField = new OO.ui.FieldLayout(
+		this.internalAnnotationInput,
+		{ align: 'top' }
+	);
+	this.externalAnnotationField = new OO.ui.FieldLayout(
+		this.externalAnnotationInput,
+		{ align: 'top' }
+	);
 
 	// Events
 	this.linkTypeIndex.connect( this, { set: 'onLinkTypeIndexSet' } );
@@ -97,13 +106,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 		choose: 'onInternalLinkSearchResultsChoose'
 	} );
 
-	// Parent method
-	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
-
 	// Initialization
 	// HACK: IndexLayout is absolutely positioned, so place actions inside it
 	this.linkTypeIndex.$content.append( this.$otherActions );
-	this.linkTypeIndex.getTabPanel( 'internal' ).$element.append( this.internalAnnotationInput.$element );
+	this.linkTypeIndex.getTabPanel( 'internal' ).$element.append( this.internalAnnotationField.$element );
 	this.linkTypeIndex.getTabPanel( 'external' ).$element.append( this.externalAnnotationField.$element );
 	this.form.$element.empty().append( this.linkTypeIndex.$element );
 };
@@ -222,6 +228,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
  * @param {string} value Current value of input widget
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function ( value ) {
+	var inspector = this;
+
 	// If this looks like an external link, switch to the correct tabPanel.
 	// Note: We don't care here if it's a *valid* link, so we just
 	// check whether it looks like a URI -- i.e. whether it starts with
@@ -247,6 +255,16 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 		// Changing tabPanel focuses and selects the input, so collapse the cursor back to the end.
 		this.externalAnnotationInput.getTextInputWidget().moveCursorToEnd();
 	}
+
+	this.internalAnnotationInput.getTextInputWidget().getValidity()
+		.then(
+			function () {
+				inspector.internalAnnotationField.setErrors( [] );
+			}, function () {
+				inspector.internalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-illegal-title' ) ] );
+			}
+		);
+
 };
 
 /**
