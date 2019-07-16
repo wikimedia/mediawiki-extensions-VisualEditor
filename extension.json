@@ -1572,6 +1572,7 @@
 				"ext.visualEditor.diffing",
 				"mediawiki.Title",
 				"mediawiki.diff.styles",
+				"mediawiki.interface.helpers.styles",
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
