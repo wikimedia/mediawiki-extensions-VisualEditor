@@ -29,6 +29,11 @@
 	border: 1px solid #c8ccd1;
 	border-top: 0;
 	min-height: 3em;
+	display: none;
+}
+
+.ve-ui-mwSaveDialog-withOptions .ve-ui-mwSaveDialog-options {
+	display: block;
 }
 
 .ve-ui-mwSaveDialog-checkboxes {

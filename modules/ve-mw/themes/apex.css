@@ -6,7 +6,7 @@
 
 /* ve.ui.MWSaveDialog summary */
 
-.ve-ui-mwSaveDialog-summary .oo-ui-inputWidget-input {
+.ve-ui-mwSaveDialog-withOptions .ve-ui-mwSaveDialog-summary .oo-ui-inputWidget-input {
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 }
