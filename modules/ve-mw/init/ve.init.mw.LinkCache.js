@@ -36,15 +36,15 @@ OO.inheritClass( ve.init.mw.LinkCache, ve.init.mw.ApiResponseCache );
  */
 ve.init.mw.LinkCache.static.getIconForLink = function ( linkData ) {
 	if ( linkData.missing ) {
-		return 'page-not-found';
+		return 'articleNotFound';
 	}
 	if ( linkData.redirect ) {
-		return 'page-redirect';
+		return 'articleRedirect';
 	}
 	if ( linkData.disambiguation ) {
-		return 'page-disambiguation';
+		return 'articleDisambiguation';
 	}
-	return 'page-existing';
+	return 'article';
 };
 
 /**
