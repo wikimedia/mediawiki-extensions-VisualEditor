@@ -544,6 +544,7 @@ ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( checkboxFields ) {
 		checkboxFields.forEach( function ( field ) {
 			dialog.$saveCheckboxes.append( field.$element );
 		} );
+		dialog.updateOptionsBar();
 	} );
 };
 
@@ -638,6 +639,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		} else {
 			dialog.editSummaryCountLabel.setLabel( mw.language.convertNumber( remaining ) );
 		}
+
+		dialog.updateOptionsBar();
 	} );
 
 	this.$saveCheckboxes = $( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' );
@@ -658,6 +661,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$saveMessages,
 		this.$saveFoot
 	);
+
+	this.updateOptionsBar();
 
 	// Review panel
 	this.reviewPanel = new OO.ui.PanelLayout( {
@@ -723,6 +728,15 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.$body.append( this.panels.$element );
 
 	this.setupDeferred.resolve();
+};
+
+ve.ui.MWSaveDialog.prototype.updateOptionsBar = function () {
+	var showOptions = !!this.editSummaryCountLabel.getLabel() || !this.$saveCheckboxes.is( ':empty' );
+	if ( showOptions !== this.showOptions ) {
+		this.savePanel.$element.toggleClass( 've-ui-mwSaveDialog-withOptions', showOptions );
+		this.showOptions = showOptions;
+		this.updateSize();
+	}
 };
 
 ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
