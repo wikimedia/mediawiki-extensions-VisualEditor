@@ -22,7 +22,7 @@ ve.init.mw.MobileCollabTarget = function VeInitMwMobileCollabTarget( title, reba
 	ve.init.mw.MobileCollabTarget.super.call( this, title, rebaserUrl, config );
 
 	// Initialization
-	this.$element.addClass( 've-init-mw-mobileArticleTarget ve-init-mw-mobileCollabTarget' );
+	this.$element.addClass( 've-init-mw-mobileArticleTarget ve-init-mw-mobileCollabTarget ve-init-mobileTarget' );
 
 	$( document.body ).removeClass( 'ns-special' );
 };

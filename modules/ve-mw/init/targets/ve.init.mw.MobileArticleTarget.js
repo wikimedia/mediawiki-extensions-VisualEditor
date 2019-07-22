@@ -33,7 +33,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	this.adjustContentPaddingDebounced = OO.ui.debounce( this.adjustContentPadding.bind( this ) );
 
 	// Initialization
-	this.$element.addClass( 've-init-mw-mobileArticleTarget' );
+	this.$element.addClass( 've-init-mw-mobileArticleTarget ve-init-mobileTarget' );
 };
 
 /* Inheritance */
