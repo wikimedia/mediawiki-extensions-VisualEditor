@@ -1465,6 +1465,7 @@
 				]
 			},
 			"dependencies": [
+				"mediawiki.api",
 				"oojs",
 				"oojs-ui",
 				"oojs-ui.styles.icons-editing-core",
