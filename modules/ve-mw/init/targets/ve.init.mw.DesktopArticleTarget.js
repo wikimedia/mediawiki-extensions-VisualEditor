@@ -345,7 +345,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
 			}
 		} else {
-			ve.init.target.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
+			this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
 			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 		}
 		this.suppressNormalStartupDialogs = true;
@@ -461,7 +461,7 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 		}
 		// Transfer and initial source range to the surface (e.g. from tempWikitextEditor)
 		if ( this.initialSourceRange && this.getSurface().getMode() === 'source' ) {
-			surfaceModel = ve.init.target.getSurface().getModel();
+			surfaceModel = this.getSurface().getModel();
 			range = surfaceModel.getRangeFromSourceOffsets( this.initialSourceRange.from, this.initialSourceRange.to );
 			surfaceModel.setLinearSelection( range );
 		}
@@ -720,7 +720,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		OO.ui.confirm( confirmPromptMessage ).done( function ( confirmed ) {
 			if ( confirmed ) {
 				target.load();
-			} else if ( $( '#wpTextbox1' ).length && !ve.init.target.isModeAvailable( 'source' ) ) {
+			} else if ( $( '#wpTextbox1' ).length && !target.isModeAvailable( 'source' ) ) {
 				// If we're switching from the wikitext editor, just deactivate
 				// don't try to switch back to it fully, that'd discard changes.
 				target.tryTeardown( true );
@@ -1344,7 +1344,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	this.currentUri = new mw.Uri( location.href );
 	veaction = this.currentUri.query.veaction;
 
-	if ( ve.init.target.isModeAvailable( 'source' ) && this.active ) {
+	if ( this.isModeAvailable( 'source' ) && this.active ) {
 		if ( veaction === 'editsource' && this.getDefaultMode() === 'visual' ) {
 			this.actFromPopState = true;
 			this.switchToWikitextEditor();
@@ -1526,7 +1526,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToVisualEditor = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.switchToVisualEditor.apply( this, arguments );
 
-	if ( ve.init.target.isModeAvailable( 'visual' ) ) {
+	if ( this.isModeAvailable( 'visual' ) ) {
 		ve.track( 'activity.editor-switch', { action: 'visual-desktop' } );
 	}
 };
@@ -1538,7 +1538,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextEditor = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.switchToWikitextEditor.apply( this, arguments );
 
-	if ( ve.init.target.isModeAvailable( 'source' ) ) {
+	if ( this.isModeAvailable( 'source' ) ) {
 		ve.track( 'activity.editor-switch', { action: 'source-nwe-desktop' } );
 	}
 };

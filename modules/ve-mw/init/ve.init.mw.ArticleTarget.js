@@ -1076,7 +1076,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				action: 'visualeditor',
 				paction: 'parsedoc',
 				page: target.getPageName(),
-				wikitext: ve.init.target.getSurface().getDom(),
+				wikitext: target.getSurface().getDom(),
 				pst: true
 			} ).then( function ( response ) {
 				// Use anonymous function to avoid passing through API promise argument
@@ -2266,7 +2266,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		}
 
 		if ( prefSaysShow ) {
-			ve.init.target.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
+			this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
 			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 
 			// No need to set a cookie every time for logged-in users that have already
@@ -2297,7 +2297,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 		this.section = null;
 	}
 
-	if ( ve.init.target.isModeAvailable( 'source' ) ) {
+	if ( this.isModeAvailable( 'source' ) ) {
 		if ( !modified ) {
 			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.getPageName(), {
 				sessionStore: true,
