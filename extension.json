@@ -1131,6 +1131,7 @@
 				"lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.css",
 				"lib/ve/src/ui/styles/inspectors/ve.ui.FragmentInspector.css",
 				"lib/ve/src/ui/styles/widgets/ve.ui.TargetWidget.css",
+				"lib/ve/src/ui/styles/ve.ui.Context.css",
 				"lib/ve/src/ui/styles/ve.ui.ContextItem.css",
 				"lib/ve/src/ui/styles/contextitems/ve.ui.LinearContextItem.css",
 				"lib/ve/src/ui/styles/contextitems/ve.ui.TableLineContextItem.css",

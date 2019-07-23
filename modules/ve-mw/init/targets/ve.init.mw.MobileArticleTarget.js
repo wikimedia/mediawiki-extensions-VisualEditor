@@ -297,8 +297,7 @@ ve.init.mw.MobileArticleTarget.prototype.setSurface = function ( surface ) {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
-	var surfaceModel,
-		surface = this.getSurface();
+	var surfaceModel;
 
 	if ( this.teardownPromise ) {
 		// Loading was cancelled, the overlay is already closed at this point. Do nothing.
@@ -323,8 +322,6 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	this.events.trackActivationComplete();
 
 	this.overlay.hideSpinner();
-
-	surface.getContext().connect( this, { resize: 'adjustContentPaddingDebounced' } );
 
 	this.maybeShowWelcomeDialog();
 
@@ -351,12 +348,10 @@ ve.init.mw.MobileArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	var surface = this.getSurface(),
 		surfaceView = surface.getView(),
-		toolbarHeight = this.getToolbar().$element[ 0 ].clientHeight,
-		contextHeight = surface.getContext().$element[ 0 ].clientHeight;
+		toolbarHeight = this.getToolbar().$element[ 0 ].clientHeight;
 
 	surface.setPadding( {
-		top: toolbarHeight,
-		bottom: contextHeight
+		top: toolbarHeight
 	} );
 	surfaceView.$attachedRootNode.css( 'padding-top', toolbarHeight );
 	surface.$placeholder.css( 'padding-top', toolbarHeight );
@@ -370,10 +365,6 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 	this.getToolbar().$group.addClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
 	this.pageToolbar.$element.removeClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
-
-	if ( ve.init.platform.constructor.static.isIos() ) {
-		this.getSurface().$element.css( 'padding-bottom', '' );
-	}
 };
 
 /**
@@ -382,10 +373,6 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
 	this.getToolbar().$group.removeClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
 	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
-
-	if ( ve.init.platform.constructor.static.isIos() ) {
-		this.getSurface().$element.css( 'padding-bottom', this.$element.height() - this.getToolbar().$element.height() );
-	}
 };
 
 /**
