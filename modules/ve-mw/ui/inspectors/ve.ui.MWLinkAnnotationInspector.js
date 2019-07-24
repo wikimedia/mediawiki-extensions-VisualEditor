@@ -260,8 +260,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 		.then(
 			function () {
 				inspector.internalAnnotationField.setErrors( [] );
+				inspector.updateSize();
 			}, function () {
 				inspector.internalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-illegal-title' ) ] );
+				inspector.updateSize();
 			}
 		);
 
@@ -279,8 +281,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkInputChange = function (
 		.then(
 			function () {
 				inspector.externalAnnotationField.setErrors( [] );
+				inspector.updateSize();
 			}, function () {
 				inspector.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-invalid-external' ) ] );
+				inspector.updateSize();
 			}
 		);
 
