@@ -169,8 +169,10 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 		encodedTitle = origTitle;
 	} else {
 		// Don't escape slashes in the title; they represent subpages.
-		encodedTitle = title.split( /(\/|#)/ ).map( function ( part ) {
-			if ( part === '/' || part === '#' ) {
+		// Don't escape colons to work around a Parsoid bug with interwiki links (T95850)
+		// TODO: Maybe this should be using mw.util.wikiUrlencode(), which also doesn't escape them?
+		encodedTitle = title.split( /(\/|#|:)/ ).map( function ( part ) {
+			if ( part === '/' || part === '#' || part === ':' ) {
 				return part;
 			} else {
 				return encodeURIComponent( part );
