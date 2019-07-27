@@ -5,16 +5,17 @@
 			"Aurora",
 			"Amire80",
 			"아라",
-			"Kurniasan"
+			"Kurniasan",
+			"SNN95"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Suntingan visual]]",
 	"tag-visualeditor-description": "Disunting dengan menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Semak]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Suntingan visual: Semak]]",
 	"tag-visualeditor-needcheck-description": "Suntingan dilakukan dengan menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] di mana sistem telah mengesan wikiteks yang mungkin mengalami perubahan yang tidak diingini.",
 	"tag-visualeditor-wikitext": "Suntingan sumber 2017",
 	"tag-visualeditor-wikitext-description": "Disunting dengan editor wikiteks 2017",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Ditukar]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Suntingan visual: Ditukar]]",
 	"tag-visualeditor-switched-description": "Pengguna mula-mula menyunting dengan VisualEditor, kemudian beralih kepada editor wikiteks.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Maklum balas",
 	"visualeditor-feedback-tool": "Berikan maklum balas mengenai perisian ini",

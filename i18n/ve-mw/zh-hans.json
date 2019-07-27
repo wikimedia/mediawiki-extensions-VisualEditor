@@ -236,7 +236,6 @@
 	"visualeditor-generating-wikitext-progress": "正在生成wiki文本",
 	"visualeditor-languages-tool": "语言",
 	"visualeditor-linkinspector-button-link-external": "外部链接",
-	"visualeditor-linkinspector-button-link-internal": "搜索页面",
 	"visualeditor-linkinspector-convert-link-isbn": "转换为ISBN链接",
 	"visualeditor-linkinspector-convert-link-pmid": "转换为PMID链接",
 	"visualeditor-linkinspector-convert-link-rfc": "转换为RFC链接",

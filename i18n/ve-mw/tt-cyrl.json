@@ -3,7 +3,8 @@
 		"authors": [
 			"Ajdar",
 			"Derslek",
-			"Ильнар"
+			"Ильнар",
+			"Ерней"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -46,8 +47,8 @@
 	"visualeditor-dialog-media-info-readmore": "Күбрәк уку",
 	"visualeditor-dialog-media-info-uploaded": "Йөкләнде: $1",
 	"visualeditor-dialog-media-noresults": "Бернидә табылмады.",
-	"visualeditor-dialog-media-page-advanced": "Өстәмә көйләнмәләр",
-	"visualeditor-dialog-media-page-general": "Төп көйләнмәләр",
+	"visualeditor-dialog-media-page-advanced": "Өстәмә",
+	"visualeditor-dialog-media-page-general": "Төп",
 	"visualeditor-dialog-media-position-center": "Урта",
 	"visualeditor-dialog-media-position-left": "Сул",
 	"visualeditor-dialog-media-position-none": "Юк",
@@ -145,8 +146,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Башлык 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Башлык 4",
 	"visualeditor-languages-tool": "Телләр",
-	"visualeditor-linkinspector-button-link-external": "Тышкы сылтама",
-	"visualeditor-linkinspector-button-link-internal": "Битне эзләү",
+	"visualeditor-linkinspector-button-link-external": "Тышкы web-сәхифә",
 	"visualeditor-linkinspector-educationpopup-text": "Башка мәкаләләргә һәм әһәмиятле сүзләр өчен wiki-сылтамалар куегыз. Бу укучылар өчен контекстның мәгънәнесен тизрәк аңларга ярдәм итәчәк.",
 	"visualeditor-linkinspector-educationpopup-title": "Сылтамалар",
 	"visualeditor-linknodeinspector-add-label": "Имза кую",
