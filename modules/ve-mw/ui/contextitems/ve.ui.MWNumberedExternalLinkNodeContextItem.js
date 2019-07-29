@@ -22,7 +22,9 @@ ve.ui.MWNumberedExternalLinkNodeContextItem = function VeUiMWNumberedExternalLin
 	// Initialization
 	this.$element.addClass( 've-ui-mwNumberedExternalLinkNodeContextItem' );
 
-	this.labelButton.setLabel( OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' ) );
+	if ( this.labelButton ) {
+		this.labelButton.setLabel( OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' ) );
+	}
 };
 
 /* Inheritance */

@@ -5,29 +5,30 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget {
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget {
 	position: relative;
 	min-height: 2.4em;
 }
 
-.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query {
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-query {
 	position: static;
 	padding: 0;
 	height: auto;
 	border: 0;
+	box-shadow: none;
 }
 
-.ve-ui-linkAnnotationWidget .oo-ui-textInputWidget {
-	margin: 0.5em 0;
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .oo-ui-textInputWidget {
+	margin: 0;
 }
 
-.ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-results {
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleSearchWidget .oo-ui-searchWidget-results {
 	position: static;
 	top: 0;
 	padding: 0;
 }
 
-.ve-ui-linkAnnotationWidget .mw-widget-titleWidget-menu:not( :empty ) {
+.ve-ui-mwLinkAnnotationInspector .ve-ui-linkAnnotationWidget .mw-widget-titleWidget-menu:not( :empty ) {
 	margin-top: 0.75em;
 }
 

@@ -78,13 +78,13 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	// inputs in the DOM, so call this before we restructure the DOM.
 	ve.ui.MWLinkAnnotationInspector.super.prototype.initialize.call( this );
 
-	this.internalAnnotationField = new OO.ui.FieldLayout(
-		this.internalAnnotationInput,
-		{ align: 'top' }
-	);
+	this.internalAnnotationField = this.annotationField;
 	this.externalAnnotationField = new OO.ui.FieldLayout(
 		this.externalAnnotationInput,
-		{ align: 'top' }
+		{
+			align: 'top',
+			label: ve.msg( 'visualeditor-linkinspector-title' )
+		}
 	);
 
 	// Events
@@ -101,6 +101,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 		change: 'onExternalLinkInputChange',
 		enter: 'onLinkInputEnter'
 	} );
+	// this.internalAnnotationInput is already bound by parent class
+	this.externalAnnotationInput.connect( this, { change: 'onAnnotationInputChange' } );
 
 	this.internalAnnotationInput.input.results.connect( this, {
 		add: 'onInternalLinkChangeResultsChange',
@@ -114,7 +116,14 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 	this.linkTypeIndex.$content.append( this.$otherActions );
 	this.linkTypeIndex.getTabPanel( 'internal' ).$element.append( this.internalAnnotationField.$element );
 	this.linkTypeIndex.getTabPanel( 'external' ).$element.append( this.externalAnnotationField.$element );
+	// labelField gets moved between tabs when activated
+	if ( OO.ui.isMobile() ) {
+		this.linkTypeIndex.getTabPanel( 'internal' ).$element.prepend( this.labelField.$element );
+	}
 	this.form.$element.empty().append( this.linkTypeIndex.$element );
+	if ( !OO.ui.isMobile() ) {
+		this.externalAnnotationField.setLabel( null );
+	}
 };
 
 /**
@@ -388,7 +397,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
  *
  * @param {OO.ui.TabPanelLayout} tabPanel Current tabPanel
  */
-ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
+ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function ( tabPanel ) {
 	var text = this.annotationInput.getTextInputWidget().getValue(),
 		end = text.length,
 		isExternal = this.isExternal(),
@@ -397,6 +406,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	this.switchingLinkTypes = true;
 
 	this.annotationInput = isExternal ? this.externalAnnotationInput : this.internalAnnotationInput;
+
+	if ( OO.ui.isMobile() ) {
+		tabPanel.$element.prepend( this.labelField.$element );
+	}
 
 	this.updateSize();
 
@@ -417,7 +430,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
 	// mode, it doesn't make sense to the user that the focus behavior occurs.
 	this.annotationInput.getTextInputWidget().setValidityFlag();
 
-	this.updateActions();
+	this.onAnnotationInputChange();
 
 	if ( this.isActive ) {
 		ve.track( 'activity.' + this.constructor.static.name, { action: 'panel-switch' } );
@@ -476,11 +489,23 @@ ve.ui.MWLinkAnnotationInspector.prototype.newExternalLinkAnnotation = function (
 /**
  * @inheritdoc
  */
+ve.ui.MWLinkAnnotationInspector.prototype.getInsertionText = function () {
+	if ( this.isNew && this.isExternal() ) {
+		return '';
+	} else {
+		// Use user input, not normalized annotation, to preserve case
+		return this.labelInput.getValue().trim() || this.annotationInput.getTextInputWidget().getValue();
+	}
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
 	// If this is a new external link, insert an autonumbered link instead of a link annotation
 	// (applying the annotation on this later does nothing because of blacklistedAnnotationTypes).
 	// Otherwise call parent method to figure out the text to insert and annotate.
-	if ( this.isExternal() ) {
+	if ( this.isNew && this.isExternal() ) {
 		return [
 			{
 				type: 'link/mwNumberedExternal',
@@ -491,8 +516,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
 			{ type: '/link/mwNumberedExternal' }
 		];
 	} else {
-		// Use user input, not normalized annotation, to preserve case
-		return this.annotationInput.getTextInputWidget().getValue();
+		return this.getInsertionText().split( '' );
 	}
 };
 
