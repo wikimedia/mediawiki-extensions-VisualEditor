@@ -68,6 +68,11 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 	// TODO: Consider upstreaming this to SearchWidget
 	input.$element.prepend( input.$query );
 
+	// Remove 'maxlength', because it should not apply to full URLs, which we allow users to paste
+	// here. Maximum length of page titles will still be enforced by JS validation later (we can't
+	// override maxLength config option, because that would break the validation).
+	input.getQuery().$input.removeAttr( 'maxlength' );
+
 	return input;
 };
 
