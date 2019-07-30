@@ -1226,7 +1226,8 @@ ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $c
  */
 ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 	var uri,
-		veaction = this.getDefaultMode() === 'visual' ? 'edit' : 'editsource';
+		veaction = this.getDefaultMode() === 'visual' ? 'edit' : 'editsource',
+		section = this.section !== null ? this.section : undefined;
 
 	// Push veaction=edit(source) url in history (if not already. If we got here by a veaction=edit(source)
 	// permalink then it will be there already and the constructor called #activate)
@@ -1235,7 +1236,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 		history.pushState &&
 		(
 			this.currentUri.query.veaction !== veaction ||
-			this.currentUri.query.section !== this.section
+			this.currentUri.query.section !== section
 		) &&
 		this.currentUri.query.action !== 'edit'
 	) {
