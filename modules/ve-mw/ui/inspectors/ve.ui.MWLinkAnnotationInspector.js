@@ -478,9 +478,9 @@ ve.ui.MWLinkAnnotationInspector.prototype.newExternalLinkAnnotation = function (
  * @inheritdoc
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
-	// If this is a new external link, insert an autonumbered link instead of a link annotation (in
-	// #getAnnotation we have the same condition to skip the annotating). Otherwise call parent method
-	// to figure out the text to insert and annotate.
+	// If this is a new external link, insert an autonumbered link instead of a link annotation
+	// (applying the annotation on this later does nothing because of blacklistedAnnotationTypes).
+	// Otherwise call parent method to figure out the text to insert and annotate.
 	if ( this.isExternal() ) {
 		return [
 			{
