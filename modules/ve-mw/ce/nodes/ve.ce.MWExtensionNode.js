@@ -48,6 +48,11 @@ ve.ce.MWExtensionNode.static.rendersEmpty = false;
 
 ve.ce.MWExtensionNode.static.iconWhenInvisible = 'markup';
 
+ve.ce.MWExtensionNode.static.getDescription = function ( model ) {
+	var body = ve.getProp( model.getAttribute( 'mw' ), 'body', 'extsrc' ) || '';
+	return body.slice( 0, 100 ) + ( body.length > 100 ? '…' : '' );
+};
+
 /* Methods */
 
 /**
