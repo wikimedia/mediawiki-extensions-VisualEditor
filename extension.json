@@ -744,7 +744,6 @@
 			],
 			"messages": [
 				"accesskey-save",
-				"apierror-readonly",
 				"colon-separator",
 				"hidden-categories",
 				"pagecategories",
@@ -767,7 +766,6 @@
 				"visualeditor-recreate",
 				"visualeditor-redirect-description",
 				"visualeditor-saveerror",
-				"visualeditor-saveerror-hookaborted",
 				"visualeditor-serializeerror"
 			],
 			"targets": [
