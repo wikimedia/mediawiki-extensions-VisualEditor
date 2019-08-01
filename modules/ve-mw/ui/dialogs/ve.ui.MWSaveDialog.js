@@ -648,11 +648,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$saveCheckboxes,
 		this.editSummaryCountLabel.$element
 	);
+	this.$license = $( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
+		.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) );
 	this.$saveMessages = $( '<div>' ).addClass( 've-ui-mwSaveDialog-messages' );
-	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append(
-		$( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
-			.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) )
-	);
+	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append( this.$license );
 	ve.targetLinksToNewWindow( this.$saveFoot[ 0 ] );
 	this.savePanel.$element.append(
 		this.$editSummaryLabel,
