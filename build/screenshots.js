@@ -177,7 +177,7 @@
 					return driver.takeScreenshot().then( function ( base64Image ) {
 						var imageBuffer;
 						if ( rect ) {
-							imageBuffer = new Buffer( base64Image, 'base64' );
+							imageBuffer = Buffer.from( base64Image, 'base64' );
 							return cropScreenshot( filename, imageBuffer, rect, padding );
 						} else {
 							fs.writeFile( filename, base64Image, 'base64' );

@@ -446,6 +446,7 @@ ve.ui.MWCategoryWidget.prototype.fitInput = function () {
 	var availableSpace, inputWidth, $lastItem,
 		$input = this.input.$element;
 
+	// eslint-disable-next-line no-jquery/no-sizzle
 	if ( !this.items.length || !$input.is( ':visible' ) ) {
 		return;
 	}
