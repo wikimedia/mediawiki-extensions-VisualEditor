@@ -24,7 +24,9 @@ OO.initClass( ve.ui.MWEditModeTool );
  * @inheritdoc mw.libs.ve.MWEditModeTool
  */
 ve.ui.MWEditModeTool.prototype.getMode = function () {
-	return this.toolbar.getSurface().getMode();
+	if ( !this.toolbar.getSurface() ) {
+		return 'source';
+	}
 };
 
 /**

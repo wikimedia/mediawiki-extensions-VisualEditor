@@ -69,8 +69,6 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	{
 		name: 'reference'
 	}
-	// "Done" tool is added in setupToolbar as it not part of the
-	// standard config (i.e. shouldn't be inhertied by TargetWidget)
 ];
 
 ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
@@ -297,7 +295,7 @@ ve.init.mw.MobileArticleTarget.prototype.setSurface = function ( surface ) {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
-	var surfaceModel;
+	var surfaceView, surfaceModel;
 
 	if ( this.teardownPromise ) {
 		// Loading was cancelled, the overlay is already closed at this point. Do nothing.
@@ -312,12 +310,13 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
+	// Place a selection at the start of the document, but with the surface
+	// disabled, so toolbar tools have a thing to focus on without us showing the
+	// keyboard.
+	surfaceView = this.getSurface().getView();
+	surfaceView.deactivate();
 	surfaceModel = this.getSurface().getModel();
-	surfaceModel.connect( this, {
-		blur: 'onSurfaceBlur',
-		focus: 'onSurfaceFocus'
-	} );
-	this[ surfaceModel.getSelection().isNull() ? 'onSurfaceBlur' : 'onSurfaceFocus' ]();
+	surfaceModel.selectFirstContentOffset();
 
 	this.events.trackActivationComplete();
 
@@ -357,22 +356,6 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	surface.$placeholder.css( 'padding-top', toolbarHeight );
 	surfaceView.emit( 'position' );
 	surface.scrollSelectionIntoView();
-};
-
-/**
- * Handle surface blur events
- */
-ve.init.mw.MobileArticleTarget.prototype.onSurfaceBlur = function () {
-	this.getToolbar().$group.addClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
-	this.pageToolbar.$element.removeClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
-};
-
-/**
- * Handle surface focus events
- */
-ve.init.mw.MobileArticleTarget.prototype.onSurfaceFocus = function () {
-	this.getToolbar().$group.removeClass( 've-init-mw-mobileArticleTarget-editTools-hidden' );
-	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar-hidden' );
 };
 
 /**
@@ -510,69 +493,44 @@ ve.init.mw.MobileArticleTarget.prototype.load = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
-	if ( !this.pageToolbar ) {
-		this.pageToolbar = new ve.ui.TargetToolbar( this, { actions: true } );
-	}
+	var originalToolbarGroups = this.constructor.static.toolbarGroups;
 
-	this.pageToolbar.setup( [
-		// Back
-		{
-			name: 'back',
-			include: [ 'back' ]
-		},
-		{
-			name: 'editMode',
-			type: 'list',
-			icon: 'edit',
-			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-			include: [ 'editModeVisual', 'editModeSource' ]
-		},
-		{
-			name: 'save',
-			type: 'bar',
-			include: [ 'showSave' ]
-		}
-	], surface );
+	// We don't want any of these tools to show up in subordinate widgets, so we
+	// temporarily add them here. We need to do it _here_ rather than in their
+	// own static variable to make sure that other tools which meddle with
+	// toolbarGroups (Cite, mostly) have a chance to do so.
+	this.constructor.static.toolbarGroups = [].concat(
+		[
+			// Back
+			{
+				name: 'back',
+				include: [ 'back' ]
+			}
+		],
+		ve.init.mw.MobileArticleTarget.static.toolbarGroups,
+		[
+			{
+				name: 'editMode',
+				type: 'list',
+				icon: 'edit',
+				title: OO.ui.deferMsg( 'visualeditor-mweditmode-tooltip' ),
+				include: [ 'editModeVisual', 'editModeSource' ]
+			},
+			{
+				name: 'save',
+				type: 'bar',
+				include: [ 'showMobileSave' ]
+			}
+		]
+	);
 
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
-	this.pageToolbar.emit( 'updateState' );
+	this.constructor.static.toolbarGroups = originalToolbarGroups;
 
-	if ( !this.$title ) {
-		this.$title = $( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title-container' ).append(
-			$( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-title' ).text(
-				new mw.Title( this.getPageName() ).getMainText()
-			)
-		);
-	}
-
-	// Insert title between 'back' and 'advanced'
-	this.$title.insertAfter( this.pageToolbar.items[ 0 ].$element );
-
-	this.pageToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-pageToolbar' );
-
-	this.toolbar.$element.append( this.pageToolbar.$element );
-	this.pageToolbar.initialize();
-
-	this.pageToolbar.$group.addClass( 've-init-mw-mobileArticleTarget-pageTools' );
 	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
-
-	this.getToolbar().setup(
-		this.constructor.static.toolbarGroups.concat( [
-			// Done with editing toolbar
-			{
-				name: 'done',
-				include: [ 'done' ]
-			}
-		] ),
-		surface
-	);
-
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
-
-	// Don't wait for the first surface focus/blur event to hide one of the toolbars
-	this.onSurfaceBlur();
 };
 
 /**
@@ -588,7 +546,7 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbarSaveButton = function () {
-	this.toolbarSaveButton = this.pageToolbar.getToolGroupByName( 'save' ).items[ 0 ];
+	this.toolbarSaveButton = this.toolbar.getToolGroupByName( 'save' ).items[ 0 ];
 };
 
 /**
@@ -650,32 +608,15 @@ ve.ui.MWBackCommand.prototype.execute = function () {
 ve.ui.commandRegistry.register( new ve.ui.MWBackCommand() );
 
 /**
- * Done tool
+ * Mobile save tool
  */
-ve.ui.MWDoneTool = function VeUiMWDoneTool() {
-	// Parent constructor
-	ve.ui.MWDoneTool.super.apply( this, arguments );
+ve.ui.MWMobileSaveTool = function VeUiMWMobileSaveTool() {
+	// Parent Constructor
+	ve.ui.MWMobileSaveTool.super.apply( this, arguments );
 };
-OO.inheritClass( ve.ui.MWDoneTool, ve.ui.Tool );
-ve.ui.MWDoneTool.static.name = 'done';
-ve.ui.MWDoneTool.static.group = 'navigation';
-ve.ui.MWDoneTool.static.autoAddToCatchall = false;
-ve.ui.MWDoneTool.static.icon = 'check';
-ve.ui.MWDoneTool.static.flags = [ 'progressive' ];
-ve.ui.MWDoneTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-donebutton-tooltip' );
-ve.ui.MWDoneTool.static.commandName = 'done';
-ve.ui.toolFactory.register( ve.ui.MWDoneTool );
+OO.inheritClass( ve.ui.MWMobileSaveTool, ve.ui.MWSaveTool );
+ve.ui.MWMobileSaveTool.static.name = 'showMobileSave';
+ve.ui.MWMobileSaveTool.static.icon = 'next';
+ve.ui.MWMobileSaveTool.static.displayBothIconAndLabel = false;
 
-/**
- * Done command
- */
-ve.ui.MWDoneCommand = function VeUiMwDoneCommand() {
-	// Parent constructor
-	ve.ui.MWDoneCommand.super.call( this, 'done' );
-};
-OO.inheritClass( ve.ui.MWDoneCommand, ve.ui.Command );
-ve.ui.MWDoneCommand.prototype.execute = function () {
-	ve.init.target.done();
-};
-ve.ui.commandRegistry.register( new ve.ui.MWDoneCommand() );
+ve.ui.toolFactory.register( ve.ui.MWMobileSaveTool );
