@@ -18,6 +18,7 @@
 		"no-jquery/no-hide": "error",
 		"no-jquery/no-show": "error",
 		"no-jquery/no-toggle": "error",
-		"max-len": "off"
+		"max-len": "off",
+		"prefer-template": "off"
 	}
 }

@@ -230,6 +230,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
 	if ( !wasSetup ) {
+		// eslint-disable-next-line no-jquery/no-class-state
 		if ( $( 'html' ).hasClass( 've-tempSourceEditing' ) ) {
 			toolbar.$element
 				.css( 'height', '' )
@@ -320,6 +321,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 
 	this.wikitextFallbackLoading = false;
 	// Duplicate of this code in ve.init.mw.DesktopArticleTarget.init.js
+	// eslint-disable-next-line no-jquery/no-class-state
 	if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
 		$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 		// Set up a temporary window manager
@@ -875,6 +877,7 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 			// Some situations make the hidden-categories visible (a user
 			// preference, and being on a category page) so rather than
 			// encoding that logic here just check whether they're visible:
+			// eslint-disable-next-line no-jquery/no-sizzle
 			$catlinks.find( '.mw-hidden-catlinks:visible' ).length === 0
 		);
 		target.transformCategoryLinks( $catlinks );

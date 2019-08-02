@@ -56,6 +56,7 @@ ve.ce.MWInternalLinkAnnotation.prototype.updateClasses = function () {
 		// determine if this is a 'missing' link.
 		entry = {};
 		entry[ model.getAttribute( 'lookupTitle' ) ] = {
+			// eslint-disable-next-line no-jquery/no-class-state
 			missing: this.$anchor.hasClass( 'new' )
 		};
 		ve.init.platform.linkCache.setMissing( entry );
