@@ -107,12 +107,7 @@
 
 .ve-init-mw-mobileArticleTarget-pageTools,
 .ve-init-mw-mobileArticleTarget-editTools {
-	display: table;
-
-	> .oo-ui-toolGroup,
-	> .ve-init-mw-mobileArticleTarget-title-container {
-		display: table-cell;
-	}
+	display: flex;
 
 	.oo-ui-barToolGroup .oo-ui-tool-link {
 		min-height: 3em;
@@ -128,26 +123,29 @@
 		}
 	}
 
-	.oo-ui-tool.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive {
-		// Sometimes rendering of fractional pixel widths leaves a 1px white bar on the side,
-		// this avoids it.
-		width: 100%;
-	}
-}
-
-/* Edit tools has no 100% width cells */
-.ve-init-mw-mobileArticleTarget-editTools {
-	width: 100%;
-
 	> .oo-ui-popupToolGroup > .oo-ui-popupToolGroup-handle {
+		/* stylelint-disable-next-line declaration-no-important */
+		padding: 3em 0 0 0 !important;
+
 		> .oo-ui-iconElement-icon,
 		> .oo-ui-indicatorElement-indicator {
 			left: 50%;
 		}
 
 		> .oo-ui-iconElement-icon {
-			margin-left: -1.875em;
+			margin-left: -1.142857em;
 		}
+
+		> .oo-ui-indicatorElement-indicator {
+			margin-left: 0.285714em;
+		}
+	}
+}
+
+.ve-init-mw-mobileArticleTarget-editTools {
+	/* stylelint-disable-next-line no-descending-specificity */
+	> .oo-ui-toolGroup {
+		flex: 1;
 	}
 
 	> .oo-ui-barToolGroup {
@@ -157,17 +155,17 @@
 			width: 100%;
 
 			> .oo-ui-tool-link {
-				padding: 0.875em;
+				padding: 0.875em 0;
 
 				> .oo-ui-iconElement-icon:not( .oo-ui-tool-checkIcon ) {
 					position: static;
 					display: inline-block;
 					vertical-align: middle;
-					margin-right: 0.25em;
 				}
 
 				> .oo-ui-tool-title {
 					vertical-align: middle;
+					margin-left: 0.3em;
 
 					@media screen and ( max-width: 767px ) {
 						// stylelint-disable-next-line declaration-no-important
@@ -176,6 +174,18 @@
 				}
 			}
 		}
+	}
+}
+
+.ve-init-mw-mobileArticleTarget-pageTools {
+	/* stylelint-disable-next-line no-descending-specificity */
+	> .oo-ui-toolGroup,
+	> .ve-init-mw-mobileArticleTarget-title-container {
+		flex: auto;
+	}
+
+	.ve-ui-toolbar-group-editMode {
+		min-width: 4em;
 	}
 }
 
