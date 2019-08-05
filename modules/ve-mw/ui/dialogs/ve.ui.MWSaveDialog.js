@@ -56,8 +56,7 @@ ve.ui.MWSaveDialog.static.feedbackUrl = 'https://www.mediawiki.org/wiki/Talk:Vis
 ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'save',
-		// May be overridden by config.saveButtonLabel
-		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-review' ),
+		// label will be set by config.saveButtonLabel
 		flags: [ 'primary', 'progressive' ],
 		modes: [ 'save', 'review', 'preview' ]
 	},
@@ -863,11 +862,9 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			// Don't focus during setup to prevent scroll jumping (T153010)
 			this.swapPanel( data.initialPanel || 'save', true );
 			// Update save button label
-			if ( data.saveButtonLabel ) {
-				this.actions.forEach( { actions: 'save' }, function ( action ) {
-					action.setLabel( data.saveButtonLabel );
-				} );
-			}
+			this.actions.forEach( { actions: 'save' }, function ( action ) {
+				action.setLabel( data.saveButtonLabel );
+			} );
 		}, this );
 };
 
