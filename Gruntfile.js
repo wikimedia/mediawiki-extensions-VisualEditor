@@ -150,8 +150,8 @@ module.exports = function ( grunt ) {
 				cache: true
 			},
 			all: [
-				'*.js{,on}',
-				'{build,modules}/**/*.js{,on}'
+				'*.{js,json}',
+				'{build,modules}/**/*.{js,json}'
 			]
 		},
 		stylelint: {
