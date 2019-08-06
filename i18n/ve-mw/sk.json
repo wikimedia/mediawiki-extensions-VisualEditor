@@ -9,7 +9,8 @@
 			"Helix84",
 			"Lexected",
 			"Patriccck",
-			"Robert Važan"
+			"Robert Važan",
+			"Vegetator"
 		]
 	},
 	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
@@ -20,7 +21,7 @@
 	"visualeditor-beta-warning": "Ak narazíte na akékoľvek technické problémy, nahláste ich, prosím.",
 	"visualeditor-browserwarning": "Používate prehliadač, ktorý nie je Vizuálnym editorom oficiálne podporovaný.",
 	"visualeditor-ca-createlocaldescriptionsource": "Pridať zdroj miestneho popisu",
-	"visualeditor-ca-createsource": "Vytvoriť zdroj",
+	"visualeditor-ca-createsource": "Vytvoriť kód",
 	"visualeditor-ca-editsource": "Upraviť kód",
 	"visualeditor-ca-editsource-section": "upraviť zdroj",
 	"visualeditor-ca-ve-create": "Vizuálny editor",

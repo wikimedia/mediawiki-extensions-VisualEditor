@@ -3,7 +3,8 @@
 		"authors": [
 			"Geopoet",
 			"Sky Harbor",
-			"ShimunUfesoj"
+			"ShimunUfesoj",
+			"Brazal.dang"
 		]
 	},
 	"tooltip-ca-createsource": "Muknaon an kodigong gikanan kaining pahina",
@@ -41,7 +42,7 @@
 	"visualeditor-dialog-meta-languages-section": "Mga Lengguwahe",
 	"visualeditor-dialog-meta-settings-label": "Mga Panuytoy nin Pahina",
 	"visualeditor-dialog-transclusion-add-content": "Magdugang nin laog",
-	"visualeditor-dialog-transclusion-add-param": "Magdugang nin parametro",
+	"visualeditor-dialog-transclusion-add-param": "Magdugang nin impormasyon",
 	"visualeditor-dialog-transclusion-add-template": "Magdugang nin panguyog",
 	"visualeditor-dialog-transclusion-content": "Laog",
 	"visualeditor-dialog-transclusion-options": "Mga Pagpipilian",
@@ -68,7 +69,7 @@
 	"visualeditor-mainnamespacepagelink": "Project:Pangenot na ngarang espasyo",
 	"visualeditor-media-input-placeholder": "Maghanap nin midya",
 	"visualeditor-meta-tool": "Mga Panuytoy nin Pahina",
-	"visualeditor-mweditmodesource-warning-cancel": "Dae, kanselara",
+	"visualeditor-mweditmodesource-warning-cancel": "Kanselaron",
 	"visualeditor-parameter-input-placeholder": "Pangaran nin parametro",
 	"visualeditor-parameter-search-no-unused": "Mayo nin dae nagagamit na mga parametro",
 	"visualeditor-parameter-search-unknown": "Bako bistadong parametro",

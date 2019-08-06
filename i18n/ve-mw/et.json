@@ -235,6 +235,7 @@
 	"visualeditor-mweditmodeve-warning": "Lähed üle visuaaltoimeti režiimi.\nKas tahad jätkata?",
 	"visualeditor-mweditmodewt-popup-body": "Saad iga hetk tagasi lähteteksti redigeerimisele ümber lülitada, kui klõpsad sellel ikoonil.",
 	"visualeditor-mweditmodewt-popup-title": "Läksid üle visuaaltoimeti režiimile.",
+	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|pilt|pilti}}",
 	"visualeditor-mwgallerydialog-caption-field-label": "Galerii pealkiri",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "Kogu galerii pealkiri",
 	"visualeditor-mwgallerydialog-card-images": "Pildid",

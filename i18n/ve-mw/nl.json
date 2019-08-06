@@ -40,10 +40,12 @@
 			"Dinosaur918",
 			"Patio",
 			"KlaasZ4usV",
-			"Ciell"
+			"Ciell",
+			"Elroy"
 		]
 	},
 	"collabpad-import-subtitle": "Geïmporteerd van $1",
+	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Broncode voor deze pagina aanmaken",
 	"tooltip-ca-edit": "Deze pagina bewerken via wikitekst",
 	"tooltip-ca-editsource": "Broncode van deze pagina bewerken",
@@ -242,7 +244,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Onderkop 4",
 	"visualeditor-generating-wikitext-progress": "Wikitekst genereren",
 	"visualeditor-languages-tool": "Talen",
-	"visualeditor-linkinspector-button-link-external": "Externe koppeling",
+	"visualeditor-linkinspector-button-link-external": "Uitwendige pagina",
 	"visualeditor-linkinspector-convert-link-isbn": "Omzetten naar ISBN-koppeling",
 	"visualeditor-linkinspector-convert-link-pmid": "Omzetten naar PMID-koppeling",
 	"visualeditor-linkinspector-convert-link-rfc": "Omzetten naar RFC-koppeling",
@@ -320,6 +322,7 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Talen",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Taalcode",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Inhoud",
+	"visualeditor-mwlanguagevariantinspector-filter-text-placeholder": "Gefilterde tekst",
 	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "Brontekst",
 	"visualeditor-mwlanguagevariantinspector-title-name": "Taalnaam",
 	"visualeditor-mwpredialog-convert": "Tekst opmaak toestaan",
