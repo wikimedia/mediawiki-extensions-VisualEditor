@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"ArmenBakkalian",
-			"Դավիթ Սարոյան"
+			"Դավիթ Սարոյան",
+			"Azniv Stepanian"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|տեսողական խմբագրում]]",
+	"tag-visualeditor-switched": "Տեսողական խմբագրիչը անջատուած է",
 	"visualeditor-feedback-tool": "Կարծիք յայտնել",
 	"visualeditor-help-label": "Ուղեցոյցը կարդա՛",
 	"visualeditor-welcomedialog-action": "Սկսիլ խմբագրել",

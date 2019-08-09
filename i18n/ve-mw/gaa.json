@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Flixtey",
-			"Mybluberet"
+			"Mybluberet",
+			"Amire80"
 		]
 	},
 	"tooltip-ca-ve-edit": "Tsakemɔ baafa nɛɛ",
 	"visualeditor-ca-createsource": "Bɔɔ he ni ejɛ",
 	"visualeditor-ca-editsource": "Tsakemɔ he ni ejɛ",
-	"visualeditor-ca-editsource-section": "Tsakemɔ he ni ejɛ",
+	"visualeditor-ca-editsource-section": "tsakemɔ he ni ejɛ",
 	"visualeditor-descriptionpagelink": "Project:Ninaa Tsakelɔ"
 }

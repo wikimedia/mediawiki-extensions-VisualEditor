@@ -205,6 +205,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "Vždy použiť vizuálny editor, ak je to možné",
 	"visualeditor-preference-tabs-prefer-wt": "Vždy použiť editor zdrojového kódu",
 	"visualeditor-preference-tabs-remember-last": "Zapamätať naposledy použitý editor",
+	"visualeditor-preference-visualdiffpage-label": "Vizuálne rozdiely verzií",
 	"visualeditor-recreate": "Počas vašich úprav bola stránka zmazaná. Tlačidlom $1 ju obnovíte.",
 	"visualeditor-savedialog-error-badtoken": "Vašu úpravu nebolo možné spracovať, protože doba platnosti návštevy vyprašala.",
 	"visualeditor-savedialog-identify-anon": "Chcete stránku uložiť ako anonymný redaktor? Vaša IP adresa bude zverejnená v histórii úprav stránky.",
