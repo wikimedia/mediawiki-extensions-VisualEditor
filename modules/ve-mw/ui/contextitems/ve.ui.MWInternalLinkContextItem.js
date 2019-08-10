@@ -54,7 +54,7 @@ ve.ui.MWInternalLinkContextItem.static.generateBody = function ( linkCache, mode
 		usePageDescriptions = mw.config.get( 'wgVisualEditorConfig' ).usePageDescriptions,
 		$wrapper = $( '<div>' ),
 		$link = $( '<a>' )
-			.addClass( 've-ui-mwInternalLinkContextItem-link' )
+			.addClass( 've-ui-linkContextItem-link' )
 			.text( description )
 			.attr( {
 				href: ve.resolveUrl( href, htmlDoc ),

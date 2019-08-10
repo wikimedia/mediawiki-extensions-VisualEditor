@@ -31,21 +31,17 @@
 	padding: 0.35714em;
 }
 
-.ve-ui-mwInternalLinkContextItem-link,
 .ve-ui-mwInternalLinkContextItem-description {
 	display: block;
-}
-
-.ve-ui-mwInternalLinkContextItem-description {
 	color: #72777d;
 	margin-top: 0.5em;
 }
 
-.ve-ui-mwInternalLinkContextItem-withImage .ve-ui-mwInternalLinkContextItem-link,
+.ve-ui-mwInternalLinkContextItem-withImage .ve-ui-linkContextItem-link,
 .ve-ui-mwInternalLinkContextItem-withImage .ve-ui-mwInternalLinkContextItem-description {
 	margin-left: 5.5em;
 }
 
-.ve-ui-mwInternalLinkContextItem-withDescription .ve-ui-mwInternalLinkContextItem-link {
+.ve-ui-mwInternalLinkContextItem-withDescription .ve-ui-linkContextItem-link {
 	font-weight: bold;
 }
