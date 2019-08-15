@@ -62,7 +62,7 @@ ve.ui.MWSaveDialog.static.actions = [
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resume-editing' ),
-		flags: [ 'safe', 'close' ],
+		flags: [ 'safe', OO.ui.isMobile() ? 'back' : 'close' ],
 		modes: [ 'save', 'conflict' ]
 	},
 	{
