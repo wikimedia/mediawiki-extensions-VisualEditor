@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Ajdar",
-			"Ильнар"
+			"Ильнар",
+			"Ерней"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуаль мөхәррир]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|күрсәтмәле төзәтмә]]",
 	"tag-visualeditor-description": "Үзгәртү [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуаль мөхәррир]] ярдәмендә башкарылган",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|визуаль мөхәррир: Тикшерү]]",
 	"tag-visualeditor-wikitext": "вики-текст мөхәррире 2017",
