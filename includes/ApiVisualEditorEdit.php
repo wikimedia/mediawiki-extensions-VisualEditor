@@ -270,7 +270,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @param string $path The RESTbase path of the transform endpoint
 	 * @param Title $title The title of the page
 	 * @param array $data An array of the HTML and the 'scrub_wikitext' option
-	 * @param array $parserParams Parsoid parser paramters to pass in
+	 * @param array $parserParams Parsoid parser parameters to pass in
 	 * @param string $etag The ETag to set in the HTTP request header
 	 * @return string Body of the RESTbase server's response
 	 */
@@ -291,7 +291,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 *
 	 * @param Title $title The title of the page
 	 * @param string $html The HTML of the page to be transformed
-	 * @param array $parserParams Parsoid parser paramters to pass in
+	 * @param array $parserParams Parsoid parser parameters to pass in
 	 * @param string $etag The ETag to set in the HTTP request header
 	 * @return string Body of the RESTbase server's response
 	 */
