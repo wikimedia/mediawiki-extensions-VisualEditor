@@ -127,6 +127,7 @@
 	"visualeditor-dialog-table-sortable": "Ordinabbile",
 	"visualeditor-dialog-table-wikitable": "Stile (uicchitable)",
 	"visualeditor-dialog-template-title": "Template",
+	"visualeditor-dialog-transclusion-absent-template": "'U template \"$1\" non g'esiste angore.",
 	"visualeditor-dialog-transclusion-add-content": "Aggiunge 'u condenute",
 	"visualeditor-dialog-transclusion-add-param": "Aggiunge cchiù 'mbormaziune",
 	"visualeditor-dialog-transclusion-add-template": "Aggiunge 'u template",

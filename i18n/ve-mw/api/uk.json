@@ -4,7 +4,8 @@
 			"A1",
 			"Alex Khimich",
 			"Piramidion",
-			"Ата"
+			"Ата",
+			"Movses"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Не знайдено кешованої серіалізованої інформації з таким ключем",
@@ -27,6 +28,7 @@
 	"apihelp-visualeditor-param-pst": "Попередньо збережіть зміни Вікі-тексту перед відправкою його до Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Розділ, над яким вчинити дію.",
 	"apihelp-visualeditor-param-starttimestamp": "При збереженні, встановіть мітку часу, коли сторінка була завантажена. Використовується для виявлення конфліктів редагування.",
+	"apihelp-visualeditor-param-stash": "При збереженні встановіть у \"true\", якщо бажаєте використовувати API «схованки» (stashing).",
 	"apihelp-visualeditor-param-wikitext": "Вікітекст для відправки у Parsoid і конвертування у HTML-код (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Повертає HTML5 для сторінки від сервісу Parsoid.",
 	"apihelp-visualeditoredit-description": "Зберегти HTML5-сторінку у MediaWiki (конвертовану у вікітекст сервісом Parsoid).",
