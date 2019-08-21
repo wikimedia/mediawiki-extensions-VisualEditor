@@ -91,7 +91,6 @@ ve.init.mw.Platform.prototype.getConfig = mw.config.get.bind( mw.config );
 /**
  * All values are JSON-parsed. To get raw values, use mw.user.options.get directly.
  *
- * @method
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.getUserConfig = function ( keys ) {
@@ -118,7 +117,6 @@ ve.init.mw.Platform.prototype.getUserConfig = function ( keys ) {
  *
  * All values are JSON encoded. To set raw values, use mw.user.options.set directly.
  *
- * @method
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) {

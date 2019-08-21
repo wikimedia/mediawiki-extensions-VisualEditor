@@ -431,7 +431,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function () {
  *
  * The type of link is automatically detected based on some crude heuristics.
  *
- * @method
  * @param {ve.dm.SurfaceFragment} fragment Current selection
  * @return {ve.dm.MWInternalLinkAnnotation|ve.dm.MWExternalLinkAnnotation|null}
  */

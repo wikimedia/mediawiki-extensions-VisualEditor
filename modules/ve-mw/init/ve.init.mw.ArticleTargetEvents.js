@@ -130,7 +130,6 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( content, ca
 /**
  * Track a save error by type
  *
- * @method
  * @param {string} type Text for error type
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( type ) {

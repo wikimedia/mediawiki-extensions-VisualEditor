@@ -219,7 +219,6 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 /**
  * Get the caption node of the image.
  *
- * @method
  * @return {ve.dm.MWImageCaptionNode|null} Caption node, if present
  */
 ve.dm.MWBlockImageNode.prototype.getCaptionNode = function () {

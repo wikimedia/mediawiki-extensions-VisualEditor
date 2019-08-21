@@ -74,7 +74,6 @@ ve.ui.MWLinkAction.static.getLinkAnnotation = function ( linktext, doc ) {
  * candidate text, so that URLs with embedded matched parentheses (like
  * wiki articles with disambiguation text) autolink nicely.
  *
- * @method
  * @inheritdoc
  */
 ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
@@ -94,7 +93,6 @@ ve.ui.MWLinkAction.prototype.getTrailingPunctuation = function ( candidate ) {
 };
 
 /**
- * @method
  * @inheritdoc
  * @return {ve.dm.MWExternalLinkAnnotation|ve.dm.MWInternalLinkAnnotation} The annotation to use
  */
@@ -107,7 +105,6 @@ ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
  * followed by whitespace.
  *
  * @see ve.ui.LinkAction#autolinkUrl
- * @method
  * @return {boolean}
  *   True if the selection is a valid RFC/PMID/ISBN and the autolink action
  *   was executed; otherwise false.
@@ -141,7 +138,6 @@ ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
 /**
  * Open either the 'link' or 'linkNode' window, depending on what is selected.
  *
- * @method
  * @return {boolean} Action was executed
  */
 ve.ui.MWLinkAction.prototype.open = function () {

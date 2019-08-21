@@ -106,7 +106,6 @@ ve.dm.MWGalleryNode.static.describeChange = function ( key ) {
 /**
  * Get the gallery's caption node.
  *
- * @method
  * @return {ve.dm.MWImageCaptionNode|null} Caption node, if present
  */
 ve.dm.MWGalleryNode.prototype.getCaptionNode = function () {
@@ -117,7 +116,6 @@ ve.dm.MWGalleryNode.prototype.getCaptionNode = function () {
 /**
  * Get the gallery's image nodes.
  *
- * @method
  * @return {ve.dm.MWGalleryImageNode[]} Gallery image nodes (may be empty if none are present)
  */
 ve.dm.MWGalleryNode.prototype.getImageNodes = function () {

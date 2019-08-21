@@ -25,7 +25,6 @@ OO.initClass( ve.init.mw.SaveErrorHandler );
  *
  * @static
  * @inheritable
- * @method
  * @param {Object} data API response from action=visualeditoredit
  * @return {boolean}
  */
@@ -36,7 +35,6 @@ ve.init.mw.SaveErrorHandler.static.matchFunction = null;
  *
  * @static
  * @inheritable
- * @method
  * @param {Object} data API response from action=visualeditoredit
  * @param {ve.init.mw.ArticleTarget} target Target
  */

@@ -405,7 +405,6 @@ ve.dm.MWTransclusionNode.static.getWikitext = function ( content ) {
 /**
  * Handle attribute change events.
  *
- * @method
  * @param {string} key Attribute key
  * @param {string} from Old value
  * @param {string} to New value
@@ -484,7 +483,6 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 /**
  * Wrapper for static method
  *
- * @method
  * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
  */
 ve.dm.MWTransclusionNode.prototype.getWikitext = function () {

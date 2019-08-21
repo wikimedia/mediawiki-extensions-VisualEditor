@@ -44,8 +44,6 @@ mw.libs.ve.MWEditModeTool.static.unavailableTooltip = null;
 
 /**
  * Switch editors
- *
- * @method
  */
 mw.libs.ve.MWEditModeTool.prototype.switch = function () {
 	this.toolbar.emit( 'switchEditor', this.constructor.static.editMode );
@@ -54,7 +52,6 @@ mw.libs.ve.MWEditModeTool.prototype.switch = function () {
 /**
  * Get current edit mode
  *
- * @method
  * @return {string} Current edit mode
  */
 mw.libs.ve.MWEditModeTool.prototype.getMode = function () {
@@ -64,7 +61,6 @@ mw.libs.ve.MWEditModeTool.prototype.getMode = function () {
 /**
  * Check if edit mode is available
  *
- * @method
  * @param {string} Edit mode
  * @return {boolean} Edit mode is available
  */

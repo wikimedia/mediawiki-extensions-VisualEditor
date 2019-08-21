@@ -517,8 +517,6 @@ ve.ui.MWSaveDialog.prototype.clearAllMessages = function () {
 
 /**
  * Reset the fields of the save dialog.
- *
- * @method
  */
 ve.ui.MWSaveDialog.prototype.reset = function () {
 	// Reset summary input

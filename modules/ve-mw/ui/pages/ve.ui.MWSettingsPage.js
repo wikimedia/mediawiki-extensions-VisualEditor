@@ -185,8 +185,6 @@ ve.ui.MWSettingsPage.prototype.setOutlineItem = function () {
 
 /**
  * Handle Table Of Contents display change events.
- *
- * @method
  */
 ve.ui.MWSettingsPage.prototype.onTableOfContentsFieldChange = function () {
 	this.tableOfContentsTouched = true;

@@ -62,8 +62,6 @@ ve.ce.MWMagicLinkNode.static.getDescription = function ( model ) {
 
 /**
  * Handle model update events.
- *
- * @method
  */
 ve.ce.MWMagicLinkNode.prototype.onUpdate = function () {
 	this.$link

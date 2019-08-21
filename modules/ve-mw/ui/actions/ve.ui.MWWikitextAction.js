@@ -39,7 +39,6 @@ ve.ui.MWWikitextAction.static.methods = [ 'toggleWrapSelection', 'wrapSelection'
 /**
  * Wrap an selection inline
  *
- * @method
  * @param {string} before Text to go before selection
  * @param {string} after Text to go after selection
  * @param {Function|string} placeholder Placeholder text to insert at an empty selection
@@ -84,7 +83,6 @@ ve.ui.MWWikitextAction.prototype.toggleWrapSelection = function ( before, after,
 /**
  * Wrap an selection inline
  *
- * @method
  * @param {string} before Text to go before selection
  * @param {string} after Text to go after selection
  * @param {Function|string} placeholder Placeholder text to insert at an empty selection
@@ -102,7 +100,6 @@ ve.ui.MWWikitextAction.prototype.wrapSelection = function ( before, after, place
  * If the selection is collapsed, it expands to take the whole line, otherwise it splits
  * the paragraph to make sure it is one line
  *
- * @method
  * @param {string} before Text to go before each line
  * @param {string} after Text to go after each line
  * @param {Function|string} placeholder Placeholder text to insert at an empty selection

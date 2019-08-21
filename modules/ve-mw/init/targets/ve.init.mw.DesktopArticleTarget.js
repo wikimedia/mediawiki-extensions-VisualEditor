@@ -920,7 +920,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 /**
  * Handle clicks on the view tab.
  *
- * @method
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
@@ -1046,7 +1045,6 @@ ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, stat
 /**
  * Handle clicks on the MwMeta button in the toolbar.
  *
- * @method
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function () {
@@ -1058,8 +1056,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
  *
  * 'Read' and 'Edit source' (when not using single edit tab) bound here,
  * 'Edit' and single edit tab are bound in mw.DesktopArticleTarget.init.
- *
- * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 	var namespaceNumber, namespaceName, isTalkNamespace, namespaceKey, namespaceTabId;
@@ -1370,7 +1366,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 /**
  * Replace the page content with new HTML.
  *
- * @method
  * @param {string} html Rendered HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {string} displayTitle HTML to show as the page title
@@ -1421,8 +1416,6 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 
 /**
  * Add onunload and onbeforeunload handlers.
- *
- * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
 	if ( window.onbeforeunload !== this.onBeforeUnload ) {
@@ -1435,8 +1428,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
 };
 /**
  * Remove onunload and onbeforunload handlers.
- *
- * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
 	// Restore whatever previous onbeforeunload hook existed
@@ -1510,8 +1501,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 
 /**
  * Handle unload event.
- *
- * @method
  */
 ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
 	if ( !this.submitting ) {

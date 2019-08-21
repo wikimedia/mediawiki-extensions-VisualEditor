@@ -80,8 +80,6 @@ ve.ce.MWNumberedExternalLinkNode.static.getDescription = function ( model ) {
 
 /**
  * Handle model update events.
- *
- * @method
  */
 ve.ce.MWNumberedExternalLinkNode.prototype.onUpdate = function () {
 	this.$link.attr( 'href', this.model.getAttribute( 'href' ) );

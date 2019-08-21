@@ -231,7 +231,6 @@ ve.init.mw.Target.prototype.documentReady = function ( doc ) {
 /**
  * Once surface is ready, initialize the UI
  *
- * @method
  * @fires surfaceReady
  */
 ve.init.mw.Target.prototype.surfaceReady = function () {
@@ -355,7 +354,6 @@ ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
 /**
  * Switch to editing mode.
  *
- * @method
  * @param {HTMLDocument|string} doc HTML document or source text
  */
 ve.init.mw.Target.prototype.setupSurface = function ( doc ) {

@@ -125,7 +125,6 @@
 	 * Override getDomElementSummary to extract HTML from data-mw/body.html
 	 * and make it comparable.
 	 *
-	 * @method
 	 * @inheritdoc ve#getDomElementSummary
 	 */
 	ve.getDomElementSummary = function ( element, includeHtml ) {

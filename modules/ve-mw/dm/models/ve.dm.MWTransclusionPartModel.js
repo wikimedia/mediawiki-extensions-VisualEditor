@@ -81,7 +81,6 @@ ve.dm.MWTransclusionPartModel.prototype.getWikitext = function () {
 /**
  * Add all non-existing required and suggested parameters, if any.
  *
- * @method
  * @return {number} Number of parameters added
  */
 ve.dm.MWTransclusionPartModel.prototype.addPromptedParameters = function () {

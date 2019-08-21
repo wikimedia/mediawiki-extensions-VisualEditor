@@ -178,7 +178,6 @@ ve.ui.MWCategoryWidget.prototype.reorder = function ( item, newIndex ) {
 /**
  * Removes category from model.
  *
- * @method
  * @param {string} name Removed category name
  */
 ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
@@ -189,7 +188,6 @@ ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
 /**
  * Update sortkey value, emit updateSortkey event
  *
- * @method
  * @param {string} name
  * @param {string} value
  */
@@ -256,7 +254,6 @@ ve.ui.MWCategoryWidget.prototype.setDisabled = function () {
 /**
  * Get list of category names.
  *
- * @method
  * @return {string[]} List of category names
  */
 ve.ui.MWCategoryWidget.prototype.getCategories = function () {
@@ -344,7 +341,6 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 /**
  * Adds category items.
  *
- * @method
  * @param {Object[]} items Items to add
  * @param {number} [index] Index to insert items after
  * @return {jQuery.Promise}
@@ -439,8 +435,6 @@ ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
 
 /**
  * Auto-fit the input.
- *
- * @method
  */
 ve.ui.MWCategoryWidget.prototype.fitInput = function () {
 	var availableSpace, inputWidth, $lastItem,

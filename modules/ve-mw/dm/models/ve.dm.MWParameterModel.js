@@ -43,7 +43,6 @@ OO.mixinClass( ve.dm.MWParameterModel, OO.EventEmitter );
 /**
  * Check if parameter is required.
  *
- * @method
  * @return {boolean} Parameter is required
  */
 ve.dm.MWParameterModel.prototype.isRequired = function () {
@@ -53,7 +52,6 @@ ve.dm.MWParameterModel.prototype.isRequired = function () {
 /**
  * Check if parameter is suggested.
  *
- * @method
  * @param {string} name Parameter name
  * @return {boolean} Parameter is suggested
  */
@@ -64,7 +62,6 @@ ve.dm.MWParameterModel.prototype.isSuggested = function () {
 /**
  * Check if parameter is deprecated.
  *
- * @method
  * @return {boolean} Parameter is deprecated
  */
 ve.dm.MWParameterModel.prototype.isDeprecated = function () {

@@ -76,7 +76,6 @@ ve.dm.MWLanguageVariantNode.static.hiddenType = 'mwLanguageVariantHidden';
  * Migrate field names from old Parsoid spec to new field names.
  * This method will go away after the next Parsoid flag day.
  * @static
- * @method
  * @private
  * @param {Object} dataMwv
  * @return {Object}
@@ -161,7 +160,6 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
  * renderings.
  *
  * @static
- * @method
  * @param {jQuery} $element Element to process
  * @param {Object|null} opts Preview options
  * @param {boolean} [opts.describeAll=false] Treat all rules as if the
@@ -189,7 +187,6 @@ ve.dm.MWLanguageVariantNode.static.processVariants = function ( $element, opts )
  * Insert language variant preview for specified element.
  *
  * @static
- * @method
  * @param {HTMLElement} element Element to insert preview inside of.
  * @param {Object} variantInfo Language variant information object.
  * @param {Object|null} opts Preview options
@@ -213,7 +210,6 @@ ve.dm.MWLanguageVariantNode.static.insertPreviewElements = function ( element, v
  * object and the user's currently preferred variant.
  *
  * @static
- * @method
  * @private
  * @param {Object} variantInfo Language variant information object.
  * @param {Object|null} opts Preview options
@@ -290,7 +286,6 @@ ve.dm.MWLanguageVariantNode.static.cloneElement = function () {
  * among a provided list of language codes.
  *
  * @static
- * @method
  * @param {Object[]} [items] An array of objects, each of which have a field
  *  named `l` equal to a language code.
  * @return {number} The index in `items` with the most appropriate language
@@ -324,7 +319,6 @@ ve.dm.MWLanguageVariantNode.static.matchLanguage = function ( items ) {
 /**
  * Helper function to get the description object for this markup node.
  *
- * @method
  * @return {Object}
  */
 ve.dm.MWLanguageVariantNode.prototype.getVariantInfo = function () {
@@ -334,7 +328,6 @@ ve.dm.MWLanguageVariantNode.prototype.getVariantInfo = function () {
 /**
  * Helper function to discriminate between hidden and shown rules.
  *
- * @method
  * @return {boolean} True if this node represents a conversion rule
  *  with no shown output
  */
@@ -346,7 +339,6 @@ ve.dm.MWLanguageVariantNode.prototype.isHidden = function () {
  * Helper function to discriminate between various types of language
  * converter markup.
  *
- * @method
  * @return {string}
  */
 ve.dm.MWLanguageVariantNode.prototype.getRuleType = function () {
@@ -358,7 +350,6 @@ ve.dm.MWLanguageVariantNode.prototype.getRuleType = function () {
  * converter markup.
  *
  * @static
- * @method
  * @param {Object} variantInfo Language variant information object.
  * @return {string}
  */

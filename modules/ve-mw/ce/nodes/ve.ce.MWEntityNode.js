@@ -42,8 +42,6 @@ ve.ce.MWEntityNode.static.name = 'mwEntity';
 
 /**
  * Handle model update events.
- *
- * @method
  */
 ve.ce.MWEntityNode.prototype.onUpdate = function () {
 	var

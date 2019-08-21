@@ -58,8 +58,6 @@ ve.ce.MWGalleryNode.static.primaryCommandName = 'gallery';
 
 /**
  * Handle model update events.
- *
- * @method
  */
 ve.ce.MWGalleryNode.prototype.onUpdate = function () {
 	var mwAttrs, defaults, mode, imageWidth, imagePadding;

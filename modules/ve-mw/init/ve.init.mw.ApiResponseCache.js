@@ -46,7 +46,6 @@ OO.mixinClass( ve.init.mw.ApiResponseCache, OO.EventEmitter );
  *
  * @abstract
  * @static
- * @method
  * @param {Object} page The page object
  * @return {Object|undefined} Any relevant info that we want to cache and return.
  */
@@ -136,7 +135,6 @@ ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
  * Get an API request promise to deal with a list of titles
  *
  * @abstract
- * @method
  * @param subqueue
  * @return {jQuery.Promise}
  */

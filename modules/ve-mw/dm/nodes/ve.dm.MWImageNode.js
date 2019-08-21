@@ -325,7 +325,6 @@ ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
  * Update the rendering of the 'align', src', 'width' and 'height' attributes
  * when they change in the model.
  *
- * @method
  * @param {string} key Attribute key
  * @param {string} from Old value
  * @param {string} to New value

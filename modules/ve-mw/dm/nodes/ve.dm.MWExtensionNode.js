@@ -197,7 +197,6 @@ ve.dm.MWExtensionNode.static.describeChange = function ( key ) {
 /**
  * Get the extension's name
  *
- * @method
  * @return {string} Extension name
  */
 ve.dm.MWExtensionNode.prototype.getExtensionName = function () {

@@ -237,7 +237,6 @@ ve.ui.MWCategoryInputWidget.prototype.onLookupMenuItemChoose = function ( item )
 /**
  * Take a category name and turn it into a menu item widget, following redirects.
  *
- * @method
  * @param {string} name Category name
  * @return {OO.ui.MenuOptionWidget} Menu item widget to be shown
  */

@@ -349,7 +349,6 @@ ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
  * This method is called within the context of a target instance. If successful the DOM from the
  * server will be parsed, stored in {this.doc} and then {this.documentReady} will be called.
  *
- * @method
  * @param {Object} response API response data
  * @param {string} status Text status message
  */
@@ -624,7 +623,6 @@ ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
  *
  * This method is called within the context of a target instance.
  *
- * @method
  * @param {string} code Error type text from mw.Api
  * @param {Object|string} errorDetails Either an object containing xhr, textStatus and exception keys, or a string.
  * @fires loadError
@@ -639,7 +637,6 @@ ve.init.mw.ArticleTarget.prototype.loadFail = function () {
  *
  * This method is called within the context of a target instance.
  *
- * @method
  * @param {HTMLDocument} doc HTML document we tried to save
  * @param {Object} saveData Options that were used
  * @param {Object} response Response data
@@ -673,7 +670,6 @@ ve.init.mw.ArticleTarget.prototype.saveSuccess = function ( doc, saveData, respo
 /**
  * Handle successful DOM save event.
  *
- * @method
  * @param {string} html Rendered page HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {number} newid New revision id, undefined if unchanged
@@ -697,7 +693,6 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
 /**
  * Handle an unsuccessful save request.
  *
- * @method
  * @param {HTMLDocument} doc HTML document we tried to save
  * @param {Object} saveData Options that were used
  * @param {boolean} wasRetry Whether this was a retry after a 'badtoken' error
@@ -769,7 +764,6 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 /**
  * Show an save process error message
  *
- * @method
  * @param {string|jQuery|Node[]} msg Message content (string of HTML, jQuery object or array of
  *  Node objects)
  * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
@@ -783,7 +777,6 @@ ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply,
 /**
  * Handle general save error
  *
- * @method
  * @fires saveErrorEmpty
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
@@ -794,7 +787,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 /**
  * Handle hook abort save error
  *
- * @method
  * @fires saveErrorHookAborted
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function () {
@@ -805,7 +797,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function () {
 /**
  * Handle token fetch indicating another user is logged in, and token fetch errors.
  *
- * @method
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
  * @param {boolean} [error=false] Whether there was an error trying to figure out who we're logged in as
  * @fires saveErrorBadToken
@@ -833,7 +824,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, erro
 /**
  * Handle unknown save error
  *
- * @method
  * @param {Object} editApi
  * @param {Object|null} data API response data
  * @fires saveErrorUnknown
@@ -857,7 +847,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data )
 /**
  * Handle page deleted error
  *
- * @method
  * @fires saveErrorPageDeleted
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
@@ -869,7 +858,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 /**
  * Handle read only error
  *
- * @method
  * @fires saveErrorReadOnly
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function () {
@@ -880,7 +868,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function () {
 /**
  * Handle an edit conflict
  *
- * @method
  * @fires editConflict
  */
 ve.init.mw.ArticleTarget.prototype.editConflict = function () {
@@ -895,7 +882,6 @@ ve.init.mw.ArticleTarget.prototype.editConflict = function () {
  * This method is called within the context of a target instance.
  *
  * @static
- * @method
  * @param {Object} response API response data
  * @param {string} status Text status message
  * @fires serializeComplete
@@ -929,7 +915,6 @@ ve.init.mw.ArticleTarget.prototype.serializeSuccess = function ( response ) {
  *
  * This method is called within the context of a target instance.
  *
- * @method
  * @param {jqXHR|null} jqXHR
  * @param {string} status Text status message
  * @param {Mixed|null} error HTTP status text
@@ -943,7 +928,6 @@ ve.init.mw.ArticleTarget.prototype.serializeFail = function () {
 /**
  * Handle clicks on the review button in the save dialog.
  *
- * @method
  * @fires saveReview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
@@ -964,7 +948,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 /**
  * Handle clicks on the show preview button in the save dialog.
  *
- * @method
  * @fires savePreview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
@@ -1024,7 +1007,6 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
 /**
  * Handle completed serialize request for diff views for new page creations.
  *
- * @method
  * @param {string} wikitext
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
@@ -1096,8 +1078,6 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 
 /**
  * Handle clicks on the resolve conflict button in the conflict dialog.
- *
- * @method
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogResolveConflict = function () {
 	var fields = { wpSave: 1 };
@@ -1600,7 +1580,6 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
  *
  *     target.save( dom, { summary: 'test', minor: true, watch: false } );
  *
- * @method
  * @param {HTMLDocument} doc Document to save
  * @param {Object} options Saving options. All keys are passed through, including unrecognized ones.
  *  - {string} summary Edit summary
@@ -1666,7 +1645,6 @@ ve.init.mw.ArticleTarget.prototype.clearDiff = function () {
 /**
  * Post DOM data to the Parsoid API to retrieve wikitext diff.
  *
- * @method
  * @param {HTMLDocument} doc Document to compare against (via wikitext)
  * @return {jQuery.Promise} Promise which resolves with the wikitext diff, or rejects with an error
  * @fires showChanges
@@ -1712,7 +1690,6 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
  *
  *     target.submit( wikitext, { wpSummary: 'test', wpMinorEdit: 1, wpSave: 1 } );
  *
- * @method
  * @param {string} wikitext Wikitext to submit
  * @param {Object} fields Other form fields to add (e.g. wpSummary, wpWatchthis, etc.). To actually
  *  save the wikitext, add { wpSave: 1 }. To go to the diff view, add { wpDiff: 1 }.
@@ -1763,7 +1740,6 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
  *         }
  *     );
  *
- * @method
  * @param {HTMLDocument} doc Document to serialize
  * @param {Function} callback Function to call when complete, accepts error and wikitext arguments
  * @return {boolean} Serializing has been started
@@ -2058,8 +2034,6 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 /**
  * Move the cursor in the editor to section specified by this.section.
  * Do nothing if this.section is undefined.
- *
- * @method
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var dmDoc, headingModel, headingView, headingText,
@@ -2123,7 +2097,6 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 /**
  * Move the cursor to a given heading and scroll to it.
  *
- * @method
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
@@ -2169,7 +2142,6 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 /**
  * Scroll to a given heading in the document.
  *
- * @method
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {

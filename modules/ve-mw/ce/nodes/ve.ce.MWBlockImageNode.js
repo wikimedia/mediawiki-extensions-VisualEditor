@@ -208,8 +208,6 @@ ve.ce.MWBlockImageNode.prototype.getCssClass = function ( type, alignment ) {
 /**
  * Override the default onSetup to add direction-dependent
  * classes to the image thumbnail.
- *
- * @method
  */
 ve.ce.MWBlockImageNode.prototype.onSetup = function () {
 	// Parent method

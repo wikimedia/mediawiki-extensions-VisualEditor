@@ -42,7 +42,6 @@ ve.ui.MWSaveDialogAction.static.methods = [ 'save', 'review', 'preview' ];
 /**
  * Open the save dialog
  *
- * @method
  * @param {string} checkbox Checkbox to toggle after opening
  * @return {boolean} Action was executed
  */
@@ -54,7 +53,6 @@ ve.ui.MWSaveDialogAction.prototype.save = function ( checkbox ) {
 /**
  * Open the save dialog, and set it to the review panel
  *
- * @method
  * @return {boolean} Action was executed
  */
 ve.ui.MWSaveDialogAction.prototype.review = function () {
@@ -65,7 +63,6 @@ ve.ui.MWSaveDialogAction.prototype.review = function () {
 /**
  * Open the save dialog, and set it to the preview panel
  *
- * @method
  * @return {boolean} Action was executed
  */
 ve.ui.MWSaveDialogAction.prototype.preview = function () {

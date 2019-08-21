@@ -57,7 +57,6 @@ OO.inheritClass( ve.ui.MWParameterSearchWidget, OO.ui.SearchWidget );
 /**
  * Handle select widget select events.
  *
- * @method
  * @param {string} value New value
  */
 ve.ui.MWParameterSearchWidget.prototype.onQueryChange = function () {
@@ -71,7 +70,6 @@ ve.ui.MWParameterSearchWidget.prototype.onQueryChange = function () {
 /**
  * Handle SelectWidget choose events.
  *
- * @method
  * @param {OO.ui.OptionWidget} item Selected item
  * @fires choose
  * @fires showAll
@@ -89,7 +87,6 @@ ve.ui.MWParameterSearchWidget.prototype.onSearchResultsChoose = function ( item 
 /**
  * Build a searchable index of parameters.
  *
- * @method
  * @param {ve.dm.MWTemplateSpecModel} spec Template specification
  */
 ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
@@ -127,8 +124,6 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 
 /**
  * Handle media query response events.
- *
- * @method
  */
 ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 	var i, len, item, textMatch, nameMatch, remainder,

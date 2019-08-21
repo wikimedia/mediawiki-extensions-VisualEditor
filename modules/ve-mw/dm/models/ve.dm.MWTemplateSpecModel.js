@@ -157,7 +157,6 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
 /**
  * Get parameter order.
  *
- * @method
  * @return {string[]} Canonically ordered parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterOrder = function () {

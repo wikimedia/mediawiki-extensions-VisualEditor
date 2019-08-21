@@ -79,8 +79,6 @@ ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 
 /**
  * Handle model update events.
- *
- * @method
  */
 ve.ce.MWLanguageVariantNode.prototype.onUpdate = function () {
 	if ( !this.model.isHidden() ) {
@@ -120,7 +118,6 @@ ve.ce.MWLanguageVariantNode.prototype.getInvisibleIconLabel = function () {
 /**
  * Create a {jQuery} appropriate for holding the output of this
  * conversion rule.
- * @method
  * @return {jQuery}
  */
 ve.ce.MWLanguageVariantNode.prototype.appendHolder = function () {

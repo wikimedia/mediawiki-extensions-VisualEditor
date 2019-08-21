@@ -75,7 +75,6 @@ ve.ce.MWInlineImageNode.static.name = 'mwInlineImage';
 
 /**
  * Update CSS classes based on current attributes
- *
  */
 ve.ce.MWInlineImageNode.prototype.updateClasses = function () {
 	var valign = this.model.getAttribute( 'valign' );
