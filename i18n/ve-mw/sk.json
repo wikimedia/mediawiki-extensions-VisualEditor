@@ -10,7 +10,8 @@
 			"Lexected",
 			"Patriccck",
 			"Robert Važan",
-			"Vegetator"
+			"Vegetator",
+			"Luky001"
 		]
 	},
 	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
@@ -129,6 +130,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Zastaraný parameter",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parameter je zastaraný. $1",
 	"visualeditor-dialog-transclusion-loading": "Načítava sa...",
+	"visualeditor-dialog-transclusion-more-template-description": "Ďalšie informácie o šablóne „$1“ môžu byť uvedené na [[{{ns:template}}:$1|jej stránke]].",
 	"visualeditor-dialog-transclusion-multiple-mode": "Zobraziť možnosti",
 	"visualeditor-dialog-transclusion-no-template-description": "Šablóna „$1“ zatiaľ nemá popis, nejaké informácie sa ale môžu nachádzať na [[$1|jej stránke]].",
 	"visualeditor-dialog-transclusion-options": "Možnosti",
@@ -212,11 +214,14 @@
 	"visualeditor-preference-core-description": "Povoliť Vizuálny editor (nebude k dispozícii v diskusiách a niektorých ďalších menných priestoroch).",
 	"visualeditor-preference-core-label": "Vizuálna úprava",
 	"visualeditor-preference-enable": "Povoliť Vizuálny editor. Bude k dispozícii v týchto menných priestoroch: $1",
+	"visualeditor-preference-newwikitexteditor-description": "Povolí nový režim wikitextu vo Vizuálnom editore. Obsahuje mnoho nástrojov z Vizuálneho editora, má podobný vzhľad a umožňuje lepšie prepínanie medzi nimi.",
+	"visualeditor-preference-newwikitexteditor-label": "Nový režim wikitextu",
 	"visualeditor-preference-tabs": "Režim úprav:",
 	"visualeditor-preference-tabs-multi-tab": "Zobraziť záložky pre oba editory",
 	"visualeditor-preference-tabs-prefer-ve": "Vždy použiť vizuálny editor, ak je to možné",
 	"visualeditor-preference-tabs-prefer-wt": "Vždy použiť editor zdrojového kódu",
 	"visualeditor-preference-tabs-remember-last": "Zapamätať naposledy použitý editor",
+	"visualeditor-preference-visualdiffpage-description": "Povoliť nový vizuálny režim pri porovnávaní rozdielu medzi verziami stránky.",
 	"visualeditor-preference-visualdiffpage-label": "Vizuálne rozdiely verzií",
 	"visualeditor-recreate": "Počas vašich úprav bola stránka zmazaná. Tlačidlom $1 ju obnovíte.",
 	"visualeditor-savedialog-error-badtoken": "Vašu úpravu nebolo možné spracovať, protože doba platnosti návštevy vyprašala.",
@@ -242,6 +247,7 @@
 	"visualeditor-special-characters-group-other": "Často používané",
 	"visualeditor-usernamespacepagelink": "Project:Menný priestor Používateľ",
 	"visualeditor-version-label": "Verzia",
+	"visualeditor-wikitext-progress": "Prebieha konverzia wikitextu",
 	"visualeditor-wikitext-warning": "Používate Vizuálny editor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] sa tu nepoužíva. Kedykoľvek sa však môžete bez straty vykonaných úprav prepnúť do režimu editácie zdrojového kódu, kliknutím na tlačidlo „Prepnúť“.",
 	"visualeditor-wikitext-warning-title": "Zistená syntax wikitextu"
 }

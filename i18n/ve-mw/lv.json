@@ -276,7 +276,7 @@
 	"visualeditor-parameter-search-more": "Rādīt vēl $1 {{PLURAL:$1|laukus|lauku|laukus}}",
 	"visualeditor-parameter-search-no-unused": "Nav neizmantotu lauku",
 	"visualeditor-parameter-search-unknown": "Nezināms lauks",
-	"visualeditor-preference-betatempdisable": "Īslaicīgi atslēgt vizuālo redaktoru, kamēr tas ir beta stadijā",
+	"visualeditor-preference-betatempdisable": "Īslaicīgi atslēgt vizuālo redaktoru, kamēr tas ir bēta stadijā",
 	"visualeditor-preference-core-description": "Ieslēgt vizuālo redaktoru. Tas nebūs pieejams diskusiju lapās un dažās citās vārdtelpās.",
 	"visualeditor-preference-core-label": "Vizuālā labošana",
 	"visualeditor-preference-enable": "Ieslēgt vizuālo redaktoru. Tas būs pieejams {{PLURAL:$2|šajās vārdtelpās|šajā vārdtelpā|šajās vārdtelpāsšajās vārdtelpās}}: $1",
