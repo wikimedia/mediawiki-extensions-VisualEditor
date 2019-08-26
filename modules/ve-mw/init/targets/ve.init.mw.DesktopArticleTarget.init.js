@@ -350,7 +350,7 @@
 						targetName: 'mwTarget',
 						modified: modified,
 						preload: uri.query.preload,
-						preloadparams: uri.query[ 'preloadparams[]' ],
+						preloadparams: uri.query.preloadparams,
 						// If switching to visual with modifications, check if we have wikitext to convert
 						wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					} );
@@ -480,7 +480,7 @@
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
 	tabMessages = conf.tabMessages;
-	uri = new mw.Uri();
+	uri = new mw.Uri( null, { arrayParams: true } );
 	// T156998: Don't trust uri.query.oldid, it'll be wrong if uri.query.diff or uri.query.direction
 	// is set to 'next' or 'prev'.
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
