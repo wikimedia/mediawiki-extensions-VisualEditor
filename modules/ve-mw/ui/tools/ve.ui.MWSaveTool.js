@@ -46,7 +46,7 @@ ve.ui.MWSaveTool.static.autoAddToGroup = false;
  */
 ve.ui.MWSaveTool.prototype.onUpdateState = function () {
 	var wasSaveable = !this.isDisabled(),
-		isSaveable = ve.init.target.isSaveable();
+		isSaveable = ve.init.target && ve.init.target.isSaveable();
 
 	// This could be a ve.ui.WindowTool that becomes active
 	// when the save dialog is open, but onUpdateState is

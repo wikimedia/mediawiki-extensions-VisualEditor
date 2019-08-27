@@ -1987,10 +1987,10 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxName ) {
-	var checkbox, currentWindow,
+	var checkbox, currentWindow, openPromise,
 		target = this;
 
-	if ( !this.isSaveable() ) {
+	if ( !this.isSaveable() || this.saveDialogIsOpening ) {
 		return;
 	}
 
@@ -2003,6 +2003,8 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 		currentWindow.executeAction( 'save' );
 		return;
 	}
+
+	this.saveDialogIsOpening = true;
 
 	this.emit( 'saveWorkflowBegin' );
 
@@ -2034,6 +2036,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 			( action === 'review' && !data.canReview ) ||
 			( action === 'preview' && !data.canPreview )
 		) {
+			target.saveDialogIsOpening = false;
 			return;
 		}
 
@@ -2051,7 +2054,12 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 		}
 
 		// Open the dialog
-		windowAction.open( 'mwSave', data, action );
+		openPromise = windowAction.open( 'mwSave', data, action );
+		if ( openPromise ) {
+			openPromise.always( function () {
+				target.saveDialogIsOpening = false;
+			} );
+		}
 	} );
 };
 
