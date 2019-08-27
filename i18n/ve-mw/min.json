@@ -85,6 +85,7 @@
 	"visualeditor-loadwarning": "Kasalahan pamuatan data dari server: $1. Apo Sanak nio mancubo lai?",
 	"visualeditor-loadwarning-token": "Kasalahan pamuatan token suntiangan dari server: $1. Apo Sanak nio mancubo lai?",
 	"visualeditor-mainnamespacepagelink": "Project:Ruangnamo utamo",
+	"visualeditor-preference-betatempdisable": "Semantaro nonaktifkan panyuntiang visual dalam versi beta",
 	"visualeditor-preference-enable": "Aktipan VisualEditor (hanyo pado ruangnamo [[{{MediaWiki:Visualeditor-mainnamespacepagelink}}|utamo]] jo [[{{MediaWiki:Visualeditor-usernamespacepagelink}}|pangguno]])",
 	"visualeditor-savedialog-label-create": "Buek laman",
 	"visualeditor-savedialog-label-report": "Laporkan masalah",

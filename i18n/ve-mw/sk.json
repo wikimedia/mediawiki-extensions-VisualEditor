@@ -178,6 +178,8 @@
 	"visualeditor-linkinspector-educationpopup-text": "Dôležité slová prepojte s ich článkami na wiki, čitateľom to pomôže pochopiť kontext.",
 	"visualeditor-linkinspector-educationpopup-title": "Odkazy",
 	"visualeditor-linkinspector-illegal-title": "Neplatný názov stránky",
+	"visualeditor-linkinspector-invalid-external": "Zadajte celé URL, napr. https://example.org",
+	"visualeditor-linknodeinspector-add-label": "Pridať popis",
 	"visualeditor-linknodeinspector-title": "Jednoduchý odkaz",
 	"visualeditor-loadwarning": "Chyba pri načítavaní údajov zo servera: $1. Želáte si operáciu zopakovať?",
 	"visualeditor-loadwarning-token": "Chyba pri načítavaní editačného tokenu zo servera: $1. Želáte si operáciu zopakovať?",
