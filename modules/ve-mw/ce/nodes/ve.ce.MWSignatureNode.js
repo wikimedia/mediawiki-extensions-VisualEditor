@@ -116,7 +116,7 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 		onlypst: true
 	} )
 		.done( function ( resp ) {
-			var wikitext = ve.getProp( resp, 'parse', 'text', '*' );
+			var wikitext = ve.getProp( resp, 'parse', 'text' );
 			if ( wikitext ) {
 				// Call parent method with the wikitext with PST applied.
 				ve.ce.MWSignatureNode.parent.prototype.generateContents.call(
