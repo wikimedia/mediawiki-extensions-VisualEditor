@@ -443,7 +443,9 @@ class ApiVisualEditor extends ApiBase {
 
 				// Look at protection status to set up notices + surface class(es)
 				$protectedClasses = [];
-				if ( MWNamespace::getRestrictionLevels( $title->getNamespace() ) !== [ '' ] ) {
+				if ( MediaWikiServices::getInstance()->getPermissionManager()
+						->getNamespaceRestrictionLevels( $title->getNamespace() ) !== [ '' ]
+				) {
 					// Page protected from editing
 					if ( $title->isProtected( 'edit' ) ) {
 						// Is the title semi-protected?
@@ -688,12 +690,13 @@ class ApiVisualEditor extends ApiBase {
 			(array)ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
 		return array_values( array_unique( array_map( function ( $namespace ) {
 			// Convert canonical namespace names to IDs
-			$idFromName = MWNamespace::getCanonicalIndex( strtolower( $namespace ) );
+			$nsInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
+			$idFromName = $nsInfo->getCanonicalIndex( strtolower( $namespace ) );
 			if ( $idFromName !== null ) {
 				return $idFromName;
 			}
 			// Allow namespaces to be specified by ID as well
-			return MWNamespace::exists( $namespace ) ? $namespace : null;
+			return $nsInfo->exists( $namespace ) ? $namespace : null;
 		}, array_keys( array_filter( $availableNamespaces ) ) ) ) );
 	}
 
