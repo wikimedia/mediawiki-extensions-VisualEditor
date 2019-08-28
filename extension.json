@@ -1580,6 +1580,7 @@
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
 				"mediawiki.storage",
+				"mediawiki.pulsatingdot",
 				"jquery.cookie",
 				"mediawiki.notify",
 				"mediawiki.skinning.content.parsoid",

@@ -63,7 +63,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	} );
 
 	this.shownEducationPopup = false;
-	this.$pulsatingDot = $( '<div>' ).addClass( 've-ui-pulsatingDot' );
+	this.$pulsatingDot = $( '<div>' ).addClass( 'mw-pulsating-dot' );
 	$shield = $( '<div>' ).addClass( 've-ui-educationPopup-shield' );
 	this.$element
 		.addClass( 've-ui-educationPopup' )
