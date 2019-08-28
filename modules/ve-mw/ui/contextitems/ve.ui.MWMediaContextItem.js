@@ -32,7 +32,7 @@ ve.ui.MWMediaContextItem = function VeUiMWMediaContextItem( context, model ) {
 		Audio: 'play',
 		Video: 'play'
 	}[ mediaClass ] );
-	// The following messages can be used here
+	// The following messages are used here:
 	// * visualeditor-media-title-audio
 	// * visualeditor-media-title-image
 	// * visualeditor-media-title-video

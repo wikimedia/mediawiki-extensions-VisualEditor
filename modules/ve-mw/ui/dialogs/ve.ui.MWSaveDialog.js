@@ -344,11 +344,11 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 	}
 
 	// Update the window title
-	// The following messages can be used here:
-	// visualeditor-savedialog-title-conflict
-	// visualeditor-savedialog-title-preview
-	// visualeditor-savedialog-title-review
-	// visualeditor-savedialog-title-save
+	// The following messages are used here:
+	// * visualeditor-savedialog-title-conflict
+	// * visualeditor-savedialog-title-preview
+	// * visualeditor-savedialog-title-review
+	// * visualeditor-savedialog-title-save
 	this.title.setLabel( ve.msg( 'visualeditor-savedialog-title-' + panel ) );
 
 	// Reset save button if we disabled it for e.g. unrecoverable spam error
@@ -469,8 +469,9 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 		$message = $( '<div>' ).addClass( 've-ui-mwSaveDialog-message' );
 		if ( options.wrap !== false ) {
 			$message.append( $( '<p>' ).append(
-				// visualeditor-savedialog-label-error
-				// visualeditor-savedialog-label-warning
+				// The following messages are used here:
+				// * visualeditor-savedialog-label-error
+				// * visualeditor-savedialog-label-warning
 				$( '<strong>' ).text( mw.msg( 'visualeditor-savedialog-label-' + options.wrap ) ),
 				document.createTextNode( mw.msg( 'colon-separator' ) ),
 				message

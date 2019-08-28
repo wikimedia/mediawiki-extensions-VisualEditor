@@ -466,6 +466,12 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			accesskey = null;
 			title = null;
 			if ( options.tooltip ) {
+				// The following messages are used here:
+				// * tooltip-minoredit
+				// * tooltip-watch
+				// * accesskey-minoredit
+				// * accesskey-watch
+				// These are just the messages defined in core. Extensions may add other checkboxes.
 				accesskey = mw.message( 'accesskey-' + options.tooltip ).text();
 				title = mw.message( 'tooltip-' + options.tooltip ).text();
 			}
