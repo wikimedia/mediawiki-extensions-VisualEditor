@@ -468,12 +468,16 @@ ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( html, categor
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, response ) {
-
+ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
 	// parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveFail.apply( this, arguments );
 
-	this.overlay.onSaveFailure( this.constructor.static.parseSaveError( response, status ) );
+	// Massage errorformat=html responses to look more like errorformat=bc expected by MF
+	if ( data.errors ) {
+		data.error = data.errors[ 0 ];
+	}
+
+	this.overlay.onSaveFailure( this.constructor.static.parseSaveError( data, status ) );
 };
 
 /**

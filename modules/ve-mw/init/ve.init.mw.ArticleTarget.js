@@ -701,7 +701,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
  * @param {Object|null} data API response data
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
-	var editApi, name, handler,
+	var name, handler, i, error,
 		saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
 		target = this;
 
@@ -714,37 +714,43 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		return;
 	}
 
-	// Handle token errors
-	if ( data.error && data.error.code === 'badtoken' ) {
-		if ( wasRetry ) {
-			this.saveErrorBadToken( null, true );
-			return;
-		}
-		this.refreshEditToken().done( function ( userChanged ) {
-			// target.editToken has been refreshed
-			if ( userChanged ) {
-				target.saveErrorBadToken( mw.user.isAnon() ? null : mw.user.getName(), false );
-			} else {
-				// New session is the same user still; retry
-				target.emit( 'saveErrorBadToken', true );
-				target.save( doc, saveData, true );
+	if ( data.errors ) {
+		for ( i = 0; i < data.errors.length; i++ ) {
+			error = data.errors[ i ];
+
+			// Handle token errors
+			if ( error.code === 'badtoken' ) {
+				if ( wasRetry ) {
+					this.saveErrorBadToken( null, true );
+					return;
+				}
+				this.refreshEditToken().done( function ( userChanged ) {
+					// target.editToken has been refreshed
+					if ( userChanged ) {
+						target.saveErrorBadToken( mw.user.isAnon() ? null : mw.user.getName(), false );
+					} else {
+						// New session is the same user still; retry
+						target.emit( 'saveErrorBadToken', true );
+						target.save( doc, saveData, true );
+					}
+				} ).fail( function () {
+					target.saveErrorBadToken( null, true );
+				} );
+				return;
+			} else if ( error.code === 'editconflict' ) {
+				this.editConflict();
+				return;
+			} else if ( error.code === 'pagedeleted' ) {
+				this.saveErrorPageDeleted();
+				return;
+			} else if ( error.code === 'hookaborted' ) {
+				this.saveErrorHookAborted( data );
+				return;
+			} else if ( error.code === 'readonly' ) {
+				this.saveErrorReadOnly( data );
+				return;
 			}
-		} ).fail( function () {
-			target.saveErrorBadToken( null, true );
-		} );
-		return;
-	} else if ( data.error && data.error.code === 'editconflict' ) {
-		this.editConflict();
-		return;
-	} else if ( data.error && data.error.code === 'pagedeleted' ) {
-		this.saveErrorPageDeleted();
-		return;
-	} else if ( data.error && data.error.code === 'hookaborted' ) {
-		this.saveErrorHookAborted();
-		return;
-	} else if ( data.error && data.error.code === 'readonly' ) {
-		this.saveErrorReadOnly();
-		return;
+		}
 	}
 
 	for ( name in saveErrorHandlerFactory.registry ) {
@@ -757,8 +763,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 	}
 
 	// Handle (other) unknown and/or unrecoverable errors
-	editApi = ve.getProp( data, 'visualeditoredit', 'edit' ) || {};
-	this.saveErrorUnknown( editApi, data );
+	this.saveErrorUnknown( data );
 };
 
 /**
@@ -775,6 +780,21 @@ ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply,
 };
 
 /**
+ * Extract the error messages from an erroneous API response
+ *
+ * @param {Object} data API response data
+ * @return {jQuery}
+ */
+ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
+	var errorMsgs = data.errors.map( function ( err ) {
+		var $node = $( '<div>' ).html( err.html );
+		ve.targetLinksToNewWindow( $node[ 0 ] );
+		return $node[ 0 ];
+	} );
+	return $( errorMsgs );
+};
+
+/**
  * Handle general save error
  *
  * @fires saveErrorEmpty
@@ -787,10 +807,11 @@ ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 /**
  * Handle hook abort save error
  *
+ * @param {Object} data API response data
  * @fires saveErrorHookAborted
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function () {
-	this.showSaveError( mw.msg( 'visualeditor-saveerror-hookaborted' ) );
+ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function ( data ) {
+	this.showSaveError( this.extractErrorMessages( data ) );
 	this.emit( 'saveErrorHookAborted' );
 };
 
@@ -824,24 +845,33 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, erro
 /**
  * Handle unknown save error
  *
- * @param {Object} editApi
  * @param {Object|null} data API response data
  * @fires saveErrorUnknown
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data ) {
-	var errorMsg = ( editApi && editApi.info ) || ( data && data.error && data.error.info ),
-		errorCode = ( editApi && editApi.code ) || ( data && data.error && data.error.code ),
+ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
+	var errorCodes, unknown;
+
+	if ( data.errors ) {
+		this.showSaveError( this.extractErrorMessages( data ), false );
+
+		errorCodes = data.errors.map( function ( err ) {
+			return err.code;
+		} ).join( ',' );
+
+		this.emit( 'saveErrorUnknown', errorCodes );
+	} else {
 		unknown = 'Unknown error';
+		if ( data.xhr && data.xhr.status !== 200 ) {
+			unknown += ', HTTP status ' + data.xhr.status;
+		}
 
-	if ( data.xhr && data.xhr.status !== 200 ) {
-		unknown += ', HTTP status ' + data.xhr.status;
+		this.showSaveError(
+			unknown,
+			false // prevents reapply
+		);
+
+		this.emit( 'saveErrorUnknown', unknown );
 	}
-
-	this.showSaveError(
-		$( document.createTextNode( errorMsg || errorCode || unknown ) ),
-		false // prevents reapply
-	);
-	this.emit( 'saveErrorUnknown', errorCode || errorMsg || unknown );
 };
 
 /**
@@ -851,6 +881,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( editApi, data )
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 	this.pageDeletedWarning = true;
+	// The API error message 'apierror-pagedeleted' is poor, make our own
 	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true, true );
 	this.emit( 'saveErrorPageDeleted' );
 };
@@ -858,10 +889,11 @@ ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 /**
  * Handle read only error
  *
+ * @param {Object} data API response data
  * @fires saveErrorReadOnly
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function () {
-	this.showSaveError( $( $.parseHTML( mw.message( 'apierror-readonly' ).parse() ) ), true, true );
+ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function ( data ) {
+	this.showSaveError( this.extractErrorMessages( data ), true, true );
 	this.emit( 'saveErrorReadOnly' );
 };
 
@@ -1598,6 +1630,9 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 	data = ve.extendObject( {}, options, {
 		action: 'visualeditoredit',
 		paction: 'save',
+		errorformat: 'html',
+		errorlang: mw.config.get( 'wgUserLanguage' ),
+		errorsuselocal: 1,
 		page: this.getPageName(),
 		oldid: this.revid,
 		basetimestamp: this.baseTimeStamp,
