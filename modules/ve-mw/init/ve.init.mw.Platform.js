@@ -254,6 +254,28 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 					groupObject[ charVal.label ] = charVal;
 				}
 			} );
+			// The following messages are used here:
+			// * special-characters-group-arabic
+			// * special-characters-group-arabicextended
+			// * special-characters-group-bangla
+			// * special-characters-group-canadianaboriginal
+			// * special-characters-group-cyrillic
+			// * special-characters-group-devanagari
+			// * special-characters-group-greek
+			// * special-characters-group-greekextended
+			// * special-characters-group-gujarati
+			// * special-characters-group-hebrew
+			// * special-characters-group-ipa
+			// * special-characters-group-khmer
+			// * special-characters-group-lao
+			// * special-characters-group-latin
+			// * special-characters-group-latinextended
+			// * special-characters-group-persian
+			// * special-characters-group-sinhala
+			// * special-characters-group-symbols
+			// * special-characters-group-tamil
+			// * special-characters-group-telugu
+			// * special-characters-group-thai
 			characters[ mw.msg( 'special-characters-group-' + groupName ) ] = groupObject;
 			groupObject.attributes = { dir: rtlGroups.indexOf( groupName ) !== -1 ? 'rtl' : 'ltr' };
 		} );

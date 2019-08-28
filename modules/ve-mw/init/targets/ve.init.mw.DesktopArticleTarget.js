@@ -1017,9 +1017,9 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		this.tryTeardown( true );
 		if ( newid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
-				// The following messages can be used here:
-				// postedit-confirmation-published
-				// postedit-confirmation-saved
+				// The following messages are used here:
+				// * postedit-confirmation-published
+				// * postedit-confirmation-saved
 				message: ve.msg( 'postedit-confirmation-' + ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? 'published' : 'saved' ), mw.user )
 			} );
 		}

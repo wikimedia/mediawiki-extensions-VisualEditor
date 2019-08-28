@@ -177,10 +177,12 @@ ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
 	switch ( key ) {
 		case 'align':
 			return ve.htmlMsg( 'visualeditor-changedesc-align',
-				// Messages used:
-				// visualeditor-align-desc-left, visualeditor-align-desc-right,
-				// visualeditor-align-desc-center, visualeditor-align-desc-default,
-				// visualeditor-align-desc-none
+				// The following messages are used here:
+				// * visualeditor-align-desc-left
+				// * visualeditor-align-desc-right
+				// * visualeditor-align-desc-center
+				// * visualeditor-align-desc-default
+				// * visualeditor-align-desc-none
 				this.wrapText( 'del', ve.msg( 'visualeditor-align-desc-' + change.from ) ),
 				this.wrapText( 'ins', ve.msg( 'visualeditor-align-desc-' + change.to ) )
 			);
