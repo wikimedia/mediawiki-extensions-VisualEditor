@@ -91,26 +91,6 @@
 	margin: 0 auto;
 }
 
-.ve-init-mw-mobileArticleTarget-title-container {
-	width: 100%;
-	position: relative;
-	border-right: 1px solid #c8ccd1;
-}
-
-.ve-init-mw-mobileArticleTarget-title {
-	padding: 0 0.5em;
-	line-height: 3.164em;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-}
-
-.ve-init-mw-mobileArticleTarget-pageTools,
 .ve-init-mw-mobileArticleTarget-editTools {
 	display: flex;
 
@@ -119,6 +99,8 @@
 	}
 
 	> .oo-ui-toolGroup {
+		flex: 1;
+
 		&-empty {
 			display: none;
 		}
@@ -126,13 +108,6 @@
 		&:last-child {
 			border-right: 0;
 		}
-	}
-}
-
-.ve-init-mw-mobileArticleTarget-editTools {
-	/* stylelint-disable-next-line no-descending-specificity */
-	> .oo-ui-toolGroup {
-		flex: 1;
 	}
 
 	> .oo-ui-popupToolGroup > .oo-ui-popupToolGroup-handle {
@@ -180,23 +155,6 @@
 			}
 		}
 	}
-}
-
-.ve-init-mw-mobileArticleTarget-pageTools {
-	/* stylelint-disable-next-line no-descending-specificity */
-	> .oo-ui-toolGroup,
-	> .ve-init-mw-mobileArticleTarget-title-container {
-		flex: auto;
-	}
-
-	.ve-ui-toolbar-group-editMode {
-		min-width: 4em;
-	}
-}
-
-.ve-init-mw-mobileArticleTarget-editTools-hidden,
-.ve-init-mw-mobileArticleTarget-pageToolbar-hidden {
-	display: none;
 }
 
 .ve-init-mw-mobileArticleTarget-iosScreenMeasure {
