@@ -11,19 +11,13 @@
 .ve-edit-visual .mw-ui-icon {
 	position: absolute;
 	opacity: 0.65;
-	transform: scale( 0.6 );
-	right: 0;
-	bottom: 0;
-	transform-origin: bottom right;
-}
-
-.ve-edit-source .mw-ui-icon:before,
-.ve-edit-source.mw-ui-icon:before,
-.ve-edit-visual .mw-ui-icon:before,
-.ve-edit-visual.mw-ui-icon:before {
-	/* Override weird styles from MW-UI */
-	margin-right: 0;
-	background-size: contain;
+	/* Center within the parent element (pencil icon) */
+	left: 50%;
+	top: 50%;
+	margin-left: -12px;
+	margin-top: -12px;
+	/* Position relative to the center, easier this way because dimensions differ */
+	transform: scale( 0.6 ) translate( 12px, 12px );
 }
 
 .mw-editsection-divider {
@@ -33,9 +27,4 @@
 .mw-editsection .ve-edit-source,
 .mw-editsection .ve-edit-visual {
 	display: inline-block;
-}
-
-#page-actions .ve-edit-source,
-#page-actions .ve-edit-visual {
-	padding-right: 0.5em;
 }

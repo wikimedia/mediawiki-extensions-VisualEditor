@@ -614,7 +614,7 @@
 				action = pageExists ? 'edit' : 'create',
 				isMinerva = mw.config.get( 'skin' ) === 'minerva',
 				// HACK: Minerva doesn't have a normal tabs container, this only kind of works
-				pTabsId = isMinerva ? 'mw-mf-page-center' :
+				pTabsId = isMinerva ? 'content' :
 					$( '#p-views' ).length ? 'p-views' : 'p-cactions',
 				// Minerva puts the '#ca-...' ids on <a> nodes
 				$caSource = $( 'li#ca-viewsource' ),
@@ -652,7 +652,7 @@
 
 					$caVeEdit = $( caVeEdit );
 					$caVeEditLink = $caVeEdit.find( 'a' );
-					// HACK: Copy the 'class' attribute, otherwise the link is invisible on Minerva
+					// HACK: Copy the 'class' attribute, otherwise the link has no icon on Minerva
 					if ( isMinerva ) {
 						$caVeEdit.attr( 'class', $caEdit.attr( 'class' ) );
 						$caVeEditLink.attr( 'class', $caEditLink.attr( 'class' ) );
