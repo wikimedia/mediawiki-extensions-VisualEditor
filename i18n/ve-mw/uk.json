@@ -389,7 +389,6 @@
 	"visualeditor-savedialog-title-save": "Зберегти зміни",
 	"visualeditor-savedialog-warning-dirty": "Внесені зміни, можливо, були пошкоджені – будь ласка, перегляньте перед збереженням.",
 	"visualeditor-saveerror": "Помилка при збереженні даних на сервер: $1.",
-	"visualeditor-saveerror-hookaborted": "Помилка при збереженні сторінки: розширення на сервері не дозволило Вам виконати збереження.",
 	"visualeditor-section-body-placeholder": "Новий розділ",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Помилка при завантаженні даних із сервера: $1.",

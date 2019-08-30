@@ -344,7 +344,6 @@
 	"visualeditor-savedialog-title-save": "Zure aldaketak gorde",
 	"visualeditor-savedialog-warning-dirty": "Baliteke zure aldaketa hondatuta egotea – mesedez berrikusi gorde aurretik",
 	"visualeditor-saveerror": "Errorea zerbitzarian datuak gordetzean: $1.",
-	"visualeditor-saveerror-hookaborted": "Errorea orria gordetzean: zerbitzariko luzapen batek ez dizu gordetzen utzi.",
 	"visualeditor-section-body-placeholder": "Atal berria",
 	"visualeditor-section-title-placeholder": "Gaia",
 	"visualeditor-serializeerror": "Errorea zerbitzaritik datuak kargatzean: $1.",

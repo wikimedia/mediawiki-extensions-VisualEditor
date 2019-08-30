@@ -377,7 +377,6 @@
 	"visualeditor-savedialog-title-save": "Konservi viajn ŝanĝojn",
 	"visualeditor-savedialog-warning-dirty": "Via redakto eble estis difektita. Bonvolu kontroli antaŭ konservado.",
 	"visualeditor-saveerror": "Eraro dum konservado de datumoj al servilo: $1.",
-	"visualeditor-saveerror-hookaborted": "Eraro dum konservado de paĝo: kromprogramo en la servilo malhelpis la konservadon.",
 	"visualeditor-section-body-placeholder": "Nova sekcio",
 	"visualeditor-section-title-placeholder": "Temo",
 	"visualeditor-serializeerror": "Eraro dum ŝutado de datumoj de servilo: $1.",

@@ -336,7 +336,6 @@
 	"visualeditor-savedialog-title-save": "Simpan suntingan anda",
 	"visualeditor-savedialog-warning-dirty": "Suntingan anda mungkin telah tercemar – sila semak sebelum menyimpan.",
 	"visualeditor-saveerror": "Ralat ketika menyimpan data ke pelayan: $1",
-	"visualeditor-saveerror-hookaborted": "Ralat menyimpan halaman: Simpanan dihalang oleh ekstensi di pelayan.",
 	"visualeditor-section-body-placeholder": "Bahagian baru",
 	"visualeditor-section-title-placeholder": "Subjek",
 	"visualeditor-serializeerror": "Ralat ketika memuatkan data dari pelayan: $1.",

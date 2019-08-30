@@ -384,7 +384,6 @@
 	"visualeditor-savedialog-title-save": "Guardar tus cambios",
 	"visualeditor-savedialog-warning-dirty": "Tu edición puede haber sido corrompida. Revisa antes de guardar.",
 	"visualeditor-saveerror": "Error al guardar datos en el servidor: $1.",
-	"visualeditor-saveerror-hookaborted": "Error al guardar la página: una extensión en el servidor impidió el guardado.",
 	"visualeditor-section-body-placeholder": "Nueva sección",
 	"visualeditor-section-title-placeholder": "Asunto",
 	"visualeditor-serializeerror": "Error al cargar datos del servidor: $1.",

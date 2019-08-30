@@ -370,7 +370,6 @@
 	"visualeditor-savedialog-title-save": "Čuvanje promena",
 	"visualeditor-savedialog-warning-dirty": "Vaša izmena je možda oštećena — pregledajte je pre čuvanja.",
 	"visualeditor-saveerror": "Greška pri čuvanju podataka na server: $1.",
-	"visualeditor-saveerror-hookaborted": "Greška pri čuvanju stranice: Dodatak na serveru vas je sprečio.",
 	"visualeditor-section-body-placeholder": "Novi odeljak",
 	"visualeditor-section-title-placeholder": "Tema",
 	"visualeditor-serializeerror": "Greška pri učitavanju podataka sa servera: $1.",

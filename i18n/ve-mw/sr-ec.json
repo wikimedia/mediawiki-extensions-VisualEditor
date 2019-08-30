@@ -375,7 +375,6 @@
 	"visualeditor-savedialog-title-save": "Чување промена",
 	"visualeditor-savedialog-warning-dirty": "Ваша измена је можда оштећена — прегледајте је пре чувања.",
 	"visualeditor-saveerror": "Грешка при чувању података на сервер: $1.",
-	"visualeditor-saveerror-hookaborted": "Грешка при чувању странице: Додатак на серверу вас је спречио.",
 	"visualeditor-section-body-placeholder": "Нови одељак",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Грешка при учитавању података са сервера: $1.",

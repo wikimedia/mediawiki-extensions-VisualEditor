@@ -398,7 +398,6 @@
 	"visualeditor-savedialog-title-save": "حفظ تعديلاتك",
 	"visualeditor-savedialog-warning-dirty": "ربما تعرض تحريرك للعطب – نرجو المراجعة قبل الحفظ.",
 	"visualeditor-saveerror": "حدث خطأ أثناء حفظ البيانات إلى الخادم: $1.",
-	"visualeditor-saveerror-hookaborted": "خطأ أثناء حفظ الصفحة: امتداد على الخادم منعك من الحفظ.",
 	"visualeditor-section-body-placeholder": "قسم جديد",
 	"visualeditor-section-title-placeholder": "الموضوع",
 	"visualeditor-serializeerror": "خطأ في تحميل البيانات من الخادم: $1.",
