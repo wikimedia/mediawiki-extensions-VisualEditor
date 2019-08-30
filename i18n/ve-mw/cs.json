@@ -398,7 +398,6 @@
 	"visualeditor-savedialog-title-save": "Uložit změny",
 	"visualeditor-savedialog-warning-dirty": "Vaše editace byla možná poškozena – před uložením ji prosím zkontrolujte.",
 	"visualeditor-saveerror": "Chyba při ukládání dat na server: $1.",
-	"visualeditor-saveerror-hookaborted": "Chyba při ukládání: Rozšíření serveru vám zabránilo uložit změny.",
 	"visualeditor-section-body-placeholder": "Nová sekce",
 	"visualeditor-section-title-placeholder": "Předmět",
 	"visualeditor-serializeerror": "Chyba při načítání dat ze serveru: $1.",

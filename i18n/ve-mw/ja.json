@@ -367,7 +367,6 @@
 	"visualeditor-savedialog-title-save": "変更内容の保存",
 	"visualeditor-savedialog-warning-dirty": "編集内容が競合しているそれがあります - 保存する前に確認してください。",
 	"visualeditor-saveerror": "サーバーにデータを保存する際にエラーが発生しました: $1",
-	"visualeditor-saveerror-hookaborted": "エラー: サーバーの拡張機能により保存できませんでした。",
 	"visualeditor-section-body-placeholder": "新しい節",
 	"visualeditor-section-title-placeholder": "題名",
 	"visualeditor-serializeerror": "サーバーからデータを読み込む際にエラーが発生しました: $1",

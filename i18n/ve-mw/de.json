@@ -379,7 +379,6 @@
 	"visualeditor-savedialog-title-save": "Änderungen speichern",
 	"visualeditor-savedialog-warning-dirty": "Deine Bearbeitung ist eventuell beschädigt. Bitte vor dem Speichern überprüfen.",
 	"visualeditor-saveerror": "Fehler beim Speichern der Daten auf dem Server: $1.",
-	"visualeditor-saveerror-hookaborted": "Fehler beim Speichern der Seite: Eine Erweiterung auf dem Server hat dich am Speichern gehindert.",
 	"visualeditor-section-body-placeholder": "Neuer Abschnitt",
 	"visualeditor-section-title-placeholder": "Betreff",
 	"visualeditor-serializeerror": "Fehler beim Laden der Daten vom Server: $1.",

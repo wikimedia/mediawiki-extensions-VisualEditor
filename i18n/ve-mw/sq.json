@@ -377,7 +377,6 @@
 	"visualeditor-savedialog-title-save": "Ruani ndryshimet tuaja",
 	"visualeditor-savedialog-warning-dirty": "Përpunimi juaj mund të jetë dëmtuar - ju lutemi, shqyrtojeni, përpara se ta ruani.",
 	"visualeditor-saveerror": "Gabim ruajtjeje të dhënash te shërbyesi: $1.",
-	"visualeditor-saveerror-hookaborted": "Gabim ruajtjeje faqeje: Një zgjerim te shërbyesi ju pengoi të bëni ruajtjen.",
 	"visualeditor-section-body-placeholder": "Ndarje e re",
 	"visualeditor-section-title-placeholder": "Subjekt",
 	"visualeditor-serializeerror": "Gabim gjatë ngarkimi të dhënash prej shërbyesi: $1.",

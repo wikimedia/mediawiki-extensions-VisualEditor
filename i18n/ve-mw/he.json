@@ -381,7 +381,6 @@
 	"visualeditor-savedialog-title-save": "שמירת השינויים שלך",
 	"visualeditor-savedialog-warning-dirty": "ייתכן שהעריכה שלך התקלקלה – נא לסקור לפני שמירה.",
 	"visualeditor-saveerror": "שגיאה בשמירת נתונים לשרת: $1.",
-	"visualeditor-saveerror-hookaborted": "שגיאה בשמירת דף: הרחבה בשרת מנעה ממך את השמירה.",
 	"visualeditor-section-body-placeholder": "פסקה חדשה",
 	"visualeditor-section-title-placeholder": "נושא",
 	"visualeditor-serializeerror": "שגיאה בטעינת נתונים מהשרת: $1.",

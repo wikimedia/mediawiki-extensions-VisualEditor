@@ -421,7 +421,6 @@
 	"visualeditor-savedialog-title-save": "Запишите свои изменения",
 	"visualeditor-savedialog-warning-dirty": "Ваши изменения могут быть некорректными — пожалуйста, проверьте их перед сохранением.",
 	"visualeditor-saveerror": "Ошибка при сохранении данных: $1.",
-	"visualeditor-saveerror-hookaborted": "Ошибка: расширение сервера предотвратило сохранение правки.",
 	"visualeditor-section-body-placeholder": "Новый раздел",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Ошибка при загрузке данных с сервера: $1",

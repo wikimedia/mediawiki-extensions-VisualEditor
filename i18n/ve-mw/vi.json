@@ -379,7 +379,6 @@
 	"visualeditor-savedialog-title-save": "Lưu lại những thay đổi của bạn",
 	"visualeditor-savedialog-warning-dirty": "Sửa đổi của bạn có thể bị hư – xin vui lòng xem lại trước khi lưu.",
 	"visualeditor-saveerror": "Lỗi khi lưu dữ liệu trên máy chủ: $1.",
-	"visualeditor-saveerror-hookaborted": "Lỗi khi lưu trang: Một phần mở rộng trên máy chủ ngăn trở bạn không thể lưu trang.",
 	"visualeditor-section-body-placeholder": "Đề mục mới",
 	"visualeditor-section-title-placeholder": "Tiêu đề",
 	"visualeditor-serializeerror": "Lỗi khi tải dữ liệu từ máy chủ: $1.",

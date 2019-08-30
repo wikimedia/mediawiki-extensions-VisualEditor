@@ -386,7 +386,6 @@
 	"visualeditor-savedialog-title-save": "Simpan perubahan Anda",
 	"visualeditor-savedialog-warning-dirty": "Suntingan Anda mungkin telah rusak – harap tinjau dahulu sebelum menyimpan.",
 	"visualeditor-saveerror": "Galat menyimpan data ke peladen: $1.",
-	"visualeditor-saveerror-hookaborted": "Galat menyimpan halaman: ekstensi di peladen mencegah Anda melakukan penyimpanan.",
 	"visualeditor-section-body-placeholder": "Bagian baru",
 	"visualeditor-section-title-placeholder": "Subjek",
 	"visualeditor-serializeerror": "Galat memuat data dari peladen: $1.",

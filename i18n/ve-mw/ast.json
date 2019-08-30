@@ -371,7 +371,6 @@
 	"visualeditor-savedialog-title-save": "Guardar los cambios",
 	"visualeditor-savedialog-warning-dirty": "La so edición pue tar corrompida – por favor, revísela antes de guardala.",
 	"visualeditor-saveerror": "Error al guardar los datos nel sirvidor: $1.",
-	"visualeditor-saveerror-hookaborted": "Error al guardar la páxina: Una estensión del sirvidor torgó que la guardaras.",
 	"visualeditor-section-body-placeholder": "Seición nueva",
 	"visualeditor-section-title-placeholder": "Asuntu",
 	"visualeditor-serializeerror": "Error al cargar los datos del sirvidor: $1.",
