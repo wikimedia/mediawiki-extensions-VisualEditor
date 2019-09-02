@@ -581,9 +581,7 @@ class ApiVisualEditor extends ApiBase {
 							$options['title-message'] = $this->msg( $options['title-message'] )->getKey();
 						}
 					}
-					/** @phan-suppress-next-line PhanTypeArraySuspiciousNullable */
 					$checkboxesMessagesList[] = $options['label-message'];
-					/** @phan-suppress-next-line PhanTypeArraySuspiciousNullable */
 					if ( !is_string( $options['label-message'] ) ) {
 						// Extract only the key. Any parameters are included in the fake message definition
 						// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)
