@@ -73,12 +73,7 @@ ve.init.mw.MobileCollabTarget.static.toolbarGroups = [
 		label: '',
 		include: '*',
 		exclude: [ 'comment', 'indent', 'outdent', { group: 'format' } ]
-	}
-	// "Done" tool is added in setupToolbar as it not part of the
-	// standard config (i.e. shouldn't be inhertied by TargetWidget)
-];
-
-ve.init.mw.MobileCollabTarget.static.actionGroups = [
+	},
 	{
 		name: 'authorList',
 		include: [ 'authorList' ]
@@ -88,6 +83,8 @@ ve.init.mw.MobileCollabTarget.static.actionGroups = [
 		include: [ 'export' ]
 	}
 ];
+
+ve.init.mw.MobileCollabTarget.static.actionGroups = [];
 
 /* Methods */
 
