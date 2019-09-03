@@ -21,13 +21,14 @@
 			"A1",
 			"Dars",
 			"Green Zero",
-			"Alex Khimich"
+			"Alex Khimich",
+			"Movses"
 		]
 	},
 	"collabpad-doctitle": "CollabPad : $1",
 	"collabpad-import-subtitle": "Імпортовано з $1",
 	"collabpad": "CollabPad",
-	"tooltip-ca-createsource": "Створити вихідний код сторінки",
+	"tooltip-ca-createsource": "Створити вихідний код цієї сторінки",
 	"tooltip-ca-edit": "Редагувати цю сторінку в редакторі вікірозмітки",
 	"tooltip-ca-editsource": "Редагувати вихідний код сторінки",
 	"tooltip-ca-ve-edit": "Редагувати цю сторінку",

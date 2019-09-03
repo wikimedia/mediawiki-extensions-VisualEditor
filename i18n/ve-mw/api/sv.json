@@ -27,6 +27,7 @@
 	"apihelp-visualeditor-param-pst": "För-spara omvandlad wikitext innan den sänds till Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Avsnittet att behandla.",
 	"apihelp-visualeditor-param-starttimestamp": "När du sparar, ställ in denna till tidsstämpel för när sidan laddades. Används för att upptäcka redigeringskonflikter.",
+	"apihelp-visualeditor-param-stash": "Ändra detta till \"true\" om du vill använda stashing-API när du sparar.",
 	"apihelp-visualeditor-param-wikitext": "Wikitext att skicka till Parsoid att konvertera till HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
 	"apihelp-visualeditoredit-description": "Spara en HTML5-sida till MediaWiki (konverterad till wikitext via Parsoid-tjänsten).",
