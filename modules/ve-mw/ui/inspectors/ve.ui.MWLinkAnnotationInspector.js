@@ -89,6 +89,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 
 	// Events
 	this.linkTypeIndex.connect( this, { set: 'onLinkTypeIndexSet' } );
+	this.labelInput.connect( this, { change: 'onLabelInputChange' } );
 	this.internalAnnotationInput.connect( this, { change: 'onInternalLinkChange' } );
 	this.externalAnnotationInput.connect( this, { change: 'onExternalLinkChange' } );
 	this.internalAnnotationInput.input.getResults().connect( this, { choose: 'onFormSubmit' } );
@@ -147,6 +148,18 @@ ve.ui.MWLinkAnnotationInspector.prototype.createExternalAnnotationInput = functi
  */
 ve.ui.MWLinkAnnotationInspector.prototype.isExternal = function () {
 	return this.linkTypeIndex.getCurrentTabPanelName() === 'external';
+};
+
+/**
+ * Handle change events on the label input
+ *
+ * @param {string} value
+ */
+ve.ui.MWLinkAnnotationInspector.prototype.onLabelInputChange = function () {
+	if ( this.isActive && !this.trackedLabelInputChange ) {
+		ve.track( 'activity.' + this.constructor.static.name, { action: 'label-input' } );
+		this.trackedLabelInputChange = true;
+	}
 };
 
 /**
