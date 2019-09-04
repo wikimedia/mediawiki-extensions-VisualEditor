@@ -118,10 +118,10 @@ ve.init.mw.Target.static.importRules.external.blacklist = ve.extendObject( {
 	section: true
 }, ve.init.mw.Target.static.importRules.external.blacklist );
 
-ve.init.mw.Target.static.importRules.external.htmlBlacklist = ve.extendObject( {
+ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove = ve.extendObject( {
 	// Remove reference numbers copied from MW read mode (T150418)
 	'sup.reference:not( [typeof] )': true
-}, ve.init.mw.Target.static.importRules.external.htmlBlacklist );
+}, ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove );
 
 /**
  * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.
