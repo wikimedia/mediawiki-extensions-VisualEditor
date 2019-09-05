@@ -12,7 +12,6 @@
 	"--": [
 		".jsduck/external.js",
 		"lib/ve/.jsduck/external.js",
-		"lib/ve/lib/oojs/oojs.jquery.js",
 		"lib/ve/lib/oojs-ui/oojs-ui-core.js",
 		"lib/ve/lib/oojs-ui/oojs-ui-widgets.js",
 		"lib/ve/lib/oojs-ui/oojs-ui-toolbars.js",

@@ -26,7 +26,12 @@ OO.inheritClass( ve.ui.MWWikitextCommandRegistry, ve.ui.CommandRegistry );
 /* Methods */
 
 /**
- * @inheritdoc
+ * Get data for a given symbolic name.
+ *
+ * See https://doc.wikimedia.org/oojs/master/OO.Registry.html
+ *
+ * @param {string} name Symbolic name
+ * @return {Mixed|undefined} Data associated with symbolic name
  */
 ve.ui.MWWikitextCommandRegistry.prototype.lookup = function ( name ) {
 	// Parent method
