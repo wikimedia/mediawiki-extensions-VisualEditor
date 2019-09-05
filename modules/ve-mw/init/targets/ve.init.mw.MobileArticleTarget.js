@@ -295,7 +295,7 @@ ve.init.mw.MobileArticleTarget.prototype.setSurface = function ( surface ) {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
-	var surfaceView, surfaceModel;
+	var surfaceModel;
 
 	if ( this.teardownPromise ) {
 		// Loading was cancelled, the overlay is already closed at this point. Do nothing.
@@ -307,16 +307,18 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	// which calls goToHeading. (T225292)
 	this.adjustContentPadding();
 
+	// Deactivate the surface so any initial selection set in surfaceReady
+	// listeners doesn't cause the keyboard to be shown.
+	this.getSurface().getView().deactivate();
+
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
-	// Place a selection at the start of the document, but with the surface
-	// disabled, so toolbar tools have a thing to focus on without us showing the
-	// keyboard.
-	surfaceView = this.getSurface().getView();
-	surfaceView.deactivate();
+	// If no selection has been set yet, set it to the start of the document.
 	surfaceModel = this.getSurface().getModel();
-	surfaceModel.selectFirstContentOffset();
+	if ( surfaceModel.getSelection().isNull() ) {
+		surfaceModel.selectFirstContentOffset();
+	}
 
 	this.events.trackActivationComplete();
 
