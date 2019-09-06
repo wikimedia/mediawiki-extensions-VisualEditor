@@ -34,7 +34,17 @@ OO.inheritClass( ve.ui.MWWikitextDataTransferHandlerFactory, ve.ui.DataTransferH
 /* Methods */
 
 /**
- * @inheritdoc
+ * Create an object based on a name.
+ *
+ * Name is used to look up the constructor to use, while all additional arguments are passed to the
+ * constructor directly, so leaving one out will pass an undefined to the constructor.
+ *
+ * See https://doc.wikimedia.org/oojs/master/OO.Factory.html
+ *
+ * @param {string} name Object name
+ * @param {...Mixed} [args] Arguments to pass to the constructor
+ * @return {Object} The new object
+ * @throws {Error} Unknown object name
  */
 ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 	// Parent method
