@@ -30,7 +30,6 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	ve.init.mw.MobileArticleTarget.super.call( this, config );
 
 	this.section = config.section;
-	this.adjustContentPaddingDebounced = OO.ui.debounce( this.adjustContentPadding.bind( this ) );
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget ve-init-mobileTarget' );
