@@ -322,8 +322,6 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 
 	this.events.trackActivationComplete();
 
-	this.overlay.hideSpinner();
-
 	this.maybeShowWelcomeDialog();
 
 	if ( ve.init.platform.constructor.static.isIos() ) {
