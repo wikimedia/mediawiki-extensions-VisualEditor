@@ -241,7 +241,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 ve.init.mw.MobileArticleTarget.prototype.onSurfaceScroll = function () {
 	var nativeSelection, range;
 
-	if ( ve.init.platform.constructor.static.isIos() ) {
+	if ( ve.init.platform.constructor.static.isIos() && this.getSurface() ) {
 		// iOS has a bug where if you change the scroll offset of a
 		// contentEditable or textarea with a cursor visible, it disappears.
 		// This function works around it by removing and reapplying the selection.
