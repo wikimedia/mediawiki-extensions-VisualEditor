@@ -308,7 +308,7 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 
 	// Deactivate the surface so any initial selection set in surfaceReady
 	// listeners doesn't cause the keyboard to be shown.
-	this.getSurface().getView().deactivate();
+	this.getSurface().getView().deactivate( false );
 
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
