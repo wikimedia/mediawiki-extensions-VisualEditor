@@ -27,6 +27,7 @@ ve.ui.MWEditModeTool.prototype.getMode = function () {
 	if ( !this.toolbar.getSurface() ) {
 		return 'source';
 	}
+	return this.toolbar.getSurface().getMode();
 };
 
 /**
