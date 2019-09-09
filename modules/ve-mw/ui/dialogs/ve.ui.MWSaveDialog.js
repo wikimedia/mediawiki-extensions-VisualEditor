@@ -382,6 +382,11 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 			this.reviewModeButtonSelect.$element.after( this.$previewEditSummaryContainer );
 			setTimeout( function () {
 				dialog.updateReviewMode();
+
+				ve.track(
+					'activity.' + dialog.constructor.static.name,
+					{ action: 'review-initial-' + dialog.reviewModeButtonSelect.findSelectedItem().getData() }
+				);
 			} );
 			break;
 	}
@@ -677,7 +682,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		],
 		classes: [ 've-ui-mwSaveDialog-reviewMode' ]
 	} );
-	this.reviewModeButtonSelect.connect( this, { select: 'updateReviewMode' } );
+	this.reviewModeButtonSelect.connect( this, {
+		choose: 'onReviewChoose',
+		select: 'updateReviewMode'
+	} );
 
 	this.$previewEditSummary = $( '<span>' ).addClass( 've-ui-mwSaveDialog-summaryPreview' ).addClass( 'comment' );
 	this.$previewEditSummaryContainer = $( '<div>' )
@@ -736,6 +744,10 @@ ve.ui.MWSaveDialog.prototype.updateOptionsBar = function () {
 	}
 };
 
+/**
+ * Update the current review mode
+ * @param  {OO.ui.ButtonOptionWidget} [button] The button clicked, or false if this is the initial setup
+ */
 ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	var dialog = this,
 		diffMode = this.reviewModeButtonSelect.findSelectedItem().getData(),
@@ -781,6 +793,14 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	OO.ui.Element.static.reconsiderScrollbars( this.reviewPanel.$element[ 0 ] );
 
 	this.updateSize();
+};
+
+/**
+ * Update the current review mode
+ * @param {OO.ui.OptionWidget} item Item chosen
+ */
+ve.ui.MWSaveDialog.prototype.onReviewChoose = function ( item ) {
+	ve.track( 'activity.' + this.constructor.static.name, { action: 'review-switch-' + item.getData() } );
 };
 
 /**
@@ -832,12 +852,20 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var surfaceMode = ve.init.target.getSurface().getMode();
+			var name,
+				surfaceMode = ve.init.target.getSurface().getMode();
 
 			this.canReview = !!data.canReview;
 			this.canPreview = !!data.canPreview;
 			this.setupCheckboxes( data.checkboxFields || [] );
 			this.checkboxesByName = data.checkboxesByName || {};
+
+			function trackCheckbox( name ) {
+				ve.track( 'activity.mwSave', { action: 'checkbox-' + name } );
+			}
+			for ( name in this.checkboxesByName ) {
+				this.checkboxesByName[ name ].$element.on( 'click', trackCheckbox.bind( this, name ) );
+			}
 
 			if ( data.sectionTitle ) {
 				this.setEditSummary( ve.msg( 'newsectionsummary', data.sectionTitle ) );
@@ -903,6 +931,8 @@ ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
+	ve.track( 'activity.' + this.constructor.static.name, { action: 'dialog-' + ( action || 'abort' ) } );
+
 	if ( action === 'save' ) {
 		return new OO.ui.Process( function () {
 			var saveDeferred = $.Deferred();
