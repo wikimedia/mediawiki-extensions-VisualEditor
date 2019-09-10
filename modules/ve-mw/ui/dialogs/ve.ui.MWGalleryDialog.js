@@ -421,7 +421,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 
 				for ( i = 0, ilen = imageNodes.length; i < ilen; i++ ) {
 					image = imageNodes[ i ];
-					resourceTitle = mw.Title.newFromText( image.getAttribute( 'resource' ), namespaceIds.file );
+					resourceTitle = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( image.getAttribute( 'resource' ) ), namespaceIds.file );
 					if ( !resourceTitle ) {
 						continue;
 					}
@@ -791,7 +791,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	OO.ui.Element.static.scrollIntoView( item.$element[ 0 ] );
 
 	// Populate edit panel
-	title = mw.Title.newFromText( item.resource );
+	title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( item.resource ) );
 	this.filenameFieldset.setLabel(
 		$( '<span>' ).append(
 			document.createTextNode( title.getMainText() + ' ' ),
@@ -993,7 +993,7 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 			parseInt( mwData.attrs.widths || this.defaults.imageWidth )
 		);
 		imageAttributes = {
-			resource: image.resource,
+			resource: './' + image.resource,
 			altText: image.altText,
 			src: image.thumbUrl,
 			height: size.height,

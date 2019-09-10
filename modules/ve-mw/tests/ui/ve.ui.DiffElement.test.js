@@ -36,7 +36,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 						ve.dm.mwExample.MWBlockImage.html
 							// FIXME: Use DOM modification instead of string replaces
 							.replace( 'width="1"', 'width="3"' )
-							.replace( 'href="Foo"', 'href="' + ve.resolveUrl( 'Foo', ve.dm.example.base ) + '"' )
+							.replace( 'href="./Foo"', 'href="' + ve.resolveUrl( './Foo', ve.dm.example.base ) + '"' )
 							.replace( 'foobar"', 'foobar" data-diff-action="structural-change" data-diff-id="0"' ) +
 					'</div>',
 				expectedDescriptions: [

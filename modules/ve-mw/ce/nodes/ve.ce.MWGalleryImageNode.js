@@ -60,7 +60,7 @@ ve.ce.MWGalleryImageNode = function VeCeMWGalleryImageNode( model ) {
 		outerDivWidth = innerDivWidth + 4;
 	}
 
-	resourceTitle = mw.Title.newFromText( attributes.resource );
+	resourceTitle = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( attributes.resource ) );
 
 	this.$element
 		.addClass( 'gallerybox' )
