@@ -10,6 +10,7 @@
 ( function () {
 	var timing, editingSessionId,
 		actionPrefixMap = {
+			firstChange: 'first_change',
 			saveIntent: 'save_intent',
 			saveAttempt: 'save_attempt',
 			saveSuccess: 'save_success',
@@ -45,6 +46,8 @@
 				return timeStamp - timing.init;
 			case 'loaded':
 				return timeStamp - timing.init;
+			case 'firstChange':
+				return timeStamp - timing.ready;
 			case 'saveIntent':
 				return timeStamp - timing.ready;
 			case 'saveAttempt':
