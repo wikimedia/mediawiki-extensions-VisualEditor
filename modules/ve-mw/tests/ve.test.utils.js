@@ -21,6 +21,8 @@
 		return new mw.Api().post();
 	};
 	ve.test.utils.MWDummyTarget = MWDummyTarget;
+	// Copy import rules from mw target, for paste tests.
+	ve.test.utils.MWDummyTarget.static.importRules = ve.init.mw.Target.static.importRules;
 
 	function MWDummyPlatform() {
 		MWDummyPlatform.super.apply( this, arguments );
