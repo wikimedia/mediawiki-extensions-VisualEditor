@@ -119,8 +119,15 @@ ve.init.mw.Target.static.importRules.external.blacklist = ve.extendObject( {
 }, ve.init.mw.Target.static.importRules.external.blacklist );
 
 ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove = ve.extendObject( {
+	// TODO: Create a plugin system for extending the blacklist, so this code
+	// can be moved to the Cite extension.
 	// Remove reference numbers copied from MW read mode (T150418)
-	'sup.reference:not( [typeof] )': true
+	'sup.reference:not( [typeof] )': true,
+	// ...sometimes we need a looser match if the HTML has been mangled
+	// in a third-party editor e.g. LibreOffice (T232461)
+	// This selector would fail if the "cite_reference_link_prefix" message
+	// were ever modified, but currently it isn't.
+	'a[ href *= "#cite_note" ]': true
 }, ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove );
 
 /**
