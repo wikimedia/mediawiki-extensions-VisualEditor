@@ -19,19 +19,17 @@
 	the same width as in read mode, except with the padding around it now being
 	part of it instead of its parent, thus making it treat the area as part
 	of content editable.
+
+	Use `rem` units. This lets us respect custom browser font-size (like `em`),
+	but isn't affected by the parent element font-size, which may be defined in
+	`px` due to `.mw-editfont-monospace` and similar classes. (T222217)
 	*/
-	/* 1/0.875 */
-	margin: 0 -1.14286em;
+	margin: 0 -1rem;
 }
 
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-attachedRootNode,
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
-	padding: 0 1.14286em; /* 1/0.875 */
-}
-
-.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ce-attachedRootNode,
-.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
-	padding: 0 1.2em; /* 1/(13.3333/16) */
+	padding: 0 1rem;
 }
 
 .mw-body .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder > * {
@@ -43,34 +41,26 @@
 
 /* Main document debug bar */
 .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
-	/* 1/0.875 */
-	padding: 1.14286em;
+	padding: 1rem;
 	padding-bottom: 0;
-	margin-top: 1.14286em;
+	margin-top: 1rem;
 }
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
-		/* 1.5/0.875 */
-		margin: 0 -1.71429em;
+		margin: 0 -1.5rem;
 	}
 
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-attachedRootNode,
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
-		padding: 0 1.71429em; /* surface-margin-left (1.5em) / (mw-body-content font-size) 0.875em */
-	}
-
-	.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ce-attachedRootNode,
-	.ve-init-mw-desktopArticleTarget .ve-ui-mwWikitextSurface .ve-ui-surface-placeholder {
-		padding: 0 1.8em; /* surface-margin-left (1.5em) / (13.3333/16) */
+		padding: 0 1.5rem;
 	}
 
 	/* Main document debug bar */
 	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
-		/* 1.5/0.875 */
-		padding: 1.71429em;
+		padding: 1.5rem;
 		padding-bottom: 0;
-		margin-top: 1.71429em;
+		margin-top: 1.5rem;
 	}
 }
