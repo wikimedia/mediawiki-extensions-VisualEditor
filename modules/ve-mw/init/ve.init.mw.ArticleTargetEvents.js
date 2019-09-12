@@ -18,6 +18,7 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
 	this.timings = { saveRetries: 0 };
 	// Events
 	this.target.connect( this, {
+		firstTransaction: 'onFirstTransaction',
 		saveWorkflowBegin: 'onSaveWorkflowBegin',
 		saveWorkflowEnd: 'onSaveWorkflowEnd',
 		saveInitiated: 'onSaveInitiated',
@@ -70,6 +71,13 @@ ve.init.mw.ArticleTargetEvents.prototype.trackTiming = function ( topic, data ) 
 		// HACK: track serializeForCache duration here, because there's no event for that
 		this.timings.serializeForCache = data.duration;
 	}
+};
+
+/**
+ * Track when the user makes their first transaction
+ */
+ve.init.mw.ArticleTargetEvents.prototype.onFirstTransaction = function () {
+	this.track( 'mwedit.firstChange' );
 };
 
 /**
