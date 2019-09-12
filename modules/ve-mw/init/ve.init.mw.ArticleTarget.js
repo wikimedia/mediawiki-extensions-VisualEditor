@@ -565,10 +565,6 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	this.restoreEditSection();
 
 	mw.hook( 've.activationComplete' ).fire();
-
-	surfaceModel.getDocument().once( 'transact', function ( transaction ) {
-		this.emit( 'firstTransaction', transaction );
-	}.bind( this ) );
 };
 
 /**

@@ -18,7 +18,6 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
 	this.timings = { saveRetries: 0 };
 	// Events
 	this.target.connect( this, {
-		firstTransaction: 'onFirstTransaction',
 		saveWorkflowBegin: 'onSaveWorkflowBegin',
 		saveWorkflowEnd: 'onSaveWorkflowEnd',
 		saveInitiated: 'onSaveInitiated',
@@ -78,6 +77,11 @@ ve.init.mw.ArticleTargetEvents.prototype.trackTiming = function ( topic, data ) 
  */
 ve.init.mw.ArticleTargetEvents.prototype.onFirstTransaction = function () {
 	this.track( 'mwedit.firstChange' );
+
+	this.trackTiming( 'behavior.firstTransaction', {
+		duration: ve.now() - this.timings.surfaceReady,
+		mode: this.target.surface.getMode()
+	} );
 };
 
 /**
@@ -218,9 +222,10 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveReview = function () {
 };
 
 ve.init.mw.ArticleTargetEvents.prototype.onSurfaceReady = function () {
+	this.timings.surfaceReady = ve.now();
 	this.target.surface.getModel().getDocument().connect( this, {
 		transact: 'recordLastTransactionTime'
-	} );
+	} ).once( 'transact', this.onFirstTransaction.bind( this ) );
 };
 
 /**
