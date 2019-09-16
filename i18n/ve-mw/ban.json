@@ -8,9 +8,10 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Uah kaca puniki",
-	"visualeditor-ca-createlocaldescriptionsource": "Icénin daging sané marupa paparan lokal",
-	"visualeditor-ca-createsource": "Karyanin wit",
+	"visualeditor-ca-createlocaldescriptionsource": "Tambeh wit déskripsi lokal",
+	"visualeditor-ca-createsource": "Kardi wit",
 	"visualeditor-ca-editsource": "Uah wit",
 	"visualeditor-ca-editsource-section": "uah wit",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor"
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-savedialog-label-publish-short": "Wedar"
 }
