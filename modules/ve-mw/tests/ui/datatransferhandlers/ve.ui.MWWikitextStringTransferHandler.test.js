@@ -109,6 +109,7 @@ QUnit.test( 'convert', function ( assert ) {
 					}
 				} ],
 				expectedData: [
+					{ type: 'paragraph' },
 					's',
 					'o',
 					'm',
@@ -122,6 +123,7 @@ QUnit.test( 'convert', function ( assert ) {
 					'e',
 					'x',
 					't',
+					{ type: '/paragraph' },
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				]

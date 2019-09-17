@@ -152,17 +152,6 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 		if ( !doc.data.hasContent() ) {
 			return failure();
 		}
-
-		// Attempt to undo outermost p-wrapping if possible
-		try {
-			surface.change(
-				ve.dm.TransactionBuilder.static.newFromWrap( doc, new ve.Range( 0, doc.data.countNonInternalElements() ), [], [], [ { type: 'paragraph' } ], [] )
-			);
-		} catch ( e ) {
-			// Sometimes there is no p-wrapping, for example: "* foo"
-			// Sometimes there are multiple <p> tags in the output.
-			// That's okay: ignore the error and paste what we've got.
-		}
 		handler.resolve( doc );
 	}, failure );
 
