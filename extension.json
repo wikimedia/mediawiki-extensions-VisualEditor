@@ -371,7 +371,6 @@
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
-			"group": "visualEditorA",
 			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.css"
 		},
 		"ext.visualEditor.targetLoader": {
@@ -587,7 +586,6 @@
 			]
 		},
 		"ext.visualEditor.collabTarget.init.styles": {
-			"group": "visualEditorA",
 			"styles": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.css"
 			],
@@ -2172,7 +2170,6 @@
 			]
 		},
 		"ext.visualEditor.diffPage.init.styles": {
-			"group": "visualEditorA",
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.DiffPage.less"
 			]
