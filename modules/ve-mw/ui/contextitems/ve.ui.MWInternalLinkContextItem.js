@@ -47,17 +47,18 @@ ve.ui.MWInternalLinkContextItem.static.modelClasses = [ ve.dm.MWInternalLinkAnno
 ve.ui.MWInternalLinkContextItem.static.generateBody = function ( linkCache, model, htmlDoc, context ) {
 	var icon, $description,
 		title = model.getAttribute( 'lookupTitle' ),
-		description = model.getAttribute( 'normalizedTitle' ),
+		normalizedTitle = model.getAttribute( 'normalizedTitle' ),
 		href = model.getHref(),
+		titleObj = mw.Title.newFromText( ve.normalizeParsoidResourceName( href ) ),
 		fragment = model.getFragment(),
 		usePageImages = mw.config.get( 'wgVisualEditorConfig' ).usePageImages,
 		usePageDescriptions = mw.config.get( 'wgVisualEditorConfig' ).usePageDescriptions,
 		$wrapper = $( '<div>' ),
 		$link = $( '<a>' )
 			.addClass( 've-ui-linkContextItem-link' )
-			.text( description )
+			.text( normalizedTitle )
 			.attr( {
-				href: ve.resolveUrl( href, htmlDoc ),
+				href: titleObj.getUrl(),
 				target: '_blank',
 				rel: 'noopener'
 			} );
