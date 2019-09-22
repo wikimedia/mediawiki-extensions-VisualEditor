@@ -20,7 +20,7 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 
 	this.active = false;
 	this.pageName = mw.config.get( 'wgRelevantPageName' );
-	this.editToken = mw.user.tokens.get( 'editToken' );
+	this.editToken = mw.user.tokens.get( 'csrfToken' );
 	this.recovered = false;
 	this.fromEditedState = false;
 	this.originalHtml = null;
