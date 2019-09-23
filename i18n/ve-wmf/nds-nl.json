@@ -11,5 +11,11 @@
 	"visualeditor-feedback-link": "Project:Visuele tekstverwarker/Kommentaar",
 	"visualeditor-feedback-tool": "Kommentaar geven",
 	"visualeditor-help-label": "Lees de gebrukershaandleiding",
-	"visualeditor-help-title": "Gebrukershaandleiding veur de tekstverwarker"
+	"visualeditor-help-title": "Gebrukershaandleiding veur de tekstverwarker",
+	"visualeditor-welcomedialog-action": "Begin mid bewarken",
+	"visualeditor-welcomedialog-content": "Ydereyne kan bewarken en elke verbeatering helpt.",
+	"visualeditor-welcomedialog-content-thanks": "Bedanked vöär juw hülpe üm de wearld meyr te låten untdekken!",
+	"visualeditor-welcomedialog-switch": "Oaverskakelen nå bronbewarking",
+	"visualeditor-welcomedialog-switch-ve": "Oaverskakelen nå de visuele tekstverwarker",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Welkom}} by $2"
 }
