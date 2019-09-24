@@ -32,6 +32,9 @@ ve.dm.MWInternalLinkAnnotation.static.name = 'link/mwInternal';
 
 ve.dm.MWInternalLinkAnnotation.static.matchRdfaTypes = [ 'mw:WikiLink', 'mw:MediaLink' ];
 
+// mw:MediaLink to non-existent files come with typeof="mw:Error"
+ve.dm.MWInternalLinkAnnotation.static.allowedRdfaTypes = [ 'mw:Error' ];
+
 ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
 	var targetData,
 		resource = domElements[ 0 ].getAttribute( 'resource' );
@@ -43,10 +46,10 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 			domElements[ 0 ].getAttribute( 'href' ),
 			converter.getTargetHtmlDocument()
 		);
-	}
 
-	if ( !targetData.isInternal ) {
-		return ve.dm.MWExternalLinkAnnotation.static.toDataElement( domElements, converter );
+		if ( !targetData.isInternal ) {
+			return ve.dm.MWExternalLinkAnnotation.static.toDataElement( domElements, converter );
+		}
 	}
 
 	return {
