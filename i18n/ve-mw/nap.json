@@ -7,7 +7,8 @@
 			"C.R.",
 			"Candalua",
 			"Macofe",
-			"Ruthven"
+			"Ruthven",
+			"Sannita"
 		]
 	},
 	"tooltip-ca-createsource": "Crèa 'o codece surgente 'e sta paggena",
@@ -22,7 +23,7 @@
 	"visualeditor-ca-createsource": "Crèa surgente",
 	"visualeditor-ca-editlocaldescriptionsource": "Cagna 'a fonte 'e descrizione lucale",
 	"visualeditor-ca-editsource": "Càgna surgente",
-	"visualeditor-ca-editsource-section": "càgna surgente",
+	"visualeditor-ca-editsource-section": "cagna surgente",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
