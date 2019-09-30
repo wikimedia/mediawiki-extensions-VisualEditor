@@ -133,7 +133,7 @@ class VisualEditorHooks {
 
 		$output->addModuleStyles( [
 			'ext.visualEditor.diffPage.init.styles',
-			'oojs-ui.styles.icons-alerts',
+			'oojs-ui.styles.icons-accessibility',
 			'oojs-ui.styles.icons-editing-advanced'
 		] );
 		$output->addModules( 'ext.visualEditor.diffPage.init' );
