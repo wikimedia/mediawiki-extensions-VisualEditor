@@ -748,7 +748,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		editNotices = this.getEditNotices(),
 		actionTools = this.actionsToolbar.tools,
 		surface = this.getSurface(),
-		surfaceReadyTime = ve.now(),
 		target = this;
 
 	if ( !this.activating ) {
@@ -768,15 +767,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	}
 
 	this.transformCategoryLinks( $( '#catlinks' ) );
-
-	// Track how long it takes for the first transaction to happen
-	surface.getModel().getDocument().once( 'transact', function () {
-		ve.track( 'mwtiming.behavior.firstTransaction', {
-			duration: ve.now() - surfaceReadyTime,
-			targetName: target.constructor.static.trackingName,
-			mode: surface.getMode()
-		} );
-	} );
 
 	surface.getModel().getMetaList().connect( this, {
 		insert: 'onMetaItemInserted',
