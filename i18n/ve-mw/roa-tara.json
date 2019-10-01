@@ -32,6 +32,7 @@
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",
 	"visualeditor-categories-tool": "Categorije",
+	"visualeditor-changedesc-mwlanguagevariant": "Marcatore d'a variande d'a lènghe cangiate",
 	"visualeditor-changedesc-mwredirect": "Redirezionamende de destinazione cangiate da $1 a $2",
 	"visualeditor-changedesc-mwtransclusion": "Parametre d'u template cangiate",
 	"visualeditor-desc": "Cangiatore visuale pe MediaUicchi",
@@ -276,5 +277,7 @@
 	"visualeditor-usernamespacepagelink": "Project:Namespace utende",
 	"visualeditor-version-label": "Versione",
 	"visualeditor-wikitext-warning": "Tu ste ause VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|uicchiteste]] non ge funzione aqquà. Pe cangià 'a pàgene jndr'à 'u mode uicchiteste senze ca pirde le cangiaminde tune non reggistrate, cazze 'u buttone de cangiamende.",
-	"visualeditor-wikitext-warning-title": "Segnaposte de uicchiteste acchiate"
+	"visualeditor-wikitext-warning-title": "Segnaposte de uicchiteste acchiate",
+	"visualeditor-wikitextconvert-plain": "Ause 'u teste semblice",
+	"visualeditor-wikitextconvert-convert": "Converte jndr'à uicchiteste"
 }

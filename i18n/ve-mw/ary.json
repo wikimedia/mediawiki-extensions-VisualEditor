@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Abdeaitali",
-			"Anass Sedrati"
+			"Anass Sedrati",
+			"SADIQUI"
 		]
 	},
 	"tooltip-ca-ve-edit": "عدًل هاد الصفحة",
-	"visualeditor-ca-editsource-section": "بدل المصدر"
+	"visualeditor-ca-editsource-section": "عدل المصدر"
 }
