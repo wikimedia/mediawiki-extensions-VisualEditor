@@ -1405,6 +1405,8 @@
 				"ext.visualEditor.checkList"
 			],
 			"messages": [
+				"visualeditor-corrupted-document-error",
+				"visualeditor-corrupted-document-title",
 				"visualeditor-missing-document-error",
 				"visualeditor-missing-document-title",
 				"visualeditor-rebase-client-author-name",
