@@ -134,16 +134,13 @@ class ApiVisualEditor extends ApiBase {
 			);
 		} else {
 			// error null, code not 200
+			$trace = ( new Exception )->getTraceAsString();
 			$this->logger->warning(
-				__METHOD__ . ": Received HTTP {code} from RESTBase",
-				[
-					'code' => $response['code'],
-					'trace' => ( new Exception )->getTraceAsString(),
-					'response' => $response['body'],
-					'requestPath' => $path,
+				__METHOD__ . ": Received HTTP {$response['code']} from RESTBase for $path." .
+					" Trace: {$trace}" .
+					" Response: {$response['body']}" .
 					/** @phan-suppress-next-line PhanTypeInvalidDimOffset */
-					'requestIfMatch' => $reqheaders['If-Match'] ?? '',
-				]
+					" Request If-Match: {$reqheaders['If-Match']}"
 			);
 			$this->dieWithError(
 				[ 'apierror-visualeditor-docserver-http', $response['code'] ],

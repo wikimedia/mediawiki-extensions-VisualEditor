@@ -288,11 +288,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			"?$
 		/x', $etag ) ) {
 			$this->logger->info(
-				__METHOD__ . ": Received funny ETag from client: {etag}",
-				[
-					'etag' => $etag,
-					'requestPath' => $path,
-				]
+				__METHOD__ . ": Received funny ETag from client: $etag for $path"
 			);
 		}
 		return $this->requestRestbase(
