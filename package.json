@@ -10,7 +10,7 @@
 		"screenshots-all": "grunt screenshots-all"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.14.1",
+		"eslint-config-wikimedia": "0.14.3",
 		"grunt": "1.0.4",
 		"grunt-banana-checker": "0.8.1",
 		"grunt-contrib-copy": "1.0.0",

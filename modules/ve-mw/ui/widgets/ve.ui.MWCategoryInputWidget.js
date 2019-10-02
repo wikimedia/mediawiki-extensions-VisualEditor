@@ -253,8 +253,11 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 			autoFitLabel: false,
 			label: $( '<span>' )
 				.text( labelText )
-				.append( '<br>↳ ' )
-				.append( $( '<span>' ).text( mw.Title.newFromText( name ).getMainText() ) )
+				.append(
+					$( '<br>' ),
+					document.createTextNode( '↳ ' ),
+					$( '<span>' ).text( mw.Title.newFromText( name ).getMainText() )
+				)
 		} );
 	} else {
 		labelText = name;
