@@ -279,6 +279,22 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
 			$path .= '/' . $parserParams['oldid'];
 		}
+		// Adapted from RESTBase mwUtil.parseETag()
+		if ( !preg_match( '/
+			^(?:W\\/)?"?
+			([^"\\/]+)
+			(?:\\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))
+			(?:\\/([^"]+))?
+			"?$
+		/x', $etag ) ) {
+			$this->logger->info(
+				__METHOD__ . ": Received funny ETag from client: {etag}",
+				[
+					'etag' => $etag,
+					'requestPath' => $path,
+				]
+			);
+		}
 		return $this->requestRestbase(
 			$title,
 			'POST', $path, $data,
