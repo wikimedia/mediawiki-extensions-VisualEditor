@@ -864,7 +864,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 				ve.track( 'activity.mwSave', { action: 'checkbox-' + name } );
 			}
 			for ( name in this.checkboxesByName ) {
-				this.checkboxesByName[ name ].$element.on( 'click', trackCheckbox.bind( this, name ) );
+				this.checkboxesByName[ name ].$element.off( '.mwSave' ).on( 'click.mwSave', trackCheckbox.bind( this, name ) );
 			}
 
 			if ( data.sectionTitle ) {
