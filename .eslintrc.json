@@ -5,20 +5,19 @@
 		"wikimedia/jquery"
 	],
 	"globals": {
-		"ve": true,
-		"VisualEditorSupportCheck": false,
-		"OO": false,
-		"unicodeJS": false,
-		"RangeFix": false,
-		"Papa": false,
-		"mw": false,
-		"require": false
+		"ve": "readonly",
+		"VisualEditorSupportCheck": "readonly",
+		"OO": "readonly",
+		"unicodeJS": "readonly",
+		"RangeFix": "readonly",
+		"Papa": "readonly",
+		"mw": "readonly",
+		"require": "readonly"
 	},
 	"rules": {
 		"no-jquery/no-hide": "error",
 		"no-jquery/no-show": "error",
 		"no-jquery/no-toggle": "error",
-		"max-len": "off",
-		"prefer-template": "off"
+		"max-len": "off"
 	}
 }
