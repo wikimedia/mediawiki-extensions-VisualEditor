@@ -920,12 +920,13 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
  * Update the filename fieldset (link to media page)
  */
 ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
+	var title = mw.Title.newFromText( ve.normalizeParsoidResourceName( this.imageModel.getResourceName() ) );
 	this.filenameFieldset.setLabel(
 		$( '<span>' ).append(
 			document.createTextNode( this.imageModel.getFilename() + ' ' ),
 			$( '<a>' )
 				.addClass( 've-ui-mwMediaDialog-description-link' )
-				.attr( 'href', ve.resolveUrl( this.imageModel.getResourceName(), this.getFragment().getDocument().getHtmlDocument() ) )
+				.attr( 'href', title.getUrl() )
 				.attr( 'target', '_blank' )
 				.attr( 'rel', 'noopener' )
 				.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) )
