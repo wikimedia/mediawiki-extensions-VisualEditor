@@ -99,7 +99,7 @@ ve.ui.MWDefinedTransclusionContextItem.static.getToolsByTitle = function () {
 			var titles = Array.isArray( template.title ) ? template.title : [ template.title ];
 			// 'title' can be a single title, or list of titles (including redirects)
 			titles.forEach( function ( title ) {
-				toolsByTitle[ mw.Title.newFromText( title ).getPrefixedText() ] = template;
+				toolsByTitle[ mw.Title.newFromText( title, mw.config.get( 'wgNamespaceIds' ).template ).getPrefixedText() ] = template;
 			} );
 		} );
 	}
@@ -113,9 +113,11 @@ ve.ui.MWDefinedTransclusionContextItem.static.getToolsByTitle = function () {
  * @return {Object|null} Tool definition, or null if no match
  */
 ve.ui.MWDefinedTransclusionContextItem.static.getMatchedTool = function ( model ) {
-	var rawTitle = ve.getProp( model.getAttribute( 'mw' ), 'parts', 0, 'template', 'target', 'wt' );
-	if ( rawTitle ) {
-		return this.getToolsByTitle()[ mw.Title.newFromText( rawTitle ).getPrefixedText() ] || null;
+	var resource, title;
+	resource = ve.getProp( model.getAttribute( 'mw' ), 'parts', 0, 'template', 'target', 'href' );
+	if ( resource ) {
+		title = mw.Title.newFromText( ve.normalizeParsoidResourceName( resource ) ).getPrefixedText();
+		return this.getToolsByTitle()[ title ] || null;
 	}
 	return null;
 };
