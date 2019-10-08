@@ -240,6 +240,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "重要な単語は他のウィキ項目にリンクしましょう。他のウェブサイトにもリンクできます。これは読者が文脈を理解する助けになります。",
 	"visualeditor-linkinspector-educationpopup-title": "リンク",
 	"visualeditor-linkinspector-illegal-title": "無効なページ名",
+	"visualeditor-linkinspector-invalid-external": "完全なURLを入力してください。例: https://example.org",
 	"visualeditor-linknodeinspector-add-label": "ラベルを追加",
 	"visualeditor-linknodeinspector-title": "単純なリンク",
 	"visualeditor-loaderror-message": "サーバーからデータを読み込む際にエラーが発生しました: $1",
@@ -273,6 +274,7 @@
 	"visualeditor-mweditmodeve-warning": "あなたはビジュアルエディターの編集に切り替えようとしています。続けますか？",
 	"visualeditor-mweditmodewt-popup-body": "このアイコンをクリックすることで、いつでもソース編集モードに戻ることができます。",
 	"visualeditor-mweditmodewt-popup-title": "ビジュアル編集に切り替えました",
+	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|画像|画像}}",
 	"visualeditor-mwgallerydialog-caption-field-label": "ギャラリーの見出し",
 	"visualeditor-mwgallerydialog-caption-input-placeholder": "ギャラリー全体の見出し",
 	"visualeditor-mwgallerydialog-card-images": "画像",
@@ -381,5 +383,7 @@
 	"visualeditor-wikitext-warning": "ビジュアルエディターを使用中です。[[{{MediaWiki:visualeditor-wikitext-warning-link}}|ウィキテキスト]]はここでは使用できません。スイッチボタンをクリックすることで、編集内容を保持したままいつでもソース編集に切り替えられます。",
 	"visualeditor-wikitext-warning-title": "ウィキテキスト記法を検出しました",
 	"visualeditor-wikitextconvert-title": "書式をウィキテキストに変換しますか。",
+	"visualeditor-wikitextconvert-message": "あなたが貼り付けようとしている内容には書式が含まれています。ウィキテキストに変換しますか、それともプレーンテキストを貼り付けますか？",
+	"visualeditor-wikitextconvert-plain": "プレーンテキストを使う",
 	"visualeditor-wikitextconvert-convert": "ウィキテキストに変換する"
 }
