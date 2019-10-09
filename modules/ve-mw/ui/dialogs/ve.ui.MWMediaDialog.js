@@ -218,7 +218,6 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 
 	// Caption
 	this.captionTarget = ve.init.target.createTargetWidget( {
-		tools: ve.init.target.constructor.static.toolbarGroups,
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
@@ -1322,7 +1321,6 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
 	// Set document
 	this.captionTarget.setDocument( captionDocument );
 	this.captionTarget.setReadOnly( this.isReadOnly() );
-	this.captionTarget.initialize();
 };
 
 /**

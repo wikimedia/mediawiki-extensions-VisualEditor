@@ -127,7 +127,6 @@ ve.ui.MWLanguageVariantInspector.prototype.getContentFromInspector = null;
  */
 ve.ui.MWLanguageVariantInspector.prototype.createTextTarget = function ( placeholder ) {
 	return ve.init.target.createTargetWidget( {
-		tools: ve.init.target.constructor.static.toolbarGroups,
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
@@ -148,7 +147,6 @@ ve.ui.MWLanguageVariantInspector.prototype.createTextTarget = function ( placeho
 ve.ui.MWLanguageVariantInspector.prototype.setupTextTargetDoc = function ( textTarget, htmlString ) {
 	var doc = this.variantNode.getDocument().newFromHtml( htmlString );
 	textTarget.setDocument( doc );
-	textTarget.initialize();
 	return doc;
 };
 

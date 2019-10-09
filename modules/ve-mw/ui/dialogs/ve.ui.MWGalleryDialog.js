@@ -222,7 +222,6 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		.addClass( 've-ui-mwGalleryDialog-highlighted-image' );
 	this.filenameFieldset.$element.append( this.$highlightedImage );
 	this.highlightedCaptionTarget = ve.init.target.createTargetWidget( {
-		tools: ve.init.target.constructor.static.toolbarGroups,
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
@@ -293,7 +292,6 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		}
 	} );
 	this.captionTarget = ve.init.target.createTargetWidget( {
-		tools: ve.init.target.constructor.static.toolbarGroups,
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
@@ -469,7 +467,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			// Caption
 			this.captionTarget.setDocument( this.captionDocument );
 			this.captionTarget.setReadOnly( isReadOnly );
-			this.captionTarget.initialize();
 
 			if ( mwData ) {
 				this.originalMwDataNormalized = ve.copy( mwData );
@@ -800,7 +797,6 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 		.css( 'background-image', 'url(' + item.thumbUrl + ')' );
 	this.highlightedCaptionTarget.setDocument( item.captionDocument );
 	this.highlightedCaptionTarget.setReadOnly( this.isReadOnly() );
-	this.highlightedCaptionTarget.initialize();
 	this.highlightedAltTextInput.setValue( item.altText );
 };
 

@@ -30,11 +30,24 @@ OO.inheritClass( ve.ui.MWTargetWidget, ve.ui.TargetWidget );
 /**
  * @inheritdoc
  */
+ve.ui.MWTargetWidget.prototype.createTarget = function () {
+	return new ve.init.mw.Target( {
+		register: false,
+		toolbarGroups: this.toolbarGroups,
+		inTargetWidget: true,
+		modes: this.modes,
+		defaultMode: this.defaultMode
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTargetWidget.prototype.setDocument = function () {
 	// Parent method
 	ve.ui.MWTargetWidget.super.prototype.setDocument.apply( this, arguments );
 
 	// Add MW specific classes to the surface
-	this.surface.getView().$element.addClass( 'mw-body-content' );
-	this.surface.$placeholder.addClass( 'mw-body-content' );
+	this.getSurface().getView().$element.addClass( 'mw-body-content' );
+	this.getSurface().$placeholder.addClass( 'mw-body-content' );
 };

@@ -33,12 +33,6 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 
 OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
-/* Events */
-
-/**
- * @event surfaceReady
- */
-
 /* Static Properties */
 
 /**
@@ -312,16 +306,11 @@ ve.init.mw.Target.prototype.track = function () {};
  * @inheritdoc
  */
 ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
-	if ( this.getSurface().getMode() === 'source' ) {
+	return new ve.ui.MWTargetWidget( ve.extendObject( {
 		// Reset to visual mode for target widgets
-		return new ve.ui.MWTargetWidget( ve.extendObject( {
-			commandRegistry: ve.ui.commandRegistry,
-			sequenceRegistry: ve.ui.sequenceRegistry,
-			dataTransferHandlerFactory: ve.ui.dataTransferHandlerFactory
-		}, config ) );
-	} else {
-		return new ve.ui.MWTargetWidget( config );
-	}
+		modes: [ 'visual' ],
+		defaultMode: 'visual'
+	}, config ) );
 };
 
 /**

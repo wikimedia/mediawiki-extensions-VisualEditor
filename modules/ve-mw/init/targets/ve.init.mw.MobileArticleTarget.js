@@ -478,13 +478,13 @@ ve.init.mw.MobileArticleTarget.prototype.load = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
-	var originalToolbarGroups = this.constructor.static.toolbarGroups;
+	var originalToolbarGroups = this.toolbarGroups;
 
 	// We don't want any of these tools to show up in subordinate widgets, so we
 	// temporarily add them here. We need to do it _here_ rather than in their
 	// own static variable to make sure that other tools which meddle with
 	// toolbarGroups (Cite, mostly) have a chance to do so.
-	this.constructor.static.toolbarGroups = [].concat(
+	this.toolbarGroups = [].concat(
 		[
 			// Back
 			{
@@ -492,7 +492,7 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 				include: [ 'back' ]
 			}
 		],
-		ve.init.mw.MobileArticleTarget.static.toolbarGroups,
+		this.toolbarGroups,
 		[
 			{
 				name: 'editMode',
@@ -512,7 +512,7 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
-	this.constructor.static.toolbarGroups = originalToolbarGroups;
+	this.toolbarGroups = originalToolbarGroups;
 
 	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
