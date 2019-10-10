@@ -10,6 +10,8 @@
  */
 
 /* eslint-disable no-jquery/no-global-selector */
+// TODO: ve.now and ve.track should be moved to mw.libs.ve
+/* global ve */
 
 /**
  * Platform preparation for the MediaWiki view page. This loads (when user needs it) the

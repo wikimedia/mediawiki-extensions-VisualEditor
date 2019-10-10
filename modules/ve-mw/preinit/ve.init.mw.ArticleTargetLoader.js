@@ -5,6 +5,9 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+// TODO: ve.now and ve.track should be moved to mw.libs.ve
+/* global ve */
+
 /**
  * Target loader.
  *

@@ -27,7 +27,10 @@
 		 */
 		getModelFromResponse: function ( response, section ) {
 			var doc,
+				// This method is only called after actually loading these, see `parseDocumentModulePromise`
+				// eslint-disable-next-line no-undef
 				targetClass = ve.init.mw.ArticleTarget,
+				// eslint-disable-next-line no-undef
 				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
@@ -95,6 +98,7 @@
 				// We may want to remove that assumption from the differ?
 				newDoc.getStore().merge( oldDoc.getStore() );
 				return function () {
+					// eslint-disable-next-line no-undef
 					return new ve.dm.VisualDiff( oldDoc, newDoc );
 				};
 			} );

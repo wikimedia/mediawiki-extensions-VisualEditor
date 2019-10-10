@@ -69,6 +69,8 @@
 			// TODO: Load a smaller subset of VE for computing the visual diff
 			modulePromise = mw.loader.using( [ 'ext.visualEditor.articleTarget' ].concat( pluginModules ) );
 			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( function ( visualDiffGenerator ) {
+				// This class is loaded via modulePromise above
+				// eslint-disable-next-line no-undef
 				diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
 
 				progress.$element.addClass( 'oo-ui-element-hidden' );
