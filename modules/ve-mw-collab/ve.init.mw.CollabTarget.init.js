@@ -92,7 +92,7 @@
 
 			dummySurface.createProgress( progressDeferred.promise(), ve.msg( 'visualeditor-rebase-client-connecting' ), true );
 
-			surfaceModel.synchronizer.once( 'initDoc', function () {
+			surfaceModel.synchronizer.once( 'initDoc', function ( error ) {
 				var initPromise;
 
 				progressDeferred.resolve();
@@ -102,6 +102,18 @@
 					target.clearSurfaces();
 					// Don't add the surface until the history has been applied
 					target.addSurface( surfaceModel );
+					if ( error ) {
+						OO.ui.alert(
+							$( '<p>' ).append(
+								ve.htmlMsg( 'visualeditor-corrupted-document-error', $( '<pre>' ).text( error.stack ) )
+							),
+							{ title: ve.msg( 'visualeditor-corrupted-document-title' ), size: 'large' }
+						).then( function () {
+							// eslint-disable-next-line no-use-before-define
+							showForm( true );
+						} );
+						return;
+					}
 					target.once( 'surfaceReady', function () {
 						initPromise.then( function () {
 							surfaceModel.selectFirstContentOffset();
@@ -184,7 +196,7 @@
 		} ).fail( function ( err ) {
 			mw.log.error( err );
 			// eslint-disable-next-line no-use-before-define
-			showForm();
+			showForm( true );
 		} );
 	}
 
