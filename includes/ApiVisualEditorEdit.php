@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-use \MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditorEdit extends ApiVisualEditor {
