@@ -312,17 +312,17 @@ class ApiVisualEditor extends ApiBase {
 							$response = $this->parseWikitextFragment(
 								$title, $wikitext, false, $oldid, $stash
 							);
-							$content = $response['body'];
-							$restbaseHeaders = $response['headers'];
 						} else {
-							$content = $this->requestRestbase(
+							$response = $this->requestRestbase(
 								$title,
 								'GET',
 								'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid .
 									'?redirect=false&stash=true',
 								[]
-							)['body'];
+							);
 						}
+						$content = $response['body'];
+						$restbaseHeaders = $response['headers'];
 						if ( $content === false ) {
 							$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 						}
