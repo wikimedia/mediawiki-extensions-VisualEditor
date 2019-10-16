@@ -274,6 +274,8 @@
 	"visualeditor-savedialog-label-save-short": "Uložiť",
 	"visualeditor-savedialog-label-visual-diff-report": "Nahlásiť chybné zobrazenie tejto zmeny",
 	"visualeditor-savedialog-label-warning": "Upozornenie",
+	"visualeditor-savedialog-review-nosummary": "Bez zhrnutia úpravy",
+	"visualeditor-savedialog-review-visual": "Vizuálne",
 	"visualeditor-savedialog-title-conflict": "Konflikt",
 	"visualeditor-savedialog-title-review": "Skontrolujte zmeny",
 	"visualeditor-savedialog-title-save": "Uložiť zmeny",

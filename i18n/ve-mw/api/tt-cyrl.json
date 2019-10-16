@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ильнар"
+			"Ильнар",
+			"Ерней"
 		]
 	},
-	"apierror-visualeditor-difffailed": "Чагыштыру килеп чыкмады"
+	"apierror-visualeditor-difffailed": "Чагыштыру килеп чыкмады",
+	"apihelp-visualeditoredit-param-summary": "Кыскача аңлатманы үзгәртү."
 }

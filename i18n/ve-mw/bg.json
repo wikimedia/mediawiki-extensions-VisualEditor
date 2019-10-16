@@ -89,6 +89,7 @@
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Сортиране на тази страница по подразбиране като",
 	"visualeditor-dialog-meta-categories-hidden": "Тази категория е настроена да не се показва на страниците, към които е добавена.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Скрити категории",
+	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Намерени категории",
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Преместване на категорията тук",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Нова категория",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Добавяне на категория",
