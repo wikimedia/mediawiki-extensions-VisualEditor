@@ -2556,9 +2556,9 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			return $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() );
 		}
 		function renderPageLinks( pages ) {
-			var i, $list = $( '<ul />' );
+			var i, $list = $( '<ul>' );
 			for ( i = 0; i < pages.length; i++ ) {
-				$list.append( $( '<li />' ).append( renderPageLink( pages[ i ] ) ) );
+				$list.append( $( '<li>' ).append( renderPageLink( pages[ i ] ) ) );
 			}
 			return $list;
 		}
