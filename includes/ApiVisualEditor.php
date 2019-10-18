@@ -629,6 +629,13 @@ class ApiVisualEditor extends ApiBase {
 				if ( $restbaseHeaders ) {
 					$result['etag'] = $restbaseHeaders['etag'];
 				}
+				if ( isset( $params['badetag'] ) ) {
+					$badetag = $params['badetag'];
+					$goodetag = $result['etag'] ?? '';
+					$this->logger->info(
+						__METHOD__ . ": Client reported bad ETag: $badetag, expected: $goodetag"
+					);
+				}
 				if ( $params['paction'] === 'parse' ||
 					 $params['paction'] === 'wikitext' ||
 					 ( !empty( $params['preload'] ) && isset( $content ) )
@@ -767,6 +774,7 @@ class ApiVisualEditor extends ApiBase {
 			'page' => [
 				ApiBase::PARAM_REQUIRED => true,
 			],
+			'badetag' => null,
 			'format' => [
 				ApiBase::PARAM_DFLT => 'jsonfm',
 				ApiBase::PARAM_TYPE => [ 'json', 'jsonfm' ],

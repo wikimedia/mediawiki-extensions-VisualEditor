@@ -196,12 +196,13 @@
 		 *
 		 * @param {string} pageName See #requestPageData
 		 * @param {Object} [options] See #requestPageData
+		 * @param {boolean} [noRestbase=false] Don't query RESTBase directly
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestParsoidData: function ( pageName, options ) {
+		requestParsoidData: function ( pageName, options, noRestbase ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data,
 				section = options.section !== undefined ? options.section : null,
-				useRestbase = ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
+				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
 				switched = false,
 				fromEditedState = false;
 
@@ -210,6 +211,7 @@
 				action: 'visualeditor',
 				paction: useRestbase ? 'metadata' : 'parse',
 				page: pageName,
+				badetag: options.badetag,
 				uselang: mw.config.get( 'wgUserLanguage' ),
 				editintro: uri.query.editintro,
 				preload: options.preload,
@@ -358,6 +360,22 @@
 			}
 
 			return dataPromise.then( function ( resp ) {
+				// Adapted from RESTBase mwUtil.parseETag()
+				var etagRegexp = /^(?:W\/)?"?([^"/]+)(?:\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))(?:\/([^"]+))?"?$/;
+
+				if ( useRestbase && (
+					!resp.visualeditor.etag ||
+					!resp.visualeditor.etag.match( etagRegexp )
+				) ) {
+					// Direct request to RESTBase returned a mangled or missing etag.
+					// Retry via the MediaWiki API.
+					return mw.libs.ve.targetLoader.requestParsoidData(
+						pageName,
+						$.extend( {}, options, { badetag: resp.visualeditor.etag || '' } ),
+						true
+					);
+				}
+
 				resp.veMode = 'visual';
 				return resp;
 			} );
