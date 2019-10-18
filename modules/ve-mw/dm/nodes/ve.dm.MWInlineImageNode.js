@@ -64,12 +64,14 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		width = img.getAttribute( 'width' ),
 		height = img.getAttribute( 'height' );
 
-	// Convert absolute URLs to relative if the href refers to a page on this wiki.
-	// Otherwise Parsoid generates |link= options for copy-pasted images (T193253).
 	href = imgWrapper.getAttribute( 'href' );
-	targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
-	if ( targetData.isInternal ) {
-		href = './' + targetData.title;
+	if ( href ) {
+		// Convert absolute URLs to relative if the href refers to a page on this wiki.
+		// Otherwise Parsoid generates |link= options for copy-pasted images (T193253).
+		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
+		if ( targetData.isInternal ) {
+			href = './' + targetData.title;
+		}
 	}
 	// Ensure that resource and href are identical if they refer to the same page.
 	// https://www.mediawiki.org/w/?diff=931265&oldid=prev
