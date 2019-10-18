@@ -611,27 +611,54 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.base": {
+		"ext.visualEditor.core.utils": {
 			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ve.utils.js",
-				"lib/ve/src/ve.utils.client.js",
 				"lib/ve/src/ve.TriggerListener.js",
-				"lib/ve/src/init/ve.init.js",
-				"lib/ve/src/init/ve.init.SafeStorage.js",
-				"lib/ve/src/init/ve.init.ListStorage.js",
-				"lib/ve/src/init/ve.init.Platform.js",
-				"lib/ve/src/init/ve.init.Target.js"
+				"lib/ve/src/ve.track.js"
 			],
 			"debugScripts": [
 				"lib/ve/src/ve.debug.js",
 				"lib/ve/src/ve.freeze.js"
 			],
 			"dependencies": [
+				"ext.visualEditor.ve",
+				"oojs-ui"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.core.utils.parsing": {
+			"group": "visualEditorA",
+			"scripts": [
+				"lib/ve/src/ve.utils.parsing.js"
+			],
+			"dependencies": [
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.base": {
+			"group": "visualEditorA",
+			"scripts": [
+				"lib/ve/src/ve.utils.client.js",
+				"lib/ve/src/init/ve.init.js",
+				"lib/ve/src/init/ve.init.SafeStorage.js",
+				"lib/ve/src/init/ve.init.ListStorage.js",
+				"lib/ve/src/init/ve.init.Platform.js",
+				"lib/ve/src/init/ve.init.Target.js"
+			],
+			"dependencies": [
 				"oojs",
 				"oojs-ui",
 				"unicodejs",
-				"ext.visualEditor.ve"
+				"ext.visualEditor.core.utils",
+				"ext.visualEditor.core.utils.parsing"
 			],
 			"targets": [
 				"desktop",
