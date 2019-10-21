@@ -363,7 +363,9 @@
 				// Adapted from RESTBase mwUtil.parseETag()
 				var etagRegexp = /^(?:W\/)?"?([^"/]+)(?:\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))(?:\/([^"]+))?"?$/;
 
-				if ( useRestbase && (
+				// `etag` is expected to be undefined when creating a new page.
+				// We can detect that case by `content` being empty, and not retry.
+				if ( useRestbase && resp.visualeditor.content && (
 					!resp.visualeditor.etag ||
 					!resp.visualeditor.etag.match( etagRegexp )
 				) ) {
