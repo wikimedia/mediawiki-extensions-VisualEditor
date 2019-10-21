@@ -75,15 +75,6 @@ ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
 // FIXME Some of these users will be on tablets, check for this
 ve.init.mw.MobileArticleTarget.static.platformType = 'phone';
 
-/* Static Methods */
-
-// FIXME This method is overridden in the MobileFrontend extension,
-// figure out a way to make it public there so that we can use it here
-/**
- * @method
- */
-ve.init.mw.MobileArticleTarget.static.parseSaveError = null;
-
 /* Methods */
 
 /**
@@ -454,12 +445,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wa
 	// parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveFail.apply( this, arguments );
 
-	// Massage errorformat=html responses to look more like errorformat=bc expected by MF
-	if ( data.errors ) {
-		data.error = data.errors[ 0 ];
-	}
-
-	this.overlay.onSaveFailure( this.constructor.static.parseSaveError( data, status ) );
+	this.overlay.onSaveFailure( data );
 };
 
 /**
