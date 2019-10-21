@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Redhotchili23"
+			"Redhotchili23",
+			"Pare Mo"
 		]
 	},
-	"visualeditor-ca-editsource-section": "bayluhan ang ginhalinan"
+	"tooltip-ca-ve-edit": "Editaron ining panid",
+	"visualeditor-ca-editsource": "Editaron ang gin·gikanan",
+	"visualeditor-ca-editsource-section": "bayluhan ang ginhalinan",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
