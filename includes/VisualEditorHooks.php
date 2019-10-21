@@ -622,6 +622,7 @@ class VisualEditorHooks {
 
 		// add VE edit section in VE available namespaces
 		if ( self::isVisualAvailable( $title, $skin->getRequest() ) ) {
+			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			$veEditSection = $tabMessages['editsection'];
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),

@@ -377,6 +377,7 @@ class ApiVisualEditor extends ApiBase {
 				} else {
 					$content = '';
 					Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+					// @phan-suppress-next-line PhanSuspiciousValueComparison Known false positive with hooks
 					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
 						$content = $this->parseWikitextFragment( $title, $content, true )['body'];
 					}
