@@ -19,7 +19,8 @@
 			"Trevor Parscal",
 			"Liuxinyu970226",
 			"Guillom",
-			"SNN95"
+			"SNN95",
+			"Verdy p"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Suntingan visual]]",
@@ -28,7 +29,7 @@
 	"tag-visualeditor-needcheck-description": "Suntingan dilakukan dengan menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] di mana sistem telah mengesan wikiteks yang mungkin mengalami perubahan yang tidak diingini.",
 	"tag-visualeditor-wikitext": "Short description of the visualeditor-wikitext tag.\n\nShown on lists of changes (history, recentchanges, etc.) for each edit made using VisualEditor in wikitext editor mode.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-wikitext-description}}\n* {{Related|tag-visualeditor}}",
 	"tag-visualeditor-wikitext-description": "Long description of the visualeditor-wikitext tag ({{msg-mw|Tag-visualeditor-wikitext}}).\n\nShown on [[Special:Tags]].\n\nSee also:\n* {{msg-mw|Tag-visualeditor-wikitext}}\n* {{Related|tag-visualeditor-description}}",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Suntingan visual: Ditukar]]",
+	"tag-visualeditor-switched": "Short description of the visualeditor-switched tag.\n\nShown on lists of changes (history, recentchanges, etc.) for each edit which was started using VisualEditor and then was moved to the wikitext editor.\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n{{Related|Tag-visualeditor}}",
 	"tag-visualeditor-switched-description": "Pengguna mula menyunting dengan suntingan visual, kemudian beralih kepada suntingan wikiteks.",
 	"visualeditor-feedback-link": "Link to a page where users can leave feedback that is automatically posted using this tool. This should be a sub-page of {{msg-mw|visualeditor-descriptionpagelink}}",
 	"visualeditor-feedback-source-link": "Link to a page where users can leave feedback about the source mode that is automatically posted using this tool. This can be the same as or different from {{msg-mw|visualeditor-feedback-link}}.",
