@@ -16,22 +16,25 @@
  */
 ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	var popupCloseButton, $popupContent, $shield,
-		usePrefs = !mw.user.isAnon(),
-		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' ),
+		// For logged in users, only check their preferences, not local storage.
+		// For anon users, who can't change preferences, check local storage.
+		// (But also check preferences in case default values are overridden.)
+		checkLocalStorage = !!mw.user.isAnon(),
+		hiddenUsingPreferences = mw.user.options.get( 'visualeditor-hideusered' ),
+		hiddenUsingLocalStorage = mw.storage.get( 've-hideusered' ) || $.cookie( 've-hideusered' ),
 		tool = this;
 
 	config = config || {};
 
+	// Do not display on platforms other than desktop
+	if ( !( ve.init.mw.DesktopArticleTarget && ve.init.target instanceof ve.init.mw.DesktopArticleTarget ) ) {
+		return;
+	}
+
+	// Do not display if the user already acknowledged the popups
 	if (
-		!( ve.init.mw.DesktopArticleTarget && ve.init.target instanceof ve.init.mw.DesktopArticleTarget ) ||
-		(
-			!prefSaysShow &&
-			!(
-				!usePrefs &&
-				mw.storage.get( 've-hideusered' ) === null &&
-				$.cookie( 've-hideusered' ) === null
-			)
-		)
+		hiddenUsingPreferences ||
+		( hiddenUsingLocalStorage && checkLocalStorage )
 	) {
 		return;
 	}
@@ -95,18 +98,19 @@ OO.initClass( ve.ui.MWEducationPopupTool );
  * Click handler for the popup close button
  */
 ve.ui.MWEducationPopupTool.prototype.onPopupCloseButtonClick = function () {
-	var usePrefs = !mw.user.isAnon(),
-		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hideusered' );
+	var
+		canSavePreferences = !mw.user.isAnon(),
+		hiddenUsingPreferences = mw.user.options.get( 'visualeditor-hideusered' );
 
 	this.shownEducationPopup = true;
 	this.popup.toggle( false );
 	this.setActive( false );
 	ve.init.target.openEducationPopupTool = undefined;
 
-	if ( prefSaysShow ) {
+	if ( !hiddenUsingPreferences && canSavePreferences ) {
 		ve.init.target.getLocalApi().saveOption( 'visualeditor-hideusered', 1 );
 		mw.user.options.set( 'visualeditor-hideusered', 1 );
-	} else if ( !usePrefs ) {
+	} else if ( !canSavePreferences ) {
 		if ( !mw.storage.set( 've-hideusered', 1 ) ) {
 			$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
 		}
