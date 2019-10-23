@@ -201,10 +201,9 @@ class ApiVisualEditor extends ApiBase {
 	 * @param string $preload The title of the page to use as the preload content
 	 * @param string[] $params The preloadTransform parameters to pass in, if any
 	 * @param Title $contextTitle The contextual page title against which to parse the preload
-	 * @param bool $parse Whether to parse the preload content
-	 * @return string The parsed content
+	 * @return string Wikitext content
 	 */
-	protected function getPreloadContent( $preload, $params, Title $contextTitle, $parse = false ) {
+	protected function getPreloadContent( $preload, $params, Title $contextTitle ) {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
 		// Check for existence to avoid getting MediaWiki:Noarticletext
@@ -226,11 +225,6 @@ class ApiVisualEditor extends ApiBase {
 				$parserOptions,
 				(array)$params
 			)->serialize();
-
-			if ( $parse ) {
-				// We need to turn this transformed wikitext into parsoid html
-				$content = $this->parseWikitextFragment( $contextTitle, $content, true )['body'];
-			}
 		}
 		return $content;
 	}
@@ -342,8 +336,7 @@ class ApiVisualEditor extends ApiBase {
 							$content = '';
 							if ( !empty( $params['preload'] ) ) {
 								$content = $this->getPreloadContent(
-									$params['preload'], $params['preloadparams'], $title,
-									$params['paction'] !== 'wikitext'
+									$params['preload'], $params['preloadparams'], $title
 								);
 								$preloaded = true;
 							}
@@ -380,15 +373,16 @@ class ApiVisualEditor extends ApiBase {
 					$content = '';
 					Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
 					// @phan-suppress-next-line PhanSuspiciousValueComparison Known false positive with hooks
-					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
-						$content = $this->parseWikitextFragment( $title, $content, true )['body'];
-					}
 					if ( $content === '' && !empty( $params['preload'] ) ) {
 						$content = $this->getPreloadContent(
-							$params['preload'], $params['preloadparams'], $title,
-							$params['paction'] !== 'wikitext'
+							$params['preload'], $params['preloadparams'], $title
 						);
 						$preloaded = true;
+					}
+					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
+						$response = $this->parseWikitextFragment( $title, $content, true );
+						$content = $response['body'];
+						$restbaseHeaders = $response['headers'];
 					}
 					$baseTimestamp = wfTimestampNow();
 					$oldid = 0;
