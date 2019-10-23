@@ -15,6 +15,7 @@
 	"apierror-visualeditor-latestnotfound": "Não foi possível encontrar a última revisão para o título",
 	"apihelp-visualeditor-description": "Retorna código HTML5 a uma página através do serviço Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Ao salvar, define isto à data e hora da revisão que foi editada. Usado para detectar conflitos de edição.",
+	"apihelp-visualeditor-param-badetag": "Se a consulta RESTBase devolveu uma ETag aparentemente inválida, passe-a aqui para fins de registo.",
 	"apihelp-visualeditor-param-cachekey": "Para serializar ou comparar as revisões, usa o resultado de um pedido \"serializeforcache\" anterior com esta chave. Invalida $1html.",
 	"apihelp-visualeditor-param-editintro": "Edite a introdução para adicionar aos avisos.",
 	"apihelp-visualeditor-param-etag": "ETag para enviar.",
