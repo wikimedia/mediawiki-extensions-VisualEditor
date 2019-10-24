@@ -19,11 +19,11 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	ve.ui.MWWikitextSurface.super.apply( this, arguments );
 
 	// Initialization
+	this.$element.addClass( 've-ui-mwWikitextSurface' );
 	// The following classes can be used here:
 	// * mw-editfont-monospace
 	// * mw-editfont-sans-serif
 	// * mw-editfont-serif
-	this.$element.addClass( 've-ui-mwWikitextSurface' );
 	this.getView().$element.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 	this.$placeholder.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 	// eslint-disable-next-line no-jquery/no-global-selector
