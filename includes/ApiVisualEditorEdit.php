@@ -280,7 +280,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$path .= '/' . $parserParams['oldid'];
 		}
 		// Adapted from RESTBase mwUtil.parseETag()
-		if ( !preg_match( '/
+		// ETag is not expected when creating a new page (oldid=0)
+		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] && !preg_match( '/
 			^(?:W\\/)?"?
 			([^"\\/]+)
 			(?:\\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))
