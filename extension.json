@@ -719,6 +719,7 @@
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css"
 			],
 			"dependencies": [
+				"mediawiki.diff.styles",
 				"mediawiki.String",
 				"jquery.lengthLimit",
 				"ext.visualEditor.mwcore",
@@ -1630,7 +1631,6 @@
 				"ext.visualEditor.mediawiki",
 				"ext.visualEditor.diffing",
 				"mediawiki.Title",
-				"mediawiki.diff.styles",
 				"mediawiki.interface.helpers.styles",
 				"mediawiki.user",
 				"mediawiki.util",
