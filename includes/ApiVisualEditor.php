@@ -380,7 +380,7 @@ class ApiVisualEditor extends ApiBase {
 						$preloaded = true;
 					}
 					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
-						$response = $this->parseWikitextFragment( $title, $content, true );
+						$response = $this->parseWikitextFragment( $title, $content, false, null, true );
 						$content = $response['body'];
 						$restbaseHeaders = $response['headers'];
 					}
