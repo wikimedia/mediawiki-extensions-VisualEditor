@@ -16,6 +16,7 @@
 	"apierror-visualeditor-latestnotfound": "לא נמצאה הגרסה האחרונה של הכותרת",
 	"apihelp-visualeditor-description": "החזרת HTML5 של דף משירות parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "בעת שמירה, להגדיר את זה בתור חותם־הזמן של הגרסה שנשמרת. זה משמש לזיהוי התנגשויות.",
+	"apihelp-visualeditor-param-badetag": "אם שאילתת RESTBase החזירה ETag שנראה בלתי־תקין, להעביר אותו כאן לצורך רישום ביומן.",
 	"apihelp-visualeditor-param-cachekey": "בשביל serialize או diff, להשתמש בתוצאה של בקשת ה־serializeforcache הקודמת עם המפתח הזה. עוקף את $1html.",
 	"apihelp-visualeditor-param-editintro": "מבוא לעריכה להוסיף להתראות.",
 	"apihelp-visualeditor-param-etag": "איזה ETag לשלוח.",

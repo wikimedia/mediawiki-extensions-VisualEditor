@@ -21,5 +21,6 @@
 	"apihelp-visualeditoredit-param-section": "Sadaļa, kurā darboties.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Jaunās sadaļas nosaukums.",
 	"apihelp-visualeditoredit-param-summary": "Izmaiņu kopsavilkums.",
-	"apihelp-visualeditoredit-param-wikitext": "Vikiteksts, ar ko strādāt."
+	"apihelp-visualeditoredit-param-wikitext": "Vikiteksts, ar ko strādāt.",
+	"apihelp-visualeditoredit-summary": "Saglabā HTML5 lapu MediaWiki (pārveidotu vikitekstā ar Parsoid servisu)."
 }

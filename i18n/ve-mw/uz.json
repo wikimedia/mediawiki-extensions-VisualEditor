@@ -4,7 +4,8 @@
 			"CoderSI",
 			"Noor2020",
 			"Sociologist",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Malikxan"
 		]
 	},
 	"tooltip-ca-createsource": "Ushbu sahifaning manba kodini yaratish",
@@ -40,6 +41,7 @@
 	"visualeditor-dialog-transclusion-add-param": "Parametr qoʻshish",
 	"visualeditor-dialog-transclusion-add-template": "Andoza qoʻshish",
 	"visualeditor-dialog-transclusion-content": "Tarkib",
+	"visualeditor-dialog-transclusion-loading": "Yuklanmoqda...",
 	"visualeditor-dialog-transclusion-options": "Moslamalar",
 	"visualeditor-dialog-transclusion-placeholder": "Yangi andoza",
 	"visualeditor-dialog-transclusion-remove-content": "Tarkibni oʻchirish",
