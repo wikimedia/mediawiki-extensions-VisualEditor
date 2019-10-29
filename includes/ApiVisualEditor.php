@@ -407,8 +407,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( $params['editintro'] ) {
 					$eiTitle = Title::newFromText( $params['editintro'] );
 					if ( $eiTitle instanceof Title && $eiTitle->exists() && $eiTitle->userCan( 'read' ) ) {
-						global $wgParser;
-						$notices[] = $wgParser->parse(
+						$notices[] = MediaWikiServices::getInstance()->getParser()->parse(
 							'<div class="mw-editintro">{{:' . $eiTitle->getFullText() . '}}</div>',
 							$title,
 							new ParserOptions()
