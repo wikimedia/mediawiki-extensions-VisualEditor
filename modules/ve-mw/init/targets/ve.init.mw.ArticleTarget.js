@@ -7,8 +7,6 @@
 
 /* eslint-disable no-jquery/no-global-selector */
 
-/* global EasyDeflate */
-
 /**
  * Initialization MediaWiki article target.
  *
@@ -550,10 +548,10 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		// Auto-save
 		this.initAutosave();
 
-		// Start loading easy-deflate module in the background, so it's
+		// Start loading deflate module in the background, so it's
 		// already loaded when the save dialog is opened.
 		setTimeout( function () {
-			mw.loader.load( 'easy-deflate.deflate' );
+			mw.loader.load( 'mediawiki.deflate' );
 		}, 500 );
 	}
 
@@ -1151,7 +1149,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
 };
 
 /**
- * Get deflated HTML. This function is async because easy-deflate may not have finished loading yet.
+ * Get deflated HTML. This function is async because deflate may not have finished loading yet.
  *
  * @param {HTMLDocument} newDoc Document to get HTML for
  * @return {jQuery.Promise} Promise resolved with deflated HTML
@@ -1159,9 +1157,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
  */
 ve.init.mw.ArticleTarget.prototype.deflateHtml = function ( newDoc ) {
 	var html = this.getHtml( newDoc, this.doc );
-	return mw.loader.using( 'easy-deflate.deflate' )
+	return mw.loader.using( 'mediawiki.deflate' )
 		.then( function () {
-			return EasyDeflate.deflate( html );
+			return mw.deflate( html );
 		} );
 };
 

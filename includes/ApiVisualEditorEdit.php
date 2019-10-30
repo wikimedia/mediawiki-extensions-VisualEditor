@@ -167,10 +167,10 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 */
 	protected function getWikitextNoCache( Title $title, $params, $parserParams ) {
 		$this->requireOnlyOneParameter( $params, 'html' );
-		if ( EasyDeflate::isDeflated( $params['html'] ) ) {
-			$status = EasyDeflate::inflate( $params['html'] );
+		if ( Deflate::isDeflated( $params['html'] ) ) {
+			$status = Deflate::inflate( $params['html'] );
 			if ( !$status->isGood() ) {
-				$this->dieWithError( 'easydeflate-invaliddeflate', 'invaliddeflate' );
+				$this->dieWithError( 'deflate-invaliddeflate', 'invaliddeflate' );
 			}
 			$html = $status->getValue();
 		} else {
