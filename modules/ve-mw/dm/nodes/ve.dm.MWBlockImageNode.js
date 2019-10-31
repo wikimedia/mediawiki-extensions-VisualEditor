@@ -68,7 +68,7 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, newDimensions, attributes,
 		figure, imgWrapper, img, captionNode, caption,
-		classAttr, typeofAttrs, errorIndex, width, height, href, targetData, resource, types,
+		classAttr, typeofAttrs, errorIndex, width, height, types,
 		mwDataJSON, mwData;
 
 	figure = domElements[ 0 ];
@@ -83,19 +83,6 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	width = img.getAttribute( 'width' );
 	height = img.getAttribute( 'height' );
 
-	href = imgWrapper.getAttribute( 'href' );
-	if ( href ) {
-		// Convert absolute URLs to relative if the href refers to a page on this wiki.
-		// Otherwise Parsoid generates |link= options for copy-pasted images (T193253).
-		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
-		if ( targetData.isInternal ) {
-			href = './' + targetData.title;
-		}
-	}
-	// Ensure that resource and href are identical if they refer to the same page.
-	// https://www.mediawiki.org/w/?diff=931265&oldid=prev
-	resource = './' + ve.normalizeParsoidResourceName( img.getAttribute( 'resource' ) );
-
 	if ( errorIndex !== -1 ) {
 		typeofAttrs.splice( errorIndex, 1 );
 	}
@@ -106,8 +93,8 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		mediaClass: types.mediaClass,
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
-		href: href,
-		resource: resource,
+		href: imgWrapper.getAttribute( 'href' ),
+		resource: img.getAttribute( 'resource' ),
 		width: width !== null && width !== '' ? +width : null,
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),

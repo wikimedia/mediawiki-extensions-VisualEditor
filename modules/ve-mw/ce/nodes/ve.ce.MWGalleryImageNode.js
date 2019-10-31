@@ -82,7 +82,7 @@ ve.ce.MWGalleryImageNode = function VeCeMWGalleryImageNode( model ) {
 		.attr( 'width', attributes.width );
 	this.$filenameA = $( '<a>' )
 		.attr( 'href', '#' ) // Just to make it look like a link
-		.text( mw.Title.newFromText( ve.normalizeParsoidResourceName( attributes.resource ) ).getMainText() )
+		.text( mw.Title.newFromText( attributes.resource ).getMainText() )
 		.toggleClass( 'oo-ui-element-hidden', galleryMwAttrs.showfilename !== 'yes' );
 
 	this.$element.prepend(
