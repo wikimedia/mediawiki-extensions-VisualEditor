@@ -37,6 +37,12 @@
 	display: table-row-group;
 }
 
+/* Prevent jQuery.makeCollapsible from hiding blocks */
+.client-js .ve-ce-surface .mw-collapsed:not( .mw-made-collapsible ) .mw-collapsible-content,
+.client-js .ve-ui-diffElement .mw-collapsed:not( .mw-made-collapsible ) .mw-collapsible-content {
+	display: block;
+}
+
 /*
  * Grey out the fake toggles to make it more obvious they are not interactive.
  * Don't bother trying to float the toggles, as the text they are floating around
@@ -49,6 +55,11 @@
 .ve-ui-diffElement table.mw-collapsible > caption:first-child:after {
 	color: #999;
 	float: none;
+}
+
+.ve-ce-surface div.mw-collapsible:before,
+.ve-ui-diffElement div.mw-collapsible:before {
+	color: #999;
 }
 
 /* Reset section node styles */
