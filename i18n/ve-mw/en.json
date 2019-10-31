@@ -13,7 +13,8 @@
 			"Timo Tijhof",
 			"Roan Kattouw",
 			"Christian Williams",
-			"Amir E. Aharoni"
+			"Amir E. Aharoni",
+			"Zoranzoki21"
 		]
 	},
 	"accesskey-ca-editsource": "e",
@@ -198,7 +199,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Are you sure you want to continue without filling the $1 {{PLURAL:$2|field|fields}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Hide options",
 	"visualeditor-dialog-transclusion-title": "Transclusion",
-	"visualeditor-dialogbutton-media-tooltip": "Media",
+	"visualeditor-dialogbutton-media-tooltip": "Images and media",
 	"visualeditor-dialogbutton-meta-tooltip": "Page settings",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusion",
