@@ -463,19 +463,26 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 
 			accesskey = null;
 			title = null;
+			// The messages documented below are just the ones defined in core.
+			// Extensions may add other checkboxes.
 			if ( options.tooltip ) {
+				// The following messages are used here:
+				// * accesskey-minoredit
+				// * accesskey-watch
+				accesskey = mw.message( 'accesskey-' + options.tooltip ).text();
 				// The following messages are used here:
 				// * tooltip-minoredit
 				// * tooltip-watch
-				// * accesskey-minoredit
-				// * accesskey-watch
-				// These are just the messages defined in core. Extensions may add other checkboxes.
-				accesskey = mw.message( 'accesskey-' + options.tooltip ).text();
 				title = mw.message( 'tooltip-' + options.tooltip ).text();
 			}
 			if ( options[ 'title-message' ] ) {
+				// Not used in core
+				// eslint-disable-next-line mediawiki/msg-doc
 				title = mw.message( options[ 'title-message' ] ).text();
 			}
+			// The following messages are used here:
+			// * minoredit
+			// * watchthis
 			$label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
 			ve.targetLinksToNewWindow( $label[ 0 ] );
 
@@ -828,20 +835,21 @@ ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function ( data ) {
  * @fires saveErrorNewUser
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, error ) {
-	var userMsg,
-		$msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) );
+	var $msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) );
 
 	if ( error ) {
 		this.emit( 'saveErrorBadToken', false );
 		$msg = $msg.add( document.createTextNode( mw.msg( 'visualeditor-savedialog-identify-trylogin' ) ) );
 	} else {
 		this.emit( 'saveErrorNewUser' );
-		if ( username === null ) {
-			userMsg = 'visualeditor-savedialog-identify-anon';
-		} else {
-			userMsg = 'visualeditor-savedialog-identify-user';
-		}
-		$msg = $msg.add( mw.message( userMsg, username ).parseDom() );
+		$msg = $msg.add(
+			mw.message(
+				username === null ?
+					'visualeditor-savedialog-identify-anon' :
+					'visualeditor-savedialog-identify-user',
+				username
+			).parseDom()
+		);
 	}
 	this.showSaveError( $msg );
 };

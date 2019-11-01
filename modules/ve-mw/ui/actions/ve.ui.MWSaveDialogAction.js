@@ -166,6 +166,12 @@ ve.ui.commandRegistry.register(
 		];
 
 	shortcuts.forEach( function ( shortcut ) {
+		// The following messages can be used here:
+		// * accesskey-save
+		// * accesskey-diff
+		// * accesskey-preview
+		// * accesskey-minoredit
+		// * accesskey-watch
 		var accessKey = ve.msg( shortcut.accessKey );
 		if ( accessKey !== '-' && accessKey !== '' ) {
 			try {

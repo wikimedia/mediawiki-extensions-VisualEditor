@@ -72,6 +72,13 @@ ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 	languageString = languageCodes.map( function ( code ) {
 		return ve.init.platform.getLanguageName( code.toLowerCase() );
 	} ).join( ve.msg( 'comma-separator' ) );
+	// The following messages can be used here:
+	// * visualeditor-mwlanguagevariant-disabled
+	// * visualeditor-mwlanguagevariant-filter
+	// * visualeditor-mwlanguagevariant-name
+	// * visualeditor-mwlanguagevariant-oneway
+	// * visualeditor-mwlanguagevariant-twoway
+	// * visualeditor-mwlanguagevariant-unknown
 	return ve.msg( messageKey, languageString );
 };
 

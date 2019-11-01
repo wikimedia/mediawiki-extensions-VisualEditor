@@ -113,6 +113,10 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getSetupProcess = function ( data ) {
 			null;
 
 	data = $.extend( {
+		// The following messages are used here
+		// * visualeditor-magiclinknodeinspector-title-isbn
+		// * visualeditor-magiclinknodeinspector-title-pmid
+		// * visualeditor-magiclinknodeinspector-title-rfc
 		title: msg ? OO.ui.deferMsg( msg ) : null
 	}, data );
 	return ve.ui.MWMagicLinkNodeInspector.super.prototype.getSetupProcess.call( this, data )

@@ -176,6 +176,7 @@ ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
 		return this.parsedMessages[ key ];
 	}
 	// Fallback to regular messages, with mw.message html escaping applied.
+	// eslint-disable-next-line mediawiki/msg-doc
 	return mw.message( key ).escaped();
 };
 

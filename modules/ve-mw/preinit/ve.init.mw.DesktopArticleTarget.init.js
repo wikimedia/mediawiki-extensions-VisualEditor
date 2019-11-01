@@ -270,16 +270,20 @@
 	}
 
 	function getTabMessage( key ) {
-		var tabMsg = tabMessages[ key ];
-		if ( !tabMsg && ( key === 'edit' || key === 'create' ) ) {
+		var tabMsgKey = tabMessages[ key ];
+		if ( !tabMsgKey && ( key === 'edit' || key === 'create' ) ) {
 			// Some skins don't use the default 'edit' and 'create' message keys.
 			// e.g. vector-view-edit, vector-view-create
-			tabMsg = mw.config.get( 'skin' ) + '-view-' + key;
-			if ( !mw.message( tabMsg ).exists() ) {
-				tabMsg = key;
+			tabMsgKey = mw.config.get( 'skin' ) + '-view-' + key;
+			// The following messages can be used here:
+			// * vector-view-edit
+			// * vector-view-create
+			// * messages for other skins
+			if ( !mw.message( tabMsgKey ).exists() ) {
+				tabMsgKey = key;
 			}
 		}
-		return tabMsg;
+		return mw.msg( tabMsgKey );
 	}
 
 	function setEditorPreference( editor ) {
@@ -302,8 +306,8 @@
 				sectionKey += 'source';
 			}
 
-			$( '#ca-edit a' ).text( mw.msg( getTabMessage( key ) ) );
-			$( '.mw-editsection a' ).text( mw.msg( tabMessages[ sectionKey ] ) );
+			$( '#ca-edit a' ).text( getTabMessage( key ) );
+			$( '.mw-editsection a' ).text( getTabMessage( sectionKey ) );
 		}
 
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
@@ -645,7 +649,7 @@
 						// 2) when onEditTabClick is not bound (!pageCanLoadEditor) it will
 						// just work.
 						veEditUri,
-						mw.msg( getTabMessage( action ) ),
+						getTabMessage( action ),
 						'ca-ve-edit',
 						mw.msg( 'tooltip-ca-ve-edit' ),
 						mw.msg( 'accesskey-ca-ve-edit' ),
@@ -671,7 +675,7 @@
 						$caEdit.after( $caVeEdit );
 					}
 				}
-				$caVeEditLink.text( mw.msg( getTabMessage( action ) ) );
+				$caVeEditLink.text( getTabMessage( action ) );
 			}
 
 			// If the edit tab is hidden, remove it.
@@ -694,10 +698,16 @@
 			// Alter the edit tab (#ca-edit)
 			if ( $( '#ca-view-foreign' ).length ) {
 				if ( tabMessages[ action + 'localdescriptionsource' ] !== null ) {
+					// The following messages can be used here:
+					// * editlocaldescriptionsource
+					// * createlocaldescriptionsource
 					$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
 				}
 			} else {
 				if ( tabMessages[ action + 'source' ] !== null ) {
+					// The following messages can be used here:
+					// * editsource
+					// * createsource
 					$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
 				}
 			}
@@ -747,7 +757,13 @@
 						$divider = $( '<span>' ),
 						dividerText = mw.msg( 'pipe-separator' );
 
+					// The following messages can be used here:
+					// * visualeditor-ca-editsource-section
+					// * config value of tabMessages.editsectionsource
 					$editSourceLink.text( mw.msg( tabMessages.editsectionsource ) );
+					// The following messages can be used here:
+					// * editsection
+					// * config value of tabMessages.editsections
 					$editLink.text( mw.msg( tabMessages.editsection ) );
 
 					$divider
@@ -1298,16 +1314,16 @@
 			// Load postEdit code to execute the queued event below, which will handle it once it arrives
 			mw.loader.load( 'mediawiki.action.view.postEdit' );
 
-			// The following messages can be used here:
-			// postedit-confirmation-published
-			// postedit-confirmation-saved
-			// postedit-confirmation-created
-			// postedit-confirmation-restored
 			notify = uri.query.venotify;
 			if ( notify === 'saved' ) {
 				notify = mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? 'published' : 'saved';
 			}
 			mw.hook( 'postEdit' ).fire( {
+				// The following messages can be used here:
+				// * postedit-confirmation-published
+				// * postedit-confirmation-saved
+				// * postedit-confirmation-created
+				// * postedit-confirmation-restored
 				message: mw.msg( 'postedit-confirmation-' + notify, mw.user )
 			} );
 

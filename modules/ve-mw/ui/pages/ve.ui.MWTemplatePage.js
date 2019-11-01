@@ -85,6 +85,9 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
+				// The following messages are used here:
+				// * visualeditor-dialog-transclusion-absent-template
+				// * visualeditor-dialog-transclusion-no-template-description
 				.append( mw.message( messageKey, title.getPrefixedText() ).parseDom() );
 			ve.targetLinksToNewWindow( this.$description[ 0 ] );
 		}

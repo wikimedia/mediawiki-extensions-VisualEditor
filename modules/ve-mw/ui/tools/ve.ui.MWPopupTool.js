@@ -129,6 +129,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 ve.ui.MWNoticesPopupTool.prototype.getTitle = function () {
 	var items = this.toolbar.getTarget().getEditNotices();
 
+	// eslint-disable-next-line mediawiki/msg-doc
 	return ve.msg( this.constructor.static.title, items.length );
 };
 

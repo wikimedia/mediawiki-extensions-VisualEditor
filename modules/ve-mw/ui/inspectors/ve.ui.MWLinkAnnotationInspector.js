@@ -238,6 +238,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
 	this.actions.forEach( null, function ( action ) {
 		if ( action.getAction() === 'convert' ) {
 			if ( msg ) {
+				// The following messages are used here:
+				// * visualeditor-linkinspector-convert-link-isbn
+				// * visualeditor-linkinspector-convert-link-pmid
+				// * visualeditor-linkinspector-convert-link-rfc
 				action.setLabel( OO.ui.deferMsg( msg ) );
 				action.toggle( true );
 			} else {

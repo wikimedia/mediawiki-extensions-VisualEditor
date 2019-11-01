@@ -52,7 +52,16 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.setup = function () {
 	// Set up label
 	var messageKey = 'visualeditor-mwlanguagevariantcontextitem-title-' +
 		this.model.getRuleType();
+
+	// The following messages are used here:
+	// * visualeditor-mwlanguagevariantcontextitem-title-disabled
+	// * visualeditor-mwlanguagevariantcontextitem-title-filter
+	// * visualeditor-mwlanguagevariantcontextitem-title-name
+	// * visualeditor-mwlanguagevariantcontextitem-title-oneway
+	// * visualeditor-mwlanguagevariantcontextitem-title-twoway
+	// * visualeditor-mwlanguagevariantcontextitem-title-unknown
 	this.setLabel( OO.ui.deferMsg( messageKey ) );
+
 	// Invoke superclass method.
 	return ve.ui.MWLanguageVariantNodeContextItem.super.prototype.setup.call( this );
 };
@@ -173,6 +182,10 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 	[ 'describe', 'title', 'hidden' ].forEach( function ( flag ) {
 		var f = ( flag === 'hidden' ) ? isHidden : variantInfo[ flag ];
 		if ( f ) {
+			// The following messages can be used here:
+			// * visualeditor-mwlanguagevariantcontextitem-flag-describe
+			// * visualeditor-mwlanguagevariantcontextitem-flag-hidden
+			// * visualeditor-mwlanguagevariantcontextitem-flag-title
 			$body.append( $( '<p>' ).text( OO.ui.msg(
 				'visualeditor-mwlanguagevariantcontextitem-flag-' + flag
 			) ) );

@@ -161,6 +161,13 @@ ve.ui.wikitextCommandRegistry.register(
 					args: [
 						heading + ' ',
 						' ' + heading,
+						// The following messages can be used here:
+						// * visualeditor-formatdropdown-format-heading1
+						// * visualeditor-formatdropdown-format-heading2
+						// * visualeditor-formatdropdown-format-heading3
+						// * visualeditor-formatdropdown-format-heading4
+						// * visualeditor-formatdropdown-format-heading5
+						// * visualeditor-formatdropdown-format-heading6
 						OO.ui.deferMsg( 'visualeditor-formatdropdown-format-heading' + i ),
 						unformat
 					],

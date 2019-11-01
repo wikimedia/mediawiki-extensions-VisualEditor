@@ -43,7 +43,13 @@ ve.ui.MWMagicLinkNodeContextItem.prototype.setup = function () {
 	// Set up label
 	var msg = 'visualeditor-magiclinknodeinspector-title-' +
 		this.model.getMagicType().toLowerCase();
+
+	// The following messages are used here:
+	// * visualeditor-magiclinknodeinspector-title-isbn
+	// * visualeditor-magiclinknodeinspector-title-pmid
+	// * visualeditor-magiclinknodeinspector-title-rfc
 	this.setLabel( OO.ui.deferMsg( msg ) );
+
 	// Invoke superclass method.
 	return ve.ui.MWMagicLinkNodeContextItem.super.prototype.setup.call( this );
 };
