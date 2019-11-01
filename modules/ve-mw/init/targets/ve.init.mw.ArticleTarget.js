@@ -548,10 +548,8 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		// Auto-save
 		this.initAutosave();
 
-		// Start loading deflate module in the background, so it's
-		// already loaded when the save dialog is opened.
 		setTimeout( function () {
-			mw.loader.load( 'mediawiki.deflate' );
+			mw.libs.ve.targetSaver.preloadDeflate();
 		}, 500 );
 	}
 
@@ -1149,21 +1147,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
 };
 
 /**
- * Get deflated HTML. This function is async because deflate may not have finished loading yet.
- *
- * @param {HTMLDocument} newDoc Document to get HTML for
- * @return {jQuery.Promise} Promise resolved with deflated HTML
- * @see #getHtml
- */
-ve.init.mw.ArticleTarget.prototype.deflateHtml = function ( newDoc ) {
-	var html = this.getHtml( newDoc, this.doc );
-	return mw.loader.using( 'mediawiki.deflate' )
-		.then( function () {
-			return mw.deflate( html );
-		} );
-};
-
-/**
  * Load the editor.
  *
  * This method initiates an API request for the page data unless dataPromise is passed in,
@@ -1285,7 +1268,7 @@ ve.init.mw.ArticleTarget.prototype.clearDocToSave = function () {
  * @param {HTMLDocument} doc Document to serialize
  */
 ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
-	var xhr, deflated,
+	var xhr,
 		aborted = false,
 		start = ve.now(),
 		target = this;
@@ -1299,9 +1282,8 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 	}
 	this.clearPreparedCacheKey();
 
-	this.preparedCacheKeyPromise = this.deflateHtml( doc )
+	this.preparedCacheKeyPromise = mw.libs.ve.targetSaver.deflateDoc( doc, this.doc )
 		.then( function ( deflatedHtml ) {
-			deflated = deflatedHtml;
 			if ( aborted ) {
 				return $.Deferred().reject();
 			}
@@ -1321,7 +1303,11 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 					var trackData = { duration: ve.now() - start };
 					if ( response.visualeditoredit && typeof response.visualeditoredit.cachekey === 'string' ) {
 						target.events.track( 'performance.system.serializeforcache', trackData );
-						return response.visualeditoredit.cachekey;
+						return {
+							cacheKey: response.visualeditoredit.cachekey,
+							// Pass the HTML for retries.
+							html: deflatedHtml
+						};
 					} else {
 						target.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
 						return $.Deferred().reject();
@@ -1339,9 +1325,6 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 				}
 				aborted = true;
 			},
-			getDeflatedHtml: function () {
-				return deflated;
-			},
 			doc: doc
 		} );
 };
@@ -1351,16 +1334,14 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
  * if one isn't already pending or finished. Instead, it returns a rejected promise in that case.
  *
  * @param {HTMLDocument} doc Document to serialize
- * @return {jQuery.Promise} Abortable promise, resolved with the cache key.
+ * @return {jQuery.Promise} Abortable promise, resolved with a plain object containing `cacheKey`,
+ * and `html` for retries.
  */
 ve.init.mw.ArticleTarget.prototype.getPreparedCacheKey = function ( doc ) {
-	var deferred;
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
 		return this.preparedCacheKeyPromise;
 	}
-	deferred = $.Deferred();
-	deferred.reject();
-	return deferred.promise();
+	return $.Deferred().reject().promise();
 };
 
 /**
@@ -1378,121 +1359,67 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * HTML directly if there is no cache key present or pending, or if the request for the cache key
  * fails, or if using the cache key fails with a badcachekey error.
  *
- * If options.token is set, this function will use mw.Api#post and let the caller handle badtoken
- * errors. If options.token is not set, this function will use mw.Api#postWithToken which retries
+ * If extraData.token is set, this function will use mw.Api#post and let the caller handle badtoken
+ * errors. If extraData.token is not set, this function will use mw.Api#postWithToken which retries
  * automatically when encountering a badtoken error. If you do not want the automatic retry behavior
- * and want to control badtoken retries, you have to set options.token.
+ * and want to control badtoken retries, you have to set extradata.token.
  *
  * @param {HTMLDocument|string} doc Document to submit or string in source mode
- * @param {Object} options POST parameters to send. Do not include 'html', 'cachekey' or 'format'.
+ * @param {Object} extraData POST parameters to send. Do not include 'html', 'cachekey' or 'format'.
  * @param {string} [eventName] If set, log an event when the request completes successfully. The
  *  full event name used will be 'performance.system.{eventName}.withCacheKey' or .withoutCacheKey
  *  depending on whether or not a cache key was used.
- * @return {jQuery.Promise}
+ * @return {jQuery.Promise} Promise which resolves/rejects when saving is complete/fails
  */
-ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, options, eventName ) {
-	var data, postData, preparedCacheKey, api,
+ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, extraData, eventName ) {
+	var data, htmlOrCacheKeyPromise, api,
 		target = this;
 
 	if ( this.getSurface().getMode() === 'source' ) {
-		data = {
+		data = ve.extendObject( {}, extraData, {
 			wikitext: doc,
 			format: 'json'
-		};
-		postData = ve.extendObject( {}, options, data );
+		} );
 		if ( this.section !== null ) {
-			postData.section = this.section;
+			data.section = this.section;
 		}
 		if ( this.sectionTitle ) {
-			postData.sectiontitle = this.sectionTitle.getValue();
-			postData.summary = undefined;
+			data.sectiontitle = this.sectionTitle.getValue();
+			data.summary = undefined;
 		}
 		api = this.getContentApi();
-		if ( postData.token ) {
-			return api.post( postData, { contentType: 'multipart/form-data' } );
+		if ( data.token ) {
+			return api.post( data, { contentType: 'multipart/form-data' } );
 		}
-		return api.postWithToken( 'csrf', postData, { contentType: 'multipart/form-data' } );
+		return api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
 	}
 
-	preparedCacheKey = this.getPreparedCacheKey( doc );
-	data = ve.extendObject( {}, options, { format: 'json' } );
+	// getPreparedCacheKey resolves with { cacheKey: ..., html: ... } or rejects.
+	// After modification it never rejects, just resolves with { html: ... } instead
+	htmlOrCacheKeyPromise = this.getPreparedCacheKey( doc ).then(
+		// Success, use promise as-is.
+		null,
+		// Fail, get deflatedHtml promise
+		function () {
+			return mw.libs.ve.targetSaver.deflateDoc( doc, target.doc ).then( function ( html ) {
+				return { html: html };
+			} );
+		} );
 
-	function ajaxRequest( cachekey, isRetried ) {
-		var fullEventName,
-			start = ve.now(),
-			deflatePromise = $.Deferred().resolve().promise();
-
-		if ( typeof cachekey === 'string' ) {
-			data.cachekey = cachekey;
-		} else {
-			// Getting a cache key failed, fall back to sending the HTML
-			data.html = preparedCacheKey && preparedCacheKey.getDeflatedHtml && preparedCacheKey.getDeflatedHtml();
-			if ( !data.html ) {
-				deflatePromise = target.deflateHtml( doc ).then( function ( deflatedHtml ) {
-					data.html = deflatedHtml;
-				} );
+	return htmlOrCacheKeyPromise.then( function ( htmlOrCacheKey ) {
+		return mw.libs.ve.targetSaver.postHtml(
+			htmlOrCacheKey.html,
+			htmlOrCacheKey.cacheKey,
+			extraData,
+			{
+				onCacheKeyFail: target.clearPreparedCacheKey.bind( target ),
+				api: target.getContentApi(),
+				track: target.events.track.bind( target.events ),
+				eventName: eventName,
+				now: ve.now
 			}
-			// If using the cache key fails, we'll come back here with cachekey still set
-			delete data.cachekey;
-		}
-		return deflatePromise
-			.then( function () {
-				var api = target.getContentApi();
-				if ( data.token ) {
-					return api.post( data, { contentType: 'multipart/form-data' } );
-				}
-				return api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
-			} )
-			.then(
-				function ( response, jqxhr ) {
-					var eventData = {
-						bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
-						duration: ve.now() - start
-					};
-
-					// Log data about the request if eventName was set
-					if ( eventName ) {
-						fullEventName = 'performance.system.' + eventName +
-							( typeof cachekey === 'string' ? '.withCacheKey' : '.withoutCacheKey' );
-						target.events.track( fullEventName, eventData );
-					}
-					return jqxhr;
-				},
-				function ( errorName, errorObject ) {
-					var responseText = ve.getProp( errorObject, 'xhr', 'responseText' ),
-						eventData;
-					if ( responseText ) {
-						eventData = {
-							bytes: require( 'mediawiki.String' ).byteLength( responseText ),
-							duration: ve.now() - start
-						};
-
-						if ( eventName ) {
-							if ( errorName === 'badcachekey' ) {
-								fullEventName = 'performance.system.' + eventName + '.badCacheKey';
-							} else {
-								fullEventName = 'performance.system.' + eventName + '.withoutCacheKey';
-							}
-							target.events.track( fullEventName, eventData );
-						}
-					}
-					// This cache key is evidently bad, clear it
-					target.clearPreparedCacheKey();
-					if ( !isRetried && errorName === 'badcachekey' ) {
-						// Try again without a cache key
-						return ajaxRequest( null, true );
-					} else {
-						// Failed twice in a row, must be some other error - let caller handle it.
-						// FIXME Can't just `return this` because all callers are broken.
-						return $.Deferred().reject( null, errorName, errorObject ).promise();
-					}
-				}
-			);
-	}
-
-	// If we successfully get prepared wikitext, then invoke ajaxRequest() with the cache key,
-	// otherwise invoke it without.
-	return preparedCacheKey.then( ajaxRequest, ajaxRequest );
+		);
+	} );
 };
 
 /**
@@ -1773,7 +1700,7 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
  * This method performs an asynchronous action and uses a callback function to handle the result.
  *
  *     target.serialize(
- *         dom,
+ *         doc,
  *         function ( wikitext ) {
  *             // Do something with the loaded DOM
  *         }
