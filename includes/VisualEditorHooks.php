@@ -62,11 +62,17 @@ class VisualEditorHooks {
 	 * @param Skin $skin The skin that's going to build the UI.
 	 */
 	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
-		$output->addModules( [
-			'ext.visualEditor.desktopArticleTarget.init',
-			'ext.visualEditor.targetLoader'
-		] );
-		$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
+		if ( !(
+			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' )
+				->shouldDisplayMobileView()
+		) ) {
+			$output->addModules( [
+				'ext.visualEditor.desktopArticleTarget.init',
+				'ext.visualEditor.targetLoader'
+			] );
+			$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
+		}
 		// add scroll offset js variable to output
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
