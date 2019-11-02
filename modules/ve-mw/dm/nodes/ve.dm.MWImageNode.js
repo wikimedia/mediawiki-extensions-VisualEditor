@@ -311,12 +311,12 @@ ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
 	if ( ve.init.platform.imageInfoCache ) {
 		return ve.init.platform.imageInfoCache.get( filename ).then( function ( info ) {
 			if ( !info || info.missing ) {
-				return $.Deferred().reject().promise();
+				return ve.createDeferred().reject().promise();
 			}
 			return info;
 		} );
 	} else {
-		return $.Deferred().reject().promise();
+		return ve.createDeferred().reject().promise();
 	}
 };
 

@@ -105,7 +105,7 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 	var splitSummary = this.constructor.static.splitSummary.bind( this.constructor.static );
 	if ( !this.getSummariesPromise ) {
 		if ( mw.user.isAnon() ) {
-			this.getSummariesPromise = $.Deferred().resolve( [] ).promise();
+			this.getSummariesPromise = ve.createDeferred().resolve( [] ).promise();
 		} else {
 			this.getSummariesPromise = ve.init.target.getLocalApi().get( {
 				action: 'query',

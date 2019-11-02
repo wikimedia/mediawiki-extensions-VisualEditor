@@ -39,7 +39,7 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 		if ( templatesUsed.length && $( templatesUsed ).find( 'li' ).length ) {
 			return templatesUsed;
 		} else {
-			return $.Deferred().reject().promise();
+			return ve.createDeferred().reject().promise();
 		}
 	} ).then( function ( templatesUsed ) {
 		page.templatesUsedFieldset.$element.append( templatesUsed );

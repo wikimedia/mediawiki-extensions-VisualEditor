@@ -60,7 +60,7 @@ ve.ce.MWExtensionNode.static.getDescription = function ( model ) {
  */
 ve.ce.MWExtensionNode.prototype.generateContents = function ( config ) {
 	var xhr, attr, wikitext,
-		deferred = $.Deferred(),
+		deferred = ve.createDeferred(),
 		mwData = ve.copy( this.getModel().getAttribute( 'mw' ) ),
 		extsrc = config && config.extsrc !== undefined ? config.extsrc : ( ve.getProp( mwData, 'body', 'extsrc' ) || '' ),
 		attrs = config && config.attrs || mwData.attrs,

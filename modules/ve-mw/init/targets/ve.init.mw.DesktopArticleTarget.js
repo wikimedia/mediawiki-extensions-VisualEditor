@@ -406,8 +406,8 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 
 	if ( !this.active && !this.activating ) {
 		this.activating = true;
-		this.activatingDeferred = $.Deferred();
-		this.toolbarSetupDeferred = $.Deferred();
+		this.activatingDeferred = ve.createDeferred();
+		this.toolbarSetupDeferred = ve.createDeferred();
 
 		$( 'html' ).addClass( 've-activating' );
 		$.when( this.activatingDeferred, this.toolbarSetupDeferred ).done( function () {
@@ -576,7 +576,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
 	var abortType,
-		saveDialogPromise = $.Deferred().resolve().promise(),
+		saveDialogPromise = ve.createDeferred().resolve().promise(),
 		target = this;
 
 	this.emit( 'deactivate' );
@@ -1109,7 +1109,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreScrollPosition = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 	var target = this,
-		deferred = $.Deferred();
+		deferred = ve.createDeferred();
 
 	if ( !this.toolbar ) {
 		return deferred.resolve().promise();
@@ -1584,7 +1584,7 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 	var target = this;
 
 	this.activating = true;
-	this.activatingDeferred = $.Deferred();
+	this.activatingDeferred = ve.createDeferred();
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.reloadSurface.apply( this, arguments );

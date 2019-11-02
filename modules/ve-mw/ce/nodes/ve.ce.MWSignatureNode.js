@@ -107,7 +107,7 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 	wikitext = '<span>~~~~</span>';
 	signatureNode = this;
 
-	deferred = $.Deferred();
+	deferred = ve.createDeferred();
 	xhr = ve.init.target.getContentApi( this.getModel().getDocument() ).post( {
 		action: 'parse',
 		text: wikitext,

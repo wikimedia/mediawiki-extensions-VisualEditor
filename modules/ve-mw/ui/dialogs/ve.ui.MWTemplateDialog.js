@@ -348,7 +348,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
  */
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 	var blankRequired = [],
-		deferred = $.Deferred();
+		deferred = ve.createDeferred();
 
 	this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
 		if ( !( page instanceof ve.ui.MWParameterPage ) ) {
@@ -392,7 +392,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 	var dialog = this;
 	if ( action === 'done' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
-			var deferred = $.Deferred();
+			var deferred = ve.createDeferred();
 			dialog.checkRequiredParameters().done( function () {
 				var modelPromise,
 					surfaceModel = dialog.getFragment().getSurface(),
@@ -403,7 +403,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				if ( dialog.selectedNode instanceof ve.dm.MWTransclusionNode ) {
 					dialog.transclusionModel.updateTransclusionNode( surfaceModel, dialog.selectedNode );
 					// TODO: updating the node could result in the inline/block state change
-					modelPromise = $.Deferred().resolve().promise();
+					modelPromise = ve.createDeferred().resolve().promise();
 				} else if ( obj !== null ) {
 					// Collapse returns a new fragment, so update dialog.fragment
 					dialog.fragment = dialog.getFragment().collapseToEnd();

@@ -97,7 +97,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 	if ( !pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ) ) {
 		// Not plaintext. We need to ask whether we should convert it to
 		// wikitext, or just strip the formatting out.
-		deferred = $.Deferred();
+		deferred = ve.createDeferred();
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 		windowAction.open( 'wikitextconvertconfirm', { deferred: deferred } );
 		return deferred.promise().then( function ( usePlain ) {

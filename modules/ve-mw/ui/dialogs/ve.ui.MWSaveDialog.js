@@ -26,7 +26,7 @@ ve.ui.MWSaveDialog = function VeUiMwSaveDialog( config ) {
 	this.editSummaryCodePointLimit = mw.config.get( 'wgCommentCodePointLimit' );
 	this.restoring = false;
 	this.messages = {};
-	this.setupDeferred = $.Deferred();
+	this.setupDeferred = ve.createDeferred();
 	this.checkboxesByName = null;
 	this.changedEditSummary = false;
 	this.canReview = false;
@@ -277,7 +277,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				ve.init.platform.linkCache.styleParsoidElements( $categories, baseDoc );
 			} );
 		} else {
-			deferred = $.Deferred().resolve();
+			deferred = ve.createDeferred().resolve();
 		}
 		deferred.done( function () {
 			// Run hooks so other things can alter the document
@@ -935,7 +935,7 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 
 	if ( action === 'save' ) {
 		return new OO.ui.Process( function () {
-			var saveDeferred = $.Deferred();
+			var saveDeferred = ve.createDeferred();
 			this.clearMessage( 'keyboard-shortcut-submit' );
 			this.emit( 'save', saveDeferred );
 			return saveDeferred.promise();

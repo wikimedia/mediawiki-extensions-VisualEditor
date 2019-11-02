@@ -61,7 +61,7 @@
 	ve.test.utils.mwEnvironment = ( function () {
 		var mwPlatform, corePlatform, mwTarget, coreTarget,
 			setEditorPreference = mw.libs.ve.setEditorPreference,
-			dummySetEditorPreference = function () { return $.Deferred().resolve().promise(); },
+			dummySetEditorPreference = function () { return ve.createDeferred().resolve().promise(); },
 			overrides = [
 				ve.dm.MWHeadingNode,
 				ve.dm.MWPreformattedNode,

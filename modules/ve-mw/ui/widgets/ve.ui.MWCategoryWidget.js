@@ -289,7 +289,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 	} );
 
 	if ( !categoryNamesToQuery.length ) {
-		return $.Deferred().resolve( {} ).promise();
+		return ve.createDeferred().resolve( {} ).promise();
 	}
 
 	// Batch this up into groups of 50

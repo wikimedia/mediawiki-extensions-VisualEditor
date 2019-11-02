@@ -326,7 +326,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList, config ) {
 			.setDisabled( config.isReadOnly );
 	} );
 
-	return $.Deferred().resolve().promise();
+	return ve.createDeferred().resolve().promise();
 };
 
 /**

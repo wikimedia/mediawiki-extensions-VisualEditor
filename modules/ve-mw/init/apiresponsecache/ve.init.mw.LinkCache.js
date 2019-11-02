@@ -78,7 +78,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 
 	// Use the synchronous missing link cache data if it exists
 	if ( cachedMissingData ) {
-		promise = $.Deferred().resolve( cachedMissingData ).promise();
+		promise = ve.createDeferred().resolve( cachedMissingData ).promise();
 	} else {
 		promise = this.get( title );
 	}

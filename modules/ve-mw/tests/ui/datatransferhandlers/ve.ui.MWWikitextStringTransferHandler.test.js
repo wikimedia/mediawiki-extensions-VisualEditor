@@ -36,7 +36,7 @@ ve.test.utils.runWikitextStringHandlerTest = function ( assert, server, string, 
 				};
 			},
 			createProgress: function () {
-				return $.Deferred().promise();
+				return ve.createDeferred().promise();
 			}
 		};
 

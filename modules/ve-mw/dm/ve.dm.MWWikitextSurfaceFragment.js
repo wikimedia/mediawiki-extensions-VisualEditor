@@ -133,7 +133,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	var wikitextPromise, progressPromise;
 
 	if ( !doc.data.hasContent() ) {
-		return $.Deferred().resolve( '' ).promise();
+		return ve.createDeferred().resolve( '' ).promise();
 	}
 
 	wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
@@ -148,7 +148,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	} );
 
 	return $.when( wikitextPromise, progressPromise ).then( function ( wikitext ) {
-		var deferred = $.Deferred();
+		var deferred = ve.createDeferred();
 		setTimeout( function () {
 			deferred.resolve( wikitext );
 		}, ve.init.target.getSurface().dialogs.getTeardownDelay() );
@@ -162,7 +162,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source ) {
 	var parsePromise;
 	if ( !source ) {
-		parsePromise = $.Deferred().resolve(
+		parsePromise = ve.createDeferred().resolve(
 			ve.dm.Document.static.newBlankDocument()
 		).promise();
 	} else {

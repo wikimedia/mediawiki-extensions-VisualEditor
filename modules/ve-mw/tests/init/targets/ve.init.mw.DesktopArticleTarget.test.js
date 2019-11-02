@@ -81,7 +81,7 @@ QUnit.test( 'init', function ( assert ) {
 			}
 		},
 		target = new ve.init.mw.DesktopArticleTarget(),
-		dataPromise = $.Deferred().resolve( response ).promise(),
+		dataPromise = ve.createDeferred().resolve( response ).promise(),
 		done = assert.async();
 
 	target.on( 'surfaceReady', function () {

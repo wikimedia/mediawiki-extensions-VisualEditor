@@ -463,7 +463,7 @@ ve.init.mw.Target.prototype.teardown = function () {
  */
 ve.init.mw.Target.prototype.refreshEditToken = function ( doc ) {
 	var api = this.getContentApi( doc ),
-		deferred = $.Deferred(),
+		deferred = ve.createDeferred(),
 		target = this;
 	api.get( {
 		action: 'query',
@@ -535,7 +535,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 
 	// Optimise as a no-op
 	if ( params.html === '' ) {
-		return $.Deferred().resolve( '' );
+		return ve.createDeferred().resolve( '' );
 	}
 
 	if ( useRevision === undefined || useRevision ) {
@@ -552,7 +552,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 		if ( response.visualeditoredit ) {
 			return response.visualeditoredit.content;
 		}
-		return $.Deferred().reject();
+		return ve.createDeferred().reject();
 	}, function ( error ) {
 		if ( error === 'badtoken' && !isRetry ) {
 			return target.refreshEditToken( doc ).then( function () {

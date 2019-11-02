@@ -64,7 +64,7 @@
 	 */
 	ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment, forceType ) {
 		var model = this,
-			deferred = $.Deferred(),
+			deferred = ve.createDeferred(),
 			baseNodeClass = ve.dm.MWTransclusionNode;
 
 		function insertNode( isInline, generatedContents ) {
@@ -160,14 +160,14 @@
 			for ( i = 0, len = data.parts.length; i < len; i++ ) {
 				part = data.parts[ i ];
 				if ( part.template ) {
-					deferred = $.Deferred();
+					deferred = ve.createDeferred();
 					promises.push( deferred.promise() );
 					this.queue.push( {
 						add: ve.dm.MWTemplateModel.newFromData( this, part.template ),
 						deferred: deferred
 					} );
 				} else if ( typeof part === 'string' ) {
-					deferred = $.Deferred();
+					deferred = ve.createDeferred();
 					promises.push( deferred.promise() );
 					this.queue.push( {
 						add: new ve.dm.MWTransclusionContentModel( this, part ),
@@ -437,7 +437,7 @@
 	 * @return {jQuery.Promise} Promise, resolved when part is added
 	 */
 	ve.dm.MWTransclusionModel.prototype.replacePart = function ( remove, add ) {
-		var deferred = $.Deferred();
+		var deferred = ve.createDeferred();
 		if (
 			!( remove instanceof ve.dm.MWTransclusionPartModel ) ||
 			!( add instanceof ve.dm.MWTransclusionPartModel )
@@ -464,7 +464,7 @@
 	 * @return {jQuery.Promise} Promise, resolved when part is added
 	 */
 	ve.dm.MWTransclusionModel.prototype.addPart = function ( part, index ) {
-		var deferred = $.Deferred();
+		var deferred = ve.createDeferred();
 		if ( !( part instanceof ve.dm.MWTransclusionPartModel ) ) {
 			throw new Error( 'Invalid transclusion part' );
 		}

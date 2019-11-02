@@ -40,7 +40,7 @@ ve.ui.MWAceEditorWidget = function VeUiMWAceEditorWidget( config ) {
 	this.$ace = $( '<div>' ).attr( 'dir', 'ltr' );
 	this.editor = null;
 	// Initialise to a rejected promise for the setValue call in the parent constructor
-	this.loadingPromise = $.Deferred().reject().promise();
+	this.loadingPromise = ve.createDeferred().reject().promise();
 	this.styleHeight = null;
 
 	// Parent constructor
@@ -75,7 +75,7 @@ ve.ui.MWAceEditorWidget.prototype.setup = function () {
 	if ( !this.loadingPromise ) {
 		this.loadingPromise = mw.loader.getState( 'ext.codeEditor.ace' ) ?
 			mw.loader.using( 'ext.codeEditor.ace' ) :
-			$.Deferred().reject().promise();
+			ve.createDeferred().reject().promise();
 		// Resolved promises will run synchronously, so ensure #setupEditor
 		// runs after this.loadingPromise is stored.
 		this.loadingPromise.done( this.setupEditor.bind( this ) );

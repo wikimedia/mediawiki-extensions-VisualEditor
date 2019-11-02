@@ -144,7 +144,7 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
  * @inheritdoc
  */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
-	var xhr, deferred = $.Deferred();
+	var xhr, deferred = ve.createDeferred();
 	xhr = ve.init.target.parseWikitextFragment(
 		( config && config.wikitext ) || this.model.getWikitext(),
 		true,

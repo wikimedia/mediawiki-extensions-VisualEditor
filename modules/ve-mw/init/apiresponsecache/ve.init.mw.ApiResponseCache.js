@@ -80,11 +80,11 @@ ve.init.mw.ApiResponseCache.prototype.get = function ( title ) {
 		// Don't bother letting things like undefined or null make it all the way through,
 		// just reject them here. Otherwise they'll cause problems or exceptions at random
 		// other points in this file.
-		return $.Deferred().reject().promise();
+		return ve.createDeferred().reject().promise();
 	}
 	title = this.constructor.static.normalizeTitle( title );
 	if ( !Object.prototype.hasOwnProperty.call( this.deferreds, title ) ) {
-		this.deferreds[ title ] = $.Deferred();
+		this.deferreds[ title ] = ve.createDeferred();
 		this.queue.push( title );
 		this.schedule();
 	}
@@ -121,7 +121,7 @@ ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
 	var name;
 	for ( name in entries ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.deferreds, name ) ) {
-			this.deferreds[ name ] = $.Deferred();
+			this.deferreds[ name ] = ve.createDeferred();
 		}
 		if ( this.deferreds[ name ].state() === 'pending' ) {
 			this.deferreds[ name ].resolve( entries[ name ] );

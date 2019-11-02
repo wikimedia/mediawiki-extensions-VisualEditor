@@ -62,7 +62,7 @@
 			var dummySurface, surfaceModel,
 				isNewAuthor = !ve.init.platform.sessionStorage.get( 've-collab-author' ),
 				username = mw.user.getName(),
-				progressDeferred = $.Deferred();
+				progressDeferred = ve.createDeferred();
 
 			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle: importTitle } );
 
@@ -158,12 +158,12 @@
 								] );
 							} else {
 								// Import failed
-								return $.Deferred().reject( 'No content for ' + target.importTitle ).promise();
+								return ve.createDeferred().reject( 'No content for ' + target.importTitle ).promise();
 							}
 						} );
 					} else {
 						// No import, or history already exists
-						initPromise = $.Deferred().resolve().promise();
+						initPromise = ve.createDeferred().resolve().promise();
 
 						// Look for import metadata in document
 						surfaceModel = target.getSurface().getModel();

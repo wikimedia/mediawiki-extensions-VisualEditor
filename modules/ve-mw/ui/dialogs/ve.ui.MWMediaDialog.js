@@ -740,7 +740,7 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 
 	// Check cache first
 	if ( this.searchCache[ imageName ] ) {
-		return $.Deferred().resolve( this.searchCache[ imageName ] );
+		return ve.createDeferred().resolve( this.searchCache[ imageName ] );
 	}
 
 	if ( dimensions.width ) {
@@ -1166,7 +1166,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			// so the this.switchPanels() call has to be later.
 			return ( this.mediaUploadBooklet ?
 				this.mediaUploadBooklet.initialize() :
-				$.Deferred().resolve().promise()
+				ve.createDeferred().resolve().promise()
 			).then( function () {
 				dialog.actions.setAbilities( { upload: false, save: false, insert: false, done: false } );
 

@@ -328,7 +328,7 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 	// Never show the dialog (T227670), but set up this promise in case something depends on it
-	this.welcomeDialogPromise = $.Deferred().reject();
+	this.welcomeDialogPromise = ve.createDeferred().reject();
 };
 
 /**

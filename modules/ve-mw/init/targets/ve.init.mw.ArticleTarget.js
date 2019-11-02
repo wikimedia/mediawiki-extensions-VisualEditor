@@ -1054,7 +1054,7 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	this.bindSaveDialogClearDiff();
 	this.saveDialog.setDiffAndReview(
-		$.Deferred().resolve( $( '<pre>' ).text( wikitext ) ).promise(),
+		ve.createDeferred().resolve( $( '<pre>' ).text( wikitext ) ).promise(),
 		this.getVisualDiffGeneratorPromise(),
 		this.getSurface().getModel().getDocument().getHtmlDocument()
 	);
@@ -1089,7 +1089,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 				} else {
 					doc = target.doc;
 				}
-				target.originalDmDocPromise = $.Deferred().resolve( target.constructor.static.createModelFromDom( doc, 'visual' ) ).promise();
+				target.originalDmDocPromise = ve.createDeferred().resolve( target.constructor.static.createModelFromDom( doc, 'visual' ) ).promise();
 			} else {
 				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), target.section );
 			}
@@ -1293,7 +1293,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 	this.preparedCacheKeyPromise = mw.libs.ve.targetSaver.deflateDoc( doc, this.doc )
 		.then( function ( deflatedHtml ) {
 			if ( aborted ) {
-				return $.Deferred().reject();
+				return ve.createDeferred().reject();
 			}
 			xhr = target.getContentApi().postWithToken( 'csrf',
 				{
@@ -1318,7 +1318,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 						};
 					} else {
 						target.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
-						return $.Deferred().reject();
+						return ve.createDeferred().reject();
 					}
 				},
 				function () {
@@ -1349,7 +1349,7 @@ ve.init.mw.ArticleTarget.prototype.getPreparedCacheKey = function ( doc ) {
 	if ( this.preparedCacheKeyPromise && this.preparedCacheKeyPromise.doc === doc ) {
 		return this.preparedCacheKeyPromise;
 	}
-	return $.Deferred().reject().promise();
+	return ve.createDeferred().reject().promise();
 };
 
 /**
@@ -1636,16 +1636,16 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 		}, 'diff' ).then( function ( response ) {
 			var data = response.visualeditoredit;
 			if ( !data && !response.error ) {
-				return $.Deferred().reject( 'Invalid response from server' ).promise();
+				return ve.createDeferred().reject( 'Invalid response from server' ).promise();
 			} else if ( response.error ) {
-				return $.Deferred().reject( response.error.info ).promise();
+				return ve.createDeferred().reject( response.error.info ).promise();
 			} else if ( data.result === 'nochanges' ) {
 				target.emit( 'noChanges' );
 				return null;
 			} else if ( data.result !== 'success' ) {
-				return $.Deferred().reject( 'Failed request: ' + data.result ).promise();
+				return ve.createDeferred().reject( 'Failed request: ' + data.result ).promise();
 			} else if ( typeof data.diff !== 'string' ) {
-				return $.Deferred().reject( 'Invalid HTML content in response from server' ).promise();
+				return ve.createDeferred().reject( 'Invalid HTML content in response from server' ).promise();
 			} else {
 				return data.diff;
 			}
@@ -1825,7 +1825,7 @@ ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMecha
 				if ( data && data.action === 'discard' ) {
 					return target.teardown( trackMechanism );
 				}
-				return $.Deferred().reject().promise();
+				return ve.createDeferred().reject().promise();
 			} );
 	}
 };
@@ -2170,7 +2170,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 		windowManager = this.getSurface().dialogs,
 		target = this;
 
-	this.welcomeDialogPromise = $.Deferred();
+	this.welcomeDialogPromise = ve.createDeferred();
 
 	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
 		// Only use the preference value if the user is logged-in.
@@ -2264,7 +2264,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 					// TODO: Some sort of progress bar?
 					target.switchToFallbackWikitextEditor( modified );
 					// Keep everything else waiting so our error handler can do its business
-					return $.Deferred().promise();
+					return ve.createDeferred().promise();
 				}
 			);
 		} else {
@@ -2373,7 +2373,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 				return data && data.action === 'discard';
 			} );
 	} else {
-		promise = $.Deferred().resolve( true ).promise();
+		promise = ve.createDeferred().resolve( true ).promise();
 	}
 	promise.then( function ( confirmed ) {
 		if ( confirmed ) {
@@ -2402,7 +2402,7 @@ ve.init.mw.ArticleTarget.prototype.reloadSurface = function ( newMode, dataPromi
 	this.clearDiff();
 	// Create progress - will be discarded when surface is destroyed.
 	this.getSurface().createProgress(
-		$.Deferred().promise(),
+		ve.createDeferred().promise(),
 		ve.msg( newMode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
 		true /* non-cancellable */
 	);

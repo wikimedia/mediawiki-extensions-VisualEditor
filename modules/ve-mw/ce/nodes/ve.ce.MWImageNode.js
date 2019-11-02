@@ -98,7 +98,7 @@ ve.ce.MWImageNode.prototype.generateContents = function () {
 		width = model.getAttribute( 'width' ),
 		height = model.getAttribute( 'height' ),
 		mwData = model.getAttribute( 'mw' ) || {},
-		deferred = $.Deferred();
+		deferred = ve.createDeferred();
 
 	// If the current rendering is larger don't fetch a new image, just let the browser resize
 	if ( this.renderedDimensions && this.renderedDimensions.width > width ) {

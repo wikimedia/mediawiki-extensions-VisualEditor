@@ -165,7 +165,7 @@ ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
  * @return {jQuery.Promise}
  */
 ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
-	var deferred = $.Deferred();
+	var deferred = ve.createDeferred();
 	// TODO: Detect paging token if results exceed limit
 	ve.init.target.getContentApi().get( {
 		format: 'json',
