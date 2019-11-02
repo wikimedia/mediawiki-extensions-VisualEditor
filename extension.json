@@ -375,9 +375,13 @@
 		},
 		"ext.visualEditor.targetLoader": {
 			"group": "visualEditorA",
-			"scripts": "modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js",
+			"scripts": [
+				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js",
+				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetSaver.js"
+			],
 			"dependencies": [
 				"ext.visualEditor.track",
+				"ext.visualEditor.core.utils.parsing",
 				"mediawiki.String",
 				"jquery.textSelection",
 				"mediawiki.api",
