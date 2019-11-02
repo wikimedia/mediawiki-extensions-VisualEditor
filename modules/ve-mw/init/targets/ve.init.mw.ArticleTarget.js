@@ -2482,7 +2482,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			}
 		} ) );
 	} );
-	return $.when.apply( $, promises ).then( function () {
+	return ve.promiseAll( promises ).then( function () {
 		var $output = $( '<div>' ).addClass( 'catlinks' );
 		function renderPageLink( page ) {
 			var title = mw.Title.newFromText( page );

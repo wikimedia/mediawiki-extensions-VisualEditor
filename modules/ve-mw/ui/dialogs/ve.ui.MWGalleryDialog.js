@@ -619,7 +619,7 @@ ve.ui.MWGalleryDialog.prototype.requestImages = function ( options ) {
 	for ( i = 0, len = options.titles.length; i < len; i++ ) {
 		promises.push( ve.init.platform.galleryImageInfoCache.get( options.titles[ i ] ) );
 	}
-	return $.when.apply( $, promises )
+	return ve.promiseAll( promises )
 		.done( function () {
 			var resp = {};
 			for ( i = 0; i < len; i++ ) {

@@ -335,7 +335,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 		index += batchSize;
 	}
 
-	return $.when.apply( $, promises );
+	return ve.promiseAll( promises );
 };
 
 /**

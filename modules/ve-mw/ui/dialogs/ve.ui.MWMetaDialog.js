@@ -250,7 +250,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			promises.push( this.categoriesPage.setup( surfaceModel.metaList, config ) );
 			promises.push( this.settingsPage.setup( surfaceModel.metaList, config ) );
 			promises.push( this.advancedSettingsPage.setup( surfaceModel.metaList, config ) );
-			return $.when.apply( $, promises );
+			return ve.promiseAll( promises );
 		}, this )
 		.next( function () {
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {

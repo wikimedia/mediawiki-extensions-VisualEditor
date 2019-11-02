@@ -180,7 +180,7 @@
 			setTimeout( this.fetch.bind( this ) );
 		}
 
-		return $.when.apply( $, promises );
+		return ve.promiseAll( promises );
 	};
 
 	/**
