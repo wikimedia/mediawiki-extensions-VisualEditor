@@ -94,16 +94,7 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 
 /**
  * @event save
- * @param {string} html Rendered page HTML from server
- * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {number} newid New revision id, undefined if unchanged
- * @param {boolean} isRedirect Whether this page is a redirect or not
- * @param {string} displayTitle What HTML to show as the page title
- * @param {Object} lastModified Object containing user-formatted date
- *  and time strings, or undefined if we made no change.
- * @param {string} contentSub HTML to show as the content subtitle
- * @param {Array} modules The modules to be loaded on the page
- * @param {Object} jsconfigvars The mw.config values needed on the page
+ * @param {Object} data Save data from the API, see ve.init.mw.ArticleTarget#saveComplete
  * Fired immediately after a save is successfully completed
  */
 
@@ -442,7 +433,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			this.retriedRevIdConflict = true;
 			// TODO this retries both requests, in RESTbase mode we should only retry
 			// the request that gave us the lower revid
-			this.loading = false;
+			this.loading = null;
 			// HACK: Load with explicit revid to hopefully prevent this from happening again
 			this.requestedRevId = Math.max( docRevId, this.revid );
 			this.load();
@@ -517,7 +508,7 @@ ve.init.mw.ArticleTarget.prototype.documentReady = function () {
 		} )
 	);
 
-	this.loading = false;
+	this.loading = null;
 	this.edited = this.fromEditedState;
 
 	// Parent method
@@ -637,84 +628,51 @@ ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
  * @fires loadError
  */
 ve.init.mw.ArticleTarget.prototype.loadFail = function () {
-	this.loading = false;
+	this.loading = null;
 	this.emit( 'loadError' );
-};
-
-/**
- * Handle a successful save request.
- *
- * This method is called within the context of a target instance.
- *
- * @param {HTMLDocument} doc HTML document we tried to save
- * @param {Object} saveData Options that were used
- * @param {Object} response Response data
- * @param {string} status Text status message
- */
-ve.init.mw.ArticleTarget.prototype.saveSuccess = function ( doc, saveData, response ) {
-	var data = response.visualeditoredit;
-	this.saving = false;
-	if ( !data ) {
-		this.saveFail( doc, saveData, false, null, 'Invalid response from server', response );
-	} else if ( data.result !== 'success' ) {
-		// Note, this could be any of db failure, hookabort, badtoken or even a captcha
-		this.saveFail( doc, saveData, false, null, 'Save failure', response );
-	} else if ( typeof data.content !== 'string' ) {
-		this.saveFail( doc, saveData, false, null, 'Invalid HTML content in response from server', response );
-	} else {
-		this.saveComplete(
-			data.content,
-			data.categorieshtml,
-			data.newrevid,
-			data.isRedirect,
-			data.displayTitleHtml,
-			data.lastModified,
-			data.contentSub,
-			data.modules,
-			data.jsconfigvars
-		);
-	}
 };
 
 /**
  * Handle successful DOM save event.
  *
- * @param {string} html Rendered page HTML from server
- * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {number} newid New revision id, undefined if unchanged
- * @param {boolean} isRedirect Whether this page is a redirect or not
- * @param {string} displayTitle What HTML to show as the page title
- * @param {Object} lastModified Object containing user-formatted date
+ * @param {Object} data Save data from the API
+ * @param {string} data.content Rendered page HTML from server
+ * @param {string} data.categorieshtml Rendered categories HTML from server
+ * @param {number} data.newrevid New revision id, undefined if unchanged
+ * @param {boolean} data.isRedirect Whether this page is a redirect or not
+ * @param {string} data.displayTitleHtml What HTML to show as the page title
+ * @param {Object} data.lastModified Object containing user-formatted date
  *  and time strings, or undefined if we made no change.
- * @param {string} contentSub HTML to show as the content subtitle
- * @param {Array} modules The modules to be loaded on the page
- * @param {Object} jsconfigvars The mw.config values needed on the page
+ * @param {string} data.contentSub HTML to show as the content subtitle
+ * @param {Array} data.modules The modules to be loaded on the page
+ * @param {Object} data.jsconfigvars The mw.config values needed on the page
  * @fires save
  */
-ve.init.mw.ArticleTarget.prototype.saveComplete = function () {
+ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	this.editSummaryValue = null;
 	this.initialEditSummary = null;
 
 	this.saveDeferred.resolve();
-	this.emit.apply( this, [ 'save' ].concat( Array.prototype.slice.call( arguments ) ) );
+	this.emit( 'save', data );
 };
 
 /**
  * Handle an unsuccessful save request.
  *
+ * TODO: This code should be mostly moved to ArticleTargetSaver,
+ * in particular the badtoken error handling.
+ *
  * @param {HTMLDocument} doc HTML document we tried to save
  * @param {Object} saveData Options that were used
  * @param {boolean} wasRetry Whether this was a retry after a 'badtoken' error
- * @param {Object} jqXHR
- * @param {string} status Text status message
- * @param {Object|null} data API response data
+ * @param {string} code Error code
+ * @param {Object|null} data Full API response data, or XHR error details
  */
-ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
+ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, code, data ) {
 	var name, handler, i, error,
 		saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
 		target = this;
 
-	this.saving = false;
 	this.pageDeletedWarning = false;
 
 	// Handle empty response
@@ -919,60 +877,12 @@ ve.init.mw.ArticleTarget.prototype.editConflict = function () {
 };
 
 /**
- * Handle a successful serialize request.
- *
- * This method is called within the context of a target instance.
- *
- * @static
- * @param {Object} response API response data
- * @param {string} status Text status message
- * @fires serializeComplete
- */
-ve.init.mw.ArticleTarget.prototype.serializeSuccess = function ( response ) {
-	var data = response.visualeditoredit;
-	this.serializing = false;
-	if ( !data && !response.error ) {
-		this.serializeFail( null, 'Invalid response from server', null );
-	} else if ( response.error ) {
-		this.serializeFail(
-			null, 'Unsuccessful request: ' + response.error.info, null
-		);
-	} else if ( data.result === 'error' ) {
-		this.serializeFail( null, 'Server error', null );
-	} else if ( typeof data.content !== 'string' ) {
-		this.serializeFail(
-			null, 'No Wikitext content in response from server', null
-		);
-	} else {
-		if ( typeof this.serializeCallback === 'function' ) {
-			this.serializeCallback( data.content );
-			this.emit( 'serializeComplete' );
-			delete this.serializeCallback;
-		}
-	}
-};
-
-/**
- * Handle an unsuccessful serialize request.
- *
- * This method is called within the context of a target instance.
- *
- * @param {jqXHR|null} jqXHR
- * @param {string} status Text status message
- * @param {Mixed|null} error HTTP status text
- * @fires serializeError
- */
-ve.init.mw.ArticleTarget.prototype.serializeFail = function () {
-	this.serializing = false;
-	this.emit( 'serializeError' );
-};
-
-/**
  * Handle clicks on the review button in the save dialog.
  *
  * @fires saveReview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
+	var target = this;
 	if ( !this.saveDialog.hasDiff ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.pushPending();
@@ -980,7 +890,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 			// Has no callback, handled via target.showChangesDiff
 			this.showChanges( this.getDocToSave() );
 		} else {
-			this.serialize( this.getDocToSave(), this.onSaveDialogReviewComplete.bind( this ) );
+			this.serialize( this.getDocToSave() ).then( function ( data ) {
+				target.onSaveDialogReviewComplete( data.content );
+			} );
 		}
 	} else {
 		this.saveDialog.swapPanel( 'review' );
@@ -1049,7 +961,7 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
 /**
  * Handle completed serialize request for diff views for new page creations.
  *
- * @param {string} wikitext
+ * @param {string} wikitext Wikitext
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	this.bindSaveDialogClearDiff();
@@ -1122,16 +1034,16 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
  * Handle clicks on the resolve conflict button in the conflict dialog.
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogResolveConflict = function () {
-	var fields = { wpSave: 1 };
+	var fields = { wpSave: 1 },
+		target = this;
 
 	if ( this.getSurface().getMode() === 'source' && this.section !== null ) {
 		fields.section = this.section;
 	}
 	// Get Wikitext from the DOM, and set up a submit call when it's done
-	this.serialize(
-		this.getDocToSave(),
-		this.submitWithSaveFields.bind( this, fields )
-	);
+	this.serialize( this.getDocToSave() ).then( function ( data ) {
+		target.submitWithSaveFields( fields, data.content );
+	} );
 };
 
 /**
@@ -1162,7 +1074,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
  *
  * @param {jQuery.Promise} [dataPromise] Promise for pending request, if any
  * @return {jQuery.Promise} Data promise
-*/
+ */
 ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	// Prevent duplicate requests
 	if ( this.loading ) {
@@ -1192,8 +1104,8 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.restoreAccessKeys();
 	this.clearPreparedCacheKey();
-	this.loading = false;
-	this.saving = false;
+	this.loading = null;
+	this.saving = null;
 	this.clearDiff();
 	this.serializing = false;
 	this.submitting = false;
@@ -1380,14 +1292,12 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * @return {jQuery.Promise} Promise which resolves/rejects when saving is complete/fails
  */
 ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, extraData, eventName ) {
-	var data, htmlOrCacheKeyPromise, api,
+	var data, htmlOrCacheKeyPromise,
 		target = this;
 
 	if ( this.getSurface().getMode() === 'source' ) {
-		data = ve.extendObject( {}, extraData, {
-			wikitext: doc,
-			format: 'json'
-		} );
+		data = ve.copy( extraData );
+
 		if ( this.section !== null ) {
 			data.section = this.section;
 		}
@@ -1395,11 +1305,12 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
 			data.sectiontitle = this.sectionTitle.getValue();
 			data.summary = undefined;
 		}
-		api = this.getContentApi();
-		if ( data.token ) {
-			return api.post( data, { contentType: 'multipart/form-data' } );
-		}
-		return api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
+
+		return mw.libs.ve.targetSaver.postWikitext(
+			doc,
+			data,
+			{ api: target.getContentApi() }
+		);
 	}
 
 	// getPreparedCacheKey resolves with { cacheKey: ..., html: ... } or rejects.
@@ -1557,21 +1468,18 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
  *  - {boolean} minor Edit is a minor edit
  *  - {boolean} watch Watch the page
  * @param {boolean} [isRetry=false] Whether this is a retry after a 'badtoken' error
- * @return {boolean} Saving has been started
-*/
+ * @return {jQuery.Promise} Save promise, see mw.libs.ve.targetSaver.postHtml
+ */
 ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
-	var data;
+	var data, promise,
+		target = this;
+
 	// Prevent duplicate requests
 	if ( this.saving ) {
-		return false;
+		return this.saving;
 	}
 
 	data = ve.extendObject( {}, options, {
-		action: 'visualeditoredit',
-		paction: 'save',
-		errorformat: 'html',
-		errorlang: mw.config.get( 'wgUserLanguage' ),
-		errorsuselocal: 1,
 		page: this.getPageName(),
 		oldid: this.revid,
 		basetimestamp: this.baseTimeStamp,
@@ -1581,11 +1489,14 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		token: this.editToken
 	} );
 
-	this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
-		.done( this.saveSuccess.bind( this, doc, data ) )
-		.fail( this.saveFail.bind( this, doc, data, !!isRetry ) );
+	promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
+		.done( this.saveComplete.bind( this ) )
+		.fail( this.saveFail.bind( this, doc, data, !!isRetry ) )
+		.always( function () {
+			target.saving = null;
+		} );
 
-	return true;
+	return promise;
 };
 
 /**
@@ -1623,32 +1534,21 @@ ve.init.mw.ArticleTarget.prototype.clearDiff = function () {
  * @return {jQuery.Promise} Promise which resolves with the wikitext diff, or rejects with an error
  * @fires showChanges
  * @fires showChangesError
-*/
+ */
 ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 	var target = this;
 	if ( !this.wikitextDiffPromise ) {
 		this.wikitextDiffPromise = this.tryWithPreparedCacheKey( doc, {
-			action: 'visualeditoredit',
 			paction: 'diff',
 			page: this.getPageName(),
 			oldid: this.revid,
 			etag: this.etag
-		}, 'diff' ).then( function ( response ) {
-			var data = response.visualeditoredit;
-			if ( !data && !response.error ) {
-				return ve.createDeferred().reject( 'Invalid response from server' ).promise();
-			} else if ( response.error ) {
-				return ve.createDeferred().reject( response.error.info ).promise();
-			} else if ( data.result === 'nochanges' ) {
+		}, 'diff' ).then( function ( data ) {
+			if ( data.result === 'nochanges' ) {
 				target.emit( 'noChanges' );
 				return null;
-			} else if ( data.result !== 'success' ) {
-				return ve.createDeferred().reject( 'Failed request: ' + data.result ).promise();
-			} else if ( typeof data.diff !== 'string' ) {
-				return ve.createDeferred().reject( 'Invalid HTML content in response from server' ).promise();
-			} else {
-				return data.diff;
 			}
+			return data.diff;
 		} );
 		this.wikitextDiffPromise
 			.done( this.emit.bind( this, 'showChanges' ) )
@@ -1668,7 +1568,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
  * @param {Object} fields Other form fields to add (e.g. wpSummary, wpWatchthis, etc.). To actually
  *  save the wikitext, add { wpSave: 1 }. To go to the diff view, add { wpDiff: 1 }.
  * @return {boolean} Submitting has been started
-*/
+ */
 ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 	var key, $form, params;
 
@@ -1707,33 +1607,42 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
  *
  * This method performs an asynchronous action and uses a callback function to handle the result.
  *
- *     target.serialize(
- *         doc,
- *         function ( wikitext ) {
- *             // Do something with the loaded DOM
- *         }
- *     );
+ *     target.serialize( doc ).then( function ( data ) {
+ *         // Do something with data.content (wikitext)
+ *     } );
  *
  * @param {HTMLDocument} doc Document to serialize
- * @param {Function} callback Function to call when complete, accepts error and wikitext arguments
- * @return {boolean} Serializing has been started
-*/
+ * @param {Function} [callback] Optional callback to run after.
+ *  Deprecated in favor of using the returned promise.
+ * @return {jQuery.Promise} Serialize promise, see mw.libs.ve.targetSaver.postHtml
+ */
 ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
+	var promise,
+		target = this;
 	// Prevent duplicate requests
 	if ( this.serializing ) {
-		return false;
+		return this.serializing;
 	}
-	this.serializeCallback = callback;
-	this.serializing = this.tryWithPreparedCacheKey( doc, {
-		action: 'visualeditoredit',
+	promise = this.serializing = this.tryWithPreparedCacheKey( doc, {
 		paction: 'serialize',
 		page: this.getPageName(),
 		oldid: this.revid,
 		etag: this.etag
 	}, 'serialize' )
-		.done( this.serializeSuccess.bind( this ) )
-		.fail( this.serializeFail.bind( this ) );
-	return true;
+		.done( this.emit.bind( this, 'serializeComplete' ) )
+		.fail( this.emit.bind( this, 'serializeError' ) )
+		.always( function () {
+			target.serializing = null;
+		} );
+
+	if ( callback ) {
+		OO.ui.warnDeprecation( 'Passing a callback to ve.init.mw.ArticleTarget#serialize is deprecated. Use the returned promise instead.' );
+		promise.then( function ( data ) {
+			callback.call( target, data.content );
+		} );
+	}
+
+	return promise;
 };
 
 /**
@@ -2284,10 +2193,8 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
  */
 ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( modified ) {
 	var target = this;
-	this.serialize( this.getDocToSave() );
-	return this.serializing.then( function ( response ) {
+	return this.serialize( this.getDocToSave() ).then( function ( data ) {
 		// HACK - add parameters the API doesn't provide for a VE->WT switch
-		var data = response.visualeditoredit;
 		data.etag = target.etag;
 		data.fromEditedState = modified;
 		data.notices = target.remoteNotices;
@@ -2297,7 +2204,8 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
 		data.oldid = target.revid;
 		data.canEdit = target.canEdit;
 		data.checkboxesDef = target.checkboxesDef;
-		return response;
+		// Wrap up like a response object as that is what dataPromise is expected to be
+		return { visualeditoredit: data };
 	} );
 };
 

@@ -132,6 +132,24 @@
 		},
 
 		/**
+		 * Post wikitext to the API.
+		 *
+		 * By default uses action=visualeditoredit, paction=save.
+		 *
+		 * @param {string} wikitext Wikitext to post. Deflating is optional but recommended.
+		 * @param {Object} [extraData] Extra data to send to the API
+		 * @param {Object} [options] Options
+		 * @param {mw.Api} [options.api] Api to use
+		 * @param {Function} [options.now] Function returning current time in milliseconds for tracking, e.g. ve.now
+		 * @param {Function} [options.track] Tracking function
+		 * @param {string} [options.eventName] Event name for tracking
+		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
+		 */
+		postWikitext: function ( wikitext, extraData, options ) {
+			return this.postContent( $.extend( { wikitext: wikitext }, extraData ), options );
+		},
+
+		/**
 		 * Post HTML to the API.
 		 *
 		 * By default uses action=visualeditoredit, paction=save.
@@ -141,15 +159,54 @@
 		 * @param {string} [cacheKey] Optional cache key of HTML stashed on server.
 		 * @param {Object} [extraData] Extra data to send to the API
 		 * @param {Object} [options] Options
+		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
+		 */
+		postHtml: function ( html, cacheKey, extraData, options ) {
+			var data,
+				saver = this;
+
+			if ( cacheKey ) {
+				data = $.extend( { cachekey: cacheKey }, extraData );
+			} else {
+				data = $.extend( { html: html }, extraData );
+			}
+			return this.postContent( data, options ).then(
+				null,
+				function ( code, response ) {
+					// This cache key is evidently bad, clear it
+					if ( options.onCacheKeyFail ) {
+						options.onCacheKeyFail();
+					}
+					if ( code === 'badcachekey' ) {
+						// If the cache key failed, try again without the cache key
+						return saver.postHtml(
+							html,
+							null,
+							extraData,
+							options
+						);
+					}
+					// Failed for some other reason - let caller handle it.
+					return $.Deferred().reject( code, response ).promise();
+				}
+			);
+		},
+
+		/**
+		 * Post content to the API.
+		 *
+		 * By default uses action=visualeditoredit, paction=save.
+		 *
+		 * @param {string} data Content data
+		 * @param {Object} [options] Options
 		 * @param {mw.Api} [options.api] Api to use
 		 * @param {Function} [options.now] Function returning current time in milliseconds for tracking, e.g. ve.now
 		 * @param {Function} [options.track] Tracking function
 		 * @param {string} [options.eventName] Event name for tracking
-		 * @return {jQuery.Promise} Promise which resolves if the post was successful
+		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
-		postHtml: function ( html, cacheKey, extraData, options ) {
-			var request, fullEventName, api, data, start,
-				saver = this;
+		postContent: function ( data, options ) {
+			var request, api, start;
 
 			options = options || {};
 			api = options.api || new mw.Api();
@@ -158,17 +215,15 @@
 				start = options.now();
 			}
 
-			if ( cacheKey ) {
-				data = $.extend( {}, extraData, { cachekey: cacheKey } );
-			} else {
-				data = $.extend( {}, extraData, { html: html } );
-			}
 			data = $.extend(
 				{
 					action: 'visualeditoredit',
 					paction: 'save',
 					format: 'json',
-					formatversion: 2
+					formatversion: 2,
+					errorformat: 'html',
+					errorlang: mw.config.get( 'wgUserLanguage' ),
+					errorsuselocal: true
 				},
 				data
 			);
@@ -180,7 +235,9 @@
 			}
 			return request.then(
 				function ( response, jqxhr ) {
-					var eventData;
+					var eventData, fullEventName, error,
+						data = response.visualeditoredit;
+
 					// Log data about the request if eventName was set
 					if ( options.track && options.eventName ) {
 						eventData = {
@@ -188,44 +245,68 @@
 							duration: options.now() - start
 						};
 						fullEventName = 'performance.system.' + options.eventName +
-							( cacheKey ? '.withCacheKey' : '.withoutCacheKey' );
+							( data.cachekey ? '.withCacheKey' : '.withoutCacheKey' );
 						options.track( fullEventName, eventData );
 					}
-					return jqxhr;
+
+					// TODO: i18n
+					if ( !data ) {
+						error = {
+							code: 'invalidresponse',
+							html: 'Invalid response from server'
+						};
+					} else if ( data.result !== 'success' ) {
+						// Note, this could be any of db failure, hookabort, badtoken or even a captcha
+						error = {
+							code: 'failure',
+							html: 'Save failure: ' + mw.html.escape( data.result )
+						};
+					} else {
+						// paction specific errors
+						switch ( data.paction ) {
+							case 'save':
+							case 'serialize':
+								if ( typeof data.content !== 'string' ) {
+									error = {
+										code: 'invalidcontent',
+										html: 'Invalid content in response from server'
+									};
+								}
+								break;
+							case 'diff':
+								if ( typeof data.diff !== 'string' ) {
+									error = {
+										code: 'invalidcontent',
+										html: 'Invalid content in response from server'
+									};
+								}
+								break;
+						}
+					}
+
+					if ( error ) {
+						// Use the same format as API errors
+						return $.Deferred().reject( error.code, { errors: [ error ] } ).promise();
+					}
+					return data;
 				},
-				function ( errorName, errorObject ) {
-					var eventData,
-						responseText = OO.getProp( errorObject, 'xhr', 'responseText' );
+				function ( code, response ) {
+					var eventData, fullEventName,
+						responseText = OO.getProp( response, 'xhr', 'responseText' );
 
 					if ( responseText && options.track && options.eventName ) {
 						eventData = {
 							bytes: require( 'mediawiki.String' ).byteLength( responseText ),
 							duration: options.now() - start
 						};
-						if ( errorName === 'badcachekey' ) {
+						if ( code === 'badcachekey' ) {
 							fullEventName = 'performance.system.' + options.eventName + '.badCacheKey';
 						} else {
 							fullEventName = 'performance.system.' + options.eventName + '.withoutCacheKey';
 						}
 						options.track( fullEventName, eventData );
 					}
-					// This cache key is evidently bad, clear it
-					if ( options.onCacheKeyFail ) {
-						options.onCacheKeyFail();
-					}
-					if ( errorName === 'badcachekey' ) {
-						// If the cache key failed, try again without the cache key
-						return saver.postHtml(
-							html,
-							null,
-							extraData,
-							options
-						);
-					} else {
-						// Failed for some other reason - let caller handle it.
-						// FIXME Can't just `return this` because all callers are broken.
-						return $.Deferred().reject( null, errorName, errorObject ).promise();
-					}
+					return $.Deferred().reject( code, response ).promise();
 				}
 			);
 		}

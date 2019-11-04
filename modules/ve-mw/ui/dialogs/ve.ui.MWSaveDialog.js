@@ -173,8 +173,13 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 				$( '<div>' ).addClass( 've-ui-mwSaveDialog-no-changes' ).text( ve.msg( 'visualeditor-diff-no-changes' ) )
 			);
 		}
-	}, function ( error ) {
-		dialog.$reviewWikitextDiff.empty().append( error );
+	}, function ( code, errorObject ) {
+		dialog.$reviewWikitextDiff.empty().append(
+			new OO.ui.MessageWidget( {
+				type: 'error',
+				label: ve.init.target.extractErrorMessages( errorObject )
+			} ).$element
+		);
 	} ).always( function () {
 		dialog.updateSize();
 	} );
