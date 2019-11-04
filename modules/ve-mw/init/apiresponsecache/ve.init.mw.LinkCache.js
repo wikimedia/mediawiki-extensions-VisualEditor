@@ -118,7 +118,9 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements ) {
 	if ( ve.dm.MWLanguageVariantNode ) {
 		// Render the user's preferred variant in language converter markup
-		ve.dm.MWLanguageVariantNode.static.processVariants( $elements );
+		$elements.each( function ( i, element ) {
+			ve.dm.MWLanguageVariantNode.static.processVariants( element );
+		} );
 	}
 };
 

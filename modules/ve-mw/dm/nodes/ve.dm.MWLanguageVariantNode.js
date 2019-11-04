@@ -160,27 +160,23 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
  * renderings.
  *
  * @static
- * @param {jQuery} $element Element to process
+ * @param {HTMLElement} container Container element to process
  * @param {Object|null} opts Preview options
  * @param {boolean} [opts.describeAll=false] Treat all rules as if the
  *   "describe" flag was set. This displays every language and its associated
  *   text, not just the one appropriate for the current user.
- * @return {jQuery} $element
  */
-ve.dm.MWLanguageVariantNode.static.processVariants = function ( $element, opts ) {
-	var self = this,
-		selector = '[typeof="mw:LanguageVariant"]',
-		$variantElements = $element.find( selector ).addBack( selector );
+ve.dm.MWLanguageVariantNode.static.processVariants = function ( container, opts ) {
+	var self = this;
 
-	$variantElements.each( function ( _, child ) {
-		var dataMwvJSON = child.getAttribute( 'data-mw-variant' );
-		if ( dataMwvJSON && child.tagName !== 'META' ) {
+	Array.prototype.forEach.call( container.querySelectorAll( '[typeof="mw:LanguageVariant"]' ), function ( element ) {
+		var dataMwvJSON = element.getAttribute( 'data-mw-variant' );
+		if ( dataMwvJSON && element.tagName !== 'META' ) {
 			self.insertPreviewElements(
-				child, JSON.parse( dataMwvJSON ), opts
+				element, JSON.parse( dataMwvJSON ), opts
 			);
 		}
 	} );
-	return $element;
 };
 
 /**
@@ -197,10 +193,10 @@ ve.dm.MWLanguageVariantNode.static.processVariants = function ( $element, opts )
  */
 ve.dm.MWLanguageVariantNode.static.insertPreviewElements = function ( element, variantInfo, opts ) {
 	// Note that `element` can't be a <meta> (or other void tag)
-	$( element ).html( this.getPreviewHtml( variantInfo, opts ) );
+	element.innerHTML = this.getPreviewHtml( variantInfo, opts );
 	// This recurses into the children added by the `html` clause to ensure
 	// that nested variants are expanded.
-	this.processVariants( $( element ).children(), opts );
+	this.processVariants( element, opts );
 	return element;
 };
 

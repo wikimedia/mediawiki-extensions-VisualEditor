@@ -156,7 +156,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 					name = ve.init.platform.getLanguageName( code.toLowerCase() ),
 					$text = $( '<td>' ).html( item.t );
 				ve.dm.MWLanguageVariantNode.static.processVariants(
-					$text, { showHidden: true }
+					$text[ 0 ], { showHidden: true }
 				);
 				$table
 					.append( $( '<tr>' )
@@ -174,7 +174,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 		// Don't put $table in $body if the table is empty; this allows
 		// CSS :empty rules to have their proper effect.
 		ve.dm.MWLanguageVariantNode.static.processVariants(
-			$table, { showHidden: true }
+			$table[ 0 ], { showHidden: true }
 		);
 		$body.append( $table );
 	}
