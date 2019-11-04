@@ -641,6 +641,7 @@
 				"lib/ve/src/ve.utils.parsing.js"
 			],
 			"dependencies": [
+				"ext.visualEditor.ve"
 			],
 			"targets": [
 				"desktop",
