@@ -162,7 +162,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Vai tiešām vēlies turpināt, neaizpildot {{PLURAL:$2|laukus|lauku|laukus}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Paslēpt iespējas",
 	"visualeditor-dialog-transclusion-title": "Iekļāvums",
-	"visualeditor-dialogbutton-media-tooltip": "Medijs",
+	"visualeditor-dialogbutton-media-tooltip": "Attēli un mediji",
 	"visualeditor-dialogbutton-meta-tooltip": "Lapas iestatījumi",
 	"visualeditor-dialogbutton-template-tooltip": "Veidne",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Iekļāvums",

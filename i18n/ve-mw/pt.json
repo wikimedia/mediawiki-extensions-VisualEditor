@@ -21,7 +21,8 @@
 			"Macofe",
 			"Diniscoelho",
 			"MokaAkashiyaPT",
-			"Athena in Wonderland"
+			"Athena in Wonderland",
+			"Mansil alfalb"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -204,7 +205,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Tem certeza de que deseja continuar sem preencher {{PLURAL:$2|o campo|os $1 campos}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Ocultar opções",
 	"visualeditor-dialog-transclusion-title": "Transclusão",
-	"visualeditor-dialogbutton-media-tooltip": "Multimédia",
+	"visualeditor-dialogbutton-media-tooltip": "Imagens e multimédia",
 	"visualeditor-dialogbutton-meta-tooltip": "Configurações da página",
 	"visualeditor-dialogbutton-template-tooltip": "Predefinição",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusão",

@@ -186,7 +186,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1টি {{PLURAL:$2|ঘর}} পূরণ না করেই আপনি এগিয়ে যাওয়ার ব্যাপারে নিশ্চিত?",
 	"visualeditor-dialog-transclusion-single-mode": "বিকল্প আড়াল করুন",
 	"visualeditor-dialog-transclusion-title": "অন্তর্ভুক্তকরণ",
-	"visualeditor-dialogbutton-media-tooltip": "মিডিয়া",
+	"visualeditor-dialogbutton-media-tooltip": "চিত্র ও মিডিয়া",
 	"visualeditor-dialogbutton-meta-tooltip": "পাতা সেটিং",
 	"visualeditor-dialogbutton-template-tooltip": "টেমপ্লেট",
 	"visualeditor-dialogbutton-transclusion-tooltip": "অন্তর্ভুক্তকরণ",

@@ -188,7 +188,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Дали сте сигурни дека сакате да продолжите без да  {{PLURAL:$2|го пополните потребното поле|без да ги пополните потребните $1 полиња}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Скриј поставки",
 	"visualeditor-dialog-transclusion-title": "Превметнување",
-	"visualeditor-dialogbutton-media-tooltip": "Слика и снимка",
+	"visualeditor-dialogbutton-media-tooltip": "Слики и медиуми",
 	"visualeditor-dialogbutton-meta-tooltip": "Поставки за страницата",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Превметнување",

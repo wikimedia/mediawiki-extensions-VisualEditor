@@ -4,7 +4,7 @@
 			"Papuass"
 		]
 	},
-	"apierror-visualeditor-docserver": "Kļūda, savienojoties ar Parsoid/RESTbase serveri",
+	"apierror-visualeditor-docserver": "Kļūda, savienojoties ar Parsoid/RESTBase serveri (nav atbildes)",
 	"apihelp-visualeditor-description": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
 	"apihelp-visualeditor-param-etag": "Nosūtāmais ETag.",
 	"apihelp-visualeditor-param-format": "Izvades formāts.",
@@ -12,6 +12,7 @@
 	"apihelp-visualeditor-param-page": "Lapa, kurā veikt darbības.",
 	"apihelp-visualeditor-param-section": "Sadaļa, kurā darboties.",
 	"apihelp-visualeditor-summary": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
+	"apihelp-visualeditoredit-description": "Saglabā HTML5 lapu MediaWiki (pārveidotu vikitekstā ar Parsoid servisu).",
 	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (saglabājot ar captcha atbildi).",
 	"apihelp-visualeditoredit-param-captchaword": "Atbilde uz captcha (saglabājot ar captcha atbildi).",
 	"apihelp-visualeditoredit-param-etag": "Nosūtāmais ETag.",

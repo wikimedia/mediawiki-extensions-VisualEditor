@@ -235,7 +235,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Êtes-vous sûr de vouloir continuer sans remplir {{PLURAL:$2|le champ $1|les champs $1}} ?",
 	"visualeditor-dialog-transclusion-single-mode": "Masquer les options",
 	"visualeditor-dialog-transclusion-title": "Insertion d’un modèle",
-	"visualeditor-dialogbutton-media-tooltip": "Média",
+	"visualeditor-dialogbutton-media-tooltip": "Images et médias",
 	"visualeditor-dialogbutton-meta-tooltip": "Paramètres de la page",
 	"visualeditor-dialogbutton-template-tooltip": "Modèle",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusion",

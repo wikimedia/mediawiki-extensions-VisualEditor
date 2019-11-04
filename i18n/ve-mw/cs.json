@@ -209,7 +209,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Určitě chcete pokračovat bez vyplnění {{PLURAL:$2|pole|polí}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Skrýt možnosti",
 	"visualeditor-dialog-transclusion-title": "Vložení",
-	"visualeditor-dialogbutton-media-tooltip": "Média",
+	"visualeditor-dialogbutton-media-tooltip": "Obrázky a média",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavení stránky",
 	"visualeditor-dialogbutton-template-tooltip": "Šablona",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Šablona",

@@ -220,7 +220,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Weet u zeker dat u verder wilt gaan zonder {{PLURAL:$2|het veld|de $1 velden}} in te vullen?",
 	"visualeditor-dialog-transclusion-single-mode": "Opties verbergen",
 	"visualeditor-dialog-transclusion-title": "Transclusie",
-	"visualeditor-dialogbutton-media-tooltip": "Media",
+	"visualeditor-dialogbutton-media-tooltip": "Afbeeldingen en media",
 	"visualeditor-dialogbutton-meta-tooltip": "Pagina-instellingen",
 	"visualeditor-dialogbutton-template-tooltip": "Sjabloon",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusie",

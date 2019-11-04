@@ -205,7 +205,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ви впевнені, що хочете продовжити, не заповнюючи {{PLURAL:$2|поле|поля}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Сховати параметри",
 	"visualeditor-dialog-transclusion-title": "Включення",
-	"visualeditor-dialogbutton-media-tooltip": "Мультимедіа",
+	"visualeditor-dialogbutton-media-tooltip": "Зображення та мультимедіа",
 	"visualeditor-dialogbutton-meta-tooltip": "Налаштування сторінки",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Включення",
