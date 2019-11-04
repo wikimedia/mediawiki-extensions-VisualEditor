@@ -215,8 +215,7 @@ ve.dm.MWLanguageVariantNode.static.insertPreviewElements = function ( element, v
  * @return {string} HTML string
  */
 ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts ) {
-	var languageIndex,
-		$holder;
+	var languageIndex, html;
 	if ( variantInfo.disabled ) {
 		return variantInfo.disabled.t;
 	} else if ( variantInfo.name ) {
@@ -224,29 +223,19 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 	} else if ( variantInfo.filter ) {
 		return variantInfo.filter.t;
 	} else if ( variantInfo.describe || ( opts && opts.describeAll ) ) {
-		$holder = $( '<body>' );
 		if ( variantInfo.twoway && variantInfo.twoway.length ) {
 			variantInfo.twoway.forEach( function ( item ) {
-				$holder.append(
-					ve.init.platform.getLanguageName( item.l.toLowerCase() )
-				);
-				$holder.append( ':' );
-				$holder.append( $.parseHTML( item.t ) );
-				$holder.append( ';' );
+				html += ve.init.platform.getLanguageName( item.l.toLowerCase() ) + ':' +
+					item.t + ';';
 			} );
 		} else if ( variantInfo.oneway && variantInfo.oneway.length ) {
 			variantInfo.oneway.forEach( function ( item ) {
-				$holder.append( $.parseHTML( item.f ) );
-				$holder.append( '⇒' );
-				$holder.append(
-					ve.init.platform.getLanguageName( item.l.toLowerCase() )
-				);
-				$holder.append( ':' );
-				$holder.append( $.parseHTML( item.t ) );
-				$holder.append( ';' );
+				html += item.f + '⇒' +
+					ve.init.platform.getLanguageName( item.l.toLowerCase() ) + ':' +
+					item.t + ';';
 			} );
 		}
-		return $holder.html();
+		return html;
 	} else {
 		if ( variantInfo.twoway && variantInfo.twoway.length ) {
 			languageIndex = this.matchLanguage( variantInfo.twoway );
