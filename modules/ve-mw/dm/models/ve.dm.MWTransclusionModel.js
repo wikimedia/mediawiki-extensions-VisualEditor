@@ -105,6 +105,8 @@
 				var contentNodes;
 
 				if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
+					// This method is only ever run by a client, so it is okay to use jQuery
+					// eslint-disable-next-line no-undef
 					contentNodes = $.parseHTML( response.visualeditor.content, surfaceFragment.getDocument().getHtmlDocument() ) || [];
 					contentNodes = ve.ce.MWTransclusionNode.static.filterRendering( contentNodes );
 					insertNode(
