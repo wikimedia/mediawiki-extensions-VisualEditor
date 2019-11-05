@@ -36,6 +36,7 @@
 		},
 		"VisualEditorRestbaseURL": false,
 		"VisualEditorFullRestbaseURL": false,
+		"VisualEditorRestbaseParsoidVariant": false,
 		"VisualEditorAllowLossySwitching": true,
 		"VisualEditorAvailableNamespaces": {
 			"User": true,

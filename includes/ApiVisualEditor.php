@@ -113,6 +113,9 @@ class ApiVisualEditor extends ApiBase {
 		$reqheaders['Accept-Language'] = self::getPageLanguage( $title )->getCode();
 		$reqheaders['User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
 		$reqheaders['Api-User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
+		if ( $this->veConfig->get( 'VisualEditorRestbaseParsoidVariant' ) ) {
+			$reqheaders['X-Parsoid-Variant'] = $this->veConfig->get( 'VisualEditorRestbaseParsoidVariant' );
+		}
 		$request['headers'] = $reqheaders;
 		$response = $this->serviceClient->run( $request );
 		if ( $response['code'] === 200 && $response['error'] === "" ) {
