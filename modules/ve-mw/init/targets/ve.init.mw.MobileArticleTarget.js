@@ -178,7 +178,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	// getBoundingClientRect returns incorrect values during scrolling, so make sure to calculate
 	// it only after the scrolling ends (https://openradar.appspot.com/radar?id=6668472289329152).
 	this.onContainerScrollTimer = setTimeout( function () {
-		var pos, viewportHeight, scrollPos, headerHeight, headerTranslateY;
+		var pos, viewportHeight, scrollX, scrollY, headerHeight, headerTranslateY;
 
 		// Check if toolbar is offscreen. In a better world, this would reject all negative values
 		// (pos >= 0), but getBoundingClientRect often returns funny small fractional values after
@@ -191,14 +191,18 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 		}
 
 		// We don't know how much we have to scroll because we don't know how large the real
-		// viewport is, but it's no larger than the layout viewport.
-		viewportHeight = window.innerHeight;
-		scrollPos = document.body.scrollTop;
+		// viewport is. This value is bigger than the screen height of all iOS devices.
+		viewportHeight = 2000;
+		// OK so this one is really weird. Normally on iOS, the scroll position is set on <body>.
+		// But on our sites, when using iOS 13, it's on <html> instead - maybe due to some funny
+		// CSS we set on html and body? Anyway, this seems to work...
+		scrollY = document.body.scrollTop || document.documentElement.scrollTop;
+		scrollX = document.body.scrollLeft || document.documentElement.scrollLeft;
 
 		// Scroll down and translate the surface by the same amount, otherwise the content at new
 		// scroll position visibly flashes.
 		$overlaySurface.css( 'transform', 'translateY( ' + viewportHeight + 'px )' );
-		document.body.scrollTop += viewportHeight;
+		window.scroll( scrollX, scrollY + viewportHeight );
 
 		// (Note that the scrolling we just did will naturally trigger another 'scroll' event,
 		// and run this handler again after 250ms. This is okay.)
@@ -210,19 +214,20 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 		$header.css( 'transform', 'translateY( ' + headerTranslateY + 'px )' );
 
 		// The scroll back up must be after a delay, otherwise no scrolling happens and the
-		// viewports are not aligned. requestAnimationFrame() seems to minimize weird flashes
-		// of white (although they still happen and I have no explanation for them).
-		requestAnimationFrame( function () {
+		// viewports are not aligned.
+		setTimeout( function () {
 			// Scroll back up
 			$overlaySurface.css( 'transform', '' );
-			document.body.scrollTop = scrollPos;
+			window.scroll( scrollX, scrollY );
 
 			// Animate toolbar sliding into view
 			$header.addClass( 'toolbar-shown' ).css( 'transform', '' );
 			setTimeout( function () {
 				$header.addClass( 'toolbar-shown-done' );
 			}, 250 );
-		} );
+			// If the delays below are made any smaller, the weirdest graphical glitches happen,
+			// so don't mess with them
+		}, 50 );
 	}, 250 );
 };
 
