@@ -115,9 +115,11 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 				// from a paste we also have to exclude the
 				// opening/closing paragraph.)
 				contextRange = new ve.Range( pastedDocumentModel.getDocumentRange().from + 1, pastedDocumentModel.getDocumentRange().to - 1 );
+				view.pasteSpecial = true;
 			}
 			return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( view, targetFragment, pastedDocumentModel, contextRange );
 		} );
 	}
+	this.pasteSpecial = true;
 	return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, pastedDocumentModel, contextRange );
 };
