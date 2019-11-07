@@ -1323,6 +1323,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 				},
 				function () {
 					target.events.track( 'performance.system.serializeforcache.fail', { duration: ve.now() - start } );
+					return ve.createDeferred().reject();
 				}
 			);
 		} )
