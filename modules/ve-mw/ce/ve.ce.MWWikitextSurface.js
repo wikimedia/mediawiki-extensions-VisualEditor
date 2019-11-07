@@ -94,6 +94,23 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 	var windowAction, deferred,
 		view = this;
 
+	function makePlain() {
+		pastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
+		pastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
+		// We just turned this into plaintext, which probably
+		// affected the content-length. Luckily, because of
+		// the earlier clone, we know we just want the whole
+		// document, and because of the major change to
+		// plaintext, the difference between originalRange and
+		// balancedRange don't really apply. As such, clear
+		// out newDocRange. (Can't just make it undefined;
+		// need to exclude the internal list, and since we're
+		// from a paste we also have to exclude the
+		// opening/closing paragraph.)
+		contextRange = new ve.Range( pastedDocumentModel.getDocumentRange().from + 1, pastedDocumentModel.getDocumentRange().to - 1 );
+		view.pasteSpecial = true;
+	}
+
 	if ( !pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ) ) {
 		// Not plaintext. We need to ask whether we should convert it to
 		// wikitext, or just strip the formatting out.
@@ -102,24 +119,12 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 		windowAction.open( 'wikitextconvertconfirm', { deferred: deferred } );
 		return deferred.promise().then( function ( usePlain ) {
 			if ( usePlain ) {
-				pastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
-				pastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
-				// We just turned this into plaintext, which probably
-				// affected the content-length. Luckily, because of
-				// the earlier clone, we know we just want the whole
-				// document, and because of the major change to
-				// plaintext, the difference between originalRange and
-				// balancedRange don't really apply. As such, clear
-				// out newDocRange. (Can't just make it undefined;
-				// need to exclude the internal list, and since we're
-				// from a paste we also have to exclude the
-				// opening/closing paragraph.)
-				contextRange = new ve.Range( pastedDocumentModel.getDocumentRange().from + 1, pastedDocumentModel.getDocumentRange().to - 1 );
-				view.pasteSpecial = true;
+				makePlain();
 			}
 			return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( view, targetFragment, pastedDocumentModel, contextRange );
 		} );
 	}
-	this.pasteSpecial = true;
+	// isPlainText is true but we still need sanitize (e.g. remove lists)
+	makePlain();
 	return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, pastedDocumentModel, contextRange );
 };
