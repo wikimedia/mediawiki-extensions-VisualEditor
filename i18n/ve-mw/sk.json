@@ -285,6 +285,7 @@
 	"visualeditor-serializeerror": "Chyba pri načítavaní údajov zo servera: $1.",
 	"visualeditor-settings-tool": "Nastavenia stránky",
 	"visualeditor-special-characters-group-other": "Často používané",
+	"visualeditor-toload": "Editor sa teraz načíta. Pokiaľ stále vidíte túto správu po niekoľkých sekundách, prosím, [$1 obnovte stránku].",
 	"visualeditor-usernamespacepagelink": "Project:Menný priestor Používateľ",
 	"visualeditor-version-label": "Verzia",
 	"visualeditor-wikitext-progress": "Prebieha konverzia wikitextu",
