@@ -1759,9 +1759,23 @@ ve.init.mw.ArticleTarget.prototype.track = function ( name ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.createSurface = function () {
+ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
+	var surface, sections, attachedRoot;
+
+	sections = dmDoc.getNodesByType( 'section' );
+	if ( sections.length && sections.length === 1 ) {
+		attachedRoot = sections[ 0 ];
+		if ( !attachedRoot.isSurfaceable() ) {
+			throw new Error( 'Not a surfaceable node' );
+		}
+	}
+
 	// Parent method
-	var surface = ve.init.mw.ArticleTarget.super.prototype.createSurface.apply( this, arguments );
+	surface = ve.init.mw.ArticleTarget.super.prototype.createSurface.call(
+		this,
+		dmDoc,
+		ve.extendObject( { attachedRoot: attachedRoot }, config )
+	);
 
 	surface.$element.addClass( this.protectedClasses );
 
