@@ -83,17 +83,39 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 	// Call grand-parent
 	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
-			var insertion, insert,
+			var insert, labelText, labelTitle, targetText,
 				annotation = this.getAnnotation(),
 				fragment = this.getFragment(),
+				insertion = this.getInsertionText(),
 				surfaceModel = fragment.getSurface();
 
 			if ( data && data.action === 'done' && annotation ) {
-				insert = this.initialSelection.isCollapsed() && ( insertion = this.getInsertionData() ).length;
+				insert = this.initialSelection.isCollapsed() && insertion.length;
 				if ( insert ) {
 					fragment.insertContent( insertion );
 				}
-				fragment.annotateContent( 'set', annotation );
+				labelText = fragment.getText();
+
+				// Build internal links locally
+				if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
+					if ( labelText.indexOf( ']]' ) !== -1 ) {
+						labelText = labelText.replace( /(\]{2,})/g, '<nowiki>$1</nowiki>' );
+					}
+					labelTitle = mw.Title.newFromText( labelText );
+					if ( !labelTitle || labelTitle.getPrefixedText() !== annotation.getAttribute( 'normalizedTitle' ) ) {
+						targetText = annotation.getAttribute( 'normalizedTitle' ) + '|';
+					} else {
+						targetText = '';
+					}
+					fragment.insertContent( '[[' + targetText + labelText + ']]' );
+				} else {
+					// Annotating the surface will send the content to Parsoid before
+					// it is inserted into the wikitext document. It is slower but it
+					// will handle all cases.
+					// Where possible we should generate the wikitext locally.
+					fragment.annotateContent( 'set', annotation );
+				}
+
 				// Fix selection after annotating is complete
 				fragment.getPending().then( function () {
 					if ( insert ) {
