@@ -2661,6 +2661,7 @@
 			"modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js",
 			"modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js",
 			"lib/ve/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
+			"modules/ve-mw/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
 			"lib/ve/tests/ce/ve.ce.TestRunner.js",
 			"lib/ve/tests/ce/ve.ce.imetests.test.js",
 			"lib/ve/tests/ce/imetests/backspace-chromium-ubuntu-none.js",

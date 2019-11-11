@@ -20,6 +20,9 @@
 		// Ensure a mock server is used (e.g. as in ve.ui.MWWikitextStringTransferHandler)
 		return new mw.Api().post();
 	};
+	MWDummyTarget.prototype.getContentApi = function () {
+		return new mw.Api();
+	};
 	MWDummyTarget.prototype.createSurface = ve.init.mw.Target.prototype.createSurface;
 	MWDummyTarget.prototype.getSurfaceConfig = ve.init.mw.Target.prototype.getSurfaceConfig;
 	// Copy import rules from mw target, for paste tests.

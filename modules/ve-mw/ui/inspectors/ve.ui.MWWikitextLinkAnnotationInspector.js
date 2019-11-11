@@ -31,27 +31,76 @@ ve.ui.MWWikitextLinkAnnotationInspector.static.modelClasses = [];
 
 ve.ui.MWWikitextLinkAnnotationInspector.static.handlesSource = true;
 
+// TODO: Support [[linktrail]]s & [[pipe trick|]]
+ve.ui.MWWikitextLinkAnnotationInspector.static.internalLinkParser = ( function () {
+	var openLink = '\\[\\[',
+		closeLink = '\\]\\]',
+		noCloseLink = '(?:(?!' + closeLink + ').)*',
+		noCloseLinkOrPipe = '(?:(?!' + closeLink + ')[^|])*';
+
+	return new RegExp(
+		openLink +
+			'(' + noCloseLinkOrPipe + ')' +
+			'(?:\\|(' + noCloseLink + '))?' +
+		closeLink,
+		'g'
+	);
+}() );
+
 /* Methods */
 
 /**
  * @inheritdoc
  */
 ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
+	// Annotation inspector stages the annotation, so call its parent
 	// Call grand-parent
-	return ve.ui.FragmentInspector.prototype.getSetupProcess.call( this, data )
+	return ve.ui.AnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var fragment = this.getFragment();
+			var text, matches, matchTitle, range, contextFragment, contextRange, linkMatches, linkRange, title,
+				inspectorTitle,
+				internalLinkParser = this.constructor.static.internalLinkParser,
+				fragment = this.getFragment();
+
+			// Only supports linear selections
+			if ( !( this.previousSelection instanceof ve.dm.LinearSelection ) ) {
+				return ve.createDeferred().reject().promise();
+			}
 
 			// Initialize range
-			if ( this.previousSelection instanceof ve.dm.LinearSelection ) {
-				if (
-					fragment.getSelection().isCollapsed() &&
-					fragment.getDocument().data.isContentOffset( fragment.getSelection().getRange().start )
-				) {
-					// Expand to nearest word
-					if ( !data.noExpand ) {
-						fragment = fragment.expandLinearSelection( 'word' );
+			if ( !data.noExpand ) {
+				if ( !fragment.getSelection().isCollapsed() ) {
+					// Trim whitespace
+					fragment = fragment.trimLinearSelection();
+				}
+				// Expand to existing link, if present
+				// Find all links in the paragraph and see which one contains
+				// the current selection.
+				contextFragment = fragment.expandLinearSelection( 'siblings' );
+				contextRange = contextFragment.getSelection().getCoveringRange();
+				range = fragment.getSelection().getCoveringRange();
+				text = contextFragment.getText();
+				internalLinkParser.lastIndex = 0;
+				while ( ( matches = internalLinkParser.exec( text ) ) !== null ) {
+					matchTitle = mw.Title.newFromText( matches[ 1 ] );
+					if ( !matchTitle ) {
+						continue;
 					}
+					linkRange = new ve.Range(
+						contextRange.start + matches.index,
+						contextRange.start + matches.index + matches[ 0 ].length
+					);
+					if ( linkRange.containsRange( range ) ) {
+						linkMatches = matches;
+						fragment = fragment.getSurface().getLinearFragment( linkRange );
+						break;
+					}
+				}
+			}
+			if ( !linkMatches ) {
+				if ( !data.noExpand && fragment.getSelection().isCollapsed() ) {
+					// expand to nearest word
+					fragment = fragment.expandLinearSelection( 'word' );
 				} else {
 					// Trim whitespace
 					fragment = fragment.trimLinearSelection();
@@ -60,17 +109,45 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 
 			// Update selection
 			fragment.select();
-			this.initialSelection = fragment.getSelection();
 
+			this.initialSelection = fragment.getSelection();
 			this.fragment = fragment;
+			this.initialLabelText = this.fragment.getText();
+
+			if ( linkMatches ) {
+				// Group 1 is the link target, group 2 is the label after | if present
+				title = mw.Title.newFromText( linkMatches[ 1 ] );
+				this.initialLabelText = linkMatches[ 2 ] || linkMatches[ 1 ];
+				// HACK: Remove escaping probably added by this tool.
+				// We should really do a full parse from wikitext to HTML if
+				// we see any syntax
+				this.initialLabelText = this.initialLabelText.replace( /<nowiki>(\]{2,})<\/nowiki>/g, '$1' );
+			} else {
+				title = mw.Title.newFromText( this.initialLabelText );
+			}
+			if ( title ) {
+				this.initialAnnotation = this.newInternalLinkAnnotationFromTitle( title );
+			}
+
+			// eslint-disable-next-line mediawiki/msg-doc
+			inspectorTitle = ve.msg(
+				this.isReadOnly() ?
+					'visualeditor-linkinspector-title' : (
+						!linkMatches ?
+							'visualeditor-linkinspector-title-add' :
+							'visualeditor-linkinspector-title-edit'
+					)
+			);
+
+			this.title.setLabel( inspectorTitle ).setTitle( inspectorTitle );
+			this.annotationInput.setReadOnly( this.isReadOnly() );
 
 			this.actions.setMode( this.getMode() );
-
-			this.initialAnnotation = this.getAnnotationFromFragment( fragment );
 			this.linkTypeIndex.setTabPanel(
 				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
 			this.annotationInput.setAnnotation( this.initialAnnotation );
+
 			this.updateActions();
 		}, this );
 };
@@ -93,8 +170,10 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				insert = this.initialSelection.isCollapsed() && insertion.length;
 				if ( insert ) {
 					fragment.insertContent( insertion );
+					labelText = insertion;
+				} else {
+					labelText = this.initialLabelText;
 				}
-				labelText = fragment.getText();
 
 				// Build internal links locally
 				if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
