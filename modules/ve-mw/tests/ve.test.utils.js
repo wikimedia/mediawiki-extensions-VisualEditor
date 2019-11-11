@@ -20,9 +20,12 @@
 		// Ensure a mock server is used (e.g. as in ve.ui.MWWikitextStringTransferHandler)
 		return new mw.Api().post();
 	};
-	ve.test.utils.MWDummyTarget = MWDummyTarget;
+	MWDummyTarget.prototype.createSurface = ve.init.mw.Target.prototype.createSurface;
+	MWDummyTarget.prototype.getSurfaceConfig = ve.init.mw.Target.prototype.getSurfaceConfig;
 	// Copy import rules from mw target, for paste tests.
-	ve.test.utils.MWDummyTarget.static.importRules = ve.init.mw.Target.static.importRules;
+	MWDummyTarget.static.importRules = ve.init.mw.Target.static.importRules;
+
+	ve.test.utils.MWDummyTarget = MWDummyTarget;
 
 	function MWDummyPlatform() {
 		MWDummyPlatform.super.apply( this, arguments );
