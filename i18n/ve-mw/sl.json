@@ -160,7 +160,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ali ste prepričani, da želite nadaljevati brez vnosa v {{PLURAL:$2|polje|polji|polja}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Skrij možnosti",
 	"visualeditor-dialog-transclusion-title": "Vključitev",
-	"visualeditor-dialogbutton-media-tooltip": "Predstavnost",
+	"visualeditor-dialogbutton-media-tooltip": "Slike in predstavnost",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavitve strani",
 	"visualeditor-dialogbutton-template-tooltip": "Predloga",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Vključitev",
