@@ -51,16 +51,6 @@
 	};
 	ve.test.utils.MWDummyPlatform = MWDummyPlatform;
 
-	// Unregister MW override nodes.
-	// They are temporarily registered in setup/teardown.
-	ve.dm.modelRegistry.unregister( ve.dm.MWHeadingNode );
-	ve.dm.modelRegistry.unregister( ve.dm.MWPreformattedNode );
-	ve.dm.modelRegistry.unregister( ve.dm.MWTableNode );
-	ve.dm.modelRegistry.unregister( ve.dm.MWExternalLinkAnnotation );
-	// Re-register unregistered nodes.
-	ve.dm.modelRegistry.register( ve.dm.InlineImageNode );
-	ve.dm.modelRegistry.register( ve.dm.BlockImageNode );
-
 	ve.test.utils.mwEnvironment = ( function () {
 		var mwPlatform, corePlatform, mwTarget, coreTarget,
 			setEditorPreference = mw.libs.ve.setEditorPreference,
@@ -94,6 +84,9 @@
 			for ( i = 0; i < overridden.length; i++ ) {
 				ve.dm.modelRegistry.unregister( overridden[ i ] );
 			}
+			ve.ui.windowFactory.unregister( ve.ui.LinkAnnotationInspector );
+			ve.ui.windowFactory.register( ve.ui.MWLinkAnnotationInspector );
+
 			ve.init.platform = mwPlatform;
 			ve.init.target = mwTarget;
 			mw.libs.ve.setEditorPreference = dummySetEditorPreference;
@@ -110,6 +103,9 @@
 			for ( i = 0; i < overridden.length; i++ ) {
 				ve.dm.modelRegistry.register( overridden[ i ] );
 			}
+			ve.ui.windowFactory.unregister( ve.ui.MWLinkAnnotationInspector );
+			ve.ui.windowFactory.register( ve.ui.LinkAnnotationInspector );
+
 			ve.init.platform = corePlatform;
 			ve.init.target = coreTarget;
 			mw.libs.ve.setEditorPreference = setEditorPreference;
