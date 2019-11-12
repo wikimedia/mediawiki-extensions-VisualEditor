@@ -2704,6 +2704,7 @@
 			"ext.visualEditor.mwmeta",
 			"ext.visualEditor.mwtransclusion",
 			"ext.visualEditor.mwalienextension",
+			"ext.visualEditor.mwwikitext",
 			"ext.visualEditor.language",
 			"ext.visualEditor.experimental",
 			"ext.visualEditor.desktopArticleTarget.init",
