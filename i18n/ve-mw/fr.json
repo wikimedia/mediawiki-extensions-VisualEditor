@@ -64,7 +64,7 @@
 	"tooltip-ca-ve-edit": "Modifier cette page",
 	"visualeditor-advancedsettings-tool": "Paramètres avancés",
 	"visualeditor-autosave-modified-prompt-accept": "Reprendre la modification",
-	"visualeditor-autosave-modified-prompt-message": "Cette page a été modifiée depuis que vous l’avez chargée la dernière fois. Voulez-{{GENDER:|vous}} reprendre {{GENDER:|votre}} modification de l’ancienne version ou démarrer une nouvelle modification à partir de la dernière version modifiée ?",
+	"visualeditor-autosave-modified-prompt-message": "Cette page a été modifiée depuis que vous l’avez chargée la dernière fois. Voulez-{{GENDER:|}}vous reprendre {{GENDER:|}}votre modification de l’ancienne version ou démarrer une nouvelle modification à partir de la dernière version modifiée ?",
 	"visualeditor-autosave-modified-prompt-reject": "Commencer une nouvelle modification",
 	"visualeditor-autosave-modified-prompt-title": "Reprendre {{GENDER:|votre}} modification ?",
 	"visualeditor-autosave-not-recovered-text": "Vos modifications non enregistrées ne pourront pas être récupérées.",
