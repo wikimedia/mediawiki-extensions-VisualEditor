@@ -685,15 +685,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 
 	// Don't show an error if the load was manually aborted
 	// The response.status check here is to catch aborts triggered by navigation away from the page
-	if (
-		errorDetails &&
-		Object.prototype.hasOwnProperty.call( errorDetails, 'error' ) &&
-		Object.prototype.hasOwnProperty.call( errorDetails.error, 'info' )
-	) {
-		errorInfo = errorDetails.error.info;
-	} else {
-		errorInfo = errorDetails;
-	}
+	errorInfo = ve.getProp( errorDetails, 'error', 'info' ) || errorDetails;
 
 	if ( !errorDetails || errorDetails.statusText !== 'abort' ) {
 		if ( code === 'http' || code === 'error' ) {
@@ -923,9 +915,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
-	html, categoriesHtml, newid, isRedirect, displayTitle, lastModified, contentSub, modules, jsconfigvars
-) {
+ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 	var newUrlParams, watchChecked, watch,
 		target = this;
 
@@ -937,9 +927,9 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		this.teardown().then( function () {
 
 			// This is a page creation or restoration, refresh the page
-			newUrlParams = newid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' };
+			newUrlParams = data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' };
 
-			if ( isRedirect ) {
+			if ( data.isRedirect ) {
 				newUrlParams.redirect = 'no';
 			}
 			location.href = target.viewUri.extend( newUrlParams );
@@ -966,38 +956,38 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		// we don't want to go back into oldid mode anyway
 		this.requestedRevId = undefined;
 
-		if ( newid !== undefined ) {
+		if ( data.newrevid !== undefined ) {
 			mw.config.set( {
-				wgCurRevisionId: newid,
-				wgRevisionId: newid
+				wgCurRevisionId: data.newrevid,
+				wgRevisionId: data.newrevid
 			} );
-			this.revid = newid;
-			this.currentRevisionId = newid;
+			this.revid = data.newrevid;
+			this.currentRevisionId = data.newrevid;
 		}
 
 		// Update module JS config values and notify ResourceLoader of any new
 		// modules needed to be added to the page
-		mw.config.set( jsconfigvars );
+		mw.config.set( data.jsconfigvars );
 		// Also load postEdit in case it's needed, below.
-		mw.loader.load( modules.concat( [ 'mediawiki.action.view.postEdit' ] ) );
+		mw.loader.load( data.modules.concat( [ 'mediawiki.action.view.postEdit' ] ) );
 
 		mw.config.set( {
-			wgIsRedirect: !!isRedirect
+			wgIsRedirect: !!data.isRedirect
 		} );
 
 		this.saveDialog.reset();
 		this.replacePageContent(
-			html,
-			categoriesHtml,
-			displayTitle,
-			lastModified,
-			contentSub
+			data.content,
+			data.categorieshtml,
+			data.displayTitleHtml,
+			data.lastModified,
+			data.contentSub
 		);
 
-		if ( newid !== undefined ) {
+		if ( data.newrevid !== undefined ) {
 			$( '#t-permalink a, #coll-download-as-rl a' ).each( function () {
 				var uri = new mw.Uri( $( this ).attr( 'href' ) );
-				uri.query.oldid = newid;
+				uri.query.oldid = data.newrevid;
 				$( this ).attr( 'href', uri.toString() );
 			} );
 		}
@@ -1005,7 +995,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 		// Tear down the target now that we're done saving
 		// Not passing trackMechanism because this isn't an abort action
 		this.tryTeardown( true );
-		if ( newid !== undefined ) {
+		if ( data.newrevid !== undefined ) {
 			mw.hook( 'postEdit' ).fire( {
 				// The following messages are used here:
 				// * postedit-confirmation-published
@@ -1019,17 +1009,25 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function (
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.serializeFail = function ( jqXHR, status ) {
+ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.serializeFail.apply( this, arguments );
+	var promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments ),
+		target = this;
 
-	OO.ui.alert( ve.msg( 'visualeditor-serializeerror', status ) );
+	return promise.fail( function ( error, response ) {
+		OO.ui.alert(
+			$( ve.htmlMsg(
+				'visualeditor-serializeerror',
+				$( '<span>' ).append( target.extractErrorMessages( response ) )[ 0 ]
+			) )
+		);
 
-	// It's possible to get here while the save dialog has never been opened (if the user uses
-	// the switch to source mode option)
-	if ( this.saveDialog ) {
-		this.saveDialog.popPending();
-	}
+		// It's possible to get here while the save dialog has never been opened (if the user uses
+		// the switch to source mode option)
+		if ( target.saveDialog ) {
+			target.saveDialog.popPending();
+		}
+	} );
 };
 
 /**
@@ -1566,14 +1564,11 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			location.href = uri.toString();
 		} );
 	} else {
-		this.serialize(
-			this.getDocToSave(),
-			function ( wikitext ) {
-				ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
-				ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
-				target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, wikitext );
-			}
-		);
+		this.serialize( this.getDocToSave() ).then( function ( data ) {
+			ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
+			ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
+			target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, data.content );
+		} );
 	}
 };
 

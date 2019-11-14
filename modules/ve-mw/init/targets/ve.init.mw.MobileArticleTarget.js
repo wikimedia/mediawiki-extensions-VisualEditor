@@ -431,22 +431,22 @@ ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( html, categoriesHtml, newRevId ) {
+ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 	// TODO: parsing this is expensive just for the section details. We should
 	// change MobileFrontend+this to behave like desktop does and just rerender
 	// the page with the provided HTML (T219420).
-	var fragment = this.getSectionFragmentFromPage( $.parseHTML( html ) );
+	var fragment = this.getSectionFragmentFromPage( $.parseHTML( data.content ) );
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
 	this.overlay.sectionId = fragment;
-	this.overlay.onSaveComplete( newRevId );
+	this.overlay.onSaveComplete( data.newrevid );
 };
 
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, jqXHR, status, data ) {
+ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, code, data ) {
 	// parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveFail.apply( this, arguments );
 
