@@ -118,10 +118,19 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 		windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 		windowAction.open( 'wikitextconvertconfirm', { deferred: deferred } );
 		return deferred.promise().then( function ( usePlain ) {
+			var insertPromise;
 			if ( usePlain ) {
 				makePlain();
 			}
-			return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( view, targetFragment, pastedDocumentModel, contextRange );
+			insertPromise = ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( view, targetFragment, pastedDocumentModel, contextRange );
+			if ( !usePlain ) {
+				insertPromise = insertPromise.then( null, function () {
+					// Rich text conversion failed, insert plain text
+					makePlain();
+					return ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( view, targetFragment, pastedDocumentModel, contextRange );
+				} );
+			}
+			return insertPromise;
 		} );
 	}
 	// isPlainText is true but we still need sanitize (e.g. remove lists)

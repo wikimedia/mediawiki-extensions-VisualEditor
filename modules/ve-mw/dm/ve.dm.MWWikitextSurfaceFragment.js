@@ -150,7 +150,11 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	return ve.promiseAll( [ wikitextPromise, progressPromise ] ).then( function ( wikitext ) {
 		var deferred = ve.createDeferred();
 		setTimeout( function () {
-			deferred.resolve( wikitext );
+			if ( wikitext !== undefined ) {
+				deferred.resolve( wikitext );
+			} else {
+				deferred.reject();
+			}
 		}, ve.init.target.getSurface().dialogs.getTeardownDelay() );
 		return deferred.promise();
 	} );
