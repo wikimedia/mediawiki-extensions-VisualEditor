@@ -202,7 +202,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Är du säker på att du vill fortsätta utan att fylla i $1 {{PLURAL:$2|fält}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Dölj alternativ",
 	"visualeditor-dialog-transclusion-title": "Mallinkludering",
-	"visualeditor-dialogbutton-media-tooltip": "Media",
+	"visualeditor-dialogbutton-media-tooltip": "Bilder och media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sidinställningar",
 	"visualeditor-dialogbutton-template-tooltip": "Mall",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Mallinkludering",

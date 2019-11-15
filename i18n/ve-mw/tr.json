@@ -207,6 +207,7 @@
 	"visualeditor-loadwarning-token": "Sunucudan düzenleme belirteci yüklenmesinde hata: $1. Yeniden denemek ister misiniz?",
 	"visualeditor-mainnamespacepagelink": "Project:Ana ad alanı",
 	"visualeditor-media-input-placeholder": "Dosya ara",
+	"visualeditor-media-title-video": "Video",
 	"visualeditor-meta-tool": "Seçenekler",
 	"visualeditor-mweditmodesource-warning-cancel": "İptal",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Değişiklikleri iptal et ve geç",
