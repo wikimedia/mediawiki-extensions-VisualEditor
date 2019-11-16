@@ -2489,7 +2489,7 @@
 				"modules/ve-mw/ui/ve.ui.MWWikitextDataTransferHandlerFactory.js",
 				"modules/ve-mw/ui/ve.ui.MWWikitextSurface.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWWikitextAction.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWWikitextConvertConfirmDialog.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWWikitextPasteContextItem.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWWikitextLinkAnnotationInspector.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextPlainTextStringTransferHandler.js"
 			],
@@ -2506,7 +2506,6 @@
 				"visualeditor-generating-wikitext-progress",
 				"visualeditor-wikitextconvert-title",
 				"visualeditor-wikitextconvert-message",
-				"visualeditor-wikitextconvert-plain",
 				"visualeditor-wikitextconvert-convert"
 			],
 			"targets": [

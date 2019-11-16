@@ -436,6 +436,5 @@
 	"visualeditor-wikitext-warning-title": "Title of notification displayed when Wikitext has been detected",
 	"visualeditor-wikitextconvert-title": "Title of prompt displayed when rich markup is pasted into a source mode editor.",
 	"visualeditor-wikitextconvert-message": "Message displayed when asking whether to convert rich markup to wikitext or use just the plain text content of the markup.",
-	"visualeditor-wikitextconvert-plain": "Label text for button to paste just plain text",
 	"visualeditor-wikitextconvert-convert": "Label text for button to convert pasted content to wikitext"
 }
