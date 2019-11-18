@@ -237,7 +237,6 @@
 	"visualeditor-loaderror-title": "The editor could not load",
 	"visualeditor-loadwarning": "Error loading data from server: $1. Would you like to retry?",
 	"visualeditor-loadwarning-noconnect": "Could not connect to the server",
-	"visualeditor-loadwarning-token": "Error loading edit token from server: $1. Would you like to retry?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convert to simple link",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN link",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID link",
