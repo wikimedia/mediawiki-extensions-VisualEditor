@@ -5,5 +5,7 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Mute taan siijđo",
-	"visualeditor-ca-editsource": "mute käldee."
+	"visualeditor-ca-editsource": "mute käldee.",
+	"visualeditor-ca-editsource-section": "mute käldee.",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }

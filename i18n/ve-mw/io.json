@@ -99,6 +99,7 @@
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Nekapabligar la redakto-ligili apud singla titulo en ca pagino.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Nekapabligar galerio",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "Ne konvertez la titulo inter linguo-varianti",
+	"visualeditor-dialog-meta-settings-redirect-help": "Vu povas transformar ca pagino en ridirektilo, pagino quo automatale sendos lekteri ad altra pagino en ca Wiki. To esas utila por mis-espelaji e por alternativa nomi o konceptaji. Se vu transformos ol en ridirektilo, la lekteri ne vidos la kontenajo de ca pagino.",
 	"visualeditor-dialog-meta-settings-redirect-label": "Ridirektar ica pagino a",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Skopo-pagino por ridirekto",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Preventar aktualigo di ca ridirekto kande la skopo-pagino movesas.",
