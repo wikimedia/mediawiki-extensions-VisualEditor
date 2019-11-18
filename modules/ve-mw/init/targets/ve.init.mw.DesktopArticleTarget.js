@@ -692,16 +692,19 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			if ( errorDetails && ( errorDetails.status || ( errorDetails.xhr && errorDetails.xhr.status ) ) ) {
 				confirmPromptMessage = ve.msg(
 					'visualeditor-loadwarning',
-					'HTTP ' + ( errorDetails.status || errorDetails.xhr.status )
+					ve.msg( 'visualeditor-error-http', errorDetails.status || errorDetails.xhr.status )
 				);
 			} else {
 				confirmPromptMessage = ve.msg(
 					'visualeditor-loadwarning',
-					ve.msg( 'visualeditor-loadwarning-noconnect' )
+					ve.msg( 'visualeditor-error-noconnect' )
 				);
 			}
 		} else if ( errorInfo ) {
-			confirmPromptMessage = ve.msg( 'visualeditor-loadwarning', code + ': ' + errorInfo );
+			confirmPromptMessage = ve.msg(
+				'visualeditor-loadwarning',
+				code + ve.msg( 'colon-separator' ) + errorInfo
+			);
 		} else if ( typeof errorDetails === 'string' ) {
 			confirmPromptMessage = errorDetails;
 		} else {

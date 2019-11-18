@@ -249,11 +249,10 @@
 						options.track( fullEventName, eventData );
 					}
 
-					// TODO: i18n
 					if ( !data ) {
 						error = {
 							code: 'invalidresponse',
-							html: 'Invalid response from server'
+							html: mw.msg( 'visualeditor-error-invalidresponse' )
 						};
 					} else if ( data.result !== 'success' ) {
 						// This can only happen when:
@@ -269,7 +268,7 @@
 								if ( typeof data.content !== 'string' ) {
 									error = {
 										code: 'invalidcontent',
-										html: 'Invalid content in response from server'
+										html: mw.msg( 'visualeditor-error-invalidcontent' )
 									};
 								}
 								break;
@@ -277,7 +276,7 @@
 								if ( typeof data.diff !== 'string' ) {
 									error = {
 										code: 'invalidcontent',
-										html: 'Invalid content in response from server'
+										html: mw.msg( 'visualeditor-error-invalidcontent' )
 									};
 								}
 								break;
