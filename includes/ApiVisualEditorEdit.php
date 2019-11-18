@@ -353,7 +353,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		] );
 
 		if ( !isset( $result['compare']['*'] ) ) {
-			return [ 'result' => 'fail' ];
+			$this->dieWithError( 'apierror-visualeditor-difffailed', 'difffailed' );
 		}
 		$diffRows = $result['compare']['*'];
 
@@ -408,11 +408,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$result = [ 'result' => 'success', 'cachekey' => $key ];
 		} elseif ( $params['paction'] === 'diff' ) {
 			$section = $params['section'] ?? null;
-			$diff = $this->diffWikitext( $title, $params['oldid'], $wikitext, $section );
-			if ( $diff['result'] === 'fail' ) {
-				$this->dieWithError( 'apierror-visualeditor-difffailed', 'difffailed' );
-			}
-			$result = $diff;
+			$result = $this->diffWikitext( $title, $params['oldid'], $wikitext, $section );
 		} elseif ( $params['paction'] === 'save' ) {
 			$saveresult = $this->saveWikitext( $title, $wikitext, $params );
 			$editStatus = $saveresult['edit']['result'];
