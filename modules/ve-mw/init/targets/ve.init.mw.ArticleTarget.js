@@ -1545,11 +1545,14 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 			oldid: this.revid,
 			etag: this.etag
 		}, 'diff' ).then( function ( data ) {
-			if ( data.result === 'nochanges' ) {
+			return data.diff;
+		}, function ( code, response ) {
+			// ArticleTargetSaver treats this as an error, this is silly
+			if ( response.visualeditoredit && response.visualeditoredit.result === 'nochanges' ) {
 				target.emit( 'noChanges' );
 				return null;
 			}
-			return data.diff;
+			return ve.createDeferred().reject( code, response ).promise();
 		} );
 		this.wikitextDiffPromise
 			.done( this.emit.bind( this, 'showChanges' ) )

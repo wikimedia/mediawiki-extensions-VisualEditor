@@ -256,11 +256,11 @@
 							html: 'Invalid response from server'
 						};
 					} else if ( data.result !== 'success' ) {
-						// Note, this could be any of db failure, hookabort, badtoken or even a captcha
-						error = {
-							code: 'failure',
-							html: 'Save failure: ' + mw.html.escape( data.result )
-						};
+						// This can only happen when:
+						// * viewing a diff with no changes (`data.result === 'nochanges'`)
+						// * saving an edit and getting a captcha (`data.result === 'error'`)
+						// It's a silly special case...
+						return $.Deferred().reject( 'no-error-no-success', response ).promise();
 					} else {
 						// paction specific errors
 						switch ( data.paction ) {
