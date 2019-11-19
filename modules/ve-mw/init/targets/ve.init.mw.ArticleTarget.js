@@ -767,7 +767,10 @@ ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
  * @fires saveErrorEmpty
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
-	this.showSaveError( ve.msg( 'visualeditor-saveerror', 'Empty server response' ), false /* prevents reapply */ );
+	this.showSaveError(
+		ve.msg( 'visualeditor-saveerror', ve.msg( 'visualeditor-error-invalidresponse' ) ),
+		false /* prevents reapply */
+	);
 	this.emit( 'saveErrorEmpty' );
 };
 
@@ -828,13 +831,14 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
 
 		this.emit( 'saveErrorUnknown', errorCodes );
 	} else {
-		unknown = 'Unknown error';
-		if ( data.xhr && data.xhr.status !== 200 ) {
-			unknown += ', HTTP status ' + data.xhr.status;
+		if ( data.xhr && data.xhr.status ) {
+			unknown = ve.msg( 'visualeditor-error-http', data.xhr.status );
+		} else {
+			unknown = ve.msg( 'visualeditor-error-noconnect' );
 		}
 
 		this.showSaveError(
-			unknown,
+			ve.msg( 'visualeditor-saveerror', unknown ),
 			false // prevents reapply
 		);
 
