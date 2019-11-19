@@ -619,8 +619,7 @@
 			"group": "visualEditorA",
 			"scripts": [
 				"lib/ve/src/ve.utils.js",
-				"lib/ve/src/ve.TriggerListener.js",
-				"lib/ve/src/ve.track.js"
+				"lib/ve/src/ve.TriggerListener.js"
 			],
 			"debugScripts": [
 				"lib/ve/src/ve.debug.js",
@@ -628,6 +627,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.ve",
+				"ext.visualEditor.track",
 				"oojs-ui"
 			],
 			"targets": [
