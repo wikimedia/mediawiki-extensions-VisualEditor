@@ -16,10 +16,16 @@
 			saveSuccess: 'save_success',
 			saveFailure: 'save_failure'
 		},
-		trackdebug = !!mw.Uri().query.trackdebug;
+		trackdebug = !!mw.Uri().query.trackdebug,
+		firstInitDone = false;
+
+	function getEditingSessionIdFromRequest() {
+		return mw.config.get( 'wgWMESchemaEditAttemptStepSessionId' ) ||
+			mw.Uri().query.editingStatsId;
+	}
 
 	timing = {};
-	editingSessionId = mw.user.generateRandomSessionId();
+	editingSessionId = getEditingSessionIdFromRequest() || mw.user.generateRandomSessionId();
 
 	function log() {
 		// mw.log is a no-op unless resource loader is in debug mode, so
@@ -86,8 +92,11 @@
 		timeStamp = timeStamp || this.timeStamp; // I8e82acc12 back-compat
 
 		if ( action === 'init' ) {
-			// Regenerate editingSessionId
-			editingSessionId = mw.user.generateRandomSessionId();
+			if ( firstInitDone ) {
+				// Regenerate editingSessionId
+				editingSessionId = mw.user.generateRandomSessionId();
+			}
+			firstInitDone = true;
 		}
 
 		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
