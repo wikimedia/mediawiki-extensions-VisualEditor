@@ -395,8 +395,7 @@
 				"visualeditor-autosave-modified-prompt-message",
 				"visualeditor-autosave-modified-prompt-reject",
 				"visualeditor-autosave-modified-prompt-title",
-				"visualeditor-loaderror-message",
-				"visualeditor-loaderror-title"
+				"visualeditor-loaderror-message"
 			],
 			"targets": [
 				"desktop",
