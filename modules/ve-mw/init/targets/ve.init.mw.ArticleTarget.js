@@ -1549,14 +1549,10 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 			oldid: this.revid,
 			etag: this.etag
 		}, 'diff' ).then( function ( data ) {
-			return data.diff;
-		}, function ( code, response ) {
-			// ArticleTargetSaver treats this as an error, this is silly
-			if ( response.visualeditoredit && response.visualeditoredit.result === 'nochanges' ) {
+			if ( !data.diff ) {
 				target.emit( 'noChanges' );
-				return null;
 			}
-			return ve.createDeferred().reject( code, response ).promise();
+			return data.diff;
 		} );
 		this.wikitextDiffPromise
 			.done( this.emit.bind( this, 'showChanges' ) )
