@@ -223,7 +223,6 @@
 	"visualeditor-loaderror-title": "সম্পাদক লোড করা যায়নি",
 	"visualeditor-loadwarning": "সার্ভার থেকে ডাটা লোডে ত্রুটি: $1। আপনি কি পুনরায় চেষ্টা করতে ইচ্ছুক?",
 	"visualeditor-loadwarning-noconnect": "সার্ভারের সাথে সংযোগ করা যায় নি",
-	"visualeditor-loadwarning-token": "সার্ভার থেকে সম্পাদন টোকেন লোডে ত্রুটি: $1। আপনি পুনরায় চেষ্টা করতে ইচ্ছুক?",
 	"visualeditor-magiclinknodeinspector-convert-link": "সরল লিঙ্কে রুপান্তর করুন",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN লিঙ্ক",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID লিঙ্ক",

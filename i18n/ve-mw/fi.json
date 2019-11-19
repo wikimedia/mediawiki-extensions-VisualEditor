@@ -227,7 +227,6 @@
 	"visualeditor-loaderror-title": "Muokkainta ei voitu ladata",
 	"visualeditor-loadwarning": "Virhe ladattaessa tietoja palvelimelta: $1. Haluatko yrittää uudelleen?",
 	"visualeditor-loadwarning-noconnect": "Ei voitu yhdistää palvelimeen",
-	"visualeditor-loadwarning-token": "Virhe ladattaessa tietoja palvelimelta: $1. Haluatko yrittää uudelleen?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Muunna yksinkertaiseksi linkiksi",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-linkki",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-linkki",

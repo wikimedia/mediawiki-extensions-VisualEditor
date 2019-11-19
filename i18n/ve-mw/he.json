@@ -234,7 +234,6 @@
 	"visualeditor-loaderror-title": "לא היה אפשר לטעון את העורך",
 	"visualeditor-loadwarning": "שגיאה בטעינת מידע מהשרת: $1. האם לנסות שוב?",
 	"visualeditor-loadwarning-noconnect": "לא ניתן היה להתחבר לשרת",
-	"visualeditor-loadwarning-token": "שגיאה בטעינת אסימון עריכה מהשרת: $1. לנסות שוב?",
 	"visualeditor-magiclinknodeinspector-convert-link": "המרה לקישור פשוט",
 	"visualeditor-magiclinknodeinspector-title-isbn": "קישור ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "קישור PMID",

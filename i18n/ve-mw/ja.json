@@ -247,7 +247,6 @@
 	"visualeditor-loaderror-title": "エディターが読み込めませんでした",
 	"visualeditor-loadwarning": "サーバーからデータを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-loadwarning-noconnect": "サーバーに接続できませんでした",
-	"visualeditor-loadwarning-token": "サーバーから編集トークンを読み込む際にエラーが発生しました: $1。再試行しますか?",
 	"visualeditor-magiclinknodeinspector-convert-link": "シンプルなリンクに変換",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN リンク",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID リンク",

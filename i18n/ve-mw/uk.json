@@ -243,7 +243,6 @@
 	"visualeditor-loaderror-title": "Редактор не зміг завантажитись",
 	"visualeditor-loadwarning": "Помилка при завантаженні даних із сервера: $1. Спробувати знову?",
 	"visualeditor-loadwarning-noconnect": "Не вдалося з'єднатися із сервером",
-	"visualeditor-loadwarning-token": "Помилка при завантаженні маркера редагування із сервера: $1. Спробувати знову?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Перетворити в просте посилання",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN посилання",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID посилання",

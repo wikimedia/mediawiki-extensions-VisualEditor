@@ -238,7 +238,6 @@
 	"visualeditor-loaderror-title": "Tidak dapat memuat penyunting",
 	"visualeditor-loadwarning": "Galat memuat data dari peladen: $1. Apakah Anda ingin mencoba lagi?",
 	"visualeditor-loadwarning-noconnect": "Tidak dapat terhubung ke peladen",
-	"visualeditor-loadwarning-token": "Galat memuat token suntingan dari peladen: $1. Apakah Anda ingin mencoba lagi?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Ubah menjadi pranala sederhana",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Pranala ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Pranala PMID",

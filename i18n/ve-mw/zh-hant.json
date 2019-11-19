@@ -250,7 +250,6 @@
 	"visualeditor-loaderror-title": "無法載入編輯器",
 	"visualeditor-loadwarning": "讀取伺服器資料發生錯誤：$1，您是否要重試？",
 	"visualeditor-loadwarning-noconnect": "無法連線至伺服器",
-	"visualeditor-loadwarning-token": "讀取伺服器編輯 Token 發生錯誤：$1，您是否要重試？",
 	"visualeditor-magiclinknodeinspector-convert-link": "轉換為簡易連結",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN 連結",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID 連結",

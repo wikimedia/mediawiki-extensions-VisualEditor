@@ -212,7 +212,6 @@
 	"visualeditor-loaderror-title": "Den Editeur konnt net geluede ginn",
 	"visualeditor-loadwarning": "Feeler beim Luede vun Date vum Server: $1. Wëllt Dir nach eng Kéier probéieren?",
 	"visualeditor-loadwarning-noconnect": "Konnt net mam Server verbannen",
-	"visualeditor-loadwarning-token": "Feeler beim Luede vum Ännerungstoke vum Server: $1. Wëllt Dir nach eng Kéier probéieren?",
 	"visualeditor-magiclinknodeinspector-convert-link": "An en einfache Link ëmwandelen",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-Link",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-Link",

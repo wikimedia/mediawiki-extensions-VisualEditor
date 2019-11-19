@@ -226,7 +226,6 @@
 	"visualeditor-loaderror-title": "Уредникот не може да се вчита",
 	"visualeditor-loadwarning": "Грешка при вчитување на податоците од опслужувачот: $1. Дали сакате да пробате одново?",
 	"visualeditor-loadwarning-noconnect": "Не можам да се поврзам со опслужувачот",
-	"visualeditor-loadwarning-token": "Грешка при вчитувањето на шифрата на уредувањето од опслужувачот: $1. Дали би сакале да пробате пак?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Претвори во проста врска",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-врска",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-врска",

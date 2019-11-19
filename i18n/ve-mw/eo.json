@@ -230,7 +230,6 @@
 	"visualeditor-loaderror-title": "La redaktilo ne ŝargiĝis",
 	"visualeditor-loadwarning": "Eraro dum ŝargado de dateno el servilo: $1. Ĉu reprovi?",
 	"visualeditor-loadwarning-noconnect": "Ne povas atingi la servilon",
-	"visualeditor-loadwarning-token": "Eraro dum ŝargado de redakta ĵetono el servilo: $1. Ĉu reprovi?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Igi al simpla ligo",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Ligo por ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Ligo por PMID",

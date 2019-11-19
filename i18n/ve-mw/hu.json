@@ -221,7 +221,6 @@
 	"visualeditor-loaderror-title": "A szerkesztő betöltése sikertelen",
 	"visualeditor-loadwarning": "Hiba a kiszolgálóról való letöltés közben: $1. Megpróbálod újra?",
 	"visualeditor-loadwarning-noconnect": "Nem sikerült csatlakozni a szerverhez",
-	"visualeditor-loadwarning-token": "Hiba a kiszolgálóról való szerkesztőtoken-letöltés közben: $1. Megpróbálod újra?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Átalakítás egyszerű hivatkozássá",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-link",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-link",

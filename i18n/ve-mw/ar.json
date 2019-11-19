@@ -247,7 +247,6 @@
 	"visualeditor-loaderror-title": "لم يتمكن المحرر من التحميل",
 	"visualeditor-loadwarning": "خطأ في تحميل البيانات من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
 	"visualeditor-loadwarning-noconnect": "لم يمكن الاتصال بالخادم",
-	"visualeditor-loadwarning-token": "خطأ في تحميل تصريح التعديل من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
 	"visualeditor-magiclinknodeinspector-convert-link": "تحويل إلى وصلة بسيطة",
 	"visualeditor-magiclinknodeinspector-title-isbn": "وصلة ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "وصلة PMID",

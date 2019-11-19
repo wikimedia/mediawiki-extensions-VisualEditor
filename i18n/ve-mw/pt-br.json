@@ -247,7 +247,6 @@
 	"visualeditor-loaderror-title": "O editor não pode ser carregado",
 	"visualeditor-loadwarning": "Erro ao carregar dados do servidor: $1. Gostaria de tentar novamente?",
 	"visualeditor-loadwarning-noconnect": "Não pôde conectar-se ao servidor",
-	"visualeditor-loadwarning-token": "Erro ao carregar dados de edição do servidor: $1. Você gostaria de tentar novamente?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Converter para ligação simples",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Ligação de ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Ligação de PMID",

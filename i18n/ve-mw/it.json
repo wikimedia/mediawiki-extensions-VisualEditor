@@ -247,7 +247,6 @@
 	"visualeditor-loaderror-title": "L'editor non è riuscito a caricarsi",
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
 	"visualeditor-loadwarning-noconnect": "Impossibile connettersi al server",
-	"visualeditor-loadwarning-token": "Errore durante il caricamento del token di modifica dal server: $1. Riprovare?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Converti in collegamento semplice",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Collegamento ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Collegamento PMID",

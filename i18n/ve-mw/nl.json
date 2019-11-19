@@ -257,7 +257,6 @@
 	"visualeditor-loaderror-title": "De tekstverwerker kon niet worden geladen",
 	"visualeditor-loadwarning": "Fout tijdens het laden van gegevens van de server: $1. Wilt u het opnieuw proberen?",
 	"visualeditor-loadwarning-noconnect": "Er kon geen verbinding gemaakt worden met de server",
-	"visualeditor-loadwarning-token": "Fout tijdens het laden van een token van server: $1. Wilt u het opnieuw proberen?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Omzetten naar eenvoudige koppeling",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-koppeling",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-koppeling",

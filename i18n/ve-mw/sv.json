@@ -240,7 +240,6 @@
 	"visualeditor-loaderror-title": "Redigeraren kunde inte starta",
 	"visualeditor-loadwarning": "Fel uppstod vid inläsning av data från server: $1. Vill du försöka igen?",
 	"visualeditor-loadwarning-noconnect": "Kunde inte ansluta till servern",
-	"visualeditor-loadwarning-token": "Fel uppstod vid laddning av redigeringsnyckel från server: $1. Vill du försöka igen?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Konvertera till enkel länk",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-länk",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-länk",

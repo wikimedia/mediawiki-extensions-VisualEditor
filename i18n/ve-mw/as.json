@@ -180,7 +180,6 @@
 	"visualeditor-loaderror-title": "সম্পাদক সমৰ্থিত কৰিব পৰা হোৱা নাই",
 	"visualeditor-loadwarning": "ছাৰ্ভাৰৰ পৰা তথ্য ল'ড হওঁতে ত্ৰুটি হৈছে: $1। আপুনি আকৌ চেষ্টা কৰিবলৈ বিচাৰেনে?",
 	"visualeditor-loadwarning-noconnect": "চাৰ্ভাৰৰ লগত সংযোগ স্থাপন নহ'ল",
-	"visualeditor-loadwarning-token": "ছাৰ্ভাৰৰ পৰা সম্পাদনা ট'কেন ল'ড হওঁতে ত্ৰুটি হৈছে: $1। আপুনি আকৌ চেষ্টা কৰিবলৈ বিচাৰেনে?",
 	"visualeditor-magiclinknodeinspector-convert-link": "সৰল সংযোগলৈ সলনি কৰক",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN সংযোগ",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID সংযোগ",

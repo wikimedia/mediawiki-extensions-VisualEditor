@@ -273,7 +273,6 @@
 	"visualeditor-loaderror-title": "Impossible de charger l’éditeur",
 	"visualeditor-loadwarning": "Erreur lors du chargement des données du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-loadwarning-noconnect": "Impossible de se connecter au serveur",
-	"visualeditor-loadwarning-token": "Erreur lors du chargement du jeton d’édition du serveur : $1. Voulez-vous réessayer ?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertir en lien simple",
 	"visualeditor-magiclinknodeinspector-title-isbn": "lien ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "lien PMID",

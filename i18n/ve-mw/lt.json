@@ -220,7 +220,6 @@
 	"visualeditor-loaderror-title": "Nepavyko įkelti redaktoriaus",
 	"visualeditor-loadwarning": "Klaida, įkeliant duomenis iš serverio: $1. Norėtumėte pabandyti dar kartą?",
 	"visualeditor-loadwarning-noconnect": "Nepavyko prisijungti prie serverio",
-	"visualeditor-loadwarning-token": "Klaida iš serverio įkeliant redagavimo raktą: $1. Ar norėtumėte pabandyti dar kartą?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Konvertuoti į paprastą nuorodą",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN nuoroda",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID nuoroda",

@@ -270,7 +270,6 @@
 	"visualeditor-loaderror-title": "Редактор не может загрузиться",
 	"visualeditor-loadwarning": "Ошибка при загрузке данных: $1. Попробовать снова?",
 	"visualeditor-loadwarning-noconnect": "Не удалось подключиться к серверу",
-	"visualeditor-loadwarning-token": "Ошибка при загрузке токена для редактирования с сервера: $1. Попробовать снова?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Превратить в простую ссылку",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-ссылка",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-ссылка",

@@ -212,7 +212,6 @@
 	"visualeditor-loaderror-title": "Мөхәррир йөкләнмәй",
 	"visualeditor-loadwarning": "Мәғлүмәт алыу ваҡытында хата: $1. Ҡабаттан ҡарарға теләйһегеҙме?",
 	"visualeditor-loadwarning-noconnect": "Сервер менән бәйләнеш булдырып булманы",
-	"visualeditor-loadwarning-token": "Серверҙан токенды тейәү хатаһы: $1. Ҡабатлап ҡарарғамы?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Ябай һылтанмаға алмаштыр",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN һылтама",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID һылтама",

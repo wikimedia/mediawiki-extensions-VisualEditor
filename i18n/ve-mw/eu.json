@@ -211,7 +211,6 @@
 	"visualeditor-loaderror-title": "Editoreak ezin izan du kargatu",
 	"visualeditor-loadwarning": "Errorea, zerbitzaritik datuak kargatzean: $1. Berriz saiatu nahi duzu?",
 	"visualeditor-loadwarning-noconnect": "Ezin izan da zerbitzarira konektatu",
-	"visualeditor-loadwarning-token": "Errorea, zerbitzaritik edizio agiria kargatzean: $1. Berriz saiatu nahi duzu?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Bihurtu lotura arruntean",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN lotura",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID lotura",

@@ -202,7 +202,6 @@
 	"visualeditor-loaderror-title": "Editor tidak dapat dimuatkan",
 	"visualeditor-loadwarning": "Ralat ketika memuatkan data dari pelayan: $1. Adakah anda ingin mencuba lagi?",
 	"visualeditor-loadwarning-noconnect": "Tidak dapat bersambung dengan pelayan",
-	"visualeditor-loadwarning-token": "Ralat ketika memuatkan token suntingan dari pelayan: $1. Adakah anda ingin mencuba lagi?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Tukarkan kepada pautan ringkas",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Pautan ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Pautan PMID",

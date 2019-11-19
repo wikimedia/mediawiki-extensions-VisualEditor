@@ -216,7 +216,6 @@
 	"visualeditor-loaderror-title": "തിരുത്തൽ സൗകര്യം എടുക്കാനായില്ല",
 	"visualeditor-loadwarning": "സെർവറിൽ നിന്നും വിവരങ്ങൾ ശേഖരിക്കുന്നതിൽ പിഴവുണ്ടായി: $1. വീണ്ടും ശ്രമിക്കണോ?",
 	"visualeditor-loadwarning-noconnect": "സെർവറുമായി ബന്ധപ്പെടാൻ സാധിച്ചില്ല.",
-	"visualeditor-loadwarning-token": "സെർവറിൽ നിന്നും തിരുത്തൽ ചീട്ട് സംഘടിപ്പിക്കാൻ കഴിഞ്ഞില്ല: $1. വീണ്ടും ശ്രമിക്കട്ടെ?",
 	"visualeditor-magiclinknodeinspector-convert-link": "വെറും കണ്ണിയിലേക്ക് രൂപപരിണാമം വരുത്തുക",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ഐ.എസ്‍.ബി.എൻ. കണ്ണി",
 	"visualeditor-magiclinknodeinspector-title-pmid": "പി.എം.ഐ.ഡി. കണ്ണി",

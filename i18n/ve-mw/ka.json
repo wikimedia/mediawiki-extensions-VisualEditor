@@ -212,7 +212,6 @@
 	"visualeditor-loaderror-message": "შეცდომა სერვერიდან მონაცემების ჩატვირთვისას: $1.",
 	"visualeditor-loaderror-title": "რედაქტორის ჩატვირთვა ვერ ხერხდება",
 	"visualeditor-loadwarning": "სერვერიდან ინფორმაცია არ ჩაიტვირთა: $1. გსურთ სცადოთ თავიდან?",
-	"visualeditor-loadwarning-token": "შეცდომა სერვერიდან რედაქტირებისთვის ჟეტონის ჩატვირთვისას: $1. თავიდან ვცადოთ?",
 	"visualeditor-magiclinknodeinspector-convert-link": "კონვერტაცია მარტივ ბმულზე",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN ბმული",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID ბმული",

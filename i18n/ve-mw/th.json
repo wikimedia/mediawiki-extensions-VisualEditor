@@ -161,7 +161,6 @@
 	"visualeditor-languages-tool": "ภาษา",
 	"visualeditor-loaderror-title": "ไม่สามารถโหลดตัวแก้ไขได้",
 	"visualeditor-loadwarning": "การโหลดข้อมูลจากเซิร์ฟเวอร์ข้อผิดพลาด:  $1  คุณต้องการลองอีกครั้งหรือไม่",
-	"visualeditor-loadwarning-token": "มีความผิดพลาดการโหลดโทเค็นแก้ไขจากเซิร์ฟเวอร์: $1  คุณต้องการลองอีกครั้งหรือไม่ ?",
 	"visualeditor-mainnamespacepagelink": "Project:Main namespace",
 	"visualeditor-media-input-placeholder": "ค้นหาสื่อ",
 	"visualeditor-meta-tool": "ตัวเลือก",

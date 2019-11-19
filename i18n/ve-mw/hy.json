@@ -230,7 +230,6 @@
 	"visualeditor-loaderror-title": "Խմբագրիչը չի բացվում",
 	"visualeditor-loadwarning": "Խնդիր $1 սերվերից տեղեկություն բեռնելու ժամանակ: Ցանկանո՞մ եք կրկին փորձել:",
 	"visualeditor-loadwarning-noconnect": "Հնարավոր չէ միանալ սերվերին",
-	"visualeditor-loadwarning-token": "Խնդիր $1 սերվերից խմբագրում բացելու ժամանակ: Ցանկանո՞մ եք կրկին փորձել:",
 	"visualeditor-magiclinknodeinspector-convert-link": "Փոխարկել պարզ հղման",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN հղում",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID հղում",

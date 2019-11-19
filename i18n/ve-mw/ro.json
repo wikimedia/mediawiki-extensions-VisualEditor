@@ -209,7 +209,6 @@
 	"visualeditor-loaderror-message": "Eroare la încărcarea datelor de pe server: $1.",
 	"visualeditor-loaderror-title": "Editorul nu poate fi încărcat",
 	"visualeditor-loadwarning": "Eroare la încărcarea datelor de pe server: $1. Doriți să reîncercați?",
-	"visualeditor-loadwarning-token": "Eroare la încărcarea de pe server a jetonului modificării: $1. Doriți să reîncercați?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertește în legătură simplă",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Legătură ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Legătură PMID",

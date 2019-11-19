@@ -224,7 +224,6 @@
 	"visualeditor-loaderror-title": "Nije moguće učitati uređivač.",
 	"visualeditor-loadwarning": "Greška pri učitavanju podataka sa servera: $1. Želite li da pokušate ponovo?",
 	"visualeditor-loadwarning-noconnect": "Nije moguće povezati se sa serverom",
-	"visualeditor-loadwarning-token": "Greška pri učitavanju tokena sa servera: $1. Želite li da pokušate ponovo?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Konvertuj u jednostavnu vezu",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN veza",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID veza",

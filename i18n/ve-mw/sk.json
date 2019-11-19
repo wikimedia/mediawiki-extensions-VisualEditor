@@ -192,7 +192,6 @@
 	"visualeditor-linknodeinspector-add-label": "Pridať popis",
 	"visualeditor-linknodeinspector-title": "Jednoduchý odkaz",
 	"visualeditor-loadwarning": "Chyba pri načítavaní údajov zo servera: $1. Želáte si operáciu zopakovať?",
-	"visualeditor-loadwarning-token": "Chyba pri načítavaní editačného tokenu zo servera: $1. Želáte si operáciu zopakovať?",
 	"visualeditor-mainnamespacepagelink": "Project:Hlavný menný priestor",
 	"visualeditor-media-input-placeholder": "Hľadať obrázky (zvuky, videá)",
 	"visualeditor-media-title-audio": "Zvuk",

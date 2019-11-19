@@ -225,7 +225,6 @@
 	"visualeditor-loaderror-title": "L'editor nun pudo cargase",
 	"visualeditor-loadwarning": "Error al cargar los datos dende'l sirvidor: $1. ¿Quies volver a intentalo?",
 	"visualeditor-loadwarning-noconnect": "Nun se pudo coneutar col sirvidor",
-	"visualeditor-loadwarning-token": "Error al cargar el pase dende'l sirvidor: $1. ¿Quier volver a intentalo?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertir a enllaz simple",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Enllaz ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Enllaz PMID",

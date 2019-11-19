@@ -211,7 +211,6 @@
 	"visualeditor-loaderror-message": "Tõrge andmete laadimisel serverist: $1.",
 	"visualeditor-loaderror-title": "Toimetit ei õnnestunud laadida",
 	"visualeditor-loadwarning": "Tõrge andmete laadimisel serverist: $1. Ehk proovid uuesti?",
-	"visualeditor-loadwarning-token": "Serverist redigeerimisloa laadimisel esines tõrge: $1. Kas tahad uuesti proovida?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Teisenda lihtlingiks",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-link",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-link",

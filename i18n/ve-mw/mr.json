@@ -209,7 +209,6 @@
 	"visualeditor-loaderror-title": "संपादक भारीत झाला नाही",
 	"visualeditor-loadwarning": "विदादाता (सर्व्हर) कडून विदा (डाटा) चढवण्यात त्रुटी: $1. आपण पुन्हा प्रयत्न करू इच्छिता ?",
 	"visualeditor-loadwarning-noconnect": "विदागाराशी अनुबंध करु शकलो नाही",
-	"visualeditor-loadwarning-token": "विदादाता (सर्व्हर) कडून संपादन टोकन: $1 चढविण्यात  त्रुटी आलेली आहे.काय आपण पुन्हा प्रयत्न करू इच्छिता?",
 	"visualeditor-magiclinknodeinspector-convert-link": "साध्या दुव्यामध्ये रुपांतरीत करा.",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN दुवा",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID दुवा",

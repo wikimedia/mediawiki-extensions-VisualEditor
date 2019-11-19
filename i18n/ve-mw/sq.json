@@ -232,7 +232,6 @@
 	"visualeditor-loaderror-title": "S’u ngarkua dot përpunuesi",
 	"visualeditor-loadwarning": "Gabim gjatë ngarkimi të dhënash prej shërbyesi: $1. Doni të riprovohet?",
 	"visualeditor-loadwarning-noconnect": "S’u lidh dot me shërbyesin",
-	"visualeditor-loadwarning-token": "Gabim gjatë ngarkimi të token-i përpunimesh prej shërbyesi: $1. Doni të riprovohet?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Shndërroje në lidhje të thjeshtë",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Lidhje ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Lidhje PMID",

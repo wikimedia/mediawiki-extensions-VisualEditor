@@ -249,7 +249,6 @@
 	"visualeditor-loaderror-title": "Edytor nie może zostać uruchomiony",
 	"visualeditor-loadwarning": "Błąd podczas ładowania danych z serwera: $1. Ponowić próbę?",
 	"visualeditor-loadwarning-noconnect": "Nie można połączyć się z serwerem",
-	"visualeditor-loadwarning-token": "Błąd podczas pobierania tokenu z serwera: $1. Ponowić próbę?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Przekształć na prosty odnośnik",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Odnośnik ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Odnośnik PMID",

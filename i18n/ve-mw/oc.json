@@ -181,7 +181,6 @@
 	"visualeditor-loaderror-message": "Error al moment del cargament de las donadas dempuèi lo servidor : $1.",
 	"visualeditor-loaderror-title": "L'editor a pas pogut cargar",
 	"visualeditor-loadwarning": "Error de cargament de donadas del servidor $1. Tornar ensajar?",
-	"visualeditor-loadwarning-token": "Error d'edicion del jeton d'edicion del servidor$1. Tornar ensajar?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertir en ligam simple",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ligam ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "ligam PMID",

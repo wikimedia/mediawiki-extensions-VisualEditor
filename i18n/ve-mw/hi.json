@@ -217,7 +217,6 @@
 	"visualeditor-loaderror-title": "संपादक लोड नहीं हुआ",
 	"visualeditor-loadwarning": "सर्वर से डाटा लोड करने में त्रुटि: $1। क्या आप पुनः प्रयास करना चाहेंगे?",
 	"visualeditor-loadwarning-noconnect": "सर्वर से संपर्क स्थापित नही हो सका",
-	"visualeditor-loadwarning-token": "सर्वर से सम्पादन टोकन पाने में त्रुटि: $1। क्या आप पुनः प्रयास करना चाहेंगे?",
 	"visualeditor-magiclinknodeinspector-convert-link": "आम कड़ी में बदलें",
 	"visualeditor-magiclinknodeinspector-title-isbn": "आईएसबीएन कड़ी",
 	"visualeditor-magiclinknodeinspector-title-pmid": "पीएमआईडी कड़ी",

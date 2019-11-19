@@ -185,7 +185,6 @@
 	"visualeditor-loaderror-title": "編輯器載入唔到",
 	"visualeditor-loadwarning": "由伺服器攞數據期間出錯：$1。你想唔想再試過？",
 	"visualeditor-loadwarning-noconnect": "連唔到去伺服器",
-	"visualeditor-loadwarning-token": "由伺服器攞編輯幣期間出錯：$1。你想唔想再試過？",
 	"visualeditor-magiclinknodeinspector-convert-link": "轉做簡單連結",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN 連結",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID連結",

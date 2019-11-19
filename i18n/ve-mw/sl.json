@@ -195,7 +195,6 @@
 	"visualeditor-loaderror-message": "Napaka pri nalaganju s strežnika: $1",
 	"visualeditor-loaderror-title": "Urejevalnik se ne more naložiti",
 	"visualeditor-loadwarning": "Napaka pri prenašanju podatkov s strežnika: $1. Želite poskusiti ponovno?",
-	"visualeditor-loadwarning-token": "Napaka pri prenašanju urejevalnega žetona s strežnika: $1. Želite poskusiti ponovno?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Pretvori v preprosto povezavo",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Povezava ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Povezava PMID",

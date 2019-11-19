@@ -190,7 +190,6 @@
 	"visualeditor-loaderror-message": "خطا هنگام بارکردن داده از کارگزار: $1",
 	"visualeditor-loaderror-title": "ویرایشگر بار نشد",
 	"visualeditor-loadwarning": "خطای بارگیری داده‌ها از کارساز:  $1. دوباره تلاش می‌کنید؟",
-	"visualeditor-loadwarning-token": "خطای بارگیری بهامهر ویرایش از کارساز:  $1. دوباره تلاش می‌کنید؟",
 	"visualeditor-magiclinknodeinspector-convert-link": "تبدیل به پیوند ساده",
 	"visualeditor-magiclinknodeinspector-title-isbn": "پیوند ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "پیوند PMID",

@@ -149,7 +149,6 @@
 	"visualeditor-linkinspector-educationpopup-title": "Lenkjer",
 	"visualeditor-linkinspector-illegal-title": "Ugild sidetittel",
 	"visualeditor-loadwarning": "Det oppstod ein feil under datalasting frå tenaren: $1. Vil du freista på nytt?",
-	"visualeditor-loadwarning-token": "Det oppstod ein feil under lasting av endringsteikn frå tenaren: $1. Vil du freista på nytt?",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-lenkje",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-lenkje",
 	"visualeditor-magiclinknodeinspector-title-rfc": "RFC-lenkje",

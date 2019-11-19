@@ -233,7 +233,6 @@
 	"visualeditor-loaderror-title": "Không thể tải trình soạn thảo",
 	"visualeditor-loadwarning": "Lỗi tải dữ liệu từ máy chủ: $1. Bạn có muốn thử lại không?",
 	"visualeditor-loadwarning-noconnect": "Không thể kết nối với máy chủ",
-	"visualeditor-loadwarning-token": "Lỗi tải dấu hiệu sửa đổi từ máy chủ: $1. Bạn có muốn thử lại không?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Đổi thành liên kết đơn giản",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Liên kết ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Liên kết PMID",

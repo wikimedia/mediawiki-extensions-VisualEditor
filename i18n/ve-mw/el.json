@@ -223,7 +223,6 @@
 	"visualeditor-loaderror-title": "Ο επεξεργαστής δεν μπόρεσε να φορτωθεί",
 	"visualeditor-loadwarning": "Σφάλμα κατά τη φόρτωση των δεδομένων από τον διακομιστή: $1. Θέλετε να προσπαθήσετε πάλι;",
 	"visualeditor-loadwarning-noconnect": "Δεν ήταν δυνατή η σύνδεση στο διακομιστή",
-	"visualeditor-loadwarning-token": "Σφάλμα κατά τη φόρτωση των δεδομένων από το διακομιστή: $1. Θέλετε να προσπαθήσετε πάλι;",
 	"visualeditor-magiclinknodeinspector-convert-link": "Μετατροπή σε απλό σύνδεσμο",
 	"visualeditor-magiclinknodeinspector-title-isbn": "σύνδεσμος ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "σύνδεσμος PMID",

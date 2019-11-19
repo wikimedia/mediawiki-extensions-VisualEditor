@@ -196,7 +196,6 @@
 	"visualeditor-loaderror-title": "Redaktoru nevarēja ielādēt",
 	"visualeditor-loadwarning": "Kļūda datu ielādē no servera: $1. Vai vēlaties mēģināt vēlreiz?",
 	"visualeditor-loadwarning-noconnect": "Nevarēja izveidot savienojumu ar serveri",
-	"visualeditor-loadwarning-token": "Kļūda labošanas iezīmes ielādē no servera: $1. Vai vēlaties mēģināt vēlreiz?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Pārvērst par vienkāršu saiti",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN saite",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID saite",

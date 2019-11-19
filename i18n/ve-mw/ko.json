@@ -244,7 +244,6 @@
 	"visualeditor-loaderror-title": "편집기를 불러올 수 없음",
 	"visualeditor-loadwarning": "서버에서 데이터를 불러오는 중 오류가 났습니다: $1 다시 시도하겠습니까?",
 	"visualeditor-loadwarning-noconnect": "서버에 연결할 수 없습니다",
-	"visualeditor-loadwarning-token": "서버에서 편집 토큰을 불러오는 중 오류가 났습니다: $1. 다시 시도하겠습니까?",
 	"visualeditor-magiclinknodeinspector-convert-link": "단순 링크로 변환",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN 링크",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID 링크",

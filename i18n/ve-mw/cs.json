@@ -247,7 +247,6 @@
 	"visualeditor-loaderror-title": "Editor se nepodařilo načíst",
 	"visualeditor-loadwarning": "Chyba při načítání dat ze serveru: $1. Chcete operaci opakovat?",
 	"visualeditor-loadwarning-noconnect": "Nepodařilo se připojit k serveru",
-	"visualeditor-loadwarning-token": "Chyba načítání editačního tokenu ze serveru: $1. Chcete to zkusit znovu?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Převést na jednoduchý odkaz",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN odkaz",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID odkaz",

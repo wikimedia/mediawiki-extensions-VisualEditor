@@ -250,7 +250,6 @@
 	"visualeditor-loaderror-title": "编辑器无法加载",
 	"visualeditor-loadwarning": "从服务器加载数据时出错：$1。想要重试吗？",
 	"visualeditor-loadwarning-noconnect": "无法连接到服务器",
-	"visualeditor-loadwarning-token": "从服务器加载编辑密钥时出错：$1。想要重试吗？",
 	"visualeditor-magiclinknodeinspector-convert-link": "转换为简易链接",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN链接",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID连接",
