@@ -183,7 +183,7 @@
 	"visualeditor-linknodeinspector-title": "איינפאכער לינק",
 	"visualeditor-loaderror-message": "פֿעלער ביים אָנלאָדן דאַטן פֿון סערווער: $1.",
 	"visualeditor-loadwarning": "פֿעלער ביים אָנלאָדן דאַטן פון סערווער: $1. צי ווילט איר פּרובירן נאָכאַמאָל?",
-	"visualeditor-loadwarning-noconnect": "נישט מעגלעך צו פארבינדן מיטן סארווער",
+	"visualeditor-error-noconnect": "נישט מעגלעך צו פארבינדן מיטן סארווער",
 	"visualeditor-magiclinknodeinspector-convert-link": "קאנווערטירן צו איינפֿאכן לינק",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN לינק",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID לינק",

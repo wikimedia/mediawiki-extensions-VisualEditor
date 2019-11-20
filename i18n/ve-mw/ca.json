@@ -221,7 +221,6 @@
 	"visualeditor-linknodeinspector-add-label": "Afegeix una etiqueta",
 	"visualeditor-linknodeinspector-title": "Enllaç senzill",
 	"visualeditor-loaderror-message": "Error de càrrega de dades del servidor: $1",
-	"visualeditor-loaderror-title": "L'editor no s'ha pogut carregar",
 	"visualeditor-loadwarning": "Error en carregar dades des del servidor: $1. Voleu tornar-ho a provar?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertir a enllaç simple",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Enllaç ISBN",

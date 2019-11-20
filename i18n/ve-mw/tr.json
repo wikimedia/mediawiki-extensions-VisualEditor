@@ -202,7 +202,6 @@
 	"visualeditor-linknodeinspector-add-label": "Etiket ekle",
 	"visualeditor-linknodeinspector-title": "Basit bağlantı",
 	"visualeditor-loaderror-message": "$1 Sunucusundan veri yüklenirken hata oluştu.",
-	"visualeditor-loaderror-title": "Editör yüklenemedi",
 	"visualeditor-loadwarning": "Sunucudan veri yüklenirken hata: $1. Yeniden denemek ister misiniz?",
 	"visualeditor-mainnamespacepagelink": "Project:Ana ad alanı",
 	"visualeditor-media-input-placeholder": "Dosya ara",

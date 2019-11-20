@@ -188,7 +188,6 @@
 	"visualeditor-linknodeinspector-add-label": "Bæta við merki",
 	"visualeditor-linknodeinspector-title": "Einfaldur tengill",
 	"visualeditor-loaderror-message": "Villa við að hlaða gögnum frá vefþjóni: $1.",
-	"visualeditor-loaderror-title": "Ekki var hægt að hlaða ritlinum",
 	"visualeditor-loadwarning": "Villa við hleðslu gagna frá vefþjóni: $1. Viltu reyna aftur?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Breyta í einfaldan tengil",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN tengill",

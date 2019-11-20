@@ -207,7 +207,6 @@
 	"visualeditor-linknodeinspector-add-label": "Adăugare etichetă",
 	"visualeditor-linknodeinspector-title": "Legătură simplă",
 	"visualeditor-loaderror-message": "Eroare la încărcarea datelor de pe server: $1.",
-	"visualeditor-loaderror-title": "Editorul nu poate fi încărcat",
 	"visualeditor-loadwarning": "Eroare la încărcarea datelor de pe server: $1. Doriți să reîncercați?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertește în legătură simplă",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Legătură ISBN",

@@ -209,7 +209,6 @@
 	"visualeditor-linknodeinspector-add-label": "Lisa silt",
 	"visualeditor-linknodeinspector-title": "Lihtlink",
 	"visualeditor-loaderror-message": "Tõrge andmete laadimisel serverist: $1.",
-	"visualeditor-loaderror-title": "Toimetit ei õnnestunud laadida",
 	"visualeditor-loadwarning": "Tõrge andmete laadimisel serverist: $1. Ehk proovid uuesti?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Teisenda lihtlingiks",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-link",

@@ -210,7 +210,6 @@
 	"visualeditor-linknodeinspector-add-label": "წარწერის დამატება",
 	"visualeditor-linknodeinspector-title": "მარტივი ბმული",
 	"visualeditor-loaderror-message": "შეცდომა სერვერიდან მონაცემების ჩატვირთვისას: $1.",
-	"visualeditor-loaderror-title": "რედაქტორის ჩატვირთვა ვერ ხერხდება",
 	"visualeditor-loadwarning": "სერვერიდან ინფორმაცია არ ჩაიტვირთა: $1. გსურთ სცადოთ თავიდან?",
 	"visualeditor-magiclinknodeinspector-convert-link": "კონვერტაცია მარტივ ბმულზე",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN ბმული",
