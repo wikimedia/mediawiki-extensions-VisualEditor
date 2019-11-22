@@ -246,6 +246,8 @@
 	"visualeditor-loaderror-message": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-loadwarning": "Errore durante il caricamento dei dati dal server: $1. Riprovare?",
 	"visualeditor-error-noconnect": "Impossibile connettersi al server",
+	"visualeditor-error-invalidresponse": "Risposta non valida dal server",
+	"visualeditor-error-invalidcontent": "Risposta non valida dal server",
 	"visualeditor-magiclinknodeinspector-convert-link": "Converti in collegamento semplice",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Collegamento ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Collegamento PMID",

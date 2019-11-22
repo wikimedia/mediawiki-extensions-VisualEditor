@@ -248,6 +248,8 @@
 	"visualeditor-loaderror-message": "Błąd podczas pobierania danych z serwera: $1.",
 	"visualeditor-loadwarning": "Błąd podczas ładowania danych z serwera: $1. Ponowić próbę?",
 	"visualeditor-error-noconnect": "Nie można połączyć się z serwerem",
+	"visualeditor-error-invalidresponse": "Nieprawidłowa odpowiedź serwera",
+	"visualeditor-error-invalidcontent": "Nieprawidłowa odpowiedź serwera",
 	"visualeditor-magiclinknodeinspector-convert-link": "Przekształć na prosty odnośnik",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Odnośnik ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Odnośnik PMID",

@@ -233,6 +233,8 @@
 	"visualeditor-loaderror-message": "שגיאה בטעינת נתונים מהשרת: $1.",
 	"visualeditor-loadwarning": "שגיאה בטעינת מידע מהשרת: $1. האם לנסות שוב?",
 	"visualeditor-error-noconnect": "לא ניתן היה להתחבר לשרת",
+	"visualeditor-error-invalidresponse": "תשובה בלתי־תקינה מהשרת",
+	"visualeditor-error-invalidcontent": "תשובה בלתי־תקינה מהשרת",
 	"visualeditor-magiclinknodeinspector-convert-link": "המרה לקישור פשוט",
 	"visualeditor-magiclinknodeinspector-title-isbn": "קישור ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "קישור PMID",

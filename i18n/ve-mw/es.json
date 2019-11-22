@@ -34,7 +34,8 @@
 			"MarcoAurelio",
 			"Adjen",
 			"Tiberius1701",
-			"Carlosmg.dg"
+			"Carlosmg.dg",
+			"Andru1013"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -253,6 +254,8 @@
 	"visualeditor-loaderror-message": "Error al cargar datos del servidor: $1.",
 	"visualeditor-loadwarning": "Error al cargar los datos del servidor: $1. ¿Le gustaría volver a intentarlo?",
 	"visualeditor-error-noconnect": "No se pudo conectar con el servidor",
+	"visualeditor-error-invalidresponse": "Respuesta de error del servidor",
+	"visualeditor-error-invalidcontent": "Respuesta de error del servidor",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertir en enlace simple",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Enlace ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Enlace PMID",

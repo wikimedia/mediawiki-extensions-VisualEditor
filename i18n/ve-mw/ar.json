@@ -246,6 +246,8 @@
 	"visualeditor-loaderror-message": "حدث خطأ في تحميل البيانات من الخادم: $1.",
 	"visualeditor-loadwarning": "خطأ في تحميل البيانات من الخادم:  $1. هل ترغب في إعادة المحاولة؟",
 	"visualeditor-error-noconnect": "لم يمكن الاتصال بالخادم",
+	"visualeditor-error-invalidresponse": "استجابة غير صالحة من الخادم",
+	"visualeditor-error-invalidcontent": "استجابة غير صالحة من الخادم",
 	"visualeditor-magiclinknodeinspector-convert-link": "تحويل إلى وصلة بسيطة",
 	"visualeditor-magiclinknodeinspector-title-isbn": "وصلة ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "وصلة PMID",

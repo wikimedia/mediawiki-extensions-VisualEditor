@@ -218,6 +218,8 @@
 	"visualeditor-loaderror-message": "Errore carecanne le date da 'u server: $1.",
 	"visualeditor-loadwarning": "Errore carecanne le date da 'u server: $1. Vuè ccu pruève arrete?",
 	"visualeditor-error-noconnect": "Non ge te puè collegà a 'u server",
+	"visualeditor-error-invalidresponse": "Resposte non valide da 'u server",
+	"visualeditor-error-invalidcontent": "Resposte non valide da 'u server",
 	"visualeditor-magiclinknodeinspector-convert-link": "Converte jndr'à 'nu collegamende semblice",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Collegamende ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Collegamende PMID",

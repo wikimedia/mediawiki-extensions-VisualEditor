@@ -233,6 +233,8 @@
 	"visualeditor-loaderror-message": "Feil ved lasting av data fra server: $1.",
 	"visualeditor-loadwarning": "Det oppsto en feil ved henting av data fra serveren: $1. Vil du prøve på nytt?",
 	"visualeditor-error-noconnect": "Kunne ikke koble til tjeneren",
+	"visualeditor-error-invalidresponse": "Ugyldig respons fra tjeneren",
+	"visualeditor-error-invalidcontent": "Ugyldig respons fra tjeneren",
 	"visualeditor-magiclinknodeinspector-convert-link": "Konverter til enkel lenke",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-lenke",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-lenke",

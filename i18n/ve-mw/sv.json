@@ -239,6 +239,8 @@
 	"visualeditor-loaderror-message": "Fel vid inläsning av data från servern: $1.",
 	"visualeditor-loadwarning": "Fel uppstod vid inläsning av data från server: $1. Vill du försöka igen?",
 	"visualeditor-error-noconnect": "Kunde inte ansluta till servern",
+	"visualeditor-error-invalidresponse": "Ogiltigt svar från servern",
+	"visualeditor-error-invalidcontent": "Ogiltigt svar från servern",
 	"visualeditor-magiclinknodeinspector-convert-link": "Konvertera till enkel länk",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-länk",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-länk",
