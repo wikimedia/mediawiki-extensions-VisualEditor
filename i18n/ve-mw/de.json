@@ -16,7 +16,8 @@
 			"Kurt Jansson",
 			"Saehrimnir",
 			"ToBeFree",
-			"Hwboehm"
+			"Hwboehm",
+			"Schmackes"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -232,6 +233,8 @@
 	"visualeditor-loaderror-message": "Fehler beim Laden der Daten vom Server: $1.",
 	"visualeditor-loadwarning": "Fehler beim Laden der Daten vom Server: $1. Soll der Vorgang erneut durchgeführt werden?",
 	"visualeditor-error-noconnect": "Es konnte keine Verbindung mit dem Server hergestellt werden",
+	"visualeditor-error-invalidresponse": "Ungültige Antwort vom Server",
+	"visualeditor-error-invalidcontent": "Ungültige Antwort vom Server",
 	"visualeditor-magiclinknodeinspector-convert-link": "In einen einfachen Link konvertieren",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN-Link",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID-Link",

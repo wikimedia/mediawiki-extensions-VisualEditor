@@ -10,5 +10,9 @@
 	"visualeditor-ca-createsource": "Kréyé wikikod-a",
 	"visualeditor-ca-editsource": "Modifyé wikikod-a",
 	"visualeditor-ca-editsource-section": "modifyé wikikod-a",
-	"visualeditor-descriptionpagelink": "Project:ÉditòVizwèl"
+	"visualeditor-descriptionpagelink": "Project:ÉditòVizwèl",
+	"visualeditor-dialog-meta-languages-label": "Lanng",
+	"visualeditor-dialog-meta-languages-section": "Lanng",
+	"visualeditor-languages-tool": "Lanng",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Lanng"
 }
