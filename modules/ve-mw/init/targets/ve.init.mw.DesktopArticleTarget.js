@@ -671,8 +671,6 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 	var errorInfo, confirmPromptMessage,
 		target = this;
 
-	this.activatingDeferred.reject();
-
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
@@ -722,6 +720,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 				// don't try to switch back to it fully, that'd discard changes.
 				target.tryTeardown( true );
 			} else {
+				target.activatingDeferred.reject();
 				// TODO: Some sort of progress bar?
 				target.wikitextFallbackLoading = true;
 				target.switchToWikitextEditor( false );
