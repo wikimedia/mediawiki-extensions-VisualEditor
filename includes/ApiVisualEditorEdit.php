@@ -357,21 +357,17 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		}
 		$diffRows = $result['compare']['*'];
 
-		if ( $diffRows !== '' ) {
-			$context = new DerivativeContext( $this->getContext() );
-			$context->setTitle( $title );
-			$engine = new DifferenceEngine( $context );
-			return [
-				'result' => 'success',
-				'diff' => $engine->addHeader(
-					$diffRows,
-					$context->msg( 'currentrev' )->parse(),
-					$context->msg( 'yourtext' )->parse()
-				)
-			];
-		} else {
-			return [ 'result' => 'nochanges' ];
-		}
+		$context = new DerivativeContext( $this->getContext() );
+		$context->setTitle( $title );
+		$engine = new DifferenceEngine( $context );
+		return [
+			'result' => 'success',
+			'diff' => $diffRows ? $engine->addHeader(
+				$diffRows,
+				$context->msg( 'currentrev' )->parse(),
+				$context->msg( 'yourtext' )->parse()
+			) : ''
+		];
 	}
 
 	/**
