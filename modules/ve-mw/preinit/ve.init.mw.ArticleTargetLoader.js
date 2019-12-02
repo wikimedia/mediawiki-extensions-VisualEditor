@@ -197,9 +197,11 @@
 		 * @param {string} pageName See #requestPageData
 		 * @param {Object} [options] See #requestPageData
 		 * @param {boolean} [noRestbase=false] Don't query RESTBase directly
+		 * @param {boolean} [noMetadata=false] Don't fetch document metadata when querying RESTBase. Metadata
+		 *  is not required for some use cases, e.g. diffing.
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestParsoidData: function ( pageName, options, noRestbase ) {
+		requestParsoidData: function ( pageName, options, noRestbase, noMetadata ) {
 			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data, abort,
 				section = options.section !== undefined ? options.section : null,
 				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
@@ -241,23 +243,29 @@
 				data.oldid = options.oldId;
 				apiXhr = new mw.Api().post( data );
 			} else {
-				apiXhr = new mw.Api().get( data );
-			}
-			apiPromise = apiXhr.then( function ( data, jqxhr ) {
-				ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
-				ve.track( 'mwtiming.performance.system.apiLoad', {
-					bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
-					duration: ve.now() - start,
-					cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-					targetName: options.targetName,
-					mode: 'visual'
-				} );
-				if ( data.visualeditor ) {
-					data.visualeditor.switched = switched;
-					data.visualeditor.fromEditedState = fromEditedState;
+				if ( noMetadata ) {
+					apiPromise = $.Deferred().resolve( { visualeditor: {} } ).promise();
+				} else {
+					apiXhr = new mw.Api().get( data );
 				}
-				return data;
-			} );
+			}
+			if ( !apiPromise ) {
+				apiPromise = apiXhr.then( function ( data, jqxhr ) {
+					ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
+					ve.track( 'mwtiming.performance.system.apiLoad', {
+						bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
+						duration: ve.now() - start,
+						cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
+						targetName: options.targetName,
+						mode: 'visual'
+					} );
+					if ( data.visualeditor ) {
+						data.visualeditor.switched = switched;
+						data.visualeditor.fromEditedState = fromEditedState;
+					}
+					return data;
+				} );
+			}
 
 			if ( useRestbase ) {
 				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );

@@ -65,7 +65,13 @@
 			cacheKey = revId + ( section !== null ? '/' + section : '' );
 
 			revCache[ cacheKey ] = revCache[ cacheKey ] ||
-				mw.libs.ve.targetLoader.requestParsoidData( pageName, { oldId: revId, targetName: 'diff' } ).then( function ( response ) {
+				mw.libs.ve.targetLoader.requestParsoidData(
+					pageName,
+					{ oldId: revId, targetName: 'diff' },
+					false,
+					// noMetadata, we only use `content` in getModelFromResponse
+					true
+				).then( function ( response ) {
 					return parseDocumentModulePromise.then( function () {
 						return mw.libs.ve.diffLoader.getModelFromResponse( response, section );
 					} );
