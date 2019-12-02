@@ -242,6 +242,8 @@
 	"visualeditor-loaderror-message": "Помилка при завантаженні даних із сервера: $1.",
 	"visualeditor-loadwarning": "Помилка при завантаженні даних із сервера: $1. Спробувати знову?",
 	"visualeditor-error-noconnect": "Не вдалося з'єднатися із сервером",
+	"visualeditor-error-invalidresponse": "Недійсна відповідь сервера",
+	"visualeditor-error-invalidcontent": "Недійсна відповідь сервера",
 	"visualeditor-magiclinknodeinspector-convert-link": "Перетворити в просте посилання",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN посилання",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID посилання",
