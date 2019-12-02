@@ -88,6 +88,18 @@ QUnit.test( 'Wikitext link inspector', function ( assert ) {
 				}
 			},
 			{
+				msg: 'Link insertion to file page',
+				name: 'wikitextLink',
+				range: new ve.Range( 26 ),
+				input: function () {
+					this.annotationInput.getTextInputWidget().setValue( 'File:foo.jpg' );
+				},
+				expectedRange: new ve.Range( 43 ),
+				expectedData: function ( data ) {
+					data.splice.apply( data, [ 26, 0 ].concat( '[[:File:foo.jpg]]'.split( '' ) ) );
+				}
+			},
+			{
 				msg: 'Link insertion with no input is no-op',
 				name: 'wikitextLink',
 				range: new ve.Range( 26 ),

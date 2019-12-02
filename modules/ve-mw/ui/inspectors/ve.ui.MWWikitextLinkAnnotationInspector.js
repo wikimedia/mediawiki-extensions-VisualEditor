@@ -57,8 +57,9 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 	// Call grand-parent
 	return ve.ui.AnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var text, matches, matchTitle, range, contextFragment, contextRange, linkMatches, linkRange, title,
+			var text, matches, matchTitle, range, contextFragment, contextRange, linkMatches, linkRange, title, namespaceId,
 				inspectorTitle,
+				wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				internalLinkParser = this.constructor.static.internalLinkParser,
 				fragment = this.getFragment();
 
@@ -90,7 +91,17 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 						contextRange.start + matches.index,
 						contextRange.start + matches.index + matches[ 0 ].length
 					);
-					if ( linkRange.containsRange( range ) ) {
+					namespaceId = mw.Title.newFromText( matches[ 1 ] ).getNamespaceId();
+					if (
+						linkRange.containsRange( range ) && !(
+							// Ignore File:/Category:, but not :File:/:Category:
+							(
+								namespaceId === wgNamespaceIds.file ||
+								namespaceId === wgNamespaceIds.category
+							) &&
+							matches[ 1 ].indexOf( ':' ) !== 0
+						)
+					) {
 						linkMatches = matches;
 						fragment = fragment.getSurface().getLinearFragment( linkRange );
 						break;
@@ -160,7 +171,8 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 	// Call grand-parent
 	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
-			var insert, labelText, labelTitle, targetText,
+			var insert, labelText, labelTitle, targetText, targetTitle, namespaceId, prefix,
+				wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				annotation = this.getAnnotation(),
 				fragment = this.getFragment(),
 				insertion = this.getInsertionText(),
@@ -186,7 +198,20 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 					} else {
 						targetText = '';
 					}
-					fragment.insertContent( '[[' + targetText + labelText + ']]' );
+					targetTitle = mw.Title.newFromText( annotation.getAttribute( 'normalizedTitle' ) );
+					namespaceId = targetTitle.getNamespaceId();
+					if (
+						( targetText + labelText )[ 0 ] !== ':' && (
+							namespaceId === wgNamespaceIds.file ||
+							namespaceId === wgNamespaceIds.category
+						)
+					) {
+						prefix = ':';
+					} else {
+						prefix = '';
+					}
+
+					fragment.insertContent( '[[' + prefix + targetText + labelText + ']]' );
 				} else {
 					// Annotating the surface will send the content to Parsoid before
 					// it is inserted into the wikitext document. It is slower but it
