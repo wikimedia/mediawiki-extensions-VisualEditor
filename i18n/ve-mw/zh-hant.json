@@ -67,7 +67,7 @@
 	"visualeditor-changedesc-mwredirect": "已將重新導向目標從$1更改為$2",
 	"visualeditor-changedesc-mwtransclusion": "已變更模板參數",
 	"visualeditor-desc": "MediaWiki 的視覺化編輯器",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-descriptionpagelink": "Project:視覺化編輯器",
 	"visualeditor-dialog-media-alttext-section": "替代文字",
 	"visualeditor-dialog-media-alttext-section-help": "可以使用此設定撰寫當使用者無法看到該項目時的文字說明。說明的內容應要足夠讓人可以了解媒體的目的與資訊。此設定對盲人以及其他使用螢幕閱讀器與文字瀏覽器的人相當重要。",
 	"visualeditor-dialog-media-change-image": "變更圖片",
