@@ -27,6 +27,7 @@
 	"apihelp-visualeditor-param-pst": "El guardáu previu tresforma'l testu wiki antes d'unvialu a Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "La sección onde actuar.",
 	"apihelp-visualeditor-param-starttimestamp": "Al guardar,establez esto como la marca horaria de cuando se cargó la páxina. Utilizao pa detectar conflictos d'edición.",
+	"apihelp-visualeditor-param-stash": "Al guardar, establecer como verdadero si quies usar la API de stashing.",
 	"apihelp-visualeditor-param-wikitext": "Testu wiki a unviar a Parsoid pa convertir a HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Devuelve HTML5 pa una páxina dende'l serviciu Parsoid.",
 	"apihelp-visualeditoredit-description": "Guardar una páxina HTML5 en MediaWiki (convertida en testu wiki mediante'l serviciu Parsoid).",
