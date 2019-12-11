@@ -682,33 +682,30 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 	}
 
 	// Don't show an error if the load was manually aborted
-	// The response.status check here is to catch aborts triggered by navigation away from the page
 	errorInfo = ve.getProp( errorDetails, 'error', 'info' ) || errorDetails;
 
-	if ( !errorDetails || errorDetails.statusText !== 'abort' ) {
-		if ( code === 'http' || code === 'error' ) {
-			if ( errorDetails && ( errorDetails.status || ( errorDetails.xhr && errorDetails.xhr.status ) ) ) {
-				confirmPromptMessage = ve.msg(
-					'visualeditor-loadwarning',
-					ve.msg( 'visualeditor-error-http', errorDetails.status || errorDetails.xhr.status )
-				);
-			} else {
-				confirmPromptMessage = ve.msg(
-					'visualeditor-loadwarning',
-					ve.msg( 'visualeditor-error-noconnect' )
-				);
-			}
-		} else if ( errorInfo ) {
+	if ( code === 'http' ) {
+		if ( errorDetails && errorDetails.xhr && errorDetails.xhr.status ) {
 			confirmPromptMessage = ve.msg(
 				'visualeditor-loadwarning',
-				code + ve.msg( 'colon-separator' ) + errorInfo
+				ve.msg( 'visualeditor-error-http', errorDetails.xhr.status )
 			);
-		} else if ( typeof errorDetails === 'string' ) {
-			confirmPromptMessage = errorDetails;
 		} else {
-			// At least give the devs something to work from
-			confirmPromptMessage = JSON.stringify( errorDetails );
+			confirmPromptMessage = ve.msg(
+				'visualeditor-loadwarning',
+				ve.msg( 'visualeditor-error-noconnect' )
+			);
 		}
+	} else if ( errorInfo ) {
+		confirmPromptMessage = ve.msg(
+			'visualeditor-loadwarning',
+			code + ve.msg( 'colon-separator' ) + errorInfo
+		);
+	} else if ( typeof errorDetails === 'string' ) {
+		confirmPromptMessage = errorDetails;
+	} else {
+		// At least give the devs something to work from
+		confirmPromptMessage = JSON.stringify( errorDetails );
 	}
 
 	if ( confirmPromptMessage ) {
@@ -727,9 +724,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			}
 		} );
 	} else {
-		if ( errorDetails.statusText !== 'abort' ) {
-			mw.log.warn( 'Failed to find error message', code, errorDetails );
-		}
+		mw.log.warn( 'Failed to find error message', code, errorDetails );
 		this.tryTeardown( true );
 	}
 };
