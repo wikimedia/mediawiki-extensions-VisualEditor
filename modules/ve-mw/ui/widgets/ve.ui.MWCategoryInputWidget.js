@@ -227,7 +227,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 /**
  * @inheritdoc
  */
-ve.ui.MWCategoryInputWidget.prototype.onLookupMenuItemChoose = function ( item ) {
+ve.ui.MWCategoryInputWidget.prototype.onLookupMenuChoose = function ( item ) {
 	this.emit( 'choose', item );
 
 	// Reset input
