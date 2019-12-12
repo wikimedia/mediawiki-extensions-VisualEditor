@@ -668,7 +668,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetails ) {
-	var errorInfo, confirmPromptMessage,
+	var $confirmPromptMessage,
 		target = this;
 
 	// Parent method
@@ -681,52 +681,27 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		return;
 	}
 
-	// Don't show an error if the load was manually aborted
-	errorInfo = ve.getProp( errorDetails, 'error', 'info' ) || errorDetails;
+	$confirmPromptMessage = this.extractErrorMessages( errorDetails );
 
-	if ( code === 'http' ) {
-		if ( errorDetails && errorDetails.xhr && errorDetails.xhr.status ) {
-			confirmPromptMessage = ve.msg(
-				'visualeditor-loadwarning',
-				ve.msg( 'visualeditor-error-http', errorDetails.xhr.status )
-			);
+	OO.ui.confirm( $confirmPromptMessage, {
+		actions: [
+			{ action: 'accept', label: OO.ui.msg( 'ooui-dialog-process-retry' ), flags: 'primary' },
+			{ action: 'reject', label: OO.ui.msg( 'ooui-dialog-message-reject' ), flags: 'safe' }
+		]
+	} ).done( function ( confirmed ) {
+		if ( confirmed ) {
+			target.load();
+		} else if ( $( '#wpTextbox1' ).length && !target.isModeAvailable( 'source' ) ) {
+			// If we're switching from the wikitext editor, just deactivate
+			// don't try to switch back to it fully, that'd discard changes.
+			target.tryTeardown( true );
 		} else {
-			confirmPromptMessage = ve.msg(
-				'visualeditor-loadwarning',
-				ve.msg( 'visualeditor-error-noconnect' )
-			);
+			target.activatingDeferred.reject();
+			// TODO: Some sort of progress bar?
+			target.wikitextFallbackLoading = true;
+			target.switchToWikitextEditor( false );
 		}
-	} else if ( errorInfo ) {
-		confirmPromptMessage = ve.msg(
-			'visualeditor-loadwarning',
-			code + ve.msg( 'colon-separator' ) + errorInfo
-		);
-	} else if ( typeof errorDetails === 'string' ) {
-		confirmPromptMessage = errorDetails;
-	} else {
-		// At least give the devs something to work from
-		confirmPromptMessage = JSON.stringify( errorDetails );
-	}
-
-	if ( confirmPromptMessage ) {
-		OO.ui.confirm( confirmPromptMessage ).done( function ( confirmed ) {
-			if ( confirmed ) {
-				target.load();
-			} else if ( $( '#wpTextbox1' ).length && !target.isModeAvailable( 'source' ) ) {
-				// If we're switching from the wikitext editor, just deactivate
-				// don't try to switch back to it fully, that'd discard changes.
-				target.tryTeardown( true );
-			} else {
-				target.activatingDeferred.reject();
-				// TODO: Some sort of progress bar?
-				target.wikitextFallbackLoading = true;
-				target.switchToWikitextEditor( false );
-			}
-		} );
-	} else {
-		mw.log.warn( 'Failed to find error message', code, errorDetails );
-		this.tryTeardown( true );
-	}
+	} );
 };
 
 /**

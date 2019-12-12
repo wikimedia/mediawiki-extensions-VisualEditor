@@ -753,12 +753,11 @@ ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply,
  * @return {jQuery}
  */
 ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
-	var errorMsgs = data.errors.map( function ( err ) {
-		var $node = $( '<div>' ).html( err.html );
-		ve.targetLinksToNewWindow( $node[ 0 ] );
-		return $node[ 0 ];
+	var $errorMsgs = ( new mw.Api() ).getErrorMessage( data );
+	$errorMsgs.each( function () {
+		ve.targetLinksToNewWindow( this );
 	} );
-	return $( errorMsgs );
+	return $errorMsgs;
 };
 
 /**
@@ -820,30 +819,18 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, erro
  * @fires saveErrorUnknown
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
-	var errorCodes, unknown;
+	var errorCodes;
+
+	this.showSaveError( this.extractErrorMessages( data ), false );
 
 	if ( data.errors ) {
-		this.showSaveError( this.extractErrorMessages( data ), false );
-
 		errorCodes = data.errors.map( function ( err ) {
 			return err.code;
 		} ).join( ',' );
-
-		this.emit( 'saveErrorUnknown', errorCodes );
 	} else {
-		if ( data.xhr && data.xhr.status ) {
-			unknown = ve.msg( 'visualeditor-error-http', data.xhr.status );
-		} else {
-			unknown = ve.msg( 'visualeditor-error-noconnect' );
-		}
-
-		this.showSaveError(
-			ve.msg( 'visualeditor-saveerror', unknown ),
-			false // prevents reapply
-		);
-
-		this.emit( 'saveErrorUnknown', unknown );
+		errorCodes = 'http-' + ( ( data.xhr && data.xhr.status ) || 0 );
 	}
+	this.emit( 'saveErrorUnknown', errorCodes );
 };
 
 /**
@@ -910,6 +897,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 	var wikitext,
+		api = this.getContentApi(),
 		target = this;
 
 	if ( !this.saveDialog.$previewViewer.children().length ) {
@@ -921,27 +909,20 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			wikitext = '== ' + this.sectionTitle.getValue() + ' ==\n\n' + wikitext;
 		}
 
-		this.getContentApi().post( {
+		api.post( {
 			action: 'visualeditor',
 			paction: 'parsedoc',
 			page: this.getPageName(),
 			wikitext: wikitext,
 			pst: true
-		} ).always( function ( response, details ) {
-			var doc,
-				baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
-
-			if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
-				doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
-				target.saveDialog.showPreview( doc, baseDoc );
-			} else {
-				target.saveDialog.showPreview(
-					ve.msg(
-						'visualeditor-loaderror-message',
-						ve.getProp( details, 'error', 'info' ) || 'Failed to connect'
-					)
-				);
-			}
+		} ).then( function ( response ) {
+			var doc, baseDoc;
+			baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
+			doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
+			target.saveDialog.showPreview( doc, baseDoc );
+		}, function ( errorCode, details ) {
+			target.saveDialog.showPreview( target.extractErrorMessages( details ) );
+		} ).always( function () {
 			target.bindSaveDialogClearDiff();
 		} );
 	} else {
