@@ -26,21 +26,35 @@
 
 /* Override MediaWiki's styles that make sense in read mode only */
 
-/* Prevent jQuery.makeCollapsible from hiding the rows, even if collapsed by default */
-.client-js .ve-ce-mwTableNode.mw-collapsed:not( .mw-made-collapsible ) tr:not( :first-child ),
-.client-js .ve-ui-diffElement table.mw-collapsed:not( .mw-made-collapsible ) tr:not( :first-child ) {
-	display: table-row;
-}
+// Prevent jQuery.makeCollapsible from hiding things, even if collapsed by default.
+// These selectors must exactly match those in jquery.makeCollapsible.styles.less in MediaWiki.
+@exclude: ~'.mw-made-collapsible';
 
-.client-js .ve-ce-mwTableNode.mw-collapsed:not( .mw-made-collapsible ) > thead + tbody,
-.client-js .ve-ui-diffElement table.mw-collapsed:not( .mw-made-collapsible ) > thead + tbody {
-	display: table-row-group;
-}
+.client-js {
+	.ve-ce-surface,
+	.ve-ui-diffElement {
+		.mw-collapsed:not( @{exclude} ) {
+			> p {
+				display: block;
+			}
 
-/* Prevent jQuery.makeCollapsible from hiding blocks */
-.client-js .ve-ce-surface .mw-collapsed:not( .mw-made-collapsible ) .mw-collapsible-content,
-.client-js .ve-ui-diffElement .mw-collapsed:not( .mw-made-collapsible ) .mw-collapsible-content {
-	display: block;
+			> table {
+				display: table;
+			}
+
+			> thead + tbody {
+				display: table-row-group;
+			}
+
+			tr:not( :first-child ) {
+				display: table-row;
+			}
+
+			.mw-collapsible-content {
+				display: block;
+			}
+		}
+	}
 }
 
 /*
