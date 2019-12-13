@@ -378,7 +378,6 @@ ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( key, text ) {
 	ve.init.mw.MobileArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
 	this.overlay.reportError( text );
-	this.overlay.hide();
 };
 
 /**
