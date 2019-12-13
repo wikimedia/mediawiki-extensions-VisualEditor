@@ -165,6 +165,7 @@
 			var data,
 				saver = this;
 
+			options = options || {};
 			if ( cacheKey ) {
 				data = $.extend( { cachekey: cacheKey }, extraData );
 			} else {
