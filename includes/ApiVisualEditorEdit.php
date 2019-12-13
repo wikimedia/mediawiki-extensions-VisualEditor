@@ -389,7 +389,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		}
 
 		if ( isset( $params['wikitext'] ) ) {
-			$wikitext = $params['wikitext'];
+			$wikitext = str_replace( "\r\n", "\n", $params['wikitext'] );
 		} else {
 			$wikitext = $this->getWikitext( $title, $params, $parserParams );
 		}
