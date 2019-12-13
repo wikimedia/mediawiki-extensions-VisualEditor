@@ -200,7 +200,7 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options, noRestbase ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data,
+			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data, abort,
 				section = options.section !== undefined ? options.section : null,
 				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
 				switched = false,
@@ -353,13 +353,14 @@
 							apiData.visualeditor.fromEditedState = fromEditedState;
 						}
 						return apiData;
-					} )
-					.promise( { abort: function () {
-						apiXhr.abort();
-						restbaseXhr.abort();
-					} } );
+					} );
+				abort = function () {
+					apiXhr.abort();
+					restbaseXhr.abort();
+				};
 			} else {
-				dataPromise = apiPromise.promise( { abort: apiXhr.abort } );
+				dataPromise = apiPromise;
+				abort = apiXhr.abort;
 			}
 
 			return dataPromise.then( function ( resp ) {
@@ -383,7 +384,7 @@
 
 				resp.veMode = 'visual';
 				return resp;
-			} );
+			} ).promise( { abort: abort } );
 		},
 
 		/**
@@ -421,7 +422,7 @@
 			return dataPromise.then( function ( resp ) {
 				resp.veMode = 'source';
 				return resp;
-			} );
+			} ).promise( { abort: dataPromise.abort } );
 		}
 	};
 }() );
