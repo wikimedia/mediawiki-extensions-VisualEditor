@@ -249,6 +249,7 @@ class ApiVisualEditor extends ApiBase {
 		if ( !$title ) {
 			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
 		}
+		'@phan-var Title $title';
 
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {

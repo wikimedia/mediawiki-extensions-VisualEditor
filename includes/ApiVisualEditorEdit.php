@@ -154,6 +154,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		} else {
 			$wikitext = $this->getWikitextNoCache( $title, $params, $parserParams );
 		}
+		'@phan-var string $wikitext';
 		return $wikitext;
 	}
 
@@ -190,7 +191,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 *
 	 * @param Title $title The title of the page
 	 * @param string $wikitext The wikitext of the edit
-	 * @return string The key of the wikitext in the serialisation cache
+	 * @return string|false The key of the wikitext in the serialisation cache
 	 */
 	protected function storeInSerializationCache( Title $title, $wikitext ) {
 		if ( $wikitext === false ) {
@@ -382,6 +383,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		if ( !$title ) {
 			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
 		}
+		'@phan-var Title $title';
 
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
@@ -467,6 +469,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 					// about what FlaggedRevs does with them.
 					$outputDone = null;
 					$useParserCache = null;
+					// @phan-suppress-next-line PhanTypeMismatchArgument
 					$view->setPageContent( $outputDone, $useParserCache );
 					$view->displayTag();
 					$view->setContext( $originalContext );
