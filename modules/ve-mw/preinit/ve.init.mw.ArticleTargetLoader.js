@@ -363,12 +363,16 @@
 						return apiData;
 					} );
 				abort = function () {
-					apiXhr.abort();
+					if ( apiXhr ) {
+						apiXhr.abort();
+					}
 					restbaseXhr.abort();
 				};
 			} else {
 				dataPromise = apiPromise;
-				abort = apiXhr.abort;
+				if ( apiXhr ) {
+					abort = apiXhr.abort;
+				}
 			}
 
 			return dataPromise.then( function ( resp ) {
