@@ -80,7 +80,7 @@
 			// TODO: Create the correct model surface type (ve.ui.Surface#createModel)
 			surfaceModel = new ve.dm.Surface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
 			surfaceModel.createSynchronizer(
-				title.toString(),
+				mw.config.get( 'wgWikiID' ) + '/' + title.toString(),
 				{
 					server: conf.rebaserUrl,
 					// TODO: server could communicate with MW (via oauth?) to know the
