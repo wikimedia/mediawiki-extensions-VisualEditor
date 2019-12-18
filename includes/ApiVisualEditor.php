@@ -626,7 +626,7 @@ class ApiVisualEditor extends ApiBase {
 					'blockinfo' => $blockinfo,
 					'canEdit' => $canEdit,
 				];
-				if ( $restbaseHeaders ) {
+				if ( isset( $restbaseHeaders['etag'] ) ) {
 					$result['etag'] = $restbaseHeaders['etag'];
 				}
 				if ( isset( $params['badetag'] ) ) {
