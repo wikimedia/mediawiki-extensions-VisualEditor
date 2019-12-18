@@ -296,7 +296,7 @@ class ApiVisualEditor extends ApiBase {
 						$wikitext = $params['wikitext'] ?? null;
 						if ( $wikitext !== null ) {
 							$stash = $params['stash'];
-							$section = $section = $params['section'] ?? null;
+							$section = $params['section'] ?? null;
 							if ( $params['pst'] ) {
 								$wikitext = $this->pstWikitext( $title, $wikitext );
 							}
