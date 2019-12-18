@@ -125,69 +125,27 @@
 		"VisualEditorAlias": "VisualEditor.i18n.alias.php"
 	},
 	"Hooks": {
-		"BeforePageDisplay": [
-			"VisualEditorHooks::onBeforePageDisplay"
-		],
-		"SkinEditSectionLinks": [
-			"VisualEditorHooks::onSkinEditSectionLinks"
-		],
-		"DiffViewHeader": [
-			"VisualEditorHooks::onDiffViewHeader"
-		],
-		"GetBetaFeaturePreferences": [
-			"VisualEditorHooks::onGetBetaPreferences"
-		],
-		"GetPreferences": [
-			"VisualEditorHooks::onGetPreferences"
-		],
-		"PreferencesFormPreSave": [
-			"VisualEditorHooks::onPreferencesFormPreSave"
-		],
-		"ListDefinedTags": [
-			"VisualEditorHooks::onListDefinedTags"
-		],
-		"ChangeTagsListActive": [
-			"VisualEditorHooks::onListDefinedTags"
-		],
-		"MakeGlobalVariablesScript": [
-			"VisualEditorHooks::onMakeGlobalVariablesScript"
-		],
-		"RedirectSpecialArticleRedirectParams": [
-			"VisualEditorHooks::onRedirectSpecialArticleRedirectParams"
-		],
-		"ResourceLoaderGetConfigVars": [
-			"VisualEditorHooks::onResourceLoaderGetConfigVars"
-		],
-		"ResourceLoaderRegisterModules": [
-			"VisualEditorHooks::onResourceLoaderRegisterModules"
-		],
-		"SkinTemplateNavigation": [
-			"VisualEditorHooks::onSkinTemplateNavigation"
-		],
-		"SkinTemplateNavigation::SpecialPage": [
-			"SpecialCollabPad::onSkinTemplateNavigationSpecialPage"
-		],
-		"ParserTestGlobals": [
-			"VisualEditorHooks::onParserTestGlobals"
-		],
-		"EditPage::showEditForm:fields": [
-			"VisualEditorHooks::onEditPageShowEditFormFields"
-		],
-		"RecentChange_save": [
-			"VisualEditorHooks::onRecentChangeSave"
-		],
-		"BeforeInitialize": [
-			"VisualEditorHooks::onBeforeInitialize"
-		],
-		"LocalUserCreated": [
-			"VisualEditorHooks::onLocalUserCreated"
-		],
-		"CustomEditor": [
-			"VisualEditorHooks::onCustomEditor"
-		],
-		"UserLoggedIn": [
-			"VisualEditorHooks::onUserLoggedIn"
-		]
+		"BeforePageDisplay": "VisualEditorHooks::onBeforePageDisplay",
+		"SkinEditSectionLinks": "VisualEditorHooks::onSkinEditSectionLinks",
+		"DiffViewHeader": "VisualEditorHooks::onDiffViewHeader",
+		"GetBetaFeaturePreferences": "VisualEditorHooks::onGetBetaPreferences",
+		"GetPreferences": "VisualEditorHooks::onGetPreferences",
+		"PreferencesFormPreSave": "VisualEditorHooks::onPreferencesFormPreSave",
+		"ListDefinedTags": "VisualEditorHooks::onListDefinedTags",
+		"ChangeTagsListActive": "VisualEditorHooks::onListDefinedTags",
+		"MakeGlobalVariablesScript": "VisualEditorHooks::onMakeGlobalVariablesScript",
+		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks::onRedirectSpecialArticleRedirectParams",
+		"ResourceLoaderGetConfigVars": "VisualEditorHooks::onResourceLoaderGetConfigVars",
+		"ResourceLoaderRegisterModules": "VisualEditorHooks::onResourceLoaderRegisterModules",
+		"SkinTemplateNavigation": "VisualEditorHooks::onSkinTemplateNavigation",
+		"SkinTemplateNavigation::SpecialPage": "SpecialCollabPad::onSkinTemplateNavigationSpecialPage",
+		"ParserTestGlobals": "VisualEditorHooks::onParserTestGlobals",
+		"EditPage::showEditForm:fields": "VisualEditorHooks::onEditPageShowEditFormFields",
+		"RecentChange_save": "VisualEditorHooks::onRecentChangeSave",
+		"BeforeInitialize": "VisualEditorHooks::onBeforeInitialize",
+		"LocalUserCreated": "VisualEditorHooks::onLocalUserCreated",
+		"CustomEditor": "VisualEditorHooks::onCustomEditor",
+		"UserLoggedIn": "VisualEditorHooks::onUserLoggedIn"
 	},
 	"ResourceModules": {
 		"socket.io": {
