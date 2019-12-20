@@ -64,7 +64,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 				fragment = this.getFragment();
 
 			// Only supports linear selections
-			if ( !( this.previousSelection instanceof ve.dm.LinearSelection ) ) {
+			if ( !( this.initialFragment && this.initialFragment.getSelection() instanceof ve.dm.LinearSelection ) ) {
 				return ve.createDeferred().reject().promise();
 			}
 
@@ -175,8 +175,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				annotation = this.getAnnotation(),
 				fragment = this.getFragment(),
-				insertion = this.getInsertionText(),
-				surfaceModel = fragment.getSurface();
+				insertion = this.getInsertionText();
 
 			if ( data && data.action === 'done' && annotation ) {
 				insert = this.initialSelection.isCollapsed() && insertion.length;
@@ -230,7 +229,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				} );
 			} else if ( !data.action ) {
 				// Restore selection to what it was before we expanded it
-				surfaceModel.setSelection( this.previousSelection );
+				this.initialFragment.select();
 			}
 		}, this )
 		.next( function () {
