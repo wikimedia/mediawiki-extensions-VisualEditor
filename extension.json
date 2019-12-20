@@ -1375,10 +1375,14 @@
 				"lib/ve/src/ui/inspectors/ve.ui.CommentAnnotationInspector.js"
 			],
 			"styles": [
-				"lib/ve/src/ce/styles/annotations/ve.ce.CommentAnnotation.css"
+				"lib/ve/src/ce/styles/annotations/ve.ce.CommentAnnotation.css",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.CommentAnnotationContextItem.css"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
+			],
+			"messages": [
+				"visualeditor-commentannotationcontextitem-reply"
 			],
 			"targets": [
 				"desktop",
