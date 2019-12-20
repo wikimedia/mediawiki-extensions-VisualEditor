@@ -380,6 +380,10 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 		$title = Title::newFromText( $params['page'] );
+		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
+			// Convert Special:CollabPad/MyPage to MyPage so we can serialize properly
+			$title = SpecialCollabPad::getSubPage( $title );
+		}
 		if ( !$title ) {
 			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
 		}
