@@ -147,17 +147,14 @@ ve.init.mw.MobileArticleTarget.prototype.clearSurfaces = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
-	var surfaceView, isActiveWithKeyboard, $header, $overlaySurface;
-	// Editor may not have loaded yet, in which case `this.surface` is undefined
-	surfaceView = this.surface && this.surface.getView();
-	isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
+	var target = this,
+		// Editor may not have loaded yet, in which case `this.surface` is undefined
+		surfaceView = this.surface && this.surface.getView(),
+		isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
 
 	if ( ve.init.platform.constructor.static.isIos() ) {
 		this.updateIosContextPadding();
 	}
-
-	$header = this.overlay.$el.find( '.overlay-header-container' );
-	$overlaySurface = this.$overlaySurface;
 
 	// On iOS Safari, when the keyboard is open, the layout viewport reported by the browser is not
 	// updated to match the real viewport reduced by the keyboard (diagram: T218414#5027607). On all
@@ -173,12 +170,15 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	if ( !isActiveWithKeyboard ) {
 		return;
 	}
+
 	// Wait until after the scroll, because 'scroll' events are not emitted for every frame the
 	// browser paints, so the toolbar would lag behind in a very unseemly manner. Additionally,
 	// getBoundingClientRect returns incorrect values during scrolling, so make sure to calculate
 	// it only after the scrolling ends (https://openradar.appspot.com/radar?id=6668472289329152).
 	this.onContainerScrollTimer = setTimeout( function () {
-		var pos, viewportHeight, scrollX, scrollY, headerHeight, headerTranslateY;
+		var pos, viewportHeight, scrollX, scrollY, headerHeight, headerTranslateY,
+			$header = target.overlay.$el.find( '.overlay-header-container' ),
+			$overlaySurface = target.$overlaySurface;
 
 		// Check if toolbar is offscreen. In a better world, this would reject all negative values
 		// (pos >= 0), but getBoundingClientRect often returns funny small fractional values after
