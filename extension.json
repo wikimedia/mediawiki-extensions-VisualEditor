@@ -1383,7 +1383,7 @@
 				"ext.visualEditor.core"
 			],
 			"messages": [
-				"visualeditor-commentannotationcontextitem-reply"
+				"visualeditor-commentannotationcontextitem-comment"
 			],
 			"targets": [
 				"desktop",
