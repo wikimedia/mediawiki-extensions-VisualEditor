@@ -363,7 +363,7 @@
 	"visualeditor-savedialog-warning-dirty": "La modifica potrebbe essere stata danneggiata - si prega di rivederla prima di salvare.",
 	"visualeditor-saveerror": "Errore durante il salvataggio dei dati sul server: $1.",
 	"visualeditor-section-body-placeholder": "Nuova sezione",
-	"visualeditor-section-title-placeholder": "Soggetto",
+	"visualeditor-section-title-placeholder": "Oggetto",
 	"visualeditor-serializeerror": "Errore durante il caricamento dei dati dal server: $1.",
 	"visualeditor-settings-tool": "Impostazioni pagina",
 	"visualeditor-special-characters-group-other": "Usato spesso",
