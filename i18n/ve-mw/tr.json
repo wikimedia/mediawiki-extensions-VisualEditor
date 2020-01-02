@@ -28,7 +28,8 @@
 			"Bulgu",
 			"Diyapazon",
 			"Hedda",
-			"Karduelis"
+			"Karduelis",
+			"BaRaN6161 TURK"
 		]
 	},
 	"tooltip-ca-createsource": "Bu sayfanın kaynak kodunu oluşturun",
@@ -215,6 +216,8 @@
 	"visualeditor-mweditmodeve-warning": "Görsel düzenleyiciye geçiyorsunuz.\nDevam etmek istiyor musunuz?",
 	"visualeditor-mweditmodewt-popup-title": "Görsel düzenlemeciye geçtiniz.",
 	"visualeditor-mwgallerydialog-title": "Galeri",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Kaynak",
+	"visualeditor-mwlanguagevariantinspector-filter-text-label": "İçerikler",
 	"visualeditor-mwsignature-tool": "İmzanız",
 	"visualeditor-pagemenu-tooltip": "Sayfa seçenekleri",
 	"visualeditor-pagetranslationwarning": "Çevirilebilir bir sayfayı düzenliyorsunuz. Görsel Düzenleyici bu düzenlemeyi resmen desteklememektedir.",
