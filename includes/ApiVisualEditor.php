@@ -539,6 +539,14 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
+				// Simplified EditPage::getEditPermissionErrors()
+				// Will be false e.g. if user is blocked or page is protected
+				$editPermErrors = $title->getUserPermissionsErrors( 'edit', $user, 'full' );
+				$canEdit = !(
+					$editPermErrors ||
+					( !$title->exists() && $title->getUserPermissionsErrors( 'create', $user, 'full' ) )
+				);
+
 				$block = null;
 				$blockinfo = null;
 				$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
@@ -558,14 +566,13 @@ class ApiVisualEditor extends ApiBase {
 					];
 
 					$blockinfo = $this->getBlockDetails( $block );
+				} elseif ( $editPermErrors ) {
+					// For cases where the user is not blocked but has not permission to edit. (e.g. T241693)
+					$notices[] = $this->msg(
+						'permissionserrorstext-withaction', 1,
+						$this->msg( $title->exists() ? 'action-edit' : 'action-createpage' )
+					) . "<br>" . call_user_func_array( [ $this, 'msg' ], $editPermErrors[0] )->parse();
 				}
-
-				// Simplified EditPage::getEditPermissionErrors()
-				// Will be false e.g. if user is blocked or page is protected
-				$canEdit = !(
-					$title->getUserPermissionsErrors( 'edit', $user, 'full' ) ||
-					( !$title->exists() && $title->getUserPermissionsErrors( 'create', $user, 'full' ) )
-				);
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
 				// Deliberately omitting ,0 so oldid comes from request
