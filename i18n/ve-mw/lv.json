@@ -189,6 +189,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "Pārvērst par ISBN saiti",
 	"visualeditor-linkinspector-convert-link-pmid": "Pārvērst par PMID saiti",
 	"visualeditor-linkinspector-convert-link-rfc": "Pārvērst par RFC saiti",
+	"visualeditor-linkinspector-educationpopup-text": "Nozīmīgiem vārdiem pievieno saites uz citiem rakstiem vai pat citām vietnēm. Tas palīdzēs lasītājiem saprast kontekstu.",
 	"visualeditor-linkinspector-educationpopup-title": "Saites",
 	"visualeditor-linkinspector-illegal-title": "Nederīgs lapas nosaukums",
 	"visualeditor-linkinspector-invalid-external": "Ievadi pilnu URL, piemēram, https://piemers.org",
