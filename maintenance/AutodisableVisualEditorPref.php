@@ -2,7 +2,7 @@
 /**
  * Sets the VisualEditor autodisable preference on appropriate users.
  *
- * @copyright 2011-2019 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
  * @license MIT
  * @author Alex Monk <amonk@wikimedia.org>
  * @file
