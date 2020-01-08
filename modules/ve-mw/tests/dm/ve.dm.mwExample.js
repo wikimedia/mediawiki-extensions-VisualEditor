@@ -1767,6 +1767,27 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'mw:DisplaySpace': {
+		body: '<p>a<span typeof="mw:DisplaySpace mw:Placeholder">&nbsp;</span>: b</p>',
+		data: [
+			{ type: 'paragraph' },
+			'a',
+			{
+				type: 'mwEntity',
+				attributes: {
+					character: '\u00a0',
+					displaySpace: true
+				}
+			},
+			{ type: '/mwEntity' },
+			':',
+			' ',
+			'b',
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
 	'wrapping with mw:Entity': {
 		body: 'a<span typeof="mw:Entity">¢</span>b<span typeof="mw:Entity">¥</span><span typeof="mw:Entity">™</span>',
 		data: [
