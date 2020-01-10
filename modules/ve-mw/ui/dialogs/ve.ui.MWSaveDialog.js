@@ -174,23 +174,12 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 			);
 		}
 	}, function ( code, errorObject ) {
-		var errorMessage;
-
-		if ( errorObject.errors ) {
-			errorMessage = ve.init.target.extractErrorMessages( errorObject );
-		} else {
-			if ( errorObject.xhr && errorObject.xhr.status ) {
-				errorMessage = ve.msg( 'visualeditor-error-http', errorObject.xhr.status );
-			} else {
-				errorMessage = ve.msg( 'visualeditor-error-noconnect' );
-			}
-			errorMessage = ve.msg( 'visualeditor-serializeerror', errorMessage );
-		}
+		var $errorMessage = ve.init.target.extractErrorMessages( errorObject );
 
 		dialog.$reviewWikitextDiff.empty().append(
 			new OO.ui.MessageWidget( {
 				type: 'error',
-				label: errorMessage
+				label: $errorMessage
 			} ).$element
 		);
 	} ).always( function () {

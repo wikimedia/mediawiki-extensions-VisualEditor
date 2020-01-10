@@ -352,8 +352,7 @@
 				"visualeditor-autosave-modified-prompt-accept",
 				"visualeditor-autosave-modified-prompt-message",
 				"visualeditor-autosave-modified-prompt-reject",
-				"visualeditor-autosave-modified-prompt-title",
-				"visualeditor-loaderror-message"
+				"visualeditor-autosave-modified-prompt-title"
 			],
 			"targets": [
 				"desktop",
@@ -412,11 +411,6 @@
 				"mw-widgets-abandonedit",
 				"redirectpagesub",
 				"subject",
-				"visualeditor-loadwarning",
-				"visualeditor-error-noconnect",
-				"visualeditor-error-http",
-				"visualeditor-error-invalidresponse",
-				"colon-separator",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-trylogin",
 				"visualeditor-savedialog-identify-user",
@@ -711,8 +705,6 @@
 				"visualeditor-editsummary",
 				"visualeditor-editsummary-bytes-remaining",
 				"visualeditor-editsummary-characters-remaining",
-				"visualeditor-error-http",
-				"visualeditor-error-noconnect",
 				"visualeditor-serializeerror",
 				"visualeditor-savedialog-error-badtoken",
 				"visualeditor-savedialog-keyboard-shortcut-submit",
@@ -782,10 +774,6 @@
 				"visualeditor-pagetranslationwarning",
 				"visualeditor-recreate",
 				"visualeditor-redirect-description",
-				"visualeditor-error-noconnect",
-				"visualeditor-error-http",
-				"visualeditor-error-invalidresponse",
-				"visualeditor-error-invalidcontent",
 				"visualeditor-saveerror",
 				"visualeditor-serializeerror"
 			],
