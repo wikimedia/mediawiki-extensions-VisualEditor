@@ -210,6 +210,12 @@ class VisualEditorHooks {
 		return false;
 	}
 
+	/**
+	 * @param Title $title
+	 * @param User $user
+	 * @param WebRequest $req
+	 * @return bool
+	 */
 	private static function isSupportedEditPage( Title $title, User $user, WebRequest $req ) {
 		if ( $req->getVal( 'action' ) !== 'edit' || !$title->quickUserCan( 'edit' ) ) {
 			return false;
@@ -234,6 +240,11 @@ class VisualEditorHooks {
 		return false;
 	}
 
+	/**
+	 * @param Title $title
+	 * @param WebRequest $req
+	 * @return bool
+	 */
 	private static function isVisualAvailable( $title, $req ) {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
@@ -247,6 +258,11 @@ class VisualEditorHooks {
 			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() );
 	}
 
+	/**
+	 * @param Title $title
+	 * @param User $user
+	 * @return bool
+	 */
 	private static function isWikitextAvailable( $title, $user ) {
 		return $user->getOption( 'visualeditor-newwikitext' ) &&
 			$title->getContentModel() === 'wikitext';
@@ -318,6 +334,11 @@ class VisualEditorHooks {
 		return true;
 	}
 
+	/**
+	 * @param User $user
+	 * @param WebRequest $req
+	 * @return string|null
+	 */
 	private static function getPreferredEditor( User $user, WebRequest $req ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
@@ -345,6 +366,11 @@ class VisualEditorHooks {
 		return null;
 	}
 
+	/**
+	 * @param User $user
+	 * @param WebRequest $req
+	 * @return string
+	 */
 	private static function getLastEditor( User $user, WebRequest $req ) {
 		// This logic matches getLastEditor in:
 		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
