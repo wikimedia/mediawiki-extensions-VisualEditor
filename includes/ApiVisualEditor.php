@@ -9,8 +9,8 @@
  */
 
 use MediaWiki\Block\DatabaseBlock;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 
 class ApiVisualEditor extends ApiBase {
 
@@ -525,7 +525,7 @@ class ApiVisualEditor extends ApiBase {
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) ) .
 							"\n</div>";
 					} elseif (
-						!is_null( $block ) &&
+						$block !== null &&
 						$block->getType() != DatabaseBlock::TYPE_AUTO &&
 						( $block->isSitewide() || $targetUser->isBlockedFrom( $title ) )
 					) {
