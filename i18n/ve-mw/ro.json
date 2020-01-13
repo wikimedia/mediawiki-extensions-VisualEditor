@@ -206,8 +206,6 @@
 	"visualeditor-linkinspector-illegal-title": "Titlu de pagină nevalid",
 	"visualeditor-linknodeinspector-add-label": "Adăugare etichetă",
 	"visualeditor-linknodeinspector-title": "Legătură simplă",
-	"visualeditor-loaderror-message": "Eroare la încărcarea datelor de pe server: $1.",
-	"visualeditor-loadwarning": "Eroare la încărcarea datelor de pe server: $1. Doriți să reîncercați?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertește în legătură simplă",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Legătură ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Legătură PMID",

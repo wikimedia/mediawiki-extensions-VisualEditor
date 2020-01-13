@@ -187,8 +187,6 @@
 	"visualeditor-linkinspector-illegal-title": "عنوان صفحهٔ نامعتبر",
 	"visualeditor-linknodeinspector-add-label": "افزودن برچسب",
 	"visualeditor-linknodeinspector-title": "پیوند ساده",
-	"visualeditor-loaderror-message": "خطا هنگام بارکردن داده از کارگزار: $1",
-	"visualeditor-loadwarning": "خطای بارگیری داده‌ها از کارساز:  $1. دوباره تلاش می‌کنید؟",
 	"visualeditor-magiclinknodeinspector-convert-link": "تبدیل به پیوند ساده",
 	"visualeditor-magiclinknodeinspector-title-isbn": "پیوند ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "پیوند PMID",

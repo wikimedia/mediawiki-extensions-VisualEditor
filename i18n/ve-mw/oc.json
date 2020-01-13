@@ -178,8 +178,6 @@
 	"visualeditor-linkinspector-illegal-title": "Títol de pagina incorrècte",
 	"visualeditor-linknodeinspector-add-label": "Apondre un libellat",
 	"visualeditor-linknodeinspector-title": "Ligam simple",
-	"visualeditor-loaderror-message": "Error al moment del cargament de las donadas dempuèi lo servidor : $1.",
-	"visualeditor-loadwarning": "Error de cargament de donadas del servidor $1. Tornar ensajar?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Convertir en ligam simple",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ligam ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "ligam PMID",

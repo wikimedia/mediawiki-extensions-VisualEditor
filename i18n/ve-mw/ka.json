@@ -209,8 +209,6 @@
 	"visualeditor-linkinspector-invalid-external": "მიუთითეთ სრული URL, მაგ. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "წარწერის დამატება",
 	"visualeditor-linknodeinspector-title": "მარტივი ბმული",
-	"visualeditor-loaderror-message": "შეცდომა სერვერიდან მონაცემების ჩატვირთვისას: $1.",
-	"visualeditor-loadwarning": "სერვერიდან ინფორმაცია არ ჩაიტვირთა: $1. გსურთ სცადოთ თავიდან?",
 	"visualeditor-magiclinknodeinspector-convert-link": "კონვერტაცია მარტივ ბმულზე",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN ბმული",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID ბმული",

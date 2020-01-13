@@ -17,6 +17,7 @@
 	"apierror-visualeditor-latestnotfound": "Revizyonê sernameyo peyên nêvêniyo.",
 	"apihelp-visualeditor-description": "Perda Parsoid servis ra peyd şo pera HTML 5i.",
 	"apihelp-visualeditor-param-basetimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı peamyayış tesbit biyo.",
+	"apihelp-visualeditor-param-badetag": "Persayışê RESTBase asayış de nêraverde yew ETag tadayo se, qeydê roceka bıresne tiya.",
 	"apihelp-visualeditor-param-cachekey": "Ena kılita rezer yana ferqi, verdê neticey  serializerforce kariya yo.  $1html kemi mendo",
 	"apihelp-visualeditor-param-editintro": "Cıkerdışê pêhesnayışan rê şınasnayış (cıkewtış) cı kı.",
 	"apihelp-visualeditor-param-etag": "ETag'a ke bırışê yo.",

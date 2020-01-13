@@ -148,8 +148,6 @@
 	"visualeditor-linkinspector-button-link-external": "ಬಾಹ್ಯ ಸಂಪರ್ಕ",
 	"visualeditor-linkinspector-illegal-title": "ಪುಟದ ಶೀರ್ಷಿಕ ಪಡೆಯಲಿಲ",
 	"visualeditor-linknodeinspector-title": "ಸರಳದ ಸಂಪರ್ಕ",
-	"visualeditor-loaderror-message": "ಪರಿಚಾರಕದಿಂದ ಡೇಟಾ ಬರುವಾಗ ದೋಷವುಂಟಾಗಿದೆ: $1",
-	"visualeditor-loadwarning": "ಸರ್ವರ್‌ನಿಂದ ಡೇಟಾ ಬರುವಾಗ ದೋಷವುಂಟಾಗಿದೆ: $1. ಮತೆ ಪ್ರಯತ್ನಿಸಬೇಕೆ?",
 	"visualeditor-magiclinknodeinspector-title-isbn": "ISBN ಕೊಂಡಿ",
 	"visualeditor-magiclinknodeinspector-title-pmid": "PMID ಕೊಂಡಿ",
 	"visualeditor-magiclinknodeinspector-title-rfc": "RFC ಕೊಂಡಿ",

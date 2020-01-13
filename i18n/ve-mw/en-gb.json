@@ -23,6 +23,5 @@
 	"visualeditor-dialog-media-type-section-help": "You can set how the media item appears on the page. This should be the thumbnail format to be consistent with other pages in almost all cases.",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "You can over-ride how this page is sorted when displayed within a category by setting a different index to sort with instead. This is often used to make pages about people show by last name, but be named with their first name shown first.",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "You can over-ride how this page's title is displayed by setting a different label to show instead.",
-	"visualeditor-loadwarning": "Error loading data from server: $1. Would you like to try again?",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Language code"
 }

@@ -192,8 +192,6 @@
 	"visualeditor-linkinspector-illegal-title": "Neveljaven naslov strani",
 	"visualeditor-linknodeinspector-add-label": "Dodaj oznako",
 	"visualeditor-linknodeinspector-title": "Preprosta povezava",
-	"visualeditor-loaderror-message": "Napaka pri nalaganju s strežnika: $1",
-	"visualeditor-loadwarning": "Napaka pri prenašanju podatkov s strežnika: $1. Želite poskusiti ponovno?",
 	"visualeditor-magiclinknodeinspector-convert-link": "Pretvori v preprosto povezavo",
 	"visualeditor-magiclinknodeinspector-title-isbn": "Povezava ISBN",
 	"visualeditor-magiclinknodeinspector-title-pmid": "Povezava PMID",
