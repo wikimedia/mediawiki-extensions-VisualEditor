@@ -4,6 +4,8 @@
 			"Papuass"
 		]
 	},
+	"apierror-visualeditor-docserver-http-error": "Kļūda, savienojoties ar Parsoid/RESTBase serveri: $1",
+	"apierror-visualeditor-docserver-http": "Kļūda, savienojoties ar Parsoid/RESTBase serveri (HTTP $1)",
 	"apierror-visualeditor-docserver": "Kļūda, savienojoties ar Parsoid/RESTBase serveri (nav atbildes)",
 	"apihelp-visualeditor-description": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
 	"apihelp-visualeditor-param-etag": "Nosūtāmais ETag.",
