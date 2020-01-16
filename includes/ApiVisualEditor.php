@@ -438,7 +438,8 @@ class ApiVisualEditor extends ApiBase {
 					)->parseAsBlock();
 					// Page protected from creation
 					if ( $title->getRestrictions( 'create' ) ) {
-						$notices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock();
+						$notices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock() .
+							$this->getLastLogEntry( $title, 'protect' );
 					}
 					// From EditPage#showIntro, checking if the page has previously been deleted:
 					$dbr = wfGetDB( DB_REPLICA );
@@ -475,7 +476,7 @@ class ApiVisualEditor extends ApiBase {
 							$noticeMsg = 'protectedpagewarning';
 						}
 						$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
-						$this->getLastLogEntry( $title, 'protect' );
+							$this->getLastLogEntry( $title, 'protect' );
 					}
 
 					// Deal with cascading edit protection
