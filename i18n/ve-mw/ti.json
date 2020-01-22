@@ -4,5 +4,13 @@
 			"Joanmp17"
 		]
 	},
-	"visualeditor-ca-editsource-section": "ምንጪ የዐርይ"
+	"visualeditor-ca-editsource-section": "ምንጪ የዐርይ",
+	"visualeditor-dialog-media-goback": "ሕቖ",
+	"visualeditor-dialog-media-page-advanced": "ዝማዕበለ",
+	"visualeditor-dialog-media-page-general": "ሓፈሻዊ",
+	"visualeditor-dialog-media-save": "ኣቐምጥ",
+	"visualeditor-dialog-media-search-tab-search": "ምድላይ",
+	"visualeditor-mweditmodesource-warning-cancel": "ሰርዝ",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "ቋንቋ",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "ምንጪ"
 }
