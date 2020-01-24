@@ -30,7 +30,8 @@
 			"夢蝶葬花",
 			"神樂坂秀吉",
 			"予弦",
-			"A Retired User"
+			"A Retired User",
+			"VulpesVulpes825"
 		]
 	},
 	"collabpad-doctitle": "CollabPad：$1",
@@ -213,7 +214,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "您确定在不填写$1个{{PLURAL:$2|字段}}的情况下继续么？",
 	"visualeditor-dialog-transclusion-single-mode": "隐藏选项",
 	"visualeditor-dialog-transclusion-title": "嵌入",
-	"visualeditor-dialogbutton-media-tooltip": "媒体文件",
+	"visualeditor-dialogbutton-media-tooltip": "图片与媒体",
 	"visualeditor-dialogbutton-meta-tooltip": "页面设置",
 	"visualeditor-dialogbutton-template-tooltip": "模板",
 	"visualeditor-dialogbutton-transclusion-tooltip": "嵌入",

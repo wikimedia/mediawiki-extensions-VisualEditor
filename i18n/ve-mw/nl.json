@@ -306,6 +306,7 @@
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Standaardbreedte: $1 px",
 	"visualeditor-mwlanguagevariant-name": "Taalnaam: $1",
 	"visualeditor-mwlanguagevariant-unknown": "Taalvariant",
+	"visualeditor-mwlanguagevariantcontextitem-flag-hidden": "Dit is een verborgen regel.",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Taalcode",
 	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<Ongeldig>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Taal",
