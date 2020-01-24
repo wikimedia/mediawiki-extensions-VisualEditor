@@ -116,13 +116,14 @@
 		 * Serializes the document to HTML, deflates it, then passes to #postHtml.
 		 *
 		 * @param {HTMLDocument} doc Document to save
-		 * @param {Object} extraData Extra data to send to the API
-		 * @param {Object} options Options
+		 * @param {Object} [extraData] Extra data to send to the API
+		 * @param {Object} [options] Options
 		 * @return {jQuery.Promise} Promise which resolves if the post was successful
 		 */
 		saveDoc: function ( doc, extraData, options ) {
+			var saver = this;
 			return this.deflateDoc( doc ).then( function ( html ) {
-				return this.postHtml(
+				return saver.postHtml(
 					html,
 					null,
 					extraData,
