@@ -426,14 +426,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			} else {
 				if ( isset( $saveresult['edit']['newrevid'] ) ) {
 					$newRevId = intval( $saveresult['edit']['newrevid'] );
-					if ( $this->veConfig->get( 'VisualEditorUseChangeTagging' ) ) {
-						// Defer till after the RC row is inserted
-						// @TODO: doEditContent should let callers specify desired tags
-						$tag = isset( $params['wikitext'] ) ? 'visualeditor-wikitext' : 'visualeditor';
-						DeferredUpdates::addCallableUpdate( function () use ( $tag, $newRevId ) {
-							ChangeTags::addTags( $tag, null, $newRevId, null );
-						} );
-					}
 				} else {
 					$newRevId = $title->getLatestRevId();
 				}
@@ -547,6 +539,9 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'captchaid' => null,
 			'captchaword' => null,
 			'cachekey' => null,
+			'tags' => [
+				ApiBase::PARAM_ISMULTI => true,
+			],
 		];
 	}
 
