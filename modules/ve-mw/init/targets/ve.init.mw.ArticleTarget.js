@@ -2074,7 +2074,7 @@ ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function ( conte
  * Show the beta dialog as needed
  */
 ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
-	var usePrefs, prefSaysShow, urlSaysHide,
+	var usePrefs, prefSaysShow, urlSaysHide, editorMode,
 		windowManager = this.getSurface().dialogs,
 		target = this;
 
@@ -2102,13 +2102,14 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				)
 			)
 		) {
+			editorMode = this.getDefaultMode();
 			this.welcomeDialog = new mw.libs.ve.WelcomeDialog();
 			windowManager.addWindows( [ this.welcomeDialog ] );
 			windowManager.openWindow(
 				this.welcomeDialog,
 				{
-					switchable: true,
-					editor: this.getDefaultMode()
+					switchable: editorMode === 'source' ? this.isModeAvailable( 'visual' ) : true,
+					editor: editorMode
 				}
 			)
 				.closed.then( function ( data ) {
