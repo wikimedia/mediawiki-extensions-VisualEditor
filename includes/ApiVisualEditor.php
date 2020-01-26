@@ -234,6 +234,7 @@ class ApiVisualEditor extends ApiBase {
 
 	/**
 	 * @inheritDoc
+	 * @suppress PhanPossiblyUndeclaredVariable False positives
 	 */
 	public function execute() {
 		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );

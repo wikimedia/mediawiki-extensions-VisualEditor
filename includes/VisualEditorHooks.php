@@ -481,6 +481,7 @@ class VisualEditorHooks {
 				// Set veaction=edit
 				$veParams['veaction'] = 'edit';
 				$veTabMessage = $tabMessages[$action];
+				// @phan-suppress-next-line PhanTypeInvalidDimOffset
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					$skin->msg( $veTabMessage )->text();
 				$veTab = [
@@ -662,7 +663,6 @@ class VisualEditorHooks {
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
 				'targetTitle' => $title,
-				// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 				'attribs' => $result['editsection']['attribs'] + [
 					'class' => 'mw-editsection-visualeditor'
 				],

@@ -510,6 +510,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			}
 		}
 
+		// @phan-suppress-next-line PhanPossiblyUndeclaredVariable False positive
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
 	}
 
