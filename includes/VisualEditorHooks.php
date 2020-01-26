@@ -228,12 +228,13 @@ class VisualEditorHooks {
 		}
 
 		if ( $req->getVal( 'wteswitched' ) ) {
-			return self::isVisualAvailable( $title, $req );
+			return self::isVisualAvailable( $title, $req, $user );
 		}
 
 		switch ( self::getPreferredEditor( $user, $req ) ) {
 			case 'visualeditor':
-				return self::isVisualAvailable( $title, $req ) || self::isWikitextAvailable( $title, $user );
+				return self::isVisualAvailable( $title, $req, $user ) ||
+					self::isWikitextAvailable( $title, $user );
 			case 'wikitext':
 				return self::isWikitextAvailable( $title, $user );
 		}
@@ -241,21 +242,40 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * @param Title $title
-	 * @param WebRequest $req
+	 * @param User $user
 	 * @return bool
 	 */
-	private static function isVisualAvailable( $title, $req ) {
+	private static function enabledForUser( $user ) {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
+		return $user->getOption( 'visualeditor-enable' ) &&
+			!$user->getOption( 'visualeditor-betatempdisable' ) &&
+			!$user->getOption( 'visualeditor-autodisable' ) &&
+			!( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() );
+	}
+
+	/**
+	 * @param Title $title
+	 * @param WebRequest $req
+	 * @param User $user
+	 * @return bool
+	 */
+	private static function isVisualAvailable( $title, $req, $user ) {
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
+
 		return (
+			// If forced by the URL parameter, skip the namespace check (T221892) and preference check
+			$req->getVal( 'veaction' ) === 'edit' || (
 				// Only in enabled namespaces
-				ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) ||
-				// Or if forced by the URL parameter (T221892)
-				$req->getVal( 'veaction' ) === 'edit'
+				ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) &&
+
+				// Enabled per user preferences
+				self::enabledForUser( $user )
 			) &&
 			// Only for pages with a supported content model
-			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() );
+			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() )
+		);
 	}
 
 	/**
@@ -282,10 +302,7 @@ class VisualEditorHooks {
 			->makeConfig( 'visualeditor' );
 
 		if (
-			!$user->getOption( 'visualeditor-enable' ) ||
-			$user->getOption( 'visualeditor-betatempdisable' ) ||
-			$user->getOption( 'visualeditor-autodisable' ) ||
-			( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() ) ||
+			!self::enabledForUser( $user ) ||
 			self::isUABlacklisted( $req, $veConfig )
 		) {
 			return true;
@@ -460,7 +477,7 @@ class VisualEditorHooks {
 		$title = $skin->getRelevantTitle();
 		// Don't exit if this page isn't VE-enabled, since we should still
 		// change "Edit" to "Edit source".
-		$isAvailable = self::isVisualAvailable( $title, $skin->getRequest() );
+		$isAvailable = self::isVisualAvailable( $title, $skin->getRequest(), $user );
 
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
@@ -657,7 +674,7 @@ class VisualEditorHooks {
 		}
 
 		// add VE edit section in VE available namespaces
-		if ( self::isVisualAvailable( $title, $skin->getRequest() ) ) {
+		if ( self::isVisualAvailable( $title, $skin->getRequest(), $user ) ) {
 			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			$veEditSection = $tabMessages['editsection'];
 			$veLink = [
