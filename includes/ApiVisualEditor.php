@@ -485,7 +485,7 @@ class ApiVisualEditor extends ApiBase {
 					if ( isset( $restrictions['edit'] ) ) {
 						$protectedClasses[] = ' mw-textarea-cprotected';
 
-						$notice = $this->msg( 'cascadeprotectedwarning' )->parseAsBlock() . '<ul>';
+						$notice = $this->msg( 'cascadeprotectedwarning', count( $sources ) )->parseAsBlock() . '<ul>';
 						// Unfortunately there's no nice way to get only the pages which cause
 						// editing to be restricted
 						foreach ( $sources as $source ) {
