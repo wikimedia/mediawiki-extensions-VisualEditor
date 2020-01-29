@@ -498,13 +498,28 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				// Permission notice
-				$permErrors = $title->getUserPermissionsErrors( 'create', $user, 'quick' );
-				if ( $permErrors && !$title->exists() ) {
-					$notices[] = $this->msg(
-						'permissionserrorstext-withaction', 1, $this->msg( 'action-createpage' )
-					) . "<br>" . call_user_func_array( [ $this, 'msg' ], $permErrors[0] )->parse();
+				// Simplified EditPage::getEditPermissionErrors()
+				$permErrors = $title->getUserPermissionsErrors( 'edit', $user, 'full' );
+				if ( !$title->exists() ) {
+					$permErrors = array_merge(
+						$permErrors,
+						wfArrayDiff2(
+							$title->getUserPermissionsErrors( 'create', $user, 'full' ),
+							$permErrors
+						)
+					);
 				}
+
+				if ( $permErrors ) {
+					// Show generic permission errors, including page protection, user blocks, etc.
+					$notice = $this->getOutput()->formatPermissionsErrorMessage( $permErrors, 'edit' );
+					// That method returns wikitext (eww), hack to get it parsed:
+					$notice = ( new RawMessage( '$1', [ $notice ] ) )->parseAsBlock();
+					$notices[] = $notice;
+				}
+
+				// Will be false e.g. if user is blocked or page is protected
+				$canEdit = !$permErrors;
 
 				// Show notice when editing user / user talk page of a user that doesn't exist
 				// or who is blocked
@@ -541,14 +556,6 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				// Simplified EditPage::getEditPermissionErrors()
-				// Will be false e.g. if user is blocked or page is protected
-				$editPermErrors = $title->getUserPermissionsErrors( 'edit', $user, 'full' );
-				$canEdit = !(
-					$editPermErrors ||
-					( !$title->exists() && $title->getUserPermissionsErrors( 'create', $user, 'full' ) )
-				);
-
 				$block = null;
 				$blockinfo = null;
 				$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
@@ -559,21 +566,9 @@ class ApiVisualEditor extends ApiBase {
 					$block = $user->getBlock();
 				}
 				if ( $block ) {
-					$notices[] = [
-						'type' => 'block',
-						'message' => call_user_func_array(
-							[ $this, 'msg' ],
-							$block->getPermissionsError( $this->getContext() )
-						)->parseAsBlock(),
-					];
-
+					// Already added to $notices via #getUserPermissionsErrors above.
+					// Add block info for MobileFrontend:
 					$blockinfo = $this->getBlockDetails( $block );
-				} elseif ( $editPermErrors ) {
-					// For cases where the user is not blocked but has not permission to edit. (e.g. T241693)
-					$notices[] = $this->msg(
-						'permissionserrorstext-withaction', 1,
-						$this->msg( $title->exists() ? 'action-edit' : 'action-createpage' )
-					) . "<br>" . call_user_func_array( [ $this, 'msg' ], $editPermErrors[0] )->parse();
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
