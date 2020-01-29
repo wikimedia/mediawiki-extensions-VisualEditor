@@ -2167,6 +2167,10 @@
 		"ext.visualEditor.diffPage.init.styles": {
 			"styles": [
 				"modules/ve-mw/preinit/styles/ve.init.mw.DiffPage.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.diffLoader": {
@@ -2197,6 +2201,10 @@
 			"messages": [
 				"visualeditor-savedialog-review-visual",
 				"visualeditor-savedialog-review-wikitext"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		},
 		"ext.visualEditor.language": {
