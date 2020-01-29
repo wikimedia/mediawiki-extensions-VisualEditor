@@ -243,7 +243,7 @@
 				data.oldid = options.oldId;
 				apiXhr = new mw.Api().post( data );
 			} else {
-				if ( noMetadata ) {
+				if ( useRestbase && noMetadata ) {
 					apiPromise = $.Deferred().resolve( { visualeditor: {} } ).promise();
 				} else {
 					apiXhr = new mw.Api().get( data );
