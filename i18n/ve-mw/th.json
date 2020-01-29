@@ -40,7 +40,7 @@
 	"visualeditor-changedesc-mwredirect": "เปลี่ยนเป้าหมายหน้าเปลี่ยนทางจาก $1 เป็น $2 แล้ว",
 	"visualeditor-changedesc-mwtransclusion": "เปลี่ยนพารามิเตอร์ของแม่แบบแล้ว",
 	"visualeditor-desc": "Visual editor สำหรับมีเดียวิกิ",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-descriptionpagelink": "Project:เครื่องมือแก้ไขแบบเห็นภาพ",
 	"visualeditor-dialog-media-alttext-section": "ข้อความอื่น",
 	"visualeditor-dialog-media-alttext-section-help": "คุณสามารถใช้เครื่องมือนี้ในการเขียนคำอธิบายข้อความสำหรับบุคคลที่ไม่สามารถมองเห็นรายการดังกล่าว ควรเขียนคำอธิบายพอให้บุคคลเหล่านั้นเข้าใจวัตถุประสงค์และข้อมูลที่ระบุโดยรายการสื่อได้ ซึ่งสำคัญต่อผู้ใช้ที่พิการทางสายตาหรือบุคคลอื่นที่ใช้ซอฟต์แวร์อ่านหน้าจอหรือเบราว์เซอร์ที่แสดงผลเฉพาะข้อความ",
 	"visualeditor-dialog-media-change-image": "เปลี่ยนภาพ",
