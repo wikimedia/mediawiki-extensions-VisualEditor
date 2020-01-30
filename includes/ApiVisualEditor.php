@@ -210,9 +210,10 @@ class ApiVisualEditor extends ApiBase {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
 		// Check for existence to avoid getting MediaWiki:Noarticletext
-		if ( $preloadTitle instanceof Title &&
-			 $preloadTitle->exists() &&
-			 $preloadTitle->userCan( 'read' )
+		if (
+			$preloadTitle instanceof Title &&
+			$preloadTitle->exists() &&
+			$this->getPermissionManager()->userCan( 'read', $this->getUser(), $preloadTitle )
 		) {
 			$preloadPage = WikiPage::factory( $preloadTitle );
 			if ( $preloadPage->isRedirect() ) {
@@ -241,6 +242,7 @@ class ApiVisualEditor extends ApiBase {
 
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
+		$permissionManager = $this->getPermissionManager();
 
 		$title = Title::newFromText( $params['page'] );
 		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
@@ -411,7 +413,11 @@ class ApiVisualEditor extends ApiBase {
 				// From EditPage#showCustomIntro
 				if ( $params['editintro'] ) {
 					$eiTitle = Title::newFromText( $params['editintro'] );
-					if ( $eiTitle instanceof Title && $eiTitle->exists() && $eiTitle->userCan( 'read' ) ) {
+					if (
+						$eiTitle instanceof Title &&
+						$eiTitle->exists() &&
+						$permissionManager->userCan( 'read', $user, $eiTitle )
+					) {
 						$notices[] = MediaWikiServices::getInstance()->getParser()->parse(
 							'<div class="mw-editintro">{{:' . $eiTitle->getFullText() . '}}</div>',
 							$title,
@@ -460,8 +466,8 @@ class ApiVisualEditor extends ApiBase {
 
 				// Look at protection status to set up notices + surface class(es)
 				$protectedClasses = [];
-				if ( MediaWikiServices::getInstance()->getPermissionManager()
-						->getNamespaceRestrictionLevels( $title->getNamespace() ) !== [ '' ]
+				if (
+					$permissionManager->getNamespaceRestrictionLevels( $title->getNamespace() ) !== [ '' ]
 				) {
 					// Page protected from editing
 					if ( $title->isProtected( 'edit' ) ) {
@@ -499,12 +505,12 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Simplified EditPage::getEditPermissionErrors()
-				$permErrors = $title->getUserPermissionsErrors( 'edit', $user, 'full' );
+				$permErrors = $permissionManager->getPermissionErrors( 'edit', $user, $title, 'full' );
 				if ( !$title->exists() ) {
 					$permErrors = array_merge(
 						$permErrors,
 						wfArrayDiff2(
-							$title->getUserPermissionsErrors( 'create', $user, 'full' ),
+							$permissionManager->getPermissionErrors( 'create', $user, $title, 'full' ),
 							$permErrors
 						)
 					);
@@ -558,7 +564,6 @@ class ApiVisualEditor extends ApiBase {
 
 				$block = null;
 				$blockinfo = null;
-				$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 				// Blocked user notice
 				if ( $user->isBlockedGlobally() ) {
 					$block = $user->getGlobalBlock();
@@ -566,7 +571,7 @@ class ApiVisualEditor extends ApiBase {
 					$block = $user->getBlock();
 				}
 				if ( $block ) {
-					// Already added to $notices via #getUserPermissionsErrors above.
+					// Already added to $notices via #getPermissionErrors above.
 					// Add block info for MobileFrontend:
 					$blockinfo = $this->getBlockDetails( $block );
 				}
