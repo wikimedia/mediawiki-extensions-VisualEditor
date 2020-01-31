@@ -326,8 +326,9 @@
 					missingTitle = {};
 					missingTitle[ title ] = { missing: true };
 					ve.init.platform.linkCache.setMissing( missingTitle );
-				} else if ( data.pages[ id ].notemplatedata ) {
-					// Prevent asking again for templates that have no specs
+				} else if ( data.pages[ id ].notemplatedata && !OO.isPlainObject( data.pages[ id ].params ) ) {
+					// (T243868) Prevent asking again for templates that have neither user-provided specs
+					// nor automatically detected params
 					specs[ title ] = null;
 				} else {
 					specs[ title ] = data.pages[ id ];
