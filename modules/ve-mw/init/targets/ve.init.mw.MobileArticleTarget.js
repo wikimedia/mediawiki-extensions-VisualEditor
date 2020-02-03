@@ -103,34 +103,6 @@ ve.init.mw.MobileArticleTarget.prototype.activateSurfaceForToolbar = function ()
 	}
 };
 
-ve.init.mw.MobileArticleTarget.prototype.updateIosContextPadding = function () {
-	var browserMenuCollapsedHeight, currentHeight;
-
-	if ( !this.$screenMeasure ) {
-		this.$screenMeasure = $( '<div>' ).addClass( 've-init-mw-mobileArticleTarget-iosScreenMeasure' );
-	}
-
-	this.$screenMeasure.appendTo( document.body );
-	// This element is sized using 'vh' units, which iOS does not actually update to match the
-	// viewport when viewport size changes due to browser menu bar collapsing/expanding.
-	browserMenuCollapsedHeight = this.$screenMeasure.height();
-	this.$screenMeasure.detach();
-
-	currentHeight = window.innerHeight;
-
-	if ( browserMenuCollapsedHeight === currentHeight ) {
-		// Looks like the browser menu bar is collapsed. Tapping near the bottom of the screen will not
-		// trigger any events on our widgets, but instead it will expand the browser menu bar. Reserve
-		// some space where the browser menu bar will appear.
-		this.surface.getContext().$element.css( 'padding-bottom', 44 );
-	} else {
-		// Looks like the browser menu is expanded, so we can remove the silly padding. Even if our
-		// check here breaks in future versions of iOS, that's okay, the user will just need to tap
-		// things in this area twice.
-		this.surface.getContext().$element.css( 'padding-bottom', 0 );
-	}
-};
-
 /**
  * @inheritdoc
  */
@@ -151,10 +123,6 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 		// Editor may not have loaded yet, in which case `this.surface` is undefined
 		surfaceView = this.surface && this.surface.getView(),
 		isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
-
-	if ( ve.init.platform.constructor.static.isIos() ) {
-		this.updateIosContextPadding();
-	}
 
 	// On iOS Safari, when the keyboard is open, the layout viewport reported by the browser is not
 	// updated to match the real viewport reduced by the keyboard (diagram: T218414#5027607). On all
