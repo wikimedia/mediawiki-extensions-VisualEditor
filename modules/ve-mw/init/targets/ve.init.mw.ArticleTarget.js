@@ -2107,7 +2107,7 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 			windowManager.openWindow(
 				this.welcomeDialog,
 				{
-					switchable: this.constructor.static.trackingName !== 'mobile',
+					switchable: true,
 					editor: this.getDefaultMode()
 				}
 			)
@@ -2115,9 +2115,6 @@ ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 					target.welcomeDialogPromise.resolve();
 					target.welcomeDialog = null;
 					if ( data && data.action === 'switch-wte' ) {
-						// TODO: Make this work on mobile - right now we can only
-						// get away with it because the button which triggers this
-						// action is hidden on mobile
 						target.switchToWikitextEditor( false );
 					} else if ( data && data.action === 'switch-ve' ) {
 						target.switchToVisualEditor();
