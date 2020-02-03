@@ -435,6 +435,10 @@ class ApiVisualEditor extends ApiBase {
 					$notices[] = $this->msg( 'readonlywarning', wfReadOnlyReason() );
 				}
 
+				// Edit notices about the page being protected (only used when we're allowed to edit it;
+				// otherwise, a generic permission error is displayed via #getUserPermissionsErrors)
+				$protectionNotices = [];
+
 				// New page notices
 				if ( !$title->exists() ) {
 					$notices[] = $this->msg(
@@ -443,11 +447,13 @@ class ApiVisualEditor extends ApiBase {
 							$this->msg( 'helppage' )->inContentLanguage()->text()
 						) )
 					)->parseAsBlock();
+
 					// Page protected from creation
 					if ( $title->getRestrictions( 'create' ) ) {
-						$notices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock() .
+						$protectionNotices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
 					}
+
 					// From EditPage#showIntro, checking if the page has previously been deleted:
 					$dbr = wfGetDB( DB_REPLICA );
 					LogEventsList::showLogExtract( $out, [ 'delete', 'move' ], $title,
@@ -482,7 +488,7 @@ class ApiVisualEditor extends ApiBase {
 							// Then it must be protected based on static groups (regular)
 							$noticeMsg = 'protectedpagewarning';
 						}
-						$notices[] = $this->msg( $noticeMsg )->parseAsBlock() .
+						$protectionNotices[] = $this->msg( $noticeMsg )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
 					}
 
@@ -500,7 +506,7 @@ class ApiVisualEditor extends ApiBase {
 								"</li>";
 						}
 						$notice .= '</ul>';
-						$notices[] = $notice;
+						$protectionNotices[] = $notice;
 					}
 				}
 
@@ -522,6 +528,9 @@ class ApiVisualEditor extends ApiBase {
 					// That method returns wikitext (eww), hack to get it parsed:
 					$notice = ( new RawMessage( '$1', [ $notice ] ) )->parseAsBlock();
 					$notices[] = $notice;
+				} elseif ( $protectionNotices ) {
+					// If we can edit, and the page is protected, then show the details about the protection
+					$notices = array_merge( $notices, $protectionNotices );
 				}
 
 				// Will be false e.g. if user is blocked or page is protected
