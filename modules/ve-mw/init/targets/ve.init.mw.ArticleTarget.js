@@ -1475,6 +1475,14 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		token: this.editToken
 	} );
 
+	if ( mw.config.get( 'wgVisualEditorConfig' ).useChangeTagging && !data.tags ) {
+		if ( this.getSurface().getMode() === 'source' ) {
+			data.tags = [ 'visualeditor-wikitext' ];
+		} else {
+			data.tags = [ 'visualeditor' ];
+		}
+	}
+
 	promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
 		.done( this.saveComplete.bind( this ) )
 		.fail( this.saveFail.bind( this, doc, data, !!isRetry ) )

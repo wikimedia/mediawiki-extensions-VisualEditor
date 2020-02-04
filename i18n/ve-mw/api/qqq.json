@@ -72,6 +72,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "{{doc-apihelp-param|visualeditoredit|sectiontitle}}",
 	"apihelp-visualeditoredit-param-starttimestamp": "{{doc-apihelp-param|visualeditoredit|starttimestamp}}",
 	"apihelp-visualeditoredit-param-summary": "{{doc-apihelp-param|visualeditoredit|summary}}\n{{Identical|Edit summary}}",
+	"apihelp-visualeditoredit-param-tags": "{{doc-apihelp-param|visualeditoredit|tags}}",
 	"apihelp-visualeditoredit-param-watch": "{{doc-apihelp-param|visualeditoredit|watch}}",
 	"apihelp-visualeditoredit-param-wikitext": "{{doc-apihelp-param|visualeditoredit|wikitext}}",
 	"apihelp-visualeditoredit-summary": "{{doc-apihelp-summary|visualeditoredit}}"

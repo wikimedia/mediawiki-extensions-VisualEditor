@@ -896,8 +896,9 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Implements the ListDefinedTags and ChangeTagsListActive hooks, to populate
-	 * core Special:Tags with the change tags in use by VisualEditor.
+	 * Implements the ListDefinedTags, ChangeTagsListActive, and
+	 * ChangeTagsAllowedAdd hooks, to populate core Special:Tags with the change
+	 * tags in use by VisualEditor.
 	 *
 	 * @param array &$tags Available change tags.
 	 */
@@ -973,6 +974,7 @@ class VisualEditorHooks {
 				$veConfig->get( 'VisualEditorEnableWikitext' ) ||
 				$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
 			),
+			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
 			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
