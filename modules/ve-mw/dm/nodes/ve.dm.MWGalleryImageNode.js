@@ -88,23 +88,22 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 
 ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	// ImageNode:
-	// <li> li (gallerybox)
-	//   <div> outerDiv
+	//   <li> li (gallerybox)
 	//     <div> thumbDiv
-	//       <div> innerDiv
+	//       <figure-inline> innerDiv
 	//         <a> a
 	//           <img> img
 	var model = data,
 		li = doc.createElement( 'li' ),
-		outerDiv = doc.createElement( 'div' ),
 		thumbDiv = doc.createElement( 'div' ),
-		innerDiv = doc.createElement( 'div' ),
+		innerDiv = doc.createElement( 'figure-inline' ),
 		a = doc.createElement( 'a' ),
 		img = doc.createElement( 'img' ),
 		alt = model.attributes.altText;
 
 	li.classList.add( 'gallerybox' );
 	thumbDiv.classList.add( 'thumb' );
+	innerDiv.setAttribute( 'typeof', 'mw:Image' );
 
 	// TODO: Support editing the link
 	// a.setAttribute( 'href', model.attributes.src );
@@ -118,8 +117,7 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	a.appendChild( img );
 	innerDiv.appendChild( a );
 	thumbDiv.appendChild( innerDiv );
-	outerDiv.appendChild( thumbDiv );
-	li.appendChild( outerDiv );
+	li.appendChild( thumbDiv );
 
 	return [ li ];
 };
