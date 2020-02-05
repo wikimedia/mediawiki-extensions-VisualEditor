@@ -587,12 +587,12 @@
 			// Set up the tabs appropriately if the user has VE on
 			if ( init.isAvailable ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
-				if ( !init.isSingleEditTab && init.isVisualAvailable && enabledForUser ) {
+				if ( !init.isSingleEditTab && init.isVisualAvailable ) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupMultiTabSkin();
 				} else if (
 					pageCanLoadEditor && (
-						( init.isVisualAvailable && enabledForUser && isOnlyTabVE() ) ||
+						( init.isVisualAvailable && isOnlyTabVE() ) ||
 						( init.isWikitextAvailable && isOnlyTabWikitext() )
 					)
 				) {
@@ -679,7 +679,7 @@
 			}
 
 			// If the edit tab is hidden, remove it.
-			if ( !( init.isVisualAvailable && enabledForUser ) ) {
+			if ( !( init.isVisualAvailable ) ) {
 				$caVeEdit.remove();
 			} else if ( pageCanLoadEditor ) {
 				// Allow instant switching to edit mode, without refresh
@@ -1015,16 +1015,32 @@
 		mw.config.get( 'wgTwoColConflict' ) !== 'true'
 	);
 
+	enabledForUser = (
+		// Allow disabling for anonymous users separately from changing the
+		// default preference (T52000)
+		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
+
+		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
+		// User has 'visualeditor-betatempdisable' preference disabled
+		// User has 'visualeditor-autodisable' preference disabled
+		enable && !tempdisable && !autodisable &&
+
+		// Except when single edit tab for old wikitext
+		!( conf.singleEditTab && tabPreference === 'prefer-wt' && !init.isWikitextAvailable )
+	);
+
 	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
 	init.isVisualAvailable = (
 		init.isAvailable &&
 
-		(
+		// If forced by the URL parameter, skip the namespace check (T221892) and preference check
+		( uri.query.veaction === 'edit' || (
 			// Only in enabled namespaces
-			conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 ||
-			// Or if forced by the URL parameter (T221892)
-			uri.query.veaction === 'edit'
-		) &&
+			conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
+
+			// Enabled per user preferences
+			enabledForUser
+		) ) &&
 
 		// Only for pages with a supported content model
 		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) )
@@ -1052,20 +1068,6 @@
 		availableModes.push( 'source' );
 	}
 
-	enabledForUser = (
-		// Allow disabling for anonymous users separately from changing the
-		// default preference (T52000)
-		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
-
-		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
-		// User has 'visualeditor-betatempdisable' preference disabled
-		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable &&
-
-		// Except when single edit tab for old wikitext
-		!( conf.singleEditTab && tabPreference === 'prefer-wt' && !init.isWikitextAvailable )
-	);
-
 	// FIXME: We should do this more elegantly
 	init.setEditorPreference = setEditorPreference;
 
@@ -1081,7 +1083,7 @@
 	// on this page. See above for why it may be false.
 	mw.libs.ve = $.extend( mw.libs.ve || {}, init );
 
-	if ( init.isVisualAvailable && enabledForUser ) {
+	if ( init.isVisualAvailable ) {
 		$( 'html' ).addClass( 've-available' );
 	} else {
 		$( 'html' ).addClass( 've-not-available' );
