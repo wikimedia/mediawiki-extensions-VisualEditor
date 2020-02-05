@@ -41,7 +41,8 @@
 			"Patio",
 			"KlaasZ4usV",
 			"Ciell",
-			"Elroy"
+			"Elroy",
+			"Bdijkstra"
 		]
 	},
 	"collabpad-import-subtitle": "Geïmporteerd van $1",
@@ -330,7 +331,7 @@
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|Eén ander veld|$1 andere velden}} weergeven",
 	"visualeditor-parameter-search-no-unused": "Geen ongebruikte velden",
 	"visualeditor-parameter-search-unknown": "Onbekend veld",
-	"visualeditor-preference-betatempdisable": "Visuele tekstverwerker tijdelijk uitschakelen zolang deze in beta is",
+	"visualeditor-preference-betatempdisable": "Visuele tekstverwerker tijdelijk uitschakelen zolang deze in bèta is",
 	"visualeditor-preference-core-description": "Visuele tekstverwerker inschakelen. Deze tekstverwerker is niet beschikbaar op overlegpagina's en sommige andere naamruimten.",
 	"visualeditor-preference-core-label": "Visueel bewerken",
 	"visualeditor-preference-enable": "Visuele tekstverwerker inschakelen. Deze is beschikbaar in de volgende {{PLURAL:$2|naamruimte|naamruimten}}: $1",
