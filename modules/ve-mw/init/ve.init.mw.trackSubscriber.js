@@ -89,8 +89,6 @@
 			duration = 0,
 			event;
 
-		timeStamp = timeStamp || this.timeStamp; // I8e82acc12 back-compat
-
 		if ( action === 'init' ) {
 			if ( firstInitDone ) {
 				// Regenerate editingSessionId
