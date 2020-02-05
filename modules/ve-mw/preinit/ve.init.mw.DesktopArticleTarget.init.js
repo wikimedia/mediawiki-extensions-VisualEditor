@@ -585,18 +585,18 @@
 			}
 
 			// Set up the tabs appropriately if the user has VE on
-			if ( init.isAvailable && enabledForUser ) {
+			if ( init.isAvailable ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
-				if ( !init.isSingleEditTab ) {
+				if ( !init.isSingleEditTab && init.isVisualAvailable && enabledForUser ) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupMultiTabSkin();
 				} else if (
 					pageCanLoadEditor && (
-						( init.isVisualAvailable && isOnlyTabVE() ) ||
+						( init.isVisualAvailable && enabledForUser && isOnlyTabVE() ) ||
 						( init.isWikitextAvailable && isOnlyTabWikitext() )
 					)
 				) {
-					// … on single-edit-tab wikis, where VE is the user's preferred editor
+					// … on single-edit-tab wikis, where VE or NWE is the user's preferred editor
 					// Handle section edit link clicks
 					$( '.mw-editsection a' ).off( '.ve-target' ).on( 'click.ve-target', function ( e ) {
 						// isOnlyTabVE is computed on click as it may have changed since load
