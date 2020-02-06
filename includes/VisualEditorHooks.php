@@ -25,6 +25,14 @@ class VisualEditorHooks {
 		'veswitched'
 	];
 
+	private static $tags = [
+		'visualeditor',
+		'visualeditor-wikitext',
+		// No longer in active use:
+		'visualeditor-needcheck',
+		'visualeditor-switched'
+	];
+
 	/**
 	 * Initialise the 'VisualEditorAvailableNamespaces' setting, and add content
 	 * namespaces to it. This will run after LocalSettings.php is processed.
@@ -594,6 +602,7 @@ class VisualEditorHooks {
 	/**
 	 * Called when an edit is saved
 	 * Adds 'visualeditor-switched' tag to the edit if requested
+	 * Adds whatever tags from static::$tags are present in the vetags parameter
 	 *
 	 * @param RecentChange $rc The new RC entry.
 	 */
@@ -601,6 +610,12 @@ class VisualEditorHooks {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getBool( 'veswitched' ) && $rc->getAttribute( 'rc_this_oldid' ) ) {
 			$rc->addTags( 'visualeditor-switched' );
+		}
+
+		$tags = explode( ',', $request->getVal( 'vetags' ) );
+		$tags = array_values( array_intersect( $tags, static::$tags ) );
+		if ( $tags ) {
+			$rc->addTags( $tags );
 		}
 	}
 

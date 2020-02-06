@@ -1475,11 +1475,11 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		token: this.editToken
 	} );
 
-	if ( mw.config.get( 'wgVisualEditorConfig' ).useChangeTagging && !data.tags ) {
+	if ( mw.config.get( 'wgVisualEditorConfig' ).useChangeTagging && !data.vetags ) {
 		if ( this.getSurface().getMode() === 'source' ) {
-			data.tags = [ 'visualeditor-wikitext' ];
+			data.vetags = 'visualeditor-wikitext';
 		} else {
-			data.tags = [ 'visualeditor' ];
+			data.vetags = 'visualeditor';
 		}
 	}
 

@@ -133,7 +133,6 @@
 		"PreferencesFormPreSave": "VisualEditorHooks::onPreferencesFormPreSave",
 		"ListDefinedTags": "VisualEditorHooks::onListDefinedTags",
 		"ChangeTagsListActive": "VisualEditorHooks::onListDefinedTags",
-		"ChangeTagsAllowedAdd": "VisualEditorHooks::onListDefinedTags",
 		"MakeGlobalVariablesScript": "VisualEditorHooks::onMakeGlobalVariablesScript",
 		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks::onRedirectSpecialArticleRedirectParams",
 		"ResourceLoaderGetConfigVars": "VisualEditorHooks::onResourceLoaderGetConfigVars",
