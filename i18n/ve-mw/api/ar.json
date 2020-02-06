@@ -3,12 +3,13 @@
 		"authors": [
 			"Meno25",
 			"ديفيد",
-			"فلورانس"
+			"فلورانس",
+			"Matma Rex"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "لا cached serialization تم العثور عليه مع هذا المفتاح",
 	"apierror-visualeditor-difffailed": "فشل الفرق",
-	"apierror-visualeditor-docserver-http-error": "خطأ في الاتصال بخادم docserver-http: $1",
+	"apierror-visualeditor-docserver-http-error": "خطأ في الاتصال بخادم: $1",
 	"apierror-visualeditor-docserver-http": "خطأ في الاتصال بخادم Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver-unconfigured": "لم يتم تعريف VirtualRESTService لملقم المستند، انظر https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "خطأ في الاتصال بخادم Parsoid/RESTBase (بدون استجابة)",
