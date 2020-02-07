@@ -928,18 +928,13 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Implements the ListDefinedTags, ChangeTagsListActive, and
-	 * ChangeTagsAllowedAdd hooks, to populate core Special:Tags with the change
-	 * tags in use by VisualEditor.
+	 * Implements the ListDefinedTags and ChangeTagsListActive hooks, to
+	 * populate core Special:Tags with the change tags in use by VisualEditor.
 	 *
 	 * @param array &$tags Available change tags.
 	 */
 	public static function onListDefinedTags( &$tags ) {
-		$tags[] = 'visualeditor';
-		// No longer in active use:
-		$tags[] = 'visualeditor-needcheck';
-		$tags[] = 'visualeditor-switched';
-		$tags[] = 'visualeditor-wikitext';
+		$tags = array_merge( $tags, static::$tags );
 	}
 
 	/**
