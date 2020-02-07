@@ -9,15 +9,43 @@ QUnit.module( 've.dm.MWInternalLinkAnnotation' );
 QUnit.test( 'toDataElement', function ( assert ) {
 	var i, l,
 		doc = ve.dm.example.createExampleDocument(),
-		internalLink = function ( pageTitle ) {
+		externalLink = function ( href ) {
 			var link = document.createElement( 'a' );
-			link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl() );
+			link.setAttribute( 'href', href );
+			return link;
+		},
+		internalLink = function ( pageTitle, params ) {
+			var link = document.createElement( 'a' );
+			link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
 			return link;
 		},
 		cases = [
 			{
+				msg: 'Not an internal link',
+				element: externalLink( 'http://example.com/' ),
+				expected: {
+					type: 'link/mwExternal',
+					attributes: {
+						href: 'http://example.com/'
+					}
+				}
+			},
+			{
 				msg: 'Simple',
 				element: internalLink( 'Foo' ),
+				expected: {
+					type: 'link/mwInternal',
+					attributes: {
+						lookupTitle: 'Foo',
+						normalizedTitle: 'Foo',
+						origTitle: 'Foo',
+						title: 'Foo'
+					}
+				}
+			},
+			{
+				msg: 'Red link',
+				element: internalLink( 'Foo', { action: 'edit', redlink: '1' } ),
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
