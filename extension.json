@@ -1488,6 +1488,12 @@
 			],
 			"skinStyles": {
 				"default": [
+					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-wikimedia.css"
+				],
+				"apex": [
+					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.css"
+				],
+				"monobook": [
 					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.css"
 				]
 			},
