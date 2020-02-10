@@ -43,6 +43,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Наслов за нови одељак.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Када чувате, поставите ово на временску ознаку тренутка када је измена учитана. Користи се за откривање сукоба измена.",
 	"apihelp-visualeditoredit-param-summary": "Опис измене.",
+	"apihelp-visualeditoredit-param-tags": "Ознаке промена које би се примењивале на измену.",
 	"apihelp-visualeditoredit-param-watch": "Додавање странице на списак надгледања тренутног корисника.",
 	"apihelp-visualeditoredit-param-wikitext": "Викитекст са којим треба деловати.",
 	"apihelp-visualeditoredit-summary": "Чување странице која је у HTML5 формату на Медијавики (конвертоване у викитекст помоћу услуге Parsoid)."
