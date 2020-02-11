@@ -351,7 +351,7 @@
 	"visualeditor-parameter-search-more": "Label for item in parameter list that, when clicked, reveals additional parameters that had been truncated to save space.\n\nParameters:\n* $1 - number of fields (parameters)",
 	"visualeditor-parameter-search-no-unused": "Message displayed in the transclusion dialog when no known parameters are unused by this template.",
 	"visualeditor-parameter-search-unknown": "{{Identical|Unknown parameter}}",
-	"visualeditor-preference-betatempdisable": "Label for the temporary user preference to disable VisualEditor while it is in beta. Note that this label is still in use although VisualEditor is not in beta anymore. It should say something like \"disable VisualEditor\" to prevent confusion.",
+	"visualeditor-preference-betatempdisable": "Label for the temporary user preference to disable VisualEditor while it is in development, before it is available to all users without opt-out.",
 	"visualeditor-preference-core-description": "Used in [[Special:Preferences]].\n\nUsed as description for the checkbox to enable the visual editor.\n\nThe label for this checkbox is {{msg-mw|Visualeditor-preference-core-label}}.\n\nSee also:\n* {{msg-mw|Visualeditor-preference-enable}}",
 	"visualeditor-preference-core-discussion-link": "{{optional|Used on [[Special:Preferences]] as a link to a page where users can discuss this Beta Feature. Defaults to a page on MediaWiki.org.}}",
 	"visualeditor-preference-core-info-link": "{{optional|Used on [[Special:Preferences]] as a link to a page where users can learn about this Beta Feature. Defaults to a page on MediaWiki.org.}}",
