@@ -225,7 +225,8 @@ class VisualEditorHooks {
 	 * @return bool
 	 */
 	private static function isSupportedEditPage( Title $title, User $user, WebRequest $req ) {
-		if ( $req->getVal( 'action' ) !== 'edit' || !$title->quickUserCan( 'edit' ) ) {
+		if ( $req->getVal( 'action' ) !== 'edit' || !MediaWikiServices::getInstance()
+			->getPermissionManager()->quickUserCan( 'edit', $user, $title ) ) {
 			return false;
 		}
 
