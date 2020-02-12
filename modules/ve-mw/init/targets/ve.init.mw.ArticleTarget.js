@@ -348,12 +348,13 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 	if ( !data || typeof data.content !== 'string' ) {
 		this.loadFail( 've-api', { errors: [ {
 			code: 've-api',
-			html: 'No HTML content in response from server'
+			html: mw.message( 'api-clientside-error-invalidresponse' ).parse()
 		} ] } );
 	} else if ( response.veMode && response.veMode !== this.getDefaultMode() ) {
 		this.loadFail( 've-mode', { errors: [ {
 			code: 've-mode',
-			html: 'Tried to load "' + response.veMode + '" data into "' + this.getDefaultMode() + '" editor'
+			html: mw.message( 'visualeditor-loaderror-wrongmode',
+				response.veMode, this.getDefaultMode() ).parse()
 		} ] } );
 	} else {
 		this.track( 'trace.parseResponse.enter' );
@@ -403,7 +404,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	if ( !data ) {
 		this.loadFail( 've-api', { errors: [ {
 			code: 've-api',
-			html: 'No metadata content in response from server'
+			html: mw.message( 'api-clientside-error-invalidresponse' ).parse()
 		} ] } );
 		return false;
 	}
@@ -434,7 +435,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			// Retried already, just error the second time.
 			this.loadFail( 've-api', { errors: [ {
 				code: 've-api',
-				html: 'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') returned by server do not match'
+				html: mw.message( 'visualeditor-loaderror-revidconflict',
+					String( docRevId ), String( this.revid ) ).parse()
 			} ] } );
 		} else {
 			this.retriedRevIdConflict = true;

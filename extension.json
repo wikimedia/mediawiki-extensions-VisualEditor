@@ -775,6 +775,8 @@
 				"visualeditor-pagetranslationwarning",
 				"visualeditor-recreate",
 				"visualeditor-redirect-description",
+				"visualeditor-loaderror-revidconflict",
+				"visualeditor-loaderror-wrongmode",
 				"visualeditor-saveerror",
 				"visualeditor-serializeerror"
 			],
