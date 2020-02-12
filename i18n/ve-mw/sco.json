@@ -3,7 +3,8 @@
 		"authors": [
 			"John Reid",
 			"Amire80",
-			"Foxj"
+			"Foxj",
+			"AmaryllisGardener"
 		]
 	},
 	"tooltip-ca-createsource": "Cræft the soorce code o this page",
@@ -185,11 +186,11 @@
 	"visualeditor-savedialog-label-report": "Report proablem",
 	"visualeditor-savedialog-label-resolve-conflict": "Resolve conflict",
 	"visualeditor-savedialog-label-resume-editing": "Conteena makin chynges",
-	"visualeditor-savedialog-label-review": "Luikower yer chynges",
+	"visualeditor-savedialog-label-review": "Leuk ower yer chynges",
 	"visualeditor-savedialog-label-review-good": "Return til hain form",
 	"visualeditor-savedialog-label-warning": "Warnisment",
 	"visualeditor-savedialog-title-conflict": "Conflict",
-	"visualeditor-savedialog-title-review": "Luikower yer chynges",
+	"visualeditor-savedialog-title-review": "Leuk ower yer chynges",
 	"visualeditor-savedialog-title-save": "Hain yer chynges",
 	"visualeditor-savedialog-warning-dirty": "Yer eedit micht hae been rotted - please luikower afore hainin.",
 	"visualeditor-saveerror": "Mistak hainin data til server: $1.",
