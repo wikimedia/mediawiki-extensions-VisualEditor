@@ -346,10 +346,15 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data || typeof data.content !== 'string' ) {
-		this.loadFail( 've-api', 'No HTML content in response from server' );
+		this.loadFail( 've-api', { errors: [ {
+			code: 've-api',
+			html: 'No HTML content in response from server'
+		} ] } );
 	} else if ( response.veMode && response.veMode !== this.getDefaultMode() ) {
-		this.loadFail( 've-mode', 'Tried to load "' + response.veMode + '" data ' +
-			'into "' + this.getDefaultMode() + '" editor' );
+		this.loadFail( 've-mode', { errors: [ {
+			code: 've-mode',
+			html: 'Tried to load "' + response.veMode + '" data into "' + this.getDefaultMode() + '" editor'
+		} ] } );
 	} else {
 		this.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
@@ -396,7 +401,10 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data ) {
-		this.loadFail( 've-api', 'No metadata content in response from server' );
+		this.loadFail( 've-api', { errors: [ {
+			code: 've-api',
+			html: 'No metadata content in response from server'
+		} ] } );
 		return false;
 	}
 
@@ -424,11 +432,10 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	if ( docRevId && docRevId !== this.revid ) {
 		if ( this.retriedRevIdConflict ) {
 			// Retried already, just error the second time.
-			this.loadFail(
-				've-api',
-				'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') ' +
-					'returned by server do not match'
-			);
+			this.loadFail( 've-api', { errors: [ {
+				code: 've-api',
+				html: 'Revision IDs (doc=' + docRevId + ',api=' + this.revid + ') returned by server do not match'
+			} ] } );
 		} else {
 			this.retriedRevIdConflict = true;
 			// TODO this retries both requests, in RESTbase mode we should only retry
@@ -623,8 +630,8 @@ ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
  *
  * This method is called within the context of a target instance.
  *
- * @param {string} code Error type text from mw.Api
- * @param {Object|string} errorDetails Either an object containing xhr, textStatus and exception keys, or a string.
+ * @param {string} code Error code from mw.Api
+ * @param {Object} errorDetails API response
  * @fires loadError
  */
 ve.init.mw.ArticleTarget.prototype.loadFail = function () {
