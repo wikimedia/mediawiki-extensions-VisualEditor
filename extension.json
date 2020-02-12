@@ -341,6 +341,7 @@
 			"dependencies": [
 				"ext.visualEditor.track",
 				"ext.visualEditor.core.utils.parsing",
+				"mediawiki.jqueryMsg",
 				"mediawiki.String",
 				"jquery.textSelection",
 				"mediawiki.api",

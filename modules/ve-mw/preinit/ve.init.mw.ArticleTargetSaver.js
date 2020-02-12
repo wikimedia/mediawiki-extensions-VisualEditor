@@ -254,7 +254,7 @@
 					if ( !data ) {
 						error = {
 							code: 'invalidresponse',
-							html: mw.msg( 'visualeditor-error-invalidresponse' )
+							html: mw.message( 'api-clientside-error-invalidresponse' ).parse()
 						};
 					} else if ( data.result !== 'success' ) {
 						// This should only happen when saving an edit and getting a captcha from ConfirmEdit
@@ -268,7 +268,7 @@
 								if ( typeof data.content !== 'string' ) {
 									error = {
 										code: 'invalidcontent',
-										html: mw.msg( 'visualeditor-error-invalidcontent' )
+										html: mw.message( 'api-clientside-error-invalidresponse' ).parse()
 									};
 								}
 								break;
@@ -276,7 +276,7 @@
 								if ( typeof data.diff !== 'string' ) {
 									error = {
 										code: 'invalidcontent',
-										html: mw.msg( 'visualeditor-error-invalidcontent' )
+										html: mw.message( 'api-clientside-error-invalidresponse' ).parse()
 									};
 								}
 								break;
