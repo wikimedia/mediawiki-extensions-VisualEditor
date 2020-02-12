@@ -341,11 +341,12 @@ ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function ( startPr
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( key, text ) {
+ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( code, errorDetails ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
-	this.overlay.reportError( text );
+	window.history.back();
+	mw.notify( this.extractErrorMessages( errorDetails ) );
 };
 
 /**
