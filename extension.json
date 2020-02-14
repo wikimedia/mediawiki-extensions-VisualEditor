@@ -1728,6 +1728,7 @@
 				"modules/ve-mw/ce/nodes/ve.ce.MWImageCaptionNode.js"
 			],
 			"styles": [
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWImageNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWBlockImageNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWInlineImageNode.css"
 			],

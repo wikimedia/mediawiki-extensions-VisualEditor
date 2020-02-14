@@ -283,16 +283,31 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 	}
 
 	// Deal with maximum dimensions for images and drawings
-	if ( mediaType !== 'DRAWING' ) {
+	if ( mediaType === 'DRAWING' ) {
+		// Vector images are scalable past their original dimensions
+		// EnforcedMax may have previously been set to true
+		scalable.setEnforcedMax( false );
+
+	} else if ( mediaType === 'AUDIO' ) {
+		// Audio files are scalable to any width but have fixed height
+		scalable.fixedRatio = false;
+		scalable.setMinDimensions( { width: 1, height: 32 } );
+		// TODO: No way to enforce max height but not max width
+		scalable.setMaxDimensions( { width: 99999, height: 32 } );
+		scalable.setEnforcedMax( true );
+		scalable.setEnforcedMin( true );
+
+		// Default dimensions for audio files are 0x0, which is no good
+		scalable.setDefaultDimensions( { width: defaultThumbSize, height: 32 } );
+
+	} else {
+		// Raster image files are limited to their original dimensions
 		if ( originalDimensions ) {
 			scalable.setMaxDimensions( originalDimensions );
 			scalable.setEnforcedMax( true );
 		} else {
 			scalable.setEnforcedMax( false );
 		}
-	} else {
-		// EnforcedMax may have previously been set to true
-		scalable.setEnforcedMax( false );
 	}
 	// TODO: Some day, when svgMaxSize works properly in MediaWiki
 	// we can add it back as max dimension consideration:
