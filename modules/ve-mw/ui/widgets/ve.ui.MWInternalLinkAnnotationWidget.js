@@ -74,6 +74,7 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 	// override maxLength config option, because that would break the validation).
 	input.getQuery().$input.removeAttr( 'maxlength' );
 
+	input.query.$input.attr( 'aria-label', mw.msg( 'visualeditor-linkinspector-button-link-internal' ) );
 	return input;
 };
 

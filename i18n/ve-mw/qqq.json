@@ -242,6 +242,7 @@
 	"visualeditor-generating-wikitext-progress": "Label for progress bar shown while generating wikitext.",
 	"visualeditor-languages-tool": "Tool for opening the languages links section of the meta dialog.\n{{Identical|Language}}",
 	"visualeditor-linkinspector-button-link-external": "Button label for entering an link to an external site.",
+	"visualeditor-linkinspector-button-link-internal": "Prompt users' with assitive technologies to search an internal page",
 	"visualeditor-linkinspector-convert-link-isbn": "Button label for converting a simple link to a ISBN magic link.",
 	"visualeditor-linkinspector-convert-link-pmid": "Button label for converting a simple link to a PMID magic link.",
 	"visualeditor-linkinspector-convert-link-rfc": "Button label for converting a simple link to a RFC magic link.",

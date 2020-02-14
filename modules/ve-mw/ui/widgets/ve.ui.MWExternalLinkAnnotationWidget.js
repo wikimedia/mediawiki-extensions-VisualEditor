@@ -51,13 +51,16 @@ ve.ui.MWExternalLinkAnnotationWidget.static.getAnnotationFromText = function ( v
  * @return {OO.ui.TextInputWidget} Text input widget
  */
 ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget = function ( config ) {
-	return new OO.ui.TextInputWidget( $.extend( {}, config, {
+	var inputWidget = new OO.ui.TextInputWidget( $.extend( {}, config, {
 		icon: 'linkExternal',
 		type: 'url',
 		validate: function ( text ) {
 			return !!ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( text.trim() );
 		}
 	} ) );
+
+	inputWidget.$input.attr( 'aria-label', mw.msg( 'visualeditor-linkinspector-button-link-external' ) );
+	return inputWidget;
 };
 
 /* Methods */
