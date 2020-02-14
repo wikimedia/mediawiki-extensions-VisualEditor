@@ -395,6 +395,8 @@
 	"visualeditor-section-body-placeholder": "新章節",
 	"visualeditor-section-title-placeholder": "主題",
 	"visualeditor-serializeerror": "讀取伺服器資料發生錯誤：$1 。",
+	"visualeditor-loaderror-revidconflict": "由伺服器回傳的修訂 ID 不相符（文件：$1，詮釋資料：$2）。",
+	"visualeditor-loaderror-wrongmode": "嘗試以錯誤的模式來載入編輯器（資料類型：「$1」，編輯器模式：「$2」）。",
 	"visualeditor-settings-tool": "頁面設定",
 	"visualeditor-special-characters-group-other": "經常使用",
 	"visualeditor-templatesused-tool": "使用的模板",

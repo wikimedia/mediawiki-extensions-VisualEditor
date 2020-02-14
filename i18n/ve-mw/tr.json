@@ -392,6 +392,8 @@
 	"visualeditor-section-body-placeholder": "Yeni bölüm",
 	"visualeditor-section-title-placeholder": "Konu",
 	"visualeditor-serializeerror": "Sunucudan veri yüklenirken hata oluştu: $1.",
+	"visualeditor-loaderror-revidconflict": "Sunucu tarafından döndürülen düzeltme kimlikleri eşleşmiyor (belge: $1, meta veri: $2)",
+	"visualeditor-loaderror-wrongmode": "Düzenleyiciyi yanlış modda yüklemeyi denedi (veri türü: \"$1\", düzenleyici modu: \"$2\").",
 	"visualeditor-settings-tool": "Sayfa ayarları",
 	"visualeditor-special-characters-group-other": "Sık kullanılan",
 	"visualeditor-templatesused-tool": "Kullanılan şablonlar",

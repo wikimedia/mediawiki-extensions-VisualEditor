@@ -375,6 +375,8 @@
 	"visualeditor-section-body-placeholder": "Нов поднаслов",
 	"visualeditor-section-title-placeholder": "Наслов",
 	"visualeditor-serializeerror": "Грешка при вчитувањето на податоците од опслужувачот: $1.",
+	"visualeditor-loaderror-revidconflict": "Назнаките на преработките што ги даде опслужувачот не се совпаѓаат (документ: $1, метаподатоци: $2).",
+	"visualeditor-loaderror-wrongmode": "Се обидовте да го вчитате уредникот во погрешен режим (податочен тип: „$1“, уреднички режим: „$2“).",
 	"visualeditor-settings-tool": "Поставки за страницата",
 	"visualeditor-special-characters-group-other": "Често користени",
 	"visualeditor-templatesused-tool": "Користени предлошки",

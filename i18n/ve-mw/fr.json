@@ -52,7 +52,8 @@
 			"DePlusJean",
 			"Trizek (WMF)",
 			"Od1n",
-			"Zarisi"
+			"Zarisi",
+			"Derugon"
 		]
 	},
 	"collabpad-doctitle": "CollabPad : $1",
@@ -422,6 +423,8 @@
 	"visualeditor-section-body-placeholder": "Nouvelle section",
 	"visualeditor-section-title-placeholder": "Sujet",
 	"visualeditor-serializeerror": "Erreur lors du chargement des données depuis le serveur : $1.",
+	"visualeditor-loaderror-revidconflict": "Les ID de révision renvoyés par le serveur ne correspondent pas (document : $1, métadonnées : $2)",
+	"visualeditor-loaderror-wrongmode": "Tentative de chargement de l’éditeur dans le mauvais mode (type de donnée : « $1 », mode de l’éditeur : « $2 »).",
 	"visualeditor-settings-tool": "Paramètres de la page",
 	"visualeditor-special-characters-group-other": "Souvent utilisé",
 	"visualeditor-templatesused-tool": "Modèles utilisés",
