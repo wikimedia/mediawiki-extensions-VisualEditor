@@ -40,6 +40,9 @@ ve.ce.MWImageNode = function VeCeMWImageNode( $focusable, $image, config ) {
 
 	// Events
 	this.model.connect( this, { attributeChange: 'onAttributeChange' } );
+
+	// Initialization
+	this.updateMediaType();
 };
 
 /* Inheritance */
@@ -164,4 +167,15 @@ ve.ce.MWImageNode.prototype.render = function ( generatedContents ) {
  */
 ve.ce.MWImageNode.prototype.onParseError = function ( deferred ) {
 	deferred.reject();
+};
+
+/**
+ * Update rendering when media type changes
+ */
+ve.ce.MWImageNode.prototype.updateMediaType = function () {
+	if ( this.model.getMediaType() === 'AUDIO' ) {
+		this.$image.addClass( 've-ce-mwImageNode-audioPlayer' );
+	} else {
+		this.$image.removeClass( 've-ce-mwImageNode-audioPlayer' );
+	}
 };

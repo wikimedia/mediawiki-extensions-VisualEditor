@@ -111,6 +111,9 @@ ve.ce.MWInlineImageNode.prototype.onAttributeChange = function ( key, from, to )
 			case 'height':
 				this.$image.css( 'height', to );
 				break;
+			case 'mediaType':
+				this.updateMediaType();
+				break;
 		}
 		this.updateClasses();
 	}
