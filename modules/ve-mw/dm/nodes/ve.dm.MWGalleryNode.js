@@ -72,7 +72,6 @@ ve.dm.MWGalleryNode.static.toDomElements = function ( data, doc ) {
 	var ul = doc.createElement( 'ul' );
 
 	// Build ul
-	ul.classList.add( 'gallery' );
 	ul.setAttribute( 'typeof', 'mw:Extension/gallery' );
 	ul.setAttribute( 'data-mw', JSON.stringify( data.attributes.mw ) );
 
