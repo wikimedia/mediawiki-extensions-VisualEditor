@@ -461,51 +461,35 @@ ve.init.mw.Target.prototype.teardown = function () {
  * @return {jQuery.Promise} Promise resolved with new username, or null if anonymous
  */
 ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
-	var api = this.getContentApi( doc ),
-		deferred = ve.createDeferred();
-	api.get( {
+	return this.getContentApi( doc ).get( {
 		action: 'query',
 		meta: 'userinfo'
-	} )
-		.done( function ( data ) {
-			var
-				userInfo = data.query && data.query.userinfo,
-				isAnon = mw.user.isAnon();
+	} ).then( function ( data ) {
+		var userInfo = data.query && data.query.userinfo;
 
-			if ( userInfo ) {
-				if (
-					( isAnon && userInfo.anon !== undefined ) ||
-						// Comparing id instead of name to protect against possible
-						// normalisation and against case where the user got renamed.
-						mw.config.get( 'wgUserId' ) === userInfo.id
-				) {
-					// New session is the same user still
-					deferred.resolve( mw.user.getName() );
-				} else {
-					// The now current session is a different user
-					if ( userInfo.anon !== undefined ) {
-						// New session is an anonymous user
-						mw.config.set( {
-							// wgUserId is unset for anonymous users, not set to null
-							wgUserId: undefined,
-							// wgUserName is explicitly set to null for anonymous users,
-							// functions like mw.user.isAnon rely on this.
-							wgUserName: null
-						} );
-					} else {
-						// New session is a different user
-						mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
-					}
-					deferred.resolve( mw.user.getName() );
-				}
-			} else {
-				deferred.reject();
-			}
-		} )
-		.fail( function () {
-			deferred.reject();
-		} );
-	return deferred.promise();
+		if ( !userInfo ) {
+			return ve.createDeferred().reject();
+		}
+
+		if ( userInfo.anon !== undefined ) {
+			// New session is an anonymous user
+			mw.config.set( {
+				// wgUserId is unset for anonymous users, not set to null
+				wgUserId: undefined,
+				// wgUserName is explicitly set to null for anonymous users,
+				// functions like mw.user.isAnon rely on this.
+				wgUserName: null
+			} );
+		} else {
+			// New session is a logged in user
+			mw.config.set( {
+				wgUserId: userInfo.id,
+				wgUserName: userInfo.name
+			} );
+		}
+
+		return mw.user.getName();
+	} );
 };
 
 /**
@@ -516,7 +500,7 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
 ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) {
-	var promise, xhr,
+	var xhr,
 		params = {
 			action: 'visualeditoredit',
 			paction: 'serialize',
@@ -539,18 +523,12 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
 		{ contentType: 'multipart/form-data' }
 	);
 
-	promise = xhr.then( function ( response ) {
+	return xhr.then( function ( response ) {
 		if ( response.visualeditoredit ) {
 			return response.visualeditoredit.content;
 		}
 		return ve.createDeferred().reject();
-	} );
-
-	promise.abort = function () {
-		xhr.abort();
-	};
-
-	return promise;
+	} ).promise( { abort: xhr.abort } );
 };
 
 /**

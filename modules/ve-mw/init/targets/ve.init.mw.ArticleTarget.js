@@ -784,31 +784,46 @@ ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function ( data ) {
 };
 
 /**
- * Handle assert error indicating another user is logged in, and token fetch errors.
+ * Handle assert error indicating another user is logged in.
  *
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
- * @param {boolean} [error=false] Whether this is a token fetch error
- * @fires saveErrorBadToken
  * @fires saveErrorNewUser
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorBadTokenOrNewUser = function ( username, error ) {
-	var $msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) );
+ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
+	var $msg;
 
-	if ( error ) {
-		this.emit( 'saveErrorBadToken', false );
-		$msg = $msg.add( document.createTextNode( mw.msg( 'visualeditor-savedialog-identify-trylogin' ) ) );
-	} else {
-		this.emit( 'saveErrorNewUser' );
-		$msg = $msg.add(
-			mw.message(
-				username === null ?
-					'visualeditor-savedialog-identify-anon' :
-					'visualeditor-savedialog-identify-user',
-				username
-			).parseDom()
-		);
-	}
+	this.emit( 'saveErrorNewUser' );
+
+	// TODO: Improve this message, concatenating it this way is a bad practice.
+	// This should read more like 'session_fail_preview' in MediaWiki core
+	// (but with the caveat that we know already whether you're logged in or not).
+	$msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) ).add(
+		mw.message(
+			username === null ?
+				'visualeditor-savedialog-identify-anon' :
+				'visualeditor-savedialog-identify-user',
+			username
+		).parseDom()
+	);
+
 	this.showSaveError( $msg );
+};
+
+/**
+ * Handle token fetch errors.
+ *
+ * @fires saveErrorBadToken
+ */
+ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
+	this.emit( 'saveErrorBadToken', false );
+
+	// TODO: Improve this message, concatenating it this way is a bad practice.
+	// Also, it's not always true that you're "no longer logged in".
+	// This should read more like 'session_fail_preview' in MediaWiki core.
+	this.showSaveError(
+		mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' +
+		mw.msg( 'visualeditor-savedialog-identify-trylogin' )
+	);
 };
 
 /**
@@ -1264,10 +1279,8 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * HTML directly if there is no cache key present or pending, or if the request for the cache key
  * fails, or if using the cache key fails with a badcachekey error.
  *
- * If extraData.token is set, this function will use mw.Api#post and let the caller handle badtoken
- * errors. If extraData.token is not set, this function will use mw.Api#postWithToken which retries
- * automatically when encountering a badtoken error. If you do not want the automatic retry behavior
- * and want to control badtoken retries, you have to set extradata.token.
+ * This function will use mw.Api#postWithToken to retry automatically when encountering a 'badtoken'
+ * error.
  *
  * @param {HTMLDocument|string} doc Document to submit or string in source mode
  * @param {Object} extraData POST parameters to send. Do not include 'html', 'cachekey' or 'format'.

@@ -195,7 +195,8 @@
 		},
 
 		/**
-		 * Post content to the API.
+		 * Post content to the API, using mw.Api#postWithToken to retry automatically when encountering
+		 * a 'badtoken' error.
 		 *
 		 * By default uses action=visualeditoredit, paction=save.
 		 *
@@ -230,11 +231,8 @@
 				data
 			);
 
-			if ( data.token ) {
-				request = api.post( data, { contentType: 'multipart/form-data' } );
-			} else {
-				request = api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
-			}
+			request = api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
+
 			return request.then(
 				function ( response, jqxhr ) {
 					var eventData, fullEventName, error,
