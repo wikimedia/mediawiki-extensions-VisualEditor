@@ -11,11 +11,9 @@
 .ve-edit-visual .mw-ui-icon {
 	position: absolute;
 	opacity: 0.65;
-	/* Center within the parent element (pencil icon) */
-	left: 50%;
-	top: 50%;
-	margin-left: -12px;
-	margin-top: -12px;
+	/* Align with pencil icon in the parent element */
+	left: 0;
+	top: 0;
 	/* Position relative to the center, easier this way because dimensions differ */
 	transform: scale( 0.6 ) translate( 12px, 12px );
 }

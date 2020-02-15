@@ -619,8 +619,7 @@
 			var caVeEdit,
 				action = pageExists ? 'edit' : 'create',
 				isMinerva = mw.config.get( 'skin' ) === 'minerva',
-				// HACK: Minerva doesn't have a normal tabs container, this only kind of works
-				pTabsId = isMinerva ? 'content' :
+				pTabsId = isMinerva ? 'page-actions' :
 					$( '#p-views' ).length ? 'p-views' : 'p-cactions',
 				// Minerva puts the '#ca-...' ids on <a> nodes
 				$caSource = $( 'li#ca-viewsource' ),
@@ -716,11 +715,11 @@
 				// Minerva hides the link text - display tiny icons instead
 				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
 				$caEdit.find( 'a' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-wikiText' );
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
 					$( this ).addClass( 've-edit-source' ).prepend( $icon );
 				} );
 				$caVeEdit.find( 'a' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-eye' );
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
 					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
 				} );
 			}
@@ -792,11 +791,11 @@
 				// Minerva hides the link text - display tiny icons instead
 				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
 				$( '#mw-content-text .mw-editsection a:not(.mw-editsection-visualeditor)' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-wikiText' );
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
 					$( this ).addClass( 've-edit-source' ).prepend( $icon );
 				} );
 				$( '#mw-content-text .mw-editsection a.mw-editsection-visualeditor' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-before mw-ui-icon-eye' );
+					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
 					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
 				} );
 			}
