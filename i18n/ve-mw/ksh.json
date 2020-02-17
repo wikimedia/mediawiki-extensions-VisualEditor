@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Purodha"
+			"Purodha",
+			"DannyS712"
 		]
 	},
 	"tooltip-ca-edit": "Donn dä Sigg iere Wikkitäx beärbeide.",
@@ -16,7 +17,7 @@
 	"visualeditor-ca-ve-edit": "Sigge beldlesch beärbeide",
 	"visualeditor-categories-tool": "Zoote",
 	"visualeditor-desc": "Määd_et müjjelesch, em MedijaWikki Sigge beldlesch ze beärbeide.",
-	"visualeditor-descriptionpagelink": "Project:<i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"„Projramm för ‚seeschbaa‘ aan Täxte jät ze änndere“\">VisualEditor</i>",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-change-image": "Dat Beld ändere",
 	"visualeditor-dialog-media-choose-image": "Dat Beld ändere",
 	"visualeditor-dialog-media-content-filename": "Dä Dattei iehre Nahme",

@@ -380,6 +380,8 @@
 	"visualeditor-section-body-placeholder": "פסקה חדשה",
 	"visualeditor-section-title-placeholder": "נושא",
 	"visualeditor-serializeerror": "שגיאה בטעינת נתונים מהשרת: $1.",
+	"visualeditor-loaderror-revidconflict": "מזהי גרסה שהוחזרו על־ידי השרת אינם תואמים (מסמך: $1, מטא־נתונים: $2).",
+	"visualeditor-loaderror-wrongmode": "נעשה ניסיון לטעון את העורך במצב לא נכון (סוג נתונים: \"$1\", מצב עורך: \"$2\").",
 	"visualeditor-settings-tool": "הגדרות דף",
 	"visualeditor-special-characters-group-other": "נפוצים",
 	"visualeditor-templatesused-tool": "תבניות שמשמשות כאן",

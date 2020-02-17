@@ -395,6 +395,8 @@
 	"visualeditor-section-body-placeholder": "Nova seção",
 	"visualeditor-section-title-placeholder": "Assunto",
 	"visualeditor-serializeerror": "Erro ao carregar dados do servidor: $1.",
+	"visualeditor-loaderror-revidconflict": "Os IDs de revisão retornados pelo servidor não correspondem (documento: $1, metadados: $2).",
+	"visualeditor-loaderror-wrongmode": "Tentou carregar o editor no modo errado (tipo de dados: \"$1\", modo editor: \"$2\").",
 	"visualeditor-settings-tool": "Configurações da página",
 	"visualeditor-special-characters-group-other": "Usado frequentemente",
 	"visualeditor-templatesused-tool": "Predefinições usadas",

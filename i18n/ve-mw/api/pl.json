@@ -8,7 +8,8 @@
 			"Woytecr",
 			"Railfail536",
 			"Sutan",
-			"Rail"
+			"Rail",
+			"Matma Rex"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Nie znaleziono seryjnej pamięci podręcznej dla tego klucza",
@@ -20,6 +21,7 @@
 	"apierror-visualeditor-latestnotfound": "Nie można znaleźć najnowszej wersji dla tytułu",
 	"apihelp-visualeditor-description": "Zwraca kod HTML5 strony za pośrednictwem usługi Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Podczas zapisywania, ustaw na znacznik czasu edytowanej wersji. Służy to do wykrywania konfliktów edycji.",
+	"apihelp-visualeditor-param-badetag": "Jeśli zapytanie do RESTBase zwróciło ETag wyglądający na nieprawidłowy, podaj go tutaj w celu logowania problemu.",
 	"apihelp-visualeditor-param-cachekey": "Dla serializacji lub porównywania użyj wyniku poprzedniego żądania serializeforcache z tym kluczem. Zastępuje $1html.",
 	"apihelp-visualeditor-param-editintro": "Edytuj intro, aby dodać do powiadomień.",
 	"apihelp-visualeditor-param-etag": "ETag do wysłania.",
@@ -51,6 +53,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Tytuł nowej sekcji.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
+	"apihelp-visualeditoredit-param-tags": "Znaczniki zmian do zastosowania w tej edycji.",
 	"apihelp-visualeditoredit-param-watch": "Dodaj stronę do listy obserwowanych przez aktualnego użytkownika.",
 	"apihelp-visualeditoredit-param-wikitext": "The wikitext do działania.",
 	"apihelp-visualeditoredit-summary": "Zapisz stronę HTML5 w MediaWiki (konwertowana na wikikod przez usługę Parsoid)."

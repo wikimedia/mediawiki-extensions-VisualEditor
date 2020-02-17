@@ -394,6 +394,8 @@
 	"visualeditor-section-body-placeholder": "Nowa sekcja",
 	"visualeditor-section-title-placeholder": "Temat",
 	"visualeditor-serializeerror": "Błąd podczas ładowania danych z serwera: $1.",
+	"visualeditor-loaderror-revidconflict": "Identyfikatory wersji zwrócone przez serwer nie zgadzają się (dokument: $1, metadane: $2)",
+	"visualeditor-loaderror-wrongmode": "Podjęto próbę załadowania edytora w złym trybie (typ danych: „$1”, tryb edytora: „$2”)",
 	"visualeditor-settings-tool": "Ustawienia strony",
 	"visualeditor-special-characters-group-other": "Często używane",
 	"visualeditor-templatesused-tool": "Użyte szablony",
