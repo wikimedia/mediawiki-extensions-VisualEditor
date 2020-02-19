@@ -8,7 +8,8 @@
 			"Wladek92",
 			"Zetud",
 			"Verdy p",
-			"Thibaut120094"
+			"Thibaut120094",
+			"Framawiki"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Pas de mise en cache de sérialisation trouvée avec cette clé",
@@ -40,8 +41,8 @@
 	"apihelp-visualeditoredit-description": "Enregistre une page HTML5 en Mediawiki (convertie en wikicode via le service Parsoid).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Lors de l’enregistrement, initialiser ceci avec l’horodatage de la version de la page qui était modifiée. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditoredit-param-cachekey": "Utilise le résultat d’une précédente requête <tt>serializeforcache</tt> avec cette clé. Ceci remplace $1html.",
-	"apihelp-visualeditoredit-param-captchaid": "Identifiant Captcha (lors d’un enregistrement avec une réponse Captcha).",
-	"apihelp-visualeditoredit-param-captchaword": "Réponse au Captcha (lors d’un enregistrement avec une réponse Captcha).",
+	"apihelp-visualeditoredit-param-captchaid": "Identifiant CAPTCHA (lors d’un enregistrement avec une réponse CAPTCHA).",
+	"apihelp-visualeditoredit-param-captchaword": "Réponse au CAPTCHA (lors d’un enregistrement avec une réponse CAPTCHA).",
 	"apihelp-visualeditoredit-param-etag": "ETag à envoyer.",
 	"apihelp-visualeditoredit-param-html": "HTML à envoyer à Parsoid en échange de wikicode.",
 	"apihelp-visualeditoredit-param-minor": "Marquage d’édition mineure.",
