@@ -1022,10 +1022,7 @@
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable &&
-
-		// Except when single edit tab for old wikitext
-		!( conf.singleEditTab && tabPreference === 'prefer-wt' && !init.isWikitextAvailable )
+		enable && !tempdisable && !autodisable
 	);
 
 	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
