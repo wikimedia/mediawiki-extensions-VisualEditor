@@ -9,7 +9,8 @@
 			"NehalDaveND",
 			"राम प्रसाद जोशी",
 			"Nirajan pant",
-			"पर्वत सुबेदी"
+			"पर्वत सुबेदी",
+			"हिमाल सुबेदी"
 		]
 	},
 	"tooltip-ca-ve-edit": "यो पृष्ठ सम्पादन गर्ने",
@@ -98,7 +99,7 @@
 	"visualeditor-dialog-transclusion-add-param": "थप जानकारी",
 	"visualeditor-dialog-transclusion-add-template": "ढाँचा जोड्ने",
 	"visualeditor-dialog-transclusion-content": "सामग्री",
-	"visualeditor-dialog-transclusion-loading": "लोड हुदैछ...",
+	"visualeditor-dialog-transclusion-loading": "खुल्दै छ…",
 	"visualeditor-dialog-transclusion-multiple-mode": "विकल्पहरू देखाउनुहाेस्",
 	"visualeditor-dialog-transclusion-options": "विकल्पहरू",
 	"visualeditor-dialog-transclusion-param-default": "पुनर्निधारित: $1",
@@ -118,6 +119,7 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|सूचना|सूचनाहरू}}",
 	"visualeditor-editnotices-tooltip": "सूचनाहरू सम्पादन गर्नुहाेस्",
 	"visualeditor-editsummary": "तपाईले के परिवर्तन गर्नुभयो",
+	"visualeditor-educationpopup-dismiss": "ठिक छ, मैले बुझेँ",
 	"visualeditor-formatdropdown-format-mw-heading1": "पृष्ठ शीर्षक",
 	"visualeditor-formatdropdown-format-mw-heading2": "शीर्षक",
 	"visualeditor-formatdropdown-format-mw-heading3": "उपशीर्षक १",
