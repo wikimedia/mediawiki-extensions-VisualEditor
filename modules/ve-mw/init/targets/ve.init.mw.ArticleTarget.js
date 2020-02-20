@@ -1578,6 +1578,9 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 	if ( this.submitting ) {
 		return false;
 	}
+	// Clear autosave now that we don't expect to need it again.
+	// FIXME: This isn't transactional, so if the save fails we're left with no recourse.
+	this.clearDocState();
 	// Save DOM
 	this.submitting = true;
 	$form = $( '<form>' ).attr( { method: 'post', enctype: 'multipart/form-data' } ).addClass( 'oo-ui-element-hidden' );
@@ -2228,12 +2231,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
  *
  * @param {boolean} [modified] Whether there were any changes at all.
  */
-ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {
-	// Assume the fallback editor won't support VE auto-save. Changes need to
-	// be wiped in case the user makes changes in the other editor then comes
-	// back to VE.
-	this.clearDocState();
-};
+ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {};
 
 /**
  * Switch to the visual editor.
