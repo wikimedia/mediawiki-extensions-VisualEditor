@@ -77,6 +77,8 @@
 	"visualeditor-dialogbutton-media-tooltip": "وێنەکان و میدیا",
 	"visualeditor-dialogbutton-meta-tooltip": "ڕێکخستنەکانی پەڕە",
 	"visualeditor-dialogbutton-template-tooltip": "داڕێژە",
+	"visualeditor-editingtabdialog-ok": "ئەو دەستکاریکەرە بەکاربێنە کە لە کۆتا دەستکاریم بەکارم هێناوە",
+	"visualeditor-editingtabdialog-title": "تابەکانی دەستکاریکردن",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ئاگاداری}}",
 	"visualeditor-editsummary": "وەسفی ئەوە بکە کە چیت گۆڕی",
 	"visualeditor-formatdropdown-format-mw-heading1": "سەرناوی پەڕە",

@@ -296,6 +296,7 @@
 	"visualeditor-rebase-client-export": "Eksportēt",
 	"visualeditor-rebase-client-import": "Importēt",
 	"visualeditor-rebase-client-import-name": "Lapas nosaukums",
+	"visualeditor-recreate": "Kamēr veici labojumus, lapa tika izdēsta. Spied uz \"$1\", lai izveidotu to no jauna.",
 	"visualeditor-redirect-description": "Pāradresēt uz $1",
 	"visualeditor-savedialog-error-badtoken": "Mēs nevarējām saglabāt tavu labojumu, jo pārlūka sesija ir izbeigusies.",
 	"visualeditor-savedialog-identify-anon": "Vai jūs gribat saglabāt šo lapu kā anonīms dalībnieks? Šīs lapas labojumu sarakstā tiks saglabāta jūsu IP adrese.",
