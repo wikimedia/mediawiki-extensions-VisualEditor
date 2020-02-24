@@ -111,12 +111,12 @@
 						mw.hook( 've.activationComplete' ).add( function () {
 							var target = ve.init.target,
 								surfaceView = target.getSurface().getView();
-							// Hide edit notices
-							target.actionsToolbar.tools.notices.getPopup().toggle( false );
 							// Modify the document to make the save button blue
 							// Wait for focus
 							surfaceView.once( 'focus', function () {
 								target.surface.getModel().getFragment().insertContent( ' ' ).collapseToStart().select();
+								// Hide edit notices
+								target.actionsToolbar.tools.notices.getPopup().toggle( false );
 								// Wait for save button fade
 								setTimeout( function () {
 									done( { width: window.innerWidth, height: window.innerHeight } );

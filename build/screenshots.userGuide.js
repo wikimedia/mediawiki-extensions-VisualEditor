@@ -258,13 +258,14 @@
 						var done = arguments[ arguments.length - 1 ];
 
 						ve.init.target.$element.css( 'font-size', '250%' );
+						// Wait for re-paint
 						setTimeout( function () {
 							done(
 								seleniumUtils.getBoundingRect( [
 									ve.init.target.toolbar.tools.citoid.$element[ 0 ]
 								] )
 							);
-						} );
+						}, 100 );
 					},
 					0
 				);
