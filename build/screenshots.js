@@ -5,7 +5,7 @@
 ( function () {
 	'use strict';
 	var accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
-		chrome = require( 'selenium-webdriver/chrome' ),
+		Builder = require( 'selenium-webdriver' ).Builder,
 		fs = require( 'fs' ),
 		Jimp = require( 'jimp' ),
 		username = process.env.SAUCE_ONDEMAND_USERNAME,
@@ -29,7 +29,7 @@
 					'@ondemand.saucelabs.com:80/wd/hub' ).build();
 			} else {
 				// If not running on Jenkins, use local browser
-				driver = new chrome.Driver();
+				driver = new Builder().forBrowser( 'chrome' ).build();
 			}
 
 			driver.manage().timeouts().setScriptTimeout( TIMEOUT );
