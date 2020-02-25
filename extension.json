@@ -1852,6 +1852,7 @@
 			],
 			"messages": [
 				"visualeditor-linkinspector-button-link-external",
+				"visualeditor-linkinspector-button-link-internal",
 				"visualeditor-linkinspector-convert-link-isbn",
 				"visualeditor-linkinspector-convert-link-pmid",
 				"visualeditor-linkinspector-convert-link-rfc",
