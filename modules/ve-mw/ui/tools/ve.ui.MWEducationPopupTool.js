@@ -81,6 +81,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 			ve.init.target.openEducationPopupTool = tool;
 			tool.$pulsatingDot.addClass( 'oo-ui-element-hidden' );
 			tool.popup.toggle( true );
+			popupCloseButton.focus();
 			$shield.remove();
 
 			ve.track( 'activity.' + tool.constructor.static.name + 'EducationPopup', { action: 'show' } );
