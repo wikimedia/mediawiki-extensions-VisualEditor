@@ -385,6 +385,8 @@
 	"visualeditor-section-body-placeholder": "Nytt avsnitt",
 	"visualeditor-section-title-placeholder": "Ämne",
 	"visualeditor-serializeerror": "Fel uppstod vid inläsning av data från server: $1.",
+	"visualeditor-loaderror-revidconflict": "Versions-ID:n som returnerades av servern matchar inte (dokument: $1, metadata: $2).",
+	"visualeditor-loaderror-wrongmode": "Försökte läsa in redigeraren i fel läge (datatyp: \"$1\", redigerarläge: \"$2\").",
 	"visualeditor-settings-tool": "Sidinställningar",
 	"visualeditor-special-characters-group-other": "Används ofta",
 	"visualeditor-templatesused-tool": "Mallar som används",
