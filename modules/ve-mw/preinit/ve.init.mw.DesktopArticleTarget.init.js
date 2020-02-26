@@ -286,9 +286,23 @@
 		return mw.msg( tabMsgKey );
 	}
 
+	/**
+	 * Set the user's new preferred editor
+	 *
+	 * @param {string} editor Preferred editor, 'visualeditor' or 'wikitext'
+	 * @return {jQuery.Promise} Promise which resolves when the preference has been set
+	 */
 	function setEditorPreference( editor ) {
 		var key = pageExists ? 'edit' : 'create',
 			sectionKey = 'editsection';
+
+		// If visual mode isn't available, don't set the editor preference as the
+		// user has expressed no choice by opening this editor. (T246259)
+		// Strictly speaking the same thing should happen if visual mode is
+		// available but source mode isn't, but that is never the case.
+		if ( !init.isVisualAvailable ) {
+			return $.Deferred().resolve().promise();
+		}
 
 		if ( editor !== 'visualeditor' && editor !== 'wikitext' ) {
 			throw new Error( 'setEditorPreference called with invalid option: ', editor );
@@ -311,16 +325,18 @@
 		}
 
 		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
-		if ( mw.user.isAnon() ) {
-			return $.Deferred().resolve().promise();
+
+		// Save user preference if logged in
+		if (
+			!mw.user.isAnon() &&
+			mw.user.options.get( 'visualeditor-editor' ) !== editor
+		) {
+			// Same as ve.init.target.getLocalApi()
+			return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
+				mw.user.options.set( 'visualeditor-editor', editor );
+			} );
 		}
-		if ( mw.user.options.get( 'visualeditor-editor' ) === editor ) {
-			return $.Deferred().resolve().promise();
-		}
-		// Same as ve.init.target.getLocalApi()
-		return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
-			mw.user.options.set( 'visualeditor-editor', editor );
-		} );
+		return $.Deferred().resolve().promise();
 	}
 
 	/**
