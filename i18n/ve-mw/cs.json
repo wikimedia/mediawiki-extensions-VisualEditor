@@ -234,6 +234,7 @@
 	"visualeditor-generating-wikitext-progress": "Generuji wikitext",
 	"visualeditor-languages-tool": "Jazyky",
 	"visualeditor-linkinspector-button-link-external": "Externí web",
+	"visualeditor-linkinspector-button-link-internal": "Hledání stránek",
 	"visualeditor-linkinspector-convert-link-isbn": "Převést na ISBN odkaz",
 	"visualeditor-linkinspector-convert-link-pmid": "Převést na PMID odkaz",
 	"visualeditor-linkinspector-convert-link-rfc": "Převést na RFC odkaz",

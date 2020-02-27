@@ -218,6 +218,7 @@
 	"visualeditor-generating-wikitext-progress": "Генерисање викитекста",
 	"visualeditor-languages-tool": "Језици",
 	"visualeditor-linkinspector-button-link-external": "Спољашњи сајт",
+	"visualeditor-linkinspector-button-link-internal": "Претрага страница",
 	"visualeditor-linkinspector-convert-link-isbn": "Конвертуј у ISBN везу",
 	"visualeditor-linkinspector-convert-link-pmid": "Конвертуј у PMID везу",
 	"visualeditor-linkinspector-convert-link-rfc": "Конвертуј у RFC везу",

@@ -9,7 +9,9 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Dizze side bewurkje",
+	"visualeditor-advancedsettings-tool": "Avansearre ynstellings",
 	"visualeditor-backbutton-tooltip": "Weromgean",
+	"visualeditor-beta-warning": "At jo technyske problemen ûnderfine by it bewurkjen, meld dat dan a.j.w.",
 	"visualeditor-ca-createsource": "Boarne oanmeitsje",
 	"visualeditor-ca-editsource": "Boarne bewurkje",
 	"visualeditor-ca-editsource-section": "boarne bewurkje",
@@ -18,6 +20,8 @@
 	"visualeditor-descriptionpagelink": "Project:Fisuële tekstbewurker",
 	"visualeditor-dialog-media-position-none": "Gjint",
 	"visualeditor-dialog-media-title": "Mediaynstellings",
+	"visualeditor-dialog-meta-advancedsettings-label": "Avansearre ynstellings",
+	"visualeditor-dialog-meta-advancedsettings-section": "Avansearre ynstellings",
 	"visualeditor-dialog-meta-categories-category": "Kategory",
 	"visualeditor-dialog-meta-categories-data-label": "Kategoryen",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Nije kategory",
@@ -34,6 +38,7 @@
 	"visualeditor-dialog-meta-settings-label": "Sideynstellings",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nee",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ja",
+	"visualeditor-dialog-meta-settings-section": "Sideynstellings",
 	"visualeditor-dialog-meta-title": "Opsjes",
 	"visualeditor-dialog-template-title": "Berjocht",
 	"visualeditor-dialog-transclusion-add-content": "Ynhâld tafoegje",
@@ -94,5 +99,6 @@
 	"visualeditor-savedialog-title-conflict": "Konflikt",
 	"visualeditor-savedialog-title-review": "Jo feroarings neisjen",
 	"visualeditor-savedialog-title-save": "Jo feroarings bewarje",
+	"visualeditor-templatesused-tool": "Brûkte berjochten",
 	"visualeditor-version-label": "Ferzje"
 }

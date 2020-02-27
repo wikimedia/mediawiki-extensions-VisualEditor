@@ -247,6 +247,7 @@
 	"visualeditor-generating-wikitext-progress": "Wikitekst genereren",
 	"visualeditor-languages-tool": "Talen",
 	"visualeditor-linkinspector-button-link-external": "Uitwendige pagina",
+	"visualeditor-linkinspector-button-link-internal": "Pagina's zoeken",
 	"visualeditor-linkinspector-convert-link-isbn": "Omzetten naar ISBN-koppeling",
 	"visualeditor-linkinspector-convert-link-pmid": "Omzetten naar PMID-koppeling",
 	"visualeditor-linkinspector-convert-link-rfc": "Omzetten naar RFC-koppeling",

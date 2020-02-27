@@ -37,7 +37,8 @@
 			"S4b1nuz E.656",
 			"Sarah Bernabei",
 			"Daimona Eaytoy",
-			"Sakretsu"
+			"Sakretsu",
+			"Albe Albe460"
 		]
 	},
 	"collabpad-import-subtitle": "Importato da $1",
@@ -234,6 +235,7 @@
 	"visualeditor-generating-wikitext-progress": "Genera wikitesto",
 	"visualeditor-languages-tool": "Lingue",
 	"visualeditor-linkinspector-button-link-external": "Sito esterno",
+	"visualeditor-linkinspector-button-link-internal": "Cerca nelle pagine interne",
 	"visualeditor-linkinspector-convert-link-isbn": "Converti in collegamento ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Converti in collegamento PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Converti in collegamento RFC",

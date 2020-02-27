@@ -224,6 +224,7 @@
 	"visualeditor-generating-wikitext-progress": "Genera wikitext",
 	"visualeditor-languages-tool": "Llengües",
 	"visualeditor-linkinspector-button-link-external": "Lloc web extern",
+	"visualeditor-linkinspector-button-link-internal": "Cerca pàgines",
 	"visualeditor-linkinspector-convert-link-isbn": "Convertir a enllaç d'ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Convertir a enllaç de PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Convertir a enllaç de RFC",

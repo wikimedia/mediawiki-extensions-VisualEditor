@@ -217,6 +217,7 @@
 	"visualeditor-generating-wikitext-progress": "Ստեղծվում է վիքիտեքստը",
 	"visualeditor-languages-tool": "Լեզուներ",
 	"visualeditor-linkinspector-button-link-external": "Արտաքին հղում",
+	"visualeditor-linkinspector-button-link-internal": "Որոնիր էջեր",
 	"visualeditor-linkinspector-convert-link-isbn": "Փոխարկել ISBN հղման",
 	"visualeditor-linkinspector-convert-link-pmid": "Փոխարկել PMID հղման",
 	"visualeditor-linkinspector-convert-link-rfc": "Փոխարկել RFC հղման",

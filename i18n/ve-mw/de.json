@@ -222,6 +222,7 @@
 	"visualeditor-generating-wikitext-progress": "Erzeuge Wikitext",
 	"visualeditor-languages-tool": "Sprachen",
 	"visualeditor-linkinspector-button-link-external": "Externe Seite",
+	"visualeditor-linkinspector-button-link-internal": "Interne Seiten suchen",
 	"visualeditor-linkinspector-convert-link-isbn": "In einen ISBN-Link konvertieren",
 	"visualeditor-linkinspector-convert-link-pmid": "In einen PMID-Link konvertieren",
 	"visualeditor-linkinspector-convert-link-rfc": "In einen RFC-Link konvertieren",

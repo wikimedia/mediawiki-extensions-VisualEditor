@@ -222,6 +222,7 @@
 	"visualeditor-generating-wikitext-progress": "יוצר קוד ויקי",
 	"visualeditor-languages-tool": "שפות",
 	"visualeditor-linkinspector-button-link-external": "אתר חיצוני",
+	"visualeditor-linkinspector-button-link-internal": "חיפוש בדפים פנימיים",
 	"visualeditor-linkinspector-convert-link-isbn": "המרה לקישור ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "המרה לקישור PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "המרה לקישור RFC",

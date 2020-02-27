@@ -258,6 +258,7 @@
 	"visualeditor-generating-wikitext-progress": "Генерация вики-текста",
 	"visualeditor-languages-tool": "Языки",
 	"visualeditor-linkinspector-button-link-external": "Внешний вебсайт",
+	"visualeditor-linkinspector-button-link-internal": "Поиск страницы",
 	"visualeditor-linkinspector-convert-link-isbn": "Превратить в ISBN-ссылку",
 	"visualeditor-linkinspector-convert-link-pmid": "Превратить в PMID-ссылку",
 	"visualeditor-linkinspector-convert-link-rfc": "Превратить в RFC-ссылку",

@@ -204,6 +204,7 @@
 	"visualeditor-generating-wikitext-progress": "Pretvaram u wikitekst",
 	"visualeditor-languages-tool": "Jezici",
 	"visualeditor-linkinspector-button-link-external": "Vanjski sajt",
+	"visualeditor-linkinspector-button-link-internal": "Traži stranice",
 	"visualeditor-linkinspector-convert-link-isbn": "Pretvori u ISBN link",
 	"visualeditor-linkinspector-convert-link-pmid": "Pretvori u PMID link",
 	"visualeditor-linkinspector-convert-link-rfc": "Pretvori u RFC link",

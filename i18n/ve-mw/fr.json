@@ -53,7 +53,8 @@
 			"Trizek (WMF)",
 			"Od1n",
 			"Zarisi",
-			"Derugon"
+			"Derugon",
+			"Eneelk"
 		]
 	},
 	"collabpad-doctitle": "CollabPad : $1",
@@ -261,6 +262,7 @@
 	"visualeditor-generating-wikitext-progress": "Génération du code wiki",
 	"visualeditor-languages-tool": "Langues",
 	"visualeditor-linkinspector-button-link-external": "Site externe",
+	"visualeditor-linkinspector-button-link-internal": "Chercher des pages internes",
 	"visualeditor-linkinspector-convert-link-isbn": "Convertir en lien ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Convertir en lien PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Convertir en lien RFC",

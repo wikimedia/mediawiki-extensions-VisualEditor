@@ -234,6 +234,7 @@
 	"visualeditor-generating-wikitext-progress": "ウィキテキストを生成中",
 	"visualeditor-languages-tool": "他言語",
 	"visualeditor-linkinspector-button-link-external": "外部サイト",
+	"visualeditor-linkinspector-button-link-internal": "ページを検索",
 	"visualeditor-linkinspector-convert-link-isbn": "ISBN リンクに変換",
 	"visualeditor-linkinspector-convert-link-pmid": "PMID リンクに変換",
 	"visualeditor-linkinspector-convert-link-rfc": "RFC リンクに変換",

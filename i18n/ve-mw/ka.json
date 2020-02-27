@@ -200,6 +200,7 @@
 	"visualeditor-generating-wikitext-progress": "ვიკიტექსტის გენერირება",
 	"visualeditor-languages-tool": "ენები",
 	"visualeditor-linkinspector-button-link-external": "რესურსები ინტერნეტში",
+	"visualeditor-linkinspector-button-link-internal": "გვერდების ძიება",
 	"visualeditor-linkinspector-convert-link-isbn": "კონვერტაცია ISBN ბმულზე",
 	"visualeditor-linkinspector-convert-link-pmid": "კონვერტაცია PMID ბმულზე",
 	"visualeditor-linkinspector-convert-link-rfc": "კონვერტაცია RFC ბმულზე",

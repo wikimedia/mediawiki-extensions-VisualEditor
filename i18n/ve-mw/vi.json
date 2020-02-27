@@ -221,6 +221,7 @@
 	"visualeditor-generating-wikitext-progress": "Đang tạo mã wiki",
 	"visualeditor-languages-tool": "Ngôn ngữ",
 	"visualeditor-linkinspector-button-link-external": "Liên kết ngoài",
+	"visualeditor-linkinspector-button-link-internal": "Tìm kiếm trang",
 	"visualeditor-linkinspector-convert-link-isbn": "Đổi thành liên kết ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Đổi thành liên kết PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Đổi thành liên kết RFC",

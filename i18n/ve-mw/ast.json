@@ -213,6 +213,7 @@
 	"visualeditor-generating-wikitext-progress": "Xenerando testu wiki",
 	"visualeditor-languages-tool": "Llingües",
 	"visualeditor-linkinspector-button-link-external": "Sitiu esternu",
+	"visualeditor-linkinspector-button-link-internal": "Buscar páxines",
 	"visualeditor-linkinspector-convert-link-isbn": "Convertir a enllaz ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Convertir a enllaz PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Convertir a enllaz RFC",

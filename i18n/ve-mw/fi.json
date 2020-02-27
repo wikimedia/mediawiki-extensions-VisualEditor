@@ -214,6 +214,7 @@
 	"visualeditor-generating-wikitext-progress": "Muunnetaan wikitekstiä",
 	"visualeditor-languages-tool": "Kielet",
 	"visualeditor-linkinspector-button-link-external": "Ulkoinen sivusto",
+	"visualeditor-linkinspector-button-link-internal": "Hae sivuja",
 	"visualeditor-linkinspector-convert-link-isbn": "Muunna ISBN-linkiksi",
 	"visualeditor-linkinspector-convert-link-pmid": "Muunna PMID-linkiksi",
 	"visualeditor-linkinspector-convert-link-rfc": "Muunna RFC-linkiksi",

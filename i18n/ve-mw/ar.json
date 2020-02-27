@@ -234,6 +234,7 @@
 	"visualeditor-generating-wikitext-progress": "توليد نص الويكي",
 	"visualeditor-languages-tool": "اللغات",
 	"visualeditor-linkinspector-button-link-external": "موقع خارجي",
+	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحة",
 	"visualeditor-linkinspector-convert-link-isbn": "تحويل إلى الرابط ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "حول إلى وصلة PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "تحويل إلى الرابط RFC",

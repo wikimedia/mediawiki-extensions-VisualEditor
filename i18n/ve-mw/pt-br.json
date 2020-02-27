@@ -234,6 +234,7 @@
 	"visualeditor-generating-wikitext-progress": "Gerando texto wiki",
 	"visualeditor-languages-tool": "Idiomas",
 	"visualeditor-linkinspector-button-link-external": "Site externo",
+	"visualeditor-linkinspector-button-link-internal": "Pesquisar páginas internas",
 	"visualeditor-linkinspector-convert-link-isbn": "Converter para ligação de ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Converter para ligação de PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Converter para ligação de RFC",

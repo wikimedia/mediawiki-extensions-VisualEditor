@@ -226,6 +226,7 @@
 	"visualeditor-generating-wikitext-progress": "Sedang menghasilkan teks wiki",
 	"visualeditor-languages-tool": "Bahasa",
 	"visualeditor-linkinspector-button-link-external": "Pranala luar",
+	"visualeditor-linkinspector-button-link-internal": "Cari halaman",
 	"visualeditor-linkinspector-convert-link-isbn": "Ubah ke pranala ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "Ubah ke pranala PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "Ubah ke pranala RFC",

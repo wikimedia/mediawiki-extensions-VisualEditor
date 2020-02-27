@@ -234,6 +234,7 @@
 	"visualeditor-generating-wikitext-progress": "Vikimetşn oluşturuluyor",
 	"visualeditor-languages-tool": "Diller",
 	"visualeditor-linkinspector-button-link-external": "Harici site",
+	"visualeditor-linkinspector-button-link-internal": "Dahili sayfalarda ara",
 	"visualeditor-linkinspector-convert-link-isbn": "ISBN bağlantısına dönüştür",
 	"visualeditor-linkinspector-convert-link-pmid": "PMID bağlantısına dönüştür",
 	"visualeditor-linkinspector-convert-link-rfc": "RFC bağlantısına dönüştür",

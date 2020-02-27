@@ -189,6 +189,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Podnaslov 4",
 	"visualeditor-languages-tool": "Jezici",
 	"visualeditor-linkinspector-button-link-external": "Vanjska poveznica",
+	"visualeditor-linkinspector-button-link-internal": "Pretraži stranice",
 	"visualeditor-linkinspector-convert-link-isbn": "Pretvori u ISBN link",
 	"visualeditor-linkinspector-convert-link-pmid": "Pretvori u PMID link",
 	"visualeditor-linkinspector-convert-link-rfc": "Pretvori u RFC link",
