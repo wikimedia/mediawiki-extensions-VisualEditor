@@ -39,6 +39,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'basetimestamp' => $params['basetimestamp'],
 			'starttimestamp' => $params['starttimestamp'],
 			'token' => $params['token'],
+			'watchlist' => $params['watchlist'],
 			'errorformat' => 'html',
 		];
 
@@ -47,9 +48,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		} else {
 			$apiParams['notminor'] = true;
 		}
-
-		// FIXME add some way that the user's preferences can be respected
-		$apiParams['watchlist'] = $params['watch'] ? 'watch' : 'unwatch';
 
 		if ( $params['captchaid'] ) {
 			$apiParams['captchaid'] = $params['captchaid'];
@@ -533,7 +531,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'starttimestamp' => null,
 			'oldid' => null,
 			'minor' => null,
-			'watch' => null,
+			'watchlist' => null,
 			'html' => null,
 			'etag' => null,
 			'summary' => null,
