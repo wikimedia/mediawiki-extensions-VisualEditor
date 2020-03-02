@@ -1435,7 +1435,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
 		fieldMap = {
 			wpSummary: 'summary',
 			wpMinoredit: 'minor',
-			wpWatchthis: 'watch',
+			wpWatchthis: 'watchlist',
 			wpCaptchaId: 'captchaid',
 			wpCaptchaWord: 'captchaword'
 		};
@@ -1446,6 +1446,8 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
 			delete options[ key ];
 		}
 	}
+
+	options.watchlist = 'watchlist' in options ? 'watch' : 'unwatch';
 
 	return options;
 };
