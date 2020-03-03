@@ -54,7 +54,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
 	"apihelp-visualeditoredit-param-tags": "Znaczniki zmian do zastosowania w tej edycji.",
-	"apihelp-visualeditoredit-param-watch": "Dodaj stronę do listy obserwowanych przez aktualnego użytkownika.",
 	"apihelp-visualeditoredit-param-wikitext": "The wikitext do działania.",
 	"apihelp-visualeditoredit-summary": "Zapisz stronę HTML5 w MediaWiki (konwertowana na wikikod przez usługę Parsoid)."
 }

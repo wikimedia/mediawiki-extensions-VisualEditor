@@ -51,7 +51,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "عنوان برای بخش جدید.",
 	"apihelp-visualeditoredit-param-starttimestamp": "در زمان ذخیره کردن، این را برای زمان بارگیری نسخه تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditoredit-param-summary": "خلاصه ویرایش.",
-	"apihelp-visualeditoredit-param-watch": "این صفحه را به پی‌گیری‌های کنونی کاربر بیفزا.",
 	"apihelp-visualeditoredit-param-wikitext": "برای کار با ویکی‌متن.",
 	"apihelp-visualeditoredit-summary": "ذخیره صفحه HTML5 به مدیاویکی (تبدیل به متن ویکی با سرویس پارسوید)"
 }

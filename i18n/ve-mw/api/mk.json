@@ -47,7 +47,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Кога зачувувате, на ова задајте му го датумот и времето на вчитувањето на страницата. Се користи за утврдување на спротиставености во уредувањето.",
 	"apihelp-visualeditoredit-param-summary": "Опис на уредувањето.",
 	"apihelp-visualeditoredit-param-tags": "Ознаките за измена се однесуваат на уредувањето.",
-	"apihelp-visualeditoredit-param-watch": "Додај ја страницата во набљудуваните на тековниот корисник.",
+	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Со кој викитекст да се делува.",
 	"apihelp-visualeditoredit-summary": "Зачувајте HTML5-страница во МедијаВики (се претвора во викитекст преку службата Parsoid)."
 }

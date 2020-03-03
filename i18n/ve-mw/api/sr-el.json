@@ -36,7 +36,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Naslov za novi odeljak.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kada čuvate, postavite ovo na vremensku oznaku trenutka kada je izmena učitana. Koristi se za otkrivanje sukoba izmena.",
 	"apihelp-visualeditoredit-param-summary": "Opis izmene.",
-	"apihelp-visualeditoredit-param-watch": "Dodavanje stranice na spisak nadgledanja trenutnog korisnika.",
 	"apihelp-visualeditoredit-param-wikitext": "Vikitekst sa kojim treba delovati.",
 	"apihelp-visualeditoredit-summary": "Čuvanje stranice koja je u HTML5 formatu na Medijaviki (konvertovane u vikitekst pomoću usluge Parsoid)."
 }

@@ -36,6 +36,5 @@
 	"apihelp-visualeditoredit-param-page": "De pagina waarop handelingen worden uitgevoerd.",
 	"apihelp-visualeditoredit-param-sectiontitle": "De naam van de nieuw kopje.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Stel dit tijdens het opslaan in op de tijd waarop de pagina is geladen. Wordt gebruikt om bewerkingsconflicten te detecteren.",
-	"apihelp-visualeditoredit-param-summary": "Bewerkingssamenvatting.",
-	"apihelp-visualeditoredit-param-watch": "De pagina aan de volglijst van de huidige gebruiker toevoegen."
+	"apihelp-visualeditoredit-param-summary": "Bewerkingssamenvatting."
 }

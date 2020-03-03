@@ -47,7 +47,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titolo por nova sekcio.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kiam konservanta, asignas tiun al tempindiko de la paĝŝarga dato. Tio estas uzata por rekoni konflikojn pri redakto.",
 	"apihelp-visualeditoredit-param-summary": "Redakta resumo.",
-	"apihelp-visualeditoredit-param-watch": "Aldoni la paĝon al la atentaro de la aktuala uzanto.",
 	"apihelp-visualeditoredit-param-wikitext": "La uzota vikiteksto.",
 	"apihelp-visualeditoredit-summary": "Konservi HTML5-paĝon en MediaVikion (kun konverto al vikiteksto per la servo Parsoid)."
 }

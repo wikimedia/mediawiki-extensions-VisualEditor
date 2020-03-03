@@ -30,6 +30,5 @@
 	"apihelp-visualeditoredit-param-page": "Ekintzak egin beharreko orria.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Atal berrirako izenburua.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Gordetzerakoan, berrikuspenaren data eta ordua finkatzen du. Hau edizio-gatazkak antzemateko erabiltzen da.",
-	"apihelp-visualeditoredit-param-summary": "Aldaketaren laburpena",
-	"apihelp-visualeditoredit-param-watch": "Orria erabiltzaile honen jarraipen zerrendara gehitu."
+	"apihelp-visualeditoredit-param-summary": "Aldaketaren laburpena"
 }

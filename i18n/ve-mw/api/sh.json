@@ -46,7 +46,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Naziv na novi podnaslov",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kada snimate, postavite ovo za vremenski pečat trenutka kada je revizija učitana. Koristi se za otkrivanje sukoba uređivanja.",
 	"apihelp-visualeditoredit-param-summary": "Sažetak izmjene",
-	"apihelp-visualeditoredit-param-watch": "Dodaj stranicu u nadgledane trenutnog korisnika.",
 	"apihelp-visualeditoredit-param-wikitext": "Sa kojim wikitekstom treba djelovati.",
 	"apihelp-visualeditoredit-summary": "Snimite HTML5-stranicu u MediaWiki (pretvara se u wikitekst preko servisa Parsoid)."
 }

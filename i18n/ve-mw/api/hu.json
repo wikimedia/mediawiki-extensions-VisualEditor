@@ -41,6 +41,5 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Az új szakasz címe.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Mentésnél állítsd a szerkesztett lapváltozat időbélyegére. Szerkesztési ütközések felismerésére szolgál.",
 	"apihelp-visualeditoredit-param-summary": "Szerkesztési összefoglaló.",
-	"apihelp-visualeditoredit-param-watch": "A lap hozzáadása a felhasználó figyelőlistájához.",
 	"apihelp-visualeditoredit-summary": "HTML5 oldal elmentése a wikiben (a Parsoid szolgáltatással wikiszöveggé konvertálva)."
 }

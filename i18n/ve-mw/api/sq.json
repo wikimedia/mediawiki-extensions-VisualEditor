@@ -42,7 +42,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titull për ndarje të re.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kur bëni ruajtje, vendoseni këtë sa vula kohore e çastit kur u ngarkua faqja. Përdoret për të pikasur përplasje përpunimesh.",
 	"apihelp-visualeditoredit-param-summary": "Përmbledhje e redaktimit.",
-	"apihelp-visualeditoredit-param-watch": "Shtoje faqen te lista e mbikëqyrjeve të përdoruesit të tanishëm.",
 	"apihelp-visualeditoredit-param-wikitext": "Teksti wiki me të cilin të veprohet.",
 	"apihelp-visualeditoredit-summary": "Ruani një faqe HTML5 në MediaWiki (e shndërruar në tekst wiki përmes shërbimit Parsoid)."
 }

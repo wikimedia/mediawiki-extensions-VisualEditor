@@ -46,7 +46,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Títulu de la sección nueva.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Al guardar,establez esto como la marca horaria de cuando se cargó la páxina. Utilizao pa detectar conflictos d'edición.",
 	"apihelp-visualeditoredit-param-summary": "Resume d'edición.",
-	"apihelp-visualeditoredit-param-watch": "Añadir esta páxina a la llista de siguimientu del usuariu actual.",
 	"apihelp-visualeditoredit-param-wikitext": "El testu wiki col qu'hai qu'actuar.",
 	"apihelp-visualeditoredit-summary": "Guardar una páxina HTML5 en MediaWiki (convertida en testu wiki mediante'l serviciu Parsoid)."
 }

@@ -42,7 +42,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "새 문단을 위한 제목입니다.",
 	"apihelp-visualeditoredit-param-starttimestamp": "저장할 때, 문서를 불러왔을 때의 타임스탬프로 설정합니다. 편집 충돌을 감지하는 데 사용됩니다.",
 	"apihelp-visualeditoredit-param-summary": "편집 요약입니다.",
-	"apihelp-visualeditoredit-param-watch": "문서를 현재 사용자의 주시문서 목록에 추가합니다.",
 	"apihelp-visualeditoredit-param-wikitext": "동작을 적용할 위키텍스트입니다.",
 	"apihelp-visualeditoredit-summary": "HTML5 페이지를 미디어위키로 저장합니다. (Parsoid 서비스를 통해 위키텍스트로 변환)"
 }

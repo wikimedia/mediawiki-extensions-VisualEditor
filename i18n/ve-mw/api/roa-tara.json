@@ -46,7 +46,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titole pa seziona nove.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Quanne ste reggistre, 'mboste quiste cumme orarie de quanne 'a pàgene ha state carecate. Ausate pe acchià conflitte de cangiaminde.",
 	"apihelp-visualeditoredit-param-summary": "Cange 'u riepiloghe.",
-	"apihelp-visualeditoredit-param-watch": "Aggiunge 'a pàgene a l'elenghe de le pàggene condrollate de stu utende.",
 	"apihelp-visualeditoredit-param-wikitext": "'U uicchiteste addò aggìe.",
 	"apihelp-visualeditoredit-summary": "Reggìstre 'na pàgene HTML5 sus a MediaUicchi (convertite jndr'à 'u uicchiteste ausanne 'u servizie Parsoid)."
 }

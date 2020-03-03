@@ -33,7 +33,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "新しい節の名前です。",
 	"apihelp-visualeditoredit-param-starttimestamp": "保存する際に、ページが読み込まれた時のタイムスタンプとしてこれがセットされます。編集競合を検出するのに利用されます。",
 	"apihelp-visualeditoredit-param-summary": "編集の要約",
-	"apihelp-visualeditoredit-param-watch": "そのページを現在の利用者のウォッチリストに追加します。",
 	"apihelp-visualeditoredit-param-wikitext": "動作を適用するウィキテキストです。",
 	"apihelp-visualeditoredit-summary": "HTML5ページを MediaWiki として保存する (Parsoidサービスを利用してウィキテキストに変換されます)"
 }

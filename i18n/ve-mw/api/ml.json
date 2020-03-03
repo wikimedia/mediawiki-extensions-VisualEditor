@@ -30,6 +30,5 @@
 	"apihelp-visualeditoredit-param-section": "പ്രവൃത്തി നടത്തേണ്ട ഭാഗം.",
 	"apihelp-visualeditoredit-param-sectiontitle": "ഭാഗത്തിന്റെ തലക്കെട്ട്.",
 	"apihelp-visualeditoredit-param-starttimestamp": "സേവ് ചെയ്യുമ്പോൾ, എടുത്ത താളിന്റെ സമയമുദ്രയായി ഇത് സജ്ജീകരിക്കുക. തിരുത്തൽ സമരസപ്പെടായ്കകൾ കണ്ടെത്താൻ ഉപയോഗിക്കുന്നതാണ്.",
-	"apihelp-visualeditoredit-param-summary": "തിരുത്തിന്റെ ചുരുക്കം.",
-	"apihelp-visualeditoredit-param-watch": "ഇപ്പോഴത്തെ ഉപയോക്താവിന്റെ ശ്രദ്ധിക്കുന്നവയുടെ പട്ടികയിലേക്ക് താൾ ചേർക്കുക."
+	"apihelp-visualeditoredit-param-summary": "തിരുത്തിന്റെ ചുരുക്കം."
 }

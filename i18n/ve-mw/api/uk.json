@@ -51,7 +51,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "При збереженні, встановіть мітку часу, коли сторінка була завантажена. Використовується для виявлення конфліктів редагування.",
 	"apihelp-visualeditoredit-param-summary": "Опис редагування.",
 	"apihelp-visualeditoredit-param-tags": "Мітки змін, які слід застосувати до цього редагування.",
-	"apihelp-visualeditoredit-param-watch": "Додати сторінку у список спостереження поточного користувача.",
 	"apihelp-visualeditoredit-param-wikitext": "Вікірозмітка, якою слід здійснити дію.",
 	"apihelp-visualeditoredit-summary": "Зберегти HTML5-сторінку у MediaWiki (конвертовану у вікітекст сервісом Parsoid)."
 }

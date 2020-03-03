@@ -48,7 +48,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Legt dies beim Speichern auf den Zeitstempel des Zeitpunkts der geladenen Seite fest. Wird verwendet, um Bearbeitungskonflikte aufzuspüren.",
 	"apihelp-visualeditoredit-param-summary": "Bearbeitungszusammenfassung.",
 	"apihelp-visualeditoredit-param-tags": "Ändere die Tags, um sie auf die Bearbeitung anzuwenden. Falls vorhanden, unterdrückt das normale Visualeditor-Änderungs-Tagging.",
-	"apihelp-visualeditoredit-param-watch": "Fügt die Seite zur Beobachtungsliste des aktuellen Benutzers hinzu.",
 	"apihelp-visualeditoredit-param-wikitext": "Der Wikitext, mit dem gearbeitet werden soll.",
 	"apihelp-visualeditoredit-summary": "Speichert eine HTML5-Seite zu MediaWiki (konvertiert zu Wikitext mithilfe des Parsoid-Dienstes)."
 }

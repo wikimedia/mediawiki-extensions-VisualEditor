@@ -46,7 +46,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "新章节的标题。",
 	"apihelp-visualeditoredit-param-starttimestamp": "当保存时，设置它作为页面加载时的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditoredit-param-summary": "编辑摘要。",
-	"apihelp-visualeditoredit-param-watch": "将该页面加入当前用户的监视列表。",
 	"apihelp-visualeditoredit-param-wikitext": "扮演的wiki文本。",
 	"apihelp-visualeditoredit-summary": "保存一个HTML5页面至MediaWiki（通过Parsoid服务转换为wiki文本）。"
 }

@@ -55,7 +55,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Заголовок для нового раздела.",
 	"apihelp-visualeditoredit-param-starttimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
 	"apihelp-visualeditoredit-param-summary": "Редактировать описание изменений.",
-	"apihelp-visualeditoredit-param-watch": "Добавить страницу в список наблюдения текущего участника.",
 	"apihelp-visualeditoredit-param-wikitext": "Викитекст для действий.",
 	"apihelp-visualeditoredit-summary": "Сохранить HTML5-страницу в MediaWiki (сконвертированную в викитекст с помощью Parsoid)."
 }

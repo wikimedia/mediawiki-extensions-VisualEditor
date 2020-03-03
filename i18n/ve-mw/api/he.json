@@ -50,7 +50,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "בעת השמירה, להגדיר את זה לחותם־זמן כאשר הדף לא נטען. משמש לזיהוי התנגשויות עריכה.",
 	"apihelp-visualeditoredit-param-summary": "תקציר עריכה.",
 	"apihelp-visualeditoredit-param-tags": "אילו תגי שינוי להחיל על העריכה.",
-	"apihelp-visualeditoredit-param-watch": "הוספת הדף לרשימת המעקב של המשתמש הנוכחי.",
 	"apihelp-visualeditoredit-param-wikitext": "עם איזה קוד ויקי לפעול.",
 	"apihelp-visualeditoredit-summary": "שמירת דף HTML5 למדיה־ויקי (מומר לקוד ויקי דרך שירות פרסואיד)."
 }

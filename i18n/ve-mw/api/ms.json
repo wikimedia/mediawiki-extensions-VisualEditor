@@ -33,6 +33,5 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Tajuk bahagian baru.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Apabila menyimpan, tetapkan cop waktu bila halaman thelah dijana. Ini bagi mengelakkan konflik suntingan.",
 	"apihelp-visualeditoredit-param-summary": "Ringkasan suntingan.",
-	"apihelp-visualeditoredit-param-watch": "Tambahkan halaman kepada senarai pantau pengguna semasa.",
 	"apihelp-visualeditoredit-param-wikitext": "Wikiteks untuk bertindak."
 }

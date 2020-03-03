@@ -41,7 +41,6 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "नविन विभागाचा मथळा",
 	"apihelp-visualeditoredit-param-starttimestamp": "जतन करतांना, यास संपादित केलेल्या आवृत्तीच्या वेळठश्यावर स्थापा.संपादन विसंवाद शोधण्यास उपयोगी.",
 	"apihelp-visualeditoredit-param-summary": "संपादन सारांश.",
-	"apihelp-visualeditoredit-param-watch": "हे पान सदस्याच्या पहाऱ्याच्या सुचीमध्ये जोडा",
 	"apihelp-visualeditoredit-param-wikitext": "सध्याच्या कामाचे विकीटेक्स्ट",
 	"apihelp-visualeditoredit-summary": "HTML5 पान मिडीयाविकीमधे जपून ठेवा (पार्सोईड सेवा वापरून विकीटेक्स्टमध्ये रुपांतर केलेले आहे)."
 }
