@@ -11,6 +11,7 @@
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionStoreRecord;
 
 class ApiVisualEditor extends ApiBase {
 
@@ -275,7 +276,8 @@ class ApiVisualEditor extends ApiBase {
 
 				// Get information about current revision
 				if ( $title->exists() ) {
-					$latestRevision = Revision::newFromTitle( $title );
+					$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+					$latestRevision = $revisionLookup->getRevisionByTitle( $title );
 					if ( $latestRevision === null ) {
 						$this->dieWithError( 'apierror-visualeditor-latestnotfound', 'latestnotfound' );
 					}
@@ -284,13 +286,14 @@ class ApiVisualEditor extends ApiBase {
 						$parserParams['oldid'] = $latestRevision->getId();
 						$revision = $latestRevision;
 					} else {
-						$revision = Revision::newFromId( $parserParams['oldid'] );
+						$revision = $revisionLookup->getRevisionById( $parserParams['oldid'] );
 						if ( $revision === null ) {
 							$this->dieWithError( [ 'apierror-nosuchrevid', $parserParams['oldid'] ], 'oldidnotfound' );
 						}
 					}
 
-					$restoring = $revision && !$revision->isCurrent();
+					$restoring = $revision &&
+						!( $revision instanceof RevisionStoreRecord && $revision->isCurrent() );
 					$baseTimestamp = $latestRevision->getTimestamp();
 					$oldid = intval( $parserParams['oldid'] );
 
