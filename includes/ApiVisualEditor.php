@@ -421,7 +421,7 @@ class ApiVisualEditor extends ApiBase {
 						$notices[] = MediaWikiServices::getInstance()->getParser()->parse(
 							'<div class="mw-editintro">{{:' . $eiTitle->getFullText() . '}}</div>',
 							$title,
-							new ParserOptions()
+							new ParserOptions( $user )
 						)->getText();
 					}
 				}
