@@ -29,7 +29,8 @@
 			"Diyapazon",
 			"Hedda",
 			"Karduelis",
-			"BaRaN6161 TURK"
+			"BaRaN6161 TURK",
+			"ToprakM"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -231,7 +232,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Alt başlık 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Alt başlık 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Alt başlık 4",
-	"visualeditor-generating-wikitext-progress": "Vikimetşn oluşturuluyor",
+	"visualeditor-generating-wikitext-progress": "Vikimetin oluşturuluyor",
 	"visualeditor-languages-tool": "Diller",
 	"visualeditor-linkinspector-button-link-external": "Harici site",
 	"visualeditor-linkinspector-button-link-internal": "Dahili sayfalarda ara",
