@@ -397,8 +397,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
  *   loadSuccess(). If false, either that loadFail() has been called or we're retrying via load().
  */
 ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
-	var aboutDoc, docRevIdMatches, docRevId,
-		name, options, accesskey, title, $label, checkbox,
+	var aboutDoc, docRevIdMatches, docRevId, checkboxes,
 		data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 
 	if ( !data ) {
@@ -454,54 +453,15 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 		this.retriedRevIdConflict = false;
 	}
 
-	this.checkboxFields = [];
-	this.checkboxesByName = {};
+	checkboxes = mw.libs.ve.targetLoader.createCheckboxFields( this.checkboxesDef );
+	this.checkboxFields = checkboxes.checkboxFields;
+	this.checkboxesByName = checkboxes.checkboxesByName;
 
-	if ( this.checkboxesDef ) {
-		for ( name in this.checkboxesDef ) {
-			options = this.checkboxesDef[ name ];
-
-			accesskey = null;
-			title = null;
-			// The messages documented below are just the ones defined in core.
-			// Extensions may add other checkboxes.
-			if ( options.tooltip ) {
-				// The following messages are used here:
-				// * accesskey-minoredit
-				// * accesskey-watch
-				accesskey = mw.message( 'accesskey-' + options.tooltip ).text();
-				// The following messages are used here:
-				// * tooltip-minoredit
-				// * tooltip-watch
-				title = mw.message( 'tooltip-' + options.tooltip ).text();
-			}
-			if ( options[ 'title-message' ] ) {
-				// Not used in core
-				// eslint-disable-next-line mediawiki/msg-doc
-				title = mw.message( options[ 'title-message' ] ).text();
-			}
-			// The following messages are used here:
-			// * minoredit
-			// * watchthis
-			$label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
-			ve.targetLinksToNewWindow( $label[ 0 ] );
-
-			checkbox = new OO.ui.CheckboxInputWidget( {
-				accessKey: accesskey,
-				selected: options.default,
-				classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
-			} );
-
-			this.checkboxFields.push(
-				new OO.ui.FieldLayout( checkbox, {
-					align: 'inline',
-					label: $label.contents(),
-					title: title
-				} )
-			);
-			this.checkboxesByName[ name ] = checkbox;
-		}
-	}
+	this.checkboxFields.forEach( function ( field ) {
+		// TODO: This method should be upstreamed or moved so that targetLoader
+		// can use it safely.
+		ve.targetLinksToNewWindow( field.$label[ 0 ] );
+	} );
 
 	return true;
 };
