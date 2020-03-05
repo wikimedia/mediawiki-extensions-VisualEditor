@@ -20,7 +20,6 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 
 	this.active = false;
 	this.pageName = mw.config.get( 'wgRelevantPageName' );
-	this.editToken = mw.user.tokens.get( 'csrfToken' );
 	this.recovered = false;
 	this.fromEditedState = false;
 	this.originalHtml = null;
@@ -459,26 +458,21 @@ ve.init.mw.Target.prototype.teardown = function () {
  * the current user.
  *
  * @param {ve.dm.Document} [doc] Document to associate with the API request
- * @return {jQuery.Promise} Promise resolved with whether we switched users
+ * @return {jQuery.Promise} Promise resolved with new username, or null if anonymous
  */
-ve.init.mw.Target.prototype.refreshEditToken = function ( doc ) {
+ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
 	var api = this.getContentApi( doc ),
-		deferred = ve.createDeferred(),
-		target = this;
+		deferred = ve.createDeferred();
 	api.get( {
 		action: 'query',
-		meta: 'tokens|userinfo',
-		type: 'csrf'
+		meta: 'userinfo'
 	} )
 		.done( function ( data ) {
 			var
 				userInfo = data.query && data.query.userinfo,
-				editToken = data.query && data.query.tokens && data.query.tokens.csrftoken,
 				isAnon = mw.user.isAnon();
 
-			if ( userInfo && editToken ) {
-				target.editToken = editToken;
-
+			if ( userInfo ) {
 				if (
 					( isAnon && userInfo.anon !== undefined ) ||
 						// Comparing id instead of name to protect against possible
@@ -486,7 +480,7 @@ ve.init.mw.Target.prototype.refreshEditToken = function ( doc ) {
 						mw.config.get( 'wgUserId' ) === userInfo.id
 				) {
 					// New session is the same user still
-					deferred.resolve( false );
+					deferred.resolve( mw.user.getName() );
 				} else {
 					// The now current session is a different user
 					if ( userInfo.anon !== undefined ) {
@@ -502,7 +496,7 @@ ve.init.mw.Target.prototype.refreshEditToken = function ( doc ) {
 						// New session is a different user
 						mw.config.set( { wgUserId: userInfo.id, wgUserName: userInfo.name } );
 					}
-					deferred.resolve( true );
+					deferred.resolve( mw.user.getName() );
 				}
 			} else {
 				deferred.reject();
@@ -519,15 +513,12 @@ ve.init.mw.Target.prototype.refreshEditToken = function ( doc ) {
  *
  * @param {ve.dm.Document} doc Document
  * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
- * @param {boolean} [isRetry=false] Whether this call is retrying a prior call
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
-ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, isRetry ) {
+ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) {
 	var promise, xhr,
-		target = this,
 		params = {
 			action: 'visualeditoredit',
-			token: this.editToken,
 			paction: 'serialize',
 			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
 			page: this.getPageName()
@@ -543,7 +534,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 		params.etag = this.etag;
 	}
 
-	xhr = this.getContentApi( doc ).post(
+	xhr = this.getContentApi( doc ).postWithToken( 'csrf',
 		params,
 		{ contentType: 'multipart/form-data' }
 	);
@@ -553,12 +544,6 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision, i
 			return response.visualeditoredit.content;
 		}
 		return ve.createDeferred().reject();
-	}, function ( error ) {
-		if ( error === 'badtoken' && !isRetry ) {
-			return target.refreshEditToken( doc ).then( function () {
-				return target.getWikitextFragment( doc, useRevision, true );
-			} );
-		}
 	} );
 
 	promise.abort = function () {

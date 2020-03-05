@@ -155,7 +155,7 @@ ve.ui.MWExportWikitextDialog.prototype.export = function () {
 		format: 'text/x-wiki',
 		model: 'wikitext',
 		wpTextbox1: wikitext,
-		wpEditToken: ve.init.target.editToken,
+		wpEditToken: mw.user.tokens.get( 'csrfToken' ),
 		// MediaWiki function-verification parameters, mostly relevant to the
 		// classic editpage, but still required here:
 		wpUnicodeCheck: 'ℳ𝒲♥𝓊𝓃𝒾𝒸ℴ𝒹ℯ',

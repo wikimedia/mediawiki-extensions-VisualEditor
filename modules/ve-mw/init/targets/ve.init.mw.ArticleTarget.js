@@ -694,23 +694,13 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 		for ( i = 0; i < data.errors.length; i++ ) {
 			error = data.errors[ i ];
 
-			// Handle token errors
 			if ( error.code === 'badtoken' ) {
-				if ( wasRetry ) {
-					this.saveErrorBadToken( null, true );
-					return;
-				}
-				this.refreshEditToken().done( function ( userChanged ) {
-					// target.editToken has been refreshed
-					if ( userChanged ) {
-						target.saveErrorBadToken( mw.user.isAnon() ? null : mw.user.getName(), false );
-					} else {
-						// New session is the same user still; retry
-						target.emit( 'saveErrorBadToken', true );
-						target.save( doc, saveData, true );
-					}
-				} ).fail( function () {
-					target.saveErrorBadToken( null, true );
+				this.saveErrorBadTokenOrNewUser( null, true );
+			} else if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
+				this.refreshUser().then( function ( username ) {
+					target.saveErrorBadTokenOrNewUser( username, false );
+				}, function () {
+					target.saveErrorUnknown( data );
 				} );
 				return;
 			} else if ( error.code === 'editconflict' ) {
@@ -794,14 +784,14 @@ ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function ( data ) {
 };
 
 /**
- * Handle token fetch indicating another user is logged in, and token fetch errors.
+ * Handle assert error indicating another user is logged in, and token fetch errors.
  *
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
- * @param {boolean} [error=false] Whether there was an error trying to figure out who we're logged in as
+ * @param {boolean} [error=false] Whether this is a token fetch error
  * @fires saveErrorBadToken
  * @fires saveErrorNewUser
  */
-ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function ( username, error ) {
+ve.init.mw.ArticleTarget.prototype.saveErrorBadTokenOrNewUser = function ( username, error ) {
 	var $msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) );
 
 	if ( error ) {
@@ -1482,8 +1472,8 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		basetimestamp: this.baseTimeStamp,
 		starttimestamp: this.startTimeStamp,
 		etag: this.etag,
-		// Pass in token to prevent automatic badtoken retries
-		token: this.editToken
+		assert: mw.user.isAnon() ? 'anon' : 'user',
+		assertuser: mw.user.getName() || undefined
 	} );
 
 	if ( mw.config.get( 'wgVisualEditorConfig' ).useChangeTagging && !data.vetags ) {
@@ -1593,7 +1583,7 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 		wpStarttime: this.startTimeStamp,
 		wpEdittime: this.baseTimeStamp,
 		wpTextbox1: wikitext,
-		wpEditToken: this.editToken,
+		wpEditToken: mw.user.tokens.get( 'csrfToken' ),
 		// MediaWiki function-verification parameters, mostly relevant to the
 		// classic editpage, but still required here:
 		wpUnicodeCheck: 'ℳ𝒲♥𝓊𝓃𝒾𝒸ℴ𝒹ℯ',
