@@ -51,6 +51,7 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
 	"apihelp-visualeditoredit-param-summary": "Xulasay vurnayışi",
 	"apihelp-visualeditoredit-param-tags": "Vurnayışi tetbiq kerdışi rê etiketi bıvurnên",
+	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Wikimetıno ke bıgureniyo.",
 	"apihelp-visualeditoredit-summary": "Pela HTML5 MediaWiki de bışevekne (servisê Parsoidi de wikimetın çarniya)."
 }

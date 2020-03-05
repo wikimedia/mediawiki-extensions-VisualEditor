@@ -12,7 +12,7 @@
 	"apierror-visualeditor-difffailed": "Fark başarısız oldu",
 	"apierror-visualeditor-docserver-http-error": "Parsoid/RESTBase sunucusuyla iletişim kurulurken hata oluştu: $1",
 	"apierror-visualeditor-docserver-http": "Parsoid/RESTBase sunucusuyla iletişim kurulurken hata oluştu (HTTP $1)",
-	"apierror-visualeditor-docserver-unconfigured": "Doküman sunucusu için VirtualRESTService tanımlanmamıştır; bkz. https://www.mediawiki.org/wiki/Extension:VisualEditor",
+	"apierror-visualeditor-docserver-unconfigured": "Doküman sunucusu için VirtualRESTService tanımlanmamıştır; https://www.mediawiki.org/wiki/Extension:VisualEditor bakınız",
 	"apierror-visualeditor-docserver": "Parsoid/RESTBase sunucusuyla iletişim hatası (yanıt yok)",
 	"apierror-visualeditor-latestnotfound": "Başlık için en son düzeltme bulunamadı",
 	"apihelp-visualeditor-description": "Parsoid hizmetinden bir sayfa için HTML5 değerini döndürür.",
@@ -22,7 +22,7 @@
 	"apihelp-visualeditor-param-editintro": "Bildirimlere eklemek için girişi düzenleyin.",
 	"apihelp-visualeditor-param-etag": "Gönderilecek ETag.",
 	"apihelp-visualeditor-param-format": "Çıkışının biçimi.",
-	"apihelp-visualeditor-param-html": "Wiki metin dönüştürmek için Parsoid göndermek için HTML.",
+	"apihelp-visualeditor-param-html": "Vikimetin dönüştürmek için Parsoid göndermek için HTML.",
 	"apihelp-visualeditor-param-oldid": "Sürüm numarası (en son revizyon için varsayılan).",
 	"apihelp-visualeditor-param-paction": "Eylemi gerçekleştirmek için.",
 	"apihelp-visualeditor-param-page": "Bu sayfa üzerinde eylemleri gerçekleştirmek için.",
@@ -52,6 +52,6 @@
 	"apihelp-visualeditoredit-param-summary": "Düzenleme özeti.",
 	"apihelp-visualeditoredit-param-tags": "Düzenlemeye uygulanacak etiketleri değiştirin.",
 	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
-	"apihelp-visualeditoredit-param-wikitext": "Hareket etmek için wiki metin.",
+	"apihelp-visualeditoredit-param-wikitext": "Taşımak için vikimetin.",
 	"apihelp-visualeditoredit-summary": "Bir HTML5 sayfasını MediaWiki'ye (Parsoid hizmeti aracılığıyla wikitext'ye dönüştürülür) kaydedin."
 }
