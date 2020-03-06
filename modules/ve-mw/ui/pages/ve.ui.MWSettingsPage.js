@@ -81,6 +81,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		$overlay: config.$overlay,
 		api: ve.init.target.getContentApi()
 	} );
+	this.redirectTargetInput.$input.attr( 'aria-label', ve.msg( 'visualeditor-dialog-meta-settings-redirect-placeholder' ) );
+
 	this.redirectTargetField = new OO.ui.FieldLayout(
 		this.redirectTargetInput,
 		{ align: 'top' }
