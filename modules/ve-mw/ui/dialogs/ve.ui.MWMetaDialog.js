@@ -68,6 +68,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 		this.templatesUsedPage
 	] );
 
+	this.bookletLayout.$menu.find( '[role=listbox]' ).first().attr( 'aria-label', OO.ui.deferMsg( 'visualeditor-dialog-meta-title' ) );
 	this.oldSettings = null;
 	this.widgetList = this.getAllWidgets();
 };

@@ -33,9 +33,12 @@ ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget
 	this.categoryWidget = categoryWidget;
 	this.api = config.api || ve.init.target.getContentApi();
 
+	this.$input.attr( 'aria-label', ve.msg( 'visualeditor-dialog-meta-categories-input-placeholder' ) );
+
 	// Initialization
 	this.$element.addClass( 've-ui-mwCategoryInputWidget' );
 	this.lookupMenu.$element.addClass( 've-ui-mwCategoryInputWidget-menu' );
+	this.lookupMenu.$element.attr( 'aria-label', ve.msg( 'visualeditor-dialog-meta-categories-data-label' ) );
 };
 
 /* Inheritance */
