@@ -206,7 +206,8 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		orientation: this.isMobile ? 'horizontal' : 'vertical'
 	} );
 	this.showSearchPanelButton = new OO.ui.ButtonWidget( {
-		label: this.isMobile ? undefined : ve.msg( 'visualeditor-mwgallerydialog-search-button-label' ),
+		label: ve.msg( 'visualeditor-mwgallerydialog-search-button-label' ),
+		invisibleLabel: !!this.isMobile,
 		icon: 'add',
 		framed: false,
 		flags: [ 'progressive' ],
