@@ -352,15 +352,6 @@ ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( code, errorDetail
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.editSource = function () {
-	var modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
-
-	this.switchToWikitextEditor( modified );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.MobileArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
 	var dataPromise;
 	if ( modified ) {
