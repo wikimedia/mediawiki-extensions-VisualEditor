@@ -352,7 +352,7 @@ ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( code, errorDetail
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
+ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var dataPromise;
 	if ( modified ) {
 		dataPromise = this.getWikitextDataPromiseForDoc( modified ).then( function ( response ) {
