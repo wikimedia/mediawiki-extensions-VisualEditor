@@ -198,7 +198,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
-	var body, contents, $heading, redirectMeta, deferred,
+	var body, $heading, redirectMeta, deferred,
 		$redirect = $(),
 		categories = [],
 		modules = [],
@@ -256,15 +256,12 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			);
 		}
 
-		// Remove metadata
-		contents = ve.filterMetaElements( Array.prototype.slice.call( body.childNodes ) );
-
 		this.$previewViewer.empty().append(
 			// TODO: This won't work with formatted titles (T122976)
 			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText() ),
 			$redirect,
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
-				contents
+				body.childNodes
 			)
 		);
 
