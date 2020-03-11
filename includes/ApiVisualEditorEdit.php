@@ -40,6 +40,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'starttimestamp' => $params['starttimestamp'],
 			'token' => $params['token'],
 			'watchlist' => $params['watchlist'],
+			'tags' => $params['tags'],
+			'section' => $params['section'],
+			'sectiontitle' => $params['sectiontitle'],
+			'captchaid' => $params['captchaid'],
+			'captchaword' => $params['captchaword'],
 			'errorformat' => 'html',
 		];
 
@@ -49,21 +54,21 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			$apiParams['notminor'] = true;
 		}
 
-		if ( $params['captchaid'] ) {
-			$apiParams['captchaid'] = $params['captchaid'];
-		}
-
-		if ( $params['captchaword'] ) {
-			$apiParams['captchaword'] = $params['captchaword'];
+		// Pass any unrecognized query parameters to the internal action=edit API request. This is
+		// necessary to support extensions that add extra stuff to the edit form (e.g. FlaggedRevs)
+		// and allows passing any other query parameters to be used for edit tagging (e.g. T209132).
+		// Exclude other known params from here and ApiMain.
+		// TODO: This doesn't exclude params from the formatter
+		$allParams = $this->getRequest()->getValues();
+		$knownParams = array_keys( $this->getAllowedParams() + $this->getMain()->getAllowedParams() );
+		foreach ( $knownParams as $knownParam ) {
+			unset( $allParams[ $knownParam ] );
 		}
 
 		$api = new ApiMain(
 			new DerivativeRequest(
 				$this->getRequest(),
-				// Pass any unrecognized query parameters to the internal action=edit API request. This is
-				// necessary to support extensions that add extra stuff to the edit form (e.g. FlaggedRevs)
-				// and allows passing any other query parameters to be used for edit tagging (e.g. T209132).
-				$apiParams + $this->getRequest()->getValues(),
+				$apiParams + $allParams,
 				/* was posted? */ true
 			),
 			/* enable write? */ true
