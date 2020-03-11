@@ -404,6 +404,10 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 	var surface,
 		target = this;
 
+	// We may be re-activating an old target, during which time ve.init.target
+	// has been overridden.
+	ve.init.target = ve.init.articleTarget;
+
 	if ( !this.active && !this.activating ) {
 		this.activating = true;
 		this.activatingDeferred = ve.createDeferred();

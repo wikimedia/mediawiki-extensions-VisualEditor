@@ -29,6 +29,13 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	// Parent constructor
 	ve.init.mw.ArticleTarget.super.call( this, config );
 
+	// Register
+	if ( config.register !== false ) {
+		// ArticleTargets are never destroyed, but we can't trust ve.init.target to
+		// not get overridden by other targets that may get created on the page.
+		ve.init.articleTarget = this;
+	}
+
 	// Properties
 	this.saveDialog = null;
 	this.saveDeferred = null;
