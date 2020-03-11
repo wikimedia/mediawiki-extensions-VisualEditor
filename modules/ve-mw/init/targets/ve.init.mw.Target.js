@@ -263,7 +263,8 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 	return new ve.ui.MWTargetWidget( ve.extendObject( {
 		// Reset to visual mode for target widgets
 		modes: [ 'visual' ],
-		defaultMode: 'visual'
+		defaultMode: 'visual',
+		toolbarGroups: this.toolbarGroups
 	}, config ) );
 };
 
