@@ -104,6 +104,68 @@
 		},
 
 		/**
+		 * Creates an OOUI checkbox inside an inline field layout
+		 *
+		 * @param {Object[]} checkboxesDef Checkbox definitions from the API
+		 * @return {Object} Result object with checkboxFields (OO.ui.FieldLayout[]) and
+		 *  checkboxesByName (keyed object of OO.ui.CheckboxInputWidget).
+		 */
+		createCheckboxFields: function ( checkboxesDef ) {
+			var checkboxFields = [],
+				checkboxesByName = {};
+
+			if ( checkboxesDef ) {
+				Object.keys( checkboxesDef ).forEach( function ( name ) {
+					var $label, checkbox,
+						options = checkboxesDef[ name ],
+						accesskey = null,
+						title = null;
+
+					// The messages documented below are just the ones defined in core.
+					// Extensions may add other checkboxes.
+					if ( options.tooltip ) {
+						// The following messages are used here:
+						// * accesskey-minoredit
+						// * accesskey-watch
+						accesskey = mw.message( 'accesskey-' + options.tooltip ).text();
+						// The following messages are used here:
+						// * tooltip-minoredit
+						// * tooltip-watch
+						title = mw.message( 'tooltip-' + options.tooltip ).text();
+					}
+					if ( options[ 'title-message' ] ) {
+						// Not used in core
+						// eslint-disable-next-line mediawiki/msg-doc
+						title = mw.message( options[ 'title-message' ] ).text();
+					}
+					// The following messages are used here:
+					// * minoredit
+					// * watchthis
+					$label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
+
+					checkbox = new OO.ui.CheckboxInputWidget( {
+						accessKey: accesskey,
+						selected: options.default,
+						classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
+					} );
+
+					checkboxFields.push(
+						new OO.ui.FieldLayout( checkbox, {
+							align: 'inline',
+							label: $label.contents(),
+							title: title
+						} )
+					);
+					checkboxesByName[ name ] = checkbox;
+				} );
+			}
+			return {
+				checkboxFields: checkboxFields,
+				checkboxesByName: checkboxesByName
+			};
+		},
+
+		/**
 		 * Request the page data and various metadata from the MediaWiki API (which will use
 		 * Parsoid or RESTBase).
 		 *

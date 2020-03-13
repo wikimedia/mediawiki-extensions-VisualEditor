@@ -41,12 +41,12 @@
 	padding: 0.7em 0.7em 0 0.7em;
 }
 
-.ve-ui-mwSaveDialog-checkboxes .oo-ui-fieldLayout {
+.ve-ui-mwSaveDialog-checkboxes > .oo-ui-fieldLayout {
 	display: inline-block;
 	margin: 0 1.5em 0 0;
 }
 
-.ve-ui-mwSaveDialog-checkboxes .oo-ui-fieldLayout:last-child {
+.ve-ui-mwSaveDialog-checkboxes > .oo-ui-fieldLayout:last-child {
 	margin-right: 0;
 }
 
