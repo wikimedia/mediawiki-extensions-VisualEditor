@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Kumkumuk",
-			"Mirzali"
+			"Mirzali",
+			"Orbot707"
 		]
 	},
 	"visualeditor-ca-editsource": "Çımeyi bıvurne",
+	"visualeditor-ca-editsource-section": "çımeyi bıvurne",
 	"visualeditor-dialog-media-choose-image": "Nê resımi bıgurene",
 	"visualeditor-dialog-meta-settings-index-disable": "Nê",
 	"visualeditor-dialog-meta-settings-index-force": "Heya",

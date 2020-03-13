@@ -15,16 +15,17 @@
 			"Coolland",
 			"Kumkumuk",
 			"Diyapazon",
-			"By erdo can"
+			"By erdo can",
+			"BaRaN6161 TURK"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici]]",
-	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici]] kullanarak düzenleyin",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici: Doğrula]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleme]]",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleyiciyi]] kullanarak düzenleyin",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleme: Doğrula]]",
 	"tag-visualeditor-needcheck-description": "Sistem [[{{MediaWiki:visualeditor-descriptionpagelink}}|görsel düzenleyici]] ile düzenleyemeyeceğiniz, ancak kaynağı değiştir bağlantısıyla editör ile yapabileceğiniz değişiklik yaptığınızı tespit etti.",
 	"tag-visualeditor-wikitext": "2017 kaynak düzenleyici",
-	"tag-visualeditor-wikitext-description": "2017 wikitext düzenleyicisi kullanılarak yapılan düzenleme",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel Düzenleyici: Değiştirildi]]",
+	"tag-visualeditor-wikitext-description": "2017 vikimetin düzenleyicisi kullanılarak yapılan düzenleme",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleme: Değiştirildi]]",
 	"tag-visualeditor-switched-description": "Kullanıcı görsel düzenleyici ile düzenlemeye başladı, daha sonra kaynak düzenleyiciye geçti.",
 	"visualeditor-feedback-link": "Project:Görsel Düzenleyici/Geri bildirim",
 	"visualeditor-feedback-tool": "Bu yazılım hakkında geri bildirim bırakın",
@@ -35,5 +36,5 @@
 	"visualeditor-welcomedialog-content-thanks": "Dünyanın daha fazla şey keşfetmesine yardımcı olduğunuz için teşekkürler!",
 	"visualeditor-welcomedialog-switch": "Kaynak düzenleyiciye geç",
 	"visualeditor-welcomedialog-switch-ve": "Görsel düzenleyiciye geç",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|Hoş geldin}} $2"
+	"visualeditor-welcomedialog-title": "$2 sitesine {{GENDER:$1|hoş geldiniz}}"
 }
