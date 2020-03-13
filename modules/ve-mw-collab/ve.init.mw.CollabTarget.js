@@ -81,6 +81,8 @@ ve.init.mw.CollabTarget.static.actionGroups = [
 		icon: 'menu',
 		indicator: null,
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+		label: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+		invisibleLabel: true,
 		include: [ 'changeDirectionality', 'findAndReplace' ]
 	},
 	{
