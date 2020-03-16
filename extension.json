@@ -644,6 +644,7 @@
 			"dependencies": [
 				"mediawiki.String",
 				"jquery.client",
+				"jquery.tablesorter",
 				"mediawiki.api",
 				"mediawiki.language",
 				"mediawiki.storage",
@@ -1055,6 +1056,7 @@
 				"lib/ve/src/ui/contextitems/ve.ui.ToolContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.TableContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.MergeCellsContextItem.js",
+				"lib/ve/src/ui/contextitems/ve.ui.SumCellsContextItem.js",
 				"lib/ve/src/ui/commands/ve.ui.ClearAnnotationCommand.js",
 				"lib/ve/src/ui/commands/ve.ui.HistoryCommand.js",
 				"lib/ve/src/ui/commands/ve.ui.IndentationCommand.js",
@@ -1345,6 +1347,7 @@
 				"visualeditor-table-move-col-before",
 				"visualeditor-table-move-row-after",
 				"visualeditor-table-move-row-before",
+				"visualeditor-table-sum",
 				"visualeditor-tablecell-tooltip",
 				"visualeditor-toolbar-format-tooltip",
 				"visualeditor-toolbar-history",
