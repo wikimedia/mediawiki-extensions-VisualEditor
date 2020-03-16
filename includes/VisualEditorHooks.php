@@ -933,7 +933,7 @@ class VisualEditorHooks {
 	 * @param OutputPage $out The page view.
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
-		$pageLanguage = ApiVisualEditor::getPageLanguage( $out->getTitle() );
+		$pageLanguage = ApiParsoidTrait::getPageLanguage( $out->getTitle() );
 
 		$fallbacks = $pageLanguage->getConverter()->getVariantFallbacks(
 			$pageLanguage->getPreferredVariant()
