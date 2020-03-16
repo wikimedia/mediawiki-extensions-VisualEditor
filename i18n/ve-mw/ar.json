@@ -26,7 +26,8 @@
 			"Aboulouei1",
 			"ديفيد",
 			"محمد عصام",
-			"علاء"
+			"علاء",
+			"NEHAOUA"
 		]
 	},
 	"collabpad-doctitle": "كولاب باد: $1",
@@ -84,7 +85,6 @@
 	"visualeditor-dialog-media-info-readmore": "اقرأ المزيد",
 	"visualeditor-dialog-media-info-separator": "·",
 	"visualeditor-dialog-media-info-uploaded": "رفع في: $1",
-	"visualeditor-dialog-media-noresults": "لا نتائج تم العثور عليها.",
 	"visualeditor-dialog-media-page-advanced": "متقدم",
 	"visualeditor-dialog-media-page-general": "عام",
 	"visualeditor-dialog-media-position-center": "وسط",
@@ -234,7 +234,7 @@
 	"visualeditor-generating-wikitext-progress": "توليد نص الويكي",
 	"visualeditor-languages-tool": "اللغات",
 	"visualeditor-linkinspector-button-link-external": "موقع خارجي",
-	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحة",
+	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحةالداخلية",
 	"visualeditor-linkinspector-convert-link-isbn": "تحويل إلى الرابط ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "حول إلى وصلة PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "تحويل إلى الرابط RFC",
@@ -249,7 +249,6 @@
 	"visualeditor-magiclinknodeinspector-title-pmid": "وصلة PMID",
 	"visualeditor-magiclinknodeinspector-title-rfc": "وصلة RFC",
 	"visualeditor-mainnamespacepagelink": "Project:النطاق الرئيسي",
-	"visualeditor-media-input-placeholder": "بحث عن ملفات",
 	"visualeditor-media-title-audio": "صوت",
 	"visualeditor-media-title-image": "صورة",
 	"visualeditor-media-title-video": "فيديو",
@@ -338,7 +337,6 @@
 	"visualeditor-mwpredialog-convert": "السماح بتهيئة النص",
 	"visualeditor-mwpredialog-title": "نص خام قبل التهيئة",
 	"visualeditor-mwsignature-tool": "توقيعك",
-	"visualeditor-pagemenu-tooltip": "خيارات الصفحة",
 	"visualeditor-pagetranslationwarning": "أنت تعدل صفحة قابلة للترجمة. تعديلها بالمحرر المرئي ليس متاحا حاليا.",
 	"visualeditor-parameter-input-placeholder": "اسم الحقل",
 	"visualeditor-parameter-search-more": "أظهر {{PLURAL:$1|الحقل الآخر|الحقلين الآخرين|الحقول ال‍$1 الأخرى}}",
