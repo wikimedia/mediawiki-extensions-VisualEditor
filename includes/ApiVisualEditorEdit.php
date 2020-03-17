@@ -113,7 +113,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
 		$displaytitle = $result['parse']['displaytitle'] ?? false;
 		$modules = array_merge(
-			$result['parse']['modulescripts'] ?? [],
 			$result['parse']['modules'] ?? [],
 			$result['parse']['modulestyles'] ?? []
 		);
