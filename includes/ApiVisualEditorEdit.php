@@ -108,7 +108,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		] );
 		$content = $result['parse']['text']['*'] ?? false;
 		$categorieshtml = $result['parse']['categorieshtml']['*'] ?? false;
-		$links = $result['parse']['links'] ?? [];
 		$revision = Revision::newFromId( $result['parse']['revid'] );
 		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
 		$displaytitle = $result['parse']['displaytitle'] ?? false;
