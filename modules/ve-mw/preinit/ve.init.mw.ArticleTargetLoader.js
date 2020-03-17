@@ -338,9 +338,6 @@
 					'Accept-Language': mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
-				if ( conf.parsoidVariant ) {
-					headers[ 'X-Parsoid-Variant' ] = conf.parsoidVariant;
-				}
 
 				// Convert specified Wikitext to HTML
 				if (
