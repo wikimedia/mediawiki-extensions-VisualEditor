@@ -185,15 +185,11 @@
 	}
 
 	function parseSection( section ) {
-		var parsedSection = section;
 		// Section must be a number, 'new' or 'T-' prefixed
-		if ( section !== 'new' ) {
-			parsedSection = section.indexOf( 'T-' ) === 0 ? +section.slice( 2 ) : +section;
-			if ( isNaN( parsedSection ) ) {
-				parsedSection = null;
-			}
+		if ( /^(new|\d+|T-\d+)$/.test( section ) ) {
+			return section;
 		}
-		return parsedSection;
+		return null;
 	}
 
 	/**
