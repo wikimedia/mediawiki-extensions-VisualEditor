@@ -256,11 +256,16 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
 		mode = this.mode;
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
-		action.setLabel(
-			mode === 'single' ?
-				ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' ) :
-				ve.msg( 'visualeditor-dialog-transclusion-single-mode' )
-		);
+		var label, expanded;
+		if ( mode === 'single' ) {
+			label = ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' );
+			expanded = false;
+		} else {
+			label = ve.msg( 'visualeditor-dialog-transclusion-single-mode' );
+			expanded = true;
+		}
+		action.setLabel( label );
+		action.$button.attr( 'aria-expanded', expanded.toString() );
 	} );
 
 	// Decide whether the button should be enabled or not. It needs to be:
