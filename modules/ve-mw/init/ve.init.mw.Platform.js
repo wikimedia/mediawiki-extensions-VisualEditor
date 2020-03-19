@@ -76,6 +76,24 @@ ve.init.mw.Platform.prototype.addMessages = function ( messages ) {
 ve.init.mw.Platform.prototype.getMessage = mw.msg.bind( mw );
 
 /**
+ * @method
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.parseNumber = function ( value ) {
+	var number = $.tablesorter.getParser( 'number' ).format( value );
+	// formatDigit returns -Infinity when parsing fails, change this to NaN
+	return number !== -Infinity ? number : NaN;
+};
+
+/**
+ * @method
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.formatNumber = function ( number ) {
+	return mw.language.convertNumber( number );
+};
+
+/**
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.getHtmlMessage = function () {
