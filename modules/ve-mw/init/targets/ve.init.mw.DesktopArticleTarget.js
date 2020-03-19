@@ -98,6 +98,8 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		icon: 'menu',
 		indicator: null,
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+		label: ve.msg( 'visualeditor-pagemenu-tooltip' ),
+		invisibleLabel: true,
 		include: [ 'meta', 'categories', 'settings', 'advancedSettings', 'languages', 'templatesUsed', 'changeDirectionality', 'findAndReplace' ]
 	},
 	{
@@ -105,6 +107,8 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		type: 'list',
 		icon: 'edit',
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+		label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+		invisibleLabel: true,
 		include: [ 'editModeVisual', 'editModeSource' ]
 	},
 	{

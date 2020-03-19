@@ -61,6 +61,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 		type: 'list',
 		icon: 'textStyle',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		invisibleLabel: true,
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
 		forceExpand: [ 'bold', 'italic', 'clear' ],
 		promote: [ 'bold', 'italic' ],
@@ -79,6 +81,8 @@ ve.init.mw.Target.static.toolbarGroups = [
 		type: 'list',
 		icon: 'listBullet',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
+		invisibleLabel: true,
 		include: [ { group: 'structure' } ],
 		demote: [ 'outdent', 'indent' ]
 	},

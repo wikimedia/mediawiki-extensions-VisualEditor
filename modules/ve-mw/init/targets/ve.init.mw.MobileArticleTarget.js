@@ -54,6 +54,8 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		type: 'list',
 		icon: 'textStyle',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
+		invisibleLabel: true,
 		include: [ { group: 'textStyle' }, 'language', 'clear' ],
 		forceExpand: [ 'bold', 'italic', 'clear' ],
 		promote: [ 'bold', 'italic' ],
@@ -463,6 +465,8 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 				type: 'list',
 				icon: 'edit',
 				title: OO.ui.deferMsg( 'visualeditor-mweditmode-tooltip' ),
+				label: OO.ui.deferMsg( 'visualeditor-mweditmode-tooltip' ),
+				invisibleLabel: true,
 				include: [ 'editModeVisual', 'editModeSource' ]
 			},
 			{
