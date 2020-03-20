@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abshirdheere"
+			"Abshirdheere",
+			"Abdullahi"
 		]
 	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Tafatirka muuqaalka]]",
 	"visualeditor-welcomedialog-action": "Biloow bedelidda",
 	"visualeditor-welcomedialog-content": "Qof kasta wuu ka qayb qaadan karaa, habayn kasta waa kaalmo.",
 	"visualeditor-welcomedialog-content-thanks": "Waad ku mahadsantahay kaalmada aad adduunyada ku caawisay helitaan dheeraad ah!",
