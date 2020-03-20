@@ -116,7 +116,7 @@ ve.ui.MWDefinedTransclusionContextItem.static.getMatchedTool = function ( model 
 	var resource, title;
 	resource = ve.getProp( model.getAttribute( 'mw' ), 'parts', 0, 'template', 'target', 'href' );
 	if ( resource ) {
-		title = mw.Title.newFromText( ve.normalizeParsoidResourceName( resource ) ).getPrefixedText();
+		title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( resource ) ).getPrefixedText();
 		return this.getToolsByTitle()[ title ] || null;
 	}
 	return null;

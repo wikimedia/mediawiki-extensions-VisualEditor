@@ -148,7 +148,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 		ve.targetLinksToNewWindow( diffElement.$document[ 0 ] );
 		// Run styles so links render with their appropriate classes
 		ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
-		ve.fixFragmentLinks( diffElement.$document[ 0 ], mw.Title.newFromText( ve.init.target.getPageName() ), 'mw-save-visualdiff-' );
+		mw.libs.ve.fixFragmentLinks( diffElement.$document[ 0 ], mw.Title.newFromText( ve.init.target.getPageName() ), 'mw-save-visualdiff-' );
 		return diffElement;
 	}
 
@@ -209,7 +209,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		Array.prototype.forEach.call( docOrMsg.head.querySelectorAll( 'link[rel~=stylesheet]' ), function ( link ) {
 			var uri = new mw.Uri( link.href );
 			if ( uri.query.modules ) {
-				modules = modules.concat( ve.expandModuleNames( uri.query.modules ) );
+				modules = modules.concat( mw.libs.ve.expandModuleNames( uri.query.modules ) );
 			}
 		} );
 		// Remove skin-specific modules (T187075)
@@ -249,7 +249,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		redirectMeta = body.querySelector( 'link[rel="mw:PageProp/redirect"]' );
 		if ( redirectMeta ) {
 			$redirect = ve.init.mw.ArticleTarget.static.buildRedirectMsg(
-				ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+				mw.libs.ve.getTargetDataFromHref(
 					redirectMeta.getAttribute( 'href' ),
 					document
 				).title
@@ -268,7 +268,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		ve.targetLinksToNewWindow( this.$previewViewer[ 0 ] );
 		// Add styles so links render with their appropriate classes
 		ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
-		ve.fixFragmentLinks( this.$previewViewer[ 0 ], mw.Title.newFromText( ve.init.target.getPageName() ), 'mw-save-preview-' );
+		mw.libs.ve.fixFragmentLinks( this.$previewViewer[ 0 ], mw.Title.newFromText( ve.init.target.getPageName() ), 'mw-save-preview-' );
 
 		if ( categories.length ) {
 			// If there are categories, we need to render them. This involves

@@ -103,7 +103,7 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.onTextChange = function ( value )
 	// page title. This has to happen /here/ because a URL can reference a
 	// valid page while not being a valid Title (e.g. if it contains a "%").
 	if ( ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( value ) ) {
-		targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref(
+		targetData = mw.libs.ve.getTargetDataFromHref(
 			value,
 			htmlDoc
 		);

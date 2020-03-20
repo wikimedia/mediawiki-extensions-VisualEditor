@@ -113,7 +113,7 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
 
 	contentNodes.forEach( function ( node ) {
 		if ( node.nodeType === Node.ELEMENT_NODE ) {
-			ve.stripParsoidFallbackIds( node );
+			mw.libs.ve.stripParsoidFallbackIds( node );
 		}
 	} );
 

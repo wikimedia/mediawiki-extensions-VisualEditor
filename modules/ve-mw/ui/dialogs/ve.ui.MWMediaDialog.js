@@ -919,7 +919,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
  * Update the filename fieldset (link to media page)
  */
 ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
-	var title = mw.Title.newFromText( ve.normalizeParsoidResourceName( this.imageModel.getResourceName() ) );
+	var title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.imageModel.getResourceName() ) );
 	this.filenameFieldset.setLabel(
 		$( '<span>' ).append(
 			document.createTextNode( this.imageModel.getFilename() + ' ' ),

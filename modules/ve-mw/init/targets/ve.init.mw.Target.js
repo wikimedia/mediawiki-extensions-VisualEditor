@@ -210,11 +210,11 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 				}
 			} else {
 				// Strip Parsoid sections
-				ve.unwrapParsoidSections( doc.body, section );
+				mw.libs.ve.unwrapParsoidSections( doc.body, section );
 			}
 		}
 		// Strip legacy IDs, for example in section headings
-		ve.stripParsoidFallbackIds( doc.body );
+		mw.libs.ve.stripParsoidFallbackIds( doc.body );
 		// Fix relative or missing base URL if needed
 		this.fixBase( doc );
 	}

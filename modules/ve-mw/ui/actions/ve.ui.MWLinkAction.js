@@ -54,7 +54,7 @@ ve.ui.MWLinkAction.static.getLinkAnnotation = function ( linktext, doc ) {
 		return ve.dm.MWMagicLinkNode.static.annotationFromContent( linktext );
 	}
 	// Is this an internal link?
-	targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( href, doc );
+	targetData = mw.libs.ve.getTargetDataFromHref( href, doc );
 	if ( targetData.isInternal ) {
 		title = mw.Title.newFromText( targetData.title );
 		return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( title );

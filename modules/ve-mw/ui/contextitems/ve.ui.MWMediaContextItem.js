@@ -69,7 +69,7 @@ ve.ui.MWMediaContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.MWMediaContextItem.prototype.renderBody = function () {
-	var title = mw.Title.newFromText( ve.normalizeParsoidResourceName( this.model.getAttribute( 'resource' ) ) );
+	var title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.model.getAttribute( 'resource' ) ) );
 	this.$body.append(
 		$( '<a>' )
 			.text( this.getDescription() )
