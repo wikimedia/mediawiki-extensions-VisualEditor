@@ -108,8 +108,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		] );
 		$content = $result['parse']['text']['*'] ?? false;
 		$categorieshtml = $result['parse']['categorieshtml']['*'] ?? false;
-		$revision = Revision::newFromId( $result['parse']['revid'] );
-		$timestamp = $revision ? $revision->getTimestamp() : wfTimestampNow();
 		$displaytitle = $result['parse']['displaytitle'] ?? false;
 		$modules = array_merge(
 			$result['parse']['modules'] ?? [],
@@ -117,7 +115,11 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		);
 		$jsconfigvars = $result['parse']['jsconfigvars'] ?? [];
 
-		if ( $content === false || ( strlen( $content ) && $revision === null ) ) {
+		if (
+			$content === false ||
+			// TODO: Is this check still needed?
+			( strlen( $content ) && Revision::newFromId( $result['parse']['revid'] ) === null )
+		) {
 			return false;
 		}
 
@@ -130,8 +132,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		return [
 			'content' => $content,
 			'categorieshtml' => $categorieshtml,
-			'basetimestamp' => $timestamp,
-			'starttimestamp' => wfTimestampNow(),
 			'displayTitleHtml' => $displaytitle,
 			'modules' => $modules,
 			'jsconfigvars' => $jsconfigvars
