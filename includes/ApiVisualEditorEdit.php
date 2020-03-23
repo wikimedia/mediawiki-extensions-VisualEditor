@@ -48,7 +48,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'errorformat' => 'html',
 		];
 
-		if ( $params['minor'] ) {
+		if ( $params['minor'] !== null ) {
 			$apiParams['minor'] = true;
 		} else {
 			$apiParams['notminor'] = true;
