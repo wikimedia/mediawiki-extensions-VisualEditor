@@ -360,7 +360,7 @@ ve.dm.MWMagicLinkIsbnType.prototype.matchHref = function ( href ) {
 		return false;
 	}
 	// conf.specialBooksources has localized name for Special:Booksources
-	normalized = ve.decodeURIComponentIntoArticleTitle( matches[ 1 ], true ).replace( ' ', '_' );
+	normalized = mw.libs.ve.decodeURIComponentIntoArticleTitle( matches[ 1 ], true ).replace( ' ', '_' );
 	if ( normalized !== 'Special:BookSources' && normalized !== conf.specialBooksources ) {
 		return false;
 	}

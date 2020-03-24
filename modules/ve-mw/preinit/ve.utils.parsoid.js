@@ -1,12 +1,27 @@
 /*!
- * VisualEditor MediaWiki utilities.
+ * Parsoid utilities.
  *
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+mw.libs.ve = mw.libs.ve || {};
+
 /**
- * @class ve
+ * Resolve a URL relative to a given base.
+ *
+ * Copied from ve.resolveUrl
+ *
+ * @param {string} url URL to resolve
+ * @param {HTMLDocument} base Document whose base URL to use
+ * @return {string} Resolved URL
  */
+mw.libs.ve.resolveUrl = function ( url, base ) {
+	var node = base.createElement( 'a' );
+	node.setAttribute( 'href', url );
+	// If doc.baseURI isn't set, node.href will be an empty string
+	// This is crazy, returning the original URL is better
+	return node.href || url;
+};
 
 /**
  * Decode a URI component into a mediawiki article title
@@ -18,7 +33,7 @@
  * @param {boolean} [preserveUnderscores] Don't convert underscores to spaces
  * @return {string} Decoded string, or original string if decodeURIComponent failed
  */
-ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscores ) {
+mw.libs.ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscores ) {
 	try {
 		s = decodeURIComponent( s );
 	} catch ( e ) {
@@ -36,7 +51,7 @@ ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscores ) {
  * @param {HTMLElement} element Parent element, e.g. document body
  * @param {number} [keepSection] Section to keep
  */
-ve.unwrapParsoidSections = function ( element, keepSection ) {
+mw.libs.ve.unwrapParsoidSections = function ( element, keepSection ) {
 	Array.prototype.forEach.call( element.querySelectorAll( 'section[data-mw-section-id]' ), function ( section ) {
 		var parent = section.parentNode,
 			sectionId = section.getAttribute( 'data-mw-section-id' );
@@ -60,7 +75,7 @@ ve.unwrapParsoidSections = function ( element, keepSection ) {
  *
  * @param {HTMLElement} element Parent element, e.g. document body
  */
-ve.stripParsoidFallbackIds = function ( element ) {
+mw.libs.ve.stripParsoidFallbackIds = function ( element ) {
 	Array.prototype.forEach.call( element.querySelectorAll( 'span[typeof="mw:FallbackId"][id]:empty' ), function ( legacySpan ) {
 		legacySpan.parentNode.removeChild( legacySpan );
 	} );
@@ -79,13 +94,13 @@ ve.stripParsoidFallbackIds = function ( element ) {
  * @param {mw.Title} docTitle Current title, only links to this title will be normalized
  * @param {string} [prefix] Prefix to add to fragment and target ID to avoid collisions
  */
-ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
+mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 	var docTitleText = docTitle.getPrefixedText();
 	prefix = prefix || '';
 	Array.prototype.forEach.call( container.querySelectorAll( 'a[href*="#"]' ), function ( el ) {
 		var target, title,
 			fragment = new mw.Uri( el.href ).fragment,
-			targetData = ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref( el.href, el.ownerDocument );
+			targetData = mw.libs.ve.getTargetDataFromHref( el.href, el.ownerDocument );
 
 		if ( targetData.isInternal ) {
 			title = mw.Title.newFromText( targetData.title );
@@ -113,6 +128,59 @@ ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 };
 
 /**
+ * Parse URL to get title it points to.
+ *
+ * @param {string} href
+ * @param {HTMLDocument|string} doc Document whose base URL to use, or base URL as a string.
+ * @return {Object} Information about the given href
+ * @return {string} return.title
+ *    The title of the internal link, else the original href if href is external
+ * @return {string} return.rawTitle
+ *    The title without URL decoding and underscore normalization applied
+ * @return {boolean} return.isInternal
+ *    True if the href pointed to the local wiki, false if href is external
+ */
+mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
+	var relativeBase, relativeBaseRegex, relativeHref, isInternal, matches, data, uri;
+
+	function regexEscape( str ) {
+		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
+	}
+
+	// Protocol relative href
+	relativeHref = href.replace( /^https?:/i, '' );
+	// Paths without a host portion are assumed to be internal
+	isInternal = !/^\/\//.test( relativeHref );
+
+	// Check if this matches the server's article path
+	// Protocol relative base
+	relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/i, '' );
+	relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) );
+	matches = relativeHref.match( relativeBaseRegex );
+	if ( matches && matches[ 1 ].split( '#' )[ 0 ].indexOf( '?' ) === -1 ) {
+		// Take the relative path
+		href = matches[ 1 ];
+		isInternal = true;
+	}
+
+	// Check if this matches the server's script path (as used by red links)
+	relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
+	if ( relativeHref.indexOf( relativeBase ) === 0 ) {
+		uri = new mw.Uri( relativeHref );
+		if ( uri.query.title ) {
+			href = uri.query.title;
+			isInternal = true;
+		}
+	}
+
+	// This href doesn't necessarily come from Parsoid (and it might not have the "./" prefix), but
+	// this method will work fine.
+	data = mw.libs.ve.parseParsoidResourceName( href );
+	data.isInternal = isInternal;
+	return data;
+};
+
+/**
  * Expand a string of the form jquery.foo,bar|jquery.ui.baz,quux to
  * an array of module names like [ 'jquery.foo', 'jquery.bar',
  * 'jquery.ui.baz', 'jquery.ui.quux' ]
@@ -123,7 +191,7 @@ ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
  * @param {string} moduleNames Packed module name list
  * @return {string[]} Array of module names
  */
-ve.expandModuleNames = function ( moduleNames ) {
+mw.libs.ve.expandModuleNames = function ( moduleNames ) {
 	var modules = [];
 
 	moduleNames.split( '|' ).forEach( function ( group ) {
@@ -159,7 +227,7 @@ ve.expandModuleNames = function ( moduleNames ) {
  * @return {string} return.title Full page title in text form (with namespace, and spaces instead of underscores)
  * @return {string} return.rawTitle The title without URL decoding and underscore normalization applied
  */
-ve.parseParsoidResourceName = function ( resourceName ) {
+mw.libs.ve.parseParsoidResourceName = function ( resourceName ) {
 	// Resource names are always prefixed with './' to prevent the MediaWiki namespace from being
 	// interpreted as a URL protocol, consider e.g. 'href="./File:Foo.png"'.
 	// (We accept input without the prefix, so this can also take plain page titles.)
@@ -167,7 +235,7 @@ ve.parseParsoidResourceName = function ( resourceName ) {
 	return {
 		// '%' and '?' are valid in page titles, but normally URI-encoded. This also changes underscores
 		// to spaces.
-		title: ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] ),
+		title: mw.libs.ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] ),
 		rawTitle: matches[ 2 ]
 	};
 };
@@ -178,6 +246,6 @@ ve.parseParsoidResourceName = function ( resourceName ) {
  * @param {string} resourceName Resource name, from a `href` or `resource` attribute
  * @return {string} Full page title in text form (with namespace, and spaces instead of underscores)
  */
-ve.normalizeParsoidResourceName = function ( resourceName ) {
-	return ve.parseParsoidResourceName( resourceName ).title;
+mw.libs.ve.normalizeParsoidResourceName = function ( resourceName ) {
+	return mw.libs.ve.parseParsoidResourceName( resourceName ).title;
 };

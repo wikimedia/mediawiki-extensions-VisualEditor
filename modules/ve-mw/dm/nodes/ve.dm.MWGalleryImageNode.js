@@ -72,7 +72,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 	dataElement = {
 		type: this.name,
 		attributes: {
-			resource: ve.normalizeParsoidResourceName( img.getAttribute( 'resource' ) ),
+			resource: mw.libs.ve.normalizeParsoidResourceName( img.getAttribute( 'resource' ) ),
 			altText: img.getAttribute( 'alt' ),
 			// 'src' for images, 'poster' for video/audio
 			src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),

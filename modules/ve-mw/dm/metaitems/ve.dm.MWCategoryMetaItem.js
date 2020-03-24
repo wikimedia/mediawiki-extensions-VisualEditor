@@ -34,7 +34,7 @@ ve.dm.MWCategoryMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/Category' ];
 
 ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements ) {
 	var href = domElements[ 0 ].getAttribute( 'href' ),
-		data = ve.parseParsoidResourceName( href ),
+		data = mw.libs.ve.parseParsoidResourceName( href ),
 		rawTitleAndFragment = data.rawTitle.match( /^(.*?)(?:#(.*))?$/ ),
 		titleAndFragment = data.title.match( /^(.*?)(?:#(.*))?$/ );
 	return {
@@ -55,8 +55,8 @@ ve.dm.MWCategoryMetaItem.static.toDomElements = function ( dataElement, doc ) {
 		sortkey = dataElement.attributes.sortkey || '',
 		origCategory = dataElement.attributes.origCategory || '',
 		origSortkey = dataElement.attributes.origSortkey || '',
-		normalizedOrigCategory = ve.decodeURIComponentIntoArticleTitle( origCategory ),
-		normalizedOrigSortkey = ve.decodeURIComponentIntoArticleTitle( origSortkey );
+		normalizedOrigCategory = mw.libs.ve.decodeURIComponentIntoArticleTitle( origCategory ),
+		normalizedOrigSortkey = mw.libs.ve.decodeURIComponentIntoArticleTitle( origSortkey );
 	if ( normalizedOrigSortkey === sortkey ) {
 		sortkey = origSortkey;
 	} else {

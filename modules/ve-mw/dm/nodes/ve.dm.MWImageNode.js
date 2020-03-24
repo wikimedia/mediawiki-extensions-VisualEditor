@@ -358,7 +358,7 @@ ve.dm.MWImageNode.prototype.onAttributeChange = function ( key, from, to ) {
  * @return {string} Filename (including namespace)
  */
 ve.dm.MWImageNode.prototype.getFilename = function () {
-	return ve.normalizeParsoidResourceName( this.getAttribute( 'resource' ) || '' );
+	return mw.libs.ve.normalizeParsoidResourceName( this.getAttribute( 'resource' ) || '' );
 };
 
 /**

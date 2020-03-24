@@ -180,7 +180,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc )
 	imgModel.cacheOriginalImageAttributes( attrs );
 
 	imgModel.setImageSource( attrs.src );
-	imgModel.setFilename( new mw.Title( ve.normalizeParsoidResourceName( attrs.resource ) ).getMainText() );
+	imgModel.setFilename( new mw.Title( mw.libs.ve.normalizeParsoidResourceName( attrs.resource ) ).getMainText() );
 	imgModel.setImageHref( attrs.href );
 
 	// Set bounding box
@@ -284,7 +284,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 	}
 	if ( attrs.resource ) {
 		this.setImageResourceName( attrs.resource );
-		this.setFilename( new mw.Title( ve.normalizeParsoidResourceName( attrs.resource ) ).getMainText() );
+		this.setFilename( new mw.Title( mw.libs.ve.normalizeParsoidResourceName( attrs.resource ) ).getMainText() );
 	}
 
 	if ( attrs.src ) {
@@ -1129,7 +1129,7 @@ ve.dm.MWImageModel.prototype.getImageHref = function () {
  * @param {ve.dm.Scalable} scalable Scalable object
  */
 ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
-	var imageName = ve.normalizeParsoidResourceName( this.getResourceName() ),
+	var imageName = mw.libs.ve.normalizeParsoidResourceName( this.getResourceName() ),
 		imageModel = this;
 
 	if ( this.scalable instanceof ve.dm.Scalable ) {

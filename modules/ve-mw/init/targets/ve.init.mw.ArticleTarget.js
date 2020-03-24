@@ -963,7 +963,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 					}
 					// Append section and unwrap
 					doc.body.appendChild( target.doc.body.querySelectorAll( 'section[data-mw-section-id]' )[ 0 ] );
-					ve.unwrapParsoidSections( doc.body );
+					mw.libs.ve.unwrapParsoidSections( doc.body );
 				} else {
 					doc = target.doc;
 				}
@@ -1935,7 +1935,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	if ( section !== null && section !== 'new' && section !== 0 && section !== 'T-0' ) {
 		if ( mode === 'visual' ) {
 			dmDoc = surface.getModel().getDocument();
-			// In ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
+			// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
 			// to the heading. Iterate over headings to find the one with the correct attribute
 			// in originalDomElements.
 			dmDoc.getNodesByType( 'mwHeading' ).some( function ( heading ) {

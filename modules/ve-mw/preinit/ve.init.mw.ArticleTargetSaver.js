@@ -89,7 +89,7 @@
 				].join( ',' ) )
 				.remove();
 
-			// data-mw-section-id is copied to headings by ve.unwrapParsoidSections
+			// data-mw-section-id is copied to headings by mw.libs.ve.unwrapParsoidSections
 			// Remove these to avoid triggering selser.
 			$( newDoc ).find( '[data-mw-section-id]:not( section )' ).removeAttr( 'data-mw-section-id' );
 

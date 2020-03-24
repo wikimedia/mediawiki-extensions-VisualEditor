@@ -40,9 +40,9 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
 		resource = domElements[ 0 ].getAttribute( 'resource' );
 
 	if ( resource ) {
-		targetData = ve.parseParsoidResourceName( resource );
+		targetData = mw.libs.ve.parseParsoidResourceName( resource );
 	} else {
-		targetData = this.getTargetDataFromHref(
+		targetData = mw.libs.ve.getTargetDataFromHref(
 			domElements[ 0 ].getAttribute( 'href' ),
 			converter.getTargetHtmlDocument()
 		);
@@ -114,59 +114,6 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle 
 	return new ve.dm.MWInternalLinkAnnotation( element );
 };
 
-/**
- * Parse URL to get title it points to.
- *
- * @param {string} href
- * @param {HTMLDocument|string} doc Document whose base URL to use, or base URL as a string.
- * @return {Object} Information about the given href
- * @return {string} return.title
- *    The title of the internal link, else the original href if href is external
- * @return {string} return.rawTitle
- *    The title without URL decoding and underscore normalization applied
- * @return {boolean} return.isInternal
- *    True if the href pointed to the local wiki, false if href is external
- */
-ve.dm.MWInternalLinkAnnotation.static.getTargetDataFromHref = function ( href, doc ) {
-	var relativeBase, relativeBaseRegex, relativeHref, isInternal, matches, data, uri;
-
-	function regexEscape( str ) {
-		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
-	}
-
-	// Protocol relative href
-	relativeHref = href.replace( /^https?:/i, '' );
-	// Paths without a host portion are assumed to be internal
-	isInternal = !/^\/\//.test( relativeHref );
-
-	// Check if this matches the server's article path
-	// Protocol relative base
-	relativeBase = ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/i, '' );
-	relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) );
-	matches = relativeHref.match( relativeBaseRegex );
-	if ( matches && matches[ 1 ].split( '#' )[ 0 ].indexOf( '?' ) === -1 ) {
-		// Take the relative path
-		href = matches[ 1 ];
-		isInternal = true;
-	}
-
-	// Check if this matches the server's script path (as used by red links)
-	relativeBase = ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
-	if ( relativeHref.indexOf( relativeBase ) === 0 ) {
-		uri = new mw.Uri( relativeHref );
-		if ( uri.query.title ) {
-			href = uri.query.title;
-			isInternal = true;
-		}
-	}
-
-	// This href doesn't necessarily come from Parsoid (and it might not have the "./" prefix), but
-	// this method will work fine.
-	data = ve.parseParsoidResourceName( href );
-	data.isInternal = isInternal;
-	return data;
-};
-
 ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
 	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.apply( this, arguments );
 	parentResult[ 0 ].setAttribute( 'rel', 'mw:WikiLink' );
@@ -177,7 +124,7 @@ ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 	var encodedTitle,
 		title = dataElement.attributes.title,
 		origTitle = dataElement.attributes.origTitle;
-	if ( origTitle !== undefined && ve.decodeURIComponentIntoArticleTitle( origTitle ) === title ) {
+	if ( origTitle !== undefined && mw.libs.ve.decodeURIComponentIntoArticleTitle( origTitle ) === title ) {
 		// Restore href from origTitle
 		encodedTitle = origTitle;
 	} else {

@@ -334,6 +334,7 @@
 		"ext.visualEditor.targetLoader": {
 			"group": "visualEditorA",
 			"scripts": [
+				"modules/ve-mw/preinit/ve.utils.parsoid.js",
 				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js",
 				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetSaver.js"
 			],
@@ -1541,7 +1542,6 @@
 		"ext.visualEditor.mwcore": {
 			"group": "visualEditorA",
 			"scripts": [
-				"modules/ve-mw/ve.MWutils.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWExtensionNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWBlockExtensionNode.js",
