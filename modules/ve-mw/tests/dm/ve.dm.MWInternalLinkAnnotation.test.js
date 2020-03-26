@@ -44,6 +44,26 @@ QUnit.test( 'toDataElement', function ( assert ) {
 				}
 			},
 			{
+				msg: 'History link',
+				element: internalLink( 'Foo', { action: 'history' } ),
+				expected: {
+					type: 'link/mwExternal',
+					attributes: {
+						href: location.origin + mw.Title.newFromText( 'Foo' ).getUrl( { action: 'history' } )
+					}
+				}
+			},
+			{
+				msg: 'Diff link',
+				element: internalLink( 'Foo', { diff: '3', oldid: '2' } ),
+				expected: {
+					type: 'link/mwExternal',
+					attributes: {
+						href: location.origin + mw.Title.newFromText( 'Foo' ).getUrl( { diff: '3', oldid: '2' } )
+					}
+				}
+			},
+			{
 				msg: 'Red link',
 				element: internalLink( 'Foo', { action: 'edit', redlink: '1' } ),
 				expected: {
