@@ -648,6 +648,23 @@
 				// The below duplicates the functionality of VisualEditorHooks::onSkinTemplateNavigation()
 				// in case we're running on a cached page that doesn't have these tabs yet.
 
+				// Alter the edit tab (#ca-edit)
+				if ( $( '#ca-view-foreign' ).length ) {
+					if ( tabMessages[ action + 'localdescriptionsource' ] !== null ) {
+						// The following messages can be used here:
+						// * editlocaldescriptionsource
+						// * createlocaldescriptionsource
+						$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
+					}
+				} else {
+					if ( tabMessages[ action + 'source' ] !== null ) {
+						// The following messages can be used here:
+						// * editsource
+						// * createsource
+						$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
+					}
+				}
+
 				// If there is no edit tab or a view-source tab,
 				// the user doesn't have permission to edit.
 				if ( $caEdit.length && !$caSource.length ) {
@@ -704,23 +721,6 @@
 				// Only bind "Add topic" tab if NWE is available, because VE doesn't support section
 				// so we never have to switch from it when editing a section
 				$( '#ca-addsection' ).off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
-			}
-
-			// Alter the edit tab (#ca-edit)
-			if ( $( '#ca-view-foreign' ).length ) {
-				if ( tabMessages[ action + 'localdescriptionsource' ] !== null ) {
-					// The following messages can be used here:
-					// * editlocaldescriptionsource
-					// * createlocaldescriptionsource
-					$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
-				}
-			} else {
-				if ( tabMessages[ action + 'source' ] !== null ) {
-					// The following messages can be used here:
-					// * editsource
-					// * createsource
-					$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
-				}
 			}
 
 			if ( isMinerva ) {
