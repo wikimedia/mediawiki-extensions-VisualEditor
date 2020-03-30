@@ -118,7 +118,10 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 		if (
 			$content === false ||
 			// TODO: Is this check still needed?
-			( strlen( $content ) && Revision::newFromId( $result['parse']['revid'] ) === null )
+			( strlen( $content ) && MediaWikiServices::getInstance()
+				->getRevisionLookup()
+				->getRevisionById( $result['parse']['revid'] ) === null
+			)
 		) {
 			return false;
 		}
