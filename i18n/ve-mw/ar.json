@@ -395,6 +395,8 @@
 	"visualeditor-section-body-placeholder": "قسم جديد",
 	"visualeditor-section-title-placeholder": "الموضوع",
 	"visualeditor-serializeerror": "خطأ في تحميل البيانات من الخادم: $1.",
+	"visualeditor-loaderror-revidconflict": "معرفات المراجعة المرجعة بواسطة الخادم لا تتطابق (الوثيقة: $1، البيانات الوصفية: $2).",
+	"visualeditor-loaderror-wrongmode": "حاول تحميل المحرر في الوضع الخاطئ (نوع البيانات: \"$1\"، وضع المحرر: \"$2\").",
 	"visualeditor-settings-tool": "إعدادات الصفحة",
 	"visualeditor-special-characters-group-other": "مستخدمة عادة",
 	"visualeditor-templatesused-tool": "القوالب المستخدمة",

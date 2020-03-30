@@ -6,7 +6,8 @@
 			"Los688",
 			"SkyDaisy9",
 			"Takot",
-			"Delim"
+			"Delim",
+			"Shirayuki"
 		]
 	},
 	"apierror-visualeditor-docserver": "Parsoid/RESTbaseサーバと通信中エラーが発生しました",
@@ -27,7 +28,7 @@
 	"apihelp-visualeditoredit-param-captchaword": "(captchaで保存するときの) captchaに対する回答",
 	"apihelp-visualeditoredit-param-html": "ウィキテキストを出力として得るために、Parsoidに送るHTML",
 	"apihelp-visualeditoredit-param-minor": "細部の編集のしるし。",
-	"apihelp-visualeditoredit-param-needcheck": "保存する際に、このリビジョンにroundtrip問題があればこのパラメータを使用する。その場合、編集はタグ付けされます。",
+	"apihelp-visualeditoredit-param-needcheck": "保存する際に、この版にroundtrip問題がある場合はこのパラメーターを使用する。その場合、編集はタグ付けされます。",
 	"apihelp-visualeditoredit-param-oldid": "使用する版番号。既定では最新版です。新しいページには 0 を使用します。",
 	"apihelp-visualeditoredit-param-page": "操作を実行したいページ",
 	"apihelp-visualeditoredit-param-sectiontitle": "新しい節の名前です。",
