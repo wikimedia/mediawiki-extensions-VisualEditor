@@ -1932,7 +1932,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		surface = this.getSurface(),
 		mode = surface.getMode();
 
-	if ( section !== null && section !== 'new' && section !== 0 && section !== 'T-0' ) {
+	if ( section !== null && section !== 'new' && section !== '0' && section !== 'T-0' ) {
 		if ( mode === 'visual' ) {
 			dmDoc = surface.getModel().getDocument();
 			// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
@@ -1942,7 +1942,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 				var domElements = heading.getOriginalDomElements( dmDoc.getStore() );
 				if (
 					domElements && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
-					+domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
+					domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
 				) {
 					headingModel = heading;
 					return true;
@@ -2259,7 +2259,8 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 /**
  * Switch to a different wikitext section
  *
- * @param {number|string|null} section New section, number, 'new' or null (whole document)
+ * @param {string|null} section Section to switch to: a number, 'T-'-prefixed number, 'new'
+ *   or null (whole document)
  * @param {boolean} noConfirm Switch without prompting (changes will be lost either way)
  */
 ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section, noConfirm ) {

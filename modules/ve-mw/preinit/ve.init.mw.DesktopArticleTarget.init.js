@@ -197,7 +197,7 @@
 	 *
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
-	 * @param {number|string} section Section to edit
+	 * @param {string} section Section to edit
 	 * @return {jQuery.Promise}
 	 */
 	function getTarget( mode, section ) {
@@ -344,7 +344,7 @@
 	 *
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
-	 * @param {number|string} [section] Section to edit (currently just source mode)
+	 * @param {string} [section] Section to edit (currently just source mode)
 	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
@@ -897,7 +897,7 @@
 		activateVe: function ( mode ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
 				sectionVal = $( 'input[name=wpSection]' ).val(),
-				section = sectionVal !== '' && sectionVal !== undefined ? +sectionVal : null,
+				section = sectionVal !== '' && sectionVal !== undefined ? sectionVal : null,
 				config = mw.config.get( 'wgVisualEditorConfig' ),
 				canSwitch = config.fullRestbaseUrl || config.allowLossySwitching,
 				modified = mw.config.get( 'wgAction' ) === 'submit' ||
@@ -947,7 +947,7 @@
 		 *
 		 * @param {string} mode Edit mode
 		 * @param {jQuery.Event} e Click event
-		 * @param {number|string} [section] Override edit section, taken from link URL if not specified
+		 * @param {string} [section] Override edit section, taken from link URL if not specified
 		 */
 		onEditSectionLinkClick: function ( mode, e, section ) {
 			var targetPromise,
