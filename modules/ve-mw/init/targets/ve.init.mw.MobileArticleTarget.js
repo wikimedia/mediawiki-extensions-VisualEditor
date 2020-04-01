@@ -14,7 +14,7 @@
  * @constructor
  * @param {VisualEditorOverlay} overlay Mobile frontend overlay
  * @param {Object} [config] Configuration options
- * @cfg {number} [section] Number of the section target should scroll to
+ * @cfg {string} [section] Number of the section target should scroll to
  */
 ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, config ) {
 	this.overlay = overlay;

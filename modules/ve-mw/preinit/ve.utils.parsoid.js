@@ -49,17 +49,17 @@ mw.libs.ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscore
  * Unwrap Parsoid sections
  *
  * @param {HTMLElement} element Parent element, e.g. document body
- * @param {number} [keepSection] Section to keep
+ * @param {string} [keepSection] Section to keep
  */
 mw.libs.ve.unwrapParsoidSections = function ( element, keepSection ) {
 	Array.prototype.forEach.call( element.querySelectorAll( 'section[data-mw-section-id]' ), function ( section ) {
 		var parent = section.parentNode,
 			sectionId = section.getAttribute( 'data-mw-section-id' );
 		// Copy section ID to first child (should be a heading)
-		if ( sectionId > 0 ) {
+		if ( sectionId !== '0' ) {
 			section.firstChild.setAttribute( 'data-mw-section-id', sectionId );
 		}
-		if ( keepSection !== undefined && +sectionId === keepSection ) {
+		if ( keepSection !== undefined && sectionId === keepSection ) {
 			return;
 		}
 		while ( section.firstChild ) {

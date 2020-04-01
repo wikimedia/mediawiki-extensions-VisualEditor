@@ -22,7 +22,7 @@
 		 * Get a ve.dm.Document model from a Parsoid response
 		 *
 		 * @param {Object} response Parsoid response from the VisualEditor API
-		 * @param {number|null} section Section. Null for the whole document.
+		 * @param {string|null} section Section. Null for the whole document.
 		 * @return {ve.dm.Document|null} Document, or null if an invalid response
 		 */
 		getModelFromResponse: function ( response, section ) {
@@ -51,7 +51,7 @@
 		 *
 		 * @param {number} revId Revision ID
 		 * @param {string} [pageName] Page name, defaults to wgRelevantPageName
-		 * @param {number|null} [section=null] Section. Null for the whole document.
+		 * @param {string|null} [section=null] Section. Null for the whole document.
 		 * @param {jQuery.Promise} [parseDocumentModulePromise] Promise which resolves when Target#parseDocument is available
 		 * @return {jQuery.Promise} Promise which resolves with a document model
 		 */

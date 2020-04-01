@@ -173,7 +173,7 @@
 		 * @param {string} pageName Page name to request, in prefixed DB key form (underscores instead of spaces)
 		 * @param {Object} [options] Options
 		 * @param {boolean} [options.sessionStore] Store result in session storage (by page+mode+section) for auto-save
-		 * @param {number|null|string} [options.section] Section to edit; number, null or 'new' (currently just source mode)
+		 * @param {null|string} [options.section] Section to edit; number, 'T-'-prefixed, null or 'new' (currently just source mode)
 		 * @param {number} [options.oldId] Old revision ID. Current if omitted.
 		 * @param {string} [options.targetName] Optional target name for tracking
 		 * @param {boolean} [options.modified] The page was been modified before loading (e.g. in source mode)
