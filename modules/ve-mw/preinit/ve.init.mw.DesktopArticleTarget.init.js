@@ -1219,6 +1219,8 @@
 							type: 'list',
 							icon: 'edit',
 							title: mw.msg( 'visualeditor-mweditmode-tooltip' ),
+							label: mw.msg( 'visualeditor-mweditmode-tooltip' ),
+							invisibleLabel: true,
 							include: [ 'editModeVisual', 'editModeSource' ]
 						} ] );
 
