@@ -38,6 +38,7 @@ ve.ui.MWParameterSearchWidget = function VeUiMWParameterSearchWidget( template, 
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwParameterSearchWidget' );
+	this.query.$input.attr( 'aria-label', ve.msg( 'visualeditor-parameter-input-placeholder' ) );
 	this.buildIndex();
 };
 
