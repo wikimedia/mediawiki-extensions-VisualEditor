@@ -5,16 +5,20 @@
 			"Lokal Profil",
 			"Warrakkk",
 			"WikiPhoenix",
-			"Technic2"
+			"Technic2",
+			"Haxpett"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Ingen cachelagrad serialisering hittades med nyckeln",
 	"apierror-visualeditor-difffailed": "Diff misslyckades",
+	"apierror-visualeditor-docserver-http-error": "Fel i kontakten med Parsoid/RESTBase-servern: $1",
+	"apierror-visualeditor-docserver-http": "Fel uppstod när Parsoid/RESTbase-servern kontaktades (HTTP $1)",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService för dokumentservern är inte definierad; se https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Fel uppstod när Parsoid/RESTbase-servern kontaktades (inget svar)",
 	"apierror-visualeditor-latestnotfound": "Kunde inte hitta den senaste sidversionen för titeln",
 	"apihelp-visualeditor-description": "Returnerar HTML5 för en sida från Parsoid-tjänsten.",
 	"apihelp-visualeditor-param-basetimestamp": "När du sparar, ställ in denna till tidsstämpel för versionen som redigerades. Används för att upptäcka redigeringskonflikter.",
+	"apihelp-visualeditor-param-badetag": "Om RESTBase-frågan returnerade en ETag som verkar ogiltigt, skicka med den för loggning.",
 	"apihelp-visualeditor-param-cachekey": "För serialisering eller diff, använd resultatet av en tidigare serializeforcache-begäran med denna nyckel. Åsidosätter $1html.",
 	"apihelp-visualeditor-param-editintro": "Redigera intro till att lägga till notiser.",
 	"apihelp-visualeditor-param-etag": "ETag att skicka.",
@@ -47,6 +51,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Rubrik för nytt avsnitt.",
 	"apihelp-visualeditoredit-param-starttimestamp": "När du sparar, ställ in denna till tidsstämpel för när sidan laddades. Används för att upptäcka redigeringskonflikter.",
 	"apihelp-visualeditoredit-param-summary": "Redigeringssammanfattning.",
+	"apihelp-visualeditoredit-param-tags": "Ändra taggar att tillämpa i redigeringen.",
 	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Wikitexten att arbeta med.",
 	"apihelp-visualeditoredit-summary": "Spara en HTML5-sida till MediaWiki (konverterad till wikitext via Parsoid-tjänsten)."
