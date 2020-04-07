@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"John Reid",
 			"Amire80",
-			"아라",
 			"Foxj",
-			"Jdforrester"
+			"Jdforrester",
+			"John Reid",
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Veesual eedit]]",

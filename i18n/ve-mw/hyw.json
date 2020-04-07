@@ -3,9 +3,9 @@
 		"authors": [
 			"ArmenBakkalian",
 			"Azniv Stepanian",
+			"Kareyac",
 			"Rajemian",
-			"Դավիթ Սարոյան",
-			"Kareyac"
+			"Դավիթ Սարոյան"
 		]
 	},
 	"tooltip-ca-ve-edit": "Խմբագրել այս էջը",
@@ -94,6 +94,7 @@
 	"visualeditor-linkinspector-button-link-internal": "էջեր որոնէ՛",
 	"visualeditor-linkinspector-educationpopup-text": "Յղումները անհրաժեշտ բառեր են, որոնք կը յղուին ուիքի այլ յօդուածներու կամ կայքէջերու։ Անոնք ընթերցողներուն կ’օգնեն հասկնալու տուեալ յօդուածին բովանդակութիւնը։",
 	"visualeditor-linkinspector-educationpopup-title": "Յղումներ",
+	"visualeditor-linknodeinspector-add-label": "Աւելցնել ստորագրութիւն",
 	"visualeditor-media-title-image": "Պատկեր",
 	"visualeditor-meta-tool": "Ընտրանքներ",
 	"visualeditor-mweditmodesource-tool-current": "Աղբիւրի խմբագրում",

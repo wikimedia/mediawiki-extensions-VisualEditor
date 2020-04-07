@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Jeblad",
+			"Jon Harald Søby",
 			"Njardarlogar",
-			"Ranveig",
-			"Jon Harald Søby"
+			"Ranveig"
 		]
 	},
 	"tooltip-ca-createsource": "Opprett kjeldekoden til sida",

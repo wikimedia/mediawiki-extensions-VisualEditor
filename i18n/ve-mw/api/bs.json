@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Srdjan m",
-			"Semina x"
+			"Semina x",
+			"Srdjan m"
 		]
 	},
 	"apierror-visualeditor-docserver-http-error": "Greška prilikom kontaktiranja Parsoid/RESTBase servera: $1",

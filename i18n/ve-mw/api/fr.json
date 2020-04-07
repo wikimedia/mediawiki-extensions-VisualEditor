@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Eneelk",
+			"Framawiki",
 			"Gomoko",
 			"Jdforrester",
 			"NemesisIII",
-			"Urhixidur",
-			"Wladek92",
-			"Zetud",
-			"Verdy p",
 			"Thibaut120094",
-			"Framawiki",
-			"Eneelk"
+			"Urhixidur",
+			"Verdy p",
+			"Wladek92",
+			"Zetud"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Pas de mise en cache de sérialisation trouvée avec cette clé",

@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Чаховіч Уладзіслаў",
-			"Дзяніс Тутэйшы",
-			"Artificial123",
 			"Amire80",
-			"Mikalai Udodau",
-			"Goshaproject",
-			"Mechanizatar",
+			"Artificial123",
 			"Artsiom91",
-			"Maksim L."
+			"Goshaproject",
+			"Maksim L.",
+			"Mechanizatar",
+			"Mikalai Udodau",
+			"Дзяніс Тутэйшы",
+			"Чаховіч Уладзіслаў"
 		]
 	},
 	"tooltip-ca-createsource": "Стварыць старонку ў рэдактары зыходнага тэксту",

@@ -3,11 +3,11 @@
 		"authors": [
 			"Admresdeserv.",
 			"Audriusa",
+			"Edgars2007",
 			"Eitvys200",
+			"Jdforrester",
 			"Papuass",
 			"PeterisP",
-			"Edgars2007",
-			"Jdforrester",
 			"Silraks",
 			"Zuiks"
 		]
@@ -19,6 +19,7 @@
 	"tooltip-ca-ve-edit": "Labot šo lapu",
 	"visualeditor-advancedsettings-tool": "Papildu iestatījumi",
 	"visualeditor-autosave-modified-prompt-accept": "Turpināt labošanu",
+	"visualeditor-autosave-modified-prompt-message": "Šī lapa ir labota pēc tam, kad tu to ielādēji labošanai. Vai {{GENDER:|vēlies}} turpināt labot veco versiju vai sākt jaunu labojumu ar jaunāko versiju?",
 	"visualeditor-autosave-modified-prompt-reject": "Sākt jaunu labojumu",
 	"visualeditor-autosave-modified-prompt-title": "Turpināt labošanu?",
 	"visualeditor-autosave-not-recovered-text": "Tavas nesaglabātās izmaiņas nevarēja atgūt.",

@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mimarik",
-			"Teslaton",
-			"Muhammad Shuaib",
 			"Jdforrester",
 			"Kusavica",
-			"TomášPolonec",
-			"Patriccck"
+			"Mimarik",
+			"Muhammad Shuaib",
+			"Patriccck",
+			"Teslaton",
+			"TomášPolonec"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuálny editor]]",

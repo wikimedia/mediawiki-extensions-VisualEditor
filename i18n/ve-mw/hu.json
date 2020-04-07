@@ -1,18 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bencemac",
+			"Csega",
 			"Dj",
 			"Einstein2",
-			"Misibacsi",
-			"ViDam",
-			"Tacsipacsi",
-			"Csega",
 			"Kishajnalka",
 			"Macofe",
+			"Misibacsi",
 			"Nyuszika7H",
-			"Tgr",
 			"R-Joe",
-			"Bencemac"
+			"Tacsipacsi",
+			"Tgr",
+			"ViDam"
 		]
 	},
 	"tooltip-ca-createsource": "Az oldal forráskódjának létrehozása",

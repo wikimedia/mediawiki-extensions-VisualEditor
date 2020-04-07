@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hwboehm",
 			"Kghbln",
-			"Se4598",
-			"Hwboehm"
+			"Se4598"
 		]
 	},
 	"visualeditor-autosave-modified-prompt-message": "Diese Seite wurde bearbeitet, seit Sie sie das letzte mal geladen haben. Möchten {{GENDER:|Sie}} die Bearbeitung der alten Version fortsetzen oder die aktuelle Version bearbeiten?",

@@ -1,6 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alluk.",
+			"Amire80",
 			"Beluga",
 			"Crt",
 			"Harriv",
@@ -14,9 +16,7 @@
 			"Skalman",
 			"Stryn",
 			"VezonThunder",
-			"Amire80",
-			"아라",
-			"Alluk."
+			"아라"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalinen muokkaus]]",

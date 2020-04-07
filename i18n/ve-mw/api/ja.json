@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"2nd-player",
+			"Delim",
 			"Fryed-peach",
 			"Los688",
+			"Shirayuki",
 			"SkyDaisy9",
-			"Takot",
-			"Delim",
-			"Shirayuki"
+			"Takot"
 		]
 	},
 	"apierror-visualeditor-docserver": "Parsoid/RESTbaseサーバと通信中エラーが発生しました",

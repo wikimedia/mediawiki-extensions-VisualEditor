@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Haxpett",
 			"Jopparn",
 			"Lokal Profil",
-			"Warrakkk",
-			"WikiPhoenix",
 			"Technic2",
-			"Haxpett"
+			"Warrakkk",
+			"WikiPhoenix"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Ingen cachelagrad serialisering hittades med nyckeln",
