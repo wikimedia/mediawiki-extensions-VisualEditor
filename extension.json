@@ -1619,7 +1619,6 @@
 				"mediawiki.storage",
 				"mediawiki.pulsatingdot",
 				"jquery.cookie",
-				"mediawiki.notify",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.widgets",
 				"ext.visualEditor.switching",
