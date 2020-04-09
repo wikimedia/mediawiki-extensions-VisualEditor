@@ -146,6 +146,9 @@
 					checkbox = new OO.ui.CheckboxInputWidget( {
 						accessKey: accesskey,
 						selected: options.default,
+						// The following classes are used here:
+						// * ve-ui-mwSaveDialog-checkbox-wpMinoredit
+						// * ve-ui-mwSaveDialog-checkbox-wpWatchthis
 						classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
 					} );
 

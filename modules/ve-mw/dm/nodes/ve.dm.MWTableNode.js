@@ -74,6 +74,7 @@ ve.dm.MWTableNode.static.toDomElements = function ( dataElement, doc ) {
 		classAttr = dataElement.attributes && this.getClassAttrFromAttributes( dataElement.attributes );
 
 	if ( classAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
 		element.className = classAttr;
 	}
 

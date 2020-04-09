@@ -144,6 +144,9 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 
 	function createDiffElement( visualDiff ) {
 		var diffElement = new ve.ui.DiffElement( visualDiff );
+		// The following classes are used here:
+		// * mw-content-ltr
+		// * mw-content-rtl
 		diffElement.$document.addClass( 'mw-body-content mw-parser-output mw-content-' + visualDiff.newDoc.getDir() );
 		ve.targetLinksToNewWindow( diffElement.$document[ 0 ] );
 		// Run styles so links render with their appropriate classes
@@ -260,6 +263,9 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			// TODO: This won't work with formatted titles (T122976)
 			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText() ),
 			$redirect,
+			// The following classes are used here:
+			// * mw-content-ltr
+			// * mw-content-rtl
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
 				body.childNodes
 			)

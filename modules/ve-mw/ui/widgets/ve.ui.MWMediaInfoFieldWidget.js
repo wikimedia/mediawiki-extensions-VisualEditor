@@ -76,6 +76,9 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	this.$element
 		.append( this.$icon, this.$label )
 		.addClass( 've-ui-mwMediaInfoFieldWidget' )
+		// The following classes are used here:
+		// * ve-ui-mwMediaInfoFieldWidget-description
+		// * ve-ui-mwMediaInfoFieldWidget-attribute
 		.addClass( 've-ui-mwMediaInfoFieldWidget-' + this.type );
 	this.$icon.addClass( 've-ui-mwMediaInfoFieldWidget-icon' );
 

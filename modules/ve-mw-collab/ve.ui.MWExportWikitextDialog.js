@@ -66,6 +66,10 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 	this.titleButton.on( 'click', this.export.bind( this ) );
 
 	this.wikitext = new OO.ui.MultilineTextInputWidget( {
+		// The following classes are used here:
+		// * mw-editfont-monospace
+		// * mw-editfont-sans-serif
+		// * mw-editfont-serif
 		classes: [ 'mw-editfont-' + mw.user.options.get( 'editfont' ) ],
 		autosize: true,
 		readOnly: true,

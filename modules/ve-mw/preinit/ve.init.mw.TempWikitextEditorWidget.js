@@ -31,7 +31,14 @@ mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget(
 
 	this.$element = $( '<textarea>' )
 		.addClass( 've-init-mw-tempWikitextEditorWidget ' )
+		// The following classes are used here:
+		// * mw-editfont-monospace
+		// * mw-editfont-sans-serif
+		// * mw-editfont-serif
 		.addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) )
+		// The following classes are used here:
+		// * mw-content-ltr
+		// * mw-content-rtl
 		.addClass( 'mw-content-' + dir )
 		.attr( {
 			lang: lang,

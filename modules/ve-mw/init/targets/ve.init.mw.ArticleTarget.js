@@ -280,6 +280,9 @@ ve.init.mw.ArticleTarget.static.buildRedirectMsg = function ( title ) {
 	return $( '<div>' )
 		.addClass( 'redirectMsg' )
 		// Hack: This is normally inside #mw-content-text, but we may insert it before, so we need this.
+		// The following classes are used here:
+		// * mw-content-ltr
+		// * mw-content-rtl
 		.addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir )
 		.append(
 			$( '<p>' ).text( mw.msg( 'redirectto' ) ),
@@ -1671,6 +1674,10 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
 		ve.extendObject( { attachedRoot: attachedRoot }, config )
 	);
 
+	// The following classes are used here:
+	// * mw-textarea-proteced
+	// * mw-textarea-cproteced
+	// * mw-textarea-sproteced
 	surface.$element.addClass( this.protectedClasses );
 
 	return surface;

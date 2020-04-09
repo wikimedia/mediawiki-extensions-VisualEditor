@@ -170,6 +170,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	}
 
 	if ( classAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
 		figure.className = classAttr;
 	}
 

@@ -19,7 +19,6 @@
 		"no-jquery/no-when": "error",
 		"no-jquery/no-visibility": "error",
 		"max-len": "off",
-		"mediawiki/class-doc": "warn",
 		"mediawiki/valid-package-file-require": "warn"
 	}
 }

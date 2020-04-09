@@ -50,11 +50,11 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 
 	this.$element
 		.prepend( this.$a )
-		// The following classes can be used here:
-		// ve-ce-mwBlockImageNode-type-thumb
-		// ve-ce-mwBlockImageNode-type-frame
-		// ve-ce-mwBlockImageNode-type-frameless
-		// ve-ce-mwBlockImageNode-type-none
+		// The following classes are used here:
+		// * ve-ce-mwBlockImageNode-type-thumb
+		// * ve-ce-mwBlockImageNode-type-frame
+		// * ve-ce-mwBlockImageNode-type-frameless
+		// * ve-ce-mwBlockImageNode-type-none
 		.addClass( 've-ce-mwBlockImageNode ve-ce-mwBlockImageNode-type-' + type )
 		// 'typeof' should appear with the proper Parsoid-generated
 		// type. The model deals with converting it
@@ -115,6 +115,8 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 
 	if ( oldAlign && oldAlign !== align ) {
 		// Remove previous alignment
+		// See static.cssClasses
+		// eslint-disable-next-line mediawiki/class-doc
 		this.$element
 			.removeClass( this.getCssClass( 'none', oldAlign ) )
 			.removeClass( this.getCssClass( 'default', oldAlign ) );
@@ -127,6 +129,7 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 		alignClass = this.getCssClass( 'none', align );
 		this.$image.removeClass( 've-ce-mwBlockImageNode-thumbimage' );
 	}
+	// eslint-disable-next-line mediawiki/class-doc
 	this.$element.addClass( alignClass );
 
 	// Border
@@ -248,6 +251,8 @@ ve.ce.MWBlockImageNode.prototype.onAttributeChange = function ( key, from, to ) 
 				} );
 				break;
 			case 'type':
+				// See constructor for types used
+				// eslint-disable-next-line mediawiki/class-doc
 				this.$element
 					.removeClass( 've-ce-mwBlockImageNode-type-' + from )
 					.addClass( 've-ce-mwBlockImageNode-type-' + to )

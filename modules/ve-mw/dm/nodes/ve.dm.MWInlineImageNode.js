@@ -170,8 +170,10 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 		originalClasses &&
 		ve.compare( originalClasses.trim().split( /\s+/ ).sort(), classes.sort() )
 	) {
+		// eslint-disable-next-line mediawiki/class-doc
 		figureInline.className = originalClasses;
 	} else if ( classes.length > 0 ) {
+		// eslint-disable-next-line mediawiki/class-doc
 		figureInline.className = classes.join( ' ' );
 	}
 

@@ -223,6 +223,8 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 		single = mode === 'single';
 		if ( this.$content ) {
 			for ( name in modeCssClasses ) {
+				// See static.modeCssClasses
+				// eslint-disable-next-line mediawiki/class-doc
 				this.$content.toggleClass( modeCssClasses[ name ], name === mode );
 			}
 		}

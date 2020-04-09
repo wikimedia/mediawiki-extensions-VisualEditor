@@ -136,6 +136,8 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
 		metaItemCheckbox.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
+			// See above for classes
+			// eslint-disable-next-line mediawiki/class-doc
 			{
 				$overlay: config.$overlay,
 				classes: metaItemCheckbox.classes,

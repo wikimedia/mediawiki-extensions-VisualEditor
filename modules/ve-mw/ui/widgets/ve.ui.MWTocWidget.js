@@ -200,6 +200,9 @@ ve.ui.MWTocWidget.prototype.build = function () {
 		tocNumber = stack.map( getItemIndex ).join( '.' );
 		viewNode = documentView.getBranchNodeFromOffset( modelNode.getRange().start );
 		uri.query.section = ( i + 1 ).toString();
+		// The following classes are used here:
+		// * toclevel-1, toclevel-2, ...
+		// * tocsection-1, tocsection-2, ...
 		$item = $( '<li>' ).addClass( 'toclevel-' + stack.length ).addClass( 'tocsection-' + ( i + 1 ) );
 		$link = $( '<a>' ).attr( 'href', uri )
 			.append( '<span class="tocnumber">' + tocNumber + '</span> ' );

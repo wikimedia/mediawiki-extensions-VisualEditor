@@ -36,6 +36,9 @@ ve.ui.MWPreviewElement.prototype.setModel = function ( model ) {
 	// Parent method
 	ve.ui.MWPreviewElement.super.prototype.setModel.call( this, model );
 
+	// The following classes are used here:
+	// * mw-content-ltr
+	// * mw-content-rtl
 	this.$element.addClass( 'mw-content-' + this.model.getDocument().getDir() );
 };
 

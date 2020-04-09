@@ -39,5 +39,8 @@ ve.ui.MWSurface.prototype.onDocumentViewLangChange = function () {
 	// Add appropriately mw-content-ltr or mw-content-rtl class
 	this.getView().$attachedRootNode
 		.removeClass( 'mw-content-ltr mw-content-rtl' )
+		// The following classes are used here:
+		// * mw-content-ltr
+		// * mw-content-rtl
 		.addClass( 'mw-content-' + this.getView().getDocument().getDir() );
 };

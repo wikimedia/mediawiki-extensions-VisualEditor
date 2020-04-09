@@ -170,7 +170,9 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		menuPosition: this.isMobile ? 'after' : 'bottom',
 		classes: [
 			've-ui-mwGalleryDialog-imageListMenuLayout',
-			've-ui-mwGalleryDialog-imageListMenuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
+			this.isMobile ?
+				've-ui-mwGalleryDialog-imageListMenuLayout-mobile' :
+				've-ui-mwGalleryDialog-imageListMenuLayout-desktop'
 		],
 		contentPanel: imageListContentPanel,
 		menuPanel: imageListMenuPanel
@@ -192,7 +194,9 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		menuPosition: this.isMobile ? 'top' : 'before',
 		classes: [
 			've-ui-mwGalleryDialog-menuLayout',
-			've-ui-mwGalleryDialog-menuLayout' + ( this.isMobile ? '-mobile' : '-desktop' )
+			this.isMobile ?
+				've-ui-mwGalleryDialog-menuLayout-mobile' :
+				've-ui-mwGalleryDialog-menuLayout-desktop'
 		],
 		menuPanel: imageListMenuLayout,
 		contentPanel: this.editSearchStack
