@@ -1,12 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Reptilien.19831209BE1",
 			"Srtxg"
 		]
 	},
 	"tooltip-ca-ve-edit": "Candjî l' pådje",
+	"visualeditor-ca-createlocaldescriptionsource": "Radjouter on discrijhaedje locå (wikicôde)",
+	"visualeditor-ca-createsource": "Ahiver l’ wikicôde",
 	"visualeditor-ca-editsource": "Candjî l' côde wiki",
 	"visualeditor-ca-editsource-section": "candjî l' côde wiki",
+	"visualeditor-descriptionpagelink": "Project:AspougneuVeyåve",
 	"visualeditor-dialog-meta-languages-label": "Lingaedjes",
 	"visualeditor-languages-tool": "Lingaedjes"
 }
