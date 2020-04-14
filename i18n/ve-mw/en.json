@@ -349,7 +349,7 @@
 	"visualeditor-preference-tabs-remember-last": "Remember my last editor",
 	"visualeditor-preference-visualdiffpage-description": "Enable the new visual mode on revision difference pages.",
 	"visualeditor-preference-visualdiffpage-discussion-link": "\/\/www.mediawiki.org\/wiki\/Talk:VisualEditor\/Diffs",
-	"visualeditor-preference-visualdiffpage-info-link": "\/\/www.mediawiki.org\/wiki\/VisualEditor\/Diffs",
+	"visualeditor-preference-visualdiffpage-info-link": "\/\/www.mediawiki.org\/wiki\/Special:MyLanguage\/VisualEditor\/Diffs",
 	"visualeditor-preference-visualdiffpage-label": "Visual differences",
 	"visualeditor-quick-access-characters.json": "null",
 	"visualeditor-rebase-client-export": "Export",
