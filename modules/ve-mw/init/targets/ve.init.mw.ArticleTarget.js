@@ -2078,73 +2078,66 @@ ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function ( conte
 	return '';
 };
 
+ve.init.mw.ArticleTarget.prototype.shouldShowWelcomeDialog = function () {
+	return !(
+		// Disabled in config?
+		!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
+		// Hidden using URL parameter?
+		'vehidebetadialog' in new mw.Uri().query ||
+		// Hidden using preferences?
+		mw.user.options.get( 'visualeditor-hidebetawelcome' ) ||
+		// Hidden using local storage or cookie (anons only)?
+		(
+			mw.user.isAnon() && (
+				mw.storage.get( 've-beta-welcome-dialog' ) ||
+				$.cookie( 've-beta-welcome-dialog' )
+			)
+		)
+	);
+};
+
+ve.init.mw.ArticleTarget.prototype.stopShowingWelcomeDialog = function () {
+	if ( mw.user.isAnon() ) {
+		// Try local storage first; if that fails, set a cookie
+		if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
+			$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+		}
+	} else {
+		this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
+		mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
+	}
+};
+
 /**
  * Show the beta dialog as needed
  */
 ve.init.mw.ArticleTarget.prototype.maybeShowWelcomeDialog = function () {
-	var usePrefs, prefSaysShow, urlSaysHide, editorMode,
+	var editorMode = this.getDefaultMode(),
 		windowManager = this.getSurface().dialogs,
 		target = this;
 
 	this.welcomeDialogPromise = ve.createDeferred();
 
-	if ( mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ) {
-		// Only use the preference value if the user is logged-in.
-		// If the user is anonymous, we can't save the preference
-		// after showing the dialog. And we don't intend to use this
-		// preference to influence anonymous users (use the config
-		// variable for that; besides the pref value would be stale if
-		// the wiki uses static html caching).
-		usePrefs = !mw.user.isAnon();
-		prefSaysShow = usePrefs && !mw.user.options.get( 'visualeditor-hidebetawelcome' );
-		urlSaysHide = 'vehidebetadialog' in new mw.Uri( location.href ).query;
-
-		if (
-			!urlSaysHide &&
-			(
-				prefSaysShow ||
-				(
-					!usePrefs &&
-					mw.storage.get( 've-beta-welcome-dialog' ) === null &&
-					$.cookie( 've-beta-welcome-dialog' ) === null
-				)
-			)
-		) {
-			editorMode = this.getDefaultMode();
-			this.welcomeDialog = new mw.libs.ve.WelcomeDialog();
-			windowManager.addWindows( [ this.welcomeDialog ] );
-			windowManager.openWindow(
-				this.welcomeDialog,
-				{
-					switchable: editorMode === 'source' ? this.isModeAvailable( 'visual' ) : true,
-					editor: editorMode
-				}
-			)
-				.closed.then( function ( data ) {
-					target.welcomeDialogPromise.resolve();
-					target.welcomeDialog = null;
-					if ( data && data.action === 'switch-wte' ) {
-						target.switchToWikitextEditor( false );
-					} else if ( data && data.action === 'switch-ve' ) {
-						target.switchToVisualEditor();
-					}
-				} );
-		} else {
-			this.welcomeDialogPromise.resolve();
-		}
-
-		if ( prefSaysShow ) {
-			this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
-			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
-
-			// No need to set a cookie every time for logged-in users that have already
-			// set the hidebetawelcome=1 preference, but only if this isn't a one-off
-			// view of the page via the hiding GET parameter.
-		} else if ( !usePrefs && !urlSaysHide ) {
-			if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
-				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+	if ( this.shouldShowWelcomeDialog() ) {
+		this.welcomeDialog = new mw.libs.ve.WelcomeDialog();
+		windowManager.addWindows( [ this.welcomeDialog ] );
+		windowManager.openWindow(
+			this.welcomeDialog,
+			{
+				switchable: editorMode === 'source' ? this.isModeAvailable( 'visual' ) : true,
+				editor: editorMode
 			}
-		}
+		)
+			.closed.then( function ( data ) {
+				target.welcomeDialogPromise.resolve();
+				target.welcomeDialog = null;
+				if ( data && data.action === 'switch-wte' ) {
+					target.switchToWikitextEditor( false );
+				} else if ( data && data.action === 'switch-ve' ) {
+					target.switchToVisualEditor();
+				}
+			} );
+		this.stopShowingWelcomeDialog();
 	} else {
 		this.welcomeDialogPromise.reject();
 	}
