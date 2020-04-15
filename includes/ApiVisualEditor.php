@@ -109,12 +109,15 @@ class ApiVisualEditor extends ApiBase {
 			$request['body'] = $params;
 		}
 		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
-		$reqheaders['Accept'] = 'text/html; charset=utf-8;' .
-			' profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"';
-		$reqheaders['Accept-Language'] = self::getPageLanguage( $title )->getCode();
-		$reqheaders['User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
-		$reqheaders['Api-User-Agent'] = 'VisualEditor-MediaWiki/' . $wgVersion;
-		$request['headers'] = $reqheaders;
+		$defaultReqHeaders = [
+			'Accept' =>
+				'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
+			'Accept-Language' => self::getPageLanguage( $title )->getCode(),
+			'User-Agent' => 'VisualEditor-MediaWiki/' . $wgVersion,
+			'Api-User-Agent' => 'VisualEditor-MediaWiki/' . $wgVersion,
+		];
+		// $reqheaders take precedence over $defaultReqHeaders
+		$request['headers'] = $reqheaders + $defaultReqHeaders;
 		$response = $this->serviceClient->run( $request );
 		if ( $response['code'] === 200 && $response['error'] === "" ) {
 			// If response was served directly from Varnish, use the response
@@ -374,6 +377,22 @@ class ApiVisualEditor extends ApiBase {
 								$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 							}
 						}
+					}
+
+					if ( $params['lint'] ) {
+						$lintResponse = $this->requestRestbase(
+							$title,
+							'GET',
+							'page/lint/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid .
+								'?redirect=false',
+							[],
+							[
+								// page/lint/ API always returns a HTTP 406 Not Acceptable error if an 'Accept'
+								// header is sent, so suppress it
+								'Accept' => null,
+								'Accept-Language' => null,
+							]
+						);
 					}
 
 				} else {
@@ -673,6 +692,9 @@ class ApiVisualEditor extends ApiBase {
 						$result['preloaded'] = $params['preload'];
 					}
 				}
+				if ( $params['lint'] && isset( $lintResponse ) && $lintResponse['body'] ) {
+					$result['lint'] = json_decode( $lintResponse['body'], true );
+				}
 				break;
 
 			case 'templatesused':
@@ -818,6 +840,7 @@ class ApiVisualEditor extends ApiBase {
 			'oldid' => null,
 			'editintro' => null,
 			'pst' => false,
+			'lint' => false,
 			'preload' => null,
 			'preloadparams' => [
 				ApiBase::PARAM_ISMULTI => true,
