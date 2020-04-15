@@ -4,7 +4,7 @@
 		"jakub-onderka/php-console-highlighter": "0.4.0",
 		"mediawiki/mediawiki-codesniffer": "30.0.0",
 		"mediawiki/minus-x": "1.1.0",
-		"mediawiki/mediawiki-phan-config": "0.9.2"
+		"mediawiki/mediawiki-phan-config": "0.10.2"
 	},
 	"scripts": {
 		"test": [
@@ -16,8 +16,5 @@
 			"minus-x fix .",
 			"phpcbf"
 		]
-	},
-	"extra": {
-		"phan-taint-check-plugin": "2.0.1"
 	}
 }
