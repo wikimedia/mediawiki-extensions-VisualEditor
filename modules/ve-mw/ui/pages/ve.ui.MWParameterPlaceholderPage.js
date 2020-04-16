@@ -54,6 +54,8 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 		$content: this.addParameterSearch.$element
 	} );
 
+	this.addParameterFieldset.$element.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-add-param' ) );
+
 	// Initialization
 	this.$element
 		.addClass( 've-ui-mwParameterPlaceholderPage' )
