@@ -23,7 +23,7 @@
  */
 ( function () {
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri, isViewPage, isEditPage,
-		pageCanLoadEditor, init, targetPromise, enable, tempdisable, autodisable,
+		pageCanLoadEditor, veEditBaseUri, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, enabledForUser, initialWikitext, oldId,
 		isLoading, tempWikitextEditor, tempWikitextEditorData, $toolbarPlaceholder,
 		data = require( './data.json' ),
@@ -996,12 +996,13 @@
 
 	// On a view page, extend the current URI so parameters like oldid are carried over
 	// On a non-view page, use viewUri
+	veEditBaseUri = pageCanLoadEditor ? uri : viewUri;
 	if ( init.isSingleEditTab ) {
-		veEditUri = viewUri.clone().extend( { action: 'edit' } );
+		veEditUri = veEditBaseUri.clone().extend( { action: 'edit' } );
 		delete veEditUri.query.veaction;
 	} else {
-		veEditUri = ( pageCanLoadEditor ? uri : viewUri ).clone().extend( { veaction: 'edit' } );
-		veEditSourceUri = ( pageCanLoadEditor ? uri : viewUri ).clone().extend( { veaction: 'editsource' } );
+		veEditUri = veEditBaseUri.clone().extend( { veaction: 'edit' } );
+		veEditSourceUri = veEditBaseUri.clone().extend( { veaction: 'editsource' } );
 		delete veEditUri.query.action;
 		delete veEditSourceUri.query.action;
 	}
