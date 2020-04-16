@@ -140,7 +140,6 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 				this.initialAnnotation = this.newInternalLinkAnnotationFromTitle( title );
 			}
 
-			// eslint-disable-next-line mediawiki/msg-doc
 			inspectorTitle = ve.msg(
 				this.isReadOnly() ?
 					'visualeditor-linkinspector-title' : (
