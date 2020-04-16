@@ -381,7 +381,6 @@
 	"visualeditor-preference-tabs-remember-last": "Помнить мой последний редактор",
 	"visualeditor-preference-visualdiffpage-description": "Включить новый визуальный режим на страницах сравнения версий.",
 	"visualeditor-preference-visualdiffpage-discussion-link": "//www.mediawiki.org/wiki/Talk:VisualEditor/Diffs",
-	"visualeditor-preference-visualdiffpage-info-link": "//www.mediawiki.org/wiki/VisualEditor/Diffs",
 	"visualeditor-preference-visualdiffpage-label": "Визуальное сравнение версий",
 	"visualeditor-rebase-client-export": "Экспорт",
 	"visualeditor-rebase-client-import": "Импортировать",

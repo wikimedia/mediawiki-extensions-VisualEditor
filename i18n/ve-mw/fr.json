@@ -385,7 +385,6 @@
 	"visualeditor-preference-tabs-remember-last": "Se souvenir du dernier éditeur utilisé",
 	"visualeditor-preference-visualdiffpage-description": "Activer le nouveau mode visuel sur les pages de différence de versions.",
 	"visualeditor-preference-visualdiffpage-discussion-link": "//www.mediawiki.org/wiki/Talk:VisualEditor/Diffs",
-	"visualeditor-preference-visualdiffpage-info-link": "//www.mediawiki.org/wiki/VisualEditor/Diffs/fr",
 	"visualeditor-preference-visualdiffpage-label": "Différences visuelles",
 	"visualeditor-rebase-client-export": "Exporter",
 	"visualeditor-rebase-client-import": "Importer",

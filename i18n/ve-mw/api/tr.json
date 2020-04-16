@@ -49,7 +49,7 @@
 	"apihelp-visualeditoredit-param-section": "Harekete geçilecek bölüm.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Yeni bölümün başlığı.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kaydederken, sayfa yüklendiğinde zaman damgası için bu ayarlayın. Tespit etmek için kullanılan düzen çakışıyor.",
-	"apihelp-visualeditoredit-param-summary": "Düzenleme özeti.",
+	"apihelp-visualeditoredit-param-summary": "Değişiklik özeti.",
 	"apihelp-visualeditoredit-param-tags": "Düzenlemeye uygulanacak etiketleri değiştirin.",
 	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Taşımak için vikimetin.",
