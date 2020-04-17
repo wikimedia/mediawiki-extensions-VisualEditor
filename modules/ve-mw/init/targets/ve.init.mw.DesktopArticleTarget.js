@@ -37,6 +37,8 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.toolbarSetupDeferred = null;
 	this.suppressNormalStartupDialogs = false;
 	this.editingTabDialog = null;
+	this.welcomeDialog = null;
+	this.welcomeDialogPromise = null;
 
 	// If this is true then #transformPage / #restorePage will not call pushState
 	// This is to avoid adding a new history entry for the url we just got from onpopstate
@@ -1395,6 +1397,71 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
 	window.onbeforeunload = this.onBeforeUnloadFallback;
 	this.onBeforeUnloadFallback = null;
 	window.removeEventListener( 'unload', this.onUnloadHandler );
+};
+
+ve.init.mw.DesktopArticleTarget.prototype.shouldShowWelcomeDialog = function () {
+	return !(
+		// Disabled in config?
+		!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
+		// Hidden using URL parameter?
+		'vehidebetadialog' in new mw.Uri().query ||
+		// Hidden using preferences?
+		mw.user.options.get( 'visualeditor-hidebetawelcome' ) ||
+		// Hidden using local storage or cookie (anons only)?
+		(
+			mw.user.isAnon() && (
+				mw.storage.get( 've-beta-welcome-dialog' ) ||
+				$.cookie( 've-beta-welcome-dialog' )
+			)
+		)
+	);
+};
+
+ve.init.mw.DesktopArticleTarget.prototype.stopShowingWelcomeDialog = function () {
+	if ( mw.user.isAnon() ) {
+		// Try local storage first; if that fails, set a cookie
+		if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
+			$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+		}
+	} else {
+		this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
+		mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
+	}
+};
+
+/**
+ * Show the beta dialog as needed
+ */
+ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
+	var editorMode = this.getDefaultMode(),
+		windowManager = this.getSurface().dialogs,
+		target = this;
+
+	this.welcomeDialogPromise = ve.createDeferred();
+
+	if ( this.shouldShowWelcomeDialog() ) {
+		this.welcomeDialog = new mw.libs.ve.WelcomeDialog();
+		windowManager.addWindows( [ this.welcomeDialog ] );
+		windowManager.openWindow(
+			this.welcomeDialog,
+			{
+				switchable: editorMode === 'source' ? this.isModeAvailable( 'visual' ) : true,
+				editor: editorMode
+			}
+		)
+			.closed.then( function ( data ) {
+				target.welcomeDialogPromise.resolve();
+				target.welcomeDialog = null;
+				if ( data && data.action === 'switch-wte' ) {
+					target.switchToWikitextEditor( false );
+				} else if ( data && data.action === 'switch-ve' ) {
+					target.switchToVisualEditor();
+				}
+			} );
+		this.stopShowingWelcomeDialog();
+	} else {
+		this.welcomeDialogPromise.reject();
+	}
 };
 
 /**
