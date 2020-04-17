@@ -989,6 +989,52 @@
 			}
 			targetPromise = getTarget( mode, section );
 			activateTarget( mode, section, targetPromise );
+		},
+
+		/**
+		 * Check whether the welcome dialog should be shown.
+		 *
+		 * The welcome dialog can be disabled in configuration; or using a query string parameter;
+		 * or if we've recorded that we've already shown it before in a user preference, local storage
+		 * or a cookie.
+		 * @return {boolean}
+		 */
+		shouldShowWelcomeDialog: function () {
+			return !(
+				// Disabled in config?
+				!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
+				// Hidden using URL parameter?
+				'vehidebetadialog' in new mw.Uri().query ||
+				// Check for deprecated hidewelcomedialog parameter (T249954)
+				'hidewelcomedialog' in new mw.Uri().query ||
+				// Hidden using preferences?
+				mw.user.options.get( 'visualeditor-hidebetawelcome' ) ||
+				// Hidden using local storage or cookie? (anons only)
+				(
+					mw.user.isAnon() && (
+						mw.storage.get( 've-beta-welcome-dialog' ) ||
+						$.cookie( 've-beta-welcome-dialog' )
+					)
+				)
+			);
+		},
+
+		/**
+		 * Record that we've already shown the welcome dialog to this user, so that it won't be shown
+		 * to them again.
+		 *
+		 * Uses a preference for logged-in users; uses local storage or a cookie for anonymous users.
+		 */
+		stopShowingWelcomeDialog: function () {
+			if ( mw.user.isAnon() ) {
+				// Try local storage first; if that fails, set a cookie
+				if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
+					$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
+				}
+			} else {
+				new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
+				mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
+			}
 		}
 	};
 
@@ -1103,10 +1149,7 @@
 	$( function () {
 		var mode, requiredSkinElements, notify,
 			showWikitextWelcome = true,
-			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null,
-			isLoggedIn = !mw.user.isAnon(),
-			prefSaysShowWelcome = isLoggedIn && !mw.user.options.get( 'visualeditor-hidebetawelcome' ),
-			urlSaysHideWelcome = 'hidewelcomedialog' in new mw.Uri( location.href ).query;
+			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null;
 
 		requiredSkinElements =
 			$( '#content' ).length &&
@@ -1277,15 +1320,7 @@
 			( init.isVisualAvailable || init.isWikitextAvailable || $( '#wpTextbox1' ).length ) &&
 			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
 			[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
-			!urlSaysHideWelcome &&
-			(
-				prefSaysShowWelcome ||
-				(
-					!isLoggedIn &&
-					mw.storage.get( 've-beta-welcome-dialog' ) === null &&
-					$.cookie( 've-beta-welcome-dialog' ) === null
-				)
-			) &&
+			init.shouldShowWelcomeDialog() &&
 			(
 				// Not on protected pages
 				mw.config.get( 'wgIsProbablyEditable' ) ||
@@ -1311,15 +1346,7 @@
 						}
 					} );
 
-				if ( prefSaysShowWelcome ) {
-					// Same as ve.init.target.getLocalApi()
-					new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
-					mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
-				} else if ( !isLoggedIn && !urlSaysHideWelcome ) {
-					if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
-						$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
-					}
-				}
+				init.stopShowingWelcomeDialog();
 			} );
 		}
 
