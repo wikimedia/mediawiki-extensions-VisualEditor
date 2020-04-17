@@ -1,9 +1,11 @@
 {
 	"root": true,
 	"extends": [
-		"../.eslintrc.json",
 		"wikimedia/server"
 	],
+	"globals": {
+		"langs": "readonly"
+	},
 	"rules": {
 		"max-len": "off",
 		"mediawiki/valid-package-file-require": "off"
