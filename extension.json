@@ -1623,7 +1623,6 @@
 				"mediawiki.widgets",
 				"ext.visualEditor.switching",
 				"ext.visualEditor.welcome",
-				"ext.visualEditor.mwextensionmessages",
 				"oojs-ui.styles.icons-editing-advanced"
 			],
 			"messages": [

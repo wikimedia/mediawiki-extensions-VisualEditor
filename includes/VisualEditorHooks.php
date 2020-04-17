@@ -1042,28 +1042,6 @@ class VisualEditorHooks {
 					'targets' => [ 'desktop', 'mobile' ],
 			] ] );
 		}
-
-		$extensionMessages = [];
-		$extensionRegistry = ExtensionRegistry::getInstance();
-		if ( $extensionRegistry->isLoaded( 'ConfirmEdit' ) ) {
-			$extensionMessages[] = 'captcha-edit';
-			$extensionMessages[] = 'captcha-label';
-
-			if ( $extensionRegistry->isLoaded( 'QuestyCaptcha' ) ) {
-				$extensionMessages[] = 'questycaptcha-edit';
-			}
-
-			if ( $extensionRegistry->isLoaded( 'FancyCaptcha' ) ) {
-				$extensionMessages[] = 'fancycaptcha-edit';
-				$extensionMessages[] = 'fancycaptcha-reload-text';
-			}
-		}
-		$resourceLoader->register( [
-			'ext.visualEditor.mwextensionmessages' => $veResourceTemplate + [
-				'messages' => $extensionMessages,
-				'targets' => [ 'desktop', 'mobile' ],
-			]
-		] );
 	}
 
 	/**
