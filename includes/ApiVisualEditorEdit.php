@@ -443,7 +443,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 
 				$result['isRedirect'] = (string)$title->isRedirect();
 
-				if ( class_exists( FlaggablePageView::class ) ) {
+				if ( ExtensionRegistry::getInstance()->isLoaded( 'FlaggedRevs' ) ) {
 					$view = FlaggablePageView::singleton();
 
 					$originalContext = $view->getContext();
