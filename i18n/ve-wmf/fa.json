@@ -6,6 +6,7 @@
 			"Armin1392",
 			"Dalba",
 			"Ebraminio",
+			"FarsiNevis",
 			"Huji",
 			"Jdforrester",
 			"Ladsgroup",
@@ -33,7 +34,7 @@
 	"visualeditor-help-title": "راهنما برای چگونگی استفاده از ویرایشگر",
 	"visualeditor-welcomedialog-action": "ویرایش را آغاز کنید",
 	"visualeditor-welcomedialog-content": "همه می توانند ویرایش و کمک کنند.",
-	"visualeditor-welcomedialog-content-thanks": "از بابت کمکتان برای شناخت بیشتر جهان ممنون هستیم!",
+	"visualeditor-welcomedialog-content-thanks": "سپاس از شما بابت کمک به شناخت بهتر جهان!",
 	"visualeditor-welcomedialog-switch": "تغییر حالت به ویرایشگر متنی",
 	"visualeditor-welcomedialog-switch-ve": "رفتن به ویرایشگر دیداری",
 	"visualeditor-welcomedialog-title": "به $2 {{GENDER:$1|خوش‌آمدید}}"

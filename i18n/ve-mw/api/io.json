@@ -13,5 +13,6 @@
 	"apihelp-visualeditoredit-param-paction": "Ago exekutenda.",
 	"apihelp-visualeditoredit-param-page": "La pagino ube agi esas exekutenda.",
 	"apihelp-visualeditoredit-param-section": "La segmento ube agi esas exekutenda.",
-	"apihelp-visualeditoredit-param-sectiontitle": "Titulo di nova segmento."
+	"apihelp-visualeditoredit-param-sectiontitle": "Titulo di nova segmento.",
+	"apihelp-visualeditoredit-param-summary": "Rezumo pri redakto."
 }
