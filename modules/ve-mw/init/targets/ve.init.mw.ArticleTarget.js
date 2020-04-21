@@ -665,10 +665,10 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 			error = data.errors[ i ];
 
 			if ( error.code === 'badtoken' ) {
-				this.saveErrorBadTokenOrNewUser( null, true );
+				this.saveErrorBadToken();
 			} else if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
 				this.refreshUser().then( function ( username ) {
-					target.saveErrorBadTokenOrNewUser( username, false );
+					target.saveErrorNewUser( username );
 				}, function () {
 					target.saveErrorUnknown( data );
 				} );
