@@ -346,14 +346,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 			} );
 
 		// Pretend the user saw the welcome dialog before suppressing it.
-		if ( mw.user.isAnon() ) {
-			if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
-				$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
-			}
-		} else {
-			this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
-			mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
-		}
+		this.stopShowingWelcomeDialog();
 		this.suppressNormalStartupDialogs = true;
 	}
 };
