@@ -348,7 +348,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 			} );
 
 		// Pretend the user saw the welcome dialog before suppressing it.
-		this.stopShowingWelcomeDialog();
+		mw.libs.ve.stopShowingWelcomeDialog();
 		this.suppressNormalStartupDialogs = true;
 	}
 };
@@ -1399,36 +1399,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
 	window.removeEventListener( 'unload', this.onUnloadHandler );
 };
 
-ve.init.mw.DesktopArticleTarget.prototype.shouldShowWelcomeDialog = function () {
-	return !(
-		// Disabled in config?
-		!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
-		// Hidden using URL parameter?
-		'vehidebetadialog' in new mw.Uri().query ||
-		// Hidden using preferences?
-		mw.user.options.get( 'visualeditor-hidebetawelcome' ) ||
-		// Hidden using local storage or cookie (anons only)?
-		(
-			mw.user.isAnon() && (
-				mw.storage.get( 've-beta-welcome-dialog' ) ||
-				$.cookie( 've-beta-welcome-dialog' )
-			)
-		)
-	);
-};
-
-ve.init.mw.DesktopArticleTarget.prototype.stopShowingWelcomeDialog = function () {
-	if ( mw.user.isAnon() ) {
-		// Try local storage first; if that fails, set a cookie
-		if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
-			$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
-		}
-	} else {
-		this.getLocalApi().saveOption( 'visualeditor-hidebetawelcome', '1' );
-		mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
-	}
-};
-
 /**
  * Show the beta dialog as needed
  */
@@ -1439,7 +1409,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 
 	this.welcomeDialogPromise = ve.createDeferred();
 
-	if ( this.shouldShowWelcomeDialog() ) {
+	if ( mw.libs.ve.shouldShowWelcomeDialog() ) {
 		this.welcomeDialog = new mw.libs.ve.WelcomeDialog();
 		windowManager.addWindows( [ this.welcomeDialog ] );
 		windowManager.openWindow(
@@ -1458,7 +1428,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 					target.switchToVisualEditor();
 				}
 			} );
-		this.stopShowingWelcomeDialog();
+		mw.libs.ve.stopShowingWelcomeDialog();
 	} else {
 		this.welcomeDialogPromise.reject();
 	}
