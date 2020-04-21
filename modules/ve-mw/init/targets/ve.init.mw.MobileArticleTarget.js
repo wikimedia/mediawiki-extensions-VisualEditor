@@ -287,8 +287,6 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 
 	this.events.trackActivationComplete();
 
-	this.maybeShowWelcomeDialog();
-
 	if ( ve.init.platform.constructor.static.isIos() ) {
 		if ( this.viewportZoomHandler ) {
 			this.viewportZoomHandler.detach();
@@ -296,14 +294,6 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 		this.viewportZoomHandler = new ve.init.mw.ViewportZoomHandler();
 		this.viewportZoomHandler.attach( this.getSurface() );
 	}
-};
-
-/**
- * @inheritdoc
- */
-ve.init.mw.MobileArticleTarget.prototype.maybeShowWelcomeDialog = function () {
-	// Never show the dialog (T227670), but set up this promise in case something depends on it
-	this.welcomeDialogPromise = ve.createDeferred().reject();
 };
 
 /**
