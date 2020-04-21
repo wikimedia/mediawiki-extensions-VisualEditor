@@ -34,7 +34,8 @@
 		availableModes = [],
 		active = false,
 		targetLoaded = false,
-		plugins = [];
+		plugins = [],
+		welcomeDialogDisabled = false;
 
 	function showLoading( mode ) {
 		var $content, windowHeight, clientTop, top, bottom, middle;
@@ -994,15 +995,17 @@
 		/**
 		 * Check whether the welcome dialog should be shown.
 		 *
-		 * The welcome dialog can be disabled in configuration; or using a query string parameter;
-		 * or if we've recorded that we've already shown it before in a user preference, local storage
-		 * or a cookie.
+		 * The welcome dialog can be disabled in configuration; or by calling disableWelcomeDialog();
+		 * or using a query string parameter; or if we've recorded that we've already shown it before
+		 * in a user preference, local storage or a cookie.
 		 * @return {boolean}
 		 */
 		shouldShowWelcomeDialog: function () {
 			return !(
 				// Disabled in config?
 				!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
+				// Disabled by calling disableWelcomeDialog()?
+				welcomeDialogDisabled ||
 				// Hidden using URL parameter?
 				'vehidebetadialog' in new mw.Uri().query ||
 				// Check for deprecated hidewelcomedialog parameter (T249954)
@@ -1035,6 +1038,16 @@
 				new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
 				mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
 			}
+		},
+
+		/**
+		 * Prevent the welcome dialog from being shown on this page view only.
+		 *
+		 * Causes shouldShowWelcomeDialog() to return false, but doesn't save anything to preferences
+		 * or local storage, so future page views are not affected.
+		 */
+		disableWelcomeDialog: function () {
+			welcomeDialogDisabled = true;
 		}
 	};
 
