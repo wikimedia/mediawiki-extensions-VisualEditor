@@ -2,25 +2,22 @@
  * Merge jsduck configuration files with a downstream one
  */
 
-/* eslint-env node, es6 */
 module.exports = function ( grunt ) {
-	var _ = grunt.util._;
+	const _ = grunt.util._;
 
 	grunt.registerMultiTask( 'jsduckcatconfig', function () {
-		var targetFile = this.data.target,
+		const targetFile = this.data.target,
 			from = this.data.from,
 			output = [];
 
 		from.forEach( function ( src ) {
-			var srcCategories;
-
 			if ( typeof src === 'string' ) {
 				src = {
 					file: src
 				};
 			}
 
-			srcCategories = grunt.file.readJSON( src.file );
+			const srcCategories = grunt.file.readJSON( src.file );
 
 			if ( !src.include && !src.aggregate ) {
 				// Default to a straight inclusion
@@ -30,14 +27,13 @@ module.exports = function ( grunt ) {
 
 			if ( src.aggregate ) {
 				_.forIn( src.aggregate, function ( targetCat, targetCatName ) {
-					var targetGroups = [];
+					const targetGroups = [];
 					// For each of the target category groups...
 					targetCat.forEach( function ( targetGroupName ) {
 						// ... find the category in the aggregate source
 						srcCategories.forEach( function ( aggrCat ) {
-							var targetGroup;
 							if ( aggrCat.name === targetGroupName ) {
-								targetGroup = {
+								const targetGroup = {
 									name: targetGroupName,
 									classes: []
 								};
