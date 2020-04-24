@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Asenoner"
+			"Asenoner",
+			"Starladin"
 		]
 	},
 	"tooltip-ca-ve-edit": "Muda chësta plata",
 	"visualeditor-ca-editsource": "Muda l wikitest",
-	"visualeditor-ca-editsource-section": "muda l codesc"
+	"visualeditor-ca-editsource-section": "muda l codesc",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
