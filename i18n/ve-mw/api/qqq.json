@@ -45,6 +45,7 @@
 	"apihelp-visualeditor-param-etag": "{{doc-apihelp-param|visualeditor|etag}}",
 	"apihelp-visualeditor-param-format": "{{doc-apihelp-param|visualeditor|format}}",
 	"apihelp-visualeditor-param-html": "{{doc-apihelp-param|visualeditor|html}}",
+	"apihelp-visualeditor-param-lint": "{{doc-apihelp-param|visualeditor|lint}}",
 	"apihelp-visualeditor-param-oldid": "{{doc-apihelp-param|visualeditor|oldid}}",
 	"apihelp-visualeditor-param-paction": "{{doc-apihelp-param|visualeditor|paction}}",
 	"apihelp-visualeditor-param-page": "{{doc-apihelp-param|visualeditor|page}}",
