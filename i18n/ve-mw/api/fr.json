@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alno",
 			"Eneelk",
 			"Framawiki",
 			"Gomoko",
@@ -28,6 +29,7 @@
 	"apihelp-visualeditor-param-etag": "ETag à envoyer.",
 	"apihelp-visualeditor-param-format": "Le format de la sortie.",
 	"apihelp-visualeditor-param-html": "HTML à envoyer à Parsoid pour être converti en wikicode.",
+	"apihelp-visualeditor-param-lint": "Renvoie aussi les erreurs Lint de Parsoid.",
 	"apihelp-visualeditor-param-oldid": "Le numéro de version à utiliser (par défaut celui de la dernière version).",
 	"apihelp-visualeditor-param-paction": "Action à effectuer.",
 	"apihelp-visualeditor-param-page": "La page sur laquelle les modifications doivent être effectuées.",
@@ -56,7 +58,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Lors de l’enregistrement, règle ceci avec l’horodatage du moment où la page a été chargée. Utilisé pour détecter les conflits d’édition.",
 	"apihelp-visualeditoredit-param-summary": "Modifier le résumé.",
 	"apihelp-visualeditoredit-param-tags": "Modifier les balises à appliquer à la modification.",
-	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Le wikitexte avec lequel travailler.",
 	"apihelp-visualeditoredit-summary": "Enregistrer une page HTML5 dans Médiawiki (convertie en wikitexte via le service Parsoid)."
 }

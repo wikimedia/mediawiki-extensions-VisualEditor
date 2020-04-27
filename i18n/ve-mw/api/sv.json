@@ -52,7 +52,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "När du sparar, ställ in denna till tidsstämpel för när sidan laddades. Används för att upptäcka redigeringskonflikter.",
 	"apihelp-visualeditoredit-param-summary": "Redigeringssammanfattning.",
 	"apihelp-visualeditoredit-param-tags": "Ändra taggar att tillämpa i redigeringen.",
-	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Wikitexten att arbeta med.",
 	"apihelp-visualeditoredit-summary": "Spara en HTML5-sida till MediaWiki (konverterad till wikitext via Parsoid-tjänsten)."
 }

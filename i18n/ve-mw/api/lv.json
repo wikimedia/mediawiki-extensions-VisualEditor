@@ -17,6 +17,7 @@
 	"apihelp-visualeditor-param-paction": "Veicamā darbība",
 	"apihelp-visualeditor-param-page": "Lapa, kurā veikt darbības.",
 	"apihelp-visualeditor-param-section": "Sadaļa, kurā darboties.",
+	"apihelp-visualeditor-param-wikitext": "Vikiteksts, ko nosūtīt Parsoid konvertācijai uz HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
 	"apihelp-visualeditoredit-description": "Saglabā HTML5 lapu MediaWiki (pārveidotu vikitekstā ar Parsoid servisu).",
 	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (saglabājot ar captcha atbildi).",

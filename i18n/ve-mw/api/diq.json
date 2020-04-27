@@ -23,6 +23,7 @@
 	"apihelp-visualeditor-param-etag": "ETag'a ke bırışê yo.",
 	"apihelp-visualeditor-param-format": "Formatê veciyayışi.",
 	"apihelp-visualeditor-param-html": "Parsoid rıştış ra mikimetini HTML  açarn",
+	"apihelp-visualeditor-param-lint": "Reyna Parsoid ra xetayanê linti tadê.",
 	"apihelp-visualeditor-param-oldid": "Nunrey revizyoni bıkarnê  (hesabyaye peyên revizyoni de)",
 	"apihelp-visualeditor-param-paction": "Fiili kerdışi rê",
 	"apihelp-visualeditor-param-page": "Ena perer sero fiili kerdışi rê",
@@ -51,7 +52,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Qeyd kerdış dı, qandé derbın revizyoni eyar kerê. Çıkı karıyaye nizam ameyo apê.",
 	"apihelp-visualeditoredit-param-summary": "Xulasay vurnayışi",
 	"apihelp-visualeditoredit-param-tags": "Vurnayışi tetbiq kerdışi rê etiketi bıvurnên",
-	"apihelp-visualeditoredit-param-watchlist": "{{int:apihelp-edit-param-watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "Wikimetıno ke bıgureniyo.",
 	"apihelp-visualeditoredit-summary": "Pela HTML5 MediaWiki de bışevekne (servisê Parsoidi de wikimetın çarniya)."
 }
