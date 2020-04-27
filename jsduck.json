@@ -9,6 +9,9 @@
 	"--builtin-classes": true,
 	"--external": "HTMLDocument,Window,Node,Text,Set,Range,Selection,ClientRect,File,FileList,Blob,DataTransfer,DataTransferItem,KeyboardEvent,MouseEvent,Promise,Storage",
 	"--warnings": ["-nodoc(class,public)", "-global"],
+	"--exclude": [
+		"lib/ve/rebaser/src/dm/"
+	],
 	"--": [
 		".jsduck/external.js",
 		"lib/ve/.jsduck/external.js",
@@ -21,7 +24,6 @@
 		"lib/ve/lib/unicodejs/unicodejs.js",
 		"lib/ve/lib/treeDiffer/treeDiffer-dist.js",
 		"lib/ve/src",
-		"lib/ve/rebaser/src/dm",
 		"modules/ve-mw"
 	]
 }
