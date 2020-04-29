@@ -505,18 +505,19 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
 ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) {
-	var xhr,
-		params = {
-			action: 'visualeditoredit',
-			paction: 'serialize',
-			html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
-			page: this.getPageName()
-		};
+	var xhr, params;
 
-	// Optimise as a no-op
-	if ( params.html === '' ) {
+	// Shortcut for empty document
+	if ( !doc.data.hasContent() ) {
 		return ve.createDeferred().resolve( '' );
 	}
+
+	params = {
+		action: 'visualeditoredit',
+		paction: 'serialize',
+		html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+		page: this.getPageName()
+	};
 
 	if ( useRevision === undefined || useRevision ) {
 		params.oldid = this.revid;
