@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"1917 Ekim Devrimi",
 			"Kumkumuk",
 			"Mirzali",
 			"Orbot707"
 		]
 	},
+	"tooltip-ca-ve-edit": "Na pele bıvurne",
 	"visualeditor-ca-editsource": "Çımeyi bıvurne",
 	"visualeditor-ca-editsource-section": "çımeyi bıvurne",
 	"visualeditor-dialog-media-choose-image": "Nê resımi bıgurene",
