@@ -35,7 +35,8 @@
 		active = false,
 		targetLoaded = false,
 		plugins = [],
-		welcomeDialogDisabled = false;
+		welcomeDialogDisabled = false,
+		educationPopupsDisabled = false;
 
 	function showLoading( mode ) {
 		var $content, windowHeight, clientTop, top, bottom, middle;
@@ -495,6 +496,32 @@
 					'wikitext';
 		}
 		return null;
+	}
+
+	function checkPreferenceOrStorage( prefName, storageKey, cookieName ) {
+		storageKey = storageKey || prefName;
+		cookieName = cookieName || storageKey;
+		return mw.user.options.get( prefName ) ||
+			(
+				mw.user.isAnon() && (
+					mw.storage.get( storageKey ) ||
+					$.cookie( cookieName )
+				)
+			);
+	}
+
+	function setPreferenceOrStorage( prefName, storageKey, cookieName ) {
+		storageKey = storageKey || prefName;
+		cookieName = cookieName || storageKey;
+		if ( mw.user.isAnon() ) {
+			// Try local storage first; if that fails, set a cookie
+			if ( !mw.storage.set( storageKey, 1 ) ) {
+				$.cookie( cookieName, 1, { path: '/', expires: 30 } );
+			}
+		} else {
+			new mw.Api().saveOption( prefName, '1' );
+			mw.user.options.set( prefName, '1' );
+		}
 	}
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
@@ -1010,15 +1037,8 @@
 				'vehidebetadialog' in new mw.Uri().query ||
 				// Check for deprecated hidewelcomedialog parameter (T249954)
 				'hidewelcomedialog' in new mw.Uri().query ||
-				// Hidden using preferences?
-				mw.user.options.get( 'visualeditor-hidebetawelcome' ) ||
-				// Hidden using local storage or cookie? (anons only)
-				(
-					mw.user.isAnon() && (
-						mw.storage.get( 've-beta-welcome-dialog' ) ||
-						$.cookie( 've-beta-welcome-dialog' )
-					)
-				)
+				// Hidden using preferences, local storage or cookie?
+				checkPreferenceOrStorage( 'visualeditor-hidebetawelcome', 've-beta-welcome-dialog' )
 			);
 		},
 
@@ -1029,15 +1049,7 @@
 		 * Uses a preference for logged-in users; uses local storage or a cookie for anonymous users.
 		 */
 		stopShowingWelcomeDialog: function () {
-			if ( mw.user.isAnon() ) {
-				// Try local storage first; if that fails, set a cookie
-				if ( !mw.storage.set( 've-beta-welcome-dialog', 1 ) ) {
-					$.cookie( 've-beta-welcome-dialog', 1, { path: '/', expires: 30 } );
-				}
-			} else {
-				new mw.Api().saveOption( 'visualeditor-hidebetawelcome', '1' );
-				mw.user.options.set( 'visualeditor-hidebetawelcome', '1' );
-			}
+			setPreferenceOrStorage( 'visualeditor-hidebetawelcome', 've-beta-welcome-dialog' );
 		},
 
 		/**
@@ -1048,6 +1060,42 @@
 		 */
 		disableWelcomeDialog: function () {
 			welcomeDialogDisabled = true;
+		},
+
+		/**
+		 * Check whether the user education popups (ve.ui.MWEducationPopupTool) should be shown.
+		 *
+		 * The education popups can be disabled by calling disableWelcomeDialog(), or if we've
+		 * recorded that we've already shown it before in a user preference, local storage or a cookie.
+		 * @return {boolean}
+		 */
+		shouldShowEducationPopups: function () {
+			return !(
+				// Disabled by calling disableEducationPopups()?
+				educationPopupsDisabled ||
+				// Hidden using preferences, local storage, or cookie?
+				checkPreferenceOrStorage( 'visualeditor-hideusered', 've-hideusered' )
+			);
+		},
+
+		/**
+		 * Record that we've already shown the education popups to this user, so that it won't be
+		 * shown to them again.
+		 *
+		 * Uses a preference for logged-in users; uses local storage or a cookie for anonymous users.
+		 */
+		stopShowingEducationPopups: function () {
+			setPreferenceOrStorage( 'visualeditor-hideusered', 've-hideusered' );
+		},
+
+		/**
+		 * Prevent the education popups from being shown on this page view only.
+		 *
+		 * Causes shouldShowEducationPopups() to return false, but doesn't save anything to
+		 * preferences or local storage, so future page views are not affected.
+		 */
+		disableEducationPopups: function () {
+			educationPopupsDisabled = true;
 		}
 	};
 
