@@ -50,17 +50,18 @@
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
-	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
+	/* stylelint-disable selector-class-pattern */
+	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
 		margin: 0 -1.5rem;
 	}
 
-	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-attachedRootNode,
-	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
+	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ce-attachedRootNode,
+	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-surface-placeholder {
 		padding: 0 1.5rem;
 	}
 
 	/* Main document debug bar */
-	.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
+	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
 		padding: 1.5rem;
 		padding-bottom: 0;
 		margin-top: 1.5rem;
