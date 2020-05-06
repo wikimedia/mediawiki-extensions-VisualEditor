@@ -224,8 +224,15 @@
 			return;
 		}
 
-		if ( ve.init.target && ve.init.target.constructor.static.platformType === 'phone' ) {
-			// handled in MobileFrontend for session-identification reasons
+		if ( ve.init.target && (
+			ve.init.target.constructor.static.platformType !== 'desktop'
+		) ) {
+			// We want to log activity events when we're also logging to
+			// EditAttemptStep. The EAS events are only fired from DesktopArticleTarget
+			// in this repo. As such, we suppress this unless the current target is at
+			// least inheriting that. (Other tools may fire their own instances of
+			// those events, but probably need to reimplement this anyway for
+			// session-identification reasons.)
 			return;
 		}
 
