@@ -362,6 +362,8 @@
 	"visualeditor-section-body-placeholder": "Seziona nove",
 	"visualeditor-section-title-placeholder": "Oggette",
 	"visualeditor-serializeerror": "Errore carecanne le date da 'u server: $1.",
+	"visualeditor-loaderror-revidconflict": "ID d'a revisione turnate da 'u server non ge s'accocchie (documende: $1, metadate: $2).",
+	"visualeditor-loaderror-wrongmode": "Agghie pruvate a carecà 'u cangiatore jndr'à 'nu mode sbagliate (tipe de date: \"$1\", mode d'u cangiatore: \"$2\").",
 	"visualeditor-settings-tool": "'Mbostaziune d'a pàgene",
 	"visualeditor-special-characters-group-other": "Ausate assaije",
 	"visualeditor-templatesused-tool": "Template ausate",
