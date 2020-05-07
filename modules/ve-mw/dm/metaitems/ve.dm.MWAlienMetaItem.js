@@ -28,8 +28,8 @@ OO.inheritClass( ve.dm.MWAlienMetaItem, ve.dm.AlienMetaItem );
 ve.dm.MWAlienMetaItem.static.name = 'mwAlienMeta';
 
 ve.dm.MWAlienMetaItem.static.matchRdfaTypes = [
-	// HACK: Avoid matching things that are better handled by MWAlienExtensionNode
-	/^mw:(?!Extension)/
+	// HACK: Avoid matching things that are better handled by MWAlienExtensionNode or MWIncludesNode
+	/^mw:(?!Extension|Includes)/
 ];
 
 // toDataElement inherited from AlienMetaItem, will return regular alienMeta elements but
