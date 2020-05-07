@@ -820,11 +820,11 @@
 				// init without refresh as that'd initialise for the wrong rev id (T52925)
 				// and would preserve the wrong DOM with a diff on top.
 				$editsections.find( '.mw-editsection-visualeditor' )
-					.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) );
+					.off( '.ve-target' ).on( 'click.ve-target', init.onEditSectionLinkClick.bind( init, 'visual' ) );
 				if ( init.isWikitextAvailable ) {
 					// TOOD: Make this less fragile
 					$editsections.find( 'a:not( .mw-editsection-visualeditor )' )
-						.on( 'click', init.onEditSectionLinkClick.bind( init, 'source' ) );
+						.off( '.ve-target' ).on( 'click.ve-target', init.onEditSectionLinkClick.bind( init, 'source' ) );
 				}
 			}
 		},
