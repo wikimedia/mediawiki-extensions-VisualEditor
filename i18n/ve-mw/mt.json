@@ -87,5 +87,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Meħtieġa  {{PLURAL:$1| parametru obligatorju nieqes|parametri obligatorji nieqsa}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Żgur li tixtieq tkompli mingħajr ma tagħti l- {{PLURAL:$2|parametru|parametri}} $1?",
 	"visualeditor-languages-tool": "Lingwi",
+	"visualeditor-mweditmodeve-popup-title": "Qlibt fuq il-modifika tas-sors",
 	"visualeditor-version-label": "Verżjoni"
 }

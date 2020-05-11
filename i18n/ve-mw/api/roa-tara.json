@@ -19,6 +19,7 @@
 	"apihelp-visualeditor-param-etag": "ETag da mannà.",
 	"apihelp-visualeditor-param-format": "'U formate d'u resultate.",
 	"apihelp-visualeditor-param-html": "HTML da mannà a Parsoid pe convertì 'u uicchiteste.",
+	"apihelp-visualeditor-param-lint": "Torne pure le errore de Lint da Prsoid.",
 	"apihelp-visualeditor-param-oldid": "'U numere de revisione da ausà (predefinite jè 'urtema revisione).",
 	"apihelp-visualeditor-param-paction": "Azione da fà.",
 	"apihelp-visualeditor-param-page": "'A pàgene sus a quale fà l'azione.",
@@ -46,6 +47,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titole pa seziona nove.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Quanne ste reggistre, 'mboste quiste cumme orarie de quanne 'a pàgene ha state carecate. Ausate pe acchià conflitte de cangiaminde.",
 	"apihelp-visualeditoredit-param-summary": "Cange 'u riepiloghe.",
+	"apihelp-visualeditoredit-param-tags": "Cange le tag da applecà a 'u cangiamende.",
 	"apihelp-visualeditoredit-param-wikitext": "'U uicchiteste addò aggìe.",
 	"apihelp-visualeditoredit-summary": "Reggìstre 'na pàgene HTML5 sus a MediaUicchi (convertite jndr'à 'u uicchiteste ausanne 'u servizie Parsoid)."
 }
