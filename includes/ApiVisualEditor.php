@@ -18,11 +18,6 @@ class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
 
 	/**
-	 * @var Config
-	 */
-	protected $veConfig;
-
-	/**
 	 * @var VirtualRESTServiceClient
 	 */
 	protected $serviceClient;
@@ -35,9 +30,8 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function __construct( ApiMain $main, $name, Config $config ) {
+	public function __construct( ApiMain $main, $name ) {
 		parent::__construct( $main, $name );
-		$this->veConfig = $config;
 		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( [] ) );
 		$this->logger = LoggerFactory::getInstance( 'VisualEditor' );
 	}

@@ -48,20 +48,6 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Factory to return the relevant API class
-	 *
-	 * @param ApiMain $main The ApiMain instance
-	 * @param string $name The api request name
-	 * @return ApiVisualEditor|ApiVisualEditorEdit API class
-	 */
-	public static function getVisualEditorApiFactory( $main, $name ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
-		$class = $name === 'visualeditor' ? 'ApiVisualEditor' : 'ApiVisualEditorEdit';
-		return new $class( $main, $name, $config );
-	}
-
-	/**
 	 * Adds VisualEditor JS to the output.
 	 *
 	 * This is attached to the MediaWiki 'BeforePageDisplay' hook.

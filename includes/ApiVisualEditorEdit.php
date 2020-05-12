@@ -18,8 +18,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	/**
 	 * @inheritDoc
 	 */
-	public function __construct( ApiMain $main, $name, Config $config ) {
-		parent::__construct( $main, $name, $config );
+	public function __construct( ApiMain $main, $name ) {
+		parent::__construct( $main, $name );
 	}
 
 	/**
