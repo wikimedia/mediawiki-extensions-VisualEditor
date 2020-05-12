@@ -53,15 +53,13 @@
 			"value": {
 				"User": true,
 				"File": true,
-				"Category": true,
-				"_merge_strategy": "array_plus"
+				"Category": true
 			},
 			"merge_strategy": "array_plus"
 		},
 		"VisualEditorAvailableContentModels": {
 			"value": {
-				"wikitext": "article",
-				"_merge_strategy": "array_plus"
+				"wikitext": "article"
 			},
 			"merge_strategy": "array_plus"
 		},
