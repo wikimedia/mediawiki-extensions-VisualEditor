@@ -166,14 +166,8 @@
 		}
 	},
 	"APIModules": {
-		"visualeditor": {
-			"class": "ApiVisualEditor",
-			"factory": "VisualEditorHooks::getVisualEditorApiFactory"
-		},
-		"visualeditoredit": {
-			"class": "ApiVisualEditorEdit",
-			"factory": "VisualEditorHooks::getVisualEditorApiFactory"
-		}
+		"visualeditor": "ApiVisualEditor",
+		"visualeditoredit": "ApiVisualEditorEdit"
 	},
 	"MessagesDirs": {
 		"VisualEditor": [
