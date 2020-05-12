@@ -340,7 +340,8 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 			'fromtitle' => $title->getPrefixedDBkey(),
 			'fromrev' => $fromId,
 			'fromsection' => $section,
-			'totext' => $this->pstWikitext( $title, $wikitext )
+			'totext' => $wikitext,
+			'topst' => true,
 		];
 
 		$api = new ApiMain(
