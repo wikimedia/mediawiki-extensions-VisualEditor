@@ -26,81 +26,144 @@
 	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
-		"VisualEditorPluginModules": [],
-		"VisualEditorPreloadModules": [
-			"site",
-			"user"
-		],
-		"VisualEditorPreferenceModules": {
-			"visualeditor-enable-experimental": "ext.visualEditor.experimental"
+		"VisualEditorPluginModules": {
+			"value": []
 		},
-		"VisualEditorRestbaseURL": false,
-		"VisualEditorFullRestbaseURL": false,
-		"VisualEditorAllowLossySwitching": true,
-		"VisualEditorAvailableNamespaces": {
-			"User": true,
-			"File": true,
-			"Category": true,
-			"_merge_strategy": "array_plus"
-		},
-		"VisualEditorAvailableContentModels": {
-			"wikitext": "article",
-			"_merge_strategy": "array_plus"
-		},
-		"VisualEditorUseChangeTagging": true,
-		"VisualEditorEnableWikitext": false,
-		"VisualEditorEnableWikitextBetaFeature": false,
-		"VisualEditorEnableDiffPage": false,
-		"VisualEditorEnableDiffPageBetaFeature": false,
-		"VisualEditorEnableVisualSectionEditing": false,
-		"VisualEditorUseSingleEditTab": false,
-		"VisualEditorSingleEditTabSwitchTime": 20160101000000,
-		"VisualEditorTabPosition": "before",
-		"VisualEditorTabMessages": {
-			"edit": null,
-			"editsource": "visualeditor-ca-editsource",
-			"create": null,
-			"createsource": "visualeditor-ca-createsource",
-			"editlocaldescription": "edit-local",
-			"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
-			"createlocaldescription": "create-local",
-			"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
-			"editsection": "editsection",
-			"editsectionsource": "visualeditor-ca-editsource-section"
-		},
-		"VisualEditorAutoAccountEnable": false,
-		"VisualEditorDisableForAnons": false,
-		"VisualEditorTransitionDefault": false,
-		"VisualEditorShowBetaWelcome": true,
-		"VisualEditorAllowExternalLinkPaste": false,
-
-		"VisualEditorNewAccountEnableProportion": false,
-		"VisualEditorFeedbackAPIURL": false,
-		"VisualEditorFeedbackTitle": false,
-		"VisualEditorSourceFeedbackTitle": false,
-		"VisualEditorSkinToolbarScrollOffset": [],
-		"VisualEditorBrowserBlacklist": {
-			"firefox": [
-				[
-					"<=",
-					11
-				]
-			],
-			"safari": [
-				[
-					"<=",
-					6
-				]
-			],
-			"opera": [
-				[
-					"<",
-					12
-				]
+		"VisualEditorPreloadModules": {
+			"value": [
+				"site",
+				"user"
 			]
 		},
-		"VisualEditorEnableTocWidget": false,
-		"VisualEditorRebaserURL": false
+		"VisualEditorPreferenceModules": {
+			"value": {
+				"visualeditor-enable-experimental": "ext.visualEditor.experimental"
+			}
+		},
+		"VisualEditorRestbaseURL": {
+			"value": false
+		},
+		"VisualEditorFullRestbaseURL": {
+			"value": false
+		},
+		"VisualEditorAllowLossySwitching": {
+			"value": true
+		},
+		"VisualEditorAvailableNamespaces": {
+			"value": {
+				"User": true,
+				"File": true,
+				"Category": true,
+				"_merge_strategy": "array_plus"
+			},
+			"merge_strategy": "array_plus"
+		},
+		"VisualEditorAvailableContentModels": {
+			"value": {
+				"wikitext": "article",
+				"_merge_strategy": "array_plus"
+			},
+			"merge_strategy": "array_plus"
+		},
+		"VisualEditorUseChangeTagging": {
+			"value": true
+		},
+		"VisualEditorEnableWikitext": {
+			"value": false
+		},
+		"VisualEditorEnableWikitextBetaFeature": {
+			"value": false
+		},
+		"VisualEditorEnableDiffPage": {
+			"value": false
+		},
+		"VisualEditorEnableDiffPageBetaFeature": {
+			"value": false
+		},
+		"VisualEditorEnableVisualSectionEditing": {
+			"value": false
+		},
+		"VisualEditorUseSingleEditTab": {
+			"value": false
+		},
+		"VisualEditorSingleEditTabSwitchTime": {
+			"value": 20160101000000
+		},
+		"VisualEditorTabPosition": {
+			"value": "before"
+		},
+		"VisualEditorTabMessages": {
+			"value": {
+				"edit": null,
+				"editsource": "visualeditor-ca-editsource",
+				"create": null,
+				"createsource": "visualeditor-ca-createsource",
+				"editlocaldescription": "edit-local",
+				"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
+				"createlocaldescription": "create-local",
+				"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
+				"editsection": "editsection",
+				"editsectionsource": "visualeditor-ca-editsource-section"
+			}
+		},
+		"VisualEditorAutoAccountEnable": {
+			"value": false
+		},
+		"VisualEditorDisableForAnons": {
+			"value": false
+		},
+		"VisualEditorTransitionDefault": {
+			"value": false
+		},
+		"VisualEditorShowBetaWelcome": {
+			"value": true
+		},
+		"VisualEditorAllowExternalLinkPaste": {
+			"value": false
+		},
+		"VisualEditorNewAccountEnableProportion": {
+			"value": false
+		},
+		"VisualEditorFeedbackAPIURL": {
+			"value": false
+		},
+		"VisualEditorFeedbackTitle": {
+			"value": false
+		},
+		"VisualEditorSourceFeedbackTitle": {
+			"value": false
+		},
+		"VisualEditorSkinToolbarScrollOffset": {
+			"value": []
+		},
+		"VisualEditorBrowserBlacklist": {
+			"value": {
+				"firefox": [
+					[
+						"<=",
+						11
+					]
+				],
+				"safari": [
+					[
+						"<=",
+						6
+					]
+				],
+				"opera": [
+					[
+						"<",
+						12
+					]
+				]
+			}
+		},
+		"VisualEditorEnableTocWidget": {
+			"value": false
+		},
+		"VisualEditorRebaserURL": {
+			"value": false
+		}
 	},
 	"APIModules": {
 		"visualeditor": {
@@ -440,7 +503,7 @@
 				"ext.visualEditor.mwlink",
 				"ext.visualEditor.mwsave"
 			],
-			"messages" : [
+			"messages": [
 				"visualeditor-backbutton-tooltip",
 				"visualeditor-donebutton-tooltip"
 			],
@@ -500,7 +563,7 @@
 				"ext.visualEditor.mwextensions.desktop",
 				"ext.visualEditor.desktopTarget"
 			],
-			"messages" : [
+			"messages": [
 				"collabpad",
 				"collabpad-doctitle",
 				"collabpad-import-subtitle"
@@ -536,7 +599,7 @@
 				"mediawiki.widgets",
 				"ext.visualEditor.supportCheck"
 			],
-			"messages" : [
+			"messages": [
 				"collabpad",
 				"collabpad-doctitle"
 			],
@@ -1449,7 +1512,7 @@
 			"dependencies": [
 				"ext.visualEditor.core"
 			],
-			"messages" : [
+			"messages": [
 				"visualeditor-tablecell-contextitem"
 			],
 			"targets": [
@@ -2135,7 +2198,7 @@
 			"dependencies": [
 				"ext.visualEditor.core"
 			],
-			"messages":[
+			"messages": [
 				"visualeditor-listbutton-check-tooltip"
 			],
 			"targets": [
@@ -2729,5 +2792,5 @@
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
