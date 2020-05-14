@@ -167,9 +167,15 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 	relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
 	if ( relativeHref.indexOf( relativeBase ) === 0 ) {
 		uri = new mw.Uri( relativeHref );
-		if ( uri.query.title ) {
+		if ( Object.keys( uri.query ).length === 1 && uri.query.title ) {
 			href = uri.query.title;
 			isInternal = true;
+		} else if ( Object.keys( uri.query ).length === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' ) {
+			href = uri.query.title;
+			isInternal = true;
+		} else {
+			href = relativeHref;
+			isInternal = false;
 		}
 	}
 
