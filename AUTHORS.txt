@@ -2,6 +2,7 @@ Principal Authors (major contributors, alphabetically)
 
 Alex Monk <krenair@gmail.com>
 Bartosz Dziewoński <matma.rex@gmail.com>
+C. Scott Ananian <cscott@cscott.net>
 Christian Williams <orbit@framezero.com>
 David Lynch <dlynch@wikimedia.org>
 Ed Sanders <esanders@wikimedia.org>
@@ -10,6 +11,8 @@ James D. Forrester <jforrester@wikimedia.org>
 Moriel Schottlender <mschottlender@wikimedia.org>
 Roan Kattouw <roan.kattouw@gmail.com>
 Rob Moen <rob.moen@gmail.com>
+Subramanya Sastry <ssastry@wikimedia.org>
+Thalia Chan <thalia.e.chan@googlemail.com>
 Timo Tijhof <krinklemail@gmail.com>
 Trevor Parscal <trevorparscal@gmail.com>
 
@@ -29,7 +32,6 @@ Arlo Breault <abreault@wikimedia.org>
 Audrey Tang <audreyt@audreyt.org>
 Brad Jorsch <bjorsch@wikimedia.org>
 Brion Vibber <brion@wikimedia.org>
-C. Scott Ananian <cscott@cscott.net>
 Carl Fürstenberg <azatoth@gmail.com>
 cenarium <cenarium.sysop@gmail.com>
 Chad Horohoe <chadh@wikimedia.org>
@@ -104,9 +106,7 @@ Seb35 <seb35wikipedia@gmail.com>
 shirayuki <shirayuking@gmail.com>
 Siebrand Mazeland <s.mazeland@xs4all.nl>
 Steven Zhang <cro0016@gmail.com>
-Subramanya Sastry <ssastry@wikimedia.org>
 Sucheta Ghoshal <sghoshal@wikimedia.org>
-Thalia Chan <thalia.e.chan@googlemail.com>
 This, that and the other <at.light@live.com.au>
 Tim Starling <tstarling@wikimedia.org>
 Tongbo Sui <beanixster@gmail.com>
