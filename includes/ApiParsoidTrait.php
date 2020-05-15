@@ -105,7 +105,6 @@ trait ApiParsoidTrait {
 	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
 	protected function requestRestbase( Title $title, $method, $path, $params, $reqheaders = [] ) {
-		global $wgVersion;
 		$request = [
 			'method' => $method,
 			'url' => '/restbase/local/v1/' . $path
@@ -120,8 +119,8 @@ trait ApiParsoidTrait {
 			'Accept' =>
 				'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
 			'Accept-Language' => self::getPageLanguage( $title )->getCode(),
-			'User-Agent' => 'VisualEditor-MediaWiki/' . $wgVersion,
-			'Api-User-Agent' => 'VisualEditor-MediaWiki/' . $wgVersion,
+			'User-Agent' => 'VisualEditor-MediaWiki/' . MW_VERSION,
+			'Api-User-Agent' => 'VisualEditor-MediaWiki/' . MW_VERSION,
 		];
 		// $reqheaders take precedence over $defaultReqHeaders
 		$request['headers'] = $reqheaders + $defaultReqHeaders;
