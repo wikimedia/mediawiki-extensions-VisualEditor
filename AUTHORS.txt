@@ -122,23 +122,34 @@ Yuki Shira <shirayuking@gmail.com>
 
 Libraries used (alphabetically)
 
-Base64.js
- – https://github.com/davidchambers/Base64.js
- – DWTFYWT licence
- – David Chambers, based off gist by yahiko
+Color Picker
+ – https://tovic.github.io/color-picker
+ – MIT license
+ – Taufik Nurrohman and other contributors
+
+Diff Match and Patch
+ – https://code.google.com/p/google-diff-match-patch/
+ – Apache license 2.0
+ – Google, Inc.
+
+DOMPurify
+ – https://github.com/cure53/DOMPurify
+ – Apache license 2.0 (dual with MPL 2.0)
+ – Mario Heiderich and other contributors
 
 jQuery
  – https://jquery.com/
  – MIT license
  – jQuery Foundation and other contributors
 
+
+jQuery Client
+ – https://github.com/wikimedia/jquery-client
+ – MIT license
+ – jquery-client maintainers and other contributors
+
 jQuery i18n
  – https://github.com/wikimedia/jquery.i18n
- – MIT license (dual with GPL v2)
- – Wikimedia Language Engineering Team and other contributors
-
-jQuery ULS
- – https://github.com/wikimedia/jquery.uls
  – MIT license (dual with GPL v2)
  – Wikimedia Language Engineering Team and other contributors
 
@@ -157,15 +168,35 @@ OOjs UI
  – MIT license
  – OOjs UI Team and other contributors
 
+PapaParse
+ – http://papaparse.com
+ – MIT license
+ – Matthew Holt and other contributors; fork by Ed Sanders
+
 RangeFix
  – https://github.com/edg2s/rangefix
  – MIT license
  – Ed Sanders and other contributors
 
+socket.io-client
+ — https://github.com/socketio/socket.io-client
+ – MIT License
+ – Guillermo Rauch and other contributors
+
+Tree Differ
+ – https://github.com/tchanders/treeDiffer.js
+ – MIT license
+ – Thalia Chan
+
 UnicodeJS
  – https://www.mediawiki.org/wiki/OOjs_UI
  – MIT license
  – UnicodeJS Team and other contributors
+
+Universal Language Selector jQuery library
+ – https://github.com/wikimedia/jquery.uls
+ – MIT license (dual with GPL v2)
+ – Wikimedia Language Engineering Team and other contributors
 
 VisualEditor
  – https://www.mediawiki.org/wiki/VisualEditor
