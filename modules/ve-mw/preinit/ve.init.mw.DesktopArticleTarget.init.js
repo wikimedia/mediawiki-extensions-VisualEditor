@@ -1057,7 +1057,7 @@
 	// On a non-view page, use viewUri
 	veEditBaseUri = pageCanLoadEditor ? uri : viewUri;
 	if ( init.isSingleEditTab ) {
-		veEditUri = veEditBaseUri.clone().extend( { action: 'edit' } );
+		veEditSourceUri = veEditUri = veEditBaseUri.clone().extend( { action: 'edit' } );
 		delete veEditUri.query.veaction;
 	} else {
 		veEditUri = veEditBaseUri.clone().extend( { veaction: 'edit' } );
