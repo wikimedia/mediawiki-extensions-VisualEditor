@@ -56,7 +56,8 @@ mw.libs.ve.unwrapParsoidSections = function ( element, keepSection ) {
 		var parent = section.parentNode,
 			sectionId = section.getAttribute( 'data-mw-section-id' );
 		// Copy section ID to first child (should be a heading)
-		if ( sectionId !== '0' ) {
+		// Pseudo-sections (with negative section IDs) may not have a heading
+		if ( sectionId !== null && +sectionId > 0 ) {
 			section.firstChild.setAttribute( 'data-mw-section-id', sectionId );
 		}
 		if ( keepSection !== undefined && sectionId === keepSection ) {
