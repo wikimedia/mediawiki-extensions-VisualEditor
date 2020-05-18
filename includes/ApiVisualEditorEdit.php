@@ -11,7 +11,10 @@
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
-class ApiVisualEditorEdit extends ApiVisualEditor {
+class ApiVisualEditorEdit extends ApiBase {
+
+	use ApiParsoidTrait;
+
 	const MAX_CACHE_RECENT = 2;
 	const MAX_CACHE_TTL = 900;
 
@@ -20,6 +23,7 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 */
 	public function __construct( ApiMain $main, $name ) {
 		parent::__construct( $main, $name );
+		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 	}
 
 	/**
@@ -270,61 +274,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	}
 
 	/**
-	 * Transform HTML to wikitext via Parsoid through RESTbase.
-	 *
-	 * @param string $path The RESTbase path of the transform endpoint
-	 * @param Title $title The title of the page
-	 * @param array $data An array of the HTML and the 'scrub_wikitext' option
-	 * @param array $parserParams Parsoid parser parameters to pass in
-	 * @param string $etag The ETag to set in the HTTP request header
-	 * @return string Body of the RESTbase server's response
-	 */
-	protected function postData( $path, Title $title, $data, $parserParams, $etag ) {
-		$path .= urlencode( $title->getPrefixedDBkey() );
-		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
-			$path .= '/' . $parserParams['oldid'];
-		}
-		// Adapted from RESTBase mwUtil.parseETag()
-		// ETag is not expected when creating a new page (oldid=0)
-		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] && !preg_match( '/
-			^(?:W\\/)?"?
-			([^"\\/]+)
-			(?:\\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))
-			(?:\\/([^"]+))?
-			"?$
-		/x', $etag ) ) {
-			$this->logger->info(
-				__METHOD__ . ": Received funny ETag from client: {etag}",
-				[
-					'etag' => $etag,
-					'requestPath' => $path,
-				]
-			);
-		}
-		return $this->requestRestbase(
-			$title,
-			'POST', $path, $data,
-			[ 'If-Match' => $etag ]
-		)['body'];
-	}
-
-	/**
-	 * Transform HTML to wikitext via Parsoid through RESTbase. Wrapper for ::postData().
-	 *
-	 * @param Title $title The title of the page
-	 * @param string $html The HTML of the page to be transformed
-	 * @param array $parserParams Parsoid parser parameters to pass in
-	 * @param string $etag The ETag to set in the HTTP request header
-	 * @return string Body of the RESTbase server's response
-	 */
-	protected function postHTML( Title $title, $html, $parserParams, $etag ) {
-		return $this->postData(
-			'transform/html/to/wikitext/', $title,
-			[ 'html' => $html, 'scrub_wikitext' => 1 ], $parserParams, $etag
-		);
-	}
-
-	/**
 	 * Calculate the different between the wikitext of an edit and an existing revision.
 	 *
 	 * @param Title $title The title of the page
@@ -380,8 +329,6 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @inheritDoc
 	 */
 	public function execute() {
-		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
-
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 		$title = Title::newFromText( $params['page'] );
@@ -562,6 +509,13 @@ class ApiVisualEditorEdit extends ApiVisualEditor {
 	 * @inheritDoc
 	 */
 	public function mustBePosted() {
+		return true;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function isInternal() {
 		return true;
 	}
 

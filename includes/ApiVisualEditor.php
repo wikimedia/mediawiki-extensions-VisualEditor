@@ -15,139 +15,15 @@ use MediaWiki\Revision\RevisionStoreRecord;
 
 class ApiVisualEditor extends ApiBase {
 
+	use ApiParsoidTrait;
 	use ApiBlockInfoTrait;
-
-	/**
-	 * @var VirtualRESTServiceClient
-	 */
-	protected $serviceClient;
-
-	/**
-	 * @var \Psr\Log\LoggerInterface
-	 */
-	protected $logger;
 
 	/**
 	 * @inheritDoc
 	 */
 	public function __construct( ApiMain $main, $name ) {
 		parent::__construct( $main, $name );
-		$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( [] ) );
-		$this->logger = LoggerFactory::getInstance( 'VisualEditor' );
-	}
-
-	/**
-	 * Creates the virtual REST service object to be used in VE's API calls. The
-	 * method determines whether to instantiate a ParsoidVirtualRESTService or a
-	 * RestbaseVirtualRESTService object based on configuration directives: if
-	 * $wgVirtualRestConfig['modules']['restbase'] is defined, RESTBase is chosen,
-	 * otherwise Parsoid is used (either by using the MW Core config, or the
-	 * VE-local one).
-	 *
-	 * @return VirtualRESTService the VirtualRESTService object to use
-	 */
-	protected function getVRSObject() {
-		// the params array to create the service object with
-		$params = [];
-		// the VRS class to use, defaults to Parsoid
-		$class = ParsoidVirtualRESTService::class;
-		// The global virtual rest service config object, if any
-		$vrs = $this->getConfig()->get( 'VirtualRestConfig' );
-		if ( isset( $vrs['modules'] ) && isset( $vrs['modules']['restbase'] ) ) {
-			// if restbase is available, use it
-			$params = $vrs['modules']['restbase'];
-			// backward compatibility
-			$params['parsoidCompat'] = false;
-			$class = RestbaseVirtualRESTService::class;
-		} elseif ( isset( $vrs['modules'] ) && isset( $vrs['modules']['parsoid'] ) ) {
-			// there's a global parsoid config, use it next
-			$params = $vrs['modules']['parsoid'];
-			$params['restbaseCompat'] = true;
-		} else {
-			// No global modules defined, so no way to contact the document server.
-			$this->dieWithError( 'apierror-visualeditor-docserver-unconfigured', 'no_vrs' );
-		}
-		// merge the global and service-specific params
-		if ( isset( $vrs['global'] ) ) {
-			$params = array_merge( $vrs['global'], $params );
-		}
-		// set up cookie forwarding
-		if ( $params['forwardCookies'] ) {
-			$params['forwardCookies'] = $this->getRequest()->getHeader( 'Cookie' );
-		} else {
-			$params['forwardCookies'] = false;
-		}
-		// create the VRS object and return it
-		return new $class( $params );
-	}
-
-	/**
-	 * Accessor function for all RESTbase requests
-	 *
-	 * @param Title $title The title of the page to use as the parsing context
-	 * @param string $method The HTTP method, either 'GET' or 'POST'
-	 * @param string $path The RESTbase api path
-	 * @param array $params Request parameters
-	 * @param array $reqheaders Request headers
-	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
-	 */
-	protected function requestRestbase( Title $title, $method, $path, $params, $reqheaders = [] ) {
-		global $wgVersion;
-		$request = [
-			'method' => $method,
-			'url' => '/restbase/local/v1/' . $path
-		];
-		if ( $method === 'GET' ) {
-			$request['query'] = $params;
-		} else {
-			$request['body'] = $params;
-		}
-		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
-		$defaultReqHeaders = [
-			'Accept' =>
-				'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
-			'Accept-Language' => self::getPageLanguage( $title )->getCode(),
-			'User-Agent' => 'VisualEditor-MediaWiki/' . $wgVersion,
-			'Api-User-Agent' => 'VisualEditor-MediaWiki/' . $wgVersion,
-		];
-		// $reqheaders take precedence over $defaultReqHeaders
-		$request['headers'] = $reqheaders + $defaultReqHeaders;
-		$response = $this->serviceClient->run( $request );
-		if ( $response['code'] === 200 && $response['error'] === "" ) {
-			// If response was served directly from Varnish, use the response
-			// (RP) header to declare the cache hit and pass the data to the client.
-			$headers = $response['headers'];
-			$rp = null;
-			if ( isset( $headers['x-cache'] ) && strpos( $headers['x-cache'], 'hit' ) !== false ) {
-				$rp = 'cached-response=true';
-			}
-			if ( $rp !== null ) {
-				$resp = $this->getRequest()->response();
-				$resp->header( 'X-Cache: ' . $rp );
-			}
-		} elseif ( $response['error'] !== '' ) {
-			$this->dieWithError(
-				[ 'apierror-visualeditor-docserver-http-error', wfEscapeWikiText( $response['error'] ) ],
-				'apierror-visualeditor-docserver-http-error'
-			);
-		} else {
-			// error null, code not 200
-			$this->logger->warning(
-				__METHOD__ . ": Received HTTP {code} from RESTBase",
-				[
-					'code' => $response['code'],
-					'trace' => ( new Exception )->getTraceAsString(),
-					'response' => $response['body'],
-					'requestPath' => $path,
-					'requestIfMatch' => $reqheaders['If-Match'] ?? '',
-				]
-			);
-			$this->dieWithError(
-				[ 'apierror-visualeditor-docserver-http', $response['code'] ],
-				'apierror-visualeditor-docserver-http'
-			);
-		}
-		return $response;
+		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 	}
 
 	/**
@@ -233,8 +109,6 @@ class ApiVisualEditor extends ApiBase {
 	 * @suppress PhanPossiblyUndeclaredVariable False positives
 	 */
 	public function execute() {
-		$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
-
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
 		$permissionManager = $this->getPermissionManager();
@@ -663,7 +537,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( isset( $params['badetag'] ) ) {
 					$badetag = $params['badetag'];
 					$goodetag = $result['etag'] ?? '';
-					$this->logger->info(
+					$this->getLogger()->info(
 						__METHOD__ . ": Client reported bad ETag: {badetag}, expected: {goodetag}",
 						[
 							'badetag' => $badetag,
@@ -772,22 +646,6 @@ class ApiVisualEditor extends ApiBase {
 		);
 		return isset( $availableContentModels[$contentModel] ) &&
 			$availableContentModels[$contentModel];
-	}
-
-	/**
-	 * Get the page language from a title, using the content language as fallback on special pages
-	 * @param Title $title Title
-	 * @return Language Content language
-	 */
-	public static function getPageLanguage( Title $title ) {
-		if ( $title->isSpecial( 'CollabPad' ) ) {
-			// Use the site language for CollabPad, as getPageLanguage just
-			// returns the interface language for special pages.
-			// TODO: Let the user change the document language on multi-lingual sites.
-			return MediaWikiServices::getInstance()->getContentLanguage();
-		} else {
-			return $title->getPageLanguage();
-		}
 	}
 
 	/**
