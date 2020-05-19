@@ -15,8 +15,8 @@ use MediaWiki\Revision\RevisionStoreRecord;
 
 class ApiVisualEditor extends ApiBase {
 
-	use ApiParsoidTrait;
 	use ApiBlockInfoTrait;
+	use ApiParsoidTrait;
 
 	/**
 	 * @inheritDoc

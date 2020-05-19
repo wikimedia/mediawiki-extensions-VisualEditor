@@ -9,6 +9,8 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 trait ApiParsoidTrait {
 
@@ -18,19 +20,19 @@ trait ApiParsoidTrait {
 	protected $serviceClient = null;
 
 	/**
-	 * @var \Psr\Log\LoggerInterface
+	 * @var LoggerInterface
 	 */
 	protected $logger = null;
 
 	/**
-	 * @return \Psr\Log\LoggerInterface
+	 * @return LoggerInterface
 	 */
 	protected function getLogger() {
-		return $this->logger ?: new \Psr\Log\NullLogger();
+		return $this->logger ?: new NullLogger();
 	}
 
 	/**
-	 * @param \Psr\Log\LoggerInterface $logger
+	 * @param LoggerInterface $logger
 	 */
 	protected function setLogger( $logger ) {
 		$this->logger = $logger;
