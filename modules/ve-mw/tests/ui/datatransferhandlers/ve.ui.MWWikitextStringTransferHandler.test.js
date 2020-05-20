@@ -4,13 +4,12 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-window.MWWIKITEXT_MOCK_API = true;
-
 QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
 	setup: function () {
 		// Mock XHR for mw.Api()
-		this.server = window.MWWIKITEXT_MOCK_API ? this.sandbox.useFakeServer() : null;
-		// Random number, chosen by a fair dice roll
+		this.server = this.sandbox.useFakeServer();
+		// Random number, chosen by a fair dice roll.
+		// Used to make #mwt ID deterministic
 		this.randomStub = sinon.stub( Math, 'random' ).returns( 0.04 );
 		ve.test.utils.mwEnvironment.setup.call( this );
 	},
