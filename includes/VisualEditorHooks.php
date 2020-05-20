@@ -228,14 +228,14 @@ class VisualEditorHooks {
 			return self::isVisualAvailable( $title, $req, $user );
 		}
 
-		switch ( self::getPreferredEditor( $user, $req ) ) {
+		switch ( self::getEditPageEditor( $user, $req ) ) {
 			case 'visualeditor':
 				return self::isVisualAvailable( $title, $req, $user ) ||
 					self::isWikitextAvailable( $title, $user );
 			case 'wikitext':
+			default:
 				return self::isWikitextAvailable( $title, $user );
 		}
-		return false;
 	}
 
 	/**
@@ -351,9 +351,9 @@ class VisualEditorHooks {
 	/**
 	 * @param User $user
 	 * @param WebRequest $req
-	 * @return string|null
+	 * @return string 'wikitext' or 'visual'
 	 */
-	private static function getPreferredEditor( User $user, WebRequest $req ) {
+	private static function getEditPageEditor( User $user, WebRequest $req ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 		$isRedLink = $req->getBool( 'redlink' );
@@ -362,22 +362,34 @@ class VisualEditorHooks {
 		if ( !$config->get( 'VisualEditorUseSingleEditTab' ) && !$isRedLink ) {
 			return 'wikitext';
 		}
+		return self::getPreferredEditor( $user, $req, !$isRedLink );
+	}
+
+	/**
+	 * @param User $user
+	 * @param WebRequest $req
+	 * @param bool $useWikitextInMultiTab
+	 * @return string 'wikitext' or 'visual'
+	 */
+	public static function getPreferredEditor(
+		User $user, WebRequest $req, $useWikitextInMultiTab = false
+	) {
 		switch ( $user->getOption( 'visualeditor-tabs' ) ) {
 			case 'prefer-ve':
 				return 'visualeditor';
 			case 'prefer-wt':
 				return 'wikitext';
-			case 'remember-last':
-				return self::getLastEditor( $user, $req );
 			case 'multi-tab':
 				// May have got here by switching from VE
 				// TODO: Make such an action explicitly request wikitext
 				// so we can use getLastEditor here instead.
-				return $isRedLink ?
-					self::getLastEditor( $user, $req ) :
-					'wikitext';
+				return $useWikitextInMultiTab ?
+					'wikitext' :
+					self::getLastEditor( $user, $req );
+			case 'remember-last':
+			default:
+				return self::getLastEditor( $user, $req );
 		}
-		return null;
 	}
 
 	/**

@@ -470,8 +470,8 @@
 		return editor;
 	}
 
-	function getPreferredEditor() {
-		// This logic matches VisualEditorHooks::getPreferredEditor
+	function getEditPageEditor() {
+		// This logic matches VisualEditorHooks::getEditPageEditor
 		// !!+ casts '0' to false
 		var isRedLink = !!+uri.query.redlink;
 		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext,
@@ -485,16 +485,16 @@
 				return 'visualeditor';
 			case 'prefer-wt':
 				return 'wikitext';
-			case 'remember-last':
-				return getLastEditor();
 			case 'multi-tab':
 				// 'multi-tab'
 				// TODO: See VisualEditor.hooks.php
 				return isRedLink ?
 					getLastEditor() :
 					'wikitext';
+			case 'remember-last':
+			default:
+				return getLastEditor();
 		}
-		return null;
 	}
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
@@ -522,11 +522,11 @@
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
 	function isOnlyTabVE() {
-		return conf.singleEditTab && getPreferredEditor() === 'visualeditor';
+		return conf.singleEditTab && getEditPageEditor() === 'visualeditor';
 	}
 
 	function isOnlyTabWikitext() {
-		return conf.singleEditTab && getPreferredEditor() === 'wikitext';
+		return conf.singleEditTab && getEditPageEditor() === 'wikitext';
 	}
 
 	init = {
@@ -1196,7 +1196,7 @@
 				if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
 					return null;
 				}
-				switch ( getPreferredEditor() ) {
+				switch ( getEditPageEditor() ) {
 					case 'visualeditor':
 						if ( init.isVisualAvailable ) {
 							return 'visual';
