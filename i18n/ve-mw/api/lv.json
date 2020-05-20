@@ -24,11 +24,14 @@
 	"apihelp-visualeditoredit-param-captchaword": "Atbilde uz captcha (saglabājot ar captcha atbildi).",
 	"apihelp-visualeditoredit-param-etag": "Nosūtāmais ETag.",
 	"apihelp-visualeditoredit-param-minor": "Atzīmēt kā maznozīmīgu labojumu.",
+	"apihelp-visualeditoredit-param-oldid": "Izmantojamais versijas numurs. Pēc noklusējuma tik izmantota jaunākā versija. Jaunām lapām jāizmanto 0.",
 	"apihelp-visualeditoredit-param-paction": "Veicamā darbība.",
 	"apihelp-visualeditoredit-param-page": "Lapa, kurā veikt darbības.",
 	"apihelp-visualeditoredit-param-section": "Sadaļa, kurā darboties.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Jaunās sadaļas nosaukums.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Saglabājot uzstādi šo uz lapas ielādes brīža laika zīmogu. Tiek izmantots, lai noteiktu labošanas konfliktus.",
 	"apihelp-visualeditoredit-param-summary": "Izmaiņu kopsavilkums.",
+	"apihelp-visualeditoredit-param-tags": "Izmaini iezīmes, ko pievienot labojumam.",
 	"apihelp-visualeditoredit-param-wikitext": "Vikiteksts, ar ko strādāt.",
 	"apihelp-visualeditoredit-summary": "Saglabā HTML5 lapu MediaWiki (pārveidotu vikitekstā ar Parsoid servisu)."
 }
