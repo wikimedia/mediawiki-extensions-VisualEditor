@@ -88,7 +88,8 @@ trait ApiParsoidTrait {
 	 */
 	protected function getVRSClient() {
 		if ( !$this->serviceClient ) {
-			$this->serviceClient = new VirtualRESTServiceClient( new MultiHttpClient( [] ) );
+			$this->serviceClient = new VirtualRESTServiceClient(
+				MediaWikiServices::getInstance()->getHttpRequestFactory()->createMultiClient() );
 			$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
 		}
 		return $this->serviceClient;
