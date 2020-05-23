@@ -17,6 +17,7 @@
 
 .ve-ui-mwSaveDialog-summary textarea {
 	height: 4em;
+	resize: vertical;
 }
 
 .ve-ui-mwSaveDialog-foot {
