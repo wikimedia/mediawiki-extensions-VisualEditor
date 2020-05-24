@@ -441,7 +441,8 @@ class ApiVisualEditor extends ApiBase {
 					) {
 						// User does not exist
 						$notices[] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
-							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) ) .
+							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) )
+								->parse() .
 							"\n</div>";
 					} elseif (
 						$block !== null &&
