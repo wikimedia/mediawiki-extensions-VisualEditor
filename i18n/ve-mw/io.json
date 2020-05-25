@@ -209,6 +209,8 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Imajo-larjeso",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Normala larjeso: $1 px",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Linguo-kodexo",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Linguo",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Lingui",
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Kontenajo",
 	"visualeditor-mwsignature-tool": "Vua signaturo",
 	"visualeditor-pagetranslationwarning": "Vu redaktas pagino tradukebla. Redaktar tala pagini per ica redaktilo ne ja oficale suportesas.",
