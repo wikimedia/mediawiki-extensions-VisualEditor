@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Diki Ananta",
 			"Gleki",
 			"Jadinegara",
 			"Macofe",
@@ -319,7 +320,7 @@
 	"visualeditor-templatesused-tool": "Cithakan kanggo",
 	"visualeditor-title-error": "Sesirah ora trep.",
 	"visualeditor-toload": "Pambesutané tembé kamot. Manawa kowé ndeleng layang iki sawisé sawatara sekon, mangga [$1 mot manèh kacané].",
-	"visualeditor-usernamespacepagelink": "Project:Mandhala aran panganggo",
+	"visualeditor-usernamespacepagelink": "Project:Mandhala aran naraguna",
 	"visualeditor-version-label": "Vèrsi",
 	"visualeditor-wikitext-progress": "Ngganti tulisan wiki",
 	"visualeditor-wikitext-warning": "Kowé nganggo pambesutan visuwal. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Tulisan wiki]] ora lumaku ing kéné. Saperlu salin menyang pambesutan sumber tanpa kélangan owahamu, pencèta tombol ganti.",

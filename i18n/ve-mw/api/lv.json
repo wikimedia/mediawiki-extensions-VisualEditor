@@ -13,6 +13,7 @@
 	"apihelp-visualeditor-description": "Atgriež HTML5 kodu lapai no Parsoid servisa.",
 	"apihelp-visualeditor-param-etag": "Nosūtāmais ETag.",
 	"apihelp-visualeditor-param-format": "Izvades formāts.",
+	"apihelp-visualeditor-param-lint": "No Parsoid atgriezt arī lint kļūdas.",
 	"apihelp-visualeditor-param-oldid": "Izmantojamās versijas numurs (pēc noklusējuma jaunākais).",
 	"apihelp-visualeditor-param-paction": "Veicamā darbība",
 	"apihelp-visualeditor-param-page": "Lapa, kurā veikt darbības.",

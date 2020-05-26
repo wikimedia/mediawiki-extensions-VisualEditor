@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Anggoro",
+			"Diki Ananta",
 			"NoiX180",
 			"Pras"
 		]
@@ -12,10 +13,10 @@
 	"tag-visualeditor-wikitext": "besut sumber 2017",
 	"tag-visualeditor-wikitext-description": "Besutan nganggo pambesut tèks-wiki 2017",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Besutan visual: Ganti]]",
-	"tag-visualeditor-switched-description": "Panganggo wiwit mbesut sarana pambesut visual, banjur salin nganggo pambesut tèks-wiki.",
+	"tag-visualeditor-switched-description": "Naraguna wiwit mbesut sarana pambesut visual, banjur salin nganggo pambesut tèks-wiki.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Pamrayoga",
 	"visualeditor-feedback-tool": "Wènèhana saran ngenani piranti alus iki",
-	"visualeditor-help-label": "Wacanana pathokan kanggo panganggo",
+	"visualeditor-help-label": "Wacanana pathokan kanggo naraguna",
 	"visualeditor-help-title": "Pathokan carané nganggo piranti besut",
 	"visualeditor-welcomedialog-action": "Wiwit mbesut",
 	"visualeditor-welcomedialog-content": "Sapa baé kena mbesut lan apa baé kang didandani iku migunani.",
