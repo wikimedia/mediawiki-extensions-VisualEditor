@@ -54,6 +54,12 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	} else {
 		this.initialEditSummary = this.currentUri.query.summary;
 	}
+	this.initialCheckboxes = $( '.editCheckboxes input' ).toArray()
+		.reduce( function ( initialCheckboxes, node ) {
+			initialCheckboxes[ node.name ] = node.checked;
+			return initialCheckboxes;
+		}, {} );
+
 	this.viewUri = new mw.Uri( mw.util.getUrl( this.getPageName() ) );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&

@@ -54,6 +54,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.sectionTitle = null;
 	this.editSummaryValue = null;
 	this.initialEditSummary = null;
+	this.initialCheckboxes = {};
 
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
@@ -1837,7 +1838,8 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
  * @fires saveWorkflowBegin
  */
 ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxName ) {
-	var checkbox, currentWindow, openPromise,
+	var checkbox, name, currentWindow, openPromise,
+		firstLoad = false,
 		target = this;
 
 	if ( !this.isSaveable() || this.saveDialogIsOpening ) {
@@ -1868,6 +1870,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 		if ( !target.saveDialog ) {
 			target.saveDialog = win;
+			firstLoad = true;
 
 			// Connect to save dialog
 			target.saveDialog.connect( target, {
@@ -1888,6 +1891,14 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 		) {
 			target.saveDialogIsOpening = false;
 			return;
+		}
+
+		if ( firstLoad ) {
+			for ( name in target.checkboxesByName ) {
+				if ( target.initialCheckboxes[ name ] !== undefined ) {
+					target.checkboxesByName[ name ].setSelected( target.initialCheckboxes[ name ] );
+				}
+			}
 		}
 
 		if ( checkboxName && ( checkbox = target.checkboxesByName[ checkboxName ] ) ) {
