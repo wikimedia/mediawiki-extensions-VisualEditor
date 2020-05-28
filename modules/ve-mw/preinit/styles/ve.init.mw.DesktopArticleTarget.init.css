@@ -104,14 +104,23 @@
 
 /* Section edit links */
 
+/* stylelint-disable no-descending-specificity */
 .mw-editsection {
-	white-space: nowrap;
 	/* bidi isolation: */
 	unicode-bidi: -moz-isolate;
 	unicode-bidi: -webkit-isolate;
 	unicode-bidi: isolate;
 }
 
+.mw-editsection:before {
+	content: '\200B';
+}
+
+.mw-editsection a {
+	white-space: nowrap;
+}
+
 .mw-editsection-divider {
 	color: #54595d;
 }
+/* stylelint-enable no-descending-specificity */
