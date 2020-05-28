@@ -183,7 +183,6 @@
 		 * @param {string} [options.wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
 		 * @param {string} [options.preload] Name of a page to use as preloaded content if pageName is empty
 		 * @param {Array} [options.preloadparams] Parameters to substitute into preload if it's used
-		 * @param {boolean} [options.lint] Also return lint errors from Parsoid
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
@@ -284,7 +283,6 @@
 				editintro: uri.query.editintro,
 				preload: options.preload,
 				preloadparams: options.preloadparams,
-				lint: options.lint,
 				formatversion: 2
 			};
 
@@ -482,7 +480,6 @@
 				editintro: uri.query.editintro,
 				preload: options.preload,
 				preloadparams: options.preloadparams,
-				lint: options.lint,
 				formatversion: 2
 			};
 
