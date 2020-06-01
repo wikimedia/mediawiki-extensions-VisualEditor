@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Belkacem77"
+			"Belkacem77",
+			"YouvaDjouadi"
 		]
 	},
-	"tooltip-ca-ve-edit": "Ẓreg asebter-agi",
+	"tooltip-ca-ve-edit": "Ẓreg asebter-a",
 	"visualeditor-advancedsettings-tool": "Iɣewwaṛen leqqayen",
 	"visualeditor-backbutton-tooltip": "Uɣal ar deffir",
 	"visualeditor-ca-createlocaldescriptionsource": "Rnu aɣbalu n uglam adigan",

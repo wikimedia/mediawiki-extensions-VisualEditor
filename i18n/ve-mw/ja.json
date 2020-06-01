@@ -60,7 +60,7 @@
 	"visualeditor-ca-ve-edit": "ビジュアルエディター",
 	"visualeditor-ca-ve-edit-section": "ビジュアルエディター",
 	"visualeditor-categories-tool": "カテゴリ",
-	"visualeditor-changedesc-mwlanguagevariant": "言語の変化形マークアップを変更しました",
+	"visualeditor-changedesc-mwlanguagevariant": "言語変種のマークアップを変更しました",
 	"visualeditor-changedesc-mwredirect": "転送先を $1 から $2 へ変更しました",
 	"visualeditor-changedesc-mwtransclusion": "テンプレートのパラメーターを変更しました",
 	"visualeditor-desc": "MediaWiki 用のビジュアルエディター",
