@@ -1341,8 +1341,15 @@
 			)
 		) {
 			mw.loader.using( 'ext.visualEditor.welcome' ).done( function () {
-				var windowManager = new OO.ui.WindowManager(),
-					welcomeDialog = new mw.libs.ve.WelcomeDialog();
+				var windowManager, welcomeDialog;
+				// Check shouldShowWelcomeDialog() again: any code that might have called
+				// stopShowingWelcomeDialog() wouldn't have had an opportunity to do that
+				// yet by the first time we checked
+				if ( !init.shouldShowWelcomeDialog() ) {
+					return;
+				}
+				windowManager = new OO.ui.WindowManager();
+				welcomeDialog = new mw.libs.ve.WelcomeDialog();
 				$( document.body ).append( windowManager.$element );
 				windowManager.addWindows( [ welcomeDialog ] );
 				windowManager.openWindow(
