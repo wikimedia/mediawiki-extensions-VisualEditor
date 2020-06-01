@@ -16,12 +16,6 @@
  */
 ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	var popupCloseButton, $popupContent, $shield,
-		// For logged in users, only check their preferences, not local storage.
-		// For anon users, who can't change preferences, check local storage.
-		// (But also check preferences in case default values are overridden.)
-		checkLocalStorage = !!mw.user.isAnon(),
-		hiddenUsingPreferences = mw.user.options.get( 'visualeditor-hideusered' ),
-		hiddenUsingLocalStorage = mw.storage.get( 've-hideusered' ) || $.cookie( 've-hideusered' ),
 		tool = this;
 
 	config = config || {};
@@ -32,10 +26,7 @@ ve.ui.MWEducationPopupTool = function VeUiMwEducationPopupTool( config ) {
 	}
 
 	// Do not display if the user already acknowledged the popups
-	if (
-		hiddenUsingPreferences ||
-		( hiddenUsingLocalStorage && checkLocalStorage )
-	) {
+	if ( !mw.libs.ve.shouldShowEducationPopups() ) {
 		return;
 	}
 
@@ -99,23 +90,11 @@ OO.initClass( ve.ui.MWEducationPopupTool );
  * Click handler for the popup close button
  */
 ve.ui.MWEducationPopupTool.prototype.onPopupCloseButtonClick = function () {
-	var
-		canSavePreferences = !mw.user.isAnon(),
-		hiddenUsingPreferences = mw.user.options.get( 'visualeditor-hideusered' );
-
 	this.shownEducationPopup = true;
 	this.popup.toggle( false );
 	this.setActive( false );
 	ve.init.target.openEducationPopupTool = undefined;
-
-	if ( !hiddenUsingPreferences && canSavePreferences ) {
-		ve.init.target.getLocalApi().saveOption( 'visualeditor-hideusered', 1 );
-		mw.user.options.set( 'visualeditor-hideusered', 1 );
-	} else if ( !canSavePreferences ) {
-		if ( !mw.storage.set( 've-hideusered', 1 ) ) {
-			$.cookie( 've-hideusered', 1, { path: '/', expires: 30 } );
-		}
-	}
+	mw.libs.ve.stopShowingEducationPopups();
 
 	this.onSelect();
 };
