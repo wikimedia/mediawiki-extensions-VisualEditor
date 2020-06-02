@@ -19,6 +19,11 @@
 	mw.libs.ve.diffLoader = {
 
 		/**
+		 * @class ve
+		 * TODO: Use @-external when we switch to JSDoc
+		 */
+
+		/**
 		 * Get a ve.dm.Document model from a Parsoid response
 		 *
 		 * @param {Object} response Parsoid response from the VisualEditor API

@@ -277,7 +277,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data 
  *
  * @constructor
  * @param {Object} [config] Configuration options
-*/
+ */
 ve.ui.MWLanguageVariantDisabledInspector = function VeUiMWLanguageVariantDisabledInspector() {
 	ve.ui.MWLanguageVariantDisabledInspector.super.apply( this, arguments );
 };
@@ -358,7 +358,7 @@ ve.ui.MWLanguageVariantDisabledInspector.prototype.getTeardownProcess = function
  *
  * @constructor
  * @param {Object} [config] Configuration options
-*/
+ */
 ve.ui.MWLanguageVariantNameInspector = function VeUiMWLanguageVariantNameInspector() {
 	ve.ui.MWLanguageVariantNameInspector.super.apply( this, arguments );
 };
@@ -423,7 +423,7 @@ ve.ui.MWLanguageVariantNameInspector.prototype.getContentFromInspector = functio
  *
  * @constructor
  * @param {Object} [config] Configuration options
-*/
+ */
 ve.ui.MWLanguageVariantFilterInspector = function VeUiMWLanguageVariantFilterInspector() {
 	ve.ui.MWLanguageVariantFilterInspector.super.apply( this, arguments );
 };
@@ -537,7 +537,7 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.getTeardownProcess = function (
  *
  * @constructor
  * @param {Object} [config] Configuration options
-*/
+ */
 ve.ui.MWLanguageVariantTwoWayInspector = function VeUiMWLanguageVariantTwoWayInspector() {
 	ve.ui.MWLanguageVariantTwoWayInspector.super.apply( this, arguments );
 };
@@ -590,6 +590,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getSetupProcess = function ( da
 
 /**
  * Create widgets corresponding to a given mapping given by this rule.
+ *
  * @param {string} [lang] The language code for the content text.
  * @param {string} [content] The HTML content text.
  * @return {Object} An object containing the required widgets and backing
@@ -687,7 +688,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.onClearButtonClick = function (
  *
  * @constructor
  * @param {Object} [config] Configuration options
-*/
+ */
 ve.ui.MWLanguageVariantOneWayInspector = function VeUiMWLanguageVariantOneWayInspector() {
 	ve.ui.MWLanguageVariantOneWayInspector.super.apply( this, arguments );
 };
@@ -740,6 +741,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getSetupProcess = function ( da
 
 /**
  * Create widgets corresponding to a given mapping given by this rule.
+ *
  * @param {string} [from] The HTML source text.
  * @param {string} [lang] The language code for the destination text.
  * @param {string} [to] The HTML destination text.

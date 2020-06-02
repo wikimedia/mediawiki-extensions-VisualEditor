@@ -756,6 +756,7 @@ ve.ui.MWSaveDialog.prototype.updateOptionsBar = function () {
 
 /**
  * Update the current review mode
+ *
  * @param  {OO.ui.ButtonOptionWidget} [button] The button clicked, or false if this is the initial setup
  */
 ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
@@ -807,6 +808,7 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 
 /**
  * Update the current review mode
+ *
  * @param {OO.ui.OptionWidget} item Item chosen
  */
 ve.ui.MWSaveDialog.prototype.onReviewChoose = function ( item ) {

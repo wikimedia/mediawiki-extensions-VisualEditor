@@ -75,6 +75,7 @@ ve.dm.MWLanguageVariantNode.static.hiddenType = 'mwLanguageVariantHidden';
 /**
  * Migrate field names from old Parsoid spec to new field names.
  * This method will go away after the next Parsoid flag day.
+ *
  * @static
  * @private
  * @param {Object} dataMwv

@@ -177,6 +177,7 @@
 								target.revid = importedDocument.revid;
 								return true;
 							}
+							return false;
 						} );
 					}
 					initPromise.fail( function ( err ) {

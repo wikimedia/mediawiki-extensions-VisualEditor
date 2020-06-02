@@ -125,6 +125,7 @@ ve.ce.MWLanguageVariantNode.prototype.getInvisibleIconLabel = function () {
 /**
  * Create a {jQuery} appropriate for holding the output of this
  * conversion rule.
+ *
  * @return {jQuery}
  */
 ve.ce.MWLanguageVariantNode.prototype.appendHolder = function () {

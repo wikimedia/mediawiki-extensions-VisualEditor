@@ -41,6 +41,7 @@ ve.dm.MWExtensionNode.static.childNodeTypes = [];
 
 /**
  * HTML tag name.
+ *
  * @static
  * @property {string}
  * @inheritable
@@ -49,6 +50,7 @@ ve.dm.MWExtensionNode.static.tagName = null;
 
 /**
  * Name of the extension and the parser tag name.
+ *
  * @static
  * @property {string}
  * @inheritable

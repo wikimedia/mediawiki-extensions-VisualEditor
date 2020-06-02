@@ -1,3 +1,5 @@
+'use strict';
+
 const createScreenshotEnvironment = require( './screenshots.js' ).createScreenshotEnvironment,
 	test = require( 'selenium-webdriver/testing' ),
 	runScreenshotTest = createScreenshotEnvironment( test );

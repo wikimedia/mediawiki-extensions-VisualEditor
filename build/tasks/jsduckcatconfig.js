@@ -2,6 +2,8 @@
  * Merge jsduck configuration files with a downstream one
  */
 
+'use strict';
+
 module.exports = function ( grunt ) {
 	const _ = grunt.util._;
 

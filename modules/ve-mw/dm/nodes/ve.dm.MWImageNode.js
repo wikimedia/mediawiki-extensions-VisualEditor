@@ -86,6 +86,7 @@ ve.dm.MWImageNode.static.getRdfa = function ( mediaClass, frameType ) {
 
 /**
  * Map media types to tag names
+ *
  * @type {Object}
  */
 ve.dm.MWImageNode.static.typesToTags = {
@@ -96,6 +97,7 @@ ve.dm.MWImageNode.static.typesToTags = {
 
 /**
  * Map media types to source attributes
+ *
  * @type {Object}
  */
 ve.dm.MWImageNode.static.typesToSrcAttrs = {

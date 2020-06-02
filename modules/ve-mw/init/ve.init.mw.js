@@ -8,6 +8,7 @@
 /**
  * Namespace for all VisualEditor MediaWiki Initialization classes, static methods and static
  * properties.
+ *
  * @class
  * @singleton
  */

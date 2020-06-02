@@ -18,7 +18,7 @@
  * actual MediaWiki integration and VisualEditor library.
  *
  * @class mw.libs.ve
- * @alternateClassName ve.init.mw.DesktopArticleTarget.init
+ * @alias ve.init.mw.DesktopArticleTarget.init
  * @singleton
  */
 ( function () {
@@ -1025,6 +1025,7 @@
 		 * The welcome dialog can be disabled in configuration; or by calling disableWelcomeDialog();
 		 * or using a query string parameter; or if we've recorded that we've already shown it before
 		 * in a user preference, local storage or a cookie.
+		 *
 		 * @return {boolean}
 		 */
 		shouldShowWelcomeDialog: function () {
@@ -1067,6 +1068,7 @@
 		 *
 		 * The education popups can be disabled by calling disableWelcomeDialog(), or if we've
 		 * recorded that we've already shown it before in a user preference, local storage or a cookie.
+		 *
 		 * @return {boolean}
 		 */
 		shouldShowEducationPopups: function () {

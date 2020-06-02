@@ -63,6 +63,7 @@ OO.inheritClass( ve.ui.MWAceEditorWidget, ve.ui.WhitespacePreservingTextInputWid
 
 /**
  * The editor has resized
+ *
  * @event resize
  */
 

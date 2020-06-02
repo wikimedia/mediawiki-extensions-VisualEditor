@@ -1702,7 +1702,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		]
-	},*/
+	}, */
 	'document with meta elements': {
 		body: '<!-- No conversion --><meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +

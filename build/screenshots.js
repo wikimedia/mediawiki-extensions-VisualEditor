@@ -1,3 +1,5 @@
+'use strict';
+
 const accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
 	Builder = require( 'selenium-webdriver' ).Builder,
 	fs = require( 'fs' ),

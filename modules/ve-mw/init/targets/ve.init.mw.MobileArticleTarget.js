@@ -6,6 +6,11 @@
  */
 
 /**
+ * @class VisualEditorOverlay
+ * TODO: Use @-external when we switch to JSDoc
+ */
+
+/**
  * MediaWiki mobile article target.
  *
  * @class

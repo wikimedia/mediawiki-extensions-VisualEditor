@@ -102,6 +102,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 			recognizedClasses.push( className );
 			return true;
 		}
+		return false;
 	} );
 
 	// Border
