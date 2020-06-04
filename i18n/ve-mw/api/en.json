@@ -36,7 +36,6 @@
 	"apihelp-visualeditor-param-etag": "ETag to send.",
 	"apihelp-visualeditor-param-format": "The format of the output.",
 	"apihelp-visualeditor-param-html": "HTML to send to Parsoid to convert to wikitext.",
-	"apihelp-visualeditor-param-lint": "Also return lint errors from Parsoid.",
 	"apihelp-visualeditor-param-oldid": "The revision number to use (defaults to latest revision).",
 	"apihelp-visualeditor-param-paction": "Action to perform.",
 	"apihelp-visualeditor-param-page": "The page to perform actions on.",
