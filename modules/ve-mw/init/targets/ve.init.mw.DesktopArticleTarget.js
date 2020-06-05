@@ -1262,7 +1262,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			// Translate into a fragment for the new URI:
 			// This should be after replacePageContent if this is post-save, so we can just look
 			// at the headers on the page.
-			fragment = this.getSectionFragmentFromPage();
+			fragment = this.getSectionFragmentFromPage( this.$editableContent );
 			if ( fragment ) {
 				uri.fragment = fragment;
 				this.viewUri.fragment = fragment;
