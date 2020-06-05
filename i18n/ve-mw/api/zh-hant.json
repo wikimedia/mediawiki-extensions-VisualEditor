@@ -22,7 +22,6 @@
 	"apihelp-visualeditor-param-etag": "要傳送的 ETag。",
 	"apihelp-visualeditor-param-format": "輸出的格式。",
 	"apihelp-visualeditor-param-html": "要傳送至 Parsoid 轉換為 WikiText 的 HTML。",
-	"apihelp-visualeditor-param-lint": "另外回傳 Parsoid 的 lint 錯誤。",
 	"apihelp-visualeditor-param-oldid": "要使用的修訂編號 (預設爲最新版本)。",
 	"apihelp-visualeditor-param-paction": "要執行的動作。",
 	"apihelp-visualeditor-param-page": "要執行動作的頁面。",

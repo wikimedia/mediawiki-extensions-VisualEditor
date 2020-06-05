@@ -23,7 +23,6 @@
 	"apihelp-visualeditor-param-etag": "Gönderilecek ETag.",
 	"apihelp-visualeditor-param-format": "Çıkışının biçimi.",
 	"apihelp-visualeditor-param-html": "Vikimetin dönüştürmek için Parsoid göndermek için HTML.",
-	"apihelp-visualeditor-param-lint": "Ayrıca Parsoid'den lint hataları döndürün.",
 	"apihelp-visualeditor-param-oldid": "Sürüm numarası (en son revizyon için varsayılan).",
 	"apihelp-visualeditor-param-paction": "Eylemi gerçekleştirmek için.",
 	"apihelp-visualeditor-param-page": "Bu sayfa üzerinde eylemleri gerçekleştirmek için.",

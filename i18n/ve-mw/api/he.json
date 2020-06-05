@@ -22,7 +22,6 @@
 	"apihelp-visualeditor-param-etag": "איזה ETag לשלוח.",
 	"apihelp-visualeditor-param-format": "תסדיר הפלט.",
 	"apihelp-visualeditor-param-html": "איזה HTML לשלוח לפרסואיד כדי להמיר לקוד ויקי.",
-	"apihelp-visualeditor-param-lint": "להחזיר גם שגיאות ניקיון מפרסואיד.",
 	"apihelp-visualeditor-param-oldid": "באיזה מספר גרסה להשתמש (ברירת המחדל היא הגרסה האחרונה).",
 	"apihelp-visualeditor-param-paction": "איזו פעולה לבצע.",
 	"apihelp-visualeditor-param-page": "על איזה דף לבצע את הפעולות.",

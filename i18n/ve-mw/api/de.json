@@ -20,7 +20,6 @@
 	"apihelp-visualeditor-param-etag": "Zu sendendes ETag.",
 	"apihelp-visualeditor-param-format": "Das Format der Ausgabe.",
 	"apihelp-visualeditor-param-html": "HTML, das an Parsoid zur Konvertierung in Wikitext gesendet werden soll.",
-	"apihelp-visualeditor-param-lint": "Auch Lint-Fehler von Parsoid zurückgeben.",
 	"apihelp-visualeditor-param-oldid": "Die zu verwendende Versionsnummer (Standard: Aktuellste Version).",
 	"apihelp-visualeditor-param-paction": "Die auszuführende Aktion.",
 	"apihelp-visualeditor-param-page": "Die Seite, auf die die Aktionen angewendet werden sollen.",

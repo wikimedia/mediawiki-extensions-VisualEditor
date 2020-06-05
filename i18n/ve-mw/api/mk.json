@@ -19,7 +19,6 @@
 	"apihelp-visualeditor-param-etag": "ETag за испраќање.",
 	"apihelp-visualeditor-param-format": "Формат на изводот.",
 	"apihelp-visualeditor-param-html": "HTML за испраќање на Parsoid за да го претвори во викитекст.",
-	"apihelp-visualeditor-param-lint": "Дај и Lint-грешки од Parsoid.",
 	"apihelp-visualeditor-param-oldid": "Број на преработката што ќе се користи (по основно: најновата преработка).",
 	"apihelp-visualeditor-param-paction": "Дејство за вршење.",
 	"apihelp-visualeditor-param-page": "Страницата врз која треба да се извршат дејствата.",
