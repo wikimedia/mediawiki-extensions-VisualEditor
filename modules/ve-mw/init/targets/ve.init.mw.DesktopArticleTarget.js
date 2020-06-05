@@ -455,6 +455,11 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 	var surfaceModel, range;
 	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
+
+	// Disable TemplateStyles in the original content
+	// (We do this here because toggling 've-active' class above hides it)
+	this.$editableContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', true );
+
 	if ( !this.editingTabDialog ) {
 		if ( this.sectionTitle ) {
 			this.sectionTitle.focus();
@@ -611,6 +616,10 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 	this.activatingDeferred.reject();
 	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active' );
 
+	// Restore TemplateStyles of the original content
+	// (We do this here because toggling 've-active' class above displays it)
+	this.$editableContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', false );
+
 	// User interface changes
 	this.restorePage();
 	this.restoreDocumentTitle();
@@ -653,9 +662,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			$( 'html' ).removeClass( 've-deactivating' );
 
 			// Move original content back out of the target
-			target.$element.parent().append( target.$originalContent.children() )
-				// Restore TemplateStyles within it
-				.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', false );
+			target.$element.parent().append( target.$originalContent.children() );
+
 			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
@@ -1145,9 +1153,6 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// Move all native content inside the target
 	// Exclude notification area to work around T143837
 	this.$originalContent.append( this.$element.siblings().not( '.mw-notification-area' ) );
-
-	// Disable TemplateStyles in originalContent
-	this.$originalContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', true );
 
 	this.$originalCategories = $( '#catlinks' ).clone( true );
 
