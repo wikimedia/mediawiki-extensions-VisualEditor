@@ -243,12 +243,9 @@ class VisualEditorHooks {
 	 * @return bool
 	 */
 	private static function enabledForUser( $user ) {
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
 		return $user->getOption( 'visualeditor-enable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' ) &&
-			!$user->getOption( 'visualeditor-autodisable' ) &&
-			!( $veConfig->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() );
+			!$user->getOption( 'visualeditor-autodisable' );
 	}
 
 	/**
@@ -474,7 +471,11 @@ class VisualEditorHooks {
 		}
 
 		// Exit if the user doesn't have VE enabled
-		if ( !self::enabledForUser( $user ) ) {
+		if (
+			!self::enabledForUser( $user ) ||
+			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
+			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
+		) {
 			return;
 		}
 
@@ -643,7 +644,11 @@ class VisualEditorHooks {
 
 		$user = $skin->getUser();
 		// Exit if the user doesn't have VE enabled
-		if ( !self::enabledForUser( $user ) ) {
+		if (
+			!self::enabledForUser( $user ) ||
+			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
+			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
+		) {
 			return;
 		}
 
