@@ -10,6 +10,8 @@
  * @ingroup Maintenance
  */
 
+use MediaWiki\MediaWikiServices;
+
 $maintenancePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' ) . '/maintenance/Maintenance.php'
 	: __DIR__ . '/../../../../maintenance/Maintenance.php';
@@ -32,6 +34,7 @@ class AutodisableVisualEditorPref extends Maintenance {
 	 */
 	public function execute() {
 		$dbr = wfGetDB( DB_REPLICA );
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 
 		$lastUserId = -1;
 		do {
@@ -64,7 +67,7 @@ class AutodisableVisualEditorPref extends Maintenance {
 				$lastUserId = $userRow->user_id;
 			}
 			$this->output( "Added preference for " . $results->numRows() . " users.\n" );
-			wfWaitForSlaves();
+			$lbFactory->waitForReplication();
 		} while ( $results->numRows() == $this->mBatchSize );
 		$this->output( "done.\n" );
 	}
