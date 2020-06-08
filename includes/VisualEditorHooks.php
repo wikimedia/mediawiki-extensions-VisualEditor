@@ -474,12 +474,7 @@ class VisualEditorHooks {
 		}
 
 		// Exit if the user doesn't have VE enabled
-		if (
-			!$user->getOption( 'visualeditor-enable' ) ||
-			$user->getOption( 'visualeditor-betatempdisable' ) ||
-			$user->getOption( 'visualeditor-autodisable' ) ||
-			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
-		) {
+		if ( !self::enabledForUser( $user ) ) {
 			return;
 		}
 
@@ -648,12 +643,7 @@ class VisualEditorHooks {
 
 		$user = $skin->getUser();
 		// Exit if the user doesn't have VE enabled
-		if (
-			!$user->getOption( 'visualeditor-enable' ) ||
-			$user->getOption( 'visualeditor-betatempdisable' ) ||
-			$user->getOption( 'visualeditor-autodisable' ) ||
-			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
-		) {
+		if ( !self::enabledForUser( $user ) ) {
 			return;
 		}
 
