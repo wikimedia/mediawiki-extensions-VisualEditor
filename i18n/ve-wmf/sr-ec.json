@@ -25,7 +25,7 @@
 	"visualeditor-welcomedialog-action": "Почни са уређивањем",
 	"visualeditor-welcomedialog-content": "Свако може да уређује, а свако побољшање помаже.",
 	"visualeditor-welcomedialog-content-thanks": "Хвала вам што помажете у ширењу знања!",
-	"visualeditor-welcomedialog-switch": "Пребаци на уређивање извора",
+	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивање извора",
 	"visualeditor-welcomedialog-switch-ve": "Пребаци на визуелни уређивач",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на {{GRAMMAR:акузатив|$2}}"
 }
