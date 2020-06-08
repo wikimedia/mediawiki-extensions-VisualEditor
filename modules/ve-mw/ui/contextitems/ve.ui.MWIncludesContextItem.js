@@ -78,7 +78,7 @@ ve.ui.MWIncludesContextItem.prototype.renderBody = function () {
 	if ( this.model.getAttribute( 'mw' ) ) {
 		wikitext = this.model.getAttribute( 'mw' ).src;
 		// The opening and closing tags are included, eww
-		wikitext = wikitext.replace( /^<includeonly>(.*)<\/includeonly>$/, '$1' );
+		wikitext = wikitext.replace( /^<includeonly>\s*([\s\S]*)\s*<\/includeonly>$/, '$1' );
 		this.$body.append( $( '<pre>' )
 			// The following classes are used here:
 			// * mw-editfont-monospace
