@@ -11,7 +11,6 @@
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Revision\RevisionStoreRecord;
 
 class ApiVisualEditor extends ApiBase {
 
@@ -144,26 +143,12 @@ class ApiVisualEditor extends ApiBase {
 
 				// Get information about current revision
 				if ( $title->exists() ) {
-					$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
-					$latestRevision = $revisionLookup->getRevisionByTitle( $title );
-					if ( $latestRevision === null ) {
-						$this->dieWithError( 'apierror-visualeditor-latestnotfound', 'latestnotfound' );
-					}
-					$revision = null;
-					if ( !isset( $parserParams['oldid'] ) || $parserParams['oldid'] === 0 ) {
-						$parserParams['oldid'] = $latestRevision->getId();
-						$revision = $latestRevision;
-					} else {
-						$revision = $revisionLookup->getRevisionById( $parserParams['oldid'] );
-						if ( $revision === null ) {
-							$this->dieWithError( [ 'apierror-nosuchrevid', $parserParams['oldid'] ], 'oldidnotfound' );
-						}
-					}
+					$revision = $this->getValidRevision( $title, $parserParams['oldid'] ?? null );
+					$latestRevision = $this->getLatestRevision( $title );
 
-					$restoring = $revision &&
-						!( $revision instanceof RevisionStoreRecord && $revision->isCurrent() );
+					$restoring = !$revision->isCurrent();
 					$baseTimestamp = $latestRevision->getTimestamp();
-					$oldid = intval( $parserParams['oldid'] );
+					$oldid = $revision->getId();
 
 					// If requested, request HTML from Parsoid/RESTBase
 					if ( $params['paction'] === 'parse' ) {
@@ -187,13 +172,7 @@ class ApiVisualEditor extends ApiBase {
 								$title, $wikitext, false, $oldid, $stash
 							);
 						} else {
-							$response = $this->requestRestbase(
-								$title,
-								'GET',
-								'page/html/' . urlencode( $title->getPrefixedDBkey() ) . '/' . $oldid .
-									'?redirect=false&stash=true',
-								[]
-							);
+							$response = $this->requestRestbasePageHtml( $revision );
 						}
 						$content = $response['body'];
 						$restbaseHeaders = $response['headers'];
