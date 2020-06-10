@@ -667,7 +667,10 @@ class ApiVisualEditor extends ApiBase {
 					'parsedoc',
 				],
 			],
-			'wikitext' => null,
+			'wikitext' => [
+				ApiBase::PARAM_TYPE => 'text',
+				ApiBase::PARAM_DFLT => null,
+			],
 			'section' => null,
 			'stash' => null,
 			'oldid' => null,
