@@ -673,7 +673,7 @@ ve.dm.mwExample.domToDataCases = {
 		fromDataBody: '<b>a</b><b data-parsoid="1">bx</b><b data-parsoid="2">c</b> ' +
 			'<b>dd</b>'
 	},
-	'adjacent annotations (Parsoid IDs)': {
+	'adjacent annotations (RESTBase IDs)': {
 		preserveAnnotationDomElements: true,
 		body: '<b>a</b><b id="mwAB">b</b><b id="mwCD">c</b> ' +
 			'<b>d</b><b>d</b>',
