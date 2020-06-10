@@ -557,7 +557,7 @@
 	}
 
 	init = {
-		blacklist: conf.blacklist,
+		unsupportedList: conf.unsupportedList,
 
 		/**
 		 * Add a plugin module or function.
@@ -1125,7 +1125,7 @@
 		// Support check asserts that Array.prototype.indexOf is available so we can use it below
 		VisualEditorSupportCheck() &&
 
-		( ( 'vewhitelist' in uri.query ) || !$.client.test( init.blacklist, null, true ) ) &&
+		( ( 'vesupported' in uri.query ) || !$.client.test( init.unsupportedList, null, true ) ) &&
 
 		// Not on pages which are outputs of the Translate extensions
 		// TODO: Allow the Translate extension to do this itself (T174180)
@@ -1190,7 +1190,7 @@
 	init.setEditorPreference = setEditorPreference;
 
 	// Note: Though VisualEditor itself only needs this exposure for a very small reason
-	// (namely to access init.blacklist from the unit tests...) this has become one of the nicest
+	// (namely to access init.unsupportedList from the unit tests...) this has become one of the nicest
 	// ways to easily detect whether the VisualEditor initialisation code is present.
 	//
 	// The VE global was once available always, but now that platform integration initialisation

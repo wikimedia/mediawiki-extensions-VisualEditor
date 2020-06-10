@@ -137,11 +137,11 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	// The key is the browser name returned by jQuery.client
 	// The value is either null (match all versions) or a list of tuples
 	// containing an inequality (<,>,<=,>=) and a version number
-	whitelist: {
+	supportedList: {
 		chrome: [ [ '>=', 19 ] ],
 		iceweasel: [ [ '>=', 10 ] ],
 		opera: [ [ '>=', 15 ] ],
-		// All non-blacklisted versions are whitelisted:
+		// All versions not in unsupportedList are fully supported:
 		firefox: null,
 		safari: null,
 		msie: null,
@@ -312,8 +312,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
 	}
 
 	if ( !(
-		'vewhitelist' in this.currentUri.query ||
-		$.client.test( this.constructor.static.compatibility.whitelist, null, true )
+		'vesupported' in this.currentUri.query ||
+		$.client.test( this.constructor.static.compatibility.supportedList, null, true )
 	) ) {
 		// Show warning in unknown browsers that pass the support test
 		// Continue at own risk.

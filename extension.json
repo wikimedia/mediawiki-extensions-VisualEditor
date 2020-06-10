@@ -136,7 +136,7 @@
 		"VisualEditorSkinToolbarScrollOffset": {
 			"value": []
 		},
-		"VisualEditorBrowserBlacklist": {
+		"VisualEditorBrowserUnsupportedList": {
 			"value": {
 				"firefox": [
 					[

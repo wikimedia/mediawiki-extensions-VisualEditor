@@ -114,7 +114,7 @@ QUnit.test( 'init', function ( assert ) {
 } );
 
 QUnit.test( 'compatibility', function ( assert ) {
-	var i, profile, matches, compatibility,
+	var profile, matches, compatibility,
 		cases = [
 			{
 				msg: 'Unidentified browser',
@@ -124,47 +124,47 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'IE11',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Edge 12',
 				userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Firefox 10',
 				userAgent: 'Mozilla/5.0 (X11; Mageia; Linux x86_64; rv:10.0.9) Gecko/20100101 Firefox/10.0.9',
-				matches: [ 'blacklist' ]
+				matches: [ 'unsupportedList' ]
 			},
 			{
 				msg: 'Firefox 11',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.1; U;WOW64; de;rv:11.0) Gecko Firefox/11.0',
-				matches: [ 'blacklist' ]
+				matches: [ 'unsupportedList' ]
 			},
 			{
 				msg: 'Firefox 12',
 				userAgent: 'Mozilla/5.0 (compatible; Windows; U; Windows NT 6.2; WOW64; en-US; rv:12.0) Gecko/20120403211507 Firefox/12.0',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Firefox 13',
 				userAgent: 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:13.0) Gecko/20100101 Firefox/13.0',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Firefox 14',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20120403211507 Firefox/14.0.1',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Firefox 15',
 				userAgent: 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) Gecko/20100101 Firefox/15.0.1',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Firefox 24',
 				userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:24.0) Gecko/20100101 Firefox/24.0',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Iceweasel 9',
@@ -174,37 +174,37 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'Iceweasel 10',
 				userAgent: 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0 Iceweasel/10.0',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Iceweasel 15',
 				userAgent: 'Mozilla/5.0 (X11; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1 Iceweasel/15.0.1',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Safari 4',
 				userAgent: 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us) AppleWebKit/531.21.11 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10',
-				matches: [ 'blacklist' ]
+				matches: [ 'unsupportedList' ]
 			},
 			{
 				msg: 'Safari 5',
 				userAgent: 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us) AppleWebKit/534.1+ (KHTML, like Gecko) Version/5.0 Safari/533.16',
-				matches: [ 'blacklist' ]
+				matches: [ 'unsupportedList' ]
 			},
 			{
 				msg: 'Safari 6',
 				userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 1084) AppleWebKit/536.30.1 (KHTML like Gecko) Version/6.0.5 Safari/536.30.1',
-				matches: [ 'blacklist' ]
+				matches: [ 'unsupportedList' ]
 			},
 			{
 				msg: 'Safari 7',
 				userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Safari 8',
 				userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.3.18 (KHTML, like Gecko) Version/8.0.3 Safari/600.3.18',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Chrome 18',
@@ -214,12 +214,12 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'Chrome 19',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Chrome 27',
 				userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'Android 2.3',
@@ -239,7 +239,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'Opera 11',
 				userAgent: 'Opera/9.80 (Windows NT 5.1) Presto/2.10.229 Version/11.64',
-				matches: [ 'blacklist' ]
+				matches: [ 'unsupportedList' ]
 			},
 			{
 				msg: 'Opera 12.16',
@@ -249,7 +249,7 @@ QUnit.test( 'compatibility', function ( assert ) {
 			{
 				msg: 'Opera 15.0',
 				userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36 OPR/15.0.1147.100',
-				matches: [ 'whitelist' ]
+				matches: [ 'supportedList' ]
 			},
 			{
 				msg: 'BlackBerry',
@@ -269,24 +269,23 @@ QUnit.test( 'compatibility', function ( assert ) {
 		];
 
 	compatibility = {
-		whitelist: ve.init.mw.DesktopArticleTarget.static.compatibility.whitelist,
+		supportedList: ve.init.mw.DesktopArticleTarget.static.compatibility.supportedList,
 		// TODO: Fix this mess when we split ve.init from ve.platform
-		blacklist: mw.libs.ve.blacklist
+		unsupportedList: mw.libs.ve.unsupportedList
 	};
 
-	for ( i = 0; i < cases.length; i++ ) {
-		profile = $.client.profile( { userAgent: cases[ i ].userAgent, platform: '' } );
+	cases.forEach( function ( caseItem ) {
+		profile = $.client.profile( { userAgent: caseItem.userAgent, platform: '' } );
 		matches = [];
-		// eslint-disable-next-line no-loop-func
-		[ 'blacklist', 'whitelist' ].every( function ( list ) {
+		[ 'unsupportedList', 'supportedList' ].every( function ( list ) {
 			if ( $.client.test( compatibility[ list ], profile, true ) ) {
 				matches.push( list );
-				// Don't check whitelist if on blacklist
+				// Don't check supportedList if on unsupportedList
 				return false;
 			}
 			return true;
 		} );
-		assert.deepEqual( matches, cases[ i ].matches,
-			cases[ i ].msg + ': ' + ( cases[ i ].matches.length ? cases[ i ].matches.join() : 'greylist (no matches)' ) );
-	}
+		assert.deepEqual( matches, caseItem.matches,
+			caseItem.msg + ': ' + ( caseItem.matches.length ? caseItem.matches.join() : 'greylist (no matches)' ) );
+	} );
 } );

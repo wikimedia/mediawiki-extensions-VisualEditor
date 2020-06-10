@@ -166,15 +166,15 @@ class VisualEditorHooks {
 	 *
 	 * @param WebRequest $req The web request to check the details of
 	 * @param Config $config VE config object
-	 * @return bool True if the User Agent is blacklisted
+	 * @return bool The User Agent is unsupported
 	 */
-	private static function isUABlacklisted( WebRequest $req, $config ) {
-		if ( $req->getVal( 'vewhitelist' ) ) {
+	private static function isUAUnsupported( WebRequest $req, $config ) {
+		if ( $req->getVal( 'vesupported' ) ) {
 			return false;
 		}
-		$blacklist = $config->get( 'VisualEditorBrowserBlacklist' );
+		$unsupportedList = $config->get( 'VisualEditorBrowserUnsupportedList' );
 		$ua = strtolower( $req->getHeader( 'User-Agent' ) );
-		foreach ( $blacklist as $uaSubstr => $rules ) {
+		foreach ( $unsupportedList as $uaSubstr => $rules ) {
 			if ( !strpos( $ua, $uaSubstr . '/' ) ) {
 				continue;
 			}
@@ -300,7 +300,7 @@ class VisualEditorHooks {
 
 		if (
 			!self::enabledForUser( $user ) ||
-			self::isUABlacklisted( $req, $veConfig )
+			self::isUAUnsupported( $req, $veConfig )
 		) {
 			return true;
 		}
@@ -835,7 +835,7 @@ class VisualEditorHooks {
 			'discussion-message' => 'visualeditor-preference-core-discussion-link',
 			'requirements' => [
 				'javascript' => true,
-				'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+				'blacklist' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 			]
 		];
 
@@ -856,7 +856,7 @@ class VisualEditorHooks {
 				'discussion-message' => 'visualeditor-preference-newwikitexteditor-discussion-link',
 				'requirements' => [
 					'javascript' => true,
-					'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+					'blacklist' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 				]
 			];
 		}
@@ -878,7 +878,7 @@ class VisualEditorHooks {
 				'discussion-message' => 'visualeditor-preference-visualdiffpage-discussion-link',
 				'requirements' => [
 					'javascript' => true,
-					'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+					'blacklist' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 				]
 			];
 		}
@@ -980,7 +980,7 @@ class VisualEditorHooks {
 			),
 			'thumbLimits' => $coreConfig->get( 'ThumbLimits' ),
 			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
-			'blacklist' => $veConfig->get( 'VisualEditorBrowserBlacklist' ),
+			'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => $veConfig->get( 'VisualEditorTabMessages' ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
