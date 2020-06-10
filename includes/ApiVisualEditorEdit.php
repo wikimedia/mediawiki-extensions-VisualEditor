@@ -188,9 +188,6 @@ class ApiVisualEditorEdit extends ApiBase {
 		$wikitext = $this->postHTML(
 			$title, $html, $parserParams, $params['etag']
 		);
-		if ( $wikitext === false ) {
-			$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
-		}
 		return $wikitext;
 	}
 
