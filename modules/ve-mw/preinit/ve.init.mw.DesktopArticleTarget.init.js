@@ -298,7 +298,11 @@
 		// user has expressed no choice by opening this editor. (T246259)
 		// Strictly speaking the same thing should happen if visual mode is
 		// available but source mode isn't, but that is never the case.
-		if ( !init.isVisualAvailable ) {
+		if (
+			!init.isVisualAvailable ||
+			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
+			( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null )
+		) {
 			return $.Deferred().resolve().promise();
 		}
 
@@ -627,7 +631,11 @@
 			// Set up the tabs appropriately if the user has VE on
 			if ( init.isAvailable ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
-				if ( !init.isSingleEditTab && init.isVisualAvailable ) {
+				if (
+					!init.isSingleEditTab && init.isVisualAvailable &&
+					// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
+					!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null )
+				) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupMultiTabSkin();
 				} else if (
@@ -1137,10 +1145,6 @@
 	);
 
 	enabledForUser = (
-		// Allow disabling for anonymous users separately from changing the
-		// default preference (T52000)
-		!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null ) &&
-
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
