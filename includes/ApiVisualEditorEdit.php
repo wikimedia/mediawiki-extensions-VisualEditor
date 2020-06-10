@@ -478,7 +478,10 @@ class ApiVisualEditorEdit extends ApiBase {
 			'token' => [
 				ApiBase::PARAM_REQUIRED => true,
 			],
-			'wikitext' => null,
+			'wikitext' => [
+				ApiBase::PARAM_TYPE => 'text',
+				ApiBase::PARAM_DFLT => null,
+			],
 			'section' => null,
 			'sectiontitle' => null,
 			'basetimestamp' => null,
@@ -486,7 +489,10 @@ class ApiVisualEditorEdit extends ApiBase {
 			'oldid' => null,
 			'minor' => null,
 			'watchlist' => null,
-			'html' => null,
+			'html' => [
+				ApiBase::PARAM_TYPE => 'text',
+				ApiBase::PARAM_DFLT => null,
+			],
 			'etag' => null,
 			'summary' => null,
 			'captchaid' => null,
