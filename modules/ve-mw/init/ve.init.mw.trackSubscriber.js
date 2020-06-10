@@ -236,11 +236,18 @@
 			return;
 		}
 
+		/* eslint-disable camelcase */
 		event = {
 			feature: feature,
 			action: data.action,
-			editingSessionId: editingSessionId
+			editingSessionId: editingSessionId,
+			user_id: mw.user.getId(),
+			user_editcount: mw.config.get( 'wgUserEditCount', 0 ),
+			editor_interface: ve.getProp( ve, 'init', 'target', 'surface', 'mode' ) === 'source' ? 'wikitext-2017' : 'visualeditor',
+			integration: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'integrationType' ) || 'page',
+			platform: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'platformType' ) || 'other'
 		};
+		/* eslint-enable camelcase */
 
 		if ( trackdebug ) {
 			log( topic, event );
