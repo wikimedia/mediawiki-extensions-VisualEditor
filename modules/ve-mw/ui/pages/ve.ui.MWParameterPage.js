@@ -265,7 +265,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	) {
 		valueInputConfig.validate = function ( value ) {
 			// TODO: Check against wgMaxNameChars
-			// TODO: Check against unicode blacklist regex from MW core's User::isValidUserName
+			// TODO: Check against unicode validation regex from MW core's User::isValidUserName
 			return !!mw.Title.newFromText( value );
 		};
 		return new mw.widgets.UserInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
