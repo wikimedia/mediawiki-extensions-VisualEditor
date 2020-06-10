@@ -835,7 +835,7 @@ class VisualEditorHooks {
 			'discussion-message' => 'visualeditor-preference-core-discussion-link',
 			'requirements' => [
 				'javascript' => true,
-				'blacklist' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
+				'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 			]
 		];
 
@@ -856,7 +856,7 @@ class VisualEditorHooks {
 				'discussion-message' => 'visualeditor-preference-newwikitexteditor-discussion-link',
 				'requirements' => [
 					'javascript' => true,
-					'blacklist' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
+					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 				]
 			];
 		}
@@ -878,7 +878,7 @@ class VisualEditorHooks {
 				'discussion-message' => 'visualeditor-preference-visualdiffpage-discussion-link',
 				'requirements' => [
 					'javascript' => true,
-					'blacklist' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
+					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 				]
 			];
 		}
