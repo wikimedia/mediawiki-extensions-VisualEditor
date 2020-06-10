@@ -39,7 +39,7 @@ ve.dm.MWMagicLinkNode.static.matchTagNames = [ 'a' ];
 
 ve.dm.MWMagicLinkNode.static.matchRdfaTypes = [ 'mw:WikiLink', 'mw:ExtLink' ];
 
-ve.dm.MWMagicLinkNode.static.blacklistedAnnotationTypes = [ 'link' ];
+ve.dm.MWMagicLinkNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 /**
  * Determine whether the given `element` is a magic link.

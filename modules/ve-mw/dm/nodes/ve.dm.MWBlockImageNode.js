@@ -54,7 +54,7 @@ ve.dm.MWBlockImageNode.static.childNodeTypes = [ 'mwImageCaption' ];
 
 ve.dm.MWBlockImageNode.static.matchTagNames = [ 'figure' ];
 
-ve.dm.MWBlockImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
+ve.dm.MWBlockImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWBlockImageNode.static.classAttributes = {
 	'mw-image-border': { borderImage: true },

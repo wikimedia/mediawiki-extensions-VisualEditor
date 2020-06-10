@@ -520,7 +520,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getInsertionText = function () {
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getInsertionData = function () {
 	// If this is a new external link, insert an autonumbered link instead of a link annotation
-	// (applying the annotation on this later does nothing because of blacklistedAnnotationTypes).
+	// (applying the annotation on this later does nothing because of disallowedAnnotationTypes).
 	// Otherwise call parent method to figure out the text to insert and annotate.
 	if ( this.isNew && this.isExternal() ) {
 		return [

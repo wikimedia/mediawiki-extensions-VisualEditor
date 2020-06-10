@@ -39,7 +39,7 @@ ve.dm.MWNumberedExternalLinkNode.static.matchTagNames = [ 'a' ];
 
 ve.dm.MWNumberedExternalLinkNode.static.matchRdfaTypes = [ 'mw:ExtLink', 've:NumberedLink' ];
 
-ve.dm.MWNumberedExternalLinkNode.static.blacklistedAnnotationTypes = [ 'link' ];
+ve.dm.MWNumberedExternalLinkNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWNumberedExternalLinkNode.static.matchFunction = function ( domElement ) {
 	// Must be empty, or explicitly flagged as a numbered link. We can't just

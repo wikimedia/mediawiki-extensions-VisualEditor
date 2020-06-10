@@ -48,7 +48,7 @@ ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = function ( attribute ) {
 // be safe to remove when verion 1.5 content is no longer acceptable.
 ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span', 'figure-inline' ];
 
-ve.dm.MWInlineImageNode.static.blacklistedAnnotationTypes = [ 'link' ];
+ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, attributes, types,

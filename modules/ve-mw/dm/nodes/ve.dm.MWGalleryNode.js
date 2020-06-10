@@ -39,7 +39,7 @@ ve.dm.MWGalleryNode.static.matchTagNames = [ 'ul' ];
 
 ve.dm.MWGalleryNode.static.childNodeTypes = [ 'mwGalleryCaption', 'mwGalleryImage' ];
 
-ve.dm.MWGalleryNode.static.blacklistedAnnotationTypes = [ 'link' ];
+ve.dm.MWGalleryNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWGalleryNode.static.cloneElement = function () {
 	// Parent method
