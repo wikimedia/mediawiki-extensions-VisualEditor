@@ -95,7 +95,7 @@ ve.dm.MWIncludesNode.prototype.getWikitextTag = function () {
 		'mw:Includes/NoInclude/End': '</noinclude>',
 		'mw:Includes/OnlyInclude': '<onlyinclude>',
 		'mw:Includes/OnlyInclude/End': '</onlyinclude>',
-		'mw:Includes/IncludeOnly': '<includeonly />'
+		'mw:Includes/IncludeOnly': '<includeonly>…</includeonly>'
 	};
 	return map[ this.getAttribute( 'type' ) ];
 };
