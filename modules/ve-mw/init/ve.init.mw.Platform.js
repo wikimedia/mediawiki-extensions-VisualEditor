@@ -61,7 +61,7 @@ ve.init.mw.Platform.prototype.notify = function ( message, title, options ) {
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.getMetadataIdRegExp = function () {
-	return /^mw[a-zA-Z0-9\-_]{2,6}$/;
+	return mw.libs.ve.restbaseIdRegExp;
 };
 
 /** @inheritdoc */

@@ -107,7 +107,7 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 
 	// Don't immediately chain, as this.parsoidRequest must be abortable
 	this.parsoidRequest.then( function ( response ) {
-		var htmlDoc, doc, surface, elementsWithIds, len;
+		var htmlDoc, doc, surface;
 
 		if ( ve.getProp( response, 'visualeditor', 'result' ) !== 'success' ) {
 			return failure();
@@ -116,12 +116,7 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 		htmlDoc = ve.createDocumentFromHtml( response.visualeditor.content );
 
 		// Strip RESTBase IDs
-		elementsWithIds = htmlDoc.querySelectorAll( '[id]' );
-		for ( i = 0, len = elementsWithIds.length; i < len; i++ ) {
-			if ( elementsWithIds[ i ].getAttribute( 'id' ).match( ve.init.platform.getMetadataIdRegExp() ) ) {
-				elementsWithIds[ i ].removeAttribute( 'id' );
-			}
-		}
+		mw.libs.ve.stripRestbaseIds( htmlDoc );
 
 		// Strip legacy IDs, for example in section headings
 		mw.libs.ve.stripParsoidFallbackIds( htmlDoc.body );

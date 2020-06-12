@@ -35,17 +35,10 @@
 				// This method is only called after actually loading these, see `parseDocumentModulePromise`
 				// eslint-disable-next-line no-undef
 				targetClass = ve.init.mw.ArticleTarget,
-				// eslint-disable-next-line no-undef
-				metadataIdRegExp = ve.init.platform.getMetadataIdRegExp(),
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
 				doc = targetClass.static.parseDocument( data.content, 'visual', section, section !== null );
-				// Strip RESTBase IDs
-				Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
-					if ( element.id.match( metadataIdRegExp ) ) {
-						element.removeAttribute( 'id' );
-					}
-				} );
+				mw.libs.ve.stripRestbaseIds( doc );
 				return targetClass.static.createModelFromDom( doc, 'visual' );
 			}
 			return null;
