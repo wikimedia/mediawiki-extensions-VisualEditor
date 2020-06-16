@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ganbarzada"
+			"Ganbarzada",
+			"Patriot Kur"
 		]
 	},
 	"tooltip-ca-ve-edit": "İm səhifə sərost kardey",
 	"visualeditor-ca-editsource": "Mətni dəgiş bıkə",
-	"visualeditor-ca-editsource-section": "Mətni dəgiş bikə"
+	"visualeditor-ca-editsource-section": "Mətni dəgiş bikə",
+	"visualeditor-mweditmodesource-warning-cancel": "Ləğv karde"
 }
