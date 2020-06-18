@@ -25,12 +25,6 @@ OO.inheritClass( ve.ui.MWLinkAction, ve.ui.LinkAction );
 
 /* Static Properties */
 
-/**
- * List of allowed methods for the action.
- *
- * @static
- * @property
- */
 ve.ui.MWLinkAction.static.methods = ve.ui.MWLinkAction.super.static.methods.concat( [ 'open', 'autolinkMagicLink' ] );
 
 /* Static methods */

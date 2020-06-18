@@ -18,7 +18,7 @@
  * actual MediaWiki integration and VisualEditor library.
  *
  * @class mw.libs.ve
- * @alias ve.init.mw.DesktopArticleTarget.init
+ * @alternateClassName ve.init.mw.DesktopArticleTarget.init
  * @singleton
  */
 ( function () {

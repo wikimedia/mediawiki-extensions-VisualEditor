@@ -29,12 +29,6 @@ OO.inheritClass( ve.ui.MWSaveDialogAction, ve.ui.Action );
 
 ve.ui.MWSaveDialogAction.static.name = 'mwSaveDialog';
 
-/**
- * List of allowed methods for the action.
- *
- * @static
- * @property
- */
 ve.ui.MWSaveDialogAction.static.methods = [ 'save', 'review', 'preview' ];
 
 /* Methods */

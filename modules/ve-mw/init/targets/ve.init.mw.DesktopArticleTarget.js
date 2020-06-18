@@ -131,7 +131,7 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
  * receive a compatibility warning. Blacklisting is handled in DesktopArticleTarget.init.
  *
  * @static
- * @property
+ * @property {Object}
  */
 ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	// The key is the browser name returned by jQuery.client
