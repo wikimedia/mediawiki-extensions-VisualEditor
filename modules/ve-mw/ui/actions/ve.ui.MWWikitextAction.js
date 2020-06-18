@@ -26,12 +26,6 @@ OO.inheritClass( ve.ui.MWWikitextAction, ve.ui.Action );
 
 ve.ui.MWWikitextAction.static.name = 'mwWikitext';
 
-/**
- * List of allowed methods for the action.
- *
- * @static
- * @property
- */
 ve.ui.MWWikitextAction.static.methods = [ 'toggleWrapSelection', 'wrapSelection', 'wrapLine' ];
 
 /* Methods */
