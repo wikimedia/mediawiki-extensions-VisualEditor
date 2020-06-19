@@ -108,8 +108,7 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 				surface = ve.init.target.getSurface();
 			this.titleButton.setDisabled( true );
 			this.wikitext.pushPending();
-			// "true" param works on ArticleTargets
-			ve.init.target.getWikitextFragment( surface.getModel().getDocument(), true ).then( function ( wikitext ) {
+			ve.init.target.getWikitextFragment( surface.getModel().getDocument() ).then( function ( wikitext ) {
 				dialog.wikitext.setValue( wikitext.trim() );
 				dialog.wikitext.$input.scrollTop( 0 );
 				dialog.wikitext.popPending();

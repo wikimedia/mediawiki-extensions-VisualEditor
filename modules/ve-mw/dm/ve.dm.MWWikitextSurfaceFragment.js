@@ -136,7 +136,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 		return ve.createDeferred().resolve( '' ).promise();
 	}
 
-	wikitextPromise = ve.init.target.getWikitextFragment( doc );
+	wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
 
 	// TODO: Emit an event to trigger the progress bar
 	progressPromise = ve.init.target.getSurface().createProgress(

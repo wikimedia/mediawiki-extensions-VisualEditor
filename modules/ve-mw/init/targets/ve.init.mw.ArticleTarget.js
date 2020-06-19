@@ -1637,23 +1637,6 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 };
 
 /**
- * @param {ve.dm.Document} doc Document
- * @param {boolean} [useRevisionData] Use revision data
- * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
- */
-ve.init.mw.ArticleTarget.prototype.getWikitextFragment = function ( doc, useRevisionData ) {
-	var params = {};
-	if ( useRevisionData ) {
-		params = {
-			page: this.getPageName(),
-			oldid: this.revid,
-			etag: this.etag
-		};
-	}
-	return ve.init.mw.ArticleTarget.super.prototype.getWikitextFragment.call( this, doc, params );
-};
-
-/**
  * Get list of edit notices.
  *
  * @return {Array} List of edit notices

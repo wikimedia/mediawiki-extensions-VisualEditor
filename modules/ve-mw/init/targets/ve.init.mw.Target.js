@@ -501,22 +501,28 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
  * Get a wikitext fragment from a document
  *
  * @param {ve.dm.Document} doc Document
- * @param {Object} [extraParams] Extra params, e.g. revision data
+ * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
-ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, extraParams ) {
+ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) {
 	var xhr, params;
 
 	// Shortcut for empty document
 	if ( !doc.data.hasContent() ) {
-		return ve.createDeferred().resolve( '' ).promise();
+		return ve.createDeferred().resolve( '' );
 	}
 
-	params = ve.extendObject( {
+	params = {
 		action: 'visualeditoredit',
 		paction: 'serialize',
-		html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML
-	}, extraParams );
+		html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+		page: this.getPageName()
+	};
+
+	if ( useRevision === undefined || useRevision ) {
+		params.oldid = this.revid;
+		params.etag = this.etag;
+	}
 
 	xhr = this.getContentApi( doc ).postWithToken( 'csrf',
 		params,
@@ -527,7 +533,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, extraParams ) 
 		if ( response.visualeditoredit ) {
 			return response.visualeditoredit.content;
 		}
-		return ve.createDeferred().reject().promise();
+		return ve.createDeferred().reject();
 	} ).promise( { abort: xhr.abort } );
 };
 
