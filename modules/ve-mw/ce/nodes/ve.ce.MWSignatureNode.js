@@ -10,7 +10,7 @@
  * inserted into the ContentEditable document.
  *
  * @class
- * @extends ve.ce.MWTransclusionInlineNode
+ * @extends ve.ce.LeafNode
  *
  * @constructor
  * @param {ve.dm.MWSignatureNode} model Model to observe
@@ -19,6 +19,10 @@
 ve.ce.MWSignatureNode = function VeCeMWSignatureNode() {
 	// Parent constructor
 	ve.ce.MWSignatureNode.super.apply( this, arguments );
+
+	// Mixin constructors
+	ve.ce.GeneratedContentNode.call( this );
+	ve.ce.FocusableNode.call( this );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-mwSignatureNode' );
@@ -32,7 +36,9 @@ ve.ce.MWSignatureNode = function VeCeMWSignatureNode() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ce.MWSignatureNode, ve.ce.MWTransclusionInlineNode );
+OO.inheritClass( ve.ce.MWSignatureNode, ve.ce.LeafNode );
+OO.mixinClass( ve.ce.MWSignatureNode, ve.ce.GeneratedContentNode );
+OO.mixinClass( ve.ce.MWSignatureNode, ve.ce.FocusableNode );
 
 /* Static Properties */
 
@@ -43,6 +49,11 @@ ve.ce.MWSignatureNode.static.tagName = 'span';
 ve.ce.MWSignatureNode.static.primaryCommandName = 'mwSignature';
 
 ve.ce.MWSignatureNode.static.liveSignatures = [];
+
+// Set a description for focusable node tooltip
+ve.ce.MWSignatureNode.static.getDescription = function () {
+	return ve.msg( 'visualeditor-mwsignature-tool' );
+};
 
 // Update the timestamp on inserted signatures every minute.
 setInterval( function () {
@@ -93,10 +104,10 @@ ve.ce.MWSignatureNode.prototype.onTeardown = function () {
 };
 
 /**
- * @inheritdoc
+ * @inheritdoc ve.ce.GeneratedContentNode
  */
 ve.ce.MWSignatureNode.prototype.generateContents = function () {
-	var wikitext, signatureNode, deferred, xhr;
+	var wikitext, deferred, xhr, doc;
 	// Parsoid doesn't support pre-save transforms. PHP parser doesn't support Parsoid's
 	// meta attributes (that may or may not be required).
 
@@ -105,10 +116,10 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 
 	// We must have only one top-level node, this is the easiest way.
 	wikitext = '<span>~~~~</span>';
-	signatureNode = this;
+	doc = this.getModel().getDocument();
 
 	deferred = ve.createDeferred();
-	xhr = ve.init.target.getContentApi( this.getModel().getDocument() ).post( {
+	xhr = ve.init.target.getContentApi( doc ).post( {
 		action: 'parse',
 		text: wikitext,
 		contentmodel: 'wikitext',
@@ -118,18 +129,22 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 		.done( function ( resp ) {
 			var wikitext = ve.getProp( resp, 'parse', 'text' );
 			if ( wikitext ) {
-				// Call parent method with the wikitext with PST applied.
-				ve.ce.MWSignatureNode.parent.prototype.generateContents.call(
-					signatureNode,
-					{ wikitext: wikitext }
-				).done( function ( nodes ) {
-					deferred.resolve( nodes );
+				ve.init.target.parseWikitextFragment( wikitext, true, doc ).then( function ( response ) {
+					if ( ve.getProp( response, 'visualeditor', 'result' ) !== 'success' ) {
+						deferred.reject();
+						return;
+					}
+
+					// Simplified case of template rendering, don't need to worry about filtering etc
+					deferred.resolve( $( response.visualeditor.content ).contents().toArray() );
 				} );
 			} else {
-				signatureNode.onParseError( deferred );
+				deferred.reject();
 			}
 		} )
-		.fail( this.onParseError.bind( this, deferred ) );
+		.fail( function () {
+			deferred.reject();
+		} );
 
 	return deferred.promise( { abort: xhr.abort } );
 };

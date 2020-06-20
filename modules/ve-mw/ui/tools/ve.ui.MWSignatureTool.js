@@ -39,7 +39,7 @@ if ( mw.Title.wantSignaturesNamespace( mw.config.get( 'wgNamespaceNumber' ) ) ) 
 		new ve.ui.Command( 'mwSignature', 'content', 'insert', {
 			args: [
 				[
-					{ type: 'mwSignature', attributes: {} },
+					{ type: 'mwSignature' },
 					{ type: '/mwSignature' }
 				],
 				// annotate
