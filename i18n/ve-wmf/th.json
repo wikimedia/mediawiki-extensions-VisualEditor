@@ -4,12 +4,13 @@
 			"Aefgh39622",
 			"Ans",
 			"Horus",
+			"Patsagorn Y.",
 			"Pilarbini",
 			"Supasate",
 			"Taweetham"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|แก้ไขแบบเห็นภาพ]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|การแก้ไขแบบเห็นภาพ]]",
 	"tag-visualeditor-description": "แก้ไขโดยใช้ [[{{MediaWiki:visualeditor-descriptionpagelink}}|เครื่องมือแก้ไขแบบเห็นภาพ]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|การแก้ไขแบบเห็นภาพ: ตรวจสอบ]]",
 	"tag-visualeditor-needcheck-description": "การแก้ไขที่ใช้[[{{MediaWiki:visualeditor-descriptionpagelink}}|ตัวแก้ไขแบบเห็นภาพ]]ซึ่งระบบตรวจพบข้อความวิกิที่อาจถูกเปลี่ยนแปลงโดยไม่ได้ตั้งใจ",
