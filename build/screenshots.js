@@ -6,7 +6,7 @@ const accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
 	Jimp = require( 'jimp' ),
 	username = process.env.SAUCE_ONDEMAND_USERNAME,
 	webdriver = require( 'selenium-webdriver' ),
-	TIMEOUT = 40 * 1000;
+	TIMEOUT = 10 * 1000;
 
 function createScreenshotEnvironment( test, beforeEach ) {
 	let clientSize, driver;
@@ -31,7 +31,10 @@ function createScreenshotEnvironment( test, beforeEach ) {
 		driver.manage().timeouts().setScriptTimeout( TIMEOUT );
 		driver.manage().window().setSize( 1200, 1000 );
 
-		driver.get( 'https://en.wikipedia.org/wiki/Help:Sample_page?veaction=edit&uselang=' + lang );
+		driver.get( 'https://en.wikipedia.org/wiki/Help:Sample_page?veaction=edit&uselang=' + lang )
+			.then( null, function ( e ) {
+				console.error( e.message );
+			} );
 		driver.wait(
 			driver.executeAsyncScript(
 				require( './screenshots-client/utils.js' )
@@ -57,7 +60,10 @@ function createScreenshotEnvironment( test, beforeEach ) {
 	} );
 
 	test.afterEach( function () {
-		driver.quit();
+		driver.quit()
+			.then( null, function ( e ) {
+				console.error( e.message );
+			} );
 	} );
 
 	function cropScreenshot( filename, imageBuffer, rect, padding ) {
