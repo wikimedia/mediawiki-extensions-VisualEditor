@@ -184,7 +184,7 @@
 	"Hooks": {
 		"BeforePageDisplay": "VisualEditorHooks::onBeforePageDisplay",
 		"SkinEditSectionLinks": "VisualEditorHooks::onSkinEditSectionLinks",
-		"DiffViewHeader": "VisualEditorHooks::onDiffViewHeader",
+		"DifferenceEngineViewHeader": "VisualEditorHooks::onDifferenceEngineViewHeader",
 		"GetBetaFeaturePreferences": "VisualEditorHooks::onGetBetaPreferences",
 		"GetPreferences": "VisualEditorHooks::onGetPreferences",
 		"PreferencesFormPreSave": "VisualEditorHooks::onPreferencesFormPreSave",
