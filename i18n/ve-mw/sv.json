@@ -157,7 +157,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "Omdirigera denna sida till",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Målsidan för omdirigering",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Du kan förhindra att denna omdirigering uppdateras automatiskt när sidan till vilken den omdirigeras flyttas, i de mycket sällsynta fall där detta behövs.",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Förhindra att denna redirect från att uppdateras då target-sidan är flyttad.",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Förhindra att denna omdirigering uppdateras när målsidan flyttas.",
 	"visualeditor-dialog-meta-settings-section": "Sidinställningar",
 	"visualeditor-dialog-meta-settings-toc-default": "Vid behov",
 	"visualeditor-dialog-meta-settings-toc-disable": "Aldrig",
