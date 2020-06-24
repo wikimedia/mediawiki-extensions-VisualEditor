@@ -99,18 +99,12 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Handler for the DiffViewHeader hook, to add visual diffs code as configured
+	 * Handler for the DifferenceEngineViewHeader hook, to add visual diffs code as configured
 	 *
 	 * @param DifferenceEngine $diff The difference engine
-	 * @param Revision|null $oldRev The old revision
-	 * @param Revision|null $newRev The new revision
 	 * @return void
 	 */
-	public static function onDiffViewHeader(
-		DifferenceEngine $diff,
-		Revision $oldRev = null,
-		Revision $newRev = null
-	) {
+	public static function onDifferenceEngineViewHeader( DifferenceEngine $diff ) {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 		$output = RequestContext::getMain()->getOutput();
