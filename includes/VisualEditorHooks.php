@@ -962,24 +962,25 @@ class VisualEditorHooks {
 		$coreConfig = RequestContext::getMain()->getConfig();
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
+		$extensionRegistry = ExtensionRegistry::getInstance();
 		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 		$availableContentModels = array_filter(
 			array_merge(
-				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
+				$extensionRegistry->getAttribute( 'VisualEditorAvailableContentModels' ),
 				$veConfig->get( 'VisualEditorAvailableContentModels' )
 			)
 		);
 
 		$vars['wgVisualEditorConfig'] = [
-			'usePageImages' => ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ),
-			'usePageDescriptions' => defined( 'WBC_VERSION' ),
+			'usePageImages' => $extensionRegistry->isLoaded( 'PageImages' ),
+			'usePageDescriptions' => $extensionRegistry->isLoaded( 'WikibaseClient' ),
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preloadModules' => $veConfig->get( 'VisualEditorPreloadModules' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
 			'pluginModules' => array_merge(
-				ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorPluginModules' ),
+				$extensionRegistry->getAttribute( 'VisualEditorPluginModules' ),
 				// @todo deprecate the global setting
 				$veConfig->get( 'VisualEditorPluginModules' )
 			),
