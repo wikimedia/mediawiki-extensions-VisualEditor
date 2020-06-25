@@ -43,6 +43,8 @@ function createScreenshotEnvironment( test ) {
 			}, function ( e ) {
 				// Log error (timeout)
 				console.error( e.message );
+				// Setup failed, set clientSize to null so no screenshots are generated
+				clientSize = null;
 			} )
 		);
 	} );
@@ -72,6 +74,11 @@ function createScreenshotEnvironment( test ) {
 	}
 
 	function runScreenshotTest( name, lang, clientScript, padding ) {
+		if ( !clientSize ) {
+			// Setup failed, don't generated a broken screenshot
+			return;
+		}
+
 		const filename = './screenshots/' + name + '-' + lang + '.png';
 
 		driver.manage().timeouts().setScriptTimeout( TIMEOUT );
