@@ -8,7 +8,7 @@ const accessKey = process.env.SAUCE_ONDEMAND_ACCESS_KEY,
 	webdriver = require( 'selenium-webdriver' ),
 	TIMEOUT = 10 * 1000;
 
-function createScreenshotEnvironment( test, beforeEach ) {
+function createScreenshotEnvironment( test ) {
 	let clientSize, driver;
 
 	test.beforeEach( function () {
@@ -45,18 +45,6 @@ function createScreenshotEnvironment( test, beforeEach ) {
 				console.error( e.message );
 			} )
 		);
-		if ( beforeEach ) {
-			driver.manage().timeouts().setScriptTimeout( TIMEOUT );
-			driver.wait(
-				driver.executeAsyncScript( beforeEach ).then(
-					function () {},
-					function ( e ) {
-						// Log error (timeout)
-						console.error( e.message );
-					}
-				)
-			);
-		}
 	} );
 
 	test.afterEach( function () {
