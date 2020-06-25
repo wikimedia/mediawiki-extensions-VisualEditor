@@ -31,7 +31,7 @@ function createScreenshotEnvironment( test, beforeEach ) {
 		driver.manage().timeouts().setScriptTimeout( TIMEOUT );
 		driver.manage().window().setSize( 1200, 1000 );
 
-		driver.get( 'https://en.wikipedia.org/wiki/Help:Sample_page?veaction=edit&uselang=' + lang )
+		driver.get( 'https://en.wikipedia.org/wiki/Help:Sample_page?veaction=edit&vehidebetadialog=1&uselang=' + lang )
 			.then( null, function ( e ) {
 				console.error( e.message );
 			} );

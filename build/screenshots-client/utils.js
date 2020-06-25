@@ -100,8 +100,7 @@ module.exports = function () {
 		}
 	};
 
-	// Suppress welcome dialog
-	mw.storage.set( 've-beta-welcome-dialog', 1 );
+	// Welcome dialog suppressed by query string (vehidebetadialog)
 	// Suppress user education indicators
 	mw.storage.set( 've-hideusered', 1 );
 	mw.hook( 've.activationComplete' ).add( function () {
