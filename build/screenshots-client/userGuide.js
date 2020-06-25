@@ -101,27 +101,39 @@ module.exports = {
 		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.categories, false, true );
 	},
 	save: function () {
-		var done = arguments[ arguments.length - 1 ];
+		var done = arguments[ arguments.length - 1 ],
+			surface = ve.init.target.surface;
+
+		surface.dialogs.once( 'opening', function ( win, opening ) {
+			opening.then( function () {
+				setTimeout( function () {
+					done(
+						seleniumUtils.getBoundingRect( [
+							ve.init.target.surface.dialogs.currentWindow.$frame[ 0 ]
+						] )
+					);
+				}, 500 );
+			} );
+		} );
 		ve.init.target.toolbarSaveButton.onSelect();
-		setTimeout( function () {
-			done(
-				seleniumUtils.getBoundingRect( [
-					ve.init.target.surface.dialogs.currentWindow.$frame[ 0 ]
-				] )
-			);
-		}, 500 );
 	},
 	specialCharacters: function () {
-		var done = arguments[ arguments.length - 1 ];
+		var done = arguments[ arguments.length - 1 ],
+			surface = ve.init.target.surface;
+
+		surface.getToolbarDialogs().once( 'opening', function ( win, opening ) {
+			opening.then( function () {
+				setTimeout( function () {
+					done(
+						seleniumUtils.getBoundingRect( [
+							ve.init.target.toolbar.tools.specialCharacter.$element[ 0 ],
+							ve.init.target.surface.toolbarDialogs.$element[ 0 ]
+						] )
+					);
+				}, 500 );
+			} );
+		} );
 		ve.init.target.toolbar.tools.specialCharacter.onSelect();
-		setTimeout( function () {
-			done(
-				seleniumUtils.getBoundingRect( [
-					ve.init.target.toolbar.tools.specialCharacter.$element[ 0 ],
-					ve.init.target.surface.toolbarDialogs.$element[ 0 ]
-				] )
-			);
-		}, 1000 );
 	},
 	formula: function () {
 		var done = arguments[ arguments.length - 1 ],
