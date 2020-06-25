@@ -177,7 +177,7 @@ module.exports = {
 	toolbarCite: function () {
 		var done = arguments[ arguments.length - 1 ];
 
-		ve.init.target.$element.css( 'font-size', '250%' );
+		ve.init.target.toolbar.tools.citoid.$element.css( 'font-size', '250%' );
 		// Wait for re-paint
 		setTimeout( function () {
 			done(
