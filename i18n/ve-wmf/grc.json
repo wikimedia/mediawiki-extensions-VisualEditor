@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gts-tg"
+			"Gts-tg",
+			"PastelKos"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Ὀπτική μεταγραφή]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Ὀπτικὴ μεταγραφή]]"
 }

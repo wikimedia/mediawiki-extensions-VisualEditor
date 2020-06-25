@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gts-tg"
+			"Gts-tg",
+			"PastelKos"
 		]
 	},
 	"tooltip-ca-ve-edit": "Μεταγράφειν τήνδε τὴν δέλτον",
@@ -9,5 +10,5 @@
 	"visualeditor-ca-createsource": "Ποιῆσαι τὴν δέλτον",
 	"visualeditor-ca-editsource": "Μεταγράφειν πηγήν",
 	"visualeditor-ca-editsource-section": "Μεταγράφειν πηγήν",
-	"visualeditor-descriptionpagelink": "Project:Ὀπτικός ἐπεξεργαστής"
+	"visualeditor-descriptionpagelink": "Project:Ὀπτικὸς ἐπεξεργαστής"
 }
