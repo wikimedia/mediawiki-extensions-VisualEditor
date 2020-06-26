@@ -20,7 +20,7 @@
 		"grunt-mocha-test": "0.13.3",
 		"grunt-stylelint": "0.15.0",
 		"grunt-tyops": "0.1.0",
-		"jimp": "0.9.6",
+		"jimp": "0.13.0",
 		"mocha": "5.2.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
