@@ -28,14 +28,14 @@ trait ApiParsoidTrait {
 	/**
 	 * @return LoggerInterface
 	 */
-	protected function getLogger() {
+	protected function getLogger() : LoggerInterface {
 		return $this->logger ?: new NullLogger();
 	}
 
 	/**
 	 * @param LoggerInterface $logger
 	 */
-	protected function setLogger( $logger ) {
+	protected function setLogger( LoggerInterface $logger ) {
 		$this->logger = $logger;
 	}
 
@@ -49,7 +49,7 @@ trait ApiParsoidTrait {
 	 *
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
-	protected function getVRSObject() {
+	protected function getVRSObject() : VirtualRESTService {
 		// the params array to create the service object with
 		$params = [];
 		// the VRS class to use, defaults to Parsoid
@@ -89,7 +89,7 @@ trait ApiParsoidTrait {
 	 *
 	 * @return VirtualRESTServiceClient
 	 */
-	protected function getVRSClient() {
+	protected function getVRSClient() : VirtualRESTServiceClient {
 		if ( !$this->serviceClient ) {
 			$this->serviceClient = new VirtualRESTServiceClient(
 				MediaWikiServices::getInstance()->getHttpRequestFactory()->createMultiClient() );
@@ -108,7 +108,9 @@ trait ApiParsoidTrait {
 	 * @param array $reqheaders Request headers
 	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
-	protected function requestRestbase( Title $title, $method, $path, $params, $reqheaders = [] ) {
+	protected function requestRestbase(
+		Title $title, string $method, string $path, array $params, array $reqheaders = []
+	) : array {
 		$request = [
 			'method' => $method,
 			'url' => '/restbase/local/v1/' . $path
@@ -172,7 +174,7 @@ trait ApiParsoidTrait {
 	 * @param Title $title Page title
 	 * @return RevisionRecord A revision record
 	 */
-	protected function getLatestRevision( Title $title ) {
+	protected function getLatestRevision( Title $title ) : RevisionRecord {
 		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		$latestRevision = $revisionLookup->getRevisionByTitle( $title );
 		if ( $latestRevision !== null ) {
@@ -193,7 +195,7 @@ trait ApiParsoidTrait {
 	 *  Should be an integer but will validate and convert user input strings.
 	 * @return RevisionRecord A revision record
 	 */
-	protected function getValidRevision( Title $title, $oldid = null ) {
+	protected function getValidRevision( Title $title, $oldid = null ) : RevisionRecord {
 		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		$revision = null;
 		if ( $oldid === null || $oldid === 0 ) {
@@ -213,7 +215,7 @@ trait ApiParsoidTrait {
 	 * @param RevisionRecord $revision Page revision
 	 * @return array The RESTBase server's response
 	 */
-	protected function requestRestbasePageHtml( RevisionRecord $revision ) {
+	protected function requestRestbasePageHtml( RevisionRecord $revision ) : array {
 		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
 		return $this->requestRestbase(
 			$title,
@@ -235,7 +237,9 @@ trait ApiParsoidTrait {
 	 * @param string $etag The ETag to set in the HTTP request header
 	 * @return string Body of the RESTbase server's response
 	 */
-	protected function postData( $path, Title $title, $data, $parserParams, $etag ) {
+	protected function postData(
+		string $path, Title $title, array $data, array $parserParams, string $etag
+	) : string {
 		$path .= urlencode( $title->getPrefixedDBkey() );
 		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
 			$path .= '/' . $parserParams['oldid'];
@@ -273,7 +277,9 @@ trait ApiParsoidTrait {
 	 * @param string $etag The ETag to set in the HTTP request header
 	 * @return string Body of the RESTbase server's response
 	 */
-	protected function postHTML( Title $title, $html, $parserParams, $etag ) {
+	protected function postHTML(
+		Title $title, string $html, array $parserParams, string $etag
+	) : string {
 		return $this->postData(
 			'transform/html/to/wikitext/', $title,
 			[ 'html' => $html, 'scrub_wikitext' => 1 ], $parserParams, $etag
@@ -285,7 +291,7 @@ trait ApiParsoidTrait {
 	 * @param Title $title Title
 	 * @return Language Content language
 	 */
-	public static function getPageLanguage( Title $title ) {
+	public static function getPageLanguage( Title $title ) : Language {
 		if ( $title->isSpecial( 'CollabPad' ) ) {
 			// Use the site language for CollabPad, as getPageLanguage just
 			// returns the interface language for special pages.
