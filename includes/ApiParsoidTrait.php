@@ -9,6 +9,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -163,6 +164,65 @@ trait ApiParsoidTrait {
 			);
 		}
 		return $response;
+	}
+
+	/**
+	 * Get the latest revision of a title
+	 *
+	 * @param Title $title Page title
+	 * @return RevisionRecord A revision record
+	 */
+	protected function getLatestRevision( Title $title ) {
+		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$latestRevision = $revisionLookup->getRevisionByTitle( $title );
+		if ( $latestRevision !== null ) {
+			return $latestRevision;
+		}
+		$this->dieWithError( 'apierror-visualeditor-latestnotfound', 'latestnotfound' );
+	}
+
+	/**
+	 * Get a specific revision of a title
+	 *
+	 * If the oldid is ommitted or is 0, the latest revision will be fetched.
+	 *
+	 * If the oldid is invalid, an API error will be reported.
+	 *
+	 * @param Title $title Page title
+	 * @param int|string|null $oldid Optional revision ID.
+	 *  Should be an integer but will validate and convert user input strings.
+	 * @return RevisionRecord A revision record
+	 */
+	protected function getValidRevision( Title $title, $oldid = null ) {
+		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$revision = null;
+		if ( $oldid === null || $oldid === 0 ) {
+			return $this->getLatestRevision( $title );
+		} else {
+			$revisionRecord = $revisionLookup->getRevisionById( $oldid );
+			if ( $revisionRecord ) {
+				return $revisionRecord;
+			}
+		}
+		$this->dieWithError( [ 'apierror-nosuchrevid', $oldid ], 'oldidnotfound' );
+	}
+
+	/**
+	 * Request page HTML from RESTBase
+	 *
+	 * @param RevisionRecord $revision Page revision
+	 * @return array The RESTBase server's response
+	 */
+	protected function requestRestbasePageHtml( RevisionRecord $revision ) {
+		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
+		return $this->requestRestbase(
+			$title,
+			'GET',
+			'page/html/' . urlencode( $title->getPrefixedDBkey() ) .
+				'/' . $revision->getId() .
+				'?redirect=false&stash=true',
+			[]
+		);
 	}
 
 	/**
