@@ -9,6 +9,10 @@
 	padding-right: 0.25em;
 }
 
+.ve-ui-mwParameterResultWidget.oo-ui-optionWidget-highlighted {
+	background-color: #e1f3ff;
+}
+
 .ve-ui-mwParameterResultWidget .oo-ui-optionWidget-icon {
 	top: 0.25em;
 	margin-top: 0;
