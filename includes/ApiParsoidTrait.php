@@ -234,11 +234,11 @@ trait ApiParsoidTrait {
 	 * @param Title $title The title of the page
 	 * @param array $data An array of the HTML and the 'scrub_wikitext' option
 	 * @param array $parserParams Parsoid parser parameters to pass in
-	 * @param string $etag The ETag to set in the HTTP request header
+	 * @param string|null $etag The ETag to set in the HTTP request header
 	 * @return string Body of the RESTbase server's response
 	 */
 	protected function postData(
-		string $path, Title $title, array $data, array $parserParams, string $etag
+		string $path, Title $title, array $data, array $parserParams, ?string $etag
 	) : string {
 		$path .= urlencode( $title->getPrefixedDBkey() );
 		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
@@ -274,11 +274,11 @@ trait ApiParsoidTrait {
 	 * @param Title $title The title of the page
 	 * @param string $html The HTML of the page to be transformed
 	 * @param array $parserParams Parsoid parser parameters to pass in
-	 * @param string $etag The ETag to set in the HTTP request header
+	 * @param string|null $etag The ETag to set in the HTTP request header
 	 * @return string Body of the RESTbase server's response
 	 */
 	protected function postHTML(
-		Title $title, string $html, array $parserParams, string $etag
+		Title $title, string $html, array $parserParams, ?string $etag
 	) : string {
 		return $this->postData(
 			'transform/html/to/wikitext/', $title,
