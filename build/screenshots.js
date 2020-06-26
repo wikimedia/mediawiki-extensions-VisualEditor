@@ -66,11 +66,16 @@ function createScreenshotEnvironment( test ) {
 		const right = Math.min( clientSize.width, rect.left + rect.width + padding );
 		const bottom = Math.min( clientSize.height, rect.top + rect.height + padding );
 
-		return Jimp.read( imageBuffer ).then( function ( jimpImage ) {
-			jimpImage
-				.crop( left, top, right - left, bottom - top )
-				.write( filename );
-		} );
+		try {
+			return Jimp.read( imageBuffer ).then( function ( jimpImage ) {
+				jimpImage
+					.crop( left, top, right - left, bottom - top )
+					.write( filename );
+			} );
+		} catch ( e ) {
+			// Log error (memory?)
+			console.error( e );
+		}
 	}
 
 	function runScreenshotTest( name, lang, clientScript, padding ) {
