@@ -19,6 +19,7 @@ function createScreenshotEnvironment( test ) {
 			driver = new webdriver.Builder().withCapabilities( {
 				browserName: process.env.BROWSER,
 				platform: process.env.PLATFORM,
+				screenResolution: '1280x1024',
 				username: username,
 				accessKey: accessKey
 			} ).usingServer( 'http://' + username + ':' + accessKey +
