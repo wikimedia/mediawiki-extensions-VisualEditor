@@ -79,7 +79,7 @@ function createScreenshotEnvironment( test ) {
 		} );
 	}
 
-	function runScreenshotTest( name, lang, clientScript, padding ) {
+	function runScreenshotTest( lang, name, clientScript, padding ) {
 		if ( !clientSize ) {
 			// Setup failed, don't generated a broken screenshot
 			return;
