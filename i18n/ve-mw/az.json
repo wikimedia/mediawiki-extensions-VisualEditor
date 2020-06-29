@@ -8,6 +8,7 @@
 			"Interfase",
 			"Jduranboger",
 			"Toghrul Rahimli",
+			"Vesely35",
 			"Wertuose"
 		]
 	},
@@ -107,6 +108,9 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Alt başlıq 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Alt başlıq 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Alt başlıq 4",
+	"visualeditor-includes-noinclude-description": "Bu səhifədəki məzmun başqa bir səhifə tərəfindən istifadə edildikdə, buradakı uyğun markerə qədər məzmun daxil <strong>edilməyəcəkdir</strong>.\nDigər markerlər istifadə edə biləcəyi üçün bu markerlərdən kənarda məzmunu redaktə edərkən diqqətli olun.",
+	"visualeditor-includes-onlyinclude-description": "Bu səhifədəki məzmun başqa bir səhifə tərəfindən istifadə edildikdə,\n<strong>təkcə</strong> uyğun gələn son işaretçiyə qədər məzmun buradan daxil olacaq.  Digər markerlər istifadə edə biləcəyi üçün bu markerlər arasında məzmunu redaktə edərkən diqqətli olun.",
+	"visualeditor-includes-includeonly-description": "Bu səhifədəki məzmun başqa bir səhifə tərəfindən istifadə edildikdə, aşağıdakı əlavə məzmun buraya daxil olacaq:",
 	"visualeditor-languages-tool": "Dillər",
 	"visualeditor-linkinspector-illegal-title": "Yanlış səhifənin adı",
 	"visualeditor-mainnamespacepagelink": "Project:Əsas adlar fəzası",

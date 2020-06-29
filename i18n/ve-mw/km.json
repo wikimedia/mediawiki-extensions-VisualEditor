@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Pichnat Thong",
 			"Sovichet",
 			"គីមស៊្រុន"
 		]
@@ -161,6 +162,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "កូនចំណងជើង ៣",
 	"visualeditor-formatdropdown-format-mw-heading6": "កូនចំណងជើង ៤",
 	"visualeditor-generating-wikitext-progress": "បង្កើតអត្ថបទវិគី",
+	"visualeditor-includes-includeonly-description": "ខណៈមាតិកាពីទំព័រនេះត្រូវបានប្រើដោយទំព័រដទៃ មាតិកាបន្ថែមជាបន្តនឹងត្រូវបានចុះនៅទីនេះ:",
 	"visualeditor-languages-tool": "ភាសា",
 	"visualeditor-linkinspector-button-link-external": "វិបសាយ​ខាងក្រៅ",
 	"visualeditor-linkinspector-button-link-internal": "ស្វែងរកទំព័រ",

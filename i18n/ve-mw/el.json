@@ -209,6 +209,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Επίπεδο 4",
 	"visualeditor-formatdropdown-format-mw-heading6": "Επίπεδο 5",
 	"visualeditor-generating-wikitext-progress": "Δημιουργία κώδικα wiki",
+	"visualeditor-includes-includeonly-description": "Όταν το περιεχόμενο αυτής της σελίδας χρησιμοποιείται από άλλη σελίδα, το ακόλουθο πρόσθετο περιεχόμενο θα συμπεριληφθεί εδώ:",
 	"visualeditor-includes-documentation": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Μάθετε περισσότερα σχετικά με τη μερική ενσωμάτωση]",
 	"visualeditor-languages-tool": "Γλώσσες",
 	"visualeditor-linkinspector-button-link-external": "Εξωτερικός σύνδεσμος",
