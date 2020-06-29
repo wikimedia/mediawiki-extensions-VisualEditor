@@ -226,15 +226,23 @@ class ApiVisualEditor extends ApiBase {
 						}
 					}
 				} else {
-					$content = '';
-					Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
-					// @phan-suppress-next-line PhanSuspiciousValueComparison Known false positive with hooks
-					if ( $content === '' && !empty( $params['preload'] ) ) {
-						$content = $this->getPreloadContent(
-							$params['preload'], $params['preloadparams'], $title
-						);
-						$preloaded = true;
+					if ( isset( $params['wikitext'] ) ) {
+						$content = $params['wikitext'];
+						if ( $params['pst'] ) {
+							$content = $this->pstWikitext( $title, $content );
+						}
+					} else {
+						$content = '';
+						Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+						// @phan-suppress-next-line PhanSuspiciousValueComparison Known false positive with hooks
+						if ( $content === '' && !empty( $params['preload'] ) ) {
+							$content = $this->getPreloadContent(
+								$params['preload'], $params['preloadparams'], $title
+							);
+							$preloaded = true;
+						}
 					}
+
 					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
 						$response = $this->parseWikitextFragment( $title, $content, false, null, true );
 						$content = $response['body'];
