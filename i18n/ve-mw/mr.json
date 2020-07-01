@@ -11,6 +11,7 @@
 			"V.narsikar",
 			"Ydyashad",
 			"अभय नातू",
+			"ज्ञानदा गद्रे-फडके",
 			"संतोष दहिवळ"
 		]
 	},
@@ -143,10 +144,10 @@
 	"visualeditor-dialog-table-wikitable": "चौकटीबध्द (विकीसारणी)",
 	"visualeditor-dialog-template-title": "साचा",
 	"visualeditor-dialog-transclusion-absent-template": "\"$1\" हा साचा उपलब्ध नाही.",
-	"visualeditor-dialog-transclusion-add-content": "मजकुर जोडा",
+	"visualeditor-dialog-transclusion-add-content": "मजकूर जोडा",
 	"visualeditor-dialog-transclusion-add-param": "इतर माहिती",
 	"visualeditor-dialog-transclusion-add-template": "साचा जोडा:",
-	"visualeditor-dialog-transclusion-content": "मजकुर",
+	"visualeditor-dialog-transclusion-content": "मजकूर",
 	"visualeditor-dialog-transclusion-contextitem-description": "$1 पासून तयार केले गेले",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "नाकारलेले क्षेत्र",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "$1 हे क्षेत्र नाकारले",
