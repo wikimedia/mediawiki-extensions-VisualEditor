@@ -233,8 +233,11 @@ class ApiVisualEditor extends ApiBase {
 						}
 					} else {
 						$content = '';
+						if ( $title->getNamespace() == NS_MEDIAWIKI && $params['section'] !== 'new' ) {
+							// If this is a system message, get the default text.
+							$content = $title->getDefaultMessageText();
+						}
 						Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
-						// @phan-suppress-next-line PhanSuspiciousValueComparison Known false positive with hooks
 						if ( $content === '' && !empty( $params['preload'] ) ) {
 							$content = $this->getPreloadContent(
 								$params['preload'], $params['preloadparams'], $title
