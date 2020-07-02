@@ -209,7 +209,7 @@
 		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
 		postContent: function ( data, options ) {
-			var request, api, start;
+			var request, api, start, action;
 
 			options = options || {};
 			api = options.api || new mw.Api();
@@ -231,12 +231,14 @@
 				data
 			);
 
+			action = data.action;
+
 			request = api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
 
 			return request.then(
 				function ( response, jqxhr ) {
 					var eventData, fullEventName, error,
-						data = response.visualeditoredit;
+						data = response[ action ];
 
 					// Log data about the request if eventName was set
 					if ( options.track && options.eventName ) {
