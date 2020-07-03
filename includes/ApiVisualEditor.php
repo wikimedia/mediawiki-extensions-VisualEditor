@@ -11,6 +11,7 @@
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
 
 class ApiVisualEditor extends ApiBase {
 
@@ -91,7 +92,7 @@ class ApiVisualEditor extends ApiBase {
 				$preloadPage = WikiPage::factory( $preloadTitle );
 			}
 
-			$content = $preloadPage->getContent( Revision::RAW );
+			$content = $preloadPage->getContent( RevisionRecord::RAW );
 			$parserOptions = ParserOptions::newFromUser( $this->getUser() );
 
 			$content = $content->preloadTransform(
