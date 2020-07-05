@@ -434,6 +434,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 
 	this.canEdit = data.canEdit;
 
+	// Zero indicates that the page doesn't exist
+	docRevId = 0;
 	aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
 	if ( aboutDoc ) {
 		docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
@@ -441,7 +443,9 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			docRevId = parseInt( docRevIdMatches[ 1 ] );
 		}
 	}
-	if ( docRevId && docRevId !== this.revid ) {
+	// There is no docRevId in source mode (doc is just a string).
+	// After switching with changes, the doc isn't associated with any particular revid.
+	if ( this.getDefaultMode() === 'visual' && !( this.switched && this.fromEditedState ) && docRevId !== this.revid ) {
 		if ( this.retriedRevIdConflict ) {
 			// Retried already, just error the second time.
 			this.loadFail( 've-api', { errors: [ {
