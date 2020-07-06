@@ -22,10 +22,10 @@
 	"visualeditor-feedback-tool": "Повратне информације",
 	"visualeditor-help-label": "Кориснички водич",
 	"visualeditor-help-title": "Водич за употребу уређивача",
-	"visualeditor-welcomedialog-action": "Почни са уређивањем",
-	"visualeditor-welcomedialog-content": "Свако може да уређује, а свако побољшање помаже.",
+	"visualeditor-welcomedialog-action": "Започни уређивање",
+	"visualeditor-welcomedialog-content": "Овде свако може да уређује и побољшава садржај.",
 	"visualeditor-welcomedialog-content-thanks": "Хвала вам што помажете у ширењу знања!",
 	"visualeditor-welcomedialog-switch": "Пребаци ме на уређивање извора",
-	"visualeditor-welcomedialog-switch-ve": "Пребаци на визуелни уређивач",
+	"visualeditor-welcomedialog-switch-ve": "Пребаци ме на визуелни уређивач",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Добро дошли}} на {{GRAMMAR:акузатив|$2}}"
 }
