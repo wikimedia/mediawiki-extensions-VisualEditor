@@ -81,7 +81,7 @@
 			"value": false
 		},
 		"VisualEditorEnableVisualSectionEditing": {
-			"value": false
+			"value": "mobile"
 		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
