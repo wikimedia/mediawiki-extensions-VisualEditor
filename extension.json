@@ -2776,7 +2776,7 @@
 		"remoteExtPath": "VisualEditor"
 	},
 	"DefaultUserOptions": {
-		"visualeditor-enable": 0,
+		"visualeditor-enable": 1,
 		"visualeditor-betatempdisable": 0,
 		"visualeditor-newwikitext": 0,
 		"visualeditor-visualdiffpage": 0,
