@@ -19,7 +19,7 @@
  * @constructor
  * @param {VisualEditorOverlay} overlay Mobile frontend overlay
  * @param {Object} [config] Configuration options
- * @cfg {string} [section] Number of the section target should scroll to
+ * @cfg {string|null} [section] Number of the section target should scroll to
  */
 ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, config ) {
 	this.overlay = overlay;
@@ -34,7 +34,9 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	// Parent constructor
 	ve.init.mw.MobileArticleTarget.super.call( this, config );
 
-	this.section = config.section;
+	if ( config.section !== undefined ) {
+		this.section = config.section;
+	}
 
 	// Initialization
 	this.$element.addClass( 've-init-mw-mobileArticleTarget ve-init-mobileTarget' );
