@@ -39,12 +39,36 @@ class VisualEditorHooks {
 	 * Also ensure Parsoid extension is loaded when necessary.
 	 */
 	public static function onRegistration() {
-		global $wgVisualEditorAvailableNamespaces, $wgContentNamespaces;
+		global $wgVisualEditorAvailableNamespaces, $wgContentNamespaces,
+			$wgVisualEditorParsoidAutoConfig, $wgVirtualRestConfig, $wgRestAPIAdditionalRouteFiles;
+		// phpcs:ignore MediaWiki.NamingConventions.ValidGlobalName.allowedPrefix
+		global $IP;
 
 		foreach ( $wgContentNamespaces as $contentNamespace ) {
 			if ( !isset( $wgVisualEditorAvailableNamespaces[$contentNamespace] ) ) {
 				$wgVisualEditorAvailableNamespaces[$contentNamespace] = true;
 			}
+		}
+
+		// For the 1.35 LTS, Parsoid is loaded from includes/VEParsoid to provide a
+		// "zero configuration" VisualEditor experience. In Wikimedia production, we
+		// have $wgVisualEditorParsoidAutoConfig off (and $wgVirtualRestConfig set to
+		// point to a separate cluster which has the Parsoid extension installed), so
+		// this code won't be executed.
+		if (
+			$wgVisualEditorParsoidAutoConfig
+			&& !ExtensionRegistry::getInstance()->isLoaded( 'Parsoid' )
+			// Generally manually configuring VRS means that you're running
+			// Parsoid on a different host.  If you need to manually configure
+			// VRS, load the Parsoid extension explicitly.
+			&& !isset( $wgVirtualRestConfig['modules']['parsoid'] )
+			&& !isset( $wgVirtualRestConfig['modules']['restbase'] )
+		) {
+			// Only install these route files if we're auto-configuring and
+			// the parsoid extension isn't loaded, otherwise we'll conflict.
+			$wgRestAPIAdditionalRouteFiles[] = wfRelativePath(
+				__DIR__ . '/VEParsoid/parsoidRoutes.json', $IP
+			);
 		}
 	}
 
