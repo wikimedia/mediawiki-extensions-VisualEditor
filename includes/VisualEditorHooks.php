@@ -365,6 +365,13 @@ class VisualEditorHooks {
 	public static function getPreferredEditor(
 		User $user, WebRequest $req, $useWikitextInMultiTab = false
 	) {
+		// VisualEditor shouldn't even call this method when it's disabled, but it is a public API for
+		// other extensions (e.g. DiscussionTools), and the editor preferences might have surprising
+		// values if the user has tried VisualEditor in the past and then disabled it. (T257234)
+		if ( !self::enabledForUser( $user ) ) {
+			return 'wikitext';
+		}
+
 		switch ( $user->getOption( 'visualeditor-tabs' ) ) {
 			case 'prefer-ve':
 				return 'visualeditor';
