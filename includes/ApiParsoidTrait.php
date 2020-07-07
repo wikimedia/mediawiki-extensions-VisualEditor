@@ -50,6 +50,7 @@ trait ApiParsoidTrait {
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
 	protected function getVRSObject() : VirtualRESTService {
+		global $wgVisualEditorParsoidAutoConfig;
 		// the params array to create the service object with
 		$params = [];
 		// the VRS class to use, defaults to Parsoid
@@ -65,6 +66,9 @@ trait ApiParsoidTrait {
 		} elseif ( isset( $vrs['modules'] ) && isset( $vrs['modules']['parsoid'] ) ) {
 			// there's a global parsoid config, use it next
 			$params = $vrs['modules']['parsoid'];
+			$params['restbaseCompat'] = true;
+		} elseif ( $wgVisualEditorParsoidAutoConfig ) {
+			$params = $vrs['modules']['parsoid'] ?? [];
 			$params['restbaseCompat'] = true;
 		} else {
 			// No global modules defined, so no way to contact the document server.

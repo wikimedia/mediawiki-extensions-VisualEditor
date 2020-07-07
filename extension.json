@@ -28,6 +28,12 @@
 	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
+		"VisualEditorParsoidAutoConfig": {
+			"value": true
+		},
+		"VisualEditorParsoidSettings": {
+			"value": []
+		},
 		"VisualEditorPluginModules": {
 			"value": []
 		},
@@ -2791,6 +2797,9 @@
 	"SpecialPages": {
 		"CollabPad": "SpecialCollabPad"
 	},
+	"AutoloadNamespaces": {
+		"VEParsoid\\": "includes/VEParsoid/src"
+	},
 	"AutoloadClasses": {
 		"ApiParsoidTrait": "includes/ApiParsoidTrait.php",
 		"ApiVisualEditor": "includes/ApiVisualEditor.php",
@@ -2800,6 +2809,9 @@
 		"VisualEditorDataModule": "includes/VisualEditorDataModule.php",
 		"VisualEditorDesktopArticleTargetInitModule": "includes/VisualEditorDesktopArticleTargetInitModule.php"
 	},
+	"ServiceWiringFiles": [
+		"includes/VEParsoid/ServiceWiring.php"
+	],
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
 	},
