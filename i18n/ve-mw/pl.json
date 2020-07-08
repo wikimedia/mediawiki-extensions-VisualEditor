@@ -210,6 +210,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Czy na pewno chcesz kontynuować bez uzupełnienia {{PLURAL:$2|pola|pól}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ukryj opcje",
 	"visualeditor-dialog-transclusion-title": "Dołączony szablon",
+	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu ustawiania pól szablonu",
 	"visualeditor-dialogbutton-media-tooltip": "Grafika i multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Ustawienia strony",
 	"visualeditor-dialogbutton-template-tooltip": "Szablon",

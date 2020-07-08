@@ -196,6 +196,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Bist du sicher, dass du ohne das Ausfüllen {{PLURAL:$2|des Feldes|der $1 Felder}} fortfahren möchtest?",
 	"visualeditor-dialog-transclusion-single-mode": "Optionen ausblenden",
 	"visualeditor-dialog-transclusion-title": "Vorlageneinbindung",
+	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Einstellungsmenü für Vorlagenfelder",
 	"visualeditor-dialogbutton-media-tooltip": "Bilder und Medien",
 	"visualeditor-dialogbutton-meta-tooltip": "Seiteneinstellungen",
 	"visualeditor-dialogbutton-template-tooltip": "Vorlage",
