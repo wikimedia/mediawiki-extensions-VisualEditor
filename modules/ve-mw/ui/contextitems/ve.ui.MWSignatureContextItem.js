@@ -8,7 +8,7 @@
  * Context item for a MWSignature.
  *
  * @class
- * @extends ve.ui.MWTransclusionContextItem
+ * @extends ve.ui.LinearContextItem
  *
  * @constructor
  * @param {ve.ui.Context} context Context item is in
@@ -26,7 +26,7 @@ ve.ui.MWSignatureContextItem = function VeUiMWSignatureContextItem() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWSignatureContextItem, ve.ui.MWTransclusionContextItem );
+OO.inheritClass( ve.ui.MWSignatureContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

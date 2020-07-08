@@ -11,7 +11,7 @@
  * save.
  *
  * @class
- * @extends ve.dm.MWTransclusionInlineNode
+ * @extends ve.dm.LeafNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model
@@ -19,15 +19,23 @@
 ve.dm.MWSignatureNode = function VeDmMWSignatureNode() {
 	// Parent constructor
 	ve.dm.MWSignatureNode.super.apply( this, arguments );
+
+	// Mixin constructors
+	ve.dm.GeneratedContentNode.call( this );
+	ve.dm.FocusableNode.call( this );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.dm.MWSignatureNode, ve.dm.MWTransclusionInlineNode );
+OO.inheritClass( ve.dm.MWSignatureNode, ve.dm.LeafNode );
+OO.mixinClass( ve.dm.MWSignatureNode, ve.dm.GeneratedContentNode );
+OO.mixinClass( ve.dm.MWSignatureNode, ve.dm.FocusableNode );
 
 /* Static members */
 
 ve.dm.MWSignatureNode.static.name = 'mwSignature';
+
+ve.dm.MWSignatureNode.static.isContent = true;
 
 ve.dm.MWSignatureNode.static.matchTagNames = null;
 
@@ -37,19 +45,9 @@ ve.dm.MWSignatureNode.static.matchFunction = function () {
 	return false;
 };
 
-ve.dm.MWSignatureNode.static.getHashObject = function ( dataElement ) {
-	return {
-		type: dataElement.type
-	};
-};
-
 ve.dm.MWSignatureNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	dataElement = ve.dm.MWSignatureNode.static.toDataElement();
-	return ve.dm.MWSignatureNode.parent.static.toDomElements( dataElement, doc, converter );
-};
-
-ve.dm.MWSignatureNode.static.toDataElement = function () {
-	return {
+	// Ignore the mwSignature dataElement and create a wikitext transclusion
+	dataElement = {
 		type: 'mwTransclusionInline',
 		attributes: {
 			mw: {
@@ -57,13 +55,11 @@ ve.dm.MWSignatureNode.static.toDataElement = function () {
 			}
 		}
 	};
+	return ve.dm.MWTransclusionInlineNode.static.toDomElements( dataElement, doc, converter );
 };
 
-/* Methods */
-
-ve.dm.MWSignatureNode.prototype.getPartsList = function () {
-	return [ { content: '~~~~' } ];
-};
+// Can't be generated from existing HTML documents, this method should never be called
+ve.dm.MWSignatureNode.static.toDataElement = null;
 
 /* Registration */
 
