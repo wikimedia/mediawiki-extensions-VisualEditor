@@ -45,9 +45,8 @@ ve.dm.MWSignatureNode.static.matchFunction = function () {
 	return false;
 };
 
-ve.dm.MWSignatureNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	// Ignore the mwSignature dataElement and create a wikitext transclusion
-	dataElement = {
+ve.dm.MWSignatureNode.static.getTemplateDataElement = function () {
+	return {
 		type: 'mwTransclusionInline',
 		attributes: {
 			mw: {
@@ -55,11 +54,22 @@ ve.dm.MWSignatureNode.static.toDomElements = function ( dataElement, doc, conver
 			}
 		}
 	};
+};
+
+ve.dm.MWSignatureNode.static.toDomElements = function ( dataElement, doc, converter ) {
+	// Ignore the mwSignature dataElement and create a wikitext transclusion
+	dataElement = this.getTemplateDataElement();
 	return ve.dm.MWTransclusionInlineNode.static.toDomElements( dataElement, doc, converter );
 };
 
 // Can't be generated from existing HTML documents, this method should never be called
 ve.dm.MWSignatureNode.static.toDataElement = null;
+
+// In previews we look up the rendering of the generated mwTransclusionInline node,
+// so use that node's hash object.
+ve.dm.MWSignatureNode.static.getHashObjectForRendering = function () {
+	return ve.dm.MWTransclusionNode.static.getHashObject( this.getTemplateDataElement() );
+};
 
 /* Registration */
 
