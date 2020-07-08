@@ -306,11 +306,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbarSaveButton = function () {
  * Needs to be done on each activation because localNoticeMessages is cleared in clearState.
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function () {
-	if ( mw.config.get( 'wgTranslatePageTranslation' ) === 'source' ) {
-		// Warn users if they're on a source of the Page Translation feature
-		this.localNoticeMessages.push( 'visualeditor-pagetranslationwarning' );
-	}
-
 	if ( !(
 		'vesupported' in this.currentUri.query ||
 		$.client.test( this.constructor.static.compatibility.supportedList, null, true )

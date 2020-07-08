@@ -354,7 +354,6 @@
 	"visualeditor-mwpredialog-convert": "Label for a button which will convert the preformatted text block into a form which can have text styles applied (e.g. bold, italic, links).",
 	"visualeditor-mwpredialog-title": "Title for the preformatted text dialog. It appears when clicking on a <nowiki><pre></nowiki> element.",
 	"visualeditor-mwsignature-tool": "Used as name of the tool for inserting signatures.",
-	"visualeditor-pagetranslationwarning": "Edit notice shown when VisualEditor loads, warning users editing a translated page that it is not officially supported.",
 	"visualeditor-parameter-input-placeholder": "Placeholder text label for an input for adding a parameter to a template.\n{{Identical|Field name}}",
 	"visualeditor-parameter-search-more": "Label for item in parameter list that, when clicked, reveals additional parameters that had been truncated to save space.\n\nParameters:\n* $1 - number of fields (parameters)",
 	"visualeditor-parameter-search-no-unused": "Message displayed in the transclusion dialog when no known parameters are unused by this template.",

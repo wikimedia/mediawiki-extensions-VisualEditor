@@ -336,7 +336,6 @@
 	"visualeditor-mwpredialog-convert": "Allow text styling",
 	"visualeditor-mwpredialog-title": "Preformatted plain text",
 	"visualeditor-mwsignature-tool": "Your signature",
-	"visualeditor-pagetranslationwarning": "You are editing a translatable page. Editing these in this editor is not yet officially supported.",
 	"visualeditor-parameter-input-placeholder": "Field name",
 	"visualeditor-parameter-search-more": "Show {{PLURAL:$1|one more field|$1 more fields}}",
 	"visualeditor-parameter-search-no-unused": "No unused fields",
