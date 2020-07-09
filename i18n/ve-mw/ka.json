@@ -256,7 +256,6 @@
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "საწყისი სიგანე: $1 პქ",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "ტექსტი",
 	"visualeditor-mwsignature-tool": "თქვენი ხელმოწერა",
-	"visualeditor-pagetranslationwarning": "თქვენ არედაქტირებთ თარგმნად გვერდს. ამ რედაქტორში მისი რედაქტირების ოფიციალური მხარდაჭერა ჯერ არ არის.",
 	"visualeditor-parameter-input-placeholder": "ველის სახელი",
 	"visualeditor-parameter-search-more": "კიდევ {{PLURAL:$1|ერთი ველის|$1 ველის}} ჩვენება",
 	"visualeditor-parameter-search-no-unused": "გამოუყენებელი ველები არ არის",

@@ -286,7 +286,6 @@
 	"visualeditor-mwpredialog-convert": "Dozvoli oblikovanje teksta",
 	"visualeditor-mwpredialog-title": "Unaprijed formatirani obični tekst",
 	"visualeditor-mwsignature-tool": "Vaš potpis",
-	"visualeditor-pagetranslationwarning": "Uređujete stranicu koju je moguće prevesti. Uređivanje ovih stranica još uvijek nije službeno podržano u ovom uređivaču.",
 	"visualeditor-parameter-input-placeholder": "Naziv polja",
 	"visualeditor-parameter-search-more": "Prikaži {{PLURAL:$1|još jedno polje|$1 više polja}}",
 	"visualeditor-parameter-search-no-unused": "Nema neiskorištenih polja",

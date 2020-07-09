@@ -335,7 +335,6 @@
 	"visualeditor-mwpredialog-convert": "Izinkan gaya teks",
 	"visualeditor-mwpredialog-title": "Teks polos terpraformat",
 	"visualeditor-mwsignature-tool": "Tanda tangan Anda",
-	"visualeditor-pagetranslationwarning": "Anda sedang menyunting sebuah halaman yang dapat diterjemahkan. Menyunting halaman seperti ini melalui penyunting ini belum didukung secara resmi.",
 	"visualeditor-parameter-input-placeholder": "Nama bidang",
 	"visualeditor-parameter-search-more": "Tampilkan {{PLURAL:$1|satu bidang lagi|$1 bidang lagi}}",
 	"visualeditor-parameter-search-no-unused": "Tidak ada bidang tak terpakai",

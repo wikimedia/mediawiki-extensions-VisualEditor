@@ -341,7 +341,6 @@
 	"visualeditor-mwpredialog-convert": "Дозволити форматування тексту",
 	"visualeditor-mwpredialog-title": "Попередньо відформатований простий текст",
 	"visualeditor-mwsignature-tool": "Ваш підпис",
-	"visualeditor-pagetranslationwarning": "Ви редагуєте сторінку для перекладу. Її редагування у цьому редакторі поки ще офіційно не підтримується.",
 	"visualeditor-parameter-input-placeholder": "Назва поля",
 	"visualeditor-parameter-search-more": "Показати {{PLURAL:$1|ще одне поле|$1 інші поля|$1 інших полів}}",
 	"visualeditor-parameter-search-no-unused": "Немає невикористаних полів",

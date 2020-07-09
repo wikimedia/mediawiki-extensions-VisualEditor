@@ -289,7 +289,6 @@
 	"visualeditor-mwpredialog-convert": "Atļaut teksta formatēšanu",
 	"visualeditor-mwpredialog-title": "Noformatēts vienkāršs teksts",
 	"visualeditor-mwsignature-tool": "Tavs paraksts",
-	"visualeditor-pagetranslationwarning": "Tu labo tulkojamu lapu. Tās labošana šajā redaktorā vēl netiek oficiāli atbalstīta.",
 	"visualeditor-parameter-input-placeholder": "Lauka nosaukums",
 	"visualeditor-parameter-search-more": "Rādīt vēl $1 {{PLURAL:$1|laukus|lauku|laukus}}",
 	"visualeditor-parameter-search-no-unused": "Nav neizmantotu lauku",

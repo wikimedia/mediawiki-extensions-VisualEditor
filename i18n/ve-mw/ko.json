@@ -313,7 +313,6 @@
 	"visualeditor-mwpredialog-convert": "텍스트 서식 허용",
 	"visualeditor-mwpredialog-title": "서식을 미리 지정한 플레인 텍스트",
 	"visualeditor-mwsignature-tool": "당신의 서명",
-	"visualeditor-pagetranslationwarning": "번역할 수 있는 문서를 편집하고 있습니다. 이 편집에서의 이러한 편집은 아직 공식적으로 지원되지 않습니다.",
 	"visualeditor-parameter-input-placeholder": "필드 이름",
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|필드 하나 더|필드 $1개 더}} 보기",
 	"visualeditor-parameter-search-no-unused": "사용하지 않은 필드가 없습니다",

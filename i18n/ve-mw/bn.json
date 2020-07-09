@@ -305,7 +305,6 @@
 	"visualeditor-mwpredialog-convert": "পাঠ্য শৈলীর অনুমতি দিন",
 	"visualeditor-mwpredialog-title": "প্রাক-বিন্যাসিত সরল পাঠ্য",
 	"visualeditor-mwsignature-tool": "আপনার স্বাক্ষর",
-	"visualeditor-pagetranslationwarning": "আপনি একটি অনুবাদ যোগ্য পাতা সম্পাদনা করছেন। এইগুলি এই সম্পাদকের মাধ্যমে সম্পাদনা করা এখনও আনুষ্ঠানিকভাবে সমর্থিত নয়।",
 	"visualeditor-parameter-input-placeholder": "ক্ষেত্রের নাম",
 	"visualeditor-parameter-search-more": "আরও $1টি {{PLURAL:$1|ক্ষেত্র}} দেখাও",
 	"visualeditor-parameter-search-no-unused": "অব্যবহৃত ক্ষেত্র নেই",

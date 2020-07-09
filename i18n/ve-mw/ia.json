@@ -135,7 +135,6 @@
 	"visualeditor-mweditmodesource-warning-cancel": "Cancellar",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Abandonar modificationes e cambiar",
 	"visualeditor-mwgallerydialog-title": "Galeria",
-	"visualeditor-pagetranslationwarning": "Iste es un pagina traducibile. Le modification de tal paginas in iste editor non es ancora officialmente supportate.",
 	"visualeditor-parameter-input-placeholder": "Nomine del campo",
 	"visualeditor-parameter-search-more": "Monstrar {{PLURAL:$1|un altere campo|$1 altere campos}}",
 	"visualeditor-parameter-search-no-unused": "Nulle campo non usate",

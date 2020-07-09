@@ -40,7 +40,6 @@
 	"visualeditor-mweditmodewt-popup-body": "Sie können jederzeit zur Quelltextbearbeitung zurückkehren, indem Sie dieses Symbol anklicken.",
 	"visualeditor-mweditmodewt-popup-title": "Sie haben zur visuellen Bearbeitung gewechselt",
 	"visualeditor-mwsignature-tool": "Ihre Unterschrift",
-	"visualeditor-pagetranslationwarning": "Sie bearbeiten eine übersetzbare Seite. Das Bearbeiten solcher Seiten in diesem Editor wird noch nicht offiziell unterstützt.",
 	"visualeditor-preference-newwikitexteditor-description": "Aktivieren Sie den neuen Wikitext-Modus innerhalb des visuellen Editors. Er hat viele der Werkzeuge, die auch im visuellen Editor vorhanden sind, er verwendet eine ähnliche Aufmachung und ermöglicht ein besseres Wechseln zwischen den beiden Modi.",
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem Sie zum Bearbeiten angefangen haben. Wählen Sie „$1“, um sie neu zu erstellen.",
 	"visualeditor-savedialog-error-badtoken": "Ihre Bearbeitung konnte nicht gespeichert werden, da die Sitzung nicht mehr gültig war.",

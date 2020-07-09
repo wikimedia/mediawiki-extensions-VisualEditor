@@ -323,7 +323,6 @@
 	"visualeditor-mwpredialog-convert": "Tillat tekstformatering",
 	"visualeditor-mwpredialog-title": "Forhåndsformatert ren tekst",
 	"visualeditor-mwsignature-tool": "Din signatur",
-	"visualeditor-pagetranslationwarning": "Du redigerer en oversettbar side. Bruk av VisualEditor til dette er ikke offisielt støttet enda.",
 	"visualeditor-parameter-input-placeholder": "Feltnavn",
 	"visualeditor-parameter-search-more": "Vis {{PLURAL:$1|ett felt til|$1 flere felt}}",
 	"visualeditor-parameter-search-no-unused": "Ingen ubrukte felt",

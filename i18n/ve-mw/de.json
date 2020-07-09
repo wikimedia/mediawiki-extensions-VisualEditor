@@ -334,7 +334,6 @@
 	"visualeditor-mwpredialog-convert": "Textgestaltung erlauben",
 	"visualeditor-mwpredialog-title": "Vorformatierter Klartext",
 	"visualeditor-mwsignature-tool": "Deine Unterschrift",
-	"visualeditor-pagetranslationwarning": "Du bearbeitest eine übersetzbare Seite. Das Bearbeiten solcher Seiten in diesem Editor wird noch nicht offiziell unterstützt.",
 	"visualeditor-parameter-input-placeholder": "Feldname",
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|Ein weiteres Feld|$1 weitere Felder}} anzeigen",
 	"visualeditor-parameter-search-no-unused": "Keine unbenutzten Felder",

@@ -325,7 +325,6 @@
 	"visualeditor-mwpredialog-convert": "Допушти обликување на текстот",
 	"visualeditor-mwpredialog-title": "Претформатиран прост текст",
 	"visualeditor-mwsignature-tool": "Ваш потпис",
-	"visualeditor-pagetranslationwarning": "Уредувате преводлива страница. Овој уредник сè уште не поддржува работа со вакви страници.",
 	"visualeditor-parameter-input-placeholder": "Назив на полето",
 	"visualeditor-parameter-search-more": "Прикажи уште {{PLURAL:$1|едно поле|$1 полиња}}",
 	"visualeditor-parameter-search-no-unused": "Нема неискористени полиња",

@@ -264,7 +264,6 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kalbos",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Kalbos kodas",
 	"visualeditor-mwsignature-tool": "Jūsų parašas",
-	"visualeditor-pagetranslationwarning": "Jūs redaguojate išverčiamą puslapį. Tokių puslapių redagavimas su šiuo redaktoriumi kol kas nėra oficialiai palaikomas.",
 	"visualeditor-parameter-input-placeholder": "Lauko pavadinimas",
 	"visualeditor-parameter-search-more": "Rodyti {{PLURAL:$1|vienu lauku daugiau|$1 laukais daugiau}}",
 	"visualeditor-parameter-search-no-unused": "Jokių nepanaudotų laukų",

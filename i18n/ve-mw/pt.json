@@ -332,7 +332,6 @@
 	"visualeditor-mwpredialog-convert": "Permitir estilos de texto",
 	"visualeditor-mwpredialog-title": "Texto simples pré-formatado",
 	"visualeditor-mwsignature-tool": "A sua assinatura",
-	"visualeditor-pagetranslationwarning": "Está a editar uma página traduzível. Estas edições neste editor não são oficialmente suportadas.",
 	"visualeditor-parameter-input-placeholder": "Nome do campo",
 	"visualeditor-parameter-search-more": "Mostrar {{PLURAL:$1|outro campo|$1 outros campos}}",
 	"visualeditor-parameter-search-no-unused": "Sem campos não utilizados",

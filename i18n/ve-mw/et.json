@@ -263,7 +263,6 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Pildi laius",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Vaikelaius: $1 px",
 	"visualeditor-mwsignature-tool": "Oma allkiri",
-	"visualeditor-pagetranslationwarning": "Redigeerid tõlgitavat lehekülge. Nende muutmine selle toimetiga pole veel ametlikult toetatud.",
 	"visualeditor-parameter-input-placeholder": "Välja nimi",
 	"visualeditor-parameter-search-more": "Näita veel {{PLURAL:$1|üht|$1}} välja",
 	"visualeditor-parameter-search-no-unused": "Kasutamata väljad puuduvad",

@@ -221,7 +221,6 @@
 	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Efni",
 	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "Frumtexti",
 	"visualeditor-mwsignature-tool": "Undirskriftin þín",
-	"visualeditor-pagetranslationwarning": "Þú ert að breyta þýðanlegri síðu. Breyting á slíkum síðum í þessum ritli er ekki studd.",
 	"visualeditor-parameter-input-placeholder": "Heiti reits",
 	"visualeditor-parameter-search-more": "Sýna {{PLURAL:$1|einn reit enn|$1 reiti enn}}",
 	"visualeditor-parameter-search-no-unused": "Engir ónotaðir reitir",

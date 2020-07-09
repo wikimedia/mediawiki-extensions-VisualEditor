@@ -286,7 +286,6 @@
 	"visualeditor-mwlanguagevariantinspector-title-disabled": "Aldaketa aldaerak desaktibatuta",
 	"visualeditor-mwlanguagevariantinspector-title-name": "Hizkuntza izena",
 	"visualeditor-mwsignature-tool": "Zure sinadura",
-	"visualeditor-pagetranslationwarning": "Itzulgarria den orri bat aldatzen ari zara. Editore honek ofizialki ez du onartzen mota honetako orriak.",
 	"visualeditor-parameter-input-placeholder": "Eremuaren izena",
 	"visualeditor-parameter-search-more": "Erakutsi {{PLURAL:$1|eremu bat|$1 eremu}} gehiago",
 	"visualeditor-parameter-search-no-unused": "Ez dago erabili gabeko eremurik",

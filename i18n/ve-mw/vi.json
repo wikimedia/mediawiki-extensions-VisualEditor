@@ -321,7 +321,6 @@
 	"visualeditor-mwpredialog-convert": "Cho phép định dạng hóa văn bản",
 	"visualeditor-mwpredialog-title": "Văn bản thuần định dạng sẵn",
 	"visualeditor-mwsignature-tool": "Chữ ký của bạn",
-	"visualeditor-pagetranslationwarning": "Bạn đang sửa đổi một trang có thể được dịch. Trình soạn thảo này chưa chính thức hỗ trợ việc sửa đổi loại trang này.",
 	"visualeditor-parameter-input-placeholder": "Tên trường",
 	"visualeditor-parameter-search-more": "Hiển thị {{PLURAL:$1|một|$1}} trường nữa",
 	"visualeditor-parameter-search-no-unused": "Không có trường không sử dụng",

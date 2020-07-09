@@ -345,7 +345,6 @@
 	"visualeditor-mwpredialog-convert": "Povolit formátování textu",
 	"visualeditor-mwpredialog-title": "Předformátovaný prostý text",
 	"visualeditor-mwsignature-tool": "Váš podpis",
-	"visualeditor-pagetranslationwarning": "Editujete překládatelnou stránku. Editace takových stránek tímto editorem dosud není oficiálně podporována.",
 	"visualeditor-parameter-input-placeholder": "Jméno pole",
 	"visualeditor-parameter-search-more": "Zobrazit $1 {{PLURAL:$1|další pole|další pole|dalších polí}}",
 	"visualeditor-parameter-search-no-unused": "Žádná nevyužitá pole",

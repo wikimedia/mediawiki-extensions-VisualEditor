@@ -337,7 +337,6 @@
 	"visualeditor-mwpredialog-convert": "السماح بتهيئة النص",
 	"visualeditor-mwpredialog-title": "نص خام قبل التهيئة",
 	"visualeditor-mwsignature-tool": "توقيعك",
-	"visualeditor-pagetranslationwarning": "أنت تعدل صفحة قابلة للترجمة. تعديلها بالمحرر المرئي ليس متاحا حاليا.",
 	"visualeditor-parameter-input-placeholder": "اسم الحقل",
 	"visualeditor-parameter-search-more": "أظهر {{PLURAL:$1|الحقل الآخر|الحقلين الآخرين|الحقول ال‍$1 الأخرى}}",
 	"visualeditor-parameter-search-no-unused": "كل الحقول مستخدمة",

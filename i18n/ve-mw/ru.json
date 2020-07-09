@@ -362,7 +362,6 @@
 	"visualeditor-mwpredialog-convert": "Разрешить стилизацию текста",
 	"visualeditor-mwpredialog-title": "Неформатированный текст",
 	"visualeditor-mwsignature-tool": "Ваша подпись",
-	"visualeditor-pagetranslationwarning": "Вы редактируете переводимую страницу. Её редактирование в этом редакторе пока ещё официально не поддерживается.",
 	"visualeditor-parameter-input-placeholder": "Имя поля",
 	"visualeditor-parameter-search-more": "Показать ещё $1 {{PLURAL:$1|поле|поля|полей}}",
 	"visualeditor-parameter-search-no-unused": "Нет неиспользованных полей",

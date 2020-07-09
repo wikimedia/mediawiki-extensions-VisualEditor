@@ -334,7 +334,6 @@
 	"visualeditor-mwpredialog-convert": "اجازهٔ تغییر سبک متن",
 	"visualeditor-mwpredialog-title": "ساختاربندی مجدد متن ساده",
 	"visualeditor-mwsignature-tool": "امضای شما",
-	"visualeditor-pagetranslationwarning": "شما در حال ویرایش صفحه قابل ترجمه هستید. ویرایش آن در این ویرایشگر هنوز رسما پشتیبانی نمی‌شود.",
 	"visualeditor-parameter-input-placeholder": "نام بخش",
 	"visualeditor-parameter-search-more": "نمایش  {{PLURAL:$1| یک بخش بیشتر| $1  بخش بیشتر}}",
 	"visualeditor-parameter-search-no-unused": "بخش استفاده‌نشده‌ای نیست",

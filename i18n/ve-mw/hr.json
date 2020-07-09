@@ -292,7 +292,6 @@
 	"visualeditor-mwlanguagevariantinspector-title-oneway": "Pravilo jednosmjerne pretvorbe",
 	"visualeditor-mwlanguagevariantinspector-title-twoway": "Pravilo jezične pretvorbe",
 	"visualeditor-mwsignature-tool": "Vaš potpis",
-	"visualeditor-pagetranslationwarning": "Uređujete stranicu koju je moguće prevesti. Uređenje takvih stranica nije još službeno podržano u vizualnom uređivaču.",
 	"visualeditor-parameter-input-placeholder": "Naziv polja",
 	"visualeditor-parameter-search-more": "Prikaži još {{PLURAL:$1|jedno polje|$1 polja}}",
 	"visualeditor-parameter-search-no-unused": "Nema nekorištenih parametara",

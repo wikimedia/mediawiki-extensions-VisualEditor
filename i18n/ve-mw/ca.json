@@ -301,7 +301,6 @@
 	"visualeditor-mwpredialog-convert": "Permet estils de text",
 	"visualeditor-mwpredialog-title": "Text senzill preformatat",
 	"visualeditor-mwsignature-tool": "La vostra signatura",
-	"visualeditor-pagetranslationwarning": "Esteu modificant una pàgina traduïble. L'ús de l'editor visual en aquestes pàgines encara no està previst oficialment.",
 	"visualeditor-parameter-input-placeholder": "Nom del camp",
 	"visualeditor-parameter-search-more": "Mostra {{PLURAL:$1|un camp més|$1 camps més}}",
 	"visualeditor-parameter-search-no-unused": "No hi ha camps sense utilitzar",

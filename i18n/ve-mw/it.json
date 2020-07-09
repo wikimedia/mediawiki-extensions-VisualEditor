@@ -308,7 +308,6 @@
 	"visualeditor-mwlanguagevariantinspector-title-twoway": "Regola di conversione della lingua",
 	"visualeditor-mwlanguagevariantinspector-twoway-add-button": "Aggiungi nuovo caso",
 	"visualeditor-mwsignature-tool": "La tua firma",
-	"visualeditor-pagetranslationwarning": "Stai modificando una pagina traducibile. La modifica di queste pagine con questo editor non è ancora ufficialmente supportata.",
 	"visualeditor-parameter-input-placeholder": "Nome campo",
 	"visualeditor-parameter-search-more": "Mostra {{PLURAL:$1|$1 altro campo|altri $1 campi}}",
 	"visualeditor-parameter-search-no-unused": "Senza campi inutilizzati",

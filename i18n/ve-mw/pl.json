@@ -348,7 +348,6 @@
 	"visualeditor-mwpredialog-convert": "Pozwól na stosowanie stylów tekstu",
 	"visualeditor-mwpredialog-title": "Preformatowany czysty tekst",
 	"visualeditor-mwsignature-tool": "Twój podpis",
-	"visualeditor-pagetranslationwarning": "Edytujesz stronę przeznaczoną do tłumaczenia. Jej edycja w tym edytorze nie jest jeszcze oficjalnie obsługiwana.",
 	"visualeditor-parameter-input-placeholder": "Nazwa pola",
 	"visualeditor-parameter-search-more": "Pokaż {{PLURAL:$1|kolejne pole|$1 kolejne pola|$1 kolejnych pól}}",
 	"visualeditor-parameter-search-no-unused": "Brak niewykorzystanych pól",

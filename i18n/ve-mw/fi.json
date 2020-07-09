@@ -286,7 +286,6 @@
 	"visualeditor-mwlanguagevariantinspector-title-name": "Kielen nimi",
 	"visualeditor-mwlanguagevariantinspector-title-oneway": "Yksisuuntainen konversiosääntö",
 	"visualeditor-mwsignature-tool": "Allekirjoituksesi",
-	"visualeditor-pagetranslationwarning": "Olet muokkaamassa käännettävää sivua. Näiden muokkaaminen tällä muokkaimella ei ole vielä virallisesti tuettu.",
 	"visualeditor-parameter-input-placeholder": "Kentän nimi",
 	"visualeditor-parameter-search-more": "Näytä {{PLURAL:$1|yksi kenttä lisää|$1 kenttää enemmän}}",
 	"visualeditor-parameter-search-no-unused": "Ei käyttämättömiä kenttiä",

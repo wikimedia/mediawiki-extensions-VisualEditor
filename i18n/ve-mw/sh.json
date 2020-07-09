@@ -212,7 +212,6 @@
 	"visualeditor-mweditmodeve-warning": "Prebacujete se na vizualno uređivanje.\nŽelite li nastaviti?",
 	"visualeditor-mwgallerydialog-title": "Galerija",
 	"visualeditor-mwsignature-tool": "Vaš potpis",
-	"visualeditor-pagetranslationwarning": "Uređujete stranicu koju je moguće prevesti. Uređivanje ovih stranica još uvijek nije službeno podržano u ovom uređivaču.",
 	"visualeditor-parameter-input-placeholder": "Naziv polja",
 	"visualeditor-parameter-search-more": "Prikaži {{PLURAL:$1|još jedno polje|$1 više polja}}",
 	"visualeditor-parameter-search-no-unused": "Nema neiskorištenih polja",
