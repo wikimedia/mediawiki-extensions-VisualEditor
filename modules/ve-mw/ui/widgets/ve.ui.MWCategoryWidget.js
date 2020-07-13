@@ -41,12 +41,15 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	this.input = new ve.ui.MWCategoryInputWidget( this, { $overlay: config.$overlay } );
 	this.forceCapitalization = mw.config.get( 'wgCaseSensitiveNamespaces' ).indexOf( categoryNamespace ) === -1;
 	this.categoryPrefix = mw.config.get( 'wgFormattedNamespaces' )[ categoryNamespace ] + ':';
+	this.expandedItem = null;
 
 	// Events
 	this.input.connect( this, { choose: 'onInputChoose' } );
 	this.popup.connect( this, {
 		removeCategory: 'onRemoveCategory',
-		updateSortkey: 'onUpdateSortkey'
+		updateSortkey: 'onUpdateSortkey',
+		ready: 'onPopupOpened',
+		closing: 'onPopupClosing'
 	} );
 	this.connect( this, {
 		drag: 'onDrag'
@@ -114,6 +117,21 @@ ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 			widget.emit( 'newCategory', categoryItem );
 		} );
 	}
+};
+
+/**
+ * Hanle popup open event
+ *
+ */
+ve.ui.MWCategoryWidget.prototype.onPopupOpened = function () {
+	this.popup.removeButton.focus();
+};
+
+/**
+ * Handle popup closing dialog
+ */
+ve.ui.MWCategoryWidget.prototype.onPopupClosing = function () {
+	this.expandedItem.focus();
 };
 
 /**
@@ -213,6 +231,12 @@ ve.ui.MWCategoryWidget.prototype.onTogglePopupMenu = function ( item ) {
 	// Close open popup.
 	if ( item.value !== this.popup.category ) {
 		this.popup.openPopup( item );
+		this.expandedItem = item;
+		this.popup
+			.$element
+			.attr( 'aria-label',
+				ve.msg( 'visualeditor-dialog-meta-categories-category' )
+			);
 	} else {
 		// Handle toggle
 		this.popup.closePopup();
