@@ -20,7 +20,6 @@ ve.ui.MWMediaDialog = function VeUiMWMediaDialog( config ) {
 
 	// Properties
 	this.imageModel = null;
-	this.pageTitle = '';
 	this.isSettingUpModel = false;
 	this.isInsertion = false;
 	this.selectedImageInfo = null;
@@ -1107,20 +1106,8 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var
-				dialog = this,
-				pageTitle = ve.init.target.getPageName( this.fragment.getDocument() ),
-				namespace = mw.config.get( 'wgNamespaceNumber' ),
-				namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages,
+			var dialog = this,
 				isReadOnly = this.isReadOnly();
-
-			// Read the page title
-			if ( namespacesWithSubpages[ namespace ] ) {
-				// If we are in a namespace that allows for subpages, strip the entire
-				// title except for the part after the last /
-				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
-			}
-			this.pageTitle = pageTitle;
 
 			// Set language for search results
 			this.search.setLang( this.getFragment().getDocument().getLang() );
@@ -1144,9 +1131,8 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			}
 
 			this.search.setup();
-
-			// Set initial values
-			this.search.getQuery().setValue( this.pageTitle );
+			// Try to populate with user uploads
+			this.search.queryMediaQueue();
 			this.resetCaption();
 
 			this.altTextInput.setReadOnly( isReadOnly );
