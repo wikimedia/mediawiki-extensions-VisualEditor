@@ -24,6 +24,11 @@ ve.ui.MWPopupTool = function VeUiMWPopupTool( title, toolGroup, config ) {
 	// Parent constructor
 	ve.ui.MWPopupTool.super.call( this, toolGroup, config );
 
+	this.popup.connect( this, {
+		ready: 'onPopupOpened',
+		closing: 'onPopupClosing'
+	} );
+
 	this.$element.addClass( 've-ui-mwPopupTool' );
 
 	this.$link.on( 'click', this.onToolLinkClick.bind( this ) );
@@ -32,6 +37,20 @@ ve.ui.MWPopupTool = function VeUiMWPopupTool( title, toolGroup, config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWPopupTool, OO.ui.PopupTool );
+
+/**
+ * Handle to call when popup is opened.
+ */
+ve.ui.MWPopupTool.prototype.onPopupOpened = function () {
+	this.popup.closeButton.focus();
+};
+
+/**
+ * Handle to call when popup is closing
+ */
+ve.ui.MWPopupTool.prototype.onPopupClosing = function () {
+	this.$link.trigger( 'focus' );
+};
 
 /**
  * Handle clicks on the main tool button.
@@ -193,6 +212,7 @@ ve.ui.MWHelpPopupTool = function VeUiMWHelpPopupTool( toolGroup, config ) {
 		);
 	ve.targetLinksToNewWindow( this.$items[ 0 ] );
 	this.popup.$body.append( this.$items );
+	this.popup.$element.attr( 'aria-label', ve.msg( 'visualeditor-help-tool' ) );
 };
 
 /* Inheritance */
