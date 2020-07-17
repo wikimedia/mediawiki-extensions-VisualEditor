@@ -720,7 +720,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
-	var redirectMetaItems,
+	var redirectMetaItems, metaList,
 		editNotices = this.getEditNotices(),
 		actionTools = this.actionsToolbar.tools,
 		surface = this.getSurface(),
@@ -742,12 +742,16 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		} );
 	}
 
-	this.transformCategoryLinks( $( '#catlinks' ) );
+	metaList = this.getSurface().getModel().getMetaList();
 
-	surface.getModel().getMetaList().connect( this, {
+	metaList.connect( this, {
 		insert: 'onMetaItemInserted',
 		remove: 'onMetaItemRemoved'
 	} );
+	// Rebuild the category list from the page we got from the API. This makes
+	// it work regardless of whether we came here from activating on an
+	// existing page, or loading via an edit URL.
+	this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ), true );
 
 	// Support: IE<=11
 	// IE requires us to defer before restoring the scroll position
@@ -849,7 +853,6 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 		target.transformCategoryLinks( $catlinks );
 		mw.hook( 'wikipage.categories' ).fire( $catlinks );
 		$( '#catlinks' ).replaceWith( $catlinks );
-		ve.init.platform.linkCache.styleParsoidElements( $catlinks, target.doc );
 	} );
 };
 
