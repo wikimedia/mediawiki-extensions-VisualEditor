@@ -87,7 +87,7 @@
 	"visualeditor-dialog-media-size-choosefull": "Постави на пуну величину",
 	"visualeditor-dialog-media-size-section": "Величина слике",
 	"visualeditor-dialog-media-size-section-help": "Можете да поставите које величине ће се медијска ставка појавити на страници. Ово би скоро увек требало да буде нормална величина јер ће прилагођена величина читаоцима ометати распоред странице и направиће га неконзистентним.",
-	"visualeditor-dialog-media-thumbdimensions": "Димензије сличице",
+	"visualeditor-dialog-media-thumbdimensions": "Димензије минијатуре",
 	"visualeditor-dialog-media-title": "Уграђивање медија",
 	"visualeditor-dialog-media-type-border": "Оивичено",
 	"visualeditor-dialog-media-type-frame": "Оквир",
