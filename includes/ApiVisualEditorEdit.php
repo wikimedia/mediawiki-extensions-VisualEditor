@@ -10,6 +10,7 @@
 
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditorEdit extends ApiBase {
 
@@ -461,8 +462,8 @@ class ApiVisualEditorEdit extends ApiBase {
 	public function getAllowedParams() {
 		return [
 			'paction' => [
-				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_TYPE => [
+				ParamValidator::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => [
 					'serialize',
 					'serializeforcache',
 					'diff',
@@ -470,14 +471,14 @@ class ApiVisualEditorEdit extends ApiBase {
 				],
 			],
 			'page' => [
-				ApiBase::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'token' => [
-				ApiBase::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'wikitext' => [
-				ApiBase::PARAM_TYPE => 'text',
-				ApiBase::PARAM_DFLT => null,
+				ParamValidator::PARAM_TYPE => 'text',
+				ParamValidator::PARAM_DEFAULT => null,
 			],
 			'section' => null,
 			'sectiontitle' => null,
@@ -487,8 +488,8 @@ class ApiVisualEditorEdit extends ApiBase {
 			'minor' => null,
 			'watchlist' => null,
 			'html' => [
-				ApiBase::PARAM_TYPE => 'text',
-				ApiBase::PARAM_DFLT => null,
+				ParamValidator::PARAM_TYPE => 'text',
+				ParamValidator::PARAM_DEFAULT => null,
 			],
 			'etag' => null,
 			'summary' => null,
@@ -496,7 +497,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			'captchaword' => null,
 			'cachekey' => null,
 			'tags' => [
-				ApiBase::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 		];
 	}
@@ -506,13 +507,6 @@ class ApiVisualEditorEdit extends ApiBase {
 	 */
 	public function needsToken() {
 		return 'csrf';
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function mustBePosted() {
-		return true;
 	}
 
 	/**

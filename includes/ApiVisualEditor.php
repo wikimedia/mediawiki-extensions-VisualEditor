@@ -12,6 +12,7 @@ use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditor extends ApiBase {
 
@@ -640,16 +641,16 @@ class ApiVisualEditor extends ApiBase {
 	public function getAllowedParams() {
 		return [
 			'page' => [
-				ApiBase::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'badetag' => null,
 			'format' => [
-				ApiBase::PARAM_DFLT => 'jsonfm',
-				ApiBase::PARAM_TYPE => [ 'json', 'jsonfm' ],
+				ParamValidator::PARAM_DEFAULT => 'jsonfm',
+				ParamValidator::PARAM_TYPE => [ 'json', 'jsonfm' ],
 			],
 			'paction' => [
-				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_TYPE => [
+				ParamValidator::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_TYPE => [
 					'parse',
 					'metadata',
 					'templatesused',
@@ -659,8 +660,8 @@ class ApiVisualEditor extends ApiBase {
 				],
 			],
 			'wikitext' => [
-				ApiBase::PARAM_TYPE => 'text',
-				ApiBase::PARAM_DFLT => null,
+				ParamValidator::PARAM_TYPE => 'text',
+				ParamValidator::PARAM_DEFAULT => null,
 			],
 			'section' => null,
 			'stash' => null,
@@ -669,7 +670,7 @@ class ApiVisualEditor extends ApiBase {
 			'pst' => false,
 			'preload' => null,
 			'preloadparams' => [
-				ApiBase::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_ISMULTI => true,
 			],
 		];
 	}
@@ -678,13 +679,6 @@ class ApiVisualEditor extends ApiBase {
 	 * @inheritDoc
 	 */
 	public function needsToken() {
-		return false;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function mustBePosted() {
 		return false;
 	}
 
