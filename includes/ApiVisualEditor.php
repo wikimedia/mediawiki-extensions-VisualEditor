@@ -44,32 +44,6 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	/**
-	 * Provide the RESTbase-parsed HTML of a given fragment of wikitext
-	 *
-	 * @param Title $title The title of the page to use as the parsing context
-	 * @param string $wikitext The wikitext fragment to parse
-	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
-	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
-	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
-	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
-	 */
-	protected function parseWikitextFragment(
-		Title $title, $wikitext, $bodyOnly, $oldid = null, $stash = false
-	) {
-		return $this->requestRestbase(
-			$title,
-			'POST',
-			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ) .
-				( $oldid === null ? '' : '/' . $oldid ),
-			[
-				'wikitext' => $wikitext,
-				'body_only' => $bodyOnly ? 1 : 0,
-				'stash' => $stash ? 1 : 0
-			]
-		);
-	}
-
-	/**
 	 * Provide the preload content for a page being created from another page
 	 *
 	 * @param string $preload The title of the page to use as the preload content
@@ -169,7 +143,7 @@ class ApiVisualEditor extends ApiBase {
 								'@phan-var WikitextContent $newSectionContent';
 								$wikitext = $newSectionContent->getText();
 							}
-							$response = $this->parseWikitextFragment(
+							$response = $this->transformWikitext(
 								$title, $wikitext, false, $oldid, $stash
 							);
 						} else {
@@ -248,7 +222,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 
 					if ( $content !== '' && $params['paction'] !== 'wikitext' ) {
-						$response = $this->parseWikitextFragment( $title, $content, false, null, true );
+						$response = $this->transformWikitext( $title, $content, false, null, true );
 						$content = $response['body'];
 						$restbaseHeaders = $response['headers'];
 					}
@@ -552,7 +526,7 @@ class ApiVisualEditor extends ApiBase {
 				if ( $params['pst'] ) {
 					$wikitext = $this->pstWikitext( $title, $wikitext );
 				}
-				$content = $this->parseWikitextFragment(
+				$content = $this->transformWikitext(
 					$title, $wikitext, $bodyOnly
 				)['body'];
 				if ( $content === false ) {

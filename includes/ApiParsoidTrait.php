@@ -240,7 +240,7 @@ trait ApiParsoidTrait {
 	 * @param string|null $etag The ETag to set in the HTTP request header
 	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
-	protected function postHTML(
+	protected function transformHTML(
 		Title $title, string $html, int $oldid = null, string $etag = null
 	) : array {
 		$data = [ 'html' => $html, 'scrub_wikitext' => 1 ];
@@ -268,6 +268,32 @@ trait ApiParsoidTrait {
 			$title,
 			'POST', $path, $data,
 			[ 'If-Match' => $etag ]
+		);
+	}
+
+	/**
+	 * Transform wikitext to HTML via Parsoid through RESTbase. Wrapper for ::postData().
+	 *
+	 * @param Title $title The title of the page to use as the parsing context
+	 * @param string $wikitext The wikitext fragment to parse
+	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
+	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
+	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
+	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
+	 */
+	protected function transformWikitext(
+		Title $title, string $wikitext, bool $bodyOnly, int $oldid = null, bool $stash = false
+	) : array {
+		return $this->requestRestbase(
+			$title,
+			'POST',
+			'transform/wikitext/to/html/' . urlencode( $title->getPrefixedDBkey() ) .
+				( $oldid === null ? '' : '/' . $oldid ),
+			[
+				'wikitext' => $wikitext,
+				'body_only' => $bodyOnly ? 1 : 0,
+				'stash' => $stash ? 1 : 0
+			]
 		);
 	}
 
