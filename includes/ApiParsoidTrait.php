@@ -232,25 +232,24 @@ trait ApiParsoidTrait {
 	}
 
 	/**
-	 * Transform HTML to wikitext via Parsoid through RESTbase.
+	 * Transform HTML to wikitext via Parsoid through RESTbase. Wrapper for ::postData().
 	 *
-	 * @param string $path The RESTbase path of the transform endpoint
 	 * @param Title $title The title of the page
-	 * @param array $data An array of the HTML and the 'scrub_wikitext' option
-	 * @param array $parserParams Parsoid parser parameters to pass in
+	 * @param string $html The HTML of the page to be transformed
+	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param string|null $etag The ETag to set in the HTTP request header
-	 * @return string Body of the RESTbase server's response
+	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
-	protected function postData(
-		string $path, Title $title, array $data, array $parserParams, ?string $etag
-	) : string {
-		$path .= urlencode( $title->getPrefixedDBkey() );
-		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] ) {
-			$path .= '/' . $parserParams['oldid'];
-		}
+	protected function postHTML(
+		Title $title, string $html, int $oldid = null, string $etag = null
+	) : array {
+		$data = [ 'html' => $html, 'scrub_wikitext' => 1 ];
+		$path = 'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() ) .
+			( $oldid === null ? '' : '/' . $oldid );
+
 		// Adapted from RESTBase mwUtil.parseETag()
 		// ETag is not expected when creating a new page (oldid=0)
-		if ( isset( $parserParams['oldid'] ) && $parserParams['oldid'] && !preg_match( '/
+		if ( $oldid && !preg_match( '/
 			^(?:W\\/)?"?
 			([^"\\/]+)
 			(?:\\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))
@@ -269,29 +268,12 @@ trait ApiParsoidTrait {
 			$title,
 			'POST', $path, $data,
 			[ 'If-Match' => $etag ]
-		)['body'];
-	}
-
-	/**
-	 * Transform HTML to wikitext via Parsoid through RESTbase. Wrapper for ::postData().
-	 *
-	 * @param Title $title The title of the page
-	 * @param string $html The HTML of the page to be transformed
-	 * @param array $parserParams Parsoid parser parameters to pass in
-	 * @param string|null $etag The ETag to set in the HTTP request header
-	 * @return string Body of the RESTbase server's response
-	 */
-	protected function postHTML(
-		Title $title, string $html, array $parserParams, ?string $etag
-	) : string {
-		return $this->postData(
-			'transform/html/to/wikitext/', $title,
-			[ 'html' => $html, 'scrub_wikitext' => 1 ], $parserParams, $etag
 		);
 	}
 
 	/**
 	 * Get the page language from a title, using the content language as fallback on special pages
+	 *
 	 * @param Title $title Title
 	 * @return Language Content language
 	 */
