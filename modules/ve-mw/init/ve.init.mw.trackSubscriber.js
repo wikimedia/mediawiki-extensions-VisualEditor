@@ -220,7 +220,7 @@
 		var feature = topic.split( '.' )[ 1 ],
 			event;
 
-		if ( !inSample() && !trackdebug ) {
+		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
 			return;
 		}
 
