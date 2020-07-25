@@ -15,7 +15,7 @@ module.exports = function ( grunt ) {
 			require: [
 				function () {
 					// eslint-disable-next-line no-undef, no-implicit-globals
-					langs = [ 'en' ];
+					langs = [ grunt.option( 'lang' ) || 'en' ];
 				}
 			]
 		},
@@ -145,7 +145,6 @@ module.exports = function ( grunt ) {
 		},
 		eslint: {
 			options: {
-				extensions: [ '.js', '.json' ],
 				cache: true,
 				fix: grunt.option( 'fix' )
 			},
