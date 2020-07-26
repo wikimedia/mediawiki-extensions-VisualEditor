@@ -714,12 +714,14 @@ class VisualEditorHooks {
 		if ( self::isVisualAvailable( $title, $skin->getRequest(), $user ) ) {
 			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			$veEditSection = $tabMessages['editsection'];
+
+			$attribs = $result['editsection']['attribs'];
+			$attribs['class'] = ( $attribs['class'] ?? '' ) . ' mw-editsection-visualeditor';
+
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
 				'targetTitle' => $title,
-				'attribs' => $result['editsection']['attribs'] + [
-					'class' => 'mw-editsection-visualeditor'
-				],
+				'attribs' => $attribs,
 				'query' => [ 'veaction' => 'edit', 'section' => $section ],
 				'options' => [ 'noclasses', 'known' ]
 			];
