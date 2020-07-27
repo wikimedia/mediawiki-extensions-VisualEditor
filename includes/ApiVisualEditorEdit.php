@@ -187,8 +187,8 @@ class ApiVisualEditorEdit extends ApiBase {
 			$html = $params['html'];
 		}
 		$wikitext = $this->postHTML(
-			$title, $html, $parserParams, $params['etag']
-		);
+			$title, $html, $parserParams['oldid'] ?? null, $params['etag'] ?? null
+		)['body'];
 		return $wikitext;
 	}
 
