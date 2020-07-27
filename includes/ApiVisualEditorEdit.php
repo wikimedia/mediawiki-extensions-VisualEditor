@@ -424,8 +424,11 @@ class ApiVisualEditorEdit extends ApiBase {
 
 				$context = new RequestContext;
 				$context->setTitle( $title );
+				$context->setRequest( new FauxRequest( [ 'action' => 'view' ] ) );
 				$tempOut = new OutputPage( $context );
 				$tempOut->setArticleFlag( true );
+
+				Hooks::run( 'OutputPageBeforeHTML', [ $tempOut, &$result['content'] ] );
 
 				$subpagestr = $this->getSkin()->subPageSubtitle( $tempOut );
 				if ( $subpagestr !== '' ) {
