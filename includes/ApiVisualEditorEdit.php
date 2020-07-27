@@ -186,7 +186,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		} else {
 			$html = $params['html'];
 		}
-		$wikitext = $this->postHTML(
+		$wikitext = $this->transformHTML(
 			$title, $html, $parserParams['oldid'] ?? null, $params['etag'] ?? null
 		)['body'];
 		return $wikitext;
