@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Akamycoco",
 			"Iyuqciyang",
 			"Songyanzhi"
 		]
@@ -11,6 +12,7 @@
 	"visualeditor-ca-editsource": "Ida npatas sspgan ka smmalu patas",
 	"visualeditor-ca-editsource-section": "ida npatas sspgan ka smmalu patas",
 	"visualeditor-categories-tool": "keelgan",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-page-advanced": "Mtmay quri brah",
 	"visualeditor-dialog-media-search-tab-search": "miying",
 	"visualeditor-dialog-meta-categories-data-label": "keelgan",
