@@ -280,7 +280,7 @@
 	"visualeditor-meta-tool": "Параметры",
 	"visualeditor-mweditmode-tooltip": "Переключить редактор",
 	"visualeditor-mweditmodesource-progress": "Переход к редактированию исходного текста…",
-	"visualeditor-mweditmodesource-tool-current": "Редактирование вики-текста",
+	"visualeditor-mweditmodesource-tool-current": "Редактирование кода",
 	"visualeditor-mweditmodesource-tool-unavailable": "Редактирование источника не разрешено",
 	"visualeditor-mweditmodesource-warning-cancel": "Отмена",
 	"visualeditor-mweditmodesource-warning-switch-discard": "Отменить изменения и переключить",
