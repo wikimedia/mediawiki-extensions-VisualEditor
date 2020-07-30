@@ -65,29 +65,32 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 
 	this.titleButton.on( 'click', this.export.bind( this ) );
 
-	this.wikitext = new OO.ui.MultilineTextInputWidget( {
-		// The following classes are used here:
-		// * mw-editfont-monospace
-		// * mw-editfont-sans-serif
-		// * mw-editfont-serif
-		classes: [ 'mw-editfont-' + mw.user.options.get( 'editfont' ) ],
-		autosize: true,
-		readOnly: true,
-		rows: 20
-	} );
-	this.wikitextField = new OO.ui.FieldLayout( this.wikitext, {
+	this.wikitextLayout = new mw.widgets.CopyTextLayout( {
 		align: 'top',
-		label: ve.msg( 'visualeditor-savedialog-review-wikitext' )
+		label: ve.msg( 'visualeditor-savedialog-review-wikitext' ),
+		multiline: true,
+		textInput: {
+			// The following classes are used here:
+			// * mw-editfont-monospace
+			// * mw-editfont-sans-serif
+			// * mw-editfont-serif
+			classes: [ 'mw-editfont-' + mw.user.options.get( 'editfont' ) ],
+			autosize: true,
+			readOnly: true,
+			rows: 20
+		}
 	} );
 
-	// Move to CSS
+	// TODO: Move to CSS
 	this.titleField.$element.css( 'max-width', 'none' );
 	this.titleInput.$element.css( 'max-width', 'none' );
-	this.wikitext.$element.css( 'max-width', 'none' );
+	this.wikitextLayout.$element.css( 'max-width', 'none' );
+	this.wikitextLayout.$field.css( 'max-width', 'none' );
+	this.wikitextLayout.textInput.$element.css( 'max-width', 'none' );
 
 	$content.append(
 		this.titleField.$element,
-		this.wikitextField.$element
+		this.wikitextLayout.$element
 	);
 
 	panel = new OO.ui.PanelLayout( {
@@ -105,18 +108,19 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var dialog = this,
-				surface = ve.init.target.getSurface();
+				surface = ve.init.target.getSurface(),
+				wikitextInput = this.wikitextLayout.textInput;
 			this.titleButton.setDisabled( true );
-			this.wikitext.pushPending();
+			this.wikitextLayout.textInput.pushPending();
 			ve.init.target.getWikitextFragment( surface.getModel().getDocument() ).then( function ( wikitext ) {
-				dialog.wikitext.setValue( wikitext.trim() );
-				dialog.wikitext.$input.scrollTop( 0 );
-				dialog.wikitext.popPending();
+				wikitextInput.setValue( wikitext.trim() );
+				wikitextInput.$input.scrollTop( 0 );
+				wikitextInput.popPending();
 				dialog.titleButton.setDisabled( false );
 				dialog.updateSize();
 			}, function () {
 				// TODO: Display API errors
-				dialog.wikitext.popPending();
+				wikitextInput.popPending();
 			} );
 		}, this );
 };
@@ -137,7 +141,7 @@ ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWExportWikitextDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
-			this.wikitext.setValue( '' );
+			this.wikitextLayout.textInput.setValue( '' );
 		}, this );
 };
 
@@ -146,7 +150,7 @@ ve.ui.MWExportWikitextDialog.prototype.getTeardownProcess = function ( data ) {
  */
 ve.ui.MWExportWikitextDialog.prototype.export = function () {
 	var key, $form, params,
-		wikitext = this.wikitext.getValue(),
+		wikitext = this.wikitextLayout.textInput.getValue(),
 		title = this.titleInput.getMWTitle(),
 		importTitle = ve.init.target.getImportTitle(),
 		submitUrl = ( new mw.Uri( title.getUrl() ) )

@@ -519,6 +519,7 @@
 				"modules/ve-mw-collab/ve.ui.MWExportWikitextDialog.js"
 			],
 			"dependencies": [
+				"mediawiki.widgets",
 				"ext.visualEditor.targetLoader",
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
