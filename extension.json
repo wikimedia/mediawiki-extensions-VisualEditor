@@ -208,7 +208,8 @@
 		"BeforeInitialize": "VisualEditorHooks::onBeforeInitialize",
 		"LocalUserCreated": "VisualEditorHooks::onLocalUserCreated",
 		"CustomEditor": "VisualEditorHooks::onCustomEditor",
-		"UserLoggedIn": "VisualEditorHooks::onUserLoggedIn"
+		"UserLoggedIn": "VisualEditorHooks::onUserLoggedIn",
+		"OutputPageBodyAttributes": "VisualEditorHooks::onOutputPageBodyAttributes"
 	},
 	"ResourceModules": {
 		"socket.io": {
