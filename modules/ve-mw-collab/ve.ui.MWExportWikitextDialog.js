@@ -148,6 +148,7 @@ ve.ui.MWExportWikitextDialog.prototype.export = function () {
 	var key, $form, params,
 		wikitext = this.wikitext.getValue(),
 		title = this.titleInput.getMWTitle(),
+		importTitle = ve.init.target.getImportTitle(),
 		submitUrl = ( new mw.Uri( title.getUrl() ) )
 			.extend( {
 				action: 'submit',
@@ -166,7 +167,10 @@ ve.ui.MWExportWikitextDialog.prototype.export = function () {
 		wpUltimateParam: true,
 		wpDiff: true
 	};
-	if ( ve.init.target.getImportTitle().toString() === title.toString() ) {
+	if (
+		importTitle && title &&
+		importTitle.toString() === title.toString()
+	) {
 		params = ve.extendObject( {
 			oldid: ve.init.target.revid,
 			basetimestamp: ve.init.target.baseTimeStamp,
