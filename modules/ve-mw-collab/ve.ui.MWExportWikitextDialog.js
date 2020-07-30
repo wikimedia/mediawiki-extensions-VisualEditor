@@ -55,7 +55,7 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 		value: ve.init.target.getImportTitle()
 	}, { api: ve.init.target.getContentApi() } );
 	this.titleButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-rebase-client-export' ),
+		label: ve.msg( 'visualeditor-rebase-client-export-start' ),
 		flags: [ 'primary', 'progressive' ]
 	} );
 	this.titleField = new OO.ui.ActionFieldLayout( this.titleInput, this.titleButton, {

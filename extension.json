@@ -529,6 +529,7 @@
 			],
 			"messages": [
 				"visualeditor-rebase-client-export",
+				"visualeditor-rebase-client-export-start",
 				"visualeditor-rebase-client-import-name",
 				"visualeditor-savedialog-review-wikitext"
 			],

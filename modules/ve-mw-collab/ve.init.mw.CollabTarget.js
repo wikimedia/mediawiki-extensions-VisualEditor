@@ -157,7 +157,7 @@ ve.ui.MWExportTool.static.group = 'export';
 ve.ui.MWExportTool.static.autoAddToCatchall = false;
 ve.ui.MWExportTool.static.flags = [ 'progressive', 'primary' ];
 ve.ui.MWExportTool.static.title =
-	OO.ui.deferMsg( 'visualeditor-rebase-client-export' );
+	OO.ui.deferMsg( 'visualeditor-rebase-client-export-start' );
 ve.ui.MWExportTool.static.commandName = 'mwExportWikitext';
 ve.ui.toolFactory.register( ve.ui.MWExportTool );
 
