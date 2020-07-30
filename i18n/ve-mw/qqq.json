@@ -383,6 +383,7 @@
 	"visualeditor-rebase-client-export-start": "Label for button to start a process to export a document\n\nSee also:\n* {{msg-mw|visualeditor-rebase-client-export}}",
 	"visualeditor-rebase-client-import": "Label for button to import a document from the wiki",
 	"visualeditor-rebase-client-import-name": "Label import document input",
+	"visualeditor-rebase-client-title-help": "Help text shown with the export to title field.",
 	"visualeditor-recreate": "Text shown when the editor fails to save the page due to it having been deleted since they opened VE. $1 is the message {{msg-mw|ooui-dialog-process-continue}}.",
 	"visualeditor-redirect-description": "Title shown as the description of redirect nodes.\n\nParameters:\n* $1 - Target title of redirect",
 	"visualeditor-savedialog-error-badtoken": "Error displayed in the save dialog if saving the edit failed due to an invalid edit token (likely due to the user having logged out in a separate window, or logged in again)",

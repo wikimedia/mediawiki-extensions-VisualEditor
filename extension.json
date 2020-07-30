@@ -531,6 +531,7 @@
 				"visualeditor-rebase-client-export",
 				"visualeditor-rebase-client-export-start",
 				"visualeditor-rebase-client-import-name",
+				"visualeditor-rebase-client-title-help",
 				"visualeditor-savedialog-review-wikitext"
 			],
 			"targets": [

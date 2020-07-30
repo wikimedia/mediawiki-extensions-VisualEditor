@@ -60,7 +60,9 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 	} );
 	this.titleField = new OO.ui.ActionFieldLayout( this.titleInput, this.titleButton, {
 		align: 'top',
-		label: ve.msg( 'visualeditor-rebase-client-import-name' )
+		label: ve.msg( 'visualeditor-rebase-client-import-name' ),
+		help: ve.msg( 'visualeditor-rebase-client-title-help' ),
+		helpInline: true
 	} );
 
 	this.titleButton.on( 'click', this.export.bind( this ) );

@@ -365,6 +365,7 @@
 	"visualeditor-rebase-client-export-start": "Export…",
 	"visualeditor-rebase-client-import": "Import",
 	"visualeditor-rebase-client-import-name": "Page title",
+	"visualeditor-rebase-client-title-help": "You will be able to review changes before saving.",
 	"visualeditor-recreate": "The page has been deleted since you started editing. Press \"$1\" to recreate it.",
 	"visualeditor-redirect-description": "Redirect to $1",
 	"visualeditor-savedialog-error-badtoken": "We could not save your edit because the session was no longer valid.",
