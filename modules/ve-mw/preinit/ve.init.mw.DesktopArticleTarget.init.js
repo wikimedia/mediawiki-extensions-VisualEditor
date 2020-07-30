@@ -326,7 +326,7 @@
 			$( '.mw-editsection a' ).text( getTabMessage( sectionKey ) );
 		}
 
-		$.cookie( 'VEE', editor, { path: '/', expires: 30 } );
+		mw.cookie.set( 'VEE', editor, { path: '/', expires: 30 * 86400, prefix: '' } );
 
 		// Save user preference if logged in
 		if (
@@ -460,7 +460,7 @@
 
 	function getLastEditor() {
 		// This logic matches VisualEditorHooks::getLastEditor
-		var editor = $.cookie( 'VEE' );
+		var editor = mw.cookie.get( 'VEE', '' );
 		// Set editor to user's preference or site's default if …
 		if (
 			// … user is logged in,
@@ -509,7 +509,7 @@
 			(
 				mw.user.isAnon() && (
 					mw.storage.get( storageKey ) ||
-					$.cookie( cookieName )
+					mw.cookie.get( cookieName, '' )
 				)
 			);
 	}
@@ -520,7 +520,7 @@
 		if ( mw.user.isAnon() ) {
 			// Try local storage first; if that fails, set a cookie
 			if ( !mw.storage.set( storageKey, 1 ) ) {
-				$.cookie( cookieName, 1, { path: '/', expires: 30 } );
+				mw.cookie.set( cookieName, 1, { path: '/', expires: 30 * 86400, prefix: '' } );
 			}
 		} else {
 			new mw.Api().saveOption( prefName, '1' );
