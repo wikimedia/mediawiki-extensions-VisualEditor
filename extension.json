@@ -358,7 +358,6 @@
 			},
 			"dependencies": [
 				"jquery.client",
-				"jquery.cookie",
 				"jquery.textSelection",
 				"mediawiki.page.startup",
 				"mediawiki.storage",
@@ -366,6 +365,7 @@
 				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
+				"mediawiki.cookie",
 				"mediawiki.api",
 				"ext.visualEditor.supportCheck",
 				"ext.visualEditor.track",
@@ -464,7 +464,6 @@
 				"ext.visualEditor.articleTarget",
 				"ext.visualEditor.desktopTarget",
 				"ext.visualEditor.mwextensions.desktop",
-				"jquery.cookie",
 				"mediawiki.jqueryMsg",
 				"mediawiki.util"
 			],
@@ -1690,7 +1689,6 @@
 				"mediawiki.jqueryMsg",
 				"mediawiki.storage",
 				"mediawiki.pulsatingdot",
-				"jquery.cookie",
 				"mediawiki.skinning.content.parsoid",
 				"mediawiki.widgets",
 				"ext.visualEditor.switching",
