@@ -839,8 +839,6 @@ ve.ui.MWGalleryDialog.prototype.onShowSearchPanelButtonClick = function () {
  * @param {boolean} visible The search panel is visible
  */
 ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
-	var pageTitle, namespace, namespacesWithSubpages;
-
 	visible = visible !== undefined ? visible : !this.searchPanelVisible;
 
 	// If currently visible panel is an edit panel, save the input values for the highlighted item
@@ -858,20 +856,8 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 	if ( !visible ) {
 		this.highlightedCaptionTarget.focus();
 	} else {
-		if ( !this.searchWidget.getQuery().getValue() ) {
-			// Wait until the search panel is visible before setting a default query
-			// as this triggers a request and render.
-			pageTitle = ve.init.target.getPageName( this.fragment.getDocument() );
-			namespace = mw.config.get( 'wgNamespaceNumber' );
-			namespacesWithSubpages = mw.config.get( 'wgVisualEditorConfig' ).namespacesWithSubpages;
-
-			if ( namespacesWithSubpages[ namespace ] ) {
-				pageTitle = pageTitle.slice( pageTitle.lastIndexOf( '/' ) + 1 );
-			}
-
-			this.searchWidget.getQuery().setValue( pageTitle );
-		}
-
+		// Try to populate with user uploads
+		this.searchWidget.queryMediaQueue();
 		this.searchWidget.getQuery().focus().select();
 	}
 	this.updateDialogSize();
