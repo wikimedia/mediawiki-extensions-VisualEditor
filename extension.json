@@ -520,6 +520,7 @@
 			],
 			"dependencies": [
 				"mediawiki.widgets",
+				"mediawiki.editfont.styles",
 				"ext.visualEditor.targetLoader",
 				"ext.visualEditor.base",
 				"ext.visualEditor.mediawiki",
