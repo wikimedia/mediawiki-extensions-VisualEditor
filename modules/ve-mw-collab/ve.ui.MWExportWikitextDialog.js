@@ -79,7 +79,8 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 			classes: [ 'mw-editfont-' + mw.user.options.get( 'editfont' ) ],
 			autosize: true,
 			readOnly: true,
-			rows: 20
+			// Height will be trimmed in getReadyProcess
+			rows: 99
 		}
 	} );
 
@@ -133,7 +134,24 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
+			var overflow;
+
 			this.titleInput.focus();
+
+			// Fix height of wikitext input
+			this.wikitextLayout.textInput.$input.css( 'max-height', '' );
+			overflow = this.$body[ 0 ].scrollHeight - this.$body[ 0 ].clientHeight;
+			if ( overflow > 0 ) {
+				// If body is too tall, take the excess height off the wikitext input
+				this.wikitextLayout.textInput.$input.css(
+					'max-height',
+					Math.max(
+						this.wikitextLayout.textInput.$input[ 0 ].clientHeight - overflow,
+						50 // minimum height
+					)
+				);
+			}
+
 		}, this );
 };
 
