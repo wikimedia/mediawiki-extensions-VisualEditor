@@ -489,7 +489,8 @@
 				"modules/ve-mw/init/targets/ve.init.mw.MobileArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ViewportZoomHandler.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWMobileSaveDialog.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js"
+				"modules/ve-mw/ui/tools/ve.ui.MWMobileLinkInspectorTool.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWBackTool.js"
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.less",
