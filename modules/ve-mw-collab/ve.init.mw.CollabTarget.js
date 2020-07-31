@@ -119,6 +119,13 @@ ve.init.mw.CollabTarget.prototype.restorePage = function () {
 };
 
 /**
+ * MWBackTool calls tryTeardown
+ */
+ve.init.mw.CollabTarget.prototype.tryTeardown = function () {
+	this.emit( 'close' );
+};
+
+/**
  * Get the title of the imported document, if there was one
  *
  * @return {mw.Title|null} Title of imported document

@@ -65,6 +65,11 @@
 				progressDeferred = ve.createDeferred();
 
 			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle: importTitle } );
+			// If the target emits a 'close' event (via the toolbar back button on mobile) then go to the landing page.
+			target.once( 'close', function () {
+				// eslint-disable-next-line no-use-before-define
+				showForm( true );
+			} );
 
 			$( 'body' ).addClass( 've-activated ve-active' );
 

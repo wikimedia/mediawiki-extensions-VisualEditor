@@ -581,7 +581,8 @@
 		"ext.visualEditor.collabTarget.mobile": {
 			"group": "visualEditorA",
 			"scripts": [
-				"modules/ve-mw-collab/ve.init.mw.MobileCollabTarget.js"
+				"modules/ve-mw-collab/ve.init.mw.MobileCollabTarget.js",
+				"modules/ve-mw/ui/tools/ve.ui.MWBackTool.js"
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.less"
