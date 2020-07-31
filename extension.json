@@ -28,34 +28,20 @@
 	},
 	"callback": "VisualEditorHooks::onRegistration",
 	"config": {
-		"VisualEditorParsoidAutoConfig": {
-			"value": true
-		},
-		"VisualEditorParsoidSettings": {
-			"value": []
-		},
-		"VisualEditorPluginModules": {
-			"value": []
-		},
-		"VisualEditorPreloadModules": {
-			"value": [
-				"site",
-				"user"
-			]
-		},
-		"VisualEditorPreferenceModules": {
-			"value": {
-				"visualeditor-enable-experimental": "ext.visualEditor.experimental"
-			}
-		},
-		"VisualEditorRestbaseURL": {
-			"value": false
-		},
-		"VisualEditorFullRestbaseURL": {
+		"VisualEditorAllowExternalLinkPaste": {
 			"value": false
 		},
 		"VisualEditorAllowLossySwitching": {
 			"value": true
+		},
+		"VisualEditorAutoAccountEnable": {
+			"value": false
+		},
+		"VisualEditorAvailableContentModels": {
+			"value": {
+				"wikitext": "article"
+			},
+			"merge_strategy": "array_plus"
 		},
 		"VisualEditorAvailableNamespaces": {
 			"value": {
@@ -64,87 +50,6 @@
 				"Category": true
 			},
 			"merge_strategy": "array_plus"
-		},
-		"VisualEditorAvailableContentModels": {
-			"value": {
-				"wikitext": "article"
-			},
-			"merge_strategy": "array_plus"
-		},
-		"VisualEditorUseChangeTagging": {
-			"value": true
-		},
-		"VisualEditorEnableBetaFeature": {
-			"value": false
-		},
-		"VisualEditorEnableWikitext": {
-			"value": false
-		},
-		"VisualEditorEnableWikitextBetaFeature": {
-			"value": false
-		},
-		"VisualEditorEnableDiffPage": {
-			"value": false
-		},
-		"VisualEditorEnableDiffPageBetaFeature": {
-			"value": false
-		},
-		"VisualEditorEnableVisualSectionEditing": {
-			"value": "mobile"
-		},
-		"VisualEditorUseSingleEditTab": {
-			"value": false
-		},
-		"VisualEditorSingleEditTabSwitchTime": {
-			"value": 20160101000000
-		},
-		"VisualEditorTabPosition": {
-			"value": "before"
-		},
-		"VisualEditorTabMessages": {
-			"value": {
-				"edit": null,
-				"editsource": "visualeditor-ca-editsource",
-				"create": null,
-				"createsource": "visualeditor-ca-createsource",
-				"editlocaldescription": "edit-local",
-				"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
-				"createlocaldescription": "create-local",
-				"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
-				"editsection": "editsection",
-				"editsectionsource": "visualeditor-ca-editsource-section"
-			}
-		},
-		"VisualEditorAutoAccountEnable": {
-			"value": false
-		},
-		"VisualEditorDisableForAnons": {
-			"description": "Do not change the edit tabs/links for anon users, regardless of other settings. Note that this does not actually disable the visual editor, contrary to the name, and you should probably set the user preferences so that wikitext editor is the default. (T253941)",
-			"value": false
-		},
-		"VisualEditorTransitionDefault": {
-			"value": false
-		},
-		"VisualEditorShowBetaWelcome": {
-			"value": true
-		},
-		"VisualEditorAllowExternalLinkPaste": {
-			"value": false
-		},
-		"VisualEditorNewAccountEnableProportion": {
-			"value": false
-		},
-		"VisualEditorFeedbackAPIURL": {
-			"value": false
-		},
-		"VisualEditorFeedbackTitle": {
-			"value": false
-		},
-		"VisualEditorSourceFeedbackTitle": {
-			"value": false
-		},
-		"VisualEditorSkinToolbarScrollOffset": {
-			"value": []
 		},
 		"VisualEditorBrowserUnsupportedList": {
 			"value": {
@@ -168,10 +73,105 @@
 				]
 			}
 		},
+		"VisualEditorDisableForAnons": {
+			"description": "Do not change the edit tabs/links for anon users, regardless of other settings. Note that this does not actually disable the visual editor, contrary to the name, and you should probably set the user preferences so that wikitext editor is the default. (T253941)",
+			"value": false
+		},
+		"VisualEditorEnableBetaFeature": {
+			"value": false
+		},
+		"VisualEditorEnableDiffPage": {
+			"value": false
+		},
+		"VisualEditorEnableDiffPageBetaFeature": {
+			"value": false
+		},
 		"VisualEditorEnableTocWidget": {
 			"value": false
 		},
+		"VisualEditorEnableVisualSectionEditing": {
+			"value": "mobile"
+		},
+		"VisualEditorEnableWikitext": {
+			"value": false
+		},
+		"VisualEditorEnableWikitextBetaFeature": {
+			"value": false
+		},
+		"VisualEditorFeedbackAPIURL": {
+			"value": false
+		},
+		"VisualEditorFeedbackTitle": {
+			"value": false
+		},
+		"VisualEditorFullRestbaseURL": {
+			"value": false
+		},
+		"VisualEditorNewAccountEnableProportion": {
+			"value": false
+		},
+		"VisualEditorParsoidAutoConfig": {
+			"value": true
+		},
+		"VisualEditorParsoidSettings": {
+			"value": []
+		},
+		"VisualEditorPluginModules": {
+			"value": []
+		},
+		"VisualEditorPreferenceModules": {
+			"value": {
+				"visualeditor-enable-experimental": "ext.visualEditor.experimental"
+			}
+		},
+		"VisualEditorPreloadModules": {
+			"value": [
+				"site",
+				"user"
+			]
+		},
 		"VisualEditorRebaserURL": {
+			"value": false
+		},
+		"VisualEditorRestbaseURL": {
+			"value": false
+		},
+		"VisualEditorShowBetaWelcome": {
+			"value": true
+		},
+		"VisualEditorSingleEditTabSwitchTime": {
+			"value": 20160101000000
+		},
+		"VisualEditorSkinToolbarScrollOffset": {
+			"value": []
+		},
+		"VisualEditorSourceFeedbackTitle": {
+			"value": false
+		},
+		"VisualEditorTabMessages": {
+			"value": {
+				"edit": null,
+				"editsource": "visualeditor-ca-editsource",
+				"create": null,
+				"createsource": "visualeditor-ca-createsource",
+				"editlocaldescription": "edit-local",
+				"editlocaldescriptionsource": "visualeditor-ca-editlocaldescriptionsource",
+				"createlocaldescription": "create-local",
+				"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
+				"editsection": "editsection",
+				"editsectionsource": "visualeditor-ca-editsource-section"
+			}
+		},
+		"VisualEditorTabPosition": {
+			"value": "before"
+		},
+		"VisualEditorTransitionDefault": {
+			"value": false
+		},
+		"VisualEditorUseChangeTagging": {
+			"value": true
+		},
+		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
 	},
@@ -191,28 +191,28 @@
 		"VisualEditorAlias": "VisualEditor.i18n.alias.php"
 	},
 	"Hooks": {
+		"BeforeInitialize": "VisualEditorHooks::onBeforeInitialize",
 		"BeforePageDisplay": "VisualEditorHooks::onBeforePageDisplay",
-		"SkinEditSectionLinks": "VisualEditorHooks::onSkinEditSectionLinks",
+		"ChangeTagsListActive": "VisualEditorHooks::onListDefinedTags",
+		"CustomEditor": "VisualEditorHooks::onCustomEditor",
 		"DifferenceEngineViewHeader": "VisualEditorHooks::onDifferenceEngineViewHeader",
+		"EditPage::showEditForm:fields": "VisualEditorHooks::onEditPageShowEditFormFields",
 		"GetBetaFeaturePreferences": "VisualEditorHooks::onGetBetaPreferences",
 		"GetPreferences": "VisualEditorHooks::onGetPreferences",
-		"PreferencesFormPreSave": "VisualEditorHooks::onPreferencesFormPreSave",
 		"ListDefinedTags": "VisualEditorHooks::onListDefinedTags",
-		"ChangeTagsListActive": "VisualEditorHooks::onListDefinedTags",
+		"LocalUserCreated": "VisualEditorHooks::onLocalUserCreated",
 		"MakeGlobalVariablesScript": "VisualEditorHooks::onMakeGlobalVariablesScript",
+		"OutputPageBodyAttributes": "VisualEditorHooks::onOutputPageBodyAttributes",
+		"ParserTestGlobals": "VisualEditorHooks::onParserTestGlobals",
+		"PreferencesFormPreSave": "VisualEditorHooks::onPreferencesFormPreSave",
+		"RecentChange_save": "VisualEditorHooks::onRecentChangeSave",
 		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks::onRedirectSpecialArticleRedirectParams",
 		"ResourceLoaderGetConfigVars": "VisualEditorHooks::onResourceLoaderGetConfigVars",
 		"ResourceLoaderRegisterModules": "VisualEditorHooks::onResourceLoaderRegisterModules",
+		"SkinEditSectionLinks": "VisualEditorHooks::onSkinEditSectionLinks",
 		"SkinTemplateNavigation": "VisualEditorHooks::onSkinTemplateNavigation",
 		"SkinTemplateNavigation::SpecialPage": "SpecialCollabPad::onSkinTemplateNavigationSpecialPage",
-		"ParserTestGlobals": "VisualEditorHooks::onParserTestGlobals",
-		"EditPage::showEditForm:fields": "VisualEditorHooks::onEditPageShowEditFormFields",
-		"RecentChange_save": "VisualEditorHooks::onRecentChangeSave",
-		"BeforeInitialize": "VisualEditorHooks::onBeforeInitialize",
-		"LocalUserCreated": "VisualEditorHooks::onLocalUserCreated",
-		"CustomEditor": "VisualEditorHooks::onCustomEditor",
-		"UserLoggedIn": "VisualEditorHooks::onUserLoggedIn",
-		"OutputPageBodyAttributes": "VisualEditorHooks::onOutputPageBodyAttributes"
+		"UserLoggedIn": "VisualEditorHooks::onUserLoggedIn"
 	},
 	"ResourceModules": {
 		"socket.io": {
@@ -2789,17 +2789,17 @@
 		"remoteExtPath": "VisualEditor"
 	},
 	"DefaultUserOptions": {
-		"visualeditor-enable": 1,
+		"visualeditor-autodisable": 0,
 		"visualeditor-betatempdisable": 0,
-		"visualeditor-newwikitext": 0,
-		"visualeditor-visualdiffpage": 0,
+		"visualeditor-editor": "wikitext",
+		"visualeditor-enable": 1,
 		"visualeditor-enable-experimental": 0,
 		"visualeditor-enable-language": 0,
 		"visualeditor-hidebetawelcome": 0,
-		"visualeditor-autodisable": 0,
+		"visualeditor-hidetabdialog": 0,
+		"visualeditor-newwikitext": 0,
 		"visualeditor-tabs": "remember-last",
-		"visualeditor-editor": "wikitext",
-		"visualeditor-hidetabdialog": 0
+		"visualeditor-visualdiffpage": 0
 	},
 	"SpecialPages": {
 		"CollabPad": "SpecialCollabPad"
@@ -2809,9 +2809,9 @@
 		"ApiVisualEditor": "includes/ApiVisualEditor.php",
 		"ApiVisualEditorEdit": "includes/ApiVisualEditorEdit.php",
 		"SpecialCollabPad": "includes/SpecialCollabPad.php",
-		"VisualEditorHooks": "includes/VisualEditorHooks.php",
 		"VisualEditorDataModule": "includes/VisualEditorDataModule.php",
-		"VisualEditorDesktopArticleTargetInitModule": "includes/VisualEditorDesktopArticleTargetInitModule.php"
+		"VisualEditorDesktopArticleTargetInitModule": "includes/VisualEditorDesktopArticleTargetInitModule.php",
+		"VisualEditorHooks": "includes/VisualEditorHooks.php"
 	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
