@@ -239,6 +239,7 @@
 	"visualeditor-preference-tabs-multi-tab": "Vis mig begge redigeringsfaneblade",
 	"visualeditor-preference-visualdiffpage-label": "Visuelle forskelle",
 	"visualeditor-rebase-client-export": "Eksporter",
+	"visualeditor-rebase-client-export-start": "Eksporter...",
 	"visualeditor-rebase-client-import": "Importer",
 	"visualeditor-rebase-client-import-name": "Sidetitel",
 	"visualeditor-redirect-description": "Omdiriger til $1",
