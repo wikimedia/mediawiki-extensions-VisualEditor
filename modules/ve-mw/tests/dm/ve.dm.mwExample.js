@@ -1768,7 +1768,7 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},
 	'mw:DisplaySpace': {
-		body: '<p>a<span typeof="mw:DisplaySpace mw:Placeholder">&nbsp;</span>: b</p>',
+		body: '<p>a<span typeof="mw:DisplaySpace">&nbsp;</span>: b</p>',
 		data: [
 			{ type: 'paragraph' },
 			'a',
