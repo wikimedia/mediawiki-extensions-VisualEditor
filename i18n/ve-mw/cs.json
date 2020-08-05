@@ -349,7 +349,7 @@
 	"visualeditor-parameter-search-more": "Zobrazit $1 {{PLURAL:$1|další pole|další pole|dalších polí}}",
 	"visualeditor-parameter-search-no-unused": "Žádná nevyužitá pole",
 	"visualeditor-parameter-search-unknown": "Neznámé pole",
-	"visualeditor-preference-betatempdisable": "Dočasně zakázat Vizuální editor, dokud je ve verzi „beta“",
+	"visualeditor-preference-betatempdisable": "Dočasně vypnout Vizuální editor, je-li v beta verzi",
 	"visualeditor-preference-core-description": "Povolit Vizuální editor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
