@@ -306,6 +306,7 @@
 	"visualeditor-preference-visualdiffpage-description": "Ota käyttöön uusi visuaalinen tila erilaisten sivujen tarkistamisessa",
 	"visualeditor-preference-visualdiffpage-label": "Visuaaliset eroavaisuudet",
 	"visualeditor-rebase-client-export": "Vie",
+	"visualeditor-rebase-client-export-start": "Vie...",
 	"visualeditor-rebase-client-import": "Tuo",
 	"visualeditor-rebase-client-import-name": "Sivun otsikko",
 	"visualeditor-recreate": "Sivu on poistettu sillä aikaa kun muokkasit sitä. Luo sivu uudelleen painamalla ”$1”.",
