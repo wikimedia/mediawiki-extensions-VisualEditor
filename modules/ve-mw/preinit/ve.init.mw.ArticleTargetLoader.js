@@ -121,6 +121,13 @@
 						accesskey = null,
 						title = null;
 
+					// Non-checkbox fields are permitted in the 'checkboxes' definitions (since MW
+					// core 4fa7d4d7), but VE doesn't yet support them.
+					// @TODO Remove this and properly support watchlist expiry and other widgets.
+					if ( options.class !== undefined && options.class !== 'OOUI\\CheckboxInputWidget' ) {
+						return;
+					}
+
 					// The messages documented below are just the ones defined in core.
 					// Extensions may add other checkboxes.
 					if ( options.tooltip ) {
