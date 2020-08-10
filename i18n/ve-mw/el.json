@@ -307,6 +307,7 @@
 	"visualeditor-preference-visualdiffpage-description": "Ενεργοποίηση της νέας οπτικής λειτουργίας στις σελίδες αναθεώρησης διαφορών.",
 	"visualeditor-preference-visualdiffpage-label": "Οπτικές διαφορές",
 	"visualeditor-rebase-client-export": "Εξαγωγή",
+	"visualeditor-rebase-client-export-start": "Εξαγωγή...",
 	"visualeditor-rebase-client-import": "Εισαγωγή",
 	"visualeditor-rebase-client-import-name": "Τίτλος σελίδας",
 	"visualeditor-recreate": "Η σελίδα έχει διαγραφεί από τότε που αρχίσατε να την επεξεργάζεστε. Πατήστε \"$1\" για να τη δημιουργήσετε ξανά.",
