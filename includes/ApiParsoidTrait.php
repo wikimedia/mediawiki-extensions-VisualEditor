@@ -70,6 +70,9 @@ trait ApiParsoidTrait {
 		} elseif ( $wgVisualEditorParsoidAutoConfig ) {
 			$params = $vrs['modules']['parsoid'] ?? [];
 			$params['restbaseCompat'] = true;
+			// forward cookies on private wikis
+			$params['forwardCookies'] = !MediaWikiServices::getInstance()
+				->getPermissionManager()->isEveryoneAllowed( 'read' );
 		} else {
 			// No global modules defined, so no way to contact the document server.
 			$this->dieWithError( 'apierror-visualeditor-docserver-unconfigured', 'no_vrs' );
