@@ -95,6 +95,7 @@
 	"visualeditor-dialog-media-upload": "আপলোড",
 	"visualeditor-dialog-meta-advancedsettings-label": "উন্নত সেটিং",
 	"visualeditor-dialog-meta-advancedsettings-section": "উন্নত সেটিং",
+	"visualeditor-dialog-meta-categories-addcategory-label": "এই পাতায় একটি বিষয়শ্রেণী যোগ করুন",
 	"visualeditor-dialog-meta-categories-category": "বিষয়শ্রেণী",
 	"visualeditor-dialog-meta-categories-data-label": "বিষয়শ্রেণীসমূহ",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "আপনি বাছাই করার একটি আলাদা সূচক তৈরি করে একটি বিষয়শ্রেণীর মাঝে প্রদর্শিত হওয়ার সময় এই পাতাটি যেভাবে প্রদর্শিত হয়, তা আপনি প্রতিস্থাপন করতে পারেন। এটি প্রায়শই এমন সব ব্যক্তির পাতা তৈরিতে ব্যবহৃত হয় যারা শেষের নামটি দ্বারা পরিচিত, কিন্তু তাদের নামকরণ করা রয়েছে তাদের প্রথমে প্রদর্শিত নামের দ্বারা।",
