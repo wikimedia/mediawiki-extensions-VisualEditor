@@ -184,7 +184,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ar tikrai norite tęsti neužpildę $1 {{PLURAL:$2|lauko|laukų}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Paslėpti parinktis",
 	"visualeditor-dialog-transclusion-title": "Intarpas",
-	"visualeditor-dialogbutton-media-tooltip": "Failas",
+	"visualeditor-dialogbutton-media-tooltip": "Paveikslėliai ir medija",
 	"visualeditor-dialogbutton-meta-tooltip": "Puslapio nustatymai",
 	"visualeditor-dialogbutton-template-tooltip": "Šablonas",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Intarpas",

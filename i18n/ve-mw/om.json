@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abbaabiyyummaa",
 			"Cedric31",
 			"Maammee",
 			"Oromoo",
@@ -72,9 +73,9 @@
 	"visualeditor-dialog-meta-categories-hidden": "Gareen kun fuula itti dabalamerratti akka hin agarsiifamne godhame.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Gareewwan dhokatan",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Garee walfakkaatu",
-	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Garee kana as hoofi",
+	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Garee kana as oofi",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Ramaddii haaraa",
-	"visualeditor-dialog-meta-categories-input-placeholder": "Ramaddii Dabali",
+	"visualeditor-dialog-meta-categories-input-placeholder": "Ramaddii dabali",
 	"visualeditor-dialog-meta-categories-missing": "Ramaddiin kun fuula ibsaa hafaaf.",
 	"visualeditor-dialog-meta-categories-options": "Filannoowwan",
 	"visualeditor-dialog-meta-categories-section": "Ramaddiiwwan",
@@ -191,7 +192,7 @@
 	"visualeditor-savedialog-label-create": "Fuula haaraa uumi",
 	"visualeditor-savedialog-label-error": "Dogoggora",
 	"visualeditor-savedialog-label-report": "Rakkoo gabaasi",
-	"visualeditor-savedialog-label-resolve-conflict": "Wal-faalla furi",
+	"visualeditor-savedialog-label-resolve-conflict": "Wal-dhabbii furi",
 	"visualeditor-savedialog-label-resume-editing": "Gulaaluu itti fufi",
 	"visualeditor-savedialog-label-review": "Jijjiiramoota kee fooyyeessi",
 	"visualeditor-savedialog-label-review-good": "Gara unka olkaayutti deebi'i",
