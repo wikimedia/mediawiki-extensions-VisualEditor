@@ -211,7 +211,10 @@ class ApiVisualEditor extends ApiBase {
 						$content = '';
 						if ( $title->getNamespace() == NS_MEDIAWIKI && $params['section'] !== 'new' ) {
 							// If this is a system message, get the default text.
-							$content = $title->getDefaultMessageText();
+							$msg = $title->getDefaultMessageText();
+							if ( $msg !== false ) {
+								$content = $title->getDefaultMessageText();
+							}
 						}
 						Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
 						if ( $content === '' && !empty( $params['preload'] ) ) {
