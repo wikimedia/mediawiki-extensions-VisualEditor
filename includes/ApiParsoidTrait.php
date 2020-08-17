@@ -252,17 +252,18 @@ trait ApiParsoidTrait {
 
 		// Adapted from RESTBase mwUtil.parseETag()
 		// ETag is not expected when creating a new page (oldid=0)
-		if ( $oldid && !preg_match( '/
+		if ( $oldid && !( preg_match( '/
 			^(?:W\\/)?"?
-			([^"\\/]+)
+			' . preg_quote( "$oldid", '/' ) . '
 			(?:\\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))
 			(?:\\/([^"]+))?
 			"?$
-		/x', $etag ) ) {
+		/x', $etag ) ) ) {
 			$this->getLogger()->info(
-				__METHOD__ . ": Received funny ETag from client: {etag}",
+				__METHOD__ . ": Received funny ETag from client: '{etag}'",
 				[
 					'etag' => $etag,
+					'oldid' => $oldid,
 					'requestPath' => $path,
 				]
 			);
