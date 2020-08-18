@@ -876,21 +876,24 @@ class VisualEditorHooks {
 
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
-		$preferences['visualeditor-enable'] = [
-			'version' => '1.0',
-			'label-message' => 'visualeditor-preference-core-label',
-			'desc-message' => 'visualeditor-preference-core-description',
-			'screenshot' => [
-				'ltr' => "$iconpath/betafeatures-icon-VisualEditor-ltr.svg",
-				'rtl' => "$iconpath/betafeatures-icon-VisualEditor-rtl.svg",
-			],
-			'info-message' => 'visualeditor-preference-core-info-link',
-			'discussion-message' => 'visualeditor-preference-core-discussion-link',
-			'requirements' => [
-				'javascript' => true,
-				'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
-			]
-		];
+
+		if ( $veConfig->get( 'VisualEditorEnableBetaFeature' ) ) {
+			$preferences['visualeditor-enable'] = [
+				'version' => '1.0',
+				'label-message' => 'visualeditor-preference-core-label',
+				'desc-message' => 'visualeditor-preference-core-description',
+				'screenshot' => [
+					'ltr' => "$iconpath/betafeatures-icon-VisualEditor-ltr.svg",
+					'rtl' => "$iconpath/betafeatures-icon-VisualEditor-rtl.svg",
+				],
+				'info-message' => 'visualeditor-preference-core-info-link',
+				'discussion-message' => 'visualeditor-preference-core-discussion-link',
+				'requirements' => [
+					'javascript' => true,
+					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
+				]
+			];
+		}
 
 		if (
 			$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' ) &&

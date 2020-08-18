@@ -74,6 +74,9 @@
 		"VisualEditorUseChangeTagging": {
 			"value": true
 		},
+		"VisualEditorEnableBetaFeature": {
+			"value": false
+		},
 		"VisualEditorEnableWikitext": {
 			"value": false
 		},
