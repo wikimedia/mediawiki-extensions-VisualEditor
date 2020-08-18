@@ -322,7 +322,7 @@
 				}
 			}
 			if ( !apiPromise ) {
-				apiPromise = apiXhr.then( function ( data, jqxhr ) {
+				apiPromise = apiXhr.then( function ( response, jqxhr ) {
 					ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
 					ve.track( 'mwtiming.performance.system.apiLoad', {
 						bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
@@ -331,11 +331,11 @@
 						targetName: options.targetName,
 						mode: 'visual'
 					} );
-					if ( data.visualeditor ) {
-						data.visualeditor.switched = switched;
-						data.visualeditor.fromEditedState = fromEditedState;
+					if ( response.visualeditor ) {
+						response.visualeditor.switched = switched;
+						response.visualeditor.fromEditedState = fromEditedState;
 					}
-					return data;
+					return response;
 				} );
 			}
 
@@ -394,7 +394,7 @@
 					} );
 				}
 				restbasePromise = restbaseXhr.then(
-					function ( data, status, jqxhr ) {
+					function ( response, status, jqxhr ) {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
 						ve.track( 'mwtiming.performance.system.restbaseLoad', {
 							bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
@@ -402,7 +402,7 @@
 							targetName: options.targetName,
 							mode: 'visual'
 						} );
-						return [ data, jqxhr.getResponseHeader( 'etag' ) ];
+						return [ response, jqxhr.getResponseHeader( 'etag' ) ];
 					},
 					function ( xhr, code, _ ) {
 						if ( xhr.status === 404 ) {

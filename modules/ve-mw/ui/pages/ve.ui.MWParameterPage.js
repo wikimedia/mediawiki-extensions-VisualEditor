@@ -263,10 +263,10 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		type === 'wiki-user-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		valueInputConfig.validate = function ( value ) {
+		valueInputConfig.validate = function ( val ) {
 			// TODO: Check against wgMaxNameChars
 			// TODO: Check against unicode validation regex from MW core's User::isValidUserName
-			return !!mw.Title.newFromText( value );
+			return !!mw.Title.newFromText( val );
 		};
 		return new mw.widgets.UserInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
 	} else if (

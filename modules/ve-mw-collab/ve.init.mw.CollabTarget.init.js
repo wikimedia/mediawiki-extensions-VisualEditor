@@ -289,7 +289,7 @@
 		} );
 	}
 
-	function importTitle() {
+	function onImportSubmit() {
 		importInput.getValidity().then( function () {
 			var title = mw.Title.newFromText( importInput.getValue().trim() );
 
@@ -306,8 +306,8 @@
 		return !!mw.Title.newFromText( value );
 	} );
 	importInput.on( 'change', onImportChange );
-	importInput.on( 'enter', importTitle );
-	importButton.on( 'click', importTitle );
+	importInput.on( 'enter', onImportSubmit );
+	importButton.on( 'click', onImportSubmit );
 	onImportChange();
 
 	if ( pageTitle ) {
