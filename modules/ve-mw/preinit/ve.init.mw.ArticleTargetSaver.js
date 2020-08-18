@@ -53,9 +53,10 @@
 			var i, len;
 
 			function copyAttributes( from, to ) {
-				from.attributes.forEach( function ( attr ) {
-					to.setAttribute( attr.name, attr.value );
-				} );
+				var i2, len2;
+				for ( i2 = 0, len2 = from.attributes.length; i2 < len2; i2++ ) {
+					to.setAttribute( from.attributes[ i2 ].name, from.attributes[ i2 ].value );
+				}
 			}
 
 			if ( oldDoc ) {
