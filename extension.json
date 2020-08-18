@@ -360,7 +360,7 @@
 			"dependencies": [
 				"jquery.client",
 				"jquery.textSelection",
-				"mediawiki.page.startup",
+				"mediawiki.page.ready",
 				"mediawiki.storage",
 				"mediawiki.Title",
 				"mediawiki.Uri",
