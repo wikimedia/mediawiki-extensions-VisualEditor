@@ -26,7 +26,7 @@
 		pageCanLoadEditor, veEditBaseUri, init, targetPromise, enable, tempdisable, autodisable,
 		tabPreference, enabledForUser, initialWikitext, oldId,
 		isLoading, tempWikitextEditor, tempWikitextEditorData, $toolbarPlaceholder,
-		data = require( './data.json' ),
+		configData = require( './data.json' ),
 		veactionToMode = {
 			edit: 'visual',
 			editsource: 'source'
@@ -351,10 +351,10 @@
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
 	 * @param {string} [section] Section to edit (currently just source mode)
-	 * @param {jQuery.Promise} [targetPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
+	 * @param {jQuery.Promise} [tPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
-	function activateTarget( mode, section, targetPromise, modified ) {
+	function activateTarget( mode, section, tPromise, modified ) {
 		var dataPromise;
 		// Only call requestPageData early if the target object isn't there yet.
 		// If the target object is there, this is a second or subsequent load, and the
@@ -400,8 +400,8 @@
 		incrementLoadingProgress();
 		active = true;
 
-		targetPromise = targetPromise || getTarget( mode, section );
-		targetPromise
+		tPromise = tPromise || getTarget( mode, section );
+		tPromise
 			.then( function ( target ) {
 				var activatePromise;
 				incrementLoadingProgress();
@@ -619,11 +619,11 @@
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
 				).each( function () {
-					var uri = new mw.Uri( this.href );
-					if ( 'action' in uri.query ) {
-						delete uri.query.action;
-						uri.query.veaction = 'editsource';
-						$( this ).attr( 'href', uri.toString() );
+					var linkUri = new mw.Uri( this.href );
+					if ( 'action' in linkUri.query ) {
+						delete linkUri.query.action;
+						linkUri.query.veaction = 'editsource';
+						$( this ).attr( 'href', linkUri.toString() );
 					}
 				} );
 			}
@@ -986,17 +986,17 @@
 		 * @param {string} [section] Override edit section, taken from link URL if not specified
 		 */
 		onEditSectionLinkClick: function ( mode, e, section ) {
-			var targetPromise,
-				uri = new mw.Uri( e.target.href ),
-				title = mw.Title.newFromText( uri.query.title || '' );
+			var tPromise,
+				linkUri = new mw.Uri( e.target.href ),
+				title = mw.Title.newFromText( linkUri.query.title || '' );
 
 			if (
 				// Modified click (e.g. ctrl+click)
 				!init.isUnmodifiedLeftClick( e ) ||
 				// Not an edit action
-				!( 'action' in uri.query || 'veaction' in uri.query ) ||
+				!( 'action' in linkUri.query || 'veaction' in linkUri.query ) ||
 				// Edit target is on another host (e.g. commons file)
-				uri.getHostPort() !== location.host ||
+				linkUri.getHostPort() !== location.host ||
 				// Title param doesn't match current page
 				title && title.getPrefixedText() !== new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getPrefixedText()
 			) {
@@ -1009,11 +1009,11 @@
 
 			trackActivateStart( { type: 'section', mechanism: 'click', mode: mode } );
 
-			if ( history.pushState && !( uri.query.veaction in veactionToMode ) ) {
+			if ( history.pushState && !( linkUri.query.veaction in veactionToMode ) ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
 				// back button from breaking when used to exit VE. FIXME: there should be a better
 				// way to do this. See also similar code in the DesktopArticleTarget constructor.
-				history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+				history.replaceState( { tag: 'visualeditor' }, document.title, linkUri );
 				// Change the state to the href of the section link that was clicked. This saves
 				// us from having to figure out the section number again.
 				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
@@ -1021,10 +1021,10 @@
 
 			// Use section from URL
 			if ( section === undefined ) {
-				section = parseSection( uri.query.section );
+				section = parseSection( linkUri.query.section );
 			}
-			targetPromise = getTarget( mode, section );
-			activateTarget( mode, section, targetPromise );
+			tPromise = getTarget( mode, section );
+			activateTarget( mode, section, tPromise );
 		},
 
 		/**
@@ -1229,16 +1229,16 @@
 		}
 
 		function isSupportedEditPage() {
-			return data.unsupportedEditParams.every( function ( param ) {
+			return configData.unsupportedEditParams.every( function ( param ) {
 				return uri.query[ param ] === undefined;
 			} );
 		}
 
 		function getInitialEditMode() {
 			// On view pages if veaction is correctly set
-			var mode = veactionToMode[ uri.query.veaction ];
-			if ( isViewPage && init.isAvailable && availableModes.indexOf( mode ) !== -1 ) {
-				return mode;
+			var m = veactionToMode[ uri.query.veaction ];
+			if ( isViewPage && init.isAvailable && availableModes.indexOf( m ) !== -1 ) {
+				return m;
 			}
 			// Edit pages
 			if ( isEditPage && isSupportedEditPage() ) {
@@ -1318,8 +1318,8 @@
 							classes: [ 've-init-mw-editSwitch' ]
 						} );
 
-						switchToolbar.on( 'switchEditor', function ( mode ) {
-							if ( mode === 'visual' ) {
+						switchToolbar.on( 'switchEditor', function ( m ) {
+							if ( m === 'visual' ) {
 								init.activateVe( 'visual' );
 								$( '#wpTextbox1' ).trigger( 'wikiEditor-switching-visualeditor' );
 							}

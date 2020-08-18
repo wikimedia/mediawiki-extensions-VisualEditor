@@ -265,13 +265,13 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		}
 
 		this.toolbarSetupDeferred.done( function () {
-			var surface = target.getSurface();
+			var newSurface = target.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
-			if ( surface ) {
+			if ( newSurface ) {
 				ve.track( 'trace.initializeToolbar.enter', { mode: mode } );
 				target.getToolbar().initialize();
-				surface.getView().emit( 'position' );
-				surface.getContext().updateDimensions();
+				newSurface.getView().emit( 'position' );
+				newSurface.getContext().updateDimensions();
 				ve.track( 'trace.initializeToolbar.exit', { mode: mode } );
 				ve.track( 'trace.activate.exit', { mode: mode } );
 			}
