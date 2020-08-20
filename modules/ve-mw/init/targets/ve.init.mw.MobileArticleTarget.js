@@ -129,6 +129,7 @@ ve.init.mw.MobileArticleTarget.prototype.clearSurfaces = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	var target = this,
+		animateToolbarIntoView,
 		// Editor may not have loaded yet, in which case `this.surface` is undefined
 		surfaceView = this.surface && this.surface.getView(),
 		isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
@@ -152,10 +153,16 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	// browser paints, so the toolbar would lag behind in a very unseemly manner. Additionally,
 	// getBoundingClientRect returns incorrect values during scrolling, so make sure to calculate
 	// it only after the scrolling ends (https://openradar.appspot.com/radar?id=6668472289329152).
-	this.onContainerScrollTimer = setTimeout( function () {
+	this.onContainerScrollTimer = setTimeout( animateToolbarIntoView = function () {
 		var pos, viewportHeight, scrollX, scrollY, headerHeight, headerTranslateY,
 			$header = target.overlay.$el.find( '.overlay-header-container' ),
 			$overlaySurface = target.$overlaySurface;
+
+		if ( target.toolbarAnimating ) {
+			// We can't do this while the 'transform' transition is happening, because
+			// getBoundingClientRect() returns values that reflect that (and are negative).
+			return;
+		}
 
 		// Check if toolbar is offscreen. In a better world, this would reject all negative values
 		// (pos >= 0), but getBoundingClientRect often returns funny small fractional values after
@@ -176,13 +183,13 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 		scrollY = document.body.scrollTop || document.documentElement.scrollTop;
 		scrollX = document.body.scrollLeft || document.documentElement.scrollLeft;
 
+		// Prevent the scrolling we're about to do from triggering this event handler again.
+		target.toolbarAnimating = true;
+
 		// Scroll down and translate the surface by the same amount, otherwise the content at new
 		// scroll position visibly flashes.
 		$overlaySurface.css( 'transform', 'translateY( ' + viewportHeight + 'px )' );
 		window.scroll( scrollX, scrollY + viewportHeight );
-
-		// (Note that the scrolling we just did will naturally trigger another 'scroll' event,
-		// and run this handler again after 250ms. This is okay.)
 
 		// Prepate to animate toolbar sliding into view
 		$header.removeClass( 'toolbar-shown toolbar-shown-done' );
@@ -201,7 +208,13 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 			$header.addClass( 'toolbar-shown' ).css( 'transform', '' );
 			setTimeout( function () {
 				$header.addClass( 'toolbar-shown-done' );
-			}, 250 );
+				// Wait until the animation is done before allowing this event handler to trigger again
+				target.toolbarAnimating = false;
+				// Re-check after the animation is done, in case the user scrolls in the meantime.
+				animateToolbarIntoView();
+				// The animation takes 250ms but we need to wait longer for some reason…
+				// 'transitionend' event also doesn't seem to work reliably.
+			}, 300 );
 			// If the delays below are made any smaller, the weirdest graphical glitches happen,
 			// so don't mess with them
 		}, 50 );
