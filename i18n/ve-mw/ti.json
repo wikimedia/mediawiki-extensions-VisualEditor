@@ -4,11 +4,11 @@
 			"Joanmp17"
 		]
 	},
-	"tooltip-ca-createsource": "ናይዚ ገጽ ምንጪ ኮድ ፈጠረ",
+	"tooltip-ca-createsource": "ናይዚ ገጽ ምንጪ ኮድ ፍጠር",
 	"tooltip-ca-ve-edit": "እዚ ገጽ ኣመዓራርይ",
 	"visualeditor-advancedsettings-tool": "ብሉጻት ኣቀማምጣታት",
 	"visualeditor-backbutton-tooltip": "ተመለስ",
-	"visualeditor-ca-createsource": "ኮድ ፈጠረ",
+	"visualeditor-ca-createsource": "ኮድ ፍጠር",
 	"visualeditor-ca-editsource": "ኮድ ኣመዓራርይ",
 	"visualeditor-ca-editsource-section": "ኮድ ኣመዓራርይ",
 	"visualeditor-ca-ve-create": "ርእየታዊ መታዓራረይ",
@@ -70,7 +70,7 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "ናይ ቋንቋ ኮድ",
 	"visualeditor-rebase-client-export": "ስደድ",
 	"visualeditor-rebase-client-import": "ኣእትው",
-	"visualeditor-savedialog-label-create": "ገጽ ፈጠረ",
+	"visualeditor-savedialog-label-create": "ገጽ ፍጠር",
 	"visualeditor-savedialog-label-error": "ጌጋ",
 	"visualeditor-savedialog-label-publish-short": "ኣሕቲሙ",
 	"visualeditor-savedialog-label-save-short": "ኣቐምጥ",
