@@ -1270,7 +1270,7 @@
 		if ( init.isAvailable && pageCanLoadEditor && !requiredSkinElements ) {
 			mw.log.warn(
 				'Your skin is incompatible with VisualEditor. ' +
-				'See <https://www.mediawiki.org/wiki/VisualEditor/Skin_requirements> for the requirements.'
+				'See https://www.mediawiki.org/wiki/Extension:VisualEditor/Skin_requirements for the requirements.'
 			);
 		} else if ( init.isAvailable ) {
 			mode = getInitialEditMode();
