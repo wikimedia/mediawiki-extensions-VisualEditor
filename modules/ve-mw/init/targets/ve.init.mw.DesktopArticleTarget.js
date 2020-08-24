@@ -903,7 +903,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
-	var newUrlParams, watchChecked, watch,
+	var newUrlParams, watch,
 		target = this;
 
 	// Parent method
@@ -926,10 +926,12 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 		// User logged in if module loaded.
 		if ( mw.loader.getState( 'mediawiki.page.watch.ajax' ) === 'ready' ) {
 			watch = require( 'mediawiki.page.watch.ajax' );
-			watchChecked = this.checkboxesByName.wpWatchthis && this.checkboxesByName.wpWatchthis.isSelected();
+
 			watch.updateWatchLink(
 				$( '#ca-watch a, #ca-unwatch a' ),
-				watchChecked ? 'unwatch' : 'watch'
+				data.watched ? 'unwatch' : 'watch',
+				'idle',
+				data.watchlistexpiry
 			);
 		}
 
