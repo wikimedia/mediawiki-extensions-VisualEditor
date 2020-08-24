@@ -94,7 +94,7 @@
 	"visualeditor-dialog-media-type-frame": "Оквир",
 	"visualeditor-dialog-media-type-frameless": "Без оквира",
 	"visualeditor-dialog-media-type-none": "Основна",
-	"visualeditor-dialog-media-type-section": "Тип слике",
+	"visualeditor-dialog-media-type-section": "Врста слике",
 	"visualeditor-dialog-media-type-section-help": "Можете да поставите како ће се медијске ставке појавити на страници. Ово треба да буде формата минијатуре да би било конзистентно са другим страницама у готово свим случајевима.",
 	"visualeditor-dialog-media-type-thumb": "Минијатура",
 	"visualeditor-dialog-media-upload": "Отпреми",

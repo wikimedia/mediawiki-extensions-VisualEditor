@@ -12,7 +12,8 @@
 			"Otogi",
 			"Pras",
 			"Silovan",
-			"Tokoko"
+			"Tokoko",
+			"Გიო ოქრო"
 		]
 	},
 	"tooltip-ca-createsource": "ამ გვერდის წყაროს კოდის შექმნა",
@@ -32,6 +33,7 @@
 	"visualeditor-ca-ve-edit": "ვიზუალური რედაქტორი",
 	"visualeditor-ca-ve-edit-section": "ვიზუალური რედაქტორი",
 	"visualeditor-categories-tool": "კატეგორიები",
+	"visualeditor-changedesc-mwredirect": "გადამისამართების სამიზნე შეცვალა $1-დან $2-ზე",
 	"visualeditor-desc": "მედიავიკის ვიზუალური რედაქტორი",
 	"visualeditor-descriptionpagelink": "Project:ვიზუალური რედაქტორი",
 	"visualeditor-dialog-media-alttext-section": "ალტერნატიული ტექსტი",

@@ -130,6 +130,10 @@
 	"visualeditor-parameter-search-unknown": "Naməlum sahə",
 	"visualeditor-preference-betatempdisable": "Vizual redaktoru beta mərhələsində olduğu üçün qeyri-aktiv et",
 	"visualeditor-preference-core-label": "Vizual redaktor",
+	"visualeditor-preference-newwikitexteditor-description": "Vizual redaktor daxilində yeni viki-mətn rejimini aktivləşdirin. Bu rejim vizual redaktorda mövcud olan bir sıra alətləri özündə birləşdirir, oxşar dizayndan istifadə edir və iki redaktor arasında keçidi asanlaşdırır.",
+	"visualeditor-preference-newwikitexteditor-label": "Yeni viki-mətn rejimi",
+	"visualeditor-preference-visualdiffpage-description": "Səhifə versiyaları fərqləri üçün yeni vizual rejimi aktivləşdirin.",
+	"visualeditor-preference-visualdiffpage-label": "Vizual fərqlər",
 	"visualeditor-savedialog-label-create": "Səhifə yaradın",
 	"visualeditor-savedialog-label-error": "Xəta",
 	"visualeditor-savedialog-label-report": "Xətanı bildir",
@@ -144,5 +148,6 @@
 	"visualeditor-savedialog-warning-dirty": "Etdiyiniz dəyişikliklərdə səhv ola bilər – lütfən yadda saxlamazdan əvvəl yoxlayın.",
 	"visualeditor-saveerror": "Yaddaşda qeyd edilərkən xəta oldu: $1.",
 	"visualeditor-serializeerror": "Yaddaşda yüklənərkən xəta oldu: $1.",
+	"visualeditor-templatesused-tool": "İstifadə edilmiş şablonlar",
 	"visualeditor-version-label": "Versiya"
 }
