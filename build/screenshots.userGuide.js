@@ -11,16 +11,18 @@ function runTests( lang ) {
 
 	test.describe( 'Screenshots: ' + lang, function () {
 		this.lang = lang;
-		test.it( 'Toolbar & action tools', function () {
+		test.it( 'Screenshots', function () {
+
+			// Toolbar & action tools
 			runLang( 'VisualEditor_toolbar', userGuide.toolbar, 0 );
 			runLang( 'VisualEditor_toolbar_actions', userGuide.toolbarActions, 0 );
-		} );
-		test.it( 'Citoid inspector', function () {
+
+			// Citoid inspector
 			runLang( 'VisualEditor_Citoid_Inspector', userGuide.citoidInspector );
 			runLang( 'VisualEditor_Citoid_Inspector_Manual', userGuide.citoidInspectorManual );
-			runLang( 'VisualEditor_Citoid_Inspector_Reuse', userGuide.citoidInspectorReuse );
-		} );
-		test.it( 'Tool groups (headings/text style/indentation/insert/page settings)', function () {
+			runLang( 'VisualEditor_Citoid_Inspector_Reuse', userGuide.citoidInspectorReuse, undefined, userGuide.citoidInspectorTeardown );
+
+			// Tool groups (headings/text style/indentation/insert/page settings)
 			runLang( 'VisualEditor_Toolbar_Headings', userGuide.toolbarHeadings );
 			runLang( 'VisualEditor_Toolbar_Formatting', userGuide.toolbarFormatting );
 			runLang( 'VisualEditor_Toolbar_Lists_and_indentation', userGuide.toolbarLists );
@@ -32,25 +34,25 @@ function runTests( lang ) {
 			runLang( 'VisualEditor_References_List_Insert_Menu', userGuide.toolbarReferences );
 			runLang( 'VisualEditor_More_Settings', userGuide.toolbarSettings );
 			runLang( 'VisualEditor_page_settings_item', userGuide.toolbarPageSettings );
-			runLang( 'VisualEditor_category_item', userGuide.toolbarCategory );
-		} );
-		test.it( 'Save dialog', function () {
-			runLang( 'VisualEditor_save_dialog', userGuide.save );
-		} );
-		test.it( 'Special character inserter', function () {
-			runLang( 'VisualEditor_Toolbar_SpecialCharacters', userGuide.specialCharacters );
-		} );
-		test.it( 'Math dialog', function () {
-			runLang( 'VisualEditor_formula', userGuide.formula );
-		} );
-		test.it( 'Reference list dialog', function () {
-			runLang( 'VisualEditor_references_list', userGuide.referenceList );
-		} );
-		test.it( 'Cite button', function () {
-			runLang( 'VisualEditor_citoid_Cite_button', userGuide.toolbarCite, 0 );
-		} );
-		test.it( 'Link inspector', function () {
-			runLang( 'VisualEditor-link_tool-search_results', userGuide.linkSearchResults );
+			runLang( 'VisualEditor_category_item', userGuide.toolbarCategory, undefined, userGuide.toolbarTeardown );
+
+			// Save dialog
+			runLang( 'VisualEditor_save_dialog', userGuide.save, undefined, userGuide.saveTeardown );
+
+			// Special character inserter
+			runLang( 'VisualEditor_Toolbar_SpecialCharacters', userGuide.specialCharacters, undefined, userGuide.specialCharactersTeardown );
+
+			// Math dialog
+			runLang( 'VisualEditor_formula', userGuide.formula, undefined, userGuide.formulaTeardown );
+
+			// Reference list dialog
+			runLang( 'VisualEditor_references_list', userGuide.referenceList, undefined, userGuide.referenceListTeardown );
+
+			// Cite button
+			runLang( 'VisualEditor_citoid_Cite_button', userGuide.toolbarCite, undefined, userGuide.toolbarCiteTeardown );
+
+			// Link inspector
+			runLang( 'VisualEditor-link_tool-search_results', userGuide.linkSearchResults, undefined, userGuide.linkSearchResultsTeardown );
 		} );
 	} );
 }
