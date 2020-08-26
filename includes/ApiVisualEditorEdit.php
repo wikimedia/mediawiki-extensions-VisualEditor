@@ -451,6 +451,8 @@ class ApiVisualEditorEdit extends ApiBase {
 					$result['newrevid'] = intval( $saveresult['edit']['newrevid'] );
 				}
 
+				$result['watched'] = $saveresult['edit']['watched'] ?? false;
+				$result['watchlistexpiry'] = $saveresult['edit']['watchlistexpiry'] ?? null;
 				$result['result'] = 'success';
 			}
 		}
