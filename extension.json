@@ -778,7 +778,6 @@
 				"visualeditor-diff-no-changes",
 				"visualeditor-editconflict",
 				"visualeditor-editsummary",
-				"visualeditor-editsummary-bytes-remaining",
 				"visualeditor-editsummary-characters-remaining",
 				"visualeditor-serializeerror",
 				"visualeditor-savedialog-error-badtoken",
