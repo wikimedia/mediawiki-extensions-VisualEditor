@@ -249,7 +249,6 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	delete valueInputConfig.validate;
 
 	// TODO:
-	// * wiki-file-name
 	// * date - T100206
 	// * number - T124850
 	// * unbalanced-wikitext/content - T106242
@@ -259,6 +258,15 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
 		return new mw.widgets.TitleInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
+	} else if (
+		type === 'wiki-file-name' &&
+		( value === '' || mw.Title.newFromText( value ) )
+	) {
+		return new mw.widgets.TitleInputWidget( $.extend( {}, valueInputConfig, {
+			api: ve.init.target.getContentApi(),
+			namespace: 6,
+			showImages: true
+		} ) );
 	} else if (
 		type === 'wiki-user-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
