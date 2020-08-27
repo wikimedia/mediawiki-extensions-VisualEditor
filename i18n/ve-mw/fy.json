@@ -197,7 +197,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|meidieling|meidielings}}",
 	"visualeditor-editnotices-tooltip": "Meidielings oer it bewurkjen",
 	"visualeditor-editsummary": "Beskriuw wat jo feroare hawwe",
-	"visualeditor-editsummary-bytes-remaining": "It oerbleaune tal bytes",
 	"visualeditor-editsummary-characters-remaining": "It oerbleaune tal tekens",
 	"visualeditor-educationpopup-dismiss": "Bêst, begrepen",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

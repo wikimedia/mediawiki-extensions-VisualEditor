@@ -148,7 +148,6 @@
 	"visualeditor-editnotices-tool": "$1{{PLURAL:$1| notico| notici}}",
 	"visualeditor-editnotices-tooltip": "Redakto-notici",
 	"visualeditor-editsummary": "Deskriptez vua chanji",
-	"visualeditor-editsummary-bytes-remaining": "Quanto di cetera bicoki*",
 	"visualeditor-educationpopup-dismiss": "Me komprenas, celez",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulo di la pagino",

@@ -206,7 +206,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|shënim|shënime}}",
 	"visualeditor-editnotices-tooltip": "Përpunoni shënime",
 	"visualeditor-editsummary": "Përshkruani ç’ndryshuat",
-	"visualeditor-editsummary-bytes-remaining": "Numri i bajtëve të mbetur",
 	"visualeditor-editsummary-characters-remaining": "Numri i shenjave të mbetura",
 	"visualeditor-educationpopup-dismiss": "OK, e mora vesh",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

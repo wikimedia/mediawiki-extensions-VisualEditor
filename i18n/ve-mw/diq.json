@@ -205,7 +205,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|not|noti}}",
 	"visualeditor-editnotices-tooltip": "Mengenan vurnayış",
 	"visualeditor-editsummary": "Menına vırnayışa",
-	"visualeditor-editsummary-bytes-remaining": "Amora mendena baytan",
 	"visualeditor-editsummary-characters-remaining": "Amarê mendena karakteran",
 	"visualeditor-educationpopup-dismiss": "Temam, fehm kerd",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

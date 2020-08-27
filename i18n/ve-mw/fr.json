@@ -249,7 +249,6 @@
 	"visualeditor-editnotices-tool": "$1 avertissement{{PLURAL:$1||s}}",
 	"visualeditor-editnotices-tooltip": "Avertissements de modification",
 	"visualeditor-editsummary": "Décrivez ce que vous avez modifié",
-	"visualeditor-editsummary-bytes-remaining": "Le nombre d’octets restants",
 	"visualeditor-editsummary-characters-remaining": "Le nombre de caractères restant",
 	"visualeditor-educationpopup-dismiss": "C’est bon, allons-y",
 	"visualeditor-feedback-defaultmessage": "URL : $1",

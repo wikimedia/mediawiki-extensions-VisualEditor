@@ -223,7 +223,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notifica|notifiche}}",
 	"visualeditor-editnotices-tooltip": "Avvisi per le modifiche",
 	"visualeditor-editsummary": "Descrivi cosa hai cambiato",
-	"visualeditor-editsummary-bytes-remaining": "Il numero di byte rimanenti",
 	"visualeditor-educationpopup-dismiss": "Ok, capito",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titolo della pagina",

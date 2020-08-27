@@ -167,7 +167,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|tilkynning|tilkynningar}}",
 	"visualeditor-editnotices-tooltip": "Breytinga tilkynning",
 	"visualeditor-editsummary": "Lýstu því sem þú hefur breytt",
-	"visualeditor-editsummary-bytes-remaining": "Fjöldi bæta sem eru eftir",
 	"visualeditor-educationpopup-dismiss": "Ég náði því",
 	"visualeditor-feedback-defaultmessage": "Vefslóð: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Síðutitill",

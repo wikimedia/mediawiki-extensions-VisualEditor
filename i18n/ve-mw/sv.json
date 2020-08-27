@@ -213,7 +213,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notis|notiser}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsnotiser",
 	"visualeditor-editsummary": "Beskriv vad du har ändrat",
-	"visualeditor-editsummary-bytes-remaining": "Antalet återstående byte",
 	"visualeditor-editsummary-characters-remaining": "Antalet återstående tecken",
 	"visualeditor-educationpopup-dismiss": "Okej, jag förstår",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

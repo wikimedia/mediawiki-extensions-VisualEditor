@@ -228,7 +228,6 @@
 	"visualeditor-editnotices-tool": "$1{{PLURAL:$1|个警告}}",
 	"visualeditor-editnotices-tooltip": "编辑警告",
 	"visualeditor-editsummary": "描述您的更改",
-	"visualeditor-editsummary-bytes-remaining": "剩余字节数",
 	"visualeditor-editsummary-characters-remaining": "剩余字节数",
 	"visualeditor-educationpopup-dismiss": "好的，明白了",
 	"visualeditor-feedback-defaultmessage": "URL：$1",

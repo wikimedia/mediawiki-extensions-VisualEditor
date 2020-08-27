@@ -212,7 +212,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avís|avisos}}",
 	"visualeditor-editnotices-tooltip": "Avisos d'edició",
 	"visualeditor-editsummary": "Descriviu el que heu canviat",
-	"visualeditor-editsummary-bytes-remaining": "El nombre de bytes restants",
 	"visualeditor-editsummary-characters-remaining": "El nombre de caràcters restants",
 	"visualeditor-educationpopup-dismiss": "D'acord",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

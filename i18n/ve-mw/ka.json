@@ -189,7 +189,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|შეტყობინება|შეტყობინება}}",
 	"visualeditor-editnotices-tooltip": "რედაქტირებათა შეტყობინებები",
 	"visualeditor-editsummary": "აღწერეთ თქვენ მიერ შეტანილი ცვლილებები",
-	"visualeditor-editsummary-bytes-remaining": "დარჩენილ ბაიტთა რაოდენობა",
 	"visualeditor-educationpopup-dismiss": "გასაგებია",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "გვერდის სათაური",

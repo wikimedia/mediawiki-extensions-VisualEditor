@@ -162,7 +162,6 @@
 	"visualeditor-editnotices-tool": "$1{{PLURAL:$1|張告示}}",
 	"visualeditor-editnotices-tooltip": "編輯通告",
 	"visualeditor-editsummary": "講吓你改咗啲乜",
-	"visualeditor-editsummary-bytes-remaining": "仲可以寫咁多個字元",
 	"visualeditor-educationpopup-dismiss": "清楚明白",
 	"visualeditor-feedback-defaultmessage": "網址：$1",
 	"visualeditor-formatdropdown-format-mw-heading1": "版題",

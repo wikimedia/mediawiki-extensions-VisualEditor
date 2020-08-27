@@ -186,7 +186,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|avertisment|avertismente|de avertismente}}",
 	"visualeditor-editnotices-tooltip": "Notificări privind modificarea",
 	"visualeditor-editsummary": "Descrieți modificările pe care le-ați adus",
-	"visualeditor-editsummary-bytes-remaining": "Numărul de octeți rămași",
 	"visualeditor-educationpopup-dismiss": "În regulă, am înțeles",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titlu de pagină",

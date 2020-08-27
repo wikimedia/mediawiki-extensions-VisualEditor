@@ -102,7 +102,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notica|noticy|noticy|noticow}}",
 	"visualeditor-editnotices-tooltip": "Notice wobźěłaś",
 	"visualeditor-editsummary": "Wopiš, což sy změnił",
-	"visualeditor-editsummary-bytes-remaining": "Licba zbytnych bajtow",
 	"visualeditor-formatdropdown-format-mw-heading1": "Bokowy titel",
 	"visualeditor-formatdropdown-format-mw-heading2": "Nadpismo",
 	"visualeditor-formatdropdown-format-mw-heading3": "Pódnapismo 1",

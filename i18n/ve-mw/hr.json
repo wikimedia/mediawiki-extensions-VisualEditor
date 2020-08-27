@@ -199,7 +199,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|napomena|napomene}}",
 	"visualeditor-editnotices-tooltip": "Uredi obavijesti",
 	"visualeditor-editsummary": "Opišite izmjene koje ste napravili",
-	"visualeditor-editsummary-bytes-remaining": "Preostalo bajtova",
 	"visualeditor-editsummary-characters-remaining": "Preostali broj znakova",
 	"visualeditor-educationpopup-dismiss": "U redu, razumijem.",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

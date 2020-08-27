@@ -209,7 +209,6 @@
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|הודעה אחת|$1 הודעות}}",
 	"visualeditor-editnotices-tooltip": "הודעות לעורכים",
 	"visualeditor-editsummary": "נא לתאר מה שינית",
-	"visualeditor-editsummary-bytes-remaining": "מספר הבתים שנותרו",
 	"visualeditor-editsummary-characters-remaining": "מספר התווים שנותרו",
 	"visualeditor-educationpopup-dismiss": "בסדר, הבנתי",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

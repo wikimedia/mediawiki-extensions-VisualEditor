@@ -147,7 +147,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|хаам}}",
 	"visualeditor-editnotices-tooltip": "Тадаран билгалонаш",
 	"visualeditor-editsummary": "ДӀаязде айхьа хийцинарг",
-	"visualeditor-editsummary-bytes-remaining": "Йисина байтийн дукхалла",
 	"visualeditor-editsummary-characters-remaining": "Йисина символийн дукхалла",
 	"visualeditor-educationpopup-dismiss": "Ок, кхетта",
 	"visualeditor-feedback-defaultmessage": "URL-адрес: $1",

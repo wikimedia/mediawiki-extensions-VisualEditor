@@ -192,7 +192,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notizie}}",
 	"visualeditor-editnotices-tooltip": "Avvise pe le cangiaminde",
 	"visualeditor-editsummary": "Descrive ce è cangiate",
-	"visualeditor-editsummary-bytes-remaining": "'U numere de byte ca rumanene",
 	"visualeditor-editsummary-characters-remaining": "'U numere de carattere ca rumanene",
 	"visualeditor-educationpopup-dismiss": "Apposte, pigghiale",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

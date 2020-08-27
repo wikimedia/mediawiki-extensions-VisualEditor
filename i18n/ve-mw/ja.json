@@ -222,7 +222,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|件のお知らせ}}",
 	"visualeditor-editnotices-tooltip": "編集の通知",
 	"visualeditor-editsummary": "編集内容を説明してください",
-	"visualeditor-editsummary-bytes-remaining": "残りバイト数",
 	"visualeditor-editsummary-characters-remaining": "残り文字数",
 	"visualeditor-educationpopup-dismiss": "わかりました",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

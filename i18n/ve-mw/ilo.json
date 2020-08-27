@@ -172,7 +172,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|a pakdaar|dagiti pakdaar}}",
 	"visualeditor-editnotices-tooltip": "Pakpakdaar ti panagurnos",
 	"visualeditor-editsummary": "Ipalawag ti binaliwam",
-	"visualeditor-editsummary-bytes-remaining": "Ti nabati a bilang dagiti byte",
 	"visualeditor-educationpopup-dismiss": "Sige, naalakon",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulo ti panid",

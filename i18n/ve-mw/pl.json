@@ -223,7 +223,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|komunikat|komunikaty|komunikatów}}",
 	"visualeditor-editnotices-tooltip": "Komunikaty",
 	"visualeditor-editsummary": "Opisz swoje zmiany",
-	"visualeditor-editsummary-bytes-remaining": "Pozostało bajtów",
 	"visualeditor-editsummary-characters-remaining": "Liczba pozostałych znaków",
 	"visualeditor-educationpopup-dismiss": "Ok, rozumiem",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

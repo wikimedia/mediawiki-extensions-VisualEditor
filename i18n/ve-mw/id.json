@@ -212,7 +212,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|pemberitahuan}}",
 	"visualeditor-editnotices-tooltip": "Pemberitahuan suntingan",
 	"visualeditor-editsummary": "Jelaskan apa yang Anda ubah",
-	"visualeditor-editsummary-bytes-remaining": "Jumlah bita tersisa",
 	"visualeditor-editsummary-characters-remaining": "Jumlah karakter tersisa",
 	"visualeditor-educationpopup-dismiss": "Oke, saya paham",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

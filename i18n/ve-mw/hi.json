@@ -193,7 +193,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|सूचना|सूचनाएँ}}",
 	"visualeditor-editnotices-tooltip": "नोटिस सम्पादित करें",
 	"visualeditor-editsummary": "अपने बदलावों का विवरण दें",
-	"visualeditor-editsummary-bytes-remaining": "शेष बाइट संख्या",
 	"visualeditor-educationpopup-dismiss": "हाँ, समझ गया",
 	"visualeditor-feedback-defaultmessage": "यूआरएल: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "पृष्ठ शीर्षक",

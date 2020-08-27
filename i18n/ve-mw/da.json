@@ -164,7 +164,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|meddelelse|meddelelser}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsbemærkninger",
 	"visualeditor-editsummary": "Beskriv hvad du har ændret",
-	"visualeditor-editsummary-bytes-remaining": "Antallet af bytes tilbage",
 	"visualeditor-educationpopup-dismiss": "Ok, jeg forstår",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Sidetitel",

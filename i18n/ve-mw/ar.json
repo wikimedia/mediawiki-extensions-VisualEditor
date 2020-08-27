@@ -221,7 +221,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ملاحظة|ملاحظات}}",
 	"visualeditor-editnotices-tooltip": "تبصرات التحرير",
 	"visualeditor-editsummary": "صف ما غيرته",
-	"visualeditor-editsummary-bytes-remaining": "عدد البايتات المتبقي",
 	"visualeditor-editsummary-characters-remaining": "عدد الحروف المتبقية",
 	"visualeditor-educationpopup-dismiss": "فهمت",
 	"visualeditor-feedback-defaultmessage": "مسار: $1",

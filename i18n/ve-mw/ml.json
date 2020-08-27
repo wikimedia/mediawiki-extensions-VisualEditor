@@ -190,7 +190,6 @@
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|ഒരു അറിയിപ്പ്|$1 അറിയിപ്പുകൾ}}",
 	"visualeditor-editnotices-tooltip": "അറിയിപ്പുകൾ തിരുത്തുക",
 	"visualeditor-editsummary": "താങ്കൾ എന്താണ് മാറ്റം വരുത്തിയതെന്ന് വിവരിക്കുക",
-	"visualeditor-editsummary-bytes-remaining": "അവശേഷിക്കുന്ന ബൈറ്റുകളുടെ എണ്ണം",
 	"visualeditor-editsummary-characters-remaining": "അവശേഷിക്കുന്ന അക്ഷരങ്ങളുടെ എണ്ണം",
 	"visualeditor-educationpopup-dismiss": "ശരി, മനസ്സിലായി",
 	"visualeditor-feedback-defaultmessage": "കണ്ണി: $1",

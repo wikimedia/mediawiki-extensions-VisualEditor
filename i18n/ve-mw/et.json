@@ -192,7 +192,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|teadaanne|teadaannet}}",
 	"visualeditor-editnotices-tooltip": "Redigeerimismärkused",
 	"visualeditor-editsummary": "Kirjelda, mida muutsid",
-	"visualeditor-editsummary-bytes-remaining": "Järele jäänud baitide arv",
 	"visualeditor-editsummary-characters-remaining": "Järele jäänud märkide arv",
 	"visualeditor-educationpopup-dismiss": "Hästi, sain aru",
 	"visualeditor-formatdropdown-format-mw-heading1": "Lehekülje pealkiri",

@@ -187,7 +187,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|oznam|oznamy}}",
 	"visualeditor-editnotices-tooltip": "Editačné upozornenia",
 	"visualeditor-editsummary": "Popíšte vaše zmeny",
-	"visualeditor-editsummary-bytes-remaining": "Zostávajúci počet bajtov",
 	"visualeditor-editsummary-characters-remaining": "Zostávajúci počet znakov",
 	"visualeditor-educationpopup-dismiss": "V poriadku, rozumiem",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

@@ -110,7 +110,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notica|noticy|noticy|noticow}}",
 	"visualeditor-editnotices-tooltip": "Noticy wobdźěłać",
 	"visualeditor-editsummary": "Wopisaj, štož sy změnił",
-	"visualeditor-editsummary-bytes-remaining": "Ličba zbytnych bajtow",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titul strony",
 	"visualeditor-formatdropdown-format-mw-heading2": "Nadpis",
 	"visualeditor-formatdropdown-format-mw-heading3": "Podnapis 1",

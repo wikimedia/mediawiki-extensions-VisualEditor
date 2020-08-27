@@ -155,7 +155,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ескертпе|ескертпе}}",
 	"visualeditor-editnotices-tooltip": "Өңдеу ескертпелері",
 	"visualeditor-editsummary": "Нені өзгерткеніңізді сипаттаңыз",
-	"visualeditor-editsummary-bytes-remaining": "Қалған байт саны",
 	"visualeditor-educationpopup-dismiss": "Жарайды, түсінікті",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Бет тақырыбының аты",

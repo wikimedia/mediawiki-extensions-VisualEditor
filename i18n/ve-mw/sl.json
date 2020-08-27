@@ -171,7 +171,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|obvestilo|obvestili|obvestila|obvestil}}",
 	"visualeditor-editnotices-tooltip": "Obvestila o urejanju",
 	"visualeditor-editsummary": "Opišite, kaj ste spremenili",
-	"visualeditor-editsummary-bytes-remaining": "Preostalo število bajtov",
 	"visualeditor-editsummary-characters-remaining": "Preostalo število znakov",
 	"visualeditor-educationpopup-dismiss": "V redu, razumem",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

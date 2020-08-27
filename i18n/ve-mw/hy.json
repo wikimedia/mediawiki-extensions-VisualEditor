@@ -203,7 +203,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|նշում|նշումներ}}",
 	"visualeditor-editnotices-tooltip": "Խմբագրել նշումները",
 	"visualeditor-editsummary": "Նկարագրել արված փոփոխությունը",
-	"visualeditor-editsummary-bytes-remaining": "Մնացող բայթերի քանակը",
 	"visualeditor-editsummary-characters-remaining": "Մնացած նիշերի քանակը",
 	"visualeditor-educationpopup-dismiss": "Լավ, հասկացա",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

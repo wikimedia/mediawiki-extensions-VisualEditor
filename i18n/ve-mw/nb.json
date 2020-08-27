@@ -208,7 +208,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|varsel|varsler}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsvarsler",
 	"visualeditor-editsummary": "Beskriv hva du endret",
-	"visualeditor-editsummary-bytes-remaining": "Antall byte som gjenstår",
 	"visualeditor-editsummary-characters-remaining": "Antall tegn som gjenstår",
 	"visualeditor-educationpopup-dismiss": "Ok, skjønner",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

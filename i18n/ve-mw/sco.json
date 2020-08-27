@@ -148,7 +148,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notice|notices}}",
 	"visualeditor-editnotices-tooltip": "Eidit notices",
 	"visualeditor-editsummary": "Describe whit ye chynged",
-	"visualeditor-editsummary-bytes-remaining": "The nummer o bytes left",
 	"visualeditor-formatdropdown-format-mw-heading1": "Page title",
 	"visualeditor-formatdropdown-format-mw-heading2": "Heidin",
 	"visualeditor-formatdropdown-format-mw-heading3": "Sub-heidin 1",

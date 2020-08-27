@@ -233,7 +233,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|melding|meldingen}}",
 	"visualeditor-editnotices-tooltip": "Meldingen over bewerken",
 	"visualeditor-editsummary": "Beschrijf wat u hebt gewijzigd",
-	"visualeditor-editsummary-bytes-remaining": "Het aantal resterende bytes",
 	"visualeditor-editsummary-characters-remaining": "Het aantal resterende tekens",
 	"visualeditor-educationpopup-dismiss": "Oké, ik snap het",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

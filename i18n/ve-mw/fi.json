@@ -200,7 +200,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ilmoitus|ilmoitusta}}",
 	"visualeditor-editnotices-tooltip": "Ilmoitukset",
 	"visualeditor-editsummary": "Kuvaile, mitä olet muuttanut",
-	"visualeditor-editsummary-bytes-remaining": "Merkkejä jäljellä",
 	"visualeditor-editsummary-characters-remaining": "Merkkejä jäljellä",
 	"visualeditor-educationpopup-dismiss": "Selvä",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

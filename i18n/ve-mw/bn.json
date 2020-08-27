@@ -200,7 +200,6 @@
 	"visualeditor-editnotices-tool": "$1টি {{PLURAL:$1|বিজ্ঞপ্তি}}",
 	"visualeditor-editnotices-tooltip": "সম্পাদনা বিজ্ঞপ্তি",
 	"visualeditor-editsummary": "আপনার পরবর্তনের বিবরণ দিন",
-	"visualeditor-editsummary-bytes-remaining": "অবশিষ্ট বাইটের সংখ্যা",
 	"visualeditor-editsummary-characters-remaining": "অবশিষ্ট অক্ষরের সংখ্যা",
 	"visualeditor-educationpopup-dismiss": "ঠিক আছে, বুঝেছি",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

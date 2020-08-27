@@ -186,7 +186,6 @@
 	"visualeditor-editnotices-tool": "{{PLURAL:$1|Eng  Notiz|$1 Notizen}}",
 	"visualeditor-editnotices-tooltip": "Ännerungsnotizen",
 	"visualeditor-editsummary": "Beschreift wat Dir geännert hutt",
-	"visualeditor-editsummary-bytes-remaining": "D'Zuel vun de Byten déi nach iwwreg sinn",
 	"visualeditor-editsummary-characters-remaining": "D'Zuel vun den Zeechen déi nach iwwreg sinn",
 	"visualeditor-educationpopup-dismiss": "OK, verstan",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

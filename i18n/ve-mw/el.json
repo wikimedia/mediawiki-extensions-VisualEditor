@@ -199,7 +199,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ειδοποίηση|ειδοποιήσεις}}",
 	"visualeditor-editnotices-tooltip": "Ειδοποιήσεις επεξεργασίας",
 	"visualeditor-editsummary": "Περιγράψτε τι αλλάξατε",
-	"visualeditor-editsummary-bytes-remaining": "Ο αριθμός byte που απομένουν",
 	"visualeditor-educationpopup-dismiss": "Εντάξει, το 'πιασα",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Τίτλος σελίδας",

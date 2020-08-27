@@ -203,7 +203,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|atentigo|atentigoj}}",
 	"visualeditor-editnotices-tooltip": "Redaktante avertojn",
 	"visualeditor-editsummary": "Priskribu vian ŝanĝon",
-	"visualeditor-editsummary-bytes-remaining": "La nombro de ceteraj bitokoj",
 	"visualeditor-editsummary-characters-remaining": "La nombro de ceteraj skribsignoj",
 	"visualeditor-educationpopup-dismiss": "Bone, ek!",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

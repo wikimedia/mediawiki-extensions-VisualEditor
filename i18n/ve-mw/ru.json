@@ -245,7 +245,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сообщение|сообщения|сообщений}}",
 	"visualeditor-editnotices-tooltip": "Заметки по редактированию",
 	"visualeditor-editsummary": "Опишите внесённые изменения",
-	"visualeditor-editsummary-bytes-remaining": "Количество оставшихся байтов",
 	"visualeditor-editsummary-characters-remaining": "Число оставшихся символов",
 	"visualeditor-educationpopup-dismiss": "Окей, понятно",
 	"visualeditor-feedback-defaultmessage": "URL-адрес: $1",

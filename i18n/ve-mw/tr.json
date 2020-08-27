@@ -224,7 +224,6 @@
 	"visualeditor-editnotices-tool": "$1 bildirim",
 	"visualeditor-editnotices-tooltip": "Düzenleme bildirimleri",
 	"visualeditor-editsummary": "Neleri değiştirdiğinizi açıklayın",
-	"visualeditor-editsummary-bytes-remaining": "Kalan bayt sayısı",
 	"visualeditor-editsummary-characters-remaining": "Kalan karakter sayısı",
 	"visualeditor-educationpopup-dismiss": "Tamam, anladım",
 	"visualeditor-feedback-defaultmessage": "URL: $1",

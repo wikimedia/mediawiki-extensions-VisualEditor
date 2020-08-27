@@ -205,7 +205,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|обавештење|обавештења}}",
 	"visualeditor-editnotices-tooltip": "Обавештења при уређивању",
 	"visualeditor-editsummary": "Укратко опишите шта сте променили",
-	"visualeditor-editsummary-bytes-remaining": "Број преосталих бајтова",
 	"visualeditor-editsummary-characters-remaining": "Број преосталих знакова",
 	"visualeditor-educationpopup-dismiss": "У реду, разумем",
 	"visualeditor-feedback-defaultmessage": "URL адреса: $1",

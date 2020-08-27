@@ -178,7 +178,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|obavijest|obavijesti}}",
 	"visualeditor-editnotices-tooltip": "Uredi obavijesti",
 	"visualeditor-editsummary": "Opišite Vaše izmjene",
-	"visualeditor-editsummary-bytes-remaining": "Preostalo bajtova",
 	"visualeditor-educationpopup-dismiss": "Razumijem",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Naslov stranice",

@@ -217,7 +217,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|сповіщення|сповіщення|сповіщень}}",
 	"visualeditor-editnotices-tooltip": "Замітки по редагуванню",
 	"visualeditor-editsummary": "Опишіть Ваші зміни",
-	"visualeditor-editsummary-bytes-remaining": "Кількість байтів, що залишилися",
 	"visualeditor-editsummary-characters-remaining": "Кількість доступних символів",
 	"visualeditor-educationpopup-dismiss": "Гаразд, зрозуміло",
 	"visualeditor-feedback-defaultmessage": "URL-адреса: $1",

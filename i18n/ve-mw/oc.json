@@ -158,7 +158,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notícia|notícias}}",
 	"visualeditor-editnotices-tooltip": "Modificar los avisses",
 	"visualeditor-editsummary": "Descriure vòstras modifications",
-	"visualeditor-editsummary-bytes-remaining": "Lo nombre d’octets que demòran",
 	"visualeditor-educationpopup-dismiss": "D'acòrdi",
 	"visualeditor-feedback-defaultmessage": "URL : $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Títol de pagina",

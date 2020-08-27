@@ -151,7 +151,6 @@
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ដំណឹង|ដំណឹង}}",
 	"visualeditor-editnotices-tooltip": "ដំណឹងពីការ​កែប្រែ",
 	"visualeditor-editsummary": "ពិពណ៌នា​អំពី​អ្វី​ដែល​អ្នក​បាន​ប្ដូរ",
-	"visualeditor-editsummary-bytes-remaining": "ចំនួន​បៃ​នៅ​សល់",
 	"visualeditor-editsummary-characters-remaining": "ចំនួន​តួអក្សរនៅ​សល់",
 	"visualeditor-educationpopup-dismiss": "ខ្ញុំយល់ហើយ",
 	"visualeditor-feedback-defaultmessage": "URL៖ $1",
