@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Herryz",
 			"NoiX180",
 			"Salomo Christian Hutajulu"
 		]
 	},
+	"tooltip-ca-ve-edit": "Padimpos alaman on",
+	"visualeditor-ca-editsource": "Patota asal",
 	"visualeditor-ca-editsource-section": "patota asal"
 }
