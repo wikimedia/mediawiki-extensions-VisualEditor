@@ -305,6 +305,7 @@
 	"visualeditor-preference-visualdiffpage-description": "Ieslēdz jauno vizuālo režīmu versiju atšķirību lapās.",
 	"visualeditor-preference-visualdiffpage-label": "Vizuālās atšķirības",
 	"visualeditor-rebase-client-export": "Eksportēt",
+	"visualeditor-rebase-client-export-start": "Eksportēt…",
 	"visualeditor-rebase-client-import": "Importēt",
 	"visualeditor-rebase-client-import-name": "Lapas nosaukums",
 	"visualeditor-recreate": "Kamēr veici labojumus, lapa tika izdēsta. Spied uz \"$1\", lai izveidotu to no jauna.",

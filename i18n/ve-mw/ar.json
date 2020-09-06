@@ -218,7 +218,7 @@
 	"visualeditor-editingtabdialog-body": "تتذكر {{SITENAME}} الآن أي محرر تفضل. يمكنك التبديل بين وضعيتي التحرير أثناء تعديلك، ويمكنك تغيير تفضيلك لاحقًا.",
 	"visualeditor-editingtabdialog-ok": "استعمل المحرر الذي عدلت به آخر مرة",
 	"visualeditor-editingtabdialog-title": "تبويبة التعديل",
-	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ملاحظة|ملاحظات}}",
+	"visualeditor-editnotices-tool": "$1 ملاحظة",
 	"visualeditor-editnotices-tooltip": "تبصرات التحرير",
 	"visualeditor-editsummary": "صف ما غيرته",
 	"visualeditor-editsummary-characters-remaining": "عدد الحروف المتبقية",
