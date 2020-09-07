@@ -257,7 +257,9 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		type === 'wiki-page-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		return new mw.widgets.TitleInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
+		return new mw.widgets.TitleInputWidget( $.extend( {
+			api: ve.init.target.getContentApi()
+		}, valueInputConfig ) );
 	} else if (
 		type === 'wiki-file-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
@@ -276,14 +278,17 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 			// TODO: Check against unicode validation regex from MW core's User::isValidUserName
 			return !!mw.Title.newFromText( val );
 		};
-		return new mw.widgets.UserInputWidget( valueInputConfig, { api: ve.init.target.getContentApi() } );
+		return new mw.widgets.UserInputWidget( $.extend( {
+			api: ve.init.target.getContentApi()
+		}, valueInputConfig ) );
 	} else if (
 		type === 'wiki-template-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		return new mw.widgets.TitleInputWidget( $.extend( {}, valueInputConfig, {
-			namespace: mw.config.get( 'wgNamespaceIds' ).template,
+		return new mw.widgets.TitleInputWidget( $.extend( {
 			api: ve.init.target.getContentApi()
+		}, valueInputConfig, {
+			namespace: mw.config.get( 'wgNamespaceIds' ).template
 		} ) );
 	} else if ( type === 'boolean' && ( value === '1' || value === '0' ) ) {
 		return new ve.ui.MWParameterCheckboxInputWidget( valueInputConfig );
