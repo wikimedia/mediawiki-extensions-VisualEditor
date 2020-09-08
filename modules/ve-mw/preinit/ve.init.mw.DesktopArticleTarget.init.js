@@ -1385,7 +1385,6 @@
 			showWikitextWelcome &&
 			// At least one editor is available (T201928)
 			( init.isVisualAvailable || init.isWikitextAvailable || $( '#wpTextbox1' ).length ) &&
-			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
 			isEditPage &&
 			init.shouldShowWelcomeDialog() &&
 			(
