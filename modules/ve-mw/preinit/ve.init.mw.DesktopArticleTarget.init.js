@@ -1298,10 +1298,10 @@
 				);
 			}
 
-			// Add the switch button to WikiEditor on ?action=edit or ?action=submit pages
+			// Add the switch button to WikiEditor on edit pages
 			if (
 				init.isVisualAvailable &&
-				[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
+				isEditPage &&
 				$( '#wpTextbox1' ).length
 			) {
 				mw.loader.load( 'ext.visualEditor.switching' );
@@ -1386,7 +1386,7 @@
 			// At least one editor is available (T201928)
 			( init.isVisualAvailable || init.isWikitextAvailable || $( '#wpTextbox1' ).length ) &&
 			mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome &&
-			[ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 &&
+			isEditPage &&
 			init.shouldShowWelcomeDialog() &&
 			(
 				// Not on protected pages
