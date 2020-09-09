@@ -13,11 +13,10 @@ use MediaWiki\MediaWikiServices;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditorEdit extends ApiBase {
-
 	use ApiParsoidTrait;
 
-	const MAX_CACHE_RECENT = 2;
-	const MAX_CACHE_TTL = 900;
+	private const MAX_CACHE_RECENT = 2;
+	private const MAX_CACHE_TTL = 900;
 
 	/**
 	 * @inheritDoc

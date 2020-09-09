@@ -15,7 +15,6 @@ use MediaWiki\Revision\RevisionRecord;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditor extends ApiBase {
-
 	use ApiBlockInfoTrait;
 	use ApiParsoidTrait;
 
