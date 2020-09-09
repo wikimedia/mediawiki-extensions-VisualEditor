@@ -19,7 +19,7 @@
  */
 ( function () {
 	var prefName, prefValue,
-		uri = new mw.Uri(),
+		uri, editintro,
 		namespaces = mw.config.get( 'wgNamespaceIds' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
@@ -27,8 +27,16 @@
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
+	try {
+		uri = new mw.Uri();
+		editintro = uri.query.editintro;
+	} catch ( e ) {
+		// URI may not be parseable (T106244)
+		uri = false;
+	}
 	// Provide the new wikitext editor
 	if (
+		uri &&
 		conf.enableWikitext &&
 		(
 			mw.user.options.get( 'visualeditor-newwikitext' ) ||
@@ -287,7 +295,7 @@
 				page: pageName,
 				badetag: options.badetag,
 				uselang: mw.config.get( 'wgUserLanguage' ),
-				editintro: uri.query.editintro,
+				editintro: editintro,
 				preload: options.preload,
 				preloadparams: options.preloadparams,
 				formatversion: 2
@@ -484,7 +492,7 @@
 				paction: 'wikitext',
 				page: pageName,
 				uselang: mw.config.get( 'wgUserLanguage' ),
-				editintro: uri.query.editintro,
+				editintro: editintro,
 				preload: options.preload,
 				preloadparams: options.preloadparams,
 				formatversion: 2
