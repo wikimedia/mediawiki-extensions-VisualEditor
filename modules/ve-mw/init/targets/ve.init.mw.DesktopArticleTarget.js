@@ -139,7 +139,6 @@ ve.init.mw.DesktopArticleTarget.static.compatibility = {
 	// containing an inequality (<,>,<=,>=) and a version number
 	supportedList: {
 		chrome: [ [ '>=', 19 ] ],
-		iceweasel: [ [ '>=', 10 ] ],
 		opera: [ [ '>=', 15 ] ],
 		// All versions not in unsupportedList are fully supported:
 		firefox: null,
