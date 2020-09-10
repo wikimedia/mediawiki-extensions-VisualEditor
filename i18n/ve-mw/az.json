@@ -9,7 +9,8 @@
 			"Jduranboger",
 			"Toghrul Rahimli",
 			"Vesely35",
-			"Wertuose"
+			"Wertuose",
+			"Şeyx Şamil"
 		]
 	},
 	"tooltip-ca-createsource": "Cari kod redaktorunda səhifəni yarat",
@@ -130,7 +131,7 @@
 	"visualeditor-preference-betatempdisable": "Vizual redaktoru beta mərhələsində olduğu üçün qeyri-aktiv et",
 	"visualeditor-preference-core-label": "Vizual redaktor",
 	"visualeditor-preference-newwikitexteditor-description": "Vizual redaktor daxilində yeni viki-mətn rejimini aktivləşdirin. Bu rejim vizual redaktorda mövcud olan bir sıra alətləri özündə birləşdirir, oxşar dizayndan istifadə edir və iki redaktor arasında keçidi asanlaşdırır.",
-	"visualeditor-preference-newwikitexteditor-label": "Yeni viki-mətn rejimi",
+	"visualeditor-preference-newwikitexteditor-label": "Yeni vikimətn rejimi",
 	"visualeditor-preference-visualdiffpage-description": "Səhifə versiyaları fərqləri üçün yeni vizual rejimi aktivləşdirin.",
 	"visualeditor-preference-visualdiffpage-label": "Vizual fərqlər",
 	"visualeditor-savedialog-label-create": "Səhifə yaradın",
