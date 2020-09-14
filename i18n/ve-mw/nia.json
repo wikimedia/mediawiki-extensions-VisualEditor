@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"NoiX180"
+			"NoiX180",
+			"Slaia"
 		]
 	},
 	"tooltip-ca-ve-edit": "Bulo’ö nga'örö andre",
-	"visualeditor-ca-editsource": "Bulö’ö gumbu",
-	"visualeditor-ca-editsource-section": "bulö’ö gumbu"
+	"visualeditor-ca-editsource": "Bulö’ö kode",
+	"visualeditor-ca-editsource-section": "bulö’ö kode"
 }
