@@ -62,8 +62,9 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
-	this.requestedRevId = mw.config.get( 'wgRevisionId' );
-	this.currentRevisionId = mw.config.get( 'wgCurRevisionId' );
+	// Use undefined instead of 0 for new documents (T262838)
+	this.requestedRevId = mw.config.get( 'wgRevisionId' ) || undefined;
+	this.currentRevisionId = mw.config.get( 'wgCurRevisionId' ) || undefined;
 	this.revid = this.requestedRevId || this.currentRevisionId;
 
 	this.edited = false;
@@ -425,7 +426,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 
 	this.baseTimeStamp = data.basetimestamp;
 	this.startTimeStamp = data.starttimestamp;
-	this.revid = data.oldid;
+	this.revid = data.oldid || undefined;
 	this.preloaded = !!data.preloaded;
 
 	this.checkboxesDef = data.checkboxesDef;
@@ -434,8 +435,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 
 	this.canEdit = data.canEdit;
 
-	// Zero indicates that the page doesn't exist
-	docRevId = 0;
+	// `undefined` indicates that the page doesn't exist
+	docRevId = undefined;
 	aboutDoc = this.doc.documentElement && this.doc.documentElement.getAttribute( 'about' );
 	if ( aboutDoc ) {
 		docRevIdMatches = aboutDoc.match( /revision\/([0-9]*)$/ );
@@ -443,8 +444,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			docRevId = parseInt( docRevIdMatches[ 1 ] );
 		}
 	}
-	// There is no docRevId in source mode (doc is just a string).
-	// After switching with changes, the doc isn't associated with any particular revid.
+	// There is no docRevId in source mode (doc is just a string), new visual documents, or when
+	// switching from source mode with changes.
 	if ( this.getDefaultMode() === 'visual' && !( this.switched && this.fromEditedState ) && docRevId !== this.revid ) {
 		if ( this.retriedRevIdConflict ) {
 			// Retried already, just error the second time.
