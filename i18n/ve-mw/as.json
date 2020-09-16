@@ -3,7 +3,8 @@
 		"authors": [
 			"Dibya Dutta",
 			"Gitartha.bordoloi",
-			"IKHazarika"
+			"IKHazarika",
+			"Simbu123"
 		]
 	},
 	"tooltip-ca-createsource": "এই পৃষ্ঠাৰ উৎস ক'ড সৃষ্টি কৰক",
@@ -221,6 +222,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "সম্ভৱ হ'লে মোক সদায়েই ভিজুৱেল এডিটৰ দেখুৱাব",
 	"visualeditor-preference-tabs-prefer-wt": "মোক সদায় উৎস সম্পাদক দেখুৱাব",
 	"visualeditor-preference-tabs-remember-last": "মোৰ শেষ সম্পাদক বিকল্প মনত ৰাখক",
+	"visualeditor-rebase-client-import-name": "পৃষ্ঠাৰ শিৰোনাম",
 	"visualeditor-recreate": "আপুনি সম্পাদনা আৰম্ভ কৰাৰ পাছত পৃষ্ঠাটো বিলোপ কৰা হৈছে। পুনৰ সৃষ্টি কৰিবলৈ \"$1\" টিপক।",
 	"visualeditor-redirect-description": "$1 লৈ পুনঃনিৰ্দেশিত",
 	"visualeditor-savedialog-error-badtoken": "ছেচনৰ ম্যাদ শেষ হোৱা বাবে আমি আপোনাৰ সম্পাদনাটো সাঁচি থ'ব নোৱাৰিলোঁ।",
