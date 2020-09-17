@@ -24,6 +24,16 @@
 				]
 			},
 			{
+				"name": "Visual Diffing",
+				"classes": [
+					"ve.dm.VisualDiff",
+					"ve.DiffMatchPatch",
+					"ve.DiffTreeNode",
+					"ve.ui.DiffDialog",
+					"ve.ui.DiffElement"
+				]
+			},
+			{
 				"name": "Data Model",
 				"classes": [
 					"ve.dm.MW*Surface",
@@ -45,14 +55,6 @@
 				"name": "Standalone",
 				"classes": [
 					"ve.init.sa*"
-				],
-				"name": "Visual Diffing",
-				"classes": [
-					"ve.DiffTreeNode",
-					"ve.DiffMatchPatch",
-					"ve.dm.VisualDiff",
-					"ve.ui.DiffDialog",
-					"ve.ui.DiffElement"
 				]
 			}
 		]
