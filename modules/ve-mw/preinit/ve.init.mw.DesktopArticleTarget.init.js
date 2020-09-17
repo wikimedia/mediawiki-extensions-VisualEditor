@@ -619,7 +619,13 @@
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
 				).each( function () {
-					var linkUri = new mw.Uri( this.href );
+					var linkUri;
+					try {
+						linkUri = new mw.Uri( this.href );
+					} catch ( e ) {
+						// T66884
+						return;
+					}
 					if ( 'action' in linkUri.query ) {
 						delete linkUri.query.action;
 						linkUri.query.veaction = 'editsource';
