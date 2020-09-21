@@ -120,6 +120,7 @@
 	"visualeditor-dialog-transclusion-add-param": "Кхин тӀетоха хаам",
 	"visualeditor-dialog-transclusion-add-template": "ТӀетоха кеп",
 	"visualeditor-dialog-transclusion-content": "Чуьраниг",
+	"visualeditor-dialog-transclusion-contextitem-description": "Гойтуш ю чуьра: $1",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Ширбелла гура",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Гура ширабелла бу. $1",
 	"visualeditor-dialog-transclusion-loading": "Чуйолуш…",
