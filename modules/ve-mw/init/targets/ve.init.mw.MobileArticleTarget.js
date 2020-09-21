@@ -357,7 +357,7 @@ ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( code, errorDetail
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
-	window.history.back();
+	this.overlay.onExitClick( $.Event() );
 	mw.notify( this.extractErrorMessages( errorDetails ) );
 };
 
@@ -428,7 +428,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wa
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
-	window.history.back();
+	this.overlay.onExitClick( $.Event() );
 };
 
 /**
