@@ -1306,13 +1306,16 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
  * @param {Event} e Native event object
  */
 ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
-	var veaction;
+	var veaction, oldUri,
+		target = this;
 
 	if ( !this.verifyPopState( e.state ) ) {
 		// Ignore popstate events fired for states not created by us
 		// This also filters out the initial fire in Chrome (T59901).
 		return;
 	}
+
+	oldUri = this.currentUri;
 
 	this.currentUri = new mw.Uri( location.href );
 	veaction = this.currentUri.query.veaction;
@@ -1332,7 +1335,15 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	}
 	if ( this.active && veaction !== 'edit' && veaction !== 'editsource' ) {
 		this.actFromPopState = true;
-		this.tryTeardown( false, 'navigate-back' );
+		// "Undo" the pop-state, as the event is not cancellable
+		history.pushState( this.popState, document.title, oldUri );
+		this.currentUri = oldUri;
+		this.tryTeardown( false, 'navigate-back' ).then( function () {
+			// Teardown was successful, re-apply the undone state
+			history.back();
+		} ).always( function () {
+			target.actFromPopState = false;
+		} );
 	}
 };
 
