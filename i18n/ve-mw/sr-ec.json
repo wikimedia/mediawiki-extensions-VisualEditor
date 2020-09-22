@@ -343,7 +343,7 @@
 	"visualeditor-rebase-client-export-start": "Извези…",
 	"visualeditor-rebase-client-import": "Увези",
 	"visualeditor-rebase-client-import-name": "Наслов странице",
-	"visualeditor-recreate": "Страница је у међувремену обрисана. Притисните „$1“ да је поново направите.",
+	"visualeditor-recreate": "Страница је у међувремену избрисана. Притисните „$1” да бисте је поново направили.",
 	"visualeditor-redirect-description": "Преусмерава на „$1”",
 	"visualeditor-savedialog-error-badtoken": "Нисмо могли да сачувамо вашу измену зато што сесија више није важећа.",
 	"visualeditor-savedialog-identify-anon": "Желите ли сачувати ову страницу као анониман корисник? Ваша IP адреса ће бити забележена у историји измена ове странице.",
