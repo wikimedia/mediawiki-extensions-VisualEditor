@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Gott wisst",
+			"Heahwrita",
 			"Hogweard",
 			"JJohnson1701"
 		]
 	},
-	"tooltip-ca-ve-edit": "Adihtan þisne tramet mid VisualEditor",
+	"tooltip-ca-ve-edit": "Adiht þisne tramet",
 	"visualeditor-ca-createlocaldescriptionsource": "Besettan stōwlicre gemearcunge fruman",
 	"visualeditor-ca-createsource": "Scippan fruman",
 	"visualeditor-ca-editsource": "Ādihtan fruman",
