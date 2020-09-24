@@ -1658,7 +1658,7 @@
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWPreContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWIncludesContextItem.js",
-				"modules/ve-mw/ui/tools/ve.ui.MWEducationPopupTool.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWEducationPopupWidget.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWCommentInspector.js"
 			],
 			"styles": [
@@ -1671,7 +1671,7 @@
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWPreviewElement.css",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.css",
-				"modules/ve-mw/ui/styles/tools/ve.ui.MWEducationPopupTool.css"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.css"
 			],
 			"skinStyles": {
 				"default": [

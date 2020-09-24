@@ -1078,7 +1078,7 @@
 		},
 
 		/**
-		 * Check whether the user education popups (ve.ui.MWEducationPopupTool) should be shown.
+		 * Check whether the user education popups (ve.ui.MWEducationPopupWidget) should be shown.
 		 *
 		 * The education popups can be disabled by calling disableWelcomeDialog(), or if we've
 		 * recorded that we've already shown it before in a user preference, local storage or a cookie.
