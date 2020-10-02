@@ -1735,7 +1735,7 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
  *
  * @param {boolean} [noPrompt] Do not display a prompt to the user
  * @param {string} [trackMechanism] Abort mechanism; used for event tracking if present
- * @return {jQuery.Promise} Promise which resolves when the target has been torn down
+ * @return {jQuery.Promise} Promise which resolves when the target has been torn down, rejects if the target won't be torn down
  */
 ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
 	var target = this;
