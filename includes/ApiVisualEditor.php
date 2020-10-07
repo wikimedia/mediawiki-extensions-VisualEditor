@@ -600,7 +600,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Gets the relevant HTML for the latest log entry on a given title, including a full log link.
 	 *
-	 * @param Title $title Title
+	 * @param Title $title
 	 * @param array|string $types
 	 * @return string
 	 */

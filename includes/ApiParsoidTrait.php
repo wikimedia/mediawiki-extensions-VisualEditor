@@ -304,7 +304,7 @@ trait ApiParsoidTrait {
 	/**
 	 * Get the page language from a title, using the content language as fallback on special pages
 	 *
-	 * @param Title $title Title
+	 * @param Title $title
 	 * @return Language Content language
 	 */
 	public static function getPageLanguage( Title $title ) : Language {

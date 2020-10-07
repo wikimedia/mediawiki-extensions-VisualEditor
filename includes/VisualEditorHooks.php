@@ -750,7 +750,7 @@ class VisualEditorHooks {
 	/**
 	 * Handler for the GetPreferences hook, to add and hide user preferences as configured
 	 *
-	 * @param User $user The user object
+	 * @param User $user
 	 * @param array &$preferences Their preferences object
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
@@ -843,7 +843,7 @@ class VisualEditorHooks {
 	/**
 	 * Handler for the GetBetaPreferences hook, to add and hide user beta preferences as configured
 	 *
-	 * @param User $user The user object
+	 * @param User $user
 	 * @param array &$preferences Their preferences object
 	 */
 	public static function onGetBetaPreferences( User $user, array &$preferences ) {
@@ -1089,7 +1089,7 @@ class VisualEditorHooks {
 	 * @param Article|null $article The page being viewed.
 	 * @param OutputPage $output The page view.
 	 * @param User $user The user-specific settings.
-	 * @param WebRequest $request The request.
+	 * @param WebRequest $request
 	 * @param MediaWiki $mediaWiki Helper class.
 	 */
 	public static function onBeforeInitialize(
