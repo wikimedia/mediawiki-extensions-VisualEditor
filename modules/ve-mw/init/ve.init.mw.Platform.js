@@ -251,8 +251,11 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 		try {
 			other = JSON.parse( otherMsg );
 			if ( other ) {
-				characters[ otherGroupName ] = other;
-				other.attributes = { dir: mw.config.get( 'wgVisualEditorConfig' ).pageLanguageDir };
+				characters.other = {
+					label: otherGroupName,
+					characters: other,
+					attributes: { dir: mw.config.get( 'wgVisualEditorConfig' ).pageLanguageDir }
+				};
 			}
 		} catch ( err ) {
 			ve.log( 've.init.mw.Platform: Could not parse the Special Character list.' );
@@ -295,8 +298,11 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			// * special-characters-group-tamil
 			// * special-characters-group-telugu
 			// * special-characters-group-thai
-			characters[ mw.msg( 'special-characters-group-' + groupName ) ] = groupObject;
-			groupObject.attributes = { dir: rtlGroups.indexOf( groupName ) !== -1 ? 'rtl' : 'ltr' };
+			characters[ groupName ] = {
+				label: mw.msg( 'special-characters-group-' + groupName ),
+				characters: groupObject,
+				attributes: { dir: rtlGroups.indexOf( groupName ) !== -1 ? 'rtl' : 'ltr' }
+			};
 		} );
 
 		return characters;
