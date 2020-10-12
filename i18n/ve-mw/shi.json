@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amara-Amaziɣ"
+			"Amara-Amaziɣ",
+			"Ayour2002",
+			"Lhoussine AIT TAYFST"
 		]
 	},
-	"tooltip-ca-ve-edit": "ⵙⵏⴼⵍ ⵜⴰⵙⵏⴰ ⴰⴷ",
-	"visualeditor-ca-editsource": "ⵙⵏⴼⵍ ⴰⵙⴰⴳⵎ",
-	"visualeditor-ca-editsource-section": "ⵙⵏⴼⵍ ⴰⵙⴰⴳⵎ"
+	"tooltip-ca-ve-edit": "Snfl tasna ad",
+	"visualeditor-ca-createsource": "Ssnulfu aɣbalu",
+	"visualeditor-ca-editsource": "Snfl asagm",
+	"visualeditor-ca-editsource-section": "Senfl asagm"
 }
