@@ -11,13 +11,11 @@
 	/* 1/0.875 */
 	margin: -1.14em -1.14em 1.14em -1.14em;
 	/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
-}
 
-@media screen and ( min-width: 982px ) {
-	/* stylelint-disable selector-class-pattern */
-	.skin-vector-legacy .ve-init-mw-desktopArticleTarget-toolbar,
-	.skin-vector-legacy .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
-		/* 1.25/0.875, 1.5/0.875 */
-		margin: -1.43em -1.71em 1.43em -1.71em;
+	@media screen and ( min-width: 982px ) {
+		.skin-vector-legacy & {
+			/* 1.25/0.875, 1.5/0.875 */
+			margin: -1.43em -1.71em 1.43em -1.71em;
+		}
 	}
 }
