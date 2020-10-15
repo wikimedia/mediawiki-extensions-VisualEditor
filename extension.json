@@ -347,7 +347,7 @@
 				],
 				"vector": [
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css",
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-vector.css"
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-vector.less"
 				],
 				"monobook": [
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
