@@ -460,7 +460,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			// the request that gave us the lower revid
 			this.loading = null;
 			// HACK: Load with explicit revid to hopefully prevent this from happening again
-			this.requestedRevId = Math.max( docRevId, this.revid );
+			this.requestedRevId = Math.max( docRevId || 0, this.revid );
 			this.load();
 		}
 		return false;
