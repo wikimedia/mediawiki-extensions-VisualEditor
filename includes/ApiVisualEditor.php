@@ -471,6 +471,10 @@ class ApiVisualEditor extends ApiBase {
 					// Don't convert the boolean to empty string with formatversion=1
 					$value[ApiResult::META_BC_BOOLS] = [ 'default' ];
 				}
+
+				// Remove empty notices (T265798)
+				$notices = array_filter( $notices );
+
 				$result = [
 					'result' => 'success',
 					'notices' => $notices,
