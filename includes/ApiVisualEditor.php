@@ -234,19 +234,7 @@ class ApiVisualEditor extends ApiBase {
 					$restoring = false;
 				}
 
-				// Get edit notices
-				$notices = $title->getEditNotices();
-
-				// Anonymous user notice
-				if ( $user->isAnon() ) {
-					$notices[] = $this->msg(
-						'anoneditwarning',
-						// Log-in link
-						'{{fullurl:Special:UserLogin|returnto={{FULLPAGENAMEE}}}}',
-						// Sign-up link
-						'{{fullurl:Special:UserLogin/signup|returnto={{FULLPAGENAMEE}}}}'
-					)->parseAsBlock();
-				}
+				$notices = [];
 
 				// From EditPage#showCustomIntro
 				if ( $params['editintro'] ) {
@@ -262,6 +250,21 @@ class ApiVisualEditor extends ApiBase {
 							new ParserOptions( $user )
 						)->getText();
 					}
+				}
+
+				// Add all page notices, but strip their keys to retain order
+				// (since Title returns message-keyed array)
+				$notices = array_merge( $notices, array_values( $title->getEditNotices() ) );
+
+				// Anonymous user notice
+				if ( $user->isAnon() ) {
+					$notices[] = $this->msg(
+						'anoneditwarning',
+						// Log-in link
+						'{{fullurl:Special:UserLogin|returnto={{FULLPAGENAMEE}}}}',
+						// Sign-up link
+						'{{fullurl:Special:UserLogin/signup|returnto={{FULLPAGENAMEE}}}}'
+					)->parseAsBlock();
 				}
 
 				// Old revision notice
