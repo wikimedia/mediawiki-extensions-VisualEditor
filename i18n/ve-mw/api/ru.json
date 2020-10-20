@@ -7,6 +7,7 @@
 			"Kaganer",
 			"Kareyac",
 			"Mailman",
+			"Megakott",
 			"Movses",
 			"Okras",
 			"Perevod16",
@@ -23,6 +24,7 @@
 	"apierror-visualeditor-latestnotfound": "Не удалось найти последнюю версию для заголовка",
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
+	"apihelp-visualeditor-param-badetag": "Если запрос RESTBase вернул кажущийся недопустимым ETag, передайте его сюда для ведения журнала.",
 	"apihelp-visualeditor-param-cachekey": "Для сериализации или просмотра различий, использовать результат предыдущего запроса serializeforcache с этим ключом. Пренебрегает $1html.",
 	"apihelp-visualeditor-param-editintro": "Изменение введения, которое добавляется к уведомлениям.",
 	"apihelp-visualeditor-param-etag": "ETag для отправки.",
@@ -55,6 +57,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Заголовок для нового раздела.",
 	"apihelp-visualeditoredit-param-starttimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
 	"apihelp-visualeditoredit-param-summary": "Редактировать описание изменений.",
+	"apihelp-visualeditoredit-param-tags": "Изменить метки, чтобы применить к редактированию.",
 	"apihelp-visualeditoredit-param-wikitext": "Викитекст для действий.",
 	"apihelp-visualeditoredit-summary": "Сохранить HTML5-страницу в MediaWiki (сконвертированную в викитекст с помощью Parsoid)."
 }

@@ -169,6 +169,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Välja kirjeldus",
 	"visualeditor-dialog-transclusion-param-info-missing": "Välja kirjeldus pole saadaval",
 	"visualeditor-dialog-transclusion-placeholder": "Malli lisamine",
+	"visualeditor-dialog-transclusion-raw-fallback": "Taanda lihtkujul vikitekstiks",
 	"visualeditor-dialog-transclusion-remove-content": "Eemalda sisu",
 	"visualeditor-dialog-transclusion-remove-param": "Eemalda väli",
 	"visualeditor-dialog-transclusion-remove-template": "Eemalda mall",

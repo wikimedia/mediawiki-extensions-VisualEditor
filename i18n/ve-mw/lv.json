@@ -176,7 +176,7 @@
 	"visualeditor-editingtabdialog-ok": "Izmantot pēdējā labojumā lietoto redaktoru",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|paziņojumi|paziņojums|paziņojumi}}",
 	"visualeditor-editnotices-tooltip": "Labošanas paziņojumi",
-	"visualeditor-editsummary": "Aprakstiet savas izmaiņas",
+	"visualeditor-editsummary": "Apraksti savas izmaiņas",
 	"visualeditor-editsummary-characters-remaining": "Atlikušo burtzīmju skaits",
 	"visualeditor-educationpopup-dismiss": "Labi, sapratu",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
