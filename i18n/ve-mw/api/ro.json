@@ -6,6 +6,7 @@
 			"Reception123"
 		]
 	},
+	"apierror-visualeditor-difffailed": "Diff eșuat",
 	"apihelp-visualeditor-description": "Întoarce pentru HTML5 pagina cu servicii Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Cand salvați, setați timestampul revisie care a fost editată. Folosit ca să detecteze conflicturi de editare.",
 	"apihelp-visualeditor-param-cachekey": "Pentru serializarea sau de a vedea diferențele, folosiți rezultatul anterior solicitării serializeforcache cu această cheie. Neglijează $1html.",
