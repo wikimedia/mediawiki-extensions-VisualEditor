@@ -427,8 +427,6 @@ class ApiVisualEditorEdit extends ApiBase {
 				$tempOut = new OutputPage( $context );
 				$tempOut->setArticleFlag( true );
 
-				Hooks::run( 'OutputPageBeforeHTML', [ $tempOut, &$result['content'] ] );
-
 				$subpagestr = $this->getSkin()->subPageSubtitle( $tempOut );
 				if ( $subpagestr !== '' ) {
 					$subpagestr = '<span class="subpages">' . $subpagestr . '</span>';
