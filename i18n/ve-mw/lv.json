@@ -173,6 +173,7 @@
 	"visualeditor-dialogbutton-transclusion-tooltip": "Iekļāvums",
 	"visualeditor-donebutton-tooltip": "Labošana pabeigta",
 	"visualeditor-editconflict": "Tavas veiktās izmaiņas nevar saglabāt, jo tās konfliktē ar citu pašlaik veiktu labojumu. Vai vēlies labot šo konfliktu manuāli?",
+	"visualeditor-editingtabdialog-body": "{{SITENAME}} tagad atceras tavu teksta redaktora izvēli. Labošanas laikā tu vari pārslēgt redaktora režīmus un vēlāk nomainīt savu izvēli.",
 	"visualeditor-editingtabdialog-ok": "Izmantot pēdējā labojumā lietoto redaktoru",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|paziņojumi|paziņojums|paziņojumi}}",
 	"visualeditor-editnotices-tooltip": "Labošanas paziņojumi",
