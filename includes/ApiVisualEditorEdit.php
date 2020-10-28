@@ -93,7 +93,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$apiParams = [
 			'action' => 'parse',
 			'oldid' => $newRevId,
-			'prop' => 'text|revid|categorieshtml|displaytitle|modules|jsconfigvars',
+			'prop' => 'text|revid|categorieshtml|displaytitle|subtitle|modules|jsconfigvars',
 		];
 		$api = new ApiMain(
 			new DerivativeRequest(
@@ -113,6 +113,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$content = $result['parse']['text']['*'] ?? false;
 		$categorieshtml = $result['parse']['categorieshtml']['*'] ?? false;
 		$displaytitle = $result['parse']['displaytitle'] ?? false;
+		$subtitle = $result['parse']['subtitle'] ?? false;
 		$modules = array_merge(
 			$result['parse']['modules'] ?? [],
 			$result['parse']['modulestyles'] ?? []
@@ -140,6 +141,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			'content' => $content,
 			'categorieshtml' => $categorieshtml,
 			'displayTitleHtml' => $displaytitle,
+			'contentSub' => $subtitle,
 			'modules' => $modules,
 			'jsconfigvars' => $jsconfigvars
 		];
@@ -420,18 +422,6 @@ class ApiVisualEditorEdit extends ApiBase {
 					$view->setContext( $originalContext );
 					RequestContext::getMain()->setTitle( $originalTitle );
 				}
-
-				$context = new RequestContext;
-				$context->setTitle( $title );
-				$context->setRequest( new FauxRequest( [ 'action' => 'view' ] ) );
-				$tempOut = new OutputPage( $context );
-				$tempOut->setArticleFlag( true );
-
-				$subpagestr = $this->getSkin()->subPageSubtitle( $tempOut );
-				if ( $subpagestr !== '' ) {
-					$subpagestr = '<span class="subpages">' . $subpagestr . '</span>';
-				}
-				$result['contentSub'] = $subpagestr . $this->getOutput()->getSubtitle();
 
 				$lang = $this->getLanguage();
 
