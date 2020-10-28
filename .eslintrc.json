@@ -9,11 +9,9 @@
 	"globals": {
 		"ve": "readonly",
 		"VisualEditorSupportCheck": "readonly",
-		"OO": "readonly",
 		"unicodeJS": "readonly",
 		"RangeFix": "readonly",
-		"Papa": "readonly",
-		"require": "readonly"
+		"Papa": "readonly"
 	},
 	"rules": {
 		"no-jquery/no-deferred": "error",
