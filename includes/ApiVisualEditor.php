@@ -215,8 +215,13 @@ class ApiVisualEditor extends ApiBase {
 								$content = $title->getDefaultMessageText();
 							}
 						}
+
+						$contentBeforeHook = $content;
 						Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
-						if ( $content === '' && !empty( $params['preload'] ) ) {
+						// Make sure we don't mark default system message content as a preload
+						if ( $content !== '' && $contentBeforeHook !== $content ) {
+							$preloaded = true;
+						} elseif ( $content === '' && !empty( $params['preload'] ) ) {
 							$content = $this->getPreloadContent(
 								$params['preload'], $params['preloadparams'], $title
 							);
@@ -504,10 +509,8 @@ class ApiVisualEditor extends ApiBase {
 						]
 					);
 				}
-				if ( $params['paction'] === 'parse' ||
-					 $params['paction'] === 'wikitext' ||
-					 ( !empty( $params['preload'] ) && isset( $content ) )
-				) {
+
+				if ( isset( $content ) ) {
 					$result['content'] = $content;
 					if ( $preloaded ) {
 						// If the preload param was actually used, pass it
@@ -516,7 +519,7 @@ class ApiVisualEditor extends ApiBase {
 						// whether the page has been created. They can work it
 						// out from some of the other returns, but this is
 						// simpler.)
-						$result['preloaded'] = $params['preload'];
+						$result['preloaded'] = $params['preload'] ?? '1';
 					}
 				}
 				break;
