@@ -4,6 +4,7 @@
 			"Aftab1995",
 			"Aftabuzzaman",
 			"Ahm masum",
+			"Al Riaz Uddin Ripon",
 			"Bellayet",
 			"Elias Ahmmad",
 			"Jayantanth",
@@ -14,6 +15,7 @@
 			"Sayak Sarkar",
 			"Sayma Jahan",
 			"Tauhid16",
+			"YahyA",
 			"আফতাবুজ্জামান"
 		]
 	},
@@ -23,6 +25,7 @@
 	"tooltip-ca-editsource": "এই পাতার উৎস কোড সম্পাদনা করুন",
 	"tooltip-ca-ve-edit": "এই পাতাটি সম্পাদনা করুন",
 	"visualeditor-advancedsettings-tool": "উন্নত সেটিং",
+	"visualeditor-autosave-modified-prompt-accept": "সম্পাদনা পুনরারম্ভ",
 	"visualeditor-autosave-modified-prompt-reject": "একটি নতুন সম্পাদনা শুরু করুন",
 	"visualeditor-autosave-not-recovered-text": "আপনার অসংরক্ষিত পরিবর্তনগুলি পুনরুদ্ধার করা যায়নি।",
 	"visualeditor-autosave-not-recovered-title": "পরিবর্তন পুনরুদ্ধার ব্যর্থ হয়েছে",
@@ -321,8 +324,11 @@
 	"visualeditor-preference-tabs-prefer-wt": "সবসময় উৎস সম্পাদক ব্যবহার করুন",
 	"visualeditor-preference-tabs-remember-last": "আমার সর্বশেষ সম্পাদক মনে রেখো",
 	"visualeditor-preference-visualdiffpage-label": "দৃশ্যমান পার্থক্য",
+	"visualeditor-rebase-client-export": "রপ্তানি",
+	"visualeditor-rebase-client-export-start": "রপ্তানি...",
 	"visualeditor-rebase-client-import": "আমদানি করুন",
 	"visualeditor-rebase-client-import-name": "পাতার শিরোনাম",
+	"visualeditor-rebase-client-title-help": "পরিবর্তন সংরক্ষণের পূর্বে আপনি তা পর্যালোচনা করতে সক্ষম হবেন।",
 	"visualeditor-recreate": "আপনি সম্পাদনা শুরু করার পর পাতাটি অপসারণ করা হয়েছে। এটি পুনঃতৈরি করতে \"$1\" চাপুন।",
 	"visualeditor-redirect-description": "$1-এ পুনঃনির্দেশিত",
 	"visualeditor-savedialog-error-badtoken": "সেশনের মেয়াদ শেষ হয়ে যাওয়ার কারণে আমরা আপনার সম্পাদনাটি সংরক্ষণ করতে পারিনি।",
@@ -358,10 +364,12 @@
 	"visualeditor-settings-tool": "পাতা সেটিং",
 	"visualeditor-special-characters-group-other": "প্রায়ই ব্যবহৃত",
 	"visualeditor-templatesused-tool": "ব্যবহৃত টেমপ্লেট",
+	"visualeditor-title-error": "অবৈধ শিরোনাম।",
 	"visualeditor-toload": "সম্পাদকটি এখন লোড হবে। আপনি যদি কয়েক সেকেন্ড পরেও এই বার্তাটি দেখতে পারেন, তাহলে দয়া করে [$1 পাতাটি পুনঃলোড করুন]।",
 	"visualeditor-usernamespacepagelink": "Project:ব্যবহারকারী নামস্থান",
 	"visualeditor-version-label": "সংস্করণ",
 	"visualeditor-wikitext-progress": "উইকিপাঠ্য রূপান্তর হচ্ছে",
 	"visualeditor-wikitext-warning": "আপনি দৃশ্যমান সম্পাদনা ব্যবহার করছেন - এখানে [[{{MediaWiki:visualeditor-wikitext-warning-link}}|উইকিপাঠ্য]] কাজ করে না। আপনার করা পরিবর্তন হারানো ছাড়াই যে কোন সময়ে উৎস সম্পাদনায় যাওয়ার জন্য, পাল্টান বোতামে ক্লিক করুন।",
-	"visualeditor-wikitext-warning-title": "উইকিটেক্সট মার্কআপ সনাক্ত"
+	"visualeditor-wikitext-warning-title": "উইকিটেক্সট মার্কআপ সনাক্ত",
+	"visualeditor-wikitextconvert-convert": "উইকিপাঠ্যে রূপান্তর"
 }
