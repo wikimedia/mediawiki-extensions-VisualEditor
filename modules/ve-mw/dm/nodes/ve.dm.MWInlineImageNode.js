@@ -51,18 +51,26 @@ ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span', 'figure-inline' ];
 ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
-	var dataElement, attributes, types,
-		figureInline = domElements[ 0 ],
-		imgWrapper = figureInline.children[ 0 ], // <a> or <span>
-		img = imgWrapper.children[ 0 ], // <img>, <video> or <audio>
-		typeofAttrs = ( figureInline.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ ),
-		mwDataJSON = figureInline.getAttribute( 'data-mw' ),
-		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
-		classes = figureInline.getAttribute( 'class' ),
-		recognizedClasses = [],
-		errorIndex = typeofAttrs.indexOf( 'mw:Error' ),
-		width = img.getAttribute( 'width' ),
-		height = img.getAttribute( 'height' );
+	var dataElement, attributes,
+		figureInline, imgWrapper, img,
+		typeofAttrs, classes, recognizedClasses, errorIndex, width, height, types,
+		mwDataJSON, mwData;
+
+	figureInline = domElements[ 0 ];
+	imgWrapper = figureInline.children[ 0 ]; // <a> or <span>
+	if ( !imgWrapper ) {
+		// Malformed figure, alienate (T267282)
+		return null;
+	}
+	img = imgWrapper.children[ 0 ]; // <img>, <video> or <audio>
+	typeofAttrs = ( figureInline.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
+	mwDataJSON = figureInline.getAttribute( 'data-mw' );
+	mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
+	classes = figureInline.getAttribute( 'class' );
+	recognizedClasses = [];
+	errorIndex = typeofAttrs.indexOf( 'mw:Error' );
+	width = img.getAttribute( 'width' );
+	height = img.getAttribute( 'height' );
 
 	if ( errorIndex !== -1 ) {
 		typeofAttrs.splice( errorIndex, 1 );
