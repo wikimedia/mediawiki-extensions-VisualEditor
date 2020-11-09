@@ -119,6 +119,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Nē",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Jā",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "Rādīt cilni šai lapai jaunas sadaļas pievienošanai",
+	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Tu vari novērst šīs lapas satura automātisku pārveidošanu citā rakstībā.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Nekonvertēt saturu starp valodas variantiem",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "Šajā lapā atspējot labošanas saites pie katra virsraksta.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Atspējot galeriju",

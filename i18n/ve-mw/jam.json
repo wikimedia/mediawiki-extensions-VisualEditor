@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dentonius",
 			"Katxis"
 		]
 	},
@@ -8,6 +9,6 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Ad luokal diskripshan suos",
 	"visualeditor-ca-createsource": "Kriet suos‎",
 	"visualeditor-ca-editsource": "Edit suos",
-	"visualeditor-ca-editsource-section": "edit suos",
+	"visualeditor-ca-editsource-section": "change up di source",
 	"visualeditor-descriptionpagelink": "Project:VijualEdita"
 }
