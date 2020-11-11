@@ -99,6 +99,7 @@
 		 * @return {jQuery.Promise} Promise resolved when the loading process is complete
 		 */
 		loadModules: function ( mode ) {
+			mw.hook( 've.loadModules' ).fire( this.addPlugin.bind( this ) );
 			ve.track( 'trace.moduleLoad.enter', { mode: mode } );
 			return mw.loader.using( modules )
 				.then( function () {
