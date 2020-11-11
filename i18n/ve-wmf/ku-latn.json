@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Balyozxane",
 			"Bikarhêner",
 			"George Animal",
 			"Guherto"
@@ -8,6 +9,9 @@
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Guhertina dîtbarî]]",
 	"tag-visualeditor-description": "Bi bikaranîna [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]ê guherandinê bike",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Guhertina dîtbarî: Kontrol bike]]",
+	"tag-visualeditor-wikitext": "2017 amûra guherandina çavkaniyê",
+	"tag-visualeditor-wikitext-description": "Guhertinên bi rêya 2017 amûra guherandina çavkaniyê hatine pêkanîn",
 	"visualeditor-feedback-link": "Project:VisualEditor/Paşragihandin",
 	"visualeditor-help-label": "Rêberê bikarhêneran bixwîne",
 	"visualeditor-help-title": "Rêberek ji bo hînbûna bikaranîna edîtorê",
