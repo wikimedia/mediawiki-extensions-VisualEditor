@@ -51,7 +51,6 @@
 
 /* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
 @media screen and ( min-width: 982px ) {
-	/* stylelint-disable selector-class-pattern */
 	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
 		margin: 0 -1.5rem;
 	}
