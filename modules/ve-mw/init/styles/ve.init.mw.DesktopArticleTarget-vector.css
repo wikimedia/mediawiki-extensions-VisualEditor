@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* stylelint-disable unit-blacklist */
+/* stylelint-disable unit-disallowed-list */
 
 /* stylelint-disable-next-line selector-class-pattern */
 .ve-activated .vector-menu-tabs .selected {
@@ -26,6 +26,7 @@
 	but isn't affected by the parent element font-size, which may be defined in
 	`px` due to `.mw-editfont-monospace` and similar classes. (T222217)
 	*/
+
 	margin: 0 -1rem;
 }
 
