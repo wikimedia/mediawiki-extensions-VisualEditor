@@ -329,6 +329,9 @@ ve.ui.MWParameterPage.prototype.isEmpty = function () {
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	var value = this.valueInput.getValue();
 
+	if ( !this.edited ) {
+		ve.track( 'activity.transclusion', { action: 'edit-parameter-value' } );
+	}
 	this.edited = true;
 	this.parameter.setValue( value );
 
