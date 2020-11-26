@@ -428,6 +428,12 @@ ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( tabPanel ) {
 			break;
 
 		case 'upload':
+			// Initialize and reset the upload booklet if it hasn't
+			// been initiailized since setup.
+			if ( !this.mediaUploadBookletInit ) {
+				this.mediaUploadBookletInit = true;
+				this.mediaUploadBooklet.initialize();
+			}
 			this.setSize( 'medium' );
 			this.uploadPageNameSet( 'upload' );
 			break;
@@ -1106,8 +1112,7 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
 ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var dialog = this,
-				isReadOnly = this.isReadOnly();
+			var isReadOnly = this.isReadOnly();
 
 			// Set language for search results
 			this.search.setLang( this.getFragment().getDocument().getLang() );
@@ -1147,20 +1152,13 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 			// opening, and it wants to display a context menu, it will be mispositioned.
 			this.switchPanels( this.selectedNode ? 'edit' : 'search', true );
 
-			// Reset upload booklet
-			// The first time this is called, it will try to switch panels,
-			// so the this.switchPanels() call has to be later.
-			return ( this.mediaUploadBooklet ?
-				this.mediaUploadBooklet.initialize() :
-				ve.createDeferred().resolve().promise()
-			).then( function () {
-				dialog.actions.setAbilities( { upload: false, save: false, insert: false, done: false } );
+			this.actions.setAbilities( { upload: false, save: false, insert: false, done: false } );
 
-				if ( data.file ) {
-					dialog.searchTabs.setTabPanel( 'upload' );
-					dialog.mediaUploadBooklet.setFile( data.file );
-				}
-			} );
+			this.mediaUploadBookletInit = false;
+			if ( data.file ) {
+				this.searchTabs.setTabPanel( 'upload' );
+				this.mediaUploadBooklet.setFile( data.file );
+			}
 		}, this );
 };
 
