@@ -507,7 +507,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface )
 			this.sectionTitle = new OO.ui.TextInputWidget( {
 				$element: $( '<h2>' ),
 				classes: [ 've-ui-init-desktopArticleTarget-sectionTitle' ],
-				maxLength: 255,
 				placeholder: ve.msg( 'visualeditor-section-title-placeholder' ),
 				spellcheck: true
 			} );
