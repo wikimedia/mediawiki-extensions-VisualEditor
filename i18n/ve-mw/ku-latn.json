@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Balyozxane",
 			"Bikarhêner",
 			"Cûndûllah el-Kurdî",
 			"George Animal",
@@ -145,7 +146,7 @@
 	"visualeditor-mwlanguagevariantinspector-title-name": "Navê ziman",
 	"visualeditor-mwsignature-tool": "Îmzeya we",
 	"visualeditor-parameter-search-unknown": "Qada nenas",
-	"visualeditor-preference-core-label": "Guherandina dîtbarî",
+	"visualeditor-preference-core-label": "Guhartina dîtbarî",
 	"visualeditor-savedialog-label-create": "Rûpelekê çêke",
 	"visualeditor-savedialog-label-error": "Çewtî",
 	"visualeditor-savedialog-label-publish-short": "Biweşîne",
@@ -153,7 +154,7 @@
 	"visualeditor-savedialog-label-report": "Pirsgirekê rapor bike",
 	"visualeditor-savedialog-label-save-short": "Tomar bike",
 	"visualeditor-savedialog-label-warning": "Hişyarî",
-	"visualeditor-savedialog-title-save": "Guhertinên xwe tomar bike",
+	"visualeditor-savedialog-title-save": "Guhartinên xwe tomar bike",
 	"visualeditor-settings-tool": "Hevyazên rûpelê",
 	"visualeditor-version-label": "Guherto"
 }
