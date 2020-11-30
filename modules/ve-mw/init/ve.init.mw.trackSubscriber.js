@@ -151,7 +151,7 @@
 			page_title: mw.config.get( 'wgPageName' ),
 			page_ns: mw.config.get( 'wgNamespaceNumber' ),
 			// eslint-disable-next-line no-jquery/no-global-selector
-			revision_id: mw.config.get( 'wgRevisionId' ) || +$( 'input[name=parentRevId]' ).val(),
+			revision_id: mw.config.get( 'wgRevisionId' ) || +$( 'input[name=parentRevId]' ).val() || 0,
 			editing_session_id: editingSessionId,
 			page_token: mw.user.getPageviewToken(),
 			session_token: mw.user.sessionId(),
