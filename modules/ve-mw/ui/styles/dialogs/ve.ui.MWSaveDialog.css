@@ -17,6 +17,7 @@
 
 .ve-ui-mwSaveDialog-summary textarea {
 	height: 4em;
+	/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
 	resize: vertical;
 }
 
