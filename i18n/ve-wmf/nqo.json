@@ -4,5 +4,7 @@
 			"Lancine.kounfantoh.fofana"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ߦߋߢߊ ߡߊߦߟߍ߬ߡߊ߲]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ߦߋߢߊ ߡߊߦߟߍ߬ߡߊ߲]]",
+	"tag-visualeditor-description": "ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲ ߡߍ߲ ߠߎ߬ ߛߌ߲ߘߌߣߍ߲߫ ߦߋ߫ [[{{MediaWiki:visualeditor-descriptionpagelink}}|ߦߋߗߏ߯ ߡߊߦߟߍߡߊ߲]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ߦߋߢߊ ߡߊߦߟߍ߬ߡߊ߲:ߝߛߍ߬ߝߛߍ߬ߟߌ]]"
 }
