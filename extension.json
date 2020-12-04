@@ -533,6 +533,7 @@
 				"oojs-ui.styles.icons-layout"
 			],
 			"messages": [
+				"visualeditor-pagemenu-tooltip",
 				"visualeditor-rebase-client-export",
 				"visualeditor-rebase-client-export-start",
 				"visualeditor-rebase-client-import-name",
