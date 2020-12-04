@@ -124,7 +124,11 @@
 							surfaceModel.selectFirstContentOffset();
 							// For new anon users, open the author list so they can set their name
 							if ( isNewAuthor && !username ) {
-								target.actionsToolbar.tools.authorList.onSelect();
+								// Something (an animation?) steals focus during load, so wait a bit
+								// before opening and focusing the authorList.
+								setTimeout( function () {
+									target.actionsToolbar.tools.authorList.onSelect();
+								}, 500 );
 							}
 						} );
 					} );
