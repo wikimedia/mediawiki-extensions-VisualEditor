@@ -1977,7 +1977,8 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	},
-	'plain external links (e.g. on paste) are converted to link/mwExternal': {
+	'plain external links when pasted are converted to link/mwExternal': {
+		fromClipboard: true,
 		body: '<a href="https://www.mediawiki.org/">ab</a>',
 		data: [
 			{
@@ -2017,7 +2018,8 @@ ve.dm.mwExample.domToDataCases = {
 		normalizedBody: '<a href="https://www.mediawiki.org/" rel="mw:ExtLink">ab</a>',
 		previewBody: '<a href="https://www.mediawiki.org/" class="external" rel="mw:ExtLink">ab</a>'
 	},
-	'plain internal links (e.g. on paste) are converted to link/mwInternal': {
+	'plain internal links when pasted are converted to link/mwInternal': {
+		fromClipboard: true,
 		body: '<a href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">ab</a>',
 		data: [
 			{
@@ -2063,7 +2065,8 @@ ve.dm.mwExample.domToDataCases = {
 			wgArticlePath: '/wiki/$1'
 		}
 	},
-	'plain href-less anchors (e.g. on paste) are converted to spans': {
+	'plain href-less anchors when pasted are converted to spans': {
+		fromClipboard: true,
 		body: '<a name="foo">ab</a>',
 		data: [
 			{
@@ -2076,14 +2079,14 @@ ve.dm.mwExample.domToDataCases = {
 				'a',
 				[ {
 					type: 'textStyle/span',
-					attributes: { nodeName: 'a' }
+					attributes: { nodeName: 'span' }
 				} ]
 			],
 			[
 				'b',
 				[ {
 					type: 'textStyle/span',
-					attributes: { nodeName: 'a' }
+					attributes: { nodeName: 'span' }
 				} ]
 			],
 			{
@@ -2096,6 +2099,7 @@ ve.dm.mwExample.domToDataCases = {
 				type: '/internalList'
 			}
 		],
-		fromDataBody: '<a>ab</a>'
+		normalizedBody: '<span name="foo">ab</span>',
+		fromDataBody: '<span>ab</span>'
 	}
 };
