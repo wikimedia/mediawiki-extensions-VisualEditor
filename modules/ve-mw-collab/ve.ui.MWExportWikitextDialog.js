@@ -35,7 +35,7 @@ ve.ui.MWExportWikitextDialog.static.title = ve.msg( 'visualeditor-rebase-client-
 ve.ui.MWExportWikitextDialog.static.actions = [
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-done' ),
-		flags: 'safe'
+		flags: [ 'safe', 'close' ]
 	}
 ];
 
