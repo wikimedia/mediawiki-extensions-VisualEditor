@@ -416,6 +416,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 			// TODO this retries both requests, in RESTbase mode we should only retry
 			// the request that gave us the lower revid
 			this.loading = null;
+			this.originalDataPromise = null;
 			// HACK: Load with explicit revid to hopefully prevent this from happening again
 			this.requestedRevId = Math.max( docRevId || 0, this.revid );
 			this.load();
@@ -605,6 +606,7 @@ ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
  */
 ve.init.mw.ArticleTarget.prototype.loadFail = function () {
 	this.loading = null;
+	this.originalDataPromise = null;
 	this.emit( 'loadError' );
 };
 
@@ -1122,7 +1124,7 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 		preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams )
 	} );
 
-	this.loading = dataPromise;
+	this.originalDataPromise = this.loading = dataPromise;
 	dataPromise.then(
 		this.loadSuccess.bind( this ),
 		this.loadFail.bind( this )
@@ -1138,6 +1140,7 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.restoreAccessKeys();
 	this.clearPreparedCacheKey();
 	this.loading = null;
+	this.originalDataPromise = null;
 	this.saving = null;
 	this.clearDiff();
 	this.serializing = false;
@@ -2344,6 +2347,45 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 		preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams )
 	} );
 
+	this.reloadSurface( 'visual', dataPromise );
+};
+
+/**
+ * Switch to a different visual section
+ *
+ * @param {string|null} section Section to switch to: a number, 'T-'-prefixed number, 'new'
+ *   or null (whole document)
+ */
+ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section ) {
+
+	if ( section !== null ) {
+		// TODO: Switching to another section would be odd and requires more testing
+		throw new Error( 'Swithing to a section other than full page (null) is not yet implemented' );
+	}
+
+	const modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
+	let dataPromise;
+	if ( modified ) {
+		dataPromise = this.originalDataPromise.then( ( response ) => {
+			// Move visualeditoredit to visualedit if required
+			response.visualeditor = response.visualeditor || response.visualeditoredit;
+			delete response.visualeditoredit;
+
+			response.visualeditor.content = mw.libs.ve.targetSaver.getHtml( this.getDocToSave(), this.doc );
+			response.visualeditor.fromEditedState = true;
+
+			return response;
+		} );
+	} else {
+		dataPromise = this.originalDataPromise;
+	}
+
+	if ( section === null ) {
+		// By keeping this.section, the new surface will still scroll to the original section
+		this.enableVisualSectionEditing = false;
+	} else {
+		// TODO: this.section = section; this.enableVisualSectionEditing = true;
+	}
 	this.reloadSurface( 'visual', dataPromise );
 };
 
