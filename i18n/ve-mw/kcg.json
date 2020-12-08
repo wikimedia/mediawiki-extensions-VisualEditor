@@ -4,5 +4,26 @@
 			"Kambai Akau"
 		]
 	},
-	"visualeditor-ca-editsource-section": "jhyuk a̠ni̠nan"
+	"visualeditor-backbutton-tooltip": "Bwuok nkat",
+	"visualeditor-ca-createsource": "Khwuk a̠ni̠nan",
+	"visualeditor-ca-editsource": "Jhyuk a̠ni̠nan",
+	"visualeditor-ca-editsource-section": "jhyuk a̠ni̠nan",
+	"visualeditor-dialog-media-position-left": "A̠zamyan",
+	"visualeditor-dialog-media-position-none": "Kukyang",
+	"visualeditor-dialog-media-position-right": "A̠zayak",
+	"visualeditor-dialog-media-save": "Sak",
+	"visualeditor-dialog-media-search-tab-search": "Zop",
+	"visualeditor-dialog-media-search-tab-upload": "Kpa̠t",
+	"visualeditor-dialog-media-searchselect": "Khai",
+	"visualeditor-dialog-media-size-section": "Shi ghwughwu",
+	"visualeditor-dialog-media-type-border": "Gak",
+	"visualeditor-dialog-media-type-frame": "Fi̠rem",
+	"visualeditor-dialog-media-type-frameless": "Sangfi̠rem",
+	"visualeditor-dialog-media-type-none": "A̠tsan",
+	"visualeditor-dialog-media-type-section": "Kak ghwughwu",
+	"visualeditor-dialog-media-upload": "Kpa̠t",
+	"visualeditor-dialog-meta-languages-code-label": "La̠mba a̠lyem",
+	"visualeditor-dialog-meta-languages-label": "Lilyem",
+	"visualeditor-dialog-meta-languages-name-label": "A̠lyem",
+	"visualeditor-dialog-meta-languages-section": "Lilyem"
 }
