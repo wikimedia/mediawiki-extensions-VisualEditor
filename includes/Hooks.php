@@ -1129,6 +1129,8 @@ class Hooks implements
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => array_filter( $veConfig->get( 'VisualEditorTabMessages' ) ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
+			'enableSectionEditingFullPageButtons' =>
+				$veConfig->get( 'VisualEditorEnableSectionEditingFullPageButtons' ),
 			'enableVisualSectionEditing' => $veConfig->get( 'VisualEditorEnableVisualSectionEditing' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'allowExternalLinkPaste' => $veConfig->get( 'VisualEditorAllowExternalLinkPaste' ),

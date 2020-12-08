@@ -24,19 +24,30 @@
 		}
 	}
 
-	> .ve-ce-surface .ve-ce-attachedRootNode {
-		// Ensure whole page is focusable (T109508)
-		// Subtract toolbar height, margin-bottom and a little more
-		// to prevent scrolling.
-		min-height: ~'calc( 100vh - 5em )';
+	> .ve-ce-surface {
+		// Ensure surface is full height so top "Edit full page" button can
+		// be scrolled out of view.
+		min-height: 100vh;
 
-		.ve-init-target-ios & {
-			// More spacing required on iOS to prevent scrolling.
-			min-height: ~'calc( 100vh - 10em )';
-		}
+		.ve-ce-attachedRootNode.ve-ce-documentNode {
+			// Ensure whole page is focusable (T109508)
+			// Only apply in full page editing mode (.ve-ce-attachedRootNode === .ve-ce-documentNode),
+			// as in section editing we may show an "Edit full page" button that we want close
+			// to the text. As this issue only really applies when the document is empty, this
+			// should not be an issue.
 
-		.ve-ui-targetWidget & {
-			min-height: 0;
+			// Subtract toolbar height, margin-bottom and a little more
+			// to prevent scrolling.
+			min-height: ~'calc( 100vh - 5em )';
+
+			.ve-init-target-ios & {
+				// More spacing required on iOS to prevent scrolling.
+				min-height: ~'calc( 100vh - 10em )';
+			}
+
+			.ve-ui-targetWidget & {
+				min-height: 0;
+			}
 		}
 	}
 }

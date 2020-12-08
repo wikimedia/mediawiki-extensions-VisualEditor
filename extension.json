@@ -61,6 +61,10 @@
 		"VisualEditorEnableHelpCompletion": {
 			"value": true
 		},
+		"VisualEditorEnableSectionEditingFullPageButtons": {
+			"description": "Shows buttons for switching to full page editing when in section edit mode.",
+			"value": false
+		},
 		"VisualEditorEnableVisualSectionEditing": {
 			"description": "When opened from a section edit link, only show that section in the editor (like in the wikitext editor). Can be boolean true for desktop and mobile, or 'mobile' for just mobile.",
 			"value": "mobile"
@@ -831,6 +835,9 @@
 				"modules/ve-mw/init/targets/ve.init.mw.ArticleTarget.js",
 				"modules/ve-mw/init/ve.init.mw.ArticleTargetEvents.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWEditModeTool.js"
+			],
+			"styles": [
+				"modules/ve-mw/init/styles/ve.init.mw.ArticleTarget.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mediawiki",

@@ -1474,7 +1474,7 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( newMode ) {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.reloadSurface.apply( this, arguments );
 
-	this.activatingDeferred.then( () => {
+	const promise = this.activatingDeferred.then( () => {
 		if ( newMode === 'source' ) {
 			mw.hook( 've.wikitextInteractive' ).fire();
 		}
@@ -1484,6 +1484,7 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( newMode ) {
 		this.setupTriggerListeners();
 	} );
 	this.toolbarSetupDeferred.resolve();
+	return promise;
 };
 
 /* Registration */

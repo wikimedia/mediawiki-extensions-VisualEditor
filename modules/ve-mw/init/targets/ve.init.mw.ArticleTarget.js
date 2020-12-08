@@ -47,6 +47,8 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	const enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
 	this.enableVisualSectionEditing = enableVisualSectionEditing === true || enableVisualSectionEditing === this.constructor.static.trackingName;
+	this.enableSectionEditingFullPageButtons = !!mw.config.get( 'wgVisualEditorConfig' ).enableSectionEditingFullPageButtons ||
+		mw.libs.ve.initialUrl.searchParams.has( 'vefullpagebuttons' );
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.currentUrl = new URL( location.href );
 	this.section = null;
@@ -70,6 +72,23 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.$saveAccessKeyElements = null;
 
 	this.$editableContent = this.getEditableContent();
+
+	this.switchToFullPageButtonTop = new OO.ui.ButtonWidget( {
+		label: 'Edit full page'
+	} ).on( 'click', this.switchToVisualSection.bind( this, null, -1 ) );
+	this.switchToFullPageButtonBottom = new OO.ui.ButtonWidget( {
+		label: 'Edit full page'
+	} ).on( 'click', this.switchToVisualSection.bind( this, null, 1 ) );
+	const $skeleton = $( '<div>' )
+		.prop( 'contentEditable', 'false' )
+		.addClass( 've-init-mw-articleTarget-switchFull-skeleton' )
+		.append( $( '<div>' ), $( '<div>' ), $( '<div>' ) );
+	this.$switchToFullPageContainerTop = $( '<div>' )
+		.addClass( 've-init-mw-articleTarget-switchFull' )
+		.append( this.switchToFullPageButtonTop.$element, $skeleton.clone().addClass( 've-init-mw-articleTarget-switchFull-skeleton-top' ) );
+	this.$switchToFullPageContainerBottom = $( '<div>' )
+		.addClass( 've-init-mw-articleTarget-switchFull' )
+		.append( this.switchToFullPageButtonBottom.$element, $skeleton.clone().addClass( 've-init-mw-articleTarget-switchFull-skeleton-bottom' ) );
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
@@ -354,6 +373,41 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		$( '#firstHeading' ).text(
 			mw.Title.newFromText( this.getPageName() ).getPrefixedText()
 		);
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.prototype.setSurface = function ( surface ) {
+	const surfaceWasReset = surface !== this.surface;
+
+	// Parent method
+	ve.init.mw.ArticleTarget.super.prototype.setSurface.apply( this, arguments );
+
+	if ( surfaceWasReset ) {
+		if ( this.enableVisualSectionEditing && this.section !== null ) {
+			const surfaceModel = surface.getModel();
+			const attachedRootRange = surfaceModel.getAttachedRoot().getOuterRange();
+			const documentRange = surfaceModel.getDocument().getDocumentRange();
+
+			if ( this.enableSectionEditingFullPageButtons ) {
+				if ( attachedRootRange.start !== 0 && OO.ui.isMobile() ) {
+					surface.getView().$element.prepend( this.$switchToFullPageContainerTop );
+				}
+
+				if ( attachedRootRange.end < documentRange.end ) {
+					surface.getView().$element.append( this.$switchToFullPageContainerBottom );
+				}
+			}
+		} else {
+			this.$switchToFullPageContainerTop.detach();
+			this.$switchToFullPageContainerBottom.detach();
+		}
+		// Restore scroll offset early to avoid flicker.
+		// TODO: Consider if this can always be called early
+		// (before surface initialize) instead of in afterSurfaceReady
+		this.restoreEditSection();
 	}
 };
 
@@ -2114,7 +2168,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		mode === 'source' ||
 		( this.enableVisualSectionEditing && this.section !== null )
 	) {
-		this.$scrollContainer.scrollTop( 0 );
+		this.$scrollContainer.scrollTop( this.$switchToFullPageContainerTop.outerHeight( true ) || 0 );
 	}
 
 	if ( section === null || section === 'new' || section === '0' || section === 'T-0' ) {
@@ -2355,11 +2409,11 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
  *
  * @param {string|null} section Section to switch to: a number, 'T-'-prefixed number, 'new'
  *   or null (whole document)
+ * @param {number} [direction=0] Direction to scroll after switching. 1 (down), -1 (up) or 0 (none).
  */
-ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section ) {
-
+ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, direction ) {
 	if ( section !== null ) {
-		// TODO: Switching to another section would be odd and requires more testing
+		// TODO: Switching to another section not yet required or supported
 		throw new Error( 'Swithing to a section other than full page (null) is not yet implemented' );
 	}
 
@@ -2380,13 +2434,37 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section ) 
 		dataPromise = this.originalDataPromise;
 	}
 
+	const oldHeadingNode = this.getSectionHeadingNode( this.section );
+	const oldSectionRange = this.getSurface().getModel().getAttachedRoot().getOuterRange();
+
 	if ( section === null ) {
-		// By keeping this.section, the new surface will still scroll to the original section
 		this.enableVisualSectionEditing = false;
+		this.visibleSection = this.section;
+		this.section = null;
 	} else {
 		// TODO: this.section = section; this.enableVisualSectionEditing = true;
 	}
-	this.reloadSurface( 'visual', dataPromise );
+
+	this.visibleSectionOffset = oldHeadingNode ?
+		oldHeadingNode.$element[ 0 ].getBoundingClientRect().top - this.getSurface().padding.top : 0;
+
+	this.reloadSurface( 'visual', dataPromise ).then( () => {
+		// oldSectionRange was based on the old attached root, which has no been
+		// unwrapped, so adjust offsets accordingly.
+		const offset = this.getSurface().getView().getRelativeSelectableContentOffset(
+			direction > 0 ? oldSectionRange.end - 2 : oldSectionRange.start - 1,
+			direction
+		);
+		this.getSurface().getModel().setLinearSelection( new ve.Range( offset ) );
+		if ( direction ) {
+			const scrollTop = this.$scrollContainer.scrollTop();
+			// Smooth scroll up or down by half of the viewport height
+			mw.libs.ve.smoothScrollTo(
+				scrollTop +
+				( direction * ( this.$scrollContainer[ 0 ].clientHeight / 2 ) )
+			);
+		}
+	} );
 };
 
 /**
@@ -2428,16 +2506,24 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
  *
  * @param {string} newMode New mode
  * @param {jQuery.Promise} [dataPromise] Data promise, if any
+ * @return {jQuery.Promise} Reload complete
  */
 ve.init.mw.ArticleTarget.prototype.reloadSurface = function ( newMode, dataPromise ) {
 	this.setDefaultMode( newMode );
 	this.clearDiff();
+
+	const deferred = ve.createDeferred();
+	this.once( 'surfaceReady', () => {
+		deferred.resolve();
+	} );
+
 	const promise = this.load( dataPromise );
 	this.getSurface().createProgress(
 		promise,
 		ve.msg( newMode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
 		true /* non-cancellable */
 	);
+	return deferred.promise();
 };
 
 /**
