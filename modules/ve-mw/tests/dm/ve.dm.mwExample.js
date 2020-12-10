@@ -327,7 +327,8 @@ ve.dm.mwExample.MWInlineImage = {
 			mw: {},
 			type: 'none',
 			originalClasses: 'foo mw-valign-text-top',
-			unrecognizedClasses: [ 'foo' ]
+			unrecognizedClasses: [ 'foo' ],
+			tagName: 'figure-inline'
 		}
 	},
 	storeItems: {
