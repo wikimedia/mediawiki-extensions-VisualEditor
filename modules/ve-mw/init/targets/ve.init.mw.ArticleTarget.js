@@ -378,6 +378,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		mode = this.getDefaultMode();
 		section = ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, mode, section );
+		this.originalDmDocPromise = null;
 
 		// Properties that don't come from the API
 		this.initialSourceRange = data.initialSourceRange;
