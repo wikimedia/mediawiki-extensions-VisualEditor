@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BrennodAloisi",
 			"Cedric31",
 			"Fitoschido",
 			"Jfblanc",
@@ -72,7 +73,7 @@
 	"visualeditor-dialog-media-type-frameless": "Sens quadre",
 	"visualeditor-dialog-media-type-none": "Basic",
 	"visualeditor-dialog-media-type-section": "Tipe d’imatge",
-	"visualeditor-dialog-media-type-thumb": "Vinheta",
+	"visualeditor-dialog-media-type-thumb": "Miniatura",
 	"visualeditor-dialog-media-upload": "Telecargar",
 	"visualeditor-dialog-meta-advancedsettings-label": "Paramètres avançats",
 	"visualeditor-dialog-meta-advancedsettings-section": "Paramètres avançats",
