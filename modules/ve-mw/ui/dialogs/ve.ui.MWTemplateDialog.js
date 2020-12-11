@@ -389,7 +389,9 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
-	var dialog = this;
+	var templateEvent, i,
+		dialog = this;
+
 	if ( action === 'done' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			var deferred = ve.createDeferred();
@@ -410,6 +412,20 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 					modelPromise = dialog.transclusionModel.insertTransclusionNode( dialog.getFragment() );
 				}
 
+				// TODO tracking will only be implemented temporarily to answer questions on
+				// template usage for the Technical Wishes topic area see T258917
+				templateEvent = {
+					action: 'save',
+					// eslint-disable-next-line camelcase
+					template_names: []
+				};
+				for ( i = 0; i < dialog.transclusionModel.getParts().length; i++ ) {
+					if ( dialog.transclusionModel.getParts()[ i ].getTitle ) {
+						templateEvent.template_names.push( dialog.transclusionModel.getParts()[ i ].getTitle() );
+					}
+				}
+				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );
+
 				return modelPromise.then( function () {
 					dialog.close( { action: action } ).closed.always( dialog.popPending.bind( dialog ) );
 				} );
@@ -429,7 +445,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var template, promise,
+			var template, promise, templateEvent, i,
 				dialog = this;
 
 			// Properties
@@ -467,6 +483,21 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				}
 			} else {
 				// Load existing template
+
+				// TODO tracking will only be implemented temporarily to answer questions on
+				// template usage for the Technical Wishes topic area see T258917
+				templateEvent = {
+					action: 'edit',
+					// eslint-disable-next-line camelcase
+					template_names: []
+				};
+				for ( i = 0; i < this.selectedNode.partsList.length; i++ ) {
+					if ( this.selectedNode.partsList[ i ].templatePage ) {
+						templateEvent.template_names.push( this.selectedNode.partsList[ i ].templatePage );
+					}
+				}
+				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );
+
 				promise = this.transclusionModel
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) )
 					.then( this.initializeTemplateParameters.bind( this ) );

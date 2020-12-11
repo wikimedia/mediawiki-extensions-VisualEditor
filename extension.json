@@ -2818,5 +2818,12 @@
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
 	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"VisualEditorTemplateDialogUse": 20813064
+			}
+		}
+	},
 	"manifest_version": 2
 }

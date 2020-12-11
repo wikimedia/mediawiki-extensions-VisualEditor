@@ -131,6 +131,15 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 		// Invalid titles return null, so abort here.
 		return;
 	}
+
+	// TODO tracking will only be implemented temporarily to answer questions on
+	// template usage for the Technical Wishes topic area see T258917
+	mw.track( 'event.VisualEditorTemplateDialogUse', {
+		action: 'add-template',
+		// eslint-disable-next-line camelcase
+		template_names: [ name.getPrefixedText() ]
+	} );
+
 	part = ve.dm.MWTemplateModel.newFromName( transclusion, name );
 	transclusion.replacePart( this.placeholder, part );
 	this.addTemplateInput.pushPending();
