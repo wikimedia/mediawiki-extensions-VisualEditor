@@ -52,21 +52,21 @@ ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, attributes,
-		figureInline, imgWrapper, img,
+		container, imgWrapper, img,
 		typeofAttrs, classes, recognizedClasses, errorIndex, width, height, types,
 		mwDataJSON, mwData;
 
-	figureInline = domElements[ 0 ]; // <figure-inline> or <span>
-	imgWrapper = figureInline.children[ 0 ]; // <a> or <span>
+	container = domElements[ 0 ]; // <figure-inline> or <span>
+	imgWrapper = container.children[ 0 ]; // <a> or <span>
 	if ( !imgWrapper ) {
 		// Malformed figure, alienate (T267282)
 		return null;
 	}
 	img = imgWrapper.children[ 0 ]; // <img>, <video> or <audio>
-	typeofAttrs = ( figureInline.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
-	mwDataJSON = figureInline.getAttribute( 'data-mw' );
+	typeofAttrs = ( container.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
+	mwDataJSON = container.getAttribute( 'data-mw' );
 	mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
-	classes = figureInline.getAttribute( 'class' );
+	classes = container.getAttribute( 'class' );
 	recognizedClasses = [];
 	errorIndex = typeofAttrs.indexOf( 'mw:Error' );
 	width = img.getAttribute( 'width' );
@@ -90,7 +90,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		alt: img.getAttribute( 'alt' ),
 		mw: mwData,
 		isError: errorIndex !== -1,
-		tagName: figureInline.nodeName.toLowerCase()
+		tagName: container.nodeName.toLowerCase()
 	};
 
 	// Extract individual classes
@@ -139,7 +139,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	var firstChild, srcAttr,
 		mediaClass = data.attributes.mediaClass,
-		figureInline = doc.createElement( data.attributes.tagName || 'figure-inline' ),
+		container = doc.createElement( data.attributes.tagName || 'figure-inline' ),
 		img = doc.createElement( this.typesToTags[ mediaClass ] ),
 		classes = [],
 		originalClasses = data.attributes.originalClasses;
@@ -155,9 +155,9 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	}
 
 	// RDFa type
-	figureInline.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
+	container.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
 	if ( !ve.isEmptyObject( data.attributes.mw ) ) {
-		figureInline.setAttribute( 'data-mw', JSON.stringify( data.attributes.mw ) );
+		container.setAttribute( 'data-mw', JSON.stringify( data.attributes.mw ) );
 	}
 
 	if ( data.attributes.defaultSize ) {
@@ -181,10 +181,10 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 		ve.compare( originalClasses.trim().split( /\s+/ ).sort(), classes.sort() )
 	) {
 		// eslint-disable-next-line mediawiki/class-doc
-		figureInline.className = originalClasses;
+		container.className = originalClasses;
 	} else if ( classes.length > 0 ) {
 		// eslint-disable-next-line mediawiki/class-doc
-		figureInline.className = classes.join( ' ' );
+		container.className = classes.join( ' ' );
 	}
 
 	if ( data.attributes.href ) {
@@ -194,10 +194,10 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 		firstChild = doc.createElement( 'span' );
 	}
 
-	figureInline.appendChild( firstChild );
+	container.appendChild( firstChild );
 	firstChild.appendChild( img );
 
-	return [ figureInline ];
+	return [ container ];
 };
 
 /* Registration */
