@@ -92,13 +92,13 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	// ImageNode:
 	//   <li> li (gallerybox)
 	//     <div> thumbDiv
-	//       <figure-inline> innerDiv
+	//       <span> innerDiv
 	//         <a> a
 	//           <img> img
 	var model = data,
 		li = doc.createElement( 'li' ),
 		thumbDiv = doc.createElement( 'div' ),
-		innerDiv = doc.createElement( model.attributes.tagName || 'figure-inline' ),
+		innerDiv = doc.createElement( model.attributes.tagName || 'span' ),
 		a = doc.createElement( 'a' ),
 		img = doc.createElement( 'img' ),
 		alt = model.attributes.altText;
