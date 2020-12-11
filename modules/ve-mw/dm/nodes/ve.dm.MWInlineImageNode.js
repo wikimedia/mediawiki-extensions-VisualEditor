@@ -56,7 +56,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		typeofAttrs, classes, recognizedClasses, errorIndex, width, height, types,
 		mwDataJSON, mwData;
 
-	figureInline = domElements[ 0 ];
+	figureInline = domElements[ 0 ]; // <figure-inline> or <span>
 	imgWrapper = figureInline.children[ 0 ]; // <a> or <span>
 	if ( !imgWrapper ) {
 		// Malformed figure, alienate (T267282)
@@ -89,7 +89,8 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),
 		mw: mwData,
-		isError: errorIndex !== -1
+		isError: errorIndex !== -1,
+		tagName: figureInline.nodeName.toLowerCase()
 	};
 
 	// Extract individual classes
@@ -138,7 +139,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	var firstChild, srcAttr,
 		mediaClass = data.attributes.mediaClass,
-		figureInline = doc.createElement( 'figure-inline' ),
+		figureInline = doc.createElement( data.attributes.tagName || 'figure-inline' ),
 		img = doc.createElement( this.typesToTags[ mediaClass ] ),
 		classes = [],
 		originalClasses = data.attributes.originalClasses;
