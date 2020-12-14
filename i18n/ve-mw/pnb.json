@@ -10,6 +10,7 @@
 	"collabpad": "کولیب پیڈ",
 	"tooltip-ca-createsource": "اس صفحے دا سورس کوڈ بناؤ",
 	"tooltip-ca-ve-edit": "ایس صفحے تے لکھو",
+	"visualeditor-advancedsettings-tool": "ہور ترتیباں",
 	"visualeditor-autosave-modified-prompt-reject": "نویں اڈیٹ شروع کرو",
 	"visualeditor-backbutton-tooltip": "پچھے جاؤ",
 	"visualeditor-ca-createlocaldescriptionsource": "آپنی لکھت رلاؤ",
@@ -30,7 +31,7 @@
 	"visualeditor-dialog-media-info-audiofile": "آڈیو فائل",
 	"visualeditor-dialog-media-info-moreinfo": "ہور جانکاری",
 	"visualeditor-dialog-media-info-readmore": "ہور پڑھو",
-	"visualeditor-dialog-media-page-advanced": "اگے دا",
+	"visualeditor-dialog-media-page-advanced": "اضافی",
 	"visualeditor-dialog-media-page-general": "عام",
 	"visualeditor-dialog-media-position-center": "وشکار",
 	"visualeditor-dialog-media-position-left": "کھبے",
@@ -50,6 +51,7 @@
 	"visualeditor-dialog-media-type-section": "مورت قسم",
 	"visualeditor-dialog-media-type-thumb": "نکی مورت",
 	"visualeditor-dialog-media-upload": "اپلوڈ",
+	"visualeditor-dialog-meta-advancedsettings-label": "ہور ترتیباں",
 	"visualeditor-dialog-meta-categories-category": "گٹھ",
 	"visualeditor-dialog-meta-categories-data-label": "گٹھاں",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "لُکیاں گٹھاں",
@@ -79,5 +81,10 @@
 	"visualeditor-dialog-transclusion-options": "آپشنز",
 	"visualeditor-dialog-transclusion-param-default": "ڈیفالٹ: $1",
 	"visualeditor-dialog-transclusion-placeholder": "سانچہ رلاؤ",
-	"visualeditor-dialog-transclusion-single-mode": "اختیار لُکاؤ"
+	"visualeditor-dialog-transclusion-single-mode": "اختیار لُکاؤ",
+	"visualeditor-media-title-audio": "آڈیو",
+	"visualeditor-media-title-image": "تصویر",
+	"visualeditor-media-title-video": "ویڈیو",
+	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|مورت|مورتاں}}",
+	"visualeditor-mwgallerydialog-card-images": "تصویراں"
 }
