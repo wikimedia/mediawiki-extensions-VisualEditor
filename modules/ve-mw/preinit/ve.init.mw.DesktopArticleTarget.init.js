@@ -530,7 +530,15 @@
 
 	conf = mw.config.get( 'wgVisualEditorConfig' );
 	tabMessages = conf.tabMessages;
-	uri = new mw.Uri( null, { arrayParams: true } );
+	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
+	try {
+		uri = new mw.Uri( null, { arrayParams: true } );
+	} catch ( e ) {
+		// URI failed to parse, probably because of query string parameters. (T270331)
+		// Fall back to the viewUri so that initialization completes.
+		// Ideally mw.Uri would ignore invalid parameters or characters.
+		uri = viewUri;
+	}
 	// T156998: Don't trust uri.query.oldid, it'll be wrong if uri.query.diff or uri.query.direction
 	// is set to 'next' or 'prev'.
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
@@ -541,7 +549,6 @@
 		oldId = undefined;
 	}
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
-	viewUri = new mw.Uri( mw.util.getUrl( mw.config.get( 'wgRelevantPageName' ) ) );
 	isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
 	isEditPage = mw.config.get( 'wgAction' ) === 'edit' || mw.config.get( 'wgAction' ) === 'submit';
 	pageCanLoadEditor = isViewPage || isEditPage;
