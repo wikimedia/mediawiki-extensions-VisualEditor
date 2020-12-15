@@ -480,7 +480,14 @@ class ApiVisualEditorEdit extends ApiBase {
 			'minor' => null,
 			'watchlist' => null,
 			'html' => [
-				ParamValidator::PARAM_TYPE => 'text',
+				// Use the 'raw' type to avoid Unicode NFC normalization.
+				// This makes the parameter binary safe, so that (a) if
+				// we use client-side compression it is not mangled, and/or
+				// (b) deprecated Unicode sequences explicitly encoded in
+				// wikitext (ie, &#x2001;) are not mangled.  Wikitext is
+				// in Unicode Normal Form C, but because of explicit entities
+				// the output HTML is not guaranteed to be.
+				ParamValidator::PARAM_TYPE => 'raw',
 				ParamValidator::PARAM_DEFAULT => null,
 			],
 			'etag' => null,
