@@ -108,7 +108,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 						formatversion: 2,
 						titles: titles,
 						redirects: !!widget.showRedirects,
-						doNotIgnoreMissingTitles: '1',
+						includeMissingTitles: '1',
 						lang: mw.config.get( 'wgUserLanguage' )
 					} );
 					return xhr.promise( { abort: xhr.abort } );
