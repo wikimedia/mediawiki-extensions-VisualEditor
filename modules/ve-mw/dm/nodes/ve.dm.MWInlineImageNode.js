@@ -43,9 +43,8 @@ ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = function ( attribute ) {
 	return attributes.indexOf( attribute ) === -1;
 };
 
-// <span> is here for backwards compatibility with Parsoid content that may be
-// stored in RESTBase.  This is now generated as <figure-inline>.  It should
-// be safe to remove when verion 1.5 content is no longer acceptable.
+// For a while, Parsoid switched to <figure-inline> for inline images, but
+// then decided to switch back to <span> in T266143.
 ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span', 'figure-inline' ];
 
 ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
@@ -56,7 +55,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		typeofAttrs, classes, recognizedClasses, errorIndex, width, height, types,
 		mwDataJSON, mwData;
 
-	container = domElements[ 0 ]; // <figure-inline> or <span>
+	container = domElements[ 0 ]; // <span> or <figure-inline>
 	imgWrapper = container.children[ 0 ]; // <a> or <span>
 	if ( !imgWrapper ) {
 		// Malformed figure, alienate (T267282)
@@ -139,7 +138,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	var firstChild, srcAttr,
 		mediaClass = data.attributes.mediaClass,
-		container = doc.createElement( data.attributes.tagName || 'figure-inline' ),
+		container = doc.createElement( data.attributes.tagName || 'span' ),
 		img = doc.createElement( this.typesToTags[ mediaClass ] ),
 		classes = [],
 		originalClasses = data.attributes.originalClasses;

@@ -307,11 +307,11 @@ ve.dm.mwExample.MWBlockImage = {
 
 ve.dm.mwExample.MWInlineImage = {
 	html:
-		'<figure-inline typeof="mw:Image" class="foo mw-valign-text-top">' +
+		'<span typeof="mw:Image" class="foo mw-valign-text-top">' +
 			'<a href="./File:Wiki.png">' +
 				'<img resource="./File:Wiki.png" src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" height="155" width="135" alt="alt text">' +
 			'</a>' +
-		'</figure-inline>',
+		'</span>',
 	data: {
 		type: 'mwInlineImage',
 		attributes: {
@@ -328,7 +328,7 @@ ve.dm.mwExample.MWInlineImage = {
 			type: 'none',
 			originalClasses: 'foo mw-valign-text-top',
 			unrecognizedClasses: [ 'foo' ],
-			tagName: 'figure-inline'
+			tagName: 'span'
 		}
 	},
 	storeItems: {
