@@ -828,7 +828,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: '120',
 					resource: 'Foo',
 					src: ve.ce.minImgDataUri,
-					width: '120'
+					width: '120',
+					tagName: 'figure-inline'
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -873,7 +874,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: '120',
 					resource: 'Foo',
 					src: ve.ce.minImgDataUri,
-					width: '120'
+					width: '120',
+					tagName: 'figure-inline'
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -918,7 +920,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: '120',
 					resource: 'Foo',
 					src: ve.ce.minImgDataUri,
-					width: '120'
+					width: '120',
+					tagName: 'figure-inline'
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -963,7 +966,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: '120',
 					resource: 'Foo',
 					src: ve.ce.minImgDataUri,
-					width: '120'
+					width: '120',
+					tagName: 'figure-inline'
 				}
 			},
 			{ type: '/mwGalleryImage' },
@@ -997,7 +1001,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: '120',
 					resource: 'Foo',
 					src: ve.ce.minImgDataUri,
-					width: '120'
+					width: '120',
+					tagName: 'figure-inline'
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
