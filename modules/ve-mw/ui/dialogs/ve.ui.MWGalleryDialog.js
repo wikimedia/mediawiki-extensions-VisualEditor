@@ -434,7 +434,8 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 						src: image.getAttribute( 'src' ),
 						height: image.getAttribute( 'height' ),
 						width: image.getAttribute( 'width' ),
-						captionDocument: dialog.createCaptionDocument( imageCaptionNode )
+						captionDocument: dialog.createCaptionDocument( imageCaptionNode ),
+						tagName: image.getAttribute( 'tagName' )
 					} );
 				}
 
@@ -996,7 +997,8 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 			altText: image.altText,
 			src: image.thumbUrl,
 			height: size.height,
-			width: size.width
+			width: size.width,
+			tagName: image.tagName
 		};
 
 		return [
