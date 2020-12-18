@@ -1124,7 +1124,7 @@ class VisualEditorHooks {
 
 		if (
 			// Only act on actual accounts (avoid race condition bugs)
-			$user->isLoggedIn() &&
+			$user->isRegistered() &&
 			// Only act if the default isn't already set
 			!User::getDefaultOption( 'visualeditor-enable' ) &&
 			// Act if either …

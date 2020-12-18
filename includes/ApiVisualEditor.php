@@ -288,7 +288,7 @@ class ApiVisualEditor extends ApiBase {
 				// New page notices
 				if ( !$title->exists() ) {
 					$notices[] = $this->msg(
-						$user->isLoggedIn() ? 'newarticletext' : 'newarticletextanon',
+						$user->isRegistered() ? 'newarticletext' : 'newarticletextanon',
 						wfExpandUrl( Skin::makeInternalOrExternalUrl(
 							$this->msg( 'helppage' )->inContentLanguage()->text()
 						) )
@@ -395,7 +395,7 @@ class ApiVisualEditor extends ApiBase {
 					$block = $targetUser->getBlock();
 
 					if (
-						!( $targetUser && $targetUser->isLoggedIn() ) &&
+						!( $targetUser && $targetUser->isRegistered() ) &&
 						!User::isIP( $targetUsername )
 					) {
 						// User does not exist
