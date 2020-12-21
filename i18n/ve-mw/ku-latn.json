@@ -101,7 +101,7 @@
 	"visualeditor-dialog-transclusion-no-template-description": "Hê danasîna şablona \"$1\" tune ye, lê dibe ku hin agahî li ser [[$1|rûpela şablonê]] hebin.",
 	"visualeditor-dialog-transclusion-options": "Vebijark",
 	"visualeditor-dialog-transclusion-param-default": "Standart:$1",
-	"visualeditor-dialog-transclusion-param-example": "$1 wek mînak",
+	"visualeditor-dialog-transclusion-param-example": "w.m. $1",
 	"visualeditor-dialog-transclusion-placeholder": "Şablonekê lê zêde bike",
 	"visualeditor-dialog-transclusion-remove-content": "Naverokê jê bibe",
 	"visualeditor-dialog-transclusion-remove-template": "Şablonê jê bibe",

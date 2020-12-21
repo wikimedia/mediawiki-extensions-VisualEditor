@@ -82,9 +82,15 @@
 	"visualeditor-dialog-transclusion-param-default": "ڈیفالٹ: $1",
 	"visualeditor-dialog-transclusion-placeholder": "سانچہ رلاؤ",
 	"visualeditor-dialog-transclusion-single-mode": "اختیار لُکاؤ",
+	"visualeditor-formatdropdown-format-mw-heading1": "صفحہ عنوان",
+	"visualeditor-languages-tool": "بولیاں",
 	"visualeditor-media-title-audio": "آڈیو",
 	"visualeditor-media-title-image": "تصویر",
 	"visualeditor-media-title-video": "ویڈیو",
 	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|مورت|مورتاں}}",
-	"visualeditor-mwgallerydialog-card-images": "تصویراں"
+	"visualeditor-mwgallerydialog-card-images": "تصویراں",
+	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "بولی کوڈ",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "بولی",
+	"visualeditor-rebase-client-import-name": "صفحہ عنوان",
+	"visualeditor-savedialog-review-visual": "ویژوئل"
 }
