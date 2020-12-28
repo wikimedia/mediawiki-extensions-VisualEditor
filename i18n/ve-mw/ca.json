@@ -230,7 +230,7 @@
 	"visualeditor-linkinspector-convert-link-rfc": "Convertir a enllaç de RFC",
 	"visualeditor-linkinspector-educationpopup-text": "Enllaceu les paraules importants a altres articles wiki o fins i tot a altres webs. Això ajudarà als lectors a entendre el context.",
 	"visualeditor-linkinspector-educationpopup-title": "Enllaços",
-	"visualeditor-linkinspector-illegal-title": "Títol de pàgina invàlid",
+	"visualeditor-linkinspector-illegal-title": "Títol de pàgina no vàlid",
 	"visualeditor-linkinspector-invalid-external": "Inseriu una URL completa, com ara https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Afegeix una etiqueta",
 	"visualeditor-linknodeinspector-title": "Enllaç senzill",

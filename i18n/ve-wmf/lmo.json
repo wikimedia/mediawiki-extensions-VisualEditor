@@ -1,15 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ninonino"
+			"Ninonino",
+			"Salvemm el lombard"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "Mudìfica fada col [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: controlà]]",
-	"tag-visualeditor-needcheck-description": "Mudìfica fàda col [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] endóche 'l sistéma 'l g'ha troàt de le mudìfiche 'ndèl wikitest che fórse i éra mìa ülìde.",
-	"visualeditor-feedback-link": "Project:VisualEditor/Comèncc",
-	"visualeditor-feedback-tool": "Làsa 'n comènt",
-	"visualeditor-help-label": "Lès la guìda del ütènt",
-	"visualeditor-help-title": "Guìda ütènt per emparà a doprà l'editor"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visiv]]",
+	"tag-visualeditor-description": "Modifica fada cont el doprà l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modiffica vixoâ: controlà]]",
+	"tag-visualeditor-needcheck-description": "Modifica eseguida cont el doprà l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] indove el sistema l'ha rilevad di possibil modifiche minga vorude in del wikitesto.",
+	"visualeditor-feedback-link": "Project:VisualEditor/Comencc",
+	"visualeditor-feedback-tool": "Dinn quel che te penset de quel programa informatich chì",
+	"visualeditor-help-label": "Lensg la guida de l'utent",
+	"visualeditor-help-title": "Guida utent per imparà a doprà l'editor"
 }
