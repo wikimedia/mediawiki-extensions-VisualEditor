@@ -373,6 +373,7 @@
 						// This is used for stats tracking, so do not change!
 						targetName: 'mwTarget',
 						modified: modified,
+						editintro: uri.query.editintro,
 						preload: uri.query.preload,
 						preloadparams: uri.query.preloadparams,
 						// If switching to visual with modifications, check if we have wikitext to convert

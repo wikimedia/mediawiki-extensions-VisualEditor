@@ -19,7 +19,7 @@
  */
 ( function () {
 	var prefName, prefValue,
-		uri, editintro,
+		uri,
 		namespaces = mw.config.get( 'wgNamespaceIds' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
@@ -29,7 +29,6 @@
 
 	try {
 		uri = new mw.Uri();
-		editintro = uri.query.editintro;
 	} catch ( e ) {
 		// URI may not be parseable (T106244)
 		uri = false;
@@ -197,6 +196,7 @@
 		 * @param {string} [options.targetName] Optional target name for tracking
 		 * @param {boolean} [options.modified] The page was been modified before loading (e.g. in source mode)
 		 * @param {string} [options.wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
+		 * @param {string} [options.editintro] Name of a page to use as edit intro message
 		 * @param {string} [options.preload] Name of a page to use as preloaded content if pageName is empty
 		 * @param {Array} [options.preloadparams] Parameters to substitute into preload if it's used
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
@@ -296,7 +296,7 @@
 				page: pageName,
 				badetag: options.badetag,
 				uselang: mw.config.get( 'wgUserLanguage' ),
-				editintro: editintro,
+				editintro: options.editintro,
 				preload: options.preload,
 				preloadparams: options.preloadparams,
 				formatversion: 2
@@ -493,7 +493,7 @@
 				paction: 'wikitext',
 				page: pageName,
 				uselang: mw.config.get( 'wgUserLanguage' ),
-				editintro: editintro,
+				editintro: options.editintro,
 				preload: options.preload,
 				preloadparams: options.preloadparams,
 				formatversion: 2
