@@ -1046,14 +1046,25 @@
 			return !(
 				// Disabled in config?
 				!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
+				// Disabled for the current request?
+				this.isWelcomeDialogSuppressed() ||
+				// Hidden using preferences, local storage or cookie?
+				checkPreferenceOrStorage( 'visualeditor-hidebetawelcome', 've-beta-welcome-dialog' )
+			);
+		},
+
+		/**
+		 * Check whether the welcome dialog is temporarily disabled.
+		 * @return {boolean}
+		 */
+		isWelcomeDialogSuppressed: function () {
+			return !!(
 				// Disabled by calling disableWelcomeDialog()?
 				welcomeDialogDisabled ||
 				// Hidden using URL parameter?
 				'vehidebetadialog' in new mw.Uri().query ||
 				// Check for deprecated hidewelcomedialog parameter (T249954)
-				'hidewelcomedialog' in new mw.Uri().query ||
-				// Hidden using preferences, local storage or cookie?
-				checkPreferenceOrStorage( 'visualeditor-hidebetawelcome', 've-beta-welcome-dialog' )
+				'hidewelcomedialog' in new mw.Uri().query
 			);
 		},
 
