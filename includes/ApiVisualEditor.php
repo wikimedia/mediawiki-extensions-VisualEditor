@@ -116,6 +116,8 @@ class ApiVisualEditor extends ApiBase {
 				$preloaded = false;
 				$restbaseHeaders = null;
 
+				$section = $params['section'] ?? null;
+
 				// Get information about current revision
 				if ( $title->exists() ) {
 					$revision = $this->getValidRevision( $title, $parserParams['oldid'] ?? null );
@@ -130,7 +132,6 @@ class ApiVisualEditor extends ApiBase {
 						$wikitext = $params['wikitext'] ?? null;
 						if ( $wikitext !== null ) {
 							$stash = $params['stash'];
-							$section = $params['section'] ?? null;
 							if ( $params['pst'] ) {
 								$wikitext = $this->pstWikitext( $title, $wikitext );
 							}
@@ -162,45 +163,35 @@ class ApiVisualEditor extends ApiBase {
 							'rvprop' => 'content|ids'
 						];
 
-						$section = $params['section'] ?? null;
+						$apiParams['rvsection'] = $section;
 
-						if ( $section === 'new' ) {
-							$content = '';
-							if ( !empty( $params['preload'] ) ) {
-								$content = $this->getPreloadContent(
-									$params['preload'], $params['preloadparams'], $title
-								);
-								$preloaded = true;
-							}
-						} else {
-							$apiParams['rvsection'] = $section;
-
-							$api = new ApiMain(
-								new DerivativeRequest(
-									$this->getRequest(),
-									$apiParams,
-									/* was posted? */ false
-								),
-								/* enable write? */ true
-							);
-							$api->execute();
-							$result = $api->getResult()->getResultData();
-							$pid = $title->getArticleID();
-							$content = false;
-							if ( isset( $result['query']['pages'][$pid]['revisions'] ) ) {
-								foreach ( $result['query']['pages'][$pid]['revisions'] as $revArr ) {
-									// Check 'revisions' is an array (T193718)
-									if ( is_array( $revArr ) && $revArr['revid'] === $oldid ) {
-										$content = $revArr['content'];
-									}
+						$api = new ApiMain(
+							new DerivativeRequest(
+								$this->getRequest(),
+								$apiParams,
+								/* was posted? */ false
+							),
+							/* enable write? */ true
+						);
+						$api->execute();
+						$result = $api->getResult()->getResultData();
+						$pid = $title->getArticleID();
+						$content = false;
+						if ( isset( $result['query']['pages'][$pid]['revisions'] ) ) {
+							foreach ( $result['query']['pages'][$pid]['revisions'] as $revArr ) {
+								// Check 'revisions' is an array (T193718)
+								if ( is_array( $revArr ) && $revArr['revid'] === $oldid ) {
+									$content = $revArr['content'];
 								}
 							}
-							if ( $content === false ) {
-								$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
-							}
+						}
+						if ( $content === false ) {
+							$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 						}
 					}
-				} else {
+				}
+
+				if ( !$title->exists() || $section === 'new' ) {
 					if ( isset( $params['wikitext'] ) ) {
 						$content = $params['wikitext'];
 						if ( $params['pst'] ) {
@@ -208,7 +199,7 @@ class ApiVisualEditor extends ApiBase {
 						}
 					} else {
 						$content = '';
-						if ( $title->getNamespace() == NS_MEDIAWIKI && $params['section'] !== 'new' ) {
+						if ( $title->getNamespace() == NS_MEDIAWIKI && $section !== 'new' ) {
 							// If this is a system message, get the default text.
 							$msg = $title->getDefaultMessageText();
 							if ( $msg !== false ) {
@@ -217,7 +208,9 @@ class ApiVisualEditor extends ApiBase {
 						}
 
 						$contentBeforeHook = $content;
-						Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+						if ( $section !== 'new' ) {
+							Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+						}
 						// Make sure we don't mark default system message content as a preload
 						if ( $content !== '' && $contentBeforeHook !== $content ) {
 							$preloaded = true;
