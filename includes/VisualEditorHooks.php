@@ -302,7 +302,7 @@ class VisualEditorHooks {
 		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			$user->setOption( 'visualeditor-editor', 'wikitext' );
-			if ( !wfReadOnly() && !$user->isAnon() ) {
+			if ( !wfReadOnly() && $user->isRegistered() ) {
 				DeferredUpdates::addCallableUpdate( function () use ( $user ) {
 					$user->saveSettings();
 				} );
@@ -403,7 +403,7 @@ class VisualEditorHooks {
 		// Set editor to user's preference or site's default if …
 		if (
 			// … user is logged in,
-			!$user->isAnon() ||
+			$user->isRegistered() ||
 			// … no cookie is set, or
 			!$editor ||
 			// value is invalid.
@@ -441,7 +441,7 @@ class VisualEditorHooks {
 
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
-			!$user->isAnon() &&
+			$user->isRegistered() &&
 			!$user->getOption( 'visualeditor-autodisable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' ) &&
 			!$user->getOption( 'visualeditor-hidetabdialog' ) &&
@@ -476,7 +476,7 @@ class VisualEditorHooks {
 		if (
 			!self::enabledForUser( $user ) ||
 			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
-			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
+			( $config->get( 'VisualEditorDisableForAnons' ) && !$user->isRegistered() )
 		) {
 			return;
 		}
@@ -649,7 +649,7 @@ class VisualEditorHooks {
 		if (
 			!self::enabledForUser( $user ) ||
 			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
-			( $config->get( 'VisualEditorDisableForAnons' ) && $user->isAnon() )
+			( $config->get( 'VisualEditorDisableForAnons' ) && !$user->isRegistered() )
 		) {
 			return;
 		}

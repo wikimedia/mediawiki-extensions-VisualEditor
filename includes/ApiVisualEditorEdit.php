@@ -10,6 +10,7 @@
 
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserIdentity;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditorEdit extends ApiBase {
@@ -238,10 +239,10 @@ class ApiVisualEditorEdit extends ApiBase {
 
 	/**
 	 * @param BagOStuff $cache
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param string $newKey
 	 */
-	private function pruneExcessStashedEntries( BagOStuff $cache, User $user, $newKey ) {
+	private function pruneExcessStashedEntries( BagOStuff $cache, UserIdentity $user, $newKey ) {
 		$key = $cache->makeKey( 'visualeditor-serialization-recent', $user->getName() );
 
 		$keyList = $cache->get( $key ) ?: [];

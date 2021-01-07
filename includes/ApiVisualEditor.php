@@ -255,7 +255,7 @@ class ApiVisualEditor extends ApiBase {
 				$notices = array_merge( $notices, array_values( $title->getEditNotices() ) );
 
 				// Anonymous user notice
-				if ( $user->isAnon() ) {
+				if ( !$user->isRegistered() ) {
 					$notices[] = $this->msg(
 						'anoneditwarning',
 						// Log-in link
