@@ -369,6 +369,8 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 	this.borderCheckbox.connect( this, { change: 'onBorderCheckboxChange' } );
 	this.positionSelect.connect( this, { choose: 'onPositionSelectChoose' } );
 	this.typeSelect.connect( this, { choose: 'onTypeSelectChoose' } );
+	this.search.getQuery().connect( this, { change: 'onSearchQueryChange' } );
+	this.search.getQuery().$indicator.on( 'mousedown', this.onSearchQueryClear.bind( this ) );
 	this.search.getResults().connect( this, { choose: 'onSearchResultsChoose' } );
 	this.captionTarget.connect( this, { change: 'checkChanged' } );
 	this.altTextInput.connect( this, { change: 'onAlternateTextChange' } );
@@ -841,6 +843,34 @@ ve.ui.MWMediaDialog.prototype.getLicenseIcon = function ( license ) {
  */
 ve.ui.MWMediaDialog.prototype.onSearchResultsChoose = function ( item ) {
 	this.chooseImageInfo( item.getData() );
+
+	ve.track( 'activity.' + this.constructor.static.name, {
+		action: 'search-choose-image'
+	} );
+};
+
+/**
+ * Handle query change events from the search input widget
+ *
+ * @param {string} query
+ */
+ve.ui.MWMediaDialog.prototype.onSearchQueryChange = function ( query ) {
+	if ( query === '' ) {
+		return;
+	}
+
+	ve.track( 'activity.' + this.constructor.static.name, {
+		action: 'search-change-query'
+	} );
+};
+
+/**
+ * Handle clearing of search query by user clicking on indicator
+ */
+ve.ui.MWMediaDialog.prototype.onSearchQueryClear = function () {
+	ve.track( 'activity.' + this.constructor.static.name, {
+		action: 'search-clear-query'
+	} );
 };
 
 /**
@@ -917,6 +947,10 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 
 		this.checkChanged();
 		this.switchPanels( 'edit' );
+
+		ve.track( 'activity.' + this.constructor.static.name, {
+			action: 'search-confirm-image'
+		} );
 	}
 };
 
@@ -1351,6 +1385,10 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 			handler = function () {
 				this.switchPanels( 'search' );
 			};
+
+			ve.track( 'activity.' + this.constructor.static.name, {
+				action: 'search-change-image'
+			} );
 			break;
 		case 'back':
 			handler = function () {
@@ -1371,6 +1409,9 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 					return this.mediaUploadBooklet.initialize();
 				}
 			};
+			ve.track( 'activity.' + this.constructor.static.name, {
+				action: 'search-change-image'
+			} );
 			break;
 		case 'cancelupload':
 			handler = function () {
@@ -1380,6 +1421,9 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 			};
 			break;
 		case 'upload':
+			ve.track( 'activity.' + this.constructor.static.name, {
+				action: 'search-upload-image'
+			} );
 			return new OO.ui.Process( this.mediaUploadBooklet.uploadFile() );
 		case 'save':
 			return new OO.ui.Process( this.mediaUploadBooklet.saveFile() );
