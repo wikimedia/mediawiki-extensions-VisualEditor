@@ -606,26 +606,18 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.editSummaryInput = new ve.ui.MWEditSummaryWidget( {
 		$overlay: this.$overlay,
 		placeholder: ve.msg( 'visualeditor-editsummary' ),
-		classes: [ 've-ui-mwSaveDialog-summary' ],
-		inputFilter: function ( value ) {
-			// Prevent the user from inputting newlines (this kicks in on paste, etc.)
-			return value.replace( /\r?\n/g, ' ' );
-		}
+		classes: [ 've-ui-mwSaveDialog-summary' ]
 	} );
-	// Prevent the user from inputting newlines from keyboard
-	this.editSummaryInput.$input.on( 'keypress', function ( e ) {
-		if ( e.which === OO.ui.Keys.ENTER ) {
-			e.preventDefault();
-
-			dialog.showMessage(
-				'keyboard-shortcut-submit',
-				$( '<p>' ).msg(
-					'visualeditor-savedialog-keyboard-shortcut-submit',
-					new ve.ui.Trigger( ve.ui.commandHelpRegistry.lookup( 'dialogConfirm' ).shortcuts[ 0 ] ).getMessage()
-				),
-				{ wrap: false }
-			);
-		}
+	// Show a warning if the user presses Enter
+	this.editSummaryInput.on( 'enter', function () {
+		dialog.showMessage(
+			'keyboard-shortcut-submit',
+			$( '<p>' ).msg(
+				'visualeditor-savedialog-keyboard-shortcut-submit',
+				new ve.ui.Trigger( ve.ui.commandHelpRegistry.lookup( 'dialogConfirm' ).shortcuts[ 0 ] ).getMessage()
+			),
+			{ wrap: false }
+		);
 	} );
 	// Limit length, and display the remaining characters
 	this.editSummaryInput.$input.codePointLimit( this.editSummaryCodePointLimit );
