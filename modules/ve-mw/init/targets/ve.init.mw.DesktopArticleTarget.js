@@ -1591,6 +1591,9 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			if ( oldId && oldId !== mw.config.get( 'wgCurRevisionId' ) ) {
 				uri.extend( { oldid: oldId } );
 			}
+			if ( mw.libs.ve.isWelcomeDialogSuppressed() ) {
+				uri.extend( { vehidebetadialog: 1 } );
+			}
 			location.href = uri.toString();
 		} );
 	} else {
