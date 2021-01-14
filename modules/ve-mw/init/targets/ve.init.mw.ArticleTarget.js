@@ -1344,7 +1344,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 	) {
 		this.saveDialog.showMessage(
 			'missingsummary',
-			ve.init.platform.getParsedMessage( 'missingsummary' )
+			new OO.ui.HtmlSnippet( ve.init.platform.getParsedMessage( 'missingsummary' ) )
 		);
 		this.saveDialog.popPending();
 	} else {
