@@ -1344,9 +1344,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 	) {
 		this.saveDialog.showMessage(
 			'missingsummary',
-			// Wrap manually since this core message already includes a bold "Warning:" label
-			$( '<p>' ).append( ve.init.platform.getParsedMessage( 'missingsummary' ) ),
-			{ wrap: false }
+			ve.init.platform.getParsedMessage( 'missingsummary' )
 		);
 		this.saveDialog.popPending();
 	} else {

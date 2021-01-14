@@ -469,31 +469,12 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
  * @param {string} name Message's unique name
  * @param {string|jQuery|Array} message Message content (string of HTML, jQuery object or array of
  *  Node objects)
- * @param {Object} [options]
- * @param {boolean} [options.wrap="warning"] Whether to wrap the message in a paragraph and if
- *  so, how. One of "warning", "error" or false.
  * @return {jQuery.Promise} Promise which resolves when the message has been shown, rejects if no new message shown.
  */
-ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
+ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message ) {
 	var $message, promise;
 	if ( !this.messages[ name ] ) {
-		options = options || {};
-		if ( options.wrap === undefined ) {
-			options.wrap = 'warning';
-		}
-		$message = $( '<div>' ).addClass( 've-ui-mwSaveDialog-message' );
-		if ( options.wrap !== false ) {
-			$message.append( $( '<p>' ).append(
-				// The following messages are used here:
-				// * visualeditor-savedialog-label-error
-				// * visualeditor-savedialog-label-warning
-				$( '<strong>' ).text( mw.msg( 'visualeditor-savedialog-label-' + options.wrap ) ),
-				document.createTextNode( mw.msg( 'colon-separator' ) ),
-				message
-			) );
-		} else {
-			$message.append( message );
-		}
+		$message = $( '<div>' ).addClass( 've-ui-mwSaveDialog-message' ).append( message );
 		this.$saveMessages.append( $message.css( 'display', 'none' ) );
 
 		// FIXME: Use CSS transitions
@@ -616,11 +597,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.editSummaryInput.on( 'enter', function () {
 		dialog.showMessage(
 			'keyboard-shortcut-submit',
-			$( '<p>' ).msg(
+			ve.msg(
 				'visualeditor-savedialog-keyboard-shortcut-submit',
 				new ve.ui.Trigger( ve.ui.commandHelpRegistry.lookup( 'dialogConfirm' ).shortcuts[ 0 ] ).getMessage()
-			),
-			{ wrap: false }
+			)
 		).then( function () {
 			// Restore focus after potential window resize
 			dialog.editSummaryInput.focus();
