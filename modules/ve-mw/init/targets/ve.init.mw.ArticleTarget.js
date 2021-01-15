@@ -95,10 +95,6 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 /* Events */
 
 /**
- * @event editConflict
- */
-
-/**
  * @event save
  * @param {Object} data Save data from the API, see ve.init.mw.ArticleTarget#saveComplete
  * Fired immediately after a save is successfully completed
@@ -113,64 +109,8 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
  */
 
 /**
- * @event saveErrorEmpty
- * Fired when save API returns no data object
- */
-
-/**
- * @event saveErrorSpamBlacklist
- * Fired when save is considered spam or blacklisted
- * TODO: Move this to the extension
- */
-
-/**
- * @event saveErrorAbuseFilter
- * Fired when AbuseFilter throws warnings
- * TODO: Move this to the extension
- */
-
-/**
- * @event saveErrorBadToken
- * @param {boolean} willRetry Whether an automatic retry will occur
- * Fired on save if we have to fetch a new edit token.
- * This is mainly for analytical purposes.
- */
-
-/**
- * @event saveErrorNewUser
- * Fired when user is logged in as a new user
- */
-
-/**
- * @event saveErrorCaptcha
- * Fired when saveError indicates captcha field is required
- * TODO: Move this to the extension
- */
-
-/**
- * @event saveErrorUnknown
- * @param {string} errorMsg Error message shown to the user
- * Fired for any other type of save error
- */
-
-/**
- * @event saveErrorPageDeleted
- * Fired when user tries to save page that was deleted after opening VE
- */
-
-/**
- * @event saveErrorTitleBlacklist
- * Fired when the user tries to save page in violation of the TitleBlacklist
- */
-
-/**
- * @event saveErrorHookAborted
- * Fired when the user tries to save page in violation of an extension
- */
-
-/**
- * @event saveErrorReadOnly
- * Fired when the user tries to save page but the database is locked
+ * @event saveError
+ * @param {string} code Error code
  */
 
 /**
@@ -656,8 +596,9 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
  * @param {Object|null} data Full API response data, or XHR error details
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, code, data ) {
-	var name, handler, i, error,
+	var name, handler, i, error, errorCodes,
 		saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
+		handled = false,
 		target = this;
 
 	this.pageDeletedWarning = false;
@@ -665,49 +606,66 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 	// Handle empty response
 	if ( !data ) {
 		this.saveErrorEmpty();
-		return;
+		handled = true;
 	}
 
-	if ( data.errors ) {
+	if ( !handled && data.errors ) {
 		for ( i = 0; i < data.errors.length; i++ ) {
 			error = data.errors[ i ];
 
 			if ( error.code === 'badtoken' ) {
 				this.saveErrorBadToken();
+				handled = true;
 			} else if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
 				this.refreshUser().then( function ( username ) {
 					target.saveErrorNewUser( username );
 				}, function () {
 					target.saveErrorUnknown( data );
 				} );
-				return;
+				handled = true;
 			} else if ( error.code === 'editconflict' ) {
 				this.editConflict();
-				return;
+				handled = true;
 			} else if ( error.code === 'pagedeleted' ) {
 				this.saveErrorPageDeleted();
-				return;
+				handled = true;
 			} else if ( error.code === 'hookaborted' ) {
 				this.saveErrorHookAborted( data );
-				return;
+				handled = true;
 			} else if ( error.code === 'readonly' ) {
 				this.saveErrorReadOnly( data );
-				return;
+				handled = true;
 			}
 		}
 	}
 
-	for ( name in saveErrorHandlerFactory.registry ) {
-		handler = saveErrorHandlerFactory.lookup( name );
-		if ( handler.static.matchFunction( data ) ) {
-			handler.static.process( data, this );
-			// Error was handled
-			return;
+	if ( !handled ) {
+		for ( name in saveErrorHandlerFactory.registry ) {
+			handler = saveErrorHandlerFactory.lookup( name );
+			if ( handler.static.matchFunction( data ) ) {
+				handler.static.process( data, this );
+				handled = true;
+			}
 		}
 	}
 
 	// Handle (other) unknown and/or unrecoverable errors
-	this.saveErrorUnknown( data );
+	if ( !handled ) {
+		this.saveErrorUnknown( data );
+		handled = true;
+	}
+
+	if ( data.errors ) {
+		errorCodes = data.errors.map( function ( err ) {
+			return err.code;
+		} ).join( ',' );
+	} else if ( ve.getProp( data, 'visualeditoredit', 'edit', 'captcha' ) ) {
+		// Eww
+		errorCodes = 'captcha';
+	} else {
+		errorCodes = 'http-' + ( ( data.xhr && data.xhr.status ) || 0 );
+	}
+	this.emit( 'saveError', errorCodes );
 };
 
 /**
@@ -739,38 +697,30 @@ ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
 
 /**
  * Handle general save error
- *
- * @fires saveErrorEmpty
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 	this.showSaveError(
 		ve.msg( 'visualeditor-saveerror', ve.msg( 'visualeditor-error-invalidresponse' ) ),
 		false /* prevents reapply */
 	);
-	this.emit( 'saveErrorEmpty' );
 };
 
 /**
  * Handle hook abort save error
  *
  * @param {Object} data API response data
- * @fires saveErrorHookAborted
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function ( data ) {
 	this.showSaveError( this.extractErrorMessages( data ) );
-	this.emit( 'saveErrorHookAborted' );
 };
 
 /**
  * Handle assert error indicating another user is logged in.
  *
  * @param {string|null} username Name of newly logged-in user, or null if anonymous
- * @fires saveErrorNewUser
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
 	var $msg;
-
-	this.emit( 'saveErrorNewUser' );
 
 	// TODO: Improve this message, concatenating it this way is a bad practice.
 	// This should read more like 'session_fail_preview' in MediaWiki core
@@ -789,12 +739,8 @@ ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
 
 /**
  * Handle token fetch errors.
- *
- * @fires saveErrorBadToken
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
-	this.emit( 'saveErrorBadToken', false );
-
 	// TODO: Improve this message, concatenating it this way is a bad practice.
 	// Also, it's not always true that you're "no longer logged in".
 	// This should read more like 'session_fail_preview' in MediaWiki core.
@@ -808,53 +754,33 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
  * Handle unknown save error
  *
  * @param {Object|null} data API response data
- * @fires saveErrorUnknown
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
-	var errorCodes;
-
 	this.showSaveError( this.extractErrorMessages( data ), false );
-
-	if ( data.errors ) {
-		errorCodes = data.errors.map( function ( err ) {
-			return err.code;
-		} ).join( ',' );
-	} else {
-		errorCodes = 'http-' + ( ( data.xhr && data.xhr.status ) || 0 );
-	}
-	this.emit( 'saveErrorUnknown', errorCodes );
 };
 
 /**
  * Handle page deleted error
- *
- * @fires saveErrorPageDeleted
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 	this.pageDeletedWarning = true;
 	// The API error message 'apierror-pagedeleted' is poor, make our own
 	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true, true );
-	this.emit( 'saveErrorPageDeleted' );
 };
 
 /**
  * Handle read only error
  *
  * @param {Object} data API response data
- * @fires saveErrorReadOnly
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function ( data ) {
 	this.showSaveError( this.extractErrorMessages( data ), true, true );
-	this.emit( 'saveErrorReadOnly' );
 };
 
 /**
  * Handle an edit conflict
- *
- * @fires editConflict
  */
 ve.init.mw.ArticleTarget.prototype.editConflict = function () {
-	this.emit( 'editConflict' );
 	this.saveDialog.popPending();
 	this.saveDialog.swapPanel( 'conflict' );
 };
