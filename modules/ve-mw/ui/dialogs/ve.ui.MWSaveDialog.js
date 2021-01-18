@@ -472,9 +472,10 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
  * @param {Object} [options]
  * @param {boolean} [options.wrap="warning"] Whether to wrap the message in a paragraph and if
  *  so, how. One of "warning", "error" or false.
+ * @return {jQuery.Promise} Promise which resolves when the message has been shown, rejects if no new message shown.
  */
 ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
-	var $message;
+	var $message, promise;
 	if ( !this.messages[ name ] ) {
 		options = options || {};
 		if ( options.wrap === undefined ) {
@@ -497,15 +498,18 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message, options ) {
 
 		// FIXME: Use CSS transitions
 		// eslint-disable-next-line no-jquery/no-slide
-		$message.slideDown( {
+		promise = $message.slideDown( {
 			duration: 250,
 			progress: this.updateSize.bind( this )
-		} );
+		} ).promise();
 
 		this.swapPanel( 'save' );
 
 		this.messages[ name ] = $message;
+
+		return promise;
 	}
+	return ve.createDeferred().reject().promise();
 };
 
 /**
@@ -617,7 +621,10 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 				new ve.ui.Trigger( ve.ui.commandHelpRegistry.lookup( 'dialogConfirm' ).shortcuts[ 0 ] ).getMessage()
 			),
 			{ wrap: false }
-		);
+		).then( function () {
+			// Restore focus after potential window resize
+			dialog.editSummaryInput.focus();
+		} );
 	} );
 	// Limit length, and display the remaining characters
 	this.editSummaryInput.$input.codePointLimit( this.editSummaryCodePointLimit );
