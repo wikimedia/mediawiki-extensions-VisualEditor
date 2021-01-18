@@ -281,7 +281,7 @@
 	"visualeditor-recreate": "V času vašega urejanje je bila ta stran izbrisana. Za ponovno kreacijo pritisnite tipko \"$1\".",
 	"visualeditor-redirect-description": "preusmeritev na $1",
 	"visualeditor-savedialog-error-badtoken": "Vašega urejanja nismo mogli shraniti, saj seja ni bila več veljavna.",
-	"visualeditor-savedialog-identify-anon": "Želite namesto tega shraniti stran kot brezimen uporabnik? V zgodovini urejanj strani bo zabeležen vaš IP-naslov.",
+	"visualeditor-savedialog-identify-anon": "Želite namesto tega shraniti stran kot b\nanonimen uporabnik? V zgodovini urejanj strani se bo zabeležil vaš IP-naslov.",
 	"visualeditor-savedialog-identify-trylogin": "Nisi več prijavljen. Prosimo, prijavi se ponovno iz drugega zavihka in poskusi ponovno.",
 	"visualeditor-savedialog-identify-user": "Zdaj ste prijavljeni kot [[User:$1|$1]]. Če boste svoje urejanje shranili, bo povezano s tem računom.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Za shranitev urejanja pritisni $1.",
