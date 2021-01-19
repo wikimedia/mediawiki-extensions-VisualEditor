@@ -242,7 +242,7 @@ class ApiVisualEditor extends ApiBase {
 						$eiTitle->exists() &&
 						$permissionManager->userCan( 'read', $user, $eiTitle )
 					) {
-						$notices[] = MediaWikiServices::getInstance()->getParser()->parse(
+						$notices['editintro'] = MediaWikiServices::getInstance()->getParser()->parse(
 							'<div class="mw-editintro">{{:' . $eiTitle->getFullText() . '}}</div>',
 							$title,
 							new ParserOptions( $user )
@@ -250,13 +250,12 @@ class ApiVisualEditor extends ApiBase {
 					}
 				}
 
-				// Add all page notices, but strip their keys to retain order
-				// (since Title returns message-keyed array)
-				$notices = array_merge( $notices, array_values( $title->getEditNotices() ) );
+				// Add all page notices
+				$notices = array_merge( $notices, $title->getEditNotices() );
 
 				// Anonymous user notice
 				if ( !$user->isRegistered() ) {
-					$notices[] = $this->msg(
+					$notices['anoneditwarning'] = $this->msg(
 						'anoneditwarning',
 						// Log-in link
 						'{{fullurl:Special:UserLogin|returnto={{FULLPAGENAMEE}}}}',
@@ -267,11 +266,11 @@ class ApiVisualEditor extends ApiBase {
 
 				// Old revision notice
 				if ( $restoring ) {
-					$notices[] = $this->msg( 'editingold' )->parseAsBlock();
+					$notices['editingold'] = $this->msg( 'editingold' )->parseAsBlock();
 				}
 
 				if ( wfReadOnly() ) {
-					$notices[] = $this->msg( 'readonlywarning', wfReadOnlyReason() );
+					$notices['readonlywarning'] = $this->msg( 'readonlywarning', wfReadOnlyReason() );
 				}
 
 				// Edit notices about the page being protected (only used when we're allowed to edit it;
@@ -280,8 +279,9 @@ class ApiVisualEditor extends ApiBase {
 
 				// New page notices
 				if ( !$title->exists() ) {
-					$notices[] = $this->msg(
-						$user->isRegistered() ? 'newarticletext' : 'newarticletextanon',
+					$newArticleKey = $user->isRegistered() ? 'newarticletext' : 'newarticletextanon';
+					$notices[$newArticleKey] = $this->msg(
+						$newArticleKey,
 						wfExpandUrl( Skin::makeInternalOrExternalUrl(
 							$this->msg( 'helppage' )->inContentLanguage()->text()
 						) )
@@ -289,7 +289,8 @@ class ApiVisualEditor extends ApiBase {
 
 					// Page protected from creation
 					if ( $title->getRestrictions( 'create' ) ) {
-						$protectionNotices[] = $this->msg( 'titleprotectedwarning' )->parseAsBlock() .
+						$protectionNotices['titleprotectedwarning'] =
+							$this->msg( 'titleprotectedwarning' )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
 					}
 
@@ -305,7 +306,7 @@ class ApiVisualEditor extends ApiBase {
 						]
 					);
 					if ( $out ) {
-						$notices[] = $out;
+						$notices['recreate-moveddeleted-warn'] = $out;
 					}
 				}
 
@@ -327,7 +328,7 @@ class ApiVisualEditor extends ApiBase {
 							// Then it must be protected based on static groups (regular)
 							$noticeMsg = 'protectedpagewarning';
 						}
-						$protectionNotices[] = $this->msg( $noticeMsg )->parseAsBlock() .
+						$protectionNotices[$noticeMsg] = $this->msg( $noticeMsg )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
 					}
 
@@ -345,7 +346,7 @@ class ApiVisualEditor extends ApiBase {
 								"</li>";
 						}
 						$notice .= '</ul>';
-						$protectionNotices[] = $notice;
+						$protectionNotices['cascadeprotectedwarning'] = $notice;
 					}
 				}
 
@@ -366,7 +367,8 @@ class ApiVisualEditor extends ApiBase {
 					$notice = $this->getOutput()->formatPermissionsErrorMessage( $permErrors, 'edit' );
 					// That method returns wikitext (eww), hack to get it parsed:
 					$notice = ( new RawMessage( '$1', [ $notice ] ) )->parseAsBlock();
-					$notices[] = $notice;
+					// Invent a message key 'permissions-error' to store in $notices
+					$notices['permissions-error'] = $notice;
 				} elseif ( $protectionNotices ) {
 					// If we can edit, and the page is protected, then show the details about the protection
 					$notices = array_merge( $notices, $protectionNotices );
@@ -392,7 +394,7 @@ class ApiVisualEditor extends ApiBase {
 						!User::isIP( $targetUsername )
 					) {
 						// User does not exist
-						$notices[] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
+						$notices['userpage-userdoesnotexist'] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) )
 								->parse() .
 							"\n</div>";
@@ -403,7 +405,7 @@ class ApiVisualEditor extends ApiBase {
 					) {
 						// Show log extract if the user is sitewide blocked or is partially
 						// blocked and not allowed to edit their user page or user talk page
-						$notices[] = $this->msg(
+						$notices['blocked-notice-logextract'] = $this->msg(
 							'blocked-notice-logextract',
 							// Support GENDER in notice
 							$targetUser->getName()
