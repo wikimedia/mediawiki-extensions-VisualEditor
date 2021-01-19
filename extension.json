@@ -2259,6 +2259,8 @@
 				"visualeditor-changedesc-textstyle-removed",
 				"visualeditor-changedesc-unknown",
 				"visualeditor-changedesc-unset",
+				"visualeditor-diff-moved-down",
+				"visualeditor-diff-moved-up",
 				"visualeditor-diff-no-changes",
 				"visualeditor-diff-timed-out"
 			],
