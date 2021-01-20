@@ -125,7 +125,7 @@ ve.ui.MWDefinedTransclusionContextItem.static.getMatchedTool = function ( model 
 };
 
 /**
- * Get a tempate param using its canonical name
+ * Get a template param using its canonical name
  *
  * @param {string} name Canonical parameter name
  * @return {string|null} Param wikitext, null if not found
