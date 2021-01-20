@@ -467,26 +467,32 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
  * Show a message in the save dialog.
  *
  * @param {string} name Message's unique name
- * @param {string|jQuery|Array} message Message content (string of HTML, jQuery object or array of
- *  Node objects)
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} label Message content. See OO.ui.mixin.LabelElement.
+ * @param {string} config MessageWidget config. Defaults to an inline warning.
  * @return {jQuery.Promise} Promise which resolves when the message has been shown, rejects if no new message shown.
  */
-ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message ) {
-	var $message, promise;
+ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
+	var messageWidget, promise;
 	if ( !this.messages[ name ] ) {
-		$message = $( '<div>' ).addClass( 've-ui-mwSaveDialog-message' ).append( message );
-		this.$saveMessages.append( $message.css( 'display', 'none' ) );
+		messageWidget = new OO.ui.MessageWidget( ve.extendObject( {
+			classes: [ 've-ui-mwSaveDialog-message' ],
+			label: label,
+			inline: true,
+			type: 'warning'
+		}, config ) );
+		this.$saveMessages.append( messageWidget.$element.css( 'display', 'none' ) );
 
 		// FIXME: Use CSS transitions
 		// eslint-disable-next-line no-jquery/no-slide
-		promise = $message.slideDown( {
+		promise = messageWidget.$element.slideDown( {
 			duration: 250,
 			progress: this.updateSize.bind( this )
 		} ).promise();
 
 		this.swapPanel( 'save' );
 
-		this.messages[ name ] = $message;
+		// Can be hidden later by #clearMessage
+		this.messages[ name ] = messageWidget.$element;
 
 		return promise;
 	}
@@ -499,9 +505,17 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, message ) {
  * @param {string} name Message's unique name
  */
 ve.ui.MWSaveDialog.prototype.clearMessage = function ( name ) {
-	if ( this.messages[ name ] ) {
-		this.messages[ name ].slideUp( {
+	var $message = this.messages[ name ],
+		dialog = this;
+	if ( $message ) {
+		// FIXME: Use CSS transitions
+		// eslint-disable-next-line no-jquery/no-slide
+		$message.slideUp( {
+			duration: 250,
 			progress: this.updateSize.bind( this )
+		} ).promise().then( function () {
+			$message.remove();
+			dialog.updateSize();
 		} );
 		delete this.messages[ name ];
 	}
