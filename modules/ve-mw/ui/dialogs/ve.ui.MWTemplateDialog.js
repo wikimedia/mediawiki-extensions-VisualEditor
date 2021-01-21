@@ -396,7 +396,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 		return new OO.ui.Process( function () {
 			var deferred = ve.createDeferred();
 			dialog.checkRequiredParameters().done( function () {
-				var modelPromise,
+				var modelPromise, editCountBucket,
 					surfaceModel = dialog.getFragment().getSurface(),
 					obj = dialog.transclusionModel.getPlainObject();
 
@@ -419,6 +419,11 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 					// eslint-disable-next-line camelcase
 					template_names: []
 				};
+				editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
+				if ( editCountBucket !== null ) {
+					// eslint-disable-next-line camelcase
+					templateEvent.user_edit_count_bucket = editCountBucket;
+				}
 				for ( i = 0; i < dialog.transclusionModel.getParts().length; i++ ) {
 					if ( dialog.transclusionModel.getParts()[ i ].getTitle ) {
 						templateEvent.template_names.push( dialog.transclusionModel.getParts()[ i ].getTitle() );
@@ -445,7 +450,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var template, promise, templateEvent, i,
+			var template, promise, templateEvent, i, editCountBucket,
 				dialog = this;
 
 			// Properties
@@ -491,6 +496,11 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					// eslint-disable-next-line camelcase
 					template_names: []
 				};
+				editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
+				if ( editCountBucket !== null ) {
+					// eslint-disable-next-line camelcase
+					templateEvent.user_edit_count_bucket = editCountBucket;
+				}
 				for ( i = 0; i < this.selectedNode.partsList.length; i++ ) {
 					if ( this.selectedNode.partsList[ i ].templatePage ) {
 						templateEvent.template_names.push( this.selectedNode.partsList[ i ].templatePage );
