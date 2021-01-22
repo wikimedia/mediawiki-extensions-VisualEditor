@@ -80,7 +80,7 @@ ve.dm.MWExternalLinkAnnotation.static.toDomElements = function ( dataElement, do
 
 ve.dm.MWExternalLinkAnnotation.static.describeChange = function ( key, change ) {
 	if ( key === 'href' ) {
-		return ve.htmlMsg( 'visualeditor-changedesc-link-href', this.wrapText( 'del', change.from ), this.wrapText( 'ins', change.to ) );
+		return ve.dm.LinkAnnotation.static.describeChange( key, change );
 	}
 	return null;
 };
