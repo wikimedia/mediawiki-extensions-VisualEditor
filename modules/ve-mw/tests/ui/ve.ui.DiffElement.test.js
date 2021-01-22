@@ -24,7 +24,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</div>',
 				expectedDescriptions: [
 					'<div>visualeditor-changedesc-mwtransclusion</div>' +
-					'<div><ul><li>visualeditor-changedesc-changed,1,<del>Hello, world!</del>,<ins>Hello, globe!</ins></li></ul></div>'
+					'<div><ul><li>visualeditor-changedesc-changed-diff,1,<span>Hello, <del>world</del><ins>globe</ins>!</span></li></ul></div>'
 				]
 			},
 			{
