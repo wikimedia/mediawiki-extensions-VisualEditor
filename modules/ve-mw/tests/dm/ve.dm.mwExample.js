@@ -798,8 +798,10 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			model.data.data[ 0 ].attributes.wikitable = false;
-			model.data.data[ 0 ].attributes.sortable = false;
+			model.data.modifyData( 0, function ( item ) {
+				item.attributes.wikitable = false;
+				item.attributes.sortable = false;
+			} );
 		},
 		normalizedBody: '<table><tr><td>Foo</td></tr></table>'
 	},
@@ -1189,7 +1191,9 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		storeItems: ve.dm.mwExample.MWTransclusion.blockStoreItems,
 		modify: function ( model ) {
-			model.data.data[ 0 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = 'Hello, globe!';
+			model.data.modifyData( 0, function ( item ) {
+				item.attributes.mw.parts[ 0 ].template.params[ '1' ].wt = 'Hello, globe!';
+			} );
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified.replace( /about="#mwt1"/, '' ),
 		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified,
@@ -1224,7 +1228,9 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		storeItems: ve.dm.mwExample.MWTransclusion.inlineStoreItems,
 		modify: function ( model ) {
-			model.data.data[ 1 ].attributes.mw.parts[ 0 ].template.params[ '1' ].wt = '5,678';
+			model.data.modifyData( 1, function ( item ) {
+				item.attributes.mw.parts[ 0 ].template.params[ '1' ].wt = '5,678';
+			} );
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified.replace( /about="#mwt1"/, '' ) + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose,
@@ -1386,7 +1392,9 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			model.data.data[ 0 ].attributes.mw.attrs.lang = 'php5';
+			model.data.modifyData( 0, function ( item ) {
+				item.attributes.mw.attrs.lang = 'php5';
+			} );
 		}
 	},
 	'mw:AlienInlineExtension': {
@@ -1424,7 +1432,9 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			model.data.data[ 1 ].attributes.mw.body.extsrc = '\\relative c\' { d d d e e e }';
+			model.data.modifyData( 1, function ( item ) {
+				item.attributes.mw.body.extsrc = '\\relative c\' { d d d e e e }';
+			} );
 		}
 	},
 	'internal link with absolute path': {
@@ -1972,14 +1982,18 @@ ve.dm.mwExample.domToDataCases = {
 	'mw:Nowiki unwraps when text modified': {
 		data: ve.dm.mwExample.mwNowiki,
 		modify: function ( model ) {
-			model.data.data[ 7 ][ 0 ] = 'z';
+			model.data.modifyData( 7, function ( item ) {
+				item[ 0 ] = 'z';
+			} );
 		},
 		normalizedBody: '<p>Foo[[Bzr]]Baz</p>'
 	},
 	'mw:Nowiki unwraps when annotations modified': {
 		data: ve.dm.mwExample.mwNowiki,
 		modify: function ( model ) {
-			model.data.data[ 7 ][ 1 ].push( model.getStore().hash( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
+			model.data.modifyData( 7, function ( item ) {
+				item[ 1 ].push( model.getStore().hash( ve.dm.example.createAnnotation( ve.dm.example.bold ) ) );
+			} );
 		},
 		normalizedBody: '<p>Foo[[B<b>a</b>r]]Baz</p>'
 	},

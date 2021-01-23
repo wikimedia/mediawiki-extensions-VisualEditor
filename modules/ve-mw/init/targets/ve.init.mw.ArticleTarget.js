@@ -2325,7 +2325,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		promises = [],
 		categories = { hidden: {}, normal: {} };
 	categoryItems.forEach( function ( categoryItem, index ) {
-		var attributes = ve.cloneObject( ve.getProp( categoryItem, 'element', 'attributes' ) );
+		var attributes = ve.copy( ve.getProp( categoryItem, 'element', 'attributes' ) );
 		attributes.index = index;
 		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( function ( result ) {
 			var group = result.hidden ? categories.hidden : categories.normal;
