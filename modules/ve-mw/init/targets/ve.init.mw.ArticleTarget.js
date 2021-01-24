@@ -958,27 +958,17 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 	var target = this;
 
 	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( function () {
-		var newRevPromise, doc;
+		var newRevPromise, dmDoc, dmDocOrNode;
 
 		if ( !target.originalDmDocPromise ) {
 			if ( !target.fromEditedState && target.getSurface().getMode() === 'visual' ) {
-				// If this.doc was loaded from an un-edited state and in visual mode,
-				// then just parse it to get originalDmDoc, otherwise we need to
-				// re-fetch the HTML
+				dmDoc = target.constructor.static.createModelFromDom( target.doc, 'visual' );
 				if ( target.section !== null && target.enableVisualSectionEditing ) {
-					// Create a document with just the section
-					doc = target.doc.cloneNode( true );
-					// Empty
-					while ( doc.body.firstChild ) {
-						doc.body.removeChild( doc.body.firstChild );
-					}
-					// Append section and unwrap
-					doc.body.appendChild( target.doc.body.querySelectorAll( 'section[data-mw-section-id]' )[ 0 ] );
-					mw.libs.ve.unwrapParsoidSections( doc.body );
+					dmDocOrNode = dmDoc.getNodesByType( 'section' )[ 0 ];
 				} else {
-					doc = target.doc;
+					dmDocOrNode = dmDoc;
 				}
-				target.originalDmDocPromise = ve.createDeferred().resolve( target.constructor.static.createModelFromDom( doc, 'visual' ) ).promise();
+				target.originalDmDocPromise = ve.createDeferred().resolve( dmDocOrNode ).promise();
 			} else {
 				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), target.section );
 			}
