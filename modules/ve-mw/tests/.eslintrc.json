@@ -10,6 +10,7 @@
 		"sinon": false
 	},
 	"rules": {
+		"compat/compat": [ "error", "last 2 chrome versions, last 2 firefox versions" ],
 		"no-jquery/no-parse-html-literal": "off"
 	}
 }

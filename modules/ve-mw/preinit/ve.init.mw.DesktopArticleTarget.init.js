@@ -1063,6 +1063,7 @@
 
 		/**
 		 * Check whether the welcome dialog is temporarily disabled.
+		 *
 		 * @return {boolean}
 		 */
 		isWelcomeDialogSuppressed: function () {
