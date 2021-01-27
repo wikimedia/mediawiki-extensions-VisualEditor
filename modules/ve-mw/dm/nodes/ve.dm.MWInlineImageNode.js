@@ -149,16 +149,18 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	var firstChild, srcAttr,
 		mediaClass = data.attributes.mediaClass,
 		container = doc.createElement( data.attributes.tagName || 'span' ),
-		img = doc.createElement( this.typesToTags[ mediaClass ] ),
+		img = doc.createElement( data.attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
 		classes = [],
 		originalClasses = data.attributes.originalClasses;
 
+	// TODO: This does not make sense for broken images (when img is a span node)
 	ve.setDomAttributes( img, data.attributes, [ 'width', 'height', 'resource' ] );
 	srcAttr = this.typesToSrcAttrs[ mediaClass ];
-	if ( srcAttr ) {
+	if ( srcAttr && !data.attributes.isError ) {
 		img.setAttribute( srcAttr, data.attributes.src );
 	}
 
+	// TODO: This does not make sense for broken images (when img is a span node)
 	if ( typeof data.attributes.alt === 'string' ) {
 		img.setAttribute( 'alt', data.attributes.alt );
 	}
