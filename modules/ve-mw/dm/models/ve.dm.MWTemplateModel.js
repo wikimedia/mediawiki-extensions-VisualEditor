@@ -345,6 +345,12 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		if ( name === '' ) {
 			continue;
 		}
+
+		// Don't add empty parameters if they were not present before the edit (T101075)
+		if ( params[ name ].getValue() === '' && !Object.prototype.hasOwnProperty.call( origParams, name ) ) {
+			continue;
+		}
+
 		origName = params[ name ].getOriginalName();
 		template.params[ origName ] = ve.extendObject(
 			{},
