@@ -1174,7 +1174,7 @@
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
-		enable && !tempdisable && !autodisable
+		( conf.isBeta ? enable : !tempdisable ) && !autodisable
 	);
 
 	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
