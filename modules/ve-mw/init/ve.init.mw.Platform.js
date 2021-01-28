@@ -267,14 +267,19 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			groupObject = {}; // button label => character data to insert
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( groupCharacters, function ( charKey, charVal ) {
+				var key, val;
 				// VE has a different format and it would be a pain to change it now
 				if ( typeof charVal === 'string' ) {
-					groupObject[ charVal ] = charVal;
+					key = charVal;
+					val = charVal;
 				} else if ( typeof charVal === 'object' && 0 in charVal && 1 in charVal ) {
-					groupObject[ charVal[ 0 ] ] = charVal[ 1 ];
+					key = charVal[ 0 ];
+					val = charVal[ 1 ];
 				} else {
-					groupObject[ charVal.label ] = charVal;
+					key = charVal.label;
+					val = charVal;
 				}
+				groupObject[ key ] = val;
 			} );
 			// The following messages are used here:
 			// * special-characters-group-arabic
