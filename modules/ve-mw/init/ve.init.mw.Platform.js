@@ -313,3 +313,19 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 		return characters;
 	} );
 };
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.decodeEntities = function ( html ) {
+	var character = ve.safeDecodeEntities( html );
+	return [
+		{
+			type: 'mwEntity',
+			attributes: { character: character }
+		},
+		{
+			type: '/mwEntity'
+		}
+	];
+};
