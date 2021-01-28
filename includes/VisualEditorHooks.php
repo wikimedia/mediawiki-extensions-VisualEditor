@@ -448,8 +448,7 @@ class VisualEditorHooks {
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			wfTimestampNow() < $config->get( 'VisualEditorSingleEditTabSwitchTimeEnd' ) &&
 			$user->isRegistered() &&
-			!$user->getOption( 'visualeditor-autodisable' ) &&
-			!$user->getOption( 'visualeditor-betatempdisable' ) &&
+			self::enabledForUser( $user ) &&
 			!$user->getOption( 'visualeditor-hidetabdialog' ) &&
 			$user->getOption( 'visualeditor-tabs' ) === 'remember-last'
 		) {
@@ -814,8 +813,7 @@ class VisualEditorHooks {
 		// Config option for Single Edit Tab
 		if (
 			$veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
-			!$user->getOption( 'visualeditor-autodisable' ) &&
-			!$user->getOption( 'visualeditor-betatempdisable' )
+			self::enabledForUser( $user )
 		) {
 			$preferences['visualeditor-tabs'] = [
 				'type' => 'select',
