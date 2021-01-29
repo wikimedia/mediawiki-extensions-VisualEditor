@@ -194,6 +194,10 @@
 			timing[ action ] = timeStamp;
 		}
 
+		if ( mw.user.options.get( 'discussiontools-abtest' ) ) {
+			event.bucket = mw.user.options.get( 'discussiontools-abtest' );
+		}
+
 		if ( trackdebug ) {
 			log( topic, duration + 'ms', event );
 		} else {
@@ -248,6 +252,10 @@
 			platform: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'platformType' ) || 'other'
 		};
 		/* eslint-enable camelcase */
+
+		if ( mw.user.options.get( 'discussiontools-abtest' ) ) {
+			event.bucket = mw.user.options.get( 'discussiontools-abtest' );
+		}
 
 		if ( trackdebug ) {
 			log( topic, event );
