@@ -50,8 +50,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.addButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'parameter',
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		tabIndex: -1
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 	} )
 		.connect( this, { click: 'onAddButtonFocus' } );
 
