@@ -438,7 +438,7 @@
 	}
 
 	function activatePageTarget( mode, section, modified ) {
-		trackActivateStart( { type: 'page', mechanism: 'click', mode: mode } );
+		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode } );
 
 		if ( !active ) {
 			if ( uri.query.action !== 'edit' && !( uri.query.veaction in veactionToMode ) ) {
@@ -1021,7 +1021,7 @@
 				return;
 			}
 
-			trackActivateStart( { type: 'section', mechanism: 'click', mode: mode } );
+			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode } );
 
 			if ( history.pushState && !( linkUri.query.veaction in veactionToMode ) ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
@@ -1304,7 +1304,7 @@
 				showWikitextWelcome = false;
 				trackActivateStart( {
 					type: section === null ? 'page' : 'section',
-					mechanism: 'url',
+					mechanism: ( section === 'new' || !mw.config.get( 'wgArticleId' ) ) ? 'url-new' : 'url',
 					mode: mode
 				} );
 				activateTarget( mode, section );
