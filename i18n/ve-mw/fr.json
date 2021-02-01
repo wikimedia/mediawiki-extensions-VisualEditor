@@ -436,6 +436,7 @@
 	"visualeditor-templatesused-tool": "Modèles utilisés",
 	"visualeditor-title-error": "Titre non valide.",
 	"visualeditor-toload": "L’éditeur va maintenant se charger. Si vous voyez encore ce message après quelques secondes, veuillez [$1 recharger la page].",
+	"visualeditor-tooltip-non-breaking-space": "Espace insécable",
 	"visualeditor-usernamespacepagelink": "Project:Espace de noms utilisateur",
 	"visualeditor-version-label": "Version",
 	"visualeditor-wikitext-progress": "Conversion du wikicode",

@@ -421,7 +421,7 @@
 	"visualeditor-templatesused-tool": "Label of toolbar tool that shows templates used on this page.",
 	"visualeditor-title-error": "Error displayed when a page title is invalid.",
 	"visualeditor-toload": "Text shown to the user in place of the wikitext editor on action=edit/submit when VisualEditor is expected to load.\n\nParameters\n* $1 is the URL which points to a page with a fallback to the wikitext editor if necessary.",
-	"visualeditor-tooltip-non-breaking-space": "Tooltip shown on the editing surface when a non-breaking space (<nowiki>&nbsp;</nowiki>) is inserted.",
+	"visualeditor-tooltip-non-breaking-space": "Tooltip shown on the editing surface when a non-breaking space (&amp;nbsp;) is inserted.",
 	"visualeditor-usernamespacepagelink": "Name of a page describing the user namespace (NS2) in this project.\n{{doc-important|Do not translate \"Project\"; it is automatically converted to the wiki's project namespace.}}",
 	"visualeditor-version-label": "Label text for version number\n{{Identical|Version}}",
 	"visualeditor-wikitext-progress": "Label for progress bar shown while converting pasted wikitext.",
