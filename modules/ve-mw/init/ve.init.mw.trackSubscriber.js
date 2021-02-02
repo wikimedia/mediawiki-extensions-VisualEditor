@@ -245,6 +245,7 @@
 			feature: feature,
 			action: data.action,
 			editingSessionId: editingSessionId,
+			is_oversample: !inSample(),
 			user_id: mw.user.getId(),
 			user_editcount: mw.config.get( 'wgUserEditCount', 0 ),
 			editor_interface: ve.getProp( ve, 'init', 'target', 'surface', 'mode' ) === 'source' ? 'wikitext-2017' : 'visualeditor',
