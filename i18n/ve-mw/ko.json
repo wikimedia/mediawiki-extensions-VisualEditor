@@ -369,6 +369,7 @@
 	"visualeditor-templatesused-tool": "사용된 틀",
 	"visualeditor-title-error": "제목이 잘못되었습니다.",
 	"visualeditor-toload": "편집기가 지금 로드됩니다. 몇 초 후에도 이 메시지가 여전히 보이면, [$1 문서를 다시 로드]해 주십시오.",
+	"visualeditor-tooltip-non-breaking-space": "줄 바꿈 없는 공백",
 	"visualeditor-usernamespacepagelink": "Project:사용자 이름공간",
 	"visualeditor-version-label": "버전",
 	"visualeditor-wikitext-progress": "위키텍스트로 변환 중",
