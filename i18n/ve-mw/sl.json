@@ -285,7 +285,7 @@
 	"visualeditor-savedialog-identify-anon": "Želite namesto tega shraniti stran kot b\nanonimen uporabnik? V zgodovini urejanj strani se bo zabeležil vaš IP-naslov.",
 	"visualeditor-savedialog-identify-trylogin": "Nisi več prijavljen. Prosimo, prijavi se ponovno iz drugega zavihka in poskusi ponovno.",
 	"visualeditor-savedialog-identify-user": "Zdaj ste prijavljeni kot [[User:$1|$1]]. Če boste svoje urejanje shranili, bo povezano s tem računom.",
-	"visualeditor-savedialog-keyboard-shortcut-submit": "Za shranitev urejanja pritisni $1.",
+	"visualeditor-savedialog-keyboard-shortcut-submit": "Za shranitev urejanja pritisnite $1.",
 	"visualeditor-savedialog-label-create": "Ustvari stran",
 	"visualeditor-savedialog-label-publish-short": "Objavi",
 	"visualeditor-savedialog-label-publish-short-start": "Objavi...",
