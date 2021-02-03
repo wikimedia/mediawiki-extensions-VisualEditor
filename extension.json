@@ -136,6 +136,9 @@
 		"VisualEditorSingleEditTabSwitchTime": {
 			"value": 20160101000000
 		},
+		"VisualEditorSingleEditTabSwitchTimeEnd": {
+			"value": 20210101000000
+		},
 		"VisualEditorSkinToolbarScrollOffset": {
 			"value": []
 		},

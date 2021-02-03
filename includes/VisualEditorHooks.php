@@ -446,6 +446,7 @@ class VisualEditorHooks {
 
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
+			wfTimestampNow() < $config->get( 'VisualEditorSingleEditTabSwitchTimeEnd' ) &&
 			$user->isRegistered() &&
 			!$user->getOption( 'visualeditor-autodisable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' ) &&
