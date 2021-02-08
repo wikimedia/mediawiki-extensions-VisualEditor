@@ -118,10 +118,6 @@
 		teardownOverrides();
 
 		return {
-			// Legacy function names, to be removed:
-			setup: setupOverrides,
-			teardown: teardownOverrides,
-			// Real function names:
 			beforeEach: setupOverrides,
 			afterEach: teardownOverrides
 		};
