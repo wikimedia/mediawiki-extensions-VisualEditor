@@ -5,17 +5,17 @@
  */
 
 QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
-	setup: function () {
+	beforeEach: function () {
 		// Mock XHR for mw.Api()
 		this.server = this.sandbox.useFakeServer();
 		// Random number, chosen by a fair dice roll.
 		// Used to make #mwt ID deterministic
 		this.randomStub = sinon.stub( Math, 'random' ).returns( 0.04 );
-		ve.test.utils.mwEnvironment.setup.call( this );
+		ve.test.utils.mwEnvironment.beforeEach.call( this );
 	},
-	teardown: function () {
+	afterEach: function () {
 		this.randomStub.restore();
-		ve.test.utils.mwEnvironment.teardown.call( this );
+		ve.test.utils.mwEnvironment.afterEach.call( this );
 	}
 } ) );
 

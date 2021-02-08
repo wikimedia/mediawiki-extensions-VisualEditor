@@ -118,8 +118,12 @@
 		teardownOverrides();
 
 		return {
+			// Legacy function names, to be removed:
 			setup: setupOverrides,
-			teardown: teardownOverrides
+			teardown: teardownOverrides,
+			// Real function names:
+			beforeEach: setupOverrides,
+			afterEach: teardownOverrides
 		};
 	}() );
 
