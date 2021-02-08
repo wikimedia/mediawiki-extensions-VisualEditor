@@ -343,6 +343,7 @@
 	"visualeditor-templatesused-tool": "Käytetyt mallineet",
 	"visualeditor-title-error": "Virheellinen otsikko.",
 	"visualeditor-toload": "Muokkain latautuu. Jos näet tämän ilmoituksen vielä muutaman sekunnin päästä, [$1 lataa sivu uudelleen].",
+	"visualeditor-tooltip-non-breaking-space": "Sitova väli",
 	"visualeditor-usernamespacepagelink": "Project:Käyttäjänimiavaruus",
 	"visualeditor-version-label": "Versio",
 	"visualeditor-wikitext-progress": "Muunnetaan wikitekstiä",
