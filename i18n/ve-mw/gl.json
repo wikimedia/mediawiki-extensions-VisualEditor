@@ -195,7 +195,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Está seguro de querer continuar sen encher {{PLURAL:$2|o campo|os campos}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Agochar as opcións",
 	"visualeditor-dialog-transclusion-title": "Transclusión",
-	"visualeditor-dialogbutton-media-tooltip": "Ficheiros multimedia",
+	"visualeditor-dialogbutton-media-tooltip": "Imaxes e ficheiros multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuración da páxina",
 	"visualeditor-dialogbutton-template-tooltip": "Modelo",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusión",
