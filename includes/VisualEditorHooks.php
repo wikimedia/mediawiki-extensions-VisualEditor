@@ -238,8 +238,13 @@ class VisualEditorHooks {
 	 * @return bool
 	 */
 	private static function enabledForUser( $user ) {
-		return $user->getOption( 'visualeditor-enable' ) &&
-			!$user->getOption( 'visualeditor-betatempdisable' ) &&
+		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
+			->makeConfig( 'visualeditor' );
+		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' );
+
+		return ( $isBeta ?
+				$user->getOption( 'visualeditor-enable' ) :
+				!$user->getOption( 'visualeditor-betatempdisable' ) ) &&
 			!$user->getOption( 'visualeditor-autodisable' );
 	}
 
@@ -1006,6 +1011,7 @@ class VisualEditorHooks {
 		$vars['wgVisualEditorConfig'] = [
 			'usePageImages' => $extensionRegistry->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => $extensionRegistry->isLoaded( 'WikibaseClient' ),
+			'isBeta' => $veConfig->get( 'VisualEditorEnableBetaFeature' ),
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preloadModules' => $veConfig->get( 'VisualEditorPreloadModules' ),
 			'preferenceModules' => $veConfig->get( 'VisualEditorPreferenceModules' ),
