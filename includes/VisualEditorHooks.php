@@ -758,7 +758,10 @@ class VisualEditorHooks {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' ) ) {
+		if (
+			$veConfig->get( 'VisualEditorEnableBetaFeature' ) &&
+			!ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' )
+		) {
 			// Config option for visual editing "alpha" state (no Beta Feature)
 			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 
@@ -780,14 +783,16 @@ class VisualEditorHooks {
 			$preferences['visualeditor-enable'] = $visualEnablePreference;
 		}
 
-		// Config option for visual editing "deployed" state (opt-out)
-		$preferences['visualeditor-betatempdisable'] = [
-			'type' => 'toggle',
-			'label-message' => 'visualeditor-preference-betatempdisable',
-			'section' => 'editing/editor',
-			'default' => $user->getOption( 'visualeditor-betatempdisable' ) ||
-				$user->getOption( 'visualeditor-autodisable' )
-		];
+		if ( !$veConfig->get( 'VisualEditorEnableBetaFeature' ) ) {
+			// Config option for visual editing "deployed" state (opt-out)
+			$preferences['visualeditor-betatempdisable'] = [
+				'type' => 'toggle',
+				'label-message' => 'visualeditor-preference-betatempdisable',
+				'section' => 'editing/editor',
+				'default' => $user->getOption( 'visualeditor-betatempdisable' ) ||
+					$user->getOption( 'visualeditor-autodisable' )
+			];
+		}
 
 		// Config option for wikitext editing "deployed" state (opt-out)
 		if (
