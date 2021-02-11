@@ -1102,52 +1102,6 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Set user preferences for new and auto-created accounts if so configured.
-	 *
-	 * Sets user preference to enable the VisualEditor account for new auto-
-	 * created ('auth') accounts, if $wgVisualEditorAutoAccountEnable is set.
-	 *
-	 * Sets user preference to enable the VisualEditor account for new non-auto-
-	 * created accounts, if the account's userID matches, modulo the value of
-	 * $wgVisualEditorNewAccountEnableProportion, if set. If set to '1', all new
-	 * accounts would have VisualEditor enabled; at '2', 50% would; at '20',
-	 * 5% would, and so on.
-	 *
-	 * To be removed once no longer needed.
-	 *
-	 * @param User $user The user-specific settings.
-	 * @param bool $autocreated True if the user was auto-created (not a new global user).
-	 */
-	public static function onLocalUserCreated( $user, $autocreated ) {
-		$config = RequestContext::getMain()->getConfig();
-		$enableProportion = $config->get( 'VisualEditorNewAccountEnableProportion' );
-
-		if (
-			// Only act on actual accounts (avoid race condition bugs)
-			$user->isRegistered() &&
-			// Only act if the default isn't already set
-			!User::getDefaultOption( 'visualeditor-enable' ) &&
-			// Act if either …
-			(
-				// … this is an auto-created account and we're configured so to do
-				(
-					$autocreated &&
-					$config->get( 'VisualEditorAutoAccountEnable' )
-				) ||
-				// … this is a real new account that matches the modulo and we're configured so to do
-				(
-					!$autocreated &&
-					$enableProportion &&
-					( ( $user->getId() % $enableProportion ) === 0 )
-				)
-			)
-		) {
-			$user->setOption( 'visualeditor-enable', 1 );
-			$user->saveSettings();
-		}
-	}
-
-	/**
 	 * On login, if user has a VEE cookie, set their preference equal to it.
 	 *
 	 * @param User $user The user-specific settings.

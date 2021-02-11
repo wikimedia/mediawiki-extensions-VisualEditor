@@ -34,9 +34,6 @@
 		"VisualEditorAllowLossySwitching": {
 			"value": true
 		},
-		"VisualEditorAutoAccountEnable": {
-			"value": false
-		},
 		"VisualEditorAvailableContentModels": {
 			"value": {
 				"wikitext": "article"
@@ -105,9 +102,6 @@
 			"value": false
 		},
 		"VisualEditorFullRestbaseURL": {
-			"value": false
-		},
-		"VisualEditorNewAccountEnableProportion": {
 			"value": false
 		},
 		"VisualEditorParsoidAutoConfig": {
@@ -200,7 +194,6 @@
 		"GetBetaFeaturePreferences": "VisualEditorHooks::onGetBetaPreferences",
 		"GetPreferences": "VisualEditorHooks::onGetPreferences",
 		"ListDefinedTags": "VisualEditorHooks::onListDefinedTags",
-		"LocalUserCreated": "VisualEditorHooks::onLocalUserCreated",
 		"MakeGlobalVariablesScript": "VisualEditorHooks::onMakeGlobalVariablesScript",
 		"OutputPageBodyAttributes": "VisualEditorHooks::onOutputPageBodyAttributes",
 		"ParserTestGlobals": "VisualEditorHooks::onParserTestGlobals",
