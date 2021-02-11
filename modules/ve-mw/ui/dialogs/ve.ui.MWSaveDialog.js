@@ -691,6 +691,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// Preview panel
 	this.previewPanel = new OO.ui.PanelLayout( {
+		classes: [ 've-ui-mwSaveDialog-preview' ],
 		expanded: false,
 		padded: true
 	} );
@@ -698,7 +699,13 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	this.previewPanel.$element
 		// Make focusable for keyboard accessible scrolling
 		.prop( 'tabIndex', 0 )
-		.append( this.$previewViewer );
+		.append(
+			$( '<div>' ).addClass( 'mw-content-container' ).append(
+				$( '<div>' ).addClass( 'mw-body' ).append(
+					this.$previewViewer
+				)
+			)
+		);
 
 	// Conflict panel
 	this.conflictPanel = new OO.ui.PanelLayout( {
