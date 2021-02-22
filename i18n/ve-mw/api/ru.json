@@ -12,6 +12,7 @@
 			"Okras",
 			"Perevod16",
 			"Smigles",
+			"Sunpriat",
 			"Vlad5250"
 		]
 	},
@@ -30,7 +31,7 @@
 	"apihelp-visualeditor-param-etag": "ETag для отправки.",
 	"apihelp-visualeditor-param-format": "Формат вывода.",
 	"apihelp-visualeditor-param-html": "HTML для отправки в Parsoid для конвертации в вики-текст.",
-	"apihelp-visualeditor-param-oldid": "Номер версии для использованиея (по умолчанию — последняя версия).",
+	"apihelp-visualeditor-param-oldid": "Номер версии для использования (по умолчанию — последняя версия).",
 	"apihelp-visualeditor-param-paction": "Действие, которое необходимо выполнить.",
 	"apihelp-visualeditor-param-page": "Страница, на которой необходимо выполнить действие.",
 	"apihelp-visualeditor-param-preload": "Страница для использования содержимого, если на выбранной странице ещё нет содержимого.",
