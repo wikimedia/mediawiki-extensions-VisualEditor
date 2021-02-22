@@ -884,32 +884,40 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 	var target = this;
 
 	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( function () {
-		var newRevPromise, dmDoc, dmDocOrNode;
+		var newRevPromise, dmDoc, dmDocOrNode,
+			mode = target.getSurface().getMode();
 
 		if ( !target.originalDmDocPromise ) {
-			if ( !target.fromEditedState && target.getSurface().getMode() === 'visual' ) {
-				dmDoc = target.constructor.static.createModelFromDom( target.doc, 'visual' );
-				if ( target.section !== null && target.enableVisualSectionEditing ) {
-					dmDocOrNode = dmDoc.getNodesByType( 'section' )[ 0 ];
-				} else {
-					dmDocOrNode = dmDoc;
-				}
-				target.originalDmDocPromise = ve.createDeferred().resolve( dmDocOrNode ).promise();
+			if ( mode === 'source' ) {
+				// Always load full doc in source mode for correct reference diffing (T260008)
+				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName() );
 			} else {
-				target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), target.section );
+				if ( !target.fromEditedState ) {
+					dmDoc = target.constructor.static.createModelFromDom( target.doc, 'visual' );
+					if ( target.section !== null && target.enableVisualSectionEditing ) {
+						dmDocOrNode = dmDoc.getNodesByType( 'section' )[ 0 ];
+					} else {
+						dmDocOrNode = dmDoc;
+					}
+					target.originalDmDocPromise = ve.createDeferred().resolve( dmDocOrNode ).promise();
+				} else {
+					target.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( target.revid, target.getPageName(), target.section );
+				}
 			}
 		}
 
-		if ( target.getSurface().getMode() === 'source' ) {
+		if ( mode === 'source' ) {
 			newRevPromise = target.getContentApi().post( {
 				action: 'visualeditor',
-				paction: 'parsedoc',
+				paction: 'parse',
 				page: target.getPageName(),
 				wikitext: target.getSurface().getDom(),
+				section: target.section,
+				stash: 0,
 				pst: true
 			} ).then( function ( response ) {
-				// Use anonymous function to avoid passing through API promise argument
-				return mw.libs.ve.diffLoader.getModelFromResponse( response, target.section === null ? null : undefined );
+				// Source mode always fetches the whole document, so set section=null to unwrap sections
+				return mw.libs.ve.diffLoader.getModelFromResponse( response, null );
 			} );
 
 			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
