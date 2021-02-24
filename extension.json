@@ -173,7 +173,12 @@
 		}
 	},
 	"APIModules": {
-		"visualeditor": "ApiVisualEditor",
+		"visualeditor": {
+			"class": "ApiVisualEditor",
+			"services": [
+				"UserNameUtils"
+			]
+		},
 		"visualeditoredit": "ApiVisualEditorEdit"
 	},
 	"MessagesDirs": {

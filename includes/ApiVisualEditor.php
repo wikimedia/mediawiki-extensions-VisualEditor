@@ -12,18 +12,25 @@ use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\User\UserNameUtils;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
 	use ApiParsoidTrait;
 
+	/** @var UserNameUtils */
+	private $userNameUtils;
+
 	/**
-	 * @inheritDoc
+	 * @param ApiMain $main
+	 * @param string $name
+	 * @param UserNameUtils $userNameUtils
 	 */
-	public function __construct( ApiMain $main, $name ) {
+	public function __construct( ApiMain $main, $name, UserNameUtils $userNameUtils ) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
+		$this->userNameUtils = $userNameUtils;
 	}
 
 	/**
@@ -391,7 +398,7 @@ class ApiVisualEditor extends ApiBase {
 
 					if (
 						!( $targetUser && $targetUser->isRegistered() ) &&
-						!User::isIP( $targetUsername )
+						!$this->userNameUtils->isIP( $targetUsername )
 					) {
 						// User does not exist
 						$notices['userpage-userdoesnotexist'] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
