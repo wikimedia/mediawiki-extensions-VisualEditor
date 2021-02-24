@@ -50,7 +50,7 @@ ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span', 'figure-inline' ];
 ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
-	var dataElement, attributes,
+	var dataElement, attributes, href, targetData,
 		container, imgWrapper, img,
 		typeofAttrs, classes, recognizedClasses, errorIndex, width, height, types,
 		mwDataJSON, mwData;
@@ -71,6 +71,16 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	width = img.getAttribute( 'width' );
 	height = img.getAttribute( 'height' );
 
+	href = imgWrapper.getAttribute( 'href' );
+	if ( href ) {
+		// Convert absolute URLs to relative if the href refers to a page on this wiki.
+		// Otherwise Parsoid generates |link= options for copy-pasted images (T193253).
+		targetData = mw.libs.ve.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
+		if ( targetData.isInternal ) {
+			href = './' + targetData.rawTitle;
+		}
+	}
+
 	if ( errorIndex !== -1 ) {
 		typeofAttrs.splice( errorIndex, 1 );
 	}
@@ -81,7 +91,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		mediaClass: types.mediaClass,
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
-		href: imgWrapper.getAttribute( 'href' ),
+		href: href,
 		resource: img.getAttribute( 'resource' ),
 		originalClasses: classes,
 		width: width !== null && width !== '' ? +width : null,
