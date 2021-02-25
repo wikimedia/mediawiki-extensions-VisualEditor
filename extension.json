@@ -2831,7 +2831,7 @@
 	"attributes": {
 		"EventLogging": {
 			"Schemas": {
-				"VisualEditorTemplateDialogUse": 20990375
+				"VisualEditorTemplateDialogUse": "/analytics/legacy/visualeditortemplatedialoguse/1.0.0"
 			}
 		}
 	},
