@@ -10,7 +10,7 @@
 	"collabpad": "CollabPad",
 	"tooltip-ca-ve-edit": "Jhyuk peji huni",
 	"visualeditor-autosave-modified-prompt-accept": "Ya a̱son ma̱ng jhyuk",
-	"visualeditor-autosave-modified-prompt-message": "Á̱ jhyuk peji huni neet nang a ku nyia̱ lodi nhu di̱ a̱ngaan a̱ni. {{GENDER:|A}} na cat a ya a̱son ma̱ng jhyuk {{GENDER:|ang}} hu si̱ a̱khwukhwop nok wu, ku tsa jhyuk fai di̱ nok fai lan swak huhwaa?",
+	"visualeditor-autosave-modified-prompt-message": "Á̱ jhyuk peji huni neet nang a ku nyia̱ lodi nhu da̱ a̱ngaan a̱ni. {{GENDER:|A}} na cat a kin ngya a̱son ma̱ng jhyuk {{GENDER:|ang}} hu si̱ a̱khwukhwop kpak wu, ku a na tsa jhyuk fai si̱ kpak hu ku yet fai lan swak huhwaa?",
 	"visualeditor-autosave-modified-prompt-reject": "Tsa jhyuk fai",
 	"visualeditor-autosave-modified-prompt-title": "Ya a̱son ma̱ng jhyuk {{GENDER:|ang}} hu a?",
 	"visualeditor-autosave-not-recovered-text": "Á̱ si̱ mi̱n shyia̱ a̱ka̱shai na nang a ku sak a̱ni bah.",
@@ -223,7 +223,7 @@
 	"visualeditor-special-characters-group-other": "Si̱ hu nang á̱ nyia̱ ta̱m ma̱ng a̱nhu nci̱ri̱ng",
 	"visualeditor-templatesused-tool": "A̱yaatemplet nang á̱ nyia̱ ta̱m ma̱ng a̱mba nci̱ri̱ng",
 	"visualeditor-title-error": "A̱kace a̱lyoot.",
-	"visualeditor-version-label": "Nok",
+	"visualeditor-version-label": "Kpak",
 	"visualeditor-wikitext-progress": "Bwan wikitext",
 	"visualeditor-wikitextconvert-convert": "Bwuak ndyo nat wikitext"
 }
