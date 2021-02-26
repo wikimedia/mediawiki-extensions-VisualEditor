@@ -168,7 +168,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		mediaClass = dataElement.attributes.mediaClass,
 		figure = doc.createElement( 'figure' ),
 		imgWrapper = doc.createElement( dataElement.attributes.href ? 'a' : 'span' ),
-		img = doc.createElement( this.typesToTags[ mediaClass ] ),
+		img = doc.createElement( dataElement.attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
 		wrapper = doc.createElement( 'div' ),
 		classAttr = this.getClassAttrFromAttributes( dataElement.attributes ),
 		captionData = data.slice( 1, -1 );
@@ -202,12 +202,14 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	}
 
 	srcAttr = this.typesToSrcAttrs[ mediaClass ];
-	if ( srcAttr ) {
+	if ( srcAttr && !dataElement.attributes.isError ) {
 		img.setAttribute( srcAttr, dataElement.attributes.src );
 	}
+	// TODO: This does not make sense for broken images (when img is a span node)
 	img.setAttribute( 'width', width );
 	img.setAttribute( 'height', height );
 	img.setAttribute( 'resource', dataElement.attributes.resource );
+	// TODO: This does not make sense for broken images (when img is a span node)
 	if ( typeof dataElement.attributes.alt === 'string' ) {
 		img.setAttribute( 'alt', dataElement.attributes.alt );
 	}
