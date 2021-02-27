@@ -746,7 +746,9 @@ class VisualEditorHooks {
 	private static function convertNs( $nsIndex ) {
 		global $wgLang;
 		if ( $nsIndex ) {
-			return $wgLang->convertNamespace( $nsIndex );
+			return MediaWikiServices::getInstance()->getLanguageConverterFactory()
+				->getLanguageConverter( $wgLang )
+				->convertNamespace( $nsIndex );
 		} else {
 			return wfMessage( 'blanknamespace' )->text();
 		}
@@ -977,10 +979,10 @@ class VisualEditorHooks {
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
 		$pageLanguage = ApiParsoidTrait::getPageLanguage( $out->getTitle() );
+		$converter = MediaWikiServices::getInstance()->getLanguageConverterFactory()
+			->getLanguageConverter( $pageLanguage );
 
-		$fallbacks = $pageLanguage->getConverter()->getVariantFallbacks(
-			$pageLanguage->getPreferredVariant()
-		);
+		$fallbacks = $converter->getVariantFallbacks( $converter->getPreferredVariant() );
 
 		$vars['wgVisualEditor'] = [
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
