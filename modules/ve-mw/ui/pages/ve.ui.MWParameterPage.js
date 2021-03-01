@@ -356,7 +356,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
  * Whether or not to show suggested values for a given parameter type
  *
  * @param {string} type Parameter type
- * @returns {boolean} True if suggested values should be shown
+ * @return {boolean} True if suggested values should be shown
  */
 ve.ui.MWParameterPage.prototype.isSuggestedValueType = function ( type ) {
 	return [ 'unknown', 'content', 'line', 'string', 'number', 'unbalanced-wikitext' ].indexOf( type ) > -1;
