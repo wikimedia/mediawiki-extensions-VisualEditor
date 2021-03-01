@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ilimanaq29",
+			"Matěj Suchánek",
 			"Mormegil",
 			"Patriccck",
 			"Patrik L.",
@@ -17,7 +18,7 @@
 	"apihelp-visualeditor-description": "Vrací HTML5 pro stránku ze služby Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Při ukládání toto nastavte na časové razítko revize, která se editovala. Slouží k detekci editačních konfliktů.",
 	"apihelp-visualeditor-param-cachekey": "Při serializaci nebo porovnání použít výsledek předchozího požadavku serializeforcache s tímto klíčem. Přepíše $1html.",
-	"apihelp-visualeditor-param-editintro": "Editovat úvod, který chcete přidat do oznámení.",
+	"apihelp-visualeditor-param-editintro": "Editační upozornění, které chcete přidat do oznámení.",
 	"apihelp-visualeditor-param-etag": "ETag, který se má poslat.",
 	"apihelp-visualeditor-param-html": "HTML, které bude posláno do Parsoidu ke konverzi na wikitext.",
 	"apihelp-visualeditor-param-oldid": "Číslo revize, které má být použito (výchozí je poslední revize stránky).",
@@ -41,5 +42,5 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Název nové sekce.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Při ukládání toto nastavte na čas, kdy byla stránka načtena. Slouží k detekci editačních konfliktů.",
 	"apihelp-visualeditoredit-param-summary": "Shrnutí editace.",
-	"apihelp-visualeditoredit-param-tags": "Změňte značky, které chcete použít pro tuto editaci."
+	"apihelp-visualeditoredit-param-tags": "Značky, které chcete použít pro tuto editaci."
 }

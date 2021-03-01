@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"David Wadie Fisher-Freberg",
 			"Iwan Novirion",
 			"Jagwar",
 			"Matma Rex",
@@ -10,7 +11,7 @@
 	"collabpad-import-subtitle": "Diimpor dari $1",
 	"tooltip-ca-createsource": "Buek kode sumber laman ko",
 	"tooltip-ca-editsource": "Suntiang kode sumber laman ko",
-	"tooltip-ca-ve-edit": "Suntiang laman ko jo VisualEditor",
+	"tooltip-ca-ve-edit": "Suntiang laman ko",
 	"visualeditor-advancedsettings-tool": "Pangaturan lanjuik",
 	"visualeditor-autosave-modified-prompt-accept": "Lanjuik manyuntiang",
 	"visualeditor-autosave-modified-prompt-reject": "Mulai suntiangan baru",
