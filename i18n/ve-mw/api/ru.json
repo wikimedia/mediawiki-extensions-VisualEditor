@@ -46,7 +46,7 @@
 	"apihelp-visualeditoredit-param-basetimestamp": "При сохранении, установите время изменения. Это используется для обнаружения конфликтов редактирования.",
 	"apihelp-visualeditoredit-param-cachekey": "Используйте результат предыдущего запроса serializeforcache с этим ключом. Переопределяет $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "ID капчи (при сохранении с показом капчи).",
-	"apihelp-visualeditoredit-param-captchaword": "Ответ на капчу (при сохранении капчи с ответом).",
+	"apihelp-visualeditoredit-param-captchaword": "Ответ на капчу (при сохранении с показом капчи).",
 	"apihelp-visualeditoredit-param-etag": "ETag для отправки.",
 	"apihelp-visualeditoredit-param-html": "HTML для отправки в Parsoid, чтобы конвертировать в вики-текст.",
 	"apihelp-visualeditoredit-param-minor": "Флаг для малой правки.",

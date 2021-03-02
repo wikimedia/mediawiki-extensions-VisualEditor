@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Helix84",
+			"Jaroslav.micek",
 			"Kusavica",
 			"Lexected",
 			"Luky001",
@@ -34,8 +35,8 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Pridať kód miestneho popisu",
 	"visualeditor-ca-createsource": "Vytvoriť kód",
 	"visualeditor-ca-editlocaldescriptionsource": "Upraviť kód miestneho popisu",
-	"visualeditor-ca-editsource": "Upraviť kód",
-	"visualeditor-ca-editsource-section": "upraviť kód",
+	"visualeditor-ca-editsource": "Upraviť zdroj",
+	"visualeditor-ca-editsource-section": "upraviť zdroj",
 	"visualeditor-ca-ve-create": "Vizuálny editor",
 	"visualeditor-ca-ve-edit": "Vizuálny editor",
 	"visualeditor-ca-ve-edit-section": "Vizuálny editor",
