@@ -150,6 +150,7 @@
 	"visualeditor-dialog-table-sortable": "Mod sortare",
 	"visualeditor-dialog-table-wikitable": "Stil (wikitable)",
 	"visualeditor-dialog-template-title": "Format",
+	"visualeditor-dialog-transclusion-absent-template": "Formatul „$1” nu există.",
 	"visualeditor-dialog-transclusion-add-content": "Adăugare conținut",
 	"visualeditor-dialog-transclusion-add-param": "Adăugare mai multe informații",
 	"visualeditor-dialog-transclusion-add-template": "Adăugare format",
