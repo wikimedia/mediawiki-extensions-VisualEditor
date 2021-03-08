@@ -1917,9 +1917,9 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 				// Extract the title
 				.replace( /^\s*=+\s*(.*?)\s*=+\s*$/, '$1' )
 				// Remove links
-				.replace( /\[\[:?([^[|]+)\|([^[]+)\]\]/, '$2' )
-				.replace( /\[\[:?([^[]+)\|?\]\]/, '$1' )
-				.replace( new RegExp( '\\[(?:' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + ')([^ ]+?) ([^\\[]+)\\]', 'i' ), '$3' )
+				.replace( /\[\[:?([^[|]+)\|([^[]+)\]\]/g, '$2' )
+				.replace( /\[\[:?([^[]+)\|?\]\]/g, '$1' )
+				.replace( new RegExp( '\\[(?:' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + ')([^ ]+?) ([^\\[]+)\\]', 'ig' ), '$3' )
 				// Cheap HTML removal
 				.replace( /<[^>]+?>/g, '' );
 		}
