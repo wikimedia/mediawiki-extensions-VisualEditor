@@ -168,6 +168,7 @@
 	"visualeditor-dialogbutton-template-tooltip": "మూస",
 	"visualeditor-editingtabdialog-ok": "సరే",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|గమనిక|గమనికలు}}",
+	"visualeditor-editnotices-tooltip": "దిద్దుబాటు గమనికలు",
 	"visualeditor-editsummary": "మీరు చేసిన మార్పుల గురించి క్లుప్తంగా వివరించండి",
 	"visualeditor-editsummary-characters-remaining": "మిగిలి ఉన్న క్యారెక్టర్లు",
 	"visualeditor-educationpopup-dismiss": "సరే, అర్థమైంది.",
