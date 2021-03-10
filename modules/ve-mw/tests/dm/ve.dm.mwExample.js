@@ -884,7 +884,7 @@ ve.dm.mwExample.domToDataCases = {
 			{
 				type: 'paragraph',
 				internal: {
-					generated: 'empty'
+					generated: 'wrapper'
 				}
 			},
 			{ type: '/paragraph' },
@@ -1073,7 +1073,7 @@ ve.dm.mwExample.domToDataCases = {
 			{
 				type: 'paragraph',
 				internal: {
-					generated: 'empty'
+					generated: 'wrapper'
 				}
 			},
 			{ type: '/paragraph' },
