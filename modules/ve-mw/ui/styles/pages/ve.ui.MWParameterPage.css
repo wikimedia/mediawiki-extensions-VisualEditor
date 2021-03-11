@@ -11,3 +11,13 @@
 	font-family: monospace, monospace;
 	background-color: #c8ccd1;
 }
+
+.ve-ui-mwParameterPage-warning {
+	color: #202122; /* @wmui-color-base10 */
+	font-weight: normal;
+	margin-top: 0.5em;
+}
+
+.ve-ui-mwParameterPage-warning .oo-ui-iconElement-icon {
+	opacity: 0.87;
+}

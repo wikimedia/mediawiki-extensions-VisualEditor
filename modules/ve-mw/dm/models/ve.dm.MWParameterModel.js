@@ -115,6 +115,15 @@ ve.dm.MWParameterModel.prototype.getValue = function () {
 };
 
 /**
+ * Get parameter suggested values.
+ *
+ * @return {string[]} Parameter suggested values
+ */
+ve.dm.MWParameterModel.prototype.getSuggestedValues = function () {
+	return this.template.getSpec().getParameterSuggestedValues( this.name );
+};
+
+/**
  * Get default parameter value.
  *
  * @return {string} Default parameter value

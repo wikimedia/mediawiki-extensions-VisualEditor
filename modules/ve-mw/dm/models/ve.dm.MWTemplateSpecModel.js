@@ -208,6 +208,16 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, l
 };
 
 /**
+ * Get a parameter suggested values.
+ *
+ * @param {string} name Parameter name
+ * @return {string[]} Parameter suggested values
+ */
+ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( name ) {
+	return this.params[ name ].suggestedvalues || [];
+};
+
+/**
  * Get a parameter value.
  *
  * @param {string} name Parameter name

@@ -19,7 +19,8 @@
  * @cfg {boolean} [readOnly] Parameter is read-only
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
-	var paramName = parameter.getName();
+	var paramName = parameter.getName(),
+		veConfig = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -187,6 +188,16 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append(
 			this.valueInput.$element
 		);
+	if (
+		veConfig.transclusionDialogSuggestedValues &&
+		this.parameter.getSuggestedValues().length
+	) {
+		this.warningMessage = new OO.ui.MessageWidget( {
+			inline: true,
+			classes: [ 've-ui-mwParameterPage-warning' ]
+		} ).toggle( false );
+		this.$field.append( this.warningMessage.$element );
+	}
 	this.$more
 		.addClass( 've-ui-mwParameterPage-more' )
 		.append( this.addButton.$element );
@@ -242,7 +253,8 @@ ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
 ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	var type = this.parameter.getType(),
 		value = this.parameter.getValue(),
-		valueInputConfig = this.getDefaultInputConfig();
+		valueInputConfig = this.getDefaultInputConfig(),
+		veConfig = mw.config.get( 'wgVisualEditorConfig' );
 
 	this.rawValueInput = false;
 	delete valueInputConfig.validate;
@@ -299,6 +311,17 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		)
 	) {
 		return ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget( valueInputConfig );
+	} else if (
+		veConfig.transclusionDialogSuggestedValues &&
+		this.parameter.getSuggestedValues().length &&
+		this.isSuggestedValueType( type )
+	) {
+		valueInputConfig.options =
+			this.parameter.getSuggestedValues().map( function ( suggestedValue ) {
+				return { data: suggestedValue };
+			} );
+		this.rawValueInput = true;
+		return new OO.ui.ComboBoxInputWidget( valueInputConfig );
 	} else if ( type !== 'line' || value.indexOf( '\n' ) !== -1 ) {
 		// If the type is line, but there are already newlines in the provided
 		// value, don't break the existing content by only providing a single-
@@ -309,6 +332,16 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	}
 
 	return new OO.ui.TextInputWidget( valueInputConfig );
+};
+
+/**
+ * Whether or not to show suggested values for a given parameter type
+ *
+ * @param {string} type Parameter type
+ * @returns {boolean} True if suggested values should be shown
+ */
+ve.ui.MWParameterPage.prototype.isSuggestedValueType = function ( type ) {
+	return [ 'unknown', 'content', 'line', 'string', 'number', 'unbalanced-wikitext' ].indexOf( type ) > -1;
 };
 
 /**
@@ -326,7 +359,8 @@ ve.ui.MWParameterPage.prototype.isEmpty = function () {
  * @param {string} value Value
  */
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
-	var value = this.valueInput.getValue();
+	var value = this.valueInput.getValue(),
+		isNotSuggestedValue;
 
 	if ( !this.edited ) {
 		ve.track( 'activity.transclusion', { action: 'edit-parameter-value' } );
@@ -336,6 +370,16 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem.setFlags( { empty: this.isEmpty() } );
+	}
+
+	if ( this.warningMessage ) {
+		isNotSuggestedValue = value &&
+			this.parameter.getSuggestedValues().length > 0 &&
+			this.parameter.getSuggestedValues().indexOf( value ) === -1;
+		if ( isNotSuggestedValue ) {
+			this.warningMessage.setLabel( ve.msg( 'visualeditor-dialog-transclusion-suggestedvalues-warning' ) );
+		}
+		this.warningMessage.toggle( isNotSuggestedValue );
 	}
 };
 
