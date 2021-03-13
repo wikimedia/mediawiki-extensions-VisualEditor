@@ -138,6 +138,10 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 					changes = ve.getProp( response, 'query', 'usercontribs' ) || [];
 
 				return changes
+					// Filter out changes without comment (e.g. due to RevisionDelete)
+					.filter( function ( change ) {
+						return Object.prototype.hasOwnProperty.call( change, 'comment' );
+					} )
 					// Remove section /* headings */
 					.map( function ( change ) {
 						return splitSummary( change.comment ).comment.trim();
