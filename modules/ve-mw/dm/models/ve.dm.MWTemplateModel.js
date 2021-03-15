@@ -339,6 +339,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 		origData = this.originalData || {},
 		origParams = origData.params || {},
 		template = { target: this.getTarget(), params: {} },
+		spec = this.getSpec(),
 		params = this.getParameters();
 
 	for ( name in params ) {
@@ -346,8 +347,14 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 			continue;
 		}
 
-		// Don't add empty parameters if they were not present before the edit (T101075)
-		if ( params[ name ].getValue() === '' && !Object.prototype.hasOwnProperty.call( origParams, name ) ) {
+		if (
+			// Don't add empty parameters (T101075)
+			params[ name ].getValue() === '' &&
+			// …unless they were present before the edit
+			!Object.prototype.hasOwnProperty.call( origParams, name ) &&
+			// …unless they are required (T276989)
+			!( spec.isParameterKnown( name ) && spec.isParameterRequired( name ) )
+		) {
 			continue;
 		}
 
