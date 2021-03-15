@@ -130,7 +130,7 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 				action: 'query',
 				list: 'usercontribs',
 				ucuser: mw.user.getName(),
-				ucprop: 'comment|title',
+				ucprop: 'comment',
 				uclimit: 500,
 				format: 'json'
 			} ).then( function ( response ) {
