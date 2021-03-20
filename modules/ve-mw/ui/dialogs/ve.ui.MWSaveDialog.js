@@ -196,7 +196,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 /**
  * Set preview content and show preview panel.
  *
- * @param {HTMLDocument|string} docOrMsg Document to preview, or error message
+ * @param {HTMLDocument|jQuery} docOrMsg Document to preview, or error message
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
@@ -292,9 +292,9 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			// Run hooks so other things can alter the document
 			mw.hook( 'wikipage.content' ).fire( dialog.$previewViewer );
 		} );
-	} else {
+	} else if ( docOrMsg instanceof $ ) {
 		this.$previewViewer.empty().append(
-			$( '<em>' ).text( docOrMsg )
+			$( '<em>' ).append( docOrMsg )
 		);
 	}
 
