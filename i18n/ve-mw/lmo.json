@@ -324,7 +324,7 @@
 	"visualeditor-parameter-search-more": "Mostra {{PLURAL:$1|$1 alter camp|alter $1 campi}}",
 	"visualeditor-parameter-search-no-unused": "Nissun camp l'è no doprad",
 	"visualeditor-parameter-search-unknown": "Camp minga conossud",
-	"visualeditor-preference-betatempdisable": "Disativa per el moment l'editor visual intanta che l'è in version minga definitiva",
+	"visualeditor-preference-betatempdisable": "Per intanta disativa l'editor visual intanta che l'è in version minga definitiva",
 	"visualeditor-preference-core-description": "Ativa l'editor visual. El podariss vessere minga disponibil in di pagine de discussion e in di alter spazzi di nom.",
 	"visualeditor-preference-core-label": "Modifica visual",
 	"visualeditor-preference-enable": "Ativa visual. È disponibil in sti {{PLURAL:$2|spazzi di nom}}: $1",
