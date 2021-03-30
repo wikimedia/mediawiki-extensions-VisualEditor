@@ -292,8 +292,8 @@ class VisualEditorHooks {
 	 */
 	public static function onCustomEditor( Article $article, User $user ) {
 		$req = $article->getContext()->getRequest();
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
+		$services = MediaWikiServices::getInstance();
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 
 		if (
 			!self::enabledForUser( $user ) ||
@@ -306,7 +306,7 @@ class VisualEditorHooks {
 
 		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
-			$user->setOption( 'visualeditor-editor', 'wikitext' );
+			$services->getUserOptionsManager()->setOption( $user, 'visualeditor-editor', 'wikitext' );
 			if ( !wfReadOnly() && $user->isRegistered() ) {
 				DeferredUpdates::addCallableUpdate( function () use ( $user ) {
 					$user->saveSettings();
@@ -937,8 +937,9 @@ class VisualEditorHooks {
 	 * @param bool &$result Success or failure
 	 */
 	public static function onPreferencesFormPreSave( $data, $form, $user, &$result ) {
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
+		$services = MediaWikiServices::getInstance();
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
+		$userOptionsManager = $services->getUserOptionsManager();
 		// On a wiki where enable is hidden and set to 1, if user sets betatempdisable=0
 		// then set autodisable=0
 		// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=1
@@ -948,7 +949,7 @@ class VisualEditorHooks {
 			$user->getOption( 'visualeditor-enable' ) &&
 			!$user->getOption( 'visualeditor-betatempdisable' )
 		) {
-			$user->setOption( 'visualeditor-autodisable', false );
+			$userOptionsManager->setOption( $user, 'visualeditor-autodisable', false );
 		} elseif (
 			// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=0,
 			// then set autodisable=1
@@ -957,7 +958,7 @@ class VisualEditorHooks {
 			!$user->getOption( 'visualeditor-enable' ) &&
 			!$user->getOption( 'visualeditor-autodisable' )
 		) {
-			$user->setOption( 'visualeditor-autodisable', true );
+			$userOptionsManager->setOption( $user, 'visualeditor-autodisable', true );
 		}
 	}
 
@@ -1131,7 +1132,8 @@ class VisualEditorHooks {
 					}
 
 					$uLatest = $user->getInstanceForUpdate();
-					$uLatest->setOption( 'visualeditor-editor', $cookie );
+					MediaWikiServices::getInstance()->getUserOptionsManager()
+						->setOption( $uLatest, 'visualeditor-editor', $cookie );
 					$uLatest->saveSettings();
 				}
 			) );
