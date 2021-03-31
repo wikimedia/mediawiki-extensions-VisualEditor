@@ -759,6 +759,7 @@
 				"mediawiki.diff.styles",
 				"mediawiki.String",
 				"jquery.lengthLimit",
+				"jquery.spinner",
 				"ext.visualEditor.mwcore",
 				"oojs-ui.styles.icons-accessibility",
 				"oojs-ui.styles.icons-editing-advanced",
