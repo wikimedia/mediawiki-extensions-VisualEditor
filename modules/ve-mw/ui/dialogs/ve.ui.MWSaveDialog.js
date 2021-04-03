@@ -412,9 +412,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 				// Don't bother with an API request for an empty summary
 				this.$previewEditSummary.text( ve.msg( 'visualeditor-savedialog-review-nosummary' ) );
 			} else {
-				this.$previewEditSummary.parent()
-					.removeClass( 'oo-ui-element-hidden' )
-					.addClass( 'mw-ajax-loader' );
+				this.$previewEditSummary.parent().removeClass( 'oo-ui-element-hidden' );
+				this.$previewEditSummary.append( $.createSpinner() );
 				this.editSummaryXhr = ve.init.target.getContentApi().post( {
 					action: 'parse',
 					title: ve.init.target.getPageName(),
@@ -423,6 +422,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 				} ).done( function ( result ) {
 					if ( result.parse.parsedsummary === '' ) {
 						dialog.$previewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
+						dialog.$previewEditSummary.empty();
 					} else {
 						// Intentionally treated as HTML
 						dialog.$previewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary ) );
@@ -430,8 +430,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 					}
 				} ).fail( function () {
 					dialog.$previewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
+					dialog.$previewEditSummary.empty();
 				} ).always( function () {
-					dialog.$previewEditSummary.parent().removeClass( 'mw-ajax-loader' );
 					dialog.updateSize();
 				} );
 			}
