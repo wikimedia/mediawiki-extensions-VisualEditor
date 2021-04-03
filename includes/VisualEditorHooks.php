@@ -633,9 +633,7 @@ class VisualEditorHooks {
 	 * @param string $section The name of the section being pointed to.
 	 * @param string $tooltip The default tooltip.
 	 * @param array &$result All link detail arrays.
-	 * @codingStandardsIgnoreStart
 	 * @phan-param array{editsection:array{text:string,targetTitle:Title,attribs:array,query:array}} $result
-	 * @codingStandardsIgnoreEnd
 	 * @param Language $lang The user interface language.
 	 */
 	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
