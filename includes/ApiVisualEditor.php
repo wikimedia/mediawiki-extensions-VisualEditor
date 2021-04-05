@@ -396,10 +396,15 @@ class ApiVisualEditor extends ApiBase {
 					);
 					$block = $targetUser->getBlock();
 
-					if (
-						!( $targetUser && $targetUser->isRegistered() ) &&
-						!$this->userNameUtils->isIP( $targetUsername )
+					$targetUserExists = ( $targetUser && $targetUser->isRegistered() );
+					if ( $targetUserExists && $targetUser->isHidden() &&
+						!$permissionManager->userHasRight( $user, 'hideuser' )
 					) {
+						// If the user exists, but is hidden, and the viewer cannot see hidden
+						// users, pretend like they don't exist at all. See T120883/T270453
+						$targetUserExists = false;
+					}
+					if ( !$targetUserExists && !User::isIP( $targetUsername ) ) {
 						// User does not exist
 						$notices['userpage-userdoesnotexist'] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) )
