@@ -264,7 +264,7 @@
 	"visualeditor-mwlanguagevariantinspector-title-name": "Ime jezika",
 	"visualeditor-mwlanguagevariantinspector-twoway-add-button": "Dodaj nov primer",
 	"visualeditor-mwpredialog-convert": "Dovoli oblikovanje besedila",
-	"visualeditor-mwsignature-tool": "Vaš podpis",
+	"visualeditor-mwsignature-tool": "Moj podpis",
 	"visualeditor-parameter-input-placeholder": "Ime parametra",
 	"visualeditor-parameter-search-more": "Prikaži še $1 {{PLURAL:$1|polje|polji|polja|polj}}",
 	"visualeditor-parameter-search-no-unused": "Ni neuporabljenih parametrov",

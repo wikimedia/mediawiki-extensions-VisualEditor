@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Din-nani1",
 			"Dnshitobu",
-			"Masssly"
+			"Masssly",
+			"Yakubu Fadilatu"
 		]
 	},
-	"tooltip-ca-ve-edit": "Malimi yaɣili ŋɔ"
+	"tooltip-ca-ve-edit": "Malimi yaɣili ŋɔ",
+	"visualeditor-ca-createsource": "Nam mi Yab'li",
+	"visualeditor-ca-editsource": "Yibu sheena malniŋ",
+	"visualeditor-ca-editsource-section": "Baŋsim nyabili mali zali"
 }
