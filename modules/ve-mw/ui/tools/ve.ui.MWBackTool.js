@@ -40,8 +40,6 @@ ve.ui.MWBackCommand = function VeUiMWBackCommand() {
 };
 OO.inheritClass( ve.ui.MWBackCommand, ve.ui.Command );
 ve.ui.MWBackCommand.prototype.execute = function () {
-	if ( this.toolbar instanceof ve.ui.TargetToolbar ) {
-		this.toolbar.target.tryTeardown();
-	}
+	ve.init.target.tryTeardown();
 };
 ve.ui.commandRegistry.register( new ve.ui.MWBackCommand() );
