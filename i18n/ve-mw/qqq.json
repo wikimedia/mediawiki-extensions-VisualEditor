@@ -192,6 +192,7 @@
 	"visualeditor-dialog-transclusion-add-template": "Label for button that adds the specified template to the page.\n{{Identical|Add template}}",
 	"visualeditor-dialog-transclusion-content": "Label for editor of content between transclusion parts.\n{{Identical|Content}}",
 	"visualeditor-dialog-transclusion-contextitem-description": "Message shown to an editor when they click on a template or group of templates that form a transclusion, listing the template(s) from which the transclusion is constructed.\n\n* $1 – the name of the template, or a list of the names of the templates if there are multiple.\n* $2 - number of templates for PLURAL support.",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Message shown to an editor when they manually add a value that is not a suggested value for a parameter.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Tooltip for deprecated parameter indicator",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Label describing that a parameter is deprecated.\n\nParameters:\n* $1 - Description given in TemplateData for why parameter is deprecated, which may be empty.",
 	"visualeditor-dialog-transclusion-loading": "Title for the transclusion dialog while its contents are loading.\n{{Identical|Loading}}",

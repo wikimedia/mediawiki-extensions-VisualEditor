@@ -170,6 +170,10 @@
 		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
+		},
+		"VisualEditorTransclusionDialogSuggestedValues": {
+			"description": "Temporary flag to enable suggested values in the transclusion dialog.",
+			"value": false
 		}
 	},
 	"APIModules": {
@@ -2152,6 +2156,7 @@
 				"visualeditor-dialog-transclusion-add-template",
 				"visualeditor-dialog-transclusion-content",
 				"visualeditor-dialog-transclusion-contextitem-description",
+				"visualeditor-dialog-transclusion-suggestedvalues-warning",
 				"visualeditor-dialog-transclusion-deprecated-parameter",
 				"visualeditor-dialog-transclusion-deprecated-parameter-description",
 				"visualeditor-dialog-transclusion-loading",
