@@ -182,6 +182,7 @@
 	"visualeditor-dialog-transclusion-add-template": "틀 추가",
 	"visualeditor-dialog-transclusion-content": "내용",
 	"visualeditor-dialog-transclusion-contextitem-description": "$1에서 생성됨",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "이것은 제안된 값 중의 하나가 아니므로 틀과 함께 동작하지 않을 것입니다.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "사용되지 않는 필드",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "필드는 구식입니다. $1",
 	"visualeditor-dialog-transclusion-loading": "불러오는 중...",

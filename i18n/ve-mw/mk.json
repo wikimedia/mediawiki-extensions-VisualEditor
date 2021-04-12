@@ -163,6 +163,7 @@
 	"visualeditor-dialog-transclusion-add-template": "Додај предлошка",
 	"visualeditor-dialog-transclusion-content": "Содржина",
 	"visualeditor-dialog-transclusion-contextitem-description": "Создадено од: $1",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Ова не е една од предложените вредности и може да не работи со предлошката.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Застарено поле",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Полето е застарено. $1",
 	"visualeditor-dialog-transclusion-loading": "Вчитувам...",

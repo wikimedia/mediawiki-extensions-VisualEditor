@@ -212,6 +212,7 @@
 	"visualeditor-dialog-transclusion-add-template": "Ajouter le modèle",
 	"visualeditor-dialog-transclusion-content": "Contenu",
 	"visualeditor-dialog-transclusion-contextitem-description": "Généré depuis : $1",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Ce n’est pas une des valeurs suggérées et cela pourrait ne pas fonctionner avec le modèle.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Champ obsolète",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Le champ est obsolète. $1",
 	"visualeditor-dialog-transclusion-loading": "Chargement en cours...",

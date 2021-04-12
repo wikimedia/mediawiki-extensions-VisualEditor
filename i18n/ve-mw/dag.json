@@ -1,7 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adam Tuferu",
+			"Alhaj Darajaati",
 			"Amire80",
+			"Chirifo",
 			"Din-nani1",
 			"Dnshitobu",
 			"Masssly",
@@ -9,7 +12,10 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Malimi yaɣili ŋɔ",
+	"visualeditor-ca-createlocaldescriptionsource": "Pahimi dundɔŋni buɣisibu nyabli",
 	"visualeditor-ca-createsource": "Nyabli nambu",
 	"visualeditor-ca-editsource": "Yibu sheena malniŋ",
-	"visualeditor-ca-editsource-section": "di nyabili malniŋ"
+	"visualeditor-ca-editsource-section": "di nyabili mali niŋ",
+	"visualeditor-descriptionpagelink": "Nina nyabu mali niŋ",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "ŋɔ pala zaɣyin shali dinwuhiri ni di kutum ni template"
 }

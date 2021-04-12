@@ -186,6 +186,7 @@
 	"visualeditor-dialog-transclusion-add-template": "Dodaj szablon",
 	"visualeditor-dialog-transclusion-content": "Treść",
 	"visualeditor-dialog-transclusion-contextitem-description": "Utworzono z: $1",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Wprowadzona wartość nie jest jedną z sugerowanych dla tego szablonu i może nie działać.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Niezalecane pole",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Pole jest niezalecane. $1",
 	"visualeditor-dialog-transclusion-loading": "Ładowanie...",

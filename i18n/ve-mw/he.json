@@ -172,6 +172,7 @@
 	"visualeditor-dialog-transclusion-add-template": "הוספת תבנית",
 	"visualeditor-dialog-transclusion-content": "תוכן",
 	"visualeditor-dialog-transclusion-contextitem-description": "נוצרה מתוך: $1",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "זה לא אחד מהערכים המוצעים, וייתכן שלא יעבוד עם התבנית.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "שדה מיושן",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "השדה מיושן. $1",
 	"visualeditor-dialog-transclusion-loading": "טעינה...",
