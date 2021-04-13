@@ -10,6 +10,7 @@
 			"Harriv",
 			"Hopea",
 			"Linnea",
+			"MITO",
 			"Macofe",
 			"McSalama",
 			"Moj",
@@ -29,6 +30,7 @@
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Tuotu kohteesta $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Luo sivun lähdekoodi",
 	"tooltip-ca-edit": "Muokkaa tätä sivua wikitekstinä",
@@ -50,6 +52,7 @@
 	"visualeditor-ca-ve-edit": "Visuaalinen muokkain",
 	"visualeditor-ca-ve-edit-section": "Visuaalinen muokkain",
 	"visualeditor-categories-tool": "Luokat",
+	"visualeditor-changedesc-mwtransclusion": "Mallineen parametreja muutettu",
 	"visualeditor-desc": "Visuaalinen muokkain MediaWikille",
 	"visualeditor-descriptionpagelink": "Project:Visuaalinen muokkain",
 	"visualeditor-dialog-media-alttext-section": "Vaihtoehtoinen teksti",
