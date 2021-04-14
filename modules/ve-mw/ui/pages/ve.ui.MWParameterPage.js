@@ -316,6 +316,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		this.parameter.getSuggestedValues().length &&
 		this.isSuggestedValueType( type )
 	) {
+		valueInputConfig.menu = { filterFromInput: true, highlightOnFilter: true };
 		valueInputConfig.options =
 			this.parameter.getSuggestedValues().map( function ( suggestedValue ) {
 				return { data: suggestedValue };
