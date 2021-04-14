@@ -542,6 +542,9 @@ class ApiVisualEditor extends ApiBase {
 			case 'parsedoc':
 			case 'parsefragment':
 				$wikitext = $params['wikitext'];
+				if ( $wikitext === null ) {
+					$this->dieWithError( [ 'apierror-missingparam', 'wikitext' ] );
+				}
 				$bodyOnly = ( $params['paction'] === 'parsefragment' );
 				if ( $params['pst'] ) {
 					$wikitext = $this->pstWikitext( $title, $wikitext );
