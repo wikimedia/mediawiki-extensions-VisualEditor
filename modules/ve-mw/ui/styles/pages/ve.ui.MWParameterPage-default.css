@@ -61,8 +61,15 @@
 	padding: 0.25em 1em;
 }
 
+.ve-ui-mwParameterPage-inlineDescription {
+	font-size: inherit;
+	padding: 0 2.5em;
+	clear: both;
+}
+
 .ve-ui-mwParameterPage-description-required,
-.ve-ui-mwParameterPage-description-deprecated {
+.ve-ui-mwParameterPage-description-deprecated,
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-description-example {
 	font-style: italic;
 	color: #54595d;
 }

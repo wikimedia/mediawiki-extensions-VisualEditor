@@ -1048,6 +1048,8 @@ class VisualEditorHooks {
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
 			'transclusionDialogSuggestedValues' => $veConfig->get( 'VisualEditorTransclusionDialogSuggestedValues' ),
+			'transclusionDialogInlineDescriptions' =>
+				$veConfig->get( 'VisualEditorTransclusionDialogInlineDescriptions' ),
 		];
 	}
 

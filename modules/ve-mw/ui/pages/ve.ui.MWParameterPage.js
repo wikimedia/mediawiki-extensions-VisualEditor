@@ -128,28 +128,30 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		this.$actions.append( this.rawFallbackButton.$element );
 	}
 
-	if ( this.$description.text().trim() === '' ) {
-		this.infoButton = new OO.ui.ButtonWidget( {
-			disabled: true,
-			title: ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' ),
-			framed: false,
-			icon: 'info',
-			classes: [ 've-ui-mwParameterPage-infoButton' ]
-		} );
-	} else {
-		this.infoButton = new OO.ui.PopupButtonWidget( {
-			$overlay: config.$overlay,
-			popup: {
-				$content: this.$description
-			},
-			title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
-			framed: false,
-			icon: 'info',
-			classes: [ 've-ui-mwParameterPage-infoButton' ]
-		} );
-	}
+	if ( !veConfig.transclusionDialogInlineDescriptions ) {
+		if ( this.$description.text().trim() === '' ) {
+			this.infoButton = new OO.ui.ButtonWidget( {
+				disabled: true,
+				title: ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' ),
+				framed: false,
+				icon: 'info',
+				classes: [ 've-ui-mwParameterPage-infoButton' ]
+			} );
+		} else {
+			this.infoButton = new OO.ui.PopupButtonWidget( {
+				$overlay: config.$overlay,
+				popup: {
+					$content: this.$description
+				},
+				title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
+				framed: false,
+				icon: 'info',
+				classes: [ 've-ui-mwParameterPage-infoButton' ]
+			} );
+		}
 
-	this.$actions.append( this.infoButton.$element );
+		this.$actions.append( this.infoButton.$element );
+	}
 
 	if ( !this.parameter.isRequired() && !config.readOnly ) {
 		this.removeButton = new OO.ui.ButtonWidget( {
@@ -204,6 +206,12 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$info, this.$field, this.$actions );
+
+	if ( veConfig.transclusionDialogInlineDescriptions ) {
+		this.$description.addClass( 've-ui-mwParameterPage-inlineDescription' );
+		this.$info.after( this.$description );
+	}
+
 	if ( !config.readOnly ) {
 		this.$element.append( this.$more );
 	}
@@ -223,6 +231,7 @@ OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
  */
 ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
 	var required = this.parameter.isRequired(),
+		veConfig = mw.config.get( 'wgVisualEditorConfig' ),
 		valueInputConfig = {
 			autosize: true,
 			required: required,
@@ -234,7 +243,7 @@ ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
 			'visualeditor-dialog-transclusion-param-default',
 			this.defaultValue
 		);
-	} else if ( this.exampleValue ) {
+	} else if ( this.exampleValue && !veConfig.transclusionDialogInlineDescriptions ) {
 		valueInputConfig.placeholder = ve.msg(
 			'visualeditor-dialog-transclusion-param-example',
 			this.exampleValue
