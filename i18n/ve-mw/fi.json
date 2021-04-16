@@ -300,6 +300,7 @@
 	"visualeditor-preference-core-label": "Visuaalinen muokkaaminen",
 	"visualeditor-preference-enable": "Ota käyttöön visuaalinen muokkain. Se on käytössä {{PLURAL:$2|seuraavassa nimiavaruudessa|seuraavissa nimiavaruuksissa}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Ota käyttöön uusi wikitekstitila visuaalisen muokkaimen sisällä. Siinä on monia visuaalisen muokkaimen työkaluja, se käyttää samanlaista muotoilua ja se myös mahdollistaa paremman vaihdon näiden kahden välillä.",
+	"visualeditor-preference-newwikitexteditor-enable": "Käytä wikitekstitilaa visuaalisen muokkaimen sisällä toisen wikitekstitilan sijaan.",
 	"visualeditor-preference-newwikitexteditor-label": "Uusi wikitekstitila",
 	"visualeditor-preference-tabs": "Muokkaustila:",
 	"visualeditor-preference-tabs-multi-tab": "Näytä minulle molemmat muokkausvälilehdet",
