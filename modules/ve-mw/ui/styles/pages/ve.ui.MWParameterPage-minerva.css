@@ -19,8 +19,13 @@
 	opacity: 0.5;
 }
 
+.ve-ui-mwParameterPage-inlineDescription {
+	max-width: 50em;
+}
+
 .ve-ui-mwParameterPage-description-required,
-.ve-ui-mwParameterPage-description-deprecated {
+.ve-ui-mwParameterPage-description-deprecated,
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-description-example {
 	font-style: italic;
 	color: #54595d;
 }
