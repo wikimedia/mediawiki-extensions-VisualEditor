@@ -184,6 +184,7 @@
 	"visualeditor-dialog-transclusion-options": "Options",
 	"visualeditor-dialog-transclusion-param-default": "Default: $1",
 	"visualeditor-dialog-transclusion-param-example": "e.g. $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Example: $1",
 	"visualeditor-dialog-transclusion-param-info": "Field description",
 	"visualeditor-dialog-transclusion-param-info-missing": "No field description available",
 	"visualeditor-dialog-transclusion-placeholder": "Add a template",

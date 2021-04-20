@@ -110,7 +110,12 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-description-example' )
 				.text(
-					ve.msg( 'visualeditor-dialog-transclusion-param-example', this.exampleValue )
+					ve.msg(
+						veConfig.transclusionDialogInlineDescriptions ?
+							'visualeditor-dialog-transclusion-param-example-long' :
+							'visualeditor-dialog-transclusion-param-example',
+						this.exampleValue
+					)
 				)
 		);
 	}
@@ -245,7 +250,9 @@ ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
 		);
 	} else if ( this.exampleValue && !veConfig.transclusionDialogInlineDescriptions ) {
 		valueInputConfig.placeholder = ve.msg(
-			'visualeditor-dialog-transclusion-param-example',
+			veConfig.transclusionDialogInlineDescriptions ?
+				'visualeditor-dialog-transclusion-param-example-long' :
+				'visualeditor-dialog-transclusion-param-example',
 			this.exampleValue
 		);
 	}
