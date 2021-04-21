@@ -213,6 +213,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append( this.$info, this.$field, this.$actions );
 
 	if ( veConfig.transclusionDialogInlineDescriptions ) {
+		this.$field.addClass( 've-ui-mwParameterPage-inlineDescription' );
 		this.$description.addClass( 've-ui-mwParameterPage-inlineDescription' );
 		this.$info.after( this.$description );
 	}
