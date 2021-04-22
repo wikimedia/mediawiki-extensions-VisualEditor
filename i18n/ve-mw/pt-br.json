@@ -195,6 +195,7 @@
 	"visualeditor-dialog-transclusion-options": "Opções",
 	"visualeditor-dialog-transclusion-param-default": "Padrão: $1",
 	"visualeditor-dialog-transclusion-param-example": "ex.: $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Exemplo: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descrição do campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nenhuma descrição disponível para o campo",
 	"visualeditor-dialog-transclusion-placeholder": "Adicionar uma predefinição",

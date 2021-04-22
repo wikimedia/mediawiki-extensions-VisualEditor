@@ -152,6 +152,7 @@
 	"visualeditor-dialog-transclusion-options": "Indstillinger",
 	"visualeditor-dialog-transclusion-param-default": "Standard: $1",
 	"visualeditor-dialog-transclusion-param-example": "f.eks. $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Eksempel: $1",
 	"visualeditor-dialog-transclusion-param-info": "Feltbeskrivelse",
 	"visualeditor-dialog-transclusion-param-info-missing": "Ingen feltbeskrivelse tilgængelig",
 	"visualeditor-dialog-transclusion-placeholder": "Tilføj en skabelon",

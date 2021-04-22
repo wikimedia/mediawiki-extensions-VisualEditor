@@ -154,6 +154,7 @@
 	"visualeditor-dialog-transclusion-options": "Iespējas",
 	"visualeditor-dialog-transclusion-param-default": "Noklusējums: $1",
 	"visualeditor-dialog-transclusion-param-example": "piemēram, $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Piemērs: $1",
 	"visualeditor-dialog-transclusion-param-info": "Lauka apraksts",
 	"visualeditor-dialog-transclusion-param-info-missing": "Lauka apraksts nav pieejams",
 	"visualeditor-dialog-transclusion-placeholder": "Pievienot veidni",

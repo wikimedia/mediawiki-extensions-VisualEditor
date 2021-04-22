@@ -200,6 +200,7 @@
 	"visualeditor-dialog-transclusion-options": "Seçenekler",
 	"visualeditor-dialog-transclusion-param-default": "Varsayılan: $1",
 	"visualeditor-dialog-transclusion-param-example": "Örnek değer: $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Örnek: $1",
 	"visualeditor-dialog-transclusion-param-info": "Alan açıklaması",
 	"visualeditor-dialog-transclusion-param-info-missing": "Alan açıklaması yok",
 	"visualeditor-dialog-transclusion-placeholder": "Şablon ekle",
