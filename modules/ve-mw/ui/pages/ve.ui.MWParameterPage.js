@@ -214,8 +214,11 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	if ( veConfig.transclusionDialogInlineDescriptions ) {
 		this.$field.addClass( 've-ui-mwParameterPage-inlineDescription' );
-		$doc.addClass( 've-ui-mwParameterPage-inlineDescription' );
-		this.$info.after( $doc );
+		this.collapsibleDoc = new ve.ui.MWExpandableContentElement( {
+			classes: [ 've-ui-mwParameterPage-inlineDescription' ],
+			$content: $doc
+		} );
+		this.$info.after( this.collapsibleDoc.$element );
 	}
 
 	if ( !config.readOnly ) {
@@ -481,4 +484,13 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function () {
  */
 ve.ui.MWParameterPage.prototype.focus = function () {
 	this.valueInput.focus();
+};
+
+/**
+ * Refresh collapsible children.
+ */
+ve.ui.MWParameterPage.prototype.updateSize = function () {
+	if ( this.collapsibleDoc ) {
+		this.collapsibleDoc.updateSize();
+	}
 };

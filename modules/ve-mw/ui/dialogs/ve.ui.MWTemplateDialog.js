@@ -61,6 +61,12 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			this.bookletLayout.focus( 1 );
+
+			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+				if ( page instanceof ve.ui.MWParameterPage ) {
+					page.updateSize();
+				}
+			} );
 		}, this );
 };
 
@@ -189,6 +195,10 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 
 		this.altered = true;
 		this.setApplicableStatus();
+
+		if ( page instanceof ve.ui.MWParameterPage ) {
+			page.updateSize();
+		}
 	} else {
 		this.onAddParameterBeforeLoad( page );
 	}

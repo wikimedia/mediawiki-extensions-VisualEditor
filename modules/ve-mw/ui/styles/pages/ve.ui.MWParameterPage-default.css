@@ -61,7 +61,11 @@
 	padding: 0.25em 1em;
 }
 
-.ve-ui-mwParameterPage-doc.ve-ui-mwParameterPage-inlineDescription {
+.ve-ui-mwParameterPage-inlineDescription {
+	position: relative;
+}
+
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc {
 	font-size: inherit;
 	padding: 0 2.5em;
 	clear: both;

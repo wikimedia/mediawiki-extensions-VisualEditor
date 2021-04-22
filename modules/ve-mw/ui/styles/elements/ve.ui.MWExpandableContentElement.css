@@ -1,0 +1,18 @@
+.ve-ui-expandableContent-fade {
+	position: absolute;
+	background: linear-gradient( 90deg, transparent 0%, rgba( 255, 255, 255, 1 ) 30% );
+	bottom: 0;
+	right: 2.5em;
+	padding-left: 30px;
+}
+
+.ve-ui-expandableContent-collapsible {
+	overflow: hidden;
+	position: relative;
+	margin: 0.4em 0 0.5em 0;
+	transition: height 200ms;
+}
+
+.ve-ui-expandableContent-collapsible > :last-child {
+	margin-bottom: 0;
+}

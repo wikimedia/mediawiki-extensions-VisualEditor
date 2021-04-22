@@ -215,6 +215,8 @@
 	"visualeditor-editsummary": "Describe what you changed",
 	"visualeditor-editsummary-characters-remaining": "The number of characters remaining",
 	"visualeditor-educationpopup-dismiss": "Okay, got it",
+	"visualeditor-expandable-less": "Less",
+	"visualeditor-expandable-more": "More",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Page title",
 	"visualeditor-formatdropdown-format-mw-heading2": "Heading",
