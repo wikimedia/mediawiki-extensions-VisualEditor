@@ -380,11 +380,13 @@ ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = functi
  */
 ve.init.mw.MobileArticleTarget.prototype.save = function () {
 	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.save.apply( this, arguments );
+	var promise = ve.init.mw.MobileArticleTarget.super.prototype.save.apply( this, arguments );
 
 	this.overlay.log( {
 		action: 'saveAttempt'
 	} );
+
+	return promise;
 };
 
 /**
