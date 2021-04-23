@@ -192,6 +192,7 @@
 	"visualeditor-dialog-transclusion-options": "선택 사항",
 	"visualeditor-dialog-transclusion-param-default": "기본값: $1",
 	"visualeditor-dialog-transclusion-param-example": "예: $1",
+	"visualeditor-dialog-transclusion-param-example-long": "예: $1",
 	"visualeditor-dialog-transclusion-param-info": "필드 설명",
 	"visualeditor-dialog-transclusion-param-info-missing": "사용할 수 있는 필드 설명이 없습니다",
 	"visualeditor-dialog-transclusion-placeholder": "틀 추가",

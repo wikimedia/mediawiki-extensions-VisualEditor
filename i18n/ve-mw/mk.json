@@ -173,6 +173,7 @@
 	"visualeditor-dialog-transclusion-options": "Нагодувања",
 	"visualeditor-dialog-transclusion-param-default": "По основно: $1",
 	"visualeditor-dialog-transclusion-param-example": "на пр. $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Пример: $1",
 	"visualeditor-dialog-transclusion-param-info": "Опис на полето",
 	"visualeditor-dialog-transclusion-param-info-missing": "Нема опис на полето",
 	"visualeditor-dialog-transclusion-placeholder": "Додај нова предлошка",
