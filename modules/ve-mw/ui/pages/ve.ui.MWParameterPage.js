@@ -42,7 +42,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$actions = $( '<div>' );
 	this.$labelElement = $( '<div>' );
 	this.$field = $( '<div>' );
-	this.$more = $( '<div>' );
+	this.$addUndocumented = $( '<div>' );
 	this.$description = $( '<div>' );
 
 	// Note: Calling createValueInput() sets some properties we rely on later in this function
@@ -205,8 +205,8 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		} ).toggle( false );
 		this.$field.append( this.warningMessage.$element );
 	}
-	this.$more
-		.addClass( 've-ui-mwParameterPage-more' )
+	this.$addUndocumented
+		.addClass( 've-ui-mwParameterPage-addUndocumented' )
 		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
@@ -219,7 +219,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( !config.readOnly ) {
-		this.$element.append( this.$more );
+		this.$element.append( this.$addUndocumented );
 	}
 };
 
