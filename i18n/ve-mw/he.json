@@ -30,7 +30,7 @@
 	"tooltip-ca-ve-edit": "עריכת הדף הזה",
 	"visualeditor-advancedsettings-tool": "הגדרות מתקדמות",
 	"visualeditor-autosave-modified-prompt-accept": "להמשיך את העריכה",
-	"visualeditor-autosave-modified-prompt-message": "דף זה נערך מאז שפתחת אותו בפעם האחרונה. האם {{GENDER:|ברצונך}} להחזיר את העריכה שלך בגרסה הישנה, או להתחיל עריכה חדשה עם הגרסה האחרונה?",
+	"visualeditor-autosave-modified-prompt-message": "הדף הזה נערך מאז שפתחת אותו בפעם האחרונה. האם {{GENDER:|אתה|את}} רוצה להחזיר את העריכה שלך בגרסה הישנה, או להתחיל עריכה חדשה עם הגרסה האחרונה?",
 	"visualeditor-autosave-modified-prompt-reject": "להתחיל עריכה חדשה",
 	"visualeditor-autosave-modified-prompt-title": "להחזיר את העריכה {{GENDER:|שלך}}?",
 	"visualeditor-autosave-not-recovered-text": "לא היה אפשר לשחזר את השינויים הלא־שמורים שלך.",

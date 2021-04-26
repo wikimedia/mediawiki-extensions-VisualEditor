@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Albe Albe460",
 			"Beta16",
 			"Daimona Eaytoy",
@@ -188,6 +189,7 @@
 	"visualeditor-dialog-transclusion-add-template": "Aggiungi template",
 	"visualeditor-dialog-transclusion-content": "Contenuto",
 	"visualeditor-dialog-transclusion-contextitem-description": "Generato da: $1",
+	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Questo non è uno dei valori suggeriti e potrebbe non funzionare col template.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Campo obsoleto",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Il campo è obsoleto. $1",
 	"visualeditor-dialog-transclusion-loading": "Caricamento...",
@@ -197,6 +199,7 @@
 	"visualeditor-dialog-transclusion-options": "Opzioni",
 	"visualeditor-dialog-transclusion-param-default": "Predefinito: $1",
 	"visualeditor-dialog-transclusion-param-example": "Esempio: $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Esempio: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descrizione campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "Non è disponibile alcuna descrizione per il campo",
 	"visualeditor-dialog-transclusion-placeholder": "Aggiungi un template",

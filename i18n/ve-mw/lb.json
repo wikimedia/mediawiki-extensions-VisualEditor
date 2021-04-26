@@ -159,6 +159,7 @@
 	"visualeditor-dialog-transclusion-options": "Optiounen",
 	"visualeditor-dialog-transclusion-param-default": "Standard: $1",
 	"visualeditor-dialog-transclusion-param-example": "z. Bsp. $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Beispill: $1",
 	"visualeditor-dialog-transclusion-param-info": "Beschreiwung vum Feld",
 	"visualeditor-dialog-transclusion-param-info-missing": "Keng Beschreiwung vum Feld disponibel",
 	"visualeditor-dialog-transclusion-placeholder": "Eng Schabloun dobäisetzen",
