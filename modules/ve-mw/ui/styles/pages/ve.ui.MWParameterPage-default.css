@@ -55,21 +55,21 @@
 	opacity: 0.5;
 }
 
-.ve-ui-mwParameterPage-description {
+.ve-ui-mwParameterPage-doc {
 	font-size: 0.9em;
 	line-height: 1.5em;
 	padding: 0.25em 1em;
 }
 
-.ve-ui-mwParameterPage-description.ve-ui-mwParameterPage-inlineDescription {
+.ve-ui-mwParameterPage-doc.ve-ui-mwParameterPage-inlineDescription {
 	font-size: inherit;
 	padding: 0 2.5em;
 	clear: both;
 }
 
-.ve-ui-mwParameterPage-description-required,
-.ve-ui-mwParameterPage-description-deprecated,
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-description-example {
+.ve-ui-mwParameterPage-doc-required,
+.ve-ui-mwParameterPage-doc-deprecated,
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc-example {
 	font-style: italic;
 	color: #54595d;
 }

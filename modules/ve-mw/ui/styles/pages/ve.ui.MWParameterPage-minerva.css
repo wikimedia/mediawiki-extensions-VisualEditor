@@ -23,9 +23,9 @@
 	max-width: 50em;
 }
 
-.ve-ui-mwParameterPage-description-required,
-.ve-ui-mwParameterPage-description-deprecated,
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-description-example {
+.ve-ui-mwParameterPage-doc-required,
+.ve-ui-mwParameterPage-doc-deprecated,
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc-example {
 	font-style: italic;
 	color: #54595d;
 }

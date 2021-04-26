@@ -43,7 +43,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$labelElement = $( '<div>' );
 	this.$field = $( '<div>' );
 	this.$addUndocumented = $( '<div>' );
-	this.$description = $( '<div>' );
+	this.$doc = $( '<div>' );
 
 	// Note: Calling createValueInput() sets some properties we rely on later in this function
 	this.valueInput = this.createValueInput()
@@ -58,10 +58,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
 	} );
 
-	// Construct the description popup
+	// Construct the field docs
 
-	this.$description
-		.addClass( 've-ui-mwParameterPage-description' )
+	this.$doc
+		.addClass( 've-ui-mwParameterPage-doc' )
 		.append( $( '<p>' ).text( this.spec.getParameterDescription( paramName ) || '' ) );
 
 	if ( this.parameter.isRequired() ) {
@@ -70,9 +70,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			.setTitle(
 				ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 			);
-		this.$description.append(
+		this.$doc.append(
 			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-description-required' )
+				.addClass( 've-ui-mwParameterPage-doc-required' )
 				.text(
 					ve.msg( 'visualeditor-dialog-transclusion-required-parameter-description' )
 				)
@@ -83,9 +83,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			.setTitle(
 				ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
 			);
-		this.$description.append(
+		this.$doc.append(
 			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-description-deprecated' )
+				.addClass( 've-ui-mwParameterPage-doc-deprecated' )
 				.text(
 					ve.msg(
 						'visualeditor-dialog-transclusion-deprecated-parameter-description',
@@ -96,9 +96,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( this.defaultValue ) {
-		this.$description.append(
+		this.$doc.append(
 			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-description-default' )
+				.addClass( 've-ui-mwParameterPage-doc-default' )
 				.text(
 					ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue )
 				)
@@ -106,9 +106,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( this.exampleValue ) {
-		this.$description.append(
+		this.$doc.append(
 			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-description-example' )
+				.addClass( 've-ui-mwParameterPage-doc-example' )
 				.text(
 					ve.msg(
 						veConfig.transclusionDialogInlineDescriptions ?
@@ -134,7 +134,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( !veConfig.transclusionDialogInlineDescriptions ) {
-		if ( this.$description.text().trim() === '' ) {
+		if ( this.$doc.text().trim() === '' ) {
 			this.infoButton = new OO.ui.ButtonWidget( {
 				disabled: true,
 				title: ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' ),
@@ -146,7 +146,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			this.infoButton = new OO.ui.PopupButtonWidget( {
 				$overlay: config.$overlay,
 				popup: {
-					$content: this.$description
+					$content: this.$doc
 				},
 				title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
 				framed: false,
@@ -214,8 +214,8 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	if ( veConfig.transclusionDialogInlineDescriptions ) {
 		this.$field.addClass( 've-ui-mwParameterPage-inlineDescription' );
-		this.$description.addClass( 've-ui-mwParameterPage-inlineDescription' );
-		this.$info.after( this.$description );
+		this.$doc.addClass( 've-ui-mwParameterPage-inlineDescription' );
+		this.$info.after( this.$doc );
 	}
 
 	if ( !config.readOnly ) {
