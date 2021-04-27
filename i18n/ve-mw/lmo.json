@@ -169,6 +169,7 @@
 	"visualeditor-dialog-transclusion-options": "Opzion",
 	"visualeditor-dialog-transclusion-param-default": "Predefinid: $1",
 	"visualeditor-dialog-transclusion-param-example": "Per esempi: $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Esempi: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descrizzion del camp",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nissuna descrizzion del camp disponibil",
 	"visualeditor-dialog-transclusion-placeholder": "Sgionta on model",
