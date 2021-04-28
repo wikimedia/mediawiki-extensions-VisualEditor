@@ -407,7 +407,7 @@ class ApiVisualEditor extends ApiBase {
 						// users, pretend like they don't exist at all. See T120883/T270453
 						$targetUserExists = false;
 					}
-					if ( !$targetUserExists && !User::isIP( $targetUsername ) ) {
+					if ( !$targetUserExists && !$this->userNameUtils->isIP( $targetUsername ) ) {
 						// User does not exist
 						$notices['userpage-userdoesnotexist'] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) )
