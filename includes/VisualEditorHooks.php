@@ -308,7 +308,7 @@ class VisualEditorHooks {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			$services->getUserOptionsManager()->setOption( $user, 'visualeditor-editor', 'wikitext' );
 			if ( !wfReadOnly() && $user->isRegistered() ) {
-				DeferredUpdates::addCallableUpdate( function () use ( $user ) {
+				DeferredUpdates::addCallableUpdate( static function () use ( $user ) {
 					$user->saveSettings();
 				} );
 			}
@@ -1125,9 +1125,9 @@ class VisualEditorHooks {
 		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
 			$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 			DeferredUpdates::addUpdate( new AtomicSectionUpdate(
-				$lb->getLazyConnectionRef( DB_MASTER ),
+				$lb->getLazyConnectionRef( DB_PRIMARY ),
 				__METHOD__,
-				function () use ( $user, $cookie ) {
+				static function () use ( $user, $cookie ) {
 					if ( wfReadOnly() ) {
 						return;
 					}

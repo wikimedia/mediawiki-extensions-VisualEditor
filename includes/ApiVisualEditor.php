@@ -592,7 +592,7 @@ class ApiVisualEditor extends ApiBase {
 			// Note: existing numeric keys might exist, and so array_merge cannot be used
 			(array)$config->get( 'VisualEditorAvailableNamespaces' ) +
 			(array)ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
-		return array_values( array_unique( array_map( function ( $namespace ) {
+		return array_values( array_unique( array_map( static function ( $namespace ) {
 			// Convert canonical namespace names to IDs
 			$nsInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
 			$idFromName = $nsInfo->getCanonicalIndex( strtolower( $namespace ) );
