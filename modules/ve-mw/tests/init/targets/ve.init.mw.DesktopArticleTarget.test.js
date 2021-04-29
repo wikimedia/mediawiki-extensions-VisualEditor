@@ -8,8 +8,7 @@
 QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'init', function ( assert ) {
-	var
-		response = {
+	const response = {
 			visualeditor: {
 				result: 'success',
 				notices: [
@@ -114,8 +113,7 @@ QUnit.test( 'init', function ( assert ) {
 } );
 
 QUnit.test( 'compatibility', function ( assert ) {
-	var profile, matches, compatibility,
-		cases = [
+	const cases = [
 			{
 				msg: 'Unidentified browser',
 				userAgent: 'FooBar Browser Company Version 3.141',
@@ -248,15 +246,15 @@ QUnit.test( 'compatibility', function ( assert ) {
 			}
 		];
 
-	compatibility = {
+	const compatibility = {
 		supportedList: ve.init.mw.DesktopArticleTarget.static.compatibility.supportedList,
 		// TODO: Fix this mess when we split ve.init from ve.platform
 		unsupportedList: mw.libs.ve.unsupportedList
 	};
 
 	cases.forEach( function ( caseItem ) {
-		profile = $.client.profile( { userAgent: caseItem.userAgent, platform: '' } );
-		matches = [];
+		const profile = $.client.profile( { userAgent: caseItem.userAgent, platform: '' } ),
+			matches = [];
 		[ 'unsupportedList', 'supportedList' ].every( function ( list ) {
 			if ( $.client.test( compatibility[ list ], profile, true ) ) {
 				matches.push( list );

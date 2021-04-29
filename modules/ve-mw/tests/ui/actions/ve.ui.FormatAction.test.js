@@ -10,8 +10,7 @@ QUnit.module( 've.ui.FormatAction (MW)', ve.test.utils.mwEnvironment );
 /* Tests */
 
 QUnit.test( 'convert (MW-specific types)', function ( assert ) {
-	var i,
-		cases = [
+	const cases = [
 			{
 				rangeOrSelection: new ve.Range( 14, 16 ),
 				type: 'mwHeading',
@@ -69,7 +68,7 @@ QUnit.test( 'convert (MW-specific types)', function ( assert ) {
 			}
 		];
 
-	for ( i = 0; i < cases.length; i++ ) {
+	for ( let i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runActionTest(
 			'format', assert, cases[ i ].html || ve.dm.example.isolationHtml, false, 'convert',
 			[ cases[ i ].type, cases[ i ].attributes ], cases[ i ].rangeOrSelection, cases[ i ].msg,

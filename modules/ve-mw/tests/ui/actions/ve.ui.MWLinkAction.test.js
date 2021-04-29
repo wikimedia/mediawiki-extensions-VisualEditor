@@ -10,7 +10,7 @@ QUnit.module( 've.ui.MWLinkAction' );
 /* Tests */
 
 QUnit.test( 'MW autolink', function ( assert ) {
-	var cases = [
+	const cases = [
 		{
 			msg: 'Strip trailing punctuation (but not matched parens)',
 			html: '<p><b>https://en.wikipedia.org/wiki/Red_(disambiguation) xyz</b></p>',
@@ -18,9 +18,8 @@ QUnit.test( 'MW autolink', function ( assert ) {
 			method: 'autolinkUrl',
 			expectedRangeOrSelection: new ve.Range( 51 ),
 			expectedData: function ( data, action ) {
-				var i,
-					a = action.getLinkAnnotation( 'https://en.wikipedia.org/wiki/Red_(disambiguation)' );
-				for ( i = 1; i < 51; i++ ) {
+				const a = action.getLinkAnnotation( 'https://en.wikipedia.org/wiki/Red_(disambiguation)' );
+				for ( let i = 1; i < 51; i++ ) {
 					data[ i ][ 1 ].push( a.element );
 				}
 			}

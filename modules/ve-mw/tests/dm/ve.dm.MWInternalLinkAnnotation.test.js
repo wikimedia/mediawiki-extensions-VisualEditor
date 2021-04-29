@@ -7,15 +7,14 @@
 QUnit.module( 've.dm.MWInternalLinkAnnotation' );
 
 QUnit.test( 'toDataElement', function ( assert ) {
-	var i, l,
-		doc = ve.dm.example.createExampleDocument(),
+	const doc = ve.dm.example.createExampleDocument(),
 		externalLink = function ( href ) {
-			var link = document.createElement( 'a' );
+			const link = document.createElement( 'a' );
 			link.setAttribute( 'href', href );
 			return link;
 		},
 		internalLink = function ( pageTitle, params ) {
-			var link = document.createElement( 'a' );
+			const link = document.createElement( 'a' );
 			link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
 			return link;
 		},
@@ -130,14 +129,13 @@ QUnit.test( 'toDataElement', function ( assert ) {
 	converter.contextStack = [];
 	converter.fromClipboard = true;
 
-	for ( i = 0, l = cases.length; i < l; i++ ) {
+	for ( let i = 0; i < cases.length; i++ ) {
 		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element ], converter ), cases[ i ].expected, cases[ i ].msg );
 	}
 } );
 
 QUnit.test( 'getFragment', function ( assert ) {
-	var i, l,
-		cases = [
+	const cases = [
 			{
 				msg: 'No fragment returns null',
 				original: 'Foo',
@@ -175,7 +173,7 @@ QUnit.test( 'getFragment', function ( assert ) {
 			}
 		];
 
-	for ( i = 0, l = cases.length; i < l; i++ ) {
+	for ( let i = 0; i < cases.length; i++ ) {
 		assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( cases[ i ].original ), cases[ i ].expected, cases[ i ].msg );
 	}
 } );

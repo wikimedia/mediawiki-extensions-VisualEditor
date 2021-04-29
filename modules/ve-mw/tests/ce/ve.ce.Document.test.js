@@ -9,15 +9,14 @@ QUnit.module( 've.ce.Document (MW)' );
 /* Tests */
 
 QUnit.test( 'Converter tests', function ( assert ) {
-	var msg, model, view, caseItem, $documentElement,
-		cases = ve.dm.mwExample.domToDataCases;
+	const cases = ve.dm.mwExample.domToDataCases;
 
-	for ( msg in cases ) {
+	for ( const msg in cases ) {
 		if ( cases[ msg ].ceHtml ) {
-			caseItem = ve.copy( cases[ msg ] );
-			model = ve.test.utils.getModelFromTestCase( caseItem );
-			view = new ve.ce.Document( model );
-			$documentElement = view.getDocumentNode().$element;
+			const caseItem = ve.copy( cases[ msg ] ),
+				model = ve.test.utils.getModelFromTestCase( caseItem ),
+				view = new ve.ce.Document( model ),
+				$documentElement = view.getDocumentNode().$element;
 			// Simplify slugs
 			$documentElement.find( '.ve-ce-branchNode-slug' ).contents().remove();
 			assert.equalDomElement(
