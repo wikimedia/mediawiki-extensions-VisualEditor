@@ -10,7 +10,7 @@ QUnit.module( 've.ce.ContentBranchNode (MW)', ve.test.utils.mwEnvironment );
 /* Tests */
 
 // FIXME runner copypasted from core, use data provider
-QUnit.test( 'getRenderedContents', function ( assert ) {
+QUnit.test( 'getRenderedContents', ( assert ) => {
 	const cases = [ {
 			msg: 'Annotation spanning text and inline nodes',
 			data: [

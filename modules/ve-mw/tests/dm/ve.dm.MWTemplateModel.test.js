@@ -35,14 +35,14 @@
 
 	/* Tests */
 
-	QUnit.test( 'serialize input parameters', function ( assert ) {
+	QUnit.test( 'serialize input parameters', ( assert ) => {
 		const templateModel = newTemplateModel(),
 			serializedTransclusionData = templateModel.serialize();
 
 		assert.deepEqual( serializedTransclusionData, { template: transclusionData } );
 	} );
 
-	QUnit.test( 'serialize changed input parameters', function ( assert ) {
+	QUnit.test( 'serialize changed input parameters', ( assert ) => {
 		const templateModel = newTemplateModel(),
 			newParameterModel = new ve.dm.MWParameterModel( templateModel, 'baz', 'Baz value' );
 
@@ -54,7 +54,7 @@
 	} );
 
 	// T75134
-	QUnit.test( 'serialize after parameter was removed', function ( assert ) {
+	QUnit.test( 'serialize after parameter was removed', ( assert ) => {
 		const templateModel = newTemplateModel(),
 			barParam = templateModel.getParameter( 'bar' );
 
@@ -66,7 +66,7 @@
 	} );
 
 	// T101075
-	QUnit.test( 'serialize without empty parameter not present in original parameter set', function ( assert ) {
+	QUnit.test( 'serialize without empty parameter not present in original parameter set', ( assert ) => {
 		const templateModel = newTemplateModel(),
 			newEmptyParam = new ve.dm.MWParameterModel( templateModel, 'new_empty', '' );
 

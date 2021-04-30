@@ -10,7 +10,7 @@ QUnit.module( 've.dm.Document (MW)', ve.test.utils.mwEnvironment );
 /* Tests */
 
 // FIXME runner copypasted from core, use data provider
-QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', function ( assert ) {
+QUnit.test( 'getRelativeRange (mwBlockImage / mwInlineImage)', ( assert ) => {
 	const store = new ve.dm.HashValueStore(),
 		storeItems = [
 			ve.dm.mwExample.MWBlockImage.storeItems,

@@ -8,7 +8,7 @@ QUnit.module( 've.ce.Document (MW)' );
 
 /* Tests */
 
-QUnit.test( 'Converter tests', function ( assert ) {
+QUnit.test( 'Converter tests', ( assert ) => {
 	const cases = ve.dm.mwExample.domToDataCases;
 
 	for ( const msg in cases ) {

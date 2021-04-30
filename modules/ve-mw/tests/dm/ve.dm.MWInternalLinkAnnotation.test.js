@@ -6,14 +6,14 @@
 
 QUnit.module( 've.dm.MWInternalLinkAnnotation' );
 
-QUnit.test( 'toDataElement', function ( assert ) {
+QUnit.test( 'toDataElement', ( assert ) => {
 	const doc = ve.dm.example.createExampleDocument(),
-		externalLink = function ( href ) {
+		externalLink = ( href ) => {
 			const link = document.createElement( 'a' );
 			link.setAttribute( 'href', href );
 			return link;
 		},
-		internalLink = function ( pageTitle, params ) {
+		internalLink = ( pageTitle, params ) => {
 			const link = document.createElement( 'a' );
 			link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
 			return link;
@@ -134,7 +134,7 @@ QUnit.test( 'toDataElement', function ( assert ) {
 	}
 } );
 
-QUnit.test( 'getFragment', function ( assert ) {
+QUnit.test( 'getFragment', ( assert ) => {
 	const cases = [
 			{
 				msg: 'No fragment returns null',

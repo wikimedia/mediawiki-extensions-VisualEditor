@@ -5,7 +5,7 @@
  */
 
 QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
-	beforeEach: function () {
+	beforeEach() {
 		// Mock XHR for mw.Api()
 		this.server = this.sandbox.useFakeServer();
 		// Random number, chosen by a fair dice roll.
@@ -13,7 +13,7 @@ QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
 		this.randomStub = sinon.stub( Math, 'random' ).returns( 0.04 );
 		ve.test.utils.mwEnvironment.beforeEach.call( this );
 	},
-	afterEach: function () {
+	afterEach() {
 		this.randomStub.restore();
 		ve.test.utils.mwEnvironment.afterEach.call( this );
 	}
@@ -21,21 +21,17 @@ QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
 
 /* Tests */
 
-ve.test.utils.runWikitextStringHandlerTest = function ( assert, server, string, mimeType, expectedResponse, expectedData, annotations, assertDom, msg ) {
+ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType, expectedResponse, expectedData, annotations, assertDom, msg ) => {
 	const done = assert.async(),
 		item = ve.ui.DataTransferItem.static.newFromString( string, mimeType ),
 		doc = ve.dm.Document.static.newBlankDocument(),
 		mockSurface = {
-			getModel: function () {
+			getModel: () => {
 				return {
-					getDocument: function () {
-						return doc;
-					}
+					getDocument: () => doc
 				};
 			},
-			createProgress: function () {
-				return ve.createDeferred().promise();
-			}
+			createProgress: () => ve.createDeferred().promise()
 		};
 
 	// Preprocess the expectedData array
@@ -56,7 +52,7 @@ ve.test.utils.runWikitextStringHandlerTest = function ( assert, server, string, 
 	// Invoke the handler
 	const handler = ve.ui.dataTransferHandlerFactory.create( 'wikitextString', mockSurface, item );
 
-	handler.getInsertableData().done( function ( docOrData ) {
+	handler.getInsertableData().done( ( docOrData ) => {
 		let actualData, store;
 		if ( docOrData instanceof ve.dm.Document ) {
 			actualData = docOrData.getData();
