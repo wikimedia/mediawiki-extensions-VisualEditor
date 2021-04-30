@@ -9,14 +9,14 @@ QUnit.module( 've.dm.SurfaceFragment (MW)', ve.test.utils.mwEnvironment );
 
 /* Tests */
 
-QUnit.test( 'isolateAndUnwrap (MWheading)', function ( assert ) {
-	ve.test.utils.runIsolateTest( assert, 'mwHeading', new ve.Range( 12, 20 ), function ( data ) {
+QUnit.test( 'isolateAndUnwrap (MWheading)', ( assert ) => {
+	ve.test.utils.runIsolateTest( assert, 'mwHeading', new ve.Range( 12, 20 ), ( data ) => {
 		data.splice( 11, 0, { type: '/list' } );
 		data.splice( 12, 1 );
 		data.splice( 20, 1, { type: 'list', attributes: { style: 'bullet' } } );
 	}, 'isolating paragraph in list item "Item 2" for MWheading' );
 
-	ve.test.utils.runIsolateTest( assert, 'mwHeading', new ve.Range( 202, 212 ), function ( data ) {
+	ve.test.utils.runIsolateTest( assert, 'mwHeading', new ve.Range( 202, 212 ), ( data ) => {
 		data.splice( 201, 1,
 			{ type: '/list' }, { type: '/listItem' }, { type: '/list' }
 		);
@@ -28,7 +28,7 @@ QUnit.test( 'isolateAndUnwrap (MWheading)', function ( assert ) {
 	}, 'isolating paragraph in list item "Nested 2" for MWheading' );
 } );
 
-QUnit.test( 'insertContent (MWheading)', function ( assert ) {
+QUnit.test( 'insertContent (MWheading)', ( assert ) => {
 	const doc = new ve.dm.Document( [
 			{ type: 'list', attributes: { style: 'bullet' } },
 			{ type: 'listItem' },

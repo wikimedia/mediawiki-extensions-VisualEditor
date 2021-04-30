@@ -8,13 +8,13 @@ QUnit.module( 've.ui.UrlStringTransferHandler (MW)' );
 
 /* Tests */
 
-QUnit.test( 'paste', function ( assert ) {
+QUnit.test( 'paste', ( assert ) => {
 	const cases = [
 			{
 				msg: 'External link converts to internal link',
 				pasteString: location.origin + mw.Title.newFromText( 'Main Page' ).getUrl(),
 				pasteType: 'text/plain',
-				expectedData: function () {
+				expectedData: () => {
 					// Explicitly create an internal link so we can assert this behaviour is working
 					const a = ve.dm.MWInternalLinkAnnotation.static.newFromTitle( mw.Title.newFromText( 'Main Page' ) ).element;
 					return [

@@ -6,14 +6,14 @@
 
 ( function () {
 	QUnit.module( 've.dm.MWTransclusionModel', QUnit.newMwEnvironment( {
-		beforeEach: function () {
+		beforeEach() {
 			// Mock XHR for mw.Api()
 			this.server = this.sandbox.useFakeServer();
 			this.server.respondImmediately = true;
 
 			ve.test.utils.mwEnvironment.beforeEach.call( this );
 		},
-		afterEach: function () {
+		afterEach() {
 			ve.test.utils.mwEnvironment.afterEach.call( this );
 		}
 	} ) );
@@ -27,10 +27,10 @@
 		server.respondWith( [ 200, { 'Content-Type': 'application/json' }, JSON.stringify( response ) ] );
 
 		transclusion.addPart( part )
-			.then( function () {
+			.then( () => {
 				callback( transclusion );
 			} )
-			.always( function () {
+			.always( () => {
 				done();
 			} );
 	}
@@ -64,7 +64,7 @@
 			}
 		};
 
-		runAddPartTest( assert, 'Test', response, this.server, function ( transclusion ) {
+		runAddPartTest( assert, 'Test', response, this.server, ( transclusion ) => {
 			const parts = transclusion.getParts(),
 				spec = parts[ 0 ].getSpec();
 
@@ -90,7 +90,7 @@
 			}
 		};
 
-		runAddPartTest( assert, 'NoData', response, this.server, function ( transclusion ) {
+		runAddPartTest( assert, 'NoData', response, this.server, ( transclusion ) => {
 			const parts = transclusion.getParts(),
 				spec = parts[ 0 ].getSpec();
 
@@ -111,7 +111,7 @@
 			}
 		};
 
-		runAddPartTest( assert, 'NoParams', response, this.server, function ( transclusion ) {
+		runAddPartTest( assert, 'NoParams', response, this.server, ( transclusion ) => {
 			const parts = transclusion.getParts(),
 				spec = parts[ 0 ].getSpec();
 

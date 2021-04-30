@@ -9,7 +9,7 @@ QUnit.module( 've.dm.MWTransclusionNode', ve.test.utils.mwEnvironment );
 
 /* Tests */
 
-QUnit.test( 'getWikitext', function ( assert ) {
+QUnit.test( 'getWikitext', ( assert ) => {
 	const cases = [
 		{
 			msg: 'mix of numbered and named parameters',

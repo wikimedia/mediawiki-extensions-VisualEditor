@@ -9,7 +9,7 @@ QUnit.module( 've.dm.MWImageModel', ve.test.utils.mwEnvironment );
 
 /* Tests */
 
-QUnit.test( 'Create and manipulate image nodes', function ( assert ) {
+QUnit.test( 'Create and manipulate image nodes', ( assert ) => {
 	const imageNode = {},
 		images = {
 			mwInlineImage: {
