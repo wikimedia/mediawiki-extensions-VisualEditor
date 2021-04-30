@@ -8,11 +8,10 @@
 QUnit.module( 've.dm.Converter (MW)', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'getModelFromDom', function ( assert ) {
-	var msg, caseItem,
-		cases = ve.dm.mwExample.domToDataCases;
+	const cases = ve.dm.mwExample.domToDataCases;
 
-	for ( msg in cases ) {
-		caseItem = ve.copy( cases[ msg ] );
+	for ( const msg in cases ) {
+		const caseItem = ve.copy( cases[ msg ] );
 		if ( caseItem.mwConfig ) {
 			mw.config.set( caseItem.mwConfig );
 		}
@@ -22,11 +21,10 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 } );
 
 QUnit.test( 'getDomFromModel', function ( assert ) {
-	var msg, caseItem,
-		cases = ve.dm.mwExample.domToDataCases;
+	const cases = ve.dm.mwExample.domToDataCases;
 
-	for ( msg in cases ) {
-		caseItem = ve.copy( cases[ msg ] );
+	for ( const msg in cases ) {
+		const caseItem = ve.copy( cases[ msg ] );
 		if ( caseItem.mwConfig ) {
 			mw.config.set( caseItem.mwConfig );
 		}

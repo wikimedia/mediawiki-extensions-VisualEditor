@@ -665,7 +665,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			var data = [ 'x', [ ve.dm.example.bold ] ],
+			const data = [ 'x', [ ve.dm.example.bold ] ],
 				linearData = ve.dm.example.preprocessAnnotations( [ data ], model.getStore() );
 			model.data.data.splice( 3, 0, linearData.data[ 0 ] );
 		},
@@ -726,7 +726,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		modify: function ( model ) {
-			var data = [ 'x', [ ve.dm.example.bold ] ],
+			const data = [ 'x', [ ve.dm.example.bold ] ],
 				linearData = ve.dm.example.preprocessAnnotations( [ data ], model.getStore() );
 			model.data.data.splice( 3, 0, linearData.data[ 0 ] );
 		},

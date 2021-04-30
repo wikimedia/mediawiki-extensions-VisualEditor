@@ -19,7 +19,7 @@
 	} ) );
 
 	function runAddPartTest( assert, name, response, server, callback ) {
-		var doc = ve.dm.Document.static.newBlankDocument(),
+		const doc = ve.dm.Document.static.newBlankDocument(),
 			transclusion = new ve.dm.MWTransclusionModel( doc ),
 			part = ve.dm.MWTemplateModel.newFromName( transclusion, name ),
 			done = assert.async();
@@ -36,7 +36,7 @@
 	}
 
 	QUnit.test( 'fetch template part data', function ( assert ) {
-		var response = {
+		const response = {
 			batchcomplete: '',
 			pages: {
 				1331311: {
@@ -65,7 +65,7 @@
 		};
 
 		runAddPartTest( assert, 'Test', response, this.server, function ( transclusion ) {
-			var parts = transclusion.getParts(),
+			const parts = transclusion.getParts(),
 				spec = parts[ 0 ].getSpec();
 
 			assert.strictEqual( parts.length, 1 );
@@ -76,7 +76,7 @@
 
 	// T243868
 	QUnit.test( 'fetch part data for parameterized template with no TemplateData', function ( assert ) {
-		var response = {
+		const response = {
 			batchcomplete: '',
 			pages: {
 				1331311: {
@@ -91,7 +91,7 @@
 		};
 
 		runAddPartTest( assert, 'NoData', response, this.server, function ( transclusion ) {
-			var parts = transclusion.getParts(),
+			const parts = transclusion.getParts(),
 				spec = parts[ 0 ].getSpec();
 
 			assert.strictEqual( parts.length, 1 );
@@ -100,7 +100,7 @@
 	} );
 
 	QUnit.test( 'fetch part data for template with no TemplateData and no params', function ( assert ) {
-		var response = {
+		const response = {
 			batchcomplete: '',
 			pages: {
 				1331311: {
@@ -112,7 +112,7 @@
 		};
 
 		runAddPartTest( assert, 'NoParams', response, this.server, function ( transclusion ) {
-			var parts = transclusion.getParts(),
+			const parts = transclusion.getParts(),
 				spec = parts[ 0 ].getSpec();
 
 			assert.strictEqual( parts.length, 1 );

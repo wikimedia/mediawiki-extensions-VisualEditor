@@ -1,16 +1,15 @@
 {
 	"extends": [
 		"wikimedia/qunit",
-		"../../../.eslintrc.json"
+		"../../../.eslintrc.json",
+		"wikimedia/language/es6"
 	],
-	"env": {
-		"es6": true
-	},
 	"globals": {
 		"sinon": false
 	},
 	"rules": {
 		"compat/compat": [ "error", "last 2 chrome versions, last 2 firefox versions" ],
+		"indent": "off",
 		"no-jquery/no-parse-html-literal": "off"
 	}
 }

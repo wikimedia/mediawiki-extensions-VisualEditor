@@ -6,7 +6,7 @@
  */
 
 ( function () {
-	var transclusionData = {
+	const transclusionData = {
 		params: {
 			foo: { wt: 'Foo value' },
 			bar: { wt: 'Bar value' },
@@ -26,7 +26,7 @@
 	 * @return {ve.dm.MWTemplateModel}
 	 */
 	function newTemplateModel() {
-		var doc = ve.dm.Document.static.newBlankDocument(),
+		const doc = ve.dm.Document.static.newBlankDocument(),
 			transclusion = new ve.dm.MWTransclusionModel( doc ),
 			clonedTransclusionData = ve.extendObject( {}, transclusionData );
 
@@ -36,46 +36,43 @@
 	/* Tests */
 
 	QUnit.test( 'serialize input parameters', function ( assert ) {
-		var templateModel = newTemplateModel(),
+		const templateModel = newTemplateModel(),
 			serializedTransclusionData = templateModel.serialize();
 
 		assert.deepEqual( serializedTransclusionData, { template: transclusionData } );
 	} );
 
 	QUnit.test( 'serialize changed input parameters', function ( assert ) {
-		var templateModel = newTemplateModel(),
-			newParameterModel = new ve.dm.MWParameterModel( templateModel, 'baz', 'Baz value' ),
-			serializedTransclusionData;
+		const templateModel = newTemplateModel(),
+			newParameterModel = new ve.dm.MWParameterModel( templateModel, 'baz', 'Baz value' );
 
 		templateModel.addParameter( newParameterModel );
 
-		serializedTransclusionData = templateModel.serialize();
+		const serializedTransclusionData = templateModel.serialize();
 
 		assert.deepEqual( serializedTransclusionData.template.params.baz, { wt: 'Baz value' } );
 	} );
 
 	// T75134
 	QUnit.test( 'serialize after parameter was removed', function ( assert ) {
-		var templateModel = newTemplateModel(),
-			barParam = templateModel.getParameter( 'bar' ),
-			serializedTransclusionData;
+		const templateModel = newTemplateModel(),
+			barParam = templateModel.getParameter( 'bar' );
 
 		templateModel.removeParameter( barParam );
 
-		serializedTransclusionData = templateModel.serialize();
+		const serializedTransclusionData = templateModel.serialize();
 
 		assert.deepEqual( serializedTransclusionData.template.params, { foo: { wt: 'Foo value' }, empty: { wt: '' } } );
 	} );
 
 	// T101075
 	QUnit.test( 'serialize without empty parameter not present in original parameter set', function ( assert ) {
-		var templateModel = newTemplateModel(),
-			newEmptyParam = new ve.dm.MWParameterModel( templateModel, 'new_empty', '' ),
-			serializedTransclusionData;
+		const templateModel = newTemplateModel(),
+			newEmptyParam = new ve.dm.MWParameterModel( templateModel, 'new_empty', '' );
 
 		templateModel.addParameter( newEmptyParam );
 
-		serializedTransclusionData = templateModel.serialize();
+		const serializedTransclusionData = templateModel.serialize();
 
 		assert.deepEqual( serializedTransclusionData, { template: transclusionData } );
 	} );

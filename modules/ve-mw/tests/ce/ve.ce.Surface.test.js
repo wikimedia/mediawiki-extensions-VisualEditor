@@ -10,8 +10,7 @@ QUnit.module( 've.ce.Surface (MW)', ve.test.utils.mwEnvironment );
 /* Tests */
 
 QUnit.test( 'handleLinearDelete', function ( assert ) {
-	var done = assert.async(),
-		promise = Promise.resolve(),
+	const done = assert.async(),
 		blocklength = ve.dm.mwExample.MWBlockImage.data.length,
 		cases = [
 			// This asserts that getRelativeRange (via getRelativeOffset) doesn't try to
@@ -54,6 +53,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 			}
 		];
 
+	let promise = Promise.resolve();
 	cases.forEach( function ( caseItem ) {
 		promise = promise.then( function () {
 			return ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, caseItem );
@@ -66,7 +66,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 } );
 
 QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
-	var cases = [
+	const cases = [
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),

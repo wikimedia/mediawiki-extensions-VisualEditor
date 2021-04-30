@@ -29,7 +29,7 @@ QUnit.test( 'isolateAndUnwrap (MWheading)', function ( assert ) {
 } );
 
 QUnit.test( 'insertContent (MWheading)', function ( assert ) {
-	var doc = new ve.dm.Document( [
+	const doc = new ve.dm.Document( [
 			{ type: 'list', attributes: { style: 'bullet' } },
 			{ type: 'listItem' },
 			{ type: 'paragraph' },
@@ -42,9 +42,9 @@ QUnit.test( 'insertContent (MWheading)', function ( assert ) {
 			{ type: '/internalList' }
 		] ),
 		surface = new ve.dm.Surface( doc ),
-		fragment = surface.getLinearFragment( new ve.Range( 4, 4 ) ),
 		headingData = [ { type: 'mwHeading', attributes: { level: 3 } }, 'x', { type: '/mwHeading' } ];
 
+	let fragment = surface.getLinearFragment( new ve.Range( 4, 4 ) );
 	fragment.insertContent( headingData );
 	assert.deepEqual(
 		doc.getData( new ve.Range( 3, 14 ) ),

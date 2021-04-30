@@ -17,7 +17,7 @@ QUnit.module( 've.ui.FragmentInspector (MW)', QUnit.newMwEnvironment( {
 /* Tests */
 
 QUnit.test( 'Wikitext link inspector', function ( assert ) {
-	var done = assert.async(),
+	const done = assert.async(),
 		surface = ve.init.target.createSurface(
 			ve.dm.converter.getModelFromDom(
 				ve.createDocumentFromHtml(
