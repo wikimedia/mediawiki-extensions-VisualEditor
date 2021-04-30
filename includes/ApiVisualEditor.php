@@ -450,11 +450,14 @@ class ApiVisualEditor extends ApiBase {
 				$req->setVal( 'format', $editPage->contentFormat );
 				// By reference for some reason (T54466)
 				$editPage->importFormData( $req );
+				$services = MediaWikiServices::getInstance();
+				$userOptionsLookup = $services->getUserOptionsLookup();
+				$watchlistManager = $services->getWatchlistManager();
 				$states = [
-					'minor' => $user->getOption( 'minordefault' ) && $title->exists(),
-					'watch' => $user->getOption( 'watchdefault' ) ||
-						( $user->getOption( 'watchcreations' ) && !$title->exists() ) ||
-						$user->isWatched( $title ),
+					'minor' => $userOptionsLookup->getOption( $user, 'minordefault' ) && $title->exists(),
+					'watch' => $userOptionsLookup->getOption( $user, 'watchdefault' ) ||
+						( $userOptionsLookup->getOption( $user, 'watchcreations' ) && !$title->exists() ) ||
+						$watchlistManager->isWatched( $user, $title ),
 				];
 				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
 				$checkboxesMessagesList = [];
