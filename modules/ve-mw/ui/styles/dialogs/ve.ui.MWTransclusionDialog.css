@@ -77,3 +77,11 @@
 .ve-ui-mwTransclusionDialog-bigger .oo-ui-menuLayout > .oo-ui-menuLayout-content {
 	left: 240px;
 }
+
+.ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-inline-help {
+	color: inherit;
+}
+
+.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
+	display: inline-block;
+}

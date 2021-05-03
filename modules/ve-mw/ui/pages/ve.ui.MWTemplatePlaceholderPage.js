@@ -18,7 +18,8 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
-	var addTemplateActionFieldLayout;
+	var addTemplateActionFieldLayout,
+		addTemplateFieldsetConfig;
 	// Configuration initialization
 	config = ve.extendObject( {
 		scrollable: false
@@ -73,12 +74,21 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		{ align: 'top' }
 	);
 
-	this.addTemplateFieldset = new OO.ui.FieldsetLayout( {
+	addTemplateFieldsetConfig = {
 		label: ve.msg( 'visualeditor-dialog-transclusion-placeholder' ),
 		icon: 'puzzle',
 		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
 		items: [ addTemplateActionFieldLayout ]
-	} );
+	};
+	// Temporary switch for verbose template search.
+	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
+		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
+			label: ve.msg( 'visualeditor-dialog-transclusion-template-search' ),
+			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
+			helpInline: true
+		} );
+	}
+	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
 
 	// Initialization
 	this.$element
@@ -105,7 +115,12 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 			.setMovable( true )
 			.setRemovable( true )
 			.setFlags( [ 'placeholder' ] )
-			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-placeholder' ) );
+			.setLabel( ve.msg(
+				// Temporary switch for verbose template search.
+				mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ?
+					'visualeditor-dialog-transclusion-template-search' :
+					'visualeditor-dialog-transclusion-placeholder'
+			) );
 	}
 };
 

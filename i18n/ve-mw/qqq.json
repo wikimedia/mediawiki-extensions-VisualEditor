@@ -218,6 +218,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Label for the confirmation dialog opened if the user tries to insert/edit a template without filling all required fields.\n\nParameters:\n* $1 - Parameters missing, as a list using {{msg-mw|and}}, {{msg-mw|comma-separator}} and {{msg-mw|word-separator}}.\n* $2 - Number of parameters missing, for PLURAL support.",
 	"visualeditor-dialog-transclusion-single-mode": "Label for button that hides advanced options in transclusion dialog",
 	"visualeditor-dialog-transclusion-title": "{{Identical|Transclusion}}",
+	"visualeditor-dialog-transclusion-template-search": "Dialog and fieldset label to search for a template.",
+	"visualeditor-dialog-transclusion-template-search-help": "Inline help for the template search field.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "ARIA label for screen readers on template fields setup menu.",
 	"visualeditor-dialogbutton-media-tooltip": "Tooltip for adding images and media on page",
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
