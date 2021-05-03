@@ -111,7 +111,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 		view.pasteSpecial = true;
 	}
 
-	if ( !pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ) ) {
+	if ( ve.init.target.constructor.static.convertToWikitextOnPaste && !pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ) ) {
 		// Not plaintext. We need to ask whether we should convert it to
 		// wikitext, or just strip the formatting out.
 		deferred = ve.createDeferred();
