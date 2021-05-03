@@ -24,8 +24,6 @@
 	cursor: default;
 	padding-left: 2.5em;
 	width: 80%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -36,8 +34,6 @@
 	right: 4em; /* 1.5em for PanelLayout's padding + 2.5em */
 	width: 25%;
 	text-align: right;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -103,8 +99,6 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
