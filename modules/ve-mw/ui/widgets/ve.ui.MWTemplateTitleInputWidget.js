@@ -42,6 +42,25 @@ OO.inheritClass( ve.ui.MWTemplateTitleInputWidget, mw.widgets.TitleInputWidget )
 
 /* Methods */
 
+// @inheritdoc mw.widgets.TitleWidget
+ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
+	var params = ve.ui.MWTemplateTitleInputWidget.super.prototype.getApiParams.call( this, query );
+
+	// TODO: This should stay as a feature flag for 3rd-parties to fallback to prefixsearch
+	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
+		params.generator = 'search';
+		params.gsrsearch = params.gpssearch;
+		params.gsrsearch += '*';
+		// params.gsrsort = 'incoming_links_desc';
+		params.gsrnamespace = params.gpsnamespace;
+		params.gsrlimit = params.gpslimit;
+		delete params.gpssearch;
+		delete params.gpsnamespace;
+		delete params.gpslimit;
+	}
+	return params;
+};
+
 // @inheritdoc mw.widgets.TitleInputWidget
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	var widget = this,

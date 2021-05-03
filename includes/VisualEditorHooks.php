@@ -1050,6 +1050,8 @@ class VisualEditorHooks {
 			'transclusionDialogSuggestedValues' => $veConfig->get( 'VisualEditorTransclusionDialogSuggestedValues' ),
 			'transclusionDialogInlineDescriptions' =>
 				$veConfig->get( 'VisualEditorTransclusionDialogInlineDescriptions' ),
+			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' )
+				&& $veConfig->get( 'VisualEditorCirrusSearchLookup' ),
 		];
 	}
 

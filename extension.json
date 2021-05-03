@@ -178,6 +178,10 @@
 		"VisualEditorTransclusionDialogInlineDescriptions": {
 			"description": "Temporary flag to enable inline parameter descriptions in the transclusion dialog.",
 			"value": false
+		},
+		"VisualEditorCirrusSearchLookup": {
+			"description": "Temporary feature flag to replace prefixsearch with fulltext CirrusSearch when searching for template names. (T274903)",
+			"value": false
 		}
 	},
 	"APIModules": {
@@ -2746,6 +2750,7 @@
 			"modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js",
 			"lib/ve/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
 			"modules/ve-mw/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
+			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateTitleInputWidget.test.js",
 			"lib/ve/tests/ce/ve.ce.TestRunner.js",
 			"lib/ve/tests/ce/ve.ce.imetests.test.js",
 			"lib/ve/tests/ce/imetests/backspace-chromium-ubuntu-none.js",
