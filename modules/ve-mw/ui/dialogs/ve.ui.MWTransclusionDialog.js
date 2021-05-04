@@ -20,6 +20,12 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 
 	// Properties
 	this.mode = null;
+
+	// Temporary override while feature flag is in place.
+	this.isBigger = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogInlineDescriptions;
+	if ( this.isBigger ) {
+		this.$element.addClass( 've-ui-mwTransclusionDialog-bigger' );
+	}
 };
 
 /* Inheritance */
@@ -383,6 +389,27 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			this.updateModeActionState();
 			this.setMode( 'auto' );
 		}, this );
+};
+
+/**
+ * @inheritdoc
+ *
+ * Temporary override to increase dialog size when a feature flag is enabled.
+ */
+ve.ui.MWTransclusionDialog.prototype.getSizeProperties = function () {
+	var size = this.getSize();
+
+	if ( this.isBigger ) {
+		// Note that the base class makes an assumption that `width` is in raw
+		// pixels, but no such assumption is made about the height.
+		if ( size === 'medium' ) {
+			return { width: 560, height: '90%' };
+		} else if ( size === 'large' ) {
+			return { width: 800, height: '90%' };
+		}
+	}
+
+	return ve.ui.MWTransclusionDialog.super.prototype.getSizeProperties.call( this );
 };
 
 /* Registration */

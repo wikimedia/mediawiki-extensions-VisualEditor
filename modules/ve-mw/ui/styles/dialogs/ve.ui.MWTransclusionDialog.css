@@ -69,3 +69,11 @@
 	-moz-transition: all 250ms ease-in-out;
 	transition: all 250ms ease-in-out;
 }
+
+.ve-ui-mwTransclusionDialog-bigger .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
+	width: 240px;
+}
+
+.ve-ui-mwTransclusionDialog-bigger .oo-ui-menuLayout > .oo-ui-menuLayout-content {
+	left: 240px;
+}
