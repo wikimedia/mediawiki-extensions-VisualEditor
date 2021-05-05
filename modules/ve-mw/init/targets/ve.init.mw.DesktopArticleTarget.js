@@ -770,7 +770,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// Set edit notices, will be shown after meta dialog.
 	// Make sure notices actually exists, because this might be a mode-switch and
 	// we've already removed it.
-	if ( editNotices.length ) {
+	if ( editNotices.length && actionTools.notices ) {
 		actionTools.notices.setNotices( editNotices );
 	} else if ( actionTools.notices ) {
 		actionTools.notices.destroy();
