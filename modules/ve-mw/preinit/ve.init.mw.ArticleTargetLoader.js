@@ -18,15 +18,13 @@
  * @singleton
  */
 ( function () {
-	var prefName, prefValue,
-		uri,
-		namespaces = mw.config.get( 'wgNamespaceIds' ),
-		conf = mw.config.get( 'wgVisualEditorConfig' ),
+	var conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
 		modules = [ 'ext.visualEditor.articleTarget' ]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
+	var uri;
 	try {
 		uri = new mw.Uri();
 	} catch ( e ) {
@@ -46,6 +44,7 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
+	var namespaces = mw.config.get( 'wgNamespaceIds' );
 	// Load signature tool if *any* namespace supports it.
 	// It will be shown disabled on namespaces that don't support it.
 	if (
@@ -57,8 +56,8 @@
 	}
 
 	// Add preference modules
-	for ( prefName in conf.preferenceModules ) {
-		prefValue = mw.user.options.get( prefName );
+	for ( var prefName in conf.preferenceModules ) {
+		var prefValue = mw.user.options.get( prefName );
 		// Check "0" (T89513)
 		if ( prefValue && prefValue !== '0' ) {
 			modules.push( conf.preferenceModules[ prefName ] );
@@ -124,8 +123,7 @@
 
 			if ( checkboxesDef ) {
 				Object.keys( checkboxesDef ).forEach( function ( name ) {
-					var $label, checkbox,
-						options = checkboxesDef[ name ],
+					var options = checkboxesDef[ name ],
 						accesskey = null,
 						title = null;
 
@@ -156,9 +154,9 @@
 					// The following messages are used here:
 					// * minoredit
 					// * watchthis
-					$label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
+					var $label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
 
-					checkbox = new OO.ui.CheckboxInputWidget( {
+					var checkbox = new OO.ui.CheckboxInputWidget( {
 						accessKey: accesskey,
 						selected: options.default,
 						// The following classes are used here:
@@ -202,24 +200,23 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
-			var sessionState, request, section, dataPromise, apiRequest, enableVisualSectionEditing;
-
 			options = options || {};
-			apiRequest = mode === 'source' ?
+			var apiRequest = mode === 'source' ?
 				this.requestWikitext.bind( this, pageName, options ) :
 				this.requestParsoidData.bind( this, pageName, options );
 
 			if ( options.sessionStore ) {
+				var sessionState;
 				try {
 					// ve.init.platform.getSessionObject is not available yet
 					sessionState = JSON.parse( mw.storage.session.get( 've-docstate' ) );
 				} catch ( e ) {}
 
 				if ( sessionState ) {
-					request = sessionState.request || {};
+					var request = sessionState.request || {};
 					// Check true section editing is in use
-					enableVisualSectionEditing = conf.enableVisualSectionEditing;
-					section = request.mode === 'source' || enableVisualSectionEditing === true || enableVisualSectionEditing === options.targetName ?
+					var enableVisualSectionEditing = conf.enableVisualSectionEditing;
+					var section = request.mode === 'source' || enableVisualSectionEditing === true || enableVisualSectionEditing === options.targetName ?
 						options.section : null;
 					// Check the requested page, mode and section match the stored one
 					if (
@@ -229,7 +226,7 @@
 						// NB we don't cache by oldid so that cached results can be recovered
 						// even if the page has been since edited
 					) {
-						dataPromise = $.Deferred().resolve( {
+						var dataPromise = $.Deferred().resolve( {
 							visualeditor: $.extend(
 								{ content: mw.storage.session.get( 've-dochtml' ) },
 								sessionState.response,
@@ -283,14 +280,13 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options, noRestbase, noMetadata ) {
-			var start, apiXhr, restbaseXhr, apiPromise, restbasePromise, dataPromise, pageHtmlUrl, headers, data, abort,
-				section = options.section !== undefined ? options.section : null,
+			var section = options.section !== undefined ? options.section : null,
 				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
 				switched = false,
 				fromEditedState = false;
 
 			options = options || {};
-			data = {
+			var data = {
 				action: 'visualeditor',
 				paction: useRestbase ? 'metadata' : 'parse',
 				page: pageName,
@@ -310,9 +306,10 @@
 				data.oldid = options.oldId;
 			}
 			// Load DOM
-			start = ve.now();
+			var start = ve.now();
 			ve.track( 'trace.apiLoad.enter', { mode: 'visual' } );
 
+			var apiXhr, apiPromise;
 			if ( !useRestbase && options.wikitext !== undefined ) {
 				// Non-RESTBase custom wikitext parse
 				data.paction = 'parse';
@@ -348,16 +345,18 @@
 				} );
 			}
 
+			var dataPromise, abort;
 			if ( useRestbase ) {
 				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );
 
-				headers = {
+				var headers = {
 					// Should be synchronised with ApiVisualEditor.php
 					Accept: 'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
 					'Accept-Language': mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
 
+				var restbaseXhr, pageHtmlUrl;
 				// Convert specified Wikitext to HTML
 				if (
 					// wikitext can be an empty string
@@ -402,7 +401,7 @@
 						dataType: 'text'
 					} );
 				}
-				restbasePromise = restbaseXhr.then(
+				var restbasePromise = restbaseXhr.then(
 					function ( response, status, jqxhr ) {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
 						ve.track( 'mwtiming.performance.system.restbaseLoad', {
@@ -485,10 +484,8 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestWikitext: function ( pageName, options ) {
-			var data, dataPromise;
-
 			options = options || {};
-			data = {
+			var data = {
 				action: 'visualeditor',
 				paction: 'wikitext',
 				page: pageName,
@@ -508,7 +505,7 @@
 				data.oldid = options.oldId;
 			}
 
-			dataPromise = new mw.Api().get( data );
+			var dataPromise = new mw.Api().get( data );
 			return dataPromise.then( function ( resp ) {
 				resp.veMode = 'source';
 				return resp;
