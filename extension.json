@@ -27,6 +27,9 @@
 		"MediaWiki": ">= 1.37.0"
 	},
 	"callback": "VisualEditorHooks::onRegistration",
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
 	"config": {
 		"VisualEditorAllowExternalLinkPaste": {
 			"value": false
@@ -191,7 +194,12 @@
 				"UserNameUtils"
 			]
 		},
-		"visualeditoredit": "ApiVisualEditorEdit"
+		"visualeditoredit": {
+			"class": "ApiVisualEditorEdit",
+			"services": [
+				"VisualEditorHookRunner"
+			]
+		}
 	},
 	"MessagesDirs": {
 		"VisualEditor": [
@@ -2831,6 +2839,9 @@
 	},
 	"SpecialPages": {
 		"CollabPad": "SpecialCollabPad"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\VisualEditor\\": "includes/"
 	},
 	"AutoloadClasses": {
 		"ApiParsoidTrait": "includes/ApiParsoidTrait.php",

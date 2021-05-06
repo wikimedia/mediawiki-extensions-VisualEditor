@@ -4,12 +4,14 @@
  *
  * @file
  * @ingroup Extensions
- * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2021 VisualEditor Team and others; see AUTHORS.txt
  * @license MIT
  */
 
+use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\User\UserIdentity;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -19,12 +21,18 @@ class ApiVisualEditorEdit extends ApiBase {
 	private const MAX_CACHE_RECENT = 2;
 	private const MAX_CACHE_TTL = 900;
 
+	/** @var VisualEditorHookRunner */
+	private $hookRunner;
+
 	/**
-	 * @inheritDoc
+	 * @param ApiMain $main
+	 * @param string $name Name of this module
+	 * @param VisualEditorHookRunner $hookRunner
 	 */
-	public function __construct( ApiMain $main, $name ) {
+	public function __construct( ApiMain $main, string $name, VisualEditorHookRunner $hookRunner ) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
+		$this->hookRunner = $hookRunner;
 	}
 
 	/**
@@ -446,8 +454,26 @@ class ApiVisualEditorEdit extends ApiBase {
 				$result['watchlistexpiry'] = $saveresult['edit']['watchlistexpiry'] ?? null;
 				$result['result'] = 'success';
 			}
+			$plugins = explode( '|', $this->getRequest()->getVal( 'plugins', '' ) );
+			$pluginData = [];
+			foreach ( $plugins as $plugin ) {
+				$pluginData[$plugin] = $this->getRequest()->getVal( 'data-' . $plugin );
+			}
+			$this->hookRunner->onVisualEditorApiVisualEditorEditPostSave(
+				new PageIdentityValue(
+					$title->getId(),
+					$title->getNamespace(),
+					$title->getDBkey(),
+					PageIdentityValue::LOCAL
+				),
+				$user,
+				$wikitext,
+				$params,
+				$pluginData,
+				$saveresult,
+				$result
+			);
 		}
-
 		// @phan-suppress-next-line PhanPossiblyUndeclaredVariable False positive
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
 	}
@@ -502,6 +528,16 @@ class ApiVisualEditorEdit extends ApiBase {
 			'tags' => [
 				ParamValidator::PARAM_ISMULTI => true,
 			],
+			'plugins' => [
+				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_TYPE => 'string',
+			],
+			// Additional data sent by the client. Not used directly in the ApiVisualEditorEdit workflows, but
+			// is passed alongside the other parameters to implementations of onApiVisualEditorEditPostSave
+			'data-{plugin}' => [
+				ParamValidator::PARAM_ISMULTI => true,
+				ApiBase::PARAM_TEMPLATE_VARS => [ 'plugin' => 'plugins' ]
+			]
 		];
 	}
 
