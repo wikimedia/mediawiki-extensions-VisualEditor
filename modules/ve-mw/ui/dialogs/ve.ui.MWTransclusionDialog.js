@@ -20,6 +20,8 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 
 	// Properties
 	this.mode = null;
+	this.closeButton = null;
+	this.backButton = null;
 
 	// Temporary override while feature flag is in place.
 	this.isBigger = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogInlineDescriptions;
@@ -46,6 +48,12 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
 		// HACK: Will be set later, but we want measurements to be accurate in the mean time, this
 		// will not be needed when T93290 is resolved
 		label: $( document.createTextNode( '\u00a0' ) )
+	},
+	{
+		action: 'back',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-goback' ),
+		modes: [ 'edit', 'insert' ],
+		flags: [ 'safe', 'back' ]
 	}
 ] );
 
@@ -177,6 +185,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 	single = this.isSingleTemplateTransclusion();
 	this.actions.setAbilities( { mode: single } );
+	this.updateActionSet();
 };
 
 /**
@@ -328,6 +337,12 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === 'back' ) {
+		return new OO.ui.Process( function () {
+			this.resetDialog();
+		}, this );
+	}
+
 	if ( action === 'mode' ) {
 		return new OO.ui.Process( function () {
 			this.setMode( this.mode === 'single' ? 'multiple' : 'single' );
@@ -335,6 +350,51 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 	}
 
 	return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
+};
+
+/**
+ * Update the widgets in the dialog's action bar.
+ */
+ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
+	var veConfig = mw.config.get( 'wgVisualEditorConfig' ),
+		backButton = this.actions.get( { flags: [ 'back' ] } ).pop();
+
+	if ( backButton ) {
+		// Todo: this won't be needed if https://gerrit.wikimedia.org/r/c/oojs/ui/+/686439 is resolved
+		this.backButton = backButton;
+	}
+
+	if ( veConfig.transclusionDialogBackButton ) {
+		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
+			parts = this.transclusionModel && this.transclusionModel.getParts(),
+			isInitialPage = parts && parts.length === 1 && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
+			isInsertMode = this.getMode() === 'insert';
+
+		if ( closeButton ) {
+			// Todo: this won't be needed if https://gerrit.wikimedia.org/r/c/oojs/ui/+/686439 is resolved
+			this.closeButton = closeButton;
+		}
+
+		this.closeButton.toggle( !isInsertMode || isInitialPage );
+		this.backButton.toggle( isInsertMode && !isInitialPage );
+	} else {
+		backButton.toggle( false );
+	}
+};
+
+/**
+ * Revert the dialog back to its initial state.
+ */
+ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
+	var target = this;
+	this.transclusionModel.reset();
+	this.bookletLayout.clearPages();
+	this.transclusionModel
+		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
+		.done( function () {
+			target.setMode( 'single' );
+			target.updateModeActionState();
+		} );
 };
 
 /**

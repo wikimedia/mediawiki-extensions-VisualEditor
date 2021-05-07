@@ -568,4 +568,14 @@
 		}
 	};
 
+	/**
+	 * Resets the model's state.
+	 */
+	ve.dm.MWTransclusionModel.prototype.reset = function () {
+		this.parts = [];
+		this.uid = 0;
+		this.requests = [];
+		this.queue = [];
+	};
+
 }() );
