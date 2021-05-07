@@ -23,6 +23,47 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	this.closeButton = null;
 	this.backButton = null;
 
+	this.resetConfirmation = new OO.ui.FieldsetLayout( {
+		classes: [ 'oo-ui-processDialog-errors' ]
+	} );
+	this.resetConfirmationTitle = new OO.ui.LabelWidget( {
+		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-title' )
+	} );
+	this.resetConfirmationMessage = new OO.ui.MessageWidget( {
+		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-message' ),
+		type: 'error'
+	} );
+	this.resetConfirmationCancelButton = new OO.ui.ButtonWidget( {
+		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-cancel' )
+	} );
+	this.resetConfirmationResetButton = new OO.ui.ButtonWidget( {
+		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-reset' ),
+		flags: [ 'primary', 'destructive' ]
+	} );
+
+	// Events
+	this.resetConfirmationCancelButton.connect( this, {
+		click: 'resetConfirmationHide'
+	} );
+	this.resetConfirmationResetButton.connect( this, {
+		click: 'resetConfirmationReset'
+	} );
+
+	// Initialization
+	this.resetConfirmation.addItems( [
+		new OO.ui.HorizontalLayout( {
+			items: [ this.resetConfirmationTitle ],
+			classes: [ 'oo-ui-processDialog-errors-title' ]
+		} ),
+		this.resetConfirmationMessage,
+		new OO.ui.HorizontalLayout( {
+			items: [ this.resetConfirmationCancelButton, this.resetConfirmationResetButton ],
+			classes: [ 'oo-ui-processDialog-errors-actions' ]
+		} )
+	] );
+	this.resetConfirmation.toggle( false );
+	this.$content.append( this.resetConfirmation.$element );
+
 	// Temporary override while feature flag is in place.
 	this.isBigger = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogInlineDescriptions;
 	if ( this.isBigger ) {
@@ -338,6 +379,15 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'back' ) {
+		if ( this.isEmpty() ) {
+			return this.getActionProcess( 'reset' );
+		}
+		return new OO.ui.Process( function () {
+			this.resetConfirmation.toggle( true );
+		}, this );
+	}
+
+	if ( action === 'reset' ) {
 		return new OO.ui.Process( function () {
 			this.resetDialog();
 		}, this );
@@ -380,6 +430,21 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 	} else {
 		backButton.toggle( false );
 	}
+};
+
+/**
+ * Dismisses the reset confirmation.
+ */
+ve.ui.MWTransclusionDialog.prototype.resetConfirmationHide = function () {
+	this.resetConfirmation.toggle( false );
+};
+
+/**
+ * Dismisses the reset confirmation and runs the reset action.
+ */
+ve.ui.MWTransclusionDialog.prototype.resetConfirmationReset = function () {
+	this.resetConfirmationHide();
+	this.executeAction( 'reset' );
 };
 
 /**
