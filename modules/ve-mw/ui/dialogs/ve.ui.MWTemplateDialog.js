@@ -275,7 +275,7 @@ ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
  */
 ve.ui.MWTemplateDialog.prototype.getTemplatePartLabel = function ( part ) {
 	return part instanceof ve.dm.MWTemplateModel ?
-		part.getSpec().getLabel() : ve.msg( 'visualeditor-dialog-transclusion-placeholder' );
+		part.getSpec().getLabel() : ve.msg( 'visualeditor-dialog-template-insert' );
 };
 
 /**
