@@ -81,7 +81,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		items: [ addTemplateActionFieldLayout ]
 	};
 	// Temporary switch for verbose template search.
-	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
+	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
 			label: ve.msg( 'visualeditor-dialog-transclusion-template-search' ),
 			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
@@ -117,7 +117,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 			.setFlags( [ 'placeholder' ] )
 			.setLabel( ve.msg(
 				// Temporary switch for verbose template search.
-				mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ?
+				mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ?
 					'visualeditor-dialog-transclusion-template-search' :
 					'visualeditor-dialog-transclusion-placeholder'
 			) );

@@ -182,8 +182,8 @@
 			"description": "Temporary flag to enable inline parameter descriptions in the transclusion dialog.",
 			"value": false
 		},
-		"VisualEditorCirrusSearchLookup": {
-			"description": "Temporary feature flag to replace prefixsearch with fulltext CirrusSearch when searching for template names. (T274903)",
+		"VisualEditorTemplateSearchImprovements": {
+			"description": "Temporary feature flag to enable various changes around searching for template names. (T271802)",
 			"value": false
 		}
 	},

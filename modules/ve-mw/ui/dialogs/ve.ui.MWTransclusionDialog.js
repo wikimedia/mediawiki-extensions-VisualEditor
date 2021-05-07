@@ -346,7 +346,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		icon: 'puzzle',
 		title: ve.msg(
 			// Temporary switch for verbose template search.
-			mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ?
+			mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ?
 				'visualeditor-dialog-transclusion-template-search' :
 				'visualeditor-dialog-transclusion-add-template'
 		)
