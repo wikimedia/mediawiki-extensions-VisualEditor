@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Elitre",
 			"Elitre82",
 			"Gazeb",
@@ -69,7 +70,7 @@
 	"visualeditor-editconflict": "Li canciamenti ca facisti nun ponnu siri sarbati a causa di nu cunflittu di edizzioni. Vuoi{{GENDER:|}} arrisòrviri lu cunflittu manuarmenti?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|nutifica|nutifichi}}",
 	"visualeditor-editsummary": "Dici so cchi canciasti",
-	"visualeditor-formatdropdown-format-mw-heading1": "Titulu di la paggina",
+	"visualeditor-formatdropdown-format-mw-heading1": "Titulu di la pàggina",
 	"visualeditor-formatdropdown-format-mw-heading2": "Ntistazzioni",
 	"visualeditor-formatdropdown-format-mw-heading3": "Suttatìtulu 1",
 	"visualeditor-formatdropdown-format-mw-heading4": "Suttatìtulu 2",
