@@ -28,6 +28,11 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	if ( this.isBigger ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-bigger' );
 	}
+
+	// Temporary change bolding while feature flag is in place.
+	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
+		this.$element.addClass( 've-ui-mwTransclusionDialog-enhancedSearch' );
+	}
 };
 
 /* Inheritance */

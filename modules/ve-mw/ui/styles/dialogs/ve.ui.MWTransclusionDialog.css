@@ -38,6 +38,14 @@
 	white-space: nowrap;
 }
 
+.ve-ui-mwTransclusionDialog-enhancedSearch .mw-widget-titleWidget-menu-withDescriptions .mw-widget-titleOptionWidget .oo-ui-labelElement-label {
+	font-weight: bold;
+}
+
+.ve-ui-mwTransclusionDialog-enhancedSearch .mw-widget-titleWidget-menu-withDescriptions .mw-widget-titleOptionWidget .oo-ui-labelElement-label .oo-ui-labelElement-label-highlight {
+	font-weight: normal;
+}
+
 .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
 	opacity: 0.51;
 }
