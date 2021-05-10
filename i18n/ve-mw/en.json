@@ -200,7 +200,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Are you sure you want to continue without filling the $1 {{PLURAL:$2|field|fields}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Hide options",
 	"visualeditor-dialog-transclusion-title": "Transclusion",
-	"visualeditor-dialog-transclusion-template-search": "Template Search",
+	"visualeditor-dialog-transclusion-template-search": "Template search",
 	"visualeditor-dialog-transclusion-template-search-help": "Find the template you want to insert by searching for an identifying keyword. Templates that have descriptions are more likely to work well with this editor (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Template fields setup menu",
 	"visualeditor-dialogbutton-media-tooltip": "Images and media",
