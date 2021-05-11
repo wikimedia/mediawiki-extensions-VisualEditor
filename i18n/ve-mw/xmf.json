@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"David1010",
+			"Narazeni",
 			"Silovan"
 		]
 	},
@@ -131,6 +132,7 @@
 	"visualeditor-dialog-transclusion-options": "პარამეტრეფი",
 	"visualeditor-dialog-transclusion-param-default": "დაჭყაფური: $1",
 	"visualeditor-dialog-transclusion-param-example": "შანულობაშ სამანგა: $1",
+	"visualeditor-dialog-transclusion-param-example-long": "სამანგა: $1",
 	"visualeditor-dialog-transclusion-param-info": "ველიშ ეჭარუა",
 	"visualeditor-dialog-transclusion-param-info-missing": "ეჭარუა ვა რე",
 	"visualeditor-dialog-transclusion-placeholder": "თანგიშ გეძინა",
@@ -145,6 +147,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "მოთხილი {{PLURAL:$1|ვე|ვე}} დინაფილი რე",
 	"visualeditor-dialog-transclusion-single-mode": "პარამეტრეფიშ ტობინაფა",
 	"visualeditor-dialog-transclusion-title": "ტრანსკლუზია",
+	"visualeditor-dialog-transclusion-template-search": "თარგიშ გორუა",
 	"visualeditor-dialogbutton-media-tooltip": "მედიაფაილი",
 	"visualeditor-dialogbutton-meta-tooltip": "ხასჷლაშ პარამეტრეფი",
 	"visualeditor-dialogbutton-template-tooltip": "თანგი",
@@ -158,6 +161,8 @@
 	"visualeditor-editnotices-tooltip": "რედაქტირაფეფიშ გინაფეფი",
 	"visualeditor-editsummary": "გეჭარით თქვან მიშნაღელი თირაფეფი",
 	"visualeditor-educationpopup-dismiss": "ქიგებგი",
+	"visualeditor-expandable-less": "ნორკე",
+	"visualeditor-expandable-more": "უმოსი",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "ხასჷლაშ დუდჯოხო",
 	"visualeditor-formatdropdown-format-mw-heading2": "დუდჯოხო",

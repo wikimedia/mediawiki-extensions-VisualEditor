@@ -203,6 +203,7 @@
 	"visualeditor-dialog-transclusion-options": "Opciones",
 	"visualeditor-dialog-transclusion-param-default": "Predeterminado: $1",
 	"visualeditor-dialog-transclusion-param-example": "por ejemplo, $1",
+	"visualeditor-dialog-transclusion-param-example-long": "Ejemplo: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descripción del campo",
 	"visualeditor-dialog-transclusion-param-info-missing": "El campo no tiene ninguna descripción",
 	"visualeditor-dialog-transclusion-placeholder": "Añadir una plantilla",
