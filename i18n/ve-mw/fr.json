@@ -240,6 +240,7 @@
 	"visualeditor-dialog-transclusion-single-mode": "Masquer les options",
 	"visualeditor-dialog-transclusion-title": "Insertion d’un modèle",
 	"visualeditor-dialog-transclusion-template-search": "Recherche de modèle",
+	"visualeditor-dialog-transclusion-template-search-help": "Trouver le modèle que vous voulez insérer en cherchant un mot-clé identifiant. Les modèles qui ont des descriptions sont plus susceptibles de bien fonctionner avec cet éditeur (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu de configuration des champs du modèle",
 	"visualeditor-dialogbutton-media-tooltip": "Images et médias",
 	"visualeditor-dialogbutton-meta-tooltip": "Paramètres de la page",
