@@ -234,7 +234,11 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
 				this.$content.toggleClass( modeCssClasses[ name ], name === mode );
 			}
 		}
-		this.setSize( single ? 'medium' : 'large' );
+		if ( this.isBigger ) {
+			this.setSize( 'larger' );
+		} else {
+			this.setSize( single ? 'medium' : 'large' );
+		}
 		this.bookletLayout.toggleOutline( !single );
 		this.updateTitle();
 		this.updateModeActionState();
@@ -402,19 +406,13 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
  * Temporary override to increase dialog size when a feature flag is enabled.
  */
 ve.ui.MWTransclusionDialog.prototype.getSizeProperties = function () {
-	var size = this.getSize();
+	var sizeProps = ve.ui.MWTransclusionDialog.super.prototype.getSizeProperties.call( this );
 
 	if ( this.isBigger ) {
-		// Note that the base class makes an assumption that `width` is in raw
-		// pixels, but no such assumption is made about the height.
-		if ( size === 'medium' ) {
-			return { width: 560, height: '90%' };
-		} else if ( size === 'large' ) {
-			return { width: 800, height: '90%' };
-		}
+		sizeProps = ve.extendObject( { height: '90%' }, sizeProps );
 	}
 
-	return ve.ui.MWTransclusionDialog.super.prototype.getSizeProperties.call( this );
+	return sizeProps;
 };
 
 /* Registration */
