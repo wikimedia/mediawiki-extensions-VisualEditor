@@ -20,7 +20,8 @@
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	var linkData, messageKey,
-		title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null;
+		title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null,
+		veConfig = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -104,7 +105,10 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.addClass( 've-ui-mwTemplatePage' )
 		.append( this.infoFieldset.$element );
 	if ( !config.isReadOnly ) {
-		this.$element.append( this.removeButton.$element, this.$more );
+		if ( !veConfig.transclusionDialogNewSidebar ) {
+			this.$element.append( this.removeButton.$element );
+		}
+		this.$element.append( this.$more );
 	}
 };
 
