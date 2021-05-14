@@ -82,8 +82,15 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	};
 	// Temporary switch for verbose template search.
 	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
+		var dialogTitle = this.placeholder.getTransclusion().parts.length === 1 ?
+			'visualeditor-dialog-transclusion-template-search' :
+			'visualeditor-dialog-transclusion-add-template';
+
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
-			label: ve.msg( 'visualeditor-dialog-transclusion-template-search' ),
+			// The following messages are used here:
+			// * visualeditor-dialog-transclusion-template-search
+			// * visualeditor-dialog-transclusion-add-template
+			label: ve.msg( dialogTitle ),
 			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
 			helpInline: true
 		} );
@@ -109,18 +116,21 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 	// Parent method
 	ve.ui.MWTemplatePlaceholderPage.super.prototype.setOutlineItem.apply( this, arguments );
 
+	var dialogTitle = ( this.placeholder.getTransclusion().parts.length === 1 &&
+		mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) ?
+		'visualeditor-dialog-transclusion-template-search' :
+		'visualeditor-dialog-transclusion-add-template';
+
 	if ( this.outlineItem ) {
 		this.outlineItem
 			.setIcon( 'puzzle' )
 			.setMovable( true )
 			.setRemovable( true )
 			.setFlags( [ 'placeholder' ] )
-			.setLabel( ve.msg(
-				// Temporary switch for verbose template search.
-				mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ?
-					'visualeditor-dialog-transclusion-template-search' :
-					'visualeditor-dialog-transclusion-placeholder'
-			) );
+			// The following messages are used here:
+			// * visualeditor-dialog-transclusion-template-search
+			// * visualeditor-dialog-transclusion-add-template
+			.setLabel( ve.msg( dialogTitle ) );
 	}
 };
 

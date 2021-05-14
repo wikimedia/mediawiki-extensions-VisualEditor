@@ -344,12 +344,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'puzzle',
-		title: ve.msg(
-			// Temporary switch for verbose template search.
-			mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ?
-				'visualeditor-dialog-transclusion-template-search' :
-				'visualeditor-dialog-transclusion-add-template'
-		)
+		title: ve.msg( 'visualeditor-dialog-transclusion-add-template' )
 	} );
 	this.addContentButton = new OO.ui.ButtonWidget( {
 		framed: false,
