@@ -182,6 +182,10 @@
 			"description": "Temporary flag to enable inline parameter descriptions in the transclusion dialog.",
 			"value": false
 		},
+		"VisualEditorTransclusionDialogNewSidebar": {
+			"description": "Temporary flag to enable the new sidebar in the transclusion dialog.",
+			"value": false
+		},
 		"VisualEditorTemplateSearchImprovements": {
 			"description": "Temporary feature flag to enable various changes around searching for template names. (T271802)",
 			"value": false
