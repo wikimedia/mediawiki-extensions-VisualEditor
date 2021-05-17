@@ -86,3 +86,10 @@ ve.dm.MWTransclusionPartModel.prototype.getWikitext = function () {
 ve.dm.MWTransclusionPartModel.prototype.addPromptedParameters = function () {
 	return 0;
 };
+
+/**
+ * @return {boolean} True if there is no user input
+ */
+ve.dm.MWTransclusionPartModel.prototype.isEmpty = function () {
+	return true;
+};

@@ -224,7 +224,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( nam
  * @return {string} Default parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
-	return this.params[ name ].default;
+	var param = this.params[ name ];
+	return param ? param.default : '';
 };
 
 /**
@@ -245,7 +246,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
  * @return {string} Auto-value for the parameter
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
-	return this.params[ name ].autovalue;
+	var param = this.params[ name ];
+	return param ? param.autovalue : '';
 };
 
 /**

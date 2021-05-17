@@ -398,6 +398,15 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 };
 
 /**
+ * @return {boolean} False if any transclusion part contains non-default input
+ */
+ve.ui.MWTransclusionDialog.prototype.isEmpty = function () {
+	return this.transclusionModel.getParts().every( function ( part ) {
+		return part.isEmpty();
+	} );
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.initialize = function () {

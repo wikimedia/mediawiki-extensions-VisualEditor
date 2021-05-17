@@ -67,3 +67,10 @@ ve.dm.MWTransclusionContentModel.prototype.serialize = function () {
 ve.dm.MWTransclusionContentModel.prototype.getWikitext = function () {
 	return this.value;
 };
+
+/**
+ * @inheritDoc
+ */
+ve.dm.MWTransclusionContentModel.prototype.isEmpty = function () {
+	return this.value === '';
+};

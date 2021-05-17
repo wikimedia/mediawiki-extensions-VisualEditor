@@ -391,3 +391,23 @@ ve.dm.MWTemplateModel.prototype.getWikitext = function () {
 
 	return '{{' + wikitext + '}}';
 };
+
+/**
+ * @inheritDoc
+ */
+ve.dm.MWTemplateModel.prototype.isEmpty = function () {
+	var params = this.getParameters();
+
+	return Object.keys( params ).every( function ( name ) {
+		// There is always an unnamed placeholder at the start
+		if ( !name ) {
+			return true;
+		}
+
+		var param = params[ name ];
+		var value = param.getValue();
+		// Check that the value has not been set, or is indistinguishable from
+		// the automatically-set value.  See `MWParameterModel.getValue`
+		return value === '' || value === param.getAutoValue();
+	} );
+};
