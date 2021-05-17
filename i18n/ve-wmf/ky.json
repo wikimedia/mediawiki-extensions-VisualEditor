@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bosogo",
 			"Chorobek",
 			"George Animal",
 			"Nrowe",
@@ -8,5 +9,5 @@
 			"Викиней"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Визуалдык редактор]]"
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Көрсөтмөлүү оңдоо]]"
 }
