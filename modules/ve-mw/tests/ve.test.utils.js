@@ -17,6 +17,7 @@
 	MWDummyTarget.prototype.getContentApi = () => new mw.Api();
 	MWDummyTarget.prototype.createSurface = ve.init.mw.Target.prototype.createSurface;
 	MWDummyTarget.prototype.getSurfaceConfig = ve.init.mw.Target.prototype.getSurfaceConfig;
+	MWDummyTarget.prototype.getSurfaceClasses = ve.init.mw.Target.prototype.getSurfaceClasses;
 	// Copy import rules from mw target, for paste tests.
 	MWDummyTarget.static.importRules = ve.init.mw.Target.static.importRules;
 

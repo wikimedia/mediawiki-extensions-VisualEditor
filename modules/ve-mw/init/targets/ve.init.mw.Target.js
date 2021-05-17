@@ -13,8 +13,11 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @cfg {string[]} [surfaceClasses] Surface classes to apply
  */
 ve.init.mw.Target = function VeInitMwTarget( config ) {
+	this.surfaceClasses = config.surfaceClasses || [];
+
 	// Parent constructor
 	ve.init.mw.Target.super.call( this, config );
 
@@ -272,6 +275,15 @@ ve.init.mw.Target.prototype.getHtml = function ( newDoc, oldDoc ) {
 ve.init.mw.Target.prototype.track = function () {};
 
 /**
+ * Get a list of CSS classes to be added to surfaces, and target widget surfaces
+ *
+ * @return {string[]} CSS classes
+ */
+ve.init.mw.Target.prototype.getSurfaceClasses = function () {
+	return this.surfaceClasses;
+};
+
+/**
  * @inheritdoc
  */
 ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
@@ -279,7 +291,8 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 		// Reset to visual mode for target widgets
 		modes: [ 'visual' ],
 		defaultMode: 'visual',
-		toolbarGroups: this.toolbarGroups
+		toolbarGroups: this.toolbarGroups,
+		surfaceClasses: this.getSurfaceClasses()
 	}, config ) );
 };
 
@@ -309,11 +322,13 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
 	// If we're not asking for a specific mode's config, use the default mode.
 	config = ve.extendObject( { mode: this.defaultMode }, config );
+	// eslint-disable-next-line mediawiki/class-doc
 	return ve.init.mw.Target.super.prototype.getSurfaceConfig.call( this, ve.extendObject( {
 		// Provide the wikitext versions of the registries, if we're using source mode
 		commandRegistry: config.mode === 'source' ? ve.ui.wikitextCommandRegistry : ve.ui.commandRegistry,
 		sequenceRegistry: config.mode === 'source' ? ve.ui.wikitextSequenceRegistry : ve.ui.sequenceRegistry,
-		dataTransferHandlerFactory: config.mode === 'source' ? ve.ui.wikitextDataTransferHandlerFactory : ve.ui.dataTransferHandlerFactory
+		dataTransferHandlerFactory: config.mode === 'source' ? ve.ui.wikitextDataTransferHandlerFactory : ve.ui.dataTransferHandlerFactory,
+		classes: this.getSurfaceClasses()
 	}, config ) );
 };
 
