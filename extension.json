@@ -2147,7 +2147,11 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js",
-				"modules/ve-mw/ui/contextitems/ve.ui.MWDefinedTransclusionContextItem.js"
+				"modules/ve-mw/ui/contextitems/ve.ui.MWDefinedTransclusionContextItem.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineCheckboxListWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineTemplateWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineContainerWidget.js"
 			],
 			"styles": [
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
@@ -2827,7 +2831,8 @@
 			"lib/ve/src/ve.freeze.js",
 			"lib/ve/rebaser/src/dm/ve.dm.RebaseServer.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseClient.js",
-			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js"
+			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js",
+			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxWidget.test.js"
 		],
 		"dependencies": [
 			"unicodejs",

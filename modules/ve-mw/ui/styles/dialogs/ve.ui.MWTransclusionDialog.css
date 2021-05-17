@@ -97,3 +97,20 @@
 .ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
 	display: inline-block;
 }
+
+.ve-ui-mwTemplateDialog .ve-ui-mwTemplateDialogOutlineTemplate {
+	padding: 2px;
+}
+
+.ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem {
+	display: block;
+	overflow: hidden;
+	right: 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 2px;
+}
+
+.ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem .oo-ui-labelWidget {
+	display: inline;
+}
