@@ -1608,7 +1608,9 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
 	// * mw-textarea-proteced
 	// * mw-textarea-cproteced
 	// * mw-textarea-sproteced
-	surface.$element.addClass( this.protectedClasses );
+	surface.$element
+		.addClass( this.protectedClasses )
+		.addClass( 'mw-body-content' );
 
 	return surface;
 };
