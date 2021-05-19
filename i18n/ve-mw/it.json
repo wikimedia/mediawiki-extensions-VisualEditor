@@ -214,6 +214,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Sei sicuro di voler continuare senza valorizzare {{PLURAL:$2|il campo|i campi}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Nascondi opzioni",
 	"visualeditor-dialog-transclusion-title": "Inclusione",
+	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Annulla",
+	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Rimuovi template",
 	"visualeditor-dialogbutton-media-tooltip": "Immagini e file multimediali",
 	"visualeditor-dialogbutton-meta-tooltip": "Impostazioni pagina",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
