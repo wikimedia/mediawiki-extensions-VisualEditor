@@ -1,7 +1,7 @@
 ( function () {
 	function enableCirrusSearchLookup( enabled ) {
 		const config = mw.config.get( 'wgVisualEditorConfig' );
-		config.cirrusSearchLookup = enabled;
+		config.cirrusSearchLookup = enabled !== false;
 		mw.config.set( 'wgVisualEditorConfig', config );
 	}
 
@@ -29,7 +29,7 @@
 	} );
 
 	QUnit.test( 'CirrusSearch: all API parameters', ( assert ) => {
-		enableCirrusSearchLookup( true );
+		enableCirrusSearchLookup();
 		const widget = new ve.ui.MWTemplateTitleInputWidget(),
 			query = 'a',
 			apiParams = widget.getApiParams( query );
@@ -39,6 +39,7 @@
 			generator: 'search',
 			gsrlimit: 10,
 			gsrnamespace: 10,
+			gsrprop: 'redirecttitle',
 			gsrsearch: 'a*',
 			ppprop: 'disambiguation',
 			prop: [ 'info', 'pageprops' ],
@@ -46,8 +47,16 @@
 		} );
 	} );
 
+	QUnit.test( 'CirrusSearch: showRedirectTargets disabled', ( assert ) => {
+		enableCirrusSearchLookup();
+		const widget = new ve.ui.MWTemplateTitleInputWidget( { showRedirectTargets: false } ),
+			apiParams = widget.getApiParams();
+
+		assert.notOk( 'gsrprop' in apiParams );
+	} );
+
 	QUnit.test( 'CirrusSearch: prefixsearch behavior', ( assert ) => {
-		enableCirrusSearchLookup( true );
+		enableCirrusSearchLookup();
 		const widget = new ve.ui.MWTemplateTitleInputWidget();
 
 		[
@@ -76,5 +85,32 @@
 				'Searching for ' + data.query
 			);
 		} );
+	} );
+
+	QUnit.test( 'CirrusSearch: redirect is forwarded to the TitleOptionWidget', ( assert ) => {
+		enableCirrusSearchLookup();
+		const widget = new ve.ui.MWTemplateTitleInputWidget(),
+			originalData = { redirecttitle: 'Template:From' },
+			data = widget.getOptionWidgetData( 'Template:To', { originalData } );
+
+		assert.strictEqual( data.redirecttitle, 'Template:From' );
+	} );
+
+	QUnit.test( 'CirrusSearch: redirect appears in the description', ( assert ) => {
+		enableCirrusSearchLookup();
+		const widget = new ve.ui.MWTemplateTitleInputWidget();
+
+		let option = widget.createOptionWidget( { redirecttitle: 'Template:From' } );
+		assert.strictEqual(
+			option.$element.find( '.ve-ui-mwTemplateTitleInputWidget-redirectedfrom' ).text(),
+			'(redirectedfrom: From)'
+		);
+
+		widget.relative = false;
+		option = widget.createOptionWidget( { redirecttitle: 'Template:From' } );
+		assert.strictEqual(
+			option.$element.find( '.ve-ui-mwTemplateTitleInputWidget-redirectedfrom' ).text(),
+			'(redirectedfrom: Template:From)'
+		);
 	} );
 }() );

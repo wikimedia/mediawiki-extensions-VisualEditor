@@ -48,17 +48,22 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 
 	// TODO: This should stay as a feature flag for 3rd-parties to fallback to prefixsearch
 	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
-		params.generator = 'search';
-		params.gsrsearch = params.gpssearch;
+		ve.extendObject( params, {
+			generator: 'search',
+			gsrsearch: params.gpssearch,
+			// gsrsort: 'incoming_links_desc',
+			gsrnamespace: params.gpsnamespace,
+			gsrlimit: params.gpslimit
+		} );
 		// Searching for "foo *" is pointless. Don't normalize it to "foo*" either but leave it
 		// unchanged. This makes the word "foo" behave the same in "foo " and "foo bar". In both
 		// cases it's not considered a prefix any more.
 		if ( !/\s$/.test( params.gsrsearch ) ) {
 			params.gsrsearch += '*';
 		}
-		// params.gsrsort = 'incoming_links_desc';
-		params.gsrnamespace = params.gpsnamespace;
-		params.gsrlimit = params.gpslimit;
+		if ( this.showRedirectTargets ) {
+			params.gsrprop = 'redirecttitle';
+		}
 		delete params.gpssearch;
 		delete params.gpsnamespace;
 		delete params.gpslimit;
@@ -168,10 +173,38 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 		.promise( { abort: function () {} } );
 };
 
-// @inheritdoc mw.widgets.TitleInputWidget
-ve.ui.MWTemplateTitleInputWidget.prototype.getOptionWidgetData = function ( title ) {
+// @inheritdoc mw.widgets.TitleWidget
+ve.ui.MWTemplateTitleInputWidget.prototype.getOptionWidgetData = function ( title, data ) {
 	return ve.extendObject(
 		ve.ui.MWTemplateTitleInputWidget.super.prototype.getOptionWidgetData.apply( this, arguments ),
-		{ description: this.descriptions[ title ] }
+		{
+			description: this.descriptions[ title ],
+			redirecttitle: data.originalData.redirecttitle
+		}
 	);
+};
+
+// @inheritdoc mw.widgets.TitleWidget
+ve.ui.MWTemplateTitleInputWidget.prototype.createOptionWidget = function ( data ) {
+	var widget = ve.ui.MWTemplateTitleInputWidget.super.prototype.createOptionWidget.call( this, data );
+
+	if ( data.redirecttitle ) {
+		// Same conditions as in mw.widgets.TitleWidget.getOptionWidgetData()
+		var title = new mw.Title( data.redirecttitle ),
+			text = this.namespace !== null && this.relative ?
+				title.getRelativeText( this.namespace ) :
+				data.redirecttitle;
+
+		var $desc = widget.$element.find( '.mw-widget-titleOptionWidget-description' );
+		if ( !$desc.length ) {
+			$desc = $( '<span>' )
+				.addClass( 'mw-widget-titleOptionWidget-description' )
+				.appendTo( widget.$element );
+		}
+		$desc.prepend( $( '<div>' )
+			.addClass( 've-ui-mwTemplateTitleInputWidget-redirectedfrom' )
+			.text( mw.msg( 'redirectedfrom', text ) ) );
+	}
+
+	return widget;
 };

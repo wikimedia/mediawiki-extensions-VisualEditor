@@ -46,6 +46,10 @@
 	font-weight: normal;
 }
 
+.ve-ui-mwTemplateTitleInputWidget-redirectedfrom {
+	font-style: italic;
+}
+
 .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
 	opacity: 0.51;
 }
