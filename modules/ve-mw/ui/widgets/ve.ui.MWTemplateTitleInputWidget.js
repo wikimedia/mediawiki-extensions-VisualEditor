@@ -80,7 +80,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				redirects = ( response.query && response.query.redirects ) || {},
 				origPages = ( response.query && response.query.pages ) || {},
 				newPages = [],
-				titles = [];
+				titles;
 
 			// Build a new array to replace response.query.pages, ensuring everything goes into
 			// the order defined by the page's index key, instead of whatever random order the
