@@ -105,7 +105,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.addClass( 've-ui-mwTemplatePage' )
 		.append( this.infoFieldset.$element );
 	if ( !config.isReadOnly ) {
-		if ( !veConfig.transclusionDialogNewSidebar ) {
+		if ( !veConfig.transclusionDialogBackButton ) {
 			this.$element.append( this.removeButton.$element );
 		}
 		this.$element.append( this.$more );

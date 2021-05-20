@@ -68,7 +68,7 @@ ve.ui.MWTransclusionContextItem.static.isCompatibleWith =
  */
 ve.ui.MWTransclusionContextItem.prototype.isDeletable = function () {
 	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
-	return veConfig.transclusionDialogNewSidebar;
+	return veConfig.transclusionDialogBackButton;
 };
 
 /**
