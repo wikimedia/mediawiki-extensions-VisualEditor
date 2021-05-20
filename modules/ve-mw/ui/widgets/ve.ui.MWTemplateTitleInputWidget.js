@@ -147,8 +147,27 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				return response;
 			}
 
-			// TODO: Do an extra HTTP request to guarantee exact matches are in the list
-			return response;
+			return widget.getApi().get( {
+				// Can't use a direct lookup by title because we need this to be case-insensitive
+				action: 'opensearch',
+				format: 'json',
+				search: query,
+				namespace: widget.namespace,
+				limit: 1,
+				formatversion: 2
+			} ).then( function ( openSearchResult ) {
+				// OpenSearch will perform a prefix search, but we only care about exact matches
+				var titles = openSearchResult[ 1 ].filter( function ( searchResult ) {
+					return searchResult.toLowerCase() === lowerTitle;
+				} );
+				for ( i = titles.length; i--; ) {
+					unshiftPages( response, {
+						ns: widget.namespace,
+						title: titles[ i ]
+					} );
+				}
+				return response;
+			} ).promise( { abort: function () {} } );
 		} )
 		.promise( { abort: function () {} } );
 
