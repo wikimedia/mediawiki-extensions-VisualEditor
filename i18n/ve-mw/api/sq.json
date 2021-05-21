@@ -7,11 +7,14 @@
 		]
 	},
 	"apierror-visualeditor-difffailed": "Diff-i dështoi",
+	"apierror-visualeditor-docserver-http-error": "Gabim në lidhjen me shërbyesin Parsoid/RESTBase: $1",
+	"apierror-visualeditor-docserver-http": "Gabim në lidhjen me shërbyesin Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService për shërbyesin e dokumenteve s’është përcaktuar; shihni https://www.mediawiki.org/wiki/Extension:VisualEditor",
-	"apierror-visualeditor-docserver": "Gabim në lidhjen me shërbyesin Parsoid/RESTbase",
+	"apierror-visualeditor-docserver": "Gabim në lidhjen me shërbyesin Parsoid/RESTbase (s’ka përgjigje)",
 	"apierror-visualeditor-latestnotfound": "S’u gjet dot rishikimi më i ri për titullin",
 	"apihelp-visualeditor-description": "Jep kod HTML5 për një faqe prej shërbimit Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Kur bëni ruajtje, vendoseni këtë sa vula kohore e rishikimit që po përpunohej. Përdoret për të pikasur përplasje përpunimesh.",
+	"apihelp-visualeditor-param-badetag": "Nëse kërkesa ndaj RESTBase u përgjigj me një Etag në dukje të pavlefshëm, jepeni këtu për qëllime regjistrimi.",
 	"apihelp-visualeditor-param-cachekey": "Për kryerje serializimi ose diff-i, përdorni përfundimin e një kërkese serializeforcache të mëparshme për këtë kyç. Anashkalon $1html.",
 	"apihelp-visualeditor-param-editintro": "Që të shtoni shënime, përpunoni hyrjen.",
 	"apihelp-visualeditor-param-etag": "ETag për t’u dërguar.",
@@ -31,6 +34,8 @@
 	"apihelp-visualeditoredit-param-cachekey": "Përdorni përfundimin e një kërkese serializeforcache të mëparshme me këtë kyç. Anashkalon $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Captcha ID (kur ruajtja bëhet përmes një përgjigjeje për captcha-n)",
 	"apihelp-visualeditoredit-param-captchaword": "Përgjigjuni captcha-s (kur ruajtja bëhet përmes një përgjigjeje për captcha-n)",
+	"apihelp-visualeditoredit-param-plugins": "Shtojca të përshoqëruara me kërkesën ndaj API-t",
+	"apihelp-visualeditoredit-param-data-{plugin}": "Të dhëna arbitrare të dërguara nga një shtojcë me kërkesën ndaj API-t.",
 	"apihelp-visualeditoredit-param-etag": "ETag për t’u dërguar.",
 	"apihelp-visualeditoredit-param-html": "HTML që duhet dërguar te Parsoid-i për të marrë tekst wiki.",
 	"apihelp-visualeditoredit-param-minor": "I vini shenjë për përpunim të vockël.",
@@ -42,6 +47,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titull për ndarje të re.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kur bëni ruajtje, vendoseni këtë sa vula kohore e çastit kur u ngarkua faqja. Përdoret për të pikasur përplasje përpunimesh.",
 	"apihelp-visualeditoredit-param-summary": "Përmbledhje e redaktimit.",
+	"apihelp-visualeditoredit-param-tags": "Ndryshoni etiketa që aplikohen te përpunimi.",
 	"apihelp-visualeditoredit-param-wikitext": "Teksti wiki me të cilin të veprohet.",
 	"apihelp-visualeditoredit-summary": "Ruani një faqe HTML5 në MediaWiki (e shndërruar në tekst wiki përmes shërbimit Parsoid)."
 }
