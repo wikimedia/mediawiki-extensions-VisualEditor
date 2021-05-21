@@ -77,7 +77,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	return promise
 		.then( function ( response ) {
 			var xhr, pageId, redirIndex,
-				redirects = ( response.query && response.query.redirects ) || {},
+				redirects = ( response.query && response.query.redirects ) || [],
 				origPages = ( response.query && response.query.pages ) || {},
 				newPages = [],
 				titles = [];
