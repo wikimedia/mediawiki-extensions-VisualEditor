@@ -50,7 +50,12 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
 		params.generator = 'search';
 		params.gsrsearch = params.gpssearch;
-		params.gsrsearch += '*';
+		// Searching for "foo *" is pointless. Don't normalize it to "foo*" either but leave it
+		// unchanged. This makes the word "foo" behave the same in "foo " and "foo bar". In both
+		// cases it's not considered a prefix any more.
+		if ( !/\s$/.test( params.gsrsearch ) ) {
+			params.gsrsearch += '*';
+		}
 		// params.gsrsort = 'incoming_links_desc';
 		params.gsrnamespace = params.gpsnamespace;
 		params.gsrlimit = params.gpslimit;
