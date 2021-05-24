@@ -280,7 +280,7 @@ ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 
 		function offsetToPos( offset ) {
 			var row = 0,
-				col = 0,
+				col,
 				pos = 0;
 
 			while ( row < lines.length && pos + lines[ row ].length < offset ) {
