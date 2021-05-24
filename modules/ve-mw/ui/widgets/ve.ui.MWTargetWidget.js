@@ -34,7 +34,6 @@ ve.ui.MWTargetWidget.prototype.createTarget = function () {
 	return new ve.init.mw.Target( {
 		register: false,
 		toolbarGroups: this.toolbarGroups,
-		inTargetWidget: true,
 		modes: this.modes,
 		defaultMode: this.defaultMode
 	} );
