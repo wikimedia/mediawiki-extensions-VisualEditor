@@ -313,7 +313,10 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.track( 'trace.parseResponse.enter' );
 		this.originalHtml = data.content;
 		this.etag = data.etag;
-		this.fromEditedState = !!data.fromEditedState;
+		// We are reading from `preloaded` which comes from the VE API. If we want
+		// to make the VE API non-blocking in the future we will need to handle
+		// special-cases like this where the content doesn't come from RESTBase.
+		this.fromEditedState = !!data.fromEditedState || !!data.preloaded;
 		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
 		mode = this.getDefaultMode();
 		section = ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null;
@@ -1749,7 +1752,7 @@ ve.init.mw.ArticleTarget.prototype.isSaveable = function () {
 
 	this.edited =
 		// Document was edited before loading
-		this.fromEditedState || this.preloaded ||
+		this.fromEditedState ||
 		// Document was edited
 		surface.getModel().hasBeenModified() ||
 		// Section title (if it exists) was edited
