@@ -175,12 +175,16 @@ class ApiVisualEditor extends ApiBase {
 
 						$apiParams['rvsection'] = $section;
 
-						$api = new ApiMain(
+						$context = new DerivativeContext( $this->getContext() );
+						$context->setRequest(
 							new DerivativeRequest(
-								$this->getRequest(),
+								$context->getRequest(),
 								$apiParams,
-								/* was posted? */ false
-							),
+								/* was posted? */ true
+							)
+						);
+						$api = new ApiMain(
+							$context,
 							/* enable write? */ true
 						);
 						$api->execute();

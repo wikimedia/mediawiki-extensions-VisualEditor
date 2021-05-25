@@ -78,12 +78,16 @@ class ApiVisualEditorEdit extends ApiBase {
 			unset( $allParams[ $knownParam ] );
 		}
 
-		$api = new ApiMain(
+		$context = new DerivativeContext( $this->getContext() );
+		$context->setRequest(
 			new DerivativeRequest(
-				$this->getRequest(),
+				$context->getRequest(),
 				$apiParams + $allParams,
 				/* was posted? */ true
-			),
+			)
+		);
+		$api = new ApiMain(
+			$context,
 			/* enable write? */ true
 		);
 
@@ -104,12 +108,17 @@ class ApiVisualEditorEdit extends ApiBase {
 			'oldid' => $newRevId,
 			'prop' => 'text|revid|categorieshtml|displaytitle|subtitle|modules|jsconfigvars',
 		];
-		$api = new ApiMain(
+
+		$context = new DerivativeContext( $this->getContext() );
+		$context->setRequest(
 			new DerivativeRequest(
-				$this->getRequest(),
+				$context->getRequest(),
 				$apiParams,
-				/* was posted? */ false
-			),
+				/* was posted? */ true
+			)
+		);
+		$api = new ApiMain(
+			$context,
 			/* enable write? */ true
 		);
 
@@ -301,12 +310,16 @@ class ApiVisualEditorEdit extends ApiBase {
 			'topst' => true,
 		];
 
-		$api = new ApiMain(
+		$context = new DerivativeContext( $this->getContext() );
+		$context->setRequest(
 			new DerivativeRequest(
-				$this->getRequest(),
+				$context->getRequest(),
 				$apiParams,
-				/* was posted? */ false
-			),
+				/* was posted? */ true
+			)
+		);
+		$api = new ApiMain(
+			$context,
 			/* enable write? */ false
 		);
 		$api->execute();
