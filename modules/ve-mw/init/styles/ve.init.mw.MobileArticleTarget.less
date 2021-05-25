@@ -42,6 +42,14 @@
 	}
 }
 
+.ve-ui-mwTargetWidget {
+	/* stylelint-disable-next-line selector-class-pattern */
+	.ve-ui-mwSurface.content {
+		// When content is applied to surface in a TargetWidget, don't add margins
+		margin: 0;
+	}
+}
+
 /* stylelint-disable-next-line selector-class-pattern */
 .ve-init-mw-mobileArticleTarget.overlay {
 	// Override MobileFrontend `.overlay` styles.

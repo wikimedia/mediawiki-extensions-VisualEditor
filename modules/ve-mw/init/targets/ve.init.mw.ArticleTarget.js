@@ -1604,15 +1604,15 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
 		ve.extendObject( { attachedRoot: attachedRoot }, config )
 	);
 
-	// The following classes are used here:
-	// * mw-textarea-proteced
-	// * mw-textarea-cproteced
-	// * mw-textarea-sproteced
-	surface.$element
-		.addClass( this.protectedClasses )
-		.addClass( 'mw-body-content' );
-
 	return surface;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.prototype.getSurfaceClasses = function () {
+	var classes = ve.init.mw.ArticleTarget.super.prototype.getSurfaceClasses.call( this );
+	return classes.concat( [ 'mw-body-content' ] );
 };
 
 /**
@@ -1623,7 +1623,15 @@ ve.init.mw.ArticleTarget.prototype.getSurfaceConfig = function ( config ) {
 		// Don't null selection on blur when editing a document.
 		// Do use it in new section mode as there are multiple inputs
 		// on the surface (header+content).
-		nullSelectionOnBlur: this.section === 'new'
+		nullSelectionOnBlur: this.section === 'new',
+		classes: this.getSurfaceClasses()
+			// The following classes are used here:
+			// * mw-textarea-proteced
+			// * mw-textarea-cproteced
+			// * mw-textarea-sproteced
+			.concat( this.protectedClasses )
+			// addClass doesn't like empty strings
+			.filter( function ( c ) { return c; } )
 	}, config ) );
 };
 
