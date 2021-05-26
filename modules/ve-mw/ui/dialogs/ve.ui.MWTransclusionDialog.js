@@ -419,6 +419,11 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 		this.backButton = backButton;
 	}
 
+	// T283511
+	if ( !this.backButton ) {
+		return;
+	}
+
 	if ( veConfig.transclusionDialogBackButton ) {
 		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
 			parts = this.transclusionModel && this.transclusionModel.getParts(),
@@ -433,7 +438,7 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 		this.closeButton.toggle( !isInsertMode || isInitialPage );
 		this.backButton.toggle( isInsertMode && !isInitialPage );
 	} else {
-		backButton.toggle( false );
+		this.backButton.toggle( false );
 	}
 };
 
