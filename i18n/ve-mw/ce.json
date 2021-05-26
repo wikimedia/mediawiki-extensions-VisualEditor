@@ -216,7 +216,7 @@
 	"visualeditor-parameter-search-no-unused": "Лелош йоцу параметраш йац",
 	"visualeditor-parameter-search-unknown": "Йоьвзуш йоцу параметр",
 	"visualeditor-preference-betatempdisable": "Цкъачунна дӀайайъа БӀаьран редактор, и дика тайалца",
-	"visualeditor-preference-core-description": "Латае бӀаьран редактор. И лело йиш хира йу дийцарийн агӀонашкахь а, кхин цӀерийн меттигашкахь а.",
+	"visualeditor-preference-core-description": "Латайе бӀаьран редактор. И лело йиш хира йу дийцарийн агӀонашкахь а, кхин цӀерийн меттигашкахь а.",
 	"visualeditor-preference-core-label": "БӀаьран тадар",
 	"visualeditor-preference-enable": "Латайе бӀаьран редактор. И лело йиш хира йу цӀерийн {{PLURAL:$2|меттигехь|меттигашкахь}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Лата бе вики-йозан керла дӀахӀоттам. Оцу тӀехь бу дукха БӀаьра тадаран гӀирсаш.",
