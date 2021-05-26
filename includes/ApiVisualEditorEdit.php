@@ -364,6 +364,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			$this->dieWithError( 'apierror-pagecannotexist' );
 		}
 		'@phan-var Title $title';
+		$this->getErrorFormatter()->setContextTitle( $title );
 
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
