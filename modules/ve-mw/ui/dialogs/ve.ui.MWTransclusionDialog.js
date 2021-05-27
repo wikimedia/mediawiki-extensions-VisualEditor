@@ -85,7 +85,7 @@ OO.inheritClass( ve.ui.MWTransclusionDialog, ve.ui.MWTemplateDialog );
 ve.ui.MWTransclusionDialog.static.name = 'transclusion';
 
 ve.ui.MWTransclusionDialog.static.title =
-	OO.ui.deferMsg( 'visualeditor-dialog-transclusion-title' );
+	OO.ui.deferMsg( 'visualeditor-dialog-transclusion-title-edit-transclusion' );
 
 ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.actions.concat( [
 	{
@@ -308,7 +308,7 @@ ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
  * Update the dialog title.
  */
 ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
-	if ( this.mode === 'multiple' ) {
+	if ( !this.isSingleTemplateTransclusion() ) {
 		this.title.setLabel( this.constructor.static.title );
 	} else {
 		// Parent method
