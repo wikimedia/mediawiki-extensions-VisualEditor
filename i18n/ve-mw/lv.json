@@ -169,6 +169,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Vai tiešām vēlies turpināt, neaizpildot {{PLURAL:$2|laukus|lauku|laukus}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Paslēpt iespējas",
 	"visualeditor-dialog-transclusion-title": "Iekļāvums",
+	"visualeditor-dialog-transclusion-reset-confirmation-title": "Atpakaļ uz meklēšanu?",
+	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Turpināt labošanu",
 	"visualeditor-dialogbutton-media-tooltip": "Attēli un mediji",
 	"visualeditor-dialogbutton-meta-tooltip": "Lapas iestatījumi",
 	"visualeditor-dialogbutton-template-tooltip": "Veidne",
