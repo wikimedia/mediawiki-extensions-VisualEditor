@@ -80,6 +80,78 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 		templateDocPageFragment = '/' + templateDataMessage.text(),
 		promise = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
 
+	/**
+	 * @param {Object} response
+	 * @param {Object} [newPage]
+	 */
+	function unshiftPages( response, newPage ) {
+		response.query.pages.forEach( function ( page ) {
+			page.index++;
+		} );
+		if ( newPage && newPage.title ) {
+			newPage.index = 1;
+			response.query.pages.unshift( newPage );
+		}
+	}
+
+	promise = promise
+		.then( function ( response ) {
+			// TODO: Remove when not in Beta any more
+			if ( !mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
+				return response;
+			}
+
+			var query = widget.getQueryValue(),
+				title = mw.Title.newFromText( query, widget.namespace );
+			// No point in trying anything when the title is invalid
+			if ( !response.query || !title ) {
+				return response;
+			}
+
+			var lowerTitle = title.getPrefixedText().toLowerCase(),
+				metadata = response.query.redirects || [],
+				foundMatchingMetadata = metadata.some( function ( redirect ) {
+					return redirect.from.toLowerCase() === lowerTitle;
+				} );
+			if ( foundMatchingMetadata ) {
+				// Redirects will be carefully positioned later in TitleWidget.getOptionsFromData()
+				return response;
+			}
+
+			var i,
+				matchingRedirects = response.query.pages.filter( function ( page ) {
+					return page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle;
+				} );
+			if ( matchingRedirects.length ) {
+				for ( i = matchingRedirects.length; i--; ) {
+					var redirect = matchingRedirects[ i ];
+					// Offer redirects as separate options when the user's input is an exact match
+					unshiftPages( response, {
+						pageid: redirect.pageid,
+						ns: redirect.ns,
+						title: redirect.redirecttitle
+					} );
+				}
+				return response;
+			}
+
+			var matchingTitles = response.query.pages.filter( function ( page ) {
+				return page.title.toLowerCase() === lowerTitle;
+			} );
+			if ( matchingTitles.length ) {
+				for ( i = matchingTitles.length; i--; ) {
+					// Make sure exact matches are at the very top
+					unshiftPages( response );
+					matchingTitles[ i ].index = 1;
+				}
+				return response;
+			}
+
+			// TODO: Do an extra HTTP request to guarantee exact matches are in the list
+			return response;
+		} )
+		.promise( { abort: function () {} } );
+
 	if ( !this.showTemplateDescriptions ) {
 		return promise;
 	}
