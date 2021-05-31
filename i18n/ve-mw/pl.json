@@ -216,7 +216,7 @@
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu ustawiania pól szablonu",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Wrócić?",
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Powrót będzie oznaczał usunięcie szablonu wraz ze wszystkimi wprowadzonymi do niego informacjami, otwierając ponownie okno wyboru szablonu. Tej akcji nie można cofnąć.",
-	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Anuluj",
+	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Kontynuuj edycję",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Usuń szablon",
 	"visualeditor-dialogbutton-media-tooltip": "Grafika i multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Ustawienia strony",
