@@ -167,6 +167,7 @@
 	"visualeditor-dialog-table-collapsible": "Collapsible",
 	"visualeditor-dialog-table-sortable": "Sortable",
 	"visualeditor-dialog-table-wikitable": "Styled (wikitable)",
+	"visualeditor-dialog-template-insert": "Insert a template",
 	"visualeditor-dialog-template-title": "Template",
 	"visualeditor-dialog-transclusion-absent-template": "The \"$1\" template doesn't yet exist.",
 	"visualeditor-dialog-transclusion-add-content": "Add content",
