@@ -186,6 +186,7 @@
 	"visualeditor-dialog-table-sortable": "Label for toggle to make a table sortable",
 	"visualeditor-dialog-table-wikitable": "Label for toggle to make a table a wikitable",
 	"visualeditor-dialog-template-title": "{{Identical|Template}}",
+	"visualeditor-dialog-transclusion-action-save": "Label for button that saves changes when editing an existing transclusion in the transclusion dialog.",
 	"visualeditor-dialog-transclusion-absent-template": "Message to user that the template they have selected does not exist on this wiki.\n\nParameters:\n* $1 - the title of the template",
 	"visualeditor-dialog-transclusion-add-content": "Label for button that adds parameter content to a transclusion.",
 	"visualeditor-dialog-transclusion-add-param": "Label for button that adds a parameter to a transcluded template.",
