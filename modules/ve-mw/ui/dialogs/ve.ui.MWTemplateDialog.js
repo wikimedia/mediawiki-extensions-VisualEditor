@@ -278,17 +278,6 @@ ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 };
 
 /**
- * Get the label of a template or template placeholder.
- *
- * @param {ve.dm.MWTemplateModel|ve.dm.MWTemplatePlaceholderModel} part Part to check
- * @return {string} Label of template or template placeholder
- */
-ve.ui.MWTemplateDialog.prototype.getTemplatePartLabel = function ( part ) {
-	return part instanceof ve.dm.MWTemplateModel ?
-		part.getSpec().getLabel() : ve.msg( 'visualeditor-dialog-template-insert' );
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getSelectedNode = function ( data ) {
@@ -324,13 +313,22 @@ ve.ui.MWTemplateDialog.prototype.setPageByName = function ( name ) {
  * Update the dialog title.
  */
 ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts();
+	var parts = this.transclusionModel && this.transclusionModel.getParts(),
+		title = ve.msg( 'visualeditor-dialog-transclusion-loading' );
 
-	this.title.setLabel(
-		parts && parts.length === 1 && parts[ 0 ] ?
-			this.getTemplatePartLabel( parts[ 0 ] ) :
-			ve.msg( 'visualeditor-dialog-transclusion-loading' )
-	);
+	if ( parts && parts.length === 1 && parts[ 0 ] ) {
+		if ( parts[ 0 ] instanceof ve.dm.MWTemplateModel ) {
+			title = ve.msg(
+				this.getMode() === 'insert' ?
+					'visualeditor-dialog-transclusion-title-insert-known-template' :
+					'visualeditor-dialog-transclusion-title-edit-known-template',
+				parts[ 0 ].getSpec().getLabel()
+			);
+		} else {
+			title = ve.msg( 'visualeditor-dialog-transclusion-title-insert-template' );
+		}
+	}
+	this.title.setLabel( title );
 };
 
 /**
