@@ -412,7 +412,12 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
  */
 ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 	var veConfig = mw.config.get( 'wgVisualEditorConfig' ),
-		backButton = this.actions.get( { flags: [ 'back' ] } ).pop();
+		backButton = this.actions.get( { flags: [ 'back' ] } ).pop(),
+		saveButton = this.actions.get( { actions: [ 'done' ] } ).pop();
+
+	if ( saveButton && this.getMode() === 'edit' ) {
+		saveButton.setLabel( ve.msg( 'visualeditor-dialog-transclusion-action-save' ) );
+	}
 
 	if ( backButton ) {
 		// Todo: this won't be needed if https://gerrit.wikimedia.org/r/c/oojs/ui/+/686439 is resolved
