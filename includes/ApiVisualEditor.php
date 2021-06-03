@@ -55,10 +55,9 @@ class ApiVisualEditor extends ApiBase {
 	 *
 	 * @param string $preload The title of the page to use as the preload content
 	 * @param string[] $params The preloadTransform parameters to pass in, if any
-	 * @param Title $contextTitle The contextual page title against which to parse the preload
 	 * @return string Wikitext content
 	 */
-	protected function getPreloadContent( $preload, $params, Title $contextTitle ) {
+	protected function getPreloadContent( $preload, $params ) {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
 		// Check for existence to avoid getting MediaWiki:Noarticletext
@@ -230,7 +229,7 @@ class ApiVisualEditor extends ApiBase {
 							$preloaded = true;
 						} elseif ( $content === '' && !empty( $params['preload'] ) ) {
 							$content = $this->getPreloadContent(
-								$params['preload'], $params['preloadparams'], $title
+								$params['preload'], $params['preloadparams']
 							);
 							$preloaded = true;
 						}
@@ -401,7 +400,7 @@ class ApiVisualEditor extends ApiBase {
 						$targetUsername,
 						/* allow IP users*/ false
 					);
-					$block = $targetUser->getBlock();
+					$block = $targetUser ? $targetUser->getBlock() : null;
 
 					$targetUserExists = ( $targetUser && $targetUser->isRegistered() );
 					if ( $targetUserExists && $targetUser->isHidden() &&
@@ -465,7 +464,7 @@ class ApiVisualEditor extends ApiBase {
 				];
 				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
 				$checkboxesMessagesList = [];
-				foreach ( $checkboxesDef as $name => &$options ) {
+				foreach ( $checkboxesDef as &$options ) {
 					if ( isset( $options['tooltip'] ) ) {
 						$checkboxesMessagesList[] = "accesskey-{$options['tooltip']}";
 						$checkboxesMessagesList[] = "tooltip-{$options['tooltip']}";

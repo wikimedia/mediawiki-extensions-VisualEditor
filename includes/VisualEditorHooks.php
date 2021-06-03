@@ -16,7 +16,7 @@ class VisualEditorHooks {
 	// TODO: Other params too?
 	// Known-good parameters: edit, veaction, section, oldid, lintid, preload, preloadparams, editintro
 	// Partially-good: preloadtitle (source-mode only)
-	private static $unsupportedEditParams = [
+	private const UNSUPPORTED_EDIT_PARAMS = [
 		'undo',
 		'undoafter',
 		// Only for WTE. This parameter is not supported right now, and NWE has a very different design
@@ -25,7 +25,7 @@ class VisualEditorHooks {
 		'veswitched'
 	];
 
-	private static $tags = [
+	private const TAGS = [
 		'visualeditor',
 		'visualeditor-wikitext',
 		// No longer in active use:
@@ -95,7 +95,7 @@ class VisualEditorHooks {
 	 */
 	public static function getDataForDesktopArticleTargetInitModule() {
 		return [
-			'unsupportedEditParams' => self::$unsupportedEditParams,
+			'unsupportedEditParams' => self::UNSUPPORTED_EDIT_PARAMS,
 		];
 	}
 
@@ -133,7 +133,7 @@ class VisualEditorHooks {
 		] );
 		$output->addModules( 'ext.visualEditor.diffPage.init' );
 		$output->enableOOUI();
-		$output->addHtml(
+		$output->addHTML(
 			'<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
 			new OOUI\ButtonGroupWidget( [
@@ -213,7 +213,7 @@ class VisualEditorHooks {
 			return false;
 		}
 
-		foreach ( self::$unsupportedEditParams as $param ) {
+		foreach ( self::UNSUPPORTED_EDIT_PARAMS as $param ) {
 			if ( $req->getVal( $param ) !== null ) {
 				return false;
 			}
@@ -606,7 +606,7 @@ class VisualEditorHooks {
 	/**
 	 * Called when an edit is saved
 	 * Adds 'visualeditor-switched' tag to the edit if requested
-	 * Adds whatever tags from static::$tags are present in the vetags parameter
+	 * Adds whatever tags from static::TAGS are present in the vetags parameter
 	 *
 	 * @param RecentChange $rc The new RC entry.
 	 */
@@ -617,7 +617,7 @@ class VisualEditorHooks {
 		}
 
 		$tags = explode( ',', $request->getVal( 'vetags' ) );
-		$tags = array_values( array_intersect( $tags, static::$tags ) );
+		$tags = array_values( array_intersect( $tags, static::TAGS ) );
 		if ( $tags ) {
 			$rc->addTags( $tags );
 		}
@@ -967,7 +967,7 @@ class VisualEditorHooks {
 	 * @param array &$tags Available change tags.
 	 */
 	public static function onListDefinedTags( &$tags ) {
-		$tags = array_merge( $tags, static::$tags );
+		$tags = array_merge( $tags, static::TAGS );
 	}
 
 	/**
