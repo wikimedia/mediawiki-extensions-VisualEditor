@@ -6,7 +6,12 @@
  */
 
 /**
- * Dialog for inserting and editing MediaWiki transclusions.
+ * Dialog for inserting and editing MediaWiki transclusions, i.e. a sequence of one or more template
+ * invocations that strictly belong to each other (e.g. because they are unbalanced), possibly
+ * mixed with raw wikitext snippets.
+ *
+ * Note the base class {@see ve.ui.MWTemplateDialog} alone does not allow to manage more than a
+ * single template invocation. Most of the code for this feature set is exclusive to this subclass.
  *
  * @class
  * @extends ve.ui.MWTemplateDialog

@@ -6,7 +6,8 @@
  */
 
 /**
- * MediaWiki transclusion content model.
+ * Represents a raw wikitext snippet that is part of an unbalanced sequence of template invocations.
+ * Meant to be an item in a {@see ve.dm.MWTransclusionModel}. Holds a back-reference to it's parent.
  *
  * @class
  * @extends ve.dm.MWTransclusionPartModel
