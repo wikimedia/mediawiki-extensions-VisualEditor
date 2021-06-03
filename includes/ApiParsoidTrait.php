@@ -205,7 +205,6 @@ trait ApiParsoidTrait {
 	 */
 	protected function getValidRevision( Title $title, $oldid = null ) : RevisionRecord {
 		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
-		$revision = null;
 		if ( $oldid === null || $oldid === 0 ) {
 			return $this->getLatestRevision( $title );
 		} else {

@@ -390,7 +390,7 @@ class ApiVisualEditorEdit extends ApiBase {
 				if ( isset( $saveresult['edit']['newrevid'] ) ) {
 					$newRevId = intval( $saveresult['edit']['newrevid'] );
 				} else {
-					$newRevId = $title->getLatestRevId();
+					$newRevId = $title->getLatestRevID();
 				}
 
 				// Return result of parseWikitext instead of saveWikitext so that the
