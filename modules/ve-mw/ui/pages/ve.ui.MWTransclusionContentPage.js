@@ -12,7 +12,7 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.dm.MWTransclusionContentModel} content Transclusion content
+ * @param {ve.dm.MWTransclusionContentModel} content
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
@@ -33,7 +33,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		autosize: true,
 		classes: [ 've-ui-mwTransclusionDialog-input' ]
 	} )
-		.setValue( this.content.getValue() )
+		.setValue( this.content.getWikitext() )
 		.setReadOnly( config.isReadOnly )
 		.connect( this, { change: 'onTextInputChange' } );
 	this.removeButton = new OO.ui.ButtonWidget( {
@@ -83,7 +83,7 @@ ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function () {
 };
 
 ve.ui.MWTransclusionContentPage.prototype.onTextInputChange = function () {
-	this.content.setValue( this.textInput.getValue() );
+	this.content.setWikitext( this.textInput.getValue() );
 };
 
 ve.ui.MWTransclusionContentPage.prototype.onRemoveButtonClick = function () {
