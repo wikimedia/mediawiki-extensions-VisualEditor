@@ -41,28 +41,21 @@ OO.mixinClass( ve.dm.MWParameterModel, OO.EventEmitter );
 /* Methods */
 
 /**
- * Check if parameter is required.
- *
- * @return {boolean} Parameter is required
+ * @return {boolean}
  */
 ve.dm.MWParameterModel.prototype.isRequired = function () {
 	return this.template.getSpec().isParameterRequired( this.name );
 };
 
 /**
- * Check if parameter is suggested.
- *
- * @param {string} name Parameter name
- * @return {boolean} Parameter is suggested
+ * @return {boolean}
  */
 ve.dm.MWParameterModel.prototype.isSuggested = function () {
 	return this.template.getSpec().isParameterSuggested( this.name );
 };
 
 /**
- * Check if parameter is deprecated.
- *
- * @return {boolean} Parameter is deprecated
+ * @return {boolean}
  */
 ve.dm.MWParameterModel.prototype.isDeprecated = function () {
 	return this.template.getSpec().isParameterDeprecated( this.name );
@@ -105,8 +98,6 @@ ve.dm.MWParameterModel.prototype.getOriginalName = function () {
 };
 
 /**
- * Get parameter value.
- *
  * @return {string} Parameter value, or automatic value if there is none stored.
  *  Otherwise an empty string.
  */
@@ -115,18 +106,14 @@ ve.dm.MWParameterModel.prototype.getValue = function () {
 };
 
 /**
- * Get parameter suggested values.
- *
- * @return {string[]} Parameter suggested values
+ * @return {string[]}
  */
 ve.dm.MWParameterModel.prototype.getSuggestedValues = function () {
 	return this.template.getSpec().getParameterSuggestedValues( this.name );
 };
 
 /**
- * Get default parameter value.
- *
- * @return {string} Default parameter value
+ * @return {string}
  */
 ve.dm.MWParameterModel.prototype.getDefaultValue = function () {
 	return this.template.getSpec().getParameterDefaultValue( this.name );
@@ -142,27 +129,21 @@ ve.dm.MWParameterModel.prototype.getExampleValue = function () {
 };
 
 /**
- * Get automatic parameter value.
- *
- * @return {string} Automatic parameter name.
+ * @return {string}
  */
 ve.dm.MWParameterModel.prototype.getAutoValue = function () {
 	return this.template.getSpec().getParameterAutoValue( this.name );
 };
 
 /**
- * Get parameter type.
- *
- * @return {string} Parameter type
+ * @return {string} Parameter type, e.g. "string"
  */
 ve.dm.MWParameterModel.prototype.getType = function () {
 	return this.template.getSpec().getParameterType( this.name );
 };
 
 /**
- * Set parameter value.
- *
- * @param {string} value Parameter value
+ * @param {string} value
  */
 ve.dm.MWParameterModel.prototype.setValue = function ( value ) {
 	this.value = value;
