@@ -124,10 +124,10 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
 	var part, promise,
 		parts = this.transclusionModel.getParts(),
-		item = this.bookletLayout.getOutline().findSelectedItem();
+		itemId = this.transclusions.getFocusedPart();
 
-	if ( item ) {
-		part = this.transclusionModel.getPartFromId( item.getData() );
+	if ( itemId ) {
+		part = this.transclusionModel.getPartFromId( itemId );
 		// Move part to new location, and if dialog is loaded switch to new part page
 		promise = this.transclusionModel.addPart( part, parts.indexOf( part ) + places );
 		if ( this.loaded && !this.preventReselection ) {
@@ -140,11 +140,10 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
  * Handle outline controls remove events.
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
-	var id, part, param,
-		item = this.bookletLayout.getOutline().findSelectedItem();
+	var part, param,
+		id = this.transclusions.getFocusedPart();
 
-	if ( item ) {
-		id = item.getData();
+	if ( id ) {
 		part = this.transclusionModel.getPartFromId( id );
 		// Check if the part is the actual template, or one of its parameters
 		if ( part instanceof ve.dm.MWTemplateModel && id !== part.getId() ) {
@@ -177,10 +176,10 @@ ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 	var part, param,
-		item = this.bookletLayout.getOutline().findSelectedItem();
+		itemId = this.transclusions.getFocusedPart();
 
-	if ( item ) {
-		part = this.transclusionModel.getPartFromId( item.getData() );
+	if ( itemId ) {
+		part = this.transclusionModel.getPartFromId( itemId );
 		if ( part instanceof ve.dm.MWTemplateModel ) {
 			param = new ve.dm.MWParameterModel( part, '', null );
 			part.addParameter( param );
@@ -338,12 +337,12 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	var index, promise,
 		parts = this.transclusionModel.getParts(),
-		item = this.bookletLayout.getOutline().findSelectedItem();
+		itemId = this.transclusions.getFocusedPart();
 
 	if ( part ) {
 		// Insert after selected part, or at the end if nothing is selected
-		index = item ?
-			parts.indexOf( this.transclusionModel.getPartFromId( item.getData() ) ) + 1 :
+		index = itemId ?
+			parts.indexOf( this.transclusionModel.getPartFromId( itemId ) ) + 1 :
 			parts.length;
 		// Add the part, and if dialog is loaded switch to part page
 		promise = this.transclusionModel.addPart( part, index );

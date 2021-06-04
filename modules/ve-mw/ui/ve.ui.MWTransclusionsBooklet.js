@@ -29,3 +29,13 @@ ve.ui.MWTransclusionsBooklet.prototype.focusPart = function ( id ) {
 		this.bookletLayout.setPage( id );
 	}
 };
+
+/**
+ * Get the currently focused element
+ *
+ * @return {string|null} transclusion part id or null if no element is focused
+ */
+ve.ui.MWTransclusionsBooklet.prototype.getFocusedPart = function () {
+	var item = this.bookletLayout.getOutline().findSelectedItem();
+	return ( item ? item.getData() : null );
+};
