@@ -6,7 +6,7 @@
  */
 
 /**
- * Represents a template invocation that's part of a (possibly unballanced) sequence of template
+ * Represents a template invocation that's part of a (possibly unbalanced) sequence of template
  * invocations and raw wikitext snippets. Meant to be an item in a {@see ve.dm.MWTransclusionModel}.
  * Holds a back-reference to it's parent.
  *

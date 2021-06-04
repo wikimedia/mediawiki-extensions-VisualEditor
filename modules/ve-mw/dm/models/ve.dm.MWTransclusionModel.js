@@ -11,7 +11,7 @@
 
 	/**
 	 * Represents a MediaWiki transclusion, i.e. a sequence of one or more template invocations that
-	 * strictly belong to each other (e.g. because they are unballanced), possibly mixed with raw
+	 * strictly belong to each other (e.g. because they are unbalanced), possibly mixed with raw
 	 * wikitext snippets. These individual "parts" are subclasses of
 	 * {@see ve.dm.MWTransclusionPartModel}.
 	 *
@@ -324,7 +324,7 @@
 				title = data.pages[ id ].title;
 
 				if ( data.pages[ id ].missing ) {
-					// Remmeber templates that don't exist in the link cache
+					// Remember templates that don't exist in the link cache
 					// { title: { missing: true|false }
 					missingTitle = {};
 					missingTitle[ title ] = { missing: true };
