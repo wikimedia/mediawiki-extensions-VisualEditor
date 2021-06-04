@@ -18,7 +18,7 @@
  * @extends ve.dm.MWTransclusionPartModel
  *
  * @constructor
- * @param {ve.dm.MWTransclusionModel} transclusion Transclusion
+ * @param {ve.dm.MWTransclusionModel} transclusion
  * @param {Object} target Template target
  * @param {string} target.wt Original wikitext of target
  * @param {string} [target.href] Hypertext reference to target
@@ -147,7 +147,7 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
 
 /**
  * @param {string} name Parameter name
- * @return {ve.dm.MWParameterModel} Parameter
+ * @return {ve.dm.MWParameterModel}
  */
 ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
 	return this.params[ name ];

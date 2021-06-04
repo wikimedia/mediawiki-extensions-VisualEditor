@@ -114,7 +114,7 @@
 		 *
 		 * @param {HTMLDocument} doc Document to save
 		 * @param {Object} [extraData] Extra data to send to the API
-		 * @param {Object} [options] Options
+		 * @param {Object} [options]
 		 * @return {jQuery.Promise} Promise which resolves if the post was successful
 		 */
 		saveDoc: function ( doc, extraData, options ) {
@@ -136,7 +136,7 @@
 		 *
 		 * @param {string} wikitext Wikitext to post. Deflating is optional but recommended.
 		 * @param {Object} [extraData] Extra data to send to the API
-		 * @param {Object} [options] Options
+		 * @param {Object} [options]
 		 * @param {mw.Api} [options.api] Api to use
 		 * @param {Function} [options.now] Function returning current time in milliseconds for tracking, e.g. ve.now
 		 * @param {Function} [options.track] Tracking function
@@ -156,7 +156,7 @@
 		 *  Should be included for retries even if a cache key is provided.
 		 * @param {string} [cacheKey] Optional cache key of HTML stashed on server.
 		 * @param {Object} [extraData] Extra data to send to the API
-		 * @param {Object} [options] Options
+		 * @param {Object} [options]
 		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
 		postHtml: function ( html, cacheKey, extraData, options ) {
@@ -198,7 +198,7 @@
 		 * By default uses action=visualeditoredit, paction=save.
 		 *
 		 * @param {string} data Content data
-		 * @param {Object} [options] Options
+		 * @param {Object} [options]
 		 * @param {mw.Api} [options.api] Api to use
 		 * @param {Function} [options.now] Function returning current time in milliseconds for tracking, e.g. ve.now
 		 * @param {Function} [options.track] Tracking function

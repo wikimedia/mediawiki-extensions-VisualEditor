@@ -870,7 +870,7 @@ ve.init.mw.ArticleTarget.prototype.bindSaveDialogClearDiff = function () {
 /**
  * Handle completed serialize request for diff views for new page creations.
  *
- * @param {string} wikitext Wikitext
+ * @param {string} wikitext
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikitext ) {
 	this.bindSaveDialogClearDiff();

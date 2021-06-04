@@ -206,7 +206,7 @@ ve.init.mw.DesktopArticleTarget.prototype.getEditableContent = function () {
 /**
  * Set the container for the target, appending the target to it
  *
- * @param {jQuery} $container Container
+ * @param {jQuery} $container
  */
 ve.init.mw.DesktopArticleTarget.prototype.setContainer = function ( $container ) {
 	$container.append( this.$element );
@@ -499,7 +499,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
 /**
  * Setup new section input for a surface, if required
  *
- * @param {ve.ui.Surface} surface Surface
+ * @param {ve.ui.Surface} surface
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface ) {
 	if ( surface.getMode() === 'source' && this.section === 'new' ) {
@@ -540,7 +540,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onSectionTitleChange = function () {
 /**
  * Teardown new section inputs
  *
- * @param {ve.ui.Surface} surface Surface
+ * @param {ve.ui.Surface} surface
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surface ) {
 	surface.setPlaceholder( '' );

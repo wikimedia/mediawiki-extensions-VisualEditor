@@ -202,7 +202,7 @@
 		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {string} pageName Page name to request, in prefixed DB key form (underscores instead of spaces)
-		 * @param {Object} [options] Options
+		 * @param {Object} [options]
 		 * @param {boolean} [options.sessionStore] Store result in session storage (by page+mode+section) for auto-save
 		 * @param {null|string} [options.section] Section to edit; number, 'T-'-prefixed, null or 'new' (currently just source mode)
 		 * @param {number} [options.oldId] Old revision ID. Current if omitted.

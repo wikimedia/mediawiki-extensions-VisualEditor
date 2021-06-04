@@ -528,7 +528,7 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
 /**
  * Get a wikitext fragment from a document
  *
- * @param {ve.dm.Document} doc Document
+ * @param {ve.dm.Document} doc
  * @param {boolean} [useRevision=true] Whether to use the revision ID + ETag
  * @return {jQuery.Promise} Abortable promise which resolves with a wikitext string
  */
@@ -568,7 +568,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
 /**
  * Parse a fragment of wikitext into HTML
  *
- * @param {string} wikitext Wikitext
+ * @param {string} wikitext
  * @param {boolean} pst Perform pre-save transform
  * @param {ve.dm.Document} [doc] Parse for a specific document, defaults to current surface's
  * @return {jQuery.Promise} Abortable promise
@@ -601,7 +601,7 @@ ve.init.mw.Target.prototype.getPageName = function () {
  *
  * @param {ve.dm.Document} [doc] API for a specific document, should default to document of current surface.
  * @param {Object} [options] API options
- * @return {mw.Api} API object
+ * @return {mw.Api}
  */
 ve.init.mw.Target.prototype.getContentApi = function ( doc, options ) {
 	options = options || {};
@@ -616,7 +616,7 @@ ve.init.mw.Target.prototype.getContentApi = function ( doc, options ) {
  * associated with the current user.
  *
  * @param {Object} [options] API options
- * @return {mw.Api} API object
+ * @return {mw.Api}
  */
 ve.init.mw.Target.prototype.getLocalApi = function ( options ) {
 	options = options || {};

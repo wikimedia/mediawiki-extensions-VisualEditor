@@ -671,7 +671,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.onAddButtonClick = function () 
 /**
  * Remove a mapping item from the inspector.
  *
- * @param {Object} item Item
+ * @param {Object} item
  */
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.onClearButtonClick = function ( item ) {
 	var idx = this.items.indexOf( item );
@@ -830,7 +830,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.onAddButtonClick = function () 
 /**
  * Remove a mapping item from the inspector.
  *
- * @param {Object} item Item
+ * @param {Object} item
  */
 ve.ui.MWLanguageVariantOneWayInspector.prototype.onClearButtonClick = function ( item ) {
 	var idx = this.items.indexOf( item );

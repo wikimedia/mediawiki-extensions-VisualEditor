@@ -13,7 +13,7 @@
  * @extends ve.dm.MWTransclusionPartModel
  *
  * @constructor
- * @param {ve.dm.MWTransclusionModel} transclusion Transclusion
+ * @param {ve.dm.MWTransclusionModel} transclusion
  */
 ve.dm.MWTemplatePlaceholderModel = function VeDmMWTemplatePlaceholderModel() {
 	// Parent constructor
