@@ -333,6 +333,5 @@
 	"visualeditor-wikitext-warning-title": "Tuvastatud vikiteksti märgistus",
 	"visualeditor-wikitextconvert-title": "Kas teisendad vorminduse vikitekstiks?",
 	"visualeditor-wikitextconvert-message": "Kleebitud sisu sisaldab vormindust. Kas see tuleks teisendada vikitekstiks või sisestada lihttekstina?",
-	"visualeditor-wikitextconvert-plain": "Kasuta lihtteksti",
 	"visualeditor-wikitextconvert-convert": "Teisenda vikitekstiks"
 }

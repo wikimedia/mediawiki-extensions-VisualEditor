@@ -152,7 +152,9 @@
 	"visualeditor-dialog-table-collapsible": "Che 'l se po comprim",
 	"visualeditor-dialog-table-sortable": "Che 'l se po ordinà",
 	"visualeditor-dialog-table-wikitable": "Stil (wikitable)",
+	"visualeditor-dialog-template-insert": "Met dent un modell",
 	"visualeditor-dialog-template-title": "Model",
+	"visualeditor-dialog-transclusion-action-save": "Salva",
 	"visualeditor-dialog-transclusion-absent-template": "El model \"$1\" a l'esist nancamò.",
 	"visualeditor-dialog-transclusion-add-content": "Sgiontegh del test",
 	"visualeditor-dialog-transclusion-add-param": "Sgionta di alter informazzion",
@@ -185,6 +187,9 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Te see sicur che te voeuret andà inanz con l'impineì minga {{PLURAL:$2|el camp|i camp}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Scond i opzion",
 	"visualeditor-dialog-transclusion-title": "Inclusion",
+	"visualeditor-dialog-transclusion-title-insert-template": "Met dent un modell",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Met dent: $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Modificaː $1",
 	"visualeditor-dialog-transclusion-template-search": "Ricerca d'on modell",
 	"visualeditor-dialog-transclusion-template-search-help": "Troeuva el modell che te veoret meter denter cont el cercà una parola ciav de reconossiment. A l'è pussee probabil che i modei con di descrizzion lavoren mei con quell'editor chì (Editor Visual).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menuù di impostazzion di camp del model",
@@ -398,6 +403,5 @@
 	"visualeditor-wikitext-warning-title": "Trovad wikitest",
 	"visualeditor-wikitextconvert-title": "Traformà la formatazzion in wikitest?",
 	"visualeditor-wikitextconvert-message": "El contegnud incollà el gh'hà denter la formatazzion contiene della formattazione. te voeuret trasformall in  wikitest o metel dent come test sempliz?",
-	"visualeditor-wikitextconvert-plain": "Drova el test sempliz",
 	"visualeditor-wikitextconvert-convert": "Trasforma in wikitest"
 }

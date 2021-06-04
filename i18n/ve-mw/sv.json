@@ -398,6 +398,5 @@
 	"visualeditor-wikitext-warning-title": "Wikitext upptäckt",
 	"visualeditor-wikitextconvert-title": "Omvandla formatering till wikitext?",
 	"visualeditor-wikitextconvert-message": "Ditt inklistrade innehåll innehåller formatering. Ska den omvandlas till wikitext eller infogas som vanlig text?",
-	"visualeditor-wikitextconvert-plain": "Använd vanlig text",
 	"visualeditor-wikitextconvert-convert": "Omvandla till wikitext"
 }

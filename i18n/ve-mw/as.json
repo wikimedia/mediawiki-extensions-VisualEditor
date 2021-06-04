@@ -346,7 +346,7 @@
 	"visualeditor-preference-tabs-prefer-ve": "সম্ভৱ হ'লে মোক সদায়েই ভিজুৱেল এডিটৰ দেখুৱাব",
 	"visualeditor-preference-tabs-prefer-wt": "মোক সদায় উৎস সম্পাদক দেখুৱাব",
 	"visualeditor-preference-tabs-remember-last": "মোৰ শেষ সম্পাদক বিকল্প মনত ৰাখক",
-	"visualeditor-preference-visualdiffpage-description": "সংশোধন পাৰ্থক্য পৃষ্ঠাত নতুন ভিজুৱেল মোড সক্ৰিয় কৰক।",
+	"visualeditor-preference-visualdiffpage-description": "সংশোধন পাৰ্থক্য পৃষ্ঠাত নতুন ভিজুৱেল ম'ড সক্ৰিয় কৰক।",
 	"visualeditor-preference-visualdiffpage-label": "দৃশ্যমান পাৰ্থক্য",
 	"visualeditor-rebase-client-export": "ৰপ্তানি",
 	"visualeditor-rebase-client-export-start": "ৰপ্তানি কৰক…",
@@ -398,6 +398,5 @@
 	"visualeditor-wikitext-warning-title": "ৱিকিপাঠ্য মাৰ্কআপ চিনাক্ত কৰা হৈছে",
 	"visualeditor-wikitextconvert-title": "ফৰ্মেটিংক ৱিকিপাঠ্যলৈ পৰিবৰ্তন কৰক?",
 	"visualeditor-wikitextconvert-message": "আপোনাৰ পেষ্ট কৰা সমলত ফৰ্মেটিং আছে। ইয়াক ৱিকিপাঠ্যলৈ ৰূপান্তৰ কৰা উচিত নে সাধাৰণ পাঠ হিচাপে অন্তৰ্ভুক্ত কৰা উচিত?",
-	"visualeditor-wikitextconvert-plain": "সৰল পাঠ ব্যৱহাৰ কৰক",
 	"visualeditor-wikitextconvert-convert": "ৱিকিপাঠলৈ ৰূপান্তৰ কৰক"
 }

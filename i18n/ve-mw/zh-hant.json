@@ -417,6 +417,5 @@
 	"visualeditor-wikitext-warning-title": "偵測到 Wiki 標記語言",
 	"visualeditor-wikitextconvert-title": "轉換格式為wiki文字？",
 	"visualeditor-wikitextconvert-message": "您貼上的內容包含格式。它應轉換為wiki文字，還是以純文字插入？",
-	"visualeditor-wikitextconvert-plain": "使用純文字",
 	"visualeditor-wikitextconvert-convert": "轉換為wiki文字"
 }

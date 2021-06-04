@@ -441,6 +441,5 @@
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка",
 	"visualeditor-wikitextconvert-title": "Перевести форматирование в вики-код?",
 	"visualeditor-wikitextconvert-message": "Скопированное вами содержимое содержит форматирование. Нужно ли его перевести в вики-код или вставить без форматирования?",
-	"visualeditor-wikitextconvert-plain": "Вставить без форматирования",
 	"visualeditor-wikitextconvert-convert": "Преобразовать в вики-код"
 }

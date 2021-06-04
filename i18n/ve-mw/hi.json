@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abijeet Patro",
 			"Ankita-ks",
 			"Ansumang",
 			"Devayon",
@@ -154,6 +155,7 @@
 	"visualeditor-dialog-table-sortable": "क्रमबद्ध",
 	"visualeditor-dialog-table-wikitable": "शैली (विकिसारणी)",
 	"visualeditor-dialog-template-title": "साँचा",
+	"visualeditor-dialog-transclusion-action-save": "सहेजें",
 	"visualeditor-dialog-transclusion-absent-template": "साँचा \"$1\" अभी उपस्थित नहीं है।",
 	"visualeditor-dialog-transclusion-add-content": "सामग्री जोड़ें",
 	"visualeditor-dialog-transclusion-add-param": "और जानकारी जोड़ें",

@@ -21,7 +21,8 @@
 			"Rachmat04",
 			"Raynasution",
 			"Rv77ax",
-			"William Surya Permana"
+			"William Surya Permana",
+			"WillsonEP09"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -169,7 +170,9 @@
 	"visualeditor-dialog-table-collapsible": "Dapat diciutkan",
 	"visualeditor-dialog-table-sortable": "Dapat diurutkan",
 	"visualeditor-dialog-table-wikitable": "Bergaya (tabel wiki)",
+	"visualeditor-dialog-template-insert": "Masukkan templat",
 	"visualeditor-dialog-template-title": "Templat",
+	"visualeditor-dialog-transclusion-action-save": "Simpan",
 	"visualeditor-dialog-transclusion-absent-template": "Templat \"$1\" mash belum tersedia.",
 	"visualeditor-dialog-transclusion-add-content": "Tambah konten",
 	"visualeditor-dialog-transclusion-add-param": "Tambah informasi lainnya",
@@ -200,6 +203,9 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Apakah Anda yakin ingin melanjutkan tanpa mengisi {{PLURAL:$2|bidang}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Sembunyikan opsi",
 	"visualeditor-dialog-transclusion-title": "Transklusi",
+	"visualeditor-dialog-transclusion-title-insert-template": "Masukkan templat",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Memasukan:$1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Sunting: $1",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu pengaturan bidang templat",
 	"visualeditor-dialogbutton-media-tooltip": "Gambar dan media",
 	"visualeditor-dialogbutton-meta-tooltip": "Pengaturan halaman",
@@ -406,6 +412,5 @@
 	"visualeditor-wikitext-warning-title": "Markah teks wiki terdeteksi",
 	"visualeditor-wikitextconvert-title": "Konversi format ke teks wiki?",
 	"visualeditor-wikitextconvert-message": "Konten yang Anda tempel mengandung format. Haruskah format ini dikonversi menjadi teks wiki atau disisipkan sebagai teks polos?",
-	"visualeditor-wikitextconvert-plain": "Gunakan teks polos",
 	"visualeditor-wikitextconvert-convert": "Konversi ke teks wiki"
 }

@@ -413,6 +413,5 @@
 	"visualeditor-wikitext-warning-title": "Notação de texto wiki detetada",
 	"visualeditor-wikitextconvert-title": "Converter a formatação para texto wiki?",
 	"visualeditor-wikitextconvert-message": "O conteúdo que inseriu contém formatação. Ela deva ser convertida para texto wiki, ou inserida como texto simples?",
-	"visualeditor-wikitextconvert-plain": "Usar texto simples",
 	"visualeditor-wikitextconvert-convert": "Converter para texto wiki"
 }

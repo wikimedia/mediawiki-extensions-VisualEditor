@@ -405,6 +405,5 @@
 	"visualeditor-wikitext-warning-title": "يوجد نص ويكي",
 	"visualeditor-wikitextconvert-title": "تحويل التنسيق إلى نص الويكي؟",
 	"visualeditor-wikitextconvert-message": "يحتوي المحتوى الملصق الخاص بك على تنسيق، هل يجب تحويله إلى نص الويكي، أم إدراجه كنص عادي؟",
-	"visualeditor-wikitextconvert-plain": "استخدم نص عادي",
 	"visualeditor-wikitextconvert-convert": "تحويل إلى نص الويكي"
 }

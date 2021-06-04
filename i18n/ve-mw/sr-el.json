@@ -379,6 +379,5 @@
 	"visualeditor-wikitext-warning-title": "Otkriveno je označavanje vikiteksta",
 	"visualeditor-wikitextconvert-title": "Konvertovati formatiranje u vikitekst?",
 	"visualeditor-wikitextconvert-message": "Vaš nalepljen sadržaj sadrži formatiranje. Treba li da se konvertuje u vikitekst ili umetne kao običan tekst?",
-	"visualeditor-wikitextconvert-plain": "Koristi običan tekst",
 	"visualeditor-wikitextconvert-convert": "Konvertuj u vikitekst"
 }

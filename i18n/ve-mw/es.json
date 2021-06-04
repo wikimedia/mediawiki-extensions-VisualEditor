@@ -399,6 +399,5 @@
 	"visualeditor-wikitext-warning-title": "Se ha detectado wikitexto",
 	"visualeditor-wikitextconvert-title": "¿Quieres convertir el formato en wikitexto?",
 	"visualeditor-wikitextconvert-message": "El contenido pegado contiene formato. ¿Quieres convertirlo en wikitexto o insertarlo como texto sencillo?",
-	"visualeditor-wikitextconvert-plain": "Usar texto sencillo",
 	"visualeditor-wikitextconvert-convert": "Convertir en wikitexto"
 }

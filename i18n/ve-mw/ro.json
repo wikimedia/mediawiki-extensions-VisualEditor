@@ -343,6 +343,5 @@
 	"visualeditor-wikitext-warning-title": "Limbaj de text wiki detectat",
 	"visualeditor-wikitextconvert-title": "Convertiți formatarea în wikitext?",
 	"visualeditor-wikitextconvert-message": "Conținutul lipit de dvs. conține formatare. Ar trebui convertit în wikitext sau inserat ca text simplu?",
-	"visualeditor-wikitextconvert-plain": "Utilizează text simplu",
 	"visualeditor-wikitextconvert-convert": "Convertește în wikitext"
 }

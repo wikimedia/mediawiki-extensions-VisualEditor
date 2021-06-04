@@ -392,6 +392,5 @@
 	"visualeditor-wikitext-warning": "U bevindt zich in de visuele tekstverwerker. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitekst]] werkt hier niet. Om op elk moment over te schakelen naar de wikitekstmodus zonder uw veranderingen te verliezen, klikt u op de knop met het wikitekstsymbool.",
 	"visualeditor-wikitext-warning-title": "Wikitekst gedetecteerd",
 	"visualeditor-wikitextconvert-title": "Opmaak naar wikitekst omzetten?",
-	"visualeditor-wikitextconvert-plain": "Gebruik platte tekst",
 	"visualeditor-wikitextconvert-convert": "Naar wikitekst omzetten"
 }

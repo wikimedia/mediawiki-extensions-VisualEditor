@@ -179,7 +179,9 @@
 	"visualeditor-dialog-table-collapsible": "Colapsável",
 	"visualeditor-dialog-table-sortable": "Ordenável",
 	"visualeditor-dialog-table-wikitable": "Estilo (wikitable)",
+	"visualeditor-dialog-template-insert": "Inserir uma predefinição",
 	"visualeditor-dialog-template-title": "Predefinição",
+	"visualeditor-dialog-transclusion-action-save": "Salvar",
 	"visualeditor-dialog-transclusion-absent-template": "A predefinição \"$1\" ainda não existe.",
 	"visualeditor-dialog-transclusion-add-content": "Adicionar conteúdo",
 	"visualeditor-dialog-transclusion-add-param": "Adicionar mais informações",
@@ -211,6 +213,9 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Tem certeza de que quer continuar sem preencher {{PLURAL:$2|o campo|os campos}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ocultar opções",
 	"visualeditor-dialog-transclusion-title": "Transclusão",
+	"visualeditor-dialog-transclusion-title-insert-template": "Inserir uma predefinição",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Inserir: $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Editar: $1",
 	"visualeditor-dialog-transclusion-template-search": "Pesquisa de predefinição",
 	"visualeditor-dialog-transclusion-template-search-help": "Encontre a predefinição que você deseja inserir pesquisando uma palavra-chave de identificação. Modelos que desejam descrições são mais propensos a funcionar bem com este editor (editor visual).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu de configuração dos campos da predefinição",
@@ -425,7 +430,6 @@
 	"visualeditor-wikitext-warning": "Você está usando o editor visual - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexto]] não funciona aqui. Para alternar ao editor de código-fonte a qualquer hora sem perder suas alterações, clique no botão.",
 	"visualeditor-wikitext-warning-title": "Código de wikitexto detectado",
 	"visualeditor-wikitextconvert-title": "Converter formatação para wikitext?",
-	"visualeditor-wikitextconvert-message": "Seu conteúdo colado contém formatação. Deve ser convertido em wikitexto ou inserido como texto simples?",
-	"visualeditor-wikitextconvert-plain": "Use texto simples",
+	"visualeditor-wikitextconvert-message": "Você colou conteúdo com formatação rica. Você gostaria de converter esta formatação para wikitexto?",
 	"visualeditor-wikitextconvert-convert": "Converta em wikitexto"
 }

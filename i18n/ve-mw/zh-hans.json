@@ -409,6 +409,5 @@
 	"visualeditor-wikitext-warning-title": "检测到wiki文本标记",
 	"visualeditor-wikitextconvert-title": "转换格式为wiki文本？",
 	"visualeditor-wikitextconvert-message": "您粘贴的内容包含格式。它应转换为wiki文本，还是以纯文本插入？",
-	"visualeditor-wikitextconvert-plain": "使用纯文本",
 	"visualeditor-wikitextconvert-convert": "转换为wiki文本"
 }

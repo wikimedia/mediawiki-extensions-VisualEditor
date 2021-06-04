@@ -383,6 +383,5 @@
 	"visualeditor-wikitext-warning-title": "Detectouse texto wiki",
 	"visualeditor-wikitextconvert-title": "Converter o formateo a texto wiki?",
 	"visualeditor-wikitextconvert-message": "O contido pegado contén formato. Debería converterse a texto wiki ou insertarse como texto plano?",
-	"visualeditor-wikitextconvert-plain": "Usar texto plano",
 	"visualeditor-wikitextconvert-convert": "Converter a texto wiki"
 }

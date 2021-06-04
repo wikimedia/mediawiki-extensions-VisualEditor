@@ -399,6 +399,5 @@
 	"visualeditor-wikitext-warning-title": "Wikitekst påvist",
 	"visualeditor-wikitextconvert-title": "Konverter formatering til wikitekst?",
 	"visualeditor-wikitextconvert-message": "Det innlimte innholdet inneholder formatering. Skal det konverteres til wikitekst, eller settes inn som ren tekst?",
-	"visualeditor-wikitextconvert-plain": "Bruk vanlig tekst",
 	"visualeditor-wikitextconvert-convert": "Konverter til wikitekst"
 }

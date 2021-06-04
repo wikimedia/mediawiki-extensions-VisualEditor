@@ -140,7 +140,9 @@
 	"visualeditor-dialog-table-collapsible": "Sakļaujama",
 	"visualeditor-dialog-table-sortable": "Kārtojama",
 	"visualeditor-dialog-table-wikitable": "Noformēta (vikitabula)",
+	"visualeditor-dialog-template-insert": "Ievietot veidni",
 	"visualeditor-dialog-template-title": "Veidne",
+	"visualeditor-dialog-transclusion-action-save": "Saglabāt",
 	"visualeditor-dialog-transclusion-absent-template": "Veidne \"$1\" vēl nepastāv.",
 	"visualeditor-dialog-transclusion-add-content": "Pievienot saturu",
 	"visualeditor-dialog-transclusion-add-param": "Pievienot vairāk informācijas",
@@ -172,6 +174,9 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Vai tiešām vēlies turpināt, neaizpildot {{PLURAL:$2|laukus|lauku|laukus}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Paslēpt iespējas",
 	"visualeditor-dialog-transclusion-title": "Iekļāvums",
+	"visualeditor-dialog-transclusion-title-insert-template": "Ievietot veidni",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Ievietot: $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Labot: $1",
 	"visualeditor-dialog-transclusion-template-search": "Veidņu meklēšana",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Veidnes lauku iestatīšanas izvēlne",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Atpakaļ uz meklēšanu?",
@@ -370,6 +375,5 @@
 	"visualeditor-wikitext-warning-title": "Atklātas wikitext iezīmes",
 	"visualeditor-wikitextconvert-title": "Pārveidot formatējumu uz vikitekstu?",
 	"visualeditor-wikitextconvert-message": "Tavs ievietotais saturs ir formatēts. Vai to vajadzētu pārveidot par vikitekstu vai ievietot kā vienkāršu tekstu?",
-	"visualeditor-wikitextconvert-plain": "Izmantot vienkāršu tekstu",
 	"visualeditor-wikitextconvert-convert": "Pārveidot uz vikitekstu"
 }

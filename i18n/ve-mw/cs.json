@@ -416,6 +416,5 @@
 	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu",
 	"visualeditor-wikitextconvert-title": "Převést formátování do wikitextu?",
 	"visualeditor-wikitextconvert-message": "Vložil(a) jste obsah obsahující formátování. Měl by být převeden do wikitextu, nebo vložen jako prostý text?",
-	"visualeditor-wikitextconvert-plain": "Jako prostý text",
 	"visualeditor-wikitextconvert-convert": "Převést do wikitextu"
 }

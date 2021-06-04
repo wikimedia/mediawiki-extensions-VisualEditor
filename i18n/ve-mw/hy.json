@@ -161,6 +161,7 @@
 	"visualeditor-dialog-table-sortable": "Դասավորվող",
 	"visualeditor-dialog-table-wikitable": "Ոճով (wikitable)",
 	"visualeditor-dialog-template-title": "Կաղապար",
+	"visualeditor-dialog-transclusion-action-save": "Հիշել",
 	"visualeditor-dialog-transclusion-absent-template": "«$1» կաղապարը գոյություն չունի",
 	"visualeditor-dialog-transclusion-add-content": "Ավելացնել բովանդակություն",
 	"visualeditor-dialog-transclusion-add-param": "Ավելացնել պարամետր",
@@ -386,6 +387,5 @@
 	"visualeditor-wikitext-warning-title": "Օգտագործվել է Վիքիգծանշում",
 	"visualeditor-wikitextconvert-title": "Ձևավորումը փոխարկե՞լ վիքիտեքստի։",
 	"visualeditor-wikitextconvert-message": "Ձեր փակցված բովանդակությունը պարունակում է ձևավորում։ Պետք է այն փոխարկել վիքիտեքստի, թե՞ ներմուծել որպես պարզ տեքստ։",
-	"visualeditor-wikitextconvert-plain": "Օգտագործել պարզ տեքստը",
 	"visualeditor-wikitextconvert-convert": "Փոխարկել վիքիտեքստի"
 }

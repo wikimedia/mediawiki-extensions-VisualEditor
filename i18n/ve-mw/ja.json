@@ -378,6 +378,5 @@
 	"visualeditor-wikitext-warning-title": "ウィキテキスト記法を検出しました",
 	"visualeditor-wikitextconvert-title": "書式をウィキテキストに変換しますか?",
 	"visualeditor-wikitextconvert-message": "あなたが貼り付けようとしている内容には書式が含まれています。ウィキテキストに変換しますか、それともプレーンテキストを貼り付けますか？",
-	"visualeditor-wikitextconvert-plain": "プレーンテキストを使う",
 	"visualeditor-wikitextconvert-convert": "ウィキテキストに変換する"
 }

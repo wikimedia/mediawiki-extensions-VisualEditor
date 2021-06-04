@@ -408,6 +408,5 @@
 	"visualeditor-wikitext-warning-title": "Виявлена вікірозмітка",
 	"visualeditor-wikitextconvert-title": "Конвертувати форматування у вікірозмітку?",
 	"visualeditor-wikitextconvert-message": "Контент, який Ви вставили, містить форматування. Чи слід його конвертувати у вікірозмітку, чи вставити як простий текст?",
-	"visualeditor-wikitextconvert-plain": "Використовувати простий текст",
 	"visualeditor-wikitextconvert-convert": "Конвертувати у вікірозмітку"
 }

@@ -340,6 +340,5 @@
 	"visualeditor-wikitext-warning-title": "Zistená syntax wikitextu",
 	"visualeditor-wikitextconvert-title": "Previesť formátovanie na wikitext?",
 	"visualeditor-wikitextconvert-message": "Vložili ste obsah obsahujúci formátovanie. Mal by byť prevedený na wikitext alebo vložený ako obyčajný text?",
-	"visualeditor-wikitextconvert-plain": "Použiť obyčajný text",
 	"visualeditor-wikitextconvert-convert": "Previesť na wikitext"
 }

@@ -424,6 +424,5 @@
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego",
 	"visualeditor-wikitextconvert-title": "Przekonwertować formatowanie do wikitekstu?",
 	"visualeditor-wikitextconvert-message": "Wklejana treść zawiera formatowanie. Czy ma zostać ono przekonwertowane na wikikod czy wklejone jako czysty tekst?",
-	"visualeditor-wikitextconvert-plain": "Użyj zwykłego tekstu",
 	"visualeditor-wikitextconvert-convert": "Przekonwertuj do wikitekstu"
 }

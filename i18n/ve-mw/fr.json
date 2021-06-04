@@ -207,7 +207,9 @@
 	"visualeditor-dialog-table-collapsible": "Repliable",
 	"visualeditor-dialog-table-sortable": "Triable",
 	"visualeditor-dialog-table-wikitable": "Stylé (wikitable)",
+	"visualeditor-dialog-template-insert": "Insérer un modèle",
 	"visualeditor-dialog-template-title": "Modèle",
+	"visualeditor-dialog-transclusion-action-save": "Enregistrer",
 	"visualeditor-dialog-transclusion-absent-template": "Le modèle « $1 » n’existe pas encore.",
 	"visualeditor-dialog-transclusion-add-content": "Ajouter le contenu",
 	"visualeditor-dialog-transclusion-add-param": "Ajouter plus d’informations",
@@ -240,6 +242,9 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Êtes-vous sûr de vouloir continuer sans remplir {{PLURAL:$2|le champ $1|les champs $1}} ?",
 	"visualeditor-dialog-transclusion-single-mode": "Masquer les options",
 	"visualeditor-dialog-transclusion-title": "Insertion d’un modèle",
+	"visualeditor-dialog-transclusion-title-insert-template": "Insérer un modèle",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Insérer : $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifier : $1",
 	"visualeditor-dialog-transclusion-template-search": "Recherche de modèle",
 	"visualeditor-dialog-transclusion-template-search-help": "Trouver le modèle que vous voulez insérer en cherchant un mot-clé identifiant. Les modèles qui ont des descriptions sont plus susceptibles de bien fonctionner avec cet éditeur (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu de configuration des champs du modèle",
@@ -455,7 +460,6 @@
 	"visualeditor-wikitext-warning": "Vous utilisez l’éditeur visuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikicode]] ne fonctionne pas ici. Pour basculer à tout moment vers la modification du wikicode sans perdre votre travail, cliquez sur le bouton de bascule.",
 	"visualeditor-wikitext-warning-title": "Balisage wikicode détecté",
 	"visualeditor-wikitextconvert-title": "Convertir la mise en forme en wikicode ?",
-	"visualeditor-wikitextconvert-message": "Votre contenu copié possède une mise en forme. Doit-il être converti en wikicode ou être inséré comme texte simple ?",
-	"visualeditor-wikitextconvert-plain": "Utiliser du texte simple",
+	"visualeditor-wikitextconvert-message": "misse en forme en wikitexte ?",
 	"visualeditor-wikitextconvert-convert": "Convertir en wikicode"
 }
