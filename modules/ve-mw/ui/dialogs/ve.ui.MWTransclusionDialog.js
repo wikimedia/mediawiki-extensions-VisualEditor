@@ -24,7 +24,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	ve.ui.MWTransclusionDialog.super.call( this, config );
 
 	// Properties
-	this.mode = null;
+	this.isSidebarExpanded = null;
 	this.closeButton = null;
 	this.backButton = null;
 
@@ -107,18 +107,6 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
 		flags: [ 'safe', 'back' ]
 	}
 ] );
-
-/**
- * Map of symbolic mode names and CSS classes.
- *
- * @static
- * @property {Object}
- * @inheritable
- */
-ve.ui.MWTransclusionDialog.static.modeCssClasses = {
-	single: 've-ui-mwTransclusionDialog-single',
-	multiple: 've-ui-mwTransclusionDialog-multiple'
-};
 
 ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 	{},
@@ -240,9 +228,8 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 };
 
 /**
- * Checks if transclusion only contains a single template or template placeholder.
- *
- * @return {boolean} Transclusion only contains a single template or template placeholder
+ * @return {boolean} True if the dialog contains a single template or template placeholder. False
+ *  otherwise. Also false if there is no data model connected yet.
  */
 ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
@@ -265,41 +252,28 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 };
 
 /**
- * Set dialog mode.
+ * Set if the dialog is expanded and the sidebar visible, or collapsed. `auto` will choose
+ * `collapsed` if possible.
  *
- * Auto mode will choose single if possible.
- *
- * @param {string} [mode='multiple'] Symbolic name of dialog mode, `multiple`, `single` or 'auto'
+ * @param {string} [mode='expanded'] Symbolic name of dialog mode, `expanded`, `collapsed` or 'auto'
  */
 ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
-	var name, single,
-		modeCssClasses = ve.ui.MWTransclusionDialog.static.modeCssClasses;
-
-	if ( this.transclusionModel ) {
-		if ( mode === 'auto' ) {
-			mode = this.isSingleTemplateTransclusion() ? 'single' : 'multiple';
-		}
-	}
-	if ( !modeCssClasses[ mode ] ) {
-		mode = 'multiple';
+	var isSidebarExpanded;
+	if ( mode === 'auto' && this.isSingleTemplateTransclusion() ) {
+		isSidebarExpanded = false;
+	} else {
+		isSidebarExpanded = mode !== 'collapsed';
 	}
 
-	if ( this.mode !== mode ) {
-		this.mode = mode;
-		single = mode === 'single';
+	if ( this.isSidebarExpanded !== isSidebarExpanded ) {
+		this.isSidebarExpanded = isSidebarExpanded;
 		if ( this.$content ) {
-			for ( name in modeCssClasses ) {
-				// See static.modeCssClasses
-				// eslint-disable-next-line mediawiki/class-doc
-				this.$content.toggleClass( modeCssClasses[ name ], name === mode );
-			}
+			this.$content
+				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !isSidebarExpanded )
+				.toggleClass( 've-ui-mwTransclusionDialog-expanded', isSidebarExpanded );
 		}
-		if ( this.isBigger ) {
-			this.setSize( 'larger' );
-		} else {
-			this.setSize( single ? 'medium' : 'large' );
-		}
-		this.bookletLayout.toggleOutline( !single );
+		this.setSize( isSidebarExpanded ? ( this.isBigger ? 'larger' : 'large' ) : 'medium' );
+		this.bookletLayout.toggleOutline( isSidebarExpanded );
 		this.updateTitle();
 		this.updateModeActionState();
 
@@ -326,18 +300,13 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
-		mode = this.mode;
+		isSidebarExpanded = this.isSidebarExpanded,
+		label = ve.msg( isSidebarExpanded ?
+			'visualeditor-dialog-transclusion-multiple-mode' :
+			'visualeditor-dialog-transclusion-single-mode' );
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
-		var label, expanded;
-		if ( mode === 'single' ) {
-			label = ve.msg( 'visualeditor-dialog-transclusion-multiple-mode' );
-			expanded = false;
-		} else {
-			label = ve.msg( 'visualeditor-dialog-transclusion-single-mode' );
-			expanded = true;
-		}
 		action.setLabel( label );
-		action.$button.attr( 'aria-expanded', expanded.toString() );
+		action.$button.attr( 'aria-expanded', isSidebarExpanded ? 1 : 0 );
 	} );
 
 	// Decide whether the button should be enabled or not. It needs to be:
@@ -405,7 +374,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 
 	if ( action === 'mode' ) {
 		return new OO.ui.Process( function () {
-			this.setMode( this.mode === 'single' ? 'multiple' : 'single' );
+			this.setMode( this.isSidebarExpanded ? 'collapsed' : 'expanded' );
 		}, this );
 	}
 
@@ -477,7 +446,7 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
 		.done( function () {
-			target.setMode( 'single' );
+			target.setMode( 'collapsed' );
 			target.updateModeActionState();
 		} );
 };

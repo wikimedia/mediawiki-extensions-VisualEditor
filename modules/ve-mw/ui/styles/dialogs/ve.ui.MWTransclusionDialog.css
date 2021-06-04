@@ -63,11 +63,11 @@
 	overflow: hidden;
 }
 
-.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
-.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label,
-.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
-.ve-ui-mwTransclusionDialog-multiple .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
-.ve-ui-mwTransclusionDialog-multiple .oo-ui-bookletLayout .ve-ui-mwParameterPage-addUndocumented {
+.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
+.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label,
+.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
+.ve-ui-mwTransclusionDialog-expanded .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
+.ve-ui-mwTransclusionDialog-expanded .oo-ui-bookletLayout .ve-ui-mwParameterPage-addUndocumented {
 	display: none;
 }
 
@@ -94,6 +94,6 @@
 	color: inherit;
 }
 
-.ve-ui-mwTransclusionDialog-single .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
+.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
 	display: inline-block;
 }
