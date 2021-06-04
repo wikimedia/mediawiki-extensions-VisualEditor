@@ -125,17 +125,16 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			}
 			// Add existing params to templates (the template might be being moved)
 			if ( added instanceof ve.dm.MWTemplateModel ) {
-				names = added.getParameterNames();
-				params = added.getParameters();
+				names = added.getOrderedParameterNames();
 				// Prevent selection changes
 				this.preventReselection = true;
 				for ( i = 0, len = names.length; i < len; i++ ) {
-					this.onAddParameter( params[ names[ i ] ] );
+					this.onAddParameter( added.getParameter( names[ i ] ) );
 				}
 				this.preventReselection = false;
 				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
 				if ( names.length ) {
-					this.setPageByName( params[ names[ 0 ] ].getId() );
+					this.setPageByName( added.getParameter( names[ 0 ] ).getId() );
 				}
 			}
 
@@ -145,10 +144,9 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				this.preventReselection = true;
 				addedCount = added.addPromptedParameters();
 				this.preventReselection = false;
-				names = added.getParameterNames();
-				params = added.getParameters();
+				names = added.getOrderedParameterNames();
 				if ( names.length ) {
-					this.setPageByName( params[ names[ 0 ] ].getId() );
+					this.setPageByName( added.getParameter( names[ 0 ] ).getId() );
 				} else if ( addedCount === 0 ) {
 					page.onAddButtonFocus();
 				}

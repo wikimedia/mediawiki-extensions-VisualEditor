@@ -32,7 +32,7 @@ ve.dm.MWTemplateModel = function VeDmMWTemplateModel( transclusion, target ) {
 
 	// TODO: Either here or in uses of this constructor we need to validate the title
 	this.title = target.href ? mw.libs.ve.normalizeParsoidResourceName( target.href ) : null;
-	this.sequence = null;
+	this.orderedParameterNames = null;
 	this.params = {};
 	this.spec = new ve.dm.MWTemplateSpecModel( this );
 	this.originalData = null;
@@ -196,19 +196,19 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  *
  * @return {string[]} List of parameter names
  */
-ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
+ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 	var i, len, index, paramOrder, paramNames;
 
-	if ( !this.sequence ) {
+	if ( !this.orderedParameterNames ) {
 		paramOrder = this.spec.getParameterOrder();
 		paramNames = Object.keys( this.params );
 
-		this.sequence = [];
+		this.orderedParameterNames = [];
 		// Known parameters first
 		for ( i = 0, len = paramOrder.length; i < len; i++ ) {
 			index = paramNames.indexOf( paramOrder[ i ] );
 			if ( index !== -1 ) {
-				this.sequence.push( paramOrder[ i ] );
+				this.orderedParameterNames.push( paramOrder[ i ] );
 				paramNames.splice( index, 1 );
 			}
 		}
@@ -238,9 +238,9 @@ ve.dm.MWTemplateModel.prototype.getParameterNames = function () {
 			// Two numbers
 			return a - b;
 		} );
-		ve.batchPush( this.sequence, paramNames );
+		ve.batchPush( this.orderedParameterNames, paramNames );
 	}
-	return this.sequence;
+	return this.orderedParameterNames;
 };
 
 /**
@@ -269,7 +269,7 @@ ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
  */
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	var name = param.getName();
-	this.sequence = null;
+	this.orderedParameterNames = null;
 	this.params[ name ] = param;
 	this.spec.fillFromTemplate();
 	param.connect( this, { change: [ 'emit', 'change' ] } );
@@ -285,7 +285,7 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
  */
 ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
 	if ( param ) {
-		this.sequence = null;
+		this.orderedParameterNames = null;
 		delete this.params[ param.getName() ];
 		param.disconnect( this );
 		this.emit( 'remove', param );
@@ -410,8 +410,8 @@ ve.dm.MWTemplateModel.prototype.isEmpty = function () {
 			return true;
 		}
 
-		var param = params[ name ];
-		var value = param.getValue();
+		var param = params[ name ],
+			value = param.getValue();
 		// Check that the value has not been set, or is indistinguishable from
 		// the automatically-set value.  See `MWParameterModel.getValue`
 		return value === '' || value === param.getAutoValue();

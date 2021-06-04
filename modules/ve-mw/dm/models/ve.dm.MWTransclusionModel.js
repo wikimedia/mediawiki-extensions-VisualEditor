@@ -549,7 +549,7 @@
 			}
 			index++;
 			if ( part instanceof ve.dm.MWTemplateModel ) {
-				names = part.getParameterNames();
+				names = part.getOrderedParameterNames();
 				for ( j = 0, jLen = names.length; j < jLen; j++ ) {
 					if ( part.getParameter( names[ j ] ) === model ) {
 						return index;
