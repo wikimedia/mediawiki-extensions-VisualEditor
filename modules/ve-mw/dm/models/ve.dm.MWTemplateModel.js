@@ -278,9 +278,10 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 };
 
 /**
- * Remove parameter from template.
+ * Remove parameter from template. Note this does *not* remove the parameter from the linked
+ * specification.
  *
- * @param {ve.dm.MWParameterModel} param Parameter to remove
+ * @param {ve.dm.MWParameterModel} [param]
  * @fires remove
  */
 ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {

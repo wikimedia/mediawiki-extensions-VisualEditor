@@ -15,9 +15,11 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
- * @param {ve.dm.MWTemplateModel} template Template
- * @param {string} [name=''] Parameter name
- * @param {string} [value=''] Parameter value
+ * @param {ve.dm.MWTemplateModel} template Reference back to the template that contains the
+ *  parameter, as well as to the specification
+ * @param {string} [name] Can be missing or empty when meant to be used as a placeholder. Parameters
+ *  without a name won't be serialized to wikitext, {@see ve.dm.MWTemplateModel.getWikitext}.
+ * @param {string} [value='']
  */
 ve.dm.MWParameterModel = function VeDmMWParameterModel( template, name, value ) {
 	// Mixin constructors
@@ -90,18 +92,14 @@ ve.dm.MWParameterModel.prototype.getId = function () {
 };
 
 /**
- * Get parameter name.
- *
- * @return {string} Parameter name
+ * @return {string} Trimmed parameter name, or an empty string if no name was provided
  */
 ve.dm.MWParameterModel.prototype.getName = function () {
 	return this.name;
 };
 
 /**
- * Get parameter name.
- *
- * @return {string} Parameter name
+ * @return {string|undefined} Untrimmed parameter name as provided on construction time
  */
 ve.dm.MWParameterModel.prototype.getOriginalName = function () {
 	return this.originalName;
@@ -136,9 +134,7 @@ ve.dm.MWParameterModel.prototype.getDefaultValue = function () {
 };
 
 /**
- * Get default parameter value.
- *
- * @return {string} Default parameter value
+ * @return {string}
  */
 ve.dm.MWParameterModel.prototype.getExampleValue = function () {
 	return this.template.getSpec().getParameterExampleValue( this.name );

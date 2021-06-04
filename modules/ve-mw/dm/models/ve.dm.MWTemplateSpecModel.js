@@ -334,7 +334,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
 };
 
 /**
- * Get all primary parameter names.
+ * Get all primary parameter names, without aliases, in their original order as they appear in the
+ * template.
  *
  * @return {string[]} Parameter names
  */
