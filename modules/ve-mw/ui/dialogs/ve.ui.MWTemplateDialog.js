@@ -121,7 +121,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( added ) );
 			if ( reselect ) {
 				// Use added page instead of closest page
-				this.setPageByName( added.getId() );
+				this.transclusions.focusPart( added.getId() );
 			}
 			// Add existing params to templates (the template might be being moved)
 			if ( added instanceof ve.dm.MWTemplateModel ) {
@@ -134,7 +134,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				this.preventReselection = false;
 				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
 				if ( names.length ) {
-					this.setPageByName( added.getParameter( names[ 0 ] ).getId() );
+					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
 				}
 			}
 
@@ -146,14 +146,14 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				this.preventReselection = false;
 				names = added.getOrderedParameterNames();
 				if ( names.length ) {
-					this.setPageByName( added.getParameter( names[ 0 ] ).getId() );
+					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
 				} else if ( addedCount === 0 ) {
 					page.onAddButtonFocus();
 				}
 			}
 		}
 	} else if ( reselect ) {
-		this.setPageByName( reselect.getName() );
+		this.transclusions.focusPart( reselect.getName() );
 	}
 
 	if ( this.loaded && ( added || removed ) ) {
@@ -195,7 +195,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
 		if ( !this.preventReselection ) {
-			this.setPageByName( param.getId() );
+			this.transclusions.focusPart( param.getId() );
 		}
 
 		this.altered = true;
@@ -228,7 +228,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 	// Select the desired page first. Otherwise, if the page we are removing is selected,
 	// OOUI will try to select the first page after it is removed, and scroll to the top.
 	if ( this.loaded && !this.preventReselection ) {
-		this.setPageByName( reselect.getName() );
+		this.transclusions.focusPart( reselect.getName() );
 	}
 
 	this.bookletLayout.removePages( [ page ] );
@@ -300,21 +300,6 @@ ve.ui.MWTemplateDialog.prototype.getSelectedNode = function ( data ) {
 };
 
 /**
- * Set the page by name.
- *
- * Page names are always the ID of the part or param they represent.
- *
- * @param {string} name Page name
- */
-ve.ui.MWTemplateDialog.prototype.setPageByName = function ( name ) {
-	if ( this.bookletLayout.isOutlined() ) {
-		this.bookletLayout.getOutline().selectItemByData( name );
-	} else {
-		this.bookletLayout.setPage( name );
-	}
-};
-
-/**
  * Update the dialog title.
  */
 ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
@@ -345,6 +330,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 
 	// Properties
 	this.bookletLayout = new OO.ui.BookletLayout( this.constructor.static.bookletLayoutConfig );
+	this.transclusions = new ve.ui.MWTransclusionsBooklet( this.bookletLayout );
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );
