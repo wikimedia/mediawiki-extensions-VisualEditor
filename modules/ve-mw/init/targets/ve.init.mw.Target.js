@@ -375,7 +375,9 @@ ve.init.mw.Target.prototype.addSurface = function () {
 	surface = ve.init.mw.Target.super.prototype.addSurface.apply( this, arguments );
 	// Add classes specific to surfaces attached directly to the target,
 	// as opposed to TargetWidget surfaces
-	surface.$element.addClass( 've-init-mw-target-surface' );
+	if ( !surface.inTargetWidget ) {
+		surface.$element.addClass( 've-init-mw-target-surface' );
+	}
 	this.track( 'trace.createSurface.exit' );
 
 	this.setSurface( surface );
