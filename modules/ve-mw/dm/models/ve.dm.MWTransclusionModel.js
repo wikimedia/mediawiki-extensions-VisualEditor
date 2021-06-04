@@ -10,7 +10,10 @@
 		specCache = {};
 
 	/**
-	 * MediaWiki transclusion model.
+	 * Represents a MediaWiki transclusion, i.e. a sequence of one or more template invocations that
+	 * strictly belong to each other (e.g. because they are unballanced), possibly mixed with raw
+	 * wikitext snippets. These individual "parts" are subclasses of
+	 * {@see ve.dm.MWTransclusionPartModel}.
 	 *
 	 * @class
 	 * @mixins OO.EventEmitter

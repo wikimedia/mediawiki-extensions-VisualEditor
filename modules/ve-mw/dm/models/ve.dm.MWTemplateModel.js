@@ -6,7 +6,13 @@
  */
 
 /**
- * MediaWiki template model.
+ * Represents a template invocation that's part of a (possibly unballanced) sequence of template
+ * invocations and raw wikitext snippets. Meant to be an item in a {@see ve.dm.MWTransclusionModel}.
+ * Holds a back-reference to it's parent.
+ *
+ * Holds a reference to the specification of the template, i.e. how the template is documented via
+ * TemplateData. The actual invocation might be entirely different, missing parameters as well as
+ * containing undocumented ones.
  *
  * @class
  * @extends ve.dm.MWTransclusionPartModel

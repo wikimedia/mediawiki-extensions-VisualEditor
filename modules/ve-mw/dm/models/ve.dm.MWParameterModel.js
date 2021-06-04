@@ -6,7 +6,10 @@
  */
 
 /**
- * MediaWiki template parameter.
+ * Represents a parameter that's part of a template invocation, centered around the parameter's
+ * value. Holds a reference to the specification of the template and the parameter as it is
+ * documented via TemplateData. Meant to be a sub-element of a {@see ve.dm.MWTemplateModel}, which
+ * is a sub-element of a {@see ve.dm.MWTransclusionModel}.
  *
  * @class
  * @mixins OO.EventEmitter

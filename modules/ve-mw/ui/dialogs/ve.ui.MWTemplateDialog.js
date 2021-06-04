@@ -6,7 +6,14 @@
  */
 
 /**
- * Dialog for inserting and editing MediaWiki transclusions.
+ * Abstract base class for dialogs that allow to insert and edit MediaWiki transclusions, i.e. a
+ * sequence of one or more template invocations that strictly belong to each other (e.g. because
+ * they are unbalanced), possibly mixed with raw wikitext snippets. Currently used for:
+ * - {@see ve.ui.MWTransclusionDialog} for arbitrary transclusions. Registered via the name
+ *   "transclusion".
+ * - {@see ve.ui.MWCitationDialog} in the Cite extension for the predefined citation types from
+ *   [[MediaWiki:visualeditor-cite-tool-definition.json]]. These are strictly limited to a single
+ *   template invocation. Registered via the name "cite".
  *
  * @class
  * @abstract

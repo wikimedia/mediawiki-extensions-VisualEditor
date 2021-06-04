@@ -6,7 +6,11 @@
  */
 
 /**
- * MediaWiki transclusion part model.
+ * Abstract base class for items in a {@see ve.dm.MWTransclusionModel}. Holds a back-reference to
+ * it's parent. Currently used for:
+ * - {@see ve.dm.MWTemplateModel} for a single template invocation.
+ * - {@see ve.dm.MWTemplatePlaceholderModel} while searching for a template name to be added.
+ * - {@see ve.dm.MWTransclusionContentModel} for a raw wikitext snippet.
  *
  * @class
  * @mixins OO.EventEmitter

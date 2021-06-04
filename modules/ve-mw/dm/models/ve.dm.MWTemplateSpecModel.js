@@ -6,7 +6,16 @@
  */
 
 /**
- * MediaWiki template specification.
+ * Holds a mixture of:
+ * - A copy of a template's specification as it is documented via TemplateData.
+ * - Undocumented parameters that appear in a template invocation, {@see fillFromTemplate}.
+ * Therefore this is not the original specification but an accessor to the documentation for an
+ * individual template invocation. It's possible different for every invocation.
+ *
+ * Meant to be in a 1:1 relationship to {@see ve.dm.MWTemplateModel}.
+ *
+ * The actual, unmodified specification can be found in {@see specCache} in
+ * {@see ve.dm.MWTransclusionModel}.
  *
  * See https://github.com/wikimedia/mediawiki-extensions-TemplateData/blob/master/Specification.md
  * for the latest version of the TemplateData specification.
