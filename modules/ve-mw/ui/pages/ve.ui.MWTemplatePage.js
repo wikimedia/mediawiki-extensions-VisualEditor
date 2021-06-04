@@ -34,26 +34,11 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	// Properties
 	this.template = template;
 	this.spec = template.getSpec();
-	this.$more = $( '<div>' );
 	this.$description = $( '<div>' );
-	this.removeButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'trash',
-		title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-		flags: [ 'destructive' ],
-		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
-	} )
-		.connect( this, { click: 'onRemoveButtonClick' } );
 	this.infoFieldset = new OO.ui.FieldsetLayout( {
 		label: this.spec.getLabel(),
 		icon: 'puzzle'
 	} );
-	this.addButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'parameter',
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
-	} )
-		.connect( this, { click: 'onAddButtonFocus' } );
 
 	// Initialization
 	this.$description.addClass( 've-ui-mwTemplatePage-description' );
@@ -98,17 +83,33 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		} );
 
 	this.infoFieldset.$element.append( this.$description );
-	this.$more
-		.addClass( 've-ui-mwTemplatePage-more' )
-		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwTemplatePage' )
 		.append( this.infoFieldset.$element );
+
 	if ( !config.isReadOnly ) {
 		if ( !veConfig.transclusionDialogBackButton ) {
-			this.$element.append( this.removeButton.$element );
+			var removeButton = new OO.ui.ButtonWidget( {
+				framed: false,
+				icon: 'trash',
+				title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
+				flags: [ 'destructive' ],
+				classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
+			} )
+				.connect( this, { click: 'onRemoveButtonClick' } );
+			removeButton.$element.appendTo( this.$element );
 		}
-		this.$element.append( this.$more );
+
+		var addButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'parameter',
+			label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
+		} )
+			.connect( this, { click: 'onAddButtonFocus' } );
+		$( '<div>' )
+			.addClass( 've-ui-mwTemplatePage-more' )
+			.append( addButton.$element )
+			.appendTo( this.$element );
 	}
 };
 

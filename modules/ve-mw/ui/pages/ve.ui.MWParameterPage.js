@@ -42,7 +42,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$actions = $( '<div>' );
 	this.$labelElement = $( '<div>' );
 	this.$field = $( '<div>' );
-	this.$addUndocumented = $( '<div>' );
 
 	// Note: Calling createValueInput() sets some properties we rely on later in this function
 	this.valueInput = this.createValueInput()
@@ -171,13 +170,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		this.$actions.append( this.removeButton.$element );
 	}
 
-	this.addButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'parameter',
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
-	} )
-		.connect( this, { click: 'onAddButtonFocus' } );
-
 	// Events
 	this.$labelElement.on( 'click', this.onLabelClick.bind( this ) );
 
@@ -205,9 +197,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		} ).toggle( false );
 		this.$field.append( this.warningMessage.$element );
 	}
-	this.$addUndocumented
-		.addClass( 've-ui-mwParameterPage-addUndocumented' )
-		.append( this.addButton.$element );
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$info, this.$field, this.$actions );
@@ -222,7 +211,16 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( !config.readOnly ) {
-		this.$element.append( this.$addUndocumented );
+		var addButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'parameter',
+			label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
+		} )
+			.connect( this, { click: 'onAddButtonFocus' } );
+		$( '<div>' )
+			.addClass( 've-ui-mwParameterPage-addUndocumented' )
+			.append( addButton.$element )
+			.appendTo( this.$element );
 	}
 };
 

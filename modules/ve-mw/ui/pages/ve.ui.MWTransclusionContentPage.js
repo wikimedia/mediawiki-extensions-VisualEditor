@@ -36,14 +36,6 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		.setValue( this.content.getValue() )
 		.setReadOnly( config.isReadOnly )
 		.connect( this, { change: 'onTextInputChange' } );
-	this.removeButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'trash',
-		title: ve.msg( 'visualeditor-dialog-transclusion-remove-content' ),
-		flags: [ 'destructive' ],
-		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
-	} )
-		.connect( this, { click: 'onRemoveButtonClick' } );
 	this.valueFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-content' ),
 		icon: 'wikiText',
@@ -56,7 +48,16 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		.append( this.valueFieldset.$element );
 
 	if ( !config.isReadOnly ) {
-		this.$element.append( this.removeButton.$element );
+		var removeButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'trash',
+			title: ve.msg( 'visualeditor-dialog-transclusion-remove-content' ),
+			flags: [ 'destructive' ],
+			classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
+		} )
+			.connect( this, { click: 'onRemoveButtonClick' } );
+
+		removeButton.$element.appendTo( this.$element );
 	}
 };
 
