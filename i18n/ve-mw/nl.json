@@ -192,6 +192,7 @@
 	"visualeditor-dialog-table-sortable": "Sorteerbaar",
 	"visualeditor-dialog-table-wikitable": "Gestijld (wikitabel)",
 	"visualeditor-dialog-template-title": "Sjabloon",
+	"visualeditor-dialog-transclusion-action-save": "Opslaan",
 	"visualeditor-dialog-transclusion-absent-template": "Het sjabloon \"$1\" bestaat nog niet.",
 	"visualeditor-dialog-transclusion-add-content": "Inhoud toevoegen",
 	"visualeditor-dialog-transclusion-add-param": "Meer informatie toevoegen",

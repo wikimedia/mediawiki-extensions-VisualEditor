@@ -423,6 +423,6 @@
 	"visualeditor-wikitext-warning": "Używasz teraz edytora wizualnego – a tu [[{{MediaWiki:visualeditor-wikitext-warning-link}}|znaczniki kodu źródłowego]] nie działają. W każdej chwili bez utraty zmian możesz przełączyć się na edycję kodu źródłowego, klikając przycisk przełączający.",
 	"visualeditor-wikitext-warning-title": "Znaleziono znaczniki kodu źródłowego",
 	"visualeditor-wikitextconvert-title": "Przekonwertować formatowanie do wikitekstu?",
-	"visualeditor-wikitextconvert-message": "Wklejana treść zawiera formatowanie. Czy ma zostać ono przekonwertowane na wikikod czy wklejone jako czysty tekst?",
+	"visualeditor-wikitextconvert-message": "{{GENDER:|Wkleiłeś treść zawierającą|Wkleiłaś treść zawierającą|Wklejona treść zawiera}} formatowanie. Czy chcesz, aby zostało ono przekonwertowane na wikitekst?",
 	"visualeditor-wikitextconvert-convert": "Przekonwertuj do wikitekstu"
 }

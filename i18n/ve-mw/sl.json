@@ -323,6 +323,6 @@
 	"visualeditor-wikitext-progress": "Pretvarjanje vikibesedila",
 	"visualeditor-wikitext-warning": "Uporabljate Vizualni urejevalnik – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikibesedilo]] tukaj ne deluje. Da preklopite v način urejanja kode brez izgub sprememb, lahko kadarkoli kliknete gumb za preklop.",
 	"visualeditor-wikitext-warning-title": "Zaznali smo označevanje wikibesedila",
-	"visualeditor-wikitextconvert-message": "Vaša prilepljena vsebina vsebuje oblikovanje. Ali jo želite pretvoriti v vikibesedilo ali vstaviti kot navadno besedilo?",
+	"visualeditor-wikitextconvert-message": "Prilepili ste vsebino z oblikovanjem. Želite oblikovanje pretvoriti v wikibesedilo?",
 	"visualeditor-wikitextconvert-convert": "Pretvori v vikibesedilo"
 }

@@ -409,6 +409,6 @@
 	"visualeditor-wikitext-warning": "Го користите нагледниот уредник — тука не работи [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]]. За да се префрлите на изворно уредување во секое време без да ги изгубите направените измени, стиснете на копчето за префрлање.",
 	"visualeditor-wikitext-warning-title": "Пронаоѓање на викитекст",
 	"visualeditor-wikitextconvert-title": "Да го претворам форматирањето во викитекст?",
-	"visualeditor-wikitextconvert-message": "Прекопиравте содржина која е форматирана. Дали да ја претворам во викитекст, или да ја ставам просто?",
+	"visualeditor-wikitextconvert-message": "Прекопиравте содржина во збогатено форматирање. Дали би сакале да го претворите во викитекст?",
 	"visualeditor-wikitextconvert-convert": "Претвори во викитекст"
 }

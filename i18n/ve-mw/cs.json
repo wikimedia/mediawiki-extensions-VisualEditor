@@ -415,6 +415,6 @@
 	"visualeditor-wikitext-warning": "Používáte Vizuální editor – [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] zde nefunguje. Kdykoli můžete bez ztráty provedených změn přepnout do režimu editace zdrojového textu tím, že kliknete na „Přepnout“.",
 	"visualeditor-wikitext-warning-title": "Detekována syntaxe wikitextu",
 	"visualeditor-wikitextconvert-title": "Převést formátování do wikitextu?",
-	"visualeditor-wikitextconvert-message": "Vložil(a) jste obsah obsahující formátování. Měl by být převeden do wikitextu, nebo vložen jako prostý text?",
+	"visualeditor-wikitextconvert-message": "Vložil(a) jste obsah obsahující formátování. Chcete toto formátování převést do wikitextu?",
 	"visualeditor-wikitextconvert-convert": "Převést do wikitextu"
 }

@@ -216,6 +216,8 @@
 	"visualeditor-dialog-transclusion-single-mode": "Nascondi opzioni",
 	"visualeditor-dialog-transclusion-title": "Inclusione",
 	"visualeditor-dialog-transclusion-title-insert-template": "Inserisci un template",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Inserisci: $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifica: $1",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Continuare a modificare",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Rimuovi template",
 	"visualeditor-dialogbutton-media-tooltip": "Immagini e file multimediali",
@@ -376,6 +378,6 @@
 	"visualeditor-wikitext-progress": "Conversione wikitesto",
 	"visualeditor-wikitext-warning": "Stai utilizzando l'editor visuale - il [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitesto]] non funziona qui. Per passare alla modifica sorgente in ogni momento senza perdere le tue modifiche, clicca il pulsante commutativo.",
 	"visualeditor-wikitext-warning-title": "Rilevato wikitesto",
-	"visualeditor-wikitextconvert-message": "Il contenuto incollato contiene della formattazione. Vuoi convertirlo in wikitesto o inserirlo come testo semplice?",
+	"visualeditor-wikitextconvert-message": "Il contenuto incollato contiene della formattazione. Vuoi convertirlo in wikitesto?",
 	"visualeditor-wikitextconvert-convert": "Converti in wikitesto"
 }

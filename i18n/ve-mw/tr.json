@@ -185,7 +185,9 @@
 	"visualeditor-dialog-table-collapsible": "Daralabilir",
 	"visualeditor-dialog-table-sortable": "Sıralanabilir",
 	"visualeditor-dialog-table-wikitable": "Tarz (vikitablosu)",
+	"visualeditor-dialog-template-insert": "Bir şablon ekle",
 	"visualeditor-dialog-template-title": "Şablon",
+	"visualeditor-dialog-transclusion-action-save": "Kaydet",
 	"visualeditor-dialog-transclusion-absent-template": "\"$1\" şablonu henüz yoktur.",
 	"visualeditor-dialog-transclusion-add-content": "İçerik ekle",
 	"visualeditor-dialog-transclusion-add-param": "Daha fazla bilgi ekleyin",
@@ -218,6 +220,9 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|boşluğunu|boşluklarını}} doldurmadan devam etmek istediğinize emin misiniz?",
 	"visualeditor-dialog-transclusion-single-mode": "Seçenekleri gizle",
 	"visualeditor-dialog-transclusion-title": "Dönüştürülme",
+	"visualeditor-dialog-transclusion-title-insert-template": "Bir şablon ekle",
+	"visualeditor-dialog-transclusion-title-insert-known-template": "Ekle: $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Düzenle: $1",
 	"visualeditor-dialog-transclusion-template-search": "Şablon arama",
 	"visualeditor-dialog-transclusion-template-search-help": "Tanımlayıcı bir anahtar kelime arayarak eklemek istediğiniz şablonu bulun. Açıklamaları olan şablonların bu düzenleyiciyle (VisualEditor) iyi çalışması daha olasıdır.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Şablon alanları kurulum menüsü",
@@ -430,6 +435,6 @@
 	"visualeditor-wikitext-warning": "Görsel düzenleyiciyi kullanıyorsunuz - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikimetin]] burada çalışmıyor. Değişikliklerinizi kaybetmeden istediğiniz zaman kaynak düzenlemeye geçmek için geçiş düğmesine tıklayın.",
 	"visualeditor-wikitext-warning-title": "Vikimetin biçimlendirmesi algılandı",
 	"visualeditor-wikitextconvert-title": "Biçimlendirmeyi vikimetine dönüştürülürsün mü?",
-	"visualeditor-wikitextconvert-message": "Yapıştırılan içeriğiniz biçimlendirme içeriyor. Vikimetin biçimine dönüştürülmeli veya düz metin olarak mı eklenmelidir?",
+	"visualeditor-wikitextconvert-message": "Zengin biçimlendirmeye sahip içerik yapıştırdınız. Bu biçimi vikimetine dönüştürmek ister misiniz?",
 	"visualeditor-wikitextconvert-convert": "Vikimetine dönüştür"
 }
