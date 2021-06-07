@@ -27,16 +27,13 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	ve.ui.MWParameterPlaceholderPage.super.call( this, name, config );
 
 	// Properties
+	// TODO: the unique `name` seems to be a relic of when BookletLayout held
+	// the parameters in separate pages rather than in a StackLayout.
 	this.name = name;
 	this.parameter = parameter;
 	this.template = this.parameter.getTemplate();
-	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, {
-		showAll: !!config.expandedParamList
-	} )
-		.connect( this, {
-			choose: 'onParameterChoose',
-			showAll: 'onParameterShowAll'
-		} );
+	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template )
+		.connect( this, { choose: 'onParameterChoose' } );
 
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -67,15 +64,6 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 OO.inheritClass( ve.ui.MWParameterPlaceholderPage, OO.ui.PageLayout );
 
 /* Methods */
-
-/**
- * Respond to the parameter search widget showAll event
- *
- * @fires showAll
- */
-ve.ui.MWParameterPlaceholderPage.prototype.onParameterShowAll = function () {
-	this.emit( 'showAll', this.name );
-};
 
 /**
  * @inheritdoc

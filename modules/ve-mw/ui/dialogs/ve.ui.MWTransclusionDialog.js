@@ -194,6 +194,8 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 	if ( item ) {
 		part = this.transclusionModel.getPartFromId( item.getData() );
 		if ( part instanceof ve.dm.MWTemplateModel ) {
+			// TODO: Use a distinct class for placeholder model rather than
+			// these magical "empty" constants.
 			param = new ve.dm.MWParameterModel( part, '', null );
 			part.addParameter( param );
 		}
