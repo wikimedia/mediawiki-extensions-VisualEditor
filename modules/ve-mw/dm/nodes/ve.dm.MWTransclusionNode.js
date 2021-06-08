@@ -428,8 +428,7 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
  * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
 ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
-	var i, len,
-		templateNS = mw.config.get( 'wgNamespaceIds' ).template,
+	var templateNS = mw.config.get( 'wgNamespaceIds' ).template,
 		partsList = this.getPartsList();
 
 	function normalizeTemplateTitle( name ) {
@@ -443,18 +442,15 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
 	if ( templates === undefined ) {
 		return true;
 	}
+	if ( !partsList[ 0 ].templatePage ) {
+		return false;
+	}
 	if ( typeof templates === 'string' ) {
 		templates = [ templates ];
 	}
-	for ( i = 0, len = templates.length; i < len; i++ ) {
-		if (
-			partsList[ 0 ].templatePage &&
-			partsList[ 0 ].templatePage === normalizeTemplateTitle( templates[ i ] )
-		) {
-			return true;
-		}
-	}
-	return false;
+	return templates.some( function ( template ) {
+		return partsList[ 0 ].templatePage === normalizeTemplateTitle( template );
+	} );
 };
 
 /**

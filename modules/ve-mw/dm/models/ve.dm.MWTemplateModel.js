@@ -162,30 +162,28 @@ ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
  * @return {boolean} Parameter exists
  */
 ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
-	var i, len, primaryName, names;
+	var primaryName,
+		params = this.params;
 
 	// Check if name (which may be an alias) is present in the template
-	if ( this.params[ name ] ) {
+	if ( name in params ) {
 		return true;
 	}
 
 	// Check if the name is known at all
-	if ( this.spec.isParameterKnown( name ) ) {
-		primaryName = this.spec.getParameterName( name );
-		// Check for primary name (may be the same as name)
-		if ( this.params[ primaryName ] ) {
-			return true;
-		}
-		// Check for other aliases (may include name)
-		names = this.spec.getParameterAliases( primaryName );
-		for ( i = 0, len = names.length; i < len; i++ ) {
-			if ( this.params[ names[ i ] ] ) {
-				return true;
-			}
-		}
+	if ( !this.spec.isParameterKnown( name ) ) {
+		return false;
 	}
 
-	return false;
+	primaryName = this.spec.getParameterName( name );
+	// Check for primary name (may be the same as name)
+	if ( primaryName in params ) {
+		return true;
+	}
+	// Check for other aliases (may include name)
+	return this.spec.getParameterAliases( primaryName ).some( function ( alias ) {
+		return alias in params;
+	} );
 };
 
 /**
@@ -298,24 +296,20 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
-	var i, len, name, j, aliases, aliasLen, foundAlias,
+	var i, len, name, foundAlias,
 		addedCount = 0,
+		params = this.params,
 		spec = this.getSpec(),
 		names = spec.getParameterNames();
 
 	for ( i = 0, len = names.length; i < len; i++ ) {
 		name = names[ i ];
-		aliases = spec.getParameterAliases( name );
-		foundAlias = false;
-		for ( j = 0, aliasLen = aliases.length; j < aliasLen; j++ ) {
-			if ( Object.prototype.hasOwnProperty.call( this.params, aliases[ j ] ) ) {
-				foundAlias = true;
-				break;
-			}
-		}
+		foundAlias = spec.getParameterAliases( name ).some( function ( alias ) {
+			return alias in params;
+		} );
 		if (
 			!foundAlias &&
-			!this.params[ name ] &&
+			!params[ name ] &&
 			(
 				spec.isParameterRequired( name ) ||
 				spec.isParameterSuggested( name )
