@@ -96,18 +96,20 @@ ve.ui.MWParameterPlaceholderPage.prototype.setOutlineItem = function () {
 };
 
 ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name ) {
-	var param, isKnownParameter, actionName;
-
-	if ( name ) {
-		isKnownParameter = this.template.getSpec().isParameterKnown( name );
-		actionName = isKnownParameter ? 'add-known-parameter' : 'add-unknown-parameter';
-
-		param = new ve.dm.MWParameterModel( this.template, name );
-		this.addParameterSearch.query.setValue( '' );
-		this.template.addParameter( param );
-
-		ve.track( 'activity.transclusion', { action: actionName } );
+	if ( !name ) {
+		return;
 	}
+
+	// Note that every parameter is known after it is added
+	var knownBefore = this.template.getSpec().isParameterKnown( name ),
+		param = new ve.dm.MWParameterModel( this.template, name );
+
+	this.addParameterSearch.query.setValue( '' );
+	this.template.addParameter( param );
+
+	ve.track( 'activity.transclusion', {
+		action: knownBefore ? 'add-known-parameter' : 'add-unknown-parameter'
+	} );
 };
 
 ve.ui.MWParameterPlaceholderPage.prototype.onRemoveButtonClick = function () {
