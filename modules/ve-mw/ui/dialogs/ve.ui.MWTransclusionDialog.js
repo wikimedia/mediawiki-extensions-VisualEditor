@@ -255,25 +255,27 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
  * Set if the dialog is expanded and the sidebar visible, or collapsed. `auto` will choose
  * `collapsed` if possible.
  *
- * @param {string} [mode='expanded'] Symbolic name of dialog mode, `expanded`, `collapsed` or 'auto'
+ * @param {boolean|string} [expand=true] True or false to expand or collapse the sidebar, or
+ *  'auto' to auto-detect based on the dialog's current content.
+ * @private
  */
-ve.ui.MWTransclusionDialog.prototype.setMode = function ( mode ) {
-	var isSidebarExpanded;
-	if ( mode === 'auto' && this.isSingleTemplateTransclusion() ) {
-		isSidebarExpanded = false;
+ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expand ) {
+	var isExpanded;
+	if ( expand === 'auto' && this.isSingleTemplateTransclusion() ) {
+		isExpanded = false;
 	} else {
-		isSidebarExpanded = mode !== 'collapsed';
+		isExpanded = expand !== false;
 	}
 
-	if ( this.isSidebarExpanded !== isSidebarExpanded ) {
-		this.isSidebarExpanded = isSidebarExpanded;
+	if ( this.isSidebarExpanded !== isExpanded ) {
+		this.isSidebarExpanded = isExpanded;
 		if ( this.$content ) {
 			this.$content
-				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !isSidebarExpanded )
-				.toggleClass( 've-ui-mwTransclusionDialog-expanded', isSidebarExpanded );
+				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !isExpanded )
+				.toggleClass( 've-ui-mwTransclusionDialog-expanded', isExpanded );
 		}
-		this.setSize( isSidebarExpanded ? ( this.isBigger ? 'larger' : 'large' ) : 'medium' );
-		this.bookletLayout.toggleOutline( isSidebarExpanded );
+		this.setSize( isExpanded ? ( this.isBigger ? 'larger' : 'large' ) : 'medium' );
+		this.bookletLayout.toggleOutline( isExpanded );
 		this.updateTitle();
 		this.updateModeActionState();
 
@@ -300,13 +302,14 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
-		isSidebarExpanded = this.isSidebarExpanded,
-		label = ve.msg( isSidebarExpanded ?
+		isExpanded = this.isSidebarExpanded,
+		label = ve.msg( isExpanded ?
 			'visualeditor-dialog-transclusion-single-mode' :
 			'visualeditor-dialog-transclusion-multiple-mode' );
+
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
 		action.setLabel( label );
-		action.$button.attr( 'aria-expanded', isSidebarExpanded ? 1 : 0 );
+		action.$button.attr( 'aria-expanded', isExpanded ? 1 : 0 );
 	} );
 
 	// Decide whether the button should be enabled or not. It needs to be:
@@ -317,16 +320,9 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	// * enabled if we're in a single-part transclusion, because the sidebar's
 	//   closed but can be opened to add more parts
 	if ( parts ) {
-		if ( parts.length === 1 && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) {
-			// Initial new-template phase: button is meaningless
-			this.actions.setAbilities( { mode: false } );
-		} else if ( !this.isSingleTemplateTransclusion() ) {
-			// Multi-part transclusion: button disabled because sidebar forced-open
-			this.actions.setAbilities( { mode: false } );
-		} else {
-			// Single-part transclusion: button enabled because sidebar is optional
-			this.actions.setAbilities( { mode: true } );
-		}
+		var canExpandAndCollapse = this.isSingleTemplateTransclusion() &&
+			!( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel );
+		this.actions.setAbilities( { mode: canExpandAndCollapse } );
 	}
 };
 
@@ -374,7 +370,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 
 	if ( action === 'mode' ) {
 		return new OO.ui.Process( function () {
-			this.setMode( this.isSidebarExpanded ? 'collapsed' : 'expanded' );
+			this.toggleSidebar( !this.isSidebarExpanded );
 		}, this );
 	}
 
@@ -446,7 +442,7 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
 		.done( function () {
-			target.setMode( 'collapsed' );
+			target.toggleSidebar( false );
 			target.updateModeActionState();
 		} );
 };
@@ -514,7 +510,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			} );
 
 			this.updateModeActionState();
-			this.setMode( 'auto' );
+			this.toggleSidebar( 'auto' );
 		}, this );
 };
 
