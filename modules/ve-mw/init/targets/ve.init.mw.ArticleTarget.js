@@ -414,7 +414,10 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 		this.retriedRevIdConflict = false;
 	}
 
-	checkboxes = mw.libs.ve.targetLoader.createCheckboxFields( this.checkboxesDef );
+	// Save dialog doesn't exist yet, so create an overlay for the widgets, and
+	// append it to the save dialog later.
+	this.$saveDialogOverlay = $( '<div>' ).addClass( 'oo-ui-window-overlay' );
+	checkboxes = mw.libs.ve.targetLoader.createCheckboxFields( this.checkboxesDef, { $overlay: this.$saveDialogOverlay } );
 	this.checkboxFields = checkboxes.checkboxFields;
 	this.checkboxesByName = checkboxes.checkboxesByName;
 
@@ -1320,7 +1323,8 @@ ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
 	}
 
 	for ( name in this.checkboxesByName ) {
-		if ( this.checkboxesByName[ name ].isSelected() ) {
+		// DropdownInputWidget or CheckboxInputWidget
+		if ( !this.checkboxesByName[ name ].isSelected || this.checkboxesByName[ name ].isSelected() ) {
 			fields[ name ] = this.checkboxesByName[ name ].getValue();
 		}
 	}
@@ -1822,6 +1826,9 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 				retry: 'onSaveDialogRetry',
 				close: 'onSaveDialogClose'
 			} );
+
+			// Attach custom overlay
+			target.saveDialog.$element.append( target.$saveDialogOverlay );
 		}
 
 		data = target.getSaveDialogOpeningData();

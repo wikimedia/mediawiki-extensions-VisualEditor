@@ -114,10 +114,11 @@
 		 * Creates an OOUI checkbox inside an inline field layout
 		 *
 		 * @param {Object[]} checkboxesDef Checkbox definitions from the API
+		 * @param {Object} [widgetConfig] Additional widget config
 		 * @return {Object} Result object with checkboxFields (OO.ui.FieldLayout[]) and
 		 *  checkboxesByName (keyed object of OO.ui.CheckboxInputWidget).
 		 */
-		createCheckboxFields: function ( checkboxesDef ) {
+		createCheckboxFields: function ( checkboxesDef, widgetConfig ) {
 			var checkboxFields = [],
 				checkboxesByName = {};
 
@@ -126,13 +127,6 @@
 					var options = checkboxesDef[ name ],
 						accesskey = null,
 						title = null;
-
-					// Non-checkbox fields are permitted in the 'checkboxes' definitions (since MW
-					// core 4fa7d4d7), but VE doesn't yet support them.
-					// @TODO Remove this and properly support watchlist expiry and other widgets.
-					if ( options.class !== undefined && options.class !== 'OOUI\\CheckboxInputWidget' ) {
-						return;
-					}
 
 					// The messages documented below are just the ones defined in core.
 					// Extensions may add other checkboxes.
@@ -156,20 +150,41 @@
 					// * watchthis
 					var $label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
 
-					var checkbox = new OO.ui.CheckboxInputWidget( {
+					var config = $.extend( {
 						accessKey: accesskey,
-						selected: options.default,
 						// The following classes are used here:
 						// * ve-ui-mwSaveDialog-checkbox-wpMinoredit
 						// * ve-ui-mwSaveDialog-checkbox-wpWatchthis
+						// * ve-ui-mwSaveDialog-checkbox-wpWatchlistExpiry
 						classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
-					} );
+					}, widgetConfig );
+
+					var checkbox;
+					switch ( options.class ) {
+						case 'OOUI\\DropdownInputWidget':
+							checkbox = new OO.ui.DropdownInputWidget( $.extend( config, {
+								value: options.default,
+								options: options.options
+							} ) );
+							break;
+
+						default:
+							checkbox = new OO.ui.CheckboxInputWidget( $.extend( config, {
+								selected: options.default
+							} ) );
+							break;
+					}
 
 					checkboxFields.push(
 						new OO.ui.FieldLayout( checkbox, {
 							align: 'inline',
 							label: $label.contents(),
-							title: title
+							title: title,
+							invisibleLabel: !!options.invisibleLabel,
+							// * ve-ui-mwSaveDialog-field-wpMinoredit
+							// * ve-ui-mwSaveDialog-field-wpWatchthis
+							// * ve-ui-mwSaveDialog-field-wpWatchlistExpiry
+							classes: [ 've-ui-mwSaveDialog-field-' + name ]
 						} )
 					);
 					checkboxesByName[ name ] = checkbox;
