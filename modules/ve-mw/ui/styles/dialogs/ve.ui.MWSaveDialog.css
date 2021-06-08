@@ -30,7 +30,6 @@
 	background-color: #f8f9fa;
 	border: 1px solid #c8ccd1;
 	border-top: 0;
-	min-height: 3em;
 	display: none;
 }
 
@@ -45,7 +44,7 @@
 
 .ve-ui-mwSaveDialog-checkboxes > .oo-ui-fieldLayout {
 	display: inline-block;
-	margin: 0 1.5em 0 0;
+	margin: 0 1.5em 0.5em 0;
 	vertical-align: middle;
 }
 
@@ -55,10 +54,6 @@
 
 .ve-ui-mwSaveDialog-checkboxes-withExpiry > .ve-ui-mwSaveDialog-field-wpMinoredit {
 	display: block;
-}
-
-.ve-ui-mwSaveDialog-checkboxes-withExpiry > .ve-ui-mwSaveDialog-field-wpWatchlistExpiry {
-	margin: 0.5em 0;
 }
 
 .ve-ui-mwSaveDialog-editSummary-count {
