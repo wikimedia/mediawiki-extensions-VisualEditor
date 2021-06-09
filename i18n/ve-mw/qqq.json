@@ -230,6 +230,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Label for the warning displayed to the user before resetting the transclusion dialog.",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Label for the button which lets you continue editing and aborts resetting the transclusion dialog.",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Label for the button which confirms the intent to reset the transclusion dialog.",
+	"visualeditor-dialog-transclusion-feedback-message": "Text for the feedback message to inform users about template search improvements with a link to the project page.",
 	"visualeditor-dialogbutton-media-tooltip": "Tooltip for adding images and media on page",
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
 	"visualeditor-dialogbutton-template-tooltip": "{{Identical|Template}}",
