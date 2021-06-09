@@ -139,7 +139,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Mankas {{PLURAL:$1|feldo|feldi}} bezonata",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ka vu esas certa ke vu volas durar sen plenigar la $1 {{PLURAL:$2|feldo|feldi}}",
 	"visualeditor-dialog-transclusion-single-mode": "Celar selekti",
-	"visualeditor-dialog-transclusion-title": "Transkluzo",
 	"visualeditor-dialog-transclusion-title-insert-template": "Inkluzez shablono",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Insertar: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Redaktez: $1",

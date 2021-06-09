@@ -142,7 +142,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Міндетті {{PLURAL:$1|параметрді|параметрді}} қажет етеді",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|параметрді|параметрді}} толтырмай жалғасырғыңыз келе ме?",
 	"visualeditor-dialog-transclusion-single-mode": "Параметрлерді жасыру",
-	"visualeditor-dialog-transclusion-title": "Кірістірілген бет",
 	"visualeditor-dialogbutton-media-tooltip": "Медиа",
 	"visualeditor-dialogbutton-meta-tooltip": "Бет баптаулары",
 	"visualeditor-dialogbutton-template-tooltip": "Үлгі",

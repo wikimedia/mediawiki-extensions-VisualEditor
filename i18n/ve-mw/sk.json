@@ -177,7 +177,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Chýba povinný parameter|Chýbajú povinné parametre}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Skutočne chcete pokračovať bez vyplnenia {{PLURAL:$2|parametra|parametrov}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Skryť možnosti",
-	"visualeditor-dialog-transclusion-title": "Šablóna",
 	"visualeditor-dialogbutton-media-tooltip": "Obrázky a multimédiá",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavenia stránky",
 	"visualeditor-dialogbutton-template-tooltip": "Šablóna",

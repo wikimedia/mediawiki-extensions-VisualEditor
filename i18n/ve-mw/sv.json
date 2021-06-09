@@ -201,7 +201,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Nödvändigt fält|Nödvändiga fält}} saknas",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Är du säker på att du vill fortsätta utan att fylla i $1 {{PLURAL:$2|fält}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Dölj alternativ",
-	"visualeditor-dialog-transclusion-title": "Mallinkludering",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Gå tillbaka?",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Avbryt",
 	"visualeditor-dialogbutton-media-tooltip": "Bilder och media",

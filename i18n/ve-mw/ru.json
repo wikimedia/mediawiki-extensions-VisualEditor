@@ -235,7 +235,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Требуемое поле отсутствует|Требуемые поля отсутствуют}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Вы уверены, что хотите продолжить без заполнения {{PLURAL:$2|поля|полей}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Скрыть параметры",
-	"visualeditor-dialog-transclusion-title": "Включение",
 	"visualeditor-dialog-transclusion-title-insert-template": "Вставить шаблон",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Меню настройки полей шаблона",
 	"visualeditor-dialogbutton-media-tooltip": "Изображения и медиафайлы",

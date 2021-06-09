@@ -171,7 +171,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "आवश्यक {{PLURAL:$1|प्राचल|प्राचले}} नाहीत",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "आपण याची निश्चिती करता काय कि आपणास $1 {{PLURAL:$2|क्षेत्र|क्षेत्र}} भरल्याशिवाय पुढे जावयाचे आहे?",
 	"visualeditor-dialog-transclusion-single-mode": "पर्याय लपवा",
-	"visualeditor-dialog-transclusion-title": "आंतर्न्यास (ट्रांसक्लूजन)",
 	"visualeditor-dialogbutton-media-tooltip": "माध्यम (मिडिया)",
 	"visualeditor-dialogbutton-meta-tooltip": "पान मांडणी (सेटींग)",
 	"visualeditor-dialogbutton-template-tooltip": "साचा",

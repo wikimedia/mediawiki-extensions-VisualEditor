@@ -190,7 +190,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Mankas {{PLURAL:$1|nepran parametron|Mankantajn neprajn parametrojn}}.",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ĉu vi certas ke vi volas fari tion sen kompletigo de la $1 {{PLURAL:$2|kampo|kampoj}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Kaŝi opciojn",
-	"visualeditor-dialog-transclusion-title": "Transkludo",
 	"visualeditor-dialogbutton-media-tooltip": "Bildoj kaj aŭdvidaĵoj",
 	"visualeditor-dialogbutton-meta-tooltip": "Paĝaj agordoj",
 	"visualeditor-dialogbutton-template-tooltip": "Ŝablono",

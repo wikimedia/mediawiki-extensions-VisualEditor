@@ -175,7 +175,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Мотлаҡ {{PLURAL:$1|күрһәткестәр}} юҡ",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Һеҙ ысынлап та «$1» юлындағы {{PLURAL:$2|күрһәткестәрҙе}} тултырмайынса, дауам итергә теләйһегеҙме?",
 	"visualeditor-dialog-transclusion-single-mode": "Параметрҙарҙы йәшереү",
-	"visualeditor-dialog-transclusion-title": "Ҡушыу",
 	"visualeditor-dialogbutton-media-tooltip": "Медианәмә",
 	"visualeditor-dialogbutton-meta-tooltip": "Бит көйләүҙәре",
 	"visualeditor-dialogbutton-template-tooltip": "Ҡалып",

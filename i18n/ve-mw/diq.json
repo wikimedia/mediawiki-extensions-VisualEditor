@@ -191,7 +191,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Lazım bıyaye  {{PLURAL:$1|parametre kemiyo|parametrey kemiyê}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Bê {{PLURAL:$2|patametreyê|parametreyanê}} $1 şıma qayıli dewam bıkerê?",
 	"visualeditor-dialog-transclusion-single-mode": "Opsiyonan bınımne",
-	"visualeditor-dialog-transclusion-title": "Şablon tam kerden",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menuay saz kerdışê cayanê şabloni",
 	"visualeditor-dialogbutton-media-tooltip": "Resımi û medya",
 	"visualeditor-dialogbutton-meta-tooltip": "Eyarê pele",

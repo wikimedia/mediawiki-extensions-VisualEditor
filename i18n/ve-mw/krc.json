@@ -137,7 +137,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Керек параметр{{PLURAL:$1||ле}} джокъду{{PLURAL:$1||ла}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 параметр{{PLURAL:$2||ле}}ни салмагъанлай бардыррыгъа ишлексиз излеймисиз?",
 	"visualeditor-dialog-transclusion-single-mode": "Параметрлени джашыр",
-	"visualeditor-dialog-transclusion-title": "Къошуу",
 	"visualeditor-dialogbutton-media-tooltip": "Мультимедиа",
 	"visualeditor-dialogbutton-meta-tooltip": "Бетни параметрлери",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",

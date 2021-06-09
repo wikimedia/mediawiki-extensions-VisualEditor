@@ -214,7 +214,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Campo obbligatorio mancante|Campi obbligatori mancanti}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Sei sicuro di voler continuare senza valorizzare {{PLURAL:$2|il campo|i campi}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Nascondi opzioni",
-	"visualeditor-dialog-transclusion-title": "Inclusione",
 	"visualeditor-dialog-transclusion-title-insert-template": "Inserisci un template",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Inserisci: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifica: $1",

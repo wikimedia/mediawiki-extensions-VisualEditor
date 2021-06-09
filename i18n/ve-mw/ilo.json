@@ -159,7 +159,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Awan ti nasken a {{PLURAL:$1|parametro|parparametro}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Siguradoka kadi a kayatmo ti agtuloy a saan a mangpunno ti $1 a {{PLURAL:$2|parametro|parparametro}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Ilemmeng dagiti pagpilian",
-	"visualeditor-dialog-transclusion-title": "Mailak-am",
 	"visualeditor-dialogbutton-media-tooltip": "Midia",
 	"visualeditor-dialogbutton-meta-tooltip": "Dagiti pannakaisaad ti panid",
 	"visualeditor-dialogbutton-template-tooltip": "Plantilia",

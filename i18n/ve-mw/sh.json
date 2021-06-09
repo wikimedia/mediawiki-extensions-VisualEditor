@@ -165,7 +165,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Obavezni {{PLURAL:$1|parametri}} nedostaju",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Jeste li sigurni da želite da nastavite? {{PLURAL:$2|Sljedeći}} parametri nisu popunjeni $1.",
 	"visualeditor-dialog-transclusion-single-mode": "Sakrij opcije",
-	"visualeditor-dialog-transclusion-title": "kao šablon",
 	"visualeditor-dialogbutton-media-tooltip": "Medijska datoteka",
 	"visualeditor-dialogbutton-meta-tooltip": "Postavke stranice",
 	"visualeditor-dialogbutton-template-tooltip": "Šablon",

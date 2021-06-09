@@ -208,7 +208,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|ينقصك مدخل ضروري|تنقصك مدخلات ضرورية}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "أتريد المتابعة بدون إعطاء {{PLURAL:$2|المدخل|المدخلات}} $1؟",
 	"visualeditor-dialog-transclusion-single-mode": "إخفاء الخيارات",
-	"visualeditor-dialog-transclusion-title": "تضمين",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "مواصلة التعديل",
 	"visualeditor-dialogbutton-media-tooltip": "الصور والوسائط",
 	"visualeditor-dialogbutton-meta-tooltip": "إعدادات الصفحة",

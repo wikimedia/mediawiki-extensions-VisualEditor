@@ -187,7 +187,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Obavezno polje nedostaje|Obavezna polja nedostaju}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Želite li zaista da nastavite bez {{PLURAL:$2|popune|popunjavanja}} polja $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Sakrij opcije",
-	"visualeditor-dialog-transclusion-title": "Uključivanje",
 	"visualeditor-dialogbutton-media-tooltip": "Datoteka",
 	"visualeditor-dialogbutton-meta-tooltip": "Podešavanja stranice",
 	"visualeditor-dialogbutton-template-tooltip": "Šablon",

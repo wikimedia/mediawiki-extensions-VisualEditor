@@ -241,7 +241,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Champ obligatoire manquant|Champs obligatoires manquants}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Êtes-vous sûr de vouloir continuer sans remplir {{PLURAL:$2|le champ $1|les champs $1}} ?",
 	"visualeditor-dialog-transclusion-single-mode": "Masquer les options",
-	"visualeditor-dialog-transclusion-title": "Insertion d’un modèle",
 	"visualeditor-dialog-transclusion-title-insert-template": "Insérer un modèle",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Insérer : $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifier : $1",

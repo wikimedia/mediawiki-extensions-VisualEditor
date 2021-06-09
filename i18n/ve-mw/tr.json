@@ -219,7 +219,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Gerekli {{PLURAL:$1|boşluk|boşluklar}} eksik",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|boşluğunu|boşluklarını}} doldurmadan devam etmek istediğinize emin misiniz?",
 	"visualeditor-dialog-transclusion-single-mode": "Seçenekleri gizle",
-	"visualeditor-dialog-transclusion-title": "Dönüştürülme",
 	"visualeditor-dialog-transclusion-title-insert-template": "Bir şablon ekle",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Ekle: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Düzenle: $1",

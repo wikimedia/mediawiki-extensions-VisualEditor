@@ -184,7 +184,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "প্ৰয়োজনীয় {{PLURAL:$1|ঘৰ|ঘৰসমূহ}} নাই",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|ঘৰ|ঘৰসমূহ}} পূৰণ নকৰাকৈ আপুনি আগুৱাব বুলি নিশ্চিতনে?",
 	"visualeditor-dialog-transclusion-single-mode": "বিকল্পসমূহ লুকুৱাওক",
-	"visualeditor-dialog-transclusion-title": "অন্তৰ্ভুক্ত কৰক",
 	"visualeditor-dialog-transclusion-template-search": "সাঁচ অনুসন্ধান",
 	"visualeditor-dialog-transclusion-template-search-help": "চিনাক্তকৰণ কীৱৰ্ড এটাৰে আপুনি সুমুৱাব বিচৰা সাঁচটোৰ সন্ধান কৰক। বৰ্ণনা থকা সাঁচবোৰে এই সম্পাদক (ভিজুৱেল এডিটৰ)-ৰ সৈতে ভালদৰে কাম কৰাৰ সম্ভাৱনা অধিক।",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "সাঁচৰ মাত্ৰা নিৰ্ধাৰণ কৰা মেনু",
@@ -397,6 +396,6 @@
 	"visualeditor-wikitext-warning": "আপুনি ভিজুৱেল‌ এডিটৰ ব্যৱহাৰ কৰি আছে - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ৱিকিপাঠ্য]]ই ইয়াত কাম নকৰে। আপোনাৰ সালসমনিসমূহ হেৰাই নোযোৱাকৈ উৎস সম্পাদনালৈ ঘূৰি যাবৰ বাবে সলনি বুটামটো টিপক।",
 	"visualeditor-wikitext-warning-title": "ৱিকিপাঠ্য মাৰ্কআপ চিনাক্ত কৰা হৈছে",
 	"visualeditor-wikitextconvert-title": "ফৰ্মেটিংক ৱিকিপাঠ্যলৈ পৰিবৰ্তন কৰক?",
-	"visualeditor-wikitextconvert-message": "আপোনাৰ পেষ্ট কৰা সমলত ফৰ্মেটিং আছে। ইয়াক ৱিকিপাঠ্যলৈ ৰূপান্তৰ কৰা উচিত নে সাধাৰণ পাঠ হিচাপে অন্তৰ্ভুক্ত কৰা উচিত?",
+	"visualeditor-wikitextconvert-message": "আপুনি সমৃদ্ধ ফৰ্মেটিংৰ সৈতে সমল পেষ্ট কৰিছে। আপুনি এই ফৰ্মেটিংক ৱিকিপাঠ্যলৈ ৰূপান্তৰ কৰিব বিচাৰে নেকি?",
 	"visualeditor-wikitextconvert-convert": "ৱিকিপাঠলৈ ৰূপান্তৰ কৰক"
 }

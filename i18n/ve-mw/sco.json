@@ -140,7 +140,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Needit {{PLURAL:$1|parameter|parameters}} amissin",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ye shuir ye wantae conteena wi nae fillin the $1 {{PLURAL:$2|parameter|parameters}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Skauk opties",
-	"visualeditor-dialog-transclusion-title": "Transclusion",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
 	"visualeditor-dialogbutton-meta-tooltip": "Page settins",
 	"visualeditor-dialogbutton-template-tooltip": "Template",

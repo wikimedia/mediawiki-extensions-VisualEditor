@@ -167,7 +167,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Parametro obbligatorio mancante|Parametre  obbligatori mancante}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Site sicuro/a 'e vulè cuntinuà senza valorizzà {{PLURAL:$2|'o parametro|'e parametre}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Annascunne ll'ozzione",
-	"visualeditor-dialog-transclusion-title": "'Nclusione",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
 	"visualeditor-dialogbutton-meta-tooltip": "'Mpustazzione paggena",
 	"visualeditor-dialogbutton-template-tooltip": "Modello",

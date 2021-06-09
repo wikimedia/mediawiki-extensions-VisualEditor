@@ -210,7 +210,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|پارامتر|پارامترهای}} موردنیاز موجود {{PLURAL:$1|نیست|نیستند}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "اطمینان دارید که می‌خواهید بدون پرکردن $1 {{PLURAL:$2|بخش|بخش}} ادامه دهید؟",
 	"visualeditor-dialog-transclusion-single-mode": "پنهان کردن گزینه‌ها",
-	"visualeditor-dialog-transclusion-title": "تراگنجانش",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "بازگشت به جستجو؟",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "ادامه‌دادن به ویرایش",
 	"visualeditor-dialogbutton-media-tooltip": "تصاویر و رسانه‌ها",

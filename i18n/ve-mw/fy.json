@@ -183,7 +183,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Ferplicht fjild mist|Ferplichte fjilden misse}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Wolle jo wier trochgean sûnder {{PLURAL:$2|it fjild|de fjilden}} $1 yn te foljen?",
 	"visualeditor-dialog-transclusion-single-mode": "Opsjes ferbergje",
-	"visualeditor-dialog-transclusion-title": "Transklúzje",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Ynstelmenu berjochtfjilden",
 	"visualeditor-dialogbutton-media-tooltip": "Ofbylden en media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sideynstellings",

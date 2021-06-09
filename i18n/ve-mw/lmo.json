@@ -186,10 +186,10 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Camp obligatori mancant}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Te see sicur che te voeuret andà inanz con l'impineì minga {{PLURAL:$2|el camp|i camp}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Scond i opzion",
-	"visualeditor-dialog-transclusion-title": "Inclusion",
 	"visualeditor-dialog-transclusion-title-insert-template": "Met dent un modell",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Met dent: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modificaː $1",
+	"visualeditor-dialog-transclusion-title-edit-transclusion": "Contegnud del modell",
 	"visualeditor-dialog-transclusion-template-search": "Ricerca d'on modell",
 	"visualeditor-dialog-transclusion-template-search-help": "Troeuva el modell che te veoret meter denter cont el cercà una parola ciav de reconossiment. A l'è pussee probabil che i modei con di descrizzion lavoren mei con quell'editor chì (Editor Visual).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menuù di impostazzion di camp del model",
@@ -402,6 +402,6 @@
 	"visualeditor-wikitext-warning": "Te seet adrée a doprà l'editor visual - el [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitest]] el fonziona minga chì. Per passà a fagh di cambiament a la sorgent in ogni moment senza perder i to cambiament, clica in sul pulasant de cambio.",
 	"visualeditor-wikitext-warning-title": "Trovad wikitest",
 	"visualeditor-wikitextconvert-title": "Traformà la formatazzion in wikitest?",
-	"visualeditor-wikitextconvert-message": "El contegnud incollà el gh'hà denter la formatazzion contiene della formattazione. te voeuret trasformall in  wikitest o metel dent come test sempliz?",
+	"visualeditor-wikitextconvert-message": "T'heet inconllad del contegnud che 'l gh'hà denter de la formatazzion. Te trasformàll 'sta formatazzion chì in d'un wikitest o mètel dent come test sempliz?",
 	"visualeditor-wikitextconvert-convert": "Trasforma in wikitest"
 }

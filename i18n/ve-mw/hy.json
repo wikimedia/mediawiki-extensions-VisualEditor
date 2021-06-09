@@ -191,7 +191,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Պահանջվող {{PLURAL:$1|դաշտը|դաշտերը}} բացակայում {{PLURAL:$1|է|են}}:",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Արդյո՞ք ցանկանում եք շարունակել` առանց լրացնելու $1 {{PLURAL:$2|դաշտը|դաշտերը}}:",
 	"visualeditor-dialog-transclusion-single-mode": "Թաքցնել կարգավորումներ",
-	"visualeditor-dialog-transclusion-title": "Ներառում",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Շարունակել խմբագրել",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Հեռացնել կաղապարը",
 	"visualeditor-dialogbutton-media-tooltip": "Մեդիա",

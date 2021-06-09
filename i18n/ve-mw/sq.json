@@ -198,7 +198,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Mungon fushë e domosdoshme|Mungojnë fusha të domosdoshme}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Jeni i sigurt se doni të vazhdoni pa plotësuar {{PLURAL:$2|fushën|fushat}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Fshini mundësitë",
-	"visualeditor-dialog-transclusion-title": "Ndërpërfshirje",
 	"visualeditor-dialog-transclusion-template-search": "Kërkim gjedheje",
 	"visualeditor-dialog-transclusion-template-search-help": "Gjeni gjedhen që dëshironi të futni duke kërkuar një fjalëkyçe identifikuese. Ka gjasa që gjedhet me përshkrime të punojnë mirë me këtë përpunues (Përpunues Pamor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menuja e konfigurimit të fushave të gjedheve",

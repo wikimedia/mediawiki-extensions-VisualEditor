@@ -175,7 +175,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Et {{PLURAL:$1|feelt een obligatoresch Feld|feele(n) $1 obligatoresch Felder}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Sidd Dir sécher datt Dir virufuere wëllt ouni {{PLURAL:$2|d'Felder}} $1 auszefëllen?",
 	"visualeditor-dialog-transclusion-single-mode": "Optioune verstoppen",
-	"visualeditor-dialog-transclusion-title": "An dëser Säit dran",
 	"visualeditor-dialog-transclusion-title-insert-template": "Eng Schabloun drasetzen",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Zréck goen?",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Ofbriechen",

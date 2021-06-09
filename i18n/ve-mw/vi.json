@@ -195,7 +195,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Thiếu {{PLURAL:$1}}trường yêu cầu",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Bạn có chắc chắn muốn tiếp tục mà không điền {{PLURAL:$2|trường|các trường}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ẩn tùy chọn",
-	"visualeditor-dialog-transclusion-title": "Bản mẫu",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Trình đơn thiết lập trường bản mẫu",
 	"visualeditor-dialogbutton-media-tooltip": "Hình ảnh và phương tiện",
 	"visualeditor-dialogbutton-meta-tooltip": "Tùy chọn trang",

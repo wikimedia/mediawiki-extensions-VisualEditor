@@ -152,7 +152,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Nodige {{PLURAL:$1|veld|velde}} ontbreek",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Wil u definitief voortgaan sonder om die $1 {{PLURAL:$2|veld|velde}} in te vul?",
 	"visualeditor-dialog-transclusion-single-mode": "Versteek opsies",
-	"visualeditor-dialog-transclusion-title": "Transklusie",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
 	"visualeditor-dialogbutton-meta-tooltip": "Bladsy-voorkeure",
 	"visualeditor-dialogbutton-template-tooltip": "Sjabloon",

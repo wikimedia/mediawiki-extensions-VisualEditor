@@ -210,7 +210,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Brak {{PLURAL:$1|wymaganego pola|wymaganych pól}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Czy na pewno chcesz kontynuować bez uzupełnienia {{PLURAL:$2|pola|pól}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ukryj opcje",
-	"visualeditor-dialog-transclusion-title": "Dołączony szablon",
 	"visualeditor-dialog-transclusion-template-search": "Wyszukiwanie szablonów",
 	"visualeditor-dialog-transclusion-template-search-help": "Znajdź szablon, który chcesz dodać, wyszukując słowo kluczowe. Szablony z opisami zazwyczaj działają lepiej w VisualEditorze.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu ustawiania pól szablonu",

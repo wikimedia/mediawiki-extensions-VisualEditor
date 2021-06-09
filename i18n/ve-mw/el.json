@@ -187,7 +187,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Λείπει απαιτούμενο πεδίο|Λείπουν απαιτούμενα πεδία}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Είστε βέβαιος ότι θέλετε να συνεχίσετε χωρίς να συμπληρώσετε {{PLURAL:$2|το πεδίο|τα πεδία}} $1;",
 	"visualeditor-dialog-transclusion-single-mode": "Απόκρυψη επιλογών",
-	"visualeditor-dialog-transclusion-title": "Ενσωμάτωση",
 	"visualeditor-dialogbutton-media-tooltip": "Πολυμέσο",
 	"visualeditor-dialogbutton-meta-tooltip": "Ρυθμίσεις σελίδας",
 	"visualeditor-dialogbutton-template-tooltip": "Πρότυπο",

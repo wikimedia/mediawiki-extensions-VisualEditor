@@ -158,7 +158,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "caay kataneng suliten naca a{{PLURAL:$1|pisinga’an}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "piluceki kisu caay henay ku nisulitan $1\n{{PLURAL:$2|langat-pisinga’an}} a zasatu palalidtu haw?",
 	"visualeditor-dialog-transclusion-single-mode": "midimut mapiliay",
-	"visualeditor-dialog-transclusion-title": "nicaliwan",
 	"visualeditor-dialogbutton-media-tooltip": "myiti",
 	"visualeditor-dialogbutton-meta-tooltip": "kasabelih setin",
 	"visualeditor-dialogbutton-transclusion-tooltip": "nicaliwan",

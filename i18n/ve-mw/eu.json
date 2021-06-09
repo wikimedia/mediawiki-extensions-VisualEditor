@@ -175,7 +175,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Beharrezkoak diren {{PLURAL:$1|eremua|eremuak}} falta dira",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ziur zaude aurrera egin nahi duzula $1{{PLURAL:$2|eremua|eremuak}} bete gabe?",
 	"visualeditor-dialog-transclusion-single-mode": "Ezkutatu aukerak",
-	"visualeditor-dialog-transclusion-title": "Txertatzea",
 	"visualeditor-dialogbutton-media-tooltip": "Multimedia fitxategiak",
 	"visualeditor-dialogbutton-meta-tooltip": "Orrialde-konfigurazioa",
 	"visualeditor-dialogbutton-template-tooltip": "Txantiloia",

@@ -124,7 +124,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Nawawala ang {{PLURAL:$1|kinakailangang parametro|mga kinakailangang parametro}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Nais mo bang magpatuloy nang hindi pinunuan ang {{PLURAL:$2|parametrong|mga parametrong}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Itago ang mga kagustuhan",
-	"visualeditor-dialog-transclusion-title": "Pagsasali",
 	"visualeditor-dialogbutton-media-tooltip": "Midya",
 	"visualeditor-dialogbutton-meta-tooltip": "Mga kagustuhan ng pahina",
 	"visualeditor-dialogbutton-template-tooltip": "Padron",

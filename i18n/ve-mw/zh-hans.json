@@ -215,7 +215,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "缺少所需的{{PLURAL:$1|字段}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "您确定在不填写$1个{{PLURAL:$2|字段}}的情况下继续么？",
 	"visualeditor-dialog-transclusion-single-mode": "隐藏选项",
-	"visualeditor-dialog-transclusion-title": "嵌入",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "模板字段设置菜单",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "返回？",
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "返回页面将删除模版以及任何添加的信息，正在返回到选择的页面框。此选择不可恢复。",

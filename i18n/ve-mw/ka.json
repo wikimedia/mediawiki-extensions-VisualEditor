@@ -179,7 +179,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "მოთხოვნილი {{PLURAL:$1|პარამეტრი|პარამეტრი}} დაკარგულია",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "დარწმუნებული ხართ, რომ „$1“ {{PLURAL:$2|პარამეტრის|პარამეტრის}}  შევსების გარეშე გსურთ გაგრძელება?",
 	"visualeditor-dialog-transclusion-single-mode": "პარამეტრების დამალვა",
-	"visualeditor-dialog-transclusion-title": "ჩანართი",
 	"visualeditor-dialogbutton-media-tooltip": "სურათები და მედია",
 	"visualeditor-dialogbutton-meta-tooltip": "გვერდის პარამეტრები",
 	"visualeditor-dialogbutton-template-tooltip": "თარგი",

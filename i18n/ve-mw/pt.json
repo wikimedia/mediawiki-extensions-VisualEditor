@@ -204,7 +204,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Falta um campo obrigatório|Faltam campos obrigatórios}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Tem certeza de que deseja continuar sem preencher {{PLURAL:$2|o campo|os $1 campos}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Ocultar opções",
-	"visualeditor-dialog-transclusion-title": "Transclusão",
 	"visualeditor-dialog-transclusion-template-search": "pesquisa de modela",
 	"visualeditor-dialog-transclusion-template-search-help": "Encourtre o templete que deseja inserir procurando por um identificando a palvara-chave. Modelos que tem descricoes sao mais provaveis trabalhar bem com este editor. (editor visual)",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu de configuração dos campos da predefinição",

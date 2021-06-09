@@ -164,7 +164,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Ruangan|Ruangan-ruangan}} yang diperlukan masih tertinggal",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Adakah anda betul-betul mahu teruskan tanpa mengisi {{PLURAL:$2|ruangan|ruangan-ruangan}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Sembunyikan pilihan",
-	"visualeditor-dialog-transclusion-title": "Transklusi",
 	"visualeditor-dialogbutton-media-tooltip": "Media",
 	"visualeditor-dialogbutton-meta-tooltip": "Tetapan laman",
 	"visualeditor-dialogbutton-template-tooltip": "Templat",

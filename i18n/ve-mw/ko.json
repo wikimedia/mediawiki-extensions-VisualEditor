@@ -210,7 +210,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "필요한 {{PLURAL:$1|필드}} 없음",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|필드}}를 채우지 않고 계속하겠습니까?",
 	"visualeditor-dialog-transclusion-single-mode": "옵션 숨기기",
-	"visualeditor-dialog-transclusion-title": "틀",
 	"visualeditor-dialog-transclusion-title-insert-template": "틀 삽입",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "삽입: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "편집: $1",

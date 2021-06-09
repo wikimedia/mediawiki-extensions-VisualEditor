@@ -181,7 +181,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Nõutav väli|Nõutavad väljad}} täitmata",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Kas oled kindel, et tahad jätkata täitmata {{PLURAL:$2|välja|välju}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Peida suvandid",
-	"visualeditor-dialog-transclusion-title": "Malli kasutamine",
 	"visualeditor-dialogbutton-media-tooltip": "Pildid ja muud failid",
 	"visualeditor-dialogbutton-meta-tooltip": "Lehekülje sätted",
 	"visualeditor-dialogbutton-template-tooltip": "Mall",

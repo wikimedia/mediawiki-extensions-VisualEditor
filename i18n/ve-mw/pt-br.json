@@ -212,7 +212,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Está faltando um campo obrigatório|Estão faltando vários campos obrigatórios}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Tem certeza de que quer continuar sem preencher {{PLURAL:$2|o campo|os campos}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ocultar opções",
-	"visualeditor-dialog-transclusion-title": "Transclusão",
 	"visualeditor-dialog-transclusion-title-insert-template": "Inserir uma predefinição",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Inserir: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Editar: $1",

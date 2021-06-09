@@ -172,7 +172,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Ирдэнэр параметр{{PLURAL:$1||дар}} суох{{PLURAL:$1|тар}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Бу {{PLURAL:$2|параметры|параметрдары}} «$1» толорумаары гынаҕын дуо?",
 	"visualeditor-dialog-transclusion-single-mode": "Параметрдары кистээ",
-	"visualeditor-dialog-transclusion-title": "Иһинээҕи",
 	"visualeditor-dialogbutton-media-tooltip": "Миэдьийэ билэ",
 	"visualeditor-dialogbutton-meta-tooltip": "Сирэй туруоруулара",
 	"visualeditor-dialogbutton-template-tooltip": "Халыып",

@@ -202,7 +202,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Bidang}} yang wajib diisi masih kosong",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Apakah Anda yakin ingin melanjutkan tanpa mengisi {{PLURAL:$2|bidang}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Sembunyikan opsi",
-	"visualeditor-dialog-transclusion-title": "Transklusi",
 	"visualeditor-dialog-transclusion-title-insert-template": "Masukkan templat",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Memasukan:$1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Sunting: $1",

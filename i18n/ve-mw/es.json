@@ -219,7 +219,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Campo necesario faltante|Campos necesarios faltantes}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "¿Estás seguro de que quieres continuar sin rellenar {{PLURAL:$2|el campo|los campos}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Ocultar opciones",
-	"visualeditor-dialog-transclusion-title": "Transclusión",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menú de la configuración de los campos de plantilla",
 	"visualeditor-dialogbutton-media-tooltip": "Imágenes y multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuración de página",

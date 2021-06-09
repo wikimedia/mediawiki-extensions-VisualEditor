@@ -192,7 +192,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Vaadittava kenttä puuttuu|Vaadittavat kentät puuttuvat}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Haluatko varmasti jatkaa, vaikka et ole täyttänyt $1 {{PLURAL:$2|kenttää}}?",
 	"visualeditor-dialog-transclusion-single-mode": "Piilota valinnat",
-	"visualeditor-dialog-transclusion-title": "Sisällytys",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Lisää: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Muokkaa: $1",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Jatka muokkaamista",
