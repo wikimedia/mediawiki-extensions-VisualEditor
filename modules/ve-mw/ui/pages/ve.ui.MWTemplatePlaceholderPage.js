@@ -89,8 +89,11 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 		// Temporary feedback message when templateSearchImprovements is true T284560
 		// TODO: remove when templateSearchImprovements are out of beta
-		this.feedbackMessage = new OO.ui.MessageWidget( {
-			label: mw.message( 'visualeditor-dialog-transclusion-feedback-message' ).parseDom(),
+		var $feedbackMessage = mw.message( 'visualeditor-dialog-transclusion-feedback-message' ).parseDom();
+		$feedbackMessage.filter( 'a' ).attr( 'target', '_blank' );
+
+		this.feedbackMessageWidget = new OO.ui.MessageWidget( {
+			label: $feedbackMessage,
 			type: 'info'
 		} );
 
@@ -102,7 +105,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
 			helpInline: true,
 			// TODO: remove this line when templateSearchImprovements are out of beta
-			items: [].concat( [ this.feedbackMessage ], addTemplateFieldsetConfig.items )
+			items: [].concat( [ this.feedbackMessageWidget ], addTemplateFieldsetConfig.items )
 		} );
 	}
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
