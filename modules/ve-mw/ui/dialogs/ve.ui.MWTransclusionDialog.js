@@ -302,8 +302,8 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
 		isSidebarExpanded = this.isSidebarExpanded,
 		label = ve.msg( isSidebarExpanded ?
-			'visualeditor-dialog-transclusion-multiple-mode' :
-			'visualeditor-dialog-transclusion-single-mode' );
+			'visualeditor-dialog-transclusion-single-mode' :
+			'visualeditor-dialog-transclusion-multiple-mode' );
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
 		action.setLabel( label );
 		action.$button.attr( 'aria-expanded', isSidebarExpanded ? 1 : 0 );
