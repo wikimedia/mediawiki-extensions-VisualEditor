@@ -66,6 +66,7 @@
 				"name": "MediaWiki",
 				"classes": [
 					"mw.Api",
+					"mw.Message",
 					"mw.Title",
 					"mw.widgets.*Widget"
 				]

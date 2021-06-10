@@ -89,12 +89,8 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 		// Temporary feedback message when templateSearchImprovements is true T284560
 		// TODO: remove when templateSearchImprovements are out of beta
-		var $feedbackMessage = mw.message( 'visualeditor-dialog-transclusion-feedback-message' ).parseDom();
-		$feedbackMessage.filter( 'a' ).attr( 'target', '_blank' );
-
-		this.feedbackMessageWidget = new OO.ui.MessageWidget( {
-			label: $feedbackMessage,
-			type: 'info'
+		var feedbackMessage = new ve.ui.MWDismissibleMessageWidget( {
+			message: mw.message( 'visualeditor-dialog-transclusion-feedback-message' )
 		} );
 
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
@@ -105,7 +101,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
 			helpInline: true,
 			// TODO: remove this line when templateSearchImprovements are out of beta
-			items: [].concat( [ this.feedbackMessageWidget ], addTemplateFieldsetConfig.items )
+			items: [].concat( [ feedbackMessage ], addTemplateFieldsetConfig.items )
 		} );
 	}
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
@@ -148,8 +144,8 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
-	// Parent method
-	ve.ui.MWTemplatePlaceholderPage.super.prototype.focus.apply( this, arguments );
+	// The parent method would focus the first element, which might be the message widget
+	this.addTemplateInput.focus();
 
 	// HACK: Set the width of the lookupMenu to the width of the input
 	// TODO: This should be handled upstream in OOUI

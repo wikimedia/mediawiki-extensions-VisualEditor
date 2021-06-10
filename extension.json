@@ -2129,6 +2129,7 @@
 				"modules/ve-mw/dm/models/ve.dm.MWTemplateModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWTemplatePlaceholderModel.js",
 				"modules/ve-mw/dm/models/ve.dm.MWParameterModel.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWDismissibleMessageWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWParameterCheckboxInputWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWParameterSearchWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWParameterResultWidget.js",
@@ -2149,6 +2150,7 @@
 			],
 			"styles": [
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWDismissibleMessageWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterResultWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMoreParametersResultWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWNoParametersResultWidget.css",
