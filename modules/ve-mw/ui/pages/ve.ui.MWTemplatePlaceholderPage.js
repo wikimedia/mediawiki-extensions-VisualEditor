@@ -80,11 +80,19 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
 		items: [ addTemplateActionFieldLayout ]
 	};
+
 	// Temporary switch for verbose template search.
 	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
 		var dialogTitle = this.placeholder.getTransclusion().parts.length === 1 ?
 			'visualeditor-dialog-transclusion-template-search' :
 			'visualeditor-dialog-transclusion-add-template';
+
+		// Temporary feedback message when templateSearchImprovements is true T284560
+		// TODO: remove when templateSearchImprovements are out of beta
+		this.feedbackMessage = new OO.ui.MessageWidget( {
+			label: mw.message( 'visualeditor-dialog-transclusion-feedback-message' ).parseDom(),
+			type: 'info'
+		} );
 
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
 			// The following messages are used here:
@@ -92,7 +100,9 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 			// * visualeditor-dialog-transclusion-add-template
 			label: ve.msg( dialogTitle ),
 			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
-			helpInline: true
+			helpInline: true,
+			// TODO: remove this line when templateSearchImprovements are out of beta
+			items: [].concat( [ this.feedbackMessage ], addTemplateFieldsetConfig.items )
 		} );
 	}
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
