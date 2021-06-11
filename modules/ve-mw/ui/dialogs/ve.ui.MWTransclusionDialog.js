@@ -304,8 +304,8 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
 		isExpanded = this.isSidebarExpanded,
 		label = ve.msg( isExpanded ?
-			'visualeditor-dialog-transclusion-single-mode' :
-			'visualeditor-dialog-transclusion-multiple-mode' );
+			'visualeditor-dialog-transclusion-collapse-options' :
+			'visualeditor-dialog-transclusion-expand-options' );
 
 	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
 		action.setLabel( label );
