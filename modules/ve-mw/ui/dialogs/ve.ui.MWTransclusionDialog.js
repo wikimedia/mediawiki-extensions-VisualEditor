@@ -169,7 +169,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddTemplateButtonClick = function () {
  * Handle add content button click events.
  */
 ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
-	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusionModel, '' ) );
+	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusionModel ) );
 };
 
 /**

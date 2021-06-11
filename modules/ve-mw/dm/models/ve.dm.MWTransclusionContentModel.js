@@ -13,15 +13,15 @@
  * @extends ve.dm.MWTransclusionPartModel
  *
  * @constructor
- * @param {ve.dm.MWTransclusionModel} transclusion Transclusion
- * @param {string} [value] Content value
+ * @param {ve.dm.MWTransclusionModel} transclusion
+ * @param {string} [wikitext='']
  */
-ve.dm.MWTransclusionContentModel = function VeDmMWTransclusionContentModel( transclusion, value ) {
+ve.dm.MWTransclusionContentModel = function VeDmMWTransclusionContentModel( transclusion, wikitext ) {
 	// Parent constructor
 	ve.dm.MWTransclusionContentModel.super.call( this, transclusion );
 
 	// Properties
-	this.value = value || '';
+	this.wikitext = wikitext || '';
 };
 
 /* Inheritance */
@@ -37,21 +37,10 @@ OO.inheritClass( ve.dm.MWTransclusionContentModel, ve.dm.MWTransclusionPartModel
 /* Methods */
 
 /**
- * Get content value.
- *
- * @return {string} Content value
+ * @param {string} wikitext
  */
-ve.dm.MWTransclusionContentModel.prototype.getValue = function () {
-	return this.value;
-};
-
-/**
- * Set content value.
- *
- * @param {string} value Content value
- */
-ve.dm.MWTransclusionContentModel.prototype.setValue = function ( value ) {
-	this.value = value;
+ve.dm.MWTransclusionContentModel.prototype.setWikitext = function ( wikitext ) {
+	this.wikitext = wikitext;
 	this.emit( 'change' );
 };
 
@@ -59,19 +48,19 @@ ve.dm.MWTransclusionContentModel.prototype.setValue = function ( value ) {
  * @inheritdoc
  */
 ve.dm.MWTransclusionContentModel.prototype.serialize = function () {
-	return this.value;
+	return this.wikitext;
 };
 
 /**
  * @inheritdoc
  */
 ve.dm.MWTransclusionContentModel.prototype.getWikitext = function () {
-	return this.value;
+	return this.wikitext;
 };
 
 /**
  * @inheritDoc
  */
 ve.dm.MWTransclusionContentModel.prototype.isEmpty = function () {
-	return this.value === '';
+	return this.wikitext === '';
 };
