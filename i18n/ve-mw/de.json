@@ -210,6 +210,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Wenn du zurückgehst, wird diese Vorlage zusammen mit allen eingegebenen Informationen entfernt und du kehrst zur Vorlagenauswahl zurück. Diese Aktion ist nicht umkehrbar.",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Weiter bearbeiten",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Vorlage entfernen",
+	"visualeditor-dialog-transclusion-feedback-message": "Kürzlich wurden Arbeiten zur Verbesserung der Suchergebnisse für Vorlagen abgeschlossen. Um mehr über die Änderungen zu erfahren oder Feedback zu hinterlassen, besuche die [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates Projektseite].",
 	"visualeditor-dialogbutton-media-tooltip": "Bilder und Medien",
 	"visualeditor-dialogbutton-meta-tooltip": "Seiteneinstellungen",
 	"visualeditor-dialogbutton-template-tooltip": "Vorlage",

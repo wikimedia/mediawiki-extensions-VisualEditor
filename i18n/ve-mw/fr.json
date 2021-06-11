@@ -244,6 +244,7 @@
 	"visualeditor-dialog-transclusion-title-insert-template": "Insérer un modèle",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Insérer : $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifier : $1",
+	"visualeditor-dialog-transclusion-title-edit-transclusion": "Contenu du modèle",
 	"visualeditor-dialog-transclusion-template-search": "Recherche de modèle",
 	"visualeditor-dialog-transclusion-template-search-help": "Trouver le modèle que vous voulez insérer en cherchant un mot-clé identifiant. Les modèles qui ont des descriptions sont plus susceptibles de bien fonctionner avec cet éditeur (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu de configuration des champs du modèle",
