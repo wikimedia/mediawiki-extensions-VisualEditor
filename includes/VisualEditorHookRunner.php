@@ -15,7 +15,10 @@ use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Page\ProperPageIdentity;
 use MediaWiki\User\UserIdentity;
 
-class VisualEditorHookRunner implements VisualEditorApiVisualEditorEditPostSaveHook {
+class VisualEditorHookRunner implements
+	VisualEditorApiVisualEditorEditPreSaveHook,
+	VisualEditorApiVisualEditorEditPostSaveHook
+{
 
 	public const SERVICE_NAME = 'VisualEditorHookRunner';
 
@@ -27,6 +30,25 @@ class VisualEditorHookRunner implements VisualEditorApiVisualEditorEditPostSaveH
 	 */
 	public function __construct( HookContainer $hookContainer ) {
 		$this->hookContainer = $hookContainer;
+	}
+
+	/** @inheritDoc */
+	public function onVisualEditorApiVisualEditorEditPreSave(
+		ProperPageIdentity $page,
+		UserIdentity $user,
+		string $wikitext,
+		array $params,
+		array $pluginData,
+		array &$apiResponse
+	) {
+		return $this->hookContainer->run( 'VisualEditorApiVisualEditorEditPreSave', [
+			$page,
+			$user,
+			$wikitext,
+			$params,
+			$pluginData,
+			&$apiResponse
+		], [ 'abortable' => true ] );
 	}
 
 	/** @inheritDoc */
