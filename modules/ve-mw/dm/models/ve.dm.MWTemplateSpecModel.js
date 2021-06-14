@@ -23,7 +23,7 @@
  * @class
  *
  * @constructor
- * @param {ve.dm.MWTemplateModel} template Template
+ * @param {ve.dm.MWTemplateModel} template
  */
 ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	// Properties

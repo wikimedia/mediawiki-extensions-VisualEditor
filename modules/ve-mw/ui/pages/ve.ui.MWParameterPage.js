@@ -375,7 +375,7 @@ ve.ui.MWParameterPage.prototype.isEmpty = function () {
 /**
  * Handle change events from the value input
  *
- * @param {string} value Value
+ * @param {string} value
  */
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	var value = this.valueInput.getValue(),

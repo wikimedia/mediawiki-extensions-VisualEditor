@@ -212,7 +212,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 /**
  * Additional handling of parameter addition events before loading.
  *
- * @param {ve.ui.MWParameterPage} page Parameter page object
+ * @param {ve.ui.MWParameterPage} page
  */
 ve.ui.MWTemplateDialog.prototype.onAddParameterBeforeLoad = function () {};
 

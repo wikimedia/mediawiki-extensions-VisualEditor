@@ -69,7 +69,7 @@ ve.dm.MWParameterModel.prototype.isDeprecated = function () {
 /**
  * Get template of which this parameter is part.
  *
- * @return {ve.dm.MWTemplateModel} Template
+ * @return {ve.dm.MWTemplateModel}
  */
 ve.dm.MWParameterModel.prototype.getTemplate = function () {
 	return this.template;

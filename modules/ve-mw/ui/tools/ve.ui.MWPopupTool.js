@@ -12,7 +12,7 @@
  * @abstract
  * @extends OO.ui.PopupTool
  * @constructor
- * @param {string} title Title
+ * @param {string} title
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config]
  * @cfg {number} [width] Popup width. Upstream default is 320.

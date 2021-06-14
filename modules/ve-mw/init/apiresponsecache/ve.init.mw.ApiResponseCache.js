@@ -46,7 +46,7 @@ OO.mixinClass( ve.init.mw.ApiResponseCache, OO.EventEmitter );
  *
  * @abstract
  * @static
- * @param {Object} page The page object
+ * @param {Object} page
  * @return {Object|undefined} Any relevant info that we want to cache and return.
  */
 ve.init.mw.ApiResponseCache.static.processPage = null;
@@ -70,7 +70,7 @@ ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
  * returns an already-resolved promise. Otherwise, it returns a pending promise and schedules
  * an request to retrieve the data.
  *
- * @param {string} title Title
+ * @param {string} title
  * @return {jQuery.Promise} Promise that will be resolved with the data once it's available
  */
 ve.init.mw.ApiResponseCache.prototype.get = function ( title ) {

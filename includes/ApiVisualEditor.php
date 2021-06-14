@@ -578,7 +578,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Check if the configured allowed namespaces include the specified namespace
 	 *
-	 * @param Config $config Configuration object
+	 * @param Config $config
 	 * @param int $namespaceId Namespace ID
 	 * @return bool
 	 */
@@ -590,7 +590,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Get a list of allowed namespace IDs
 	 *
-	 * @param Config $config Configuration object
+	 * @param Config $config
 	 * @return array
 	 */
 	public static function getAvailableNamespaceIds( Config $config ) {
@@ -613,7 +613,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Check if the configured allowed content models include the specified content model
 	 *
-	 * @param Config $config Configuration object
+	 * @param Config $config
 	 * @param string $contentModel Content model ID
 	 * @return bool
 	 */

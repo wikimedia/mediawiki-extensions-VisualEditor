@@ -53,7 +53,7 @@ ve.ui.MWEditSummaryWidget.static.summarySplitter = /^(\/\*.*?\*\/\s*)?(.*)$/;
 /**
  * Split a summary into the section and the actual summary
  *
- * @param {string} summary Summary
+ * @param {string} summary
  * @return {Object} Object with section and comment string properties
  */
 ve.ui.MWEditSummaryWidget.static.splitSummary = function ( summary ) {

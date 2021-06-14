@@ -16,7 +16,7 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
- * @param {ve.dm.MWTransclusionModel} transclusion Transclusion
+ * @param {ve.dm.MWTransclusionModel} transclusion
  */
 ve.dm.MWTransclusionPartModel = function VeDmMWTransclusionPartModel( transclusion ) {
 	// Mixin constructors

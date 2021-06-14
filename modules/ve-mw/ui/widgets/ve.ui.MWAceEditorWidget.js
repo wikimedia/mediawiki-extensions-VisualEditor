@@ -179,7 +179,7 @@ ve.ui.MWAceEditorWidget.prototype.setValue = function ( value ) {
 /**
  * Set the value of the Ace editor widget
  *
- * @param {string} value Value
+ * @param {string} value
  * @return {ve.ui.MWAceEditorWidget}
  * @chainable
  */
@@ -343,7 +343,7 @@ ve.ui.MWAceEditorWidget.prototype.clearUndoStack = function () {
 /**
  * Toggle the visibility of line numbers
  *
- * @param {boolean} visible Visible
+ * @param {boolean} visible
  * @return {ve.ui.MWAceEditorWidget}
  * @chainable
  */
@@ -358,7 +358,7 @@ ve.ui.MWAceEditorWidget.prototype.toggleLineNumbers = function ( visible ) {
 /**
  * Toggle the visibility of the print margin
  *
- * @param {boolean} visible Visible
+ * @param {boolean} visible
  * @return {ve.ui.MWAceEditorWidget}
  * @chainable
  */
