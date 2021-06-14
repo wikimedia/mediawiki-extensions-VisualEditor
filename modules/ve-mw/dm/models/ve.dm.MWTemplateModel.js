@@ -146,8 +146,6 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
 };
 
 /**
- * Get a parameter.
- *
  * @param {string} name Parameter name
  * @return {ve.dm.MWParameterModel} Parameter
  */

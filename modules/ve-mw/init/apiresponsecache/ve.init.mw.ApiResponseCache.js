@@ -52,10 +52,8 @@ OO.mixinClass( ve.init.mw.ApiResponseCache, OO.EventEmitter );
 ve.init.mw.ApiResponseCache.static.processPage = null;
 
 /**
- * Normalize the title of the response
- *
- * @param {string} title Title
- * @return {string} Normalized title
+ * @param {string} title
+ * @return {string}
  */
 ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
 	var titleObj = mw.Title.newFromText( title );
