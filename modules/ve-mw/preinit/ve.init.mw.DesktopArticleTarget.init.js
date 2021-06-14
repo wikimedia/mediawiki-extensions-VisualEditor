@@ -97,13 +97,13 @@
 	}
 
 	function setupTempWikitextEditor( data ) {
-		var content = data.content;
+		var wikitext = data.content;
 		// Add trailing linebreak to non-empty wikitext documents for consistency
 		// with old editor and usability. Will be stripped on save. T156609
-		if ( content ) {
-			content += '\n';
+		if ( wikitext ) {
+			wikitext += '\n';
 		}
-		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( { value: content } );
+		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( { value: wikitext } );
 		tempWikitextEditorData = data;
 
 		// Create an equal-height placeholder for the toolbar to avoid vertical jump
@@ -132,17 +132,17 @@
 	}
 
 	function syncTempWikitextEditor() {
-		var newContent = tempWikitextEditor.getValue();
+		var wikitext = tempWikitextEditor.getValue();
 
 		// Strip trailing linebreak. Will get re-added in ArticleTarget#parseDocument.
-		if ( newContent.slice( -1 ) === '\n' ) {
-			newContent = newContent.slice( 0, -1 );
+		if ( wikitext.slice( -1 ) === '\n' ) {
+			wikitext = wikitext.slice( 0, -1 );
 		}
 
-		if ( newContent !== tempWikitextEditorData.content ) {
+		if ( wikitext !== tempWikitextEditorData.content ) {
 			// Write changes back to response data object,
 			// which will be used to construct the surface.
-			tempWikitextEditorData.content = newContent;
+			tempWikitextEditorData.content = wikitext;
 			// TODO: Consider writing changes using a
 			// transaction so they can be undone.
 			// For now, just mark surface as pre-modified
