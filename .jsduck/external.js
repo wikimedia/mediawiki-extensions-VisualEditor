@@ -4,6 +4,11 @@
  */
 
 /**
+ * @class mw.Message
+ * @source <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message>
+ */
+
+/**
  * @class mw.Title
  * @source <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Title>
  */
