@@ -54,6 +54,7 @@
 .ve-ui-mwParameterPage-doc {
 	font-size: 0.9em;
 	line-height: 1.5em;
+	overflow-wrap: break-word;
 	padding: 0.25em 1em;
 }
 
