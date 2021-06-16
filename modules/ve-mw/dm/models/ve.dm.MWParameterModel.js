@@ -30,7 +30,7 @@ ve.dm.MWParameterModel = function VeDmMWParameterModel( template, name, value ) 
 	this.originalName = name;
 	this.name = typeof name === 'string' ? name.trim() : '';
 	this.value = value || '';
-	this.id = this.template.getId() + '/' + name;
+	this.id = this.template.getId() + '/' + this.name;
 };
 
 /* Inheritance */
