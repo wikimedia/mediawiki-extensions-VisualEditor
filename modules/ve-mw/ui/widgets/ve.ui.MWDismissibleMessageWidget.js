@@ -14,26 +14,27 @@
  * @cfg {mw.Message} message Message to display
  */
 ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( config ) {
+	var $label = config.message.parseDom();
+	$label.filter( 'a' ).attr( 'target', '_blank' );
+	// eslint-disable-next-line no-jquery/variable-pattern
+	config.label = $label;
+
 	// Parent constructor
 	ve.ui.MWDismissibleMessageWidget.super.call( this, config );
 
 	// Properties
-	this.message = config.message;
-	this.dismissButton = new OO.ui.ButtonWidget( {
+	this.messageKey = config.message.key;
+	delete config.message;
+
+	var dismissButton = new OO.ui.ButtonWidget( {
 		icon: 'close',
 		framed: false
-	} );
-
-	// Initialization
-	this.dismissButton
+	} )
 		.connect( this, { click: 'onDismissClick' } );
+
 	this.$element
 		.addClass( 've-ui-dismissibleMessageWidget' )
-		.prepend( this.dismissButton.$element );
-
-	var $message = this.message.parseDom();
-	$message.filter( 'a' ).attr( 'target', '_blank' );
-	this.setLabel( $message );
+		.prepend( dismissButton.$element );
 
 	var hidden = !!mw.storage.get( this.getStorageKey() );
 	this.toggle( !hidden );
@@ -56,13 +57,15 @@ ve.ui.MWDismissibleMessageWidget.static.storageKeyPrefix = 'mwe-visualeditor-hid
  * @return {string} The local storage key
  */
 ve.ui.MWDismissibleMessageWidget.prototype.getStorageKey = function () {
-	return this.constructor.static.storageKeyPrefix + this.message.key;
+	return this.constructor.static.storageKeyPrefix + this.messageKey;
 };
 
 /**
  * Respond to dismiss button click event.
+ * @fires close
  */
 ve.ui.MWDismissibleMessageWidget.prototype.onDismissClick = function () {
 	mw.storage.set( this.getStorageKey(), '1' );
 	this.toggle( false );
+	this.emit( 'close' );
 };

@@ -91,7 +91,8 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		// TODO: remove when templateSearchImprovements are out of beta
 		var feedbackMessage = new ve.ui.MWDismissibleMessageWidget( {
 			message: mw.message( 'visualeditor-dialog-transclusion-feedback-message' )
-		} );
+		} )
+			.connect( this, { close: 'focus' } );
 
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
 			// The following messages are used here:
