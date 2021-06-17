@@ -527,6 +527,36 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 				dialog.loaded = true;
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+
+				// FIXME: Proof-of-concept for T274543, to be removed.  None of
+				// this code will be needed, instead the bookletLayout will
+				// instantiate the appropriate sidebar.
+				if ( mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar ) {
+					var intRange = [];
+					for ( var index = 0; index < 40; index++ ) {
+						intRange.push( index );
+					}
+					var template1 = new ve.ui.MWTemplateOutlineTemplateWidget( {
+						// Generate sample data.
+						items: intRange.map(
+							function ( j ) {
+								return new ve.ui.MWTemplateOutlineParameterCheckboxWidget( {
+									required: j < 5,
+									// TODO: Label can be a passed as an unevaluated lazy message function.
+									label: 'Parameter number ' + ( j + 1 ) + ' plus long text continuation',
+									selected: j % 2
+								} );
+							}
+						)
+					} );
+					var pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget( {
+						items: template1
+					} );
+					dialog.bookletLayout.$element.find( '.oo-ui-outlineSelectWidget' )
+						.empty()
+						.append( pocSidebar.$element );
+				}
+
 				dialog.$body.append( dialog.bookletLayout.$element );
 
 				dialog.bookletLayout.autoFocus = true;
