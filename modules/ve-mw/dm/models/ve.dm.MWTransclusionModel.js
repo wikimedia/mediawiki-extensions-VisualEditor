@@ -405,9 +405,11 @@
 	};
 
 	/**
-	 * Get the wikitext for this transclusion.
+	 * Get a minimal wikitext representation for this transclusion, possibly containing multiple
+	 * template invocations, mixed with raw wikitext snippets. Don't store this. This neither
+	 * respects TemplateData format strings nor how an edited template was formatted before.
 	 *
-	 * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+	 * @return {string} Wikitext
 	 */
 	ve.dm.MWTransclusionModel.prototype.getWikitext = function () {
 		var i, len,
