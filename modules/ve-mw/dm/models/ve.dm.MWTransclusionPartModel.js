@@ -77,17 +77,6 @@ ve.dm.MWTransclusionPartModel.prototype.serialize = function () {
 };
 
 /**
- * Get a minimal wikitext representation for this part, e.g. a compiled template invocation like
- * `{{foo|1=bar|baz=quux}}`. Don't store this. This neither respects TemplateData format strings nor
- * how an edited template was formatted before.
- *
- * @return {string} Wikitext
- */
-ve.dm.MWTransclusionPartModel.prototype.getWikitext = function () {
-	return '';
-};
-
-/**
  * Add all non-existing required and suggested parameters, if any.
  *
  * @return {number} Number of parameters added

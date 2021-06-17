@@ -388,23 +388,6 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 /**
  * @inheritdoc
  */
-ve.dm.MWTemplateModel.prototype.getWikitext = function () {
-	var wikitext = this.target.wt;
-
-	for ( var param in this.params ) {
-		if ( param === '' ) {
-			continue;
-		}
-		wikitext += '|' + param + '=' +
-			ve.dm.MWTransclusionNode.static.escapeParameter( this.params[ param ].getValue() );
-	}
-
-	return '{{' + wikitext + '}}';
-};
-
-/**
- * @inheritdoc
- */
 ve.dm.MWTemplateModel.prototype.isEmpty = function () {
 	var params = this.params;
 

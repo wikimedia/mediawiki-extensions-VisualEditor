@@ -33,7 +33,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		autosize: true,
 		classes: [ 've-ui-mwTransclusionDialog-input' ]
 	} )
-		.setValue( this.content.getWikitext() )
+		.setValue( this.content.serialize() )
 		.setReadOnly( config.isReadOnly )
 		.connect( this, { change: 'onTextInputChange' } );
 	this.valueFieldset = new OO.ui.FieldsetLayout( {

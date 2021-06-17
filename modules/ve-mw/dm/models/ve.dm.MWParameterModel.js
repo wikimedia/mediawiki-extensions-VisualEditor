@@ -18,7 +18,7 @@
  * @param {ve.dm.MWTemplateModel} template Reference back to the template that contains the
  *  parameter, as well as to the specification
  * @param {string} [name] Can be missing or empty when meant to be used as a placeholder. Parameters
- *  without a name won't be serialized to wikitext, {@see ve.dm.MWTemplateModel.getWikitext}.
+ *  without a name won't be serialized to wikitext, {@see ve.dm.MWTemplateModel.serialize}.
  * @param {string} [value='']
  */
 ve.dm.MWParameterModel = function VeDmMWParameterModel( template, name, value ) {
@@ -92,8 +92,7 @@ ve.dm.MWParameterModel.prototype.getName = function () {
 };
 
 /**
- * Original parameter name. Will be used in {@see ve.dm.MWTransclusionPartModel.serialize}, but not
- * in {@see ve.dm.MWTransclusionPartModel.getWikitext}.
+ * Original parameter name. Will be used in {@see ve.dm.MWTransclusionPartModel.serialize}.
  *
  * @return {string|undefined} Untrimmed parameter name as provided on construction time
  */

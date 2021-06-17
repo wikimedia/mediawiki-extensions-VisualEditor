@@ -416,24 +416,6 @@
 	};
 
 	/**
-	 * Get a minimal wikitext representation for this transclusion, possibly containing multiple
-	 * template invocations, mixed with raw wikitext snippets. Don't store this. This neither
-	 * respects TemplateData format strings nor how an edited template was formatted before.
-	 *
-	 * @return {string} Wikitext
-	 */
-	ve.dm.MWTransclusionModel.prototype.getWikitext = function () {
-		var i, len,
-			wikitext = '';
-
-		for ( i = 0, len = this.parts.length; i < len; i++ ) {
-			wikitext += this.parts[ i ].getWikitext();
-		}
-
-		return wikitext;
-	};
-
-	/**
 	 * Get a unique ID for a part in the transclusion.
 	 *
 	 * This is used to give parts unique IDs, and returns a different value each time it's called.
