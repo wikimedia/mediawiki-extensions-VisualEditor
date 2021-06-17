@@ -14,24 +14,26 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWidget( config ) {
-	config = config || {};
-
 	// Parent constructor
 	ve.ui.MWTemplateOutlineTemplateWidget.super.call( this, config );
 
 	// Initialization
-	// TODO: var title = new OO
+	this.templateModel = config.templateModel.connect( this, {
+		add: 'onAddParameter'
+		// remove: 'onRemoveParameter'
+	} );
 
-	var parameters = new ve.ui.MWTemplateOutlineCheckboxListWidget( {
-		// TODO: Probably take some responsibility for interpreting a template model.
-		items: config.items
+	var checkboxes = this.templateModel.getAllParametersOrdered().map(
+		this.createCheckbox.bind( this ) );
+	this.parameters = new ve.ui.MWTemplateOutlineCheckboxListWidget( {
+		items: checkboxes
 	} );
 	var layout = new OO.ui.Layout( {
 		// TODO: template title and icon
-		items: [ parameters ]
+		items: [ this.parameters ]
 	} );
 	layout.$element
-		.append( parameters.$element );
+		.append( this.parameters.$element );
 
 	this.$element
 		.append( layout.$element )
@@ -41,3 +43,21 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, OO.ui.Widget );
+
+ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( name ) {
+	var parameterModel = this.templateModel.getParameter( name );
+	var isPresent = !!parameterModel;
+	if ( !parameterModel ) {
+		// TODO: Streamline, don't create a temporary parameter model?
+		parameterModel = new ve.dm.MWParameterModel( this.templateModel, name );
+	}
+	return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
+		required: parameterModel.isRequired(),
+		label: parameterModel.getName(),
+		selected: isPresent
+	} );
+};
+
+ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( /* parameter */ ) {
+	// Note: this is not called when initially populating the template, we attach to its events too late.
+};
