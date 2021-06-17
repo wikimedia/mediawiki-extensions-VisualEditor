@@ -190,8 +190,6 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 		if ( page instanceof ve.ui.MWParameterPage ) {
 			page.updateSize();
 		}
-	} else {
-		this.onAddParameterBeforeLoad( page );
 	}
 };
 
@@ -216,13 +214,6 @@ ve.ui.MWTemplateDialog.prototype.makePlaceholderPage = function ( placeholder ) 
 	page.toggle( true );
 	return page;
 };
-
-/**
- * Additional handling of parameter addition events before loading.
- *
- * @param {ve.ui.MWParameterPage} page
- */
-ve.ui.MWTemplateDialog.prototype.onAddParameterBeforeLoad = function () {};
 
 /**
  * Handle remove param events.
