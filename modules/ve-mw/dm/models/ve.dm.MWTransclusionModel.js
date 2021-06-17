@@ -512,7 +512,7 @@
 	 *
 	 * Matching is performed against the first section of the `id`, delimited by a '/'.
 	 *
-	 * @param {string} id Part ID
+	 * @param {string} id Any id, including slash-delimited template parameter ids
 	 * @return {ve.dm.MWTransclusionPartModel|null} Part with matching ID, if found
 	 */
 	ve.dm.MWTransclusionModel.prototype.getPartFromId = function ( id ) {
