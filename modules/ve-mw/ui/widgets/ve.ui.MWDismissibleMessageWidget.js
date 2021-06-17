@@ -28,7 +28,8 @@ ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( conf
 
 	var dismissButton = new OO.ui.ButtonWidget( {
 		icon: 'close',
-		framed: false
+		framed: false,
+		title: mw.msg( 'visualeditor-dismissible-message-close' )
 	} )
 		.connect( this, { click: 'onDismissClick' } );
 
