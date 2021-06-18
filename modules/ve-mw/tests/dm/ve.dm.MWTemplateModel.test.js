@@ -76,4 +76,109 @@
 
 		assert.deepEqual( serializedTransclusionData, { template: transclusionData } );
 	} );
+
+	[
+		{
+			name: 'no spec retrieved',
+			spec: null,
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		},
+		{
+			name: 'empty spec',
+			spec: {},
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		},
+		{
+			name: 'spec with explicit paramOrder and all known params',
+			spec: {
+				params: {
+					bar: {},
+					empty: {},
+					unused: {},
+					foo: {}
+				},
+				paramOrder: [ 'foo', 'empty', 'bar' ]
+			},
+			expected: [
+				'foo',
+				'empty',
+				'bar'
+			]
+		},
+		{
+			name: 'spec with explicit paramOrder and some unknown params',
+			spec: {
+				params: {
+					empty: {},
+					unused: {},
+					foo: {}
+				},
+				paramOrder: [ 'foo', 'empty' ]
+			},
+			expected: [
+				'foo',
+				'empty',
+				'bar'
+			]
+		},
+		{
+			name: 'spec with explicit paramOrder but all unknown params',
+			spec: {
+				params: {},
+				paramOrder: []
+			},
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		},
+		{
+			name: 'spec with no paramOrder, all known params',
+			spec: {
+				params: {
+					bar: {},
+					foo: {},
+					unused: {},
+					empty: {}
+				}
+			},
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		},
+		{
+			name: 'spec with no paramOrder and some unknown params',
+			spec: {
+				params: {
+					empty: {},
+					unused: {},
+					foo: {}
+				}
+			},
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		}
+	].forEach( ( { name, spec, expected } ) => {
+		QUnit.test( 'getOrderedParameterNames: ' + name, ( assert ) => {
+			const templateModel = newTemplateModel();
+			if ( spec !== null ) {
+				templateModel.getSpec().extend( spec );
+			}
+			assert.deepEqual( templateModel.getOrderedParameterNames(), expected );
+		} );
+	} );
 }() );
