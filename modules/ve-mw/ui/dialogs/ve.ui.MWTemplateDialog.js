@@ -248,10 +248,10 @@ ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
 	if ( parts.length && !( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
-		this.actions.setAbilities( { done: this.altered, insert: true } );
+		this.actions.setAbilities( { done: this.altered } );
 	} else {
 		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
-		this.actions.setAbilities( { done: parts.length === 0 && this.altered, insert: false } );
+		this.actions.setAbilities( { done: parts.length === 0 && this.altered } );
 	}
 };
 
@@ -390,7 +390,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 	var templateEvent, i,
 		dialog = this;
 
-	if ( action === 'done' || action === 'insert' ) {
+	if ( action === 'done' ) {
 		return new OO.ui.Process( function () {
 			var deferred = ve.createDeferred();
 			dialog.checkRequiredParameters().done( function () {
@@ -510,7 +510,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					.load( ve.copy( this.selectedNode.getAttribute( 'mw' ) ) )
 					.then( this.initializeTemplateParameters.bind( this ) );
 			}
-			this.actions.setAbilities( { done: false, insert: false } );
+			this.actions.setAbilities( { done: false } );
 
 			return promise.then( function () {
 				// Add missing required and suggested parameters to each transclusion.
