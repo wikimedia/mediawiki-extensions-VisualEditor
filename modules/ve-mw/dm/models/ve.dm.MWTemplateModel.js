@@ -188,10 +188,12 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  * Get all potential parameters, known and unknown.
  *
  * All parameters reported by TemplateData, plus any unknown parameters present
- * in the template invocation.
+ * in the template invocation.  Known parameters are ordered according to
+ * `paramOrder`, or when absent to the order of parameters as they appear in
+ * TemplateData.
  *
- * Known parameters have the TemplateData order, and unknown parameters are
- * sorted with numeric names first, followed by alphabetically sorted names.
+ * Known parameters are in TemplateData order, and unknown parameters are sorted
+ * with numeric names first, followed by alphabetically sorted names.
  *
  * @return {string[]}
  */
