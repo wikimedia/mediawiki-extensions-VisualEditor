@@ -394,16 +394,15 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 		return new OO.ui.Process( function () {
 			var deferred = ve.createDeferred();
 			dialog.checkRequiredParameters().done( function () {
-				var modelPromise,
-					surfaceModel = dialog.getFragment().getSurface(),
-					obj = dialog.transclusionModel.getPlainObject();
+				var surfaceModel = dialog.getFragment().getSurface(),
+					obj = dialog.transclusionModel.getPlainObject(),
+					modelPromise = ve.createDeferred().resolve().promise();
 
 				dialog.pushPending();
 
 				if ( dialog.selectedNode instanceof ve.dm.MWTransclusionNode ) {
 					dialog.transclusionModel.updateTransclusionNode( surfaceModel, dialog.selectedNode );
 					// TODO: updating the node could result in the inline/block state change
-					modelPromise = ve.createDeferred().resolve().promise();
 				} else if ( obj !== null ) {
 					// Collapse returns a new fragment, so update dialog.fragment
 					dialog.fragment = dialog.getFragment().collapseToEnd();
