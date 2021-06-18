@@ -175,18 +175,19 @@ ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
  * Handle add parameter button click events.
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
-	var part, param,
-		itemId = this.transclusions.getFocusedPart();
-
-	if ( itemId ) {
-		part = this.transclusionModel.getPartFromId( itemId );
-		if ( part instanceof ve.dm.MWTemplateModel ) {
-			// TODO: Use a distinct class for placeholder model rather than
-			// these magical "empty" constants.
-			param = new ve.dm.MWParameterModel( part, '', null );
-			part.addParameter( param );
-		}
+	var partId = this.transclusions.getFocusedPart();
+	if ( !partId ) {
+		return;
 	}
+
+	var part = this.transclusionModel.getPartFromId( partId );
+	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
+		return;
+	}
+
+	// TODO: Use a distinct class for placeholder model rather than
+	// these magical "empty" constants.
+	part.addParameter( new ve.dm.MWParameterModel( part ) );
 };
 
 /**
@@ -195,19 +196,15 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
  * @param {OO.ui.PageLayout} page Active page
  */
 ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
-	this.addParameterButton.setDisabled(
-		!( page instanceof ve.ui.MWTemplatePage || page instanceof ve.ui.MWParameterPage ) ||
-		this.isReadOnly()
-	);
-	this.bookletLayout.getOutlineControls().removeButton.toggle( !(
-		(
-			page instanceof ve.ui.MWParameterPage &&
-			page.parameter.isRequired()
-		) || (
-			this.transclusionModel.getParts().length === 1 &&
-			page instanceof ve.ui.MWTemplatePlaceholderPage
-		)
-	) );
+	var isPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage,
+		acceptsNewParameters = page instanceof ve.ui.MWTemplatePage ||
+			page instanceof ve.ui.MWParameterPage,
+		isRequired = page instanceof ve.ui.MWParameterPage && page.parameter.isRequired(),
+		canNotRemove = isRequired ||
+			( isPlaceholder && this.transclusionModel.getParts().length === 1 );
+
+	this.addParameterButton.setDisabled( !acceptsNewParameters || this.isReadOnly() );
+	this.bookletLayout.getOutlineControls().removeButton.toggle( !canNotRemove );
 };
 
 /**
