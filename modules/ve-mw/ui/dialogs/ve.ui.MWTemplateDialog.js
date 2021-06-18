@@ -245,14 +245,11 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
  * If the transclusion only contains a placeholder it will not be editable.
  */
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts();
+	var parts = this.transclusionModel && this.transclusionModel.getParts(),
+		startsWithPlaceholder = parts && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
+		canSave = !startsWithPlaceholder;
 
-	if ( parts.length && !( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) ) {
-		this.actions.setAbilities( { done: this.altered } );
-	} else {
-		// Loading is resolved. We have either: 1) no parts, or 2) the a placeholder as the first part
-		this.actions.setAbilities( { done: parts.length === 0 && this.altered } );
-	}
+	this.actions.setAbilities( { done: canSave && this.altered } );
 };
 
 /**
