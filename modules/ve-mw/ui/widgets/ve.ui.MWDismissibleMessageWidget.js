@@ -63,6 +63,7 @@ ve.ui.MWDismissibleMessageWidget.prototype.getStorageKey = function () {
 
 /**
  * Respond to dismiss button click event.
+ *
  * @fires close
  */
 ve.ui.MWDismissibleMessageWidget.prototype.onDismissClick = function () {
