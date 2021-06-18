@@ -261,6 +261,7 @@ ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 /**
  * Get parameter from its ID.
  *
+ * @private
  * @param {string} id Parameter ID
  * @return {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
  */
@@ -342,6 +343,7 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 /**
  * Set original data, to be used as a base for serialization.
  *
+ * @private
  * @param {Object} data Original data
  */
 ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
@@ -409,7 +411,7 @@ ve.dm.MWTemplateModel.prototype.getWikitext = function () {
 };
 
 /**
- * @inheritDoc
+ * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.isEmpty = function () {
 	var params = this.getParameters();

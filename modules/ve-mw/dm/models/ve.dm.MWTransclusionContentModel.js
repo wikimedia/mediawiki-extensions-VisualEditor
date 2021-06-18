@@ -59,7 +59,7 @@ ve.dm.MWTransclusionContentModel.prototype.getWikitext = function () {
 };
 
 /**
- * @inheritDoc
+ * @inheritdoc
  */
 ve.dm.MWTransclusionContentModel.prototype.isEmpty = function () {
 	return this.wikitext === '';

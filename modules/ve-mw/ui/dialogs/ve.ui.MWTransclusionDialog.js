@@ -119,6 +119,7 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 /**
  * Handle outline controls move events.
  *
+ * @private
  * @param {number} places Number of places to move the selected item
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
@@ -137,6 +138,8 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
 
 /**
  * Handle outline controls remove events.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 	var id = this.transclusions.getFocusedPart();
@@ -157,6 +160,8 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 
 /**
  * Handle add template button click events.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onAddTemplateButtonClick = function () {
 	this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
@@ -164,6 +169,8 @@ ve.ui.MWTransclusionDialog.prototype.onAddTemplateButtonClick = function () {
 
 /**
  * Handle add content button click events.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
 	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusionModel ) );
@@ -171,6 +178,8 @@ ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
 
 /**
  * Handle add parameter button click events.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 	var partId = this.transclusions.getFocusedPart();
@@ -191,6 +200,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 /**
  * Handle booklet layout page set events.
  *
+ * @private
  * @param {OO.ui.PageLayout} page Active page
  */
 ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
@@ -222,6 +232,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 };
 
 /**
+ * @private
  * @return {boolean} True if the dialog contains a single template or template placeholder. False
  *  otherwise. Also false if there is no data model connected yet.
  */
@@ -280,7 +291,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expand ) {
 };
 
 /**
- * Update the dialog title.
+ * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
 	if ( !this.isSingleTemplateTransclusion() ) {
@@ -293,6 +304,8 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
 
 /**
  * Update the state of the 'mode' action
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
@@ -372,6 +385,8 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 
 /**
  * Update the widgets in the dialog's action bar.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 	var veConfig = mw.config.get( 'wgVisualEditorConfig' ),
@@ -412,6 +427,8 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 
 /**
  * Dismisses the reset confirmation.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.resetConfirmationHide = function () {
 	this.resetConfirmation.toggle( false );
@@ -419,6 +436,8 @@ ve.ui.MWTransclusionDialog.prototype.resetConfirmationHide = function () {
 
 /**
  * Dismisses the reset confirmation and runs the reset action.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.resetConfirmationReset = function () {
 	this.resetConfirmationHide();
@@ -427,6 +446,8 @@ ve.ui.MWTransclusionDialog.prototype.resetConfirmationReset = function () {
 
 /**
  * Revert the dialog back to its initial state.
+ *
+ * @private
  */
 ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	var target = this;

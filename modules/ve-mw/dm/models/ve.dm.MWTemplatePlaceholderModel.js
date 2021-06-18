@@ -27,7 +27,7 @@ OO.inheritClass( ve.dm.MWTemplatePlaceholderModel, ve.dm.MWTransclusionPartModel
 /* Methods */
 
 /**
- * @inheritDoc
+ * @inheritdoc
  */
 ve.dm.MWTemplatePlaceholderModel.prototype.isEmpty = function () {
 	return true;
