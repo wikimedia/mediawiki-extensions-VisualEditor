@@ -14,7 +14,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {ve.ui.MWTemplateOutlineParameterCheckboxWidget[]} [items] An array of options to add to the multiselect.
+ * @cfg {ve.ui.MWTemplateOutlineParameterCheckboxLayout[]} [items] An array of options to add to the multiselect.
  */
 ve.ui.MWTemplateOutlineCheckboxListWidget = function VeUiMWTemplateOutlineCheckboxListWidget( config ) {
 	// Parent constructor

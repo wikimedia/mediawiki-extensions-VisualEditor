@@ -2149,7 +2149,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWDefinedTransclusionContextItem.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineCheckboxListWidget.js",
-				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxLayout.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineTemplateWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineContainerWidget.js"
 			],
@@ -2832,7 +2832,7 @@
 			"lib/ve/rebaser/src/dm/ve.dm.RebaseServer.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseClient.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js",
-			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxWidget.test.js"
+			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxLayout.test.js"
 		],
 		"dependencies": [
 			"unicodejs",

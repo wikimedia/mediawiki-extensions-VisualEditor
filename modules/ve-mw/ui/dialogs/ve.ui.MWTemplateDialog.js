@@ -531,7 +531,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						// Generate sample data.
 						items: intRange.map(
 							function ( j ) {
-								return new ve.ui.MWTemplateOutlineParameterCheckboxWidget( {
+								return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
 									required: j < 5,
 									// TODO: Label can be a passed as an unevaluated lazy message function.
 									label: 'Parameter number ' + ( j + 1 ) + ' plus long text continuation',
