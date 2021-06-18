@@ -8,7 +8,7 @@
 /**
  * Represents a template invocation that's part of a (possibly unbalanced) sequence of template
  * invocations and raw wikitext snippets. Meant to be an item in a {@see ve.dm.MWTransclusionModel}.
- * Holds a back-reference to it's parent.
+ * Holds a back-reference to its parent.
  *
  * Holds a reference to the specification of the template, i.e. how the template is documented via
  * TemplateData. The actual invocation might be entirely different, missing parameters as well as
@@ -147,7 +147,7 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
 
 /**
  * @param {string} name Parameter name
- * @return {ve.dm.MWParameterModel}
+ * @return {ve.dm.MWParameterModel|undefined}
  */
 ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
 	return this.params[ name ];
@@ -185,56 +185,62 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 };
 
 /**
- * Get ordered list of parameter names.
+ * Get all potential parameters, known and unknown.
  *
- * Numeric names, whether strings or real numbers, are placed at the beginning, followed by
- * alphabetically sorted names.
+ * All parameters reported by TemplateData, plus any unknown parameters present
+ * in the template invocation.
+ *
+ * Known parameters have the TemplateData order, and unknown parameters are
+ * sorted with numeric names first, followed by alphabetically sorted names.
+ */
+ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
+	var knownParams = this.spec.getParameterOrder();
+	var paramNames = Object.keys( this.params );
+	var unknownParams = paramNames.filter( function ( name ) {
+		return knownParams.indexOf( name ) === -1;
+	} );
+	// TODO: verify in a test that aliases are handled correctly.
+	// Unknown parameters in alpha-numeric order second, empty string at the very end
+	unknownParams.sort( function ( a, b ) {
+		var aIsNaN = isNaN( a ),
+			bIsNaN = isNaN( b );
+
+		if ( a === '' ) {
+			return 1;
+		}
+		if ( b === '' ) {
+			return -1;
+		}
+		if ( aIsNaN && bIsNaN ) {
+			// Two strings
+			return a < b ? -1 : a === b ? 0 : 1;
+		}
+		if ( aIsNaN ) {
+			// A is a string
+			return 1;
+		}
+		if ( bIsNaN ) {
+			// B is a string
+			return -1;
+		}
+		// Two numbers
+		return a - b;
+	} );
+	// TODO: cache results
+	return knownParams.concat( unknownParams );
+};
+
+/**
+ * Get ordered list of parameter names present in this template invocation.
  *
  * @return {string[]} List of parameter names
  */
 ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
-	var i, len, index, paramOrder, paramNames;
-
 	if ( !this.orderedParameterNames ) {
-		paramOrder = this.spec.getParameterOrder();
-		paramNames = Object.keys( this.params );
-
-		this.orderedParameterNames = [];
-		// Known parameters first
-		for ( i = 0, len = paramOrder.length; i < len; i++ ) {
-			index = paramNames.indexOf( paramOrder[ i ] );
-			if ( index !== -1 ) {
-				this.orderedParameterNames.push( paramOrder[ i ] );
-				paramNames.splice( index, 1 );
-			}
-		}
-		// Unknown parameters in alpha-numeric order second, empty string at the very end
-		paramNames.sort( function ( a, b ) {
-			var aIsNaN = isNaN( a ),
-				bIsNaN = isNaN( b );
-
-			if ( a === '' ) {
-				return 1;
-			}
-			if ( b === '' ) {
-				return -1;
-			}
-			if ( aIsNaN && bIsNaN ) {
-				// Two strings
-				return a < b ? -1 : a === b ? 0 : 1;
-			}
-			if ( aIsNaN ) {
-				// A is a string
-				return 1;
-			}
-			if ( bIsNaN ) {
-				// B is a string
-				return -1;
-			}
-			// Two numbers
-			return a - b;
+		var paramNames = Object.keys( this.params );
+		this.orderedParameterNames = this.getAllParametersOrdered().filter( function ( name ) {
+			return paramNames.indexOf( name ) !== -1;
 		} );
-		ve.batchPush( this.orderedParameterNames, paramNames );
 	}
 	return this.orderedParameterNames;
 };
