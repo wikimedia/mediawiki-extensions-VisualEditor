@@ -229,6 +229,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Ustawienia strony",
 	"visualeditor-dialogbutton-template-tooltip": "Szablon",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Szablon",
+	"visualeditor-dismissible-message-close": "Zamknij komunikat i nie pokazuj go więcej",
 	"visualeditor-donebutton-tooltip": "Edycja wykonana",
 	"visualeditor-editconflict": "Twoje zmiany nie mogły zostać zapisane z powodu wystąpienia konfliktu edycji. Czy {{GENDER:|chcesz}} rozwiązać go ręcznie?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} pamięta teraz, który edytor preferujesz. Możesz zmieniać tryb edycji podczas edytowania oraz zmienić później swoje preferencje.",

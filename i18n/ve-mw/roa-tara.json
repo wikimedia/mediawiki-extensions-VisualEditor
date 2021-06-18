@@ -194,6 +194,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Turnanne rete live stu template cu tutte le 'mbormaziune ca è mise, turnanne a'u scacchiamende d'u template. Sta azione jè irreversibbele.",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Condinue a cangià",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Live 'u template",
+	"visualeditor-dialog-transclusion-feedback-message": "Le urteme fatìe onne state combletate pe migliorà le resultate de recerche de le template. Pe sapè de cchiù sus a le cangiaminde o pe lassà 'na segnalazione, vèje sus a [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates pàgene d'u pruggette].",
 	"visualeditor-dialogbutton-media-tooltip": "Immaggine e media",
 	"visualeditor-dialogbutton-meta-tooltip": "'Mbostaziune d'a pàgene",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
