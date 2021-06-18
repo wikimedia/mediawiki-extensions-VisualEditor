@@ -214,8 +214,6 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
-	var single;
-
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
 
 	if ( this.transclusionModel.getParts().length === 0 ) {
@@ -223,8 +221,8 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 		this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
 	}
 
-	single = this.isSingleTemplateTransclusion();
-	this.actions.setAbilities( { mode: single } );
+	var canCollapse = this.isSingleTemplateTransclusion();
+	this.actions.setAbilities( { mode: canCollapse } );
 	this.updateActionSet();
 };
 
@@ -321,9 +319,9 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	// * enabled if we're in a single-part transclusion, because the sidebar's
 	//   closed but can be opened to add more parts
 	if ( parts ) {
-		var canExpandAndCollapse = this.isSingleTemplateTransclusion() &&
+		var canCollapse = this.isSingleTemplateTransclusion() &&
 			!( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel );
-		this.actions.setAbilities( { mode: canExpandAndCollapse } );
+		this.actions.setAbilities( { mode: canCollapse } );
 	}
 };
 
