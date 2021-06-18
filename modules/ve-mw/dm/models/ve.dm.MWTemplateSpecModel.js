@@ -30,7 +30,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	this.template = template;
 	this.description = null;
 	this.params = {};
-	this.paramOrder = [];
+	this.canonicalOrder = [];
 	this.sets = [];
 	this.maps = {};
 
@@ -69,10 +69,11 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 	if ( data.description !== null ) {
 		this.description = data.description;
 	}
-	if ( Array.isArray( data.paramOrder ) ) {
-		this.paramOrder = data.paramOrder.slice();
-	}
 	if ( data.params ) {
+		this.canonicalOrder = Array.isArray( data.paramOrder ) ?
+			data.paramOrder :
+			Object.keys( data.params );
+
 		for ( key in data.params ) {
 			// Pre-fill spec
 			if ( !this.params[ key ] ) {
@@ -166,10 +167,12 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
 /**
  * Get parameter order.
  *
- * @return {string[]} Canonically ordered parameter names
+ * @return {string[]} Canonically ordered parameter names: the explicit
+ *   `paramOrder` if given, otherwise the order of parameters as they appear in
+ *   TemplateData.
  */
-ve.dm.MWTemplateSpecModel.prototype.getParameterOrder = function () {
-	return this.paramOrder.slice();
+ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
+	return this.canonicalOrder.slice();
 };
 
 /**
