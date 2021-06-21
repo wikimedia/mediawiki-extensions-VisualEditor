@@ -23,8 +23,20 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		// remove: 'onRemoveParameter'
 	} );
 
-	var checkboxes = this.templateModel.getAllParametersOrdered().map(
-		this.createCheckbox.bind( this ) );
+	var widget = this;
+	var checkboxes = this.templateModel.getAllParametersOrdered().filter( function ( parameter ) {
+		return parameter !== '';
+	} ).map( function ( parameter ) {
+		return widget.createCheckbox( parameter );
+	} );
+
+	var addParameterButton = new OO.ui.ButtonWidget( {
+		framed: false,
+		icon: 'parameter',
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
+		classes: [ 've-ui-templateOutlineItem' ]
+	} );
+
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
@@ -33,7 +45,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		items: [ this.parameters ]
 	} );
 	layout.$element
-		.append( this.parameters.$element );
+		.append( this.parameters.$element, addParameterButton.$element );
 
 	this.$element
 		.append( layout.$element )
