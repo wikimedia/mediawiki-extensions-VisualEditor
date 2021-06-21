@@ -38,8 +38,7 @@ OO.inheritClass( ve.ui.MWParameterResultWidget, OO.ui.DecoratedOptionWidget );
  * @return {jQuery}
  */
 ve.ui.MWParameterResultWidget.prototype.buildLabel = function () {
-	var i, len,
-		$label = $( '<div>' )
+	var $label = $( '<div>' )
 			.addClass( 've-ui-mwParameterResultWidget-label' )
 			.text( this.data.label ),
 		$names = $( '<div>' )
@@ -55,7 +54,7 @@ ve.ui.MWParameterResultWidget.prototype.buildLabel = function () {
 				.text( this.data.name )
 		);
 	}
-	for ( i = 0, len = this.data.aliases.length; i < len; i++ ) {
+	for ( var i = 0; i < this.data.aliases.length; i++ ) {
 		if ( this.data.aliases[ i ] === this.data.label ) {
 			continue;
 		}

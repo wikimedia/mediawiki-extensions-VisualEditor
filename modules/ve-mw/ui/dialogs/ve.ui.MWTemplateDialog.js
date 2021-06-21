@@ -94,15 +94,15 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
-	var i, len, page, name, names, params, partPage, reselect, addedCount,
+	var names, reselect,
 		removePages = [];
 
 	if ( removed ) {
 		// Remove parameter pages of removed templates
-		partPage = this.bookletLayout.getPage( removed.getId() );
+		var partPage = this.bookletLayout.getPage( removed.getId() );
 		if ( removed instanceof ve.dm.MWTemplateModel ) {
-			params = removed.getParameters();
-			for ( name in params ) {
+			var params = removed.getParameters();
+			for ( var name in params ) {
 				removePages.push( this.bookletLayout.getPage( params[ name ].getId() ) );
 			}
 			removed.disconnect( this );
@@ -115,7 +115,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	}
 
 	if ( added ) {
-		page = this.getPageFromPart( added );
+		var page = this.getPageFromPart( added );
 		if ( page ) {
 			this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( added ) );
 			if ( reselect ) {
@@ -127,7 +127,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				names = added.getOrderedParameterNames();
 				// Prevent selection changes
 				this.preventReselection = true;
-				for ( i = 0, len = names.length; i < len; i++ ) {
+				for ( var i = 0; i < names.length; i++ ) {
 					this.onAddParameter( added.getParameter( names[ i ] ) );
 				}
 				this.preventReselection = false;
@@ -141,7 +141,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			if ( added instanceof ve.dm.MWTemplateModel && this.loaded ) {
 				// Prevent selection changes
 				this.preventReselection = true;
-				addedCount = added.addPromptedParameters();
+				var addedCount = added.addPromptedParameters();
 				this.preventReselection = false;
 				names = added.getOrderedParameterNames();
 				if ( names.length ) {
@@ -387,14 +387,13 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
-	var templateEvent, i,
-		dialog = this;
+	var dialog = this;
 
 	if ( action === 'done' || action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			var deferred = ve.createDeferred();
 			dialog.checkRequiredParameters().done( function () {
-				var modelPromise, editCountBucket,
+				var modelPromise,
 					surfaceModel = dialog.getFragment().getSurface(),
 					obj = dialog.transclusionModel.getPlainObject();
 
@@ -412,17 +411,17 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 
 				// TODO tracking will only be implemented temporarily to answer questions on
 				// template usage for the Technical Wishes topic area see T258917
-				templateEvent = {
+				var templateEvent = {
 					action: 'save',
 					// eslint-disable-next-line camelcase
 					template_names: []
 				};
-				editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
+				var editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
 				if ( editCountBucket !== null ) {
 					// eslint-disable-next-line camelcase
 					templateEvent.user_edit_count_bucket = editCountBucket;
 				}
-				for ( i = 0; i < dialog.transclusionModel.getParts().length; i++ ) {
+				for ( var i = 0; i < dialog.transclusionModel.getParts().length; i++ ) {
 					if ( dialog.transclusionModel.getParts()[ i ].getTitle ) {
 						templateEvent.template_names.push( dialog.transclusionModel.getParts()[ i ].getTitle() );
 					}
@@ -448,7 +447,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var template, promise, templateEvent, i, editCountBucket,
+			var promise,
 				dialog = this;
 
 			// Properties
@@ -472,7 +471,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			if ( !this.selectedNode ) {
 				if ( data.template ) {
 					// New specified template
-					template = ve.dm.MWTemplateModel.newFromName(
+					var template = ve.dm.MWTemplateModel.newFromName(
 						this.transclusionModel, data.template
 					);
 					promise = this.transclusionModel.addPart( template ).then(
@@ -489,17 +488,17 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 				// TODO tracking will only be implemented temporarily to answer questions on
 				// template usage for the Technical Wishes topic area see T258917
-				templateEvent = {
+				var templateEvent = {
 					action: 'edit',
 					// eslint-disable-next-line camelcase
 					template_names: []
 				};
-				editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
+				var editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
 				if ( editCountBucket !== null ) {
 					// eslint-disable-next-line camelcase
 					templateEvent.user_edit_count_bucket = editCountBucket;
 				}
-				for ( i = 0; i < this.selectedNode.partsList.length; i++ ) {
+				for ( var i = 0; i < this.selectedNode.partsList.length; i++ ) {
 					if ( this.selectedNode.partsList[ i ].templatePage ) {
 						templateEvent.template_names.push( this.selectedNode.partsList[ i ].templatePage );
 					}
@@ -559,8 +558,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
  * Initialize parameters for new template insertion
  */
 ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
-	var i, parts = this.transclusionModel.getParts();
-	for ( i = 0; i < parts.length; i++ ) {
+	var parts = this.transclusionModel.getParts();
+	for ( var i = 0; i < parts.length; i++ ) {
 		if ( parts[ i ] instanceof ve.dm.MWTemplateModel ) {
 			parts[ i ].addPromptedParameters();
 		}

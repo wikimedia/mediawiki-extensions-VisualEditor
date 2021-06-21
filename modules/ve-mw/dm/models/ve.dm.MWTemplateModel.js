@@ -66,10 +66,9 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  * @return {ve.dm.MWTemplateModel} New template model
  */
 ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
-	var key,
-		template = new ve.dm.MWTemplateModel( transclusion, data.target );
+	var template = new ve.dm.MWTemplateModel( transclusion, data.target );
 
-	for ( key in data.params ) {
+	for ( var key in data.params ) {
 		template.addParameter(
 			new ve.dm.MWParameterModel( template, key, data.params[ key ].wt )
 		);
@@ -91,7 +90,7 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
  * @return {ve.dm.MWTemplateModel|null} New template model
  */
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
-	var href, title,
+	var title,
 		templateNs = mw.config.get( 'wgNamespaceIds' ).template;
 	if ( name instanceof mw.Title ) {
 		title = name;
@@ -100,7 +99,7 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 		title = mw.Title.newFromText( name, templateNs );
 	}
 	if ( title !== null ) {
-		href = title.getPrefixedText();
+		var href = title.getPrefixedText();
 		return new ve.dm.MWTemplateModel( transclusion, { href: href, wt: name } );
 	}
 
@@ -160,8 +159,7 @@ ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
  * @return {boolean} Parameter exists
  */
 ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
-	var primaryName,
-		params = this.params;
+	var params = this.params;
 
 	// Check if name (which may be an alias) is present in the template
 	if ( name in params ) {
@@ -173,7 +171,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 		return false;
 	}
 
-	primaryName = this.spec.getParameterName( name );
+	var primaryName = this.spec.getParameterName( name );
 	// Check for primary name (may be the same as name)
 	if ( primaryName in params ) {
 		return true;
@@ -254,9 +252,7 @@ ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
  * @return {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
  */
 ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
-	var name;
-
-	for ( name in this.params ) {
+	for ( var name in this.params ) {
 		if ( this.params[ name ].getId() === id ) {
 			return this.params[ name ];
 		}
@@ -303,15 +299,14 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
-	var i, len, name, foundAlias,
-		addedCount = 0,
+	var addedCount = 0,
 		params = this.params,
 		spec = this.getSpec(),
 		names = spec.getParameterNames();
 
-	for ( i = 0, len = names.length; i < len; i++ ) {
-		name = names[ i ];
-		foundAlias = spec.getParameterAliases( name ).some( function ( alias ) {
+	for ( var i = 0; i < names.length; i++ ) {
+		var name = names[ i ];
+		var foundAlias = spec.getParameterAliases( name ).some( function ( alias ) {
 			return alias in params;
 		} );
 		if (
@@ -343,14 +338,13 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.serialize = function () {
-	var name, origName,
-		origData = this.originalData || {},
+	var origData = this.originalData || {},
 		origParams = origData.params || {},
 		template = { target: this.getTarget(), params: {} },
 		spec = this.getSpec(),
 		params = this.getParameters();
 
-	for ( name in params ) {
+	for ( var name in params ) {
 		if ( name === '' ) {
 			continue;
 		}
@@ -366,7 +360,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 			continue;
 		}
 
-		origName = params[ name ].getOriginalName();
+		var origName = params[ name ].getOriginalName();
 		template.params[ origName ] = ve.extendObject(
 			{},
 			origParams[ origName ],
