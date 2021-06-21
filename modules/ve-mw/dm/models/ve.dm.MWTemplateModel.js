@@ -192,6 +192,8 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  *
  * Known parameters have the TemplateData order, and unknown parameters are
  * sorted with numeric names first, followed by alphabetically sorted names.
+ *
+ * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 	var knownParams = this.spec.getParameterOrder();
