@@ -57,10 +57,19 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 			gsrnamespace: params.gpsnamespace,
 			gsrlimit: params.gpslimit
 		} );
-		// Searching for "foo *" is pointless. Don't normalize it to "foo*" either but leave it
-		// unchanged. This makes the word "foo" behave the same in "foo " and "foo bar". In both
-		// cases it's not considered a prefix any more.
-		if ( !/\s$/.test( params.gsrsearch ) ) {
+		// Adding the asterisk to emulate a prefix search behavior. It does not make sense in all
+		// cases though. We're limiting it to be add only of the term ends with a letter or numeric
+		// character.
+		var endsWithAlpha;
+		try {
+			// TODO: Convert to literal when IE11 compatibility was dropped
+			// eslint-disable-next-line prefer-regex-literals
+			endsWithAlpha = new RegExp( '[0-9a-z\\p{L}\\p{N}]$', 'iu' );
+		} catch ( e ) {
+			// TODO: Remove when IE11 compatibility was dropped
+			endsWithAlpha = /[0-9a-z\xC0-\uFFFF]$/i;
+		}
+		if ( endsWithAlpha.test( params.gsrsearch ) ) {
 			params.gsrsearch += '*';
 		}
 		if ( this.showRedirectTargets ) {
