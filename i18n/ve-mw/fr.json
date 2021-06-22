@@ -257,6 +257,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Paramètres de la page",
 	"visualeditor-dialogbutton-template-tooltip": "Modèle",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusion",
+	"visualeditor-dismissible-message-close": "Fermer le message et ne plus l’afficher",
 	"visualeditor-donebutton-tooltip": "Modification effectuée",
 	"visualeditor-editconflict": "Vos modifications n’ont pas pu être enregistrées à cause d’un conflit avec une autre modification. Voulez-{{GENDER:|}}vous résoudre ce conflit manuellement ?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} se souvient dorénavant de l’éditeur que vous préférez. Vous pouvez basculer en cours de modification entre les modes de rédaction et changer ultérieurement votre préférence.",

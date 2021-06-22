@@ -229,6 +229,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Configurações da página",
 	"visualeditor-dialogbutton-template-tooltip": "Predefinição",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transclusão",
+	"visualeditor-dismissible-message-close": "Feche a mensagem e não mostre novamente",
 	"visualeditor-donebutton-tooltip": "Edição concluída",
 	"visualeditor-editconflict": "Suas alterações não puderam ser salvas por causa de um conflito de edição. {{GENDER:|Você}} gostaria de resolver o conflito manualmente?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} agora lembra qual editor você prefere. Você pode alternar os modos de edição conforme você edita e altera sua preferência mais tarde.",

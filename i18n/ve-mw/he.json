@@ -216,6 +216,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "הגדרות דף",
 	"visualeditor-dialogbutton-template-tooltip": "תבנית",
 	"visualeditor-dialogbutton-transclusion-tooltip": "הכללה",
+	"visualeditor-dismissible-message-close": "לסגור את ההודעה ולא להציג שוב",
 	"visualeditor-donebutton-tooltip": "סיימתי את העריכה",
 	"visualeditor-editconflict": "השינויים שלך לא נשמרו בגלל התנגשות עריכה. האם {{GENDER:|תרצה|תרצי}} לפתור את ההתנגשות ידנית?",
 	"visualeditor-editingtabdialog-body": "אתר {{SITENAME}} זוכר עכשיו איזה עורך {{GENDER:|אתה מעדיף|את מעדיפה}}. אפשר לעבור בין מצבי העריכה תוך כדי העריכה, ולשנות את ההעדפה שלך אחר־כך.",
