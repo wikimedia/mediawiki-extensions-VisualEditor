@@ -198,7 +198,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	var knownParams = this.spec.getCanonicalParameterOrder();
+	var knownParams = this.spec.getParameterOrder();
 	var paramNames = Object.keys( this.params );
 	var unknownParams = paramNames.filter( function ( name ) {
 		return knownParams.indexOf( name ) === -1;
