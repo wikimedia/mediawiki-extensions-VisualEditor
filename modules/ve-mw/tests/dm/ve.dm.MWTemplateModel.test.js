@@ -105,7 +105,7 @@
 					unused: {},
 					foo: {}
 				},
-				paramOrder: [ 'foo', 'empty', 'bar' ]
+				paramOrder: [ 'foo', 'empty', 'bar', 'unused' ]
 			},
 			expected: [
 				'foo',
@@ -121,7 +121,7 @@
 					unused: {},
 					foo: {}
 				},
-				paramOrder: [ 'foo', 'empty' ]
+				paramOrder: [ 'foo', 'empty', 'unused' ]
 			},
 			expected: [
 				'foo',
@@ -179,6 +179,106 @@
 				templateModel.getSpec().extend( spec );
 			}
 			assert.deepEqual( templateModel.getOrderedParameterNames(), expected );
+		} );
+	} );
+
+	[
+		{
+			name: 'no spec retrieved',
+			spec: null,
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		},
+		{
+			name: 'spec with explicit paramOrder and all known params',
+			spec: {
+				params: {
+					bar: {},
+					empty: {},
+					unused: {},
+					foo: {}
+				},
+				paramOrder: [ 'foo', 'empty', 'unused', 'bar' ]
+			},
+			expected: [
+				'foo',
+				'empty',
+				'unused',
+				'bar'
+			]
+		},
+		{
+			name: 'spec with explicit paramOrder and some unknown params',
+			spec: {
+				params: {
+					empty: {},
+					unused: {},
+					foo: {}
+				},
+				paramOrder: [ 'foo', 'empty', 'unused' ]
+			},
+			expected: [
+				'foo',
+				'empty',
+				'unused',
+				'bar'
+			]
+		},
+		{
+			name: 'spec with explicit paramOrder but all unknown params',
+			spec: {
+				params: {},
+				paramOrder: []
+			},
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+			]
+		},
+		{
+			name: 'spec with no paramOrder, all known params',
+			spec: {
+				params: {
+					bar: {},
+					foo: {},
+					unused: {},
+					empty: {}
+				}
+			},
+			expected: [
+				'bar',
+				'empty',
+				'foo'
+				// FIXME: 'unused'
+			]
+		},
+		{
+			name: 'spec with no paramOrder and some unknown params',
+			spec: {
+				params: {
+					empty: {},
+					unused: {},
+					foo: {}
+				}
+			},
+			expected: [
+				'bar',
+				'empty',
+				// FIXME: 'unused'
+				'foo'
+			]
+		}
+	].forEach( ( { name, spec, expected } ) => {
+		QUnit.test( 'getAllParametersOrdered: ' + name, ( assert ) => {
+			const templateModel = newTemplateModel();
+			if ( spec !== null ) {
+				templateModel.getSpec().extend( spec );
+			}
+			assert.deepEqual( templateModel.getAllParametersOrdered(), expected );
 		} );
 	} );
 }() );
