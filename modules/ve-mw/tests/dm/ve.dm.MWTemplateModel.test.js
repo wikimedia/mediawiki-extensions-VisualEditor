@@ -153,8 +153,8 @@
 			},
 			expected: [
 				'bar',
-				'foo',
-				'empty'
+				'empty',
+				'foo'
 			]
 		},
 		{
@@ -167,9 +167,9 @@
 				}
 			},
 			expected: [
+				'bar',
 				'empty',
-				'foo',
-				'bar'
+				'foo'
 			]
 		}
 	].forEach( ( { name, spec, expected } ) => {
@@ -251,9 +251,9 @@
 			},
 			expected: [
 				'bar',
-				'foo',
-				'unused',
-				'empty'
+				'empty',
+				'foo'
+				// FIXME: 'unused'
 			]
 		},
 		{
@@ -266,10 +266,10 @@
 				}
 			},
 			expected: [
+				'bar',
 				'empty',
-				'unused',
-				'foo',
-				'bar'
+				// FIXME: 'unused'
+				'foo'
 			]
 		}
 	].forEach( ( { name, spec, expected } ) => {
