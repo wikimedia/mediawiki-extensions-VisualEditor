@@ -89,9 +89,6 @@ OO.inheritClass( ve.ui.MWTransclusionDialog, ve.ui.MWTemplateDialog );
 
 ve.ui.MWTransclusionDialog.static.name = 'transclusion';
 
-ve.ui.MWTransclusionDialog.static.title =
-	OO.ui.deferMsg( 'visualeditor-dialog-transclusion-title-edit-transclusion' );
-
 ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.actions.concat( [
 	{
 		action: 'mode',
@@ -286,7 +283,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expand ) {
  */
 ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
 	if ( !this.isSingleTemplateTransclusion() ) {
-		this.title.setLabel( this.constructor.static.title );
+		this.title.setLabel( ve.msg( 'visualeditor-dialog-transclusion-title-edit-transclusion' ) );
 	} else {
 		// Parent method
 		ve.ui.MWTransclusionDialog.super.prototype.updateTitle.call( this );
