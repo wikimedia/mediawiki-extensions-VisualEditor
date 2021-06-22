@@ -317,7 +317,7 @@ ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
 			title = ve.msg( 'visualeditor-dialog-transclusion-title-insert-template' );
 		}
 	}
-	this.title.setLabel( title );
+	this.title.setLabel( title ).setTitle( title );
 };
 
 /**
