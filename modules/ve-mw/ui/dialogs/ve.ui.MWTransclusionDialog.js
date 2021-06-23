@@ -122,14 +122,13 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
  * @param {number} places Number of places to move the selected item
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
-	var part, promise,
-		parts = this.transclusionModel.getParts(),
+	var parts = this.transclusionModel.getParts(),
 		itemId = this.transclusions.getFocusedPart();
 
 	if ( itemId ) {
-		part = this.transclusionModel.getPartFromId( itemId );
+		var part = this.transclusionModel.getPartFromId( itemId );
 		// Move part to new location, and if dialog is loaded switch to new part page
-		promise = this.transclusionModel.addPart( part, parts.indexOf( part ) + places );
+		var promise = this.transclusionModel.addPart( part, parts.indexOf( part ) + places );
 		if ( this.loaded && !this.preventReselection ) {
 			promise.done( this.transclusions.focusPart.bind( this.transclusions, part.getId() ) );
 		}
@@ -140,14 +139,13 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
  * Handle outline controls remove events.
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
-	var part, param,
-		id = this.transclusions.getFocusedPart();
+	var id = this.transclusions.getFocusedPart();
 
 	if ( id ) {
-		part = this.transclusionModel.getPartFromId( id );
+		var part = this.transclusionModel.getPartFromId( id );
 		// Check if the part is the actual template, or one of its parameters
 		if ( part instanceof ve.dm.MWTemplateModel && id !== part.getId() ) {
-			param = part.getParameterFromId( id );
+			var param = part.getParameterFromId( id );
 			if ( param instanceof ve.dm.MWParameterModel ) {
 				part.removeParameter( param );
 			}
@@ -328,17 +326,16 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
  * @param {ve.dm.MWTransclusionPartModel} part Part to add
  */
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
-	var index, promise,
-		parts = this.transclusionModel.getParts(),
+	var parts = this.transclusionModel.getParts(),
 		itemId = this.transclusions.getFocusedPart();
 
 	if ( part ) {
 		// Insert after selected part, or at the end if nothing is selected
-		index = itemId ?
+		var index = itemId ?
 			parts.indexOf( this.transclusionModel.getPartFromId( itemId ) ) + 1 :
 			parts.length;
 		// Add the part, and if dialog is loaded switch to part page
-		promise = this.transclusionModel.addPart( part, index );
+		var promise = this.transclusionModel.addPart( part, index );
 		if ( this.loaded && !this.preventReselection ) {
 			promise.done( this.transclusions.focusPart.bind( this.transclusions, part.getId() ) );
 		}

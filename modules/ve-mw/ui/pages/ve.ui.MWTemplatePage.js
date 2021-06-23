@@ -19,8 +19,7 @@
  * @cfg {boolean} [isReadOnly] Page is read-only
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var linkData, messageKey,
-		title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null,
+	var title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null,
 		veConfig = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Configuration initialization
@@ -63,8 +62,8 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		// template is called, nor link to the template page. However, if we know for
 		// certain that the template doesn't exist, be explicit about it (T162694).
 		if ( title ) {
-			linkData = ve.init.platform.linkCache.getCached( '_missing/' + title );
-			messageKey = linkData && linkData.missing ?
+			var linkData = ve.init.platform.linkCache.getCached( '_missing/' + title );
+			var messageKey = linkData && linkData.missing ?
 				'visualeditor-dialog-transclusion-absent-template' :
 				'visualeditor-dialog-transclusion-no-template-description';
 

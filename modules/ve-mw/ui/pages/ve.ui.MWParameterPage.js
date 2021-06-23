@@ -378,8 +378,7 @@ ve.ui.MWParameterPage.prototype.isEmpty = function () {
  * @param {string} value
  */
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
-	var value = this.valueInput.getValue(),
-		isNotSuggestedValue;
+	var value = this.valueInput.getValue();
 
 	if ( !this.edited ) {
 		ve.track( 'activity.transclusion', { action: 'edit-parameter-value' } );
@@ -392,7 +391,7 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	}
 
 	if ( this.warningMessage ) {
-		isNotSuggestedValue = value &&
+		var isNotSuggestedValue = value &&
 			this.parameter.getSuggestedValues().length > 0 &&
 			this.parameter.getSuggestedValues().indexOf( value ) === -1;
 		if ( isNotSuggestedValue ) {

@@ -18,8 +18,6 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
-	var addTemplateActionFieldLayout,
-		addTemplateFieldsetConfig;
 	// Configuration initialization
 	config = ve.extendObject( {
 		scrollable: false
@@ -68,13 +66,13 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		this.removeButton.toggle( false );
 	}
 
-	addTemplateActionFieldLayout = new OO.ui.ActionFieldLayout(
+	var addTemplateActionFieldLayout = new OO.ui.ActionFieldLayout(
 		this.addTemplateInput,
 		this.addTemplateButton,
 		{ align: 'top' }
 	);
 
-	addTemplateFieldsetConfig = {
+	var addTemplateFieldsetConfig = {
 		label: ve.msg( 'visualeditor-dialog-transclusion-placeholder' ),
 		icon: 'puzzle',
 		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
@@ -154,14 +152,13 @@ ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
-	var part, name, event, editCountBucket,
-		transclusion = this.placeholder.getTransclusion(),
+	var transclusion = this.placeholder.getTransclusion(),
 		menu = this.addTemplateInput.getLookupMenu();
 
 	if ( menu.isVisible() ) {
 		menu.chooseItem( menu.findSelectedItem() );
 	}
-	name = this.addTemplateInput.getMWTitle();
+	var name = this.addTemplateInput.getMWTitle();
 	if ( !name ) {
 		// Invalid titles return null, so abort here.
 		return;
@@ -169,19 +166,19 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 
 	// TODO tracking will only be implemented temporarily to answer questions on
 	// template usage for the Technical Wishes topic area see T258917
-	event = {
+	var event = {
 		action: 'add-template',
 		// eslint-disable-next-line camelcase
 		template_names: [ name.getPrefixedText() ]
 	};
-	editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
+	var editCountBucket = mw.config.get( 'wgUserEditCountBucket' );
 	if ( editCountBucket !== null ) {
 		// eslint-disable-next-line camelcase
 		event.user_edit_count_bucket = editCountBucket;
 	}
 	mw.track( 'event.VisualEditorTemplateDialogUse', event );
 
-	part = ve.dm.MWTemplateModel.newFromName( transclusion, name );
+	var part = ve.dm.MWTemplateModel.newFromName( transclusion, name );
 	transclusion.replacePart( this.placeholder, part );
 	this.addTemplateInput.pushPending();
 	// abort pending lookups, also, so the menu can't appear after we've left the page

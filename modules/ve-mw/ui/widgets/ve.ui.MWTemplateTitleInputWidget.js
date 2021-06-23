@@ -188,22 +188,20 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 
 	return promise
 		.then( function ( response ) {
-			var xhr, pageId, redirIndex,
-				redirects = ( response.query && response.query.redirects ) || [],
+			var redirects = ( response.query && response.query.redirects ) || [],
 				origPages = ( response.query && response.query.pages ) || {},
-				newPages = [],
-				titles;
+				newPages = [];
 
 			// Build a new array to replace response.query.pages, ensuring everything goes into
 			// the order defined by the page's index key, instead of whatever random order the
 			// browser would let you iterate over the old object in.
-			for ( pageId in origPages ) {
+			for ( var pageId in origPages ) {
 				if ( 'index' in origPages[ pageId ] ) {
 					newPages[ origPages[ pageId ].index - 1 ] = origPages[ pageId ];
 				} else {
 					// Watch out for cases where the index is specified on the redirect object
 					// rather than the page object.
-					for ( redirIndex in redirects ) {
+					for ( var redirIndex in redirects ) {
 						if ( redirects[ redirIndex ].to === origPages[ pageId ].title ) {
 							newPages[ redirects[ redirIndex ].index - 1 ] = origPages[ pageId ];
 							break;
@@ -226,7 +224,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				} );
 			}
 
-			titles = newPages.map( function ( page ) {
+			var titles = newPages.map( function ( page ) {
 				return page.title;
 			} );
 
@@ -236,7 +234,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			// Also get descriptions
 			// FIXME: This should go through MWTransclusionModel rather than duplicate.
 			if ( titles.length > 0 ) {
-				xhr = widget.getApi().get( {
+				var xhr = widget.getApi().get( {
 					action: 'templatedata',
 					format: 'json',
 					formatversion: 2,
@@ -249,16 +247,15 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			}
 		} )
 		.then( function ( templateDataResponse ) {
-			var index, page, missingTitle,
-				pages = ( templateDataResponse && templateDataResponse.pages ) || {};
+			var pages = ( templateDataResponse && templateDataResponse.pages ) || {};
 			// Look for descriptions and cache them
-			for ( index in pages ) {
-				page = pages[ index ];
+			for ( var index in pages ) {
+				var page = pages[ index ];
 
 				if ( page.missing ) {
 					// Remmeber templates that don't exist in the link cache
 					// { title: { missing: true|false }
-					missingTitle = {};
+					var missingTitle = {};
 					missingTitle[ page.title ] = { missing: true };
 					ve.init.platform.linkCache.setMissing( missingTitle );
 				} else if ( !page.notemplatedata ) {

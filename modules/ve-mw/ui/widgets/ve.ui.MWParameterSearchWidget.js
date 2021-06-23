@@ -88,20 +88,19 @@ ve.ui.MWParameterSearchWidget.prototype.onSearchResultsChoose = function ( item 
  * Build a searchable index of parameters.
  */
 ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
-	var i, len, name, label, aliases, description,
-		spec = this.template.getSpec(),
+	var spec = this.template.getSpec(),
 		knownParams = spec.getParameterNames();
 
 	this.index.length = 0;
-	for ( i = 0, len = knownParams.length; i < len; i++ ) {
-		name = knownParams[ i ];
+	for ( var i = 0; i < knownParams.length; i++ ) {
+		var name = knownParams[ i ];
 		// Skip parameters already in use
 		if ( this.template.hasParameter( name ) ) {
 			continue;
 		}
-		label = spec.getParameterLabel( name );
-		aliases = spec.getParameterAliases( name );
-		description = spec.getParameterDescription( name );
+		var label = spec.getParameterLabel( name ),
+			aliases = spec.getParameterAliases( name ),
+			description = spec.getParameterDescription( name );
 
 		this.index.push( {
 			// Query information
@@ -124,7 +123,7 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
  * Handle media query response events.
  */
 ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
-	var i, len, item, textMatch, nameMatch, remainder,
+	var textMatch, nameMatch, remainder,
 		exactMatch = false,
 		value = this.query.getValue().trim().replace( /[|{}]/g, '' ),
 		query = value.toLowerCase(),
@@ -133,8 +132,8 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 
 	this.results.clearItems();
 
-	for ( i = 0, len = this.index.length; i < len; i++ ) {
-		item = this.index[ i ];
+	for ( var i = 0; i < this.index.length; i++ ) {
+		var item = this.index[ i ];
 		if ( hasQuery ) {
 			textMatch = item.text.indexOf( query ) >= 0;
 			nameMatch = item.names.indexOf( query ) >= 0;
@@ -150,7 +149,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 			}
 		}
 		if ( !hasQuery && !this.showAll && items.length >= this.limit ) {
-			remainder = len - i;
+			remainder = this.index.length - i;
 			break;
 		}
 	}

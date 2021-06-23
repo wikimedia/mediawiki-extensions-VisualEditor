@@ -64,8 +64,6 @@ ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang
  * @param {Array} [data.sets] Lists of param sets
  */
 ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
-	var key, param, i, len;
-
 	if ( data.description !== null ) {
 		this.description = data.description;
 	}
@@ -73,17 +71,17 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 		this.paramOrder = data.paramOrder.slice();
 	}
 	if ( data.params ) {
-		for ( key in data.params ) {
+		for ( var key in data.params ) {
 			// Pre-fill spec
 			if ( !this.params[ key ] ) {
 				this.params[ key ] = this.getDefaultParameterSpec( key );
 			}
-			param = this.params[ key ];
+			var param = this.params[ key ];
 			// Extend existing spec
 			ve.extendObject( true, this.params[ key ], data.params[ key ] );
 			// Add aliased references
 			if ( param.aliases.length ) {
-				for ( i = 0, len = param.aliases.length; i < len; i++ ) {
+				for ( var i = 0; i < param.aliases.length; i++ ) {
 					this.params[ param.aliases[ i ] ] = param;
 				}
 			}
@@ -103,9 +101,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
  * is never overwritten.
  */
 ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
-	var key;
-
-	for ( key in this.template.getParameters() ) {
+	for ( var key in this.template.getParameters() ) {
 		if ( key && !this.params[ key ] ) {
 			this.params[ key ] = this.getDefaultParameterSpec( key );
 		}
@@ -138,15 +134,14 @@ ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) 
  * @return {string} Template label
  */
 ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
-	var titleObj,
-		title = this.template.getTitle(),
+	var title = this.template.getTitle(),
 		target = this.template.getTarget();
 
 	if ( title ) {
 		try {
 			// Normalize and remove namespace prefix if in the Template: namespace
-			titleObj = new mw.Title( title );
-			title = titleObj.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
+			title = new mw.Title( title )
+				.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
 		} catch ( e ) { }
 	}
 
@@ -340,10 +335,9 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
  * @return {string[]} Parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
-	var name,
-		names = [];
+	var names = [];
 
-	for ( name in this.params ) {
+	for ( var name in this.params ) {
 		if ( this.params[ name ].name === name ) {
 			names.push( name );
 		}
