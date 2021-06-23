@@ -91,96 +91,11 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 		templateDocPageFragment = '/' + templateDataMessage.text(),
 		promise = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
 
-	/**
-	 * @param {Object} response
-	 * @param {Object} [newPage]
-	 */
-	function unshiftPages( response, newPage ) {
-		response.query.pages.forEach( function ( page ) {
-			page.index++;
-		} );
-		if ( newPage && newPage.title ) {
-			newPage.index = 1;
-			response.query.pages.unshift( newPage );
-		}
+	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
+		promise = promise
+			.then( this.addExactMatch.bind( this ) )
+			.promise( { abort: function () {} } );
 	}
-
-	promise = promise
-		.then( function ( response ) {
-			// TODO: Remove when not in Beta any more
-			if ( !mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
-				return response;
-			}
-
-			var query = widget.getQueryValue(),
-				title = mw.Title.newFromText( query, widget.namespace );
-			// No point in trying anything when the title is invalid
-			if ( !response.query || !title ) {
-				return response;
-			}
-
-			var lowerTitle = title.getPrefixedText().toLowerCase(),
-				metadata = response.query.redirects || [],
-				foundMatchingMetadata = metadata.some( function ( redirect ) {
-					return redirect.from.toLowerCase() === lowerTitle;
-				} );
-			if ( foundMatchingMetadata ) {
-				// Redirects will be carefully positioned later in TitleWidget.getOptionsFromData()
-				return response;
-			}
-
-			var i,
-				matchingRedirects = response.query.pages.filter( function ( page ) {
-					return page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle;
-				} );
-			if ( matchingRedirects.length ) {
-				for ( i = matchingRedirects.length; i--; ) {
-					var redirect = matchingRedirects[ i ];
-					// Offer redirects as separate options when the user's input is an exact match
-					unshiftPages( response, {
-						pageid: redirect.pageid,
-						ns: redirect.ns,
-						title: redirect.redirecttitle
-					} );
-				}
-				return response;
-			}
-
-			var matchingTitles = response.query.pages.filter( function ( page ) {
-				return page.title.toLowerCase() === lowerTitle;
-			} );
-			if ( matchingTitles.length ) {
-				for ( i = matchingTitles.length; i--; ) {
-					// Make sure exact matches are at the very top
-					unshiftPages( response );
-					matchingTitles[ i ].index = 1;
-				}
-				return response;
-			}
-
-			return widget.getApi().get( {
-				// Can't use a direct lookup by title because we need this to be case-insensitive
-				action: 'opensearch',
-				format: 'json',
-				search: query,
-				namespace: widget.namespace,
-				limit: 1,
-				formatversion: 2
-			} ).then( function ( openSearchResult ) {
-				// OpenSearch will perform a prefix search, but we only care about exact matches
-				var titles = openSearchResult[ 1 ].filter( function ( searchResult ) {
-					return searchResult.toLowerCase() === lowerTitle;
-				} );
-				for ( i = titles.length; i--; ) {
-					unshiftPages( response, {
-						ns: widget.namespace,
-						title: titles[ i ]
-					} );
-				}
-				return response;
-			} ).promise( { abort: function () {} } );
-		} )
-		.promise( { abort: function () {} } );
 
 	if ( !this.showTemplateDescriptions ) {
 		return promise;
@@ -269,6 +184,101 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			// API request failed; most likely, we're on a wiki which doesn't have TemplateData.
 			return originalResponse;
 		} )
+		.promise( { abort: function () {} } );
+};
+
+/**
+ * @private
+ * @method
+ * @param {Object} response Action API response from server
+ * @return {Object} Modified response
+ */
+ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response ) {
+	var query = this.getQueryValue(),
+		namespace = this.namespace,
+		title = mw.Title.newFromText( query, namespace );
+	// No point in trying anything when the title is invalid
+	if ( !response.query || !title ) {
+		return response;
+	}
+
+	var lowerTitle = title.getPrefixedText().toLowerCase(),
+		metadata = response.query.redirects || [],
+		foundMatchingMetadata = metadata.some( function ( redirect ) {
+			return redirect.from.toLowerCase() === lowerTitle;
+		} );
+	if ( foundMatchingMetadata ) {
+		// Redirects will be carefully positioned later in TitleWidget.getOptionsFromData()
+		return response;
+	}
+
+	/**
+	 * @param {{index: number}[]} pages
+	 * @param {Object} [newPage]
+	 */
+	function unshiftPages( pages, newPage ) {
+		pages.forEach( function ( page ) {
+			page.index++;
+		} );
+		if ( newPage && newPage.title ) {
+			newPage.index = 1;
+			pages.unshift( newPage );
+		}
+	}
+
+	var i,
+		matchingRedirects = response.query.pages.filter( function ( page ) {
+			return page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle;
+		} );
+	if ( matchingRedirects.length ) {
+		for ( i = matchingRedirects.length; i--; ) {
+			var redirect = matchingRedirects[ i ];
+			// Offer redirects as separate options when the user's input is an exact match
+			unshiftPages( response.query.pages, {
+				pageid: redirect.pageid,
+				ns: redirect.ns,
+				title: redirect.redirecttitle
+			} );
+		}
+		return response;
+	}
+
+	var matchingTitles = response.query.pages.filter( function ( page ) {
+		return page.title.toLowerCase() === lowerTitle;
+	} );
+	if ( matchingTitles.length ) {
+		for ( i = matchingTitles.length; i--; ) {
+			// Make sure exact matches are at the very top
+			unshiftPages( response.query.pages );
+			matchingTitles[ i ].index = 1;
+		}
+		return response;
+	}
+
+	return this.getApi().get( {
+		// Can't use a direct lookup by title because we need this to be case-insensitive
+		action: 'opensearch',
+		format: 'json',
+		search: query,
+		namespace: namespace,
+		limit: 1,
+		formatversion: 2
+	} ).then( function ( openSearchResult ) {
+		// OpenSearch will perform a prefix search, but we only care about exact matches
+		var titles = openSearchResult[ 1 ].filter( function ( searchResult ) {
+			return searchResult.toLowerCase() === lowerTitle;
+		} );
+		for ( i = titles.length; i--; ) {
+			unshiftPages( response.query.pages, {
+				ns: namespace,
+				title: titles[ i ]
+			} );
+		}
+		return response;
+	}, function () {
+		// Proceed with the unmodified response in case the additional API request failed
+		return response;
+	} )
 		.promise( { abort: function () {} } );
 };
 
