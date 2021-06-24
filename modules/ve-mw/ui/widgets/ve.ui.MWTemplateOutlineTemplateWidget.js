@@ -25,7 +25,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 
 	var checkboxes = this.templateModel.getAllParametersOrdered().map(
 		this.createCheckbox.bind( this ) );
-	this.parameters = new ve.ui.MWTemplateOutlineCheckboxListWidget( {
+	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
 	var layout = new OO.ui.Layout( {
