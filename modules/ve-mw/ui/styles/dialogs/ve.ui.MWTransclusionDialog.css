@@ -102,13 +102,20 @@
 	padding: 2px;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem {
+.ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem,
+.ve-ui-mwTemplateDialog .ve-ui-templateOutlineTemplateLabel {
 	display: block;
 	overflow: hidden;
 	right: 0;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	padding: 2px;
+}
+
+.ve-ui-mwTemplateDialog .ve-ui-templateOutlineTemplateLabel .oo-ui-labelWidget {
+	/* FIXME: padding kludged to roughly match the spec. */
+	padding: 11px 12px 11px 6px;
+	font-weight: bold;
 }
 
 .ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem .oo-ui-labelWidget {

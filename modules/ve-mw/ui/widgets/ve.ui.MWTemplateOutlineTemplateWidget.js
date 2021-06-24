@@ -37,6 +37,18 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		classes: [ 've-ui-templateOutlineItem' ]
 	} );
 
+	var templateLabel = new OO.ui.Layout( {
+		classes: [ 've-ui-templateOutlineTemplateLabel' ],
+		content: [
+			new OO.ui.IconWidget( {
+				icon: 'puzzle'
+			} ),
+			new OO.ui.LabelWidget( {
+				label: config.templateModel.getSpec().getLabel()
+			} )
+		]
+	} );
+
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
@@ -45,7 +57,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		// items: [ this.parameters ]
 	} );
 	layout.$element
-		.append( this.parameters.$element, addParameterButton.$element );
+		.append( templateLabel.$element, this.parameters.$element, addParameterButton.$element );
 
 	this.$element
 		.append( layout.$element )
