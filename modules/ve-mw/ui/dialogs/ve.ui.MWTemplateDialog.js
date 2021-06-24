@@ -32,6 +32,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.altered = false;
 	this.preventReselection = false;
 	this.templateParameterPlaceholderPages = {};
+	this.isNewSidebar = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
@@ -467,6 +468,12 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
 			this.bookletLayout.autoFocus = false;
 
+			if ( this.isNewSidebar ) {
+				this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget( {
+					transclusionModel: this.transclusionModel
+				} );
+			}
+
 			// Initialization
 			if ( !this.selectedNode ) {
 				if ( data.template ) {
@@ -518,33 +525,12 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.loaded = true;
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 
-				// FIXME: Proof-of-concept for T274543, to be removed.  None of
-				// this code will be needed, instead the bookletLayout will
-				// instantiate the appropriate sidebar.
-				if ( mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar ) {
-					var intRange = [];
-					for ( var index = 0; index < 40; index++ ) {
-						intRange.push( index );
-					}
-					var template1 = new ve.ui.MWTemplateOutlineTemplateWidget( {
-						// Generate sample data.
-						items: intRange.map(
-							function ( j ) {
-								return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
-									required: j < 5,
-									// TODO: Label can be a passed as an unevaluated lazy message function.
-									label: 'Parameter number ' + ( j + 1 ) + ' plus long text continuation',
-									selected: j % 2
-								} );
-							}
-						)
-					} );
-					var pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget( {
-						items: template1
-					} );
+				if ( dialog.isNewSidebar ) {
+					// TODO: bookletLayout will be deprecated.
+					dialog.$body.append( dialog.pocSidebar.$element );
 					dialog.bookletLayout.$element.find( '.oo-ui-outlineSelectWidget' )
 						.empty()
-						.append( pocSidebar.$element );
+						.append( dialog.pocSidebar.$element );
 				}
 
 				dialog.$body.append( dialog.bookletLayout.$element );
