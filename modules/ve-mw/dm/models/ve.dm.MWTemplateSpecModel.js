@@ -43,12 +43,12 @@ OO.initClass( ve.dm.MWTemplateSpecModel );
 /**
  * @private
  * @param {string|Object.<string,string>} stringOrObject
- * @param {string} [lang]
+ * @param {string} [languageCode]
  * @return {string|undefined}
  */
-ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang ) {
+ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, languageCode ) {
 	return stringOrObject && typeof stringOrObject === 'object' ?
-		OO.ui.getLocalValue( stringOrObject, lang ) :
+		OO.ui.getLocalValue( stringOrObject, languageCode ) :
 		stringOrObject;
 };
 
@@ -136,11 +136,11 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 };
 
 /**
- * @param {string} [lang] Language to get description in
+ * @param {string} [languageCode]
  * @return {string|null} Template description or null if not available
  */
-ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
-	return this.constructor.static.getLocalValue( this.description || null, lang );
+ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( languageCode ) {
+	return this.constructor.static.getLocalValue( this.description || null, languageCode );
 };
 
 /**
@@ -174,22 +174,22 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
 
 /**
  * @param {string} name Parameter name or alias
- * @param {string} [lang] Language to get label in
+ * @param {string} [languageCode]
  * @return {string}
  */
-ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) {
+ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, languageCode ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
-	return this.constructor.static.getLocalValue( param && param.label || name, lang );
+	return this.constructor.static.getLocalValue( param && param.label || name, languageCode );
 };
 
 /**
  * @param {string} name Parameter name or alias
- * @param {string} [lang] Language to get description
+ * @param {string} [languageCode]
  * @return {string|null}
  */
-ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, lang ) {
+ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, languageCode ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
-	return this.constructor.static.getLocalValue( param && param.description || null, lang );
+	return this.constructor.static.getLocalValue( param && param.description || null, languageCode );
 };
 
 /**
@@ -212,12 +212,12 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
 
 /**
  * @param {string} name Parameter name or alias
- * @param {string} [lang] Language to get description
+ * @param {string} [languageCode]
  * @return {string|null}
  */
-ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, lang ) {
+ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, languageCode ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
-	return this.constructor.static.getLocalValue( param && param.example || null, lang );
+	return this.constructor.static.getLocalValue( param && param.example || null, languageCode );
 };
 
 /**
