@@ -28,6 +28,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Nuppáldas bajilčála 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Nuppáldas bajilčála 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Nuppáldas bajilčála 4",
+	"visualeditor-languages-tool": "Gielat",
 	"visualeditor-linkinspector-button-link-external": "Olggobeale siidu",
 	"visualeditor-linkinspector-button-link-internal": "Oza siiddu",
 	"visualeditor-linkinspector-educationpopup-title": "Liŋkkat",
@@ -36,6 +37,8 @@
 	"visualeditor-mweditmodesource-tool-current": "Gáldodivodeapmi",
 	"visualeditor-mweditmodeve-tool-current": "Visuála divvun",
 	"visualeditor-mwgallerydialog-title": "Galleriija",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Giella",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Gielat",
 	"visualeditor-mwsignature-tool": "Du vuolláičála",
 	"visualeditor-savedialog-label-review": "Dárkkis iežat rievdademiid",
 	"visualeditor-savedialog-title-save": "Vurke iežat rievdadusaid"

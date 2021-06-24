@@ -15,5 +15,11 @@
 	"visualeditor-dialog-meta-categories-category": "Luokka",
 	"visualeditor-dialog-meta-categories-data-label": "Luokah",
 	"visualeditor-dialog-meta-categories-section": "Luokah",
-	"visualeditor-linkinspector-educationpopup-title": "Liiŋkah"
+	"visualeditor-dialog-meta-languages-label": "Kielah",
+	"visualeditor-dialog-meta-languages-name-label": "Kielâ",
+	"visualeditor-dialog-meta-languages-section": "Kielah",
+	"visualeditor-languages-tool": "Kielah",
+	"visualeditor-linkinspector-educationpopup-title": "Liiŋkah",
+	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Kielâ",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kielah"
 }
