@@ -19,8 +19,8 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 
 	// Initialization
 	this.templateModel = config.templateModel.connect( this, {
-		add: 'onAddParameter'
-		// remove: 'onRemoveParameter'
+		add: 'onAddParameter',
+		remove: 'onRemoveParameter'
 	} );
 
 	var widget = this;
@@ -42,7 +42,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 	} );
 	var layout = new OO.ui.Layout( {
 		// TODO: template title and icon
-		items: [ this.parameters ]
+		// items: [ this.parameters ]
 	} );
 	layout.$element
 		.append( this.parameters.$element, addParameterButton.$element );
@@ -56,20 +56,60 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 
 OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, OO.ui.Widget );
 
-ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( name ) {
-	var parameterModel = this.templateModel.getParameter( name );
-	var isPresent = !!parameterModel;
+ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
+	var parameterModel = ( parameter instanceof ve.dm.MWParameterModel ) ?
+			parameter : this.templateModel.getParameter( parameter ),
+		isPresent = !!parameterModel;
+
 	if ( !parameterModel ) {
 		// TODO: Streamline, don't create a temporary parameter model?
-		parameterModel = new ve.dm.MWParameterModel( this.templateModel, name );
+		parameterModel = new ve.dm.MWParameterModel( this.templateModel, parameter );
 	}
 	return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
 		required: parameterModel.isRequired(),
 		label: parameterModel.getName(),
+		data: parameterModel.getName(),
 		selected: isPresent
+	} ).connect( this, {
+		change: 'onCheckboxChange'
 	} );
 };
 
-ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( /* parameter */ ) {
-	// Note: this is not called when initially populating the template, we attach to its events too late.
+ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( parameter ) {
+	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
+
+	if ( !paramCheckbox ) {
+		this.parameters.addItems(
+			this.createCheckbox( parameter ),
+			this.templateModel.getAllParametersOrdered().indexOf( parameter.getName() )
+		);
+	} else {
+		paramCheckbox.setSelected( true, true );
+	}
+};
+
+ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( parameter ) {
+	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
+
+	if ( paramCheckbox ) {
+		if ( this.templateModel.isParameterUnknown( parameter ) ) {
+			paramCheckbox.disconnect( this );
+			this.parameters.removeItems( [ paramCheckbox ] );
+		} else {
+			paramCheckbox.setSelected( false, true );
+		}
+	}
+};
+
+ve.ui.MWTemplateOutlineTemplateWidget.prototype.onCheckboxChange = function ( data, checked ) {
+	var parameter = this.templateModel.getParameter( data );
+
+	if ( checked ) {
+		parameter = parameter || new ve.dm.MWParameterModel( this.templateModel, data );
+		this.templateModel.addParameter( parameter );
+	} else {
+		if ( parameter ) {
+			this.templateModel.removeParameter( parameter );
+		}
+	}
 };

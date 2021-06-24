@@ -182,6 +182,10 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	} );
 };
 
+ve.dm.MWTemplateModel.prototype.isParameterUnknown = function ( parameter ) {
+	return this.spec.getCanonicalParameterOrder().indexOf( parameter.getName() ) === -1;
+};
+
 /**
  * Get all potential parameters, known and unknown.
  *
