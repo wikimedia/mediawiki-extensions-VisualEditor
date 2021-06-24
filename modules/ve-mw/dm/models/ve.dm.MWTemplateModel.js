@@ -171,7 +171,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 		return false;
 	}
 
-	var primaryName = this.spec.getParameterName( name );
+	var primaryName = this.spec.getPrimaryParameterName( name );
 	// Check for primary name (may be the same as name)
 	if ( primaryName in params ) {
 		return true;

@@ -289,10 +289,10 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
  *
  * If a parameter is not an alias of another, the output will be the same as the input.
  *
- * @param {string} name Parameter alias
- * @return {string} Parameter name
+ * @param {string} name Parameter name or alias
+ * @return {string}
  */
-ve.dm.MWTemplateSpecModel.prototype.getParameterName = function ( name ) {
+ve.dm.MWTemplateSpecModel.prototype.getPrimaryParameterName = function ( name ) {
 	return this.params[ name ].name;
 };
 

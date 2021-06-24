@@ -55,7 +55,7 @@
 		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), undefined, 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'p2' ), 'string', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'p2' ), [], 'getParameterAliases' );
-		assert.strictEqual( spec.getParameterName( 'p2' ), 'p2', 'getParameterName' );
+		assert.strictEqual( spec.getPrimaryParameterName( 'p2' ), 'p2', 'getPrimaryParameterName' );
 		assert.strictEqual( spec.isParameterRequired( 'p2' ), false, 'isParameterRequired' );
 		assert.strictEqual( spec.isParameterSuggested( 'p2' ), false, 'isParameterSuggested' );
 		assert.strictEqual( spec.isParameterDeprecated( 'p2' ), false, 'isParameterDeprecated' );
@@ -85,7 +85,7 @@
 		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), undefined, 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'p2' ), 'string', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'p2' ), [], 'getParameterAliases' );
-		assert.strictEqual( spec.getParameterName( 'p2' ), 'p2', 'getParameterName' );
+		assert.strictEqual( spec.getPrimaryParameterName( 'p2' ), 'p2', 'getPrimaryParameterName' );
 		assert.strictEqual( spec.isParameterRequired( 'p2' ), false, 'isParameterRequired' );
 		assert.strictEqual( spec.isParameterSuggested( 'p2' ), false, 'isParameterSuggested' );
 		assert.strictEqual( spec.isParameterDeprecated( 'p2' ), false, 'isParameterDeprecated' );
@@ -114,7 +114,7 @@
 		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), undefined, 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'p2' ), 'string', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'p2' ), [], 'getParameterAliases' );
-		assert.strictEqual( spec.getParameterName( 'p2' ), 'p2', 'getParameterName' );
+		assert.strictEqual( spec.getPrimaryParameterName( 'p2' ), 'p2', 'getPrimaryParameterName' );
 		assert.strictEqual( spec.isParameterRequired( 'p2' ), false, 'isParameterRequired' );
 		assert.strictEqual( spec.isParameterSuggested( 'p2' ), false, 'isParameterSuggested' );
 		assert.strictEqual( spec.isParameterDeprecated( 'p2' ), false, 'isParameterDeprecated' );
@@ -163,7 +163,7 @@
 		assert.strictEqual( spec.getParameterAutoValue( 'a' ), 'ParamAutoValue', 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'a' ), 'DummyType', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'a' ), [ 'a' ], 'getParameterAliases' );
-		assert.strictEqual( spec.getParameterName( 'a' ), 'p', 'getParameterName' );
+		assert.strictEqual( spec.getPrimaryParameterName( 'a' ), 'p', 'getPrimaryParameterName' );
 		assert.strictEqual( spec.isParameterRequired( 'a' ), true, 'isParameterRequired' );
 		assert.strictEqual( spec.isParameterSuggested( 'a' ), true, 'isParameterSuggested' );
 		assert.strictEqual( spec.isParameterDeprecated( 'a' ), true, 'isParameterDeprecated' );
