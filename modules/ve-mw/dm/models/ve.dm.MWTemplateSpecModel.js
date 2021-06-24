@@ -186,8 +186,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
  * @return {string} Parameter label
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) {
-	var primaryName = this.getPrimaryParameterName( name );
-	return this.constructor.static.getLocalValue( this.params[ primaryName ].label || name, lang );
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return this.constructor.static.getLocalValue( param && param.label || name, lang );
 };
 
 /**
@@ -198,8 +198,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) 
  * @return {string|null} Parameter description
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, lang ) {
-	name = this.getPrimaryParameterName( name );
-	return this.constructor.static.getLocalValue( this.params[ name ].description || null, lang );
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return this.constructor.static.getLocalValue( param && param.description || null, lang );
 };
 
 /**
@@ -209,8 +209,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, l
  * @return {string[]} Parameter suggested values
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return this.params[ name ].suggestedvalues || [];
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return param && param.suggestedvalues || [];
 };
 
 /**
@@ -220,8 +220,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( nam
  * @return {string} Default parameter value
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	var param = this.params[ name ];
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
 	return param && param.default || '';
 };
 
@@ -233,8 +232,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
  * @return {string|null}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, lang ) {
-	name = this.getPrimaryParameterName( name );
-	return this.constructor.static.getLocalValue( this.params[ name ].example || null, lang );
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return this.constructor.static.getLocalValue( param && param.example || null, lang );
 };
 
 /**
@@ -244,8 +243,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
  * @return {string} Auto-value for the parameter
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	var param = this.params[ name ];
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
 	return param && param.autovalue || '';
 };
 
@@ -256,8 +254,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
  * @return {string} Parameter type
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return this.params[ name ].type || 'string';
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return param && param.type || 'string';
 };
 
 /**
@@ -267,8 +265,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
  * @return {string[]} Alternate parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return this.params[ name ].aliases || [];
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return param && param.aliases || [];
 };
 
 /**
@@ -290,8 +288,8 @@ ve.dm.MWTemplateSpecModel.prototype.getPrimaryParameterName = function ( name ) 
  * @return {boolean} Parameter is required
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return !!this.params[ name ].required;
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return !!( param && param.required );
 };
 
 /**
@@ -301,8 +299,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
  * @return {boolean} Parameter is suggested
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return !!this.params[ name ].suggested;
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return !!( param && param.suggested );
 };
 
 /**
@@ -312,9 +310,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
  * @return {boolean} Parameter is deprecated
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return typeof this.params[ name ].deprecated === 'string' ||
-		!!this.params[ name ].deprecated;
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return !!( param && ( param.deprecated || typeof param.deprecated === 'string' ) );
 };
 
 /**
@@ -325,9 +322,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
  *   deprecated or no description has been specified
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = function ( name ) {
-	name = this.getPrimaryParameterName( name );
-	return typeof this.params[ name ].deprecated === 'string' ?
-		this.params[ name ].deprecated : '';
+	var param = this.params[ this.getPrimaryParameterName( name ) ];
+	return param && typeof param.deprecated === 'string' ? param.deprecated : '';
 };
 
 /**
