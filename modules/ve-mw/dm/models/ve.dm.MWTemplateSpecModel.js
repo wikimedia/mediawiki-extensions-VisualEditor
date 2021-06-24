@@ -42,6 +42,12 @@ OO.initClass( ve.dm.MWTemplateSpecModel );
 
 /* Static methods */
 
+/**
+ * @private
+ * @param {string|Object.<string,string>} stringOrObject
+ * @param {string} [lang]
+ * @return {string|undefined}
+ */
 ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang ) {
 	return stringOrObject && typeof stringOrObject === 'object' ?
 		OO.ui.getLocalValue( stringOrObject, lang ) :
@@ -112,6 +118,7 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 /**
  * Get the default spec for a parameter.
  *
+ * @private
  * @param {string} name Parameter name
  * @return {Object} Parameter spec
  */
