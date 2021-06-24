@@ -28,11 +28,8 @@
 ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	// Properties
 	this.template = template;
-	this.description = null;
 	this.params = {};
 	this.canonicalOrder = [];
-	this.sets = [];
-	this.maps = {};
 
 	// Initialization
 	this.fillFromTemplate();
@@ -163,7 +160,7 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
  * @return {string|null} Template description or null if not available
  */
 ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( lang ) {
-	return this.constructor.static.getLocalValue( this.description, lang );
+	return this.constructor.static.getLocalValue( this.description || null, lang );
 };
 
 /**
@@ -358,7 +355,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
  * @return {Object[]} Lists of parameter set descriptors
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
-	return this.sets;
+	return this.sets || [];
 };
 
 /**
@@ -367,5 +364,5 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
  * @return {Object} Object with application property maps to parameters keyed to application name.
  */
 ve.dm.MWTemplateSpecModel.prototype.getMaps = function () {
-	return this.maps;
+	return this.maps || {};
 };
