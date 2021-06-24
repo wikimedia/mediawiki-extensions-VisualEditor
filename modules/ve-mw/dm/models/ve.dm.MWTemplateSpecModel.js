@@ -102,8 +102,6 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 };
 
 /**
- * Fill from template.
- *
  * Filling is passive, so existing information is never overwritten. The spec should be re-filled
  * after a parameter is added to ensure it's still complete, and this is safe because existing data
  * is never overwritten.
@@ -120,8 +118,6 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 };
 
 /**
- * Get template label.
- *
  * @return {string} Template label
  */
 ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
@@ -140,8 +136,6 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 };
 
 /**
- * Get template description.
- *
  * @param {string} [lang] Language to get description in
  * @return {string|null} Template description or null if not available
  */
@@ -172,18 +166,16 @@ ve.dm.MWTemplateSpecModel.prototype.isKnownParameterOrAlias = function ( name ) 
  * Check if a parameter name is an alias.
  *
  * @param {string} name Parameter name or alias
- * @return {boolean} Parameter name is an alias
+ * @return {boolean}
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
 	return name in this.aliases;
 };
 
 /**
- * Get a parameter label.
- *
  * @param {string} name Parameter name or alias
  * @param {string} [lang] Language to get label in
- * @return {string} Parameter label
+ * @return {string}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -191,11 +183,9 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) 
 };
 
 /**
- * Get a parameter description.
- *
  * @param {string} name Parameter name or alias
  * @param {string} [lang] Language to get description
- * @return {string|null} Parameter description
+ * @return {string|null}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, lang ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -203,10 +193,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, l
 };
 
 /**
- * Get a parameter suggested values.
- *
  * @param {string} name Parameter name or alias
- * @return {string[]} Parameter suggested values
+ * @return {string[]}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -214,10 +202,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( nam
 };
 
 /**
- * Get a parameter value.
- *
  * @param {string} name Parameter name or alias
- * @return {string} Default parameter value
+ * @return {string}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -225,8 +211,6 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
 };
 
 /**
- * Get a parameter example value.
- *
  * @param {string} name Parameter name or alias
  * @param {string} [lang] Language to get description
  * @return {string|null}
@@ -237,10 +221,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
 };
 
 /**
- * Get a parameter auto value.
- *
  * @param {string} name Parameter name or alias
- * @return {string} Auto-value for the parameter
+ * @return {string}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -248,10 +230,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
 };
 
 /**
- * Get a parameter type.
- *
  * @param {string} name Parameter name or alias
- * @return {string} Parameter type
+ * @return {string} e.g. "string"
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -259,8 +239,6 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
 };
 
 /**
- * Get parameter aliases.
- *
  * @param {string} name Parameter name or alias
  * @return {string[]} Alternate parameter names
  */
@@ -282,10 +260,8 @@ ve.dm.MWTemplateSpecModel.prototype.getPrimaryParameterName = function ( name ) 
 };
 
 /**
- * Check if parameter is required.
- *
  * @param {string} name Parameter name or alias
- * @return {boolean} Parameter is required
+ * @return {boolean}
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -293,10 +269,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterRequired = function ( name ) {
 };
 
 /**
- * Check if parameter is suggested.
- *
  * @param {string} name Parameter name or alias
- * @return {boolean} Parameter is suggested
+ * @return {boolean}
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -304,10 +278,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
 };
 
 /**
- * Check if parameter is deprecated.
- *
  * @param {string} name Parameter name or alias
- * @return {boolean} Parameter is deprecated
+ * @return {boolean}
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
 	var param = this.params[ this.getPrimaryParameterName( name ) ];
@@ -315,8 +287,6 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
 };
 
 /**
- * Get parameter deprecation description.
- *
  * @param {string} name Parameter name or alias
  * @return {string} Explaining of why parameter is deprecated, empty if parameter is either not
  *   deprecated or no description has been specified
@@ -339,8 +309,6 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
 };
 
 /**
- * Get parameter sets.
- *
  * @return {Object[]} Lists of parameter set descriptors
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
