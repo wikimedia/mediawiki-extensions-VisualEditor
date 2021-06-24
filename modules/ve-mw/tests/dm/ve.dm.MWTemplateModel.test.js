@@ -79,6 +79,56 @@
 
 	[
 		{
+			name: 'serialize with explicit parameter order',
+			spec: {
+				foo: {},
+				empty: {},
+				bar: {},
+				paramOrder: [ 'bar', 'foo', 'empty' ]
+			},
+			expected: [ 'foo', 'bar', 'empty' ]
+		},
+		{
+			name: 'serialize with no parameter order',
+			spec: {
+				foo: {},
+				empty: {},
+				bar: {}
+			},
+			expected: [ 'foo', 'bar', 'empty' ]
+		},
+		{
+			name: 'serialize with aliases',
+			spec: {
+				foo: {},
+				empty: {},
+				hasaliases: {
+					aliases: [ 'bar', 'baz' ]
+				}
+			},
+			expected: [ 'foo', 'bar', 'empty' ]
+		},
+		{
+			name: 'serialize with unknown params',
+			spec: {
+				bar: {}
+			},
+			expected: [ 'foo', 'bar', 'empty' ]
+		}
+	].forEach( ( { name, spec, expected } ) => {
+		QUnit.test( name, ( assert ) => {
+			const templateModel = newTemplateModel();
+
+			templateModel.getSpec().extend( spec );
+
+			const serializedTransclusionData = templateModel.serialize();
+			const order = Object.keys( serializedTransclusionData.template.params );
+			assert.deepEqual( order, expected );
+		} );
+	} );
+
+	[
+		{
 			name: 'no spec retrieved',
 			spec: null,
 			expected: [
