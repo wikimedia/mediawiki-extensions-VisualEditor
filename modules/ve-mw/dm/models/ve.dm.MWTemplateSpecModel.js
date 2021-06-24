@@ -178,14 +178,10 @@ ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
 };
 
 /**
- * Check if a parameter name is known.
- *
- * Could be a primary name or alias.
- *
- * @param {string} name Parameter name
- * @return {boolean} Parameter name is known
+ * @param {string} name Parameter name or alias
+ * @return {boolean}
  */
-ve.dm.MWTemplateSpecModel.prototype.isParameterKnown = function ( name ) {
+ve.dm.MWTemplateSpecModel.prototype.isKnownParameterOrAlias = function ( name ) {
 	return this.params[ name ] !== undefined;
 };
 
