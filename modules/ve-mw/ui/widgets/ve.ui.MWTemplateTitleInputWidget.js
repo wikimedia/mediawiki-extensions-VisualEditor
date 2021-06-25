@@ -194,7 +194,8 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
  * @return {Object} Modified response
  */
 ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response ) {
-	var query = this.getQueryValue(),
+	var widget = this,
+		query = this.getQueryValue(),
 		namespace = this.namespace,
 		title = mw.Title.newFromText( query, namespace );
 	// No point in trying anything when the title is invalid
@@ -223,6 +224,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		if ( newPage && newPage.title ) {
 			newPage.index = 1;
 			pages.unshift( newPage );
+			if ( pages.length > widget.limit ) {
+				pages.splice( widget.limit );
+			}
 		}
 	}
 
