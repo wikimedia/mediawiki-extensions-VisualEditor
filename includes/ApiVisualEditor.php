@@ -365,15 +365,6 @@ class ApiVisualEditor extends ApiBase {
 
 				// Simplified EditPage::getEditPermissionErrors()
 				$permErrors = $permissionManager->getPermissionErrors( 'edit', $user, $title, 'full' );
-				if ( !$title->exists() ) {
-					$permErrors = array_merge(
-						$permErrors,
-						wfArrayDiff2(
-							$permissionManager->getPermissionErrors( 'create', $user, $title, 'full' ),
-							$permErrors
-						)
-					);
-				}
 
 				if ( $permErrors ) {
 					// Show generic permission errors, including page protection, user blocks, etc.
