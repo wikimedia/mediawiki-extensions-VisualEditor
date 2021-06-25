@@ -136,7 +136,8 @@ ve.dm.MWTemplateModel.prototype.getSpec = function () {
 };
 
 /**
- * Get all params.
+ * Get parameters in their original order as they appear in the wikitext. This is critical for
+ * {@see serialize}.
  *
  * @return {Object.<string,ve.dm.MWParameterModel>} Parameters keyed by name
  */
@@ -272,6 +273,7 @@ ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
  *
  * @param {ve.dm.MWParameterModel} param Parameter to add
  * @fires add
+ * @fires change
  */
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	var name = param.getName();

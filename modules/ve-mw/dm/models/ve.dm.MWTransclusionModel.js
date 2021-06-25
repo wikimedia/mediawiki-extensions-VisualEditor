@@ -32,7 +32,6 @@
 		this.requests = [];
 		this.queue = [];
 		this.specCache = specCache;
-
 	};
 
 	/* Inheritance */
@@ -252,7 +251,6 @@
 		}
 	};
 
-	/** */
 	ve.dm.MWTransclusionModel.prototype.fetch = function () {
 		var templateNamespaceId = mw.config.get( 'wgNamespaceIds' ).template,
 			titles = [],

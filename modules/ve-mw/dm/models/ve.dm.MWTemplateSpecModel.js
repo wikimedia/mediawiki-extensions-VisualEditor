@@ -9,6 +9,8 @@
  * Holds a mixture of:
  * - A copy of a template's specification as it is documented via TemplateData.
  * - Undocumented parameters that appear in a template invocation, {@see fillFromTemplate}.
+ * - Documented aliases are also considered valid, known parameter names. Use
+ *   {@see isParameterAlias} to differentiate between the two.
  * Therefore this is not the original specification but an accessor to the documentation for an
  * individual template invocation. It's possible different for every invocation.
  *
@@ -73,7 +75,6 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 			Object.keys( data.params );
 
 		for ( var key in data.params ) {
-			// Pre-fill spec
 			if ( !this.params[ key ] ) {
 				this.params[ key ] = this.getDefaultParameterSpec( key );
 			}
