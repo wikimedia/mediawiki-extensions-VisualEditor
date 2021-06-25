@@ -31,7 +31,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.loaded = false;
 	this.altered = false;
 	this.preventReselection = false;
-	this.templateParameterPlaceholderPages = {};
+	this.expandedParamList = {};
 	this.isNewSidebar = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
@@ -105,6 +105,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			var params = removed.getParameters();
 			for ( var name in params ) {
 				removePages.push( this.bookletLayout.getPage( params[ name ].getId() ) );
+				delete this.expandedParamList[ params[ name ].getId() ];
 			}
 			removed.disconnect( this );
 		}
@@ -166,6 +167,17 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 };
 
 /**
+ * Respond to showAll event in the placeholder page.
+ * Cache this so we can make sure the parameter list is expanded
+ * when we next load this same pageId placeholder.
+ *
+ * @param {string} pageId Page Id
+ */
+ve.ui.MWTemplateDialog.prototype.onParameterPlaceholderShowAll = function ( pageId ) {
+	this.expandedParamList[ pageId ] = true;
+};
+
+/**
  * Handle add param events.
  *
  * @param {ve.dm.MWParameterModel} param Added param
@@ -177,7 +189,11 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 		page = new ve.ui.MWParameterPage( param, param.getId(), { $overlay: this.$overlay, readOnly: this.isReadOnly() } );
 	} else {
 		// This branch is triggered when we receive a synthetic placeholder event with name=''.
-		page = this.makePlaceholderPage( param );
+		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {
+			$overlay: this.$overlay,
+			expandedParamList: !!this.expandedParamList[ param.getId() ]
+		} )
+			.connect( this, { showAll: 'onParameterPlaceholderShowAll' } );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
@@ -192,28 +208,6 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 			page.updateSize();
 		}
 	}
-};
-
-/**
- * Cache placeholder pages so they keep state if reused.
- *
- * @param {ve.dm.MWParameterModel} placeholder The not yet named parameter to choose and fill in
- * @return {ve.ui.MWParameterPlaceholderPage} A new or cached placeholder page
- */
-ve.ui.MWTemplateDialog.prototype.makePlaceholderPage = function ( placeholder ) {
-	var templateId = placeholder.getId(),
-		// Reuse placeholder if possible to preserve the showAll state.
-		page = this.templateParameterPlaceholderPages[ templateId ];
-
-	if ( !page || page.template !== placeholder.getTemplate() ) {
-		page = new ve.ui.MWParameterPlaceholderPage( placeholder, templateId, {
-			$overlay: this.$overlay
-		} );
-		this.templateParameterPlaceholderPages[ templateId ] = page;
-	}
-
-	page.toggle( true );
-	return page;
 };
 
 /**
