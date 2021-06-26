@@ -44,16 +44,19 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 			framed: false,
 			flags: [ 'progressive' ],
 			label: ve.msg( 'visualeditor-expandable-more' ),
-			classes: [ 've-ui-expandableContent-toggle' ]
+			classes: [ 've-ui-expandableContent-toggle' ],
+			icon: 'expand'
 		} );
 
 	toggle.on( 'click', function () {
 		if ( element.collapsed ) {
 			toggle.setLabel( ve.msg( 'visualeditor-expandable-more' ) );
 			element.$content.css( { height: collapsedHeight } );
+			toggle.setIcon( 'expand' );
 		} else {
 			toggle.setLabel( ve.msg( 'visualeditor-expandable-less' ) );
 			element.$content.css( { height: element.$content.prop( 'scrollHeight' ) + collapsedHeight } );
+			toggle.setIcon( 'collapse' );
 		}
 		element.collapsed = !element.collapsed;
 	} );
