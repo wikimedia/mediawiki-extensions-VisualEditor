@@ -84,7 +84,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 			// Extend existing spec
 			ve.extendObject( true, this.params[ key ], data.params[ key ] );
 			// Add aliased references
-			if ( param.aliases.length ) {
+			if ( param.aliases ) {
 				for ( var i = 0; i < param.aliases.length; i++ ) {
 					this.params[ param.aliases[ i ] ] = param;
 				}
@@ -121,15 +121,7 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
  */
 ve.dm.MWTemplateSpecModel.prototype.getDefaultParameterSpec = function ( name ) {
 	return {
-		label: name,
-		description: null,
-		default: '',
-		type: 'string',
-		aliases: [],
-		name: name,
-		required: false,
-		suggested: false,
-		deprecated: false
+		name: name
 	};
 };
 
@@ -211,7 +203,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, lang ) 
  * @return {string|null} Parameter description
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDescription = function ( name, lang ) {
-	return this.constructor.static.getLocalValue( this.params[ name ].description, lang );
+	return this.constructor.static.getLocalValue( this.params[ name ].description || null, lang );
 };
 
 /**
@@ -232,7 +224,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( nam
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
 	var param = this.params[ name ];
-	return param ? param.default : '';
+	return param && param.default || '';
 };
 
 /**
@@ -240,10 +232,10 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name )
  *
  * @param {string} name Parameter name
  * @param {string} [lang] Language to get description
- * @return {string} Example parameter value
+ * @return {string|null}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, lang ) {
-	return this.constructor.static.getLocalValue( this.params[ name ].example, lang );
+	return this.constructor.static.getLocalValue( this.params[ name ].example || null, lang );
 };
 
 /**
@@ -254,7 +246,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
 	var param = this.params[ name ];
-	return param ? param.autovalue : '';
+	return param && param.autovalue || '';
 };
 
 /**
@@ -264,7 +256,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterAutoValue = function ( name ) {
  * @return {string} Parameter type
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
-	return this.params[ name ].type;
+	return this.params[ name ].type || 'string';
 };
 
 /**
@@ -274,7 +266,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
  * @return {string[]} Alternate parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterAliases = function ( name ) {
-	return this.params[ name ].aliases;
+	return this.params[ name ].aliases || [];
 };
 
 /**
@@ -316,7 +308,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterSuggested = function ( name ) {
  * @return {boolean} Parameter is deprecated
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterDeprecated = function ( name ) {
-	return this.params[ name ].deprecated !== false;
+	return typeof this.params[ name ].deprecated === 'string' ||
+		!!this.params[ name ].deprecated;
 };
 
 /**

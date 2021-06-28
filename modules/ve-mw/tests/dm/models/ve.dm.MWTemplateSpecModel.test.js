@@ -51,8 +51,8 @@
 		assert.strictEqual( spec.getParameterDescription( 'p2' ), null, 'getParameterDescription' );
 		assert.deepEqual( spec.getParameterSuggestedValues( 'p2' ), [], 'getParameterSuggestedValues' );
 		assert.strictEqual( spec.getParameterDefaultValue( 'p2' ), '', 'getParameterDefaultValue' );
-		assert.strictEqual( spec.getParameterExampleValue( 'p2' ), undefined, 'getParameterExampleValue' );
-		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), undefined, 'getParameterAutoValue' );
+		assert.strictEqual( spec.getParameterExampleValue( 'p2' ), null, 'getParameterExampleValue' );
+		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), '', 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'p2' ), 'string', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'p2' ), [], 'getParameterAliases' );
 		assert.strictEqual( spec.getPrimaryParameterName( 'p2' ), 'p2', 'getPrimaryParameterName' );
@@ -81,8 +81,8 @@
 		assert.strictEqual( spec.getParameterDescription( 'p2' ), null, 'getParameterDescription' );
 		assert.deepEqual( spec.getParameterSuggestedValues( 'p2' ), [], 'getParameterSuggestedValues' );
 		assert.strictEqual( spec.getParameterDefaultValue( 'p2' ), '', 'getParameterDefaultValue' );
-		assert.strictEqual( spec.getParameterExampleValue( 'p2' ), undefined, 'getParameterExampleValue' );
-		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), undefined, 'getParameterAutoValue' );
+		assert.strictEqual( spec.getParameterExampleValue( 'p2' ), null, 'getParameterExampleValue' );
+		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), '', 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'p2' ), 'string', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'p2' ), [], 'getParameterAliases' );
 		assert.strictEqual( spec.getPrimaryParameterName( 'p2' ), 'p2', 'getPrimaryParameterName' );
@@ -110,8 +110,8 @@
 		assert.strictEqual( spec.getParameterDescription( 'p2' ), null, 'getParameterDescription' );
 		assert.deepEqual( spec.getParameterSuggestedValues( 'p2' ), [], 'getParameterSuggestedValues' );
 		assert.strictEqual( spec.getParameterDefaultValue( 'p2' ), '', 'getParameterDefaultValue' );
-		assert.strictEqual( spec.getParameterExampleValue( 'p2' ), undefined, 'getParameterExampleValue' );
-		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), undefined, 'getParameterAutoValue' );
+		assert.strictEqual( spec.getParameterExampleValue( 'p2' ), null, 'getParameterExampleValue' );
+		assert.strictEqual( spec.getParameterAutoValue( 'p2' ), '', 'getParameterAutoValue' );
 		assert.strictEqual( spec.getParameterType( 'p2' ), 'string', 'getParameterType' );
 		assert.deepEqual( spec.getParameterAliases( 'p2' ), [], 'getParameterAliases' );
 		assert.strictEqual( spec.getPrimaryParameterName( 'p2' ), 'p2', 'getPrimaryParameterName' );
@@ -171,6 +171,16 @@
 		assert.deepEqual( spec.getParameterNames(), [ 'p' ], 'getParameterNames' );
 		assert.deepEqual( spec.getParameterSets(), [ 'DummySet' ], 'getParameterSets' );
 		assert.deepEqual( spec.getMaps(), { dummyMap: true }, 'getMaps' );
+	} );
+
+	QUnit.test( 'Parameter deprecation with empty string', ( assert ) => {
+		const template = createTemplateMock(),
+			spec = new ve.dm.MWTemplateSpecModel( template );
+
+		spec.extend( { params: { p: { deprecated: '' } } } );
+
+		assert.strictEqual( spec.isParameterDeprecated( 'p' ), true );
+		assert.strictEqual( spec.getParameterDeprecationDescription( 'p' ), '' );
 	} );
 
 }() );
