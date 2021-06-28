@@ -183,8 +183,14 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	} );
 };
 
-ve.dm.MWTemplateModel.prototype.isParameterUnknown = function ( parameter ) {
-	return this.spec.getCanonicalParameterOrder().indexOf( parameter.getName() ) === -1;
+/**
+ * If a parameter is documented, i.e. known via TemplateData. Always false for aliases.
+ *
+ * @param {ve.dm.MWParameterModel} parameter
+ * @return {boolean}
+ */
+ve.dm.MWTemplateModel.prototype.isParameterDocumented = function ( parameter ) {
+	return this.spec.getDocumentedParameterOrder().indexOf( parameter.getName() ) !== -1;
 };
 
 /**
@@ -201,7 +207,7 @@ ve.dm.MWTemplateModel.prototype.isParameterUnknown = function ( parameter ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	var knownParams = this.spec.getCanonicalParameterOrder();
+	var knownParams = this.spec.getDocumentedParameterOrder();
 	var paramNames = Object.keys( this.params );
 	var unknownParams = paramNames.filter( function ( name ) {
 		return knownParams.indexOf( name ) === -1;
