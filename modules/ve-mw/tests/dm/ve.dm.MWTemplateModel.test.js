@@ -327,6 +327,25 @@
 				'foo',
 				'bar'
 			]
+		},
+		{
+			name: 'spec with explicit paramOrder and aliases',
+			spec: {
+				params: {
+					empty: {},
+					unused: {},
+					hasalias: {
+						aliases: [ 'bar', 'baz' ]
+					}
+				},
+				paramOrder: [ 'hasalias', 'empty', 'unused' ]
+			},
+			expected: [
+				'bar',
+				'empty',
+				'unused',
+				'foo'
+			]
 		}
 	].forEach( ( { name, spec, expected } ) => {
 		QUnit.test( 'getAllParametersOrdered: ' + name, ( assert ) => {

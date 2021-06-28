@@ -185,16 +185,6 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 };
 
 /**
- * If a parameter is documented, i.e. known via TemplateData. Always false for aliases.
- *
- * @param {ve.dm.MWParameterModel} parameter
- * @return {boolean}
- */
-ve.dm.MWTemplateModel.prototype.isParameterDocumented = function ( parameter ) {
-	return this.spec.getDocumentedParameterOrder().indexOf( parameter.getName() ) !== -1;
-};
-
-/**
  * Get all potential parameters, known and unknown.
  *
  * All parameters reported by TemplateData, plus any unknown parameters present
@@ -208,12 +198,12 @@ ve.dm.MWTemplateModel.prototype.isParameterDocumented = function ( parameter ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	var currentParams = Object.keys( this.params ),
-		documentedParamsOrdered = this.spec.getDocumentedParameterOrder(),
+	var spec = this.spec,
+		currentParams = Object.keys( this.params ),
 		undocumentedParams = currentParams.filter( function ( name ) {
-			return documentedParamsOrdered.indexOf( name ) === -1;
+			return !spec.isDocumentedParameterOrAlias( name );
 		} );
-	// TODO: verify in a test that aliases are handled correctly.
+
 	// Unknown parameters in alpha-numeric order second, empty string at the very end
 	undocumentedParams.sort( function ( a, b ) {
 		var aIsNaN = isNaN( a ),
@@ -240,8 +230,23 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 		// Two numbers
 		return a - b;
 	} );
+
+	var documentedParams = spec.getDocumentedParameterOrder();
+
+	// Restore aliases in the list of documented parameters
+	currentParams.forEach( function ( name ) {
+		if ( spec.isParameterAlias( name ) ) {
+			documentedParams.splice(
+				// This can never fail because only documented parameters can have aliases
+				documentedParams.indexOf( spec.getPrimaryParameterName( name ) ),
+				1,
+				name
+			);
+		}
+	} );
+
 	// TODO: cache results
-	return documentedParamsOrdered.concat( undocumentedParams );
+	return documentedParams.concat( undocumentedParams );
 };
 
 /**

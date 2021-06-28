@@ -74,7 +74,7 @@ OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, OO.ui.Widget );
 
 /**
  * @param {string|ve.dm.MWParameterModel} parameter
- * @returns {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
+ * @return {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
  */
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
 	var templateSpec = this.templateModel.getSpec(),
@@ -131,7 +131,7 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( p
 	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
 
 	if ( paramCheckbox ) {
-		if ( !this.templateModel.isParameterDocumented( parameter ) ) {
+		if ( !this.templateModel.getSpec().isDocumentedParameterOrAlias( parameter.getName() ) ) {
 			paramCheckbox.disconnect( this );
 			this.parameters.removeItems( [ paramCheckbox ] );
 		} else {
