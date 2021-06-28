@@ -102,7 +102,7 @@
 		spec.extend( { params: { p2: {} } } );
 
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
-		assert.strictEqual( spec.getDescription(), undefined, 'getDescription' );
+		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getCanonicalParameterOrder(), [ 'p2' ], 'getCanonicalParameterOrder' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
@@ -120,7 +120,7 @@
 		assert.strictEqual( spec.isParameterDeprecated( 'p2' ), false, 'isParameterDeprecated' );
 		assert.strictEqual( spec.getParameterDeprecationDescription( 'p2' ), '', 'getParameterDeprecationDescription' );
 		assert.deepEqual( spec.getParameterNames(), [ 'p1', 'p2' ], 'getParameterNames' );
-		assert.strictEqual( spec.getParameterSets(), undefined, 'getParameterSets' );
+		assert.deepEqual( spec.getParameterSets(), [], 'getParameterSets' );
 		assert.deepEqual( spec.getMaps(), {}, 'getMaps' );
 	} );
 
