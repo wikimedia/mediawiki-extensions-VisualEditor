@@ -95,7 +95,7 @@
 				spec = parts[ 0 ].getSpec();
 
 			assert.strictEqual( parts.length, 1 );
-			assert.deepEqual( spec.getParameterNames(), [ 'foo', 'bar' ] );
+			assert.deepEqual( spec.getKnownParameterNames(), [ 'foo', 'bar' ] );
 		} );
 	} );
 
@@ -116,7 +116,7 @@
 				spec = parts[ 0 ].getSpec();
 
 			assert.strictEqual( parts.length, 1 );
-			assert.deepEqual( spec.getParameterNames(), [] );
+			assert.deepEqual( spec.getKnownParameterNames(), [] );
 		} );
 	} );
 }() );

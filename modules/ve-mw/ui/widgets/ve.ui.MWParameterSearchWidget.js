@@ -91,7 +91,7 @@ ve.ui.MWParameterSearchWidget.prototype.onSearchResultsChoose = function ( item 
  */
 ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 	var spec = this.template.getSpec(),
-		knownParams = spec.getParameterNames();
+		knownParams = spec.getKnownParameterNames();
 
 	this.index.length = 0;
 	for ( var i = 0; i < knownParams.length; i++ ) {

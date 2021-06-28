@@ -160,6 +160,12 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 };
 
 /**
+ * Check if a parameter name or alias was seen before. This includes parameters and aliases
+ * documented via TemplateData as well as undocumented parameters, e.g. from the original template
+ * invocation. When undocumented parameters are removed from the linked {@see ve.dm.MWTemplateModel}
+ * they are still known and will still be offered via {@see getKnownParameterNames} for the lifetime
+ * of this object.
+ *
  * @param {string} name Parameter name or alias
  * @return {boolean}
  */
@@ -302,14 +308,15 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
 };
 
 /**
- * Get all primary parameter names, without aliases. Warning:
- * - This is not necessarily in the original order as the parameters appeared in the template.
- * - When a parameter is known to be an alias, the alias is resolved.
- * - This includes parameters that appear in the template but aren't documented via TemplateData.
+ * Get all known primary parameter names, without aliases, in their original order as they became
+ * known (usually but not necessarily the order in which they appear in the template). This still
+ * includes undocumented parameters that have been part of the template at some point during the
+ * lifetime of this object, but have been removed from the linked {@see ve.dm.MWTemplateModel} in
+ * the meantime.
  *
- * @return {string[]}
+ * @return {string[]} Primary parameter names
  */
-ve.dm.MWTemplateSpecModel.prototype.getParameterNames = function () {
+ve.dm.MWTemplateSpecModel.prototype.getKnownParameterNames = function () {
 	return Object.keys( this.params );
 };
 

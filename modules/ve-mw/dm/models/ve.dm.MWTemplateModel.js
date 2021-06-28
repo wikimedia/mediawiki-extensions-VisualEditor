@@ -136,10 +136,11 @@ ve.dm.MWTemplateModel.prototype.getSpec = function () {
 };
 
 /**
- * Get parameters in their original order as they appear in the wikitext. This is critical for
- * {@see serialize}.
+ * Get all parameters that are currently present in this template invocation in the order as they
+ * originally appear in the wikitext. This is critical for {@see serialize}. Might contain
+ * placeholders with the parameter name "".
  *
- * @return {Object.<string,ve.dm.MWParameterModel>} Parameters keyed by name
+ * @return {Object.<string,ve.dm.MWParameterModel>} Parameters keyed by name or alias
  */
 ve.dm.MWTemplateModel.prototype.getParameters = function () {
 	return this.params;
@@ -207,14 +208,14 @@ ve.dm.MWTemplateModel.prototype.isParameterDocumented = function ( parameter ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	var knownParams = this.spec.getDocumentedParameterOrder();
-	var paramNames = Object.keys( this.params );
-	var unknownParams = paramNames.filter( function ( name ) {
-		return knownParams.indexOf( name ) === -1;
-	} );
+	var currentParams = Object.keys( this.params ),
+		documentedParamsOrdered = this.spec.getDocumentedParameterOrder(),
+		undocumentedParams = currentParams.filter( function ( name ) {
+			return documentedParamsOrdered.indexOf( name ) === -1;
+		} );
 	// TODO: verify in a test that aliases are handled correctly.
 	// Unknown parameters in alpha-numeric order second, empty string at the very end
-	unknownParams.sort( function ( a, b ) {
+	undocumentedParams.sort( function ( a, b ) {
 		var aIsNaN = isNaN( a ),
 			bIsNaN = isNaN( b );
 
@@ -240,13 +241,17 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 		return a - b;
 	} );
 	// TODO: cache results
-	return knownParams.concat( unknownParams );
+	return documentedParamsOrdered.concat( undocumentedParams );
 };
 
 /**
- * Get ordered list of parameter names present in this template invocation.
+ * Returns the same parameters as {@see getParameters}, i.e. parameters that are currently present
+ * in this template invocation, but sorted in a canonical order for presentational purposes.
  *
- * @return {string[]} List of parameter names
+ * Don't use this if you need the parameters as they originally appear in the wikitext, or if you
+ * don't care about an order. Use {@see getParameters} together with `Object.keys()` instead.
+ *
+ * @return {string[]} Sorted list of parameter names
  */
 ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 	if ( !this.orderedParameterNames ) {
@@ -316,7 +321,7 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 	var addedCount = 0,
 		params = this.params,
 		spec = this.getSpec(),
-		names = spec.getParameterNames();
+		names = spec.getKnownParameterNames();
 
 	for ( var i = 0; i < names.length; i++ ) {
 		var name = names[ i ];
