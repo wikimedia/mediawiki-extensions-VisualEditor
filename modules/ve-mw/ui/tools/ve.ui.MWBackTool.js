@@ -20,7 +20,6 @@ ve.ui.MWBackTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
 ve.ui.MWBackTool.static.commandName = 'back';
 
-/** */
 ve.ui.MWBackTool.prototype.onUpdateState = function () {
 	// Parent method
 	ve.ui.MWBackTool.super.prototype.onUpdateState.apply( this, arguments );
