@@ -205,7 +205,7 @@ ve.ui.MWTemplateDialog.prototype.makePlaceholderPage = function ( placeholder ) 
 		// Reuse placeholder if possible to preserve the showAll state.
 		page = this.templateParameterPlaceholderPages[ templateId ];
 
-	if ( !page ) {
+	if ( !page || page.template !== placeholder.getTemplate() ) {
 		page = new ve.ui.MWParameterPlaceholderPage( placeholder, templateId, {
 			$overlay: this.$overlay
 		} );
