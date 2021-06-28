@@ -2739,6 +2739,7 @@
 			"modules/ve-mw/tests/dm/ve.dm.MWTemplateModel.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.MWTransclusionModel.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.MWInternalLinkAnnotation.test.js",
+			"modules/ve-mw/tests/dm/models/ve.dm.MWTemplateSpecModel.test.js",
 			"lib/ve/tests/ce/ve.ce.test.js",
 			"lib/ve/tests/ce/ve.ce.Document.test.js",
 			"modules/ve-mw/tests/ce/ve.ce.Document.test.js",
