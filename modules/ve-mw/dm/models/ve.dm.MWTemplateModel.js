@@ -167,7 +167,7 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	}
 
 	// Check if the name is known at all
-	if ( !this.spec.isParameterKnown( name ) ) {
+	if ( !this.spec.isKnownParameterOrAlias( name ) ) {
 		return false;
 	}
 
@@ -361,7 +361,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 			// …unless they were present before the edit
 			!Object.prototype.hasOwnProperty.call( origParams, name ) &&
 			// …unless they are required (T276989)
-			!( spec.isParameterKnown( name ) && spec.isParameterRequired( name ) )
+			!( spec.isKnownParameterOrAlias( name ) && spec.isParameterRequired( name ) )
 		) {
 			continue;
 		}

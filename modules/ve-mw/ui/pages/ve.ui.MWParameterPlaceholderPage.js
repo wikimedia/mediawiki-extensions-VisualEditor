@@ -89,7 +89,7 @@ ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name )
 	}
 
 	// Note that every parameter is known after it is added
-	var knownBefore = this.template.getSpec().isParameterKnown( name ),
+	var knownBefore = this.template.getSpec().isKnownParameterOrAlias( name ),
 		param = new ve.dm.MWParameterModel( this.template, name );
 
 	this.addParameterSearch.query.setValue( '' );
