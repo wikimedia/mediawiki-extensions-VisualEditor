@@ -68,6 +68,10 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 
 OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, OO.ui.Widget );
 
+/**
+ * @param {string|ve.dm.MWParameterModel} parameter
+ * @returns {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
+ */
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
 	var parameterModel = ( parameter instanceof ve.dm.MWParameterModel ) ?
 			parameter : this.templateModel.getParameter( parameter ),
@@ -87,6 +91,12 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( para
 	} );
 };
 
+/**
+ * Handles a template model add event {@see ve.dm.MWTemplateModel}.
+ * Triggered when a parameter is added to the template model.
+ *
+ * @param {ve.dm.MWParameterModel} parameter
+ */
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( parameter ) {
 	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
 
@@ -100,6 +110,12 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( para
 	}
 };
 
+/**
+ * Handles a template model remove event {@see ve.dm.MWTemplateModel}.
+ * Triggered when a parameter is removed from the template model.
+ *
+ * @param {ve.dm.MWParameterModel} parameter
+ */
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( parameter ) {
 	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
 
@@ -113,6 +129,12 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( p
 	}
 };
 
+/**
+ * Handles a parameter checkbox change event {@see ve.ui.MWTemplateOutlineParameterCheckboxLayout}
+ *
+ * @param {string} data Parameter name
+ * @param {boolean} checked New checkbox state
+ */
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.onCheckboxChange = function ( data, checked ) {
 	var parameter = this.templateModel.getParameter( data );
 

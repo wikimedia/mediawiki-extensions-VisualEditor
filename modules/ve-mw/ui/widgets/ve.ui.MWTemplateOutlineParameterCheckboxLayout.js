@@ -45,11 +45,34 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 
 OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.FieldLayout );
 
+/* Events */
+
+/**
+ * @event change
+ * @param {string} name Parameter name
+ * @param {boolean} checked New checkbox state
+ */
+
+/**
+ * @event select
+ * @param {string} name Parameter name
+ */
+
 /* Methods */
+
+/**
+ * Handles a checkbox input widget change event {@see OO.ui.CheckboxInputWidget}.
+ *
+ * @param {boolean} value
+ * @fires change
+ */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onEdit = function ( value ) {
 	this.emit( 'change', this.getData(), value );
 };
 
+/**
+ * @fires select
+ */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onLabelClick = function () {
 	if ( !this.fieldWidget.isSelected() ) {
 		this.fieldWidget.setSelected( true );
