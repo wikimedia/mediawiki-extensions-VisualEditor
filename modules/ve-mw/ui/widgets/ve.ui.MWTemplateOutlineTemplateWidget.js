@@ -24,11 +24,15 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 	} );
 
 	var widget = this;
-	var checkboxes = this.templateModel.getAllParametersOrdered().filter( function ( parameter ) {
-		return parameter !== '';
-	} ).map( function ( parameter ) {
-		return widget.createCheckbox( parameter );
-	} );
+	var checkboxes = this.templateModel
+		.getAllParametersOrdered()
+		.filter( function ( paramName ) {
+			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
+			return paramName !== '';
+		} )
+		.map( function ( paramName ) {
+			return widget.createCheckbox( paramName );
+		} );
 
 	var addParameterButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -88,12 +92,18 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( para
 };
 
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( parameter ) {
-	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
+	var paramName = parameter.getName(),
+		paramCheckbox = this.parameters.findItemFromData( paramName );
+
+	if ( paramName === '' ) {
+		// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
+		return;
+	}
 
 	if ( !paramCheckbox ) {
 		this.parameters.addItems(
 			this.createCheckbox( parameter ),
-			this.templateModel.getAllParametersOrdered().indexOf( parameter.getName() )
+			this.templateModel.getAllParametersOrdered().indexOf( paramName )
 		);
 	} else {
 		paramCheckbox.setSelected( true, true );
