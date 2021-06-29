@@ -1,16 +1,25 @@
-.ve-ui-expandableContent-fade {
-	position: absolute;
-	background: linear-gradient( 90deg, transparent 0%, rgba( 255, 255, 255, 1 ) 30% );
-	bottom: 0;
-	right: 2.5em;
-	padding-left: 30px;
-}
-
 .ve-ui-expandableContent-collapsible {
 	overflow: hidden;
 	position: relative;
 	margin: 0.4em 0 0.5em 0;
 	transition: height 200ms;
+}
+
+.ve-ui-expandableContent-container {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	bottom: 0;
+}
+
+.ve-ui-expandableContent-toggle {
+	background-color: rgba( 255, 255, 255, 1 );
+}
+
+.ve-ui-expandableContent-fade {
+	background: linear-gradient( 90deg, rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 90% );
+	width: 50px;
+	height: 100%;
 }
 
 .ve-ui-expandableContent-collapsible > :last-child {

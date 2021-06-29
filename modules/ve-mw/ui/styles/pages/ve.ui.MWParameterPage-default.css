@@ -58,8 +58,12 @@
 	padding: 0.25em 1em;
 }
 
-.ve-ui-mwParameterPage-inlineDescription {
-	position: relative;
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-expandableContent-collapsible > :first-child {
+	margin-top: 0;
+}
+
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-expandableContent-container {
+	right: 2.5em;
 }
 
 .ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc {

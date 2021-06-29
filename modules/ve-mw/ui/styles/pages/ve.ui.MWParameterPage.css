@@ -21,3 +21,11 @@
 .ve-ui-mwParameterPage-warning .oo-ui-iconElement-icon {
 	opacity: 0.87;
 }
+
+.ve-ui-mwParameterPage-info {
+	margin-bottom: 0.5em;
+}
+
+.ve-ui-mwParameterPage-inlineDescription {
+	position: relative;
+}

@@ -38,13 +38,15 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
 ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 	this.$content.addClass( 've-ui-expandableContent-collapsible' );
 
-	var collapsedHeight = this.getLineHeight() * 1.25;
-	var toggle = new OO.ui.ButtonWidget( {
-		framed: false,
-		flags: [ 'progressive' ],
-		label: ve.msg( 'visualeditor-expandable-more' )
-	} );
-	var element = this;
+	var element = this,
+		collapsedHeight = this.getLineHeight(),
+		toggle = new OO.ui.ButtonWidget( {
+			framed: false,
+			flags: [ 'progressive' ],
+			label: ve.msg( 'visualeditor-expandable-more' ),
+			classes: [ 've-ui-expandableContent-toggle' ]
+		} );
+
 	toggle.on( 'click', function () {
 		if ( element.collapsed ) {
 			toggle.setLabel( ve.msg( 'visualeditor-expandable-more' ) );
@@ -57,7 +59,11 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 	} );
 
 	$( '<div>' )
-		.addClass( 've-ui-expandableContent-fade' )
+		.addClass( 've-ui-expandableContent-container' )
+		.append(
+			$( '<div>' )
+				.addClass( 've-ui-expandableContent-fade' )
+		)
 		.append( toggle.$element )
 		.height( collapsedHeight )
 		.appendTo( this.$element );
