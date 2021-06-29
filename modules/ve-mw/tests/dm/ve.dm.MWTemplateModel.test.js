@@ -81,9 +81,11 @@
 		{
 			name: 'serialize with explicit parameter order',
 			spec: {
-				foo: {},
-				empty: {},
-				bar: {},
+				params: {
+					foo: {},
+					empty: {},
+					bar: {}
+				},
 				paramOrder: [ 'bar', 'foo', 'empty' ]
 			},
 			expected: [ 'foo', 'bar', 'empty' ]
@@ -91,19 +93,21 @@
 		{
 			name: 'serialize with no parameter order',
 			spec: {
-				foo: {},
-				empty: {},
-				bar: {}
+				params: {
+					foo: {},
+					empty: {},
+					bar: {}
+				}
 			},
 			expected: [ 'foo', 'bar', 'empty' ]
 		},
 		{
 			name: 'serialize with aliases',
 			spec: {
-				foo: {},
-				empty: {},
-				hasaliases: {
-					aliases: [ 'bar', 'baz' ]
+				params: {
+					foo: {},
+					empty: {},
+					hasaliases: { aliases: [ 'bar', 'baz' ] }
 				}
 			},
 			expected: [ 'foo', 'bar', 'empty' ]
@@ -111,7 +115,9 @@
 		{
 			name: 'serialize with unknown params',
 			spec: {
-				bar: {}
+				params: {
+					bar: {}
+				}
 			},
 			expected: [ 'foo', 'bar', 'empty' ]
 		}
