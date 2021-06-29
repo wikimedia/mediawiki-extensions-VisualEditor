@@ -462,6 +462,6 @@
 	"visualeditor-wikitext-warning": "Vous utilisez l’éditeur visuel — le [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikicode]] ne fonctionne pas ici. Pour basculer à tout moment vers la modification du wikicode sans perdre votre travail, cliquez sur le bouton de bascule.",
 	"visualeditor-wikitext-warning-title": "Balisage wikicode détecté",
 	"visualeditor-wikitextconvert-title": "Convertir la mise en forme en wikicode ?",
-	"visualeditor-wikitextconvert-message": "misse en forme en wikitexte ?",
+	"visualeditor-wikitextconvert-message": "Vous avez collé un contenu formaté. Voulez-vous le  convertir en wikicode ?",
 	"visualeditor-wikitextconvert-convert": "Convertir en wikicode"
 }
