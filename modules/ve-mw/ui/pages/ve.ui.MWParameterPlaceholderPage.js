@@ -32,8 +32,13 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	this.name = name;
 	this.parameter = parameter;
 	this.template = this.parameter.getTemplate();
-	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template )
-		.connect( this, { choose: 'onParameterChoose' } );
+	this.addParameterSearch = new ve.ui.MWParameterSearchWidget( this.template, {
+		showAll: !!config.expandedParamList
+	} )
+		.connect( this, {
+			choose: 'onParameterChoose',
+			showAll: 'onParameterShowAll'
+		} );
 
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -64,6 +69,15 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 OO.inheritClass( ve.ui.MWParameterPlaceholderPage, OO.ui.PageLayout );
 
 /* Methods */
+
+/**
+ * Respond to the parameter search widget showAll event
+ *
+ * @fires showAll
+ */
+ve.ui.MWParameterPlaceholderPage.prototype.onParameterShowAll = function () {
+	this.emit( 'showAll', this.name );
+};
 
 /**
  * @inheritdoc
