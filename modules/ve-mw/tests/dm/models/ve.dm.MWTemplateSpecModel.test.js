@@ -31,8 +31,10 @@
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getCanonicalParameterOrder(), [], 'getCanonicalParameterOrder' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'unknown' ), false, 'isKnownParameterOrAlias' );
+		assert.strictEqual( spec.isParameterAlias( 'unknown' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterDefaultValue( 'unknown' ), '', 'getParameterDefaultValue' );
 		assert.strictEqual( spec.getParameterAutoValue( 'unknown' ), '', 'getParameterAutoValue' );
+		assert.strictEqual( spec.getPrimaryParameterName( 'unknown' ), 'unknown', 'getPrimaryParameterName' );
 		assert.deepEqual( spec.getParameterNames(), [], 'getParameterNames' );
 		assert.deepEqual( spec.getParameterSets(), [], 'getParameterSets' );
 		assert.deepEqual( spec.getMaps(), {}, 'getMaps' );
@@ -171,6 +173,40 @@
 		assert.deepEqual( spec.getParameterNames(), [ 'p' ], 'getParameterNames' );
 		assert.deepEqual( spec.getParameterSets(), [ 'DummySet' ], 'getParameterSets' );
 		assert.deepEqual( spec.getMaps(), { dummyMap: true }, 'getMaps' );
+	} );
+
+	QUnit.test( 'Template uses aliases', ( assert ) => {
+		const template = createTemplateMock( [ 'p1-alias', 'p2' ] ),
+			spec = new ve.dm.MWTemplateSpecModel( template );
+
+		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), false );
+		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
+		assert.deepEqual( spec.getParameterNames(), [ 'p1-alias', 'p2' ] );
+
+		spec.extend( { params: { p1: { aliases: [ 'p1-alias' ] } } } );
+
+		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), true );
+		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
+		assert.deepEqual( spec.getParameterNames(), [ 'p2', 'p1' ] );
+	} );
+
+	QUnit.test( 'Alias conflicts with another parameter', ( assert ) => {
+		const template = createTemplateMock(),
+			spec = new ve.dm.MWTemplateSpecModel( template );
+
+		spec.extend( { params: {
+			p1: {
+				label: 'Parameter one'
+			},
+			p2: {
+				label: 'Parameter two',
+				// Note: This is impossible in real-world scenarios, but better be safe than sorry
+				aliases: [ 'p1' ]
+			}
+		} } );
+
+		assert.strictEqual( spec.getParameterLabel( 'p1' ), 'Parameter two' );
+		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'Parameter two' );
 	} );
 
 	QUnit.test( 'Parameter deprecation with empty string', ( assert ) => {
