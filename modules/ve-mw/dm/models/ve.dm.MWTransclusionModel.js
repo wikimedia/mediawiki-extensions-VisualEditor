@@ -31,7 +31,6 @@
 		this.uid = 0;
 		this.requests = [];
 		this.queue = [];
-		this.specCache = specCache;
 	};
 
 	/* Inheritance */
