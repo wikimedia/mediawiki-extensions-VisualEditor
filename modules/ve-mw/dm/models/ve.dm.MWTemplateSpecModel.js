@@ -110,7 +110,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 	for ( var key in this.template.getParameters() ) {
 		// Ignore placeholder parameters with no name
-		if ( key && !this.params[ key ] ) {
+		if ( key && !this.isKnownParameterOrAlias( key ) ) {
 			// There is no information other than the names of the parameters, that they exist, and
 			// in which order
 			this.params[ key ] = {};
