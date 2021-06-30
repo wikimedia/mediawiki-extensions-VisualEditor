@@ -219,6 +219,19 @@
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'Parameter two' );
 	} );
 
+	QUnit.test( 'fillFromTemplate() must skip aliases', ( assert ) => {
+		const template = createTemplateMock( [ 'colour' ] ),
+			spec = new ve.dm.MWTemplateSpecModel( template );
+
+		spec.extend( { params: { color: { aliases: [ 'colour' ] } } } );
+
+		assert.deepEqual( spec.getParameterNames(), [ 'color' ] );
+
+		spec.fillFromTemplate();
+
+		assert.deepEqual( spec.getParameterNames(), [ 'color' ] );
+	} );
+
 	QUnit.test( 'Parameter deprecation with empty string', ( assert ) => {
 		const template = createTemplateMock(),
 			spec = new ve.dm.MWTemplateSpecModel( template );
