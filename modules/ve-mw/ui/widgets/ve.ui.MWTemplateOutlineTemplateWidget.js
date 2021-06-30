@@ -69,7 +69,8 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, OO.ui.Widget );
 
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
-	var parameterModel = ( parameter instanceof ve.dm.MWParameterModel ) ?
+	var templateSpec = this.templateModel.getSpec(),
+		parameterModel = ( parameter instanceof ve.dm.MWParameterModel ) ?
 			parameter : this.templateModel.getParameter( parameter ),
 		isPresent = !!parameterModel;
 
@@ -79,7 +80,7 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( para
 	}
 	return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
 		required: parameterModel.isRequired(),
-		label: parameterModel.getName(),
+		label: templateSpec.getParameterLabel( parameterModel.getName() ),
 		data: parameterModel.getName(),
 		selected: isPresent
 	} ).connect( this, {
