@@ -7,12 +7,12 @@
 	 * @return {ve.dm.MWTemplateModel} but it's a mock
 	 */
 	function createTemplateMock( parameterNames ) {
-		const x = {};
+		const params = {};
 		( parameterNames || [] ).forEach( ( name ) => {
-			x[ name ] = {};
+			params[ name ] = {};
 		} );
 		return {
-			params: x,
+			params,
 			getTitle: () => null,
 			getTarget: () => {
 				return { wt: 'RawTemplateName' };
