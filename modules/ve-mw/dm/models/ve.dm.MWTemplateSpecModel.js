@@ -26,13 +26,16 @@
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template
+ * @property {string[]} documentedParamOrder Preferred order of parameters via TemplateData.
+ *  Contains only parameters that appear in TemplateData, either via `paramOrder` or in the `params`
+ *  list. Never contains undocumented parameters. Never contains aliases.
  */
 ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	// Properties
 	this.template = template;
 	this.params = {};
 	this.aliases = {};
-	this.canonicalOrder = [];
+	this.documentedParamOrder = [];
 
 	// Initialization
 	this.fillFromTemplate();
@@ -65,7 +68,8 @@ ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang
  *
  * @param {Object} data Template spec data
  * @param {string} [data.description] Template description
- * @param {string[]} [data.paramOrder] Canonically ordered parameter names
+ * @param {string[]} [data.paramOrder] Preferred parameter order as documented via TemplateData. If
+ *  given, the TemplateData API makes sure this contains the same parameters as `params`.
  * @param {Object} [data.params] Template param specs keyed by param name
  * @param {Array} [data.sets] Lists of param sets
  */
@@ -74,7 +78,7 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 		this.description = data.description;
 	}
 	if ( data.params ) {
-		this.canonicalOrder = Array.isArray( data.paramOrder ) ?
+		this.documentedParamOrder = Array.isArray( data.paramOrder ) ?
 			data.paramOrder :
 			Object.keys( data.params );
 
@@ -145,14 +149,14 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( languageCode ) {
 };
 
 /**
- * Get parameter order.
+ * Empty if the template is not documented. Otherwise the explicit `paramOrder` if given, or the
+ * order of parameters as they appear in TemplateData. Returns a copy, i.e. it's safe to manipulate
+ * the array.
  *
- * @return {string[]} Canonically ordered parameter names: the explicit
- *   `paramOrder` if given, otherwise the order of parameters as they appear in
- *   TemplateData.
+ * @return {string[]} Preferred order of parameters via TemplateData, if given
  */
-ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
-	return this.canonicalOrder.slice();
+ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
+	return this.documentedParamOrder.slice();
 };
 
 /**

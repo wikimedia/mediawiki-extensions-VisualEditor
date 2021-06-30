@@ -104,7 +104,7 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( p
 	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
 
 	if ( paramCheckbox ) {
-		if ( this.templateModel.isParameterUnknown( parameter ) ) {
+		if ( !this.templateModel.isParameterDocumented( parameter ) ) {
 			paramCheckbox.disconnect( this );
 			this.parameters.removeItems( [ paramCheckbox ] );
 		} else {
