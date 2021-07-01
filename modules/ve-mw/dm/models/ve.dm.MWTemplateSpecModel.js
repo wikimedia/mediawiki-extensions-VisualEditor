@@ -26,6 +26,12 @@
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template
+ * @property {Object.<string,boolean>} seenParameterNames Keeps track of any parameter from any
+ *  source and in which order they have been seen first. Includes parameters that have been removed
+ *  during the lifetime of this object, i.e. {@see fillFromTemplate} doesn't remove parameters that
+ *  have been seen before. The order is typically but not necessarily the original order in which
+ *  the parameters appear in the template. Aliases are resolved and don't appear on their original
+ *  position any more.
  * @property {string[]} documentedParamOrder Preferred order of parameters via TemplateData.
  *  Contains only parameters that appear in TemplateData, either via `paramOrder` or in the `params`
  *  list. Never contains undocumented parameters. Never contains aliases.
@@ -33,6 +39,7 @@
 ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	// Properties
 	this.template = template;
+	this.seenParameterNames = {};
 	this.params = {};
 	this.aliases = {};
 	this.documentedParamOrder = [];
@@ -83,19 +90,20 @@ ve.dm.MWTemplateSpecModel.prototype.extend = function ( data ) {
 			Object.keys( data.params );
 
 		for ( var key in data.params ) {
+			this.seenParameterNames[ key ] = true;
+
 			if ( !this.params[ key ] ) {
 				this.params[ key ] = {};
 			}
 			var param = this.params[ key ];
 			// Extend existing spec
 			ve.extendObject( true, this.params[ key ], data.params[ key ] );
-			// Add aliased references
+
 			if ( param.aliases ) {
 				for ( var i = 0; i < param.aliases.length; i++ ) {
 					var alias = param.aliases[ i ];
 					this.aliases[ alias ] = key;
-					// Remove duplicate specification when it turns out the template used an alias
-					delete this.params[ alias ];
+					delete this.seenParameterNames[ alias ];
 				}
 			}
 		}
@@ -117,7 +125,7 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 		if ( key && !this.isKnownParameterOrAlias( key ) ) {
 			// There is no information other than the names of the parameters, that they exist, and
 			// in which order
-			this.params[ key ] = {};
+			this.seenParameterNames[ key ] = true;
 		}
 	}
 };
@@ -170,7 +178,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
  * @return {boolean}
  */
 ve.dm.MWTemplateSpecModel.prototype.isKnownParameterOrAlias = function ( name ) {
-	return name in this.params || name in this.aliases;
+	return name in this.seenParameterNames || name in this.aliases;
 };
 
 /**
@@ -317,7 +325,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
  * @return {string[]} Primary parameter names
  */
 ve.dm.MWTemplateSpecModel.prototype.getKnownParameterNames = function () {
-	return Object.keys( this.params );
+	return Object.keys( this.seenParameterNames );
 };
 
 /**
