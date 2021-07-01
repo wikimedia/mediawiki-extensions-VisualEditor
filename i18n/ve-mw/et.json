@@ -331,6 +331,6 @@
 	"visualeditor-wikitext-warning": "Kasutad visuaaltoimetit. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Vikitekst]] siin ei tööta. Et minna tagasi lähteteksti redigeerimise režiimi iga hetk ilma muudatusi kaotamata, klõpsa ümberlülitusnuppu.",
 	"visualeditor-wikitext-warning-title": "Tuvastatud vikiteksti märgistus",
 	"visualeditor-wikitextconvert-title": "Kas teisendad vorminduse vikitekstiks?",
-	"visualeditor-wikitextconvert-message": "Kleebitud sisu sisaldab vormindust. Kas see tuleks teisendada vikitekstiks või sisestada lihttekstina?",
+	"visualeditor-wikitextconvert-message": "Kleebitud sisu sisaldab rikasvormingut. Kas soovid teisendada selle vormingu vikitekstiks?",
 	"visualeditor-wikitextconvert-convert": "Teisenda vikitekstiks"
 }
