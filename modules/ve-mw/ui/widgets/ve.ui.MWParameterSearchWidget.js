@@ -137,8 +137,8 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 	for ( var i = 0; i < this.index.length; i++ ) {
 		var item = this.index[ i ];
 		if ( hasQuery ) {
-			textMatch = item.text.indexOf( query ) >= 0;
-			nameMatch = item.names.indexOf( query ) >= 0;
+			textMatch = item.text.indexOf( query ) !== -1;
+			nameMatch = item.names.indexOf( query ) !== -1;
 		}
 		if ( !hasQuery || textMatch || nameMatch ) {
 			// Only show exact matches for deprecated params
@@ -146,7 +146,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 				continue;
 			}
 			items.push( new ve.ui.MWParameterResultWidget( { data: item } ) );
-			if ( hasQuery && nameMatch ) {
+			if ( hasQuery && nameMatch && item.names.split( '|' ).indexOf( query ) !== -1 ) {
 				exactMatch = true;
 			}
 		}

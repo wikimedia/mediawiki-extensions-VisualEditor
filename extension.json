@@ -2790,6 +2790,8 @@
 			"modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js",
 			"lib/ve/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
 			"modules/ve-mw/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
+			"modules/ve-mw/tests/ui/widgets/ve.ui.MWParameterSearchWidget.test.js",
+			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxLayout.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateTitleInputWidget.test.js",
 			"lib/ve/tests/ce/ve.ce.TestRunner.js",
 			"lib/ve/tests/ce/ve.ce.imetests.test.js",
@@ -2831,8 +2833,7 @@
 			"lib/ve/src/ve.freeze.js",
 			"lib/ve/rebaser/src/dm/ve.dm.RebaseServer.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseClient.js",
-			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js",
-			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxLayout.test.js"
+			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js"
 		],
 		"dependencies": [
 			"unicodejs",
