@@ -368,11 +368,12 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 };
 
 /**
- * Get the wikitext for this transclusion.
+ * Recreate the wikitext for this transclusion, possibly containing multiple template invocations,
+ * mixed with raw wikitext snippets.
  *
  * @static
  * @param {Object} content MW data content
- * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+ * @return {string} Wikitext
  */
 ve.dm.MWTransclusionNode.static.getWikitext = function ( content ) {
 	var i, len, part, template, param,
@@ -477,9 +478,9 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 };
 
 /**
- * Wrapper for static method
+ * Wrapper for static method, {@see ve.dm.MWTransclusionNode.static.getWikitext} above.
  *
- * @return {string} Wikitext like `{{foo|1=bar|baz=quux}}`
+ * @return {string} Wikitext
  */
 ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
 	return this.constructor.static.getWikitext( this.getAttribute( 'mw' ) );

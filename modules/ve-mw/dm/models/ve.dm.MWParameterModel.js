@@ -92,6 +92,9 @@ ve.dm.MWParameterModel.prototype.getName = function () {
 };
 
 /**
+ * Original parameter name. Will be used in {@see ve.dm.MWTransclusionPartModel.serialize}, but not
+ * in {@see ve.dm.MWTransclusionPartModel.getWikitext}.
+ *
  * @return {string|undefined} Untrimmed parameter name as provided on construction time
  */
 ve.dm.MWParameterModel.prototype.getOriginalName = function () {

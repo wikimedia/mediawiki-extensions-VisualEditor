@@ -65,16 +65,21 @@ ve.dm.MWTransclusionPartModel.prototype.remove = function () {
 };
 
 /**
- * Get serialized representation of transclusion part.
+ * Create a serialized representation of this part. Contains all information needed to recreate the
+ * original wikitext, including extra whitespace. Used in
+ * {@see ve.dm.MWTransclusionModel.getPlainObject}. The corresponding deserializer is in
+ * {@see ve.dm.MWTransclusionNode.static.getWikitext}.
  *
- * @return {Mixed} Serialized representation, or undefined if empty
+ * @return {Object|string|undefined} Serialized representation, raw wikitext, or undefined if empty
  */
 ve.dm.MWTransclusionPartModel.prototype.serialize = function () {
 	return undefined;
 };
 
 /**
- * Get the wikitext for this part.
+ * Get a minimal wikitext representation for this part, e.g. a compiled template invocation like
+ * `{{foo|1=bar|baz=quux}}`. Don't store this. This neither respects TemplateData format strings nor
+ * how an edited template was formatted before.
  *
  * @return {string} Wikitext
  */
