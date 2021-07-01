@@ -421,32 +421,35 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
 /**
  * Check if transclusion contains only a single template.
  *
- * @param {string|string[]} [templates] Names of templates to allow, omit to allow any template name
+ * @param {string|string[]} [allowedTemplates] Names of templates to allow, omit to allow any template name
  * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
-ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( templates ) {
+ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplates ) {
 	var templateNS = mw.config.get( 'wgNamespaceIds' ).template,
-		partsList = this.getPartsList();
+		parts = this.getPartsList();
 
 	function normalizeTemplateTitle( name ) {
 		var title = mw.Title.newFromText( name, templateNS );
 		return title ? title.getPrefixedText() : name;
 	}
 
-	if ( partsList.length !== 1 ) {
+	// Bail out as early as possible when no filter is given, or it's not a single part anyway
+	var isSingle = parts.length === 1;
+	if ( !isSingle || !allowedTemplates ) {
+		return isSingle;
+	}
+
+	var singlePart = parts[ 0 ];
+	// It's not a template but e.g. a parser function or raw wikitext content
+	if ( !singlePart.templatePage ) {
 		return false;
 	}
-	if ( templates === undefined ) {
-		return true;
+
+	if ( typeof allowedTemplates === 'string' ) {
+		allowedTemplates = [ allowedTemplates ];
 	}
-	if ( !partsList[ 0 ].templatePage ) {
-		return false;
-	}
-	if ( typeof templates === 'string' ) {
-		templates = [ templates ];
-	}
-	return templates.some( function ( template ) {
-		return partsList[ 0 ].templatePage === normalizeTemplateTitle( template );
+	return allowedTemplates.some( function ( template ) {
+		return singlePart.templatePage === normalizeTemplateTitle( template );
 	} );
 };
 
@@ -461,6 +464,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 		var content = this.getAttribute( 'mw' );
 		for ( var i = 0; i < content.parts.length; i++ ) {
 			var part = content.parts[ i ];
+			// A template as serialized by {@see ve.dm.MWTemplateModel.serialize}
 			if ( part.template ) {
 				var href = part.template.target.href,
 					page = href ? mw.libs.ve.normalizeParsoidResourceName( href ) : null;
@@ -469,6 +473,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 					templatePage: page
 				} );
 			} else {
+				// Raw wikitext as serialized by {@see ve.dm.MWTransclusionContentModel.serialize}
 				this.partsList.push( { content: part } );
 			}
 		}
