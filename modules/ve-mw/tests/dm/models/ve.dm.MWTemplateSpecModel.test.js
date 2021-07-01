@@ -107,7 +107,33 @@
 		assert.deepEqual( spec.getMaps(), {}, 'getMaps' );
 	} );
 
-	QUnit.test( 'Basic behavior with most minimal extend()', ( assert ) => {
+	[
+		[],
+		{}
+	].forEach( ( templateData ) => {
+		QUnit.test( 'Invalid TemplateData, e.g. empty or without params', ( assert ) => {
+			const template = createTemplateMock(),
+				spec = new ve.dm.MWTemplateSpecModel( template );
+
+			spec.extend( templateData );
+
+			assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+			assert.strictEqual( spec.getParameterLabel( 'p' ), 'p', 'getParameterLabel' );
+			assert.strictEqual( spec.getParameterDescription( 'p' ), null, 'getParameterDescription' );
+			assert.deepEqual( spec.getParameterSuggestedValues( 'p' ), [], 'getParameterSuggestedValues' );
+			assert.strictEqual( spec.getParameterDefaultValue( 'p' ), '', 'getParameterDefaultValue' );
+			assert.strictEqual( spec.getParameterExampleValue( 'p' ), null, 'getParameterExampleValue' );
+			assert.strictEqual( spec.getParameterAutoValue( 'p' ), '', 'getParameterAutoValue' );
+			assert.strictEqual( spec.getParameterType( 'p' ), 'string', 'getParameterType' );
+			assert.deepEqual( spec.getParameterAliases( 'p' ), [], 'getParameterAliases' );
+			assert.strictEqual( spec.isParameterRequired( 'p' ), false, 'isParameterRequired' );
+			assert.strictEqual( spec.isParameterSuggested( 'p' ), false, 'isParameterSuggested' );
+			assert.strictEqual( spec.isParameterDeprecated( 'p' ), false, 'isParameterDeprecated' );
+			assert.strictEqual( spec.getParameterDeprecationDescription( 'p' ), '', 'getParameterDeprecationDescription' );
+		} );
+	} );
+
+	QUnit.test( 'Basic behavior with minimal extend()', ( assert ) => {
 		const template = createTemplateMock( [ 'p1' ] ),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
@@ -230,6 +256,17 @@
 		spec.fillFromTemplate();
 
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'color' ] );
+	} );
+
+	QUnit.test( 'getDocumentedParameterOrder() should not return a reference', ( assert ) => {
+		const template = createTemplateMock(),
+			spec = new ve.dm.MWTemplateSpecModel( template );
+
+		spec.extend( { params: {}, paramOrder: [ 'p' ] } );
+		const parameterNames = spec.getDocumentedParameterOrder();
+		parameterNames.push( 'x' );
+
+		assert.deepEqual( spec.getDocumentedParameterOrder(), [ 'p' ] );
 	} );
 
 	QUnit.test( 'Parameter deprecation with empty string', ( assert ) => {
