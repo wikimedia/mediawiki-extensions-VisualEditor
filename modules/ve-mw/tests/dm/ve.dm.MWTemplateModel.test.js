@@ -125,7 +125,7 @@
 		QUnit.test( name, ( assert ) => {
 			const templateModel = newTemplateModel();
 
-			templateModel.getSpec().extend( spec );
+			templateModel.getSpec().setTemplateData( spec );
 
 			const serializedTransclusionData = templateModel.serialize();
 			const order = Object.keys( serializedTransclusionData.template.params );
@@ -232,7 +232,7 @@
 		QUnit.test( 'getOrderedParameterNames: ' + name, ( assert ) => {
 			const templateModel = newTemplateModel();
 			if ( spec !== null ) {
-				templateModel.getSpec().extend( spec );
+				templateModel.getSpec().setTemplateData( spec );
 			}
 			assert.deepEqual( templateModel.getOrderedParameterNames(), expected );
 		} );
@@ -332,7 +332,7 @@
 		QUnit.test( 'getAllParametersOrdered: ' + name, ( assert ) => {
 			const templateModel = newTemplateModel();
 			if ( spec !== null ) {
-				templateModel.getSpec().extend( spec );
+				templateModel.getSpec().setTemplateData( spec );
 			}
 			assert.deepEqual( templateModel.getAllParametersOrdered(), expected );
 		} );

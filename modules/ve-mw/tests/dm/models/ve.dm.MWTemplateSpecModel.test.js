@@ -115,7 +115,7 @@
 			const template = createTemplateMock(),
 				spec = new ve.dm.MWTemplateSpecModel( template );
 
-			spec.extend( templateData );
+			spec.setTemplateData( templateData );
 
 			assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
 			assert.strictEqual( spec.getParameterLabel( 'p' ), 'p', 'getParameterLabel' );
@@ -133,11 +133,11 @@
 		} );
 	} );
 
-	QUnit.test( 'Basic behavior with minimal extend()', ( assert ) => {
+	QUnit.test( 'Basic behavior with minimal setTemplateData()', ( assert ) => {
 		const template = createTemplateMock( [ 'p1' ] ),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
-		spec.extend( { params: { p2: {} } } );
+		spec.setTemplateData( { params: { p2: {} } } );
 
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
@@ -162,11 +162,11 @@
 		assert.deepEqual( spec.getMaps(), {}, 'getMaps' );
 	} );
 
-	QUnit.test( 'Complex extend() with alias', ( assert ) => {
+	QUnit.test( 'Complex setTemplateData() with alias', ( assert ) => {
 		const template = createTemplateMock(),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
-		spec.extend( {
+		spec.setTemplateData( {
 			description: 'TemplateDescription',
 			params: {
 				p: {
@@ -219,7 +219,7 @@
 		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'p1-alias', 'p2' ] );
 
-		spec.extend( { params: { p1: { aliases: [ 'p1-alias' ] } } } );
+		spec.setTemplateData( { params: { p1: { aliases: [ 'p1-alias' ] } } } );
 
 		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), true );
 		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
@@ -230,7 +230,7 @@
 		const template = createTemplateMock(),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
-		spec.extend( { params: {
+		spec.setTemplateData( { params: {
 			p1: {
 				label: 'Parameter one'
 			},
@@ -249,7 +249,7 @@
 		const template = createTemplateMock( [ 'colour' ] ),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
-		spec.extend( { params: { color: { aliases: [ 'colour' ] } } } );
+		spec.setTemplateData( { params: { color: { aliases: [ 'colour' ] } } } );
 
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'color' ] );
 
@@ -262,7 +262,7 @@
 		const template = createTemplateMock(),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
-		spec.extend( { params: {}, paramOrder: [ 'p' ] } );
+		spec.setTemplateData( { params: {}, paramOrder: [ 'p' ] } );
 		const parameterNames = spec.getDocumentedParameterOrder();
 		parameterNames.push( 'x' );
 
@@ -273,7 +273,7 @@
 		const template = createTemplateMock(),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
-		spec.extend( { params: { p: { deprecated: '' } } } );
+		spec.setTemplateData( { params: { p: { deprecated: '' } } } );
 
 		assert.strictEqual( spec.isParameterDeprecated( 'p' ), true );
 		assert.strictEqual( spec.getParameterDeprecationDescription( 'p' ), '' );

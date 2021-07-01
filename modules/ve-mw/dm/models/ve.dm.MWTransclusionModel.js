@@ -200,7 +200,7 @@
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
 				var title = item.add.getTitle();
 				if ( hasOwn.call( specCache, title ) && specCache[ title ] ) {
-					item.add.getSpec().extend( specCache[ title ] );
+					item.add.getSpec().setTemplateData( specCache[ title ] );
 				}
 			}
 
