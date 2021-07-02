@@ -320,7 +320,7 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 	var addedCount = 0,
 		params = this.params,
-		spec = this.getSpec(),
+		spec = this.spec,
 		names = spec.getKnownParameterNames();
 
 	for ( var i = 0; i < names.length; i++ ) {
@@ -359,9 +359,9 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
 ve.dm.MWTemplateModel.prototype.serialize = function () {
 	var origData = this.originalData || {},
 		origParams = origData.params || {},
-		template = { target: this.getTarget(), params: {} },
-		spec = this.getSpec(),
-		params = this.getParameters();
+		template = { target: this.target, params: {} },
+		spec = this.spec,
+		params = this.params;
 
 	for ( var name in params ) {
 		if ( name === '' ) {
@@ -398,16 +398,14 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.getWikitext = function () {
-	var param,
-		wikitext = this.getTarget().wt,
-		params = this.getParameters();
+	var wikitext = this.target.wt;
 
-	for ( param in params ) {
+	for ( var param in this.params ) {
 		if ( param === '' ) {
 			continue;
 		}
 		wikitext += '|' + param + '=' +
-			ve.dm.MWTransclusionNode.static.escapeParameter( params[ param ].getValue() );
+			ve.dm.MWTransclusionNode.static.escapeParameter( this.params[ param ].getValue() );
 	}
 
 	return '{{' + wikitext + '}}';
@@ -417,7 +415,7 @@ ve.dm.MWTemplateModel.prototype.getWikitext = function () {
  * @inheritDoc
  */
 ve.dm.MWTemplateModel.prototype.isEmpty = function () {
-	var params = this.getParameters();
+	var params = this.params;
 
 	return Object.keys( params ).every( function ( name ) {
 		// There is always an unnamed placeholder at the start
