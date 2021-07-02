@@ -79,6 +79,8 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 		this.templateData.params = {};
 	}
 
+	var resolveAliases = false;
+
 	for ( var primaryName in this.templateData.params ) {
 		this.seenParameterNames[ primaryName ] = true;
 
@@ -86,8 +88,18 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 		for ( var i = 0; i < aliases.length; i++ ) {
 			var alias = aliases[ i ];
 			this.aliases[ alias ] = primaryName;
-			delete this.seenParameterNames[ alias ];
+			if ( alias in this.seenParameterNames ) {
+				resolveAliases = true;
+			}
 		}
+	}
+
+	if ( resolveAliases ) {
+		var primaryNames = {};
+		for ( var name in this.seenParameterNames ) {
+			primaryNames[ this.getPrimaryParameterName( name ) ] = true;
+		}
+		this.seenParameterNames = primaryNames;
 	}
 };
 
