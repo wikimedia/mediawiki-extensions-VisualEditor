@@ -109,8 +109,6 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 /* Methods */
 
 /**
- * Get template target.
- *
  * @return {Object} Template target
  */
 ve.dm.MWTemplateModel.prototype.getTarget = function () {
@@ -118,8 +116,6 @@ ve.dm.MWTemplateModel.prototype.getTarget = function () {
 };
 
 /**
- * Get template title.
- *
  * @return {string|null} Template title, if available
  */
 ve.dm.MWTemplateModel.prototype.getTitle = function () {
@@ -127,8 +123,6 @@ ve.dm.MWTemplateModel.prototype.getTitle = function () {
 };
 
 /**
- * Get template specification.
- *
  * @return {ve.dm.MWTemplateSpecModel} Template specification
  */
 ve.dm.MWTemplateModel.prototype.getSpec = function () {
