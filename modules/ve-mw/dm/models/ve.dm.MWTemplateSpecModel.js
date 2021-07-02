@@ -73,7 +73,7 @@ ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang
  * @param {Array} [data.sets] Lists of param sets
  */
 ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
-	this.templateData = data;
+	this.templateData = data || {};
 	// Better be safe even if the `params` element isn't optional in the TemplateData API
 	if ( !this.templateData.params ) {
 		this.templateData.params = {};

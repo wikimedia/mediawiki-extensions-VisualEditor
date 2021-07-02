@@ -108,6 +108,8 @@
 	} );
 
 	[
+		undefined,
+		null,
 		[],
 		{}
 	].forEach( ( templateData ) => {
