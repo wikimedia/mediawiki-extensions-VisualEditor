@@ -223,7 +223,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Terug",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Toch doorgaan",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Verplicht veld ontbreekt|Verplichte velden ontbreken}}",
-	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Weet u zeker dat u verder wilt gaan zonder {{PLURAL:$2|het veld|de $1 velden}} in te vullen?",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Weet u zeker dat u verder wilt gaan zonder {{PLURAL:$2|het veld|de velden}} $1 in te vullen?",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Terug naar zoeken?",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Doorgaan met bewerken",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Sjabloon verwijderen",
