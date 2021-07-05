@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Universal Life"
+			"Universal Life",
+			"WikiiiTranslator"
 		]
 	},
+	"visualeditor-ca-editsource": "Trocar el manadero",
 	"visualeditor-ca-editsource-section": "trocar el manadero"
 }

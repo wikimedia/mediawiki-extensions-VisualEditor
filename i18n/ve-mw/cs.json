@@ -216,6 +216,7 @@
 	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Toto není jedna z navrhovaných hodnot a šablona s ní nemusí fungovat.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Vložit šablonu",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Vložit: $1",
+	"visualeditor-dialog-transclusion-title-edit-known-template": "Editace šablony $1",
 	"visualeditor-dialogbutton-media-tooltip": "Obrázky a média",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavení stránky",
 	"visualeditor-dialogbutton-template-tooltip": "Šablona",
