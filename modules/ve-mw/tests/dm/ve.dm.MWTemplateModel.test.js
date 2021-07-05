@@ -35,6 +35,24 @@
 
 	/* Tests */
 
+	QUnit.test( 'hasParameter', ( assert ) => {
+		const template = newTemplateModel();
+
+		// All parameters are primary as long as the TemplateData documentation isn't known
+		assert.strictEqual( template.hasParameter( 'bar' ), true );
+		assert.strictEqual( template.hasParameter( 'resolved-bar' ), false );
+		assert.strictEqual( template.hasParameter( 'alternative-bar' ), false );
+
+		template.getSpec().setTemplateData( { params: {
+			'resolved-bar': { aliases: [ 'bar', 'alternative-bar' ] }
+		} } );
+
+		// Now "bar" and "alternative-bar" are aliases, and "resolved-bar" is the primary name
+		assert.strictEqual( template.hasParameter( 'bar' ), true );
+		assert.strictEqual( template.hasParameter( 'resolved-bar' ), true );
+		assert.strictEqual( template.hasParameter( 'alternative-bar' ), true );
+	} );
+
 	QUnit.test( 'serialize input parameters', ( assert ) => {
 		const templateModel = newTemplateModel(),
 			serializedTransclusionData = templateModel.serialize();
