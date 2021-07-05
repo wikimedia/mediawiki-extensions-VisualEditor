@@ -103,12 +103,12 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
  * to the template.
  */
 ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
-	for ( var key in this.template.getParameters() ) {
+	for ( var name in this.template.getParameters() ) {
 		// Ignore placeholder parameters with no name
-		if ( key && !this.isKnownParameterOrAlias( key ) ) {
+		if ( name && !this.isKnownParameterOrAlias( name ) ) {
 			// There is no information other than the names of the parameters, that they exist, and
 			// in which order
-			this.seenParameterNames[ key ] = true;
+			this.seenParameterNames[ name ] = true;
 		}
 	}
 };
