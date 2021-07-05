@@ -129,14 +129,8 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( para
  */
 ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( parameter ) {
 	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
-
 	if ( paramCheckbox ) {
-		if ( !this.templateModel.getSpec().isDocumentedParameterOrAlias( parameter.getName() ) ) {
-			paramCheckbox.disconnect( this );
-			this.parameters.removeItems( [ paramCheckbox ] );
-		} else {
-			paramCheckbox.setSelected( false, true );
-		}
+		paramCheckbox.setSelected( false, true );
 	}
 };
 
