@@ -219,18 +219,18 @@
 	} );
 
 	QUnit.test( 'Template uses aliases', ( assert ) => {
-		const template = createTemplateMock( [ 'p1-alias', 'p2' ] ),
+		const template = createTemplateMock( [ 'p0', 'p1-alias', 'p2' ] ),
 			spec = new ve.dm.MWTemplateSpecModel( template );
 
 		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), false );
 		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
-		assert.deepEqual( spec.getKnownParameterNames(), [ 'p1-alias', 'p2' ] );
+		assert.deepEqual( spec.getKnownParameterNames(), [ 'p0', 'p1-alias', 'p2' ] );
 
 		spec.setTemplateData( { params: { p1: { aliases: [ 'p1-alias' ] } } } );
 
 		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), true );
 		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
-		assert.deepEqual( spec.getKnownParameterNames(), [ 'p2', 'p1' ] );
+		assert.deepEqual( spec.getKnownParameterNames(), [ 'p0', 'p1', 'p2' ] );
 	} );
 
 	QUnit.test( 'Alias conflicts with another parameter', ( assert ) => {
