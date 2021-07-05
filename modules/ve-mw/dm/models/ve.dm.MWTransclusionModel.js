@@ -20,6 +20,10 @@
 	 *
 	 * @constructor
 	 * @param {ve.dm.Document} doc Document to use associate with API requests
+	 * @property {ve.dm.MWTransclusionPartModel[]} parts
+	 * @property {number} uid
+	 * @property {jQuery.Promise[]} requests
+	 * @property {Object[]} queue
 	 */
 	ve.dm.MWTransclusionModel = function VeDmMWTransclusionModel( doc ) {
 		// Mixin constructors
@@ -296,6 +300,12 @@
 		this.requests.push( this.fetchRequest( titles, specs, queue ) );
 	};
 
+	/**
+	 * @param {string[]} titles
+	 * @param {Object.<string,Object|null>} specs
+	 * @param {Object[]} queue
+	 * @return {jQuery.Promise}
+	 */
 	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, specs, queue ) {
 		var xhr = ve.init.target.getContentApi( this.doc ).get( {
 			action: 'templatedata',
@@ -309,6 +319,12 @@
 		return xhr;
 	};
 
+	/**
+	 * @param {string[]} titles
+	 * @param {Object.<string,Object|null>} specs
+	 * @param {Object} [data]
+	 * @param {Object.<number,Object>} [data.pages]
+	 */
 	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( titles, specs, data ) {
 		var aliasMap = [];
 
@@ -352,6 +368,10 @@
 		}
 	};
 
+	/**
+	 * @param {Object[]} queue
+	 * @param {jQuery.Promise} apiPromise
+	 */
 	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( queue, apiPromise ) {
 		// Prune completed request
 		var index = this.requests.indexOf( apiPromise );

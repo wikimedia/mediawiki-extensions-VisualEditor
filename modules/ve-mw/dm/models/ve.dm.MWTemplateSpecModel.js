@@ -32,6 +32,8 @@
  *  have been seen before. The order is typically but not necessarily the original order in which
  *  the parameters appear in the template. Aliases are resolved and don't appear on their original
  *  position any more.
+ * @property {Object} templateData Documentation as provided by the TemplateData API
+ * @property {Object.<string,string>} aliases Maps aliases to primary parameter names
  */
 ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	// Properties
@@ -50,9 +52,9 @@ OO.initClass( ve.dm.MWTemplateSpecModel );
 
 /**
  * @private
- * @param {string|Object.<string,string>} stringOrObject
+ * @param {string|Object.<string,string>|null} stringOrObject
  * @param {string} [languageCode]
- * @return {string|undefined}
+ * @return {string|null|undefined}
  */
 ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, languageCode ) {
 	return stringOrObject && typeof stringOrObject === 'object' ?
@@ -66,11 +68,15 @@ ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang
  * Template spec data is available from the TemplateData extension's API.
  *
  * @param {Object} data Template spec data
- * @param {string} [data.description] Template description
+ * @param {string|Object.<string,string>} [data.description] Template description
  * @param {string[]} [data.paramOrder] Preferred parameter order as documented via TemplateData. If
  *  given, the TemplateData API makes sure this contains the same parameters as `params`.
- * @param {Object} [data.params] Template param specs keyed by param name
- * @param {Array} [data.sets] Lists of param sets
+ * @param {Object.<string,Object>} [data.params] Template param specs keyed by param name
+ * @param {{label:(string|Object.<string,string>),params:string[]}[]} [data.sets] List of parameter
+ *  sets, i.e. parameters that belong together (whatever that means, this feature is underspecified
+ *  and unused)
+ * @param {Object.<string,Object.<string,string|string[]|string[][]>>} [data.maps] Source to target
+ *  parameter mappings for consumers like Citoid or gadgets
  */
 ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 	this.templateData = data || {};
@@ -92,9 +98,9 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 };
 
 /**
- * Filling is passive, so existing information is never overwritten. The spec should be re-filled
- * after a parameter is added to ensure it's still complete, and this is safe because existing data
- * is never overwritten.
+ * Adds all (possibly undocumented) parameters from the linked template to the list of known
+ * parameters, {@see getKnownParameterNames}. This should be called every time a parameter is added
+ * to the template.
  */
 ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 	for ( var key in this.template.getParameters() ) {
@@ -108,7 +114,7 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 };
 
 /**
- * @return {string} Template label
+ * @return {string} Normalized template name without the "Template:" namespace prefix
  */
 ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 	var title = this.template.getTitle(),
@@ -134,9 +140,10 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( languageCode ) {
 };
 
 /**
- * Empty if the template is not documented. Otherwise the explicit `paramOrder` if given, or the
- * order of parameters as they appear in TemplateData. Returns a copy, i.e. it's safe to manipulate
- * the array.
+ * Preferred order of parameters via TemplateData, without aliases or undocumented parameters. Empty
+ * if the template is not documented. Otherwise the explicit `paramOrder` if given, or the order of
+ * parameters as they appear in TemplateData. Returns a copy, i.e. it's safe to manipulate the
+ * array.
  *
  * @return {string[]} Preferred order of parameters via TemplateData, if given
  */
@@ -181,7 +188,8 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
 /**
  * @param {string} name Parameter name or alias
  * @param {string} [languageCode]
- * @return {string}
+ * @return {string} Descriptive label of the parameter, if given. Otherwise the alias or parameter
+ *  name as is.
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterLabel = function ( name, languageCode ) {
 	var param = this.templateData.params[ this.getPrimaryParameterName( name ) ];
@@ -208,8 +216,11 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSuggestedValues = function ( nam
 };
 
 /**
+ * The default value will be placed in the input field when the parameter is added. The user can
+ * edit or even remove it.
+ *
  * @param {string} name Parameter name or alias
- * @return {string}
+ * @return {string} e.g. "{{PAGENAME}}"
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterDefaultValue = function ( name ) {
 	var param = this.templateData.params[ this.getPrimaryParameterName( name ) ];
@@ -227,6 +238,9 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterExampleValue = function ( name, 
 };
 
 /**
+ * The auto-value will be used by the template in case the user doesn't provide a value. In
+ * VisualEditor this is only for documentation and should not appear in a serialization.
+ *
  * @param {string} name Parameter name or alias
  * @return {string}
  */
@@ -316,16 +330,18 @@ ve.dm.MWTemplateSpecModel.prototype.getKnownParameterNames = function () {
 };
 
 /**
- * @return {Object[]} Lists of parameter set descriptors
+ * See https://www.mediawiki.org/wiki/Extension:TemplateData#Set_object
+ *
+ * @return {{label:(string|Object.<string,string>),params:string[]}[]}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
 	return this.templateData.sets || [];
 };
 
 /**
- * Get map describing relationship between another content type and the parameters.
+ * See https://www.mediawiki.org/wiki/Extension:TemplateData#Maps_object
  *
- * @return {Object} Object with application property maps to parameters keyed to application name.
+ * @return {Object.<string,Object.<string,string|string[]|string[][]>>}
  */
 ve.dm.MWTemplateSpecModel.prototype.getMaps = function () {
 	return this.templateData.maps || {};
