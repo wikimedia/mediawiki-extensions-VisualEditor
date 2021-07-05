@@ -127,7 +127,7 @@ ve.ui.MWParameterSearchWidget.prototype.buildIndex = function () {
 ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 	var textMatch, nameMatch, remainder,
 		exactMatch = false,
-		value = this.query.getValue().trim().replace( /[|{}]/g, '' ),
+		value = this.query.getValue().trim().replace( /[={|}]+/g, '' ),
 		query = value.toLowerCase(),
 		hasQuery = !!query.length,
 		items = [];
