@@ -30,6 +30,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+		assert.strictEqual( spec.isDocumentedParameterOrAlias( 'unknown' ), false, 'isDocumentedParameterOrAlias' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'unknown' ), false, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'unknown' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'unknown' ), 'unknown', 'getParameterLabel' );
@@ -57,6 +58,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+		assert.strictEqual( spec.isDocumentedParameterOrAlias( 'p2' ), false, 'isDocumentedParameterOrAlias' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'p2', 'getParameterLabel' );
@@ -87,6 +89,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+		assert.strictEqual( spec.isDocumentedParameterOrAlias( 'p2' ), false, 'isDocumentedParameterOrAlias' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'p2', 'getParameterLabel' );
@@ -144,6 +147,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [ 'p2' ], 'getDocumentedParameterOrder' );
+		assert.strictEqual( spec.isDocumentedParameterOrAlias( 'p2' ), true, 'isDocumentedParameterOrAlias' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'p2', 'getParameterLabel' );
@@ -193,6 +197,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), 'TemplateDescription', 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [ 'DummyOrder' ], 'getDocumentedParameterOrder' );
+		assert.strictEqual( spec.isDocumentedParameterOrAlias( 'a' ), true, 'isDocumentedParameterOrAlias' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'a' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'a' ), true, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'a' ), 'ParamLabel', 'getParameterLabel' );

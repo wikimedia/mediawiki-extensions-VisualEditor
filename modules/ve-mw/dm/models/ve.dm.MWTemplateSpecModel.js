@@ -147,6 +147,14 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 };
 
 /**
+ * @param {string} name Parameter name or alias
+ * @return {boolean}
+ */
+ve.dm.MWTemplateSpecModel.prototype.isDocumentedParameterOrAlias = function ( name ) {
+	return name in this.templateData.params || name in this.aliases;
+};
+
+/**
  * Check if a parameter name or alias was seen before. This includes parameters and aliases
  * documented via TemplateData as well as undocumented parameters, e.g. from the original template
  * invocation. When undocumented parameters are removed from the linked {@see ve.dm.MWTemplateModel}
