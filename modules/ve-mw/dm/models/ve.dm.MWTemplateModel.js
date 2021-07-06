@@ -20,8 +20,9 @@
  * @constructor
  * @param {ve.dm.MWTransclusionModel} transclusion
  * @param {Object} target Template target
- * @param {string} target.wt Original wikitext of target
- * @param {string} [target.href] Hypertext reference to target
+ * @param {string} target.wt Template name as originally used in the wikitext, including optional
+ *  whitespace
+ * @param {string} [target.href] Hypertext reference to target, e.g. "./Template:Example"
  */
 ve.dm.MWTemplateModel = function VeDmMWTemplateModel( transclusion, target ) {
 	// Parent constructor
@@ -63,6 +64,7 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  *
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion template is in
  * @param {Object} data Template data
+ * @param {Object.<string,{wt:string}>} data.params
  * @return {ve.dm.MWTemplateModel} New template model
  */
 ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
@@ -149,33 +151,20 @@ ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
 };
 
 /**
- * Check if a parameter exists.
+ * Check if a parameter with this name or one of its aliases is currently part of this template.
  *
- * @param {string} name Parameter name
- * @return {boolean} Parameter exists
+ * @param {string} name Parameter name or alias
+ * @return {boolean} Parameter is in the template
  */
 ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 	var params = this.params;
 
-	// Check if name (which may be an alias) is present in the template
-	if ( name in params ) {
-		return true;
-	}
-
-	// Check if the name is known at all
-	if ( !this.spec.isKnownParameterOrAlias( name ) ) {
-		return false;
-	}
-
-	var primaryName = this.spec.getPrimaryParameterName( name );
-	// Check for primary name (may be the same as name)
-	if ( primaryName in params ) {
-		return true;
-	}
-	// Check for other aliases (may include name)
-	return this.spec.getParameterAliases( primaryName ).some( function ( alias ) {
-		return alias in params;
-	} );
+	// Check for `name` (which may be an alias), its primary name, and all of its aliases
+	return name in params ||
+		this.spec.getPrimaryParameterName( name ) in params ||
+		this.spec.getParameterAliases( name ).some( function ( alias ) {
+			return alias in params;
+		} );
 };
 
 /**
@@ -347,6 +336,7 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
  * Set original data, to be used as a base for serialization.
  *
  * @param {Object} data Original data
+ * @param {Object.<string,Object>} [data.params]
  */
 ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
 	this.originalData = data;
