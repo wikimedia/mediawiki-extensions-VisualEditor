@@ -80,6 +80,8 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 
 /**
  * Called when the transclusion model changes. E.g. parts changes, parameter values changes.
+ *
+ * @private
  */
 ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
 	if ( this.loaded ) {
@@ -91,6 +93,7 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
 /**
  * Handle parts being replaced.
  *
+ * @protected
  * @param {ve.dm.MWTransclusionPartModel} removed Removed part
  * @param {ve.dm.MWTransclusionPartModel} added Added part
  */
@@ -180,6 +183,7 @@ ve.ui.MWTemplateDialog.prototype.onParameterPlaceholderShowAll = function ( page
 /**
  * Handle add param events.
  *
+ * @private
  * @param {ve.dm.MWParameterModel} param Added param
  */
 ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
@@ -213,6 +217,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 /**
  * Handle remove param events.
  *
+ * @private
  * @param {ve.dm.MWParameterModel} param Removed param
  */
 ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
@@ -238,6 +243,8 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
  *
  * If the transclusion is empty or only contains a placeholder it will not be insertable.
  * If the transclusion only contains a placeholder it will not be editable.
+ *
+ * @private
  */
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
@@ -257,6 +264,7 @@ ve.ui.MWTemplateDialog.prototype.getBodyHeight = function () {
 /**
  * Get a page for a transclusion part.
  *
+ * @protected
  * @param {ve.dm.MWTransclusionModel} part Part to get page for
  * @return {OO.ui.PageLayout|null} Page for part, null if no matching page could be found
  */
@@ -292,6 +300,8 @@ ve.ui.MWTemplateDialog.prototype.getSelectedNode = function ( data ) {
 
 /**
  * Update the dialog title.
+ *
+ * @protected
  */
 ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
@@ -334,6 +344,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
  *  anyway, the returned deferred will be resolved.
  * Otherwise, the returned deferred will be rejected.
  *
+ * @private
  * @return {jQuery.Deferred}
  */
 ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
@@ -532,6 +543,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 /**
  * Initialize parameters for new template insertion
+ *
+ * @private
  */
 ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
 	var parts = this.transclusionModel.getParts();
