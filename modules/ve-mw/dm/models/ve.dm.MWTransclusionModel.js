@@ -313,7 +313,10 @@
 			includeMissingTitles: '1',
 			redirects: '1'
 		} ).done( this.fetchRequestDone.bind( this ) );
-		xhr.always( this.fetchRequestAlways.bind( this, queue, xhr ) );
+		xhr.always(
+			this.fetchRequestAlways.bind( this, xhr ),
+			this.process.bind( this, queue )
+		);
 		return xhr;
 	};
 
@@ -363,17 +366,14 @@
 	};
 
 	/**
-	 * @param {Object[]} queue
 	 * @param {jQuery.Promise} apiPromise
 	 */
-	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( queue, apiPromise ) {
+	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( apiPromise ) {
 		// Prune completed request
 		var index = this.requests.indexOf( apiPromise );
 		if ( index !== -1 ) {
 			this.requests.splice( index, 1 );
 		}
-		// Actually add queued items
-		this.process( queue );
 	};
 
 	/**
