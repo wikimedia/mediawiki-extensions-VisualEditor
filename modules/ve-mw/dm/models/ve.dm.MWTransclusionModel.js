@@ -256,8 +256,7 @@
 
 	ve.dm.MWTransclusionModel.prototype.fetch = function () {
 		var templateNamespaceId = mw.config.get( 'wgNamespaceIds' ).template,
-			titles = [],
-			specs = {};
+			titles = [];
 
 		if ( !this.queue.length ) {
 			return;
@@ -297,16 +296,15 @@
 			return;
 		}
 
-		this.requests.push( this.fetchRequest( titles, specs, queue ) );
+		this.requests.push( this.fetchRequest( titles, queue ) );
 	};
 
 	/**
 	 * @param {string[]} titles
-	 * @param {Object.<string,Object|null>} specs
 	 * @param {Object[]} queue
 	 * @return {jQuery.Promise}
 	 */
-	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, specs, queue ) {
+	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, queue ) {
 		var xhr = ve.init.target.getContentApi( this.doc ).get( {
 			action: 'templatedata',
 			titles: titles,
@@ -314,18 +312,16 @@
 			format: 'json',
 			includeMissingTitles: '1',
 			redirects: '1'
-		} ).done( this.fetchRequestDone.bind( this, titles, specs ) );
+		} ).done( this.fetchRequestDone.bind( this ) );
 		xhr.always( this.fetchRequestAlways.bind( this, queue, xhr ) );
 		return xhr;
 	};
 
 	/**
-	 * @param {string[]} titles
-	 * @param {Object.<string,Object|null>} specs
 	 * @param {Object} [data]
 	 * @param {Object.<number,Object>} [data.pages]
 	 */
-	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( titles, specs, data ) {
+	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( data ) {
 		var aliasMap = [];
 
 		if ( data && data.pages ) {
@@ -342,9 +338,9 @@
 				} else if ( data.pages[ id ].notemplatedata && !OO.isPlainObject( data.pages[ id ].params ) ) {
 					// (T243868) Prevent asking again for templates that have neither user-provided specs
 					// nor automatically detected params
-					specs[ title ] = null;
+					specCache[ title ] = null;
 				} else {
-					specs[ title ] = data.pages[ id ];
+					specCache[ title ] = data.pages[ id ];
 				}
 			}
 			// Follow redirects
@@ -359,12 +355,10 @@
 			for ( var i = 0; i < aliasMap.length; i++ ) {
 				// Only define the alias if the target exists, otherwise
 				// we create a new property with an invalid "undefined" value.
-				if ( hasOwn.call( specs, aliasMap[ i ].to ) ) {
-					specs[ aliasMap[ i ].from ] = specs[ aliasMap[ i ].to ];
+				if ( hasOwn.call( specCache, aliasMap[ i ].to ) ) {
+					specCache[ aliasMap[ i ].from ] = specCache[ aliasMap[ i ].to ];
 				}
 			}
-
-			ve.extendObject( specCache, specs );
 		}
 	};
 
