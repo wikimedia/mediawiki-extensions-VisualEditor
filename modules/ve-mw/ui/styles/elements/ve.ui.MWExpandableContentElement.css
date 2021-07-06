@@ -10,14 +10,16 @@
 	align-items: center;
 	position: absolute;
 	bottom: 0;
+	pointer-events: none; /* Allows clicking "through" the fade effect */
 }
 
 .ve-ui-expandableContent-toggle {
-	background-color: rgba( 255, 255, 255, 1 );
+	background-color: #fff;
+	pointer-events: auto;
 }
 
 .ve-ui-expandableContent-fade {
-	background: linear-gradient( 90deg, rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 90% );
+	background: linear-gradient( 90deg, rgba( 255, 255, 255, 0 ) 0, #fff 90% );
 	width: 50px;
 	height: 100%;
 }
