@@ -168,68 +168,37 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
 };
 
 /**
- * Get all potential parameters, known and unknown.
- *
- * All parameters reported by TemplateData, plus any unknown parameters present
- * in the template invocation.  Known parameters are ordered according to
- * `paramOrder`, or when absent to the order of parameters as they appear in
- * TemplateData.
- *
- * Known parameters are in TemplateData order, and unknown parameters are sorted
- * with numeric names first, followed by alphabetically sorted names.
+ * Get all current and potential parameter names in a canonical order that's always the same,
+ * unrelated to how the parameters appear in the wikitext. Parameter names and aliases documented
+ * via TemplateData are first, in their documented order. Undocumented parameters are sorted with
+ * numeric names first, followed by alphabetically sorted names. The unnamed placeholder parameter
+ * is last.
  *
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 	var spec = this.spec,
-		currentParams = Object.keys( this.params ),
-		undocumentedParams = currentParams.filter( function ( name ) {
-			return !spec.isDocumentedParameterOrAlias( name );
-		} );
+		parameters = spec.getCanonicalParameterOrder();
 
-	// Unknown parameters in alpha-numeric order second, empty string at the very end
-	undocumentedParams.sort( function ( a, b ) {
-		var aIsNaN = isNaN( a ),
-			bIsNaN = isNaN( b );
-
-		if ( a === '' ) {
-			return 1;
-		}
-		if ( b === '' ) {
-			return -1;
-		}
-		if ( aIsNaN && bIsNaN ) {
-			// Two strings
-			return a < b ? -1 : a === b ? 0 : 1;
-		}
-		if ( aIsNaN ) {
-			// A is a string
-			return 1;
-		}
-		if ( bIsNaN ) {
-			// B is a string
-			return -1;
-		}
-		// Two numbers
-		return a - b;
-	} );
-
-	var documentedParams = spec.getDocumentedParameterOrder();
-
-	// Restore aliases in the list of documented parameters
-	currentParams.forEach( function ( name ) {
+	// Restore aliases originally used in the wikitext. The spec doesn't know which alias was used.
+	for ( var name in this.params ) {
 		if ( spec.isParameterAlias( name ) ) {
-			documentedParams.splice(
+			parameters.splice(
 				// This can never fail because only documented parameters can have aliases
-				documentedParams.indexOf( spec.getPrimaryParameterName( name ) ),
+				parameters.indexOf( spec.getPrimaryParameterName( name ) ),
 				1,
 				name
 			);
 		}
-	} );
+	}
+
+	// Restore the placeholder, if present. The spec doesn't keep track of placeholders.
+	if ( '' in this.params ) {
+		parameters.push( '' );
+	}
 
 	// TODO: cache results
-	return documentedParams.concat( undocumentedParams );
+	return parameters;
 };
 
 /**
@@ -243,9 +212,9 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
  */
 ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 	if ( !this.orderedParameterNames ) {
-		var paramNames = Object.keys( this.params );
+		var params = this.params;
 		this.orderedParameterNames = this.getAllParametersOrdered().filter( function ( name ) {
-			return paramNames.indexOf( name ) !== -1;
+			return name in params;
 		} );
 	}
 	return this.orderedParameterNames;
