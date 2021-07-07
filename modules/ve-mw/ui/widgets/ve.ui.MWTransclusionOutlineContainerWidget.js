@@ -11,7 +11,8 @@
  * @extends OO.ui.Widget
  *
  * @constructor
- * @param {Object} [config] Configuration options
+ * @param {Object} config
+ * @param {ve.dm.MWTransclusionModel} config.transclusionModel
  * // TODO: document `items`
  */
 ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( config ) {
@@ -21,6 +22,7 @@ ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineC
 	// Initialization
 	this.transclusionModel = config.transclusionModel;
 
+	// FIXME: This is an abstract base class, it should not be instantiated directly
 	this.containerLayout = new OO.ui.Layout();
 	this.$element.append( this.containerLayout.$element );
 
@@ -39,10 +41,9 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * Handle parts being replaced.
- *
- * @param {ve.dm.MWTransclusionPartModel} removed Removed part
- * @param {ve.dm.MWTransclusionPartModel} added Added part
+ * @private
+ * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
+ * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( removed, added ) {
 	if ( removed instanceof ve.dm.MWTemplateModel ) {
@@ -61,10 +62,8 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( 
 /* Methods */
 
 /**
- * Add a template container
- *
  * @private
- * @param {ve.dm.MWTemplateModel} template Added part
+ * @param {ve.dm.MWTemplateModel} template
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.addTemplate = function ( template ) {
 	// FIXME: Respect order

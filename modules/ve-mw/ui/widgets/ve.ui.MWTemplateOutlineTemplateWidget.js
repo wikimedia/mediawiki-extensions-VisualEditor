@@ -11,7 +11,8 @@
  * @extends OO.ui.Widget
  *
  * @constructor
- * @param {Object} [config] Configuration options
+ * @param {Object} config
+ * @param {ve.dm.MWTemplateModel} config.templateModel
  */
 ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWidget( config ) {
 	// Parent constructor
@@ -41,6 +42,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		classes: [ 've-ui-templateOutlineItem' ]
 	} );
 
+	// FIXME: This is an abstract base class, it should not be instantiated directly
 	var templateLabel = new OO.ui.Layout( {
 		classes: [ 've-ui-templateOutlineTemplateLabel' ],
 		content: [
@@ -56,6 +58,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
+	// FIXME: This is an abstract base class, it should not be instantiated directly
 	var layout = new OO.ui.Layout( {
 		// TODO: template title and icon
 		// items: [ this.parameters ]

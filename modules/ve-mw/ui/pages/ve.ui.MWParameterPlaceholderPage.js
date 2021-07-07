@@ -12,7 +12,8 @@
  * @extends OO.ui.PageLayout
  *
  * @constructor
- * @param {ve.dm.MWTemplateModel} parameter Template
+ * @param {ve.dm.MWParameterModel} parameter Reference to a placeholder parameter with an empty
+ *  name, as well as to the template the parameter belongs to
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
