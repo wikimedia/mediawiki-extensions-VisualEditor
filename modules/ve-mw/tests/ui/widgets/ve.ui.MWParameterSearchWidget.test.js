@@ -43,7 +43,7 @@
 
 		assert.strictEqual( items.length, 2 );
 		assert.strictEqual( items[ 0 ].getData().name, 'abbr' );
-		assert.strictEqual( items[ 0 ].getData().description, 'visualeditor-parameter-search-unknown' );
+		assert.strictEqual( items[ 0 ].getData().isUnknown, true );
 		assert.strictEqual( items[ 1 ].getData().name, 'abbreviation' );
 	} );
 

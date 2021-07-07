@@ -47,6 +47,11 @@ ve.ui.MWParameterResultWidget.prototype.buildLabel = function () {
 			.addClass( 've-ui-mwParameterResultWidget-description' )
 			.text( this.data.description || '' );
 
+	if ( this.data.isUnknown ) {
+		$description.addClass( 've-ui-mwParameterResultWidget-unknown' )
+			.text( ve.msg( 'visualeditor-parameter-search-unknown' ) );
+	}
+
 	if ( this.data.name && this.data.name !== this.data.label ) {
 		$names.append(
 			$( '<span>' )

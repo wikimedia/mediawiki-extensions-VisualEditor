@@ -162,7 +162,7 @@ ve.ui.MWParameterSearchWidget.prototype.addResults = function () {
 				name: value,
 				label: value,
 				aliases: [],
-				description: ve.msg( 'visualeditor-parameter-search-unknown' )
+				isUnknown: true
 			}
 		} ) );
 	}
