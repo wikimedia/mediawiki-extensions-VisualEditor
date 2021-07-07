@@ -218,7 +218,6 @@
 				{
 					action: 'visualeditoredit',
 					paction: 'save',
-					format: 'json',
 					formatversion: 2,
 					errorformat: 'html',
 					errorlang: mw.config.get( 'wgUserLanguage' ),

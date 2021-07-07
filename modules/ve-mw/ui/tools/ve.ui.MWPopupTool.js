@@ -297,7 +297,6 @@ ve.ui.MWHelpPopupTool.prototype.onSelect = function () {
 		this.versionPromise = ve.init.target.getLocalApi().get( {
 			action: 'query',
 			meta: 'siteinfo',
-			format: 'json',
 			siprop: 'extensions'
 		} ).then( function ( response ) {
 			var extension = response.query.extensions.filter( function ( ext ) {

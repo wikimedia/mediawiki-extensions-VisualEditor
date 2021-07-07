@@ -151,8 +151,6 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			if ( titles.length > 0 ) {
 				var xhr = widget.getApi().get( {
 					action: 'templatedata',
-					format: 'json',
-					formatversion: 2,
 					titles: titles,
 					redirects: !!widget.showRedirects,
 					includeMissingTitles: '1',

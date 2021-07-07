@@ -601,6 +601,8 @@ ve.init.mw.Target.prototype.getPageName = function () {
  *
  * @param {ve.dm.Document} [doc] API for a specific document, should default to document of current surface.
  * @param {Object} [options] API options
+ * @param {Object} [options.parameters] Default query parameters for all API requests. Defaults
+ *  include action=query, format=json, and formatversion=2 if not specified otherwise.
  * @return {mw.Api}
  */
 ve.init.mw.Target.prototype.getContentApi = function ( doc, options ) {

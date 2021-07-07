@@ -311,7 +311,6 @@
 			action: 'templatedata',
 			titles: titles,
 			lang: mw.config.get( 'wgUserLanguage' ),
-			format: 'json',
 			includeMissingTitles: '1',
 			redirects: '1'
 		} ).done( this.fetchRequestDone.bind( this, titles, specs ) );

@@ -131,8 +131,7 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 				list: 'usercontribs',
 				ucuser: mw.user.getName(),
 				ucprop: 'comment',
-				uclimit: 500,
-				format: 'json'
+				uclimit: 500
 			} ).then( function ( response ) {
 				var usedComments = {},
 					changes = ve.getProp( response, 'query', 'usercontribs' ) || [];
