@@ -365,7 +365,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 			// …unless they were present before the edit
 			!Object.prototype.hasOwnProperty.call( origParams, name ) &&
 			// …unless they are required (T276989)
-			!( spec.isKnownParameterOrAlias( name ) && spec.isParameterRequired( name ) )
+			!spec.isParameterRequired( name )
 		) {
 			continue;
 		}
