@@ -526,7 +526,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.loaded = true;
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 
-				if ( dialog.isNewSidebar ) {
+				if ( dialog.pocSidebar ) {
 					// TODO: bookletLayout will be deprecated.
 					dialog.$body.append( dialog.pocSidebar.$element );
 					dialog.bookletLayout.$element.find( '.oo-ui-outlineSelectWidget' )
