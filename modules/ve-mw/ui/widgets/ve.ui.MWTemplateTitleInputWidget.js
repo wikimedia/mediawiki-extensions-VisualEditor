@@ -235,7 +235,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 			newPage.index = 1;
 			pages.unshift( newPage );
 			if ( pages.length > widget.limit ) {
-				pages.splice( widget.limit );
+				pages.sort( function ( a, b ) {
+					return a.index - b.index;
+				} ).splice( widget.limit );
 			}
 		}
 	}
