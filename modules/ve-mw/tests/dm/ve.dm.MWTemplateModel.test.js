@@ -10,7 +10,8 @@
 		params: {
 			foo: { wt: 'Foo value' },
 			bar: { wt: 'Bar value' },
-			empty: { wt: '' }
+			empty: { wt: '' },
+			'': { wt: '' }
 		},
 		target: {
 			href: './Template:Test',
@@ -54,45 +55,56 @@
 	} );
 
 	QUnit.test( 'serialize input parameters', ( assert ) => {
-		const templateModel = newTemplateModel(),
-			serializedTransclusionData = templateModel.serialize();
+		const template = newTemplateModel();
 
-		assert.deepEqual( serializedTransclusionData, { template: transclusionData } );
+		const serialization = template.serialize();
+		assert.deepEqual( serialization, { template: {
+			params: {
+				foo: { wt: 'Foo value' },
+				bar: { wt: 'Bar value' },
+				empty: { wt: '' }
+			},
+			target: { href: './Template:Test', wt: 'Test' }
+		} } );
 	} );
 
 	QUnit.test( 'serialize changed input parameters', ( assert ) => {
-		const templateModel = newTemplateModel(),
-			newParameterModel = new ve.dm.MWParameterModel( templateModel, 'baz', 'Baz value' );
+		const template = newTemplateModel(),
+			newParameter = new ve.dm.MWParameterModel( template, 'baz', 'Baz value' );
 
-		templateModel.addParameter( newParameterModel );
+		template.addParameter( newParameter );
 
-		const serializedTransclusionData = templateModel.serialize();
-
-		assert.deepEqual( serializedTransclusionData.template.params.baz, { wt: 'Baz value' } );
+		const serialization = template.serialize();
+		assert.deepEqual( serialization.template.params.baz, { wt: 'Baz value' } );
 	} );
 
 	// T75134
 	QUnit.test( 'serialize after parameter was removed', ( assert ) => {
-		const templateModel = newTemplateModel(),
-			barParam = templateModel.getParameter( 'bar' );
+		const template = newTemplateModel(),
+			existingParameter = template.getParameter( 'bar' );
 
-		templateModel.removeParameter( barParam );
+		template.removeParameter( existingParameter );
 
-		const serializedTransclusionData = templateModel.serialize();
-
-		assert.deepEqual( serializedTransclusionData.template.params, { foo: { wt: 'Foo value' }, empty: { wt: '' } } );
+		const serialization = template.serialize();
+		assert.deepEqual( serialization.template.params, {
+			foo: { wt: 'Foo value' },
+			empty: { wt: '' }
+		} );
 	} );
 
 	// T101075
 	QUnit.test( 'serialize without empty parameter not present in original parameter set', ( assert ) => {
-		const templateModel = newTemplateModel(),
-			newEmptyParam = new ve.dm.MWParameterModel( templateModel, 'new_empty', '' );
+		const template = newTemplateModel(),
+			parameterWithoutValue = new ve.dm.MWParameterModel( template, 'new_empty', '' );
 
-		templateModel.addParameter( newEmptyParam );
+		template.addParameter( parameterWithoutValue );
 
-		const serializedTransclusionData = templateModel.serialize();
-
-		assert.deepEqual( serializedTransclusionData, { template: transclusionData } );
+		const serialization = template.serialize();
+		assert.deepEqual( serialization.template.params, {
+			foo: { wt: 'Foo value' },
+			bar: { wt: 'Bar value' },
+			empty: { wt: '' }
+		} );
 	} );
 
 	[
@@ -141,13 +153,12 @@
 		}
 	].forEach( ( { name, spec, expected } ) => {
 		QUnit.test( name, ( assert ) => {
-			const templateModel = newTemplateModel();
+			const template = newTemplateModel();
 
-			templateModel.getSpec().setTemplateData( spec );
+			template.getSpec().setTemplateData( spec );
 
-			const serializedTransclusionData = templateModel.serialize();
-			const order = Object.keys( serializedTransclusionData.template.params );
-			assert.deepEqual( order, expected );
+			const serialization = template.serialize();
+			assert.deepEqual( Object.keys( serialization.template.params ), expected );
 		} );
 	} );
 
@@ -158,7 +169,8 @@
 			expected: [
 				'bar',
 				'empty',
-				'foo'
+				'foo',
+				''
 			]
 		},
 		{
@@ -167,7 +179,8 @@
 			expected: [
 				'bar',
 				'empty',
-				'foo'
+				'foo',
+				''
 			]
 		},
 		{
@@ -184,7 +197,8 @@
 			expected: [
 				'foo',
 				'empty',
-				'bar'
+				'bar',
+				''
 			]
 		},
 		{
@@ -200,7 +214,8 @@
 			expected: [
 				'foo',
 				'empty',
-				'bar'
+				'bar',
+				''
 			]
 		},
 		{
@@ -212,7 +227,8 @@
 			expected: [
 				'bar',
 				'empty',
-				'foo'
+				'foo',
+				''
 			]
 		},
 		{
@@ -228,7 +244,8 @@
 			expected: [
 				'bar',
 				'foo',
-				'empty'
+				'empty',
+				''
 			]
 		},
 		{
@@ -243,16 +260,19 @@
 			expected: [
 				'empty',
 				'foo',
-				'bar'
+				'bar',
+				''
 			]
 		}
 	].forEach( ( { name, spec, expected } ) => {
 		QUnit.test( 'getOrderedParameterNames: ' + name, ( assert ) => {
-			const templateModel = newTemplateModel();
-			if ( spec !== null ) {
-				templateModel.getSpec().setTemplateData( spec );
+			const template = newTemplateModel();
+
+			if ( spec ) {
+				template.getSpec().setTemplateData( spec );
 			}
-			assert.deepEqual( templateModel.getOrderedParameterNames(), expected );
+
+			assert.deepEqual( template.getOrderedParameterNames(), expected );
 		} );
 	} );
 
@@ -263,7 +283,8 @@
 			expected: [
 				'bar',
 				'empty',
-				'foo'
+				'foo',
+				''
 			]
 		},
 		{
@@ -281,7 +302,8 @@
 				'foo',
 				'empty',
 				'unused',
-				'bar'
+				'bar',
+				''
 			]
 		},
 		{
@@ -298,7 +320,8 @@
 				'foo',
 				'empty',
 				'unused',
-				'bar'
+				'bar',
+				''
 			]
 		},
 		{
@@ -310,7 +333,8 @@
 			expected: [
 				'bar',
 				'empty',
-				'foo'
+				'foo',
+				''
 			]
 		},
 		{
@@ -327,7 +351,8 @@
 				'bar',
 				'foo',
 				'unused',
-				'empty'
+				'empty',
+				''
 			]
 		},
 		{
@@ -343,7 +368,8 @@
 				'empty',
 				'unused',
 				'foo',
-				'bar'
+				'bar',
+				''
 			]
 		},
 		{
@@ -362,16 +388,19 @@
 				'bar',
 				'empty',
 				'unused',
-				'foo'
+				'foo',
+				''
 			]
 		}
 	].forEach( ( { name, spec, expected } ) => {
 		QUnit.test( 'getAllParametersOrdered: ' + name, ( assert ) => {
-			const templateModel = newTemplateModel();
-			if ( spec !== null ) {
-				templateModel.getSpec().setTemplateData( spec );
+			const template = newTemplateModel();
+
+			if ( spec ) {
+				template.getSpec().setTemplateData( spec );
 			}
-			assert.deepEqual( templateModel.getAllParametersOrdered(), expected );
+
+			assert.deepEqual( template.getAllParametersOrdered(), expected );
 		} );
 	} );
 }() );
