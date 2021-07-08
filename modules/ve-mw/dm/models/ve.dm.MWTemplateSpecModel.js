@@ -157,6 +157,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( languageCode ) {
  * parameters as they appear in TemplateData. Returns a copy, i.e. it's safe to manipulate the
  * array.
  *
+ * @private
  * @return {string[]} Preferred order of parameters via TemplateData, if given
  */
 ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
@@ -166,11 +167,40 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 };
 
 /**
- * @param {string} name Parameter name or alias
- * @return {boolean}
+ * Same as {@see getKnownParameterNames}, but in a canonical order that's always the same, unrelated
+ * to how the parameters appear in the wikitext. Primary parameter names documented via TemplateData
+ * are first, in their documented order. Undocumented parameters are sorted with numeric names
+ * first, followed by alphabetically sorted names.
+ *
+ * @return {string[]}
  */
-ve.dm.MWTemplateSpecModel.prototype.isDocumentedParameterOrAlias = function ( name ) {
-	return name in this.templateData.params || name in this.aliases;
+ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
+	var documentedParameters = this.templateData.params,
+		undocumentedParameters = this.getKnownParameterNames().filter( function ( name ) {
+			return !( name in documentedParameters );
+		} );
+
+	undocumentedParameters.sort( function ( a, b ) {
+		var aIsNaN = isNaN( a ),
+			bIsNaN = isNaN( b );
+
+		if ( aIsNaN && bIsNaN ) {
+			// Two strings
+			return a < b ? -1 : a === b ? 0 : 1;
+		}
+		if ( aIsNaN ) {
+			// A is a string
+			return 1;
+		}
+		if ( bIsNaN ) {
+			// B is a string
+			return -1;
+		}
+		// Two numbers
+		return a - b;
+	} );
+
+	return this.getDocumentedParameterOrder().concat( undocumentedParameters );
 };
 
 /**
