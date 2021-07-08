@@ -196,8 +196,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response ) {
 	var widget = this,
 		query = this.getQueryValue(),
-		namespace = this.namespace,
-		title = mw.Title.newFromText( query, namespace );
+		title = mw.Title.newFromText( query, this.namespace );
 	// No point in trying anything when the title is invalid
 	if ( !response.query || !title ) {
 		return response;
@@ -211,6 +210,17 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	if ( foundMatchingMetadata ) {
 		// Redirects will be carefully positioned later in TitleWidget.getOptionsFromData()
 		return response;
+	}
+
+	/**
+	 * @param {{pageid: number}[]} pages
+	 * @param {number} pageId
+	 * @return {boolean}
+	 */
+	function containsPageId( pages, pageId ) {
+		return pageId && pages.some( function ( page ) {
+			return page.pageid === pageId;
+		} );
 	}
 
 	/**
@@ -260,23 +270,21 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	}
 
 	return this.getApi().get( {
+		action: 'query',
 		// Can't use a direct lookup by title because we need this to be case-insensitive
-		action: 'opensearch',
-		format: 'json',
-		search: query,
-		namespace: namespace,
-		limit: 1,
-		formatversion: 2
-	} ).then( function ( openSearchResult ) {
-		// OpenSearch will perform a prefix search, but we only care about exact matches
-		var titles = openSearchResult[ 1 ].filter( function ( searchResult ) {
-			return searchResult.toLowerCase() === lowerTitle;
-		} );
-		for ( i = titles.length; i--; ) {
-			unshiftPages( response.query.pages, {
-				ns: namespace,
-				title: titles[ i ]
-			} );
+		generator: 'prefixsearch',
+		gpssearch: query,
+		gpsnamespace: this.namespace,
+		gpslimit: 1
+	} ).then( function ( prefixMatches ) {
+		// action=query returns page objects in `{ query: { pages: [] } }`, not keyed by page id
+		if ( prefixMatches.query ) {
+			for ( var index in prefixMatches.query.pages ) {
+				var prefixMatch = prefixMatches.query.pages[ index ];
+				if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
+					unshiftPages( response.query.pages, prefixMatch );
+				}
+			}
 		}
 		return response;
 	}, function () {
