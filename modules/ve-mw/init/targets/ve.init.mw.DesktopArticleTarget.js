@@ -1157,7 +1157,11 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	// Exclude notification area to work around T143837
 	this.$originalContent.append( this.$element.siblings().not( '.mw-notification-area' ) );
 
-	this.$originalCategories = $( '#catlinks' ).clone( true );
+	// To preserve event handlers (e.g. HotCat) if editing is cancelled, detach the original container
+	// and replace it with a clone during editing
+	this.$originalCategories = $( '#catlinks' );
+	this.$originalCategories.after( this.$originalCategories.clone() );
+	this.$originalCategories.detach();
 
 	// Mark every non-direct ancestor between editableContent and the container as uneditable
 	$content = this.$editableContent;
