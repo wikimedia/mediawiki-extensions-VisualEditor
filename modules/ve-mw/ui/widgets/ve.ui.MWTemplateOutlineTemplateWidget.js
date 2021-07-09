@@ -58,16 +58,8 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
-	// FIXME: This is an abstract base class, it should not be instantiated directly
-	var layout = new OO.ui.Layout( {
-		// TODO: template title and icon
-		// items: [ this.parameters ]
-	} );
-	layout.$element
-		.append( templateLabel.$element, this.parameters.$element, addParameterButton.$element );
-
 	this.$element
-		.append( layout.$element );
+		.append( templateLabel.$element, this.parameters.$element, addParameterButton.$element );
 };
 
 /* Inheritance */
