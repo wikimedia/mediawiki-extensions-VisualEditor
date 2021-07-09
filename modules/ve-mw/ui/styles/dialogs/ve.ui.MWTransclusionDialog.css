@@ -98,12 +98,8 @@
 	display: inline-block;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-mwTemplateDialogOutlineTemplate {
-	padding: 2px;
-}
-
-.ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem,
-.ve-ui-mwTemplateDialog .ve-ui-templateOutlineTemplateLabel {
+.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem,
+.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineLabel {
 	display: block;
 	overflow: hidden;
 	right: 0;
@@ -112,12 +108,12 @@
 	padding: 2px;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-templateOutlineTemplateLabel .oo-ui-labelWidget {
+.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineLabel .oo-ui-labelWidget {
 	/* FIXME: padding kludged to roughly match the spec. */
 	padding: 11px 12px 11px 6px;
 	font-weight: bold;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-templateOutlineItem .oo-ui-labelWidget {
+.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem .oo-ui-labelWidget {
 	display: inline;
 }
