@@ -8,7 +8,7 @@
  * Container for template, as rendered in the template dialog sidebar.
  *
  * @class
- * @extends OO.ui.Widget
+ * @extends ve.ui.MWTemplateOutlinePartWidget
  *
  * @constructor
  * @param {Object} config
@@ -72,7 +72,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, OO.ui.Widget );
+OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, ve.ui.MWTemplateOutlinePartWidget );
 
 /**
  * @param {string|ve.dm.MWParameterModel} parameter
