@@ -3,9 +3,10 @@
  * @extends ve.ui.MWTransclusionOutlinePartWidget
  *
  * @constructor
+ * @param {ve.dm.MWTransclusionContentModel} content
  * @param {Object} [config]
  */
-ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWikitextWidget( config ) {
+ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWikitextWidget( content, config ) {
 	// Initialize config
 	config = $.extend( {
 		icon: 'wikiText',
@@ -14,6 +15,8 @@ ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWi
 
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineWikitextWidget.super.call( this, config );
+
+	this.content = content;
 };
 
 /* Inheritance */

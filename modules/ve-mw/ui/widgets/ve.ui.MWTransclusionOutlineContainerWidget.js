@@ -13,7 +13,8 @@
  * @constructor
  * @param {Object} config
  * @param {ve.dm.MWTransclusionModel} config.transclusionModel
- * // TODO: document `items`
+ * @property {Object.<string,ve.ui.MWTransclusionOutlinePartWidget>} partWidgets Map of top-level
+ *  items currently visible in this container, indexed by part id
  */
 ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( config ) {
 	// Parent constructor
@@ -21,6 +22,7 @@ ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineC
 
 	// Initialization
 	this.transclusionModel = config.transclusionModel;
+	this.partWidgets = {};
 
 	// Events
 	this.transclusionModel.connect( this, {
@@ -42,21 +44,13 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( removed, added ) {
-	if ( removed instanceof ve.dm.MWTemplateModel ) {
-		// TODO
-		// this.removeTemplate( removed );
+	if ( removed ) {
+		this.removePartWidget( removed );
 	}
-	// TODO: and for wikitext snippets?
 	// TODO: reselect if active part was in a removed template
 
-	if ( added instanceof ve.dm.MWTemplateModel ) {
-		this.addTemplate( added );
-	} else if ( added instanceof ve.dm.MWTemplatePlaceholderModel ) {
-		var placeholder = new ve.ui.MWTransclusionOutlinePlaceholderWidget();
-		this.$element.append( placeholder.$element );
-	} else if ( added instanceof ve.dm.MWTransclusionContentModel ) {
-		var wikitextItem = new ve.ui.MWTransclusionOutlineWikitextWidget();
-		this.$element.append( wikitextItem.$element );
+	if ( added ) {
+		this.addPartWidget( added );
 	}
 };
 
@@ -64,14 +58,34 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( 
 
 /**
  * @private
- * @param {ve.dm.MWTemplateModel} template
+ * @param {ve.dm.MWTransclusionPartModel} part
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.addTemplate = function ( template ) {
-	// FIXME: Respect order
-	var container = new ve.ui.MWTransclusionOutlineTemplateWidget( {
-		templateModel: template
-	} );
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function ( part ) {
+	var partId = part.getId(),
+		widget = this.partWidgets[ partId ];
 
-	this.$element
-		.append( container.$element );
+	if ( widget ) {
+		widget.$element.remove();
+		delete this.partWidgets[ partId ];
+	}
+};
+
+/**
+ * @private
+ * @param {ve.dm.MWTransclusionPartModel} part
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( part ) {
+	var widget;
+
+	if ( part instanceof ve.dm.MWTemplateModel ) {
+		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part );
+	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
+		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
+	} else if ( part instanceof ve.dm.MWTransclusionContentModel ) {
+		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
+	}
+
+	this.partWidgets[ part.getId() ] = widget;
+	// FIXME: Respect order
+	this.$element.append( widget.$element );
 };
