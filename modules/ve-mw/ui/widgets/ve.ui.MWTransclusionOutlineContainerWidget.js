@@ -51,8 +51,13 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( 
 
 	if ( added instanceof ve.dm.MWTemplateModel ) {
 		this.addTemplate( added );
+	} else if ( added instanceof ve.dm.MWTemplatePlaceholderModel ) {
+		var placeholder = new ve.ui.MWTransclusionOutlinePlaceholderWidget();
+		this.$element.append( placeholder.$element );
+	} else if ( added instanceof ve.dm.MWTransclusionContentModel ) {
+		var wikitextItem = new ve.ui.MWTransclusionOutlineWikitextWidget();
+		this.$element.append( wikitextItem.$element );
 	}
-	// TODO: and for wikitext snippets?
 };
 
 /* Methods */
@@ -63,7 +68,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( 
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.addTemplate = function ( template ) {
 	// FIXME: Respect order
-	var container = new ve.ui.MWTemplateOutlineTemplateWidget( {
+	var container = new ve.ui.MWTransclusionOutlineTemplateWidget( {
 		templateModel: template
 	} );
 

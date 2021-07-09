@@ -2149,9 +2149,11 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWDefinedTransclusionContextItem.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxLayout.js",
-				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlinePartWidget.js",
-				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineTemplateWidget.js",
-				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineContainerWidget.js"
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlinePartWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineTemplateWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineContainerWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlinePlaceholderWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineWikitextWidget.js"
 			],
 			"styles": [
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
