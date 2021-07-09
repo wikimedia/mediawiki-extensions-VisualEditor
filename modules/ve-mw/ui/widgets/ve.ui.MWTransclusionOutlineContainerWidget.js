@@ -22,10 +22,6 @@ ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineC
 	// Initialization
 	this.transclusionModel = config.transclusionModel;
 
-	// FIXME: This is an abstract base class, it should not be instantiated directly
-	this.containerLayout = new OO.ui.Layout();
-	this.$element.append( this.containerLayout.$element );
-
 	// Events
 	this.transclusionModel.connect( this, {
 		replace: 'onReplacePart'
@@ -71,6 +67,6 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addTemplate = function ( te
 		templateModel: template
 	} );
 
-	this.containerLayout.$element
+	this.$element
 		.append( container.$element );
 };
