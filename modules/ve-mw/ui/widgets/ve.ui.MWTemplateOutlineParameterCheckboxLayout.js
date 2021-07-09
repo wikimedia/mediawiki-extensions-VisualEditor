@@ -31,7 +31,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, this.checkbox, config );
 
 	// Initialization
-	this.$element.addClass( 've-ui-templateOutlineItem' );
+	this.$element.addClass( 've-ui-mwTransclusionOutlineItem' );
 
 	// Override base behaviors
 	// Unwire native label->input linkage, and replace with our custom click handler.

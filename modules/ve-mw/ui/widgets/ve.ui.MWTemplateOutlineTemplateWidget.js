@@ -39,12 +39,12 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		framed: false,
 		icon: 'parameter',
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		classes: [ 've-ui-templateOutlineItem' ]
+		classes: [ 've-ui-mwTransclusionOutlineItem' ]
 	} );
 
 	// FIXME: This is an abstract base class, it should not be instantiated directly
 	var templateLabel = new OO.ui.Layout( {
-		classes: [ 've-ui-templateOutlineTemplateLabel' ],
+		classes: [ 've-ui-mwTransclusionOutlineLabel' ],
 		content: [
 			new OO.ui.IconWidget( {
 				icon: 'puzzle'
@@ -67,8 +67,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		.append( templateLabel.$element, this.parameters.$element, addParameterButton.$element );
 
 	this.$element
-		.append( layout.$element )
-		.addClass( 've-ui-mwTemplateDialogOutlineTemplate' );
+		.append( layout.$element );
 };
 
 /* Inheritance */
