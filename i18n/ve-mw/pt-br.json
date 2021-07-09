@@ -367,7 +367,7 @@
 	"visualeditor-parameter-input-placeholder": "Nome do campo",
 	"visualeditor-parameter-search-more": "Mostrar {{PLURAL:$1|mais um campo|mais $1 campos}}",
 	"visualeditor-parameter-search-no-unused": "Sem campos não-utilizados",
-	"visualeditor-parameter-search-unknown": "Campo desconhecido",
+	"visualeditor-parameter-search-unknown": "(Campo desconhecido)",
 	"visualeditor-preference-betatempdisable": "Desabilitar temporariamente o editor visual enquanto ele está em beta",
 	"visualeditor-preference-core-description": "Ativar o Editor Visual. Ele não estará disponível nas páginas de discussão e em alguns espaços nominais.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",

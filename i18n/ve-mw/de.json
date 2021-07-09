@@ -354,7 +354,7 @@
 	"visualeditor-parameter-input-placeholder": "Feldname",
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|Ein weiteres Feld|$1 weitere Felder}} anzeigen",
 	"visualeditor-parameter-search-no-unused": "Keine unbenutzten Felder",
-	"visualeditor-parameter-search-unknown": "Unbekanntes Feld",
+	"visualeditor-parameter-search-unknown": "(Unbekanntes Feld)",
 	"visualeditor-preference-betatempdisable": "Visuellen Editor während der Beta-Phase deaktivieren",
 	"visualeditor-preference-core-description": "Den visuellen Editor aktivieren. Der Editor ist auf Diskussionsseiten und in einigen anderen Namensräumen nicht verfügbar.",
 	"visualeditor-preference-core-label": "Visuelles Bearbeiten",

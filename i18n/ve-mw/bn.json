@@ -329,7 +329,7 @@
 	"visualeditor-parameter-input-placeholder": "ক্ষেত্রের নাম",
 	"visualeditor-parameter-search-more": "আরও $1টি {{PLURAL:$1|ক্ষেত্র}} দেখাও",
 	"visualeditor-parameter-search-no-unused": "অব্যবহৃত ক্ষেত্র নেই",
-	"visualeditor-parameter-search-unknown": "অজানা ক্ষেত্র",
+	"visualeditor-parameter-search-unknown": "(অজানা ক্ষেত্র)",
 	"visualeditor-preference-betatempdisable": "দৃশ্যমান সম্পাদনা বেটা থাকাকালীন অবস্থায় সাময়িকভাবে এটি নিষ্ক্রিয় করুন",
 	"visualeditor-preference-core-description": "দৃশ্যমান সম্পাদক সক্রিয় করুন। এটি আলাপ পাতায় এবং অন্যান্য কিছু নামস্থানে উপলব্ধ হবে না।",
 	"visualeditor-preference-core-label": "দৃশ্যমান সম্পাদনা",

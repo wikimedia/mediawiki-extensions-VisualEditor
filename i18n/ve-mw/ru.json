@@ -383,7 +383,7 @@
 	"visualeditor-parameter-input-placeholder": "Имя поля",
 	"visualeditor-parameter-search-more": "Показать ещё $1 {{PLURAL:$1|поле|поля|полей}}",
 	"visualeditor-parameter-search-no-unused": "Нет неиспользованных полей",
-	"visualeditor-parameter-search-unknown": "Неизвестное поле",
+	"visualeditor-parameter-search-unknown": "(Неизвестное поле)",
 	"visualeditor-preference-betatempdisable": "Временно отключить визуальный редактор, пока он находится в бета-версии",
 	"visualeditor-preference-core-description": "Включить визуальный редактор. Он будет недоступен на страницах обсуждения и в некоторых других пространствах имён.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
