@@ -25,6 +25,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	var widget = this;
+	this.paramNames = [];
 	var checkboxes = this.templateModel
 		.getAllParametersOrdered()
 		.filter( function ( paramName ) {
@@ -32,8 +33,21 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			return paramName;
 		} )
 		.map( function ( paramName ) {
+			widget.paramNames.push( paramName );
 			return widget.createCheckbox( paramName );
 		} );
+
+	if ( checkboxes.length >= 1 ) {
+		this.searchWidget = new OO.ui.SearchInputWidget( {
+			placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' )
+		} ).connect( this, {
+			change: 'onFilterChange'
+		} );
+		this.infoWidget = new OO.ui.LabelWidget( {
+			label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
+			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
+		} ).toggle( false );
+	}
 
 	var addParameterButton = new ve.ui.MWTransclusionOutlineButtonWidget( {
 		icon: 'parameter',
@@ -46,6 +60,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 	this.$element
 		.append( this.parameters.$element, addParameterButton.$element );
+	if ( this.searchWidget ) {
+		this.$element.prepend( this.searchWidget.$element, this.infoWidget.$element );
+	}
 };
 
 /* Inheritance */
@@ -133,4 +150,38 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxSelect = function 
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameterButtonClick = function () {
 	// FIXME: This triggers a chain of events that (re)does way to much. Replace!
 	this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel ) );
+};
+
+/**
+ * Handles a parameter filter change event
+ *
+ * @param {string} data user input
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( data ) {
+
+	var widget = this;
+	this.infoWidget.toggle( false );
+
+	// hide all parameter names
+	this.paramNames.forEach( function ( name ) {
+		var paramCheckbox = widget.parameters.findItemFromData( name );
+		paramCheckbox.toggle( false );
+	} );
+
+	// find matches
+	data = data.toLowerCase();
+	var matches = this.paramNames.filter( function ( paramName ) {
+		return paramName.toLowerCase().indexOf( data ) !== -1;
+	} );
+
+	// display matches only
+	matches.forEach( function ( match ) {
+		var paramCheckbox = widget.parameters.findItemFromData( match );
+		paramCheckbox.toggle( true );
+	} );
+
+	// handle no results
+	if ( matches.length === 0 ) {
+		this.infoWidget.toggle( true );
+	}
 };
