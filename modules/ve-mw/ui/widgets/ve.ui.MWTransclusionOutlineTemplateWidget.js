@@ -9,21 +9,21 @@
  * @extends ve.ui.MWTransclusionOutlinePartWidget
  *
  * @constructor
- * @param {Object} config
- * @param {ve.dm.MWTemplateModel} config.templateModel
+ * @param {ve.dm.MWTemplateModel} template
+ * @param {Object} [config]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( config ) {
+ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template, config ) {
 	// Initialize config
 	config = $.extend( {
 		icon: 'puzzle',
-		label: config.templateModel.getSpec().getLabel()
+		label: template.getSpec().getLabel()
 	}, config );
 
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, config );
 
 	// Initialization
-	this.templateModel = config.templateModel.connect( this, {
+	this.templateModel = template.connect( this, {
 		add: 'onAddParameter',
 		remove: 'onRemoveParameter'
 	} );
