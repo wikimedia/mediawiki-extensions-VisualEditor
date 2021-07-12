@@ -1,6 +1,4 @@
 /*!
- * VisualEditor user interface MWTemplateOutlineTemplateWidget class.
- *
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
@@ -8,13 +6,13 @@
  * Container for template, as rendered in the template dialog sidebar.
  *
  * @class
- * @extends ve.ui.MWTemplateOutlinePartWidget
+ * @extends ve.ui.MWTransclusionOutlinePartWidget
  *
  * @constructor
  * @param {Object} config
  * @param {ve.dm.MWTemplateModel} config.templateModel
  */
-ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWidget( config ) {
+ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( config ) {
 	// Initialize config
 	config = $.extend( {
 		icon: 'puzzle',
@@ -22,7 +20,7 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 	}, config );
 
 	// Parent constructor
-	ve.ui.MWTemplateOutlineTemplateWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, config );
 
 	// Initialization
 	this.templateModel = config.templateModel.connect( this, {
@@ -57,13 +55,13 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplateOutlineTemplateWidget, ve.ui.MWTemplateOutlinePartWidget );
+OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusionOutlinePartWidget );
 
 /**
  * @param {string|ve.dm.MWParameterModel} parameter
  * @return {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
  */
-ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
 	var templateSpec = this.templateModel.getSpec(),
 		parameterModel = ( parameter instanceof ve.dm.MWParameterModel ) ?
 			parameter : this.templateModel.getParameter( parameter ),
@@ -89,7 +87,7 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.createCheckbox = function ( para
  *
  * @param {ve.dm.MWParameterModel} parameter
  */
-ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( parameter ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( parameter ) {
 	var paramName = parameter.getName(),
 		paramCheckbox = this.parameters.findItemFromData( paramName );
 
@@ -114,7 +112,7 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onAddParameter = function ( para
  *
  * @param {ve.dm.MWParameterModel} parameter
  */
-ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( parameter ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function ( parameter ) {
 	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
 	if ( paramCheckbox ) {
 		paramCheckbox.setSelected( false, true );
@@ -127,7 +125,7 @@ ve.ui.MWTemplateOutlineTemplateWidget.prototype.onRemoveParameter = function ( p
  * @param {string} data Parameter name
  * @param {boolean} checked New checkbox state
  */
-ve.ui.MWTemplateOutlineTemplateWidget.prototype.onCheckboxChange = function ( data, checked ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function ( data, checked ) {
 	var parameter = this.templateModel.getParameter( data );
 
 	if ( checked ) {

@@ -50,7 +50,7 @@
 	font-style: italic;
 }
 
-.ve-ui-mwTemplateOutlinePartWidget-header {
+.ve-ui-mwTransclusionOutlinePartWidget-header {
 	cursor: pointer;
 	font-weight: bold;
 	overflow: hidden;
@@ -59,11 +59,11 @@
 	text-overflow: ellipsis;
 }
 
-.ve-ui-mwTemplateOutlinePartWidget-header:hover {
+.ve-ui-mwTransclusionOutlinePartWidget-header:hover {
 	background-color: #eaecf0;
 }
 
-.ve-ui-mwTemplateOutlinePartWidget-header .oo-ui-iconElement-icon {
+.ve-ui-mwTransclusionOutlinePartWidget-header .oo-ui-iconElement-icon {
 	left: 11px;
 }
 
