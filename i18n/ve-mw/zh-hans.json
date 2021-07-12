@@ -33,6 +33,7 @@
 			"乌拉跨氪",
 			"予弦",
 			"夢蝶葬花",
+			"忒有钱",
 			"神樂坂秀吉",
 			"铁桶",
 			"飞舞回堂前"
@@ -374,7 +375,7 @@
 	"visualeditor-parameter-input-placeholder": "字段名称",
 	"visualeditor-parameter-search-more": "显示{{PLURAL:$1|另外$1个字段}}",
 	"visualeditor-parameter-search-no-unused": "没有未使用的字段",
-	"visualeditor-parameter-search-unknown": "未知字段",
+	"visualeditor-parameter-search-unknown": "（未知字段）",
 	"visualeditor-preference-betatempdisable": "暂时禁用正在测试中的可视化编辑器",
 	"visualeditor-preference-core-description": "启用可视化编辑器。它不能用于讨论页和某些其他名字空间。",
 	"visualeditor-preference-core-label": "可视化编辑",

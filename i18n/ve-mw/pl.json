@@ -367,7 +367,7 @@
 	"visualeditor-parameter-input-placeholder": "Nazwa pola",
 	"visualeditor-parameter-search-more": "Pokaż {{PLURAL:$1|kolejne pole|$1 kolejne pola|$1 kolejnych pól}}",
 	"visualeditor-parameter-search-no-unused": "Brak niewykorzystanych pól",
-	"visualeditor-parameter-search-unknown": "Nieznane pole",
+	"visualeditor-parameter-search-unknown": "(Nieznane pole)",
 	"visualeditor-preference-betatempdisable": "Tymczasowo wyłącz edytor wizualny (podczas gdy jest w wersji beta)",
 	"visualeditor-preference-core-description": "Uaktywnij edytor wizualny. Nie będzie on dostępny na stronach dyskusji i w niektórych przestrzeniach nazw.",
 	"visualeditor-preference-core-label": "Edycja w edytorze wizualnym",

@@ -165,6 +165,7 @@
 	"visualeditor-mweditmodeve-tool-current": "Visuell endring",
 	"visualeditor-mweditmodewt-popup-body": "Du kan byta attende til kjeldeendring kva tid som helst ved å klikka på dette ikonet.",
 	"visualeditor-mweditmodewt-popup-title": "Du har bytt til visuell endring",
+	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|bilete}}",
 	"visualeditor-mwgallerydialog-card-images": "Bilete",
 	"visualeditor-mwgallerydialog-card-options": "Val",
 	"visualeditor-mwgallerydialog-classes-field-label": "CSS-klassar",

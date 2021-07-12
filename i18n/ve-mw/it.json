@@ -322,7 +322,7 @@
 	"visualeditor-parameter-input-placeholder": "Nome campo",
 	"visualeditor-parameter-search-more": "Mostra {{PLURAL:$1|$1 altro campo|altri $1 campi}}",
 	"visualeditor-parameter-search-no-unused": "Senza campi inutilizzati",
-	"visualeditor-parameter-search-unknown": "Campo sconosciuto",
+	"visualeditor-parameter-search-unknown": "(Campo sconosciuto)",
 	"visualeditor-preference-betatempdisable": "Disattiva temporaneamente l'editor visuale mentre è in beta",
 	"visualeditor-preference-core-description": "Abilita l'editor visuale. Potrebbe non essere disponibile nelle pagine di discussione e in alcuni altri namespace.",
 	"visualeditor-preference-core-label": "Modifica visuale",
