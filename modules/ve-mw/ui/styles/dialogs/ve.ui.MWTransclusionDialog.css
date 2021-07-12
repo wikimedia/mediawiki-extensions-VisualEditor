@@ -50,6 +50,23 @@
 	font-style: italic;
 }
 
+.ve-ui-mwTemplateOutlinePartWidget-header {
+	cursor: pointer;
+	font-weight: bold;
+	overflow: hidden;
+	padding: 11px 0 11px 40px;
+	position: relative;
+	text-overflow: ellipsis;
+}
+
+.ve-ui-mwTemplateOutlinePartWidget-header:hover {
+	background-color: #eaecf0;
+}
+
+.ve-ui-mwTemplateOutlinePartWidget-header .oo-ui-iconElement-icon {
+	left: 11px;
+}
+
 .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
 	opacity: 0.51;
 }
@@ -98,20 +115,13 @@
 	display: inline-block;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem,
-.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineLabel {
+.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem {
 	display: block;
 	overflow: hidden;
 	right: 0;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	padding: 2px;
-}
-
-.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineLabel .oo-ui-labelWidget {
-	/* FIXME: padding kludged to roughly match the spec. */
-	padding: 11px 12px 11px 6px;
-	font-weight: bold;
 }
 
 .ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem .oo-ui-labelWidget {

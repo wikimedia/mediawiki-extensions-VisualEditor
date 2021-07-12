@@ -15,6 +15,12 @@
  * @param {ve.dm.MWTemplateModel} config.templateModel
  */
 ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWidget( config ) {
+	// Initialize config
+	config = $.extend( {
+		icon: 'puzzle',
+		label: config.templateModel.getSpec().getLabel()
+	}, config );
+
 	// Parent constructor
 	ve.ui.MWTemplateOutlineTemplateWidget.super.call( this, config );
 
@@ -42,24 +48,11 @@ ve.ui.MWTemplateOutlineTemplateWidget = function VeUiMWTemplateOutlineTemplateWi
 		classes: [ 've-ui-mwTransclusionOutlineItem' ]
 	} );
 
-	// FIXME: This is an abstract base class, it should not be instantiated directly
-	var templateLabel = new OO.ui.Layout( {
-		classes: [ 've-ui-mwTransclusionOutlineLabel' ],
-		content: [
-			new OO.ui.IconWidget( {
-				icon: 'puzzle'
-			} ),
-			new OO.ui.LabelWidget( {
-				label: config.templateModel.getSpec().getLabel()
-			} )
-		]
-	} );
-
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
 	this.$element
-		.append( templateLabel.$element, this.parameters.$element, addParameterButton.$element );
+		.append( this.parameters.$element, addParameterButton.$element );
 };
 
 /* Inheritance */
