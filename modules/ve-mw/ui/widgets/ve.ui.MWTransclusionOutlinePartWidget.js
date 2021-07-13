@@ -30,7 +30,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
 		// Note: There is no code that uses this. It just helps when manually inspecting the HTML.
 		.attr( 'data-transclusion-part-id', part.getId() )
-		.prepend( header.$element );
+		.append( header.$element );
 };
 
 /* Inheritance */
