@@ -20,7 +20,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	}, config );
 
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, template, config );
 
 	// Initialization
 	this.templateModel = template.connect( this, {

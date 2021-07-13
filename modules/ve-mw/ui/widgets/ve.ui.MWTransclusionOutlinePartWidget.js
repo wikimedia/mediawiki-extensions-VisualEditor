@@ -13,11 +13,12 @@
  * @extends OO.ui.Widget
  *
  * @constructor
+ * @param {ve.dm.MWTransclusionPartModel} part
  * @param {Object} [config]
  * @cfg {string} [icon='']
  * @cfg {string} [label]
  */
-ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( config ) {
+ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
 	// Parent constructor
 	ve.ui.MWTransclusionOutlinePartWidget.super.call( this, config );
 
@@ -25,11 +26,15 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	OO.ui.mixin.IconElement.call( this, config );
 	OO.ui.mixin.LabelElement.call( this, config );
 
+	this.id = part.getId();
+
 	this.$header = $( '<div>' )
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget-header' )
 		.prepend( this.$icon, this.$label );
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
+		// Note: There is no code that uses this. It just helps when manually inspecting the HTML.
+		.attr( 'data-transclusion-part-id', part.getId() )
 		.prepend( this.$header );
 };
 
@@ -40,3 +45,10 @@ OO.mixinClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.mixin.IconElement );
 OO.mixinClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.mixin.LabelElement );
 // TODO: Add OO.ui.mixin.AccessKeyedElement?
 // TODO: Add OO.ui.mixin.TitledElement?
+
+/**
+ * @return {string} Identifier of the {@see ve.dm.MWTransclusionPartModel} this widget represents
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.getId = function () {
+	return this.id;
+};

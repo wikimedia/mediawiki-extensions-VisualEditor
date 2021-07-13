@@ -21,7 +21,7 @@ ve.ui.MWTransclusionOutlinePlaceholderWidget = function VeUiMWTransclusionOutlin
 	}, config );
 
 	// Parent constructor
-	ve.ui.MWTransclusionOutlinePlaceholderWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlinePlaceholderWidget.super.call( this, placeholder, config );
 
 	this.placeholder = placeholder;
 };

@@ -26,9 +26,8 @@ ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineC
 
 	// Events
 	this.transclusionModel.connect( this, {
-		replace: 'onReplacePart'
-		// TODO
-		// change: 'onTransclusionModelChange'
+		replace: 'onReplacePart',
+		change: 'onTransclusionModelChange'
 	} );
 
 	this.$element.addClass( 've-ui-mwTransclusionOutlineContainerWidget' );
@@ -53,6 +52,24 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( 
 
 	if ( added ) {
 		this.addPartWidget( added );
+	}
+};
+
+/**
+ * @private
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange = function () {
+	var newOrder = this.transclusionModel.getParts();
+
+	for ( var i = 0; i < newOrder.length; i++ ) {
+		var expectedWidget = this.partWidgets[ newOrder[ i ].getId() ],
+			$expectedElement = expectedWidget && expectedWidget.$element,
+			$currentElement = this.$element.children().eq( i );
+
+		if ( !$currentElement.is( $expectedElement ) ) {
+			// Move each widget to the correct position if it wasn't there before
+			$currentElement.before( $expectedElement );
+		}
 	}
 };
 
