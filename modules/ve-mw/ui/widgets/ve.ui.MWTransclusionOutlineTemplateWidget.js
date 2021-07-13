@@ -38,7 +38,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	var addParameterButton = new ve.ui.MWTransclusionOutlineButtonWidget( {
 		icon: 'parameter',
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
-	} );
+	} )
+		.connect( this, { click: 'onAddParameterButtonClick' } );
 
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
@@ -130,4 +131,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function 
 			this.templateModel.removeParameter( parameter );
 		}
 	}
+};
+
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameterButtonClick = function () {
+	this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel ) );
 };
