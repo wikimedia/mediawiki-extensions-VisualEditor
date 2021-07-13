@@ -526,15 +526,16 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.loaded = true;
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 
+				dialog.$body.append( dialog.bookletLayout.$element );
 				if ( dialog.pocSidebar ) {
 					// TODO: bookletLayout will be deprecated.
-					dialog.$body.append( dialog.pocSidebar.$element );
-					dialog.bookletLayout.$element.find( '.oo-ui-outlineSelectWidget' )
-						.empty()
-						.append( dialog.pocSidebar.$element );
+					dialog.bookletLayout.outlinePanel.$element.prepend( $( '<div>' )
+						.addClass( 've-ui-mwTemplateDialog-pocSidebar-debug-container' )
+						.append(
+							dialog.pocSidebar.$element,
+							dialog.bookletLayout.outlineSelectWidget.$element
+						) );
 				}
-
-				dialog.$body.append( dialog.bookletLayout.$element );
 
 				dialog.bookletLayout.autoFocus = true;
 			} );

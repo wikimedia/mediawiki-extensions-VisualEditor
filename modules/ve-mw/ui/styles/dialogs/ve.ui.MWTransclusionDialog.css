@@ -50,6 +50,24 @@
 	font-style: italic;
 }
 
+.ve-ui-mwTemplateDialog-pocSidebar-debug-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 2.5em;
+	overflow: auto;
+}
+
+.ve-ui-mwTemplateDialog-pocSidebar-debug-container > .oo-ui-outlineSelectWidget {
+	height: auto;
+}
+
+.ve-ui-mwTemplateDialog-pocSidebar-debug-container > .ve-ui-mwTransclusionOutlineContainerWidget {
+	background-color: rgba( 0%, 100%, 0%, 0.1 );
+	outline: 1px solid #0f0;
+}
+
 .ve-ui-mwTransclusionOutlinePartWidget-header {
 	cursor: pointer;
 	font-weight: bold;

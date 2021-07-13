@@ -30,6 +30,8 @@ ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineC
 		// TODO
 		// change: 'onTransclusionModelChange'
 	} );
+
+	this.$element.addClass( 've-ui-mwTransclusionOutlineContainerWidget' );
 };
 
 /* Inheritance */
