@@ -133,15 +133,37 @@
 	display: inline-block;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem {
+.ve-ui-mwTransclusionOutlineItem {
 	display: block;
 	overflow: hidden;
-	right: 0;
+	padding-bottom: 8px;
+	padding-left: 24px;
+	padding-top: 8px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	padding: 2px;
 }
 
-.ve-ui-mwTemplateDialog .ve-ui-mwTransclusionOutlineItem .oo-ui-labelWidget {
-	display: inline;
+.ve-ui-mwTransclusionOutlineItem.oo-ui-fieldLayout.oo-ui-fieldLayout-align-inline {
+	margin-top: 0;
+}
+
+.ve-ui-mwTransclusionOutlineItem,
+.ve-ui-mwTransclusionOutlineItem label {
+	cursor: pointer;
+}
+
+.ve-ui-mwTransclusionOutlineItem:hover {
+	background-color: #eaecf0;
+}
+
+.ve-ui-mwTransclusionOutlineItem .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [ type='checkbox' ]:hover + span {
+	border-width: 2px;
+}
+
+.ve-ui-mwTransclusionOutlineItem.oo-ui-buttonWidget {
+	padding: 0;
+}
+
+.ve-ui-mwTransclusionOutlineItem.oo-ui-buttonWidget a {
+	display: block;
 }
