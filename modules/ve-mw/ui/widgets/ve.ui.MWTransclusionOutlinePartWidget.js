@@ -24,22 +24,37 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 
 	this.id = part.getId();
 
-	var header = new ve.ui.MWTransclusionOutlineButtonWidget( config );
+	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
+		.connect( this, { click: 'onHeaderClick' } );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
 		// Note: There is no code that uses this. It just helps when manually inspecting the HTML.
 		.attr( 'data-transclusion-part-id', part.getId() )
-		.append( header.$element );
+		.append( this.header.$element );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 
+/* Events */
+
+/**
+ * @event partHeaderClick
+ * @param {string} partId
+ */
+
 /**
  * @return {string} Identifier of the {@see ve.dm.MWTransclusionPartModel} this widget represents
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.getId = function () {
 	return this.id;
+};
+
+/**
+ * @fires partHeaderClick
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderClick = function () {
+	this.emit( 'partHeaderClick', this.id );
 };

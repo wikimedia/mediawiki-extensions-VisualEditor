@@ -470,9 +470,10 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			this.bookletLayout.autoFocus = false;
 
 			if ( this.isNewSidebar ) {
-				this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget( {
-					transclusionModel: this.transclusionModel
-				} );
+				this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
+					this.transclusionModel,
+					this.bookletLayout
+				);
 			}
 
 			// Initialization

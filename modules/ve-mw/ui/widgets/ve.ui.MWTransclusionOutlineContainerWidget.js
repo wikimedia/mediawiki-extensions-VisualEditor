@@ -11,17 +11,18 @@
  * @extends OO.ui.Widget
  *
  * @constructor
- * @param {Object} config
- * @param {ve.dm.MWTransclusionModel} config.transclusionModel
+ * @param {ve.dm.MWTransclusionModel} transclusionModel
+ * @param {OO.ui.BookletLayout} bookletLayout
  * @property {Object.<string,ve.ui.MWTransclusionOutlinePartWidget>} partWidgets Map of top-level
  *  items currently visible in this container, indexed by part id
  */
-ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( config ) {
+ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( transclusionModel, bookletLayout ) {
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this );
 
 	// Initialization
-	this.transclusionModel = config.transclusionModel;
+	this.transclusionModel = transclusionModel;
+	this.bookletLayout = bookletLayout;
 	this.partWidgets = {};
 
 	// Events
@@ -104,7 +105,16 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
 	}
 
+	widget.connect( this, { partHeaderClick: 'onPartHeaderClick' } );
+
 	this.partWidgets[ part.getId() ] = widget;
 	// FIXME: Respect order
 	this.$element.append( widget.$element );
+};
+
+/**
+ * @param {string} partId
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartHeaderClick = function ( partId ) {
+	this.bookletLayout.setPage( partId );
 };
