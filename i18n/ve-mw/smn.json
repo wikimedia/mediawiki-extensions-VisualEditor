@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Seipinne",
 			"Trondtr",
 			"Yupik"
 		]
@@ -20,6 +21,8 @@
 	"visualeditor-dialog-meta-languages-section": "Kielah",
 	"visualeditor-languages-tool": "Kielah",
 	"visualeditor-linkinspector-educationpopup-title": "Liiŋkah",
+	"visualeditor-mwgallerydialog-classes-field-label": "CSS-luokah",
+	"visualeditor-mwgallerydialog-styles-field-label": "CSS-stiijlah",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Kielâ",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kielah"
 }

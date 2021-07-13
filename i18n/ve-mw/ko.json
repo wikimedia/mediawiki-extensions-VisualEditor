@@ -330,7 +330,7 @@
 	"visualeditor-parameter-input-placeholder": "필드 이름",
 	"visualeditor-parameter-search-more": "{{PLURAL:$1|필드 하나 더|필드 $1개 더}} 보기",
 	"visualeditor-parameter-search-no-unused": "사용하지 않은 필드가 없습니다",
-	"visualeditor-parameter-search-unknown": "알 수 없는 변수",
+	"visualeditor-parameter-search-unknown": "(알 수 없는 필드)",
 	"visualeditor-preference-betatempdisable": "베타 동안 시각편집기를 일시적으로 비활성화",
 	"visualeditor-preference-core-description": "시각편집기를 활성화합니다. 토론 문서와 몇몇 다른 이름공간에서는 사용할 수 없습니다.",
 	"visualeditor-preference-core-label": "시각편집기",

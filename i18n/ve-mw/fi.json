@@ -200,6 +200,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Muokkaa: $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Mallineen sisältö",
 	"visualeditor-dialog-transclusion-template-search": "Mallinehaku",
+	"visualeditor-dialog-transclusion-template-search-help": "Löydä lisättävä malline hakemalla tunnistavaa avainsanaa. Mallineet, joissa on kuvaus toimivat todennäköisesti paremmin tässä muokkaimessa (visuaalinen muokkain)",
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Palataanko takaisin hakuun?",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Jatka muokkaamista",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Poista malline",
