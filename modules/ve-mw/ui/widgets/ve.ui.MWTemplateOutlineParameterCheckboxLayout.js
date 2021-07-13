@@ -11,7 +11,11 @@
  * @extends OO.ui.FieldLayout
  *
  * @constructor
- * @param {Object} [config] Configuration options
+ * @param {Object} config
+ * @cfg {string} data Parameter name
+ * @cfg {string} label
+ * @cfg {boolean} [required]
+ * @cfg {boolean} [selected]
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineParameterCheckboxLayout( config ) {
 	config = config || {};
@@ -49,13 +53,13 @@ OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.FieldLayo
 
 /**
  * @event change
- * @param {string} name Parameter name
+ * @param {string} paramName
  * @param {boolean} checked New checkbox state
  */
 
 /**
  * @event select
- * @param {string} name Parameter name
+ * @param {string} paramName
  */
 
 /* Methods */
@@ -77,6 +81,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onLabelClick = function
 	if ( !this.fieldWidget.isSelected() ) {
 		this.fieldWidget.setSelected( true );
 	}
+	// FIXME: Move up into the if()?
 	this.emit( 'select', this.getData() );
 };
 

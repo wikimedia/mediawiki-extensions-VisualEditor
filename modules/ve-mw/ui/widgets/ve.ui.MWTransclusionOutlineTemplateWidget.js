@@ -29,7 +29,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		.getAllParametersOrdered()
 		.filter( function ( paramName ) {
 			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
-			return paramName !== '';
+			return paramName;
 		} )
 		.map( function ( paramName ) {
 			return widget.createCheckbox( paramName );
@@ -53,26 +53,20 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusionOutlinePartWidget );
 
 /**
- * @param {string|ve.dm.MWParameterModel} parameter
+ * @param {string} paramName
  * @return {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( parameter ) {
-	var templateSpec = this.templateModel.getSpec(),
-		parameterModel = ( parameter instanceof ve.dm.MWParameterModel ) ?
-			parameter : this.templateModel.getParameter( parameter ),
-		isPresent = !!parameterModel;
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( paramName ) {
+	var spec = this.templateModel.getSpec();
 
-	if ( !parameterModel ) {
-		// TODO: Streamline, don't create a temporary parameter model?
-		parameterModel = new ve.dm.MWParameterModel( this.templateModel, parameter );
-	}
 	return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
-		required: parameterModel.isRequired(),
-		label: templateSpec.getParameterLabel( parameterModel.getName() ),
-		data: parameterModel.getName(),
-		selected: isPresent
+		required: spec.isParameterRequired( paramName ),
+		label: spec.getParameterLabel( paramName ),
+		data: paramName,
+		selected: this.templateModel.hasParameter( paramName )
 	} ).connect( this, {
-		change: 'onCheckboxChange'
+		change: 'onCheckboxChange',
+		select: 'onCheckboxSelect'
 	} );
 };
 
@@ -80,24 +74,20 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
  * Handles a template model add event {@see ve.dm.MWTemplateModel}.
  * Triggered when a parameter is added to the template model.
  *
- * @param {ve.dm.MWParameterModel} parameter
+ * @param {ve.dm.MWParameterModel} param
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( parameter ) {
-	var paramName = parameter.getName(),
-		paramCheckbox = this.parameters.findItemFromData( paramName );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( param ) {
+	var paramName = param.getName(),
+		checkbox = this.parameters.findItemFromData( paramName );
 
-	if ( paramName === '' ) {
-		// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
-		return;
-	}
-
-	if ( !paramCheckbox ) {
+	// All parameters known via the spec already have a checkbox
+	if ( checkbox ) {
+		checkbox.setSelected( true, true );
+	} else if ( paramName ) {
 		this.parameters.addItems(
-			this.createCheckbox( parameter ),
+			[ this.createCheckbox( paramName ) ],
 			this.templateModel.getAllParametersOrdered().indexOf( paramName )
 		);
-	} else {
-		paramCheckbox.setSelected( true, true );
 	}
 };
 
@@ -105,34 +95,42 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
  * Handles a template model remove event {@see ve.dm.MWTemplateModel}.
  * Triggered when a parameter is removed from the template model.
  *
- * @param {ve.dm.MWParameterModel} parameter
+ * @param {ve.dm.MWParameterModel} param
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function ( parameter ) {
-	var paramCheckbox = this.parameters.findItemFromData( parameter.getName() );
-	if ( paramCheckbox ) {
-		paramCheckbox.setSelected( false, true );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function ( param ) {
+	var checkbox = this.parameters.findItemFromData( param.getName() );
+	if ( checkbox ) {
+		checkbox.setSelected( false, true );
 	}
 };
 
 /**
  * Handles a parameter checkbox change event {@see ve.ui.MWTemplateOutlineParameterCheckboxLayout}
  *
- * @param {string} data Parameter name
+ * @param {string} paramName
  * @param {boolean} checked New checkbox state
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function ( data, checked ) {
-	var parameter = this.templateModel.getParameter( data );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function ( paramName, checked ) {
+	var param = this.templateModel.getParameter( paramName );
+	if ( !checked ) {
+		this.templateModel.removeParameter( param );
+	} else if ( !param ) {
+		this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel, paramName ) );
+	}
+};
 
-	if ( checked ) {
-		parameter = parameter || new ve.dm.MWParameterModel( this.templateModel, data );
-		this.templateModel.addParameter( parameter );
-	} else {
-		if ( parameter ) {
-			this.templateModel.removeParameter( parameter );
-		}
+/**
+ * @param {string} paramName
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxSelect = function ( paramName ) {
+	var param = this.templateModel.getParameter( paramName );
+	if ( param ) {
+		// FIXME: This triggers a chain of events that (re)does way to much. Replace!
+		this.templateModel.addParameter( param );
 	}
 };
 
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameterButtonClick = function () {
+	// FIXME: This triggers a chain of events that (re)does way to much. Replace!
 	this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel ) );
 };

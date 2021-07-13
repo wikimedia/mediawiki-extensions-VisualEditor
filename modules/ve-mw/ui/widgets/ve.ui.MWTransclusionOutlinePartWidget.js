@@ -22,7 +22,9 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	// Parent constructor
 	ve.ui.MWTransclusionOutlinePartWidget.super.call( this, config );
 
-	this.id = part.getId();
+	// FIXME: Use config.data and OO.ui.Element.getData() instead?
+	// Warning, there is already config.id and this.elementId!
+	this.partId = part.getId();
 
 	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
 		.connect( this, { click: 'onHeaderClick' } );
@@ -48,13 +50,13 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /**
  * @return {string} Identifier of the {@see ve.dm.MWTransclusionPartModel} this widget represents
  */
-ve.ui.MWTransclusionOutlinePartWidget.prototype.getId = function () {
-	return this.id;
+ve.ui.MWTransclusionOutlinePartWidget.prototype.getPartId = function () {
+	return this.partId;
 };
 
 /**
  * @fires partHeaderClick
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderClick = function () {
-	this.emit( 'partHeaderClick', this.id );
+	this.emit( 'partHeaderClick', this.partId );
 };

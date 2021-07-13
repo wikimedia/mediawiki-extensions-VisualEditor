@@ -245,13 +245,20 @@ ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
  * @fires change
  */
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
-	var name = param.getName();
-	this.orderedParameterNames = null;
-	this.params[ name ] = param;
-	this.spec.fillFromTemplate();
-	param.connect( this, { change: [ 'emit', 'change' ] } );
+	var name = param.getName(),
+		exists = name in this.params;
+	if ( !exists ) {
+		this.orderedParameterNames = null;
+		this.params[ name ] = param;
+		this.spec.fillFromTemplate();
+		param.connect( this, { change: [ 'emit', 'change' ] } );
+	}
+	// FIXME: This should be skipped as well, but is currently needed for the hacks in
+	//  {@see ve.ui.MWTransclusionOutlineTemplateWidget}
 	this.emit( 'add', param );
-	this.emit( 'change' );
+	if ( !exists ) {
+		this.emit( 'change' );
+	}
 };
 
 /**

@@ -1,6 +1,6 @@
 /**
- * Generic button-like widget for items in the template dialog sidebar. See {OO.ui.ButtonWidget} for
- * inspiration.
+ * Generic button-like widget for items in the template dialog sidebar. See
+ * {@see OO.ui.ButtonWidget} for inspiration.
  *
  * @class
  * @extends OO.ui.Widget
@@ -20,6 +20,9 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 	} );
 	OO.ui.mixin.IconElement.call( this, config );
 	OO.ui.mixin.LabelElement.call( this, config );
+	OO.ui.mixin.TabIndexedElement.call( this, ve.extendObject( {
+		$tabIndexed: this.$button
+	}, config ) );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlineButtonWidget' )
@@ -33,5 +36,6 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.ButtonElemen
 OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.IconElement );
 OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.LabelElement );
 // TODO: Add OO.ui.mixin.TitledElement?
-// TODO: Add OO.ui.mixin.TabIndexedElement?
+// TODO: Add OO.ui.mixin.FlaggedElement?
+OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.TabIndexedElement );
 // TODO: Add OO.ui.mixin.AccessKeyedElement?
