@@ -15,7 +15,7 @@
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineParameterCheckboxLayout( config ) {
 	config = config || {};
-	config = $.extend( { align: 'inline' }, config );
+	config = ve.extendObject( { align: 'inline' }, config );
 
 	this.checkbox = new OO.ui.CheckboxInputWidget( {
 		title: config.required ? ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) : null,

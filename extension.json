@@ -2149,6 +2149,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWDefinedTransclusionContextItem.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTemplateOutlineParameterCheckboxLayout.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineButtonWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlinePartWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineTemplateWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineContainerWidget.js",

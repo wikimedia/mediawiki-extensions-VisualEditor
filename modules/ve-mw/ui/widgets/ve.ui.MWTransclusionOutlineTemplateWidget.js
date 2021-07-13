@@ -10,17 +10,13 @@
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template
- * @param {Object} [config]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template, config ) {
-	// Initialize config
-	config = $.extend( {
+ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template ) {
+	// Parent constructor
+	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, template, {
 		icon: 'puzzle',
 		label: template.getSpec().getLabel()
-	}, config );
-
-	// Parent constructor
-	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, template, config );
+	} );
 
 	// Initialization
 	this.templateModel = template.connect( this, {
@@ -39,11 +35,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			return widget.createCheckbox( paramName );
 		} );
 
-	var addParameterButton = new OO.ui.ButtonWidget( {
-		framed: false,
+	var addParameterButton = new ve.ui.MWTransclusionOutlineButtonWidget( {
 		icon: 'parameter',
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
-		classes: [ 've-ui-mwTransclusionOutlineItem' ]
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 	} );
 
 	this.parameters = new OO.ui.FieldsetLayout( {
