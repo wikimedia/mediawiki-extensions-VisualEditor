@@ -25,7 +25,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	var widget = this;
-	this.paramNames = [];
 	var checkboxes = this.templateModel
 		.getAllParametersOrdered()
 		.filter( function ( paramName ) {
@@ -33,7 +32,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			return paramName;
 		} )
 		.map( function ( paramName ) {
-			widget.paramNames.push( paramName );
 			return widget.createCheckbox( paramName );
 		} );
 
@@ -101,6 +99,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
 	if ( checkbox ) {
 		checkbox.setSelected( true, true );
 	} else if ( paramName ) {
+		this.searchWidget.setValue( '' );
 		this.parameters.addItems(
 			[ this.createCheckbox( paramName ) ],
 			this.templateModel.getAllParametersOrdered().indexOf( paramName )
@@ -153,35 +152,39 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameterButtonClick = 
 };
 
 /**
- * Handles a parameter filter change event
+ * Narrows the list of checkboxes down to parameters that match the user's input. The search
+ * algorithm is modelled after {@see ve.ui.MWParameterSearchWidget.buildIndex}. We search the
+ * parameter's primary name, aliases, label, and description. But not e.g. the example value.
  *
- * @param {string} data user input
+ * @param {string} query user input
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( data ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( query ) {
+	var spec = this.templateModel.getSpec(),
+		checkboxes = this.parameters,
+		nothingFound = true;
 
-	var widget = this;
-	this.infoWidget.toggle( false );
+	query = query.trim().toLowerCase();
 
-	// hide all parameter names
-	this.paramNames.forEach( function ( name ) {
-		var paramCheckbox = widget.parameters.findItemFromData( name );
-		paramCheckbox.toggle( false );
+	// Note: We can't really cache this because the list of know parameters can change any time
+	this.templateModel.getAllParametersOrdered().forEach( function ( paramName ) {
+		var checkbox = checkboxes.findItemFromData( paramName );
+		if ( !checkbox ) {
+			return;
+		}
+
+		var placesToSearch = [
+			spec.getPrimaryParameterName( paramName ),
+			spec.getParameterLabel( paramName ),
+			spec.getParameterDescription( paramName )
+		].concat( spec.getParameterAliases( paramName ) );
+
+		var foundSomeMatch = placesToSearch.some( function ( term ) {
+			return term && term.toLowerCase().indexOf( query ) !== -1;
+		} );
+
+		checkbox.toggle( foundSomeMatch );
+		nothingFound = nothingFound && !foundSomeMatch;
 	} );
 
-	// find matches
-	data = data.toLowerCase();
-	var matches = this.paramNames.filter( function ( paramName ) {
-		return paramName.toLowerCase().indexOf( data ) !== -1;
-	} );
-
-	// display matches only
-	matches.forEach( function ( match ) {
-		var paramCheckbox = widget.parameters.findItemFromData( match );
-		paramCheckbox.toggle( true );
-	} );
-
-	// handle no results
-	if ( matches.length === 0 ) {
-		this.infoWidget.toggle( true );
-	}
+	this.infoWidget.toggle( nothingFound );
 };
