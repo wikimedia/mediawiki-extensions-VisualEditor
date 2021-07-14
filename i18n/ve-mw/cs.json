@@ -29,6 +29,7 @@
 			"Teslaton",
 			"Vojtěch Dostál",
 			"Walter Klosse",
+			"YjM",
 			"ශ්වෙත"
 		]
 	},
@@ -356,7 +357,7 @@
 	"visualeditor-parameter-input-placeholder": "Jméno pole",
 	"visualeditor-parameter-search-more": "Zobrazit $1 {{PLURAL:$1|další pole|další pole|dalších polí}}",
 	"visualeditor-parameter-search-no-unused": "Žádná nevyužitá pole",
-	"visualeditor-parameter-search-unknown": "Neznámé pole",
+	"visualeditor-parameter-search-unknown": "(Neznámé pole)",
 	"visualeditor-preference-betatempdisable": "Dočasně vypnout Vizuální editor, je-li v beta verzi",
 	"visualeditor-preference-core-description": "Povolit Vizuální editor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
