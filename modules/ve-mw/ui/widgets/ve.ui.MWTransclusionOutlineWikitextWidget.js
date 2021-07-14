@@ -4,17 +4,13 @@
  *
  * @constructor
  * @param {ve.dm.MWTransclusionContentModel} content
- * @param {Object} [config]
  */
-ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWikitextWidget( content, config ) {
-	// Initialize config
-	config = $.extend( {
+ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWikitextWidget( content ) {
+	// Parent constructor
+	ve.ui.MWTransclusionOutlineWikitextWidget.super.call( this, content, {
 		icon: 'wikiText',
 		label: ve.msg( 'visualeditor-dialog-transclusion-content' )
-	}, config );
-
-	// Parent constructor
-	ve.ui.MWTransclusionOutlineWikitextWidget.super.call( this, content, config );
+	} );
 
 	this.content = content;
 };

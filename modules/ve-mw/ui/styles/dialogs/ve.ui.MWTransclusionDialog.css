@@ -68,7 +68,7 @@
 	outline: 1px solid #0f0;
 }
 
-.ve-ui-mwTransclusionOutlinePartWidget-header {
+.ve-ui-mwTransclusionOutlineButtonWidget {
 	cursor: pointer;
 	font-weight: bold;
 	overflow: hidden;
@@ -77,11 +77,11 @@
 	text-overflow: ellipsis;
 }
 
-.ve-ui-mwTransclusionOutlinePartWidget-header:hover {
+.ve-ui-mwTransclusionOutlineButtonWidget:hover {
 	background-color: #eaecf0;
 }
 
-.ve-ui-mwTransclusionOutlinePartWidget-header .oo-ui-iconElement-icon {
+.ve-ui-mwTransclusionOutlineButtonWidget .oo-ui-iconElement-icon {
 	left: 11px;
 }
 
@@ -158,12 +158,4 @@
 
 .ve-ui-mwTransclusionOutlineItem .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [ type='checkbox' ]:hover + span {
 	border-width: 2px;
-}
-
-.ve-ui-mwTransclusionOutlineItem.oo-ui-buttonWidget {
-	padding: 0;
-}
-
-.ve-ui-mwTransclusionOutlineItem.oo-ui-buttonWidget a {
-	display: block;
 }
