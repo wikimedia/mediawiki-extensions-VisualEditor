@@ -14,7 +14,7 @@ ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWi
 	}, config );
 
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineWikitextWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlineWikitextWidget.super.call( this, content, config );
 
 	this.content = content;
 };
