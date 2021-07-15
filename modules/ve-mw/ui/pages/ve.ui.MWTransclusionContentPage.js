@@ -19,6 +19,8 @@
  * @cfg {boolean} [isReadOnly] Page is read-only
  */
 ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( content, name, config ) {
+	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
+
 	// Configuration initialization
 	config = ve.extendObject( {
 		scrollable: false
@@ -47,7 +49,7 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		.addClass( 've-ui-mwTransclusionContentPage' )
 		.append( this.valueFieldset.$element );
 
-	if ( !config.isReadOnly ) {
+	if ( !config.isReadOnly && !veConfig.transclusionDialogNewSidebar ) {
 		var removeButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			icon: 'trash',

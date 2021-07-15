@@ -19,6 +19,8 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( parameter, name, config ) {
+	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
+
 	// Configuration initialization
 	config = ve.extendObject( {
 		scrollable: false
@@ -41,15 +43,6 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 			showAll: 'onParameterShowAll'
 		} );
 
-	this.removeButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'trash',
-		title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
-		flags: [ 'destructive' ],
-		classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
-	} )
-		.connect( this, { click: 'onRemoveButtonClick' } );
-
 	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' ),
 		icon: 'parameter',
@@ -62,7 +55,20 @@ ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( para
 	// Initialization
 	this.$element
 		.addClass( 've-ui-mwParameterPlaceholderPage' )
-		.append( this.addParameterFieldset.$element, this.removeButton.$element );
+		.append( this.addParameterFieldset.$element );
+
+	if ( !veConfig.transclusionDialogNewSidebar ) {
+		var removeButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'trash',
+			title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
+			flags: [ 'destructive' ],
+			classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
+		} )
+			.connect( this, { click: 'onRemoveButtonClick' } );
+
+		this.$element.append( removeButton.$element );
+	}
 };
 
 /* Inheritance */
