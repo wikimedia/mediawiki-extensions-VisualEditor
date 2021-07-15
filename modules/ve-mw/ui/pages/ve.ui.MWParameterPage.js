@@ -157,8 +157,11 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		this.$actions.append( this.infoButton.$element );
 	}
 
-	if ( !this.parameter.isRequired() && !config.readOnly ) {
-		this.removeButton = new OO.ui.ButtonWidget( {
+	if ( !this.parameter.isRequired() &&
+		!config.readOnly &&
+		!veConfig.transclusionDialogNewSidebar
+	) {
+		var removeButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			icon: 'trash',
 			title: ve.msg( 'visualeditor-dialog-transclusion-remove-param' ),
@@ -167,7 +170,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		} )
 			.connect( this, { click: 'onRemoveButtonClick' } );
 
-		this.$actions.append( this.removeButton.$element );
+		this.$actions.append( removeButton.$element );
 	}
 
 	// Events

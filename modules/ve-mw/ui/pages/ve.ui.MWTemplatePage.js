@@ -87,7 +87,9 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.append( this.infoFieldset.$element );
 
 	if ( !config.isReadOnly ) {
-		if ( !veConfig.transclusionDialogBackButton ) {
+		if ( !veConfig.transclusionDialogBackButton &&
+			!veConfig.transclusionDialogNewSidebar
+		) {
 			var removeButton = new OO.ui.ButtonWidget( {
 				framed: false,
 				icon: 'trash',
