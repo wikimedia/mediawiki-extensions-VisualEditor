@@ -29,3 +29,10 @@
 .ve-ui-mwParameterPage-inlineDescription {
 	position: relative;
 }
+
+.ve-ui-mwParameterPage-undocumentedLabel {
+	margin-left: 0.4em;
+	font-size: 13px;
+	font-style: italic;
+	color: #72777d;
+}
