@@ -11,25 +11,17 @@
  * @extends OO.ui.Widget
  *
  * @constructor
- * @param {ve.dm.MWTransclusionModel} transclusionModel
  * @param {OO.ui.BookletLayout} bookletLayout
  * @property {Object.<string,ve.ui.MWTransclusionOutlinePartWidget>} partWidgets Map of top-level
  *  items currently visible in this container, indexed by part id
  */
-ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( transclusionModel, bookletLayout ) {
+ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( bookletLayout ) {
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this );
 
 	// Initialization
-	this.transclusionModel = transclusionModel;
 	this.bookletLayout = bookletLayout;
 	this.partWidgets = {};
-
-	// Events
-	this.transclusionModel.connect( this, {
-		replace: 'onReplacePart',
-		change: 'onTransclusionModelChange'
-	} );
 
 	this.$element.addClass( 've-ui-mwTransclusionOutlineContainerWidget' );
 };
@@ -41,26 +33,26 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @private
  * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
+ * @param {number} [newPosition]
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( removed, added ) {
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( removed, added, newPosition ) {
 	if ( removed ) {
 		this.removePartWidget( removed );
 	}
 	// TODO: reselect if active part was in a removed template
 
 	if ( added ) {
-		this.addPartWidget( added );
+		this.addPartWidget( added, newPosition );
 	}
 };
 
 /**
- * @private
+ * @param {ve.dm.MWTransclusionModel} transclusionModel
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange = function () {
-	var newOrder = this.transclusionModel.getParts();
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange = function ( transclusionModel ) {
+	var newOrder = transclusionModel.getParts();
 
 	for ( var i = 0; i < newOrder.length; i++ ) {
 		var expectedWidget = this.partWidgets[ newOrder[ i ].getId() ],
@@ -93,8 +85,9 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function
 /**
  * @private
  * @param {ve.dm.MWTransclusionPartModel} part
+ * @param {number} [newPosition]
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( part ) {
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( part, newPosition ) {
 	var widget;
 
 	if ( part instanceof ve.dm.MWTemplateModel ) {
@@ -108,8 +101,11 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 	widget.connect( this, { partHeaderClick: 'onPartHeaderClick' } );
 
 	this.partWidgets[ part.getId() ] = widget;
-	// FIXME: Respect order
-	this.$element.append( widget.$element );
+	if ( typeof newPosition === 'number' && newPosition < this.$element.children().length ) {
+		this.$element.children().eq( newPosition ).before( widget.$element );
+	} else {
+		this.$element.append( widget.$element );
+	}
 };
 
 /**

@@ -31,6 +31,8 @@ OO.inheritClass( ve.dm.MWTransclusionContentModel, ve.dm.MWTransclusionPartModel
 /* Events */
 
 /**
+ * Emitted when the wikitext changed.
+ *
  * @event change
  */
 
@@ -40,8 +42,10 @@ OO.inheritClass( ve.dm.MWTransclusionContentModel, ve.dm.MWTransclusionPartModel
  * @param {string} wikitext
  */
 ve.dm.MWTransclusionContentModel.prototype.setWikitext = function ( wikitext ) {
-	this.wikitext = wikitext;
-	this.emit( 'change' );
+	if ( this.wikitext !== wikitext ) {
+		this.wikitext = wikitext;
+		this.emit( 'change' );
+	}
 };
 
 /**

@@ -46,13 +46,24 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
 /* Events */
 
 /**
+ * Emitted when a new parameter was added to the template.
+ *
  * @event add
  * @param {ve.dm.MWParameterModel} param Added param
  */
 
 /**
+ * Emitted when a parameter was removed from the template.
+ *
  * @event remove
  * @param {ve.dm.MWParameterModel} param Removed param
+ */
+
+/**
+ * Emitted when anything changed, e.g. a parameter was added or removed, or a parameter's value
+ * edited.
+ *
+ * @event change
  */
 
 /* Static Methods */
@@ -251,6 +262,8 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 		this.orderedParameterNames = null;
 		this.params[ name ] = param;
 		this.spec.fillFromTemplate();
+		// This forwards cange events from the nested ve.dm.MWParameterModel upwards. The array
+		// syntax is a way to call `this.emit( 'change' )`.
 		param.connect( this, { change: [ 'emit', 'change' ] } );
 	}
 	// FIXME: This should be skipped as well, but is currently needed for the hacks in

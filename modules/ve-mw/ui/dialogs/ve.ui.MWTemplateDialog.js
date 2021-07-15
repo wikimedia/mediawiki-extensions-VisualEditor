@@ -476,9 +476,12 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					this.pocSidebar.$element.remove();
 				}
 				this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
-					this.transclusionModel,
 					this.bookletLayout
 				);
+				this.transclusionModel.connect( this.pocSidebar, {
+					replace: 'onReplacePart',
+					change: [ 'onTransclusionModelChange', this.transclusionModel ]
+				} );
 			}
 
 			// Initialization
