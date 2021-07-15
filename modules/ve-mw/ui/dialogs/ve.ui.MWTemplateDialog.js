@@ -470,6 +470,11 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			this.bookletLayout.autoFocus = false;
 
 			if ( this.isNewSidebar ) {
+				// FIXME: This is created at the wrong time. That's why we run into the situation
+				//  where an old instance exists. Should be in initialize().
+				if ( this.pocSidebar ) {
+					this.pocSidebar.$element.remove();
+				}
 				this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
 					this.transclusionModel,
 					this.bookletLayout
@@ -530,12 +535,17 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.$body.append( dialog.bookletLayout.$element );
 				if ( dialog.pocSidebar ) {
 					// TODO: bookletLayout will be deprecated.
-					dialog.bookletLayout.outlinePanel.$element.prepend( $( '<div>' )
-						.addClass( 've-ui-mwTemplateDialog-pocSidebar-debug-container' )
-						.append(
-							dialog.pocSidebar.$element,
-							dialog.bookletLayout.outlineSelectWidget.$element
-						) );
+					var $debugContainer = dialog.bookletLayout.outlinePanel.$element
+						.children( '.ve-ui-mwTemplateDialog-pocSidebar-debug-container' );
+					if ( !$debugContainer.length ) {
+						$debugContainer = $( '<div>' )
+							.addClass( 've-ui-mwTemplateDialog-pocSidebar-debug-container' )
+							.prependTo( dialog.bookletLayout.outlinePanel.$element );
+					}
+					$debugContainer.append(
+						dialog.pocSidebar.$element,
+						dialog.bookletLayout.outlineSelectWidget.$element
+					);
 				}
 
 				dialog.bookletLayout.autoFocus = true;
