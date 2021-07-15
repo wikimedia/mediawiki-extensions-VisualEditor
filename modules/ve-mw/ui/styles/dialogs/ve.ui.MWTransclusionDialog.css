@@ -68,23 +68,6 @@
 	outline: 1px solid #0f0;
 }
 
-.ve-ui-mwTransclusionOutlineButtonWidget {
-	cursor: pointer;
-	font-weight: bold;
-	overflow: hidden;
-	padding: 11px 0 11px 37px;
-	position: relative;
-	text-overflow: ellipsis;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget:hover {
-	background-color: #eaecf0;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget .oo-ui-iconElement-icon {
-	left: 11px;
-}
-
 .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
 	opacity: 0.51;
 }
@@ -158,4 +141,30 @@
 
 .ve-ui-mwTransclusionOutlineItem .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [ type='checkbox' ]:hover + span {
 	border-width: 2px;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget,
+.ve-ui-mwTransclusionOutlineButtonWidget > .oo-ui-buttonElement-button {
+	display: block;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-labelElement.oo-ui-iconElement > .oo-ui-buttonElement-button {
+	border-left: 0;
+	border-radius: 0;
+	border-right: 0;
+	overflow: hidden;
+	padding: 8px 0 8px 36px;
+	text-overflow: ellipsis;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+	background-color: #eaecf0;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement:first-child {
+	margin-left: 0;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
+	left: 10px;
 }
