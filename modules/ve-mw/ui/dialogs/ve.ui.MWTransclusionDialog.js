@@ -452,6 +452,9 @@ ve.ui.MWTransclusionDialog.prototype.resetConfirmationReset = function () {
 ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	var target = this;
 	this.transclusionModel.reset();
+	if ( this.pocSidebar ) {
+		this.pocSidebar.clear();
+	}
 	this.bookletLayout.clearPages();
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
