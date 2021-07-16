@@ -472,12 +472,13 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			if ( this.isNewSidebar ) {
 				// FIXME: This is created at the wrong time. That's why we run into the situation
 				//  where an old instance exists. Should be in initialize().
-				if ( this.pocSidebar ) {
-					this.pocSidebar.$element.remove();
+				if ( !this.pocSidebar ) {
+					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
+						this.bookletLayout
+					);
+				} else {
+					this.pocSidebar.clear();
 				}
-				this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
-					this.bookletLayout
-				);
 				this.transclusionModel.connect( this.pocSidebar, {
 					replace: 'onReplacePart',
 					change: [ 'onTransclusionModelChange', this.transclusionModel ]

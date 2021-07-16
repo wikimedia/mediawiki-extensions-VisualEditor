@@ -114,3 +114,13 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartHeaderClick = function ( partId ) {
 	this.bookletLayout.setPage( partId );
 };
+
+/**
+ * Removes all {@see ve.ui.MWTransclusionOutlinePartWidget}, i.e. empties the list.
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.clear = function () {
+	for ( var partId in this.partWidgets ) {
+		this.partWidgets[ partId ].$element.remove();
+	}
+	this.partWidgets = {};
+};
