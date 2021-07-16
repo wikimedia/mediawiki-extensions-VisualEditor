@@ -37,7 +37,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 
 	if ( checkboxes.length >= 1 ) {
 		this.searchWidget = new OO.ui.SearchInputWidget( {
-			placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' )
+			placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
+			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
 		} ).connect( this, {
 			change: 'onFilterChange'
 		} );
