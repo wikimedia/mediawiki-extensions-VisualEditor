@@ -255,6 +255,10 @@
 	"visualeditor-includes-onlyinclude-start": "آغاز محتوای مجاز در گزیده‌ها",
 	"visualeditor-includes-onlyinclude-end": "پایان محتوای مجاز در گزیده‌ها",
 	"visualeditor-includes-includeonly": "محتوا تنها برای گزیده‌ها",
+	"visualeditor-includes-noinclude-description": "هنگامی که محتوای این صفحه در صفحه‌ای دیگر استفاده شده‌باشد، محتوا از اینجا تا نشانهٔ منطبق پایانی در آن صفحه <strong>قرار نخواهند گرفت</strong>. در زمان ویرایش محتوای خارج از این نشانه‌های دقت کنید؛ زیرا ممکن است از آن‌ها در صفحه‌های دیگر استفاده شده‌باشد.",
+	"visualeditor-includes-onlyinclude-description": "هنگامی که محتوای این صفحه در صفحه‌ای دیگر استفاده شده‌باشد، <strong>فقط</strong> محتوا از اینجا تا نشانهٔ منطبق پایانی در آن صفحه قرار خواهند گرفت. در زمان ویرایش محتوای موجود در میان این نشانه‌ها دقت کنید؛ زیرا ممکن است از آن‌ها در صفحه‌های دیگر استفاده شده‌باشد.",
+	"visualeditor-includes-includeonly-description": "هنگامی که محتوای این صفحه در صفحه‌ای دیگر استفاده شده‌باشد، محتوای اضافی زیر در اینجا قرار خواهد گرفت:",
+	"visualeditor-includes-documentation": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion دربارهٔ تراگنجانش جزئی بیشتر بدانید]",
 	"visualeditor-languages-tool": "زبان‌ها",
 	"visualeditor-linkinspector-button-link-external": "وب‌گاه بیرونی",
 	"visualeditor-linkinspector-button-link-internal": "جستجوی صفحه‌های داخلی",
@@ -426,7 +430,7 @@
 	"visualeditor-wikitext-progress": "تبدیل منبع",
 	"visualeditor-wikitext-warning": "شما از این ویرایشگر استفاده می‌کنید - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|ویکی‌متن]] در اینجا عمل نخواهد کرد. برای رفتن به ویرایش کد در هر زمان بدون گم‌شدن تغییراتتان، بر روی دکمهٔ تغییر وضعیت کلیک کنید.",
 	"visualeditor-wikitext-warning-title": "نشانه‌گذاری ویکی‌متن شناسایی شد",
-	"visualeditor-wikitextconvert-title": "تبدیل قالب‌بندی به ویکی‌تکست؟",
+	"visualeditor-wikitextconvert-title": "تبدیل قالب‌بندی به ویکی‌متن؟",
 	"visualeditor-wikitextconvert-message": "شما محتوایی با قالب‌بندی پرخرج را چسبانده‌اید. آیا مایل هستید این قالب‌بندی به ویکی‌متن تبدیل شود؟",
-	"visualeditor-wikitextconvert-convert": "تبدیل به ویکی‌تکست"
+	"visualeditor-wikitextconvert-convert": "تبدیل به ویکی‌متن"
 }

@@ -338,7 +338,7 @@
 	"visualeditor-parameter-input-placeholder": "Nomine del campo",
 	"visualeditor-parameter-search-more": "Monstrar {{PLURAL:$1|un altere campo|$1 altere campos}}",
 	"visualeditor-parameter-search-no-unused": "Nulle campo non usate",
-	"visualeditor-parameter-search-unknown": "Campo incognite",
+	"visualeditor-parameter-search-unknown": "(Campo incognite)",
 	"visualeditor-preference-betatempdisable": "Disactivar temporarimente le editor visual durante su phase beta",
 	"visualeditor-preference-core-description": "Activar le editor visual. Illo non essera disponibile in pagina de discussion e in alcun altere spatios de nomines.",
 	"visualeditor-preference-core-label": "Modification in modo visual",
