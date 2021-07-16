@@ -2197,6 +2197,8 @@
 				"visualeditor-dialog-transclusion-content",
 				"visualeditor-dialog-transclusion-contextitem-description",
 				"visualeditor-dialog-transclusion-expand-options",
+				"visualeditor-dialog-transclusion-filter-placeholder",
+				"visualeditor-dialog-transclusion-filter-no-match",
 				"visualeditor-dialog-transclusion-deprecated-parameter",
 				"visualeditor-dialog-transclusion-deprecated-parameter-description",
 				"visualeditor-dialog-transclusion-loading",

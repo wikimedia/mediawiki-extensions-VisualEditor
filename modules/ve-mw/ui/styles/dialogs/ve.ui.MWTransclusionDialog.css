@@ -180,3 +180,7 @@
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
 	left: 10px;
 }
+
+.ve-ui-mwTransclusionOutlineTemplateWidget-no-match {
+	font-style: italic;
+}
