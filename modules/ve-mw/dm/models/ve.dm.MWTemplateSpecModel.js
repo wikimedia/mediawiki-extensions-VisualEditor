@@ -228,6 +228,14 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
 };
 
 /**
+ * @param name Parameter name or alias
+ * @returns {boolean}
+ */
+ve.dm.MWTemplateSpecModel.prototype.isParameterDocumented = function ( name ) {
+	return name in this.templateData.params || name in this.aliases;
+};
+
+/**
  * @param {string} name Parameter name or alias
  * @param {string} [languageCode]
  * @return {string} Descriptive label of the parameter, if given. Otherwise the alias or parameter

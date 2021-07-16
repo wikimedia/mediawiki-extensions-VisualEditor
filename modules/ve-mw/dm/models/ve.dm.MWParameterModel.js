@@ -67,6 +67,13 @@ ve.dm.MWParameterModel.prototype.isDeprecated = function () {
 };
 
 /**
+ * @return {boolean}
+ */
+ve.dm.MWParameterModel.prototype.isDocumented = function () {
+	return this.template.getSpec().isParameterDocumented( this.name );
+};
+
+/**
  * Get template of which this parameter is part.
  *
  * @return {ve.dm.MWTemplateModel}

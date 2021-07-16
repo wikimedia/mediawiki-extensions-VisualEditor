@@ -190,8 +190,18 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append(
 			this.valueInput.$element
 		);
-	if (
-		veConfig.transclusionDialogSuggestedValues &&
+
+	if ( veConfig.transclusionDialogNewSidebar &&
+		!this.parameter.isDocumented()
+	) {
+		var undocumentedLabel = new OO.ui.LabelWidget( {
+			label: ve.msg( 'visualeditor-dialog-transclusion-param-undocumented' ),
+			classes: [ 've-ui-mwParameterPage-undocumentedLabel' ]
+		} );
+		this.$labelElement.after( undocumentedLabel.$element );
+	}
+
+	if ( veConfig.transclusionDialogSuggestedValues &&
 		this.parameter.getSuggestedValues().length
 	) {
 		this.warningMessage = new OO.ui.MessageWidget( {
