@@ -44,12 +44,18 @@
 	/* Events */
 
 	/**
+	 * Emitted when a part is added, removed, replaced (e.g. a placeholder with an actual template),
+	 * or an existing part changed position.
+	 *
 	 * @event replace
 	 * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
-	 * @param {ve.dm.MWTransclusionPartModel|null} added Added part
+	 * @param {ve.dm.MWTransclusionPartModel|null} added Added or moved part
+	 * @param {number} [newPosition] Position the part was added or moved to
 	 */
 
 	/**
+	 * Emitted when anything changed, including any changes in the content of the parts.
+	 *
 	 * @event change
 	 */
 
@@ -232,12 +238,14 @@
 
 			this.parts.splice( index, remove, item.add );
 			if ( item.add ) {
+				// This forwards cange events from the nested ve.dm.MWTransclusionPartModel upwards.
+				// The array syntax is a way to call `this.emit( 'change' )`.
 				item.add.connect( this, { change: [ 'emit', 'change' ] } );
 			}
 			if ( item.remove ) {
 				item.remove.disconnect( this );
 			}
-			this.emit( 'replace', item.remove || null, item.add );
+			this.emit( 'replace', item.remove || null, item.add, index );
 
 			// Resolve promises
 			if ( item.deferred ) {

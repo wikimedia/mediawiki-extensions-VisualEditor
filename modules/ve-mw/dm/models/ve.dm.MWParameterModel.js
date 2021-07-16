@@ -40,6 +40,8 @@ OO.mixinClass( ve.dm.MWParameterModel, OO.EventEmitter );
 /* Events */
 
 /**
+ * Emitted when the parameter's value changed.
+ *
  * @event change
  */
 
@@ -154,8 +156,10 @@ ve.dm.MWParameterModel.prototype.getType = function () {
  * @param {string} value
  */
 ve.dm.MWParameterModel.prototype.setValue = function ( value ) {
-	this.value = value;
-	this.emit( 'change' );
+	if ( this.value !== value ) {
+		this.value = value;
+		this.emit( 'change' );
+	}
 };
 
 /**
