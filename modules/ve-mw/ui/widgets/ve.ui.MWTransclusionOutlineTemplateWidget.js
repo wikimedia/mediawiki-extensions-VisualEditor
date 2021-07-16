@@ -56,11 +56,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	this.parameters = new OO.ui.FieldsetLayout( {
 		items: checkboxes
 	} );
-	this.$element
-		.append( this.parameters.$element, addParameterButton.$element );
+
 	if ( this.searchWidget ) {
-		this.$element.prepend( this.searchWidget.$element, this.infoWidget.$element );
+		this.$element.append( this.searchWidget.$element, this.infoWidget.$element );
 	}
+	this.$element.append( this.parameters.$element, addParameterButton.$element );
 };
 
 /* Inheritance */
