@@ -301,6 +301,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterType = function ( name ) {
 };
 
 /**
+ * Warning, this does not return a copy. Don't manipulate the returned array.
+ *
  * @param {string} name Parameter name or alias
  * @return {string[]} Alternate parameter names
  */
@@ -364,6 +366,8 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
  * includes undocumented parameters that have been part of the template at some point during the
  * lifetime of this object, but have been removed from the linked {@see ve.dm.MWTemplateModel} in
  * the meantime.
+ *
+ * The returned array is a copy, i.e. it's safe to manipulate.
  *
  * @return {string[]} Primary parameter names
  */
