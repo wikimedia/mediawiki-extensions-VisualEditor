@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Alex00728",
+			"Apzp79",
 			"Bluemersen",
 			"Codenstory",
 			"Ellif",
@@ -187,6 +188,8 @@
 	"visualeditor-dialog-transclusion-content": "내용",
 	"visualeditor-dialog-transclusion-contextitem-description": "$1에서 생성됨",
 	"visualeditor-dialog-transclusion-expand-options": "옵션 보기",
+	"visualeditor-dialog-transclusion-filter-placeholder": "필드 찾기",
+	"visualeditor-dialog-transclusion-filter-no-match": "일치하는 항목이 없습니다",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "사용되지 않는 필드",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "필드는 구식입니다. $1",
 	"visualeditor-dialog-transclusion-loading": "불러오는 중...",
@@ -198,6 +201,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "예: $1",
 	"visualeditor-dialog-transclusion-param-info": "필드 설명",
 	"visualeditor-dialog-transclusion-param-info-missing": "사용할 수 있는 필드 설명이 없습니다",
+	"visualeditor-dialog-transclusion-param-undocumented": "(문서화되지 않은 변수)",
 	"visualeditor-dialog-transclusion-placeholder": "틀 추가",
 	"visualeditor-dialog-transclusion-raw-fallback": "플레인 위키텍스트로 전환",
 	"visualeditor-dialog-transclusion-remove-content": "내용 제거",

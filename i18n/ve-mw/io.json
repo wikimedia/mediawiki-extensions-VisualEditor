@@ -120,6 +120,7 @@
 	"visualeditor-dialog-transclusion-content": "Kontenajo",
 	"visualeditor-dialog-transclusion-contextitem-description": "Produktita de: $1",
 	"visualeditor-dialog-transclusion-expand-options": "Montrar selekti",
+	"visualeditor-dialog-transclusion-filter-no-match": "Nula asorto trovesis",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Obsoleta feldo",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Feldo esas obsoleta. $1",
 	"visualeditor-dialog-transclusion-loading": "Ol kargesas…",
