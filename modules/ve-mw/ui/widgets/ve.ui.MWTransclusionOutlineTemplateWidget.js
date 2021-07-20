@@ -100,7 +100,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
 	if ( checkbox ) {
 		checkbox.setSelected( true, true );
 	} else if ( paramName ) {
-		this.searchWidget.setValue( '' );
+		if ( this.searchWidget ) {
+			this.searchWidget.setValue( '' );
+		}
 		this.parameters.addItems(
 			[ this.createCheckbox( paramName ) ],
 			this.templateModel.getAllParametersOrdered().indexOf( paramName )
