@@ -35,33 +35,32 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			return widget.createCheckbox( paramName );
 		} );
 
-	if ( checkboxes.length >= 1 ) {
-		this.searchWidget = new OO.ui.SearchInputWidget( {
-			placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
-			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
-		} ).connect( this, {
-			change: 'onFilterChange'
-		} );
-		this.infoWidget = new OO.ui.LabelWidget( {
-			label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
-			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
-		} ).toggle( false );
-	}
+	this.searchWidget = new OO.ui.SearchInputWidget( {
+		placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
+		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
+	} ).connect( this, {
+		change: 'onFilterChange'
+	} ).toggle( false );
+	this.infoWidget = new OO.ui.LabelWidget( {
+		label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
+		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
+	} ).toggle( false );
 
 	var addParameterButton = new ve.ui.MWTransclusionOutlineButtonWidget( {
 		icon: 'parameter',
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
-	} )
-		.connect( this, { click: 'onAddParameterButtonClick' } );
+	} ).connect( this, { click: 'onAddParameterButtonClick' } );
 
-	this.parameters = new OO.ui.FieldsetLayout( {
-		items: checkboxes
-	} );
+	this.parameters = new OO.ui.FieldsetLayout()
+		.connect( this, { change: 'onCheckboxListChange' } );
+	this.parameters.addItems( checkboxes );
 
-	if ( this.searchWidget ) {
-		this.$element.append( this.searchWidget.$element, this.infoWidget.$element );
-	}
-	this.$element.append( this.parameters.$element, addParameterButton.$element );
+	this.$element.append(
+		this.searchWidget.$element,
+		this.infoWidget.$element,
+		this.parameters.$element,
+		addParameterButton.$element
+	);
 };
 
 /* Inheritance */
@@ -100,9 +99,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
 	if ( checkbox ) {
 		checkbox.setSelected( true, true );
 	} else if ( paramName ) {
-		if ( this.searchWidget ) {
-			this.searchWidget.setValue( '' );
-		}
+		this.searchWidget.setValue( '' );
 		this.parameters.addItems(
 			[ this.createCheckbox( paramName ) ],
 			this.templateModel.getAllParametersOrdered().indexOf( paramName )
@@ -152,6 +149,13 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxSelect = function 
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameterButtonClick = function () {
 	// FIXME: This triggers a chain of events that (re)does way to much. Replace!
 	this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel ) );
+};
+
+/**
+ * @param {OO.ui.Element[]} items
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxListChange = function ( items ) {
+	this.searchWidget.toggle( items.length >= 1 );
 };
 
 /**
