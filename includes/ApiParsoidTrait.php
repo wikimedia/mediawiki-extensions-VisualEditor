@@ -28,7 +28,7 @@ trait ApiParsoidTrait {
 	/**
 	 * @return LoggerInterface
 	 */
-	protected function getLogger() : LoggerInterface {
+	protected function getLogger(): LoggerInterface {
 		return $this->logger ?: new NullLogger();
 	}
 
@@ -49,7 +49,7 @@ trait ApiParsoidTrait {
 	 *
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
-	protected function getVRSObject() : VirtualRESTService {
+	protected function getVRSObject(): VirtualRESTService {
 		global $wgVisualEditorParsoidAutoConfig;
 		// the params array to create the service object with
 		$params = [];
@@ -96,7 +96,7 @@ trait ApiParsoidTrait {
 	 *
 	 * @return VirtualRESTServiceClient
 	 */
-	protected function getVRSClient() : VirtualRESTServiceClient {
+	protected function getVRSClient(): VirtualRESTServiceClient {
 		if ( !$this->serviceClient ) {
 			$this->serviceClient = new VirtualRESTServiceClient(
 				MediaWikiServices::getInstance()->getHttpRequestFactory()->createMultiClient() );
@@ -117,7 +117,7 @@ trait ApiParsoidTrait {
 	 */
 	protected function requestRestbase(
 		Title $title, string $method, string $path, array $params, array $reqheaders = []
-	) : array {
+	): array {
 		$request = [
 			'method' => $method,
 			'url' => '/restbase/local/v1/' . $path
@@ -182,7 +182,7 @@ trait ApiParsoidTrait {
 	 * @param Title $title Page title
 	 * @return RevisionRecord A revision record
 	 */
-	protected function getLatestRevision( Title $title ) : RevisionRecord {
+	protected function getLatestRevision( Title $title ): RevisionRecord {
 		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		$latestRevision = $revisionLookup->getRevisionByTitle( $title );
 		if ( $latestRevision !== null ) {
@@ -203,7 +203,7 @@ trait ApiParsoidTrait {
 	 *  Should be an integer but will validate and convert user input strings.
 	 * @return RevisionRecord A revision record
 	 */
-	protected function getValidRevision( Title $title, $oldid = null ) : RevisionRecord {
+	protected function getValidRevision( Title $title, $oldid = null ): RevisionRecord {
 		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		if ( $oldid === null || $oldid === 0 ) {
 			return $this->getLatestRevision( $title );
@@ -222,7 +222,7 @@ trait ApiParsoidTrait {
 	 * @param RevisionRecord $revision Page revision
 	 * @return array The RESTBase server's response
 	 */
-	protected function requestRestbasePageHtml( RevisionRecord $revision ) : array {
+	protected function requestRestbasePageHtml( RevisionRecord $revision ): array {
 		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
 		return $this->requestRestbase(
 			$title,
@@ -245,7 +245,7 @@ trait ApiParsoidTrait {
 	 */
 	protected function transformHTML(
 		Title $title, string $html, int $oldid = null, string $etag = null
-	) : array {
+	): array {
 		$data = [ 'html' => $html, 'scrub_wikitext' => 1 ];
 		$path = 'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() ) .
 			( $oldid === null ? '' : '/' . $oldid );
@@ -287,7 +287,7 @@ trait ApiParsoidTrait {
 	 */
 	protected function transformWikitext(
 		Title $title, string $wikitext, bool $bodyOnly, int $oldid = null, bool $stash = false
-	) : array {
+	): array {
 		return $this->requestRestbase(
 			$title,
 			'POST',
@@ -307,7 +307,7 @@ trait ApiParsoidTrait {
 	 * @param Title $title
 	 * @return Language Content language
 	 */
-	public static function getPageLanguage( Title $title ) : Language {
+	public static function getPageLanguage( Title $title ): Language {
 		if ( $title->isSpecial( 'CollabPad' ) ) {
 			// Use the site language for CollabPad, as getPageLanguage just
 			// returns the interface language for special pages.
