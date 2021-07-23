@@ -108,6 +108,14 @@
 	left: 240px;
 }
 
+.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
+	width: 100%;
+}
+
+.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen .oo-ui-menuLayout > .oo-ui-menuLayout-content {
+	left: 100%;
+}
+
 .ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-inline-help {
 	color: inherit;
 }
