@@ -183,16 +183,17 @@ ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
  * unrelated to how the parameters appear in the wikitext. Parameter names and aliases documented
  * via TemplateData are first, in their documented order. Undocumented parameters are sorted with
  * numeric names first, followed by alphabetically sorted names. The unnamed placeholder parameter
- * is last.
+ * is last. Parameters that are deprecated and do not have a value are filtered out.
  *
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 	var spec = this.spec,
+		params = this.params,
 		parameters = spec.getCanonicalParameterOrder();
 
 	// Restore aliases originally used in the wikitext. The spec doesn't know which alias was used.
-	for ( var name in this.params ) {
+	Object.keys( params ).forEach( function ( name ) {
 		if ( spec.isParameterAlias( name ) ) {
 			parameters.splice(
 				// This can never fail because only documented parameters can have aliases
@@ -201,11 +202,23 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 				name
 			);
 		}
-	}
+	} );
 
 	// Restore the placeholder, if present. The spec doesn't keep track of placeholders.
-	if ( '' in this.params ) {
+	if ( '' in params ) {
 		parameters.push( '' );
+	}
+
+	// Remove deprecated parameters, if they do not have a value.
+	if ( mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar ) {
+		parameters = parameters.filter( function ( name ) {
+			if ( spec.isParameterDeprecated( name ) ) {
+				if ( !params[ name ] || !this.originalData.params[ name ].wt ) {
+					return false;
+				}
+			}
+			return true;
+		}, this );
 	}
 
 	// TODO: cache results
