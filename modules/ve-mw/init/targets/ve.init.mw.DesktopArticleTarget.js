@@ -718,17 +718,17 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
-	var redirectMetaItems, metaList,
-		editNotices = this.getEditNotices(),
-		actionTools = this.actionsToolbar.tools,
-		surface = this.getSurface(),
-		target = this;
-
 	if ( !this.activating ) {
 		// Activation was aborted before we got here. Do nothing
 		// TODO are there things we need to clean up?
 		return;
 	}
+
+	var redirectMetaItems, metaList,
+		editNotices = this.getEditNotices(),
+		actionTools = this.actionsToolbar.tools,
+		surface = this.getSurface(),
+		target = this;
 
 	this.activating = false;
 
