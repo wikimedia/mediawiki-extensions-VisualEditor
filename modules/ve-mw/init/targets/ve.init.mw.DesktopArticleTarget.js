@@ -582,13 +582,14 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
  * @fires deactivate
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
-	var abortType,
+	var
 		saveDialogPromise = ve.createDeferred().resolve().promise(),
 		target = this;
 
 	this.emit( 'deactivate' );
 
 	// Event tracking
+	var abortType, abortedMode;
 	if ( trackMechanism ) {
 		if ( this.activating ) {
 			abortType = 'preinit';
@@ -601,11 +602,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			// they go through switchToWikitextEditor() instead
 			abortType = 'abandon';
 		}
-		ve.track( 'mwedit.abort', {
-			type: abortType,
-			mechanism: trackMechanism,
-			mode: this.surface ? this.surface.getMode() : this.getDefaultMode()
-		} );
+		abortedMode = this.surface ? this.surface.getMode() : this.getDefaultMode();
 	}
 
 	// Cancel activating, start deactivating
@@ -664,6 +661,15 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 
 			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+
+			// Event tracking
+			if ( trackMechanism ) {
+				ve.track( 'mwedit.abort', {
+					type: abortType,
+					mechanism: trackMechanism,
+					mode: abortedMode
+				} );
+			}
 
 			if ( !target.isViewPage ) {
 				location.href = target.viewUri.clone().extend( {
