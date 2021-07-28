@@ -1252,6 +1252,10 @@
 		}
 
 		function getInitialEditMode() {
+			if ( mw.config.get( 'wgDiscussionToolsStartNewTopicTool' ) ) {
+				// Avoid conflicts with DiscussionTools
+				return false;
+			}
 			// On view pages if veaction is correctly set
 			var m = veactionToMode[ uri.query.veaction ];
 			if ( isViewPage && init.isAvailable && availableModes.indexOf( m ) !== -1 ) {
