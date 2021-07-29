@@ -49,7 +49,7 @@ OO.inheritClass( ve.ui.MWTemplateDialog, ve.ui.NodeDialog );
 ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
 /**
- * Configuration for booklet layout.
+ * Configuration for the {@see OO.ui.BookletLayout} used in this dialog.
  *
  * @static
  * @property {Object}
@@ -94,8 +94,8 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
  * Handle parts being replaced.
  *
  * @protected
- * @param {ve.dm.MWTransclusionPartModel} removed Removed part
- * @param {ve.dm.MWTransclusionPartModel} added Added part
+ * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
+ * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	var names, reselect,
@@ -165,7 +165,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	}
 
 	this.setApplicableStatus();
-
 	this.updateTitle();
 };
 

@@ -108,6 +108,7 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
 	}
 ] );
 
+/** @inheritdoc */
 ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 	{},
 	ve.ui.MWTemplateDialog.static.bookletLayoutConfig,
