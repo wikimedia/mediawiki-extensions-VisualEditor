@@ -203,7 +203,7 @@
 	"visualeditor-mwsignature-tool": "Ваш подпіс",
 	"visualeditor-parameter-input-placeholder": "Назва поля",
 	"visualeditor-parameter-search-no-unused": "Няма нявыкарыстаных палёў",
-	"visualeditor-parameter-search-unknown": "Невядомае поле",
+	"visualeditor-parameter-search-unknown": "(Невядомае поле)",
 	"visualeditor-preference-betatempdisable": "Часова выключыць візуальны рэдактар, пакуль ён знаходзіцца ў бэта-вэрсіі",
 	"visualeditor-preference-core-description": "Уключыць візуальны рэдактар. Ён будзе недаступны на старонках абмеркаваньняў і яшчэ ў некаторых прасторах назваў.",
 	"visualeditor-preference-core-label": "Візуальнае рэдагаваньне",
