@@ -23,12 +23,3 @@ ve.dm.MWTemplatePlaceholderModel = function VeDmMWTemplatePlaceholderModel() {
 /* Inheritance */
 
 OO.inheritClass( ve.dm.MWTemplatePlaceholderModel, ve.dm.MWTransclusionPartModel );
-
-/* Methods */
-
-/**
- * @inheritdoc
- */
-ve.dm.MWTemplatePlaceholderModel.prototype.isEmpty = function () {
-	return true;
-};
