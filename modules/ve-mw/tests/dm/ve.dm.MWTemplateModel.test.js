@@ -34,15 +34,6 @@
 		return ve.dm.MWTemplateModel.newFromData( transclusion, clonedTransclusionData );
 	}
 
-	/**
-	 * @param {boolean} enabled
-	 */
-	function enableNewSidebar( enabled ) {
-		const config = mw.config.get( 'wgVisualEditorConfig' );
-		config.transclusionDialogNewSidebar = enabled !== false;
-		mw.config.set( 'wgVisualEditorConfig', config );
-	}
-
 	/* Tests */
 
 	QUnit.test( 'hasParameter', ( assert ) => {
@@ -410,119 +401,6 @@
 			}
 
 			assert.deepEqual( template.getAllParametersOrdered(), expected );
-		} );
-	} );
-
-	[
-		{
-			name: 'spec with explicit paramOrder and a deprecated param that has a value',
-			spec: {
-				params: {
-					empty: {},
-					unused: {},
-					foo: {
-						deprecated: true
-					}
-				},
-				paramOrder: [ 'foo', 'empty', 'unused' ]
-			},
-			expected: [
-				'foo',
-				'empty',
-				'unused',
-				'bar',
-				''
-			]
-		},
-		{
-			name: 'spec with explicit paramOrder and a deprecated param that does not have a value',
-			spec: {
-				params: {
-					empty: {
-						deprecated: true
-					},
-					unused: {},
-					foo: {}
-				},
-				paramOrder: [ 'foo', 'empty', 'unused' ]
-			},
-			expected: [
-				'foo',
-				'unused',
-				'bar',
-				''
-			]
-		},
-		{
-			name: 'spec with explicit paramOrder and an aliased deprecated param that does have a value',
-			spec: {
-				params: {
-					empty: {},
-					unused: {},
-					hasalias: {
-						deprecated: true,
-						aliases: [ 'bar' ]
-					}
-				},
-				paramOrder: [ 'hasalias', 'empty', 'unused' ]
-			},
-			expected: [
-				'bar',
-				'empty',
-				'unused',
-				'foo',
-				''
-			]
-		},
-		{
-			name: 'spec with explicit paramOrder and an aliased deprecated param that does not have a value',
-			spec: {
-				params: {
-					foo: {},
-					unused: {},
-					hasalias: {
-						deprecated: true,
-						aliases: [ 'empty' ]
-					}
-				},
-				paramOrder: [ 'hasalias', 'foo', 'unused' ]
-			},
-			expected: [
-				'foo',
-				'unused',
-				'bar',
-				''
-			]
-		},
-		{
-			name: 'spec with no paramOrder and a deprecated param that does not have a value',
-			spec: {
-				params: {
-					empty: {
-						deprecated: true
-					},
-					unused: {},
-					foo: {}
-				}
-			},
-			expected: [
-				'unused',
-				'foo',
-				'bar',
-				''
-			]
-		}
-	].forEach( ( { name, spec, expected } ) => {
-		QUnit.test( 'getAllParametersOrdered: transclusionDialogNewSidebar: ' + name, ( assert ) => {
-			enableNewSidebar( true );
-			const template = newTemplateModel();
-
-			if ( spec ) {
-				template.getSpec().setTemplateData( spec );
-			}
-
-			assert.deepEqual( template.getAllParametersOrdered(), expected );
-			enableNewSidebar( false );
 		} );
 	} );
 }() );
