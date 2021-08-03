@@ -388,7 +388,10 @@ ve.dm.MWTemplateModel.prototype.containsValuableData = function () {
 
 		var param = params[ name ],
 			value = param.getValue();
-		// The automatically set value isn't valueable, {@see ve.dm.MWParameterModel.getValue}
-		return value !== '' && value !== param.getAutoValue();
+		return !value &&
+			// This will automatically be restored, see {@see ve.dm.MWParameterModel.getValue}
+			value !== param.getAutoValue() &&
+			// While this isn't always meaningless, it typically is, and it's easy to restore
+			value !== param.getDefaultValue();
 	} );
 };
