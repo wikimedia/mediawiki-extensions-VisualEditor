@@ -377,12 +377,13 @@ ve.ui.MWParameterPage.prototype.isSuggestedValueType = function ( type ) {
 };
 
 /**
- * Check if the parameter is empty
- *
- * @return {boolean} The parameter is empty
+ * @private
+ * @return {boolean} True if there is either user-provided input or a default value
  */
-ve.ui.MWParameterPage.prototype.isEmpty = function () {
-	return this.valueInput.getValue() === '' && this.defaultValue === '';
+ve.ui.MWParameterPage.prototype.containsSomeValue = function () {
+	// Note: For templates that allow overriding a default value with nothing, the empty string is
+	// meaningful user input. For templates that don't, the parameter can never be truly empty.
+	return this.valueInput.getValue() || this.defaultValue;
 };
 
 /**
@@ -400,7 +401,7 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	this.parameter.setValue( value );
 
 	if ( this.outlineItem ) {
-		this.outlineItem.setFlags( { empty: this.isEmpty() } );
+		this.outlineItem.setFlags( { empty: !this.containsSomeValue() } );
 	}
 
 	if ( this.warningMessage ) {
@@ -469,7 +470,7 @@ ve.ui.MWParameterPage.prototype.setOutlineItem = function () {
 			.setMovable( false )
 			.setRemovable( true )
 			.setLevel( 1 )
-			.setFlags( { empty: this.isEmpty() } )
+			.setFlags( { empty: !this.containsSomeValue() } )
 			.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
 
 		if ( this.parameter.isRequired() ) {
