@@ -89,8 +89,8 @@ ve.dm.MWTransclusionPartModel.prototype.addPromptedParameters = function () {
 };
 
 /**
- * @return {boolean} True if there is no user input
+ * @return {boolean} True if there is meaningful user input that was not e.g. auto-generated
  */
-ve.dm.MWTransclusionPartModel.prototype.isEmpty = function () {
-	return true;
+ve.dm.MWTransclusionPartModel.prototype.containsValuableData = function () {
+	return false;
 };

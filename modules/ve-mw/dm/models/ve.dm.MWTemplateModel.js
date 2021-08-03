@@ -377,19 +377,18 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 /**
  * @inheritdoc
  */
-ve.dm.MWTemplateModel.prototype.isEmpty = function () {
+ve.dm.MWTemplateModel.prototype.containsValuableData = function () {
 	var params = this.params;
 
-	return Object.keys( params ).every( function ( name ) {
-		// There is always an unnamed placeholder at the start
+	return Object.keys( params ).some( function ( name ) {
+		// Skip unnamed placeholders
 		if ( !name ) {
-			return true;
+			return false;
 		}
 
 		var param = params[ name ],
 			value = param.getValue();
-		// Check that the value has not been set, or is indistinguishable from
-		// the automatically-set value.  See `MWParameterModel.getValue`
-		return value === '' || value === param.getAutoValue();
+		// The automatically set value isn't valueable, {@see ve.dm.MWParameterModel.getValue}
+		return value !== '' && value !== param.getAutoValue();
 	} );
 };
