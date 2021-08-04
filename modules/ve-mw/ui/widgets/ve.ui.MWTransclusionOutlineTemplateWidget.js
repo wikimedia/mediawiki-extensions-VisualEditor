@@ -12,10 +12,12 @@
  * @param {ve.dm.MWTemplateModel} template
  */
 ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template ) {
+	var spec = template.getSpec();
+
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, template, {
 		icon: 'puzzle',
-		label: template.getSpec().getLabel()
+		label: spec.getLabel()
 	} );
 
 	// Initialization
@@ -28,6 +30,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	var checkboxes = this.templateModel
 		.getAllParametersOrdered()
 		.filter( function ( paramName ) {
+			if ( spec.isParameterDeprecated( paramName ) && !template.hasParameter( paramName ) ) {
+				return false;
+			}
 			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
 			return paramName;
 		} )
