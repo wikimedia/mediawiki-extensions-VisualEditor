@@ -549,6 +549,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						dialog.pocSidebar.$element,
 						dialog.bookletLayout.outlineSelectWidget.$element
 					);
+					dialog.bookletLayout.outlineSelectWidget.toggle( false );
 				}
 
 				dialog.bookletLayout.autoFocus = true;
