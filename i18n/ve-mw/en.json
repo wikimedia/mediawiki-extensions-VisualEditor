@@ -172,6 +172,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Save",
 	"visualeditor-dialog-transclusion-absent-template": "The \"$1\" template doesn't yet exist.",
 	"visualeditor-dialog-transclusion-add-content": "Add content",
+	"visualeditor-dialog-transclusion-add-wikitext": "Add wikitext",
 	"visualeditor-dialog-transclusion-add-param": "Add more information",
 	"visualeditor-dialog-transclusion-add-template": "Add template",
 	"visualeditor-dialog-transclusion-collapse-options": "Hide options",
