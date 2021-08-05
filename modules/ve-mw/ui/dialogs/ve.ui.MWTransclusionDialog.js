@@ -20,6 +20,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
+	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
+
 	// Parent constructor
 	ve.ui.MWTransclusionDialog.super.call( this, config );
 
@@ -69,14 +71,15 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	this.resetConfirmation.toggle( false );
 	this.$content.append( this.resetConfirmation.$element );
 
-	// Temporary override while feature flag is in place.
-	this.isBigger = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogInlineDescriptions;
-	if ( this.isBigger ) {
+	// Temporary feature flags
+	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
+	this.useBackButton = veConfig.transclusionDialogBackButton;
+	this.useSearchImprovements = veConfig.templateSearchImprovements;
+
+	if ( this.useInlineDescriptions ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-bigger' );
 	}
-
-	// Temporary change bolding while feature flag is in place.
-	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
+	if ( this.useSearchImprovements ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-enhancedSearch' );
 	}
 };
@@ -277,7 +280,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expand ) {
 				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !isExpanded )
 				.toggleClass( 've-ui-mwTransclusionDialog-expanded', isExpanded );
 		}
-		this.setSize( isExpanded ? ( this.isBigger ? 'larger' : 'large' ) : 'medium' );
+		this.setSize( isExpanded ? ( this.useInlineDescriptions ? 'larger' : 'large' ) : 'medium' );
 		this.bookletLayout.toggleOutline( isExpanded );
 		this.updateTitle();
 		this.updateModeActionState();
@@ -387,8 +390,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
-	var veConfig = mw.config.get( 'wgVisualEditorConfig' ),
-		backButton = this.actions.get( { flags: [ 'back' ] } ).pop(),
+	var backButton = this.actions.get( { flags: [ 'back' ] } ).pop(),
 		saveButton = this.actions.get( { actions: [ 'done' ] } ).pop();
 
 	if ( saveButton && this.getMode() === 'edit' ) {
@@ -405,7 +407,7 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 		return;
 	}
 
-	if ( veConfig.transclusionDialogBackButton ) {
+	if ( this.useBackButton ) {
 		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
 			parts = this.transclusionModel && this.transclusionModel.getParts(),
 			isInitialPage = parts && parts.length === 1 && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
@@ -537,7 +539,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWTransclusionDialog.prototype.getSizeProperties = function () {
 	var sizeProps = ve.ui.MWTransclusionDialog.super.prototype.getSizeProperties.call( this );
 
-	if ( this.isBigger ) {
+	if ( this.useInlineDescriptions ) {
 		sizeProps = ve.extendObject( { height: '90%' }, sizeProps );
 	}
 
