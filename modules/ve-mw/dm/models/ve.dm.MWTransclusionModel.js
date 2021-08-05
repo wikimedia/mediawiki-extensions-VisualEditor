@@ -22,7 +22,9 @@
 	 * @param {ve.dm.Document} doc Document to use associate with API requests
 	 * @property {ve.dm.MWTransclusionPartModel[]} parts
 	 * @property {number} uid
-	 * @property {jQuery.Promise[]} requests
+	 * @property {jQuery.Promise[]} requests Currently running API requests. The only
+	 *  reason to keep these around is to be able to abort them earlier when the template dialog
+	 *  closes or resets.
 	 * @property {Object[]} queue
 	 */
 	ve.dm.MWTransclusionModel = function VeDmMWTransclusionModel( doc ) {
@@ -329,42 +331,41 @@
 	 * @param {Object.<number,Object>} [data.pages]
 	 */
 	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( data ) {
-		var aliasMap = [];
+		if ( !data || !data.pages ) {
+			return;
+		}
 
-		if ( data && data.pages ) {
-			// Keep spec data on hand for future use
-			for ( var id in data.pages ) {
-				var title = data.pages[ id ].title;
+		// Keep spec data on hand for future use
+		for ( var id in data.pages ) {
+			var title = data.pages[ id ].title;
 
-				if ( data.pages[ id ].missing ) {
-					// Remember templates that don't exist in the link cache
-					// { title: { missing: true|false }
-					var missingTitle = {};
-					missingTitle[ title ] = { missing: true };
-					ve.init.platform.linkCache.setMissing( missingTitle );
-				} else if ( data.pages[ id ].notemplatedata && !OO.isPlainObject( data.pages[ id ].params ) ) {
-					// (T243868) Prevent asking again for templates that have neither user-provided specs
-					// nor automatically detected params
-					specCache[ title ] = null;
-				} else {
-					specCache[ title ] = data.pages[ id ];
-				}
+			if ( data.pages[ id ].missing ) {
+				// Remember templates that don't exist in the link cache
+				// { title: { missing: true|false }
+				var missingTitle = {};
+				missingTitle[ title ] = { missing: true };
+				ve.init.platform.linkCache.setMissing( missingTitle );
+			} else if ( data.pages[ id ].notemplatedata && !OO.isPlainObject( data.pages[ id ].params ) ) {
+				// (T243868) Prevent asking again for templates that have neither user-provided specs
+				// nor automatically detected params
+				specCache[ title ] = null;
+			} else {
+				specCache[ title ] = data.pages[ id ];
 			}
-			// Follow redirects
-			if ( data.redirects ) {
-				aliasMap = data.redirects;
-			}
-			// Follow MW's normalisation
-			if ( data.normalized ) {
-				ve.batchPush( aliasMap, data.normalized );
-			}
-			// Cross-reference aliased titles.
-			for ( var i = 0; i < aliasMap.length; i++ ) {
-				// Only define the alias if the target exists, otherwise
-				// we create a new property with an invalid "undefined" value.
-				if ( hasOwn.call( specCache, aliasMap[ i ].to ) ) {
-					specCache[ aliasMap[ i ].from ] = specCache[ aliasMap[ i ].to ];
-				}
+		}
+
+		// Follow redirects
+		var aliasMap = data.redirects || [];
+		// Follow MW's normalisation
+		if ( data.normalized ) {
+			ve.batchPush( aliasMap, data.normalized );
+		}
+		// Cross-reference aliased titles.
+		for ( var i = 0; i < aliasMap.length; i++ ) {
+			// Only define the alias if the target exists, otherwise
+			// we create a new property with an invalid "undefined" value.
+			if ( hasOwn.call( specCache, aliasMap[ i ].to ) ) {
+				specCache[ aliasMap[ i ].from ] = specCache[ aliasMap[ i ].to ];
 			}
 		}
 	};
