@@ -115,6 +115,8 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 	{ outlined: true, editable: true }
 );
 
+ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth = 540;
+
 /* Methods */
 
 /**
@@ -258,30 +260,36 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 };
 
 /**
- * Set if the dialog is expanded and the sidebar visible, or collapsed. `auto` will choose
- * `collapsed` if possible.
+ * Set if the dialog is expanded and the sidebar visible, or collapsed.
  *
- * @param {boolean|string} [expand=true] True or false to expand or collapse the sidebar, or
+ * @param {boolean|string} [toggle=true] True or false to expand or collapse the sidebar, or
  *  'auto' to auto-detect based on the dialog's current content.
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expand ) {
-	var isExpanded;
-	if ( expand === 'auto' && this.isSingleTemplateTransclusion() ) {
-		isExpanded = false;
-	} else {
-		isExpanded = expand !== false;
+ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( toggle ) {
+	var showSidebar = toggle !== false;
+
+	if ( toggle === 'auto' ) {
+		if ( this.useInlineDescriptions ) {
+			var isSmallScreen = $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
+			showSidebar = !isSmallScreen;
+			this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
+			this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
+		} else {
+			showSidebar = !this.isSingleTemplateTransclusion();
+		}
 	}
 
-	if ( this.isSidebarExpanded !== isExpanded ) {
-		this.isSidebarExpanded = isExpanded;
+	if ( this.isSidebarExpanded !== showSidebar ) {
+		this.isSidebarExpanded = showSidebar;
 		if ( this.$content ) {
 			this.$content
-				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !isExpanded )
-				.toggleClass( 've-ui-mwTransclusionDialog-expanded', isExpanded );
+				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !showSidebar )
+				.toggleClass( 've-ui-mwTransclusionDialog-expanded', showSidebar );
 		}
-		this.setSize( isExpanded ? ( this.useInlineDescriptions ? 'larger' : 'large' ) : 'medium' );
-		this.bookletLayout.toggleOutline( isExpanded );
+		this.ignoreNextWindowResizeEvent = true;
+		this.setSize( showSidebar ? ( this.useInlineDescriptions ? 'larger' : 'large' ) : 'medium' );
+		this.bookletLayout.toggleOutline( showSidebar );
 		this.updateTitle();
 		this.updateModeActionState();
 
@@ -324,12 +332,12 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	// * disabled when we're in the initial add-new-template phase, because it's
 	//   meaningless
 	// * disabled if we're in a multi-part transclusion, because the sidebar's
-	//   forced open
+	//   forced open (this does not apply when using the new sidebar)
 	// * enabled if we're in a single-part transclusion, because the sidebar's
 	//   closed but can be opened to add more parts
 	if ( parts ) {
-		var canCollapse = this.isSingleTemplateTransclusion() &&
-			!( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel );
+		var canCollapse = !( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) &&
+				( this.useInlineDescriptions || this.isSingleTemplateTransclusion() );
 		this.actions.setAbilities( { mode: canCollapse } );
 	}
 };
@@ -459,7 +467,7 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
 		.done( function () {
-			target.toggleSidebar( false );
+			target.toggleSidebar( 'auto' );
 			target.updateModeActionState();
 		} );
 };
@@ -498,6 +506,9 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	} );
 
 	// Events
+	if ( this.useInlineDescriptions ) {
+		this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
+	}
 	this.bookletLayout.connect( this, { set: 'onBookletLayoutSet' } );
 	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first().attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
 	this.addTemplateButton.connect( this, { click: 'onAddTemplateButtonClick' } );
@@ -529,6 +540,16 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			this.updateModeActionState();
 			this.toggleSidebar( 'auto' );
 		}, this );
+};
+
+/**
+ * @private
+ */
+ve.ui.MWTransclusionDialog.prototype.onWindowResize = function () {
+	if ( !this.ignoreNextWindowResizeEvent ) {
+		this.toggleSidebar( 'auto' );
+	}
+	this.ignoreNextWindowResizeEvent = false;
 };
 
 /**
