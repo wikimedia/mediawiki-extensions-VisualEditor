@@ -9,6 +9,7 @@
  */
 
 use MediaWiki\Block\DatabaseBlock;
+use MediaWiki\Content\Transform\ContentTransformer;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -37,6 +38,9 @@ class ApiVisualEditor extends ApiBase {
 	/** @var WatchlistManager */
 	private $watchlistManager;
 
+	/** @var ContentTransformer */
+	private $contentTransformer;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
@@ -45,6 +49,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param LinkRenderer $linkRenderer
 	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param WatchlistManager $watchlistManager
+	 * @param ContentTransformer $contentTransformer
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -53,7 +58,8 @@ class ApiVisualEditor extends ApiBase {
 		Parser $parser,
 		LinkRenderer $linkRenderer,
 		UserOptionsLookup $userOptionsLookup,
-		WatchlistManager $watchlistManager
+		WatchlistManager $watchlistManager,
+		ContentTransformer $contentTransformer
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -62,6 +68,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->linkRenderer = $linkRenderer;
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->watchlistManager = $watchlistManager;
+		$this->contentTransformer = $contentTransformer;
 	}
 
 	/**
@@ -72,13 +79,14 @@ class ApiVisualEditor extends ApiBase {
 	 * @return string The transformed wikitext
 	 */
 	protected function pstWikitext( Title $title, $wikitext ) {
-		return ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT )
-			->preSaveTransform(
-				$title,
-				$this->getUser(),
-				WikiPage::factory( $title )->makeParserOptions( $this->getContext() )
-			)
-			->serialize( 'text/x-wiki' );
+		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
+		return $this->contentTransformer->preSaveTransform(
+			$content,
+			$title,
+			$this->getUser(),
+			WikiPage::factory( $title )->makeParserOptions( $this->getContext() )
+		)
+		->serialize( 'text/x-wiki' );
 	}
 
 	/**

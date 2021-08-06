@@ -203,7 +203,8 @@
 				"Parser",
 				"LinkRenderer",
 				"UserOptionsLookup",
-				"WatchlistManager"
+				"WatchlistManager",
+				"ContentTransformer"
 			]
 		},
 		"visualeditoredit": {
