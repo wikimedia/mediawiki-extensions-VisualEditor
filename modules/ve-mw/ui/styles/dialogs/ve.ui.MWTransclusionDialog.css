@@ -60,12 +60,9 @@
 }
 
 .ve-ui-mwTemplateDialog-pocSidebar-debug-container > .oo-ui-outlineSelectWidget {
+	background-color: rgba( 100%, 0%, 100%, 0.1 );
 	height: auto;
-}
-
-.ve-ui-mwTemplateDialog-pocSidebar-debug-container > .ve-ui-mwTransclusionOutlineContainerWidget {
-	background-color: rgba( 0%, 100%, 0%, 0.1 );
-	outline: 1px solid #0f0;
+	outline: 1px solid #f0f;
 }
 
 .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
