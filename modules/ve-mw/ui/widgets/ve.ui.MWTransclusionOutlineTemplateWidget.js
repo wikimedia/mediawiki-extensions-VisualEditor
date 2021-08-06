@@ -44,7 +44,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
 	} ).connect( this, {
-		change: 'onFilterChange'
+		change: 'filterParameters'
 	} ).toggle( false );
 	this.infoWidget = new OO.ui.LabelWidget( {
 		label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
@@ -103,6 +103,24 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
 };
 
 /**
+ * @param {ve.ui.MWTemplateOutlineParameterCheckboxLayout} checkbox
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.insertCheckboxAtCanonicalPosition = function ( checkbox ) {
+	var paramName = checkbox.getData(),
+		insertAt = 0,
+		// Note this might include parameters that don't have a checkbox, e.g. deprecated
+		allParamNames = this.templateModel.getAllParametersOrdered();
+	for ( var i = 0; i < allParamNames.length; i++ ) {
+		if ( allParamNames[ i ] === paramName || !this.parameters.items[ insertAt ] ) {
+			break;
+		} else if ( this.parameters.items[ insertAt ].getData() === allParamNames[ i ] ) {
+			insertAt++;
+		}
+	}
+	this.parameters.addItems( [ checkbox ], insertAt );
+};
+
+/**
  * Handles a template model add event {@see ve.dm.MWTemplateModel}.
  * Triggered when a parameter is added to the template model.
  *
@@ -119,23 +137,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
 	var checkbox = this.parameters.findItemFromData( paramName );
 	if ( !checkbox ) {
 		checkbox = this.createCheckbox( paramName );
-
-		var insertAt = 0,
-			// Note this might include parameters that don't have a checkbox, e.g. deprecated
-			allParamNames = this.templateModel.getAllParametersOrdered();
-		for ( var i = 0; i < allParamNames.length; i++ ) {
-			if ( allParamNames[ i ] === paramName || !this.parameters.items[ insertAt ] ) {
-				break;
-			} else if ( this.parameters.items[ insertAt ].getData() === allParamNames[ i ] ) {
-				insertAt++;
-			}
-		}
-
-		this.parameters.addItems( [ checkbox ], insertAt );
+		this.insertCheckboxAtCanonicalPosition( checkbox );
 		// Make sure an active filter is applied to the new checkbox as well
 		var filter = this.searchWidget.getValue();
 		if ( filter ) {
-			this.onFilterChange( filter );
+			this.filterParameters( filter );
 		}
 	}
 
@@ -206,7 +212,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxListChange = funct
  * @param {string} query user input
  * @fires filterParameter
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( query ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function ( query ) {
 	var self = this,
 		template = this.templateModel,
 		spec = this.templateModel.getSpec(),
