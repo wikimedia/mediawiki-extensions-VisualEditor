@@ -285,7 +285,7 @@
 	"visualeditor-parameter-input-placeholder": "Ime parametra",
 	"visualeditor-parameter-search-more": "Prikaži še $1 {{PLURAL:$1|polje|polji|polja|polj}}",
 	"visualeditor-parameter-search-no-unused": "Ni neuporabljenih parametrov",
-	"visualeditor-parameter-search-unknown": "Neznan parameter",
+	"visualeditor-parameter-search-unknown": "(Neznan parameter)",
 	"visualeditor-preference-betatempdisable": "Začasno onemogoči Vizualni urejevalnik, dokler je še v razvoju",
 	"visualeditor-preference-core-description": "Omogoči Vizualni urejevalnik. Na voljo ne bo na pogovornih straneh in v nekaterih drugih imenskih prostorih.",
 	"visualeditor-preference-core-label": "Urejanje z Vizualnim urejevalnikom",

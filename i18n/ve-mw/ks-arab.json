@@ -5,10 +5,17 @@
 			"Shahwaqar"
 		]
 	},
+	"visualeditor-dialog-media-change-image": "شَکل بَدلٲئو",
 	"visualeditor-dialog-media-content-filename": "فَیِل ناو",
+	"visualeditor-dialog-media-position-left": "کھووُر",
+	"visualeditor-dialog-meta-categories-category": "زٲژ",
+	"visualeditor-dialog-meta-categories-data-label": "زٲژ",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "نٔو زٲژ",
+	"visualeditor-dialog-meta-categories-section": "زٲژ",
+	"visualeditor-dialog-meta-languages-code-label": "زَبان کوڑ",
 	"visualeditor-dialog-meta-languages-label": "زَبانٕ",
 	"visualeditor-dialog-meta-languages-name-label": "زَبان",
+	"visualeditor-dialog-meta-languages-section": "زَبانٕ",
 	"visualeditor-dialog-template-title": "فرما",
 	"visualeditor-dialog-transclusion-param-example-long": "مثال: $1",
 	"visualeditor-dialogbutton-template-tooltip": "فرما",
@@ -17,5 +24,10 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "آگُر",
 	"visualeditor-mwsignature-tool": "تُہند دَستخَط",
 	"visualeditor-preference-tabs": "اٮ۪ڑِٹَیغ طٔریٖقہٕ:",
+	"visualeditor-rebase-client-export": "بَرآمَد",
+	"visualeditor-rebase-client-export-start": "بَرآمَد...",
+	"visualeditor-rebase-client-import": "دَرآمَد",
+	"visualeditor-savedialog-label-publish-short": "شائع کٕرو",
+	"visualeditor-savedialog-label-publish-short-start": "شائع کٕرو...",
 	"visualeditor-usernamespacepagelink": "Project: رُکُن ناو جائے"
 }
