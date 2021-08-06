@@ -232,7 +232,9 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		var addButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			icon: 'parameter',
-			label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
+			label: veConfig.transclusionDialogNewSidebar ?
+				ve.msg( 'visualeditor-dialog-transclusion-add-undocumented-param' ) :
+				ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 		} )
 			.connect( this, { click: 'addPlaceholderParameter' } );
 		$( '<div>' )
