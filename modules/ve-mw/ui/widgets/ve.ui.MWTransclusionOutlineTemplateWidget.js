@@ -109,18 +109,41 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
  * @param {ve.dm.MWParameterModel} param
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( param ) {
-	var paramName = param.getName(),
-		checkbox = this.parameters.findItemFromData( paramName );
+	var paramName = param.getName();
+	// The placeholder (currently) doesn't get a corresponding item in the sidebar
+	if ( !paramName ) {
+		return;
+	}
 
 	// All parameters known via the spec already have a checkbox
-	if ( checkbox ) {
-		checkbox.setSelected( true, true );
-	} else if ( paramName ) {
+	var checkbox = this.parameters.findItemFromData( paramName );
+	if ( !checkbox ) {
+		checkbox = this.createCheckbox( paramName );
+
+		var insertAt = 0,
+			// Note this might include parameters that don't have a checkbox, e.g. deprecated
+			allParamNames = this.templateModel.getAllParametersOrdered();
+		for ( var i = 0; i < allParamNames.length; i++ ) {
+			if ( allParamNames[ i ] === paramName || !this.parameters.items[ insertAt ] ) {
+				break;
+			} else if ( this.parameters.items[ insertAt ].getData() === allParamNames[ i ] ) {
+				insertAt++;
+			}
+		}
+
+		this.parameters.addItems( [ checkbox ], insertAt );
+		// Make sure an active filter is applied to the new checkbox as well
+		var filter = this.searchWidget.getValue();
+		if ( filter ) {
+			this.onFilterChange( filter );
+		}
+	}
+
+	checkbox.setSelected( true, true );
+
+	// Reset filter, but only if it hides the relevant checkbox
+	if ( !checkbox.isVisible() ) {
 		this.searchWidget.setValue( '' );
-		this.parameters.addItems(
-			[ this.createCheckbox( paramName ) ],
-			this.templateModel.getAllParametersOrdered().indexOf( paramName )
-		);
 	}
 };
 
@@ -187,23 +210,18 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( 
 	var self = this,
 		template = this.templateModel,
 		spec = this.templateModel.getSpec(),
-		checkboxes = this.parameters,
 		nothingFound = true;
 
 	query = query.trim().toLowerCase();
 
 	// Note: We can't really cache this because the list of know parameters can change any time
-	this.templateModel.getAllParametersOrdered().forEach( function ( paramName ) {
-		var checkbox = checkboxes.findItemFromData( paramName );
-		if ( !checkbox ) {
-			return;
-		}
-
-		var placesToSearch = [
-			spec.getPrimaryParameterName( paramName ),
-			spec.getParameterLabel( paramName ),
-			spec.getParameterDescription( paramName )
-		].concat( spec.getParameterAliases( paramName ) );
+	this.parameters.items.forEach( function ( checkbox ) {
+		var paramName = checkbox.getData(),
+			placesToSearch = [
+				spec.getPrimaryParameterName( paramName ),
+				spec.getParameterLabel( paramName ),
+				spec.getParameterDescription( paramName )
+			].concat( spec.getParameterAliases( paramName ) );
 
 		var foundSomeMatch = placesToSearch.some( function ( term ) {
 			return term && term.toLowerCase().indexOf( query ) !== -1;
