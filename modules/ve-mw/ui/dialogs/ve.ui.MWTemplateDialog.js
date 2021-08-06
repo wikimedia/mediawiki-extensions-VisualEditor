@@ -475,6 +475,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
 						this.bookletLayout
 					);
+					this.pocSidebar.connect( this, { filterParameter: 'onFilterParameter' } );
 				} else {
 					this.pocSidebar.clear();
 				}
@@ -574,6 +575,16 @@ ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
  * Intentionally empty. This is provided for Wikia extensibility.
  */
 ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
+
+/**
+ * @private
+ */
+ve.ui.MWTemplateDialog.prototype.onFilterParameter = function ( partId, isVisible ) {
+	var page = this.bookletLayout.getPage( partId );
+	if ( page ) {
+		page.toggle( isVisible );
+	}
+};
 
 /**
  * @inheritdoc

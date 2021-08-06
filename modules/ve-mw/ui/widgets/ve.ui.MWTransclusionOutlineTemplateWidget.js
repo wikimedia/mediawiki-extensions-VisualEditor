@@ -72,6 +72,18 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 
 OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusionOutlinePartWidget );
 
+/* Events */
+
+/**
+ * Triggered when the user uses the search widget at the top to filter the list of parameters.
+ *
+ * @event filterParameter
+ * @param {string} partId Unique id of the parameter, e.g. something like "part_1/param1"
+ * @param {boolean} isVisible
+ */
+
+/* Methods */
+
 /**
  * @param {string} paramName
  * @return {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
@@ -169,9 +181,12 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxListChange = funct
  * parameter's primary name, aliases, label, and description. But not e.g. the example value.
  *
  * @param {string} query user input
+ * @fires filterParameter
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( query ) {
-	var spec = this.templateModel.getSpec(),
+	var self = this,
+		template = this.templateModel,
+		spec = this.templateModel.getSpec(),
 		checkboxes = this.parameters,
 		nothingFound = true;
 
@@ -196,6 +211,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onFilterChange = function ( 
 
 		checkbox.toggle( foundSomeMatch );
 		nothingFound = nothingFound && !foundSomeMatch;
+
+		var param = template.getParameter( paramName );
+		if ( param ) {
+			self.emit( 'filterParameter', param.getId(), foundSomeMatch );
+		}
 	} );
 
 	this.infoWidget.toggle( nothingFound );
