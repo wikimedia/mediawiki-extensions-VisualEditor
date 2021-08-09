@@ -369,7 +369,7 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'back' ) {
-		if ( this.isEmpty() ) {
+		if ( !this.containsValuableData() ) {
 			return this.getActionProcess( 'reset' );
 		}
 		return new OO.ui.Process( function () {
@@ -473,11 +473,11 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 };
 
 /**
- * @return {boolean} False if any transclusion part contains non-default input
+ * @return {boolean} True if any transclusion part contains meaningful, non-default user input
  */
-ve.ui.MWTransclusionDialog.prototype.isEmpty = function () {
-	return this.transclusionModel.getParts().every( function ( part ) {
-		return part.isEmpty();
+ve.ui.MWTransclusionDialog.prototype.containsValuableData = function () {
+	return this.transclusionModel.getParts().some( function ( part ) {
+		return part.containsValuableData();
 	} );
 };
 

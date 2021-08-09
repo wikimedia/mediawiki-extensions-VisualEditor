@@ -58,6 +58,6 @@ ve.dm.MWTransclusionContentModel.prototype.serialize = function () {
 /**
  * @inheritdoc
  */
-ve.dm.MWTransclusionContentModel.prototype.isEmpty = function () {
-	return this.wikitext === '';
+ve.dm.MWTransclusionContentModel.prototype.containsValuableData = function () {
+	return this.wikitext !== '';
 };
