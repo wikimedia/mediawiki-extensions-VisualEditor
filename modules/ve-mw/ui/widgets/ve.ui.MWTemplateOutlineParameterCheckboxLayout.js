@@ -27,27 +27,33 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 		selected: config.selected || config.required
 	} )
 	// FIXME: pass-through binding like [ 'emit', 'toggle' ]?
-		.connect( this, {
-			change: 'onEdit'
-		} );
+		.connect( this, { change: 'onCheckboxChange' } );
+	checkbox.$input.on( 'keydown', this.onCheckboxKeyDown.bind( this ) );
 
 	// Parent constructor
 	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, checkbox, config );
 
+	// Mixin constructors
+	if ( checkbox.isDisabled() ) {
+		OO.ui.mixin.TabIndexedElement.call( this, config );
+	}
+
 	// Initialization
-	this.$element.addClass( 've-ui-mwTransclusionOutlineItem' );
+	this.$element
+		.addClass( 've-ui-mwTransclusionOutlineItem' )
+		.on( 'click', this.onClick.bind( this ) )
+		.on( 'keydown', this.onKeyDown.bind( this ) );
 
 	// Override base behaviors
 	// Unwire native label->input linkage, and replace with our custom click handler.
-	this.$label
-		.attr( 'for', null );
-	this.$header
-		.on( 'click', this.onLabelClick.bind( this ) );
+	this.$label.attr( 'for', null );
+	this.$header.on( 'click', this.onLabelClick.bind( this ) );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.FieldLayout );
+OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIndexedElement );
 
 /* Events */
 
@@ -64,25 +70,45 @@ OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.FieldLayo
 
 /* Methods */
 
+// FIXME: This is a hack. Needs to be a subclass of Widget instead.
+ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.isDisabled = function () {
+	return false;
+};
+
+/**
+ * @fires select
+ */
+ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
+	this.emit( 'select', this.getData() );
+};
+
+ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( e ) {
+	if ( e.keyCode === OO.ui.Keys.ENTER ) {
+		this.emit( 'select', this.getData() );
+		return false;
+	}
+};
+
+ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxKeyDown = function ( e ) {
+	if ( e.keyCode === OO.ui.Keys.ENTER ) {
+		this.fieldWidget.setSelected( true );
+		this.emit( 'select', this.getData() );
+		return false;
+	}
+};
+
 /**
  * Handles a checkbox input widget change event {@see OO.ui.CheckboxInputWidget}.
  *
  * @param {boolean} value
  * @fires change
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onEdit = function ( value ) {
+ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = function ( value ) {
 	this.emit( 'change', this.getData(), value );
 };
 
-/**
- * @fires select
- */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onLabelClick = function () {
-	if ( !this.fieldWidget.isSelected() ) {
-		this.fieldWidget.setSelected( true );
-	}
-	// FIXME: Move up into the if()?
-	this.emit( 'select', this.getData() );
+	this.fieldWidget.setSelected( true );
 };
 
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.setSelected = function ( state, internal ) {
