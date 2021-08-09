@@ -4,15 +4,18 @@
  *
  * @file
  * @ingroup Extensions
- * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright 2011-2021 VisualEditor Team and others; see AUTHORS.txt
  * @license MIT
  */
 
 use MediaWiki\Block\DatabaseBlock;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserNameUtils;
+use MediaWiki\User\UserOptionsLookup;
+use MediaWiki\Watchlist\WatchlistManager;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditor extends ApiBase {
@@ -22,15 +25,43 @@ class ApiVisualEditor extends ApiBase {
 	/** @var UserNameUtils */
 	private $userNameUtils;
 
+	/** @var Parser */
+	private $parser;
+
+	/** @var LinkRenderer */
+	private $linkRenderer;
+
+	/** @var userOptionsLookup */
+	private $userOptionsLookup;
+
+	/** @var WatchlistManager */
+	private $watchlistManager;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
 	 * @param UserNameUtils $userNameUtils
+	 * @param Parser $parser
+	 * @param LinkRenderer $linkRenderer
+	 * @param UserOptionsLookup $userOptionsLookup
+	 * @param WatchlistManager $watchlistManager
 	 */
-	public function __construct( ApiMain $main, $name, UserNameUtils $userNameUtils ) {
+	public function __construct(
+		ApiMain $main,
+		$name,
+		UserNameUtils $userNameUtils,
+		Parser $parser,
+		LinkRenderer $linkRenderer,
+		UserOptionsLookup $userOptionsLookup,
+		WatchlistManager $watchlistManager
+	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 		$this->userNameUtils = $userNameUtils;
+		$this->parser = $parser;
+		$this->linkRenderer = $linkRenderer;
+		$this->userOptionsLookup = $userOptionsLookup;
+		$this->watchlistManager = $watchlistManager;
 	}
 
 	/**
@@ -255,7 +286,7 @@ class ApiVisualEditor extends ApiBase {
 						$eiTitle->exists() &&
 						$permissionManager->userCan( 'read', $user, $eiTitle )
 					) {
-						$notices['editintro'] = MediaWikiServices::getInstance()->getParser()->parse(
+						$notices['editintro'] = $this->parser->parse(
 							'<div class="mw-editintro">{{:' . $eiTitle->getFullText() . '}}</div>',
 							$title,
 							new ParserOptions( $user )
@@ -355,7 +386,7 @@ class ApiVisualEditor extends ApiBase {
 						// editing to be restricted
 						foreach ( $sources as $source ) {
 							$notice .= "<li>" .
-								MediaWikiServices::getInstance()->getLinkRenderer()->makeLink( $source ) .
+								$this->linkRenderer->makeLink( $source ) .
 								"</li>";
 						}
 						$notice .= '</ul>';
@@ -444,14 +475,11 @@ class ApiVisualEditor extends ApiBase {
 				$req->setVal( 'format', $editPage->contentFormat );
 				// By reference for some reason (T54466)
 				$editPage->importFormData( $req );
-				$services = MediaWikiServices::getInstance();
-				$userOptionsLookup = $services->getUserOptionsLookup();
-				$watchlistManager = $services->getWatchlistManager();
 				$states = [
-					'minor' => $userOptionsLookup->getOption( $user, 'minordefault' ) && $title->exists(),
-					'watch' => $userOptionsLookup->getOption( $user, 'watchdefault' ) ||
-						( $userOptionsLookup->getOption( $user, 'watchcreations' ) && !$title->exists() ) ||
-						$watchlistManager->isWatched( $user, $title ),
+					'minor' => $this->userOptionsLookup->getOption( $user, 'minordefault' ) && $title->exists(),
+					'watch' => $this->userOptionsLookup->getOption( $user, 'watchdefault' ) ||
+						( $this->userOptionsLookup->getOption( $user, 'watchcreations' ) && !$title->exists() ) ||
+						$this->watchlistManager->isWatched( $user, $title ),
 				];
 				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
 				$checkboxesMessagesList = [];
