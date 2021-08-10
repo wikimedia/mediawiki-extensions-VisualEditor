@@ -10,8 +10,9 @@
 
 use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageIdentityValue;
+use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Storage\PageEditStash;
 use MediaWiki\User\UserIdentity;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -24,15 +25,37 @@ class ApiVisualEditorEdit extends ApiBase {
 	/** @var VisualEditorHookRunner */
 	private $hookRunner;
 
+	/** @var RevisionLookup */
+	private $revisionLookup;
+
+	/** @var IBufferingStatsdDataFactory */
+	private $statsdDataFactory;
+
+	/** @var PageEditStash */
+	private $pageEditStash;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name Name of this module
 	 * @param VisualEditorHookRunner $hookRunner
+	 * @param RevisionLookup $revisionLookup
+	 * @param IBufferingStatsdDataFactory $statsdDataFactory
+	 * @param PageEditStash $pageEditStash
 	 */
-	public function __construct( ApiMain $main, string $name, VisualEditorHookRunner $hookRunner ) {
+	public function __construct(
+		ApiMain $main,
+		string $name,
+		VisualEditorHookRunner $hookRunner,
+		RevisionLookup $revisionLookup,
+		IBufferingStatsdDataFactory $statsdDataFactory,
+		PageEditStash $pageEditStash
+	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 		$this->hookRunner = $hookRunner;
+		$this->revisionLookup = $revisionLookup;
+		$this->statsdDataFactory = $statsdDataFactory;
+		$this->pageEditStash = $pageEditStash;
 	}
 
 	/**
@@ -141,8 +164,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		if (
 			$content === false ||
 			// TODO: Is this check still needed?
-			( strlen( $content ) && MediaWikiServices::getInstance()
-				->getRevisionLookup()
+			( strlen( $content ) && $this->revisionLookup
 				->getRevisionById( $result['parse']['revid'] ) === null
 			)
 		) {
@@ -225,10 +247,6 @@ class ApiVisualEditorEdit extends ApiBase {
 
 		$cache = ObjectCache::getLocalClusterInstance();
 
-		$services = MediaWikiServices::getInstance();
-		$statsd = $services->getStatsdDataFactory();
-		$editStash = $services->getPageEditStash();
-
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
 		$key = $cache->makeKey( 'visualeditor', 'serialization', $hash );
@@ -238,18 +256,18 @@ class ApiVisualEditorEdit extends ApiBase {
 		}
 
 		$status = $ok ? 'ok' : 'failed';
-		$statsd->increment( "editstash.ve_serialization_cache.set_" . $status );
+		$this->statsdDataFactory->increment( "editstash.ve_serialization_cache.set_" . $status );
 
 		// Also parse and prepare the edit in case it might be saved later
 		$page = WikiPage::factory( $title );
 		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
 
-		$status = $editStash->parseAndCache( $page, $content, $this->getUser(), '' );
-		if ( $status === $editStash::ERROR_NONE ) {
+		$status = $this->pageEditStash->parseAndCache( $page, $content, $this->getUser(), '' );
+		if ( $status === $this->pageEditStash::ERROR_NONE ) {
 			$logger = LoggerFactory::getInstance( 'StashEdit' );
 			$logger->debug( "Cached parser output for VE content key '$key'." );
 		}
-		$statsd->increment( "editstash.ve_cache_stores.$status" );
+		$this->statsdDataFactory->increment( "editstash.ve_cache_stores.$status" );
 
 		return $hash;
 	}
@@ -284,8 +302,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$value = $cache->get( $key );
 
 		$status = ( $value !== false ) ? 'hit' : 'miss';
-		$statsd = MediaWikiServices::getInstance()->getStatsdDataFactory();
-		$statsd->increment( "editstash.ve_serialization_cache.get_$status" );
+		$this->statsdDataFactory->increment( "editstash.ve_serialization_cache.get_$status" );
 
 		return $value;
 	}
