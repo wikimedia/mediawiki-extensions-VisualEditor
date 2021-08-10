@@ -127,6 +127,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getContentFromInspector = null;
  */
 ve.ui.MWLanguageVariantInspector.prototype.createTextTarget = function ( placeholder ) {
 	return ve.init.target.createTargetWidget( {
+		toolbarGroups: [],
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
 		importRules: this.constructor.static.getImportRules(),
