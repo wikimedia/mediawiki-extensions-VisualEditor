@@ -8,7 +8,7 @@
  * Container for checkbox and label
  *
  * @class
- * @extends OO.ui.FieldLayout
+ * @extends OO.ui.Widget
  *
  * @constructor
  * @param {Object} config
@@ -18,41 +18,36 @@
  * @cfg {boolean} [selected]
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineParameterCheckboxLayout( config ) {
-	config = config || {};
-	config = ve.extendObject( { align: 'inline' }, config );
-
-	var checkbox = new OO.ui.CheckboxInputWidget( {
+	this.checkbox = new OO.ui.CheckboxInputWidget( {
 		title: config.required ? ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) : null,
 		disabled: config.required,
 		selected: config.selected || config.required
 	} )
 	// FIXME: pass-through binding like [ 'emit', 'toggle' ]?
 		.connect( this, { change: 'onCheckboxChange' } );
-	checkbox.$input.on( 'keydown', this.onCheckboxKeyDown.bind( this ) );
+	this.checkbox.$input.on( 'keydown', this.onKeyDown.bind( this ) );
 
 	// Parent constructor
-	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, checkbox, config );
+	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, config );
 
 	// Mixin constructors
-	if ( checkbox.isDisabled() ) {
-		OO.ui.mixin.TabIndexedElement.call( this, config );
-	}
+	OO.ui.mixin.LabelElement.call( this, $.extend( { $label: $( '<label>' ) }, config ) );
+	OO.ui.mixin.TabIndexedElement.call( this, ve.extendObject( config, {
+		tabIndex: this.checkbox.isDisabled() ? 0 : -1
+	} ) );
 
 	// Initialization
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlineItem' )
+		.append( this.checkbox.$element, this.$label )
 		.on( 'click', this.onClick.bind( this ) )
 		.on( 'keydown', this.onKeyDown.bind( this ) );
-
-	// Override base behaviors
-	// Unwire native label->input linkage, and replace with our custom click handler.
-	this.$label.attr( 'for', null );
-	this.$header.on( 'click', this.onLabelClick.bind( this ) );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.FieldLayout );
+OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.Widget );
+OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.LabelElement );
 OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIndexedElement );
 
 /* Events */
@@ -70,29 +65,18 @@ OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIn
 
 /* Methods */
 
-// FIXME: This is a hack. Needs to be a subclass of Widget instead.
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.isDisabled = function () {
-	return false;
-};
-
 /**
  * @fires select
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
-	this.emit( 'select', this.getData() );
+	this.setSelected( true );
 };
 
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( e ) {
-	if ( e.keyCode === OO.ui.Keys.ENTER ) {
-		this.emit( 'select', this.getData() );
-		return false;
-	}
-};
-
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxKeyDown = function ( e ) {
-	if ( e.keyCode === OO.ui.Keys.ENTER ) {
-		this.fieldWidget.setSelected( true );
-		this.emit( 'select', this.getData() );
+	if ( e.keyCode === OO.ui.Keys.SPACE ) {
+		// FIXME: Focus should stay in the sidebar
+	} else if ( e.keyCode === OO.ui.Keys.ENTER ) {
+		this.setSelected( true );
 		return false;
 	}
 };
@@ -107,10 +91,16 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = func
 	this.emit( 'change', this.getData(), value );
 };
 
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onLabelClick = function () {
-	this.fieldWidget.setSelected( true );
-};
-
+/**
+ * @param {boolean} state Selected state
+ * @param {boolean} internal Used for internal calls to suppress events
+ */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.setSelected = function ( state, internal ) {
-	this.fieldWidget.setSelected( state, internal );
+	if ( !this.checkbox.isDisabled() ) {
+		this.checkbox.setSelected( state, internal );
+	}
+	if ( !internal ) {
+		// Note: Must be fired even if the checkbox was selected before, for proper focus behavior
+		this.emit( 'select', this.getData() );
+	}
 };
