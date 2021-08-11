@@ -187,12 +187,12 @@
 }
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget {
-	margin: 8px 24px 8px 24px;
+	margin: 8px 24px;
 	width: auto;
 }
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-no-match {
 	font-style: italic;
 	color: #72777d;
-	margin: 8px 24px 8px 24px;
+	margin: 8px 24px;
 }
