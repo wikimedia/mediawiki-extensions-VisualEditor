@@ -210,7 +210,10 @@
 		"visualeditoredit": {
 			"class": "ApiVisualEditorEdit",
 			"services": [
-				"VisualEditorHookRunner"
+				"VisualEditorHookRunner",
+				"RevisionLookup",
+				"StatsdDataFactory",
+				"PageEditStash"
 			]
 		}
 	},
