@@ -67,7 +67,10 @@ ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang
 /**
  * Template spec data is available from the TemplateData extension's API.
  *
- * @param {Object} data Template spec data
+ * @param {Object} data As returned by the TemplataData API. Expected to be in formatversion=2,
+ *  guaranteed via {@see ve.init.mw.Target.prototype.getContentApi}.
+ * @param {boolean} [data.notemplatedata] True when there is no user-provided documentation.
+ *  `params` are auto-detected in this case.
  * @param {string|Object.<string,string>} [data.description] Template description
  * @param {string[]} [data.paramOrder] Preferred parameter order as documented via TemplateData. If
  *  given, the TemplateData API makes sure this contains the same parameters as `params`.
@@ -149,6 +152,17 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
  */
 ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( languageCode ) {
 	return this.constructor.static.getLocalValue( this.templateData.description || null, languageCode );
+};
+
+/**
+ * True it the template does have any user-provided documentation. Note that undocumented templates
+ * can still have auto-detected `params` and a `paramOrder`, while documented templates might not
+ * have `params`. Use `{@see getDocumentedParameterOrder()}.length` to differentiate.
+ *
+ * @return {boolean}
+ */
+ve.dm.MWTemplateSpecModel.prototype.isDocumented = function () {
+	return !this.templateData.notemplatedata;
 };
 
 /**
