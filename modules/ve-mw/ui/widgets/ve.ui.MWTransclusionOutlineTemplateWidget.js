@@ -75,6 +75,11 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Events */
 
 /**
+ * @event selectParameter
+ * @param {string} paramId Unique id of the parameter, e.g. something like "part_1/param1"
+ */
+
+/**
  * Triggered when the user uses the search widget at the top to filter the list of parameters.
  *
  * @event filterParameters
@@ -85,6 +90,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Methods */
 
 /**
+ * @private
  * @param {string} paramName
  * @return {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
  */
@@ -103,6 +109,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
 };
 
 /**
+ * @private
  * @param {ve.ui.MWTemplateOutlineParameterCheckboxLayout} checkbox
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.insertCheckboxAtCanonicalPosition = function ( checkbox ) {
@@ -124,6 +131,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.insertCheckboxAtCanonicalPos
  * Handles a template model add event {@see ve.dm.MWTemplateModel}.
  * Triggered when a parameter is added to the template model.
  *
+ * @private
  * @param {ve.dm.MWParameterModel} param
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( param ) {
@@ -157,6 +165,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
  * Handles a template model remove event {@see ve.dm.MWTemplateModel}.
  * Triggered when a parameter is removed from the template model.
  *
+ * @private
  * @param {ve.dm.MWParameterModel} param
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function ( param ) {
@@ -169,6 +178,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function
 /**
  * Handles a parameter checkbox change event {@see ve.ui.MWTemplateOutlineParameterCheckboxLayout}
  *
+ * @private
  * @param {string} paramName
  * @param {boolean} checked New checkbox state
  */
@@ -182,22 +192,33 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function 
 };
 
 /**
+ * @private
  * @param {string} paramName
+ * @fires selectParameter
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxSelect = function ( paramName ) {
 	var param = this.templateModel.getParameter( paramName );
 	if ( param ) {
-		// FIXME: This triggers a chain of events that (re)does way to much. Replace!
-		this.templateModel.addParameter( param );
+		this.emit( 'selectParameter', param.getId() );
 	}
 };
 
+/**
+ * @private
+ * @fires selectParameter
+ */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.addPlaceholderParameter = function () {
-	// FIXME: This triggers a chain of events that (re)does way to much. Replace!
+	var placeholder = this.templateModel.getParameter( '' );
+	if ( placeholder ) {
+		this.emit( 'selectParameter', placeholder.getId() );
+		return;
+	}
+
 	this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel ) );
 };
 
 /**
+ * @private
  * @param {OO.ui.Element[]} items
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxListChange = function ( items ) {
@@ -209,6 +230,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxListChange = funct
  * algorithm is modelled after {@see ve.ui.MWParameterSearchWidget.buildIndex}. We search the
  * parameter's primary name, aliases, label, and description. But not e.g. the example value.
  *
+ * @private
  * @param {string} query user input
  * @fires filterParameters
  */

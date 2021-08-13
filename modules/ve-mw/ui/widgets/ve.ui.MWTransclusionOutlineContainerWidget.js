@@ -100,14 +100,17 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
 		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
-		widget.connect( this, { filterParameters: [ 'emit', 'filterParameters' ] } );
+		widget.connect( this, {
+			selectParameter: 'focusPart',
+			filterParameters: [ 'emit', 'filterParameters' ]
+		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
 	} else if ( part instanceof ve.dm.MWTransclusionContentModel ) {
 		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
 	}
 
-	widget.connect( this, { partHeaderClick: 'onPartHeaderClick' } );
+	widget.connect( this, { partHeaderClick: 'focusPart' } );
 
 	this.partWidgets[ part.getId() ] = widget;
 	if ( typeof newPosition === 'number' && newPosition < this.$element.children().length ) {
@@ -118,9 +121,11 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 };
 
 /**
+ * @private
  * @param {string} partId
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartHeaderClick = function ( partId ) {
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.focusPart = function ( partId ) {
+	this.bookletLayout.focus();
 	this.bookletLayout.setPage( partId );
 };
 
@@ -129,7 +134,9 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartHeaderClick = functio
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.clear = function () {
 	for ( var partId in this.partWidgets ) {
-		this.partWidgets[ partId ].$element.remove();
+		var widget = this.partWidgets[ partId ];
+		widget.disconnect( this );
+		widget.$element.remove();
 	}
 	this.partWidgets = {};
 };
