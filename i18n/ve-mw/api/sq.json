@@ -3,9 +3,11 @@
 		"authors": [
 			"Besnik b",
 			"Liridon",
-			"Techlik"
+			"Techlik",
+			"Vyolla"
 		]
 	},
+	"apierror-visualeditor-badcachekey": "Asnjë serializim i ruajtur nuk u gjet me atë çelës",
 	"apierror-visualeditor-difffailed": "Diff-i dështoi",
 	"apierror-visualeditor-docserver-http-error": "Gabim në lidhjen me shërbyesin Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "Gabim në lidhjen me shërbyesin Parsoid/RESTBase (HTTP $1)",
@@ -25,8 +27,10 @@
 	"apihelp-visualeditor-param-page": "Faqja ku të kryhet veprimi.",
 	"apihelp-visualeditor-param-preload": "Faqja, lënda e të cilës të përdoret, nëse faqja e sjellë s’ka ende lëndë.",
 	"apihelp-visualeditor-param-preloadparams": "Parametra për t’u zëvendësuar te faqja parangarkim, në pastë.",
+	"apihelp-visualeditor-param-pst": "Ruajeni transformimin e tekstit para se ta dërgoni në Parsoid (paction= parsefragment).",
 	"apihelp-visualeditor-param-section": "Ndarja në të cilën të veprohet.",
 	"apihelp-visualeditor-param-starttimestamp": "Kur bëni ruajtje, vendoseni këtë sa vula kohore e çastit kur u ngarkua faqja. Përdoret për të pikasur përplasje përpunimesh.",
+	"apihelp-visualeditor-param-stash": "Kur ruani diçka, vendosesni këtç të vërtetë, nëse doni të përdorni API -në e grumbullimit.",
 	"apihelp-visualeditor-param-wikitext": "Tekst wiki për t’u dërguar te Parsoid-i për ta shndërruar në HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Jep kod HTML5 për një faqe prej shërbimit Parsoid.",
 	"apihelp-visualeditoredit-description": "Ruani një faqe HTML5 në MediaWiki (e shndërruar në tekst wiki përmes shërbimit Parsoid).",
