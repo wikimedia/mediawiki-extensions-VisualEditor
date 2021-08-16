@@ -75,12 +75,16 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
 	this.useBackButton = veConfig.transclusionDialogBackButton;
 	this.useSearchImprovements = veConfig.templateSearchImprovements;
+	this.useNewSidebar = veConfig.transclusionDialogNewSidebar;
 
 	if ( this.useInlineDescriptions ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-bigger' );
 	}
 	if ( this.useSearchImprovements ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-enhancedSearch' );
+	}
+	if ( this.useNewSidebar ) {
+		this.$element.addClass( 've-ui-mwTransclusionDialog-newSidebar' );
 	}
 };
 
@@ -159,6 +163,17 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 			this.transclusionModel.removePart( part );
 		}
 	}
+};
+
+/**
+ * Handle booklet layout focus.
+ *
+ * @private
+ */
+ve.ui.MWTransclusionDialog.prototype.onBookletLayoutFocus = function () {
+	var currentPage = this.bookletLayout.getCurrentPage(),
+		isParameterPage = currentPage instanceof ve.ui.MWParameterPage;
+	this.bookletLayout.getOutlineControls().removeButton.setDisabled( isParameterPage );
 };
 
 /**
@@ -497,7 +512,9 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	this.addContentButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'wikiText',
-		title: ve.msg( 'visualeditor-dialog-transclusion-add-content' )
+		title: ve.msg( this.useNewSidebar ?
+			'visualeditor-dialog-transclusion-add-wikitext' :
+			'visualeditor-dialog-transclusion-add-content' )
 	} );
 	this.addParameterButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -505,21 +522,28 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		title: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 	} );
 
+	this.bookletLayout.getOutlineControls().addItems( [ this.addTemplateButton, this.addContentButton ] );
+	if ( !this.useNewSidebar ) {
+		this.bookletLayout.getOutlineControls().addItems( [ this.addParameterButton ] );
+	}
+
 	// Events
 	if ( this.useInlineDescriptions ) {
 		this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
 	}
 	this.bookletLayout.connect( this, { set: 'onBookletLayoutSet' } );
-	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first().attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
+	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first()
+		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
 	this.addTemplateButton.connect( this, { click: 'onAddTemplateButtonClick' } );
 	this.addContentButton.connect( this, { click: 'onAddContentButtonClick' } );
 	this.addParameterButton.connect( this, { click: 'onAddParameterButtonClick' } );
-	this.bookletLayout.getOutlineControls()
-		.addItems( [ this.addTemplateButton, this.addContentButton, this.addParameterButton ] )
-		.connect( this, {
-			move: 'onOutlineControlsMove',
-			remove: 'onOutlineControlsRemove'
-		} );
+	this.bookletLayout.getOutlineControls().connect( this, {
+		move: 'onOutlineControlsMove',
+		remove: 'onOutlineControlsRemove'
+	} );
+	if ( this.useNewSidebar ) {
+		this.bookletLayout.$element.on( 'focusin', this.onBookletLayoutFocus.bind( this ) );
+	}
 };
 
 /**
@@ -536,6 +560,10 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 				move: !isReadOnly,
 				remove: !isReadOnly
 			} );
+
+			if ( this.useNewSidebar ) {
+				this.bookletLayout.getOutlineControls().toggle( !this.isSingleTemplateTransclusion() );
+			}
 
 			this.updateModeActionState();
 			this.toggleSidebar( 'auto' );
