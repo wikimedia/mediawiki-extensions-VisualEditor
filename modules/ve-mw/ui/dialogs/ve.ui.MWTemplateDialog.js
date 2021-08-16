@@ -152,7 +152,8 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				if ( names.length ) {
 					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
 				} else if ( addedCount === 0 ) {
-					page.onAddButtonFocus();
+					// This adds a placeholder, i.e. the parameter search widget appears
+					page.addPlaceholderParameter();
 				}
 			}
 		}
@@ -306,7 +307,7 @@ ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts(),
 		title = ve.msg( 'visualeditor-dialog-transclusion-loading' );
 
-	if ( parts && parts.length === 1 && parts[ 0 ] ) {
+	if ( parts && parts.length === 1 ) {
 		if ( parts[ 0 ] instanceof ve.dm.MWTemplateModel ) {
 			title = ve.msg(
 				this.getMode() === 'insert' ?

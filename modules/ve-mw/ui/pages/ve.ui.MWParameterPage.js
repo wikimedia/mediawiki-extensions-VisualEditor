@@ -224,12 +224,16 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( !config.readOnly ) {
+		// This button is only shown when this …ParameterPage is neither followed by another
+		// …TemplatePage (i.e. it's the last template in the transclusion) nor a
+		// …ParameterPlaceholderPage (i.e. the parameter search widget isn't shown). This state
+		// should be unreachable, but isn't. Hiding this is done via CSS.
 		var addButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			icon: 'parameter',
 			label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
 		} )
-			.connect( this, { click: 'onAddButtonFocus' } );
+			.connect( this, { click: 'addPlaceholderParameter' } );
 		$( '<div>' )
 			.addClass( 've-ui-mwParameterPage-addUndocumented' )
 			.append( addButton.$element )
@@ -443,7 +447,7 @@ ve.ui.MWParameterPage.prototype.onRawFallbackButtonClick = function () {
 /**
  * Handle click events from the add button
  */
-ve.ui.MWParameterPage.prototype.onAddButtonFocus = function () {
+ve.ui.MWParameterPage.prototype.addPlaceholderParameter = function () {
 	var template = this.parameter.getTemplate();
 	template.addParameter( new ve.dm.MWParameterModel( template ) );
 };
