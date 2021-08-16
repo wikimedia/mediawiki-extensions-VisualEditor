@@ -1,5 +1,5 @@
 /*!
- * VisualEditor user interface MWTemplateOutlineParameterCheckboxLayout class.
+ * VisualEditor user interface MWTransclusionOutlineParameterWidget class.
  *
  * @license The MIT License (MIT); see LICENSE.txt
  */
@@ -17,7 +17,7 @@
  * @cfg {boolean} [required]
  * @cfg {boolean} [selected]
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineParameterCheckboxLayout( config ) {
+ve.ui.MWTransclusionOutlineParameterWidget = function VeUiMWTransclusionOutlineParameterWidget( config ) {
 	this.checkbox = new OO.ui.CheckboxInputWidget( {
 		title: config.required ? ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) : null,
 		disabled: config.required,
@@ -28,7 +28,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 	this.checkbox.$input.on( 'keydown', this.onKeyDown.bind( this ) );
 
 	// Parent constructor
-	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, ve.extendObject( config, {
+	ve.ui.MWTransclusionOutlineParameterWidget.super.call( this, ve.extendObject( config, {
 		$label: $( '<label>' )
 	} ) );
 
@@ -47,8 +47,8 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.OptionWidget );
-OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIndexedElement );
+OO.inheritClass( ve.ui.MWTransclusionOutlineParameterWidget, OO.ui.OptionWidget );
+OO.mixinClass( ve.ui.MWTransclusionOutlineParameterWidget, OO.ui.mixin.TabIndexedElement );
 
 /* Events */
 
@@ -69,7 +69,7 @@ OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIn
  * @private
  * @fires parameterFocused
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.onClick = function () {
 	this.selectCheckbox( true );
 };
 
@@ -77,7 +77,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
  * @private
  * @fires parameterFocused
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( e ) {
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.onKeyDown = function ( e ) {
 	if ( e.keyCode === OO.ui.Keys.SPACE ) {
 		// FIXME: Focus should stay in the sidebar
 	} else if ( e.keyCode === OO.ui.Keys.ENTER ) {
@@ -93,7 +93,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( 
  * @param {boolean} value
  * @fires parameterSelectionChanged
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = function ( value ) {
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.onCheckboxChange = function ( value ) {
 	this.emit( 'parameterSelectionChanged', this.getData(), value );
 };
 
@@ -102,7 +102,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = func
  * @param {boolean} state Selected state
  * @fires parameterFocused
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.selectCheckbox = function ( state ) {
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.selectCheckbox = function ( state ) {
 	if ( !this.checkbox.isDisabled() ) {
 		this.checkbox.setSelected( state );
 	}

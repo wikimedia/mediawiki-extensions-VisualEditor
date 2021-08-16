@@ -19,7 +19,6 @@
 			{
 				"name": "User Interface",
 				"classes": [
-					"ve.ui.MW*Layout",
 					"ve.ui.MW*Page",
 					"ve.ui.MW*Window",
 					"ve.ui.MWTransclusionsBooklet"
