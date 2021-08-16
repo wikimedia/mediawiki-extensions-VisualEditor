@@ -4,24 +4,24 @@
 	QUnit.test( 'interprets param with no attributes', ( assert ) => {
 		const layout = new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {} );
 
-		assert.strictEqual( layout.fieldWidget.disabled, false );
-		assert.strictEqual( layout.fieldWidget.selected, false );
-		assert.strictEqual( layout.fieldWidget.title, null );
+		assert.strictEqual( layout.checkbox.isDisabled(), false );
+		assert.strictEqual( layout.checkbox.isSelected(), false );
+		assert.strictEqual( layout.checkbox.getTitle(), null );
 	} );
 
 	QUnit.test( 'interprets required param', ( assert ) => {
 		const layout = new ve.ui.MWTemplateOutlineParameterCheckboxLayout( { required: true } );
 
-		assert.strictEqual( layout.fieldWidget.disabled, true );
-		assert.strictEqual( layout.fieldWidget.selected, true );
-		assert.notStrictEqual( layout.fieldWidget.title, null );
+		assert.strictEqual( layout.checkbox.isDisabled(), true );
+		assert.strictEqual( layout.checkbox.isSelected(), true );
+		assert.notStrictEqual( layout.checkbox.getTitle(), null );
 	} );
 
-	QUnit.test( 'interprets included param', ( assert ) => {
+	QUnit.test( 'interprets selected param', ( assert ) => {
 		const layout = new ve.ui.MWTemplateOutlineParameterCheckboxLayout( { selected: true } );
 
-		assert.strictEqual( layout.fieldWidget.disabled, false );
-		assert.strictEqual( layout.fieldWidget.selected, true );
-		assert.strictEqual( layout.fieldWidget.title, null );
+		assert.strictEqual( layout.checkbox.isDisabled(), false );
+		assert.strictEqual( layout.checkbox.isSelected(), true );
+		assert.strictEqual( layout.checkbox.getTitle(), null );
 	} );
 }() );
