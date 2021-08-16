@@ -11,8 +11,6 @@ ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWi
 		icon: 'wikiText',
 		label: ve.msg( 'visualeditor-dialog-transclusion-content' )
 	} );
-
-	this.content = content;
 };
 
 /* Inheritance */

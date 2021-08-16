@@ -15,8 +15,6 @@ ve.ui.MWTransclusionOutlinePlaceholderWidget = function VeUiMWTransclusionOutlin
 		icon: 'puzzle',
 		label: label
 	} );
-
-	this.placeholder = placeholder;
 };
 
 /* Inheritance */
