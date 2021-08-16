@@ -2161,6 +2161,7 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlinePartWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineTemplateWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineContainerWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineParameterSelectWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlinePlaceholderWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineWikitextWidget.js"
 			],

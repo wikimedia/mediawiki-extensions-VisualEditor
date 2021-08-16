@@ -5,7 +5,9 @@
  */
 
 /**
- * Container for checkbox and label
+ * A widget that represents a template parameter, with a checkbox to add/remove the parameter.
+ * Modelled after {@see OO.ui.OutlineOptionWidget}. Also see {@see OO.ui.CheckboxMultioptionWidget}
+ * for inspiration.
  *
  * @class
  * @extends OO.ui.OptionWidget
@@ -19,93 +21,56 @@
  */
 ve.ui.MWTransclusionOutlineParameterWidget = function VeUiMWTransclusionOutlineParameterWidget( config ) {
 	this.checkbox = new OO.ui.CheckboxInputWidget( {
-		title: config.required ? ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) : null,
+		title: config.required ?
+			ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) :
+			null,
 		disabled: config.required,
-		selected: config.selected || config.required
+		selected: config.selected || config.required,
+		// Keyboard navigation is handled by the outer OO.ui.SelectWidget
+		tabIndex: -1
 	} )
-	// FIXME: pass-through binding like [ 'emit', 'toggle' ]?
-		.connect( this, { change: 'onCheckboxChange' } );
-	this.checkbox.$input.on( 'keydown', this.onKeyDown.bind( this ) );
+		.connect( this, {
+			// The array syntax is a way to call `this.emit( 'change' )`.
+			change: [ 'emit', 'change' ]
+		} );
+	this.checkbox.$input.on( {
+		mousedown: this.onMouseDown.bind( this )
+	} );
 
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineParameterWidget.super.call( this, ve.extendObject( config, {
 		$label: $( '<label>' )
 	} ) );
 
-	// Mixin constructors
-	OO.ui.mixin.TabIndexedElement.call( this, ve.extendObject( config, {
-		tabIndex: this.checkbox.isDisabled() ? 0 : -1
-	} ) );
-
 	// Initialization
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlineItem' )
-		.append( this.checkbox.$element, this.$label )
-		.on( 'click', this.onClick.bind( this ) )
-		.on( 'keydown', this.onKeyDown.bind( this ) );
+		.append( this.checkbox.$element, this.$label );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWTransclusionOutlineParameterWidget, OO.ui.OptionWidget );
-OO.mixinClass( ve.ui.MWTransclusionOutlineParameterWidget, OO.ui.mixin.TabIndexedElement );
-
-/* Events */
-
-/**
- * @event parameterSelectionChanged
- * @param {string} paramName
- * @param {boolean} selected
- */
-
-/**
- * @event parameterFocused
- * @param {string} paramName
- */
 
 /* Methods */
 
 /**
  * @private
- * @fires parameterFocused
  */
-ve.ui.MWTransclusionOutlineParameterWidget.prototype.onClick = function () {
-	this.selectCheckbox( true );
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.onMouseDown = function ( e ) {
+	// Mouse clicks conflict with the click handler in {@see OO.ui.SelectWidget}
+	e.stopPropagation();
 };
 
 /**
- * @private
- * @fires parameterFocused
+ * @inheritDoc OO.ui.OptionWidget
  */
-ve.ui.MWTransclusionOutlineParameterWidget.prototype.onKeyDown = function ( e ) {
-	if ( e.keyCode === OO.ui.Keys.SPACE ) {
-		// FIXME: Focus should stay in the sidebar
-	} else if ( e.keyCode === OO.ui.Keys.ENTER ) {
-		this.selectCheckbox( true );
-		return false;
-	}
-};
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.setSelected = function ( state ) {
+	// Never uncheck a required parameter
+	state = state || this.checkbox.isDisabled();
 
-/**
- * Handles a checkbox input widget change event {@see OO.ui.CheckboxInputWidget}.
- *
- * @private
- * @param {boolean} value
- * @fires parameterSelectionChanged
- */
-ve.ui.MWTransclusionOutlineParameterWidget.prototype.onCheckboxChange = function ( value ) {
-	this.emit( 'parameterSelectionChanged', this.getData(), value );
-};
+	this.checkbox.setSelected( state, true );
+	ve.ui.MWTransclusionOutlineParameterWidget.super.prototype.setSelected.call( this, state );
 
-/**
- * @private
- * @param {boolean} state Selected state
- * @fires parameterFocused
- */
-ve.ui.MWTransclusionOutlineParameterWidget.prototype.selectCheckbox = function ( state ) {
-	if ( !this.checkbox.isDisabled() ) {
-		this.checkbox.setSelected( state );
-	}
-	// Note: Must be fired even if the checkbox was selected before, for proper focus behavior
-	this.emit( 'parameterFocused', this.getData() );
+	return this;
 };

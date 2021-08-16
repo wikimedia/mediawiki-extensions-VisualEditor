@@ -45,15 +45,20 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
 	} ).connect( this, {
 		change: 'filterParameters'
-	} ).toggle( false );
+	} ).toggle( checkboxes.length );
 	this.infoWidget = new OO.ui.LabelWidget( {
 		label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
-	this.parameters = new OO.ui.FieldsetLayout()
-		.connect( this, { change: 'onCheckboxListChange' } );
-	this.parameters.addItems( checkboxes );
+	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
+		items: checkboxes
+	} )
+		.connect( this, {
+			choose: 'onParameterChoose',
+			parameterFocused: 'onParameterFocused',
+			change: 'onCheckboxListChange'
+		} );
 
 	this.$element.append(
 		this.searchWidget.$element,
@@ -96,9 +101,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
 		label: spec.getParameterLabel( paramName ),
 		data: paramName,
 		selected: this.templateModel.hasParameter( paramName )
-	} ).connect( this, {
-		parameterSelectionChanged: 'onParameterSelectionChanged',
-		parameterFocused: 'onParameterFocused'
 	} );
 };
 
@@ -170,14 +172,13 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function
 };
 
 /**
- * Handles a parameter checkbox change event {@see ve.ui.MWTransclusionOutlineParameterWidget}
- *
  * @private
- * @param {string} paramName
+ * @param {ve.ui.MWTransclusionOutlineParameterWidget} checkbox
  * @param {boolean} selected
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterSelectionChanged = function ( paramName, selected ) {
-	var param = this.templateModel.getParameter( paramName );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterChoose = function ( checkbox, selected ) {
+	var paramName = checkbox.getData(),
+		param = this.templateModel.getParameter( paramName );
 	if ( !selected ) {
 		this.templateModel.removeParameter( param );
 	} else if ( !param ) {
