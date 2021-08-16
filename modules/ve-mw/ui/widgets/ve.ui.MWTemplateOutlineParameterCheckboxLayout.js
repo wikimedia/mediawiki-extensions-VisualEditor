@@ -21,7 +21,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 	config = config || {};
 	config = ve.extendObject( { align: 'inline' }, config );
 
-	this.checkbox = new OO.ui.CheckboxInputWidget( {
+	var checkbox = new OO.ui.CheckboxInputWidget( {
 		title: config.required ? ve.msg( 'visualeditor-dialog-transclusion-required-parameter' ) : null,
 		disabled: config.required,
 		selected: config.selected || config.required
@@ -32,7 +32,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 		} );
 
 	// Parent constructor
-	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, this.checkbox, config );
+	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, checkbox, config );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwTransclusionOutlineItem' );
@@ -86,5 +86,5 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onLabelClick = function
 };
 
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.setSelected = function ( state, internal ) {
-	this.checkbox.setSelected( state, internal );
+	this.fieldWidget.setSelected( state, internal );
 };
