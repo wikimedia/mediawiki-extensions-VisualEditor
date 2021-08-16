@@ -476,7 +476,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
 						this.bookletLayout
 					);
-					this.pocSidebar.connect( this, { filterParameter: 'onFilterParameter' } );
+					this.pocSidebar.connect( this, { filterParameters: 'onFilterParameters' } );
 				} else {
 					this.pocSidebar.clear();
 				}
@@ -581,10 +581,12 @@ ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 /**
  * @private
  */
-ve.ui.MWTemplateDialog.prototype.onFilterParameter = function ( partId, isVisible ) {
-	var page = this.bookletLayout.getPage( partId );
-	if ( page ) {
-		page.toggle( isVisible );
+ve.ui.MWTemplateDialog.prototype.onFilterParameters = function ( visibility ) {
+	for ( var partId in visibility ) {
+		var page = this.bookletLayout.getPage( partId );
+		if ( page ) {
+			page.toggle( visibility[ partId ] );
+		}
 	}
 };
 

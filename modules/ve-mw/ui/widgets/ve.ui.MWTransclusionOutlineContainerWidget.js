@@ -33,9 +33,9 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event filterParameter
- * @param {string} partId Unique id of the parameter, e.g. something like "part_1/param1"
- * @param {boolean} isVisible
+ * @event filterParameters
+ * @param {Object.<string,boolean>} visibility Keyed by unique id of the parameter, e.g. something
+ *  like "part_1/param1". Note this lists only parameters that are currently in use.
  */
 
 /**
@@ -99,8 +99,8 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 	if ( part instanceof ve.dm.MWTemplateModel ) {
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
-		// The array syntax is a way to call `this.emit( 'filterParameter' )`.
-		widget.connect( this, { filterParameter: [ 'emit', 'filterParameter' ] } );
+		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
+		widget.connect( this, { filterParameters: [ 'emit', 'filterParameters' ] } );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
 	} else if ( part instanceof ve.dm.MWTransclusionContentModel ) {
