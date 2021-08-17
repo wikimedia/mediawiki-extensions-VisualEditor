@@ -189,8 +189,8 @@
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget {
 	padding: 2px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;
+	justify-content: left;
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers {
@@ -198,12 +198,15 @@
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget .oo-ui-buttonWidget {
-	margin-left: 16px !important; /* stylelint-disable-line declaration-no-important */
+	margin-left: 4px !important; /* stylelint-disable-line declaration-no-important */
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-items > .oo-ui-buttonWidget:first-child,
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers > .oo-ui-buttonWidget:nth-child( 2 ) {
+.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-items > .oo-ui-buttonWidget:first-child {
 	margin-left: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers > .oo-ui-buttonWidget:nth-child( 2 ) {
+	margin-left: -4px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget {
