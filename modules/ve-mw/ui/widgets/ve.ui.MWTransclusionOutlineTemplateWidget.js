@@ -97,8 +97,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
 		data: paramName,
 		selected: this.templateModel.hasParameter( paramName )
 	} ).connect( this, {
-		change: 'onCheckboxChange',
-		select: 'onCheckboxSelect'
+		parameterSelectionChanged: 'onParameterSelectionChanged',
+		parameterFocused: 'onParameterFocused'
 	} );
 };
 
@@ -174,11 +174,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function
  *
  * @private
  * @param {string} paramName
- * @param {boolean} checked New checkbox state
+ * @param {boolean} selected
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function ( paramName, checked ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterSelectionChanged = function ( paramName, selected ) {
 	var param = this.templateModel.getParameter( paramName );
-	if ( !checked ) {
+	if ( !selected ) {
 		this.templateModel.removeParameter( param );
 	} else if ( !param ) {
 		this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel, paramName ) );
@@ -190,7 +190,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxChange = function 
  * @param {string} paramName
  * @fires selectParameter
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxSelect = function ( paramName ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterFocused = function ( paramName ) {
 	var param = this.templateModel.getParameter( paramName );
 	if ( param ) {
 		this.emit( 'selectParameter', param.getId() );
