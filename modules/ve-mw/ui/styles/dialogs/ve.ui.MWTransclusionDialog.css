@@ -59,6 +59,10 @@
 	overflow: auto;
 }
 
+.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTemplateDialog-pocSidebar-debug-container {
+	bottom: 0;
+}
+
 .ve-ui-mwTemplateDialog-pocSidebar-debug-container > .oo-ui-outlineSelectWidget {
 	background-color: rgba( 100%, 0%, 100%, 0.1 );
 	height: auto;

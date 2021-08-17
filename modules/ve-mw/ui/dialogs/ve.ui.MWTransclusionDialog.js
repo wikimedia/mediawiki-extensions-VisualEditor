@@ -563,6 +563,10 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 
 			if ( this.useNewSidebar ) {
 				this.bookletLayout.getOutlineControls().toggle( !this.isSingleTemplateTransclusion() );
+				this.$element.toggleClass(
+					've-ui-mwTransclusionDialog-single-transclusion',
+					this.isSingleTemplateTransclusion()
+				);
 			}
 
 			this.updateModeActionState();
