@@ -39,7 +39,10 @@ ve.ui.MWTransclusionContentPage = function VeUiMWTransclusionContentPage( conten
 		.setReadOnly( config.isReadOnly )
 		.connect( this, { change: 'onTextInputChange' } );
 	this.valueFieldset = new OO.ui.FieldsetLayout( {
-		label: ve.msg( 'visualeditor-dialog-transclusion-content' ),
+		label: ve.msg( veConfig.transclusionDialogNewSidebar ?
+			'visualeditor-dialog-transclusion-wikitext' :
+			'visualeditor-dialog-transclusion-content'
+		),
 		icon: 'wikiText',
 		$content: this.textInput.$element
 	} );

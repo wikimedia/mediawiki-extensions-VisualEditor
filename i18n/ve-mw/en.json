@@ -217,6 +217,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Continue editing",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Remove template",
 	"visualeditor-dialog-transclusion-feedback-message": "Recent work was completed to improve template search results. To learn more about the changes or leave feedback, go to the [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates project’s page].",
+	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
 	"visualeditor-dialogbutton-media-tooltip": "Images and media",
 	"visualeditor-dialogbutton-meta-tooltip": "Page settings",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
