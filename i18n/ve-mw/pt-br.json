@@ -184,6 +184,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Salvar",
 	"visualeditor-dialog-transclusion-absent-template": "A predefinição \"$1\" ainda não existe.",
 	"visualeditor-dialog-transclusion-add-content": "Adicionar conteúdo",
+	"visualeditor-dialog-transclusion-add-wikitext": "Adicionar wikitexto",
 	"visualeditor-dialog-transclusion-add-param": "Adicionar mais informações",
 	"visualeditor-dialog-transclusion-add-template": "Adicionar predefinição",
 	"visualeditor-dialog-transclusion-collapse-options": "Ocultar opções",
