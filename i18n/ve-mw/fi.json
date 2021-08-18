@@ -169,6 +169,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Tallenna",
 	"visualeditor-dialog-transclusion-absent-template": "Mallinetta \"$1\" ei löydy.",
 	"visualeditor-dialog-transclusion-add-content": "Lisää sisältö",
+	"visualeditor-dialog-transclusion-add-wikitext": "Lisää wikiteksti",
 	"visualeditor-dialog-transclusion-add-param": "Lisää enemmän tietoa",
 	"visualeditor-dialog-transclusion-add-template": "Lisää malline",
 	"visualeditor-dialog-transclusion-collapse-options": "Piilota valinnat",

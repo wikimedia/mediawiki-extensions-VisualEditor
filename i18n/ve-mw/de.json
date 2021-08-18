@@ -216,6 +216,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Weiter bearbeiten",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Vorlage entfernen",
 	"visualeditor-dialog-transclusion-feedback-message": "Kürzlich wurden Arbeiten zur Verbesserung der Suchergebnisse für Vorlagen abgeschlossen. Mehr Informationen über die Neuerungen finden sich auf der [//de.wikipedia.org/wiki/Wikipedia:Technische_Wünsche/Topwünsche/Vorlagen_suchen_und_einfügen Projektseite]. Dort kann auch Feedback gegeben werden.",
+	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
 	"visualeditor-dialogbutton-media-tooltip": "Bilder und Medien",
 	"visualeditor-dialogbutton-meta-tooltip": "Seiteneinstellungen",
 	"visualeditor-dialogbutton-template-tooltip": "Vorlage",

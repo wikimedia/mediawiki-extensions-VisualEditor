@@ -184,6 +184,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Zapisz",
 	"visualeditor-dialog-transclusion-absent-template": "Szablon „$1” jeszcze nie istnieje.",
 	"visualeditor-dialog-transclusion-add-content": "Dodaj treść",
+	"visualeditor-dialog-transclusion-add-wikitext": "Dodaj wikitekst",
 	"visualeditor-dialog-transclusion-add-param": "Dodaj więcej informacji",
 	"visualeditor-dialog-transclusion-add-template": "Dodaj szablon",
 	"visualeditor-dialog-transclusion-collapse-options": "Ukryj opcje",

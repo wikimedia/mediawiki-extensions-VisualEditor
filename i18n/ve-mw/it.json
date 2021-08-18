@@ -40,6 +40,7 @@
 			"Statix64",
 			"Stefania.scaramuzzi",
 			"Supernino",
+			"Toa",
 			"Una giornata uggiosa '94",
 			"Wikitoni"
 		]
@@ -224,6 +225,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifica: $1",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Continuare a modificare",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Rimuovi template",
+	"visualeditor-dialog-transclusion-wikitext": "Wikitesto",
 	"visualeditor-dialogbutton-media-tooltip": "Immagini e file multimediali",
 	"visualeditor-dialogbutton-meta-tooltip": "Impostazioni pagina",
 	"visualeditor-dialogbutton-template-tooltip": "Template",

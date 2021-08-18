@@ -213,6 +213,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Enregistrer",
 	"visualeditor-dialog-transclusion-absent-template": "Le modèle « $1 » n’existe pas encore.",
 	"visualeditor-dialog-transclusion-add-content": "Ajouter le contenu",
+	"visualeditor-dialog-transclusion-add-wikitext": "Ajouter le wikitexte",
 	"visualeditor-dialog-transclusion-add-param": "Ajouter plus d’informations",
 	"visualeditor-dialog-transclusion-add-template": "Ajouter le modèle",
 	"visualeditor-dialog-transclusion-collapse-options": "Masquer les options",
