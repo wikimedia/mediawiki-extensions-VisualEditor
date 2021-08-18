@@ -151,7 +151,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				names = added.getOrderedParameterNames();
 				if ( names.length ) {
 					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
-				} else if ( addedCount === 0 ) {
+				} else if ( addedCount === 0 && !this.isNewSidebar ) {
 					// This adds a placeholder, i.e. the parameter search widget appears
 					page.addPlaceholderParameter();
 				}

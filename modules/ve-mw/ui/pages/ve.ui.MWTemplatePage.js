@@ -101,20 +101,22 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 			removeButton.$element.appendTo( this.$element );
 		}
 
-		// This button is only shown as a last resort when this …TemplatePage is neither followed by
-		// a …ParameterPage (i.e. the template doesn't have parameters) nor a
-		// …ParameterPlaceholderPage (i.e. the parameter search widget isn't shown). This state
-		// should be unreachable, but isn't. Hiding this is done via CSS.
-		var addButton = new OO.ui.ButtonWidget( {
-			framed: false,
-			icon: 'parameter',
-			label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
-		} )
-			.connect( this, { click: 'addPlaceholderParameter' } );
-		$( '<div>' )
-			.addClass( 've-ui-mwTemplatePage-more' )
-			.append( addButton.$element )
-			.appendTo( this.$element );
+		if ( !veConfig.transclusionDialogNewSidebar ) {
+			// This button is only shown as a last resort when this …TemplatePage is neither followed by
+			// a …ParameterPage (i.e. the template doesn't have parameters) nor a
+			// …ParameterPlaceholderPage (i.e. the parameter search widget isn't shown). This state
+			// should be unreachable, but isn't. Hiding this is done via CSS.
+			var addButton = new OO.ui.ButtonWidget( {
+				framed: false,
+				icon: 'parameter',
+				label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
+			} )
+				.connect( this, { click: 'addPlaceholderParameter' } );
+			$( '<div>' )
+				.addClass( 've-ui-mwTemplatePage-more' )
+				.append( addButton.$element )
+				.appendTo( this.$element );
+		}
 	}
 };
 

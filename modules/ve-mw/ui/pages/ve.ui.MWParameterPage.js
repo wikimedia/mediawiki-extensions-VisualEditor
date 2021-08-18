@@ -223,7 +223,8 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		this.$info.after( this.collapsibleDoc.$element );
 	}
 
-	if ( !config.readOnly ) {
+	// FIXME this and the addPlaceholderParameter can be remove when the feature flag is gone
+	if ( !config.readOnly && !veConfig.transclusionDialogNewSidebar ) {
 		// This button is only shown when this …ParameterPage is neither followed by another
 		// …TemplatePage (i.e. it's the last template in the transclusion) nor a
 		// …ParameterPlaceholderPage (i.e. the parameter search widget isn't shown). This state
