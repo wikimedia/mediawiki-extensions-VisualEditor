@@ -110,6 +110,7 @@
 }
 
 .ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
+	border-right: 0;
 	width: 100%;
 }
 
