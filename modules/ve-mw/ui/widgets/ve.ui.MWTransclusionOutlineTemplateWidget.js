@@ -51,11 +51,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
-	var addParameterButton = new ve.ui.MWTransclusionOutlineButtonWidget( {
-		icon: 'parameter',
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-param' )
-	} ).connect( this, { click: 'addPlaceholderParameter' } );
-
 	this.parameters = new OO.ui.FieldsetLayout()
 		.connect( this, { change: 'onCheckboxListChange' } );
 	this.parameters.addItems( checkboxes );
@@ -63,8 +58,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	this.$element.append(
 		this.searchWidget.$element,
 		this.infoWidget.$element,
-		this.parameters.$element,
-		addParameterButton.$element
+		this.parameters.$element
 	);
 };
 
@@ -201,20 +195,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxSelect = function 
 	if ( param ) {
 		this.emit( 'selectParameter', param.getId() );
 	}
-};
-
-/**
- * @private
- * @fires selectParameter
- */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.addPlaceholderParameter = function () {
-	var placeholder = this.templateModel.getParameter( '' );
-	if ( placeholder ) {
-		this.emit( 'selectParameter', placeholder.getId() );
-		return;
-	}
-
-	this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel ) );
 };
 
 /**
