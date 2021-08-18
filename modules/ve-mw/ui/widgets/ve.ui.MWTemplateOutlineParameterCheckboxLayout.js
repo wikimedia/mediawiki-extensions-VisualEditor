@@ -8,7 +8,7 @@
  * Container for checkbox and label
  *
  * @class
- * @extends OO.ui.Widget
+ * @extends OO.ui.OptionWidget
  *
  * @constructor
  * @param {Object} config
@@ -28,10 +28,11 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 	this.checkbox.$input.on( 'keydown', this.onKeyDown.bind( this ) );
 
 	// Parent constructor
-	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, config );
+	ve.ui.MWTemplateOutlineParameterCheckboxLayout.super.call( this, ve.extendObject( config, {
+		$label: $( '<label>' )
+	} ) );
 
 	// Mixin constructors
-	OO.ui.mixin.LabelElement.call( this, $.extend( { $label: $( '<label>' ) }, config ) );
 	OO.ui.mixin.TabIndexedElement.call( this, ve.extendObject( config, {
 		tabIndex: this.checkbox.isDisabled() ? 0 : -1
 	} ) );
@@ -46,8 +47,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout = function VeUiMWTemplateOutlineP
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.Widget );
-OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.LabelElement );
+OO.inheritClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.OptionWidget );
 OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIndexedElement );
 
 /* Events */
@@ -66,12 +66,17 @@ OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIn
 /* Methods */
 
 /**
+ * @private
  * @fires select
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
 	this.setSelected( true );
 };
 
+/**
+ * @private
+ * @fires select
+ */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( e ) {
 	if ( e.keyCode === OO.ui.Keys.SPACE ) {
 		// FIXME: Focus should stay in the sidebar
@@ -84,6 +89,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( 
 /**
  * Handles a checkbox input widget change event {@see OO.ui.CheckboxInputWidget}.
  *
+ * @private
  * @param {boolean} value
  * @fires change
  */
@@ -94,6 +100,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = func
 /**
  * @param {boolean} state Selected state
  * @param {boolean} internal Used for internal calls to suppress events
+ * @fires select
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.setSelected = function ( state, internal ) {
 	if ( !this.checkbox.isDisabled() ) {
