@@ -32,7 +32,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.altered = false;
 	this.preventReselection = false;
 	this.expandedParamList = {};
-	this.isNewSidebar = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar;
+	this.useNewSidebar = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
@@ -469,7 +469,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
 			this.bookletLayout.autoFocus = false;
 
-			if ( this.isNewSidebar ) {
+			if ( this.useNewSidebar ) {
 				// FIXME: This is created at the wrong time. That's why we run into the situation
 				//  where an old instance exists. Should be in initialize().
 				if ( !this.pocSidebar ) {
