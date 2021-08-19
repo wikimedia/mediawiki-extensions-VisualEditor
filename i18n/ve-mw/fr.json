@@ -258,6 +258,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Continuer à éditer",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Supprimer le modèle",
 	"visualeditor-dialog-transclusion-feedback-message": "Un travail récent s’est achevé pour améliorer les résultats de recherche de modèle. Pour en savoir plus sur les modifications ou laissez un avis, aller sur la [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates page du projet].",
+	"visualeditor-dialog-transclusion-wikitext": "Wikitexte",
 	"visualeditor-dialogbutton-media-tooltip": "Images et médias",
 	"visualeditor-dialogbutton-meta-tooltip": "Paramètres de la page",
 	"visualeditor-dialogbutton-template-tooltip": "Modèle",
