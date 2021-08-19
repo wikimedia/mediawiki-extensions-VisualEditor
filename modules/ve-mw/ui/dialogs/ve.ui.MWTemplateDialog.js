@@ -98,7 +98,7 @@ ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
-	var names, reselect,
+	var reselect,
 		removePages = [];
 
 	if ( removed ) {
@@ -127,32 +127,27 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				// Use added page instead of closest page
 				this.transclusions.focusPart( added.getId() );
 			}
-			// Add existing params to templates (the template might be being moved)
+
 			if ( added instanceof ve.dm.MWTemplateModel ) {
-				names = added.getOrderedParameterNames();
-				// Prevent selection changes
+				// Prevent selection changes while parameters are added
 				this.preventReselection = true;
+
+				// Add existing params to templates (the template might be being moved)
+				var names = added.getOrderedParameterNames();
 				for ( var i = 0; i < names.length; i++ ) {
 					this.onAddParameter( added.getParameter( names[ i ] ) );
 				}
-				this.preventReselection = false;
 				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
-				if ( names.length ) {
-					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
-				}
-			}
 
-			// Add required and suggested params to user created templates
-			if ( added instanceof ve.dm.MWTemplateModel && this.loaded ) {
-				// Prevent selection changes
-				this.preventReselection = true;
-				var addedCount = added.addPromptedParameters();
+				// Add required and suggested params to user created templates
+				var shouldAddPlaceholder = this.loaded && added.addPromptedParameters() === 0;
+
 				this.preventReselection = false;
-				names = added.getOrderedParameterNames();
+
 				if ( names.length ) {
+					// Focus the first element when parameters are present
 					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
-				} else if ( addedCount === 0 && !this.isNewSidebar ) {
-					// This adds a placeholder, i.e. the parameter search widget appears
+				} else if ( shouldAddPlaceholder && !this.isNewSidebar ) {
 					page.addPlaceholderParameter();
 				}
 			}
