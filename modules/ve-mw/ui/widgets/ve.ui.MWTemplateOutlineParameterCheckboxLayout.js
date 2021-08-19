@@ -70,7 +70,7 @@ OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIn
  * @fires select
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
-	this.setSelected( true );
+	this.selectCheckbox( true );
 };
 
 /**
@@ -81,7 +81,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( 
 	if ( e.keyCode === OO.ui.Keys.SPACE ) {
 		// FIXME: Focus should stay in the sidebar
 	} else if ( e.keyCode === OO.ui.Keys.ENTER ) {
-		this.setSelected( true );
+		this.selectCheckbox( true );
 		return false;
 	}
 };
@@ -98,16 +98,14 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = func
 };
 
 /**
+ * @private
  * @param {boolean} state Selected state
- * @param {boolean} internal Used for internal calls to suppress events
  * @fires select
  */
-ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.setSelected = function ( state, internal ) {
+ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.selectCheckbox = function ( state ) {
 	if ( !this.checkbox.isDisabled() ) {
-		this.checkbox.setSelected( state, internal );
+		this.checkbox.setSelected( state );
 	}
-	if ( !internal ) {
-		// Note: Must be fired even if the checkbox was selected before, for proper focus behavior
-		this.emit( 'select', this.getData() );
-	}
+	// Note: Must be fired even if the checkbox was selected before, for proper focus behavior
+	this.emit( 'select', this.getData() );
 };
