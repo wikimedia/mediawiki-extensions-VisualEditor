@@ -30,6 +30,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [], 'getUndocumentedParameterNames' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'unknown' ), false, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'unknown' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'unknown' ), 'unknown', 'getParameterLabel' );
@@ -57,6 +58,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [ 'p1', 'p2' ], 'getUndocumentedParameterNames' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'p2', 'getParameterLabel' );
@@ -87,6 +89,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [ 'p1', 'p2' ], 'getUndocumentedParameterNames' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'p2', 'getParameterLabel' );
@@ -120,6 +123,7 @@
 			spec.setTemplateData( templateData );
 
 			assert.deepEqual( spec.getDocumentedParameterOrder(), [], 'getDocumentedParameterOrder' );
+			assert.deepEqual( spec.getUndocumentedParameterNames(), [], 'getUndocumentedParameterNames' );
 			assert.strictEqual( spec.getParameterLabel( 'p' ), 'p', 'getParameterLabel' );
 			assert.strictEqual( spec.getParameterDescription( 'p' ), null, 'getParameterDescription' );
 			assert.deepEqual( spec.getParameterSuggestedValues( 'p' ), [], 'getParameterSuggestedValues' );
@@ -144,6 +148,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), null, 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [ 'p2' ], 'getDocumentedParameterOrder' );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [ 'p1' ], 'getUndocumentedParameterNames' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'p2' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'p2' ), false, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'p2' ), 'p2', 'getParameterLabel' );
@@ -193,6 +198,7 @@
 		assert.strictEqual( spec.getLabel(), 'RawTemplateName', 'getLabel' );
 		assert.strictEqual( spec.getDescription(), 'TemplateDescription', 'getDescription' );
 		assert.deepEqual( spec.getDocumentedParameterOrder(), [ 'DummyOrder' ], 'getDocumentedParameterOrder' );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [], 'getUndocumentedParameterNames' );
 		assert.strictEqual( spec.isKnownParameterOrAlias( 'a' ), true, 'isKnownParameterOrAlias' );
 		assert.strictEqual( spec.isParameterAlias( 'a' ), true, 'isParameterAlias' );
 		assert.strictEqual( spec.getParameterLabel( 'a' ), 'ParamLabel', 'getParameterLabel' );
@@ -220,12 +226,14 @@
 		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), false );
 		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'p0', 'p1-alias', 'p2' ] );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [ 'p0', 'p1-alias', 'p2' ], 'getUndocumentedParameterNames' );
 
 		spec.setTemplateData( { params: { p1: { aliases: [ 'p1-alias' ] } } } );
 
 		assert.strictEqual( spec.isParameterAlias( 'p1-alias' ), true );
 		assert.strictEqual( spec.getParameterLabel( 'p1-alias' ), 'p1-alias' );
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'p0', 'p1', 'p2' ] );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [ 'p0', 'p2' ], 'getUndocumentedParameterNames' );
 	} );
 
 	QUnit.test( 'Alias conflicts with another parameter', ( assert ) => {
@@ -254,10 +262,12 @@
 		spec.setTemplateData( { params: { color: { aliases: [ 'colour' ] } } } );
 
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'color' ] );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [], 'getUndocumentedParameterNames' );
 
 		spec.fillFromTemplate();
 
 		assert.deepEqual( spec.getKnownParameterNames(), [ 'color' ] );
+		assert.deepEqual( spec.getUndocumentedParameterNames(), [], 'getUndocumentedParameterNames' );
 	} );
 
 	[

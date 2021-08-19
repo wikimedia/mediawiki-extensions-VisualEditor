@@ -171,13 +171,23 @@ ve.dm.MWTemplateSpecModel.prototype.isDocumented = function () {
  * parameters as they appear in TemplateData. Returns a copy, i.e. it's safe to manipulate the
  * array.
  *
- * @private
  * @return {string[]} Preferred order of parameters via TemplateData, if given
  */
 ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 	return Array.isArray( this.templateData.paramOrder ) ?
 		this.templateData.paramOrder.slice() :
 		Object.keys( this.templateData.params );
+};
+
+/**
+ * @return {string[]}
+ */
+ve.dm.MWTemplateSpecModel.prototype.getUndocumentedParameterNames = function () {
+	var documentedParameters = this.templateData.params;
+
+	return this.getKnownParameterNames().filter( function ( name ) {
+		return !( name in documentedParameters );
+	} );
 };
 
 /**
@@ -189,10 +199,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
  * @return {string[]}
  */
 ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
-	var documentedParameters = this.templateData.params,
-		undocumentedParameters = this.getKnownParameterNames().filter( function ( name ) {
-			return !( name in documentedParameters );
-		} );
+	var undocumentedParameters = this.getUndocumentedParameterNames();
 
 	undocumentedParameters.sort( function ( a, b ) {
 		var aIsNaN = isNaN( a ),
