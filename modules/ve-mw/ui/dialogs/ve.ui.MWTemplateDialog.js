@@ -113,7 +113,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			removed.disconnect( this );
 		}
 		if ( this.loaded && !this.preventReselection && partPage.isActive() ) {
-			reselect = this.bookletLayout.findClosestPage( partPage );
+			reselect = this.bookletLayout.findClosestPage( partPage ).getName();
 		}
 		removePages.push( partPage );
 		this.bookletLayout.removePages( removePages );
@@ -153,7 +153,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			}
 		}
 	} else if ( reselect ) {
-		this.transclusions.focusPart( reselect.getName() );
+		this.transclusions.focusPart( reselect );
 	}
 
 	if ( this.loaded && ( added || removed ) ) {
