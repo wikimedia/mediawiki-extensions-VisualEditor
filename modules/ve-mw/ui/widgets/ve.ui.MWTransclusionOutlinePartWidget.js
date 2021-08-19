@@ -20,20 +20,16 @@
  */
 ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
 	// Parent constructor
-	ve.ui.MWTransclusionOutlinePartWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlinePartWidget.super.call( this, ve.extendObject( config, {
+		data: part.getId()
+	} ) );
 
-	// FIXME: Use config.data and OO.ui.Element.getData() instead?
-	// Warning, there is already config.id and this.elementId!
-	this.partId = part.getId();
-
-	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
+	var header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
 		.connect( this, { click: 'onHeaderClick' } );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
-		// Note: There is no code that uses this. It just helps when manually inspecting the HTML.
-		.attr( 'data-transclusion-part-id', part.getId() )
-		.append( this.header.$element );
+		.append( header.$element );
 };
 
 /* Inheritance */
@@ -43,20 +39,13 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event partHeaderClick
+ * @event headerClick
  * @param {string} partId
  */
 
 /**
- * @return {string} Identifier of the {@see ve.dm.MWTransclusionPartModel} this widget represents
- */
-ve.ui.MWTransclusionOutlinePartWidget.prototype.getPartId = function () {
-	return this.partId;
-};
-
-/**
- * @fires partHeaderClick
+ * @fires headerClick
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderClick = function () {
-	this.emit( 'partHeaderClick', this.partId );
+	this.emit( 'headerClick', this.data );
 };

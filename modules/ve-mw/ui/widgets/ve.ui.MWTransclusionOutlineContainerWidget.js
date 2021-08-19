@@ -110,7 +110,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
 	}
 
-	widget.connect( this, { partHeaderClick: 'focusPart' } );
+	widget.connect( this, { headerClick: 'focusPart' } );
 
 	this.partWidgets[ part.getId() ] = widget;
 	if ( typeof newPosition === 'number' && newPosition < this.$element.children().length ) {
