@@ -25,7 +25,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	} ) );
 
 	var header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
-		.connect( this, { click: 'onHeaderClick' } );
+		.connect( this, { click: [ 'emit', 'focusPart', part.getId() ] } );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
@@ -39,13 +39,6 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event headerClick
- * @param {string} partId
+ * @event focusPart
+ * @param {string} partId Unique id of the part, e.g. something "part_1" or "part_1/param1".
  */
-
-/**
- * @fires headerClick
- */
-ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderClick = function () {
-	this.emit( 'headerClick', this.data );
-};

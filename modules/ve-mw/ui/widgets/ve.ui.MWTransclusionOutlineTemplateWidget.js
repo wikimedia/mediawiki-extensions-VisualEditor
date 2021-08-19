@@ -69,8 +69,8 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Events */
 
 /**
- * @event selectParameter
- * @param {string} paramId Unique id of the parameter, e.g. something like "part_1/param1"
+ * @event focusPart
+ * @param {string} partId Unique id of the part, e.g. something "part_1" or "part_1/param1".
  */
 
 /**
@@ -188,12 +188,12 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterSelectionChanged 
 /**
  * @private
  * @param {string} paramName
- * @fires selectParameter
+ * @fires focusPart
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterFocused = function ( paramName ) {
 	var param = this.templateModel.getParameter( paramName );
 	if ( param ) {
-		this.emit( 'selectParameter', param.getId() );
+		this.emit( 'focusPart', param.getId() );
 	}
 };
 
