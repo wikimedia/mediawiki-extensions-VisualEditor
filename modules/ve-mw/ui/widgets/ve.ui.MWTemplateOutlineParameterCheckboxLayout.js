@@ -53,13 +53,13 @@ OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIn
 /* Events */
 
 /**
- * @event change
+ * @event parameterSelectionChanged
  * @param {string} paramName
- * @param {boolean} checked New checkbox state
+ * @param {boolean} selected
  */
 
 /**
- * @event select
+ * @event parameterFocused
  * @param {string} paramName
  */
 
@@ -67,7 +67,7 @@ OO.mixinClass( ve.ui.MWTemplateOutlineParameterCheckboxLayout, OO.ui.mixin.TabIn
 
 /**
  * @private
- * @fires select
+ * @fires parameterFocused
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
 	this.selectCheckbox( true );
@@ -75,7 +75,7 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onClick = function () {
 
 /**
  * @private
- * @fires select
+ * @fires parameterFocused
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( e ) {
 	if ( e.keyCode === OO.ui.Keys.SPACE ) {
@@ -91,21 +91,21 @@ ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onKeyDown = function ( 
  *
  * @private
  * @param {boolean} value
- * @fires change
+ * @fires parameterSelectionChanged
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.onCheckboxChange = function ( value ) {
-	this.emit( 'change', this.getData(), value );
+	this.emit( 'parameterSelectionChanged', this.getData(), value );
 };
 
 /**
  * @private
  * @param {boolean} state Selected state
- * @fires select
+ * @fires parameterFocused
  */
 ve.ui.MWTemplateOutlineParameterCheckboxLayout.prototype.selectCheckbox = function ( state ) {
 	if ( !this.checkbox.isDisabled() ) {
 		this.checkbox.setSelected( state );
 	}
 	// Note: Must be fired even if the checkbox was selected before, for proper focus behavior
-	this.emit( 'select', this.getData() );
+	this.emit( 'parameterFocused', this.getData() );
 };
