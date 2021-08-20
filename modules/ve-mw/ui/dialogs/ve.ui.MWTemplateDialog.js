@@ -150,6 +150,15 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				} else if ( shouldAddPlaceholder && !this.isNewSidebar ) {
 					page.addPlaceholderParameter();
 				}
+
+				if ( this.isNewSidebar ) {
+					var documentedParameters = added.getSpec().getDocumentedParameterOrder(),
+						undocumentedParameters = added.getSpec().getUndocumentedParameterNames();
+
+					if ( !documentedParameters.length || undocumentedParameters.length ) {
+						page.addPlaceholderParameter();
+					}
+				}
 			}
 		}
 	} else if ( reselect ) {
