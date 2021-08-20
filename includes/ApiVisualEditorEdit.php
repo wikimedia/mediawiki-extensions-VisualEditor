@@ -10,7 +10,6 @@
 
 use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\User\UserIdentity;
@@ -369,6 +368,8 @@ class ApiVisualEditorEdit extends ApiBase {
 	public function execute() {
 		$user = $this->getUser();
 		$params = $this->extractRequestParams();
+
+		$result = [];
 		$title = Title::newFromText( $params['page'] );
 		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
 			// Convert Special:CollabPad/MyPage to MyPage so we can serialize properly
@@ -406,18 +407,33 @@ class ApiVisualEditorEdit extends ApiBase {
 			$section = $params['section'] ?? null;
 			$result = $this->diffWikitext( $title, $params['oldid'], $wikitext, $section );
 		} elseif ( $params['paction'] === 'save' ) {
+			$pluginData = [];
+			foreach ( $params['plugins'] ?? [] as $plugin ) {
+				$pluginData[$plugin] = $params['data-' . $plugin];
+			}
+			$presaveHook = $this->hookRunner->onVisualEditorApiVisualEditorEditPreSave(
+				$title->toPageIdentity(),
+				$user,
+				$wikitext,
+				$params,
+				$pluginData,
+				$result
+			);
+
+			if ( $presaveHook === false ) {
+				$this->dieWithError( $result['message'], 'hookaborted', $result );
+			}
+
 			$saveresult = $this->saveWikitext( $title, $wikitext, $params );
 			$editStatus = $saveresult['edit']['result'];
 
 			// Error
 			if ( $editStatus !== 'Success' ) {
-				$result = [
-					'result' => 'error',
-					'edit' => $saveresult['edit']
-				];
-
-			// Success
+				$result['result'] = 'error';
+				$result['edit'] = $saveresult['edit'];
 			} else {
+				// Success
+				$result['result'] = 'success';
 				if ( isset( $saveresult['edit']['newrevid'] ) ) {
 					$newRevId = intval( $saveresult['edit']['newrevid'] );
 				} else {
@@ -426,10 +442,12 @@ class ApiVisualEditorEdit extends ApiBase {
 
 				// Return result of parseWikitext instead of saveWikitext so that the
 				// frontend can update the page rendering without a refresh.
-				$result = $this->parseWikitext( $newRevId );
-				if ( $result === false ) {
+				$parseWikitextResult = $this->parseWikitext( $newRevId );
+				if ( $parseWikitextResult === false ) {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				}
+
+				$result = array_merge( $result, $parseWikitextResult );
 
 				$result['isRedirect'] = (string)$title->isRedirect();
 
@@ -483,20 +501,14 @@ class ApiVisualEditorEdit extends ApiBase {
 
 				$result['watched'] = $saveresult['edit']['watched'] ?? false;
 				$result['watchlistexpiry'] = $saveresult['edit']['watchlistexpiry'] ?? null;
-				$result['result'] = 'success';
 			}
-			$plugins = explode( '|', $this->getRequest()->getVal( 'plugins', '' ) );
-			$pluginData = [];
-			foreach ( $plugins as $plugin ) {
-				$pluginData[$plugin] = $this->getRequest()->getVal( 'data-' . $plugin );
-			}
+
 			$this->hookRunner->onVisualEditorApiVisualEditorEditPostSave(
-				new PageIdentityValue(
-					$title->getId(),
-					$title->getNamespace(),
-					$title->getDBkey(),
-					PageIdentityValue::LOCAL
-				),
+			// The earlier call to $title->toPageIdentity() will have an article ID of 0 for new article
+			// creation. Because of title cache (Title::$titleCache), $title->getId() will change value during the
+			// parseWikitext() call in that case, but the ID of a PageIdentityValue object won't, so we need to create
+			// a new one here.
+				$title->toPageIdentity(),
 				$user,
 				$wikitext,
 				$params,
@@ -505,7 +517,6 @@ class ApiVisualEditorEdit extends ApiBase {
 				$result
 			);
 		}
-		// @phan-suppress-next-line PhanPossiblyUndeclaredVariable False positive
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
 	}
 
