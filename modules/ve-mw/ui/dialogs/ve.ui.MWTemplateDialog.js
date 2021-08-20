@@ -113,7 +113,8 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			removed.disconnect( this );
 		}
 		if ( this.loaded && !this.preventReselection && partPage.isActive() ) {
-			reselect = this.bookletLayout.findClosestPage( partPage ).getName();
+			var closestPage = this.bookletLayout.findClosestPage( partPage );
+			reselect = closestPage && closestPage.getName();
 		}
 		removePages.push( partPage );
 		this.bookletLayout.removePages( removePages );
