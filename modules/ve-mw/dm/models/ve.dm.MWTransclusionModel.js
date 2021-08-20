@@ -22,10 +22,10 @@
 	 * @param {ve.dm.Document} doc Document to use associate with API requests
 	 * @property {ve.dm.MWTransclusionPartModel[]} parts
 	 * @property {number} uid
-	 * @property {jQuery.Promise[]} requests Currently running API requests. The only
+	 * @property {jQuery.Promise[]} templateDataApiRequests Currently running API requests. The only
 	 *  reason to keep these around is to be able to abort them earlier when the template dialog
 	 *  closes or resets.
-	 * @property {Object[]} queue
+	 * @property {Object[]} changeQueue
 	 */
 	ve.dm.MWTransclusionModel = function VeDmMWTransclusionModel( doc ) {
 		// Mixin constructors
@@ -35,8 +35,8 @@
 		this.doc = doc;
 		this.parts = [];
 		this.uid = 0;
-		this.requests = [];
-		this.queue = [];
+		this.templateDataApiRequests = [];
+		this.changeQueue = [];
 	};
 
 	/* Inheritance */
@@ -174,20 +174,20 @@
 				if ( part.template ) {
 					deferred = ve.createDeferred();
 					promises.push( deferred.promise() );
-					this.queue.push( {
+					this.changeQueue.push( {
 						add: ve.dm.MWTemplateModel.newFromData( this, part.template ),
 						deferred: deferred
 					} );
 				} else if ( typeof part === 'string' ) {
 					deferred = ve.createDeferred();
 					promises.push( deferred.promise() );
-					this.queue.push( {
+					this.changeQueue.push( {
 						add: new ve.dm.MWTransclusionContentModel( this, part ),
 						deferred: deferred
 					} );
 				}
 			}
-			setTimeout( this.fetch.bind( this ) );
+			setTimeout( this.processChangeQueue.bind( this ) );
 		}
 
 		return ve.promiseAll( promises );
@@ -196,12 +196,13 @@
 	/**
 	 * Process one or more queue items.
 	 *
+	 * @private
 	 * @param {Object[]} queue List of objects containing parts to add and optionally indexes to add
 	 *  them at, if no index is given parts will be added at the end
 	 * @fires replace For each item added
 	 * @fires change
 	 */
-	ve.dm.MWTransclusionModel.prototype.process = function ( queue ) {
+	ve.dm.MWTransclusionModel.prototype.resolveChangeQueue = function ( queue ) {
 		var i,
 			resolveQueue = [];
 
@@ -264,18 +265,21 @@
 		}
 	};
 
-	ve.dm.MWTransclusionModel.prototype.fetch = function () {
+	/**
+	 * @private
+	 */
+	ve.dm.MWTransclusionModel.prototype.processChangeQueue = function () {
 		var templateNamespaceId = mw.config.get( 'wgNamespaceIds' ).template,
 			titles = [];
 
-		if ( !this.queue.length ) {
+		if ( !this.changeQueue.length ) {
 			return;
 		}
 
-		var queue = this.queue.slice();
+		var queue = this.changeQueue.slice();
 
 		// Clear shared queue for future calls
-		this.queue.length = 0;
+		this.changeQueue.length = 0;
 
 		// Get unique list of template titles that aren't already loaded
 		for ( var i = 0; i < queue.length; i++ ) {
@@ -302,38 +306,40 @@
 
 		// Bypass server for empty lists
 		if ( !titles.length ) {
-			setTimeout( this.process.bind( this, queue ) );
+			setTimeout( this.resolveChangeQueue.bind( this, queue ) );
 			return;
 		}
 
-		this.requests.push( this.fetchRequest( titles, queue ) );
+		this.templateDataApiRequests.push( this.callTemplateDataApi( titles, queue ) );
 	};
 
 	/**
+	 * @private
 	 * @param {string[]} titles
 	 * @param {Object[]} queue
 	 * @return {jQuery.Promise}
 	 */
-	ve.dm.MWTransclusionModel.prototype.fetchRequest = function ( titles, queue ) {
+	ve.dm.MWTransclusionModel.prototype.callTemplateDataApi = function ( titles, queue ) {
 		var xhr = ve.init.target.getContentApi( this.doc ).get( {
 			action: 'templatedata',
 			titles: titles,
 			lang: mw.config.get( 'wgUserLanguage' ),
 			includeMissingTitles: '1',
 			redirects: '1'
-		} ).done( this.fetchRequestDone.bind( this ) );
+		} ).done( this.cacheTemplateDataApiResponse.bind( this ) );
 		xhr.always(
-			this.fetchRequestAlways.bind( this, xhr ),
-			this.process.bind( this, queue )
+			this.markRequestAsDone.bind( this, xhr ),
+			this.resolveChangeQueue.bind( this, queue )
 		);
 		return xhr;
 	};
 
 	/**
+	 * @private
 	 * @param {Object} [data]
 	 * @param {Object.<number,Object>} [data.pages]
 	 */
-	ve.dm.MWTransclusionModel.prototype.fetchRequestDone = function ( data ) {
+	ve.dm.MWTransclusionModel.prototype.cacheTemplateDataApiResponse = function ( data ) {
 		if ( !data || !data.pages ) {
 			return;
 		}
@@ -374,24 +380,22 @@
 	};
 
 	/**
+	 * @private
 	 * @param {jQuery.Promise} apiPromise
 	 */
-	ve.dm.MWTransclusionModel.prototype.fetchRequestAlways = function ( apiPromise ) {
+	ve.dm.MWTransclusionModel.prototype.markRequestAsDone = function ( apiPromise ) {
 		// Prune completed request
-		var index = this.requests.indexOf( apiPromise );
+		var index = this.templateDataApiRequests.indexOf( apiPromise );
 		if ( index !== -1 ) {
-			this.requests.splice( index, 1 );
+			this.templateDataApiRequests.splice( index, 1 );
 		}
 	};
 
-	/**
-	 * Abort any pending requests.
-	 */
-	ve.dm.MWTransclusionModel.prototype.abortRequests = function () {
-		for ( var i = 0; i < this.requests.length; i++ ) {
-			this.requests[ i ].abort();
+	ve.dm.MWTransclusionModel.prototype.abortAllApiRequests = function () {
+		for ( var i = 0; i < this.templateDataApiRequests.length; i++ ) {
+			this.templateDataApiRequests[ i ].abort();
 		}
-		this.requests.length = 0;
+		this.templateDataApiRequests.length = 0;
 	};
 
 	/**
@@ -400,21 +404,17 @@
 	 * @return {Object|null} Plain object representation, or null if empty
 	 */
 	ve.dm.MWTransclusionModel.prototype.getPlainObject = function () {
-		var obj = { parts: [] };
+		var parts = [];
 
 		for ( var i = 0; i < this.parts.length; i++ ) {
 			var part = this.parts[ i ];
 			var serialization = part.serialize();
 			if ( serialization !== undefined && serialization !== '' ) {
-				obj.parts.push( serialization );
+				parts.push( serialization );
 			}
 		}
 
-		if ( obj.parts.length === 0 ) {
-			return null;
-		}
-
-		return obj;
+		return parts.length ? { parts: parts } : null;
 	};
 
 	/**
@@ -447,11 +447,11 @@
 		) {
 			throw new Error( 'Invalid transclusion part' );
 		}
-		this.queue.push( { remove: remove, add: add, deferred: deferred } );
+		this.changeQueue.push( { remove: remove, add: add, deferred: deferred } );
 
-		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
+		// Fetch on next yield to process items in the queue together, subsequent calls will
 		// have no effect because the queue will be clear
-		setTimeout( this.fetch.bind( this ) );
+		setTimeout( this.processChangeQueue.bind( this ) );
 
 		return deferred.promise();
 	};
@@ -471,11 +471,11 @@
 		if ( !( part instanceof ve.dm.MWTransclusionPartModel ) ) {
 			throw new Error( 'Invalid transclusion part' );
 		}
-		this.queue.push( { add: part, index: index, deferred: deferred } );
+		this.changeQueue.push( { add: part, index: index, deferred: deferred } );
 
 		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
 		// have no effect because the queue will be clear
-		setTimeout( this.fetch.bind( this ) );
+		setTimeout( this.processChangeQueue.bind( this ) );
 
 		return deferred.promise();
 	};
@@ -571,8 +571,8 @@
 	ve.dm.MWTransclusionModel.prototype.reset = function () {
 		this.parts = [];
 		this.uid = 0;
-		this.requests = [];
-		this.queue = [];
+		this.templateDataApiRequests = [];
+		this.changeQueue = [];
 	};
 
 }() );
