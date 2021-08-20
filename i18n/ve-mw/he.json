@@ -216,6 +216,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "המשך עריכה",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "הסרת תבנית",
 	"visualeditor-dialog-transclusion-feedback-message": "לאחרונה הושלמה עבודה לשיפור תוצאות חיפוש תבניות. למידע נוסף על שינויים או שליחת משוב, ר' את [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates דף המיזם].",
+	"visualeditor-dialog-transclusion-wikitext": "קוד ויקי",
 	"visualeditor-dialogbutton-media-tooltip": "תמונות ומדיה",
 	"visualeditor-dialogbutton-meta-tooltip": "הגדרות דף",
 	"visualeditor-dialogbutton-template-tooltip": "תבנית",
