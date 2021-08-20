@@ -126,7 +126,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( added ) );
 			if ( reselect ) {
 				// Use added page instead of closest page
-				this.transclusions.focusPart( added.getId() );
+				reselect = added.getId();
 			}
 
 			if ( added instanceof ve.dm.MWTemplateModel ) {
@@ -147,7 +147,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 
 				if ( names.length ) {
 					// Focus the first element when parameters are present
-					this.transclusions.focusPart( added.getParameter( names[ 0 ] ).getId() );
+					reselect = added.getParameter( names[ 0 ] ).getId();
 				} else if ( shouldAddPlaceholder && !this.isNewSidebar ) {
 					page.addPlaceholderParameter();
 				}
@@ -162,7 +162,9 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				}
 			}
 		}
-	} else if ( reselect ) {
+	}
+
+	if ( reselect ) {
 		this.transclusions.focusPart( reselect );
 	}
 
