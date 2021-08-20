@@ -264,7 +264,7 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	this.orderedParameterNames = null;
 	this.params[ name ] = param;
 	this.spec.fillFromTemplate();
-	// This forwards cange events from the nested ve.dm.MWParameterModel upwards. The array
+	// This forwards change events from the nested ve.dm.MWParameterModel upwards. The array
 	// syntax is a way to call `this.emit( 'change' )`.
 	param.connect( this, { change: [ 'emit', 'change' ] } );
 	this.emit( 'add', param );

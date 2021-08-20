@@ -241,7 +241,7 @@
 
 			this.parts.splice( index, remove, item.add );
 			if ( item.add ) {
-				// This forwards cange events from the nested ve.dm.MWTransclusionPartModel upwards.
+				// This forwards change events from the nested ve.dm.MWTransclusionPartModel upwards.
 				// The array syntax is a way to call `this.emit( 'change' )`.
 				item.add.connect( this, { change: [ 'emit', 'change' ] } );
 			}
