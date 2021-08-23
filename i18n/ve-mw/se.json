@@ -5,7 +5,10 @@
 			"Yupik"
 		]
 	},
+	"visualeditor-categories-tool": "Kategoriijat",
 	"visualeditor-dialog-media-choose-image": "Geavat dán gova",
+	"visualeditor-dialog-media-content-filename": "Fiilanamma",
+	"visualeditor-dialog-media-info-licenseshortname": "Liseansa",
 	"visualeditor-dialog-media-info-readmore": "Loga lasi",
 	"visualeditor-dialog-media-search-tab-search": "Oza",
 	"visualeditor-dialog-media-title": "Mediaválljemat",

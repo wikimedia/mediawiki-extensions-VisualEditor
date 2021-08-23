@@ -360,6 +360,6 @@
 	"visualeditor-wikitext-warning": "Esteu utilitzant l'Editor Visual. El [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] no funciona en aquest espai. Per canviar a l'editor en wikitext en qualsevol moment sense perdre els canvis, feu clic al botó de canvi.",
 	"visualeditor-wikitext-warning-title": "S'ha detectat sintaxi wiki",
 	"visualeditor-wikitextconvert-title": "Voleu convertir el format a wikitext?",
-	"visualeditor-wikitextconvert-message": "El contingut enganxat conté format. Voleu convertir-lo a wikitext, o bé inserir-lo com a text senzill?",
+	"visualeditor-wikitextconvert-message": "El contingut que heu enganxat conté format. Voleu convertir-lo a wikitext?",
 	"visualeditor-wikitextconvert-convert": "Converteix a wikitext"
 }

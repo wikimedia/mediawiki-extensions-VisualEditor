@@ -246,6 +246,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Вернуться к поискам?",
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Возврат удаляет этот шаблон вместе с любой введенной информацией, возвращая вас к выбору шаблона. Эти действия носят необратимый характер.",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Продолжить редактирование",
+	"visualeditor-dialog-transclusion-wikitext": "Вики-текст",
 	"visualeditor-dialogbutton-media-tooltip": "Изображения и медиафайлы",
 	"visualeditor-dialogbutton-meta-tooltip": "Параметры страницы",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",

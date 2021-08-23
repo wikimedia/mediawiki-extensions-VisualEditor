@@ -207,6 +207,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-title": "Palataanko takaisin hakuun?",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Jatka muokkaamista",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Poista malline",
+	"visualeditor-dialog-transclusion-wikitext": "Wikiteksti",
 	"visualeditor-dialogbutton-media-tooltip": "Kuvat ja media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sivun asetukset",
 	"visualeditor-dialogbutton-template-tooltip": "Malline",
