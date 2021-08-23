@@ -238,11 +238,14 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
+	var parts = this.transclusionModel.getParts();
 
-	if ( this.transclusionModel.getParts().length === 0 ) {
+	if ( parts.length === 0 ) {
 		this.addParameterButton.setDisabled( true );
 		this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
 	}
+
+	this.multipartMessage.toggle( parts.length > 1 && this.useNewSidebar );
 
 	var canCollapse = this.isSingleTemplateTransclusion();
 	this.actions.setAbilities( { mode: canCollapse } );
@@ -527,6 +530,11 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		this.bookletLayout.getOutlineControls().addItems( [ this.addParameterButton ] );
 	}
 
+	this.multipartMessage = new OO.ui.MessageWidget( {
+		label: ve.msg( 'visualeditor-dialog-transclusion-multipart-message' ),
+		classes: [ 've-ui-mwTransclusionDialog-multipart-message' ]
+	} );
+
 	// Events
 	if ( this.useInlineDescriptions ) {
 		this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
@@ -543,6 +551,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	} );
 	if ( this.useNewSidebar ) {
 		this.bookletLayout.$element.on( 'focusin', this.onBookletLayoutFocus.bind( this ) );
+		this.bookletLayout.stackLayout.$element.prepend( this.multipartMessage.$element );
 	}
 };
 
