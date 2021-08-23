@@ -86,12 +86,12 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /**
  * @private
  * @param {string} paramName
- * @return {ve.ui.MWTemplateOutlineParameterCheckboxLayout}
+ * @return {ve.ui.MWTransclusionOutlineParameterWidget}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( paramName ) {
 	var spec = this.templateModel.getSpec();
 
-	return new ve.ui.MWTemplateOutlineParameterCheckboxLayout( {
+	return new ve.ui.MWTransclusionOutlineParameterWidget( {
 		required: spec.isParameterRequired( paramName ),
 		label: spec.getParameterLabel( paramName ),
 		data: paramName,
@@ -104,7 +104,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
 
 /**
  * @private
- * @param {ve.ui.MWTemplateOutlineParameterCheckboxLayout} checkbox
+ * @param {ve.ui.MWTransclusionOutlineParameterWidget} checkbox
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.insertCheckboxAtCanonicalPosition = function ( checkbox ) {
 	var paramName = checkbox.getData(),
@@ -170,7 +170,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function
 };
 
 /**
- * Handles a parameter checkbox change event {@see ve.ui.MWTemplateOutlineParameterCheckboxLayout}
+ * Handles a parameter checkbox change event {@see ve.ui.MWTransclusionOutlineParameterWidget}
  *
  * @private
  * @param {string} paramName
