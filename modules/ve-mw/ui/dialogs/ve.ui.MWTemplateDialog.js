@@ -148,11 +148,11 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				if ( names.length ) {
 					// Focus the first element when parameters are present
 					reselect = added.getParameter( names[ 0 ] ).getId();
-				} else if ( shouldAddPlaceholder && !this.isNewSidebar ) {
+				} else if ( shouldAddPlaceholder && !this.useNewSidebar ) {
 					page.addPlaceholderParameter();
 				}
 
-				if ( this.isNewSidebar ) {
+				if ( this.useNewSidebar ) {
 					var documentedParameters = added.getSpec().getDocumentedParameterOrder(),
 						undocumentedParameters = added.getSpec().getUndocumentedParameterNames();
 
