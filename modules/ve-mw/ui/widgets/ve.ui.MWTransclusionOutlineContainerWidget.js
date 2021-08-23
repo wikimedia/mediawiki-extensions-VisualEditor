@@ -11,16 +11,14 @@
  * @extends OO.ui.Widget
  *
  * @constructor
- * @param {OO.ui.BookletLayout} bookletLayout
  * @property {Object.<string,ve.ui.MWTransclusionOutlinePartWidget>} partWidgets Map of top-level
  *  items currently visible in this container, indexed by part id
  */
-ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget( bookletLayout ) {
+ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget() {
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this );
 
 	// Initialization
-	this.bookletLayout = bookletLayout;
 	this.partWidgets = {};
 
 	this.$element.addClass( 've-ui-mwTransclusionOutlineContainerWidget' );
@@ -36,6 +34,11 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
  * @event filterParameters
  * @param {Object.<string,boolean>} visibility Keyed by unique id of the parameter, e.g. something
  *  like "part_1/param1". Note this lists only parameters that are currently in use.
+ */
+
+/**
+ * @event focusPart
+ * @param {string} partId Unique id of the part, e.g. something "part_1" or "part_1/param1".
  */
 
 /**
@@ -100,17 +103,14 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
 		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
-		widget.connect( this, {
-			selectParameter: 'focusPart',
-			filterParameters: [ 'emit', 'filterParameters' ]
-		} );
+		widget.connect( this, { filterParameters: [ 'emit', 'filterParameters' ] } );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
 	} else if ( part instanceof ve.dm.MWTransclusionContentModel ) {
 		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
 	}
 
-	widget.connect( this, { headerClick: 'focusPart' } );
+	widget.connect( this, { focusPart: [ 'emit', 'focusPart' ] } );
 
 	this.partWidgets[ part.getId() ] = widget;
 	if ( typeof newPosition === 'number' && newPosition < this.$element.children().length ) {
@@ -118,15 +118,6 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 	} else {
 		this.$element.append( widget.$element );
 	}
-};
-
-/**
- * @private
- * @param {string} partId
- */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.focusPart = function ( partId ) {
-	this.bookletLayout.focus();
-	this.bookletLayout.setPage( partId );
 };
 
 /**

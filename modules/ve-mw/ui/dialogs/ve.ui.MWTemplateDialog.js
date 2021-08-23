@@ -480,10 +480,11 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				// FIXME: This is created at the wrong time. That's why we run into the situation
 				//  where an old instance exists. Should be in initialize().
 				if ( !this.pocSidebar ) {
-					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget(
-						this.bookletLayout
-					);
-					this.pocSidebar.connect( this, { filterParameters: 'onFilterParameters' } );
+					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget();
+					this.pocSidebar.connect( this, {
+						filterParameters: 'onFilterParameters',
+						focusPart: 'focusPart'
+					} );
 				} else {
 					this.pocSidebar.clear();
 				}
@@ -595,6 +596,15 @@ ve.ui.MWTemplateDialog.prototype.onFilterParameters = function ( visibility ) {
 			page.toggle( visibility[ partId ] );
 		}
 	}
+};
+
+/**
+ * @private
+ * @param {string} partId
+ */
+ve.ui.MWTemplateDialog.prototype.focusPart = function ( partId ) {
+	this.bookletLayout.focus();
+	this.bookletLayout.setPage( partId );
 };
 
 /**
