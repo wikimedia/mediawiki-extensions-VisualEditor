@@ -275,43 +275,49 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 };
 
 /**
- * Set if the dialog is expanded and the sidebar visible, or collapsed.
+ * Automatically expand or collapse the sidebar according to default logic.
  *
- * @param {boolean|string} [toggle=true] True or false to expand or collapse the sidebar, or
- *  'auto' to auto-detect based on the dialog's current content.
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( toggle ) {
-	var showSidebar = toggle !== false;
+ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
+	var showSidebar;
 
-	if ( toggle === 'auto' ) {
-		if ( this.useInlineDescriptions ) {
-			var isSmallScreen = $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
-			showSidebar = !isSmallScreen;
-			this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
-			this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
-		} else {
-			showSidebar = !this.isSingleTemplateTransclusion();
-		}
+	if ( this.useInlineDescriptions ) {
+		var isSmallScreen = $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
+		showSidebar = !isSmallScreen;
+		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
+		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
+	} else {
+		showSidebar = !this.isSingleTemplateTransclusion();
 	}
 
-	if ( this.isSidebarExpanded !== showSidebar ) {
-		this.isSidebarExpanded = showSidebar;
-		if ( this.$content ) {
-			this.$content
-				.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !showSidebar )
-				.toggleClass( 've-ui-mwTransclusionDialog-expanded', showSidebar );
-		}
-		this.ignoreNextWindowResizeEvent = true;
-		this.setSize( showSidebar ? ( this.useInlineDescriptions ? 'larger' : 'large' ) : 'medium' );
-		this.bookletLayout.toggleOutline( showSidebar );
-		this.updateTitle();
-		this.updateModeActionState();
+	this.toggleSidebar( showSidebar );
+};
 
-		// HACK blur any active input so that its dropdown will be hidden and won't end
-		// up being mispositioned
-		this.$content.find( 'input:focus' ).trigger( 'blur' );
+/**
+ * Set if the sidebar is visible (which means the dialog is expanded), or collapsed.
+ *
+ * @param {boolean} showSidebar
+ * @private
+ */
+ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( showSidebar ) {
+	if ( this.isSidebarExpanded === showSidebar ) {
+		return;
 	}
+
+	this.isSidebarExpanded = showSidebar;
+	this.$content
+		.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !showSidebar )
+		.toggleClass( 've-ui-mwTransclusionDialog-expanded', showSidebar );
+	this.ignoreNextWindowResizeEvent = true;
+	this.setSize( showSidebar ? ( this.useInlineDescriptions ? 'larger' : 'large' ) : 'medium' );
+	this.bookletLayout.toggleOutline( showSidebar );
+	this.updateTitle();
+	this.updateModeActionState();
+
+	// HACK blur any active input so that its dropdown will be hidden and won't end
+	// up being mispositioned
+	this.$content.find( 'input:focus' ).trigger( 'blur' );
 };
 
 /**
@@ -482,7 +488,7 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
 		.done( function () {
-			target.toggleSidebar( 'auto' );
+			target.autoExpandSidebar();
 			target.updateModeActionState();
 		} );
 };
@@ -570,7 +576,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			}
 
 			this.updateModeActionState();
-			this.toggleSidebar( 'auto' );
+			this.autoExpandSidebar();
 		}, this );
 };
 
@@ -579,7 +585,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWTransclusionDialog.prototype.onWindowResize = function () {
 	if ( !this.ignoreNextWindowResizeEvent ) {
-		this.toggleSidebar( 'auto' );
+		this.autoExpandSidebar();
 	}
 	this.ignoreNextWindowResizeEvent = false;
 };
