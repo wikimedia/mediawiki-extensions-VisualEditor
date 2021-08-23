@@ -114,10 +114,11 @@ class ApiVisualEditor extends ApiBase {
 			$content = $preloadPage->getContent( RevisionRecord::RAW );
 			$parserOptions = ParserOptions::newFromUser( $this->getUser() );
 
-			$content = $content->preloadTransform(
+			$content = $this->contentTransformer->preloadTransform(
+				$content,
 				$preloadTitle,
 				$parserOptions,
-				(array)$params
+				$params
 			)->serialize();
 		}
 		return $content;
