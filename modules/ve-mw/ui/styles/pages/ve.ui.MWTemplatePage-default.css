@@ -40,3 +40,7 @@
 .ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-field {
 	padding: 0;
 }
+
+.ve-ui-mwTransclusionDialog-template-note {
+	margin-top: 16px;
+}

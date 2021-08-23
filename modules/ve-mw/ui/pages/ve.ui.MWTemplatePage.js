@@ -43,10 +43,14 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	// Initialization
 	this.$description
 		.text( this.spec.getDescription() );
+
 	// The transcluded page may be dynamically generated or unspecified in the DOM
 	// for other reasons (T68724). In that case we can't tell the user what the
 	// template is called, nor link to the template page. However, if we know for
 	// certain that the template doesn't exist, be explicit about it (T162694).
+	var linkData = ve.init.platform.linkCache.getCached( '_missing/' + link ),
+		pageMissing = link && linkData && linkData.missing;
+
 	if ( link ) {
 		if ( this.spec.getDescription() ) {
 			this.$description
@@ -61,17 +65,13 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 						).parseDom() )
 				);
 		} else {
-			var linkData = ve.init.platform.linkCache.getCached( '_missing/' + link );
-			var messageKey = linkData && linkData.missing ?
-				'visualeditor-dialog-transclusion-absent-template' :
-				'visualeditor-dialog-transclusion-no-template-description';
-
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				// The following messages are used here:
-				// * visualeditor-dialog-transclusion-absent-template
-				// * visualeditor-dialog-transclusion-no-template-description
-				.append( mw.message( messageKey, this.spec.getLabel(), link ).parseDom() );
+				.append( mw.message(
+					pageMissing ? 'visualeditor-dialog-transclusion-absent-template' :
+						'visualeditor-dialog-transclusion-no-template-description',
+					this.spec.getLabel(), link
+				).parseDom() );
 		}
 		ve.targetLinksToNewWindow( this.$description[ 0 ] );
 	}
@@ -80,7 +80,26 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 			ve.track( 'activity.transclusion', { action: 'template-doc-link-click' } );
 		} );
 
-	this.infoFieldset.$element.append( this.$description );
+	this.infoFieldset.$element
+		.append( this.$description );
+
+	if ( veConfig.transclusionDialogNewSidebar && !pageMissing ) {
+		if ( !this.template.getSpec().getDocumentedParameterOrder().length ) {
+			var noParametersNote = new OO.ui.MessageWidget( {
+				label: mw.message( 'visualeditor-dialog-transclusion-no-parameters-description' ).parseDom(),
+				classes: [ 've-ui-mwTransclusionDialog-template-note' ]
+			} );
+			this.infoFieldset.$element.append( noParametersNote.$element );
+		} else if ( !this.template.getSpec().isDocumented() ) {
+			var noTemplateDataParametersWarning = new OO.ui.MessageWidget( {
+				label: mw.message( 'visualeditor-dialog-transclusion-no-template-data-description', link ).parseDom(),
+				classes: [ 've-ui-mwTransclusionDialog-template-note' ],
+				type: 'warning'
+			} );
+			this.infoFieldset.$element.append( noTemplateDataParametersWarning.$element );
+		}
+	}
+
 	this.$element
 		.addClass( 've-ui-mwTemplatePage' )
 		.append( this.infoFieldset.$element );

@@ -2218,6 +2218,8 @@
 				"visualeditor-dialog-transclusion-loading",
 				"visualeditor-dialog-transclusion-more-template-description",
 				"visualeditor-dialog-transclusion-multipart-message",
+				"visualeditor-dialog-transclusion-no-parameters-description",
+				"visualeditor-dialog-transclusion-no-template-data-description",
 				"visualeditor-dialog-transclusion-no-template-description",
 				"visualeditor-dialog-transclusion-absent-template",
 				"visualeditor-dialog-transclusion-options",
