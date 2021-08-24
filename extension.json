@@ -2807,6 +2807,7 @@
 			"modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js",
 			"lib/ve/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
 			"modules/ve-mw/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
+			"modules/ve-mw/tests/ui/widgets/ve.ui.MWParameterCheckboxInputWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWParameterSearchWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTransclusionOutlineParameterWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateTitleInputWidget.test.js",
