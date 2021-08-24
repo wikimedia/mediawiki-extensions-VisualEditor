@@ -12,6 +12,7 @@
  * - {@see ve.dm.MWTemplatePlaceholderModel} while searching for a template name to be added.
  * - {@see ve.dm.MWTransclusionContentModel} for a raw wikitext snippet.
  *
+ * @abstract
  * @class
  * @mixins OO.EventEmitter
  *
