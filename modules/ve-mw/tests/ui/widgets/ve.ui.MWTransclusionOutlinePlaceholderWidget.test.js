@@ -5,5 +5,9 @@ QUnit.test( 'Constructor', ( assert ) => {
 		placeholder = new ve.dm.MWTemplatePlaceholderModel( transclusion ),
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( placeholder );
 
-	assert.ok( widget );
+	assert.strictEqual( widget.getData(), 'part_0' );
+	assert.strictEqual(
+		widget.$element.find( '.ve-ui-mwTransclusionOutlineButtonWidget' ).text(),
+		'visualeditor-dialog-transclusion-add-template'
+	);
 } );
