@@ -86,6 +86,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function
 		widget = this.partWidgets[ partId ];
 
 	if ( widget ) {
+		widget.disconnect( this );
 		widget.$element.remove();
 		delete this.partWidgets[ partId ];
 	}
