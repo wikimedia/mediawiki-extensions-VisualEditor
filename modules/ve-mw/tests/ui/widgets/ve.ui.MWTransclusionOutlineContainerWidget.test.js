@@ -40,3 +40,6 @@ QUnit.test( 'Basic functionality', ( assert ) => {
 	widget.clear();
 	assert.deepEqual( widget.partWidgets, {} );
 } );
+
+// TODO: addPartWidget() with different positions.
+// TODO: onTransclusionModelChange() is complex and fragile and must be tested.
