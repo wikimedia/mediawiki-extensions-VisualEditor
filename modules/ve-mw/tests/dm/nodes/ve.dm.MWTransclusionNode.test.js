@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.dm.MWTransclusionNode', ve.test.utils.mwEnvironment );
+QUnit.module( 've.dm.MWTransclusionNode' );
 
 /* Tests */
 
