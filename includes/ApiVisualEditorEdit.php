@@ -575,9 +575,9 @@ class ApiVisualEditorEdit extends ApiBase {
 				ParamValidator::PARAM_TYPE => 'string',
 			],
 			// Additional data sent by the client. Not used directly in the ApiVisualEditorEdit workflows, but
-			// is passed alongside the other parameters to implementations of onApiVisualEditorEditPostSave
+			// is passed alongside the other parameters to implementations of onApiVisualEditorEditPostSave and
+			// onApiVisualEditorEditPreSave
 			'data-{plugin}' => [
-				ParamValidator::PARAM_ISMULTI => true,
 				ApiBase::PARAM_TEMPLATE_VARS => [ 'plugin' => 'plugins' ]
 			]
 		];
