@@ -41,5 +41,30 @@ QUnit.test( 'Basic functionality', ( assert ) => {
 	assert.deepEqual( widget.partWidgets, {} );
 } );
 
-// TODO: addPartWidget() with different positions.
-// TODO: onTransclusionModelChange() is complex and fragile and must be tested.
+QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
+	const transclusion = new ve.dm.MWTransclusionModel(),
+		part0 = new ve.dm.MWTransclusionContentModel( transclusion ),
+		part1 = new ve.dm.MWTransclusionContentModel( transclusion ),
+		part2 = new ve.dm.MWTransclusionContentModel( transclusion ),
+		widget = new ve.ui.MWTransclusionOutlineContainerWidget();
+
+	// This adds the parts at an invalid position, at the start, and in the middle
+	widget.onReplacePart( null, part0, 666 );
+	widget.onReplacePart( null, part1, 0 );
+	widget.onReplacePart( null, part2, 1 );
+
+	// Note this is just a map and doesn't reflect the order in the UI
+	assert.deepEqual( Object.keys( widget.partWidgets ), [ 'part_0', 'part_1', 'part_2' ] );
+
+	assert.ok( widget.$element.children().eq( 0 ).is( widget.partWidgets.part_1.$element ) );
+	assert.ok( widget.$element.children().eq( 1 ).is( widget.partWidgets.part_2.$element ) );
+	assert.ok( widget.$element.children().eq( 2 ).is( widget.partWidgets.part_0.$element ) );
+
+	// This bypasses all logic in ve.dm.MWTransclusionModel, effectively making it a mock.
+	transclusion.parts = [ part2, part0, part1 ];
+	widget.onTransclusionModelChange( transclusion );
+
+	assert.ok( widget.$element.children().eq( 0 ).is( widget.partWidgets.part_2.$element ) );
+	assert.ok( widget.$element.children().eq( 1 ).is( widget.partWidgets.part_0.$element ) );
+	assert.ok( widget.$element.children().eq( 2 ).is( widget.partWidgets.part_1.$element ) );
+} );

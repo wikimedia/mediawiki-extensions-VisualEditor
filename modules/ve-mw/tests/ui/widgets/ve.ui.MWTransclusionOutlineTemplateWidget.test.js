@@ -12,7 +12,55 @@ QUnit.test( 'Constructor', ( assert ) => {
 	);
 } );
 
-// TODO: insertCheckboxAtCanonicalPosition() is complex and fragile and must be tested.
+QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
+	function assertOrder( widget, expected ) {
+		assert.deepEqual( widget.parameters.items.map( ( item ) => item.data ), expected );
+	}
+
+	const transclusion = new ve.dm.MWTransclusionModel(),
+		template = ve.dm.MWTemplateModel.newFromData( transclusion, {
+			target: {},
+			params: { b: {}, e: {} }
+		} );
+	template.getSpec().setTemplateData( {
+		params: {
+			e: { deprecated: true },
+			h: { deprecated: true },
+			g: {}
+		},
+		paramOrder: [ 'g', 'h', 'e' ]
+	} );
+	const widget = new ve.ui.MWTransclusionOutlineTemplateWidget( template );
+
+	// Expected order on construction time is:
+	// - Documented params in paramOrder (g, h, e), excluding unused deprected params (- h)
+	// - Undocumented params currently used in the template (+ b)
+	assertOrder( widget, [ 'g', 'e', 'b' ] );
+
+	let insertAt = widget.findCanonicalPosition( 'h' );
+	// Most minimal mock instead of an actual ve.ui.MWTransclusionOutlineParameterWidget
+	widget.parameters.addItems( [ new OO.ui.Widget( { data: 'h' } ) ], insertAt );
+	// Deprecated param appears at it's canonical position via paramOrder
+	assert.strictEqual( insertAt, 1 );
+	assertOrder( widget, [ 'g', 'h', 'e', 'b' ] );
+
+	const newParam = new ve.dm.MWParameterModel( template, 'a1' );
+	// This fires an "add" event the widget listens to, i.e. this covers onAddParameter() as well
+	template.addParameter( newParam );
+	assertOrder( widget, [ 'g', 'h', 'e', 'a1', 'b' ] );
+	// Removing the param doesn't remove it's checkbox item from the widget
+	template.removeParameter( newParam );
+	assertOrder( widget, [ 'g', 'h', 'e', 'a1', 'b' ] );
+
+	// This is effectively the same as above: teach the spec a new param without adding it to the
+	// template. This doesn't fire events, which allows us to test the private method in isolation.
+	template.getSpec().seenParameterNames.a2 = true;
+	insertAt = widget.findCanonicalPosition( 'a2' );
+	// Most minimal mock instead of an actual ve.ui.MWTransclusionOutlineParameterWidget
+	widget.parameters.addItems( [ new OO.ui.Widget( { data: 'a2' } ) ], insertAt );
+	assert.strictEqual( insertAt, 4 );
+	assertOrder( widget, [ 'g', 'h', 'e', 'a1', 'a2', 'b' ] );
+} );
 
 QUnit.test( 'filterParameters() on an empty template', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
