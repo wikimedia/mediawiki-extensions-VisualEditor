@@ -118,7 +118,7 @@ class ApiVisualEditor extends ApiBase {
 				$content,
 				$preloadTitle,
 				$parserOptions,
-				$params
+				(array)$params
 			)->serialize();
 		}
 		return $content;
