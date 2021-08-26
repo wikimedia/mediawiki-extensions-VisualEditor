@@ -129,12 +129,12 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
 };
 
 /**
- * @return {string} Normalized template name without the "Template:" namespace prefix
+ * @return {string} Normalized template name without the "Template:" namespace prefix, if possible.
+ *  Otherwise the unnormalized template name as used in the wikitext. Might even be a string like
+ *  `{{example}}` when a template name is dynamically generated.
  */
 ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
-	var title = this.template.getTitle(),
-		target = this.template.getTarget();
-
+	var title = this.template.getTitle();
 	if ( title ) {
 		try {
 			// Normalize and remove namespace prefix if in the Template: namespace
@@ -142,8 +142,7 @@ ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
 				.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
 		} catch ( e ) { }
 	}
-
-	return title || target.wt;
+	return title || this.template.getTarget().wt;
 };
 
 /**
