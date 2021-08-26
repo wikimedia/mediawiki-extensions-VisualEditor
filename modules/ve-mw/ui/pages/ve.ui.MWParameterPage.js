@@ -126,7 +126,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	// Construct the action buttons
 
-	if ( !this.rawValueInput ) {
+	if ( !this.rawValueInput && !this.useNewSidebar ) {
 		this.rawFallbackButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			icon: 'wikiText',
