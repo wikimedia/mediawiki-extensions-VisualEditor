@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Gildo Máquina",
 			"Jacinto Jeque"
 		]
 	},
-	"visualeditor-ca-editsource-section": "Oleelirya ophattuwa"
+	"visualeditor-ca-editsource": "Oreerihela ekootiku-yoopacerya",
+	"visualeditor-ca-editsource-section": "Oleelirya ophattuwa",
+	"visualeditor-descriptionpagelink": "Mutthokelo: ereerihelo enooneya ni maytho"
 }
