@@ -13,13 +13,10 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, config ) {
-	// Configuration initialization
-	config = ve.extendObject( {
-		scrollable: false
-	}, config );
-
 	// Parent constructor
-	ve.ui.MWAddParameterPage.super.call( this, name, config );
+	ve.ui.MWAddParameterPage.super.call( this, name, ve.extendObject( {
+		scrollable: false
+	}, config ) );
 
 	this.template = parameter.getTemplate();
 	this.isExpanded = false;
