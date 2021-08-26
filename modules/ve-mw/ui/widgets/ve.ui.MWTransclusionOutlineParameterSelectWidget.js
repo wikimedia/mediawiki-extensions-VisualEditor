@@ -35,6 +35,22 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.mixin.Tab
  * @param {string} paramName
  */
 
+/* Static Methods */
+
+/**
+ * @param {Object} config
+ * @param {string} config.data Parameter name
+ * @param {string} config.label
+ * @param {boolean} [config.required] Required parameters can't be unchecked
+ * @param {boolean} [config.selected] If the parameter is currently used (checked)
+ * @return {ve.ui.MWTransclusionOutlineParameterWidget}
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.static.createItem = function ( config ) {
+	return new ve.ui.MWTransclusionOutlineParameterWidget( config );
+};
+
+/* Methods */
+
 /**
  * @inheritDoc OO.ui.mixin.GroupElement
  * @param {ve.ui.MWTransclusionOutlineParameterWidget[]} items
@@ -43,9 +59,9 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.mixin.Tab
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function ( items, index ) {
 	var self = this;
-	items.forEach( function ( checkbox ) {
-		checkbox.connect( self, {
-			change: [ 'onCheckboxChange', checkbox ],
+	items.forEach( function ( item ) {
+		item.connect( self, {
+			change: [ 'onCheckboxChange', item ],
 			parameterFocused: [ 'emit', 'parameterFocused' ]
 		} );
 	} );
@@ -54,15 +70,26 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 };
 
 /**
+ * @param {string} paramName
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.markParameterAsUnused = function ( paramName ) {
+	// There is no OO.ui.SelectWidget.unselectItemByData(), we need to do this manually
+	var item = this.findItemFromData( paramName );
+	if ( item ) {
+		item.setSelected( false );
+	}
+};
+
+/**
  * @private
- * @param {ve.ui.MWTransclusionOutlineParameterWidget} checkbox
+ * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
  * @param {boolean} value
  */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = function ( checkbox, value ) {
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = function ( item, value ) {
 	// This extra check shouldn't be necessary, but better be safe than sorry
-	if ( checkbox.isSelected() !== value ) {
+	if ( item.isSelected() !== value ) {
 		// Note: This should have been named `toggle…` as it toggles the item's selection
-		this.chooseItem( checkbox );
+		this.chooseItem( item );
 	}
 };
 
