@@ -153,8 +153,15 @@
 	display: inline;
 }
 
+/* TODO: Remove debug color */
+.ve-ui-mwTransclusionOutlineItem.oo-ui-optionWidget-selected {
+	/* background-color: rgba( 0%, 100%, 0%, 0.2 ); */
+}
+
+.ve-ui-mwTransclusionOutlineItem.oo-ui-optionWidget-highlighted,
 .ve-ui-mwTransclusionOutlineItem:hover {
-	background-color: #eaecf0;
+	/* This shade on a white background results in #eaecf0 */
+	background-color: rgba( 0, 24, 73, 0.082 );
 }
 
 .ve-ui-mwTransclusionOutlineItem .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [ type='checkbox' ]:hover + span {
