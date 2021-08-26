@@ -45,13 +45,13 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		{ classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset-input' ] }
 	);
 
-	var rawTemplateName = this.template.getTarget().wt,
-		title = mw.Title.newFromText( this.template.getTitle() || rawTemplateName ),
-		link = title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
 	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
 		label: this.addParameterInputHeader.$element,
 		helpInline: true,
-		help: mw.message( 'visualeditor-dialog-transclusion-add-param-help', link ).parseDom(),
+		help: mw.message(
+			'visualeditor-dialog-transclusion-add-param-help',
+			this.template.getSpec().getLabel()
+		).parseDom(),
 		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
 		$content: this.addParameterInputField.$element
 	} );
