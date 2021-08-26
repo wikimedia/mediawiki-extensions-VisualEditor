@@ -129,7 +129,8 @@ ve.dm.MWTemplateModel.prototype.getTarget = function () {
 };
 
 /**
- * @return {string|null} Template title, if available
+ * @return {string|null} Prefixed template title including the "Template:" namespace, if available.
+ *  Use {@see ve.dm.MWTemplateSpecModel.getLabel} for a human-readable label without the namespace.
  */
 ve.dm.MWTemplateModel.prototype.getTitle = function () {
 	return this.title;

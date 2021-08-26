@@ -50,7 +50,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		helpInline: true,
 		help: mw.message(
 			'visualeditor-dialog-transclusion-add-param-help',
-			this.template.getSpec().getLabel()
+			this.template.getTitle() || this.template.getTarget().wt
 		).parseDom(),
 		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
 		$content: this.addParameterInputField.$element

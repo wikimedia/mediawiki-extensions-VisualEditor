@@ -19,7 +19,7 @@
  * @cfg {boolean} [isReadOnly] Page is read-only
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var title = template.getTitle() ? mw.Title.newFromText( template.getTitle() ) : null,
+	var link = template.getTitle(),
 		veConfig = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Configuration initialization
@@ -33,17 +33,22 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	// Properties
 	this.template = template;
 	this.spec = template.getSpec();
-	this.$description = $( '<div>' );
+	this.$description = $( '<div>' )
+		.addClass( 've-ui-mwTemplatePage-description' );
 	this.infoFieldset = new OO.ui.FieldsetLayout( {
 		label: this.spec.getLabel(),
 		icon: 'puzzle'
 	} );
 
 	// Initialization
-	this.$description.addClass( 've-ui-mwTemplatePage-description' );
-	if ( this.spec.getDescription() ) {
-		this.$description.text( this.spec.getDescription() );
-		if ( title ) {
+	this.$description
+		.text( this.spec.getDescription() );
+	// The transcluded page may be dynamically generated or unspecified in the DOM
+	// for other reasons (T68724). In that case we can't tell the user what the
+	// template is called, nor link to the template page. However, if we know for
+	// certain that the template doesn't exist, be explicit about it (T162694).
+	if ( link ) {
+		if ( this.spec.getDescription() ) {
 			this.$description
 				.append(
 					$( '<hr>' ),
@@ -51,18 +56,12 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 						.addClass( 've-ui-mwTemplatePage-description-extra' )
 						.append( mw.message(
 							'visualeditor-dialog-transclusion-more-template-description',
-							title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template )
+							this.spec.getLabel(),
+							link
 						).parseDom() )
 				);
-			ve.targetLinksToNewWindow( this.$description[ 0 ] );
-		}
-	} else {
-		// The transcluded page may be dynamically generated or unspecified in the DOM
-		// for other reasons (T68724). In that case we can't tell the user what the
-		// template is called, nor link to the template page. However, if we know for
-		// certain that the template doesn't exist, be explicit about it (T162694).
-		if ( title ) {
-			var linkData = ve.init.platform.linkCache.getCached( '_missing/' + title );
+		} else {
+			var linkData = ve.init.platform.linkCache.getCached( '_missing/' + link );
 			var messageKey = linkData && linkData.missing ?
 				'visualeditor-dialog-transclusion-absent-template' :
 				'visualeditor-dialog-transclusion-no-template-description';
@@ -72,9 +71,9 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 				// The following messages are used here:
 				// * visualeditor-dialog-transclusion-absent-template
 				// * visualeditor-dialog-transclusion-no-template-description
-				.append( mw.message( messageKey, title.getPrefixedText() ).parseDom() );
-			ve.targetLinksToNewWindow( this.$description[ 0 ] );
+				.append( mw.message( messageKey, this.spec.getLabel(), link ).parseDom() );
 		}
+		ve.targetLinksToNewWindow( this.$description[ 0 ] );
 	}
 	this.$description.find( 'a[href]' )
 		.on( 'click', function () {
