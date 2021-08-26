@@ -198,6 +198,10 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 
 	if ( param.getName() ) {
 		page = new ve.ui.MWParameterPage( param, param.getId(), { $overlay: this.$overlay, readOnly: this.isReadOnly() } );
+	} else if ( this.useNewSidebar ) {
+		page = new ve.ui.MWAddParameterPage( param, param.getId(), {
+			$overlay: this.$overlay
+		} );
 	} else {
 		// This branch is triggered when we receive a synthetic placeholder event with name=''.
 		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {

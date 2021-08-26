@@ -28,6 +28,22 @@
 	padding-bottom: 5em;
 }
 
+.ve-ui-mwTransclusionDialog-addParameterFieldset-collapsed .oo-ui-inline-help {
+	display: none;
+}
+
+.ve-ui-mwTransclusionDialog-addParameterFieldset-input {
+	margin-top: 8px;
+}
+
+.ve-ui-mwTransclusionDialog-addParameterFieldset-input .oo-ui-fieldLayout-field {
+	width: 100%;
+}
+
+.ve-ui-mwTransclusionDialog-addParameterFieldset-header.oo-ui-iconElement .oo-ui-iconElement-icon {
+	height: 100%;
+}
+
 .ve-ui-mwTransclusionDialog-removeButton {
 	position: absolute;
 	top: 0.85714286em; /* Equals ≈`12px` */
