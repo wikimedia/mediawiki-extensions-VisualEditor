@@ -35,6 +35,13 @@
 			} );
 	}
 
+	QUnit.test( 'getUniquePartId', function ( assert ) {
+		const transclusion = new ve.dm.MWTransclusionModel();
+		assert.strictEqual( transclusion.getUniquePartId(), 0 );
+		assert.strictEqual( transclusion.getUniquePartId(), 1 );
+		assert.strictEqual( transclusion.getUniquePartId(), 2 );
+	} );
+
 	QUnit.test( 'fetch template part data', function ( assert ) {
 		const response = {
 			batchcomplete: '',

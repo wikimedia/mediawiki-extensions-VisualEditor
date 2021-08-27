@@ -36,6 +36,19 @@
 
 	/* Tests */
 
+	[
+		[ undefined, null ],
+		[ '', null ],
+		[ 'no_prefix', 'no prefix' ],
+		[ '/unexpected_prefix', '/unexpected prefix' ],
+		[ './Template:%C3%9Cnicode%5Fexample/subpage', 'Template:Ünicode example/subpage' ],
+		[ './Template:Possibly_invalid%5B%5D', 'Template:Possibly invalid[]' ]
+	].forEach( ( [ href, expected ] ) => QUnit.test( 'getTitle: ' + href, ( assert ) => {
+		const transclusion = { getUniquePartId: () => 0 },
+			template = new ve.dm.MWTemplateModel( transclusion, { href } );
+		assert.strictEqual( template.getTitle(), expected );
+	} ) );
+
 	QUnit.test( 'hasParameter', ( assert ) => {
 		const template = newTemplateModel();
 
