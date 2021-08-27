@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Iflaq",
+			"Rishabhbhat",
 			"Shahwaqar"
 		]
 	},
+	"visualeditor-ca-editsource-section": "کوڈ اؠڈِٹ کٔرِو",
 	"visualeditor-dialog-media-change-image": "شَکل بَدلٲئو",
 	"visualeditor-dialog-media-content-filename": "فَیِل ناو",
 	"visualeditor-dialog-media-position-left": "کھووُر",
@@ -27,7 +29,7 @@
 	"visualeditor-rebase-client-export": "بَرآمَد",
 	"visualeditor-rebase-client-export-start": "بَرآمَد...",
 	"visualeditor-rebase-client-import": "دَرآمَد",
-	"visualeditor-savedialog-label-publish-short": "شائع کٕرو",
-	"visualeditor-savedialog-label-publish-short-start": "شائع کٕرو...",
+	"visualeditor-savedialog-label-publish-short": "شایع کٔرِو",
+	"visualeditor-savedialog-label-publish-short-start": "شایع کٔرِو...",
 	"visualeditor-usernamespacepagelink": "Project: رُکُن ناو جائے"
 }
