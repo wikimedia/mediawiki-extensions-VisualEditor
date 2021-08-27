@@ -575,4 +575,11 @@
 		this.changeQueue = [];
 	};
 
+	// Temporary compatibility for https://github.com/femiwiki/Sanctions/pull/118. Remove when not
+	// needed any more.
+	mw.log.deprecate( ve.dm.MWTransclusionModel.prototype, 'abortRequests',
+		ve.dm.MWTransclusionModel.prototype.abortAllApiRequests,
+		'Use "abortAllApiRequests" instead.'
+	);
+
 }() );
