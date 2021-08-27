@@ -1,6 +1,6 @@
 ( function () {
 
-	QUnit.module( 've.dm.MWTemplateSpecModel', ve.test.utils.mwEnvironment );
+	QUnit.module( 've.dm.MWTemplateSpecModel' );
 
 	/**
 	 * @param {string[]} [parameterNames]
