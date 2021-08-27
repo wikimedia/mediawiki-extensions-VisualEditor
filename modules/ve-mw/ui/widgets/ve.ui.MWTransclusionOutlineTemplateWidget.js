@@ -22,12 +22,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 
 	// Initialization
 	this.templateModel = template.connect( this, {
-		add: 'onAddParameter',
-		remove: 'onRemoveParameter'
+		add: 'onParameterAddedToTemplateModel',
+		remove: 'onParameterRemovedFromTemplateModel'
 	} );
 
-	var widget = this;
-	var checkboxes = this.templateModel
+	var parameterNames = this.templateModel
 		.getAllParametersOrdered()
 		.filter( function ( paramName ) {
 			if ( spec.isParameterDeprecated( paramName ) && !template.hasParameter( paramName ) ) {
@@ -35,9 +34,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			}
 			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
 			return paramName;
-		} )
-		.map( function ( paramName ) {
-			return widget.createCheckbox( paramName );
 		} );
 
 	this.searchWidget = new OO.ui.SearchInputWidget( {
@@ -45,19 +41,19 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
 	} ).connect( this, {
 		change: 'filterParameters'
-	} ).toggle( checkboxes.length );
+	} ).toggle( parameterNames.length );
 	this.infoWidget = new OO.ui.LabelWidget( {
 		label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
 	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
-		items: checkboxes
+		items: parameterNames.map( this.createCheckbox.bind( this ) )
 	} )
 		.connect( this, {
 			choose: 'onParameterChoose',
 			parameterFocused: 'onParameterFocused',
-			change: 'onCheckboxListChange'
+			change: 'onParameterWidgetListChanged'
 		} );
 
 	this.$element.append(
@@ -91,12 +87,11 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /**
  * @private
  * @param {string} paramName
- * @return {ve.ui.MWTransclusionOutlineParameterWidget}
+ * @return {OO.ui.OptionWidget}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( paramName ) {
 	var spec = this.templateModel.getSpec();
-
-	return new ve.ui.MWTransclusionOutlineParameterWidget( {
+	return ve.ui.MWTransclusionOutlineParameterSelectWidget.static.createItem( {
 		required: spec.isParameterRequired( paramName ),
 		label: spec.getParameterLabel( paramName ),
 		data: paramName,
@@ -106,11 +101,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
 
 /**
  * @private
- * @param {ve.ui.MWTransclusionOutlineParameterWidget} checkbox
+ * @param {string} paramName
+ * @return {number}
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.insertCheckboxAtCanonicalPosition = function ( checkbox ) {
-	var paramName = checkbox.getData(),
-		insertAt = 0,
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = function ( paramName ) {
+	var insertAt = 0,
 		// Note this might include parameters that don't have a checkbox, e.g. deprecated
 		allParamNames = this.templateModel.getAllParametersOrdered();
 	for ( var i = 0; i < allParamNames.length; i++ ) {
@@ -120,17 +115,14 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.insertCheckboxAtCanonicalPos
 			insertAt++;
 		}
 	}
-	this.parameters.addItems( [ checkbox ], insertAt );
+	return insertAt;
 };
 
 /**
- * Handles a template model add event {@see ve.dm.MWTemplateModel}.
- * Triggered when a parameter is added to the template model.
- *
  * @private
  * @param {ve.dm.MWParameterModel} param
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( param ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateModel = function ( param ) {
 	var paramName = param.getName();
 	// The placeholder (currently) doesn't get a corresponding item in the sidebar
 	if ( !paramName ) {
@@ -138,10 +130,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
 	}
 
 	// All parameters known via the spec already have a checkbox
-	var checkbox = this.parameters.findItemFromData( paramName );
-	if ( !checkbox ) {
-		checkbox = this.createCheckbox( paramName );
-		this.insertCheckboxAtCanonicalPosition( checkbox );
+	var item = this.parameters.findItemFromData( paramName );
+	if ( !item ) {
+		item = this.createCheckbox( paramName );
+		this.parameters.addItems( [ item ], this.findCanonicalPosition( paramName ) );
+
 		// Make sure an active filter is applied to the new checkbox as well
 		var filter = this.searchWidget.getValue();
 		if ( filter ) {
@@ -149,35 +142,29 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onAddParameter = function ( 
 		}
 	}
 
-	checkbox.setSelected( true, true );
+	item.setSelected( true, true );
 
 	// Reset filter, but only if it hides the relevant checkbox
-	if ( !checkbox.isVisible() ) {
+	if ( !item.isVisible() ) {
 		this.searchWidget.setValue( '' );
 	}
 };
 
 /**
- * Handles a template model remove event {@see ve.dm.MWTemplateModel}.
- * Triggered when a parameter is removed from the template model.
- *
  * @private
  * @param {ve.dm.MWParameterModel} param
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onRemoveParameter = function ( param ) {
-	var checkbox = this.parameters.findItemFromData( param.getName() );
-	if ( checkbox ) {
-		checkbox.setSelected( false, true );
-	}
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterRemovedFromTemplateModel = function ( param ) {
+	this.parameters.markParameterAsUnused( param.getName() );
 };
 
 /**
  * @private
- * @param {ve.ui.MWTransclusionOutlineParameterWidget} checkbox
+ * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterChoose = function ( checkbox, selected ) {
-	var paramName = checkbox.getData(),
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterChoose = function ( item, selected ) {
+	var paramName = item.getData(),
 		param = this.templateModel.getParameter( paramName );
 	if ( !selected ) {
 		this.templateModel.removeParameter( param );
@@ -202,7 +189,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterFocused = functio
  * @private
  * @param {OO.ui.Element[]} items
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onCheckboxListChange = function ( items ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged = function ( items ) {
 	this.searchWidget.toggle( items.length >= 1 );
 };
 
@@ -225,8 +212,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	query = query.trim().toLowerCase();
 
 	// Note: We can't really cache this because the list of know parameters can change any time
-	this.parameters.items.forEach( function ( checkbox ) {
-		var paramName = checkbox.getData(),
+	this.parameters.items.forEach( function ( item ) {
+		var paramName = item.getData(),
 			placesToSearch = [
 				spec.getPrimaryParameterName( paramName ),
 				spec.getParameterLabel( paramName ),
@@ -237,7 +224,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 			return term && term.toLowerCase().indexOf( query ) !== -1;
 		} );
 
-		checkbox.toggle( foundSomeMatch );
+		item.toggle( foundSomeMatch );
 
 		nothingFound = nothingFound && !foundSomeMatch;
 
