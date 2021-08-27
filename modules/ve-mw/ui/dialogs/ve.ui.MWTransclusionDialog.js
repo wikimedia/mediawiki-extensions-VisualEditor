@@ -131,14 +131,14 @@ ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth = 540;
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
 	var parts = this.transclusionModel.getParts(),
-		itemId = this.transclusions.getFocusedPart();
+		itemId = this.findSelectedPartId();
 
 	if ( itemId ) {
 		var part = this.transclusionModel.getPartFromId( itemId );
 		// Move part to new location, and if dialog is loaded switch to new part page
 		var promise = this.transclusionModel.addPart( part, parts.indexOf( part ) + places );
 		if ( this.loaded && !this.preventReselection ) {
-			promise.done( this.transclusions.focusPart.bind( this.transclusions, part.getId() ) );
+			promise.done( this.focusPart.bind( this, part.getId() ) );
 		}
 	}
 };
@@ -149,7 +149,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
-	var id = this.transclusions.getFocusedPart();
+	var id = this.findSelectedPartId();
 
 	if ( id ) {
 		var part = this.transclusionModel.getPartFromId( id );
@@ -200,7 +200,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
-	var partId = this.transclusions.getFocusedPart();
+	var partId = this.findSelectedPartId();
 	if ( !partId ) {
 		return;
 	}
@@ -264,6 +264,18 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () 
 		parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
 		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
 	);
+};
+
+/**
+ * @return {string|undefined}
+ */
+ve.ui.MWTransclusionDialog.prototype.findSelectedPartId = function () {
+	if ( this.pocSidebar ) {
+		return this.pocSidebar.findSelectedPartId();
+	}
+
+	var item = this.bookletLayout.getOutline().findSelectedItem();
+	return item && item.getData();
 };
 
 /**
@@ -373,7 +385,7 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	var parts = this.transclusionModel.getParts(),
-		itemId = this.transclusions.getFocusedPart();
+		itemId = this.findSelectedPartId();
 
 	if ( part ) {
 		// Insert after selected part, or at the end if nothing is selected
@@ -383,7 +395,7 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 		// Add the part, and if dialog is loaded switch to part page
 		var promise = this.transclusionModel.addPart( part, index );
 		if ( this.loaded && !this.preventReselection ) {
-			promise.done( this.transclusions.focusPart.bind( this.transclusions, part.getId() ) );
+			promise.done( this.focusPart.bind( this, part.getId() ) );
 		}
 	}
 };
