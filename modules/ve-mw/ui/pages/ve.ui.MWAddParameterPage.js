@@ -105,3 +105,13 @@ ve.ui.MWAddParameterPage.prototype.togglePlaceholder = function ( expand ) {
 		!this.isExpanded
 	);
 };
+
+ve.ui.MWAddParameterPage.prototype.setOutlineItem = function () {
+	// Parent method
+	ve.ui.MWParameterPage.super.prototype.setOutlineItem.apply( this, arguments );
+
+	if ( this.outlineItem ) {
+		// This page should not be shown in the (BookletLayout-based) sidebar
+		this.outlineItem.$element.empty().removeClass();
+	}
+};

@@ -183,6 +183,10 @@
 	text-overflow: ellipsis;
 }
 
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-optionWidget-selected .oo-ui-buttonElement-button {
+	background-color: #eaf3ff;
+}
+
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
 	background-color: #eaecf0;
 }
