@@ -58,18 +58,26 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 					$( '<hr>' ),
 					$( '<span>' )
 						.addClass( 've-ui-mwTemplatePage-description-extra' )
-						.append( mw.message(
-							'visualeditor-dialog-transclusion-more-template-description',
-							this.spec.getLabel(),
-							link
-						).parseDom() )
+						.append(
+							veConfig.transclusionDialogNewSidebar ?
+								mw.message( 'visualeditor-dialog-transclusion-more-template-description',
+									this.spec.getLabel(), link ).parseDom() :
+								mw.message( 'visualeditor-dialog-transclusion-see-template',
+									link ).parseDom()
+						)
 				);
-		} else {
+		} else if ( pageMissing ) {
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
 				.append( mw.message(
-					pageMissing ? 'visualeditor-dialog-transclusion-absent-template' :
-						'visualeditor-dialog-transclusion-no-template-description',
+					'visualeditor-dialog-transclusion-absent-template',
+					this.spec.getLabel()
+				).parseDom() );
+		} else if ( !veConfig.transclusionDialogNewSidebar || this.spec.isDocumented() ) {
+			this.$description
+				.addClass( 've-ui-mwTemplatePage-description-missing' )
+				.append( mw.message(
+					'visualeditor-dialog-transclusion-no-template-description',
 					this.spec.getLabel(), link
 				).parseDom() );
 		}
