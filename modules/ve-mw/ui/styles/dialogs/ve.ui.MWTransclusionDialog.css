@@ -28,7 +28,8 @@
 	padding-bottom: 5em;
 }
 
-.ve-ui-mwTransclusionDialog-addParameterFieldset-collapsed .oo-ui-inline-help {
+.ve-ui-mwTransclusionDialog-addParameterFieldset-collapsed .oo-ui-inline-help,
+.ve-ui-mwTransclusionDialog-addParameterFieldset-collapsed .ve-ui-mwTransclusionDialog-addParameterFieldset-input {
 	display: none;
 }
 

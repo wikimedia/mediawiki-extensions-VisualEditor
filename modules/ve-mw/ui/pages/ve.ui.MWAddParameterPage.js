@@ -98,12 +98,14 @@ ve.ui.MWAddParameterPage.prototype.onParameterInput = function () {
 ve.ui.MWAddParameterPage.prototype.togglePlaceholder = function ( expand ) {
 	this.isExpanded = expand === undefined ? !this.isExpanded : !!expand;
 
-	this.addParameterInputField.toggle( this.isExpanded );
 	this.addParameterInputHeader.setIcon( this.isExpanded ? 'subtract' : 'add' );
 	this.addParameterFieldset.$element.toggleClass(
 		've-ui-mwTransclusionDialog-addParameterFieldset-collapsed',
 		!this.isExpanded
 	);
+	if ( this.isExpanded ) {
+		this.paramInputField.focus();
+	}
 };
 
 ve.ui.MWAddParameterPage.prototype.setOutlineItem = function () {
