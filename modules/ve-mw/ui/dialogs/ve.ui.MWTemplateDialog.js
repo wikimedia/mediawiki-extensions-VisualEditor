@@ -165,7 +165,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	}
 
 	if ( reselect ) {
-		this.transclusions.focusPart( reselect );
+		this.focusPart( reselect );
 	}
 
 	if ( this.loaded && ( added || removed ) ) {
@@ -213,7 +213,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
 		if ( !this.preventReselection ) {
-			this.transclusions.focusPart( param.getId() );
+			this.focusPart( param.getId() );
 		}
 
 		this.altered = true;
@@ -238,7 +238,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 	// Select the desired page first. Otherwise, if the page we are removing is selected,
 	// OOUI will try to select the first page after it is removed, and scroll to the top.
 	if ( this.loaded && !this.preventReselection ) {
-		this.transclusions.focusPart( reselect.getName() );
+		this.focusPart( reselect.getName() );
 	}
 
 	this.bookletLayout.removePages( [ page ] );
@@ -342,7 +342,6 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 
 	// Properties
 	this.bookletLayout = new OO.ui.BookletLayout( this.constructor.static.bookletLayoutConfig );
-	this.transclusions = new ve.ui.MWTransclusionsBooklet( this.bookletLayout );
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );
@@ -607,8 +606,18 @@ ve.ui.MWTemplateDialog.prototype.onFilterParameters = function ( visibility ) {
  * @param {string} partId
  */
 ve.ui.MWTemplateDialog.prototype.focusPart = function ( partId ) {
-	this.bookletLayout.focus();
-	this.bookletLayout.setPage( partId );
+	// The new sidebar does not focus template parameters, only top-level parts
+	if ( this.pocSidebar && partId.indexOf( '/' ) === -1 ) {
+		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
+		//  is executed later than this here.
+		setTimeout( this.pocSidebar.selectPartById.bind( this.pocSidebar, partId ) );
+		this.bookletLayout.focus();
+		this.bookletLayout.setPage( partId );
+	} else if ( this.bookletLayout.isOutlined() ) {
+		this.bookletLayout.getOutline().selectItemByData( partId );
+	} else {
+		this.bookletLayout.setPage( partId );
+	}
 };
 
 /**

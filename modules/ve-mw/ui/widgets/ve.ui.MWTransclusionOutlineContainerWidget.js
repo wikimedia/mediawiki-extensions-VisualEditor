@@ -76,12 +76,12 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
 };
 
 /**
- * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
+ * @private
+ * @param {string} partId
+ * @fires focusPart
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartSelected = function ( partId ) {
-	for ( var id in this.partWidgets ) {
-		this.partWidgets[ id ].setSelected( id === partId );
-	}
+	this.selectPartById( partId );
 	this.emit( 'focusPart', partId );
 };
 
@@ -105,6 +105,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function
  * @private
  * @param {ve.dm.MWTransclusionPartModel} part
  * @param {number} [newPosition]
+ * @fires filterParameters
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( part, newPosition ) {
 	var widget;
@@ -127,6 +128,17 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		this.$element.children().eq( newPosition ).before( widget.$element );
 	} else {
 		this.$element.append( widget.$element );
+	}
+};
+
+/**
+ * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
+ *
+ * @param {string} partId
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function ( partId ) {
+	for ( var id in this.partWidgets ) {
+		this.partWidgets[ id ].setSelected( id === partId );
 	}
 };
 
