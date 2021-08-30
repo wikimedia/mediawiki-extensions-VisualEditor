@@ -488,6 +488,9 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						filterParameters: 'onFilterParameters',
 						focusPart: 'focusPart'
 					} );
+					this.bookletLayout.connect( this, {
+						set: 'onBookletLayoutSetPage'
+					} );
 				} else {
 					this.pocSidebar.clear();
 				}
@@ -618,6 +621,19 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( partId ) {
 	} else {
 		this.bookletLayout.setPage( partId );
 	}
+};
+
+/**
+ * @private
+ * @param {OO.ui.PageLayout} page
+ */
+ve.ui.MWTemplateDialog.prototype.onBookletLayoutSetPage = function ( page ) {
+	// FIXME: This triggers twice for the same page. Why?
+
+	// The sidebar (currently) can't focus individual template parameters with composite ids like
+	// "part_1/param1". Make sure at least the top-level part is focused.
+	var partId = page.getName().split( '/', 2 )[ 0 ];
+	this.pocSidebar.selectPartById( partId );
 };
 
 /**
