@@ -3,7 +3,7 @@
  * {@see OO.ui.ButtonWidget} for inspiration.
  *
  * @class
- * @extends OO.ui.Widget
+ * @extends OO.ui.OptionWidget
  *
  * @constructor
  * @param {Object} config
@@ -19,7 +19,6 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 		framed: false
 	} );
 	OO.ui.mixin.IconElement.call( this, config );
-	OO.ui.mixin.LabelElement.call( this, config );
 	OO.ui.mixin.TabIndexedElement.call( this, ve.extendObject( {
 		$tabIndexed: this.$button
 	}, config ) );
@@ -31,11 +30,10 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.Widget );
+OO.inheritClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.OptionWidget );
 OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.ButtonElement );
 OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.IconElement );
-OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.LabelElement );
-// TODO: Add OO.ui.mixin.TitledElement?
-// TODO: Add OO.ui.mixin.FlaggedElement?
 OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.TabIndexedElement );
-// TODO: Add OO.ui.mixin.AccessKeyedElement?
+
+ve.ui.MWTransclusionOutlineButtonWidget.static.highlightable = false;
+ve.ui.MWTransclusionOutlineButtonWidget.static.pressable = false;

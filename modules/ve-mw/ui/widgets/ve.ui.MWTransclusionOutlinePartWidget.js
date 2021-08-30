@@ -24,12 +24,12 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 		data: part.getId()
 	} ) );
 
-	var header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
-		.connect( this, { click: [ 'emit', 'focusPart', part.getId() ] } );
+	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
+		.connect( this, { click: [ 'emit', 'selectPart', part.getId() ] } );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
-		.append( header.$element );
+		.append( this.header.$element );
 };
 
 /* Inheritance */
@@ -42,3 +42,25 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
  * @event focusPart
  * @param {string} partId Unique id of the part, e.g. something "part_1" or "part_1/param1".
  */
+
+/* Methods */
+
+/**
+ * Convenience method, modelled after {@see OO.ui.OptionWidget}, but this isn't one.
+ *
+ * @return {boolean}
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.isSelected = function () {
+	return this.header.isSelected();
+};
+
+/**
+ * Convenience method, modelled after {@see OO.ui.OptionWidget}, but this isn't one.
+ *
+ * @param {boolean} state
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.setSelected = function ( state ) {
+	this.header
+		.setSelected( state )
+		.setFlags( { progressive: state } );
+};

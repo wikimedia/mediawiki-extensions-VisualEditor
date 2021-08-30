@@ -75,6 +75,16 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
 	}
 };
 
+/**
+ * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartSelected = function ( partId ) {
+	for ( var id in this.partWidgets ) {
+		this.partWidgets[ id ].setSelected( id === partId );
+	}
+	this.emit( 'focusPart', partId );
+};
+
 /* Methods */
 
 /**
@@ -82,13 +92,12 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
  * @param {ve.dm.MWTransclusionPartModel} part
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function ( part ) {
-	var partId = part.getId(),
-		widget = this.partWidgets[ partId ];
-
-	if ( widget ) {
-		widget.disconnect( this );
-		widget.$element.remove();
-		delete this.partWidgets[ partId ];
+	var id = part.getId();
+	if ( id in this.partWidgets ) {
+		this.partWidgets[ id ]
+			.disconnect( this )
+			.$element.remove();
+		delete this.partWidgets[ id ];
 	}
 };
 
@@ -111,7 +120,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
 	}
 
-	widget.connect( this, { focusPart: [ 'emit', 'focusPart' ] } );
+	widget.connect( this, { selectPart: 'onPartSelected' } );
 
 	this.partWidgets[ part.getId() ] = widget;
 	if ( typeof newPosition === 'number' && newPosition < this.$element.children().length ) {
@@ -122,13 +131,27 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 };
 
 /**
+ * This is inspired by {@see OO.ui.SelectWidget.findSelectedItem}, but isn't one.
+ *
+ * @return {string|undefined}
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.findSelectedPartId = function () {
+	for ( var id in this.partWidgets ) {
+		var part = this.partWidgets[ id ];
+		if ( part.isSelected() ) {
+			return part.getData();
+		}
+	}
+};
+
+/**
  * Removes all {@see ve.ui.MWTransclusionOutlinePartWidget}, i.e. empties the list.
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.clear = function () {
-	for ( var partId in this.partWidgets ) {
-		var widget = this.partWidgets[ partId ];
-		widget.disconnect( this );
-		widget.$element.remove();
+	for ( var id in this.partWidgets ) {
+		this.partWidgets[ id ]
+			.disconnect( this )
+			.$element.remove();
 	}
 	this.partWidgets = {};
 };
