@@ -15,7 +15,6 @@
  */
 ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( config ) {
 	var $label = config.message.parseDom();
-	$label.filter( 'a[href]' ).attr( 'target', '_blank' );
 	// eslint-disable-next-line no-jquery/variable-pattern
 	config.label = $label;
 
@@ -32,6 +31,8 @@ ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( conf
 		title: mw.msg( 'visualeditor-dismissible-message-close' )
 	} )
 		.connect( this, { click: 'onDismissClick' } );
+
+	ve.targetLinksToNewWindow( this.$element[ 0 ] );
 
 	this.$element
 		.addClass( 've-ui-dismissibleMessageWidget' )
