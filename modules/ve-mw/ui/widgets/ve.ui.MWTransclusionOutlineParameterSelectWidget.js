@@ -31,7 +31,10 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.mixin.Tab
 /* Events */
 
 /**
- * @event parameterFocused
+ * This is fired instead of the "choose" event from the {@see OO.ui.SelectWidget} base class when
+ * pressing enter/click on a parameter that's already selected.
+ *
+ * @event templateParameterClick
  * @param {string} paramName
  */
 
@@ -95,13 +98,14 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 /**
  * @inheritDoc OO.ui.SelectWidget
  * @param {jQuery.Event} e
- * @fires parameterFocused
+ * @fires templateParameterClick
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = function ( e ) {
 	if ( e.which === OO.ui.MouseButtons.LEFT ) {
 		var item = this.findTargetItem( e );
+		// Same as pressing enter, see below.
 		if ( item && item.isSelected() ) {
-			this.emit( 'parameterFocused', item.getData() );
+			this.emit( 'templateParameterClick', item.getData() );
 
 			// Don't call the parent, i.e. can't click to unselect the item
 			return false;
@@ -115,7 +119,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = functio
  * @inheritDoc OO.ui.SelectWidget
  * @param {KeyboardEvent} e
  * @fires choose
- * @fires parameterFocused
+ * @fires templateParameterClick
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = function ( e ) {
 	var item;
@@ -143,8 +147,9 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 			break;
 		case OO.ui.Keys.ENTER:
 			item = this.findHighlightedItem();
+			// Same as clicking with the mouse, see above.
 			if ( item && item.isSelected() ) {
-				this.emit( 'parameterFocused', item.getData() );
+				this.emit( 'templateParameterClick', item.getData() );
 				e.preventDefault();
 
 				// Don't call the parent, i.e. can't use enter to unselect the item

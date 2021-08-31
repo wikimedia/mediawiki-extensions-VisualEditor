@@ -485,8 +485,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				if ( !this.pocSidebar ) {
 					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget();
 					this.pocSidebar.connect( this, {
-						filterParameters: 'onFilterParameters',
-						focusPart: 'focusPart'
+						focusPageByName: 'focusPart',
+						filterPagesByName: 'onFilterPagesByName'
 					} );
 					this.bookletLayout.connect( this, {
 						set: 'onBookletLayoutSetPage'
@@ -595,31 +595,31 @@ ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 /**
  * @private
  */
-ve.ui.MWTemplateDialog.prototype.onFilterParameters = function ( visibility ) {
-	for ( var partId in visibility ) {
-		var page = this.bookletLayout.getPage( partId );
+ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
+	for ( var pageName in visibility ) {
+		var page = this.bookletLayout.getPage( pageName );
 		if ( page ) {
-			page.toggle( visibility[ partId ] );
+			page.toggle( visibility[ pageName ] );
 		}
 	}
 };
 
 /**
  * @private
- * @param {string} partId
+ * @param {string} pageName
  */
-ve.ui.MWTemplateDialog.prototype.focusPart = function ( partId ) {
+ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 	// The new sidebar does not focus template parameters, only top-level parts
-	if ( this.pocSidebar && partId.indexOf( '/' ) === -1 ) {
+	if ( this.pocSidebar && pageName.indexOf( '/' ) === -1 ) {
 		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
 		//  is executed later than this here.
-		setTimeout( this.pocSidebar.selectPartById.bind( this.pocSidebar, partId ) );
+		setTimeout( this.pocSidebar.selectPartById.bind( this.pocSidebar, pageName ) );
 		this.bookletLayout.focus();
-		this.bookletLayout.setPage( partId );
+		this.bookletLayout.setPage( pageName );
 	} else if ( this.bookletLayout.isOutlined() ) {
-		this.bookletLayout.getOutline().selectItemByData( partId );
+		this.bookletLayout.getOutline().selectItemByData( pageName );
 	} else {
-		this.bookletLayout.setPage( partId );
+		this.bookletLayout.setPage( pageName );
 	}
 };
 

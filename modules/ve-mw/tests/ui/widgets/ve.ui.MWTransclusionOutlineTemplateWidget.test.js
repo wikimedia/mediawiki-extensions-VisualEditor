@@ -71,7 +71,7 @@ QUnit.test( 'filterParameters() on an empty template', ( assert ) => {
 
 	let eventsFired = 0;
 	widget.connect( this, {
-		filterParameters: ( visibility ) => {
+		filterParametersById: ( visibility ) => {
 			assert.deepEqual( visibility, {} );
 			eventsFired++;
 		}
@@ -101,7 +101,7 @@ QUnit.test( 'filterParameters() considers everything from the spec', ( assert ) 
 
 	let eventsFired = 0;
 	widget.connect( this, {
-		filterParameters: ( visibility ) => {
+		filterParametersById: ( visibility ) => {
 			assert.deepEqual( visibility, {
 				'part_0/a': true,
 				'part_0/b': false,

@@ -51,8 +51,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		items: parameterNames.map( this.createCheckbox.bind( this ) )
 	} )
 		.connect( this, {
-			choose: 'onParameterChoose',
-			parameterFocused: 'onParameterFocused',
+			choose: 'onTemplateParameterChoose',
+			// Note that choose implies focus, but not the other way around
+			templateParameterClick: 'onTemplateParameterClick',
 			change: 'onParameterWidgetListChanged'
 		} );
 
@@ -70,16 +71,18 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Events */
 
 /**
- * @event focusPart
- * @param {string} partId Unique id of the part, e.g. something like "part_1" or "part_1/param1".
+ * @event focusTemplateParameterById
+ * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
+ *  "part_1" or "part_1/param1".
  */
 
 /**
  * Triggered when the user uses the search widget at the top to filter the list of parameters.
  *
- * @event filterParameters
+ * @event filterParametersById
  * @param {Object.<string,boolean>} visibility Keyed by unique id of the parameter, e.g. something
- *  like "part_1/param1". Note this lists only parameters that are currently in use.
+ *  like "part_1/param1". Note this lists only parameters that are currently shown as a checkbox.
+ *  The spec might contain more parameters (e.g. deprecated).
  */
 
 /* Methods */
@@ -163,7 +166,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterRemovedFromTempla
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterChoose = function ( item, selected ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = function ( item, selected ) {
 	var paramName = item.getData(),
 		param = this.templateModel.getParameter( paramName );
 	if ( !selected ) {
@@ -176,12 +179,12 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterChoose = function
 /**
  * @private
  * @param {string} paramName
- * @fires focusPart
+ * @fires focusTemplateParameterById
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterFocused = function ( paramName ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterClick = function ( paramName ) {
 	var param = this.templateModel.getParameter( paramName );
 	if ( param ) {
-		this.emit( 'focusPart', param.getId() );
+		this.emit( 'focusTemplateParameterById', param.getId() );
 	}
 };
 
@@ -200,7 +203,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
  *
  * @private
  * @param {string} query user input
- * @fires filterParameters
+ * @fires filterParametersById
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function ( query ) {
 	var self = this,
@@ -235,5 +238,5 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	} );
 
 	this.infoWidget.toggle( nothingFound );
-	self.emit( 'filterParameters', visibility );
+	self.emit( 'filterParametersById', visibility );
 };
