@@ -44,7 +44,7 @@ ve.ui.MWTransclusionOutlineParameterWidget = function VeUiMWTransclusionOutlineP
 
 	// Initialization
 	this.$element
-		.addClass( 've-ui-mwTransclusionOutlineItem' )
+		.addClass( 've-ui-mwTransclusionOutlineParameterWidget' )
 		.append( this.checkbox.$element, this.$label );
 };
 
