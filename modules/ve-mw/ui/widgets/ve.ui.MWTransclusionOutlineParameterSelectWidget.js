@@ -95,6 +95,16 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 
 /**
  * @inheritDoc OO.ui.SelectWidget
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function () {
+	if ( !this.findHighlightedItem() ) {
+		this.highlightItem( this.items[ 0 ] );
+	}
+	// Don't call the parent. It makes assumptions that conflict with how we use selections.
+};
+
+/**
+ * @inheritDoc OO.ui.SelectWidget
  * @param {jQuery.Event} e
  * @fires parameterFocused
  */
