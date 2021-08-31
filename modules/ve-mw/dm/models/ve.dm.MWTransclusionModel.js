@@ -285,15 +285,13 @@
 		for ( var i = 0; i < queue.length; i++ ) {
 			var item = queue[ i ];
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
-				var title = item.add.getTitle();
+				var title = item.add.getTitle(),
+					mwTitle = title ? mw.Title.newFromText( title, templateNamespaceId ) : null;
 				if (
 					// Skip titles that don't have a resolvable href
-					title &&
+					mwTitle &&
 					// Skip titles outside the template namespace
-					mw.Title.newFromText(
-						title,
-						templateNamespaceId
-					).namespace === templateNamespaceId &&
+					mwTitle.namespace === templateNamespaceId &&
 					// Skip already cached data
 					!hasOwn.call( specCache, title ) &&
 					// Skip duplicate titles in the same batch
