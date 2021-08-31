@@ -148,7 +148,7 @@
 					// The following messages are used here:
 					// * minoredit
 					// * watchthis
-					var $label = $( '<span>' ).append( mw.message( options[ 'label-message' ] ).parseDom() );
+					var $label = mw.message( options[ 'label-message' ] ).parseDom();
 
 					var config = $.extend( {
 						accessKey: accesskey,
@@ -178,7 +178,7 @@
 					checkboxFields.push(
 						new OO.ui.FieldLayout( checkbox, {
 							align: 'inline',
-							label: $label.contents(),
+							label: $label,
 							title: title,
 							invisibleLabel: !!options.invisibleLabel,
 							// * ve-ui-mwSaveDialog-field-wpMinoredit

@@ -14,12 +14,12 @@
  * @cfg {mw.Message} message Message to display
  */
 ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( config ) {
-	var $label = config.message.parseDom();
-	// eslint-disable-next-line no-jquery/variable-pattern
-	config.label = $label;
+	config.label = config.message.parseDom();
 
 	// Parent constructor
 	ve.ui.MWDismissibleMessageWidget.super.call( this, config );
+
+	ve.targetLinksToNewWindow( this.$label[ 0 ] );
 
 	// Properties
 	this.messageKey = config.message.key;
@@ -31,8 +31,6 @@ ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( conf
 		title: mw.msg( 'visualeditor-dismissible-message-close' )
 	} )
 		.connect( this, { click: 'onDismissClick' } );
-
-	ve.targetLinksToNewWindow( this.$element[ 0 ] );
 
 	this.$element
 		.addClass( 've-ui-dismissibleMessageWidget' )
