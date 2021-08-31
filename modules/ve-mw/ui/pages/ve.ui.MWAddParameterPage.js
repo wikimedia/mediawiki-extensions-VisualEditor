@@ -32,7 +32,10 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		.connect( this, { click: 'togglePlaceholder' } );
 
 	// Input field and button
-	this.paramInputField = new OO.ui.TextInputWidget().connect( this, { enter: 'onParameterInput' } );
+	this.paramInputField = new OO.ui.TextInputWidget( {
+		placeholder: ve.msg( 'visualeditor-dialog-transclusion-add-param-placeholder' )
+	} )
+		.connect( this, { enter: 'onParameterInput' } );
 	var saveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param-save' ),
 		flags: [ 'primary', 'progressive' ]
@@ -45,16 +48,19 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		{ classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset-input' ] }
 	);
 
+	var $helpText = mw.message(
+		'visualeditor-dialog-transclusion-add-param-help',
+		this.template.getTitle() || this.template.getTarget().wt
+	).parseDom();
 	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
 		label: this.addParameterInputHeader.$element,
 		helpInline: true,
-		help: mw.message(
-			'visualeditor-dialog-transclusion-add-param-help',
-			this.template.getTitle() || this.template.getTarget().wt
-		).parseDom(),
+		help: $helpText,
 		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
 		$content: this.addParameterInputField.$element
 	} );
+
+	ve.targetLinksToNewWindow( this.addParameterFieldset.$element[ 0 ] );
 
 	// Init visibility
 	this.togglePlaceholder( false );
