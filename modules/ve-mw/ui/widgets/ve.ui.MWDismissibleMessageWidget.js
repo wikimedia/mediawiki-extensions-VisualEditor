@@ -15,7 +15,7 @@
  */
 ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( config ) {
 	var $label = config.message.parseDom();
-	$label.filter( 'a' ).attr( 'target', '_blank' );
+	$label.filter( 'a[href]' ).attr( 'target', '_blank' );
 	// eslint-disable-next-line no-jquery/variable-pattern
 	config.label = $label;
 
