@@ -41,6 +41,11 @@
 	width: 100%;
 }
 
+.ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-fieldLayout-messages .oo-ui-messageWidget {
+	margin-left: 0;
+	margin-right: 0;
+}
+
 .ve-ui-mwTransclusionDialog-addParameterFieldset-header.oo-ui-iconElement .oo-ui-iconElement-icon {
 	height: 100%;
 }

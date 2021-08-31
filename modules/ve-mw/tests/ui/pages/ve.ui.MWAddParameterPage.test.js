@@ -41,3 +41,46 @@ QUnit.test( 'Outline item initialization', ( assert ) => {
 	assert.notOk( outlineItem.$element.hasClass( 'oo-ui-outlineOptionWidget' ),
 		'Outline item should not be styled' );
 } );
+
+[
+	[ '', 0 ],
+	[ 'a', 0 ],
+	[ 'used', '(visualeditor-dialog-transclusion-add-param-error-exists-selected: used, used)' ],
+	[ 'unused', '(visualeditor-dialog-transclusion-add-param-error-exists-unselected: unused, unused)' ],
+	[ 'usedAlias', '(visualeditor-dialog-transclusion-add-param-error-alias: usedAlias, x)' ],
+	[ 'unusedAlias', '(visualeditor-dialog-transclusion-add-param-error-alias: unusedAlias, y)' ],
+	[ 'usedDeprecated', '(visualeditor-dialog-transclusion-add-param-error-exists-selected: usedDeprecated, usedDeprecated)' ],
+	[ 'unusedDeprecated', '(visualeditor-dialog-transclusion-add-param-error-deprecated: unusedDeprecated, unusedDeprecated)' ]
+].forEach( ( [ input, expected ] ) =>
+	QUnit.test( 'getValidationErrors: ' + input, ( assert ) => {
+		const data = {
+			target: {},
+			params: {
+				used: {},
+				usedAlias: {},
+				usedDeprecated: {}
+			}
+		};
+
+		const transclusion = new ve.dm.MWTransclusionModel(),
+			template = ve.dm.MWTemplateModel.newFromData( transclusion, data ),
+			parameter = new ve.dm.MWParameterModel( template ),
+			page = new ve.ui.MWAddParameterPage( parameter );
+
+		template.getSpec().setTemplateData( { params: {
+				used: {},
+				unused: {},
+				x: { aliases: [ 'usedAlias' ] },
+				y: { aliases: [ 'unusedAlias' ] },
+				usedDeprecated: { deprecated: true },
+				unusedDeprecated: { deprecated: true }
+			} } );
+		template.addParameter( parameter );
+
+		const errors = page.getValidationErrors( input );
+		assert.strictEqual( errors.length, expected ? 1 : 0 );
+		if ( expected ) {
+			assert.strictEqual( errors[ 0 ].text(), expected );
+		}
+	} )
+);

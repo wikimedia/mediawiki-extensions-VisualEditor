@@ -41,10 +41,10 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		} );
 	this.saveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param-save' ),
-		flags: [ 'primary', 'progressive' ]
+		flags: [ 'primary', 'progressive' ],
+		disabled: true
 	} )
-		.connect( this, { click: 'onParameterNameSubmitted' } )
-		.setDisabled( true );
+		.connect( this, { click: 'onParameterNameSubmitted' } );
 
 	this.addParameterInputField = new OO.ui.ActionFieldLayout(
 		this.paramInputField,
@@ -89,8 +89,11 @@ OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
  */
 ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
 	var paramName = value.trim(),
-		isValid = /^[^={|}]+$/.test( paramName );
-	this.saveButton.setDisabled( !isValid );
+		isValid = /^[^={|}]+$/.test( paramName ),
+		errors = this.getValidationErrors( paramName );
+
+	this.addParameterInputField.setErrors( errors );
+	this.saveButton.setDisabled( !isValid || errors.length );
 };
 
 ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
@@ -105,16 +108,40 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 		return;
 	}
 
-	if ( this.template.getSpec().isParameterDocumented( name ) ) {
-		// TODO: This special case needs a proper error message for the user
-		return;
-	}
-
 	this.template.addParameter( new ve.dm.MWParameterModel( this.template, name ) );
 
 	ve.track( 'activity.transclusion', {
 		action: 'add-unknown-parameter'
 	} );
+};
+
+ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
+	if ( !name ) {
+		return [];
+	}
+
+	var key,
+		spec = this.template.getSpec();
+
+	if ( spec.getParameterAliases( name ).indexOf( name ) !== -1 ) {
+		key = 'visualeditor-dialog-transclusion-add-param-error-alias';
+	} else if ( this.template.hasParameter( name ) ) {
+		key = 'visualeditor-dialog-transclusion-add-param-error-exists-selected';
+	} else if ( spec.isParameterDeprecated( name ) ) {
+		key = 'visualeditor-dialog-transclusion-add-param-error-deprecated';
+	} else if ( spec.isKnownParameterOrAlias( name ) ) {
+		key = 'visualeditor-dialog-transclusion-add-param-error-exists-unselected';
+	}
+
+	if ( !key ) {
+		return [];
+	}
+
+	var label = spec.getParameterLabel( spec.getPrimaryParameterName( name ) ),
+		// eslint-disable-next-line mediawiki/msg-doc
+		$msg = mw.message( key, name, label ).parseDom();
+	ve.targetLinksToNewWindow( $( '<div>' ).append( $msg )[ 0 ] );
+	return [ $msg ];
 };
 
 /**
