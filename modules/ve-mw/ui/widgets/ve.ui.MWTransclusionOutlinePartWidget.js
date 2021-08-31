@@ -39,7 +39,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event focusPart
+ * @event selectPart
  * @param {string} partId Unique id of the part, e.g. something like "part_1" or "part_1/param1".
  */
 
