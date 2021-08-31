@@ -61,8 +61,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 	var self = this;
 	items.forEach( function ( item ) {
 		item.connect( self, {
-			change: [ 'onCheckboxChange', item ],
-			parameterFocused: [ 'emit', 'parameterFocused' ]
+			change: [ 'onCheckboxChange', item ]
 		} );
 	} );
 
