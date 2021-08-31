@@ -16,11 +16,12 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 	// Mixin constructors
 	OO.ui.mixin.TabIndexedElement.call( this, config );
 
-	// Events
-	this.$element.on( {
-		focus: this.bindDocumentKeyDownListener.bind( this ),
-		blur: this.unbindDocumentKeyDownListener.bind( this )
-	} );
+	this.$element
+		.addClass( 've-ui-mwTransclusionOutlineParameterSelectWidget' )
+		.on( {
+			focus: this.bindDocumentKeyDownListener.bind( this ),
+			blur: this.unbindDocumentKeyDownListener.bind( this )
+		} );
 };
 
 /* Inheritance */
