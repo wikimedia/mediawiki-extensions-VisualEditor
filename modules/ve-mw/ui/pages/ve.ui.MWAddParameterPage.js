@@ -114,6 +114,6 @@ ve.ui.MWAddParameterPage.prototype.setOutlineItem = function () {
 
 	if ( this.outlineItem ) {
 		// This page should not be shown in the (BookletLayout-based) sidebar
-		this.outlineItem.$element.empty().removeClass();
+		this.outlineItem.$element.empty().removeAttr( 'class' );
 	}
 };
