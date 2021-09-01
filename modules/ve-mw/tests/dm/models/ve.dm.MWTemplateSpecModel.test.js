@@ -276,6 +276,11 @@
 		[ { notemplatedata: true }, false, 'undocumented' ],
 		[ { notemplatedata: true, params: { p: {} } }, false, 'auto-detected params' ],
 
+		// Make sure bad input is not reported as being documented
+		[ undefined, false, 'undefined' ],
+		[ null, false, 'null' ],
+		[ [], false, 'empty array' ],
+
 		[ { notemplatedata: false }, true, 'unexpected false' ],
 		[ { notemplatedata: '' }, true, 'unsupported formatversion=1' ]
 	].forEach( ( [ templateData, expected, message ] ) => {
@@ -283,8 +288,9 @@
 			const template = createTemplateMock(),
 				spec = new ve.dm.MWTemplateSpecModel( template );
 
-			spec.setTemplateData( templateData );
+			assert.notOk( spec.isDocumented(), 'undocumented by default' );
 
+			spec.setTemplateData( templateData );
 			assert.strictEqual( spec.isDocumented(), expected );
 		} );
 	} );

@@ -39,7 +39,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	// Properties
 	this.template = template;
 	this.seenParameterNames = {};
-	this.templateData = { params: {} };
+	this.templateData = { notemplatedata: true, params: {} };
 	this.aliases = {};
 
 	// Initialization
@@ -82,7 +82,11 @@ ve.dm.MWTemplateSpecModel.static.getLocalValue = function ( stringOrObject, lang
  *  parameter mappings for consumers like Citoid or gadgets
  */
 ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
-	this.templateData = data || {};
+	if ( !data || !ve.isPlainObject( data ) ) {
+		return;
+	}
+
+	this.templateData = data;
 	// Better be safe even if the `params` element isn't optional in the TemplateData API
 	if ( !this.templateData.params ) {
 		this.templateData.params = {};
