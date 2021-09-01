@@ -171,6 +171,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Lisää sisältö",
 	"visualeditor-dialog-transclusion-add-wikitext": "Lisää wikiteksti",
 	"visualeditor-dialog-transclusion-add-param": "Lisää enemmän tietoa",
+	"visualeditor-dialog-transclusion-add-param-save": "Lisää parametri",
 	"visualeditor-dialog-transclusion-add-template": "Lisää malline",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Lisää dokumentoimaton parametri",
 	"visualeditor-dialog-transclusion-collapse-options": "Piilota valinnat",
