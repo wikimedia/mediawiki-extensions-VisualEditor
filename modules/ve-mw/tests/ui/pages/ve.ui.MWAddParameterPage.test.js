@@ -1,4 +1,4 @@
-QUnit.module( 've.ui.MWAddParameterPage' );
+QUnit.module( 've.ui.MWAddParameterPage', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'Input event handler', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
