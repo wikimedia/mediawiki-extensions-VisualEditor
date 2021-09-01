@@ -119,6 +119,13 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
 };
 
 /**
+ * @param {string} paramName
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = function ( paramName ) {
+	this.parameters.highlightParameter( paramName );
+};
+
+/**
  * @private
  * @param {ve.dm.MWParameterModel} param
  */

@@ -72,6 +72,18 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 /**
  * @param {string} paramName
  */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightParameter = function ( paramName ) {
+	var item = this.findItemFromData( paramName );
+	// Intentionally drop any highlighting if the parameter can't be found
+	this.highlightItem( item );
+	if ( item ) {
+		this.scrollItemIntoView( item );
+	}
+};
+
+/**
+ * @param {string} paramName
+ */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.markParameterAsUnused = function ( paramName ) {
 	// There is no OO.ui.SelectWidget.unselectItemByData(), we need to do this manually
 	var item = this.findItemFromData( paramName );

@@ -488,9 +488,14 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						filterParameters: 'onFilterParameters',
 						focusPart: 'focusPart'
 					} );
+					// FIXME: Check if we can merge these two "set"/"focusin" event handlers
 					this.bookletLayout.connect( this, {
 						set: 'onBookletLayoutSetPage'
 					} );
+					this.bookletLayout.stackLayout.$element.on(
+						'focusin',
+						this.onBookletLayoutPageFocused.bind( this )
+					);
 				} else {
 					this.pocSidebar.clear();
 				}
@@ -634,6 +639,22 @@ ve.ui.MWTemplateDialog.prototype.onBookletLayoutSetPage = function ( page ) {
 	// "part_1/param1". Make sure at least the top-level part is focused.
 	var partId = page.getName().split( '/', 2 )[ 0 ];
 	this.pocSidebar.selectPartById( partId );
+};
+
+/**
+ * Modeled after {@see OO.ui.BookletLayout.onStackLayoutFocus}.
+ *
+ * @private
+ * @param {jQuery.Event} e
+ */
+ve.ui.MWTemplateDialog.prototype.onBookletLayoutPageFocused = function ( e ) {
+	var $focusedPage = $( e.target ).closest( '.oo-ui-pageLayout' );
+	for ( var pageName in this.bookletLayout.pages ) {
+		if ( this.bookletLayout.getPage( pageName ).$element[ 0 ] === $focusedPage[ 0 ] ) {
+			this.pocSidebar.highlightSubItemByPageName( pageName );
+			break;
+		}
+	}
 };
 
 /**

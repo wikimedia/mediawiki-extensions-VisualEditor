@@ -144,6 +144,19 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function (
 };
 
 /**
+ * @param {string} pageName
+ */
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.highlightSubItemByPageName = function ( pageName ) {
+	var ids = pageName.split( '/', 2 ),
+		partId = ids[ 0 ],
+		paramName = ids[ 1 ];
+	// Note this code-path (currently) doesn't care about top-level parts
+	if ( partId in this.partWidgets && paramName !== undefined ) {
+		this.partWidgets[ partId ].highlightParameter( paramName );
+	}
+};
+
+/**
  * This is inspired by {@see OO.ui.SelectWidget.findSelectedItem}, but isn't one.
  *
  * @return {string|undefined}
