@@ -38,7 +38,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
 
 /**
  * @event focusPart
- * @param {string} partId Unique id of the part, e.g. something "part_1" or "part_1/param1".
+ * @param {string} partId Unique id of the part, e.g. something like "part_1" or "part_1/param1".
  */
 
 /**
@@ -134,7 +134,8 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 /**
  * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
  *
- * @param {string} partId
+ * @param {string} partId Top-level part id, e.g. "part_1". Note this (currently) doesn't accept
+ *  parameter ids like "part_1/param1".
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function ( partId ) {
 	for ( var id in this.partWidgets ) {
