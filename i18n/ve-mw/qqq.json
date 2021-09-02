@@ -208,6 +208,8 @@
 	"visualeditor-dialog-transclusion-loading": "Title for the transclusion dialog while its contents are loading.\n{{Identical|Loading}}",
 	"visualeditor-dialog-transclusion-more-template-description": "Message to user that additional template information might be available for a template.\n\nParameters:\n* $1 - The name of the template.\n* $2 - The title of the template.",
 	"visualeditor-dialog-transclusion-multipart-message": "Message displayed when a transclusion with multiple parts is edited.",
+	"visualeditor-dialog-transclusion-no-parameters-description": "Message to user that no documented parameters were found for the template.",
+	"visualeditor-dialog-transclusion-no-template-data-description": "Message to user that no information on the template's parameters is available for the template.\n\nParameters:\n* $1 - The title of the template.",
 	"visualeditor-dialog-transclusion-no-template-description": "Message to user that no template information is available for the template.\n\nParameters:\n* $1 - The name of the template.\n* $2 - The title of the template.",
 	"visualeditor-dialog-transclusion-options": "Label for section with options for templates, content or parameters.\n{{Identical|Options}}",
 	"visualeditor-dialog-transclusion-param-default": "Label for parameter's default value in the template dialog. $1 - Parameter's default value.\n{{Identical|Default}}",
