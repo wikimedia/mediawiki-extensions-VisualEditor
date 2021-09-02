@@ -229,6 +229,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Label for the OK button on the confirmation dialog opened if the user tries to insert/edit a template without filling all required fields.\n{{Identical|Continue anyway}}",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Title for the confirmation dialog opened if the user tries to insert/edit a template without filling all required fields.\n\nParameters:\n* $1 - Number of parameters missing, for PLURAL support.",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Label for the confirmation dialog opened if the user tries to insert/edit a template without filling all required fields.\n\nParameters:\n* $1 - Parameters missing, as a list using {{msg-mw|and}}, {{msg-mw|comma-separator}} and {{msg-mw|word-separator}}.\n* $2 - Number of parameters missing, for PLURAL support.",
+	"visualeditor-dialog-transclusion-see-template": "Message to user that additional template information might be available for a template.\n\nParameters:\n* $1 - The title of the template.",
 	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Message shown to an editor when they manually add a value that is not a suggested value for a parameter.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Label for the transclusion dialog when selecting a transclusion to insert.",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Label for the transclusion dialog when editing a transclusion to insert.\n\nParameters:\n* $1 - Transclusion name.",
