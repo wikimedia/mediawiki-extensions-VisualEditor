@@ -21,9 +21,19 @@ QUnit.test( 'interaction with items', ( assert ) => {
 
 	let eventsFired = 0;
 	widget.connect( this, { parameterFocused: () => eventsFired++ } );
-	// FIXME: There is currently no code in the OptionWidget that fires this
-	item.emit( 'parameterFocused' );
-	assert.strictEqual( eventsFired, 1 );
+
+	widget.onMouseDown( {
+		which: OO.ui.MouseButtons.LEFT,
+		target: item.$element[ 0 ]
+	} );
+
+	widget.highlightItem( item );
+	widget.onDocumentKeyDown( {
+		keyCode: OO.ui.Keys.ENTER,
+		preventDefault: () => undefined
+	} );
+
+	assert.strictEqual( eventsFired, 2 );
 } );
 
 QUnit.test( 'interaction with required parameter', ( assert ) => {
