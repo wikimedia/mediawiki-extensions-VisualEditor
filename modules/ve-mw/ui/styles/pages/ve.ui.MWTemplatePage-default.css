@@ -30,6 +30,12 @@
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout,
+.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-info,
+.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-field {
+	padding: 0;
+}
+
+.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout,
 .ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwTransclusionDialog-multipart-message {
 	/* This top/bottom margin is meant to collapse with the next one */
 	margin: 48px 0 16px 0;
@@ -38,17 +44,11 @@
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .ve-ui-mwParameterPage,
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .ve-ui-mwParameterPlaceholderPage {
 	/* Tighter margins within a group of parameters. */
-	margin: 16px 0;
+	margin-top: 16px;
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout:last-child {
 	margin-bottom: 48px;
-}
-
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout,
-.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-info,
-.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-field {
-	padding: 0;
 }
 
 .ve-ui-mwTransclusionDialog-template-note {
