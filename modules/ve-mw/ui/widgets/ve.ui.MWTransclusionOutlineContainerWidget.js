@@ -114,14 +114,19 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
 		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
-		widget.connect( this, { filterParameters: [ 'emit', 'filterParameters' ] } );
+		widget.connect( this, {
+			focusPart: [ 'emit', 'focusPart' ],
+			filterParameters: [ 'emit', 'filterParameters' ]
+		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
 	} else if ( part instanceof ve.dm.MWTransclusionContentModel ) {
 		widget = new ve.ui.MWTransclusionOutlineWikitextWidget( part );
 	}
 
-	widget.connect( this, { selectPart: 'onPartSelected' } );
+	widget.connect( this, {
+		selectPart: 'onPartSelected'
+	} );
 
 	this.partWidgets[ part.getId() ] = widget;
 	if ( typeof newPosition === 'number' && newPosition < this.$element.children().length ) {
