@@ -92,19 +92,24 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.append( this.$description );
 
 	if ( veConfig.transclusionDialogNewSidebar && !pageMissing ) {
+		var noticeWidget;
+
 		if ( !this.template.getSpec().getDocumentedParameterOrder().length ) {
-			var noParametersNote = new OO.ui.MessageWidget( {
+			noticeWidget = new OO.ui.MessageWidget( {
 				label: mw.message( 'visualeditor-dialog-transclusion-no-parameters-description' ).parseDom(),
 				classes: [ 've-ui-mwTransclusionDialog-template-note' ]
 			} );
-			this.infoFieldset.$element.append( noParametersNote.$element );
 		} else if ( !this.template.getSpec().isDocumented() ) {
-			var noTemplateDataParametersWarning = new OO.ui.MessageWidget( {
+			noticeWidget = new OO.ui.MessageWidget( {
 				label: mw.message( 'visualeditor-dialog-transclusion-no-template-data-description', link ).parseDom(),
 				classes: [ 've-ui-mwTransclusionDialog-template-note' ],
 				type: 'warning'
 			} );
-			this.infoFieldset.$element.append( noTemplateDataParametersWarning.$element );
+		}
+
+		if ( noticeWidget && noticeWidget.$element ) {
+			ve.targetLinksToNewWindow( noticeWidget.$element[ 0 ] );
+			this.infoFieldset.$element.append( noticeWidget.$element );
 		}
 	}
 
