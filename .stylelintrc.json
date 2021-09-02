@@ -2,6 +2,7 @@
 	"extends": "stylelint-config-wikimedia/grade-a",
 	"rules": {
 		"no-descending-specificity": null,
-		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-"
+		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-",
+		"declaration-property-unit-disallowed-list": null
 	}
 }
