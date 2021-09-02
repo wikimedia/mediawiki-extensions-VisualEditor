@@ -77,7 +77,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		// Temporary feedback message when templateSearchImprovements is true T284560
 		// TODO: remove when templateSearchImprovements are out of beta
 		var feedbackMessage = new ve.ui.MWDismissibleMessageWidget( {
-			message: mw.message( 'visualeditor-dialog-transclusion-feedback-message' )
+			messageKey: 'visualeditor-dialog-transclusion-feedback-message'
 		} )
 			.connect( this, { close: 'focus' } );
 

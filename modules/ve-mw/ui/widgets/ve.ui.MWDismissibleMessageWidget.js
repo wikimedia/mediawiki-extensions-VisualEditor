@@ -11,10 +11,11 @@
  *
  * @constructor
  * @param {Object} config Configuration options
- * @cfg {mw.Message} message Message to display
+ * @cfg {string} messageKey
  */
 ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( config ) {
-	config.label = config.message.parseDom();
+	// eslint-disable-next-line mediawiki/msg-doc
+	config.label = mw.message( config.messageKey ).parseDom();
 
 	// Parent constructor
 	ve.ui.MWDismissibleMessageWidget.super.call( this, config );
@@ -22,8 +23,7 @@ ve.ui.MWDismissibleMessageWidget = function VeUiMWDismissibleMessageWidget( conf
 	ve.targetLinksToNewWindow( this.$label[ 0 ] );
 
 	// Properties
-	this.messageKey = config.message.key;
-	delete config.message;
+	this.messageKey = config.messageKey;
 
 	var dismissButton = new OO.ui.ButtonWidget( {
 		icon: 'close',
