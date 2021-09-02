@@ -43,6 +43,12 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
  */
 
 /**
+ * @event updateOutlineControlButtons
+ * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
+ *  "part_1" or "part_1/param1".
+ */
+
+/**
  * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  * @param {number} [newPosition]
@@ -128,6 +134,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 	}
 
 	widget.connect( this, {
+		transclusionPartSoftSelected: 'selectPartById',
 		transclusionPartSelected: 'onTransclusionPartSelected'
 	} );
 
@@ -149,6 +156,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function (
 	for ( var id in this.partWidgets ) {
 		this.partWidgets[ id ].setSelected( id === partId );
 	}
+	this.emit( 'updateOutlineControlButtons', partId );
 };
 
 /**

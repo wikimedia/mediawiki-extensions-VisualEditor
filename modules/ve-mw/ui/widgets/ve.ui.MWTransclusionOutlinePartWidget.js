@@ -25,7 +25,10 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	} ) );
 
 	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
-		.connect( this, { click: [ 'emit', 'transclusionPartSelected', part.getId() ] } );
+		.connect( this, {
+			spacePressed: [ 'emit', 'transclusionPartSoftSelected', part.getId() ],
+			click: [ 'emit', 'transclusionPartSelected', part.getId() ]
+		} );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
@@ -39,6 +42,16 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /* Events */
 
 /**
+ * "Soft" selection with space.
+ *
+ * @event transclusionPartSoftSelected
+ * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
+ *  "part_1".
+ */
+
+/**
+ * "Hard" selection with enter or mouse click.
+ *
  * @event transclusionPartSelected
  * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
  *  "part_1".

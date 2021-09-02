@@ -486,7 +486,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget();
 					this.pocSidebar.connect( this, {
 						focusPageByName: 'focusPart',
-						filterPagesByName: 'onFilterPagesByName'
+						filterPagesByName: 'onFilterPagesByName',
+						updateOutlineControlButtons: 'onUpdateOutlineControlButtons'
 					} );
 					// FIXME: Check if we can merge these two "set"/"focusin" event handlers
 					this.bookletLayout.connect( this, {
@@ -607,6 +608,20 @@ ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
 			page.toggle( visibility[ pageName ] );
 		}
 	}
+};
+
+/**
+ * @private
+ */
+ve.ui.MWTemplateDialog.prototype.onUpdateOutlineControlButtons = function ( pageName ) {
+	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
+	// the "select" event. This will stop working when we disconnect the old sidebar.
+	this.bookletLayout.getOutline().items.forEach( function ( item ) {
+		// This repeats what ve.ui.MWTransclusionOutlineContainerWidget.selectPartById did, but for
+		// the old sidebar
+		item.setSelected( item.getData() === pageName );
+	} );
+	this.bookletLayout.getOutlineControls().onOutlineChange();
 };
 
 /**
