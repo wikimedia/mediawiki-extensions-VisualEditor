@@ -23,6 +23,7 @@ VisualEditor.
 
 
 ## Terminology
+
 * Apex: See https://www.mediawiki.org/wiki/Skin:Apex
 * CE: ContentEditable
 * DM: Data model
