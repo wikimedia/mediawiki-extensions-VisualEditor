@@ -695,9 +695,8 @@ ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply,
  */
 ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
 	var $errorMsgs = ( new mw.Api() ).getErrorMessage( data );
-	$errorMsgs.each( function () {
-		ve.targetLinksToNewWindow( this );
-	} );
+	// Warning, this assumes there are only Element nodes in the jQuery set
+	$errorMsgs.toArray().forEach( ve.targetLinksToNewWindow );
 	return $errorMsgs;
 };
 
