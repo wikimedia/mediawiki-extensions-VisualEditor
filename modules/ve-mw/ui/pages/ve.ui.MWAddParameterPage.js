@@ -134,7 +134,7 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 
 /**
  * @private
- * @param {string} name
+ * @param {string} name Parameter name or alias
  * @return {jQuery[]} An array as accepted by {@see OO.ui.FieldLayout.setErrors}
  */
 ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
@@ -165,7 +165,7 @@ ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
 		return [];
 	}
 
-	var label = spec.getParameterLabel( spec.getPrimaryParameterName( name ) ),
+	var label = spec.getParameterLabel( this.template.getOriginalParameterName( name ) ),
 		// eslint-disable-next-line mediawiki/msg-doc
 		$msg = mw.message( key, name, label ).parseDom();
 	ve.targetLinksToNewWindow( $( '<div>' ).append( $msg )[ 0 ] );

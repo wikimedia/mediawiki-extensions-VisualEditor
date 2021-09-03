@@ -155,7 +155,7 @@ ve.dm.MWTemplateModel.prototype.getParameters = function () {
 };
 
 /**
- * @param {string} name Parameter name
+ * @param {string} name Parameter name or alias as originally used in the wikitext
  * @return {ve.dm.MWParameterModel|undefined}
  */
 ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
@@ -169,14 +169,25 @@ ve.dm.MWTemplateModel.prototype.getParameter = function ( name ) {
  * @return {boolean} Parameter is in the template
  */
 ve.dm.MWTemplateModel.prototype.hasParameter = function ( name ) {
-	var params = this.params;
+	return this.getOriginalParameterName( name ) in this.params;
+};
 
-	// Check for `name` (which may be an alias), its primary name, and all of its aliases
-	return name in params ||
-		this.spec.getPrimaryParameterName( name ) in params ||
-		this.spec.getParameterAliases( name ).some( function ( alias ) {
-			return alias in params;
-		} );
+/**
+ * @param {string} name Parameter name or alias
+ * @return {string} Parameter name or alias as originally used in the wikitext
+ */
+ve.dm.MWTemplateModel.prototype.getOriginalParameterName = function ( name ) {
+	if ( name in this.params ) {
+		return name;
+	}
+	var aliases = this.spec.getParameterAliases( name );
+	// FIXME: Should use .filter() when we dropped IE11 support
+	for ( var i = 0; i < aliases.length; i++ ) {
+		if ( aliases[ i ] in this.params ) {
+			return aliases[ i ];
+		}
+	}
+	return this.spec.getPrimaryParameterName( name );
 };
 
 /**

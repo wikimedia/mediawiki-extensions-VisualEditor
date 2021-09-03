@@ -49,8 +49,9 @@ QUnit.test( 'Outline item initialization', ( assert ) => {
 	[ 'x|a=b', '(visualeditor-dialog-transclusion-add-param-error-forbidden-char: |)' ],
 	[ 'used', '(visualeditor-dialog-transclusion-add-param-error-exists-selected: used, used)' ],
 	[ 'unused', '(visualeditor-dialog-transclusion-add-param-error-exists-unselected: unused, unused)' ],
-	[ 'usedAlias', '(visualeditor-dialog-transclusion-add-param-error-alias: usedAlias, x)' ],
+	[ 'usedAlias', '(visualeditor-dialog-transclusion-add-param-error-alias: usedAlias, xLabel)' ],
 	[ 'unusedAlias', '(visualeditor-dialog-transclusion-add-param-error-alias: unusedAlias, y)' ],
+	[ 'usedAliasNoLabel', '(visualeditor-dialog-transclusion-add-param-error-alias: usedAliasNoLabel, usedAliasNoLabel)' ],
 	[ 'usedDeprecated', '(visualeditor-dialog-transclusion-add-param-error-exists-selected: usedDeprecated, usedDeprecated)' ],
 	[ 'unusedDeprecated', '(visualeditor-dialog-transclusion-add-param-error-deprecated: unusedDeprecated, unusedDeprecated)' ]
 ].forEach( ( [ input, expected ] ) =>
@@ -60,6 +61,7 @@ QUnit.test( 'Outline item initialization', ( assert ) => {
 			params: {
 				used: {},
 				usedAlias: {},
+				usedAliasNoLabel: {},
 				usedDeprecated: {}
 			}
 		};
@@ -72,8 +74,9 @@ QUnit.test( 'Outline item initialization', ( assert ) => {
 		template.getSpec().setTemplateData( { params: {
 				used: {},
 				unused: {},
-				x: { aliases: [ 'usedAlias' ] },
+				x: { aliases: [ 'usedAlias' ], label: 'xLabel' },
 				y: { aliases: [ 'unusedAlias' ] },
+				z: { aliases: [ 'usedAliasNoLabel' ] },
 				usedDeprecated: { deprecated: true },
 				unusedDeprecated: { deprecated: true }
 			} } );

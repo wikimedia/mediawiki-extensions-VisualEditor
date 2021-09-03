@@ -90,7 +90,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 
 /**
  * @private
- * @param {string} paramName
+ * @param {string} paramName Parameter name or alias as used in the model
  * @return {OO.ui.OptionWidget}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( paramName ) {
