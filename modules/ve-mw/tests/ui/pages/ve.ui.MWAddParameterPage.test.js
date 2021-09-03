@@ -45,6 +45,8 @@ QUnit.test( 'Outline item initialization', ( assert ) => {
 [
 	[ '', 0 ],
 	[ 'a', 0 ],
+	[ 'a=b', '(visualeditor-dialog-transclusion-add-param-error-forbidden-char: =)' ],
+	[ 'x|a=b', '(visualeditor-dialog-transclusion-add-param-error-forbidden-char: |)' ],
 	[ 'used', '(visualeditor-dialog-transclusion-add-param-error-exists-selected: used, used)' ],
 	[ 'unused', '(visualeditor-dialog-transclusion-add-param-error-exists-unselected: unused, unused)' ],
 	[ 'usedAlias', '(visualeditor-dialog-transclusion-add-param-error-alias: usedAlias, x)' ],
