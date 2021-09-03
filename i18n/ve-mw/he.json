@@ -189,6 +189,8 @@
 	"visualeditor-dialog-transclusion-loading": "טעינה...",
 	"visualeditor-dialog-transclusion-more-template-description": "ייתכן שיש מידע נוסף על התבנית \"$1\" ב[[$2|דף התיעוד שלה]].",
 	"visualeditor-dialog-transclusion-multipart-message": "{{GENDER:|אתה עורך|את עורכת}} תבנית ועוד חלק אחד או יותר של תוכן קשור (קוד ויקי או תבניות נוספות).",
+	"visualeditor-dialog-transclusion-no-parameters-description": "התבנית הזאת מיועדת לשימוש בלי [//www.mediawiki.org/wiki/Help:Templates#Parameters פרמטרים]. אם התבנית הזאת כן מכילה פרמטרים, הם [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters לא מתועדים].",
+	"visualeditor-dialog-transclusion-no-template-data-description": "בתבנית הזאת חסרים [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters נתוני תבנית] (TemplateData), והפרמטרים שלה נוצרו אוטומטית. ייתכן שיש מידע נוסף ב[[$1|דף התבנית]].",
 	"visualeditor-dialog-transclusion-no-template-description": "לתבנית \"$1\" עדיין אין תיאור, אבל ייתכן שאפשר למצוא מידע כלשהו ב[[$2|דף של התבנית]].",
 	"visualeditor-dialog-transclusion-options": "אפשרויות",
 	"visualeditor-dialog-transclusion-param-default": "ברירת מחדל: $1",

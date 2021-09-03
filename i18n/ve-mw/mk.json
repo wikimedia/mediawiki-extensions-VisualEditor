@@ -179,6 +179,8 @@
 	"visualeditor-dialog-transclusion-loading": "Вчитувам...",
 	"visualeditor-dialog-transclusion-more-template-description": "Уште информации за предлошката „$1“ ќе најдете на [[$2|нејзината страница]].",
 	"visualeditor-dialog-transclusion-multipart-message": "Уредувате предлошка и едно или повеќе парчиња поврзана содржина (викитекст и/или дополнителни предлошки).",
+	"visualeditor-dialog-transclusion-no-parameters-description": "Оваа предлошка може да е предвидена за употреба со [//www.mediawiki.org/wiki/Help:Templates#Parameters параметри]. Ако предлошката содржи параметри, тогаш тие се [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters недокуменирани].",
+	"visualeditor-dialog-transclusion-no-template-data-description": "На предлошката ѝ недостасуваат [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters Прдложни податоци], а нејзините параметри се автосоздадени. Поради тоа, предлошката и нејзините параметри немаат описи. Дополнителни информации може да има на [[$1|нејзината страница]].",
 	"visualeditor-dialog-transclusion-no-template-description": "Предлошката „$1“ засега нема опис, но може ќе најдете некои информации на [[$2|нејзината страница]].",
 	"visualeditor-dialog-transclusion-options": "Нагодувања",
 	"visualeditor-dialog-transclusion-param-default": "По основно: $1",
