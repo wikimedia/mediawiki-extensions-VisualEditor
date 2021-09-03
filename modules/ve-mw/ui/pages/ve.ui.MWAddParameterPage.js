@@ -35,16 +35,20 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 	this.paramInputField = new OO.ui.TextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-dialog-transclusion-add-param-placeholder' )
 	} )
-		.connect( this, { enter: 'onParameterInput' } );
-	var saveButton = new OO.ui.ButtonWidget( {
+		.connect( this, {
+			change: 'onParameterNameChanged',
+			enter: 'onParameterInput'
+		} );
+	this.saveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param-save' ),
 		flags: [ 'primary', 'progressive' ]
 	} )
-		.connect( this, { click: 'onParameterInput' } );
+		.connect( this, { click: 'onParameterInput' } )
+		.setDisabled( true );
 
 	this.addParameterInputField = new OO.ui.ActionFieldLayout(
 		this.paramInputField,
-		saveButton,
+		this.saveButton,
 		{ classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset-input' ] }
 	);
 
@@ -79,11 +83,25 @@ OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
 
 /* Methods */
 
+/**
+ * @private
+ * @param {string} value
+ */
+ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
+	var paramName = value.trim(),
+		isValid = /^[^={|}]+$/.test( paramName );
+	this.saveButton.setDisabled( !isValid );
+};
+
 ve.ui.MWAddParameterPage.prototype.onParameterInput = function () {
 	var name = this.paramInputField.getValue().trim();
+	if ( !name || this.saveButton.isDisabled() ) {
+		return;
+	}
+
 	this.paramInputField.setValue( '' );
 
-	if ( !name || this.template.hasParameter( name ) ) {
+	if ( this.template.hasParameter( name ) ) {
 		return;
 	}
 
