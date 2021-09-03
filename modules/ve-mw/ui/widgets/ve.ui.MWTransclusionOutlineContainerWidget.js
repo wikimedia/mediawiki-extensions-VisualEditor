@@ -31,14 +31,15 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event filterParameters
- * @param {Object.<string,boolean>} visibility Keyed by unique id of the parameter, e.g. something
- *  like "part_1/param1". Note this lists only parameters that are currently in use.
+ * @event filterPagesByName
+ * @param {Object.<string,boolean>} visibility Keyed by unique id of the {@see OO.ui.BookletLayout}
+ *  page, e.g. something like "part_1/param1".
  */
 
 /**
- * @event focusPart
- * @param {string} partId Unique id of the part, e.g. something like "part_1" or "part_1/param1".
+ * @event focusPageByName
+ * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
+ *  "part_1" or "part_1/param1".
  */
 
 /**
@@ -78,11 +79,11 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
 /**
  * @private
  * @param {string} partId
- * @fires focusPart
+ * @fires focusPageByName
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onPartSelected = function ( partId ) {
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionPartSelected = function ( partId ) {
 	this.selectPartById( partId );
-	this.emit( 'focusPart', partId );
+	this.emit( 'focusPageByName', partId );
 };
 
 /* Methods */
@@ -105,7 +106,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function
  * @private
  * @param {ve.dm.MWTransclusionPartModel} part
  * @param {number} [newPosition]
- * @fires filterParameters
+ * @fires filterPagesByName
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( part, newPosition ) {
 	var widget;
@@ -115,8 +116,10 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
 		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
 		widget.connect( this, {
-			focusPart: [ 'emit', 'focusPart' ],
-			filterParameters: [ 'emit', 'filterParameters' ]
+			// We can forward these events as is. The parameter's unique ids are reused as page
+			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
+			focusTemplateParameterById: [ 'emit', 'focusPageByName' ],
+			filterParametersById: [ 'emit', 'filterPagesByName' ]
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
@@ -125,7 +128,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 	}
 
 	widget.connect( this, {
-		selectPart: 'onPartSelected'
+		transclusionPartSelected: 'onTransclusionPartSelected'
 	} );
 
 	this.partWidgets[ part.getId() ] = widget;

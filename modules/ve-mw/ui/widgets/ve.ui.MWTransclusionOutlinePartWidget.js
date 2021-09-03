@@ -25,7 +25,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	} ) );
 
 	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
-		.connect( this, { click: [ 'emit', 'selectPart', part.getId() ] } );
+		.connect( this, { click: [ 'emit', 'transclusionPartSelected', part.getId() ] } );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
@@ -39,8 +39,9 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event selectPart
- * @param {string} partId Unique id of the part, e.g. something like "part_1" or "part_1/param1".
+ * @event transclusionPartSelected
+ * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
+ *  "part_1".
  */
 
 /* Methods */
