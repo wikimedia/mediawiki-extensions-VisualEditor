@@ -30,6 +30,7 @@
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout,
+.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-doc,
 .ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-info,
 .ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-field {
 	padding: 0;
