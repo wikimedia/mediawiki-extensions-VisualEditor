@@ -691,7 +691,6 @@ class VisualEditorHooks {
 
 		// add VE edit section in VE available namespaces
 		if ( self::isVisualAvailable( $title, $skin->getRequest(), $user ) ) {
-			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			$veEditSection = $tabMessages['editsection'];
 
 			$attribs = $result['editsection']['attribs'];
@@ -977,7 +976,7 @@ class VisualEditorHooks {
 	 * @param OutputPage $out The page view.
 	 */
 	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
-		$pageLanguage = ApiParsoidTrait::getPageLanguage( $out->getTitle() );
+		$pageLanguage = ApiVisualEditor::getPageLanguage( $out->getTitle() );
 		$converter = MediaWikiServices::getInstance()->getLanguageConverterFactory()
 			->getLanguageConverter( $pageLanguage );
 
