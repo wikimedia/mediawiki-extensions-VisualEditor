@@ -200,6 +200,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Сепак продолжи",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Недостасува потребно поле|Недостасуваат потребни полиња}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Дали сте сигурни дека сакате да продолжите без да  {{PLURAL:$2|го пополните потребното поле|без да ги пополните потребните $1 полиња}}?",
+	"visualeditor-dialog-transclusion-see-template": "Предлошките се создадени од корисници и може да немаат целосни описи. Дополнителни информации може да има на [[$1|предложната страница]].",
 	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Ова не е една од предложените вредности и може да не работи со предлошката.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Вметни предлошка",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Вметни: $1",

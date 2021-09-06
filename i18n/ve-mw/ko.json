@@ -183,6 +183,7 @@
 	"visualeditor-dialog-transclusion-absent-template": "\"$1\" 틀은 아직 존재하지 않습니다.",
 	"visualeditor-dialog-transclusion-add-content": "내용 추가",
 	"visualeditor-dialog-transclusion-add-param": "자세한 정보 추가",
+	"visualeditor-dialog-transclusion-add-param-save": "변수 추가",
 	"visualeditor-dialog-transclusion-add-template": "틀 추가",
 	"visualeditor-dialog-transclusion-collapse-options": "옵션 숨기기",
 	"visualeditor-dialog-transclusion-content": "내용",

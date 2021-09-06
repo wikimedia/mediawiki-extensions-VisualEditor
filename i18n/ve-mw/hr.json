@@ -11,6 +11,7 @@
 			"Roberta F.",
 			"SpeedyGonsales",
 			"Srdjan m",
+			"Tacsipacsi",
 			"Teoo3",
 			"Zeljko.filipin"
 		]
@@ -170,8 +171,8 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Polje koje se više ne koristi",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Polje se više ne koristi. $1",
 	"visualeditor-dialog-transclusion-loading": "Učitavanje",
-	"visualeditor-dialog-transclusion-more-template-description": "Moguće je da postoje dodatne informacije o predlošku \"$1\" na [[{{ns:template}}:$1|njegovoj stranici]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Predložak \"$1\" još uvijek nema opisa, ali je moguće da postoje informacije o njemu na [[$1|stranici predloška]].",
+	"visualeditor-dialog-transclusion-more-template-description": "Moguće je da postoje dodatne informacije o predlošku »$1« na [[$2|njegovoj stranici]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Predložak »$1« još uvijek nema opisa, ali je moguće da postoje informacije o njemu na [[$2|stranici predloška]].",
 	"visualeditor-dialog-transclusion-options": "Mogućnosti",
 	"visualeditor-dialog-transclusion-param-default": "Zadano: $1",
 	"visualeditor-dialog-transclusion-param-example": "npr. $1",
