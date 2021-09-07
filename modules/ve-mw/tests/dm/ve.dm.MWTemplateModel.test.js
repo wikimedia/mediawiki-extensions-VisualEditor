@@ -69,6 +69,33 @@
 		assert.strictEqual( template.hasParameter( 'alternative-bar' ), true );
 	} );
 
+	QUnit.test( 'getOriginalParameterName', ( assert ) => {
+		const template = newTemplateModel();
+		template.addParameter( new ve.dm.MWParameterModel( template, 'p1' ) );
+		template.addParameter( new ve.dm.MWParameterModel( template, 'p2-alias' ) );
+
+		// These are all independent parameters as long as we don't know anything about aliases
+		assert.strictEqual( template.getOriginalParameterName( 'p1' ), 'p1' );
+		assert.strictEqual( template.getOriginalParameterName( 'p1-alias' ), 'p1-alias' );
+		assert.strictEqual( template.getOriginalParameterName( 'p2' ), 'p2' );
+		assert.strictEqual( template.getOriginalParameterName( 'p2-alias' ), 'p2-alias' );
+		assert.strictEqual( template.getOriginalParameterName( 'p3' ), 'p3' );
+		assert.strictEqual( template.getOriginalParameterName( 'p3-alias' ), 'p3-alias' );
+
+		template.getSpec().setTemplateData( { params: {
+			p1: { aliases: [ 'p1-alias' ] },
+			p2: { aliases: [ 'p2-alias' ] },
+			p3: { aliases: [ 'p3-alias' ] }
+		} } );
+
+		assert.strictEqual( template.getOriginalParameterName( 'p1' ), 'p1' );
+		assert.strictEqual( template.getOriginalParameterName( 'p1-alias' ), 'p1' );
+		assert.strictEqual( template.getOriginalParameterName( 'p2' ), 'p2-alias' );
+		assert.strictEqual( template.getOriginalParameterName( 'p2-alias' ), 'p2-alias' );
+		assert.strictEqual( template.getOriginalParameterName( 'p3' ), 'p3' );
+		assert.strictEqual( template.getOriginalParameterName( 'p3-alias' ), 'p3' );
+	} );
+
 	QUnit.test( 'serialize input parameters', ( assert ) => {
 		const template = newTemplateModel();
 
