@@ -201,18 +201,25 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	} else if ( this.useNewSidebar ) {
 		page = new ve.ui.MWAddParameterPage( param, param.getId(), {
 			$overlay: this.$overlay
-		} );
+		} )
+			.connect( this, {
+				focusTemplateParameterById: 'focusPart'
+			} );
 	} else {
 		// This branch is triggered when we receive a synthetic placeholder event with name=''.
 		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {
 			$overlay: this.$overlay,
 			expandedParamList: !!this.expandedParamList[ param.getId() ]
 		} )
-			.connect( this, { showAll: 'onParameterPlaceholderShowAll' } );
+			.connect( this, {
+				showAll: 'onParameterPlaceholderShowAll',
+				focusTemplateParameterById: 'focusPart'
+			} );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
-		if ( !this.preventReselection ) {
+		// Unconditionally focus parameter placeholders. Named parameters must be focused manually.
+		if ( !this.preventReselection && !param.getName() ) {
 			this.focusPart( param.getId() );
 		}
 
@@ -237,7 +244,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 
 	// Select the desired page first. Otherwise, if the page we are removing is selected,
 	// OOUI will try to select the first page after it is removed, and scroll to the top.
-	if ( this.loaded && !this.preventReselection ) {
+	if ( this.loaded && !this.preventReselection && !this.pocSidebar ) {
 		this.focusPart( reselect.getName() );
 	}
 
