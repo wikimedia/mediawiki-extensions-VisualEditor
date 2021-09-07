@@ -37,13 +37,13 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 	} )
 		.connect( this, {
 			change: 'onParameterNameChanged',
-			enter: 'onParameterInput'
+			enter: 'onParameterNameSubmitted'
 		} );
 	this.saveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param-save' ),
 		flags: [ 'primary', 'progressive' ]
 	} )
-		.connect( this, { click: 'onParameterInput' } )
+		.connect( this, { click: 'onParameterNameSubmitted' } )
 		.setDisabled( true );
 
 	this.addParameterInputField = new OO.ui.ActionFieldLayout(
@@ -93,7 +93,7 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
 	this.saveButton.setDisabled( !isValid );
 };
 
-ve.ui.MWAddParameterPage.prototype.onParameterInput = function () {
+ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	var name = this.paramInputField.getValue().trim();
 	if ( !name || this.saveButton.isDisabled() ) {
 		return;
