@@ -81,13 +81,8 @@ class ApiVisualEditorEdit extends ApiBase {
 			'captchaid' => $params['captchaid'],
 			'captchaword' => $params['captchaword'],
 			'errorformat' => 'html',
+			( $params['minor'] !== null ? 'minor' : 'notminor' ) => true,
 		];
-
-		if ( $params['minor'] !== null ) {
-			$apiParams['minor'] = true;
-		} else {
-			$apiParams['notminor'] = true;
-		}
 
 		// Pass any unrecognized query parameters to the internal action=edit API request. This is
 		// necessary to support extensions that add extra stuff to the edit form (e.g. FlaggedRevs)

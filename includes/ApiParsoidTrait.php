@@ -118,17 +118,8 @@ trait ApiParsoidTrait {
 	protected function requestRestbase(
 		Title $title, string $method, string $path, array $params, array $reqheaders = []
 	): array {
-		$request = [
-			'method' => $method,
-			'url' => '/restbase/local/v1/' . $path
-		];
-		if ( $method === 'GET' ) {
-			$request['query'] = $params;
-		} else {
-			$request['body'] = $params;
-		}
 		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
-		$defaultReqHeaders = [
+		$reqheaders += [
 			'Accept' =>
 				'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
 			'Accept-Language' => self::getPageLanguage( $title )->getCode(),
@@ -136,20 +127,19 @@ trait ApiParsoidTrait {
 			'Api-User-Agent' => 'VisualEditor-MediaWiki/' . MW_VERSION,
 			'Promise-Non-Write-API-Action' => 'true',
 		];
-		// $reqheaders take precedence over $defaultReqHeaders
-		$request['headers'] = $reqheaders + $defaultReqHeaders;
+		$request = [
+			'method' => $method,
+			'url' => '/restbase/local/v1/' . $path,
+			( $method === 'GET' ? 'query' : 'body' ) => $params,
+			'headers' => $reqheaders,
+		];
 		$response = $this->getVRSClient()->run( $request );
 		if ( $response['code'] === 200 && $response['error'] === "" ) {
 			// If response was served directly from Varnish, use the response
 			// (RP) header to declare the cache hit and pass the data to the client.
 			$headers = $response['headers'];
-			$rp = null;
 			if ( isset( $headers['x-cache'] ) && strpos( $headers['x-cache'], 'hit' ) !== false ) {
-				$rp = 'cached-response=true';
-			}
-			if ( $rp !== null ) {
-				$resp = $this->getRequest()->response();
-				$resp->header( 'X-Cache: ' . $rp );
+				$this->getRequest()->response()->header( 'X-Cache: cached-response=true' );
 			}
 		} elseif ( $response['error'] !== '' ) {
 			$this->dieWithError(
