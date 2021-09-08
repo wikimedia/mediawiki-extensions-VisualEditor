@@ -7,21 +7,21 @@ QUnit.test( 'Input event handler', ( assert ) => {
 		page = new ve.ui.MWAddParameterPage( parameter );
 
 	page.paramInputField.setValue( ' ' );
-	page.onParameterInput();
+	page.onParameterNameSubmitted();
 	assert.deepEqual( template.getParameters(), {}, 'empty input is ignored' );
 
 	page.paramInputField.setValue( ' p1 ' );
-	page.onParameterInput();
+	page.onParameterNameSubmitted();
 	assert.ok( template.hasParameter( 'p1' ), 'input is trimmed and parameter added' );
 
 	template.getParameter( 'p1' ).setValue( 'not empty' );
 	page.paramInputField.setValue( 'p1' );
-	page.onParameterInput();
+	page.onParameterNameSubmitted();
 	assert.ok( template.getParameter( 'p1' ).getValue(), 'existing parameter is not replaced' );
 
 	template.getSpec().setTemplateData( { params: { documented: {} } } );
 	page.paramInputField.setValue( 'documented' );
-	page.onParameterInput();
+	page.onParameterNameSubmitted();
 	assert.notOk( template.hasParameter( 'documented' ), 'documented parameter is not added' );
 
 } );
