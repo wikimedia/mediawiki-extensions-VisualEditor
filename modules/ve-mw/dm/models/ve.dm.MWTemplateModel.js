@@ -386,7 +386,7 @@ ve.dm.MWTemplateModel.prototype.containsValuableData = function () {
 
 		var param = params[ name ],
 			value = param.getValue();
-		return !value &&
+		return value &&
 			// This will automatically be restored, see {@see ve.dm.MWParameterModel.getValue}
 			value !== param.getAutoValue() &&
 			// While this isn't always meaningless, it typically is, and it's easy to restore
