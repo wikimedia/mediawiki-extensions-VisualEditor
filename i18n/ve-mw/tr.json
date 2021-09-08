@@ -194,6 +194,7 @@
 	"visualeditor-dialog-transclusion-add-wikitext": "Vikimetin ekle",
 	"visualeditor-dialog-transclusion-add-param": "Daha fazla bilgi ekleyin",
 	"visualeditor-dialog-transclusion-add-param-help": "Biliniyorsa, belgelenmemiş parametre adlarını girin. Parametre zaten şablonun bir parçası değilse, eklemenin bir etkisi olmaz. Mevcut parametrelerle ilgili bilgileri [[$1|şablonun sayfasında]] bulabilirsiniz.",
+	"visualeditor-dialog-transclusion-add-param-placeholder": "Parametre adı",
 	"visualeditor-dialog-transclusion-add-param-save": "Parametre ekle",
 	"visualeditor-dialog-transclusion-add-template": "Şablon ekle",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Belgelenmemiş parametre ekle",

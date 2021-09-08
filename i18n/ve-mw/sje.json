@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bidumsábme",
 			"Olve Utne"
 		]
 	},
 	"visualeditor-ca-createsource": "Álge wikitiekstav",
-	"visualeditor-ca-editsource": "Wikitiekstav rävvdadit",
+	"visualeditor-ca-editsource": "Rävvdada wikitiekstav",
 	"visualeditor-ca-editsource-section": "wikitiekstav rävvdadit",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitäkksta"
 }
