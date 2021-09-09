@@ -641,7 +641,6 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
 		//  is executed later than this here.
 		setTimeout( this.pocSidebar.selectPartById.bind( this.pocSidebar, pageName ) );
-		this.bookletLayout.focus();
 		this.bookletLayout.setPage( pageName );
 	} else if ( this.bookletLayout.isOutlined() ) {
 		this.bookletLayout.getOutline().selectItemByData( pageName );

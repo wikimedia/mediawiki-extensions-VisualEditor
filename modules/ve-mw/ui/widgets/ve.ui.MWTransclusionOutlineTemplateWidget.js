@@ -130,6 +130,24 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = functio
 };
 
 /**
+ * @inheritDoc
+ * @fires transclusionPartSelected
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onHeaderClick = function () {
+	var names = this.templateModel.getOrderedParameterNames();
+	if ( names.length ) {
+		// Don't focus the template header but the first parameter, if present
+		var param = this.templateModel.getParameter( names[ 0 ] );
+		if ( param ) {
+			this.emit( 'transclusionPartSelected', param.getId() );
+			return;
+		}
+	}
+
+	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.onHeaderClick.apply( this, arguments );
+};
+
+/**
  * @private
  * @param {ve.dm.MWParameterModel} param
  */

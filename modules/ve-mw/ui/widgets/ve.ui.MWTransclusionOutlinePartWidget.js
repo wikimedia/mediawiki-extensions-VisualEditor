@@ -28,7 +28,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
 		.connect( this, {
 			spacePressed: [ 'emit', 'transclusionPartSoftSelected', part.getId() ],
-			click: [ 'emit', 'transclusionPartSelected', part.getId() ]
+			click: 'onHeaderClick'
 		} );
 
 	this.$element
@@ -58,6 +58,14 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
  */
 
 /* Methods */
+
+/**
+ * @protected
+ * @fires transclusionPartSelected
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderClick = function () {
+	this.emit( 'transclusionPartSelected', this.getData() );
+};
 
 /**
  * Convenience method, modelled after {@see OO.ui.OptionWidget}, but this isn't one.
