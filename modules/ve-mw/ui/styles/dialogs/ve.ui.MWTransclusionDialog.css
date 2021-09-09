@@ -131,13 +131,13 @@
 	left: 240px;
 }
 
-.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
+.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
 	border-right: 0;
 	width: 100%;
 }
 
-.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen .oo-ui-menuLayout > .oo-ui-menuLayout-content {
-	left: 100%;
+.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-content {
+	display: none;
 }
 
 .ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-inline-help {
