@@ -12,7 +12,7 @@ QUnit.test( 'interaction with items', ( assert ) => {
 	const item = ve.ui.MWTransclusionOutlineParameterSelectWidget.static.createItem( {} ),
 		widget = new ve.ui.MWTransclusionOutlineParameterSelectWidget( { items: [ item ] } );
 
-	assert.strictEqual( widget.getItems().length, 1, 'item is added' );
+	assert.strictEqual( widget.getItemCount(), 1, 'item is added' );
 
 	// Note this triggers a chain of events that bubbles up to the SelectWidget. The individual
 	// OptionWidgets just store their state, but the outer SelectWidget manages it!
