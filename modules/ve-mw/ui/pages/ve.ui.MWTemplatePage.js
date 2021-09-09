@@ -59,7 +59,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 					$( '<span>' )
 						.addClass( 've-ui-mwTemplatePage-description-extra' )
 						.append(
-							veConfig.transclusionDialogNewSidebar ?
+							!veConfig.transclusionDialogNewSidebar ?
 								mw.message( 'visualeditor-dialog-transclusion-more-template-description',
 									this.spec.getLabel(), link ).parseDom() :
 								mw.message( 'visualeditor-dialog-transclusion-see-template',
