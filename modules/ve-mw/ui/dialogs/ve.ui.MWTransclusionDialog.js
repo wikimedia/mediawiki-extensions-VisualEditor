@@ -324,8 +324,12 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( showSidebar ) {
 	this.$content
 		.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !showSidebar )
 		.toggleClass( 've-ui-mwTransclusionDialog-expanded', showSidebar );
+
+	var dialogSizeSidebarExpanded = this.useInlineDescriptions ? 'larger' : 'large';
+	var dialogSizeSidebarCollapsed = this.useNewSidebar ? dialogSizeSidebarExpanded : 'medium';
 	this.ignoreNextWindowResizeEvent = true;
-	this.setSize( showSidebar ? ( this.useInlineDescriptions ? 'larger' : 'large' ) : 'medium' );
+	this.setSize( showSidebar ? dialogSizeSidebarExpanded : dialogSizeSidebarCollapsed );
+
 	this.bookletLayout.toggleOutline( showSidebar );
 	this.updateTitle();
 	this.updateModeActionState();
