@@ -107,7 +107,8 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 		return;
 	}
 
-	this.template.addParameter( new ve.dm.MWParameterModel( this.template, name ) );
+	var param = new ve.dm.MWParameterModel( this.template, name );
+	this.template.addParameter( param );
 
 	ve.track( 'activity.transclusion', {
 		action: 'add-unknown-parameter'
