@@ -27,8 +27,6 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 
 	// Properties
 	this.isSidebarExpanded = null;
-	this.closeButton = null;
-	this.backButton = null;
 
 	this.resetConfirmation = new OO.ui.FieldsetLayout( {
 		classes: [ 'oo-ui-processDialog-errors' ]
@@ -445,31 +443,17 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 		saveButton.setLabel( ve.msg( 'visualeditor-dialog-transclusion-action-save' ) );
 	}
 
-	if ( backButton ) {
-		// Todo: this won't be needed if https://gerrit.wikimedia.org/r/c/oojs/ui/+/686439 is resolved
-		this.backButton = backButton;
-	}
-
-	// T283511
-	if ( !this.backButton ) {
-		return;
-	}
-
 	if ( this.useBackButton ) {
 		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
 			parts = this.transclusionModel && this.transclusionModel.getParts(),
 			isInitialPage = parts && parts.length === 1 && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
-			isInsertMode = this.getMode() === 'insert';
+			isInsertMode = this.getMode() === 'insert',
+			isUsingClose = !isInsertMode || isInitialPage;
 
-		if ( closeButton ) {
-			// Todo: this won't be needed if https://gerrit.wikimedia.org/r/c/oojs/ui/+/686439 is resolved
-			this.closeButton = closeButton;
-		}
-
-		this.closeButton.toggle( !isInsertMode || isInitialPage );
-		this.backButton.toggle( isInsertMode && !isInitialPage );
+		closeButton.toggle( isUsingClose );
+		backButton.toggle( !isUsingClose );
 	} else {
-		this.backButton.toggle( false );
+		backButton.toggle( false );
 	}
 };
 
