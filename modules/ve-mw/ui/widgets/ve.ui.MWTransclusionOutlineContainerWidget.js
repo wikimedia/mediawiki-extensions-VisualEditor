@@ -16,12 +16,12 @@
  */
 ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget() {
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this );
+	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this, {
+		classes: [ 've-ui-mwTransclusionOutlineContainerWidget' ]
+	} );
 
 	// Initialization
 	this.partWidgets = {};
-
-	this.$element.addClass( 've-ui-mwTransclusionOutlineContainerWidget' );
 };
 
 /* Inheritance */

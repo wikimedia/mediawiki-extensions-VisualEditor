@@ -11,6 +11,7 @@
 ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOutlineParameterSelectWidget( config ) {
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.call( this, ve.extendObject( config, {
+		classes: [ 've-ui-mwTransclusionOutlineParameterSelectWidget' ],
 		multiselect: true
 	} ) );
 
@@ -20,7 +21,6 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 	} );
 
 	this.$element
-		.addClass( 've-ui-mwTransclusionOutlineParameterSelectWidget' )
 		.on( {
 			focus: this.bindDocumentKeyDownListener.bind( this ),
 			blur: this.unbindDocumentKeyDownListener.bind( this )

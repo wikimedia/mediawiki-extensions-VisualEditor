@@ -39,12 +39,12 @@ ve.ui.MWTransclusionOutlineParameterWidget = function VeUiMWTransclusionOutlineP
 
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineParameterWidget.super.call( this, ve.extendObject( config, {
+		classes: [ 've-ui-mwTransclusionOutlineParameterWidget' ],
 		$label: $( '<label>' )
 	} ) );
 
 	// Initialization
 	this.$element
-		.addClass( 've-ui-mwTransclusionOutlineParameterWidget' )
 		.append( this.checkbox.$element, this.$label );
 };
 
