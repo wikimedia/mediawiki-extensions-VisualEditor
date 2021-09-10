@@ -5,7 +5,8 @@
  * @extends OO.ui.SelectWidget
  *
  * @constructor
- * @param {Object} [config]
+ * @param {Object} config
+ * @cfg {ve.ui.MWTransclusionOutlineParameterWidget[]} items
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOutlineParameterSelectWidget( config ) {
 	// Parent constructor
@@ -14,7 +15,9 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 	} ) );
 
 	// Mixin constructors
-	OO.ui.mixin.TabIndexedElement.call( this, config );
+	OO.ui.mixin.TabIndexedElement.call( this, {
+		tabIndex: this.isEmpty() ? -1 : 0
+	} );
 
 	this.$element
 		.addClass( 've-ui-mwTransclusionOutlineParameterSelectWidget' )
@@ -69,7 +72,9 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 		} );
 	} );
 
-	return ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.addItems.call( this, items, index );
+	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.addItems.call( this, items, index );
+	this.setTabIndex( this.isEmpty() ? -1 : 0 );
+	return this;
 };
 
 /**
