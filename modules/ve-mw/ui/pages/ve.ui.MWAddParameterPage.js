@@ -84,6 +84,19 @@ OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
 /* Methods */
 
 /**
+ * @inheritDoc OO.ui.PanelLayout
+ */
+ve.ui.MWAddParameterPage.prototype.focus = function () {
+	if ( this.isExpanded ) {
+		this.paramInputField.focus();
+		return;
+	}
+
+	// Parent method
+	ve.ui.MWAddParameterPage.super.prototype.focus.apply( this, arguments );
+};
+
+/**
  * @private
  * @param {string} value
  */
@@ -95,6 +108,9 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
 	this.saveButton.setDisabled( !paramName || errors.length );
 };
 
+/**
+ * @private
+ */
 ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	var name = this.paramInputField.getValue().trim();
 	if ( !name || this.saveButton.isDisabled() ) {
@@ -114,6 +130,11 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	} );
 };
 
+/**
+ * @private
+ * @param {string} name
+ * @return {jQuery[]} An array as accepted by {@see OO.ui.FieldLayout.setErrors}
+ */
 ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
 	if ( !name ) {
 		return [];
@@ -166,9 +187,12 @@ ve.ui.MWAddParameterPage.prototype.togglePlaceholder = function ( expand ) {
 	}
 };
 
+/**
+ * @inheritDoc OO.ui.PageLayout
+ */
 ve.ui.MWAddParameterPage.prototype.setOutlineItem = function () {
 	// Parent method
-	ve.ui.MWParameterPage.super.prototype.setOutlineItem.apply( this, arguments );
+	ve.ui.MWAddParameterPage.super.prototype.setOutlineItem.apply( this, arguments );
 
 	if ( this.outlineItem ) {
 		// This page should not be shown in the (BookletLayout-based) sidebar
