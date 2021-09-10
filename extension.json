@@ -2206,6 +2206,7 @@
 				"visualeditor-dialog-transclusion-add-param-error-deprecated",
 				"visualeditor-dialog-transclusion-add-param-error-exists-selected",
 				"visualeditor-dialog-transclusion-add-param-error-exists-unselected",
+				"visualeditor-dialog-transclusion-add-param-error-forbidden-char",
 				"visualeditor-dialog-transclusion-add-param-help",
 				"visualeditor-dialog-transclusion-add-param-placeholder",
 				"visualeditor-dialog-transclusion-add-param-save",

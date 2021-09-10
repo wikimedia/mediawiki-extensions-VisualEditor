@@ -178,6 +178,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "\"$1\" cannot be added because the parameter has been marked as [//www.mediawiki.org/wiki/Help:TemplateData#deprecated deprecated].",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Cannot add two parameters of the same name.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "This parameter is already available for use. Please check the options in the sidebar.",
+	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 is a forbidden character. Please remove it to add the parameter.",
 	"visualeditor-dialog-transclusion-add-param-help": "If known, enter undocumented parameter names. Note that only parameters known by the template will have an effect. You may find information about existing parameters on the [[$1|template's page]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Parameter name",
 	"visualeditor-dialog-transclusion-add-param-save": "Add parameter",

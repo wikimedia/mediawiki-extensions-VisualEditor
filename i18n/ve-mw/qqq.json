@@ -196,6 +196,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "Message shown to an editor when they attempt adding a parameter which is deprecated.\n\nParameters:\n* $1 - The name of the parameter.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Message shown to an editor when they attempt adding a parameter which is already present and checked in the sidebar.\n\nParameters:\n* $1 - The name of the parameter.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Message shown to an editor when they attempt adding a parameter which is already present and unchecked in the sidebar.\n\nParameters:\n* $1 - The name of the parameter.",
+	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "Message shown to an editor when they attempt adding a parameter which contains forbidden characters.\n\nParameters:\n* $1 - The forbidden character.",
 	"visualeditor-dialog-transclusion-add-param-help": "Help text for new undocumented parameter input field.\n\nParameters:\n* $1 - The title of the template.",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Placeholder in the input field that adds a new undocumented parameter to a transcluded template.",
 	"visualeditor-dialog-transclusion-add-param-save": "Label for save button that adds a new undocumented parameter to a transcluded template.",

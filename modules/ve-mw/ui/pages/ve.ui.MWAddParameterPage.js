@@ -89,11 +89,10 @@ OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
  */
 ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
 	var paramName = value.trim(),
-		isValid = /^[^={|}]+$/.test( paramName ),
 		errors = this.getValidationErrors( paramName );
 
 	this.addParameterInputField.setErrors( errors );
-	this.saveButton.setDisabled( !isValid || errors.length );
+	this.saveButton.setDisabled( !paramName || errors.length );
 };
 
 ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
@@ -118,6 +117,12 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
 	if ( !name ) {
 		return [];
+	}
+
+	var forbiddenCharacter = name.match( /[={|}]/ );
+	if ( forbiddenCharacter ) {
+		return [ mw.message( 'visualeditor-dialog-transclusion-add-param-error-forbidden-char',
+			forbiddenCharacter[ 0 ] ).parseDom() ];
 	}
 
 	var key,
