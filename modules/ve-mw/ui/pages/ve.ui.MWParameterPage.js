@@ -386,7 +386,7 @@ ve.ui.MWParameterPage.prototype.isSuggestedValueType = function ( type ) {
 ve.ui.MWParameterPage.prototype.containsSomeValue = function () {
 	// Note: For templates that allow overriding a default value with nothing, the empty string is
 	// meaningful user input. For templates that don't, the parameter can never be truly empty.
-	return this.valueInput.getValue() || this.defaultValue;
+	return !!( this.valueInput.getValue() || this.defaultValue );
 };
 
 /**
