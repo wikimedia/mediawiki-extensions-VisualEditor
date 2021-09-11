@@ -15,6 +15,8 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @cfg {Object} [toolbarConfig]
+ * @cfg {boolean} [register=true]
  */
 ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	var enableVisualSectionEditing;

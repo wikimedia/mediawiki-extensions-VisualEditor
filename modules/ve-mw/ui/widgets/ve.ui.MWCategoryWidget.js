@@ -80,7 +80,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
  * @param {Object} item Category item
  * @param {string} item.name Fully prefixed category name
  * @param {string} item.value Category value (name without prefix)
- * @param {Object} item.metaItem Category meta item
+ * @param {ve.dm.MWCategoryMetaItem} item.metaItem
  * @param {ve.dm.MetaItem} [beforeCategory] Insert after this category; if unset, insert at the end
  */
 
@@ -89,7 +89,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
  * @param {Object} item Category item
  * @param {string} item.name Fully prefixed category name
  * @param {string} item.value Category value (name without prefix)
- * @param {Object} item.metaItem Category meta item
+ * @param {ve.dm.MWCategoryMetaItem} item.metaItem
  */
 
 /* Methods */

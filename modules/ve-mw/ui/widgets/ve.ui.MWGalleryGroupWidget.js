@@ -14,6 +14,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @cfg {string} [orientation='vertical']
  */
 ve.ui.MWGalleryGroupWidget = function VeUiMWGalleryGroupWidget( config ) {
 	// Configuration initialization

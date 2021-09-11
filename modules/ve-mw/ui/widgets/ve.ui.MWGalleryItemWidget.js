@@ -15,6 +15,8 @@
  * @constructor
  * @param {Object} imageInfo Image information object
  * @param {Object} [config] Configuration options
+ * @cfg {boolean} [isMobile=false]
+ * @cfg {boolean} [draggable=true]
  */
 ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config ) {
 	this.resource = imageInfo.resource;

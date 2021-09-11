@@ -20,9 +20,9 @@
  * @param {Object} [config] Configuration options
  * @cfg {string} [href] A url encapsulating the field text. If a label is attached it will include the label.
  * @cfg {string} [label] A ve.msg() label string for the field.
- * @cfg {boolean} [isDate] Field text is a date that will be converted to 'fromNow' string.
- * @cfg {string} [type] Field type, either 'description' or 'attribute'
- * @cfg {string} [descriptionHeight] Height limit for description fields; defaults to '4em'
+ * @cfg {boolean} [isDate=false] Field text is a date that will be converted to 'fromNow' string.
+ * @cfg {string} [type='attribute'] Field type, either 'description' or 'attribute'
+ * @cfg {string} [descriptionHeight='4em'] Height limit for description fields
  */
 ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, config ) {
 	var datetime;

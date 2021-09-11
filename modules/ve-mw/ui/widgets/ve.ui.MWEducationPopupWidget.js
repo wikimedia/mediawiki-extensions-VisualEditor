@@ -17,10 +17,10 @@
  * @extends OO.ui.Widget
  * @param {jQuery} $target Element to attach to
  * @param {Object} config Configuration options
- * @param {string} popupTitle Popup title
- * @param {string} popupText Popup text
- * @param {string} [popupImage] Popup image class
- * @param {string} [trackingName] Tracking name
+ * @cfg {string} popupTitle
+ * @cfg {string} popupText
+ * @cfg {string} [popupImage] Popup image class
+ * @cfg {string} [trackingName]
  */
 ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) {
 	var $popupContent;
@@ -77,7 +77,6 @@ ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) 
 
 	// DOME
 	this.$element.addClass( 've-ui-educationPopup' ).append( this.$pulsatingDot, this.popup.$element );
-
 };
 
 /* Inheritance */

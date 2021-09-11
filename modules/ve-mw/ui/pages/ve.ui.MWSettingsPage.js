@@ -285,7 +285,7 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
  * Setup settings page.
  *
  * @param {ve.dm.MetaList} metaList Meta list
- * @param {Object} [config] Configuration options
+ * @param {Object} config
  * @param {Object} [config.data] Dialog setup data
  * @param {boolean} [config.isReadOnly] Dialog is in read-only mode
  * @return {jQuery.Promise}

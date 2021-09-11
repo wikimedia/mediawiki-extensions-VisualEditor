@@ -17,6 +17,8 @@
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
+ * @cfg {boolean} [expandedParamList=false] If the {@see ve.ui.MWParameterSearchWidget} results
+ *  should be initially expanded
  */
 ve.ui.MWParameterPlaceholderPage = function VeUiMWParameterPlaceholderPage( parameter, name, config ) {
 	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
