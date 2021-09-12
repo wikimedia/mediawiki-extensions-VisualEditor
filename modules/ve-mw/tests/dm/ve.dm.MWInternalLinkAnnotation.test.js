@@ -111,9 +111,9 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					type: 'link/mwInternal',
 					attributes: {
 						lookupTitle: 'Foo',
-						normalizedTitle: 'Foo#bar.3F',
-						origTitle: 'Foo#bar.3F',
-						title: 'Foo#bar.3F'
+						normalizedTitle: 'Foo#' + mw.util.escapeIdForLink( 'bar?' ),
+						origTitle: 'Foo#' + mw.util.escapeIdForLink( 'bar?' ),
+						title: 'Foo#' + mw.util.escapeIdForLink( 'bar?' )
 					}
 				}
 			}
