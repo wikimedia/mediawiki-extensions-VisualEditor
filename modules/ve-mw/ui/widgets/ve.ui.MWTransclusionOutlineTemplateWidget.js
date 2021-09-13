@@ -179,17 +179,25 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = 
 	if ( !selected ) {
 		this.templateModel.removeParameter( param );
 	} else if ( !param ) {
-		this.templateModel.addParameter( new ve.dm.MWParameterModel( this.templateModel, paramName ) );
+		param = new ve.dm.MWParameterModel( this.templateModel, paramName );
+		this.templateModel.addParameter( param );
 	}
 };
 
 /**
  * @private
- * @param {string} paramName
+ * @param {OO.ui.OptionWidget} item
+ * @param {boolean} selected
  * @fires focusTemplateParameterById
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterClick = function ( paramName ) {
-	var param = this.templateModel.getParameter( paramName );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterClick = function ( item, selected ) {
+	// Fail-safe. There should be no code-path that calls this with false.
+	if ( !selected ) {
+		return;
+	}
+
+	var paramName = item.getData(),
+		param = this.templateModel.getParameter( paramName );
 	if ( param ) {
 		this.emit( 'focusTemplateParameterById', param.getId() );
 	}

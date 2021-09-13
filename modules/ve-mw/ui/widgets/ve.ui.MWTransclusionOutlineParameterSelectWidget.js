@@ -39,7 +39,8 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.mixin.Tab
  * pressing enter/click on a parameter that's already selected.
  *
  * @event templateParameterClick
- * @param {string} paramName
+ * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
+ * @param {boolean} selected
  */
 
 /* Static Methods */
@@ -133,7 +134,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = functio
 		var item = this.findTargetItem( e );
 		// Same as pressing enter, see below.
 		if ( item && item.isSelected() ) {
-			this.emit( 'templateParameterClick', item.getData() );
+			this.emit( 'templateParameterClick', item, item.isSelected() );
 
 			// Don't call the parent, i.e. can't click to unselect the item
 			return false;
@@ -177,7 +178,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 			item = this.findHighlightedItem();
 			// Same as clicking with the mouse, see above.
 			if ( item && item.isSelected() ) {
-				this.emit( 'templateParameterClick', item.getData() );
+				this.emit( 'templateParameterClick', item, item.isSelected() );
 				e.preventDefault();
 
 				// Don't call the parent, i.e. can't use enter to unselect the item

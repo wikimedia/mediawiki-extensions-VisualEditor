@@ -114,7 +114,8 @@ ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name )
 	// Note that every parameter is known after it is added
 	var knownBefore = this.template.getSpec().isKnownParameterOrAlias( name );
 
-	this.template.addParameter( new ve.dm.MWParameterModel( this.template, name ) );
+	var param = new ve.dm.MWParameterModel( this.template, name );
+	this.template.addParameter( param );
 
 	ve.track( 'activity.transclusion', {
 		action: knownBefore ? 'add-known-parameter' : 'add-unknown-parameter'
