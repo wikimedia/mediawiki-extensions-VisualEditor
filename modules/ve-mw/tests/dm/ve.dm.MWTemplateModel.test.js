@@ -43,11 +43,13 @@
 		[ '/unexpected_prefix', '/unexpected prefix' ],
 		[ './Template:%C3%9Cnicode%5Fexample/subpage', 'Template:Ünicode example/subpage' ],
 		[ './Template:Possibly_invalid%5B%5D', 'Template:Possibly invalid[]' ]
-	].forEach( ( [ href, expected ] ) => QUnit.test( 'getTitle: ' + href, ( assert ) => {
-		const transclusion = { getUniquePartId: () => 0 },
-			template = new ve.dm.MWTemplateModel( transclusion, { href } );
-		assert.strictEqual( template.getTitle(), expected );
-	} ) );
+	].forEach( ( [ href, expected ] ) =>
+		QUnit.test( 'getTitle: ' + href, ( assert ) => {
+			const transclusion = { getUniquePartId: () => 0 },
+				template = new ve.dm.MWTemplateModel( transclusion, { href } );
+			assert.strictEqual( template.getTitle(), expected );
+		} )
+	);
 
 	QUnit.test( 'hasParameter', ( assert ) => {
 		const template = newTemplateModel();
@@ -164,7 +166,7 @@
 			},
 			expected: [ 'foo', 'bar', 'empty' ]
 		}
-	].forEach( ( { name, spec, expected } ) => {
+	].forEach( ( { name, spec, expected } ) =>
 		QUnit.test( name, ( assert ) => {
 			const template = newTemplateModel();
 
@@ -172,8 +174,8 @@
 
 			const serialization = template.serialize();
 			assert.deepEqual( Object.keys( serialization.template.params ), expected );
-		} );
-	} );
+		} )
+	);
 
 	[
 		{
@@ -277,7 +279,7 @@
 				''
 			]
 		}
-	].forEach( ( { name, spec, expected } ) => {
+	].forEach( ( { name, spec, expected } ) =>
 		QUnit.test( 'getOrderedParameterNames: ' + name, ( assert ) => {
 			const template = newTemplateModel();
 
@@ -286,8 +288,8 @@
 			}
 
 			assert.deepEqual( template.getOrderedParameterNames(), expected );
-		} );
-	} );
+		} )
+	);
 
 	[
 		{
@@ -405,7 +407,7 @@
 				''
 			]
 		}
-	].forEach( ( { name, spec, expected } ) => {
+	].forEach( ( { name, spec, expected } ) =>
 		QUnit.test( 'getAllParametersOrdered: ' + name, ( assert ) => {
 			const template = newTemplateModel();
 
@@ -414,6 +416,7 @@
 			}
 
 			assert.deepEqual( template.getAllParametersOrdered(), expected );
-		} );
-	} );
+		} )
+	);
+
 }() );

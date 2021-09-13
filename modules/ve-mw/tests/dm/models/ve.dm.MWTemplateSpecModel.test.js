@@ -115,7 +115,7 @@
 		null,
 		[],
 		{}
-	].forEach( ( templateData ) => {
+	].forEach( ( templateData ) =>
 		QUnit.test( 'Invalid TemplateData, e.g. empty or without params', ( assert ) => {
 			const template = createTemplateMock(),
 				spec = new ve.dm.MWTemplateSpecModel( template );
@@ -136,8 +136,8 @@
 			assert.strictEqual( spec.isParameterSuggested( 'p' ), false, 'isParameterSuggested' );
 			assert.strictEqual( spec.isParameterDeprecated( 'p' ), false, 'isParameterDeprecated' );
 			assert.strictEqual( spec.getParameterDeprecationDescription( 'p' ), '', 'getParameterDeprecationDescription' );
-		} );
-	} );
+		} )
+	);
 
 	QUnit.test( 'Basic behavior with minimal setTemplateData()', ( assert ) => {
 		const template = createTemplateMock( [ 'p1' ] ),
@@ -283,7 +283,7 @@
 
 		[ { notemplatedata: false }, true, 'unexpected false' ],
 		[ { notemplatedata: '' }, true, 'unsupported formatversion=1' ]
-	].forEach( ( [ templateData, expected, message ] ) => {
+	].forEach( ( [ templateData, expected, message ] ) =>
 		QUnit.test( 'isDocumented(): ' + message, ( assert ) => {
 			const template = createTemplateMock(),
 				spec = new ve.dm.MWTemplateSpecModel( template );
@@ -292,8 +292,8 @@
 
 			spec.setTemplateData( templateData );
 			assert.strictEqual( spec.isDocumented(), expected );
-		} );
-	} );
+		} )
+	);
 
 	QUnit.test( 'getDocumentedParameterOrder() should not return a reference', ( assert ) => {
 		const template = createTemplateMock(),
