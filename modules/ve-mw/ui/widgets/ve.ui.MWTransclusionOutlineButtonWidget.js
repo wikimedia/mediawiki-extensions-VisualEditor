@@ -12,7 +12,9 @@
  */
 ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButtonWidget( config ) {
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineButtonWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlineButtonWidget.super.call( this, ve.extendObject( config, {
+		classes: [ 've-ui-mwTransclusionOutlineButtonWidget' ]
+	} ) );
 
 	// Mixin constructors
 	OO.ui.mixin.ButtonElement.call( this, {
@@ -24,7 +26,6 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 	}, config ) );
 
 	this.$element
-		.addClass( 've-ui-mwTransclusionOutlineButtonWidget' )
 		.append( this.$button.append( this.$icon, this.$label ) );
 };
 

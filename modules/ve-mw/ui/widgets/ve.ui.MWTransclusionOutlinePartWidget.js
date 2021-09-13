@@ -21,6 +21,7 @@
 ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
 	// Parent constructor
 	ve.ui.MWTransclusionOutlinePartWidget.super.call( this, ve.extendObject( config, {
+		classes: [ 've-ui-mwTransclusionOutlinePartWidget' ],
 		data: part.getId()
 	} ) );
 
@@ -31,7 +32,6 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 		} );
 
 	this.$element
-		.addClass( 've-ui-mwTransclusionOutlinePartWidget' )
 		.append( this.header.$element );
 };
 
