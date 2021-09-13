@@ -164,17 +164,6 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 };
 
 /**
- * Handle booklet layout focus.
- *
- * @private
- */
-ve.ui.MWTransclusionDialog.prototype.onBookletLayoutFocus = function () {
-	var currentPage = this.bookletLayout.getCurrentPage(),
-		isParameterPage = currentPage instanceof ve.ui.MWParameterPage;
-	this.bookletLayout.getOutlineControls().removeButton.setDisabled( isParameterPage );
-};
-
-/**
  * Handle add template button click events.
  *
  * @private
@@ -556,7 +545,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		remove: 'onOutlineControlsRemove'
 	} );
 	if ( this.useNewSidebar ) {
-		this.bookletLayout.$element.on( 'focusin', this.onBookletLayoutFocus.bind( this ) );
 		this.bookletLayout.stackLayout.$element.prepend( this.multipartMessage.$element );
 	}
 };
