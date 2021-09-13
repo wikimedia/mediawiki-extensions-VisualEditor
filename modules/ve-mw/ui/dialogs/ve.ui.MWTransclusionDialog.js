@@ -209,15 +209,13 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
  * @param {OO.ui.PageLayout} page Active page
  */
 ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
-	var isPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage,
+	var partCount = this.transclusionModel.getParts().length,
+		isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage && partCount === 1,
 		acceptsNewParameters = page instanceof ve.ui.MWTemplatePage ||
-			page instanceof ve.ui.MWParameterPage,
-		isRequired = page instanceof ve.ui.MWParameterPage && page.parameter.isRequired(),
-		canNotRemove = isRequired ||
-			( isPlaceholder && this.transclusionModel.getParts().length === 1 );
+			page instanceof ve.ui.MWParameterPage;
 
 	this.addParameterButton.setDisabled( !acceptsNewParameters || this.isReadOnly() );
-	this.bookletLayout.getOutlineControls().removeButton.toggle( !canNotRemove );
+	this.bookletLayout.getOutlineControls().removeButton.toggle( !isLastPlaceholder );
 };
 
 /**

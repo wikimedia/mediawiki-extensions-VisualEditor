@@ -469,7 +469,7 @@ ve.ui.MWParameterPage.prototype.setupOutlineItem = function () {
 	this.outlineItem
 		.setIcon( 'parameter' )
 		.setMovable( false )
-		.setRemovable( !this.useNewSidebar )
+		.setRemovable( !this.parameter.isRequired() && !this.useNewSidebar )
 		.setLevel( 1 )
 		.setFlags( { empty: !this.containsSomeValue() } )
 		.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
