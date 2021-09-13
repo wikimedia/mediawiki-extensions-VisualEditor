@@ -180,7 +180,8 @@
 
 .ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted,
 .ve-ui-mwTransclusionOutlineParameterWidget:hover {
-	/* This shade on a white background results in #eaecf0 */
+	/* This shade on a white background results in #eaecf0 a.k.a. @background-color-base--hover
+	   a.k.a. @wmui-color-base80 */
 	background-color: rgba( 0, 24, 73, 0.082 );
 }
 
@@ -206,6 +207,14 @@
 
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
 	background-color: #eaecf0;
+	color: #000;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:active,
+.ve-ui-mwTransclusionOutlineParameterWidget:active {
+	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
+	background-color: rgba( 41, 98, 204, 0.1 );
+	color: #36c;
 }
 
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement:first-child {
