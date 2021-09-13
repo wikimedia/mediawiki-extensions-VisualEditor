@@ -37,3 +37,27 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineButtonWidget, OO.ui.mixin.TabIndexedEl
 
 ve.ui.MWTransclusionOutlineButtonWidget.static.highlightable = false;
 ve.ui.MWTransclusionOutlineButtonWidget.static.pressable = false;
+
+/* Events */
+
+/**
+ * @event spacePressed
+ */
+
+/**
+ * @inheritDoc OO.ui.mixin.ButtonElement
+ * @param {jQuery.Event} e Key press event
+ * @fires spacePressed
+ */
+ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyPress = function ( e ) {
+	if ( e.which === OO.ui.Keys.SPACE ) {
+		// We know we can only select another part, so don't even try to unselect this one
+		if ( !this.isSelected() ) {
+			this.emit( 'spacePressed' );
+		}
+		e.preventDefault();
+		return;
+	}
+
+	return OO.ui.mixin.ButtonElement.prototype.onKeyPress.call( this, e );
+};
