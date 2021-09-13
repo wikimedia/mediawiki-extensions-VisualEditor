@@ -52,6 +52,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} )
 		.connect( this, {
 			choose: 'onTemplateParameterChoose',
+			templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
 			// Note that choose implies focus, but not the other way around
 			templateParameterClick: 'onTemplateParameterClick',
 			change: 'onParameterWidgetListChanged'
@@ -172,8 +173,23 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterRemovedFromTempla
  * @private
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
+ * @fires focusTemplateParameterById
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = function ( item, selected ) {
+	this.onTemplateParameterSelectionChanged( item, selected );
+
+	var param = this.templateModel.getParameter( item.getData() );
+	if ( param ) {
+		this.emit( 'focusTemplateParameterById', param.getId() );
+	}
+};
+
+/**
+ * @private
+ * @param {OO.ui.OptionWidget} item
+ * @param {boolean} selected
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelectionChanged = function ( item, selected ) {
 	var paramName = item.getData(),
 		param = this.templateModel.getParameter( paramName );
 	if ( !selected ) {

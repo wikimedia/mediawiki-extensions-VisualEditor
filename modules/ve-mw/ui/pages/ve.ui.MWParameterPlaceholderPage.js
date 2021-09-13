@@ -116,6 +116,7 @@ ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name )
 
 	var param = new ve.dm.MWParameterModel( this.template, name );
 	this.template.addParameter( param );
+	this.emit( 'focusTemplateParameterById', param.getId() );
 
 	ve.track( 'activity.transclusion', {
 		action: knownBefore ? 'add-known-parameter' : 'add-unknown-parameter'

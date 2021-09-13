@@ -36,6 +36,15 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.mixin.Tab
 
 /**
  * This is fired instead of the "choose" event from the {@see OO.ui.SelectWidget} base class when
+ * pressing space on a parameter to toggle it, without loosing the focus.
+ *
+ * @event templateParameterSelectionChanged
+ * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
+ * @param {boolean} selected
+ */
+
+/**
+ * This is fired instead of the "choose" event from the {@see OO.ui.SelectWidget} base class when
  * pressing enter/click on a parameter that's already selected.
  *
  * @event templateParameterClick
@@ -148,6 +157,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = functio
  * @inheritDoc OO.ui.SelectWidget
  * @param {KeyboardEvent} e
  * @fires choose
+ * @fires templateParameterSelectionChanged
  * @fires templateParameterClick
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = function ( e ) {
@@ -169,8 +179,8 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 		case OO.ui.Keys.SPACE:
 			item = this.findHighlightedItem();
 			if ( item ) {
-				// Note: This should have been named `toggle…` as it toggles the item's selection
-				this.chooseItem( item );
+				this[ item.isSelected() ? 'unselectItem' : 'selectItem' ]( item );
+				this.emit( 'templateParameterSelectionChanged', item, item.isSelected() );
 			}
 			e.preventDefault();
 			break;
