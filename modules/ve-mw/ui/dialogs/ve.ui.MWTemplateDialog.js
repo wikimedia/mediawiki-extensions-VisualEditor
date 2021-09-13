@@ -652,7 +652,7 @@ ve.ui.MWTemplateDialog.prototype.onBookletLayoutSetPage = function ( page ) {
 
 	// The sidebar (currently) can't focus individual template parameters with composite ids like
 	// "part_1/param1". Make sure at least the top-level part is focused.
-	var partId = page.getName().split( '/', 2 )[ 0 ];
+	var partId = page.getName().split( '/', 1 )[ 0 ];
 	this.pocSidebar.selectPartById( partId );
 };
 

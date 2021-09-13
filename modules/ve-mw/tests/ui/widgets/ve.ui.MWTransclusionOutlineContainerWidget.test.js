@@ -70,3 +70,30 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 	assert.ok( $items.eq( 1 ).is( widget.partWidgets.part_0.$element ) );
 	assert.ok( $items.eq( 2 ).is( widget.partWidgets.part_1.$element ) );
 } );
+
+[
+	[ '', null ],
+	[ 'part_0', null ],
+	[ 'part_0/', '' ],
+	[ 'part_0/foo', 'foo' ],
+	[ 'part_1/foo', null ],
+	[ 'part_0/foo/bar', 'foo/bar' ]
+].forEach( ( [ pageName, expected ] ) =>
+	QUnit.test( 'highlightSubItemByPageName: ' + pageName, ( assert ) => {
+		const transclusion = new ve.dm.MWTransclusionModel(),
+			template = new ve.dm.MWTemplateModel( transclusion, {} ),
+			partWidget = new ve.ui.MWTransclusionOutlineTemplateWidget( template ),
+			widget = new ve.ui.MWTransclusionOutlineContainerWidget();
+
+		// eslint-disable-next-line camelcase
+		widget.partWidgets.part_0 = partWidget;
+
+		let actual = null;
+		partWidget.highlightParameter = ( paramName ) => {
+			actual = paramName;
+		};
+
+		widget.highlightSubItemByPageName( pageName );
+		assert.strictEqual( actual, expected );
+	} )
+);

@@ -163,12 +163,14 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function (
  * @param {string} pageName
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.highlightSubItemByPageName = function ( pageName ) {
-	var ids = pageName.split( '/', 2 ),
-		partId = ids[ 0 ],
-		paramName = ids[ 1 ];
+	var partId = pageName.split( '/', 1 )[ 0 ],
+		partWidget = this.partWidgets[ partId ];
 	// Note this code-path (currently) doesn't care about top-level parts
-	if ( partId in this.partWidgets && paramName !== undefined ) {
-		this.partWidgets[ partId ].highlightParameter( paramName );
+	if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget &&
+		pageName.length > partId.length
+	) {
+		var paramName = pageName.slice( partId.length + 1 );
+		partWidget.highlightParameter( paramName );
 	}
 };
 
