@@ -18,7 +18,12 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		scrollable: false
 	}, config ) );
 
-	this.template = parameter.getTemplate();
+	this.template = parameter.getTemplate()
+		.connect( this, {
+			// There is a "change" event, but it triggers way to often even for content changes
+			add: 'onTemplateParametersChanged',
+			remove: 'onTemplateParametersChanged'
+		} );
 	this.isExpanded = false;
 
 	// Header button to expand
@@ -94,6 +99,13 @@ ve.ui.MWAddParameterPage.prototype.focus = function () {
 
 	// Parent method
 	ve.ui.MWAddParameterPage.super.prototype.focus.apply( this, arguments );
+};
+
+/**
+ * @private
+ */
+ve.ui.MWAddParameterPage.prototype.onTemplateParametersChanged = function () {
+	this.onParameterNameChanged( this.paramInputField.getValue() );
 };
 
 /**
