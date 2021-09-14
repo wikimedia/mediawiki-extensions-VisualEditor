@@ -57,10 +57,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		this.valueInput.setReadOnly( true );
 	}
 
-	this.statusIndicator = new OO.ui.IndicatorWidget( {
-		classes: [ 've-ui-mwParameterPage-statusIndicator' ]
-	} );
-
 	// Construct the field docs
 
 	var $doc = $( '<div>' )
@@ -68,12 +64,15 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.append( $( '<p>' )
 			.text( this.spec.getParameterDescription( paramName ) || '' ) );
 
+	var statusIndicator;
 	if ( this.parameter.isRequired() ) {
-		this.statusIndicator
-			.setIndicator( 'required' )
-			.setTitle(
-				ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
-			);
+		if ( !this.useNewSidebar ) {
+			statusIndicator = new OO.ui.IndicatorWidget( {
+				classes: [ 've-ui-mwParameterPage-statusIndicator' ],
+				indicator: 'required',
+				title: ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
+			} );
+		}
 		$doc.append(
 			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-doc-required' )
@@ -82,11 +81,11 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				)
 		);
 	} else if ( this.parameter.isDeprecated() ) {
-		this.statusIndicator
-			.setIndicator( 'alert' )
-			.setTitle(
-				ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
-			);
+		statusIndicator = new OO.ui.IndicatorWidget( {
+			classes: [ 've-ui-mwParameterPage-statusIndicator' ],
+			indicator: 'alert',
+			title: ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
+		} );
 		$doc.append(
 			$( '<p>' )
 				.addClass( 've-ui-mwParameterPage-doc-deprecated' )
@@ -181,7 +180,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	// Initialization
 	this.$info
 		.addClass( 've-ui-mwParameterPage-info' )
-		.append( this.$labelElement, this.statusIndicator.$element );
+		.append( this.$labelElement );
+	if ( statusIndicator ) {
+		this.$info.append( ' ', statusIndicator.$element );
+	}
 	this.$actions
 		.addClass( 've-ui-mwParameterPage-actions' );
 	this.$labelElement
