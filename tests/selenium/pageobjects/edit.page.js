@@ -3,7 +3,13 @@ const Page = require( 'wdio-mediawiki/Page' );
 
 class EditPage extends Page {
 
+	get content() { return $( '#content' ); }
+	get edited() { return $( '*=Your edit was saved' ); }
+	get notices() { return $( '.ve-ui-mwNoticesPopupTool-items' ); }
+	get savePage() { return $( '.ve-ui-overlay-global .oo-ui-processDialog-actions-primary' ); }
+	get savePageDots() { return $( '.ve-ui-toolbar-saveButton' ); }
 	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
+	get veBodyContent() { return $( '.mw-body-content.ve-ui-surface' ); }
 	get veRootNode() { return $( '.ve-ce-rootNode[role="textbox"]' ); }
 
 	openForEditing( title ) {
