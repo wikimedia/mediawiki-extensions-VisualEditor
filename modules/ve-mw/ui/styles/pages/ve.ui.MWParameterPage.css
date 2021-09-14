@@ -30,6 +30,10 @@
 	position: relative;
 }
 
+.ve-ui-mwParameterPage-inlineDescription .ve-ui-expandableContent-container {
+	right: 0;
+}
+
 .ve-ui-mwParameterPage-undocumentedLabel {
 	margin-left: 0.4em;
 	font-size: 13px;
