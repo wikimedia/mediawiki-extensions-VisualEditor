@@ -179,7 +179,11 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 		case OO.ui.Keys.SPACE:
 			item = this.findHighlightedItem();
 			if ( item ) {
-				this[ item.isSelected() ? 'unselectItem' : 'selectItem' ]( item );
+				if ( item.isSelected() ) {
+					this.unselectItem( item );
+				} else {
+					this.selectItem( item );
+				}
 				this.emit( 'templateParameterSelectionChanged', item, item.isSelected() );
 			}
 			e.preventDefault();
