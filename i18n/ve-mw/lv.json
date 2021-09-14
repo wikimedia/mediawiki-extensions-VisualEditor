@@ -147,6 +147,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Pievienot saturu",
 	"visualeditor-dialog-transclusion-add-wikitext": "Pievienot vikitekstu",
 	"visualeditor-dialog-transclusion-add-param": "Pievienot vairāk informācijas",
+	"visualeditor-dialog-transclusion-add-param-placeholder": "Parametra nosaukums",
 	"visualeditor-dialog-transclusion-add-param-save": "Pievienot parametru",
 	"visualeditor-dialog-transclusion-add-template": "Pievienot veidni",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Pievienot nedokumentētu parametru",
