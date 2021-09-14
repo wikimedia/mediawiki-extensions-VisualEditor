@@ -51,7 +51,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 	} )
 		.connect( this, { click: 'onParameterNameSubmitted' } );
 
-	this.addParameterInputField = new OO.ui.ActionFieldLayout(
+	this.actionFieldLayout = new OO.ui.ActionFieldLayout(
 		this.paramInputField,
 		this.saveButton,
 		{ classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset-input' ] }
@@ -68,7 +68,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		helpInline: true,
 		help: $helpText,
 		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
-		$content: this.addParameterInputField.$element
+		$content: this.actionFieldLayout.$element
 	} );
 
 	ve.targetLinksToNewWindow( this.addParameterFieldset.$element[ 0 ] );
@@ -116,7 +116,7 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
 	var paramName = value.trim(),
 		errors = this.getValidationErrors( paramName );
 
-	this.addParameterInputField.setErrors( errors );
+	this.actionFieldLayout.setErrors( errors );
 	this.saveButton.setDisabled( !paramName || errors.length );
 };
 
