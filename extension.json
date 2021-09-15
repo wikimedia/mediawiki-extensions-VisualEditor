@@ -2208,6 +2208,7 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWParameterSearchWidget.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css",
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css"
 			],
 			"skinStyles": {
