@@ -38,17 +38,8 @@
 }
 
 .ve-ui-mwParameterPage-label {
-	display: inline;
-	vertical-align: middle;
 	font-size: 1.1em;
-	font-weight: bold;
 	line-height: 1.705em;
-}
-
-.ve-ui-mwParameterPage-statusIndicator {
-	display: inline-block;
-	vertical-align: middle;
-	opacity: 0.5;
 }
 
 .ve-ui-mwParameterPage-doc {

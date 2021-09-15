@@ -26,6 +26,19 @@
 	margin-bottom: 0.5em;
 }
 
+.ve-ui-mwParameterPage-label {
+	display: inline;
+	vertical-align: middle;
+	font-weight: bold;
+	overflow-wrap: break-word;
+}
+
+.ve-ui-mwParameterPage-statusIndicator {
+	display: inline-block;
+	vertical-align: middle;
+	opacity: 0.5;
+}
+
 .ve-ui-mwParameterPage-inlineDescription {
 	position: relative;
 }
