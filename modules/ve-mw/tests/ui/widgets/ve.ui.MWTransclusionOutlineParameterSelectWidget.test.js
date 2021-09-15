@@ -20,7 +20,7 @@ QUnit.test( 'interaction with items', ( assert ) => {
 	assert.ok( item.isSelected(), 'clicking the checkbox selects the item' );
 
 	let eventsFired = 0;
-	widget.connect( this, { templateParameterClick: () => eventsFired++ } );
+	widget.connect( this, { choose: () => eventsFired++ } );
 
 	widget.onMouseDown( {
 		which: OO.ui.MouseButtons.LEFT,
