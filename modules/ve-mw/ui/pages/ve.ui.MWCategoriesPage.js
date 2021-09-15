@@ -90,15 +90,10 @@ OO.inheritClass( ve.ui.MWCategoriesPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWCategoriesPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWCategoriesPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'tag' )
-			.setLabel( ve.msg( 'visualeditor-dialog-meta-categories-section' ) );
-	}
+ve.ui.MWCategoriesPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'tag' )
+		.setLabel( ve.msg( 'visualeditor-dialog-meta-categories-section' ) );
 };
 
 /**

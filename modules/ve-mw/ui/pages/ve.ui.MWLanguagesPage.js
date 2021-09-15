@@ -45,15 +45,10 @@ OO.inheritClass( ve.ui.MWLanguagesPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWLanguagesPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWLanguagesPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'textLanguage' )
-			.setLabel( ve.msg( 'visualeditor-dialog-meta-languages-section' ) );
-	}
+ve.ui.MWLanguagesPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'textLanguage' )
+		.setLabel( ve.msg( 'visualeditor-dialog-meta-languages-section' ) );
 };
 
 ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {

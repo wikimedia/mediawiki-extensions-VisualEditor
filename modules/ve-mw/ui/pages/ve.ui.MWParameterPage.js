@@ -465,33 +465,28 @@ ve.ui.MWParameterPage.prototype.onLabelClick = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWParameterPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWParameterPage.super.prototype.setOutlineItem.apply( this, arguments );
+ve.ui.MWParameterPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'parameter' )
+		.setMovable( false )
+		.setRemovable( !this.useNewSidebar )
+		.setLevel( 1 )
+		.setFlags( { empty: !this.containsSomeValue() } )
+		.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
 
-	if ( this.outlineItem ) {
+	if ( this.parameter.isRequired() ) {
 		this.outlineItem
-			.setIcon( 'parameter' )
-			.setMovable( false )
-			.setRemovable( !this.useNewSidebar )
-			.setLevel( 1 )
-			.setFlags( { empty: !this.containsSomeValue() } )
-			.setLabel( this.spec.getParameterLabel( this.parameter.getName() ) );
-
-		if ( this.parameter.isRequired() ) {
-			this.outlineItem
-				.setIndicator( 'required' )
-				.setTitle(
-					ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
-				);
-		}
-		if ( this.parameter.isDeprecated() ) {
-			this.outlineItem
-				.setIndicator( 'alert' )
-				.setTitle(
-					ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
-				);
-		}
+			.setIndicator( 'required' )
+			.setTitle(
+				ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
+			);
+	}
+	if ( this.parameter.isDeprecated() ) {
+		this.outlineItem
+			.setIndicator( 'alert' )
+			.setTitle(
+				ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
+			);
 	}
 };
 

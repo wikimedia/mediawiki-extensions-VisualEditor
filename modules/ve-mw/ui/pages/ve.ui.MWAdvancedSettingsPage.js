@@ -152,15 +152,10 @@ ve.ui.MWAdvancedSettingsPage.prototype.onDisplayTitleInputChange = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWAdvancedSettingsPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWAdvancedSettingsPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'settings' )
-			.setLabel( ve.msg( 'visualeditor-dialog-meta-advancedsettings-section' ) );
-	}
+ve.ui.MWAdvancedSettingsPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'settings' )
+		.setLabel( ve.msg( 'visualeditor-dialog-meta-advancedsettings-section' ) );
 };
 
 /* Indexing option methods */

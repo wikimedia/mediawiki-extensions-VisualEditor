@@ -204,12 +204,7 @@ ve.ui.MWAddParameterPage.prototype.togglePlaceholder = function ( expand ) {
 /**
  * @inheritDoc OO.ui.PageLayout
  */
-ve.ui.MWAddParameterPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWAddParameterPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		// This page should not be shown in the (BookletLayout-based) sidebar
-		this.outlineItem.$element.empty().removeAttr( 'class' );
-	}
+ve.ui.MWAddParameterPage.prototype.setupOutlineItem = function () {
+	// This page should not be shown in the (BookletLayout-based) sidebar
+	this.outlineItem.$element.empty().removeAttr( 'class' );
 };

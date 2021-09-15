@@ -63,15 +63,10 @@ OO.inheritClass( ve.ui.MWTemplatesUsedPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplatesUsedPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWTemplatesUsedPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'puzzle' )
-			.setLabel( ve.msg( 'visualeditor-templatesused-tool' ) );
-	}
+ve.ui.MWTemplatesUsedPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'puzzle' )
+		.setLabel( ve.msg( 'visualeditor-templatesused-tool' ) );
 };
 
 /**

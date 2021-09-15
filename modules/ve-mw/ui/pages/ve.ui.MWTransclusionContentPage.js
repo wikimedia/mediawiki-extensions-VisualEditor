@@ -75,17 +75,12 @@ OO.inheritClass( ve.ui.MWTransclusionContentPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWTransclusionContentPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWTransclusionContentPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'wikiText' )
-			.setMovable( true )
-			.setRemovable( true )
-			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-content' ) );
-	}
+ve.ui.MWTransclusionContentPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'wikiText' )
+		.setMovable( true )
+		.setRemovable( true )
+		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-content' ) );
 };
 
 ve.ui.MWTransclusionContentPage.prototype.onTextInputChange = function () {

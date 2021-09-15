@@ -125,26 +125,21 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplatePlaceholderPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWTemplatePlaceholderPage.super.prototype.setOutlineItem.apply( this, arguments );
-
+ve.ui.MWTemplatePlaceholderPage.prototype.setupOutlineItem = function () {
 	var dialogTitle = ( this.placeholder.getTransclusion().parts.length === 1 &&
 		mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) ?
 		'visualeditor-dialog-transclusion-template-search' :
 		'visualeditor-dialog-transclusion-add-template';
 
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'puzzle' )
-			.setMovable( true )
-			.setRemovable( true )
-			.setFlags( [ 'placeholder' ] )
-			// The following messages are used here:
-			// * visualeditor-dialog-transclusion-template-search
-			// * visualeditor-dialog-transclusion-add-template
-			.setLabel( ve.msg( dialogTitle ) );
-	}
+	this.outlineItem
+		.setIcon( 'puzzle' )
+		.setMovable( true )
+		.setRemovable( true )
+		.setFlags( [ 'placeholder' ] )
+		// The following messages are used here:
+		// * visualeditor-dialog-transclusion-template-search
+		// * visualeditor-dialog-transclusion-add-template
+		.setLabel( ve.msg( dialogTitle ) );
 };
 
 ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {

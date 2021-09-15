@@ -89,19 +89,14 @@ ve.ui.MWParameterPlaceholderPage.prototype.onParameterShowAll = function () {
 /**
  * @inheritdoc
  */
-ve.ui.MWParameterPlaceholderPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWParameterPlaceholderPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'parameter' )
-			.setMovable( false )
-			.setRemovable( true )
-			.setLevel( 1 )
-			.setFlags( [ 'placeholder' ] )
-			.setLabel( ve.msg( 'visualeditor-dialog-transclusion-add-param' ) );
-	}
+ve.ui.MWParameterPlaceholderPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'parameter' )
+		.setMovable( false )
+		.setRemovable( true )
+		.setLevel( 1 )
+		.setFlags( [ 'placeholder' ] )
+		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-add-param' ) );
 };
 
 ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name ) {

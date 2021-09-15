@@ -176,15 +176,10 @@ ve.ui.MWSettingsPage.static.addMetaCheckbox = function ( metaName, label ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWSettingsPage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWSettingsPage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'pageSettings' )
-			.setLabel( ve.msg( 'visualeditor-dialog-meta-settings-section' ) );
-	}
+ve.ui.MWSettingsPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'pageSettings' )
+		.setLabel( ve.msg( 'visualeditor-dialog-meta-settings-section' ) );
 };
 
 /**

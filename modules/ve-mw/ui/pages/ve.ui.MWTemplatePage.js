@@ -160,17 +160,12 @@ OO.inheritClass( ve.ui.MWTemplatePage, OO.ui.PageLayout );
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplatePage.prototype.setOutlineItem = function () {
-	// Parent method
-	ve.ui.MWTemplatePage.super.prototype.setOutlineItem.apply( this, arguments );
-
-	if ( this.outlineItem ) {
-		this.outlineItem
-			.setIcon( 'puzzle' )
-			.setMovable( true )
-			.setRemovable( true )
-			.setLabel( this.spec.getLabel() );
-	}
+ve.ui.MWTemplatePage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		.setIcon( 'puzzle' )
+		.setMovable( true )
+		.setRemovable( true )
+		.setLabel( this.spec.getLabel() );
 };
 
 ve.ui.MWTemplatePage.prototype.onRemoveButtonClick = function () {
