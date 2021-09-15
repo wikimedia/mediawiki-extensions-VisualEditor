@@ -153,10 +153,17 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
  *  parameter ids like "part_1/param1".
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function ( partId ) {
+	var changed = false;
 	for ( var id in this.partWidgets ) {
-		this.partWidgets[ id ].setSelected( id === partId );
+		var selected = id === partId;
+		if ( this.partWidgets[ id ].isSelected() !== selected ) {
+			this.partWidgets[ id ].setSelected( selected );
+			changed = true;
+		}
 	}
-	this.emit( 'updateOutlineControlButtons', partId );
+	if ( changed ) {
+		this.emit( 'updateOutlineControlButtons', partId );
+	}
 };
 
 /**
