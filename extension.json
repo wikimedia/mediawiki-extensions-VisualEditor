@@ -2821,6 +2821,7 @@
 			"lib/ve/tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js",
 			"modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.test.js",
 			"modules/ve-mw/tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js",
+			"modules/ve-mw/tests/ui/dialogs/ve.ui.MWTransclusionDialog.test.js",
 			"modules/ve-mw/tests/init/targets/ve.init.mw.DesktopArticleTarget.test.js",
 			"lib/ve/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
 			"modules/ve-mw/tests/ui/inspectors/ve.ui.FragmentInspector.test.js",
