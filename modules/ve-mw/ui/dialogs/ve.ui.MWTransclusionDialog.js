@@ -280,42 +280,42 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
-	var showSidebar;
+	var expandSidebar;
 
 	if ( this.useInlineDescriptions ) {
 		var isSmallScreen = $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
-		showSidebar = !isSmallScreen;
+		expandSidebar = !isSmallScreen;
 		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
 	} else {
-		showSidebar = !this.isSingleTemplateTransclusion();
+		expandSidebar = !this.isSingleTemplateTransclusion();
 	}
 
-	this.toggleSidebar( showSidebar );
+	this.toggleSidebar( expandSidebar );
 };
 
 /**
  * Set if the sidebar is visible (which means the dialog is expanded), or collapsed.
  *
- * @param {boolean} showSidebar
+ * @param {boolean} expandSidebar
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( showSidebar ) {
-	if ( this.isSidebarExpanded === showSidebar ) {
+ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) {
+	if ( this.isSidebarExpanded === expandSidebar ) {
 		return;
 	}
 
-	this.isSidebarExpanded = showSidebar;
+	this.isSidebarExpanded = expandSidebar;
 	this.$content
-		.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !showSidebar )
-		.toggleClass( 've-ui-mwTransclusionDialog-expanded', showSidebar );
+		.toggleClass( 've-ui-mwTransclusionDialog-collapsed', !expandSidebar )
+		.toggleClass( 've-ui-mwTransclusionDialog-expanded', expandSidebar );
 
 	var dialogSizeSidebarExpanded = this.useInlineDescriptions ? 'larger' : 'large';
 	var dialogSizeSidebarCollapsed = this.useNewSidebar ? dialogSizeSidebarExpanded : 'medium';
 	this.ignoreNextWindowResizeEvent = true;
-	this.setSize( showSidebar ? dialogSizeSidebarExpanded : dialogSizeSidebarCollapsed );
+	this.setSize( expandSidebar ? dialogSizeSidebarExpanded : dialogSizeSidebarCollapsed );
 
-	this.bookletLayout.toggleOutline( showSidebar );
+	this.bookletLayout.toggleOutline( expandSidebar );
 	this.updateTitle();
 	this.updateModeActionState();
 
