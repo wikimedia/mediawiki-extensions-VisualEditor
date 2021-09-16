@@ -208,7 +208,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
  * @private
  * @param {OO.ui.PageLayout} page Active page
  */
-ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSet = function ( page ) {
+ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) {
 	var partCount = this.transclusionModel.getParts().length,
 		isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage && partCount === 1,
 		acceptsNewParameters = page instanceof ve.ui.MWTemplatePage ||
@@ -532,7 +532,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	if ( this.useInlineDescriptions ) {
 		this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
 	}
-	this.bookletLayout.connect( this, { set: 'onBookletLayoutSet' } );
+	this.bookletLayout.connect( this, { set: 'onBookletLayoutSetPage' } );
 	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first()
 		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
 	this.addTemplateButton.connect( this, { click: 'onAddTemplateButtonClick' } );
