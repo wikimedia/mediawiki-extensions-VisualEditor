@@ -12,8 +12,8 @@
  * @extends ve.init.Target
  *
  * @constructor
- * @param {Object} [config] Configuration options
- * @cfg {string[]} [surfaceClasses] Surface classes to apply
+ * @param {Object} config
+ * @cfg {string[]} [surfaceClasses=[]] Surface classes to apply
  */
 ve.init.mw.Target = function VeInitMwTarget( config ) {
 	this.surfaceClasses = config.surfaceClasses || [];

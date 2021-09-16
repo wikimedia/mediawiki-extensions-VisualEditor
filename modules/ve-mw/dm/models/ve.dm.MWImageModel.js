@@ -15,9 +15,9 @@
  * @param {ve.dm.Document} parentDoc Document that contains or will contain the image
  * @param {Object} [config] Configuration options
  * @cfg {string} [resourceName] The resource name of the given media file
- * @cfg {Object} [currentDimensions] Current dimensions, width & height
- * @cfg {Object} [minDimensions] Minimum dimensions, width & height
- * @cfg {boolean} [isDefaultSize] Object is using its default size dimensions
+ * @cfg {Object} [currentDimensions={}] Current dimensions, width & height
+ * @cfg {Object} [minDimensions={}] Minimum dimensions, width & height
+ * @cfg {boolean} [isDefaultSize=false] Object is using its default size dimensions
  */
 ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 	var scalable, currentDimensions, minDimensions;

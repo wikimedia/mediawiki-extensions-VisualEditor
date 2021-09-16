@@ -14,6 +14,8 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @cfg {number} [namespace] Namespace to prepend to queries. Defaults to template namespace.
+ * @cfg {boolean} [showDescriptions] Show template descriptions from the TemplateData API
+ * @cfg {mw.Api} [api]
  */
 ve.ui.MWTemplateTitleInputWidget = function VeUiMWTemplateTitleInputWidget( config ) {
 	config = ve.extendObject( {}, {

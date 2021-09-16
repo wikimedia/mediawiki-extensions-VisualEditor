@@ -15,7 +15,7 @@
  * @constructor
  * @param {ve.dm.MWTransclusionPartModel} part
  * @param {Object} config
- * @cfg {string} [icon='']
+ * @cfg {string} [icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
  * @cfg {string} label
  */
 ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
