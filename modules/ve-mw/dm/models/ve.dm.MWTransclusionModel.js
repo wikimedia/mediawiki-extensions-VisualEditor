@@ -513,7 +513,7 @@
 	ve.dm.MWTransclusionModel.prototype.getPartFromId = function ( id ) {
 		// For ids from ve.dm.MWParameterModel, compare against the part id
 		// of the parameter instead of the entire model id (e.g. "part_1" instead of "part_1/foo").
-		var partId = id.split( '/' )[ 0 ];
+		var partId = id.split( '/', 1 )[ 0 ];
 
 		for ( var i = 0; i < this.parts.length; i++ ) {
 			if ( this.parts[ i ].getId() === partId ) {

@@ -84,12 +84,13 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
 
 /**
  * @private
- * @param {string} partId
+ * @param {string} pageName
  * @fires focusPageByName
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionPartSelected = function ( partId ) {
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionPartSelected = function ( pageName ) {
+	var partId = pageName.split( '/', 1 )[ 0 ];
 	this.selectPartById( partId );
-	this.emit( 'focusPageByName', partId );
+	this.emit( 'focusPageByName', pageName );
 };
 
 /* Methods */
