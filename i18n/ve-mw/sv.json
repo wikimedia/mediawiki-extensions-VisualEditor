@@ -178,7 +178,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Lägg till innehåll",
 	"visualeditor-dialog-transclusion-add-wikitext": "Lägg till wikitext",
 	"visualeditor-dialog-transclusion-add-param": "Lägg till mer information",
-	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" har redan lagts till som \"$2\". Kontrollera alternativen i sidofältet. Det kan antingen bero på [//www.mediawiki.org/wiki/Help:TemplateData#aliases alias] eller [//www.mediawiki.org/wiki/Help:TemplateData#label etiketter] används.",
+	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" har redan lagts till som \"$2\". Kontrollera alternativen i sidofältet. Det kan antingen bero på att [//www.mediawiki.org/wiki/Help:TemplateData#aliases alias] eller [//www.mediawiki.org/wiki/Help:TemplateData#label etiketter] används.",
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "\"$1\" kan inte läggas till eftersom parametern har markerats som [//www.mediawiki.org/wiki/Help:TemplateData#deprecated föråldrad].",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Kan inte lägga till två parametrar med samma namn.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Denna parameter är redan tillgänglig att använda. Kontrollera alternativen i sidofältet.",
