@@ -642,6 +642,8 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 		//  is executed later than this here.
 		setTimeout( this.pocSidebar.selectPartById.bind( this.pocSidebar, pageName ) );
 		this.bookletLayout.setPage( pageName );
+		// The .setPage() call above does not necessarily call .focus(). This forces it.
+		this.bookletLayout.focus();
 	} else if ( this.bookletLayout.isOutlined() ) {
 		this.bookletLayout.getOutline().selectItemByData( pageName );
 	} else {
