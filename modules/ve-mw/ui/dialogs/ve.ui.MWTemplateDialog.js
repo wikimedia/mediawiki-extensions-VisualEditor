@@ -496,10 +496,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						filterPagesByName: 'onFilterPagesByName',
 						updateOutlineControlButtons: 'onUpdateOutlineControlButtons'
 					} );
-					// FIXME: Check if we can merge these two "set"/"focusin" event handlers
-					this.bookletLayout.connect( this, {
-						set: 'onBookletLayoutSetPage'
-					} );
 					this.bookletLayout.stackLayout.$element.on(
 						'focusin',
 						this.onBookletLayoutPageFocused.bind( this )
@@ -647,19 +643,6 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 	} else {
 		this.bookletLayout.setPage( pageName );
 	}
-};
-
-/**
- * @private
- * @param {OO.ui.PageLayout} page
- */
-ve.ui.MWTemplateDialog.prototype.onBookletLayoutSetPage = function ( page ) {
-	// FIXME: This triggers twice for the same page. Why?
-
-	// The sidebar (currently) can't focus individual template parameters with composite ids like
-	// "part_1/param1". Make sure at least the top-level part is focused.
-	var partId = page.getName().split( '/', 1 )[ 0 ];
-	this.pocSidebar.selectPartById( partId );
 };
 
 /**
