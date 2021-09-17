@@ -216,6 +216,11 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) 
 
 	this.addParameterButton.setDisabled( !acceptsNewParameters || this.isReadOnly() );
 	this.bookletLayout.getOutlineControls().removeButton.toggle( !isLastPlaceholder );
+
+	if ( this.pocSidebar ) {
+		var partId = page.getName().split( '/', 1 )[ 0 ];
+		this.pocSidebar.selectPartById( partId );
+	}
 };
 
 /**
