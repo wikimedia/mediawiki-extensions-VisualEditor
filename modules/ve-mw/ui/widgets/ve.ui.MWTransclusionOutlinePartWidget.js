@@ -53,8 +53,8 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
  * "Hard" selection with enter or mouse click.
  *
  * @event transclusionPartSelected
- * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
- *  "part_1".
+ * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
+ *  "part_1" or "part_1/param1".
  */
 
 /* Methods */
