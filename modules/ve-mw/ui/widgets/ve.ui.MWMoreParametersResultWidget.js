@@ -37,6 +37,7 @@ OO.inheritClass( ve.ui.MWMoreParametersResultWidget, OO.ui.DecoratedOptionWidget
 /**
  * Build the label element
  *
+ * @private
  * @return {jQuery}
  */
 ve.ui.MWMoreParametersResultWidget.prototype.buildLabel = function () {

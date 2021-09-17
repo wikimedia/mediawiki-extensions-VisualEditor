@@ -49,6 +49,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  */
 
 /**
+ * @private
  * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  * @param {number} [newPosition]

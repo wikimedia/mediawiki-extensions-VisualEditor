@@ -183,6 +183,9 @@ ve.ui.MWTemplatePage.prototype.setupOutlineItem = function () {
 		.setLabel( this.spec.getLabel() );
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTemplatePage.prototype.onRemoveButtonClick = function () {
 	this.template.remove();
 };
