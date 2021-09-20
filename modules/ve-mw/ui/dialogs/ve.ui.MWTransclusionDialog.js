@@ -237,8 +237,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 	this.multipartMessage.toggle( parts.length > 1 && this.useNewSidebar );
 
-	var canCollapse = this.isSingleTemplateTransclusion();
-	this.actions.setAbilities( { mode: canCollapse } );
+	this.updateModeActionState();
 	this.updateActionSet();
 };
 
@@ -484,7 +483,6 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
 		.done( function () {
 			target.autoExpandSidebar();
-			target.updateModeActionState();
 		} );
 };
 
