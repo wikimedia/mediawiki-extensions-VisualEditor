@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Gazeb",
 			"Gmelfi",
 			"HalanTul",
@@ -8,7 +9,7 @@
 			"Sarvaturi"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Canciamentu visuali]]",
 	"tag-visualeditor-description": "Canciamentu fattu usannu [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: cuntrullari]]",
 	"tag-visualeditor-needcheck-description": "Canciamentu fattu usannu [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] unni lu sistema rilivau pussibbili canciamenti nun vulutu ntô wikitestu.",
