@@ -67,12 +67,24 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 						)
 				);
 		} else if ( pageMissing ) {
+			var msg,
+				templateLabel = this.spec.getLabel();
+
+			if ( veConfig.transclusionDialogNewSidebar ) {
+				msg = mw.message(
+					templateLabel.match( /:/ ) ?
+						'visualeditor-dialog-transclusion-template-title-modifier' :
+						'visualeditor-dialog-transclusion-template-title-nonexistent'
+				);
+			} else {
+				msg = mw.message(
+					'visualeditor-dialog-transclusion-absent-template',
+					templateLabel
+				);
+			}
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.append( mw.message(
-					'visualeditor-dialog-transclusion-absent-template',
-					this.spec.getLabel()
-				).parseDom() );
+				.append( msg.parseDom() );
 		} else if ( !veConfig.transclusionDialogNewSidebar || this.spec.isDocumented() ) {
 			this.$description
 				.addClass( 've-ui-mwTemplatePage-description-missing' )
@@ -82,6 +94,10 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 				).parseDom() );
 		}
 		ve.targetLinksToNewWindow( this.$description[ 0 ] );
+	} else if ( veConfig.transclusionDialogNewSidebar ) {
+		this.$description
+			.addClass( 've-ui-mwTemplatePage-description-missing' )
+			.append( mw.message( 'visualeditor-dialog-transclusion-template-title-invalid' ).parseDom() );
 	}
 	this.$description.find( 'a[href]' )
 		.on( 'click', function () {
