@@ -221,6 +221,8 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 		// Unconditionally focus parameter placeholders. Named parameters must be focused manually.
 		if ( !this.preventReselection && !param.getName() ) {
 			this.focusPart( param.getId() );
+		} else {
+			page.scrollElementIntoView();
 		}
 
 		this.altered = true;
@@ -617,6 +619,11 @@ ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
  * @private
  */
 ve.ui.MWTemplateDialog.prototype.onUpdateOutlineControlButtons = function ( pageName ) {
+	var page = this.bookletLayout.getPage( pageName );
+	if ( page ) {
+		page.scrollElementIntoView();
+	}
+
 	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
 	// the "select" event. This will stop working when we disconnect the old sidebar.
 	this.bookletLayout.getOutline().items.forEach( function ( item ) {
