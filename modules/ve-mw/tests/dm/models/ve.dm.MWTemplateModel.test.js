@@ -12,6 +12,23 @@
 	}
 
 	[
+		[ 'a', 'b', 'Template:A', 'prefers .wt when it is a valid title' ],
+		[ '{{a}}', 'subst:b', 'subst:b', 'falls back to unmodified getTitle' ],
+		[ 'subst:a', 'b', 'Template:A', 'strips subst:' ],
+		[ 'safesubst:a', 'b', 'Template:A', 'strips safesubst:' ],
+		[ ' SUBST: a', 'b', 'Template:A', 'ignores capitalization and whitespace' ],
+		[ 'subst :a', 'b', 'Template:Subst :a', 'leaves bad whitespace untouched' ],
+		[ 'int:a', 'b', 'Template:Int:a', 'leaves other prefixes untouched' ]
+	].forEach( ( [ wt, href, expected, message ] ) =>
+		QUnit.test( 'getTemplateDataQueryTitle: ' + message, ( assert ) => {
+			const data = { target: { wt, href } },
+				model = ve.dm.MWTemplateModel.newFromData( createTransclusionModel(), data );
+
+			assert.strictEqual( model.getTemplateDataQueryTitle(), expected );
+		} )
+	);
+
+	[
 		[ {}, false, 'no parameters' ],
 		[ { p1: {}, p2: { wt: 'foo' } }, true, 'multiple parameters' ],
 		[ { p1: {} }, false, 'undefined' ],

@@ -211,7 +211,7 @@
 				remove = 0;
 
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
-				var title = item.add.getTitle();
+				var title = item.add.getTemplateDataQueryTitle();
 				if ( hasOwn.call( specCache, title ) && specCache[ title ] ) {
 					item.add.getSpec().setTemplateData( specCache[ title ] );
 				}
@@ -285,7 +285,7 @@
 		for ( var i = 0; i < queue.length; i++ ) {
 			var item = queue[ i ];
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
-				var title = item.add.getTitle(),
+				var title = item.add.getTemplateDataQueryTitle(),
 					mwTitle = title ? mw.Title.newFromText( title, templateNamespaceId ) : null;
 				if (
 					// Skip titles that don't have a resolvable href
