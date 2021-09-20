@@ -498,6 +498,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						filterPagesByName: 'onFilterPagesByName',
 						updateOutlineControlButtons: 'onUpdateOutlineControlButtons'
 					} );
+					this.bookletLayout.stackLayout.off( 'visibleItemChange' );
 				} else {
 					this.pocSidebar.clear();
 				}

@@ -160,6 +160,9 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = func
 
 		if ( partWidget.isSelected() !== selected ) {
 			partWidget.setSelected( selected );
+			if ( selected ) {
+				partWidget.scrollElementIntoView();
+			}
 			changed = true;
 		}
 
