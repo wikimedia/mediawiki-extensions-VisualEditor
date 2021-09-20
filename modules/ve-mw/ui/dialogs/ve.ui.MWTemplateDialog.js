@@ -486,7 +486,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
 			this.bookletLayout.autoFocus = false;
 
-			if ( this.useNewSidebar ) {
+			if ( this.useNewSidebar && this.bookletLayout.isOutlined() ) {
 				// FIXME: This is created at the wrong time. That's why we run into the situation
 				//  where an old instance exists. Should be in initialize().
 				if ( !this.pocSidebar ) {
