@@ -286,7 +286,7 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 	var expandSidebar;
 
 	if ( this.useInlineDescriptions ) {
-		var isSmallScreen = $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
+		var isSmallScreen = this.isNarrowScreen();
 		expandSidebar = !isSmallScreen;
 		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
@@ -325,6 +325,31 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 	// HACK blur any active input so that its dropdown will be hidden and won't end
 	// up being mispositioned
 	this.$content.find( 'input:focus' ).trigger( 'blur' );
+
+	if ( this.useInlineDescriptions && this.pocSidebar && this.loaded && this.isNarrowScreen() ) {
+		// Reapply selection and scrolling when switching between panes.
+		// FIXME: decouple from descendants
+		var selectedPage = this.bookletLayout.stackLayout.getCurrentItem();
+		if ( selectedPage ) {
+			var name = selectedPage.getName();
+			var dialog = this;
+			// Align whichever panel is becoming visible, after animation completes.
+			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
+			setTimeout( function () {
+				if ( expandSidebar ) {
+					dialog.pocSidebar.selectPartByPageName( name );
+				} else {
+					selectedPage.scrollElementIntoView();
+					// TODO: Find a reliable way to refocus.
+					// dialog.focusPart( name );
+				}
+			}, OO.ui.theme.getDialogTransitionDuration() );
+		}
+	}
+};
+
+ve.ui.MWTransclusionDialog.prototype.isNarrowScreen = function () {
+	return $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
 };
 
 /**
