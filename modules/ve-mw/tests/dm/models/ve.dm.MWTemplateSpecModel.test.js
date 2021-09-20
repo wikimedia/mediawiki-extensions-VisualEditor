@@ -111,6 +111,22 @@
 	} );
 
 	[
+		[ 'a', './Template:{{b}}', 'Template:{{b}}', 'prefers title, even if invalid' ],
+		[ 'subst:a', '', 'subst:a', 'falls back to unmodified .wt' ],
+		[ 'a', './Template:b', 'B', 'strips template namespace' ],
+		[ 'a', './Talk:b', 'Talk:B', 'does not strip other namespaces' ],
+		[ 'a', './B', ':B', 'title in main namespace must be prefixed' ]
+	].forEach( ( [ wt, href, expected, message ] ) =>
+		QUnit.test( 'getTitle: ' + message, ( assert ) => {
+			const transclusion = new ve.dm.MWTransclusionModel(),
+				template = new ve.dm.MWTemplateModel( transclusion, { wt, href } ),
+				spec = new ve.dm.MWTemplateSpecModel( template );
+
+			assert.strictEqual( spec.getLabel(), expected );
+		} )
+	);
+
+	[
 		undefined,
 		null,
 		[],
