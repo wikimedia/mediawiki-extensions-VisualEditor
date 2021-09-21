@@ -148,7 +148,7 @@
 	display: inline-block;
 }
 
-.ve-ui-mwTransclusionOutlineContainerWidget {
+.ve-ui-mwTransclusionOutlineWidget {
 	/* .oo-ui-window-head uses a 1px outline which overlaps the top pixel of the sidebar */
 	padding-top: 1px;
 }

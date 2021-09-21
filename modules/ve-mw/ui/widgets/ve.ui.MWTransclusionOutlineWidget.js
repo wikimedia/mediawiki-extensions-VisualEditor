@@ -1,5 +1,5 @@
 /*!
- * VisualEditor user interface MWTransclusionOutlineContainerWidget class.
+ * VisualEditor user interface MWTransclusionOutlineWidget class.
  *
  * @license The MIT License (MIT); see LICENSE.txt
  */
@@ -14,10 +14,10 @@
  * @property {Object.<string,ve.ui.MWTransclusionOutlinePartWidget>} partWidgets Map of top-level
  *  items currently visible in this container, indexed by part id
  */
-ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineContainerWidget() {
+ve.ui.MWTransclusionOutlineWidget = function VeUiMWTransclusionOutlineWidget() {
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineContainerWidget.super.call( this, {
-		classes: [ 've-ui-mwTransclusionOutlineContainerWidget' ]
+	ve.ui.MWTransclusionOutlineWidget.super.call( this, {
+		classes: [ 've-ui-mwTransclusionOutlineWidget' ]
 	} );
 
 	// Initialization
@@ -26,7 +26,7 @@ ve.ui.MWTransclusionOutlineContainerWidget = function VeUiMWTransclusionOutlineC
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
+OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
 
 /* Events */
 
@@ -53,7 +53,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineContainerWidget, OO.ui.Widget );
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  * @param {number} [newPosition]
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( removed, added, newPosition ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, added, newPosition ) {
 	if ( removed ) {
 		this.removePartWidget( removed );
 	}
@@ -67,7 +67,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onReplacePart = function ( 
 /**
  * @param {ve.dm.MWTransclusionModel} transclusionModel
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange = function ( transclusionModel ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionModelChange = function ( transclusionModel ) {
 	var newOrder = transclusionModel.getParts();
 
 	for ( var i = 0; i < newOrder.length; i++ ) {
@@ -87,7 +87,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
  * @param {string} pageName
  * @fires focusPageByName
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionPartSelected = function ( pageName ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSelected = function ( pageName ) {
 	this.emit( 'focusPageByName', pageName );
 };
 
@@ -97,7 +97,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionPartSelected 
  * @private
  * @param {ve.dm.MWTransclusionPartModel} part
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function ( part ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.removePartWidget = function ( part ) {
 	var id = part.getId();
 	if ( id in this.partWidgets ) {
 		this.partWidgets[ id ]
@@ -113,7 +113,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.removePartWidget = function
  * @param {number} [newPosition]
  * @fires filterPagesByName
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( part, newPosition ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, newPosition ) {
 	var widget;
 
 	if ( part instanceof ve.dm.MWTemplateModel ) {
@@ -150,7 +150,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
  *
  * @param {string} pageName
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = function ( pageName ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.selectPartByPageName = function ( pageName ) {
 	var partId = pageName.split( '/', 1 )[ 0 ],
 		isParameterId = pageName.length > partId.length,
 		changed = false;
@@ -186,7 +186,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = func
  *
  * @return {string|undefined}
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.findSelectedPartId = function () {
+ve.ui.MWTransclusionOutlineWidget.prototype.findSelectedPartId = function () {
 	for ( var id in this.partWidgets ) {
 		var part = this.partWidgets[ id ];
 		if ( part.isSelected() ) {
@@ -198,7 +198,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.findSelectedPartId = functi
 /**
  * Removes all {@see ve.ui.MWTransclusionOutlinePartWidget}, i.e. empties the list.
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.clear = function () {
+ve.ui.MWTransclusionOutlineWidget.prototype.clear = function () {
 	for ( var id in this.partWidgets ) {
 		this.partWidgets[ id ]
 			.disconnect( this )

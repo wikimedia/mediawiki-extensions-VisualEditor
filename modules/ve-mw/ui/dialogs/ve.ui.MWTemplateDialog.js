@@ -493,7 +493,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				// FIXME: This is created at the wrong time. That's why we run into the situation
 				//  where an old instance exists. Should be in initialize().
 				if ( !this.pocSidebar ) {
-					this.pocSidebar = new ve.ui.MWTransclusionOutlineContainerWidget();
+					this.pocSidebar = new ve.ui.MWTransclusionOutlineWidget();
 					this.pocSidebar.connect( this, {
 						focusPageByName: 'focusPart',
 						filterPagesByName: 'onFilterPagesByName',
@@ -627,7 +627,7 @@ ve.ui.MWTemplateDialog.prototype.onUpdateOutlineControlButtons = function ( page
 	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
 	// the "select" event. This will stop working when we disconnect the old sidebar.
 	this.bookletLayout.getOutline().items.forEach( function ( item ) {
-		// This repeats what ve.ui.MWTransclusionOutlineContainerWidget.selectPartByPageName did, but for
+		// This repeats what ve.ui.MWTransclusionOutlineWidget.selectPartByPageName did, but for
 		// the old sidebar
 		item.setSelected( item.getData() === pageName );
 	} );
