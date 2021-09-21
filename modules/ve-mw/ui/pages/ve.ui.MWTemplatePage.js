@@ -19,7 +19,7 @@
  * @cfg {boolean} [isReadOnly] Page is read-only
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
-	var link = template.getTitle(),
+	var link = template.getTemplateDataQueryTitle(),
 		veConfig = mw.config.get( 'wgVisualEditorConfig' );
 
 	// Configuration initialization
