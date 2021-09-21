@@ -88,8 +88,6 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionModelChange =
  * @fires focusPageByName
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.onTransclusionPartSelected = function ( pageName ) {
-	var partId = pageName.split( '/', 1 )[ 0 ];
-	this.selectPartById( partId );
 	this.emit( 'focusPageByName', pageName );
 };
 
@@ -135,7 +133,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 	}
 
 	widget.connect( this, {
-		transclusionPartSoftSelected: 'selectPartById',
+		transclusionPartSoftSelected: 'selectPartByPageName',
 		transclusionPartSelected: 'onTransclusionPartSelected'
 	} );
 
@@ -150,35 +148,32 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
 /**
  * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
  *
- * @param {string} partId Top-level part id, e.g. "part_1". Note this (currently) doesn't accept
- *  parameter ids like "part_1/param1".
- */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartById = function ( partId ) {
-	var changed = false;
-	for ( var id in this.partWidgets ) {
-		var selected = id === partId;
-		if ( this.partWidgets[ id ].isSelected() !== selected ) {
-			this.partWidgets[ id ].setSelected( selected );
-			changed = true;
-		}
-	}
-	if ( changed ) {
-		this.emit( 'updateOutlineControlButtons', partId );
-	}
-};
-
-/**
  * @param {string} pageName
  */
-ve.ui.MWTransclusionOutlineContainerWidget.prototype.highlightSubItemByPageName = function ( pageName ) {
+ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = function ( pageName ) {
 	var partId = pageName.split( '/', 1 )[ 0 ],
-		partWidget = this.partWidgets[ partId ];
-	// Note this code-path (currently) doesn't care about top-level parts
-	if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget &&
-		pageName.length > partId.length
-	) {
-		var paramName = pageName.slice( partId.length + 1 );
-		partWidget.highlightParameter( paramName );
+		changed = false;
+
+	for ( var id in this.partWidgets ) {
+		var partWidget = this.partWidgets[ id ],
+			selected = id === partId;
+
+		if ( partWidget.isSelected() !== selected ) {
+			partWidget.setSelected( selected );
+			changed = true;
+		}
+
+		if ( selected &&
+			partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget &&
+			pageName.length > partId.length
+		) {
+			var paramName = pageName.slice( partId.length + 1 );
+			partWidget.highlightParameter( paramName );
+		}
+	}
+
+	if ( changed ) {
+		this.emit( 'updateOutlineControlButtons', partId );
 	}
 };
 
