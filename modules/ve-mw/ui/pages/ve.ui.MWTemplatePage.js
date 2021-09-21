@@ -49,56 +49,56 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	// template is called, nor link to the template page. However, if we know for
 	// certain that the template doesn't exist, be explicit about it (T162694).
 	var linkData = ve.init.platform.linkCache.getCached( '_missing/' + link ),
-		pageMissing = link && linkData && linkData.missing;
+		knownAsMissing = link && linkData && linkData.missing;
 
-	if ( link ) {
-		if ( this.spec.getDescription() ) {
-			this.$description
-				.append(
-					$( '<hr>' ),
-					$( '<span>' )
-						.addClass( 've-ui-mwTemplatePage-description-extra' )
-						.append(
-							!veConfig.transclusionDialogNewSidebar ?
-								mw.message( 'visualeditor-dialog-transclusion-more-template-description',
-									this.spec.getLabel(), link ).parseDom() :
-								mw.message( 'visualeditor-dialog-transclusion-see-template',
-									link ).parseDom()
-						)
-				);
-		} else if ( pageMissing ) {
-			var msg,
-				templateLabel = this.spec.getLabel();
-
-			if ( veConfig.transclusionDialogNewSidebar ) {
-				msg = mw.message(
-					templateLabel.match( /:/ ) ?
-						'visualeditor-dialog-transclusion-template-title-modifier' :
-						'visualeditor-dialog-transclusion-template-title-nonexistent'
-				);
-			} else {
-				msg = mw.message(
-					'visualeditor-dialog-transclusion-absent-template',
-					templateLabel
-				);
-			}
-			this.$description
-				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.append( msg.parseDom() );
-		} else if ( !veConfig.transclusionDialogNewSidebar || this.spec.isDocumented() ) {
-			this.$description
-				.addClass( 've-ui-mwTemplatePage-description-missing' )
-				.append( mw.message(
-					'visualeditor-dialog-transclusion-no-template-description',
-					this.spec.getLabel(), link
-				).parseDom() );
+	var key,
+		messageStyle = 've-ui-mwTemplatePage-description-missing',
+		$addMessageHere = this.$description;
+	if ( this.spec.getDescription() ) {
+		key = !veConfig.transclusionDialogNewSidebar ?
+			'visualeditor-dialog-transclusion-more-template-description' :
+			'visualeditor-dialog-transclusion-see-template';
+		messageStyle = 've-ui-mwTemplatePage-description-extra';
+		$addMessageHere = $( '<span>' );
+		this.$description.append( $( '<hr>' ), $addMessageHere );
+	} else if ( !veConfig.transclusionDialogNewSidebar ) {
+		if ( knownAsMissing ) {
+			key = 'visualeditor-dialog-transclusion-absent-template';
+		} else if ( link ) {
+			key = 'visualeditor-dialog-transclusion-no-template-description';
 		}
-		ve.targetLinksToNewWindow( this.$description[ 0 ] );
-	} else if ( veConfig.transclusionDialogNewSidebar ) {
-		this.$description
-			.addClass( 've-ui-mwTemplatePage-description-missing' )
-			.append( mw.message( 'visualeditor-dialog-transclusion-template-title-invalid' ).parseDom() );
+		// Note this leaves dynamic template names like {{ {{foo}} }} without a message.
+	} else if ( !link || knownAsMissing ) {
+		var title;
+		try {
+			title = link && new mw.Title( link );
+		} catch ( e ) {
+		}
+		// When {{User:Foo}} can be parsed as "Foo", we know the ":" is not syntax.
+		key = title && title.getMain().indexOf( ':' ) === -1 ?
+			'visualeditor-dialog-transclusion-template-title-nonexistent' :
+			'visualeditor-dialog-transclusion-template-title-modifier';
+	} else if ( this.spec.isDocumented() ) {
+		key = 'visualeditor-dialog-transclusion-no-template-description';
 	}
+	// Note this leaves existing templates without TemplateData without a message, not even a link!
+
+	if ( key ) {
+		// The following classes are used here:
+		// * ve-ui-mwTemplatePage-description-extra
+		// * ve-ui-mwTemplatePage-description-missing
+		$addMessageHere.addClass( messageStyle )
+			// The following messages are used here:
+			// * visualeditor-dialog-transclusion-absent-template
+			// * visualeditor-dialog-transclusion-more-template-description
+			// * visualeditor-dialog-transclusion-no-template-description
+			// * visualeditor-dialog-transclusion-see-template
+			// * visualeditor-dialog-transclusion-template-title-modifier
+			// * visualeditor-dialog-transclusion-template-title-nonexistent
+			.append( mw.message( key, this.spec.getLabel(), link ).parseDom() );
+		ve.targetLinksToNewWindow( $addMessageHere[ 0 ] );
+	}
+
 	this.$description.find( 'a[href]' )
 		.on( 'click', function () {
 			ve.track( 'activity.transclusion', { action: 'template-doc-link-click' } );
@@ -107,7 +107,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.infoFieldset.$element
 		.append( this.$description );
 
-	if ( veConfig.transclusionDialogNewSidebar && !pageMissing ) {
+	if ( veConfig.transclusionDialogNewSidebar && !knownAsMissing ) {
 		var noticeWidget;
 
 		if ( !this.template.getSpec().getDocumentedParameterOrder().length ) {
