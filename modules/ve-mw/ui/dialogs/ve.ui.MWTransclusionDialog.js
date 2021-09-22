@@ -218,8 +218,7 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) 
 	this.bookletLayout.getOutlineControls().removeButton.toggle( !isLastPlaceholder );
 
 	if ( this.pocSidebar ) {
-		var partId = page.getName().split( '/', 1 )[ 0 ];
-		this.pocSidebar.selectPartById( partId );
+		this.pocSidebar.selectPartByPageName( page.getName() );
 	}
 };
 

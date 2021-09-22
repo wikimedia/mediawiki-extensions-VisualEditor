@@ -498,10 +498,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						filterPagesByName: 'onFilterPagesByName',
 						updateOutlineControlButtons: 'onUpdateOutlineControlButtons'
 					} );
-					this.bookletLayout.stackLayout.$element.on(
-						'focusin',
-						this.onBookletLayoutPageFocused.bind( this )
-					);
 				} else {
 					this.pocSidebar.clear();
 				}
@@ -627,7 +623,7 @@ ve.ui.MWTemplateDialog.prototype.onUpdateOutlineControlButtons = function ( page
 	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
 	// the "select" event. This will stop working when we disconnect the old sidebar.
 	this.bookletLayout.getOutline().items.forEach( function ( item ) {
-		// This repeats what ve.ui.MWTransclusionOutlineContainerWidget.selectPartById did, but for
+		// This repeats what ve.ui.MWTransclusionOutlineContainerWidget.selectPartByPageName did, but for
 		// the old sidebar
 		item.setSelected( item.getData() === pageName );
 	} );
@@ -643,7 +639,7 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 	if ( this.pocSidebar && pageName.indexOf( '/' ) === -1 ) {
 		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
 		//  is executed later than this here.
-		setTimeout( this.pocSidebar.selectPartById.bind( this.pocSidebar, pageName ) );
+		setTimeout( this.pocSidebar.selectPartByPageName.bind( this.pocSidebar, pageName ) );
 		this.bookletLayout.setPage( pageName );
 		// The .setPage() call above does not necessarily call .focus(). This forces it.
 		this.bookletLayout.focus();
@@ -651,22 +647,6 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 		this.bookletLayout.getOutline().selectItemByData( pageName );
 	} else {
 		this.bookletLayout.setPage( pageName );
-	}
-};
-
-/**
- * Modeled after {@see OO.ui.BookletLayout.onStackLayoutFocus}.
- *
- * @private
- * @param {jQuery.Event} e
- */
-ve.ui.MWTemplateDialog.prototype.onBookletLayoutPageFocused = function ( e ) {
-	var $focusedPage = $( e.target ).closest( '.oo-ui-pageLayout' );
-	for ( var pageName in this.bookletLayout.pages ) {
-		if ( this.bookletLayout.getPage( pageName ).$element[ 0 ] === $focusedPage[ 0 ] ) {
-			this.pocSidebar.highlightSubItemByPageName( pageName );
-			break;
-		}
 	}
 };
 
