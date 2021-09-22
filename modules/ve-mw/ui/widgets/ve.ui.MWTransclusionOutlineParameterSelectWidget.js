@@ -79,7 +79,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 };
 
 /**
- * @param {string} paramName
+ * @param {string} [paramName] Parameter name to highlight, without part ID.  Omit to unhighlight all.
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightParameter = function ( paramName ) {
 	var item = this.findItemFromData( paramName );
