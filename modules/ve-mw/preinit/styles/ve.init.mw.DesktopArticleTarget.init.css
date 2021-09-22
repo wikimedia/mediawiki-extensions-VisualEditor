@@ -73,6 +73,11 @@
 	cursor: pointer;
 }
 
+.ve-activated #catlinks:hover {
+	/* focusableNode highlight equivalent styling */
+	background: #e9f2fd;
+}
+
 .ve-activated #catlinks a {
 	opacity: 1;
 }
