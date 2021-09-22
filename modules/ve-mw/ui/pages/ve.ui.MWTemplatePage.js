@@ -78,10 +78,9 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		key = title && title.getMain().indexOf( ':' ) === -1 ?
 			'visualeditor-dialog-transclusion-template-title-nonexistent' :
 			'visualeditor-dialog-transclusion-template-title-modifier';
-	} else if ( this.spec.isDocumented() ) {
+	} else {
 		key = 'visualeditor-dialog-transclusion-no-template-description';
 	}
-	// Note this leaves existing templates without TemplateData without a message, not even a link!
 
 	if ( key ) {
 		// The following classes are used here:
