@@ -42,23 +42,45 @@ ve.ui.MWTransclusionOutlineButtonWidget.static.pressable = false;
 /* Events */
 
 /**
- * @event spacePressed
+ * @event keyPressed
+ * @param {number} key Typically one of the {@see OO.ui.Keys} constants
  */
 
 /**
  * @inheritDoc OO.ui.mixin.ButtonElement
- * @param {jQuery.Event} e Key press event
- * @fires spacePressed
+ * @param {jQuery.Event} e
+ * @fires keyPressed
  */
-ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyPress = function ( e ) {
-	if ( e.which === OO.ui.Keys.SPACE ) {
+ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
+	var withMetaKey = e.ctrlKey || e.metaKey;
+
+	if ( e.which === OO.ui.Keys.SPACE &&
+		!withMetaKey && !e.shiftKey && !e.altKey
+	) {
 		// We know we can only select another part, so don't even try to unselect this one
 		if ( !this.isSelected() ) {
-			this.emit( 'spacePressed' );
+			this.emit( 'keyPressed', e.which );
 		}
+		// The default behavior of pressing space is to scroll down
 		e.preventDefault();
+		return;
+	} else if ( ( e.which === OO.ui.Keys.UP || e.which === OO.ui.Keys.DOWN ) &&
+		withMetaKey && e.shiftKey &&
+		!e.altKey
+	) {
+		this.emit( 'keyPressed', e.which );
+		// TODO: Do we need e.preventDefault() and/or e.stopPropagation() here?
+		return;
+	} else if ( e.which === OO.ui.Keys.DELETE &&
+		withMetaKey &&
+		!e.shiftKey && !e.altKey
+	) {
+		this.emit( 'keyPressed', e.which );
+		// To not trigger the "clear cache" feature in Chrome we must do both
+		e.preventDefault();
+		e.stopPropagation();
 		return;
 	}
 
-	return OO.ui.mixin.ButtonElement.prototype.onKeyPress.call( this, e );
+	return OO.ui.mixin.ButtonElement.prototype.onKeyDown.call( this, e );
 };

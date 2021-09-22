@@ -19,6 +19,8 @@
  * @cfg {string} label
  */
 ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
+	this.part = part;
+
 	// Parent constructor
 	ve.ui.MWTransclusionOutlinePartWidget.super.call( this, ve.extendObject( config, {
 		classes: [ 've-ui-mwTransclusionOutlinePartWidget' ],
@@ -27,7 +29,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 
 	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
 		.connect( this, {
-			spacePressed: [ 'emit', 'transclusionPartSoftSelected', part.getId() ],
+			keyPressed: 'onHeaderKeyPressed',
 			click: 'onHeaderClick'
 		} );
 
@@ -58,6 +60,33 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
  */
 
 /* Methods */
+
+/**
+ * @private
+ * @param {number} key Note that some keys only make it here when Ctrl or Ctrl+Shift is pressed
+ * @fires transclusionPartSoftSelected
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderKeyPressed = function ( key ) {
+	switch ( key ) {
+		case OO.ui.Keys.SPACE:
+			this.emit( 'transclusionPartSoftSelected', this.getData() );
+			break;
+		case OO.ui.Keys.UP:
+		case OO.ui.Keys.DOWN:
+			// Modelled after {@see ve.ui.MWTransclusionDialog.onOutlineControlsMove}
+			var transclusion = this.part.getTransclusion(),
+				parts = transclusion.getParts(),
+				offset = key === OO.ui.Keys.UP ? -1 : 1,
+				newIndex = parts.indexOf( this.part ) + offset;
+			if ( newIndex >= 0 && newIndex < parts.length ) {
+				transclusion.addPart( this.part, newIndex );
+			}
+			break;
+		case OO.ui.Keys.DELETE:
+			this.part.remove();
+			break;
+	}
+};
 
 /**
  * @protected
