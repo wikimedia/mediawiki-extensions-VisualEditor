@@ -43,9 +43,9 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  */
 
 /**
- * @event updateOutlineControlButtons
- * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
- *  "part_1" or "part_1/param1".
+ * @event selectedTransclusionPartChanged
+ * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
+ *  "part_1".
  */
 
 /**
@@ -177,7 +177,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.selectPartByPageName = function ( pa
 	}
 
 	if ( changed ) {
-		this.emit( 'updateOutlineControlButtons', partId );
+		this.emit( 'selectedTransclusionPartChanged', partId );
 	}
 };
 

@@ -497,7 +497,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					this.pocSidebar.connect( this, {
 						focusPageByName: 'focusPart',
 						filterPagesByName: 'onFilterPagesByName',
-						updateOutlineControlButtons: 'onUpdateOutlineControlButtons'
+						selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
 					} );
 					this.bookletLayout.stackLayout.off( 'visibleItemChange' );
 				} else {
@@ -618,8 +618,8 @@ ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
 /**
  * @private
  */
-ve.ui.MWTemplateDialog.prototype.onUpdateOutlineControlButtons = function ( pageName ) {
-	var page = this.bookletLayout.getPage( pageName );
+ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( partId ) {
+	var page = this.bookletLayout.getPage( partId );
 	if ( page ) {
 		page.scrollElementIntoView();
 	}
@@ -629,7 +629,7 @@ ve.ui.MWTemplateDialog.prototype.onUpdateOutlineControlButtons = function ( page
 	this.bookletLayout.getOutline().items.forEach( function ( item ) {
 		// This repeats what ve.ui.MWTransclusionOutlineWidget.selectPartByPageName did, but for
 		// the old sidebar
-		item.setSelected( item.getData() === pageName );
+		item.setSelected( item.getData() === partId );
 	} );
 	this.bookletLayout.getOutlineControls().onOutlineChange();
 };
