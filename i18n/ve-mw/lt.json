@@ -265,7 +265,7 @@
 	"visualeditor-parameter-input-placeholder": "Lauko pavadinimas",
 	"visualeditor-parameter-search-more": "Rodyti {{PLURAL:$1|vienu lauku daugiau|$1 laukais daugiau}}",
 	"visualeditor-parameter-search-no-unused": "Jokių nepanaudotų laukų",
-	"visualeditor-parameter-search-unknown": "Nežinomas laukas",
+	"visualeditor-parameter-search-unknown": "(Nežinomas laukas)",
 	"visualeditor-preference-betatempdisable": "Laikinai išjungti vizualų redaktorių, kol jis bandomosios versijos",
 	"visualeditor-preference-core-description": "Įjungti vizualų redaktorių. Jis neveiks aptarimų puslapiuose ir kai kuriose kitose vardų srityse.",
 	"visualeditor-preference-core-label": "Vizualus redagavimas",

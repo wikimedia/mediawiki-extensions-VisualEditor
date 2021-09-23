@@ -240,7 +240,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "仍要继续",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "缺少必填的{{PLURAL:$1|字段}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "您确定在不填写$1{{PLURAL:$2|字段}}的情况下继续么？",
-	"visualeditor-dialog-transclusion-see-template": "模板是用户生成的，可能缺少完整的描述。在[[$1|模板页面]]上可能有其他信息。",
+	"visualeditor-dialog-transclusion-see-template": "模板是用户生成的，可能缺少完整的描述。在[[$2|模板页面]]上可能有其他信息。",
 	"visualeditor-dialog-transclusion-suggestedvalues-warning": "这不是建议值之一，可能不适用于该模板。",
 	"visualeditor-dialog-transclusion-title-insert-template": "插入模板",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "插入：$1",

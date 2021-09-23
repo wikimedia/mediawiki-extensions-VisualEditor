@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"DonCamillo"
+			"DonCamillo",
+			"Gwanki"
 		]
 	},
 	"tooltip-ca-ve-edit": "Gyara wannan shafi",
 	"visualeditor-ca-editsource": "Gyara masomi",
-	"visualeditor-ca-editsource-section": "Gyara masomin"
+	"visualeditor-ca-editsource-section": "Gyara masomin",
+	"visualeditor-dialog-transclusion-template-title-nonexistent": "Babu wannan samfurin.",
+	"visualeditor-dialog-transclusion-template-title-modifier": "Bayanan samfuri da [//www.mediawiki.org/wiki/Manual:Glossary#Parameter parameter] sunaye (idan akwai su) ba su samuwa lokacin gyara samfura ta amfani da masu gyara, kamar [//www.mediawiki.org/wiki/Help:Substitution subst]."
 }
