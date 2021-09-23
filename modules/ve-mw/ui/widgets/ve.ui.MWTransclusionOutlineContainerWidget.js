@@ -152,6 +152,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.addPartWidget = function ( 
  */
 ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = function ( pageName ) {
 	var partId = pageName.split( '/', 1 )[ 0 ],
+		isParameterId = pageName.length > partId.length,
 		changed = false;
 
 	for ( var id in this.partWidgets ) {
@@ -160,7 +161,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = func
 
 		if ( partWidget.isSelected() !== selected ) {
 			partWidget.setSelected( selected );
-			if ( selected ) {
+			if ( selected && !isParameterId ) {
 				partWidget.scrollElementIntoView();
 			}
 			changed = true;
@@ -168,7 +169,7 @@ ve.ui.MWTransclusionOutlineContainerWidget.prototype.selectPartByPageName = func
 
 		if ( selected &&
 			partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget &&
-			pageName.length > partId.length
+			isParameterId
 		) {
 			var paramName = pageName.slice( partId.length + 1 );
 			partWidget.highlightParameter( paramName );
