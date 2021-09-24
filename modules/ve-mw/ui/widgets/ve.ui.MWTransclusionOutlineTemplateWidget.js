@@ -121,7 +121,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
 };
 
 /**
- * @param {string} paramName
+ * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = function ( paramName ) {
 	this.parameters.highlightParameter( paramName );
@@ -142,7 +142,18 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onHeaderClick = function () 
 		}
 	}
 
-	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.onHeaderClick.apply( this, arguments );
+	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.onHeaderClick.call( this );
+};
+
+/**
+ * @inheritDoc
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setSelected = function ( state ) {
+	if ( !state && this.isSelected() ) {
+		this.parameters.highlightItem();
+	}
+
+	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.setSelected.call( this, state );
 };
 
 /**
