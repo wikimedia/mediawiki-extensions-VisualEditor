@@ -512,7 +512,9 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// Initialization
 			if ( !this.selectedNode ) {
 				if ( data.template ) {
-					// New specified template
+					// The template name is from MediaWiki:Visualeditor-cite-tool-definition.json,
+					// passed via a ve.ui.Command, which triggers a ve.ui.MWCitationAction, which
+					// executes ve.ui.WindowAction.open(), which opens this dialog.
 					var template = ve.dm.MWTemplateModel.newFromName(
 						this.transclusionModel, data.template
 					);
@@ -520,13 +522,13 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						this.initializeNewTemplateParameters.bind( this )
 					);
 				} else {
-					// New template placeholder
+					// Open the dialog to add a new template, always starting with a placeholder
 					promise = this.transclusionModel.addPart(
 						new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel )
 					);
 				}
 			} else {
-				// Load existing template
+				// Open the dialog to edit an existing template
 
 				// TODO tracking will only be implemented temporarily to answer questions on
 				// template usage for the Technical Wishes topic area see T258917
