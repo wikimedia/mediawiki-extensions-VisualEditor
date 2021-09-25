@@ -48,7 +48,7 @@ class ApiVisualEditorTest extends MediaWikiIntegrationTestCase {
 			'Foobar' => true,
 		] ] );
 		$this->assertSame(
-			[ 0, -1, null, 10, 11 ],
+			[ 0, -1, 10, 11 ],
 			ApiVisualEditor::getAvailableNamespaceIds( $config )
 		);
 	}
