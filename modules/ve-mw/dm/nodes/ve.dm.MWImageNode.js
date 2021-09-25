@@ -312,9 +312,8 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 			scalable.setEnforcedMax( false );
 		}
 	}
-	// TODO: Some day, when svgMaxSize works properly in MediaWiki
-	// we can add it back as max dimension consideration:
-	// mw.config.get( 'wgVisualEditorConfig' ).svgMaxSize
+	// TODO: Some day, when $wgSvgMaxSize works properly in MediaWiki
+	// we can add it back as max dimension consideration.
 };
 
 /**

@@ -1036,7 +1036,6 @@ class VisualEditorHooks {
 				$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
 			),
 			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
-			'svgMaxSize' => $coreConfig->get( 'SVGMaxSize' ),
 			'namespacesWithSubpages' => $coreConfig->get( 'NamespacesWithSubpages' ),
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
