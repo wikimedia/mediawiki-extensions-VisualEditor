@@ -11,6 +11,7 @@
 			"Renardo",
 			"Robin van der Vliet",
 			"Shirayuki",
+			"TMg",
 			"Yekrats",
 			"YvesNevelsteen"
 		]
@@ -173,7 +174,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "La kampo estas evitinda. $1",
 	"visualeditor-dialog-transclusion-loading": "Ŝarĝanta...",
 	"visualeditor-dialog-transclusion-more-template-description": "Eble estas pli da informo pri la ŝablono \"$1\" en [[{{ns:template}}:$1|ĝia paĝo]].",
-	"visualeditor-dialog-transclusion-no-template-description": "La ŝablono \"$1\" ne jam estas priskribita, sed eble estas iom da informo en la [[$1|paĝo de la ŝablono]].",
+	"visualeditor-dialog-transclusion-no-template-description": "La ŝablono \"$1\" ne jam estas priskribita, sed eble estas iom da informo en la [[$2|paĝo de la ŝablono]].",
 	"visualeditor-dialog-transclusion-options": "Opcioj",
 	"visualeditor-dialog-transclusion-param-default": "Defaŭlto: $1",
 	"visualeditor-dialog-transclusion-param-example": "Ekz.: $1",

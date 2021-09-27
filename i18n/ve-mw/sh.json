@@ -9,6 +9,7 @@
 			"Sf",
 			"Srdjan m",
 			"Srđan",
+			"TMg",
 			"Zoranzoki21"
 		]
 	},
@@ -149,7 +150,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Polje koje se više ne koristi",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Polje se više ne koristi. $1",
 	"visualeditor-dialog-transclusion-loading": "Učitavanje...",
-	"visualeditor-dialog-transclusion-no-template-description": "Šablon \"$1\" još uvijek nema opis, ali je moguće da postoje neke informacije na [[$1|stranici šablona]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablon \"$1\" još uvijek nema opis, ali je moguće da postoje neke informacije na [[$2|stranici šablona]].",
 	"visualeditor-dialog-transclusion-options": "Opcije",
 	"visualeditor-dialog-transclusion-param-default": "Zadana vrijednost: $1",
 	"visualeditor-dialog-transclusion-param-example": "Primjer vrijednosti: $1",

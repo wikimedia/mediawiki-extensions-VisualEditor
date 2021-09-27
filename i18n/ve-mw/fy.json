@@ -5,7 +5,8 @@
 			"PiefPafPier",
 			"Robin van der Vliet",
 			"Robin0van0der0vliet",
-			"Sjoerddebruin"
+			"Sjoerddebruin",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -166,7 +167,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "It fjild wurdt útfazearre. $1",
 	"visualeditor-dialog-transclusion-loading": "Laden ...",
 	"visualeditor-dialog-transclusion-more-template-description": "Der soe oanfoljende ynformaasje oer it berjocht \"$1\" stean kinne op 'e [[{{ns:template}}:$1|berjochtside]].",
-	"visualeditor-dialog-transclusion-no-template-description": "It berjocht \"$1\" hat noch gjin beskriuwing, mar der soe ynformaasje stean kinne op 'e [[$1|berjochtside]].",
+	"visualeditor-dialog-transclusion-no-template-description": "It berjocht \"$1\" hat noch gjin beskriuwing, mar der soe ynformaasje stean kinne op 'e [[$2|berjochtside]].",
 	"visualeditor-dialog-transclusion-options": "Opsjes",
 	"visualeditor-dialog-transclusion-param-default": "Standert: $1",
 	"visualeditor-dialog-transclusion-param-example": "bgl. $1",

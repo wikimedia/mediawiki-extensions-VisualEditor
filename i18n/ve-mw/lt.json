@@ -12,6 +12,7 @@
 			"Reedy",
 			"Robotukas11",
 			"Shirayuki",
+			"TMg",
 			"Tomasdd",
 			"Zygimantus"
 		]
@@ -167,7 +168,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Nebenaudotinas laukas",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Laukas yra nebenaudotinas. $1",
 	"visualeditor-dialog-transclusion-loading": "Įkeliama...",
-	"visualeditor-dialog-transclusion-no-template-description": "Šablonas \"$1\" kol kas neturi aprašymo, bet galite rasti informacijos [[$1|šablono puslapyje]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablonas \"$1\" kol kas neturi aprašymo, bet galite rasti informacijos [[$2|šablono puslapyje]].",
 	"visualeditor-dialog-transclusion-options": "Parinktys",
 	"visualeditor-dialog-transclusion-param-default": "Numatytoji: $1",
 	"visualeditor-dialog-transclusion-param-example": "pvz., $1",

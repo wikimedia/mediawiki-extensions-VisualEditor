@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"ChrisPtDe",
-			"Murma174"
+			"Murma174",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Di kweltekst faan detdiar sidj skriiw",
@@ -89,7 +90,7 @@
 	"visualeditor-dialog-transclusion-content": "Auersicht",
 	"visualeditor-dialog-transclusion-expand-options": "Mögelkhaiden wise",
 	"visualeditor-dialog-transclusion-loading": "Loose ...",
-	"visualeditor-dialog-transclusion-no-template-description": "Dü heest üüb detheer sidj det föörlaag „$1“ brükt. Detdiar föörlaag hää noch nian beskriiwang, man ferlicht stäänt wat üüb det [[$1|föörlaagensidj]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Dü heest üüb detheer sidj det föörlaag „$1“ brükt. Detdiar föörlaag hää noch nian beskriiwang, man ferlicht stäänt wat üüb det [[$2|föörlaagensidj]].",
 	"visualeditor-dialog-transclusion-options": "Iinstelangen",
 	"visualeditor-dialog-transclusion-placeholder": "Nei föörlaag",
 	"visualeditor-dialog-transclusion-remove-content": "Tekst wechnem",

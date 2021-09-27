@@ -3,7 +3,8 @@
 		"authors": [
 			"David1010",
 			"Narazeni",
-			"Silovan"
+			"Silovan",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "თე ხასჷლას წყუშ კოდიშ აკოქიმინუა",
@@ -129,7 +130,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "მოჯვეშაფილი ვე",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ვექ მიჯვეშუ. $1",
 	"visualeditor-dialog-transclusion-loading": "იხარგუაფუ...",
-	"visualeditor-dialog-transclusion-no-template-description": "თანგის „$1“ დიო ხოლო ვაუღუ ეჭარუა, მარა შილებე დოგორათ მუდგაინი ინფორმაცია [[$1|თანგიშ ხასჷლას]].",
+	"visualeditor-dialog-transclusion-no-template-description": "თანგის „$1“ დიო ხოლო ვაუღუ ეჭარუა, მარა შილებე დოგორათ მუდგაინი ინფორმაცია [[$2|თანგიშ ხასჷლას]].",
 	"visualeditor-dialog-transclusion-options": "პარამეტრეფი",
 	"visualeditor-dialog-transclusion-param-default": "დაჭყაფური: $1",
 	"visualeditor-dialog-transclusion-param-example": "შანულობაშ სამანგა: $1",

@@ -14,6 +14,7 @@
 			"Reception123",
 			"Stelistcristi",
 			"Strainu",
+			"TMg",
 			"Wintereu"
 		]
 	},
@@ -163,7 +164,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Câmpul este învechit. $1",
 	"visualeditor-dialog-transclusion-loading": "Se încarcă...",
 	"visualeditor-dialog-transclusion-more-template-description": "S-ar putea să fie niște informații adiționale despre formatul „$1” pe [[{{ns:template}}:$1|pagina sa]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Formatul „$1” nu are încă o descriere, dar ar putea exista câteva informații pe [[$1|pagina formatului]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Formatul „$1” nu are încă o descriere, dar ar putea exista câteva informații pe [[$2|pagina formatului]].",
 	"visualeditor-dialog-transclusion-options": "Opțiuni",
 	"visualeditor-dialog-transclusion-param-default": "Valoare implicită: $1",
 	"visualeditor-dialog-transclusion-param-example": "de exemplu $1",

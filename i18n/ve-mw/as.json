@@ -4,7 +4,8 @@
 			"Dibya Dutta",
 			"Gitartha.bordoloi",
 			"IKHazarika",
-			"Simbu123"
+			"Simbu123",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "ক'লাবপেড: $1",
@@ -167,7 +168,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ক্ষেত্ৰ অবচিত হৈছে। $1",
 	"visualeditor-dialog-transclusion-loading": "ল'ড হৈ আছে…",
 	"visualeditor-dialog-transclusion-more-template-description": "\"$1\" সাঁচটোৰ বিষয়ে [[{{ns:template}}:$1|ইয়াৰ পৃষ্ঠাত]] কিছু অতিৰিক্ত তথ্য থাকিব পাৰে।",
-	"visualeditor-dialog-transclusion-no-template-description": " \"$1\" সাঁচৰ এতিয়া ইয়াৰ কোনো বিৱৰণ নাই, কিন্তু [[$1|সাঁচৰ পৃষ্ঠাত]] অলপ তথ্য থাকিব পাৰে।",
+	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" সাঁচৰ এতিয়া ইয়াৰ কোনো বিৱৰণ নাই, কিন্তু [[$2|সাঁচৰ পৃষ্ঠাত]] অলপ তথ্য থাকিব পাৰে।",
 	"visualeditor-dialog-transclusion-options": "বিকল্পসমূহ",
 	"visualeditor-dialog-transclusion-param-default": "পূৰ্ববনিৰ্ধাৰিত: $1",
 	"visualeditor-dialog-transclusion-param-example": "উদাহৰণ: $1",

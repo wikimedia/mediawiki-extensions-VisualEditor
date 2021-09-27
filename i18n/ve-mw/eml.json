@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gloria sah",
-			"Lévi"
+			"Lévi",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Fà al côdis surzèia ed cla pàgina ché",
@@ -93,7 +94,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Càmp vèć",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Al càmp 'l è vèć. $1",
 	"visualeditor-dialog-transclusion-loading": "Drē a carghèr...",
-	"visualeditor-dialog-transclusion-no-template-description": "Al mudèl \"$1\" al gà mia incòra 'na spiegasiòun, mó prén èsregh soquânti infurmasiòun int la [[$1|pàgina dal mudèl]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Al mudèl \"$1\" al gà mia incòra 'na spiegasiòun, mó prén èsregh soquânti infurmasiòun int la [[$2|pàgina dal mudèl]].",
 	"visualeditor-dialog-transclusion-options": "Al sernidûri",
 	"visualeditor-dialog-transclusion-param-info": "Descrisiòun dal càmp",
 	"visualeditor-dialog-transclusion-param-info-missing": "A n'gh'è dispunìbil nisùna descrisiòun dal càmp",

@@ -15,6 +15,7 @@
 			"Nghtwlkr",
 			"Njardarlogar",
 			"Orf3us",
+			"TMg",
 			"Tarjeimo"
 		]
 	},
@@ -177,7 +178,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Feltet er utdatert. $1",
 	"visualeditor-dialog-transclusion-loading": "Laster…",
 	"visualeditor-dialog-transclusion-more-template-description": "Det kan være mer informasjon om malen «$1» på [[{{ns:template}}:$1|malsiden]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Malen «$1» har ingen beskrivelse enda, men det kan hende det finnes informasjon eller hjelp på [[$1|malsiden]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Malen «$1» har ingen beskrivelse enda, men det kan hende det finnes informasjon eller hjelp på [[$2|malsiden]].",
 	"visualeditor-dialog-transclusion-options": "Alternativer",
 	"visualeditor-dialog-transclusion-param-default": "Standard: $1",
 	"visualeditor-dialog-transclusion-param-example": "f.eks. $1",

@@ -31,5 +31,6 @@
 	"visualeditor-mwgallerydialog-classes-field-label": "CSS-luokah",
 	"visualeditor-mwgallerydialog-styles-field-label": "CSS-stiijlah",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Kielâ",
-	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kielah"
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kielah",
+	"visualeditor-savedialog-review-wikitext": "Wikitekstâ"
 }

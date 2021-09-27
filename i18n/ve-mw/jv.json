@@ -9,7 +9,8 @@
 			"Meursault2004",
 			"NoiX180",
 			"Pras",
-			"Sumbukompor"
+			"Sumbukompor",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -155,7 +156,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Babagan wis kadaluwarsa. $1",
 	"visualeditor-dialog-transclusion-loading": "Ngamot...",
 	"visualeditor-dialog-transclusion-more-template-description": "Bokmanawa ana katerangan tambahan ngenani cithakan \"$1\" ing [[{{ns:template}}:$1|kacané]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Cithakan \"$1\" durung ana wedharané, nanging mungkin ana sawenèh katerangan ing [[$1|kaca cithakané]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Cithakan \"$1\" durung ana wedharané, nanging mungkin ana sawenèh katerangan ing [[$2|kaca cithakané]].",
 	"visualeditor-dialog-transclusion-options": "Pilihan",
 	"visualeditor-dialog-transclusion-param-default": "Gawan: $1",
 	"visualeditor-dialog-transclusion-param-example": "conto $1",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lam-ang"
+			"Lam-ang",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Partuaten ti taudan a kodigo iti daytoy a panid",
@@ -142,7 +143,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Saanen a maus-usar a pagikabilan",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Nasukatanen ti pagikabilan. $1",
 	"visualeditor-dialog-transclusion-loading": "Agkarkarga...",
-	"visualeditor-dialog-transclusion-no-template-description": "Awan pay ti deskripsion ti plantilia ti \"$1\", ngem mabalin nga adda sangkabassit a pakaammo iti [[$1|panid ti plantilia]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Awan pay ti deskripsion ti plantilia ti \"$1\", ngem mabalin nga adda sangkabassit a pakaammo iti [[$2|panid ti plantilia]].",
 	"visualeditor-dialog-transclusion-options": "Dagiti pagpilian",
 	"visualeditor-dialog-transclusion-param-default": "Kasisigud: $1",
 	"visualeditor-dialog-transclusion-param-example": "kas ti $1",

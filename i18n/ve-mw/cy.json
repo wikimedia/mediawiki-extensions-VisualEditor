@@ -8,6 +8,7 @@
 			"Jdforrester",
 			"Lloffiwr",
 			"Robin Owain",
+			"TMg",
 			"ОйЛ"
 		]
 	},
@@ -120,7 +121,7 @@
 	"visualeditor-dialog-transclusion-content": "Cynnwys",
 	"visualeditor-dialog-transclusion-expand-options": "Dewisiadau...",
 	"visualeditor-dialog-transclusion-loading": "Llwytho...",
-	"visualeditor-dialog-transclusion-no-template-description": "Nid oes gan y \"$1\" templed disgrifiad, ond gallai fod rhywfaint o wybodaeth a roddir ar y dudalen y templed.",
+	"visualeditor-dialog-transclusion-no-template-description": "Nid oes gan y \"$1\" templed disgrifiad, ond gallai fod rhywfaint o wybodaeth a roddir ar y [[$2|dudalen y templed]].",
 	"visualeditor-dialog-transclusion-options": "Dewisiadau",
 	"visualeditor-dialog-transclusion-param-info": "Disgrifiad y maes",
 	"visualeditor-dialog-transclusion-param-info-missing": "Dim disgrifiad maes ar gael",

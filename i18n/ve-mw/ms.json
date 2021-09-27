@@ -7,7 +7,8 @@
 			"Jeluang Terluang",
 			"Karmadunya9-",
 			"Macofe",
-			"Pizza1016"
+			"Pizza1016",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -147,7 +148,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parameter telah dilupuskan. $1",
 	"visualeditor-dialog-transclusion-loading": "Memuatkan...",
 	"visualeditor-dialog-transclusion-more-template-description": "Mungkin ada maklumat tambahan tentang templat \"$1\" di [[{{ns:template}}:$1|halamannya]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Templat \"$1\" belum ada keterangan, tetapi mungkin ada maklumat di [[$1|halaman templat]] berkenaan.",
+	"visualeditor-dialog-transclusion-no-template-description": "Templat \"$1\" belum ada keterangan, tetapi mungkin ada maklumat di [[$2|halaman templat]] berkenaan.",
 	"visualeditor-dialog-transclusion-options": "Pilihan",
 	"visualeditor-dialog-transclusion-param-default": "Asali: $1",
 	"visualeditor-dialog-transclusion-param-example": "cth. $1",
