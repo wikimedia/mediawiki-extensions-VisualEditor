@@ -564,6 +564,15 @@
 	};
 
 	/**
+	 * @return {boolean} True if any transclusion part contains meaningful, non-default user input
+	 */
+	ve.dm.MWTransclusionModel.prototype.containsValuableData = function () {
+		return this.parts.some( function ( part ) {
+			return part.containsValuableData();
+		} );
+	};
+
+	/**
 	 * Resets the model's state.
 	 */
 	ve.dm.MWTransclusionModel.prototype.reset = function () {

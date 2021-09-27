@@ -422,7 +422,7 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'back' ) {
-		if ( !this.containsValuableData() ) {
+		if ( !this.transclusionModel.containsValuableData() ) {
 			return this.getActionProcess( 'reset' );
 		}
 		return new OO.ui.Process( function () {
@@ -508,15 +508,6 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 		.done( function () {
 			target.autoExpandSidebar();
 		} );
-};
-
-/**
- * @return {boolean} True if any transclusion part contains meaningful, non-default user input
- */
-ve.ui.MWTransclusionDialog.prototype.containsValuableData = function () {
-	return this.transclusionModel.getParts().some( function ( part ) {
-		return part.containsValuableData();
-	} );
 };
 
 /**
