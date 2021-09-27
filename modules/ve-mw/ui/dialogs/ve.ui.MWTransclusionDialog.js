@@ -84,6 +84,8 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	if ( this.useNewSidebar ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-newSidebar' );
 	}
+
+	this.$element.on( 'keydown', this.onKeyDown.bind( this ) );
 };
 
 /* Inheritance */
@@ -164,12 +166,14 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 };
 
 /**
- * Handle add template button click events.
+ * Create a new template part at the end of the transclusion.
  *
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.onAddTemplateButtonClick = function () {
+ve.ui.MWTransclusionDialog.prototype.addTemplatePlaceholder = function () {
 	this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
+	this.autoExpandSidebar();
+	this.bookletLayout.getOutlineControls().toggle( true );
 };
 
 /**
@@ -242,6 +246,32 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 	this.updateModeActionState();
 	this.updateActionSet();
+};
+
+/**
+ * @private
+ * @param {string} key
+ * @return {string}
+ */
+ve.ui.MWTransclusionDialog.prototype.getHotkeyCombo = function ( key ) {
+	return ( ve.getSystemPlatform() === 'mac' ? 'meta+' : 'ctrl+' ) + 'shift+' + key;
+};
+
+/**
+ * Handles key down events.
+ *
+ * @protected
+ * @param {jQuery.Event} e Key down event
+ */
+ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
+	var eventTrigger = new ve.ui.Trigger( e ).toString(),
+		addTemplateTrigger = this.getHotkeyCombo( 'e' );
+
+	if ( addTemplateTrigger === eventTrigger ) {
+		this.addTemplatePlaceholder();
+		e.preventDefault();
+		e.stopPropagation();
+	}
 };
 
 /**
@@ -570,7 +600,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	this.bookletLayout.connect( this, { set: 'onBookletLayoutSetPage' } );
 	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first()
 		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
-	this.addTemplateButton.connect( this, { click: 'onAddTemplateButtonClick' } );
+	this.addTemplateButton.connect( this, { click: 'addTemplatePlaceholder' } );
 	this.addContentButton.connect( this, { click: 'onAddContentButtonClick' } );
 	this.addParameterButton.connect( this, { click: 'onAddParameterButtonClick' } );
 	this.bookletLayout.getOutlineControls().connect( this, {
