@@ -82,6 +82,7 @@ OO.inheritClass( ve.ui.MWParameterPlaceholderPage, OO.ui.PageLayout );
 /**
  * Respond to the parameter search widget showAll event
  *
+ * @private
  * @fires showAll
  */
 ve.ui.MWParameterPlaceholderPage.prototype.onParameterShowAll = function () {
@@ -101,6 +102,10 @@ ve.ui.MWParameterPlaceholderPage.prototype.setupOutlineItem = function () {
 		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-add-param' ) );
 };
 
+/**
+ * @private
+ * @param {string} name
+ */
 ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name ) {
 	this.addParameterSearch.query.setValue( '' );
 
@@ -120,6 +125,9 @@ ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name )
 	} );
 };
 
+/**
+ * @private
+ */
 ve.ui.MWParameterPlaceholderPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
 };

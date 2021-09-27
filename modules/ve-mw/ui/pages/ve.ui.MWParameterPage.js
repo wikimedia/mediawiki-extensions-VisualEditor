@@ -285,6 +285,7 @@ ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
  * Create a value input widget based on the parameter type and whether it is
  * required or not.
  *
+ * @private
  * @return {OO.ui.InputWidget}
  */
 ve.ui.MWParameterPage.prototype.createValueInput = function () {
@@ -374,6 +375,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 /**
  * Whether or not to show suggested values for a given parameter type
  *
+ * @private
  * @param {string} type Parameter type
  * @return {boolean} True if suggested values should be shown
  */
@@ -394,6 +396,7 @@ ve.ui.MWParameterPage.prototype.containsSomeValue = function () {
 /**
  * Handle change events from the value input
  *
+ * @private
  * @param {string} value
  */
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
@@ -422,6 +425,8 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 
 /**
  * Handle click events from the remove button
+ *
+ * @private
  */
 ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 	this.parameter.remove();
@@ -429,6 +434,8 @@ ve.ui.MWParameterPage.prototype.onRemoveButtonClick = function () {
 
 /**
  * Handle click events from the raw fallback button
+ *
+ * @private
  */
 ve.ui.MWParameterPage.prototype.onRawFallbackButtonClick = function () {
 	this.valueInput.$element.detach();
@@ -447,6 +454,8 @@ ve.ui.MWParameterPage.prototype.onRawFallbackButtonClick = function () {
 
 /**
  * Handle click events from the add button
+ *
+ * @private
  */
 ve.ui.MWParameterPage.prototype.addPlaceholderParameter = function () {
 	var template = this.parameter.getTemplate();
@@ -456,6 +465,7 @@ ve.ui.MWParameterPage.prototype.addPlaceholderParameter = function () {
 /**
  * Handle click events from the label element
  *
+ * @private
  * @param {jQuery.Event} e Click event
  */
 ve.ui.MWParameterPage.prototype.onLabelClick = function () {

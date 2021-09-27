@@ -142,6 +142,9 @@ ve.ui.MWTemplatePlaceholderPage.prototype.setupOutlineItem = function () {
 		.setLabel( ve.msg( dialogTitle ) );
 };
 
+/**
+ * @inheritDoc OO.ui.PanelLayout
+ */
 ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
 	// The parent method would focus the first element, which might be the message widget
 	this.addTemplateInput.focus();
@@ -151,6 +154,9 @@ ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
 	this.addTemplateInput.lookupMenu.width = this.addTemplateInput.$input[ 0 ].clientWidth;
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	var transclusion = this.placeholder.getTransclusion(),
 		menu = this.addTemplateInput.getLookupMenu();
@@ -189,10 +195,16 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	}
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTemplatePlaceholderPage.prototype.onTemplateInputChange = function () {
 	this.addTemplateButton.setDisabled( this.addTemplateInput.getMWTitle() === null );
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTemplatePlaceholderPage.prototype.onRemoveButtonClick = function () {
 	this.placeholder.remove();
 };

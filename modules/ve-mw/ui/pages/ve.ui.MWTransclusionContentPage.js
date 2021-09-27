@@ -83,10 +83,16 @@ ve.ui.MWTransclusionContentPage.prototype.setupOutlineItem = function () {
 		.setLabel( ve.msg( 'visualeditor-dialog-transclusion-content' ) );
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTransclusionContentPage.prototype.onTextInputChange = function () {
 	this.content.setWikitext( this.textInput.getValue() );
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTransclusionContentPage.prototype.onRemoveButtonClick = function () {
 	this.content.remove();
 };
