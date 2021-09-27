@@ -41,7 +41,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		placeholder: ve.msg( 'visualeditor-dialog-transclusion-add-param-placeholder' )
 	} )
 		.connect( this, {
-			change: 'onParameterNameChanged',
+			change: 'updateParameterNameValidation',
 			enter: 'onParameterNameSubmitted'
 		} );
 	this.saveButton = new OO.ui.ButtonWidget( {
@@ -105,14 +105,14 @@ ve.ui.MWAddParameterPage.prototype.focus = function () {
  * @private
  */
 ve.ui.MWAddParameterPage.prototype.onTemplateParametersChanged = function () {
-	this.onParameterNameChanged( this.paramInputField.getValue() );
+	this.updateParameterNameValidation( this.paramInputField.getValue() );
 };
 
 /**
  * @private
  * @param {string} value
  */
-ve.ui.MWAddParameterPage.prototype.onParameterNameChanged = function ( value ) {
+ve.ui.MWAddParameterPage.prototype.updateParameterNameValidation = function ( value ) {
 	var paramName = value.trim(),
 		errors = this.getValidationErrors( paramName );
 
