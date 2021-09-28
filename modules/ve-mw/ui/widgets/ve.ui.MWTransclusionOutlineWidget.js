@@ -58,8 +58,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
 	if ( removed ) {
 		this.removePartWidget( removed );
 	}
-	// TODO: reselect if active part was in a removed template
-
 	if ( added ) {
 		this.addPartWidget( added, newPosition );
 	}

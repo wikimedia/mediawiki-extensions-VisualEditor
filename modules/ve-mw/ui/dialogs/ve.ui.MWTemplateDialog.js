@@ -499,6 +499,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						filterPagesByName: 'onFilterPagesByName',
 						selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
 					} );
+					// TODO: Remove when https://gerrit.wikimedia.org/r/723612 is part of MediaWiki
 					this.bookletLayout.stackLayout.off( 'visibleItemChange' );
 				} else {
 					this.pocSidebar.clear();
