@@ -2836,7 +2836,6 @@
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTransclusionOutlinePlaceholderWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTransclusionOutlineTemplateWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTransclusionOutlineWidget.test.js",
-			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTransclusionOutlineWikitextWidget.test.js",
 			"lib/ve/tests/ce/ve.ce.TestRunner.js",
 			"lib/ve/tests/ce/ve.ce.imetests.test.js",
 			"lib/ve/tests/ce/imetests/backspace-chromium-ubuntu-none.js",
