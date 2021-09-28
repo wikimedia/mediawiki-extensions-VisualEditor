@@ -1,29 +1,35 @@
 QUnit.module( 've.ui.MWAddParameterPage', ve.test.utils.mwEnvironment );
 
-QUnit.test( 'Input event handler', ( assert ) => {
+QUnit.test( 'Input event handlers', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
 		template = new ve.dm.MWTemplateModel( transclusion, {} ),
 		parameter = new ve.dm.MWParameterModel( template ),
 		page = new ve.ui.MWAddParameterPage( parameter );
 
 	page.paramInputField.setValue( ' ' );
+	assert.strictEqual( page.saveButton.isDisabled(), true, 'cannot click' );
 	page.onParameterNameSubmitted();
 	assert.deepEqual( template.getParameters(), {}, 'empty input is ignored' );
+	assert.strictEqual( page.paramInputField.getValue(), ' ', 'bad input is not cleared' );
 
 	page.paramInputField.setValue( ' p1 ' );
+	assert.strictEqual( page.saveButton.isDisabled(), false, 'can click' );
 	page.onParameterNameSubmitted();
 	assert.ok( template.hasParameter( 'p1' ), 'input is trimmed and parameter added' );
+	assert.strictEqual( page.paramInputField.getValue(), '', 'accepted input is cleared' );
 
 	template.getParameter( 'p1' ).setValue( 'not empty' );
 	page.paramInputField.setValue( 'p1' );
+	assert.strictEqual( page.saveButton.isDisabled(), true, 'cannot click' );
 	page.onParameterNameSubmitted();
-	assert.ok( template.getParameter( 'p1' ).getValue(), 'existing parameter is not replaced' );
+	assert.strictEqual( template.getParameter( 'p1' ).getValue(), 'not empty',
+		'existing parameter is not replaced' );
 
 	template.getSpec().setTemplateData( { params: { documented: {} } } );
 	page.paramInputField.setValue( 'documented' );
 	page.onParameterNameSubmitted();
 	assert.notOk( template.hasParameter( 'documented' ), 'documented parameter is not added' );
-
+	assert.strictEqual( page.paramInputField.getValue(), 'documented', 'bad input is not cleared' );
 } );
 
 QUnit.test( 'Outline item initialization', ( assert ) => {
