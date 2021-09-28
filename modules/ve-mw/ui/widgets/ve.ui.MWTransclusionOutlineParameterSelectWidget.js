@@ -169,6 +169,8 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 		case OO.ui.Keys.SPACE:
 			item = this.findHighlightedItem();
 			if ( item ) {
+				// Warning, this intentionally doesn't call .chooseItem() because we don't want this
+				// to fire a "choose" event!
 				if ( item.isSelected() ) {
 					this.unselectItem( item );
 				} else {
