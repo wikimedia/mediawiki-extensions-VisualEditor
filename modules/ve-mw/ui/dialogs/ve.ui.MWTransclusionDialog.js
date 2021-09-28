@@ -280,7 +280,7 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
 /**
  * Automatically expand or collapse the sidebar according to default logic.
  *
- * @private
+ * @protected
  */
 ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 	var expandSidebar;
