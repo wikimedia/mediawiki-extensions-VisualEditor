@@ -171,7 +171,7 @@
 	"visualeditor-dialog-transclusion-action-save": "שמירה",
 	"visualeditor-dialog-transclusion-absent-template": "התבנית \"$1\" עדיין לא קיימת.",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "התבנית הזאת אינה קיימת.",
-	"visualeditor-dialog-transclusion-template-title-modifier": "תיעוד התבנית ושמות ה[//www.mediawiki.org/wiki/Manual:Glossary#Parameter פרמטרים] (אם הם קיימים) אינם זמינים בעת עריכת תבניות שמשתמשות במאייכים, כגון [//www.mediawiki.org/wiki/Help:Substitution subst] (ס).",
+	"visualeditor-dialog-transclusion-template-title-modifier": "תיעוד התבנית ושמות ה[//www.mediawiki.org/wiki/Manual:Glossary#Parameter פרמטרים] (אם הם קיימים) אינם זמינים בעת עריכת תבניות שמשתמשות בתחביר מקונן או במאייכים, כגון [//www.mediawiki.org/wiki/Help:Substitution subst] (ס).",
 	"visualeditor-dialog-transclusion-add-content": "הוספת תוכן",
 	"visualeditor-dialog-transclusion-add-wikitext": "הוספת קוד ויקי",
 	"visualeditor-dialog-transclusion-add-param": "הוספת מידע",

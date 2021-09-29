@@ -172,7 +172,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Speichern",
 	"visualeditor-dialog-transclusion-absent-template": "Die Vorlage „$1“ ist noch nicht vorhanden.",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Diese Vorlage existiert nicht.",
-	"visualeditor-dialog-transclusion-template-title-modifier": "Vorlagendokumentation und [//www.mediawiki.org/wiki/Manual:Glossary#Parameter Parameter]-Namen (falls vorhanden) sind nicht verfügbar, wenn Vorlagen mit Modifikatoren wie [//www.mediawiki.org/wiki/Help:Substitution subst] bearbeitet werden.",
+	"visualeditor-dialog-transclusion-template-title-modifier": "Vorlagendokumentation und [//www.mediawiki.org/wiki/Manual:Glossary#Parameter Parameter]-Namen (falls vorhanden) sind nicht verfügbar, wenn Vorlagen unter Verwendung einer verschachtelten Syntax oder mit Modifikatoren wie [//www.mediawiki.org/wiki/Help:Substitution subst] bearbeitet werden.",
 	"visualeditor-dialog-transclusion-add-content": "Inhalt hinzufügen",
 	"visualeditor-dialog-transclusion-add-wikitext": "Wikitext hinzufügen",
 	"visualeditor-dialog-transclusion-add-param": "Weitere Informationen hinzufügen",
