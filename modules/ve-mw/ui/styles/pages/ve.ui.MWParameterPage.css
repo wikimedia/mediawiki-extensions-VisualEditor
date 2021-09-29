@@ -43,8 +43,8 @@
 	position: relative;
 }
 
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-expandableContent-container {
-	right: 0;
+.ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
+	right: 2.5em;
 }
 
 .ve-ui-mwParameterPage-undocumentedLabel {
