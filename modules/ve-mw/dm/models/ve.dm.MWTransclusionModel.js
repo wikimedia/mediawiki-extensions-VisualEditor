@@ -290,8 +290,6 @@
 				if (
 					// Skip titles that don't have a resolvable href
 					mwTitle &&
-					// Skip titles outside the template namespace
-					mwTitle.namespace === templateNamespaceId &&
 					// Skip already cached data
 					!hasOwn.call( specCache, title ) &&
 					// Skip duplicate titles in the same batch
