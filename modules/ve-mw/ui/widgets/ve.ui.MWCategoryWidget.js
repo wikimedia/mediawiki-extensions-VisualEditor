@@ -181,6 +181,7 @@ ve.ui.MWCategoryWidget.prototype.onDrag = function () {
 
 /**
  * @inheritdoc OO.ui.mixin.DraggableGroupElement
+ * @fires newCategory
  */
 ve.ui.MWCategoryWidget.prototype.reorder = function ( item, newIndex ) {
 	// Compute beforeCategory before removing, otherwise newIndex
@@ -208,6 +209,7 @@ ve.ui.MWCategoryWidget.prototype.onRemoveCategory = function ( name ) {
  *
  * @param {string} name
  * @param {string} value
+ * @fires updateSortkey
  */
 ve.ui.MWCategoryWidget.prototype.onUpdateSortkey = function ( name, value ) {
 	this.categories[ name ].sortKey = value;
