@@ -79,7 +79,7 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 	[ 'part_1/foo', null ],
 	[ 'part_0/foo/bar', 'foo/bar' ]
 ].forEach( ( [ pageName, expected ] ) =>
-	QUnit.test( 'selectPartByPageName: ' + pageName, ( assert ) => {
+	QUnit.test( 'setSelectionByPageName: ' + pageName, ( assert ) => {
 		const transclusion = new ve.dm.MWTransclusionModel(),
 			template = new ve.dm.MWTemplateModel( transclusion, {} ),
 			partWidget = new ve.ui.MWTransclusionOutlineTemplateWidget( template ),
@@ -93,7 +93,7 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 			actual = paramName;
 		};
 
-		widget.selectPartByPageName( pageName );
+		widget.setSelectionByPageName( pageName );
 		assert.strictEqual( actual, expected );
 	} )
 );

@@ -630,7 +630,7 @@ ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( 
 	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
 	// the "select" event. This will stop working when we disconnect the old sidebar.
 	this.bookletLayout.getOutline().items.forEach( function ( item ) {
-		// This repeats what ve.ui.MWTransclusionOutlineWidget.selectPartByPageName did, but for
+		// This repeats what ve.ui.MWTransclusionOutlineWidget.setSelectionByPageName did, but for
 		// the old sidebar
 		item.setSelected( item.getData() === partId );
 	} );
@@ -646,7 +646,7 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 	if ( this.pocSidebar && pageName.indexOf( '/' ) === -1 ) {
 		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
 		//  is executed later than this here.
-		setTimeout( this.pocSidebar.selectPartByPageName.bind( this.pocSidebar, pageName ) );
+		setTimeout( this.pocSidebar.setSelectionByPageName.bind( this.pocSidebar, pageName ) );
 		this.bookletLayout.setPage( pageName );
 		// The .setPage() call above does not necessarily call .focus(). This forces it.
 		this.bookletLayout.focus();
