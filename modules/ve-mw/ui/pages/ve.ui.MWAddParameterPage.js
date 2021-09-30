@@ -122,6 +122,7 @@ ve.ui.MWAddParameterPage.prototype.updateParameterNameValidation = function ( va
 
 /**
  * @private
+ * @fires focusTemplateParameterById
  */
 ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	var name = this.paramInputField.getValue().trim();

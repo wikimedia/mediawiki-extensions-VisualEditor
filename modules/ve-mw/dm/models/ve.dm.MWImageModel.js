@@ -1040,6 +1040,7 @@ ve.dm.MWImageModel.prototype.setSizeType = function ( type ) {
  * @see #getAlignment
  *
  * @param {string} align Alignment
+ * @fires alignmentChange
  */
 ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
 	if ( align === 'default' ) {
@@ -1057,6 +1058,7 @@ ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
  * @see #getVerticalAlignment
  *
  * @param {string} valign Alignment
+ * @fires alignmentChange
  */
 ve.dm.MWImageModel.prototype.setVerticalAlignment = function ( valign ) {
 	this.verticalAlignment = valign;

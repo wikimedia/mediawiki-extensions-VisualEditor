@@ -602,6 +602,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
  * @param {boolean} wasRetry Whether this was a retry after a 'badtoken' error
  * @param {string} code Error code
  * @param {Object|null} data Full API response data, or XHR error details
+ * @fires saveError
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, code, data ) {
 	var name, handler, i, error, errorCodes,

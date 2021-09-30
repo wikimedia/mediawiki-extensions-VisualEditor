@@ -105,6 +105,7 @@ ve.ui.MWParameterPlaceholderPage.prototype.setupOutlineItem = function () {
 /**
  * @private
  * @param {string} name
+ * @fires focusTemplateParameterById
  */
 ve.ui.MWParameterPlaceholderPage.prototype.onParameterChoose = function ( name ) {
 	this.addParameterSearch.query.setValue( '' );

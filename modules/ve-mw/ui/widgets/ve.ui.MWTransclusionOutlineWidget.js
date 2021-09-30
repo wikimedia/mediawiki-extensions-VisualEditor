@@ -148,6 +148,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
  * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
  *
  * @param {string} pageName
+ * @fires selectedTransclusionPartChanged
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.selectPartByPageName = function ( pageName ) {
 	var partId = pageName.split( '/', 1 )[ 0 ],

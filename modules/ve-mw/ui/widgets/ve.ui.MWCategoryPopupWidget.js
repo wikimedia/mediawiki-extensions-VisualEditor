@@ -124,6 +124,7 @@ ve.ui.MWCategoryPopupWidget.prototype.openPopup = function ( item ) {
  * Handle popup toggle events.
  *
  * @param {boolean} show Widget is being made visible
+ * @fires updateSortkey
  */
 ve.ui.MWCategoryPopupWidget.prototype.onToggle = function ( show ) {
 	var newSortkey;

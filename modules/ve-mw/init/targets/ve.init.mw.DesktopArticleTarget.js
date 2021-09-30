@@ -1148,6 +1148,8 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
 
 /**
  * Page modifications for switching to edit mode.
+ *
+ * @fires transformPage
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	var $content;
@@ -1245,6 +1247,8 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 
 /**
  * Page modifications for switching back to view mode.
+ *
+ * @fires restorePage
  */
 ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	var uri, keys, fragment, target;
