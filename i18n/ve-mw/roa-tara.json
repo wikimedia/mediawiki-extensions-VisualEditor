@@ -166,7 +166,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Cambe deprecate",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "'U cambe jè deprecate: $1",
 	"visualeditor-dialog-transclusion-loading": "Stoche a careche…",
-	"visualeditor-dialog-transclusion-more-template-description": "Pò essere ca stonne cchiù 'mbormaziune sus a 'u template \"$1\" jndr'à [[{{ns:template}}:$1|pàgena soje]].",
+	"visualeditor-dialog-transclusion-more-template-description": "Pò essere ca stonne cchiù 'mbormaziune sus a 'u template \"$1\" jndr'à [[$2|pàgena soje]].",
 	"visualeditor-dialog-transclusion-no-template-description": "'U template \"$1\" non ge tène angore 'na descrizione, ma pò essere ca stonne de le 'mbormaziune sus ' a [[$2|pàgene d'u template]].",
 	"visualeditor-dialog-transclusion-options": "Opziune",
 	"visualeditor-dialog-transclusion-param-default": "Predefinite: $1",
