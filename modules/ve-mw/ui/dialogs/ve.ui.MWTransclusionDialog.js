@@ -218,7 +218,7 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) 
 	this.bookletLayout.getOutlineControls().removeButton.toggle( !isLastPlaceholder );
 
 	if ( this.pocSidebar ) {
-		this.pocSidebar.selectPartByPageName( page.getName() );
+		this.pocSidebar.setSelectionByPageName( page.getName() );
 	}
 };
 
@@ -337,7 +337,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
 			setTimeout( function () {
 				if ( expandSidebar ) {
-					dialog.pocSidebar.selectPartByPageName( name );
+					dialog.pocSidebar.setSelectionByPageName( name );
 				} else {
 					selectedPage.scrollElementIntoView();
 					// TODO: Find a reliable way to refocus.

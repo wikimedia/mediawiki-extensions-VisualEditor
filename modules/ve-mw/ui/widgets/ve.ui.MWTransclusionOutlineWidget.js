@@ -132,7 +132,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 	}
 
 	widget.connect( this, {
-		transclusionPartSoftSelected: 'selectPartByPageName',
+		transclusionPartSoftSelected: 'setSelectionByPageName',
 		transclusionPartSelected: 'onTransclusionPartSelected'
 	} );
 
@@ -150,7 +150,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
  * @param {string} pageName
  * @fires selectedTransclusionPartChanged
  */
-ve.ui.MWTransclusionOutlineWidget.prototype.selectPartByPageName = function ( pageName ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( pageName ) {
 	var partId = pageName.split( '/', 1 )[ 0 ],
 		isParameterId = pageName.length > partId.length,
 		changed = false;
