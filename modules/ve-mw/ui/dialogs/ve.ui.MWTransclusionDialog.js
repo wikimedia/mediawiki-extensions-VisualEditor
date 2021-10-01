@@ -236,13 +236,12 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	if ( parts.length === 0 ) {
 		this.addParameterButton.setDisabled( true );
 		this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
+		if ( this.isNarrowScreen() ) {
+			this.toggleSidebar( false );
+		}
 	}
 
 	this.multipartMessage.toggle( parts.length > 1 && this.useNewSidebar );
-
-	if ( this.isNarrowScreen() && this.isSingleTemplatePlaceholder() ) {
-		this.toggleSidebar( false );
-	}
 
 	this.updateModeActionState();
 	this.updateActionSet();
@@ -296,9 +295,8 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () 
 ve.ui.MWTransclusionDialog.prototype.isSingleTemplatePlaceholder = function () {
 	var parts = this.transclusionModel && this.transclusionModel.getParts();
 
-	return parts && parts.length === 1 && (
-		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
-	);
+	return this.isSingleTemplateTransclusion() &&
+		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel;
 };
 
 /**
@@ -417,8 +415,7 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts(),
-		isExpanded = this.isSidebarExpanded,
+	var isExpanded = this.isSidebarExpanded,
 		label = ve.msg( isExpanded ?
 			'visualeditor-dialog-transclusion-collapse-options' :
 			'visualeditor-dialog-transclusion-expand-options' );
@@ -428,18 +425,13 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 		action.$button.attr( 'aria-expanded', isExpanded ? 1 : 0 );
 	} );
 
-	// Decide whether the button should be enabled or not. It needs to be:
-	// * disabled when we're in the initial add-new-template phase, because it's
-	//   meaningless
-	// * disabled if we're in a multi-part transclusion, because the sidebar's
-	//   forced open (this does not apply when using the new sidebar)
-	// * enabled if we're in a single-part transclusion, because the sidebar's
-	//   closed but can be opened to add more parts
-	if ( parts ) {
-		var canCollapse = !( this.isSingleTemplatePlaceholder() ) &&
-				( this.useInlineDescriptions || this.isSingleTemplateTransclusion() );
-		this.actions.setAbilities( { mode: canCollapse } );
-	}
+	// Old sidebar: Only a single template can be collapsed, except it's still the initial
+	// placeholder.
+	// New sidebar: The button is only visible on very narrow screens, {@see autoExpandSidebar}.
+	// It's always needed, except in the initial placeholder state.
+	var canCollapse = ( this.isSingleTemplateTransclusion() || this.useInlineDescriptions ) &&
+		!this.isSingleTemplatePlaceholder();
+	this.actions.setAbilities( { mode: canCollapse } );
 };
 
 /**
