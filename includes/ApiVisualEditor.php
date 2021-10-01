@@ -611,33 +611,29 @@ class ApiVisualEditor extends ApiBase {
 	 * @return bool
 	 */
 	public static function isAllowedNamespace( Config $config, $namespaceId ) {
-		$availableNamespaces = self::getAvailableNamespaceIds( $config );
-		return in_array( $namespaceId, $availableNamespaces );
+		return in_array( $namespaceId, self::getAvailableNamespaceIds( $config ) );
 	}
 
 	/**
 	 * Get a list of allowed namespace IDs
 	 *
 	 * @param Config $config
-	 * @return array
+	 * @return int[]
 	 */
 	public static function getAvailableNamespaceIds( Config $config ) {
-		$availableNamespaces =
-			// Note: existing numeric keys might exist, and so array_merge cannot be used
-			(array)$config->get( 'VisualEditorAvailableNamespaces' ) +
-			(array)ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' );
-		$namespaceIds = array_values( array_unique( array_map( static function ( $namespace ) {
+		$namespaceInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
+		$configuredNamespaces = array_replace(
+			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' ),
+			$config->get( 'VisualEditorAvailableNamespaces' )
+		);
+		$normalized = [];
+		foreach ( $configuredNamespaces as $id => $enabled ) {
 			// Convert canonical namespace names to IDs
-			$nsInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
-			$idFromName = $nsInfo->getCanonicalIndex( strtolower( $namespace ) );
-			if ( $idFromName !== null ) {
-				return $idFromName;
-			}
-			// Allow namespaces to be specified by ID as well
-			return $nsInfo->exists( $namespace ) ? $namespace : null;
-		}, array_keys( array_filter( $availableNamespaces ) ) ) ) );
-		// Remove `null` if there were any namespaces that didn't exist, T291728
-		return array_values( array_diff( $namespaceIds, [ null ] ) );
+			$id = $namespaceInfo->getCanonicalIndex( strtolower( $id ) ) ?? $id;
+			$normalized[$id] = $enabled && $namespaceInfo->exists( $id );
+		}
+		ksort( $normalized );
+		return array_keys( array_filter( $normalized ) );
 	}
 
 	/**
@@ -652,8 +648,7 @@ class ApiVisualEditor extends ApiBase {
 			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
 			$config->get( 'VisualEditorAvailableContentModels' )
 		);
-		return isset( $availableContentModels[$contentModel] ) &&
-			$availableContentModels[$contentModel];
+		return (bool)( $availableContentModels[$contentModel] ?? false );
 	}
 
 	/**
