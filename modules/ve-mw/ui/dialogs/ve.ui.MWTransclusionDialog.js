@@ -236,6 +236,10 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 	this.multipartMessage.toggle( parts.length > 1 && this.useNewSidebar );
 
+	if ( this.isNarrowScreen() && this.isSingleTemplatePlaceholder() ) {
+		this.toggleSidebar( false );
+	}
+
 	this.updateModeActionState();
 	this.updateActionSet();
 };
@@ -250,6 +254,19 @@ ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () 
 
 	return parts && parts.length === 1 && (
 		parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
+		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
+	);
+};
+
+/**
+ * @private
+ * @return {boolean} True if the dialog contains a single template placeholder. False otherwise.
+ * Also false if there is no data model connected yet.
+ */
+ve.ui.MWTransclusionDialog.prototype.isSingleTemplatePlaceholder = function () {
+	var parts = this.transclusionModel && this.transclusionModel.getParts();
+
+	return parts && parts.length === 1 && (
 		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
 	);
 };
@@ -389,7 +406,7 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	// * enabled if we're in a single-part transclusion, because the sidebar's
 	//   closed but can be opened to add more parts
 	if ( parts ) {
-		var canCollapse = !( parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel ) &&
+		var canCollapse = !( this.isSingleTemplatePlaceholder() ) &&
 				( this.useInlineDescriptions || this.isSingleTemplateTransclusion() );
 		this.actions.setAbilities( { mode: canCollapse } );
 	}
