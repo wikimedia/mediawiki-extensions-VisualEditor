@@ -157,7 +157,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Salva",
 	"visualeditor-dialog-transclusion-absent-template": "El model \"$1\" a l'esist nancamò.",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Quell modell chì l'esista minga",
-	"visualeditor-dialog-transclusion-template-title-modifier": "La documentazzion del modell e [//www.mediawiki.org/wiki/Manual:Glossary#Parameter parameter] nomm (se i esisten) a inn minga disponibel in del modifegà i modei per mez di modificator, compagn de [//www.mediawiki.org/wiki/Help:Substitution subst].",
+	"visualeditor-dialog-transclusion-template-title-modifier": "La documentazzion del modell e [//www.mediawiki.org/wiki/Manual:Glossary#Parameter parameter] nom (se i esisten) a inn minga disponibel quand che se modifeghen i modei per mez de la sintassi \"vun denter l'alter\" o i modificator, compagn de [//www.mediawiki.org/wiki/Help:Substitution subst].",
 	"visualeditor-dialog-transclusion-add-content": "Sgiontegh del test",
 	"visualeditor-dialog-transclusion-add-wikitext": "Sgionta del wiki-test",
 	"visualeditor-dialog-transclusion-add-param": "Sgionta di alter informazzion",
