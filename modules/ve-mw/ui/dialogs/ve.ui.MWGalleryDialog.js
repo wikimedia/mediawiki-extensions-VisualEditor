@@ -119,7 +119,7 @@ ve.ui.MWGalleryDialog.static.getImportRules = function () {
  */
 ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	var imagesTabPanel, optionsTabPanel,
-		imageListMenuLayout, imageListMenuPanel, imageListContentPanel,
+		imageListMenuPanel, imageListContentPanel,
 		modeField, captionField, widthsField, heightsField,
 		perrowField, showFilenameField, classesField, stylesField,
 		highlightedCaptionField, highlightedCaptionFieldset,
@@ -166,7 +166,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		padded: true,
 		expanded: true
 	} );
-	imageListMenuLayout = new OO.ui.MenuLayout( {
+	this.imageListMenuLayout = new OO.ui.MenuLayout( {
 		menuPosition: this.isMobile ? 'after' : 'bottom',
 		classes: [
 			've-ui-mwGalleryDialog-imageListMenuLayout',
@@ -198,7 +198,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 				've-ui-mwGalleryDialog-menuLayout-mobile' :
 				've-ui-mwGalleryDialog-menuLayout-desktop'
 		],
-		menuPanel: imageListMenuLayout,
+		menuPanel: this.imageListMenuLayout,
 		contentPanel: this.editSearchStack
 	} );
 
@@ -449,7 +449,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			// ...Otherwise show the search panel
 			} else {
 				this.toggleEmptyGalleryMessage( true );
-				this.showSearchPanelButton.toggle( false );
 				this.toggleSearchPanel( true );
 			}
 
@@ -687,7 +686,6 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 	// Gallery is no longer empty
 	this.updateActions();
 	this.toggleEmptyGalleryMessage( false );
-	this.showSearchPanelButton.toggle( true );
 };
 
 /**
@@ -779,7 +777,6 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	if ( !item ) {
 		// Show the search panel if the gallery is empty
 		this.toggleEmptyGalleryMessage( true );
-		this.showSearchPanelButton.toggle( false );
 		this.toggleSearchPanel( true );
 		return;
 	}
@@ -856,6 +853,12 @@ ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 
 	// Toggle the search panel, and do the opposite for the edit panel
 	this.editSearchStack.setItem( visible ? this.searchPanel : this.editPanel );
+
+	this.imageListMenuLayout.toggleMenu( !visible );
+	if ( this.highlightedItem && visible ) {
+		this.highlightedItem.toggleHighlighted( false );
+		this.highlightedItem = null;
+	}
 
 	// If the edit panel is visible, focus the caption target
 	if ( !visible ) {
