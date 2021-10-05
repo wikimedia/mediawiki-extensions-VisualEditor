@@ -53,6 +53,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	this.resetConfirmationResetButton.connect( this, {
 		click: 'resetConfirmationReset'
 	} );
+	this.setupHotkeyTriggers();
 
 	// Initialization
 	this.resetConfirmation.addItems( [
@@ -181,8 +182,10 @@ ve.ui.MWTransclusionDialog.prototype.addTemplatePlaceholder = function () {
  *
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
+ve.ui.MWTransclusionDialog.prototype.addContent = function () {
 	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusionModel ) );
+	this.autoExpandSidebar();
+	this.bookletLayout.getOutlineControls().toggle( true );
 };
 
 /**
@@ -190,7 +193,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddContentButtonClick = function () {
  *
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
+ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
 	var partId = this.findSelectedPartId();
 	if ( !partId ) {
 		return;
@@ -204,6 +207,7 @@ ve.ui.MWTransclusionDialog.prototype.onAddParameterButtonClick = function () {
 	// TODO: Use a distinct class for placeholder model rather than
 	// these magical "empty" constants.
 	part.addParameter( new ve.dm.MWParameterModel( part ) );
+	this.autoExpandSidebar();
 };
 
 /**
@@ -257,17 +261,34 @@ ve.ui.MWTransclusionDialog.prototype.getHotkeyCombo = function ( key ) {
 };
 
 /**
+ * @private
+ */
+ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
+	var context = this;
+
+	this.hotkeyTriggers = {};
+	this.hotkeyTriggers[ this.getHotkeyCombo( 'e' ) ] = function () {
+		context.addTemplatePlaceholder();
+	};
+	this.hotkeyTriggers[ this.getHotkeyCombo( 'y' ) ] = function () {
+		context.addContent();
+	};
+	this.hotkeyTriggers[ this.getHotkeyCombo( 'u' ) ] = function () {
+		context.addParameter();
+	};
+};
+
+/**
  * Handles key down events.
  *
  * @protected
  * @param {jQuery.Event} e Key down event
  */
 ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
-	var eventTrigger = new ve.ui.Trigger( e ).toString(),
-		addTemplateTrigger = this.getHotkeyCombo( 'e' );
+	var eventTrigger = new ve.ui.Trigger( e ).toString();
 
-	if ( addTemplateTrigger === eventTrigger ) {
-		this.addTemplatePlaceholder();
+	if ( this.hotkeyTriggers[ eventTrigger ] ) {
+		this.hotkeyTriggers[ eventTrigger ]();
 		e.preventDefault();
 		e.stopPropagation();
 	}
@@ -593,8 +614,8 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first()
 		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
 	this.addTemplateButton.connect( this, { click: 'addTemplatePlaceholder' } );
-	this.addContentButton.connect( this, { click: 'onAddContentButtonClick' } );
-	this.addParameterButton.connect( this, { click: 'onAddParameterButtonClick' } );
+	this.addContentButton.connect( this, { click: 'addContent' } );
+	this.addParameterButton.connect( this, { click: 'addParameter' } );
 	this.bookletLayout.getOutlineControls().connect( this, {
 		move: 'onOutlineControlsMove',
 		remove: 'onOutlineControlsRemove'
