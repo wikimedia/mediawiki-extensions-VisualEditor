@@ -295,32 +295,6 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
 };
 
 /**
- * @private
- * @return {boolean} True if the dialog contains a single template or template placeholder. False
- *  otherwise. Also false if there is no data model connected yet.
- */
-ve.ui.MWTransclusionDialog.prototype.isSingleTemplateTransclusion = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts();
-
-	return parts && parts.length === 1 && (
-		parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
-		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
-	);
-};
-
-/**
- * @private
- * @return {boolean} True if the dialog contains a single template placeholder. False otherwise.
- * Also false if there is no data model connected yet.
- */
-ve.ui.MWTransclusionDialog.prototype.isSingleTemplatePlaceholder = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts();
-
-	return this.isSingleTemplateTransclusion() &&
-		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel;
-};
-
-/**
  * @return {string|undefined}
  */
 ve.ui.MWTransclusionDialog.prototype.findSelectedPartId = function () {
@@ -520,8 +494,7 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 
 	if ( this.useBackButton ) {
 		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
-			parts = this.transclusionModel && this.transclusionModel.getParts(),
-			isInitialPage = parts && parts.length === 1 && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
+			isInitialPage = this.isSingleTemplatePlaceholder(),
 			isInsertMode = this.getMode() === 'insert',
 			isUsingClose = !isInsertMode || isInitialPage;
 

@@ -68,6 +68,10 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
+			if ( this.isSingleTemplatePlaceholder() ) {
+				this.bookletLayout.focus( 1 );
+			}
+
 			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
 				if ( page instanceof ve.ui.MWParameterPage ) {
 					page.updateSize();
@@ -268,11 +272,38 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
  * @private
  */
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts(),
-		startsWithPlaceholder = parts && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
-		canSave = !startsWithPlaceholder;
+	this.actions.setAbilities( { done: !this.startsWithPlaceholder() && this.altered } );
+};
 
-	this.actions.setAbilities( { done: canSave && this.altered } );
+/**
+ * @return {boolean} True if the dialog starts with a template placeholder. False otherwise.
+ * Also false if there is no data model connected yet.
+ */
+ve.ui.MWTemplateDialog.prototype.startsWithPlaceholder = function () {
+	var parts = this.transclusionModel && this.transclusionModel.getParts();
+
+	return parts && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel;
+};
+
+/**
+ * @return {boolean} True if the dialog contains a single template or template placeholder. False
+ *  otherwise. Also false if there is no data model connected yet.
+ */
+ve.ui.MWTemplateDialog.prototype.isSingleTemplateTransclusion = function () {
+	var parts = this.transclusionModel && this.transclusionModel.getParts();
+
+	return parts && parts.length === 1 && (
+		parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
+		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
+	);
+};
+
+/**
+ * @return {boolean} True if the dialog contains a single template placeholder. False otherwise.
+ * Also false if there is no data model connected yet.
+ */
+ve.ui.MWTemplateDialog.prototype.isSingleTemplatePlaceholder = function () {
+	return this.isSingleTemplateTransclusion() && this.startsWithPlaceholder();
 };
 
 /**
