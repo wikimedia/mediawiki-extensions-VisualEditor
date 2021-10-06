@@ -208,6 +208,7 @@
 	"visualeditor-dialog-template-title": "Шаблон",
 	"visualeditor-dialog-transclusion-action-save": "Сохранить",
 	"visualeditor-dialog-transclusion-absent-template": "Шаблон «$1» ещё не существует.",
+	"visualeditor-dialog-transclusion-template-title-nonexistent": "Этот шаблон не существует.",
 	"visualeditor-dialog-transclusion-add-content": "Добавить содержимое",
 	"visualeditor-dialog-transclusion-add-wikitext": "Добавить викитекст",
 	"visualeditor-dialog-transclusion-add-param": "Добавить ещё информацию",
