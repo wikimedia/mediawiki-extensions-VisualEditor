@@ -70,7 +70,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 	// Temporary switch for verbose template search.
 	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
-		var dialogTitle = this.placeholder.getTransclusion().parts.length === 1 ?
+		var dialogTitle = this.placeholder.getTransclusion().isSinglePart() ?
 			'visualeditor-dialog-transclusion-template-search' :
 			'visualeditor-dialog-transclusion-add-template';
 
@@ -109,7 +109,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		} )
 			.connect( this, { click: 'onRemoveButtonClick' } );
 
-		if ( this.placeholder.getTransclusion().parts.length === 1 ) {
+		if ( this.placeholder.getTransclusion().isSinglePart() ) {
 			this.removeButton.toggle( false );
 		}
 		this.$element.append( this.removeButton.$element );
@@ -126,7 +126,7 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
  * @inheritdoc
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.setupOutlineItem = function () {
-	var dialogTitle = ( this.placeholder.getTransclusion().parts.length === 1 &&
+	var dialogTitle = ( this.placeholder.getTransclusion().isSinglePart() &&
 		mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) ?
 		'visualeditor-dialog-transclusion-template-search' :
 		'visualeditor-dialog-transclusion-add-template';

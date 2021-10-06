@@ -217,8 +217,8 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
  * @param {OO.ui.PageLayout} page Active page
  */
 ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) {
-	var partCount = this.transclusionModel.getParts().length,
-		isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage && partCount === 1,
+	var isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage &&
+			this.transclusionModel.isSinglePart(),
 		acceptsNewParameters = page instanceof ve.ui.MWTemplatePage ||
 			page instanceof ve.ui.MWParameterPage;
 
