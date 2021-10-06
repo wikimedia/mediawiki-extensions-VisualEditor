@@ -20,7 +20,7 @@ class ApiVisualEditorTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 		$this->scopedCallback = ExtensionRegistry::getInstance()->setAttributeForTest(
 			'VisualEditorAvailableNamespaces',
-			[ 'Template_Talk' => true ]
+			[ 'User' => true, 'Template_Talk' => true ]
 		);
 	}
 
@@ -44,11 +44,12 @@ class ApiVisualEditorTest extends MediaWikiIntegrationTestCase {
 			1 => false,
 			-1 => true,
 			999999 => true,
+			2 => false,
 			'Template' => true,
 			'Foobar' => true,
 		] ] );
 		$this->assertSame(
-			[ 0, -1, 10, 11 ],
+			[ -1, 0, 10, 11 ],
 			ApiVisualEditor::getAvailableNamespaceIds( $config )
 		);
 	}
