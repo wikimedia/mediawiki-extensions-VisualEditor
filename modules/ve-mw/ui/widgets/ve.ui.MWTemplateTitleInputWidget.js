@@ -182,7 +182,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			return originalResponse;
 		}, function () {
 			// API request failed; most likely, we're on a wiki which doesn't have TemplateData.
-			return originalResponse;
+			return originalResponse || ve.createDeferred().reject();
 		} )
 		.promise( { abort: function () {} } );
 };
