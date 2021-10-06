@@ -68,7 +68,7 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
-			if ( this.isSingleTemplatePlaceholder() ) {
+			if ( this.transclusionModel.isEmpty() ) {
 				this.bookletLayout.focus( 1 );
 			}
 
@@ -273,30 +273,8 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
  * @private
  */
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts(),
-		startsWithPlaceholder = parts && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
-		canSave = !startsWithPlaceholder;
-
+	var canSave = !this.transclusionModel.isEmpty();
 	this.actions.setAbilities( { done: canSave && this.altered } );
-};
-
-/**
- * @return {boolean} True if the dialog contains a single template or template placeholder. False
- *  otherwise. Also false if there is no data model connected yet.
- */
-ve.ui.MWTemplateDialog.prototype.isSingleTemplateTransclusion = function () {
-	var part = this.transclusionModel && this.transclusionModel.getFirstAndOnlyPart();
-	return part instanceof ve.dm.MWTemplateModel ||
-		part instanceof ve.dm.MWTemplatePlaceholderModel;
-};
-
-/**
- * @return {boolean} True if the dialog contains a single template placeholder. False otherwise.
- * Also false if there is no data model connected yet.
- */
-ve.ui.MWTemplateDialog.prototype.isSingleTemplatePlaceholder = function () {
-	var part = this.transclusionModel && this.transclusionModel.getFirstAndOnlyPart();
-	return part instanceof ve.dm.MWTemplatePlaceholderModel;
 };
 
 /**
@@ -349,10 +327,10 @@ ve.ui.MWTemplateDialog.prototype.getSelectedNode = function ( data ) {
  * @protected
  */
 ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
-	var part = this.transclusionModel && this.transclusionModel.getFirstAndOnlyPart(),
-		title = ve.msg( 'visualeditor-dialog-transclusion-loading' );
+	var title = ve.msg( 'visualeditor-dialog-transclusion-loading' );
 
-	if ( part ) {
+	if ( this.transclusionModel.isSingleTemplate() ) {
+		var part = this.transclusionModel.getParts()[ 0 ];
 		if ( part instanceof ve.dm.MWTemplateModel ) {
 			title = ve.msg(
 				this.getMode() === 'insert' ?

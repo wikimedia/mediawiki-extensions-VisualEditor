@@ -219,7 +219,7 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) {
 	var isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage &&
-			this.transclusionModel.isSinglePart(),
+			this.transclusionModel.isSingleTemplate(),
 		acceptsNewParameters = page instanceof ve.ui.MWTemplatePage ||
 			page instanceof ve.ui.MWParameterPage;
 
@@ -343,7 +343,7 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
 	} else {
-		expandSidebar = !this.isSingleTemplateTransclusion();
+		expandSidebar = !this.transclusionModel.isSingleTemplate();
 	}
 
 	this.toggleSidebar( expandSidebar );
@@ -408,7 +408,7 @@ ve.ui.MWTransclusionDialog.prototype.isNarrowScreen = function () {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
-	if ( !this.isSingleTemplateTransclusion() ) {
+	if ( !this.transclusionModel.isSingleTemplate() ) {
 		this.title.setLabel( ve.msg( 'visualeditor-dialog-transclusion-title-edit-transclusion' ) );
 	} else {
 		// Parent method
@@ -436,8 +436,9 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 	// placeholder.
 	// New sidebar: The button is only visible on very narrow screens, {@see autoExpandSidebar}.
 	// It's always needed, except in the initial placeholder state.
-	var canCollapse = ( this.isSingleTemplateTransclusion() || this.useInlineDescriptions ) &&
-		!this.isSingleTemplatePlaceholder();
+	var isInitialState = !isExpanded && this.transclusionModel.isEmpty(),
+		canCollapse = ( this.transclusionModel.isSingleTemplate() || this.useInlineDescriptions ) &&
+			!isInitialState;
 	this.actions.setAbilities( { mode: canCollapse } );
 };
 
@@ -506,12 +507,10 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 
 	if ( this.useBackButton ) {
 		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
-			isInitialPage = this.isSingleTemplatePlaceholder(),
-			isInsertMode = this.getMode() === 'insert',
-			isUsingClose = !isInsertMode || isInitialPage;
+			canGoBack = this.getMode() === 'insert' && !this.transclusionModel.isEmpty();
 
-		closeButton.toggle( isUsingClose );
-		backButton.toggle( !isUsingClose );
+		closeButton.toggle( !canGoBack );
+		backButton.toggle( canGoBack );
 	} else {
 		backButton.toggle( false );
 	}
@@ -626,10 +625,10 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			} );
 
 			if ( this.useNewSidebar ) {
-				this.bookletLayout.getOutlineControls().toggle( !this.isSingleTemplateTransclusion() );
+				this.bookletLayout.getOutlineControls().toggle( !this.transclusionModel.isSingleTemplate() );
 				this.$element.toggleClass(
 					've-ui-mwTransclusionDialog-single-transclusion',
-					this.isSingleTemplateTransclusion()
+					this.transclusionModel.isSingleTemplate()
 				);
 			}
 
