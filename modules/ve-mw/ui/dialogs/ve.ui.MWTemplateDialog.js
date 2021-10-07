@@ -272,17 +272,11 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
  * @private
  */
 ve.ui.MWTemplateDialog.prototype.setApplicableStatus = function () {
-	this.actions.setAbilities( { done: !this.startsWithPlaceholder() && this.altered } );
-};
+	var parts = this.transclusionModel && this.transclusionModel.getParts(),
+		startsWithPlaceholder = parts && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel,
+		canSave = !startsWithPlaceholder;
 
-/**
- * @return {boolean} True if the dialog starts with a template placeholder. False otherwise.
- * Also false if there is no data model connected yet.
- */
-ve.ui.MWTemplateDialog.prototype.startsWithPlaceholder = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts();
-
-	return parts && parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel;
+	this.actions.setAbilities( { done: canSave && this.altered } );
 };
 
 /**
@@ -290,12 +284,9 @@ ve.ui.MWTemplateDialog.prototype.startsWithPlaceholder = function () {
  *  otherwise. Also false if there is no data model connected yet.
  */
 ve.ui.MWTemplateDialog.prototype.isSingleTemplateTransclusion = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts();
-
-	return parts && parts.length === 1 && (
-		parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
-		parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
-	);
+	var part = this.transclusionModel && this.transclusionModel.getFirstAndOnlyPart();
+	return part instanceof ve.dm.MWTemplateModel ||
+		part instanceof ve.dm.MWTemplatePlaceholderModel;
 };
 
 /**
@@ -303,7 +294,8 @@ ve.ui.MWTemplateDialog.prototype.isSingleTemplateTransclusion = function () {
  * Also false if there is no data model connected yet.
  */
 ve.ui.MWTemplateDialog.prototype.isSingleTemplatePlaceholder = function () {
-	return this.isSingleTemplateTransclusion() && this.startsWithPlaceholder();
+	var part = this.transclusionModel && this.transclusionModel.getFirstAndOnlyPart();
+	return part instanceof ve.dm.MWTemplatePlaceholderModel;
 };
 
 /**
@@ -356,16 +348,16 @@ ve.ui.MWTemplateDialog.prototype.getSelectedNode = function ( data ) {
  * @protected
  */
 ve.ui.MWTemplateDialog.prototype.updateTitle = function () {
-	var parts = this.transclusionModel && this.transclusionModel.getParts(),
+	var part = this.transclusionModel && this.transclusionModel.getFirstAndOnlyPart(),
 		title = ve.msg( 'visualeditor-dialog-transclusion-loading' );
 
-	if ( parts && parts.length === 1 ) {
-		if ( parts[ 0 ] instanceof ve.dm.MWTemplateModel ) {
+	if ( part ) {
+		if ( part instanceof ve.dm.MWTemplateModel ) {
 			title = ve.msg(
 				this.getMode() === 'insert' ?
 					'visualeditor-dialog-transclusion-title-insert-known-template' :
 					'visualeditor-dialog-transclusion-title-edit-known-template',
-				parts[ 0 ].getSpec().getLabel()
+				part.getSpec().getLabel()
 			);
 		} else {
 			title = ve.msg( 'visualeditor-dialog-transclusion-title-insert-template' );
@@ -474,9 +466,10 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 					// eslint-disable-next-line camelcase
 					templateEvent.user_edit_count_bucket = editCountBucket;
 				}
-				for ( var i = 0; i < dialog.transclusionModel.getParts().length; i++ ) {
-					if ( dialog.transclusionModel.getParts()[ i ].getTitle ) {
-						templateEvent.template_names.push( dialog.transclusionModel.getParts()[ i ].getTitle() );
+				var parts = dialog.transclusionModel.getParts();
+				for ( var i = 0; i < parts.length; i++ ) {
+					if ( parts[ i ].getTitle ) {
+						templateEvent.template_names.push( parts[ i ].getTitle() );
 					}
 				}
 				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );

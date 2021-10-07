@@ -492,6 +492,20 @@
 	};
 
 	/**
+	 * @return {boolean}
+	 */
+	ve.dm.MWTransclusionModel.prototype.isSinglePart = function () {
+		return this.parts.length === 1;
+	};
+
+	/**
+	 * @return {ve.dm.MWTransclusionPartModel|boolean}
+	 */
+	ve.dm.MWTransclusionModel.prototype.getFirstAndOnlyPart = function () {
+		return this.isSinglePart() && this.parts[ 0 ];
+	};
+
+	/**
 	 * Get all parts.
 	 *
 	 * @return {ve.dm.MWTransclusionPartModel[]} Parts in transclusion
