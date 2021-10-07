@@ -33,7 +33,7 @@
 		return { fragment: fragment };
 	}
 
-	QUnit.test( 'onReplacePart', ( assert ) => {
+	QUnit.test.skip( 'onReplacePart', ( assert ) => {
 		// don't kill test until this promise is resolved, to allow the async workflow to complete
 		const finishTest = assert.async();
 
