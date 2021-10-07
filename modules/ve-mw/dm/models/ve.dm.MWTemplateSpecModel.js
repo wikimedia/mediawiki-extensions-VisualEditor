@@ -210,7 +210,7 @@ ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
 
 		if ( aIsNaN && bIsNaN ) {
 			// Two strings
-			return a < b ? -1 : a === b ? 0 : 1;
+			return a.localeCompare( b );
 		}
 		if ( aIsNaN ) {
 			// A is a string
