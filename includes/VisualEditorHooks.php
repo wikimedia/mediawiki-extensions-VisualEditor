@@ -1008,14 +1008,19 @@ class VisualEditorHooks {
 		);
 
 		$namespacesWithSubpages = $coreConfig->get( 'NamespacesWithSubpages' );
-		// $namespacesWithSubpages is a map of namespace id to boolean value, we want
-		// to filter out namespaces that don't exist, not need to include those and it
-		// would increase the JavaScript config size. See T291727
+		// Export as a list of namespaces where subpages are enabled instead of an object
+		// mapping namespaces to if subpages are enabled or not, so filter out disabled
+		// namespaces and then just use the keys. See T291729.
+		$namespacesWithSubpages = array_filter( $namespacesWithSubpages );
+		$namespacesWithSubpagesEnabled = array_keys( $namespacesWithSubpages );
+		// $wgNamespacesWithSubpages can include namespaces that don't exist, no need
+		// to include those in the JavaScript data. See T291727.
+		// Run this filtering after the filter for subpages being enabled, to reduce
+		// the number of calls needed to namespace info.
 		$nsInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
-		$namespacesWithSubpages = array_filter(
-			$namespacesWithSubpages,
-			[ $nsInfo, 'exists' ],
-			ARRAY_FILTER_USE_KEY
+		$namespacesWithSubpagesEnabled = array_filter(
+			$namespacesWithSubpagesEnabled,
+			[ $nsInfo, 'exists' ]
 		);
 		$vars['wgVisualEditorConfig'] = [
 			'usePageImages' => $extensionRegistry->isLoaded( 'PageImages' ),
@@ -1046,7 +1051,7 @@ class VisualEditorHooks {
 				$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
 			),
 			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
-			'namespacesWithSubpages' => $namespacesWithSubpages,
+			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
 			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
