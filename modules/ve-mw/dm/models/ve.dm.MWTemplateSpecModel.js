@@ -138,7 +138,7 @@ ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
  *  `{{example}}` when a template name is dynamically generated.
  */
 ve.dm.MWTemplateSpecModel.prototype.getLabel = function () {
-	var title = this.template.getTitle();
+	var title = this.template.getTemplateDataQueryTitle();
 	if ( title ) {
 		try {
 			// Normalize and remove namespace prefix if in the Template: namespace
