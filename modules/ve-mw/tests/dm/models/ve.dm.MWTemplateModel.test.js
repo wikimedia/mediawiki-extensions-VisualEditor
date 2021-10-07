@@ -10,6 +10,7 @@
 		params: {
 			foo: { wt: 'Foo value' },
 			bar: { wt: 'Bar value' },
+			Bar: { wt: 'Bar value' },
 			empty: { wt: '' },
 			'': { wt: '' }
 		},
@@ -104,6 +105,7 @@
 			params: {
 				foo: { wt: 'Foo value' },
 				bar: { wt: 'Bar value' },
+				Bar: { wt: 'Bar value' },
 				empty: { wt: '' }
 			},
 			target: { href: './Template:Test', wt: 'Test' }
@@ -130,6 +132,7 @@
 		const serialization = template.serialize();
 		assert.deepEqual( serialization.template.params, {
 			foo: { wt: 'Foo value' },
+			Bar: { wt: 'Bar value' },
 			empty: { wt: '' }
 		} );
 	} );
@@ -145,6 +148,7 @@
 		assert.deepEqual( serialization.template.params, {
 			foo: { wt: 'Foo value' },
 			bar: { wt: 'Bar value' },
+			Bar: { wt: 'Bar value' },
 			empty: { wt: '' }
 		} );
 	} );
@@ -156,11 +160,12 @@
 				params: {
 					foo: {},
 					empty: {},
-					bar: {}
+					bar: {},
+					Bar: {}
 				},
-				paramOrder: [ 'bar', 'foo', 'empty' ]
+				paramOrder: [ 'bar', 'foo', 'empty', 'Bar' ]
 			},
-			expected: [ 'foo', 'bar', 'empty' ]
+			expected: [ 'foo', 'bar', 'Bar', 'empty' ]
 		},
 		{
 			name: 'serialize with no parameter order',
@@ -168,21 +173,23 @@
 				params: {
 					foo: {},
 					empty: {},
-					bar: {}
+					bar: {},
+					Bar: {}
 				}
 			},
-			expected: [ 'foo', 'bar', 'empty' ]
+			expected: [ 'foo', 'bar', 'Bar', 'empty' ]
 		},
 		{
 			name: 'serialize with aliases',
 			spec: {
 				params: {
 					foo: {},
+					Bar: {},
 					empty: {},
 					hasaliases: { aliases: [ 'bar', 'baz' ] }
 				}
 			},
-			expected: [ 'foo', 'bar', 'empty' ]
+			expected: [ 'foo', 'bar', 'Bar', 'empty' ]
 		},
 		{
 			name: 'serialize with unknown params',
@@ -191,7 +198,7 @@
 					bar: {}
 				}
 			},
-			expected: [ 'foo', 'bar', 'empty' ]
+			expected: [ 'foo', 'bar', 'Bar', 'empty' ]
 		}
 	].forEach( ( { name, spec, expected } ) =>
 		QUnit.test( name, ( assert ) => {
@@ -210,6 +217,7 @@
 			spec: null,
 			expected: [
 				'bar',
+				'Bar',
 				'empty',
 				'foo',
 				''
@@ -220,6 +228,7 @@
 			spec: {},
 			expected: [
 				'bar',
+				'Bar',
 				'empty',
 				'foo',
 				''
@@ -230,14 +239,16 @@
 			spec: {
 				params: {
 					bar: {},
+					Bar: {},
 					empty: {},
 					unused: {},
 					foo: {}
 				},
-				paramOrder: [ 'foo', 'empty', 'bar', 'unused' ]
+				paramOrder: [ 'foo', 'Bar', 'empty', 'bar', 'unused' ]
 			},
 			expected: [
 				'foo',
+				'Bar',
 				'empty',
 				'bar',
 				''
@@ -257,6 +268,7 @@
 				'foo',
 				'empty',
 				'bar',
+				'Bar',
 				''
 			]
 		},
@@ -268,6 +280,7 @@
 			},
 			expected: [
 				'bar',
+				'Bar',
 				'empty',
 				'foo',
 				''
@@ -278,6 +291,7 @@
 			spec: {
 				params: {
 					bar: {},
+					Bar: {},
 					foo: {},
 					unused: {},
 					empty: {}
@@ -285,6 +299,7 @@
 			},
 			expected: [
 				'bar',
+				'Bar',
 				'foo',
 				'empty',
 				''
@@ -303,6 +318,7 @@
 				'empty',
 				'foo',
 				'bar',
+				'Bar',
 				''
 			]
 		}
@@ -324,6 +340,7 @@
 			spec: null,
 			expected: [
 				'bar',
+				'Bar',
 				'empty',
 				'foo',
 				''
@@ -334,14 +351,16 @@
 			spec: {
 				params: {
 					bar: {},
+					Bar: {},
 					empty: {},
 					unused: {},
 					foo: {}
 				},
-				paramOrder: [ 'foo', 'empty', 'unused', 'bar' ]
+				paramOrder: [ 'foo', 'Bar', 'empty', 'unused', 'bar' ]
 			},
 			expected: [
 				'foo',
+				'Bar',
 				'empty',
 				'unused',
 				'bar',
@@ -363,6 +382,7 @@
 				'empty',
 				'unused',
 				'bar',
+				'Bar',
 				''
 			]
 		},
@@ -374,6 +394,7 @@
 			},
 			expected: [
 				'bar',
+				'Bar',
 				'empty',
 				'foo',
 				''
@@ -384,6 +405,7 @@
 			spec: {
 				params: {
 					bar: {},
+					Bar: {},
 					foo: {},
 					unused: {},
 					empty: {}
@@ -391,6 +413,7 @@
 			},
 			expected: [
 				'bar',
+				'Bar',
 				'foo',
 				'unused',
 				'empty',
@@ -411,6 +434,7 @@
 				'unused',
 				'foo',
 				'bar',
+				'Bar',
 				''
 			]
 		},
@@ -430,6 +454,7 @@
 				'bar',
 				'empty',
 				'unused',
+				'Bar',
 				'foo',
 				''
 			]
