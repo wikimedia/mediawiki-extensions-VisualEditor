@@ -46,6 +46,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  * @event selectedTransclusionPartChanged
  * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
  *  "part_1".
+ * @param {boolean} internal Used for internal calls to suppress events
  */
 
 /**
@@ -177,7 +178,8 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 	}
 
 	if ( changed ) {
-		this.emit( 'selectedTransclusionPartChanged', partId );
+		var isPartHeader = pageName === partId;
+		this.emit( 'selectedTransclusionPartChanged', partId, !isPartHeader );
 	}
 };
 

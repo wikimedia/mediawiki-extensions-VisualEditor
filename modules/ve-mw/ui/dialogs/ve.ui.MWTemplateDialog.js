@@ -644,10 +644,12 @@ ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
 
 /**
  * @private
+ * @param {string} partId
+ * @param {boolean} internal Used for internal calls to suppress events
  */
-ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( partId ) {
+ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( partId, internal ) {
 	var page = this.bookletLayout.getPage( partId );
-	if ( page ) {
+	if ( page && !internal ) {
 		page.scrollElementIntoView();
 	}
 
