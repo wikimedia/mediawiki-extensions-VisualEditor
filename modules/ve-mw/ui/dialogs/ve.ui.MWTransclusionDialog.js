@@ -327,6 +327,13 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 
 	if ( this.useInlineDescriptions ) {
 		var isSmallScreen = this.isNarrowScreen();
+		if ( isSmallScreen &&
+			// eslint-disable-next-line no-jquery/no-class-state
+			this.$content.hasClass( 've-ui-mwTransclusionDialog-small-screen' )
+		) {
+			// We did this already. If the sidebar is visible or not is now the user's decision.
+			return;
+		}
 		expandSidebar = !isSmallScreen;
 		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
