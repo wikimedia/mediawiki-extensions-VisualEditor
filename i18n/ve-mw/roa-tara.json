@@ -158,6 +158,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Aggiunge 'u condenute",
 	"visualeditor-dialog-transclusion-add-wikitext": "Aggiunge uicchiteste",
 	"visualeditor-dialog-transclusion-add-param": "Aggiunge cchiù 'mbormaziune",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "'Mbossibbele aggiungere doje parametre cu 'u stesse nome.",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Nome d'u parametre",
 	"visualeditor-dialog-transclusion-add-param-save": "Aggiunge 'nu parametre",
 	"visualeditor-dialog-transclusion-add-template": "Aggiunge 'u template",
