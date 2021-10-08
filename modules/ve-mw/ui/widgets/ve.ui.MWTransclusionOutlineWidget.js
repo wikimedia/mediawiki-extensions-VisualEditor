@@ -178,8 +178,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 	}
 
 	if ( changed ) {
-		var isPartHeader = pageName === partId;
-		this.emit( 'selectedTransclusionPartChanged', partId, !isPartHeader );
+		this.emit( 'selectedTransclusionPartChanged', partId, isParameterId );
 	}
 };
 
