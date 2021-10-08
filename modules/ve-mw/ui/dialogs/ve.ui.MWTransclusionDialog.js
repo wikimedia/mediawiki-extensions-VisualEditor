@@ -175,6 +175,7 @@ ve.ui.MWTransclusionDialog.prototype.addTemplatePlaceholder = function () {
 	this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
 	this.autoExpandSidebar();
 	this.bookletLayout.getOutlineControls().toggle( true );
+	this.$element.removeClass( 've-ui-mwTransclusionDialog-single-transclusion' );
 };
 
 /**
@@ -186,6 +187,7 @@ ve.ui.MWTransclusionDialog.prototype.addContent = function () {
 	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusionModel ) );
 	this.autoExpandSidebar();
 	this.bookletLayout.getOutlineControls().toggle( true );
+	this.$element.removeClass( 've-ui-mwTransclusionDialog-single-transclusion' );
 };
 
 /**

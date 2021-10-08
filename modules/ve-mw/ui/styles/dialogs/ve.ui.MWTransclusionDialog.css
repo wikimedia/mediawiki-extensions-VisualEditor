@@ -79,10 +79,13 @@
 	right: 0;
 	bottom: 2.5em;
 	overflow: auto;
+	/* Compensate for 2 * 2px padding on the .oo-ui-outlineControlsWidget + 1px border */
+	margin-bottom: 5px;
 }
 
 .ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTemplateDialog-pocSidebar-debug-container {
 	bottom: 0;
+	margin-bottom: 0;
 }
 
 .ve-ui-mwTemplateDialog-pocSidebar-debug-container > .oo-ui-outlineSelectWidget {
