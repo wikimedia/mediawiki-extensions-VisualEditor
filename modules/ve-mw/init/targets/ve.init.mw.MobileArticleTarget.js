@@ -361,17 +361,6 @@ ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function ( startPr
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.loadFail = function ( code, errorDetails ) {
-	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.loadFail.apply( this, arguments );
-
-	this.overlay.onExitClick( $.Event() );
-	mw.notify( this.extractErrorMessages( errorDetails ) );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var dataPromise;
 	if ( modified ) {
