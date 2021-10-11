@@ -49,7 +49,7 @@ ve.dm.MWExtensionNode.static.childNodeTypes = [];
 ve.dm.MWExtensionNode.static.tagName = null;
 
 /**
- * Name of the extension and the parser tag name.
+ * Name of the MediaWiki parser extension tag. (Not related to the name of the MediaWiki extension.)
  *
  * @static
  * @property {string}
@@ -136,7 +136,7 @@ ve.dm.MWExtensionNode.static.getHashObject = function ( dataElement ) {
 };
 
 /**
- * Get the extension's name
+ * Get name of the MediaWiki parser extension tag.
  *
  * Static version for toDomElements
  *
@@ -197,7 +197,7 @@ ve.dm.MWExtensionNode.static.describeChange = function ( key ) {
 /* Methods */
 
 /**
- * Get the extension's name
+ * Get name of the MediaWiki parser extension tag.
  *
  * @return {string} Extension name
  */
