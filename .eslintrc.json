@@ -17,6 +17,7 @@
 		"no-jquery/no-deferred": "error",
 		"no-jquery/no-when": "error",
 		"no-jquery/no-visibility": "error",
+		"max-len": "off",
 		"mediawiki/valid-package-file-require": "warn"
 	}
 }
