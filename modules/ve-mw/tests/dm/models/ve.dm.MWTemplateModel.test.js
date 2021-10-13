@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-( function () {
+{
 	const transclusionData = {
 		params: {
 			foo: { wt: 'Foo value' },
@@ -27,13 +27,13 @@
 	 *
 	 * @return {ve.dm.MWTemplateModel}
 	 */
-	function newTemplateModel() {
+	const newTemplateModel = function () {
 		const doc = ve.dm.Document.static.newBlankDocument(),
 			transclusion = new ve.dm.MWTransclusionModel( doc ),
 			clonedTransclusionData = ve.extendObject( {}, transclusionData );
 
 		return ve.dm.MWTemplateModel.newFromData( transclusion, clonedTransclusionData );
-	}
+	};
 
 	/* Tests */
 
@@ -508,4 +508,4 @@
 		} )
 	);
 
-}() );
+}

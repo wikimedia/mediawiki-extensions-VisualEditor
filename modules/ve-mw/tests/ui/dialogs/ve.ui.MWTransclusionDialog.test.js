@@ -4,7 +4,7 @@
  * @copyright 2021 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-( function () {
+{
 	QUnit.module( 've.ui.MWTransclusionDialog', QUnit.newMwEnvironment( {
 		beforeEach() {
 			ve.test.utils.mwEnvironment.beforeEach.call( this );
@@ -23,7 +23,7 @@
 		}
 	} ) );
 
-	function createFragmentFromDoc( doc ) {
+	const createFragmentFromDoc = function ( doc ) {
 		// convert doc to something ui magical
 		const surface = new ve.dm.Surface( doc );
 		// VE block from surface
@@ -31,7 +31,7 @@
 
 		// return fragment as data for the dialog
 		return { fragment: fragment };
-	}
+	};
 
 	QUnit.test.skip( 'onReplacePart', ( assert ) => {
 		// don't kill test until this promise is resolved, to allow the async workflow to complete
@@ -87,13 +87,13 @@
 			// change transclusion model (onReplacePart happens automatically)
 			const promise = transclusion.addPart( template );
 
-			promise.done( function () {
-					// checking for parameter checkboxes
-					// (should be 3 because of 2 predefined and 1 undocumented)
-					assert.strictEqual(
-						dialog.$element.find( '.ve-ui-mwTransclusionOutlineParameterWidget' ).length, 3
-					);
-					dialog.close();
+			promise.done( () => {
+				// checking for parameter checkboxes
+				// (should be 3 because of 2 predefined and 1 undocumented)
+				assert.strictEqual(
+					dialog.$element.find( '.ve-ui-mwTransclusionOutlineParameterWidget' ).length, 3
+				);
+				dialog.close();
 			} );
 
 		} ).fail( () => {
@@ -101,9 +101,9 @@
 			finishTest();
 		} );
 
-		windowInstance.closed.then( function () {
+		windowInstance.closed.then( () => {
 			assert.ok( true );
 			finishTest();
 		} );
 	} );
-}() );
+}

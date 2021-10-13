@@ -4,7 +4,7 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-( function () {
+{
 	QUnit.module( 've.dm.MWTransclusionModel', QUnit.newMwEnvironment( {
 		beforeEach() {
 			// Mock XHR for mw.Api()
@@ -18,7 +18,7 @@
 		}
 	} ) );
 
-	function runAddPartTest( assert, name, response, server, callback ) {
+	const runAddPartTest = function ( assert, name, response, server, callback ) {
 		const doc = ve.dm.Document.static.newBlankDocument(),
 			transclusion = new ve.dm.MWTransclusionModel( doc ),
 			part = ve.dm.MWTemplateModel.newFromName( transclusion, name ),
@@ -33,7 +33,7 @@
 			.always( () => {
 				done();
 			} );
-	}
+	};
 
 	QUnit.test( 'getUniquePartId', function ( assert ) {
 		const transclusion = new ve.dm.MWTransclusionModel();
@@ -126,4 +126,4 @@
 			assert.deepEqual( spec.getKnownParameterNames(), [] );
 		} );
 	} );
-}() );
+}

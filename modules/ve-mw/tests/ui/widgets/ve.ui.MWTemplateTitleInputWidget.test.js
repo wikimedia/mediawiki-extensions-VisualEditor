@@ -1,9 +1,9 @@
-( function () {
-	function enableCirrusSearchLookup( enabled ) {
+{
+	const enableCirrusSearchLookup = function ( enabled ) {
 		const config = mw.config.get( 'wgVisualEditorConfig' );
 		config.cirrusSearchLookup = enabled !== false;
 		mw.config.set( 'wgVisualEditorConfig', config );
-	}
+	};
 
 	QUnit.module( 've.ui.MWTemplateTitleInputWidget', QUnit.newMwEnvironment( {
 		beforeEach: function () {
@@ -180,4 +180,4 @@
 			'(redirectedfrom: Template:From)'
 		);
 	} );
-}() );
+}
