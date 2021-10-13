@@ -236,17 +236,14 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	if ( parts.length === 0 ) {
 		this.addParameterButton.setDisabled( true );
 		this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
-		if ( this.isNarrowScreen() ) {
-			this.toggleSidebar( false );
-		}
 	} else if ( parts.length > 1 ) {
-		this.autoExpandSidebar();
 		this.bookletLayout.getOutlineControls().toggle( true );
 		this.$element.removeClass( 've-ui-mwTransclusionDialog-single-transclusion' );
 	}
 
 	this.multipartMessage.toggle( parts.length > 1 && this.useNewSidebar );
 
+	this.autoExpandSidebar();
 	this.updateModeActionState();
 	this.updateActionSet();
 };
@@ -327,14 +324,17 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 
 	if ( this.useInlineDescriptions ) {
 		var isSmallScreen = this.isNarrowScreen();
-		if ( isSmallScreen &&
+		if ( isSmallScreen && this.isSingleTemplatePlaceholder() ) {
+			expandSidebar = false;
+		} else if ( isSmallScreen &&
 			// eslint-disable-next-line no-jquery/no-class-state
 			this.$content.hasClass( 've-ui-mwTransclusionDialog-small-screen' )
 		) {
 			// We did this already. If the sidebar is visible or not is now the user's decision.
 			return;
+		} else {
+			expandSidebar = !isSmallScreen;
 		}
-		expandSidebar = !isSmallScreen;
 		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
 	} else {
