@@ -1018,10 +1018,10 @@ class VisualEditorHooks {
 		// Run this filtering after the filter for subpages being enabled, to reduce
 		// the number of calls needed to namespace info.
 		$nsInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
-		$namespacesWithSubpagesEnabled = array_filter(
+		$namespacesWithSubpagesEnabled = array_values( array_filter(
 			$namespacesWithSubpagesEnabled,
 			[ $nsInfo, 'exists' ]
-		);
+		) );
 		$vars['wgVisualEditorConfig'] = [
 			'usePageImages' => $extensionRegistry->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => $extensionRegistry->isLoaded( 'WikibaseClient' ),
