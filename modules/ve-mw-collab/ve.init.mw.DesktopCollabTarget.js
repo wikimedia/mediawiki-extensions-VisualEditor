@@ -40,8 +40,8 @@ OO.inheritClass( ve.init.mw.DesktopCollabTarget, ve.init.mw.CollabTarget );
  * Page modifications after editor load.
  */
 ve.init.mw.DesktopCollabTarget.prototype.transformPage = function () {
-	var title;
 	this.$originalContent.append( this.$element.siblings() );
+	var title;
 	if ( ( title = this.getImportTitle() ) ) {
 		$( '#contentSub' ).html(
 			ve.htmlMsg(

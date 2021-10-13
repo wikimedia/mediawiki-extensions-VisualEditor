@@ -20,8 +20,6 @@
  * @cfg {boolean} [isDefaultSize=false] Object is using its default size dimensions
  */
 ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
-	var scalable, currentDimensions, minDimensions;
-
 	config = config || {};
 
 	// Mixin constructors
@@ -61,10 +59,10 @@ ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 	}
 
 	// Create scalable
-	currentDimensions = config.currentDimensions || {};
-	minDimensions = config.minDimensions || {};
+	var currentDimensions = config.currentDimensions || {};
+	var minDimensions = config.minDimensions || {};
 
-	scalable = new ve.dm.Scalable( {
+	var scalable = new ve.dm.Scalable( {
 		currentDimensions: {
 			width: currentDimensions.width,
 			height: currentDimensions.height
@@ -122,11 +120,10 @@ ve.dm.MWImageModel.static.infoCache = {};
  * @return {ve.dm.MWImageNode} An image node
  */
 ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
-	var attrs, newNode, newDimensions,
-		defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
-			.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
+	var defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+		.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
 
-	attrs = ve.extendObject( {
+	var attrs = ve.extendObject( {
 		mediaClass: 'Image',
 		type: 'thumb',
 		align: 'default',
@@ -136,7 +133,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 	}, attributes );
 
 	if ( attrs.defaultSize ) {
-		newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( attrs, attrs.mediaType );
+		var newDimensions = ve.dm.MWImageNode.static.scaleToThumbnailSize( attrs, attrs.mediaType );
 		if ( newDimensions ) {
 			attrs.width = newDimensions.width;
 			attrs.height = newDimensions.height;
@@ -145,7 +142,7 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 
 	imageType = imageType || 'mwBlockImage';
 
-	newNode = ve.dm.nodeFactory.createFromElement( {
+	var newNode = ve.dm.nodeFactory.createFromElement( {
 		type: imageType,
 		attributes: attrs
 	} );
@@ -382,12 +379,11 @@ ve.dm.MWImageModel.prototype.getBoundingBox = function () {
  * @param {ve.dm.Surface} surfaceModel Surface model of main document
  */
 ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
-	var captionRange, captionNode,
-		doc = surfaceModel.getDocument();
+	var doc = surfaceModel.getDocument();
 
 	// Update the caption
 	if ( node.getType() === 'mwBlockImage' ) {
-		captionNode = node.getCaptionNode();
+		var captionNode = node.getCaptionNode();
 		if ( !captionNode ) {
 			// There was no caption before, so insert one now
 			surfaceModel.getFragment()
@@ -398,7 +394,7 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
 			captionNode = node.getCaptionNode();
 		}
 
-		captionRange = captionNode.getRange();
+		var captionRange = captionNode.getRange();
 
 		// Remove contents of old caption
 		surfaceModel.change(
@@ -439,15 +435,14 @@ ve.dm.MWImageModel.prototype.updateImageNode = function ( node, surfaceModel ) {
  * @throws {Error} Unknown image node type
  */
 ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
-	var offset, contentToInsert, selectedNode,
-		nodeType = this.getImageNodeType(),
+	var nodeType = this.getImageNodeType(),
 		surfaceModel = fragment.getSurface();
 
 	if ( !( fragment.getSelection() instanceof ve.dm.LinearSelection ) ) {
 		return fragment;
 	}
 
-	selectedNode = fragment.getSelectedNode();
+	var selectedNode = fragment.getSelectedNode();
 
 	// If there was a previous node, remove it first
 	if ( selectedNode ) {
@@ -455,8 +450,9 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
 		fragment.removeContent();
 	}
 
-	contentToInsert = this.getData();
+	var contentToInsert = this.getData();
 
+	var offset;
 	switch ( nodeType ) {
 		case 'mwInlineImage':
 			if ( selectedNode && selectedNode.type === 'mwBlockImage' ) {
@@ -501,8 +497,7 @@ ve.dm.MWImageModel.prototype.insertImageNode = function ( fragment ) {
  * @return {Array} Linear data
  */
 ve.dm.MWImageModel.prototype.getData = function () {
-	var data,
-		originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
+	var originalAttrs = ve.copy( this.getOriginalImageAttributes() ),
 		editAttributes = ve.extendObject( originalAttrs, this.getUpdatedAttributes() ),
 		nodeType = this.getImageNodeType();
 
@@ -514,7 +509,7 @@ ve.dm.MWImageModel.prototype.getData = function () {
 		delete editAttributes.isError;
 	}
 
-	data = [
+	var data = [
 		{
 			type: nodeType,
 			attributes: editAttributes
@@ -534,9 +529,9 @@ ve.dm.MWImageModel.prototype.getData = function () {
  * @return {Object} Updated attributes
  */
 ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
-	var attrs, currentDimensions,
-		origAttrs = this.getOriginalImageAttributes();
+	var origAttrs = this.getOriginalImageAttributes();
 
+	var currentDimensions;
 	// Adjust default dimensions if size is set to default
 	if ( this.scalable.isDefault() && this.scalable.getDefaultDimensions() ) {
 		currentDimensions = this.scalable.getDefaultDimensions();
@@ -544,7 +539,7 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 		currentDimensions = this.getCurrentDimensions();
 	}
 
-	attrs = {
+	var attrs = {
 		mediaClass: this.getMediaClass(),
 		type: this.getType(),
 		width: currentDimensions.width,

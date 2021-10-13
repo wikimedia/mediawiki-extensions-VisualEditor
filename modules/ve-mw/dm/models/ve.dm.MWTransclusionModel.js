@@ -159,8 +159,7 @@
 	 * @return {jQuery.Promise} Promise, resolved when spec is loaded
 	 */
 	ve.dm.MWTransclusionModel.prototype.load = function ( data ) {
-		var deferred,
-			promises = [];
+		var promises = [];
 
 		// Convert single part format to multi-part format
 		// Parsoid doesn't use this format any more, but we accept it for backwards compatibility
@@ -171,6 +170,7 @@
 		if ( Array.isArray( data.parts ) ) {
 			for ( var i = 0; i < data.parts.length; i++ ) {
 				var part = data.parts[ i ];
+				var deferred;
 				if ( part.template ) {
 					deferred = ve.createDeferred();
 					promises.push( deferred.promise() );
@@ -203,10 +203,9 @@
 	 * @fires change
 	 */
 	ve.dm.MWTransclusionModel.prototype.resolveChangeQueue = function ( queue ) {
-		var i,
-			resolveQueue = [];
+		var resolveQueue = [];
 
-		for ( i = 0; i < queue.length; i++ ) {
+		for ( var i = 0; i < queue.length; i++ ) {
 			var item = queue[ i ],
 				remove = 0;
 
@@ -260,9 +259,9 @@
 		// We need to go back and resolve the deferreds after emitting change.
 		// Otherwise we get silly situations like a single change event being
 		// guaranteed after the transclusion loaded promise gets resolved.
-		for ( i = 0; i < resolveQueue.length; i++ ) {
-			resolveQueue[ i ].resolve();
-		}
+		resolveQueue.forEach( function ( queueItem ) {
+			queueItem.resolve();
+		} );
 	};
 
 	/**
