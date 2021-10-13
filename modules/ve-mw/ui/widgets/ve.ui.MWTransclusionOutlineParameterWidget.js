@@ -56,6 +56,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineParameterWidget, OO.ui.OptionWidget 
 
 /**
  * @private
+ * @param {jQuery.Event} e
  */
 ve.ui.MWTransclusionOutlineParameterWidget.prototype.onMouseDown = function ( e ) {
 	// Mouse clicks conflict with the click handler in {@see OO.ui.SelectWidget}

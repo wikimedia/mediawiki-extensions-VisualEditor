@@ -252,7 +252,7 @@ ve.dm.MWTemplateSpecModel.prototype.isParameterAlias = function ( name ) {
 };
 
 /**
- * @param name Parameter name or alias
+ * @param {string} name Parameter name or alias
  * @return {boolean}
  */
 ve.dm.MWTemplateSpecModel.prototype.isParameterDocumented = function ( name ) {
