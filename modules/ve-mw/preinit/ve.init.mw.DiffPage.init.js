@@ -73,7 +73,7 @@
 				// This class is loaded via modulePromise above
 				// eslint-disable-next-line no-undef
 				var diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
-				diffElement.$document.addClass( 'mw-parser-output' );
+				diffElement.$document.addClass( 'mw-parser-output content' );
 
 				progress.$element.addClass( 'oo-ui-element-hidden' );
 				$visualDiff.append( diffElement.$element );
