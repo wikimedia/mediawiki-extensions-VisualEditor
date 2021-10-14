@@ -1,4 +1,4 @@
-( function () {
+{
 
 	QUnit.module( 've.dm.MWTemplateSpecModel' );
 
@@ -6,7 +6,7 @@
 	 * @param {string[]} [parameterNames]
 	 * @return {ve.dm.MWTemplateModel} but it's a mock
 	 */
-	function createTemplateMock( parameterNames ) {
+	const createTemplateMock = function ( parameterNames ) {
 		const params = {};
 		( parameterNames || [] ).forEach( ( name ) => {
 			params[ name ] = {};
@@ -21,7 +21,7 @@
 				return this.params;
 			}
 		};
-	}
+	};
 
 	QUnit.test( 'Basic behavior on empty template', ( assert ) => {
 		const template = createTemplateMock(),
@@ -332,4 +332,4 @@
 		assert.strictEqual( spec.getParameterDeprecationDescription( 'p' ), '' );
 	} );
 
-}() );
+}

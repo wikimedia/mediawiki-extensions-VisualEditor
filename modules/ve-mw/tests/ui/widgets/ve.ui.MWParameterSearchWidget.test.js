@@ -1,10 +1,10 @@
-( function () {
+{
 
 	/**
 	 * @param {string[]} [knownParameters]
 	 * @return {ve.dm.MWTemplateModel} but it's a mock
 	 */
-	function makeTemplateMock( knownParameters ) {
+	const makeTemplateMock = function ( knownParameters ) {
 		const spec = {
 			getKnownParameterNames: () => knownParameters || [],
 			getParameterLabel: () => '',
@@ -17,7 +17,7 @@
 			getSpec: () => spec,
 			hasParameter: () => false
 		};
-	}
+	};
 
 	QUnit.module( 've.ui.MWParameterSearchWidget' );
 
@@ -47,4 +47,4 @@
 		assert.strictEqual( items[ 1 ].getData().name, 'abbreviation' );
 	} );
 
-}() );
+}
