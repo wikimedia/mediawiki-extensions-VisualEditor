@@ -632,6 +632,7 @@ ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
 
 /**
  * @private
+ * @param {Object} visibility
  */
 ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
 	for ( var pageName in visibility ) {
