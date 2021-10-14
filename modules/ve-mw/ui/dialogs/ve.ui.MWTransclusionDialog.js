@@ -205,7 +205,10 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
 	var placeholderParameter = new ve.dm.MWParameterModel( part );
 	part.addParameter( placeholderParameter );
 	this.focusPart( placeholderParameter.getId() );
-	this.autoExpandSidebar();
+
+	if ( this.useInlineDescriptions ) {
+		this.autoExpandSidebar();
+	}
 };
 
 /**
