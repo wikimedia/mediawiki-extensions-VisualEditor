@@ -202,7 +202,9 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
 
 	// TODO: Use a distinct class for placeholder model rather than
 	// these magical "empty" constants.
-	part.addParameter( new ve.dm.MWParameterModel( part ) );
+	var placeholderParameter = new ve.dm.MWParameterModel( part );
+	part.addParameter( placeholderParameter );
+	this.focusPart( placeholderParameter.getId() );
 	this.autoExpandSidebar();
 };
 
