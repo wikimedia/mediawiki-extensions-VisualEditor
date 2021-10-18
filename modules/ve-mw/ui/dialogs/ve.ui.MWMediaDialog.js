@@ -508,9 +508,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			{
 				name: 'ImageDescription',
 				value: ve.getProp( metadata, 'ImageDescription', 'value' ),
-				data: {
-					keepOriginal: true
-				},
+				format: 'html',
 				view: {
 					type: 'description',
 					primary: true,
@@ -519,13 +517,15 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			},
 			{
 				name: '$fileDetails',
-				data: { skipProcessing: true },
+				// Real value is set later
+				value: '',
+				format: 'html',
 				view: { icon: 'image' }
 			},
 			{
 				name: 'LicenseShortName',
 				value: ve.getProp( metadata, 'LicenseShortName', 'value' ),
-				data: {},
+				format: 'html-remove-formatting',
 				view: {
 					href: ve.getProp( metadata, 'LicenseUrl', 'value' ),
 					icon: this.getLicenseIcon( ve.getProp( metadata, 'LicenseShortName', 'value' ) )
@@ -534,54 +534,52 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			{
 				name: 'Artist',
 				value: ve.getProp( metadata, 'Artist', 'value' ),
-				data: {},
+				format: 'html-remove-formatting',
 				view: {
 					// "Artist" label
-					label: 'visualeditor-dialog-media-info-meta-artist',
+					labelMsg: 'visualeditor-dialog-media-info-meta-artist',
 					icon: 'userAvatar'
 				}
 			},
 			{
 				name: 'Credit',
 				value: ve.getProp( metadata, 'Credit', 'value' ),
-				data: {},
+				format: 'html-remove-formatting',
 				view: { icon: 'userAvatar' }
 			},
 			{
 				name: 'user',
 				value: imageinfo.user,
-				data: { skipProcessing: true },
+				format: 'plaintext',
 				view: {
 					icon: 'userAvatar',
 					// This is 'uploaded by'
-					label: 'visualeditor-dialog-media-info-artist'
+					labelMsg: 'visualeditor-dialog-media-info-artist'
 				}
 			},
 			{
 				name: 'timestamp',
 				value: imageinfo.timestamp,
-				data: {
-					ignoreCharLimit: true
-				},
+				format: 'plaintext',
 				view: {
 					icon: 'clock',
-					label: 'visualeditor-dialog-media-info-uploaded',
+					labelMsg: 'visualeditor-dialog-media-info-uploaded',
 					isDate: true
 				}
 			},
 			{
 				name: 'DateTimeOriginal',
 				value: ve.getProp( metadata, 'DateTimeOriginal', 'value' ),
-				data: {},
+				format: 'html-remove-formatting',
 				view: {
 					icon: 'clock',
-					label: 'visualeditor-dialog-media-info-created'
+					labelMsg: 'visualeditor-dialog-media-info-created'
 				}
 			},
 			{
 				name: 'moreinfo',
 				value: ve.msg( 'visualeditor-dialog-media-info-moreinfo' ),
-				data: {},
+				format: 'plaintext',
 				view: {
 					icon: 'info',
 					href: imageinfo.descriptionurl
@@ -609,14 +607,17 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	// Clean data from the API responses
 	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
 		field = apiDataKeysConfig[ i ].name;
-		// Skip empty fields and those that are specifically configured to be skipped
-		if ( apiDataKeysConfig[ i ].data.skipProcessing ) {
+		if ( apiDataKeysConfig[ i ].format === 'html' ) {
+			apiData[ field ] = new OO.ui.HtmlSnippet( apiDataKeysConfig[ i ].value );
+
+		} else if ( apiDataKeysConfig[ i ].format === 'html-remove-formatting' ) {
+			apiData[ field ] = this.cleanAPIresponse( apiDataKeysConfig[ i ].value );
+
+		} else if ( apiDataKeysConfig[ i ].format === 'plaintext' ) {
 			apiData[ field ] = apiDataKeysConfig[ i ].value;
+
 		} else {
-			// Store a clean information from the API.
-			if ( apiDataKeysConfig[ i ].value ) {
-				apiData[ field ] = this.cleanAPIresponse( apiDataKeysConfig[ i ].value, apiDataKeysConfig[ i ].data );
-			}
+			throw new Error( 'Unexpected metadata field format' );
 		}
 	}
 
@@ -624,7 +625,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	if ( imageinfo.mediatype === 'AUDIO' ) {
 		// Label this file as an audio
 		apiData.$fileDetails = $( '<span>' )
-			.append( ve.msg( 'visualeditor-dialog-media-info-audiofile' ) );
+			.text( ve.msg( 'visualeditor-dialog-media-info-audiofile' ) );
 	} else {
 		// Build the display for image size and type
 		apiData.$fileDetails = $( '<div>' )
@@ -639,7 +640,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 				),
 				$( '<span>' )
 					.addClass( 've-ui-mwMediaDialog-panel-imageinfo-separator' )
-					.text( mw.msg( 'visualeditor-dialog-media-info-separator' ) ),
+					.text( ve.msg( 'visualeditor-dialog-media-info-separator' ) ),
 				$( '<span>' ).text( fileType )
 			);
 	}
@@ -768,29 +769,20 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 /**
  * Clean the API responses and return it in plaintext. If needed, truncate.
  *
- * @param {string} rawResponse Raw response from the API
- * @param {Object} config Configuration options
+ * @param {string} html Raw response from the API
  * @return {string} Plaintext clean response
  */
-ve.ui.MWMediaDialog.prototype.cleanAPIresponse = function ( rawResponse, config ) {
-	var isTruncated, charLimit,
-		html = $.parseHTML( rawResponse ),
-		ellipsis = ve.msg( 'visualeditor-dialog-media-info-ellipsis' ),
-		originalText = $( '<div>' ).append( html ).text();
-
-	config = config || {};
-
-	charLimit = config.charLimit || 50;
-	isTruncated = originalText.length > charLimit;
-
-	if ( config.keepOriginal ) {
-		return html;
-	}
+ve.ui.MWMediaDialog.prototype.cleanAPIresponse = function ( html ) {
+	var text = $( $.parseHTML( html ) ).text();
 
 	// Check if the string should be truncated
-	return mw.html.escape( isTruncated && !config.ignoreCharLimit ?
-		originalText.slice( 0, charLimit ) + ellipsis :
-		originalText );
+	var charLimit = 50;
+	if ( text.length > charLimit ) {
+		var ellipsis = ve.msg( 'visualeditor-dialog-media-info-ellipsis' );
+		text = text.slice( 0, charLimit ) + ellipsis;
+	}
+
+	return text;
 };
 
 /**
