@@ -43,7 +43,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		change: 'filterParameters'
 	} ).toggle( parameterNames.length );
 	this.infoWidget = new OO.ui.LabelWidget( {
-		label: new OO.ui.HtmlSnippet( ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ) ),
+		label: ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ),
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
