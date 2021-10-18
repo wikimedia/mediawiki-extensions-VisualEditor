@@ -25,6 +25,7 @@
 
 	var timing = {};
 	var editingSessionId = getEditingSessionIdFromRequest() || mw.user.generateRandomSessionId();
+	ve.init.editingSessionId = editingSessionId;
 
 	function log() {
 		// mw.log is a no-op unless resource loader is in debug mode, so
@@ -91,6 +92,7 @@
 			if ( firstInitDone ) {
 				// Regenerate editingSessionId
 				editingSessionId = mw.user.generateRandomSessionId();
+				ve.init.editingSessionId = editingSessionId;
 			}
 			firstInitDone = true;
 		}
