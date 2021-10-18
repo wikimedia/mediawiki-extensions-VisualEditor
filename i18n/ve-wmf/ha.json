@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bashir Gwanki",
+			"Gwanki"
+		]
+	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
+	"tag-visualeditor-description": "An yi gyara ta amfani da [[{{MediaWiki: visualeditor-descriptionpagelink}}|wajen gyara na gani]]",
+	"tag-visualeditor-needcheck-description": "An yi gyara ta amfani da [[{{MediaWiki: visualeditor-descriptionpagelink}}|visual editor]] inda tsarin ya gano wikitext mai yiwuwa yana da canje-canje da ba a yi niyya ba.",
+	"tag-visualeditor-wikitext": "tushen gyara 2017",
+	"tag-visualeditor-wikitext-description": "An yi gyara ta amfani da editan wikitext na 2017",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Switched]]"
+}

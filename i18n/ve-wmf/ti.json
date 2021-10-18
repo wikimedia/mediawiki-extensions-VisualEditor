@@ -10,5 +10,5 @@
 	"visualeditor-welcomedialog-action": "ኣርትዖት ጀምር",
 	"visualeditor-welcomedialog-switch": "ናብ ኮድ መታዓራረይ ለውጥ",
 	"visualeditor-welcomedialog-switch-ve": "ናብ ርእየታዊ መታዓራረይ ለውጥ",
-	"visualeditor-welcomedialog-title": "ናብ $2 {{GENDER:$1|እንቋዕ ብደሓን መጻእካ|እንቋዕ ብደሓን መጻእኪ}}"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|እንቋዕ ብደሓን መጻእካ|እንቋዕ ብደሓን መጻእኪ}} ናብ $2"
 }
