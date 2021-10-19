@@ -255,6 +255,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 		this.focusPart( reselect.getName() );
 	}
 
+	this.bookletLayout.stackLayout.unsetCurrentItem();
 	this.bookletLayout.removePages( [ page ] );
 
 	if ( this.loaded ) {
