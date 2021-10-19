@@ -213,9 +213,8 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		var viewNode = ve.ce.nodeFactory.createFromModel( modelNode );
 		if ( !viewNode.hasRendering() ) {
 			viewNode.onSetup();
-			viewNode.$element
-				.append( viewNode.createInvisibleIcon() )
-				.attr( 'title', dataElement.attributes.text );
+			// HACK: Force the icon to render immediately
+			viewNode.updateInvisibleIconSync( true );
 			els = viewNode.$element.toArray();
 			viewNode.destroy();
 			return els;
