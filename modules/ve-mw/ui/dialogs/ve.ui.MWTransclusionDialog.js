@@ -269,13 +269,13 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 	var context = this;
 
 	this.hotkeyTriggers = {};
-	this.hotkeyTriggers[ this.getHotkeyCombo( 'e' ) ] = function () {
+	this.hotkeyTriggers[ this.getHotkeyCombo( 'x' ) ] = function () {
 		context.addTemplatePlaceholder();
 	};
 	this.hotkeyTriggers[ this.getHotkeyCombo( 'y' ) ] = function () {
 		context.addContent();
 	};
-	this.hotkeyTriggers[ this.getHotkeyCombo( 'u' ) ] = function () {
+	this.hotkeyTriggers[ this.getHotkeyCombo( 'd' ) ] = function () {
 		context.addParameter();
 	};
 };
