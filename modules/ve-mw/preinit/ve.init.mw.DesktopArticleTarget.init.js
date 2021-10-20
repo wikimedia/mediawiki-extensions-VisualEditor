@@ -874,7 +874,7 @@
 
 		/**
 		 * Check whether a jQuery event represents a plain left click, without
-		 * any modifiers
+		 * any modifiers or a programmatically triggered click.
 		 *
 		 * This is a duplicate of a function in ve.utils, because this file runs
 		 * before any of VE core or OOui has been loaded.
@@ -883,7 +883,9 @@
 		 * @return {boolean} Whether it was an unmodified left click
 		 */
 		isUnmodifiedLeftClick: function ( e ) {
-			return e && e.which && e.which === 1 && !( e.shiftKey || e.altKey || e.ctrlKey || e.metaKey );
+			return e && ( (
+				e.which && e.which === 1 && !( e.shiftKey || e.altKey || e.ctrlKey || e.metaKey )
+			) || e.isTrigger );
 		},
 
 		onEditTabClick: function ( mode, e ) {
