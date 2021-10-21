@@ -37,11 +37,14 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		} );
 
 	this.searchWidget = new OO.ui.SearchInputWidget( {
+		title: ve.msg( 'visualeditor-dialog-transclusion-filter-title', spec.getLabel() ),
 		placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
 	} ).connect( this, {
 		change: 'filterParameters'
 	} ).toggle( parameterNames.length );
+	this.searchWidget.$element.attr( 'role', 'search' );
+
 	this.infoWidget = new OO.ui.LabelWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ),
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]

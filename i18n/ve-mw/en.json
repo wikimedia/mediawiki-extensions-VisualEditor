@@ -191,6 +191,7 @@
 	"visualeditor-dialog-transclusion-contextitem-description": "Generated from: $1",
 	"visualeditor-dialog-transclusion-expand-options": "Show options",
 	"visualeditor-dialog-transclusion-filter-placeholder": "Find field",
+	"visualeditor-dialog-transclusion-filter-title": "Parameter search for $1",
 	"visualeditor-dialog-transclusion-filter-no-match": "No matches found",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Deprecated field",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Field is deprecated. $1",
