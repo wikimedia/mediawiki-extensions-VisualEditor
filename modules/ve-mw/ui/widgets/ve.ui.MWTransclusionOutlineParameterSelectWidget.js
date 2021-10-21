@@ -24,7 +24,9 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 		.on( {
 			focus: this.bindDocumentKeyDownListener.bind( this ),
 			blur: this.unbindDocumentKeyDownListener.bind( this )
-		} );
+		} )
+		// FIXME might make sense upstream?
+		.attr( 'aria-multiselectable', 'true' );
 };
 
 /* Inheritance */
