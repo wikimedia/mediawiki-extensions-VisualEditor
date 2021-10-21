@@ -55,6 +55,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
 			change: 'onParameterWidgetListChanged'
 		} );
+	this.parameters.$element
+		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ) );
 
 	this.$element.append(
 		this.searchWidget.$element,
