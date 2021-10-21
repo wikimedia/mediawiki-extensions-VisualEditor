@@ -1651,6 +1651,7 @@
 		"ext.visualEditor.mwcore": {
 			"group": "visualEditorA",
 			"scripts": [
+				"modules/ve-mw/dm/nodes/ve.dm.MWAnnotationNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWIncludesNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWEntityNode.js",
 				"modules/ve-mw/dm/nodes/ve.dm.MWExtensionNode.js",
@@ -1660,6 +1661,8 @@
 				"modules/ve-mw/dm/nodes/ve.dm.MWTableNode.js",
 				"modules/ve-mw/dm/annotations/ve.dm.MWNowikiAnnotation.js",
 				"modules/ve-mw/dm/metaitems/ve.dm.MWAlienMetaItem.js",
+				"modules/ve-mw/dm/nodes/ve.dm.MWAlienAnnotationNode.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWAnnotationNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWIncludesNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWEntityNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWExtensionNode.js",
@@ -1668,6 +1671,7 @@
 				"modules/ve-mw/ce/nodes/ve.ce.MWPreNode.js",
 				"modules/ve-mw/ce/nodes/ve.ce.MWTableNode.js",
 				"modules/ve-mw/ce/annotations/ve.ce.MWNowikiAnnotation.js",
+				"modules/ve-mw/ce/nodes/ve.ce.MWAlienAnnotationNode.js",
 				"modules/ve-mw/ui/ve.ui.MWCommandRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWSequenceRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWSurface.js",
@@ -1694,6 +1698,8 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWPreContextItem.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWAnnotationContextItem.js",
+				"modules/ve-mw/ui/contextitems/ve.ui.MWAlienAnnotationContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWIncludesContextItem.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWEducationPopupWidget.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWCommentInspector.js"
@@ -1701,6 +1707,7 @@
 			"styles": [
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWEntityNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWIncludesNode.css",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWAnnotationNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTableNode.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWPreDialog.css",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
@@ -1765,6 +1772,10 @@
 				"visualeditor-includes-onlyinclude-description",
 				"visualeditor-includes-onlyinclude-end",
 				"visualeditor-includes-onlyinclude-start",
+				"visualeditor-annotations-default-start",
+				"visualeditor-annotations-default-end",
+				"visualeditor-annotations-default-description",
+				"visualeditor-annotations-extended-documentation",
 				"visualeditor-mwpredialog-convert",
 				"visualeditor-mwpredialog-title",
 				"visualeditor-tooltip-non-breaking-space",
