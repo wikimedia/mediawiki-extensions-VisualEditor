@@ -18,6 +18,8 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 
 	// Mixin constructors
 	OO.ui.mixin.ButtonElement.call( this, {
+		// FIXME semantically this could be a <legend> and the surrounding OutlinePartWidget a <fieldset>
+		$button: $( '<span>' ),
 		framed: false
 	} );
 	OO.ui.mixin.IconElement.call( this, config );
