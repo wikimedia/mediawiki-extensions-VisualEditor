@@ -40,7 +40,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	this.$info = $( '<div>' );
 	this.$actions = $( '<div>' );
-	this.$labelElement = $( '<div>' );
 	this.$field = $( '<div>' );
 
 	// Temporary feature flags
@@ -48,21 +47,29 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.useSuggestedValues = veConfig.transclusionDialogSuggestedValues;
 	this.useNewSidebar = veConfig.transclusionDialogNewSidebar;
 
+	// Construct the field docs for the template description
+	var $doc = $( '<div>' )
+		.attr( 'id', OO.ui.generateElementId() )
+		.addClass( 've-ui-mwParameterPage-doc' )
+		.append( $( '<p>' )
+			.text( this.spec.getParameterDescription( paramName ) || '' ) );
+
 	// Note: Calling createValueInput() sets some properties we rely on later in this function
 	this.valueInput = this.createValueInput()
 		.setValue( this.parameter.getValue() )
 		.connect( this, { change: 'onValueInputChange' } );
 
+	this.valueInput.$input.attr( 'aria-describedby', $doc.attr( 'id' ) );
+
 	if ( config.readOnly && this.valueInput.setReadOnly ) {
 		this.valueInput.setReadOnly( true );
 	}
 
-	// Construct the field docs
-
-	var $doc = $( '<div>' )
-		.addClass( 've-ui-mwParameterPage-doc' )
-		.append( $( '<p>' )
-			.text( this.spec.getParameterDescription( paramName ) || '' ) );
+	var labelElement = new OO.ui.LabelWidget( {
+		input: this.valueInput,
+		label: this.spec.getParameterLabel( paramName ),
+		classes: [ 've-ui-mwParameterPage-label' ]
+	} );
 
 	var statusIndicator;
 	if ( this.parameter.isRequired() ) {
@@ -174,21 +181,15 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		this.$actions.append( removeButton.$element );
 	}
 
-	// Events
-	this.$labelElement.on( 'click', this.onLabelClick.bind( this ) );
-
 	// Initialization
 	this.$info
 		.addClass( 've-ui-mwParameterPage-info' )
-		.append( this.$labelElement );
+		.append( labelElement.$element );
 	if ( statusIndicator ) {
 		this.$info.append( ' ', statusIndicator.$element );
 	}
 	this.$actions
 		.addClass( 've-ui-mwParameterPage-actions' );
-	this.$labelElement
-		.addClass( 've-ui-mwParameterPage-label' )
-		.text( this.spec.getParameterLabel( paramName ) );
 	this.$field
 		.addClass( 've-ui-mwParameterPage-field' )
 		.append(
@@ -199,7 +200,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		$( '<span>' )
 			.addClass( 've-ui-mwParameterPage-undocumentedLabel' )
 			.text( ve.msg( 'visualeditor-dialog-transclusion-param-undocumented' ) )
-			.insertAfter( this.$labelElement );
+			.insertAfter( labelElement.$element );
 	}
 
 	if ( this.useSuggestedValues && this.parameter.getSuggestedValues().length ) {
@@ -459,16 +460,6 @@ ve.ui.MWParameterPage.prototype.onRawFallbackButtonClick = function () {
 ve.ui.MWParameterPage.prototype.addPlaceholderParameter = function () {
 	var template = this.parameter.getTemplate();
 	template.addParameter( new ve.dm.MWParameterModel( template ) );
-};
-
-/**
- * Handle click events from the label element
- *
- * @private
- * @param {jQuery.Event} e Click event
- */
-ve.ui.MWParameterPage.prototype.onLabelClick = function () {
-	this.valueInput.simulateLabelClick();
 };
 
 /**
