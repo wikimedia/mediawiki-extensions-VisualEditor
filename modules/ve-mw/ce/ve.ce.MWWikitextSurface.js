@@ -30,8 +30,7 @@ OO.inheritClass( ve.ce.MWWikitextSurface, ve.ce.Surface );
  * @inheritdoc
  */
 ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
-	var originalSelection, scrollTop, slice, clipboardKey,
-		view = this,
+	var view = this,
 		clipboardData = e.originalEvent.clipboardData,
 		text = this.getModel().getFragment().getText( true ).replace( /\n\n/g, '\n' );
 
@@ -45,9 +44,9 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		clipboardData.setData( 'text/plain', text );
 		// We're not going to set HTML, but for browsers that support custom data, set a clipboard key
 		if ( ve.isClipboardDataFormatsSupported( e, true ) ) {
-			slice = this.model.documentModel.shallowCloneFromSelection( this.getModel().getSelection() );
+			var slice = this.model.documentModel.shallowCloneFromSelection( this.getModel().getSelection() );
 			this.clipboardIndex++;
-			clipboardKey = this.clipboardId + '-' + this.clipboardIndex;
+			var clipboardKey = this.clipboardId + '-' + this.clipboardIndex;
 			this.clipboard = { slice: slice, hash: null };
 			// Clone the elements in the slice
 			slice.data.cloneElements( true );
@@ -59,10 +58,10 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 			clipboardData.setData( 'text/x-wiki', text );
 		}
 	} else {
-		originalSelection = new ve.SelectionState( this.nativeSelection );
+		var originalSelection = new ve.SelectionState( this.nativeSelection );
 
 		// Save scroll position before changing focus to "offscreen" paste target
-		scrollTop = this.$window.scrollTop();
+		var scrollTop = this.$window.scrollTop();
 
 		// Prevent surface observation due to native range changing
 		this.surfaceObserver.disable();
@@ -91,14 +90,13 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
  * @inheritdoc
  */
 ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targetFragment, pastedDocumentModel, contextRange ) {
-	var promise, plainPastedDocumentModel, plainContextRange,
-		wasSpecial = this.pasteSpecial,
+	var wasSpecial = this.pasteSpecial,
 		// TODO: This check returns true if the paste contains meaningful structure (tables, lists etc.)
 		// but no annotations (bold, links etc.).
 		wasPlain = wasSpecial || pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ),
 		view = this;
 
-	plainPastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
+	var plainPastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
 	plainPastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
 	// We just turned this into plaintext, which probably
 	// affected the content-length. Luckily, because of
@@ -110,11 +108,11 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 	// need to exclude the internal list, and since we're
 	// from a paste we also have to exclude the
 	// opening/closing paragraph.)
-	plainContextRange = new ve.Range( plainPastedDocumentModel.getDocumentRange().from + 1, plainPastedDocumentModel.getDocumentRange().to - 1 );
+	var plainContextRange = new ve.Range( plainPastedDocumentModel.getDocumentRange().from + 1, plainPastedDocumentModel.getDocumentRange().to - 1 );
 	view.pasteSpecial = true;
 
 	// isPlainText is true but we still need sanitize (e.g. remove lists)
-	promise = ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
+	var promise = ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
 	if ( ve.init.target.constructor.static.convertToWikitextOnPaste && !wasPlain ) {
 		promise.then( function () {
 			// We need to wait for the selection change after paste as that triggers

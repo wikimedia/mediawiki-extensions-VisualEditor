@@ -8,8 +8,7 @@
  */
 
 ( function () {
-	var timing, editingSessionId,
-		actionPrefixMap = {
+	var actionPrefixMap = {
 			firstChange: 'first_change',
 			saveIntent: 'save_intent',
 			saveAttempt: 'save_attempt',
@@ -24,8 +23,8 @@
 			mw.Uri().query.editingStatsId;
 	}
 
-	timing = {};
-	editingSessionId = getEditingSessionIdFromRequest() || mw.user.generateRandomSessionId();
+	var timing = {};
+	var editingSessionId = getEditingSessionIdFromRequest() || mw.user.generateRandomSessionId();
 
 	function log() {
 		// mw.log is a no-op unless resource loader is in debug mode, so
@@ -86,8 +85,7 @@
 	function mwEditHandler( topic, data, timeStamp ) {
 		var action = topic.split( '.' )[ 1 ],
 			actionPrefix = actionPrefixMap[ action ] || action,
-			duration = 0,
-			event;
+			duration = 0;
 
 		if ( action === 'init' ) {
 			if ( firstInitDone ) {
@@ -141,7 +139,7 @@
 		}
 
 		/* eslint-disable camelcase */
-		event = $.extend( {
+		var event = $.extend( {
 			version: 1,
 			action: action,
 			is_oversample: !inSample(),
@@ -221,8 +219,7 @@
 	}
 
 	function activityHandler( topic, data ) {
-		var feature = topic.split( '.' )[ 1 ],
-			event;
+		var feature = topic.split( '.' )[ 1 ];
 
 		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
 			return;
@@ -241,7 +238,7 @@
 		}
 
 		/* eslint-disable camelcase */
-		event = {
+		var event = {
 			feature: feature,
 			action: data.action,
 			editingSessionId: editingSessionId,
