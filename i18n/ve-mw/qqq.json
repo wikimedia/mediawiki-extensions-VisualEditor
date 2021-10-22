@@ -213,6 +213,7 @@
 	"visualeditor-dialog-transclusion-contextitem-description": "Message shown to an editor when they click on a template or group of templates that form a transclusion, listing the template(s) from which the transclusion is constructed.\n\n* $1 – the name of the template, or a list of the names of the templates if there are multiple.\n* $2 - number of templates for PLURAL support.",
 	"visualeditor-dialog-transclusion-expand-options": "Label for button that shows advanced options in transclusion dialog",
 	"visualeditor-dialog-transclusion-filter-placeholder": "Placeholder for template parameter search field.",
+	"visualeditor-dialog-transclusion-filter-title": "Title for the template parameter search field.\n\nParameters:\n* $1 - The title of the related template.",
 	"visualeditor-dialog-transclusion-filter-no-match": "Message when there are no matching parameters found in the parameter search field.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Tooltip for deprecated parameter indicator",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Label describing that a parameter is deprecated.\n\nParameters:\n* $1 - Description given in TemplateData for why parameter is deprecated, which may be empty.",
