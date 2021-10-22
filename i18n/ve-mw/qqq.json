@@ -229,6 +229,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "Label for parameter's example value in the template dialog. If feasible without abbreviation. $1 - Parameter's example value.\n{{Identical|Example}}",
 	"visualeditor-dialog-transclusion-param-info": "Title of button that hides and shows parameter descriptions",
 	"visualeditor-dialog-transclusion-param-info-missing": "Title of button that hides and shows parameter descriptions when no description is available",
+	"visualeditor-dialog-transclusion-param-selection-aria-label": "ARIA label for screen readers on template parameter selection menu.\n\nParameters:\n* $1 - The title of the related template.",
 	"visualeditor-dialog-transclusion-param-undocumented": "Label shown next to a parameter's name indicating that the parameter is undocumented.",
 	"visualeditor-dialog-transclusion-placeholder": "Label for section with options for adding a new template to a multi part transclusion.\n{{Identical|Add template}}",
 	"visualeditor-dialog-transclusion-raw-fallback": "Label of the button that converts complex validation-required type-based inputs back into plain wikitext inputs.",
