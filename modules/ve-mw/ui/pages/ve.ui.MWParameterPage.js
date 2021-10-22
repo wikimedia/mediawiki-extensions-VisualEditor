@@ -196,11 +196,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		);
 
 	if ( this.useNewSidebar && !this.parameter.isDocumented() ) {
-		var undocumentedLabel = new OO.ui.LabelWidget( {
-			label: ve.msg( 'visualeditor-dialog-transclusion-param-undocumented' ),
-			classes: [ 've-ui-mwParameterPage-undocumentedLabel' ]
-		} );
-		this.$labelElement.after( undocumentedLabel.$element );
+		$( '<span>' )
+			.addClass( 've-ui-mwParameterPage-undocumentedLabel' )
+			.text( ve.msg( 'visualeditor-dialog-transclusion-param-undocumented' ) )
+			.insertAfter( this.$labelElement );
 	}
 
 	if ( this.useSuggestedValues && this.parameter.getSuggestedValues().length ) {
