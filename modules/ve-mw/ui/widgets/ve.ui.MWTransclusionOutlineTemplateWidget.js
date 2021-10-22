@@ -188,7 +188,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = 
 	this.onTemplateParameterSelectionChanged( item, selected );
 
 	var param = this.templateModel.getParameter( item.getData() );
-	if ( param ) {
+	if ( param && selected ) {
 		this.emit( 'focusTemplateParameterById', param.getId() );
 	}
 };
