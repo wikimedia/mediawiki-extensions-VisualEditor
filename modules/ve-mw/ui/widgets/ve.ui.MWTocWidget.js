@@ -204,8 +204,9 @@ ve.ui.MWTocWidget.prototype.build = function () {
 		// * toclevel-1, toclevel-2, ...
 		// * tocsection-1, tocsection-2, ...
 		$item = $( '<li>' ).addClass( 'toclevel-' + stack.length ).addClass( 'tocsection-' + ( i + 1 ) );
-		$link = $( '<a>' ).attr( 'href', uri )
-			.append( '<span class="tocnumber">' + tocNumber + '</span> ' );
+		$link = $( '<a>' ).attr( 'href', uri ).append(
+			$( '<span>' ).addClass( 'tocnumber' ).text( tocNumber )
+		);
 		$text = $( '<span>' ).addClass( 'toctext' );
 
 		viewNode.$tocText = $text;

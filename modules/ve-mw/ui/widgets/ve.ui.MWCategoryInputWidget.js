@@ -254,7 +254,7 @@ ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( nam
 				.text( labelText )
 				.append(
 					$( '<br>' ),
-					document.createTextNode( '↳ ' ),
+					$( document.createTextNode( '↳ ' ) ),
 					$( '<span>' ).text( mw.Title.newFromText( name ).getMainText() )
 				)
 		} );

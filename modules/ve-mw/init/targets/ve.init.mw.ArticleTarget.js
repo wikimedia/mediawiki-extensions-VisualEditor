@@ -190,11 +190,12 @@ ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode,
  * @return {jQuery}
  */
 ve.init.mw.ArticleTarget.static.buildRedirectSub = function () {
+	var $subMsg = mw.message( 'redirectpagesub' ).parseDom();
 	// Page subtitle
 	// Compare: Article::view()
 	return $( '<span>' )
 		.attr( 'id', 'redirectsub' )
-		.append( mw.message( 'redirectpagesub' ).parseDom() );
+		.append( $subMsg );
 };
 
 /**
@@ -2270,7 +2271,8 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		function renderPageLinks( pages ) {
 			var i, $list = $( '<ul>' );
 			for ( i = 0; i < pages.length; i++ ) {
-				$list.append( $( '<li>' ).append( renderPageLink( pages[ i ] ) ) );
+				var $link = renderPageLink( pages[ i ] );
+				$list.append( $( '<li>' ).append( $link ) );
 			}
 			return $list;
 		}
@@ -2281,10 +2283,12 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 		if ( categoriesNormal.length ) {
 			categoriesNormal.sort( categorySort.bind( null, categories.normal ) );
 			var $normal = $( '<div>' ).addClass( 'mw-normal-catlinks' );
+			var $pageLink = renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categoriesNormal.length ) );
+			var $pageLinks = renderPageLinks( categoriesNormal );
 			$normal.append(
-				renderPageLink( ve.msg( 'pagecategorieslink' ) ).text( ve.msg( 'pagecategories', categoriesNormal.length ) ),
-				ve.msg( 'colon-separator' ),
-				renderPageLinks( categoriesNormal )
+				$pageLink,
+				$( document.createTextNode( ve.msg( 'colon-separator' ) ) ),
+				$pageLinks
 			);
 			$output.append( $normal );
 		}
@@ -2299,10 +2303,11 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			} else {
 				$hidden.addClass( 'mw-hidden-cats-hidden' );
 			}
+			var $hiddenPageLinks = renderPageLinks( categoriesHidden );
 			$hidden.append(
-				ve.msg( 'hidden-categories', categoriesHidden.length ),
-				ve.msg( 'colon-separator' ),
-				renderPageLinks( categoriesHidden )
+				$( document.createTextNode( ve.msg( 'hidden-categories', categoriesHidden.length ) ) ),
+				$( document.createTextNode( ve.msg( 'colon-separator' ) ) ),
+				$hiddenPageLinks
 			);
 			$output.append( $hidden );
 		}

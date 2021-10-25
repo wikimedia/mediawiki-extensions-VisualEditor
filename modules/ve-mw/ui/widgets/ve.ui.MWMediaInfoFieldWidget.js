@@ -74,6 +74,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	} else if ( content instanceof OO.ui.HtmlSnippet ) {
 		this.$text.html( content.toString() );
 	} else if ( content instanceof $ ) {
+		// eslint-disable-next-line no-jquery/no-append-html
 		this.$text.append( content );
 	} else {
 		throw new Error( 'Unexpected metadata field content' );

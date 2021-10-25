@@ -105,10 +105,9 @@
 					// Don't add the surface until the history has been applied
 					target.addSurface( surfaceModel );
 					if ( error ) {
+						var $errorMsg = ve.htmlMsg( 'visualeditor-rebase-corrupted-document-error', $( '<pre>' ).text( error.stack ) );
 						OO.ui.alert(
-							$( '<p>' ).append(
-								ve.htmlMsg( 'visualeditor-rebase-corrupted-document-error', $( '<pre>' ).text( error.stack ) )
-							),
+							$( '<p>' ).append( $errorMsg ),
 							{ title: ve.msg( 'visualeditor-rebase-corrupted-document-title' ), size: 'large' }
 						).then( function () {
 							// eslint-disable-next-line no-use-before-define

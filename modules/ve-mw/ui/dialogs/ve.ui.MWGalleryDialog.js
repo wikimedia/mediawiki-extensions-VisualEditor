@@ -791,7 +791,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( item.resource ) );
 	this.filenameFieldset.setLabel(
 		$( '<span>' ).append(
-			document.createTextNode( title.getMainText() + ' ' ),
+			$( document.createTextNode( title.getMainText() + ' ' ) ),
 			$( '<a>' )
 				.addClass( 've-ui-mwMediaDialog-description-link' )
 				.attr( 'href', title.getUrl() )

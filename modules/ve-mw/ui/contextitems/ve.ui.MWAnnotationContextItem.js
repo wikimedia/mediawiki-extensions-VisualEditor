@@ -53,11 +53,12 @@ ve.ui.MWAnnotationContextItem.prototype.renderBody = function () {
 
 	var $desc = this.getDescriptionMessage();
 	if ( $desc ) {
-		this.$body.append( $desc ).append( mw.msg( 'word-separator' ) );
+		this.$body.append( $desc, $( document.createTextNode( mw.msg( 'word-separator' ) ) ) );
 	}
 
 	if ( this.model.getAttribute( 'mw' ) ) {
 		if ( this.model.getAttribute( 'mw' ).extendedRange ) {
+			// eslint-disable-next-line no-jquery/no-append-html
 			this.$body.append( mw.message( 'visualeditor-annotations-extended-documentation' ).parseDom() );
 		}
 	}

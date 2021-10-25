@@ -953,7 +953,7 @@ ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
 	var title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.imageModel.getResourceName() ) );
 	this.filenameFieldset.setLabel(
 		$( '<span>' ).append(
-			document.createTextNode( this.imageModel.getFilename() + ' ' ),
+			$( document.createTextNode( this.imageModel.getFilename() + ' ' ) ),
 			$( '<a>' )
 				.addClass( 've-ui-mwMediaDialog-description-link' )
 				.attr( 'href', title.getUrl() )
