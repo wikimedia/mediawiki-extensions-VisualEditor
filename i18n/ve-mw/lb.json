@@ -167,6 +167,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "Beispill: $1",
 	"visualeditor-dialog-transclusion-param-info": "Beschreiwung vum Feld",
 	"visualeditor-dialog-transclusion-param-info-missing": "Keng Beschreiwung vum Feld disponibel",
+	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parameteren an $1",
 	"visualeditor-dialog-transclusion-placeholder": "Eng Schabloun dobäisetzen",
 	"visualeditor-dialog-transclusion-raw-fallback": "Zréck op den einfache Wikitext",
 	"visualeditor-dialog-transclusion-remove-content": "Inhalt ewechhuelen",

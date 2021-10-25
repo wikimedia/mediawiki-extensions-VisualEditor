@@ -184,7 +184,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Camp obsolet",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "El camp és obsolet. $1",
 	"visualeditor-dialog-transclusion-loading": "Carregant...",
-	"visualeditor-dialog-transclusion-more-template-description": "Pot haver-hi més informació sobre la plantilla \"$1\" a la [[{{ns:template}}:$1|pàgina corresponent]].",
+	"visualeditor-dialog-transclusion-more-template-description": "Pot haver-hi més informació sobre la plantilla «$1» a la [[$2|seva pròpia pàgina]].",
 	"visualeditor-dialog-transclusion-no-template-description": "La plantilla «$1» encara no té descripció, però hi pot haver alguna informació a la [[$2|pàgina de la plantilla]].",
 	"visualeditor-dialog-transclusion-options": "Opcions",
 	"visualeditor-dialog-transclusion-param-default": "Valor per defecte:$1",

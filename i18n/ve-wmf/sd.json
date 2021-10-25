@@ -13,8 +13,8 @@
 	"tag-visualeditor-wikitext-description": "2017ع وڪي-متن سنوارگاھ استعمال ڪندي ڪيل سنوار",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|وزيوئل‌سنوار:مٽايل]]",
 	"tag-visualeditor-switched-description": "واپرائيندڙ وزيوئل سنوارگاھ استعمال ڪندي سنوارڻ شروع ڪيو، وري پوءِ وڪي-متن سنوارگاھ ڏانھن تبديلي ڪئي.",
-	"visualeditor-feedback-link": "رٿا:وزيوئل_سنوارگاھ/پذيرائي",
-	"visualeditor-feedback-tool": "ھن سافٽويئر بابت پذيرائي ڇڏيو",
+	"visualeditor-feedback-link": "رٿا:وزيوئل_سنوارگاھ/موٽ",
+	"visualeditor-feedback-tool": "ھن سافٽويئر بابت موٽ ڇڏيو",
 	"visualeditor-help-label": "واپرائيندڙ جو رھنما پڙھو",
 	"visualeditor-help-title": "سنوارگاھ ڪيئن استعمال ڪجي لاءِ رھنما",
 	"visualeditor-welcomedialog-action": "سڌارڻ شروع ڪريو",
@@ -22,5 +22,5 @@
 	"visualeditor-welcomedialog-content-thanks": "دنيا کي وڌيڪ کوجنا ڪرڻ ۾ مدد ڪرڻ لاءِ توھان جي مھرباني!",
 	"visualeditor-welcomedialog-switch": "ذريعو سنوارگاھ طرف وڃو",
 	"visualeditor-welcomedialog-switch-ve": "وزيوئل سنوارگاھ ڏانھن وڃو",
-	"visualeditor-welcomedialog-title": "$2 ڏانھن {{GENDER:$1|ڀليڪار}}"
+	"visualeditor-welcomedialog-title": "$2 ۾ {{GENDER:$1|ڀليڪار}}"
 }
