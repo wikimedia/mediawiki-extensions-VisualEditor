@@ -491,17 +491,22 @@
 	};
 
 	/**
-	 * @return {boolean}
+	 * @return {boolean} True if the transclusion is literally empty or contains only placeholders
 	 */
-	ve.dm.MWTransclusionModel.prototype.isSinglePart = function () {
-		return this.parts.length === 1;
+	ve.dm.MWTransclusionModel.prototype.isEmpty = function () {
+		return this.parts.every( function ( part ) {
+			return part instanceof ve.dm.MWTemplatePlaceholderModel;
+		} );
 	};
 
 	/**
-	 * @return {ve.dm.MWTransclusionPartModel|boolean}
+	 * @return {boolean} True if this is a single template or template placeholder
 	 */
-	ve.dm.MWTransclusionModel.prototype.getFirstAndOnlyPart = function () {
-		return this.isSinglePart() && this.parts[ 0 ];
+	ve.dm.MWTransclusionModel.prototype.isSingleTemplate = function () {
+		return this.parts.length === 1 && (
+			this.parts[ 0 ] instanceof ve.dm.MWTemplateModel ||
+			this.parts[ 0 ] instanceof ve.dm.MWTemplatePlaceholderModel
+		);
 	};
 
 	/**
