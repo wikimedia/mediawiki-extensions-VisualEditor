@@ -523,10 +523,14 @@
 	 *
 	 * Matching is performed against the first section of the `id`, delimited by a '/'.
 	 *
-	 * @param {string} id Any id, including slash-delimited template parameter ids
-	 * @return {ve.dm.MWTransclusionPartModel|null} Part with matching ID, if found
+	 * @param {string} [id] Any id, including slash-delimited template parameter ids
+	 * @return {ve.dm.MWTransclusionPartModel|undefined} Part with matching ID, if found
 	 */
 	ve.dm.MWTransclusionModel.prototype.getPartFromId = function ( id ) {
+		if ( !id ) {
+			return;
+		}
+
 		// For ids from ve.dm.MWParameterModel, compare against the part id
 		// of the parameter instead of the entire model id (e.g. "part_1" instead of "part_1/foo").
 		var partId = id.split( '/', 1 )[ 0 ];
@@ -536,7 +540,6 @@
 				return this.parts[ i ];
 			}
 		}
-		return null;
 	};
 
 	/**
