@@ -13,7 +13,7 @@
 		} );
 		return {
 			params,
-			getTitle: () => null,
+			getTemplateDataQueryTitle: () => null,
 			getTarget: () => {
 				return { wt: 'RawTemplateName' };
 			},
@@ -111,13 +111,14 @@
 	} );
 
 	[
-		[ 'a', './Template:{{b}}', 'Template:{{b}}', 'prefers title, even if invalid' ],
-		[ 'subst:a', '', 'subst:a', 'falls back to unmodified .wt' ],
-		[ 'a', './Template:b', 'B', 'strips template namespace' ],
-		[ 'a', './Talk:b', 'Talk:B', 'does not strip other namespaces' ],
-		[ 'a', './B', ':B', 'title in main namespace must be prefixed' ]
+		[ 'a_a', 'b_b', 'A a', 'parses .wt if possible' ],
+		[ 'subst:a_a', 'b_b', 'A a', 'resolves subst:' ],
+		[ '{{a_a}}', './Template:b_b', 'B b', 'strips template namespace' ],
+		[ '{{a_a}}', './Talk:b_b', 'Talk:B b', 'does not strip other namespaces' ],
+		[ '{{a_a}}', './b_b', ':B b', 'title in main namespace must be prefixed' ],
+		[ '{{a_a}}', './Template:{{b_b}}', 'Template:{{b b}}', 'falls back to unmodified href if invalid' ]
 	].forEach( ( [ wt, href, expected, message ] ) =>
-		QUnit.test( 'getTitle: ' + message, ( assert ) => {
+		QUnit.test( 'getLabel: ' + message, ( assert ) => {
 			const transclusion = new ve.dm.MWTransclusionModel(),
 				template = new ve.dm.MWTemplateModel( transclusion, { wt, href } ),
 				spec = new ve.dm.MWTemplateSpecModel( template );

@@ -21,7 +21,7 @@ QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 
 	const transclusion = new ve.dm.MWTransclusionModel(),
 		template = ve.dm.MWTemplateModel.newFromData( transclusion, {
-			target: {},
+			target: { wt: '' },
 			params: { b: {}, e: {} }
 		} );
 	template.getSpec().setTemplateData( {
@@ -66,7 +66,7 @@ QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 
 QUnit.test( 'filterParameters() on an empty template', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
-		template = new ve.dm.MWTemplateModel( transclusion, {} ),
+		template = new ve.dm.MWTemplateModel( transclusion, { wt: '' } ),
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( template );
 
 	let eventsFired = 0;
@@ -85,7 +85,7 @@ QUnit.test( 'filterParameters() on an empty template', ( assert ) => {
 QUnit.test( 'filterParameters() considers everything from the spec', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
 		template = ve.dm.MWTemplateModel.newFromData( transclusion, {
-			target: {},
+			target: { wt: '' },
 			params: { a: {}, b: {}, c: {}, d: {}, e: {} }
 		} ),
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( template );

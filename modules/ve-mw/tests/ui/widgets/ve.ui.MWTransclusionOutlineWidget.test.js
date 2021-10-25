@@ -12,7 +12,7 @@ QUnit.test( 'Supports all ve.dm.MWTransclusionPartModel subclasses', ( assert ) 
 	const transclusion = new ve.dm.MWTransclusionModel(),
 		widget = new ve.ui.MWTransclusionOutlineWidget();
 
-	widget.onReplacePart( null, new ve.dm.MWTemplateModel( transclusion, {} ) );
+	widget.onReplacePart( null, new ve.dm.MWTemplateModel( transclusion, { wt: '' } ) );
 	widget.onReplacePart( null, new ve.dm.MWTemplatePlaceholderModel( transclusion ) );
 	widget.onReplacePart( null, new ve.dm.MWTransclusionContentModel( transclusion ) );
 
@@ -81,7 +81,7 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 ].forEach( ( [ pageName, expected ] ) =>
 	QUnit.test( 'setSelectionByPageName: ' + pageName, ( assert ) => {
 		const transclusion = new ve.dm.MWTransclusionModel(),
-			template = new ve.dm.MWTemplateModel( transclusion, {} ),
+			template = new ve.dm.MWTemplateModel( transclusion, { wt: '' } ),
 			partWidget = new ve.ui.MWTransclusionOutlineTemplateWidget( template ),
 			widget = new ve.ui.MWTransclusionOutlineWidget();
 
