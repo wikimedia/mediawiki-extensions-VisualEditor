@@ -323,7 +323,7 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 
 	if ( this.useInlineDescriptions ) {
 		var isSmallScreen = this.isNarrowScreen();
-		if ( isSmallScreen && this.isSingleTemplatePlaceholder() ) {
+		if ( isSmallScreen && this.transclusionModel.isEmpty() ) {
 			expandSidebar = false;
 		} else if ( isSmallScreen &&
 			// eslint-disable-next-line no-jquery/no-class-state
