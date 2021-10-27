@@ -9,6 +9,8 @@
  * @param {Object} config
  * @cfg {string} [icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
  * @cfg {string} label
+ * @cfg {string} ariaDescriptionSelected
+ * @cfg {string} ariaDescriptionUnselected
  */
 ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButtonWidget( config ) {
 	// Parent constructor
@@ -30,11 +32,27 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 	// FIXME hack for screen readers to understand the selection state
 	this.$button.attr( {
 		role: 'gridcell',
+		'aria-label': config.label,
 		'aria-selected': 'false'
 	} );
 
 	this.$element
 		.append( this.$button.append( this.$icon, this.$label ) );
+
+	if ( config.ariaDescriptionUnselected || config.ariaDescriptionSelected ) {
+		this.$ariaDescriptionUnselected = $( '<span>' )
+			.text( config.ariaDescriptionUnselected || '' )
+			.attr( 'id', OO.ui.generateElementId() )
+			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
+		this.$ariaDescriptionSelected = $( '<span>' )
+			.text( config.ariaDescriptionSelected || '' )
+			.attr( 'id', OO.ui.generateElementId() )
+			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
+		this.$button.attr( 'aria-describedby', this.$ariaDescriptionUnselected.attr( 'id' ) );
+		this.$element.append( this.$ariaDescriptionUnselected, this.$ariaDescriptionSelected );
+	}
 };
 
 /* Inheritance */
@@ -99,6 +117,12 @@ ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
 ve.ui.MWTransclusionOutlineButtonWidget.prototype.setSelected = function ( state ) {
 	if ( this.$button ) {
 		this.$button.attr( 'aria-selected', state.toString() );
+		if ( this.$ariaDescriptionSelected && this.$ariaDescriptionUnselected ) {
+			this.$button.attr(
+				'aria-describedby',
+				( state ? this.$ariaDescriptionSelected : this.$ariaDescriptionUnselected ).attr( 'id' )
+			);
+		}
 	}
 
 	return ve.ui.MWTransclusionOutlineButtonWidget.super.prototype.setSelected.call( this, state );
