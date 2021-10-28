@@ -3,17 +3,20 @@
 		"authors": [
 			"Bashir Gwanki",
 			"DonCamillo",
+			"Em-em",
 			"Gwanki"
 		]
 	},
 	"tooltip-ca-ve-edit": "Gyara wannan shafi",
 	"visualeditor-backbutton-tooltip": "Koma baya",
+	"visualeditor-ca-createsource": "Kirkira tsatso",
 	"visualeditor-ca-editsource": "Gyara masomi",
 	"visualeditor-ca-editsource-section": "Gyara masomin",
 	"visualeditor-ca-ve-create": "Gyaran Gani",
 	"visualeditor-ca-ve-edit": "Gyaran Gani",
 	"visualeditor-ca-ve-edit-section": "Gyaran Gani",
 	"visualeditor-categories-tool": "Rukunoni",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-change-image": "Canja Hoto",
 	"visualeditor-dialog-media-choose-image": "Amfani da wannan hoto",
 	"visualeditor-dialog-media-content-filename": "Sunan fayil",
