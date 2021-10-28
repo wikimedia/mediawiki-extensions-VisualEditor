@@ -323,6 +323,17 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 
 	if ( this.useInlineDescriptions ) {
 		var isSmallScreen = this.isNarrowScreen();
+
+		var showOtherActions = isSmallScreen ||
+			this.actions.getOthers().some( function ( action ) {
+				// Check for unknown actions, show the toolbar if any are available.
+				return action.action !== 'mode';
+			} );
+		this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
+			action.toggle( isSmallScreen );
+		} );
+		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !showOtherActions );
+
 		if ( isSmallScreen && this.transclusionModel.isEmpty() ) {
 			expandSidebar = false;
 		} else if ( isSmallScreen &&
@@ -334,13 +345,6 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 		} else {
 			expandSidebar = !isSmallScreen;
 		}
-
-		var showOtherActions = isSmallScreen ||
-			this.actions.getOthers().some( function ( action ) {
-				// Check for unknown actions, show the toolbar if any are available.
-				return action.action !== 'mode';
-			} );
-		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !showOtherActions );
 
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
 	} else {
