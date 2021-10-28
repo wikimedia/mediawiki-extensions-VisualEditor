@@ -27,6 +27,12 @@ ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButt
 		$tabIndexed: this.$button
 	}, config ) );
 
+	// FIXME hack for screen readers to understand the selection state
+	this.$button.attr( {
+		role: 'gridcell',
+		'aria-selected': 'false'
+	} );
+
 	this.$element
 		.append( this.$button.append( this.$icon, this.$label ) );
 };
@@ -85,4 +91,15 @@ ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
 	}
 
 	return OO.ui.mixin.ButtonElement.prototype.onKeyDown.call( this, e );
+};
+
+/**
+ * @inheritDoc
+ */
+ve.ui.MWTransclusionOutlineButtonWidget.prototype.setSelected = function ( state ) {
+	if ( this.$button ) {
+		this.$button.attr( 'aria-selected', state.toString() );
+	}
+
+	return ve.ui.MWTransclusionOutlineButtonWidget.super.prototype.setSelected.call( this, state );
 };
