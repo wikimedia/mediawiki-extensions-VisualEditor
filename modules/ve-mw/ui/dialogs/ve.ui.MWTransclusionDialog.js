@@ -334,7 +334,14 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 		} else {
 			expandSidebar = !isSmallScreen;
 		}
-		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !isSmallScreen );
+
+		var showOtherActions = isSmallScreen ||
+			this.actions.getOthers().some( function ( action ) {
+				// Check for unknown actions, show the toolbar if any are available.
+				return action.action !== 'mode';
+			} );
+		this.$otherActions.toggleClass( 'oo-ui-element-hidden', !showOtherActions );
+
 		this.$content.toggleClass( 've-ui-mwTransclusionDialog-small-screen', isSmallScreen );
 	} else {
 		expandSidebar = !this.transclusionModel.isSingleTemplate();
