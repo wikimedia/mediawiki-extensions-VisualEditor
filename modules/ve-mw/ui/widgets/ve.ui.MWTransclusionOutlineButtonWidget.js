@@ -98,11 +98,11 @@ ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
 		this.emit( 'keyPressed', e.which );
 		// TODO: Do we need e.preventDefault() and/or e.stopPropagation() here?
 		return;
-	} else if ( e.which === OO.ui.Keys.DELETE &&
+	} else if ( ( e.which === OO.ui.Keys.DELETE || ( isMac && e.which === OO.ui.Keys.BACKSPACE ) ) &&
 		withMetaKey &&
 		!e.shiftKey && !e.altKey
 	) {
-		this.emit( 'keyPressed', e.which );
+		this.emit( 'keyPressed', OO.ui.Keys.DELETE );
 		// To not trigger the "clear cache" feature in Chrome we must do both
 		e.preventDefault();
 		e.stopPropagation();
