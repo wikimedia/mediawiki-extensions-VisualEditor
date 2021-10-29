@@ -7,7 +7,7 @@ QUnit.test( 'Constructor', ( assert ) => {
 
 	assert.strictEqual( widget.getData(), 'part_0' );
 	assert.strictEqual(
-		widget.$element.find( '.ve-ui-mwTransclusionOutlineButtonWidget' ).text(),
+		widget.$element.find( '.ve-ui-mwTransclusionOutlineButtonWidget .oo-ui-buttonElement-button' ).text(),
 		'Example'
 	);
 	assert.notOk( widget.searchWidget.isVisible() );

@@ -17,7 +17,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	// Parent constructor
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, template, {
 		icon: 'puzzle',
-		label: spec.getLabel()
+		label: spec.getLabel(),
+		ariaDescriptionSelected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected' ),
+		ariaDescriptionUnselected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria' )
 	} );
 
 	// Initialization
@@ -139,7 +141,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setSelected = function ( sta
 	if ( !state && this.isSelected() ) {
 		this.parameters.highlightItem();
 	}
-
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.setSelected.call( this, state );
 };
 
