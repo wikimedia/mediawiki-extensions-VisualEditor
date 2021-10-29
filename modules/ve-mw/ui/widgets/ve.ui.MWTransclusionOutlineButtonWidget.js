@@ -78,7 +78,8 @@ ve.ui.MWTransclusionOutlineButtonWidget.static.pressable = false;
  * @fires keyPressed
  */
 ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
-	var withMetaKey = e.ctrlKey || e.metaKey;
+	var isMac = ve.getSystemPlatform() === 'mac';
+	var withMetaKey = isMac ? e.metaKey : e.ctrlKey;
 
 	if ( e.which === OO.ui.Keys.SPACE &&
 		!withMetaKey && !e.shiftKey && !e.altKey
