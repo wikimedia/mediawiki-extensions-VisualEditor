@@ -156,6 +156,10 @@
 	padding-top: 1px;
 }
 
+.ve-ui-mwTransclusionOutline-ariaHidden {
+	display: none;
+}
+
 .ve-ui-mwTransclusionOutlineParameterSelectWidget:focus {
 	border-radius: 2px;
 	box-shadow: inset 0 0 0 1px #36c;

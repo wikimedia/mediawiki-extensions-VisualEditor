@@ -19,6 +19,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 	OO.ui.mixin.TabIndexedElement.call( this, {
 		tabIndex: this.isEmpty() ? -1 : 0
 	} );
+	ve.ui.MWAriaDescribe.call( this, config );
 
 	this.$element
 		.on( {
@@ -33,6 +34,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 
 OO.inheritClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.SelectWidget );
 OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, OO.ui.mixin.TabIndexedElement );
+OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, ve.ui.MWAriaDescribe );
 
 /* Events */
 
