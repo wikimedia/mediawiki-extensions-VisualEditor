@@ -52,20 +52,26 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
+	var $parametersAriaDescription = $( '<span>' )
+		.text( ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-description' ) )
+		.attr( 'id', OO.ui.generateElementId() )
+		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
 	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
-		items: parameterNames.map( this.createCheckbox.bind( this ) )
+		items: parameterNames.map( this.createCheckbox.bind( this ) ),
+		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
+		ariaDescriptionId: $parametersAriaDescription.attr( 'id' )
 	} )
 		.connect( this, {
 			choose: 'onTemplateParameterChoose',
 			templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
 			change: 'onParameterWidgetListChanged'
 		} );
-	this.parameters.$element
-		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ) );
 
 	this.$element.append(
 		this.searchWidget.$element,
 		this.infoWidget.$element,
+		$parametersAriaDescription,
 		this.parameters.$element
 	);
 };

@@ -19,6 +19,7 @@
 			{
 				"name": "User Interface",
 				"classes": [
+					"ve.ui.MWAriaDescribe",
 					"ve.ui.MW*Page",
 					"ve.ui.MW*Window"
 				]
