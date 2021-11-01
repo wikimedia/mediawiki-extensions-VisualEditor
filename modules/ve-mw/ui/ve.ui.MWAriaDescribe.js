@@ -6,12 +6,12 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {string} [ariaDescriptionId]
+ * @cfg {jQuery} [$ariaDescribedBy]
  * @cfg {string} [ariaLabel]
  */
 ve.ui.MWAriaDescribe = function VeUiMWAriaDescribe( config ) {
-	if ( config.ariaDescriptionId ) {
-		this.setAriaDescriptionId( config.ariaDescriptionId );
+	if ( config.$ariaDescribedBy ) {
+		this.setAriaDescribedBy( config.$ariaDescribedBy );
 	}
 
 	if ( config.ariaLabel ) {
@@ -24,12 +24,15 @@ ve.ui.MWAriaDescribe = function VeUiMWAriaDescribe( config ) {
 OO.initClass( ve.ui.MWAriaDescribe );
 
 /**
- * @param {string} id
+ * @param {jQuery} $description
  * @chainable
  * @return {OO.ui.Element} The element, for chaining
  */
-ve.ui.MWAriaDescribe.prototype.setAriaDescriptionId = function ( id ) {
-	this.$element.attr( 'aria-describedby', id );
+ve.ui.MWAriaDescribe.prototype.setAriaDescribedBy = function ( $description ) {
+	if ( !$description.attr( 'id' ) ) {
+		$description.attr( 'id', OO.ui.generateElementId() );
+	}
+	this.$element.attr( 'aria-describedby', $description.attr( 'id' ) );
 	return this;
 };
 
