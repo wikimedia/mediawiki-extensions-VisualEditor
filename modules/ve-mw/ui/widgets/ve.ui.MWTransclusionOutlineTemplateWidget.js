@@ -54,13 +54,12 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 
 	var $parametersAriaDescription = $( '<span>' )
 		.text( ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-description' ) )
-		.attr( 'id', OO.ui.generateElementId() )
 		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
 	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
 		items: parameterNames.map( this.createCheckbox.bind( this ) ),
 		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
-		ariaDescriptionId: $parametersAriaDescription.attr( 'id' )
+		$ariaDescribedBy: $parametersAriaDescription
 	} )
 		.connect( this, {
 			choose: 'onTemplateParameterChoose',
