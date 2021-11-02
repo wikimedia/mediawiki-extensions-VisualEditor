@@ -450,7 +450,7 @@ class ApiVisualEditor extends ApiBase {
 					} elseif (
 						$block !== null &&
 						$block->getType() != DatabaseBlock::TYPE_AUTO &&
-						( $block->isSitewide() || $targetUser->isBlockedFrom( $title ) )
+						( $block->isSitewide() || $permissionManager->isBlockedFrom( $targetUser, $title ) )
 					) {
 						// Show log extract if the user is sitewide blocked or is partially
 						// blocked and not allowed to edit their user page or user talk page
