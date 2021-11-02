@@ -10,8 +10,8 @@ QUnit.test( 'Constructor', ( assert ) => {
 		widget.$element.find( '.ve-ui-mwTransclusionOutlineButtonWidget .oo-ui-buttonElement-button' ).text(),
 		'Example'
 	);
-	assert.notOk( widget.searchWidget.isVisible() );
-	assert.notOk( widget.infoWidget.isVisible() );
+	assert.false( widget.searchWidget.isVisible() );
+	assert.false( widget.infoWidget.isVisible() );
 } );
 
 QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
@@ -78,7 +78,7 @@ QUnit.test( 'filterParameters() on an empty template', ( assert ) => {
 	} );
 
 	widget.filterParameters( '' );
-	assert.ok( widget.infoWidget.isVisible() );
+	assert.true( widget.infoWidget.isVisible() );
 	assert.strictEqual( eventsFired, 1 );
 } );
 
@@ -113,8 +113,8 @@ QUnit.test( 'filterParameters() considers everything from the spec', ( assert ) 
 		}
 	} );
 
-	assert.ok( widget.searchWidget.isVisible() );
+	assert.true( widget.searchWidget.isVisible() );
 	widget.filterParameters( ' A ' );
-	assert.notOk( widget.infoWidget.isVisible() );
+	assert.false( widget.infoWidget.isVisible() );
 	assert.strictEqual( eventsFired, 1 );
 } );

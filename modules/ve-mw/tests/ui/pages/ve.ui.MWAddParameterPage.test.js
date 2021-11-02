@@ -15,7 +15,7 @@ QUnit.test( 'Input event handlers', ( assert ) => {
 	page.paramInputField.setValue( ' p1 ' );
 	assert.strictEqual( page.saveButton.isDisabled(), false, 'can click' );
 	page.onParameterNameSubmitted();
-	assert.ok( template.hasParameter( 'p1' ), 'input is trimmed and parameter added' );
+	assert.true( template.hasParameter( 'p1' ), 'input is trimmed and parameter added' );
 	assert.strictEqual( page.paramInputField.getValue(), '', 'accepted input is cleared' );
 
 	template.getParameter( 'p1' ).setValue( 'not empty' );
@@ -28,7 +28,7 @@ QUnit.test( 'Input event handlers', ( assert ) => {
 	template.getSpec().setTemplateData( { params: { documented: {} } } );
 	page.paramInputField.setValue( 'documented' );
 	page.onParameterNameSubmitted();
-	assert.notOk( template.hasParameter( 'documented' ), 'documented parameter is not added' );
+	assert.false( template.hasParameter( 'documented' ), 'documented parameter is not added' );
 	assert.strictEqual( page.paramInputField.getValue(), 'documented', 'bad input is not cleared' );
 } );
 
@@ -41,10 +41,10 @@ QUnit.test( 'Outline item initialization', ( assert ) => {
 	page.setOutlineItem( new OO.ui.OutlineOptionWidget() );
 	const outlineItem = page.getOutlineItem();
 
-	assert.notOk( outlineItem.$element.children().length,
+	assert.strictEqual( outlineItem.$element.children().length, 0,
 		'Outline item should be empty' );
 	// eslint-disable-next-line no-jquery/no-class-state
-	assert.notOk( outlineItem.$element.hasClass( 'oo-ui-outlineOptionWidget' ),
+	assert.false( outlineItem.$element.hasClass( 'oo-ui-outlineOptionWidget' ),
 		'Outline item should not be styled' );
 } );
 

@@ -305,7 +305,7 @@
 			const template = createTemplateMock(),
 				spec = new ve.dm.MWTemplateSpecModel( template );
 
-			assert.notOk( spec.isDocumented(), 'undocumented by default' );
+			assert.false( spec.isDocumented(), 'undocumented by default' );
 
 			spec.setTemplateData( templateData );
 			assert.strictEqual( spec.isDocumented(), expected );

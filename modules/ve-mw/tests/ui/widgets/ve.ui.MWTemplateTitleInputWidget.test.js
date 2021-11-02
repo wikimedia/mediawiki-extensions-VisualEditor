@@ -55,7 +55,7 @@
 		const widget = new ve.ui.MWTemplateTitleInputWidget( { showRedirectTargets: false } ),
 			apiParams = widget.getApiParams();
 
-		assert.notOk( 'gsrprop' in apiParams );
+		assert.false( 'gsrprop' in apiParams );
 	} );
 
 	QUnit.test( 'CirrusSearch: prefixsearch behavior', ( assert ) => {

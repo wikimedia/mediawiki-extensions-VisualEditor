@@ -4,7 +4,7 @@ QUnit.test( 'Constructor', ( assert ) => {
 	const widget = new ve.ui.MWTransclusionOutlineWidget();
 
 	// eslint-disable-next-line no-jquery/no-class-state
-	assert.ok( widget.$element.hasClass( 've-ui-mwTransclusionOutlineWidget' ) );
+	assert.true( widget.$element.hasClass( 've-ui-mwTransclusionOutlineWidget' ) );
 	assert.deepEqual( widget.partWidgets, {} );
 } );
 
@@ -16,9 +16,9 @@ QUnit.test( 'Supports all ve.dm.MWTransclusionPartModel subclasses', ( assert ) 
 	widget.onReplacePart( null, new ve.dm.MWTemplatePlaceholderModel( transclusion ) );
 	widget.onReplacePart( null, new ve.dm.MWTransclusionContentModel( transclusion ) );
 
-	assert.ok( widget.partWidgets.part_0 instanceof ve.ui.MWTransclusionOutlineTemplateWidget );
-	assert.ok( widget.partWidgets.part_1 instanceof ve.ui.MWTransclusionOutlinePlaceholderWidget );
-	assert.ok( widget.partWidgets.part_2 instanceof ve.ui.MWTransclusionOutlineWikitextWidget );
+	assert.true( widget.partWidgets.part_0 instanceof ve.ui.MWTransclusionOutlineTemplateWidget );
+	assert.true( widget.partWidgets.part_1 instanceof ve.ui.MWTransclusionOutlinePlaceholderWidget );
+	assert.true( widget.partWidgets.part_2 instanceof ve.ui.MWTransclusionOutlineWikitextWidget );
 } );
 
 QUnit.test( 'Basic functionality', ( assert ) => {
@@ -57,18 +57,18 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 	assert.deepEqual( Object.keys( widget.partWidgets ), [ 'part_0', 'part_1', 'part_2' ] );
 
 	let $items = widget.$element.children();
-	assert.ok( $items.eq( 0 ).is( widget.partWidgets.part_1.$element ) );
-	assert.ok( $items.eq( 1 ).is( widget.partWidgets.part_2.$element ) );
-	assert.ok( $items.eq( 2 ).is( widget.partWidgets.part_0.$element ) );
+	assert.true( $items.eq( 0 ).is( widget.partWidgets.part_1.$element ) );
+	assert.true( $items.eq( 1 ).is( widget.partWidgets.part_2.$element ) );
+	assert.true( $items.eq( 2 ).is( widget.partWidgets.part_0.$element ) );
 
 	// This bypasses all logic in ve.dm.MWTransclusionModel, effectively making it a mock.
 	transclusion.parts = [ part2, part0, part1 ];
 	widget.onTransclusionModelChange( transclusion );
 
 	$items = widget.$element.children();
-	assert.ok( $items.eq( 0 ).is( widget.partWidgets.part_2.$element ) );
-	assert.ok( $items.eq( 1 ).is( widget.partWidgets.part_0.$element ) );
-	assert.ok( $items.eq( 2 ).is( widget.partWidgets.part_1.$element ) );
+	assert.true( $items.eq( 0 ).is( widget.partWidgets.part_2.$element ) );
+	assert.true( $items.eq( 1 ).is( widget.partWidgets.part_0.$element ) );
+	assert.true( $items.eq( 2 ).is( widget.partWidgets.part_1.$element ) );
 } );
 
 [

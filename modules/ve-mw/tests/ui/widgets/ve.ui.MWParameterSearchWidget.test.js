@@ -43,7 +43,7 @@
 
 		assert.strictEqual( items.length, 2 );
 		assert.strictEqual( items[ 0 ].getData().name, 'abbr' );
-		assert.ok( items[ 0 ].getData().isUnknown );
+		assert.true( items[ 0 ].getData().isUnknown );
 		assert.strictEqual( items[ 1 ].getData().name, 'abbreviation' );
 	} );
 

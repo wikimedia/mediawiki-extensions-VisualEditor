@@ -97,12 +97,12 @@
 			} );
 
 		} ).fail( () => {
-			assert.ok( false );
+			assert.true( false );
 			finishTest();
 		} );
 
 		windowInstance.closed.then( () => {
-			assert.ok( true );
+			assert.true( true );
 			finishTest();
 		} );
 	} );
