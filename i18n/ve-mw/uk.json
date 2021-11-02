@@ -220,6 +220,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "Приклад: $1",
 	"visualeditor-dialog-transclusion-param-info": "Опис поля",
 	"visualeditor-dialog-transclusion-param-info-missing": "Немає опису поля",
+	"visualeditor-dialog-transclusion-param-selection-aria-description": "Натисніть пробіл, щоб додати або видалити параметри. Натисніть Enter, щоб додати параметр і негайно відредагувати його значення. Коли параметр уже вибрано, натисніть Enter, щоб відредагувати значення.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Параметри у $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Недокументований параметр)",
 	"visualeditor-dialog-transclusion-placeholder": "Додати шаблон",
