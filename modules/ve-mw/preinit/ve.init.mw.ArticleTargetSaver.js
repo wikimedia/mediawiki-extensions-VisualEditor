@@ -222,7 +222,7 @@
 					errorformat: 'html',
 					errorlang: mw.config.get( 'wgUserLanguage' ),
 					errorsuselocal: true,
-					editingStatsId: window.ve && window.ve.init.editingSessionId
+					editingStatsId: window.ve && window.ve.init && window.ve.init.editingSessionId
 				},
 				data
 			);
