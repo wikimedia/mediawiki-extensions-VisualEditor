@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Gloria sah",
 			"Mondschein",
 			"Ninonino",
@@ -33,7 +34,7 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Sgionta una font per la descrizzion local",
 	"visualeditor-ca-createsource": "Crea sorgent",
 	"visualeditor-ca-editlocaldescriptionsource": "Modifica el wikitest local",
-	"visualeditor-ca-editsource": "modifica 'l sorgent",
+	"visualeditor-ca-editsource": "Modifica 'l sorgent",
 	"visualeditor-ca-editsource-section": "modifica 'l sorgent",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
@@ -198,6 +199,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "Esempi: $1",
 	"visualeditor-dialog-transclusion-param-info": "Descrizzion del camp",
 	"visualeditor-dialog-transclusion-param-info-missing": "Nissuna descrizzion del camp disponibil",
+	"visualeditor-dialog-transclusion-param-selection-aria-description": "Schiscia \"Spazzi\" per sgiontà o toeu via di parametri. Schiscia \"Invio\" per sgiontà on parametro e donca modifegà el so valor. Se on parametro l'è sgiamò selezionad, Schiscia \"Invio\" per cambiàgh el valor.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parametri in $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Parametro minga trovad)",
 	"visualeditor-dialog-transclusion-placeholder": "Sgionta on model",

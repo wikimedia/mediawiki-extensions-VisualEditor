@@ -202,6 +202,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "Пример: $1",
 	"visualeditor-dialog-transclusion-param-info": "Опис на полето",
 	"visualeditor-dialog-transclusion-param-info-missing": "Нема опис на полето",
+	"visualeditor-dialog-transclusion-param-selection-aria-description": "Притиснете на белина за да додадете илли отстраните параметри. Стиснете Enter за да додадете параметар и веднаш да му ја уредите вредноста. Кога параметарот е веќе одбран, стиснете Enter за да му ја уредите вредноста.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Параметри во $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Недокументиран параметар)",
 	"visualeditor-dialog-transclusion-placeholder": "Додај нова предлошка",
