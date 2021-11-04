@@ -153,7 +153,7 @@ trait ApiParsoidTrait {
 				[
 					'code' => $response['code'],
 					'trace' => ( new Exception )->getTraceAsString(),
-					'response' => $response['body'],
+					'response' => [ 'body' => $response['body'] ],
 					'requestPath' => $path,
 					'requestIfMatch' => $reqheaders['If-Match'] ?? '',
 				]
