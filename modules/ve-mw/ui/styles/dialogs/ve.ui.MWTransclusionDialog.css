@@ -265,3 +265,13 @@
 	color: #72777d;
 	margin: 8px 24px;
 }
+
+.ve-ui-mwTransclusionDialog-floatingHelpElement {
+	position: absolute;
+	right: 23px;
+	bottom: 23px;
+}
+
+.ve-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout label {
+	margin-bottom: 16px;
+}
