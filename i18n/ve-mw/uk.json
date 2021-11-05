@@ -185,7 +185,7 @@
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Цей шаблон не існує.",
 	"visualeditor-dialog-transclusion-template-title-modifier": "Документація за шаблонами та імена [//www.mediawiki.org/wiki/Manual:Glossary#Parameter параметрів] (якщо вони є) недоступні під час редагування шаблонів із використанням вкладеного синтаксису або модифікаторів, таких як [//www.mediawiki.org/wiki/Help:Substitution subst].",
 	"visualeditor-dialog-transclusion-template-widget-aria": "Натисніть пробіл, щоб вибрати шаблон.",
-	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Натисніть Ctrl+Del, щоб видалити шаблон, його параметри та їх значення. Натисніть Ctrl+Shift+Стрілки, щоб перемістити шаблон вгору або вниз.",
+	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Натисніть Ctrl+Del, щоб видалити шаблон, його параметри та їхні значення. Натисніть Ctrl+Shift+Стрілки, щоб перемістити шаблон вгору або вниз.",
 	"visualeditor-dialog-transclusion-add-content": "Додати вміст",
 	"visualeditor-dialog-transclusion-add-wikitext": "Додати вікітекст",
 	"visualeditor-dialog-transclusion-add-param": "Додати більше інформації",
