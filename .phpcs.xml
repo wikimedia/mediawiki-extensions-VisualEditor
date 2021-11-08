@@ -3,6 +3,17 @@
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
 		<exclude name="MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgTitle" />
 	</rule>
+
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing.TooMuchSpaceAfterComma">
+		<severity>5</severity>
+	</rule>
+	<rule ref="MediaWiki.Classes.FullQualifiedClassName">
+		<severity>5</severity>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst">
+		<severity>5</severity>
+	</rule>
+
 	<file>.</file>
 	<arg name="extensions" value="php"/>
 	<arg name="encoding" value="UTF-8"/>
