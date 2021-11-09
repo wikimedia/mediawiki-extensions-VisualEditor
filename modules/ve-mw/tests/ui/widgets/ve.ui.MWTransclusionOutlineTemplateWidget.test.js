@@ -15,8 +15,8 @@ QUnit.test( 'Constructor', ( assert ) => {
 } );
 
 QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
-	function assertOrder( widget, expected ) {
-		assert.deepEqual( widget.parameters.items.map( ( item ) => item.data ), expected );
+	function assertOrder( w, expected ) {
+		assert.deepEqual( w.parameters.items.map( ( item ) => item.data ), expected );
 	}
 
 	const transclusion = new ve.dm.MWTransclusionModel(),

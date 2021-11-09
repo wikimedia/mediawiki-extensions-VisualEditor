@@ -248,12 +248,12 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		} );
 	if ( matchingRedirects.length ) {
 		for ( i = matchingRedirects.length; i--; ) {
-			var redirect = matchingRedirects[ i ];
+			var matchingRedirect = matchingRedirects[ i ];
 			// Offer redirects as separate options when the user's input is an exact match
 			unshiftPages( response.query.pages, {
-				pageid: redirect.pageid,
-				ns: redirect.ns,
-				title: redirect.redirecttitle
+				pageid: matchingRedirect.pageid,
+				ns: matchingRedirect.ns,
+				title: matchingRedirect.redirecttitle
 			} );
 		}
 		return response;
