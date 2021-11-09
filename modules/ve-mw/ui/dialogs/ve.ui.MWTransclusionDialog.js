@@ -262,7 +262,7 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 	var context = this;
 
 	this.hotkeyTriggers = {};
-	this.hotkeyTriggers[ 'ctrl+alt+d' ] = function () {
+	this.hotkeyTriggers[ 'ctrl+d' ] = function () {
 		context.addTemplatePlaceholder();
 	};
 	this.hotkeyTriggers[ this.getHotkeyCombo( 'y' ) ] = function () {
