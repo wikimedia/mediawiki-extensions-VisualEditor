@@ -590,6 +590,24 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		classes: [ 've-ui-mwTransclusionDialog-multipart-message' ]
 	} );
 
+	if ( this.useNewSidebar || this.useInlineDescriptions ) {
+		var helpPopup = new ve.ui.MWFloatingHelpElement( {
+			label: mw.message( 'visualeditor-dialog-transclusion-help-title' ).text(),
+			$message: new OO.ui.FieldsetLayout( {
+				items: [
+					new OO.ui.LabelWidget( {
+						label: mw.message( 'visualeditor-dialog-transclusion-help-message' ).text()
+					} ),
+					this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-help', 'helpNotice' ),
+					this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-feedback', 'edit' )
+				],
+				classes: [ 've-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout' ]
+			} ).$element
+		} );
+		helpPopup.$element.addClass( 've-ui-mwTransclusionDialog-floatingHelpElement' );
+		helpPopup.$element.appendTo( this.$body );
+	}
+
 	// Events
 	if ( this.useInlineDescriptions ) {
 		this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
@@ -660,6 +678,31 @@ ve.ui.MWTransclusionDialog.prototype.getSizeProperties = function () {
 	}
 
 	return sizeProps;
+};
+
+/**
+ * Converts a message link into an OO.ui.ButtonWidget with an icon.
+ *
+ * @private
+ * @param {string} message i18n message key
+ * @param {string} icon icon name
+ * @return {OO.ui.ButtonWidget}
+ */
+ve.ui.MWTemplateDialog.prototype.getMessageButton = function ( message, icon ) {
+	// Messages that can be used here:
+	// * visualeditor-dialog-transclusion-help-page-help
+	// * visualeditor-dialog-transclusion-help-page-feedback
+	var $link = mw.message( message ).parseDom(),
+		button = new OO.ui.ButtonWidget( {
+			label: $link.text(),
+			href: $link.attr( 'href' ),
+			target: '_blank',
+			flags: 'progressive',
+			icon: icon,
+			framed: false
+		} );
+	button.$button.attr( 'role', 'link' );
+	return button;
 };
 
 /* Registration */
