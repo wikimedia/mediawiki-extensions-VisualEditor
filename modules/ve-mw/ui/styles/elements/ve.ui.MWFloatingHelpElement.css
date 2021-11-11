@@ -10,13 +10,13 @@
 	z-index: 2;
 }
 
-.ve-ui-mwFloatingHelpElement .oo-ui-windowManager .oo-ui-dialog {
+.ve-ui-mwFloatingHelpElement .oo-ui-windowManager-floating .oo-ui-dialog {
 	position: relative;
 	margin-bottom: 16px;
 	padding: 0;
 }
 
-.ve-ui-mwFloatingHelpElement .oo-ui-windowManager .oo-ui-dialog .oo-ui-window-frame {
+.ve-ui-mwFloatingHelpElement .oo-ui-windowManager-floating .oo-ui-dialog .oo-ui-window-frame {
 	position: relative;
 	top: 0;
 }

@@ -49,6 +49,7 @@ ve.ui.MWFloatingHelpDialog.prototype.initialize = function () {
 	var content = new OO.ui.PanelLayout( { padded: true, expanded: false } );
 	content.$element.append( this.$message );
 	this.$body.append( content.$element );
+	this.$foot.remove();
 };
 
 /**
@@ -63,7 +64,7 @@ ve.ui.MWFloatingHelpDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWFloatingHelpDialog.prototype.getSizeProperties = function () {
 	var sizeProps = ve.ui.MWFloatingHelpDialog.super.prototype.getSizeProperties.call( this );
 	if ( !OO.ui.isMobile() ) {
-		return ve.extendObject( {}, sizeProps, { width: '350px' } );
+		return ve.extendObject( {}, sizeProps, { width: '350px', maxHeight: '50%' } );
 	}
 	return sizeProps;
 };
