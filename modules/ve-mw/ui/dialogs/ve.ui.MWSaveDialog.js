@@ -228,8 +228,6 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		// TODO: This code is very similar to ve.ui.PreviewElement+ve.ui.MWPreviewElement
 		ve.resolveAttributes( body, docOrMsg, ve.dm.Converter.static.computedAttributes );
 
-		var $heading = $( '<h1>' ).addClass( 'firstHeading' );
-
 		// Document title will only be set if wikitext contains {{DISPLAYTITLE}}
 		if ( docOrMsg.title ) {
 			// HACK: Parse title as it can contain basic wikitext (T122976)
@@ -240,7 +238,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				text: '{{DISPLAYTITLE:' + docOrMsg.title + '}}\n'
 			} ).then( function ( response ) {
 				if ( ve.getProp( response, 'parse', 'displaytitle' ) ) {
-					$heading.html( response.parse.displaytitle );
+					dialog.$previewHeading.html( response.parse.displaytitle );
 				}
 			} );
 		}
@@ -257,9 +255,9 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			);
 		}
 
+		// TODO: This won't work with formatted titles (T122976)
+		this.$previewHeading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText() );
 		this.$previewViewer.empty().append(
-			// TODO: This won't work with formatted titles (T122976)
-			$heading.text( docOrMsg.title || mw.Title.newFromText( ve.init.target.getPageName() ).getPrefixedText() ),
 			$redirect,
 			// The following classes are used here:
 			// * mw-content-ltr
@@ -693,6 +691,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		expanded: false,
 		padded: true
 	} );
+	this.$previewHeading = $( '<h1>' ).addClass( 'firstHeading' );
 	this.$previewViewer = $( '<div>' ).addClass( 'mw-body-content mw-parser-output' );
 	this.previewPanel.$element
 		// Make focusable for keyboard accessible scrolling
@@ -700,6 +699,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		.append(
 			$( '<div>' ).addClass( 'mw-content-container' ).append(
 				$( '<div>' ).addClass( 'mw-body' ).append(
+					this.$previewHeading,
 					this.$previewViewer
 				)
 			)
