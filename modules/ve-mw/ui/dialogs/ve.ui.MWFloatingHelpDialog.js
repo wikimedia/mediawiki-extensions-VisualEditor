@@ -62,5 +62,8 @@ ve.ui.MWFloatingHelpDialog.prototype.getSetupProcess = function ( data ) {
 
 ve.ui.MWFloatingHelpDialog.prototype.getSizeProperties = function () {
 	var sizeProps = ve.ui.MWFloatingHelpDialog.super.prototype.getSizeProperties.call( this );
-	return ve.extendObject( {}, sizeProps, { width: '350px' } );
+	if ( !OO.ui.isMobile() ) {
+		return ve.extendObject( {}, sizeProps, { width: '350px' } );
+	}
+	return sizeProps;
 };

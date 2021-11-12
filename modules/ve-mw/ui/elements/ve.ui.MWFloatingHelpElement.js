@@ -32,13 +32,17 @@ ve.ui.MWFloatingHelpElement = function VeUiMWFloatingHelpElement( config ) {
 
 	this.windowManager = new OO.ui.WindowManager();
 	this.windowManager.addWindows( [ this.helpDialog ] );
+	this.windowManager.$element.addClass( 've-ui-mwFloatingHelpElement-windowManager' );
+
+	if ( OO.ui.isMobile() ) {
+		$( document.body ).append( this.windowManager.$element );
+	} else {
+		this.$element.append( this.windowManager.$element );
+	}
 
 	this.$element
 		.addClass( 've-ui-mwFloatingHelpElement' )
-		.append(
-			this.windowManager.$element,
-			this.helpButton.$element
-		);
+		.append( this.helpButton.$element );
 };
 
 /* Inheritance */

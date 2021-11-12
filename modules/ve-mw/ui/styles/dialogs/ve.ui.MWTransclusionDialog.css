@@ -275,3 +275,7 @@
 .ve-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout label {
 	margin-bottom: 16px;
 }
+
+.ve-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout .oo-ui-buttonWidget {
+	width: 100%;
+}
