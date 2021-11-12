@@ -200,13 +200,10 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
  * @param {HTMLDocument} [baseDoc] Base document against which to normalise links, if document provided
  */
 ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
-	var body, $heading, redirectMeta, deferred,
-		$redirect = $(),
-		categories = [],
-		modules = [],
-		dialog = this;
+	var dialog = this;
 
 	if ( docOrMsg instanceof HTMLDocument ) {
+		var modules = [];
 		// Extract required modules for stylesheet tags (avoids re-loading styles)
 		Array.prototype.forEach.call( docOrMsg.head.querySelectorAll( 'link[rel~=stylesheet]' ), function ( link ) {
 			var uri = new mw.Uri( link.href );
@@ -219,7 +216,8 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			return ( module.match( /^(skins|mediawiki\.skinning)\./ ) === null );
 		} );
 		mw.loader.using( modules );
-		body = docOrMsg.body;
+		var body = docOrMsg.body;
+		var categories = [];
 		// Take a snapshot of all categories
 		Array.prototype.forEach.call( body.querySelectorAll( 'link[rel~="mw:PageProp/Category"]' ), function ( element ) {
 			categories.push( ve.dm.nodeFactory.createFromElement( ve.dm.MWCategoryMetaItem.static.toDataElement( [ element ] ) ) );
@@ -230,7 +228,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		// TODO: This code is very similar to ve.ui.PreviewElement+ve.ui.MWPreviewElement
 		ve.resolveAttributes( body, docOrMsg, ve.dm.Converter.static.computedAttributes );
 
-		$heading = $( '<h1>' ).addClass( 'firstHeading' );
+		var $heading = $( '<h1>' ).addClass( 'firstHeading' );
 
 		// Document title will only be set if wikitext contains {{DISPLAYTITLE}}
 		if ( docOrMsg.title ) {
@@ -248,7 +246,8 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		}
 
 		// Redirect
-		redirectMeta = body.querySelector( 'link[rel="mw:PageProp/redirect"]' );
+		var $redirect = $( [] );
+		var redirectMeta = body.querySelector( 'link[rel="mw:PageProp/redirect"]' );
 		if ( redirectMeta ) {
 			$redirect = ve.init.mw.ArticleTarget.static.buildRedirectMsg(
 				mw.libs.ve.getTargetDataFromHref(
@@ -275,6 +274,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		ve.init.platform.linkCache.styleParsoidElements( this.$previewViewer, baseDoc );
 		mw.libs.ve.fixFragmentLinks( this.$previewViewer[ 0 ], mw.Title.newFromText( ve.init.target.getPageName() ), 'mw-save-preview-' );
 
+		var deferred;
 		if ( categories.length ) {
 			// If there are categories, we need to render them. This involves
 			// a delay, since they might be hidden categories.
@@ -342,15 +342,13 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  * @throws {Error} Unknown saveDialog panel
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
-	var currentEditSummaryWikitext,
-		mode = panel,
-		size = 'medium',
-		dialog = this,
-		panelObj = dialog[ panel + 'Panel' ];
-
 	if ( ( [ 'save', 'review', 'preview', 'conflict' ].indexOf( panel ) ) === -1 ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
+
+	var mode = panel,
+		dialog = this,
+		panelObj = dialog[ panel + 'Panel' ];
 
 	// Update the window title
 	// The following messages are used here:
@@ -369,6 +367,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		this.$content[ 0 ].focus();
 	}
 
+	var size = 'medium';
 	switch ( panel ) {
 		case 'save':
 			if ( !noFocus && this.panels.getCurrentItem() !== this.savePanel ) {
@@ -400,7 +399,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 			break;
 	}
 	if ( panel === 'preview' || panel === 'review' ) {
-		currentEditSummaryWikitext = this.editSummaryInput.getValue();
+		var currentEditSummaryWikitext = this.editSummaryInput.getValue();
 		if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 			if ( this.editSummaryXhr ) {
 				this.editSummaryXhr.abort();
@@ -472,9 +471,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
  * @return {jQuery.Promise} Promise which resolves when the message has been shown, rejects if no new message shown.
  */
 ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
-	var messageWidget, promise;
 	if ( !this.messages[ name ] ) {
-		messageWidget = new OO.ui.MessageWidget( ve.extendObject( {
+		var messageWidget = new OO.ui.MessageWidget( ve.extendObject( {
 			classes: [ 've-ui-mwSaveDialog-message' ],
 			label: label,
 			inline: true,
@@ -484,7 +482,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
 
 		// FIXME: Use CSS transitions
 		// eslint-disable-next-line no-jquery/no-slide
-		promise = messageWidget.$element.slideDown( {
+		var promise = messageWidget.$element.slideDown( {
 			duration: 250,
 			progress: this.updateSize.bind( this )
 		} ).promise();
@@ -746,14 +744,14 @@ ve.ui.MWSaveDialog.prototype.updateOptionsBar = function () {
  * @param  {OO.ui.ButtonOptionWidget} [button] The button clicked, or false if this is the initial setup
  */
 ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
+	if ( !this.hasDiff ) {
+		return;
+	}
+
 	var dialog = this,
 		diffMode = this.reviewModeButtonSelect.findSelectedItem().getData(),
 		surfaceMode = ve.init.target.getSurface().getMode(),
 		isVisual = diffMode === 'visual';
-
-	if ( !this.hasDiff ) {
-		return;
-	}
 
 	// Config values used here:
 	// * visualeditor-diffmode-visual
@@ -850,8 +848,7 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var name,
-				surfaceMode = ve.init.target.getSurface().getMode();
+			var surfaceMode = ve.init.target.getSurface().getMode();
 
 			this.canReview = !!data.canReview;
 			this.canPreview = !!data.canPreview;
@@ -874,7 +871,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			function trackCheckbox( n ) {
 				ve.track( 'activity.mwSave', { action: 'checkbox-' + n } );
 			}
-			for ( name in this.checkboxesByName ) {
+			for ( var name in this.checkboxesByName ) {
 				this.checkboxesByName[ name ].$element.off( '.mwSave' ).on( 'click.mwSave', trackCheckbox.bind( this, name ) );
 			}
 
