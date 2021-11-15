@@ -17,6 +17,9 @@
  * @param {Object} config
  * @cfg {string} [icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
  * @cfg {string} label
+ * @cfg {string} ariaDescriptionUnselected
+ * @cfg {string} ariaDescriptionSelected
+ * @cfg {string} ariaDescriptionSelectedSingle
  */
 ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
 	this.part = part;
@@ -32,6 +35,37 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 			keyPressed: 'onHeaderKeyPressed',
 			click: 'onHeaderClick'
 		} );
+
+	if ( config.ariaDescriptionUnselected &&
+		config.ariaDescriptionSelected &&
+		config.ariaDescriptionSelectedSingle
+	) {
+		this.$ariaDescriptionUnselected = $( '<span>' )
+			.text( config.ariaDescriptionUnselected || '' )
+			.attr( 'id', OO.ui.generateElementId() )
+			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
+		this.$ariaDescriptionSelected = $( '<span>' )
+			.text( config.ariaDescriptionSelected || '' )
+			.attr( 'id', OO.ui.generateElementId() )
+			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
+		this.$ariaDescriptionSelectedSingle = $( '<span>' )
+			.text( config.ariaDescriptionSelectedSingle || '' )
+			.attr( 'id', OO.ui.generateElementId() )
+			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
+		this.header.setAriaDescribedBy( this.$ariaDescriptionUnselected );
+		this.header.$element.prepend(
+			this.$ariaDescriptionUnselected,
+			this.$ariaDescriptionSelected,
+			this.$ariaDescriptionSelectedSingle
+		);
+	}
+
+	this.transclusionModel = this.part.getTransclusion().connect( this, {
+		replace: 'updateButtonAriaDescription'
+	} );
 
 	this.$element
 		.append( this.header.$element );
@@ -111,7 +145,24 @@ ve.ui.MWTransclusionOutlinePartWidget.prototype.isSelected = function () {
  * @param {boolean} state
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.setSelected = function ( state ) {
+	this.updateButtonAriaDescription( state );
 	this.header
 		.setSelected( state )
 		.setFlags( { progressive: state } );
+};
+
+/**
+ * @param {boolean} state
+ */
+ve.ui.MWTransclusionOutlinePartWidget.prototype.updateButtonAriaDescription = function ( state ) {
+	if ( !this.$ariaDescriptionUnselected ||
+		!this.$ariaDescriptionSelected ||
+		!this.$ariaDescriptionSelectedSingle
+	) {
+		return;
+	}
+
+	this.header.setAriaDescribedBy( !state ? this.$ariaDescriptionUnselected :
+		( this.transclusionModel.isSingleTemplate() ? this.$ariaDescriptionSelectedSingle : this.$ariaDescriptionSelected )
+	);
 };
