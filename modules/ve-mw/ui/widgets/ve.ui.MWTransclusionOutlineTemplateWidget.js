@@ -18,8 +18,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.call( this, template, {
 		icon: 'puzzle',
 		label: spec.getLabel(),
+		ariaDescriptionUnselected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria' ),
 		ariaDescriptionSelected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected' ),
-		ariaDescriptionUnselected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria' )
+		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected-single' )
 	} );
 
 	// Initialization
@@ -59,8 +60,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
 		items: parameterNames.map( this.createCheckbox.bind( this ) ),
 		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
-		$ariaDescribedBy: $parametersAriaDescription
-	} )
+		$ariaDescribedBy: $parametersAriaDescription } )
 		.connect( this, {
 			choose: 'onTemplateParameterChoose',
 			templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
