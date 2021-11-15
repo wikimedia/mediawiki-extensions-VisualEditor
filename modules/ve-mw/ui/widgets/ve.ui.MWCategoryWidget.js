@@ -29,7 +29,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 
 	// Mixin constructors
 	OO.ui.mixin.GroupElement.call( this, config );
-	OO.ui.mixin.DraggableGroupElement.call( this, $.extend( {}, config, { orientation: 'horizontal' } ) );
+	OO.ui.mixin.DraggableGroupElement.call( this, ve.extendObject( {}, config, { orientation: 'horizontal' } ) );
 
 	// Properties
 	this.categories = {};

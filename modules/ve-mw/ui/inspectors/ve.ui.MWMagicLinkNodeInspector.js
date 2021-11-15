@@ -112,7 +112,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getSetupProcess = function ( data ) {
 			'visualeditor-magiclinknodeinspector-title-' + type.toLowerCase() :
 			null;
 
-	data = $.extend( {
+	data = ve.extendObject( {
 		// The following messages are used here
 		// * visualeditor-magiclinknodeinspector-title-isbn
 		// * visualeditor-magiclinknodeinspector-title-pmid

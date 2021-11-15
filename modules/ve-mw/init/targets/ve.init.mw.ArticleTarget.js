@@ -20,7 +20,7 @@
  */
 ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	config = config || {};
-	config.toolbarConfig = $.extend( {
+	config.toolbarConfig = ve.extendObject( {
 		shadow: true,
 		actions: true,
 		floatable: true
@@ -1327,7 +1327,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
  * @return {boolean} Whether submission was started
  */
 ve.init.mw.ArticleTarget.prototype.submitWithSaveFields = function ( fields, wikitext ) {
-	return this.submit( wikitext, $.extend( this.getSaveFields(), fields ) );
+	return this.submit( wikitext, ve.extendObject( this.getSaveFields(), fields ) );
 };
 
 /**

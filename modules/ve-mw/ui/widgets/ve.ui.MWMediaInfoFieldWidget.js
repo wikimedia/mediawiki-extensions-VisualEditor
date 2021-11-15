@@ -35,7 +35,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 
 	// Mixin constructors
 	OO.ui.mixin.IconElement.call( this, config );
-	OO.ui.mixin.LabelElement.call( this, $.extend( { $label: $( '<div>' ) }, config ) );
+	OO.ui.mixin.LabelElement.call( this, ve.extendObject( { $label: $( '<div>' ) }, config ) );
 
 	this.$text = $( '<div>' )
 		.addClass( 've-ui-mwMediaInfoFieldWidget-text' );

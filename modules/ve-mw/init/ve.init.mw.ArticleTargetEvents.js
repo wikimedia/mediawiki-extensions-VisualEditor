@@ -40,7 +40,7 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
  * @param {Object} data Additional data describing the event, encoded as an object
  */
 ve.init.mw.ArticleTargetEvents.prototype.track = function ( topic, data ) {
-	ve.track( topic, $.extend( {
+	ve.track( topic, ve.extendObject( {
 		mode: this.target.surface ? this.target.surface.getMode() : this.target.getDefaultMode()
 	}, data ) );
 };
