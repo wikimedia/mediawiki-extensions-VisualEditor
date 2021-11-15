@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Khun Kt",
 			"Ninjastrikers",
 			"咽頭べさ"
 		]
@@ -11,5 +12,7 @@
 	"visualeditor-ca-editsource-section": "ခြပ်ချော်ꩻ အရွီးအခိုႏတာႏ",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-content-filename": "ဖုဲင်မိဉ်ꩻ",
-	"visualeditor-preference-tabs": "ခြပ်ချော်ꩻမုꩻ အနယ်ꩻ:"
+	"visualeditor-dialog-transclusion-help-title": "တမ်းပလေက်မွဉ်းဖျင်မုꩻ အစွဲးအကမ်း",
+	"visualeditor-preference-tabs": "ခြပ်ချော်ꩻမုꩻ အနယ်ꩻ:",
+	"visualeditor-rebase-client-export": "ဒင်ႏပသာ"
 }
