@@ -20,7 +20,7 @@ ve.ui.MWFloatingHelpElement = function VeUiMWFloatingHelpElement( config ) {
 
 	this.helpDialog = new ve.ui.MWFloatingHelpDialog( config );
 	this.helpButton = new OO.ui.ButtonWidget( {
-		icon: 'feedback',
+		icon: 'help',
 		label: config.label,
 		invisibleLabel: true,
 		flags: 'progressive',
@@ -69,6 +69,6 @@ ve.ui.MWFloatingHelpElement.prototype.onClick = function () {
 
 ve.ui.MWFloatingHelpElement.prototype.updateButton = function ( isOpen ) {
 	this.helpButton
-		.setIcon( isOpen ? 'expand' : 'feedback' )
+		.setIcon( isOpen ? 'expand' : 'help' )
 		.setFlags( { primary: isOpen } );
 };
