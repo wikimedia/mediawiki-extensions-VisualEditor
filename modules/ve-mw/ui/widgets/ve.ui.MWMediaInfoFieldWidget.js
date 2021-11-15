@@ -72,6 +72,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 	if ( typeof content === 'string' ) {
 		this.$text.text( content );
 	} else if ( content instanceof OO.ui.HtmlSnippet ) {
+		// eslint-disable-next-line no-jquery/no-html
 		this.$text.html( content.toString() );
 	} else if ( content instanceof $ ) {
 		// eslint-disable-next-line no-jquery/no-append-html

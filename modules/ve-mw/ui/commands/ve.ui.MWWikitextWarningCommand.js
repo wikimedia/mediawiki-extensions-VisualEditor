@@ -35,6 +35,7 @@ ve.ui.MWWikitextWarningCommand.prototype.execute = function () {
 	if ( this.warning && this.warning.isOpen ) {
 		return false;
 	}
+	// eslint-disable-next-line no-jquery/no-html
 	$message = $( '<div>' ).html( ve.init.platform.getParsedMessage( 'visualeditor-wikitext-warning' ) );
 	ve.targetLinksToNewWindow( $message[ 0 ] );
 	ve.init.platform.notify(
