@@ -729,11 +729,8 @@
 					);
 
 					$caVeEdit = $( caVeEdit );
-					$caVeEditLink = $caVeEdit.find( 'a' );
-					// HACK: Copy the 'class' attribute, otherwise the link has no icon on Minerva
 					if ( isMinerva ) {
-						$caVeEdit.attr( 'class', $caEdit.attr( 'class' ) );
-						$caVeEditLink.attr( 'class', $caEditLink.attr( 'class' ) );
+						$caVeEdit.find( '.mw-ui-icon' ).addClass( 'mw-ui-icon-wikimedia-edit-base20' );
 					}
 				}
 			} else if ( $caEdit.length && $caVeEdit.length ) {
@@ -770,12 +767,13 @@
 			if ( isMinerva ) {
 				// Minerva hides the link text - display tiny icons instead
 				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
-				$caEdit.find( 'a' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
+				$caEdit.find( '.mw-ui-icon' ).each( function () {
+					// Use <b> to dodge some styles targeting <span> to hide labels
+					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
 					$( this ).addClass( 've-edit-source' ).prepend( $icon );
 				} );
-				$caVeEdit.find( 'a' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
+				$caVeEdit.find( '.mw-ui-icon' ).each( function () {
+					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
 					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
 				} );
 			}
@@ -799,6 +797,8 @@
 				// Avoid creating inline style attributes if the inherited value is already correct
 				$editsections.css( 'direction', bodyDir );
 			}
+
+			var isMinerva = mw.config.get( 'skin' ) === 'minerva';
 
 			// The "visibility" css construct ensures we always occupy the same space in the layout.
 			// This prevents the heading from changing its wrap when the user toggles editSourceLink.
@@ -835,23 +835,29 @@
 
 						if ( conf.tabPosition === 'before' ) {
 							$editSourceLink.before( $editLink, $divider );
+							if ( isMinerva ) {
+								$editLink.removeClass( 'mw-ui-icon-flush-right' );
+							}
 						} else {
 							$editSourceLink.after( $divider, $editLink );
+							if ( isMinerva ) {
+								$editSourceLink.removeClass( 'mw-ui-icon-flush-right' );
+							}
 						}
 					}
 				} );
 			}
 
-			var isMinerva = mw.config.get( 'skin' ) === 'minerva';
 			if ( isMinerva ) {
 				// Minerva hides the link text - display tiny icons instead
 				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
 				$( '#mw-content-text .mw-editsection a:not(.mw-editsection-visualeditor)' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
+					// Use <b> to dodge some styles targeting <span> to hide labels
+					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
 					$( this ).addClass( 've-edit-source' ).prepend( $icon );
 				} );
 				$( '#mw-content-text .mw-editsection a.mw-editsection-visualeditor' ).each( function () {
-					var $icon = $( '<span>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
+					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
 					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
 				} );
 			}
