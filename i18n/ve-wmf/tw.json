@@ -3,14 +3,15 @@
 		"authors": [
 			"Amire80",
 			"Edith101",
-			"Kennedy Twumasi"
+			"Kennedy Twumasi",
+			"Robertjamal12"
 		]
 	},
 	"visualeditor-feedback-tool": "Gia wagyentre efa \"software\" wɛi hu",
-	"visualeditor-help-label": "kinkia atrɛtre homa nu",
-	"visualeditor-welcomedialog-content": "obiaa tumi sesa,na enpotuo boa",
-	"visualeditor-welcomedialog-content-thanks": "madase se wama ewiase enboah",
-	"visualeditor-welcomedialog-switch": "Bowɛ ko wo nhyhiɛye",
-	"visualeditor-welcomedialog-switch-ve": "Bowɛ ko wo apono",
-	"visualeditor-welcomedialog-title": "enfie:$Akwaba}}ko $2"
+	"visualeditor-help-label": "Kinkia atrɛtre homa nu",
+	"visualeditor-welcomedialog-content": "Obiaa tumi sesa, na enpotuo boa.",
+	"visualeditor-welcomedialog-content-thanks": "Yɛdase sɛ wo ama wiase nyinaa ɛhu nyinaa pii!",
+	"visualeditor-welcomedialog-switch": "Sesa kɔ source editor mu",
+	"visualeditor-welcomedialog-switch-ve": "Sesa kɔ visual editor mu",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Akwaaba}} ɛba $2"
 }
