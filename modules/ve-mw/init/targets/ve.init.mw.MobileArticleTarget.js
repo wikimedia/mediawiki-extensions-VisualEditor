@@ -28,7 +28,7 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	this.$overlaySurface = overlay.$el.find( '.surface' );
 
 	config = config || {};
-	config.toolbarConfig = $.extend( {
+	config.toolbarConfig = ve.extendObject( {
 		actions: false
 	}, config.toolbarConfig );
 

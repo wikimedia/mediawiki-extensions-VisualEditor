@@ -141,7 +141,7 @@
 		}
 
 		/* eslint-disable camelcase */
-		var event = $.extend( {
+		var event = ve.extendObject( {
 			version: 1,
 			action: action,
 			is_oversample: !inSample(),

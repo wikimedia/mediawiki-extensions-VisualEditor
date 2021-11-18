@@ -305,14 +305,14 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		type === 'wiki-page-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		return new mw.widgets.TitleInputWidget( $.extend( {
+		return new mw.widgets.TitleInputWidget( ve.extendObject( {
 			api: ve.init.target.getContentApi()
 		}, valueInputConfig ) );
 	} else if (
 		type === 'wiki-file-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		return new mw.widgets.TitleInputWidget( $.extend( {}, valueInputConfig, {
+		return new mw.widgets.TitleInputWidget( ve.extendObject( {}, valueInputConfig, {
 			api: ve.init.target.getContentApi(),
 			namespace: 6,
 			showImages: true
@@ -326,14 +326,14 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 			// TODO: Check against unicode validation regex from MW core's User::isValidUserName
 			return !!mw.Title.newFromText( val );
 		};
-		return new mw.widgets.UserInputWidget( $.extend( {
+		return new mw.widgets.UserInputWidget( ve.extendObject( {
 			api: ve.init.target.getContentApi()
 		}, valueInputConfig ) );
 	} else if (
 		type === 'wiki-template-name' &&
 		( value === '' || mw.Title.newFromText( value ) )
 	) {
-		return new mw.widgets.TitleInputWidget( $.extend( {
+		return new mw.widgets.TitleInputWidget( ve.extendObject( {
 			api: ve.init.target.getContentApi()
 		}, valueInputConfig, {
 			namespace: mw.config.get( 'wgNamespaceIds' ).template
