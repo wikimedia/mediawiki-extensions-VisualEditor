@@ -235,6 +235,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "틀 제거",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "위키텍스트 요소를 선택하려면 Space를 누르십시오. 위키텍스트를 선택하고 편집하려면 Enter를 누르십시오.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "위키텍스트 요소를 삭제하려면 Ctrl+Del을 누르십시오. 요소를 위아래로 이동하려면 Ctrl+Shift+방향키를 누르십시오.",
+	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "위키텍스트 요소를 삭제하려면 Ctrl+Del을 누르십시오.",
 	"visualeditor-dialogbutton-media-tooltip": "이미지 및 미디어",
 	"visualeditor-dialogbutton-meta-tooltip": "문서 설정",
 	"visualeditor-dialogbutton-template-tooltip": "틀",

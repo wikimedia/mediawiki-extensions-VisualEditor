@@ -15,6 +15,7 @@
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-content-filename": "Tiätuvuárkkánommâ",
 	"visualeditor-dialog-media-info-licenseshortname": "Liiseens",
+	"visualeditor-dialog-media-save": "Vuorkkii",
 	"visualeditor-dialog-media-search-tab-search": "Uusâ",
 	"visualeditor-dialog-meta-categories-category": "Luokka",
 	"visualeditor-dialog-meta-categories-data-label": "Luokah",
@@ -35,5 +36,7 @@
 	"visualeditor-mwgallerydialog-styles-field-label": "CSS-stiijlah",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Kielâ",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Kielah",
+	"visualeditor-savedialog-label-save-short": "Vuorkkii",
+	"visualeditor-savedialog-label-save-short-start": "Vuorkkii...",
 	"visualeditor-savedialog-review-wikitext": "Wikitekstâ"
 }
