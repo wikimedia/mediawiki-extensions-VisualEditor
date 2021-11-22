@@ -41,18 +41,15 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 		config.ariaDescriptionSelectedSingle
 	) {
 		this.$ariaDescriptionUnselected = $( '<span>' )
-			.text( config.ariaDescriptionUnselected || '' )
-			.attr( 'id', OO.ui.generateElementId() )
+			.text( config.ariaDescriptionUnselected )
 			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
 		this.$ariaDescriptionSelected = $( '<span>' )
-			.text( config.ariaDescriptionSelected || '' )
-			.attr( 'id', OO.ui.generateElementId() )
+			.text( config.ariaDescriptionSelected )
 			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
 		this.$ariaDescriptionSelectedSingle = $( '<span>' )
-			.text( config.ariaDescriptionSelectedSingle || '' )
-			.attr( 'id', OO.ui.generateElementId() )
+			.text( config.ariaDescriptionSelectedSingle )
 			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
 		this.header.setAriaDescribedBy( this.$ariaDescriptionUnselected );

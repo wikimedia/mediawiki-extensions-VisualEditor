@@ -8,8 +8,11 @@
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$ariaDescribedBy]
  * @cfg {string} [ariaLabel]
+ * @cfg {jQuery} [$describedElement]
  */
 ve.ui.MWAriaDescribe = function VeUiMWAriaDescribe( config ) {
+	this.$describedElement = config.$describedElement || this.$element;
+
 	if ( config.$ariaDescribedBy ) {
 		this.setAriaDescribedBy( config.$ariaDescribedBy );
 	}
@@ -24,15 +27,20 @@ ve.ui.MWAriaDescribe = function VeUiMWAriaDescribe( config ) {
 OO.initClass( ve.ui.MWAriaDescribe );
 
 /**
- * @param {jQuery} $description
+ * @param {jQuery} [$description]
  * @chainable
  * @return {OO.ui.Element} The element, for chaining
  */
 ve.ui.MWAriaDescribe.prototype.setAriaDescribedBy = function ( $description ) {
+	if ( !$description ) {
+		this.$describedElement.removeAttr( 'aria-describedby' );
+		return this;
+	}
+
 	if ( !$description.attr( 'id' ) ) {
 		$description.attr( 'id', OO.ui.generateElementId() );
 	}
-	this.$element.attr( 'aria-describedby', $description.attr( 'id' ) );
+	this.$describedElement.attr( 'aria-describedby', $description.attr( 'id' ) );
 	return this;
 };
 
@@ -42,6 +50,6 @@ ve.ui.MWAriaDescribe.prototype.setAriaDescribedBy = function ( $description ) {
  * @return {OO.ui.Element} The element, for chaining
  */
 ve.ui.MWAriaDescribe.prototype.setAriaLabel = function ( label ) {
-	this.$element.attr( 'aria-label', label );
+	this.$describedElement.attr( 'aria-label', label );
 	return this;
 };
