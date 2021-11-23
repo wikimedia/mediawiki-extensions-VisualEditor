@@ -248,29 +248,14 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 
 /**
  * @private
- * @param {string} key
- * @return {string}
- */
-ve.ui.MWTransclusionDialog.prototype.getHotkeyCombo = function ( key ) {
-	return ( ve.getSystemPlatform() === 'mac' ? 'meta+' : 'ctrl+' ) + 'shift+' + key;
-};
-
-/**
- * @private
  */
 ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
-	var context = this;
+	var meta = ve.getSystemPlatform() === 'mac' ? 'meta+' : 'ctrl+';
 
 	this.hotkeyTriggers = {};
-	this.hotkeyTriggers[ 'ctrl+d' ] = function () {
-		context.addTemplatePlaceholder();
-	};
-	this.hotkeyTriggers[ this.getHotkeyCombo( 'y' ) ] = function () {
-		context.addContent();
-	};
-	this.hotkeyTriggers[ this.getHotkeyCombo( 'd' ) ] = function () {
-		context.addParameter();
-	};
+	this.hotkeyTriggers[ meta + 'd' ] = this.addTemplatePlaceholder.bind( this );
+	this.hotkeyTriggers[ meta + 'shift+y' ] = this.addContent.bind( this );
+	this.hotkeyTriggers[ meta + 'shift+d' ] = this.addParameter.bind( this );
 };
 
 /**
