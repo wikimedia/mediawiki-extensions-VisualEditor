@@ -50,9 +50,11 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	// Construct the field docs for the template description
 	var $doc = $( '<div>' )
 		.attr( 'id', OO.ui.generateElementId() )
-		.addClass( 've-ui-mwParameterPage-doc' )
-		.append( $( '<p>' )
-			.text( this.spec.getParameterDescription( paramName ) || '' ) );
+		.addClass( 've-ui-mwParameterPage-doc' );
+	var description = this.spec.getParameterDescription( paramName );
+	if ( description ) {
+		$( '<p>' ).text( description ).appendTo( $doc );
+	}
 
 	// Note: Calling createValueInput() sets some properties we rely on later in this function
 	this.valueInput = this.createValueInput()
@@ -144,7 +146,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	if ( !this.useInlineDescriptions ) {
-		if ( $doc.text().trim() === '' ) {
+		if ( !$doc.children().length ) {
 			this.infoButton = new OO.ui.ButtonWidget( {
 				disabled: true,
 				title: ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' ),
@@ -214,7 +216,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$info, this.$field, this.$actions );
 
-	if ( this.useInlineDescriptions ) {
+	if ( this.useInlineDescriptions && $doc.children().length ) {
 		this.$field.addClass( 've-ui-mwParameterPage-inlineDescription' );
 		this.collapsibleDoc = new ve.ui.MWExpandableContentElement( {
 			classes: [ 've-ui-mwParameterPage-inlineDescription' ],
