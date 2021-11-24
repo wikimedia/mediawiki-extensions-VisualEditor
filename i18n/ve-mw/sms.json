@@ -4,6 +4,7 @@
 			"Yupik"
 		]
 	},
+	"tooltip-ca-ve-edit": "Muuʹtt tän seeid",
 	"visualeditor-advancedsettings-tool": "Lââʹssasetõõzz",
 	"visualeditor-ca-createsource": "Raaj wikiteeʹkst",
 	"visualeditor-ca-editsource": "Muuʹtt wikiteeʹkst",
@@ -42,6 +43,7 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Ǩiõl",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Ǩiõllkoodd",
 	"visualeditor-mwlanguagevariantinspector-title-name": "Ǩiõl nõmm",
+	"visualeditor-savedialog-label-create": "Raaj seeid",
 	"visualeditor-savedialog-label-publish-short": "Õlmstââʹtt",
 	"visualeditor-savedialog-label-publish-short-start": "Õlmstââʹtt...",
 	"visualeditor-savedialog-label-save-short": "Ruõkk",
