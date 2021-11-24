@@ -4,7 +4,8 @@
 			"Maxí",
 			"Snævar",
 			"Sveinki",
-			"Sveinn í Felli"
+			"Sveinn í Felli",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Búa til frumkóða síðunnar",
@@ -138,7 +139,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Úreltur reitur",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Reiturinn er úreltur. $1",
 	"visualeditor-dialog-transclusion-loading": "Hleður…",
-	"visualeditor-dialog-transclusion-no-template-description": "Sniðið „$1“ hefur ekki ennþá lýsingu, en það gætu verið einhverjar upplýsingar á [[$1|síðu sniðsins]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Sniðið „$1“ hefur ekki ennþá lýsingu, en það gætu verið einhverjar upplýsingar á [[$2|síðu sniðsins]].",
 	"visualeditor-dialog-transclusion-options": "Valkostir",
 	"visualeditor-dialog-transclusion-param-default": "Sjálfgefið: $1",
 	"visualeditor-dialog-transclusion-param-example": "t.d. $1",

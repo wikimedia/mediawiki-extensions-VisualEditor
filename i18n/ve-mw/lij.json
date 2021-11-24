@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Giromin Cangiaxo",
-			"S4b1nuz E.656"
+			"S4b1nuz E.656",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -163,7 +164,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "O campo o l'è obsoleto. $1",
 	"visualeditor-dialog-transclusion-loading": "Camallando…",
 	"visualeditor-dialog-transclusion-more-template-description": "Ghe poriæ vese di atre informassioin in sciô modello \"$1\" inta [[{{ns:template}}:$1|so paggina]].",
-	"visualeditor-dialog-transclusion-no-template-description": "O modello \"$1\" 'na descrission o no ghe l'ha ancon, ma poriæ vesighe de informassioin inta [[$1|paggina do modello]].",
+	"visualeditor-dialog-transclusion-no-template-description": "O modello \"$1\" 'na descrission o no ghe l'ha ancon, ma poriæ vesighe de informassioin inta [[$2|paggina do modello]].",
 	"visualeditor-dialog-transclusion-options": "Opçioin",
 	"visualeditor-dialog-transclusion-param-default": "Predefinio: $1",
 	"visualeditor-dialog-transclusion-param-example": "ezempio: $1",

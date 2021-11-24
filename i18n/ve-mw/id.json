@@ -23,7 +23,8 @@
 			"Raynasution",
 			"Rv77ax",
 			"William Surya Permana",
-			"WillsonEP09"
+			"WillsonEP09",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -189,7 +190,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Bidang telah usang. $1",
 	"visualeditor-dialog-transclusion-loading": "Memuat...",
 	"visualeditor-dialog-transclusion-more-template-description": "Mungkin ada sedikit informasi tambahan mengenai templat \"$1\" ini pada [[{{ns:template}}:$1|halamannya]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Templat \"$1\" belum memiliki keterangan, namun mungkin ada sedikit informasi pada [[$1|halaman templat]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Templat \"$1\" belum memiliki keterangan, namun mungkin ada sedikit informasi pada [[$2|halaman templat]].",
 	"visualeditor-dialog-transclusion-options": "Opsi",
 	"visualeditor-dialog-transclusion-param-default": "Baku: $1",
 	"visualeditor-dialog-transclusion-param-example": "mis. $1",

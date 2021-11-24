@@ -13,7 +13,8 @@
 			"Robotukas11",
 			"Shirayuki",
 			"Tomasdd",
-			"Zygimantus"
+			"Zygimantus",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Sukurti šio puslapio išeities kodą",
@@ -167,7 +168,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Nebenaudotinas laukas",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Laukas yra nebenaudotinas. $1",
 	"visualeditor-dialog-transclusion-loading": "Įkeliama...",
-	"visualeditor-dialog-transclusion-no-template-description": "Šablonas \"$1\" kol kas neturi aprašymo, bet galite rasti informacijos [[$1|šablono puslapyje]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablonas \"$1\" kol kas neturi aprašymo, bet galite rasti informacijos [[$2|šablono puslapyje]].",
 	"visualeditor-dialog-transclusion-options": "Parinktys",
 	"visualeditor-dialog-transclusion-param-default": "Numatytoji: $1",
 	"visualeditor-dialog-transclusion-param-example": "pvz., $1",
@@ -265,7 +266,7 @@
 	"visualeditor-parameter-input-placeholder": "Lauko pavadinimas",
 	"visualeditor-parameter-search-more": "Rodyti {{PLURAL:$1|vienu lauku daugiau|$1 laukais daugiau}}",
 	"visualeditor-parameter-search-no-unused": "Jokių nepanaudotų laukų",
-	"visualeditor-parameter-search-unknown": "Nežinomas laukas",
+	"visualeditor-parameter-search-unknown": "(Nežinomas laukas)",
 	"visualeditor-preference-betatempdisable": "Laikinai išjungti vizualų redaktorių, kol jis bandomosios versijos",
 	"visualeditor-preference-core-description": "Įjungti vizualų redaktorių. Jis neveiks aptarimų puslapiuose ir kai kuriose kitose vardų srityse.",
 	"visualeditor-preference-core-label": "Vizualus redagavimas",

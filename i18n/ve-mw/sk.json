@@ -14,7 +14,8 @@
 			"Teslaton",
 			"TomášPolonec",
 			"Vegetator",
-			"Yardom78"
+			"Yardom78",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
@@ -160,7 +161,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Parameter je zastaraný. $1",
 	"visualeditor-dialog-transclusion-loading": "Načítava sa...",
 	"visualeditor-dialog-transclusion-more-template-description": "Ďalšie informácie o šablóne „$1“ môžu byť uvedené na [[{{ns:template}}:$1|jej stránke]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Šablóna „$1“ zatiaľ nemá popis, nejaké informácie sa ale môžu nachádzať na [[$1|jej stránke]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Šablóna „$1“ zatiaľ nemá popis, nejaké informácie sa ale môžu nachádzať na [[$2|jej stránke]].",
 	"visualeditor-dialog-transclusion-options": "Možnosti",
 	"visualeditor-dialog-transclusion-param-default": "Predvolená hodnota: $1",
 	"visualeditor-dialog-transclusion-param-example": "napr. $1",

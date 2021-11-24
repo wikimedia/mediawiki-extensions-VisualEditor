@@ -23,7 +23,8 @@
 			"Tobulos1",
 			"Umeaboy",
 			"Warrakkk",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Dhallin"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -178,6 +179,12 @@
 	"visualeditor-dialog-transclusion-add-content": "Lägg till innehåll",
 	"visualeditor-dialog-transclusion-add-wikitext": "Lägg till wikitext",
 	"visualeditor-dialog-transclusion-add-param": "Lägg till mer information",
+	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" har redan lagts till som \"$2\". Kontrollera alternativen i sidofältet. Det kan antingen bero på att [//www.mediawiki.org/wiki/Help:TemplateData#aliases alias] eller [//www.mediawiki.org/wiki/Help:TemplateData#label etiketter] används.",
+	"visualeditor-dialog-transclusion-add-param-error-deprecated": "\"$1\" kan inte läggas till eftersom parametern har markerats som [//www.mediawiki.org/wiki/Help:TemplateData#deprecated föråldrad].",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Kan inte lägga till två parametrar med samma namn.",
+	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Denna parameter är redan tillgänglig att använda. Kontrollera alternativen i sidofältet.",
+	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 är ett otillåtet tecken. Ta bort det för att lägga till parametern.",
+	"visualeditor-dialog-transclusion-add-param-help": "Ange parameternamn utan dokumentation om det är känt. Observera att endast parametrar som är kända av mallen har effekt. Du kan hitta information om befintliga parametrar på [[$1|template's page]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Parameternamn",
 	"visualeditor-dialog-transclusion-add-param-save": "Lägg till parameter",
 	"visualeditor-dialog-transclusion-add-template": "Lägg till mall",
@@ -192,6 +199,9 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Fältet är föråldrat. $1",
 	"visualeditor-dialog-transclusion-loading": "Läser in...",
 	"visualeditor-dialog-transclusion-more-template-description": "Det kan finnas någon ytterligare information om mallen \"$1\" på [[$2|dess sida]].",
+	"visualeditor-dialog-transclusion-multipart-message": "Du redigerar för närvarande en mall och en eller flera delar av anslutet innehåll (wikitext och/eller ytterligare mallar).",
+	"visualeditor-dialog-transclusion-no-parameters-description": "Den här mallen kan vara avsedd att användas utan [//www.mediawiki.org/wiki/Help:Templates#Parameters -parametrar]. Om den här mallen innehåller parametrar är de [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters odokumenterade].",
+	"visualeditor-dialog-transclusion-no-template-data-description": "Denna mall saknar [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters TemplateData] och dess parametrar har genererats automatiskt. På grund av detta saknar mallen och dess parametrar beskrivningar. Det kan finnas ytterligare information på [[$1|mallsidan]].",
 	"visualeditor-dialog-transclusion-no-template-description": "Mallen \"$1\" har ännu inte någon beskrivning, men det kan finnas information på [[$2|mallens sida]].",
 	"visualeditor-dialog-transclusion-options": "Alternativ",
 	"visualeditor-dialog-transclusion-param-default": "Standard: $1",
@@ -223,6 +233,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Om du går tillbaka kommer denna mall och all information du har lagt till att tas bort innan du återvänder till mallmenyn. Detta kan inte ångras.",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Fortsätt redigera",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Ta bort mall",
+	"visualeditor-dialog-transclusion-feedback-message": "Det senaste arbetet har slutförts för att förbättra mallens sökresultat. Om du vill veta mer om ändringarna eller lämna feedback, gå till [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates projekts sida].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
 	"visualeditor-dialogbutton-media-tooltip": "Bilder och media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sidinställningar",
@@ -430,6 +441,6 @@
 	"visualeditor-wikitext-warning": "Du använder den visuella redigeraren - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] fungerar inte här. För att när som helst växla till wikitext-läge utan att förlora dina ändringar, klicka på växla-knappen.",
 	"visualeditor-wikitext-warning-title": "Wikitext upptäckt",
 	"visualeditor-wikitextconvert-title": "Omvandla formatering till wikitext?",
-	"visualeditor-wikitextconvert-message": "Ditt inklistrade innehåll innehåller formatering. Ska den omvandlas till wikitext eller infogas som vanlig text?",
+	"visualeditor-wikitextconvert-message": "Du har klistrat in innehåll med rik formatering. Vill du konvertera denna formatering till wikitext?",
 	"visualeditor-wikitextconvert-convert": "Omvandla till wikitext"
 }

@@ -6,7 +6,8 @@
 			"Renessaince",
 			"Wizardist",
 			"Zedlik",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -153,7 +154,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Састарэлае поле",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Поле састарэла. $1",
 	"visualeditor-dialog-transclusion-loading": "Загрузка…",
-	"visualeditor-dialog-transclusion-no-template-description": "Шаблён «$1» яшчэ ня мае апісаньня, але некаторыя зьвесткі могуць утрымлівацца на [[$1|старонцы шаблёну]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Шаблён «$1» яшчэ ня мае апісаньня, але некаторыя зьвесткі могуць утрымлівацца на [[$2|старонцы шаблёну]].",
 	"visualeditor-dialog-transclusion-options": "Парамэтры",
 	"visualeditor-dialog-transclusion-param-default": "Дапомна: $1",
 	"visualeditor-dialog-transclusion-param-example": "напрыклад, $1",

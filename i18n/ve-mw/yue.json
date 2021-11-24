@@ -9,7 +9,8 @@
 			"Moon0319",
 			"Roy17",
 			"William915",
-			"Yueman"
+			"Yueman",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "整呢版嘅代碼出嚟",
@@ -134,7 +135,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "舊參數",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "呢個參數已經唔建議用。$1",
 	"visualeditor-dialog-transclusion-loading": "載入緊…",
-	"visualeditor-dialog-transclusion-no-template-description": "《$1》模仲未有解說，不過個模嘅[[$1|模頁]]上面可能有啲有用嘅資料。",
+	"visualeditor-dialog-transclusion-no-template-description": "《$1》模仲未有解說，不過個模嘅[[$2|模頁]]上面可能有啲有用嘅資料。",
 	"visualeditor-dialog-transclusion-options": "選項",
 	"visualeditor-dialog-transclusion-param-default": "預設：$1",
 	"visualeditor-dialog-transclusion-param-example": "譬如 $1",

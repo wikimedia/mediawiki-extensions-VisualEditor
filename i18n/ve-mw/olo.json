@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ilja.mos",
-			"Mashoi7"
+			"Mashoi7",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Luaji tämän sivun lähtehkoudu",
@@ -111,7 +112,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Vahnennuh kenty",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Kenty on vahnennuh. $1",
 	"visualeditor-dialog-transclusion-loading": "Ladavuu...",
-	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" šablonal ei ole vie kuvavustu, no midätah tieduo voibi olla [[$1|šablonan sivul]].",
+	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" šablonal ei ole vie kuvavustu, no midätah tieduo voibi olla [[$2|šablonan sivul]].",
 	"visualeditor-dialog-transclusion-options": "Azetukset",
 	"visualeditor-dialog-transclusion-param-info": "Kentän kuvavus",
 	"visualeditor-dialog-transclusion-placeholder": "Ližiä šablon",

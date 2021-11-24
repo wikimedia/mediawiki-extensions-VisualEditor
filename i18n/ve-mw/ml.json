@@ -5,7 +5,8 @@
 			"Praveenp",
 			"Ranjithsiji",
 			"Santhosh.thottingal",
-			"Vssun"
+			"Vssun",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "ഈ താളിന്റെ സ്രോതസ്സ് രൂപം സൃഷ്ടിക്കുക",
@@ -160,7 +161,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "മണ്ഡലം ഒഴിവാക്കിയിരിക്കുന്നു. $1",
 	"visualeditor-dialog-transclusion-loading": "ശേഖരിക്കുന്നു...",
 	"visualeditor-dialog-transclusion-more-template-description": "\"$1\" ഫലകത്തെക്കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ [[{{ns:template}}:$1|അതിന്റെ താളിൽ]] ഉണ്ടാവും.",
-	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" ഫലകത്തിന് വിവരണമൊന്നുമില്ല, എങ്കിലും [[$1|ഫലകത്തിന്റെ താളിൽ]] വിവരമെന്തെങ്കിലും ഉണ്ടാകാതിരിക്കില്ല.",
+	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" ഫലകത്തിന് വിവരണമൊന്നുമില്ല, എങ്കിലും [[$2|ഫലകത്തിന്റെ താളിൽ]] വിവരമെന്തെങ്കിലും ഉണ്ടാകാതിരിക്കില്ല.",
 	"visualeditor-dialog-transclusion-options": "ഐച്ഛികങ്ങൾ",
 	"visualeditor-dialog-transclusion-param-default": "സ്വതേ: $1",
 	"visualeditor-dialog-transclusion-param-example": "ഉദാഹരണം: $1",

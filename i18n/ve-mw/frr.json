@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"ChrisPtDe",
-			"Murma174"
+			"Murma174",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Di kweltekst faan detdiar sidj skriiw",
@@ -89,7 +90,7 @@
 	"visualeditor-dialog-transclusion-content": "Auersicht",
 	"visualeditor-dialog-transclusion-expand-options": "Mögelkhaiden wise",
 	"visualeditor-dialog-transclusion-loading": "Loose ...",
-	"visualeditor-dialog-transclusion-no-template-description": "Dü heest üüb detheer sidj det föörlaag „$1“ brükt. Detdiar föörlaag hää noch nian beskriiwang, man ferlicht stäänt wat üüb det [[$1|föörlaagensidj]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Dü heest üüb detheer sidj det föörlaag „$1“ brükt. Detdiar föörlaag hää noch nian beskriiwang, man ferlicht stäänt wat üüb det [[$2|föörlaagensidj]].",
 	"visualeditor-dialog-transclusion-options": "Iinstelangen",
 	"visualeditor-dialog-transclusion-placeholder": "Nei föörlaag",
 	"visualeditor-dialog-transclusion-remove-content": "Tekst wechnem",
@@ -138,7 +139,7 @@
 	"visualeditor-serializeerror": "Bi't loosin faan dooten faan di server: $1 as wat skiaf gingen.",
 	"visualeditor-settings-tool": "Iinstelangen för det sidj",
 	"visualeditor-usernamespacepagelink": "Project:Brükernöömrüm",
-	"visualeditor-version-label": "Werjuun",
+	"visualeditor-version-label": "Wersion",
 	"visualeditor-wikitext-warning": "Dü brükst VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] werket heer ei. Trak üüb „{{int:visualeditor-ca-editsource}}“, am det sidj uun Wikitext-muude tu bewerkin. Wat noch ei seekert wurden as, gongt ferleesen.",
 	"visualeditor-wikitext-warning-title": "Wikitext as fünjen wurden"
 }

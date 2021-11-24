@@ -174,7 +174,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Inhalt hinzufügen",
 	"visualeditor-dialog-transclusion-add-wikitext": "Wikitext hinzufügen",
 	"visualeditor-dialog-transclusion-add-param": "Weitere Informationen hinzufügen",
-	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" ist ein [//www.mediawiki.org/wiki/Help:TemplateData#aliases Alias] des Parameters „$2“ und kann nicht hinzugefügt werden, da es sich um ein Duplikat handeln würde.",
+	"visualeditor-dialog-transclusion-add-param-error-alias": "„$1“ wurde bereits als „$2“ hinzugefügt. Bitte prüfe die Optionen in der Seitenleiste. Dies ist entweder auf die Verwendung von [//www.mediawiki.org/wiki/Help:TemplateData#aliases Aliasse] oder [//www.mediawiki.org/wiki/Help:TemplateData#label Label] zurückzuführen.",
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "„$1“ kann nicht hinzugefügt werden, da der Parameter als [//www.mediawiki.org/wiki/Help:TemplateData#deprecated veraltet] markiert wurde.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Es können nicht zwei Parameter mit demselben Namen hinzugefügt werden.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Dieser Parameter ist bereits zur Verwendung verfügbar. Bitte prüfe die Optionen in der Seitenleiste.",

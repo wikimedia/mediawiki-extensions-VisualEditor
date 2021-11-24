@@ -4,7 +4,8 @@
 			"Candalua",
 			"Fierodelveneto",
 			"GatoSelvadego",
-			"Gloria sah"
+			"Gloria sah",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -168,7 +169,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "El canpo el xé obsołeto. $1",
 	"visualeditor-dialog-transclusion-loading": "So' drio cargar...",
 	"visualeditor-dialog-transclusion-more-template-description": "Ghe podaria esare major informasion sol modèło \"$1\" in te ła [[{{ns:template}}:$1|so pàjina]].",
-	"visualeditor-dialog-transclusion-no-template-description": "El modeło \"$1\" no el ga njoncora na descrision, ma podaria esarghe algune informasion in te ła [[$1|pàjina del modeło]].",
+	"visualeditor-dialog-transclusion-no-template-description": "El modeło \"$1\" no el ga njoncora na descrision, ma podaria esarghe algune informasion in te ła [[$2|pàjina del modeło]].",
 	"visualeditor-dialog-transclusion-options": "Opsion",
 	"visualeditor-dialog-transclusion-param-default": "Predefinio: $1",
 	"visualeditor-dialog-transclusion-param-example": "Exenpio: $1",

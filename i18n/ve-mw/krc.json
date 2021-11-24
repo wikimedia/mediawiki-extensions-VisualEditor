@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ernác",
-			"Iltever"
+			"Iltever",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Бетни чыкъгъан кодун къура",
@@ -121,7 +122,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Эскиленнген къыр",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Къыр эскиленнгенди. $1",
 	"visualeditor-dialog-transclusion-loading": "Джюклениу...",
-	"visualeditor-dialog-transclusion-no-template-description": "«$1» шаблонну сиз бу бетге {{GENDER:$2|саласыз}}. Аны алкъын айгъакълауу джокъду, алай а [[$1|шаблонну бети]]нде къаллай болса да иформация болургъа боллукъду.",
+	"visualeditor-dialog-transclusion-no-template-description": "«$1» шаблонну сиз бу бетге саласыз. Аны алкъын айгъакълауу джокъду, алай а [[$2|шаблонну бети]]нде къаллай болса да иформация болургъа боллукъду.",
 	"visualeditor-dialog-transclusion-options": "Параметрле",
 	"visualeditor-dialog-transclusion-param-default": "Тынгылау бла магъанасы: $1",
 	"visualeditor-dialog-transclusion-param-example": "Магъана юлгю: $1",

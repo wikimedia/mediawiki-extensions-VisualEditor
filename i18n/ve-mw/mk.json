@@ -163,7 +163,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Додај содржина",
 	"visualeditor-dialog-transclusion-add-wikitext": "Додај викитекст",
 	"visualeditor-dialog-transclusion-add-param": "Додај уште информации",
-	"visualeditor-dialog-transclusion-add-param-error-alias": "„$1“ е [//www.mediawiki.org/wiki/Help:TemplateData#aliases истозначник] на параметарот „$2“. Не може да се додаде бидејќи ќе биде дупликат.",
+	"visualeditor-dialog-transclusion-add-param-error-alias": "„$1“ е веќе додаден како „$2“. Погледајте ги можностите во страничникот. Ова се должи на употребата на [//www.mediawiki.org/wiki/Help:TemplateData#aliases истозначници] или [//www.mediawiki.org/wiki/Help:TemplateData#label натписи].",
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "„$1“ не може да се додаде бидејќи параметарот е означен како [//www.mediawiki.org/wiki/Help:TemplateData#deprecated застарен].",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Не можам да додадам два параметра со исто име.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Овој параметар е веќе достапен за употреба. Погледајте ги можностите во страничникот.",

@@ -13,7 +13,8 @@
 			"R-Joe",
 			"Tacsipacsi",
 			"Tgr",
-			"ViDam"
+			"ViDam",
+			"Teemeah"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -169,8 +170,11 @@
 	"visualeditor-dialog-transclusion-add-content": "Tartalom hozzáadása",
 	"visualeditor-dialog-transclusion-add-wikitext": "Wikiszöveg hozzáadása",
 	"visualeditor-dialog-transclusion-add-param": "További információ hozzáadása",
+	"visualeditor-dialog-transclusion-add-param-error-alias": "A(z) „$1” paraméter már hozzá van adva „$2” néven. Ellenőrizd a beállításokat az oldalsávban. Ezt az [https://www.mediawiki.org/wiki/Help:TemplateData/hu#aliases alternatív paraméternevek] vagy [https:www.mediawiki.org/wiki/Help:TemplateData/hu#label címkék] használata okozhatja.",
+	"visualeditor-dialog-transclusion-add-param-error-deprecated": "A(z) „$1” paramétert nem lehet hozzáadni, mert [https://www.mediawiki.org/wiki/Help:TemplateData/hu#deprecated elavultnak] van jelölve.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Nem adható hozzá két ugyanolyan nevű paraméter.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "A(z) $1 tiltott karakter. Távolítsd el a paraméter hozáadásához.",
+	"visualeditor-dialog-transclusion-add-param-placeholder": "Paraméter neve",
 	"visualeditor-dialog-transclusion-add-param-save": "Paraméter hozzáadása",
 	"visualeditor-dialog-transclusion-add-template": "Sablon hozzáadása",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Dokumentálatlan paraméter hozzáadása",
@@ -178,6 +182,8 @@
 	"visualeditor-dialog-transclusion-content": "Tartalom",
 	"visualeditor-dialog-transclusion-contextitem-description": "Készült ebből: $1",
 	"visualeditor-dialog-transclusion-expand-options": "Opciók megjelenítése",
+	"visualeditor-dialog-transclusion-filter-placeholder": "Mező keresése",
+	"visualeditor-dialog-transclusion-filter-no-match": "Nincs egyezés",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Elavult mező",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "A mező elavult. $1",
 	"visualeditor-dialog-transclusion-loading": "Betöltés…",

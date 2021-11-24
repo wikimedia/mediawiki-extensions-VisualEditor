@@ -17,7 +17,8 @@
 			"Лилиә",
 			"Ләйсән",
 			"Рустам Нурыев",
-			"Янмурза Баки"
+			"Янмурза Баки",
+			"TMg"
 		]
 	},
 	"tooltip-ca-createsource": "Битте сығанаҡ код мөхәррирендә булдырырға",
@@ -158,7 +159,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Иҫкергән өлкә",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Иҫкергән өлкә. $1",
 	"visualeditor-dialog-transclusion-loading": "Тейәү",
-	"visualeditor-dialog-transclusion-no-template-description": "Әлегә «$1» ҡалыптың һүрәтнамәһе юҡ, әммә, [[$1|ҡалып бите]] битендә ниндәйҙә булһа мәғлүмәт бар.",
+	"visualeditor-dialog-transclusion-no-template-description": "Әлегә «$1» ҡалыптың һүрәтнамәһе юҡ, әммә, [[$2|ҡалып бите]] битендә ниндәйҙә булһа мәғлүмәт бар.",
 	"visualeditor-dialog-transclusion-options": "Көйләүҙәр",
 	"visualeditor-dialog-transclusion-param-default": "Һайланмаған:$1",
 	"visualeditor-dialog-transclusion-param-example": "Мәҫәлән: $1",

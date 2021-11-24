@@ -9,7 +9,8 @@
 			"Papuass",
 			"PeterisP",
 			"Silraks",
-			"Zuiks"
+			"Zuiks",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -147,6 +148,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Pievienot saturu",
 	"visualeditor-dialog-transclusion-add-wikitext": "Pievienot vikitekstu",
 	"visualeditor-dialog-transclusion-add-param": "Pievienot vairāk informācijas",
+	"visualeditor-dialog-transclusion-add-param-placeholder": "Parametra nosaukums",
 	"visualeditor-dialog-transclusion-add-param-save": "Pievienot parametru",
 	"visualeditor-dialog-transclusion-add-template": "Pievienot veidni",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Pievienot nedokumentētu parametru",
@@ -159,7 +161,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Lauks ir novecojis. $1",
 	"visualeditor-dialog-transclusion-loading": "Ielādē…",
 	"visualeditor-dialog-transclusion-more-template-description": "Papildu informācija par \"$1\" veidni var būt apskatāma [[{{ns:template}}:$1|tās lapā]].",
-	"visualeditor-dialog-transclusion-no-template-description": "Veidnei \"$1\" vēl nav apraksta, bet informācija var būt atrodama [[$1|veidnes lapā]].",
+	"visualeditor-dialog-transclusion-no-template-description": "Veidnei \"$1\" vēl nav apraksta, bet informācija var būt atrodama [[$2|veidnes lapā]].",
 	"visualeditor-dialog-transclusion-options": "Iespējas",
 	"visualeditor-dialog-transclusion-param-default": "Noklusējums: $1",
 	"visualeditor-dialog-transclusion-param-example": "piemēram, $1",
@@ -379,7 +381,7 @@
 	"visualeditor-version-label": "Versija",
 	"visualeditor-wikitext-progress": "Pārveido vikitekstu",
 	"visualeditor-wikitext-warning": "Tu lieto vizuālo redaktoru - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikiteksts]] šeit nedarbosies. Lai pārslēgtos uz koda labošanu nezaudējot izmaiņas, jebkurā brīdī spied uz pārslēgšanās pogas.",
-	"visualeditor-wikitext-warning-title": "Atklātas wikitext iezīmes",
+	"visualeditor-wikitext-warning-title": "Pamanītas vikiteksta iezīmes",
 	"visualeditor-wikitextconvert-title": "Pārveidot formatējumu uz vikitekstu?",
 	"visualeditor-wikitextconvert-message": "Tavs ievietotais saturs ir formatēts. Vai to vajadzētu pārveidot par vikitekstu vai ievietot kā vienkāršu tekstu?",
 	"visualeditor-wikitextconvert-convert": "Pārveidot uz vikitekstu"
