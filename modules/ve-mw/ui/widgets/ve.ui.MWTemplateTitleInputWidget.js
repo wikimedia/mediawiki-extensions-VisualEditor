@@ -21,7 +21,8 @@ ve.ui.MWTemplateTitleInputWidget = function VeUiMWTemplateTitleInputWidget( conf
 	config = ve.extendObject( {}, {
 		namespace: mw.config.get( 'wgNamespaceIds' ).template,
 		// We don't need results to show up twice normalized and unnormalized
-		addQueryInput: false
+		addQueryInput: false,
+		icon: 'search'
 	}, config );
 
 	// Parent constructor
