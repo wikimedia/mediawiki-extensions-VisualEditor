@@ -48,8 +48,6 @@ ve.dm.MWBlockImageNode.static.preserveHtmlAttributes = function ( attribute ) {
 
 ve.dm.MWBlockImageNode.static.handlesOwnChildren = true;
 
-ve.dm.MWBlockImageNode.static.ignoreChildren = true;
-
 ve.dm.MWBlockImageNode.static.childNodeTypes = [ 'mwImageCaption' ];
 
 ve.dm.MWBlockImageNode.static.matchTagNames = [ 'figure' ];

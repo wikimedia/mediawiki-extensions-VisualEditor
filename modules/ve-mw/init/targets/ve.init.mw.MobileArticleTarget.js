@@ -302,9 +302,8 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	// If no selection has been set yet, set it to the start of the document.
-	var surfaceModel = this.getSurface().getModel();
-	if ( surfaceModel.getSelection().isNull() ) {
-		surfaceModel.selectFirstContentOffset();
+	if ( this.getSurface().getModel().getSelection().isNull() ) {
+		this.getSurface().getView().selectFirstSelectableContentOffset();
 	}
 
 	this.events.trackActivationComplete();
