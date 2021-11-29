@@ -7,8 +7,6 @@
 		"langs": "readonly"
 	},
 	"rules": {
-		"max-len": "off",
-		"mediawiki/valid-package-file-require": "off",
-		"no-var": "error"
+		"max-len": "off"
 	}
 }
