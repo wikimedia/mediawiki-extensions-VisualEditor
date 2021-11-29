@@ -98,6 +98,7 @@
 	"visualeditor-dialog-transclusion-param-default": "နဂိုအတိုင်း: $1",
 	"visualeditor-dialog-transclusion-param-example": "ဥပမာ $1",
 	"visualeditor-dialog-transclusion-param-example-long": "ဥပမာ- $1",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "တမ်းပလိတ် ရှာဖွေရန်",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "နောက်သို့ ပြန်သွားရန်",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "မည်သို့ပင်ဖြစ်စေ၊ ဆက်လုပ်ပါ",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "တည်းဖြတ်မှုကို ဆက်လုပ်ရန်",

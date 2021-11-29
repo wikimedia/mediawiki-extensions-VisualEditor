@@ -208,6 +208,7 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parametri in $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Parametro minga trovad)",
 	"visualeditor-dialog-transclusion-placeholder": "Sgionta on model",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Troeuva el modell",
 	"visualeditor-dialog-transclusion-raw-fallback": "Torna indree al wikitest sempliz",
 	"visualeditor-dialog-transclusion-remove-content": "Toeu via el test",
 	"visualeditor-dialog-transclusion-remove-param": "Toeu via un camp",

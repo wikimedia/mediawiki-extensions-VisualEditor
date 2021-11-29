@@ -221,6 +221,7 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "פרמטרים של $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(פרמטר לא מתועד)",
 	"visualeditor-dialog-transclusion-placeholder": "הוספת תבנית",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "מציאת תבנית",
 	"visualeditor-dialog-transclusion-raw-fallback": "לעבר לקוד מקור בעת הצורך",
 	"visualeditor-dialog-transclusion-remove-content": "הסרת תוכן",
 	"visualeditor-dialog-transclusion-remove-param": "הסרת שדה",

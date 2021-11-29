@@ -222,6 +222,7 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parameter in $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Undokumentierter Parameter)",
 	"visualeditor-dialog-transclusion-placeholder": "Eine Vorlage hinzufügen",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Vorlage finden",
 	"visualeditor-dialog-transclusion-raw-fallback": "Zurück zu einfachem Wikitext",
 	"visualeditor-dialog-transclusion-remove-content": "Inhalt entfernen",
 	"visualeditor-dialog-transclusion-remove-param": "Feld entfernen",

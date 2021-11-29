@@ -211,6 +211,7 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Параметри во $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Недокументиран параметар)",
 	"visualeditor-dialog-transclusion-placeholder": "Додај нова предлошка",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Најди предлошка",
 	"visualeditor-dialog-transclusion-raw-fallback": "Поврати на прост викитекст",
 	"visualeditor-dialog-transclusion-remove-content": "Отстрани содржина",
 	"visualeditor-dialog-transclusion-remove-param": "Отстрани поле",
