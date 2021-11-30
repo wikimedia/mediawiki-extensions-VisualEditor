@@ -201,6 +201,7 @@
 	"visualeditor-dialog-transclusion-param-info": "وصف الحقل",
 	"visualeditor-dialog-transclusion-param-info-missing": "لا وصف",
 	"visualeditor-dialog-transclusion-placeholder": "أضف قالبا",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "ابحث عن قالب",
 	"visualeditor-dialog-transclusion-raw-fallback": "الرجوع إلى نص الويكي",
 	"visualeditor-dialog-transclusion-remove-content": "أزل المحتوى",
 	"visualeditor-dialog-transclusion-remove-param": "أزل الحقل",

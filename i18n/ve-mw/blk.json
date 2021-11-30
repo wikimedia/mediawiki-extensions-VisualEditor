@@ -3,6 +3,7 @@
 		"authors": [
 			"Khun Kt",
 			"Ninjastrikers",
+			"လွိုင်ႏအာထင်ႏထိုထဲင်း",
 			"咽頭べさ"
 		]
 	},
@@ -101,6 +102,7 @@
 	"visualeditor-dialog-transclusion-param-default": "အွောန်ႏစွူနုဲင်းအလီꩻ: $1",
 	"visualeditor-dialog-transclusion-param-example": "ဥပမာႏ $1",
 	"visualeditor-dialog-transclusion-param-example-long": "ဥပမာႏ: $1",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "ထိုမ်ႏတမ်းပလေက်",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "သဲင်ꩻချာ",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "နုဲင်းမုဲင်ꩻမုဲင်ꩻတယဝ်း၊ မာꩻသွုပ်ဟုဲင်း",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "မာꩻသွုပ် မွဉ်းဖျင်မုꩻ",

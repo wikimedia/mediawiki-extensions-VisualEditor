@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abuluntu",
 			"Apple farmer",
 			"Cocu",
 			"Danmichaelo",
@@ -165,10 +166,19 @@
 	"visualeditor-dialog-table-collapsible": "Sammenslåbar",
 	"visualeditor-dialog-table-sortable": "Sorterbar",
 	"visualeditor-dialog-table-wikitable": "Wikitable-stil",
+	"visualeditor-dialog-template-insert": "Sett inn en mal",
 	"visualeditor-dialog-template-title": "Mal",
+	"visualeditor-dialog-transclusion-action-save": "Lagre",
 	"visualeditor-dialog-transclusion-absent-template": "Malen «$1» eksisterer ikke enda.",
+	"visualeditor-dialog-transclusion-template-title-nonexistent": "Malen finnes ikke.",
+	"visualeditor-dialog-transclusion-template-widget-aria": "Trykk på mellomromtasten for å markere malen.",
+	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Trykk Ctrl+Del for å slette malen med tilhørende parametere og verdier. Trykk Ctrl+Shift+Piltaster for å flytte malen opp eller ned.",
+	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "Trykk Ctrl+Del for å slette malen med parametere og verdier.",
 	"visualeditor-dialog-transclusion-add-content": "Legg til innhold",
+	"visualeditor-dialog-transclusion-add-wikitext": "Legg til wikitekst",
 	"visualeditor-dialog-transclusion-add-param": "Legg til mer informasjon",
+	"visualeditor-dialog-transclusion-add-param-error-deprecated": "«$1» kan ikke legges til siden parameteret har blitt markert som [//www.mediawiki.org/wiki/Help:TemplateData#deprecated foreldet].",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Kan ikke legge til to parametere med samme navn.",
 	"visualeditor-dialog-transclusion-add-template": "Legg til mal",
 	"visualeditor-dialog-transclusion-collapse-options": "Skjul innstillinger",
 	"visualeditor-dialog-transclusion-content": "Innhold",

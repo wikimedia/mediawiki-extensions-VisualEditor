@@ -92,7 +92,7 @@
 	"visualeditor-dialogbutton-meta-tooltip": "Mpustazzioni dâ pàggina",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
 	"visualeditor-dialogbutton-transclusion-tooltip": "nclusioni",
-	"visualeditor-editconflict": "Li canciamenti ca facisti nun ponnu siri sarbati a causa di nu cunflittu di edizzioni. Vuoi{{GENDER:|}} arrisòrviri lu cunflittu manuarmenti?",
+	"visualeditor-editconflict": "Li canciamenti ca facisti nun ponnu siri sarbati a causa d'un cunflittu di edizzioni. {{GENDER:|Vuoi}} arrisòrviri lu cunflittu manuarmenti?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|nutifica|nutifichi}}",
 	"visualeditor-editsummary": "Dici so cchi canciasti",
 	"visualeditor-educationpopup-dismiss": "Ok, caputu",

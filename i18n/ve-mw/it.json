@@ -211,6 +211,7 @@
 	"visualeditor-dialog-transclusion-param-info-missing": "Non è disponibile alcuna descrizione per il campo",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Parametro non documentato)",
 	"visualeditor-dialog-transclusion-placeholder": "Aggiungi un template",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Trova template",
 	"visualeditor-dialog-transclusion-remove-content": "Rimuovi contenuto",
 	"visualeditor-dialog-transclusion-remove-param": "Rimuovi campo",
 	"visualeditor-dialog-transclusion-remove-template": "Rimuovi template",
