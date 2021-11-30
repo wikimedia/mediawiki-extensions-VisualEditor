@@ -82,54 +82,42 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				title: ve.msg( 'visualeditor-dialog-transclusion-required-parameter' )
 			} );
 		}
-		$doc.append(
-			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-doc-required' )
-				.text(
-					ve.msg( 'visualeditor-dialog-transclusion-required-parameter-description' )
-				)
-		);
+		$( '<p>' )
+			.addClass( 've-ui-mwParameterPage-doc-required' )
+			.text( ve.msg( 'visualeditor-dialog-transclusion-required-parameter-description' ) )
+			.appendTo( $doc );
 	} else if ( this.parameter.isDeprecated() ) {
 		statusIndicator = new OO.ui.IndicatorWidget( {
 			classes: [ 've-ui-mwParameterPage-statusIndicator' ],
 			indicator: 'alert',
 			title: ve.msg( 'visualeditor-dialog-transclusion-deprecated-parameter' )
 		} );
-		$doc.append(
-			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-doc-deprecated' )
-				.text(
-					ve.msg(
-						'visualeditor-dialog-transclusion-deprecated-parameter-description',
-						this.spec.getParameterDeprecationDescription( paramName )
-					)
-				)
-		);
+		$( '<p>' )
+			.addClass( 've-ui-mwParameterPage-doc-deprecated' )
+			.text( ve.msg(
+				'visualeditor-dialog-transclusion-deprecated-parameter-description',
+				this.spec.getParameterDeprecationDescription( paramName )
+			) )
+			.appendTo( $doc );
 	}
 
 	if ( this.defaultValue ) {
-		$doc.append(
-			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-doc-default' )
-				.text(
-					ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue )
-				)
-		);
+		$( '<p>' )
+			.addClass( 've-ui-mwParameterPage-doc-default' )
+			.text( ve.msg( 'visualeditor-dialog-transclusion-param-default', this.defaultValue ) )
+			.appendTo( $doc );
 	}
 
 	if ( this.exampleValue ) {
-		$doc.append(
-			$( '<p>' )
-				.addClass( 've-ui-mwParameterPage-doc-example' )
-				.text(
-					ve.msg(
-						this.useInlineDescriptions ?
-							'visualeditor-dialog-transclusion-param-example-long' :
-							'visualeditor-dialog-transclusion-param-example',
-						this.exampleValue
-					)
-				)
-		);
+		$( '<p>' )
+			.addClass( 've-ui-mwParameterPage-doc-example' )
+			.text( ve.msg(
+				this.useInlineDescriptions ?
+					'visualeditor-dialog-transclusion-param-example-long' :
+					'visualeditor-dialog-transclusion-param-example',
+				this.exampleValue
+			) )
+			.appendTo( $doc );
 	}
 
 	// Construct the action buttons
