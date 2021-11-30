@@ -39,7 +39,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.exampleValue = parameter.getExampleValue();
 
 	this.$info = $( '<div>' );
-	this.$actions = $( '<div>' );
 	this.$field = $( '<div>' );
 
 	// Temporary feature flags
@@ -121,6 +120,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 
 	// Construct the action buttons
+	var $actions = $( '<div>' );
 
 	if ( !this.rawValueInput && !this.useNewSidebar ) {
 		this.rawFallbackButton = new OO.ui.ButtonWidget( {
@@ -129,8 +129,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			title: ve.msg( 'visualeditor-dialog-transclusion-raw-fallback' )
 		} )
 			.connect( this, { click: 'onRawFallbackButtonClick' } );
-
-		this.$actions.append( this.rawFallbackButton.$element );
+		this.rawFallbackButton.$element.appendTo( $actions );
 	}
 
 	if ( !this.useInlineDescriptions ) {
@@ -154,8 +153,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 				classes: [ 've-ui-mwParameterPage-infoButton' ]
 			} );
 		}
-
-		this.$actions.append( this.infoButton.$element );
+		this.infoButton.$element.appendTo( $actions );
 	}
 
 	if ( !this.parameter.isRequired() && !config.readOnly && !this.useNewSidebar ) {
@@ -167,8 +165,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			classes: [ 've-ui-mwParameterPage-removeButton' ]
 		} )
 			.connect( this, { click: 'onRemoveButtonClick' } );
-
-		this.$actions.append( removeButton.$element );
+		removeButton.$element.appendTo( $actions );
 	}
 
 	// Initialization
@@ -178,8 +175,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	if ( statusIndicator ) {
 		this.$info.append( ' ', statusIndicator.$element );
 	}
-	this.$actions
-		.addClass( 've-ui-mwParameterPage-actions' );
 	this.$field
 		.addClass( 've-ui-mwParameterPage-field' )
 		.append(
@@ -202,7 +197,12 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
-		.append( this.$info, this.$field, this.$actions );
+		.append( this.$info, this.$field );
+	if ( $actions.children().length ) {
+		$actions
+			.addClass( 've-ui-mwParameterPage-actions' )
+			.appendTo( this.$element );
+	}
 
 	if ( this.useInlineDescriptions && $doc.children().length ) {
 		this.$field.addClass( 've-ui-mwParameterPage-inlineDescription' );
