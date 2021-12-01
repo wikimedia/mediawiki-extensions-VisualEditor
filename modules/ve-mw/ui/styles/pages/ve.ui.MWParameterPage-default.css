@@ -32,7 +32,6 @@
 	position: absolute;
 	top: -0.3125em;
 	right: 4em; /* 1.5em for PanelLayout's padding + 2.5em */
-	width: 25%;
 	text-align: right;
 	box-sizing: border-box;
 }
