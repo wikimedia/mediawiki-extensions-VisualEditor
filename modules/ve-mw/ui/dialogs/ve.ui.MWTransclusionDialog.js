@@ -571,9 +571,10 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	}
 
 	this.multipartMessage = new OO.ui.MessageWidget( {
-		label: ve.msg( 'visualeditor-dialog-transclusion-multipart-message' ),
+		label: mw.message( 'visualeditor-dialog-transclusion-multipart-message' ).parseDom(),
 		classes: [ 've-ui-mwTransclusionDialog-multipart-message' ]
 	} );
+	ve.targetLinksToNewWindow( this.multipartMessage.$element[ 0 ] );
 
 	if ( this.useNewSidebar || this.useInlineDescriptions ) {
 		var helpPopup = new ve.ui.MWFloatingHelpElement( {
