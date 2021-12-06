@@ -65,24 +65,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
 };
 
 /**
- * @param {ve.dm.MWTransclusionModel} transclusionModel
- */
-ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionModelChange = function ( transclusionModel ) {
-	var newOrder = transclusionModel.getParts();
-
-	for ( var i = 0; i < newOrder.length; i++ ) {
-		var expectedWidget = this.partWidgets[ newOrder[ i ].getId() ],
-			$expectedElement = expectedWidget && expectedWidget.$element,
-			$currentElement = this.$element.children().eq( i );
-
-		if ( !$currentElement.is( $expectedElement ) ) {
-			// Move each widget to the correct position if it wasn't there before
-			$currentElement.before( $expectedElement );
-		}
-	}
-};
-
-/**
  * @private
  * @param {string} pageName
  * @fires focusPageByName

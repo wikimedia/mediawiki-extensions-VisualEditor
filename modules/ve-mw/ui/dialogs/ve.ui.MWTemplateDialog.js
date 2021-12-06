@@ -505,10 +505,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				} else {
 					this.pocSidebar.clear();
 				}
-				this.transclusionModel.connect( this.pocSidebar, {
-					replace: 'onReplacePart',
-					change: [ 'onTransclusionModelChange', this.transclusionModel ]
-				} );
+				this.transclusionModel.connect( this.pocSidebar, { replace: 'onReplacePart' } );
 			}
 
 			// Initialization
