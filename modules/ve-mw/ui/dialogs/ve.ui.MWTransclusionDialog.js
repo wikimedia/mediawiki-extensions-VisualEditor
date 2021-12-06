@@ -239,7 +239,11 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 		this.$element.removeClass( 've-ui-mwTransclusionDialog-single-transclusion' );
 	}
 
-	this.multipartMessage.toggle( parts.length > 1 && this.useNewSidebar );
+	// multipart message
+	if ( this.useNewSidebar ) {
+		this.bookletLayout.stackLayout.$element.prepend( this.multipartMessage.$element );
+		this.multipartMessage.toggle( parts.length > 1 );
+	}
 
 	this.autoExpandSidebar();
 	this.updateModeActionState();
@@ -570,6 +574,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		this.bookletLayout.getOutlineControls().addItems( [ this.addParameterButton ] );
 	}
 
+	// multipart message gets attached in onReplacePart()
 	this.multipartMessage = new OO.ui.MessageWidget( {
 		label: mw.message( 'visualeditor-dialog-transclusion-multipart-message' ).parseDom(),
 		classes: [ 've-ui-mwTransclusionDialog-multipart-message' ]
@@ -608,9 +613,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 		move: 'onOutlineControlsMove',
 		remove: 'onOutlineControlsRemove'
 	} );
-	if ( this.useNewSidebar ) {
-		this.bookletLayout.stackLayout.$element.prepend( this.multipartMessage.$element );
-	}
 };
 
 /**
