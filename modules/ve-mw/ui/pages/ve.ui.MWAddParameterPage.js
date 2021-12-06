@@ -18,12 +18,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		scrollable: false
 	}, config ) );
 
-	this.template = parameter.getTemplate()
-		.connect( this, {
-			// There is a "change" event, but it triggers way to often even for content changes
-			add: 'onTemplateParametersChanged',
-			remove: 'onTemplateParametersChanged'
-		} );
+	this.template = parameter.getTemplate();
 	this.isExpanded = false;
 
 	// Header button to expand
@@ -36,7 +31,37 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 	} )
 		.connect( this, { click: 'togglePlaceholder' } );
 
-	// Input field and button
+	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
+		label: this.addParameterInputHeader.$element,
+		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ]
+	} );
+
+	// Init visibility
+	this.togglePlaceholder( false );
+
+	// Initialization
+	this.$element
+		.addClass( 've-ui-mwParameterPlaceholderPage' )
+		.append( this.addParameterFieldset.$element );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
+
+/* Methods */
+
+/**
+ * @private
+ */
+ve.ui.MWAddParameterPage.prototype.initialize = function () {
+	this.template
+		.connect( this, {
+			// There is a "change" event, but it triggers way to often even for content changes
+			add: 'onTemplateParametersChanged',
+			remove: 'onTemplateParametersChanged'
+		} );
+
 	this.paramInputField = new OO.ui.TextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-dialog-transclusion-add-param-placeholder' )
 	} )
@@ -63,30 +88,21 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		link
 	).parseDom();
 	ve.init.platform.linkCache.styleElement( link, $helpText.filter( 'a:not(.external)' ) );
-	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
-		label: this.addParameterInputHeader.$element,
-		helpInline: true,
-		help: $helpText,
-		classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset' ],
-		$content: this.actionFieldLayout.$element
+
+	// Copied from {@see OO.ui.FieldsetLayout} because there is no method to do this later
+	var helpWidget = new OO.ui.LabelWidget( {
+		label: $helpText,
+		classes: [ 'oo-ui-inline-help' ]
 	} );
 
-	ve.targetLinksToNewWindow( this.addParameterFieldset.$element[ 0 ] );
+	ve.targetLinksToNewWindow( helpWidget.$element[ 0 ] );
 
-	// Init visibility
-	this.togglePlaceholder( false );
-
-	// Initialization
-	this.$element
-		.addClass( 've-ui-mwParameterPlaceholderPage' )
-		.append( this.addParameterFieldset.$element );
+	this.addParameterFieldset.$element.append(
+		helpWidget.$element,
+		this.addParameterFieldset.$group,
+		this.actionFieldLayout.$element
+	);
 };
-
-/* Inheritance */
-
-OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
-
-/* Methods */
 
 /**
  * @inheritDoc OO.ui.PanelLayout
@@ -198,6 +214,9 @@ ve.ui.MWAddParameterPage.prototype.togglePlaceholder = function ( expand ) {
 		!this.isExpanded
 	);
 	if ( this.isExpanded ) {
+		if ( !this.paramInputField ) {
+			this.initialize();
+		}
 		this.paramInputField.focus();
 	}
 };
