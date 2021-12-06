@@ -188,13 +188,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			.insertAfter( labelElement.$element );
 	}
 
-	if ( this.useSuggestedValues && this.parameter.getSuggestedValues().length ) {
-		this.warningMessage = new OO.ui.MessageWidget( {
-			inline: true,
-			classes: [ 've-ui-mwParameterPage-warning' ]
-		} ).toggle( false );
-		this.$field.append( this.warningMessage.$element );
-	}
 	this.$element
 		.addClass( 've-ui-mwParameterPage' )
 		.append( this.$info, this.$field );
@@ -400,16 +393,6 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 
 	if ( this.outlineItem ) {
 		this.outlineItem.setFlags( { empty: !this.containsSomeValue() } );
-	}
-
-	if ( this.warningMessage ) {
-		var isNotSuggestedValue = value &&
-			this.parameter.getSuggestedValues().length > 0 &&
-			this.parameter.getSuggestedValues().indexOf( value ) === -1;
-		if ( isNotSuggestedValue ) {
-			this.warningMessage.setLabel( ve.msg( 'visualeditor-dialog-transclusion-suggestedvalues-warning' ) );
-		}
-		this.warningMessage.toggle( isNotSuggestedValue );
 	}
 };
 
