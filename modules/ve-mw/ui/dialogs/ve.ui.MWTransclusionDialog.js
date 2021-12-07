@@ -647,7 +647,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onWindowResize = function () {
-	if ( !this.ignoreNextWindowResizeEvent ) {
+	if ( this.transclusionModel && !this.ignoreNextWindowResizeEvent ) {
 		this.autoExpandSidebar();
 	}
 	this.ignoreNextWindowResizeEvent = false;
