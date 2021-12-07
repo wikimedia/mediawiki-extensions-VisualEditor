@@ -183,7 +183,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Continuar totevia",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Manca {{PLURAL:$1|un campo|campos}} obligatori",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Es tu secur de voler continuar sin completar le {{PLURAL:$2|campo|campos}} $1?",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Iste non es un del valores suggerite e pote non functionar con le patrono.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Inserer un patrono",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Inserer: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modificar: $1",

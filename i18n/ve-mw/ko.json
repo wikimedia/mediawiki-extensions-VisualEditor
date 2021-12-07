@@ -226,7 +226,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "필요한 {{PLURAL:$1|필드}} 없음",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|필드}}를 채우지 않고 계속하겠습니까?",
 	"visualeditor-dialog-transclusion-see-template": "틀은 사용자가 생성한 것으로 전체 설명이 부족할 수 있습니다. 이 [[$2|틀 문서]]에 추가 정보가 있을 수 있습니다.",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "이것은 제안된 값 중의 하나가 아니므로 틀과 함께 동작하지 않을 것입니다.",
 	"visualeditor-dialog-transclusion-title-insert-template": "틀 삽입",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "삽입: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "편집: $1",

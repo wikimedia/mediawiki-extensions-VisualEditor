@@ -182,7 +182,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Turpināt tāpat",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Trūkst {{PLURAL:$1|obligātie lauki|obligātais lauks|obligātie lauki}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Vai tiešām vēlies turpināt, neaizpildot {{PLURAL:$2|laukus|lauku|laukus}} $1?",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Šī nav viena no ieteiktajām vērtībām un var nestrādāt ar šo veidni.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Ievietot veidni",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Ievietot: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Labot: $1",

@@ -224,7 +224,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Λείπει απαιτούμενο πεδίο|Λείπουν απαιτούμενα πεδία}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Είστε βέβαιος ότι θέλετε να συνεχίσετε χωρίς να συμπληρώσετε {{PLURAL:$2|το πεδίο|τα πεδία}} $1;",
 	"visualeditor-dialog-transclusion-see-template": "Τα πρότυπα είναι δημιουργημένα από χρήστες και μπορεί να μην έχουν πλήρεις περιγραφές. Μπορεί να υπάρχουν επιπλέον πληροφορίες στην [[$2|σελίδα του προτύπου]].",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Αυτή δεν είναι μία από τις προτεινόμενες τιμές και ενδέχεται να μην λειτουργεί με το πρότυπο.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Εισαγωγή προτύπου",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Εισαγωγή: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Επεξεργασία: $1",

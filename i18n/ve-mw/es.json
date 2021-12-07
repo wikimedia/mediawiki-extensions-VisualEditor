@@ -249,7 +249,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Campo necesario faltante|Campos necesarios faltantes}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "¿Estás seguro de que quieres continuar sin rellenar {{PLURAL:$2|el campo|los campos}} $1?",
 	"visualeditor-dialog-transclusion-see-template": "Las plantillas son generadas por usarios y pueden carecer de descripciones completas. Puede que haya información adicional en este [[$2|página de plantilla]].",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Este no es uno de los valores sugeridos y no puede funcionar con la plantilla.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Insertar una plantilla",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Insertar: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Editar: $1",

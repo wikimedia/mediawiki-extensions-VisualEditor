@@ -169,7 +169,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Lanturang manten",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Widang}} sané wajib ical",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Napiké ragané seken jagi ngalanturant tanpa ngadagingin {{PLURAL:$2|widang}} $1?",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Puniki nénten satunggil nilai sané kanikayang miwah minab nénten mawiguna sareng mal.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Sisipang mal",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Sisipin:$1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Uah:$1",

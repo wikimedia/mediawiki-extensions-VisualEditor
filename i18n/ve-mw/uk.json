@@ -235,7 +235,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Обов'язкове поле незаповнене|Обов'язкові поля незаповнені}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ви впевнені, що хочете продовжити, не заповнюючи {{PLURAL:$2|поле|поля}} $1?",
 	"visualeditor-dialog-transclusion-see-template": "Шаблони створюються користувачами і можуть не мати повних описів. Можливо, на цій [[$2|сторінці шаблону]] є додаткова інформація.",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Це не одне із пропонованих значень і може не працювати в шаблоні.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Вставити шаблон",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Вставити: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Редагувати: $1",

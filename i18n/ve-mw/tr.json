@@ -253,7 +253,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Gerekli {{PLURAL:$1|alan|alanlar}} eksik",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|alanını|alanlarını}} doldurmadan devam etmek istediğinize emin misiniz?",
 	"visualeditor-dialog-transclusion-see-template": "Şablonlar kullanıcı tarafından oluşturulur ve tam açıklamaları olmayabilir. [[$2|Bu şablonun sayfasında]] ek bilgiler yer alabilir.",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Bu önerilen bir değer değil ve şablonla çalışmayabilir.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Bir şablon ekle",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Ekle: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Düzenle: $1",

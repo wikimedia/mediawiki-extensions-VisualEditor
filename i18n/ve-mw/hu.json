@@ -211,7 +211,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Folytatás mindenképpen",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Kötelező {{PLURAL:$1|mező hiányzik|mezők hiányoznak}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Biztos vagy benne, hogy a(z) $1 {{PLURAL:$2|mező|mezők}} kitöltése nélkül szeretnél továbblépni?",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Ez az érték nem szerepel a javasolt értékek között, így lehet, hogy nem működik a sablonnal.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Sablon beillesztése",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Beszúrás: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Szerkesztés: $1",

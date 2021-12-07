@@ -276,7 +276,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Champ obligatoire manquant|Champs obligatoires manquants}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Êtes-vous sûr de vouloir continuer sans remplir {{PLURAL:$2|le champ $1|les champs $1}} ?",
 	"visualeditor-dialog-transclusion-see-template": "Les modèles sont générés par l’utilisateur et peuvent manquer de description complète. Il peut y avoir des informations supplémentaires sur la [[$2|page du modèle]].",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Ce n’est pas une des valeurs suggérées et cela pourrait ne pas fonctionner avec le modèle.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Insérer un modèle",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Insérer : $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifier : $1",

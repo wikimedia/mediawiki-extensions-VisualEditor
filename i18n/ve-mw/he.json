@@ -233,7 +233,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|שדה נדרש חסר|שדות נדרשים חסרים}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "האם ברצונך באמת להמשיך ללא מילוי {{PLURAL:$2|השדה|השדות}} $1?",
 	"visualeditor-dialog-transclusion-see-template": "התבניות נוצרות על־ידי משתמשים וייתכן שחסרים בהן תיאורים שלמים. ייתכן שיש מידע נוסף ב[[$2|דף התבנית]] הזאת.",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "זה לא אחד מהערכים המוצעים, וייתכן שלא יעבוד עם התבנית.",
 	"visualeditor-dialog-transclusion-title-insert-template": "הוספת תבנית",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "הוספה: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "עריכה: $1",

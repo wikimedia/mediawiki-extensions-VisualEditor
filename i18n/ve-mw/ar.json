@@ -212,7 +212,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "متابعة",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|ينقصك مدخل ضروري|تنقصك مدخلات ضرورية}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "أتريد المتابعة بدون إعطاء {{PLURAL:$2|المدخل|المدخلات}} $1؟",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "هذه ليست إحدى القيم المقترحة وربما لا تعمل مع القالب.",
 	"visualeditor-dialog-transclusion-title-insert-template": "إدراج قالب",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "إدراج: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "تعديل: $1",

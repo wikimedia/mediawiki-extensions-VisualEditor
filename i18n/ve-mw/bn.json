@@ -200,7 +200,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "যাই হোক না কেন অব্যাহত রাখুন",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "আবশ্যকীয় {{PLURAL:$1|ঘর|ঘরগুলি}} অনুপস্থিত",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1টি {{PLURAL:$2|ঘর}} পূরণ না করেই আপনি এগিয়ে যাওয়ার ব্যাপারে নিশ্চিত?",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "এটি পরামর্শকৃত মানগুলির একটি নয় এবং টেমপ্লেটটির সাথে কাজ নাও করতে পারে।",
 	"visualeditor-dialog-transclusion-title-insert-template": "টেমপ্লেট সন্নিবেশ করুন",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "সন্নিবেশ করুন: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "সম্পাদনা করছেন: $1",

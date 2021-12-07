@@ -211,7 +211,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Tələb olunan {{PLURAL:$1|sahə|sahələr}} əlavə olunmayıb",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|sahəsini|sahələrini}} əlavə etmədən davam etmək istədiyinizə əminsiniz?",
 	"visualeditor-dialog-transclusion-see-template": "Şablonlar istifadəçilər tərəfindən yaradılır və bəzən izah bölmələri olmaya bilər. [[$2|Şablonun səhifəsində]] əlavə məlumat ola bilər.",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "Bu tövsiyə olunan dəyərlərdən biri deyil və şablonla işləməyə bilər.",
 	"visualeditor-dialog-transclusion-title-insert-template": "Şablon daxil et",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Daxil et: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Redaktə: $1",

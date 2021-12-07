@@ -218,7 +218,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "به هر حال ادامه بده",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|پارامتر|پارامترهای}} موردنیاز موجود {{PLURAL:$1|نیست|نیستند}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "اطمینان دارید که می‌خواهید بدون پرکردن $1 {{PLURAL:$2|بخش|بخش}} ادامه دهید؟",
-	"visualeditor-dialog-transclusion-suggestedvalues-warning": "این، جزء مقدارهای پیشنهادشده نیست و ممکن است با الگو کار نکند.",
 	"visualeditor-dialog-transclusion-title-insert-template": "افزودن الگو",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "درج: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "ویرایش: $1",
