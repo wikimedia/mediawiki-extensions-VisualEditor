@@ -62,7 +62,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 		'visualeditor-dialog-transclusion-add-param-help',
 		link
 	).parseDom();
-	ve.init.platform.linkCache.styleElement( link, $helpText );
+	ve.init.platform.linkCache.styleElement( link, $helpText.filter( 'a:not(.external)' ) );
 	this.addParameterFieldset = new OO.ui.FieldsetLayout( {
 		label: this.addParameterInputHeader.$element,
 		helpInline: true,
