@@ -1228,6 +1228,7 @@
 				"lib/ve/src/ce/styles/nodes/ve.ce.AlienNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.BranchNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.ContentBranchNode.css",
+				"lib/ve/src/ce/styles/nodes/ve.ce.ParagraphNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.RootNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.GeneratedContentNode.css",
 				"lib/ve/src/ce/styles/nodes/ve.ce.HorizontalRuleNode.css",
