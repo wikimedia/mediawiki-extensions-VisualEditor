@@ -118,7 +118,7 @@
 					}
 					target.once( 'surfaceReady', function () {
 						initPromise.then( function () {
-							surfaceModel.selectFirstContentOffset();
+							target.getSurface().getView().selectFirstSelectableContentOffset();
 							var isNewAuthor = !ve.init.platform.sessionStorage.get( 've-collab-author' );
 							// For new anon users, open the author list so they can set their name
 							if ( isNewAuthor && !username ) {

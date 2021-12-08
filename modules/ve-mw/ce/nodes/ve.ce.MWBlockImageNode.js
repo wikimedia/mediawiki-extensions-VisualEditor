@@ -84,7 +84,7 @@ ve.ce.MWBlockImageNode.static.tagName = 'figure';
 
 ve.ce.MWBlockImageNode.static.renderHtmlAttributes = false;
 
-ve.ce.MWBlockImageNode.static.transition = false;
+ve.ce.MWBlockImageNode.static.autoFocus = false;
 
 ve.ce.MWBlockImageNode.static.cssClasses = {
 	default: {
