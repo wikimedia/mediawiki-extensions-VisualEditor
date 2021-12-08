@@ -19,7 +19,8 @@
 			"Se4598",
 			"ToBeFree",
 			"Tomabrafix",
-			"Umherirrender"
+			"Umherirrender",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -188,7 +189,7 @@
 	"visualeditor-dialog-transclusion-content": "Inhalt",
 	"visualeditor-dialog-transclusion-contextitem-description": "Erzeugt von: $1",
 	"visualeditor-dialog-transclusion-expand-options": "Optionen anzeigen",
-	"visualeditor-dialog-transclusion-filter-placeholder": "Feld suchen",
+	"visualeditor-dialog-transclusion-filter-placeholder": "Parameter suchen",
 	"visualeditor-dialog-transclusion-filter-no-match": "Es wurden keine Übereinstimmungen gefunden.",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Veraltetes Feld",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Feld ist veraltet. $1",

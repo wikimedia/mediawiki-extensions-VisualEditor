@@ -16,7 +16,8 @@
 			"Njardarlogar",
 			"Orf3us",
 			"Tarjeimo",
-			"TMg"
+			"TMg",
+			"Abuluntu"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -165,10 +166,14 @@
 	"visualeditor-dialog-table-collapsible": "Sammenslåbar",
 	"visualeditor-dialog-table-sortable": "Sorterbar",
 	"visualeditor-dialog-table-wikitable": "Wikitable-stil",
+	"visualeditor-dialog-template-insert": "Sett inn en mal",
 	"visualeditor-dialog-template-title": "Mal",
+	"visualeditor-dialog-transclusion-action-save": "Lagre",
 	"visualeditor-dialog-transclusion-absent-template": "Malen «$1» eksisterer ikke enda.",
 	"visualeditor-dialog-transclusion-add-content": "Legg til innhold",
+	"visualeditor-dialog-transclusion-add-wikitext": "Legg til wikitekst",
 	"visualeditor-dialog-transclusion-add-param": "Legg til mer informasjon",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Kan ikke legge til to parametere med samme navn.",
 	"visualeditor-dialog-transclusion-add-template": "Legg til mal",
 	"visualeditor-dialog-transclusion-collapse-options": "Skjul innstillinger",
 	"visualeditor-dialog-transclusion-content": "Innhold",

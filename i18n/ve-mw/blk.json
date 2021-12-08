@@ -3,7 +3,8 @@
 		"authors": [
 			"Khun Kt",
 			"Ninjastrikers",
-			"咽頭べさ"
+			"咽頭べさ",
+			"လွိုင်ႏအာထင်ႏထိုထဲင်း"
 		]
 	},
 	"collabpad-import-subtitle": "$1 ဒင်ႏသော့ꩻခါꩻဒျာႏ",
@@ -28,7 +29,7 @@
 	"visualeditor-dialog-media-choose-image": "ထူႏသုင်ꩻရုက်ပုင်ႏယို",
 	"visualeditor-dialog-media-content-description-link": "(လိတ်မဲ့ငါအွောန်ႏနယ်ချက်)",
 	"visualeditor-dialog-media-content-filename": "ဖုဲင်မိဉ်ꩻ",
-	"visualeditor-dialog-media-content-section": "လိတ်ပုင်ႏ",
+	"visualeditor-dialog-media-content-section": "ပုင်ႏလိတ်",
 	"visualeditor-dialog-media-goback": "သဲင်ꩻချာ",
 	"visualeditor-dialog-media-info-artist": "$1 ဒင်ႏခါꩻဒျာႏသွူ",
 	"visualeditor-dialog-media-info-audiofile": "အငဝ်းဖုဲင်",
@@ -84,7 +85,7 @@
 	"visualeditor-dialog-meta-settings-section": "လိတ်မဲ့ငါ အပွိုင်အဖျင်ဖိုင်ႏ",
 	"visualeditor-dialog-meta-settings-toc-default": "မိဉ်ႏအဝ်ႏလိုႏနဝ်ꩻ",
 	"visualeditor-dialog-meta-settings-toc-disable": "မုဲင်ꩻခါတယဝ်း",
-	"visualeditor-dialog-meta-settings-toc-force": "အတမို့",
+	"visualeditor-dialog-meta-settings-toc-force": "သေႏသေႏ",
 	"visualeditor-dialog-meta-templatesused-noresults": "မော့ꩻတဝ်း တမ်းပလေက်",
 	"visualeditor-dialog-meta-title": "လွိုက်ပဲင်ႏခွင်ꩻ",
 	"visualeditor-dialog-template-insert": "ထဲမ်သော့ꩻ တမ်းပလေက်တဗာႏ",
@@ -105,7 +106,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "မာꩻသွုပ် မွဉ်းဖျင်မုꩻ",
 	"visualeditor-dialog-transclusion-wikitext": "ဝီခီလိတ်ယာႏ",
 	"visualeditor-dialogbutton-media-tooltip": "ရုက်ပုင်ႏဖိုင်ႏတောမ်ႏ မီဒီယာ",
-	"visualeditor-dialogbutton-meta-tooltip": "လိတ်မဲ့ငါ အပွိုင်အဖျင်ဖိုင်ႏ",
+	"visualeditor-dialogbutton-meta-tooltip": "လိတ်မဲ့ငါ အပွိုင်အဆင်ဖိုင်ႏ",
 	"visualeditor-dialogbutton-template-tooltip": "တမ်းပလေက်",
 	"visualeditor-donebutton-tooltip": "မွဉ်းဖျင်မုꩻထွူလဲဉ်း",
 	"visualeditor-editingtabdialog-body": "ယိုခါ နာꩻစွယ်ꩻအယ်ဒီတာနုဲင်းမုဲင်ꩻနဝ်ꩻ {{SITENAME}} တောင်ꩻလဲဉ်းသွူ၊ ဆုဲင်ꩻနဝ်ꩻ ကျွိုက်သꩻ ပြောင်ꩻလုဲင်ႏနွောင်ꩻလဲဉ်း မွဉ်းဖျင်မုꩻပုင်ႏစံႏသွူ။",
@@ -187,7 +188,7 @@
 	"visualeditor-savedialog-title-review": "ထွားစဲစ်ချာ နာꩻပြောင်ꩻလုဲင်ႏမုꩻဖိုင်ႏ",
 	"visualeditor-savedialog-title-save": "သဲမ် ပြောင်ꩻလုဲင်ႏခါꩻမုꩻဖိုင်ႏ",
 	"visualeditor-section-title-placeholder": "အကျောင်ꩻခရာႏ",
-	"visualeditor-settings-tool": "လိတ်မဲ့ငါ အပွိုင်အဖျင်ဖိုင်ႏ",
+	"visualeditor-settings-tool": "လိတ်မဲ့ငါ အပွိုင်အဆင်ဖိုင်ႏ",
 	"visualeditor-special-characters-group-other": "ဆင်ႏဆင်ႏထူႏသုင်ꩻ",
 	"visualeditor-templatesused-tool": "သုင်ꩻခါꩻဒျာႏ တမ်းပလေက်ဖိုင်ႏသွူ",
 	"visualeditor-version-label": "ဗားသိဉ်း"

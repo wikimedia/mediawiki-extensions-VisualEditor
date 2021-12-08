@@ -214,7 +214,7 @@
 	"visualeditor-dialog-transclusion-remove-param": "필드 제거",
 	"visualeditor-dialog-transclusion-remove-template": "틀 제거",
 	"visualeditor-dialog-transclusion-required-parameter": "필수 필드",
-	"visualeditor-dialog-transclusion-required-parameter-description": "필드는 필수입니다.",
+	"visualeditor-dialog-transclusion-required-parameter-description": "이 필드는 필수입니다.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "돌아가기",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "어쨌든 계속하기",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "필요한 {{PLURAL:$1|필드}} 없음",

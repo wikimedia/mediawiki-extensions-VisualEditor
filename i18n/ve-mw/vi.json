@@ -17,7 +17,8 @@
 			"Trần Nguyễn Minh Huy",
 			"Vinhtantran",
 			"Đỗ Thảo",
-			"Nghiemtrongdai VN"
+			"Nghiemtrongdai VN",
+			"Thienhau2003"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -42,8 +43,8 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Thêm mã nguồn miêu tả địa phương",
 	"visualeditor-ca-createsource": "Tạo mã nguồn",
 	"visualeditor-ca-editlocaldescriptionsource": "Sửa mã nguồn miêu tả địa phương",
-	"visualeditor-ca-editsource": "Sửa mã nguồn",
-	"visualeditor-ca-editsource-section": "sửa mã nguồn",
+	"visualeditor-ca-editsource": "Sửa đổi mã nguồn",
+	"visualeditor-ca-editsource-section": "sửa đổi mã nguồn",
 	"visualeditor-ca-ve-create": "\nTrình soạn thảo trực quan",
 	"visualeditor-ca-ve-edit": "Trình soạn thảo trực quan",
 	"visualeditor-ca-ve-edit-section": "Trình soạn thảo trực quan",
