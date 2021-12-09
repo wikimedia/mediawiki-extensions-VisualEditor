@@ -226,7 +226,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 		// Unconditionally focus parameter placeholders. Named parameters must be focused manually.
 		if ( !this.preventReselection && !param.getName() ) {
 			this.focusPart( param.getId() );
-		} else {
+		} else if ( !this.loaded ) {
 			page.scrollElementIntoView();
 		}
 
