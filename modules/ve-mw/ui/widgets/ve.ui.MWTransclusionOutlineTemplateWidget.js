@@ -256,7 +256,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 			].concat( spec.getParameterAliases( paramName ) );
 
 		var foundSomeMatch = placesToSearch.some( function ( term ) {
-			return term && term.toLowerCase().indexOf( query ) !== -1;
+			// Aliases missed validation for a long time and aren't guaranteed to be strings
+			return term && typeof term === 'string' && term.toLowerCase().indexOf( query ) !== -1;
 		} );
 
 		item.toggle( foundSomeMatch );
