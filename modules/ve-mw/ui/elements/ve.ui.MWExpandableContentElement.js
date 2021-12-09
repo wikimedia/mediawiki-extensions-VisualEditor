@@ -62,8 +62,6 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 		element.collapsed = !element.collapsed;
 	} );
 
-	toggle.$element.attr( 'aria-hidden', 'true' );
-
 	$( '<div>' )
 		.addClass( 've-ui-expandableContent-container' )
 		.append(
