@@ -162,7 +162,7 @@
 	"visualeditor-dialog-meta-languages-label": "Языки",
 	"visualeditor-dialog-meta-languages-link-label": "Связанная страница",
 	"visualeditor-dialog-meta-languages-name-label": "Язык",
-	"visualeditor-dialog-meta-languages-readonlynote": "Список страниц на других языках, которые ссылаются сюда. В настоящий момент этот список может быть отредактирован только в режиме исходного кода.",
+	"visualeditor-dialog-meta-languages-readonlynote": "Это список страниц на других языках, которые связаны с этой страницей. В настоящий момент этот список может быть отредактирован только в режиме правки кода или в Викиданных.",
 	"visualeditor-dialog-meta-languages-section": "Языки",
 	"visualeditor-dialog-meta-settings-displaytitle": "Отображаемый заголовок",
 	"visualeditor-dialog-meta-settings-displaytitle-enable": "Включить отображаемый заголовок",
