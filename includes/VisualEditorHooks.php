@@ -359,6 +359,9 @@ class VisualEditorHooks {
 	private static function getEditPageEditor( User $user, WebRequest $req ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
+		if ( $config->get( 'VisualEditorDisableForAnons' ) && !$user->isRegistered() ) {
+			return 'wikitext';
+		}
 		$isRedLink = $req->getBool( 'redlink' );
 		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext,
 		// unless following a redlink
