@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vickylin77s"
+			"Vickylin77s",
+			"Amire80"
 		]
 	},
 	"tooltip-ca-ve-edit": "misinanot to inian a felih",
 	"visualeditor-ca-createlocaldescriptionsource": "Mikapot a micomod to itiniay mipakimaday a yin-se-ma",
 	"visualeditor-ca-createsource": "misanga’ to yin-se-ma",
-	"visualeditor-ca-editsource": "  o yin-se-ma no pisinanot",
+	"visualeditor-ca-editsource": "o yin-se-ma no pisinanot",
 	"visualeditor-ca-editsource-section": "  o yin-se-ma no pisinanot",
 	"visualeditor-categories-tool": "　pisakilac",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
