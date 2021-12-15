@@ -187,7 +187,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "לא ניתן להוסיף שני פרמטרים באותו שם.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "הפרמטר הזה כבר זמין לשימוש. נא לבדוק את האפשרויות בסרגל הצד.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 הוא תו אסור. נא להסיר אותו כדי להוסיף את הפרמטר.",
-	"visualeditor-dialog-transclusion-add-param-help": "אם הם ידועים, נא להזין שמות של פרמטרים לא מתועדים של התבנית. נא לשים לב לכך שרק לפרמטרים שהתבנית מכירה תהיה השפעה. אפשר למצוא מידע על הפרמטרים הקיימים ב[[$1|דף התבנית]].",
+	"visualeditor-dialog-transclusion-add-param-help": "אם הם ידועים, נא להזין שמות של [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters פרמטרים לא מתועדים]. נא לשים לב לכך שרק לפרמטרים שהתבנית מכירה תהיה השפעה. אפשר למצוא מידע על הפרמטרים הקיימים ב[[$1|דף התבנית]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "שם הפרמטר",
 	"visualeditor-dialog-transclusion-add-param-save": "הוספת פרמטר",
 	"visualeditor-dialog-transclusion-add-template": "הוספת תבנית",

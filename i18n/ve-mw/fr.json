@@ -230,7 +230,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Impossible d'ajouter deux paramètres du même nom.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Ce paramètre est déjà disponible pour l'utilisation. Veuillez vérifier les options dans la barre latérale.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 est un caractère interdit. Veuillez le supprimer pour ajouter le paramètre.",
-	"visualeditor-dialog-transclusion-add-param-help": "S’ils sont connus, entrer les noms des paramètres non documentés. Noter que seuls les paramètres connus par le modèle auront un effet. Vous pouvez trouver des informations sur les paramètres existants sur la [[$1|page du modèle]].",
+	"visualeditor-dialog-transclusion-add-param-help": "S’ils sont connus, entrer les noms des [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters paramètres non documentés]. Noter que seuls les paramètres connus par le modèle auront un effet. Vous pouvez trouver des informations sur les paramètres existants sur la [[$1|page du modèle]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Nom du paramètre",
 	"visualeditor-dialog-transclusion-add-param-save": "Ajouter un paramètre",
 	"visualeditor-dialog-transclusion-add-template": "Ajouter le modèle",

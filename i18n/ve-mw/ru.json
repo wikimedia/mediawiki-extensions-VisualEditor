@@ -238,6 +238,7 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Параметры в $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Недокументированный параметр)",
 	"visualeditor-dialog-transclusion-placeholder": "Добавить шаблон",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Найти шаблон",
 	"visualeditor-dialog-transclusion-raw-fallback": "Отступить к простой викиразметке",
 	"visualeditor-dialog-transclusion-remove-content": "Удалить содержимое",
 	"visualeditor-dialog-transclusion-remove-param": "Удалить поле",
