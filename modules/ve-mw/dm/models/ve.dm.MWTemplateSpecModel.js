@@ -125,7 +125,7 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 	}
 
 	this.templateData = data;
-	// Better be safe even if the `params` element isn't optional in the TemplateData API
+	// This is currently not optional in the TemplateData API but might be in the future
 	if ( !this.templateData.params ) {
 		this.templateData.params = {};
 	}
@@ -226,6 +226,8 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 };
 
 /**
+ * The returned array is a copy, i.e. it's safe to manipulate.
+ *
  * @return {string[]}
  */
 ve.dm.MWTemplateSpecModel.prototype.getUndocumentedParameterNames = function () {
@@ -241,6 +243,8 @@ ve.dm.MWTemplateSpecModel.prototype.getUndocumentedParameterNames = function () 
  * to how the parameters appear in the wikitext. Primary parameter names documented via TemplateData
  * are first, in their documented order. Undocumented parameters are sorted with numeric names
  * first, followed by alphabetically sorted names.
+ *
+ * The returned array is a copy, i.e. it's safe to manipulate.
  *
  * @return {string[]}
  */
