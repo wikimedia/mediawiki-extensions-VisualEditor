@@ -56,19 +56,10 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 	// Note this is just a map and doesn't reflect the order in the UI
 	assert.deepEqual( Object.keys( widget.partWidgets ), [ 'part_0', 'part_1', 'part_2' ] );
 
-	let $items = widget.$element.children();
+	const $items = widget.$element.children();
 	assert.true( $items.eq( 0 ).is( widget.partWidgets.part_1.$element ) );
 	assert.true( $items.eq( 1 ).is( widget.partWidgets.part_2.$element ) );
 	assert.true( $items.eq( 2 ).is( widget.partWidgets.part_0.$element ) );
-
-	// This bypasses all logic in ve.dm.MWTransclusionModel, effectively making it a mock.
-	transclusion.parts = [ part2, part0, part1 ];
-	widget.onTransclusionModelChange( transclusion );
-
-	$items = widget.$element.children();
-	assert.true( $items.eq( 0 ).is( widget.partWidgets.part_2.$element ) );
-	assert.true( $items.eq( 1 ).is( widget.partWidgets.part_0.$element ) );
-	assert.true( $items.eq( 2 ).is( widget.partWidgets.part_1.$element ) );
 } );
 
 [
