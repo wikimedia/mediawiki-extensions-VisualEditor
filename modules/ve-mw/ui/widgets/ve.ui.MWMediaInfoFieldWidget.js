@@ -16,10 +16,10 @@
  * @mixins OO.ui.mixin.TitledElement
  *
  * @constructor
- * @param {Object} content API response data from which to build the display
+ * @param {jQuery|string|OO.ui.HtmlSnippet} content API response data from which to build the display
  * @param {Object} [config] Configuration options
  * @cfg {string} [href] A url encapsulating the field text. If a label is attached it will include the label.
- * @cfg {string} [label] A ve.msg() label string for the field.
+ * @cfg {string} [labelMsg] A ve.msg() label string for the field.
  * @cfg {boolean} [isDate=false] Field text is a date that will be converted to 'fromNow' string.
  * @cfg {string} [type='attribute'] Field type, either 'description' or 'attribute'
  * @cfg {string} [descriptionHeight='4em'] Height limit for description fields
@@ -39,38 +39,44 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 
 	this.$text = $( '<div>' )
 		.addClass( 've-ui-mwMediaInfoFieldWidget-text' );
-	this.$overlay = null;
 	this.type = config.type || 'attribute';
 
 	// Initialization
-	if ( config.isDate && ( datetime = moment( content ) ).isValid() ) {
-		content = datetime.fromNow();
+	if ( typeof content === 'string' ) {
+		if ( config.isDate && ( datetime = moment( content ) ).isValid() ) {
+			content = datetime.fromNow();
+		}
+
+		if ( config.labelMsg ) {
+			// Messages defined in ve.ui.MWMediaDialog#buildMediaInfoPanel
+			// eslint-disable-next-line mediawiki/msg-doc
+			content = ve.msg( config.labelMsg, content );
+		}
+
+		if ( config.href ) {
+			// This variable may contain either jQuery objects or strings
+			// eslint-disable-next-line no-jquery/variable-pattern
+			content = $( '<a>' )
+				.attr( 'href',
+					// For the cases where we get urls that are "local"
+					// without http(s) prefix, we will add that prefix
+					// ourselves
+					!config.href.match( /^(https?:)?\/\// ) ?
+						'//' + config.href :
+						config.href
+				)
+				.text( content );
+		}
 	}
 
-	if ( config.label ) {
-		// Messages defined in ve.ui.MWMediaDialog#buildMediaInfoPanel
-		// eslint-disable-next-line mediawiki/msg-doc
-		content = ve.msg( config.label, content );
-	}
-
-	if ( config.href ) {
-		this.$text
-			.append(
-				$( '<a>' )
-					.attr( 'target', '_blank' )
-					.attr( 'rel', 'mw:ExtLink' )
-					.attr( 'href',
-						// For the cases where we get urls that are "local"
-						// without http(s) prefix, we will add that prefix
-						// ourselves
-						!config.href.match( /^(https?:)?\/\// ) ?
-							'//' + config.href :
-							config.href
-					)
-					.append( content )
-			);
-	} else {
+	if ( typeof content === 'string' ) {
+		this.$text.text( content );
+	} else if ( content instanceof OO.ui.HtmlSnippet ) {
+		this.$text.html( content.toString() );
+	} else if ( content instanceof $ ) {
 		this.$text.append( content );
+	} else {
+		throw new Error( 'Unexpected metadata field content' );
 	}
 
 	this.$element
