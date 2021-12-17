@@ -6,6 +6,8 @@ QUnit.test( 'Input event handlers', ( assert ) => {
 		parameter = new ve.dm.MWParameterModel( template ),
 		page = new ve.ui.MWAddParameterPage( parameter );
 
+	page.togglePlaceholder( true );
+
 	page.paramInputField.setValue( ' ' );
 	assert.strictEqual( page.saveButton.isDisabled(), true, 'cannot click' );
 	page.onParameterNameSubmitted();
