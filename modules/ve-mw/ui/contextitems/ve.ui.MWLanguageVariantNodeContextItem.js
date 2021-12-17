@@ -125,7 +125,10 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 				) );
 
 			variantInfo.oneway.forEach( function ( item ) {
+				// Safe HTML from the parser
+				// eslint-disable-next-line no-jquery/no-html
 				var $fromText = $( '<td>' ).html( item.f ),
+					// eslint-disable-next-line no-jquery/no-html
 					$toText = $( '<td>' ).html( item.t ),
 					code = item.l,
 					name = ve.init.platform.getLanguageName( code.toLowerCase() );
@@ -154,6 +157,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 			variantInfo.twoway.forEach( function ( item ) {
 				var code = item.l,
 					name = ve.init.platform.getLanguageName( code.toLowerCase() ),
+					// eslint-disable-next-line no-jquery/no-html
 					$text = $( '<td>' ).html( item.t );
 				ve.dm.MWLanguageVariantNode.static.processVariants(
 					$text[ 0 ], { showHidden: true }

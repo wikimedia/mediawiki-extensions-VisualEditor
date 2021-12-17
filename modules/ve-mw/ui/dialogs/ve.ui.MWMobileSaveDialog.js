@@ -47,6 +47,7 @@ ve.ui.MWMobileSaveDialog.prototype.initialize = function () {
 		skin = mobile.Skin.getSingleton();
 		licenseMsg = skin.getLicenseMsg();
 		if ( licenseMsg ) {
+			// eslint-disable-next-line no-jquery/no-html
 			this.$license.html( licenseMsg );
 		}
 	}

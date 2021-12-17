@@ -1372,6 +1372,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		}
 
 		// Intentionally treated as HTML
+		// eslint-disable-next-line no-jquery/no-html
 		$( '#footer-info-lastmod' ).html( ' ' + mw.msg(
 			'lastmodifiedat',
 			lastModified.date,
@@ -1382,6 +1383,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	this.$editableContent.find( '.mw-parser-output' ).replaceWith( $content );
 	mw.hook( 'wikipage.content' ).fire( this.$editableContent );
 	if ( displayTitle ) {
+		// eslint-disable-next-line no-jquery/no-html
 		$( '#firstHeading' ).html( displayTitle );
 	}
 
@@ -1390,6 +1392,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	$( '#catlinks' ).replaceWith( $categories );
 	this.$originalCategories = null;
 
+	// eslint-disable-next-line no-jquery/no-html
 	$( '#contentSub' ).html( contentSub );
 	this.setRealRedirectInterface();
 

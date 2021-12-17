@@ -43,6 +43,8 @@ ve.init.mw.DesktopCollabTarget.prototype.transformPage = function () {
 	this.$originalContent.append( this.$element.siblings() );
 	var title;
 	if ( ( title = this.getImportTitle() ) ) {
+		// ve.htmlMsg returns `Node[]`
+		// eslint-disable-next-line no-jquery/no-html
 		$( '#contentSub' ).html(
 			ve.htmlMsg(
 				'collabpad-import-subtitle',

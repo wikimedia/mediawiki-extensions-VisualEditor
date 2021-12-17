@@ -240,6 +240,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 				text: '{{DISPLAYTITLE:' + docOrMsg.title + '}}\n'
 			} ).then( function ( response ) {
 				if ( ve.getProp( response, 'parse', 'displaytitle' ) ) {
+					// eslint-disable-next-line no-jquery/no-html
 					dialog.$previewHeading.html( response.parse.displaytitle );
 				}
 			} );
@@ -427,6 +428,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						dialog.$previewEditSummary.empty();
 					} else {
 						// Intentionally treated as HTML
+						// eslint-disable-next-line no-jquery/no-html
 						dialog.$previewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary ) );
 						ve.targetLinksToNewWindow( dialog.$previewEditSummary[ 0 ] );
 					}
@@ -600,6 +602,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	} );
 
 	// Save panel
+	// eslint-disable-next-line no-jquery/no-html
 	this.$editSummaryLabel = $( '<div>' ).addClass( 've-ui-mwSaveDialog-summaryLabel' )
 		.html( ve.init.platform.getParsedMessage( 'summary' ) );
 	ve.targetLinksToNewWindow( this.$editSummaryLabel[ 0 ] );
@@ -641,6 +644,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$saveCheckboxes,
 		this.editSummaryCountLabel.$element
 	);
+	// eslint-disable-next-line no-jquery/no-html
 	this.$license = $( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
 		.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) );
 	this.$saveMessages = $( '<div>' ).addClass( 've-ui-mwSaveDialog-messages' );
@@ -715,6 +719,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		expanded: false,
 		padded: true
 	} );
+	// eslint-disable-next-line no-jquery/no-html
 	this.$conflict = $( '<div>' ).addClass( 've-ui-mwSaveDialog-conflict' )
 		.html( ve.init.platform.getParsedMessage( 'visualeditor-editconflict' ) );
 	ve.targetLinksToNewWindow( this.$conflict[ 0 ] );
