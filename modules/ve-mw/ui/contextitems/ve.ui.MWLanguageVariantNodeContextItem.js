@@ -87,10 +87,10 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 		case 'filter':
 		case 'name':
 			$header
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-name-label' )
 				) )
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-code-label' )
 				) );
 
@@ -111,16 +111,16 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 
 		case 'oneway':
 			$header
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-name-label' )
 				) )
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-code-label' )
 				) )
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-text-from-label' )
 				) )
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-text-to-label' )
 				) );
 
@@ -141,13 +141,13 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 
 		case 'twoway':
 			$header
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-name-label' )
 				) )
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-code-label' )
 				) )
-				.append( $( '<th>' ).append(
+				.append( $( '<th>' ).text(
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label' )
 				) );
 

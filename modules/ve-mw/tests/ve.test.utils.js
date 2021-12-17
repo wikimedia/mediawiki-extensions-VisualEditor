@@ -34,9 +34,11 @@
 		const $wrapper = $( '<div>' );
 		args.forEach( ( arg, i ) => {
 			if ( i > 0 ) {
-				$wrapper.append( ',' );
+				$wrapper[ 0 ].appendChild( document.createTextNode( ',' ) );
 			}
-			$wrapper.append( arg );
+			// Strings are converted to text nodes
+			// eslint-disable-next-line no-jquery/no-append-html
+			$wrapper.append( typeof arg === 'string' ? document.createTextNode( arg ) : arg );
 		} );
 		// Merge text nodes
 		$wrapper[ 0 ].normalize();

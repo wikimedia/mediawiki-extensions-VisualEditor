@@ -61,15 +61,15 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 		.append( $( '<tr>' )
 			.append(
 				$( '<th>' )
-					.append( ve.msg( 'visualeditor-dialog-meta-languages-code-label' ) )
+					.text( ve.msg( 'visualeditor-dialog-meta-languages-code-label' ) )
 			)
 			.append(
 				$( '<th>' )
-					.append( ve.msg( 'visualeditor-dialog-meta-languages-name-label' ) )
+					.text( ve.msg( 'visualeditor-dialog-meta-languages-name-label' ) )
 			)
 			.append(
 				$( '<th>' )
-					.append( ve.msg( 'visualeditor-dialog-meta-languages-link-label' ) )
+					.text( ve.msg( 'visualeditor-dialog-meta-languages-link-label' ) )
 			)
 		);
 

@@ -1000,10 +1000,11 @@ ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 		target = this;
 
 	return promise.fail( function ( error, response ) {
+		var $errorMessages = target.extractErrorMessages( response );
 		OO.ui.alert(
 			$( ve.htmlMsg(
 				'visualeditor-serializeerror',
-				$( '<span>' ).append( target.extractErrorMessages( response ) )[ 0 ]
+				$( '<span>' ).append( $errorMessages )[ 0 ]
 			) )
 		);
 

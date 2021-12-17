@@ -42,6 +42,8 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 			return ve.createDeferred().reject().promise();
 		}
 	} ).then( function ( templatesUsed ) {
+		// templatesUsed is an array of nodes
+		// eslint-disable-next-line no-jquery/no-append-html
 		page.templatesUsedFieldset.$element.append( templatesUsed );
 		ve.targetLinksToNewWindow( page.templatesUsedFieldset.$element[ 0 ] );
 	}, function () {

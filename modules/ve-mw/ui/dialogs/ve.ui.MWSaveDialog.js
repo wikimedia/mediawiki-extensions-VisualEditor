@@ -169,6 +169,8 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 	this.$reviewWikitextDiff.append( new OO.ui.ProgressBarWidget().$element );
 	wikitextDiffPromise.then( function ( wikitextDiff ) {
 		if ( wikitextDiff ) {
+			// wikitextDiff is an HTML string we trust from the API
+			// eslint-disable-next-line no-jquery/no-append-html
 			dialog.$reviewWikitextDiff.empty().append( wikitextDiff );
 		} else {
 			dialog.$reviewWikitextDiff.empty().append(
@@ -262,6 +264,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 			// The following classes are used here:
 			// * mw-content-ltr
 			// * mw-content-rtl
+			// eslint-disable-next-line no-jquery/no-append-html
 			$( '<div>' ).addClass( 'mw-content-' + mw.config.get( 'wgVisualEditor' ).pageLanguageDir ).append(
 				body.childNodes
 			)
@@ -292,6 +295,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		} );
 	} else if ( docOrMsg instanceof $ ) {
 		this.$previewViewer.empty().append(
+			// eslint-disable-next-line no-jquery/no-append-html
 			$( '<em>' ).append( docOrMsg )
 		);
 	}
@@ -410,7 +414,8 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 				this.$previewEditSummary.text( ve.msg( 'visualeditor-savedialog-review-nosummary' ) );
 			} else {
 				this.$previewEditSummary.parent().removeClass( 'oo-ui-element-hidden' );
-				this.$previewEditSummary.append( $.createSpinner() );
+				var $spinner = $.createSpinner();
+				this.$previewEditSummary.append( $spinner );
 				this.editSummaryXhr = ve.init.target.getContentApi().post( {
 					action: 'parse',
 					title: ve.init.target.getPageName(),

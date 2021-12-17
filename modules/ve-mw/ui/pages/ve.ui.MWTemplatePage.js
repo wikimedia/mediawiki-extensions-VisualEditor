@@ -83,18 +83,18 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	}
 
 	if ( key ) {
+		// The following messages are used here:
+		// * visualeditor-dialog-transclusion-absent-template
+		// * visualeditor-dialog-transclusion-more-template-description
+		// * visualeditor-dialog-transclusion-no-template-description
+		// * visualeditor-dialog-transclusion-see-template
+		// * visualeditor-dialog-transclusion-template-title-modifier
+		// * visualeditor-dialog-transclusion-template-title-nonexistent
+		var $msg = mw.message( key, this.spec.getLabel(), link ).parseDom();
 		// The following classes are used here:
 		// * ve-ui-mwTemplatePage-description-extra
 		// * ve-ui-mwTemplatePage-description-missing
-		$addMessageHere.addClass( messageStyle )
-			// The following messages are used here:
-			// * visualeditor-dialog-transclusion-absent-template
-			// * visualeditor-dialog-transclusion-more-template-description
-			// * visualeditor-dialog-transclusion-no-template-description
-			// * visualeditor-dialog-transclusion-see-template
-			// * visualeditor-dialog-transclusion-template-title-modifier
-			// * visualeditor-dialog-transclusion-template-title-nonexistent
-			.append( mw.message( key, this.spec.getLabel(), link ).parseDom() );
+		$addMessageHere.addClass( messageStyle ).append( $msg );
 		ve.targetLinksToNewWindow( $addMessageHere[ 0 ] );
 	}
 
