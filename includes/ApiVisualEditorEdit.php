@@ -253,10 +253,10 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->statsdDataFactory->increment( "editstash.ve_serialization_cache.set_" . $status );
 
 		// Also parse and prepare the edit in case it might be saved later
-		$page = WikiPage::factory( $title );
+		$pageUpdater = WikiPage::factory( $title )->newPageUpdater( $this->getUser() );
 		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
 
-		$status = $this->pageEditStash->parseAndCache( $page, $content, $this->getUser(), '' );
+		$status = $this->pageEditStash->parseAndCache( $pageUpdater, $content, $this->getUser(), '' );
 		if ( $status === $this->pageEditStash::ERROR_NONE ) {
 			$logger = LoggerFactory::getInstance( 'StashEdit' );
 			$logger->debug( "Cached parser output for VE content key '$key'." );
