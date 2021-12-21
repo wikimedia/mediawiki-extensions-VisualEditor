@@ -346,7 +346,9 @@
 	 *
 	 * @private
 	 * @param {string} mode Target mode: 'visual' or 'source'
-	 * @param {string} [section] Section to edit (currently just source mode)
+	 * @param {string} [section] Section to edit.
+	 *  If visual section editing is not enabled, we will jump to the start of this section, and still
+	 *  the heading to prefix the edit summary.
 	 * @param {jQuery.Promise} [tPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
 	 */
@@ -393,6 +395,29 @@
 				.then( incrementLoadingProgress );
 		}
 
+		var visibleSection = null;
+		var visibleSectionOffset = null;
+		if ( section === null ) {
+			var firstVisibleEditSection = null;
+			$( '#mw-content-text .mw-editsection' ).each( function () {
+				var top = this.getBoundingClientRect().top;
+				if ( top > 0 ) {
+					firstVisibleEditSection = this;
+					// break
+					return false;
+				}
+			} );
+
+			if ( firstVisibleEditSection ) {
+				var firstVisibleSectionLink = firstVisibleEditSection.querySelector( 'a' );
+				var linkUri = new mw.Uri( firstVisibleSectionLink.href );
+				visibleSection = parseSection( linkUri.query.section );
+
+				var firstVisibleHeading = $( firstVisibleEditSection ).closest( 'h1, h2, h3, h4, h5, h6' )[ 0 ];
+				visibleSectionOffset = firstVisibleHeading.getBoundingClientRect().top;
+			}
+		}
+
 		showLoading( mode );
 		incrementLoadingProgress();
 		active = true;
@@ -400,6 +425,9 @@
 		tPromise = tPromise || getTarget( mode, section );
 		tPromise
 			.then( function ( target ) {
+				target.visibleSection = visibleSection;
+				target.visibleSectionOffset = visibleSectionOffset;
+
 				incrementLoadingProgress();
 				target.on( 'deactivate', function () {
 					active = false;

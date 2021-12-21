@@ -238,6 +238,9 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	var toolbar = this.getToolbar();
 
+	// Allow the toolbar to start floating now if necessary
+	this.onContainerScroll();
+
 	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
 	if ( !wasSetup ) {
 		// eslint-disable-next-line no-jquery/no-class-state
@@ -249,14 +252,21 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 			this.toolbarSetupDeferred.resolve();
 		} else {
 			setTimeout( function () {
+				var isFloating = toolbar.isFloating();
 				toolbar.$element
-					.css( 'height', toolbar.$bar[ 0 ].offsetHeight )
 					.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
+				// For unfloated toolbar, transition the container hide to smoothly
+				// push the content down. Don't do this if the toolbar is floating to avoid movement.
+				if ( !isFloating ) {
+					toolbar.$element.css( 'height', toolbar.$bar[ 0 ].offsetHeight );
+				}
 				setTimeout( function () {
 					// Clear to allow growth during use and when resizing window
 					toolbar.$element
-						.css( 'height', '' )
 						.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
+					if ( !isFloating ) {
+						toolbar.$element.css( 'height', '' );
+					}
 					target.toolbarSetupDeferred.resolve();
 				}, 250 );
 			} );
@@ -422,9 +432,6 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 
 		this.originalEditondbclick = mw.user.options.get( 'editondblclick' );
 		mw.user.options.set( 'editondblclick', 0 );
-
-		// Save the scroll position; will be restored by surfaceReady()
-		this.saveScrollPosition();
 
 		// User interface changes
 		this.changeDocumentTitle();
@@ -730,8 +737,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 
 	var editNotices = this.getEditNotices(),
 		actionTools = this.actionsToolbar.tools,
-		surface = this.getSurface(),
-		target = this;
+		surface = this.getSurface();
 
 	this.activating = false;
 
@@ -753,12 +759,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// it work regardless of whether we came here from activating on an
 	// existing page, or loading via an edit URL.
 	this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ), true );
-
-	// Support: IE<=11
-	// IE requires us to defer before restoring the scroll position
-	setTimeout( function () {
-		target.restoreScrollPosition();
-	} );
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
@@ -1068,28 +1068,6 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function ()
 	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
 	data.editSummary = this.editSummaryValue || this.initialEditSummary;
 	return data;
-};
-
-/**
- * Remember the window's scroll position.
- */
-ve.init.mw.DesktopArticleTarget.prototype.saveScrollPosition = function () {
-	if ( ( this.getDefaultMode() === 'source' || this.enableVisualSectionEditing ) && this.section !== null ) {
-		// Reset scroll to top if doing real section editing
-		this.scrollTop = 0;
-	} else {
-		this.scrollTop = $( window ).scrollTop();
-	}
-};
-
-/**
- * Restore the window's scroll position.
- */
-ve.init.mw.DesktopArticleTarget.prototype.restoreScrollPosition = function () {
-	if ( this.scrollTop !== null ) {
-		$( window ).scrollTop( this.scrollTop );
-		this.scrollTop = null;
-	}
 };
 
 /**

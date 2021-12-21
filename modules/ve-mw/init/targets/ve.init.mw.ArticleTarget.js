@@ -51,6 +51,8 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	// A workaround, as default URI does not get updated after pushState (T74334)
 	this.currentUri = new mw.Uri( location.href );
 	this.section = null;
+	this.visibleSection = null;
+	this.visibleSectionOffset = null;
 	this.sectionTitle = null;
 	this.editSummaryValue = null;
 	this.initialEditSummary = null;
@@ -1023,6 +1025,8 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.originalHtml = null;
 	this.toolbarSaveButton = null;
 	this.section = null;
+	this.visibleSection = null;
+	this.visibleSectionOffset = null;
 	this.editNotices = [];
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
@@ -1880,62 +1884,76 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
  * Do nothing if this.section is undefined.
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
-	var section = this.section,
-		surface = this.getSurface(),
-		mode = surface.getMode();
+	var section = this.section !== null ? this.section : this.visibleSection;
 
-	if ( section !== null && section !== 'new' && section !== '0' && section !== 'T-0' ) {
-		var headingText;
-		if ( mode === 'visual' ) {
-			var dmDoc = surface.getModel().getDocument();
-			// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
-			// to the heading. Iterate over headings to find the one with the correct attribute
-			// in originalDomElements.
-			var headingModel;
-			dmDoc.getNodesByType( 'mwHeading' ).some( function ( heading ) {
-				var domElements = heading.getOriginalDomElements( dmDoc.getStore() );
-				if (
-					domElements && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
-					domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
-				) {
-					headingModel = heading;
-					return true;
-				}
-				return false;
-			} );
-			if ( headingModel ) {
-				var headingView = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
-				if ( new mw.Uri().query.summary === undefined ) {
-					headingText = headingView.$element.text();
-				}
-				if ( !this.enableVisualSectionEditing ) {
-					this.goToHeading( headingView );
-				}
+	if ( this.enableVisualSectionEditing && this.section !== null ) {
+		$( this.getElementWindow() ).scrollTop( 0 );
+	}
+
+	if ( section === null || section === 'new' || section === '0' || section === 'T-0' ) {
+		return;
+	}
+
+	var surface = this.getSurface(),
+		mode = surface.getMode(),
+		setExactScrollOffset = this.section === null && this.visibleSection !== null && this.visibleSectionOffset !== null,
+		// User clicked section edit link with visual section editing not available:
+		// Take them to the top of the section using goToHeading
+		goToStartOfHeading = this.section !== null && !this.enableVisualSectionEditing,
+		setEditSummary = this.section !== null;
+
+	var headingText;
+	if ( mode === 'visual' ) {
+		var dmDoc = surface.getModel().getDocument();
+		// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
+		// to the heading. Iterate over headings to find the one with the correct attribute
+		// in originalDomElements.
+		var headingModel;
+		dmDoc.getNodesByType( 'mwHeading' ).some( function ( heading ) {
+			var domElements = heading.getOriginalDomElements( dmDoc.getStore() );
+			if (
+				domElements && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
+				domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
+			) {
+				headingModel = heading;
+				return true;
 			}
-		} else if ( mode === 'source' ) {
-			// With elements of extractSectionTitle + stripSectionName TODO:
-			// Arguably, we should just throw this through the API and then do
-			// the same extract-text pass we do in visual mode. Would save us
-			// having to think about wikitext here.
-			headingText = surface.getModel().getDocument().data.getText(
-				false,
-				surface.getModel().getDocument().getDocumentNode().children[ 0 ].getRange()
-			)
-				// Extract the title
-				.replace( /^\s*=+\s*(.*?)\s*=+\s*$/, '$1' )
-				// Remove links
-				.replace( /\[\[:?([^[|]+)\|([^[]+)\]\]/g, '$2' )
-				.replace( /\[\[:?([^[]+)\|?\]\]/g, '$1' )
-				.replace( new RegExp( '\\[(?:' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + ')([^ ]+?) ([^\\[]+)\\]', 'ig' ), '$3' )
-				// Cheap HTML removal
-				.replace( /<[^>]+?>/g, '' );
+			return false;
+		} );
+		if ( headingModel ) {
+			var headingView = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
+			if ( setEditSummary && new mw.Uri().query.summary === undefined ) {
+				headingText = headingView.$element.text();
+			}
+			if ( setExactScrollOffset ) {
+				this.scrollToHeading( headingView, this.visibleSectionOffset );
+			} else if ( goToStartOfHeading ) {
+				this.goToHeading( headingView );
+			}
 		}
-		if ( headingText ) {
-			this.initialEditSummary =
-				'/* ' +
-				ve.graphemeSafeSubstring( headingText, 0, 244 ) +
-				' */ ';
-		}
+	} else if ( mode === 'source' && setEditSummary ) {
+		// With elements of extractSectionTitle + stripSectionName TODO:
+		// Arguably, we should just throw this through the API and then do
+		// the same extract-text pass we do in visual mode. Would save us
+		// having to think about wikitext here.
+		headingText = surface.getModel().getDocument().data.getText(
+			false,
+			surface.getModel().getDocument().getDocumentNode().children[ 0 ].getRange()
+		)
+			// Extract the title
+			.replace( /^\s*=+\s*(.*?)\s*=+\s*$/, '$1' )
+			// Remove links
+			.replace( /\[\[:?([^[|]+)\|([^[]+)\]\]/g, '$2' )
+			.replace( /\[\[:?([^[]+)\|?\]\]/g, '$1' )
+			.replace( new RegExp( '\\[(?:' + ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source + ')([^ ]+?) ([^\\[]+)\\]', 'ig' ), '$3' )
+			// Cheap HTML removal
+			.replace( /<[^>]+?>/g, '' );
+	}
+	if ( headingText ) {
+		this.initialEditSummary =
+			'/* ' +
+			ve.graphemeSafeSubstring( headingText, 0, 244 ) +
+			' */ ';
 	}
 };
 
@@ -1988,11 +2006,13 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
  * Scroll to a given heading in the document.
  *
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
+ * @param {number} [headingOffset=0] Set the top offset of the heading to a specific amount, relative
+ *  to the surface viewport.
  */
-ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
+ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode, headingOffset ) {
 	var $window = $( this.getElementWindow() );
 
-	$window.scrollTop( headingNode.$element.offset().top - this.getSurface().padding.top );
+	$window.scrollTop( headingNode.$element.offset().top - ( this.getSurface().padding.top + ( headingOffset || 0 ) ) );
 };
 
 /**
