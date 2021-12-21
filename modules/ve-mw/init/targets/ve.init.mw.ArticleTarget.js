@@ -1985,9 +1985,9 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode ) {
-	var $window = $( OO.ui.Element.static.getWindow( this.$element ) );
+	var $window = $( this.getElementWindow() );
 
-	$window.scrollTop( headingNode.$element.offset().top - this.getToolbar().$element.height() );
+	$window.scrollTop( headingNode.$element.offset().top - this.getSurface().padding.top );
 };
 
 /**
