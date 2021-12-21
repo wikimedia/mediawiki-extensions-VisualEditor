@@ -2376,6 +2376,8 @@
 				"visualeditor-changedesc-link-href",
 				"visualeditor-changedesc-link-href-diff",
 				"visualeditor-changedesc-link-removed",
+				"visualeditor-changedesc-list-indent",
+				"visualeditor-changedesc-list-outdent",
 				"visualeditor-changedesc-no-key",
 				"visualeditor-changedesc-set",
 				"visualeditor-changedesc-textstyle-added",
