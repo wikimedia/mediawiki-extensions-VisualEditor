@@ -483,11 +483,16 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	// Parent method
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
-	// Do this after window is made scrollable on mobile
-	// ('surfaceReady' handler in VisualEditorOverlay in MobileFrontend)
-	this.restoreEditSection();
-
 	mw.hook( 've.activationComplete' ).fire();
+};
+
+/**
+ * Runs after the surface has been made ready and visible
+ *
+ * Implementing sub-classes must call this method.
+ */
+ve.init.mw.ArticleTarget.prototype.afterSurfaceReady = function () {
+	this.restoreEditSection();
 };
 
 /**

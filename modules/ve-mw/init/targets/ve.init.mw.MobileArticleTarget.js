@@ -290,10 +290,6 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 		return;
 	}
 
-	// Calls scrollSelectionIntoView so must be called before parent,
-	// which calls goToHeading. (T225292)
-	this.adjustContentPadding();
-
 	// Deactivate the surface so any initial selection set in surfaceReady
 	// listeners doesn't cause the keyboard to be shown.
 	this.getSurface().getView().deactivate( false );
@@ -315,6 +311,16 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 		this.viewportZoomHandler = new ve.init.mw.ViewportZoomHandler();
 		this.viewportZoomHandler.attach( this.getSurface() );
 	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.mw.MobileArticleTarget.prototype.afterSurfaceReady = function () {
+	this.adjustContentPadding();
+
+	// Parent method
+	ve.init.mw.MobileArticleTarget.super.prototype.afterSurfaceReady.apply( this, arguments );
 };
 
 /**
