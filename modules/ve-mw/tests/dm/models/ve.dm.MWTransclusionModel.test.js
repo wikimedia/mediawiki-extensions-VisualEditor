@@ -35,11 +35,11 @@
 			} );
 	};
 
-	QUnit.test( 'getUniquePartId', function ( assert ) {
+	QUnit.test( 'nextUniquePartId', function ( assert ) {
 		const transclusion = new ve.dm.MWTransclusionModel();
-		assert.strictEqual( transclusion.getUniquePartId(), 0 );
-		assert.strictEqual( transclusion.getUniquePartId(), 1 );
-		assert.strictEqual( transclusion.getUniquePartId(), 2 );
+		assert.strictEqual( transclusion.nextUniquePartId(), 0 );
+		assert.strictEqual( transclusion.nextUniquePartId(), 1 );
+		assert.strictEqual( transclusion.nextUniquePartId(), 2 );
 	} );
 
 	QUnit.test( 'fetch template part data', function ( assert ) {

@@ -7,7 +7,7 @@
 	 */
 	const createTransclusionModel = function () {
 		return {
-			getUniquePartId: () => 0
+			nextUniquePartId: () => 0
 		};
 	};
 
