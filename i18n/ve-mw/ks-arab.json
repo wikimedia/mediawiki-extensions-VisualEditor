@@ -3,7 +3,8 @@
 		"authors": [
 			"Iflaq",
 			"Rishabhbhat",
-			"Shahwaqar"
+			"Shahwaqar",
+			"Teashae"
 		]
 	},
 	"visualeditor-ca-editsource": "کوڈ اؠڈِٹ کٔرِو",
@@ -16,9 +17,9 @@
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "نٔو زٲژ",
 	"visualeditor-dialog-meta-categories-section": "زٲژ",
 	"visualeditor-dialog-meta-languages-code-label": "زَبان کوڑ",
-	"visualeditor-dialog-meta-languages-label": "زَبانٕ",
+	"visualeditor-dialog-meta-languages-label": "زَبانہٕ",
 	"visualeditor-dialog-meta-languages-name-label": "زَبان",
-	"visualeditor-dialog-meta-languages-section": "زَبانٕ",
+	"visualeditor-dialog-meta-languages-section": "زَبانہٕ",
 	"visualeditor-dialog-template-title": "فرما",
 	"visualeditor-dialog-transclusion-param-example-long": "مثال: $1",
 	"visualeditor-dialogbutton-template-tooltip": "فرما",
