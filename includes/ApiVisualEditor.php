@@ -41,6 +41,9 @@ class ApiVisualEditor extends ApiBase {
 	/** @var ContentTransformer */
 	private $contentTransformer;
 
+	/** @var ReadOnlyMode */
+	private $readOnlyMode;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
@@ -50,6 +53,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param WatchlistManager $watchlistManager
 	 * @param ContentTransformer $contentTransformer
+	 * @param ReadOnlyMode $readOnlyMode
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -59,7 +63,8 @@ class ApiVisualEditor extends ApiBase {
 		LinkRenderer $linkRenderer,
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
-		ContentTransformer $contentTransformer
+		ContentTransformer $contentTransformer,
+		ReadOnlyMode $readOnlyMode
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -69,6 +74,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->watchlistManager = $watchlistManager;
 		$this->contentTransformer = $contentTransformer;
+		$this->readOnlyMode = $readOnlyMode;
 	}
 
 	/**
@@ -322,8 +328,8 @@ class ApiVisualEditor extends ApiBase {
 					$notices['editingold'] = $this->msg( 'editingold' )->parseAsBlock();
 				}
 
-				if ( wfReadOnly() ) {
-					$notices['readonlywarning'] = $this->msg( 'readonlywarning', wfReadOnlyReason() );
+				if ( $this->readOnlyMode->isReadOnly() ) {
+					$notices['readonlywarning'] = $this->msg( 'readonlywarning', $this->readOnlyMode->getReason() );
 				}
 
 				// Edit notices about the page being protected (only used when we're allowed to edit it;
