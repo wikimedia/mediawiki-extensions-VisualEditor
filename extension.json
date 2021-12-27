@@ -204,7 +204,8 @@
 				"LinkRenderer",
 				"UserOptionsLookup",
 				"WatchlistManager",
-				"ContentTransformer"
+				"ContentTransformer",
+				"ReadOnlyMode"
 			]
 		},
 		"visualeditoredit": {

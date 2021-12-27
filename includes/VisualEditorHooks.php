@@ -313,7 +313,7 @@ class VisualEditorHooks {
 		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			$services->getUserOptionsManager()->setOption( $user, 'visualeditor-editor', 'wikitext' );
-			if ( !wfReadOnly() && $user->isRegistered() ) {
+			if ( !$services->getReadOnlyMode()->isReadOnly() && $user->isRegistered() ) {
 				DeferredUpdates::addCallableUpdate( static function () use ( $user ) {
 					$user->saveSettings();
 				} );
@@ -1166,12 +1166,13 @@ class VisualEditorHooks {
 				$lb->getLazyConnectionRef( DB_PRIMARY ),
 				__METHOD__,
 				static function () use ( $user, $cookie ) {
-					if ( wfReadOnly() ) {
+					$services = MediaWikiServices::getInstance();
+					if ( $services->getReadOnlyMode()->isReadOnly() ) {
 						return;
 					}
 
 					$uLatest = $user->getInstanceForUpdate();
-					MediaWikiServices::getInstance()->getUserOptionsManager()
+					$services->getUserOptionsManager()
 						->setOption( $uLatest, 'visualeditor-editor', $cookie );
 					$uLatest->saveSettings();
 				}
