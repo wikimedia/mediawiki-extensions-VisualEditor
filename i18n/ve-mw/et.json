@@ -216,7 +216,7 @@
 	"visualeditor-includes-noinclude-description": "Kui selle lehekülje sisu kasutatakse teisel leheküljel, siis sisu alates siit kuni vastava lõpptähiseni <strong>ei ole</strong> kaasa arvatud. Ole tähelepanelik neist tähistest väljapoole jääva sisu redigeerimisel, kuna teised leheküljed võivad seda kasutada.",
 	"visualeditor-includes-onlyinclude-description": "Kui selle lehekülje sisu kasutatakse teisel leheküljel, siis on kaasa arvatud <strong>ainult</strong> sisu alates siit kuni vastava lõpptähiseni. Ole tähelepanelik nende tähiste vahele jääva sisu redigeerimisel, kuna teised leheküljed võivad seda kasutada.",
 	"visualeditor-includes-includeonly-description": "Kui selle lehekülje sisu kasutatakse teisel leheküljel, siis on selles kohas kaasa arvatud järgmine lisasisu:",
-	"visualeditor-includes-documentation": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Loe veel osalise mallina kasutamise kohta]",
+	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Loe veel osalise mallina kasutamise kohta]",
 	"visualeditor-languages-tool": "Keeled",
 	"visualeditor-linkinspector-button-link-external": "Välislink",
 	"visualeditor-linkinspector-button-link-internal": "Otsi viki lehekülgi",
