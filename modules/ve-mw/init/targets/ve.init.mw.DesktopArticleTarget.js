@@ -960,7 +960,10 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			wgIsRedirect: !!data.isRedirect
 		} );
 
-		this.saveDialog.reset();
+		if ( this.saveDialog ) {
+			this.saveDialog.reset();
+		}
+
 		this.replacePageContent(
 			data.content,
 			data.categorieshtml,
