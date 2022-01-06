@@ -14,13 +14,13 @@
 		$visualDiff = $( '<div>' ),
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		originalUri = new mw.Uri(),
-		mode = originalUri.query.diffmode || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
+		initMode = originalUri.query.diffmode || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 
-	if ( mode !== 'visual' ) {
+	if ( initMode !== 'visual' ) {
 		// Enforce a valid mode, to avoid visual glitches in button-selection.
-		mode = 'source';
+		initMode = 'source';
 	}
 
 	$visualDiffContainer.append(
@@ -29,10 +29,7 @@
 	);
 
 	function onReviewModeButtonSelectSelect( item ) {
-		var $revSlider = $( '.mw-revslider-container' ),
-			oldId = mw.config.get( 'wgDiffOldId' ),
-			newId = mw.config.get( 'wgDiffNewId' ),
-			uri = new mw.Uri();
+		var uri = new mw.Uri();
 
 		var oldPageName, newPageName;
 		if ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ComparePages' ) {
@@ -42,7 +39,7 @@
 			newPageName = uri.query.page2;
 		}
 
-		mode = item.getData();
+		var mode = item.getData();
 		var isVisual = mode === 'visual';
 
 		if ( mode !== mw.user.options.get( 'visualeditor-diffmode-historical' ) ) {
@@ -52,6 +49,7 @@
 		}
 		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
 		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
+		var $revSlider = $( '.mw-revslider-container' );
 		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
 		if ( isVisual ) {
 			// Highlight the headers using the same styles as the diff, to better indicate
@@ -63,6 +61,8 @@
 			$wikitextDiffHeader.find( '#mw-diff-ntitle1' ).removeAttr( 'data-diff-action' );
 		}
 
+		var oldId = mw.config.get( 'wgDiffOldId' );
+		var newId = mw.config.get( 'wgDiffNewId' );
 		if ( isVisual && !(
 			lastDiff && lastDiff.oldId === oldId && lastDiff.newId === newId &&
 			lastDiff.oldPageName === oldPageName && lastDiff.newPageName === newPageName
@@ -117,6 +117,6 @@
 		} );
 		reviewModeButtonSelect.on( 'select', onReviewModeButtonSelectSelect );
 		$( '.ve-init-mw-diffPage-diffMode' ).empty().append( reviewModeButtonSelect.$element );
-		reviewModeButtonSelect.selectItemByData( mode );
+		reviewModeButtonSelect.selectItemByData( initMode );
 	} );
 }() );
