@@ -201,6 +201,7 @@
 	"visualeditor-dialog-transclusion-confirmation-reject": "Continue editing",
 	"visualeditor-dialog-transclusion-content": "Content",
 	"visualeditor-dialog-transclusion-contextitem-description": "Generated from: $1",
+	"visualeditor-dialog-transclusion-contextitem-loading": "Loading…",
 	"visualeditor-dialog-transclusion-expand-options": "Show options",
 	"visualeditor-dialog-transclusion-filter-hide-unused": "Hide unused fields",
 	"visualeditor-dialog-transclusion-filter-no-match": "No matches found",
