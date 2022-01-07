@@ -18,6 +18,7 @@
 			"Stam.nikos",
 			"SucreRouge",
 			"Tifa93",
+			"Αντιγόνη",
 			"Ανώνυμος Βικιπαιδιστής"
 		]
 	},
@@ -235,7 +236,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-message": "Η επιστροφή θα καταργήσει αυτό το πρότυπο μαζί με τυχόν πληροφορίες που έχετε εισαγάγει, επιστρέφοντας σας στην επιλογή προτύπου. Αυτή η ενέργεια είναι μη αναστρέψιμη.",
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Συνέχεια επεξεργασίας",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Αφαίρεση προτύπου",
-	"visualeditor-dialog-transclusion-feedback-message": "Πρόσφατο έργο ολοκληρώθηκε για τη βελτίωση των αποτελεσμάτων αναζήτησης προτύπων. Για να μάθετε περισσότερα σχετικά με τις αλλαγές ή να αφήσετε σχόλια, μεταβείτε στη στο[//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates σελίδα του έργου].",
+	"visualeditor-dialog-transclusion-feedback-message": "Πρόσφατο έργο ολοκληρώθηκε για τη βελτίωση των αποτελεσμάτων αναζήτησης προτύπων. Για να μάθετε περισσότερα σχετικά με τις αλλαγές ή να αφήσετε σχόλια, μεταβείτε στη [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates σελίδα του έργου].",
 	"visualeditor-dialog-transclusion-wikitext": "Κείμενο wiki",
 	"visualeditor-dialogbutton-media-tooltip": "Εικόνες και πολυμέσα",
 	"visualeditor-dialogbutton-meta-tooltip": "Ρυθμίσεις σελίδας",

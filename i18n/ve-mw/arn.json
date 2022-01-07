@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fiestoforo"
+			"Fiestoforo",
+			"Manke ruLpa"
 		]
 	},
-	"tooltip-ca-ve-edit": "Elkünufinge tüfachi pakina."
+	"tooltip-ca-ve-edit": "Elkünufinge tüfachi pakina.",
+	"visualeditor-ca-editsource": "Kümeeltun wirin",
+	"visualeditor-ca-editsource-section": "kümeeltun wirin"
 }
