@@ -38,6 +38,30 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	}
 
 	/**
+	 * Get the definition summary for this module.
+	 *
+	 * @param ResourceLoaderContext $context
+	 * @return array
+	 */
+	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+		$summary = parent::getDefinitionSummary( $context );
+
+		$msgVersion = [];
+		$msgInfo = $this->getMessageInfo( $context );
+		$msgInfo = array_merge( $msgInfo['parse'], $msgInfo['plain'] );
+		foreach ( $msgInfo as $msgKey => $msgObj ) {
+			$msgVersion[ $msgKey ] = [
+				// Include the text of the message, in case the canonical translation changes
+				$msgObj->plain(),
+				// Include the page touched time, in case the on-wiki override is invalidated
+				Title::makeTitle( NS_MEDIAWIKI, ucfirst( $msgObj->getKey() ) )->getTouched(),
+			];
+		}
+		$summary[] = [ 've-messages' => $msgVersion ];
+		return $summary;
+	}
+
+	/**
 	 * @param ResourceLoaderContext $context Object containing information about the state of this
 	 *   specific loader request.
 	 * @return array[] Messages in various states of parsing
