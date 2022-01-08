@@ -42,11 +42,6 @@
 		var mode = item.getData();
 		var isVisual = mode === 'visual';
 
-		if ( mode !== mw.user.options.get( 'visualeditor-diffmode-historical' ) ) {
-			mw.user.options.set( 'visualeditor-diffmode-historical', mode );
-			// Same as ve.init.target.getLocalApi()
-			new mw.Api().saveOption( 'visualeditor-diffmode-historical', mode );
-		}
 		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
 		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
 		var $revSlider = $( '.mw-revslider-container' );
@@ -100,6 +95,15 @@
 
 	}
 
+	function onReviewModeButtonSelectChoose( item ) {
+		var mode = item.getData();
+		if ( mode !== mw.user.options.get( 'visualeditor-diffmode-historical' ) ) {
+			mw.user.options.set( 'visualeditor-diffmode-historical', mode );
+			// Same as ve.init.target.getLocalApi()
+			new mw.Api().saveOption( 'visualeditor-diffmode-historical', mode );
+		}
+	}
+
 	mw.hook( 'wikipage.diff' ).add( function () {
 		$wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
 		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' )
@@ -115,7 +119,10 @@
 				new OO.ui.ButtonOptionWidget( { data: 'source', icon: 'wikiText', label: mw.msg( 'visualeditor-savedialog-review-wikitext' ) } )
 			]
 		} );
+		// Choose is only emitted when the user interacts with the widget, whereas
+		// select is emitted even when the mode is set programmatically (e.g. on load)
 		reviewModeButtonSelect.on( 'select', onReviewModeButtonSelectSelect );
+		reviewModeButtonSelect.on( 'choose', onReviewModeButtonSelectChoose );
 		$( '.ve-init-mw-diffPage-diffMode' ).empty().append( reviewModeButtonSelect.$element );
 		reviewModeButtonSelect.selectItemByData( initMode );
 	} );
