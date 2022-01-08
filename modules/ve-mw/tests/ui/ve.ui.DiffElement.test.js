@@ -8,7 +8,7 @@ QUnit.module( 've.ui.DiffElement (MW)', ve.test.utils.mwEnvironment );
 
 QUnit.test( 'Diffing', ( assert ) => {
 	const fixBase = ( body ) =>
-			'<html><head><base href="' + ve.dm.example.baseUri + '"></head><body>' + body + '</body>',
+			'<html><head><base href="' + ve.dm.example.baseUri + '"></head><body>' + body + '</body></html>',
 		cases = [
 			{
 				msg: 'Change template param',
