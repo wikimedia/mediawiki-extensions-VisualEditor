@@ -28,47 +28,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	// Properties
 	this.isSidebarExpanded = null;
 
-	this.resetConfirmation = new OO.ui.FieldsetLayout( {
-		classes: [ 'oo-ui-processDialog-errors' ]
-	} );
-	this.resetConfirmationTitle = new OO.ui.LabelWidget( {
-		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-title' )
-	} );
-	this.resetConfirmationMessage = new OO.ui.MessageWidget( {
-		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-message' ),
-		type: 'error'
-	} );
-	this.resetConfirmationCancelButton = new OO.ui.ButtonWidget( {
-		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-cancel' )
-	} );
-	this.resetConfirmationResetButton = new OO.ui.ButtonWidget( {
-		label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-reset-confirmation-reset' ),
-		flags: [ 'primary', 'destructive' ]
-	} );
-
-	// Events
-	this.resetConfirmationCancelButton.connect( this, {
-		click: 'resetConfirmationHide'
-	} );
-	this.resetConfirmationResetButton.connect( this, {
-		click: 'resetConfirmationReset'
-	} );
 	this.setupHotkeyTriggers();
-
-	// Initialization
-	this.resetConfirmation.addItems( [
-		new OO.ui.HorizontalLayout( {
-			items: [ this.resetConfirmationTitle ],
-			classes: [ 'oo-ui-processDialog-errors-title' ]
-		} ),
-		this.resetConfirmationMessage,
-		new OO.ui.HorizontalLayout( {
-			items: [ this.resetConfirmationCancelButton, this.resetConfirmationResetButton ],
-			classes: [ 'oo-ui-processDialog-errors-actions' ]
-		} )
-	] );
-	this.resetConfirmation.toggle( false );
-	this.$content.append( this.resetConfirmation.$element );
 
 	// Temporary feature flags
 	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
@@ -458,11 +418,16 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'back' ) {
-		if ( !this.transclusionModel.containsValuableData() ) {
-			return this.getActionProcess( 'reset' );
-		}
 		return new OO.ui.Process( function () {
-			this.resetConfirmation.toggle( true );
+			if ( this.transclusionModel.containsValuableData() ) {
+				ve.ui.MWConfirmationDialog.confirm(
+					'visualeditor-dialog-transclusion-back-confirmation-prompt',
+					'visualeditor-dialog-transclusion-back-confirmation-continue',
+					this.resetDialog.bind( this )
+				);
+			} else {
+				this.resetDialog();
+			}
 		}, this );
 	}
 
@@ -503,25 +468,6 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 	} else {
 		backButton.toggle( false );
 	}
-};
-
-/**
- * Dismisses the reset confirmation.
- *
- * @private
- */
-ve.ui.MWTransclusionDialog.prototype.resetConfirmationHide = function () {
-	this.resetConfirmation.toggle( false );
-};
-
-/**
- * Dismisses the reset confirmation and runs the reset action.
- *
- * @private
- */
-ve.ui.MWTransclusionDialog.prototype.resetConfirmationReset = function () {
-	this.resetConfirmationHide();
-	this.executeAction( 'reset' );
 };
 
 /**

@@ -1,0 +1,87 @@
+/*!
+ * VisualEditor user interface MWConfirmationDialog class.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+/**
+ * Dialog for displaying a confirmation.
+ *
+ * This class exists to override the static MessageDialog actions.
+ *
+ * @class
+ * @extends OO.ui.MessageDialog
+ *
+ * @constructor
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MWConfirmationDialog = function VeUiMWConfirmationDialog( config ) {
+	this.accept = config.accept;
+
+	// Parent constructor
+	ve.ui.MWConfirmationDialog.super.call( this, config );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MWConfirmationDialog, OO.ui.MessageDialog );
+
+/* Static properties */
+
+ve.ui.MWConfirmationDialog.static.name = 'confirmation';
+
+ve.ui.MWConfirmationDialog.static.size = 'small';
+
+/* Static methods */
+
+/**
+ * Open a confirmation dialog
+ *
+ * @param {string} prompt message key to show as dialog content
+ * @param {string} accept message key for button label to continue
+ * @param {Function} successCmd callback if continue action is chosen
+ */
+ve.ui.MWConfirmationDialog.confirm = function ( prompt, accept, successCmd ) {
+	var windowManager = new OO.ui.WindowManager();
+	$( document.body ).append( windowManager.$element );
+	var dialog = new ve.ui.MWConfirmationDialog( {
+		accept: accept
+	} );
+	windowManager.addWindows( [ dialog ] );
+	windowManager.openWindow( dialog, {
+		// Messages that can be used here:
+		// * visualeditor-dialog-transclusion-back-confirmation-prompt
+		// * visualeditor-dialog-transclusion-close-confirmation-prompt
+		message: mw.message( prompt ).text()
+	} ).closed.then( function ( data ) {
+		if ( data && data.action === 'accept' ) {
+			successCmd();
+		}
+	} );
+};
+
+/* Methods */
+
+/**
+ * @inheritdoc
+ *
+ * @param {Object} [data] Dialog opening data
+ * @param {jQuery|string|Function|null} [data.title] Dialog title, omit to use
+ *  the {@link #static-title static title}
+ * @param {Object[]} [data.actions] List of configuration options for each
+ *   {@link OO.ui.ActionWidget action widget}, omit to use the default "OK".
+ */
+ve.ui.MWConfirmationDialog.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
+	data = ve.extendObject( {
+		actions: [
+			{ action: 'reject', label: OO.ui.deferMsg( 'ooui-dialog-message-reject' ), flags: 'safe' },
+			// Messages that can be used here:
+			// * visualeditor-dialog-transclusion-back-confirmation-continue
+			// * visualeditor-dialog-transclusion-close-confirmation-continue
+			{ action: 'accept', label: OO.ui.deferMsg( this.accept || 'ooui-dialog-message-accept' ), flags: 'primary' }
+		]
+	}, data );
+
+	return ve.ui.MWConfirmationDialog.super.prototype.getSetupProcess.call( this, data );
+};
