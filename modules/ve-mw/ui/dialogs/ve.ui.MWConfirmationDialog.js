@@ -75,11 +75,19 @@ ve.ui.MWConfirmationDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	data = ve.extendObject( {
 		actions: [
-			{ action: 'reject', label: OO.ui.deferMsg( 'ooui-dialog-message-reject' ), flags: 'safe' },
-			// Messages that can be used here:
-			// * visualeditor-dialog-transclusion-back-confirmation-continue
-			// * visualeditor-dialog-transclusion-close-confirmation-continue
-			{ action: 'accept', label: OO.ui.deferMsg( this.accept || 'ooui-dialog-message-accept' ), flags: 'primary' }
+			{
+				action: 'reject',
+				label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-confirmation-reject' ),
+				flags: 'safe'
+			},
+			{
+				action: 'accept',
+				// Additional messages that can be used here:
+				// * visualeditor-dialog-transclusion-back-confirmation-continue
+				// * visualeditor-dialog-transclusion-close-confirmation-continue
+				label: OO.ui.deferMsg( this.accept || 'ooui-dialog-message-accept' ),
+				flags: 'primary'
+			}
 		]
 	}, data );
 

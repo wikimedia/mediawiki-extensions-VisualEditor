@@ -431,16 +431,21 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 		}, this );
 	}
 
-	if ( action === 'reset' ) {
-		return new OO.ui.Process( function () {
-			this.resetDialog();
-		}, this );
-	}
-
 	if ( action === 'mode' ) {
 		return new OO.ui.Process( function () {
 			this.toggleSidebar( !this.isSidebarExpanded );
 		}, this );
+	}
+
+	if ( !action ) {
+		if ( this.altered && this.transclusionModel.containsValuableData() ) {
+			return new OO.ui.Process( function () {
+				ve.ui.MWConfirmationDialog.confirm(
+					'visualeditor-dialog-transclusion-close-confirmation-prompt',
+					'visualeditor-dialog-transclusion-close-confirmation-continue',
+					this.close.bind( this ) );
+			}, this );
+		}
 	}
 
 	return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
