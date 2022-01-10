@@ -354,10 +354,11 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 /**
  * Handle the watch button being toggled on/off.
  *
- * @param {jQuery.Event} e Event object which triggered the event
- * @param {string} actionPerformed 'watch' or 'unwatch'
+ * @param {boolean} isWatched
+ * @param {string} expiry
+ * @param {string} expirySelected
  */
-ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( e, actionPerformed ) {
+ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( isWatched ) {
 	if ( !this.active && !this.activating ) {
 		return;
 	}
@@ -365,7 +366,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( e, actionPe
 		this.checkboxesByName.wpWatchthis.setSelected(
 			!!mw.user.options.get( 'watchdefault' ) ||
 			( !!mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
-			actionPerformed === 'watch'
+			isWatched
 		);
 	}
 };
@@ -376,7 +377,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( e, actionPe
 ve.init.mw.DesktopArticleTarget.prototype.bindHandlers = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.bindHandlers.call( this );
 	if ( this.onWatchToggleHandler ) {
-		$( '#ca-watch, #ca-unwatch' ).on( 'watchpage.mw', this.onWatchToggleHandler );
+		mw.hook( 'wikipage.watchlistChange' ).add( this.onWatchToggleHandler );
 	}
 };
 
@@ -386,7 +387,7 @@ ve.init.mw.DesktopArticleTarget.prototype.bindHandlers = function () {
 ve.init.mw.DesktopArticleTarget.prototype.unbindHandlers = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.unbindHandlers.call( this );
 	if ( this.onWatchToggleHandler ) {
-		$( '#ca-watch, #ca-unwatch' ).off( 'watchpage.mw', this.onWatchToggleHandler );
+		mw.hook( 'wikipage.watchlistChange' ).remove( this.onWatchToggleHandler );
 	}
 };
 
@@ -924,9 +925,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			var watch = require( 'mediawiki.page.watch.ajax' );
 
 			watch.updateWatchLink(
-				$( '#ca-watch a, #ca-unwatch a' ),
-				data.watched ? 'unwatch' : 'watch',
-				'idle',
+				data.watched,
 				data.watchlistexpiry
 			);
 		}
