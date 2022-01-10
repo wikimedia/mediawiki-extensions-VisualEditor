@@ -28,6 +28,8 @@ ve.ui.MWTemplateTitleInputWidget = function VeUiMWTemplateTitleInputWidget( conf
 
 	// Parent constructor
 	ve.ui.MWTemplateTitleInputWidget.super.call( this, config );
+	// All code below expects this, but ContentTranslation doesn't necessarily set it to 2
+	this.api.defaults.parameters.formatversion = 2;
 
 	this.showTemplateDescriptions = this.showDescriptions;
 	// Clear the showDescriptions flag for subsequent requests as we implement
@@ -57,7 +59,6 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 		ve.extendObject( params, {
 			generator: 'search',
 			gsrsearch: params.gpssearch,
-			// gsrsort: 'incoming_links_desc',
 			gsrnamespace: params.gpsnamespace,
 			gsrlimit: params.gpslimit
 		} );
