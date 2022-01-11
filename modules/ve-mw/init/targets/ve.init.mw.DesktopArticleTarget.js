@@ -924,7 +924,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 		if ( mw.loader.getState( 'mediawiki.page.watch.ajax' ) === 'ready' ) {
 			var watch = require( 'mediawiki.page.watch.ajax' );
 
-			watch.updateWatchLink(
+			watch.updatePageWatchStatus(
 				data.watched,
 				data.watchlistexpiry
 			);
