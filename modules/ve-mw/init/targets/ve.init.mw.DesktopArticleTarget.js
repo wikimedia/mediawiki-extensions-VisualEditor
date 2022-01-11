@@ -456,6 +456,8 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 	// (We do this here because toggling 've-active' class above hides it)
 	this.$editableContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', true );
 
+	this.afterSurfaceReady();
+
 	if ( !this.editingTabDialog ) {
 		if ( this.sectionTitle ) {
 			this.sectionTitle.focus();
