@@ -413,13 +413,9 @@
 	};
 
 	/**
-	 * Get a unique ID for a part in the transclusion.
-	 *
-	 * This is used to give parts unique IDs, and returns a different value each time it's called.
-	 *
-	 * @return {number} Unique ID
+	 * @return {number} Next part ID, starting from 0, guaranteed to be unique for this transclusion
 	 */
-	ve.dm.MWTransclusionModel.prototype.getUniquePartId = function () {
+	ve.dm.MWTransclusionModel.prototype.nextUniquePartId = function () {
 		return this.uid++;
 	};
 
