@@ -225,8 +225,6 @@
 	"visualeditor-dialog-transclusion-title-insert-template": "Inserisci un template",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Inserisci: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifica: $1",
-	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "Continuare a modificare",
-	"visualeditor-dialog-transclusion-reset-confirmation-reset": "Rimuovi template",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitesto",
 	"visualeditor-dialogbutton-media-tooltip": "Immagini e file multimediali",
 	"visualeditor-dialogbutton-meta-tooltip": "Impostazioni pagina",
