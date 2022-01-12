@@ -81,11 +81,11 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 };
 
 /**
- * Called when the transclusion model changes. E.g. parts changes, parameter values changes.
+ * Update dialog actions whenever the content changes.
  *
  * @private
  */
-ve.ui.MWTemplateDialog.prototype.onTransclusionModelChange = function () {
+ve.ui.MWTemplateDialog.prototype.touch = function () {
 	if ( this.loaded ) {
 		this.altered = true;
 		this.setApplicableStatus();
@@ -171,13 +171,11 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 		if ( reselect ) {
 			this.focusPart( reselect );
 		}
-
-		if ( added || removed ) {
-			this.altered = true;
-		}
 	}
 
-	this.setApplicableStatus();
+	if ( added || removed ) {
+		this.touch();
+	}
 	this.updateTitle();
 };
 
@@ -230,8 +228,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 			page.scrollElementIntoView();
 		}
 
-		this.altered = true;
-		this.setApplicableStatus();
+		this.touch();
 
 		if ( page instanceof ve.ui.MWParameterPage ) {
 			page.updateSize();
@@ -258,10 +255,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 	this.bookletLayout.stackLayout.unsetCurrentItem();
 	this.bookletLayout.removePages( [ page ] );
 
-	if ( this.loaded ) {
-		this.altered = true;
-		this.setApplicableStatus();
-	}
+	this.touch();
 };
 
 /**
@@ -483,7 +477,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// Events
 			this.transclusionModel.connect( this, {
 				replace: 'onReplacePart',
-				change: 'onTransclusionModelChange'
+				change: 'touch'
 			} );
 
 			// Detach the form while building for performance
