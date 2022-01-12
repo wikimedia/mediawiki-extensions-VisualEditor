@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fiestoforo"
+			"Fiestoforo",
+			"Manke ruLpa"
 		]
 	},
-	"tooltip-ca-ve-edit": "Elkünufinge tüfachi pakina."
+	"tooltip-ca-ve-edit": "Elkünufinge tüfachi pakina.",
+	"visualeditor-ca-createlocaldescriptionsource": "Püñamtun ñi faw chumngen",
+	"visualeditor-ca-createsource": "Zewman küpamum",
+	"visualeditor-ca-editsource": "Kümeelün wirin",
+	"visualeditor-ca-editsource-section": "kümeelün wirin",
+	"visualeditor-descriptionpagelink": "Project:Azkintun Kümeelfe"
 }
