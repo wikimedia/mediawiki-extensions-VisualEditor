@@ -475,7 +475,7 @@
 				// We can detect that case by `content` being empty, and not retry.
 				if ( useRestbase && resp.visualeditor.content && (
 					!resp.visualeditor.etag ||
-					!resp.visualeditor.etag.match( etagRegexp )
+					!etagRegexp.test( resp.visualeditor.etag )
 				) ) {
 					// Direct request to RESTBase returned a mangled or missing etag.
 					// Retry via the MediaWiki API.

@@ -325,34 +325,32 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 		if ( inNowiki ) {
 			if ( match[ 0 ] === '</nowiki>' ) {
 				inNowiki = false;
-				output += match[ 0 ];
-			} else {
-				output += match[ 0 ];
 			}
+			output += match[ 0 ];
 		} else {
 			var needsNowiki = true;
 			if ( match[ 0 ] === '<nowiki>' ) {
 				inNowiki = true;
 				needsNowiki = false;
-			} else if ( match[ 0 ] === '</nowiki>' || match[ 0 ].match( /<nowiki\s*\/>/ ) ) {
+			} else if ( match[ 0 ] === '</nowiki>' || /<nowiki\s*\/>/.test( match[ 0 ] ) ) {
 				needsNowiki = false;
-			} else if ( match[ 0 ].match( /(?:\[\[)/ ) ) {
+			} else if ( /(?:\[\[)/.test( match[ 0 ] ) ) {
 				linkStack++;
 				needsNowiki = false;
-			} else if ( match[ 0 ].match( /(?:\]\])/ ) ) {
+			} else if ( /(?:\]\])/.test( match[ 0 ] ) ) {
 				if ( linkStack > 0 ) {
 					linkStack--;
 					needsNowiki = false;
 				}
-			} else if ( match[ 0 ].match( /(?:\{\{)/ ) ) {
+			} else if ( /(?:\{\{)/.test( match[ 0 ] ) ) {
 				bracketStack++;
 				needsNowiki = false;
-			} else if ( match[ 0 ].match( /(?:\}\})/ ) ) {
+			} else if ( /(?:\}\})/.test( match[ 0 ] ) ) {
 				if ( bracketStack > 0 ) {
 					bracketStack--;
 					needsNowiki = false;
 				}
-			} else if ( match[ 0 ].match( /\|+/ ) ) {
+			} else if ( /\|+/.test( match[ 0 ] ) ) {
 				if ( bracketStack > 0 || linkStack > 0 ) {
 					needsNowiki = false;
 				}
