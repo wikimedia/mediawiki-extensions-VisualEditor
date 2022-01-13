@@ -79,7 +79,10 @@ ve.ui.MWAddParameterPage.prototype.initialize = function () {
 	this.actionFieldLayout = new OO.ui.ActionFieldLayout(
 		this.paramInputField,
 		this.saveButton,
-		{ classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset-input' ] }
+		{
+			classes: [ 've-ui-mwTransclusionDialog-addParameterFieldset-input' ],
+			align: 'top'
+		}
 	);
 
 	var link = this.template.getTitle() || this.template.getTarget().wt;
