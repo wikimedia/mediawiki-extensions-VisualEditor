@@ -160,6 +160,8 @@
 	"visualeditor-dialog-transclusion-add-content": "सामग्री जोड़ें",
 	"visualeditor-dialog-transclusion-add-param": "और जानकारी जोड़ें",
 	"visualeditor-dialog-transclusion-add-template": "साँचा जोड़ें",
+	"visualeditor-dialog-transclusion-back-confirmation-continue": "वापस जाएँ",
+	"visualeditor-dialog-transclusion-close-confirmation-continue": "बंद करें",
 	"visualeditor-dialog-transclusion-collapse-options": "विकल्प छुपाएँ",
 	"visualeditor-dialog-transclusion-content": "सामग्री",
 	"visualeditor-dialog-transclusion-contextitem-description": "$1: से उत्पन्न",

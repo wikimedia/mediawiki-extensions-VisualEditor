@@ -33,6 +33,7 @@
 			"Wwycheuk",
 			"Xiplus",
 			"Zhxy 519",
+			"列维劳德",
 			"和平奮鬥救地球",
 			"烈羽"
 		]
@@ -187,7 +188,9 @@
 	"visualeditor-dialog-transclusion-add-content": "加入內容",
 	"visualeditor-dialog-transclusion-add-param": "加入更多資訊",
 	"visualeditor-dialog-transclusion-add-template": "增加模板",
+	"visualeditor-dialog-transclusion-close-confirmation-continue": "關閉",
 	"visualeditor-dialog-transclusion-collapse-options": "隱藏選項",
+	"visualeditor-dialog-transclusion-confirmation-reject": "堅持編輯",
 	"visualeditor-dialog-transclusion-content": "內容",
 	"visualeditor-dialog-transclusion-contextitem-description": "產生自：$1",
 	"visualeditor-dialog-transclusion-expand-options": "顯示選項",

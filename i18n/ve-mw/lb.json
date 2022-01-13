@@ -158,6 +158,8 @@
 	"visualeditor-dialog-transclusion-add-param-save": "Parameter derbäisetzen",
 	"visualeditor-dialog-transclusion-add-template": "Schabloun derbäisetzen",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Net dokumentéierte Parameter derbäisetzen",
+	"visualeditor-dialog-transclusion-back-confirmation-continue": "Zréck goen",
+	"visualeditor-dialog-transclusion-close-confirmation-continue": "Zoumaachen",
 	"visualeditor-dialog-transclusion-collapse-options": "Optioune verstoppen",
 	"visualeditor-dialog-transclusion-content": "Inhalt",
 	"visualeditor-dialog-transclusion-contextitem-description": "Generéiert vun: $1",

@@ -193,6 +193,7 @@
 	"visualeditor-dialog-transclusion-add-param": "Aggiungi ulteriori informazioni",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Nome del parametro",
 	"visualeditor-dialog-transclusion-add-template": "Aggiungi template",
+	"visualeditor-dialog-transclusion-back-confirmation-continue": "Indietro",
 	"visualeditor-dialog-transclusion-collapse-options": "Nascondi opzioni",
 	"visualeditor-dialog-transclusion-content": "Contenuto",
 	"visualeditor-dialog-transclusion-contextitem-description": "Generato da: $1",
