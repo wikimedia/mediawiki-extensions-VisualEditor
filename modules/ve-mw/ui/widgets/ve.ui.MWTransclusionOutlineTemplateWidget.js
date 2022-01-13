@@ -20,7 +20,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		label: spec.getLabel(),
 		ariaDescriptionUnselected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria' ),
 		ariaDescriptionSelected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected' ),
-		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected-single' )
+		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected-single' ),
+		// This subclass needs additional control over header structure.
+		suppressHeader: true
 	} );
 
 	// Initialization
@@ -62,6 +64,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		toggleUnusedFields: 'onToggleUnusedFields'
 	} );
 
+	var stickyRows = new OO.ui.Element( {
+		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-sticky' ],
+		content: [ this.header, this.searchWidget, this.toggleUnusedWidget ]
+	} );
+
 	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
 		items: parameterNames.map( this.createCheckbox.bind( this ) ),
 		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
@@ -73,10 +80,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	this.$element.append(
-		this.searchWidget.$element,
+		stickyRows.$element,
 		this.infoWidget.$element,
 		$parametersAriaDescription,
-		this.toggleUnusedWidget.$element,
 		this.parameters.$element
 	);
 };

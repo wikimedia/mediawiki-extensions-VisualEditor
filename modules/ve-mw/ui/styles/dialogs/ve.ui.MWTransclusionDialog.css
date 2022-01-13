@@ -102,6 +102,20 @@
 	color: #72777d;
 }
 
+.ve-ui-mwTransclusionDialog-newSidebar.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineButtonWidget {
+	display: none;
+}
+
+.ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
+	background-color: #fff;
+	/* there's a weird space between the scrollable and the children that messes with sticky */
+	margin-top: -8px;
+	padding: 8px 0;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
 .ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
 	height: 1.5em;
 	overflow: hidden;
@@ -260,6 +274,11 @@
 	width: auto;
 }
 
+.ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget:last-child {
+	/* Workaround to override oo-ui-inputWidget:last-child rule */
+	margin-right: 24px;
+}
+
 .ve-ui-mwTransclusionOutlineTemplateWidget-no-match {
 	font-style: italic;
 	color: #72777d;
@@ -281,5 +300,6 @@
 }
 
 .ve-ui-mwTransclusionOutlineToggleUnusedWidget {
-	margin: -4px 18px 8px 18px;
+	margin-top: -4px; /* reduce default margin to top element */
+	margin-left: 18px; /* align text of the button with surrounding elements */
 }
