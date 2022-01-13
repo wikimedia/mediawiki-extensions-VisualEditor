@@ -198,7 +198,7 @@
 	"visualeditor-dialog-transclusion-close-confirmation-continue": "Close",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Close template editor? Changes will be lost and cannot be undone.",
 	"visualeditor-dialog-transclusion-collapse-options": "Hide options",
-	"visualeditor-dialog-transclusion-confirmation-reject": "Keep editing",
+	"visualeditor-dialog-transclusion-confirmation-reject": "Continue editing",
 	"visualeditor-dialog-transclusion-content": "Content",
 	"visualeditor-dialog-transclusion-contextitem-description": "Generated from: $1",
 	"visualeditor-dialog-transclusion-expand-options": "Show options",
