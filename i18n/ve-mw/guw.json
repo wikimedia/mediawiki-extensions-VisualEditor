@@ -3,6 +3,7 @@
 		"authors": [
 			"Anthonymodec",
 			"Gadarawamo",
+			"Joshateji",
 			"Misteld",
 			"Samatics"
 		]
@@ -13,5 +14,7 @@
 	"visualeditor-ca-editsource-section": "vọ dodonu etọn jlado",
 	"visualeditor-descriptionpagelink": "Project: jladotọ nupinpọntọn",
 	"visualeditor-dialog-transclusion-action-save": "Sẹdo",
+	"visualeditor-dialog-transclusion-back-confirmation-continue": "Lẹkọ",
+	"visualeditor-dialog-transclusion-confirmation-reject": "Zindonukọn to azọ́n towe mẹ",
 	"visualeditor-dismissible-message-close": "Su wekanhlanme bo maso dohia"
 }
