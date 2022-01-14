@@ -29,36 +29,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		remove: 'onParameterRemovedFromTemplateModel'
 	} );
 
-	var parameterNames = this.templateModel
-		.getAllParametersOrdered()
-		.filter( function ( paramName ) {
-			if ( spec.isParameterDeprecated( paramName ) && !template.hasParameter( paramName ) ) {
-				return false;
-			}
-			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
-			return paramName;
-		} );
-
-	var $parametersAriaDescription = $( '<span>' )
-		.text( ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-description' ) )
-		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
-
-	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
-		items: parameterNames.map( this.createCheckbox.bind( this ) ),
-		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
-		$ariaDescribedBy: $parametersAriaDescription
-	} ).connect( this, {
-		choose: 'onTemplateParameterChoose',
-		templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
-		change: 'onParameterWidgetListChanged'
-	} );
-
-	this.$element.append(
-		$parametersAriaDescription,
-		this.parameters.$element
-	);
-
-	this.toggleSearchWidget( parameterNames.length );
+	this.initializeParameterSelectWidget();
+	this.initializeStickyFilters();
 };
 
 /* Inheritance */
@@ -83,6 +55,49 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
  */
 
 /* Methods */
+
+/**
+ * @private
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterSelectWidget = function () {
+	if ( this.parameters ) {
+		return;
+	}
+
+	var template = this.templateModel,
+		spec = template.getSpec();
+	var parameterNames = this.templateModel
+		.getAllParametersOrdered()
+		.filter( function ( paramName ) {
+			if ( spec.isParameterDeprecated( paramName ) && !template.hasParameter( paramName ) ) {
+				return false;
+			}
+			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
+			return paramName;
+		} );
+	if ( !parameterNames.length ) {
+		return;
+	}
+
+	var $parametersAriaDescription = $( '<span>' )
+		.text( ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-description' ) )
+		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
+
+	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
+		items: parameterNames.map( this.createCheckbox.bind( this ) ),
+		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
+		$ariaDescribedBy: $parametersAriaDescription
+	} ).connect( this, {
+		choose: 'onTemplateParameterChoose',
+		templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
+		change: 'onParameterWidgetListChanged'
+	} );
+
+	this.$element.append(
+		$parametersAriaDescription,
+		this.parameters.$element
+	);
+};
 
 /**
  * @private
@@ -122,14 +137,16 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
  * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = function ( paramName ) {
-	this.parameters.highlightParameter( paramName );
+	if ( this.parameters ) {
+		this.parameters.highlightParameter( paramName );
+	}
 };
 
 /**
  * @inheritDoc
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setSelected = function ( state ) {
-	if ( !state && this.isSelected() ) {
+	if ( !state && this.isSelected() && this.parameters ) {
 		this.parameters.highlightItem();
 	}
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.setSelected.call( this, state );
@@ -145,6 +162,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
 	if ( !paramName ) {
 		return;
 	}
+
+	this.initializeParameterSelectWidget();
+	this.initializeStickyFilters();
 
 	// All parameters known via the spec already have a checkbox
 	var item = this.parameters.findItemFromData( paramName );
@@ -211,45 +231,59 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelection
  * @param {OO.ui.Element[]} items
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged = function ( items ) {
-	this.toggleSearchWidget( items.length );
+	this.toggleFilters( items.length );
 };
 
 /**
  * @private
  * @param {number} numberOfParameters
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleSearchWidget = function ( numberOfParameters ) {
-	if ( !this.searchWidget && numberOfParameters ) {
-		this.searchWidget = new OO.ui.SearchInputWidget( {
-			title: ve.msg( 'visualeditor-dialog-transclusion-filter-title', this.templateModel.getSpec().getLabel() ),
-			placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
-			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
-		} ).connect( this, {
-			change: 'filterParameters'
-		} );
-		this.searchWidget.$element.attr( 'role', 'search' );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( numberOfParameters ) {
+	this.searchWidget.toggle( numberOfParameters );
+	this.toggleUnusedWidget.toggle( numberOfParameters );
+};
 
-		this.toggleUnusedWidget = new ve.ui.MWTransclusionOutlineToggleUnusedWidget();
-		this.toggleUnusedWidget.connect( this, {
-			toggleUnusedFields: 'onToggleUnusedFields'
-		} );
-
-		this.infoWidget = new OO.ui.LabelWidget( {
-			label: ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ),
-			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
-		} ).toggle( false );
-
-		var stickyRows = new OO.ui.Element( {
-			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-sticky' ],
-			// The header is not new, but listed here to have this in the correct place
-			content: [ this.header, this.searchWidget, this.toggleUnusedWidget ]
-		} );
-
-		this.$element.prepend(
-			stickyRows.$element,
-			this.infoWidget.$element
-		);
+/**
+ * @private
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeStickyFilters = function () {
+	if ( this.$stickyFilters || !this.parameters || !this.parameters.getItemCount() ) {
+		return;
 	}
+
+	this.searchWidget = new OO.ui.SearchInputWidget( {
+		title: ve.msg( 'visualeditor-dialog-transclusion-filter-title', this.templateModel.getSpec().getLabel() ),
+		placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
+		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
+	} ).connect( this, {
+		change: 'filterParameters'
+	} );
+	this.searchWidget.$element.attr( 'role', 'search' );
+
+	this.toggleUnusedWidget = new ve.ui.MWTransclusionOutlineToggleUnusedWidget();
+	this.toggleUnusedWidget.connect( this, {
+		toggleUnusedFields: 'onToggleUnusedFields'
+	} );
+
+	this.infoWidget = new OO.ui.LabelWidget( {
+		label: ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ),
+		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
+	} ).toggle( false );
+
+	this.$stickyFilters = $( '<div>' )
+		.addClass( 've-ui-mwTransclusionOutlineTemplateWidget-sticky' )
+		.append(
+			this.header.$element,
+			this.searchWidget.$element,
+			this.toggleUnusedWidget.$element
+		);
+
+	this.$element.prepend(
+		this.$stickyFilters,
+		this.infoWidget.$element
+	);
+
+	this.toggleFilters( this.parameters.getItemCount() );
 };
 
 /**
