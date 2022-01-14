@@ -279,3 +279,7 @@
 .ve-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout .oo-ui-buttonWidget {
 	width: 100%;
 }
+
+.ve-ui-mwTransclusionOutlineToggleUnusedWidget {
+	margin: -4px 18px 8px 18px;
+}
