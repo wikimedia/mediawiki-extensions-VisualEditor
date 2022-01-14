@@ -20,9 +20,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		label: spec.getLabel(),
 		ariaDescriptionUnselected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria' ),
 		ariaDescriptionSelected: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected' ),
-		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected-single' ),
-		// This subclass needs additional control over header structure.
-		suppressHeader: true
+		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected-single' )
 	} );
 
 	// Initialization
@@ -41,33 +39,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 			return paramName;
 		} );
 
-	this.searchWidget = new OO.ui.SearchInputWidget( {
-		title: ve.msg( 'visualeditor-dialog-transclusion-filter-title', spec.getLabel() ),
-		placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
-		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
-	} ).connect( this, {
-		change: 'filterParameters'
-	} ).toggle( parameterNames.length );
-	this.searchWidget.$element.attr( 'role', 'search' );
-
-	this.infoWidget = new OO.ui.LabelWidget( {
-		label: ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ),
-		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
-	} ).toggle( false );
-
 	var $parametersAriaDescription = $( '<span>' )
 		.text( ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-description' ) )
 		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
-
-	this.toggleUnusedWidget = new ve.ui.MWTransclusionOutlineToggleUnusedWidget();
-	this.toggleUnusedWidget.connect( this, {
-		toggleUnusedFields: 'onToggleUnusedFields'
-	} );
-
-	var stickyRows = new OO.ui.Element( {
-		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-sticky' ],
-		content: [ this.header, this.searchWidget, this.toggleUnusedWidget ]
-	} );
 
 	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
 		items: parameterNames.map( this.createCheckbox.bind( this ) ),
@@ -80,11 +54,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	this.$element.append(
-		stickyRows.$element,
-		this.infoWidget.$element,
 		$parametersAriaDescription,
 		this.parameters.$element
 	);
+
+	this.toggleSearchWidget( parameterNames.length );
 };
 
 /* Inheritance */
@@ -179,7 +153,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
 		this.parameters.addItems( [ item ], this.findCanonicalPosition( paramName ) );
 
 		// Make sure an active filter is applied to the new checkbox as well
-		var filter = this.searchWidget.getValue();
+		var filter = this.searchWidget && this.searchWidget.getValue();
 		if ( filter ) {
 			this.filterParameters( filter );
 		}
@@ -237,7 +211,45 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelection
  * @param {OO.ui.Element[]} items
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged = function ( items ) {
-	this.searchWidget.toggle( items.length >= 1 );
+	this.toggleSearchWidget( items.length );
+};
+
+/**
+ * @private
+ * @param {number} numberOfParameters
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleSearchWidget = function ( numberOfParameters ) {
+	if ( !this.searchWidget && numberOfParameters ) {
+		this.searchWidget = new OO.ui.SearchInputWidget( {
+			title: ve.msg( 'visualeditor-dialog-transclusion-filter-title', this.templateModel.getSpec().getLabel() ),
+			placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
+			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-searchWidget' ]
+		} ).connect( this, {
+			change: 'filterParameters'
+		} );
+		this.searchWidget.$element.attr( 'role', 'search' );
+
+		this.toggleUnusedWidget = new ve.ui.MWTransclusionOutlineToggleUnusedWidget();
+		this.toggleUnusedWidget.connect( this, {
+			toggleUnusedFields: 'onToggleUnusedFields'
+		} );
+
+		this.infoWidget = new OO.ui.LabelWidget( {
+			label: ve.msg( 'visualeditor-dialog-transclusion-filter-no-match' ),
+			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
+		} ).toggle( false );
+
+		var stickyRows = new OO.ui.Element( {
+			classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-sticky' ],
+			// The header is not new, but listed here to have this in the correct place
+			content: [ this.header, this.searchWidget, this.toggleUnusedWidget ]
+		} );
+
+		this.$element.prepend(
+			stickyRows.$element,
+			this.infoWidget.$element
+		);
+	}
 };
 
 /**
