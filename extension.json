@@ -2218,7 +2218,8 @@
 					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-default.css"
 				],
 				"minerva": [
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.css"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.css",
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.css"
 				]
 			},
 			"dependencies": [
