@@ -173,6 +173,8 @@
 	"visualeditor-dialog-transclusion-add-content": "বিষয়বস্তু যোগ",
 	"visualeditor-dialog-transclusion-add-param": "আরও প্যারামিটার যোগ করুন",
 	"visualeditor-dialog-transclusion-add-template": "টেমপ্লেট যোগ",
+	"visualeditor-dialog-transclusion-back-confirmation-continue": "ফিরে যান",
+	"visualeditor-dialog-transclusion-close-confirmation-continue": "বন্ধ করুন",
 	"visualeditor-dialog-transclusion-collapse-options": "বিকল্প আড়াল করুন",
 	"visualeditor-dialog-transclusion-content": "বিষয়বস্তু",
 	"visualeditor-dialog-transclusion-contextitem-description": "$1 থেকে উৎপন্ন",

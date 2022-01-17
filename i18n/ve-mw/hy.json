@@ -167,6 +167,8 @@
 	"visualeditor-dialog-transclusion-add-content": "Ավելացնել բովանդակություն",
 	"visualeditor-dialog-transclusion-add-param": "Ավելացնել պարամետր",
 	"visualeditor-dialog-transclusion-add-template": "Ավելացնել կաղապար",
+	"visualeditor-dialog-transclusion-back-confirmation-continue": "Հետ գնալ",
+	"visualeditor-dialog-transclusion-close-confirmation-continue": "Փակել",
 	"visualeditor-dialog-transclusion-collapse-options": "Թաքցնել կարգավորումներ",
 	"visualeditor-dialog-transclusion-content": "Բովանդակություն",
 	"visualeditor-dialog-transclusion-contextitem-description": "Ստացվել է $1-ից",

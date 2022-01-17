@@ -8,7 +8,8 @@
 			"Naa2Darkoa",
 			"Remam222",
 			"Robertjamal12",
-			"SAgbley"
+			"SAgbley",
+			"Warmglow"
 		]
 	},
 	"tooltip-ca-edit": "Fa wikitext sesa saa krataa fa yi",
@@ -87,6 +88,7 @@
 	"visualeditor-dialog-meta-settings-toc-force": "Abiri biara",
 	"visualeditor-dialog-transclusion-action-save": "Sie wɔ ha",
 	"visualeditor-dialog-transclusion-add-param": "Fa nsɛm no bi ka ho",
+	"visualeditor-dialog-transclusion-close-confirmation-continue": "Tumu",
 	"visualeditor-dialog-transclusion-content": "Biribiara a ɛwɔ so",
 	"visualeditor-dialog-transclusion-filter-no-match": "Yɛn ɛnhu nea wo hwehwɛ",
 	"visualeditor-dialog-transclusion-param-example-long": "Nhwɛsode: $1",

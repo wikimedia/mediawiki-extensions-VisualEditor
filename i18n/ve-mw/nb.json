@@ -182,6 +182,8 @@
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Kan ikke legge til to parametere med samme navn.",
 	"visualeditor-dialog-transclusion-add-template": "Legg til mal",
 	"visualeditor-dialog-transclusion-back-confirmation-continue": "Gå tilbake",
+	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Gå tilbake til søk? Redigeringer vil gå tapt og kan ikke hentes tilbake igjen.",
+	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Lukke malredigereren? Endringene vil gå tapt og kan ikke hentes tilbake.",
 	"visualeditor-dialog-transclusion-collapse-options": "Skjul innstillinger",
 	"visualeditor-dialog-transclusion-confirmation-reject": "Fortsett å redigere",
 	"visualeditor-dialog-transclusion-content": "Innhold",
