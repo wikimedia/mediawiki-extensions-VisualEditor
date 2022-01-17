@@ -4,7 +4,7 @@ const EditPage = require( '../pageobjects/edit.page' );
 const Util = require( 'wdio-mediawiki/Util' );
 const LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
-describe( 'VisualEditor', function () {
+describe( 'Content Editable', function () {
 
 	it( 'should load when an url is opened', function () {
 		LoginPage.loginAdmin();
