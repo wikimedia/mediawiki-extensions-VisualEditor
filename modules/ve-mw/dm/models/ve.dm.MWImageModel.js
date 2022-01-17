@@ -26,7 +26,7 @@ ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 	OO.EventEmitter.call( this );
 
 	// Properties
-	this.attributesCache = null;
+	this.attributesCache = {};
 
 	// Image properties
 	this.parentDoc = parentDoc;
@@ -293,6 +293,9 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 	this.scalable.clearDefaultDimensions();
 	this.scalable.clearMaxDimensions();
 	this.scalable.clearMinDimensions();
+	// This is a different image so clear the attributes cache
+	delete this.attributesCache.originalWidth;
+	delete this.attributesCache.originalHeight;
 
 	// If we already have dimensions from the API, use them
 	if ( APIinfo ) {
