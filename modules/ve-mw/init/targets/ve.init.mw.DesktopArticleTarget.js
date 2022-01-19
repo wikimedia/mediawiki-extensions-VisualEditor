@@ -736,7 +736,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		} );
 	}
 
-	var metaList = this.getSurface().getModel().getMetaList();
+	var metaList = this.getSurface().getModel().getDocument().getMetaList();
 
 	metaList.connect( this, {
 		insert: 'onMetaItemInserted',
@@ -750,7 +750,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
-	var redirectMetaItems = this.getSurface().getModel().getMetaList().getItemsInGroup( 'mwRedirect' );
+	var redirectMetaItems = metaList.getItemsInGroup( 'mwRedirect' );
 	if ( redirectMetaItems.length ) {
 		this.setFakeRedirectInterface( redirectMetaItems[ 0 ].getAttribute( 'title' ) );
 	} else {
@@ -778,7 +778,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 			this.setFakeRedirectInterface( metaItem.getAttribute( 'title' ) );
 			break;
 		case 'mwCategory':
-			var metaList = this.getSurface().getModel().getMetaList();
+			var metaList = this.getSurface().getModel().getDocument().getMetaList();
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
 			break;
 	}
@@ -797,7 +797,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
 			this.setFakeRedirectInterface( null );
 			break;
 		case 'mwCategory':
-			var metaList = this.getSurface().getModel().getMetaList();
+			var metaList = this.getSurface().getModel().getDocument().getMetaList();
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
 			break;
 	}
@@ -1347,7 +1347,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 			} );
 	}
 
-	var redirectMetaItems = this.getSurface().getModel().getMetaList().getItemsInGroup( 'mwRedirect' );
+	var redirectMetaItems = this.getSurface().getModel().getDocument().getMetaList().getItemsInGroup( 'mwRedirect' );
 	if ( redirectMetaItems.length ) {
 		var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 		windowAction.open( 'meta', { page: 'settings' } );
