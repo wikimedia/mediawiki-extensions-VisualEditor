@@ -140,45 +140,46 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	return dataElement;
 };
 
-ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
-	var mediaClass = data.attributes.mediaClass,
-		container = doc.createElement( data.attributes.tagName || 'span' ),
-		img = doc.createElement( data.attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
+ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc ) {
+	var attributes = dataElement.attributes,
+		mediaClass = attributes.mediaClass,
+		container = doc.createElement( attributes.tagName || 'span' ),
+		img = doc.createElement( attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
 		classes = [],
-		originalClasses = data.attributes.originalClasses;
+		originalClasses = attributes.originalClasses;
 
 	// TODO: This does not make sense for broken images (when img is a span node)
-	ve.setDomAttributes( img, data.attributes, [ 'width', 'height', 'resource' ] );
+	ve.setDomAttributes( img, attributes, [ 'width', 'height', 'resource' ] );
 	var srcAttr = this.typesToSrcAttrs[ mediaClass ];
-	if ( srcAttr && !data.attributes.isError ) {
-		img.setAttribute( srcAttr, data.attributes.src );
+	if ( srcAttr && !attributes.isError ) {
+		img.setAttribute( srcAttr, attributes.src );
 	}
 
 	// TODO: This does not make sense for broken images (when img is a span node)
-	if ( typeof data.attributes.alt === 'string' ) {
-		img.setAttribute( 'alt', data.attributes.alt );
+	if ( typeof attributes.alt === 'string' ) {
+		img.setAttribute( 'alt', attributes.alt );
 	}
 
 	// RDFa type
-	container.setAttribute( 'typeof', this.getRdfa( mediaClass, data.attributes.type ) );
-	if ( !ve.isEmptyObject( data.attributes.mw ) ) {
-		container.setAttribute( 'data-mw', JSON.stringify( data.attributes.mw ) );
+	container.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type ) );
+	if ( !ve.isEmptyObject( attributes.mw ) ) {
+		container.setAttribute( 'data-mw', JSON.stringify( attributes.mw ) );
 	}
 
-	if ( data.attributes.defaultSize ) {
+	if ( attributes.defaultSize ) {
 		classes.push( 'mw-default-size' );
 	}
 
-	if ( data.attributes.borderImage ) {
+	if ( attributes.borderImage ) {
 		classes.push( 'mw-image-border' );
 	}
 
-	if ( data.attributes.valign && data.attributes.valign !== 'default' ) {
-		classes.push( 'mw-valign-' + data.attributes.valign );
+	if ( attributes.valign && attributes.valign !== 'default' ) {
+		classes.push( 'mw-valign-' + attributes.valign );
 	}
 
-	if ( data.attributes.unrecognizedClasses ) {
-		classes = OO.simpleArrayUnion( classes, data.attributes.unrecognizedClasses );
+	if ( attributes.unrecognizedClasses ) {
+		classes = OO.simpleArrayUnion( classes, attributes.unrecognizedClasses );
 	}
 
 	if (
@@ -193,9 +194,9 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( data, doc ) {
 	}
 
 	var firstChild;
-	if ( data.attributes.href ) {
+	if ( attributes.href ) {
 		firstChild = doc.createElement( 'a' );
-		firstChild.setAttribute( 'href', data.attributes.href );
+		firstChild.setAttribute( 'href', attributes.href );
 	} else {
 		firstChild = doc.createElement( 'span' );
 	}
