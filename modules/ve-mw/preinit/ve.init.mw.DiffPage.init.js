@@ -72,6 +72,8 @@
 				var diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
 				diffElement.$document.addClass( 'mw-parser-output content' );
 
+				mw.libs.ve.fixFragmentLinks( diffElement.$document[ 0 ], mw.Title.newFromText( newPageName ), 'mw-diffpage-visualdiff-' );
+
 				progress.$element.addClass( 'oo-ui-element-hidden' );
 				$visualDiff.append( diffElement.$element );
 				lastDiff = {

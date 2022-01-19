@@ -196,6 +196,7 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 						// hasn't already been fixed (in which case it would be null)
 						if ( target ) {
 							target.setAttribute( 'id', prefix + fragment );
+							target.setAttribute( 'data-mw-id-fixed', '' );
 						}
 					}
 					el.setAttribute( 'href', '#' + prefix + fragment );
@@ -203,6 +204,12 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 				el.removeAttribute( 'target' );
 
 			}
+		}
+	} );
+	// Remove any section heading anchors which weren't fixed above (T218492)
+	Array.prototype.forEach.call( container.querySelectorAll( 'h1, h2, h3, h4, h5, h6' ), function ( el ) {
+		if ( el.hasAttribute( 'id' ) && !el.hasAttribute( 'data-mw-id-fixed' ) ) {
+			el.removeAttribute( 'id' );
 		}
 	} );
 };
