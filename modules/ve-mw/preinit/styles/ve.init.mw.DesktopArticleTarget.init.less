@@ -20,16 +20,21 @@
  */
 
 /* Only hide the #toc inside the original article, not generated ones in VE (T187636) */
-.ve-active .ve-init-mw-desktopArticleTarget-editableContent #toc,
-.ve-active #siteNotice,
-.ve-active .mw-indicators,
-.ve-active #t-print,
-.ve-active #t-permalink,
-.ve-active #p-coll-print_export,
-.ve-active #t-cite,
-.ve-deactivating .ve-ui-surface,
-.ve-active .ve-init-mw-desktopArticleTarget-editableContent,
-.ve-active .ve-init-mw-tempWikitextEditorWidget {
+.ve-active {
+	.ve-init-mw-desktopArticleTarget-editableContent #toc,
+	#siteNotice,
+	.mw-indicators,
+	#t-print,
+	#t-permalink,
+	#p-coll-print_export,
+	#t-cite,
+	.ve-init-mw-desktopArticleTarget-editableContent,
+	.ve-init-mw-tempWikitextEditorWidget {
+		display: none;
+	}
+}
+
+.ve-deactivating .ve-ui-surface {
 	display: none;
 }
 
@@ -54,36 +59,38 @@
 	opacity: 0.5;
 }
 
-.ve-activated #firstHeading {
-	/* Override the styles above to allow the heading to be selected, for copy-pasting */
-	-webkit-user-select: text;
-	-moz-user-select: text;
-	-ms-user-select: text;
-	user-select: text;
-	pointer-events: auto;
-	cursor: text;
-}
+.ve-activated {
+	#firstHeading {
+		/* Override the styles above to allow the heading to be selected, for copy-pasting */
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		-ms-user-select: text;
+		user-select: text;
+		pointer-events: auto;
+		cursor: text;
 
-.ve-activated #firstHeading a {
-	/* Re-disable any gadget-added links inside the heading, e.g. section 0 edit links */
-	pointer-events: none;
-}
+		a {
+			/* Re-disable any gadget-added links inside the heading, e.g. section 0 edit links */
+			pointer-events: none;
+		}
+	}
 
-.ve-activated #catlinks {
-	cursor: pointer;
-}
+	#catlinks {
+		cursor: pointer;
 
-.ve-activated #catlinks:hover {
-	/* focusableNode highlight equivalent styling */
-	background: #e9f2fd;
-}
+		&:hover {
+			/* focusableNode highlight equivalent styling */
+			background: #e9f2fd;
+		}
 
-.ve-activated #catlinks a {
-	opacity: 1;
-}
+		a {
+			opacity: 1;
+		}
+	}
 
-.ve-activated #content {
-	position: relative;
+	#content {
+		position: relative;
+	}
 }
 /* stylelint-enable selector-max-id */
 
@@ -114,14 +121,14 @@
 	unicode-bidi: -moz-isolate;
 	unicode-bidi: -webkit-isolate;
 	unicode-bidi: isolate;
-}
 
-.mw-editsection:before {
-	content: '\200B';
-}
+	&:before {
+		content: '\200B';
+	}
 
-.mw-editsection a {
-	white-space: nowrap;
+	a {
+		white-space: nowrap;
+	}
 }
 
 .mw-editsection-divider {

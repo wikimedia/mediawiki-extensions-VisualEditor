@@ -378,7 +378,7 @@
 					"callback": "VisualEditorHooks::getDataForDesktopArticleTargetInitModule"
 				}
 			],
-			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init.css",
+			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init.less",
 			"skinStyles": {
 				"default": [
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css"
