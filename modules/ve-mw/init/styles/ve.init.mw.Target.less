@@ -76,6 +76,23 @@
 	color: #999;
 }
 
+/* Categories */
+
+// Don't show categories from converter preview mode (e.g. <ref>[[Category:Foo]]</ref)...
+a[ rel~='mw:PageProp/Category' ] {
+	display: none;
+
+	// ... unless in a category list (e.g. visual diff)
+	.catlinks & { /* stylelint-disable-line selector-class-pattern */
+		display: inline;
+	}
+}
+
+// Increase specificity of catlink margin reset when nested in body content (e.g. in visual diff)
+.mw-body-content .catlinks ul { /* stylelint-disable-line selector-class-pattern */
+	margin: 0;
+}
+
 /* Reset section node styles */
 .ve-init-mw-target .ve-ce-sectionNode:before,
 .ve-init-mw-target .ve-ce-sectionNode:after {

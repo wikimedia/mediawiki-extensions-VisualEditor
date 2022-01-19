@@ -1810,10 +1810,10 @@ ve.dm.mwExample.domToDataCases = {
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar%20baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		previewBody: ve.dm.example.commentNodePreview( ' No conversion ' ) + '<meta property="mw:ThisIsAnAlien" /><p>Foo' +
-			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
+			'<a href="/wiki/Category:Bar">Bar</a>Bar' +
 			'<meta property="mw:foo" content="bar" />Ba' + ve.dm.example.commentNodePreview( ' inline ' ) + 'z</p>' +
 			'<meta property="mw:bar" content="baz" />' + ve.dm.example.commentNodePreview( 'barbaz' ) +
-			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar%20baz%23quux" />' +
+			'<a href="/wiki/Category:Foo_foo">Foo foo</a>' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		base: ve.dm.mwExample.baseUri,
 		data: ve.dm.mwExample.withMeta,
