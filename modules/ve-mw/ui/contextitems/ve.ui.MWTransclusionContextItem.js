@@ -96,8 +96,36 @@ ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 		)[ 0 ] );
 	}
 
-	// Parent method
-	ve.ui.MWTransclusionContextItem.super.prototype.onEditButtonClick.apply( this, arguments );
+	this.toggleLoadingVisualization( true );
+
+	// This replaces what the parent does because we can't store the `onTearDownCallback` argument
+	// in the {@see ve.ui.commandRegistry}.
+	this.getCommand().execute( this.context.getSurface(), [
+		// This will be passed as `name` and `data` arguments to {@see ve.ui.WindowAction.open}
+		ve.ui.MWTransclusionDialog.static.name,
+		{
+			onTearDownCallback: this.toggleLoadingVisualization.bind( this )
+		}
+	], 'context' );
+	this.emit( 'command' );
+};
+
+/**
+ * @private
+ * @param {boolean} [isLoading=false]
+ */
+ve.ui.MWTransclusionContextItem.prototype.toggleLoadingVisualization = function ( isLoading ) {
+	this.editButton.setDisabled( isLoading );
+	if ( isLoading ) {
+		this.originalEditButtonLabel = this.editButton.getLabel();
+		this.editButton.setLabel( ve.msg( 'visualeditor-dialog-transclusion-contextitem-loading' ) );
+	} else if ( this.originalEditButtonLabel ) {
+		this.editButton.setLabel( this.originalEditButtonLabel );
+	}
+
+	if ( this.isDeletable() ) {
+		this.deleteButton.toggle( !isLoading );
+	}
 };
 
 /* Registration */

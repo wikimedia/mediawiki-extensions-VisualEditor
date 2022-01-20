@@ -570,6 +570,8 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
+	this.onTearDownCallback = data && data.onTearDownCallback;
+
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			var isReadOnly = this.isReadOnly();
@@ -592,6 +594,15 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			this.updateModeActionState();
 			this.autoExpandSidebar();
 		}, this );
+};
+
+/** @inheritdoc */
+ve.ui.MWTransclusionDialog.prototype.getTeardownProcess = function () {
+	if ( this.onTearDownCallback ) {
+		this.onTearDownCallback();
+	}
+
+	return ve.ui.MWTransclusionDialog.super.prototype.getTeardownProcess.apply( this, arguments );
 };
 
 /**
