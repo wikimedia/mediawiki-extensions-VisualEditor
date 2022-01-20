@@ -108,12 +108,15 @@
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
 	background-color: #fff;
-	/* there's a weird space between the scrollable and the children that messes with sticky */
-	margin-top: -8px;
-	padding: 8px 0;
+	padding-bottom: 8px;
 	position: sticky;
 	top: 0;
 	z-index: 1;
+}
+
+.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
+	margin-top: -8px;
+	padding-top: 8px;
 }
 
 .ve-ui-mwTransclusionDialog .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {

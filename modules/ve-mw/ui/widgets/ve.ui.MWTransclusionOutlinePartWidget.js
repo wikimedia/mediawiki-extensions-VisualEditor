@@ -64,10 +64,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 		replace: 'updateButtonAriaDescription'
 	} );
 
-	if ( !config.suppressHeader ) {
-		this.$element
-			.append( this.header.$element );
-	}
+	this.$element.append( this.header.$element );
 };
 
 /* Inheritance */
