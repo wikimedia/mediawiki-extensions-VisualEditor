@@ -30,7 +30,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	this.initializeParameterSelectWidget();
-	this.initializeStickyFilters();
+	this.toggleFilters( this.parameters && this.parameters.getItemCount() );
 };
 
 /* Inheritance */
@@ -164,13 +164,14 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
 	}
 
 	this.initializeParameterSelectWidget();
-	this.initializeStickyFilters();
 
 	// All parameters known via the spec already have a checkbox
 	var item = this.parameters.findItemFromData( paramName );
 	if ( !item ) {
 		item = this.createCheckbox( paramName );
 		this.parameters.addItems( [ item ], this.findCanonicalPosition( paramName ) );
+
+		this.toggleFilters( this.parameters.getItemCount() );
 
 		// Make sure an active filter is applied to the new checkbox as well
 		var filter = this.searchWidget && this.searchWidget.getValue();
@@ -239,18 +240,19 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
  * @param {number} numberOfParameters
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( numberOfParameters ) {
-	this.searchWidget.toggle( numberOfParameters );
-	this.toggleUnusedWidget.toggle( numberOfParameters );
+	var visible = numberOfParameters > 3;
+	if ( this.searchWidget ) {
+		this.searchWidget.toggle( visible );
+		this.toggleUnusedWidget.toggle( visible );
+	} else if ( visible ) {
+		this.initializeFilters();
+	}
 };
 
 /**
  * @private
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeStickyFilters = function () {
-	if ( this.$stickyFilters || !this.parameters || !this.parameters.getItemCount() ) {
-		return;
-	}
-
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function () {
 	this.searchWidget = new OO.ui.SearchInputWidget( {
 		title: ve.msg( 'visualeditor-dialog-transclusion-filter-title', this.templateModel.getSpec().getLabel() ),
 		placeholder: ve.msg( 'visualeditor-dialog-transclusion-filter-placeholder' ),
@@ -270,7 +272,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeStickyFilters = fu
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
-	this.$stickyFilters = $( '<div>' )
+	var $stickyHeader = $( '<div>' )
 		.addClass( 've-ui-mwTransclusionOutlineTemplateWidget-sticky' )
 		.append(
 			this.header.$element,
@@ -279,11 +281,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeStickyFilters = fu
 		);
 
 	this.$element.prepend(
-		this.$stickyFilters,
+		$stickyHeader,
 		this.infoWidget.$element
 	);
-
-	this.toggleFilters( this.parameters.getItemCount() );
 };
 
 /**
