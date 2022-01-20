@@ -26,7 +26,7 @@ ve.ui.MWLinkInspectorTool = function VeUiMwLinkInspectorTool() {
 
 	educationPopup = new ve.ui.MWEducationPopupWidget( this.$link, {
 		popupTitle: ve.msg( 'visualeditor-linkinspector-educationpopup-title' ),
-		popupText: ve.msg( 'visualeditor-linkinspector-educationpopup-text' ),
+		popupText: mw.message( 'visualeditor-linkinspector-educationpopup-text' ).parseDom(),
 		popupImage: 'link',
 		trackingName: 'link'
 	} );
