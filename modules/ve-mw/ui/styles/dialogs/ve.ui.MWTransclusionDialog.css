@@ -186,7 +186,7 @@
 .ve-ui-mwTransclusionOutlineParameterWidget {
 	overflow: hidden;
 	padding-bottom: 8px;
-	padding-left: 24px;
+	padding-left: 30px;
 	padding-top: 8px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -304,5 +304,5 @@
 
 .ve-ui-mwTransclusionOutlineToggleUnusedWidget {
 	margin-top: -4px; /* reduce default margin to top element */
-	margin-left: 18px; /* align text of the button with surrounding elements */
+	margin-left: 24px;
 }
