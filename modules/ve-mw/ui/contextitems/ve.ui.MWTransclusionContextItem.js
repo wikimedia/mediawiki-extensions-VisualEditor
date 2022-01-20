@@ -84,9 +84,9 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 };
 
 /**
- * @inheritdoc
+ * @param {string} [source] Source for tracking in {@see ve.ui.WindowAction.open}
  */
-ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
+ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function ( source ) {
 	var surfaceModel = this.context.getSurface().getModel(),
 		selection = surfaceModel.getSelection();
 
@@ -106,7 +106,7 @@ ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 		{
 			onTearDownCallback: this.toggleLoadingVisualization.bind( this )
 		}
-	], 'context' );
+	], source || 'context' );
 	this.emit( 'command' );
 };
 

@@ -141,7 +141,7 @@ ve.ce.MWTransclusionNode.prototype.executeCommand = function () {
 	if ( contextItems[ 0 ] instanceof ve.ui.MWTransclusionContextItem ) {
 		// Utilize the context item when it's there instead of triggering the command manually.
 		// Required to make the context item show the "Loading…" message (see T297773).
-		contextItems[ 0 ].onEditButtonClick();
+		contextItems[ 0 ].onEditButtonClick( 'command' );
 		return;
 	}
 
