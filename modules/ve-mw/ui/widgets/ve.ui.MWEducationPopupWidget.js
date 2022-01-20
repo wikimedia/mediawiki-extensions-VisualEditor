@@ -18,7 +18,7 @@
  * @param {jQuery} $target Element to attach to
  * @param {Object} config Configuration options
  * @cfg {string} popupTitle
- * @cfg {string} popupText
+ * @cfg {string|jQuery} popupText
  * @cfg {string} [popupImage] Popup image class
  * @cfg {string} [trackingName]
  */
@@ -52,9 +52,15 @@ ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) 
 
 	$popupContent = $( '<div>' ).append(
 		$( '<h3>' ).text( config.popupTitle ),
-		$( '<p>' ).text( config.popupText ),
+		// eslint-disable-next-line no-jquery/no-append-html
+		$( '<p>' ).append(
+			config.popupText instanceof $ ?
+				config.popupText :
+				document.createTextNode( config.popupText )
+		),
 		this.popupCloseButton.$element
 	);
+	ve.targetLinksToNewWindow( $popupContent[ 0 ] );
 	if ( config.popupImage ) {
 		$popupContent.prepend(
 			// eslint-disable-next-line mediawiki/class-doc
