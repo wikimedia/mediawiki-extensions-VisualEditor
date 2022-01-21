@@ -91,10 +91,6 @@
 			// Remove these to avoid triggering selser.
 			$( newDoc ).find( '[data-mw-section-id]:not( section )' ).removeAttr( 'data-mw-section-id' );
 
-			// Deduplicate styles (we re-duplicated them in ve.init.mw.Target.static.parseDocument)
-			// to let selser recognize the nodes and avoid dirty diffs.
-			mw.libs.ve.deduplicateStyles( newDoc.body );
-
 			// Add doctype manually
 			// ve.serializeXhtml is loaded separately from utils.parsing
 			// eslint-disable-next-line no-undef
