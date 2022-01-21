@@ -420,8 +420,8 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 	var willLoseProgress = this.getMode() === 'insert' ?
 		// A new template with no parameters is not considered valuable.
 		this.transclusionModel.containsValuableData() :
-		// The user has changed a parameter, and the template contains some parameters.
-		( this.altered && this.transclusionModel.containsValuableData );
+		// The user has changed a parameter, and is not on the template search page.
+		( this.altered && !this.transclusionModel.isEmpty() );
 
 	switch ( action ) {
 		case 'back':
