@@ -200,6 +200,7 @@
 	"visualeditor-dialog-transclusion-confirmation-reject": "להמשיך לערוך",
 	"visualeditor-dialog-transclusion-content": "תוכן",
 	"visualeditor-dialog-transclusion-contextitem-description": "נוצרה מתוך: $1",
+	"visualeditor-dialog-transclusion-contextitem-loading": "טעינה...",
 	"visualeditor-dialog-transclusion-expand-options": "הצגת אפשרויות",
 	"visualeditor-dialog-transclusion-filter-hide-unused": "הסתרת שדות שאינם בשימוש",
 	"visualeditor-dialog-transclusion-filter-no-match": "לא נמצאו התאמות",

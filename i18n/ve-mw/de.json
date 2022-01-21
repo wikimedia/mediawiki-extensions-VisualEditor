@@ -202,6 +202,7 @@
 	"visualeditor-dialog-transclusion-confirmation-reject": "Weiter bearbeiten",
 	"visualeditor-dialog-transclusion-content": "Inhalt",
 	"visualeditor-dialog-transclusion-contextitem-description": "Erzeugt von: $1",
+	"visualeditor-dialog-transclusion-contextitem-loading": "Lade …",
 	"visualeditor-dialog-transclusion-expand-options": "Optionen anzeigen",
 	"visualeditor-dialog-transclusion-filter-hide-unused": "Ungenutzte Felder ausblenden",
 	"visualeditor-dialog-transclusion-filter-no-match": "Es wurden keine Übereinstimmungen gefunden.",
