@@ -4,7 +4,7 @@ QUnit.test( 'Constructor', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
 		template = ve.dm.MWTemplateModel.newFromData( transclusion, {
 			target: { wt: 'Example' },
-			params: { a: {} }
+			params: { 1: {}, 2: {}, 3: {}, 4: {} }
 		} ),
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( template );
 
@@ -71,13 +71,18 @@ QUnit.test( 'filterParameters() when it cannot find anything', ( assert ) => {
 	const transclusion = new ve.dm.MWTransclusionModel(),
 		template = ve.dm.MWTemplateModel.newFromData( transclusion, {
 			target: { wt: '' },
-			params: { a: {} }
+			params: { 1: {}, 2: {}, 3: {}, 4: {} }
 		} ),
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( template );
 	let eventsFired = 0;
 	widget.connect( this, {
 		filterParametersById: ( visibility ) => {
-			assert.deepEqual( visibility, { 'part_0/a': false } );
+			assert.deepEqual( visibility, {
+				'part_0/1': false,
+				'part_0/2': false,
+				'part_0/3': false,
+				'part_0/4': false
+			} );
 			eventsFired++;
 		}
 	} );
