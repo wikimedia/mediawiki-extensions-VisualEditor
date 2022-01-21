@@ -16,8 +16,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWConfirmationDialog = function VeUiMWConfirmationDialog( config ) {
-	this.accept = config.accept;
-
 	// Parent constructor
 	ve.ui.MWConfirmationDialog.super.call( this, config );
 };
@@ -38,15 +36,12 @@ ve.ui.MWConfirmationDialog.static.size = 'small';
  * Open a confirmation dialog
  *
  * @param {string} prompt message key to show as dialog content
- * @param {string} accept message key for button label to continue
  * @param {Function} successCmd callback if continue action is chosen
  */
-ve.ui.MWConfirmationDialog.confirm = function ( prompt, accept, successCmd ) {
+ve.ui.MWConfirmationDialog.confirm = function ( prompt, successCmd ) {
 	var windowManager = new OO.ui.WindowManager();
 	$( document.body ).append( windowManager.$element );
-	var dialog = new ve.ui.MWConfirmationDialog( {
-		accept: accept
-	} );
+	var dialog = new ve.ui.MWConfirmationDialog();
 	windowManager.addWindows( [ dialog ] );
 	windowManager.openWindow( dialog, {
 		// Messages that can be used here:
@@ -82,14 +77,21 @@ ve.ui.MWConfirmationDialog.prototype.getSetupProcess = function ( data ) {
 			},
 			{
 				action: 'accept',
-				// Additional messages that can be used here:
-				// * visualeditor-dialog-transclusion-back-confirmation-continue
-				// * visualeditor-dialog-transclusion-close-confirmation-continue
-				label: OO.ui.deferMsg( this.accept || 'ooui-dialog-message-accept' ),
-				flags: 'primary'
+				label: OO.ui.deferMsg( 'visualeditor-dialog-transclusion-confirmation-discard' ),
+				flags: 'destructive'
 			}
 		]
 	}, data );
 
 	return ve.ui.MWConfirmationDialog.super.prototype.getSetupProcess.call( this, data );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWConfirmationDialog.prototype.getReadyProcess = function ( data ) {
+	// "normal" destructive actions don't get focus by default
+	this.getActions().get( { actions: 'accept' } )[ 0 ].focus();
+
+	return ve.ui.MWConfirmationDialog.super.prototype.getReadyProcess.call( this, data );
 };
