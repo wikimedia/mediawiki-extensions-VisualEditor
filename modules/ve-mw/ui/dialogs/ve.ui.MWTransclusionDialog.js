@@ -540,6 +540,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 						label: mw.message( 'visualeditor-dialog-transclusion-help-message' ).text()
 					} ),
 					this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-help', 'helpNotice' ),
+					this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-shortcuts', 'keyboard' ),
 					this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-feedback', 'feedback' )
 				],
 				classes: [ 've-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout' ]
