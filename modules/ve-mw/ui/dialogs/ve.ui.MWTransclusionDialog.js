@@ -422,7 +422,6 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 			if ( this.transclusionModel.containsValuableData() ) {
 				ve.ui.MWConfirmationDialog.confirm(
 					'visualeditor-dialog-transclusion-back-confirmation-prompt',
-					'visualeditor-dialog-transclusion-back-confirmation-continue',
 					this.resetDialog.bind( this )
 				);
 			} else {
@@ -442,7 +441,6 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 			return new OO.ui.Process( function () {
 				ve.ui.MWConfirmationDialog.confirm(
 					'visualeditor-dialog-transclusion-close-confirmation-prompt',
-					'visualeditor-dialog-transclusion-close-confirmation-continue',
 					this.close.bind( this ) );
 			}, this );
 		}
