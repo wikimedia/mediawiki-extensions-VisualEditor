@@ -229,9 +229,6 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		}
 		// Strip legacy IDs, for example in section headings
 		mw.libs.ve.stripParsoidFallbackIds( doc.body );
-		// Re-duplicate deduplicated TemplateStyles, for correct rendering when editing a section or
-		// when templates are removed during the edit
-		mw.libs.ve.reduplicateStyles( doc.body );
 		// Fix relative or missing base URL if needed
 		this.fixBase( doc );
 	}
