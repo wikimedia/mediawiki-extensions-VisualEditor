@@ -2,16 +2,18 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
+use ApiTestCase;
 use ApiVisualEditor;
 use ExtensionRegistry;
 use HashConfig;
-use MediaWikiIntegrationTestCase;
 use Wikimedia\ScopedCallback;
 
 /**
+ * @group medium
+ *
  * @covers \ApiVisualEditor
  */
-class ApiVisualEditorTest extends MediaWikiIntegrationTestCase {
+class ApiVisualEditorTest extends ApiTestCase {
 
 	/** @var ScopedCallback|null */
 	private $scopedCallback;
@@ -27,6 +29,22 @@ class ApiVisualEditorTest extends MediaWikiIntegrationTestCase {
 	protected function tearDown(): void {
 		$this->scopedCallback = null;
 		parent::tearDown();
+	}
+
+	private function loadEditor() {
+		$params = [
+			'action' => 'visualeditor',
+			'paction' => 'parse',
+			'page' => 'SomeTestPage',
+		];
+		return $this->doApiRequestWithToken( $params );
+	}
+
+	public function testLoadEditor() {
+		$this->assertSame(
+			'success',
+			$this->loadEditor()[0]['visualeditor']['result']
+		);
 	}
 
 	public function testIsAllowedNamespace() {
