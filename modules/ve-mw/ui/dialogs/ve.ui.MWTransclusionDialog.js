@@ -28,8 +28,6 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 	// Properties
 	this.isSidebarExpanded = null;
 
-	this.setupHotkeyTriggers();
-
 	// Temporary feature flags
 	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
 	this.useBackButton = veConfig.transclusionDialogBackButton;
@@ -214,12 +212,40 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
+	// Lower-case modifier and key names as specified in {@see ve.ui.Trigger}
 	var meta = ve.getSystemPlatform() === 'mac' ? 'meta+' : 'ctrl+';
+	var hotkeys = {
+		addTemplate: meta + 'd',
+		addWikitext: meta + 'shift+y',
+		addParameter: meta + 'shift+d',
+		moveUp: meta + 'shift+up',
+		moveDown: meta + 'shift+down',
+		remove: meta + 'del'
+	};
 
 	this.hotkeyTriggers = {};
-	this.hotkeyTriggers[ meta + 'd' ] = this.addTemplatePlaceholder.bind( this );
-	this.hotkeyTriggers[ meta + 'shift+y' ] = this.addContent.bind( this );
-	this.hotkeyTriggers[ meta + 'shift+d' ] = this.addParameter.bind( this );
+	this.hotkeyTriggers[ hotkeys.addTemplate ] = this.addTemplatePlaceholder.bind( this );
+	this.hotkeyTriggers[ hotkeys.addWikitext ] = this.addContent.bind( this );
+	this.hotkeyTriggers[ hotkeys.addParameter ] = this.addParameter.bind( this );
+
+	this.addHotkeyToTitle( this.addTemplateButton, hotkeys.addTemplate );
+	this.addHotkeyToTitle( this.addContentButton, hotkeys.addWikitext );
+	this.addHotkeyToTitle( this.addParameterButton, hotkeys.addParameter );
+
+	var controls = this.bookletLayout.getOutlineControls();
+	this.addHotkeyToTitle( controls.upButton, hotkeys.moveUp );
+	this.addHotkeyToTitle( controls.downButton, hotkeys.moveDown );
+	this.addHotkeyToTitle( controls.removeButton, hotkeys.remove );
+};
+
+/**
+ * @private
+ * @param {OO.ui.mixin.TitledElement} element
+ * @param {string} hotkey
+ */
+ve.ui.MWTransclusionDialog.prototype.addHotkeyToTitle = function ( element, hotkey ) {
+	// Separated with a space as in {@see OO.ui.Tool.updateTitle}
+	element.setTitle( element.getTitle() + ' ' + new ve.ui.Trigger( hotkey ).getMessage() );
 };
 
 /**
@@ -524,6 +550,8 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	if ( !this.useNewSidebar ) {
 		this.bookletLayout.getOutlineControls().addItems( [ this.addParameterButton ] );
 	}
+
+	this.setupHotkeyTriggers();
 
 	// multipart message gets attached in onReplacePart()
 	this.multipartMessage = new OO.ui.MessageWidget( {
