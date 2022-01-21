@@ -275,7 +275,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Tooltip for adding images and media on page",
 	"visualeditor-dialogbutton-meta-tooltip": "{{Identical|Page settings}}",
 	"visualeditor-dialogbutton-template-tooltip": "{{Identical|Template}}",
-	"visualeditor-dialogbutton-transclusion-tooltip": "{{Identical|Transclusion}}",
 	"visualeditor-dismissible-message-close": "Tooltip for the close button that closes an info message so it's never shown again.",
 	"visualeditor-donebutton-tooltip": "Tooltip text for done editing button in mobile, closing the edit toolbar and blurring the surface.",
 	"visualeditor-editconflict": "Alert message when saving a page causes an edit conflict",
