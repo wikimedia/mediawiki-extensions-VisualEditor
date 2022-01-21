@@ -535,6 +535,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	if ( this.useNewSidebar || this.useInlineDescriptions ) {
 		var helpPopup = new ve.ui.MWFloatingHelpElement( {
 			label: mw.message( 'visualeditor-dialog-transclusion-help-title' ).text(),
+			title: mw.message( 'visualeditor-dialog-transclusion-help-title' ).text(),
 			$message: new OO.ui.FieldsetLayout( {
 				items: [
 					new OO.ui.LabelWidget( {

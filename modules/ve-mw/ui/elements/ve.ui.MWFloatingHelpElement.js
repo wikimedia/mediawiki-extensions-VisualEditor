@@ -22,6 +22,7 @@ ve.ui.MWFloatingHelpElement = function VeUiMWFloatingHelpElement( config ) {
 	this.helpButton = new OO.ui.ButtonWidget( {
 		icon: 'help',
 		label: config.label,
+		title: config.title,
 		invisibleLabel: true,
 		flags: 'progressive',
 		rel: 'help',
