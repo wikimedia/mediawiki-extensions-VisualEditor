@@ -22,7 +22,7 @@ ve.ui.MWTransclusionContextItem = function VeUiMWTransclusionContextItem() {
 	// Initialization
 	this.$element.addClass( 've-ui-mwTransclusionContextItem' );
 	if ( !this.model.isSingleTemplate() ) {
-		this.setLabel( ve.msg( 'visualeditor-dialogbutton-transclusion-tooltip' ) );
+		this.setLabel( ve.msg( 'visualeditor-dialog-transclusion-title-edit-transclusion' ) );
 	}
 };
 
