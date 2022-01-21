@@ -29,8 +29,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		remove: 'onParameterRemovedFromTemplateModel'
 	} );
 
-	this.initializeParameterSelectWidget();
-	this.toggleFilters( this.parameters && this.parameters.getItemCount() );
+	this.initializeParameterList();
+	this.toggleFilters();
 };
 
 /* Inheritance */
@@ -54,13 +54,23 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
  *  The spec might contain more parameters (e.g. deprecated).
  */
 
+/* Static Properties */
+
+/**
+ * Minimum number of parameters required before search and filter options appear.
+ *
+ * @static
+ * @property {number}
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.static.searchableParameterCount = 4;
+
 /* Methods */
 
 /**
  * @private
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterSelectWidget = function () {
-	if ( this.parameters ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = function () {
+	if ( this.parameterList ) {
 		return;
 	}
 
@@ -83,7 +93,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterSelectWid
 		.text( ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-description' ) )
 		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
-	this.parameters = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
+	this.parameterList = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
 		items: parameterNames.map( this.createCheckbox.bind( this ) ),
 		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
 		$ariaDescribedBy: $parametersAriaDescription
@@ -95,7 +105,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterSelectWid
 
 	this.$element.append(
 		$parametersAriaDescription,
-		this.parameters.$element
+		this.parameterList.$element
 	);
 };
 
@@ -124,9 +134,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
 		// Note this might include parameters that don't have a checkbox, e.g. deprecated
 		allParamNames = this.templateModel.getAllParametersOrdered();
 	for ( var i = 0; i < allParamNames.length; i++ ) {
-		if ( allParamNames[ i ] === paramName || !this.parameters.items[ insertAt ] ) {
+		if ( allParamNames[ i ] === paramName || !this.parameterList.items[ insertAt ] ) {
 			break;
-		} else if ( this.parameters.items[ insertAt ].getData() === allParamNames[ i ] ) {
+		} else if ( this.parameterList.items[ insertAt ].getData() === allParamNames[ i ] ) {
 			insertAt++;
 		}
 	}
@@ -137,8 +147,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
  * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = function ( paramName ) {
-	if ( this.parameters ) {
-		this.parameters.highlightParameter( paramName );
+	if ( this.parameterList ) {
+		this.parameterList.highlightParameter( paramName );
 	}
 };
 
@@ -146,8 +156,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = functio
  * @inheritDoc
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setSelected = function ( state ) {
-	if ( !state && this.isSelected() && this.parameters ) {
-		this.parameters.highlightItem();
+	if ( !state && this.isSelected() && this.parameterList ) {
+		this.parameterList.highlightItem();
 	}
 	ve.ui.MWTransclusionOutlineTemplateWidget.super.prototype.setSelected.call( this, state );
 };
@@ -163,15 +173,15 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
 		return;
 	}
 
-	this.initializeParameterSelectWidget();
+	this.initializeParameterList();
 
 	// All parameters known via the spec already have a checkbox
-	var item = this.parameters.findItemFromData( paramName );
+	var item = this.parameterList.findItemFromData( paramName );
 	if ( !item ) {
 		item = this.createCheckbox( paramName );
-		this.parameters.addItems( [ item ], this.findCanonicalPosition( paramName ) );
+		this.parameterList.addItems( [ item ], this.findCanonicalPosition( paramName ) );
 
-		this.toggleFilters( this.parameters.getItemCount() );
+		this.toggleFilters();
 
 		// Make sure an active filter is applied to the new checkbox as well
 		var filter = this.searchWidget && this.searchWidget.getValue();
@@ -193,7 +203,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
  * @param {ve.dm.MWParameterModel} param
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterRemovedFromTemplateModel = function ( param ) {
-	this.parameters.markParameterAsUnused( param.getName() );
+	this.parameterList.markParameterAsUnused( param.getName() );
 };
 
 /**
@@ -231,16 +241,16 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelection
  * @private
  * @param {OO.ui.Element[]} items
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged = function ( items ) {
-	this.toggleFilters( items.length );
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged = function () {
+	this.toggleFilters();
 };
 
 /**
  * @private
- * @param {number} numberOfParameters
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( numberOfParameters ) {
-	var visible = numberOfParameters > 3;
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () {
+	var numParams = this.parameterList && this.parameterList.getItemCount(),
+		visible = numParams >= this.constructor.static.searchableParameterCount;
 	if ( this.searchWidget ) {
 		this.searchWidget.toggle( visible );
 		this.toggleUnusedWidget.toggle( visible );
@@ -305,7 +315,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	query = query.trim().toLowerCase();
 
 	// Note: We can't really cache this because the list of know parameters can change any time
-	this.parameters.items.forEach( function ( item ) {
+	this.parameterList.items.forEach( function ( item ) {
 		var paramName = item.getData(),
 			placesToSearch = [
 				spec.getPrimaryParameterName( paramName ),
@@ -339,7 +349,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
  * @param {boolean} visibility
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = function ( visibility ) {
-	this.parameters.items.forEach( function ( item ) {
+	this.parameterList.items.forEach( function ( item ) {
 		item.toggle( visibility || item.isSelected() );
 	} );
 };
