@@ -31,20 +31,50 @@ class ApiVisualEditorTest extends ApiTestCase {
 		parent::tearDown();
 	}
 
-	private function loadEditor() {
-		$params = [
+	private function loadEditor( $overrideParams = [] ) {
+		$params = array_merge( [
 			'action' => 'visualeditor',
 			'paction' => 'metadata',
 			'page' => 'SomeTestPage',
-		];
+		], $overrideParams );
 		return $this->doApiRequestWithToken( $params );
 	}
 
-	public function testLoadEditor() {
+	public function testLoadEditorBasic() {
 		$this->assertSame(
 			'success',
 			$this->loadEditor()[0]['visualeditor']['result']
 		);
+	}
+
+	/**
+	 * @dataProvider provideLoadEditorPreload
+	 */
+	public function testLoadEditorPreload( $params, $expected ) {
+		$this->assertSame(
+			$expected,
+			$this->loadEditor( $params )[0]['visualeditor']['content']
+		);
+	}
+
+	public function provideLoadEditorPreload() {
+		return [
+			'load with preload content' => [
+				[
+					'preload' => 'UTPage',
+					'paction' => 'wikitext',
+				],
+				'UTContent',
+			],
+			'load with preload via Special:MyLanguage' => [
+				// NB UTPage isn't actually translated, so we get the same content back.
+				[
+					'preload' => 'Special:MyLanguage/UTPage',
+					'paction' => 'wikitext',
+				],
+				'UTContent',
+			]
+		];
 	}
 
 	public function testIsAllowedNamespace() {

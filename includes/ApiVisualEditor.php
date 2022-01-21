@@ -14,6 +14,7 @@ use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\User\UserNameUtils;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
@@ -41,6 +42,9 @@ class ApiVisualEditor extends ApiBase {
 	/** @var ContentTransformer */
 	private $contentTransformer;
 
+	/** @var SpecialPageFactory */
+	private $specialPageFactory;
+
 	/** @var ReadOnlyMode */
 	private $readOnlyMode;
 
@@ -53,6 +57,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param UserOptionsLookup $userOptionsLookup
 	 * @param WatchlistManager $watchlistManager
 	 * @param ContentTransformer $contentTransformer
+	 * @param SpecialPageFactory $specialPageFactory
 	 * @param ReadOnlyMode $readOnlyMode
 	 */
 	public function __construct(
@@ -64,6 +69,7 @@ class ApiVisualEditor extends ApiBase {
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
 		ContentTransformer $contentTransformer,
+		SpecialPageFactory $specialPageFactory,
 		ReadOnlyMode $readOnlyMode
 	) {
 		parent::__construct( $main, $name );
@@ -74,6 +80,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->watchlistManager = $watchlistManager;
 		$this->contentTransformer = $contentTransformer;
+		$this->specialPageFactory = $specialPageFactory;
 		$this->readOnlyMode = $readOnlyMode;
 	}
 
@@ -105,6 +112,19 @@ class ApiVisualEditor extends ApiBase {
 	protected function getPreloadContent( $preload, $params ) {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
+
+		// Use SpecialMyLanguage redirect so that nonexistent translated pages can
+		// fall back to the corresponding page in a suitable language
+		if ( $preloadTitle && $preloadTitle->isSpecialPage() ) {
+			[ $spName, $spParam ] = $this->specialPageFactory->resolveAlias( $preloadTitle->getText() );
+			if ( $spName ) {
+				$specialPage = $this->specialPageFactory->getPage( $spName );
+				if ( $specialPage instanceof SpecialMyLanguage ) {
+					$preloadTitle = $specialPage->getRedirect( $spParam );
+				}
+			}
+		}
+
 		// Check for existence to avoid getting MediaWiki:Noarticletext
 		if (
 			$preloadTitle instanceof Title &&
