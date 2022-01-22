@@ -158,18 +158,19 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 // should be more conditional.
 ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) {
 	var dataElement = data[ 0 ],
-		mediaClass = dataElement.attributes.mediaClass,
+		attributes = dataElement.attributes,
+		mediaClass = attributes.mediaClass,
 		figure = doc.createElement( 'figure' ),
-		imgWrapper = doc.createElement( dataElement.attributes.href ? 'a' : 'span' ),
-		img = doc.createElement( dataElement.attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
+		imgWrapper = doc.createElement( attributes.href ? 'a' : 'span' ),
+		img = doc.createElement( attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
 		wrapper = doc.createElement( 'div' ),
-		classAttr = this.getClassAttrFromAttributes( dataElement.attributes ),
+		classAttr = this.getClassAttrFromAttributes( attributes ),
 		captionData = data.slice( 1, -1 );
 
 	// RDFa type
-	figure.setAttribute( 'typeof', this.getRdfa( mediaClass, dataElement.attributes.type ) );
-	if ( !ve.isEmptyObject( dataElement.attributes.mw ) ) {
-		figure.setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
+	figure.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type ) );
+	if ( !ve.isEmptyObject( attributes.mw ) ) {
+		figure.setAttribute( 'data-mw', JSON.stringify( attributes.mw ) );
 	}
 
 	if ( classAttr ) {
@@ -177,34 +178,34 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		figure.className = classAttr;
 	}
 
-	if ( dataElement.attributes.href ) {
-		imgWrapper.setAttribute( 'href', dataElement.attributes.href );
+	if ( attributes.href ) {
+		imgWrapper.setAttribute( 'href', attributes.href );
 	}
 
-	var width = dataElement.attributes.width;
-	var height = dataElement.attributes.height;
+	var width = attributes.width;
+	var height = attributes.height;
 	// If defaultSize is set, and was set on the way in, use the original width and height
 	// we got on the way in.
-	if ( dataElement.attributes.defaultSize ) {
-		if ( dataElement.attributes.originalWidth !== undefined ) {
-			width = dataElement.attributes.originalWidth;
+	if ( attributes.defaultSize ) {
+		if ( attributes.originalWidth !== undefined ) {
+			width = attributes.originalWidth;
 		}
-		if ( dataElement.attributes.originalHeight !== undefined ) {
-			height = dataElement.attributes.originalHeight;
+		if ( attributes.originalHeight !== undefined ) {
+			height = attributes.originalHeight;
 		}
 	}
 
 	var srcAttr = this.typesToSrcAttrs[ mediaClass ];
-	if ( srcAttr && !dataElement.attributes.isError ) {
-		img.setAttribute( srcAttr, dataElement.attributes.src );
+	if ( srcAttr && !attributes.isError ) {
+		img.setAttribute( srcAttr, attributes.src );
 	}
 	// TODO: This does not make sense for broken images (when img is a span node)
 	img.setAttribute( 'width', width );
 	img.setAttribute( 'height', height );
-	img.setAttribute( 'resource', dataElement.attributes.resource );
+	img.setAttribute( 'resource', attributes.resource );
 	// TODO: This does not make sense for broken images (when img is a span node)
-	if ( typeof dataElement.attributes.alt === 'string' ) {
-		img.setAttribute( 'alt', dataElement.attributes.alt );
+	if ( typeof attributes.alt === 'string' ) {
+		img.setAttribute( 'alt', attributes.alt );
 	}
 	figure.appendChild( imgWrapper );
 	imgWrapper.appendChild( img );
