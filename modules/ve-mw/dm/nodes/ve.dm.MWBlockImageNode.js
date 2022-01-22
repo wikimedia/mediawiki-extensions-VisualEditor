@@ -73,8 +73,9 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	var mwDataJSON = figure.getAttribute( 'data-mw' );
 	var mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 	var errorIndex = typeofAttrs.indexOf( 'mw:Error' );
-	var width = img.getAttribute( 'width' );
-	var height = img.getAttribute( 'height' );
+	var isError = errorIndex !== -1;
+	var width = img.getAttribute( isError ? 'data-width' : 'width' );
+	var height = img.getAttribute( isError ? 'data-height' : 'height' );
 
 	var href = imgWrapper.getAttribute( 'href' );
 	if ( href ) {
@@ -86,7 +87,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		}
 	}
 
-	if ( errorIndex !== -1 ) {
+	if ( isError ) {
 		typeofAttrs.splice( errorIndex, 1 );
 	}
 
@@ -102,7 +103,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),
 		mw: mwData,
-		isError: errorIndex !== -1
+		isError: isError
 	};
 
 	this.setClassAttributes( attributes, classAttr );
@@ -168,7 +169,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		captionData = data.slice( 1, -1 );
 
 	// RDFa type
-	figure.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type ) );
+	figure.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type, attributes.isError ) );
 	if ( !ve.isEmptyObject( attributes.mw ) ) {
 		figure.setAttribute( 'data-mw', JSON.stringify( attributes.mw ) );
 	}
@@ -207,9 +208,13 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		img.appendChild( doc.createTextNode( filename ) );
 	}
 
-	// TODO: This does not make sense for broken images (when img is a span node)
-	img.setAttribute( 'width', width );
-	img.setAttribute( 'height', height );
+	if ( width !== null ) {
+		img.setAttribute( attributes.isError ? 'data-width' : 'width', width );
+	}
+	if ( height !== null ) {
+		img.setAttribute( attributes.isError ? 'data-width' : 'height', height );
+	}
+
 	img.setAttribute( 'resource', attributes.resource );
 	// TODO: This does not make sense for broken images (when img is a span node)
 	if ( typeof attributes.alt === 'string' ) {

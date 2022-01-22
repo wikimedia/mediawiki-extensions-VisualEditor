@@ -1890,6 +1890,107 @@ ve.dm.mwExample.domToDataCases = {
 		] ),
 		storeItems: ve.dm.mwExample.MWBlockImage.storeItems
 	},
+	'broken block image': {
+		body:
+			'<figure class="mw-default-size" typeof="mw:Error mw:Image/Thumb" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
+				'<a href="./Special:FilePath/Missing_image.jpg">' +
+					'<span resource="./File:Missing_image.jpg" data-width="220">File:Missing image.jpg</span>' +
+				'</a>' +
+				'<figcaption>abc</figcaption>' +
+			'</figure>',
+		data: [
+			{
+				type: 'mwBlockImage',
+				attributes: {
+					type: 'thumb',
+					align: 'default',
+					href: './Special:FilePath/Missing_image.jpg',
+					mediaClass: 'Image',
+					src: null,
+					defaultSize: true,
+					width: 220,
+					height: null,
+					originalWidth: 220,
+					originalHeight: null,
+					alt: null,
+					isError: true,
+					resource: './File:Missing_image.jpg',
+					mw: {
+						errors: [ {
+							key: 'apierror-filedoesnotexist',
+							message: 'This image does not exist.'
+						} ]
+					},
+					originalClasses: 'mw-default-size',
+					unrecognizedClasses: []
+				}
+			},
+			{ type: 'mwImageCaption' },
+			{ type: 'paragraph', internal: { generated: 'wrapper' } },
+			'a', 'b', 'c',
+			{ type: '/paragraph' },
+			{ type: '/mwImageCaption' },
+			{ type: '/mwBlockImage' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		previewBody:
+			'<figure class="mw-default-size" typeof="mw:Error mw:Image/Thumb" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
+				'<a href="./Special:FilePath/Missing_image.jpg" class="new">' +
+					'<span resource="./File:Missing_image.jpg" data-width="220">File:Missing image.jpg</span>' +
+				'</a>' +
+				'<figcaption>abc</figcaption>' +
+			'</figure>'
+	},
+	'broken inline image': {
+		body:
+			'<p>' +
+				'<span typeof="mw:Error mw:Image" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
+					'<a href="./Special:FilePath/Missing_image.jpg">' +
+						'<span resource="./File:Missing_image.jpg" data-width="200">File:Missing image.jpg</span>' +
+					'</a>' +
+				'</span>' +
+			'</p>',
+		data: [
+			{ type: 'paragraph' },
+			{
+				type: 'mwInlineImage',
+				attributes: {
+					type: 'none',
+					href: './Special:FilePath/Missing_image.jpg',
+					mediaClass: 'Image',
+					src: null,
+					tagName: 'span',
+					width: 200,
+					height: null,
+					valign: 'default',
+					alt: null,
+					isError: true,
+					resource: './File:Missing_image.jpg',
+					mw: {
+						errors: [ {
+							key: 'apierror-filedoesnotexist',
+							message: 'This image does not exist.'
+						} ]
+					},
+					originalClasses: null,
+					unrecognizedClasses: []
+				}
+			},
+			{ type: '/mwInlineImage' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		previewBody:
+			'<p>' +
+				'<span typeof="mw:Error mw:Image" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
+					'<a href="./Special:FilePath/Missing_image.jpg" class="new">' +
+						'<span resource="./File:Missing_image.jpg" data-width="200">File:Missing image.jpg</span>' +
+					'</a>' +
+				'</span>' +
+			'</p>'
+	},
 	'attribute preservation does not crash due to text node split': {
 		body:
 			'<figure typeof="mw:Image/Thumb" data-parsoid="{}">' +

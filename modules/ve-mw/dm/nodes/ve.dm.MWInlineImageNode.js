@@ -63,8 +63,9 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	var classes = container.getAttribute( 'class' );
 	var recognizedClasses = [];
 	var errorIndex = typeofAttrs.indexOf( 'mw:Error' );
-	var width = img.getAttribute( 'width' );
-	var height = img.getAttribute( 'height' );
+	var isError = errorIndex !== -1;
+	var width = img.getAttribute( isError ? 'data-width' : 'width' );
+	var height = img.getAttribute( isError ? 'data-height' : 'height' );
 
 	var href = imgWrapper.getAttribute( 'href' );
 	if ( href ) {
@@ -76,7 +77,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		}
 	}
 
-	if ( errorIndex !== -1 ) {
+	if ( isError ) {
 		typeofAttrs.splice( errorIndex, 1 );
 	}
 
@@ -93,7 +94,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),
 		mw: mwData,
-		isError: errorIndex !== -1,
+		isError: isError,
 		tagName: container.nodeName.toLowerCase()
 	};
 
@@ -148,8 +149,16 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		classes = [],
 		originalClasses = attributes.originalClasses;
 
-	// TODO: This does not make sense for broken images (when img is a span node)
-	ve.setDomAttributes( img, attributes, [ 'width', 'height', 'resource' ] );
+	ve.setDomAttributes( img, attributes, [ 'resource' ] );
+	var width = attributes.width;
+	var height = attributes.height;
+	if ( width !== null ) {
+		img.setAttribute( attributes.isError ? 'data-width' : 'width', width );
+	}
+	if ( height !== null ) {
+		img.setAttribute( attributes.isError ? 'data-width' : 'height', height );
+	}
+
 	var srcAttr = this.typesToSrcAttrs[ mediaClass ];
 	if ( srcAttr && !attributes.isError ) {
 		img.setAttribute( srcAttr, attributes.src );
@@ -161,7 +170,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 	}
 
 	// RDFa type
-	container.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type ) );
+	container.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type, attributes.isError ) );
 	if ( !ve.isEmptyObject( attributes.mw ) ) {
 		container.setAttribute( 'data-mw', JSON.stringify( attributes.mw ) );
 	}
