@@ -248,7 +248,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	highlightedCaptionFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-content-section' )
 	} );
-	highlightedCaptionFieldset.addItems( highlightedCaptionField );
+	highlightedCaptionFieldset.addItems( [ highlightedCaptionField ] );
 
 	highlightedAltTextField = new OO.ui.FieldLayout( this.highlightedAltTextInput, {
 		align: 'top'
@@ -256,7 +256,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	highlightedAltTextFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' )
 	} );
-	highlightedAltTextFieldset.addItems( highlightedAltTextField );
+	highlightedAltTextFieldset.addItems( [ highlightedAltTextField ] );
 
 	// Search panel
 	this.searchWidget = new mw.widgets.MediaSearchWidget( {
