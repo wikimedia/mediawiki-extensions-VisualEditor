@@ -140,7 +140,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	return dataElement;
 };
 
-ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc ) {
+ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var attributes = dataElement.attributes,
 		mediaClass = attributes.mediaClass,
 		container = doc.createElement( attributes.tagName || 'span' ),
@@ -199,6 +199,14 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc ) {
 		firstChild.setAttribute( 'href', attributes.href );
 	} else {
 		firstChild = doc.createElement( 'span' );
+	}
+
+	if ( attributes.isError ) {
+		if ( converter.isForPreview() ) {
+			firstChild.classList.add( 'new' );
+		}
+		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
+		img.appendChild( doc.createTextNode( filename ) );
 	}
 
 	container.appendChild( firstChild );

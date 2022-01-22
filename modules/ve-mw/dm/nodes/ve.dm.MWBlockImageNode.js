@@ -199,6 +199,14 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	if ( srcAttr && !attributes.isError ) {
 		img.setAttribute( srcAttr, attributes.src );
 	}
+	if ( attributes.isError ) {
+		if ( converter.isForPreview() ) {
+			imgWrapper.classList.add( 'new' );
+		}
+		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
+		img.appendChild( doc.createTextNode( filename ) );
+	}
+
 	// TODO: This does not make sense for broken images (when img is a span node)
 	img.setAttribute( 'width', width );
 	img.setAttribute( 'height', height );
