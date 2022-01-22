@@ -232,7 +232,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		help: ve.msg( 'visualeditor-dialog-media-content-section-help' ),
 		classes: [ 've-ui-mwMediaDialog-caption-fieldset' ]
 	} );
-	this.captionFieldset.addItems( captionField );
+	this.captionFieldset.addItems( [ captionField ] );
 
 	// Alt text
 	this.altTextInput = new OO.ui.TextInputWidget( {
@@ -247,7 +247,7 @@ ve.ui.MWMediaDialog.prototype.initialize = function () {
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' ),
 		help: ve.msg( 'visualeditor-dialog-media-alttext-section-help' )
 	} );
-	altTextFieldset.addItems( altTextField );
+	altTextFieldset.addItems( [ altTextField ] );
 
 	// Advanced settings
 
