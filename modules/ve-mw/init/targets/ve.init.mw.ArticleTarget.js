@@ -2007,9 +2007,11 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
  *  to the surface viewport.
  */
 ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode, headingOffset ) {
-	var $window = $( this.getElementWindow() );
+	var $scrollContainer = $( this.getScrollContainer() );
 
-	$window.scrollTop( headingNode.$element.offset().top - ( this.getSurface().padding.top + ( headingOffset || 0 ) ) );
+	$scrollContainer.scrollTop(
+		headingNode.$element.offset().top - parseInt( headingNode.$element.css( 'margin-top' ) ) -
+		( this.getSurface().padding.top + ( headingOffset || 0 ) ) );
 };
 
 /**
