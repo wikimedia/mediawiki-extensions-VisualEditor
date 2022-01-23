@@ -337,6 +337,63 @@
 	}
 
 	/**
+	 * Scroll to a specific heading before VE loads
+	 *
+	 * Similar to ve.init.mw.ArticleTarget.prototype.scrollToHeading
+	 *
+	 * @param {string} section Parsed section (string)
+	 */
+	function scrollToSection( section ) {
+		if ( section === '0' || section === 'new' ) {
+			return;
+		}
+
+		var $heading;
+		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( function () {
+			var linkUri = new mw.Uri( this.href );
+			if ( section === parseSection( linkUri.query.section ) ) {
+				$heading = $( this ).closest( 'h1, h2, h3, h4, h5, h6' );
+				return false;
+			}
+		} );
+		// When loading on action=edit URLs, there is no page content
+		if ( !$heading || !$heading.length ) {
+			return;
+		}
+
+		var offset = 0;
+		var enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
+		if ( enableVisualSectionEditing === true || enableVisualSectionEditing === 'desktop' ) {
+			// Heading will jump to the top of the page in visual section editing, and the toolbar will unfloat
+			offset = $( '#mw-content-text' ).offset().top - 43;
+		} else {
+			// Align with top of heading margin. Doesn't apply in visual section editing as the margin collapses.
+			offset = parseInt( $heading.css( 'margin-top' ) );
+		}
+
+		// Support for CSS `scroll-behavior: smooth;` and JS `window.scroll( { behavior: 'smooth' } )`
+		// is correlated:
+		// * https://caniuse.com/css-scroll-behavior
+		// * https://caniuse.com/mdn-api_window_scroll_options_behavior_parameter
+		var supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+		var newScrollTop = $heading.offset().top - offset;
+		if ( supportsSmoothScroll ) {
+			window.scroll( {
+				top: newScrollTop,
+				behavior: 'smooth'
+			} );
+		} else {
+			// Ideally we would use OO.ui.Element.static.getRootScrollableElement here
+			// as it has slightly better browser support (Chrome < 60)
+			var scrollContainer = window.document.documentElement;
+
+			$( scrollContainer ).animate( {
+				scrollTop: newScrollTop
+			} );
+		}
+	}
+
+	/**
 	 * Load and activate the target.
 	 *
 	 * If you need to call methods on the target before activate is called, call getTarget()
@@ -415,6 +472,8 @@
 				var firstVisibleHeading = $( firstVisibleEditSection ).closest( 'h1, h2, h3, h4, h5, h6' )[ 0 ];
 				visibleSectionOffset = firstVisibleHeading.getBoundingClientRect().top;
 			}
+		} else if ( mode === 'visual' ) {
+			scrollToSection( section );
 		}
 
 		showLoading( mode );

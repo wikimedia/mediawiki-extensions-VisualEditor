@@ -1967,8 +1967,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
-	var target = this,
-		offsetNode = headingNode,
+	var offsetNode = headingNode,
 		surface = this.getSurface(),
 		surfaceView = surface.getView(),
 		lastHeadingLevel = -1;
@@ -1986,21 +1985,21 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 	}
 	var startOffset = offsetNode.getModel().getOffset();
 
-	function scrollAndSetSelection() {
+	function setSelection() {
 		surfaceView.selectRelativeSelectableContentOffset( startOffset, 1 );
-		// Focussing the document triggers showSelection which calls scrollIntoView
-		// which uses a jQuery animation, so make sure this is aborted.
-		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[ 0 ] ) ).stop( true );
-		target.scrollToHeading( headingNode );
 	}
 
 	if ( surfaceView.isFocused() ) {
-		scrollAndSetSelection();
+		setSelection();
+		// Focussing the document triggers showSelection which calls scrollIntoView
+		// which uses a jQuery animation, so make sure this is aborted.
+		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[ 0 ] ) ).stop( true );
 	} else {
 		// onDocumentFocus is debounced, so wait for that to happen before setting
 		// the model selection, otherwise it will get reset
-		surfaceView.once( 'focus', scrollAndSetSelection );
+		surfaceView.once( 'focus', setSelection );
 	}
+	this.scrollToHeading( headingNode );
 };
 
 /**
@@ -2011,9 +2010,7 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
  *  to the surface viewport.
  */
 ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode, headingOffset ) {
-	var $scrollContainer = $( this.getScrollContainer() );
-
-	$scrollContainer.scrollTop(
+	this.$scrollContainer.scrollTop(
 		headingNode.$element.offset().top - parseInt( headingNode.$element.css( 'margin-top' ) ) -
 		( this.getSurface().padding.top + ( headingOffset || 0 ) ) );
 };
