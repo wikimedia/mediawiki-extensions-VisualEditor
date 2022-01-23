@@ -1966,7 +1966,6 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 	var target = this,
 		offsetNode = headingNode,
 		surface = this.getSurface(),
-		surfaceModel = surface.getModel(),
 		surfaceView = surface.getView(),
 		lastHeadingLevel = -1;
 
@@ -1981,12 +1980,10 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 		}
 		offsetNode = nextNode;
 	}
-	var offset = surfaceModel.getDocument().data.getNearestContentOffset(
-		offsetNode.getModel().getOffset(), 1
-	);
+	var startOffset = offsetNode.getModel().getOffset();
 
 	function scrollAndSetSelection() {
-		surfaceModel.setLinearSelection( new ve.Range( offset ) );
+		surfaceView.selectRelativeSelectableContentOffset( startOffset, 1 );
 		// Focussing the document triggers showSelection which calls scrollIntoView
 		// which uses a jQuery animation, so make sure this is aborted.
 		$( OO.ui.Element.static.getClosestScrollableContainer( surfaceView.$element[ 0 ] ) ).stop( true );
