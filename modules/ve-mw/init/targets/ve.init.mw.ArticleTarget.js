@@ -1887,7 +1887,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var section = this.section !== null ? this.section : this.visibleSection;
 
 	if ( this.enableVisualSectionEditing && this.section !== null ) {
-		$( this.getElementWindow() ).scrollTop( 0 );
+		this.$scrollContainer.scrollTop( 0 );
 	}
 
 	if ( section === null || section === 'new' || section === '0' || section === 'T-0' ) {

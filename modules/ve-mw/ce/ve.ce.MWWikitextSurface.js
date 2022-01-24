@@ -61,7 +61,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		var originalSelection = new ve.SelectionState( this.nativeSelection );
 
 		// Save scroll position before changing focus to "offscreen" paste target
-		var scrollTop = this.$window.scrollTop();
+		var scrollTop = this.surface.$scrollContainer.scrollTop();
 
 		// Prevent surface observation due to native range changing
 		this.surfaceObserver.disable();
@@ -69,7 +69,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		this.pasteTargetInput.setValue( text ).select();
 
 		// Restore scroll position after changing focus
-		this.$window.scrollTop( scrollTop );
+		this.surface.$scrollContainer.scrollTop( scrollTop );
 
 		// setTimeout: postpone until after the default copy action
 		setTimeout( function () {
@@ -77,7 +77,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 			view.$attachedRootNode[ 0 ].focus();
 			view.showSelectionState( originalSelection );
 			// Restore scroll position
-			view.$window.scrollTop( scrollTop );
+			view.surface.$scrollContainer.scrollTop( scrollTop );
 			view.surfaceObserver.clear();
 			view.surfaceObserver.enable();
 			// Detach input

@@ -95,7 +95,7 @@ ve.init.mw.MobileArticleTarget.prototype.deactivateSurfaceForToolbar = function 
 	ve.init.mw.MobileArticleTarget.super.prototype.deactivateSurfaceForToolbar.call( this );
 
 	if ( this.wasSurfaceActive && ve.init.platform.constructor.static.isIos() ) {
-		this.prevScrollPosition = this.getSurface().$scrollContainer.scrollTop();
+		this.prevScrollPosition = this.$scrollContainer.scrollTop();
 	}
 };
 
@@ -109,7 +109,7 @@ ve.init.mw.MobileArticleTarget.prototype.activateSurfaceForToolbar = function ()
 	if ( this.wasSurfaceActive && ve.init.platform.constructor.static.isIos() ) {
 		// Setting the cursor can cause unwanted scrolling on iOS, so manually
 		// restore the scroll offset from before the toolbar was opened (T218650).
-		this.getSurface().$scrollContainer.scrollTop( this.prevScrollPosition );
+		this.$scrollContainer.scrollTop( this.prevScrollPosition );
 	}
 };
 
