@@ -417,36 +417,40 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
-	if ( action === 'back' ) {
-		return new OO.ui.Process( function () {
-			if ( this.transclusionModel.containsValuableData() ) {
-				ve.ui.MWConfirmationDialog.confirm(
-					'visualeditor-dialog-transclusion-back-confirmation-prompt',
-					this.resetDialog.bind( this )
-				);
-			} else {
-				this.resetDialog();
-			}
-		}, this );
-	}
+	var willLoseProgress = this.getMode() === 'insert' ?
+		// A new template with no parameters is not considered valuable.
+		this.transclusionModel.containsValuableData() :
+		// The user has changed a parameter, and the template contains some parameters.
+		( this.altered && this.transclusionModel.containsValuableData );
 
-	if ( action === 'mode' ) {
-		return new OO.ui.Process( function () {
-			this.toggleSidebar( !this.isSidebarExpanded );
-		}, this );
-	}
-
-	if ( !action ) {
-		if ( this.altered && this.transclusionModel.containsValuableData() ) {
+	switch ( action ) {
+		case 'back':
 			return new OO.ui.Process( function () {
-				ve.ui.MWConfirmationDialog.confirm(
-					'visualeditor-dialog-transclusion-close-confirmation-prompt',
-					this.close.bind( this ) );
+				if ( willLoseProgress ) {
+					ve.ui.MWConfirmationDialog.confirm(
+						'visualeditor-dialog-transclusion-back-confirmation-prompt',
+						this.resetDialog.bind( this )
+					);
+				} else {
+					this.resetDialog();
+				}
 			}, this );
-		}
+		case 'mode':
+			return new OO.ui.Process( function () {
+				this.toggleSidebar( !this.isSidebarExpanded );
+			}, this );
+		default:
+			// close action
+			if ( willLoseProgress ) {
+				return new OO.ui.Process( function () {
+					ve.ui.MWConfirmationDialog.confirm(
+						'visualeditor-dialog-transclusion-close-confirmation-prompt',
+						this.close.bind( this ) );
+				}, this );
+			} else {
+				return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
+			}
 	}
-
-	return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 /**
