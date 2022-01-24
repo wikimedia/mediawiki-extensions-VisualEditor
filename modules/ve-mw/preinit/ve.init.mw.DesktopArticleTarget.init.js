@@ -1194,7 +1194,11 @@
 
 		// Not on pages which are outputs of the Translate extensions
 		// TODO: Allow the Translate extension to do this itself (T174180)
-		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation'
+		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
+
+		// Not on the editor in the FileImporter dialog (T298345)
+		// TODO: Allow the FileImporter extension to do this itself (T174180)
+		!mw.config.get( 'wgFileImporterEditor' )
 	);
 
 	var enabledForUser = (
