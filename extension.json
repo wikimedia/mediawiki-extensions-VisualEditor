@@ -2779,6 +2779,7 @@
 			"lib/ve/tests/ve.test.utils.js",
 			"modules/ve-mw/tests/ve.test.utils.js",
 			"lib/ve/tests/ve.test.js",
+			"modules/ve-mw/tests/preinit/ve.utils.parsoid.test.js",
 			"lib/ve/tests/ve.DiffMatchPatch.test.js",
 			"lib/ve/tests/ve.EventSequencer.test.js",
 			"lib/ve/tests/ve.Scheduler.test.js",
