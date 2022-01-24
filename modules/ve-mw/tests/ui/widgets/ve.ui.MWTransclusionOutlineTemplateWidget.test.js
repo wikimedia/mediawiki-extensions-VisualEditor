@@ -19,7 +19,7 @@ QUnit.test( 'Constructor', ( assert ) => {
 
 QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 	function assertOrder( w, expected ) {
-		assert.deepEqual( w.parameters.items.map( ( item ) => item.data ), expected );
+		assert.deepEqual( w.parameterList.items.map( ( item ) => item.data ), expected );
 	}
 
 	const transclusion = new ve.dm.MWTransclusionModel(),
@@ -44,7 +44,7 @@ QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 
 	let insertAt = widget.findCanonicalPosition( 'h' );
 	// Most minimal mock instead of an actual ve.ui.MWTransclusionOutlineParameterWidget
-	widget.parameters.addItems( [ new OO.ui.Widget( { data: 'h' } ) ], insertAt );
+	widget.parameterList.addItems( [ new OO.ui.Widget( { data: 'h' } ) ], insertAt );
 	// Deprecated param appears at it's canonical position via paramOrder
 	assert.strictEqual( insertAt, 1 );
 	assertOrder( widget, [ 'g', 'h', 'e', 'b' ] );
@@ -62,7 +62,7 @@ QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 	template.getSpec().seenParameterNames.a2 = true;
 	insertAt = widget.findCanonicalPosition( 'a2' );
 	// Most minimal mock instead of an actual ve.ui.MWTransclusionOutlineParameterWidget
-	widget.parameters.addItems( [ new OO.ui.Widget( { data: 'a2' } ) ], insertAt );
+	widget.parameterList.addItems( [ new OO.ui.Widget( { data: 'a2' } ) ], insertAt );
 	assert.strictEqual( insertAt, 4 );
 	assertOrder( widget, [ 'g', 'h', 'e', 'a1', 'a2', 'b' ] );
 } );
