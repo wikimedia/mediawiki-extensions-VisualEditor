@@ -55,17 +55,20 @@
 		// eslint-disable-next-line no-use-before-define
 		$( document ).on( 'keydown', onDocumentKeyDown );
 
+		init.$loading.toggleClass( 've-init-mw-desktopArticleTarget-loading-overlay-source', mode === 'source' );
+		init.$loading.toggleClass( 've-init-mw-desktopArticleTarget-loading-overlay-visual', mode === 'visual' );
+
 		var $content = $( '#content' );
-		if ( mode !== 'source' ) {
-			// Center within visible part of the target
-			var windowHeight = window.innerHeight;
-			var clientTop = $content[ 0 ].offsetTop - window.pageYOffset;
-			var top = Math.max( clientTop, 0 );
-			var bottom = Math.min( clientTop + $content[ 0 ].offsetHeight, windowHeight );
-			var middle = ( bottom - top ) / 2;
-			init.$loading.css( 'top', middle + Math.max( -clientTop, 0 ) );
+		if ( mode === 'visual' ) {
+			init.$loading.css( {
+				top: window.innerHeight / 2,
+				width: $content.outerWidth()
+			} );
 		} else {
-			init.$loading.css( 'top', '' );
+			init.$loading.css( {
+				top: '',
+				width: ''
+			} );
 		}
 
 		$content.prepend( init.$loading );
