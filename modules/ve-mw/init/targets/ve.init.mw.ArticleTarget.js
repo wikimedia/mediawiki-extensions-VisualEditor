@@ -58,6 +58,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.initialEditSummary = null;
 	this.initialCheckboxes = {};
 
+	this.copyrightWarning = null;
 	this.checkboxFields = null;
 	this.checkboxesByName = null;
 	this.$saveAccessKeyElements = null;
@@ -371,6 +372,8 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	this.startTimeStamp = data.starttimestamp;
 	this.revid = data.oldid || undefined;
 	this.preloaded = !!data.preloaded;
+
+	this.copyrightWarning = data.copyrightWarning;
 
 	this.checkboxesDef = data.checkboxesDef;
 	this.checkboxesMessages = data.checkboxesMessages;
@@ -1874,6 +1877,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 		canReview: !( mode === 'source' && this.section === 'new' ),
 		sectionTitle: this.sectionTitle && this.sectionTitle.getValue(),
 		saveButtonLabel: this.getSaveButtonLabel(),
+		copyrightWarning: this.copyrightWarning,
 		checkboxFields: this.checkboxFields,
 		checkboxesByName: this.checkboxesByName
 	};
