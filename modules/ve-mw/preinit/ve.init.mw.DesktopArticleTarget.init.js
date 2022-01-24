@@ -1191,11 +1191,7 @@
 
 		// Not on pages which are outputs of the Translate extensions
 		// TODO: Allow the Translate extension to do this itself (T174180)
-		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
-
-		// Not on the edit conflict page of the TwoColumnConflict extension (T156251)
-		// TODO: Allow the TwoColumnConflict extension to do this itself (T174180)
-		mw.config.get( 'wgTwoColConflict' ) !== 'true'
+		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation'
 	);
 
 	var enabledForUser = (
