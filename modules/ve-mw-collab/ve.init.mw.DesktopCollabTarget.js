@@ -75,7 +75,7 @@ ve.init.mw.DesktopCollabTarget.prototype.attachToolbar = function () {
 	ve.init.mw.DesktopCollabTarget.super.prototype.attachToolbar.apply( this, arguments );
 
 	toolbar.$element.addClass(
-		've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-open ve-init-mw-desktopArticleTarget-toolbar-opened'
+		've-init-mw-desktopArticleTarget-toolbar ve-init-mw-desktopArticleTarget-toolbar-open'
 	);
 	this.$element.prepend( toolbar.$element );
 };

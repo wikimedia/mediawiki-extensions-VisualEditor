@@ -432,23 +432,6 @@ ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.load = function () {
-	// Create dummy surface to show toolbar while loading
-	// Call ve.init.Target directly to avoid firing surfaceReady
-	var surface = ve.init.Target.prototype.addSurface.call( this, new ve.dm.Document( [
-		{ type: 'paragraph' }, { type: '/paragraph' },
-		{ type: 'internalList' }, { type: '/internalList' }
-	] ) );
-	surface.setReadOnly( true );
-	// setSurface creates dummy toolbar
-	this.setSurface( surface );
-
-	return ve.init.mw.MobileArticleTarget.super.prototype.load.apply( this, arguments );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var originalToolbarGroups = this.toolbarGroups;
 
