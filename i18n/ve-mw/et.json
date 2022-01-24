@@ -190,7 +190,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Pildid ja muud failid",
 	"visualeditor-dialogbutton-meta-tooltip": "Lehekülje sätted",
 	"visualeditor-dialogbutton-template-tooltip": "Mall",
-	"visualeditor-dialogbutton-transclusion-tooltip": "Malli kasutamine",
 	"visualeditor-donebutton-tooltip": "Redigeerimine valmis",
 	"visualeditor-editconflict": "Sinu muudatust ei õnnestunud redigeerimiskonflikti tõttu salvestada. Kas soovid konflikti käsitsi lahendada?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} peab nüüd meeles, millist toimetit eelistad. Saad toimetamisrežiimi muuta toimetamise käigus ning saad hiljem eelistusi muuta.",
