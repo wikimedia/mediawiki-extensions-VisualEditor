@@ -2788,6 +2788,7 @@
 			"lib/ve/tests/ve.BranchNode.test.js",
 			"lib/ve/tests/ve.LeafNode.test.js",
 			"lib/ve/tests/dm/ve.dm.example.js",
+			"lib/ve/tests/dm/ve.dm.example.StubReferenceNode.js",
 			"lib/ve/tests/dm/ve.dm.Annotation.test.js",
 			"lib/ve/tests/dm/ve.dm.AnnotationSet.test.js",
 			"lib/ve/tests/dm/ve.dm.LinkAnnotation.test.js",
