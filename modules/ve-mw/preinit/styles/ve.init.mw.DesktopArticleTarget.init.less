@@ -95,12 +95,17 @@
 /* stylelint-enable selector-max-id */
 
 .ve-init-mw-desktopArticleTarget-loading-overlay {
-	position: absolute;
-	/* Center progress bar within toolbar */
-	top: 0.875em;
-	left: 0;
-	right: 0;
 	z-index: 1;
+
+	&-visual {
+		position: fixed;
+	}
+
+	&-source {
+		position: absolute;
+		width: 100%;
+		top: 0.875em;
+	}
 }
 
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
