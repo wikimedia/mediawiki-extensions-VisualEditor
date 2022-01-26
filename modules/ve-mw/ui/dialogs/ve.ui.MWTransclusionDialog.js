@@ -439,7 +439,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 			return new OO.ui.Process( function () {
 				this.toggleSidebar( !this.isSidebarExpanded );
 			}, this );
-		default:
+		case '':
 			// close action
 			if ( willLoseProgress ) {
 				return new OO.ui.Process( function () {
@@ -447,10 +447,9 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 						'visualeditor-dialog-transclusion-close-confirmation-prompt',
 						this.close.bind( this ) );
 				}, this );
-			} else {
-				return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
 			}
 	}
+	return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
 };
 
 /**
