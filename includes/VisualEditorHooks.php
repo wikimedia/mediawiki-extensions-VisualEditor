@@ -118,8 +118,10 @@ class VisualEditorHooks {
 			$veConfig->get( 'VisualEditorEnableDiffPage' ) ||
 			// Enabled as user beta feature
 			$userOptionsLookup->getOption( $user, 'visualeditor-visualdiffpage' ) ||
+			// Enabled by query param (deprecated)
+			$output->getRequest()->getVal( 'visualdiff' ) !== null ||
 			// Enabled by query param
-			$output->getRequest()->getVal( 'visualdiff' ) !== null
+			$output->getRequest()->getVal( 'diffmode' ) === 'visual'
 		) ) {
 			return;
 		}
