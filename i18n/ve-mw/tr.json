@@ -213,7 +213,7 @@
 	"visualeditor-dialog-transclusion-add-param-save": "Parametre ekle",
 	"visualeditor-dialog-transclusion-add-template": "Şablon ekle",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Belgelenmemiş parametre ekle",
-	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Aramaya dönmek istiyor musun? Düzenlemeler kaybolacak ve geri alınamayacak.",
+	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Aramaya geri dönmek mi istiyorsunuz? Düzenlemeler kaybolacak ve geri alınamayacak.",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Şablon düzenleyici kapatılsın mı? Değişiklikler kaybolacak ve geri alınamaz.",
 	"visualeditor-dialog-transclusion-collapse-options": "Seçenekleri gizle",
 	"visualeditor-dialog-transclusion-confirmation-discard": "Düzenlemeleri sil",

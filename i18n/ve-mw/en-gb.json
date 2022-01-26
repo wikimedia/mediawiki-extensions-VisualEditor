@@ -17,8 +17,5 @@
 	"visualeditor-dialog-media-position-checkbox-help": "You can make this media item appear in line with the text of the page instead of floating. You should do this sparingly, as it will break up the flow of the text if you uncheck this box.",
 	"visualeditor-dialog-media-size-section-help": "You can set how large the media item appears on the page. This should almost always be the normal size, as a custom size will interfere with the layout of the page for readers and make the media  items seem inconsistent.",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "You can over-ride how this page is sorted when displayed within a category by setting a different index to sort with instead. This is often used to make pages about people show by last name, but be named with their first name shown first.",
-	"visualeditor-dialog-meta-settings-displaytitle-help": "You can over-ride how this page's title is displayed by setting a different label to show instead.",
-	"visualeditor-dialog-transclusion-confirmation-reject": "Kɔ so ara sesa mu",
-	"visualeditor-dialog-transclusion-filter-hide-unused": "Fa biribiara a wɔnkaa ho asɛm no sie",
-	"visualeditor-dialog-transclusion-filter-show-all": "Kyerɛ deɛ ɛka fa biribi ho no nyinaa"
+	"visualeditor-dialog-meta-settings-displaytitle-help": "You can over-ride how this page's title is displayed by setting a different label to show instead."
 }
