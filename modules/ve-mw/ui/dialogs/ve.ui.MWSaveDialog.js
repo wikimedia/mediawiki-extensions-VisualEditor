@@ -644,9 +644,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		this.$saveCheckboxes,
 		this.editSummaryCountLabel.$element
 	);
-	// eslint-disable-next-line no-jquery/no-html
-	this.$license = $( '<p>' ).addClass( 've-ui-mwSaveDialog-license' )
-		.html( ve.init.platform.getParsedMessage( 'copyrightwarning' ) );
+	this.$license = $( '<p>' ).addClass( 've-ui-mwSaveDialog-license' );
 	this.$saveMessages = $( '<div>' ).addClass( 've-ui-mwSaveDialog-messages' );
 	this.$saveFoot = $( '<div>' ).addClass( 've-ui-mwSaveDialog-foot' ).append( this.$license );
 	ve.targetLinksToNewWindow( this.$saveFoot[ 0 ] );
@@ -848,6 +846,7 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
  * @param {Object} [data]
  * @param {boolean} [data.canReview] User can review changes
  * @param {boolean} [data.canPreview] User can preview changes
+ * @param {string} [data.copyrightWarning] HTML to display as the copyright message
  * @param {OO.ui.FieldLayout[]} [data.checkboxFields] Checkbox fields
  * @param {Object} [data.checkboxesByName] Checkbox widgets, indexed by name
  * @param {string} [data.sectionTitle] Section title, if in new section mode
@@ -862,6 +861,8 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.canReview = !!data.canReview;
 			this.canPreview = !!data.canPreview;
+			// eslint-disable-next-line no-jquery/no-html
+			this.$license.html( data.copyrightWarning );
 			this.setupCheckboxes( data.checkboxFields || [] );
 			this.checkboxesByName = data.checkboxesByName || {};
 			// HACK: Change layout when wpWatchlistExpiry is present to force wpWatchthis

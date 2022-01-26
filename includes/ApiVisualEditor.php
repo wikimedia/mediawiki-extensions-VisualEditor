@@ -533,9 +533,16 @@ class ApiVisualEditor extends ApiBase {
 				// Remove empty notices (T265798)
 				$notices = array_filter( $notices );
 
+				$copyrightWarning = EditPage::getCopyrightWarning(
+					$title,
+					'parse',
+					$this
+				);
+
 				$result = [
 					'result' => 'success',
 					'notices' => $notices,
+					'copyrightWarning' => $copyrightWarning,
 					'checkboxesDef' => $checkboxesDef,
 					'checkboxesMessages' => $checkboxesMessages,
 					'protectedClasses' => implode( ' ', $protectedClasses ),

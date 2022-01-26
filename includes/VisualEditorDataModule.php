@@ -20,7 +20,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
 		$msgInfo = $this->getMessageInfo( $context );
-		$parsedMessages = $msgInfo['parsed'];
+		$parsedMessages = [];
 		$plainMessages = [];
 		foreach ( $msgInfo['parse'] as $msgKey => $msgObj ) {
 			$parsedMessages[ $msgKey ] = $msgObj->parse();
@@ -56,16 +56,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			'visualeditor-wikitext-warning' => $context->msg( 'visualeditor-wikitext-warning' ),
 		];
 
-		// Copyright warning (already parsed)
-		$parsedMsgs = [
-			'copyrightwarning' => EditPage::getCopyrightWarning(
-				// Use a dummy title
-				Title::newFromText( 'Dwimmerlaik' ),
-				'parse',
-				$context->getLanguage()
-			),
-		];
-
 		// Messages to be exported as plain text
 		$plainMsgs = [
 			'visualeditor-feedback-link' =>
@@ -84,8 +74,6 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 
 		return [
 			'parse' => $parseMsgs,
-			// Already parsed
-			'parsed' => $parsedMsgs,
 			'plain' => $plainMsgs,
 		];
 	}
