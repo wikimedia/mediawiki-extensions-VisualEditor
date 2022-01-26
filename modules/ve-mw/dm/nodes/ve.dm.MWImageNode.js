@@ -189,6 +189,8 @@ ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
 				this.wrapText( 'del', ve.msg( 'visualeditor-align-desc-' + change.from ) ),
 				this.wrapText( 'ins', ve.msg( 'visualeditor-align-desc-' + change.to ) )
 			);
+		case 'originalWidth':
+		case 'originalHeight':
 		case 'originalClasses':
 		case 'unrecognizedClasses':
 			return;
