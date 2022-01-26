@@ -189,6 +189,7 @@
 	"visualeditor-dialog-transclusion-add-wikitext": "افزودن ویکی‌متن",
 	"visualeditor-dialog-transclusion-add-param": "اضافه کردن اطلاعات بیشتر",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "نمی‌توان دو پارامتر هم‌نام را افزود.",
+	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "این پارامتر هم‌اکنون برای استفاده در دسترس است. لطفاً گزینه‌های موجود در نوار کناری را بررسی کنید.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 یک نویسهٔ ممنوعه است. برای افزودن پارامتر، این نویسه را حذف کنید.",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "نام پارامتر",
 	"visualeditor-dialog-transclusion-add-param-save": "افزودن پارامتر",

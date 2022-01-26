@@ -19,7 +19,8 @@
 			"Đỗ Thảo",
 			"Nghiemtrongdai VN",
 			"Thienhau2003",
-			"Keo010122"
+			"Keo010122",
+			"NguoiDungKhongDinhDanh"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -184,7 +185,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Trường bị phản đối",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Trường bị phản đối. $1",
 	"visualeditor-dialog-transclusion-loading": "Đang tải…",
-	"visualeditor-dialog-transclusion-more-template-description": "Có thể có thêm thông tin về bản mẫu “$1” tại [[{{ns:template}}:$1|trang của nó]].",
+	"visualeditor-dialog-transclusion-more-template-description": "Có thể có thêm thông tin về bản mẫu “$1” tại [[$2|trang của nó]].",
 	"visualeditor-dialog-transclusion-no-template-description": "Bản mẫu “$1” chưa có lời miêu tả, nhưng [[$2|trang bản mẫu]] có thể có thông tin về nó.",
 	"visualeditor-dialog-transclusion-options": "Tùy chọn",
 	"visualeditor-dialog-transclusion-param-default": "Mặc định: $1",
@@ -192,7 +193,7 @@
 	"visualeditor-dialog-transclusion-param-info": "Miêu tả trường",
 	"visualeditor-dialog-transclusion-param-info-missing": "Không có lời miêu tả trường",
 	"visualeditor-dialog-transclusion-placeholder": "Thêm bản mẫu",
-	"visualeditor-dialog-transclusion-raw-fallback": "Lỡ thì hiển thị mã wiki thuần",
+	"visualeditor-dialog-transclusion-raw-fallback": "Hiển thị mã wiki thuần",
 	"visualeditor-dialog-transclusion-remove-content": "Xóa nội dung",
 	"visualeditor-dialog-transclusion-remove-param": "Xóa trường",
 	"visualeditor-dialog-transclusion-remove-template": "Gỡ bản mẫu",
