@@ -427,7 +427,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 		case 'back':
 			return new OO.ui.Process( function () {
 				if ( willLoseProgress ) {
-					ve.ui.MWConfirmationDialog.confirm(
+					ve.ui.MWConfirmationDialog.static.confirm(
 						'visualeditor-dialog-transclusion-back-confirmation-prompt',
 						this.resetDialog.bind( this )
 					);
@@ -443,7 +443,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 			// close action
 			if ( willLoseProgress ) {
 				return new OO.ui.Process( function () {
-					ve.ui.MWConfirmationDialog.confirm(
+					ve.ui.MWConfirmationDialog.static.confirm(
 						'visualeditor-dialog-transclusion-close-confirmation-prompt',
 						this.close.bind( this ) );
 				}, this );

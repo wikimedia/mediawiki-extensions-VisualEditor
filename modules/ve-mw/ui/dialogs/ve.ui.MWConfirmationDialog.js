@@ -35,10 +35,11 @@ ve.ui.MWConfirmationDialog.static.size = 'small';
 /**
  * Open a confirmation dialog
  *
+ * @static
  * @param {string} prompt message key to show as dialog content
  * @param {Function} successCmd callback if continue action is chosen
  */
-ve.ui.MWConfirmationDialog.confirm = function ( prompt, successCmd ) {
+ve.ui.MWConfirmationDialog.static.confirm = function ( prompt, successCmd ) {
 	var windowManager = new OO.ui.WindowManager();
 	$( document.body ).append( windowManager.$element );
 	var dialog = new ve.ui.MWConfirmationDialog();
