@@ -702,6 +702,12 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		return;
 	}
 
+	if ( !this.activating ) {
+		// Load failed after activation abandoned (e.g. user pressed escaped).
+		// Nothing more to do.
+		return;
+	}
+
 	var $confirmPromptMessage = this.extractErrorMessages( errorDetails );
 
 	OO.ui.confirm( $confirmPromptMessage, {
@@ -711,16 +717,21 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		]
 	} ).done( function ( confirmed ) {
 		if ( confirmed ) {
+			// Retry load
 			target.load();
-		} else if ( $( '#wpTextbox1' ).length && !target.isModeAvailable( 'source' ) ) {
-			// If we're switching from the wikitext editor, just deactivate
-			// don't try to switch back to it fully, that'd discard changes.
-			target.tryTeardown( true );
 		} else {
-			target.activatingDeferred.reject();
-			// TODO: Some sort of progress bar?
-			target.wikitextFallbackLoading = true;
-			target.switchToWikitextEditor( false );
+			// User pressed cancel
+			if ( target.getSurface() ) {
+				// Switching from VE source mode
+				target.activatingDeferred.reject();
+				// TODO: Some sort of progress bar?
+				target.wikitextFallbackLoading = true;
+				target.switchToWikitextEditor( false );
+			} else {
+				// We're switching from read mode or the 2010 wikitext editor:
+				// just give up and stay where you are
+				target.tryTeardown( true );
+			}
 		}
 	} );
 };
@@ -878,7 +889,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 				if ( toolbarDialogs.getCurrentWindow() ) {
 					toolbarDialogs.getCurrentWindow().close();
 				} else {
-					target.tryTeardown( false, 'navigate-read' );
+					target.tryTeardown( true, 'navigate-read' );
 				}
 			}
 		} );
