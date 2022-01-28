@@ -402,7 +402,7 @@
 		var visibleSectionOffset = null;
 		if ( section === null ) {
 			var firstVisibleEditSection = null;
-			$( '#mw-content-text .mw-editsection' ).each( function () {
+			$( '#firstHeading, #mw-content-text .mw-editsection' ).each( function () {
 				var top = this.getBoundingClientRect().top;
 				if ( top > 0 ) {
 					firstVisibleEditSection = this;
@@ -411,7 +411,7 @@
 				}
 			} );
 
-			if ( firstVisibleEditSection ) {
+			if ( firstVisibleEditSection && firstVisibleEditSection.id !== 'firstHeading' ) {
 				var firstVisibleSectionLink = firstVisibleEditSection.querySelector( 'a' );
 				var linkUri = new mw.Uri( firstVisibleSectionLink.href );
 				visibleSection = parseSection( linkUri.query.section );
