@@ -1336,6 +1336,8 @@
 				"visualeditor-changedir-tool-rtl",
 				"visualeditor-clearbutton-tooltip",
 				"visualeditor-clipboard-copy",
+				"visualeditor-clipboard-copy-fail",
+				"visualeditor-clipboard-copy-success",
 				"visualeditor-clipboard-cut",
 				"visualeditor-clipboard-paste",
 				"visualeditor-clipboard-paste-special",
