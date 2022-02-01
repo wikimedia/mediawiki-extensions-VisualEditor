@@ -8,6 +8,7 @@
  * @license MIT
  */
 
+use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
 use MediaWiki\MediaWikiServices;
 
 class VisualEditorHooks {
@@ -81,9 +82,14 @@ class VisualEditorHooks {
 	 * @param Skin $skin The skin that's going to build the UI.
 	 */
 	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
+		$services = MediaWikiServices::getInstance();
+		$hookRunner = new VisualEditorHookRunner( $services->getHookContainer() );
+		if ( !$hookRunner->onVisualEditorBeforeEditorHook( $output, $skin ) ) {
+			return;
+		}
 		if ( !(
 			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
-			MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' )
+			$services->getService( 'MobileFrontend.Context' )
 				->shouldDisplayMobileView()
 		) ) {
 			$output->addModules( [
@@ -93,8 +99,7 @@ class VisualEditorHooks {
 			$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
 		}
 		// add scroll offset js variable to output
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$skinsToolbarScrollOffset = $veConfig->get( 'VisualEditorSkinToolbarScrollOffset' );
 		$toolbarScrollOffset = 0;
 		$skinName = $skin->getSkinName();
@@ -457,6 +462,11 @@ class VisualEditorHooks {
 
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
+			return;
+		}
+
+		$hookRunner = new VisualEditorHookRunner( $services->getHookContainer() );
+		if ( !$hookRunner->onVisualEditorBeforeEditorHook( $skin->getOutput(), $skin ) ) {
 			return;
 		}
 
