@@ -1187,17 +1187,16 @@
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
 	init.isAvailable = (
-		// Support check asserts that Array.prototype.indexOf is available so we can use it below
 		VisualEditorSupportCheck() &&
 
 		( ( 'vesupported' in uri.query ) || !$.client.test( init.unsupportedList, null, true ) ) &&
 
 		// Not on pages which are outputs of the Translate extensions
-		// TODO: Allow the Translate extension to do this itself (T174180)
+		// TODO: Remove this once the extension is using VisualEditorBeforeEditorHook (T174180)
 		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
 
 		// Not on the editor in the FileImporter dialog (T298345)
-		// TODO: Allow the FileImporter extension to do this itself (T174180)
+		// TODO: Remove this once the extension is using VisualEditorBeforeEditorHook (T174180)
 		!mw.config.get( 'wgFileImporterEditor' )
 	);
 
