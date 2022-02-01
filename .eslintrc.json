@@ -17,7 +17,12 @@
 		"no-jquery/no-append-html": "error",
 		"no-jquery/no-deferred": "error",
 		"no-jquery/no-extend": "error",
-		"no-jquery/no-html": [ "error", { "allowGetOrSet": "get" } ],
+		"no-jquery/no-html": [
+			"error",
+			{
+				"allowGetOrSet": "get"
+			}
+		],
 		"no-jquery/no-when": "error",
 		"no-jquery/no-visibility": "error",
 		"max-len": "off",

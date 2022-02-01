@@ -33,7 +33,7 @@
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
 		"stylelint-config-wikimedia": "0.11.1",
-		"wdio-mediawiki": "1.1.1",
+		"wdio-mediawiki": "1.2.0",
 		"webdriverio": "7.4.6"
 	}
 }
