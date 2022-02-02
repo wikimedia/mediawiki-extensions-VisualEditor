@@ -180,7 +180,6 @@
 		if ( action === 'saveFailure' ) {
 			event[ actionPrefix + '_message' ] = event.message;
 		}
-		/* eslint-enable camelcase */
 
 		// Remove renamed properties
 		delete event.type;
@@ -194,9 +193,13 @@
 			timing[ action ] = timeStamp;
 		}
 
-		if ( mw.user.options.get( 'discussiontools-abtest' ) ) {
-			event.bucket = mw.user.options.get( 'discussiontools-abtest' );
+		if ( mw.config.get( 'wgDiscussionToolsABTestBucket' ) ) {
+			data.bucket = mw.config.get( 'wgDiscussionToolsABTestBucket' );
+			if ( mw.config.get( 'wgDiscussionToolsAnonymousUserId' ) ) {
+				data.anonymous_user_id = mw.config.get( 'wgDiscussionToolsAnonymousUserId' );
+			}
 		}
+		/* eslint-enable camelcase */
 
 		if ( trackdebug ) {
 			log( topic, duration + 'ms', event );
@@ -251,11 +254,14 @@
 			integration: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'integrationType' ) || 'page',
 			platform: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'platformType' ) || 'other'
 		};
-		/* eslint-enable camelcase */
 
-		if ( mw.user.options.get( 'discussiontools-abtest' ) ) {
-			event.bucket = mw.user.options.get( 'discussiontools-abtest' );
+		if ( mw.config.get( 'wgDiscussionToolsABTestBucket' ) ) {
+			data.bucket = mw.config.get( 'wgDiscussionToolsABTestBucket' );
+			if ( mw.config.get( 'wgDiscussionToolsAnonymousUserId' ) ) {
+				data.anonymous_user_id = mw.config.get( 'wgDiscussionToolsAnonymousUserId' );
+			}
 		}
+		/* eslint-enable camelcase */
 
 		if ( trackdebug ) {
 			log( topic, event );
