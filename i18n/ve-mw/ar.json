@@ -27,7 +27,8 @@
 			"فلورانس",
 			"محمد أحمد عبد الفتاح",
 			"محمد عصام",
-			"مشعل الحربي"
+			"مشعل الحربي",
+			"SaldırganSincap"
 		]
 	},
 	"collabpad-doctitle": "كولاب باد: $1",
@@ -348,7 +349,7 @@
 	"visualeditor-parameter-input-placeholder": "اسم الحقل",
 	"visualeditor-parameter-search-more": "أظهر {{PLURAL:$1|الحقل الآخر|الحقلين الآخرين|الحقول ال‍$1 الأخرى}}",
 	"visualeditor-parameter-search-no-unused": "كل الحقول مستخدمة",
-	"visualeditor-parameter-search-unknown": "حقل غير معروف",
+	"visualeditor-parameter-search-unknown": "(حقل غير معروف)",
 	"visualeditor-preference-betatempdisable": "عطل المحرر المرئي مؤقتا ما دام في الطور التجريبي.",
 	"visualeditor-preference-core-description": "تمكين المحرر المرئي. لن يكون متوفرًا في صفحات النقاش ونطاقات أخرى.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
@@ -412,6 +413,6 @@
 	"visualeditor-wikitext-warning": "أنت تستخدم المحرر المرئي، و[[{{MediaWiki:visualeditor-wikitext-warning-link}}|نص الويكي]] لا يعمل هنا. للاحتفاظ بتعديلاتك وإكمال التحرير عن طريق المصدر، اضغط على زر التحويل.",
 	"visualeditor-wikitext-warning-title": "يوجد نص ويكي",
 	"visualeditor-wikitextconvert-title": "تحويل التنسيق إلى نص الويكي؟",
-	"visualeditor-wikitextconvert-message": "يحتوي المحتوى الملصق الخاص بك على تنسيق، هل يجب تحويله إلى نص الويكي، أم إدراجه كنص عادي؟",
+	"visualeditor-wikitextconvert-message": "لقد قمت بلصق المحتوى بتنسيق غني. هل ترغب في تحويل هذا التنسيق إلى نص ويكي؟",
 	"visualeditor-wikitextconvert-convert": "تحويل إلى نص الويكي"
 }
