@@ -30,7 +30,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	this.initializeParameterList();
-	this.toggleFilters();
+	this.toggleFilters( !this.transclusionModel.isSingleTemplate() );
 };
 
 /* Inheritance */
@@ -177,7 +177,10 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
 
 	// All parameters known via the spec already have a checkbox
 	var item = this.parameterList.findItemFromData( paramName );
-	if ( !item ) {
+	if ( item ) {
+		// Reset the "hide unused" filter for this field, it's going to be used
+		item.toggle( true );
+	} else {
 		item = this.createCheckbox( paramName );
 		this.parameterList.addItems( [ item ], this.findCanonicalPosition( paramName ) );
 
@@ -247,8 +250,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
 
 /**
  * @private
+ * @param {boolean} [initiallyHideUnused=false]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( initiallyHideUnused ) {
 	var numParams = this.parameterList && this.parameterList.getItemCount(),
 		visible = numParams >= this.constructor.static.searchableParameterCount;
 	if ( this.searchWidget ) {
@@ -256,6 +260,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () 
 		this.toggleUnusedWidget.toggle( visible );
 	} else if ( visible ) {
 		this.initializeFilters();
+		if ( initiallyHideUnused === true ) {
+			this.toggleUnusedWidget.toggleUnusedParameters( false );
+		}
 	}
 };
 
@@ -338,10 +345,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 		}
 	} );
 
+	this.toggleUnusedWidget.toggle( !query );
 	this.infoWidget.toggle( nothingFound );
 	self.emit( 'filterParametersById', visibility );
-
-	this.toggleUnusedWidget.toggle( !query );
 };
 
 /**

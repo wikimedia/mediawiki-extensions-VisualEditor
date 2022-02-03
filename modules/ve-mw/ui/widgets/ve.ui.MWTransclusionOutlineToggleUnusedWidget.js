@@ -38,18 +38,33 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineToggleUnusedWidget, OO.ui.ButtonWidg
 /**
  * Handles clicks on the button by mouse or keyboard interaction.
  *
+ * @private
  * @fires toggleUnusedFields
  */
 ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.onClick = function () {
-	this.showUnusedFields = !this.showUnusedFields;
-	this.setLabel( ve.msg( this.showUnusedFields ? 'visualeditor-dialog-transclusion-filter-hide-unused' :
-		'visualeditor-dialog-transclusion-filter-show-all' ) );
-	this.emit( 'toggleUnusedFields', this.showUnusedFields );
+	this.toggleUnusedParameters();
+};
+
+/**
+ * @param {boolean} [showUnused]
+ * @fires toggleUnusedFields
+ */
+ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters = function ( showUnused ) {
+	showUnused = showUnused === undefined ? !this.showUnusedFields : showUnused;
+	if ( showUnused !== this.showUnusedFields ) {
+		this.showUnusedFields = showUnused;
+		this.setLabel( ve.msg( this.showUnusedFields ?
+			'visualeditor-dialog-transclusion-filter-hide-unused' :
+			'visualeditor-dialog-transclusion-filter-show-all'
+		) );
+		this.emit( 'toggleUnusedFields', this.showUnusedFields );
+	}
 };
 
 /**
  * Handles toggling the visibility of the button.
  *
+ * @private
  * @param {boolean} visible
  * @fires toggleUnusedFields
  */
