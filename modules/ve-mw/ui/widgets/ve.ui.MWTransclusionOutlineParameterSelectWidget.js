@@ -104,6 +104,15 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.markParameterAsUnused
 };
 
 /**
+ * @return {boolean}
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.allParametersUsed = function () {
+	return this.items.every( function ( item ) {
+		return item.isSelected();
+	} );
+};
+
+/**
  * @private
  * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
  * @param {boolean} value
