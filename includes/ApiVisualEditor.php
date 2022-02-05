@@ -150,7 +150,6 @@ class ApiVisualEditor extends ApiBase {
 		if ( !$title->canExist() ) {
 			$this->dieWithError( 'apierror-pagecannotexist' );
 		}
-		'@phan-var Title $title';
 
 		$parserParams = [];
 		if ( isset( $params['oldid'] ) ) {
