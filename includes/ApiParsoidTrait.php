@@ -314,6 +314,7 @@ trait ApiParsoidTrait {
 	 * @param string|null $code See ApiErrorFormatter::addError()
 	 * @param array|null $data See ApiErrorFormatter::addError()
 	 * @param int|null $httpCode HTTP error code to use
+	 * @return never
 	 */
 	abstract public function dieWithError( $msg, $code = null, $data = null, $httpCode = null );
 
