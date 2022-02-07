@@ -146,7 +146,13 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 		// The following classes are used here:
 		// * mw-content-ltr
 		// * mw-content-rtl
-		diffElement.$document.addClass( 'mw-body-content mw-parser-output mw-content-' + visualDiff.newDoc.getDir() );
+		diffElement.$document.addClass( [
+			'mw-body-content',
+			'mw-parser-output',
+			// HACK: T287733
+			mw.config.get( 'skin' ) === 'vector' || mw.config.get( 'skin' ) === 'vector-2022' ? 'vector-body' : null,
+			'mw-content-' + visualDiff.newDoc.getDir()
+		] );
 		ve.targetLinksToNewWindow( diffElement.$document[ 0 ] );
 		// Run styles so links render with their appropriate classes
 		ve.init.platform.linkCache.styleParsoidElements( diffElement.$document, baseDoc );
@@ -699,7 +705,12 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		padded: true
 	} );
 	this.$previewHeading = $( '<h1>' ).addClass( 'firstHeading' );
-	this.$previewViewer = $( '<div>' ).addClass( 'mw-body-content mw-parser-output' );
+	this.$previewViewer = $( '<div>' ).addClass( [
+		'mw-body-content',
+		'mw-parser-output',
+		// HACK: T287733
+		mw.config.get( 'skin' ) === 'vector' || mw.config.get( 'skin' ) === 'vector-2022' ? 'vector-body' : null
+	] );
 	this.previewPanel.$element
 		// Make focusable for keyboard accessible scrolling
 		.prop( 'tabIndex', 0 )
