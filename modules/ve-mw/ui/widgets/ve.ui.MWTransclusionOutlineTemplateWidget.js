@@ -11,6 +11,8 @@
  * @constructor
  * @param {ve.dm.MWTemplateModel} template
  * @param {boolean} [replacesPlaceholder]
+ * @property {ve.dm.MWTemplateModel} templateModel
+ * @property {ve.ui.MWTransclusionOutlineParameterSelectWidget} parameterList
  */
 ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template, replacesPlaceholder ) {
 	var spec = template.getSpec();
@@ -30,8 +32,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		remove: 'onParameterRemovedFromTemplateModel'
 	} );
 
-	this.initializeParameterList();
-	this.toggleFilters( !replacesPlaceholder && !this.transclusionModel.isSingleTemplate() );
+	var initiallyHideUnused = !replacesPlaceholder && !this.transclusionModel.isSingleTemplate();
+	this.initializeParameterList( initiallyHideUnused );
+	this.toggleFilters( initiallyHideUnused );
 };
 
 /* Inheritance */
@@ -69,23 +72,14 @@ ve.ui.MWTransclusionOutlineTemplateWidget.static.searchableParameterCount = 4;
 
 /**
  * @private
+ * @param {boolean} [initiallyHideUnused=false]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = function () {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = function ( initiallyHideUnused ) {
 	if ( this.parameterList ) {
 		return;
 	}
 
-	var template = this.templateModel,
-		spec = template.getSpec();
-	var parameterNames = this.templateModel
-		.getAllParametersOrdered()
-		.filter( function ( paramName ) {
-			if ( spec.isParameterDeprecated( paramName ) && !template.hasParameter( paramName ) ) {
-				return false;
-			}
-			// Don't create a checkbox for ve.ui.MWParameterPlaceholderPage
-			return paramName;
-		} );
+	var parameterNames = this.getRelevantTemplateParameters( initiallyHideUnused ? 'used' : 'all' );
 	if ( !parameterNames.length ) {
 		return;
 	}
@@ -96,7 +90,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = fu
 
 	this.parameterList = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
 		items: parameterNames.map( this.createCheckbox.bind( this ) ),
-		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', spec.getLabel() ),
+		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', this.templateModel.getSpec().getLabel() ),
 		$ariaDescribedBy: $parametersAriaDescription
 	} ).connect( this, {
 		choose: 'onTemplateParameterChoose',
@@ -108,6 +102,57 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = fu
 		$parametersAriaDescription,
 		this.parameterList.$element
 	);
+};
+
+/**
+ * @private
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createAllParameterCheckboxes = function () {
+	if ( !this.parameterListComplete ) {
+		var self = this;
+		this.initializeParameterList();
+		this.getRelevantTemplateParameters().forEach( function ( paramName ) {
+			if ( !self.parameterList.findItemFromData( paramName ) ) {
+				self.parameterList.addItems(
+					[ self.createCheckbox( paramName ) ],
+					self.findCanonicalPosition( paramName )
+				);
+			}
+		} );
+		this.parameterListComplete = true;
+	}
+};
+
+/**
+ * @private
+ * @param {string} [filter='all'] Either "used", "unused", or "all"
+ * @return {string[]}
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.getRelevantTemplateParameters = function ( filter ) {
+	var parameterNames,
+		template = this.templateModel;
+
+	switch ( filter ) {
+		case 'used':
+			parameterNames = template.getOrderedParameterNames();
+			break;
+		case 'unused':
+			parameterNames = template.getAllParametersOrdered().filter( function ( name ) {
+				return !( name in template.getParameters() );
+			} );
+			break;
+		default:
+			parameterNames = template.getAllParametersOrdered();
+	}
+
+	return parameterNames.filter( function ( name ) {
+		// Don't offer deprecated parameters, unless they are already used
+		if ( template.getSpec().isParameterDeprecated( name ) && !template.hasParameter( name ) ) {
+			return false;
+		}
+		// Never create a checkbox for a ve.ui.MWParameterPlaceholderPage placeholder
+		return !!name;
+	} );
 };
 
 /**
@@ -248,7 +293,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelection
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.updateUnusedParameterToggleState = function () {
 	if ( this.toggleUnusedWidget ) {
-		this.toggleUnusedWidget.setDisabled( this.parameterList.allParametersUsed() );
+		this.toggleUnusedWidget.setDisabled( !this.getRelevantTemplateParameters( 'unused' ).length );
 	}
 };
 
@@ -265,7 +310,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
  * @param {boolean} [initiallyHideUnused=false]
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( initiallyHideUnused ) {
-	var numParams = this.parameterList && this.parameterList.getItemCount(),
+	var numParams = this.getRelevantTemplateParameters().length,
 		visible = numParams >= this.constructor.static.searchableParameterCount;
 	if ( this.searchWidget ) {
 		this.searchWidget.toggle( visible );
@@ -273,7 +318,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( i
 	} else if ( visible ) {
 		this.initializeFilters();
 		this.updateUnusedParameterToggleState();
-		if ( initiallyHideUnused === true ) {
+		if ( initiallyHideUnused ) {
 			this.toggleUnusedWidget.toggleUnusedParameters( false );
 		}
 	}
@@ -332,6 +377,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 		nothingFound = true;
 
 	query = query.trim().toLowerCase();
+	this.createAllParameterCheckboxes();
 
 	// Note: We can't really cache this because the list of know parameters can change any time
 	this.parameterList.items.forEach( function ( item ) {
@@ -367,7 +413,12 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
  * @param {boolean} visibility
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = function ( visibility ) {
-	this.parameterList.items.forEach( function ( item ) {
-		item.toggle( visibility || item.isSelected() );
-	} );
+	if ( visibility ) {
+		this.createAllParameterCheckboxes();
+	}
+	if ( this.parameterList ) {
+		this.parameterList.items.forEach( function ( item ) {
+			item.toggle( visibility || item.isSelected() );
+		} );
+	}
 };

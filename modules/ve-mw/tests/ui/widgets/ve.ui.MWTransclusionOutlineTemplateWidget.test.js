@@ -27,6 +27,8 @@ QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 			target: { wt: '' },
 			params: { b: {}, e: {} }
 		} );
+	// Skip .addPart(), the TemplateData API, specCache and everything related
+	transclusion.parts.push( template );
 	template.getSpec().setTemplateData( {
 		params: {
 			e: { deprecated: true },
@@ -45,7 +47,7 @@ QUnit.test( 'insertCheckboxAtCanonicalPosition()', ( assert ) => {
 	let insertAt = widget.findCanonicalPosition( 'h' );
 	// Most minimal mock instead of an actual ve.ui.MWTransclusionOutlineParameterWidget
 	widget.parameterList.addItems( [ new OO.ui.Widget( { data: 'h' } ) ], insertAt );
-	// Deprecated param appears at it's canonical position via paramOrder
+	// Deprecated param appears at its canonical position via paramOrder
 	assert.strictEqual( insertAt, 1 );
 	assertOrder( widget, [ 'g', 'h', 'e', 'b' ] );
 
