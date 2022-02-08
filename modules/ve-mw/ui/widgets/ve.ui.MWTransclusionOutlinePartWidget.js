@@ -93,28 +93,12 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 
 /**
  * @private
- * @param {number} key Note that some keys only make it here when Ctrl or Ctrl+Shift is pressed
+ * @param {number} key
  * @fires transclusionPartSoftSelected
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderKeyPressed = function ( key ) {
-	switch ( key ) {
-		case OO.ui.Keys.SPACE:
-			this.emit( 'transclusionPartSoftSelected', this.getData() );
-			break;
-		case OO.ui.Keys.UP:
-		case OO.ui.Keys.DOWN:
-			// Modelled after {@see ve.ui.MWTransclusionDialog.onOutlineControlsMove}
-			var transclusion = this.part.getTransclusion(),
-				parts = transclusion.getParts(),
-				offset = key === OO.ui.Keys.UP ? -1 : 1,
-				newIndex = parts.indexOf( this.part ) + offset;
-			if ( newIndex >= 0 && newIndex < parts.length ) {
-				transclusion.addPart( this.part, newIndex );
-			}
-			break;
-		case OO.ui.Keys.DELETE:
-			this.part.remove();
-			break;
+	if ( key === OO.ui.Keys.SPACE ) {
+		this.emit( 'transclusionPartSoftSelected', this.getData() );
 	}
 };
 

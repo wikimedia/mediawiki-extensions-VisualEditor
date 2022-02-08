@@ -78,22 +78,6 @@ ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
 		// The default behavior of pressing space is to scroll down
 		e.preventDefault();
 		return;
-	} else if ( ( e.which === OO.ui.Keys.UP || e.which === OO.ui.Keys.DOWN ) &&
-		withMetaKey && e.shiftKey &&
-		!e.altKey
-	) {
-		this.emit( 'keyPressed', e.which );
-		// TODO: Do we need e.preventDefault() and/or e.stopPropagation() here?
-		return;
-	} else if ( ( e.which === OO.ui.Keys.DELETE || ( isMac && e.which === OO.ui.Keys.BACKSPACE ) ) &&
-		withMetaKey &&
-		!e.shiftKey && !e.altKey
-	) {
-		this.emit( 'keyPressed', OO.ui.Keys.DELETE );
-		// To not trigger the "clear cache" feature in Chrome we must do both
-		e.preventDefault();
-		e.stopPropagation();
-		return;
 	}
 
 	return OO.ui.mixin.ButtonElement.prototype.onKeyDown.call( this, e );
