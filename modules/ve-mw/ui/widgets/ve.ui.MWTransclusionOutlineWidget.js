@@ -127,6 +127,17 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 	}
 };
 
+ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function () {
+	for ( var id in this.partWidgets ) {
+		var partWidget = this.partWidgets[ id ];
+		if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget &&
+			partWidget.toggleUnusedWidget
+		) {
+			partWidget.toggleUnusedWidget.toggleUnusedParameters( false );
+		}
+	}
+};
+
 /**
  * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
  *

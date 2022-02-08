@@ -21,6 +21,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @property {ve.dm.MWTransclusionModel|null} transclusionModel
  */
 ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	// Parent constructor
@@ -570,6 +571,10 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						dialog.bookletLayout.outlineSelectWidget.$element
 					);
 					dialog.bookletLayout.outlineSelectWidget.toggle( false );
+
+					if ( !dialog.transclusionModel.isSingleTemplate() ) {
+						dialog.pocSidebar.hideAllUnusedParameters();
+					}
 				}
 
 				dialog.bookletLayout.autoFocus = true;
