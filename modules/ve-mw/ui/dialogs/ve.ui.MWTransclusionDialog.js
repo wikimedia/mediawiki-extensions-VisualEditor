@@ -94,9 +94,13 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
 		return;
 	}
 
-	var index = this.transclusionModel.getParts().indexOf( part );
+	var newPlace = this.transclusionModel.getParts().indexOf( part ) + places;
+	if ( newPlace < 0 || newPlace >= this.transclusionModel.getParts().length ) {
+		return;
+	}
+
 	// Move part to new location, and if dialog is loaded switch to new part page
-	var promise = this.transclusionModel.addPart( part, index + places );
+	var promise = this.transclusionModel.addPart( part, newPlace );
 	if ( this.loaded && !this.preventReselection ) {
 		promise.done( this.focusPart.bind( this, part.getId() ) );
 	}
@@ -220,13 +224,17 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 		addParameter: meta + 'shift+d',
 		moveUp: meta + 'shift+up',
 		moveDown: meta + 'shift+down',
-		remove: meta + 'del'
+		remove: meta + 'delete'
 	};
 
 	this.hotkeyTriggers = {};
 	this.hotkeyTriggers[ hotkeys.addTemplate ] = this.addTemplatePlaceholder.bind( this );
 	this.hotkeyTriggers[ hotkeys.addWikitext ] = this.addContent.bind( this );
 	this.hotkeyTriggers[ hotkeys.addParameter ] = this.addParameter.bind( this );
+
+	this.hotkeyTriggers[ hotkeys.moveUp ] = this.onOutlineControlsMove.bind( this, -1 );
+	this.hotkeyTriggers[ hotkeys.moveDown ] = this.onOutlineControlsMove.bind( this, 1 );
+	this.hotkeyTriggers[ hotkeys.remove ] = this.onOutlineControlsRemove.bind( this );
 
 	this.addHotkeyToTitle( this.addTemplateButton, hotkeys.addTemplate );
 	this.addHotkeyToTitle( this.addContentButton, hotkeys.addWikitext );
