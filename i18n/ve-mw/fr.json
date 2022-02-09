@@ -242,7 +242,7 @@
 	"visualeditor-dialog-transclusion-confirmation-reject": "Continuer à éditer",
 	"visualeditor-dialog-transclusion-content": "Contenu",
 	"visualeditor-dialog-transclusion-contextitem-description": "Généré depuis : $1",
-	"visualeditor-dialog-transclusion-contextitem-loading": "Chargement…",
+	"visualeditor-dialog-transclusion-contextitem-loading": "Chargement en cours...",
 	"visualeditor-dialog-transclusion-expand-options": "Afficher les options",
 	"visualeditor-dialog-transclusion-filter-hide-unused": "Masquer les champs inutilisés",
 	"visualeditor-dialog-transclusion-filter-no-match": "Aucune correspondance trouvée",
