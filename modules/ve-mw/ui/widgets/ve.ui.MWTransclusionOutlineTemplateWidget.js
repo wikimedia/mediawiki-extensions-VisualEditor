@@ -238,6 +238,17 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelection
 		param = new ve.dm.MWParameterModel( this.templateModel, paramName );
 		this.templateModel.addParameter( param );
 	}
+
+	this.updateUnusedParameterToggleState();
+};
+
+/**
+ * @private
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.updateUnusedParameterToggleState = function () {
+	if ( this.toggleUnusedWidget ) {
+		this.toggleUnusedWidget.setDisabled( this.parameterList.allParametersUsed() );
+	}
 };
 
 /**
@@ -260,6 +271,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( i
 		this.toggleUnusedWidget.toggle( visible );
 	} else if ( visible ) {
 		this.initializeFilters();
+		this.updateUnusedParameterToggleState();
 		if ( initiallyHideUnused === true ) {
 			this.toggleUnusedWidget.toggleUnusedParameters( false );
 		}
