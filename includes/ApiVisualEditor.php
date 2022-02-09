@@ -448,10 +448,11 @@ class ApiVisualEditor extends ApiBase {
 					}
 					if ( !$targetUserExists && !$this->userNameUtils->isIP( $targetUsername ) ) {
 						// User does not exist
-						$notices['userpage-userdoesnotexist'] = "<div class=\"mw-userpage-userdoesnotexist error\">\n" .
+						$notices['userpage-userdoesnotexist'] = Html::warningBox(
 							$this->msg( 'userpage-userdoesnotexist', wfEscapeWikiText( $targetUsername ) )
-								->parse() .
-							"\n</div>";
+								->parse(),
+							'mw-userpage-userdoesnotexist'
+						);
 					} elseif (
 						$block !== null &&
 						$block->getType() != DatabaseBlock::TYPE_AUTO &&
