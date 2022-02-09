@@ -52,7 +52,6 @@
 				.addClass( 've-init-mw-desktopArticleTarget-loading-overlay' )
 				.append( init.progressBar.$element );
 		}
-		// eslint-disable-next-line no-use-before-define
 		$( document ).on( 'keydown', onDocumentKeyDown );
 
 		init.$loading.toggleClass( 've-init-mw-desktopArticleTarget-loading-overlay-source', mode === 'source' );
@@ -81,7 +80,6 @@
 	function clearLoading() {
 		init.progressBar.clearLoading();
 		isLoading = false;
-		// eslint-disable-next-line no-use-before-define
 		$( document ).off( 'keydown', onDocumentKeyDown );
 		$( 'html' ).removeClass( 've-loading' );
 		if ( init.$loading ) {
@@ -89,11 +87,9 @@
 		}
 		if ( tempWikitextEditor ) {
 			if ( ve.init && ve.init.target ) {
-				// eslint-disable-next-line no-use-before-define
 				ve.init.target.toolbarSetupDeferred.then( teardownTempWikitextEditor );
 			} else {
 				// Target didn't get created. Teardown editor anyway.
-				// eslint-disable-next-line no-use-before-define
 				teardownTempWikitextEditor();
 			}
 		}
