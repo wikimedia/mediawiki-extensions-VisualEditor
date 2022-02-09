@@ -224,7 +224,8 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 		addParameter: meta + 'shift+d',
 		moveUp: meta + 'shift+up',
 		moveDown: meta + 'shift+down',
-		remove: meta + 'delete'
+		remove: meta + 'delete',
+		removeBackspace: meta + 'backspace'
 	};
 
 	this.hotkeyTriggers = {};
@@ -235,6 +236,7 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 	this.hotkeyTriggers[ hotkeys.moveUp ] = this.onOutlineControlsMove.bind( this, -1 );
 	this.hotkeyTriggers[ hotkeys.moveDown ] = this.onOutlineControlsMove.bind( this, 1 );
 	this.hotkeyTriggers[ hotkeys.remove ] = this.onOutlineControlsRemove.bind( this );
+	this.hotkeyTriggers[ hotkeys.removeBackspace ] = this.onOutlineControlsRemove.bind( this );
 
 	this.addHotkeyToTitle( this.addTemplateButton, hotkeys.addTemplate );
 	this.addHotkeyToTitle( this.addContentButton, hotkeys.addWikitext );
