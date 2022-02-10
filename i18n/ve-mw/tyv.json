@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Agilight",
+			"Riverman",
 			"Көпек",
 			"Монгуш Салим"
 		]
@@ -16,6 +17,7 @@
 	"visualeditor-ca-ve-edit-section": "Визуалдыг эдикчи",
 	"visualeditor-categories-tool": "Аңгылалдар",
 	"visualeditor-desc": "MediaWiki-ге херек Визуалдыг эдикчи",
+	"visualeditor-descriptionpagelink": "Project:ВизуалдыгЭдикчи",
 	"visualeditor-dialog-media-goback": "Дедир",
 	"visualeditor-dialog-media-info-artist": "$1 чүдүрген",
 	"visualeditor-dialog-media-info-audiofile": "Аадың файл",
