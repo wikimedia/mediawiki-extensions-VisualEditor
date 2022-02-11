@@ -6,12 +6,8 @@
 	};
 
 	QUnit.module( 've.ui.MWTemplateTitleInputWidget', QUnit.newMwEnvironment( {
-		beforeEach: function () {
-			enableCirrusSearchLookup( false );
-		},
-		afterEach() {
-			enableCirrusSearchLookup( false );
-		}
+		beforeEach: enableCirrusSearchLookup.bind( this, false ),
+		afterEach: enableCirrusSearchLookup.bind( this, false )
 	} ) );
 
 	QUnit.test( 'default prefixsearch', ( assert ) => {
