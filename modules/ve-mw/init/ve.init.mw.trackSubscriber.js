@@ -42,6 +42,25 @@
 		);
 	}
 
+	function addABTestData( data ) {
+		// DiscussionTools New Topic A/B test for logged out users
+		if ( !mw.config.get( 'wgDiscussionToolsABTest' ) ) {
+			return;
+		}
+		if ( mw.user.isAnon() ) {
+			var tokenData = mw.storage.getObject( 'DTNewTopicABToken' );
+			if ( !tokenData ) {
+				return;
+			}
+			var anonid = parseInt( tokenData.token.slice( 0, 8 ), 16 );
+			data.bucket = anonid % 2 === 0 ? 'test' : 'control';
+			// eslint-disable-next-line camelcase
+			data.anonymous_user_id = tokenData.token;
+		} else if ( mw.user.options.get( 'discussiontools-abtest2' ) ) {
+			data.bucket = mw.user.options.get( 'discussiontools-abtest2' );
+		}
+	}
+
 	function computeDuration( action, event, timeStamp ) {
 		if ( event.timing !== undefined ) {
 			return event.timing;
@@ -192,14 +211,9 @@
 		} else {
 			timing[ action ] = timeStamp;
 		}
-
-		if ( mw.config.get( 'wgDiscussionToolsABTestBucket' ) ) {
-			data.bucket = mw.config.get( 'wgDiscussionToolsABTestBucket' );
-			if ( mw.config.get( 'wgDiscussionToolsAnonymousUserId' ) ) {
-				data.anonymous_user_id = mw.config.get( 'wgDiscussionToolsAnonymousUserId' );
-			}
-		}
 		/* eslint-enable camelcase */
+
+		addABTestData( event );
 
 		if ( trackdebug ) {
 			log( topic, duration + 'ms', event );
@@ -254,14 +268,9 @@
 			integration: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'integrationType' ) || 'page',
 			platform: ve.getProp( ve, 'init', 'target', 'constructor', 'static', 'platformType' ) || 'other'
 		};
-
-		if ( mw.config.get( 'wgDiscussionToolsABTestBucket' ) ) {
-			data.bucket = mw.config.get( 'wgDiscussionToolsABTestBucket' );
-			if ( mw.config.get( 'wgDiscussionToolsAnonymousUserId' ) ) {
-				data.anonymous_user_id = mw.config.get( 'wgDiscussionToolsAnonymousUserId' );
-			}
-		}
 		/* eslint-enable camelcase */
+
+		addABTestData( data );
 
 		if ( trackdebug ) {
 			log( topic, event );
