@@ -291,6 +291,18 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
+	// Set edit notices, will be shown after welcome dialog.
+	// Make sure notices actually exists, because this might be a mode-switch and
+	// we've already removed it.
+	var editNotices = this.getEditNotices(),
+		actionTools = this.actionsToolbar.tools;
+	if ( editNotices && editNotices.length && actionTools.notices ) {
+		actionTools.notices.setNotices( editNotices );
+	} else if ( actionTools.notices ) {
+		actionTools.notices.destroy();
+		actionTools.notices = null;
+	}
+
 	// Move the toolbar to top of target, before heading etc.
 	// Avoid re-attaching as it breaks CSS animations
 	if ( !this.toolbar.$element.parent().is( this.$element ) ) {
@@ -750,9 +762,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		return;
 	}
 
-	var editNotices = this.getEditNotices(),
-		actionTools = this.actionsToolbar.tools,
-		surface = this.getSurface();
+	var surface = this.getSurface();
 
 	this.activating = false;
 
@@ -783,16 +793,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		this.setFakeRedirectInterface( redirectMetaItems[ 0 ].getAttribute( 'title' ) );
 	} else {
 		this.setFakeRedirectInterface( null );
-	}
-
-	// Set edit notices, will be shown after meta dialog.
-	// Make sure notices actually exists, because this might be a mode-switch and
-	// we've already removed it.
-	if ( editNotices.length && actionTools.notices ) {
-		actionTools.notices.setNotices( editNotices );
-	} else if ( actionTools.notices ) {
-		actionTools.notices.destroy();
-		actionTools.notices = null;
 	}
 
 	this.setupUnloadHandlers();
