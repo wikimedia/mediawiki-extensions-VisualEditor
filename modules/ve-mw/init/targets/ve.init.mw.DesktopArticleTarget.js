@@ -299,6 +299,10 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 			.css( 'height', '0' )
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar' );
 		this.$element.prepend( this.toolbar.$element );
+
+		// Calculate if the 'oo-ui-toolbar-narrow' class is needed (OOUI does it too late for our
+		// toolbar because the methods are called in the wrong order, see T92282).
+		this.toolbar.onWindowResize();
 	}
 };
 
