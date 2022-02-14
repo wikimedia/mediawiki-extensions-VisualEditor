@@ -1706,7 +1706,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 /**
  * Getting the message for the toolbar / save dialog save / publish button
  *
- * @param {boolean} [startProcess] Use version of the label for starting that process, i.e. with an ellipsis after it
+ * @param {boolean} [startProcess=false] Use version of the label for starting that process, i.e. with an ellipsis after it
  * @return {Function|string} An i18n message or resolveable function
  */
 ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess ) {
@@ -2051,7 +2051,7 @@ ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function ( conte
 /**
  * Switches to the wikitext editor, either keeping (default) or discarding changes.
  *
- * @param {boolean} [modified] Whether there were any changes at all.
+ * @param {boolean} [modified=false] Whether there were any changes at all.
  */
 ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
 	var target = this;
@@ -2115,7 +2115,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
 /**
  * Switches to the fallback wikitext editor, either keeping (default) or discarding changes.
  *
- * @param {boolean} [modified] Whether there were any changes at all.
+ * @param {boolean} [modified=false] Whether there were any changes at all.
  */
 ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {};
 
@@ -2165,7 +2165,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
  *
  * @param {string|null} section Section to switch to: a number, 'T-'-prefixed number, 'new'
  *   or null (whole document)
- * @param {boolean} noConfirm Switch without prompting (changes will be lost either way)
+ * @param {boolean} [noConfirm=false] Switch without prompting (changes will be lost either way)
  */
 ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section, noConfirm ) {
 	var target = this;

@@ -347,7 +347,7 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  * Swap state in the save dialog.
  *
  * @param {string} panel One of 'save', 'review' or 'conflict'
- * @param {boolean} [noFocus] Don't attempt to focus anything (e.g. while setting up)
+ * @param {boolean} [noFocus=false] Don't attempt to focus anything (e.g. while setting up)
  * @throws {Error} Unknown saveDialog panel
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
@@ -855,11 +855,11 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 /**
  * @inheritdoc
  * @param {Object} [data]
- * @param {boolean} [data.canReview] User can review changes
- * @param {boolean} [data.canPreview] User can preview changes
+ * @param {boolean} [data.canReview=false] User can review changes
+ * @param {boolean} [data.canPreview=false] User can preview changes
  * @param {string} [data.copyrightWarning] HTML to display as the copyright message
- * @param {OO.ui.FieldLayout[]} [data.checkboxFields] Checkbox fields
- * @param {Object} [data.checkboxesByName] Checkbox widgets, indexed by name
+ * @param {OO.ui.FieldLayout[]} [data.checkboxFields=[]] Checkbox fields
+ * @param {Object} [data.checkboxesByName={}] Checkbox widgets, indexed by name
  * @param {string} [data.sectionTitle] Section title, if in new section mode
  * @param {string} [data.editSummary] Edit summary
  * @param {string} [data.initialPanel='save'] Initial panel to show

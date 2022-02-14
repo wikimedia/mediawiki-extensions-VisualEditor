@@ -30,7 +30,7 @@ mw.libs.ve.resolveUrl = function ( url, base ) {
  * see https://phabricator.wikimedia.org/T137847 .
  *
  * @param {string} s String to decode
- * @param {boolean} [preserveUnderscores] Don't convert underscores to spaces
+ * @param {boolean} [preserveUnderscores=false] Don't convert underscores to spaces
  * @return {string} Decoded string, or original string if decodeURIComponent failed
  */
 mw.libs.ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscores ) {

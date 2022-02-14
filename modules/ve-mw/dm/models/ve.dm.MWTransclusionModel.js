@@ -70,7 +70,7 @@
 	 * should ensure the surface is not accessible while the type is being evaluated.
 	 *
 	 * @param {ve.dm.SurfaceFragment} surfaceFragment Surface fragment after which to insert.
-	 * @param {boolean|undefined} [forceType] Force the type to 'inline' or 'block'. If not
+	 * @param {string} [forceType] Force the type to 'inline' or 'block'. If not
 	 *   specified it will be evaluated asynchronously.
 	 * @return {jQuery.Promise} Promise which resolves when the node has been inserted. If
 	 *   forceType was specified this will be instant.

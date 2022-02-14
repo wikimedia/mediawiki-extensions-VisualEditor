@@ -838,7 +838,7 @@ ve.ui.MWGalleryDialog.prototype.onShowSearchPanelButtonClick = function () {
 /**
  * Toggle the search panel (and the edit panel, the opposite way)
  *
- * @param {boolean} visible The search panel is visible
+ * @param {boolean} [visible] The search panel is visible
  */
 ve.ui.MWGalleryDialog.prototype.toggleSearchPanel = function ( visible ) {
 	visible = visible !== undefined ? visible : !this.searchPanelVisible;
