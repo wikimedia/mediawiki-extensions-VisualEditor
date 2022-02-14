@@ -243,34 +243,12 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
 	if ( !wasSetup ) {
-		// eslint-disable-next-line no-jquery/no-class-state
-		if ( $( 'html' ).hasClass( 've-tempSourceEditing' ) ) {
-			toolbar.$element
-				.css( 'height', '' )
-				.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
-				.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
-			this.toolbarSetupDeferred.resolve();
-		} else {
-			setTimeout( function () {
-				var isFloating = toolbar.isFloating();
-				toolbar.$element
-					.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
-				// For unfloated toolbar, transition the container hide to smoothly
-				// push the content down. Don't do this if the toolbar is floating to avoid movement.
-				if ( !isFloating ) {
-					toolbar.$element.css( 'height', toolbar.$bar[ 0 ].offsetHeight );
-				}
-				setTimeout( function () {
-					// Clear to allow growth during use and when resizing window
-					toolbar.$element
-						.addClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
-					if ( !isFloating ) {
-						toolbar.$element.css( 'height', '' );
-					}
-					target.toolbarSetupDeferred.resolve();
-				}, 250 );
-			} );
+		toolbar.$element
+			.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
+		if ( !toolbar.isFloating() ) {
+			toolbar.$element.css( 'height', '' );
 		}
+		this.toolbarSetupDeferred.resolve();
 
 		this.toolbarSetupDeferred.done( function () {
 			var newSurface = target.getSurface();
@@ -453,16 +431,6 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.changeDocumentTitle();
 		this.transformPage();
 		this.setupLocalNoticeMessages();
-
-		// Create dummy surface to show toolbar while loading
-		// Call ve.init.Target directly to avoid firing surfaceReady
-		var surface = ve.init.Target.prototype.addSurface.call( this, new ve.dm.Document( [
-			{ type: 'paragraph' }, { type: '/paragraph' },
-			{ type: 'internalList' }, { type: '/internalList' }
-		] ) );
-		surface.setReadOnly( true );
-		// setSurface creates dummy toolbar
-		this.setSurface( surface );
 
 		this.load( dataPromise );
 	}
@@ -889,8 +857,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
 			// also check they didn't fire after this event, as would be the case if
 			// they were bound to the document.
 			if ( !e.isPropagationStopped() ) {
-				var toolbarDialogs = target.surface.getToolbarDialogs();
-				if ( toolbarDialogs.getCurrentWindow() ) {
+				var toolbarDialogs = target.surface && target.surface.getToolbarDialogs();
+				if ( toolbarDialogs && toolbarDialogs.getCurrentWindow() ) {
 					toolbarDialogs.getCurrentWindow().close();
 				} else {
 					target.tryTeardown( true, 'navigate-read' );
@@ -1096,12 +1064,13 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 		return deferred.resolve().promise();
 	}
 
-	this.toolbar.$element.css( 'height', this.toolbar.$bar[ 0 ].offsetHeight );
+	this.toolbar.$element
+		.addClass( 've-init-mw-desktopArticleTarget-toolbar-preclose' )
+		.css( 'height', this.toolbar.$bar[ 0 ].offsetHeight );
 	setTimeout( function () {
 		target.toolbar.$element
 			.css( 'height', '0' )
-			.removeClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
-			.removeClass( 've-init-mw-desktopArticleTarget-toolbar-opened' );
+			.addClass( 've-init-mw-desktopArticleTarget-toolbar-close' );
 		setTimeout( function () {
 			// Parent method
 			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( target );
@@ -1151,7 +1120,11 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 
 	// Move all native content inside the target
 	// Exclude notification area to work around T143837
-	this.$originalContent.append( this.$element.siblings().not( '.mw-notification-area' ) );
+	this.$originalContent.append(
+		this.$element.siblings()
+			.not( '.mw-notification-area' )
+			.not( '.ve-init-mw-desktopArticleTarget-toolbarPlaceholder' )
+	);
 
 	// To preserve event handlers (e.g. HotCat) if editing is cancelled, detach the original container
 	// and replace it with a clone during editing

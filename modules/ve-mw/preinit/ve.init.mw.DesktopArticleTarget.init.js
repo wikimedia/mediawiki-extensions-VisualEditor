@@ -25,7 +25,9 @@
 	var conf, tabMessages, uri, pageExists, viewUri, veEditUri, veEditSourceUri,
 		init, targetPromise,
 		tabPreference, initialWikitext, oldId,
-		isLoading, tempWikitextEditor, tempWikitextEditorData, $toolbarPlaceholder,
+		isLoading, tempWikitextEditor, tempWikitextEditorData,
+		$toolbarPlaceholder, $toolbarPlaceholderBar,
+		contentTop, wasFloating,
 		configData = require( './data.json' ),
 		veactionToMode = {
 			edit: 'visual',
@@ -38,7 +40,7 @@
 		welcomeDialogDisabled = false,
 		educationPopupsDisabled = false;
 
-	function showLoading( mode ) {
+	function showLoading( /* mode */ ) {
 		if ( isLoading ) {
 			return;
 		}
@@ -54,23 +56,7 @@
 		}
 		$( document ).on( 'keydown', onDocumentKeyDown );
 
-		init.$loading.toggleClass( 've-init-mw-desktopArticleTarget-loading-overlay-source', mode === 'source' );
-		init.$loading.toggleClass( 've-init-mw-desktopArticleTarget-loading-overlay-visual', mode === 'visual' );
-
-		var $content = $( '#content' );
-		if ( mode === 'visual' ) {
-			init.$loading.css( {
-				top: window.innerHeight / 2,
-				width: $content.outerWidth()
-			} );
-		} else {
-			init.$loading.css( {
-				top: '',
-				width: ''
-			} );
-		}
-
-		$content.prepend( init.$loading );
+		$toolbarPlaceholderBar.append( init.$loading );
 	}
 
 	function incrementLoadingProgress() {
@@ -85,13 +71,52 @@
 		if ( init.$loading ) {
 			init.$loading.detach();
 		}
+
 		if ( tempWikitextEditor ) {
-			if ( ve.init && ve.init.target ) {
-				ve.init.target.toolbarSetupDeferred.then( teardownTempWikitextEditor );
-			} else {
-				// Target didn't get created. Teardown editor anyway.
-				teardownTempWikitextEditor();
-			}
+			teardownTempWikitextEditor();
+		}
+		hideToolbarPlaceholder();
+	}
+
+	function onWindowScroll() {
+		var scrollTop = $( window ).scrollTop();
+		var floating = scrollTop > contentTop;
+		if ( floating !== wasFloating ) {
+			var width = $( '#content' ).outerWidth();
+			$toolbarPlaceholder.toggleClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-floating', floating );
+			$toolbarPlaceholderBar.css( 'width', width );
+			wasFloating = floating;
+		}
+	}
+
+	var onWindowScrollListener = mw.util.throttle( onWindowScroll, 250 );
+
+	function showToolbarPlaceholder() {
+		if ( !$toolbarPlaceholder ) {
+			// Create an equal-height placeholder for the toolbar to avoid vertical jump
+			// when the real toolbar is ready.
+			$toolbarPlaceholder = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder' );
+			$toolbarPlaceholderBar = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-bar' );
+			$toolbarPlaceholder.append( $toolbarPlaceholderBar );
+		}
+		$( '#content' ).prepend( $toolbarPlaceholder );
+		// TODO: Would be better with ve.addPassiveEventListener
+		contentTop = $( '#content' ).offset().top;
+		wasFloating = null;
+		$( window ).on( 'scroll', onWindowScrollListener );
+		onWindowScrollListener();
+
+		// Add class for transition after first render
+		setTimeout( function () {
+			$toolbarPlaceholder.addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
+		} );
+	}
+
+	function hideToolbarPlaceholder() {
+		if ( $toolbarPlaceholder ) {
+			$( window ).off( 'scroll', onWindowScrollListener );
+			$toolbarPlaceholder.detach();
+			$toolbarPlaceholder.removeClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
 		}
 	}
 
@@ -104,16 +129,6 @@
 		}
 		tempWikitextEditor = new mw.libs.ve.MWTempWikitextEditorWidget( { value: wikitext } );
 		tempWikitextEditorData = data;
-
-		// Create an equal-height placeholder for the toolbar to avoid vertical jump
-		// when the real toolbar is ready.
-		$toolbarPlaceholder = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder' );
-		$( '#content' ).prepend( $toolbarPlaceholder );
-
-		// Add class for transition after first render
-		setTimeout( function () {
-			$toolbarPlaceholder.addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
-		} );
 
 		// Bring forward some transformations that show the editor is now ready
 		$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -159,8 +174,6 @@
 		tempWikitextEditor.$element.remove();
 		mw.libs.ve.tempWikitextEditor = tempWikitextEditor = null;
 		tempWikitextEditorData = null;
-		$toolbarPlaceholder.remove();
-		$toolbarPlaceholder = null;
 
 		$( '#mw-content-text' ).removeClass( 'oo-ui-element-hidden' );
 		$( 'html' ).removeClass( 've-tempSourceEditing' );
@@ -364,8 +377,8 @@
 		var offset = 0;
 		var enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
 		if ( enableVisualSectionEditing === true || enableVisualSectionEditing === 'desktop' ) {
-			// Heading will jump to the top of the page in visual section editing, and the toolbar will unfloat
-			offset = $( '#mw-content-text' ).offset().top - 43;
+			// Heading will jump to the top of the page in visual section editing
+			offset = $( '#mw-content-text' ).offset().top;
 		} else {
 			// Align with top of heading margin. Doesn't apply in visual section editing as the margin collapses.
 			offset = parseInt( $heading.css( 'margin-top' ) );
@@ -410,6 +423,7 @@
 	 */
 	function activateTarget( mode, section, tPromise, modified ) {
 		var dataPromise;
+
 		// Only call requestPageData early if the target object isn't there yet.
 		// If the target object is there, this is a second or subsequent load, and the
 		// internal state of the target object can influence the load request.
@@ -476,6 +490,10 @@
 			scrollToSection( section );
 		}
 
+		// Do this after section scrolling
+		showToolbarPlaceholder();
+		mw.hook( 've.activationStart' ).fire();
+
 		showLoading( mode );
 		incrementLoadingProgress();
 		active = true;
@@ -490,23 +508,25 @@
 				target.on( 'deactivate', function () {
 					active = false;
 				} );
-				// Detach the loading bar for activation so it doesn't get moved around
-				// and altered, re-attach immediately after
-				init.$loading.detach();
 				// If target was already loaded, ensure the mode is correct
 				target.setDefaultMode( mode );
-				if ( tempWikitextEditor ) {
-					syncTempWikitextEditor();
-				}
 				var activatePromise = target.activate( dataPromise );
-				$( '#content' ).prepend( init.$loading );
+
+				// toolbarSetupDeferred resolves slightly before activatePromise, use done
+				// to run in the same paint cycle as the VE toolbar being drawn
+				target.toolbarSetupDeferred.done( function () {
+					hideToolbarPlaceholder();
+				} );
+
 				return activatePromise;
 			} )
 			.then( function () {
 				if ( mode === 'visual' ) {
 					// 'mwedit.ready' has already been fired for source mode in setupTempWikitextEditor
 					ve.track( 'mwedit.ready', { mode: mode } );
-				} else if ( !tempWikitextEditor ) {
+				} else if ( tempWikitextEditor ) {
+					syncTempWikitextEditor();
+				} else {
 					// We're in source mode, but skipped the
 					// tempWikitextEditor, so make sure we do relevant
 					// tracking / hooks:
