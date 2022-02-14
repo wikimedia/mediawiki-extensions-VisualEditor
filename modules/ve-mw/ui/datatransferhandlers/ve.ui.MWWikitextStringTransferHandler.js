@@ -124,7 +124,7 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 
 	// We already know how to handle wikitext magic links, no need for the API call
 	if ( ve.dm.MWMagicLinkNode.static.validateContent( wikitext.trim() ) ) {
-		handler.resolve( [
+		this.resolve( [
 			{
 				type: 'link/mwMagic',
 				attributes: {

@@ -325,8 +325,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function
  * @fires filterParametersById
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function ( query ) {
-	var self = this,
-		template = this.templateModel,
+	var template = this.templateModel,
 		spec = this.templateModel.getSpec(),
 		visibility = {},
 		nothingFound = true;
@@ -359,7 +358,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 
 	this.toggleUnusedWidget.toggle( !query );
 	this.infoWidget.toggle( nothingFound );
-	self.emit( 'filterParametersById', visibility );
+	this.emit( 'filterParametersById', visibility );
 };
 
 /**

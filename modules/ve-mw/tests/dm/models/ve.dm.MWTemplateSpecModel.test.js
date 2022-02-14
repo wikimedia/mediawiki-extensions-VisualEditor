@@ -1,5 +1,4 @@
 {
-
 	QUnit.module( 've.dm.MWTemplateSpecModel' );
 
 	/**

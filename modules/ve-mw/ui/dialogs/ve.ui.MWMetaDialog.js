@@ -77,7 +77,6 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
  * @return {boolean} Whether settings were changed.
  */
 ve.ui.MWMetaDialog.prototype.compareSettings = function () {
-
 	var newSettings = this.extractSettings();
 	return !ve.compare( newSettings, this.oldSettings );
 };

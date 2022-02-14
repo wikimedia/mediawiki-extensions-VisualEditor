@@ -109,7 +109,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 	// from a paste we also have to exclude the
 	// opening/closing paragraph.)
 	var plainContextRange = new ve.Range( plainPastedDocumentModel.getDocumentRange().from + 1, plainPastedDocumentModel.getDocumentRange().to - 1 );
-	view.pasteSpecial = true;
+	this.pasteSpecial = true;
 
 	// isPlainText is true but we still need sanitize (e.g. remove lists)
 	var promise = ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
