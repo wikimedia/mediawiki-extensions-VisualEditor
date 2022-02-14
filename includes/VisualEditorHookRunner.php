@@ -76,11 +76,11 @@ class VisualEditorHookRunner implements
 	}
 
 	/** @inheritDoc */
-	public function onVisualEditorBeforeEditorHook(
+	public function onVisualEditorBeforeEditor(
 		OutputPage $output,
 		Skin $skin
 	): bool {
-		return $this->hookContainer->run( 'VisualEditorBeforeEditorHook', [
+		return $this->hookContainer->run( 'VisualEditorBeforeEditor', [
 			$output,
 			$skin
 		], [ 'abortable' => true ] );

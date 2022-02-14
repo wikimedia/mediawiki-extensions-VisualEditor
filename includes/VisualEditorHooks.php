@@ -60,7 +60,7 @@ class VisualEditorHooks {
 	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
 		$services = MediaWikiServices::getInstance();
 		$hookRunner = new VisualEditorHookRunner( $services->getHookContainer() );
-		if ( !$hookRunner->onVisualEditorBeforeEditorHook( $output, $skin ) ) {
+		if ( !$hookRunner->onVisualEditorBeforeEditor( $output, $skin ) ) {
 			return;
 		}
 		if ( !(
@@ -460,7 +460,7 @@ class VisualEditorHooks {
 		}
 
 		$hookRunner = new VisualEditorHookRunner( $services->getHookContainer() );
-		if ( !$hookRunner->onVisualEditorBeforeEditorHook( $skin->getOutput(), $skin ) ) {
+		if ( !$hookRunner->onVisualEditorBeforeEditor( $skin->getOutput(), $skin ) ) {
 			return;
 		}
 
