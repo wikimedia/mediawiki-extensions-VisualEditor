@@ -11,6 +11,7 @@
 	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
 }
 
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-floating,
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder-open {
 	height: 42px;
 }
