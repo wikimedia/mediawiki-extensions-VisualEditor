@@ -25,7 +25,7 @@ interface VisualEditorBeforeEditorHook {
 	 * @param Skin $skin
 	 * @return bool
 	 */
-	public function onVisualEditorBeforeEditorHook(
+	public function onVisualEditorBeforeEditor(
 		OutputPage $output,
 		Skin $skin
 	): bool;
