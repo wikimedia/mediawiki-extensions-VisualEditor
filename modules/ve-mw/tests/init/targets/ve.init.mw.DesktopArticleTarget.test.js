@@ -86,8 +86,10 @@ QUnit.test( 'init', ( assert ) => {
 	target.on( 'surfaceReady', () => {
 		assert.strictEqual( target.getSurface().getModel().getDocument().getLang(), 'he', 'Page language is passed through from config' );
 		assert.strictEqual( target.getSurface().getModel().getDocument().getDir(), 'rtl', 'Page direction is passed through from config' );
-		mw.config.get( 'wgVisualEditor' ).pageLanguageCode = 'en';
-		mw.config.get( 'wgVisualEditor' ).pageLanguageDir = 'ltr';
+		mw.config.set( 'wgVisualEditor', {
+			pageLanguageCode: 'en',
+			pageLanguageDir: 'ltr'
+		} );
 		target.activatingDeferred.then( () => {
 			assert.equalDomElement(
 				target.actionsToolbar.tools.notices.noticeItems[ 0 ].$element[ 0 ],
@@ -106,8 +108,10 @@ QUnit.test( 'init', ( assert ) => {
 			} );
 		} );
 	} );
-	mw.config.get( 'wgVisualEditor' ).pageLanguageCode = 'he';
-	mw.config.get( 'wgVisualEditor' ).pageLanguageDir = 'rtl';
+	mw.config.set( 'wgVisualEditor', {
+		pageLanguageCode: 'he',
+		pageLanguageDir: 'rtl'
+	} );
 	mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome = false;
 	target.activate( dataPromise );
 } );
