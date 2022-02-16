@@ -144,6 +144,7 @@
 	"visualeditor-dialog-transclusion-loading": "Загрузка...",
 	"visualeditor-dialogbutton-media-tooltip": "Файл",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
+	"visualeditor-dismissible-message-close": "Зачыніць паведамленне і больш не паказваць",
 	"visualeditor-editconflict": "Вашы змены не атрымалася запісаць, таму што адбыўся канфлікт правак. Жадаеце вырашыць канфлікт уручную?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|паведамленне|паведамленні|паведамленняў}}",
 	"visualeditor-editsummary": "Апішыце, што вы змянілі",
