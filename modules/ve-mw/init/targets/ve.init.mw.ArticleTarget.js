@@ -1889,8 +1889,13 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
  */
 ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	var section = this.section !== null ? this.section : this.visibleSection;
+	var surface = this.getSurface();
+	var mode = surface.getMode();
 
-	if ( this.enableVisualSectionEditing && this.section !== null ) {
+	if (
+		mode === 'source' ||
+		( this.enableVisualSectionEditing && this.section !== null )
+	) {
 		this.$scrollContainer.scrollTop( 0 );
 	}
 
@@ -1898,9 +1903,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		return;
 	}
 
-	var surface = this.getSurface(),
-		mode = surface.getMode(),
-		setExactScrollOffset = this.section === null && this.visibleSection !== null && this.visibleSectionOffset !== null,
+	var setExactScrollOffset = this.section === null && this.visibleSection !== null && this.visibleSectionOffset !== null,
 		// User clicked section edit link with visual section editing not available:
 		// Take them to the top of the section using goToHeading
 		goToStartOfHeading = this.section !== null && !this.enableVisualSectionEditing,
