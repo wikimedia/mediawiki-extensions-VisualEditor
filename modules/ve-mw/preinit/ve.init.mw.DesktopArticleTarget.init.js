@@ -79,7 +79,7 @@
 	}
 
 	function onWindowScroll() {
-		var scrollTop = $( window ).scrollTop();
+		var scrollTop = $( document.documentElement ).scrollTop();
 		var floating = scrollTop > contentTop;
 		if ( floating !== wasFloating ) {
 			var width = $( '#content' ).outerWidth();
@@ -99,12 +99,24 @@
 			$toolbarPlaceholderBar = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-bar' );
 			$toolbarPlaceholder.append( $toolbarPlaceholderBar );
 		}
-		$( '#content' ).prepend( $toolbarPlaceholder );
-		// TODO: Would be better with ve.addPassiveEventListener
+		// Toggle -floating class before append (if required) to avoid content moving later
 		contentTop = $( '#content' ).offset().top;
 		wasFloating = null;
+		onWindowScroll();
+
+		var scrollTopBefore = $( document.documentElement ).scrollTop();
+
+		$( '#content' ).prepend( $toolbarPlaceholder );
+
+		// TODO: Would be better with ve.addPassiveEventListener
 		$( window ).on( 'scroll', onWindowScrollListener );
-		onWindowScrollListener();
+
+		if ( wasFloating ) {
+			// Browser might not support scroll anchoring:
+			// https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor/Guide_to_scroll_anchoring
+			// ...so compute the new scroll offset ourselves.
+			window.scrollTo( 0, scrollTopBefore + $toolbarPlaceholder.outerHeight() );
+		}
 
 		// Add class for transition after first render
 		setTimeout( function () {
@@ -389,7 +401,7 @@
 		// * https://caniuse.com/css-scroll-behavior
 		// * https://caniuse.com/mdn-api_window_scroll_options_behavior_parameter
 		var supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
-		var newScrollTop = $heading.offset().top - offset;
+		var newScrollTop = $heading.offset().top - offset - $toolbarPlaceholder.outerHeight();
 		if ( supportsSmoothScroll ) {
 			window.scroll( {
 				top: newScrollTop,
@@ -398,7 +410,7 @@
 		} else {
 			// Ideally we would use OO.ui.Element.static.getRootScrollableElement here
 			// as it has slightly better browser support (Chrome < 60)
-			var scrollContainer = window.document.documentElement;
+			var scrollContainer = document.documentElement;
 
 			$( scrollContainer ).animate( {
 				scrollTop: newScrollTop
@@ -465,6 +477,10 @@
 				.then( incrementLoadingProgress );
 		}
 
+		// Do this before section scrolling
+		showToolbarPlaceholder();
+		mw.hook( 've.activationStart' ).fire();
+
 		var visibleSection = null;
 		var visibleSectionOffset = null;
 		if ( section === null ) {
@@ -489,10 +505,6 @@
 		} else if ( mode === 'visual' ) {
 			scrollToSection( section );
 		}
-
-		// Do this after section scrolling
-		showToolbarPlaceholder();
-		mw.hook( 've.activationStart' ).fire();
 
 		showLoading( mode );
 		incrementLoadingProgress();

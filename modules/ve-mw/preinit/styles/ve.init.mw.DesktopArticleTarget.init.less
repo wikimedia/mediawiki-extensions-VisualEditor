@@ -120,11 +120,16 @@
 		transform: translateY( 0 );
 	}
 
-	&-floating .ve-init-mw-desktopArticleTarget-toolbarPlaceholder-bar {
-		position: fixed;
-		top: 0;
-		z-index: 1;
-		background: #fff;
+	&-floating {
+		// No height transition required when toolbar starts off floating
+		transition: none;
+
+		.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-bar {
+			position: fixed;
+			top: 0;
+			z-index: 1;
+			background: #fff;
+		}
 	}
 }
 
