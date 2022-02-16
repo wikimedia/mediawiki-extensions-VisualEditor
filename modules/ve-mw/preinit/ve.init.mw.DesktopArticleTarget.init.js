@@ -274,6 +274,19 @@
 					target.on( 'deactivate', function () {
 						active = false;
 					} );
+					target.on( 'reactivate', function () {
+						try {
+							// T270331, see below.
+							uri = new mw.Uri( null, { arrayParams: true } );
+						} catch ( e ) {
+							uri = viewUri;
+						}
+
+						activateTarget(
+							getEditModeFromUri( uri ),
+							parseSection( uri.query.section )
+						);
+					} );
 					target.setContainer( $( '#content' ) );
 					targetLoaded = true;
 					return target;
