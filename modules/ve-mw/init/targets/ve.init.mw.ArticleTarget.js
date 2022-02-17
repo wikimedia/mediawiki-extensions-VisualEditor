@@ -63,6 +63,8 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.checkboxesByName = null;
 	this.$saveAccessKeyElements = null;
 
+	this.$editableContent = this.getEditableContent();
+
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
 	// Use undefined instead of 0 for new documents (T262838)
@@ -185,6 +187,15 @@ ve.init.mw.ArticleTarget.static.parseDocument = function ( documentString, mode,
 
 	// Parent method
 	return ve.init.mw.ArticleTarget.super.static.parseDocument.call( this, documentString, mode, section, onlySection );
+};
+
+/**
+ * Get the editable part of the page
+ *
+ * @return {jQuery} Editable DOM selection
+ */
+ve.init.mw.ArticleTarget.prototype.getEditableContent = function () {
+	return $( '#mw-content-text' );
 };
 
 /**
@@ -572,6 +583,20 @@ ve.init.mw.ArticleTarget.prototype.loadFail = function () {
 };
 
 /**
+ * Replace the page content with new HTML.
+ *
+ * @method
+ * @abstract
+ * @param {string} html Rendered HTML from server
+ * @param {string} categoriesHtml Rendered categories HTML from server
+ * @param {string} displayTitle HTML to show as the page title
+ * @param {Object} lastModified Object containing user-formatted date
+ *  and time strings, or undefined if we made no change.
+ * @param {string} contentSub HTML to show as the content subtitle
+ */
+ve.init.mw.ArticleTarget.prototype.replacePageContent = null;
+
+/**
  * Handle successful DOM save event.
  *
  * @param {Object} data Save data from the API
@@ -593,6 +618,77 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 
 	this.saveDeferred.resolve();
 	this.emit( 'save', data );
+
+	var target = this;
+
+	if ( !this.pageExists || this.restoring ) {
+		// Teardown the target, ensuring auto-save data is cleared
+		this.teardown().then( function () {
+
+			// This is a page creation or restoration, refresh the page
+			var newUrlParams = data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' };
+
+			if ( data.isRedirect ) {
+				newUrlParams.redirect = 'no';
+			}
+			location.href = target.viewUri.extend( newUrlParams );
+		} );
+	} else {
+		// Update watch link to match 'watch checkbox' in save dialog.
+		// User logged in if module loaded.
+		if ( mw.loader.getState( 'mediawiki.page.watch.ajax' ) === 'ready' ) {
+			var watch = require( 'mediawiki.page.watch.ajax' );
+
+			watch.updatePageWatchStatus(
+				data.watched,
+				data.watchlistexpiry
+			);
+		}
+
+		// If we were explicitly editing an older version, make sure we won't
+		// load the same old version again, now that we've saved the next edit
+		// will be against the latest version.
+		// If there is an ?oldid= parameter in the URL, this will cause restorePage() to remove it.
+		this.restoring = false;
+
+		// Clear requestedRevId in case it was set by a retry or something; after saving
+		// we don't want to go back into oldid mode anyway
+		this.requestedRevId = undefined;
+
+		if ( data.newrevid !== undefined ) {
+			mw.config.set( {
+				wgCurRevisionId: data.newrevid,
+				wgRevisionId: data.newrevid
+			} );
+			this.revid = data.newrevid;
+			this.currentRevisionId = data.newrevid;
+		}
+
+		// Update module JS config values and notify ResourceLoader of any new
+		// modules needed to be added to the page
+		mw.config.set( data.jsconfigvars );
+		mw.loader.load( data.modules );
+
+		mw.config.set( {
+			wgIsRedirect: !!data.isRedirect
+		} );
+
+		if ( this.saveDialog ) {
+			this.saveDialog.reset();
+		}
+
+		this.replacePageContent(
+			data.content,
+			data.categorieshtml,
+			data.displayTitleHtml,
+			data.lastModified,
+			data.contentSub
+		);
+
+		// Tear down the target now that we're done saving
+		// Not passing trackMechanism because this isn't an abort action
+		this.tryTeardown( true );
+	}
 };
 
 /**
@@ -2016,17 +2112,16 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode, hea
 };
 
 /**
- * Get the hash fragment for the current section's ID using the page's PHP HTML.
+ * Get the hash fragment for the current section's ID using the page's HTML.
  *
  * TODO: Do this in a less skin-dependent way
  *
- * @param {jQuery} [context] Page context to search in, if narrowing down the content is required
  * @return {string} Hash fragment, or empty string if not found
  */
-ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function ( context ) {
+ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function () {
 	// Assume there are section edit links, as the user just did a section edit. This also means
 	// that the section numbers line up correctly, as not every H_ tag is a numbered section.
-	var $sections = $( '.mw-editsection', context );
+	var $sections = this.$editableContent.find( '.mw-editsection' );
 
 	var section;
 	if ( this.section === 'new' ) {
@@ -2259,6 +2354,29 @@ ve.init.mw.ArticleTarget.prototype.updateRedirectInterface = function ( $sub, $m
 		// Hack: This is normally inside #mw-content-text, but that's hidden while editing.
 		$( '#mw-content-text' ).before( $msg );
 	}
+};
+
+/**
+ * Set temporary redirect interface to match the current state of redirection in the editor.
+ *
+ * @param {string|null} title Current redirect target, or null if none
+ */
+ve.init.mw.ArticleTarget.prototype.setFakeRedirectInterface = function ( title ) {
+	this.updateRedirectInterface(
+		title ? this.constructor.static.buildRedirectSub() : $(),
+		title ? this.constructor.static.buildRedirectMsg( title ) : $()
+	);
+};
+
+/**
+ * Set the redirect interface to match the page's redirect state.
+ */
+ve.init.mw.ArticleTarget.prototype.setRealRedirectInterface = function () {
+	this.updateRedirectInterface(
+		mw.config.get( 'wgIsRedirect' ) ? this.constructor.static.buildRedirectSub() : $(),
+		// Remove our custom content header - the original one in #mw-content-text will be shown
+		$()
+	);
 };
 
 /**

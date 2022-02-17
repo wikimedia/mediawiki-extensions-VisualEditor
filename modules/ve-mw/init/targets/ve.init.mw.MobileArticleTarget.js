@@ -400,6 +400,11 @@ ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function () {};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 	// TODO: parsing this is expensive just for the section details. We should
 	// change MobileFrontend+this to behave like desktop does and just rerender

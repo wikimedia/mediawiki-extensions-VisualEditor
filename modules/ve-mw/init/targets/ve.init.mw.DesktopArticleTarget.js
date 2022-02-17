@@ -69,7 +69,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
-	this.$editableContent = this.getEditableContent().addClass( 've-init-mw-desktopArticleTarget-editableContent' );
+	this.$editableContent.addClass( 've-init-mw-desktopArticleTarget-editableContent' );
 
 	// Initialization
 	this.$element
@@ -192,15 +192,6 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
 ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config ) {
 	config = ve.extendObject( { $overlayContainer: $( '#content' ) }, config );
 	return ve.init.mw.DesktopArticleTarget.parent.prototype.addSurface.call( this, dmDoc, config );
-};
-
-/**
- * Get the editable part of the page
- *
- * @return {jQuery} Editable DOM selection
- */
-ve.init.mw.DesktopArticleTarget.prototype.getEditableContent = function () {
-	return $( '#mw-content-text' );
 };
 
 /**
@@ -886,76 +877,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
-	var target = this;
-
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
-
-	if ( !this.pageExists || this.restoring ) {
-		// Teardown the target, ensuring auto-save data is cleared
-		this.teardown().then( function () {
-
-			// This is a page creation or restoration, refresh the page
-			var newUrlParams = data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' };
-
-			if ( data.isRedirect ) {
-				newUrlParams.redirect = 'no';
-			}
-			location.href = target.viewUri.extend( newUrlParams );
-		} );
-	} else {
-		// Update watch link to match 'watch checkbox' in save dialog.
-		// User logged in if module loaded.
-		if ( mw.loader.getState( 'mediawiki.page.watch.ajax' ) === 'ready' ) {
-			var watch = require( 'mediawiki.page.watch.ajax' );
-
-			watch.updatePageWatchStatus(
-				data.watched,
-				data.watchlistexpiry
-			);
-		}
-
-		// If we were explicitly editing an older version, make sure we won't
-		// load the same old version again, now that we've saved the next edit
-		// will be against the latest version.
-		// If there is an ?oldid= parameter in the URL, this will cause restorePage() to remove it.
-		this.restoring = false;
-
-		// Clear requestedRevId in case it was set by a retry or something; after saving
-		// we don't want to go back into oldid mode anyway
-		this.requestedRevId = undefined;
-
-		if ( data.newrevid !== undefined ) {
-			mw.config.set( {
-				wgCurRevisionId: data.newrevid,
-				wgRevisionId: data.newrevid
-			} );
-			this.revid = data.newrevid;
-			this.currentRevisionId = data.newrevid;
-		}
-
-		// Update module JS config values and notify ResourceLoader of any new
-		// modules needed to be added to the page
-		mw.config.set( data.jsconfigvars );
-		// Also load postEdit in case it's needed, below.
-		mw.loader.load( data.modules.concat( [ 'mediawiki.action.view.postEdit' ] ) );
-
-		mw.config.set( {
-			wgIsRedirect: !!data.isRedirect
-		} );
-
-		if ( this.saveDialog ) {
-			this.saveDialog.reset();
-		}
-
-		this.replacePageContent(
-			data.content,
-			data.categorieshtml,
-			data.displayTitleHtml,
-			data.lastModified,
-			data.contentSub
-		);
-
+	if ( this.pageExists && !this.restoring ) {
+		// Fix permalinks
 		if ( data.newrevid !== undefined ) {
 			$( '#t-permalink a, #coll-download-as-rl a' ).each( function () {
 				var uri = new mw.Uri( $( this ).attr( 'href' ) );
@@ -964,10 +887,10 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			} );
 		}
 
-		// Tear down the target now that we're done saving
-		// Not passing trackMechanism because this isn't an abort action
-		this.tryTeardown( true );
+		// Desktop post-edit notification
 		if ( data.newrevid !== undefined ) {
+			// Append postEdit module to the list that will be loaded in the parent method
+			data.modules = data.modules.concat( [ 'mediawiki.action.view.postEdit' ] );
 			mw.hook( 'postEdit' ).fire( {
 				// The following messages are used here:
 				// * postedit-confirmation-published
@@ -976,6 +899,9 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			} );
 		}
 	}
+
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 };
 
 /**
@@ -1237,7 +1163,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			// Translate into a fragment for the new URI:
 			// This should be after replacePageContent if this is post-save, so we can just look
 			// at the headers on the page.
-			var fragment = this.getSectionFragmentFromPage( this.$editableContent );
+			var fragment = this.getSectionFragmentFromPage();
 			if ( fragment ) {
 				uri.fragment = fragment;
 				this.viewUri.fragment = fragment;
@@ -1318,14 +1244,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 };
 
 /**
- * Replace the page content with new HTML.
- *
- * @param {string} html Rendered HTML from server
- * @param {string} categoriesHtml Rendered categories HTML from server
- * @param {string} displayTitle HTML to show as the page title
- * @param {Object} lastModified Object containing user-formatted date
- *  and time strings, or undefined if we made no change.
- * @param {string} contentSub HTML to show as the content subtitle
+ * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub
@@ -1592,29 +1511,6 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 		target.setupTriggerListeners();
 	} );
 	this.toolbarSetupDeferred.resolve();
-};
-
-/**
- * Set temporary redirect interface to match the current state of redirection in the editor.
- *
- * @param {string|null} title Current redirect target, or null if none
- */
-ve.init.mw.DesktopArticleTarget.prototype.setFakeRedirectInterface = function ( title ) {
-	this.updateRedirectInterface(
-		title ? this.constructor.static.buildRedirectSub() : $(),
-		title ? this.constructor.static.buildRedirectMsg( title ) : $()
-	);
-};
-
-/**
- * Set the redirect interface to match the page's redirect state.
- */
-ve.init.mw.DesktopArticleTarget.prototype.setRealRedirectInterface = function () {
-	this.updateRedirectInterface(
-		mw.config.get( 'wgIsRedirect' ) ? this.constructor.static.buildRedirectSub() : $(),
-		// Remove our custom content header - the original one in #mw-content-text will be shown
-		$()
-	);
 };
 
 /* Registration */
