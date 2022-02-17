@@ -401,21 +401,45 @@ ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function () {};
+ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function (
+	html, categoriesHtml, displayTitle, lastModified /* , contentSub */
+) {
+	var $content = $( $.parseHTML( html ) );
+
+	if ( lastModified ) {
+		// TODO: Update the last-modified-bar with the correct info
+		// eslint-disable-next-line no-jquery/no-global-selector
+		$( '.last-modified-bar' ).remove();
+	}
+
+	// eslint-disable-next-line no-jquery/no-global-selector
+	var $editableContent = $( '#mw-content-text' );
+	$editableContent.find( '.mw-parser-output' ).replaceWith( $content );
+	mw.hook( 'wikipage.content' ).fire( $editableContent );
+	if ( displayTitle ) {
+		// eslint-disable-next-line no-jquery/no-html, no-jquery/no-global-selector
+		$( '#firstHeading' ).html( displayTitle );
+	}
+
+	// Mobile doesn't do some things that desktop does:
+	// * Categories
+	// * siteSub/taglline
+	this.setRealRedirectInterface();
+};
 
 /**
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
-	// Avoid tryTeardown showing the abandonedit dialog in parent saveComplete:
+	// Set 'saved' flag before teardown (which is called in parent method) to avoid prompts
+	// This is set in this.overlay.onSaveComplete, but we can't call that until we have
+	// computed the fragment.
 	this.overlay.saved = true;
 
-	// TODO: parsing this is expensive just for the section details. We should
-	// change MobileFrontend+this to behave like desktop does and just rerender
-	// the page with the provided HTML (T219420).
-	var fragment = this.getSectionFragmentFromPage( $.parseHTML( data.content ) );
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
+
+	var fragment = this.getSectionFragmentFromPage();
 
 	this.overlay.sectionId = fragment;
 	this.overlay.onSaveComplete( data.newrevid );
