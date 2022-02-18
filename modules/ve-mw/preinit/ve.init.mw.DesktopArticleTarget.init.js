@@ -262,6 +262,9 @@
 							defaultMode: mode
 						}
 					);
+					target.on( 'deactivate', function () {
+						active = false;
+					} );
 					target.setContainer( $( '#content' ) );
 					targetLoaded = true;
 					return target;
@@ -517,9 +520,6 @@
 				target.visibleSectionOffset = visibleSectionOffset;
 
 				incrementLoadingProgress();
-				target.on( 'deactivate', function () {
-					active = false;
-				} );
 				// If target was already loaded, ensure the mode is correct
 				target.setDefaultMode( mode );
 				var activatePromise = target.activate( dataPromise );
