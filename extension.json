@@ -214,7 +214,8 @@
 				"VisualEditorHookRunner",
 				"RevisionLookup",
 				"StatsdDataFactory",
-				"PageEditStash"
+				"PageEditStash",
+				"SkinFactory"
 			]
 		}
 	},

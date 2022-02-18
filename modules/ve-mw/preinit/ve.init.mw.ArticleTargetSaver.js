@@ -223,6 +223,9 @@
 				{
 					action: 'visualeditoredit',
 					paction: 'save',
+					useskin: mw.config.get( 'skin' ),
+					// Same as OO.ui.isMobile()
+					mobileformat: !!mw.config.get( 'wgMFMode' ),
 					formatversion: 2,
 					errorformat: 'html',
 					errorlang: mw.config.get( 'wgUserLanguage' ),

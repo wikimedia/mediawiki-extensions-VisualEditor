@@ -33,6 +33,9 @@ class ApiVisualEditorEdit extends ApiBase {
 	/** @var PageEditStash */
 	private $pageEditStash;
 
+	/** @var SkinFactory */
+	private $skinFactory;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name Name of this module
@@ -40,6 +43,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * @param RevisionLookup $revisionLookup
 	 * @param IBufferingStatsdDataFactory $statsdDataFactory
 	 * @param PageEditStash $pageEditStash
+	 * @param SkinFactory $skinFactory
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -47,7 +51,8 @@ class ApiVisualEditorEdit extends ApiBase {
 		VisualEditorHookRunner $hookRunner,
 		RevisionLookup $revisionLookup,
 		IBufferingStatsdDataFactory $statsdDataFactory,
-		PageEditStash $pageEditStash
+		PageEditStash $pageEditStash,
+		SkinFactory $skinFactory
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -55,6 +60,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->revisionLookup = $revisionLookup;
 		$this->statsdDataFactory = $statsdDataFactory;
 		$this->pageEditStash = $pageEditStash;
+		$this->skinFactory = $skinFactory;
 	}
 
 	/**
@@ -117,13 +123,17 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * Load into an array the output of MediaWiki's parser for a given revision
 	 *
 	 * @param int $newRevId The revision to load
+	 * @param array $params Original request params
 	 * @return array|false The parsed of the save attempt
 	 */
-	protected function parseWikitext( $newRevId ) {
+	protected function parseWikitext( $newRevId, array $params ) {
 		$apiParams = [
 			'action' => 'parse',
 			'oldid' => $newRevId,
 			'prop' => 'text|revid|categorieshtml|displaytitle|subtitle|modules|jsconfigvars',
+			'useskin' => $params['useskin'],
+			// Param is added by hook in MobileFrontend
+			'mobileformat' => $params['mobileformat'],
 		];
 
 		$context = new DerivativeContext( $this->getContext() );
@@ -436,7 +446,7 @@ class ApiVisualEditorEdit extends ApiBase {
 
 				// Return result of parseWikitext instead of saveWikitext so that the
 				// frontend can update the page rendering without a refresh.
-				$parseWikitextResult = $this->parseWikitext( $newRevId );
+				$parseWikitextResult = $this->parseWikitext( $newRevId, $params );
 				if ( $parseWikitextResult === false ) {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
 				}
@@ -561,6 +571,10 @@ class ApiVisualEditorEdit extends ApiBase {
 			'captchaid' => null,
 			'captchaword' => null,
 			'cachekey' => null,
+			'useskin' => [
+				ApiBase::PARAM_TYPE => array_keys( $this->skinFactory->getInstalledSkins() ),
+				ApiBase::PARAM_HELP_MSG => 'apihelp-parse-param-useskin',
+			],
 			'tags' => [
 				ParamValidator::PARAM_ISMULTI => true,
 			],
