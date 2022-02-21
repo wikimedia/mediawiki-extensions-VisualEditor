@@ -1898,8 +1898,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 	// Get the save dialog
 	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
-		var data, checked,
-			windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+		var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 
 		if ( !target.saveDialog ) {
 			target.saveDialog = win;
@@ -1919,7 +1918,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 			target.saveDialog.$element.append( target.$saveDialogOverlay );
 		}
 
-		data = target.getSaveDialogOpeningData();
+		var data = target.getSaveDialogOpeningData();
 
 		if (
 			( action === 'review' && !data.canReview ) ||
@@ -1939,10 +1938,10 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 		var checkbox;
 		if ( checkboxName && ( checkbox = target.checkboxesByName[ checkboxName ] ) ) {
-			checked = !checkbox.isSelected();
+			var isSelected = !checkbox.isSelected();
 			// Wait for native access key change to happen
 			setTimeout( function () {
-				checkbox.setSelected( checked );
+				checkbox.setSelected( isSelected );
 			} );
 		}
 

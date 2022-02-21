@@ -19,8 +19,6 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
-	var categoryNamespace = mw.config.get( 'wgNamespaceIds' ).category;
-
 	// Config initialization
 	config = config || {};
 
@@ -31,6 +29,7 @@ ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
 	OO.ui.mixin.GroupElement.call( this, config );
 	OO.ui.mixin.DraggableGroupElement.call( this, ve.extendObject( {}, config, { orientation: 'horizontal' } ) );
 
+	var categoryNamespace = mw.config.get( 'wgNamespaceIds' ).category;
 	// Properties
 	this.categories = {};
 	// Source -> target
@@ -100,13 +99,12 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
  * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
-	var categoryItem,
-		value = item.getData(),
+	var value = item.getData(),
 		widget = this;
 
 	if ( value && value !== '' ) {
 		// Add new item
-		categoryItem = this.getCategoryItemFromValue( value );
+		var categoryItem = this.getCategoryItemFromValue( value );
 		this.queryCategoryStatus( [ categoryItem.name ] ).done( function () {
 			// Remove existing items by name
 			var toRemove = mw.Title.newFromText( categoryItem.name ).getMainText();
@@ -141,10 +139,8 @@ ve.ui.MWCategoryWidget.prototype.onPopupClosing = function () {
  * @return {Object} Category item with name, value and metaItem properties
  */
 ve.ui.MWCategoryWidget.prototype.getCategoryItemFromValue = function ( value ) {
-	var title;
-
 	// Normalize
-	title = mw.Title.newFromText( this.categoryPrefix + value );
+	var title = mw.Title.newFromText( this.categoryPrefix + value );
 	if ( title ) {
 		return {
 			name: title.getPrefixedText(),
@@ -258,11 +254,10 @@ ve.ui.MWCategoryWidget.prototype.setDefaultSortKey = function ( value ) {
  * @inheritdoc
  */
 ve.ui.MWCategoryWidget.prototype.setDisabled = function () {
-	var isDisabled;
 	// Parent method
 	ve.ui.MWCategoryWidget.super.prototype.setDisabled.apply( this, arguments );
 
-	isDisabled = this.isDisabled();
+	var isDisabled = this.isDisabled();
 
 	if ( this.input ) {
 		this.input.setDisabled( isDisabled );
@@ -294,13 +289,11 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames ) {
-	var widget = this,
-		promises = [], index = 0, batchSize = 50,
-		categoryNamesToQuery;
+	var widget = this;
 
 	// Get rid of any we already know the hidden status of, or have an entry
 	// if normalizedTitles (i.e. have been fetched before)
-	categoryNamesToQuery = categoryNames.filter( function ( name ) {
+	var categoryNamesToQuery = categoryNames.filter( function ( name ) {
 		var cacheEntry;
 		if ( widget.normalizedTitles[ name ] ) {
 			return false;
@@ -318,6 +311,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 		return ve.createDeferred().resolve( {} ).promise();
 	}
 
+	var index = 0, batchSize = 50, promises = [];
 	// Batch this up into groups of 50
 	while ( index < categoryNamesToQuery.length ) {
 		promises.push( ve.init.target.getContentApi().get( {
@@ -369,8 +363,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
-	var categoryItem, hadFocus,
-		categoryItems = [],
+	var categoryItems = [],
 		existingCategoryItems = [],
 		// eslint-disable-next-line no-jquery/no-map-util
 		categoryNames = $.map( items, function ( item ) {
@@ -379,19 +372,20 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 		widget = this;
 
 	return this.queryCategoryStatus( categoryNames ).then( function () {
-		var itemTitle, config, cachedData,
-			checkValueMatches = function ( existingCategoryItem ) {
-				return config.item.value === existingCategoryItem.value;
-			};
+		var config;
+		var checkValueMatches = function ( existingCategoryItem ) {
+			return config.item.value === existingCategoryItem.value;
+		};
 
 		items.forEach( function ( item ) {
 			item.name = widget.normalizedTitles[ item.name ];
 
-			itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category );
+			var itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category );
 			// Create a widget using the item data
 			config = {
 				item: item
 			};
+			var cachedData;
 			if ( Object.prototype.hasOwnProperty.call( widget.categoryRedirects, itemTitle.getPrefixedText() ) ) {
 				config.redirectTo = new mw.Title(
 					widget.categoryRedirects[ itemTitle.getPrefixedText() ],
@@ -405,7 +399,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			config.missing = cachedData.missing;
 			config.disabled = widget.disabled;
 
-			categoryItem = new ve.ui.MWCategoryItemWidget( config );
+			var categoryItem = new ve.ui.MWCategoryItemWidget( config );
 			categoryItem.connect( widget, {
 				togglePopupMenu: 'onTogglePopupMenu'
 			} );
@@ -426,7 +420,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 		OO.ui.mixin.DraggableGroupElement.prototype.addItems.call( widget, categoryItems, index );
 
 		// Ensure the input remains the last item in the list, and preserve focus
-		hadFocus = widget.getElementDocument().activeElement === widget.input.$input[ 0 ];
+		var hadFocus = widget.getElementDocument().activeElement === widget.input.$input[ 0 ];
 		widget.$group.append( widget.input.$element );
 		if ( hadFocus ) {
 			widget.input.$input[ 0 ].focus();
@@ -439,10 +433,8 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
  * @inheritdoc
  */
 ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
-	var i, len, categoryItem;
-
-	for ( i = 0, len = items.length; i < len; i++ ) {
-		categoryItem = items[ i ];
+	for ( var i = 0, len = items.length; i < len; i++ ) {
+		var categoryItem = items[ i ];
 		if ( categoryItem ) {
 			categoryItem.disconnect( this );
 			items.push( categoryItem );
@@ -459,8 +451,7 @@ ve.ui.MWCategoryWidget.prototype.removeItems = function ( items ) {
  * Auto-fit the input.
  */
 ve.ui.MWCategoryWidget.prototype.fitInput = function () {
-	var availableSpace, inputWidth, $lastItem,
-		$input = this.input.$element;
+	var $input = this.input.$element;
 
 	// eslint-disable-next-line no-jquery/no-sizzle
 	if ( !this.items.length || !$input.is( ':visible' ) ) {
@@ -469,13 +460,13 @@ ve.ui.MWCategoryWidget.prototype.fitInput = function () {
 
 	// Measure the input's natural size
 	$input.css( 'width', '' );
-	inputWidth = $input.outerWidth( true );
+	var inputWidth = $input.outerWidth( true );
 
 	// this.items hasn't been updated if this was triggered by a drag event,
 	// so look at document order
-	$lastItem = this.$group.find( '.ve-ui-mwCategoryItemWidget' ).last();
+	var $lastItem = this.$group.find( '.ve-ui-mwCategoryItemWidget' ).last();
 	// Try to fit to the right of the last item
-	availableSpace = Math.floor( this.$group.width() - ( $lastItem.position().left + $lastItem.outerWidth( true ) ) );
+	var availableSpace = Math.floor( this.$group.width() - ( $lastItem.position().left + $lastItem.outerWidth( true ) ) );
 	if ( availableSpace > inputWidth ) {
 		$input.css( 'width', availableSpace );
 	}

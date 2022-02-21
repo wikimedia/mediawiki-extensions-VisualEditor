@@ -19,12 +19,10 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWLinkInspectorTool = function VeUiMwLinkInspectorTool() {
-	var educationPopup;
-
 	// Parent constructor
 	ve.ui.MWLinkInspectorTool.super.apply( this, arguments );
 
-	educationPopup = new ve.ui.MWEducationPopupWidget( this.$link, {
+	var educationPopup = new ve.ui.MWEducationPopupWidget( this.$link, {
 		popupTitle: ve.msg( 'visualeditor-linkinspector-educationpopup-title' ),
 		popupText: mw.message( 'visualeditor-linkinspector-educationpopup-text' ).parseDom(),
 		popupImage: 'link',

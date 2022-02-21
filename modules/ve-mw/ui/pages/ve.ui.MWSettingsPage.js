@@ -226,9 +226,8 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
  * @return {boolean} Whether redirect link is valid.
  */
 ve.ui.MWSettingsPage.prototype.checkValidRedirect = function () {
-	var title;
 	if ( this.enableRedirectInput.isSelected() ) {
-		title = this.redirectTargetInput.getValue();
+		var title = this.redirectTargetInput.getValue();
 
 		if ( !mw.Title.newFromText( title ) ) {
 			/*
@@ -285,25 +284,23 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
  * @return {jQuery.Promise}
  */
 ve.ui.MWSettingsPage.prototype.setup = function ( metaList, config ) {
-	var tableOfContentsMetaItem, tableOfContentsField, tableOfContentsMode,
-		redirectTargetItem, redirectTarget, redirectStatic,
-		settingsPage = this;
+	var settingsPage = this;
 
 	this.metaList = metaList;
 
 	// Table of Contents items
-	tableOfContentsField = this.tableOfContents.getField();
-	tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
-	tableOfContentsMode = tableOfContentsMetaItem && tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
+	var tableOfContentsField = this.tableOfContents.getField();
+	var tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
+	var tableOfContentsMode = tableOfContentsMetaItem && tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
 	tableOfContentsField
 		.selectItemByData( tableOfContentsMode )
 		.setDisabled( config.isReadOnly );
 	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)
-	redirectTargetItem = this.getMetaItem( 'mwRedirect' );
-	redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '';
-	redirectStatic = this.getMetaItem( 'mwStaticRedirect' );
+	var redirectTargetItem = this.getMetaItem( 'mwRedirect' );
+	var redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '';
+	var redirectStatic = this.getMetaItem( 'mwStaticRedirect' );
 	this.enableRedirectInput
 		.setSelected( !!redirectTargetItem )
 		.setDisabled( config.isReadOnly );
@@ -333,10 +330,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( metaList, config ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
-	var currentTableOfContents, newTableOfContentsData, newTableOfContentsItem,
-		currentRedirectTargetItem, newRedirectData, newRedirectItemData,
-		currentStaticRedirectItem, newStaticRedirectState,
-		settingsPage = this;
+	var settingsPage = this;
 
 	// Data initialisation
 	data = data || {};
@@ -345,16 +339,16 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	}
 
 	// Table of Contents items
-	currentTableOfContents = this.getMetaItem( 'mwTOC' );
-	newTableOfContentsData = this.tableOfContents.getField().findSelectedItem();
+	var currentTableOfContents = this.getMetaItem( 'mwTOC' );
+	var newTableOfContentsData = this.tableOfContents.getField().findSelectedItem();
 
 	// Redirect items
-	currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
-	newRedirectData = this.redirectTargetInput.getValue();
-	newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } };
+	var currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
+	var newRedirectData = this.redirectTargetInput.getValue();
+	var newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } };
 
-	currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' );
-	newStaticRedirectState = this.enableStaticRedirectInput.isSelected();
+	var currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' );
+	var newStaticRedirectState = this.enableStaticRedirectInput.isSelected();
 
 	// Alter the TOC option flag iff it's been touched & is actually different
 	if ( this.tableOfContentsTouched ) {
@@ -363,7 +357,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 				currentTableOfContents.remove();
 			}
 		} else {
-			newTableOfContentsItem = { type: 'mwTOC', attributes: { property: newTableOfContentsData.data } };
+			var newTableOfContentsItem = { type: 'mwTOC', attributes: { property: newTableOfContentsData.data } };
 
 			if ( !currentTableOfContents ) {
 				this.metaList.insertMeta( newTableOfContentsItem );

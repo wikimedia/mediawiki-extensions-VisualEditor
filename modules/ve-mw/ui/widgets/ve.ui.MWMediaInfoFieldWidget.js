@@ -25,8 +25,6 @@
  * @cfg {string} [descriptionHeight='4em'] Height limit for description fields
  */
 ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, config ) {
-	var datetime;
-
 	// Configuration initialization
 	config = config || {};
 
@@ -43,6 +41,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 
 	// Initialization
 	if ( typeof content === 'string' ) {
+		var datetime;
 		if ( config.isDate && ( datetime = moment( content ) ).isValid() ) {
 			content = datetime.fromNow();
 		}
@@ -138,11 +137,9 @@ ve.ui.MWMediaInfoFieldWidget.static.threshold = 24;
  * visible or not.
  */
 ve.ui.MWMediaInfoFieldWidget.prototype.initialize = function () {
-	var actualHeight, containerHeight;
-
 	if ( this.getType() === 'description' ) {
-		actualHeight = this.$text.prop( 'scrollHeight' );
-		containerHeight = this.$text.outerHeight( true );
+		var actualHeight = this.$text.prop( 'scrollHeight' );
+		var containerHeight = this.$text.outerHeight( true );
 
 		if ( actualHeight < containerHeight + this.constructor.static.threshold ) {
 			// The contained result is big enough to show. Remove the maximum height

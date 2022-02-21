@@ -57,12 +57,11 @@ ve.ce.MWSignatureNode.static.getDescription = function () {
 
 // Update the timestamp on inserted signatures every minute.
 setInterval( function () {
-	var updatedSignatures, i, sig,
-		liveSignatures = ve.ce.MWSignatureNode.static.liveSignatures;
+	var liveSignatures = ve.ce.MWSignatureNode.static.liveSignatures;
 
-	updatedSignatures = [];
-	for ( i = 0; i < liveSignatures.length; i++ ) {
-		sig = liveSignatures[ i ];
+	var updatedSignatures = [];
+	for ( var i = 0; i < liveSignatures.length; i++ ) {
+		var sig = liveSignatures[ i ];
 		try {
 			sig.forceUpdate();
 			updatedSignatures.push( sig );

@@ -75,8 +75,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 		$header = $( '<tr>' ),
 		variantInfo = this.model.getVariantInfo(),
 		type = this.model.getRuleType(),
-		isHidden = this.model.isHidden(),
-		languageCodes;
+		isHidden = this.model.isHidden();
 
 	$table.addClass(
 		've-ui-mwLanguageVariantNodeContextItem-rule-table'
@@ -94,7 +93,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-code-label' )
 				) );
 
-			languageCodes = ( type === 'filter' ) ?
+			var languageCodes = ( type === 'filter' ) ?
 				variantInfo.filter.l : [ variantInfo.name.t ];
 			languageCodes.forEach( function ( code ) {
 				var name = ve.init.platform.getLanguageName( code.toLowerCase() );

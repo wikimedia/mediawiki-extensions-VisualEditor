@@ -23,8 +23,6 @@
  * @cfg {string} [trackingName]
  */
 ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) {
-	var $popupContent;
-
 	config = config || {};
 
 	// HACK: Do not display on platforms other than desktop
@@ -50,7 +48,7 @@ ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) 
 	this.trackingName = config.trackingName;
 	this.$pulsatingDot = $( '<div>' ).addClass( 'mw-pulsating-dot' );
 
-	$popupContent = $( '<div>' ).append(
+	var $popupContent = $( '<div>' ).append(
 		$( '<h3>' ).text( config.popupTitle ),
 		// eslint-disable-next-line no-jquery/no-append-html
 		$( '<p>' ).append(
@@ -117,15 +115,13 @@ ve.ui.MWEducationPopupWidget.prototype.onTargetMouseDown = function () {
  * Click handler for the popup close button
  */
 ve.ui.MWEducationPopupWidget.prototype.onPopupCloseButtonClick = function () {
-	var mouseLeft;
-
 	this.$target.off( 'mousedown', this.onTargetMouseDownHandler );
 	this.popup.toggle( false );
 
 	ve.init.target.openEducationPopup = null;
 	mw.libs.ve.stopShowingEducationPopups();
 
-	mouseLeft = { which: OO.ui.MouseButtons.LEFT };
+	var mouseLeft = { which: OO.ui.MouseButtons.LEFT };
 	this.$target
 		.trigger( $.Event( 'mousedown', mouseLeft ) )
 		.trigger( $.Event( 'mouseup', mouseLeft ) )

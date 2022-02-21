@@ -77,15 +77,13 @@ ve.ui.MWIncludesContextItem.prototype.getDescriptionMessage = function () {
  * @inheritdoc
  */
 ve.ui.MWIncludesContextItem.prototype.renderBody = function () {
-	var wikitext;
-
 	this.$body.empty();
 
 	var $desc = this.getDescriptionMessage();
 	this.$body.append( $desc, $( document.createTextNode( mw.msg( 'word-separator' ) ) ) );
 
 	if ( this.model.getAttribute( 'mw' ) ) {
-		wikitext = this.model.getAttribute( 'mw' ).src;
+		var wikitext = this.model.getAttribute( 'mw' ).src;
 		// The opening and closing tags are included, eww
 		wikitext = wikitext.replace( /^<includeonly>\s*([\s\S]*)\s*<\/includeonly>$/, '$1' );
 		this.$body.append( $( '<pre>' )
