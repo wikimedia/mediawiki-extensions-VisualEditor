@@ -231,7 +231,6 @@ ve.ui.MWSettingsPage.prototype.checkValidRedirect = function () {
 		title = this.redirectTargetInput.getValue();
 
 		if ( !mw.Title.newFromText( title ) ) {
-
 			/*
 			 * TODO more precise error message. Modify the Title.newFromText method in Title.js
 			 * my idea is to in the parse method instead of a boolean return a string with an error message (not an error code since the error string can have parameters),

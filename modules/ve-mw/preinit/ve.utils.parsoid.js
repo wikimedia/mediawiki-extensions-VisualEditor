@@ -220,7 +220,6 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 		if ( targetData.isInternal ) {
 			var title = mw.Title.newFromText( targetData.title );
 			if ( title && title.getPrefixedText() === docTitleText ) {
-
 				if ( !fragment ) {
 					// Special case for empty fragment, even if prefix set
 					el.setAttribute( 'href', '#' );

@@ -434,7 +434,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 						src: image.getAttribute( 'src' ),
 						height: image.getAttribute( 'height' ),
 						width: image.getAttribute( 'width' ),
-						captionDocument: dialog.createCaptionDocument( imageCaptionNode ),
+						captionDocument: this.createCaptionDocument( imageCaptionNode ),
 						tagName: image.getAttribute( 'tagName' )
 					} );
 				}
@@ -703,7 +703,6 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 	this.requestImages( {
 		titles: [ title ]
 	} ).done( function () {
-
 		// populate edit panel with the new image
 		var items = dialog.galleryGroup.items;
 		dialog.onHighlightItem( items[ items.length - 1 ] );

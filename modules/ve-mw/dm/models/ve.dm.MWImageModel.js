@@ -299,19 +299,19 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 
 	// If we already have dimensions from the API, use them
 	if ( APIinfo ) {
-		imageModel.scalable.setOriginalDimensions( {
+		this.scalable.setOriginalDimensions( {
 			width: APIinfo.width,
 			height: APIinfo.height
 		} );
 		// Update media type
-		imageModel.setMediaType( APIinfo.mediatype );
+		this.setMediaType( APIinfo.mediatype );
 		// Update defaults
 		ve.dm.MWImageNode.static.syncScalableToType(
-			imageModel.getType(),
+			this.getType(),
 			APIinfo.mediatype,
-			imageModel.scalable
+			this.scalable
 		);
-		imageModel.updateScalableDetails( {
+		this.updateScalableDetails( {
 			width: APIinfo.width,
 			height: APIinfo.height
 		} );

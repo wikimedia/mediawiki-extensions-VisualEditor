@@ -1315,7 +1315,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
 		return mw.libs.ve.targetSaver.postWikitext(
 			doc,
 			data,
-			{ api: target.getContentApi() }
+			{ api: this.getContentApi() }
 		);
 	}
 

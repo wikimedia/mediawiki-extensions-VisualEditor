@@ -1,5 +1,4 @@
 {
-
 	/**
 	 * @param {string[]} [knownParameters]
 	 * @return {ve.dm.MWTemplateModel} but it's a mock

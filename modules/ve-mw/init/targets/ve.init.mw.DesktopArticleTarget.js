@@ -673,7 +673,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 	if ( this.wikitextFallbackLoading ) {
 		// Failed twice now
 		mw.log.warn( 'Failed to fall back to wikitext', code, errorDetails );
-		location.href = target.viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
+		location.href = this.viewUri.clone().extend( { action: 'edit', veswitched: 1 } );
 		return;
 	}
 
