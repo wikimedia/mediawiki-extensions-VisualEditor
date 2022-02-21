@@ -54,15 +54,10 @@ OO.inheritClass( ve.ui.MWFloatingHelpElement, OO.ui.Element );
 
 ve.ui.MWFloatingHelpElement.prototype.onClick = function () {
 	if ( !this.helpButton.hasFlag( 'primary' ) ) {
-		var window = this.windowManager.openWindow( this.helpDialog ),
-			element = this;
+		var window = this.windowManager.openWindow( this.helpDialog );
 
-		window.opening.then( function () {
-			element.updateButton( true );
-		} );
-		window.closing.then( function () {
-			element.updateButton( false );
-		} );
+		window.opening.then( this.updateButton.bind( this, true ) );
+		window.closing.then( this.updateButton.bind( this, false ) );
 	} else {
 		this.windowManager.closeWindow( this.helpDialog );
 	}
