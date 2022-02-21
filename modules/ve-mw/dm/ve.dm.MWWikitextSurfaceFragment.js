@@ -68,7 +68,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type,
  * @param {string} before Text to go before selection
  * @param {string} after Text to go after selection
  * @param {Function|string} placeholder Placeholder text to insert at an empty selection
- * @param {boolean} forceWrap Force wrapping, even if matching wrapping exists
+ * @param {boolean} [forceWrap=false] Force wrapping, even if matching wrapping exists
  * @return {ve.dm.MWWikitextSurfaceFragment}
  * @chainable
  */

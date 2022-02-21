@@ -408,7 +408,7 @@ ve.ui.MWAceEditorWidget.prototype.focus = function () {
 
 /**
  * @inheritdoc
- * @param {boolean} force Force a resize call on Ace editor
+ * @param {boolean} [force=false] Force a resize call on Ace editor
  */
 ve.ui.MWAceEditorWidget.prototype.adjustSize = function ( force ) {
 	var widget = this;

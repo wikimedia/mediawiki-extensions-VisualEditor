@@ -65,7 +65,7 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
  *
  * @param {string} title
  * @param {jQuery} $element Element to style
- * @param {boolean} hasFragment Whether the link goes to a fragment
+ * @param {boolean} [hasFragment=false] Whether the link goes to a fragment
  */
 ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFragment ) {
 	var cache = this,

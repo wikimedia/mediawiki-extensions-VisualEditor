@@ -51,8 +51,8 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, ve.ui.MWAriaDes
  * @param {Object} config
  * @param {string} config.data Parameter name
  * @param {string} config.label
- * @param {boolean} [config.required] Required parameters can't be unchecked
- * @param {boolean} [config.selected] If the parameter is currently used (checked)
+ * @param {boolean} [config.required=false] Required parameters can't be unchecked
+ * @param {boolean} [config.selected=false] If the parameter is currently used (checked)
  * @return {ve.ui.MWTransclusionOutlineParameterWidget}
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.static.createItem = function ( config ) {

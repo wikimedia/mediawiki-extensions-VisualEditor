@@ -237,7 +237,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, 
  * @param {ve.dm.MetaList} metaList Meta list
  * @param {Object} config
  * @param {Object} [config.data] Dialog setup data
- * @param {boolean} [config.isReadOnly] Dialog is in read-only mode
+ * @param {boolean} [config.isReadOnly=false] Dialog is in read-only mode
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoriesPage.prototype.setup = function ( metaList, config ) {

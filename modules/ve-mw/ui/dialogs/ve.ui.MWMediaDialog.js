@@ -1192,7 +1192,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
  * Switch between the edit and insert/search panels
  *
  * @param {string} panel Panel name
- * @param {boolean} [noFocus] Do not put focus into the default field of the panel
+ * @param {boolean} [noFocus=false] Do not put focus into the default field of the panel
  */
 ve.ui.MWMediaDialog.prototype.switchPanels = function ( panel, noFocus ) {
 	switch ( panel ) {

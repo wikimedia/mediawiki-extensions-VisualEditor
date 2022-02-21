@@ -132,6 +132,7 @@ ve.ui.MWTransclusionOutlinePartWidget.prototype.setSelected = function ( state )
 };
 
 /**
+ * @private
  * @param {boolean} state
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.updateButtonAriaDescription = function ( state ) {
