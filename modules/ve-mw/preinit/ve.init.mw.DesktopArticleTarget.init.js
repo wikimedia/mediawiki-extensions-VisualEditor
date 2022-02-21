@@ -208,9 +208,18 @@
 		}
 	}
 
+	/**
+	 * Parse a section value from a query string object
+	 *
+	 *     @example
+	 *     parseSection( uri.query.section )
+	 *
+	 * @param {string|undefined} section Section value from query object
+	 * @return {string|null} Section if valid, null otherwise
+	 */
 	function parseSection( section ) {
 		// Section must be a number, 'new' or 'T-' prefixed
-		if ( /^(new|\d+|T-\d+)$/.test( section ) ) {
+		if ( section && /^(new|\d+|T-\d+)$/.test( section ) ) {
 			return section;
 		}
 		return null;
@@ -1356,9 +1365,52 @@
 		// for e.g. "Edit" > "Edit source" even when VE is not available.
 	}
 
+	function isSupportedEditPage( editUri ) {
+		return configData.unsupportedEditParams.every( function ( param ) {
+			return editUri.query[ param ] === undefined;
+		} );
+	}
+
+	function getEditModeFromUri( editUri ) {
+		if ( mw.config.get( 'wgDiscussionToolsStartNewTopicTool' ) ) {
+			// Avoid conflicts with DiscussionTools
+			return false;
+		}
+		// On view pages if veaction is correctly set
+		var m = veactionToMode[ editUri.query.veaction ];
+		if ( isViewPage && init.isAvailable && availableModes.indexOf( m ) !== -1 ) {
+			return m;
+		}
+		// Edit pages
+		if ( isEditPage && isSupportedEditPage( editUri ) ) {
+			// Just did a discard-switch from wikitext editor to VE (in no RESTBase mode)
+			if ( editUri.query.wteswitched === '1' ) {
+				return init.isVisualAvailable ? 'visual' : null;
+			}
+			// User has disabled VE, or we are in view source only mode, or we have landed here with posted data
+			if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
+				return null;
+			}
+			switch ( getEditPageEditor() ) {
+				case 'visualeditor':
+					if ( init.isVisualAvailable ) {
+						return 'visual';
+					}
+					if ( init.isWikitextAvailable ) {
+						return 'source';
+					}
+					return null;
+
+				case 'wikitext':
+					return init.isWikitextAvailable ? 'source' : null;
+			}
+		}
+		return null;
+	}
+
 	$( function () {
 		var showWikitextWelcome = true,
-			section = uri.query.section !== undefined ? parseSection( uri.query.section ) : null;
+			section = parseSection( uri.query.section );
 
 		var requiredSkinElements =
 			$( '#content' ).length &&
@@ -1370,56 +1422,13 @@
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 		}
 
-		function isSupportedEditPage() {
-			return configData.unsupportedEditParams.every( function ( param ) {
-				return uri.query[ param ] === undefined;
-			} );
-		}
-
-		function getInitialEditMode() {
-			if ( mw.config.get( 'wgDiscussionToolsStartNewTopicTool' ) ) {
-				// Avoid conflicts with DiscussionTools
-				return false;
-			}
-			// On view pages if veaction is correctly set
-			var m = veactionToMode[ uri.query.veaction ];
-			if ( isViewPage && init.isAvailable && availableModes.indexOf( m ) !== -1 ) {
-				return m;
-			}
-			// Edit pages
-			if ( isEditPage && isSupportedEditPage() ) {
-				// Just did a discard-switch from wikitext editor to VE (in no RESTBase mode)
-				if ( uri.query.wteswitched === '1' ) {
-					return init.isVisualAvailable ? 'visual' : null;
-				}
-				// User has disabled VE, or we are in view source only mode, or we have landed here with posted data
-				if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
-					return null;
-				}
-				switch ( getEditPageEditor() ) {
-					case 'visualeditor':
-						if ( init.isVisualAvailable ) {
-							return 'visual';
-						}
-						if ( init.isWikitextAvailable ) {
-							return 'source';
-						}
-						return null;
-
-					case 'wikitext':
-						return init.isWikitextAvailable ? 'source' : null;
-				}
-			}
-			return null;
-		}
-
 		if ( init.isAvailable && pageCanLoadEditor && !requiredSkinElements ) {
 			mw.log.warn(
 				'Your skin is incompatible with VisualEditor. ' +
 				'See https://www.mediawiki.org/wiki/Extension:VisualEditor/Skin_requirements for the requirements.'
 			);
 		} else if ( init.isAvailable ) {
-			var mode = getInitialEditMode();
+			var mode = getEditModeFromUri( uri );
 			if ( mode ) {
 				showWikitextWelcome = false;
 				trackActivateStart( {
