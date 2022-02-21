@@ -1227,7 +1227,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	}
 	if ( !this.active && ( veaction === 'edit' || veaction === 'editsource' ) ) {
 		this.actFromPopState = true;
-		this.activate();
+		this.emit( 'reactivate' );
 	}
 	if ( this.active && veaction !== 'edit' && veaction !== 'editsource' ) {
 		this.actFromPopState = true;
