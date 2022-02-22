@@ -60,7 +60,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
 		this.removePartWidget( removed );
 	}
 	if ( added ) {
-		this.addPartWidget( added, newPosition );
+		this.addPartWidget( added, newPosition, removed );
 	}
 };
 
@@ -93,13 +93,14 @@ ve.ui.MWTransclusionOutlineWidget.prototype.removePartWidget = function ( part )
  * @private
  * @param {ve.dm.MWTransclusionPartModel} part
  * @param {number} [newPosition]
+ * @param {ve.dm.MWTransclusionPartModel|null} [removed]
  * @fires filterPagesByName
  */
-ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, newPosition ) {
+ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, newPosition, removed ) {
 	var widget;
 
 	if ( part instanceof ve.dm.MWTemplateModel ) {
-		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part );
+		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part, removed instanceof ve.dm.MWTemplatePlaceholderModel );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
 		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
 		widget.connect( this, {

@@ -10,8 +10,9 @@
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template
+ * @param {boolean} [replacesPlaceholder]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template ) {
+ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTemplateWidget( template, replacesPlaceholder ) {
 	var spec = template.getSpec();
 
 	// Parent constructor
@@ -30,7 +31,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} );
 
 	this.initializeParameterList();
-	this.toggleFilters( !this.transclusionModel.isSingleTemplate() );
+	this.toggleFilters( !replacesPlaceholder && !this.transclusionModel.isSingleTemplate() );
 };
 
 /* Inheritance */
