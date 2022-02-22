@@ -133,7 +133,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			'prop' => 'text|revid|categorieshtml|displaytitle|subtitle|modules|jsconfigvars',
 			'useskin' => $params['useskin'],
 			// Param is added by hook in MobileFrontend
-			'mobileformat' => $params['mobileformat'],
+			'mobileformat' => $params['mobileformat'] ?? null,
 		];
 
 		$context = new DerivativeContext( $this->getContext() );
