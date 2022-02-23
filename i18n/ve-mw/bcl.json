@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Brazal.dang",
+			"Daramlagon",
 			"Geopoet",
 			"ShimunUfesoj",
 			"Sky Harbor"
@@ -14,13 +15,13 @@
 	"visualeditor-browserwarning": "Ika naggagamit nin sarong parabuklat na bakong opisyal na suportado kaining paraliwat.",
 	"visualeditor-ca-createlocaldescriptionsource": "Idugang an lokal na deskripsyon",
 	"visualeditor-ca-createsource": "Muknaon an gikanan",
-	"visualeditor-ca-editsource": "Liwaton an gikanan",
-	"visualeditor-ca-editsource-section": "liwaton an gikanan",
+	"visualeditor-ca-editsource": "Liwaton an ginikanan",
+	"visualeditor-ca-editsource-section": "baguhon an susugan",
 	"visualeditor-ca-ve-create": "Biswal-na-Paraliwat",
 	"visualeditor-ca-ve-edit": "Biswal-na-Paraliwat",
 	"visualeditor-ca-ve-edit-section": "Biswal-na-Paraliwat",
 	"visualeditor-desc": "Biswal na paraliwat para sa MediaWiki",
-	"visualeditor-descriptionpagelink": "Project:Biswal-na-Paraliwat",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-content-section": "Kapsyon",
 	"visualeditor-dialog-media-size-choosecustom": "Pamugtakon an kustombreng sukol",
 	"visualeditor-dialog-media-size-choosedefault": "Pamugtakon sa panugmad na sukol",
