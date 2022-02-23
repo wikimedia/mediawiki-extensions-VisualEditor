@@ -73,6 +73,7 @@
 	"visualeditor-dialog-media-info-audiofile": "Ljudfil",
 	"visualeditor-dialog-media-info-created": "Skapad: $1",
 	"visualeditor-dialog-media-info-credit": "Erkännande",
+	"visualeditor-dialog-media-info-dateformat": "$2 $1 $3",
 	"visualeditor-dialog-media-info-imagedescription": "Full beskrivning",
 	"visualeditor-dialog-media-info-licenseshortname": "Licens",
 	"visualeditor-dialog-media-info-meta-artist": "Artist: $1",
