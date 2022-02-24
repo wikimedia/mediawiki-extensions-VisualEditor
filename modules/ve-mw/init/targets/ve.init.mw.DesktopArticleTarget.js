@@ -877,6 +877,15 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
+	// Desktop post-edit notification
+	if ( this.pageExists && !this.restoring && data.newrevid !== undefined ) {
+		// Append postEdit module to the list that will be loaded in the parent method
+		data.modules = data.modules.concat( [ 'mediawiki.action.view.postEdit' ] );
+	}
+
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
+
 	if ( this.pageExists && !this.restoring ) {
 		// Fix permalinks
 		if ( data.newrevid !== undefined ) {
@@ -887,10 +896,8 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			} );
 		}
 
-		// Desktop post-edit notification
+		// Actually fire the postEdit hook now that the save is complete
 		if ( data.newrevid !== undefined ) {
-			// Append postEdit module to the list that will be loaded in the parent method
-			data.modules = data.modules.concat( [ 'mediawiki.action.view.postEdit' ] );
 			mw.hook( 'postEdit' ).fire( {
 				// The following messages are used here:
 				// * postedit-confirmation-published
@@ -899,9 +906,6 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			} );
 		}
 	}
-
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 };
 
 /**
