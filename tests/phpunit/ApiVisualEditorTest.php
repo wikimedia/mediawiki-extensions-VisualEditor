@@ -34,7 +34,7 @@ class ApiVisualEditorTest extends ApiTestCase {
 	private function loadEditor() {
 		$params = [
 			'action' => 'visualeditor',
-			'paction' => 'parse',
+			'paction' => 'metadata',
 			'page' => 'SomeTestPage',
 		];
 		return $this->doApiRequestWithToken( $params );
