@@ -342,7 +342,7 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 				// This wasn't validated for a while, existing templates can do anything here
 				return typeof suggestedValue === 'string';
 			} ).map( function ( suggestedValue ) {
-				return { data: suggestedValue };
+				return { data: suggestedValue, label: suggestedValue || '\xA0' };
 			} );
 		this.rawValueInput = true;
 		return new OO.ui.ComboBoxInputWidget( valueInputConfig );
