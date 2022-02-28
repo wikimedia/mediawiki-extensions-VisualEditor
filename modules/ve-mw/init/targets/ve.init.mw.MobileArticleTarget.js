@@ -406,6 +406,9 @@ ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function () {};
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
+	// Avoid tryTeardown showing the abandonedit dialog in parent saveComplete:
+	this.overlay.saved = true;
+
 	// TODO: parsing this is expensive just for the section details. We should
 	// change MobileFrontend+this to behave like desktop does and just rerender
 	// the page with the provided HTML (T219420).
