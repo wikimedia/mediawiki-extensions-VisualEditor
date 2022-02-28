@@ -41,6 +41,7 @@ ve.ui.MWMobileSaveDialog.prototype.initialize = function () {
 	ve.ui.MWMobileSaveDialog.super.prototype.initialize.call( this );
 
 	this.$reviewVisualDiff.addClass( 'content' );
+	this.previewPanel.$element.addClass( 'content' );
 
 	if ( mw.mobileFrontend ) {
 		mobile = mw.mobileFrontend.require( 'mobile.startup' );
