@@ -108,7 +108,6 @@
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
 	background-color: #fff;
-	padding-bottom: 8px;
 	position: sticky;
 	top: 0;
 	z-index: 1;
@@ -116,6 +115,7 @@
 
 .ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
 	margin-top: -8px;
+	margin-bottom: 8px;
 	padding-top: 8px;
 }
 
