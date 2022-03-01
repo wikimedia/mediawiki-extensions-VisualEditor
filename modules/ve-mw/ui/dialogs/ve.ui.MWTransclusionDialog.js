@@ -113,6 +113,15 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
+	var controls = this.bookletLayout.getOutlineControls();
+	// T301914: Safe-guard for when a keyboard shortcut triggers this, instead of the actual button
+	if ( !controls.isVisible() ||
+		!controls.removeButton.isVisible() ||
+		controls.removeButton.isDisabled()
+	) {
+		return;
+	}
+
 	var itemId = this.findSelectedItemId(),
 		part = this.transclusionModel.getPartFromId( itemId );
 	// Check if the part is the actual template, or one of its parameters
