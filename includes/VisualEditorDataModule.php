@@ -69,7 +69,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	protected function getMessageInfo( ResourceLoaderContext $context ) {
 		$editSubmitButtonLabelPublish = $this->getConfig()
 			->get( 'EditSubmitButtonLabelPublish' );
-		$saveButtonLabelKey = $editSubmitButtonLabelPublish ? 'publishpage' : 'savearticle';
+		$saveButtonLabelKey = $editSubmitButtonLabelPublish ? 'publishchanges' : 'savechanges';
 		$saveButtonLabel = $context->msg( $saveButtonLabelKey )->text();
 
 		// Messages to be exported as parsed html
