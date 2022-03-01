@@ -41,10 +41,26 @@ class ApiVisualEditorTest extends ApiTestCase {
 	}
 
 	public function testLoadEditorBasic() {
-		$this->assertSame(
-			'success',
-			$this->loadEditor()[0]['visualeditor']['result']
-		);
+		$data = $this->loadEditor()[0]['visualeditor'];
+
+		$this->assertSame( 'success', $data['result'] );
+
+		$properties = [
+			'notices',
+			'copyrightWarning',
+			'checkboxesDef',
+			'checkboxesMessages',
+			'protectedClasses',
+			'basetimestamp',
+			'starttimestamp',
+			'oldid',
+			'blockinfo',
+			'canEdit',
+			'content',
+		];
+		foreach ( $properties as $prop ) {
+			$this->assertArrayHasKey( $prop, $data, "Result has key '$prop'" );
+		}
 	}
 
 	/**
