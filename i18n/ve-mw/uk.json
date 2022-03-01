@@ -220,7 +220,7 @@
 	"visualeditor-dialog-transclusion-help-message": "Шаблони забезпечують форматування вмісту. Цей редактор показує які опції шаблон надає ліворуч та значення, які можна вказати для цих опцій праворуч.",
 	"visualeditor-dialog-transclusion-help-page-feedback": "[//meta.wikimedia.org/wiki/Special:MyLanguage/Talk:WMDE_Technical_Wishes/VisualEditor_template_dialog_improvements Залишити відгук]",
 	"visualeditor-dialog-transclusion-help-page-help": "[//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Editing_templates Довідка з редагування шаблонів]",
-	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts Гарячі клавіші]",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts#Template_editor_dialog_shortcuts_and_keyboard_interactions Гарячі клавіші]",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Застаріле поле",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Поле застаріло. $1",
 	"visualeditor-dialog-transclusion-loading": "Завантаження…",

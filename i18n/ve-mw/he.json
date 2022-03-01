@@ -211,7 +211,7 @@
 	"visualeditor-dialog-transclusion-help-message": "תבניות מספקות עיצוב לתוכן. העורך הזה מציג אילו אפשרויות התבנית מספקת בצד ימין, וערכים שאפשר להוסיף לאפשרויות באלה בצד שמאל.",
 	"visualeditor-dialog-transclusion-help-page-feedback": "[//meta.wikimedia.org/wiki/Special:MyLanguage/Talk:WMDE_Technical_Wishes/VisualEditor_template_dialog_improvements שליחת משוב]",
 	"visualeditor-dialog-transclusion-help-page-help": "[//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Editing_templates עזרה בעריכת תבניות]",
-	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts קיצורי מקלדת]",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts#Template_editor_dialog_shortcuts_and_keyboard_interactions קיצורי מקלדת]",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "שדה מיושן",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "השדה מיושן. $1",
 	"visualeditor-dialog-transclusion-loading": "טעינה...",

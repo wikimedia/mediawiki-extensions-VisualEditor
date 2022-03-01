@@ -211,7 +211,7 @@
 	"visualeditor-dialog-transclusion-help-message": "Τα πρότυπα παρέχουν μορφοποίηση για το περιεχόμενο. Αυτός ο επεξεργαστής δείχνει ποιες επιλογές παρέχει ένα πρότυπο στα αριστερά και στη συνέχεια μπορούν να προστεθούν τιμές σε αυτές τις επιλογές στα δεξιά.",
 	"visualeditor-dialog-transclusion-help-page-feedback": "[//meta.wikimedia.org/wiki/Special:MyLanguage/Talk:WMDE_Technical_Wishes/VisualEditor_template_dialog_improvements Αφήστε αναπληροφόρηση]",
 	"visualeditor-dialog-transclusion-help-page-help": "[//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Editing_templates Βοήθεια για την επεξεργασία προτύπων]",
-	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts Συντομεύσεις πληκτρολογίου]",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts#Template_editor_dialog_shortcuts_and_keyboard_interactions Συντομεύσεις πληκτρολογίου]",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Καταργημένο πεδίο",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Το πεδίο έχει καταργηθεί.$1",
 	"visualeditor-dialog-transclusion-loading": "Φόρτωση...",

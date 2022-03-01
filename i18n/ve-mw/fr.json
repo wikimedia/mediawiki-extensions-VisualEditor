@@ -253,7 +253,7 @@
 	"visualeditor-dialog-transclusion-help-message": "Les modèles permettent de mettre en forme le contenu. Cet éditeur montre les options du modèle sur la gauche. Les valeurs peuvent ensuite être ajoutées à ces options sur la droite.",
 	"visualeditor-dialog-transclusion-help-page-feedback": "[//meta.wikimedia.org/wiki/Special:MyLanguage/Talk:WMDE_Technical_Wishes/VisualEditor_template_dialog_improvements Laissez un commentaire]",
 	"visualeditor-dialog-transclusion-help-page-help": "[//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Editing_templates Aide pour modifier des modèles]",
-	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts Raccourcis clavier]",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts#Template_editor_dialog_shortcuts_and_keyboard_interactions Raccourcis clavier]",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Champ obsolète",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Le champ est obsolète. $1",
 	"visualeditor-dialog-transclusion-loading": "Chargement en cours...",
