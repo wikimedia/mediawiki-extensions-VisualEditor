@@ -44,6 +44,7 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-newSidebar' );
 	}
 
+	this.hotkeyTriggers = {};
 	this.$element.on( 'keydown', this.onKeyDown.bind( this ) );
 };
 
@@ -217,7 +218,8 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
  */
 ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 	// Lower-case modifier and key names as specified in {@see ve.ui.Trigger}
-	var meta = ve.getSystemPlatform() === 'mac' ? 'meta+' : 'ctrl+';
+	var isMac = ve.getSystemPlatform() === 'mac',
+		meta = isMac ? 'meta+' : 'ctrl+';
 	var hotkeys = {
 		addTemplate: meta + 'd',
 		addWikitext: meta + 'shift+y',
@@ -228,15 +230,16 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 		removeBackspace: meta + 'backspace'
 	};
 
-	this.hotkeyTriggers = {};
-	this.hotkeyTriggers[ hotkeys.addTemplate ] = this.addTemplatePlaceholder.bind( this );
-	this.hotkeyTriggers[ hotkeys.addWikitext ] = this.addContent.bind( this );
-	this.hotkeyTriggers[ hotkeys.addParameter ] = this.addParameter.bind( this );
-
-	this.hotkeyTriggers[ hotkeys.moveUp ] = this.onOutlineControlsMove.bind( this, -1 );
-	this.hotkeyTriggers[ hotkeys.moveDown ] = this.onOutlineControlsMove.bind( this, 1 );
-	this.hotkeyTriggers[ hotkeys.remove ] = this.onOutlineControlsRemove.bind( this );
-	this.hotkeyTriggers[ hotkeys.removeBackspace ] = this.onOutlineControlsRemove.bind( this );
+	var notInTextFields = /^(?!INPUT|TEXTAREA)/i;
+	this.connectHotKeyBinding( hotkeys.addTemplate, this.addTemplatePlaceholder.bind( this ) );
+	this.connectHotKeyBinding( hotkeys.addWikitext, this.addContent.bind( this ) );
+	this.connectHotKeyBinding( hotkeys.addParameter, this.addParameter.bind( this ) );
+	this.connectHotKeyBinding( hotkeys.moveUp, this.onOutlineControlsMove.bind( this, -1 ), notInTextFields );
+	this.connectHotKeyBinding( hotkeys.moveDown, this.onOutlineControlsMove.bind( this, 1 ), notInTextFields );
+	this.connectHotKeyBinding( hotkeys.remove, this.onOutlineControlsRemove.bind( this ), notInTextFields );
+	if ( isMac ) {
+		this.connectHotKeyBinding( hotkeys.removeBackspace, this.onOutlineControlsRemove.bind( this ), notInTextFields );
+	}
 
 	this.addHotkeyToTitle( this.addTemplateButton, hotkeys.addTemplate );
 	this.addHotkeyToTitle( this.addContentButton, hotkeys.addWikitext );
@@ -246,6 +249,19 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 	this.addHotkeyToTitle( controls.upButton, hotkeys.moveUp );
 	this.addHotkeyToTitle( controls.downButton, hotkeys.moveDown );
 	this.addHotkeyToTitle( controls.removeButton, hotkeys.remove );
+};
+
+/**
+ * @private
+ * @param {string} hotkey
+ * @param {Function} handler
+ * @param {RegExp} [validTypes]
+ */
+ve.ui.MWTransclusionDialog.prototype.connectHotKeyBinding = function ( hotkey, handler, validTypes ) {
+	this.hotkeyTriggers[ hotkey ] = {
+		handler: handler,
+		validTypes: validTypes
+	};
 };
 
 /**
@@ -265,10 +281,11 @@ ve.ui.MWTransclusionDialog.prototype.addHotkeyToTitle = function ( element, hotk
  * @param {jQuery.Event} e Key down event
  */
 ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
-	var eventTrigger = new ve.ui.Trigger( e ).toString();
+	var hotkey = new ve.ui.Trigger( e ).toString(),
+		trigger = this.hotkeyTriggers[ hotkey ];
 
-	if ( this.hotkeyTriggers[ eventTrigger ] ) {
-		this.hotkeyTriggers[ eventTrigger ]();
+	if ( trigger && ( !trigger.validTypes || trigger.validTypes.test( e.target.nodeName ) ) ) {
+		trigger.handler();
 		e.preventDefault();
 		e.stopPropagation();
 	}
