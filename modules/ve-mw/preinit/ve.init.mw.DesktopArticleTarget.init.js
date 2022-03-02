@@ -1297,16 +1297,8 @@
 	// browser etc.
 	init.isAvailable = (
 		VisualEditorSupportCheck() &&
-
-		( ( 'vesupported' in uri.query ) || !$.client.test( init.unsupportedList, null, true ) ) &&
-
-		// Not on pages which are outputs of the Translate extensions
-		// TODO: Remove this once the extension is using VisualEditorBeforeEditorHook (T174180)
-		mw.config.get( 'wgTranslatePageTranslation' ) !== 'translation' &&
-
-		// Not on the editor in the FileImporter dialog (T298345)
-		// TODO: Remove this once the extension is using VisualEditorBeforeEditorHook (T174180)
-		!mw.config.get( 'wgFileImporterEditor' )
+		( ( 'vesupported' in uri.query ) || !$.client.test( init.unsupportedList, null, true ) )
+		// Extensions can disable VE in certain circumstances using the VisualEditorBeforeEditor hook (T174180)
 	);
 
 	var enabledForUser = (
