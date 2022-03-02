@@ -239,7 +239,7 @@
 	"visualeditor-dialog-transclusion-help-message": "Sjablonen bieden opmaak voor inhoud. Deze tekstverwerker laat aan de linkerkant zien welke opties een sjabloon biedt en aan de rechterkant kunnen waarden worden toegevoegd.",
 	"visualeditor-dialog-transclusion-help-page-feedback": "[//meta.wikimedia.org/wiki/Special:MyLanguage/Talk:WMDE_Technical_Wishes/VisualEditor_template_dialog_improvements Laat feedback achter]",
 	"visualeditor-dialog-transclusion-help-page-help": "[//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Editing_templates Hulp bij het bewerken van sjablonen]",
-	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts#Template_editor_dialog_shortcuts_and_keyboard_interactions Toetsenbord-sneltoetsen]",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts Sneltoetsen]",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Verouderd veld",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Veld is verouderd: $1",
 	"visualeditor-dialog-transclusion-loading": "Bezig met laden…",
