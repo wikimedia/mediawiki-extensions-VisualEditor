@@ -409,19 +409,23 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 };
 
 /**
- * Intiailise autosave, recovering changes if applicable
+ * Intialise autosave, recovering changes if applicable
+ *
+ * @param {boolean} [suppressNotification=false] Don't notify the user if changes are recovered
  */
-ve.init.mw.Target.prototype.initAutosave = function () {
+ve.init.mw.Target.prototype.initAutosave = function ( suppressNotification ) {
 	var target = this,
 		surfaceModel = this.getSurface().getModel();
 	if ( this.recovered ) {
 		// Restore auto-saved transactions if document state was recovered
 		try {
 			surfaceModel.restoreChanges();
-			ve.init.platform.notify(
-				ve.msg( 'visualeditor-autosave-recovered-text' ),
-				ve.msg( 'visualeditor-autosave-recovered-title' )
-			);
+			if ( !suppressNotification ) {
+				ve.init.platform.notify(
+					ve.msg( 'visualeditor-autosave-recovered-text' ),
+					ve.msg( 'visualeditor-autosave-recovered-title' )
+				);
+			}
 		} catch ( e ) {
 			mw.log.warn( e );
 			ve.init.platform.notify(
