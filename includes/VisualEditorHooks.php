@@ -1175,7 +1175,7 @@ class VisualEditorHooks {
 		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
 			$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 			DeferredUpdates::addUpdate( new AtomicSectionUpdate(
-				$lb->getLazyConnectionRef( DB_PRIMARY ),
+				$lb->getConnectionRef( DB_PRIMARY ),
 				__METHOD__,
 				static function () use ( $user, $cookie ) {
 					$services = MediaWikiServices::getInstance();
