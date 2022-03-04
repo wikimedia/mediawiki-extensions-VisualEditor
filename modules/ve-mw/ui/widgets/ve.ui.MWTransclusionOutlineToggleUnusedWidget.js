@@ -42,7 +42,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineToggleUnusedWidget, OO.ui.ButtonWidg
  * @fires toggleUnusedFields
  */
 ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.onClick = function () {
-	this.toggleUnusedParameters( !this.showUnusedFields );
+	this.toggleUnusedParameters( !this.showUnusedFields, false, true );
 };
 
 /** @inheritdoc */
@@ -54,9 +54,10 @@ ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.setDisabled = function (
 /**
  * @param {boolean} showUnused
  * @param {boolean} [internal]
+ * @param {boolean} [fromClick]
  * @fires toggleUnusedFields
  */
-ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters = function ( showUnused, internal ) {
+ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters = function ( showUnused, internal, fromClick ) {
 	showUnused = showUnused || this.isDisabled();
 	if ( showUnused !== this.showUnusedFields ) {
 		this.showUnusedFields = showUnused;
@@ -65,7 +66,7 @@ ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters =
 			'visualeditor-dialog-transclusion-filter-show-all'
 		) );
 		if ( !internal ) {
-			this.emit( 'toggleUnusedFields', this.showUnusedFields );
+			this.emit( 'toggleUnusedFields', this.showUnusedFields, fromClick );
 		}
 	}
 };

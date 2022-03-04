@@ -411,14 +411,29 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 /**
  * @private
  * @param {boolean} visibility
+ * @param {boolean} fromClick
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = function ( visibility ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = function ( visibility, fromClick ) {
 	if ( visibility ) {
 		this.createAllParameterCheckboxes();
 	}
+
+	var firstSelected;
 	if ( this.parameterList ) {
 		this.parameterList.items.forEach( function ( item ) {
 			item.toggle( visibility || item.isSelected() );
+			if ( fromClick && !firstSelected && item.isSelected() ) {
+				firstSelected = item;
+			}
 		} );
+	}
+
+	if ( !visibility && fromClick ) {
+		// make sure the header is still visibly after collapsing
+		this.header.scrollElementIntoView();
+		if ( firstSelected ) {
+			// make sure parameters ( if any ) are still visible and scrolled underneath the sticky
+			firstSelected.scrollElementIntoView( { padding: { top: 110 } } );
+		}
 	}
 };
