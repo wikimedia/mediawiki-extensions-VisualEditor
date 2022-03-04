@@ -5,7 +5,27 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.mwEnvironment );
+QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.newMwEnvironment( {
+	beforeEach: function () {
+		mw.config.set( 'wgVisualEditorConfig', ve.extendObject(
+			{},
+			mw.config.get( 'wgVisualEditorConfig' ),
+			{
+				// Disable welcome dialog
+				showBetaWelcome: false
+			}
+		) );
+	},
+	config: {
+		wgVisualEditor: {
+			pageLanguageCode: 'he',
+			pageLanguageDir: 'rtl'
+		},
+		wgAction: 'view',
+		wgNamespaceNumber: 0,
+		wgCanonicalNamespace: ''
+	}
+} ) );
 
 QUnit.test( 'init', ( assert ) => {
 	const response = {
@@ -86,10 +106,6 @@ QUnit.test( 'init', ( assert ) => {
 	target.on( 'surfaceReady', () => {
 		assert.strictEqual( target.getSurface().getModel().getDocument().getLang(), 'he', 'Page language is passed through from config' );
 		assert.strictEqual( target.getSurface().getModel().getDocument().getDir(), 'rtl', 'Page direction is passed through from config' );
-		mw.config.set( 'wgVisualEditor', {
-			pageLanguageCode: 'en',
-			pageLanguageDir: 'ltr'
-		} );
 		target.activatingDeferred.then( () => {
 			assert.equalDomElement(
 				target.actionsToolbar.tools.notices.noticeItems[ 0 ].$element[ 0 ],
@@ -108,11 +124,6 @@ QUnit.test( 'init', ( assert ) => {
 			} );
 		} );
 	} );
-	mw.config.set( 'wgVisualEditor', {
-		pageLanguageCode: 'he',
-		pageLanguageDir: 'rtl'
-	} );
-	mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome = false;
 	target.activate( dataPromise );
 } );
 
