@@ -410,7 +410,7 @@
 	"visualeditor-special-characters-group-other": "經常使用",
 	"visualeditor-templatesused-tool": "使用的模板",
 	"visualeditor-title-error": "無效標題。",
-	"visualeditor-toload": "現在將載入編輯器，若您再幾秒過後仍看到此訊息，請 [$1 重新載入此頁面]。",
+	"visualeditor-toload": "現在將載入編輯器，若您再幾秒過後仍看到此訊息，請[$1 重新載入頁面]。",
 	"visualeditor-tooltip-non-breaking-space": "不換行空格",
 	"visualeditor-usernamespacepagelink": "Project:使用者命名空間",
 	"visualeditor-version-label": "版本",
