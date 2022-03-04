@@ -280,21 +280,21 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 		// Take the relative path
 		href = matches[ 1 ];
 		isInternal = true;
-	}
-
-	// Check if this matches the server's script path (as used by red links)
-	relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
-	if ( relativeHref.indexOf( relativeBase ) === 0 ) {
-		var uri = new mw.Uri( relativeHref );
-		if ( Object.keys( uri.query ).length === 1 && uri.query.title ) {
-			href = uri.query.title;
-			isInternal = true;
-		} else if ( Object.keys( uri.query ).length === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' ) {
-			href = uri.query.title;
-			isInternal = true;
-		} else {
-			href = relativeHref;
-			isInternal = false;
+	} else {
+		// Check if this matches the server's script path (as used by red links)
+		relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
+		if ( relativeHref.indexOf( relativeBase ) === 0 ) {
+			var uri = new mw.Uri( relativeHref );
+			if ( Object.keys( uri.query ).length === 1 && uri.query.title ) {
+				href = uri.query.title;
+				isInternal = true;
+			} else if ( Object.keys( uri.query ).length === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' ) {
+				href = uri.query.title;
+				isInternal = true;
+			} else {
+				href = relativeHref;
+				isInternal = false;
+			}
 		}
 	}
 
