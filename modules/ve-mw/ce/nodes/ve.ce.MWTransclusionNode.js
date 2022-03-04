@@ -45,39 +45,23 @@ ve.ce.MWTransclusionNode.static.iconWhenInvisible = 'puzzle';
 /* Static Methods */
 
 /**
- * Get a list of descriptions of template parts in a transclusion node, excluding raw wikitext
+ * Get a plain text description of the template parts in a transclusion node, excluding raw wikitext
  * snippets.
  *
  * @static
- * @param {ve.dm.MWTransclusionNode} model Node model
- * @return {(string|undefined)[]} List of template part descriptions
- */
-ve.ce.MWTransclusionNode.static.getTemplatePartDescriptions = function ( model ) {
-	return model.getPartsList().map( this.getTemplatePartDescription );
-};
-
-/**
- * Get a description of a template part in a transclusion node, except it's a raw wikitext snippet.
- *
- * @static
- * @param {Object} part Template part
- * @return {string|undefined}
- */
-ve.ce.MWTransclusionNode.static.getTemplatePartDescription = function ( part ) {
-	if ( part.templatePage ) {
-		return mw.Title.newFromText( part.templatePage )
-			.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
-	} else if ( part.template ) {
-		// Not actually a template, but e.g. a parser function
-		return part.template;
-	}
-};
-
-/**
- * @inheritdoc
+ * @param {ve.dm.MWTransclusionNode} model
+ * @return {string} Comma-separated list of template names
  */
 ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
-	return this.getTemplatePartDescriptions( model )
+	return model.getPartsList()
+		.map( function ( part ) {
+			if ( part.templatePage ) {
+				return mw.Title.newFromText( part.templatePage )
+					.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
+			}
+			// Not actually a template, but e.g. a parser function
+			return part.template || '';
+		} )
 		.filter( function ( desc ) {
 			return desc;
 		} )
