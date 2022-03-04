@@ -1,4 +1,10 @@
-QUnit.module( 've.ui.MWParameterPage', ve.test.utils.mwEnvironment );
+QUnit.module( 've.ui.MWParameterPage', ve.test.utils.newMwEnvironment( {
+	config: {
+		wgVisualEditorConfig: ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
+			transclusionDialogSuggestedValues: true
+		} )
+	}
+} ) );
 
 [
 	[ undefined, '', ve.ui.MWLazyMultilineTextInputWidget ],
@@ -70,10 +76,6 @@ QUnit.module( 've.ui.MWParameterPage', ve.test.utils.mwEnvironment );
 	[ 'wiki-template-name', mw.widgets.TitleInputWidget ]
 ].forEach( ( [ type, expected ] ) =>
 	QUnit.test( `suggestedvalues: ${type}`, ( assert ) => {
-		const config = mw.config.get( 'wgVisualEditorConfig' ),
-			wasEnabled = config.transclusionDialogSuggestedValues;
-		config.transclusionDialogSuggestedValues = true;
-
 		const transclusion = new ve.dm.MWTransclusionModel(),
 			template = new ve.dm.MWTemplateModel( transclusion, {} ),
 			parameter = new ve.dm.MWParameterModel( template, 'p', '' );
@@ -91,8 +93,6 @@ QUnit.module( 've.ui.MWParameterPage', ve.test.utils.mwEnvironment );
 			assert.strictEqual( input.getMenu().getItemCount(), 1 );
 			assert.strictEqual( input.getMenu().items[ 0 ].getData(), 'example' );
 		}
-
-		config.transclusionDialogSuggestedValues = wasEnabled;
 	} )
 );
 

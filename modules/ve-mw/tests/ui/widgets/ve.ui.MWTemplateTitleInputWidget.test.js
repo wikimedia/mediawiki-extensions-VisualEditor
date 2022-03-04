@@ -1,14 +1,12 @@
 {
-	const enableCirrusSearchLookup = function ( enabled ) {
-		const config = mw.config.get( 'wgVisualEditorConfig' );
-		config.cirrusSearchLookup = enabled !== false;
-		mw.config.set( 'wgVisualEditorConfig', config );
+	const enableCirrusSearchLookup = function () {
+		// Config will be reset by newMwEnvironment's teardown
+		mw.config.set( 'wgVisualEditorConfig', ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
+			cirrusSearchLookup: true
+		} ) );
 	};
 
-	QUnit.module( 've.ui.MWTemplateTitleInputWidget', QUnit.newMwEnvironment( {
-		beforeEach: enableCirrusSearchLookup.bind( this, false ),
-		afterEach: enableCirrusSearchLookup.bind( this, false )
-	} ) );
+	QUnit.module( 've.ui.MWTemplateTitleInputWidget', ve.test.utils.newMwEnvironment() );
 
 	QUnit.test( 'default prefixsearch', ( assert ) => {
 		const widget = new ve.ui.MWTemplateTitleInputWidget(),

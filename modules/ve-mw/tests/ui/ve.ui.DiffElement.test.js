@@ -4,7 +4,7 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-QUnit.module( 've.ui.DiffElement (MW)', ve.test.utils.mwEnvironment );
+QUnit.module( 've.ui.DiffElement (MW)', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'Diffing', ( assert ) => {
 	const fixBase = ( body ) =>

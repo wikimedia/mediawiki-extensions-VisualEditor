@@ -4,18 +4,16 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-QUnit.module( 've.ui.MWWikitextStringTransferHandler', QUnit.newMwEnvironment( {
+QUnit.module( 've.ui.MWWikitextStringTransferHandler', ve.test.utils.newMwEnvironment( {
 	beforeEach() {
 		// Mock XHR for mw.Api()
 		this.server = this.sandbox.useFakeServer();
 		// Random number, chosen by a fair dice roll.
 		// Used to make #mwt ID deterministic
 		this.randomStub = sinon.stub( Math, 'random' ).returns( 0.04 );
-		ve.test.utils.mwEnvironment.beforeEach.call( this );
 	},
 	afterEach() {
 		this.randomStub.restore();
-		ve.test.utils.mwEnvironment.afterEach.call( this );
 	}
 } ) );
 
