@@ -132,9 +132,12 @@ class ApiVisualEditorEdit extends ApiBase {
 			'oldid' => $newRevId,
 			'prop' => 'text|revid|categorieshtml|displaytitle|subtitle|modules|jsconfigvars',
 			'useskin' => $params['useskin'],
-			// Param is added by hook in MobileFrontend
-			'mobileformat' => $params['mobileformat'] ?? null,
 		];
+		// Boolean parameters must be omitted completely to be treated as false.
+		// Param is added by hook in MobileFrontend, so it may be unset.
+		if ( isset( $params['mobileformat'] ) && $params['mobileformat'] ) {
+			$apiParams['mobileformat'] = '1';
+		}
 
 		$context = new DerivativeContext( $this->getContext() );
 		$context->setRequest(
