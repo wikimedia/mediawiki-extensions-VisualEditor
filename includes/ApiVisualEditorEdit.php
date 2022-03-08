@@ -177,8 +177,7 @@ class ApiVisualEditorEdit extends ApiBase {
 
 		if ( $displaytitle !== false ) {
 			// Escape entities as in OutputPage::setPageTitle()
-			$displaytitle = Sanitizer::normalizeCharReferences(
-				Sanitizer::removeHTMLtags( $displaytitle ) );
+			$displaytitle = Sanitizer::removeSomeTags( $displaytitle );
 		}
 
 		return [
