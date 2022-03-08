@@ -205,17 +205,17 @@ ve.dm.mwExample.MWTransclusion.mixedDataClose = { type: '/mwTransclusionInline' 
 ve.dm.mwExample.MWTransclusion.blockParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.blockData ), undefined ] );
 ve.dm.mwExample.MWTransclusion.blockStoreItems = {};
 ve.dm.mwExample.MWTransclusion.blockStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.blockParamsHash ) ] =
-	$( ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent ).toArray();
+	$.parseHTML( ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent );
 
 ve.dm.mwExample.MWTransclusion.inlineParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.inlineData ), undefined ] );
 ve.dm.mwExample.MWTransclusion.inlineStoreItems = {};
 ve.dm.mwExample.MWTransclusion.inlineStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.inlineParamsHash ) ] =
-	$( ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose ).toArray();
+	$.parseHTML( ve.dm.mwExample.MWTransclusion.inlineOpen + ve.dm.mwExample.MWTransclusion.inlineContent + ve.dm.mwExample.MWTransclusion.inlineClose );
 
 ve.dm.mwExample.MWTransclusion.mixedParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.mixedDataOpen ), undefined ] );
 ve.dm.mwExample.MWTransclusion.mixedStoreItems = {};
 ve.dm.mwExample.MWTransclusion.mixedStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.mixedParamsHash ) ] =
-	$( ve.dm.mwExample.MWTransclusion.mixed ).toArray();
+	$.parseHTML( ve.dm.mwExample.MWTransclusion.mixed );
 
 ve.dm.mwExample.MWInternalLink = {
 	absoluteHref: ve.resolveUrl( '/wiki/Foo/Bar', ve.dm.example.base )
@@ -376,7 +376,7 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta property="mw:ThisIsAnAlien" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{ type: 'paragraph' },
@@ -398,7 +398,7 @@ ve.dm.mwExample.withMeta = [
 	'r',
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta property="mw:foo" content="bar" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	'B',
@@ -414,7 +414,7 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta property="mw:bar" content="baz" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{
@@ -443,7 +443,7 @@ ve.dm.mwExample.withMeta = [
 	{ type: '/mwCategory' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{ type: 'internalList' },
@@ -467,7 +467,7 @@ ve.dm.mwExample.withMetaRealData = [
 	{ type: '/paragraph' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta property="mw:ThisIsAnAlien" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{ type: 'paragraph' },
@@ -500,12 +500,12 @@ ve.dm.mwExample.withMetaRealData = [
 	{ type: '/mwCategory' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta property="mw:foo" content="bar" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta property="mw:bar" content="baz" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{
@@ -534,7 +534,7 @@ ve.dm.mwExample.withMetaRealData = [
 	{ type: '/mwCategory' },
 	{
 		type: 'mwAlienMeta',
-		originalDomElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
+		originalDomElements: $.parseHTML( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' )
 	},
 	{ type: '/mwAlienMeta' },
 	{ type: 'internalList' },
@@ -545,11 +545,11 @@ ve.dm.mwExample.withMetaMetaData = [
 	[
 		{
 			type: 'alienMeta',
-			originalDomElements: $( '<!-- No conversion -->' ).toArray()
+			originalDomElements: $.parseHTML( '<!-- No conversion -->' )
 		},
 		{
 			type: 'mwAlienMeta',
-			originalDomElements: $( '<meta property="mw:ThisIsAnAlien" />' ).toArray()
+			originalDomElements: $.parseHTML( '<meta property="mw:ThisIsAnAlien" />' )
 		}
 	],
 	undefined,
@@ -571,21 +571,21 @@ ve.dm.mwExample.withMetaMetaData = [
 	[
 		{
 			type: 'mwAlienMeta',
-			originalDomElements: $( '<meta property="mw:foo" content="bar" />' ).toArray()
+			originalDomElements: $.parseHTML( '<meta property="mw:foo" content="bar" />' )
 		}
 	],
 	undefined,
 	[
 		{
 			type: 'alienMeta',
-			originalDomElements: $( '<!-- inline -->' ).toArray()
+			originalDomElements: $.parseHTML( '<!-- inline -->' )
 		}
 	],
 	undefined,
 	[
 		{
 			type: 'mwAlienMeta',
-			originalDomElements: $( '<meta property="mw:bar" content="baz" />' ).toArray()
+			originalDomElements: $.parseHTML( '<meta property="mw:bar" content="baz" />' )
 		},
 		{
 			type: 'comment',
@@ -604,7 +604,7 @@ ve.dm.mwExample.withMetaMetaData = [
 		},
 		{
 			type: 'mwAlienMeta',
-			originalDomElements: $( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' ).toArray()
+			originalDomElements: $.parseHTML( '<meta typeof="mw:Placeholder" data-parsoid="foobar" />' )
 		}
 	],
 	undefined,
@@ -623,7 +623,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b>a</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b>a</b>' )
 				} ]
 			],
 			[
@@ -631,7 +631,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b data-parsoid="1">b</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b data-parsoid="1">b</b>' )
 				} ]
 			],
 			[
@@ -639,7 +639,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b data-parsoid="2">c</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b data-parsoid="2">c</b>' )
 				} ]
 			],
 			' ',
@@ -648,7 +648,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b>a</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b>a</b>' )
 				} ]
 			],
 			[
@@ -656,7 +656,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b>a</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b>a</b>' )
 				} ]
 			],
 			{ type: '/paragraph' },
@@ -684,7 +684,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b>a</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b>a</b>' )
 				} ]
 			],
 			[
@@ -692,7 +692,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b id="mwAB">b</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b id="mwAB">b</b>' )
 				} ]
 			],
 			[
@@ -700,7 +700,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b id="mwCD">c</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b id="mwCD">c</b>' )
 				} ]
 			],
 			' ',
@@ -709,7 +709,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b>a</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b>a</b>' )
 				} ]
 			],
 			[
@@ -717,7 +717,7 @@ ve.dm.mwExample.domToDataCases = {
 				[ {
 					type: 'textStyle/bold',
 					attributes: { nodeName: 'b' },
-					originalDomElements: $( '<b>a</b>' ).toArray()
+					originalDomElements: $.parseHTML( '<b>a</b>' )
 				} ]
 			],
 			{ type: '/paragraph' },
@@ -1296,7 +1296,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		storeItems: {
-			hd2ff771ac84b229d: $( '<p about="#mwt1" typeof="mw:Transclusion" data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}" data-parsoid="1">foo</p>' ).toArray()
+			hd2ff771ac84b229d: $.parseHTML( '<p about="#mwt1" typeof="mw:Transclusion" data-mw="{&quot;parts&quot;:[{&quot;template&quot;:{&quot;target&quot;:{&quot;wt&quot;:&quot;echo&quot;,&quot;href&quot;:&quot;./Template:Echo&quot;},&quot;params&quot;:{&quot;1&quot;:{&quot;wt&quot;:&quot;foo&quot;}},&quot;i&quot;:0}}]}" data-parsoid="1">foo</p>' )
 		}
 	},
 	'mw:Transclusion containing only meta data': {
@@ -1345,7 +1345,7 @@ ve.dm.mwExample.domToDataCases = {
 					mw: {},
 					originalMw: '{}'
 				},
-				originalDomElements: $( '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}">content</span>' ).toArray()
+				originalDomElements: $.parseHTML( '<span dir="ltr" about="#mwt1" typeof="mw:Transclusion" data-mw="{}">content</span>' )
 			},
 			{ type: '/mwTransclusionInline' },
 			{ type: '/paragraph' },
@@ -1384,7 +1384,7 @@ ve.dm.mwExample.domToDataCases = {
 					},
 					originalMw: '{"name":"syntaxhighlight","attrs":{"lang":"php"},"body":{"extsrc":"\\n$foo = bar;\\n"}}'
 				},
-				originalDomElements: $( '<div about="#mwt1" data-parsoid="1"></div>' ).toArray()
+				originalDomElements: $.parseHTML( '<div about="#mwt1" data-parsoid="1"></div>' )
 			},
 			{ type: '/mwAlienBlockExtension' },
 			{ type: 'internalList' },
@@ -1423,7 +1423,7 @@ ve.dm.mwExample.domToDataCases = {
 					},
 					originalMw: '{"name":"score","attrs":{},"body":{"extsrc":"\\\\relative c\' { e d c d e e e }"}}'
 				},
-				originalDomElements: $( '<img src="' + ve.ce.minImgDataUri + '" width="100" height="20" alt="Bar" about="#mwt1" data-parsoid="1"></img>' ).toArray()
+				originalDomElements: $.parseHTML( '<img src="' + ve.ce.minImgDataUri + '" width="100" height="20" alt="Bar" about="#mwt1" data-parsoid="1"></img>' )
 			},
 			{ type: '/mwAlienInlineExtension' },
 			{ type: '/paragraph' },

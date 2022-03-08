@@ -167,7 +167,7 @@ QUnit.test( 'convert', function ( assert ) {
 						attributes: {
 							mw: {}
 						},
-						originalDomElements: $( '<div typeof="mw:Transclusion" about="#mwt40000000">Template</div>' ).toArray()
+						originalDomElements: $.parseHTML( '<div typeof="mw:Transclusion" about="#mwt40000000">Template</div>' )
 					},
 					{ type: '/mwTransclusionBlock' },
 					{ type: 'internalList' },
@@ -182,10 +182,10 @@ QUnit.test( 'convert', function ( assert ) {
 				annotations: [],
 				assertDom: true,
 				expectedData: [
-					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2>foo</h2>' ).toArray() },
+					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $.parseHTML( '<h2>foo</h2>' ) },
 					'f', 'o', 'o',
 					{ type: '/mwHeading' },
-					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2 id="mw-meaningful-id">bar</h2>' ).toArray() },
+					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $.parseHTML( '<h2 id="mw-meaningful-id">bar</h2>' ) },
 					'b', 'a', 'r',
 					{ type: '/mwHeading' },
 					{ type: 'internalList' },
@@ -200,7 +200,7 @@ QUnit.test( 'convert', function ( assert ) {
 				annotations: [],
 				assertDom: true,
 				expectedData: [
-					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $( '<h2 id="Tudnivalók"> Tudnivalók </h2>' ).toArray() },
+					{ type: 'mwHeading', attributes: { level: 2 }, originalDomElements: $.parseHTML( '<h2 id="Tudnivalók"> Tudnivalók </h2>' ) },
 					'T', 'u', 'd', 'n', 'i', 'v', 'a', 'l', 'ó', 'k',
 					{ type: '/mwHeading' },
 					{ type: 'internalList' },
