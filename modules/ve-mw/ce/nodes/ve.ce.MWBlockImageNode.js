@@ -42,7 +42,6 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 		$image = $( '<img>' )
 			.attr( 'src', this.getResolvedAttribute( 'src' ) );
 		this.$a = $( '<a>' )
-			.addClass( 'image' )
 			.attr( 'href', this.getResolvedAttribute( 'href' ) )
 			.append( $image );
 		$focusable = $image;

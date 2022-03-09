@@ -88,6 +88,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 		href: href,
+		imgWrapperClassAttr: imgWrapper.getAttribute( 'class' ),
 		resource: img.getAttribute( 'resource' ),
 		originalClasses: classes,
 		width: width !== null && width !== '' ? +width : null,
@@ -206,6 +207,10 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 	if ( attributes.href ) {
 		firstChild = doc.createElement( 'a' );
 		firstChild.setAttribute( 'href', attributes.href );
+		if ( attributes.imgWrapperClassAttr ) {
+			// eslint-disable-next-line mediawiki/class-doc
+			firstChild.className = attributes.imgWrapperClassAttr;
+		}
 	} else {
 		firstChild = doc.createElement( 'span' );
 	}

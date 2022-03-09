@@ -47,6 +47,11 @@ ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 	this.imageResourceName = '';
 	this.imageHref = '';
 
+	// FIXME: This is blindly being preserved but may not apply if, say,
+	// a link is no longer pointing to a file description page.  When support
+	// for editing the |link= media option is added, take it into account.
+	this.imgWrapperClassAttr = null;
+
 	this.boundingBox = null;
 	this.initialHash = {};
 
@@ -179,6 +184,7 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc )
 	imgModel.setImageSource( attrs.src );
 	imgModel.setFilename( new mw.Title( mw.libs.ve.normalizeParsoidResourceName( attrs.resource ) ).getMainText() );
 	imgModel.setImageHref( attrs.href );
+	imgModel.setImgWrapperClassAttr( attrs.imgWrapperClassAttr );
 
 	// Set bounding box
 	imgModel.setBoundingBox( {
@@ -279,6 +285,11 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 	if ( attrs.href ) {
 		this.setImageHref( attrs.href );
 	}
+
+	if ( attrs.imgWrapperClassAttr ) {
+		this.setImgWrapperClassAttr( attrs.imgWrapperClassAttr );
+	}
+
 	if ( attrs.resource ) {
 		this.setImageResourceName( attrs.resource );
 		this.setFilename( new mw.Title( mw.libs.ve.normalizeParsoidResourceName( attrs.resource ) ).getMainText() );
@@ -565,6 +576,7 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 
 	attrs.src = this.getImageSource();
 	attrs.href = this.getImageHref();
+	attrs.imgWrapperClassAttr = this.getImgWrapperClassAttr();
 	attrs.resource = this.getImageResourceName();
 
 	return attrs;
@@ -1120,6 +1132,20 @@ ve.dm.MWImageModel.prototype.getImageResourceName = function () {
  */
 ve.dm.MWImageModel.prototype.getImageHref = function () {
 	return this.imageHref;
+};
+
+/**
+ * @param {string|null} classAttr
+ */
+ve.dm.MWImageModel.prototype.setImgWrapperClassAttr = function ( classAttr ) {
+	this.imgWrapperClassAttr = classAttr;
+};
+
+/**
+ * @return {string|null}
+ */
+ve.dm.MWImageModel.prototype.getImgWrapperClassAttr = function () {
+	return this.imgWrapperClassAttr;
 };
 
 /**
