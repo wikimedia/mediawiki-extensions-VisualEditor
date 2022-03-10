@@ -181,12 +181,6 @@ class ApiVisualEditor extends ApiBase {
 			case 'parse':
 			case 'wikitext':
 			case 'metadata':
-				// Dirty hack to provide the correct context for edit notices
-				// FIXME Don't write to globals! Eww.
-				global $wgTitle;
-				$wgTitle = $title;
-				RequestContext::getMain()->setTitle( $title );
-
 				$preloaded = false;
 				$restbaseHeaders = null;
 
@@ -339,12 +333,12 @@ class ApiVisualEditor extends ApiBase {
 						'{{fullurl:Special:UserLogin|returnto={{FULLPAGENAMEE}}}}',
 						// Sign-up link
 						'{{fullurl:Special:UserLogin/signup|returnto={{FULLPAGENAMEE}}}}'
-					)->parseAsBlock();
+					)->page( $title )->parseAsBlock();
 				}
 
 				// Old revision notice
 				if ( $restoring ) {
-					$notices['editingold'] = $this->msg( 'editingold' )->parseAsBlock();
+					$notices['editingold'] = $this->msg( 'editingold' )->page( $title )->parseAsBlock();
 				}
 
 				if ( $this->readOnlyMode->isReadOnly() ) {
@@ -363,12 +357,12 @@ class ApiVisualEditor extends ApiBase {
 						wfExpandUrl( Skin::makeInternalOrExternalUrl(
 							$this->msg( 'helppage' )->inContentLanguage()->text()
 						) )
-					)->parseAsBlock();
+					)->page( $title )->parseAsBlock();
 
 					// Page protected from creation
 					if ( $title->getRestrictions( 'create' ) ) {
 						$protectionNotices['titleprotectedwarning'] =
-							$this->msg( 'titleprotectedwarning' )->parseAsBlock() .
+							$this->msg( 'titleprotectedwarning' )->page( $title )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
 					}
 
@@ -406,7 +400,7 @@ class ApiVisualEditor extends ApiBase {
 							// Then it must be protected based on static groups (regular)
 							$noticeMsg = 'protectedpagewarning';
 						}
-						$protectionNotices[$noticeMsg] = $this->msg( $noticeMsg )->parseAsBlock() .
+						$protectionNotices[$noticeMsg] = $this->msg( $noticeMsg )->page( $title )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
 					}
 
@@ -415,7 +409,8 @@ class ApiVisualEditor extends ApiBase {
 					if ( isset( $restrictions['edit'] ) ) {
 						$protectedClasses[] = ' mw-textarea-cprotected';
 
-						$notice = $this->msg( 'cascadeprotectedwarning', count( $sources ) )->parseAsBlock() . '<ul>';
+						$notice = $this->msg( 'cascadeprotectedwarning', count( $sources ) )
+							->page( $title )->parseAsBlock() . '<ul>';
 						// Unfortunately there's no nice way to get only the pages which cause
 						// editing to be restricted
 						foreach ( $sources as $source ) {
