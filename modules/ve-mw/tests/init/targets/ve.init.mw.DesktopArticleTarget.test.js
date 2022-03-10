@@ -6,21 +6,15 @@
  */
 
 QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.newMwEnvironment( {
-	beforeEach: function () {
-		mw.config.set( 'wgVisualEditorConfig', ve.extendObject(
-			{},
-			mw.config.get( 'wgVisualEditorConfig' ),
-			{
-				// Disable welcome dialog
-				showBetaWelcome: false
-			}
-		) );
-	},
 	config: {
-		wgVisualEditor: {
+		wgVisualEditor: ve.extendObject( {}, mw.config.get( 'wgVisualEditor' ), {
 			pageLanguageCode: 'he',
 			pageLanguageDir: 'rtl'
-		},
+		} ),
+		wgVisualEditorConfig: ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
+			// Disable welcome dialog
+			showBetaWelcome: false
+		} ),
 		wgAction: 'view',
 		wgNamespaceNumber: 0,
 		wgCanonicalNamespace: ''

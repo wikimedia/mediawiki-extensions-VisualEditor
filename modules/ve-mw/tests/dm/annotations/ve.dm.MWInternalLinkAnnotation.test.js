@@ -19,8 +19,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 			return () => {
 				const link = document.createElement( 'a' );
 				link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
-				// http://localhost:9876/index.php?title=Foo&action=history
-				// console.log(location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ))
 				return link;
 			};
 		},

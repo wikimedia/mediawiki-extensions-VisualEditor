@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.utils.parsoid', ve.test.utils.mwEnvironment );
+QUnit.module( 've.utils.parsoid', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'reduplicateStyles/deduplicateStyles', ( assert ) => {
 	// Test cases based on this page and the templates there:

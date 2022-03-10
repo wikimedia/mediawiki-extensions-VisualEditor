@@ -5,21 +5,14 @@
  */
 
 {
-	QUnit.module( 've.ui.MWTransclusionDialog', QUnit.newMwEnvironment( {
-		beforeEach() {
-			ve.test.utils.mwEnvironment.beforeEach.call( this );
-
-			// set config variable to activate new sidebar feature
+	QUnit.module( 've.ui.MWTransclusionDialog', ve.test.utils.newMwEnvironment( {
+		config: {
+			// Set config variable to activate new sidebar feature
 			// TODO: remove this when sidebar feature will be default
-			mw.config.set( {
-				wgVisualEditorConfig: {
-					transclusionDialogNewSidebar: true,
-					transclusionDialogInlineDescriptions: true
-				}
-			} );
-		},
-		afterEach() {
-			ve.test.utils.mwEnvironment.afterEach.call( this );
+			wgVisualEditorConfig: ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
+				transclusionDialogNewSidebar: true,
+				transclusionDialogInlineDescriptions: true
+			} )
 		}
 	} ) );
 
