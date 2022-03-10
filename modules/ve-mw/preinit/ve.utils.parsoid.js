@@ -266,34 +266,39 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 		return str.replace( /([.?*+^$[\]\\(){}|-])/g, '\\$1' );
 	}
 
+	var isInternal = null;
 	// Protocol relative href
 	var relativeHref = href.replace( /^https?:/i, '' );
-	// Paths without a host portion are assumed to be internal
-	var isInternal = !/^\/\//.test( relativeHref );
 
-	// Check if this matches the server's article path
-	// Protocol relative base
-	var relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/i, '' );
-	var relativeBaseRegex = new RegExp( regexEscape( relativeBase ).replace( regexEscape( '$1' ), '(.*)' ) );
-	var matches = relativeHref.match( relativeBaseRegex );
-	if ( matches && matches[ 1 ].split( '#' )[ 0 ].indexOf( '?' ) === -1 ) {
-		// Take the relative path
-		href = matches[ 1 ];
+	// Paths without a host portion are assumed to be internal
+	if ( !/^\/\//.test( relativeHref ) ) {
 		isInternal = true;
 	} else {
 		// Check if this matches the server's script path (as used by red links)
-		relativeBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
-		if ( relativeHref.indexOf( relativeBase ) === 0 ) {
+		var scriptBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
+		if ( relativeHref.indexOf( scriptBase ) === 0 ) {
 			var uri = new mw.Uri( relativeHref );
-			if ( Object.keys( uri.query ).length === 1 && uri.query.title ) {
-				href = uri.query.title;
+			var queryLength = Object.keys( uri.query ).length;
+			if (
+				( queryLength === 1 && uri.query.title ) ||
+				( queryLength === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' )
+			) {
+				href = uri.query.title + ( uri.fragment ? '#' + uri.fragment : '' );
 				isInternal = true;
-			} else if ( Object.keys( uri.query ).length === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' ) {
-				href = uri.query.title;
-				isInternal = true;
-			} else {
+			} else if ( queryLength > 1 ) {
 				href = relativeHref;
 				isInternal = false;
+			}
+		}
+		if ( isInternal === null ) {
+			// Check if this matches the server's article path
+			var articleBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgArticlePath' ), doc ).replace( /^https?:/i, '' );
+			var articleBaseRegex = new RegExp( regexEscape( articleBase ).replace( regexEscape( '$1' ), '(.*)' ) );
+			var matches = relativeHref.match( articleBaseRegex );
+			if ( matches && matches[ 1 ].split( '#' )[ 0 ].indexOf( '?' ) === -1 ) {
+				// Take the relative path
+				href = matches[ 1 ];
+				isInternal = true;
 			}
 		}
 	}

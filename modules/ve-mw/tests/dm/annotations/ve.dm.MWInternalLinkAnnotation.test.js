@@ -4,19 +4,25 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-QUnit.module( 've.dm.MWInternalLinkAnnotation' );
+QUnit.module( 've.dm.MWInternalLinkAnnotation', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'toDataElement', ( assert ) => {
-	const doc = ve.dm.example.createExampleDocument(),
+	const doc = ve.dm.example.createExampleDocumentFromData( [] ),
 		externalLink = ( href ) => {
-			const link = document.createElement( 'a' );
-			link.setAttribute( 'href', href );
-			return link;
+			return () => {
+				const link = document.createElement( 'a' );
+				link.setAttribute( 'href', href );
+				return link;
+			};
 		},
 		internalLink = ( pageTitle, params ) => {
-			const link = document.createElement( 'a' );
-			link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
-			return link;
+			return () => {
+				const link = document.createElement( 'a' );
+				link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
+				// http://localhost:9876/index.php?title=Foo&action=history
+				// console.log(location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ))
+				return link;
+			};
 		},
 		cases = [
 			{
@@ -32,6 +38,19 @@ QUnit.test( 'toDataElement', ( assert ) => {
 			{
 				msg: 'Simple',
 				element: internalLink( 'Foo' ),
+				expected: {
+					type: 'link/mwInternal',
+					attributes: {
+						lookupTitle: 'Foo',
+						normalizedTitle: 'Foo',
+						origTitle: 'Foo',
+						title: 'Foo'
+					}
+				}
+			},
+			{
+				msg: 'Relative path',
+				element: externalLink( './Foo' ),
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
@@ -79,15 +98,26 @@ QUnit.test( 'toDataElement', ( assert ) => {
 				// Because percent-encoded URLs aren't valid titles, but what they decode to might be
 				msg: 'Percent encoded characters',
 				element: internalLink( 'Foo?' ),
-				expected: {
-					type: 'link/mwInternal',
-					attributes: {
-						lookupTitle: 'Foo?',
-						normalizedTitle: 'Foo?',
-						origTitle: 'Foo%3F',
-						title: 'Foo?'
+				expected: [
+					{
+						type: 'link/mwInternal',
+						attributes: {
+							lookupTitle: 'Foo?',
+							normalizedTitle: 'Foo?',
+							origTitle: 'Foo?',
+							title: 'Foo?'
+						}
+					},
+					{
+						type: 'link/mwInternal',
+						attributes: {
+							lookupTitle: 'Foo?',
+							normalizedTitle: 'Foo?',
+							origTitle: 'Foo%3F',
+							title: 'Foo?'
+						}
 					}
-				}
+				]
 			},
 			{
 				// The fragment should make it into some parts of this, and not others
@@ -129,8 +159,28 @@ QUnit.test( 'toDataElement', ( assert ) => {
 	converter.contextStack = [];
 	converter.fromClipboard = true;
 
+	const articlePaths = [
+		{
+			msg: 'query string URL',
+			wgArticlePath: mw.config.get( 'wgScriptPath' ) + '/index.php?title=$1'
+		},
+		{
+			msg: 'short URL',
+			wgArticlePath: mw.config.get( 'wgScriptPath' ) + '/index.php/$1'
+		}
+	];
+
 	for ( let i = 0; i < cases.length; i++ ) {
-		assert.deepEqual( ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element ], converter ), cases[ i ].expected, cases[ i ].msg );
+		articlePaths.forEach( function ( pathData, j ) {
+			mw.config.set( 'wgArticlePath', pathData.wgArticlePath );
+			assert.deepEqual(
+				ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element() ], converter ),
+				Array.isArray( cases[ i ].expected ) ?
+					cases[ i ].expected[ j ] :
+					cases[ i ].expected,
+				cases[ i ].msg + ': ' + pathData.msg
+			);
+		} );
 	}
 } );
 
