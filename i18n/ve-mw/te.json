@@ -151,6 +151,7 @@
 	"visualeditor-dialog-transclusion-collapse-options": "ఎంపికలను దాచు",
 	"visualeditor-dialog-transclusion-content": "విషయము",
 	"visualeditor-dialog-transclusion-expand-options": "ఎంపికలను చూపించు",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "[//www.mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Portal/Keyboard_shortcuts#Template_editor_dialog_shortcuts_and_keyboard_interactions కీబోర్డు షార్ట్‌కట్లు]",
 	"visualeditor-dialog-transclusion-loading": "వస్తోంది…",
 	"visualeditor-dialog-transclusion-more-template-description": "\"$1\" మూస గురించి మరింత సమాచారం [[{{ns:template}}:$1|దాని పేజీలో]] ఉండవచ్చు.",
 	"visualeditor-dialog-transclusion-options": "ఎంపికలు",
