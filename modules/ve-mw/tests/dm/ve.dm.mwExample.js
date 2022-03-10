@@ -280,6 +280,7 @@ ve.dm.mwExample.MWBlockImage = {
 				type: 'thumb',
 				align: 'right',
 				href: './Foo',
+				imgWrapperClassAttr: null,
 				mediaClass: 'Image',
 				src: ve.ce.minImgDataUri,
 				width: 1,
@@ -316,6 +317,7 @@ ve.dm.mwExample.MWInlineImage = {
 		attributes: {
 			src: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png',
 			href: './File:Wiki.png',
+			imgWrapperClassAttr: null,
 			mediaClass: 'Image',
 			width: 135,
 			height: 155,
@@ -332,6 +334,35 @@ ve.dm.mwExample.MWInlineImage = {
 	},
 	storeItems: {
 		hbb0aeb2b8e907b74: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
+	}
+};
+
+ve.dm.mwExample.MWInlineImageWithWrapperClass = {
+	html:
+		'<span typeof="mw:Image" class="foo mw-valign-text-top">' +
+			'<a href="./File:Wiki.png" class="mw-file-description">' +
+				'<img resource="./File:Wiki.png" src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" height="155" width="135" alt="alt text">' +
+			'</a>' +
+		'</span>',
+	data: {
+		type: 'mwInlineImage',
+		attributes: {
+			src: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png',
+			href: './File:Wiki.png',
+			imgWrapperClassAttr: 'mw-file-description',
+			mediaClass: 'Image',
+			width: 135,
+			height: 155,
+			alt: 'alt text',
+			isError: false,
+			valign: 'text-top',
+			resource: './File:Wiki.png',
+			mw: {},
+			type: 'none',
+			originalClasses: 'foo mw-valign-text-top',
+			unrecognizedClasses: [ 'foo' ],
+			tagName: 'span'
+		}
 	}
 };
 
@@ -746,7 +777,26 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
 			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
-			'<a class="image ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false">' +
+			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false">' +
+				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
+			'</a>' +
+			ve.dm.example.inlineSlug +
+			'</p>',
+		storeItems: ve.dm.mwExample.MWInlineImage.storeItems
+	},
+	mwImageWithWrapperClass: {
+		body: '<p>' + ve.dm.mwExample.MWInlineImageWithWrapperClass.html + '</p>',
+		data: [
+			{ type: 'paragraph' },
+			ve.dm.mwExample.MWInlineImageWithWrapperClass.data,
+			{ type: '/mwInlineImage' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
+			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
+			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false">' +
 				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
 			'</a>' +
 			ve.dm.example.inlineSlug +
@@ -1025,6 +1075,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
 					mw: {},
@@ -1059,6 +1110,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
 					mw: {},
@@ -1092,6 +1144,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
 					mw: {},
@@ -1125,6 +1178,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
 					mw: {},
@@ -1149,6 +1203,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
 					mw: {},
@@ -1905,6 +1960,7 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'thumb',
 					align: 'default',
 					href: './Special:FilePath/Missing_image.jpg',
+					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: null,
 					defaultSize: true,
@@ -1958,6 +2014,7 @@ ve.dm.mwExample.domToDataCases = {
 				attributes: {
 					type: 'none',
 					href: './Special:FilePath/Missing_image.jpg',
+					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: null,
 					tagName: 'span',
@@ -2018,6 +2075,7 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'thumb',
 					align: 'default',
 					href: './Foo',
+					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: ve.ce.minImgDataUri,
 					width: 1,

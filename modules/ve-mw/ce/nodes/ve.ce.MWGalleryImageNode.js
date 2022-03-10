@@ -68,8 +68,7 @@ ve.ce.MWGalleryImageNode = function VeCeMWGalleryImageNode( model ) {
 		.css( 'height', innerDivHeight + 'px' );
 	var $innerDiv = $( '<span>' )
 		.css( 'margin', innerDivMargin );
-	var $a = $( '<a>' )
-		.addClass( 'image' );
+	var $a = $( '<a>' );
 	var $img = $( '<img>' )
 		.attr( 'resource', attributes.resource )
 		.attr( 'alt', attributes.altText )

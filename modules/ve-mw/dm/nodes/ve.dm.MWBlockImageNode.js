@@ -98,6 +98,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 		href: href,
+		imgWrapperClassAttr: imgWrapper.getAttribute( 'class' ),
 		resource: img.getAttribute( 'resource' ),
 		width: width !== null && width !== '' ? +width : null,
 		height: height !== null && height !== '' ? +height : null,
@@ -181,6 +182,11 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 
 	if ( attributes.href ) {
 		imgWrapper.setAttribute( 'href', attributes.href );
+	}
+
+	if ( attributes.imgWrapperClassAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
+		imgWrapper.className = attributes.imgWrapperClassAttr;
 	}
 
 	var width = attributes.width;

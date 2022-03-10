@@ -107,6 +107,10 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	innerDiv.setAttribute( 'typeof', 'mw:Image' );
 
 	// TODO: Support editing the link
+	// FIXME: Dropping the href causes Parsoid to mark the node as wrapper modified,
+	// making the whole gallery subtree edited, preventing selser.  When fixing,
+	// preserving the imgWrapperClassAttr, as in the MW*ImageNodes, will also be
+	// necessary.
 	// a.setAttribute( 'href', model.attributes.src );
 
 	img.setAttribute( 'resource', model.attributes.resource );
