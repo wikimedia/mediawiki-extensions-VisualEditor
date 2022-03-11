@@ -42,22 +42,32 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineToggleUnusedWidget, OO.ui.ButtonWidg
  * @fires toggleUnusedFields
  */
 ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.onClick = function () {
-	this.toggleUnusedParameters( !this.showUnusedFields, false, true );
+	this.toggleUnusedParameters( !this.showUnusedFields, true );
 };
 
 /** @inheritdoc */
 ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.setDisabled = function ( disabled ) {
 	ve.ui.MWTransclusionOutlineToggleUnusedWidget.super.prototype.setDisabled.call( this, disabled );
-	this.toggleUnusedParameters( this.showUnusedFields, true );
+	this.updateState( this.showUnusedFields );
 };
 
 /**
  * @param {boolean} showUnused
- * @param {boolean} [internal]
  * @param {boolean} [fromClick]
  * @fires toggleUnusedFields
  */
-ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters = function ( showUnused, internal, fromClick ) {
+ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters = function ( showUnused, fromClick ) {
+	if ( this.updateState( showUnused ) ) {
+		this.emit( 'toggleUnusedFields', this.showUnusedFields, fromClick );
+	}
+};
+
+/**
+ * @private
+ * @param {boolean} showUnused
+ * @return {boolean} Returns true when state changed.
+ */
+ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.updateState = function ( showUnused ) {
 	showUnused = showUnused || this.isDisabled();
 	if ( showUnused !== this.showUnusedFields ) {
 		this.showUnusedFields = showUnused;
@@ -65,10 +75,9 @@ ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.toggleUnusedParameters =
 			'visualeditor-dialog-transclusion-filter-hide-unused' :
 			'visualeditor-dialog-transclusion-filter-show-all'
 		) );
-		if ( !internal ) {
-			this.emit( 'toggleUnusedFields', this.showUnusedFields, fromClick );
-		}
+		return true;
 	}
+	return false;
 };
 
 /**
