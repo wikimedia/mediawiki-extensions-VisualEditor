@@ -347,9 +347,6 @@
 				],
 				"monobook": [
 					"modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget-apextheme.css"
-				],
-				"apex": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget-apextheme.css"
 				]
 			},
 			"targets": [
@@ -394,9 +391,6 @@
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-vector.less"
 				],
 				"monobook": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
-				],
-				"apex": [
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
 				],
 				"minerva": [
@@ -500,9 +494,6 @@
 				],
 				"vector-2022": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
-				],
-				"apex": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-apex.css"
 				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
@@ -609,9 +600,6 @@
 				],
 				"vector-2022": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
-				],
-				"apex": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-apex.css"
 				],
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
@@ -1291,9 +1279,6 @@
 				"default": [
 					"lib/ve/src/themes/wikimediaui.css"
 				],
-				"apex": [
-					"lib/ve/src/themes/apex.css"
-				],
 				"monobook": [
 					"lib/ve/src/themes/apex.css"
 				]
@@ -1625,9 +1610,6 @@
 				"default": [
 					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-wikimedia.css"
 				],
-				"apex": [
-					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.css"
-				],
 				"monobook": [
 					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.css"
 				]
@@ -1743,9 +1725,6 @@
 			"skinStyles": {
 				"default": [
 					"modules/ve-mw/themes/wikimediaui.css"
-				],
-				"apex": [
-					"modules/ve-mw/themes/apex.css"
 				],
 				"monobook": [
 					"modules/ve-mw/themes/apex.css"
