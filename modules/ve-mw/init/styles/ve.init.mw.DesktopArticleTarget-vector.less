@@ -28,42 +28,42 @@
 	*/
 
 	margin: 0 -1rem;
-}
 
-.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ce-surface .ve-ce-attachedRootNode,
-.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-surface-placeholder {
-	padding: 0 1rem;
-}
-
-.mw-body .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-surface-placeholder > * {
-	/* Fix margin overlap */
-	margin-top: 0;
-	/* Placeholder doesn't need a border as well */
-	border: 0;
-}
-
-/* Main document debug bar */
-.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
-	padding: 1rem;
-	padding-bottom: 0;
-	margin-top: 1rem;
-}
-
-/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
-@media screen and ( min-width: 982px ) {
-	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface {
-		margin: 0 -1.5rem;
-	}
-
-	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ce-surface .ve-ce-attachedRootNode,
-	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-surface-placeholder {
-		padding: 0 1.5rem;
+	> .ve-ce-surface .ve-ce-attachedRootNode,
+	> .ve-ui-surface-placeholder {
+		padding: 0 1rem;
 	}
 
 	/* Main document debug bar */
-	.skin-vector-legacy .ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface > .ve-ui-debugBar {
-		padding: 1.5rem;
+	> .ve-ui-debugBar {
+		padding: 1rem;
 		padding-bottom: 0;
-		margin-top: 1.5rem;
+		margin-top: 1rem;
+	}
+
+	.mw-body & > .ve-ui-surface-placeholder > * {
+		/* Fix margin overlap */
+		margin-top: 0;
+		/* Placeholder doesn't need a border as well */
+		border: 0;
+	}
+
+	.skin-vector-legacy & {
+		/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
+		@media screen and ( min-width: 982px ) {
+			margin: 0 -1.5rem;
+
+			> .ve-ce-surface .ve-ce-attachedRootNode,
+			> .ve-ui-surface-placeholder {
+				padding: 0 1.5rem;
+			}
+
+			/* Main document debug bar */
+			> .ve-ui-debugBar {
+				padding: 1.5rem;
+				padding-bottom: 0;
+				margin-top: 1.5rem;
+			}
+		}
 	}
 }

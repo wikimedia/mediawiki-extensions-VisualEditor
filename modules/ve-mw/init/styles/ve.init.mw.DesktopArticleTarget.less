@@ -4,44 +4,43 @@
  * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
-
 /* Toolbar */
+.ve-init-mw-desktopArticleTarget-toolbar {
+	> .oo-ui-toolbar-bar {
+		opacity: 0;
+		transition: opacity 250ms ease;
+	}
 
-.ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
-	opacity: 0;
-	transition: opacity 250ms ease;
-}
+	&-open > .oo-ui-toolbar-bar {
+		opacity: 1;
+	}
 
-.ve-init-mw-desktopArticleTarget-toolbar-open > .oo-ui-toolbar-bar {
-	opacity: 1;
-}
+	&-preclose {
+		overflow: hidden;
+		transition: height 250ms ease;
+	}
 
-.ve-init-mw-desktopArticleTarget-toolbar-preclose {
-	overflow: hidden;
-	transition: height 250ms ease;
-}
+	&-close {
+		height: 0;
+	}
 
-.ve-init-mw-desktopArticleTarget-toolbar-close {
-	height: 0;
-}
+	&-preclose > .oo-ui-toolbar-bar {
+		transition: transform 250ms ease;
+		transform: translateY( 0 );
+	}
 
-.ve-init-mw-desktopArticleTarget-toolbar-preclose > .oo-ui-toolbar-bar {
-	transition: transform 250ms ease;
-	transform: translateY( 0 );
-}
+	&-close > .oo-ui-toolbar-bar {
+		transform: translateY( -100% );
+	}
 
-.ve-init-mw-desktopArticleTarget-toolbar-close > .oo-ui-toolbar-bar {
-	transform: translateY( -100% );
-}
+	.ve-tempSourceEditing & {
+		margin-bottom: -3.125em;
+		transition: opacity 2s ease;
 
-.ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar,
-.ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar > .oo-ui-toolbar-bar {
-	transition: none;
-}
-
-.ve-tempSourceEditing .ve-init-mw-desktopArticleTarget-toolbar {
-	margin-bottom: -3.125em;
-	transition: opacity 2s ease;
+		& > .oo-ui-toolbar-bar {
+			transition: none;
+		}
+	}
 }
 
 /*!
@@ -53,33 +52,35 @@
 	overflow: hidden;
 }
 
-.ve-init-mw-desktopArticleTarget .ve-redirect-header {
-	cursor: pointer;
-}
+.ve-init-mw-desktopArticleTarget {
+	.ve-redirect-header {
+		cursor: pointer;
+	}
 
-/* stylelint-disable-next-line selector-class-pattern */
-.ve-init-mw-desktopArticleTarget .redirectMsg a:hover {
-	text-decoration: none;
-}
+	/* stylelint-disable-next-line selector-class-pattern */
+	.redirectMsg a:hover {
+		text-decoration: none;
+	}
 
-/*!
- * Increase z-index of surface container so it appears above the debug bar
- */
-.ve-init-mw-desktopArticleTarget #bodyContent { /* stylelint-disable-line selector-max-id */
-	z-index: 1;
-}
+	/*!
+	 * Increase z-index of surface container so it appears above the debug bar
+	 */
+	#bodyContent { /* stylelint-disable-line selector-max-id */
+		z-index: 1;
+	}
 
-.ve-ui-init-desktopArticleTarget-sectionTitle {
-	max-width: none;
-	margin: 1em 0 0.5em 0;
-}
+	&-sectionTitle {
+		max-width: none;
+		margin: 1em 0 0.5em 0;
 
-/* stylelint-disable declaration-no-important */
-.ve-ui-init-desktopArticleTarget-sectionTitle .oo-ui-inputWidget-input {
-	padding: 0 !important;
-	border: 0 !important;
-	outline: 0 !important;
-	box-shadow: none !important;
-	line-height: inherit;
+		.oo-ui-inputWidget-input {
+			/* stylelint-disable declaration-no-important */
+			padding: 0 !important;
+			border: 0 !important;
+			outline: 0 !important;
+			box-shadow: none !important;
+			line-height: inherit;
+			/* stylelint-enable declaration-no-important */
+		}
+	}
 }
-/* stylelint-enable declaration-no-important */

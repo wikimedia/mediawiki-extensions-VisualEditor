@@ -4,35 +4,40 @@
  * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
+/**
+ * Hide VE edit tab and section edit things for noscript users.
+ * For script users they're always visible unless and until ve-not-available is added.
+ */
 
 /* stylelint-disable selector-max-id */
 
-/* Hide VE edit tab and section edit things for noscript users.
- * For script users they're always visible unless and until ve-not-available is added.
- */
-.client-nojs #ca-ve-edit,
-.client-nojs .mw-editsection-divider,
-.client-nojs .mw-editsection-visualeditor,
-.ve-not-available #ca-ve-edit,
-.ve-not-available .mw-editsection-divider,
-.ve-not-available .mw-editsection-visualeditor {
-	display: none;
+.client-nojs,
+.ve-not-available {
+	#ca-ve-edit,
+	.mw-editsection-divider,
+	.mw-editsection-visualeditor {
+		display: none;
+	}
 }
 
 /* stylelint-enable selector-max-id */
 
 /* For script users, expand brackets by default, unless and until ve-not-available is added */
 
-/* @noflip */
-.client-js .mw-content-ltr .mw-editsection-bracket:first-of-type,
-.client-js .mw-content-rtl .mw-editsection-bracket:not( :first-of-type ) {
-	margin-right: 0.25em;
-	color: #54595d;
-}
+.client-js {
+	.mw-content-ltr .mw-editsection-bracket:first-of-type,
+	.mw-content-rtl .mw-editsection-bracket:not( :first-of-type ) {
+		/* @noflip */
+		margin-right: 0.25em;
+		/* @noflip */
+		color: #54595d;
+	}
 
-/* @noflip */
-.client-js .mw-content-rtl .mw-editsection-bracket:first-of-type,
-.client-js .mw-content-ltr .mw-editsection-bracket:not( :first-of-type ) {
-	margin-left: 0.25em;
-	color: #54595d;
+	.mw-content-rtl .mw-editsection-bracket:first-of-type,
+	.mw-content-ltr .mw-editsection-bracket:not( :first-of-type ) {
+		/* @noflip */
+		margin-left: 0.25em;
+		/* @noflip */
+		color: #54595d;
+	}
 }
