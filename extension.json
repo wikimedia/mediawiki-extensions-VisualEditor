@@ -26,7 +26,7 @@
 	"requires": {
 		"MediaWiki": ">= 1.38.0"
 	},
-	"callback": "VisualEditorHooks::onRegistration",
+	"callback": "MediaWiki\\Extension\\VisualEditor\\Hooks::onRegistration",
 	"ServiceWiringFiles": [
 		"includes/ServiceWiring.php"
 	],
@@ -197,7 +197,7 @@
 	},
 	"APIModules": {
 		"visualeditor": {
-			"class": "ApiVisualEditor",
+			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditor",
 			"services": [
 				"UserNameUtils",
 				"Parser",
@@ -210,7 +210,7 @@
 			]
 		},
 		"visualeditoredit": {
-			"class": "ApiVisualEditorEdit",
+			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditorEdit",
 			"services": [
 				"VisualEditorHookRunner",
 				"RevisionLookup",
@@ -232,27 +232,27 @@
 		"VisualEditorAlias": "VisualEditor.i18n.alias.php"
 	},
 	"Hooks": {
-		"BeforeInitialize": "VisualEditorHooks::onBeforeInitialize",
-		"BeforePageDisplay": "VisualEditorHooks::onBeforePageDisplay",
-		"ChangeTagsListActive": "VisualEditorHooks::onListDefinedTags",
-		"CustomEditor": "VisualEditorHooks::onCustomEditor",
-		"DifferenceEngineViewHeader": "VisualEditorHooks::onDifferenceEngineViewHeader",
-		"EditPage::showEditForm:fields": "VisualEditorHooks::onEditPageShowEditFormFields",
-		"GetBetaFeaturePreferences": "VisualEditorHooks::onGetBetaPreferences",
-		"GetPreferences": "VisualEditorHooks::onGetPreferences",
-		"ListDefinedTags": "VisualEditorHooks::onListDefinedTags",
-		"MakeGlobalVariablesScript": "VisualEditorHooks::onMakeGlobalVariablesScript",
-		"OutputPageBodyAttributes": "VisualEditorHooks::onOutputPageBodyAttributes",
-		"ParserTestGlobals": "VisualEditorHooks::onParserTestGlobals",
-		"PreferencesFormPreSave": "VisualEditorHooks::onPreferencesFormPreSave",
-		"RecentChange_save": "VisualEditorHooks::onRecentChangeSave",
-		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks::onRedirectSpecialArticleRedirectParams",
-		"ResourceLoaderGetConfigVars": "VisualEditorHooks::onResourceLoaderGetConfigVars",
-		"ResourceLoaderRegisterModules": "VisualEditorHooks::onResourceLoaderRegisterModules",
-		"SkinEditSectionLinks": "VisualEditorHooks::onSkinEditSectionLinks",
-		"SkinTemplateNavigation": "VisualEditorHooks::onSkinTemplateNavigation",
-		"SkinTemplateNavigation::SpecialPage": "SpecialCollabPad::onSkinTemplateNavigationSpecialPage",
-		"UserLoggedIn": "VisualEditorHooks::onUserLoggedIn"
+		"BeforeInitialize": "MediaWiki\\Extension\\VisualEditor\\Hooks::onBeforeInitialize",
+		"BeforePageDisplay": "MediaWiki\\Extension\\VisualEditor\\Hooks::onBeforePageDisplay",
+		"ChangeTagsListActive": "MediaWiki\\Extension\\VisualEditor\\Hooks::onListDefinedTags",
+		"CustomEditor": "MediaWiki\\Extension\\VisualEditor\\Hooks::onCustomEditor",
+		"DifferenceEngineViewHeader": "MediaWiki\\Extension\\VisualEditor\\Hooks::onDifferenceEngineViewHeader",
+		"EditPage::showEditForm:fields": "MediaWiki\\Extension\\VisualEditor\\Hooks::onEditPageShowEditFormFields",
+		"GetBetaFeaturePreferences": "MediaWiki\\Extension\\VisualEditor\\Hooks::onGetBetaPreferences",
+		"GetPreferences": "MediaWiki\\Extension\\VisualEditor\\Hooks::onGetPreferences",
+		"ListDefinedTags": "MediaWiki\\Extension\\VisualEditor\\Hooks::onListDefinedTags",
+		"MakeGlobalVariablesScript": "MediaWiki\\Extension\\VisualEditor\\Hooks::onMakeGlobalVariablesScript",
+		"OutputPageBodyAttributes": "MediaWiki\\Extension\\VisualEditor\\Hooks::onOutputPageBodyAttributes",
+		"ParserTestGlobals": "MediaWiki\\Extension\\VisualEditor\\Hooks::onParserTestGlobals",
+		"PreferencesFormPreSave": "MediaWiki\\Extension\\VisualEditor\\Hooks::onPreferencesFormPreSave",
+		"RecentChange_save": "MediaWiki\\Extension\\VisualEditor\\Hooks::onRecentChangeSave",
+		"RedirectSpecialArticleRedirectParams": "MediaWiki\\Extension\\VisualEditor\\Hooks::onRedirectSpecialArticleRedirectParams",
+		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\VisualEditor\\Hooks::onResourceLoaderGetConfigVars",
+		"ResourceLoaderRegisterModules": "MediaWiki\\Extension\\VisualEditor\\Hooks::onResourceLoaderRegisterModules",
+		"SkinEditSectionLinks": "MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinEditSectionLinks",
+		"SkinTemplateNavigation": "MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinTemplateNavigation",
+		"SkinTemplateNavigation::SpecialPage": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad::onSkinTemplateNavigationSpecialPage",
+		"UserLoggedIn": "MediaWiki\\Extension\\VisualEditor\\Hooks::onUserLoggedIn"
 	},
 	"ResourceModules": {
 		"socket.io": {
@@ -372,12 +372,12 @@
 		},
 		"ext.visualEditor.desktopArticleTarget.init": {
 			"group": "visualEditorA",
-			"class": "VisualEditorDesktopArticleTargetInitModule",
+			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDesktopArticleTargetInitModule",
 			"packageFiles": [
 				"modules/ve-mw/preinit/ve.init.mw.DesktopArticleTarget.init.js",
 				{
 					"name": "modules/ve-mw/preinit/data.json",
-					"callback": "VisualEditorHooks::getDataForDesktopArticleTargetInitModule"
+					"callback": "MediaWiki\\Extension\\VisualEditor\\Hooks::getDataForDesktopArticleTargetInitModule"
 				}
 			],
 			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init.less",
@@ -911,7 +911,7 @@
 		},
 		"ext.visualEditor.data": {
 			"group": "visualEditorA",
-			"class": "VisualEditorDataModule"
+			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDataModule"
 		},
 		"ext.visualEditor.core": {
 			"group": "visualEditorA",
@@ -2977,19 +2977,16 @@
 		"visualeditor-visualdiffpage": 0
 	},
 	"SpecialPages": {
-		"CollabPad": "SpecialCollabPad"
+		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\VisualEditor\\": "includes/"
 	},
 	"AutoloadClasses": {
 		"ApiParsoidTrait": "includes/ApiParsoidTrait.php",
-		"ApiVisualEditor": "includes/ApiVisualEditor.php",
-		"ApiVisualEditorEdit": "includes/ApiVisualEditorEdit.php",
-		"SpecialCollabPad": "includes/SpecialCollabPad.php",
-		"VisualEditorDataModule": "includes/VisualEditorDataModule.php",
-		"VisualEditorDesktopArticleTargetInitModule": "includes/VisualEditorDesktopArticleTargetInitModule.php",
-		"VisualEditorHooks": "includes/VisualEditorHooks.php"
+		"MediaWiki\\Extension\\VisualEditor\\ApiParsoidTrait": "includes/ApiParsoidTrait.php",
+		"MediaWiki\\Extension\\VisualEditor\\Hooks": "includes/Hooks.php",
+		"VisualEditorHooks": "includes/Hooks.php"
 	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"

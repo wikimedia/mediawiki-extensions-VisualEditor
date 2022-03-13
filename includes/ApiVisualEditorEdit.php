@@ -8,12 +8,30 @@
  * @license MIT
  */
 
-use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
+namespace MediaWiki\Extension\VisualEditor;
+
+use ApiBase;
+use ApiMain;
+use BagOStuff;
+use ContentHandler;
+use Deflate;
+use DerivativeContext;
+use DerivativeRequest;
+use DifferenceEngine;
+use ExtensionRegistry;
+use FlaggablePageView;
+use IBufferingStatsdDataFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\User\UserIdentity;
+use ObjectCache;
+use RequestContext;
+use Sanitizer;
+use SkinFactory;
+use Title;
 use Wikimedia\ParamValidator\ParamValidator;
+use WikiPage;
 
 class ApiVisualEditorEdit extends ApiBase {
 	use ApiParsoidTrait;

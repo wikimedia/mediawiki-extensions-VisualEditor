@@ -3,15 +3,15 @@
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use ApiTestCase;
-use ApiVisualEditor;
 use ExtensionRegistry;
 use HashConfig;
+use MediaWiki\Extension\VisualEditor\ApiVisualEditor;
 use Wikimedia\ScopedCallback;
 
 /**
  * @group medium
  *
- * @covers \ApiVisualEditor
+ * @covers \MediaWiki\Extension\VisualEditor\ApiVisualEditor
  */
 class ApiVisualEditorTest extends ApiTestCase {
 

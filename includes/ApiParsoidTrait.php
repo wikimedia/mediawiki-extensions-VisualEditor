@@ -8,10 +8,22 @@
  * @license MIT
  */
 
+namespace MediaWiki\Extension\VisualEditor;
+
+use Config;
+use Exception;
+use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use Message;
+use ParsoidVirtualRESTService;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RestbaseVirtualRESTService;
+use Title;
+use VirtualRESTService;
+use VirtualRESTServiceClient;
+use WebRequest;
 
 trait ApiParsoidTrait {
 
@@ -330,3 +342,5 @@ trait ApiParsoidTrait {
 	 */
 	abstract public function getRequest();
 }
+
+class_alias( ApiParsoidTrait::class, 'ApiParsoidTrait' );

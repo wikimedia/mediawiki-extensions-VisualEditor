@@ -10,7 +10,10 @@
  * @license MIT
  */
 
+namespace MediaWiki\Extension\VisualEditor;
+
 use MediaWiki\MediaWikiServices;
+use ResourceLoaderFileModule;
 
 class VisualEditorDesktopArticleTargetInitModule extends ResourceLoaderFileModule {
 

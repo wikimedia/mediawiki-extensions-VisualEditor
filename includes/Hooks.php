@@ -8,10 +8,37 @@
  * @license MIT
  */
 
-use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
-use MediaWiki\MediaWikiServices;
+namespace MediaWiki\Extension\VisualEditor;
 
-class VisualEditorHooks {
+use ActorMigration;
+use Article;
+use AtomicSectionUpdate;
+use Config;
+use DeferredUpdates;
+use DifferenceEngine;
+use EditPage;
+use ExtensionRegistry;
+use Html;
+use Language;
+use MediaWiki;
+use MediaWiki\MediaWikiServices;
+use OOUI\ButtonGroupWidget;
+use OOUI\ButtonWidget;
+use OutputPage;
+use PreferencesFormOOUI;
+use RecentChange;
+use RequestContext;
+use ResourceLoader;
+use Skin;
+use SkinTemplate;
+use SpecialPage;
+use Title;
+use User;
+use WebRequest;
+use WikiFilePage;
+use WikiPage;
+
+class Hooks {
 
 	// Known parameters that VE does not handle
 	// TODO: Other params too?
@@ -145,15 +172,15 @@ class VisualEditorHooks {
 		$output->addHTML(
 			'<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
-			new OOUI\ButtonGroupWidget( [
+			new ButtonGroupWidget( [
 				'items' => [
-					new \OOUI\ButtonWidget( [
+					new ButtonWidget( [
 						'data' => 'visual',
 						'icon' => 'eye',
 						'disabled' => true,
 						'label' => $output->msg( 'visualeditor-savedialog-review-visual' )->plain()
 					] ),
-					new \OOUI\ButtonWidget( [
+					new ButtonWidget( [
 						'data' => 'source',
 						'icon' => 'wikiText',
 						'active' => true,
@@ -166,7 +193,7 @@ class VisualEditorHooks {
 	}
 
 	/**
-	 * Detect incompatibile browsers which we can't expect to load VE
+	 * Detect incompatible browsers which we can't expect to load VE
 	 *
 	 * @param WebRequest $req The web request to check the details of
 	 * @param Config $config VE config object
@@ -1192,3 +1219,5 @@ class VisualEditorHooks {
 		}
 	}
 }
+
+class_alias( Hooks::class, 'VisualEditorHooks' );
