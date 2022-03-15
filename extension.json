@@ -435,7 +435,7 @@
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
-			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.css"
+			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.less"
 		},
 		"ext.visualEditor.targetLoader": {
 			"group": "visualEditorA",
@@ -470,13 +470,13 @@
 			"group": "visualEditorA",
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-vector.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-vector.less"
 				],
 				"monobook": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-monobook.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-monobook.less"
 				]
 			}
 		},
@@ -486,20 +486,20 @@
 				"modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
+				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.less"
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.less"
 				],
 				"monobook": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.less"
 				],
 				"minerva": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-minerva.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-minerva.less"
 				]
 			},
 			"dependencies": [
@@ -592,20 +592,20 @@
 				"modules/ve-mw-collab/ve.init.mw.DesktopCollabTarget.js"
 			],
 			"styles": [
-				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.css"
+				"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.less"
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-vector.less"
 				],
 				"monobook": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-monobook.less"
 				],
 				"minerva": [
-					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-minerva.css"
+					"modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget-minerva.less"
 				]
 			},
 			"dependencies": [
