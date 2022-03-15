@@ -418,22 +418,26 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = funct
 		this.createAllParameterCheckboxes();
 	}
 
-	var firstSelected;
 	if ( this.parameterList ) {
 		this.parameterList.items.forEach( function ( item ) {
 			item.toggle( visibility || item.isSelected() );
-			if ( fromClick && !firstSelected && item.isSelected() ) {
-				firstSelected = item;
-			}
 		} );
 	}
 
 	if ( !visibility && fromClick ) {
-		// make sure the header is still visibly after collapsing
-		this.header.scrollElementIntoView();
+		this.scrollTopIntoView();
+	}
+};
+
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.scrollTopIntoView = function () {
+	this.header.scrollElementIntoView();
+
+	if ( this.parameterList ) {
+		var firstSelected = this.parameterList.findFirstSelectedItem();
 		if ( firstSelected ) {
 			// make sure parameters ( if any ) are still visible and scrolled underneath the sticky
 			firstSelected.scrollElementIntoView( { padding: { top: 110 } } );
 		}
+
 	}
 };

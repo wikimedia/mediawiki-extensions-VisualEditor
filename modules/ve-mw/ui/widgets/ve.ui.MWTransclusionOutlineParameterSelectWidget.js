@@ -81,6 +81,23 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 };
 
 /**
+ * @return {ve.ui.MWTransclusionOutlineParameterWidget|null}
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem = function () {
+	var firstSelected;
+
+	this.items.some( function ( item ) {
+		if ( !firstSelected && item.isSelected() ) {
+			firstSelected = item;
+			return true;
+		}
+		return false;
+	} );
+
+	return firstSelected;
+};
+
+/**
  * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightParameter = function ( paramName ) {
