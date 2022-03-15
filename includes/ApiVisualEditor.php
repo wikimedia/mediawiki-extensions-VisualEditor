@@ -8,6 +8,22 @@
  * @license MIT
  */
 
+namespace MediaWiki\Extension\VisualEditor;
+
+use ApiBase;
+use ApiBlockInfoTrait;
+use ApiMain;
+use ApiResult;
+use Article;
+use Config;
+use ContentHandler;
+use DerivativeContext;
+use DerivativeRequest;
+use EditPage;
+use ExtensionRegistry;
+use Hooks as MWHooks;
+use Html;
+use LogEventsList;
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Content\Transform\ContentTransformer;
 use MediaWiki\Linker\LinkRenderer;
@@ -18,7 +34,17 @@ use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\User\UserNameUtils;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
+use Parser;
+use ParserOptions;
+use RawMessage;
+use ReadOnlyMode;
+use Skin;
+use SpecialMyLanguage;
+use Title;
+use User;
 use Wikimedia\ParamValidator\ParamValidator;
+use WikiPage;
+use WikitextContent;
 
 class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
@@ -281,7 +307,7 @@ class ApiVisualEditor extends ApiBase {
 
 						$contentBeforeHook = $content;
 						if ( $section !== 'new' ) {
-							Hooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+							MWHooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
 						}
 						// Make sure we don't mark default system message content as a preload
 						if ( $content !== '' && $contentBeforeHook !== $content ) {
