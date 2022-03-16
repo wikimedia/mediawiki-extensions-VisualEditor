@@ -147,6 +147,7 @@
 	"visualeditor-dialog-template-title": "మూస",
 	"visualeditor-dialog-transclusion-add-content": "విషయము చేర్చు",
 	"visualeditor-dialog-transclusion-add-param": "మరింత సమాచారాన్ని చేర్చండి",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "పరామితి \"$2\" ను రెండు సార్లు చేర్చలేరు.",
 	"visualeditor-dialog-transclusion-add-template": "మూస చేర్చు",
 	"visualeditor-dialog-transclusion-collapse-options": "ఎంపికలను దాచు",
 	"visualeditor-dialog-transclusion-content": "విషయము",
