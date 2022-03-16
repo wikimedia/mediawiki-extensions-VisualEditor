@@ -543,7 +543,9 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
 	var params = {
 		action: 'visualeditoredit',
 		paction: 'serialize',
-		html: ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
+		html: mw.libs.ve.targetSaver.getHtml(
+			ve.dm.converter.getDomFromModel( doc )
+		),
 		page: this.getPageName()
 	};
 
