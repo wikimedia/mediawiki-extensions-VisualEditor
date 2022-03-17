@@ -1,7 +1,6 @@
 {
 	"extends": [
 		"wikimedia/qunit",
-		"../../../.eslintrc.json",
 		"wikimedia/language/es6"
 	],
 	"globals": {
