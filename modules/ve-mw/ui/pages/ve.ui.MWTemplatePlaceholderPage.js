@@ -19,6 +19,7 @@
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
 	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
+	var page = this;
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -76,10 +77,17 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 		// Temporary feedback message when templateSearchImprovements is true T284560
 		// TODO: remove when templateSearchImprovements are out of beta
-		var feedbackMessage = new ve.ui.MWDismissibleMessageWidget( {
-			messageKey: 'visualeditor-dialog-transclusion-feedback-message'
+		var key = 'mwe-visualeditor-hide-visualeditor-dialog-transclusion-feedback-message';
+		var feedbackMessage = new OO.ui.MessageWidget( {
+			label: $( ve.htmlMsg( 'visualeditor-dialog-transclusion-feedback-message' ) ),
+			showClose: true
 		} )
-			.connect( this, { close: 'focus' } );
+			.on( 'close', function () {
+				mw.storage.set( key, '1' );
+				page.focus();
+			} )
+			.toggle( !mw.storage.get( key ) );
+		ve.targetLinksToNewWindow( feedbackMessage.$label[ 0 ] );
 
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
 			// The following messages are used here:
