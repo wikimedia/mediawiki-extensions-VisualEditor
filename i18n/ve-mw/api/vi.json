@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Anh88",
+			"Bluetpp",
 			"Minh Nguyen"
 		]
 	},
@@ -26,6 +27,7 @@
 	"apihelp-visualeditoredit-param-minor": "Đánh dấu là sửa đổi nhỏ.",
 	"apihelp-visualeditoredit-param-needcheck": "Khi lưu, thiết lập thông số này nếu phiên bản có thể gây vấn đề khứ hồi. Lần sửa đổi này sẽ được đánh dấu.",
 	"apihelp-visualeditoredit-param-oldid": "Số phiên bản để sử dụng. Mặc định là phiên bản hiện tại. Sử dụng 0 cho trang mới.",
+	"apihelp-visualeditoredit-param-paction": "Tác vụ để thực hiện.",
 	"apihelp-visualeditoredit-param-page": "Trang để thực hiện các tác vụ.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Khi lưu, đặt thành dấu thời gian lúc trang được tải. Được sử dụng để phát hiện các mâu thuẫn sửa đổi.",
 	"apihelp-visualeditoredit-param-summary": "Lời tóm lược sửa đổi."
