@@ -4,9 +4,10 @@
  * @package VisualEditor
  */
 
-/* eslint-env node, es6 */
+'use strict';
+
 module.exports = function ( grunt ) {
-	var modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
+	const modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
 		screenshotOptions = {
 			reporter: 'spec',
 			// TODO: Work out how to catch this timeout and continue.
@@ -14,7 +15,7 @@ module.exports = function ( grunt ) {
 			timeout: 5 * 60 * 1000,
 			require: [
 				function () {
-					// eslint-disable-next-line no-undef, no-implicit-globals
+					// eslint-disable-next-line no-undef
 					langs = [ grunt.option( 'lang' ) || 'en' ];
 				}
 			]
@@ -26,7 +27,7 @@ module.exports = function ( grunt ) {
 			timeout: 5 * 60 * 1000,
 			require: [
 				function () {
-					// eslint-disable-next-line no-undef, no-implicit-globals
+					// eslint-disable-next-line no-undef
 					langs = require( './build/tasks/screenshotLangs.json' ).langs;
 				}
 			]
@@ -190,10 +191,10 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'git-status', function () {
-		var done = this.async();
+		const done = this.async();
 		// Are there unstaged changes?
 		require( 'child_process' ).exec( 'git ls-files --modified', function ( err, stdout, stderr ) {
-			var ret = err || stderr || stdout;
+			const ret = err || stderr || stdout;
 			if ( ret ) {
 				grunt.log.error( 'Unstaged changes in these files:' );
 				grunt.log.error( ret );
