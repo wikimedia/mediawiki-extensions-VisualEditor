@@ -259,7 +259,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Bilder und Medien",
 	"visualeditor-dialogbutton-meta-tooltip": "Seiteneinstellungen",
 	"visualeditor-dialogbutton-template-tooltip": "Vorlage",
-	"visualeditor-dismissible-message-close": "Meldung schließen und nicht mehr anzeigen",
 	"visualeditor-donebutton-tooltip": "Bearbeitung abschließen",
 	"visualeditor-editconflict": "Deine Änderungen konnten aufgrund eines Bearbeitungskonflikts nicht gespeichert werden. Willst {{GENDER:|du}} den Konflikt manuell beheben?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} merkt sich jetzt, welchen Editor du bevorzugst. Du kannst zwischen Bearbeitungsmodi wechseln und deine Einstellung später ändern.",

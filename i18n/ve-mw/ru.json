@@ -260,7 +260,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Изображения и медиафайлы",
 	"visualeditor-dialogbutton-meta-tooltip": "Параметры страницы",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
-	"visualeditor-dismissible-message-close": "Закрыть сообщение и не показывать его снова",
 	"visualeditor-donebutton-tooltip": "Редактирование завершено",
 	"visualeditor-editconflict": "Произошёл конфликт редактирования, поэтому вашу правку не удалось сохранить. Хотите ли вы разрешить конфликт вручную?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} теперь помнит предпочитаемый вами редактор. Вы можете переключать режимы во время редактирования или изменить свои настройки позже.",

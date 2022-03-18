@@ -223,7 +223,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Képek és média",
 	"visualeditor-dialogbutton-meta-tooltip": "Oldalbeállítások",
 	"visualeditor-dialogbutton-template-tooltip": "Sablon",
-	"visualeditor-dismissible-message-close": "Bezárás és ne mutassa többet ezt az üzenetet",
 	"visualeditor-donebutton-tooltip": "Szerkesztés befejezése",
 	"visualeditor-editconflict": "A módosítások nem menthetők egy szerkesztési ütközés miatt. Szeretnéd kézzel megoldani a problémát?",
 	"visualeditor-editingtabdialog-body": "A(z) {{SITENAME}} most már meg tudja jegyezni, melyik szerkesztési nézetet használod szívesebben. Válthatsz módot szerkesztés közben, és megváltoztathatod a beállítást később is.",

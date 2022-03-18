@@ -249,7 +249,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Obrázky a média",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavení stránky",
 	"visualeditor-dialogbutton-template-tooltip": "Šablona",
-	"visualeditor-dismissible-message-close": "Zavřít zprávu a nezobrazovat znovu",
 	"visualeditor-donebutton-tooltip": "Editace hotova",
 	"visualeditor-editconflict": "Vaše změny nelze uložit kvůli editačnímu konfliktu. {{GENDER:|Chcete}} editační konflikt vyřešit ručně?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} si nyní pamatuje, který editor preferujete. Režim editace můžete v průběhu přepínat a později změnit své nastavení.",

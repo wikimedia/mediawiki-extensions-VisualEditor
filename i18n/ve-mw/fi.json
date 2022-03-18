@@ -252,7 +252,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Kuvat ja media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sivun asetukset",
 	"visualeditor-dialogbutton-template-tooltip": "Malline",
-	"visualeditor-dismissible-message-close": "Sulje viesti äläkä näytä sitä enää uudestaan",
 	"visualeditor-donebutton-tooltip": "Muokkaukset valmiita",
 	"visualeditor-editconflict": "Muutoksiasi ei voitu tallentaa samanaikaisen muokkauksen takia. {{GENDER:|Haluatko}} ratkaista päällekkäiset muutokset manuaalisesti?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} muistaa nyt muokkausohjelmavalintasi, ja voit muuttaa näitä asetuksia myöhemmin. Muokkaustilojen välillä voi vaihtaa myös muokkauksen aikana.",

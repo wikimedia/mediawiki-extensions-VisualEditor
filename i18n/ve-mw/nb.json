@@ -249,7 +249,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Bilder og media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sideinnstillinger",
 	"visualeditor-dialogbutton-template-tooltip": "Mal",
-	"visualeditor-dismissible-message-close": "Lukk meldingen og ikke vis den igjen",
 	"visualeditor-donebutton-tooltip": "Ferdig med å redigere",
 	"visualeditor-editconflict": "Endringene dine kunne ikke lagres på grunn av en redigeringskollisjon. Vil {{GENDER:|du}} løse konflikten manuelt?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} husker nå hvilken editor du foretrekker. Du kan bytte redigeringsmodus mens du redigerer, og du kan endre innstillingene dine på et senere tidspunkt.",
