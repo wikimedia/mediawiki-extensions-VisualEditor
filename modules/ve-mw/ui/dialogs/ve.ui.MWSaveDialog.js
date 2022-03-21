@@ -457,12 +457,12 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 
 	// Only show preview in source mode
 	this.actions.forEach( { actions: 'preview' }, function ( action ) {
-		action.toggle( dialog.canPreview );
+		action.toggle( dialog.canPreview && panel !== 'preview' );
 	} );
 
 	// Diff API doesn't support section=new
 	this.actions.forEach( { actions: 'review' }, function ( action ) {
-		action.toggle( dialog.canReview );
+		action.toggle( dialog.canReview && panel !== 'review' );
 	} );
 
 	// Support: iOS
