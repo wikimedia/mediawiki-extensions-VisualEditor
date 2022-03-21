@@ -280,6 +280,7 @@ ve.dm.mwExample.MWBlockImage = {
 				type: 'thumb',
 				align: 'right',
 				href: './Foo',
+				imageClassAttr: null,
 				imgWrapperClassAttr: null,
 				mediaClass: 'Image',
 				src: ve.ce.minImgDataUri,
@@ -317,6 +318,7 @@ ve.dm.mwExample.MWInlineImage = {
 		attributes: {
 			src: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png',
 			href: './File:Wiki.png',
+			imageClassAttr: null,
 			imgWrapperClassAttr: null,
 			mediaClass: 'Image',
 			width: 135,
@@ -349,6 +351,7 @@ ve.dm.mwExample.MWInlineImageWithWrapperClass = {
 		attributes: {
 			src: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png',
 			href: './File:Wiki.png',
+			imageClassAttr: null,
 			imgWrapperClassAttr: 'mw-file-description',
 			mediaClass: 'Image',
 			width: 135,
@@ -1075,6 +1078,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
@@ -1110,6 +1114,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
@@ -1144,6 +1149,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
@@ -1178,6 +1184,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
@@ -1203,6 +1210,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					height: 300,
 					href: './Foo',
+					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
 					mediaClass: 'Image',
@@ -1949,7 +1957,7 @@ ve.dm.mwExample.domToDataCases = {
 		body:
 			'<figure class="mw-default-size" typeof="mw:Error mw:Image/Thumb" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
 				'<a href="./Special:FilePath/Missing_image.jpg">' +
-					'<span resource="./File:Missing_image.jpg" data-width="220">File:Missing image.jpg</span>' +
+					'<span class="mw-broken-media" resource="./File:Missing_image.jpg" data-width="220">File:Missing image.jpg</span>' +
 				'</a>' +
 				'<figcaption>abc</figcaption>' +
 			'</figure>',
@@ -1960,6 +1968,7 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'thumb',
 					align: 'default',
 					href: './Special:FilePath/Missing_image.jpg',
+					imageClassAttr: 'mw-broken-media',
 					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: null,
@@ -1993,7 +2002,7 @@ ve.dm.mwExample.domToDataCases = {
 		previewBody:
 			'<figure class="mw-default-size" typeof="mw:Error mw:Image/Thumb" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
 				'<a href="./Special:FilePath/Missing_image.jpg" class="new">' +
-					'<span resource="./File:Missing_image.jpg" data-width="220">File:Missing image.jpg</span>' +
+					'<span class="mw-broken-media" resource="./File:Missing_image.jpg" data-width="220">File:Missing image.jpg</span>' +
 				'</a>' +
 				'<figcaption>abc</figcaption>' +
 			'</figure>'
@@ -2003,7 +2012,7 @@ ve.dm.mwExample.domToDataCases = {
 			'<p>' +
 				'<span typeof="mw:Error mw:Image" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
 					'<a href="./Special:FilePath/Missing_image.jpg">' +
-						'<span resource="./File:Missing_image.jpg" data-width="200">File:Missing image.jpg</span>' +
+						'<span class="mw-broken-media" resource="./File:Missing_image.jpg" data-width="200">File:Missing image.jpg</span>' +
 					'</a>' +
 				'</span>' +
 			'</p>',
@@ -2014,6 +2023,7 @@ ve.dm.mwExample.domToDataCases = {
 				attributes: {
 					type: 'none',
 					href: './Special:FilePath/Missing_image.jpg',
+					imageClassAttr: 'mw-broken-media',
 					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: null,
@@ -2043,7 +2053,7 @@ ve.dm.mwExample.domToDataCases = {
 			'<p>' +
 				'<span typeof="mw:Error mw:Image" data-mw="{&quot;errors&quot;:[{&quot;key&quot;:&quot;apierror-filedoesnotexist&quot;,&quot;message&quot;:&quot;This image does not exist.&quot;}]}">' +
 					'<a href="./Special:FilePath/Missing_image.jpg" class="new">' +
-						'<span resource="./File:Missing_image.jpg" data-width="200">File:Missing image.jpg</span>' +
+						'<span class="mw-broken-media" resource="./File:Missing_image.jpg" data-width="200">File:Missing image.jpg</span>' +
 					'</a>' +
 				'</span>' +
 			'</p>'
@@ -2075,6 +2085,7 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'thumb',
 					align: 'default',
 					href: './Foo',
+					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: ve.ce.minImgDataUri,
