@@ -153,7 +153,7 @@
 	"visualeditor-dialog-transclusion-add-content": "Inhalt dobäisetzen",
 	"visualeditor-dialog-transclusion-add-wikitext": "Wikitext derbäisetzen",
 	"visualeditor-dialog-transclusion-add-param": "Méi Informatiounen derbäisetzen",
-	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Et kënne keng zwee Parameter mat demselwechten Numm derbäigesat ginn.",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "De Parameter \"$2\" kann net zweemol derbäigesat ginn.",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Numm vum Parameter",
 	"visualeditor-dialog-transclusion-add-param-save": "Parameter derbäisetzen",
 	"visualeditor-dialog-transclusion-add-template": "Schabloun derbäisetzen",
