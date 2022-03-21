@@ -31,19 +31,11 @@
 
 .ve-ui-mwParameterPage-inlineDescription {
 	position: relative;
-	/* FIXME remove when sidebar feature flag is gone T303386 */
-	padding-left: 2.5em;
-	padding-right: 2.5em;
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-inlineDescription {
 	/* FIXME remove when sidebar feature flag is gone T303386 */
 	padding-left: 0;
-}
-
-/* Temporary style while inline description is deployed without the new sidebar */
-.ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
-	right: 2.5em;
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {

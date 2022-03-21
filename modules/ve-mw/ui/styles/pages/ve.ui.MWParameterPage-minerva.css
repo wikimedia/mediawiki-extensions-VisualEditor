@@ -20,6 +20,10 @@
 	color: #54595d;
 }
 
+.ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
+	right: 0;
+}
+
 .ve-ui-mwParameterPage-infoButton,
 .ve-ui-mwParameterPage-removeButton {
 	display: none;

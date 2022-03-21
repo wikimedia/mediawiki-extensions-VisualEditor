@@ -90,6 +90,17 @@
 	padding-bottom: 2em;
 }
 
+/* FIXME remove when sidebar feature flag is gone T303386 */
+.ve-ui-mwParameterPage-inlineDescription {
+	padding-left: 2.5em;
+	padding-right: 2.5em;
+}
+
+/* Temporary style while inline description is deployed without the new sidebar */
+.ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
+	right: 2.5em;
+}
+
 .ve-ui-mwParameterPage .oo-ui-textInputWidget {
 	display: inline-block;
 	vertical-align: top;
