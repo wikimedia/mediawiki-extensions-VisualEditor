@@ -1161,7 +1161,7 @@
 				"lib/ve/src/ui/contextitems/ve.ui.LinearContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.AnnotationContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.TableLineContextItem.js",
-				"lib/ve/src/ui/contextitems/ve.ui.AlienContextItem.js",
+				"lib/ve/src/ui/contextitems/ve.ui.MobileActionsContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.AlignableContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.CommentContextItem.js",
 				"lib/ve/src/ui/contextitems/ve.ui.LinkContextItem.js",
@@ -1295,7 +1295,6 @@
 			],
 			"messages": [
 				"visualeditor",
-				"visualeditor-aliencontextitem-title",
 				"visualeditor-aliennode-tooltip",
 				"visualeditor-align-desc-center",
 				"visualeditor-align-desc-default",
