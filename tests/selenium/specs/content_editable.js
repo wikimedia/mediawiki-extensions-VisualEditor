@@ -13,8 +13,7 @@ describe( 'Content Editable', function () {
 		await EditPage.openForEditing( name );
 
 		await EditPage.activationComplete();
-		assert( await EditPage.notices.isDisplayed() );
-
+		assert( await EditPage.toolbar.isDisplayed() );
 	} );
 
 } );

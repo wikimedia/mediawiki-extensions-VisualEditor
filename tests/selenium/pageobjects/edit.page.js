@@ -3,7 +3,7 @@ const Page = require( 'wdio-mediawiki/Page' );
 
 class EditPage extends Page {
 
-	get notices() { return $( '.ve-ui-mwNoticesPopupTool-items' ); }
+	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
 
 	openForEditing( title ) {
 		super.openTitle( title, { veaction: 'edit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
