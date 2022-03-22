@@ -66,7 +66,7 @@ ve.dm.MWBlockImageNode.static.classAttributes = {
 ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter ) {
 	var figure = domElements[ 0 ];
 	var imgWrapper = figure.children[ 0 ]; // <a> or <span>
-	var img = imgWrapper.children[ 0 ]; // <img>, <video> or <audio>
+	var img = imgWrapper.children[ 0 ]; // <img>, <video>, <audio>, or <span> if mw:Error
 	var captionNode = figure.children[ 1 ]; // <figcaption> or undefined
 	var classAttr = figure.getAttribute( 'class' );
 	var typeofAttrs = figure.getAttribute( 'typeof' ).trim().split( /\s+/ );
@@ -98,6 +98,7 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 		href: href,
+		imageClassAttr: img.getAttribute( 'class' ),
 		imgWrapperClassAttr: imgWrapper.getAttribute( 'class' ),
 		resource: img.getAttribute( 'resource' ),
 		width: width !== null && width !== '' ? +width : null,
@@ -182,6 +183,12 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 
 	if ( attributes.href ) {
 		imgWrapper.setAttribute( 'href', attributes.href );
+	}
+
+	// At the moment, preserving this is only relevant on mw:Error spans
+	if ( attributes.isError && attributes.imageClassAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
+		img.className = attributes.imageClassAttr;
 	}
 
 	if ( attributes.imgWrapperClassAttr ) {

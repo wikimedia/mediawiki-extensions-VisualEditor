@@ -88,6 +88,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 		href: href,
+		imageClassAttr: img.getAttribute( 'class' ),
 		imgWrapperClassAttr: imgWrapper.getAttribute( 'class' ),
 		resource: img.getAttribute( 'resource' ),
 		originalClasses: classes,
@@ -221,6 +222,11 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		}
 		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
 		img.appendChild( doc.createTextNode( filename ) );
+		// At the moment, preserving this is only relevant on mw:Error spans
+		if ( attributes.imageClassAttr ) {
+			// eslint-disable-next-line mediawiki/class-doc
+			img.className = attributes.imageClassAttr;
+		}
 	}
 
 	container.appendChild( firstChild );
