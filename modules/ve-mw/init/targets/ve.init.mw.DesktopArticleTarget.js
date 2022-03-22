@@ -190,7 +190,15 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config ) {
-	config = ve.extendObject( { $overlayContainer: $( '#content' ) }, config );
+	config = ve.extendObject( {
+		$overlayContainer: $( '#content' ),
+		// Vector-2022 content area has no padding itself, so popups render too close
+		// to the edge of the text (T258501). Use a negative value to allow popups to
+		// position slightly outside the content. Padding elsewhere means we are
+		// guaranteed 30px of space between the content and the edge of the viewport.
+		// Other skins pass 'undefined' to use the default padding of +10px.
+		overlayPadding: mw.config.get( 'skin' ) === 'vector-2022' ? -10 : undefined
+	}, config );
 	return ve.init.mw.DesktopArticleTarget.parent.prototype.addSurface.call( this, dmDoc, config );
 };
 
