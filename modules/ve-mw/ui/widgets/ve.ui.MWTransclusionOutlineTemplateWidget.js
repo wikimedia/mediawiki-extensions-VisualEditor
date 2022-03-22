@@ -10,7 +10,7 @@
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template
- * @param {boolean} [replacesPlaceholder]
+ * @param {boolean} [replacesPlaceholder=false]
  * @property {ve.dm.MWTemplateModel} templateModel
  * @property {ve.ui.MWTransclusionOutlineParameterSelectWidget} parameterList
  */
@@ -32,9 +32,20 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		remove: 'onParameterRemovedFromTemplateModel'
 	} );
 
-	var initiallyHideUnused = !replacesPlaceholder && !this.transclusionModel.isSingleTemplate();
-	this.initializeParameterList( initiallyHideUnused );
-	this.toggleFilters( initiallyHideUnused );
+	this.toggleFilters();
+	var canFilter = !!this.toggleUnusedWidget,
+		initiallyHideUnused = canFilter && !replacesPlaceholder && !this.transclusionModel.isSingleTemplate();
+
+	var parameterNames = this.getRelevantTemplateParameters( initiallyHideUnused ? 'used' : 'all' );
+	if ( parameterNames.length ) {
+		this.initializeParameterList();
+		this.parameterList.addItems( parameterNames.map( this.createCheckbox.bind( this ) ) );
+	}
+
+	if ( initiallyHideUnused ) {
+		// This is only to update the label of the "Hide unused" button
+		this.toggleUnusedWidget.toggleUnusedParameters( false );
+	}
 };
 
 /* Inheritance */
@@ -72,15 +83,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.static.searchableParameterCount = 4;
 
 /**
  * @private
- * @param {boolean} [initiallyHideUnused=false]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = function ( initiallyHideUnused ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = function () {
 	if ( this.parameterList ) {
-		return;
-	}
-
-	var parameterNames = this.getRelevantTemplateParameters( initiallyHideUnused ? 'used' : 'all' );
-	if ( !parameterNames.length ) {
 		return;
 	}
 
@@ -89,7 +94,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = fu
 		.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
 	this.parameterList = new ve.ui.MWTransclusionOutlineParameterSelectWidget( {
-		items: parameterNames.map( this.createCheckbox.bind( this ) ),
 		ariaLabel: ve.msg( 'visualeditor-dialog-transclusion-param-selection-aria-label', this.templateModel.getSpec().getLabel() ),
 		$ariaDescribedBy: $parametersAriaDescription
 	} ).connect( this, {
@@ -307,9 +311,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
 
 /**
  * @private
- * @param {boolean} [initiallyHideUnused=false]
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( initiallyHideUnused ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () {
 	var numParams = this.getRelevantTemplateParameters().length,
 		visible = numParams >= this.constructor.static.searchableParameterCount;
 	if ( this.searchWidget ) {
@@ -318,9 +321,6 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function ( i
 	} else if ( visible ) {
 		this.initializeFilters();
 		this.updateUnusedParameterToggleState();
-		if ( initiallyHideUnused ) {
-			this.toggleUnusedWidget.toggleUnusedParameters( false );
-		}
 	}
 };
 
@@ -438,6 +438,5 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.scrollTopIntoView = function
 			// make sure parameters ( if any ) are still visible and scrolled underneath the sticky
 			firstSelected.scrollElementIntoView( { padding: { top: 110 } } );
 		}
-
 	}
 };
