@@ -1769,9 +1769,7 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
 	var target = this;
 
-	if ( noPrompt || !this.edited ) {
-		return this.teardown( trackMechanism );
-	} else {
+	if ( !noPrompt && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
 		return this.getSurface().dialogs.openWindow( 'abandonedit' )
 			.closed.then( function ( data ) {
 				if ( data && data.action === 'discard' ) {
@@ -1779,6 +1777,8 @@ ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMecha
 				}
 				return ve.createDeferred().reject().promise();
 			} );
+	} else {
+		return this.teardown( trackMechanism );
 	}
 };
 
@@ -2259,15 +2259,15 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
  *
  * @param {string|null} section Section to switch to: a number, 'T-'-prefixed number, 'new'
  *   or null (whole document)
- * @param {boolean} [noConfirm=false] Switch without prompting (changes will be lost either way)
+ * @param {boolean} [noPrompt=false] Switch without prompting (changes will be lost either way)
  */
-ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section, noConfirm ) {
+ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section, noPrompt ) {
 	var target = this;
 	if ( section === this.section ) {
 		return;
 	}
 	var promise;
-	if ( !noConfirm && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
+	if ( !noPrompt && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
 		promise = this.getSurface().dialogs.openWindow( 'abandonedit' )
 			.closed.then( function ( data ) {
 				return data && data.action === 'discard';
