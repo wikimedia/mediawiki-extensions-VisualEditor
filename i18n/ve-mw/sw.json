@@ -5,7 +5,8 @@
 			"Lloffiwr",
 			"Magotech",
 			"Muddyb",
-			"Muddyb Blast Producer"
+			"Muddyb Blast Producer",
+			"Wangombe"
 		]
 	},
 	"tooltip-ca-createsource": "Anzisha chanzo msimbo za ukurasa huu",
@@ -24,6 +25,7 @@
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-content-section": "Maelezo ya yaliyomo",
 	"visualeditor-dialog-media-goback": "Rudi",
+	"visualeditor-dialog-media-info-meta-artist": "Mwandishi = $1",
 	"visualeditor-dialog-media-position-center": "Katikati",
 	"visualeditor-dialog-media-position-left": "Kushoto",
 	"visualeditor-dialog-media-position-right": "Kulia",
