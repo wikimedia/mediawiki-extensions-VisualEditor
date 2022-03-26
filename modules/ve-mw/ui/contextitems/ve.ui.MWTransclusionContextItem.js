@@ -66,14 +66,6 @@ ve.ui.MWTransclusionContextItem.static.isCompatibleWith =
 /**
  * @inheritdoc
  */
-ve.ui.MWTransclusionContextItem.prototype.isDeletable = function () {
-	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
-	return veConfig.transclusionDialogBackButton || ve.ui.MWTransclusionContextItem.super.prototype.isDeletable.call( this );
-};
-
-/**
- * @inheritdoc
- */
 ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
 	return ve.msg(
@@ -121,10 +113,6 @@ ve.ui.MWTransclusionContextItem.prototype.toggleLoadingVisualization = function 
 		this.editButton.setLabel( ve.msg( 'visualeditor-dialog-transclusion-contextitem-loading' ) );
 	} else if ( this.originalEditButtonLabel ) {
 		this.editButton.setLabel( this.originalEditButtonLabel );
-	}
-
-	if ( this.isDeletable() ) {
-		this.deleteButton.toggle( !isLoading );
 	}
 };
 
