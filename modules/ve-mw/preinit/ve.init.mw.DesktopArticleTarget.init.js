@@ -544,6 +544,10 @@
 				incrementLoadingProgress();
 				// If target was already loaded, ensure the mode is correct
 				target.setDefaultMode( mode );
+				// syncTempWikitextEditor modified the result object in the dataPromise
+				if ( tempWikitextEditor ) {
+					syncTempWikitextEditor();
+				}
 				var activatePromise = target.activate( dataPromise );
 
 				// toolbarSetupDeferred resolves slightly before activatePromise, use done
@@ -558,9 +562,7 @@
 				if ( mode === 'visual' ) {
 					// 'mwedit.ready' has already been fired for source mode in setupTempWikitextEditor
 					ve.track( 'mwedit.ready', { mode: mode } );
-				} else if ( tempWikitextEditor ) {
-					syncTempWikitextEditor();
-				} else {
+				} else if ( !tempWikitextEditor ) {
 					// We're in source mode, but skipped the
 					// tempWikitextEditor, so make sure we do relevant
 					// tracking / hooks:
