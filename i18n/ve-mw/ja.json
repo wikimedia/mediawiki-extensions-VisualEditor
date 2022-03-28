@@ -36,6 +36,7 @@
 			"Translatealcd",
 			"Vigorous action",
 			"Whym",
+			"Yamagata Yusuke",
 			"Yusuke1109",
 			"しぃ",
 			"ネイ"
@@ -95,7 +96,7 @@
 	"visualeditor-dialog-media-info-ellipsis": "…",
 	"visualeditor-dialog-media-info-imagedescription": "フル説明",
 	"visualeditor-dialog-media-info-licenseshortname": "ライセンス",
-	"visualeditor-dialog-media-info-meta-artist": "アーティスト: $1",
+	"visualeditor-dialog-media-info-meta-artist": "作者: $1",
 	"visualeditor-dialog-media-info-moreinfo": "詳細情報",
 	"visualeditor-dialog-media-info-readmore": "さらに読む",
 	"visualeditor-dialog-media-info-separator": "。",
