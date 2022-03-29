@@ -35,6 +35,8 @@ OO.inheritClass( ve.dm.MWExternalLinkAnnotation, ve.dm.LinkAnnotation );
 
 ve.dm.MWExternalLinkAnnotation.static.name = 'link/mwExternal';
 
+ve.dm.MWExternalLinkAnnotation.static.allowedRdfaTypes = null;
+
 ve.dm.MWExternalLinkAnnotation.static.toDataElement = function ( domElements, converter ) {
 	var domElement = domElements[ 0 ],
 		type = domElement.getAttribute( 'rel' ) || domElement.getAttribute( 'typeof' ) || domElement.getAttribute( 'property' ) || '',
