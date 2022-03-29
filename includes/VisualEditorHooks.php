@@ -457,7 +457,8 @@ class VisualEditorHooks {
 	 * @param array &$links Navigation links.
 	 */
 	public static function onSkinTemplateNavigation( SkinTemplate $skin, array &$links ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()
+		$services = MediaWikiServices::getInstance();
+		$config = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
