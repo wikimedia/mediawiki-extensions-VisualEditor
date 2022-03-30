@@ -270,8 +270,10 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 	// Protocol relative href
 	var relativeHref = href.replace( /^https?:/i, '' );
 
-	// Paths without a host portion are assumed to be internal
-	if ( !/^\/\//.test( relativeHref ) ) {
+	// Equivalent to `ve.init.platform.getExternalLinkUrlProtocolsRegExp()`, which can not be called here
+	var externalLinkUrlProtocolsRegExp = new RegExp( '^(' + mw.config.get( 'wgUrlProtocols' ) + ')', 'i' );
+	// Paths that don't start with a registered external url protocol
+	if ( !externalLinkUrlProtocolsRegExp.test( href ) ) {
 		isInternal = true;
 	} else {
 		// Check if this matches the server's script path (as used by red links)
@@ -299,6 +301,8 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 				// Take the relative path
 				href = matches[ 1 ];
 				isInternal = true;
+			} else {
+				isInternal = false;
 			}
 		}
 	}

@@ -45,6 +45,23 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 			expectedRangeOrSelection: new ve.Range( 5 ),
 			expectedHtml: '<p>a<sup typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;}" class="mw-ref reference"><a style="counter-reset: mw-Ref 1;"><span class="mw-reflink-text">[1]</span></a></sup>b</p>',
 			msg: 'VE references not stripped'
+		},
+		{
+			documentHtml: '<p></p>',
+			rangeOrSelection: new ve.Range( 1 ),
+			pasteHtml: 'Lorem <a href="mailto:someone@somewhere.net">ipsum</a> dolor sit amet',
+			expectedRangeOrSelection: new ve.Range( 27 ),
+			expectedHtml: '<p>Lorem <a href="mailto:someone@somewhere.net" rel="mw:ExtLink">ipsum</a> dolor sit amet</p>',
+			config: {
+				importRules: {
+					external: {
+						blacklist: {
+							'link/mwExternal': false
+						}
+					}
+				}
+			},
+			msg: '"mailto:" pseudo protocol not recognized'
 		}
 	];
 

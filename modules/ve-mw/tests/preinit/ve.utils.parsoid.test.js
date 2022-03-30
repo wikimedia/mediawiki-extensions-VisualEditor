@@ -81,3 +81,32 @@ QUnit.test( 'reduplicateStyles/deduplicateStyles', ( assert ) => {
 		);
 	} );
 } );
+
+QUnit.test( 'getTargetDataFromHref', ( assert ) => {
+	const doc = ve.parseXhtml( '<p></p>' );
+	const hrefCases = [
+		{
+			msg: 'Invalid protocol is not handled as internal link',
+			href: 'not-a-protocol:Some%20text',
+			expectedInfo: {
+				title: 'not-a-protocol:Some text',
+				rawTitle: 'not-a-protocol:Some%20text',
+				isInternal: true
+			}
+
+		},
+		{
+			msg: 'Valid protocol is not handled as external link',
+			href: 'mailto:someone@somewhere.net',
+			expectedInfo: {
+				title: 'mailto:someone@somewhere.net',
+				rawTitle: 'mailto:someone@somewhere.net',
+				isInternal: false
+			}
+		}
+	];
+	hrefCases.forEach( ( caseItem ) => {
+		const actualInfo = mw.libs.ve.getTargetDataFromHref( caseItem.href, doc );
+		assert.deepEqual( actualInfo, caseItem.expectedInfo, caseItem.msg );
+	} );
+} );
