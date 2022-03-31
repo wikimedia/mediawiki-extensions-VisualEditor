@@ -87,7 +87,7 @@ mw.libs.ve.restbaseIdRegExp = /^mw[a-zA-Z0-9\-_]{2,6}$/;
 mw.libs.ve.stripRestbaseIds = function ( doc ) {
 	var restbaseIdRegExp = mw.libs.ve.restbaseIdRegExp;
 	Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
-		if ( element.id.match( restbaseIdRegExp ) ) {
+		if ( restbaseIdRegExp.test( element.id ) ) {
 			element.removeAttribute( 'id' );
 		}
 	} );

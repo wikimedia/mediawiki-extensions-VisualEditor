@@ -115,7 +115,7 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
 	} );
 
 	function isWhitespaceNode( node ) {
-		return node && node.nodeType === Node.TEXT_NODE && !!node.data.match( whitespaceRegex );
+		return node && node.nodeType === Node.TEXT_NODE && whitespaceRegex.test( node.data );
 	}
 
 	while ( isWhitespaceNode( contentNodes[ 0 ] ) ) {

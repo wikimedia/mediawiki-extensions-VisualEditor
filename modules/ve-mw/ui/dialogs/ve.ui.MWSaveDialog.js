@@ -221,7 +221,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( docOrMsg, baseDoc ) {
 		} );
 		// Remove skin-specific modules (T187075 / T185284)
 		modules = modules.filter( function ( module ) {
-			return ( module.match( /^(skins|mediawiki\.skinning)\./ ) === null );
+			return !/^(skins|mediawiki\.skinning)\./.test( module );
 		} );
 		mw.loader.using( modules );
 		var body = docOrMsg.body;

@@ -89,7 +89,7 @@ ve.ui.MWEditSummaryWidget.static.getMatchingSummaries = function ( summaries, qu
 				summaryPrefixMatches.push( summary );
 			}
 		} else if ( index !== -1 ) {
-			if ( lowerSummary[ index - 1 ].match( /\s/ ) ) {
+			if ( /\s/.test( lowerSummary[ index - 1 ] ) ) {
 				// Character before match is whitespace
 				wordPrefixMatches.push( summary );
 			} else {
