@@ -113,7 +113,7 @@
 	"visualeditor-dialog-meta-categories-addcategory-label": "Xếp trang này vào thêm thể loại",
 	"visualeditor-dialog-meta-categories-category": "Thể loại",
 	"visualeditor-dialog-meta-categories-data-label": "Thể loại",
-	"visualeditor-dialog-meta-categories-defaultsort-help": "Bạn có thể ghi đè cách sắp xếp trang này trên trang thể loại bằng một chìa khóa sắp xếp thay thế. Nhiều khi phải ghi đè chìa khóa để sắp xếp một tiểu sử của người phương Tây theo họ mà đặt tên trang theo thứ tự tên-họ.",
+	"visualeditor-dialog-meta-categories-defaultsort-help": "Bạn có thể ghi đè cách sắp xếp trang này trên trang thể loại bằng một chìa khóa sắp xếp thay thế. Tính năng này thường được sử dụng để đặt tên với tên riêng đứng trước, nhưng sắp xếp trang tiểu sử với họ đứng trước.",
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Sắp xếp trang này dưới tên mặc định",
 	"visualeditor-dialog-meta-categories-hidden": "Thể loại này sẽ không hiển thị trên các trang được xếp vào nó.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Thể loại ẩn",

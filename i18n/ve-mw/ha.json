@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Bashir Gwanki",
+			"Bello Na'im",
 			"DonCamillo",
 			"Em-em",
 			"Gwanki",
@@ -27,6 +28,7 @@
 	"visualeditor-dialog-media-content-filename": "Sunan fayil",
 	"visualeditor-dialog-media-content-section": "Take",
 	"visualeditor-dialog-media-goback": "Baya",
+	"visualeditor-dialog-media-info-meta-artist": "Mawallafi: $1",
 	"visualeditor-dialog-media-position-center": "Tsakkiya",
 	"visualeditor-dialog-media-position-left": "Hagu",
 	"visualeditor-dialog-media-position-none": "Babu",
