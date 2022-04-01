@@ -274,19 +274,28 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		return response;
 	}
 
+	var numberOfCirrusSearchResults = Object.keys( response.query.pages ).length;
+	var fullFallbackNeeded = !numberOfCirrusSearchResults;
+
 	return this.getApi().get( {
 		action: 'query',
 		// Can't use a direct lookup by title because we need this to be case-insensitive
 		generator: 'prefixsearch',
 		gpssearch: query,
 		gpsnamespace: this.namespace,
-		gpslimit: 1
+		// Fall back to prefixsearch when CirrusSearch failed, otherwise just the top-1 prefix match
+		gpslimit: fullFallbackNeeded ? this.limit : 1
 	} ).then( function ( prefixMatches ) {
 		// action=query returns page objects in `{ query: { pages: [] } }`, not keyed by page id
 		if ( prefixMatches.query ) {
+			if ( fullFallbackNeeded ) {
+				response.query.pages = prefixMatches.query.pages;
+				return response;
+			}
 			for ( var index in prefixMatches.query.pages ) {
 				var prefixMatch = prefixMatches.query.pages[ index ];
 				if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
+					// Move the top-1 prefix match to the top, releant for e.g. {{!!}}
 					unshiftPages( response.query.pages, prefixMatch );
 				}
 			}
