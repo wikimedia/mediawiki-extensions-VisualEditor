@@ -592,7 +592,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			'captchaword' => null,
 			'cachekey' => null,
 			'useskin' => [
-				ApiBase::PARAM_TYPE => array_keys( $this->skinFactory->getInstalledSkins() ),
+				ParamValidator::PARAM_TYPE => array_keys( $this->skinFactory->getInstalledSkins() ),
 				ApiBase::PARAM_HELP_MSG => 'apihelp-parse-param-useskin',
 			],
 			'tags' => [
