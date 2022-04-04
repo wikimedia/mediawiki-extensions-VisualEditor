@@ -46,6 +46,9 @@ class ApiVisualEditorTest extends ApiTestCase {
 		$this->assertSame( 'success', $data['result'] );
 
 		$properties = [
+			// When updating this, also update the sample response in
+			// ve.init.mw.DesktopArticleTarget.test.js
+			'result',
 			'notices',
 			'copyrightWarning',
 			'checkboxesDef',
@@ -57,10 +60,14 @@ class ApiVisualEditorTest extends ApiTestCase {
 			'blockinfo',
 			'canEdit',
 			'content',
+			// When updating this, also update the sample response in
+			// ve.init.mw.DesktopArticleTarget.test.js
 		];
 		foreach ( $properties as $prop ) {
 			$this->assertArrayHasKey( $prop, $data, "Result has key '$prop'" );
 		}
+
+		$this->assertSameSize( $properties, $data, "No other properties are expected" );
 	}
 
 	/**
