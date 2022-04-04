@@ -16,6 +16,7 @@
 			"Jskang",
 			"Kwj2772",
 			"LFM",
+			"MemphisA5",
 			"Miri-Nae",
 			"Namoroka",
 			"Naturehead",
@@ -187,7 +188,7 @@
 	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "틀, 틀 변수, 틀 값을 삭제하려면 Ctrl+Del을 누르십시오.",
 	"visualeditor-dialog-transclusion-add-content": "내용 추가",
 	"visualeditor-dialog-transclusion-add-param": "자세한 정보 추가",
-	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" 값은 \"$2\" 변수의 [//www.mediawiki.org/wiki/Help:TemplateData#aliases 다른 이름]이므로 중복이기 때문에 추가할 수 없습니다.",
+	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\"은(는) 이미 \"$2\"로 추가되었습니다. 사이드바에서 옵션을 확인하세요. 이는 [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#aliases 다른 이름] 또는 [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#label 라벨]을 사용했기 때문입니다.",
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "\"$1\" 값을 추가할 수 없습니다. 해당 변수는 [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#deprecated 구식]으로 표기되어 있습니다.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "\"$2\" 변수를 두 번 추가할 수 없습니다.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "\"$2\" 변수는 이미 사용 가능합니다. 사이드바에서 옵션을 확인해 주십시오.",
@@ -208,7 +209,7 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter": "사용되지 않는 필드",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "필드는 구식입니다. $1",
 	"visualeditor-dialog-transclusion-loading": "불러오는 중...",
-	"visualeditor-dialog-transclusion-more-template-description": "[[{{ns:template}}:$1|틀 문서]]에 \"$1\" 틀에 관한 추가 정보가 있을 수 있습니다.",
+	"visualeditor-dialog-transclusion-more-template-description": "[[$2|틀 문서]]에 \"$1\" 틀에 관한 추가 정보가 있을 수 있습니다.",
 	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" 틀은 아직 설명이 없습니다. [[$2|틀 문서]]에 일부 정보가 있을 수 있습니다.",
 	"visualeditor-dialog-transclusion-options": "선택 사항",
 	"visualeditor-dialog-transclusion-param-default": "기본값: $1",
@@ -413,6 +414,6 @@
 	"visualeditor-wikitext-warning": "시각편집기를 사용하고 있습니다 - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|위키텍스트]]는 여기서 작동하지 않습니다. 편집한 내용을 잃지 않고 원본 편집으로 언제든지 전환하려면 전환을 선택하세요.",
 	"visualeditor-wikitext-warning-title": "위키텍스트 문법이 감지됨",
 	"visualeditor-wikitextconvert-title": "서식을 위키텍스트로 변환하시겠습니까?",
-	"visualeditor-wikitextconvert-message": "붙여넣은 내용에 서식이 포함되어 있습니다. 위키텍스트로 변환해야 합니까, 아니면 플레인 텍스트로 추가되어야 합니까?",
+	"visualeditor-wikitextconvert-message": "붙여넣은 내용에 리치 서식이 포함되어 있습니다. 이 형식을 위키텍스트로 변환하시겠습니까?",
 	"visualeditor-wikitextconvert-convert": "위키텍스트로 변환"
 }

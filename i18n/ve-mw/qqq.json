@@ -32,7 +32,8 @@
 			"Verdy p",
 			"Woytecr",
 			"Yejianfei",
-			"Zoranzoki21"
+			"Zoranzoki21",
+			"Ата"
 		]
 	},
 	"accesskey-ca-editsource": "{{doc-accesskey}}",
@@ -229,7 +230,7 @@
 	"visualeditor-dialog-transclusion-help-message": "'''In RTL languages, swap \"left\" and \"right\".'''\n\nMessage shown to an editor within the template help dialog.",
 	"visualeditor-dialog-transclusion-help-page-feedback": "Link to the feedback page for template improvements.",
 	"visualeditor-dialog-transclusion-help-page-help": "Link to the template section on the project's help page.",
-	"visualeditor-dialog-transclusion-help-page-shortcuts": "Link to the keyboard shortcuts section on the project's help page",
+	"visualeditor-dialog-transclusion-help-page-shortcuts": "Link to the keyboard shortcuts section on the project's help page (given section anchor is present on the page)",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Tooltip for the indicator icon (an exclamation mark) that marks deprecated template parameters.",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Label describing that a template parameter is deprecated and should not be used any more.\n\nParameters:\n* $1 - Description given in the template's TemplateData documentation for why the parameter is deprecated. May be empty.",
 	"visualeditor-dialog-transclusion-loading": "Title for the transclusion dialog while its contents are loading.\n{{Identical|Loading}}",
