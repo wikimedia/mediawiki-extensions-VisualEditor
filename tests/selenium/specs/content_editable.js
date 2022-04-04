@@ -14,6 +14,20 @@ describe( 'Content Editable', function () {
 
 		await EditPage.activationComplete();
 		assert( await EditPage.toolbar.isDisplayed() );
+
+	} );
+
+	it( 'should be editable', async function () {
+		await LoginPage.loginAdmin();
+
+		const name = Util.getTestString();
+		const content = Util.getTestString();
+		await EditPage.openForEditing( name );
+		await EditPage.activationComplete();
+		await EditPage.veRootNode.setValue( content );
+
+		const expectedContent = await EditPage.veRootNode.getText();
+		assert.equal( expectedContent, content );
 	} );
 
 } );
