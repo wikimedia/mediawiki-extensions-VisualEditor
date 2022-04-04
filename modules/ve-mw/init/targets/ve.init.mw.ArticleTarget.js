@@ -534,6 +534,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			starttimestamp: this.startTimeStamp,
 			oldid: this.revid,
 			canEdit: this.canEdit,
+			copyrightWarning: this.copyrightWarning,
 			checkboxesDef: this.checkboxesDef,
 			checkboxesMessages: this.checkboxesMessages
 		}
