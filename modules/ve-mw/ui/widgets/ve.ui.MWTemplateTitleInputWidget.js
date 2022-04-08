@@ -275,7 +275,6 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	}
 
 	var numberOfCirrusSearchResults = Object.keys( response.query.pages ).length;
-	var fullFallbackNeeded = !numberOfCirrusSearchResults;
 
 	return this.getApi().get( {
 		action: 'query',
@@ -283,22 +282,26 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		generator: 'prefixsearch',
 		gpssearch: query,
 		gpsnamespace: this.namespace,
-		// Fall back to prefixsearch when CirrusSearch failed, otherwise just the top-1 prefix match
-		gpslimit: fullFallbackNeeded ? this.limit : 1
+		// Try to fill with prefix matches, otherwise just the top-1 prefix match
+		gpslimit: Math.max( this.limit - numberOfCirrusSearchResults, 1 )
 	} ).then( function ( prefixMatches ) {
 		// action=query returns page objects in `{ query: { pages: [] } }`, not keyed by page id
 		if ( prefixMatches.query ) {
-			if ( fullFallbackNeeded ) {
-				response.query.pages = prefixMatches.query.pages;
-				return response;
-			}
+			var missingPages = [];
 			for ( var index in prefixMatches.query.pages ) {
 				var prefixMatch = prefixMatches.query.pages[ index ];
 				if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
-					// Move the top-1 prefix match to the top, releant for e.g. {{!!}}
-					unshiftPages( response.query.pages, prefixMatch );
+					missingPages.push( prefixMatch );
 				}
 			}
+			missingPages.sort( function ( a, b ) {
+				// Needs to be in revers order because of the way unshiftPages() works
+				return b.index - a.index;
+			} ).forEach( function ( page ) {
+				// Move prefix matches to the top, pushing CirrusSearch results down one by one,
+				// releant for e.g. {{!!}}
+				unshiftPages( response.query.pages, page );
+			} );
 		}
 		return response;
 	}, function () {
