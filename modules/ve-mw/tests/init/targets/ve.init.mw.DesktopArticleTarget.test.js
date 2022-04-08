@@ -132,9 +132,7 @@ QUnit.test( 'init', ( assert ) => {
 				content: true,
 				// Not stored because if you're blocked, the editor opens in read-only mode (or doesn't open
 				// at all, on mobile), so we'll never have to restore from auto-save
-				blockinfo: true,
-				// T305225
-				copyrightWarning: true
+				blockinfo: true
 			};
 			Object.keys( response.visualeditor ).forEach( ( key ) => {
 				if ( !ignoredKeys[ key ] ) {
