@@ -548,15 +548,19 @@
 				if ( tempWikitextEditor ) {
 					syncTempWikitextEditor();
 				}
-				var activatePromise = target.activate( dataPromise );
 
-				// toolbarSetupDeferred resolves slightly before activatePromise, use done
-				// to run in the same paint cycle as the VE toolbar being drawn
-				target.toolbarSetupDeferred.done( function () {
-					hideToolbarPlaceholder();
+				var deactivating = target.deactivatingDeferred || $.Deferred().resolve();
+				return deactivating.then( function () {
+					var activatePromise = target.activate( dataPromise );
+
+					// toolbarSetupDeferred resolves slightly before activatePromise, use done
+					// to run in the same paint cycle as the VE toolbar being drawn
+					target.toolbarSetupDeferred.done( function () {
+						hideToolbarPlaceholder();
+					} );
+
+					return activatePromise;
 				} );
-
-				return activatePromise;
 			} )
 			.then( function () {
 				if ( mode === 'visual' ) {

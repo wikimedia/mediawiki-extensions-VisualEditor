@@ -32,6 +32,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	this.onUnloadHandler = this.onUnload.bind( this );
 	this.activating = false;
 	this.deactivating = false;
+	this.deactivatingDeferred = null;
 	this.recreating = false;
 	this.activatingDeferred = null;
 	this.toolbarSetupDeferred = null;
@@ -575,8 +576,6 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 		saveDialogPromise = ve.createDeferred().resolve().promise(),
 		target = this;
 
-	this.emit( 'deactivate' );
-
 	// Event tracking
 	var abortType, abortedMode;
 	if ( trackMechanism ) {
@@ -596,9 +595,12 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 
 	// Cancel activating, start deactivating
 	this.deactivating = true;
+	this.deactivatingDeferred = ve.createDeferred();
 	this.activating = false;
 	this.activatingDeferred.reject();
 	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active' );
+
+	this.emit( 'deactivate' );
 
 	// Restore TemplateStyles of the original content
 	// (We do this here because toggling 've-active' class above displays it)
@@ -642,14 +644,15 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			target.initialEditSummary = new mw.Uri().query.summary;
 			target.editSummaryValue = null;
 
-			target.deactivating = false;
-			$( 'html' ).removeClass( 've-deactivating' );
-
 			// Move original content back out of the target
 			target.$element.parent().append( target.$originalContent.children() );
 
 			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+
+			target.deactivating = false;
+			target.deactivatingDeferred.resolve();
+			$( 'html' ).removeClass( 've-deactivating' );
 
 			// Event tracking
 			if ( trackMechanism ) {
