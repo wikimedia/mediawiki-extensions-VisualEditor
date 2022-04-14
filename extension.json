@@ -206,7 +206,8 @@
 				"WatchlistManager",
 				"ContentTransformer",
 				"SpecialPageFactory",
-				"ReadOnlyMode"
+				"ReadOnlyMode",
+				"RestrictionStore"
 			]
 		},
 		"visualeditoredit": {

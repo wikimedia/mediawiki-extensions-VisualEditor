@@ -29,6 +29,7 @@ use MediaWiki\Content\Transform\ContentTransformer;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\RestrictionStore;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\User\UserNameUtils;
@@ -74,6 +75,9 @@ class ApiVisualEditor extends ApiBase {
 	/** @var ReadOnlyMode */
 	private $readOnlyMode;
 
+	/** @var RestrictionStore */
+	private $restrictionStore;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
@@ -85,6 +89,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param ContentTransformer $contentTransformer
 	 * @param SpecialPageFactory $specialPageFactory
 	 * @param ReadOnlyMode $readOnlyMode
+	 * @param RestrictionStore $restrictionStore
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -96,7 +101,8 @@ class ApiVisualEditor extends ApiBase {
 		WatchlistManager $watchlistManager,
 		ContentTransformer $contentTransformer,
 		SpecialPageFactory $specialPageFactory,
-		ReadOnlyMode $readOnlyMode
+		ReadOnlyMode $readOnlyMode,
+		RestrictionStore $restrictionStore
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -108,6 +114,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->contentTransformer = $contentTransformer;
 		$this->specialPageFactory = $specialPageFactory;
 		$this->readOnlyMode = $readOnlyMode;
+		$this->restrictionStore = $restrictionStore;
 	}
 
 	/**
@@ -386,7 +393,7 @@ class ApiVisualEditor extends ApiBase {
 					)->page( $title )->parseAsBlock();
 
 					// Page protected from creation
-					if ( $title->getRestrictions( 'create' ) ) {
+					if ( $this->restrictionStore->getRestrictions( $title, 'create' ) ) {
 						$protectionNotices['titleprotectedwarning'] =
 							$this->msg( 'titleprotectedwarning' )->page( $title )->parseAsBlock() .
 							$this->getLastLogEntry( $title, 'protect' );
@@ -414,9 +421,9 @@ class ApiVisualEditor extends ApiBase {
 					$permissionManager->getNamespaceRestrictionLevels( $title->getNamespace() ) !== [ '' ]
 				) {
 					// Page protected from editing
-					if ( $title->isProtected( 'edit' ) ) {
+					if ( $this->restrictionStore->isProtected( $title, 'edit' ) ) {
 						// Is the title semi-protected?
-						if ( $title->isSemiProtected() ) {
+						if ( $this->restrictionStore->isSemiProtected( $title ) ) {
 							$protectedClasses[] = 'mw-textarea-sprotected';
 
 							$noticeMsg = 'semiprotectedpagewarning';
@@ -431,7 +438,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 
 					// Deal with cascading edit protection
-					list( $sources, $restrictions ) = $title->getCascadeProtectionSources();
+					list( $sources, $restrictions ) = $this->restrictionStore->getCascadeProtectionSources( $title );
 					if ( isset( $restrictions['edit'] ) ) {
 						$protectedClasses[] = ' mw-textarea-cprotected';
 
