@@ -40,7 +40,7 @@
 	"visualeditor-dialog-media-info-dateformat": "$1 $2, $3",
 	"visualeditor-dialog-media-info-imagedescription": "पूर्ण विवरण",
 	"visualeditor-dialog-media-info-licenseshortname": "इजाजतपत्र",
-	"visualeditor-dialog-media-info-meta-artist": "लेख : $1",
+	"visualeditor-dialog-media-info-meta-artist": "लेखक: $1",
 	"visualeditor-dialog-media-info-moreinfo": "थप जानकारी",
 	"visualeditor-dialog-media-info-readmore": "थप पढ्ने",
 	"visualeditor-dialog-media-info-separator": "।",
