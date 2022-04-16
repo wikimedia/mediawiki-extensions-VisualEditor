@@ -2958,12 +2958,6 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\VisualEditor\\": "includes/"
 	},
-	"AutoloadClasses": {
-		"ApiParsoidTrait": "includes/ApiParsoidTrait.php",
-		"MediaWiki\\Extension\\VisualEditor\\ApiParsoidTrait": "includes/ApiParsoidTrait.php",
-		"MediaWiki\\Extension\\VisualEditor\\Hooks": "includes/Hooks.php",
-		"VisualEditorHooks": "includes/Hooks.php"
-	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
 	},
