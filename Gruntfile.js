@@ -149,10 +149,7 @@ module.exports = function ( grunt ) {
 				cache: true,
 				fix: grunt.option( 'fix' )
 			},
-			all: [
-				'*.{js,json}',
-				'{build,modules}/**/*.{js,json}'
-			]
+			all: [ '.' ]
 		},
 		stylelint: {
 			options: {
