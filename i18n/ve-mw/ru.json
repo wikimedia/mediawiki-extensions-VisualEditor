@@ -209,7 +209,7 @@
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Этот шаблон не существует.",
 	"visualeditor-dialog-transclusion-template-widget-aria": "Нажмите на клавишу пробела, чтобы выбрать шаблон.",
 	"visualeditor-dialog-transclusion-add-content": "Добавить содержимое",
-	"visualeditor-dialog-transclusion-add-wikitext": "Добавить викитекст",
+	"visualeditor-dialog-transclusion-add-wikitext": "Добавить вики-текст",
 	"visualeditor-dialog-transclusion-add-param": "Добавить ещё информацию",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Имя параметра",
 	"visualeditor-dialog-transclusion-add-param-save": "Добавить параметр",
@@ -239,7 +239,7 @@
 	"visualeditor-dialog-transclusion-param-undocumented": "(Недокументированный параметр)",
 	"visualeditor-dialog-transclusion-placeholder": "Добавить шаблон",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Найти шаблон",
-	"visualeditor-dialog-transclusion-raw-fallback": "Отступить к простой викиразметке",
+	"visualeditor-dialog-transclusion-raw-fallback": "Вернуться к простому вики-тексту",
 	"visualeditor-dialog-transclusion-remove-content": "Удалить содержимое",
 	"visualeditor-dialog-transclusion-remove-param": "Удалить поле",
 	"visualeditor-dialog-transclusion-remove-template": "Удалить шаблон",
@@ -460,7 +460,7 @@
 	"visualeditor-wikitext-progress": "Преобразование вики-текста",
 	"visualeditor-wikitext-warning": "Вы используете визуальный редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-разметка]] здесь не работает. Чтобы в любое время переключиться назад на редактирование исходного текста без потери изменений, нажмите на кнопку переключателя.",
 	"visualeditor-wikitext-warning-title": "Обнаружена вики-разметка",
-	"visualeditor-wikitextconvert-title": "Перевести форматирование в вики-код?",
+	"visualeditor-wikitextconvert-title": "Перевести форматирование в вики-текст?",
 	"visualeditor-wikitextconvert-message": "Скопированное вами содержимое содержит форматирование. Хотите ли вы преобразовать это форматирование в вики-текст?",
 	"visualeditor-wikitextconvert-convert": "Преобразовать в вики-код"
 }
