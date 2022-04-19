@@ -413,10 +413,11 @@
 	};
 
 	/**
-	 * @return {number} Next part ID, starting from 0, guaranteed to be unique for this transclusion
+	 * @return {string} Next part ID, starting from "part_0", guaranteed to be unique for this
+	 *  transclusion
 	 */
 	ve.dm.MWTransclusionModel.prototype.nextUniquePartId = function () {
-		return this.uid++;
+		return 'part_' + this.uid++;
 	};
 
 	/**

@@ -46,7 +46,7 @@
 		[ './Template:Possibly_invalid%5B%5D', 'Template:Possibly invalid[]' ]
 	].forEach( ( [ href, expected ] ) =>
 		QUnit.test( 'getTitle: ' + href, ( assert ) => {
-			const transclusion = { nextUniquePartId: () => 0 },
+			const transclusion = { nextUniquePartId: () => '' },
 				template = new ve.dm.MWTemplateModel( transclusion, { href } );
 			assert.strictEqual( template.getTitle(), expected );
 		} )
@@ -481,7 +481,7 @@
 		[ 'int:a', 'b', 'Template:Int:a', 'leaves other prefixes untouched' ]
 	].forEach( ( [ wt, href, expected, message ] ) =>
 		QUnit.test( 'getTemplateDataQueryTitle: ' + message, ( assert ) => {
-			const transclusion = { nextUniquePartId: () => 0 },
+			const transclusion = { nextUniquePartId: () => '' },
 				data = { target: { wt, href } },
 				model = ve.dm.MWTemplateModel.newFromData( transclusion, data );
 
@@ -500,7 +500,7 @@
 		[ { p1: { wt: '\nfoo' } }, true, 'newline' ]
 	].forEach( ( [ params, expected, message ] ) =>
 		QUnit.test( 'containsValuableData: ' + message, ( assert ) => {
-			const transclusion = { nextUniquePartId: () => 0 },
+			const transclusion = { nextUniquePartId: () => '' },
 				data = { target: {}, params },
 				model = ve.dm.MWTemplateModel.newFromData( transclusion, data );
 
