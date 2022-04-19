@@ -20,6 +20,7 @@
 ve.ui.MWTemplateTitleInputWidget = function VeUiMWTemplateTitleInputWidget( config ) {
 	config = ve.extendObject( {}, {
 		namespace: mw.config.get( 'wgNamespaceIds' ).template,
+		showMissing: false,
 		// We don't need results to show up twice normalized and unnormalized
 		addQueryInput: false,
 		icon: 'search',
@@ -205,8 +206,12 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		query = this.getQueryValue(),
 		title = mw.Title.newFromText( query, this.namespace );
 	// No point in trying anything when the title is invalid
-	if ( !response.query || !title ) {
+	if ( !title ) {
 		return response;
+	}
+
+	if ( !response.query ) {
+		response.query = { pages: [] };
 	}
 
 	var lowerTitle = title.getPrefixedText().toLowerCase(),
