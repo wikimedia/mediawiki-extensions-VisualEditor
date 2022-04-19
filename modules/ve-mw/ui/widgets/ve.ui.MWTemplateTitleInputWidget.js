@@ -115,15 +115,15 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			// Build a new array to replace response.query.pages, ensuring everything goes into
 			// the order defined by the page's index key, instead of whatever random order the
 			// browser would let you iterate over the old object in.
-			for ( var pageId in origPages ) {
-				if ( 'index' in origPages[ pageId ] ) {
-					newPages[ origPages[ pageId ].index - 1 ] = origPages[ pageId ];
+			for ( var i in origPages ) {
+				if ( 'index' in origPages[ i ] ) {
+					newPages[ origPages[ i ].index - 1 ] = origPages[ i ];
 				} else {
 					// Watch out for cases where the index is specified on the redirect object
 					// rather than the page object.
-					for ( var redirIndex in redirects ) {
-						if ( redirects[ redirIndex ].to === origPages[ pageId ].title ) {
-							newPages[ redirects[ redirIndex ].index - 1 ] = origPages[ pageId ];
+					for ( var j in redirects ) {
+						if ( redirects[ j ].to === origPages[ i ].title ) {
+							newPages[ redirects[ j ].index - 1 ] = origPages[ i ];
 							break;
 						}
 					}
