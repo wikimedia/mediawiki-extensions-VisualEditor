@@ -420,8 +420,6 @@
 	};
 
 	/**
-	 * Replace part.
-	 *
 	 * Replace asynchronously.
 	 *
 	 * @param {ve.dm.MWTransclusionPartModel} remove Part to remove
@@ -448,11 +446,9 @@
 	};
 
 	/**
-	 * Add part.
-	 *
 	 * Added asynchronously, but order is preserved.
 	 *
-	 * @param {ve.dm.MWTransclusionPartModel} part Part to add
+	 * @param {ve.dm.MWTransclusionPartModel} part
 	 * @param {number} [index] Specific index to add content at, defaults to the end
 	 * @throws {Error} If part is not valid
 	 * @return {jQuery.Promise} Promise, resolved when part is added
@@ -472,9 +468,7 @@
 	};
 
 	/**
-	 * Remove a part.
-	 *
-	 * @param {ve.dm.MWTransclusionPartModel} part Part to remove
+	 * @param {ve.dm.MWTransclusionPartModel} part
 	 * @fires replace
 	 */
 	ve.dm.MWTransclusionModel.prototype.removePart = function ( part ) {
@@ -506,17 +500,13 @@
 	};
 
 	/**
-	 * Get all parts.
-	 *
-	 * @return {ve.dm.MWTransclusionPartModel[]} Parts in transclusion
+	 * @return {ve.dm.MWTransclusionPartModel[]} All parts in this transclusion
 	 */
 	ve.dm.MWTransclusionModel.prototype.getParts = function () {
 		return this.parts;
 	};
 
 	/**
-	 * Get part by its ID.
-	 *
 	 * Matching is performed against the first section of the `id`, delimited by a '/'.
 	 *
 	 * @param {string} [id] Any id, including slash-delimited template parameter ids
