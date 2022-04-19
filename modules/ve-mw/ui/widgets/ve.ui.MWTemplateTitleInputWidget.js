@@ -273,8 +273,6 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		return response;
 	}
 
-	var numberOfCirrusSearchResults = Object.keys( response.query.pages ).length;
-
 	return this.getApi().get( {
 		action: 'query',
 		// Can't use a direct lookup by title because we need this to be case-insensitive
@@ -282,25 +280,25 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		gpssearch: query,
 		gpsnamespace: this.namespace,
 		// Try to fill with prefix matches, otherwise just the top-1 prefix match
-		gpslimit: Math.max( this.limit - numberOfCirrusSearchResults, 1 )
+		gpslimit: this.limit
 	} ).then( function ( prefixMatches ) {
 		// action=query returns page objects in `{ query: { pages: [] } }`, not keyed by page id
-		if ( prefixMatches.query ) {
-			var missingPages = [];
-			for ( var index in prefixMatches.query.pages ) {
-				var prefixMatch = prefixMatches.query.pages[ index ];
-				if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
-					missingPages.push( prefixMatch );
-				}
+		var pages = prefixMatches.query && prefixMatches.query.pages || [];
+		pages.sort( function ( a, b ) {
+			return a.index - b.index;
+		} );
+		for ( i in pages ) {
+			var prefixMatch = pages[ i ];
+			if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
+				// Move prefix matches to the top, indexed from -9 to 0, relevant for e.g. {{!!}}
+				// Note: Sorting happens later in mw.widgets.TitleWidget.getOptionsFromData()
+				prefixMatch.index -= widget.limit;
+				response.query.pages.push( prefixMatch );
 			}
-			missingPages.sort( function ( a, b ) {
-				// Needs to be in revers order because of the way unshiftPages() works
-				return b.index - a.index;
-			} ).forEach( function ( page ) {
-				// Move prefix matches to the top, pushing CirrusSearch results down one by one,
-				// releant for e.g. {{!!}}
-				unshiftPages( response.query.pages, page );
-			} );
+			// Check only after the top-1 prefix match is guaranteed to be present
+			if ( response.query.pages.length >= widget.limit ) {
+				break;
+			}
 		}
 		return response;
 	}, function () {
