@@ -110,10 +110,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	return promise
 		.then( function ( response ) {
 			var redirects = ( response.query && response.query.redirects ) || [],
-				origPages = ( response.query && response.query.pages ) || [],
-				newPages = [];
+				newPages = ( response.query && response.query.pages ) || [];
 
-			origPages.forEach( function ( page ) {
+			newPages.forEach( function ( page ) {
 				if ( !( 'index' in page ) ) {
 					// Watch out for cases where the index is specified on the redirect object
 					// rather than the page object.
@@ -126,26 +125,17 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				}
 			} );
 
-			// Build a new array to replace response.query.pages, ensuring everything goes into
-			// the order defined by the page's index key, instead of whatever random order the
-			// browser would let you iterate over the old object in.
-			for ( var i in origPages ) {
-				if ( 'index' in origPages[ i ] ) {
-					newPages[ origPages[ i ].index - 1 ] = origPages[ i ];
-				}
-			}
+			// Ensure everything goes into the order defined by the page's index key
+			newPages.sort( function ( a, b ) {
+				return a.index - b.index;
+			} );
 
 			// T54448: Filter out matches which end in /doc or as configured on-wiki
 			if ( templateDataInstalled ) {
 				newPages = newPages.filter( function ( page ) {
 					// Can't use String.endsWith() as that's ES6.
 					// page.title.endsWith( templateDocPageFragment )
-					return page.title.slice( 0 - templateDocPageFragment.length ) !== templateDocPageFragment;
-				} );
-			} else {
-				// Even if not filtering /doc, collapse the sparse array
-				newPages = newPages.filter( function ( page ) {
-					return page;
+					return page.title.slice( -templateDocPageFragment.length ) !== templateDocPageFragment;
 				} );
 			}
 
