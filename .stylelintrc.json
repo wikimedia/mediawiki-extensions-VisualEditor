@@ -1,5 +1,5 @@
 {
-	"extends": "stylelint-config-wikimedia/grade-a",
+	"extends": "stylelint-config-wikimedia/support-modern",
 	"rules": {
 		"no-descending-specificity": null,
 		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-",
