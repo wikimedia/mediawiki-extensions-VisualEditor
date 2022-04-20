@@ -212,14 +212,17 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		var modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
 		modelNode.setDocument( converter.internalList.getDocument() );
 		var viewNode = ve.ce.nodeFactory.createFromModel( modelNode );
+		// HACK: Node must be attached to check for rendering
+		viewNode.$element.appendTo( 'body' );
 		if ( !viewNode.hasRendering() ) {
+			viewNode.$element.detach();
 			viewNode.onSetup();
 			// HACK: Force the icon to render immediately
 			viewNode.updateInvisibleIconSync( true );
 			els = viewNode.$element.toArray();
-			viewNode.destroy();
-			return els;
 		}
+		viewNode.destroy();
+		viewNode.$element.detach();
 	}
 	return els;
 };
