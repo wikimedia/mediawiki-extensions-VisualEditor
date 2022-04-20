@@ -109,7 +109,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	return promise
 		.then( function ( response ) {
 			var redirects = ( response.query && response.query.redirects ) || [],
-				origPages = ( response.query && response.query.pages ) || {},
+				origPages = ( response.query && response.query.pages ) || [],
 				newPages = [];
 
 			// Build a new array to replace response.query.pages, ensuring everything goes into
@@ -167,8 +167,8 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 		.then( function ( templateDataResponse ) {
 			var pages = ( templateDataResponse && templateDataResponse.pages ) || {};
 			// Look for descriptions and cache them
-			for ( var index in pages ) {
-				var page = pages[ index ];
+			for ( var i in pages ) {
+				var page = pages[ i ];
 
 				if ( page.missing ) {
 					// Remmeber templates that don't exist in the link cache
