@@ -755,7 +755,7 @@ class ApiVisualEditor extends ApiBase {
 				ParamValidator::PARAM_DEFAULT => null,
 			],
 			'section' => null,
-			'stash' => null,
+			'stash' => false,
 			'oldid' => null,
 			'editintro' => null,
 			'pst' => false,
