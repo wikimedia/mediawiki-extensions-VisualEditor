@@ -86,21 +86,40 @@ QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 	const doc = ve.parseXhtml( '<p></p>' );
 	const hrefCases = [
 		{
-			msg: 'Invalid protocol is not handled as internal link',
+			/* eslint-disable no-script-url */
+			msg: 'Invalid protocol is handled as internal link',
+			href: 'javascript:alert()',
+			expectedInfo: {
+				title: 'javascript:alert()',
+				rawTitle: 'javascript:alert()',
+				isInternal: true
+			}
+			/* eslint-enable no-script-url */
+		},
+		{
+			msg: 'Invalid protocol is handled as internal link',
 			href: 'not-a-protocol:Some%20text',
 			expectedInfo: {
 				title: 'not-a-protocol:Some text',
 				rawTitle: 'not-a-protocol:Some%20text',
 				isInternal: true
 			}
-
 		},
 		{
-			msg: 'Valid protocol is not handled as external link',
-			href: 'mailto:someone@somewhere.net',
+			msg: 'Valid protocol is handled as external link',
+			href: 'https://example.net/',
 			expectedInfo: {
-				title: 'mailto:someone@somewhere.net',
-				rawTitle: 'mailto:someone@somewhere.net',
+				title: 'https://example.net/',
+				rawTitle: 'https://example.net/',
+				isInternal: false
+			}
+		},
+		{
+			msg: 'Valid protocol is handled as external link',
+			href: 'mailto:example@example.net',
+			expectedInfo: {
+				title: 'mailto:example@example.net',
+				rawTitle: 'mailto:example@example.net',
 				isInternal: false
 			}
 		}

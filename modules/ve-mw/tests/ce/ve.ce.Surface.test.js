@@ -49,9 +49,30 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
-			pasteHtml: 'Lorem <a href="mailto:someone@somewhere.net">ipsum</a> dolor sit amet',
+			pasteHtml: '<a href="https://example.net/">Lorem</a> <a href="not-a-protocol:Some%20text">ipsum</a> <a href="mailto:example@example.net">dolor</a> <a href="javascript:alert()">sit amet</a>',
 			expectedRangeOrSelection: new ve.Range( 27 ),
-			expectedHtml: '<p>Lorem <a href="mailto:someone@somewhere.net" rel="mw:ExtLink">ipsum</a> dolor sit amet</p>',
+			// hrefs with invalid protocols get removed by DOMPurify, and these links become spans in
+			// ve.dm.LinkAnnotation.static.toDataElement (usually the span is stripped later)
+			expectedHtml: '<p>Lorem <span>ipsum</span> dolor <span>sit amet</span></p>',
+			config: {
+				importRules: {
+					external: {
+						blacklist: {
+							'link/mwExternal': true
+						}
+					}
+				}
+			},
+			msg: 'External links stripped'
+		},
+		{
+			documentHtml: '<p></p>',
+			rangeOrSelection: new ve.Range( 1 ),
+			pasteHtml: '<a href="https://example.net/">Lorem</a> <a href="not-a-protocol:Some%20text">ipsum</a> <a href="mailto:example@example.net">dolor</a> <a href="javascript:alert()">sit amet</a>',
+			expectedRangeOrSelection: new ve.Range( 27 ),
+			// hrefs with invalid protocols get removed by DOMPurify, and these links become spans in
+			// ve.dm.LinkAnnotation.static.toDataElement (usually the span is stripped later)
+			expectedHtml: '<p><a href="https://example.net/" rel="mw:ExtLink">Lorem</a> <span>ipsum</span> <a href="mailto:example@example.net" rel="mw:ExtLink">dolor</a> <span>sit amet</span></p>',
 			config: {
 				importRules: {
 					external: {
@@ -61,7 +82,7 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 					}
 				}
 			},
-			msg: '"mailto:" pseudo protocol not recognized'
+			msg: 'External links not stripped, but only some protocols allowed'
 		}
 	];
 
