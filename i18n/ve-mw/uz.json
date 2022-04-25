@@ -138,6 +138,7 @@
 	"visualeditor-serializeerror": "Maʼlumotlarni serverdan yuklashda xatolik: $1",
 	"visualeditor-settings-tool": "Sahifa sozlamalari",
 	"visualeditor-templatesused-tool": "Foydalanilgan andozalar",
+	"visualeditor-toload": "Muharrir hozir yuklanadi. Bir necha soniyadan keyin ham ushbu xabarni koʻrayotgan boʻlsangiz, iltimos, [$1 sahifani qayta yuklang].",
 	"visualeditor-usernamespacepagelink": "Project:Shaxsiy nomfazo",
 	"visualeditor-version-label": "Versiyasi",
 	"visualeditor-wikitext-warning": "Siz VisualEditordan foydalanmoqdasiz — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|viki-belgilar]] bu yerda ishlamaydi. Sahifani viki-matn tartibida tahrirlash uchun \"{{MediaWiki:visualeditor-ca-editsource}}\"ni bosing. Saqlanmagan oʻzgarishlar yoʻqoladi.",
