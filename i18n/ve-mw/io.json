@@ -267,5 +267,8 @@
 	"visualeditor-version-label": "Versiono",
 	"visualeditor-wikitext-progress": "Konvertanta wikitexto",
 	"visualeditor-wikitext-warning": "Vu uzas VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] ne funcionas hike. Por swichar al bazala redaktilo irgatempe sen perdar vua chanji, kliktar la swicho-butono.",
-	"visualeditor-wikitext-warning-title": "Wikitexto-\"markup\" detektita"
+	"visualeditor-wikitext-warning-title": "Wikitexto-\"markup\" detektita",
+	"visualeditor-wikitextconvert-title": "Ka vu deziras konvertar formato ad Wikitexto?",
+	"visualeditor-wikitextconvert-message": "Vu skriptis kontenajo kun formato ''rich text'' (RTF). Ka vu deziras konvertar ca formato a Wikitexto?",
+	"visualeditor-wikitextconvert-convert": "Konvertez a Wikitexto"
 }
