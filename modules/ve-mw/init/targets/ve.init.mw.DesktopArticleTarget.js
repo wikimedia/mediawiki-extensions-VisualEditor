@@ -706,13 +706,11 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			// Retry load
 			target.load();
 		} else {
-			// User pressed cancel
+			// User pressed "cancel"
 			if ( target.getSurface() ) {
-				// Switching from VE source mode
+				// Restore the mode of the current surface
+				target.setDefaultMode( target.getSurface().getMode() );
 				target.activatingDeferred.reject();
-				// TODO: Some sort of progress bar?
-				target.wikitextFallbackLoading = true;
-				target.switchToWikitextEditor( false );
 			} else {
 				// We're switching from read mode or the 2010 wikitext editor:
 				// just give up and stay where you are
@@ -1473,10 +1471,6 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextSection = function () 
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var target = this;
-
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.switchToFallbackWikitextEditor.apply( this, arguments );
-
 	var oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
 	var prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
@@ -1484,7 +1478,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 		ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
 		ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate', mode: 'visual' } );
 		this.submitting = true;
-		prefPromise.done( function () {
+		return prefPromise.then( function () {
 			var uri = target.viewUri.clone().extend( {
 				action: 'edit',
 				// No changes, safe to stay in section mode
@@ -1500,7 +1494,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			location.href = uri.toString();
 		} );
 	} else {
-		this.serialize( this.getDocToSave() ).then( function ( data ) {
+		return this.serialize( this.getDocToSave() ).then( function ( data ) {
 			ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
 			ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
 			target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, data.content );
