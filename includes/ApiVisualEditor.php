@@ -21,17 +21,19 @@ use DerivativeContext;
 use DerivativeRequest;
 use EditPage;
 use ExtensionRegistry;
-use Hooks as MWHooks;
 use Html;
 use LogEventsList;
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Content\Transform\ContentTransformer;
+use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\RestrictionStore;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\SpecialPage\SpecialPageFactory;
+use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserNameUtils;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
@@ -42,9 +44,7 @@ use ReadOnlyMode;
 use Skin;
 use SpecialMyLanguage;
 use Title;
-use User;
 use Wikimedia\ParamValidator\ParamValidator;
-use WikiPage;
 use WikitextContent;
 
 class ApiVisualEditor extends ApiBase {
@@ -78,6 +78,15 @@ class ApiVisualEditor extends ApiBase {
 	/** @var RestrictionStore */
 	private $restrictionStore;
 
+	/** @var WikiPageFactory */
+	private $wikiPageFactory;
+
+	/** @var HookContainer */
+	private $hookContainer;
+
+	/** @var UserFactory */
+	private $userFactory;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
@@ -90,6 +99,9 @@ class ApiVisualEditor extends ApiBase {
 	 * @param SpecialPageFactory $specialPageFactory
 	 * @param ReadOnlyMode $readOnlyMode
 	 * @param RestrictionStore $restrictionStore
+	 * @param WikiPageFactory $wikiPageFactory
+	 * @param HookContainer $hookContainer
+	 * @param UserFactory $userFactory
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -102,7 +114,10 @@ class ApiVisualEditor extends ApiBase {
 		ContentTransformer $contentTransformer,
 		SpecialPageFactory $specialPageFactory,
 		ReadOnlyMode $readOnlyMode,
-		RestrictionStore $restrictionStore
+		RestrictionStore $restrictionStore,
+		WikiPageFactory $wikiPageFactory,
+		HookContainer $hookContainer,
+		UserFactory $userFactory
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -115,6 +130,9 @@ class ApiVisualEditor extends ApiBase {
 		$this->specialPageFactory = $specialPageFactory;
 		$this->readOnlyMode = $readOnlyMode;
 		$this->restrictionStore = $restrictionStore;
+		$this->wikiPageFactory = $wikiPageFactory;
+		$this->hookContainer = $hookContainer;
+		$this->userFactory = $userFactory;
 	}
 
 	/**
@@ -130,7 +148,7 @@ class ApiVisualEditor extends ApiBase {
 			$content,
 			$title,
 			$this->getUser(),
-			WikiPage::factory( $title )->makeParserOptions( $this->getContext() )
+			$this->wikiPageFactory->newFromTitle( $title )->makeParserOptions( $this->getContext() )
 		)
 		->serialize( 'text/x-wiki' );
 	}
@@ -164,10 +182,13 @@ class ApiVisualEditor extends ApiBase {
 			$preloadTitle->exists() &&
 			$this->getPermissionManager()->userCan( 'read', $this->getUser(), $preloadTitle )
 		) {
-			$preloadPage = WikiPage::factory( $preloadTitle );
+			// If the preload title has no redirect, null will be
+			// returned which will break call to ->preloadTransform() below.
+			$preloadTitleFallback = $preloadTitle;
+			$preloadPage = $this->wikiPageFactory->newFromTitle( $preloadTitle );
 			if ( $preloadPage->isRedirect() ) {
 				$preloadTitle = $preloadPage->getRedirectTarget();
-				$preloadPage = WikiPage::factory( $preloadTitle );
+				$preloadPage = $this->wikiPageFactory->newFromTitle( $preloadTitle );
 			}
 
 			$content = $preloadPage->getContent( RevisionRecord::RAW );
@@ -175,7 +196,7 @@ class ApiVisualEditor extends ApiBase {
 
 			$content = $this->contentTransformer->preloadTransform(
 				$content,
-				$preloadTitle,
+				$preloadTitle ?? $preloadTitleFallback,
 				$parserOptions,
 				(array)$params
 			)->serialize();
@@ -238,7 +259,7 @@ class ApiVisualEditor extends ApiBase {
 							}
 							if ( $section !== null ) {
 								$sectionContent = new WikitextContent( $wikitext );
-								$page = WikiPage::factory( $title );
+								$page = $this->wikiPageFactory->newFromTitle( $title );
 								$newSectionContent = $page->replaceSectionAtRev(
 									$section, $sectionContent, '', $oldid
 								);
@@ -314,7 +335,7 @@ class ApiVisualEditor extends ApiBase {
 
 						$contentBeforeHook = $content;
 						if ( $section !== 'new' ) {
-							MWHooks::run( 'EditFormPreloadText', [ &$content, &$title ] );
+							$this->hookContainer->run( 'EditFormPreloadText', [ &$content, &$title ] );
 						}
 						// Make sure we don't mark default system message content as a preload
 						if ( $content !== '' && $contentBeforeHook !== $content ) {
@@ -480,9 +501,9 @@ class ApiVisualEditor extends ApiBase {
 				if ( $title->getNamespace() == NS_USER || $title->getNamespace() == NS_USER_TALK ) {
 					$parts = explode( '/', $title->getText(), 2 );
 					$targetUsername = $parts[0];
-					$targetUser = User::newFromName(
+					$targetUser = $this->userFactory->newFromName(
 						$targetUsername,
-						/* allow IP users*/ false
+						/* allow IP users*/ UserFactory::RIGOR_NONE
 					);
 					$block = $targetUser ? $targetUser->getBlock() : null;
 
@@ -504,6 +525,7 @@ class ApiVisualEditor extends ApiBase {
 					} elseif (
 						$block !== null &&
 						$block->getType() != DatabaseBlock::TYPE_AUTO &&
+						$targetUser &&
 						( $block->isSitewide() || $permissionManager->isBlockedFrom( $targetUser, $title ) )
 					) {
 						// Show log extract if the user is sitewide blocked or is partially
