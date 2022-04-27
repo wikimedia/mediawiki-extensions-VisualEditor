@@ -244,7 +244,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Edit: $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Template content",
 	"visualeditor-dialog-transclusion-template-search": "Template search",
-	"visualeditor-dialog-transclusion-template-search-help": "Find the template you want to insert by searching for an identifying keyword. Templates that have descriptions are more likely to work well with this editor (VisualEditor).",
+	"visualeditor-dialog-transclusion-template-search-help": "Find the template you want to insert by searching for an identifying keyword. Templates that have descriptions are more likely to work well with the visual editor.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Template fields setup menu",
 	"visualeditor-dialog-transclusion-feedback-message": "Recent work was completed to improve template search results. To learn more about the changes or leave feedback, go to the [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates project's page].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
