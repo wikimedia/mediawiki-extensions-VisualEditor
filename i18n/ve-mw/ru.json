@@ -252,6 +252,7 @@
 	"visualeditor-dialog-transclusion-title-insert-template": "Вставить шаблон",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Вставка: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Правка: $1",
+	"visualeditor-dialog-transclusion-template-search-help": "Найдите шаблон, который вы хотите вставить, через поиск по определяющему ключевому слову. Шаблоны, имеющие описания, с большей степенью вероятности работают лучше с визуальным редактором.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Меню настройки полей шаблона",
 	"visualeditor-dialog-transclusion-wikitext": "Вики-текст",
 	"visualeditor-dialogbutton-media-tooltip": "Изображения и медиафайлы",

@@ -272,7 +272,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Bewerken: $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Sjablooninhoud",
 	"visualeditor-dialog-transclusion-template-search": "Sjabloon zoeken",
-	"visualeditor-dialog-transclusion-template-search-help": "Zoek het sjabloon dat u wilt invoegen door te zoeken naar een identificerend trefwoord. Sjablonen met beschrijvingen werken waarschijnlijk beter met deze tekstverwerker (VisualEditor).",
+	"visualeditor-dialog-transclusion-template-search-help": "Zoek het sjabloon dat u wilt invoegen door te zoeken naar een kenmerkend trefwoord. Sjablonen met beschrijvingen werken waarschijnlijk beter met de visuele editor.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Instellingenmenu voor sjabloonvelden",
 	"visualeditor-dialog-transclusion-feedback-message": "Recent werk is voltooid om de zoekresultaten naar sjablonen te verbeteren. Ga voor meer informatie over de wijzigingen of het achterlaten van feedback naar de [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates projectpagina].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitekst",

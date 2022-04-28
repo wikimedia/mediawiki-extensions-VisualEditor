@@ -252,7 +252,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "编辑：$1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "模板内容",
 	"visualeditor-dialog-transclusion-template-search": "模板搜索",
-	"visualeditor-dialog-transclusion-template-search-help": "通过搜索识别关键字寻找要插入的模板。具有描述的模板更有可能与此编辑器 (VisualEditor) 配合使用。",
+	"visualeditor-dialog-transclusion-template-search-help": "通过搜索识别关键字寻找要插入的模板。具有描述的模板更有可能与可视化编辑器配合使用。",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "模板字段设置菜单",
 	"visualeditor-dialog-transclusion-feedback-message": "最近完成了改进模板搜索结果的工作。要了解有关更改的更多信息或留下反馈，请访问 [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates 项目页面]。",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",

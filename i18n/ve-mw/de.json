@@ -246,7 +246,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Bearbeiten: $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Inhalt der Vorlage",
 	"visualeditor-dialog-transclusion-template-search": "Vorlagensuche",
-	"visualeditor-dialog-transclusion-template-search-help": "Finde die Vorlage, die du einfügen möchtest, indem du nach einem identifizierenden Schlüsselwort suchst. Vorlagen, die Beschreibungen haben, funktionieren mit diesem Editor (VisualEditor) gut.",
+	"visualeditor-dialog-transclusion-template-search-help": "Finde die Vorlage, die du einfügen möchtest, indem du nach einem identifizierenden Schlüsselwort suchst. Vorlagen, die Beschreibungen haben, funktionieren mit dem Visual Editor.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Einstellungsmenü für Vorlagenfelder",
 	"visualeditor-dialog-transclusion-feedback-message": "Kürzlich wurden Arbeiten zur Verbesserung der Suchergebnisse für Vorlagen abgeschlossen. Mehr Informationen über die Neuerungen finden sich auf der [//de.wikipedia.org/wiki/Wikipedia:Technische_Wünsche/Topwünsche/Vorlagen_suchen_und_einfügen Projektseite]. Dort kann auch Feedback gegeben werden.",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",

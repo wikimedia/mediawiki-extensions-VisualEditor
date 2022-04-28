@@ -244,7 +244,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "עריכה: $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "תוכן תבנית",
 	"visualeditor-dialog-transclusion-template-search": "חיפוש תבנית",
-	"visualeditor-dialog-transclusion-template-search-help": "{{GENDER:|מצא את התבנית שאתה|מצאי את התבנית שאת}} רוצה באמצעות חיפוש מילת מפתח מזהה. סביר שתבניות עם תיאורים יעבדו טוב יותר עם העורך הזה (העורך החזותי).",
+	"visualeditor-dialog-transclusion-template-search-help": "{{GENDER:|מצא את התבנית שאתה|מצאי את התבנית שאת}} רוצה באמצעות חיפוש מילת מפתח מזהה. סביר שתבניות עם תיאורים יעבדו טוב יותר עם העורך החזותי.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "תפריט הגדרות שדות תבנית",
 	"visualeditor-dialog-transclusion-feedback-message": "לאחרונה הושלמה עבודה לשיפור תוצאות חיפוש תבניות. למידע נוסף על שינויים או שליחת משוב, ר' את [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates דף המיזם].",
 	"visualeditor-dialog-transclusion-wikitext": "קוד ויקי",
