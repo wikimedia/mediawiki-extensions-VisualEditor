@@ -109,12 +109,9 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	if ( veConfig.transclusionDialogNewSidebar && !knownAsMissing ) {
 		var noticeWidget;
 
-		if ( !this.template.getSpec().getDocumentedParameterOrder().length ) {
-			noticeWidget = new OO.ui.MessageWidget( {
-				label: mw.message( 'visualeditor-dialog-transclusion-no-parameters-description' ).parseDom(),
-				classes: [ 've-ui-mwTransclusionDialog-template-note' ]
-			} );
-		} else if ( !this.template.getSpec().isDocumented() ) {
+		if ( this.template.getSpec().getDocumentedParameterOrder().length &&
+			!this.template.getSpec().isDocumented()
+		) {
 			noticeWidget = new OO.ui.MessageWidget( {
 				label: mw.message( 'visualeditor-dialog-transclusion-no-template-data-description', link ).parseDom(),
 				classes: [ 've-ui-mwTransclusionDialog-template-note' ],
