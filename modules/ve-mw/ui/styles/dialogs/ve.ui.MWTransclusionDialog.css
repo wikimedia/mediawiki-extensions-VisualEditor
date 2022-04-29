@@ -312,7 +312,11 @@
 	width: 100%;
 }
 
-.ve-ui-mwTransclusionOutlineToggleUnusedWidget {
-	margin-top: -4px; /* reduce default margin to top element */
-	margin-left: 24px;
+.ve-ui-mwTransclusionOutlineToggleUnusedWidget.oo-ui-buttonWidget {
+	margin: -4px 24px 0 24px;
+}
+
+.ve-ui-mwTransclusionOutlineToggleUnusedWidget .oo-ui-labelElement-label {
+	overflow-wrap: break-word;
+	white-space: normal;
 }
