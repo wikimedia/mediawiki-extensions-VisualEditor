@@ -40,6 +40,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	if ( parameterNames.length ) {
 		this.initializeParameterList();
 		this.parameterList.addItems( parameterNames.map( this.createCheckbox.bind( this ) ) );
+	} else {
+		this.$noParametersNote = $( '<div>' )
+			.text( ve.msg( 'visualeditor-dialog-transclusion-no-template-parameters' ) )
+			.addClass( 've-ui-mwTransclusionOutline-no-template-parameters' );
+		this.$element.append( this.$noParametersNote );
 	}
 
 	if ( initiallyHideUnused ) {
@@ -221,6 +226,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterAddedToTemplateMo
 	// The placeholder (currently) doesn't get a corresponding item in the sidebar
 	if ( !paramName ) {
 		return;
+	}
+
+	if ( this.$noParametersNote ) {
+		this.$noParametersNote.remove();
+		delete this.$noParametersNote;
 	}
 
 	this.initializeParameterList();
