@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adamw",
 			"Adjen",
 			"Andru1013",
 			"Armando-Martin",
@@ -238,7 +239,9 @@
 	"visualeditor-dialog-transclusion-param-info-missing": "El campo no tiene ninguna descripción",
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Presiona Space para agregar o quitar los parámetros. Presiona Enter para agregar un parámetro e inmediatamente editar su valor. Cuando un parámetro ya está seleccionado, presiona Enter para editar el valor.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parámetros en $1",
+	"visualeditor-dialog-transclusion-param-undocumented": "(Parámetro sin documentación)",
 	"visualeditor-dialog-transclusion-placeholder": "Añadir una plantilla",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Buscar plantilla",
 	"visualeditor-dialog-transclusion-raw-fallback": "Caer de nuevo a wikitexto plano",
 	"visualeditor-dialog-transclusion-remove-content": "Eliminar el contenido",
 	"visualeditor-dialog-transclusion-remove-param": "Eliminar el campo",
@@ -255,9 +258,13 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Editar: $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Contenido de la plantilla",
 	"visualeditor-dialog-transclusion-template-search": "Búsqueda de plantillas",
+	"visualeditor-dialog-transclusion-template-search-help": "Buscar la plantilla que quiere añadir por buscar una palabra clave de identificar. Plantillas que tiene las descripciones son más probablemente para trabajar bien con el editor visual.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menú de la configuración de los campos de plantilla",
+	"visualeditor-dialog-transclusion-feedback-message": "El trabajo reciente completado mejoró resultados de búsqueda de la plantilla. Para aprender más sobre los cambios o dar comentario, va al [//meta.wikimedia.org/wiki/special:MyLanguage/WMDE_los_deseos Técnicos/que Encuentran_y_insertando_la página de proyecto de plantillas].",
+	"visualeditor-dialog-transclusion-wikitext": "Código",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Presione la barra espaciadora para seleccionar el elemento de wikitexto. Presione Entrar para seleccionar y editar el wikitexto.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Presione Ctrl+Del para eliminar el elemento de wikitexto. Presione Ctrl+Shift+Arrows para mover el elemento hacia arriba o hacia abajo.",
+	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "Prensa Control+Del para borrar el elemento de código.",
 	"visualeditor-dialogbutton-media-tooltip": "Imágenes y multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuración de página",
 	"visualeditor-dialogbutton-template-tooltip": "Plantilla",

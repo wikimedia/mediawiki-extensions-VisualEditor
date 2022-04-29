@@ -9,6 +9,7 @@
 			"Maksim L.",
 			"Mechanizatar",
 			"Mikalai Udodau",
+			"No Sleep till Krupki",
 			"ZlyiLev",
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў"
@@ -276,8 +277,8 @@
 	"visualeditor-includes-includeonly-description": "Калі змест з гэтай старонкі выкарыстоўваецца іншай старонкай, сюды будзе ўключаны наступны дадатковы змест:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Даведайцеся больш пра частковае ўключэнне]",
 	"visualeditor-languages-tool": "Мовы",
-	"visualeditor-linkinspector-button-link-external": "Спасылка ў Сеціва",
-	"visualeditor-linkinspector-button-link-internal": "Пошук старонкі",
+	"visualeditor-linkinspector-button-link-external": "Вонкавы сайт",
+	"visualeditor-linkinspector-button-link-internal": "Пошук унутраных старонак",
 	"visualeditor-linkinspector-convert-link-isbn": "Ператварыць у ISBN-спасылку",
 	"visualeditor-linkinspector-convert-link-pmid": "Ператварыць у PMID-спасылку",
 	"visualeditor-linkinspector-convert-link-rfc": "Ператварыць у RFC-спасылку",

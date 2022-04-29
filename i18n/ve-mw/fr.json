@@ -286,7 +286,7 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifier : $1",
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Contenu du modèle",
 	"visualeditor-dialog-transclusion-template-search": "Recherche de modèle",
-	"visualeditor-dialog-transclusion-template-search-help": "Trouver le modèle que vous voulez insérer en cherchant un mot-clé identifiant. Les modèles qui ont des descriptions sont plus susceptibles de bien fonctionner avec l’éditeur visuel.",
+	"visualeditor-dialog-transclusion-template-search-help": "Trouvez le modèle que vous voulez insérer en cherchant un mot-clé identifiant. Les modèles qui ont des descriptions sont plus susceptibles de bien fonctionner avec l’éditeur visuel.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu de configuration des champs du modèle",
 	"visualeditor-dialog-transclusion-feedback-message": "Un travail récent s’est achevé pour améliorer les résultats de recherche de modèle. Pour en savoir plus sur les modifications ou laissez un avis, aller sur la [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates page du projet].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikicode",
