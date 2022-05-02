@@ -671,7 +671,7 @@ class Hooks {
 			$rc->addTags( 'visualeditor-switched' );
 		}
 
-		$tags = explode( ',', $request->getVal( 'vetags' ) );
+		$tags = explode( ',', $request->getVal( 'vetags' ) ?? '' );
 		$tags = array_values( array_intersect( $tags, static::TAGS ) );
 		if ( $tags ) {
 			$rc->addTags( $tags );
