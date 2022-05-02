@@ -195,7 +195,6 @@
 	"visualeditor-dialog-transclusion-loading": "Po ngarkohet…",
 	"visualeditor-dialog-transclusion-more-template-description": "Ndoshta ka informacion shtesë për modelin \"$1\" në [[$2|faqen e tij]].",
 	"visualeditor-dialog-transclusion-multipart-message": "Po redaktoni një model dhe një ose më shumë pjesë nga përmbajtja (tekst wiki dhe/ose modele shtesë).",
-	"visualeditor-dialog-transclusion-no-parameters-description": "Ky model mund të përdoret pa [//www.mediawiki.org/wiki/Ndihmë:Modele#Parametra parametra]. Nëse ky model bart parametra, ata janë [//www.mediawiki.org/wiki/Ndihmë:Editorivizual/Përdorues_udhëzim#Model_parametra të padokumentuar].",
 	"visualeditor-dialog-transclusion-no-template-data-description": "Ky model nuk ka  [//www.mediawiki.org/wiki/Ndihmë:Editorivizual/Përdorues_udhëzim#Model_parametra Modeltëdhënash] dhe parametrat e tij vetëgjenerohen. Si rezultat, modeli dhe parametrat e tij janë pa përshkrim. Mund të  ketë  informacion shtesë  në [[$1|faqen e modelit]].",
 	"visualeditor-dialog-transclusion-no-template-description": "Gjedhja \"$1\" ende s’ka përshkrim, por mund të ketë pak informacion te [[$2|faqja e gjedhes]].",
 	"visualeditor-dialog-transclusion-options": "Mundësi",

@@ -192,6 +192,7 @@
 	"visualeditor-dialog-transclusion-content": "內容",
 	"visualeditor-dialog-transclusion-contextitem-description": "產生自：$1",
 	"visualeditor-dialog-transclusion-expand-options": "顯示選項",
+	"visualeditor-dialog-transclusion-filter-show-all": "顯示全部",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "已停用參數",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "參數已停用。$1",
 	"visualeditor-dialog-transclusion-loading": "讀取中…",

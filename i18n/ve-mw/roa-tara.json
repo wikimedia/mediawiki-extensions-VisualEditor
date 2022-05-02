@@ -177,7 +177,6 @@
 	"visualeditor-dialog-transclusion-loading": "Stoche a careche…",
 	"visualeditor-dialog-transclusion-more-template-description": "Pò essere ca stonne cchiù 'mbormaziune sus a 'u template \"$1\" jndr'à [[$2|pàgena soje]].",
 	"visualeditor-dialog-transclusion-multipart-message": "Ste cange 'nu template e une o cchiù stuèzze de condenute connesse (uicchiteste e/o template aggiundive)",
-	"visualeditor-dialog-transclusion-no-parameters-description": "Stu template pò essere indese pe l'ause senze [//www.mediawiki.org/wiki/Help:Templates#Parameters parametre]. Ce stu template tène parametre, sò [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters non documendate].",
 	"visualeditor-dialog-transclusion-no-template-data-description": "Stu template non ge tène 'nu [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters TemplateData], e le parametre sue onne state autogenerate. Cumme resultate 'u template e le parametre sue non ge tènene 'a descrizione. Puè acchià de le 'mbormaziune aggiundive sus 'a [[$1|pàgene d'u template]].",
 	"visualeditor-dialog-transclusion-no-template-description": "'U template \"$1\" non ge tène angore 'na descrizione, ma pò essere ca stonne de le 'mbormaziune sus ' a [[$2|pàgene d'u template]].",
 	"visualeditor-dialog-transclusion-options": "Opziune",

@@ -186,7 +186,6 @@
 	"visualeditor-dialog-transclusion-loading": "Yüklənir…",
 	"visualeditor-dialog-transclusion-more-template-description": "\"$1\" şablonu haqqında [[$2|öz səhifəsində]] daha çox məlumat ola bilər.",
 	"visualeditor-dialog-transclusion-multipart-message": "Hal-hazırda bir şablonu və bir və ya daha çox əlaqəli məzmunu (vikimətn və/və ya əlavə şablonları) redaktə edirsiniz.",
-	"visualeditor-dialog-transclusion-no-parameters-description": "Bu şablon [//www.mediawiki.org/wiki/Help:Templates#Parameters parametrlərsiz] istifadə üçün nəzərdə tutulmuş ola bilər. Əgər parametrləri varsa o zaman onlar [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters sənədləşdirilməyib].",
 	"visualeditor-dialog-transclusion-no-template-data-description": "Bu şablonda [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters \n TemplateData] yoxdur. Onun parametrləri avtomatik olaraq yaradıldı. Bunun nəticəsi olaraq şablon və onun parametrlərində izah bölməsi yoxdur. [[$1|Şablonun səhifəsində]] daha ətraflı məlumat ola bilər.",
 	"visualeditor-dialog-transclusion-no-template-description": "\"$1\" şablonunun hələ ki izah bölməsi yoxdur amma [[$2|səhifəsində]] məlumat ola bilər.",
 	"visualeditor-dialog-transclusion-options": "Seçimlər",

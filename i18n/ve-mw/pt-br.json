@@ -217,7 +217,6 @@
 	"visualeditor-dialog-transclusion-loading": "Carregando...",
 	"visualeditor-dialog-transclusion-more-template-description": "Pode haver alguma informação adicional sobre a predefinição \"$1\" em [[$2|sua página]].",
 	"visualeditor-dialog-transclusion-multipart-message": "Você está editando atualmente uma predefinição e um ou mais peças de conteúdo conectado (wikitext e/ou predefinições adicionais).",
-	"visualeditor-dialog-transclusion-no-parameters-description": "Essa predefinição pode ser usado sem [//www.mediawiki.org/wiki/Help:Templates/pt-br#Parâmetros parâmetros]. Se essa predefinição contiver parâmetros, eles são [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide/pt-br#Parâmetros_da_predefinição indocumentados].",
 	"visualeditor-dialog-transclusion-no-template-data-description": "Essa predefinição está faltando [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide/pt-br#Parâmetros_da_predefinição TemplateData], e seus parâmetros foram gerados automaticamente. Como resultado, a predefinição e seus parâmetros carecem de descrições. Pode haver informações adicionais sobre a [[$1|página de predefinição]].",
 	"visualeditor-dialog-transclusion-no-template-description": "A predefinição \"$1\" não possui ainda nenhuma descrição, mas poderá encontrar alguma informação na [[$2|documentação da predefinição]].",
 	"visualeditor-dialog-transclusion-options": "Opções",

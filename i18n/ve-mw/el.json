@@ -214,7 +214,6 @@
 	"visualeditor-dialog-transclusion-loading": "Φόρτωση...",
 	"visualeditor-dialog-transclusion-more-template-description": "Ίσως υπάρχουν πρόσθετες πληροφορίες για το πρότυπο «$1» στη [[$2|σελίδα του]].",
 	"visualeditor-dialog-transclusion-multipart-message": "Αυτήν τη στιγμή επεξεργάζεστε ένα πρότυπο και ένα ή περισσότερα κομμάτια [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Editing_multi-part_template_content συνδεδεμένου περιεχομένου] (wikitext και/ή επιπλέον πρότυπα).",
-	"visualeditor-dialog-transclusion-no-parameters-description": "Αυτό το πρότυπο μπορεί να προορίζεται για χρήση χωρίς [//www.mediawiki.org/wiki/Special:MyLanguage/Help:Templates#Parameters Παραμέτρους]. Εάν αυτό το πρότυπο όντως περιέχει παραμέτρους, είναι [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters ατεκμηρίωτες].",
 	"visualeditor-dialog-transclusion-no-template-data-description": "Από αυτό το πρότυπο λείπει το [//www.mediawiki.org/wiki/Help:VisualEditor/User_guide#Template_parameters TemplateData] και οι παράμετροί του έχουν δημιουργηθεί αυτόματα. Ως αποτέλεσμα, το πρότυπο και οι παράμετροί του στερούνται περιγραφών. Ενδέχεται να υπάρχουν πρόσθετες πληροφορίες στη [[$1|σελίδα προτύπου]].",
 	"visualeditor-dialog-transclusion-no-template-description": "Το πρότυπο \"$1\" δεν έχει ακόμα περιγραφή, αλλά μπορεί να υπάρχουν κάποιες πληροφορίες στη [[$2|σελίδα του προτύπου]].",
 	"visualeditor-dialog-transclusion-options": "Επιλογές",
