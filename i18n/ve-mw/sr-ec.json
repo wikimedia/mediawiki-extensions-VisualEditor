@@ -169,6 +169,7 @@
 	"visualeditor-dialog-transclusion-content": "Садржај",
 	"visualeditor-dialog-transclusion-contextitem-description": "Генерисано из: $1",
 	"visualeditor-dialog-transclusion-expand-options": "Прикажи опције",
+	"visualeditor-dialog-transclusion-filter-show-all": "Прикажи све",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Застарело поље",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Поље је застарело. $1",
 	"visualeditor-dialog-transclusion-loading": "Учитавање…",
