@@ -1,5 +1,8 @@
 {
-	"extends": "stylelint-config-wikimedia/support-modern",
+	"extends": [
+		"stylelint-config-wikimedia/support-modern",
+		"stylelint-config-wikimedia/mediawiki"
+	],
 	"rules": {
 		"no-descending-specificity": null,
 		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-",
