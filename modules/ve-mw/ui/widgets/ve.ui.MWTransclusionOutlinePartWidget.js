@@ -36,10 +36,7 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 			click: 'onHeaderClick'
 		} );
 
-	if ( config.ariaDescriptionUnselected &&
-		config.ariaDescriptionSelected &&
-		config.ariaDescriptionSelectedSingle
-	) {
+	if ( config.ariaDescriptionUnselected ) {
 		this.$ariaDescriptionUnselected = $( '<span>' )
 			.text( config.ariaDescriptionUnselected )
 			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
@@ -52,12 +49,13 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 			.text( config.ariaDescriptionSelectedSingle )
 			.addClass( 've-ui-mwTransclusionOutline-ariaHidden' );
 
-		this.header.setAriaDescribedBy( this.$ariaDescriptionUnselected );
-		this.header.$element.prepend(
-			this.$ariaDescriptionUnselected,
-			this.$ariaDescriptionSelected,
-			this.$ariaDescriptionSelectedSingle
-		);
+		this.header
+			.setAriaDescribedBy( this.$ariaDescriptionUnselected )
+			.$element.prepend(
+				this.$ariaDescriptionUnselected,
+				this.$ariaDescriptionSelected,
+				this.$ariaDescriptionSelectedSingle
+			);
 	}
 
 	this.transclusionModel = this.part.getTransclusion().connect( this, {
@@ -136,13 +134,6 @@ ve.ui.MWTransclusionOutlinePartWidget.prototype.setSelected = function ( state )
  * @param {boolean} state
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.updateButtonAriaDescription = function ( state ) {
-	if ( !this.$ariaDescriptionUnselected ||
-		!this.$ariaDescriptionSelected ||
-		!this.$ariaDescriptionSelectedSingle
-	) {
-		return;
-	}
-
 	this.header.setAriaDescribedBy( !state ? this.$ariaDescriptionUnselected :
 		( this.transclusionModel.isSingleTemplate() ? this.$ariaDescriptionSelectedSingle : this.$ariaDescriptionSelected )
 	);
