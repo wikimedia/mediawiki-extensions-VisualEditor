@@ -207,7 +207,10 @@
 				"ContentTransformer",
 				"SpecialPageFactory",
 				"ReadOnlyMode",
-				"RestrictionStore"
+				"RestrictionStore",
+				"WikiPageFactory",
+				"HookContainer",
+				"UserFactory"
 			]
 		},
 		"visualeditoredit": {
