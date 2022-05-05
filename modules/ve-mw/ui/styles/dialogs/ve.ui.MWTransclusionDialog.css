@@ -138,8 +138,6 @@
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwParameterPage-addUndocumented,
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout > .oo-ui-gridLayout > .oo-ui-panelLayout {
-	-webkit-transition: all 250ms ease-in-out;
-	-moz-transition: all 250ms ease-in-out;
 	transition: all 250ms ease-in-out;
 }
 
