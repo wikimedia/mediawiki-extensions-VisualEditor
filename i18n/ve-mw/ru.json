@@ -289,7 +289,7 @@
 	"visualeditor-includes-noinclude-description": "Когда содержимое с этой страницы используется другой страницей, содержимое отсюда до совпадающего конечного маркера <strong>не</strong> включается. Будьте осторожны при редактировании содержимого за пределами этих маркеров, так как другие страницы могут его использовать.",
 	"visualeditor-includes-onlyinclude-description": "Когда содержимое с этой страницы используется другой страницей, будет включено <strong>только</strong> содержимое отсюда до соответствующего маркера конца. Будьте осторожны при редактировании содержимого за пределами этих маркеров, так как другие страницы могут его использовать.",
 	"visualeditor-includes-includeonly-description": "Когда содержание этой страницы используется на другой странице, то следующее дополнительное содержание будет внесено сюда:",
-	"visualeditor-includes-documentation": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Узнать больше о частичном включении]",
+	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Узнать больше о частичном включении]",
 	"visualeditor-languages-tool": "Языки",
 	"visualeditor-linkinspector-button-link-external": "Внешний вебсайт",
 	"visualeditor-linkinspector-button-link-internal": "Поиск внутренних страниц",

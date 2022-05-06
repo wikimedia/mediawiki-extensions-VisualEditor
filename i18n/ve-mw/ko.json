@@ -202,7 +202,7 @@
 	"visualeditor-dialog-transclusion-expand-options": "옵션 보기",
 	"visualeditor-dialog-transclusion-filter-no-match": "일치하는 항목이 없습니다",
 	"visualeditor-dialog-transclusion-filter-placeholder": "필드 찾기",
-	"visualeditor-dialog-transclusion-filter-show-all": "모든 필드 표시",
+	"visualeditor-dialog-transclusion-filter-show-all": "모두 표시",
 	"visualeditor-dialog-transclusion-filter-title": "$1의 변수 검색",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "사용되지 않는 필드",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "필드는 구식입니다. $1",
