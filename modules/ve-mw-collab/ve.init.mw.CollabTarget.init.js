@@ -237,7 +237,7 @@
 			history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl() );
 			showPage( title, importTitle );
 		} else {
-			location.href = specialTitle.getUrl();
+			location.href = specialTitle.getUrl( { import: importTitle } );
 		}
 	}
 
@@ -308,7 +308,10 @@
 	onImportChange();
 
 	if ( pageTitle ) {
-		showPage( pageTitle );
+		var uri = new mw.Uri( location.href ),
+			importTitleText = uri.query.import,
+			importTitleParam = ( importTitleText ? mw.Title.newFromText( importTitleText ) : null );
+		showPage( pageTitle, importTitleParam );
 	} else {
 		showForm();
 	}
