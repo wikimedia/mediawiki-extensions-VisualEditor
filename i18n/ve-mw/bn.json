@@ -182,6 +182,7 @@
 	"visualeditor-dialog-transclusion-contextitem-loading": "লোড করা হচ্ছে…",
 	"visualeditor-dialog-transclusion-expand-options": "বিকল্প দেখাও",
 	"visualeditor-dialog-transclusion-filter-no-match": "কোনও মিল খুঁজে পাওয়া যায়নি",
+	"visualeditor-dialog-transclusion-filter-show-all": "সব দেখান",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "অসমর্থিত ক্ষেত্র",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "ক্ষেত্র অবচিত হয়েছে। $1",
 	"visualeditor-dialog-transclusion-loading": "লোড হচ্ছে...",
