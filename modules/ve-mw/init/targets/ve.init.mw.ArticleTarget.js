@@ -2169,9 +2169,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 				function ( response ) { return response; },
 				function () {
 					// TODO: Some sort of progress bar?
-					target.switchToFallbackWikitextEditor( modified );
-					// Keep everything else waiting so our error handler can do its business
-					return ve.createDeferred().promise();
+					return target.switchToFallbackWikitextEditor( modified );
 				}
 			);
 		} else {
@@ -2211,8 +2209,11 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
  * Switches to the fallback wikitext editor, either keeping (default) or discarding changes.
  *
  * @param {boolean} [modified=false] Whether there were any changes at all.
+ * @return {jQuery.Promise} Promise which rejects if the switch fails
  */
-ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {};
+ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () {
+	return ve.createDeferred().resolve().promise();
+};
 
 /**
  * Switch to the visual editor.
@@ -2301,13 +2302,12 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 ve.init.mw.ArticleTarget.prototype.reloadSurface = function ( newMode, dataPromise ) {
 	this.setDefaultMode( newMode );
 	this.clearDiff();
-	// Create progress - will be discarded when surface is destroyed.
+	var promise = this.load( dataPromise );
 	this.getSurface().createProgress(
-		ve.createDeferred().promise(),
+		promise,
 		ve.msg( newMode === 'source' ? 'visualeditor-mweditmodesource-progress' : 'visualeditor-mweditmodeve-progress' ),
 		true /* non-cancellable */
 	);
-	this.load( dataPromise );
 };
 
 /**

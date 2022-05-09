@@ -369,6 +369,7 @@ ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = functi
 		} );
 	}
 	this.overlay.switchToSourceEditor( dataPromise );
+	return dataPromise;
 };
 
 /**
