@@ -4,6 +4,7 @@ const Page = require( 'wdio-mediawiki/Page' );
 class EditPage extends Page {
 
 	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
+	get veRootNode() { return $( '.ve-ce-rootNode[role="textbox"]' ); }
 
 	openForEditing( title ) {
 		super.openTitle( title, { veaction: 'edit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
