@@ -234,6 +234,19 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		mw.libs.ve.reduplicateStyles( doc.body );
 		// Fix relative or missing base URL if needed
 		this.fixBase( doc );
+		// Test: Remove tags injected by plugins during parse (T298147)
+		Array.prototype.forEach.call( doc.querySelectorAll( 'script' ), function ( element ) {
+			function truncate( text, l ) {
+				return text.length > l ? text.slice( 0, l ) + '…' : text;
+			}
+			var errorMessage = 'DOM content matching deny list found during parse:\n' + truncate( this.outerHTML, 100 ) +
+				'\nContext:\n' + truncate( this.parentNode.outerHTML, 200 );
+			mw.log.error( errorMessage );
+			var err = new Error( errorMessage );
+			err.name = 'VeDomDenyListWarning';
+			mw.errorLogger.logError( err, 'error.visualeditor' );
+			element.parentNode.removeChild( element );
+		} );
 	}
 
 	return doc;
