@@ -41,6 +41,7 @@ use Parser;
 use ParserOptions;
 use RawMessage;
 use ReadOnlyMode;
+use RequestContext;
 use Skin;
 use SpecialMyLanguage;
 use Title;
@@ -235,6 +236,11 @@ class ApiVisualEditor extends ApiBase {
 			case 'parse':
 			case 'wikitext':
 			case 'metadata':
+				// Dirty hack to provide the correct context for FlaggedRevs when it generates edit notices
+				// and save dialog checkboxes. (T307852)
+				// FIXME Don't write to globals! Eww.
+				RequestContext::getMain()->setTitle( $title );
+
 				$preloaded = false;
 				$restbaseHeaders = null;
 
