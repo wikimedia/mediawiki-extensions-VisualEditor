@@ -28,6 +28,14 @@ use WebRequest;
 trait ApiParsoidTrait {
 
 	/**
+	 * A direct Parsoid client for zero-configuration mode.
+	 * Initially `false`, then once we determine whether we're using zeroconf
+	 * mode or not then it will be a ?VisualEditorParsoidClient.
+	 * @var VisualEditorParsoidClient|null|false
+	 */
+	protected $directClient = false;
+
+	/**
 	 * @var VirtualRESTServiceClient
 	 */
 	protected $serviceClient = null;
@@ -52,6 +60,38 @@ trait ApiParsoidTrait {
 	}
 
 	/**
+	 * Fetches the VisualEditorParsoidClient used for direct access to
+	 * Parsoid.
+	 * @return ?VisualEditorParsoidClient null if a VirtualRESTService is
+	 *  to be used.
+	 */
+	protected function getDirectClient(): ?VisualEditorParsoidClient {
+		if ( $this->directClient === false ) {
+			// We haven't checked configuration yet.
+			// Check to see if any of the restbase-related configuration
+			// variables are set, and bail if so:
+			$vrs = $this->getConfig()->get( 'VirtualRestConfig' );
+			if ( isset( $vrs['modules'] ) &&
+				 ( isset( $vrs['modules']['restbase'] ) ||
+				  isset( $vrs['modules']['parsoid'] ) )
+			) {
+				$this->directClient = null;
+				return null;
+			}
+			// Eventually we'll do something fancy, but I'm hacking here...
+			global $wgVisualEditorParsoidAutoConfig;
+			if ( !$wgVisualEditorParsoidAutoConfig ) {
+				// explicit opt out
+				$this->directClient = null;
+				return null;
+			}
+			// Default to using the direct client.
+			$this->directClient = VisualEditorParsoidClient::factory();
+		}
+		return $this->directClient;
+	}
+
+	/**
 	 * Creates the virtual REST service object to be used in VE's API calls. The
 	 * method determines whether to instantiate a ParsoidVirtualRESTService or a
 	 * RestbaseVirtualRESTService object based on configuration directives: if
@@ -62,6 +102,12 @@ trait ApiParsoidTrait {
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
 	protected function getVRSObject(): VirtualRESTService {
+		if ( $this->getDirectClient() ) {
+			$this->dieWithError(
+				'apierror-visualeditor-docserver-bad-config',
+				'apierror-visualeditor-docserver-bad-config'
+			);
+		}
 		global $wgVisualEditorParsoidAutoConfig;
 		// the params array to create the service object with
 		$params = [];
@@ -132,9 +178,11 @@ trait ApiParsoidTrait {
 	): array {
 		// Should be synchronised with requestParsoidData() in
 		// modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js
+		$profile = 'https://www.mediawiki.org/wiki/Specs/HTML/' .
+			VisualEditorParsoidClient::PARSOID_VERSION;
 		$reqheaders += [
 			'Accept' =>
-				'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
+				"text/html; charset=utf-8; profile=\"$profile\"",
 			'Accept-Language' => self::getPageLanguage( $title )->getCode(),
 			'User-Agent' => 'VisualEditor-MediaWiki/' . MW_VERSION,
 			'Api-User-Agent' => 'VisualEditor-MediaWiki/' . MW_VERSION,
@@ -227,6 +275,12 @@ trait ApiParsoidTrait {
 	 */
 	protected function requestRestbasePageHtml( RevisionRecord $revision ): array {
 		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
+		$client = $this->getDirectClient();
+		if ( $client ) {
+			return $client->getPageHtml(
+				$revision, $this->getPageLanguage( $title )
+			);
+		}
 		return $this->requestRestbase(
 			$title,
 			'GET',
@@ -249,6 +303,12 @@ trait ApiParsoidTrait {
 	protected function transformHTML(
 		Title $title, string $html, int $oldid = null, string $etag = null
 	): array {
+		$client = $this->getDirectClient();
+		if ( $client ) {
+			return $client->transformHtml(
+				$title, $this->getPageLanguage( $title ), $html, $oldid, $etag
+			);
+		}
 		$data = [ 'html' => $html ];
 		$path = 'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() ) .
 			( $oldid === null ? '' : '/' . $oldid );
@@ -291,6 +351,13 @@ trait ApiParsoidTrait {
 	protected function transformWikitext(
 		Title $title, string $wikitext, bool $bodyOnly, int $oldid = null, bool $stash = false
 	): array {
+		$client = $this->getDirectClient();
+		if ( $client ) {
+			return $client->transformWikitext(
+				$title, $this->getPageLanguage( $title ),
+				$wikitext, $bodyOnly, $oldid, $stash
+			);
+		}
 		return $this->requestRestbase(
 			$title,
 			'POST',
