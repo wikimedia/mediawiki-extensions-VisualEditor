@@ -239,8 +239,8 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 			function truncate( text, l ) {
 				return text.length > l ? text.slice( 0, l ) + '…' : text;
 			}
-			var errorMessage = 'DOM content matching deny list found during parse:\n' + truncate( this.outerHTML, 100 ) +
-				'\nContext:\n' + truncate( this.parentNode.outerHTML, 200 );
+			var errorMessage = 'DOM content matching deny list found during parse:\n' + truncate( element.outerHTML, 100 ) +
+				'\nContext:\n' + truncate( element.parentNode.outerHTML, 200 );
 			mw.log.error( errorMessage );
 			var err = new Error( errorMessage );
 			err.name = 'VeDomDenyListWarning';
