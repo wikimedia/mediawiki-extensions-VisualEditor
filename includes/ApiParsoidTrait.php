@@ -130,7 +130,8 @@ trait ApiParsoidTrait {
 	protected function requestRestbase(
 		Title $title, string $method, string $path, array $params, array $reqheaders = []
 	): array {
-		// Should be synchronised with modules/ve-mw/init/ve.init.mw.ArticleTargetLoader.js
+		// Should be synchronised with requestParsoidData() in
+		// modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js
 		$reqheaders += [
 			'Accept' =>
 				'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.0.0"',
