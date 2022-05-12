@@ -303,6 +303,10 @@
 	bottom: 23px;
 }
 
+.ve-ui-mwTransclusionDialog-small-screen .ve-ui-mwTransclusionDialog-floatingHelpElement {
+	display: none;
+}
+
 .ve-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout label {
 	margin-bottom: 16px;
 }
