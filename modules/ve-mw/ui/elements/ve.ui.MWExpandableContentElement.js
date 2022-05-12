@@ -37,16 +37,20 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
 };
 
 ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
-	this.$content.addClass( 've-ui-expandableContent-collapsible' );
-
 	var collapsedHeight = this.getLineHeight();
+
 	this.button = new OO.ui.ButtonWidget( {
 		framed: false,
 		flags: [ 'progressive' ],
 		label: ve.msg( 'visualeditor-expandable-more' ),
 		classes: [ 've-ui-expandableContent-toggle' ],
+		invisibleLabel: ve.ui.MWTransclusionDialog.static.isSmallScreen(),
 		icon: 'expand'
 	} ).on( 'click', this.onButtonClick.bind( this ) );
+
+	this.$content.on( 'click', this.onDescriptionClick.bind( this ) )
+		.addClass( 've-ui-expandableContent-collapsible' )
+		.height( collapsedHeight );
 
 	$( '<div>' )
 		.addClass( 've-ui-expandableContent-container' )
@@ -57,8 +61,6 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 		.append( this.button.$element )
 		.height( collapsedHeight )
 		.appendTo( this.$element );
-
-	this.$content.height( collapsedHeight );
 };
 
 ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
@@ -74,10 +76,21 @@ ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
 	this.collapsed = !this.collapsed;
 };
 
+ve.ui.MWExpandableContentElement.prototype.onDescriptionClick = function () {
+	if ( this.button.invisibleLabel ) {
+		// Don't toggle the description if the user is trying to select the text.
+		if ( window.getSelection().toString() === '' ) {
+			this.onButtonClick();
+		}
+	}
+};
+
 ve.ui.MWExpandableContentElement.prototype.updateSize = function () {
 	this.toggle( true );
 
-	if ( this.$content.outerHeight() / this.getLineHeight() >= 3 ) {
+	if ( this.button ) {
+		this.button.setInvisibleLabel( ve.ui.MWTransclusionDialog.static.isSmallScreen() );
+	} else if ( this.$content.outerHeight() / this.getLineHeight() >= 3 ) {
 		this.makeCollapsible();
 	}
 };
