@@ -373,6 +373,16 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) {
 	if ( this.isSidebarExpanded === expandSidebar ) {
+		if ( this.useInlineDescriptions ) {
+			// Updates the page sizes when the sidebar remains expanded but the screen is being resized.
+			// This is useful for descriptions that fit when the screen size is initially large but need
+			// to be collapsed when the screen size is reduced.
+			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+				if ( page instanceof ve.ui.MWParameterPage ) {
+					page.updateSize();
+				}
+			} );
+		}
 		return;
 	}
 
@@ -395,12 +405,23 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 	this.$content.find( 'input:focus' ).trigger( 'blur' );
 
 	if ( this.useInlineDescriptions && this.pocSidebar && this.loaded && this.isNarrowScreen() ) {
+		var dialog = this;
+
+		// Updates the page sizes when the menu is toggled using the button. This needs
+		// to happen after the animation when the panel is visible.
+		setTimeout( function () {
+			dialog.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+				if ( page instanceof ve.ui.MWParameterPage ) {
+					page.updateSize();
+				}
+			} );
+		}, OO.ui.theme.getDialogTransitionDuration() );
+
 		// Reapply selection and scrolling when switching between panes.
 		// FIXME: decouple from descendants
 		var selectedPage = this.bookletLayout.stackLayout.getCurrentItem();
 		if ( selectedPage ) {
 			var name = selectedPage.getName();
-			var dialog = this;
 			// Align whichever panel is becoming visible, after animation completes.
 			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
 			setTimeout( function () {
