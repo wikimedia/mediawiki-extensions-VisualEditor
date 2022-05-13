@@ -441,6 +441,21 @@ ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
 /**
  * @inheritdoc
  */
+ve.init.mw.MobileArticleTarget.prototype.teardown = function () {
+	var target = this;
+	// Parent method
+	return ve.init.mw.MobileArticleTarget.super.prototype.teardown.call( this ).then( function () {
+		if ( !target.isViewPage ) {
+			location.href = target.viewUri.clone().extend( {
+				redirect: mw.config.get( 'wgIsRedirect' ) ? 'no' : undefined
+			} );
+		}
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var originalToolbarGroups = this.toolbarGroups;
 
