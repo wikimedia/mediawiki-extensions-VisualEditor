@@ -566,9 +566,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
  * @fires deactivate
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
-	var
-		saveDialogPromise = ve.createDeferred().resolve().promise(),
-		target = this;
+	var target = this;
 
 	// Event tracking
 	var abortType, abortedMode;
@@ -614,55 +612,44 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 		}
 	}
 
-	if ( this.saveDialog ) {
-		if ( this.saveDialog.isOpened() ) {
-			// If the save dialog is still open (from saving) close it
-			saveDialogPromise = this.saveDialog.close().closed;
+	// Parent method
+	return ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( this ).then( function () {
+		// After teardown
+		target.active = false;
+
+		// If there is a load in progress, try to abort it
+		if ( target.loading && target.loading.abort ) {
+			target.loading.abort();
 		}
-		// Release the reference
-		this.saveDialog = null;
-	}
 
-	return saveDialogPromise.then( function () {
-		// Parent method
-		return ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( target ).then( function () {
-			// After teardown
-			target.active = false;
+		target.clearState();
+		target.initialEditSummary = new mw.Uri().query.summary;
+		target.editSummaryValue = null;
 
-			// If there is a load in progress, try to abort it
-			if ( target.loading && target.loading.abort ) {
-				target.loading.abort();
-			}
+		// Move original content back out of the target
+		target.$element.parent().append( target.$originalContent.children() );
 
-			target.clearState();
-			target.initialEditSummary = new mw.Uri().query.summary;
-			target.editSummaryValue = null;
+		$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
+			.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
-			// Move original content back out of the target
-			target.$element.parent().append( target.$originalContent.children() );
+		target.deactivating = false;
+		target.deactivatingDeferred.resolve();
+		$( 'html' ).removeClass( 've-deactivating' );
 
-			$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
-				.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		// Event tracking
+		if ( trackMechanism ) {
+			ve.track( 'mwedit.abort', {
+				type: abortType,
+				mechanism: trackMechanism,
+				mode: abortedMode
+			} );
+		}
 
-			target.deactivating = false;
-			target.deactivatingDeferred.resolve();
-			$( 'html' ).removeClass( 've-deactivating' );
-
-			// Event tracking
-			if ( trackMechanism ) {
-				ve.track( 'mwedit.abort', {
-					type: abortType,
-					mechanism: trackMechanism,
-					mode: abortedMode
-				} );
-			}
-
-			if ( !target.isViewPage ) {
-				location.href = target.viewUri.clone().extend( {
-					redirect: mw.config.get( 'wgIsRedirect' ) ? 'no' : undefined
-				} );
-			}
-		} );
+		if ( !target.isViewPage ) {
+			location.href = target.viewUri.clone().extend( {
+				redirect: mw.config.get( 'wgIsRedirect' ) ? 'no' : undefined
+			} );
+		}
 	} );
 };
 
