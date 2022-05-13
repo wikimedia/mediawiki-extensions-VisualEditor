@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Don Alessandro"
+			"Don Alessandro",
+			"TayfunEt."
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "Mıntıqa tasviri içün menba qoy",
 	"visualeditor-ca-createsource": "Kodunı yarat",
 	"visualeditor-ca-editsource": "Kodunı deñiştir",
 	"visualeditor-ca-editsource-section": "kodunı deñiştir",
