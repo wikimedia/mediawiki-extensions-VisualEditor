@@ -58,6 +58,12 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.initialEditSummary = null;
 	this.initialCheckboxes = {};
 
+	this.viewUri = new mw.Uri( mw.util.getUrl( this.getPageName() ) );
+	this.isViewPage = (
+		mw.config.get( 'wgAction' ) === 'view' &&
+		this.currentUri.query.diff === undefined
+	);
+
 	this.copyrightWarning = null;
 	this.checkboxFields = null;
 	this.checkboxesByName = null;

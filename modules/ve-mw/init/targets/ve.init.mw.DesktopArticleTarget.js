@@ -61,12 +61,6 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 			return initialCheckboxes;
 		}, {} );
 
-	this.viewUri = new mw.Uri( mw.util.getUrl( this.getPageName() ) );
-	this.isViewPage = (
-		mw.config.get( 'wgAction' ) === 'view' &&
-		this.currentUri.query.diff === undefined
-	);
-
 	this.tabLayout = mw.config.get( 'wgVisualEditorConfig' ).tabLayout;
 	this.events = new ve.init.mw.ArticleTargetEvents( this );
 	this.$originalContent = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-originalContent' );
