@@ -1756,9 +1756,22 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 			// Disconnect history listener
 			surface.getModel().disconnect( this );
 		}
+
+		var saveDialogPromise = ve.createDeferred().resolve().promise();
+		if ( this.saveDialog ) {
+			if ( this.saveDialog.isOpened() ) {
+				// If the save dialog is still open (from saving) close it
+				saveDialogPromise = this.saveDialog.close().closed;
+			}
+			// Release the reference
+			this.saveDialog = null;
+		}
+
 		// Parent method
-		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( this ).then( function () {
-			mw.hook( 've.deactivationComplete' ).fire( target.edited );
+		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( target ).then( function () {
+			return saveDialogPromise.then( function () {
+				mw.hook( 've.deactivationComplete' ).fire( target.edited );
+			} );
 		} );
 	}
 	return this.teardownPromise;
