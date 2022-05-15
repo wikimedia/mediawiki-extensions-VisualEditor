@@ -11,7 +11,6 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Config;
-use Exception;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
@@ -20,6 +19,7 @@ use ParsoidVirtualRESTService;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RestbaseVirtualRESTService;
+use RuntimeException;
 use Title;
 use VirtualRESTService;
 use VirtualRESTServiceClient;
@@ -165,7 +165,7 @@ trait ApiParsoidTrait {
 				__METHOD__ . ": Received HTTP {code} from RESTBase",
 				[
 					'code' => $response['code'],
-					'trace' => ( new Exception )->getTraceAsString(),
+					'exception' => new RuntimeException(),
 					'response' => [ 'body' => $response['body'] ],
 					'requestPath' => $path,
 					'requestIfMatch' => $reqheaders['If-Match'] ?? '',
