@@ -232,7 +232,7 @@
 	"visualeditor-dialog-transclusion-add-param-save": "Ajouter un paramètre",
 	"visualeditor-dialog-transclusion-add-template": "Ajouter le modèle",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Ajouter un paramètre non documenté",
-	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Revenir à la recherche ? Les modifications seront perdues sans pouvoir être annulées.",
+	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Revenir à la recherche ? Vos modifications seront perdues et cela ne pourra pas être annulé.",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Fermer l’éditeur de modèle ? Les modifications seront perdues et cela ne pourra pas être annulé.",
 	"visualeditor-dialog-transclusion-collapse-options": "Masquer les options",
 	"visualeditor-dialog-transclusion-confirmation-discard": "Annuler les modifications",

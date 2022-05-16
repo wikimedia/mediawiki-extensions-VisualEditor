@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"APPER",
+			"Brettchenweber",
 			"Filzstift",
 			"G.Hagedorn",
 			"Hwboehm",
@@ -192,8 +193,8 @@
 	"visualeditor-dialog-transclusion-add-param-save": "Parameter hinzufügen",
 	"visualeditor-dialog-transclusion-add-template": "Vorlage hinzufügen",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Undokumentierten Parameter hinzufügen",
-	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Zurück zur Suche gehen? Bearbeitungen gehen verloren und können nicht rückgängig gemacht werden.",
-	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Vorlageneditor schließen? Die Änderungen gehen verloren und können nicht rückgängig gemacht werden.",
+	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Zurück zur Suche gehen? Deine Bearbeitungen gehen verloren und können nicht wiederhergestellt werden.",
+	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Vorlageneditor schließen? Deine Bearbeitungen gehen verloren und können nicht wiederhergestellt werden.",
 	"visualeditor-dialog-transclusion-collapse-options": "Optionen ausblenden",
 	"visualeditor-dialog-transclusion-confirmation-discard": "Bearbeitungen verwerfen",
 	"visualeditor-dialog-transclusion-confirmation-reject": "Weiter bearbeiten",

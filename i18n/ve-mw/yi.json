@@ -169,6 +169,7 @@
 	"visualeditor-dialog-transclusion-title-insert-known-template": "אַרײַנגעבן: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "רעדאַקטירן: $1",
 	"visualeditor-dialog-transclusion-template-search": "מוסטער־זוך",
+	"visualeditor-dialog-transclusion-feedback-message": "מ׳האט לעצטנס געקאנטשעט די ארבעט צו פארבעסערן די רעזולטאטן פון מוסטערן־זוען. כדי צו לערנען נאך וועגן די ענדערונגען אדער איבערצולאזן פֿידבעק, גייט צום \n[//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates פראיעקט־בלאט].",
 	"visualeditor-dialog-transclusion-wikitext": "וויקיטעקסט",
 	"visualeditor-dialogbutton-media-tooltip": "בילדער און מעדיע",
 	"visualeditor-dialogbutton-meta-tooltip": "בלאט שטעלונגען",
