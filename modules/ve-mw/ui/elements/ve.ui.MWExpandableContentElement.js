@@ -39,28 +39,14 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
 ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 	this.$content.addClass( 've-ui-expandableContent-collapsible' );
 
-	var element = this,
-		collapsedHeight = this.getLineHeight(),
-		toggle = new OO.ui.ButtonWidget( {
-			framed: false,
-			flags: [ 'progressive' ],
-			label: ve.msg( 'visualeditor-expandable-more' ),
-			classes: [ 've-ui-expandableContent-toggle' ],
-			icon: 'expand'
-		} );
-
-	toggle.on( 'click', function () {
-		if ( element.collapsed ) {
-			toggle.setLabel( ve.msg( 'visualeditor-expandable-more' ) );
-			element.$content.css( { height: collapsedHeight } );
-			toggle.setIcon( 'expand' );
-		} else {
-			toggle.setLabel( ve.msg( 'visualeditor-expandable-less' ) );
-			element.$content.css( { height: element.$content.prop( 'scrollHeight' ) + collapsedHeight } );
-			toggle.setIcon( 'collapse' );
-		}
-		element.collapsed = !element.collapsed;
-	} );
+	var collapsedHeight = this.getLineHeight();
+	this.button = new OO.ui.ButtonWidget( {
+		framed: false,
+		flags: [ 'progressive' ],
+		label: ve.msg( 'visualeditor-expandable-more' ),
+		classes: [ 've-ui-expandableContent-toggle' ],
+		icon: 'expand'
+	} ).on( 'click', this.onButtonClick.bind( this ) );
 
 	$( '<div>' )
 		.addClass( 've-ui-expandableContent-container' )
@@ -68,11 +54,24 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 			$( '<div>' )
 				.addClass( 've-ui-expandableContent-fade' )
 		)
-		.append( toggle.$element )
+		.append( this.button.$element )
 		.height( collapsedHeight )
 		.appendTo( this.$element );
 
 	this.$content.height( collapsedHeight );
+};
+
+ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
+	if ( this.collapsed ) {
+		this.button.setLabel( ve.msg( 'visualeditor-expandable-more' ) );
+		this.$content.css( { height: this.getLineHeight() } );
+		this.button.setIcon( 'expand' );
+	} else {
+		this.button.setLabel( ve.msg( 'visualeditor-expandable-less' ) );
+		this.$content.css( { height: this.$content.prop( 'scrollHeight' ) + this.getLineHeight() } );
+		this.button.setIcon( 'collapse' );
+	}
+	this.collapsed = !this.collapsed;
 };
 
 ve.ui.MWExpandableContentElement.prototype.updateSize = function () {
