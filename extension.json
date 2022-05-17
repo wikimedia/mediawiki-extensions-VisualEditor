@@ -522,11 +522,7 @@
 				"lastmodifiedat",
 				"mw-widgets-abandonedit",
 				"pagetitle",
-				"redirectpagesub",
 				"subject",
-				"visualeditor-savedialog-identify-anon",
-				"visualeditor-savedialog-identify-trylogin",
-				"visualeditor-savedialog-identify-user",
 				"visualeditor-section-body-placeholder",
 				"visualeditor-section-title-placeholder"
 			]
@@ -879,6 +875,7 @@
 				"publishchanges-start",
 				"publishpage",
 				"publishpage-start",
+				"redirectpagesub",
 				"redirectto",
 				"savearticle",
 				"savearticle-start",
@@ -893,6 +890,9 @@
 				"visualeditor-pagemenu-tooltip",
 				"visualeditor-recreate",
 				"visualeditor-redirect-description",
+				"visualeditor-savedialog-identify-anon",
+				"visualeditor-savedialog-identify-trylogin",
+				"visualeditor-savedialog-identify-user",
 				"visualeditor-saveerror",
 				"visualeditor-serializeerror"
 			],
