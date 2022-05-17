@@ -249,7 +249,7 @@ trait ApiParsoidTrait {
 	protected function transformHTML(
 		Title $title, string $html, int $oldid = null, string $etag = null
 	): array {
-		$data = [ 'html' => $html, 'scrub_wikitext' => 1 ];
+		$data = [ 'html' => $html ];
 		$path = 'transform/html/to/wikitext/' . urlencode( $title->getPrefixedDBkey() ) .
 			( $oldid === null ? '' : '/' . $oldid );
 
