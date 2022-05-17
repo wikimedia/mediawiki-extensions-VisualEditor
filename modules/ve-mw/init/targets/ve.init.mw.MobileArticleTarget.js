@@ -421,9 +421,16 @@ ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function (
 		$( '#firstHeading' ).html( displayTitle );
 	}
 
-	// Mobile doesn't do some things that desktop does:
-	// * Categories
-	// * siteSub/taglline
+	// Categories are only shown in AMC
+	// eslint-disable-next-line no-jquery/no-global-selector
+	if ( $( '#catlinks' ).length ) {
+		var $categories = $( $.parseHTML( categoriesHtml ) );
+		mw.hook( 'wikipage.categories' ).fire( $categories );
+		// eslint-disable-next-line no-jquery/no-global-selector
+		$( '#catlinks' ).replaceWith( $categories );
+	}
+
+	// TODO: Consider contentSub
 	this.setRealRedirectInterface();
 };
 
