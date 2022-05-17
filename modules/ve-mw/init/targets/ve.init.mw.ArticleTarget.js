@@ -628,12 +628,14 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 
 	var target = this;
 
-	if ( !this.pageExists || this.restoring ) {
+	// This is a page creation, a restoration, or we loaded the editor from a non-view page: refresh the page.
+	if ( !this.pageExists || this.restoring || !this.isViewPage ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
 
-			// This is a page creation or restoration, refresh the page
-			var newUrlParams = data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' };
+			var newUrlParams = !this.pageExists || this.restoring ?
+				( data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' } ) :
+				{};
 
 			if ( data.isRedirect ) {
 				newUrlParams.redirect = 'no';
