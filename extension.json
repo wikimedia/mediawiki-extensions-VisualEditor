@@ -549,8 +549,7 @@
 				"ext.visualEditor.mwsave"
 			],
 			"messages": [
-				"visualeditor-backbutton-tooltip",
-				"visualeditor-donebutton-tooltip"
+				"visualeditor-backbutton-tooltip"
 			],
 			"targets": [
 				"mobile"
