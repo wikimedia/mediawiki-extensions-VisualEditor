@@ -236,7 +236,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Immagini e file multimediali",
 	"visualeditor-dialogbutton-meta-tooltip": "Impostazioni pagina",
 	"visualeditor-dialogbutton-template-tooltip": "Template",
-	"visualeditor-donebutton-tooltip": "Modifica completata",
 	"visualeditor-editconflict": "Le modifiche apportate non possono essere salvate a causa di un conflitto di edizione. {{GENDER:|Vuoi}} risolvere il conflitto manualmente?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} ora ricorda quale editor preferisci. Puoi cambiare modalità di modifica mentre stai editando, e cambiare le tue preferenze in seguito.",
 	"visualeditor-editingtabdialog-ok": "Usa l'editor che ho utilizzato per ultimo",

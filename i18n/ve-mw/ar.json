@@ -243,7 +243,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "الصور والوسائط",
 	"visualeditor-dialogbutton-meta-tooltip": "إعدادات الصفحة",
 	"visualeditor-dialogbutton-template-tooltip": "قالب",
-	"visualeditor-donebutton-tooltip": "انتهيت من التعديل",
 	"visualeditor-editconflict": "تعذر حفظ التغييرات الخاصة لوجود تضارب تحرير. أتود{{GENDER:||ين}} تصويب التضارب يدويا؟",
 	"visualeditor-editingtabdialog-body": "تتذكر {{SITENAME}} الآن أي محرر تفضل. يمكنك التبديل بين وضعيتي التحرير أثناء تعديلك، ويمكنك تغيير تفضيلك لاحقًا.",
 	"visualeditor-editingtabdialog-ok": "استعمل المحرر الذي عدلت به آخر مرة",

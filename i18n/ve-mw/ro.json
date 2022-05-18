@@ -206,7 +206,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Imagini și media",
 	"visualeditor-dialogbutton-meta-tooltip": "Setări pagină",
 	"visualeditor-dialogbutton-template-tooltip": "Format",
-	"visualeditor-donebutton-tooltip": "Gata cu modificările",
 	"visualeditor-editconflict": "Modificările dumneavoastră nu au putut fi salvate din cauza unui conflict de editare. Doriți să rezolvați conflictul manual?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} reține acum ce editor preferați. Puteți comuta între editoare în timp ce editați și puteți să vă schimbați preferința mai târziu.",
 	"visualeditor-editingtabdialog-ok": "Folosește editorul pe care l-am utilizat la ultima modificare",

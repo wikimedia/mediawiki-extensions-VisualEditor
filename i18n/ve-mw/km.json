@@ -142,7 +142,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "រូបភាពនិងមេឌា",
 	"visualeditor-dialogbutton-meta-tooltip": "ការកំណត់​ទំព័រ",
 	"visualeditor-dialogbutton-template-tooltip": "ទំព័រគំរូ",
-	"visualeditor-donebutton-tooltip": "កែប្រែចប់",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} ចងចាំពីមុខងារកែប្រែដែលអ្នកចូលចិត្តហើយ។ អ្នកអាចផ្លាស់ម៉ូដកែប្រែ កំឡុងពេលដែលអ្នកកំពុងធ្វើការកែប្រែ ហើយប្ដូរចំណង់ចំណូលចិត្តរបស់អ្នកពេលក្រោយក៏បាន។",
 	"visualeditor-editingtabdialog-ok": "ប្រើមុខងារកែប្រែដែលខ្ញុំបានប្រើលើកមុន",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|ដំណឹង|ដំណឹង}}",

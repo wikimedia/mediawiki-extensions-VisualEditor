@@ -216,7 +216,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Attēli un mediji",
 	"visualeditor-dialogbutton-meta-tooltip": "Lapas iestatījumi",
 	"visualeditor-dialogbutton-template-tooltip": "Veidne",
-	"visualeditor-donebutton-tooltip": "Labošana pabeigta",
 	"visualeditor-editconflict": "Tavas veiktās izmaiņas nevar saglabāt, jo tās konfliktē ar citu pašlaik veiktu labojumu. Vai vēlies labot šo konfliktu manuāli?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} tagad atceras tavu teksta redaktora izvēli. Labošanas laikā tu vari pārslēgt redaktora režīmus un vēlāk nomainīt savu izvēli.",
 	"visualeditor-editingtabdialog-ok": "Izmantot pēdējā labojumā lietoto redaktoru",

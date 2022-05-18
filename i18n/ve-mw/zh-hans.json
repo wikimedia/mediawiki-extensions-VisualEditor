@@ -261,7 +261,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "图像与媒体",
 	"visualeditor-dialogbutton-meta-tooltip": "页面设置",
 	"visualeditor-dialogbutton-template-tooltip": "模板",
-	"visualeditor-donebutton-tooltip": "完成编辑",
 	"visualeditor-editconflict": "您的更改因为编辑冲突无法保存。{{GENDER:|您}}希望手动解决冲突吗？",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}}现已记住您喜欢的编辑器。在您编辑时您可以切换编辑模式，并在日后更改您的参数设置。",
 	"visualeditor-editingtabdialog-ok": "使用我在上次编辑时用的编辑器",

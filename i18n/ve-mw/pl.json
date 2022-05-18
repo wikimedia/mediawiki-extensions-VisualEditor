@@ -267,7 +267,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Grafika i multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Ustawienia strony",
 	"visualeditor-dialogbutton-template-tooltip": "Szablon",
-	"visualeditor-donebutton-tooltip": "Edycja wykonana",
 	"visualeditor-editconflict": "Twoje zmiany nie mogły zostać zapisane z powodu wystąpienia konfliktu edycji. Czy {{GENDER:|chcesz}} rozwiązać go ręcznie?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} pamięta teraz, który edytor preferujesz. Możesz zmieniać tryb edycji podczas edytowania oraz zmienić później swoje preferencje.",
 	"visualeditor-editingtabdialog-ok": "Użyj edytora, którego użyłem w ostatniej edycji",

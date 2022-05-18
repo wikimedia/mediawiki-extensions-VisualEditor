@@ -263,7 +263,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Gambar dan media",
 	"visualeditor-dialogbutton-meta-tooltip": "Pengaturan halaman",
 	"visualeditor-dialogbutton-template-tooltip": "Templat",
-	"visualeditor-donebutton-tooltip": "Selesai menyunting",
 	"visualeditor-editconflict": "Perubahan Anda tidak dapat disimpan karena ada konflik penyuntingan. Apakah {{GENDER:|Anda}} ingin menyelesaikan konflik tersebut secara manual?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} kini mengingat penyunting yang Anda pilih. Anda dapat beralih mode penyuntingan saat Anda menyunting, dan mengubah preferensi Anda nanti.",
 	"visualeditor-editingtabdialog-ok": "Gunakan penyunting yang saya pakai pada suntingan terakhir",

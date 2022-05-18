@@ -215,7 +215,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "চিত্র ও মিডিয়া",
 	"visualeditor-dialogbutton-meta-tooltip": "পাতা সেটিং",
 	"visualeditor-dialogbutton-template-tooltip": "টেমপ্লেট",
-	"visualeditor-donebutton-tooltip": "সম্পাদনা সম্পন্ন",
 	"visualeditor-editconflict": "আপনার পরিবর্তনগুলো সম্পাদনা দ্বন্দ্বের কারণে সংরক্ষণ করা যায়নি। {{GENDER:|আপনি}} ম্যানুয়ালি এই দ্বন্দ্ব সমাধান করতে ইচ্ছুক?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} এখন আপনি কোন সম্পাদক পছন্দ করেন তা মনে রাখবে। আপনি সম্পাদনা করার সময় সম্পাদনা মোড, এবং পরে আপনার পছন্দ পরিবর্তন করতে পারবেন।",
 	"visualeditor-editingtabdialog-ok": "আমার সর্বশেষ সম্পাদনায় আমি যে সম্পাদক ব্যবহার করেছি তা ব্যবহার করুন",

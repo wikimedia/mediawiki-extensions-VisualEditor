@@ -178,7 +178,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Obrázky a multimédiá",
 	"visualeditor-dialogbutton-meta-tooltip": "Nastavenia stránky",
 	"visualeditor-dialogbutton-template-tooltip": "Šablóna",
-	"visualeditor-donebutton-tooltip": "Editácia hotová",
 	"visualeditor-editconflict": "Zmeny nie je možné uložiť z dôvodu editačného konfliktu. Chcete vyriešiť editačný konflikt manuálne?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} si teraz pamätá, ktorý editor preferujete. Režim editácie môžete neskôr kedykoľvek zmeniť.",
 	"visualeditor-editingtabdialog-ok": "Použiť editor, ktorým som uložil/-a/ svoju poslednú úpravu",

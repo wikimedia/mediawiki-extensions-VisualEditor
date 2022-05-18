@@ -238,7 +238,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Hình ảnh và phương tiện",
 	"visualeditor-dialogbutton-meta-tooltip": "Tùy chọn trang",
 	"visualeditor-dialogbutton-template-tooltip": "Bản mẫu",
-	"visualeditor-donebutton-tooltip": "Hoàn tất việc sửa đổi",
 	"visualeditor-editconflict": "Không thể lưu các thay đổi của bạn do mâu thuẫn sửa đổi. Bạn có muốn giải quyết mâu thuẫn một cách thủ công?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} hiện duy trì chế độ sửa đổi của bạn. Bạn có thể chuyển qua lại các chế độ sửa đổi trong một phiên sửa đổi và cũng có thể thay đổi tùy chọn của bạn về sau.",
 	"visualeditor-editingtabdialog-ok": "Sử dụng chế độ sửa đổi mà tôi sử dụng lần truớc",

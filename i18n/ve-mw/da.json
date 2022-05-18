@@ -165,7 +165,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Billeder og medier",
 	"visualeditor-dialogbutton-meta-tooltip": "Sideindstillinger",
 	"visualeditor-dialogbutton-template-tooltip": "Skabelon",
-	"visualeditor-donebutton-tooltip": "Færdig med at redigere",
 	"visualeditor-editconflict": "Dine ændringer kunne ikke gemmes på grund af en redigeringskonflikt. Vil {{GENDER:|du}} løse konflikten manuelt?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|meddelelse|meddelelser}}",
 	"visualeditor-editnotices-tooltip": "Redigeringsbemærkninger",

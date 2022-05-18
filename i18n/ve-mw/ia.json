@@ -191,7 +191,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Imagines e multimedia",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuration de pagina",
 	"visualeditor-dialogbutton-template-tooltip": "Patrono",
-	"visualeditor-donebutton-tooltip": "Modification facite",
 	"visualeditor-editconflict": "Le cambiamentos non pote esser salveguardate a causa de un conflicto de modification. Esque {{GENDER:|tu}} vole resolver le conflicto manualmente?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} memora ora le editor que tu prefere. Tu pote cambiar inter editores durante que tu modifica, e cambiar tu preferentia plus tarde.",
 	"visualeditor-editingtabdialog-ok": "Usar le editor que io usava pro mi ultime modification",

@@ -254,7 +254,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "画像とメディア",
 	"visualeditor-dialogbutton-meta-tooltip": "ページの設定",
 	"visualeditor-dialogbutton-template-tooltip": "テンプレート",
-	"visualeditor-donebutton-tooltip": "編集を終了する",
 	"visualeditor-editconflict": "編集競合のため、編集内容を保存できませんでした。{{GENDER:|}}この競合を手動で解決しますか?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} は、以前に利用したエディターを記憶します。編集中に編集モードを切り替えて、あとで個人設定を変更できます。",
 	"visualeditor-editingtabdialog-ok": "最後に使用したエディターを使う",

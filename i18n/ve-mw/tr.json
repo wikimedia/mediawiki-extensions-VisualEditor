@@ -274,7 +274,6 @@
 	"visualeditor-dialogbutton-media-tooltip": "Resimler ve medya",
 	"visualeditor-dialogbutton-meta-tooltip": "Sayfa ayarları",
 	"visualeditor-dialogbutton-template-tooltip": "Şablon",
-	"visualeditor-donebutton-tooltip": "Düzenleme tamamlandı",
 	"visualeditor-editconflict": "Değişiklikleriniz bir düzenleme çakışması nedeniyle kaydedilemedi. Çakışmayı elle çözmek ister misiniz?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} artık hangi düzenleyiciyi tercih ettiğinizi hatırlıyor. Düzenlerken düzenleme modlarını değiştirebilir ve daha sonra tercihinizi değiştirebilirsiniz.",
 	"visualeditor-editingtabdialog-ok": "Son düzenlememde kullandığım düzenleyici kullan",
