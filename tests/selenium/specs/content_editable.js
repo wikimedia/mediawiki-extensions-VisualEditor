@@ -8,7 +8,7 @@ describe( 'Content Editable', function () {
 
 	let name, content;
 
-	beforeEach( async function () {
+	it( 'should load when an url is opened', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();
@@ -16,13 +16,19 @@ describe( 'Content Editable', function () {
 
 		await EditPage.openForEditing( name );
 		await EditPage.activationComplete();
-	} );
 
-	it( 'should load when an url is opened', async function () {
 		assert( await EditPage.toolbar.isDisplayed() );
 	} );
 
 	it( 'should be editable', async function () {
+		content = Util.getTestString();
+		name = Util.getTestString();
+		await browser.deleteAllCookies();
+		await LoginPage.loginAdmin();
+
+		await EditPage.openForEditing( name );
+		await EditPage.activationComplete();
+
 		await EditPage.veRootNode.setValue( content );
 
 		assert.equal( await EditPage.veRootNode.getText(), content );
@@ -34,6 +40,14 @@ describe( 'Content Editable', function () {
 	} );
 
 	it( 'should save an edit', async function () {
+		content = Util.getTestString();
+		name = Util.getTestString();
+		await browser.deleteAllCookies();
+		await LoginPage.loginAdmin();
+
+		await EditPage.openForEditing( name );
+		await EditPage.activationComplete();
+
 		await EditPage.veRootNode.setValue( content );
 		await EditPage.savePageDots.click();
 		await EditPage.savePage.click();
