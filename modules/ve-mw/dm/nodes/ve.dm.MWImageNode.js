@@ -170,7 +170,9 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 				continue;
 			}
 			var change = this.describeChange( key, attributeChanges[ key ] );
-			descriptions.push( change );
+			if ( change ) {
+				descriptions.push( change );
+			}
 		}
 	}
 	return descriptions;
