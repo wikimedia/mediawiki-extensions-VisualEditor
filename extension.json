@@ -545,8 +545,7 @@
 				"ext.visualEditor.core.mobile",
 				"ext.visualEditor.articleTarget",
 				"ext.visualEditor.mwextensions",
-				"ext.visualEditor.mwlink",
-				"ext.visualEditor.mwsave"
+				"ext.visualEditor.mwlink"
 			],
 			"messages": [
 				"visualeditor-backbutton-tooltip"
