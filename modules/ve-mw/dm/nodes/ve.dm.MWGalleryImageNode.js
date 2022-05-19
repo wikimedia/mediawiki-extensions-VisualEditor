@@ -136,6 +136,11 @@ ve.dm.MWGalleryImageNode.static.describeChange = function ( key ) {
 	return ve.dm.MWGalleryImageNode.super.static.describeChange.apply( this, arguments );
 };
 
+ve.dm.MWGalleryImageNode.static.isDiffComparable = function ( element, other ) {
+	// Images with different src's shouldn't be diffed
+	return element.type === other.type && element.attributes.resource === other.attributes.resource;
+};
+
 /* Methods */
 
 /**
