@@ -21,6 +21,8 @@
 ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config ) {
 	this.resource = imageInfo.resource;
 	this.altText = imageInfo.altText || '';
+	// Keep the original value which may be null
+	this.originalAltText = imageInfo.altText;
 	this.src = imageInfo.src;
 	this.height = imageInfo.height;
 	this.width = imageInfo.width;

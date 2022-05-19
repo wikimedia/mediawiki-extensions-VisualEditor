@@ -115,7 +115,7 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 
 	img.setAttribute( 'resource', model.attributes.resource );
 	img.setAttribute( 'src', model.attributes.src );
-	if ( alt ) {
+	if ( typeof alt === 'string' ) {
 		img.setAttribute( 'alt', alt );
 	}
 

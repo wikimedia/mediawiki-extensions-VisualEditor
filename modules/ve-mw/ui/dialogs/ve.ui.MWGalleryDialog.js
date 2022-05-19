@@ -970,20 +970,29 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 		};
 	}
 
-	function getImageLinearData( image ) {
+	/**
+	 * Get linear data from a gallery item
+	 *
+	 * @param {ve.ui.MWGalleryItemWidget} galleryItem Gallery item
+	 * @return {Array} Linear data
+	 */
+	function getImageLinearData( galleryItem ) {
 		var size = scaleImage(
-			parseInt( image.height ),
-			parseInt( image.width ),
+			parseInt( galleryItem.height ),
+			parseInt( galleryItem.width ),
 			parseInt( mwData.attrs.heights || this.defaults.imageHeight ),
 			parseInt( mwData.attrs.widths || this.defaults.imageWidth )
 		);
 		var imageAttributes = {
-			resource: './' + image.resource,
-			altText: image.altText,
-			src: image.thumbUrl,
+			resource: './' + galleryItem.resource,
+			altText: ( !galleryItem.altText && !galleryItem.originalAltText ) ?
+				// Use original null/empty value
+				galleryItem.originalAltText :
+				galleryItem.altText,
+			src: galleryItem.thumbUrl,
 			height: size.height,
 			width: size.width,
-			tagName: image.tagName
+			tagName: galleryItem.tagName
 		};
 
 		return [
