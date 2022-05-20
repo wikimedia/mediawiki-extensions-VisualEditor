@@ -31,7 +31,7 @@ class VisualEditorParsoidClient {
 	 * Keep this in sync with the Accept: header in
 	 * ve.init.mw.ArticleTargetLoader.js
 	 */
-	public const PARSOID_VERSION = '2.0.0';
+	public const PARSOID_VERSION = '2.4.0';
 
 	/** @var array Parsoid-specific settings array from $config */
 	private $parsoidSettings;
