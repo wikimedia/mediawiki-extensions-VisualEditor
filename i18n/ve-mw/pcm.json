@@ -4,8 +4,9 @@
 			"Samatics"
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "Add lokal description source",
 	"visualeditor-ca-createsource": "Mek source",
-	"visualeditor-ca-editsource": "Chenj am wit kod",
-	"visualeditor-ca-editsource-section": "chenj-am wit code",
+	"visualeditor-ca-editsource": "Chenj-am wit source",
+	"visualeditor-ca-editsource-section": "chenj-am wit source",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
