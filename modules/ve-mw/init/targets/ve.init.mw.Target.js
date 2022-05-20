@@ -93,6 +93,10 @@ ve.init.mw.Target.static.toolbarGroups = [
 		name: 'insert',
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		narrowConfig: {
+			invisibleLabel: true,
+			icon: 'add'
+		},
 		include: '*',
 		forceExpand: [ 'media', 'transclusion', 'insertTable' ],
 		promote: [ 'media', 'transclusion', 'insertTable' ]

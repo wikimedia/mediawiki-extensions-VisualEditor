@@ -346,23 +346,6 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.getSaveButtonLabel = function ( startProcess ) {
-	var suffix = startProcess ? '-start' : '';
-	// The following messages can be used here:
-	// * visualeditor-savedialog-label-publish-short
-	// * visualeditor-savedialog-label-publish-short-start
-	// * visualeditor-savedialog-label-save-short
-	// * visualeditor-savedialog-label-save-short-start
-	if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
-		return OO.ui.deferMsg( 'visualeditor-savedialog-label-publish-short' + suffix );
-	}
-
-	return OO.ui.deferMsg( 'visualeditor-savedialog-label-save-short' + suffix );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var dataPromise;
 	if ( modified ) {
