@@ -65,6 +65,11 @@
 	overflow: hidden;
 }
 
+.ve-init-mw-mobileArticleTarget-toolbar-popups {
+	// Avoid jittering while scrolling (T209192)
+	position: fixed;
+}
+
 @media screen and ( max-width: 767px ) {
 	.ve-init-mw-target-surface > .ve-ui-surface-placeholder > * {
 		/* Fix margin overlap */
