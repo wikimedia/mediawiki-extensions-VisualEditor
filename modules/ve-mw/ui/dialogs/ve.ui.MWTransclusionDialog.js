@@ -81,6 +81,15 @@ ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 
 ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth = 540;
 
+/* Static Methods */
+
+/**
+ * @return {boolean}
+ */
+ve.ui.MWTransclusionDialog.static.isSmallScreen = function () {
+	return $( window ).width() <= ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth;
+};
+
 /* Methods */
 
 /**
@@ -333,7 +342,7 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 	var expandSidebar;
 
 	if ( this.useInlineDescriptions ) {
-		var isSmallScreen = this.isNarrowScreen();
+		var isSmallScreen = this.constructor.static.isSmallScreen();
 
 		var showOtherActions = isSmallScreen ||
 			this.actions.getOthers().some( function ( action ) {
@@ -404,7 +413,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 	// up being mispositioned
 	this.$content.find( 'input:focus' ).trigger( 'blur' );
 
-	if ( this.useInlineDescriptions && this.pocSidebar && this.loaded && this.isNarrowScreen() ) {
+	if ( this.useInlineDescriptions && this.pocSidebar && this.loaded && this.constructor.static.isSmallScreen() ) {
 		var dialog = this;
 
 		// Updates the page sizes when the menu is toggled using the button. This needs
@@ -435,10 +444,6 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		}
 	}
-};
-
-ve.ui.MWTransclusionDialog.prototype.isNarrowScreen = function () {
-	return $( window ).width() <= this.constructor.static.smallScreenMaxWidth;
 };
 
 /**
