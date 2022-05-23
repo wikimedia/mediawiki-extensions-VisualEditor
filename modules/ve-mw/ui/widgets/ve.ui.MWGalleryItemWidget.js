@@ -30,6 +30,7 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 	this.captionDocument = imageInfo.captionDocument;
 	this.highlighted = false;
 	this.tagName = imageInfo.tagName;
+	this.isError = imageInfo.isError;
 
 	// Configuration initialization
 	config = config || {};

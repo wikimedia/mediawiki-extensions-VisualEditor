@@ -225,7 +225,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		img.setAttribute( attributes.isError ? 'data-width' : 'width', width );
 	}
 	if ( height !== null ) {
-		img.setAttribute( attributes.isError ? 'data-width' : 'height', height );
+		img.setAttribute( attributes.isError ? 'data-height' : 'height', height );
 	}
 
 	img.setAttribute( 'resource', attributes.resource );

@@ -69,8 +69,11 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		];
 	}
 
-	var width = img.getAttribute( 'width' );
-	var height = img.getAttribute( 'height' );
+	var typeofAttrs = figureInline.getAttribute( 'typeof' ).trim().split( /\s+/ );
+	var errorIndex = typeofAttrs.indexOf( 'mw:Error' );
+	var isError = errorIndex !== -1;
+	var width = img.getAttribute( isError ? 'data-width' : 'width' );
+	var height = img.getAttribute( isError ? 'data-height' : 'height' );
 
 	var dataElement = {
 		type: this.name,
@@ -81,7 +84,8 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 			width: width !== null && width !== '' ? +width : null,
 			height: height !== null && height !== '' ? +height : null,
-			tagName: figureInline.nodeName.toLowerCase()
+			tagName: figureInline.nodeName.toLowerCase(),
+			isError: isError
 		}
 	};
 
@@ -96,14 +100,15 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	//     <div> thumbDiv
 	//       <span> innerDiv
 	//         <a> a
-	//           <img> img
+	//           <img> img (or span if error)
 	var model = data,
+		attributes = model.attributes,
 		li = doc.createElement( 'li' ),
 		thumbDiv = doc.createElement( 'div' ),
-		innerDiv = doc.createElement( model.attributes.tagName || 'span' ),
+		innerDiv = doc.createElement( attributes.tagName || 'span' ),
 		a = doc.createElement( 'a' ),
-		img = doc.createElement( 'img' ),
-		alt = model.attributes.altText;
+		img = doc.createElement( attributes.isError ? 'span' : 'img' ),
+		alt = attributes.altText;
 
 	li.classList.add( 'gallerybox' );
 	thumbDiv.classList.add( 'thumb' );
@@ -114,12 +119,18 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	// making the whole gallery subtree edited, preventing selser.  When fixing,
 	// preserving the imgWrapperClassAttr, as in the MW*ImageNodes, will also be
 	// necessary.
-	// a.setAttribute( 'href', model.attributes.src );
+	// a.setAttribute( 'href', attributes.src );
 
-	img.setAttribute( 'resource', model.attributes.resource );
-	img.setAttribute( 'src', model.attributes.src );
-	img.setAttribute( 'width', model.attributes.width );
-	img.setAttribute( 'height', model.attributes.height );
+	img.setAttribute( 'resource', attributes.resource );
+	if ( attributes.isError ) {
+		img.classList.add( 'mw-broken-media' );
+		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
+		img.appendChild( doc.createTextNode( filename ) );
+	} else {
+		img.setAttribute( 'src', attributes.src );
+	}
+	img.setAttribute( attributes.isError ? 'data-width' : 'width', attributes.width );
+	img.setAttribute( attributes.isError ? 'data-height' : 'height', attributes.height );
 	if ( typeof alt === 'string' ) {
 		img.setAttribute( 'alt', alt );
 	}
