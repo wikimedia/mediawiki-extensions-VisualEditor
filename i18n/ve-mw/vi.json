@@ -178,6 +178,7 @@
 	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Nhấn Ctrl+Del để xóa bản mẫu, các tham số và giá trị của nó. Nhấn Ctrl+Shift+Mũi tên để di chuyển bản mẫu lên xuống.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "Nhấn Ctrl+Del để xóa bản mẫu, các tham số và giá trị của nó.",
 	"visualeditor-dialog-transclusion-add-content": "Thêm nội dung",
+	"visualeditor-dialog-transclusion-add-wikitext": "Thêm mã wiki",
 	"visualeditor-dialog-transclusion-add-param": "Bổ sung thêm thông tin",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Không thể thêm tham số \"$2\" hai lần.",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Tên tham số",
