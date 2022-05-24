@@ -10,8 +10,8 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use ResourceLoaderContext;
-use ResourceLoaderModule;
+use MediaWiki\ResourceLoader\Context as ResourceLoaderContext;
+use MediaWiki\ResourceLoader\Module as ResourceLoaderModule;
 use Title;
 
 class VisualEditorDataModule extends ResourceLoaderModule {

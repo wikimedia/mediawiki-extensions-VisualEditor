@@ -13,9 +13,9 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\MediaWikiServices;
-use ResourceLoaderFileModule;
+use MediaWiki\ResourceLoader\FileModule;
 
-class VisualEditorDesktopArticleTargetInitModule extends ResourceLoaderFileModule {
+class VisualEditorDesktopArticleTargetInitModule extends FileModule {
 
 	/**
 	 * @inheritDoc
