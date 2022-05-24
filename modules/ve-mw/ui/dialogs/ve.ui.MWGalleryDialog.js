@@ -989,7 +989,7 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 				// Use original null/empty value
 				galleryItem.originalAltText :
 				galleryItem.altText,
-			src: galleryItem.thumbUrl,
+			src: galleryItem.src,
 			height: size.height,
 			width: size.width,
 			tagName: galleryItem.tagName
