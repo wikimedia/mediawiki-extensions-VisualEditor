@@ -69,6 +69,9 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		];
 	}
 
+	var width = img.getAttribute( 'width' );
+	var height = img.getAttribute( 'height' );
+
 	var dataElement = {
 		type: this.name,
 		attributes: {
@@ -76,8 +79,8 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			altText: img.getAttribute( 'alt' ),
 			// 'src' for images, 'poster' for video/audio
 			src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
-			height: img.getAttribute( 'height' ),
-			width: img.getAttribute( 'width' ),
+			width: width !== null && width !== '' ? +width : null,
+			height: height !== null && height !== '' ? +height : null,
 			tagName: figureInline.nodeName.toLowerCase()
 		}
 	};
@@ -115,6 +118,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 
 	img.setAttribute( 'resource', model.attributes.resource );
 	img.setAttribute( 'src', model.attributes.src );
+	img.setAttribute( 'width', model.attributes.width );
+	img.setAttribute( 'height', model.attributes.height );
 	if ( typeof alt === 'string' ) {
 		img.setAttribute( 'alt', alt );
 	}
