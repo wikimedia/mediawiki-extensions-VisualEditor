@@ -23,6 +23,7 @@
 	},
 	"apierror-visualeditor-badcachekey": "No cached serialization found with that key",
 	"apierror-visualeditor-difffailed": "Diff failed",
+	"apierror-visualeditor-docserver-bad-config": "Direct Parsoid access is configured but the VirtualRESTService was used",
 	"apierror-visualeditor-docserver-http-error": "Error contacting the Parsoid/RESTBase server: $1",
 	"apierror-visualeditor-docserver-http": "Error contacting the Parsoid/RESTBase server (HTTP $1)",
 	"apierror-visualeditor-docserver-unconfigured": "The VirtualRESTService for the document server is not defined; see https://www.mediawiki.org/wiki/Extension:VisualEditor",
