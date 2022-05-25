@@ -219,12 +219,11 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 	// Restore aliases originally used in the wikitext. The spec doesn't know which alias was used.
 	for ( var name in this.params ) {
 		if ( spec.isParameterAlias( name ) ) {
-			parameters.splice(
-				// This can never fail because only documented parameters can have aliases
-				parameters.indexOf( spec.getPrimaryParameterName( name ) ),
-				1,
-				name
-			);
+			var i = parameters.indexOf( spec.getPrimaryParameterName( name ) );
+			// Fails when a parameter appears multiple times (via aliases) in the wikitext
+			if ( i !== -1 ) {
+				parameters.splice( i, 1, name );
+			}
 		}
 	}
 
