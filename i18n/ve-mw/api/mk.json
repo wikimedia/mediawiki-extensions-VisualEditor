@@ -6,6 +6,7 @@
 	},
 	"apierror-visualeditor-badcachekey": "Не најдов меѓускладирана серијализација за тој клуч",
 	"apierror-visualeditor-difffailed": "Разликата не успеа",
+	"apierror-visualeditor-docserver-bad-config": "Нагоден е непосредниот пристап за Parsoid, но употребен е VirtualRESTService",
 	"apierror-visualeditor-docserver-http-error": "Грешка при поврзувањето со опслужувачот Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "Грешка при поврзувањето со опслужувачот Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver-unconfigured": "Не е зададен VirtualRESTService за документен опслужувач; погл. https://www.mediawiki.org/wiki/Extension:VisualEditor",

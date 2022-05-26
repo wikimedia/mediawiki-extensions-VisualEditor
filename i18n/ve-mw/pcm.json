@@ -4,9 +4,9 @@
 			"Samatics"
 		]
 	},
-	"visualeditor-ca-createlocaldescriptionsource": "Ad lokal diskrishon source",
-	"visualeditor-ca-createsource": "Mek source",
-	"visualeditor-ca-editsource": "Chenj-am wit source",
-	"visualeditor-ca-editsource-section": "chenj-am wit source",
+	"visualeditor-ca-createlocaldescriptionsource": "Ad lokal diskrishon from orijin",
+	"visualeditor-ca-createsource": "Mek-am from orijin",
+	"visualeditor-ca-editsource": "Chenj-am from orijin",
+	"visualeditor-ca-editsource-section": "chenj-am for orijin",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
