@@ -20,7 +20,7 @@ ve.ui.MWExpandableContentElement = function VeUiMWExpandableContentElement( conf
 
 	this.$content = config.$content;
 
-	this.collapsed = false;
+	this.collapsed = true;
 	this.toggle( false );
 };
 
@@ -32,13 +32,26 @@ OO.mixinClass( ve.ui.MWExpandableContentElement, OO.EventEmitter );
 
 /* Methods */
 
+/**
+ * @private
+ * @return {number}
+ */
 ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
 	return parseInt( this.$content.css( 'line-height' ) );
 };
 
-ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
-	var collapsedHeight = this.getLineHeight();
+/**
+ * @private
+ * @return {number}
+ */
+ve.ui.MWExpandableContentElement.prototype.getTextHeight = function () {
+	return this.$content.children( 'p' ).first().prop( 'scrollHeight' );
+};
 
+/**
+ * @private
+ */
+ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 	this.button = new OO.ui.ButtonWidget( {
 		framed: false,
 		flags: [ 'progressive' ],
@@ -49,33 +62,59 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 	} ).on( 'click', this.onButtonClick.bind( this ) );
 
 	this.$content.on( 'click', this.onDescriptionClick.bind( this ) )
-		.addClass( 've-ui-expandableContent-collapsible' )
-		.height( collapsedHeight );
+		.addClass( 've-ui-expandableContent-collapsible' );
 
-	$( '<div>' )
+	this.$container = $( '<div>' )
 		.addClass( 've-ui-expandableContent-container' )
 		.append(
 			$( '<div>' )
 				.addClass( 've-ui-expandableContent-fade' )
 		)
 		.append( this.button.$element )
-		.height( collapsedHeight )
 		.appendTo( this.$element );
 };
 
-ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
-	if ( this.collapsed ) {
+/**
+ * @private
+ * @param {boolean} collapse
+ */
+ve.ui.MWExpandableContentElement.prototype.collapse = function ( collapse ) {
+	var collapsedHeight = this.getLineHeight();
+
+	if ( collapse ) {
 		this.button.setLabel( ve.msg( 'visualeditor-expandable-more' ) );
-		this.$content.css( { height: this.getLineHeight() } );
+		this.$content.css( { height: collapsedHeight } );
 		this.button.setIcon( 'expand' );
 	} else {
 		this.button.setLabel( ve.msg( 'visualeditor-expandable-less' ) );
-		this.$content.css( { height: this.$content.prop( 'scrollHeight' ) + this.getLineHeight() } );
+		this.$content.css( { height: this.getTextHeight() + this.button.$element.height() } );
 		this.button.setIcon( 'collapse' );
 	}
+	this.$container.removeClass( 'oo-ui-element-hidden' );
+	this.$container.height( collapsedHeight );
+	this.button.setInvisibleLabel( ve.ui.MWTransclusionDialog.static.isSmallScreen() );
+};
+
+/**
+ * @private
+ */
+ve.ui.MWExpandableContentElement.prototype.reset = function () {
+	this.$content.css( { height: this.getTextHeight() } );
+	this.$container.addClass( 'oo-ui-element-hidden' );
+	this.button.setInvisibleLabel( false );
+};
+
+/**
+ * @private
+ */
+ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
+	this.collapse( !this.collapsed );
 	this.collapsed = !this.collapsed;
 };
 
+/**
+ * @private
+ */
 ve.ui.MWExpandableContentElement.prototype.onDescriptionClick = function () {
 	if ( this.button.invisibleLabel ) {
 		// Don't toggle the description if the user is trying to select the text.
@@ -88,9 +127,14 @@ ve.ui.MWExpandableContentElement.prototype.onDescriptionClick = function () {
 ve.ui.MWExpandableContentElement.prototype.updateSize = function () {
 	this.toggle( true );
 
-	if ( this.button ) {
-		this.button.setInvisibleLabel( ve.ui.MWTransclusionDialog.static.isSmallScreen() );
-	} else if ( this.$content.outerHeight() / this.getLineHeight() >= 3 ) {
-		this.makeCollapsible();
+	if ( this.getTextHeight() / this.getLineHeight() >= 3 ) {
+		if ( !this.$container ) {
+			this.makeCollapsible();
+		}
+		this.collapse( this.collapsed );
+	} else {
+		if ( this.$container ) {
+			this.reset();
+		}
 	}
 };
