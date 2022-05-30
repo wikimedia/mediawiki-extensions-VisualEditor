@@ -382,16 +382,6 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) {
 	if ( this.isSidebarExpanded === expandSidebar ) {
-		if ( this.useInlineDescriptions ) {
-			// Updates the page sizes when the sidebar remains expanded but the screen is being resized.
-			// This is useful for descriptions that fit when the screen size is initially large but need
-			// to be collapsed when the screen size is reduced.
-			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
-				if ( page instanceof ve.ui.MWParameterPage ) {
-					page.updateSize();
-				}
-			} );
-		}
 		return;
 	}
 
@@ -704,6 +694,14 @@ ve.ui.MWTransclusionDialog.prototype.getTeardownProcess = function () {
 ve.ui.MWTransclusionDialog.prototype.onWindowResize = function () {
 	if ( this.transclusionModel && !this.ignoreNextWindowResizeEvent ) {
 		this.autoExpandSidebar();
+
+		if ( this.useInlineDescriptions ) {
+			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+				if ( page instanceof ve.ui.MWParameterPage ) {
+					page.updateSize();
+				}
+			} );
+		}
 	}
 	this.ignoreNextWindowResizeEvent = false;
 };
