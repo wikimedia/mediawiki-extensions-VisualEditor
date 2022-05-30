@@ -75,9 +75,17 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 	var width = img.getAttribute( isError ? 'data-width' : 'width' );
 	var height = img.getAttribute( isError ? 'data-height' : 'height' );
 
+	if ( isError ) {
+		typeofAttrs.splice( errorIndex, 1 );
+	}
+
+	var types = ve.dm.MWImageNode.static.rdfaToTypes[ typeofAttrs[ 0 ] ];
+
 	var dataElement = {
 		type: this.name,
 		attributes: {
+			mediaClass: types.mediaClass,
+			mediaTag: img.nodeName.toLowerCase(),
 			resource: './' + mw.libs.ve.normalizeParsoidResourceName( img.getAttribute( 'resource' ) ),
 			altText: img.getAttribute( 'alt' ),
 			// 'src' for images, 'poster' for video/audio
@@ -106,12 +114,16 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 		thumbDiv = doc.createElement( 'div' ),
 		container = doc.createElement( 'span' ),
 		a = doc.createElement( 'a' ),
-		img = doc.createElement( attributes.isError ? 'span' : 'img' ),
+		img = doc.createElement( attributes.isError ? 'span' : ( attributes.mediaTag || 'img' ) ),
 		alt = attributes.altText;
+
+	// FIXME: attributes.mediaTag and attributes.mediaClass aren't set after edit
 
 	li.classList.add( 'gallerybox' );
 	thumbDiv.classList.add( 'thumb' );
-	container.setAttribute( 'typeof', 'mw:Image' );
+	container.setAttribute( 'typeof', ve.dm.MWImageNode.static.getRdfa(
+		( attributes.mediaClass || 'File' ), 'none', attributes.isError
+	) );
 
 	// TODO: Support editing the link
 	// FIXME: Dropping the href causes Parsoid to mark the node as wrapper modified,
@@ -126,7 +138,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
 		img.appendChild( doc.createTextNode( filename ) );
 	} else {
-		img.setAttribute( 'src', attributes.src );
+		var srcAttr = ve.dm.MWImageNode.static.tagsToSrcAttrs[ img.nodeName.toLowerCase() ];
+		img.setAttribute( srcAttr, attributes.src );
 	}
 	img.setAttribute( attributes.isError ? 'data-width' : 'width', attributes.width );
 	img.setAttribute( attributes.isError ? 'data-height' : 'height', attributes.height );
