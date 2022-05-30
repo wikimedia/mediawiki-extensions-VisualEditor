@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aram",
 			"Asoxor",
 			"Calak",
 			"Diyariq",
@@ -203,11 +204,26 @@
 	"visualeditor-savedialog-label-create": "پەڕە دروست بکە",
 	"visualeditor-savedialog-label-resume-editing": "بەردەوامبوون لە دەستکاریکردن",
 	"visualeditor-savedialog-label-review": "بەسەر گۆڕانکارییەکانتدا بچۆوە",
+	"visualeditor-savedialog-label-save-short": "پاشەکەوت",
+	"visualeditor-savedialog-label-save-short-start": "پاشەکەوت…",
+	"visualeditor-savedialog-review-nosummary": "بەبێ کورتەی دەستکاری",
 	"visualeditor-savedialog-review-visual": "دیداری",
 	"visualeditor-savedialog-review-wikitext": "ویکیدەق",
 	"visualeditor-savedialog-title-conflict": "کێشە",
+	"visualeditor-savedialog-title-preview": "پێشبینینی گۆڕانکارییەکانت",
 	"visualeditor-savedialog-title-review": "بەسەر گۆڕانکارییەکانتدا بچۆوە",
 	"visualeditor-savedialog-title-save": "گۆڕانکارییەکانت پاشکەوت بکە",
+	"visualeditor-saveerror": "ھەڵەی پاشەکەوتکردنی دراوە بۆ ڕاژەکار: $1.",
+	"visualeditor-section-body-placeholder": "بەشی نوێ",
+	"visualeditor-section-title-placeholder": "بابەت",
+	"visualeditor-serializeerror": "ھەڵەی بارکردنی دراوە لە ڕاژەکارەوە: $1.",
 	"visualeditor-settings-tool": "ڕێکخستنەکانی پەڕە",
-	"visualeditor-usernamespacepagelink": "Project:بۆشاییی ناوی بەکارھێنەر"
+	"visualeditor-special-characters-group-other": "زۆر بەکارھاتووەکان",
+	"visualeditor-templatesused-tool": "داڕێژە بەکارھاتووەکان",
+	"visualeditor-title-error": "ناونیشان نادروستە.",
+	"visualeditor-usernamespacepagelink": "Project:بۆشاییی ناوی بەکارھێنەر",
+	"visualeditor-version-label": "وەشان",
+	"visualeditor-wikitext-warning-title": "مارکئەپی ویکیدەق دۆزرایەوە",
+	"visualeditor-wikitextconvert-title": "شێوازەکە دەگۆڕیت بۆ ویکیدەق؟",
+	"visualeditor-wikitextconvert-convert": "گۆڕین بۆ ویکیدەق"
 }
