@@ -39,7 +39,8 @@ describe( 'Content Editable', function () {
 		await browser.reloadSession();
 	} );
 
-	it( 'should save an edit', async function () {
+	// Skipped because of T309712: Dismiss 'Try Content Translation' popup
+	it.skip( 'should save an edit', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();
@@ -50,10 +51,11 @@ describe( 'Content Editable', function () {
 
 		await EditPage.veRootNode.setValue( content );
 		await EditPage.savePageDots.click();
+		await EditPage.savePage.waitForClickable();
 		await EditPage.savePage.click();
 
-		assert( await EditPage.veBodyContent.isDisplayed() );
-		assert.equal( await EditPage.veBodyContent.getText(), content );
+		await EditPage.notification.waitForDisplayed();
+		assert.strictEqual( await EditPage.notification.getText(), 'The page has been created.' );
 	} );
 
 } );
