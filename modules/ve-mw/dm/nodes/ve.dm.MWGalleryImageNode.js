@@ -44,7 +44,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 	// TODO: Improve handling of missing files. See 'isError' in MWBlockImageNode#toDataElement
 	var li = domElements[ 0 ];
 	var img = li.querySelector( 'img,audio,video,span[resource]' );
-	var figureInline = img.parentNode.parentNode;
+	var container = img.parentNode.parentNode;
 
 	// Get caption (may be missing for mode="packed-hover" galleries)
 	var captionNode = li.querySelector( '.gallerytext' );
@@ -69,7 +69,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		];
 	}
 
-	var typeofAttrs = figureInline.getAttribute( 'typeof' ).trim().split( /\s+/ );
+	var typeofAttrs = container.getAttribute( 'typeof' ).trim().split( /\s+/ );
 	var errorIndex = typeofAttrs.indexOf( 'mw:Error' );
 	var isError = errorIndex !== -1;
 	var width = img.getAttribute( isError ? 'data-width' : 'width' );
@@ -84,7 +84,6 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 			width: width !== null && width !== '' ? +width : null,
 			height: height !== null && height !== '' ? +height : null,
-			tagName: figureInline.nodeName.toLowerCase(),
 			isError: isError
 		}
 	};
@@ -98,21 +97,21 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	// ImageNode:
 	//   <li> li (gallerybox)
 	//     <div> thumbDiv
-	//       <span> innerDiv
+	//       <span> container
 	//         <a> a
 	//           <img> img (or span if error)
 	var model = data,
 		attributes = model.attributes,
 		li = doc.createElement( 'li' ),
 		thumbDiv = doc.createElement( 'div' ),
-		innerDiv = doc.createElement( attributes.tagName || 'span' ),
+		container = doc.createElement( 'span' ),
 		a = doc.createElement( 'a' ),
 		img = doc.createElement( attributes.isError ? 'span' : 'img' ),
 		alt = attributes.altText;
 
 	li.classList.add( 'gallerybox' );
 	thumbDiv.classList.add( 'thumb' );
-	innerDiv.setAttribute( 'typeof', 'mw:Image' );
+	container.setAttribute( 'typeof', 'mw:Image' );
 
 	// TODO: Support editing the link
 	// FIXME: Dropping the href causes Parsoid to mark the node as wrapper modified,
@@ -136,8 +135,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	}
 
 	a.appendChild( img );
-	innerDiv.appendChild( a );
-	thumbDiv.appendChild( innerDiv );
+	container.appendChild( a );
+	thumbDiv.appendChild( container );
 	li.appendChild( thumbDiv );
 
 	return [ li ];

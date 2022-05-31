@@ -43,14 +43,12 @@ ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = function ( attribute ) {
 	return attributes.indexOf( attribute ) === -1;
 };
 
-// For a while, Parsoid switched to <figure-inline> for inline images, but
-// then decided to switch back to <span> in T266143.
-ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span', 'figure-inline' ];
+ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span' ];
 
 ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
-	var container = domElements[ 0 ]; // <span> or <figure-inline>
+	var container = domElements[ 0 ]; // <span>
 	var imgWrapper = container.children[ 0 ]; // <a> or <span>
 	if ( !imgWrapper ) {
 		// Malformed figure, alienate (T267282)
@@ -96,8 +94,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		height: height !== null && height !== '' ? +height : null,
 		alt: img.getAttribute( 'alt' ),
 		mw: mwData,
-		isError: isError,
-		tagName: container.nodeName.toLowerCase()
+		isError: isError
 	};
 
 	// Extract individual classes
@@ -146,7 +143,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var attributes = dataElement.attributes,
 		mediaClass = attributes.mediaClass,
-		container = doc.createElement( attributes.tagName || 'span' ),
+		container = doc.createElement( 'span' ),
 		img = doc.createElement( attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
 		classes = [],
 		originalClasses = attributes.originalClasses;
