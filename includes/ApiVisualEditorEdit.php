@@ -148,7 +148,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$apiParams = [
 			'action' => 'parse',
 			'oldid' => $newRevId,
-			'prop' => 'text|revid|categorieshtml|displaytitle|subtitle|modules|jsconfigvars',
+			'prop' => 'text|revid|categorieshtml|sections|displaytitle|subtitle|modules|jsconfigvars',
 			'useskin' => $params['useskin'],
 		];
 		// Boolean parameters must be omitted completely to be treated as false.
@@ -178,6 +178,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		] );
 		$content = $result['parse']['text']['*'] ?? false;
 		$categorieshtml = $result['parse']['categorieshtml']['*'] ?? false;
+		$sections = isset( $result['parse']['hidetoc'] ) ? [] : $result['parse']['sections'];
 		$displaytitle = $result['parse']['displaytitle'] ?? false;
 		$subtitle = $result['parse']['subtitle'] ?? false;
 		$modules = array_merge(
@@ -204,6 +205,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		return [
 			'content' => $content,
 			'categorieshtml' => $categorieshtml,
+			'sections' => $sections,
 			'displayTitleHtml' => $displaytitle,
 			'contentSub' => $subtitle,
 			'modules' => $modules,

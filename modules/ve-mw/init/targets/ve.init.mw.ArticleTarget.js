@@ -600,6 +600,7 @@ ve.init.mw.ArticleTarget.prototype.loadFail = function () {
  * @param {Object} lastModified Object containing user-formatted date
  *  and time strings, or undefined if we made no change.
  * @param {string} contentSub HTML to show as the content subtitle
+ * @param {Array} sections Section data to display in the TOC
  */
 ve.init.mw.ArticleTarget.prototype.replacePageContent = null;
 
@@ -617,6 +618,7 @@ ve.init.mw.ArticleTarget.prototype.replacePageContent = null;
  * @param {string} data.contentSub HTML to show as the content subtitle
  * @param {Array} data.modules The modules to be loaded on the page
  * @param {Object} data.jsconfigvars The mw.config values needed on the page
+ * @param {Array} data.sections Section data to display in the TOC
  * @fires save
  */
 ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
@@ -691,7 +693,8 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 			data.categorieshtml,
 			data.displayTitleHtml,
 			data.lastModified,
-			data.contentSub
+			data.contentSub,
+			data.sections
 		);
 
 		// Tear down the target now that we're done saving
