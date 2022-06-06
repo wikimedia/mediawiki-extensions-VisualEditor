@@ -158,6 +158,7 @@
 	"visualeditor-dialog-template-insert": "Inserați un format",
 	"visualeditor-dialog-template-title": "Format",
 	"visualeditor-dialog-transclusion-absent-template": "Formatul „$1” nu există.",
+	"visualeditor-dialog-transclusion-template-title-nonexistent": "Acest format nu există.",
 	"visualeditor-dialog-transclusion-add-content": "Adăugare conținut",
 	"visualeditor-dialog-transclusion-add-param": "Adăugare mai multe informații",
 	"visualeditor-dialog-transclusion-add-param-help": "Dacă sunt cunoscute, introduceți nume de [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters parametri nedocumentați]. Luați în vedere că numai parametrii cunoscuți de format vor avea un efect. S-ar putea să găsiți informații despre parametrii existenți pe [[$1|pagina formatului]].",
