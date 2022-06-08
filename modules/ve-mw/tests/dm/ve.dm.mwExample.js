@@ -330,8 +330,7 @@ ve.dm.mwExample.MWInlineImage = {
 			mw: {},
 			type: 'none',
 			originalClasses: 'foo mw-valign-text-top',
-			unrecognizedClasses: [ 'foo' ],
-			tagName: 'span'
+			unrecognizedClasses: [ 'foo' ]
 		}
 	},
 	storeItems: {
@@ -363,8 +362,7 @@ ve.dm.mwExample.MWInlineImageWithWrapperClass = {
 			mw: {},
 			type: 'none',
 			originalClasses: 'foo mw-valign-text-top',
-			unrecognizedClasses: [ 'foo' ],
-			tagName: 'span'
+			unrecognizedClasses: [ 'foo' ]
 		}
 	}
 };
@@ -883,7 +881,6 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					tagName: 'span',
 					isError: false
 				}
 			},
@@ -930,7 +927,6 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: null,
-					tagName: 'span',
 					isError: true
 				}
 			},
@@ -977,7 +973,6 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					tagName: 'span',
 					isError: false
 				}
 			},
@@ -1024,7 +1019,6 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					tagName: 'span',
 					isError: false
 				}
 			},
@@ -1071,7 +1065,6 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					tagName: 'span',
 					isError: false
 				}
 			},
@@ -1107,7 +1100,6 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					tagName: 'span',
 					isError: false
 				}
 			},
@@ -2079,7 +2071,6 @@ ve.dm.mwExample.domToDataCases = {
 					imgWrapperClassAttr: null,
 					mediaClass: 'Image',
 					src: null,
-					tagName: 'span',
 					width: 200,
 					height: null,
 					valign: 'default',
