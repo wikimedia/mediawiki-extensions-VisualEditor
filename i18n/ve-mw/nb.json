@@ -67,7 +67,7 @@
 	"visualeditor-dialog-media-info-dateformat": "$2 $1 $3",
 	"visualeditor-dialog-media-info-imagedescription": "Full beskrivelse",
 	"visualeditor-dialog-media-info-licenseshortname": "Lisens",
-	"visualeditor-dialog-media-info-meta-artist": "Kunstner: $1",
+	"visualeditor-dialog-media-info-meta-artist": "Opphavsperson: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Mer informasjon",
 	"visualeditor-dialog-media-info-readmore": "Les mer",
 	"visualeditor-dialog-media-info-uploaded": "Lastet opp: $1",
