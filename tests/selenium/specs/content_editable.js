@@ -8,7 +8,7 @@ describe( 'Content Editable', function () {
 
 	let name, content;
 
-	it( 'should load when an url is opened', async function () {
+	it( 'should load when an url is opened @daily', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();
