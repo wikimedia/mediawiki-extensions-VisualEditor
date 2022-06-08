@@ -6,6 +6,7 @@ class EditPage extends Page {
 	get content() { return $( '#content' ); }
 	get edited() { return $( '*=Your edit was saved' ); }
 	get notices() { return $( '.ve-ui-mwNoticesPopupTool-items' ); }
+	get notification() { return $( 'div.mw-notification-content span.oo-ui-labelElement-label' ); }
 	get savePage() { return $( '.ve-ui-overlay-global .oo-ui-processDialog-actions-primary' ); }
 	get savePageDots() { return $( '.ve-ui-toolbar-saveButton' ); }
 	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
