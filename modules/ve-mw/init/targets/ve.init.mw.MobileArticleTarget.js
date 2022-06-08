@@ -402,7 +402,7 @@ ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, displayTitle, lastModified /* , contentSub */
+	html, categoriesHtml, displayTitle, lastModified, contentSub
 ) {
 	var $content = $( $.parseHTML( html ) );
 
@@ -430,7 +430,9 @@ ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function (
 		$( '#catlinks' ).replaceWith( $categories );
 	}
 
-	// TODO: Consider contentSub
+	// eslint-disable-next-line no-jquery/no-global-selector, no-jquery/no-html
+	$( '.minerva__subtitle' ).html( contentSub );
+
 	this.setRealRedirectInterface();
 };
 
