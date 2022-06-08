@@ -410,5 +410,3 @@ trait ApiParsoidTrait {
 	 */
 	abstract public function getRequest();
 }
-
-class_alias( ApiParsoidTrait::class, 'ApiParsoidTrait' );
