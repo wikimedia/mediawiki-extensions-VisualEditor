@@ -1,0 +1,25 @@
+/*!
+ * VisualEditor MediaWiki DesktopArticleTarget Vector-2022 skin init styles.
+ *
+ * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+// Local copy of Vector variables.
+@padding-top-content: 0.5em;
+@padding-horizontal-content: 0.5em;
+// End local copy of Vector variables.
+
+@padding-top-toolbar: -@padding-top-content/0.875;
+@padding-horizontal-toolbar: -@padding-horizontal-content/0.875;
+
+.ve-init-mw-desktopArticleTarget-toolbar,
+.ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
+
+	// New Vector with $wgVectorTitleAboveTabs = false
+	/* stylelint-disable-next-line selector-max-id */
+	#content.ve-init-mw-desktopArticleTarget-targetContainer & {
+		font-size: 0.875em;
+		margin: @padding-top-toolbar @padding-horizontal-toolbar -@padding-top-toolbar @padding-horizontal-toolbar;
+	}
+}

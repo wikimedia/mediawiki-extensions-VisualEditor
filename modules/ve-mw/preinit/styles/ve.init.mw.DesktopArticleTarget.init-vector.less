@@ -5,38 +5,16 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-// Local copy of Vector variables.
-// Can be removed after I87c5502530cd0039b090fbd3cfa7615d6cd64b36 is merged.
-@padding-top-content: 0.5em;
-@padding-horizontal-content: 0.5em;
-// End local copy of Vector variables.
-
-@padding-top-toolbar: -@padding-top-content/0.875;
-@padding-horizontal-toolbar: -@padding-horizontal-content/0.875;
-
 .ve-init-mw-desktopArticleTarget-toolbar,
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
 	font-size: 0.875em;
+	/* 1/0.875 */
+	margin: -1.14em -1.14em 1.14em -1.14em;
 
-	// New Vector with $wgVectorTitleAboveTabs = false
-	margin: @padding-top-toolbar @padding-horizontal-toolbar -@padding-top-toolbar @padding-horizontal-toolbar;
-
-	// New Vector with $wgVectorTitleAboveTabs = true
-	/* stylelint-disable-next-line selector-class-pattern */
-	.vector-article-toolbar ~ .vector-body & {
-		margin: 0;
-	}
-
-	// Legacy Vector
-	.skin-vector-legacy & {
-		/* 1/0.875 */
-		margin: -1.14em -1.14em 1.14em -1.14em;
-
-		/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
-		@media screen and ( min-width: 982px ) {
-			/* 1.25/0.875, 1.5/0.875 */
-			margin: -1.43em -1.71em 1.43em -1.71em;
-		}
+	/* High-definition-specific styles (because Vector adds 1em to the leftNav if width is 982px+ */
+	@media screen and ( min-width: 982px ) {
+		/* 1.25/0.875, 1.5/0.875 */
+		margin: -1.43em -1.71em 1.43em -1.71em;
 	}
 }
 
