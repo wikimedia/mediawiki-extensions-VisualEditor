@@ -88,8 +88,6 @@
 	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|مورت|مورتاں}}",
 	"visualeditor-mwgallerydialog-card-images": "تصویراں",
 	"visualeditor-mwgallerydialog-show-filename-field-label": "فائل دا ناں دکھاؤ",
-	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "بولی کوڈ",
-	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "بولی",
 	"visualeditor-rebase-client-import-name": "صفحہ عنوان",
 	"visualeditor-savedialog-review-visual": "ویژوئل"
 }
