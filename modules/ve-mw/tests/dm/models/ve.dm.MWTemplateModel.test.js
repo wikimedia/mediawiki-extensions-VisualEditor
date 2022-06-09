@@ -471,6 +471,20 @@
 		} )
 	);
 
+	QUnit.test( 'same documented parameter used with different aliases', ( assert ) => {
+		const transclusion = new ve.dm.MWTransclusionModel();
+		const template = ve.dm.MWTemplateModel.newFromData( transclusion, {
+			target: {},
+			params: { d: {}, c: {}, b: {}, a: {} }
+		} );
+		template.getSpec().setTemplateData( {
+			params: { a: { aliases: [ 'b', 'c' ] }, e: {} }
+		} );
+
+		assert.deepEqual( template.getOrderedParameterNames(), [ 'a', 'c', 'b', 'd' ] );
+		assert.deepEqual( template.getAllParametersOrdered(), [ 'a', 'c', 'b', 'e', 'd' ] );
+	} );
+
 	[
 		[ 'a', 'b', 'Template:A', 'prefers .wt when it is a valid title' ],
 		[ '{{a}}', 'subst:b', 'subst:b', 'falls back to unmodified getTitle' ],
