@@ -25,5 +25,13 @@ class EditPage extends Page {
 		} );
 	}
 
+	saveComplete() {
+		return browser.executeAsync( function ( done ) {
+			ve.init.target.on( 'save', function () {
+				done();
+			} );
+		} );
+	}
+
 }
 module.exports = new EditPage();

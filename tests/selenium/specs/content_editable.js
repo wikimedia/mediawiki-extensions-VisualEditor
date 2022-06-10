@@ -54,7 +54,7 @@ describe( 'Content Editable', function () {
 		await EditPage.savePage.waitForClickable();
 		await EditPage.savePage.click();
 
-		await EditPage.notification.waitForDisplayed();
+		await EditPage.saveComplete();
 		assert.strictEqual( await EditPage.notification.getText(), 'The page has been created.' );
 	} );
 
