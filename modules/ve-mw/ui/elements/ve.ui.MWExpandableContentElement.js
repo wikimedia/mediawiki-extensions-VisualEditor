@@ -45,7 +45,7 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
  * @return {number}
  */
 ve.ui.MWExpandableContentElement.prototype.getTextHeight = function () {
-	return this.$content.children( 'p' ).first().prop( 'scrollHeight' );
+	return this.$content.prop( 'scrollHeight' );
 };
 
 /**
