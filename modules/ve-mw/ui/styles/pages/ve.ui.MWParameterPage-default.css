@@ -65,17 +65,10 @@
 	color: #54595d;
 }
 
-.ve-ui-mwParameterPage-infoButton,
 .ve-ui-mwParameterPage-removeButton {
 	display: none;
 }
 
-.ve-ui-mwParameterPage-infoButton .oo-ui-popupWidget {
-	z-index: 100;
-	text-align: left;
-}
-
-.oo-ui-pageLayout-active .ve-ui-mwParameterPage-infoButton,
 .oo-ui-pageLayout-active .ve-ui-mwParameterPage-removeButton {
 	display: inline-block;
 }

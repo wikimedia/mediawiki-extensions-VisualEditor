@@ -42,7 +42,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.$field = $( '<div>' );
 
 	// Temporary feature flags
-	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
 	this.useNewSidebar = veConfig.transclusionDialogNewSidebar;
 
 	// Construct the field docs for the template description
@@ -110,9 +109,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		$( '<p>' )
 			.addClass( 've-ui-mwParameterPage-doc-example' )
 			.text( ve.msg(
-				this.useInlineDescriptions ?
-					'visualeditor-dialog-transclusion-param-example-long' :
-					'visualeditor-dialog-transclusion-param-example',
+				'visualeditor-dialog-transclusion-param-example-long',
 				this.exampleValue
 			) )
 			.appendTo( $doc );
@@ -129,30 +126,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 		} )
 			.connect( this, { click: 'onRawFallbackButtonClick' } );
 		this.rawFallbackButton.$element.appendTo( $actions );
-	}
-
-	if ( !this.useInlineDescriptions ) {
-		if ( !$doc.children().length ) {
-			this.infoButton = new OO.ui.ButtonWidget( {
-				disabled: true,
-				title: ve.msg( 'visualeditor-dialog-transclusion-param-info-missing' ),
-				framed: false,
-				icon: 'info',
-				classes: [ 've-ui-mwParameterPage-infoButton' ]
-			} );
-		} else {
-			this.infoButton = new OO.ui.PopupButtonWidget( {
-				$overlay: config.$overlay,
-				popup: {
-					$content: $doc
-				},
-				title: ve.msg( 'visualeditor-dialog-transclusion-param-info' ),
-				framed: false,
-				icon: 'info',
-				classes: [ 've-ui-mwParameterPage-infoButton' ]
-			} );
-		}
-		this.infoButton.$element.appendTo( $actions );
 	}
 
 	if ( !this.parameter.isRequired() && !config.readOnly && !this.useNewSidebar ) {
@@ -196,7 +169,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 			.appendTo( this.$element );
 	}
 
-	if ( this.useInlineDescriptions && $doc.children().length ) {
+	if ( $doc.children().length ) {
 		this.$field.addClass( 've-ui-mwParameterPage-inlineDescription' );
 		this.collapsibleDoc = new ve.ui.MWExpandableContentElement( {
 			classes: [ 've-ui-mwParameterPage-inlineDescription' ],
@@ -250,13 +223,6 @@ ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
 		valueInputConfig.placeholder = ve.msg(
 			'visualeditor-dialog-transclusion-param-default',
 			this.defaultValue
-		);
-	} else if ( this.exampleValue && !this.useInlineDescriptions ) {
-		valueInputConfig.placeholder = ve.msg(
-			this.useInlineDescriptions ?
-				'visualeditor-dialog-transclusion-param-example-long' :
-				'visualeditor-dialog-transclusion-param-example',
-			this.exampleValue
 		);
 	}
 

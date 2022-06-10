@@ -1119,8 +1119,6 @@ class Hooks {
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
-			'transclusionDialogInlineDescriptions' =>
-				$veConfig->get( 'VisualEditorTransclusionDialogInlineDescriptions' ),
 			'transclusionDialogNewSidebar' => $veConfig->get( 'VisualEditorTransclusionDialogNewSidebar' ),
 			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' ),
 		];

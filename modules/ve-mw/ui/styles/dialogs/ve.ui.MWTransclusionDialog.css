@@ -142,20 +142,20 @@
 	transition: all 250ms ease-in-out;
 }
 
-.ve-ui-mwTransclusionDialog-bigger .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
+.ve-ui-mwTemplateDialog .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
 	width: 240px;
 }
 
-.ve-ui-mwTransclusionDialog-bigger .oo-ui-menuLayout > .oo-ui-menuLayout-content {
+.ve-ui-mwTemplateDialog .oo-ui-menuLayout > .oo-ui-menuLayout-content {
 	left: 240px;
 }
 
-.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
+.ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
 	border-right: 0;
 	width: 100%;
 }
 
-.ve-ui-mwTransclusionDialog-bigger .ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-content {
+.ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-content {
 	display: none;
 }
 

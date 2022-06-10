@@ -174,10 +174,6 @@
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		},
-		"VisualEditorTransclusionDialogInlineDescriptions": {
-			"description": "Temporary flag to enable inline parameter descriptions in the transclusion dialog.",
-			"value": false
-		},
 		"VisualEditorTransclusionDialogNewSidebar": {
 			"description": "Temporary flag to enable the new sidebar in the transclusion dialog.",
 			"value": false
@@ -2243,10 +2239,7 @@
 				"visualeditor-dialog-transclusion-no-template-parameters",
 				"visualeditor-dialog-transclusion-options",
 				"visualeditor-dialog-transclusion-param-default",
-				"visualeditor-dialog-transclusion-param-example",
 				"visualeditor-dialog-transclusion-param-example-long",
-				"visualeditor-dialog-transclusion-param-info",
-				"visualeditor-dialog-transclusion-param-info-missing",
 				"visualeditor-dialog-transclusion-param-selection-aria-description",
 				"visualeditor-dialog-transclusion-param-selection-aria-label",
 				"visualeditor-dialog-transclusion-param-undocumented",
