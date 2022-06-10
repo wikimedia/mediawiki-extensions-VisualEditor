@@ -1122,7 +1122,6 @@ class Hooks {
 			'transclusionDialogSuggestedValues' => $veConfig->get( 'VisualEditorTransclusionDialogSuggestedValues' ),
 			'transclusionDialogInlineDescriptions' =>
 				$veConfig->get( 'VisualEditorTransclusionDialogInlineDescriptions' ),
-			'transclusionDialogBackButton' => $veConfig->get( 'VisualEditorTransclusionDialogBackButton' ),
 			'transclusionDialogNewSidebar' => $veConfig->get( 'VisualEditorTransclusionDialogNewSidebar' ),
 			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' )
 				&& $veConfig->get( 'VisualEditorTemplateSearchImprovements' ),

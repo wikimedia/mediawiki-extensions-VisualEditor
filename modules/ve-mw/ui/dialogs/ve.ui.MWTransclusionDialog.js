@@ -30,7 +30,6 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 
 	// Temporary feature flags
 	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
-	this.useBackButton = veConfig.transclusionDialogBackButton;
 	this.useSearchImprovements = veConfig.templateSearchImprovements;
 	this.useNewSidebar = veConfig.transclusionDialogNewSidebar;
 
@@ -543,15 +542,11 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 		saveButton.setLabel( ve.msg( 'visualeditor-dialog-transclusion-action-save' ) );
 	}
 
-	if ( this.useBackButton ) {
-		var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
-			canGoBack = this.getMode() === 'insert' && !this.transclusionModel.isEmpty();
+	var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
+		canGoBack = this.getMode() === 'insert' && !this.transclusionModel.isEmpty();
 
-		closeButton.toggle( !canGoBack );
-		backButton.toggle( canGoBack );
-	} else {
-		backButton.toggle( false );
-	}
+	closeButton.toggle( !canGoBack );
+	backButton.toggle( canGoBack );
 };
 
 /**
