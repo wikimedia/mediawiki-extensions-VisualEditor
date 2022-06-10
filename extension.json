@@ -174,10 +174,6 @@
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		},
-		"VisualEditorTransclusionDialogSuggestedValues": {
-			"description": "Temporary flag to enable suggested values in the transclusion dialog.",
-			"value": false
-		},
 		"VisualEditorTransclusionDialogInlineDescriptions": {
 			"description": "Temporary flag to enable inline parameter descriptions in the transclusion dialog.",
 			"value": false

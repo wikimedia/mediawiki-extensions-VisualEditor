@@ -1119,7 +1119,6 @@ class Hooks {
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
-			'transclusionDialogSuggestedValues' => $veConfig->get( 'VisualEditorTransclusionDialogSuggestedValues' ),
 			'transclusionDialogInlineDescriptions' =>
 				$veConfig->get( 'VisualEditorTransclusionDialogInlineDescriptions' ),
 			'transclusionDialogBackButton' => $veConfig->get( 'VisualEditorTransclusionDialogBackButton' ),

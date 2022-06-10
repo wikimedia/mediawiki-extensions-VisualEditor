@@ -43,7 +43,6 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 
 	// Temporary feature flags
 	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
-	this.useSuggestedValues = veConfig.transclusionDialogSuggestedValues;
 	this.useNewSidebar = veConfig.transclusionDialogNewSidebar;
 
 	// Construct the field docs for the template description
@@ -332,7 +331,6 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	) {
 		return ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget( valueInputConfig );
 	} else if (
-		this.useSuggestedValues &&
 		this.parameter.getSuggestedValues().length &&
 		this.isSuggestedValueType( type )
 	) {
