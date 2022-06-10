@@ -68,24 +68,21 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		items: [ addTemplateActionFieldLayout ]
 	};
 
-	// Temporary switch for verbose template search.
-	if ( mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) {
-		var dialogTitle = this.placeholder.getTransclusion().isSingleTemplate() ?
-			'visualeditor-dialog-transclusion-template-search' :
-			'visualeditor-dialog-transclusion-add-template';
+	var dialogTitle = this.placeholder.getTransclusion().isSingleTemplate() ?
+		'visualeditor-dialog-transclusion-template-search' :
+		'visualeditor-dialog-transclusion-add-template';
 
-		// TODO: Remove `mw.storage.remove` after a few months, let's say December 2022.
-		mw.storage.remove( 'mwe-visualeditor-hide-visualeditor-dialog-transclusion-feedback-message' );
+	// TODO: Remove `mw.storage.remove` after a few months, let's say December 2022.
+	mw.storage.remove( 'mwe-visualeditor-hide-visualeditor-dialog-transclusion-feedback-message' );
 
-		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
-			// The following messages are used here:
-			// * visualeditor-dialog-transclusion-template-search
-			// * visualeditor-dialog-transclusion-add-template
-			label: ve.msg( dialogTitle ),
-			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
-			helpInline: true
-		} );
-	}
+	addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
+		// The following messages are used here:
+		// * visualeditor-dialog-transclusion-template-search
+		// * visualeditor-dialog-transclusion-add-template
+		label: ve.msg( dialogTitle ),
+		help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
+		helpInline: true
+	} );
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
 
 	// Initialization
@@ -120,8 +117,7 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
  * @inheritdoc
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.setupOutlineItem = function () {
-	var dialogTitle = ( this.placeholder.getTransclusion().isSingleTemplate() &&
-		mw.config.get( 'wgVisualEditorConfig' ).templateSearchImprovements ) ?
+	var dialogTitle = this.placeholder.getTransclusion().isSingleTemplate() ?
 		'visualeditor-dialog-transclusion-template-search' :
 		'visualeditor-dialog-transclusion-add-template';
 

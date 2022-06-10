@@ -30,14 +30,10 @@ ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
 
 	// Temporary feature flags
 	this.useInlineDescriptions = veConfig.transclusionDialogInlineDescriptions;
-	this.useSearchImprovements = veConfig.templateSearchImprovements;
 	this.useNewSidebar = veConfig.transclusionDialogNewSidebar;
 
 	if ( this.useInlineDescriptions ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-bigger' );
-	}
-	if ( this.useSearchImprovements ) {
-		this.$element.addClass( 've-ui-mwTransclusionDialog-enhancedSearch' );
 	}
 	if ( this.useNewSidebar ) {
 		this.$element.addClass( 've-ui-mwTransclusionDialog-newSidebar' );
