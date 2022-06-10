@@ -10,6 +10,7 @@ use Wikimedia\ScopedCallback;
 
 /**
  * @group medium
+ * @group Database
  *
  * @covers \MediaWiki\Extension\VisualEditor\ApiVisualEditor
  */
@@ -17,6 +18,9 @@ class ApiVisualEditorTest extends ApiTestCase {
 
 	/** @var ScopedCallback|null */
 	private $scopedCallback;
+
+	/** @var @inheritDoc */
+	protected $tablesUsed = [ 'page', 'revision' ];
 
 	protected function setUp(): void {
 		parent::setUp();
