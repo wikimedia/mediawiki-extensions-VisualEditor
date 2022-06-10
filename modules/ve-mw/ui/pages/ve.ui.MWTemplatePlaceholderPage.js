@@ -19,7 +19,6 @@
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
 	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
-	var page = this;
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -75,29 +74,13 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 			'visualeditor-dialog-transclusion-template-search' :
 			'visualeditor-dialog-transclusion-add-template';
 
-		// Temporary feedback message when templateSearchImprovements is true T284560
-		// TODO: remove when templateSearchImprovements are out of beta
-		var key = 'mwe-visualeditor-hide-visualeditor-dialog-transclusion-feedback-message';
-		var feedbackMessage = new OO.ui.MessageWidget( {
-			label: $( ve.htmlMsg( 'visualeditor-dialog-transclusion-feedback-message' ) ),
-			showClose: true
-		} )
-			.on( 'close', function () {
-				mw.storage.set( key, '1' );
-				page.focus();
-			} )
-			.toggle( !mw.storage.get( key ) );
-		ve.targetLinksToNewWindow( feedbackMessage.$label[ 0 ] );
-
 		addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
 			// The following messages are used here:
 			// * visualeditor-dialog-transclusion-template-search
 			// * visualeditor-dialog-transclusion-add-template
 			label: ve.msg( dialogTitle ),
 			help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
-			helpInline: true,
-			// TODO: remove this line when templateSearchImprovements are out of beta
-			items: [].concat( [ feedbackMessage ], addTemplateFieldsetConfig.items )
+			helpInline: true
 		} );
 	}
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
