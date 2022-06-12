@@ -424,16 +424,37 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 /**
  * Intialise autosave, recovering changes if applicable
  *
- * @param {boolean} [suppressNotification=false] Don't notify the user if changes are recovered
+ * @param {Object} [config] Configuration options
+ * @cfg {boolean} [suppressNotification=false] Don't notify the user if changes are recovered
+ * @cfg {string} [docId] Document ID for storage grouping
+ * @cfg {ve.init.SafeStorage} [storage] Storage interface
  */
-ve.init.mw.Target.prototype.initAutosave = function ( suppressNotification ) {
-	var target = this,
-		surfaceModel = this.getSurface().getModel();
+ve.init.mw.Target.prototype.initAutosave = function ( config ) {
+	var target = this;
+
+	// Old function signature
+	// TODO: Remove after fixed downstream
+	if ( typeof config === 'boolean' ) {
+		config = { suppressNotification: config };
+	} else {
+		config = config || {};
+	}
+
+	var surfaceModel = this.getSurface().getModel();
+
+	if ( config.docId ) {
+		surfaceModel.setAutosaveDocId( config.docId );
+	}
+
+	if ( config.storage ) {
+		surfaceModel.setStorage( config.storage );
+	}
+
 	if ( this.recovered ) {
 		// Restore auto-saved transactions if document state was recovered
 		try {
 			surfaceModel.restoreChanges();
-			if ( !suppressNotification ) {
+			if ( !config.suppressNotification ) {
 				ve.init.platform.notify(
 					ve.msg( 'visualeditor-autosave-recovered-text' ),
 					ve.msg( 'visualeditor-autosave-recovered-title' )
