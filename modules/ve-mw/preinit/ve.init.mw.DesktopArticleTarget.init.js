@@ -323,7 +323,7 @@
 			// * vector-view-create
 			// * messages for other skins
 			if ( !mw.message( tabMsgKey ).exists() ) {
-				tabMsgKey = key;
+				tabMsgKey = 'skin-view-' + key;
 			}
 		}
 		return mw.msg( tabMsgKey );

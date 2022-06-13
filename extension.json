@@ -414,11 +414,6 @@
 			"messages": [
 				"accesskey-ca-editsource",
 				"accesskey-ca-ve-edit",
-				"create",
-				"create-local",
-				"edit",
-				"edit-local",
-				"editsection",
 				"pipe-separator",
 				"postedit-confirmation-created",
 				"postedit-confirmation-published",
@@ -427,8 +422,7 @@
 				"tooltip-ca-createsource",
 				"tooltip-ca-edit",
 				"tooltip-ca-editsource",
-				"tooltip-ca-ve-edit",
-				"visualeditor-ca-editsource-section"
+				"tooltip-ca-ve-edit"
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
