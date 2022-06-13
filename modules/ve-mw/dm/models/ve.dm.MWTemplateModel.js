@@ -69,8 +69,6 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
 /* Static Methods */
 
 /**
- * Create from data.
- *
  * Data is in the format provided by Parsoid.
  *
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion template is in
@@ -93,8 +91,6 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
 };
 
 /**
- * Create from name.
- *
  * Name is equivalent to what would be entered between double brackets, defaulting to the Template
  * namespace, using a leading colon to access other namespaces.
  *
@@ -256,8 +252,6 @@ ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 };
 
 /**
- * Get parameter from its ID.
- *
  * @private
  * @param {string} id Parameter ID
  * @return {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
@@ -273,8 +267,6 @@ ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
 };
 
 /**
- * Add a parameter to template.
- *
  * @param {ve.dm.MWParameterModel} param Parameter to add
  * @fires add
  * @fires change
