@@ -39,8 +39,7 @@ describe( 'Content Editable', function () {
 		await browser.reloadSession();
 	} );
 
-	// Skipped because of T309712: Dismiss 'Try Content Translation' popup
-	it.skip( 'should save an edit', async function () {
+	it( 'should save an edit', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();

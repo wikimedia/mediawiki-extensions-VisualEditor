@@ -14,7 +14,7 @@ class EditPage extends Page {
 	get veRootNode() { return $( '.ve-ce-rootNode[role="textbox"]' ); }
 
 	openForEditing( title ) {
-		super.openTitle( title, { veaction: 'edit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
+		super.openTitle( title, { veaction: 'edit', cxhidebetapopup: 1, hidewelcomedialog: 1, vehidebetadialog: 1 } );
 	}
 
 	activationComplete() {
