@@ -130,20 +130,6 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		.append( this.infoFieldset.$element );
 
 	if ( !config.isReadOnly ) {
-		if ( !veConfig.transclusionDialogBackButton &&
-			!veConfig.transclusionDialogNewSidebar
-		) {
-			var removeButton = new OO.ui.ButtonWidget( {
-				framed: false,
-				icon: 'trash',
-				title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-				flags: [ 'destructive' ],
-				classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
-			} )
-				.connect( this, { click: 'onRemoveButtonClick' } );
-			removeButton.$element.appendTo( this.$element );
-		}
-
 		if ( !veConfig.transclusionDialogNewSidebar ) {
 			// This button is only shown as a last resort when this …TemplatePage is neither followed by
 			// a …ParameterPage (i.e. the template doesn't have parameters) nor a
@@ -178,13 +164,6 @@ ve.ui.MWTemplatePage.prototype.setupOutlineItem = function () {
 		.setMovable( true )
 		.setRemovable( true )
 		.setLabel( this.spec.getLabel() );
-};
-
-/**
- * @private
- */
-ve.ui.MWTemplatePage.prototype.onRemoveButtonClick = function () {
-	this.template.remove();
 };
 
 ve.ui.MWTemplatePage.prototype.addPlaceholderParameter = function () {
