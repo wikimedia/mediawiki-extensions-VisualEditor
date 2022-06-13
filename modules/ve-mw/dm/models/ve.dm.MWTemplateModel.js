@@ -209,18 +209,30 @@ ve.dm.MWTemplateModel.prototype.getOriginalParameterName = function ( name ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	var spec = this.spec,
-		parameters = spec.getCanonicalParameterOrder();
+	var primaryName,
+		spec = this.spec,
+		usedAliases = {};
+
+	for ( var alias in this.params ) {
+		if ( spec.isParameterAlias( alias ) ) {
+			primaryName = spec.getPrimaryParameterName( alias );
+			if ( !usedAliases[ primaryName ] ) {
+				// Skip primary name when it's not used, otherwise move it to the front
+				usedAliases[ primaryName ] = primaryName in this.params ? [ primaryName ] : [];
+			}
+			// Append aliases in their original order (not documented order)
+			usedAliases[ primaryName ].push( alias );
+		}
+	}
+
+	var parameters = spec.getCanonicalParameterOrder();
 
 	// Restore aliases originally used in the wikitext. The spec doesn't know which alias was used.
-	for ( var name in this.params ) {
-		if ( spec.isParameterAlias( name ) ) {
-			var i = parameters.indexOf( spec.getPrimaryParameterName( name ) );
-			// Fails when a parameter appears multiple times (via aliases) in the wikitext
-			if ( i !== -1 ) {
-				parameters.splice( i, 1, name );
-			}
-		}
+	for ( primaryName in usedAliases ) {
+		var i = parameters.indexOf( primaryName );
+		// TODO: parameters.splice( i, 1, ...usedAliases[ primaryName ] ) when we can use ES6
+		parameters = parameters.slice( 0, i ).concat( usedAliases[ primaryName ],
+			parameters.slice( i + 1 ) );
 	}
 
 	// Restore the placeholder, if present. The spec doesn't keep track of placeholders.
