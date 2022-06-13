@@ -255,7 +255,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Cari templat",
 	"visualeditor-dialog-transclusion-template-search-help": "Temukan templat yang ingin Anda sisipkan dengan mencari kata kunci pengenal. Templat yang memiliki penjelasan cenderung bekerja dengan baik dengan penyunting ini (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu pengaturan bidang templat",
-	"visualeditor-dialog-transclusion-feedback-message": "Perbaikan terhadap hasil pencarian templat telah selesai dilakukan. Untuk informasi lebih lanjut atau saran, silakan kunjungi [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates halaman proyek ini].",
 	"visualeditor-dialog-transclusion-wikitext": "Teks wiki",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Tekan Spasi untuk memilih elemen teks wiki. Tekan Enter untuk memilih dan mengubah teks wiki.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Tekan Ctrl+Del untuk menghapus elemen teks wiki. Tekan Ctrl+Shift+Anak Panah untuk memindahkan elemen ke atas atau bawah.",

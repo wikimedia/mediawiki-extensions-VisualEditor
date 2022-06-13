@@ -214,7 +214,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Şablon axtarışı",
 	"visualeditor-dialog-transclusion-template-search-help": "Tanıdıcı açar söz axtararaq daxil etmək istədiyiniz şablonu tapın. İzahları olan şablonların bu redaktorla (VisualEditor) yaxşı işləmə ehtimalı daha yüksəkdir.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Şablon sahələrinin quraşdırma menyusu",
-	"visualeditor-dialog-transclusion-feedback-message": "Şablon axtarış nəticələrini yaxşılaşdırmaq üçün son işlər tamamlandı. Dəyişikliklər haqqında daha çox məlumat əldə etmək və ya rəy bildirmək üçün [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates layihənin səhifəsinə] get.",
 	"visualeditor-dialog-transclusion-wikitext": "Vikimətn",
 	"visualeditor-dialogbutton-media-tooltip": "Şəkillər və media",
 	"visualeditor-dialogbutton-meta-tooltip": "Səhifənin parametrləri",

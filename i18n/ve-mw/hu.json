@@ -215,7 +215,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Sablon keresés",
 	"visualeditor-dialog-transclusion-template-search-help": "Keresd meg a beszúrni kívánt sablont egy azonosító kulcsszó keresésével. A leírással rendelkező sablonok nagyobb valószínűséggel működnek jól ezzel a szerkesztővel (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Sablonmező-beállítási menü",
-	"visualeditor-dialog-transclusion-feedback-message": "A sablonkeresés nemrég óta fejlettebb algoritmust használ. További információkért, vagy ha visszajelzést akarsz hagyni, látogasd meg a  [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates projektlapot].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikiszöveg",
 	"visualeditor-dialogbutton-media-tooltip": "Képek és média",
 	"visualeditor-dialogbutton-meta-tooltip": "Oldalbeállítások",

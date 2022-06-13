@@ -231,7 +231,6 @@
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Modifica: $1",
 	"visualeditor-dialog-transclusion-template-search": "Ricerca template",
 	"visualeditor-dialog-transclusion-template-search-help": "Trova il template che vuoi inserire cercandolo con una parola chiave che lo identifichi. Con l'editor visuale è più probabile riuscire a individuare i template che abbiano una descrizione.",
-	"visualeditor-dialog-transclusion-feedback-message": "Recentemente sono stati completati degli aggiornamenti per migliorare i risultati della ricerca di template. Per saperne di più o lasciare un feedback andare sulla [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates pagina ufficiale del progetto].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitesto",
 	"visualeditor-dialogbutton-media-tooltip": "Immagini e file multimediali",
 	"visualeditor-dialogbutton-meta-tooltip": "Impostazioni pagina",

@@ -259,7 +259,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Wyszukiwanie szablonów",
 	"visualeditor-dialog-transclusion-template-search-help": "Znajdź szablon, który chcesz dodać, wyszukując słowo kluczowe. Szablony z opisami zazwyczaj działają lepiej w edytorze wizualnym.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menu ustawiania pól szablonu",
-	"visualeditor-dialog-transclusion-feedback-message": "Niedawno wprowadzono zmiany w celu ulepszenia wyników wyszukiwania szablonów. Aby dowiedzieć się więcej o zmianach lub zostawić komentarz, możesz [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates przejść na stronę projektu].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikikod",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Wciśnij spację, aby wybrać fragment wikitekstu. Wciśnij enter, aby wybrać i edytować wikitekst.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Wciśnij ctrl+del, aby usunąć fragment wikitekstu. Wciśnij ctrl+shift+strzałki, aby przesunąć go w górę lub w dół.",

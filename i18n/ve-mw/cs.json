@@ -239,7 +239,6 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Obsah šablony",
 	"visualeditor-dialog-transclusion-template-search": "Hledání šablon",
 	"visualeditor-dialog-transclusion-template-search-help": "Vyhledejte šablonu, kterou chcete vložit, hledáním identifikačního klíčového slova. Šablony, které mají popisy, pravděpodobně budou ve vizuálním editoru fungovat lépe.",
-	"visualeditor-dialog-transclusion-feedback-message": "Nedávno byla dokončena práce na vylepšení výsledků vyhledávání šablon. Pokud se chcete o změnách dozvědět více nebo zanechat zpětnou vazbu, přejděte na [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates stránku projektu].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Stisknutím mezerníku vyberte prvek wikitextu. Stisknutím klávesy enter vyberte a upravte wikitext.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Stisknutím klávesové zkratky Ctrl + Del odstraníte prvek wikitextu. Stisknutím kláves Ctrl + Shift + šipka přesunete prvek nahoru nebo dolů.",

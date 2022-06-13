@@ -239,7 +239,6 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "محتوى القالب",
 	"visualeditor-dialog-transclusion-template-search": "البحث عن قالب",
 	"visualeditor-dialog-transclusion-template-search-help": "جِد القالب الذي تودّ إضافته بالبحث عبر كلماتٍ مفتاحيّة. من المرجح أن تعمل القوالب التي لها  وصوف بشكلٍ جيّدٍ مع هذا المحرر (المحرر المرئي).",
-	"visualeditor-dialog-transclusion-feedback-message": "اكتمل العمل الأخير على تحسين نتائج البحث عن القوالب. لمعرفة المزيد حول التغييرات أو لترك ملاحظاتك، فضلًا توجه [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates لصفحة المشروع].",
 	"visualeditor-dialogbutton-media-tooltip": "الصور والوسائط",
 	"visualeditor-dialogbutton-meta-tooltip": "إعدادات الصفحة",
 	"visualeditor-dialogbutton-template-tooltip": "قالب",

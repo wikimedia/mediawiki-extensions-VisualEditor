@@ -238,7 +238,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Malsøk",
 	"visualeditor-dialog-transclusion-template-search-help": "Finn malen du ønsker å sette inn ved å søke etter nøkkelord. Maler som har beskrivelser virker sannsynligvis bedre med denne redigeringsmetoden (visuell redigering).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Meny for oppsett av malfelt",
-	"visualeditor-dialog-transclusion-feedback-message": "Nylig arbeid har blitt gjort for å forbedre malsøkeresultatene. For å lære mer om endringene eller gi tilbakemelding, gå til [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates prosjektsiden].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitekst",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Trykk mellomrom for å velge wikitekstelementet. Trykk enter for å velge og redigere wikiteksten.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Trykk Ctrl+Del for å slette wikitekstelementet. Trykk Ctrl+Shift+piltast for å flytte elementet opp eller ned.",

@@ -235,7 +235,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Пребарување на предлошки",
 	"visualeditor-dialog-transclusion-template-search-help": "Најдете ја предлошката што сакате да ја вметнете пребарувајќи ја според клучен збор. Прелдошките кои имаат описи е поверојатно да работат добро со нагледниот уредник.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Мени за поставки на предложните полиња",
-	"visualeditor-dialog-transclusion-feedback-message": "Неодамна извршивме подобрувања во пронаоѓањето на предлошки. За да дознаете повеќе за промените или да дадете свое мислење, појдете на [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates проектната страница].",
 	"visualeditor-dialog-transclusion-wikitext": "Викитекст",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Стиснете на копчето за белина за да изберере елемент од викитекстот. Стиснете Стиснете на Enter за да изберете и уредите викитекст.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Стиснете Ctrl+Del за да избришете елемент од викитекстот. Стиснете Ctrl+Shift+Стрелки за да го поместите елементот нагоре или надолу.",

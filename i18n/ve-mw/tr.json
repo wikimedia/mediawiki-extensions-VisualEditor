@@ -266,7 +266,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Şablon arama",
 	"visualeditor-dialog-transclusion-template-search-help": "Tanımlayıcı bir anahtar kelime arayarak eklemek istediğiniz şablonu bulun. Açıklamaları olan şablonların görsel düzenleyiciyle iyi çalışması daha olasıdır.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Şablon alanları kurulum menüsü",
-	"visualeditor-dialog-transclusion-feedback-message": "Şablon arama sonuçlarını geliştirmek amacıyla yakın zamanda bir çalışma tamamlandı. Değişiklikler hakkında daha fazla bilgi edinmek ve geri dönüş bırakmak için [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates proje sayfasına] gidin.",
 	"visualeditor-dialog-transclusion-wikitext": "Vikimetin",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Vikimetin öğesini seçmek için Space tuşuna basın. Vikimetni seçmek ve düzenlemek için Enter'a basın.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Vikimetin öğesini silmek için Ctrl+Del tuşlarına basın. Öğeyi yukarı veya aşağı taşımak için Ctrl+Shift+Ok tuşlarına basın.",

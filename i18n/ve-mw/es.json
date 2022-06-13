@@ -262,7 +262,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Búsqueda de plantillas",
 	"visualeditor-dialog-transclusion-template-search-help": "Buscar la plantilla que quiere añadir por buscar una palabra clave de identificar. Plantillas que tiene las descripciones son más probablemente para trabajar bien con el editor visual.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Menú de la configuración de los campos de plantilla",
-	"visualeditor-dialog-transclusion-feedback-message": "El trabajo reciente completado mejoró resultados de búsqueda de la plantilla. Para aprender más sobre los cambios o dar comentario, va al [//meta.wikimedia.org/wiki/special:MyLanguage/WMDE_los_deseos Técnicos/que Encuentran_y_insertando_la página de proyecto de plantillas].",
 	"visualeditor-dialog-transclusion-wikitext": "Código",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Presione la barra espaciadora para seleccionar el elemento de wikitexto. Presione Entrar para seleccionar y editar el wikitexto.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Presione Ctrl+Del para eliminar el elemento de wikitexto. Presione Ctrl+Shift+Arrows para mover el elemento hacia arriba o hacia abajo.",

@@ -178,7 +178,6 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "განაგრძე ამის მიუხედავად",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "მოთხოვნილი {{PLURAL:$1|პარამეტრი|პარამეტრი}} დაკარგულია",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "დარწმუნებული ხართ, რომ „$1“ {{PLURAL:$2|პარამეტრის|პარამეტრის}}  შევსების გარეშე გსურთ გაგრძელება?",
-	"visualeditor-dialog-transclusion-feedback-message": "ბოლო სამუშაოები თარგის ძიების შედეგების გასაუჯობესებლად ჩატარდა. ცვლილებების შესახებ მეტის გასაგებად ან უკუკავშირის დასატოვებლად, გადადით [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates პროექტის გვერდზე].",
 	"visualeditor-dialogbutton-media-tooltip": "სურათები და მედია",
 	"visualeditor-dialogbutton-meta-tooltip": "გვერდის პარამეტრები",
 	"visualeditor-dialogbutton-template-tooltip": "თარგი",

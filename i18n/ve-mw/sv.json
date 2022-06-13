@@ -254,7 +254,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Mallsökning",
 	"visualeditor-dialog-transclusion-template-search-help": "Hitta mallen du vill infoga genom att söka efter ett identifierande nyckelord. Mallar som har beskrivningar är mer benägna att fungera med den visuella redigeraren.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Inställningsmeny för mallfält",
-	"visualeditor-dialog-transclusion-feedback-message": "Det senaste arbetet för att förbättra mallens sökresultat har slutförts. Om du vill veta mer om ändringarna eller lämna feedback, gå till [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates projektets sida].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Tryck på mellanslag för att markera wikitext-elementet. Tryck på Enter för att markera och redigera wikitexten.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Tryck på Ctrl+Del för att radera wikitext-elementet. Tryck på Ctrl+Shift+Piltangenter för att flytta elementet uppåt eller nedåt.",

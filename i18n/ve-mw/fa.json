@@ -262,7 +262,6 @@
 	"visualeditor-dialog-transclusion-template-search": "جستجو برای الگو",
 	"visualeditor-dialog-transclusion-template-search-help": "الگویی که می‌خواهید را با جستجوی یک کلیدواژهٔ شناسایی بیابید. الگوهایی که دارای توصیف هستند، احتمالاً با ویرایشگر دیداری بهتر کار خواهند کرد.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "منوی تنظیم فیلدهای الگو",
-	"visualeditor-dialog-transclusion-feedback-message": "تلاش‌های اخیر برای بهبود نتایج جستجو برای الگو کامل شده‌است. برای کسب اطلاعات بیشتر پیرامون تغییرات، یا ارسال بازخورد، به [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates صفحهٔ پروژه] مراجعه کنید.",
 	"visualeditor-dialog-transclusion-wikitext": "ویکی‌متن",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "برای انتخاب عنصر ویکی‌متن کلید Space را بفشارید. برای انتخاب و ویرایش ویکی‌متن دکمهٔ Enter را بفشارید.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "برای حذف عنصر ویکی‌متن کلیدهای Ctrl+Del را بفشارید. برای حرکت دادن عنصر به بالا یا پایین دکمه‌های Ctrl+Shift+Arrows را بفشارید.",

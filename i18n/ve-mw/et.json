@@ -218,7 +218,6 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Malli sisu",
 	"visualeditor-dialog-transclusion-template-search": "Malli otsimine",
 	"visualeditor-dialog-transclusion-template-search-help": "Leia mall, mida soovid lisada, otsides iseloomulikku märksõna. Suurema tõenäosusega töötavad visuaaltoimetis paremini mallid, millel on kirjeldus.",
-	"visualeditor-dialog-transclusion-feedback-message": "Hiljutise töö tulemusel on mallid nüüd paremini leitavad. Et saada muudatuste kohta lisateavet ja andmaks tagasisidet, mine [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates projekti leheküljele].",
 	"visualeditor-dialog-transclusion-wikitext": "Vikitekst",
 	"visualeditor-dialogbutton-media-tooltip": "Pildid ja muud failid",
 	"visualeditor-dialogbutton-meta-tooltip": "Lehekülje sätted",

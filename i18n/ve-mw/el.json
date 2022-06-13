@@ -245,7 +245,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Αναζήτηση προτύπου",
 	"visualeditor-dialog-transclusion-template-search-help": "Βρείτε το πρότυπο που θέλετε να εισαγάγετε αναζητώντας μια αναγνωριστική λέξη-κλειδί. Πρότυπα που έχουν περιγραφές είναι πιο πιθανό να λειτουργούν καλά με αυτόν τον επεξεργαστή (VisualEditor).",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Μενού ρύθμισης πεδίων προτύπου",
-	"visualeditor-dialog-transclusion-feedback-message": "Πρόσφατο έργο ολοκληρώθηκε για τη βελτίωση των αποτελεσμάτων αναζήτησης προτύπων. Για να μάθετε περισσότερα σχετικά με τις αλλαγές ή να αφήσετε σχόλια, μεταβείτε στη [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates σελίδα του έργου].",
 	"visualeditor-dialog-transclusion-wikitext": "Κείμενο wiki",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Πατήστε Ctrl+Del για να διαγράψετε το στοιχείο κειμένου wiki. Πατήστε Ctrl+Shift+Βέλη για να μετακινήσετε το στοιχείο πάνω ή κάτω.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "Πατήστε Ctrl+Del για να διαγράψετε το στοιχείο κειμένου wiki.",

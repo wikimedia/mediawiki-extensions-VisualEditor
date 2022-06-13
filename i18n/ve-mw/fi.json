@@ -244,7 +244,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Mallinehaku",
 	"visualeditor-dialog-transclusion-template-search-help": "Hae mallinetta käyttämällä vapaavalintaista hakusanaa. Visuaalisessa muokkaimessa toimivat parhaiten mallineet, joille on annettu kuvaus.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Mallineen kenttien asetusvalikko",
-	"visualeditor-dialog-transclusion-feedback-message": "Mallinehaku on uudistunut. Tutustu muutoksiin ja jätä palautetta [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates projektin sivulla].",
 	"visualeditor-dialog-transclusion-wikitext": "Wikiteksti",
 	"visualeditor-dialogbutton-media-tooltip": "Kuvat ja media",
 	"visualeditor-dialogbutton-meta-tooltip": "Sivun asetukset",

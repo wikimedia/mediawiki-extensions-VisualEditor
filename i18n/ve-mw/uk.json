@@ -254,7 +254,6 @@
 	"visualeditor-dialog-transclusion-template-search": "Пошук шаблону",
 	"visualeditor-dialog-transclusion-template-search-help": "Знайдіть шаблон, який бажаєте використати, пошукавши за визначальним ключовим словом. Шаблони, що мають описи, працюватимуть в цьому редакторі (візуальному) краще.",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Меню вказання полів шаблонів",
-	"visualeditor-dialog-transclusion-feedback-message": "Нещодавно завершилася робота з покращення результатів пошуку шаблонів. Щоб дізнатися більше про зміни або залишити відгук, перейдіть до [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates сторінки проєкту].",
 	"visualeditor-dialog-transclusion-wikitext": "Вікітекст",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Натисніть пробіл, щоб вибрати елемент вікітексту. Натисніть Enter, щоб вибрати та відредагувати вікітекст.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Натисніть Ctrl+Del, щоб видалити елемент вікітексту. Натисніть Ctrl+Shift+Стрілки, щоб перемістити елемент вгору або вниз.",

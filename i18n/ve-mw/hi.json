@@ -249,7 +249,6 @@
 	"visualeditor-dialog-transclusion-template-search": "साँचा खोजें",
 	"visualeditor-dialog-transclusion-template-search-help": "जोड़ने के लिए साँचा खोजने के लिए कोई कीवर्ड दर्ज करें। जिन साँचों में विवरण है, वे यथादृश्य संपादिका के साथ और भी अच्छे से काम करेंगे।",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "साँचा फ़ील्ड्स सेटअप मेन्यू",
-	"visualeditor-dialog-transclusion-feedback-message": "हाल ही में साँचे के खोज के परिणामों को बेहतर बनाने के लिए काम पूरा हुआ है। बदलावों के बारे में अधिक जानने के लिए या फिर प्रतिक्रिया देने के लिए [//meta.wikimedia.org/wiki/Special:MyLanguage/WMDE_Technical_Wishes/Finding_and_inserting_templates परियोजना के पृष्ठ] पर जाएँ।",
 	"visualeditor-dialog-transclusion-wikitext": "विकिटेक्स्ट",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "विकिटेक्स्ट तत्व को चुनने के लिए Space दबाएँ। विकिटेक्स्ट को चुनकर संपादित करने के लिए Enter दबाएँ।",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "विकिटेक्स्ट तत्व हो हटाने के लिए Ctrl+Del दबाएँ। तत्व को ऊपर या नीचे ले जाने के लिए Ctrl+Shift+Arrows दबाएँ।",
