@@ -1031,7 +1031,21 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 		$content = $content.parent();
 	}
 
+	this.restoreEditTabsIfNeeded( $content );
 	this.updateHistoryState();
+};
+
+/**
+ * Checks the edit/view tabs have not been marked as disabled. The view tab provides a way
+ * to exit the VisualEditor so its important it is not marked as uneditable.
+ *
+ * @param {jQuery} $content area
+ */
+ve.init.mw.DesktopArticleTarget.prototype.restoreEditTabsIfNeeded = function ( $content ) {
+	var $viewTab = $content.find( '.ve-init-mw-desktopArticleTarget-uneditableContent #ca-view' );
+	if ( $viewTab.length ) {
+		$viewTab.parents( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+	}
 };
 
 /**
