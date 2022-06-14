@@ -130,7 +130,8 @@ ve.dm.MWImageModel.static.createImageNode = function ( attributes, imageType ) {
 		.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
 
 	var attrs = ve.extendObject( {
-		mediaClass: 'Image',
+		mediaClass: 'File',
+		mediaTag: 'img',
 		type: 'thumb',
 		align: 'default',
 		width: defaultThumbSize,
@@ -562,7 +563,8 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 	}
 
 	var attrs = {
-		mediaClass: this.getMediaClass(),
+		mediaClass: 'File',
+		mediaTag: this.getMediaTag(),
 		type: this.getType(),
 		width: currentDimensions.width,
 		height: currentDimensions.height,
@@ -798,20 +800,20 @@ ve.dm.MWImageModel.prototype.getMediaType = function () {
 };
 
 /**
- * Get Parsoid media class: Image, Video or Audio
+ * Get media tag: img, video or audio
  *
- * @return {string} Media class
+ * @return {string} Tag name
  */
-ve.dm.MWImageModel.prototype.getMediaClass = function () {
+ve.dm.MWImageModel.prototype.getMediaTag = function () {
 	var mediaType = this.getMediaType();
 
 	if ( mediaType === 'VIDEO' ) {
-		return 'Video';
+		return 'video';
 	}
 	if ( mediaType === 'AUDIO' ) {
-		return 'Audio';
+		return 'audio';
 	}
-	return 'Image';
+	return 'img';
 };
 
 /**

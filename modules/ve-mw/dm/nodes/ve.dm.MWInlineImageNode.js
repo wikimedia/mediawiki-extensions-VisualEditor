@@ -54,7 +54,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		// Malformed figure, alienate (T267282)
 		return null;
 	}
-	var img = imgWrapper.children[ 0 ]; // <img>, <video> or <audio>
+	var img = imgWrapper.children[ 0 ]; // <img>, <video>, <audio>, or <span> if mw:Error
 	var typeofAttrs = ( container.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
 	var mwDataJSON = container.getAttribute( 'data-mw' );
 	var mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
@@ -83,6 +83,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 
 	var attributes = {
 		mediaClass: types.mediaClass,
+		mediaTag: img.nodeName.toLowerCase(),
 		type: types.frameType,
 		src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 		href: href,
@@ -142,9 +143,8 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 
 ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, converter ) {
 	var attributes = dataElement.attributes,
-		mediaClass = attributes.mediaClass,
 		container = doc.createElement( 'span' ),
-		img = doc.createElement( attributes.isError ? 'span' : this.typesToTags[ mediaClass ] ),
+		img = doc.createElement( attributes.isError ? 'span' : attributes.mediaTag ),
 		classes = [],
 		originalClasses = attributes.originalClasses;
 
@@ -158,7 +158,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		img.setAttribute( attributes.isError ? 'data-width' : 'height', height );
 	}
 
-	var srcAttr = this.typesToSrcAttrs[ mediaClass ];
+	var srcAttr = this.tagsToSrcAttrs[ img.nodeName.toLowerCase() ];
 	if ( srcAttr && !attributes.isError ) {
 		img.setAttribute( srcAttr, attributes.src );
 	}
@@ -169,7 +169,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 	}
 
 	// RDFa type
-	container.setAttribute( 'typeof', this.getRdfa( mediaClass, attributes.type, attributes.isError ) );
+	container.setAttribute( 'typeof', this.getRdfa( attributes.mediaClass, attributes.type, attributes.isError ) );
 	if ( !ve.isEmptyObject( attributes.mw ) ) {
 		container.setAttribute( 'data-mw', JSON.stringify( attributes.mw ) );
 	}
