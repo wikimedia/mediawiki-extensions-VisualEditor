@@ -47,7 +47,9 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
 ve.ui.MWExpandableContentElement.prototype.getTextHeight = function () {
 	var currentHeight = this.$content.height(),
 		expandedHeight = this.$content.css( 'height', 'auto' ).height();
-	this.$content.css( { height: currentHeight } );
+	if ( expandedHeight !== currentHeight ) {
+		this.$content.css( { height: currentHeight } );
+	}
 	return expandedHeight;
 };
 
@@ -90,7 +92,7 @@ ve.ui.MWExpandableContentElement.prototype.collapse = function ( collapse ) {
 		this.button.setIcon( 'expand' );
 	} else {
 		this.button.setLabel( ve.msg( 'visualeditor-expandable-less' ) );
-		this.$content.css( { height: this.getTextHeight() + this.button.$element.height() } );
+		this.$content.css( 'height', this.getTextHeight() + this.button.$element.height() );
 		this.button.setIcon( 'collapse' );
 	}
 	this.$container.removeClass( 'oo-ui-element-hidden' );
@@ -102,7 +104,7 @@ ve.ui.MWExpandableContentElement.prototype.collapse = function ( collapse ) {
  * @private
  */
 ve.ui.MWExpandableContentElement.prototype.reset = function () {
-	this.$content.css( { height: this.getTextHeight() } );
+	this.$content.css( 'height', 'auto' );
 	this.$container.addClass( 'oo-ui-element-hidden' );
 	this.button.setInvisibleLabel( false );
 };
