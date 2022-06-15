@@ -822,35 +822,6 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 };
 
 /**
- * Handle Escape key presses.
- *
- * @param {jQuery.Event} e Keydown event
- */
-ve.init.mw.DesktopArticleTarget.prototype.onDocumentKeyDown = function ( e ) {
-	var target = this;
-
-	// Parent method
-	ve.init.mw.DesktopArticleTarget.super.prototype.onDocumentKeyDown.apply( this, arguments );
-
-	if ( e.which === OO.ui.Keys.ESCAPE ) {
-		setTimeout( function () {
-			// Listeners should stopPropagation if they handle the escape key, but
-			// also check they didn't fire after this event, as would be the case if
-			// they were bound to the document.
-			if ( !e.isPropagationStopped() ) {
-				var toolbarDialogs = target.surface && target.surface.getToolbarDialogs();
-				if ( toolbarDialogs && toolbarDialogs.getCurrentWindow() ) {
-					toolbarDialogs.getCurrentWindow().close();
-				} else {
-					target.tryTeardown( false, 'navigate-read' );
-				}
-			}
-		} );
-		e.preventDefault();
-	}
-};
-
-/**
  * Handle clicks on the view tab.
  *
  * @param {jQuery.Event} e Mouse click event

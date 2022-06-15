@@ -481,6 +481,11 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		history: 'updateToolbarSaveButtonState'
 	} );
 
+	// Handle cancel events, i.e. pressing <escape>
+	this.getSurface().connect( this, {
+		cancel: 'onSurfaceCancel'
+	} );
+
 	// Iterate over the trigger registry and resolve any access key conflicts
 	for ( var name in ve.ui.triggerRegistry.registry ) {
 		var triggers = ve.ui.triggerRegistry.registry[ name ];
@@ -506,6 +511,13 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	ve.init.mw.ArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
 	mw.hook( 've.activationComplete' ).fire();
+};
+
+/**
+ * Handle surface cancel events
+ */
+ve.init.mw.ArticleTarget.prototype.onSurfaceCancel = function () {
+	this.tryTeardown( false, 'navigate-read' );
 };
 
 /**
