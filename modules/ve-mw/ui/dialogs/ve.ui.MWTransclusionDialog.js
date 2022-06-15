@@ -607,8 +607,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 					label: mw.message( 'visualeditor-dialog-transclusion-help-message' ).text()
 				} ),
 				this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-help', 'helpNotice' ),
-				this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-shortcuts', 'keyboard' ),
-				this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-feedback', 'feedback' )
+				this.getMessageButton( 'visualeditor-dialog-transclusion-help-page-shortcuts', 'keyboard' )
 			],
 			classes: [ 've-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout' ]
 		} ).$element
@@ -706,7 +705,7 @@ ve.ui.MWTransclusionDialog.prototype.getSizeProperties = function () {
 ve.ui.MWTemplateDialog.prototype.getMessageButton = function ( message, icon ) {
 	// Messages that can be used here:
 	// * visualeditor-dialog-transclusion-help-page-help
-	// * visualeditor-dialog-transclusion-help-page-feedback
+	// * visualeditor-dialog-transclusion-help-page-shortcuts
 	var $link = mw.message( message ).parseDom(),
 		button = new OO.ui.ButtonWidget( {
 			label: $link.text(),

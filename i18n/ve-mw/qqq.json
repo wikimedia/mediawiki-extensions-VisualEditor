@@ -226,7 +226,6 @@
 	"visualeditor-dialog-transclusion-filter-title": "Title for the template parameter search field.\n\nParameters:\n* $1 - The title of the related template.",
 	"visualeditor-dialog-transclusion-help-title": "Title for the template help dialog.\n\nText longer than 33 characters will overflow.",
 	"visualeditor-dialog-transclusion-help-message": "'''In RTL languages, swap \"left\" and \"right\".'''\n\nMessage shown to an editor within the template help dialog.",
-	"visualeditor-dialog-transclusion-help-page-feedback": "Link to the feedback page for template improvements.",
 	"visualeditor-dialog-transclusion-help-page-help": "Link to the template section on the project's help page.",
 	"visualeditor-dialog-transclusion-help-page-shortcuts": "Link to the keyboard shortcuts section on the project's help page (given section anchor is present on the page)",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Tooltip for the indicator icon (an exclamation mark) that marks deprecated template parameters.",
