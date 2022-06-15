@@ -172,7 +172,7 @@ class ApiVisualEditor extends ApiBase {
 			if ( $spName ) {
 				$specialPage = $this->specialPageFactory->getPage( $spName );
 				if ( $specialPage instanceof SpecialMyLanguage ) {
-					$preloadTitle = $specialPage->getRedirect( $spParam );
+					$preloadTitle = $specialPage->findTitleForTransclusion( $spParam );
 				}
 			}
 		}
