@@ -22,6 +22,7 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @property {ve.dm.MWTransclusionModel|null} transclusionModel
+ * @property {boolean} [canGoBack=false]
  */
 ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	// Parent constructor
@@ -497,6 +498,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					promise = this.transclusionModel.addPart(
 						new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel )
 					);
+					this.canGoBack = true;
 				}
 			} else {
 				// Open the dialog to edit an existing template
