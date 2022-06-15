@@ -420,7 +420,6 @@
 	"visualeditor-savedialog-title-review": "Title for save dialog slide for the wikitext diff",
 	"visualeditor-savedialog-title-save": "Title for save dialog slide for the final save step. Appears between the buttons {{msg-mw|visualeditor-toolbar-savedialog}} and {{msg-mw|visualeditor-dialog-action-cancel}}.",
 	"visualeditor-savedialog-warning-dirty": "Note displayed to users in the save dialog if VisualEditor believes that it may have corrupted the page.",
-	"visualeditor-saveerror": "Text shown when the editor fails to save properly.\n\nParameters:\n* $1 is an error message, in English.",
 	"visualeditor-section-body-placeholder": "Placeholder for surface when adding a new section",
 	"visualeditor-section-title-placeholder": "Placeholder for title input when adding a new section\n{{Identical|Subject}}",
 	"visualeditor-loaderror-revidconflict": "Error message shown when loading the editor.\n\nParameters:\n* $1 and $2: revision IDs, as numbers",

@@ -867,8 +867,7 @@
 				"visualeditor-redirect-description",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-trylogin",
-				"visualeditor-savedialog-identify-user",
-				"visualeditor-saveerror"
+				"visualeditor-savedialog-identify-user"
 			],
 			"targets": [
 				"desktop",

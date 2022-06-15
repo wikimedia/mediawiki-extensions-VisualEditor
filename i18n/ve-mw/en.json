@@ -400,7 +400,6 @@
 	"visualeditor-savedialog-title-review": "Review your changes",
 	"visualeditor-savedialog-title-save": "Save your changes",
 	"visualeditor-savedialog-warning-dirty": "Your edit may have been corrupted – please review before saving.",
-	"visualeditor-saveerror": "Error saving data to server: $1.",
 	"visualeditor-section-body-placeholder": "New section",
 	"visualeditor-section-title-placeholder": "Subject",
 	"visualeditor-loaderror-revidconflict": "Revision IDs returned by the server do not match (document: $1, metadata: $2).",
