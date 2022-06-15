@@ -879,12 +879,7 @@ ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 
 	return promise.fail( function ( error, response ) {
 		var $errorMessages = target.extractErrorMessages( response );
-		OO.ui.alert(
-			$( ve.htmlMsg(
-				'visualeditor-serializeerror',
-				$( '<span>' ).append( $errorMessages )[ 0 ]
-			) )
-		);
+		OO.ui.alert( $errorMessages );
 
 		// It's possible to get here while the save dialog has never been opened (if the user uses
 		// the switch to source mode option)
