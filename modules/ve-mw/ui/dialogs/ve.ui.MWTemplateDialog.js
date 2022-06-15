@@ -189,7 +189,12 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	var page;
 
 	if ( param.getName() ) {
-		page = new ve.ui.MWParameterPage( param, param.getId(), { $overlay: this.$overlay, readOnly: this.isReadOnly() } );
+		page = new ve.ui.MWParameterPage( param, param.getId(), {
+			$overlay: this.$overlay, readOnly: this.isReadOnly()
+		} )
+			.connect( this, {
+				hasValueChange: 'onHasValueChange'
+			} );
 	} else {
 		page = new ve.ui.MWAddParameterPage( param, param.getId(), {
 			$overlay: this.$overlay
@@ -631,6 +636,17 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 		this.bookletLayout.getOutline().selectItemByData( pageName );
 	} else {
 		this.bookletLayout.setPage( pageName );
+	}
+};
+
+/**
+ * @private
+ * @param {string} pageName
+ * @param {boolean} hasValue
+ */
+ve.ui.MWTemplateDialog.prototype.onHasValueChange = function ( pageName, hasValue ) {
+	if ( this.pocSidebar ) {
+		this.pocSidebar.toggleHasValueByPageName( pageName, hasValue );
 	}
 };
 

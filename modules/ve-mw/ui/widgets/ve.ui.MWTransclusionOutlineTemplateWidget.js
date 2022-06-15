@@ -170,12 +170,15 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.getRelevantTemplateParameter
  * @return {OO.ui.OptionWidget}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( paramName ) {
-	var spec = this.templateModel.getSpec();
+	var spec = this.templateModel.getSpec(),
+		parameterModel = this.templateModel.getParameter( paramName );
+
 	return ve.ui.MWTransclusionOutlineParameterSelectWidget.static.createItem( {
 		required: spec.isParameterRequired( paramName ),
 		label: spec.getParameterLabel( paramName ),
 		data: paramName,
-		selected: this.templateModel.hasParameter( paramName )
+		selected: !!parameterModel,
+		hasValue: !!parameterModel && !!parameterModel.getValue()
 	} );
 };
 
@@ -204,6 +207,19 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = function ( paramName ) {
 	if ( this.parameterList ) {
 		this.parameterList.highlightParameter( paramName );
+	}
+};
+
+/**
+ * @param {string} paramName
+ * @param {boolean} hasValue
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleHasValue = function ( paramName, hasValue ) {
+	if ( this.parameterList ) {
+		var item = this.parameterList.findItemFromData( paramName );
+		if ( item ) {
+			item.toggleHasValue( hasValue );
+		}
 	}
 };
 
