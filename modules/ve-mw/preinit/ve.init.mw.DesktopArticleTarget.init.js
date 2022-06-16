@@ -302,7 +302,15 @@
 		return targetPromise;
 	}
 
-	function trackActivateStart( initData ) {
+	function trackActivateStart( initData, link ) {
+		if ( link ) {
+			link = new mw.Uri( $( link ).closest( 'a' ).attr( 'href' ) );
+		} else {
+			link = uri;
+		}
+		if ( link && link.query.wvprov === 'sticky-header' ) {
+			initData.mechanism += '-sticky-header';
+		}
 		ve.track( 'trace.activate.enter', { mode: initData.mode } );
 		// ve.track normally tries to guess the current platform based on
 		// ve.init.target. We're in a pre-target-loaded state, so have it
@@ -578,8 +586,8 @@
 			.always( clearLoading );
 	}
 
-	function activatePageTarget( mode, section, modified ) {
-		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode } );
+	function activatePageTarget( mode, section, modified, link ) {
+		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode }, link );
 
 		if ( !active ) {
 			if ( uri.query.action !== 'edit' && !( uri.query.veaction in veactionToMode ) ) {
@@ -1086,12 +1094,12 @@
 				if ( section !== null ) {
 					this.onEditSectionLinkClick( mode, e, section );
 				} else {
-					init.activateVe( mode );
+					init.activateVe( mode, e.target );
 				}
 			}
 		},
 
-		activateVe: function ( mode ) {
+		activateVe: function ( mode, link ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
 				sectionVal = $( 'input[name=wpSection]' ).val(),
 				section = sectionVal !== '' && sectionVal !== undefined ? sectionVal : null,
@@ -1135,7 +1143,7 @@
 				} );
 			} else {
 				releaseOldEditWarning();
-				activatePageTarget( mode, section, modified );
+				activatePageTarget( mode, section, modified, link );
 			}
 		},
 
@@ -1167,7 +1175,7 @@
 				return;
 			}
 
-			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode } );
+			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode }, e.target );
 
 			if ( history.pushState && !( linkUri.query.veaction in veactionToMode ) ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
@@ -1184,7 +1192,7 @@
 				section = parseSection( linkUri.query.section );
 			}
 			var tPromise = getTarget( mode, section );
-			activateTarget( mode, section, tPromise );
+			activateTarget( mode, section, tPromise, e.target );
 		},
 
 		/**
