@@ -25,7 +25,7 @@
 }
 
 .ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .ve-ui-mwParameterPage,
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .ve-ui-mwParameterPlaceholderPage {
+.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-bookletLayout-stackLayout > .ve-ui-mwAddParameterPage {
 	/* Tighter margins within a group of parameters. */
 	margin-top: 20px;
 }
