@@ -154,8 +154,6 @@
 	"visualeditor-dialog-transclusion-more-template-description": "\"$1\" మూస గురించి మరింత సమాచారం [[{{ns:template}}:$1|దాని పేజీలో]] ఉండవచ్చు.",
 	"visualeditor-dialog-transclusion-options": "ఎంపికలు",
 	"visualeditor-dialog-transclusion-param-default": "అప్రమేయం: $1",
-	"visualeditor-dialog-transclusion-param-example": "ఉదాహరణకు $1",
-	"visualeditor-dialog-transclusion-param-info": "ఖాళీ వివరణ",
 	"visualeditor-dialog-transclusion-placeholder": "కొత్త మూస",
 	"visualeditor-dialog-transclusion-remove-content": "విషయము తొలగించు",
 	"visualeditor-dialog-transclusion-remove-param": "పరామితి తొలగించు",

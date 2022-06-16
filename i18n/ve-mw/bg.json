@@ -138,8 +138,6 @@
 	"visualeditor-dialog-transclusion-loading": "Зареждане...",
 	"visualeditor-dialog-transclusion-options": "Настройки",
 	"visualeditor-dialog-transclusion-param-default": "По подразбиране: $1",
-	"visualeditor-dialog-transclusion-param-example": "например $1",
-	"visualeditor-dialog-transclusion-param-info": "Описание на полето",
 	"visualeditor-dialog-transclusion-placeholder": "Добавяне на шаблон",
 	"visualeditor-dialog-transclusion-remove-content": "Премахване на съдържание",
 	"visualeditor-dialog-transclusion-remove-param": "Премахване на поле",

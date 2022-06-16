@@ -120,8 +120,6 @@
 	"visualeditor-dialog-transclusion-loading": "Llwytho...",
 	"visualeditor-dialog-transclusion-no-template-description": "Nid oes gan y \"$1\" templed disgrifiad, ond gallai fod rhywfaint o wybodaeth a roddir ar y [[$2|dudalen y templed]].",
 	"visualeditor-dialog-transclusion-options": "Dewisiadau",
-	"visualeditor-dialog-transclusion-param-info": "Disgrifiad y maes",
-	"visualeditor-dialog-transclusion-param-info-missing": "Dim disgrifiad maes ar gael",
 	"visualeditor-dialog-transclusion-placeholder": "Ychwanegu templed",
 	"visualeditor-dialog-transclusion-remove-content": "Cael gwared ar y cynnwys",
 	"visualeditor-dialog-transclusion-remove-param": "Cael gwared ar y maes",

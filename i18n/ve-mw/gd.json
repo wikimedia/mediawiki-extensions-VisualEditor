@@ -99,8 +99,6 @@
 	"visualeditor-dialog-transclusion-loading": "'Ga luchdadh...",
 	"visualeditor-dialog-transclusion-no-template-description": "Chan eil tuairisgeul aig an teamplaid \"$1\" fhathast ach dh'fhaoidte gu bheil fiosrachadh air [[$2|duilleag na teamplaid]].",
 	"visualeditor-dialog-transclusion-options": "Roghainnean",
-	"visualeditor-dialog-transclusion-param-info": "Tuairisgeul an raoin",
-	"visualeditor-dialog-transclusion-param-info-missing": "Chan eil tuairisgeul an raoin ri fhaighinn",
 	"visualeditor-dialog-transclusion-placeholder": "Cuir teamplaid ris",
 	"visualeditor-dialog-transclusion-remove-content": "Thoir an t-susbaint air falbh",
 	"visualeditor-dialog-transclusion-remove-param": "Thoir an raon air falbh",
