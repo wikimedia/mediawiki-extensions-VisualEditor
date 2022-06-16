@@ -1226,7 +1226,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, displayTitle, lastModified, contentSub
+	html, categoriesHtml, displayTitle, lastModified, contentSub, sections
 ) {
 	var $content = $( $.parseHTML( html ) );
 
@@ -1263,6 +1263,8 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	// eslint-disable-next-line no-jquery/no-html
 	$( '#contentSub' ).html( contentSub );
 	this.setRealRedirectInterface();
+
+	mw.hook( 'wikipage.tableOfContents' ).fire( sections );
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	mw.libs.ve.setupEditLinks();

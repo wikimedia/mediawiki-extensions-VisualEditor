@@ -402,7 +402,7 @@ ve.init.mw.MobileArticleTarget.prototype.showSaveDialog = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, displayTitle, lastModified, contentSub
+	html, categoriesHtml, displayTitle, lastModified, contentSub, sections
 ) {
 	var $content = $( $.parseHTML( html ) );
 
@@ -432,6 +432,8 @@ ve.init.mw.MobileArticleTarget.prototype.replacePageContent = function (
 
 	// eslint-disable-next-line no-jquery/no-global-selector, no-jquery/no-html
 	$( '.minerva__subtitle' ).html( contentSub );
+
+	mw.hook( 'wikipage.tableOfContents' ).fire( sections );
 
 	this.setRealRedirectInterface();
 };
