@@ -9,3 +9,8 @@
 	/* We don't want anything to collapse left/right, so shouldn't use margin */
 	padding: 0 20px;
 }
+
+.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwTransclusionDialog-multipart-message,
+.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwTransclusionDialog-multipart-message + .oo-ui-panelLayout {
+	margin-top: 20px;
+}
