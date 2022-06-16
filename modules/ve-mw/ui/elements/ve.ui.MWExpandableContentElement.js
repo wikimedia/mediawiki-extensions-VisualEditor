@@ -132,7 +132,7 @@ ve.ui.MWExpandableContentElement.prototype.onDescriptionClick = function () {
 ve.ui.MWExpandableContentElement.prototype.updateSize = function () {
 	this.toggle( true );
 
-	if ( this.getTextHeight() / this.getLineHeight() >= 3 ) {
+	if ( Math.floor( this.getTextHeight() / this.getLineHeight() ) > 3 ) {
 		if ( !this.$container ) {
 			this.makeCollapsible();
 		}
