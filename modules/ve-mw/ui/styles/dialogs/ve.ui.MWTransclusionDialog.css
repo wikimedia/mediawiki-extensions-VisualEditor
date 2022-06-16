@@ -17,12 +17,6 @@
 	min-width: 10em;
 }
 
-.ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
-	position: relative;
-	overflow: hidden;
-	margin-bottom: 1em;
-}
-
 .ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-searchWidget-results {
 	position: relative;
 	padding-bottom: 5em;

@@ -32,7 +32,6 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.loaded = false;
 	this.altered = false;
 	this.preventReselection = false;
-	this.expandedParamList = {};
 	this.useNewSidebar = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
@@ -111,7 +110,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			var params = removed.getParameters();
 			for ( var name in params ) {
 				removePages.push( this.bookletLayout.getPage( params[ name ].getId() ) );
-				delete this.expandedParamList[ params[ name ].getId() ];
 			}
 			removed.disconnect( this );
 		}
@@ -181,17 +179,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 };
 
 /**
- * Respond to showAll event in the placeholder page.
- * Cache this so we can make sure the parameter list is expanded
- * when we next load this same pageId placeholder.
- *
- * @param {string} pageId Page Id
- */
-ve.ui.MWTemplateDialog.prototype.onParameterPlaceholderShowAll = function ( pageId ) {
-	this.expandedParamList[ pageId ] = true;
-};
-
-/**
  * Handle add param events.
  *
  * @private
@@ -202,21 +189,11 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 
 	if ( param.getName() ) {
 		page = new ve.ui.MWParameterPage( param, param.getId(), { $overlay: this.$overlay, readOnly: this.isReadOnly() } );
-	} else if ( this.useNewSidebar ) {
+	} else {
 		page = new ve.ui.MWAddParameterPage( param, param.getId(), {
 			$overlay: this.$overlay
 		} )
 			.connect( this, {
-				focusTemplateParameterById: 'focusPart'
-			} );
-	} else {
-		// This branch is triggered when we receive a synthetic placeholder event with name=''.
-		page = new ve.ui.MWParameterPlaceholderPage( param, param.getId(), {
-			$overlay: this.$overlay,
-			expandedParamList: !!this.expandedParamList[ param.getId() ]
-		} )
-			.connect( this, {
-				showAll: 'onParameterPlaceholderShowAll',
 				focusTemplateParameterById: 'focusPart'
 			} );
 	}
