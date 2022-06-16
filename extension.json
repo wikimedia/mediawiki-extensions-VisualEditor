@@ -173,10 +173,6 @@
 		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
-		},
-		"VisualEditorTransclusionDialogNewSidebar": {
-			"description": "Temporary flag to enable the new sidebar in the transclusion dialog.",
-			"value": false
 		}
 	},
 	"APIModules": {

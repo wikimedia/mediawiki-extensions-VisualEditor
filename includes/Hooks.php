@@ -1119,7 +1119,8 @@ class Hooks {
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
-			'transclusionDialogNewSidebar' => $veConfig->get( 'VisualEditorTransclusionDialogNewSidebar' ),
+			// TODO: Remove when all usages in .js files are removed
+			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' ),
 		];
 	}
