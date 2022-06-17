@@ -814,8 +814,7 @@
 				"visualeditor-savedialog-title-preview",
 				"visualeditor-savedialog-title-review",
 				"visualeditor-savedialog-title-save",
-				"visualeditor-savedialog-warning-dirty",
-				"visualeditor-serializeerror"
+				"visualeditor-savedialog-warning-dirty"
 			],
 			"targets": [
 				"desktop",
@@ -866,8 +865,7 @@
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-trylogin",
 				"visualeditor-savedialog-identify-user",
-				"visualeditor-saveerror",
-				"visualeditor-serializeerror"
+				"visualeditor-saveerror"
 			],
 			"targets": [
 				"desktop",

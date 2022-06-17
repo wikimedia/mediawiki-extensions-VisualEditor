@@ -397,7 +397,6 @@
 	"visualeditor-saveerror": "Error saving data to server: $1.",
 	"visualeditor-section-body-placeholder": "New section",
 	"visualeditor-section-title-placeholder": "Subject",
-	"visualeditor-serializeerror": "Error loading data from server: $1.",
 	"visualeditor-loaderror-revidconflict": "Revision IDs returned by the server do not match (document: $1, metadata: $2).",
 	"visualeditor-loaderror-wrongmode": "Tried to load the editor in wrong mode (data type: \"$1\", editor mode: \"$2\").",
 	"visualeditor-settings-tool": "Page settings",
