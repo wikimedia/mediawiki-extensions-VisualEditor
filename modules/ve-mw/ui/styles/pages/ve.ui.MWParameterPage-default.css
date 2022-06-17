@@ -27,15 +27,6 @@
 	box-sizing: border-box;
 }
 
-.ve-ui-mwParameterPage-actions {
-	cursor: default;
-	position: absolute;
-	top: -0.3125em;
-	right: 4em; /* 1.5em for PanelLayout's padding + 2.5em */
-	text-align: right;
-	box-sizing: border-box;
-}
-
 .ve-ui-mwParameterPage-label {
 	font-size: 1.1em;
 	line-height: 1.705em;
@@ -63,14 +54,6 @@
 .ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc-example {
 	font-style: italic;
 	color: #54595d;
-}
-
-.ve-ui-mwParameterPage-removeButton {
-	display: none;
-}
-
-.oo-ui-pageLayout-active .ve-ui-mwParameterPage-removeButton {
-	display: inline-block;
 }
 
 .ve-ui-mwParameterPage-field {
@@ -103,13 +86,4 @@
 
 .ve-ui-mwParameterPage .oo-ui-textInputWidget textarea {
 	height: 2.5em;
-}
-
-.ve-ui-mwParameterPage-addUndocumented {
-	display: none;
-	margin: 1em 0 0.5em 0;
-}
-
-.ve-ui-mwParameterPage:last-child .ve-ui-mwParameterPage-addUndocumented {
-	display: block;
 }

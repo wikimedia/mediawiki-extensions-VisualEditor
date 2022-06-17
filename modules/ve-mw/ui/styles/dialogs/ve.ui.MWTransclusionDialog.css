@@ -127,8 +127,7 @@
 .ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
 .ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label,
 .ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
-.ve-ui-mwTransclusionDialog-expanded .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
-.ve-ui-mwTransclusionDialog-expanded .oo-ui-bookletLayout .ve-ui-mwParameterPage-addUndocumented {
+.ve-ui-mwTransclusionDialog-expanded .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more {
 	display: none;
 }
 
@@ -136,7 +135,6 @@
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-removeButton,
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwTemplatePage-more,
-.ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout .ve-ui-mwParameterPage-addUndocumented,
 .ve-ui-mwTransclusionDialog.ve-ui-mwTemplateDialog-ready .oo-ui-bookletLayout > .oo-ui-gridLayout > .oo-ui-panelLayout {
 	transition: all 250ms ease-in-out;
 }

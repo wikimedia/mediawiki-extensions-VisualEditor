@@ -5,13 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwParameterPage .ve-ui-mwParameter-wikitextFallbackInput {
-	/* Support: Blink, Gecko, Webkit */
-	/* Specify a valid second value to fix size, see T176636 */
-	font-family: monospace, monospace;
-	background-color: #c8ccd1;
-}
-
 .ve-ui-mwParameterPage-label {
 	display: inline;
 	vertical-align: middle;
