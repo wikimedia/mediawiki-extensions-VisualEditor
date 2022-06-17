@@ -107,7 +107,7 @@ class VisualEditorParsoidClient {
 		// User here, it only currently affects the output in obscure
 		// corner cases; see PageConfigFactory::create() for more.
 		$pageConfig = $this->pageConfigFactory->create(
-			$title, $user, $oldid, null, $lang, $this->parsoidSettings
+			$title, $user, $revision, null, $lang, $this->parsoidSettings
 		);
 		if ( $pageConfig->getRevisionContent() === null ) {
 			throw new \LogicException( "Specified revision does not exist" );
