@@ -372,8 +372,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function
 };
 
 /**
- * Narrows the list of checkboxes down to parameters that match the user's input. The search
- * algorithm is modelled after {@see ve.ui.MWParameterSearchWidget.buildIndex}. We search the
+ * Narrows the list of checkboxes down to parameters that match the user's input. We search the
  * parameter's primary name, aliases, label, and description. But not e.g. the example value.
  *
  * @private
