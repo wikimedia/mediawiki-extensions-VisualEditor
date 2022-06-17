@@ -159,7 +159,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.getRelevantTemplateParameter
 		if ( template.getSpec().isParameterDeprecated( name ) && !template.hasParameter( name ) ) {
 			return false;
 		}
-		// Never create a checkbox for a ve.ui.MWParameterPlaceholderPage placeholder
+		// Never create a checkbox for a not yet named parameter placeholder
 		return !!name;
 	} );
 };

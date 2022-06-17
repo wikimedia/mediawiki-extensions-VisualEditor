@@ -1,5 +1,5 @@
 /**
- * Placeholder page for a currently unnamed parameter. Represented as a unnamed
+ * Placeholder page for a currently unnamed parameter. Represented as an unnamed
  * {@see ve.dm.MWParameterModel} in the corresponding {@see ve.dm.MWTemplateModel}.
  *
  * @class
@@ -41,7 +41,7 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 
 	// Initialization
 	this.$element
-		.addClass( 've-ui-mwParameterPlaceholderPage' )
+		.addClass( 've-ui-mwAddParameterPage' )
 		.append( this.addParameterFieldset.$element );
 };
 
