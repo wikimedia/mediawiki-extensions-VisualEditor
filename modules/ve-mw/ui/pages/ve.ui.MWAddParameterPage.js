@@ -223,12 +223,3 @@ ve.ui.MWAddParameterPage.prototype.togglePlaceholder = function ( expand ) {
 		this.paramInputField.focus();
 	}
 };
-
-/**
- * @inheritDoc OO.ui.PageLayout
- */
-ve.ui.MWAddParameterPage.prototype.setupOutlineItem = function () {
-	this.outlineItem
-		// Basic properties to make the OO.ui.OutlineControlsWidget buttons behave sane
-		.setLevel( 1 );
-};

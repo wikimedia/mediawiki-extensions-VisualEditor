@@ -55,16 +55,6 @@ OO.inheritClass( ve.ui.MWTransclusionContentPage, OO.ui.PageLayout );
 /* Methods */
 
 /**
- * @inheritdoc
- */
-ve.ui.MWTransclusionContentPage.prototype.setupOutlineItem = function () {
-	this.outlineItem
-		// Basic properties to make the OO.ui.OutlineControlsWidget buttons behave sane
-		.setMovable( true )
-		.setRemovable( true );
-};
-
-/**
  * @private
  */
 ve.ui.MWTransclusionContentPage.prototype.onTextInputChange = function () {

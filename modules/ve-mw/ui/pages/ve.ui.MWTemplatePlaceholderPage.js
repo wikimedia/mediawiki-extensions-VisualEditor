@@ -96,16 +96,6 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
 /* Methods */
 
 /**
- * @inheritdoc
- */
-ve.ui.MWTemplatePlaceholderPage.prototype.setupOutlineItem = function () {
-	this.outlineItem
-		// Basic properties to make the OO.ui.OutlineControlsWidget buttons behave sane
-		.setMovable( true )
-		.setRemovable( true );
-};
-
-/**
  * @inheritDoc OO.ui.PanelLayout
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {

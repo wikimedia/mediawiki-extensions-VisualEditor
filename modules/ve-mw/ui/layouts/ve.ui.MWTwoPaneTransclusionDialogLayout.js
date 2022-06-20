@@ -298,16 +298,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 	}
 
 	// Add new pages
-	var items = [];
 	for ( i = 0; i < pages.length; i++ ) {
 		page = pages[ i ];
 		name = page.getName();
 		this.pages[ page.getName() ] = page;
-		if ( this.outlined ) {
-			var item = new OO.ui.OutlineOptionWidget( { data: name } );
-			page.setOutlineItem( item );
-			items.push( item );
-		}
 	}
 
 	this.stackLayout.addItems( pages, index );
@@ -325,9 +319,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 		var page = pages[ i ],
 			name = page.getName();
 		delete this.pages[ name ];
-		if ( this.outlined ) {
-			page.setOutlineItem( null );
-		}
 		// If the current page is removed, clear currentPageName
 		if ( this.currentPageName === name ) {
 			this.currentPageName = null;
