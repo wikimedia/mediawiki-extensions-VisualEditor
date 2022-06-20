@@ -177,6 +177,17 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 };
 
 /**
+ * @param {string} pageName
+ * @param {boolean} hasValue
+ */
+ve.ui.MWTransclusionOutlineWidget.prototype.toggleHasValueByPageName = function ( pageName, hasValue ) {
+	var idParts = pageName.split( '/' ),
+		templatePartWidget = this.partWidgets[ idParts[ 0 ] ];
+
+	templatePartWidget.toggleHasValue( idParts[ 1 ], hasValue );
+};
+
+/**
  * This is inspired by {@see OO.ui.SelectWidget.findSelectedItem}, but isn't one.
  *
  * @return {string|undefined} Always a top-level part id, e.g. "part_0"

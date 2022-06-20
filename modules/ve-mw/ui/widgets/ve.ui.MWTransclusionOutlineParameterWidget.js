@@ -18,6 +18,7 @@
  * @cfg {string} label
  * @cfg {boolean} [required=false] Required parameters can't be unchecked
  * @cfg {boolean} [selected=false] If the parameter is currently used (checked)
+ * @cfg {boolean} [hasValue=false] If the parameter has a value that's not empty
  */
 ve.ui.MWTransclusionOutlineParameterWidget = function VeUiMWTransclusionOutlineParameterWidget( config ) {
 	this.checkbox = new OO.ui.CheckboxInputWidget( {
@@ -42,6 +43,8 @@ ve.ui.MWTransclusionOutlineParameterWidget = function VeUiMWTransclusionOutlineP
 		classes: [ 've-ui-mwTransclusionOutlineParameterWidget' ],
 		$label: $( '<label>' )
 	} ) );
+
+	this.toggleHasValue( config.hasValue );
 
 	// Initialization
 	this.$element
@@ -74,4 +77,11 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.setSelected = function ( st
 	ve.ui.MWTransclusionOutlineParameterWidget.super.prototype.setSelected.call( this, state );
 
 	return this;
+};
+
+/**
+ * @param {boolean} hasValue
+ */
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.toggleHasValue = function ( hasValue ) {
+	this.$element.toggleClass( 've-ui-mwTransclusionOutlineParameterWidget-hasValue', hasValue );
 };

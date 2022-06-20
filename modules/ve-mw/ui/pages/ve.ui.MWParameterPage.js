@@ -35,6 +35,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	this.spec = parameter.getTemplate().getSpec();
 	this.defaultValue = parameter.getDefaultValue();
 	this.exampleValue = parameter.getExampleValue();
+	this.hadValue = null;
 
 	this.$info = $( '<div>' );
 	this.$field = $( '<div>' );
@@ -140,6 +141,17 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
+
+/* Events */
+
+/**
+ * Triggered the parameter value changes between empty and not empty.
+ *
+ * @event hasValueChange
+ * @param string parameterId Keyed by unique id of the parameter, e.g. something
+ *  like "part_1/param1".
+ * @param boolean hasValue
+ */
 
 /* Methods */
 
@@ -288,6 +300,11 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	}
 	this.edited = true;
 	this.parameter.setValue( value );
+
+	if ( !!value !== this.hadValue ) {
+		this.hadValue = !!value;
+		this.emit( 'hasValueChange', this.parameter.getId(), this.hadValue );
+	}
 };
 
 /**

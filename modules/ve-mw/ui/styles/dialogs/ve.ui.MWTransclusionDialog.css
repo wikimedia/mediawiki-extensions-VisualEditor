@@ -229,6 +229,10 @@
 	border-width: 2px;
 }
 
+.ve-ui-mwTransclusionOutlineParameterWidget-hasValue {
+	font-weight: bold;
+}
+
 .ve-ui-mwTransclusionOutlineButtonWidget,
 .ve-ui-mwTransclusionOutlineButtonWidget > .oo-ui-buttonElement-button {
 	display: block;
