@@ -65,7 +65,7 @@
 	font-style: italic;
 }
 
-.ve-ui-mwTemplateDialog-pocSidebar-debug-container {
+.ve-ui-mwTemplateDialog-sidebar-debug-container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -76,12 +76,12 @@
 	margin-bottom: 5px;
 }
 
-.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTemplateDialog-pocSidebar-debug-container {
+.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTemplateDialog-sidebar-debug-container {
 	bottom: 0;
 	margin-bottom: 0;
 }
 
-.ve-ui-mwTemplateDialog-pocSidebar-debug-container > .oo-ui-outlineSelectWidget {
+.ve-ui-mwTemplateDialog-sidebar-debug-container > .oo-ui-outlineSelectWidget {
 	background-color: rgba( 100%, 0%, 100%, 0.1 );
 	height: auto;
 	outline: 1px solid #f0f;
