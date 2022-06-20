@@ -117,19 +117,10 @@ OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
  * @inheritdoc
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.setupOutlineItem = function () {
-	var dialogTitle = this.placeholder.getTransclusion().isSingleTemplate() ?
-		'visualeditor-dialog-transclusion-template-search' :
-		'visualeditor-dialog-transclusion-add-template';
-
 	this.outlineItem
-		.setIcon( 'puzzle' )
+		// Basic properties to make the OO.ui.OutlineControlsWidget buttons behave sane
 		.setMovable( true )
-		.setRemovable( true )
-		.setFlags( [ 'placeholder' ] )
-		// The following messages are used here:
-		// * visualeditor-dialog-transclusion-template-search
-		// * visualeditor-dialog-transclusion-add-template
-		.setLabel( ve.msg( dialogTitle ) );
+		.setRemovable( true );
 };
 
 /**
