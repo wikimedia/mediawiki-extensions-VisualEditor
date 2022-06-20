@@ -169,8 +169,15 @@
 	margin-top: -24px;
 }
 
+/* no margin for labels and wikitext */
 .ve-ui-mwTransclusionOutlinePartWidget:last-child {
 	margin-bottom: -24px;
+}
+
+/* margin for last checkbox or text */
+.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutlineParameterWidget:last-child,
+.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutline-no-template-parameters {
+	margin-bottom: 48px;
 }
 
 .ve-ui-mwTransclusionOutlineWidget {
