@@ -164,6 +164,23 @@
 	display: inline-block;
 }
 
+.ve-ui-mwTransclusionOutlinePartWidget {
+	margin-top: 24px;
+	margin-bottom: 24px;
+}
+
+.ve-ui-mwTransclusionOutlineButtonWidget {
+	margin-top: -10px;
+}
+
+.ve-ui-mwTransclusionOutlinePartWidget:first-child .ve-ui-mwTransclusionOutlineButtonWidget {
+	margin-top: -24px;
+}
+
+.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutlineButtonWidget {
+	margin-bottom: -24px;
+}
+
 .ve-ui-mwTransclusionOutlineWidget {
 	/* .oo-ui-window-head uses a 1px outline which overlaps the top pixel of the sidebar */
 	padding-top: 1px;
