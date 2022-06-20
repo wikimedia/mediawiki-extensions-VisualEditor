@@ -50,7 +50,7 @@ OO.inheritClass( ve.ui.MWTemplateDialog, ve.ui.NodeDialog );
 ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
 
 /**
- * Configuration for the {@see OO.ui.BookletLayout} used in this dialog.
+ * Configuration for the {@see ve.ui.MWTwoPaneTransclusionDialogLayout} used in this dialog.
  *
  * @static
  * @property {Object}
@@ -321,7 +321,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	ve.ui.MWTemplateDialog.super.prototype.initialize.call( this );
 
 	// Properties
-	this.bookletLayout = new OO.ui.BookletLayout( this.constructor.static.bookletLayoutConfig );
+	this.bookletLayout = new ve.ui.MWTwoPaneTransclusionDialogLayout( this.constructor.static.bookletLayoutConfig );
 
 	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
 	this.sidebar.connect( this, {

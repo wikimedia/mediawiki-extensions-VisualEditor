@@ -113,8 +113,8 @@
 	padding-top: 8px;
 }
 
-.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
-.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
+.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
+.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
 	display: none;
 }
 
@@ -139,7 +139,7 @@
 	color: inherit;
 }
 
-.ve-ui-mwTransclusionDialog-collapsed .oo-ui-bookletLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
+.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
 	display: inline-block;
 }
 
