@@ -150,12 +150,10 @@ OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
  * @return {Object}
  */
 ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
-	var required = this.parameter.isRequired(),
-		valueInputConfig = {
-			autosize: true,
-			required: required,
-			validate: required ? 'non-empty' : null
-		};
+	var valueInputConfig = {
+		autosize: true,
+		required: this.parameter.isRequired()
+	};
 
 	if ( this.defaultValue ) {
 		valueInputConfig.placeholder = ve.msg(
@@ -178,9 +176,6 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	var type = this.parameter.getType(),
 		value = this.parameter.getValue(),
 		valueInputConfig = this.getDefaultInputConfig();
-
-	this.rawValueInput = false;
-	delete valueInputConfig.validate;
 
 	// TODO:
 	// * date - T100206
@@ -246,14 +241,12 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 			} ).map( function ( suggestedValue ) {
 				return { data: suggestedValue, label: suggestedValue || '\xA0' };
 			} );
-		this.rawValueInput = true;
 		return new OO.ui.ComboBoxInputWidget( valueInputConfig );
 	} else if ( type !== 'line' || value.indexOf( '\n' ) !== -1 ) {
 		// If the type is line, but there are already newlines in the provided
 		// value, don't break the existing content by only providing a single-
 		// line field. (This implies that the TemplateData for the field isn't
 		// complying with its use in practice...)
-		this.rawValueInput = true;
 		return new ve.ui.MWLazyMultilineTextInputWidget( valueInputConfig );
 	}
 
@@ -295,16 +288,6 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	}
 	this.edited = true;
 	this.parameter.setValue( value );
-};
-
-/**
- * Handle click events from the add button
- *
- * @private
- */
-ve.ui.MWParameterPage.prototype.addPlaceholderParameter = function () {
-	var template = this.parameter.getTemplate();
-	template.addParameter( new ve.dm.MWParameterModel( template ) );
 };
 
 /**
