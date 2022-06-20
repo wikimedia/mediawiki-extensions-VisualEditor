@@ -232,7 +232,7 @@ ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 
 	// Select the desired page first. Otherwise, if the page we are removing is selected,
 	// OOUI will try to select the first page after it is removed, and scroll to the top.
-	if ( this.loaded && !this.preventReselection && !this.pocSidebar ) {
+	if ( this.loaded && !this.preventReselection && !this.sidebar ) {
 		this.focusPart( reselect.getName() );
 	}
 
@@ -332,6 +332,13 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 
 	// Properties
 	this.bookletLayout = new OO.ui.BookletLayout( this.constructor.static.bookletLayoutConfig );
+
+	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
+	this.sidebar.connect( this, {
+		focusPageByName: 'focusPart',
+		filterPagesByName: 'onFilterPagesByName',
+		selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
+	} );
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );
@@ -471,19 +478,8 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			this.bookletLayout.autoFocus = false;
 
 			if ( this.useNewSidebar && this.bookletLayout.isOutlined() ) {
-				// FIXME: This is created at the wrong time. That's why we run into the situation
-				//  where an old instance exists. Should be in initialize().
-				if ( !this.pocSidebar ) {
-					this.pocSidebar = new ve.ui.MWTransclusionOutlineWidget();
-					this.pocSidebar.connect( this, {
-						focusPageByName: 'focusPart',
-						filterPagesByName: 'onFilterPagesByName',
-						selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
-					} );
-				} else {
-					this.pocSidebar.clear();
-				}
-				this.transclusionModel.connect( this.pocSidebar, { replace: 'onReplacePart' } );
+				this.sidebar.clear();
+				this.transclusionModel.connect( this.sidebar, { replace: 'onReplacePart' } );
 			}
 
 			// Initialization
@@ -541,23 +537,23 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 
 				dialog.$body.append( dialog.bookletLayout.$element );
-				if ( dialog.pocSidebar ) {
+				if ( dialog.sidebar ) {
 					// TODO: bookletLayout will be deprecated.
 					var $debugContainer = dialog.bookletLayout.outlinePanel.$element
-						.children( '.ve-ui-mwTemplateDialog-pocSidebar-debug-container' );
+						.children( '.ve-ui-mwTemplateDialog-sidebar-debug-container' );
 					if ( !$debugContainer.length ) {
 						$debugContainer = $( '<div>' )
-							.addClass( 've-ui-mwTemplateDialog-pocSidebar-debug-container' )
+							.addClass( 've-ui-mwTemplateDialog-sidebar-debug-container' )
 							.prependTo( dialog.bookletLayout.outlinePanel.$element );
 					}
 					$debugContainer.append(
-						dialog.pocSidebar.$element,
+						dialog.sidebar.$element,
 						dialog.bookletLayout.outlineSelectWidget.$element
 					);
 					dialog.bookletLayout.outlineSelectWidget.toggle( false );
 
 					if ( !dialog.transclusionModel.isSingleTemplate() ) {
-						dialog.pocSidebar.hideAllUnusedParameters();
+						dialog.sidebar.hideAllUnusedParameters();
 					}
 				}
 
@@ -625,10 +621,10 @@ ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( 
  */
 ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 	// The new sidebar does not focus template parameters, only top-level parts
-	if ( this.pocSidebar && pageName.indexOf( '/' ) === -1 ) {
+	if ( pageName.indexOf( '/' ) === -1 ) {
 		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
 		//  is executed later than this here.
-		setTimeout( this.pocSidebar.setSelectionByPageName.bind( this.pocSidebar, pageName ) );
+		setTimeout( this.sidebar.setSelectionByPageName.bind( this.sidebar, pageName ) );
 		this.bookletLayout.setPage( pageName );
 		// The .setPage() call above does not necessarily call .focus(). This forces it.
 		this.bookletLayout.focus();
@@ -645,9 +641,7 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
  * @param {boolean} hasValue
  */
 ve.ui.MWTemplateDialog.prototype.onHasValueChange = function ( pageName, hasValue ) {
-	if ( this.pocSidebar ) {
-		this.pocSidebar.toggleHasValueByPageName( pageName, hasValue );
-	}
+	this.sidebar.toggleHasValueByPageName( pageName, hasValue );
 };
 
 /**

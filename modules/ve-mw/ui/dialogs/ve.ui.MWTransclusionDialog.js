@@ -188,9 +188,7 @@ ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) 
 	this.addParameterButton.setDisabled( !acceptsNewParameters || this.isReadOnly() );
 	this.bookletLayout.getOutlineControls().removeButton.toggle( !isLastPlaceholder );
 
-	if ( this.pocSidebar ) {
-		this.pocSidebar.setSelectionByPageName( page.getName() );
-	}
+	this.sidebar.setSelectionByPageName( page.getName() );
 };
 
 /**
@@ -301,9 +299,9 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
  * @return {string|undefined} Any id, including slash-delimited template parameter ids
  */
 ve.ui.MWTransclusionDialog.prototype.findSelectedItemId = function () {
-	if ( this.pocSidebar ) {
+	if ( this.sidebar ) {
 		// TODO: This can't return parameter ids any more when the old sidebar is gone
-		return this.pocSidebar.findSelectedPartId();
+		return this.sidebar.findSelectedPartId();
 	}
 
 	var item = this.bookletLayout.getOutline().findSelectedItem();
@@ -387,7 +385,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 	// up being mispositioned
 	this.$content.find( 'input:focus' ).trigger( 'blur' );
 
-	if ( this.pocSidebar && this.loaded && this.constructor.static.isSmallScreen() ) {
+	if ( this.loaded && this.constructor.static.isSmallScreen() ) {
 		var dialog = this;
 
 		// Updates the page sizes when the menu is toggled using the button. This needs
@@ -409,7 +407,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
 			setTimeout( function () {
 				if ( expandSidebar ) {
-					dialog.pocSidebar.setSelectionByPageName( name );
+					dialog.sidebar.setSelectionByPageName( name );
 				} else {
 					selectedPage.scrollElementIntoView();
 					// TODO: Find a reliable way to refocus.
@@ -541,9 +539,8 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	var target = this;
 	this.transclusionModel.reset();
-	if ( this.pocSidebar ) {
-		this.pocSidebar.clear();
-	}
+	this.sidebar.clear();
+
 	this.bookletLayout.clearPages();
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
