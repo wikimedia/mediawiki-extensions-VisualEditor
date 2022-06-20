@@ -169,7 +169,7 @@
 	margin-top: -24px;
 }
 
-.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutlineButtonWidget {
+.ve-ui-mwTransclusionOutlinePartWidget:last-child {
 	margin-bottom: -24px;
 }
 
