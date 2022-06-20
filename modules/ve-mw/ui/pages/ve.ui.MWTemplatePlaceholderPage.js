@@ -18,8 +18,6 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeholder, name, config ) {
-	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
-
 	// Configuration initialization
 	config = ve.extendObject( {
 		scrollable: false
@@ -89,22 +87,6 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	this.$element
 		.addClass( 've-ui-mwTemplatePlaceholderPage' )
 		.append( this.addTemplateFieldset.$element );
-
-	if ( !veConfig.transclusionDialogNewSidebar ) {
-		this.removeButton = new OO.ui.ButtonWidget( {
-			framed: false,
-			icon: 'trash',
-			title: ve.msg( 'visualeditor-dialog-transclusion-remove-template' ),
-			flags: [ 'destructive' ],
-			classes: [ 've-ui-mwTransclusionDialog-removeButton' ]
-		} )
-			.connect( this, { click: 'onRemoveButtonClick' } );
-
-		if ( this.placeholder.getTransclusion().isSingleTemplate() ) {
-			this.removeButton.toggle( false );
-		}
-		this.$element.append( this.removeButton.$element );
-	}
 };
 
 /* Inheritance */
@@ -180,9 +162,6 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	// abort pending lookups, also, so the menu can't appear after we've left the page
 	this.addTemplateInput.closeLookupMenu();
 	this.addTemplateButton.setDisabled( true );
-	if ( this.removeButton ) {
-		this.removeButton.setDisabled( true );
-	}
 };
 
 /**
@@ -190,11 +169,4 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.onTemplateInputChange = function () {
 	this.addTemplateButton.setDisabled( this.addTemplateInput.getMWTitle() === null );
-};
-
-/**
- * @private
- */
-ve.ui.MWTemplatePlaceholderPage.prototype.onRemoveButtonClick = function () {
-	this.placeholder.remove();
 };

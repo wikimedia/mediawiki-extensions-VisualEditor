@@ -243,7 +243,6 @@
 	"visualeditor-dialog-transclusion-param-undocumented": "Label shown next to a parameter's name indicating that the parameter is undocumented.",
 	"visualeditor-dialog-transclusion-placeholder": "Label for section with options for adding a new template to a multi part transclusion.\n{{Identical|Add template}}",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Placeholder for the input field to find and add a new template.",
-	"visualeditor-dialog-transclusion-remove-template": "Label for button that removes a template from a transclusion.\n{{Identical|Remove template}}",
 	"visualeditor-dialog-transclusion-required-parameter": "Tooltip for the indicator icon (a star) that marks required template parameter.\n{{Identical|Required field}}",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Label describing that a template parameter is required.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Label for the Cancel button on the confirmation dialog opened if the user tries to insert/edit a template without filling all required fields.\n{{Identical|Go back}}",
