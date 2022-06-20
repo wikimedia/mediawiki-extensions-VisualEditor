@@ -59,7 +59,6 @@
 	"visualeditor-dialog-transclusion-options": "Chaguzi",
 	"visualeditor-dialog-transclusion-placeholder": "Kigezo kipya",
 	"visualeditor-dialog-transclusion-remove-content": "Ondoa yaliyomo",
-	"visualeditor-dialog-transclusion-remove-param": "Ondoa paramita",
 	"visualeditor-dialog-transclusion-remove-template": "Ondoa kigezo",
 	"visualeditor-dialogbutton-media-tooltip": "Faili",
 	"visualeditor-dialogbutton-meta-tooltip": "Mipangilio ya ukurasa",
@@ -78,9 +77,6 @@
 	"visualeditor-mainnamespacepagelink": "Project:Eneo kuu la wiki",
 	"visualeditor-meta-tool": "Chaguzi",
 	"visualeditor-mweditmodesource-warning-cancel": "Batilisha",
-	"visualeditor-parameter-input-placeholder": "Jina la paramita",
-	"visualeditor-parameter-search-no-unused": "Hakuna paramita zisizotumiwa",
-	"visualeditor-parameter-search-unknown": "Paramita isiyojulikana",
 	"visualeditor-savedialog-label-create": "Anzisha ukurasa",
 	"visualeditor-savedialog-label-report": "Ripoti tatizo",
 	"visualeditor-savedialog-label-resolve-conflict": "Tatua mgongano",
@@ -90,7 +86,6 @@
 	"visualeditor-savedialog-title-review": "Pitia mabadiliko yako",
 	"visualeditor-savedialog-title-save": "Hifadhi mabadiliko yako",
 	"visualeditor-saveerror": "Hitilafu ya kuhifadhi data katika seva: $1.",
-	"visualeditor-serializeerror": "Hitilafu ya kupakua data kutoka katika seva: $1.",
 	"visualeditor-usernamespacepagelink": "Project:Eneo la wiki la mtumiaji",
 	"visualeditor-version-label": "Toleo"
 }

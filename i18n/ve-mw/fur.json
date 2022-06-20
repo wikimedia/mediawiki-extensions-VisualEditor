@@ -105,7 +105,6 @@
 	"visualeditor-dialog-transclusion-options": "Opzions",
 	"visualeditor-dialog-transclusion-placeholder": "Zonte un model",
 	"visualeditor-dialog-transclusion-remove-content": "Gjave contignût",
-	"visualeditor-dialog-transclusion-remove-param": "Cjave cjamp",
 	"visualeditor-dialog-transclusion-remove-template": "Gjave model",
 	"visualeditor-dialog-transclusion-required-parameter": "Cjamp obligatori",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Il cjamp al è obligatori.",
@@ -139,10 +138,6 @@
 	"visualeditor-mwgallerydialog-card-images": "Figuris",
 	"visualeditor-mwgallerydialog-card-options": "Opzions",
 	"visualeditor-mwgallerydialog-title": "Galarie",
-	"visualeditor-parameter-input-placeholder": "Non dal cjamp",
-	"visualeditor-parameter-search-more": "Mostre {{PLURAL:$1|un altri cjamp|$1 altris cjamps}}",
-	"visualeditor-parameter-search-no-unused": "Nissun cjamp no doprât",
-	"visualeditor-parameter-search-unknown": "Cjamp no cognossût",
 	"visualeditor-preference-core-label": "Editôr visuâl",
 	"visualeditor-rebase-client-export": "Espuarte",
 	"visualeditor-rebase-client-export-start": "Espuarte...",
@@ -162,7 +157,6 @@
 	"visualeditor-saveerror": "Erôr salvant i dâts tal servidôr: $1.",
 	"visualeditor-section-body-placeholder": "Gnove sezion",
 	"visualeditor-section-title-placeholder": "Sogjet",
-	"visualeditor-serializeerror": "Erôr cjamant i dâts dal servidôr: $1.",
 	"visualeditor-settings-tool": "Impuestazions de pagjine",
 	"visualeditor-version-label": "Version"
 }

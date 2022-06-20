@@ -58,7 +58,6 @@
 	"visualeditor-dialog-transclusion-options": "Opziuns",
 	"visualeditor-dialog-transclusion-placeholder": "Nov model",
 	"visualeditor-dialog-transclusion-remove-content": "Allontanar il cuntegn",
-	"visualeditor-dialog-transclusion-remove-param": "Allontanar il parameter",
 	"visualeditor-dialog-transclusion-remove-template": "Allontanar il model",
 	"visualeditor-dialogbutton-media-tooltip": "Medias",
 	"visualeditor-dialogbutton-meta-tooltip": "Configuraziun da la pagina",
@@ -71,7 +70,6 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Terza sutsecziun",
 	"visualeditor-formatdropdown-format-mw-heading6": "Quarta sutsecziun",
 	"visualeditor-languages-tool": "Linguas",
-	"visualeditor-parameter-search-unknown": "Parameter nunenconuschent",
 	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-version-label": "Versiun"
 }
