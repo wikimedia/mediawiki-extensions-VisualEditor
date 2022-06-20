@@ -22,6 +22,7 @@
  * @constructor
  * @param {Object} [config] Configuration options
  * @property {ve.dm.MWTransclusionModel|null} transclusionModel
+ * @property {ve.ui.MWTransclusionOutlineWidget} sidebar
  * @property {boolean} [canGoBack=false]
  */
 ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
@@ -224,14 +225,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
  * @param {ve.dm.MWParameterModel} param Removed param
  */
 ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
-	var page = this.bookletLayout.getPage( param.getId() ),
-		reselect = this.bookletLayout.findClosestPage( page );
-
-	// Select the desired page first. Otherwise, if the page we are removing is selected,
-	// OOUI will try to select the first page after it is removed, and scroll to the top.
-	if ( this.loaded && !this.preventReselection && !this.sidebar ) {
-		this.focusPart( reselect.getName() );
-	}
+	var page = this.bookletLayout.getPage( param.getId() );
 
 	this.bookletLayout.stackLayout.unsetCurrentItem();
 	this.bookletLayout.removePages( [ page ] );

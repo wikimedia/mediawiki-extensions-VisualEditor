@@ -290,10 +290,10 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
 };
 
 /**
- * @return {string|undefined} Any id, including slash-delimited template parameter ids
+ * @private
+ * @return {string|undefined} Top-level part id
  */
 ve.ui.MWTransclusionDialog.prototype.findSelectedItemId = function () {
-	// TODO: This can't return parameter ids any more when the old sidebar is gone
 	return this.sidebar.findSelectedPartId();
 };
 
