@@ -160,10 +160,9 @@ OO.inheritClass( ve.ui.MWTemplatePage, OO.ui.PageLayout );
  */
 ve.ui.MWTemplatePage.prototype.setupOutlineItem = function () {
 	this.outlineItem
-		.setIcon( 'puzzle' )
+		// Basic properties to make the OO.ui.OutlineControlsWidget buttons behave sane
 		.setMovable( true )
-		.setRemovable( true )
-		.setLabel( this.spec.getLabel() );
+		.setRemovable( true );
 };
 
 ve.ui.MWTemplatePage.prototype.addPlaceholderParameter = function () {

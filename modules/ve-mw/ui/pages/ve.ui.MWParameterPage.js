@@ -310,6 +310,15 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 /**
  * @inheritdoc
  */
+ve.ui.MWParameterPage.prototype.setupOutlineItem = function () {
+	this.outlineItem
+		// Basic properties to make the OO.ui.OutlineControlsWidget buttons behave sane
+		.setLevel( 1 );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWParameterPage.prototype.focus = function () {
 	this.valueInput.focus();
 };
