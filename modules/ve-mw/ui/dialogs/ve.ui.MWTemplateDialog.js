@@ -57,7 +57,6 @@ ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
  * @inheritable
  */
 ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
-	continuous: true,
 	outlined: false
 };
 

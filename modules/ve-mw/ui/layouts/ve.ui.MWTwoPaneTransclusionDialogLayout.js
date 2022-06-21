@@ -9,7 +9,6 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {boolean} [continuous=false] Show all pages, one after another
  * @cfg {boolean} [autoFocus=true] Focus on the first focusable element when a new page is
  *  displayed. Disabled on mobile.
  * @cfg {boolean} [outlined=false] Show the outline. The outline is used to navigate through the
@@ -28,7 +27,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.pages = {};
 	this.ignoreFocus = false;
 	this.stackLayout = new OO.ui.StackLayout( {
-		continuous: !!config.continuous,
+		continuous: true,
 		expanded: this.expanded
 	} );
 	this.setContentPanel( this.stackLayout );
@@ -147,9 +146,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
 	if ( !page ) {
 		return;
 	}
-	// For continuous MWTwoPaneTransclusionDialogLayouts, scroll the selected page
-	// into view first
-	if ( this.stackLayout.continuous && !this.scrolling ) {
+	// Scroll the selected page into view first
+	if ( !this.scrolling ) {
 		promise = page.scrollElementIntoView();
 	} else {
 		// eslint-disable-next-line no-jquery/no-deferred
@@ -507,12 +505,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 		previousPage.setActive( false );
 		// Blur anything focused if the next page doesn't have anything focusable.
 		// This is not needed if the next page has something focusable (because once it is
-		// focused this blur happens automatically). If the layout is non-continuous, this
-		// check is meaningless because the next page is not visible yet and thus can't
-		// hold focus.
+		// focused this blur happens automatically).
 		if ( this.autoFocus &&
 			!OO.ui.isMobile() &&
-			this.stackLayout.continuous &&
 			OO.ui.findFocusable( page.$element ).length !== 0
 		) {
 			$focused = previousPage.$element.find( ':focus' );
@@ -523,20 +518,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	}
 	page.setActive( true );
 	this.stackLayout.setItem( page );
-	if ( !this.stackLayout.continuous && previousPage ) {
-		// This should not be necessary, since any inputs on the previous page should have
-		// been blurred when it was hidden, but browsers are not very consistent about
-		// this.
-		$focused = previousPage.$element.find( ':focus' );
-		if ( $focused.length ) {
-			$focused[ 0 ].blur();
-		}
-	}
 	this.emit( 'set', page );
 };
 
 /**
- * For outlined-continuous booklets, also reset the outlineSelectWidget to the first item.
+ * For outlined booklets, also reset the outlineSelectWidget to the first item.
  *
  * @inheritdoc
  */
@@ -546,7 +532,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.resetScroll = function () {
 
 	if (
 		this.outlined &&
-		this.stackLayout.continuous &&
 		this.outlineSelectWidget.findFirstSelectableItem()
 	) {
 		this.scrolling = true;
