@@ -174,7 +174,6 @@
 	"visualeditor-dialog-transclusion-template-widget-aria": "Press Space to select the template.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Press Ctrl+Del to delete the template, its parameters and their values. Press Ctrl+Shift+Arrows to move the template up or down.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "Press Ctrl+Del to delete the template, its parameters and their values.",
-	"visualeditor-dialog-transclusion-add-content": "Add content",
 	"visualeditor-dialog-transclusion-add-wikitext": "Add wikitext",
 	"visualeditor-dialog-transclusion-add-param": "Add more information",
 	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" is already added as \"$2\". Please check the options in the sidebar. This is due to either the use of [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#aliases aliases] or [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#label labels].",

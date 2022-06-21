@@ -194,7 +194,6 @@
 	"visualeditor-dialog-transclusion-template-widget-aria": "ARIA description for screen readers on the template parameter selection menu for the keyboard controls on unselected template parts.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected": "ARIA description for screen readers on the template parameter selection menu for the keyboard controls on selected template parts.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "ARIA description for screen readers on the template parameter selection menu for the keyboard controls on selected template parts that can't be moved.",
-	"visualeditor-dialog-transclusion-add-content": "Label for button that adds parameter content to a transclusion.",
 	"visualeditor-dialog-transclusion-add-wikitext": "Label for button that adds parameter wikitext to a transclusion.",
 	"visualeditor-dialog-transclusion-add-param": "Label for button that adds a parameter to a transcluded template.",
 	"visualeditor-dialog-transclusion-add-param-error-alias": "Message shown to an editor when they attempt adding an alias of a another parameter already present in the sidebar.\n\nParameters:\n* $1 - The alias as entered by the user.\n* $2 - The label of the parameter as shown in the sidebar.\n\n\"Alias\" must be translated using the same word as in this message: {{msg-mw|Templatedata-modal-table-param-aliases}}",
