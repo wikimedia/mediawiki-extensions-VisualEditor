@@ -33,7 +33,6 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.loaded = false;
 	this.altered = false;
 	this.preventReselection = false;
-	this.useNewSidebar = mw.config.get( 'wgVisualEditorConfig' ).transclusionDialogNewSidebar;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
@@ -143,7 +142,9 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
 
 				// Add required and suggested params to user created templates
-				var shouldAddPlaceholder = this.loaded && added.addPromptedParameters() === 0;
+				if ( this.loaded ) {
+					added.addPromptedParameters();
+				}
 
 				this.preventReselection = false;
 
@@ -151,17 +152,13 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 					// Focus the first element when parameters are present
 					// FIXME: This hasn't worked in a long time, nor is it a desirable behavior.
 					reselect = added.getParameter( names[ 0 ] ).getId();
-				} else if ( shouldAddPlaceholder && !this.useNewSidebar ) {
-					page.addPlaceholderParameter();
 				}
 
-				if ( this.useNewSidebar ) {
-					var documentedParameters = added.getSpec().getDocumentedParameterOrder(),
-						undocumentedParameters = added.getSpec().getUndocumentedParameterNames();
+				var documentedParameters = added.getSpec().getDocumentedParameterOrder(),
+					undocumentedParameters = added.getSpec().getUndocumentedParameterNames();
 
-					if ( !documentedParameters.length || undocumentedParameters.length ) {
-						page.addPlaceholderParameter();
-					}
+				if ( !documentedParameters.length || undocumentedParameters.length ) {
+					page.addPlaceholderParameter();
 				}
 			}
 		}
@@ -477,7 +474,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
 			this.bookletLayout.autoFocus = false;
 
-			if ( this.useNewSidebar && this.bookletLayout.isOutlined() ) {
+			if ( this.bookletLayout.isOutlined() ) {
 				this.sidebar.clear();
 				this.transclusionModel.connect( this.sidebar, { replace: 'onReplacePart' } );
 			}
@@ -537,24 +534,21 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 
 				dialog.$body.append( dialog.bookletLayout.$element );
-				if ( dialog.sidebar ) {
-					// TODO: bookletLayout will be deprecated.
-					var $debugContainer = dialog.bookletLayout.outlinePanel.$element
-						.children( '.ve-ui-mwTemplateDialog-sidebar-debug-container' );
-					if ( !$debugContainer.length ) {
-						$debugContainer = $( '<div>' )
-							.addClass( 've-ui-mwTemplateDialog-sidebar-debug-container' )
-							.prependTo( dialog.bookletLayout.outlinePanel.$element );
-					}
-					$debugContainer.append(
-						dialog.sidebar.$element,
-						dialog.bookletLayout.outlineSelectWidget.$element
-					);
-					dialog.bookletLayout.outlineSelectWidget.toggle( false );
+				var $debugContainer = dialog.bookletLayout.outlinePanel.$element
+					.children( '.ve-ui-mwTemplateDialog-sidebar-debug-container' );
+				if ( !$debugContainer.length ) {
+					$debugContainer = $( '<div>' )
+						.addClass( 've-ui-mwTemplateDialog-sidebar-debug-container' )
+						.prependTo( dialog.bookletLayout.outlinePanel.$element );
+				}
+				$debugContainer.append(
+					dialog.sidebar.$element,
+					dialog.bookletLayout.outlineSelectWidget.$element
+				);
+				dialog.bookletLayout.outlineSelectWidget.toggle( false );
 
-					if ( !dialog.transclusionModel.isSingleTemplate() ) {
-						dialog.sidebar.hideAllUnusedParameters();
-					}
+				if ( !dialog.transclusionModel.isSingleTemplate() ) {
+					dialog.sidebar.hideAllUnusedParameters();
 				}
 
 				dialog.bookletLayout.autoFocus = true;
