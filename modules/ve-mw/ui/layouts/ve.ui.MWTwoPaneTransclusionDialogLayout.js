@@ -68,7 +68,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	if ( this.outlined ) {
 		this.outlinePanel.$element
 			.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' )
-			.append( this.outlineControlsWidget.$element );
+			.append(
+				$( '<div>' ).addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-sidebar-container' )
+					.append( this.sidebar.$element ),
+				this.outlineControlsWidget.$element
+			);
 	}
 };
 

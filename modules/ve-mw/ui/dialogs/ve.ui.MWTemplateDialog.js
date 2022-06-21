@@ -513,14 +513,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 
 				dialog.$body.append( dialog.bookletLayout.$element );
-				var $debugContainer = dialog.bookletLayout.outlinePanel.$element
-					.children( '.ve-ui-mwTemplateDialog-sidebar-debug-container' );
-				if ( !$debugContainer.length ) {
-					$debugContainer = $( '<div>' )
-						.addClass( 've-ui-mwTemplateDialog-sidebar-debug-container' )
-						.prependTo( dialog.bookletLayout.outlinePanel.$element );
-				}
-				$debugContainer.append( dialog.sidebar.$element );
 
 				if ( !dialog.transclusionModel.isSingleTemplate() ) {
 					dialog.sidebar.hideAllUnusedParameters();
