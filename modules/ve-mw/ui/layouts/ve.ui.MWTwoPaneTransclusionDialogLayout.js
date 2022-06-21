@@ -72,8 +72,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.stackLayout.$element.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-stackLayout' );
 	if ( this.outlined ) {
 		this.outlinePanel.$element
-			.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' )
-			.append( this.outlineSelectWidget.$element );
+			.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' );
 		if ( this.editable ) {
 			this.outlinePanel.$element
 				.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel-editable' )
