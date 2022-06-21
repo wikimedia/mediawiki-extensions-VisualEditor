@@ -81,7 +81,7 @@
 	margin-bottom: 0;
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineButtonWidget {
+.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineButtonWidget {
 	display: none;
 }
 
@@ -248,26 +248,26 @@
 	left: 10px;
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget {
+.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget {
 	padding: 2px;
 	display: flex;
 	align-items: flex-start;
 	justify-content: left;
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers {
+.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers {
 	float: left;
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget .oo-ui-buttonWidget {
+.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget .oo-ui-buttonWidget {
 	margin-left: 4px !important; /* stylelint-disable-line declaration-no-important */
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-items > .oo-ui-buttonWidget:first-child {
+.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-items > .oo-ui-buttonWidget:first-child {
 	margin-left: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers > .oo-ui-buttonWidget:nth-child( 2 ) {
+.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers > .oo-ui-buttonWidget:nth-child( 2 ) {
 	margin-left: -4px !important; /* stylelint-disable-line declaration-no-important */
 }
 
