@@ -175,21 +175,6 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
 };
 
 /**
- * Handle booklet layout page set events.
- *
- * @private
- * @param {OO.ui.PageLayout} page Active page
- */
-ve.ui.MWTransclusionDialog.prototype.onBookletLayoutSetPage = function ( page ) {
-	var isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage &&
-			this.transclusionModel.isSingleTemplate();
-
-	this.bookletLayout.getOutlineControls().removeButton.toggle( !isLastPlaceholder );
-
-	this.sidebar.setSelectionByPageName( page.getName() );
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
@@ -580,7 +565,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 
 	// Events
 	this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
-	this.bookletLayout.connect( this, { set: 'onBookletLayoutSetPage' } );
 	this.addTemplateButton.connect( this, { click: 'addTemplatePlaceholder' } );
 	this.addContentButton.connect( this, { click: 'addContent' } );
 	this.bookletLayout.getOutlineControls().connect( this, {
