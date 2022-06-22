@@ -227,7 +227,6 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
 	var page = this.bookletLayout.getPage( param.getId() );
 
-	this.bookletLayout.stackLayout.unsetCurrentItem();
 	this.bookletLayout.removePages( [ page ] );
 
 	this.touch();
