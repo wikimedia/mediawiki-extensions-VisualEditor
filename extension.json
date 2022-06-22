@@ -2137,6 +2137,7 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWDefinedTransclusionContextItem.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineControlsWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineParameterWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineButtonWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlinePartWidget.js",
@@ -2153,7 +2154,8 @@
 				"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css",
-				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css"
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTransclusionOutlineControlsWidget.less"
 			],
 			"skinStyles": {
 				"default": [

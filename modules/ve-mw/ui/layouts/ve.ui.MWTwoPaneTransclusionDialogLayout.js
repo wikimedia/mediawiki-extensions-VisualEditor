@@ -47,7 +47,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 		this.setMenuPanel( this.outlinePanel );
 		this.outlineVisible = true;
 		if ( this.editable ) {
-			this.outlineControlsWidget = new OO.ui.OutlineControlsWidget(
+			this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget(
 				this.outlineSelectWidget
 			);
 		}
@@ -300,7 +300,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutline = function () {
  *
  * If the outline is not editable, the method will return `null`.
  *
- * @return {OO.ui.OutlineControlsWidget|null} The outline controls widget.
+ * @return {ve.ui.MWTransclusionOutlineControlsWidget|null} The outline controls widget.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutlineControls = function () {
 	return this.outlineControlsWidget;
