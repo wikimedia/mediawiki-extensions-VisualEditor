@@ -225,7 +225,6 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Template content",
 	"visualeditor-dialog-transclusion-template-search": "Template search",
 	"visualeditor-dialog-transclusion-template-search-help": "Find the template you want to insert by searching for an identifying keyword. Templates that have descriptions are more likely to work well with the visual editor.",
-	"visualeditor-dialog-transclusion-templates-menu-aria-label": "Template fields setup menu",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitext",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Press Space to select the wikitext element. Press Enter to select and edit the wikitext.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Press Ctrl+Del to delete the wikitext element. Press Ctrl+Shift+Arrows to move the element up or down.",

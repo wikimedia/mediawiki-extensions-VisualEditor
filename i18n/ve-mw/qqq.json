@@ -245,7 +245,6 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Label for the transclusion dialog when editing more than a single template.",
 	"visualeditor-dialog-transclusion-template-search": "Dialog and fieldset label to search for a template.",
 	"visualeditor-dialog-transclusion-template-search-help": "Inline help for the template search field.",
-	"visualeditor-dialog-transclusion-templates-menu-aria-label": "ARIA label for screen readers on template fields setup menu.",
 	"visualeditor-dialog-transclusion-wikitext": "Label for editor of wikitext content between transclusion parts.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "ARIA description for screen readers on the template parameter selection menu for the keyboard controls on unselected wikitext parts.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "ARIA description for screen readers on the template parameter selection menu for the keyboard controls on selected wikitext parts.",

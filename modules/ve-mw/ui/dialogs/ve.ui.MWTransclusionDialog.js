@@ -581,8 +581,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	// Events
 	this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
 	this.bookletLayout.connect( this, { set: 'onBookletLayoutSetPage' } );
-	this.bookletLayout.$menu.find( '[ role="listbox" ]' ).first()
-		.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-templates-menu-aria-label' ) );
 	this.addTemplateButton.connect( this, { click: 'addTemplatePlaceholder' } );
 	this.addContentButton.connect( this, { click: 'addContent' } );
 	this.bookletLayout.getOutlineControls().connect( this, {
