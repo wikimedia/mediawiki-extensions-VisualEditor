@@ -706,6 +706,9 @@
 	var isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
 	var isEditPage = mw.config.get( 'wgAction' ) === 'edit' || mw.config.get( 'wgAction' ) === 'submit';
 	var pageCanLoadEditor = isViewPage || isEditPage;
+	if ( pageCanLoadEditor ) {
+		$targetContainer.addClass( 've-init-mw-desktopArticleTarget-targetContainer' );
+	}
 
 	// Cast "0" (T89513)
 	var enable = !!+mw.user.options.get( 'visualeditor-enable' );

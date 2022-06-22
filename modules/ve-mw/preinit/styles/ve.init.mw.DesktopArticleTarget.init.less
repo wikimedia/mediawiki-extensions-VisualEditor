@@ -59,7 +59,7 @@
  * - while loading: anything marked "original content" as on the second load this is where the read mode content will be
  * - after activation: anything marked as "uneditable content"
  */
-.ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-toolbarPlaceholder ):not( .ve-init-mw-desktopArticleTarget ),
+.ve-loading .ve-init-mw-desktopArticleTarget-targetContainer > :not( .ve-init-mw-desktopArticleTarget-toolbarPlaceholder ):not( .ve-init-mw-desktopArticleTarget ),
 .ve-loading .ve-init-mw-desktopArticleTarget-originalContent,
 .ve-activated:not( .ve-loading ) .ve-init-mw-desktopArticleTarget-uneditableContent {
 	pointer-events: none;
@@ -71,7 +71,7 @@
 }
 
 .ve-activated {
-	#firstHeading {
+	.ve-init-mw-desktopArticleTarget-targetContainer #firstHeading {
 		/* Override the styles above to allow the heading to be selected, for copy-pasting */
 		-webkit-user-select: text;
 		-moz-user-select: text;
@@ -97,10 +97,6 @@
 		a {
 			opacity: 1;
 		}
-	}
-
-	#content {
-		position: relative;
 	}
 }
 /* stylelint-enable selector-max-id */
