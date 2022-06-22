@@ -470,7 +470,7 @@ class Hooks {
 	/**
 	 * Changes the Edit tab and adds the VisualEditor tab.
 	 *
-	 * This is attached to the MediaWiki 'SkinTemplateNavigation' hook.
+	 * This is attached to the MediaWiki 'SkinTemplateNavigation::Universal' hook.
 	 *
 	 * @param SkinTemplate $skin The skin template on which the UI is built.
 	 * @param array &$links Navigation links.

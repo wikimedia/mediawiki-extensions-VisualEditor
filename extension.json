@@ -235,8 +235,10 @@
 		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\VisualEditor\\Hooks::onResourceLoaderGetConfigVars",
 		"ResourceLoaderRegisterModules": "MediaWiki\\Extension\\VisualEditor\\Hooks::onResourceLoaderRegisterModules",
 		"SkinEditSectionLinks": "MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinEditSectionLinks",
-		"SkinTemplateNavigation": "MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinTemplateNavigation",
-		"SkinTemplateNavigation::SpecialPage": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad::onSkinTemplateNavigationSpecialPage",
+		"SkinTemplateNavigation::Universal": [
+			"MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinTemplateNavigation",
+			"MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad::onSkinTemplateNavigationSpecialPage"
+		],
 		"UserLoggedIn": "MediaWiki\\Extension\\VisualEditor\\Hooks::onUserLoggedIn"
 	},
 	"ResourceModules": {
