@@ -9,8 +9,6 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {boolean} [autoFocus=true] Focus on the first focusable element when a new page is
- *  displayed. Disabled on mobile.
  * @cfg {boolean} [outlined=false] Show the outline. The outline is used to navigate through the
  *  pages of the booklet.
  * @cfg {boolean} [editable=false] Show controls for adding, removing and reordering pages.
@@ -32,7 +30,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	} );
 	this.setContentPanel( this.stackLayout );
 	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
-	this.autoFocus = config.autoFocus === undefined || !!config.autoFocus;
+	this.autoFocus = true;
 	this.outlineVisible = false;
 	this.outlined = !!config.outlined;
 	if ( this.outlined ) {
@@ -62,10 +60,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 			select: 'onOutlineSelectWidgetSelect'
 		} );
 	}
-	if ( this.autoFocus ) {
-		// Event 'focus' does not bubble, but 'focusin' does
-		this.stackLayout.$element.on( 'focusin', this.onStackLayoutFocus.bind( this ) );
-	}
+	// Event 'focus' does not bubble, but 'focusin' does
+	this.stackLayout.$element.on( 'focusin', this.onStackLayoutFocus.bind( this ) );
 
 	// Initialization
 	this.$element.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout' );
@@ -190,14 +186,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function ( itemIndex )
 	if ( !OO.ui.contains( page.$element[ 0 ], this.getElementDocument().activeElement, true ) ) {
 		page.focus();
 	}
-};
-
-/**
- * Find the first focusable input in the booklet layout and focus
- * on it.
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusFirstFocusable = function () {
-	OO.ui.findFocusable( this.stackLayout.$element ).focus();
 };
 
 /**
@@ -505,8 +493,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 		// Blur anything focused if the next page doesn't have anything focusable.
 		// This is not needed if the next page has something focusable (because once it is
 		// focused this blur happens automatically).
-		if ( this.autoFocus &&
-			!OO.ui.isMobile() &&
+		if ( !OO.ui.isMobile() &&
 			OO.ui.findFocusable( page.$element ).length !== 0
 		) {
 			$focused = previousPage.$element.find( ':focus' );
