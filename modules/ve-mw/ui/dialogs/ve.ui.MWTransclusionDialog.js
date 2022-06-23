@@ -60,7 +60,7 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
 ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
 	{},
 	ve.ui.MWTemplateDialog.static.bookletLayoutConfig,
-	{ outlined: true, editable: true }
+	{ outlined: true }
 );
 
 ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth = 540;

@@ -14,7 +14,6 @@
  * @param {Object} [config] Configuration options
  * @cfg {boolean} [outlined=false] Show the outline. The outline is used to navigate through the
  *  pages of the booklet.
- * @cfg {boolean} [editable=false] Show controls for adding, removing and reordering pages.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDialogLayout( config ) {
 	// Configuration initialization
@@ -37,7 +36,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.outlineVisible = false;
 	this.outlined = !!config.outlined;
 	if ( this.outlined ) {
-		this.editable = !!config.editable;
 		this.outlineControlsWidget = null;
 		this.outlineSelectWidget = new OO.ui.OutlineSelectWidget();
 		this.outlinePanel = new OO.ui.PanelLayout( {
@@ -46,11 +44,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 		} );
 		this.setMenuPanel( this.outlinePanel );
 		this.outlineVisible = true;
-		if ( this.editable ) {
-			this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget(
-				this.outlineSelectWidget
-			);
-		}
+		this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget(
+			this.outlineSelectWidget
+		);
 	}
 	this.toggleMenu( this.outlined );
 
@@ -71,12 +67,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.stackLayout.$element.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-stackLayout' );
 	if ( this.outlined ) {
 		this.outlinePanel.$element
-			.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' );
-		if ( this.editable ) {
-			this.outlinePanel.$element
-				.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel-editable' )
-				.append( this.outlineControlsWidget.$element );
-		}
+			.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' )
+			.append( this.outlineControlsWidget.$element );
 	}
 };
 
@@ -189,15 +181,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isOutlined = function () {
 };
 
 /**
- * Check if booklet has editing controls.
- *
- * @return {boolean} Booklet is editable
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isEditable = function () {
-	return this.editable;
-};
-
-/**
  * Check if booklet has a visible outline.
  *
  * @return {boolean} Outline is visible
@@ -219,7 +202,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( sho
 	show = show === undefined ? !this.outlineVisible : !!show;
 	this.outlineVisible = show;
 	this.toggleMenu( show );
-	if ( show && this.editable ) {
+	if ( show ) {
 		var booklet = this;
 		// HACK: Kill dumb scrollbars when the sidebar stops animating, see T161798.
 		// Only necessary when outline controls are present, delay matches transition on
@@ -231,8 +214,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( sho
 };
 
 /**
- * Get the outline widget.
- *
  * If the booklet is not outlined, the method will return `null`.
  *
  * @return {OO.ui.OutlineSelectWidget|null} Outline widget, or null if the booklet is not outlined
@@ -242,11 +223,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutline = function () {
 };
 
 /**
- * Get the outline controls widget.
- *
- * If the outline is not editable, the method will return `null`.
- *
- * @return {ve.ui.MWTransclusionOutlineControlsWidget|null} The outline controls widget.
+ * @return {ve.ui.MWTransclusionOutlineControlsWidget|null}
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutlineControls = function () {
 	return this.outlineControlsWidget;
@@ -263,8 +240,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getPage = function ( name ) {
 };
 
 /**
- * Get the current page.
- *
  * @return {OO.ui.PageLayout|undefined} Current page, if found
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPage = function () {
