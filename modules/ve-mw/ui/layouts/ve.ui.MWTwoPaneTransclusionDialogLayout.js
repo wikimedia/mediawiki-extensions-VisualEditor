@@ -103,11 +103,9 @@ OO.inheritClass( ve.ui.MWTwoPaneTransclusionDialogLayout, OO.ui.MenuLayout );
  * @param {jQuery.Event} e Focusin event
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutFocus = function ( e ) {
-	var name, $target;
-
 	// Find the page that an element was focused within
-	$target = $( e.target ).closest( '.oo-ui-pageLayout' );
-	for ( name in this.pages ) {
+	var $target = $( e.target ).closest( '.oo-ui-pageLayout' );
+	for ( var name in this.pages ) {
 		// Check for page match, exclude current page to find only page changes
 		if ( this.pages[ name ].$element[ 0 ] === $target[ 0 ] && name !== this.currentPageName ) {
 			this.setPage( name );
@@ -123,18 +121,15 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutFocus = function 
  * @param {OO.ui.PanelLayout|null} page The page panel that is now the current panel
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( page ) {
-	var promise, layout = this;
 	// If everything is unselected, do nothing
 	if ( !page ) {
 		return;
 	}
 	// Scroll the selected page into view first
-	promise = page.scrollElementIntoView();
+	var promise = page.scrollElementIntoView();
 	// Focus the first element on the newly selected panel.
 	if ( this.autoFocus && !OO.ui.isMobile() ) {
-		promise.done( function () {
-			layout.focus();
-		} );
+		promise.done( this.focus.bind( this ) );
 	}
 
 	if ( this.outlined ) {
@@ -156,14 +151,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
  * @param {number} [itemIndex] A specific item to focus on
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function ( itemIndex ) {
-	var page,
-		items = this.stackLayout.getItems();
-
-	if ( itemIndex !== undefined && items[ itemIndex ] ) {
-		page = items[ itemIndex ];
-	} else {
-		page = this.stackLayout.getCurrentItem();
-	}
+	var items = this.stackLayout.getItems(),
+		page = items[ itemIndex ] || this.stackLayout.getCurrentItem();
 
 	if ( !page && this.outlined ) {
 		this.selectFirstSelectablePage();
@@ -221,27 +210,24 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isOutlineVisible = function ()
  * Hide or show the outline.
  *
  * @param {boolean} [show] Show outline, omit to invert current state
- * @chainable
- * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( show ) {
-	var booklet = this;
-
-	if ( this.outlined ) {
-		show = show === undefined ? !this.outlineVisible : !!show;
-		this.outlineVisible = show;
-		this.toggleMenu( show );
-		if ( show && this.editable ) {
-			// HACK: Kill dumb scrollbars when the sidebar stops animating, see T161798.
-			// Only necessary when outline controls are present, delay matches transition on
-			// `.oo-ui-menuLayout-menu`.
-			setTimeout( function () {
-				OO.ui.Element.static.reconsiderScrollbars( booklet.outlinePanel.$element[ 0 ] );
-			}, OO.ui.theme.getDialogTransitionDuration() );
-		}
+	if ( !this.outlined ) {
+		return;
 	}
 
-	return this;
+	show = show === undefined ? !this.outlineVisible : !!show;
+	this.outlineVisible = show;
+	this.toggleMenu( show );
+	if ( show && this.editable ) {
+		var booklet = this;
+		// HACK: Kill dumb scrollbars when the sidebar stops animating, see T161798.
+		// Only necessary when outline controls are present, delay matches transition on
+		// `.oo-ui-menuLayout-menu`.
+		setTimeout( function () {
+			OO.ui.Element.static.reconsiderScrollbars( booklet.outlinePanel.$element[ 0 ] );
+		}, OO.ui.theme.getDialogTransitionDuration() );
+	}
 };
 
 /**
@@ -307,19 +293,18 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPageName = function 
  * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, index ) {
-	var i, len, name, page, item, currentIndex,
-		stackLayoutPages = this.stackLayout.getItems(),
-		remove = [],
-		items = [];
+	var i, name, page,
+		stackLayoutPages = this.stackLayout.getItems();
 
 	// Remove pages with same names
-	for ( i = 0, len = pages.length; i < len; i++ ) {
+	var remove = [];
+	for ( i = 0; i < pages.length; i++ ) {
 		page = pages[ i ];
 		name = page.getName();
 
 		if ( Object.prototype.hasOwnProperty.call( this.pages, name ) ) {
 			// Correct the insertion index
-			currentIndex = stackLayoutPages.indexOf( this.pages[ name ] );
+			var currentIndex = stackLayoutPages.indexOf( this.pages[ name ] );
 			if ( currentIndex !== -1 && currentIndex + 1 < index ) {
 				index--;
 			}
@@ -331,12 +316,13 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 	}
 
 	// Add new pages
-	for ( i = 0, len = pages.length; i < len; i++ ) {
+	var items = [];
+	for ( i = 0; i < pages.length; i++ ) {
 		page = pages[ i ];
 		name = page.getName();
 		this.pages[ page.getName() ] = page;
 		if ( this.outlined ) {
-			item = new OO.ui.OutlineOptionWidget( { data: name } );
+			var item = new OO.ui.OutlineOptionWidget( { data: name } );
 			page.setOutlineItem( item );
 			items.push( item );
 		}
@@ -360,12 +346,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages ) {
-	var i, len, name, page,
-		itemsToRemove = [];
+	var itemsToRemove = [];
 
-	for ( i = 0, len = pages.length; i < len; i++ ) {
-		page = pages[ i ];
-		name = page.getName();
+	for ( var i = 0; i < pages.length; i++ ) {
+		var page = pages[ i ],
+			name = page.getName();
 		delete this.pages[ name ];
 		if ( this.outlined ) {
 			itemsToRemove.push( this.outlineSelectWidget.findItemFromData( name ) );
@@ -393,14 +378,13 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
  * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
-	var i, len,
-		pages = this.stackLayout.getItems();
+	var pages = this.stackLayout.getItems();
 
 	this.pages = {};
 	this.currentPageName = null;
 	if ( this.outlined ) {
 		this.outlineSelectWidget.clearItems();
-		for ( i = 0, len = pages.length; i < len; i++ ) {
+		for ( var i = 0; i < pages.length; i++ ) {
 			pages[ i ].setOutlineItem( null );
 		}
 	}
@@ -433,7 +417,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 		}
 	}
 
-	var $focused;
 	if ( previousPage ) {
 		previousPage.setActive( false );
 		// Blur anything focused if the next page doesn't have anything focusable.
@@ -442,7 +425,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 		if ( !OO.ui.isMobile() &&
 			OO.ui.findFocusable( page.$element ).length !== 0
 		) {
-			$focused = previousPage.$element.find( ':focus' );
+			var $focused = previousPage.$element.find( ':focus' );
 			if ( $focused.length ) {
 				$focused[ 0 ].blur();
 			}
