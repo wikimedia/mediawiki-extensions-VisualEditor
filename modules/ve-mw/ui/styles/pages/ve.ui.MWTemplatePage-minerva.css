@@ -5,12 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.oo-ui-menuLayout-content > .ve-ui-mwTwoPaneTransclusionDialogLayout-stackLayout {
-	/* We don't want anything to collapse left/right, so shouldn't use margin */
-	padding: 0 20px;
-}
-
-.ve-ui-mwTransclusionDialog-multipart-message,
-.ve-ui-mwTransclusionDialog-multipart-message + .oo-ui-panelLayout {
+.ve-ui-mwTransclusionDialog-multipart-message + .oo-ui-panelLayout,
+.ve-ui-mwTransclusionDialog-multipart-message {
 	margin-top: 20px;
 }

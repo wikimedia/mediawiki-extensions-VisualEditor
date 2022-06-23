@@ -1,5 +1,8 @@
 .ve-ui-mwTwoPaneTransclusionDialogLayout {
 	&-stackLayout {
+		/* We don't want anything to collapse left/right, so shouldn't use margin */
+		padding: 0 48px;
+
 		&.oo-ui-stackLayout-continuous > .oo-ui-panelLayout-scrollable {
 			// Override from PanelLayout; only the StackLayout must be scrollable
 			overflow: hidden;
@@ -8,13 +11,16 @@
 		> .oo-ui-panelLayout {
 			width: 100%;
 			box-sizing: border-box;
-			// @padding-panel-dialog
-			padding: 20px;
+			margin: 48px 0 20px 0;
+
+			&:last-child {
+				margin-bottom: 48px;
+			}
 		}
 	}
 
 	&-outlinePanel {
-		> .oo-ui-outlineControlsWidget {
+		.oo-ui-outlineControlsWidget {
 			position: absolute;
 			bottom: 0;
 			left: 0;
@@ -22,11 +28,38 @@
 			height: 2.5em;
 			// @border-dialog-bar
 			border-top: 1px solid #c8ccd1;
+			padding: 2px;
+			display: flex;
+			align-items: flex-start;
+			justify-content: left;
+
+			.oo-ui-buttonWidget {
+				margin-left: 4px !important; /* stylelint-disable-line declaration-no-important */
+			}
+
+			&-items {
+				> .oo-ui-buttonWidget:first-child {
+					margin-left: 0 !important; /* stylelint-disable-line declaration-no-important */
+				}
+			}
+
+			&-movers {
+				float: left;
+
+				> .oo-ui-buttonWidget:nth-child( 2 ) {
+					margin-left: -4px !important; /* stylelint-disable-line declaration-no-important */
+				}
+			}
 		}
 	}
 
 	> .oo-ui-menuLayout-menu {
+		width: 240px;
 		// @border-dialog-bar
 		border-right: 1px solid #c8ccd1;
+	}
+
+	> .oo-ui-menuLayout-content {
+		left: 240px;
 	}
 }
