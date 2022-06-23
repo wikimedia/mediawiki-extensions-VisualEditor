@@ -40,7 +40,7 @@
 		welcomeDialogDisabled = false,
 		educationPopupsDisabled = false,
 		$targetContainer = $(
-			document.querySelector( '[data-ve-target-container]' ) ||
+			document.querySelector( '[data-mw-ve-target-container]' ) ||
 			document.getElementById( 'content' )
 		);
 

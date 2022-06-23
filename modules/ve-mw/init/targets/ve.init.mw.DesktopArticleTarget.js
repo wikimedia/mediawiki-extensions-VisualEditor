@@ -187,7 +187,7 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
 ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config ) {
 	config = ve.extendObject( {
 		$overlayContainer: $(
-			document.querySelector( '[data-ve-target-container]' ) ||
+			document.querySelector( '[data-mw-ve-target-container]' ) ||
 			document.getElementById( 'content' )
 		),
 		// Vector-2022 content area has no padding itself, so popups render too close

@@ -29,7 +29,7 @@
 		// Infuse the form last to avoid recursive infusion with no config
 		form = OO.ui.infuse( $( '.ve-init-mw-collabTarget-form' ) ),
 		$targetContainer = $(
-			document.querySelector( '[data-ve-target-container]' ) ||
+			document.querySelector( '[data-mw-ve-target-container]' ) ||
 			document.getElementById( 'content' )
 		);
 
