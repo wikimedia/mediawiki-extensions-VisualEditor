@@ -322,8 +322,9 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 
 	// Properties
 	this.bookletLayout = new ve.ui.MWTwoPaneTransclusionDialogLayout( this.constructor.static.bookletLayoutConfig );
+	// TODO: Remove once all references are gone.
+	this.sidebar = this.bookletLayout.sidebar;
 
-	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
 	this.sidebar.connect( this, {
 		focusPageByName: 'focusPart',
 		filterPagesByName: 'onFilterPagesByName',
