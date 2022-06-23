@@ -534,11 +534,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						.addClass( 've-ui-mwTemplateDialog-sidebar-debug-container' )
 						.prependTo( dialog.bookletLayout.outlinePanel.$element );
 				}
-				$debugContainer.append(
-					dialog.sidebar.$element,
-					dialog.bookletLayout.outlineSelectWidget.$element
-				);
-				dialog.bookletLayout.outlineSelectWidget.toggle( false );
+				$debugContainer.append( dialog.sidebar.$element );
 
 				if ( !dialog.transclusionModel.isSingleTemplate() ) {
 					dialog.sidebar.hideAllUnusedParameters();

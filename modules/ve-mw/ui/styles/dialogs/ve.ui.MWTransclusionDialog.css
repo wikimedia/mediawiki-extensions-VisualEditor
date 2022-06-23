@@ -81,20 +81,6 @@
 	margin-bottom: 0;
 }
 
-.ve-ui-mwTemplateDialog-sidebar-debug-container > .oo-ui-outlineSelectWidget {
-	background-color: rgba( 100%, 0%, 100%, 0.1 );
-	height: auto;
-	outline: 1px solid #f0f;
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-iconElement-icon {
-	opacity: 0.51;
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-labelElement-label {
-	color: #72777d;
-}
-
 .ve-ui-mwTransclusionDialog-newSidebar.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineButtonWidget {
 	display: none;
 }
