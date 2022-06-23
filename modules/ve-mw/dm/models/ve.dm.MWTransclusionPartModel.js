@@ -82,11 +82,8 @@ ve.dm.MWTransclusionPartModel.prototype.serialize = function () {
 
 /**
  * Add all non-existing required and suggested parameters, if any.
- *
- * @return {number} Number of parameters added
  */
 ve.dm.MWTransclusionPartModel.prototype.addPromptedParameters = function () {
-	return 0;
 };
 
 /**
