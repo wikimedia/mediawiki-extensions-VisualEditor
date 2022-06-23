@@ -321,8 +321,7 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
-	var addedCount = 0,
-		params = this.params,
+	var params = this.params,
 		spec = this.spec,
 		names = spec.getKnownParameterNames();
 
@@ -340,11 +339,8 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 			)
 		) {
 			this.addParameter( new ve.dm.MWParameterModel( this, names[ i ] ) );
-			addedCount++;
 		}
 	}
-
-	return addedCount;
 };
 
 /**
