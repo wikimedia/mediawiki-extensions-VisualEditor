@@ -96,22 +96,6 @@ OO.inheritClass( ve.ui.MWTwoPaneTransclusionDialogLayout, OO.ui.MenuLayout );
  * @param {OO.ui.PageLayout} page Current page
  */
 
-/**
- * An 'add' event is emitted when pages are {@link #addPages added} to the booklet layout.
- *
- * @event add
- * @param {OO.ui.PageLayout[]} page Added pages
- * @param {number} index Index pages were added at
- */
-
-/**
- * A 'remove' event is emitted when pages are {@link #clearPages cleared} or
- * {@link #removePages removed} from the booklet.
- *
- * @event remove
- * @param {OO.ui.PageLayout[]} pages Removed pages
- */
-
 /* Methods */
 
 /**
@@ -361,7 +345,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPageName = function 
  *
  * @param {OO.ui.PageLayout[]} pages Pages to add
  * @param {number} index Index of the insertion point
- * @fires add
  * @chainable
  * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
@@ -406,8 +389,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 		// It's impossible to lose a selection here. Selecting something else is business logic.
 	}
 	this.stackLayout.addItems( pages, index );
-	this.emit( 'add', pages, index );
-
 	return this;
 };
 
@@ -417,7 +398,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  * To remove all pages from the booklet, you may wish to use the #clearPages method instead.
  *
  * @param {OO.ui.PageLayout[]} pages An array of pages to remove
- * @fires remove
  * @chainable
  * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
@@ -443,8 +423,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 		// We might loose the selection here, but what to select instead is business logic.
 	}
 	this.stackLayout.removeItems( pages );
-	this.emit( 'remove', pages );
-
 	return this;
 };
 
@@ -453,7 +431,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
  *
  * To remove only a subset of pages from the booklet, use the #removePages method.
  *
- * @fires remove
  * @chainable
  * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
@@ -470,9 +447,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 		}
 	}
 	this.stackLayout.clearItems();
-
-	this.emit( 'remove', pages );
-
 	return this;
 };
 
