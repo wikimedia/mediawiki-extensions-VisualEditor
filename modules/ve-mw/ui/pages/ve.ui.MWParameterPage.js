@@ -13,12 +13,11 @@
  *
  * @constructor
  * @param {ve.dm.MWParameterModel} parameter Template parameter
- * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  * @cfg {boolean} [readOnly] Parameter is read-only
  */
-ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) {
+ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, config ) {
 	var paramName = parameter.getName();
 
 	// Configuration initialization
@@ -27,7 +26,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, name, config ) 
 	}, config );
 
 	// Parent constructor
-	ve.ui.MWParameterPage.super.call( this, name, config );
+	ve.ui.MWParameterPage.super.call( this, parameter.getId(), config );
 
 	// Properties
 	this.edited = false;

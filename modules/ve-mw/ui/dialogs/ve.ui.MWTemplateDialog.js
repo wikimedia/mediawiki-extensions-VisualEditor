@@ -187,7 +187,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	var page;
 
 	if ( param.getName() ) {
-		page = new ve.ui.MWParameterPage( param, param.getId(), {
+		page = new ve.ui.MWParameterPage( param, {
 			$overlay: this.$overlay, readOnly: this.isReadOnly()
 		} )
 			.connect( this, {
