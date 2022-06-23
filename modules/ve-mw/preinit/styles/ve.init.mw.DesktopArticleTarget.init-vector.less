@@ -18,8 +18,14 @@
 .ve-init-mw-desktopArticleTarget-toolbarPlaceholder {
 	font-size: 0.875em;
 
-	// New Vector
+	// New Vector with $wgVectorTitleAboveTabs = false
 	margin: @padding-top-toolbar @padding-horizontal-toolbar -@padding-top-toolbar @padding-horizontal-toolbar;
+
+	// New Vector with $wgVectorTitleAboveTabs = true
+	/* stylelint-disable-next-line selector-class-pattern */
+	.vector-article-toolbar ~ .vector-body & {
+		margin: 0;
+	}
 
 	// Legacy Vector
 	.skin-vector-legacy & {

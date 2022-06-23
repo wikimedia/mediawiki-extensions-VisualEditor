@@ -27,7 +27,11 @@
 		} ),
 		importButton = OO.ui.infuse( $( '.ve-init-mw-collabTarget-importButton' ) ),
 		// Infuse the form last to avoid recursive infusion with no config
-		form = OO.ui.infuse( $( '.ve-init-mw-collabTarget-form' ) );
+		form = OO.ui.infuse( $( '.ve-init-mw-collabTarget-form' ) ),
+		$targetContainer = $(
+			document.querySelector( '[data-ve-target-container]' ) ||
+			document.getElementById( 'content' )
+		);
 
 	if ( !VisualEditorSupportCheck() ) {
 		// VE not supported - say something?
@@ -67,7 +71,7 @@
 
 			$( 'body' ).addClass( 've-activated ve-active' );
 
-			$( '#content' ).prepend( target.$element );
+			$targetContainer.prepend( target.$element );
 
 			target.transformPage();
 			$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );

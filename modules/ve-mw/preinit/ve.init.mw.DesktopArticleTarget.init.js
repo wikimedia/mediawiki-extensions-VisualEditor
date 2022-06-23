@@ -38,7 +38,11 @@
 		targetLoaded = false,
 		plugins = [],
 		welcomeDialogDisabled = false,
-		educationPopupsDisabled = false;
+		educationPopupsDisabled = false,
+		$targetContainer = $(
+			document.querySelector( '[data-ve-target-container]' ) ||
+			document.getElementById( 'content' )
+		);
 
 	function showLoading( /* mode */ ) {
 		if ( isLoading ) {
@@ -82,7 +86,7 @@
 		var scrollTop = $( document.documentElement ).scrollTop();
 		var floating = scrollTop > contentTop;
 		if ( floating !== wasFloating ) {
-			var width = $( '#content' ).outerWidth();
+			var width = $targetContainer.outerWidth();
 			$toolbarPlaceholder.toggleClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-floating', floating );
 			$toolbarPlaceholderBar.css( 'width', width );
 			wasFloating = floating;
@@ -100,13 +104,13 @@
 			$toolbarPlaceholder.append( $toolbarPlaceholderBar );
 		}
 		// Toggle -floating class before append (if required) to avoid content moving later
-		contentTop = $( '#content' ).offset().top;
+		contentTop = $targetContainer.offset().top;
 		wasFloating = null;
 		onWindowScroll();
 
 		var scrollTopBefore = $( document.documentElement ).scrollTop();
 
-		$( '#content' ).prepend( $toolbarPlaceholder );
+		$targetContainer.prepend( $toolbarPlaceholder );
 
 		// TODO: Would be better with ve.addPassiveEventListener
 		$( window ).on( 'scroll', onWindowScrollListener );
@@ -287,7 +291,7 @@
 							parseSection( uri.query.section )
 						);
 					} );
-					target.setContainer( $( '#content' ) );
+					target.setContainer( $targetContainer );
 					targetLoaded = true;
 					return target;
 				}, function ( e ) {
@@ -1432,7 +1436,7 @@
 			section = parseSection( uri.query.section );
 
 		var requiredSkinElements =
-			$( '#content' ).length &&
+			$targetContainer.length &&
 			$( '#mw-content-text' ).length &&
 			// A link to open the editor is technically not necessary if it's going to open itself
 			( isEditPage || $( '#ca-edit, #ca-viewsource' ).length );
