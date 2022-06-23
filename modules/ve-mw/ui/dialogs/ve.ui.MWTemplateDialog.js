@@ -482,7 +482,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 						this.transclusionModel, data.template
 					);
 					promise = this.transclusionModel.addPart( template ).then(
-						this.initializeNewTemplateParameters.bind( this )
+						this.transclusionModel.addPromptedParameters.bind( this.transclusionModel )
 					);
 				} else {
 					// Open the dialog to add a new template, always starting with a placeholder
@@ -547,20 +547,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.bookletLayout.autoFocus = true;
 			} );
 		}, this );
-};
-
-/**
- * Initialize parameters for new template insertion
- *
- * @private
- */
-ve.ui.MWTemplateDialog.prototype.initializeNewTemplateParameters = function () {
-	var parts = this.transclusionModel.getParts();
-	for ( var i = 0; i < parts.length; i++ ) {
-		if ( parts[ i ] instanceof ve.dm.MWTemplateModel ) {
-			parts[ i ].addPromptedParameters();
-		}
-	}
 };
 
 /**
