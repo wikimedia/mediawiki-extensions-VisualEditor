@@ -14,6 +14,7 @@
  * @param {Object} [config] Configuration options
  * @cfg {boolean} [outlined=false] Show the outline. The outline is used to navigate through the
  *  pages of the booklet.
+ * @property {Object.<string,OO.ui.PageLayout>} pages
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDialogLayout( config ) {
 	// Configuration initialization
@@ -131,6 +132,21 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSelectedTransclusionPartChan
 };
 
 /**
+ * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
+ * @param {ve.dm.MWTransclusionPartModel|null} added Added part
+ * @param {number} [newPosition]
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onReplacePart = function ( removed, added, newPosition ) {
+	this.sidebar.onReplacePart( removed, added, newPosition );
+
+	var keys = Object.keys( this.pages ),
+		isLastPlaceholder = keys.length === 1 &&
+			this.pages[ keys[ 0 ] ] instanceof ve.ui.MWTemplatePlaceholderPage;
+	// TODO: In other cases this is disabled rather than hidden. See T311303
+	this.outlineControlsWidget.removeButton.toggle( !isLastPlaceholder );
+};
+
+/**
  * Handle stack layout focus.
  *
  * @private
@@ -164,13 +180,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
 	// Focus the first element on the newly selected panel.
 	if ( this.autoFocus && !OO.ui.isMobile() ) {
 		promise.done( this.focus.bind( this ) );
-	}
-
-	if ( this.outlined ) {
-		var isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage &&
-			Object.keys( this.pages ).length === 1;
-		// TODO: In other cases this is disabled rather than hidden. See T311303
-		this.outlineControlsWidget.removeButton.toggle( !isLastPlaceholder );
 	}
 
 	this.sidebar.setSelectionByPageName( page.getName() );

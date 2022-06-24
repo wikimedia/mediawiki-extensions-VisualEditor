@@ -451,7 +451,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			this.bookletLayout.autoFocus = false;
 
 			if ( this.bookletLayout.isOutlined() ) {
-				this.transclusionModel.connect( this.sidebar, { replace: 'onReplacePart' } );
+				this.transclusionModel.connect( this.bookletLayout, { replace: 'onReplacePart' } );
 			}
 
 			// Initialization
