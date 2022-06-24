@@ -4,6 +4,9 @@
  *
  * Also owns the outline controls.
  *
+ * This class has domain knowledge about its contents, for example different
+ * behaviors for template vs template parameter elements.
+ *
  * @class
  * @extends OO.ui.MenuLayout
  *
@@ -155,6 +158,14 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
 			layout.focus();
 		} );
 	}
+
+	var isLastPlaceholder = page instanceof ve.ui.MWTemplatePlaceholderPage &&
+		Object.keys( this.pages ).length === 1;
+
+	// TODO: In other cases this is disabled rather than hidden. See T311303
+	this.outlineControlsWidget.removeButton.toggle( !isLastPlaceholder );
+
+	this.sidebar.setSelectionByPageName( page.getName() );
 };
 
 /**
