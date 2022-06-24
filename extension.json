@@ -200,7 +200,8 @@
 				"RevisionLookup",
 				"StatsdDataFactory",
 				"PageEditStash",
-				"SkinFactory"
+				"SkinFactory",
+				"WikiPageFactory"
 			]
 		}
 	},

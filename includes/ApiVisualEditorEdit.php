@@ -22,6 +22,7 @@ use ExtensionRegistry;
 use FlaggablePageView;
 use IBufferingStatsdDataFactory;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\User\UserIdentity;
@@ -31,7 +32,6 @@ use Sanitizer;
 use SkinFactory;
 use Title;
 use Wikimedia\ParamValidator\ParamValidator;
-use WikiPage;
 
 class ApiVisualEditorEdit extends ApiBase {
 	use ApiParsoidTrait;
@@ -54,6 +54,9 @@ class ApiVisualEditorEdit extends ApiBase {
 	/** @var SkinFactory */
 	private $skinFactory;
 
+	/** @var WikiPageFactory */
+	private $wikiPageFactory;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name Name of this module
@@ -62,6 +65,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * @param IBufferingStatsdDataFactory $statsdDataFactory
 	 * @param PageEditStash $pageEditStash
 	 * @param SkinFactory $skinFactory
+	 * @param WikiPageFactory $wikiPageFactory
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -70,7 +74,8 @@ class ApiVisualEditorEdit extends ApiBase {
 		RevisionLookup $revisionLookup,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		PageEditStash $pageEditStash,
-		SkinFactory $skinFactory
+		SkinFactory $skinFactory,
+		WikiPageFactory $wikiPageFactory
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -79,6 +84,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->statsdDataFactory = $statsdDataFactory;
 		$this->pageEditStash = $pageEditStash;
 		$this->skinFactory = $skinFactory;
+		$this->wikiPageFactory = $wikiPageFactory;
 	}
 
 	/**
@@ -285,7 +291,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->statsdDataFactory->increment( "editstash.ve_serialization_cache.set_" . $status );
 
 		// Also parse and prepare the edit in case it might be saved later
-		$pageUpdater = WikiPage::factory( $title )->newPageUpdater( $this->getUser() );
+		$pageUpdater = $this->wikiPageFactory->newFromTitle( $title )->newPageUpdater( $this->getUser() );
 		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
 
 		$status = $this->pageEditStash->parseAndCache( $pageUpdater, $content, $this->getUser(), '' );

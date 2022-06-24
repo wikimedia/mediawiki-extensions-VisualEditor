@@ -35,8 +35,6 @@ use SpecialPage;
 use Title;
 use User;
 use WebRequest;
-use WikiFilePage;
-use WikiPage;
 
 class Hooks {
 
@@ -551,6 +549,7 @@ class Hooks {
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
 		// us to splice into the middle of an associative array.
 		$newViews = [];
+		$wikiPageFactory = $services->getWikiPageFactory();
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
 				// Build the VisualEditor tab
@@ -579,8 +578,7 @@ class Hooks {
 				$editTab = $data;
 				if (
 					$title->inNamespace( NS_FILE ) &&
-					WikiPage::factory( $title ) instanceof WikiFilePage &&
-					!WikiPage::factory( $title )->isLocal()
+					!$wikiPageFactory->newFromTitle( $title )->isLocal()
 				) {
 					$editTabMessage = $tabMessages[$action . 'localdescriptionsource'];
 				} else {
@@ -717,8 +715,7 @@ class Hooks {
 		// Exit if we're on a foreign file description page
 		if (
 			$title->inNamespace( NS_FILE ) &&
-			WikiPage::factory( $title ) instanceof WikiFilePage &&
-			!WikiPage::factory( $title )->isLocal()
+			!$services->getWikiPageFactory()->newFromTitle( $title )->isLocal()
 		) {
 			return;
 		}
