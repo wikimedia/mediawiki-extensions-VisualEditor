@@ -22,12 +22,7 @@
 	position: relative;
 }
 
-.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-inlineDescription {
-	/* FIXME remove when sidebar feature flag is gone T303386 */
-	padding-left: 0;
-}
-
-.ve-ui-mwTransclusionDialog-newSidebar .ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
+.ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
 	right: 0;
 }
 

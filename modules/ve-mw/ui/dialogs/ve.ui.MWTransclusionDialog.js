@@ -20,18 +20,11 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWTransclusionDialog = function VeUiMWTransclusionDialog( config ) {
-	var veConfig = mw.config.get( 'wgVisualEditorConfig' );
-
 	// Parent constructor
 	ve.ui.MWTransclusionDialog.super.call( this, config );
 
 	// Properties
 	this.isSidebarExpanded = null;
-
-	// TODO: Remove and cleanup CSS
-	if ( veConfig.transclusionDialogNewSidebar ) {
-		this.$element.addClass( 've-ui-mwTransclusionDialog-newSidebar' );
-	}
 
 	this.hotkeyTriggers = {};
 	this.$element.on( 'keydown', this.onKeyDown.bind( this ) );
