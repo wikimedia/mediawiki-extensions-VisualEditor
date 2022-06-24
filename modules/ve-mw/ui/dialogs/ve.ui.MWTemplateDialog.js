@@ -314,9 +314,7 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	this.sidebar = this.bookletLayout.sidebar;
 
 	this.sidebar.connect( this, {
-		focusPageByName: 'focusPart',
-		filterPagesByName: 'onFilterPagesByName',
-		selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
+		focusPageByName: 'focusPart'
 	} );
 
 	// Initialization
@@ -535,42 +533,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
  * Intentionally empty. This is provided for Wikia extensibility.
  */
 ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
-
-/**
- * @private
- * @param {Object} visibility
- */
-ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
-	for ( var pageName in visibility ) {
-		var page = this.bookletLayout.getPage( pageName );
-		if ( page ) {
-			page.toggle( visibility[ pageName ] );
-		}
-	}
-};
-
-/**
- * @private
- * @param {string} partId
- * @param {boolean} internal Used for internal calls to suppress events
- *
- * This method supports using the space bar in a sidebar template header.
- */
-ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( partId, internal ) {
-	var page = this.bookletLayout.getPage( partId );
-	if ( page && !internal ) {
-		page.scrollElementIntoView();
-	}
-
-	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
-	// the "select" event. This will stop working when we disconnect the old sidebar.
-	this.bookletLayout.getOutline().items.forEach( function ( item ) {
-		// This repeats what ve.ui.MWTransclusionOutlineWidget.setSelectionByPageName did, but for
-		// the old sidebar
-		item.setSelected( item.getData() === partId );
-	} );
-	this.bookletLayout.getOutlineControls().onOutlineChange();
-};
 
 /**
  * @private
