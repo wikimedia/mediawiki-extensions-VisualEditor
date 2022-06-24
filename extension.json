@@ -2148,11 +2148,11 @@
 			],
 			"styles": [
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css",
+				"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css",
-				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css",
-				"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.less"
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css"
 			],
 			"skinStyles": {
 				"default": [
@@ -2160,9 +2160,9 @@
 					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-default.css"
 				],
 				"minerva": [
+					"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout-minerva.less",
 					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.css",
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.css",
-					"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout-minerva.less"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.css"
 				]
 			},
 			"dependencies": [
