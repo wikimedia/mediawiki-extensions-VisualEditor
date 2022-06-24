@@ -514,8 +514,6 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	var target = this;
 	this.transclusionModel.reset();
-	this.sidebar.clear();
-
 	this.bookletLayout.clearPages();
 	this.transclusionModel
 		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )

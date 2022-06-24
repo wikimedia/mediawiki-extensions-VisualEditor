@@ -455,6 +455,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 			pages[ i ].setOutlineItem( null );
 		}
 	}
+	this.sidebar.clear();
 	this.stackLayout.clearItems();
 
 	this.emit( 'remove', pages );
