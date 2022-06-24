@@ -104,14 +104,6 @@
 	display: none;
 }
 
-.ve-ui-mwTemplateDialog .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
-	width: 240px;
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-menuLayout > .oo-ui-menuLayout-content {
-	left: 240px;
-}
-
 .ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
 	border-right: 0;
 	width: 100%;
@@ -246,29 +238,6 @@
 
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
 	left: 10px;
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget {
-	padding: 2px;
-	display: flex;
-	align-items: flex-start;
-	justify-content: left;
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers {
-	float: left;
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget .oo-ui-buttonWidget {
-	margin-left: 4px !important; /* stylelint-disable-line declaration-no-important */
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-items > .oo-ui-buttonWidget:first-child {
-	margin-left: 0 !important; /* stylelint-disable-line declaration-no-important */
-}
-
-.ve-ui-mwTemplateDialog .oo-ui-outlineControlsWidget > .oo-ui-outlineControlsWidget-movers > .oo-ui-buttonWidget:nth-child( 2 ) {
-	margin-left: -4px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget {

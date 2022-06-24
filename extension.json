@@ -2161,7 +2161,8 @@
 				],
 				"minerva": [
 					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.css",
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.css"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.css",
+					"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout-minerva.less"
 				]
 			},
 			"dependencies": [
