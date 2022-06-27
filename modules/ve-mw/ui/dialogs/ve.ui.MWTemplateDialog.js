@@ -100,8 +100,7 @@ ve.ui.MWTemplateDialog.prototype.touch = function () {
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  */
 ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
-	var reselect,
-		removePages = [];
+	var removePages = [];
 
 	if ( removed ) {
 		// Remove parameter pages of removed templates
@@ -113,10 +112,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 			}
 			removed.disconnect( this );
 		}
-		if ( this.loaded && !this.preventReselection && partPage.isActive() ) {
-			var closestPage = this.bookletLayout.findClosestPage( partPage );
-			reselect = closestPage && closestPage.getName();
-		}
 		removePages.push( partPage );
 		this.bookletLayout.removePages( removePages );
 	}
@@ -124,9 +119,12 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 	if ( added ) {
 		var page = this.getPageFromPart( added );
 		if ( page ) {
+			var reselect;
+
 			this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( added ) );
-			if ( reselect ) {
-				// Use added page instead of closest page
+			if ( removed ) {
+				// When we're replacing a part, it can only be a template placeholder
+				// becoming an actual template.  Focus this new template.
 				reselect = added.getId();
 			}
 
@@ -148,10 +146,16 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 
 				this.preventReselection = false;
 
-				if ( names.length ) {
-					// Focus the first element when parameters are present
-					// FIXME: This hasn't worked in a long time, nor is it a desirable behavior.
-					reselect = added.getParameter( names[ 0 ] ).getId();
+				if ( this.loaded ) {
+					if ( names.length ) {
+						// Focus the first element when parameters are present
+						// FIXME: This hasn't worked in a long time, nor is it a desirable behavior.
+						reselect = added.getParameter( names[ 0 ] ).getId();
+					}
+
+					if ( reselect ) {
+						this.focusPart( reselect );
+					}
 				}
 
 				var documentedParameters = added.getSpec().getDocumentedParameterOrder(),
@@ -161,12 +165,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 					page.addPlaceholderParameter();
 				}
 			}
-		}
-	}
-
-	if ( this.loaded ) {
-		if ( reselect ) {
-			this.focusPart( reselect );
 		}
 	}
 

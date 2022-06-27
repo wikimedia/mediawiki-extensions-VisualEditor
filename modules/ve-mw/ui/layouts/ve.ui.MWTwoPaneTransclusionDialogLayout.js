@@ -251,40 +251,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( sho
 };
 
 /**
- * Find the page closest to the specified page.
- *
- * @param {OO.ui.PageLayout} page Page to use as a reference point
- * @return {OO.ui.PageLayout|null} Page closest to the specified page
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.findClosestPage = function ( page ) {
-	var next, prev, level,
-		pages = this.stackLayout.getItems(),
-		index = pages.indexOf( page );
-
-	if ( index !== -1 ) {
-		next = pages[ index + 1 ];
-		prev = pages[ index - 1 ];
-		// Prefer adjacent pages at the same level
-		if ( this.outlined ) {
-			level = this.outlineSelectWidget.findItemFromData( page.getName() ).getLevel();
-			if (
-				prev &&
-				level === this.outlineSelectWidget.findItemFromData( prev.getName() ).getLevel()
-			) {
-				return prev;
-			}
-			if (
-				next &&
-				level === this.outlineSelectWidget.findItemFromData( next.getName() ).getLevel()
-			) {
-				return next;
-			}
-		}
-	}
-	return prev || next || null;
-};
-
-/**
  * Get the outline widget.
  *
  * If the booklet is not outlined, the method will return `null`.
