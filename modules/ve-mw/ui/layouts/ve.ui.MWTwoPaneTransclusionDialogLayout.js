@@ -36,7 +36,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.outlineVisible = false;
 	this.outlined = !!config.outlined;
 	if ( this.outlined ) {
-		this.outlineControlsWidget = null;
 		this.outlineSelectWidget = new OO.ui.OutlineSelectWidget();
 		this.outlinePanel = new OO.ui.PanelLayout( {
 			expanded: this.expanded,
@@ -44,9 +43,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 		} );
 		this.setMenuPanel( this.outlinePanel );
 		this.outlineVisible = true;
-		this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget(
-			this.outlineSelectWidget
-		);
+		this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget();
 	}
 	this.toggleMenu( this.outlined );
 
@@ -130,7 +127,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSelectedTransclusionPartChan
 		// the old sidebar
 		item.setSelected( item.getData() === partId );
 	} );
-	this.outlineControlsWidget.onOutlineChange();
+	this.refreshControls();
 };
 
 /**
@@ -463,5 +460,41 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	}
 	page.setActive( true );
 	this.stackLayout.setItem( page );
+
+	this.refreshControls();
+
 	this.emit( 'set', page );
+};
+
+/**
+ * Refresh controls
+ *
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
+	var pages = this.stackLayout.getItems(),
+		page = this.getCurrentPage(),
+		index = pages.indexOf( page ),
+		isParameter = page instanceof ve.ui.MWParameterPage,
+		canMoveUp, canMoveDown = false,
+		canBeDeleted = !isParameter;
+
+	/* check if this is the first element and no parameter */
+	canMoveUp = !isParameter && index > 0;
+
+	/* check if this is the last element and no parameter */
+	if ( !isParameter ) {
+		for ( var i = index + 1; i < pages.length; i++ ) {
+			if ( !( pages[ i ] instanceof ve.ui.MWParameterPage || pages[ i ] instanceof ve.ui.MWAddParameterPage ) ) {
+				canMoveDown = true;
+				break;
+			}
+		}
+	}
+
+	this.outlineControlsWidget.setButtonsEnabled( {
+		canMoveUp: canMoveUp,
+		canMoveDown: canMoveDown,
+		canBeDeleted: canBeDeleted
+	} );
+
 };

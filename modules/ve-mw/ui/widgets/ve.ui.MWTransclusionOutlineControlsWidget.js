@@ -1,28 +1,12 @@
 /**
- * OutlineControlsWidget is a set of controls for an
- * {@link OO.ui.OutlineSelectWidget outline select widget}.
- * Controls include moving items up and down, removing items, and adding different kinds of items.
- *
- * **Currently, this class is only used by {@link OO.ui.BookletLayout booklet layouts}.**
- *
  * @class
  * @extends OO.ui.Widget
  * @mixins OO.ui.mixin.GroupElement
  *
  * @constructor
- * @param {OO.ui.OutlineSelectWidget} outline Outline to control
  * @param {Object} [config] Configuration options
- * @cfg {Object} [abilities] List of abilties
- * @cfg {boolean} [abilities.move=true] Allow moving movable items
- * @cfg {boolean} [abilities.remove=true] Allow removing removable items
  */
-ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( outline, config ) {
-	// Allow passing positional parameters inside the config object
-	if ( OO.isPlainObject( outline ) && config === undefined ) {
-		config = outline;
-		outline = config.outline;
-	}
-
+ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( config ) {
 	// Configuration initialization
 	config = config || {};
 
@@ -33,7 +17,6 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( 
 	OO.ui.mixin.GroupElement.call( this, config );
 
 	// Properties
-	this.outline = outline;
 	this.$movers = $( '<div>' );
 	this.upButton = new OO.ui.ButtonWidget( {
 		framed: false,
@@ -50,14 +33,8 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( 
 		icon: 'trash',
 		title: OO.ui.msg( 'ooui-outline-control-remove' )
 	} );
-	this.abilities = { move: true, remove: true };
 
 	// Events
-	outline.connect( this, {
-		select: 'onOutlineChange',
-		add: 'onOutlineChange',
-		remove: 'onOutlineChange'
-	} );
 	this.upButton.connect( this, {
 		click: [ 'emit', 'move', -1 ]
 	} );
@@ -75,7 +52,6 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( 
 		.addClass( 've-ui-mwTransclusionOutlineControlsWidget-movers' )
 		.append( this.upButton.$element, this.downButton.$element, this.removeButton.$element );
 	this.$element.append( this.$icon, this.$group, this.$movers );
-	this.setAbilities( config.abilities || {} );
 };
 
 /* Setup */
@@ -97,52 +73,15 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineControlsWidget, OO.ui.mixin.GroupEleme
 /* Methods */
 
 /**
- * Set abilities.
+ * Change buttons
  *
- * @param {Object} abilities List of abilties
- * @param {boolean} [abilities.move] Allow moving movable items
- * @param {boolean} [abilities.remove] Allow removing removable items
+ * @param {Object} states List of abilities with canMoveUp, canMoveDown and canBeDeleted
+ * @param {boolean} states.canMoveUp Allow moving item up
+ * @param {boolean} states.canMoveDown Allow moving item down
+ * @param {boolean} states.canBeDeleted Allow removing removable item
  */
-ve.ui.MWTransclusionOutlineControlsWidget.prototype.setAbilities = function ( abilities ) {
-	for ( var ability in this.abilities ) {
-		if ( abilities[ ability ] !== undefined ) {
-			this.abilities[ ability ] = !!abilities[ ability ];
-		}
-	}
-
-	this.onOutlineChange();
-};
-
-/**
- * Handle outline change events.
- *
- * @private
- */
-ve.ui.MWTransclusionOutlineControlsWidget.prototype.onOutlineChange = function () {
-	var items = this.outline.getItems(),
-		selectedItem = this.outline.findSelectedItem(),
-		movable = this.abilities.move && selectedItem && selectedItem.isMovable(),
-		removable = this.abilities.remove && selectedItem && selectedItem.isRemovable();
-
-	var firstMovable, lastMovable;
-	if ( movable ) {
-		var i = -1;
-		var len = items.length;
-		while ( ++i < len ) {
-			if ( items[ i ].isMovable() ) {
-				firstMovable = items[ i ];
-				break;
-			}
-		}
-		i = len;
-		while ( i-- ) {
-			if ( items[ i ].isMovable() ) {
-				lastMovable = items[ i ];
-				break;
-			}
-		}
-	}
-	this.upButton.setDisabled( !movable || selectedItem === firstMovable );
-	this.downButton.setDisabled( !movable || selectedItem === lastMovable );
-	this.removeButton.setDisabled( !removable );
+ve.ui.MWTransclusionOutlineControlsWidget.prototype.setButtonsEnabled = function ( states ) {
+	this.upButton.setDisabled( !states.canMoveUp );
+	this.downButton.setDisabled( !states.canMoveDown );
+	this.removeButton.setDisabled( !states.canBeDeleted );
 };
