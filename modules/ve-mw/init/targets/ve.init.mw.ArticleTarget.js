@@ -827,22 +827,31 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 		this.emit( 'savePreview' );
 		this.saveDialog.pushPending();
 
-		wikitext = this.getDocToSave();
-		if ( this.sectionTitle && this.sectionTitle.getValue() ) {
-			wikitext = '== ' + this.sectionTitle.getValue() + ' ==\n\n' + wikitext;
+		var params = {};
+
+		var sectionTitle = this.sectionTitle && this.sectionTitle.getValue();
+		if ( sectionTitle ) {
+			params.section = 'new';
+			params.sectiontitle = sectionTitle;
+		}
+		if ( mw.config.get( 'wgUserVariant' ) ) {
+			params.variant = mw.config.get( 'wgUserVariant' );
 		}
 
-		api.post( {
-			action: 'visualeditor',
-			paction: 'parsedoc',
-			page: this.getPageName(),
-			wikitext: wikitext,
-			pst: true
-		} ).then( function ( response ) {
-			var doc, baseDoc;
-			baseDoc = target.getSurface().getModel().getDocument().getHtmlDocument();
-			doc = target.constructor.static.parseDocument( response.visualeditor.content, 'visual' );
-			target.saveDialog.showPreview( doc, baseDoc );
+		api.post( ve.extendObject( params, {
+			action: 'parse',
+			title: this.getPageName(),
+			text: this.getDocToSave(),
+			pst: true,
+			preview: true,
+			sectionpreview: this.section !== null,
+			disableeditsection: true,
+			uselang: mw.config.get( 'wgUserLanguage' ),
+			useskin: mw.config.get( 'skin' ),
+			mobileformat: OO.ui.isMobile(),
+			prop: [ 'text', 'categorieshtml', 'displaytitle', 'subtitle', 'modules', 'jsconfigvars' ]
+		} ) ).then( function ( response ) {
+			target.saveDialog.showPreview( response );
 		}, function ( errorCode, details ) {
 			target.saveDialog.showPreview( target.extractErrorMessages( details ) );
 		} ).always( function () {

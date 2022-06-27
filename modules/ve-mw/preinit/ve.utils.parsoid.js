@@ -110,30 +110,39 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 	var docTitleText = docTitle.getPrefixedText();
 	prefix = prefix || '';
 	Array.prototype.forEach.call( container.querySelectorAll( 'a[href*="#"]' ), function ( el ) {
-		var fragment = new mw.Uri( el.href ).fragment,
-			targetData = mw.libs.ve.getTargetDataFromHref( el.href, el.ownerDocument );
+		var fragment = null;
+		if ( el.getAttribute( 'href' )[ 0 ] === '#' ) {
+			// Leagcy parser
+			fragment = el.getAttribute( 'href' ).slice( 1 );
+		} else {
+			// Parsoid HTML
+			var targetData = mw.libs.ve.getTargetDataFromHref( el.href, el.ownerDocument );
 
-		if ( targetData.isInternal ) {
-			var title = mw.Title.newFromText( targetData.title );
-			if ( title && title.getPrefixedText() === docTitleText ) {
-
-				if ( !fragment ) {
-					// Special case for empty fragment, even if prefix set
-					el.setAttribute( 'href', '#' );
-				} else {
-					if ( prefix ) {
-						var target = container.querySelector( '#' + $.escapeSelector( fragment ) );
-						// There may be multiple links to a specific target, so check the target
-						// hasn't already been fixed (in which case it would be null)
-						if ( target ) {
-							target.setAttribute( 'id', prefix + fragment );
-						}
-					}
-					el.setAttribute( 'href', '#' + prefix + fragment );
+			if ( targetData.isInternal ) {
+				var title = mw.Title.newFromText( targetData.title );
+				if ( title && title.getPrefixedText() === docTitleText ) {
+					fragment = new mw.Uri( el.href ).fragment;
 				}
-				el.removeAttribute( 'target' );
-
 			}
+		}
+
+		if ( fragment !== null ) {
+			if ( !fragment ) {
+				// Special case for empty fragment, even if prefix set
+				el.setAttribute( 'href', '#' );
+			} else {
+				if ( prefix ) {
+					var target = container.querySelector( '#' + $.escapeSelector( fragment ) );
+					// There may be multiple links to a specific target, so check the target
+					// hasn't already been fixed (in which case it would be null)
+					if ( target ) {
+						target.setAttribute( 'id', prefix + fragment );
+						target.setAttribute( 'data-mw-id-fixed', '' );
+					}
+				}
+				el.setAttribute( 'href', '#' + prefix + fragment );
+			}
+			el.removeAttribute( 'target' );
 		}
 	} );
 };
@@ -193,44 +202,6 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 	var data = mw.libs.ve.parseParsoidResourceName( href );
 	data.isInternal = isInternal;
 	return data;
-};
-
-/**
- * Expand a string of the form jquery.foo,bar|jquery.ui.baz,quux to
- * an array of module names like [ 'jquery.foo', 'jquery.bar',
- * 'jquery.ui.baz', 'jquery.ui.quux' ]
- *
- * Implementation of ResourceLoaderContext::expandModuleNames
- * TODO: Consider upstreaming this to MW core.
- *
- * @param {string} moduleNames Packed module name list
- * @return {string[]} Array of module names
- */
-mw.libs.ve.expandModuleNames = function ( moduleNames ) {
-	var modules = [];
-
-	moduleNames.split( '|' ).forEach( function ( group ) {
-		if ( group.indexOf( ',' ) === -1 ) {
-			// This is not a set of modules in foo.bar,baz notation
-			// but a single module
-			modules.push( group );
-		} else {
-			// This is a set of modules in foo.bar,baz notation
-			var matches = group.match( /(.*)\.([^.]*)/ );
-			if ( !matches ) {
-				// Prefixless modules, i.e. without dots
-				modules = modules.concat( group.split( ',' ) );
-			} else {
-				// We have a prefix and a bunch of suffixes
-				var prefix = matches[ 1 ];
-				var suffixes = matches[ 2 ].split( ',' ); // [ 'bar', 'baz' ]
-				suffixes.forEach( function ( suffix ) {
-					modules.push( prefix + '.' + suffix );
-				} );
-			}
-		}
-	} );
-	return modules;
 };
 
 /**

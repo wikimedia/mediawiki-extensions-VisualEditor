@@ -69,11 +69,11 @@
 	pointer-events: none;
 }
 
-.ve-activated #catlinks {
+.ve-activated .ve-init-mw-desktopArticleTarget-originalContent #catlinks {
 	cursor: pointer;
 }
 
-.ve-activated #catlinks a {
+.ve-activated .ve-init-mw-desktopArticleTarget-originalContent #catlinks a {
 	opacity: 1;
 }
 
