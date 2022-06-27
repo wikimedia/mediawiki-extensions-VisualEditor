@@ -595,8 +595,6 @@ ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
 		this.bookletLayout.setPage( pageName );
 		// The .setPage() call above does not necessarily call .focus(). This forces it.
 		this.bookletLayout.focus();
-	} else if ( this.bookletLayout.isOutlined() ) {
-		this.bookletLayout.getOutline().selectItemByData( pageName );
 	} else {
 		this.bookletLayout.setPage( pageName );
 	}
