@@ -1226,8 +1226,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 	html, categoriesHtml, displayTitle, lastModified, contentSub, sections
 ) {
-	var $content = $( $.parseHTML( html ) );
-
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
 		// for lastmod to have been added by MediaWiki), we will be now.
@@ -1246,7 +1244,8 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	this.$editableContent.find( '.mw-parser-output' ).replaceWith( $content );
+	// eslint-disable-next-line no-jquery/no-html
+	this.$editableContent.find( '.mw-parser-output' ).first().html( html );
 	mw.hook( 'wikipage.content' ).fire( this.$editableContent );
 	if ( displayTitle ) {
 		// eslint-disable-next-line no-jquery/no-html
