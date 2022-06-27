@@ -268,15 +268,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( sho
 };
 
 /**
- * If the booklet is not outlined, the method will return `null`.
- *
- * @return {OO.ui.OutlineSelectWidget|null} Outline widget, or null if the booklet is not outlined
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutline = function () {
-	return this.outlineSelectWidget;
-};
-
-/**
  * @return {ve.ui.MWTransclusionOutlineControlsWidget|null}
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutlineControls = function () {
