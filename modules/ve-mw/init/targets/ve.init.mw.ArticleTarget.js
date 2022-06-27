@@ -834,7 +834,7 @@ ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
 	this.showSaveError(
-		ve.msg( 'visualeditor-saveerror', ve.msg( 'visualeditor-error-invalidresponse' ) ),
+		this.extractErrorMessages( null ),
 		false /* prevents reapply */
 	);
 };
