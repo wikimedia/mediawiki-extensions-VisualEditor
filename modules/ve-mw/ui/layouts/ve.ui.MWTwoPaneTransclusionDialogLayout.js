@@ -139,12 +139,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
  *
  * If no page is selected, the first selectable page will be selected.
  * If the focus is already in an element on the current page, nothing will happen.
- *
- * @param {number} [itemIndex] A specific item to focus on
  */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function ( itemIndex ) {
-	var items = this.stackLayout.getItems(),
-		page = items[ itemIndex ] || this.stackLayout.getCurrentItem();
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
+	var page = this.stackLayout.getCurrentItem();
 
 	if ( !page && this.outlined ) {
 		this.selectFirstSelectablePage();

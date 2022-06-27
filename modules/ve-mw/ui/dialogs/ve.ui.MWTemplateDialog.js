@@ -69,7 +69,8 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			if ( this.transclusionModel.isEmpty() ) {
-				this.bookletLayout.focus( 1 );
+				// Focus the template placeholder input field.
+				this.bookletLayout.focus();
 			}
 
 			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
@@ -551,6 +552,8 @@ ve.ui.MWTemplateDialog.prototype.onFilterPagesByName = function ( visibility ) {
  * @private
  * @param {string} partId
  * @param {boolean} internal Used for internal calls to suppress events
+ *
+ * This method supports using the space bar in a sidebar template header.
  */
 ve.ui.MWTemplateDialog.prototype.onSelectedTransclusionPartChanged = function ( partId, internal ) {
 	var page = this.bookletLayout.getPage( partId );
