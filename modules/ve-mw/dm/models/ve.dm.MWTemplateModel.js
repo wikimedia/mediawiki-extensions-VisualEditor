@@ -318,7 +318,7 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
 };
 
 /**
- * @inheritdoc
+ * Add all non-existing required and suggested parameters, if any.
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 	var params = this.params,

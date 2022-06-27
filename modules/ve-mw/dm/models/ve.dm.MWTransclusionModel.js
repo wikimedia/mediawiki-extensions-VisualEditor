@@ -560,13 +560,15 @@
 		return -1;
 	};
 
-	/*
+	/**
 	 * Add missing required and suggested parameters to each transclusion.
 	 */
 	ve.dm.MWTransclusionModel.prototype.addPromptedParameters = function () {
-		for ( var i = 0; i < this.parts.length; i++ ) {
-			this.parts[ i ].addPromptedParameters();
-		}
+		this.parts.forEach( function ( part ) {
+			if ( part instanceof ve.dm.MWTemplateModel ) {
+				part.addPromptedParameters();
+			}
+		} );
 	};
 
 	/**
