@@ -129,15 +129,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
 		return;
 	}
 	// Scroll the selected page into view first
-	if ( !this.scrolling ) {
-		promise = page.scrollElementIntoView();
-	} else {
-		// eslint-disable-next-line no-jquery/no-deferred
-		promise = $.Deferred().resolve();
-	}
+	promise = page.scrollElementIntoView();
 	// Focus the first element on the newly selected panel.
-	// Don't focus if the page was set by scrolling.
-	if ( this.autoFocus && !OO.ui.isMobile() && !this.scrolling ) {
+	if ( this.autoFocus && !OO.ui.isMobile() ) {
 		promise.done( function () {
 			layout.focus();
 		} );
@@ -457,26 +451,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	page.setActive( true );
 	this.stackLayout.setItem( page );
 	this.emit( 'set', page );
-};
-
-/**
- * For outlined booklets, also reset the outlineSelectWidget to the first item.
- *
- * @inheritdoc
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.resetScroll = function () {
-	// Parent method
-	ve.ui.MWTwoPaneTransclusionDialogLayout.super.prototype.resetScroll.call( this );
-
-	if (
-		this.outlined &&
-		this.outlineSelectWidget.findFirstSelectableItem()
-	) {
-		this.scrolling = true;
-		this.outlineSelectWidget.selectItem( this.outlineSelectWidget.findFirstSelectableItem() );
-		this.scrolling = false;
-	}
-	return this;
 };
 
 /**
