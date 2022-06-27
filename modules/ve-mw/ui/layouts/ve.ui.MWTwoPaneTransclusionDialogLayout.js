@@ -165,10 +165,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function ( itemIndex )
 		page = this.stackLayout.getCurrentItem();
 	}
 
-	if ( !page && this.outlined ) {
-		this.selectFirstSelectablePage();
-		page = this.stackLayout.getCurrentItem();
-	}
 	if ( !page ) {
 		return;
 	}
@@ -451,18 +447,4 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	page.setActive( true );
 	this.stackLayout.setItem( page );
 	this.emit( 'set', page );
-};
-
-/**
- * Select the first selectable page.
- *
- * @chainable
- * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.selectFirstSelectablePage = function () {
-	if ( !this.outlineSelectWidget.findSelectedItem() ) {
-		this.outlineSelectWidget.selectItem( this.outlineSelectWidget.findFirstSelectableItem() );
-	}
-
-	return this;
 };
