@@ -1,0 +1,28 @@
+.ve-ui-mwTransclusionOutlineControlsWidget {
+	@size-base: 32px;
+	background-color: #fff; // @background-color-base; aka @wmui-color-base100;
+	&-items,
+	&-movers {
+		float: left;
+		box-sizing: border-box;
+
+		> .oo-ui-buttonWidget {
+			height: @size-base;
+			width: @size-base;
+			// There's a lot of weird specific margins with weird specific selectors
+			margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+		}
+	}
+
+	&-items {
+		float: left;
+
+		.oo-ui-buttonWidget {
+			float: left;
+		}
+	}
+
+	&-movers {
+		float: right;
+	}
+}
