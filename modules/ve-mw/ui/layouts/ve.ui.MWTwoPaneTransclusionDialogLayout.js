@@ -51,6 +51,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.toggleMenu( this.outlined );
 
 	// Events
+	this.sidebar.connect( this, {
+		filterPagesByName: 'onFilterPagesByName',
+		selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
+	} );
 	this.stackLayout.connect( this, {
 		set: 'onStackLayoutSet'
 	} );
@@ -87,6 +91,42 @@ OO.inheritClass( ve.ui.MWTwoPaneTransclusionDialogLayout, OO.ui.MenuLayout );
  */
 
 /* Methods */
+
+/**
+ * @private
+ * @param {Object} visibility
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onFilterPagesByName = function ( visibility ) {
+	for ( var pageName in visibility ) {
+		var page = this.getPage( pageName );
+		if ( page ) {
+			page.toggle( visibility[ pageName ] );
+		}
+	}
+};
+
+/**
+ * @private
+ * @param {string} partId
+ * @param {boolean} internal Used for internal calls to suppress events
+ *
+ * This method supports using the space bar in a sidebar template header.
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSelectedTransclusionPartChanged = function ( partId, internal ) {
+	var page = this.getPage( partId );
+	if ( page && !internal ) {
+		page.scrollElementIntoView();
+	}
+
+	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
+	// the "select" event. This will stop working when we disconnect the old sidebar.
+	this.outlineSelectWidget.items.forEach( function ( item ) {
+		// This repeats what ve.ui.MWTransclusionOutlineWidget.setSelectionByPageName did, but for
+		// the old sidebar
+		item.setSelected( item.getData() === partId );
+	} );
+	this.outlineControlsWidget.onOutlineChange();
+};
 
 /**
  * Handle stack layout focus.
