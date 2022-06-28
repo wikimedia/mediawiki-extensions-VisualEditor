@@ -83,15 +83,6 @@
 	padding-top: 8px;
 }
 
-.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .oo-ui-fieldsetLayout > .oo-ui-iconElement-icon,
-.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
-	display: none;
-}
-
-.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTemplatePlaceholderPage .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
-	display: inline-block;
-}
-
 .ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
 	border-right: 0;
 	width: 100%;
