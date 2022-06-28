@@ -33,6 +33,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.transclusionModel = null;
 	this.loaded = false;
 	this.altered = false;
+	this.canGoBack = false;
 	this.preventReselection = false;
 
 	this.confirmOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
