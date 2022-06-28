@@ -69,22 +69,6 @@
 	font-style: italic;
 }
 
-.ve-ui-mwTemplateDialog-sidebar-debug-container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 2.5em;
-	overflow: auto;
-	/* Compensate for 2 * 2px padding on the .oo-ui-outlineControlsWidget + 1px border */
-	margin-bottom: 5px;
-}
-
-.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTemplateDialog-sidebar-debug-container {
-	bottom: 0;
-	margin-bottom: 0;
-}
-
 .ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineButtonWidget {
 	display: none;
 }
