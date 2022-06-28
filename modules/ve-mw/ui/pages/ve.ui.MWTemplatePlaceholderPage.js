@@ -148,7 +148,9 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function () {
 	mw.track( 'event.VisualEditorTemplateDialogUse', event );
 
 	var part = ve.dm.MWTemplateModel.newFromName( transclusion, name );
-	transclusion.replacePart( this.placeholder, part );
+	transclusion.replacePart( this.placeholder, part ).then(
+		transclusion.addPromptedParameters.bind( transclusion )
+	);
 	this.addTemplateInput.pushPending();
 	// abort pending lookups, also, so the menu can't appear after we've left the page
 	this.addTemplateInput.closeLookupMenu();

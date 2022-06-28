@@ -139,11 +139,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				}
 				added.connect( this, { add: 'onAddParameter', remove: 'onRemoveParameter' } );
 
-				// Add required and suggested params to user created templates
-				if ( this.loaded ) {
-					added.addPromptedParameters();
-				}
-
 				this.preventReselection = false;
 
 				if ( this.loaded ) {
@@ -479,9 +474,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					var template = ve.dm.MWTemplateModel.newFromName(
 						this.transclusionModel, data.template
 					);
-					promise = this.transclusionModel.addPart( template ).then(
-						this.transclusionModel.addPromptedParameters.bind( this.transclusionModel )
-					);
+					promise = this.transclusionModel.addPart( template );
 				} else {
 					// Open the dialog to add a new template, always starting with a placeholder
 					promise = this.transclusionModel.addPart(
