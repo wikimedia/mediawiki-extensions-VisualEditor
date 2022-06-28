@@ -16,25 +16,19 @@
 	&-movers {
 		box-sizing: border-box;
 
-		> .oo-ui-buttonWidget {
+		> .oo-ui-buttonWidget.oo-ui-iconElement {
 			// Override OOUI defaults
-			margin: 0 0 0 4px;
-		}
-
-		> .oo-ui-buttonWidget:first-child {
-			// Override OOUI first child defaults
-			margin-left: 0;
+			margin-left: 4px;
+			margin-right: 0;
 		}
 	}
 
-	&-items {
-		margin-right: 4px;
+	&-items > .oo-ui-buttonWidget:first-child {
+		margin-left: 0;
 	}
 
-	&-movers {
+	&-movers > .oo-ui-buttonWidget:nth-child( 2 ) {
 		// Move arrow controls closer together
-		> .oo-ui-buttonWidget:nth-child( 2 ) {
-			margin-left: -4px;
-		}
+		margin-left: -4px;
 	}
 }
