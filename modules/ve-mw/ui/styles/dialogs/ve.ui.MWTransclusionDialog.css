@@ -5,22 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-widget {
-	display: inline-block;
-}
-
-.ve-ui-mwTransclusionDialog-addTemplateFieldset > .oo-ui-buttonElement-framed {
-	margin-left: 0.5em;
-}
-
-.ve-ui-mwTransclusionDialog-addTemplateFieldset .mw-widget-titleInputWidget {
-	min-width: 10em;
-}
-
-.ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-inline-help {
-	color: inherit;
-}
-
 .ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-searchWidget-results {
 	position: relative;
 	padding-bottom: 5em;
@@ -51,10 +35,6 @@
 
 .ve-ui-mwTransclusionDialog-addParameterFieldset-header.oo-ui-iconElement .oo-ui-iconElement-icon {
 	height: 100%;
-}
-
-.ve-ui-mwTransclusionDialog-addButton {
-	white-space: nowrap;
 }
 
 .ve-ui-mwTemplateDialog .mw-widget-titleWidget-menu-withDescriptions .mw-widget-titleOptionWidget .oo-ui-labelElement-label {
@@ -92,6 +72,10 @@
 	display: none;
 }
 
+.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTemplatePlaceholderPage .oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
+	display: inline-block;
+}
+
 .ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-menu {
 	border-right: 0;
 	width: 100%;
@@ -99,10 +83,6 @@
 
 .ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-content {
 	display: none;
-}
-
-.ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
-	display: inline-block;
 }
 
 .ve-ui-mwTransclusionOutlinePartWidget {
