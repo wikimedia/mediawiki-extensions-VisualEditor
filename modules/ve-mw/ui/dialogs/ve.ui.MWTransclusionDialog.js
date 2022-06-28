@@ -96,7 +96,8 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
 	// Move part to new location, and if dialog is loaded switch to new part page
 	var promise = this.transclusionModel.addPart( part, newPlace );
 	if ( this.loaded && !this.preventReselection ) {
-		promise.done( this.focusPart.bind( this, part.getId() ) );
+		// FIXME: Should be handled internally to bookletLayout.
+		promise.done( this.bookletLayout.focusPart.bind( this.bookletLayout, part.getId() ) );
 	}
 };
 
@@ -162,7 +163,7 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
 	// these magical "empty" constants.
 	var placeholderParameter = new ve.dm.MWParameterModel( part );
 	part.addParameter( placeholderParameter );
-	this.focusPart( placeholderParameter.getId() );
+	this.bookletLayout.focusPart( placeholderParameter.getId() );
 
 	this.autoExpandSidebar();
 };
@@ -373,7 +374,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 				} else {
 					selectedPage.scrollElementIntoView();
 					// TODO: Find a reliable way to refocus.
-					// dialog.focusPart( name );
+					// dialog.bookletLayout.focusPart( name );
 				}
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		}
@@ -428,7 +429,7 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	// Add the part, and if dialog is loaded switch to part page
 	var promise = this.transclusionModel.addPart( part, index );
 	if ( this.loaded && !this.preventReselection ) {
-		promise.done( this.focusPart.bind( this, part.getId() ) );
+		promise.done( this.bookletLayout.focusPart.bind( this.bookletLayout, part.getId() ) );
 	}
 };
 
