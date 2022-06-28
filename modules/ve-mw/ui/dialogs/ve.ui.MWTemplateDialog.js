@@ -145,7 +145,7 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 
 				if ( this.loaded ) {
 					if ( reselect ) {
-						this.focusPart( reselect );
+						this.bookletLayout.focusPart( reselect );
 					}
 				}
 
@@ -186,14 +186,14 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 			$overlay: this.$overlay
 		} )
 			.connect( this, {
-				focusTemplateParameterById: 'focusPart'
+				focusTemplateParameterById: this.bookletLayout.focusPart.bind( this.bookletLayout )
 			} );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
 		// Unconditionally focus parameter placeholders. Named parameters must be focused manually.
 		if ( !this.preventReselection && !param.getName() ) {
-			this.focusPart( param.getId() );
+			this.bookletLayout.focusPart( param.getId() );
 		} else if ( !this.loaded ) {
 			page.scrollElementIntoView();
 		}
@@ -312,10 +312,6 @@ ve.ui.MWTemplateDialog.prototype.initialize = function () {
 	this.bookletLayout = new ve.ui.MWTwoPaneTransclusionDialogLayout( this.constructor.static.bookletLayoutConfig );
 	// TODO: Remove once all references are gone.
 	this.sidebar = this.bookletLayout.sidebar;
-
-	this.sidebar.connect( this, {
-		focusPageByName: 'focusPart'
-	} );
 
 	// Initialization
 	this.$content.addClass( 've-ui-mwTemplateDialog' );
@@ -533,24 +529,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
  * Intentionally empty. This is provided for Wikia extensibility.
  */
 ve.ui.MWTemplateDialog.prototype.initializeTemplateParameters = function () {};
-
-/**
- * @private
- * @param {string} pageName
- */
-ve.ui.MWTemplateDialog.prototype.focusPart = function ( pageName ) {
-	// The new sidebar does not focus template parameters, only top-level parts
-	if ( pageName.indexOf( '/' ) === -1 ) {
-		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
-		//  is executed later than this here.
-		setTimeout( this.sidebar.setSelectionByPageName.bind( this.sidebar, pageName ) );
-		this.bookletLayout.setPage( pageName );
-		// The .setPage() call above does not necessarily call .focus(). This forces it.
-		this.bookletLayout.focus();
-	} else {
-		this.bookletLayout.setPage( pageName );
-	}
-};
 
 /**
  * @private

@@ -52,6 +52,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 
 	// Events
 	this.sidebar.connect( this, {
+		focusPageByName: 'focusPart',
 		filterPagesByName: 'onFilterPagesByName',
 		selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
 	} );
@@ -189,6 +190,22 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
 	// Only change the focus if is not already in the current page
 	if ( !OO.ui.contains( page.$element[ 0 ], this.getElementDocument().activeElement, true ) ) {
 		page.focus();
+	}
+};
+
+/**
+ * @param {string} pageName
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageName ) {
+	if ( pageName.indexOf( '/' ) === -1 ) {
+		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
+		//  is executed later than this here.
+		setTimeout( this.sidebar.setSelectionByPageName.bind( this.sidebar, pageName ) );
+		this.setPage( pageName );
+		// The .setPage() call above does not necessarily call .focus(). This forces it.
+		this.focus();
+	} else {
+		this.setPage( pageName );
 	}
 };
 
