@@ -1,28 +1,40 @@
 .ve-ui-mwTransclusionOutlineControlsWidget {
-	@size-base: 32px;
 	background-color: #fff; // @background-color-base; aka @wmui-color-base100;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 2.5em;
+	// @border-dialog-bar
+	border-top: 1px solid #c8ccd1;
+	padding: 2px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: left;
+
 	&-items,
 	&-movers {
-		float: left;
 		box-sizing: border-box;
 
 		> .oo-ui-buttonWidget {
-			height: @size-base;
-			width: @size-base;
-			// There's a lot of weird specific margins with weird specific selectors
-			margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+			// Override OOUI defaults
+			margin: 0 0 0 4px;
+		}
+
+		> .oo-ui-buttonWidget:first-child {
+			// Override OOUI first child defaults
+			margin-left: 0;
 		}
 	}
 
 	&-items {
-		float: left;
-
-		.oo-ui-buttonWidget {
-			float: left;
-		}
+		margin-right: 4px;
 	}
 
 	&-movers {
-		float: right;
+		// Move arrow controls closer together
+		> .oo-ui-buttonWidget:nth-child( 2 ) {
+			margin-left: -4px;
+		}
 	}
 }
