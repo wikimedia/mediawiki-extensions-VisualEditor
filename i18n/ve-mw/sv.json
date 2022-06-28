@@ -373,7 +373,6 @@
 	"visualeditor-savedialog-title-review": "Kontrollera dina ändringar",
 	"visualeditor-savedialog-title-save": "Spara dina ändringar",
 	"visualeditor-savedialog-warning-dirty": "Din redigering kan ha blivit skadad – kontrollera innan du sparar.",
-	"visualeditor-saveerror": "Fel uppstod vid sparande av data till server: $1.",
 	"visualeditor-section-body-placeholder": "Nytt avsnitt",
 	"visualeditor-section-title-placeholder": "Ämne",
 	"visualeditor-loaderror-revidconflict": "Versions-ID:n som returnerades av servern matchar inte (dokument: $1, metadata: $2).",

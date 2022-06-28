@@ -304,7 +304,6 @@
 	"visualeditor-savedialog-title-review": "Revider tu modificationes",
 	"visualeditor-savedialog-title-save": "Salveguardar tu modificationes",
 	"visualeditor-savedialog-warning-dirty": "Le modification pote haber essite corrumpite. Per favor revide lo ante de salveguardar.",
-	"visualeditor-saveerror": "Error durante le salveguarda del datos in le servitor: $1.",
 	"visualeditor-section-body-placeholder": "Nove section",
 	"visualeditor-section-title-placeholder": "Subjecto",
 	"visualeditor-loaderror-revidconflict": "Le IDs de version retornate per le servitor non corresponde (documento: $1, metadata: $2).",

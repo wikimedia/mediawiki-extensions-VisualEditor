@@ -113,7 +113,6 @@
 	"visualeditor-savedialog-title-review": "Guggda doi Ännarunge nomol o",
 	"visualeditor-savedialog-title-save": "Doi Ännarunge schbaischare",
 	"visualeditor-savedialog-warning-dirty": "Doi Beaweidung isch meeschlischawais bschedischd worre. Gugg nomol noch.",
-	"visualeditor-saveerror": "Fehla baim Schbaischare vun Daade vum Server: $1.",
 	"visualeditor-settings-tool": "Saideoischdellunge",
 	"visualeditor-version-label": "Ausfiarung",
 	"visualeditor-wikitext-warning": "Du schaffschd middm VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitegschd]] ged do nedd. Gligg uff „{{int:visualeditor-ca-editsource}}“, um onde Said im Wikitegschdmodus zu schaffe. Uugsischade Ännarunge sinn valore.",

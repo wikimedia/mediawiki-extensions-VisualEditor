@@ -369,7 +369,6 @@
 	"visualeditor-savedialog-title-review": "Änderungen überprüfen",
 	"visualeditor-savedialog-title-save": "Änderungen speichern",
 	"visualeditor-savedialog-warning-dirty": "Deine Bearbeitung ist eventuell beschädigt. Bitte vor dem Speichern überprüfen.",
-	"visualeditor-saveerror": "Fehler beim Speichern der Daten auf dem Server: $1.",
 	"visualeditor-section-body-placeholder": "Neuer Abschnitt",
 	"visualeditor-section-title-placeholder": "Betreff",
 	"visualeditor-loaderror-revidconflict": "Die vom Server zurückgegebenen Versions-IDs stimmen nicht überein (Dokument: $1, Metadaten: $2).",

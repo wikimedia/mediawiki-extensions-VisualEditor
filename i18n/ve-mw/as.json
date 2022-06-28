@@ -307,7 +307,6 @@
 	"visualeditor-savedialog-title-review": "আপুনি কৰা সালসলনি পুনৰীক্ষণ কৰক",
 	"visualeditor-savedialog-title-save": "আপুনি কৰা সালসলনি সাঁচি থওক",
 	"visualeditor-savedialog-warning-dirty": "আপোনাৰ সম্পাদনাৰ হয়তো ক্ষতি হৈছে – অনুগ্ৰহ কৰা সাঁচি থোৱাৰ আগতে পুনৰীক্ষণ কৰক।",
-	"visualeditor-saveerror": "ছাৰ্ভাৰত তথ্য সাঁচি থওঁতে ত্ৰুটি হৈছে: $1।",
 	"visualeditor-section-body-placeholder": "নতুন পৰিচ্ছেদ",
 	"visualeditor-section-title-placeholder": "বিষয়",
 	"visualeditor-loaderror-revidconflict": "চাৰ্ভাৰে ঘূৰাই দিয়া সংশোধন আইডিসমূহ মিলা নাই (দস্তাবেজ: $1, মেটাডাটা: $2)।",

@@ -238,7 +238,6 @@
 	"visualeditor-savedialog-title-review": "ทบทวนการเปลี่ยนแปลงของคุณ",
 	"visualeditor-savedialog-title-save": "บันทึกการแก้ไข",
 	"visualeditor-savedialog-warning-dirty": "แก้ไขของคุณอาจได้รับความเสียหาย – โปรดตรวจสอบก่อนทำการบันทึก",
-	"visualeditor-saveerror": "มีข้อผิดพลาดในการบันทึกข้อมูลไปยังเซิร์ฟเวอร์:  $1",
 	"visualeditor-section-body-placeholder": "ส่วนใหม่",
 	"visualeditor-settings-tool": "การตั้งค่าหน้า",
 	"visualeditor-special-characters-group-other": "ที่ใช้บ่อย",

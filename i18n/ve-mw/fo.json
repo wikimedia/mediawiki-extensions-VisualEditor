@@ -101,7 +101,6 @@
 	"visualeditor-savedialog-title-review": "Eftirkanna tínar broytingar",
 	"visualeditor-savedialog-title-save": "Goym tínar broytingar",
 	"visualeditor-savedialog-warning-dirty": "Tín rætting kann hava tikið skaða - vinarliga hygg hana ígjjøgnum áðrenn tú goymir.",
-	"visualeditor-saveerror": "Feilur hendi tá dáta skuldi goymast á ambætaranum: $1.",
 	"visualeditor-version-label": "Versjón",
 	"visualeditor-wikitext-warning": "Tú brúkar VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] virkar ikki her. Trýst á \"{{int:visualeditor-ca-editsource}}\" fyri at rætta síðuna í wikitekst-støðu – ikki goymdar rættingar verða mistar.",
 	"visualeditor-wikitext-warning-title": "Wikitekst markering er funnin"

@@ -386,7 +386,6 @@
 	"visualeditor-savedialog-title-review": "Değişikliklerinizi gözden geçirin",
 	"visualeditor-savedialog-title-save": "Değişikliklerinizi kaydedin",
 	"visualeditor-savedialog-warning-dirty": "Değişiklikleriniz bozulmuş olabilir - lütfen kaydetmeden önce inceleme yapınız.",
-	"visualeditor-saveerror": "Sunucuya veri kaydedilirken hata: $1.",
 	"visualeditor-section-body-placeholder": "Yeni bölüm",
 	"visualeditor-section-title-placeholder": "Konu",
 	"visualeditor-loaderror-revidconflict": "Sunucu tarafından döndürülen düzeltme kimlikleri eşleşmiyor (belge: $1, meta veri: $2)",

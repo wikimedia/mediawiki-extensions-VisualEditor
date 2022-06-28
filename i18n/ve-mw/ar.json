@@ -351,7 +351,6 @@
 	"visualeditor-savedialog-title-review": "راجع تعديلاتك",
 	"visualeditor-savedialog-title-save": "حفظ تعديلاتك",
 	"visualeditor-savedialog-warning-dirty": "ربما تعرض تحريرك للعطب – نرجو المراجعة قبل الحفظ.",
-	"visualeditor-saveerror": "حدث خطأ أثناء حفظ البيانات إلى الخادم: $1.",
 	"visualeditor-section-body-placeholder": "قسم جديد",
 	"visualeditor-section-title-placeholder": "الموضوع",
 	"visualeditor-loaderror-revidconflict": "معرفات المراجعة المرجعة بواسطة الخادم لا تتطابق (الوثيقة: $1، البيانات الوصفية: $2).",

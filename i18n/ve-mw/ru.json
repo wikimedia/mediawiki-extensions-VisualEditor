@@ -380,7 +380,6 @@
 	"visualeditor-savedialog-title-review": "Просмотрите свои изменения",
 	"visualeditor-savedialog-title-save": "Запишите свои изменения",
 	"visualeditor-savedialog-warning-dirty": "Ваши изменения могут быть некорректными — пожалуйста, проверьте их перед сохранением.",
-	"visualeditor-saveerror": "Ошибка при сохранении данных: $1.",
 	"visualeditor-section-body-placeholder": "Новый раздел",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-loaderror-revidconflict": "ID версий возвращаемые сервером не совпадают (документ: $1, метаданные: $2).",

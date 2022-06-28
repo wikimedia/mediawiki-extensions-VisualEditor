@@ -332,7 +332,6 @@
 	"visualeditor-savedialog-title-review": "Rivedi le modifiche",
 	"visualeditor-savedialog-title-save": "Salva le modifiche",
 	"visualeditor-savedialog-warning-dirty": "La modifica potrebbe essere stata danneggiata - si prega di rivederla prima di salvare.",
-	"visualeditor-saveerror": "Errore durante il salvataggio dei dati sul server: $1.",
 	"visualeditor-section-body-placeholder": "Nuova sezione",
 	"visualeditor-section-title-placeholder": "Oggetto",
 	"visualeditor-settings-tool": "Impostazioni pagina",

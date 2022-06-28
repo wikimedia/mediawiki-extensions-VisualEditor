@@ -117,7 +117,6 @@
 	"visualeditor-savedialog-title-review": "Twoje změny přepruwować",
 	"visualeditor-savedialog-title-save": "Twoje změny składować",
 	"visualeditor-savedialog-warning-dirty": "Twoja změna je snano wobškodźena - prošu přepruwuj před składowanjom.",
-	"visualeditor-saveerror": "Zmylk při składowanju datow na serwerje: $1.",
 	"visualeditor-settings-tool": "Nastajenja strony",
 	"visualeditor-version-label": "Wersija",
 	"visualeditor-wikitext-warning": "Wužiwaš VisualEditor - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitekst]] tu njefunguje. Zo by kóždy čas k wobdźěłowanju žórłoweho teksta přešoł, bjeztoho zo by swoje změny zhubił, wočiń padacy meni pódla \"{{int:visualeditor-toolbar-savedialog}}\" a wubjer \"{{int:visualeditor-mweditmodesource-title}}\".",

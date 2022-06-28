@@ -354,7 +354,6 @@
 	"visualeditor-savedialog-title-review": "Xem lại những thay đổi của bạn",
 	"visualeditor-savedialog-title-save": "Lưu lại những thay đổi của bạn",
 	"visualeditor-savedialog-warning-dirty": "Sửa đổi của bạn có thể bị hư – xin vui lòng xem lại trước khi lưu.",
-	"visualeditor-saveerror": "Lỗi khi lưu dữ liệu trên máy chủ: $1.",
 	"visualeditor-section-body-placeholder": "Mục mới",
 	"visualeditor-section-title-placeholder": "Tiêu đề",
 	"visualeditor-loaderror-revidconflict": "Mã phiên bản do máy chủ trả về không trùng khớp (tài liệu: $1, siêu dữ liệu: $2).",

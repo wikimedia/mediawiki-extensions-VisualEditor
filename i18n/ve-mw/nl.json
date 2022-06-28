@@ -391,7 +391,6 @@
 	"visualeditor-savedialog-title-review": "Wijzigingen controleren",
 	"visualeditor-savedialog-title-save": "Wijzigingen opslaan",
 	"visualeditor-savedialog-warning-dirty": "Uw bewerking is mogelijk beschadigd. Controleer deze voordat u opslaat.",
-	"visualeditor-saveerror": "Fout tijdens het opslaan van gegevens naar de server: $1.",
 	"visualeditor-section-body-placeholder": "Nieuw kopje",
 	"visualeditor-section-title-placeholder": "Onderwerp",
 	"visualeditor-loaderror-revidconflict": "Door de server geretourneerde revisie-ID's komen niet overeen (document: $1, metadata: $2).",

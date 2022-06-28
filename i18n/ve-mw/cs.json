@@ -375,7 +375,6 @@
 	"visualeditor-savedialog-title-review": "Zkontrolujte změny",
 	"visualeditor-savedialog-title-save": "Uložit změny",
 	"visualeditor-savedialog-warning-dirty": "Vaše editace byla možná poškozena – před uložením ji prosím zkontrolujte.",
-	"visualeditor-saveerror": "Chyba při ukládání dat na server: $1.",
 	"visualeditor-section-body-placeholder": "Nová sekce",
 	"visualeditor-section-title-placeholder": "Předmět",
 	"visualeditor-loaderror-revidconflict": "ID revizí vrácená serverem neodpovídají (dokument: $1, metadata: $2).",

@@ -237,7 +237,6 @@
 	"visualeditor-savedialog-title-review": "Gennemse dine ændringer",
 	"visualeditor-savedialog-title-save": "Gem dine ændringer",
 	"visualeditor-savedialog-warning-dirty": "Din redigering kan være beskadiget - du bør gennemgå den før du gemmer.",
-	"visualeditor-saveerror": "Fejl under lagring af data til serveren: $1.",
 	"visualeditor-section-body-placeholder": "Nyt afsnit",
 	"visualeditor-settings-tool": "Sideindstillinger",
 	"visualeditor-special-characters-group-other": "Ofte brugte",

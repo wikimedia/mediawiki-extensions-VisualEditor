@@ -357,7 +357,6 @@
 	"visualeditor-savedialog-title-review": "Gjennomgå endringene dine",
 	"visualeditor-savedialog-title-save": "Lagre endringene dine",
 	"visualeditor-savedialog-warning-dirty": "Redigeringen din kan ha blitt skadet – vennligst gjennomgå endringene før lagring.",
-	"visualeditor-saveerror": "Det oppsto et problem ved lagring av data til serveren: $1.",
 	"visualeditor-section-body-placeholder": "Nytt avsnitt",
 	"visualeditor-section-title-placeholder": "Emne",
 	"visualeditor-loaderror-revidconflict": "Revisjons-ID-er returnert av tjeneren matcher ikke (dokument: $1, metadata: $2).",

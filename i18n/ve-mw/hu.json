@@ -332,7 +332,6 @@
 	"visualeditor-savedialog-title-review": "Változtatásaid megtekintése",
 	"visualeditor-savedialog-title-save": "Változtatásaid mentése",
 	"visualeditor-savedialog-warning-dirty": "A változások megsérülhettek, kérlek ellenőrizd.",
-	"visualeditor-saveerror": "Hiba a kiszolgálóra való mentés közben: $1.",
 	"visualeditor-section-body-placeholder": "Új szakasz",
 	"visualeditor-section-title-placeholder": "Tárgy",
 	"visualeditor-loaderror-revidconflict": "A szerver által visszaadott lapváltozat-azonosítók nem egyeznek (dokumentum: $1, metaadatok: $2).",

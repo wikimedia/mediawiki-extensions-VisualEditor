@@ -352,7 +352,6 @@
 	"visualeditor-savedialog-title-review": "変更内容の確認",
 	"visualeditor-savedialog-title-save": "変更内容の保存",
 	"visualeditor-savedialog-warning-dirty": "編集内容が競合しているそれがあります - 保存する前に確認してください。",
-	"visualeditor-saveerror": "サーバーにデータを保存する際にエラーが発生しました: $1",
 	"visualeditor-section-body-placeholder": "新しい節",
 	"visualeditor-section-title-placeholder": "題名",
 	"visualeditor-settings-tool": "ページの設定",

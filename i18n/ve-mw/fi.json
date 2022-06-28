@@ -359,7 +359,6 @@
 	"visualeditor-savedialog-title-review": "Tarkista muutoksesi",
 	"visualeditor-savedialog-title-save": "Tallenna muutokset",
 	"visualeditor-savedialog-warning-dirty": "Muokkauksesi on ehkä vioittunut – tarkista ennen tallentamista.",
-	"visualeditor-saveerror": "Virhe tallennettaessa tietoja palvelimelle: $1.",
 	"visualeditor-section-body-placeholder": "Uusi osio",
 	"visualeditor-section-title-placeholder": "Otsikko",
 	"visualeditor-loaderror-revidconflict": "Palvelimen palauttamat versio-ID:t eivät vastaa toisiaan (asiakirja: $1, metadata: $2).",

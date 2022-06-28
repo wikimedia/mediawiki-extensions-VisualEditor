@@ -154,7 +154,6 @@
 	"visualeditor-savedialog-title-review": "Adolygu eich newidiadau",
 	"visualeditor-savedialog-title-save": "Cadw eich newidiadau",
 	"visualeditor-savedialog-warning-dirty": "Efallai bod eich golygiad wedi ei lygru - byddwch gystal â'i adolygu cyn ei roi ar gadw.",
-	"visualeditor-saveerror": "Cafwyd gwall wrth gadw'r data ar y gweinydd: $1",
 	"visualeditor-settings-tool": "Gosodiadau'r dudalen",
 	"visualeditor-version-label": "Fersiwn",
 	"visualeditor-wikitext-warning": "Rydych yn defnyddio'r Golygydd Gweladwy; nid yw - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] yn gweithio yma. Cliciwch \"{{int:visualeditor-ca-editsource}}\" i olygu'r gystrawen wici ar y dudalen - bydd gwaith heb ei gadw cyn clicio yn mynd ar gyfeiliorn.",

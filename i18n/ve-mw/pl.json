@@ -378,7 +378,6 @@
 	"visualeditor-savedialog-title-review": "Kontrola zmian",
 	"visualeditor-savedialog-title-save": "Zapisywanie zmian",
 	"visualeditor-savedialog-warning-dirty": "Twoja edycja mogła zostać uszkodzona - przejrzyj ją przed zapisaniem.",
-	"visualeditor-saveerror": "Błąd podczas zapisywania danych na serwerze: $1.",
 	"visualeditor-section-body-placeholder": "Nowa sekcja",
 	"visualeditor-section-title-placeholder": "Temat",
 	"visualeditor-loaderror-revidconflict": "Identyfikatory wersji zwrócone przez serwer nie zgadzają się (dokument: $1, metadane: $2)",

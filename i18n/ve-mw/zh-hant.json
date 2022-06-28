@@ -331,7 +331,6 @@
 	"visualeditor-savedialog-title-review": "複核您的變更",
 	"visualeditor-savedialog-title-save": "儲存您的變更",
 	"visualeditor-savedialog-warning-dirty": "您的編輯可能已損毀，在儲存前請先複核。",
-	"visualeditor-saveerror": "儲存資料至伺服器時發生錯誤：$1。",
 	"visualeditor-section-body-placeholder": "新章節",
 	"visualeditor-section-title-placeholder": "主題",
 	"visualeditor-loaderror-revidconflict": "由伺服器回傳的修訂 ID 不相符（文件：$1，詮釋資料：$2）。",

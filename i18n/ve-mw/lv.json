@@ -326,7 +326,6 @@
 	"visualeditor-savedialog-title-review": "Pārskatīt izmaiņas",
 	"visualeditor-savedialog-title-save": "Saglabāt veiktās izmaiņas",
 	"visualeditor-savedialog-warning-dirty": "Jūsu labojums, iespējams, ir bojāts - lūdzu pārskatiet vēlreiz pirms saglabāšanas.",
-	"visualeditor-saveerror": "Kļūda datu saglabāšanā: $1.",
 	"visualeditor-section-body-placeholder": "Jauna sadaļa",
 	"visualeditor-section-title-placeholder": "Temats",
 	"visualeditor-loaderror-revidconflict": "Servera atgrieztie versiju ID nesakrīt (dokuments: $1, metadati: $2).",

@@ -351,7 +351,6 @@
 	"visualeditor-savedialog-title-review": "Controla i cambiament che t'hee fad",
 	"visualeditor-savedialog-title-save": "Salva i to modifeghe",
 	"visualeditor-savedialog-warning-dirty": "La toa modìfica la podariss vesser stàda danegiàda - dagh 'na controlada inanz de salvà.",
-	"visualeditor-saveerror": "Eror intant che 'l sistéma l'era 'drée a salvà i dati sul server: $1.",
 	"visualeditor-section-body-placeholder": "Sezzion noeuva",
 	"visualeditor-section-title-placeholder": "Oget:",
 	"visualeditor-loaderror-revidconflict": "I ID de revision dad indree del server i corisponden minga (document: $1, metadati: $2).",

@@ -364,7 +364,6 @@
 	"visualeditor-savedialog-title-review": "Επανεξετάστε τις αλλαγές σας",
 	"visualeditor-savedialog-title-save": "Αποθήκευση των αλλαγών σας",
 	"visualeditor-savedialog-warning-dirty": "Η επεξεργασία σας ίσως έχει αλλοιωθεί - παρακαλούμε ελέγξτε πριν την αποθηκεύσετε.",
-	"visualeditor-saveerror": "Σφάλμα κατά την αποθήκευση δεδομένων σε διακομιστή: $1.",
 	"visualeditor-section-body-placeholder": "Νέα ενότητα",
 	"visualeditor-section-title-placeholder": "Θέμα",
 	"visualeditor-loaderror-revidconflict": "Τα ID Έκδοσης που επιστράφηκαν από τον διακομιστή δεν ταιριάζουν (κείμενο: $1, μεταδεδομένα: $2).",

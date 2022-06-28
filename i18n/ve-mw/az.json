@@ -332,7 +332,6 @@
 	"visualeditor-savedialog-title-review": "Dəyişikliklərə bax",
 	"visualeditor-savedialog-title-save": "Yadda saxla",
 	"visualeditor-savedialog-warning-dirty": "Etdiyiniz dəyişikliklərdə səhv ola bilər – lütfən yadda saxlamazdan əvvəl yoxlayın.",
-	"visualeditor-saveerror": "Yaddaşda qeyd edilərkən xəta oldu: $1.",
 	"visualeditor-section-body-placeholder": "Yeni bölmə",
 	"visualeditor-section-title-placeholder": "Mövzu",
 	"visualeditor-loaderror-revidconflict": "Serverdən qayıdan versiya nömrələri uyğun gəlmir (sənəd: $1, metadata: $2).",

@@ -81,7 +81,6 @@
 	"visualeditor-savedialog-title-review": "Previder tui changes",
 	"visualeditor-savedialog-title-save": "Conservar tui changes",
 	"visualeditor-savedialog-warning-dirty": "Tui redaction ha eventualmen esset damageat. Ples previder ante li conservation.",
-	"visualeditor-saveerror": "Erra durant li conservation del dates sur li servitor: $1.",
 	"visualeditor-version-label": "Version",
 	"visualeditor-wikitext-warning": "Tu usa VisualEditor. Ci [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] ne functiona. Clicca a «{{int:visualeditor-ca-editsource}}» por redacter ti págine in modo de wikitextu. Tu va perdir ínconservat changes.",
 	"visualeditor-wikitext-warning-title": "Trova de wikitextual marcage"

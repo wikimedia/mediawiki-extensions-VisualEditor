@@ -360,7 +360,6 @@
 	"visualeditor-savedialog-title-review": "Праверце вашы праўкі",
 	"visualeditor-savedialog-title-save": "Захаваць змены",
 	"visualeditor-savedialog-warning-dirty": "Вашая праўка магла быць сапсаваная — праверце яе, калі ласка, перад захаваннем.",
-	"visualeditor-saveerror": "Памылка захавання дадзеных на сервер: $1.",
 	"visualeditor-section-body-placeholder": "Новы раздзел",
 	"visualeditor-section-title-placeholder": "Тэма",
 	"visualeditor-loaderror-revidconflict": "Ідэнтыфікатары версій, вернутыя серверам, не супадаюць (дакумент: $1, метададзеныя: $2).",

@@ -370,7 +370,6 @@
 	"visualeditor-savedialog-title-review": "Revisa tus cambios",
 	"visualeditor-savedialog-title-save": "Guardar tus cambios",
 	"visualeditor-savedialog-warning-dirty": "Tu edición puede haber sido corrompida. Revisa antes de guardar.",
-	"visualeditor-saveerror": "Error al guardar datos en el servidor: $1.",
 	"visualeditor-section-body-placeholder": "Nueva sección",
 	"visualeditor-section-title-placeholder": "Asunto",
 	"visualeditor-settings-tool": "Configuración de página",

@@ -114,7 +114,6 @@
 	"visualeditor-savedialog-title-review": "Feranrangen preewe",
 	"visualeditor-savedialog-title-save": "Feranrangen seekre",
 	"visualeditor-savedialog-warning-dirty": "Mä din feranrang stemet ferlicht wat ei - preewe det noch ans föör't seekrin.",
-	"visualeditor-saveerror": "Bi't seekrin faan dooten üüb di server: $1 as wat skiaf gingen.",
 	"visualeditor-settings-tool": "Iinstelangen för det sidj",
 	"visualeditor-version-label": "Wersion",
 	"visualeditor-wikitext-warning": "Dü brükst VisualEditor. [[{{MediaWiki:visualeditor-wikitext-warning-link}}|Wikitext]] werket heer ei. Trak üüb „{{int:visualeditor-ca-editsource}}“, am det sidj uun Wikitext-muude tu bewerkin. Wat noch ei seekert wurden as, gongt ferleesen.",

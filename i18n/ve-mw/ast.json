@@ -289,7 +289,6 @@
 	"visualeditor-savedialog-title-review": "Revisar los cambios",
 	"visualeditor-savedialog-title-save": "Guardar los cambios",
 	"visualeditor-savedialog-warning-dirty": "La so edición pue tar corrompida – por favor, revísela antes de guardala.",
-	"visualeditor-saveerror": "Error al guardar los datos nel sirvidor: $1.",
 	"visualeditor-section-body-placeholder": "Seición nueva",
 	"visualeditor-section-title-placeholder": "Asuntu",
 	"visualeditor-loaderror-revidconflict": "Los identificadores de revisión devueltos pol sirvidor nun casen (documentu: $1, metadatos: $2).",

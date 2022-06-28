@@ -198,7 +198,6 @@
 	"visualeditor-savedialog-title-review": "Праверыць зьмены",
 	"visualeditor-savedialog-title-save": "Захаваць зьмены",
 	"visualeditor-savedialog-warning-dirty": "Вашая праўка магла быць сапсаваная — праверце яе, калі ласка, перад захаваньнем.",
-	"visualeditor-saveerror": "Памылка ў час захаваньня зьвестак на сэрвэры: $1.",
 	"visualeditor-settings-tool": "Парамэтры старонкі",
 	"visualeditor-version-label": "Вэрсія",
 	"visualeditor-wikitext-warning": "Вы карыстаецеся візуальным рэдактарам — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікітэкст]] тут не працуе. Каб пераключыцца на рэдагаваньне вікітэксту ў любы момант бяз страты зьменаў, націсьніце кнопку пераключэньня.",

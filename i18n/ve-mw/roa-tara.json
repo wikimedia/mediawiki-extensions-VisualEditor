@@ -323,7 +323,6 @@
 	"visualeditor-savedialog-title-review": "Revide le cangiaminde tune",
 	"visualeditor-savedialog-title-save": "Reggistre le cangiaminde tune",
 	"visualeditor-savedialog-warning-dirty": "'U cangiamende tune pò essere ca ha state corrotte - pe piacere revide apprime de reggistrà.",
-	"visualeditor-saveerror": "Errore reggistranne le date sus 'u server: $1.",
 	"visualeditor-section-body-placeholder": "Seziona nove",
 	"visualeditor-section-title-placeholder": "Oggette",
 	"visualeditor-loaderror-revidconflict": "ID d'a revisione turnate da 'u server non ge s'accocchie (documende: $1, metadate: $2).",

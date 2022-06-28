@@ -309,7 +309,6 @@
 	"visualeditor-savedialog-title-review": "Приказ измена",
 	"visualeditor-savedialog-title-save": "Чување измена",
 	"visualeditor-savedialog-warning-dirty": "Ваша измена је можда оштећена. Прегледајте је пре чувања.",
-	"visualeditor-saveerror": "Грешка при чувању података на сервер: $1.",
 	"visualeditor-section-body-placeholder": "Нови одељак",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-settings-tool": "Подешавања странице",

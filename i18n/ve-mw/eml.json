@@ -120,7 +120,6 @@
 	"visualeditor-savedialog-title-review": "Rivèd'r i vòster cambiamèint",
 	"visualeditor-savedialog-title-save": "Salvèr el vòstri mudificasiòun",
 	"visualeditor-savedialog-warning-dirty": "La vòstra editasiòun la pôl èsres ruinèda - per piaśér prôva a controlèr n' ètra vòlta prìma ed salvèr",
-	"visualeditor-saveerror": "Erōr mèinter ch' j s' salvèven gl' infurmasiòun in dàl sèrver: $1.",
 	"visualeditor-settings-tool": "I paràmeter dla pàgina",
 	"visualeditor-version-label": "Versiòun",
 	"visualeditor-wikitext-warning": "A sî dré a druèr VisualEditor - Al [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] al ne funsiòuna brìsa chè. Andè a clichèr \"{{int:visualeditor-ca-editsource}}\" per cambièr la pàgina in dla manéra wikitexte (i cambiamèint mìa salvè i andràn pèrs)",
