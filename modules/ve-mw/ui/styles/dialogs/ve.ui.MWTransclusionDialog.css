@@ -17,6 +17,10 @@
 	min-width: 10em;
 }
 
+.ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-inline-help {
+	color: inherit;
+}
+
 .ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-searchWidget-results {
 	position: relative;
 	padding-bottom: 5em;
@@ -111,10 +115,6 @@
 
 .ve-ui-mwTemplateDialog.ve-ui-mwTransclusionDialog-small-screen.ve-ui-mwTransclusionDialog-expanded .oo-ui-menuLayout > .oo-ui-menuLayout-content {
 	display: none;
-}
-
-.ve-ui-mwTransclusionDialog-addTemplateFieldset .oo-ui-inline-help {
-	color: inherit;
 }
 
 .ve-ui-mwTransclusionDialog-collapsed .ve-ui-mwTwoPaneTransclusionDialogLayout .ve-ui-mwTransclusionDialog-addTemplateFieldset.oo-ui-fieldsetLayout > .oo-ui-labelElement-label {
@@ -256,6 +256,17 @@
 	margin: 8px 24px;
 }
 
+.ve-ui-mwTransclusionOutlineToggleUnusedWidget.oo-ui-buttonWidget {
+	margin: -4px 24px 0 24px;
+}
+
+.ve-ui-mwTransclusionOutlineToggleUnusedWidget .oo-ui-labelElement-label {
+	word-break: break-word;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
 .ve-ui-mwTransclusionDialog-floatingHelpElement {
 	position: absolute;
 	right: 23px;
@@ -272,15 +283,4 @@
 
 .ve-ui-mwTransclusionDialog-floatingHelpElement-fieldsetLayout .oo-ui-buttonWidget {
 	width: 100%;
-}
-
-.ve-ui-mwTransclusionOutlineToggleUnusedWidget.oo-ui-buttonWidget {
-	margin: -4px 24px 0 24px;
-}
-
-.ve-ui-mwTransclusionOutlineToggleUnusedWidget .oo-ui-labelElement-label {
-	word-break: break-word;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: normal;
 }
