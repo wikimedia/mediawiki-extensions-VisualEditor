@@ -144,7 +144,7 @@ ve.ui.MWTransclusionDialog.prototype.addTemplatePlaceholder = function () {
  *
  * @private
  */
-ve.ui.MWTransclusionDialog.prototype.addContent = function () {
+ve.ui.MWTransclusionDialog.prototype.addWikitext = function () {
 	this.addPart( new ve.dm.MWTransclusionContentModel( this.transclusionModel ) );
 };
 
@@ -211,7 +211,7 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 
 	var notInTextFields = /^(?!INPUT|TEXTAREA)/i;
 	this.connectHotKeyBinding( hotkeys.addTemplate, this.addTemplatePlaceholder.bind( this ) );
-	this.connectHotKeyBinding( hotkeys.addWikitext, this.addContent.bind( this ) );
+	this.connectHotKeyBinding( hotkeys.addWikitext, this.addWikitext.bind( this ) );
 	this.connectHotKeyBinding( hotkeys.addParameter, this.addParameter.bind( this ) );
 	this.connectHotKeyBinding( hotkeys.moveUp, this.onOutlineControlsMove.bind( this, -1 ), notInTextFields );
 	this.connectHotKeyBinding( hotkeys.moveDown, this.onOutlineControlsMove.bind( this, 1 ), notInTextFields );
@@ -220,10 +220,9 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 		this.connectHotKeyBinding( hotkeys.removeBackspace, this.onOutlineControlsRemove.bind( this ), notInTextFields );
 	}
 
-	this.addHotkeyToTitle( this.addTemplateButton, hotkeys.addTemplate );
-	this.addHotkeyToTitle( this.addContentButton, hotkeys.addWikitext );
-
 	var controls = this.bookletLayout.getOutlineControls();
+	this.addHotkeyToTitle( controls.addTemplateButton, hotkeys.addTemplate );
+	this.addHotkeyToTitle( controls.addWikitextButton, hotkeys.addWikitext );
 	this.addHotkeyToTitle( controls.upButton, hotkeys.moveUp );
 	this.addHotkeyToTitle( controls.downButton, hotkeys.moveDown );
 	this.addHotkeyToTitle( controls.removeButton, hotkeys.remove );
@@ -516,20 +515,6 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.MWTransclusionDialog.super.prototype.initialize.call( this );
 
-	// Properties
-	this.addTemplateButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'puzzle',
-		title: ve.msg( 'visualeditor-dialog-transclusion-add-template' )
-	} );
-	this.addContentButton = new OO.ui.ButtonWidget( {
-		framed: false,
-		icon: 'wikiText',
-		title: ve.msg( 'visualeditor-dialog-transclusion-add-wikitext' )
-	} );
-
-	this.bookletLayout.getOutlineControls().addItems( [ this.addTemplateButton, this.addContentButton ] );
-
 	this.setupHotkeyTriggers();
 
 	// multipart message gets attached in onReplacePart()
@@ -558,9 +543,9 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 
 	// Events
 	this.getManager().connect( this, { resize: ve.debounce( this.onWindowResize.bind( this ) ) } );
-	this.addTemplateButton.connect( this, { click: 'addTemplatePlaceholder' } );
-	this.addContentButton.connect( this, { click: 'addContent' } );
 	this.bookletLayout.getOutlineControls().connect( this, {
+		addTemplate: 'addTemplatePlaceholder',
+		addWikitext: 'addWikitext',
 		move: 'onOutlineControlsMove',
 		remove: 'onOutlineControlsRemove'
 	} );
@@ -574,9 +559,6 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var isReadOnly = this.isReadOnly();
-			this.addTemplateButton.setDisabled( isReadOnly );
-			this.addContentButton.setDisabled( isReadOnly );
 			this.bookletLayout.getOutlineControls().toggle( !this.transclusionModel.isSingleTemplate() );
 			this.$element.toggleClass(
 				've-ui-mwTransclusionDialog-single-transclusion',
