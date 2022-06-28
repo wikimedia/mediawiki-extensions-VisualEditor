@@ -17,7 +17,6 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( 
 	OO.ui.mixin.GroupElement.call( this, config );
 
 	// Properties
-	this.$movers = $( '<div>' );
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'puzzle',
@@ -68,13 +67,14 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( 
 			this.addTemplateButton.$element,
 			this.addWikitextButton.$element
 		);
-	this.$movers.addClass( 've-ui-mwTransclusionOutlineControlsWidget-movers' )
+	var $movers = $( '<div>' )
+		.addClass( 've-ui-mwTransclusionOutlineControlsWidget-movers' )
 		.append(
 			this.upButton.$element,
 			this.downButton.$element,
 			this.removeButton.$element
 		);
-	this.$element.append( this.$icon, this.$group, this.$movers );
+	this.$element.append( this.$icon, this.$group, $movers );
 };
 
 /* Setup */
