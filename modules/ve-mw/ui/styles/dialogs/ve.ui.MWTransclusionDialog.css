@@ -5,38 +5,6 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-searchWidget-results {
-	position: relative;
-	padding-bottom: 5em;
-}
-
-.ve-ui-mwTransclusionDialog-addParameterFieldset-collapsed .oo-ui-inline-help,
-.ve-ui-mwTransclusionDialog-addParameterFieldset-collapsed .ve-ui-mwTransclusionDialog-addParameterFieldset-input {
-	display: none;
-}
-
-.ve-ui-mwTransclusionDialog-addParameterFieldset-input {
-	margin-top: 8px;
-}
-
-.ve-ui-mwTransclusionDialog-addParameterFieldset-input .oo-ui-fieldLayout-field {
-	width: 100%;
-}
-
-.ve-ui-mwTransclusionDialog-addParameterFieldset .oo-ui-fieldLayout-messages .oo-ui-messageWidget {
-	margin-left: 0;
-	margin-right: 0;
-}
-
-.ve-ui-mwTransclusionDialog-addParameterFieldset-header .oo-ui-buttonElement-button {
-	white-space: normal;
-	word-break: break-word;
-}
-
-.ve-ui-mwTransclusionDialog-addParameterFieldset-header.oo-ui-iconElement .oo-ui-iconElement-icon {
-	height: 100%;
-}
-
 .ve-ui-mwTemplateDialog .mw-widget-titleWidget-menu-withDescriptions .mw-widget-titleOptionWidget .oo-ui-labelElement-label {
 	font-weight: bold;
 }
