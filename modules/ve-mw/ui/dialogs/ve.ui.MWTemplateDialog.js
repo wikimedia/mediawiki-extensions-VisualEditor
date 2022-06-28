@@ -142,12 +142,6 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 				this.preventReselection = false;
 
 				if ( this.loaded ) {
-					if ( names.length ) {
-						// Focus the first element when parameters are present
-						// FIXME: This hasn't worked in a long time, nor is it a desirable behavior.
-						reselect = added.getParameter( names[ 0 ] ).getId();
-					}
-
 					if ( reselect ) {
 						this.focusPart( reselect );
 					}
