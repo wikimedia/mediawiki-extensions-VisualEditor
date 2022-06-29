@@ -11,17 +11,13 @@
  * @mixins OO.ui.mixin.GroupElement
  *
  * @constructor
- * @param {Object} [config] Configuration options
  */
-ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( config ) {
-	// Configuration initialization
-	config = config || {};
-
+ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget() {
 	// Parent constructor
-	ve.ui.MWTransclusionOutlineControlsWidget.super.call( this, config );
+	ve.ui.MWTransclusionOutlineControlsWidget.super.call( this );
 
 	// Mixin constructors
-	OO.ui.mixin.GroupElement.call( this, config );
+	OO.ui.mixin.GroupElement.call( this );
 
 	// Properties
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
