@@ -8,27 +8,26 @@ describe( 'Content Editable', function () {
 
 	let name, content;
 
-	// See T310772
-	it.skip( 'should load when an url is opened @daily', async function () {
+	it( 'should load when an url is opened @daily', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();
 		await LoginPage.loginAdmin();
 
 		await EditPage.openForEditing( name );
-		await EditPage.activationComplete();
+		await EditPage.toolbar.waitForDisplayed( { timeout: 20000 } );
 
 		assert( await EditPage.toolbar.isDisplayed() );
 	} );
 
-	it.skip( 'should be editable', async function () {
+	it( 'should be editable', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();
 		await LoginPage.loginAdmin();
 
 		await EditPage.openForEditing( name );
-		await EditPage.activationComplete();
+		await EditPage.toolbar.waitForDisplayed( { timeout: 20000 } );
 
 		await EditPage.veRootNode.setValue( content );
 
@@ -40,14 +39,14 @@ describe( 'Content Editable', function () {
 		await browser.reloadSession();
 	} );
 
-	it.skip( 'should save an edit', async function () {
+	it( 'should save an edit', async function () {
 		content = Util.getTestString();
 		name = Util.getTestString();
 		await browser.deleteAllCookies();
 		await LoginPage.loginAdmin();
 
 		await EditPage.openForEditing( name );
-		await EditPage.activationComplete();
+		await EditPage.toolbar.waitForDisplayed( { timeout: 20000 } );
 
 		await EditPage.veRootNode.setValue( content );
 		await EditPage.savePageDots.click();
