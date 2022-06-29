@@ -306,8 +306,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPageName = function 
  *
  * @param {OO.ui.PageLayout[]} pages Pages to add
  * @param {number} index Index of the insertion point
- * @chainable
- * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, index ) {
 	var i, name, page,
@@ -350,7 +348,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 		// It's impossible to lose a selection here. Selecting something else is business logic.
 	}
 	this.stackLayout.addItems( pages, index );
-	return this;
 };
 
 /**
@@ -359,8 +356,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  * To remove all pages from the booklet, you may wish to use the #clearPages method instead.
  *
  * @param {OO.ui.PageLayout[]} pages An array of pages to remove
- * @chainable
- * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages ) {
 	var itemsToRemove = [];
@@ -383,16 +378,12 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 		// We might loose the selection here, but what to select instead is business logic.
 	}
 	this.stackLayout.removeItems( pages );
-	return this;
 };
 
 /**
  * Clear all pages from the booklet layout.
  *
  * To remove only a subset of pages from the booklet, use the #removePages method.
- *
- * @chainable
- * @return {ve.ui.MWTwoPaneTransclusionDialogLayout} The layout, for chaining
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 	var pages = this.stackLayout.getItems();
@@ -407,7 +398,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 	}
 	this.sidebar.clear();
 	this.stackLayout.clearItems();
-	return this;
 };
 
 /**
