@@ -43,13 +43,6 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  */
 
 /**
- * @event selectedTransclusionPartChanged
- * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
- *  "part_1".
- * @param {boolean} internal Used for internal calls to suppress events
- */
-
-/**
  * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
  * @param {ve.dm.MWTransclusionPartModel|null} added Added part
  * @param {number} [newPosition]
@@ -146,8 +139,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function (
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( pageName ) {
 	var partId = pageName.split( '/', 1 )[ 0 ],
-		isParameterId = pageName.length > partId.length,
-		changed = false;
+		isParameterId = pageName.length > partId.length;
 
 	for ( var id in this.partWidgets ) {
 		var partWidget = this.partWidgets[ id ],
@@ -158,7 +150,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 			if ( selected && !isParameterId ) {
 				partWidget.scrollElementIntoView();
 			}
-			changed = true;
 		}
 
 		if ( selected &&
@@ -168,10 +159,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 			var paramName = pageName.slice( partId.length + 1 );
 			partWidget.highlightParameter( paramName );
 		}
-	}
-
-	if ( changed ) {
-		this.emit( 'selectedTransclusionPartChanged', partId, isParameterId );
 	}
 };
 

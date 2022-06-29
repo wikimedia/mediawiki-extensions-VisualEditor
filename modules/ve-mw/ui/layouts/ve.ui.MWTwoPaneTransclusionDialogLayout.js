@@ -37,7 +37,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.outlineVisible = false;
 	this.outlined = !!config.outlined;
 	if ( this.outlined ) {
-		this.outlineSelectWidget = new OO.ui.OutlineSelectWidget();
 		this.outlinePanel = new OO.ui.PanelLayout( {
 			expanded: this.expanded,
 			scrollable: true
@@ -51,17 +50,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	// Events
 	this.sidebar.connect( this, {
 		focusPageByName: 'focusPart',
-		filterPagesByName: 'onFilterPagesByName',
-		selectedTransclusionPartChanged: 'onSelectedTransclusionPartChanged'
+		filterPagesByName: 'onFilterPagesByName'
 	} );
 	this.stackLayout.connect( this, {
 		set: 'onStackLayoutSet'
 	} );
-	if ( this.outlined ) {
-		this.outlineSelectWidget.connect( this, {
-			select: 'onOutlineSelectWidgetSelect'
-		} );
-	}
 	// Event 'focus' does not bubble, but 'focusin' does
 	this.stackLayout.$element.on( 'focusin', this.onStackLayoutFocus.bind( this ) );
 
@@ -106,29 +99,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onFilterPagesByName = function
 			page.toggle( visibility[ pageName ] );
 		}
 	}
-};
-
-/**
- * @private
- * @param {string} partId
- * @param {boolean} internal Used for internal calls to suppress events
- *
- * This method supports using the space bar in a sidebar template header.
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSelectedTransclusionPartChanged = function ( partId, internal ) {
-	var page = this.getPage( partId );
-	if ( page && !internal ) {
-		page.scrollElementIntoView();
-	}
-
-	// FIXME: This hack re-implements what OO.ui.SelectWidget.selectItem would do, without firing
-	// the "select" event. This will stop working when we disconnect the old sidebar.
-	this.outlineSelectWidget.items.forEach( function ( item ) {
-		// This repeats what ve.ui.MWTransclusionOutlineWidget.setSelectionByPageName did, but for
-		// the old sidebar
-		item.setSelected( item.getData() === partId );
-	} );
-	this.refreshControls();
 };
 
 /**
@@ -216,18 +186,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
 		this.focus();
 	} else {
 		this.setPage( pageName );
-	}
-};
-
-/**
- * Handle outline widget select events.
- *
- * @private
- * @param {OO.ui.OptionWidget|null} item Selected item
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onOutlineSelectWidgetSelect = function ( item ) {
-	if ( item ) {
-		this.setPage( item.getData() );
 	}
 };
 
@@ -352,10 +310,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 		}
 	}
 
-	if ( this.outlined ) {
-		this.outlineSelectWidget.addItems( items, index );
-		// It's impossible to lose a selection here. Selecting something else is business logic.
-	}
 	this.stackLayout.addItems( pages, index );
 };
 
@@ -367,24 +321,17 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  * @param {OO.ui.PageLayout[]} pages An array of pages to remove
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages ) {
-	var itemsToRemove = [];
-
 	for ( var i = 0; i < pages.length; i++ ) {
 		var page = pages[ i ],
 			name = page.getName();
 		delete this.pages[ name ];
 		if ( this.outlined ) {
-			itemsToRemove.push( this.outlineSelectWidget.findItemFromData( name ) );
 			page.setOutlineItem( null );
 		}
 		// If the current page is removed, clear currentPageName
 		if ( this.currentPageName === name ) {
 			this.currentPageName = null;
 		}
-	}
-	if ( itemsToRemove.length ) {
-		this.outlineSelectWidget.removeItems( itemsToRemove );
-		// We might loose the selection here, but what to select instead is business logic.
 	}
 	this.stackLayout.removeItems( pages );
 };
@@ -395,16 +342,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
  * To remove only a subset of pages from the booklet, use the #removePages method.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
-	var pages = this.stackLayout.getItems();
-
 	this.pages = {};
 	this.currentPageName = null;
-	if ( this.outlined ) {
-		this.outlineSelectWidget.clearItems();
-		for ( var i = 0; i < pages.length; i++ ) {
-			pages[ i ].setOutlineItem( null );
-		}
-	}
 	this.sidebar.clear();
 	this.stackLayout.clearItems();
 };
@@ -423,16 +362,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 
 	var previousPage = this.currentPageName ? this.pages[ this.currentPageName ] : null;
 	this.currentPageName = name;
-
-	if ( this.outlined ) {
-		var selectedItem = this.outlineSelectWidget.findSelectedItem();
-		if ( !selectedItem || selectedItem.getData() !== name ) {
-			// Warning! This triggers a "select" event and the .onOutlineSelectWidgetSelect()
-			// handler, which calls .setPage() a second time. Make sure .currentPageName is set to
-			// break this loop.
-			this.outlineSelectWidget.selectItemByData( name );
-		}
-	}
 
 	if ( previousPage ) {
 		previousPage.setActive( false );
