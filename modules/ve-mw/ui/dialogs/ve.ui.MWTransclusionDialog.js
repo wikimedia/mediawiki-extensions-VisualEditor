@@ -189,6 +189,7 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	this.autoExpandSidebar();
 	this.updateModeActionState();
 	this.updateActionSet();
+	this.bookletLayout.refreshControls();
 };
 
 /**
@@ -576,11 +577,6 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			var isReadOnly = this.isReadOnly();
 			this.addTemplateButton.setDisabled( isReadOnly );
 			this.addContentButton.setDisabled( isReadOnly );
-			this.bookletLayout.getOutlineControls().setAbilities( {
-				move: !isReadOnly,
-				remove: !isReadOnly
-			} );
-
 			this.bookletLayout.getOutlineControls().toggle( !this.transclusionModel.isSingleTemplate() );
 			this.$element.toggleClass(
 				've-ui-mwTransclusionDialog-single-transclusion',
