@@ -112,11 +112,13 @@
 	/* background-color: rgba( 0%, 100%, 0%, 0.2 ); */
 }
 
+.ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted:hover,
 .ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted {
 	color: #36c;
 	background-color: #eaf3ff;
 }
 
+.ve-ui-mwTransclusionOutlineParameterSelectWidget:focus .ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted,
 .ve-ui-mwTransclusionOutlineParameterWidget:hover {
 	/* This shade on a white background results in #eaecf0 a.k.a. @background-color-base--hover
 	   a.k.a. @wmui-color-base80 */
