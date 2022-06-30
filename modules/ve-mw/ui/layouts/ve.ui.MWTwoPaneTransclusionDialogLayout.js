@@ -50,7 +50,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	// Events
 	this.sidebar.connect( this, {
 		focusPageByName: 'focusPart',
-		filterPagesByName: 'onFilterPagesByName'
+		filterPagesByName: 'onFilterPagesByName',
+		sidebarPartSoftSelected: 'onSidebarPartSoftSelected'
 	} );
 	this.stackLayout.connect( this, {
 		set: 'onStackLayoutSet'
@@ -176,6 +177,18 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
 		this.focus();
 	} else {
 		this.setPage( pageName );
+	}
+};
+
+/**
+ * @param {*} pageName
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarPartSoftSelected = function ( pageName ) {
+	this.refreshControls();
+
+	var page = this.getPage( pageName );
+	if ( page ) {
+		page.scrollElementIntoView();
 	}
 };
 

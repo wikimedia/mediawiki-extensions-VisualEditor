@@ -56,6 +56,25 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
 	}
 };
 
+/**
+ * Handle spacebar in a part header
+ *
+ * @param {*} pageName
+ */
+ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSoftSelected = function ( pageName ) {
+	this.setSelectionByPageName( pageName );
+	this.emit( 'sidebarPartSoftSelected', pageName );
+};
+
+/* Events */
+
+/**
+ * Respond to the intent to select a sidebar item but without focusing the content pane.
+ *
+ * @event sidebarPartSoftSelected
+ * @param {string} pageName
+ */
+
 /* Methods */
 
 /**
@@ -99,7 +118,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 	}
 
 	widget.connect( this, {
-		transclusionPartSoftSelected: 'setSelectionByPageName',
+		transclusionPartSoftSelected: 'onTransclusionPartSoftSelected',
 		transclusionPartSelected: [ 'emit', 'focusPageByName' ]
 	} );
 
@@ -126,7 +145,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function (
  * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
  *
  * @param {string} pageName
- * @fires selectedTransclusionPartChanged
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( pageName ) {
 	var selectedPartId = pageName.split( '/', 1 )[ 0 ],
