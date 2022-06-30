@@ -138,26 +138,24 @@ ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function (
  * @fires selectedTransclusionPartChanged
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( pageName ) {
-	var partId = pageName.split( '/', 1 )[ 0 ],
-		isParameterId = pageName.length > partId.length;
+	var selectedPartId = pageName.split( '/', 1 )[ 0 ],
+		isParameter = pageName.length > selectedPartId.length;
 
-	for ( var id in this.partWidgets ) {
-		var partWidget = this.partWidgets[ id ],
-			selected = id === partId;
+	for ( var partId in this.partWidgets ) {
+		var partWidget = this.partWidgets[ partId ],
+			selected = partId === pageName;
 
 		if ( partWidget.isSelected() !== selected ) {
 			partWidget.setSelected( selected );
-			if ( selected && !isParameterId ) {
+			if ( selected && !isParameter ) {
 				partWidget.scrollElementIntoView();
 			}
 		}
 
-		if ( selected &&
-			partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget &&
-			isParameterId
-		) {
-			var paramName = pageName.slice( partId.length + 1 );
-			partWidget.highlightParameter( paramName );
+		if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget ) {
+			var selectedParamName = ( partId === selectedPartId && isParameter ) ?
+				pageName.slice( selectedPartId.length + 1 ) : null;
+			partWidget.highlightParameter( selectedParamName );
 		}
 	}
 };

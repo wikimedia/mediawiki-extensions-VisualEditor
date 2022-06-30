@@ -26,6 +26,10 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 			focus: this.bindDocumentKeyDownListener.bind( this ),
 			blur: this.unbindDocumentKeyDownListener.bind( this )
 		} );
+
+	// FIXME: Workaround to prevent the hover effect, because it causes explicit
+	// highlight and un-highlighting.  For now, this is achieved with pure CSS effects.
+	this.blockMouseOverEvents = 1;
 };
 
 /* Inheritance */
@@ -213,4 +217,11 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 	}
 
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.onDocumentKeyDown.call( this, e );
+};
+
+/**
+ * FIXME: Overrides SelectWidget handler, to prevent un-highlighting the selected item.
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseLeave = function () {
+	return false;
 };
