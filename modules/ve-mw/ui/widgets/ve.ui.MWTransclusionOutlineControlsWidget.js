@@ -30,17 +30,20 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget( 
 	this.upButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'upTriangle',
-		title: OO.ui.msg( 'ooui-outline-control-move-up' )
+		title: OO.ui.msg( 'ooui-outline-control-move-up' ),
+		disabled: true
 	} );
 	this.downButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'downTriangle',
-		title: OO.ui.msg( 'ooui-outline-control-move-down' )
+		title: OO.ui.msg( 'ooui-outline-control-move-down' ),
+		disabled: true
 	} );
 	this.removeButton = new OO.ui.ButtonWidget( {
 		framed: false,
 		icon: 'trash',
-		title: OO.ui.msg( 'ooui-outline-control-remove' )
+		title: OO.ui.msg( 'ooui-outline-control-remove' ),
+		disabled: true
 	} );
 
 	// Events
