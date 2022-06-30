@@ -189,7 +189,6 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
 	this.autoExpandSidebar();
 	this.updateModeActionState();
 	this.updateActionSet();
-	this.bookletLayout.refreshControls();
 };
 
 /**
