@@ -461,18 +461,19 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
  *
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
-	var pages = this.stackLayout.getItems(),
-		page = this.getCurrentPage(),
+	var partId = this.sidebar.findSelectedPartId(),
+		pages = this.stackLayout.getItems(),
+		page = this.getPage( partId ),
 		index = pages.indexOf( page ),
-		isParameter = page instanceof ve.ui.MWParameterPage,
+		isPart = !!partId,
 		canMoveUp, canMoveDown = false,
-		canBeDeleted = !isParameter;
+		canBeDeleted = isPart;
 
 	/* check if this is the first element and no parameter */
-	canMoveUp = !isParameter && index > 0;
+	canMoveUp = isPart && index > 0;
 
 	/* check if this is the last element and no parameter */
-	if ( !isParameter ) {
+	if ( isPart ) {
 		for ( var i = index + 1; i < pages.length; i++ ) {
 			if ( !( pages[ i ] instanceof ve.ui.MWParameterPage || pages[ i ] instanceof ve.ui.MWAddParameterPage ) ) {
 				canMoveDown = true;
