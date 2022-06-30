@@ -370,6 +370,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	}
 	page.setActive( true );
 	this.stackLayout.setItem( page );
+	this.refreshControls();
 	this.emit( 'set', page );
 };
 
