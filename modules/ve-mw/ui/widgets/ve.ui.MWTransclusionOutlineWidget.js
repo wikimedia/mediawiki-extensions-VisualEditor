@@ -104,7 +104,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 			// We can forward these events as is. The parameter's unique ids are reused as page
 			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
 			templateParameterAdded: [ 'emit', 'templateParameterAdded' ],
-			filterParametersById: [ 'emit', 'filterPagesByName' ]
+			filterParametersById: 'onFilterParametersByName'
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
 		widget = new ve.ui.MWTransclusionOutlinePlaceholderWidget( part );
@@ -199,4 +199,14 @@ ve.ui.MWTransclusionOutlineWidget.prototype.clear = function () {
 			.$element.remove();
 	}
 	this.partWidgets = {};
+};
+
+/**
+ * @private
+ *
+ * @param {Object} parameter
+ */
+ve.ui.MWTransclusionOutlineWidget.prototype.onFilterParametersByName = function ( parameter ) {
+	this.emit( 'filterPagesByName', parameter );
+	this.setSelectionByPageName();
 };
