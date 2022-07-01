@@ -60,7 +60,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Events */
 
 /**
- * @event focusTemplateParameterById
+ * @event templateParameterAdded
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
  */
@@ -289,14 +289,14 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterRemovedFromTempla
  * @private
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
- * @fires focusTemplateParameterById
+ * @fires templateParameterAdded
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = function ( item, selected ) {
 	this.onTemplateParameterSelectionChanged( item, selected );
 
 	var param = this.templateModel.getParameter( item.getData() );
 	if ( param && selected ) {
-		this.emit( 'focusTemplateParameterById', param.getId() );
+		this.emit( 'templateParameterAdded', param.getId() );
 	}
 };
 

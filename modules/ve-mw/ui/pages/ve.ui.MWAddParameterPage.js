@@ -141,7 +141,7 @@ ve.ui.MWAddParameterPage.prototype.updateParameterNameValidation = function ( va
 
 /**
  * @private
- * @fires focusTemplateParameterById
+ * @fires templateParameterAdded
  */
 ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	var name = this.paramInputField.getValue().trim();
@@ -157,7 +157,7 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 
 	var param = new ve.dm.MWParameterModel( this.template, name );
 	this.template.addParameter( param );
-	this.emit( 'focusTemplateParameterById', param.getId() );
+	this.emit( 'templateParameterAdded', param.getId() );
 
 	ve.track( 'activity.transclusion', {
 		action: 'add-unknown-parameter'

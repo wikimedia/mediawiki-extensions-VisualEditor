@@ -108,7 +108,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 		widget.connect( this, {
 			// We can forward these events as is. The parameter's unique ids are reused as page
 			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
-			focusTemplateParameterById: [ 'emit', 'focusPageByName' ],
+			templateParameterAdded: [ 'emit', 'focusPageByName' ],
 			filterParametersById: [ 'emit', 'filterPagesByName' ]
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {

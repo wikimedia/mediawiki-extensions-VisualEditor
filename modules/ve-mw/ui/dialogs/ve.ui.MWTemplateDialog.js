@@ -186,7 +186,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 			$overlay: this.$overlay
 		} )
 			.connect( this, {
-				focusTemplateParameterById: this.bookletLayout.focusPart.bind( this.bookletLayout )
+				templateParameterAdded: this.bookletLayout.focusPart.bind( this.bookletLayout )
 			} );
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
