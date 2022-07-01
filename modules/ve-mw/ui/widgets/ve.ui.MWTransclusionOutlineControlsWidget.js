@@ -89,22 +89,26 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineControlsWidget, OO.ui.mixin.GroupEleme
 
 /**
  * Emitted when the "Add template" button in the toolbar is clicked
+ *
  * @event addTemplate
  */
 
 /**
  * Emitted when the "Add wikitext" button in the toolbar is clicked
+ *
  * @event addWikitext
  */
 
 /**
  * Emitted when one of the two "Move item up/down" buttons in the toolbar is clicked
+ *
  * @event move
  * @param {number} places Number of places to move, typically -1 or 1
  */
 
 /**
  * Emitted when the "Remove item" button in the toolbar is clicked
+ *
  * @event remove
  */
 
