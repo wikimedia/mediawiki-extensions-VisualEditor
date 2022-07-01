@@ -991,7 +991,9 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 				// Use original null/empty value
 				galleryItem.originalAltText :
 				galleryItem.altText,
-			src: galleryItem.src,
+			// For existing images use `src` to avoid triggering a diff if the
+			// thumbnail size changes. For new images we have to use `thumbUrl` (T310623).
+			src: galleryItem.src || galleryItem.thumbUrl,
 			height: size.height,
 			width: size.width,
 			tagName: galleryItem.tagName,
