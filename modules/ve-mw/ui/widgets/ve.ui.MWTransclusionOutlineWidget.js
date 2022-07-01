@@ -56,15 +56,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
 	}
 };
 
-/**
- * @private
- * @param {string} pageName
- * @fires focusPageByName
- */
-ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSelected = function ( pageName ) {
-	this.emit( 'focusPageByName', pageName );
-};
-
 /* Methods */
 
 /**
@@ -109,7 +100,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 
 	widget.connect( this, {
 		transclusionPartSoftSelected: 'setSelectionByPageName',
-		transclusionPartSelected: 'onTransclusionPartSelected'
+		transclusionPartSelected: [ 'emit', 'focusPageByName' ]
 	} );
 
 	this.partWidgets[ part.getId() ] = widget;
