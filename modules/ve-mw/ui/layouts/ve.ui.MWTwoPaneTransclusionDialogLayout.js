@@ -76,16 +76,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 
 OO.inheritClass( ve.ui.MWTwoPaneTransclusionDialogLayout, OO.ui.MenuLayout );
 
-/* Events */
-
-/**
- * A 'set' event is emitted when a page is {@link #setPage set} to be displayed by the
- * booklet layout.
- *
- * @event set
- * @param {OO.ui.PageLayout} page Current page
- */
-
 /* Methods */
 
 /**
@@ -342,7 +332,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 /**
  * Set the current page by symbolic name.
  *
- * @fires set
  * @param {string} name Symbolic name of page
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
@@ -371,7 +360,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	page.setActive( true );
 	this.stackLayout.setItem( page );
 	this.refreshControls();
-	this.emit( 'set', page );
 };
 
 /**
