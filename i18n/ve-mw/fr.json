@@ -66,7 +66,7 @@
 	"collabpad": "CollabPad",
 	"tooltip-ca-createsource": "Créer le code wiki de cette page",
 	"tooltip-ca-edit": "Modifier le wikicode de cette page",
-	"tooltip-ca-editsource": "Modifier le code wiki de cette page",
+	"tooltip-ca-editsource": "Modifier le wikicode de cette page",
 	"tooltip-ca-ve-edit": "Modifier cette page",
 	"visualeditor-advancedsettings-tool": "Paramètres avancés",
 	"visualeditor-annotations-default-description": "Cette partie de la page fait partie d’une plage d’annotation.",
