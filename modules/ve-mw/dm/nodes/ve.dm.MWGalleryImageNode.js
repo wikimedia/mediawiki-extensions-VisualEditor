@@ -156,12 +156,12 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 };
 
 ve.dm.MWGalleryImageNode.static.describeChange = function ( key ) {
-	// These attributes are computed
-	if ( key === 'src' || key === 'width' || key === 'height' ) {
-		return null;
+	if ( key === 'resource' || key === 'altText' ) {
+		// Parent method
+		return ve.dm.MWGalleryImageNode.super.static.describeChange.apply( this, arguments );
 	}
-	// Parent method
-	return ve.dm.MWGalleryImageNode.super.static.describeChange.apply( this, arguments );
+	// All other attributes are computed
+	return null;
 };
 
 ve.dm.MWGalleryImageNode.static.isDiffComparable = function ( element, other ) {
