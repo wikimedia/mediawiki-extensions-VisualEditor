@@ -140,8 +140,11 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 /**
  * @inheritDoc OO.ui.SelectWidget
  */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function () {
-	if ( !this.findHighlightedItem() ) {
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( event ) {
+	if ( event.target === this.$element[ 0 ] &&
+		!this.findHighlightedItem()
+	) {
+		// When tabbing into the selection list, highlight the first parameter.
 		this.highlightItem( this.items[ 0 ] );
 	}
 	// Don't call the parent. It makes assumptions that conflict with how we use selections.
