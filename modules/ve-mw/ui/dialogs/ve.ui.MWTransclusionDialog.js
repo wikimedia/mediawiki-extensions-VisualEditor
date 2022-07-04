@@ -361,8 +361,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 		}, OO.ui.theme.getDialogTransitionDuration() );
 
 		// Reapply selection and scrolling when switching between panes.
-		// FIXME: decouple from descendants
-		var selectedPage = this.bookletLayout.stackLayout.getCurrentItem();
+		var selectedPage = this.bookletLayout.getCurrentPage();
 		if ( selectedPage ) {
 			var name = selectedPage.getName();
 			// Align whichever panel is becoming visible, after animation completes.
@@ -371,9 +370,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 				if ( expandSidebar ) {
 					dialog.sidebar.setSelectionByPageName( name );
 				} else {
-					selectedPage.scrollElementIntoView();
-					// TODO: Find a reliable way to refocus.
-					// dialog.bookletLayout.focusPart( name );
+					selectedPage.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
 				}
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		}
