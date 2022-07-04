@@ -123,27 +123,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutFocus = function 
 };
 
 /**
- * Handle stack layout set events.
- *
- * @private
- * @param {OO.ui.PanelLayout|null} page The page panel that is now the current panel
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( page ) {
-	// If everything is unselected, do nothing
-	if ( !page ) {
-		return;
-	}
-	// Scroll the selected page into view first
-	var promise = page.scrollElementIntoView();
-	// Focus the first element on the newly selected panel.
-	if ( this.autoFocus && !OO.ui.isMobile() ) {
-		promise.done( this.focus.bind( this ) );
-	}
-
-	this.sidebar.setSelectionByPageName( page.getName() );
-};
-
-/**
  * Focus the input field for the current page.
  *
  * If no page is selected, the first selectable page will be selected.
@@ -165,28 +144,15 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
  * @param {string} pageName
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageName ) {
-	if ( pageName.indexOf( '/' ) === -1 ) {
-		// FIXME: This is currently needed because the event that adds a new part to the new sidebar
-		//  is executed later than this here.
-		setTimeout( this.sidebar.setSelectionByPageName.bind( this.sidebar, pageName ) );
-		this.setPage( pageName );
-		// The .setPage() call above does not necessarily call .focus(). This forces it.
-		this.focus();
-	} else {
-		this.setPage( pageName );
-	}
+	this.setPage( pageName );
+	this.focus();
 };
 
 /**
  * @param {*} pageName
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarPartSoftSelected = function ( pageName ) {
-	this.refreshControls();
-
-	var page = this.getPage( pageName );
-	if ( page ) {
-		page.scrollElementIntoView();
-	}
+	this.setPage( pageName );
 };
 
 /**
@@ -338,10 +304,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 
 	this.stackLayout.removeItems( pagesToRemove );
 	if ( isCurrentPageRemoved ) {
-		this.currentPageName = nextSelectionCandidate || prevSelectionCandidate;
-		if ( this.currentPageName ) {
-			this.onStackLayoutSet( this.pages[ this.currentPageName ] );
-		}
+		this.setPage( nextSelectionCandidate || prevSelectionCandidate );
 	}
 };
 
