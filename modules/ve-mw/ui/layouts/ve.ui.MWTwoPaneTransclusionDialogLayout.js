@@ -53,9 +53,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 		filterPagesByName: 'onFilterPagesByName',
 		sidebarPartSoftSelected: 'onSidebarPartSoftSelected'
 	} );
-	this.stackLayout.connect( this, {
-		set: 'onStackLayoutSet'
-	} );
 	// Event 'focus' does not bubble, but 'focusin' does
 	this.stackLayout.$element.on( 'focusin', this.onStackLayoutFocus.bind( this ) );
 
@@ -315,19 +312,37 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  *
  * To remove all pages from the booklet, you may wish to use the #clearPages method instead.
  *
- * @param {OO.ui.PageLayout[]} pages An array of pages to remove
+ * @param {OO.ui.PageLayout[]} pagesToRemove An array of pages to remove
  */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages ) {
-	for ( var i = 0; i < pages.length; i++ ) {
-		var page = pages[ i ],
-			name = page.getName();
-		delete this.pages[ name ];
-		// If the current page is removed, clear currentPageName
-		if ( this.currentPageName === name ) {
-			this.currentPageName = null;
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesToRemove ) {
+	var layout = this,
+		isCurrentPageRemoved = false,
+		prevSelectionCandidate, nextSelectionCandidate;
+
+	this.stackLayout.getItems().forEach( function ( page ) {
+		var pageName = page.getName();
+		if ( pagesToRemove.indexOf( page ) !== -1 ) {
+			delete layout.pages[ pageName ];
+			// If the current page is removed, clear currentPageName
+			if ( layout.currentPageName === pageName ) {
+				isCurrentPageRemoved = true;
+			}
+		} else {
+			if ( !isCurrentPageRemoved ) {
+				prevSelectionCandidate = pageName;
+			} else if ( !nextSelectionCandidate ) {
+				nextSelectionCandidate = pageName;
+			}
+		}
+	} );
+
+	this.stackLayout.removeItems( pagesToRemove );
+	if ( isCurrentPageRemoved ) {
+		this.currentPageName = nextSelectionCandidate || prevSelectionCandidate;
+		if ( this.currentPageName ) {
+			this.onStackLayoutSet( this.pages[ this.currentPageName ] );
 		}
 	}
-	this.stackLayout.removeItems( pages );
 };
 
 /**
@@ -371,7 +386,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 		}
 	}
 	page.setActive( true );
-	this.stackLayout.setItem( page );
+	this.onStackLayoutSet( page );
 	this.refreshControls();
 };
 
