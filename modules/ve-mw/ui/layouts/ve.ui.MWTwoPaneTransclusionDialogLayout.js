@@ -348,7 +348,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 			}
 		}
 	}
-	page.scrollElementIntoView();
+	page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
 	page.setActive( true );
 	this.sidebar.setSelectionByPageName( name );
 	this.refreshControls();
