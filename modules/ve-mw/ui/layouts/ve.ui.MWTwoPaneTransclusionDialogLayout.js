@@ -49,9 +49,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 
 	// Events
 	this.sidebar.connect( this, {
-		focusPageByName: 'focusPart',
 		filterPagesByName: 'onFilterPagesByName',
-		sidebarPartSoftSelected: 'onSidebarPartSoftSelected'
+		sidebarPartSelected: 'onSidebarItemSelected',
+		templateParameterAdded: 'onSidebarItemSelected'
 	} );
 	// Event 'focus' does not bubble, but 'focusin' does
 	this.stackLayout.$element.on( 'focusin', this.onStackLayoutFocus.bind( this ) );
@@ -149,10 +149,16 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
 };
 
 /**
- * @param {*} pageName
+ * Parts and parameters can be soft-selected, or selected and focused.
+ *
+ * @param {string} pageName Full, unique name of part or parameter
+ * @param {string} [soft] If true, suppress content pane focus.
  */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarPartSoftSelected = function ( pageName ) {
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = function ( pageName, soft ) {
 	this.setPage( pageName );
+	if ( !soft ) {
+		this.focus();
+	}
 };
 
 /**

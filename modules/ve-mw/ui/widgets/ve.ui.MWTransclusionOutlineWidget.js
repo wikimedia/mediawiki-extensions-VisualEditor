@@ -37,10 +37,15 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  */
 
 /**
- * @event focusPageByName
+ * Respond to the intent to select a sidebar item
+ *
+ * @event sidebarPartSelected
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
+ * @param {string} [soft] If true, don't focus the content pane.  Defaults to false.
  */
+
+/* Methods */
 
 /**
  * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
@@ -60,22 +65,12 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
  * Handle spacebar in a part header
  *
  * @param {*} pageName
+ * @fires sidebarPartSelected
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSoftSelected = function ( pageName ) {
 	this.setSelectionByPageName( pageName );
-	this.emit( 'sidebarPartSoftSelected', pageName );
+	this.emit( 'sidebarPartSelected', pageName, true );
 };
-
-/* Events */
-
-/**
- * Respond to the intent to select a sidebar item but without focusing the content pane.
- *
- * @event sidebarPartSoftSelected
- * @param {string} pageName
- */
-
-/* Methods */
 
 /**
  * @private
@@ -108,7 +103,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 		widget.connect( this, {
 			// We can forward these events as is. The parameter's unique ids are reused as page
 			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
-			templateParameterAdded: [ 'emit', 'focusPageByName' ],
+			templateParameterAdded: [ 'emit', 'templateParameterAdded' ],
 			filterParametersById: [ 'emit', 'filterPagesByName' ]
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
@@ -119,7 +114,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 
 	widget.connect( this, {
 		transclusionPartSoftSelected: 'onTransclusionPartSoftSelected',
-		transclusionPartSelected: [ 'emit', 'focusPageByName' ]
+		transclusionPartSelected: [ 'emit', 'sidebarPartSelected' ]
 	} );
 
 	this.partWidgets[ part.getId() ] = widget;

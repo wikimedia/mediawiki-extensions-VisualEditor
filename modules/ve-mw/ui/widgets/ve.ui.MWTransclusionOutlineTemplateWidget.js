@@ -63,6 +63,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
  * @event templateParameterAdded
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
+ * @param {boolean} soft If true, focus should stay in the sidebar.
  */
 
 /**
@@ -289,15 +290,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterRemovedFromTempla
  * @private
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
- * @fires templateParameterAdded
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = function ( item, selected ) {
-	this.onTemplateParameterSelectionChanged( item, selected );
-
-	var param = this.templateModel.getParameter( item.getData() );
-	if ( param && selected ) {
-		this.emit( 'templateParameterAdded', param.getId() );
-	}
+	this.toggleParameter( item, selected, false );
 };
 
 /**
@@ -306,6 +301,17 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = 
  * @param {boolean} selected
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelectionChanged = function ( item, selected ) {
+	this.toggleParameter( item, selected, true );
+};
+
+/**
+ * @private
+ * @param {OO.ui.OptionWidget} item
+ * @param {boolean} selected
+ * @param {boolean} soft If true, focus should stay in the sidebar.
+ * @fires templateParameterAdded
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleParameter = function ( item, selected, soft ) {
 	var paramName = item.getData(),
 		param = this.templateModel.getParameter( paramName );
 	if ( !selected ) {
@@ -316,6 +322,10 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelection
 	}
 
 	this.updateUnusedParameterToggleState();
+
+	if ( param && selected ) {
+		this.emit( 'templateParameterAdded', param.getId(), soft );
+	}
 };
 
 /**
