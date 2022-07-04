@@ -153,7 +153,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
  * If the focus is already in an element on the current page, nothing will happen.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
-	var page = this.stackLayout.getCurrentItem();
+	var page = this.pages[ this.currentPageName ];
 
 	if ( !page ) {
 		return;
