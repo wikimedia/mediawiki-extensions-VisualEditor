@@ -358,7 +358,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 };
 
 /**
- * Set the current page by symbolic name.  Doesn't focus the input.
+ * Set the current page and sidebar selection, by symbolic name.  Doesn't focus the input.
  *
  * @param {string} name Symbolic name of page
  */
@@ -385,8 +385,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 			}
 		}
 	}
+	page.scrollElementIntoView();
 	page.setActive( true );
-	this.onStackLayoutSet( page );
+	this.sidebar.setSelectionByPageName( name );
 	this.refreshControls();
 };
 
