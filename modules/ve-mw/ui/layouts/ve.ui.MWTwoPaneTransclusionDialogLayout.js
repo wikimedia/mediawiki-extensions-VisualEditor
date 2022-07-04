@@ -274,7 +274,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 			if ( currentIndex !== -1 && currentIndex + 1 < index ) {
 				index--;
 			}
-			remove.push( this.pages[ name ] );
+			remove.push( name );
 		}
 	}
 	if ( remove.length ) {
@@ -296,17 +296,19 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  *
  * To remove all pages from the booklet, you may wish to use the #clearPages method instead.
  *
- * @param {OO.ui.PageLayout[]} pagesToRemove An array of pages to remove
+ * @param {string[]} pagesNamesToRemove
  */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesToRemove ) {
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesNamesToRemove ) {
 	var layout = this,
+		pagesToRemove = [],
 		isCurrentParameter = this.pages[ this.currentPageName ] instanceof ve.ui.MWParameterPage,
 		isCurrentPageRemoved = false,
 		prevSelectionCandidate, nextSelectionCandidate;
 
 	this.stackLayout.getItems().forEach( function ( page ) {
 		var pageName = page.getName();
-		if ( pagesToRemove.indexOf( page ) !== -1 ) {
+		if ( pagesNamesToRemove.indexOf( pageName ) !== -1 ) {
+			pagesToRemove.push( page );
 			delete layout.pages[ pageName ];
 			// If the current page is removed, clear currentPageName
 			if ( layout.currentPageName === pageName ) {

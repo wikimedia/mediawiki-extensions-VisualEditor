@@ -29,7 +29,7 @@ QUnit.test( 'can add and remove multiple pages', ( assert ) => {
     assert.strictEqual( layout.getPage( parameterPageB.getName() ), parameterPageB );
     assert.strictEqual( layout.getPage( parameterPageC.getName() ), parameterPageC );
 
-    layout.removePages( [ parameterPageA, parameterPageB ] );
+    layout.removePages( [ parameterPageA.getName(), parameterPageB.getName() ] );
     assert.strictEqual( layout.getPage( parameterPageA.getName() ), undefined );
     assert.strictEqual( layout.getPage( parameterPageB.getName() ), undefined );
     assert.strictEqual( layout.getPage( parameterPageC.getName() ), parameterPageC );
