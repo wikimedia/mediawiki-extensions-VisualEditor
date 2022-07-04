@@ -147,7 +147,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutSet = function ( 
 };
 
 /**
- * Focus the first input in the current page.
+ * Focus the input field for the current page.
  *
  * If no page is selected, the first selectable page will be selected.
  * If the focus is already in an element on the current page, nothing will happen.
@@ -343,7 +343,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 };
 
 /**
- * Set the current page by symbolic name.
+ * Set the current page by symbolic name.  Doesn't focus the input.
  *
  * @param {string} name Symbolic name of page
  */

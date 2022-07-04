@@ -182,6 +182,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 				hasValueChange: 'onHasValueChange'
 			} );
 	} else {
+		// Create parameter placeholder.
 		page = new ve.ui.MWAddParameterPage( param, param.getId(), {
 			$overlay: this.$overlay
 		} )
