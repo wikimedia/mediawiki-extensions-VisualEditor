@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Nertiks",
-			"Nērtiks Jōrgesuns"
+			"Nērtiks Jōrgesuns",
+			"Tīgelika"
 		]
 	},
-	"visualeditor-ca-createlocaldescriptionsource": "Preidāis lōkalin enpeisāsenjas appun",
+	"visualeditor-ca-createlocaldescriptionsource": "Preidāis lōkalin enpeisāsenjas kōdan",
 	"visualeditor-ca-createsource": "Teīkjas appun",
 	"visualeditor-ca-editsource": "Redigīs appun",
 	"visualeditor-ca-editsource-section": "redigīs appun",
