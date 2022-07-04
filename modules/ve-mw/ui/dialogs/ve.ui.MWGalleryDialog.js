@@ -228,6 +228,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	this.highlightedAltTextInput = new OO.ui.TextInputWidget( {
 		placeholder: ve.msg( 'visualeditor-dialog-media-alttext-section' )
 	} );
+	this.altTextSameAsCaption = new OO.ui.CheckboxInputWidget();
 	this.removeButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-mwgallerydialog-remove-button-label' ),
 		icon: 'trash',
@@ -246,10 +247,17 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	var highlightedAltTextField = new OO.ui.FieldLayout( this.highlightedAltTextInput, {
 		align: 'top'
 	} );
+	var altTextSameAsCaptionField = new OO.ui.FieldLayout( this.altTextSameAsCaption, {
+		align: 'inline',
+		label: ve.msg( 'visualeditor-dialog-media-alttext-checkbox' )
+	} );
 	var highlightedAltTextFieldset = new OO.ui.FieldsetLayout( {
 		label: ve.msg( 'visualeditor-dialog-media-alttext-section' )
 	} );
-	highlightedAltTextFieldset.addItems( [ highlightedAltTextField ] );
+	highlightedAltTextFieldset.addItems( [
+		highlightedAltTextField,
+		altTextSameAsCaptionField
+	] );
 
 	// Search panel
 	this.searchWidget = new mw.widgets.MediaSearchWidget( {
@@ -420,6 +428,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 					this.initialImageData.push( {
 						resource: resource,
 						altText: image.getAttribute( 'altText' ),
+						altTextSame: image.getAttribute( 'altTextSame' ),
 						src: image.getAttribute( 'src' ),
 						height: image.getAttribute( 'height' ),
 						width: image.getAttribute( 'width' ),
@@ -473,6 +482,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			}
 
 			this.highlightedAltTextInput.setReadOnly( isReadOnly );
+			this.altTextSameAsCaption.setDisabled( isReadOnly );
 			this.modeDropdown.setDisabled( isReadOnly );
 			this.widthsInput.setReadOnly( isReadOnly );
 			this.heightsInput.setReadOnly( isReadOnly );
@@ -505,6 +515,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.stylesInput.connect( this, { change: 'updateActions' } );
 			this.captionTarget.connect( this, { change: 'updateActions' } );
 			this.highlightedAltTextInput.connect( this, { change: 'updateActions' } );
+			this.altTextSameAsCaption.connect( this, { change: 'onAltTextSameAsCaptionChange' } );
 			this.highlightedCaptionTarget.connect( this, { change: 'updateActions' } );
 
 			return this.imagesPromise;
@@ -579,6 +590,7 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.classesInput.disconnect( this );
 			this.stylesInput.disconnect( this );
 			this.highlightedAltTextInput.disconnect( this );
+			this.altTextSameAsCaption.disconnect( this );
 			this.captionTarget.disconnect( this );
 			this.highlightedCaptionTarget.disconnect( this );
 
@@ -661,6 +673,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 				items.push( new ve.ui.MWGalleryItemWidget( {
 					resource: title,
 					altText: '',
+					altTextSame: false,
 					src: '',
 					height: thumbUrls[ title ].height,
 					width: thumbUrls[ title ].width,
@@ -713,6 +726,7 @@ ve.ui.MWGalleryDialog.prototype.updateHighlightedItem = function () {
 	if ( this.highlightedItem ) {
 		// No need to call setCaptionDocument(), the document object is updated on every change
 		this.highlightedItem.setAltText( this.highlightedAltTextInput.getValue() );
+		this.highlightedItem.setAltTextSame( this.altTextSameAsCaption.isSelected() );
 	}
 };
 
@@ -794,6 +808,8 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	this.highlightedCaptionTarget.setDocument( item.captionDocument );
 	this.highlightedCaptionTarget.setReadOnly( this.isReadOnly() );
 	this.highlightedAltTextInput.setValue( item.altText );
+	this.highlightedAltTextInput.setReadOnly( item.altTextSame );
+	this.altTextSameAsCaption.setSelected( item.altTextSame );
 };
 
 /**
@@ -814,6 +830,14 @@ ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
 	// heights is only ignored in slideshow mode
 	this.heightsInput.setDisabled( mode === 'slideshow' );
 
+	this.updateActions();
+};
+
+/**
+ * Handle change event for this.altTextSameAsCaption
+ */
+ve.ui.MWGalleryDialog.prototype.onAltTextSameAsCaptionChange = function () {
+	this.highlightedAltTextInput.setReadOnly( this.altTextSameAsCaption.isSelected() );
 	this.updateActions();
 };
 
@@ -942,6 +966,9 @@ ve.ui.MWGalleryDialog.prototype.isHighlightedItemModified = function () {
 		if ( this.highlightedAltTextInput.getValue() !== this.highlightedItem.altText ) {
 			return true;
 		}
+		if ( this.altTextSameAsCaption.isSelected() !== this.highlightedItem.altTextSame ) {
+			return true;
+		}
 		if ( this.highlightedCaptionTarget.hasBeenModified() ) {
 			return true;
 		}
@@ -991,6 +1018,7 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 				// Use original null/empty value
 				galleryItem.originalAltText :
 				galleryItem.altText,
+			altTextSame: galleryItem.altTextSame,
 			// For existing images use `src` to avoid triggering a diff if the
 			// thumbnail size changes. For new images we have to use `thumbUrl` (T310623).
 			src: galleryItem.src || galleryItem.thumbUrl,

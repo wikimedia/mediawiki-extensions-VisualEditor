@@ -21,6 +21,7 @@
 ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config ) {
 	this.resource = imageInfo.resource;
 	this.altText = imageInfo.altText || '';
+	this.altTextSame = imageInfo.altTextSame;
 	// Keep the original value which may be null
 	this.originalAltText = imageInfo.altText;
 	this.src = imageInfo.src;
@@ -110,6 +111,15 @@ ve.ui.MWGalleryItemWidget.prototype.setCaptionDocument = function ( captionDocum
  */
 ve.ui.MWGalleryItemWidget.prototype.setAltText = function ( altText ) {
 	this.altText = altText;
+};
+
+/**
+ * Set the altTextSame property
+ *
+ * @param {boolean} same
+ */
+ve.ui.MWGalleryItemWidget.prototype.setAltTextSame = function ( same ) {
+	this.altTextSame = same;
 };
 
 /**

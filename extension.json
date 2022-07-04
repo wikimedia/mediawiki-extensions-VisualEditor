@@ -1877,6 +1877,7 @@
 				"moment"
 			],
 			"messages": [
+				"visualeditor-dialog-media-alttext-checkbox",
 				"visualeditor-dialog-media-alttext-section",
 				"visualeditor-dialog-media-alttext-section-help",
 				"visualeditor-dialog-media-change-image",
