@@ -7,6 +7,7 @@
  * @constructor
  * @param {Object} config
  * @cfg {ve.ui.MWTransclusionOutlineParameterWidget[]} items
+ * @property {string|null} currentHighlight
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOutlineParameterSelectWidget( config ) {
 	// Parent constructor
@@ -24,7 +25,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 	this.$element
 		.on( {
 			focus: this.bindDocumentKeyDownListener.bind( this ),
-			blur: this.unbindDocumentKeyDownListener.bind( this )
+			blur: this.onBlur.bind( this )
 		} );
 
 	// FIXME: Workaround to prevent the hover effect, because it causes explicit
@@ -105,12 +106,22 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem
  * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightParameter = function ( paramName ) {
+	this.currentHighlight = paramName;
 	var item = this.findItemFromData( paramName );
 	// Intentionally drop any highlighting if the parameter can't be found
 	this.highlightItem( item );
 	if ( item ) {
 		this.scrollItemIntoView( item );
 	}
+};
+
+/**
+ * Handle blur event by reapplying "select" highlighting.
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onBlur = function () {
+	this.unbindDocumentKeyDownListener();
+	var item = this.findItemFromData( this.currentHighlight );
+	this.highlightItem( item );
 };
 
 /**
