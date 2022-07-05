@@ -139,11 +139,11 @@ ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function (
 /**
  * This is inspired by {@see OO.ui.SelectWidget.selectItem}, but isn't one.
  *
- * @param {string} pageName
+ * @param {string} [pageName] Symbolic name of page. Omit to remove current selection.
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( pageName ) {
-	var selectedPartId = pageName.split( '/', 1 )[ 0 ],
-		isParameter = pageName.length > selectedPartId.length;
+	var selectedPartId = pageName ? pageName.split( '/', 1 )[ 0 ] : null,
+		isParameter = pageName ? pageName.length > selectedPartId.length : false;
 
 	for ( var partId in this.partWidgets ) {
 		var partWidget = this.partWidgets[ partId ],

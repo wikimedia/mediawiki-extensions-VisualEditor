@@ -63,6 +63,7 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 } );
 
 [
+	[ null, null ],
 	[ '', null ],
 	[ 'part_0', null ],
 	[ 'part_0/', '' ],
