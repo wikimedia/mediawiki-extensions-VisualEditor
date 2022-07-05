@@ -347,7 +347,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	this.currentPageName = name;
 
 	if ( previousPage ) {
-		previousPage.setActive( false );
 		// Blur anything focused if the next page doesn't have anything focusable.
 		// This is not needed if the next page has something focusable (because once it is
 		// focused this blur happens automatically).
@@ -360,7 +359,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 			}
 		}
 	}
-	page.setActive( true );
 	this.sidebar.setSelectionByPageName( name );
 	this.refreshControls();
 };
