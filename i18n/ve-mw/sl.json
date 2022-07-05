@@ -162,6 +162,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Vseeno nadaljuj",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Zahtevano polje manjka|Zahtevani polji manjkata|Zahtevana polja manjkajo}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Ali res želite nadaljevati brez vnosa v {{PLURAL:$2|polje|polji|polja}} $1?",
+	"visualeditor-dialog-transclusion-see-template": "Predloge so uporabniško ustvarjene in jim lahko manjkajo popolni opisi. Dodatne informacije o tem so morda na voljo na [[$2|strani predloge]].",
 	"visualeditor-dialog-transclusion-title-insert-template": "Vstavi predlogo",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Vstavi: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Uredi: $1",
