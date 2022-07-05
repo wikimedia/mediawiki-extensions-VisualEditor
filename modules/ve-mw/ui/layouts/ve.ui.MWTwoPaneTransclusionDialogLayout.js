@@ -333,7 +333,13 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	var page = this.pages[ name ];
-	if ( !page || name === this.currentPageName ) {
+	if ( !page ) {
+		return;
+	}
+
+	page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
+
+	if ( name === this.currentPageName ) {
 		return;
 	}
 
@@ -354,7 +360,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 			}
 		}
 	}
-	page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
 	page.setActive( true );
 	this.sidebar.setSelectionByPageName( name );
 	this.refreshControls();
