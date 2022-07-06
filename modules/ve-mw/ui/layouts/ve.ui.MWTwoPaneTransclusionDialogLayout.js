@@ -315,6 +315,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 			nextSelectionCandidate || prevSelectionCandidate
 		);
 	}
+	this.focus();
 };
 
 /**

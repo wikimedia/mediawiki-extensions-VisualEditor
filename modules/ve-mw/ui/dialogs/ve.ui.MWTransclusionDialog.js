@@ -497,9 +497,10 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	var target = this;
 	this.transclusionModel.reset();
 	this.bookletLayout.clearPages();
-	this.transclusionModel
-		.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ), 0 )
+	var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
+	this.transclusionModel.addPart( placeholderPage )
 		.done( function () {
+			target.bookletLayout.focusPart( placeholderPage.getId() );
 			target.autoExpandSidebar();
 		} );
 };
