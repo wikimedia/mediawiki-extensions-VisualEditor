@@ -133,8 +133,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
 	if ( !page ) {
 		return;
 	}
-	// Only change the focus if is not already in the current page
-	if ( !OO.ui.contains( page.$element[ 0 ], this.getElementDocument().activeElement, true ) ) {
+	// Only change the focus if it's visible and is not already the current page
+	if ( page.$element[ 0 ].offsetParent !== null &&
+		!OO.ui.contains( page.$element[ 0 ], this.getElementDocument().activeElement, true )
+	) {
 		page.focus();
 	}
 };
