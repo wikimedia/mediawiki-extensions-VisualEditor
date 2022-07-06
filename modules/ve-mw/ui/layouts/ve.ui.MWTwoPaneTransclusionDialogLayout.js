@@ -288,6 +288,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesToRemove ) {
 	var layout = this,
+		isCurrentParameter = this.pages[ this.currentPageName ] instanceof ve.ui.MWParameterPage,
 		isCurrentPageRemoved = false,
 		prevSelectionCandidate, nextSelectionCandidate;
 
@@ -310,7 +311,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 
 	this.stackLayout.removeItems( pagesToRemove );
 	if ( isCurrentPageRemoved ) {
-		this.setPage( nextSelectionCandidate || prevSelectionCandidate );
+		this.setPage( isCurrentParameter ? null :
+			nextSelectionCandidate || prevSelectionCandidate
+		);
 	}
 };
 
@@ -327,20 +330,19 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 };
 
 /**
- * Set the current page and sidebar selection, by symbolic name.  Doesn't focus the input.
+ * Set the current page and sidebar selection, by symbolic name. Doesn't focus the input.
  *
- * @param {string} name Symbolic name of page
+ * @param {string} [name] Symbolic name of page. Omit to remove current selection.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	var page = this.pages[ name ];
-	if ( !page ) {
-		return;
-	}
 
-	page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
+	if ( page ) {
+		page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
 
-	if ( name === this.currentPageName ) {
-		return;
+		if ( name === this.currentPageName ) {
+			return;
+		}
 	}
 
 	var previousPage = this.currentPageName ? this.pages[ this.currentPageName ] : null;
