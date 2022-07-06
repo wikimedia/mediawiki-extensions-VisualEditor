@@ -27,10 +27,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.currentPageName = null;
 	this.pages = {};
 	this.ignoreFocus = false;
-	this.stackLayout = new OO.ui.StackLayout( {
-		continuous: true,
-		expanded: this.expanded
-	} );
+	this.stackLayout = new ve.ui.MWVerticalLayout();
 	this.setContentPanel( this.stackLayout );
 	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
 	this.outlineVisible = false;
