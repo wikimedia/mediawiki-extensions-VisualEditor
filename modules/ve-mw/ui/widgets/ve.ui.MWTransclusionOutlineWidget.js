@@ -151,9 +151,9 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 
 		if ( partWidget.isSelected() !== selected ) {
 			partWidget.setSelected( selected );
-			if ( selected && !isParameter ) {
-				partWidget.scrollElementIntoView();
-			}
+		}
+		if ( selected && !isParameter ) {
+			partWidget.scrollElementIntoView();
 		}
 
 		if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget ) {
