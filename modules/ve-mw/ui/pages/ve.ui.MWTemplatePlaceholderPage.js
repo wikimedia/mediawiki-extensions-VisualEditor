@@ -46,7 +46,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	this.addTemplateInput.$input.attr( 'aria-label', ve.msg( 'visualeditor-dialog-transclusion-add-template' ) );
 
 	this.addTemplateButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-dialog-transclusion-add-template' ),
+		label: ve.msg( 'visualeditor-dialog-transclusion-add-template-save' ),
 		flags: [ 'progressive' ],
 		classes: [ 've-ui-mwTransclusionDialog-addButton' ],
 		disabled: true
