@@ -447,9 +447,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 			// Detach the form while building for performance
 			this.bookletLayout.$element.detach();
-			// HACK: Prevent any setPage() calls (from #onReplacePart) from focussing stuff, it messes
-			// with OOUI logic for marking fields as invalid (T199838). We set it back to true below.
-			this.bookletLayout.autoFocus = false;
 
 			if ( this.bookletLayout.isOutlined() ) {
 				this.transclusionModel.connect( this.bookletLayout, { replace: 'onReplacePart' } );
@@ -512,8 +509,6 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				if ( !dialog.transclusionModel.isSingleTemplate() ) {
 					dialog.sidebar.hideAllUnusedParameters();
 				}
-
-				dialog.bookletLayout.autoFocus = true;
 			} );
 		}, this );
 };

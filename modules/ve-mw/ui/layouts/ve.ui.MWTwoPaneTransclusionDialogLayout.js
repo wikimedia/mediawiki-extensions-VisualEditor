@@ -33,7 +33,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	} );
 	this.setContentPanel( this.stackLayout );
 	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
-	this.autoFocus = true;
 	this.outlineVisible = false;
 	this.outlined = !!config.outlined;
 	if ( this.outlined ) {
