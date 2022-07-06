@@ -371,6 +371,9 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 					dialog.sidebar.setSelectionByPageName( name );
 				} else {
 					selectedPage.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
+					if ( !OO.ui.isMobile() ) {
+						selectedPage.focus();
+					}
 				}
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		}
