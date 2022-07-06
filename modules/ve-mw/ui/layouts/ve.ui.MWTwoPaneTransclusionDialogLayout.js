@@ -209,6 +209,15 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutlineControls = function 
 };
 
 /**
+ * Get the list of pages on the stack ordered by appearance.
+ *
+ * @return {OO.ui.PageLayout[]}
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getPagesOrdered = function () {
+	return this.stackLayout.getItems();
+};
+
+/**
  * Get a page by its symbolic name.
  *
  * @param {string} name Symbolic name of page
