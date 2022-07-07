@@ -2157,7 +2157,8 @@
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWAddParameterPage.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePlaceholderPage.less",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTransclusionOutlineControlsWidget.less"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTransclusionOutlineControlsWidget.less",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTransclusionOutlineWidget.less"
 			],
 			"skinStyles": {
 				"default": [
