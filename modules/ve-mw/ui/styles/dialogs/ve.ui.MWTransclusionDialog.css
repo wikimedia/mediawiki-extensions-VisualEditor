@@ -144,16 +144,23 @@
 	padding: 8px 0 8px 36px;
 	text-overflow: ellipsis;
 }
-
+/* selected */
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-optionWidget-selected .oo-ui-buttonElement-button {
 	background-color: #eaf3ff;
 }
 
+/* hover */
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
 	background-color: #eaecf0;
-	color: #000;
 }
 
+/* selected + hover */
+.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-optionWidget-selected > .oo-ui-buttonElement-button:hover {
+	background-color: #eaf3ff;
+	color: #36c;
+}
+
+/* click */
 .ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:active,
 .ve-ui-mwTransclusionOutlineParameterWidget:active {
 	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
