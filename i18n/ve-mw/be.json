@@ -11,6 +11,7 @@
 			"Mikalai Udodau",
 			"No Sleep till Krupki",
 			"Tomato Cream",
+			"Tīgelika",
 			"ZlyiLev",
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў"
@@ -168,8 +169,8 @@
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 з’яўляецца забароненым сімвалам. Калі ласка, выдаліце яго, каб дадаць параметр.",
 	"visualeditor-dialog-transclusion-add-param-help": "Калі яны вядомыя, увядзіце назвы [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters недакументаваных параметраў]. Звярніце ўвагу, што эфект будуць мець толькі параметры, вядомыя шаблону. Вы можаце знайсці інфармацыю аб існуючых параметрах на [[$1|старонцы шаблону]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Назва параметра",
-	"visualeditor-dialog-transclusion-add-param-save": "Дадаць параметр",
-	"visualeditor-dialog-transclusion-add-template": "Дадаць шаблон",
+	"visualeditor-dialog-transclusion-add-param-save": "Дадаць",
+	"visualeditor-dialog-transclusion-add-template": "Дадаць",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Дадаць недакументаваны параметр",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Вярнуцца да пошуку? Вашы змяненні будуць страчаны і гэта нельга будзе адмяніць.",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Зачыніць рэдактар шаблонаў? Вашы змяненні будуць страчаны і гэта нельга будзе адмяніць.",

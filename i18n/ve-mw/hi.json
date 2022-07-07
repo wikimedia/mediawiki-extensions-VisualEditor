@@ -179,6 +179,7 @@
 	"visualeditor-dialog-transclusion-add-param-placeholder": "पैरामीटर का नाम",
 	"visualeditor-dialog-transclusion-add-param-save": "पैरामीटर जोड़ें",
 	"visualeditor-dialog-transclusion-add-template": "साँचा जोड़ें",
+	"visualeditor-dialog-transclusion-add-template-save": "जोड़ें",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "अप्रलेखित पैरामीटर जोड़ें",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "खोज पर वापस जाएँ? आपके बदलाव रद्द कर दिए जाएँगे और इसे पूर्ववत नहीं किया जा सकता।",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "साँचा एडिटर बंद करें? आपके बदलाव रद्द कर दिए जाएँगे और इसे पूर्ववत नहीं किया जा सकता।",
