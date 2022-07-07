@@ -192,13 +192,6 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
 	}
 	this.bookletLayout.addPages( [ page ], this.transclusionModel.getIndex( param ) );
 	if ( this.loaded ) {
-		// Unconditionally focus parameter placeholders. Named parameters must be focused manually.
-		if ( !this.preventReselection && !param.getName() ) {
-			this.bookletLayout.focusPart( param.getId() );
-		} else if ( !this.loaded ) {
-			page.scrollElementIntoView();
-		}
-
 		this.touch();
 
 		if ( page instanceof ve.ui.MWParameterPage ) {
