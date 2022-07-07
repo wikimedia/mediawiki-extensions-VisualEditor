@@ -457,9 +457,11 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					promise = this.transclusionModel.addPart( template );
 				} else {
 					// Open the dialog to add a new template, always starting with a placeholder
-					promise = this.transclusionModel.addPart(
-						new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel )
-					);
+					var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
+					promise = this.transclusionModel.addPart( placeholderPage );
+					promise.then( function () {
+						dialog.bookletLayout.setPage( placeholderPage.getId() );
+					} );
 					this.canGoBack = true;
 				}
 			} else {
