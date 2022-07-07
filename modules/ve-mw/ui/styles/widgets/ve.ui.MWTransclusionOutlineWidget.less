@@ -1,42 +1,85 @@
+.ve-ui-mwTransclusionOutlineWidget {
+	/* .oo-ui-window-head uses a 1px outline which overlaps the top pixel of the sidebar */
+	padding-top: 1px;
+
+	.ve-ui-mwTransclusionOutline-ariaHidden {
+		display: none;
+	}
+
+	.ve-ui-mwTransclusionOutlinePartWidget {
+		margin-top: 24px;
+		margin-bottom: 24px;
+
+		&:first-child .ve-ui-mwTransclusionOutlineButtonWidget {
+			margin-top: -24px;
+		}
+
+		/* no margin for labels and wikitext */
+		&:last-child {
+			margin-bottom: -24px;
+
+			/* margin for last text */
+			.ve-ui-mwTransclusionOutline-no-template-parameters {
+				margin-bottom: 48px;
+			}
+		}
+
+		.ve-ui-mwTransclusionOutlineButtonWidget {
+			display: block;
+			margin-top: -10px;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+			> .oo-ui-buttonElement-button {
+				display: block;
+				overflow: hidden;
+				padding: 8px 0 8px 36px;
+				text-overflow: ellipsis;
+
+				&:hover {
+					background-color: #eaecf0;
+				}
+
+				/* click */
+				&:active {
+					/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
+					background-color: rgba( 41, 98, 204, 0.1 );
+					color: #36c;
+				}
+
+				> .oo-ui-iconElement-icon {
+					left: 10px;
+				}
+			}
+
+			/* selected */
+			&.oo-ui-optionWidget-selected > .oo-ui-buttonElement-button {
+				background-color: #eaf3ff;
+
+				&:hover {
+					background-color: #eaf3ff;
+					color: #36c;
+				}
+			}
+		}
+	}
+}
+
+/* click */
+.ve-ui-mwTransclusionOutlineParameterWidget:active {
+	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
+	background-color: rgba( 41, 98, 204, 0.1 );
+	color: #36c;
+}
+
 .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
 	background-color: #fff;
 	/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
 	position: sticky;
 	top: 0;
 	z-index: 1;
-}
-
-.ve-ui-mwTransclusionOutlinePartWidget {
-	margin-top: 24px;
-	margin-bottom: 24px;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget {
-	margin-top: -10px;
-}
-
-.ve-ui-mwTransclusionOutlinePartWidget:first-child .ve-ui-mwTransclusionOutlineButtonWidget {
-	margin-top: -24px;
-}
-
-/* no margin for labels and wikitext */
-.ve-ui-mwTransclusionOutlinePartWidget:last-child {
-	margin-bottom: -24px;
-}
-
-/* margin for last checkbox or text */
-.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutlineParameterWidget:last-child,
-.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutline-no-template-parameters {
-	margin-bottom: 48px;
-}
-
-.ve-ui-mwTransclusionOutlineWidget {
-	/* .oo-ui-window-head uses a 1px outline which overlaps the top pixel of the sidebar */
-	padding-top: 1px;
-}
-
-.ve-ui-mwTransclusionOutline-ariaHidden {
-	display: none;
 }
 
 .ve-ui-mwTransclusionOutline-no-template-parameters {
@@ -58,6 +101,11 @@
 	padding-top: 8px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+/* margin for last checkbox */
+.ve-ui-mwTransclusionOutlineParameterWidget:last-child {
+	margin-bottom: 48px;
 }
 
 .ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-labelElement > .oo-ui-labelElement-label {
@@ -85,48 +133,6 @@
 
 .ve-ui-mwTransclusionOutlineParameterWidget-hasValue {
 	font-weight: bold;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget,
-.ve-ui-mwTransclusionOutlineButtonWidget > .oo-ui-buttonElement-button {
-	display: block;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-labelElement.oo-ui-iconElement > .oo-ui-buttonElement-button {
-	overflow: hidden;
-	padding: 8px 0 8px 36px;
-	text-overflow: ellipsis;
-}
-/* selected */
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-optionWidget-selected .oo-ui-buttonElement-button {
-	background-color: #eaf3ff;
-}
-
-/* hover */
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
-	background-color: #eaecf0;
-}
-
-/* selected + hover */
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-optionWidget-selected > .oo-ui-buttonElement-button:hover {
-	background-color: #eaf3ff;
-	color: #36c;
-}
-
-/* click */
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button:active,
-.ve-ui-mwTransclusionOutlineParameterWidget:active {
-	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
-	background-color: rgba( 41, 98, 204, 0.1 );
-	color: #36c;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement:first-child {
-	margin-left: 0;
-}
-
-.ve-ui-mwTransclusionOutlineButtonWidget.oo-ui-buttonElement-frameless.oo-ui-iconElement > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
-	left: 10px;
 }
 
 .ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget {
