@@ -19,9 +19,16 @@
 		/* We don't want anything to collapse left/right, so shouldn't use margin */
 		padding: 0 54px;
 
-		&.oo-ui-stackLayout-continuous > .oo-ui-panelLayout-scrollable {
-			// Override from PanelLayout; only the StackLayout must be scrollable
-			overflow: hidden;
+		&.ve-ui-mwVerticalLayout {
+			> .oo-ui-panelLayout-scrollable {
+				// Override from PanelLayout; only the StackLayout must be scrollable
+				overflow: hidden;
+			}
+
+			> .oo-ui-panelLayout {
+				display: block;
+				position: relative;
+			}
 		}
 
 		> .oo-ui-panelLayout {

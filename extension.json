@@ -2132,6 +2132,7 @@
 				"modules/ve-mw/ui/dialogs/ve.ui.MWRequiredParamBlankConfirmDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWTemplateDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWTransclusionDialog.js",
+				"modules/ve-mw/ui/layouts/ve.ui.MWVerticalLayout.js",
 				"modules/ve-mw/ui/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWTransclusionDialogTool.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWTransclusionContextItem.js",
