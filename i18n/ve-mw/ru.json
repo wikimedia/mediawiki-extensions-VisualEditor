@@ -198,7 +198,7 @@
 	"visualeditor-dialog-transclusion-template-widget-aria": "Нажмите на клавишу пробела, чтобы выбрать шаблон.",
 	"visualeditor-dialog-transclusion-add-wikitext": "Добавить вики-текст",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Имя параметра",
-	"visualeditor-dialog-transclusion-add-param-save": "Добавить параметр",
+	"visualeditor-dialog-transclusion-add-param-save": "Добавить",
 	"visualeditor-dialog-transclusion-add-template": "Добавить шаблон",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Добавить недокументированный параметр",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Закрыть редактор шаблонов? Ваши изменения будут потеряны, и это действие необратимо.",

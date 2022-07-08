@@ -25,7 +25,8 @@
 			"SteveR",
 			"Tel'et",
 			"Tifinaghes",
-			"Ата"
+			"Ата",
+			"Пан Хаунд"
 		]
 	},
 	"collabpad-doctitle": "CollabPad : $1",
@@ -182,7 +183,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 — заборонений символ. Видаліть його, щоб додати параметр.",
 	"visualeditor-dialog-transclusion-add-param-help": "Якщо відомо, введіть назви [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters недокументованих параметрів]. Зауважте, що працюватимуть лише параметри, відомі шаблону. Ви можете знайти інформацію про наявні параметри на [[$1|сторінці шаблону]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Назва параметру",
-	"visualeditor-dialog-transclusion-add-param-save": "Додати параметр",
+	"visualeditor-dialog-transclusion-add-param-save": "Додати",
 	"visualeditor-dialog-transclusion-add-template": "Додати шаблон",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Додати незареєстрований параметр",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Повернутися до пошуку? Редагування буде втрачено й неможливо відновити.",
