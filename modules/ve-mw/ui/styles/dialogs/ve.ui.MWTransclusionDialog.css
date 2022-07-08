@@ -17,11 +17,11 @@
 	font-style: italic;
 }
 
-.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineButtonWidget {
+.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineWidget .ve-ui-mwTransclusionOutlinePartWidget .ve-ui-mwTransclusionOutlineButtonWidget {
 	display: none;
 }
 
-.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
+.ve-ui-mwTransclusionDialog-single-transclusion .ve-ui-mwTransclusionOutlineWidget .ve-ui-mwTransclusionOutlinePartWidget .ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
 	margin-top: -8px;
 	margin-bottom: 8px;
 	padding-top: 8px;
