@@ -442,6 +442,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 
 	this.toggleUnusedWidget.toggle( !query );
 	this.infoWidget.toggle( nothingFound );
+	this.parameterList.setTabIndex( nothingFound ? -1 : 0 );
 	this.emit( 'filterParametersById', visibility );
 };
 
