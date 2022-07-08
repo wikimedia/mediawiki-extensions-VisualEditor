@@ -26,6 +26,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-template-widget-aria-selected-single' )
 	} );
 
+	this.$element.addClass( 've-ui-mwTransclusionOutlineTemplateWidget' );
+
 	// Initialization
 	this.templateModel = template.connect( this, {
 		add: 'onParameterAddedToTemplateModel',
@@ -43,7 +45,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	} else {
 		this.$noParametersNote = $( '<div>' )
 			.text( ve.msg( 'visualeditor-dialog-transclusion-no-template-parameters' ) )
-			.addClass( 've-ui-mwTransclusionOutline-no-template-parameters' );
+			.addClass( 've-ui-mwTransclusionOutlineTemplateWidget-no-template-parameters' );
 		this.$element.append( this.$noParametersNote );
 	}
 

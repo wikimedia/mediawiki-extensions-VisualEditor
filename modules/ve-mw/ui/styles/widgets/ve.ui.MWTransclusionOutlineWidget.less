@@ -19,7 +19,7 @@
 			margin-bottom: -24px;
 
 			/* margin for last text */
-			.ve-ui-mwTransclusionOutline-no-template-parameters {
+			.ve-ui-mwTransclusionOutlineTemplateWidget-no-template-parameters {
 				margin-bottom: 48px;
 			}
 		}
@@ -67,31 +67,59 @@
 	}
 }
 
-/* click */
-.ve-ui-mwTransclusionOutlineParameterWidget:active {
-	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
-	background-color: rgba( 41, 98, 204, 0.1 );
-	color: #36c;
-}
+.ve-ui-mwTransclusionOutlineTemplateWidget {
+	&-sticky {
+		background-color: #fff;
+		/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+		position: sticky;
+		top: 0;
+		z-index: 1;
+	}
 
-.ve-ui-mwTransclusionOutlineTemplateWidget-sticky {
-	background-color: #fff;
-	/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
-	position: sticky;
-	top: 0;
-	z-index: 1;
-}
+	&-no-template-parameters {
+		font-style: italic;
+		color: #72777d;
+		margin: 8px 24px 24px 24px;
+	}
 
-.ve-ui-mwTransclusionOutline-no-template-parameters {
-	font-style: italic;
-	color: #72777d;
-	margin: 8px 24px 24px 24px;
-}
+	&-searchWidget {
+		margin: 8px 24px;
+		width: auto;
 
-.ve-ui-mwTransclusionOutlineParameterSelectWidget:focus {
-	border-radius: 2px;
-	box-shadow: inset 0 0 0 1px #36c;
-	outline: 0;
+		&:last-child {
+			/* Workaround to override oo-ui-inputWidget:last-child rule */
+			margin-right: 24px;
+		}
+	}
+
+	&-no-match {
+		font-style: italic;
+		color: #72777d;
+		margin: 8px 24px;
+	}
+
+	.ve-ui-mwTransclusionOutlineToggleUnusedWidget {
+		margin: -4px 24px 0 24px;
+
+		.oo-ui-labelElement-label {
+			word-break: break-word;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+			white-space: normal;
+		}
+	}
+
+	.ve-ui-mwTransclusionOutlineParameterSelectWidget:focus {
+		border-radius: 2px;
+		box-shadow: inset 0 0 0 1px #36c;
+		outline: 0;
+
+		.ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted {
+			/* This shade on a white background results in #eaecf0 a.k.a.
+			@background-color-base--hover a.k.a. @wmui-color-base80 */
+			background-color: rgba( 0, 24, 73, 0.082 );
+		}
+	}
 }
 
 .ve-ui-mwTransclusionOutlineParameterWidget {
@@ -108,6 +136,13 @@
 	margin-bottom: 48px;
 }
 
+/* click */
+.ve-ui-mwTransclusionOutlineParameterWidget:active {
+	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
+	background-color: rgba( 41, 98, 204, 0.1 );
+	color: #36c;
+}
+
 .ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-labelElement > .oo-ui-labelElement-label {
 	cursor: pointer;
 	display: inline;
@@ -119,10 +154,9 @@
 	background-color: #eaf3ff;
 }
 
-.ve-ui-mwTransclusionOutlineParameterSelectWidget:focus .ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted,
 .ve-ui-mwTransclusionOutlineParameterWidget:hover {
-	/* This shade on a white background results in #eaecf0 a.k.a. @background-color-base--hover
-	   a.k.a. @wmui-color-base80 */
+	/* This shade on a white background results in #eaecf0
+	a.k.a. @background-color-base--hover a.k.a. @wmui-color-base80 */
 	background-color: rgba( 0, 24, 73, 0.082 );
 }
 
@@ -133,31 +167,4 @@
 
 .ve-ui-mwTransclusionOutlineParameterWidget-hasValue {
 	font-weight: bold;
-}
-
-.ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget {
-	margin: 8px 24px;
-	width: auto;
-}
-
-.ve-ui-mwTransclusionOutlineTemplateWidget-searchWidget:last-child {
-	/* Workaround to override oo-ui-inputWidget:last-child rule */
-	margin-right: 24px;
-}
-
-.ve-ui-mwTransclusionOutlineTemplateWidget-no-match {
-	font-style: italic;
-	color: #72777d;
-	margin: 8px 24px;
-}
-
-.ve-ui-mwTransclusionOutlineToggleUnusedWidget.oo-ui-buttonWidget {
-	margin: -4px 24px 0 24px;
-}
-
-.ve-ui-mwTransclusionOutlineToggleUnusedWidget .oo-ui-labelElement-label {
-	word-break: break-word;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: normal;
 }
