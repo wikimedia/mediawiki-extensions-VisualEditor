@@ -22,6 +22,11 @@
 			.ve-ui-mwTransclusionOutlineTemplateWidget-no-template-parameters {
 				margin-bottom: 48px;
 			}
+
+			/* margin for last checkbox in the sidebar */
+			.ve-ui-mwTransclusionOutlineParameterWidget:last-child {
+				margin-bottom: 48px;
+			}
 		}
 
 		.ve-ui-mwTransclusionOutlineButtonWidget {
@@ -120,51 +125,46 @@
 			background-color: rgba( 0, 24, 73, 0.082 );
 		}
 	}
-}
 
-.ve-ui-mwTransclusionOutlineParameterWidget {
-	overflow: hidden;
-	padding-bottom: 8px;
-	padding-left: 30px;
-	padding-top: 8px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
+	.ve-ui-mwTransclusionOutlineParameterWidget {
+		overflow: hidden;
+		padding-bottom: 8px;
+		padding-left: 30px;
+		padding-top: 8px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 
-/* margin for last checkbox in the sidebar */
-.ve-ui-mwTransclusionOutlinePartWidget:last-child .ve-ui-mwTransclusionOutlineParameterWidget:last-child {
-	margin-bottom: 48px;
-}
+		&:hover {
+			/* This shade on a white background results in #eaecf0
+			a.k.a. @background-color-base--hover a.k.a. @wmui-color-base80 */
+			background-color: rgba( 0, 24, 73, 0.082 );
+		}
 
-/* click */
-.ve-ui-mwTransclusionOutlineParameterWidget:active {
-	/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
-	background-color: rgba( 41, 98, 204, 0.1 );
-	color: #36c;
-}
+		/* click */
+		&:active {
+			/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
+			background-color: rgba( 41, 98, 204, 0.1 );
+			color: #36c;
+		}
 
-.ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-labelElement > .oo-ui-labelElement-label {
-	cursor: pointer;
-	display: inline;
-}
+		&.oo-ui-optionWidget-highlighted,
+		&.oo-ui-optionWidget-highlighted:hover {
+			color: #36c;
+			background-color: #eaf3ff;
+		}
 
-.ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted:hover,
-.ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted {
-	color: #36c;
-	background-color: #eaf3ff;
-}
+		&-hasValue {
+			font-weight: bold;
+		}
 
-.ve-ui-mwTransclusionOutlineParameterWidget:hover {
-	/* This shade on a white background results in #eaecf0
-	a.k.a. @background-color-base--hover a.k.a. @wmui-color-base80 */
-	background-color: rgba( 0, 24, 73, 0.082 );
-}
+		> .oo-ui-labelElement-label {
+			cursor: pointer;
+			display: inline;
+		}
 
-.ve-ui-mwTransclusionOutlineParameterWidget .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [ type='checkbox' ]:hover + span {
-	/* Stronger :hover effect to make the different checkbox/label click regions more obvious */
-	border-width: 2px;
-}
-
-.ve-ui-mwTransclusionOutlineParameterWidget-hasValue {
-	font-weight: bold;
+		.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [ type='checkbox' ]:hover + span {
+			/* Stronger :hover effect to make the different checkbox/label click regions more obvious */
+			border-width: 2px;
+		}
+	}
 }
