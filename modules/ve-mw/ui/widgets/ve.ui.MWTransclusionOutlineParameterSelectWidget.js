@@ -27,9 +27,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 			blur: this.unbindDocumentKeyDownListener.bind( this )
 		} );
 
-	// FIXME: Workaround to prevent the hover effect, because it causes explicit
-	// highlight and un-highlighting.  For now, this is achieved with pure CSS effects.
-	this.blockMouseOverEvents = 1;
+	this.itemSet = null;
 };
 
 /* Inheritance */
@@ -102,14 +100,24 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem
 };
 
 /**
- * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
+ * @param {string} [paramName] Parameter name to set, e.g. "param1". Omit to remove setting.
  */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightParameter = function ( paramName ) {
-	var item = this.findItemFromData( paramName );
-	// Intentionally drop any highlighting if the parameter can't be found
-	this.highlightItem( item );
-	if ( item ) {
-		this.scrollItemIntoView( item );
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = function ( paramName ) {
+	if ( this.itemSet === paramName ) {
+		return;
+	}
+
+	var newItem = this.findItemFromData( paramName ),
+		currentItem = this.findItemFromData( this.itemSet );
+	this.itemSet = paramName;
+
+	if ( currentItem ) {
+		currentItem.setParameter( false );
+	}
+	if ( newItem ) {
+		newItem.setParameter( true );
+		this.highlightItem( newItem );
+		this.scrollItemIntoView( newItem );
 	}
 };
 
@@ -140,14 +148,14 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 /**
  * @inheritDoc OO.ui.SelectWidget
  */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( event ) {
-	if ( event.target === this.$element[ 0 ] &&
-		!this.findHighlightedItem()
-	) {
-		// When tabbing into the selection list, highlight the first parameter.
-		this.highlightItem( this.items[ 0 ] );
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( e ) {
+	var currentItem = this.findItemFromData( this.itemSet );
+	if ( e.target === this.$element[ 0 ] ) {
+		// When tabbing into the selection list, always highlight the set or first parameter.
+		this.highlightItem( currentItem || this.items[ 0 ] );
 	}
-	// Don't call the parent. It makes assumptions that conflict with how we use selections.
+
+	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.onFocus.call( this, e );
 };
 
 /**
@@ -220,11 +228,4 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 	}
 
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.onDocumentKeyDown.call( this, e );
-};
-
-/**
- * FIXME: Overrides SelectWidget handler, to prevent un-highlighting the selected item.
- */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseLeave = function () {
-	return false;
 };

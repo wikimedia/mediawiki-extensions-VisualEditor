@@ -205,11 +205,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
 };
 
 /**
- * @param {string} [paramName] Parameter name to highlight, e.g. "param1". Omit for no highlight.
+ * @param {string} [paramName] Parameter name to set, e.g. "param1". Omit to remove setting.
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.highlightParameter = function ( paramName ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setParameter = function ( paramName ) {
 	if ( this.parameterList ) {
-		this.parameterList.highlightParameter( paramName );
+		this.parameterList.setParameter( paramName );
 	}
 };
 

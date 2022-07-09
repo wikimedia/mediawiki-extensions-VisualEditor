@@ -159,7 +159,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 		if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget ) {
 			var selectedParamName = ( partId === selectedPartId && isParameter ) ?
 				pageName.slice( selectedPartId.length + 1 ) : null;
-			partWidget.highlightParameter( selectedParamName );
+			partWidget.setParameter( selectedParamName );
 		}
 	}
 };

@@ -79,6 +79,10 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.setSelected = function ( st
 	return this;
 };
 
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.setParameter = function ( state ) {
+	this.$element.toggleClass( 've-ui-mwTransclusionOutlineParameterWidget-isSet', state );
+};
+
 /**
  * @param {boolean} hasValue
  */

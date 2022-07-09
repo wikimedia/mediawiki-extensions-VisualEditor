@@ -121,12 +121,6 @@
 		border-radius: 2px;
 		box-shadow: inset 0 0 0 1px #36c;
 		outline: 0;
-
-		.ve-ui-mwTransclusionOutlineParameterWidget.oo-ui-optionWidget-highlighted {
-			/* This shade on a white background results in #eaecf0 a.k.a.
-			@background-color-base--hover a.k.a. @wmui-color-base80 */
-			background-color: rgba( 0, 24, 73, 0.082 );
-		}
 	}
 
 	.ve-ui-mwTransclusionOutlineParameterWidget {
@@ -137,12 +131,6 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 
-		&:hover {
-			/* This shade on a white background results in #eaecf0
-			a.k.a. @background-color-base--hover a.k.a. @wmui-color-base80 */
-			background-color: rgba( 0, 24, 73, 0.082 );
-		}
-
 		/* click */
 		&:active {
 			/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
@@ -150,10 +138,18 @@
 			color: #36c;
 		}
 
-		&.oo-ui-optionWidget-highlighted,
-		&.oo-ui-optionWidget-highlighted:hover {
-			color: #36c;
+		&.ve-ui-mwTransclusionOutlineParameterWidget-isSet,
+		&.ve-ui-mwTransclusionOutlineParameterWidget-isSet:hover,
+		&.ve-ui-mwTransclusionOutlineParameterWidget-isSet.oo-ui-optionWidget-highlighted {
 			background-color: #eaf3ff;
+			color: #36c;
+		}
+
+		&.oo-ui-optionWidget-highlighted {
+			/* This shade on a white background results in #eaecf0
+			a.k.a. @background-color-base--hover a.k.a. @wmui-color-base80 */
+			background-color: rgba( 0, 24, 73, 0.082 );
+			color: #000;
 		}
 
 		&-hasValue {

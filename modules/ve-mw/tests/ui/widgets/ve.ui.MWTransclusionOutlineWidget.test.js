@@ -81,7 +81,7 @@ QUnit.test( 'Adding and moving parts to specific positions', ( assert ) => {
 		widget.partWidgets.part_0 = partWidget;
 
 		let actual = null;
-		partWidget.highlightParameter = ( paramName ) => {
+		partWidget.setParameter = ( paramName ) => {
 			actual = paramName;
 		};
 
