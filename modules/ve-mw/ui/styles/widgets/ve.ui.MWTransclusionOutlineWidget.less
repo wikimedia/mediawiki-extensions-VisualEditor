@@ -44,7 +44,9 @@
 				text-overflow: ellipsis;
 
 				&:hover {
-					background-color: #eaecf0;
+					/* This shade on a white background results in #eaecf0 a.k.a.
+					@background-color-base--hover a.k.a. @wmui-color-base80 */
+					background-color: rgba( 0, 24, 73, 0.082 );
 				}
 
 				/* click */
