@@ -183,7 +183,7 @@
 	"visualeditor-dialog-transclusion-add-param-help": "Pokud jsou známé, vložte názvy [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters nezdokumentovaných parametrů]. Nezapomeňte, že vliv budou mít pouze parametry, které šablona zná. Informace o dostupných parametrech možná naleznete na [[$1|stránce šablony]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Název parametru",
 	"visualeditor-dialog-transclusion-add-param-save": "Přidat",
-	"visualeditor-dialog-transclusion-add-template": "Přidat",
+	"visualeditor-dialog-transclusion-add-template": "Přidat šablonu",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Přidat nezdokumentovaný parametr",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Opravdu chcete zavřít editor šablony? Vaše změny budou ztraceny a nebude možné je vrátit zpět.",
 	"visualeditor-dialog-transclusion-collapse-options": "Skrýt možnosti",
