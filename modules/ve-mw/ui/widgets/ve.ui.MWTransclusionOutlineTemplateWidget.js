@@ -473,8 +473,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.scrollTopIntoView = function
 	if ( this.parameterList ) {
 		var firstSelected = this.parameterList.findFirstSelectedItem();
 		if ( firstSelected ) {
-			// make sure parameters ( if any ) are still visible and scrolled underneath the sticky
-			firstSelected.scrollElementIntoView( { padding: { top: 110 } } );
+			firstSelected.scrollToView();
 		}
 	}
 };

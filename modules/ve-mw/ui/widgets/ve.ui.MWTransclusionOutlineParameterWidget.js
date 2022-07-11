@@ -89,3 +89,12 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.setParameter = function ( s
 ve.ui.MWTransclusionOutlineParameterWidget.prototype.toggleHasValue = function ( hasValue ) {
 	this.$element.toggleClass( 've-ui-mwTransclusionOutlineParameterWidget-hasValue', hasValue );
 };
+
+/**
+ * Custom method to scroll parameter into view respecting the sticky part that sits above
+ */
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.scrollToView = function () {
+	// make sure parameter is visible and scrolled underneath the sticky
+	// TODO find a dynamic way to get height of the sticky part
+	this.scrollElementIntoView( { padding: { top: 115 } } );
+};

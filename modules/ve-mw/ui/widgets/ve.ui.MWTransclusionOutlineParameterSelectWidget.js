@@ -117,8 +117,17 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = functi
 	if ( newItem ) {
 		newItem.setParameter( true );
 		this.highlightItem( newItem );
-		this.scrollItemIntoView( newItem );
 	}
+};
+
+/**
+ * @inheritDoc OO.ui.SelectWidget
+ */
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightItem = function ( item ) {
+	if ( item ) {
+		item.scrollToView();
+	}
+	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.highlightItem.call( this, item );
 };
 
 /**
