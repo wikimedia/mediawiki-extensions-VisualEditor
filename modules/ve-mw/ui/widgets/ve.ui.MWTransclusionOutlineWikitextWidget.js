@@ -1,4 +1,7 @@
 /**
+ * Top-level part in the template dialog sidebar, representing a raw wikitext
+ * snippet.
+ *
  * @class
  * @extends ve.ui.MWTransclusionOutlinePartWidget
  *

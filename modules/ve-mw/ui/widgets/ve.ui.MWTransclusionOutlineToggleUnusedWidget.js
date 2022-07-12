@@ -1,5 +1,6 @@
 /**
- * Button widget to toggle unused fields
+ * Button widget to toggle unused fields in the template dialog sidebar, appears
+ * at the top of any template with more than the threshold number of parameters.
  *
  * @class
  * @extends OO.ui.ButtonWidget

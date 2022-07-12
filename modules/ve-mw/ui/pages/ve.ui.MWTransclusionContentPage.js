@@ -6,7 +6,7 @@
  */
 
 /**
- * MediaWiki transclusion dialog content page.
+ * Template dialog content pane input for a raw wikitext snippet.
  *
  * @class
  * @extends OO.ui.PageLayout

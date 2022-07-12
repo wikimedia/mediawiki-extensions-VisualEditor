@@ -1,5 +1,10 @@
 /**
- * This is modelled after {@see OO.ui.OutlineSelectWidget}.
+ * List of template parameters, each of which can be added or removed using a
+ * checkbox.
+ *
+ * This is modelled after {@see OO.ui.OutlineSelectWidget}.  Currently we use
+ * the SelectWidget in multi-select mode, and selection maps to checked
+ * checkboxes.
  *
  * @class
  * @extends OO.ui.SelectWidget
