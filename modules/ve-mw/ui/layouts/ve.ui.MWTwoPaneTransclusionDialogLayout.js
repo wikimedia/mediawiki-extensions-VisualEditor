@@ -299,9 +299,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 				isCurrentPageRemoved = true;
 			}
 		} else {
-			if ( !isCurrentPageRemoved ) {
+			// avoid choosing a parameter as previous selection
+			if ( !isCurrentPageRemoved && pageName.indexOf( '/' ) === -1 ) {
 				prevSelectionCandidate = pageName;
-			} else if ( !nextSelectionCandidate ) {
+			} else if ( isCurrentPageRemoved && !nextSelectionCandidate ) {
 				nextSelectionCandidate = pageName;
 			}
 		}
