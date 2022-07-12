@@ -74,7 +74,7 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 				this.bookletLayout.focus();
 			}
 
-			this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+			this.bookletLayout.getPagesOrdered().forEach( function ( page ) {
 				if ( page instanceof ve.ui.MWParameterPage ) {
 					page.updateSize();
 				}

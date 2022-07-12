@@ -586,7 +586,7 @@ ve.ui.MWTransclusionDialog.prototype.onWindowResize = function () {
 	if ( this.transclusionModel ) {
 		this.autoExpandSidebar();
 
-		this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+		this.bookletLayout.getPagesOrdered().forEach( function ( page ) {
 			if ( page instanceof ve.ui.MWParameterPage ) {
 				page.updateSize();
 			}
