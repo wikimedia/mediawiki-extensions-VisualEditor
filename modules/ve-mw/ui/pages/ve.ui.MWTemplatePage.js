@@ -6,7 +6,8 @@
  */
 
 /**
- * MediaWiki transclusion dialog template page.
+ * Template dialog content pane header for a template.  Includes informational
+ * messages about the template, such as a link to the page where it's defined.
  *
  * @class
  * @extends OO.ui.PageLayout

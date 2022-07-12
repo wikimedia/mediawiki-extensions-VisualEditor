@@ -5,7 +5,8 @@
  */
 
 /**
- * Container for transclusion, may contain a single or multiple templates.
+ * Container for the entire transclusion dialog sidebar, may contain a single or
+ * multiple templates or raw wikitext snippets.
  *
  * @class
  * @extends OO.ui.Widget

@@ -6,7 +6,9 @@
  */
 
 /**
- * MediaWiki transclusion dialog placeholder page.
+ * The placeholder is shown in the template dialog content pane, and allows the
+ * user to enter a template name.  Once a name is chosen, the placeholder is
+ * replaced with elements for the concrete template.
  *
  * @class
  * @extends OO.ui.PageLayout

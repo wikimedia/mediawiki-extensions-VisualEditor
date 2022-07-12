@@ -3,7 +3,8 @@
  */
 
 /**
- * Container for template, as rendered in the template dialog sidebar.
+ * Container for a template as rendered in the template dialog sidebar.
+ * Contains search and visibility inputs, and a list of parameters when available.
  *
  * @class
  * @extends ve.ui.MWTransclusionOutlinePartWidget

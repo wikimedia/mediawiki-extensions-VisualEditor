@@ -6,7 +6,9 @@
  */
 
 /**
- * MediaWiki transclusion dialog template page.
+ * Container for editing the value of a parameter in the template dialog
+ * content pane.  Includes a dynamic value input depending on the parameter's
+ * type documented in TemplateData.
  *
  * @class
  * @extends OO.ui.PageLayout

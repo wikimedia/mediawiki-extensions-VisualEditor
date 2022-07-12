@@ -1,6 +1,6 @@
 /**
- * Generic button-like widget for items in the template dialog sidebar. See
- * {@see OO.ui.ButtonWidget} for inspiration.
+ * Generic button-like widget for top-level parts in the template dialog
+ * sidebar. See {@see OO.ui.ButtonWidget} for inspiration.
  *
  * @class
  * @extends OO.ui.OptionWidget

@@ -6,7 +6,10 @@
  */
 
 /**
- * Creates an ve.ui.MWTemplateTitleInputWidget object.
+ * Input field for entering a template title, for example when adding a template
+ * in the template dialog.  Autocomplete fetches TemplateData and performs
+ * searching in the background, to display information about matching templates
+ * on the wiki.
  *
  * @class
  * @extends mw.widgets.TitleInputWidget

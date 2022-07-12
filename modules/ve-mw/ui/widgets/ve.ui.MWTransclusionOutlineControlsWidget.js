@@ -1,4 +1,11 @@
 /**
+ * Toolbar at the bottom of the template dialog sidebar.  Provides buttons to
+ * reorder and delete top-level parts, and buttons to add templates or raw
+ * wikitext.
+ *
+ * When there is only one template in the transclusion, the sidebar may be
+ * hidden.
+ *
  * @class
  * @extends OO.ui.Widget
  * @mixins OO.ui.mixin.GroupElement
