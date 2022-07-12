@@ -33,7 +33,8 @@ ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWi
 	this.header = new ve.ui.MWTransclusionOutlineButtonWidget( config )
 		.connect( this, {
 			keyPressed: 'onHeaderKeyPressed',
-			click: 'onHeaderClick'
+			// The array syntax is a way to call `this.emit( 'transclusionPartSelected', … )`.
+			click: [ 'emit', 'transclusionPartSelected', part.getId() ]
 		} );
 
 	if ( config.ariaDescriptionUnselected ) {
@@ -98,14 +99,6 @@ ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderKeyPressed = function ( 
 	if ( key === OO.ui.Keys.SPACE ) {
 		this.emit( 'transclusionPartSoftSelected', this.getData() );
 	}
-};
-
-/**
- * @protected
- * @fires transclusionPartSelected
- */
-ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderClick = function () {
-	this.emit( 'transclusionPartSelected', this.getData() );
 };
 
 /**

@@ -1090,15 +1090,6 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogRetry = function () {
 };
 
 /**
- * Handle dialog close events.
- *
- * @fires saveWorkflowEnd
- */
-ve.init.mw.ArticleTarget.prototype.onSaveDialogClose = function () {
-	this.emit( 'saveWorkflowEnd' );
-};
-
-/**
  * Load the editor.
  *
  * This method initiates an API request for the page data unless dataPromise is passed in,
@@ -1950,7 +1941,8 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 				preview: 'onSaveDialogPreview',
 				resolve: 'onSaveDialogResolveConflict',
 				retry: 'onSaveDialogRetry',
-				close: 'onSaveDialogClose'
+				// The array syntax is a way to call `this.emit( 'saveWorkflowEnd' )`.
+				close: [ 'emit', 'saveWorkflowEnd' ]
 			} );
 
 			// Attach custom overlay
