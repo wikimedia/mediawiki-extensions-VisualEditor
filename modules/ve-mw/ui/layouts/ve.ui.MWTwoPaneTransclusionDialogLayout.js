@@ -149,7 +149,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
 /**
  * Parts and parameters can be soft-selected, or selected and focused.
  *
- * @param {string} pageName Full, unique name of part or parameter
+ * @param {string|null} pageName Full, unique name of part or parameter, or null to deselect
  * @param {string} [soft] If true, suppress content pane focus.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = function ( pageName, soft ) {
@@ -360,7 +360,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 		// This is not needed if the next page has something focusable (because once it is
 		// focused this blur happens automatically).
 		if ( !OO.ui.isMobile() &&
-			OO.ui.findFocusable( page.$element ).length !== 0
+			( !page || OO.ui.findFocusable( page.$element ).length !== 0 )
 		) {
 			var $focused = previousPage.$element.find( ':focus' );
 			if ( $focused.length ) {
