@@ -1,5 +1,21 @@
 @import 'mediawiki.mixins.less';
 
+// Copied from wikimedia-ui-base.less
+@wmui-color-accent50: #36c;
+@wmui-color-accent90: #eaf3ff;
+@color-base--subtle: #72777d;
+
+@selected-text-color: @wmui-color-accent50;
+@selected-background: @wmui-color-accent90;
+
+// This shade on a white background results in #eaecf0 a.k.a. @background-color-base--hover a.k.a.
+// @wmui-color-base80
+@hover-shading: rgba( 0, 24, 73, 0.082 );
+
+@on-click-text-color: @wmui-color-accent50;
+// Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover
+@on-click-shading: rgba( 41, 98, 204, 0.1 );
+
 .ve-ui-mwTransclusionOutlineWidget {
 	/* .oo-ui-window-head uses a 1px outline which overlaps the top pixel of the sidebar */
 	padding-top: 1px;
@@ -47,16 +63,13 @@
 
 				&:hover,
 				&:focus {
-					/* This shade on a white background results in #eaecf0 a.k.a.
-					@background-color-base--hover a.k.a. @wmui-color-base80 */
-					background-color: rgba( 0, 24, 73, 0.082 );
+					background-color: @hover-shading;
 				}
 
 				/* click */
 				&:active {
-					/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
-					background-color: rgba( 41, 98, 204, 0.1 );
-					color: #36c;
+					background-color: @on-click-shading;
+					color: @on-click-text-color;
 				}
 
 				> .oo-ui-iconElement-icon {
@@ -66,11 +79,11 @@
 
 			/* selected */
 			&.oo-ui-optionWidget-selected > .oo-ui-buttonElement-button {
-				background-color: #eaf3ff;
+				background-color: @selected-background;
 
 				&:hover {
-					background-color: #eaf3ff;
-					color: #36c;
+					background-color: @selected-background;
+					color: @selected-text-color;
 				}
 			}
 		}
@@ -87,7 +100,7 @@
 
 	&-no-template-parameters {
 		font-style: italic;
-		color: #72777d;
+		color: @color-base--subtle;
 		margin: 8px 24px 24px 24px;
 	}
 
@@ -103,7 +116,7 @@
 
 	&-no-match {
 		font-style: italic;
-		color: #72777d;
+		color: @color-base--subtle;
 		margin: 8px 24px;
 	}
 
@@ -120,7 +133,7 @@
 
 	.ve-ui-mwTransclusionOutlineParameterSelectWidget:focus {
 		border-radius: 2px;
-		box-shadow: inset 0 0 0 1px #36c;
+		box-shadow: inset 0 0 0 1px @wmui-color-accent50;
 		outline: 0;
 	}
 
@@ -134,22 +147,19 @@
 
 		/* click */
 		&:active {
-			/* Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover */
-			background-color: rgba( 41, 98, 204, 0.1 );
-			color: #36c;
+			background-color: @on-click-shading;
+			color: @on-click-text-color;
 		}
 
 		&.ve-ui-mwTransclusionOutlineParameterWidget-isSet,
 		&.ve-ui-mwTransclusionOutlineParameterWidget-isSet:hover,
 		&.ve-ui-mwTransclusionOutlineParameterWidget-isSet.oo-ui-optionWidget-highlighted {
-			background-color: #eaf3ff;
-			color: #36c;
+			background-color: @selected-background;
+			color: @selected-text-color;
 		}
 
 		&.oo-ui-optionWidget-highlighted {
-			/* This shade on a white background results in #eaecf0
-			a.k.a. @background-color-base--hover a.k.a. @wmui-color-base80 */
-			background-color: rgba( 0, 24, 73, 0.082 );
+			background-color: @hover-shading;
 			color: #000;
 		}
 
