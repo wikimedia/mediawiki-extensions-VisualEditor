@@ -157,6 +157,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = functi
 	if ( !soft ) {
 		this.focus();
 	}
+
+	var page = this.pages[ pageName ];
+	if ( page ) {
+		page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
+	}
 };
 
 /**
@@ -345,12 +350,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	var page = this.pages[ name ];
 
-	if ( page ) {
-		page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
-
-		if ( name === this.currentPageName ) {
-			return;
-		}
+	if ( page && name === this.currentPageName ) {
+		return;
 	}
 
 	var previousPage = this.currentPageName ? this.pages[ this.currentPageName ] : null;
