@@ -67,7 +67,7 @@ ve.ui.MWTransclusionContextItem.static.isCompatibleWith =
  * @inheritdoc
  */
 ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
-	/** @var {ve.ce.MWTransclusionNode} nodeClass */
+	/** @type {ve.ce.MWTransclusionNode} */
 	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
 	return ve.msg(
 		'visualeditor-dialog-transclusion-contextitem-description',
