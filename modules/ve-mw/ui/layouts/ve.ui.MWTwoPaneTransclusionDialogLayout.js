@@ -74,7 +74,7 @@ OO.inheritClass( ve.ui.MWTwoPaneTransclusionDialogLayout, OO.ui.MenuLayout );
 
 /**
  * @private
- * @param {Object} visibility
+ * @param {Object.<string,boolean>} visibility
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onFilterPagesByName = function ( visibility ) {
 	for ( var pageName in visibility ) {
@@ -150,7 +150,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
  * Parts and parameters can be soft-selected, or selected and focused.
  *
  * @param {string|null} pageName Full, unique name of part or parameter, or null to deselect
- * @param {string} [soft] If true, suppress content pane focus.
+ * @param {boolean} [soft] If true, suppress content pane focus.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = function ( pageName, soft ) {
 	this.setPage( pageName );

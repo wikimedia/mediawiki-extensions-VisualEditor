@@ -1,9 +1,3 @@
-/*!
- * VisualEditor user interface MWTransclusionOutlineWidget class.
- *
- * @license The MIT License (MIT); see LICENSE.txt
- */
-
 /**
  * Container for the entire transclusion dialog sidebar, may contain a single or
  * multiple templates or raw wikitext snippets.
@@ -43,7 +37,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  * @event sidebarPartSelected
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
- * @param {string} [soft] If true, don't focus the content pane.  Defaults to false.
+ * @param {boolean} [soft] If true, don't focus the content pane.  Defaults to false.
  */
 
 /* Methods */
@@ -65,7 +59,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
 /**
  * Handle spacebar in a part header
  *
- * @param {*} pageName
+ * @param {string} pageName
  * @fires sidebarPartSelected
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSoftSelected = function ( pageName ) {
@@ -100,7 +94,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 	if ( part instanceof ve.dm.MWTemplateModel ) {
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part, removed instanceof ve.dm.MWTemplatePlaceholderModel );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
-		// The array syntax is a way to call `this.emit( 'filterParameters' )`.
 		widget.connect( this, {
 			// We can forward these events as is. The parameter's unique ids are reused as page
 			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
@@ -204,10 +197,10 @@ ve.ui.MWTransclusionOutlineWidget.prototype.clear = function () {
 
 /**
  * @private
- *
- * @param {Object} parameter
+ * @param {Object.<string,boolean>} visibility
+ * @fires filterPagesByName
  */
-ve.ui.MWTransclusionOutlineWidget.prototype.onFilterParametersByName = function ( parameter ) {
-	this.emit( 'filterPagesByName', parameter );
+ve.ui.MWTransclusionOutlineWidget.prototype.onFilterParametersByName = function ( visibility ) {
+	this.emit( 'filterPagesByName', visibility );
 	this.setSelectionByPageName();
 };

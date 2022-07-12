@@ -1,9 +1,3 @@
-/*!
- * VisualEditor user interface MWTransclusionOutlineParameterWidget class.
- *
- * @license The MIT License (MIT); see LICENSE.txt
- */
-
 /**
  * A widget that represents a template parameter, with a checkbox to add/remove the parameter.
  * Modelled after {@see OO.ui.OutlineOptionWidget}. Also see {@see OO.ui.CheckboxMultioptionWidget}
@@ -79,6 +73,9 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.setSelected = function ( st
 	return this;
 };
 
+/**
+ * @param {boolean} state
+ */
 ve.ui.MWTransclusionOutlineParameterWidget.prototype.setParameter = function ( state ) {
 	this.$element.toggleClass( 've-ui-mwTransclusionOutlineParameterWidget-isSet', state );
 };
