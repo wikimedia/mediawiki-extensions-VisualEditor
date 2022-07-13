@@ -580,8 +580,14 @@ class Hooks {
 					$title->inNamespace( NS_FILE ) &&
 					!$wikiPageFactory->newFromTitle( $title )->isLocal()
 				) {
+					// The following messages can be used here:
+					// * visualeditor-ca-editlocaldescriptionsource
+					// * visualeditor-ca-createlocaldescriptionsource
 					$editTabMessage = $tabMessages[$action . 'localdescriptionsource'];
 				} else {
+					// The following messages can be used here:
+					// * visualeditor-ca-editsource
+					// * visualeditor-ca-createsource
 					$editTabMessage = $tabMessages[$action . 'source'];
 				}
 
@@ -731,6 +737,8 @@ class Hooks {
 		) {
 			// Don't add ve-edit, but do update the edit tab (e.g. "Edit source").
 			$tabMessages = $config->get( 'VisualEditorTabMessages' );
+			// The following messages can be used here:
+			// * visualeditor-ca-editsource-section
 			$sourceEditSection = $tabMessages['editsectionsource'];
 			$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
 		}
