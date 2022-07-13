@@ -168,8 +168,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( 
 		// When tabbing into the selection list, always highlight the set or first parameter.
 		this.highlightItem( currentItem || this.items[ 0 ] );
 	}
-
-	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.onFocus.call( this, e );
+	// Don't call the parent. It makes assumptions what should be done here.
 };
 
 /**
