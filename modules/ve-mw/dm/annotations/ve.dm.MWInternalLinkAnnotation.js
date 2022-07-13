@@ -71,15 +71,8 @@ ve.dm.MWInternalLinkAnnotation.static.toDataElement = function ( domElements, co
  * @return {Object} The element.
  */
 ve.dm.MWInternalLinkAnnotation.static.dataElementFromTitle = function ( title, rawTitle ) {
-	var target = title.toText(),
-		namespaceIds = mw.config.get( 'wgNamespaceIds' );
+	var target = title.toText();
 
-	if ( title.getNamespaceId() === namespaceIds.file || title.getNamespaceId() === namespaceIds.category ) {
-		// File: or Category: link
-		// We have to prepend a colon so this is interpreted as a link
-		// rather than an image inclusion or categorization
-		target = ':' + target;
-	}
 	if ( title.getFragment() ) {
 		target += '#' + title.getFragment();
 	}
