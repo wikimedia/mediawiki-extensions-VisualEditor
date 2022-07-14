@@ -33,6 +33,8 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineToggleUnusedWidget, OO.ui.ButtonWidg
 
 /**
  * @event toggleUnusedFields
+ * @param {boolean} visibility If unused fields should be shown or not.
+ * @param {boolean} [fromClick]
  * Emitted when the visibility for unused fields should be (re)applied.
  */
 

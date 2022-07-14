@@ -1,7 +1,3 @@
-/*!
- * @license The MIT License (MIT); see LICENSE.txt
- */
-
 /**
  * Container for a template as rendered in the template dialog sidebar.
  * Contains search and visibility inputs, and a list of parameters when available.
@@ -450,7 +446,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 /**
  * @private
  * @param {boolean} visibility
- * @param {boolean} fromClick
+ * @param {boolean} [fromClick]
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = function ( visibility, fromClick ) {
 	if ( visibility ) {
