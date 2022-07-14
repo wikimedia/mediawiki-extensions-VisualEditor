@@ -11,10 +11,6 @@
 	position: relative;
 }
 
-.ve-ui-mwParameterPage.oo-ui-pageLayout:last-of-type {
-	margin-bottom: 1.5em;
-}
-
 .ve-ui-mwParameterPage-info {
 	float: left;
 	cursor: default;
