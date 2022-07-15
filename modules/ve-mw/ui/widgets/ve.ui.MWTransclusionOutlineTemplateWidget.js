@@ -103,7 +103,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = fu
 		$ariaDescribedBy: $parametersAriaDescription
 	} ).connect( this, {
 		choose: 'onTemplateParameterChoose',
-		templateParameterSelectionChanged: 'onTemplateParameterSelectionChanged',
+		templateParameterSpaceDown: 'onTemplateParameterSpaceDown',
 		change: 'onParameterWidgetListChanged'
 	} );
 
@@ -299,7 +299,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterChoose = 
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSelectionChanged = function ( item, selected ) {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSpaceDown = function ( item, selected ) {
 	this.toggleParameter( item, selected, true );
 };
 
