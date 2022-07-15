@@ -227,6 +227,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleHasValue = function ( 
  * @inheritDoc
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setSelected = function ( state ) {
+	// FIXME: This is a super-specific hack; should be replaced with a more generic solution
 	if ( !state && this.isSelected() && this.parameterList ) {
 		this.parameterList.highlightItem();
 	}
