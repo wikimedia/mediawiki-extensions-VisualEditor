@@ -101,8 +101,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onReplacePart = function ( rem
 };
 
 /**
- * Handle stack layout focus.
- *
  * @private
  * @param {jQuery.Event} e Focusin event
  */
@@ -165,18 +163,14 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = functi
 };
 
 /**
- * Check if booklet has an outline.
- *
- * @return {boolean} Booklet has an outline
+ * @return {boolean}
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isOutlined = function () {
 	return this.outlined;
 };
 
 /**
- * Check if booklet has a visible outline.
- *
- * @return {boolean} Outline is visible
+ * @return {boolean}
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isOutlineVisible = function () {
 	return this.outlined && this.outlineVisible;
@@ -223,8 +217,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getPagesOrdered = function () 
 };
 
 /**
- * Get a page by its symbolic name.
- *
  * @param {string} name Symbolic name of page
  * @return {OO.ui.PageLayout|undefined} Page, if found
  */
@@ -241,8 +233,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPage = function () {
 };
 
 /**
- * Get the symbolic name of the current page.
- *
  * @return {string|null} Symbolic name of the current page
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPageName = function () {
@@ -250,8 +240,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPageName = function 
 };
 
 /**
- * Add pages to the booklet layout
- *
  * When pages are added with the same names as existing pages, the existing pages will be
  * automatically removed before the new pages are added.
  *
@@ -292,10 +280,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 };
 
 /**
- * Remove the specified pages from the booklet layout.
- *
- * To remove all pages from the booklet, you may wish to use the #clearPages method instead.
- *
  * @param {string[]} pagesNamesToRemove
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesNamesToRemove ) {
@@ -332,11 +316,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 	}
 };
 
-/**
- * Clear all pages from the booklet layout.
- *
- * To remove only a subset of pages from the booklet, use the #removePages method.
- */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.clearPages = function () {
 	this.pages = {};
 	this.currentPageName = null;
@@ -376,10 +355,6 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 	this.refreshControls();
 };
 
-/**
- * Refresh controls
- *
- */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
 	var partId = this.sidebar.findSelectedPartId(),
 		pages = this.stackLayout.getItems(),
@@ -407,5 +382,4 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () 
 		canMoveDown: canMoveDown,
 		canBeDeleted: canBeDeleted
 	} );
-
 };
