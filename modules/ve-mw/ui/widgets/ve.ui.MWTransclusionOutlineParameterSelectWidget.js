@@ -46,9 +46,9 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, ve.ui.MWAriaDes
 
 /**
  * This is fired instead of the "choose" event from the {@see OO.ui.SelectWidget} base class when
- * pressing space on a parameter to toggle it, without loosing the focus.
+ * pressing space on a parameter to toggle it or scroll it into view, without losing the focus.
  *
- * @event templateParameterSelectionChanged
+ * @event templateParameterSpaceDown
  * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
  * @param {boolean} selected
  */
@@ -196,7 +196,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = functio
  * @inheritDoc OO.ui.SelectWidget
  * @param {KeyboardEvent} e
  * @fires choose
- * @fires templateParameterSelectionChanged
+ * @fires templateParameterSpaceDown
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = function ( e ) {
 	var item;
@@ -224,7 +224,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 				} else {
 					this.selectItem( item );
 				}
-				this.emit( 'templateParameterSelectionChanged', item, item.isSelected() );
+				this.emit( 'templateParameterSpaceDown', item, item.isSelected() );
 			}
 			e.preventDefault();
 			break;
