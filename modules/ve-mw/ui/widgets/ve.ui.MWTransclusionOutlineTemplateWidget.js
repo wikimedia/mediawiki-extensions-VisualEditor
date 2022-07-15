@@ -59,7 +59,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Events */
 
 /**
- * @event templateParameterAdded
+ * @event templateParameterSelected
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
  * @param {boolean} soft If true, focus should stay in the sidebar.
@@ -308,7 +308,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSpaceDown
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
  * @param {boolean} soft If true, focus should stay in the sidebar.
- * @fires templateParameterAdded
+ * @fires templateParameterSelected
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleParameter = function ( item, selected, soft ) {
 	var paramName = item.getData(),
@@ -323,7 +323,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleParameter = function (
 	this.updateUnusedParameterToggleState();
 
 	if ( param && selected ) {
-		this.emit( 'templateParameterAdded', param.getId(), soft );
+		this.emit( 'templateParameterSelected', param.getId(), soft );
 	}
 };
 
