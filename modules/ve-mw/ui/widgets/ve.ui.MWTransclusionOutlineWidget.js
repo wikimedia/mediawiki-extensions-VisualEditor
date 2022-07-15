@@ -34,7 +34,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
 /**
  * Respond to the intent to select a sidebar item
  *
- * @event sidebarPartSelected
+ * @event sidebarItemSelected
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
  * @param {boolean} [soft] If true, don't focus the content pane.  Defaults to false.
@@ -60,11 +60,11 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
  * Handle spacebar in a part header
  *
  * @param {string} pageName
- * @fires sidebarPartSelected
+ * @fires sidebarItemSelected
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSoftSelected = function ( pageName ) {
 	this.setSelectionByPageName( pageName );
-	this.emit( 'sidebarPartSelected', pageName, true );
+	this.emit( 'sidebarItemSelected', pageName, true );
 };
 
 /**
@@ -97,7 +97,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 		widget.connect( this, {
 			// We can forward these events as is. The parameter's unique ids are reused as page
 			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
-			templateParameterSelected: [ 'emit', 'templateParameterSelected' ],
+			templateParameterSelected: [ 'emit', 'sidebarItemSelected' ],
 			filterParametersById: 'onFilterParametersByName'
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
@@ -108,7 +108,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 
 	widget.connect( this, {
 		transclusionPartSoftSelected: 'onTransclusionPartSoftSelected',
-		transclusionPartSelected: [ 'emit', 'sidebarPartSelected' ]
+		transclusionPartSelected: [ 'emit', 'sidebarItemSelected' ]
 	} );
 
 	this.partWidgets[ part.getId() ] = widget;
