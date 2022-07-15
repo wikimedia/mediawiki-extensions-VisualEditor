@@ -30,7 +30,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 	this.$element
 		.on( {
 			focus: this.bindDocumentKeyDownListener.bind( this ),
-			blur: this.unbindDocumentKeyDownListener.bind( this )
+			blur: this.onBlur.bind( this )
 		} );
 
 	this.itemSet = null;
@@ -242,4 +242,9 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = f
 	}
 
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.onDocumentKeyDown.call( this, e );
+};
+
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onBlur = function () {
+	this.highlightItem();
+	this.unbindDocumentKeyDownListener();
 };
