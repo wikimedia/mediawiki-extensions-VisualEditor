@@ -109,12 +109,15 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem
  * @param {string} [paramName] Parameter name to set, e.g. "param1". Omit to remove setting.
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = function ( paramName ) {
+	var newItem = paramName ? this.findItemFromData( paramName ) : null;
+	// Unhighlight when called with no parameter name
+	this.highlightItem( newItem );
+
 	if ( this.itemSet === paramName ) {
 		return;
 	}
 
-	var newItem = this.findItemFromData( paramName ),
-		currentItem = this.findItemFromData( this.itemSet );
+	var currentItem = this.itemSet ? this.findItemFromData( this.itemSet ) : null;
 	this.itemSet = paramName;
 
 	if ( currentItem ) {
@@ -122,7 +125,6 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = functi
 	}
 	if ( newItem ) {
 		newItem.setParameter( true );
-		this.highlightItem( newItem );
 	}
 };
 
