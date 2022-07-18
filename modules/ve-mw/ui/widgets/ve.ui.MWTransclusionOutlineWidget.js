@@ -97,7 +97,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 		widget.connect( this, {
 			// We can forward these events as is. The parameter's unique ids are reused as page
 			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
-			transclusionOutlineItemSelected: [ 'emit', 'sidebarItemSelected' ],
 			filterParametersById: 'onFilterParametersByName'
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
@@ -108,7 +107,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 
 	widget.connect( this, {
 		transclusionPartSoftSelected: 'onTransclusionPartSoftSelected',
-		transclusionPartSelected: [ 'emit', 'sidebarItemSelected' ]
+		transclusionOutlineItemSelected: [ 'emit', 'sidebarItemSelected' ]
 	} );
 
 	this.partWidgets[ part.getId() ] = widget;
