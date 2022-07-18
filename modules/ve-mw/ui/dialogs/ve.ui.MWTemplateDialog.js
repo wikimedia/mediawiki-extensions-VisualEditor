@@ -106,15 +106,14 @@ ve.ui.MWTemplateDialog.prototype.onReplacePart = function ( removed, added ) {
 
 	if ( removed ) {
 		// Remove parameter pages of removed templates
-		var partPage = this.bookletLayout.getPage( removed.getId() );
 		if ( removed instanceof ve.dm.MWTemplateModel ) {
 			var params = removed.getParameters();
 			for ( var name in params ) {
-				removePages.push( this.bookletLayout.getPage( params[ name ].getId() ) );
+				removePages.push( params[ name ].getId() );
 			}
 			removed.disconnect( this );
 		}
-		removePages.push( partPage );
+		removePages.push( removed.getId() );
 		this.bookletLayout.removePages( removePages );
 	}
 
@@ -207,9 +206,7 @@ ve.ui.MWTemplateDialog.prototype.onAddParameter = function ( param ) {
  * @param {ve.dm.MWParameterModel} param Removed param
  */
 ve.ui.MWTemplateDialog.prototype.onRemoveParameter = function ( param ) {
-	var page = this.bookletLayout.getPage( param.getId() );
-
-	this.bookletLayout.removePages( [ page ] );
+	this.bookletLayout.removePages( [ param.getId() ] );
 
 	this.touch();
 };
