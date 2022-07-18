@@ -110,8 +110,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutFocus = function 
 	// Find the page that an element was focused within
 	var $target = $( e.target ).closest( '.oo-ui-pageLayout' );
 	for ( var name in this.pages ) {
-		// Check for page match, exclude current page to find only page changes
-		if ( this.pages[ name ].$element[ 0 ] === $target[ 0 ] && name !== this.currentPageName ) {
+		if ( this.pages[ name ].$element[ 0 ] === $target[ 0 ] ) {
 			this.setPage( name );
 			break;
 		}
