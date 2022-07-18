@@ -116,10 +116,12 @@ ve.ui.MWTransclusionOutlinePartWidget.prototype.isSelected = function () {
  * @param {boolean} state
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.setSelected = function ( state ) {
-	this.updateButtonAriaDescription( state );
-	this.header
-		.setSelected( state )
-		.setFlags( { progressive: state } );
+	if ( state !== this.isSelected() ) {
+		this.updateButtonAriaDescription( state );
+		this.header
+			.setSelected( state )
+			.setFlags( { progressive: state } );
+	}
 };
 
 /**
