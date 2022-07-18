@@ -12,7 +12,7 @@
  * @constructor
  * @param {Object} config
  * @cfg {ve.ui.MWTransclusionOutlineParameterWidget[]} items
- * @property {string|null} itemSet Name of the currently selected parameter
+ * @property {string|null} activeParameter Name of the currently selected parameter
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOutlineParameterSelectWidget( config ) {
 	// Parent constructor
@@ -33,7 +33,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 			blur: this.onBlur.bind( this )
 		} );
 
-	this.itemSet = null;
+	this.activeParameter = null;
 };
 
 /* Inheritance */
@@ -108,19 +108,19 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem
 /**
  * @param {string|null} [paramName] Parameter name to set, e.g. "param1". Omit to remove setting.
  */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = function ( paramName ) {
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setActiveParameter = function ( paramName ) {
 	// Note: We know unnamed parameter placeholders never have an item here
 	var newItem = paramName ? this.findItemFromData( paramName ) : null;
 	// Unhighlight when called with no parameter name
 	this.highlightItem( newItem );
 
 	paramName = paramName || null;
-	if ( this.itemSet === paramName ) {
+	if ( this.activeParameter === paramName ) {
 		return;
 	}
 
-	var currentItem = this.itemSet ? this.findItemFromData( this.itemSet ) : null;
-	this.itemSet = paramName;
+	var currentItem = this.activeParameter ? this.findItemFromData( this.activeParameter ) : null;
+	this.activeParameter = paramName;
 
 	if ( currentItem ) {
 		currentItem.toggleActivePageIndicator( false );
@@ -170,7 +170,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( e ) {
 	if ( e.target === this.$element[ 0 ] ) {
 		// Note: We know unnamed parameter placeholders never have an item here
-		var currentItem = this.itemSet ? this.findItemFromData( this.itemSet ) : null;
+		var currentItem = this.activeParameter ? this.findItemFromData( this.activeParameter ) : null;
 		// When tabbing into the selection list, always highlight the set or first parameter.
 		this.highlightItem( currentItem || this.items[ 0 ] );
 	}

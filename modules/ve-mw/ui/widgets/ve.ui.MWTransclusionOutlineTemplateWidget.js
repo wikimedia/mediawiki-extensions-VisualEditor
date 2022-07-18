@@ -206,7 +206,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = func
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.setParameter = function ( paramName ) {
 	if ( this.parameterList ) {
-		this.parameterList.setParameter( paramName );
+		this.parameterList.setActiveParameter( paramName );
 	}
 };
 
