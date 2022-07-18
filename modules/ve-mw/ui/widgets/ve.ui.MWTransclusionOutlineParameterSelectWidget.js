@@ -123,10 +123,10 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = functi
 	this.itemSet = paramName;
 
 	if ( currentItem ) {
-		currentItem.setParameter( false );
+		currentItem.toggleActivePageIndicator( false );
 	}
 	if ( newItem ) {
-		newItem.setParameter( true );
+		newItem.toggleActivePageIndicator( true );
 	}
 };
 
