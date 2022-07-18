@@ -143,9 +143,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
 		var partWidget = this.partWidgets[ partId ],
 			selected = partId === pageName;
 
-		if ( partWidget.isSelected() !== selected ) {
-			partWidget.setSelected( selected );
-		}
+		partWidget.setSelected( selected );
 		if ( selected && !isParameter ) {
 			partWidget.scrollElementIntoView();
 		}
