@@ -93,5 +93,5 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.toggleHasValue = function (
 ve.ui.MWTransclusionOutlineParameterWidget.prototype.scrollToView = function () {
 	// make sure parameter is visible and scrolled underneath the sticky
 	// TODO find a dynamic way to get height of the sticky part
-	this.scrollElementIntoView( { padding: { top: 115 } } );
+	this.scrollElementIntoView( { animate: false, padding: { top: 115 } } );
 };
