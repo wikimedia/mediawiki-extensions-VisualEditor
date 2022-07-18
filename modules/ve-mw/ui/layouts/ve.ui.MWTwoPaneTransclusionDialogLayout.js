@@ -307,10 +307,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 	} );
 
 	this.stackLayout.removeItems( pagesToRemove );
-	if ( isCurrentPageRemoved ) {
-		this.setPage( isCurrentParameter ? null :
-			nextSelectionCandidate || prevSelectionCandidate
-		);
+	if ( isCurrentPageRemoved && !isCurrentParameter ) {
+		this.setPage( nextSelectionCandidate || prevSelectionCandidate );
 	}
 };
 

@@ -148,6 +148,12 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.markParameterAsUnused
 	var item = paramName ? this.findItemFromData( paramName ) : null;
 	if ( item ) {
 		item.setSelected( false );
+		paramName = paramName || null;
+		// An unused parameter can't be the active (set) one; it doesn't exist in the content pane
+		if ( this.itemSet === paramName ) {
+			this.itemSet = null;
+			item.setParameter( false );
+		}
 	}
 };
 
