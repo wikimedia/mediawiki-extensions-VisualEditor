@@ -198,7 +198,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 is een verboden karakter. Verwijder het om de parameter toe te voegen.",
 	"visualeditor-dialog-transclusion-add-param-help": "Indien bekend, voer [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters ongedocumenteerde parameternamen] in. Merk op dat alleen parameters die bekend zijn bij het sjabloon een effect hebben. U kunt informatie over bestaande parameters vinden op de [[$1|sjabloonpagina]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Parameternaam",
-	"visualeditor-dialog-transclusion-add-param-save": "Voeg parameter toe",
+	"visualeditor-dialog-transclusion-add-param-save": "Toevoegen",
 	"visualeditor-dialog-transclusion-add-template": "Sjabloon toevoegen",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Voeg ongedocumenteerde parameter toe",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Teruggaan naar zoeken? Uw wijzigingen gaan dan verloren en dit kan niet ongedaan worden gemaakt.",

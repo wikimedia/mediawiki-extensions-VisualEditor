@@ -7,6 +7,7 @@
 			"Ebraminio",
 			"Freshman404",
 			"Huji",
+			"Jeeputer",
 			"Ladsgroup",
 			"Movyn",
 			"Reza1615",
@@ -53,6 +54,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "عنوان برای بخش جدید.",
 	"apihelp-visualeditoredit-param-starttimestamp": "در زمان ذخیره کردن، این را برای زمان بارگیری نسخه تنظیم کنید. برای تشخیص تعارض ویرایش کاربرد دارد.",
 	"apihelp-visualeditoredit-param-summary": "خلاصهٔ ویرایش.",
+	"apihelp-visualeditoredit-param-tags": "برچسب‌های تغییر برای افزودن به ویرایش.",
 	"apihelp-visualeditoredit-param-wikitext": "برای کار با ویکی‌متن.",
 	"apihelp-visualeditoredit-summary": "ذخیره صفحه HTML5 به مدیاویکی (تبدیل به متن ویکی با سرویس پارسوید)"
 }

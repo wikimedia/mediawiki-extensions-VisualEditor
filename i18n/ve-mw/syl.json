@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"এম আবু সাঈদ"
+			"এম আবু সাঈদ",
+			"ꠢꠣꠍꠘ ꠞꠣꠎꠣ"
 		]
 	},
 	"tooltip-ca-ve-edit": "ꠅꠃ ꠚꠣꠔꠣ ꠟꠦꠈ",
+	"visualeditor-ca-createsource": "ꠏꠠ ꠛꠣꠘꠣꠃꠇ꠆ꠇꠣ",
 	"visualeditor-ca-editsource": "ꠎꠠꠅ ꠟꠦꠈ",
-	"visualeditor-ca-editsource-section": "ꠃꠔꠡ ꠟꠦꠈ"
+	"visualeditor-ca-editsource-section": "ꠃꠔꠡ ꠟꠦꠈꠂꠁꠘ",
+	"visualeditor-descriptionpagelink": "ꠙ꠆ꠞꠎꠦꠇ꠆ꠐ:ꠖꠦꠇꠤꠀ-ꠟꠦꠈꠞꠣ"
 }
