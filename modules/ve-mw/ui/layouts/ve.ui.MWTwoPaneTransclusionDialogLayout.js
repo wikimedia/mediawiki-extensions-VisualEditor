@@ -46,8 +46,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	// Events
 	this.sidebar.connect( this, {
 		filterPagesByName: 'onFilterPagesByName',
-		sidebarPartSelected: 'onSidebarItemSelected',
-		templateParameterSelected: 'onSidebarItemSelected'
+		sidebarItemSelected: 'onSidebarItemSelected'
 	} );
 	// Event 'focus' does not bubble, but 'focusin' does
 	this.stackLayout.$element.on( 'focusin', this.onStackLayoutFocus.bind( this ) );
