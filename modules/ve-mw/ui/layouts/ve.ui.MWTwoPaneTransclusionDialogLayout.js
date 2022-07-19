@@ -294,6 +294,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 			delete layout.pages[ pageName ];
 			// If the current page is removed, clear currentPageName
 			if ( layout.currentPageName === pageName ) {
+				layout.currentPageName = null;
 				isCurrentPageRemoved = true;
 			}
 		} else {
