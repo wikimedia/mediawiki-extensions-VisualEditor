@@ -156,11 +156,11 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 };
 
 ve.dm.MWGalleryImageNode.static.describeChange = function ( key ) {
-	if ( key === 'resource' || key === 'altText' ) {
+	if ( key === 'altText' ) {
 		// Parent method
 		return ve.dm.MWGalleryImageNode.super.static.describeChange.apply( this, arguments );
 	}
-	// All other attributes are computed
+	// All other attributes are computed, or result in nodes being incomparable (`resource`)
 	return null;
 };
 
