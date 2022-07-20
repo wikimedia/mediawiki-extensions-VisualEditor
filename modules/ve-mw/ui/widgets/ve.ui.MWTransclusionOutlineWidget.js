@@ -63,7 +63,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
  * @fires sidebarItemSelected
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSoftSelected = function ( pageName ) {
-	this.setSelectionByPageName( pageName );
 	this.emit( 'sidebarItemSelected', pageName, true );
 };
 
