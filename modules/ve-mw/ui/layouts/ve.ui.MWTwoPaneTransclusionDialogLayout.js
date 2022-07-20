@@ -31,13 +31,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	// Properties
 	this.pages = {};
 	this.currentPageName = null;
-	this.ignoreFocus = false;
 	this.stackLayout = new ve.ui.MWVerticalLayout();
 	this.setContentPanel( this.stackLayout );
 	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
 	this.outlinePanel = new OO.ui.PanelLayout( { expanded: this.expanded, scrollable: true } );
 	this.setMenuPanel( this.outlinePanel );
-	this.outlineVisible = true;
 	this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget();
 
 	// Events
@@ -155,13 +153,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = functi
 };
 
 /**
- * Hide or show the outline.
- *
- * @param {boolean} [show] Show outline, omit to invert current state
+ * @param {boolean} show If the sidebar should be shown or not.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( show ) {
-	show = show === undefined ? !this.outlineVisible : !!show;
-	this.outlineVisible = show;
 	this.toggleMenu( show );
 	if ( show ) {
 		var booklet = this;
@@ -175,7 +169,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( sho
 };
 
 /**
- * @return {ve.ui.MWTransclusionOutlineControlsWidget|null}
+ * @return {ve.ui.MWTransclusionOutlineControlsWidget}
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getOutlineControls = function () {
 	return this.outlineControlsWidget;
@@ -321,10 +315,14 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 			}
 		}
 	}
+
 	this.sidebar.setSelectionByPageName( name );
 	this.refreshControls();
 };
 
+/**
+ * @private
+ */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
 	var partId = this.sidebar.findSelectedPartId(),
 		pages = this.stackLayout.getItems(),
