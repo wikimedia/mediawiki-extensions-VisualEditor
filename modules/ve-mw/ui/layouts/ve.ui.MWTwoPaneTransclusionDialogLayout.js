@@ -289,19 +289,24 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 
 	this.stackLayout.getItems().forEach( function ( page ) {
 		var pageName = page.getName();
+
 		if ( pagesNamesToRemove.indexOf( pageName ) !== -1 ) {
 			pagesToRemove.push( page );
 			delete layout.pages[ pageName ];
-			// If the current page is removed, clear currentPageName
 			if ( layout.currentPageName === pageName ) {
 				layout.currentPageName = null;
 				isCurrentPageRemoved = true;
 			}
-		} else {
-			// avoid choosing a parameter as previous selection
-			if ( !isCurrentPageRemoved && pageName.indexOf( '/' ) === -1 ) {
+			return;
+		}
+
+		// Move the selection from a removed top-level part to another, but not to a parameter
+		if ( pageName.indexOf( '/' ) === -1 ) {
+			if ( !isCurrentPageRemoved ) {
+				// The last part before the removed one
 				prevSelectionCandidate = pageName;
-			} else if ( isCurrentPageRemoved && !nextSelectionCandidate ) {
+			} else if ( !nextSelectionCandidate ) {
+				// The first part after the removed one
 				nextSelectionCandidate = pageName;
 			}
 		}
