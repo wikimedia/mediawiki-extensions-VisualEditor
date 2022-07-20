@@ -76,8 +76,8 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.setSelected = function ( st
 /**
  * @param {boolean} state
  */
-ve.ui.MWTransclusionOutlineParameterWidget.prototype.setParameter = function ( state ) {
-	this.$element.toggleClass( 've-ui-mwTransclusionOutlineParameterWidget-isSet', state );
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.toggleActivePageIndicator = function ( state ) {
+	this.$element.toggleClass( 've-ui-mwTransclusionOutlineParameterWidget-activePage', state );
 };
 
 /**
