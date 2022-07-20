@@ -808,12 +808,10 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
  *
  * @param {string|jQuery|Node[]} msg Message content (string of HTML, jQuery object or array of
  *  Node objects)
- * @param {boolean} [allowReapply=true] Whether or not to allow the user to reapply.
- *  Reset when swapping panels. Assumed to be true unless explicitly set to false.
  * @param {boolean} [warning=false] Whether or not this is a warning.
  */
-ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, allowReapply, warning ) {
-	this.saveDeferred.reject( [ new OO.ui.Error( msg, { recoverable: allowReapply, warning: warning } ) ] );
+ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, warning ) {
+	this.saveDeferred.reject( [ new OO.ui.Error( msg, { warning: warning } ) ] );
 };
 
 /**
@@ -833,10 +831,7 @@ ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
  * Handle general save error
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
-	this.showSaveError(
-		this.extractErrorMessages( null ),
-		false /* prevents reapply */
-	);
+	this.showSaveError( this.extractErrorMessages( null ) );
 };
 
 /**
@@ -888,7 +883,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
  * @param {Object|null} data API response data
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
-	this.showSaveError( this.extractErrorMessages( data ), false );
+	this.showSaveError( this.extractErrorMessages( data ) );
 };
 
 /**
@@ -897,7 +892,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
 ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
 	this.pageDeletedWarning = true;
 	// The API error message 'apierror-pagedeleted' is poor, make our own
-	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true, true );
+	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true );
 };
 
 /**
@@ -906,7 +901,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
  * @param {Object} data API response data
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function ( data ) {
-	this.showSaveError( this.extractErrorMessages( data ), true, true );
+	this.showSaveError( this.extractErrorMessages( data ), true );
 };
 
 /**
