@@ -490,7 +490,7 @@ class ApiVisualEditor extends ApiBase {
 					// Show generic permission errors, including page protection, user blocks, etc.
 					$notice = $this->getOutput()->formatPermissionsErrorMessage( $permErrors, 'edit' );
 					// That method returns wikitext (eww), hack to get it parsed:
-					$notice = ( new RawMessage( '$1', [ $notice ] ) )->parseAsBlock();
+					$notice = ( new RawMessage( '$1', [ $notice ] ) )->page( $title )->parseAsBlock();
 					// Invent a message key 'permissions-error' to store in $notices
 					$notices['permissions-error'] = $notice;
 				} elseif ( $protectionNotices ) {
