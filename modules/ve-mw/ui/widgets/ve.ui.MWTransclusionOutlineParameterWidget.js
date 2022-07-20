@@ -68,9 +68,7 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.setSelected = function ( st
 	state = state || this.checkbox.isDisabled();
 
 	this.checkbox.setSelected( state, true );
-	ve.ui.MWTransclusionOutlineParameterWidget.super.prototype.setSelected.call( this, state );
-
-	return this;
+	return ve.ui.MWTransclusionOutlineParameterWidget.super.prototype.setSelected.call( this, state );
 };
 
 /**
