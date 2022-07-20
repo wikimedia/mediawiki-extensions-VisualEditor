@@ -59,13 +59,6 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /* Events */
 
 /**
- * @event transclusionOutlineItemSelected
- * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
- *  "part_1" or "part_1/param1".
- * @param {boolean} [soft] If true, focus should stay in the sidebar. Defaults to false.
- */
-
-/**
  * Triggered when the user uses the search widget at the top to filter the list of parameters.
  *
  * @event filterParametersById
