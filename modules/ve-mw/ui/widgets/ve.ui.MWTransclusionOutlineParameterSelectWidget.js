@@ -106,13 +106,15 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem
 };
 
 /**
- * @param {string} [paramName] Parameter name to set, e.g. "param1". Omit to remove setting.
+ * @param {string|null} [paramName] Parameter name to set, e.g. "param1". Omit to remove setting.
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setParameter = function ( paramName ) {
+	// Note: We know unnamed parameter placeholders never have an item here
 	var newItem = paramName ? this.findItemFromData( paramName ) : null;
 	// Unhighlight when called with no parameter name
 	this.highlightItem( newItem );
 
+	paramName = paramName || null;
 	if ( this.itemSet === paramName ) {
 		return;
 	}
@@ -143,7 +145,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightItem = funct
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.markParameterAsUnused = function ( paramName ) {
 	// There is no OO.ui.SelectWidget.unselectItemByData(), we need to do this manually
-	var item = this.findItemFromData( paramName );
+	var item = paramName ? this.findItemFromData( paramName ) : null;
 	if ( item ) {
 		item.setSelected( false );
 	}
@@ -166,8 +168,9 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
  * @inheritDoc OO.ui.SelectWidget
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( e ) {
-	var currentItem = this.findItemFromData( this.itemSet );
 	if ( e.target === this.$element[ 0 ] ) {
+		// Note: We know unnamed parameter placeholders never have an item here
+		var currentItem = this.itemSet ? this.findItemFromData( this.itemSet ) : null;
 		// When tabbing into the selection list, always highlight the set or first parameter.
 		this.highlightItem( currentItem || this.items[ 0 ] );
 	}
