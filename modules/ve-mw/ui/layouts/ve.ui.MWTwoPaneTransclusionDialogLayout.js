@@ -117,15 +117,14 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutFocus = function 
 /**
  * Focus the input field for the current page.
  *
- * If no page is selected, the first selectable page will be selected.
  * If the focus is already in an element on the current page, nothing will happen.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
 	var page = this.pages[ this.currentPageName ];
-
 	if ( !page ) {
 		return;
 	}
+
 	// Only change the focus if it's visible and is not already the current page
 	if ( page.$element[ 0 ].offsetParent !== null &&
 		!OO.ui.contains( page.$element[ 0 ], this.getElementDocument().activeElement, true )
@@ -226,15 +225,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getPage = function ( name ) {
  * @return {OO.ui.PageLayout|undefined} Current page, if found
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPage = function () {
-	var name = this.getCurrentPageName();
-	return name ? this.getPage( name ) : undefined;
-};
-
-/**
- * @return {string|null} Symbolic name of the current page
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPageName = function () {
-	return this.currentPageName;
+	return this.pages[ this.currentPageName ];
 };
 
 /**
