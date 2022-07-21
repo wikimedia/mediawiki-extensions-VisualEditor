@@ -173,12 +173,10 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 /**
  * @inheritDoc OO.ui.SelectWidget
  */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( e ) {
-	if ( e.target === this.$element[ 0 ] ) {
-		// Note: We know unnamed parameter placeholders never have an item here
-		var currentItem = this.activeParameter ? this.findItemFromData( this.activeParameter ) : null;
-		// When tabbing into the selection list, always highlight the set or first parameter.
-		this.highlightItem( currentItem || this.items[ 0 ] );
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( event ) {
+	if ( event.target === this.$element[ 0 ] && !this.findHighlightedItem() ) {
+		// When tabbing into the selection list, highlight the first parameter.
+		this.highlightItem( this.items[ 0 ] );
 	}
 	// Don't call the parent. It makes assumptions what should be done here.
 };
