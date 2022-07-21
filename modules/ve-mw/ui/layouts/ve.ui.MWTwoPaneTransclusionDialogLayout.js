@@ -12,8 +12,6 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {boolean} [outlined=false] Show the outline. The outline is used to navigate through the
- *  pages of the booklet.
  * @property {Object.<string,OO.ui.PageLayout>} pages
  * @property {string} currentPageName Name of the currently selected transclusion item (top-level
  *  part or template parameter). Typically represented as a blue bar in the sidebar. Special cases
@@ -37,18 +35,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	this.stackLayout = new ve.ui.MWVerticalLayout();
 	this.setContentPanel( this.stackLayout );
 	this.sidebar = new ve.ui.MWTransclusionOutlineWidget();
-	this.outlineVisible = false;
-	this.outlined = !!config.outlined;
-	if ( this.outlined ) {
-		this.outlinePanel = new OO.ui.PanelLayout( {
-			expanded: this.expanded,
-			scrollable: true
-		} );
-		this.setMenuPanel( this.outlinePanel );
-		this.outlineVisible = true;
-		this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget();
-	}
-	this.toggleMenu( this.outlined );
+	this.outlinePanel = new OO.ui.PanelLayout( { expanded: this.expanded, scrollable: true } );
+	this.setMenuPanel( this.outlinePanel );
+	this.outlineVisible = true;
+	this.outlineControlsWidget = new ve.ui.MWTransclusionOutlineControlsWidget();
 
 	// Events
 	this.sidebar.connect( this, {
@@ -61,15 +51,13 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	// Initialization
 	this.$element.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout' );
 	this.stackLayout.$element.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-stackLayout' );
-	if ( this.outlined ) {
-		this.outlinePanel.$element
-			.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' )
-			.append(
-				$( '<div>' ).addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-sidebar-container' )
-					.append( this.sidebar.$element ),
-				this.outlineControlsWidget.$element
-			);
-	}
+	this.outlinePanel.$element
+		.addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-outlinePanel' )
+		.append(
+			$( '<div>' ).addClass( 've-ui-mwTwoPaneTransclusionDialogLayout-sidebar-container' )
+				.append( this.sidebar.$element ),
+			this.outlineControlsWidget.$element
+		);
 };
 
 /* Setup */
@@ -167,29 +155,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = functi
 };
 
 /**
- * @return {boolean}
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isOutlined = function () {
-	return this.outlined;
-};
-
-/**
- * @return {boolean}
- */
-ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.isOutlineVisible = function () {
-	return this.outlined && this.outlineVisible;
-};
-
-/**
  * Hide or show the outline.
  *
  * @param {boolean} [show] Show outline, omit to invert current state
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( show ) {
-	if ( !this.outlined ) {
-		return;
-	}
-
 	show = show === undefined ? !this.outlineVisible : !!show;
 	this.outlineVisible = show;
 	this.toggleMenu( show );

@@ -1,10 +1,7 @@
 QUnit.module( 've.ui.MWTwoPaneTransclusionDialogLayout', ve.test.utils.newMwEnvironment() );
 
 const createLayout = function () {
-    return new ve.ui.MWTwoPaneTransclusionDialogLayout( {
-        continuous: true,
-        outlined: false
-    } );
+    return new ve.ui.MWTwoPaneTransclusionDialogLayout( { continuous: true } );
 };
 
 const createTemplate = function () {

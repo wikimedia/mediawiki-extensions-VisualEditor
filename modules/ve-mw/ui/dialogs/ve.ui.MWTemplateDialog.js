@@ -57,9 +57,7 @@ ve.ui.MWTemplateDialog.static.modelClasses = [ ve.dm.MWTransclusionNode ];
  * @property {Object}
  * @inheritable
  */
-ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {
-	outlined: false
-};
+ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {};
 
 /* Methods */
 
@@ -438,9 +436,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			// Detach the form while building for performance
 			this.bookletLayout.$element.detach();
 
-			if ( this.bookletLayout.isOutlined() ) {
-				this.transclusionModel.connect( this.bookletLayout, { replace: 'onReplacePart' } );
-			}
+			this.transclusionModel.connect( this.bookletLayout, { replace: 'onReplacePart' } );
 
 			// Initialization
 			if ( !this.selectedNode ) {

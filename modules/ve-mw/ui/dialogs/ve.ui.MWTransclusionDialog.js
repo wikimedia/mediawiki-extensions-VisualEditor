@@ -56,13 +56,6 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
 	}
 ] );
 
-/** @inheritdoc */
-ve.ui.MWTransclusionDialog.static.bookletLayoutConfig = ve.extendObject(
-	{},
-	ve.ui.MWTemplateDialog.static.bookletLayoutConfig,
-	{ outlined: true }
-);
-
 ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth = 540;
 
 /* Static Methods */
