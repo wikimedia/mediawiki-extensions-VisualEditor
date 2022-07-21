@@ -3,6 +3,7 @@
 		"authors": [
 			"CoderSI",
 			"Malikxan",
+			"Nataev",
 			"Noor2020",
 			"Sociologist",
 			"පසිඳු කාවින්ද"
@@ -173,7 +174,7 @@
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Galareya boʻsh.",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "Slaydshou",
 	"visualeditor-mwgallerydialog-remove-button-label": "Tasvirni olib tashlash",
-	"visualeditor-mwsignature-tool": "Imzoingiz",
+	"visualeditor-mwsignature-tool": "Imzongiz",
 	"visualeditor-preference-core-label": "Koʻrib tahrirlash",
 	"visualeditor-preference-enable": "VisualEditorni yoqish (faqat [[{{MediaWiki:visualeditor-mainnamespacepagelink}}|asosiy]] va [[{{MediaWiki:visualeditor-usernamespacepagelink}}|foydalanuvchi]] nomfazolari uchun)",
 	"visualeditor-preference-tabs": "Tahrirlash rejimi:",
