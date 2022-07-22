@@ -425,7 +425,9 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	var parts = this.transclusionModel.getParts(),
-		selectedPart = this.transclusionModel.getPartFromId( this.findSelectedItemId() );
+		pageName = this.bookletLayout.getCurrentPage().getName(),
+		topLevelPartId = pageName.split( '/', 1 )[ 0 ],
+		selectedPart = this.transclusionModel.getPartFromId( topLevelPartId );
 	// Insert after selected part, or at the end if nothing is selected
 	var index = selectedPart ? parts.indexOf( selectedPart ) + 1 : parts.length;
 	// Add the part, and if dialog is loaded switch to part page
