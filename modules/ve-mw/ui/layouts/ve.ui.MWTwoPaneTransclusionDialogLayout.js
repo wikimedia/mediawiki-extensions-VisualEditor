@@ -229,6 +229,25 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getCurrentPage = function () {
 };
 
 /**
+ * @return {string|null} A top-level part id like "part_0" if that part is selected. When a
+ *  parameter is selected null is returned.
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getSelectedTopLevelPartId = function () {
+	var page = this.getCurrentPage(),
+		isParameter = page instanceof ve.ui.MWParameterPage || page instanceof ve.ui.MWAddParameterPage;
+	return page && !isParameter ? page.getName() : null;
+};
+
+/**
+ * @return {string|null} A top-level part id like "part_0" that corresponds to the current
+ *  selection, whatever is selected. When a parameter is selected the id of the template the
+ *  parameter belongs to is returned.
+ */
+ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getTopLevelPartIdForSelection = function () {
+	return this.currentPageName ? this.currentPageName.split( '/', 1 )[ 0 ] : null;
+};
+
+/**
  * When pages are added with the same names as existing pages, the existing pages will be
  * automatically removed before the new pages are added.
  *
@@ -349,7 +368,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
 };
 
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
-	var partId = this.sidebar.findSelectedPartId(),
+	var partId = this.getSelectedTopLevelPartId(),
 		pages = this.stackLayout.getItems(),
 		page = this.getPage( partId ),
 		index = pages.indexOf( page ),
