@@ -94,8 +94,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part, removed instanceof ve.dm.MWTemplatePlaceholderModel );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
 		widget.connect( this, {
-			// We can forward these events as is. The parameter's unique ids are reused as page
-			// names in {@see ve.ui.MWTemplateDialog.onAddParameter}.
 			filterParametersById: 'onFilterParametersByName'
 		} );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {

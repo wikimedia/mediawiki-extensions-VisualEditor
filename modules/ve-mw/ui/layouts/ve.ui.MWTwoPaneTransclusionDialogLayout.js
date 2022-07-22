@@ -76,6 +76,7 @@ OO.inheritClass( ve.ui.MWTwoPaneTransclusionDialogLayout, OO.ui.MenuLayout );
  * @param {Object.<string,boolean>} visibility
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onFilterPagesByName = function ( visibility ) {
+	this.currentPageName = null;
 	for ( var pageName in visibility ) {
 		var page = this.getPage( pageName );
 		if ( page ) {
