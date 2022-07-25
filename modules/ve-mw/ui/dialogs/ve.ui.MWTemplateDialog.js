@@ -345,7 +345,7 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 				blankRequired.length
 			)
 		} ).closed.then( function ( data ) {
-			if ( data.action === 'ok' ) {
+			if ( data && data.action === 'ok' ) {
 				deferred.resolve();
 			} else {
 				deferred.reject();
