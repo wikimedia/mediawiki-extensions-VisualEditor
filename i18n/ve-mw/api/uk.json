@@ -12,6 +12,7 @@
 	},
 	"apierror-visualeditor-badcachekey": "Не знайдено кешованої серіалізованої інформації з таким ключем",
 	"apierror-visualeditor-difffailed": "Не вдалося отримати різницю версій",
+	"apierror-visualeditor-docserver-bad-config": "Прямий доступ до Parsoid налаштовано, але використовувався VirtualRESTService",
 	"apierror-visualeditor-docserver-http-error": "Помилка підключення до серверу Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "Помилка підключення до серверу Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService для сервера документа не визначено; див. https://www.mediawiki.org/wiki/Extension:VisualEditor",
