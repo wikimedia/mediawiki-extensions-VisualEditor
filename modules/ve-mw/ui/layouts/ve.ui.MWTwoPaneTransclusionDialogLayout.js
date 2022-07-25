@@ -15,6 +15,13 @@
  * @cfg {boolean} [outlined=false] Show the outline. The outline is used to navigate through the
  *  pages of the booklet.
  * @property {Object.<string,OO.ui.PageLayout>} pages
+ * @property {string} currentPageName Name of the currently selected transclusion item (top-level
+ *  part or template parameter). Typically represented as a blue bar in the sidebar. Special cases
+ *  you should be aware of:
+ *  - An unchecked parameter exists as an item in the sidebar, but not as a page in the content
+ *    pane.
+ *  - A parameter placeholder (to add an undocumented parameter) exists as a page in the content
+ *    pane, but has no corresponding item in the sidebar.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDialogLayout( config ) {
 	// Configuration initialization
@@ -24,8 +31,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDial
 	ve.ui.MWTwoPaneTransclusionDialogLayout.super.call( this, config );
 
 	// Properties
-	this.currentPageName = null;
 	this.pages = {};
+	this.currentPageName = null;
 	this.ignoreFocus = false;
 	this.stackLayout = new ve.ui.MWVerticalLayout();
 	this.setContentPanel( this.stackLayout );
