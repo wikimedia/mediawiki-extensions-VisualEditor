@@ -133,7 +133,7 @@ ve.ui.MWTransclusionDialog.prototype.addTemplatePlaceholder = function () {
 };
 
 /**
- * Handle add content button click events.
+ * Handle add wikitext button click or hotkey events.
  *
  * @private
  */
@@ -145,10 +145,19 @@ ve.ui.MWTransclusionDialog.prototype.addWikitext = function () {
  * Handle add parameter hotkey events.
  *
  * @private
+ * @param {jQuery.Event} e Key down event
  */
-ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
-	var partId = this.bookletLayout.getTopLevelPartIdForSelection(),
+ve.ui.MWTransclusionDialog.prototype.addParameter = function ( e ) {
+	// Check if the focus was in e.g. a parameter list or filter input when the hotkey was pressed
+	var partId = this.bookletLayout.sidebar.findPartIdContainingElement( e.target ),
 		part = this.transclusionModel.getPartFromId( partId );
+
+	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
+		// Otherwise add to the template that's currently selected via its title or parameter
+		partId = this.bookletLayout.getTopLevelPartIdForSelection();
+		part = this.transclusionModel.getPartFromId( partId );
+	}
+
 	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
 		return;
 	}
@@ -255,7 +264,7 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
 		trigger = this.hotkeyTriggers[ hotkey ];
 
 	if ( trigger && ( !trigger.validTypes || trigger.validTypes.test( e.target.nodeName ) ) ) {
-		trigger.handler();
+		trigger.handler( e );
 		e.preventDefault();
 		e.stopPropagation();
 	}
