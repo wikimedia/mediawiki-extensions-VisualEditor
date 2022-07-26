@@ -76,7 +76,7 @@ ve.ui.MWTransclusionDialog.static.isSmallScreen = function () {
  * @param {number} places Number of places to move the selected item
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
-	var part = this.transclusionModel.getPartFromId( this.findSelectedItemId() );
+	var part = this.transclusionModel.getPartFromId( this.bookletLayout.getSelectedTopLevelPartId() );
 	if ( !part ) {
 		return;
 	}
@@ -109,7 +109,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 		return;
 	}
 
-	var itemId = this.findSelectedItemId(),
+	var itemId = this.bookletLayout.getSelectedTopLevelPartId(),
 		part = this.transclusionModel.getPartFromId( itemId );
 	// Check if the part is the actual template, or one of its parameters
 	// TODO: This applies to the old sidebar only and can be removed later
@@ -147,9 +147,8 @@ ve.ui.MWTransclusionDialog.prototype.addWikitext = function () {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
-	var pageName = this.bookletLayout.getCurrentPage().getName(),
-		topLevelPartId = pageName.split( '/', 1 )[ 0 ],
-		part = this.transclusionModel.getPartFromId( topLevelPartId );
+	var partId = this.bookletLayout.getTopLevelPartIdForSelection(),
+		part = this.transclusionModel.getPartFromId( partId );
 	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
 		return;
 	}
@@ -260,15 +259,6 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
 		e.preventDefault();
 		e.stopPropagation();
 	}
-};
-
-/**
- * @deprecated This can only find selected top-level parts
- * @private
- * @return {string|undefined} Top-level part id
- */
-ve.ui.MWTransclusionDialog.prototype.findSelectedItemId = function () {
-	return this.sidebar.findSelectedPartId();
 };
 
 /**
@@ -418,9 +408,8 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 	var parts = this.transclusionModel.getParts(),
-		pageName = this.bookletLayout.getCurrentPage().getName(),
-		topLevelPartId = pageName.split( '/', 1 )[ 0 ],
-		selectedPart = this.transclusionModel.getPartFromId( topLevelPartId );
+		partId = this.bookletLayout.getTopLevelPartIdForSelection(),
+		selectedPart = this.transclusionModel.getPartFromId( partId );
 	// Insert after selected part, or at the end if nothing is selected
 	var index = selectedPart ? parts.indexOf( selectedPart ) + 1 : parts.length;
 	// Add the part, and if dialog is loaded switch to part page

@@ -166,21 +166,6 @@ ve.ui.MWTransclusionOutlineWidget.prototype.toggleHasValueByPageName = function 
 };
 
 /**
- * This is inspired by {@see OO.ui.SelectWidget.findSelectedItem}, but isn't one.
- *
- * @deprecated This can only find selected top-level parts
- * @return {string|undefined} Always a top-level part id, e.g. "part_0"
- */
-ve.ui.MWTransclusionOutlineWidget.prototype.findSelectedPartId = function () {
-	for ( var id in this.partWidgets ) {
-		var part = this.partWidgets[ id ];
-		if ( part.isSelected() ) {
-			return part.getData();
-		}
-	}
-};
-
-/**
  * Removes all {@see ve.ui.MWTransclusionOutlinePartWidget}, i.e. empties the list.
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.clear = function () {
