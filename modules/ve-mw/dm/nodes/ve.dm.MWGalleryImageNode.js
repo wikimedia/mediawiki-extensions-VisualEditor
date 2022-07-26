@@ -57,6 +57,12 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		}
 	}
 
+	// FIXME: This should match Parsoid's WTUtils::textContentFromCaption,
+	// which drops <ref>s
+	var altFromCaption = captionNode ? captionNode.textContent.trim() : '';
+	var altTextSame = img.hasAttribute( 'alt' ) && altFromCaption &&
+		( img.getAttribute( 'alt' ).trim() === altFromCaption );
+
 	var caption;
 	if ( captionNode ) {
 		caption = converter.getDataFromDomClean( captionNode, { type: 'mwGalleryImageCaption' } );
@@ -88,6 +94,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			mediaTag: img.nodeName.toLowerCase(),
 			resource: './' + mw.libs.ve.normalizeParsoidResourceName( img.getAttribute( 'resource' ) ),
 			altText: img.getAttribute( 'alt' ),
+			altTextSame: altTextSame,
 			// 'src' for images, 'poster' for video/audio
 			src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 			width: width !== null && width !== '' ? +width : null,
@@ -143,7 +150,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc ) {
 	}
 	img.setAttribute( attributes.isError ? 'data-width' : 'width', attributes.width );
 	img.setAttribute( attributes.isError ? 'data-height' : 'height', attributes.height );
-	if ( typeof alt === 'string' ) {
+
+	if ( typeof alt === 'string' && !attributes.altTextSame ) {
 		img.setAttribute( 'alt', alt );
 	}
 
