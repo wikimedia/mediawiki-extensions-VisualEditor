@@ -481,7 +481,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				this.updateMwData( this.originalMwDataNormalized );
 			}
 
-			this.highlightedAltTextInput.setReadOnly( isReadOnly );
+			this.highlightedAltTextInput.setReadOnly( isReadOnly || this.altTextSameAsCaption.isSelected() );
 			this.altTextSameAsCaption.setDisabled( isReadOnly );
 			this.modeDropdown.setDisabled( isReadOnly );
 			this.widthsInput.setReadOnly( isReadOnly );
@@ -808,7 +808,7 @@ ve.ui.MWGalleryDialog.prototype.onHighlightItem = function ( item ) {
 	this.highlightedCaptionTarget.setDocument( item.captionDocument );
 	this.highlightedCaptionTarget.setReadOnly( this.isReadOnly() );
 	this.highlightedAltTextInput.setValue( item.altText );
-	this.highlightedAltTextInput.setReadOnly( item.altTextSame );
+	this.highlightedAltTextInput.setReadOnly( this.isReadOnly() || item.altTextSame );
 	this.altTextSameAsCaption.setSelected( item.altTextSame );
 };
 
@@ -837,7 +837,7 @@ ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
  * Handle change event for this.altTextSameAsCaption
  */
 ve.ui.MWGalleryDialog.prototype.onAltTextSameAsCaptionChange = function () {
-	this.highlightedAltTextInput.setReadOnly( this.altTextSameAsCaption.isSelected() );
+	this.highlightedAltTextInput.setReadOnly( this.isReadOnly() || this.altTextSameAsCaption.isSelected() );
 	this.updateActions();
 };
 
