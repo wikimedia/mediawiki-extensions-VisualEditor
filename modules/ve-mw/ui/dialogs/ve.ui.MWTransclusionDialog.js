@@ -147,7 +147,9 @@ ve.ui.MWTransclusionDialog.prototype.addWikitext = function () {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.addParameter = function () {
-	var part = this.transclusionModel.getPartFromId( this.findSelectedItemId() );
+	var pageName = this.bookletLayout.getCurrentPage().getName(),
+		topLevelPartId = pageName.split( '/', 1 )[ 0 ],
+		part = this.transclusionModel.getPartFromId( topLevelPartId );
 	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
 		return;
 	}
@@ -261,6 +263,7 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
 };
 
 /**
+ * @deprecated This can only find selected top-level parts
  * @private
  * @return {string|undefined} Top-level part id
  */
