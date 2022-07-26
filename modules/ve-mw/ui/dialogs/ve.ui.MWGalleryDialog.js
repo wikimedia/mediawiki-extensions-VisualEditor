@@ -672,8 +672,8 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 			if ( Object.prototype.hasOwnProperty.call( thumbUrls, title ) ) {
 				items.push( new ve.ui.MWGalleryItemWidget( {
 					resource: title,
-					altText: '',
-					altTextSame: false,
+					altText: null,
+					altTextSame: true,
 					src: '',
 					height: thumbUrls[ title ].height,
 					width: thumbUrls[ title ].width,
