@@ -111,14 +111,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 
 	var itemId = this.bookletLayout.getSelectedTopLevelPartId(),
 		part = this.transclusionModel.getPartFromId( itemId );
-	// Check if the part is the actual template, or one of its parameters
-	// TODO: This applies to the old sidebar only and can be removed later
-	if ( part instanceof ve.dm.MWTemplateModel && itemId !== part.getId() ) {
-		var param = part.getParameterFromId( itemId );
-		if ( param ) {
-			param.remove();
-		}
-	} else if ( part instanceof ve.dm.MWTransclusionPartModel ) {
+	if ( part ) {
 		this.transclusionModel.removePart( part );
 	}
 };

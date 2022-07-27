@@ -264,21 +264,6 @@ ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 };
 
 /**
- * @private
- * @param {string} id Parameter ID
- * @return {ve.dm.MWParameterModel|null} Parameter with matching ID, null if no parameters match
- */
-ve.dm.MWTemplateModel.prototype.getParameterFromId = function ( id ) {
-	for ( var name in this.params ) {
-		if ( this.params[ name ].getId() === id ) {
-			return this.params[ name ];
-		}
-	}
-
-	return null;
-};
-
-/**
  * @param {ve.dm.MWParameterModel} param Parameter to add
  * @fires add
  * @fires change
