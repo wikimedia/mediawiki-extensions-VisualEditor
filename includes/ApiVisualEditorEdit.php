@@ -184,7 +184,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		] );
 		$content = $result['parse']['text']['*'] ?? false;
 		$categorieshtml = $result['parse']['categorieshtml']['*'] ?? false;
-		$sections = isset( $result['parse']['hidetoc'] ) ? [] : $result['parse']['sections'];
+		$sections = isset( $result['parse']['showtoc'] ) ? $result['parse']['sections'] : [];
 		$displaytitle = $result['parse']['displaytitle'] ?? false;
 		$subtitle = $result['parse']['subtitle'] ?? false;
 		$modules = array_merge(
