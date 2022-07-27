@@ -798,10 +798,8 @@
 				"visualeditor-editsummary-characters-remaining",
 				"visualeditor-savedialog-error-badtoken",
 				"visualeditor-savedialog-keyboard-shortcut-submit",
-				"visualeditor-savedialog-label-create",
 				"visualeditor-savedialog-label-publish-short",
 				"visualeditor-savedialog-label-publish-short-start",
-				"visualeditor-savedialog-label-report",
 				"visualeditor-savedialog-label-resolve-conflict",
 				"visualeditor-savedialog-label-resume-editing",
 				"visualeditor-savedialog-label-review",
@@ -815,8 +813,7 @@
 				"visualeditor-savedialog-title-conflict",
 				"visualeditor-savedialog-title-preview",
 				"visualeditor-savedialog-title-review",
-				"visualeditor-savedialog-title-save",
-				"visualeditor-savedialog-warning-dirty"
+				"visualeditor-savedialog-title-save"
 			],
 			"targets": [
 				"desktop",
@@ -2086,7 +2083,6 @@
 				"visualeditor-dialog-meta-settings-toc-label",
 				"visualeditor-dialog-meta-templatesused-noresults",
 				"visualeditor-dialog-meta-title",
-				"visualeditor-dialogbutton-meta-tooltip",
 				"visualeditor-languages-tool",
 				"visualeditor-meta-tool",
 				"visualeditor-settings-tool",
@@ -2218,7 +2214,6 @@
 				"visualeditor-dialog-transclusion-no-template-data-description",
 				"visualeditor-dialog-transclusion-no-template-description",
 				"visualeditor-dialog-transclusion-no-template-parameters",
-				"visualeditor-dialog-transclusion-options",
 				"visualeditor-dialog-transclusion-param-default",
 				"visualeditor-dialog-transclusion-param-example-long",
 				"visualeditor-dialog-transclusion-param-selection-aria-description",
