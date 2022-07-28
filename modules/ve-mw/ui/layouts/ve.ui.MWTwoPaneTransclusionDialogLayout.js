@@ -1,6 +1,6 @@
 /**
- * Specialized layout similar to BookletLayout, but to synchronize the sidebar
- * and content pane of the transclusion dialog
+ * Specialized layout forked from and similar to {@see OO.ui.BookletLayout}, but to synchronize the
+ * sidebar and content pane of the transclusion dialog.
  *
  * Also owns the outline controls.
  *
@@ -22,9 +22,6 @@
  *    pane, but has no corresponding item in the sidebar.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout = function VeUiMWTwoPaneTransclusionDialogLayout( config ) {
-	// Configuration initialization
-	config = config || {};
-
 	// Parent constructor
 	ve.ui.MWTwoPaneTransclusionDialogLayout.super.call( this, config );
 
@@ -159,12 +156,12 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = functi
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( show ) {
 	this.toggleMenu( show );
 	if ( show ) {
-		var booklet = this;
+		var self = this;
 		// HACK: Kill dumb scrollbars when the sidebar stops animating, see T161798.
 		// Only necessary when outline controls are present, delay matches transition on
 		// `.oo-ui-menuLayout-menu`.
 		setTimeout( function () {
-			OO.ui.Element.static.reconsiderScrollbars( booklet.outlinePanel.$element[ 0 ] );
+			OO.ui.Element.static.reconsiderScrollbars( self.outlinePanel.$element[ 0 ] );
 		}, OO.ui.theme.getDialogTransitionDuration() );
 	}
 };
@@ -345,18 +342,15 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
 	var partId = this.getSelectedTopLevelPartId(),
-		pages = this.stackLayout.getItems(),
-		page = this.getPage( partId ),
-		index = pages.indexOf( page ),
-		isPart = !!partId,
 		canMoveUp, canMoveDown = false,
-		canBeDeleted = isPart;
+		canBeDeleted = !!partId;
 
-	/* check if this is the first element and no parameter */
-	canMoveUp = isPart && index > 0;
-
-	/* check if this is the last element and no parameter */
-	if ( isPart ) {
+	if ( partId ) {
+		var pages = this.stackLayout.getItems(),
+			page = this.getPage( partId ),
+			index = pages.indexOf( page );
+		canMoveUp = index > 0;
+		// Check if there is at least one more top-level part below the current one
 		for ( var i = index + 1; i < pages.length; i++ ) {
 			if ( !( pages[ i ] instanceof ve.ui.MWParameterPage || pages[ i ] instanceof ve.ui.MWAddParameterPage ) ) {
 				canMoveDown = true;

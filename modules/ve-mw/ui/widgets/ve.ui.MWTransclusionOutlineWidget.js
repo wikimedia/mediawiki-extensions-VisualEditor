@@ -157,7 +157,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.setSelectionByPageName = function ( 
  * @param {boolean} hasValue
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.toggleHasValueByPageName = function ( pageName, hasValue ) {
-	var idParts = pageName.split( '/' ),
+	var idParts = pageName.split( '/', 2 ),
 		templatePartWidget = this.partWidgets[ idParts[ 0 ] ];
 
 	templatePartWidget.toggleHasValue( idParts[ 1 ], hasValue );

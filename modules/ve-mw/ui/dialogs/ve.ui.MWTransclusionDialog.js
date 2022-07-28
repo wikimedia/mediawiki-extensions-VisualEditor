@@ -89,7 +89,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
 	// Move part to new location, and if dialog is loaded switch to new part page
 	var promise = this.transclusionModel.addPart( part, newPlace );
 	if ( this.loaded && !this.preventReselection ) {
-		// FIXME: Should be handled internally to bookletLayout.
+		// FIXME: Should be handled internally {@see ve.ui.MWTwoPaneTransclusionDialogLayout}
 		promise.done( this.bookletLayout.focusPart.bind( this.bookletLayout, part.getId() ) );
 	}
 };
@@ -109,8 +109,8 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 		return;
 	}
 
-	var itemId = this.bookletLayout.getSelectedTopLevelPartId(),
-		part = this.transclusionModel.getPartFromId( itemId );
+	var partId = this.bookletLayout.getSelectedTopLevelPartId(),
+		part = this.transclusionModel.getPartFromId( partId );
 	if ( part ) {
 		this.transclusionModel.removePart( part );
 	}
