@@ -164,6 +164,25 @@ ve.ui.MWTransclusionOutlineWidget.prototype.toggleHasValueByPageName = function 
 };
 
 /**
+ * Checks if the provided DOM element belongs to the DOM structure of one of the top-level
+ * {@see ve.ui.MWTransclusionOutlinePartWidget}s, and returns its id. Useful for e.g. mouse click or
+ * keyboard handlers.
+ *
+ * @param {HTMLElement} element
+ * @return {string|undefined} Always a top-level part id, e.g. "part_0"
+ */
+ve.ui.MWTransclusionOutlineWidget.prototype.findPartIdContainingElement = function ( element ) {
+	if ( element ) {
+		for ( var id in this.partWidgets ) {
+			var part = this.partWidgets[ id ];
+			if ( $.contains( part.$element[ 0 ], element ) ) {
+				return id;
+			}
+		}
+	}
+};
+
+/**
  * Removes all {@see ve.ui.MWTransclusionOutlinePartWidget}, i.e. empties the list.
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.clear = function () {
