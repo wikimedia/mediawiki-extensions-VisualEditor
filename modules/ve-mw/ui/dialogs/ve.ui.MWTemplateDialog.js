@@ -392,8 +392,10 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				}
 				var parts = dialog.transclusionModel.getParts();
 				for ( var i = 0; i < parts.length; i++ ) {
-					if ( parts[ i ].getTitle ) {
-						templateEvent.template_names.push( parts[ i ].getTitle() );
+					// Only {@see ve.dm.MWTemplateModel} have a title
+					var title = parts[ i ].getTitle && parts[ i ].getTitle();
+					if ( title ) {
+						templateEvent.template_names.push( title );
 					}
 				}
 				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );
