@@ -175,7 +175,6 @@
 	"visualeditor-dialog-table-collapsible": "Label for toggle to make a table collapsible\n{{Identical|Collapsible}}",
 	"visualeditor-dialog-table-sortable": "Label for toggle to make a table sortable",
 	"visualeditor-dialog-table-wikitable": "Label for toggle to make a table a wikitable",
-	"visualeditor-dialog-template-insert": "Title for the template dialog to insert a new template.",
 	"visualeditor-dialog-template-title": "{{Identical|Template}}",
 	"visualeditor-dialog-transclusion-action-save": "Label for button that saves changes when editing an existing transclusion in the transclusion dialog.",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Message to user that the template name they have provided does not exist on this wiki.\n\nParameters:\n* $1 - Human-readable name of the template.\n* $2 - Full page name of the template.",
