@@ -71,6 +71,7 @@
 	"visualeditor-changedesc-mwredirect": "Destinazione del reindirizzamento modificata da $1 a $2",
 	"visualeditor-desc": "Editor visivo per MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-media-alttext-checkbox": "Usa la didascalia come testo alternativo",
 	"visualeditor-dialog-media-alttext-section": "Testo alternativo",
 	"visualeditor-dialog-media-alttext-section-help": "Puoi usare questo per scrivere una descrizione del testo per le persone che non riescono a visualizzare l'elemento. La descrizione dovrebbe essere abbastanza buona per permettere la comprensione dello scopo e le informazioni date dall'elemento. Questo è di vitale importanza per gli utenti non vedenti e per le persone che utilizzano un software di lettura schermo o browser testuali.",
 	"visualeditor-dialog-media-change-image": "Cambia immagine",

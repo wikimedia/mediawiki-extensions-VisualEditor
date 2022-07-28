@@ -95,6 +95,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Paramètres du modèle modifiés",
 	"visualeditor-desc": "Éditeur visuel pour MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:ÉditeurVisuel",
+	"visualeditor-dialog-media-alttext-checkbox": "Utiliser la légende comme texte substitutif",
 	"visualeditor-dialog-media-alttext-section": "Texte de substitution",
 	"visualeditor-dialog-media-alttext-section-help": "Vous pouvez utiliser ceci pour écrire un texte descriptif destiné aux personnes qui ne peuvent pas voir l’élément. La description doit être suffisante pour leur permettre de comprendre l’utilité et les informations données par le média. Cela est fondamental pour les utilisateurs malvoyants et pour ceux qui utilisent un logiciel de lecture d’écran ou un navigateur n’affichant que du texte.",
 	"visualeditor-dialog-media-change-image": "Changer l’image",

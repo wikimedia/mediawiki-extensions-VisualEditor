@@ -63,6 +63,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Параметри шаблону змінено",
 	"visualeditor-desc": "Візуальний редактор для MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:Візуальний редактор",
+	"visualeditor-dialog-media-alttext-checkbox": "Використовуйте підпис як альтернативний текст",
 	"visualeditor-dialog-media-alttext-section": "Текст заміщення",
 	"visualeditor-dialog-media-alttext-section-help": "Ви можете використати це поле, щоб надати текстовий опис, який використовуватиметься людьми із вадами зору, які не зможуть роздивитись елемент. Опис для них має бути достатньо зрозумілим, аби зрозуміти загал інформації, що надається медіаелементом. Це дуже важливо для сліпих користувачів, а також інших людей, що використовують екранні читачі або ж суто текстові браузери.",
 	"visualeditor-dialog-media-change-image": "Змінити зображення",
