@@ -1448,7 +1448,7 @@
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 		}
 
-		if ( init.isAvailable && pageCanLoadEditor && !requiredSkinElements ) {
+		if ( ( init.isVisualAvailable || init.isWikitextAvailable ) && pageCanLoadEditor && !requiredSkinElements ) {
 			mw.log.warn(
 				'Your skin is incompatible with VisualEditor. ' +
 				'See https://www.mediawiki.org/wiki/Extension:VisualEditor/Skin_requirements for the requirements.'
