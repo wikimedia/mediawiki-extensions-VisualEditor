@@ -71,7 +71,7 @@ ve.ui.MWAddParameterPage.prototype.initialize = function () {
 		} );
 	this.saveButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-dialog-transclusion-add-param-save' ),
-		flags: [ 'primary', 'progressive' ],
+		flags: [ 'progressive' ],
 		disabled: true
 	} )
 		.connect( this, { click: 'onParameterNameSubmitted' } );
