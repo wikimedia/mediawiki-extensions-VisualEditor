@@ -145,14 +145,14 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightItem = funct
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.markParameterAsUnused = function ( paramName ) {
 	// There is no OO.ui.SelectWidget.unselectItemByData(), we need to do this manually
+	/** @type {ve.ui.MWTransclusionOutlineParameterWidget} */
 	var item = paramName ? this.findItemFromData( paramName ) : null;
 	if ( item ) {
 		item.setSelected( false );
-		paramName = paramName || null;
 		// An unused parameter can't be the active (set) one; it doesn't exist in the content pane
-		if ( this.itemSet === paramName ) {
-			this.itemSet = null;
-			item.setParameter( false );
+		if ( this.activeParameter === paramName ) {
+			this.activeParameter = null;
+			item.toggleActivePageIndicator( false );
 		}
 	}
 };
