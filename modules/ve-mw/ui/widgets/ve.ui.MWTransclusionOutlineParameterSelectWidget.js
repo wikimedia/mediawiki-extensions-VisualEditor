@@ -8,6 +8,8 @@
  *
  * @class
  * @extends OO.ui.SelectWidget
+ * @mixins OO.ui.mixin.TabIndexedElement
+ * @mixins ve.ui.MWAriaDescribe
  *
  * @constructor
  * @param {Object} config
@@ -92,17 +94,8 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
  * @return {ve.ui.MWTransclusionOutlineParameterWidget|null}
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem = function () {
-	var firstSelected;
-
-	this.items.some( function ( item ) {
-		if ( !firstSelected && item.isSelected() ) {
-			firstSelected = item;
-			return true;
-		}
-		return false;
-	} );
-
-	return firstSelected;
+	var selected = this.findSelectedItems();
+	return Array.isArray( selected ) ? selected[ 0 ] || null : selected;
 };
 
 /**

@@ -4,6 +4,10 @@
  *
  * @class
  * @extends OO.ui.OptionWidget
+ * @mixins OO.ui.mixin.ButtonElement
+ * @mixins OO.ui.mixin.IconElement
+ * @mixins OO.ui.mixin.TabIndexedElement
+ * @mixins ve.ui.MWAriaDescribe
  *
  * @constructor
  * @param {Object} config
