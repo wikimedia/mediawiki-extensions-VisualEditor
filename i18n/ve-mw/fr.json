@@ -292,7 +292,7 @@
 	"visualeditor-includes-onlyinclude-start": "Début du contenu intégré dans les extraits",
 	"visualeditor-includes-onlyinclude-end": "Fin du contenu intégré dans les extraits",
 	"visualeditor-includes-includeonly": "Contenu intégré uniquement dans les extraits",
-	"visualeditor-includes-noinclude-description": "Lorsque le contenu de cette page est utilisé par une autre page, ce contenu jusqu’au marqueur de fin correspondant <strong>ne sera pas</strong> inclus. Faites attention en modifiant le contenu en dehors de ces balises, car d'autres pages peuvent l’utiliser.",
+	"visualeditor-includes-noinclude-description": "Lorsque le contenu de cette page est utilisé par une autre page, ce contenu à partir d’ici jusqu’au marqueur de fin correspondant <strong>ne sera pas</strong> inclus. Faites attention en modifiant le contenu en dehors de ces balises, car d’autres pages peuvent l’utiliser.",
 	"visualeditor-includes-onlyinclude-description": "Lorsque le contenu de cette page est utilisé par une autre page, <strong>seul</strong> ce contenu jusqu’au marqueur de fin correspondant sera inclus. Faites attention en modifiant le contenu entre ces balises, car d’autres pages peuvent l’utiliser.",
 	"visualeditor-includes-includeonly-description": "Lorsque le contenu de cette page est utilisé par une autre page, le contenu supplémentaire suivant y sera inclus :",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion En savoir plus sur l’inclusion partielle]",
