@@ -350,6 +350,10 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () 
 	} else if ( visible ) {
 		this.initializeFilters();
 		this.updateUnusedParameterToggleState();
+		if ( this.parameterList ) {
+			// TODO find a dynamic way to get height of the sticky part
+			this.parameterList.stickyHeaderHeight = 114;
+		}
 	}
 };
 
@@ -464,7 +468,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.scrollTopIntoView = function
 	if ( this.parameterList ) {
 		var firstSelected = this.parameterList.findFirstSelectedItem();
 		if ( firstSelected ) {
-			firstSelected.scrollToView();
+			// FIXME: This code should be in {@see ve.ui.MWTransclusionOutlineParameterSelectWidget}
+			firstSelected.ensureVisibilityBelowStickyHeader( this.parameterList.stickyHeaderHeight );
 		}
 	}
 };

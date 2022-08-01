@@ -15,6 +15,7 @@
  * @param {Object} config
  * @cfg {ve.ui.MWTransclusionOutlineParameterWidget[]} items
  * @property {string|null} activeParameter Name of the currently selected parameter
+ * @property {number|null} stickyHeaderHeight
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOutlineParameterSelectWidget( config ) {
 	// Parent constructor
@@ -36,6 +37,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 		} );
 
 	this.activeParameter = null;
+	this.stickyHeaderHeight = null;
 };
 
 /* Inheritance */
@@ -127,8 +129,8 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setActiveParameter = 
  * @inheritDoc OO.ui.SelectWidget
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightItem = function ( item ) {
-	if ( item ) {
-		item.scrollToView();
+	if ( item && this.stickyHeaderHeight ) {
+		item.ensureVisibilityBelowStickyHeader( this.stickyHeaderHeight );
 	}
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.highlightItem.call( this, item );
 };
