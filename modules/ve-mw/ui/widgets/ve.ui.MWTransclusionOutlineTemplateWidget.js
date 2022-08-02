@@ -364,7 +364,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () 
 
 	if ( this.parameterList ) {
 		// TODO find a dynamic way to get height of the sticky part
-		this.parameterList.stickyHeaderHeight = visible ? 114 : 0;
+		this.parameterList.stickyHeaderHeight = visible ? 113 : 0;
 	}
 };
 
