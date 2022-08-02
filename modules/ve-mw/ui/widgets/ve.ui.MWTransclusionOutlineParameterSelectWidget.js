@@ -129,7 +129,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setActiveParameter = 
  * @inheritDoc OO.ui.SelectWidget
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightItem = function ( item ) {
-	if ( item && this.stickyHeaderHeight ) {
+	if ( item ) {
 		item.ensureVisibilityBelowStickyHeader( this.stickyHeaderHeight );
 	}
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.highlightItem.call( this, item );

@@ -31,8 +31,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		remove: 'onParameterRemovedFromTemplateModel'
 	} );
 
-	this.toggleFilters();
-	var canFilter = !!this.toggleUnusedWidget,
+	var canFilter = this.shouldFiltersBeShown(),
 		initiallyHideUnused = canFilter && !replacesPlaceholder && !this.transclusionModel.isSingleTemplate();
 
 	var parameterNames = this.getRelevantTemplateParameters( initiallyHideUnused ? 'used' : 'all' );
@@ -46,6 +45,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 		this.$element.append( this.$noParametersNote );
 	}
 
+	this.toggleFilters();
 	if ( initiallyHideUnused ) {
 		// This is only to update the label of the "Hide unused" button
 		this.toggleUnusedWidget.toggleUnusedParameters( false );
@@ -340,10 +340,19 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
 
 /**
  * @private
+ * @return {boolean}
  */
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () {
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.shouldFiltersBeShown = function () {
 	var numParams = this.getRelevantTemplateParameters().length,
 		visible = numParams >= this.constructor.static.searchableParameterCount;
+	return visible;
+};
+
+/**
+ * @private
+ */
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () {
+	var visible = this.shouldFiltersBeShown();
 	if ( this.searchWidget ) {
 		this.searchWidget.toggle( visible );
 		this.toggleUnusedWidget.toggle( visible );
