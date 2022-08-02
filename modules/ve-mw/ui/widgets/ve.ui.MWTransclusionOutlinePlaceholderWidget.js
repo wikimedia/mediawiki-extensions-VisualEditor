@@ -18,6 +18,8 @@ ve.ui.MWTransclusionOutlinePlaceholderWidget = function VeUiMWTransclusionOutlin
 		icon: 'puzzle',
 		label: label
 	} );
+
+	this.$element.addClass( 've-ui-mwTransclusionOutlinePlaceholderWidget' );
 };
 
 /* Inheritance */

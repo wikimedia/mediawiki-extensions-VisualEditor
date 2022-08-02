@@ -17,6 +17,8 @@ ve.ui.MWTransclusionOutlineWikitextWidget = function VeUiMWTransclusionOutlineWi
 		ariaDescriptionSelected: ve.msg( 'visualeditor-dialog-transclusion-wikitext-widget-aria-selected' ),
 		ariaDescriptionSelectedSingle: ve.msg( 'visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single' )
 	} );
+
+	this.$element.addClass( 've-ui-mwTransclusionOutlineWikitextWidget' );
 };
 
 /* Inheritance */
