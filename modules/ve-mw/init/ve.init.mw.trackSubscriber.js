@@ -34,10 +34,17 @@
 		console.log.apply( console, arguments );
 	}
 
-	function inSample() {
+	function inEASSample() {
 		// Not using mw.eventLog.inSample() because we need to be able to pass our own editingSessionId
 		return mw.eventLog.randomTokenMatch(
 			1 / mw.config.get( 'wgWMESchemaEditAttemptStepSamplingRate' ),
+			editingSessionId
+		);
+	}
+
+	function inVEFUSample() {
+		return mw.eventLog.randomTokenMatch(
+			1 / mw.config.get( 'wgWMESchemaVisualEditorFeatureUseSamplingRate' ),
 			editingSessionId
 		);
 	}
@@ -152,6 +159,10 @@
 			firstInitDone = true;
 		}
 
+		if ( !inEASSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
+			return;
+		}
+
 		if (
 			action === 'abort' &&
 			( data.type === 'unknown' || data.type === 'unknown-edited' )
@@ -225,15 +236,11 @@
 
 		logEditViaMetricsPlatform( data, actionPrefix );
 
-		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
-			return;
-		}
-
 		/* eslint-disable camelcase */
 		var event = ve.extendObject( {
 			version: 1,
 			action: action,
-			is_oversample: !inSample(),
+			is_oversample: !inEASSample(),
 			editor_interface: 'visualeditor',
 			integration: ve.init && ve.init.target && ve.init.target.constructor.static.integrationType || 'page',
 			page_id: mw.config.get( 'wgArticleId' ),
@@ -278,7 +285,7 @@
 	function activityHandler( topic, data ) {
 		var feature = topic.split( '.' )[ 1 ];
 
-		if ( !inSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
+		if ( !inVEFUSample() && !mw.config.get( 'wgWMESchemaEditAttemptStepOversample' ) && !trackdebug ) {
 			return;
 		}
 
@@ -299,7 +306,7 @@
 			feature: feature,
 			action: data.action,
 			editingSessionId: editingSessionId,
-			is_oversample: !inSample(),
+			is_oversample: !inVEFUSample(),
 			user_id: mw.user.getId(),
 			user_editcount: mw.config.get( 'wgUserEditCount', 0 ),
 			editor_interface: ve.getProp( ve, 'init', 'target', 'surface', 'mode' ) === 'source' ? 'wikitext-2017' : 'visualeditor',
@@ -324,6 +331,11 @@
 		mw.loader.using( 'ext.eventLogging' ).done( function () {
 			ve.trackSubscribe( 'mwedit.', mwEditHandler );
 			ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
+		} );
+	}
+
+	if ( mw.config.exists( 'wgWMESchemaVisualEditorFeatureUseSamplingRate' ) ) {
+		mw.loader.using( 'ext.eventLogging' ).done( function () {
 			ve.trackSubscribe( 'activity.', activityHandler );
 		} );
 	}
