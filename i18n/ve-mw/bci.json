@@ -56,12 +56,10 @@
 	"visualeditor-dialog-transclusion-filter-hide-unused": "Fa liké nga bé faman moun fa fia",
 	"visualeditor-dialog-transclusion-filter-show-all": "Fa bé klouaa fa klé",
 	"visualeditor-dialog-transclusion-loading": "Bé sou yé...",
-	"visualeditor-dialog-transclusion-options": "I yowlè ouflè vié moun",
 	"visualeditor-dialog-transclusion-param-example-long": "Liké kè nga sa: $1",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Sô sin",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Klouaa mô yéli yé i ékoun",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Fa $1 wlou noun",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Katchi: $1",
-	"visualeditor-dialog-transclusion-wikitext": "Wiki codi",
-	"visualeditor-dialogbutton-meta-tooltip": "Floua boué nga i siésiélè ningué moun"
+	"visualeditor-dialog-transclusion-wikitext": "Wiki codi"
 }

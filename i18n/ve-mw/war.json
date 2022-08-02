@@ -54,7 +54,6 @@
 	"visualeditor-dialog-template-title": "Batakan",
 	"visualeditor-dialog-transclusion-collapse-options": "Tago-a an pagpipilian",
 	"visualeditor-dialog-transclusion-loading": "Nagloload...",
-	"visualeditor-dialog-transclusion-options": "Mga pagpipilian",
 	"visualeditor-dialog-transclusion-placeholder": "Dugnga hin batakan",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Balik",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Igpadayon la",
@@ -63,6 +62,5 @@
 	"visualeditor-educationpopup-dismiss": "Okay, nakuha ko na",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulo han pakli",
-	"visualeditor-savedialog-label-create": "Paghimo hin pakli",
 	"visualeditor-version-label": "Bersyon"
 }

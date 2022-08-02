@@ -57,8 +57,6 @@
 	"visualeditor-meta-tool": "خيارات",
 	"visualeditor-mweditmodesource-warning-cancel": "فوتها",
 	"visualeditor-preference-core-label": "المحرر المرئي",
-	"visualeditor-savedialog-label-create": "اصنع صفحة",
-	"visualeditor-savedialog-label-report": "خبر على مشكلة",
 	"visualeditor-savedialog-label-resolve-conflict": "سلك التشعب",
 	"visualeditor-savedialog-label-resume-editing": "كمل التبديل",
 	"visualeditor-savedialog-label-review": "سجل تبديلات نتاعك",
@@ -66,6 +64,5 @@
 	"visualeditor-savedialog-title-conflict": "تضارب",
 	"visualeditor-savedialog-title-review": "سجل تبديلات نتاعك",
 	"visualeditor-savedialog-title-save": "سجل تبديلات نتاعك",
-	"visualeditor-savedialog-warning-dirty": "بالك تحريرك صرالو عطب – مادا بيك راجع قبل الحفظ.",
 	"visualeditor-version-label": "نسخة"
 }

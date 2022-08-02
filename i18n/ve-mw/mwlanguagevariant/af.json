@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Biggs ZA",
-			"Fwolff"
+			"Fwolff",
+			"Rooiratel"
 		]
 	},
 	"visualeditor-mwlanguagevariant-name": "Taalnaam: $1",
@@ -12,5 +13,6 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Bestemming",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Tale",
 	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Taalkode",
+	"visualeditor-mwlanguagevariantinspector-filter-text-label": "Inhoud",
 	"visualeditor-mwlanguagevariantinspector-title-name": "Taalnaam"
 }
