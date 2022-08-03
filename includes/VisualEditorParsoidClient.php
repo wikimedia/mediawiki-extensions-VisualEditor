@@ -13,7 +13,9 @@ namespace MediaWiki\Extension\VisualEditor;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
+use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use ParserOutput;
 use RequestContext;
 use Title;
@@ -24,6 +26,7 @@ use Wikimedia\Parsoid\Config\SiteConfig;
 use Wikimedia\Parsoid\Core\SelserData;
 use Wikimedia\Parsoid\Parsoid;
 use Wikimedia\Parsoid\Utils\DOMUtils;
+use WikitextContent;
 
 class VisualEditorParsoidClient {
 	/**
@@ -230,8 +233,18 @@ class VisualEditorParsoidClient {
 		// introduced as a post-parse transform.  So although we pass a
 		// User here, it only currently affects the output in obscure
 		// corner cases; see PageConfigFactory::create() for more.
+
+		// Create a mutable revision record and set to the desired wikitext.
+		$tmpRevision = new MutableRevisionRecord( $title );
+		$tmpRevision->setSlot(
+			SlotRecord::newUnsaved(
+				SlotRecord::MAIN,
+				new WikitextContent( $wikitext )
+			)
+		);
+
 		$pageConfig = $this->pageConfigFactory->create(
-			$title, $user, $oldid, $wikitext, $lang, $this->parsoidSettings
+			$title, $user, $tmpRevision, null, $lang, $this->parsoidSettings
 		);
 		$parsoid = new Parsoid( $this->siteConfig, $this->dataAccess );
 		$parserOutput = new ParserOutput();
