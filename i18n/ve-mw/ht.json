@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Bfpage",
 			"Tisave"
 		]
 	},
 	"tooltip-ca-ve-edit": "Edit paj sa a",
-	"visualeditor-ca-editsource": "Edit sous",
+	"visualeditor-ca-createlocaldescriptionsource": "Ajoute deskription lokal la nan kòd",
+	"visualeditor-ca-createsource": "Kreye nan kòd",
+	"visualeditor-ca-editsource": "Modifye kòd",
 	"visualeditor-ca-editsource-section": "modifye sous"
 }

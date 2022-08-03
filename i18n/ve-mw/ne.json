@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bada Kaji",
 			"Ganesh Paudel",
 			"NehalDaveND",
 			"Nirajan pant",
@@ -24,6 +25,9 @@
 	"visualeditor-ca-editsource": "स्रोत सम्पादन गर्ने",
 	"visualeditor-ca-editsource-section": "स्रोत सम्पादन गर्नुहाेस्",
 	"visualeditor-categories-tool": "श्रेणीहरू",
+	"visualeditor-changedesc-mwlanguagevariant": "भाषा भेरियन्ट मार्कअप परिवर्तन भयो",
+	"visualeditor-changedesc-mwredirect": "अनुप्रेषण $1 बाट $2 मा परिवर्तन गरियो",
+	"visualeditor-changedesc-mwtransclusion": "ढाँचा प्यारामिटरहरू परिवर्तन गरियो",
 	"visualeditor-desc": "मेडियाविकिको लागि दृष्टि सम्पादक",
 	"visualeditor-descriptionpagelink": "Project:भिजुअल इडिटर",
 	"visualeditor-dialog-media-alttext-section": "वैकल्पिक पाठ",
