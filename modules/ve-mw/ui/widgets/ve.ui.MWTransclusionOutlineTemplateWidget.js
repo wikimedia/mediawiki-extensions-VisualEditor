@@ -38,7 +38,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget = function VeUiMWTransclusionOutlineTe
 	if ( parameterNames.length ) {
 		this.initializeParameterList();
 		this.parameterList.addItems( parameterNames.map( this.createCheckbox.bind( this ) ) );
-	} else {
+	} else if ( !canFilter ) {
 		this.$noParametersNote = $( '<div>' )
 			.text( ve.msg( 'visualeditor-dialog-transclusion-no-template-parameters' ) )
 			.addClass( 've-ui-mwTransclusionOutlineTemplateWidget-no-template-parameters' );
