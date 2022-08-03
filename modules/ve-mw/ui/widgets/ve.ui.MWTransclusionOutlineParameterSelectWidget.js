@@ -15,7 +15,7 @@
  * @param {Object} config
  * @cfg {ve.ui.MWTransclusionOutlineParameterWidget[]} items
  * @property {string|null} activeParameter Name of the currently selected parameter
- * @property {number|null} stickyHeaderHeight
+ * @property {number} stickyHeaderHeight
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOutlineParameterSelectWidget( config ) {
 	// Parent constructor
@@ -37,7 +37,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget = function VeUiMWTransclusionOu
 		} );
 
 	this.activeParameter = null;
-	this.stickyHeaderHeight = null;
+	this.stickyHeaderHeight = 0;
 };
 
 /* Inheritance */
@@ -92,12 +92,12 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function (
 	return this;
 };
 
-/**
- * @return {ve.ui.MWTransclusionOutlineParameterWidget|null}
- */
-ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.findFirstSelectedItem = function () {
-	var selected = this.findSelectedItems();
-	return Array.isArray( selected ) ? selected[ 0 ] || null : selected;
+ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.ensureVisibilityOfFirstCheckedParameter = function () {
+	// TODO: Replace with {@see OO.ui.SelectWidget.findFirstSelectedItem} when available
+	var firstChecked = this.findSelectedItems()[ 0 ];
+	if ( firstChecked ) {
+		firstChecked.ensureVisibility( this.stickyHeaderHeight );
+	}
 };
 
 /**
@@ -130,7 +130,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setActiveParameter = 
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.highlightItem = function ( item ) {
 	if ( item ) {
-		item.ensureVisibilityBelowStickyHeader( this.stickyHeaderHeight );
+		item.ensureVisibility( this.stickyHeaderHeight );
 	}
 	ve.ui.MWTransclusionOutlineParameterSelectWidget.super.prototype.highlightItem.call( this, item );
 };

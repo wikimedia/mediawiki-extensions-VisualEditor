@@ -343,9 +343,10 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onParameterWidgetListChanged
  * @return {boolean}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.shouldFiltersBeShown = function () {
-	var numParams = this.getRelevantTemplateParameters().length,
-		visible = numParams >= this.constructor.static.searchableParameterCount;
-	return visible;
+	var min = this.constructor.static.searchableParameterCount,
+		existingParameterWidgets = this.parameterList && this.parameterList.getItemCount();
+	// Avoid expensive calls when there are already enough items in the parameter list
+	return existingParameterWidgets >= min || this.getRelevantTemplateParameters().length >= min;
 };
 
 /**
@@ -359,10 +360,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () 
 	} else if ( visible ) {
 		this.initializeFilters();
 		this.updateUnusedParameterToggleState();
-		if ( this.parameterList ) {
-			// TODO find a dynamic way to get height of the sticky part
-			this.parameterList.stickyHeaderHeight = 114;
-		}
+	}
+
+	if ( this.parameterList ) {
+		// TODO find a dynamic way to get height of the sticky part
+		this.parameterList.stickyHeaderHeight = visible ? 114 : 0;
 	}
 };
 
@@ -467,18 +469,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = funct
 	}
 
 	if ( !visibility && fromClick ) {
-		this.scrollTopIntoView();
-	}
-};
-
-ve.ui.MWTransclusionOutlineTemplateWidget.prototype.scrollTopIntoView = function () {
-	this.header.scrollElementIntoView();
-
-	if ( this.parameterList ) {
-		var firstSelected = this.parameterList.findFirstSelectedItem();
-		if ( firstSelected ) {
-			// FIXME: This code should be in {@see ve.ui.MWTransclusionOutlineParameterSelectWidget}
-			firstSelected.ensureVisibilityBelowStickyHeader( this.parameterList.stickyHeaderHeight );
+		this.header.scrollElementIntoView();
+		if ( this.parameterList ) {
+			this.parameterList.ensureVisibilityOfFirstCheckedParameter();
 		}
 	}
 };

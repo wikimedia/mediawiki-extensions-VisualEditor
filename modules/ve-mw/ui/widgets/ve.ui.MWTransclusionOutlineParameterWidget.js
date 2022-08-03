@@ -88,9 +88,9 @@ ve.ui.MWTransclusionOutlineParameterWidget.prototype.toggleHasValue = function (
 /**
  * Custom method to scroll parameter into view respecting the sticky part that sits above
  *
- * @param {number} stickyHeaderHeight
+ * @param {number} paddingTop
  */
-ve.ui.MWTransclusionOutlineParameterWidget.prototype.ensureVisibilityBelowStickyHeader = function ( stickyHeaderHeight ) {
+ve.ui.MWTransclusionOutlineParameterWidget.prototype.ensureVisibility = function ( paddingTop ) {
 	// make sure parameter is visible and scrolled underneath the sticky
-	this.scrollElementIntoView( { animate: false, padding: { top: stickyHeaderHeight } } );
+	this.scrollElementIntoView( { animate: false, padding: { top: paddingTop } } );
 };
