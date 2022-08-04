@@ -44,11 +44,11 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
  * @private
  * @return {number}
  */
-ve.ui.MWExpandableContentElement.prototype.getTextHeight = function () {
+ve.ui.MWExpandableContentElement.prototype.calculateCurrentTextHeight = function () {
 	var currentHeight = this.$content.height(),
 		expandedHeight = this.$content.css( 'height', 'auto' ).height();
 	if ( expandedHeight !== currentHeight ) {
-		this.$content.css( { height: currentHeight } );
+		this.$content.css( 'height', currentHeight );
 	}
 	return expandedHeight;
 };
@@ -72,32 +72,29 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
 	this.$container = $( '<div>' )
 		.addClass( 've-ui-expandableContent-container' )
 		.append(
-			$( '<div>' )
-				.addClass( 've-ui-expandableContent-fade' )
+			$( '<div>' ).addClass( 've-ui-expandableContent-fade' ),
+			this.button.$element
 		)
-		.append( this.button.$element )
 		.appendTo( this.$element );
 };
 
 /**
  * @private
- * @param {boolean} collapse
  */
-ve.ui.MWExpandableContentElement.prototype.collapse = function ( collapse ) {
-	var collapsedHeight = this.getLineHeight();
+ve.ui.MWExpandableContentElement.prototype.recalculateVisuals = function () {
+	var height = this.calculateCurrentTextHeight() + this.button.$element.height(),
+		collapsedHeight = this.getLineHeight(),
+		label = this.collapsed ? 'visualeditor-expandable-more' : 'visualeditor-expandable-less';
 
-	if ( collapse ) {
-		this.button.setLabel( ve.msg( 'visualeditor-expandable-more' ) );
-		this.$content.css( { height: collapsedHeight } );
-		this.button.setIcon( 'expand' );
-	} else {
-		this.button.setLabel( ve.msg( 'visualeditor-expandable-less' ) );
-		this.$content.css( 'height', this.getTextHeight() + this.button.$element.height() );
-		this.button.setIcon( 'collapse' );
-	}
-	this.$container.removeClass( 'oo-ui-element-hidden' );
-	this.$container.height( collapsedHeight );
-	this.button.setInvisibleLabel( ve.ui.MWTransclusionDialog.static.isSmallScreen() );
+	this.$content.css( 'height', this.collapsed ? collapsedHeight : height );
+	this.$container.removeClass( 'oo-ui-element-hidden' )
+		.height( collapsedHeight );
+	// The following messages are used here:
+	// * visualeditor-expandable-more
+	// * visualeditor-expandable-less
+	this.button.setLabel( ve.msg( label ) )
+		.setInvisibleLabel( ve.ui.MWTransclusionDialog.static.isSmallScreen() )
+		.setIcon( this.collapsed ? 'expand' : 'collapse' );
 };
 
 /**
@@ -113,8 +110,8 @@ ve.ui.MWExpandableContentElement.prototype.reset = function () {
  * @private
  */
 ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
-	this.collapse( !this.collapsed );
 	this.collapsed = !this.collapsed;
+	this.recalculateVisuals();
 };
 
 /**
@@ -132,11 +129,11 @@ ve.ui.MWExpandableContentElement.prototype.onDescriptionClick = function () {
 ve.ui.MWExpandableContentElement.prototype.updateSize = function () {
 	this.toggle( true );
 
-	if ( Math.floor( this.getTextHeight() / this.getLineHeight() ) > 3 ) {
+	if ( Math.floor( this.calculateCurrentTextHeight() / this.getLineHeight() ) > 3 ) {
 		if ( !this.$container ) {
 			this.makeCollapsible();
 		}
-		this.collapse( this.collapsed );
+		this.recalculateVisuals();
 	} else {
 		if ( this.$container ) {
 			this.reset();
