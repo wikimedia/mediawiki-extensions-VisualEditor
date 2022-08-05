@@ -169,7 +169,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				var page = pages[ i ];
 
 				if ( page.missing ) {
-					// Remmeber templates that don't exist in the link cache
+					// Remember templates that don't exist in the link cache
 					// { title: { missing: true|false }
 					var missingTitle = {};
 					missingTitle[ page.title ] = { missing: true };

@@ -146,7 +146,7 @@ OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
 /* Events */
 
 /**
- * Triggered the parameter value changes between empty and not empty.
+ * Triggered when the parameter value changes between empty and not empty.
  *
  * @event hasValueChange
  * @param string parameterId Keyed by unique id of the parameter, e.g. something

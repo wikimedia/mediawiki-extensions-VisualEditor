@@ -65,7 +65,7 @@ ve.ui.MWEditSummaryWidget.static.splitSummary = function ( summary ) {
 };
 
 /**
- * Filter a list of edit summaries to a specific query stirng
+ * Filter a list of edit summaries to a specific query string
  *
  * @param {string[]} summaries Edit summaries
  * @param {string} query User query
