@@ -127,7 +127,7 @@
 	"visualeditor-dialog-meta-settings-redirect-help": "Te podet trasformà questa pagina chì in una redirezzion, cioè una pagina che la mena in automatich i letor a un'altra pagin del wiki. Quest po el vesser util per di eror de grafia, di nom o di concet che podet vesser drovad vun inscambi de l'alterː Se te l'ativet i letor i vadarann minga el contegnud de questa pagina chì.",
 	"visualeditor-dialog-meta-settings-redirect-label": "Fà una redirezzion de questa pagina chì vers",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Pagina de destinazzion per la redirezzion",
-	"visualeditor-dialog-meta-settings-redirect-statichelp": "Te podet impedì che quella redirezzion chì la se sgiorna in automatich quand che la pagina che 'l insegna la ven spostada, semai che ghe sìa besogn.",
+	"visualeditor-dialog-meta-settings-redirect-statichelp": "Te podet impedì che quella redirezzion chì la se atualiza in automatich quand che la pagina a la qual 'l la manda  l'è spostada, al cas che 'l sia necessari.",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Impedissegh a questa redirezzion chì de vesser sgiornada quand che la ven spostada la pagina de destinazzion.",
 	"visualeditor-dialog-meta-settings-section": "Impostazzion de la pagina",
 	"visualeditor-dialog-meta-settings-toc-default": "Se gh'è besogn",
