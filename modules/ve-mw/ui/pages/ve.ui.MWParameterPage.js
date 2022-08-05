@@ -36,7 +36,7 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, config ) {
 	this.spec = parameter.getTemplate().getSpec();
 	this.defaultValue = parameter.getDefaultValue();
 	this.exampleValue = parameter.getExampleValue();
-	this.hadValue = null;
+	this.hasValue = null;
 
 	this.$info = $( '<div>' );
 	this.$field = $( '<div>' );
@@ -302,9 +302,9 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 	this.edited = true;
 	this.parameter.setValue( value );
 
-	if ( !!value !== this.hadValue ) {
-		this.hadValue = !!value;
-		this.emit( 'hasValueChange', this.parameter.getId(), this.hadValue );
+	if ( !!value !== this.hasValue ) {
+		this.hasValue = !!value;
+		this.emit( 'hasValueChange', this.parameter.getId(), this.hasValue );
 	}
 };
 
