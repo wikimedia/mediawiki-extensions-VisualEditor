@@ -484,11 +484,7 @@ class ApiVisualEditorEdit extends ApiBase {
 				$result['isRedirect'] = (string)$title->isRedirect();
 
 				if ( ExtensionRegistry::getInstance()->isLoaded( 'FlaggedRevs' ) ) {
-
-					$globalContext = RequestContext::getMain();
-					$globalTitle = $globalContext->getTitle();
-
-					$newContext = new DerivativeContext( $globalContext );
+					$newContext = new DerivativeContext( RequestContext::getMain() );
 					// Defeat !$this->isPageView( $request ) || $request->getVal( 'oldid' ) check in setPageContent
 					$newRequest = new DerivativeRequest(
 						$this->getRequest(),
@@ -501,11 +497,10 @@ class ApiVisualEditorEdit extends ApiBase {
 					);
 					$newContext->setRequest( $newRequest );
 					$newContext->setTitle( $title );
-					$globalContext->setTitle( $title );
 
 					// Must be after $globalContext->setTitle since FlaggedRevs constructor
 					// inspects global Title
-					$view = FlaggablePageView::singleton();
+					$view = FlaggablePageView::newFromTitle( $title );
 					// Most likely identical to $globalState, but not our concern
 					$originalContext = $view->getContext();
 					$view->setContext( $newContext );
@@ -518,7 +513,6 @@ class ApiVisualEditorEdit extends ApiBase {
 					$view->setPageContent( $outputDone, $useParserCache );
 					$view->displayTag();
 					$view->setContext( $originalContext );
-					$globalContext->setTitle( $globalTitle );
 				}
 
 				$lang = $this->getLanguage();

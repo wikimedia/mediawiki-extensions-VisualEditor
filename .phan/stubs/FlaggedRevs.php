@@ -10,9 +10,10 @@
 class FlaggablePageView extends ContextSource {
 
 	/**
+	 * @param Title|MediaWiki\Page\PageIdentity $title
 	 * @return self
 	 */
-	public static function singleton() {
+	public static function newFromTitle( $title ) {
 	}
 
 	/**
