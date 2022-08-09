@@ -200,7 +200,7 @@
 		active = false;
 		// Push read tab URL to history
 		if ( history.pushState && $( '#ca-view a' ).length ) {
-			history.pushState( { tag: 'visualeditor' }, document.title, new mw.Uri( $( '#ca-view a' ).attr( 'href' ) ) );
+			history.pushState( { tag: 'visualeditor' }, '', new mw.Uri( $( '#ca-view a' ).attr( 'href' ) ) );
 		}
 		clearLoading();
 	}
@@ -599,9 +599,9 @@
 					// Replace the current state with one that is tagged as ours, to prevent the
 					// back button from breaking when used to exit VE. FIXME: there should be a better
 					// way to do this. See also similar code in the DesktopArticleTarget constructor.
-					history.replaceState( { tag: 'visualeditor' }, document.title, uri );
+					history.replaceState( { tag: 'visualeditor' }, '', uri );
 					// Set veaction to edit
-					history.pushState( { tag: 'visualeditor' }, document.title, mode === 'source' ? veEditSourceUri : veEditUri );
+					history.pushState( { tag: 'visualeditor' }, '', mode === 'source' ? veEditSourceUri : veEditUri );
 				}
 
 				// Update mw.Uri instance
@@ -1188,10 +1188,10 @@
 				// Replace the current state with one that is tagged as ours, to prevent the
 				// back button from breaking when used to exit VE. FIXME: there should be a better
 				// way to do this. See also similar code in the DesktopArticleTarget constructor.
-				history.replaceState( { tag: 'visualeditor' }, document.title, linkUri );
+				history.replaceState( { tag: 'visualeditor' }, '', linkUri );
 				// Change the state to the href of the section link that was clicked. This saves
 				// us from having to figure out the section number again.
-				history.pushState( { tag: 'visualeditor' }, document.title, this.href );
+				history.pushState( { tag: 'visualeditor' }, '', this.href );
 			}
 
 			// Use section from URL
@@ -1627,7 +1627,7 @@
 			delete uri.query.venotify;
 			// Get rid of the ?venotify= from the URL
 			if ( history.replaceState ) {
-				history.replaceState( null, document.title, uri );
+				history.replaceState( null, '', uri );
 			}
 		}
 	} );

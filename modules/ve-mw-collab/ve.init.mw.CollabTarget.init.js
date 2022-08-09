@@ -211,7 +211,7 @@
 		var specialTitle = mw.Title.newFromText( 'Special:CollabPad' );
 
 		if ( pushState ) {
-			history.pushState( { tag: 'collabTarget' }, mw.msg( 'collabpad' ), specialTitle.getUrl() );
+			history.pushState( { tag: 'collabTarget' }, '', specialTitle.getUrl() );
 		}
 
 		if ( target ) {
@@ -238,7 +238,7 @@
 		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
 		if ( history.pushState ) {
 			// TODO: Handle popstate
-			history.pushState( { tag: 'collabTarget', title: title.toString() }, title.getMain(), specialTitle.getUrl() );
+			history.pushState( { tag: 'collabTarget', title: title.toString() }, '', specialTitle.getUrl() );
 			showPage( title, importTitle );
 		} else {
 			location.href = specialTitle.getUrl( { import: importTitle } );
@@ -327,7 +327,7 @@
 
 	// Tag current state
 	if ( history.replaceState ) {
-		history.replaceState( { tag: 'collabTarget', title: pageName }, document.title, location.href );
+		history.replaceState( { tag: 'collabTarget', title: pageName }, '', location.href );
 	}
 	window.addEventListener( 'popstate', function ( e ) {
 		if ( e.state && e.state.tag === 'collabTarget' ) {
