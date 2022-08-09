@@ -33,17 +33,17 @@ trait ApiParsoidTrait {
 	 * mode or not then it will be a ?VisualEditorParsoidClient.
 	 * @var VisualEditorParsoidClient|null|false
 	 */
-	protected $directClient = false;
+	private $directClient = false;
 
 	/**
 	 * @var VirtualRESTServiceClient
 	 */
-	protected $serviceClient = null;
+	private $serviceClient = null;
 
 	/**
 	 * @var LoggerInterface
 	 */
-	protected $logger = null;
+	private $logger = null;
 
 	/**
 	 * @return LoggerInterface
@@ -65,7 +65,7 @@ trait ApiParsoidTrait {
 	 * @return ?VisualEditorParsoidClient null if a VirtualRESTService is
 	 *  to be used.
 	 */
-	protected function getDirectClient(): ?VisualEditorParsoidClient {
+	private function getDirectClient(): ?VisualEditorParsoidClient {
 		if ( $this->directClient === false ) {
 			// We haven't checked configuration yet.
 			// Check to see if any of the restbase-related configuration
@@ -101,7 +101,7 @@ trait ApiParsoidTrait {
 	 *
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
-	protected function getVRSObject(): VirtualRESTService {
+	private function getVRSObject(): VirtualRESTService {
 		if ( $this->getDirectClient() ) {
 			$this->dieWithError(
 				'apierror-visualeditor-docserver-bad-config',
@@ -154,7 +154,7 @@ trait ApiParsoidTrait {
 	 *
 	 * @return VirtualRESTServiceClient
 	 */
-	protected function getVRSClient(): VirtualRESTServiceClient {
+	private function getVRSClient(): VirtualRESTServiceClient {
 		if ( !$this->serviceClient ) {
 			$this->serviceClient = new VirtualRESTServiceClient(
 				MediaWikiServices::getInstance()->getHttpRequestFactory()->createMultiClient() );
@@ -173,7 +173,7 @@ trait ApiParsoidTrait {
 	 * @param array $reqheaders Request headers
 	 * @return array The RESTbase server's response, 'code', 'reason', 'headers' and 'body'
 	 */
-	protected function requestRestbase(
+	private function requestRestbase(
 		Title $title, string $method, string $path, array $params, array $reqheaders = []
 	): array {
 		// Should be synchronised with requestParsoidData() in
