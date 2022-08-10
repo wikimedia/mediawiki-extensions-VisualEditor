@@ -274,37 +274,9 @@ ve.init.mw.ArticleTarget.prototype.setDefaultMode = function () {
 /**
  * Update state of editing tabs
  *
- * @param {boolean} editing Whether the editor is loaded.
+ * @param {boolean} editing Whether the editor is loaded
  */
-ve.init.mw.ArticleTarget.prototype.updateTabs = function ( editing ) {
-	var $tab;
-
-	if ( editing ) {
-		if ( this.section === 'new' ) {
-			$tab = $( '#ca-addsection' );
-		} else if ( $( '#ca-ve-edit' ).length ) {
-			if ( this.getDefaultMode() === 'visual' ) {
-				$tab = $( '#ca-ve-edit' );
-			} else {
-				$tab = $( '#ca-edit' );
-			}
-		} else {
-			// Single edit tab
-			$tab = $( '#ca-edit' );
-		}
-	} else {
-		$tab = $( '#ca-view' );
-	}
-
-	// Deselect current mode (e.g. "view" or "history") in skins that have
-	// separate tab sections for content actions and namespaces, like Vector.
-	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
-	// In skins like MonoBook that don't have the separate tab sections,
-	// deselect the known tabs for editing modes (when switching or exiting editor).
-	$( '#ca-edit, #ca-ve-edit, #ca-addsection' ).not( $tab ).removeClass( 'selected' );
-
-	$tab.addClass( 'selected' );
-};
+ve.init.mw.ArticleTarget.prototype.updateTabs = function () {};
 
 /**
  * Handle response to a successful load request.
