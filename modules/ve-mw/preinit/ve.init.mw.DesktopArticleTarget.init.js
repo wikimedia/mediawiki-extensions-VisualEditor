@@ -198,6 +198,7 @@
 	function abortLoading() {
 		$( 'html' ).removeClass( 've-activated' );
 		active = false;
+		updateTabs( false );
 		// Push read tab URL to history
 		if ( history.pushState && $( '#ca-view a' ).length ) {
 			history.pushState( { tag: 'visualeditor' }, document.title, new mw.Uri( $( '#ca-view a' ).attr( 'href' ) ) );
@@ -277,6 +278,7 @@
 					);
 					target.on( 'deactivate', function () {
 						active = false;
+						updateTabs( false );
 					} );
 					target.on( 'reactivate', function () {
 						try {
@@ -399,6 +401,43 @@
 	}
 
 	/**
+	 * Update state of editing tabs
+	 *
+	 * @param {boolean} editing Whether the editor is loaded
+	 * @param {string} [mode='visual'] Edit mode ('visual' or 'source')
+	 * @param {boolean} [isNewSection] Adding a new section
+	 */
+	function updateTabs( editing, mode, isNewSection ) {
+		var $tab;
+
+		if ( editing ) {
+			if ( isNewSection ) {
+				$tab = $( '#ca-addsection' );
+			} else if ( $( '#ca-ve-edit' ).length ) {
+				if ( !mode || mode === 'visual' ) {
+					$tab = $( '#ca-ve-edit' );
+				} else {
+					$tab = $( '#ca-edit' );
+				}
+			} else {
+				// Single edit tab
+				$tab = $( '#ca-edit' );
+			}
+		} else {
+			$tab = $( '#ca-view' );
+		}
+
+		// Deselect current mode (e.g. "view" or "history") in skins that have
+		// separate tab sections for content actions and namespaces, like Vector.
+		$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
+		// In skins like MonoBook that don't have the separate tab sections,
+		// deselect the known tabs for editing modes (when switching or exiting editor).
+		$( '#ca-edit, #ca-ve-edit, #ca-addsection' ).not( $tab ).removeClass( 'selected' );
+
+		$tab.addClass( 'selected' );
+	}
+
+	/**
 	 * Scroll to a specific heading before VE loads
 	 *
 	 * Similar to ve.init.mw.ArticleTarget.prototype.scrollToHeading
@@ -472,6 +511,8 @@
 	 */
 	function activateTarget( mode, section, tPromise, modified ) {
 		var dataPromise;
+
+		updateTabs( true, mode, section === 'new' );
 
 		// Only call requestPageData early if the target object isn't there yet.
 		// If the target object is there, this is a second or subsequent load, and the
@@ -1370,6 +1411,8 @@
 
 	// FIXME: We should do this more elegantly
 	init.setEditorPreference = setEditorPreference;
+
+	init.updateTabs = updateTabs;
 
 	// Note: Though VisualEditor itself only needs this exposure for a very small reason
 	// (namely to access init.unsupportedList from the unit tests...) this has become one of the nicest

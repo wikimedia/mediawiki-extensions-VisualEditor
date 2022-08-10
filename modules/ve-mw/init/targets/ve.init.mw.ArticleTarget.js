@@ -263,7 +263,7 @@ ve.init.mw.ArticleTarget.prototype.setDefaultMode = function () {
 	ve.init.mw.ArticleTarget.super.prototype.setDefaultMode.apply( this, arguments );
 
 	if ( this.defaultMode !== oldDefaultMode ) {
-		this.updateTabs( true );
+		this.updateTabs();
 		if ( mw.libs.ve.setEditorPreference ) {
 			// only set up by DAT.init
 			mw.libs.ve.setEditorPreference( this.defaultMode === 'visual' ? 'visualeditor' : 'wikitext' );
@@ -272,9 +272,7 @@ ve.init.mw.ArticleTarget.prototype.setDefaultMode = function () {
 };
 
 /**
- * Update state of editing tabs
- *
- * @param {boolean} editing Whether the editor is loaded
+ * Update state of editing tabs from this target
  */
 ve.init.mw.ArticleTarget.prototype.updateTabs = function () {};
 
@@ -2295,7 +2293,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 			target.initialEditSummary = null;
 			target.section = section;
 			target.reloadSurface( 'source' );
-			target.updateTabs( true );
+			target.updateTabs();
 		}
 	} );
 };
