@@ -12,7 +12,6 @@ namespace MediaWiki\Extension\VisualEditor;
 
 use ActorMigration;
 use Article;
-use AtomicSectionUpdate;
 use Config;
 use DeferredUpdates;
 use DifferenceEngine;
@@ -23,6 +22,7 @@ use Language;
 use MediaWiki;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\User\UserIdentity;
 use OOUI\ButtonGroupWidget;
 use OOUI\ButtonWidget;
 use OutputPage;
@@ -321,6 +321,23 @@ class Hooks {
 	}
 
 	/**
+	 * @param UserIdentity $user
+	 * @param string $key
+	 * @param string $value
+	 */
+	private static function deferredSetUserOption( UserIdentity $user, string $key, string $value ) {
+		DeferredUpdates::addCallableUpdate( static function () use ( $user, $key, $value ) {
+			$services = MediaWikiServices::getInstance();
+			if ( $services->getReadOnlyMode()->isReadOnly() ) {
+				return;
+			}
+			$userOptionsManager = $services->getUserOptionsManager();
+			$userOptionsManager->setOption( $user, $key, $value );
+			$userOptionsManager->saveOptions( $user );
+		} );
+	}
+
+	/**
 	 * Decide whether to bother showing the wikitext editor at all.
 	 * If not, we expect the VE initialisation JS to activate.
 	 *
@@ -344,11 +361,8 @@ class Hooks {
 
 		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
-			$services->getUserOptionsManager()->setOption( $user, 'visualeditor-editor', 'wikitext' );
-			if ( !$services->getReadOnlyMode()->isReadOnly() && $user->isRegistered() ) {
-				DeferredUpdates::addCallableUpdate( static function () use ( $user ) {
-					$user->saveSettings();
-				} );
+			if ( $user->isRegistered() ) {
+				self::deferredSetUserOption( $user, 'visualeditor-editor', 'wikitext' );
 			}
 			return true;
 		}
@@ -1200,22 +1214,7 @@ class Hooks {
 	public static function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
 		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
-			$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-			DeferredUpdates::addUpdate( new AtomicSectionUpdate(
-				$lb->getConnectionRef( DB_PRIMARY ),
-				__METHOD__,
-				static function () use ( $user, $cookie ) {
-					$services = MediaWikiServices::getInstance();
-					if ( $services->getReadOnlyMode()->isReadOnly() ) {
-						return;
-					}
-
-					$uLatest = $user->getInstanceForUpdate();
-					$services->getUserOptionsManager()
-						->setOption( $uLatest, 'visualeditor-editor', $cookie );
-					$uLatest->saveSettings();
-				}
-			) );
+			self::deferredSetUserOption( $user, 'visualeditor-editor', $cookie );
 		}
 	}
 }
