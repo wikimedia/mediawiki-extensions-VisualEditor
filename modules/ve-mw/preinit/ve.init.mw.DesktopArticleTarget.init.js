@@ -706,6 +706,8 @@
 	var isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
 	var isEditPage = mw.config.get( 'wgAction' ) === 'edit' || mw.config.get( 'wgAction' ) === 'submit';
 	var pageCanLoadEditor = isViewPage || isEditPage;
+	var pageIsProbablyEditable = mw.config.get( 'wgIsProbablyEditable' ) ||
+		mw.config.get( 'wgRelevantPageIsProbablyEditable' );
 	if ( pageCanLoadEditor ) {
 		$targetContainer.addClass( 've-init-mw-desktopArticleTarget-targetContainer' );
 	}
@@ -1448,7 +1450,11 @@
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 		}
 
-		if ( ( init.isVisualAvailable || init.isWikitextAvailable ) && pageCanLoadEditor && !requiredSkinElements ) {
+		if ( ( init.isVisualAvailable || init.isWikitextAvailable ) &&
+			pageCanLoadEditor &&
+			pageIsProbablyEditable &&
+			!requiredSkinElements
+		) {
 			mw.log.warn(
 				'Your skin is incompatible with VisualEditor. ' +
 				'See https://www.mediawiki.org/wiki/Extension:VisualEditor/Skin_requirements for the requirements.'
@@ -1571,11 +1577,8 @@
 			( init.isVisualAvailable || init.isWikitextAvailable || $( '#wpTextbox1' ).length ) &&
 			isEditPage &&
 			init.shouldShowWelcomeDialog() &&
-			(
-				// Not on protected pages
-				mw.config.get( 'wgIsProbablyEditable' ) ||
-				mw.config.get( 'wgRelevantPageIsProbablyEditable' )
-			)
+			// Not on protected pages
+			pageIsProbablyEditable
 		) {
 			mw.loader.using( 'ext.visualEditor.welcome' ).done( function () {
 				var windowManager, welcomeDialog;
