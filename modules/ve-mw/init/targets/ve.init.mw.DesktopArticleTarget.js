@@ -76,7 +76,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		// use the Back button to exit the editor we can restore Read mode. This is because we want
 		// to ignore foreign states in onWindowPopState. Without this, the Read state is foreign.
 		// FIXME: There should be a much better solution than this.
-		history.replaceState( this.popState, document.title, this.currentUri );
+		history.replaceState( this.popState, '', this.currentUri );
 	}
 
 	this.setupSkinTabs();
@@ -1103,7 +1103,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 			delete uri.query.section;
 		}
 
-		history.pushState( this.popState, document.title, uri );
+		history.pushState( this.popState, '', uri );
 	}
 	this.actFromPopState = false;
 };
@@ -1169,9 +1169,9 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		// Otherwise use the canonical style view url (T44553, T102363).
 		var keys = Object.keys( uri.query );
 		if ( !keys.length || ( keys.length === 1 && keys[ 0 ] === 'title' ) ) {
-			history.pushState( this.popState, document.title, this.viewUri );
+			history.pushState( this.popState, '', this.viewUri );
 		} else {
-			history.pushState( this.popState, document.title, uri );
+			history.pushState( this.popState, '', uri );
 		}
 	}
 };
@@ -1209,7 +1209,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 	if ( this.active && veaction !== 'edit' && veaction !== 'editsource' ) {
 		this.actFromPopState = true;
 		// "Undo" the pop-state, as the event is not cancellable
-		history.pushState( this.popState, document.title, oldUri );
+		history.pushState( this.popState, '', oldUri );
 		this.currentUri = oldUri;
 		this.tryTeardown( false, 'navigate-back' ).then( function () {
 			// Teardown was successful, re-apply the undone state
