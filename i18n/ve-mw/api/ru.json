@@ -20,7 +20,6 @@
 	"apierror-visualeditor-difffailed": "Сравнение не удалось",
 	"apierror-visualeditor-docserver-http-error": "Ошибка при обращении к серверу Parsoid/RESTbase: $1",
 	"apierror-visualeditor-docserver-http": "Ошибка при обращении к серверу Parsoid/RESTbase (HTTP $1)",
-	"apierror-visualeditor-docserver-unconfigured": "VirtualRESTService для сервера документов не определён; см. раздел https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "Ошибка при обращении к серверу Parsoid/RESTbase (нет ответа)",
 	"apierror-visualeditor-latestnotfound": "Не удалось найти последнюю версию для заголовка",
 	"apihelp-visualeditor-description": "Возвращает HTML5 для страницы с сервиса Parsoid.",

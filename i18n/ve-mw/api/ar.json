@@ -12,7 +12,6 @@
 	"apierror-visualeditor-difffailed": "فشل الفرق",
 	"apierror-visualeditor-docserver-http-error": "خطأ في الاتصال بخادم Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "خطأ في الاتصال بخادم Parsoid/RESTBase (HTTP $1)",
-	"apierror-visualeditor-docserver-unconfigured": "لم يتم تعريف VirtualRESTService لملقم المستند، انظر https://www.mediawiki.org/wiki/Extension:VisualEditor",
 	"apierror-visualeditor-docserver": "خطأ في الاتصال بخادم Parsoid/RESTBase (بدون استجابة)",
 	"apierror-visualeditor-latestnotfound": "لم يمكن العثور على أحدث نسخة للعنوان",
 	"apihelp-visualeditor-description": "يرجع HTML5 لصفحة من الخدمة بارسويد (Parsoid).",
