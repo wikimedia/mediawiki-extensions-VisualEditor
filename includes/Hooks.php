@@ -10,7 +10,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use ActorMigration;
 use Article;
 use Config;
 use DeferredUpdates;
@@ -519,28 +518,21 @@ class Hooks {
 			!$userOptionsLookup->getOption( $user, 'visualeditor-hidetabdialog' ) &&
 			$userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
 		) {
+			// Check if the user has made any edits before the SET switch time
 			$dbr = wfGetDB( DB_REPLICA );
-			$revWhere = ActorMigration::newMigration()->getWhere( $dbr, 'rev_user', $user );
-			foreach ( $revWhere['orconds'] as $key => $cond ) {
-				$tsField = $key === 'actor' ? 'revactor_timestamp' : 'rev_timestamp';
-				if (
-					$dbr->select(
-						[ 'revision' ] + $revWhere['tables'],
-						'1',
-						[
-							$cond,
-							$tsField . ' < ' . $dbr->addQuotes( $dbr->timestamp(
-								$config->get( 'VisualEditorSingleEditTabSwitchTime' )
-							) )
-						],
-						__METHOD__,
-						[ 'LIMIT' => 1 ],
-						$revWhere['joins']
-					)->numRows() === 1
-				) {
-					$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
-					break;
-				}
+			$revExists = $dbr->newSelectQueryBuilder()
+				->from( 'revision' )
+				->field( '1' )
+				->where( [
+					'rev_actor' => $user->getActorId(),
+					'rev_timestamp < ' . $dbr->addQuotes( $dbr->timestamp(
+						$config->get( 'VisualEditorSingleEditTabSwitchTime' )
+					) )
+				] )
+				->caller( __METHOD__ )
+				->fetchField();
+			if ( $revExists ) {
+				$links['views']['edit']['class'] .= ' visualeditor-showtabdialog';
 			}
 		}
 
