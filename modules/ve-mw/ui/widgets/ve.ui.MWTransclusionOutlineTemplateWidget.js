@@ -469,9 +469,11 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = funct
 	}
 
 	if ( !visibility && fromClick ) {
-		this.header.scrollElementIntoView();
-		if ( this.parameterList ) {
-			this.parameterList.ensureVisibilityOfFirstCheckedParameter();
-		}
+		var self = this;
+		this.header.scrollElementIntoView().then( function () {
+			if ( self.parameterList ) {
+				self.parameterList.ensureVisibilityOfFirstCheckedParameter();
+			}
+		} );
 	}
 };
