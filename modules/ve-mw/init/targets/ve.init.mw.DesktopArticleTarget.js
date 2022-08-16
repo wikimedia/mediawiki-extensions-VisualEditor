@@ -318,6 +318,39 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
 /**
  * @inheritdoc
  */
+ve.init.mw.DesktopArticleTarget.prototype.updateTabs = function ( editing ) {
+	var $tab;
+
+	if ( editing ) {
+		if ( this.section === 'new' ) {
+			$tab = $( '#ca-addsection' );
+		} else if ( $( '#ca-ve-edit' ).length ) {
+			if ( this.getDefaultMode() === 'visual' ) {
+				$tab = $( '#ca-ve-edit' );
+			} else {
+				$tab = $( '#ca-edit' );
+			}
+		} else {
+			// Single edit tab
+			$tab = $( '#ca-edit' );
+		}
+	} else {
+		$tab = $( '#ca-view' );
+	}
+
+	// Deselect current mode (e.g. "view" or "history") in skins that have
+	// separate tab sections for content actions and namespaces, like Vector.
+	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
+	// In skins like MonoBook that don't have the separate tab sections,
+	// deselect the known tabs for editing modes (when switching or exiting editor).
+	$( '#ca-edit, #ca-ve-edit, #ca-addsection' ).not( $tab ).removeClass( 'selected' );
+
+	$tab.addClass( 'selected' );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 	var target = this;
 
