@@ -649,7 +649,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
 
-			var newUrlParams = !this.pageExists || this.restoring ?
+			var newUrlParams = !target.pageExists || target.restoring ?
 				( data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' } ) :
 				{};
 
