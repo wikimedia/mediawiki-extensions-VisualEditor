@@ -318,34 +318,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setupLocalNoticeMessages = function ()
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.updateTabs = function ( editing ) {
-	var $tab;
-
-	if ( editing ) {
-		if ( this.section === 'new' ) {
-			$tab = $( '#ca-addsection' );
-		} else if ( $( '#ca-ve-edit' ).length ) {
-			if ( this.getDefaultMode() === 'visual' ) {
-				$tab = $( '#ca-ve-edit' );
-			} else {
-				$tab = $( '#ca-edit' );
-			}
-		} else {
-			// Single edit tab
-			$tab = $( '#ca-edit' );
-		}
-	} else {
-		$tab = $( '#ca-view' );
-	}
-
-	// Deselect current mode (e.g. "view" or "history") in skins that have
-	// separate tab sections for content actions and namespaces, like Vector.
-	$( '#p-views' ).find( 'li.selected' ).removeClass( 'selected' );
-	// In skins like MonoBook that don't have the separate tab sections,
-	// deselect the known tabs for editing modes (when switching or exiting editor).
-	$( '#ca-edit, #ca-ve-edit, #ca-addsection' ).not( $tab ).removeClass( 'selected' );
-
-	$tab.addClass( 'selected' );
+ve.init.mw.DesktopArticleTarget.prototype.updateTabs = function () {
+	mw.libs.ve.updateTabs( true, this.getDefaultMode(), this.section === 'new' );
 };
 
 /**
@@ -1033,7 +1007,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
  * @fires transformPage
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
-	this.updateTabs( true );
+	this.updateTabs();
 	this.emit( 'transformPage' );
 
 	// TODO: Deprecate in favour of ve.activationComplete
@@ -1147,11 +1121,6 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
  * @fires restorePage
  */
 ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
-	// Skins like monobook don't have a tab for view mode and instead just have the namespace tab
-	// selected. We didn't deselect the namespace tab, so we're ready after deselecting #ca-ve-edit.
-	// In skins having #ca-view (like Vector), select that.
-	this.updateTabs( false );
-
 	// Restore any previous redirectMsg/redirectsub
 	this.setRealRedirectInterface();
 	if ( this.$originalCategories ) {
