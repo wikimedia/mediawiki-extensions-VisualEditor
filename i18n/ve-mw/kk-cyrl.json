@@ -3,7 +3,8 @@
 		"authors": [
 			"Arystanbek",
 			"TMg",
-			"Нұрлан Рахымжанов"
+			"Нұрлан Рахымжанов",
+			"СеніңШешең"
 		]
 	},
 	"tooltip-ca-createsource": "Бұл беттің қайнар мәтінін бастау",
@@ -14,14 +15,14 @@
 	"visualeditor-backbutton-tooltip": "Артқа қайту",
 	"visualeditor-beta-warning": "VisualEditor 'beta' нұсқада. Сіз бағдарламалық жасақтама шектеулеріне кездесуіңіз не беттің кейбір бөліктерін өңдей алмауыңыз мүмкін. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-tool}}\" дегенді таңдаңыз.",
 	"visualeditor-browserwarning": "Сіздің қолданып отырған шолғышыңызды VisualEditor ресми түрде қолдамайды.",
-	"visualeditor-ca-createlocaldescriptionsource": "Жергілікті сипаттама қайнарын қосу",
-	"visualeditor-ca-createsource": "Қайнарын құру",
+	"visualeditor-ca-createlocaldescriptionsource": "Жергілікті сипаттама көзін қосу",
+	"visualeditor-ca-createsource": "Көз құру",
 	"visualeditor-ca-editlocaldescriptionsource": "Жергілікті сипаттама қайнарын өңдеу",
-	"visualeditor-ca-editsource": "Қайнарын өңдеу",
-	"visualeditor-ca-editsource-section": "қайнарын өңдеу",
+	"visualeditor-ca-editsource": "Кодын өңдеу",
+	"visualeditor-ca-editsource-section": "кодын өңдеу",
 	"visualeditor-categories-tool": "Санаттар",
 	"visualeditor-desc": "МедиаУики үшін визуальды өңдегіш",
-	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-descriptionpagelink": "Project:Визуалды өңдегіш",
 	"visualeditor-dialog-media-alttext-section": "Баламалы мәтін",
 	"visualeditor-dialog-media-change-image": "Суретті өзгерту",
 	"visualeditor-dialog-media-choose-image": "Бұл суретті қолдану",
