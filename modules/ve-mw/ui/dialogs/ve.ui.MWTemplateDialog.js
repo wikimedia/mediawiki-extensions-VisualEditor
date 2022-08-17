@@ -497,6 +497,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				if ( !dialog.transclusionModel.isSingleTemplate() ) {
 					dialog.sidebar.hideAllUnusedParameters();
 				}
+				dialog.sidebar.initializeAllStickyHeaderHeights();
 			} );
 		}, this );
 };

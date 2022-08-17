@@ -88,8 +88,14 @@ ve.ui.MWTransclusionOutlineWidget.prototype.removePartWidget = function ( part )
  * @fires filterPagesByName
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, newPosition, removed ) {
-	var widget;
+	var keys = Object.keys( this.partWidgets ),
+		onlyPart = keys.length === 1 && this.partWidgets[ keys[ 0 ] ];
+	if ( onlyPart instanceof ve.ui.MWTransclusionOutlineTemplateWidget ) {
+		// To recalculate the height of the sticky header when we enter multi-part mode
+		onlyPart.recalculateStickyHeaderHeight();
+	}
 
+	var widget;
 	if ( part instanceof ve.dm.MWTemplateModel ) {
 		widget = new ve.ui.MWTransclusionOutlineTemplateWidget( part, removed instanceof ve.dm.MWTemplatePlaceholderModel );
 		// This forwards events from the nested ve.ui.MWTransclusionOutlineTemplateWidget upwards.
@@ -122,6 +128,15 @@ ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function (
 			partWidget.toggleUnusedWidget
 		) {
 			partWidget.toggleUnusedWidget.toggleUnusedParameters( false );
+		}
+	}
+};
+
+ve.ui.MWTransclusionOutlineWidget.prototype.initializeAllStickyHeaderHeights = function () {
+	for ( var id in this.partWidgets ) {
+		var partWidget = this.partWidgets[ id ];
+		if ( partWidget instanceof ve.ui.MWTransclusionOutlineTemplateWidget ) {
+			partWidget.recalculateStickyHeaderHeight();
 		}
 	}
 };
