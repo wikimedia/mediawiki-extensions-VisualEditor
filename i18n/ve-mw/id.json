@@ -26,6 +26,7 @@
 			"Raynasution",
 			"Rv77ax",
 			"TMg",
+			"Veracious",
 			"William Surya Permana",
 			"WillsonEP09"
 		]
@@ -63,6 +64,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Parameter templat diubah",
 	"visualeditor-desc": "Penyunting visual untuk MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-media-alttext-checkbox": "Gunakan takarir sebagai teks alternatif",
 	"visualeditor-dialog-media-alttext-section": "Teks alternatif",
 	"visualeditor-dialog-media-alttext-section-help": "Anda dapat menggunakan bidang ini untuk memberikan keterangan teks yang digunakan oleh orang-orang yang tidak dapat melihat butir tersebut. Keterangan tersebut harus cukup baik bagi mereka sehingga dapat memahami maksud dan informasi yang tersedia dalam butir media yang dimaksud. Hal ini vital bagi pengguna tunanetra dan orang lain yang menggunakan perangkat lunak pembaca layar atau peramban hanya-teks.",
 	"visualeditor-dialog-media-change-image": "Ganti gambar",
