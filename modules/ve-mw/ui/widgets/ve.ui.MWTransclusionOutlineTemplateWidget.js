@@ -362,9 +362,13 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () 
 		this.updateUnusedParameterToggleState();
 	}
 
-	if ( this.parameterList ) {
-		// TODO find a dynamic way to get height of the sticky part
-		this.parameterList.stickyHeaderHeight = visible ? 113 : 0;
+	this.recalculateStickyHeaderHeight();
+};
+
+ve.ui.MWTransclusionOutlineTemplateWidget.prototype.recalculateStickyHeaderHeight = function () {
+	// A template with no used parameters might have a sticky header, but no paramater list yet
+	if ( this.$stickyHeader && this.parameterList ) {
+		this.parameterList.stickyHeaderHeight = Math.floor( this.$stickyHeader.outerHeight() );
 	}
 };
 
@@ -391,7 +395,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function
 		classes: [ 've-ui-mwTransclusionOutlineTemplateWidget-no-match' ]
 	} ).toggle( false );
 
-	var $stickyHeader = $( '<div>' )
+	this.$stickyHeader = $( '<div>' )
 		.addClass( 've-ui-mwTransclusionOutlineTemplateWidget-sticky' )
 		.append(
 			this.header.$element,
@@ -400,7 +404,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function
 		);
 
 	this.$element.prepend(
-		$stickyHeader,
+		this.$stickyHeader,
 		this.infoWidget.$element
 	);
 };
@@ -449,6 +453,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	this.toggleUnusedWidget.toggle( !query );
 	this.infoWidget.toggle( nothingFound );
 	this.parameterList.setTabIndex( nothingFound ? -1 : 0 );
+	// The "hide unused" button might be hidden now, which changes the height of the sticky header
+	this.recalculateStickyHeaderHeight();
 	this.emit( 'filterParametersById', visibility );
 };
 
