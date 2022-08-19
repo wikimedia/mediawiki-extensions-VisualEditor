@@ -20,7 +20,6 @@ use MediaWiki\Revision\RevisionRecord;
 use ParsoidVirtualRESTService;
 use Psr\Log\LoggerInterface;
 use RestbaseVirtualRESTService;
-use RuntimeException;
 use StatusValue;
 use Title;
 use VirtualRESTService;
@@ -202,17 +201,9 @@ class ParsoidHelper {
 				wfEscapeWikiText( $response['error'] ) );
 		} elseif ( $response['code'] !== 200 ) {
 			// error null, code not 200
-			$this->logger->warning(
-				__METHOD__ . ": Received HTTP {code} from RESTBase",
-				[
-					'code' => $response['code'],
-					'exception' => new RuntimeException(),
-					'response' => [ 'body' => $response['body'] ],
-					'requestPath' => $path,
-					'requestIfMatch' => $reqheaders['If-Match'] ?? '',
-				]
-			);
-			return StatusValue::newFatal( 'apierror-visualeditor-docserver-http', $response['code'] );
+			$json = json_decode( $response['body'], true );
+			$message = $json['detail'] ?? '(no message)';
+			return StatusValue::newFatal( 'apierror-visualeditor-docserver-http', $response['code'], $message );
 		}
 		return StatusValue::newGood( $response );
 	}
