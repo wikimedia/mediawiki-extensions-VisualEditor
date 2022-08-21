@@ -15,19 +15,37 @@ use Config;
 use DeferredUpdates;
 use ExtensionRegistry;
 use Html;
+use HTMLForm;
 use IContextSource;
 use Language;
 use MediaWiki;
+use MediaWiki\Auth\Hook\UserLoggedInHook;
+use MediaWiki\ChangeTags\Hook\ChangeTagsListActiveHook;
+use MediaWiki\ChangeTags\Hook\ListDefinedTagsHook;
 use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
+use MediaWiki\Hook\BeforeInitializeHook;
+use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Hook\CustomEditorHook;
+use MediaWiki\Hook\EditPage__showEditForm_fieldsHook;
+use MediaWiki\Hook\MakeGlobalVariablesScriptHook;
+use MediaWiki\Hook\OutputPageBodyAttributesHook;
+use MediaWiki\Hook\ParserTestGlobalsHook;
+use MediaWiki\Hook\RecentChange_saveHook;
+use MediaWiki\Hook\SkinEditSectionLinksHook;
+use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Preferences\Hook\GetPreferencesHook;
+use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderGetConfigVarsHook;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\SpecialPage\Hook\RedirectSpecialArticleRedirectParamsHook;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use OOUI\ButtonGroupWidget;
 use OOUI\ButtonWidget;
 use OutputPage;
-use PreferencesFormOOUI;
 use RecentChange;
 use RequestContext;
 use Skin;
@@ -37,7 +55,30 @@ use TextSlotDiffRenderer;
 use User;
 use WebRequest;
 
-class Hooks implements TextSlotDiffRendererTablePrefixHook {
+/**
+ * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+ */
+class Hooks implements
+	TextSlotDiffRendererTablePrefixHook,
+	BeforeInitializeHook,
+	BeforePageDisplayHook,
+	ChangeTagsListActiveHook,
+	CustomEditorHook,
+	EditPage__showEditForm_fieldsHook,
+	GetPreferencesHook,
+	ListDefinedTagsHook,
+	MakeGlobalVariablesScriptHook,
+	OutputPageBodyAttributesHook,
+	ParserTestGlobalsHook,
+	PreferencesFormPreSaveHook,
+	RecentChange_saveHook,
+	RedirectSpecialArticleRedirectParamsHook,
+	ResourceLoaderGetConfigVarsHook,
+	ResourceLoaderRegisterModulesHook,
+	SkinEditSectionLinksHook,
+	SkinTemplateNavigation__UniversalHook,
+	UserLoggedInHook
+{
 
 	// Known parameters that VE does not handle
 	// TODO: Other params too?
@@ -88,7 +129,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param OutputPage $output The page view.
 	 * @param Skin $skin The skin that's going to build the UI.
 	 */
-	public static function onBeforePageDisplay( OutputPage $output, Skin $skin ) {
+	public function onBeforePageDisplay( $output, $skin ): void {
 		$services = MediaWikiServices::getInstance();
 		$hookRunner = new VisualEditorHookRunner( $services->getHookContainer() );
 		if ( !$hookRunner->onVisualEditorBeforeEditor( $output, $skin ) ) {
@@ -344,7 +385,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param User $user The user-specific settings.
 	 * @return bool Whether to show the wikitext editor or not.
 	 */
-	public static function onCustomEditor( Article $article, User $user ) {
+	public function onCustomEditor( $article, $user ) {
 		$req = $article->getContext()->getRequest();
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
@@ -480,7 +521,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param SkinTemplate $skin The skin template on which the UI is built.
 	 * @param array &$links Navigation links.
 	 */
-	public static function onSkinTemplateNavigation( SkinTemplate $skin, array &$links ) {
+	public function onSkinTemplateNavigation__Universal( $skin, &$links ): void {
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
 		$config = $services->getConfigFactory()
@@ -702,7 +743,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param EditPage $editPage The edit page view.
 	 * @param OutputPage $output The page view.
 	 */
-	public static function onEditPageShowEditFormFields( EditPage $editPage, OutputPage $output ) {
+	public function onEditPage__showEditForm_fields( $editPage, $output ) {
 		$request = $output->getRequest();
 		if ( $request->getBool( 'veswitched' ) ) {
 			$output->addHTML( Html::hidden( 'veswitched', '1' ) );
@@ -716,7 +757,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 *
 	 * @param RecentChange $rc The new RC entry.
 	 */
-	public static function onRecentChangeSave( RecentChange $rc ) {
+	public function onRecentChange_Save( $rc ) {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getBool( 'veswitched' ) && $rc->getAttribute( 'rc_this_oldid' ) ) {
 			$rc->addTags( 'visualeditor-switched' );
@@ -742,7 +783,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @phan-param array{editsection:array{text:string,targetTitle:Title,attribs:array,query:array}} $result
 	 * @param Language $lang The user interface language.
 	 */
-	public static function onSkinEditSectionLinks( Skin $skin, Title $title, $section,
+	public function onSkinEditSectionLinks( $skin, $title, $section,
 		$tooltip, &$result, $lang
 	) {
 		$services = MediaWikiServices::getInstance();
@@ -840,7 +881,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param Skin $sk
 	 * @param string[] &$bodyAttrs
 	 */
-	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, &$bodyAttrs ) {
+	public function onOutputPageBodyAttributes( $out, $sk, &$bodyAttrs ): void {
 		$specialTitle = $sk->getTitle();
 
 		// HACK: Replace classes generated by Skin::getPageClasses as if an article title
@@ -861,7 +902,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param User $user
 	 * @param array &$preferences Their preferences object
 	 */
-	public static function onGetPreferences( User $user, array &$preferences ) {
+	public function onGetPreferences( $user, &$preferences ) {
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
@@ -960,11 +1001,12 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * when the user it was set on explicitly enables VE.
 	 *
 	 * @param array $data User-submitted data
-	 * @param PreferencesFormOOUI $form A ContextSource
+	 * @param HTMLForm $form A ContextSource
 	 * @param User $user User with new preferences already set
 	 * @param bool &$result Success or failure
+	 * @param array $oldUserOptions
 	 */
-	public static function onPreferencesFormPreSave( $data, $form, $user, &$result ) {
+	public function onPreferencesFormPreSave( $data, $form, $user, &$result, $oldUserOptions ) {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$userOptionsManager = $services->getUserOptionsManager();
@@ -993,12 +1035,19 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	}
 
 	/**
+	 * @param array &$tags
+	 */
+	public function onChangeTagsListActive( &$tags ) {
+		$this->onListDefinedTags( $tags );
+	}
+
+	/**
 	 * Implements the ListDefinedTags and ChangeTagsListActive hooks, to
 	 * populate core Special:Tags with the change tags in use by VisualEditor.
 	 *
 	 * @param array &$tags Available change tags.
 	 */
-	public static function onListDefinedTags( &$tags ) {
+	public function onListDefinedTags( &$tags ) {
 		$tags = array_merge( $tags, static::TAGS );
 	}
 
@@ -1008,7 +1057,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param array &$vars Global variables object
 	 * @param OutputPage $out The page view.
 	 */
-	public static function onMakeGlobalVariablesScript( array &$vars, OutputPage $out ) {
+	public function onMakeGlobalVariablesScript( &$vars, $out ): void {
 		$pageLanguage = ApiVisualEditor::getPageLanguage( $out->getTitle() );
 		$converter = MediaWikiServices::getInstance()->getLanguageConverterFactory()
 			->getLanguageConverter( $pageLanguage );
@@ -1026,8 +1075,10 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * Adds extra variables to the global config
 	 *
 	 * @param array &$vars Global variables object
+	 * @param string $skin
+	 * @param Config $config
 	 */
-	public static function onResourceLoaderGetConfigVars( array &$vars ) {
+	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
 		$coreConfig = RequestContext::getMain()->getConfig();
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
@@ -1104,7 +1155,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 *
 	 * @param ResourceLoader $resourceLoader Client-side code and assets to be loaded.
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
+	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
 		$veResourceTemplate = [
 			'localBasePath' => dirname( __DIR__ ),
 			'remoteExtPath' => 'VisualEditor',
@@ -1129,7 +1180,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 *
 	 * @param array &$settings The settings with which MediaWiki is being run.
 	 */
-	public static function onParserTestGlobals( array &$settings ) {
+	public function onParserTestGlobals( &$settings ) {
 		$settings['wgVisualEditorInParserTests'] = true;
 	}
 
@@ -1137,7 +1188,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param array &$redirectParams Parameters preserved on special page redirects
 	 *   to wiki pages
 	 */
-	public static function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
+	public function onRedirectSpecialArticleRedirectParams( &$redirectParams ) {
 		$redirectParams[] = 'veaction';
 	}
 
@@ -1151,9 +1202,8 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 * @param WebRequest $request
 	 * @param MediaWiki $mediaWiki Helper class.
 	 */
-	public static function onBeforeInitialize(
-		Title $title, $article, OutputPage $output,
-		User $user, WebRequest $request, MediaWiki $mediaWiki
+	public function onBeforeInitialize(
+		$title, $article, $output, $user, $request, $mediaWiki
 	) {
 		if ( $request->getVal( 'veaction' ) ) {
 			$request->setVal( 'redirect', 'no' );
@@ -1165,7 +1215,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 *
 	 * @param User $user The user-specific settings.
 	 */
-	public static function onUserLoggedIn( $user ) {
+	public function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
 		if ( $user->isNamed() && ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) ) {
 			self::deferredSetUserOption( $user, 'visualeditor-editor', $cookie );
