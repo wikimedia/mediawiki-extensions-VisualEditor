@@ -1502,7 +1502,17 @@
 				'Your skin is incompatible with VisualEditor. ' +
 				'See https://www.mediawiki.org/wiki/Extension:VisualEditor/Skin_requirements for the requirements.'
 			);
-			var err = new Error( 'Incompatible skin: ' + mw.config.get( 'skin' ) );
+			// aid debugging for additional context.
+			var errorCode = [
+				init.isVisualAvailable,
+				init.isWikitextAvailable,
+				pageCanLoadEditor,
+				pageIsProbablyEditable,
+				requiredSkinElements
+			].map( function ( bool ) {
+				return Number( bool );
+			} ).join( '-' );
+			var err = new Error( 'Incompatible with VisualEditor: ' + errorCode );
 			err.name = 'VeIncompatibleSkinWarning';
 			mw.errorLogger.logError( err, 'error.visualeditor' );
 		} else if ( init.isAvailable ) {
