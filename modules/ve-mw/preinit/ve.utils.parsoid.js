@@ -100,7 +100,7 @@ mw.libs.ve.stripRestbaseIds = function ( doc ) {
  * @param {HTMLElement} element Parent element, e.g. document body
  */
 mw.libs.ve.reduplicateStyles = function ( element ) {
-	Array.prototype.forEach.call( element.querySelectorAll( 'link[rel="mw-deduplicated-inline-style"]' ), function ( link ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'link[rel~="mw-deduplicated-inline-style"]' ), function ( link ) {
 		var href = link.getAttribute( 'href' );
 		if ( !href || href.slice( 0, 'mw-data:'.length ) !== 'mw-data:' ) {
 			return;
