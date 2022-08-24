@@ -577,7 +577,6 @@ ve.init.mw.ArticleTarget.prototype.loadFail = function () {
  * Replace the page content with new HTML.
  *
  * @method
- * @abstract
  * @param {string} html Rendered HTML from server
  * @param {string} categoriesHtml Rendered categories HTML from server
  * @param {string} displayTitle HTML to show as the page title
@@ -586,7 +585,32 @@ ve.init.mw.ArticleTarget.prototype.loadFail = function () {
  * @param {string} contentSub HTML to show as the content subtitle
  * @param {Array} sections Section data to display in the TOC
  */
-ve.init.mw.ArticleTarget.prototype.replacePageContent = null;
+ve.init.mw.ArticleTarget.prototype.replacePageContent = function (
+	html, categoriesHtml, displayTitle, lastModified, contentSub, sections
+) {
+	// eslint-disable-next-line no-jquery/no-append-html
+	this.$editableContent.find( '.mw-parser-output' ).first().replaceWith( html );
+	mw.hook( 'wikipage.content' ).fire( this.$editableContent );
+
+	if ( displayTitle ) {
+		// eslint-disable-next-line no-jquery/no-html
+		$( '#firstHeading' ).html( displayTitle );
+	}
+
+	// Categories are only shown in AMC on mobile
+	if ( $( '#catlinks' ).length ) {
+		var $categories = $( $.parseHTML( categoriesHtml ) );
+		mw.hook( 'wikipage.categories' ).fire( $categories );
+		$( '#catlinks' ).replaceWith( $categories );
+	}
+
+	// eslint-disable-next-line no-jquery/no-html
+	$( '#contentSub, .minerva__subtitle' ).html( contentSub );
+
+	this.setRealRedirectInterface();
+
+	mw.hook( 'wikipage.tableOfContents' ).fire( sections );
+};
 
 /**
  * Handle successful DOM save event.
