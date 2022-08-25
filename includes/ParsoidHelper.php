@@ -262,8 +262,10 @@ class ParsoidHelper {
 			( $oldid === null ? '' : '/' . $oldid );
 
 		// Adapted from RESTBase mwUtil.parseETag()
-		// ETag is not expected when creating a new page (oldid=0)
-		if ( $oldid && !( preg_match( '/
+		// ETag is not expected when:
+		// * Doing anything on a non-RESTBase wiki
+		// * Creating a new page on a RESTBase wiki (oldid=0)
+		if ( $etag !== null && !( preg_match( '/
 			^(?:W\\/)?"?
 			' . preg_quote( "$oldid", '/' ) . '
 			(?:\\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))
