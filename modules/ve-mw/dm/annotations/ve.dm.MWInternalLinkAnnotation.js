@@ -108,6 +108,7 @@ ve.dm.MWInternalLinkAnnotation.static.newFromTitle = function ( title, rawTitle 
 
 ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
 	var parentResult = ve.dm.LinkAnnotation.static.toDomElements.apply( this, arguments );
+	// we just created that link so the 'rel' attribute should be safe
 	parentResult[ 0 ].setAttribute( 'rel', 'mw:WikiLink' );
 	return parentResult;
 };

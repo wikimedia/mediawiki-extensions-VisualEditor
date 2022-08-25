@@ -210,7 +210,7 @@ ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function () {
  */
 ve.ce.MWTransclusionNode.prototype.filterRenderedDomElements = function ( domElements ) {
 	// We want to remove all styles and links which aren't from TemplateStyles.
-	var selector = 'style:not([data-mw-deduplicate^="TemplateStyles:"]), link:not([rel="mw-deduplicated-inline-style"][href^="mw-data:TemplateStyles:"])';
+	var selector = 'style:not([data-mw-deduplicate^="TemplateStyles:"]), link:not([rel~="mw-deduplicated-inline-style"][href^="mw-data:TemplateStyles:"])';
 	return $( domElements ).find( selector ).addBack( selector ).remove().end().end().toArray();
 };
 
