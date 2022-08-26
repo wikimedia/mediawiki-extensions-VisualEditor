@@ -140,13 +140,18 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = function ( pageName, soft ) {
 	this.setPage( pageName );
-	if ( !soft ) {
-		this.focus();
-	}
 
 	var page = this.pages[ pageName ];
 	if ( page ) {
+		// Warning, scrolling must be done before focussing. The browser will trigger a conflicting
+		// scroll when the focussed element is out of view.
 		page.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
+	}
+
+	// We assume "mobile" means "touch device with on-screen keyboard". That should only open when
+	// tapping the input field, not when navigating in the sidebar.
+	if ( !soft && !OO.ui.isMobile() ) {
+		this.focus();
 	}
 };
 
