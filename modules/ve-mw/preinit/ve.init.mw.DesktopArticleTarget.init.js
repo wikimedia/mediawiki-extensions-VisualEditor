@@ -898,14 +898,14 @@
 
 				// Alter the edit tab (#ca-edit)
 				if ( $( '#ca-view-foreign' ).length ) {
-					if ( tabMessages[ action + 'localdescriptionsource' ] !== null ) {
+					if ( tabMessages[ action + 'localdescriptionsource' ] ) {
 						// The following messages can be used here:
 						// * editlocaldescriptionsource
 						// * createlocaldescriptionsource
 						$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
 					}
 				} else {
-					if ( tabMessages[ action + 'source' ] !== null ) {
+					if ( tabMessages[ action + 'source' ] ) {
 						// The following messages can be used here:
 						// * editsource
 						// * createsource
