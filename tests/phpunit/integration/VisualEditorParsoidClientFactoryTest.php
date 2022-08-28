@@ -2,21 +2,21 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
+use IBufferingStatsdDataFactory;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory;
 use MediaWiki\Extension\VisualEditor\VRSParsoidClient;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Parser\Parsoid\Config\DataAccess;
-use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
-use MediaWiki\Parser\Parsoid\Config\SiteConfig;
+use MediaWiki\Parser\Parsoid\HTMLTransformFactory;
+use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWikiIntegrationTestCase;
 use MultiHttpClient;
 use ParsoidVirtualRESTService;
 use Psr\Log\NullLogger;
 use Wikimedia\TestingAccessWrapper;
-use Wikimedia\UUID\GlobalIdGenerator;
 
 /**
  * @coversDefaultClass \MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory
@@ -43,12 +43,12 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 
 		return new VisualEditorParsoidClientFactory(
 			$options,
-			$this->createNoOpMock( SiteConfig::class ),
-			$this->createNoOpMock( PageConfigFactory::class ),
-			$this->createNoOpMock( DataAccess::class ),
-			$this->createNoOpMock( GlobalIdGenerator::class ),
 			$httpRequestFactory,
-			new NullLogger()
+			new NullLogger(),
+			$this->createNoOpMock( ParsoidOutputStash::class ),
+			$this->createNoOpMock( IBufferingStatsdDataFactory::class ),
+			$this->createNoOpMock( ParsoidOutputAccess::class ),
+			$this->createNoOpMock( HTMLTransformFactory::class )
 		);
 	}
 

@@ -66,63 +66,105 @@ describe( 'Visual Editor API', function () {
 	// VisualEditor edit: 'visualeditoredit' action API ///
 	const page = utils.title( 'VisualEditorNew' );
 
-	it( 'Should create page, edit and save page', async () => {
-		const token = await alice.token();
-		const html = '<p>save paction</p>';
-		const summary = 'save test workflow';
-		const result = await alice.action(
-			'visualeditoredit',
-			{
-				page: page,
-				paction: 'save',
-				token: token,
-				html: html,
-				summary: summary
-			},
-			'post'
-		);
+	describe( 'Editing', function () {
+		it( 'Should create page, edit and save page with HTML', async () => {
+			const token = await alice.token();
+			const html = '<p>save paction</p>';
+			const summary = 'save test workflow';
+			const result = await alice.action(
+				'visualeditoredit',
+				{
+					page: page,
+					paction: 'save',
+					token: token,
+					html: html,
+					summary: summary
+				},
+				'post'
+			);
 
-		assert.equal( result.visualeditoredit.result, 'success' );
-	} );
+			assert.equal( result.visualeditoredit.result, 'success' );
+		} );
 
-	it( 'Should refuse to edit with a bad token', async () => {
-		const token = 'dshfkjdsakf';
-		const html = '<p>save paction</p>';
-		const summary = 'save test workflow';
-		const error = await alice.actionError(
-			'visualeditoredit',
-			{
-				page: page,
-				paction: 'save',
-				token: token,
-				html: html,
-				summary: summary
-			},
-			'post'
-		);
+		it( 'Should refuse to edit with a bad token', async () => {
+			const token = 'dshfkjdsakf';
+			const html = '<p>save paction</p>';
+			const summary = 'save test workflow';
+			const error = await alice.actionError(
+				'visualeditoredit',
+				{
+					page: page,
+					paction: 'save',
+					token: token,
+					html: html,
+					summary: summary
+				},
+				'post'
+			);
 
-		assert.equal( error.code, 'badtoken' );
-	} );
+			assert.equal( error.code, 'badtoken' );
+		} );
 
-	it( 'Should edit page and save with Wikitext', async () => {
-		const token = await alice.token();
-		const html = '<p>save paction</p>';
-		const summary = 'save test workflow';
-		const wikitext = 'wikitext string in page test';
-		const result = await alice.action(
-			'visualeditoredit',
-			{
-				page: page,
-				paction: 'save',
-				token: token,
-				html: html,
-				wikitext: wikitext,
-				summary: summary
-			},
-			'post'
-		);
-		assert.equal( result.visualeditoredit.result, 'success' );
-		assert.include( result.visualeditoredit.content, wikitext );
+		it( 'Should use selser when editing', async () => {
+			const token = await alice.token();
+			let result;
+
+			// Create a page with messy wikitext
+			const originalWikitext = '*a\n* b\n*  <i>c</I>';
+
+			result = await alice.action(
+				'visualeditoredit',
+				{
+					page,
+					paction: 'save',
+					token,
+					wikitext: originalWikitext,
+					summary: 'editing wikitext'
+				},
+				'post'
+			);
+			assert.equal( result.visualeditoredit.result, 'success' );
+
+			// Fetch HTML for editing
+			result = await alice.action( 'visualeditor', { page, paction: 'parse' } );
+			assert.equal( result.visualeditor.result, 'success' );
+
+			let html = result.visualeditor.content;
+			const etag = result.visualeditor.etag;
+			const oldid = result.visualeditor.oldid;
+
+			// Append to HTML
+			html = html.replace( '</body>', '<p>More Text</p></body>' );
+			result = await alice.action(
+				'visualeditoredit',
+				{
+					page,
+					paction: 'save',
+					token,
+					html,
+					etag,
+					oldid,
+					summary: 'appending html'
+				},
+				'post'
+			);
+
+			// TODO: Make a test that will fail if the etag is not used to look up stashed HTML.
+			//       This test will pass even if stashing is not used, because in that case
+			//       the base revision will be re-rendered, and the HTML will still match.
+
+			assert.equal( result.visualeditoredit.result, 'success' );
+
+			// Fetch wikitext to check
+			result = await alice.action( 'visualeditor', { page, paction: 'wikitext' } );
+			assert.equal( result.visualeditor.result, 'success' );
+
+			// Make sure the new content was appended, but the wikitext was kept
+			// in its original messy state.
+			const newWikitext = result.visualeditor.content;
+			assert.include( newWikitext, originalWikitext );
+			assert.include( newWikitext, 'More Text' );
+		} );
 	} );
 
 	it( 'Should show page diff', async () => {
@@ -132,7 +174,7 @@ describe( 'Visual Editor API', function () {
 		const result = await alice.action(
 			'visualeditoredit',
 			{
-				page: page,
+				page: title,
 				paction: 'diff',
 				token: token,
 				html: html,
@@ -150,7 +192,7 @@ describe( 'Visual Editor API', function () {
 		const result = await alice.action(
 			'visualeditoredit',
 			{
-				page: page,
+				page: title,
 				paction: 'serialize',
 				token: token,
 				html: html,
@@ -171,7 +213,7 @@ describe( 'Visual Editor API', function () {
 		const result = await alice.action(
 			'visualeditoredit',
 			{
-				page: page,
+				page: title,
 				paction: 'serializeforcache',
 				token: token,
 				html: html,

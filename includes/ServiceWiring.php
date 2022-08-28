@@ -33,12 +33,12 @@ return [
 					VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => $isPrivateWiki
 				]
 			),
-			$services->getParsoidSiteConfig(),
-			$services->getParsoidPageConfigFactory(),
-			$services->getParsoidDataAccess(),
-			$services->getGlobalIdGenerator(),
 			$services->getHttpRequestFactory(),
-			LoggerFactory::getInstance( 'VisualEditor' )
+			LoggerFactory::getInstance( 'VisualEditor' ),
+			$services->getParsoidOutputStash(),
+			$services->getStatsdDataFactory(),
+			$services->getParsoidOutputAccess(),
+			$services->getHTMLTransformFactory()
 		);
 	},
 ];
