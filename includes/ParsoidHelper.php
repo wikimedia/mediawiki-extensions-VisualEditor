@@ -13,34 +13,14 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Config;
-use ConfigException;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
-use ParsoidVirtualRESTService;
 use Psr\Log\LoggerInterface;
-use RestbaseVirtualRESTService;
 use StatusValue;
 use Title;
-use VirtualRESTService;
-use VirtualRESTServiceClient;
-use Wikimedia\Assert\Assert;
 
 class ParsoidHelper {
-
-	/**
-	 * A direct Parsoid client for zero-configuration mode.
-	 * Initially `false`, then once we determine whether we're using zeroconf
-	 * mode or not then it will be a ?VisualEditorParsoidClient.
-	 * @var VisualEditorParsoidClient|null|false
-	 */
-	private $directClient = false;
-
-	/** @var VirtualRESTServiceClient */
-	private $serviceClient = null;
-
-	/** @var Config */
-	private $config;
 
 	/** @var LoggerInterface */
 	private $logger;
@@ -48,119 +28,31 @@ class ParsoidHelper {
 	/** @var string|false */
 	private $forwardCookies;
 
+	/** @var VisualEditorParsoidClientFactory */
+	private $veParsoidClientFactory;
+
 	/**
-	 * @param Config $config
+	 * NOTE: Config is retained for backwards compatibility with Extension:DiscussionTools.
+	 *
 	 * @param LoggerInterface $logger
 	 * @param string|false $forwardCookies
+	 * @param Config|null $config
+	 * @param VisualEditorParsoidClientFactory|null $clientFactory
 	 */
-	public function __construct( Config $config, LoggerInterface $logger, $forwardCookies ) {
-		$this->config = $config;
+	public function __construct(
+		LoggerInterface $logger,
+		$forwardCookies,
+		// NOTE: DiscussionTools is still setting this
+		?Config $config = null,
+		?VisualEditorParsoidClientFactory $clientFactory = null
+	) {
 		$this->logger = $logger;
 		$this->forwardCookies = $forwardCookies;
-	}
-
-	/**
-	 * Fetches the VisualEditorParsoidClient used for direct access to
-	 * Parsoid.
-	 * @return ?VisualEditorParsoidClient null if a VirtualRESTService is
-	 *  to be used.
-	 */
-	private function getDirectClient(): ?VisualEditorParsoidClient {
-		if ( $this->directClient === false ) {
-			// We haven't checked configuration yet.
-			// Check to see if any of the restbase-related configuration
-			// variables are set, and bail if so:
-			$vrs = $this->config->get( 'VirtualRestConfig' );
-			if ( isset( $vrs['modules'] ) &&
-				 ( isset( $vrs['modules']['restbase'] ) ||
-				  isset( $vrs['modules']['parsoid'] ) )
-			) {
-				$this->directClient = null;
-				return null;
-			}
-			// Eventually we'll do something fancy, but I'm hacking here...
-			global $wgVisualEditorParsoidAutoConfig;
-			if ( !$wgVisualEditorParsoidAutoConfig ) {
-				// explicit opt out
-				$this->directClient = null;
-				return null;
-			}
-			// Default to using the direct client.
-			$this->directClient = VisualEditorParsoidClient::factory();
-		}
-		return $this->directClient;
-	}
-
-	/**
-	 * Creates the virtual REST service object to be used in VE's API calls. The
-	 * method determines whether to instantiate a ParsoidVirtualRESTService or a
-	 * RestbaseVirtualRESTService object based on configuration directives: if
-	 * $wgVirtualRestConfig['modules']['restbase'] is defined, RESTBase is chosen,
-	 * otherwise Parsoid is used (either by using the MW Core config, or the
-	 * VE-local one).
-	 *
-	 * @return VirtualRESTService the VirtualRESTService object to use
-	 */
-	private function getVRSObject(): VirtualRESTService {
-		Assert::precondition(
-			!$this->getDirectClient(),
-			"Direct Parsoid access is configured but the VirtualRESTService was used"
-		);
-
-		global $wgVisualEditorParsoidAutoConfig;
-		// the params array to create the service object with
-		$params = [];
-		// the VRS class to use, defaults to Parsoid
-		$class = ParsoidVirtualRESTService::class;
-		// The global virtual rest service config object, if any
-		$vrs = $this->config->get( 'VirtualRestConfig' );
-		if ( isset( $vrs['modules'] ) && isset( $vrs['modules']['restbase'] ) ) {
-			// if restbase is available, use it
-			$params = $vrs['modules']['restbase'];
-			// backward compatibility
-			$params['parsoidCompat'] = false;
-			$class = RestbaseVirtualRESTService::class;
-		} elseif ( isset( $vrs['modules'] ) && isset( $vrs['modules']['parsoid'] ) ) {
-			// there's a global parsoid config, use it next
-			$params = $vrs['modules']['parsoid'];
-			$params['restbaseCompat'] = true;
-		} elseif ( $wgVisualEditorParsoidAutoConfig ) {
-			$params = $vrs['modules']['parsoid'] ?? [];
-			$params['restbaseCompat'] = true;
-			// forward cookies on private wikis
-			$params['forwardCookies'] = !MediaWikiServices::getInstance()
-				->getPermissionManager()->isEveryoneAllowed( 'read' );
-		} else {
-			// No global modules defined, so no way to contact the document server.
-			throw new ConfigException( "The VirtualRESTService for the document server is not defined;" .
-				" see https://www.mediawiki.org/wiki/Extension:VisualEditor" );
-		}
-		// merge the global and service-specific params
-		if ( isset( $vrs['global'] ) ) {
-			$params = array_merge( $vrs['global'], $params );
-		}
-		// set up cookie forwarding
-		if ( $params['forwardCookies'] ) {
-			$params['forwardCookies'] = $this->forwardCookies;
-		} else {
-			$params['forwardCookies'] = false;
-		}
-		// create the VRS object and return it
-		return new $class( $params );
-	}
-
-	/**
-	 * Creates the object which directs queries to the virtual REST service, depending on the path.
-	 *
-	 * @return VirtualRESTServiceClient
-	 */
-	private function getVRSClient(): VirtualRESTServiceClient {
-		if ( !$this->serviceClient ) {
-			$this->serviceClient = new VirtualRESTServiceClient(
-				MediaWikiServices::getInstance()->getHttpRequestFactory()->createMultiClient() );
-			$this->serviceClient->mount( '/restbase/', $this->getVRSObject() );
-		}
-		return $this->serviceClient;
+		// XXX: Extension:DiscussionTools is already instantiating this helper, so, we
+		//      need to carter for backwards compatibility, so just fall back to creating
+		//      from service locator.
+		$this->veParsoidClientFactory = $clientFactory ?? MediaWikiServices::getInstance()
+			->getService( VisualEditorParsoidClientFactory::SERVICE_NAME );
 	}
 
 	/**
@@ -195,7 +87,7 @@ class ParsoidHelper {
 			( $method === 'GET' ? 'query' : 'body' ) => $params,
 			'headers' => $reqheaders,
 		];
-		$response = $this->getVRSClient()->run( $request );
+		$response = $this->veParsoidClientFactory->getVRSClient( $this->forwardCookies )->run( $request );
 		if ( $response['error'] !== '' ) {
 			return StatusValue::newFatal( 'apierror-visualeditor-docserver-http-error',
 				wfEscapeWikiText( $response['error'] ) );
@@ -218,7 +110,7 @@ class ParsoidHelper {
 	 */
 	public function requestRestbasePageHtml( RevisionRecord $revision, ?Language $pageLanguage = null ): StatusValue {
 		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
-		$client = $this->getDirectClient();
+		$client = $this->veParsoidClientFactory->getDirectClient();
 		if ( $client ) {
 			return StatusValue::newGood( $client->getPageHtml(
 				$revision, $pageLanguage ?: $title->getPageLanguage()
@@ -251,7 +143,7 @@ class ParsoidHelper {
 	public function transformHTML(
 		Title $title, string $html, int $oldid = null, string $etag = null, ?Language $pageLanguage = null
 	): StatusValue {
-		$client = $this->getDirectClient();
+		$client = $this->veParsoidClientFactory->getDirectClient();
 		if ( $client ) {
 			return StatusValue::newGood( $client->transformHtml(
 				$title, $pageLanguage ?: $title->getPageLanguage(), $html, $oldid, $etag
@@ -308,7 +200,7 @@ class ParsoidHelper {
 		Title $title, string $wikitext, bool $bodyOnly, int $oldid = null, bool $stash = false,
 		?Language $pageLanguage = null
 	): StatusValue {
-		$client = $this->getDirectClient();
+		$client = $this->veParsoidClientFactory->getDirectClient();
 		if ( $client ) {
 			return StatusValue::newGood( $client->transformWikitext(
 				$title, $pageLanguage ?: $title->getPageLanguage(),

@@ -11,7 +11,6 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Language;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
@@ -19,13 +18,13 @@ use MediaWiki\Revision\SlotRecord;
 use ParserOutput;
 use RequestContext;
 use Title;
-use UIDGenerator;
 use WikiMap;
 use Wikimedia\Parsoid\Config\DataAccess;
 use Wikimedia\Parsoid\Config\SiteConfig;
 use Wikimedia\Parsoid\Core\SelserData;
 use Wikimedia\Parsoid\Parsoid;
 use Wikimedia\Parsoid\Utils\DOMUtils;
+use Wikimedia\UUID\GlobalIdGenerator;
 use WikitextContent;
 
 class VisualEditorParsoidClient {
@@ -48,35 +47,28 @@ class VisualEditorParsoidClient {
 	/** @var DataAccess */
 	protected $dataAccess;
 
-	/**
-	 * @return static
-	 */
-	public static function factory(): VisualEditorParsoidClient {
-		$services = MediaWikiServices::getInstance();
-		return new static(
-			$services->getMainConfig()->get( 'ParsoidSettings' ),
-			$services->getParsoidSiteConfig(),
-			$services->getParsoidPageConfigFactory(),
-			$services->getParsoidDataAccess()
-		);
-	}
+	/** @var GlobalIdGenerator */
+	private $globalIdGenerator;
 
 	/**
 	 * @param array $parsoidSettings
 	 * @param SiteConfig $siteConfig
 	 * @param PageConfigFactory $pageConfigFactory
 	 * @param DataAccess $dataAccess
+	 * @param GlobalIdGenerator $globalIdGenerator
 	 */
 	public function __construct(
 		array $parsoidSettings,
 		SiteConfig $siteConfig,
 		PageConfigFactory $pageConfigFactory,
-		DataAccess $dataAccess
+		DataAccess $dataAccess,
+		GlobalIdGenerator $globalIdGenerator
 	) {
 		$this->parsoidSettings = $parsoidSettings;
 		$this->siteConfig = $siteConfig;
 		$this->pageConfigFactory = $pageConfigFactory;
 		$this->dataAccess = $dataAccess;
+		$this->globalIdGenerator = $globalIdGenerator;
 	}
 
 	/**
@@ -122,7 +114,7 @@ class VisualEditorParsoidClient {
 		$out = $parsoid->wikitext2html(
 			$pageConfig, $envOptions, $headers, $parserOutput
 		);
-		$tid = UIDGenerator::newUUIDv1();
+		$tid = $this->globalIdGenerator->newUUIDv1();
 		$etag = "W/\"{$oldid}/{$tid}\"";
 		# XXX: we could cache this locally using the $etag as a key,
 		# then reuse it when transforming back to wikitext below.

@@ -39,9 +39,10 @@ trait ApiParsoidTrait {
 	protected function getHelper(): ParsoidHelper {
 		if ( !$this->helper ) {
 			$this->helper = new ParsoidHelper(
-				$this->getConfig(),
 				$this->getLogger(),
-				$this->getRequest()->getHeader( 'Cookie' )
+				$this->getRequest()->getHeader( 'Cookie' ),
+				$this->getConfig(),
+				MediaWikiServices::getInstance()->getService( VisualEditorParsoidClientFactory::SERVICE_NAME )
 			);
 		}
 		return $this->helper;
