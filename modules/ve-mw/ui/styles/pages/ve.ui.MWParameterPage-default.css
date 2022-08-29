@@ -12,10 +12,9 @@
 }
 
 .ve-ui-mwParameterPage-info {
-	float: left;
 	cursor: default;
-	width: 80%;
-	box-sizing: border-box;
+	/* To collapse the top margin of the first <p> in the .ve-ui-mwParameterPage-doc below */
+	margin-bottom: -0.4em;
 }
 
 .ve-ui-mwParameterPage-label {
