@@ -489,15 +489,9 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				// Add missing required and suggested parameters to each transclusion.
 				dialog.transclusionModel.addPromptedParameters();
 
-				dialog.loaded = true;
-				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
-
 				dialog.$body.append( dialog.bookletLayout.$element );
-
-				if ( !dialog.transclusionModel.isSingleTemplate() ) {
-					dialog.sidebar.hideAllUnusedParameters();
-				}
-				dialog.sidebar.initializeAllStickyHeaderHeights();
+				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+				dialog.loaded = true;
 			} );
 		}, this );
 };
