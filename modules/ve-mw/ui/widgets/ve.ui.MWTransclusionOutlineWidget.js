@@ -119,6 +119,11 @@ ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, new
 	} else {
 		this.$element.append( widget.$element );
 	}
+
+	if ( widget instanceof ve.ui.MWTransclusionOutlineTemplateWidget ) {
+		// We can do this only after the widget is visible on screen
+		widget.recalculateStickyHeaderHeight();
+	}
 };
 
 ve.ui.MWTransclusionOutlineWidget.prototype.hideAllUnusedParameters = function () {
