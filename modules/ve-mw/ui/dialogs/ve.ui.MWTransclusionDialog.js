@@ -556,6 +556,12 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 
 			this.updateModeActionState();
 			this.autoExpandSidebar();
+
+			if ( !this.transclusionModel.isSingleTemplate() ) {
+				this.sidebar.hideAllUnusedParameters();
+			}
+			// We can do this only after the widget is visible on screen
+			this.sidebar.initializeAllStickyHeaderHeights();
 		}, this );
 };
 
