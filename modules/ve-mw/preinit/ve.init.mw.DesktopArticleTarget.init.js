@@ -1664,12 +1664,20 @@
 		}
 
 		if ( uri.query.venotify ) {
+			var notify = uri.query.venotify;
+
+			// wgPostEdit can be "saved", "created", "restored" or null for null edits.
+			// TODO: Also set wgPostEdit on non-redirecting edits (T240041)
+			mw.config.set( 'wgPostEdit', notify );
+
 			// Load postEdit code to execute the queued event below, which will handle it once it arrives
 			mw.loader.load( 'mediawiki.action.view.postEdit' );
 
-			var notify = uri.query.venotify;
+			var messageSuffix;
 			if ( notify === 'saved' ) {
-				notify = mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? 'published' : 'saved';
+				messageSuffix = mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? 'published' : 'saved';
+			} else {
+				messageSuffix = notify;
 			}
 			mw.hook( 'postEdit' ).fire( {
 				// The following messages can be used here:
@@ -1677,7 +1685,7 @@
 				// * postedit-confirmation-saved
 				// * postedit-confirmation-created
 				// * postedit-confirmation-restored
-				message: mw.msg( 'postedit-confirmation-' + notify, mw.user )
+				message: mw.msg( 'postedit-confirmation-' + messageSuffix, mw.user )
 			} );
 
 			delete uri.query.venotify;
