@@ -641,7 +641,7 @@
 					// back button from breaking when used to exit VE. FIXME: there should be a better
 					// way to do this. See also similar code in the DesktopArticleTarget constructor.
 					history.replaceState( { tag: 'visualeditor' }, '', uri );
-					// Set veaction to edit
+					// Set action=edit or veaction=edit/editsource
 					history.pushState( { tag: 'visualeditor' }, '', mode === 'source' ? veEditSourceUri : veEditUri );
 				}
 
@@ -1227,22 +1227,27 @@
 
 			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode }, e.target );
 
-			if ( history.pushState && !( linkUri.query.veaction in veactionToMode ) ) {
-				// Replace the current state with one that is tagged as ours, to prevent the
-				// back button from breaking when used to exit VE. FIXME: there should be a better
-				// way to do this. See also similar code in the DesktopArticleTarget constructor.
-				history.replaceState( { tag: 'visualeditor' }, '', linkUri );
-				// Change the state to the href of the section link that was clicked. This saves
-				// us from having to figure out the section number again.
-				history.pushState( { tag: 'visualeditor' }, '', this.href );
-			}
+			if ( !active ) {
+				if ( uri.query.action !== 'edit' && !( uri.query.veaction in veactionToMode ) ) {
+					if ( history.pushState ) {
+						// Replace the current state with one that is tagged as ours, to prevent the
+						// back button from breaking when used to exit VE. FIXME: there should be a better
+						// way to do this. See also similar code in the DesktopArticleTarget constructor.
+						history.replaceState( { tag: 'visualeditor' }, '', uri );
+						// Use linkUri
+						history.pushState( { tag: 'visualeditor' }, '', linkUri );
+					}
+				}
+				// Update mw.Uri instance
+				uri = linkUri;
 
-			// Use section from URL
-			if ( section === undefined ) {
-				section = parseSection( linkUri.query.section );
+				// Use section from URL
+				if ( section === undefined ) {
+					section = parseSection( linkUri.query.section );
+				}
+				var tPromise = getTarget( mode, section );
+				activateTarget( mode, section, tPromise, e.target );
 			}
-			var tPromise = getTarget( mode, section );
-			activateTarget( mode, section, tPromise, e.target );
 		},
 
 		/**
