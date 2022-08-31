@@ -139,7 +139,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 je nedovoljen znak. Za dodajanje parametra ga odstranite.",
 	"visualeditor-dialog-transclusion-add-param-help": "Če jih poznate, vnesite [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters nedokumentirana imena parametrov]. Upoštevajte, da bodo uporabljeni samo parametri, ki jih predloga pozna. Podatki o obstoječih parametrih so morda na voljo na [[$1|strani predloge]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Ime parametra",
-	"visualeditor-dialog-transclusion-add-param-save": "Dodaj parameter",
+	"visualeditor-dialog-transclusion-add-param-save": "Dodaj",
 	"visualeditor-dialog-transclusion-add-template": "Dodaj predlogo",
 	"visualeditor-dialog-transclusion-add-template-save": "Dodaj",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Dodaj nedokumentirani parameter",
