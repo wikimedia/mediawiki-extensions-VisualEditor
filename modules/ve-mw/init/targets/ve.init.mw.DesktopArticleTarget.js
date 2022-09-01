@@ -1194,6 +1194,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 
 	this.currentUri = new mw.Uri( location.href );
 	var veaction = this.currentUri.query.veaction;
+	var action = this.currentUri.query.action;
+
+	if ( !veaction && action === 'edit' ) {
+		veaction = this.getDefaultMode() === 'source' ? 'editsource' : 'edit';
+	}
 
 	if ( this.isModeAvailable( 'source' ) && this.active ) {
 		if ( veaction === 'editsource' && this.getDefaultMode() === 'visual' ) {
