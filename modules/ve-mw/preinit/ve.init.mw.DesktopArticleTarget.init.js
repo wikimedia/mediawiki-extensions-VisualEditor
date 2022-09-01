@@ -670,6 +670,13 @@
 		return editor;
 	}
 
+	/**
+	 * Get the preferred editor for this edit page
+	 *
+	 * For the preferred *available* editor, use getAvailableEditPageEditor.
+	 *
+	 * @return {string} 'visualeditor' or 'wikitext'
+	 */
 	function getEditPageEditor() {
 		// This logic matches VisualEditorHooks::getEditPageEditor
 		// !!+ casts '0' to false
@@ -694,6 +701,28 @@
 			case 'remember-last':
 			default:
 				return getLastEditor();
+		}
+	}
+
+	/**
+	 * Get the preferred editor which is also available on this edit page
+	 *
+	 * @return {string} 'visual' or 'source'
+	 */
+	function getAvailableEditPageEditor() {
+		switch ( getEditPageEditor() ) {
+			case 'visualeditor':
+				if ( init.isVisualAvailable ) {
+					return 'visual';
+				}
+				if ( init.isWikitextAvailable ) {
+					return 'source';
+				}
+				return null;
+
+			case 'wikitext':
+			default:
+				return init.isWikitextAvailable ? 'source' : null;
 		}
 	}
 
@@ -760,11 +789,11 @@
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
 	function isOnlyTabVE() {
-		return conf.singleEditTab && getEditPageEditor() === 'visualeditor';
+		return conf.singleEditTab && getAvailableEditPageEditor() === 'visual';
 	}
 
 	function isOnlyTabWikitext() {
-		return conf.singleEditTab && getEditPageEditor() === 'wikitext';
+		return conf.singleEditTab && getAvailableEditPageEditor() === 'source';
 	}
 
 	init = {
@@ -1447,6 +1476,12 @@
 		} );
 	}
 
+	/**
+	 * Get the edit mode for the given URI
+	 *
+	 * @param {mw.Uri} editUri Edit URI
+	 * @return {string} 'visual' or 'source'
+	 */
 	function getEditModeFromUri( editUri ) {
 		if ( mw.config.get( 'wgDiscussionToolsStartNewTopicTool' ) ) {
 			// Avoid conflicts with DiscussionTools
@@ -1467,19 +1502,7 @@
 			if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
 				return null;
 			}
-			switch ( getEditPageEditor() ) {
-				case 'visualeditor':
-					if ( init.isVisualAvailable ) {
-						return 'visual';
-					}
-					if ( init.isWikitextAvailable ) {
-						return 'source';
-					}
-					return null;
-
-				case 'wikitext':
-					return init.isWikitextAvailable ? 'source' : null;
-			}
+			return getAvailableEditPageEditor();
 		}
 		return null;
 	}
