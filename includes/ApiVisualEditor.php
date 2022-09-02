@@ -784,7 +784,9 @@ class ApiVisualEditor extends ApiBase {
 			],
 			'section' => null,
 			'stash' => false,
-			'oldid' => null,
+			'oldid' => [
+				ParamValidator::PARAM_TYPE => 'integer',
+			],
 			'editintro' => null,
 			'pst' => false,
 			'preload' => null,
