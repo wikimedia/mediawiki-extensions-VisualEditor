@@ -31,6 +31,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\RestrictionStore;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\User\UserFactory;
@@ -52,6 +53,9 @@ class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
 	use ApiParsoidTrait;
 
+	/** @var RevisionLookup */
+	private $revisionLookup;
+
 	/** @var UserNameUtils */
 	private $userNameUtils;
 
@@ -61,7 +65,7 @@ class ApiVisualEditor extends ApiBase {
 	/** @var LinkRenderer */
 	private $linkRenderer;
 
-	/** @var userOptionsLookup */
+	/** @var UserOptionsLookup */
 	private $userOptionsLookup;
 
 	/** @var WatchlistManager */
@@ -94,6 +98,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
+	 * @param RevisionLookup $revisionLookup
 	 * @param UserNameUtils $userNameUtils
 	 * @param Parser $parser
 	 * @param LinkRenderer $linkRenderer
@@ -111,6 +116,7 @@ class ApiVisualEditor extends ApiBase {
 	public function __construct(
 		ApiMain $main,
 		$name,
+		RevisionLookup $revisionLookup,
 		UserNameUtils $userNameUtils,
 		Parser $parser,
 		LinkRenderer $linkRenderer,
@@ -127,6 +133,7 @@ class ApiVisualEditor extends ApiBase {
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
+		$this->revisionLookup = $revisionLookup;
 		$this->userNameUtils = $userNameUtils;
 		$this->parser = $parser;
 		$this->linkRenderer = $linkRenderer;
@@ -241,11 +248,6 @@ class ApiVisualEditor extends ApiBase {
 			$this->dieWithError( 'apierror-pagecannotexist' );
 		}
 
-		$parserParams = [];
-		if ( isset( $params['oldid'] ) ) {
-			$parserParams['oldid'] = $params['oldid'];
-		}
-
 		wfDebugLog( 'visualeditor', "called on '$title' with paction: '{$params['paction']}'" );
 		switch ( $params['paction'] ) {
 			case 'parse':
@@ -263,8 +265,21 @@ class ApiVisualEditor extends ApiBase {
 
 				// Get information about current revision
 				if ( $title->exists() ) {
-					$revision = $this->getValidRevision( $title, $parserParams['oldid'] ?? null );
-					$latestRevision = $this->getLatestRevision( $title );
+					$latestRevision = $this->revisionLookup->getRevisionByTitle( $title );
+					if ( !$latestRevision ) {
+						$this->dieWithError(
+							[ 'apierror-missingrev-title', wfEscapeWikiText( $title->getPrefixedText() ) ],
+							'nosuchrevid'
+						);
+					}
+					if ( isset( $params['oldid'] ) ) {
+						$revision = $this->revisionLookup->getRevisionById( $params['oldid'] );
+						if ( !$revision ) {
+							$this->dieWithError( [ 'apierror-nosuchrevid', $params['oldid'] ] );
+						}
+					} else {
+						$revision = $latestRevision;
+					}
 
 					$restoring = !$revision->isCurrent();
 					$baseTimestamp = $latestRevision->getTimestamp();

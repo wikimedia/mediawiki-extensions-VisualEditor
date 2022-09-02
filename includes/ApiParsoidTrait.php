@@ -41,46 +41,6 @@ trait ApiParsoidTrait {
 	}
 
 	/**
-	 * Get the latest revision of a title
-	 *
-	 * @param Title $title Page title
-	 * @return RevisionRecord A revision record
-	 */
-	protected function getLatestRevision( Title $title ): RevisionRecord {
-		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
-		$latestRevision = $revisionLookup->getRevisionByTitle( $title );
-		if ( $latestRevision !== null ) {
-			return $latestRevision;
-		}
-		$this->dieWithError( 'apierror-visualeditor-latestnotfound', 'latestnotfound' );
-	}
-
-	/**
-	 * Get a specific revision of a title
-	 *
-	 * If the oldid is ommitted or is 0, the latest revision will be fetched.
-	 *
-	 * If the oldid is invalid, an API error will be reported.
-	 *
-	 * @param Title|null $title Page title, not required if $oldid is used
-	 * @param int|string|null $oldid Optional revision ID.
-	 *  Should be an integer but will validate and convert user input strings.
-	 * @return RevisionRecord A revision record
-	 */
-	protected function getValidRevision( Title $title = null, $oldid = null ): RevisionRecord {
-		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
-		if ( $oldid === null || $oldid === 0 ) {
-			return $this->getLatestRevision( $title );
-		} else {
-			$revisionRecord = $revisionLookup->getRevisionById( $oldid );
-			if ( $revisionRecord ) {
-				return $revisionRecord;
-			}
-		}
-		$this->dieWithError( [ 'apierror-nosuchrevid', $oldid ], 'oldidnotfound' );
-	}
-
-	/**
 	 * @param array $response
 	 */
 	private function forwardErrorsAndCacheHeaders( array $response ) {

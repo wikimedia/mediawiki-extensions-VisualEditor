@@ -179,6 +179,7 @@
 		"visualeditor": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditor",
 			"services": [
+				"RevisionLookup",
 				"UserNameUtils",
 				"Parser",
 				"LinkRenderer",
