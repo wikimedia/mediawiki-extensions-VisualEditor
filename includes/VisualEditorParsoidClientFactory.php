@@ -8,6 +8,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
 use ParsoidVirtualRESTService;
+use Psr\Log\LoggerInterface;
 use RestbaseVirtualRESTService;
 use VirtualRESTService;
 use VirtualRESTServiceClient;
@@ -16,6 +17,9 @@ use Wikimedia\Parsoid\Config\DataAccess;
 use Wikimedia\Parsoid\Config\SiteConfig;
 use Wikimedia\UUID\GlobalIdGenerator;
 
+/**
+ * @since 1.40
+ */
 class VisualEditorParsoidClientFactory {
 
 	/**
@@ -63,8 +67,8 @@ class VisualEditorParsoidClientFactory {
 	/** @var ServiceOptions */
 	private $options;
 
-	/** @var VisualEditorParsoidClient|false|null */
-	private $directClient = false;
+	/** @var LoggerInterface */
+	private $logger;
 
 	/**
 	 * @param ServiceOptions $options
@@ -73,6 +77,7 @@ class VisualEditorParsoidClientFactory {
 	 * @param DataAccess $dataAccess
 	 * @param GlobalIdGenerator $globalIdGenerator
 	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param LoggerInterface $logger
 	 */
 	public function __construct(
 		ServiceOptions $options,
@@ -80,7 +85,8 @@ class VisualEditorParsoidClientFactory {
 		PageConfigFactory $pageConfigFactory,
 		DataAccess $dataAccess,
 		GlobalIdGenerator $globalIdGenerator,
-		HttpRequestFactory $httpRequestFactory
+		HttpRequestFactory $httpRequestFactory,
+		LoggerInterface $logger
 	) {
 		$this->options = $options;
 		$this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
@@ -90,51 +96,58 @@ class VisualEditorParsoidClientFactory {
 		$this->dataAccess = $dataAccess;
 		$this->globalIdGenerator = $globalIdGenerator;
 		$this->httpRequestFactory = $httpRequestFactory;
+		$this->logger = $logger;
 	}
 
 	/**
-	 * @return VisualEditorParsoidClient
+	 * Create a ParsoidClient for accessing Parsoid.
+	 *
+	 * @param string|string[]|false $cookiesToForward
+	 *
+	 * @return ParsoidClient
 	 */
-	private function getVisualEditorParsoidClient(): VisualEditorParsoidClient {
-		return new VisualEditorParsoidClient(
+	public function createParsoidClient( $cookiesToForward ): ParsoidClient {
+		// Default to using the direct client.
+		$client = $this->createDirectClient();
+
+		if ( !$client ) {
+			// Default to using the direct client.
+			$client = new VRSParsoidClient(
+				$this->getVRSClient( $cookiesToForward ),
+				$this->logger
+			);
+		}
+
+		return $client;
+	}
+
+	/**
+	 * @return ?ParsoidClient
+	 */
+	private function createDirectClient(): ?ParsoidClient {
+		// We haven't checked configuration yet.
+		// Check to see if any of the restbase-related configuration
+		// variables are set, and bail if so:
+		$vrs = $this->options->get( MainConfigNames::VirtualRestConfig );
+		if ( isset( $vrs['modules'] ) &&
+			( isset( $vrs['modules']['restbase'] ) ||
+				isset( $vrs['modules']['parsoid'] ) )
+		) {
+			return null;
+		}
+		// Eventually we'll do something fancy, but I'm hacking here...
+		if ( !$this->options->get( self::USE_AUTO_CONFIG ) ) {
+			// explicit opt out
+			return null;
+		}
+
+		return new DirectParsoidClient(
 			$this->options->get( MainConfigNames::ParsoidSettings ),
 			$this->siteConfig,
 			$this->pageConfigFactory,
 			$this->dataAccess,
 			$this->globalIdGenerator
 		);
-	}
-
-	/**
-	 * Fetches the VisualEditorParsoidClient used for direct access to
-	 * Parsoid.
-	 * @return ?VisualEditorParsoidClient null if a VirtualRESTService is
-	 *  to be used.
-	 */
-	public function getDirectClient(): ?VisualEditorParsoidClient {
-		if ( $this->directClient === false ) {
-			// We haven't checked configuration yet.
-			// Check to see if any of the restbase-related configuration
-			// variables are set, and bail if so:
-			$vrs = $this->options->get( MainConfigNames::VirtualRestConfig );
-			if ( isset( $vrs['modules'] ) &&
-				( isset( $vrs['modules']['restbase'] ) ||
-					isset( $vrs['modules']['parsoid'] ) )
-			) {
-				$this->directClient = null;
-				return null;
-			}
-			// Eventually we'll do something fancy, but I'm hacking here...
-			if ( !$this->options->get( self::USE_AUTO_CONFIG ) ) {
-				// explicit opt out
-				$this->directClient = null;
-				return null;
-			}
-			$veClient = $this->getVisualEditorParsoidClient();
-			// Default to using the direct client.
-			$this->directClient = $veClient;
-		}
-		return $this->directClient;
 	}
 
 	/**
@@ -151,9 +164,9 @@ class VisualEditorParsoidClientFactory {
 	 *
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
-	private function getVRSObject( $forwardCookies ): VirtualRESTService {
+	private function createVRSObject( $forwardCookies ): VirtualRESTService {
 		Assert::precondition(
-			!$this->getDirectClient(),
+			!$this->createDirectClient(),
 			"Direct Parsoid access is configured but the VirtualRESTService was used"
 		);
 
@@ -200,16 +213,16 @@ class VisualEditorParsoidClientFactory {
 	/**
 	 * Creates the object which directs queries to the virtual REST service, depending on the path.
 	 *
-	 * @param string|string[]|false $forwardCookies False if header is unset; otherwise the
+	 * @param string|string[]|false $cookiesToForward False if header is unset; otherwise the
 	 *  header value(s) as either a string (the default) or an array, if
 	 *  WebRequest::GETHEADER_LIST flag was set.
 	 *
 	 * @return VirtualRESTServiceClient
 	 */
-	public function getVRSClient( $forwardCookies ): VirtualRESTServiceClient {
+	private function getVRSClient( $cookiesToForward ): VirtualRESTServiceClient {
 		if ( !$this->serviceClient ) {
 			$this->serviceClient = new VirtualRESTServiceClient( $this->httpRequestFactory->createMultiClient() );
-			$this->serviceClient->mount( '/restbase/', $this->getVRSObject( $forwardCookies ) );
+			$this->serviceClient->mount( '/restbase/', $this->createVRSObject( $cookiesToForward ) );
 		}
 		return $this->serviceClient;
 	}

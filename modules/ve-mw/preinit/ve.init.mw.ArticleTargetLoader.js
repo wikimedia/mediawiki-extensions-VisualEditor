@@ -365,7 +365,7 @@
 				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );
 
 				var headers = {
-					// Should be synchronised with VisualEditorParsoidClient.php
+					// Should be synchronised with DirectParsoidClient.php
 					Accept: 'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.4.0"',
 					'Accept-Language': mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )

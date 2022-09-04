@@ -12,6 +12,7 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 return [
@@ -36,7 +37,8 @@ return [
 			$services->getParsoidPageConfigFactory(),
 			$services->getParsoidDataAccess(),
 			$services->getGlobalIdGenerator(),
-			$services->getHttpRequestFactory()
+			$services->getHttpRequestFactory(),
+			LoggerFactory::getInstance( 'VisualEditor' )
 		);
 	},
 ];

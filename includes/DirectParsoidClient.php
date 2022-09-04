@@ -11,6 +11,7 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Language;
+use MediaWiki\Page\PageIdentity;
 use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
@@ -27,7 +28,7 @@ use Wikimedia\Parsoid\Utils\DOMUtils;
 use Wikimedia\UUID\GlobalIdGenerator;
 use WikitextContent;
 
-class VisualEditorParsoidClient {
+class DirectParsoidClient implements ParsoidClient {
 	/**
 	 * Requested Parsoid HTML version.
 	 * Keep this in sync with the Accept: header in
@@ -75,13 +76,15 @@ class VisualEditorParsoidClient {
 	 * Request page HTML
 	 *
 	 * @param RevisionRecord $revision Page revision
-	 * @param Language $pageLanguage Page language
+	 * @param ?Language $language Desired output language
+	 *
 	 * @return array The response
 	 */
-	public function getPageHtml( RevisionRecord $revision, Language $pageLanguage ): array {
-		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
+	public function getPageHtml( RevisionRecord $revision, ?Language $language ): array {
+		$page = $revision->getPage();
+		$title = Title::castFromPageIdentity( $page );
 		$oldid = $revision->getId();
-		$lang = $pageLanguage->getCode();
+		$lang = $language->getCode();
 		// This is /page/html/$title/$revision?redirect=false&stash=true
 		// With Accept-Language: $lang
 		$envOptions = [
@@ -102,7 +105,7 @@ class VisualEditorParsoidClient {
 		// User here, it only currently affects the output in obscure
 		// corner cases; see PageConfigFactory::create() for more.
 		$pageConfig = $this->pageConfigFactory->create(
-			$title, $user, $revision, null, $lang, $this->parsoidSettings
+			$page, $user, $revision, null, $lang, $this->parsoidSettings
 		);
 		if ( $pageConfig->getRevisionContent() === null ) {
 			throw new \LogicException( "Specified revision does not exist" );
@@ -129,7 +132,7 @@ class VisualEditorParsoidClient {
 	/**
 	 * Transform HTML to wikitext via Parsoid
 	 *
-	 * @param Title $title The title of the page
+	 * @param PageIdentity $page The page the content belongs to
 	 * @param Language $pageLanguage Page language
 	 * @param string $html The HTML of the page to be transformed
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
@@ -137,7 +140,7 @@ class VisualEditorParsoidClient {
 	 * @return array The response, 'code', 'reason', 'headers' and 'body'
 	 */
 	public function transformHTML(
-		Title $title, Language $pageLanguage, string $html, ?int $oldid, ?string $etag
+		PageIdentity $page, Language $pageLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
 		// This is POST /transform/html/to/wikitext/$title/$oldid
 		// with header If-Match: $etag
@@ -152,7 +155,7 @@ class VisualEditorParsoidClient {
 		// User here, it only currently affects the output in obscure
 		// corner cases; see PageConfigFactory::create() for more.
 		$pageConfig = $this->pageConfigFactory->create(
-			$title, $user, $oldid, null, $lang, $this->parsoidSettings
+			$page, $user, $oldid, null, $lang, $this->parsoidSettings
 		);
 		$doc = DOMUtils::parseHTML( $html, true );
 		$vEdited = DOMUtils::extractInlinedContentVersion( $doc ) ??
@@ -171,13 +174,14 @@ class VisualEditorParsoidClient {
 		], $selserData );
 		return [
 			'body' => $wikitext,
+			'headers' => [],
 		];
 	}
 
 	/**
 	 * Transform wikitext to HTML via Parsoid.
 	 *
-	 * @param Title $title The title of the page to use as the parsing context
+	 * @param PageIdentity $page The page the content belongs to
 	 * @param Language $pageLanguage Page language
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
@@ -186,9 +190,11 @@ class VisualEditorParsoidClient {
 	 * @return array The response, 'code', 'reason', 'headers' and 'body'
 	 */
 	public function transformWikitext(
-		Title $title, Language $pageLanguage, string $wikitext,
+		PageIdentity $page, Language $pageLanguage, string $wikitext,
 		bool $bodyOnly, ?int $oldid, bool $stash
 	): array {
+		$title = Title::castFromPageIdentity( $page );
+
 		// This is POST /transform/wikitext/to/html/$title/$oldid
 		// with data: [
 		//   'wikitext' => $wikitext,
@@ -227,7 +233,7 @@ class VisualEditorParsoidClient {
 		// corner cases; see PageConfigFactory::create() for more.
 
 		// Create a mutable revision record and set to the desired wikitext.
-		$tmpRevision = new MutableRevisionRecord( $title );
+		$tmpRevision = new MutableRevisionRecord( $page );
 		$tmpRevision->setSlot(
 			SlotRecord::newUnsaved(
 				SlotRecord::MAIN,
@@ -236,7 +242,7 @@ class VisualEditorParsoidClient {
 		);
 
 		$pageConfig = $this->pageConfigFactory->create(
-			$title, $user, $tmpRevision, null, $lang, $this->parsoidSettings
+			$page, $user, $tmpRevision, null, $lang, $this->parsoidSettings
 		);
 		$parsoid = new Parsoid( $this->siteConfig, $this->dataAccess );
 		$parserOutput = new ParserOutput();

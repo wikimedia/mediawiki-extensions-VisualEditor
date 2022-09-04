@@ -3,8 +3,9 @@
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use MediaWiki\Config\ServiceOptions;
-use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClient;
+use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory;
+use MediaWiki\Extension\VisualEditor\VRSParsoidClient;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Parser\Parsoid\Config\DataAccess;
@@ -13,7 +14,8 @@ use MediaWiki\Parser\Parsoid\Config\SiteConfig;
 use MediaWikiIntegrationTestCase;
 use MultiHttpClient;
 use ParsoidVirtualRESTService;
-use VirtualRESTServiceClient;
+use Psr\Log\NullLogger;
+use Wikimedia\TestingAccessWrapper;
 use Wikimedia\UUID\GlobalIdGenerator;
 
 /**
@@ -45,48 +47,22 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 			$this->createNoOpMock( PageConfigFactory::class ),
 			$this->createNoOpMock( DataAccess::class ),
 			$this->createNoOpMock( GlobalIdGenerator::class ),
-			$httpRequestFactory
+			$httpRequestFactory,
+			new NullLogger()
 		);
 	}
 
-	/**
-	 * @covers ::getVisualEditorParsoidClient
-	 */
-	public function testGetDirectClient() {
-		$optionValues = [
-			MainConfigNames::ParsoidSettings => [],
-			MainConfigNames::VirtualRestConfig => [ 'modules' => [] ],
-			VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-			VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
-		];
-
-		$veParsoidClient = $this->newClientFactory( $optionValues )
-			->getDirectClient();
-
-		$this->assertInstanceOf( VisualEditorParsoidClient::class, $veParsoidClient );
-	}
-
-	public function provideGetDirectCLientReturnsNull() {
+	public function provideGetClient() {
 		yield [
 			[
 				MainConfigNames::ParsoidSettings => [],
 				MainConfigNames::VirtualRestConfig => [
-					'modules' => [ 'restbase' => '' ]
+					'modules' => []
 				],
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
 				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
-		];
-
-		yield [
-			[
-				MainConfigNames::ParsoidSettings => [],
-				MainConfigNames::VirtualRestConfig => [
-					'modules' => [ 'parsoid' => '' ]
-				],
-				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
-			]
+			DirectParsoidClient::class
 		];
 
 		yield [
@@ -94,37 +70,44 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 				MainConfigNames::ParsoidSettings => [],
 				MainConfigNames::VirtualRestConfig => [],
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => false
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider provideGetDirectCLientReturnsNull
-	 * @covers ::getVisualEditorParsoidClient
-	 */
-	public function testGetDirectClientReturnsNull( $optionValues ) {
-		$veParsoidClient = $this->newClientFactory( $optionValues )->getDirectClient();
-
-		$this->assertNull( $veParsoidClient );
-	}
-
-	/**
-	 * @covers ::getVRSClient
-	 */
-	public function testGetVRSClient() {
-		$optionValues = [
-			MainConfigNames::ParsoidSettings => [],
-			MainConfigNames::VirtualRestConfig => [
-				'modules' => [ 'restbase' => [] ]
+				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
-			VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-			VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
+			DirectParsoidClient::class
 		];
 
-		$vrsClient = $this->newClientFactory( $optionValues )->getVRSClient( false );
+		yield [
+			[
+				MainConfigNames::ParsoidSettings => [],
+				MainConfigNames::VirtualRestConfig => [
+					'modules' => [ 'restbase' => [] ]
+				],
+				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
+				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
+			],
+			VRSParsoidClient::class
+		];
 
-		$this->assertInstanceOf( VirtualRESTServiceClient::class, $vrsClient );
+		yield [
+			[
+				MainConfigNames::ParsoidSettings => [],
+				MainConfigNames::VirtualRestConfig => [
+					'modules' => [ 'parsoid' => [] ]
+				],
+				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
+				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
+			],
+			VRSParsoidClient::class
+		];
+	}
+
+	/**
+	 * @dataProvider provideGetClient
+	 * @covers ::createParsoidClient
+	 */
+	public function testGetClient( $optionValues, $expectedType ) {
+		$client = $this->newClientFactory( $optionValues )->createParsoidClient( false );
+
+		$this->assertInstanceOf( $expectedType, $client );
 	}
 
 	public function provideCookieToForward() {
@@ -137,7 +120,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 
 	/**
 	 * @dataProvider provideCookieToForward
-	 * @covers ::getVRSClient
+	 * @covers ::createParsoidClient
 	 */
 	public function testGetVRSClientForwardedCookies( $cookie, $expectedCookie ) {
 		$optionValues = [
@@ -154,7 +137,9 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 			VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 		];
 
-		$vrsClient = $this->newClientFactory( $optionValues )->getVRSClient( $cookie );
+		$parsoidClient = $this->newClientFactory( $optionValues )->createParsoidClient( $cookie );
+		$vrsClient = TestingAccessWrapper::newFromObject( $parsoidClient )->vrsClient;
+
 		$mountAndService = $vrsClient->getMountAndService( '/restbase/' );
 
 		// Assert that the mount and service are correct
