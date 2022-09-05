@@ -10,7 +10,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Config;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
@@ -24,28 +23,9 @@ use WebRequest;
 trait ApiParsoidTrait {
 
 	/**
-	 * @var ParsoidHelper
-	 */
-	private $helper = null;
-
-	/**
 	 * @var LoggerInterface
 	 */
 	private $logger = null;
-
-	/**
-	 * @return ParsoidHelper
-	 */
-	protected function getHelper(): ParsoidHelper {
-		if ( !$this->helper ) {
-			$this->helper = new ParsoidHelper(
-				$this->getLogger(),
-				$this->getRequest()->getHeader( 'Cookie' ),
-				MediaWikiServices::getInstance()->getService( VisualEditorParsoidClientFactory::SERVICE_NAME )
-			);
-		}
-		return $this->helper;
-	}
 
 	/**
 	 * @return LoggerInterface
@@ -102,22 +82,18 @@ trait ApiParsoidTrait {
 	}
 
 	/**
-	 * @param StatusValue $status
+	 * @param array $response
 	 */
-	private function forwardErrorsAndCacheHeaders( StatusValue $status ) {
-		if ( !$status->isOK() ) {
-			$this->dieStatus( $status );
+	private function forwardErrorsAndCacheHeaders( array $response ) {
+		if ( isset( $response['error'] ) ) {
+			$this->dieWithError( $response['error'] );
 		}
 
-		$response = $status->getValue();
-		// Only set when using RESTBase
-		if ( isset( $response['code'] ) && $response['code'] === 200 ) {
-			// If response was served directly from Varnish, use the response
-			// (RP) header to declare the cache hit and pass the data to the client.
-			$headers = $response['headers'];
-			if ( isset( $headers['x-cache'] ) && strpos( $headers['x-cache'], 'hit' ) !== false ) {
-				$this->getRequest()->response()->header( 'X-Cache: cached-response=true' );
-			}
+		// If response was received directly from Varnish, use the response
+		// (RP) header to declare the cache hit and pass the data to the client.
+		$headers = $response['headers'] ?? [];
+		if ( isset( $headers['x-cache'] ) && strpos( $headers['x-cache'], 'hit' ) !== false ) {
+			$this->getRequest()->response()->header( 'X-Cache: cached-response=true' );
 		}
 	}
 
@@ -131,11 +107,11 @@ trait ApiParsoidTrait {
 		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
 		$lang = self::getPageLanguage( $title );
 
-		$status = $this->getHelper()->requestRestbasePageHtml( $revision, $lang );
+		$response = $this->getParsoidClient()->getPageHtml( $revision, $lang );
 
-		$this->forwardErrorsAndCacheHeaders( $status );
+		$this->forwardErrorsAndCacheHeaders( $response );
 
-		return $status->getValue();
+		return $response;
 	}
 
 	/**
@@ -152,11 +128,11 @@ trait ApiParsoidTrait {
 	): array {
 		$lang = self::getPageLanguage( $title );
 
-		$status = $this->getHelper()->transformHTML( $title, $html, $oldid, $etag, $lang );
+		$response = $this->getParsoidClient()->transformHTML( $title, $lang, $html, $oldid, $etag );
 
-		$this->forwardErrorsAndCacheHeaders( $status );
+		$this->forwardErrorsAndCacheHeaders( $response );
 
-		return $status->getValue();
+		return $response;
 	}
 
 	/**
@@ -174,11 +150,18 @@ trait ApiParsoidTrait {
 	): array {
 		$lang = self::getPageLanguage( $title );
 
-		$status = $this->getHelper()->transformWikitext( $title, $wikitext, $bodyOnly, $oldid, $stash, $lang );
+		$response = $this->getParsoidClient()->transformWikitext(
+			$title,
+			$lang,
+			$wikitext,
+			$bodyOnly,
+			$oldid,
+			$stash
+		);
 
-		$this->forwardErrorsAndCacheHeaders( $status );
+		$this->forwardErrorsAndCacheHeaders( $response );
 
-		return $status->getValue();
+		return $response;
 	}
 
 	/**
@@ -199,6 +182,12 @@ trait ApiParsoidTrait {
 	}
 
 	/**
+	 * @see VisualEditorParsoidClientFactory
+	 * @return ParsoidClient
+	 */
+	abstract protected function getParsoidClient(): ParsoidClient;
+
+	/**
 	 * @see ApiBase
 	 * @param string|array|Message $msg See ApiErrorFormatter::addError()
 	 * @param string|null $code See ApiErrorFormatter::addError()
@@ -214,12 +203,6 @@ trait ApiParsoidTrait {
 	 * @return never
 	 */
 	abstract public function dieStatus( StatusValue $status );
-
-	/**
-	 * @see ContextSource
-	 * @return Config
-	 */
-	abstract public function getConfig();
 
 	/**
 	 * @see ContextSource

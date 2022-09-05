@@ -57,6 +57,9 @@ class ApiVisualEditorEdit extends ApiBase {
 	/** @var WikiPageFactory */
 	private $wikiPageFactory;
 
+	/** @var VisualEditorParsoidClientFactory */
+	private $parsoidClientFactory;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name Name of this module
@@ -66,6 +69,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * @param PageEditStash $pageEditStash
 	 * @param SkinFactory $skinFactory
 	 * @param WikiPageFactory $wikiPageFactory
+	 * @param VisualEditorParsoidClientFactory $parsoidClientFactory
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -75,7 +79,8 @@ class ApiVisualEditorEdit extends ApiBase {
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		PageEditStash $pageEditStash,
 		SkinFactory $skinFactory,
-		WikiPageFactory $wikiPageFactory
+		WikiPageFactory $wikiPageFactory,
+		VisualEditorParsoidClientFactory $parsoidClientFactory
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -85,6 +90,16 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->pageEditStash = $pageEditStash;
 		$this->skinFactory = $skinFactory;
 		$this->wikiPageFactory = $wikiPageFactory;
+		$this->parsoidClientFactory = $parsoidClientFactory;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function getParsoidClient(): ParsoidClient {
+		return $this->parsoidClientFactory->createParsoidClient(
+			$this->getRequest()->getHeader( 'Cookie' )
+		);
 	}
 
 	/**
@@ -644,4 +659,5 @@ class ApiVisualEditorEdit extends ApiBase {
 	public function isWriteMode() {
 		return true;
 	}
+
 }

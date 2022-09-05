@@ -190,7 +190,8 @@
 				"RestrictionStore",
 				"WikiPageFactory",
 				"HookContainer",
-				"UserFactory"
+				"UserFactory",
+				"VisualEditor.ParsoidClientFactory"
 			]
 		},
 		"visualeditoredit": {
@@ -201,7 +202,8 @@
 				"StatsdDataFactory",
 				"PageEditStash",
 				"SkinFactory",
-				"WikiPageFactory"
+				"WikiPageFactory",
+				"VisualEditor.ParsoidClientFactory"
 			]
 		}
 	},

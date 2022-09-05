@@ -88,6 +88,9 @@ class ApiVisualEditor extends ApiBase {
 	/** @var UserFactory */
 	private $userFactory;
 
+	/** @var VisualEditorParsoidClientFactory */
+	private $parsoidClientFactory;
+
 	/**
 	 * @param ApiMain $main
 	 * @param string $name
@@ -103,6 +106,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param WikiPageFactory $wikiPageFactory
 	 * @param HookContainer $hookContainer
 	 * @param UserFactory $userFactory
+	 * @param VisualEditorParsoidClientFactory $parsoidClientFactory
 	 */
 	public function __construct(
 		ApiMain $main,
@@ -118,7 +122,8 @@ class ApiVisualEditor extends ApiBase {
 		RestrictionStore $restrictionStore,
 		WikiPageFactory $wikiPageFactory,
 		HookContainer $hookContainer,
-		UserFactory $userFactory
+		UserFactory $userFactory,
+		VisualEditorParsoidClientFactory $parsoidClientFactory
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -134,6 +139,16 @@ class ApiVisualEditor extends ApiBase {
 		$this->wikiPageFactory = $wikiPageFactory;
 		$this->hookContainer = $hookContainer;
 		$this->userFactory = $userFactory;
+		$this->parsoidClientFactory = $parsoidClientFactory;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function getParsoidClient(): ParsoidClient {
+		return $this->parsoidClientFactory->createParsoidClient(
+			$this->getRequest()->getHeader( 'Cookie' )
+		);
 	}
 
 	/**
@@ -465,7 +480,7 @@ class ApiVisualEditor extends ApiBase {
 					}
 
 					// Deal with cascading edit protection
-					list( $sources, $restrictions ) = $this->restrictionStore->getCascadeProtectionSources( $title );
+					[ $sources, $restrictions ] = $this->restrictionStore->getCascadeProtectionSources( $title );
 					if ( isset( $restrictions['edit'] ) ) {
 						$protectedClasses[] = ' mw-textarea-cprotected';
 
