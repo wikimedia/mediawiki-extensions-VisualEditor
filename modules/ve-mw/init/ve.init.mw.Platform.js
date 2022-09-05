@@ -170,11 +170,11 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 };
 
 ve.init.mw.Platform.prototype.createLocalStorage = function () {
-	return this.createListStorage( mw.storage );
+	return this.createConflictableStorage( mw.storage );
 };
 
 ve.init.mw.Platform.prototype.createSessionStorage = function () {
-	return this.createListStorage( mw.storage.session );
+	return this.createConflictableStorage( mw.storage.session );
 };
 
 /**

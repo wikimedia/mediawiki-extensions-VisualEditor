@@ -715,7 +715,7 @@
 				"lib/ve/src/ve.utils.client.js",
 				"lib/ve/src/init/ve.init.js",
 				"lib/ve/src/init/ve.init.SafeStorage.js",
-				"lib/ve/src/init/ve.init.ListStorage.js",
+				"lib/ve/src/init/ve.init.ConflictableStorage.js",
 				"lib/ve/src/init/ve.init.Platform.js",
 				"lib/ve/src/init/ve.init.Target.js"
 			],
