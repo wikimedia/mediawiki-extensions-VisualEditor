@@ -41,7 +41,6 @@ trait ApiParsoidTrait {
 			$this->helper = new ParsoidHelper(
 				$this->getLogger(),
 				$this->getRequest()->getHeader( 'Cookie' ),
-				$this->getConfig(),
 				MediaWikiServices::getInstance()->getService( VisualEditorParsoidClientFactory::SERVICE_NAME )
 			);
 		}

@@ -12,7 +12,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Config;
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
@@ -32,18 +31,13 @@ class ParsoidHelper {
 	private $veParsoidClientFactory;
 
 	/**
-	 * NOTE: Config is retained for backwards compatibility with Extension:DiscussionTools.
-	 *
 	 * @param LoggerInterface $logger
 	 * @param string|false $forwardCookies
-	 * @param Config|null $config
 	 * @param VisualEditorParsoidClientFactory|null $clientFactory
 	 */
 	public function __construct(
 		LoggerInterface $logger,
 		$forwardCookies,
-		// NOTE: DiscussionTools is still setting this
-		?Config $config = null,
 		?VisualEditorParsoidClientFactory $clientFactory = null
 	) {
 		$this->logger = $logger;
