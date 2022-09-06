@@ -39,10 +39,8 @@
 		plugins = [],
 		welcomeDialogDisabled = false,
 		educationPopupsDisabled = false,
-		$targetContainer = $(
-			document.querySelector( '[data-mw-ve-target-container]' ) ||
-			document.getElementById( 'content' )
-		);
+		// Defined after document-ready below
+		$targetContainer = null;
 
 	function showLoading( /* mode */ ) {
 		if ( isLoading ) {
@@ -778,9 +776,6 @@
 	var pageCanLoadEditor = isViewPage || isEditPage;
 	var pageIsProbablyEditable = mw.config.get( 'wgIsProbablyEditable' ) ||
 		mw.config.get( 'wgRelevantPageIsProbablyEditable' );
-	if ( pageCanLoadEditor ) {
-		$targetContainer.addClass( 've-init-mw-desktopArticleTarget-targetContainer' );
-	}
 
 	// Cast "0" (T89513)
 	var enable = !!+mw.user.options.get( 'visualeditor-enable' );
@@ -1508,6 +1503,14 @@
 	}
 
 	$( function () {
+		$targetContainer = $(
+			document.querySelector( '[data-mw-ve-target-container]' ) ||
+			document.getElementById( 'content' )
+		);
+		if ( pageCanLoadEditor ) {
+			$targetContainer.addClass( 've-init-mw-desktopArticleTarget-targetContainer' );
+		}
+
 		var showWikitextWelcome = true,
 			section = parseSection( uri.query.section );
 
