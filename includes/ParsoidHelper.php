@@ -13,7 +13,6 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Language;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use Psr\Log\LoggerInterface;
 use StatusValue;
@@ -33,20 +32,16 @@ class ParsoidHelper {
 	/**
 	 * @param LoggerInterface $logger
 	 * @param string|false $forwardCookies
-	 * @param VisualEditorParsoidClientFactory|null $clientFactory
+	 * @param VisualEditorParsoidClientFactory $clientFactory
 	 */
 	public function __construct(
 		LoggerInterface $logger,
 		$forwardCookies,
-		?VisualEditorParsoidClientFactory $clientFactory = null
+		VisualEditorParsoidClientFactory $clientFactory
 	) {
 		$this->logger = $logger;
 		$this->forwardCookies = $forwardCookies;
-		// XXX: Extension:DiscussionTools is already instantiating this helper, so, we
-		//      need to carter for backwards compatibility, so just fall back to creating
-		//      from service locator.
-		$this->veParsoidClientFactory = $clientFactory ?? MediaWikiServices::getInstance()
-			->getService( VisualEditorParsoidClientFactory::SERVICE_NAME );
+		$this->veParsoidClientFactory = $clientFactory;
 	}
 
 	/**
