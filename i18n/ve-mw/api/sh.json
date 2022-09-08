@@ -45,7 +45,7 @@
 	"apihelp-visualeditoredit-param-html": "HTML poslan Parsoidu u zamjenu za wikitest.",
 	"apihelp-visualeditoredit-param-minor": "Označite kao manje uređivanje.",
 	"apihelp-visualeditoredit-param-needcheck": "Kada snimate, postavite ovaj parametar ako revizija ima cirkulrane probleme. To će rezultati u tagiranom uređivanju.",
-	"apihelp-visualeditoredit-param-oldid": "Broj revizija za korištenje. Zadano za posljednju reviziju. Koristite 0 za novu stranicu.",
+	"apihelp-visualeditoredit-param-oldid": "Broj izmjena za korištenje. Zadano za posljednju izmjenu.",
 	"apihelp-visualeditoredit-param-paction": "Akcija za izvesti.",
 	"apihelp-visualeditoredit-param-page": "Stranica na kojoj se izvode akcije.",
 	"apihelp-visualeditoredit-param-section": "Na kome podnaslovu treba djelovati.",

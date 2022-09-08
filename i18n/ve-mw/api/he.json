@@ -43,7 +43,7 @@
 	"apihelp-visualeditoredit-param-html": "איזה HTML לשלוח לפרסואיד כדי לקבל חזרה קוד ויקי.",
 	"apihelp-visualeditoredit-param-minor": "דגל עריכה משנית.",
 	"apihelp-visualeditoredit-param-needcheck": "בעת השמירה יש להגדיר את הפרמטר הזה אם בגרסה יכולות להיות בעיות שליחה וחזרה (roundtrip). כתוצאה מזה העריכה תתויג.",
-	"apihelp-visualeditoredit-param-oldid": "באיזה מספר גרסה להשתמש. ברירת המחדל היא הגרסה האחרונה. יש להשתמש ב־0 לדף חדש.",
+	"apihelp-visualeditoredit-param-oldid": "באיזה מספר גרסה להשתמש. ברירת המחדל היא הגרסה האחרונה.",
 	"apihelp-visualeditoredit-param-paction": "איזו פעולה לבצע.",
 	"apihelp-visualeditoredit-param-page": "על איזה דף לבצע את הפעולה.",
 	"apihelp-visualeditoredit-param-section": "על איזה פרק לפעול.",
