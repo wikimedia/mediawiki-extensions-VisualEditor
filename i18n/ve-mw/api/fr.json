@@ -52,7 +52,7 @@
 	"apihelp-visualeditoredit-param-html": "HTML à envoyer à Parsoid en échange de wikicode.",
 	"apihelp-visualeditoredit-param-minor": "Marquage d’édition mineure.",
 	"apihelp-visualeditoredit-param-needcheck": "Lors de l’enregistrement, régler ce paramètre si la version pourrait rencontrer des problèmes de conversion inverse. Ceci ajoutera un balisage de cette version.",
-	"apihelp-visualeditoredit-param-oldid": "Le numéro de version à utiliser. Par défaut celui de la dernière version. Utilisez 0 pour créer une nouvelle page.",
+	"apihelp-visualeditoredit-param-oldid": "Le numéro de version à utiliser. Par défaut celui de la dernière version.",
 	"apihelp-visualeditoredit-param-paction": "Action à effectuer.",
 	"apihelp-visualeditoredit-param-page": "La page sur laquelle les modifications doivent être effectuées.",
 	"apihelp-visualeditoredit-param-section": "La section sur laquelle agir.",
