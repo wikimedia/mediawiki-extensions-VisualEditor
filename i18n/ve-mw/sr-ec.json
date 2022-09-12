@@ -59,7 +59,7 @@
 	"visualeditor-dialog-media-info-artist": "{{GENDER:$1|Отпремио|Отпремила}}: $1",
 	"visualeditor-dialog-media-info-audiofile": "Звучна датотека",
 	"visualeditor-dialog-media-info-created": "Направљено: $1",
-	"visualeditor-dialog-media-info-meta-artist": "Уметник: $1",
+	"visualeditor-dialog-media-info-meta-artist": "Аутор: $1",
 	"visualeditor-dialog-media-info-moreinfo": "Више информација",
 	"visualeditor-dialog-media-info-readmore": "Детаљније",
 	"visualeditor-dialog-media-info-uploaded": "Отпремљено: $1",
