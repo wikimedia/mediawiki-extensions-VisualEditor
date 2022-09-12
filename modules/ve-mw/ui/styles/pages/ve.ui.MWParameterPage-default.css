@@ -5,14 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwParameterPage.oo-ui-pageLayout {
-	padding-top: 0;
-	padding-bottom: 0;
-	position: relative;
-}
-
 .ve-ui-mwParameterPage-info {
-	cursor: default;
 	/* To collapse the top margin of the first <p> in the .ve-ui-mwParameterPage-doc below */
 	margin-bottom: -0.4em;
 }
@@ -23,7 +16,6 @@
 }
 
 .ve-ui-mwParameterPage-doc {
-	font-size: 0.9em;
 	line-height: 1.3em;
 	overflow-wrap: break-word;
 }
@@ -32,29 +24,11 @@
 	margin-top: 0;
 }
 
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc {
-	font-size: inherit;
-	padding: 0;
-	clear: both;
-}
-
 .ve-ui-mwParameterPage-doc-required,
 .ve-ui-mwParameterPage-doc-deprecated,
 .ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc-example {
 	font-style: italic;
 	color: #54595d;
-}
-
-.ve-ui-mwParameterPage-field {
-	position: relative;
-	clear: both;
-}
-
-.ve-ui-mwParameterPage .oo-ui-textInputWidget {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	box-sizing: border-box;
 }
 
 .ve-ui-mwParameterPage .oo-ui-textInputWidget textarea {
