@@ -64,7 +64,7 @@
 	"visualeditor-descriptionpagelink": "Project:Editor Visual",
 	"visualeditor-dialog-media-alttext-checkbox": "Usar a legenda como texto alternativo",
 	"visualeditor-dialog-media-alttext-section": "Texto alternativo",
-	"visualeditor-dialog-media-alttext-section-help": "Pode utilizar esta função para escrever uma descrição textual para as pessoas que não conseguem visualizar o item. Esta deve ser suficiente para o entendimento e informações dadas pelo item multimédia. Isto é vital para utilizadores cegos e outras pessoas que utilizem programas de leitura de ecrã ou navegadores de texto.",
+	"visualeditor-dialog-media-alttext-section-help": "Pode utilizar esta função para fornecer uma descrição textual às pessoas que não conseguem ver o elemento. Esta descrição deve ser suficiente para que se compreenda o objetivo e a informação fornecida pelo elemento multimédia. Isto é vital para utilizadores invisuais e outras pessoas que utilizem programas de leitura do ecrã ou navegadores textuais.",
 	"visualeditor-dialog-media-change-image": "Alterar imagem",
 	"visualeditor-dialog-media-choose-image": "Usar esta imagem",
 	"visualeditor-dialog-media-content-description-link": "(página de descrição)",
