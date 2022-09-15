@@ -17,7 +17,7 @@
 	"visualeditor-beta-warning": "VisualEditor 'beta' нұсқада. Сіз бағдарламалық жасақтама шектеулеріне кездесуіңіз не беттің кейбір бөліктерін өңдей алмауыңыз мүмкін. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-tool}}\" дегенді таңдаңыз.",
 	"visualeditor-browserwarning": "Сіздің қолданып отырған шолғышыңызды VisualEditor ресми түрде қолдамайды.",
 	"visualeditor-ca-createlocaldescriptionsource": "Жергілікті сипаттама көзін қосу",
-	"visualeditor-ca-createsource": "Кодын бастау",
+	"visualeditor-ca-createsource": "Қайнарын құру",
 	"visualeditor-ca-editlocaldescriptionsource": "Жергілікті сипаттама қайнарын өңдеу",
 	"visualeditor-ca-editsource": "Кодын өңдеу",
 	"visualeditor-ca-editsource-section": "кодын өңдеу",

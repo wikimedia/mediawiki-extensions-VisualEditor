@@ -40,7 +40,7 @@
 	"apihelp-visualeditoredit-param-html": "HTML a inviar a Parsoid in excambio de wikitexto.",
 	"apihelp-visualeditoredit-param-minor": "Marca de modification minor.",
 	"apihelp-visualeditoredit-param-needcheck": "Quando tu salveguarda, activa iste parametro si le version pote haber problemas de conversion inverse (\"roundtrip\"). Isto adjungera un etiquetta al modification.",
-	"apihelp-visualeditoredit-param-oldid": "Le numero de version a usar. Predefinite como le ultime version. Usa 0 pro un nove pagina.",
+	"apihelp-visualeditoredit-param-oldid": "Le numero de version a usar. Predefinite como le ultime version.",
 	"apihelp-visualeditoredit-param-paction": "Action a exequer.",
 	"apihelp-visualeditoredit-param-page": "Le pagina sur le qual exequer actiones.",
 	"apihelp-visualeditoredit-param-section": "Le section sur le qual ager.",
