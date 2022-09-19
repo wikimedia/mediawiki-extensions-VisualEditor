@@ -87,7 +87,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 			'code' => 200,
 			'headers' => [],
 			'body' => '<html><body>Response body</body></html>',
-			'error'	=> null,
+			'error'	=> '',
 		];
 		$vrsClient = $this->createVRSParsoidClient(
 			[
@@ -110,7 +110,8 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 
 		$resp = $vrsClient->getPageHtml( $revision, $language );
 		$this->assertIsArray( $resp );
-		$this->assertArrayEquals( $resp, $response );
+		$this->assertFalse( isset( $resp['error'] ) );
+		$this->assertArrayEquals( $resp, $response, false, true );
 	}
 
 	/**
@@ -135,7 +136,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 				'code' => '500',
 				'headers' => [],
 				'body' => '{}',
-				'error'	=> null,
+				'error'	=> '',
 			],
 
 			[
@@ -152,7 +153,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 				'body' => json_encode( [
 					'detail' => 'Another error message',
 				] ),
-				'error'	=> null,
+				'error'	=> '',
 			],
 
 			[
@@ -160,6 +161,22 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 				'404',
 				'Another error message'
 			]
+		];
+
+		yield [
+			[
+				'code' => '205',
+				'headers' => [
+					'Location' => 'http://example.com/'
+				],
+				'body' => json_encode( [
+					'detail' => 'bla bla bla',
+				] ),
+				'error'	=> '',
+			],
+
+			// not an error
+			null
 		];
 	}
 
@@ -228,7 +245,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertIsArray( $resp );
-		$this->assertArrayEquals( $resp, $response );
+		$this->assertArrayEquals( $resp, $response, false, true );
 	}
 
 	/** @return Generator */
@@ -266,7 +283,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 				'Accept-Language' => $langCode,
 			],
 			'body' => '<html><body>Response body</body></html>',
-			'reason' => null,
+			'error' => '',
 		];
 
 		$vrsClient = $this->createVRSParsoidClient(
@@ -288,6 +305,6 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertIsArray( $resp );
-		$this->assertArrayEquals( $resp, $response );
+		$this->assertArrayEquals( $resp, $response, false, true );
 	}
 }
