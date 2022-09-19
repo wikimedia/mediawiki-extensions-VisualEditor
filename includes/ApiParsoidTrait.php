@@ -85,7 +85,7 @@ trait ApiParsoidTrait {
 	 * @param array $response
 	 */
 	private function forwardErrorsAndCacheHeaders( array $response ) {
-		if ( isset( $response['error'] ) ) {
+		if ( !empty( $response['error'] ) ) {
 			$this->dieWithError( $response['error'] );
 		}
 
