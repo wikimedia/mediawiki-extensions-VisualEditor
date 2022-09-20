@@ -406,10 +406,6 @@
 				"accesskey-ca-editsource",
 				"accesskey-ca-ve-edit",
 				"pipe-separator",
-				"postedit-confirmation-created",
-				"postedit-confirmation-published",
-				"postedit-confirmation-restored",
-				"postedit-confirmation-saved",
 				"tooltip-ca-createsource",
 				"tooltip-ca-edit",
 				"tooltip-ca-editsource",
@@ -500,6 +496,8 @@
 				"lastmodifiedat",
 				"mw-widgets-abandonedit",
 				"pagetitle",
+				"postedit-confirmation-published",
+				"postedit-confirmation-saved",
 				"visualeditor-section-body-placeholder",
 				"visualeditor-section-title-placeholder"
 			]
