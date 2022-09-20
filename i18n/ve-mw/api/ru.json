@@ -53,7 +53,7 @@
 	"apihelp-visualeditoredit-param-html": "HTML для отправки в Parsoid, чтобы конвертировать в вики-текст.",
 	"apihelp-visualeditoredit-param-minor": "Флаг для малой правки.",
 	"apihelp-visualeditoredit-param-needcheck": "При сохранении установите этот параметр, если версия может иметь циклические проблемы. Это приведёт к тому, что правка будет помечена.",
-	"apihelp-visualeditoredit-param-oldid": "Номер используемой версии. По умолчанию в последней версии. Используйте 0 для новой страницы.",
+	"apihelp-visualeditoredit-param-oldid": "Номер используемой версии. По умолчанию в последней версии.",
 	"apihelp-visualeditoredit-param-paction": "Действие, которое необходимо выполнить.",
 	"apihelp-visualeditoredit-param-page": "Страница, на которой необходимо выполнить действие.",
 	"apihelp-visualeditoredit-param-section": "Раздел c которым взаимодействовать.",
