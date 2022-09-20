@@ -4,7 +4,8 @@
 			"Arystanbek",
 			"Нұрлан Рахымжанов",
 			"TMg",
-			"СеніңШешең"
+			"СеніңШешең",
+			"Darzz"
 		]
 	},
 	"tooltip-ca-createsource": "Бұл беттің қайнар мәтінін бастау",
@@ -18,8 +19,8 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Жергілікті сипаттама көзін қосу",
 	"visualeditor-ca-createsource": "Қайнарын құру",
 	"visualeditor-ca-editlocaldescriptionsource": "Жергілікті сипаттама қайнарын өңдеу",
-	"visualeditor-ca-editsource": "Кодын өңдеу",
-	"visualeditor-ca-editsource-section": "кодын өңдеу",
+	"visualeditor-ca-editsource": "Қайнарын өңдеу",
+	"visualeditor-ca-editsource-section": "қайнарын өңдеу",
 	"visualeditor-ca-ve-create": "VisualEditor",
 	"visualeditor-ca-ve-edit": "VisualEditor",
 	"visualeditor-ca-ve-edit-section": "VisualEditor",

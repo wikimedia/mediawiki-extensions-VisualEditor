@@ -17,7 +17,9 @@
 			"Orf3us",
 			"Tarjeimo",
 			"TMg",
-			"Abuluntu"
+			"Abuluntu",
+			"Avilena",
+			"EdoAug"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -390,7 +392,7 @@
 	"visualeditor-savedialog-label-publish-short-start": "Publiser …",
 	"visualeditor-savedialog-label-report": "Rapportér problem",
 	"visualeditor-savedialog-label-resolve-conflict": "Løs konflikt",
-	"visualeditor-savedialog-label-resume-editing": "Fortsett redigering",
+	"visualeditor-savedialog-label-resume-editing": "Fortsett å redigere",
 	"visualeditor-savedialog-label-review": "Gå gjennom endringene dine",
 	"visualeditor-savedialog-label-review-good": "Tilbake til lagringsskjemaet",
 	"visualeditor-savedialog-label-save-short": "Lagre",
