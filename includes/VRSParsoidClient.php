@@ -77,8 +77,8 @@ class VRSParsoidClient implements ParsoidClient {
 				'apierror-visualeditor-docserver-http-error',
 				wfEscapeWikiText( $response['error'] )
 			];
-		} elseif ( $response['code'] !== 200 ) {
-			// error null, code not 200
+		} elseif ( $response['code'] >= 400 ) {
+			// no error message, but code indicates an error
 			$json = json_decode( $response['body'], true );
 			$text = $json['detail'] ?? '(no message)';
 			$response['error'] = [
@@ -86,7 +86,11 @@ class VRSParsoidClient implements ParsoidClient {
 				$response['code'],
 				wfEscapeWikiText( $text )
 			];
+		} else {
+			// Needed because $response['error'] may be '' on success!
+			$response['error'] = null;
 		}
+
 		return $response;
 	}
 
