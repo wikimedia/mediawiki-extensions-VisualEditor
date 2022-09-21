@@ -2,5 +2,10 @@
 	"root": true,
 	"extends": [
 		"wikimedia/server"
-	]
+	],
+	"env": {
+		"commonjs": true,
+		"node": true,
+		"mocha": true
+	}
 }
