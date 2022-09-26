@@ -3,25 +3,19 @@
 const { action, assert, utils } = require( 'api-testing' );
 
 describe( 'Visual Editor API', function () {
-	// const titles = ( list ) => list.map( ( p ) => utils.dbkey( p.title ) );
-
 	const title = utils.title( 'VisualEditor' );
-	const newPage = utils.title( 'VisualEditorNew' );
 
 	let alice;
 	let pageInfo;
 
 	before( async () => {
-		alice = await action.alice();
-
 		const textX = 'Hello World! {{Template Requests}}';
 
-		pageInfo = await
-		alice.edit( title, { text: textX } );
-
+		alice = await action.alice();
+		pageInfo = await alice.edit( title, { text: textX } );
 	} );
-	// https://en.wikipedia.org/w/api.php?action=visualeditor&format=json&page=Davido%20Adeleke&paction=metadata
 
+	// VisualEditor: 'visualeditor' action API ///
 	it( 'can load metadata', async () => {
 		const result = await alice.action( 'visualeditor', { page: title, paction: 'metadata' } );
 		assert.equal( result.visualeditor.oldid, pageInfo.newrevid );
@@ -52,6 +46,9 @@ describe( 'Visual Editor API', function () {
 		assert.equal( result.visualeditor.result, 'success' );
 	} );
 
+	// VisualEditor edit: 'visualeditoredit' action API ///
+	const page = utils.title( 'VisualEditorNew' );
+
 	it( 'Should create page, edit and save page', async () => {
 		const token = await alice.token();
 		const html = '<p>save paction</p>';
@@ -59,8 +56,87 @@ describe( 'Visual Editor API', function () {
 		const result = await alice.action(
 			'visualeditoredit',
 			{
-				page: newPage,
+				page: page,
 				paction: 'save',
+				token: token,
+				html: html,
+				summary: summary
+			},
+			'post'
+		);
+
+		assert.equal( result.visualeditoredit.result, 'success' );
+	} );
+
+	it( 'Should edit page and save with Wikitext', async () => {
+		const token = await alice.token();
+		const html = '<p>save paction</p>';
+		const summary = 'save test workflow';
+		const wikitext = 'wikitext string in page test';
+		const result = await alice.action(
+			'visualeditoredit',
+			{
+				page: page,
+				paction: 'save',
+				token: token,
+				html: html,
+				wikitext: wikitext,
+				summary: summary
+			},
+			'post'
+		);
+		assert.equal( result.visualeditoredit.result, 'success' );
+		assert.include( result.visualeditoredit.content, wikitext );
+	} );
+
+	it( 'Should show page diff', async () => {
+		const token = await alice.token();
+		const html = '<p>diff paction</p>';
+		const summary = 'diff page test workflow';
+		const result = await alice.action(
+			'visualeditoredit',
+			{
+				page: page,
+				paction: 'diff',
+				token: token,
+				html: html,
+				summary: summary
+			},
+			'post'
+		);
+		assert.equal( result.visualeditoredit.result, 'success' );
+	} );
+
+	it( 'Should serialize page', async () => {
+		const token = await alice.token();
+		const html = '<h2>serialize paction test</h2>';
+		const summary = 'serialize page test workflow';
+		const result = await alice.action(
+			'visualeditoredit',
+			{
+				page: page,
+				paction: 'serialize',
+				token: token,
+				html: html,
+				summary: summary
+			},
+			'post'
+		);
+		assert.equal( result.visualeditoredit.result, 'success' );
+
+		// Trim to remove trailing newline in the content
+		assert.equal( result.visualeditoredit.content.trim(), '== serialize paction test ==' );
+	} );
+
+	it( 'Should serialize page for cache', async () => {
+		const token = await alice.token();
+		const html = '<p>serialize for cache paction</p>';
+		const summary = 'serializeforcache create page test workflow';
+		const result = await alice.action(
+			'visualeditoredit',
+			{
+				page: page,
+				paction: 'serializeforcache',
 				token: token,
 				html: html,
 				summary: summary
