@@ -6,6 +6,7 @@ describe( 'Visual Editor API', function () {
 	// const titles = ( list ) => list.map( ( p ) => utils.dbkey( p.title ) );
 
 	const title = utils.title( 'VisualEditor' );
+	const newPage = utils.title( 'VisualEditorNew' );
 
 	let alice;
 	let pageInfo;
@@ -49,5 +50,23 @@ describe( 'Visual Editor API', function () {
 	it( 'can load metadata', async () => {
 		const result = await alice.action( 'visualeditor', { page: title, paction: 'wikitext' } );
 		assert.equal( result.visualeditor.result, 'success' );
+	} );
+
+	it( 'Should create page, edit and save page', async () => {
+		const token = await alice.token();
+		const html = '<p>save paction</p>';
+		const summary = 'save test workflow';
+		const result = await alice.action(
+			'visualeditoredit',
+			{
+				page: newPage,
+				paction: 'save',
+				token: token,
+				html: html,
+				summary: summary
+			},
+			'post'
+		);
+		assert.equal( result.visualeditoredit.result, 'success' );
 	} );
 } );
