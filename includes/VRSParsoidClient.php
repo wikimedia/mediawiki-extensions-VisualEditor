@@ -98,13 +98,13 @@ class VRSParsoidClient implements ParsoidClient {
 	 * Request page HTML
 	 *
 	 * @param RevisionRecord $revision Page revision
-	 * @param ?Language $language Desired output language
+	 * @param ?Language $targetLanguage The desired output language
 	 *
 	 * @return array The response
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $language = null ): array {
+	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage = null ): array {
 		$title = Title::castFromPageIdentity( $revision->getPage() );
-		$language = $language ?: $title->getPageLanguage();
+		$targetLanguage = $targetLanguage ?: $title->getPageLanguage();
 
 		return $this->requestRestbase(
 			'GET',
@@ -113,7 +113,7 @@ class VRSParsoidClient implements ParsoidClient {
 			'?redirect=false&stash=true',
 			[],
 			[
-				'Accept-Language' => $language->getCode(),
+				'Accept-Language' => $targetLanguage->getCode(),
 			]
 		);
 	}
@@ -122,14 +122,15 @@ class VRSParsoidClient implements ParsoidClient {
 	 * Transform HTML to wikitext via Parsoid
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $pageLanguage Page language
+	 * @param Language $targetLanguage The desired output language
 	 * @param string $html The HTML of the page to be transformed
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param ?string $etag The ETag to set in the HTTP request header
+	 *
 	 * @return array The response, 'code', 'error', 'headers' and 'body'
 	 */
 	public function transformHTML(
-		PageIdentity $page, Language $pageLanguage, string $html, ?int $oldid, ?string $etag
+		PageIdentity $page, Language $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
 		$title = Title::castFromPageIdentity( $page );
 
@@ -161,7 +162,7 @@ class VRSParsoidClient implements ParsoidClient {
 			'POST', $path, $data,
 			[
 				'If-Match' => $etag,
-				'Accept-Language' => $pageLanguage->getCode(),
+				'Accept-Language' => $targetLanguage->getCode(),
 			]
 		);
 	}
@@ -170,15 +171,16 @@ class VRSParsoidClient implements ParsoidClient {
 	 * Transform wikitext to HTML via Parsoid.
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $pageLanguage Page language
+	 * @param Language $targetLanguage The desired output language
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
+	 *
 	 * @return array The response, 'code', 'reason', 'headers' and 'body'
 	 */
 	public function transformWikitext(
-		PageIdentity $page, Language $pageLanguage, string $wikitext,
+		PageIdentity $page, Language $targetLanguage, string $wikitext,
 		bool $bodyOnly, ?int $oldid, bool $stash
 	): array {
 		$title = Title::castFromPageIdentity( $page );
@@ -193,7 +195,7 @@ class VRSParsoidClient implements ParsoidClient {
 				'stash' => $stash ? 1 : 0
 			],
 			[
-				'Accept-Language' => $pageLanguage->getCode(),
+				'Accept-Language' => $targetLanguage->getCode(),
 			]
 		);
 	}

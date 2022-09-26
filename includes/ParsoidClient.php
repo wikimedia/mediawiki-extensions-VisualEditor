@@ -11,17 +11,17 @@ interface ParsoidClient {
 	 * Request page HTML
 	 *
 	 * @param RevisionRecord $revision Page revision
-	 * @param Language|null $language Desired output language
+	 * @param Language|null $targetLanguage Desired output language
 	 *
 	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $language ): array;
+	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array;
 
 	/**
 	 * Transform HTML to wikitext via Parsoid
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $pageLanguage Page language
+	 * @param Language $targetLanguage The desired output language
 	 * @param string $html The HTML of the page to be transformed
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param ?string $etag The ETag to set in the HTTP request header
@@ -30,7 +30,7 @@ interface ParsoidClient {
 	 */
 	public function transformHTML(
 		PageIdentity $page,
-		Language $pageLanguage,
+		Language $targetLanguage,
 		string $html,
 		?int $oldid,
 		?string $etag
@@ -40,7 +40,7 @@ interface ParsoidClient {
 	 * Transform wikitext to HTML via Parsoid.
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $pageLanguage Page language
+	 * @param Language $targetLanguage The desired output language
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
@@ -50,7 +50,7 @@ interface ParsoidClient {
 	 */
 	public function transformWikitext(
 		PageIdentity $page,
-		Language $pageLanguage,
+		Language $targetLanguage,
 		string $wikitext,
 		bool $bodyOnly,
 		?int $oldid,

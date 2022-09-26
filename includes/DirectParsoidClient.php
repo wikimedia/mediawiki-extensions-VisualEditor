@@ -76,15 +76,15 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Request page HTML
 	 *
 	 * @param RevisionRecord $revision Page revision
-	 * @param ?Language $language Desired output language
+	 * @param ?Language $targetLanguage Desired output language
 	 *
 	 * @return array The response
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $language ): array {
+	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array {
 		$page = $revision->getPage();
 		$title = Title::castFromPageIdentity( $page );
 		$oldid = $revision->getId();
-		$lang = $language->getCode();
+		$lang = $targetLanguage->getCode();
 		// This is /page/html/$title/$revision?redirect=false&stash=true
 		// With Accept-Language: $lang
 		$envOptions = [
@@ -133,19 +133,20 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Transform HTML to wikitext via Parsoid
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $pageLanguage Page language
+	 * @param Language $targetLanguage The desired output language
 	 * @param string $html The HTML of the page to be transformed
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param ?string $etag The ETag to set in the HTTP request header
+	 *
 	 * @return array The response, 'code', 'reason', 'headers' and 'body'
 	 */
 	public function transformHTML(
-		PageIdentity $page, Language $pageLanguage, string $html, ?int $oldid, ?string $etag
+		PageIdentity $page, Language $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
 		// This is POST /transform/html/to/wikitext/$title/$oldid
 		// with header If-Match: $etag
 		// and data: [ 'html' => $html ]
-		$lang = $pageLanguage->getCode();
+		$lang = $targetLanguage->getCode();
 		// $pageConfig originally created in
 		// ParsoidHandler::tryToCreatePageConfig
 		$user = RequestContext::getMain()->getUser();
@@ -182,15 +183,16 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Transform wikitext to HTML via Parsoid.
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $pageLanguage Page language
+	 * @param Language $targetLanguage The desired output language
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
+	 *
 	 * @return array The response, 'code', 'reason', 'headers' and 'body'
 	 */
 	public function transformWikitext(
-		PageIdentity $page, Language $pageLanguage, string $wikitext,
+		PageIdentity $page, Language $targetLanguage, string $wikitext,
 		bool $bodyOnly, ?int $oldid, bool $stash
 	): array {
 		$title = Title::castFromPageIdentity( $page );
@@ -203,7 +205,7 @@ class DirectParsoidClient implements ParsoidClient {
 		// ]
 		// T267990: Stashing features are not implemented in zero-conf mode;
 		// they will eventually be replaced by PET's ParserCache/stash mechanism
-		$lang = $pageLanguage->getCode();
+		$lang = $targetLanguage->getCode();
 		$envOptions = [
 			// $attribs['envOptions'] is created in ParsoidHandler::getRequestAttributes()
 			'prefix' => WikiMap::getCurrentWikiId(),
