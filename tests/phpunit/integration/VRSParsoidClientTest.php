@@ -58,10 +58,13 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 		yield 'No language code, fallback to en' => [ null ];
 	}
 
-	private function createLanguage( $langCode ) {
+	private function createLanguage( $langCode, $allowNull = false ) {
 		if ( $langCode === null ) {
 			$language = $this->getServiceContainer()->getContentLanguage();
 			$langCode = $language->getCode();
+			if ( $allowNull ) {
+				$language = null;
+			}
 		} else {
 			$language = $this->createNoOpMock(
 				Language::class,
@@ -78,7 +81,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideLanguageCodes
 	 */
 	public function testGetPageHtml( $langCode ) {
-		[ $language, $langCode ] = $this->createLanguage( $langCode );
+		[ $language, $langCode ] = $this->createLanguage( $langCode, true );
 		$revision = $this->getExistingTestPage( 'VRSParsoidClient' )
 			->getRevisionRecord();
 		$revId = $revision->getId();

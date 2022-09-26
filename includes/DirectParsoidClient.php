@@ -83,6 +83,7 @@ class DirectParsoidClient implements ParsoidClient {
 	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array {
 		$page = $revision->getPage();
 		$title = Title::castFromPageIdentity( $page );
+		$targetLanguage = $targetLanguage ?: $title->getPageLanguage();
 		$oldid = $revision->getId();
 		$lang = $targetLanguage->getCode();
 		// This is /page/html/$title/$revision?redirect=false&stash=true
