@@ -102,7 +102,7 @@ class VRSParsoidClient implements ParsoidClient {
 	 *
 	 * @return array The response
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage = null ): array {
+	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array {
 		$title = Title::castFromPageIdentity( $revision->getPage() );
 		$targetLanguage = $targetLanguage ?: $title->getPageLanguage();
 
