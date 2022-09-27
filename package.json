@@ -4,6 +4,7 @@
 	"private": true,
 	"description": "Build tools for the VisualEditor-MediaWiki extension.",
 	"scripts": {
+		"api-testing": "mocha --timeout 0 --parallel --recursive tests/api-testing",
 		"test": "grunt test",
 		"doc": "jsduck",
 		"postdoc": "grunt copy:jsduck",
@@ -29,6 +30,7 @@
 		"grunt-tyops": "0.1.0",
 		"jimp": "0.13.0",
 		"mocha": "5.2.0",
+		"api-testing": "1.5.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
 		"stylelint-config-wikimedia": "0.13.0",
