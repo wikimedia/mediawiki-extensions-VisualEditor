@@ -25,5 +25,5 @@
 	"visualeditor-welcomedialog-content-thanks": "Hvala, ker pomagate svetu odkrivati novo znanje!",
 	"visualeditor-welcomedialog-switch": "Preklop na urejevalnik izvorne kode",
 	"visualeditor-welcomedialog-switch-ve": "Preklopi na vizualni urejevalnik",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobrodošli}} v {{GRAMMAR:dajalnik|$2}}"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Pozdravljeni}} v {{GRAMMAR:dajalnik|$2}}"
 }

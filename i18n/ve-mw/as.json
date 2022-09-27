@@ -199,6 +199,7 @@
 	"visualeditor-dialog-transclusion-reset-confirmation-cancel": "সম্পাদনা অব্যাহত ৰাখক",
 	"visualeditor-dialog-transclusion-reset-confirmation-reset": "সাঁচ আঁতৰাওক",
 	"visualeditor-dialog-transclusion-feedback-message": "সাঁচ সন্ধান ফলাফল উন্নত কৰিবলৈ শেহতীয়া কাম সম্পূৰ্ণ কৰা হৈছে। পৰিৱৰ্তনবোৰৰ বিষয়ে অধিক জানিবলৈ বা মতামত দিবলৈ [//meta.wikimedia.org/wiki/WMDE_Technical_Wishes/Finding_and_inserting_templates প্ৰকল্পৰ পৃষ্ঠালৈ যাওক]।",
+	"visualeditor-dialog-transclusion-wikitext": "ৱিকিপাঠ্য",
 	"visualeditor-dialogbutton-media-tooltip": "চিত্ৰ আৰু মিডিয়া",
 	"visualeditor-dialogbutton-meta-tooltip": "পৃষ্ঠা ছেটিং",
 	"visualeditor-dialogbutton-template-tooltip": "সাঁচ",
