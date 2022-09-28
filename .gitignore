@@ -17,6 +17,7 @@ vendor
 screenshots/*.png
 .eslintcache
 tests/selenium/log
+.api-testing.config.json
 
 # OS
 .DS_Store

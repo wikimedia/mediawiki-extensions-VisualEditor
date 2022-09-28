@@ -4,6 +4,8 @@
 	"private": true,
 	"description": "Build tools for the VisualEditor-MediaWiki extension.",
 	"scripts": {
+		"eslint": "eslint --cache --ext .js,.json .",
+		"eslint-fix": "eslint --cache --ext .js,.json --fix .",
 		"api-testing": "mocha --timeout 0 --parallel --recursive tests/api-testing",
 		"test": "grunt test",
 		"doc": "jsduck",
