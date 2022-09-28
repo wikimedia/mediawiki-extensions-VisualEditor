@@ -329,7 +329,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		this.documentReady( this.doc );
 	}
 
-	if ( [ 'edit', 'submit' ].indexOf( mw.util.getParamValue( 'action' ) ) !== -1 ) {
+	if ( !this.isViewPage ) {
 		$( '#firstHeading' ).text(
 			mw.Title.newFromText( this.getPageName() ).getPrefixedText()
 		);
