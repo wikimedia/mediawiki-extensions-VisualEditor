@@ -1246,8 +1246,8 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	// eslint-disable-next-line no-jquery/no-html
-	this.$editableContent.find( '.mw-parser-output' ).first().html( html );
+	// eslint-disable-next-line no-jquery/no-append-html
+	this.$editableContent.find( '.mw-parser-output' ).first().replaceWith( html );
 	mw.hook( 'wikipage.content' ).fire( this.$editableContent );
 	if ( displayTitle ) {
 		// eslint-disable-next-line no-jquery/no-html
