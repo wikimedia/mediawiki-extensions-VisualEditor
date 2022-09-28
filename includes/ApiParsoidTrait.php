@@ -16,7 +16,6 @@ use MediaWiki\Revision\RevisionRecord;
 use Message;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use StatusValue;
 use Title;
 use WebRequest;
 
@@ -196,13 +195,6 @@ trait ApiParsoidTrait {
 	 * @return never
 	 */
 	abstract public function dieWithError( $msg, $code = null, $data = null, $httpCode = null );
-
-	/**
-	 * @see ApiBase
-	 * @param StatusValue $status
-	 * @return never
-	 */
-	abstract public function dieStatus( StatusValue $status );
 
 	/**
 	 * @see ContextSource
