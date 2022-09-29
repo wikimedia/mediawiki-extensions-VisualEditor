@@ -5,10 +5,14 @@
 			"Munkhzaya.E",
 			"Sembuk",
 			"Wisdom",
-			"Буцах"
+			"Буцах",
+			"Chinneeb"
 		]
 	},
 	"tooltip-ca-ve-edit": "Энэ хуудсыг VisualEditor-р засварлах",
+	"visualeditor-ca-createsource": "Кодоор үүсгэх",
+	"visualeditor-ca-editsource": "Кодоор засварлах",
+	"visualeditor-ca-editsource-section": "кодоор засварлах",
 	"visualeditor-dialog-media-change-image": "Ялгаатай зураг сонгоно уу",
 	"visualeditor-dialog-media-type-none": "Үндсэн",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Нуугдсан категориуд",
