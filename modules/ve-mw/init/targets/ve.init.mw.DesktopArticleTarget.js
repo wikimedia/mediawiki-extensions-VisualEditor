@@ -1231,8 +1231,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
-	html, categoriesHtml, displayTitle, lastModified, contentSub, sections
+	html, categoriesHtml, displayTitle, lastModified /* , contentSub, sections */
 ) {
+	// Parent method
+	ve.init.mw.DesktopArticleTarget.super.prototype.replacePageContent.apply( this, arguments );
+
 	if ( lastModified ) {
 		// If we were not viewing the most recent revision before (a requirement
 		// for lastmod to have been added by MediaWiki), we will be now.
@@ -1251,24 +1254,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 		) );
 	}
 
-	// eslint-disable-next-line no-jquery/no-append-html
-	this.$editableContent.find( '.mw-parser-output' ).first().replaceWith( html );
-	mw.hook( 'wikipage.content' ).fire( this.$editableContent );
-	if ( displayTitle ) {
-		// eslint-disable-next-line no-jquery/no-html
-		$( '#firstHeading' ).html( displayTitle );
-	}
-
-	var $categories = $( $.parseHTML( categoriesHtml ) );
-	mw.hook( 'wikipage.categories' ).fire( $categories );
-	$( '#catlinks' ).replaceWith( $categories );
 	this.$originalCategories = null;
-
-	// eslint-disable-next-line no-jquery/no-html
-	$( '#contentSub' ).html( contentSub );
-	this.setRealRedirectInterface();
-
-	mw.hook( 'wikipage.tableOfContents' ).fire( sections );
 
 	// Re-set any edit section handlers now that the page content has been replaced
 	mw.libs.ve.setupEditLinks();
