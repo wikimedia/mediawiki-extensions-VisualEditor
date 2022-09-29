@@ -12,6 +12,7 @@
 	"apihelp-visualeditor-param-cachekey": "Za serializacijo ali razliko uporabite rezultat predhodnega zahtevka serializeforchache s tem ključem. Povozi $1html.",
 	"apihelp-visualeditor-param-editintro": "Urejanje intra za dodajanje obvestil.",
 	"apihelp-visualeditor-param-etag": "ETag za pošiljanje.",
+	"apihelp-visualeditor-param-format": "Oblika izhoda.",
 	"apihelp-visualeditor-param-html": "HTML za pošiljanje Parsoidu za pretvorbo v wikibesedilo.",
 	"apihelp-visualeditor-param-oldid": "Številka redakcije za uporabo (po privzetem zadnja redakcija).",
 	"apihelp-visualeditor-param-paction": "Dejanje za izvedbo.",
