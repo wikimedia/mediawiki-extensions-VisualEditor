@@ -19,16 +19,38 @@ describe( 'Visual Editor API', function () {
 	it( 'can load metadata', async () => {
 		const result = await alice.action( 'visualeditor', { page: title, paction: 'metadata' } );
 		assert.equal( result.visualeditor.oldid, pageInfo.newrevid );
+		assert.nestedProperty( result.visualeditor, 'copyrightWarning' );
+		assert.nestedProperty( result.visualeditor, 'checkboxesDef' );
+		assert.nestedProperty( result.visualeditor, 'checkboxesMessages' );
+		assert.equal( result.visualeditor.oldid, pageInfo.newrevid );
 	} );
 
 	it( 'able to parse', async () => {
 		const result = await alice.action( 'visualeditor', { page: title, paction: 'parse' } );
+
 		assert.equal( result.visualeditor.result, 'success' );
+		assert.nestedProperty( result.visualeditor, 'copyrightWarning' );
+		assert.nestedProperty( result.visualeditor, 'checkboxesDef' );
+		assert.nestedProperty( result.visualeditor, 'checkboxesMessages' );
+
+		assert.nestedProperty( result.visualeditor, 'etag' );
+		assert.match( result.visualeditor.etag, /^(W\/)?"\d+\// );
+
+		assert.nestedProperty( result.visualeditor, 'oldid' );
+		assert.equal( result.visualeditor.oldid, pageInfo.newrevid );
+
+		assert.nestedProperty( result.visualeditor, 'content' );
+		assert.include( result.visualeditor.content, 'Hello World!' );
+		assert.include( result.visualeditor.content, '<html' );
 	} );
 
 	it( 'able to parsefragment', async () => {
-		const result = await alice.action( 'visualeditor', { page: title, paction: 'parsefragment', wikitext: 'test' } );
+		const result = await alice.action( 'visualeditor', { page: title, paction: 'parsefragment', wikitext: 'wonderer' } );
 		assert.equal( result.visualeditor.result, 'success' );
+
+		assert.nestedProperty( result.visualeditor, 'content' );
+		assert.include( result.visualeditor.content, 'wonderer' );
+		assert.notInclude( result.visualeditor.content, '<html' );
 	} );
 
 	it( 'templatesUsed', async () => {
@@ -36,7 +58,7 @@ describe( 'Visual Editor API', function () {
 		assert.include( result.visualeditor, 'Template Requests' );
 	} );
 
-	it( 'can load metadata', async () => {
+	it( 'can load wikitext', async () => {
 		const result = await alice.action( 'visualeditor', { page: title, paction: 'wikitext' } );
 		assert.equal( result.visualeditor.result, 'success' );
 	} );
@@ -61,6 +83,25 @@ describe( 'Visual Editor API', function () {
 		);
 
 		assert.equal( result.visualeditoredit.result, 'success' );
+	} );
+
+	it( 'Should refuse to edit with a bad token', async () => {
+		const token = 'dshfkjdsakf';
+		const html = '<p>save paction</p>';
+		const summary = 'save test workflow';
+		const error = await alice.actionError(
+			'visualeditoredit',
+			{
+				page: page,
+				paction: 'save',
+				token: token,
+				html: html,
+				summary: summary
+			},
+			'post'
+		);
+
+		assert.equal( error.code, 'badtoken' );
 	} );
 
 	it( 'Should edit page and save with Wikitext', async () => {
