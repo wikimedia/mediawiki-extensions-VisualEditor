@@ -26,11 +26,6 @@ describe( 'Visual Editor API', function () {
 		assert.equal( result.visualeditor.result, 'success' );
 	} );
 
-	it( 'able to parsedoc', async () => {
-		const result = await alice.action( 'visualeditor', { page: title, paction: 'parsedoc', wikitext: 'test' } );
-		assert.equal( result.visualeditor.result, 'success' );
-	} );
-
 	it( 'able to parsefragment', async () => {
 		const result = await alice.action( 'visualeditor', { page: title, paction: 'parsefragment', wikitext: 'test' } );
 		assert.equal( result.visualeditor.result, 'success' );

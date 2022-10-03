@@ -680,18 +680,16 @@ class ApiVisualEditor extends ApiBase {
 				$result = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
 				break;
 
-			case 'parsedoc':
 			case 'parsefragment':
 				$wikitext = $params['wikitext'];
 				if ( $wikitext === null ) {
 					$this->dieWithError( [ 'apierror-missingparam', 'wikitext' ] );
 				}
-				$bodyOnly = ( $params['paction'] === 'parsefragment' );
 				if ( $params['pst'] ) {
 					$wikitext = $this->pstWikitext( $title, $wikitext );
 				}
 				$content = $this->transformWikitext(
-					$title, $wikitext, $bodyOnly
+					$title, $wikitext, true
 				)['body'];
 				if ( $content === false ) {
 					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
@@ -790,7 +788,6 @@ class ApiVisualEditor extends ApiBase {
 					'templatesused',
 					'wikitext',
 					'parsefragment',
-					'parsedoc',
 				],
 			],
 			'wikitext' => [
