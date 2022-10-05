@@ -286,7 +286,7 @@
 	"visualeditor-preference-core-description": "Omogoči Vizualni urejevalnik. Na voljo ne bo na pogovornih straneh in v nekaterih drugih imenskih prostorih.",
 	"visualeditor-preference-core-label": "Urejanje z Vizualnim urejevalnikom",
 	"visualeditor-preference-enable": "Omogoči Vizualni urejevalnik. Na voljo bo v {{PLURAL:$2|naslednjem imenskem prostoru|naslednjih imenskih prostorih}}: $1.",
-	"visualeditor-preference-newwikitexteditor-description": "Omogoči preglednejši način urejanja vikibesedila v Vizualnem urejevalniku. Mnogo orodij je vzetih iz Vizualnega urejavalnika, ima podoben dizajn in omogoča boljše preklapljanje med obema urejevalnikoma.",
+	"visualeditor-preference-newwikitexteditor-description": "Omogoči preglednejši način urejanja vikibesedila v Vizualnem urejevalniku. Številna orodja so vzeta iz Vizualnega urejavalnika, imajo podoben videz in omogočajo boljše preklapljanje med obema urejevalnikoma.",
 	"visualeditor-preference-newwikitexteditor-label": "Preglednejši prikaz vikibesedila",
 	"visualeditor-preference-tabs": "Urejevalni način:",
 	"visualeditor-preference-tabs-multi-tab": "Pokaži mi zavihka obeh urejevalnikov",
