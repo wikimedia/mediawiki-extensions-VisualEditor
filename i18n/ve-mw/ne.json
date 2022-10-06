@@ -15,6 +15,7 @@
 			"हिमाल सुबेदी"
 		]
 	},
+	"collabpad-import-subtitle": "$1बाट आयात गरिएको",
 	"tooltip-ca-ve-edit": "यो पृष्ठ सम्पादन गर्नुहोस्",
 	"visualeditor-advancedsettings-tool": "उन्नत सेटिङहरू",
 	"visualeditor-autosave-modified-prompt-accept": "सम्पादन पुनः सुरु गर्नुहोस्",
@@ -41,6 +42,7 @@
 	"visualeditor-dialog-media-info-artist": "$1को उर्ध्वभरणहरूको सूची",
 	"visualeditor-dialog-media-info-audiofile": "श्रब्य फाइल",
 	"visualeditor-dialog-media-info-created": "सिर्जना गरिएको: $1",
+	"visualeditor-dialog-media-info-ellipsis": "…",
 	"visualeditor-dialog-media-info-meta-artist": "लेखक: $1",
 	"visualeditor-dialog-media-info-moreinfo": "थप जानकारी",
 	"visualeditor-dialog-media-info-readmore": "थप पढ्नुहोस्",
@@ -155,10 +157,12 @@
 	"visualeditor-mwgallerydialog-title": "ग्यालरीबाट",
 	"visualeditor-mwgallerydialog-widths-field-label": "छवि चौडाइ",
 	"visualeditor-mwsignature-tool": "तपाईको हस्ताक्षर",
+	"visualeditor-preference-betatempdisable": "परिक्षणमा हुँदा दृश्य सम्पादकलाई अस्थायी रूपमा असक्षम पार्नुहोस्",
 	"visualeditor-preference-core-label": "दृश्यात्मक सम्पादन",
 	"visualeditor-preference-newwikitexteditor-description": "दृश्य सम्पादक भित्र नयाँ विकिटेक्स्ट मोड सक्षम गर्नुहोस्। यसमा दृश्य सम्पादकमा उपस्थित धेरै उपकरणहरू छन्, समान डिजाइन प्रयोग गर्दछ, र दुई बीच राम्रो स्विच गर्न अनुमति दिन्छ।",
 	"visualeditor-preference-newwikitexteditor-label": "नयाँ विकिपाठ रिति",
 	"visualeditor-preference-tabs": "अनुवाद रिति",
+	"visualeditor-preference-tabs-multi-tab": "मलाई दुवै सम्पादक ट्याबहरू देखाउनुहोस्",
 	"visualeditor-preference-tabs-prefer-ve": "सम्भव भएमा मलाई सधैं दृश्य सम्पादन दिनुहोस्",
 	"visualeditor-preference-tabs-prefer-wt": "मलाई सधैं स्रोत सम्पादक दिनुहोस्",
 	"visualeditor-preference-tabs-remember-last": "मेरो अन्तिम सम्पादक सम्झनुहोस्",
