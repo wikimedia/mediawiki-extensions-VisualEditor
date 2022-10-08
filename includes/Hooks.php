@@ -844,7 +844,7 @@ class Hooks {
 				'label-message' => [
 					'visualeditor-preference-enable',
 					$wgLang->commaList( array_map(
-						[ 'self', 'convertNs' ],
+						[ self::class, 'convertNs' ],
 						$namespaces
 					) ),
 					count( $namespaces )
