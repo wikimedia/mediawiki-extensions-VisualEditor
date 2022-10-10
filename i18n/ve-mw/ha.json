@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Bashir Gwanki",
 			"Bello Na'im",
 			"DonCamillo",
@@ -17,7 +18,7 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Sa tushen bayani na harshen",
 	"visualeditor-ca-createsource": "Kirkira tsatso",
 	"visualeditor-ca-editsource": "Gyara masomi",
-	"visualeditor-ca-editsource-section": "Gyara masomin",
+	"visualeditor-ca-editsource-section": "gyara masomin",
 	"visualeditor-categories-tool": "Rukunoni",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
 	"visualeditor-dialog-media-change-image": "Canja Hoto",
