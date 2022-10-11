@@ -12,7 +12,8 @@
 			"Veeven",
 			"Visdaviva",
 			"மதனாஹரன்",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"Tmamatha"
 		]
 	},
 	"tooltip-ca-createsource": "ఈ పేజీ సోర్సుకోడ్‌ను సృష్టించండి",
@@ -251,7 +252,9 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "బొమ్మ వెడల్పు",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "డిఫాల్టు వెడల్పు: $1 px",
 	"visualeditor-mwsignature-tool": "మీ సంతకం",
+	"visualeditor-preference-newwikitexteditor-enable": "వేరే వికీటెక్స్ట్ ఎడిటరుకు బదులుగా విజువల్ ఎడిటర్ లోపలే వికీటెక్స్ట్ మోడ్‌ని ఉపయోగించండి.",
 	"visualeditor-preference-newwikitexteditor-label": "కొత్త వికీటెక్స్ట్ విధం",
+	"visualeditor-preference-tabs": "దిద్దుబాటు పద్ధతి:",
 	"visualeditor-rebase-client-export-start": "ఎగుమతించు…",
 	"visualeditor-rebase-client-title-help": "భద్రపరిచేముందు మీరు మార్పులను సమీక్షించగలుగుతారు.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "$1 ను నొక్కి మీ దిద్దుబాటును భద్రపరచవచ్చు.",
