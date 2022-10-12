@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper functions for using the REST interface to Parsoid/RESTBase.
+ * Helper functions for using the REST interface to Parsoid.
  *
  * @file
  * @ingroup Extensions
@@ -10,22 +10,24 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use Exception;
+use IBufferingStatsdDataFactory;
 use Language;
+use LocalizedException;
+use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Page\PageIdentity;
-use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
+use MediaWiki\Parser\Parsoid\HTMLTransformFactory;
+use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
+use MediaWiki\Permissions\Authority;
+use MediaWiki\Rest\Handler\HtmlInputTransformHelper;
+use MediaWiki\Rest\Handler\HtmlOutputRendererHelper;
+use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use ParserOutput;
-use RequestContext;
-use Title;
-use WikiMap;
-use Wikimedia\Parsoid\Config\DataAccess;
-use Wikimedia\Parsoid\Config\SiteConfig;
-use Wikimedia\Parsoid\Core\SelserData;
-use Wikimedia\Parsoid\Parsoid;
-use Wikimedia\Parsoid\Utils\DOMUtils;
-use Wikimedia\UUID\GlobalIdGenerator;
+use RawMessage;
+use User;
 use WikitextContent;
 
 class DirectParsoidClient implements ParsoidClient {
@@ -35,103 +37,198 @@ class DirectParsoidClient implements ParsoidClient {
 	 * ve.init.mw.ArticleTargetLoader.js
 	 */
 	public const PARSOID_VERSION = '2.4.0';
+	private const FLAVOR_DEFAULT = 'view';
 
-	/** @var array Parsoid-specific settings array from $config */
-	private $parsoidSettings;
+	/** @var ParsoidOutputStash */
+	private $parsoidOutputStash;
 
-	/** @var SiteConfig */
-	protected $siteConfig;
+	/** @var IBufferingStatsdDataFactory */
+	private $stats;
 
-	/** @var PageConfigFactory */
-	protected $pageConfigFactory;
+	/** @var ParsoidOutputAccess */
+	private $parsoidOutputAccess;
 
-	/** @var DataAccess */
-	protected $dataAccess;
+	/** @var Authority */
+	private $performer;
 
-	/** @var GlobalIdGenerator */
-	private $globalIdGenerator;
+	/** @var HTMLTransformFactory */
+	private $htmlTransformFactory;
 
 	/**
-	 * @param array $parsoidSettings
-	 * @param SiteConfig $siteConfig
-	 * @param PageConfigFactory $pageConfigFactory
-	 * @param DataAccess $dataAccess
-	 * @param GlobalIdGenerator $globalIdGenerator
+	 * @param ParsoidOutputStash $parsoidOutputStash
+	 * @param IBufferingStatsdDataFactory $statsDataFactory
+	 * @param ParsoidOutputAccess $parsoidOutputAccess
+	 * @param HTMLTransformFactory $htmlTransformFactory
+	 * @param Authority $performer
 	 */
 	public function __construct(
-		array $parsoidSettings,
-		SiteConfig $siteConfig,
-		PageConfigFactory $pageConfigFactory,
-		DataAccess $dataAccess,
-		GlobalIdGenerator $globalIdGenerator
+		ParsoidOutputStash $parsoidOutputStash,
+		IBufferingStatsdDataFactory $statsDataFactory,
+		ParsoidOutputAccess $parsoidOutputAccess,
+		HTMLTransformFactory $htmlTransformFactory,
+		Authority $performer
 	) {
-		$this->parsoidSettings = $parsoidSettings;
-		$this->siteConfig = $siteConfig;
-		$this->pageConfigFactory = $pageConfigFactory;
-		$this->dataAccess = $dataAccess;
-		$this->globalIdGenerator = $globalIdGenerator;
+		$this->parsoidOutputStash = $parsoidOutputStash;
+		$this->stats = $statsDataFactory;
+		$this->parsoidOutputAccess = $parsoidOutputAccess;
+		$this->htmlTransformFactory = $htmlTransformFactory;
+		$this->performer = $performer;
 	}
 
 	/**
-	 * Request page HTML
+	 * @param PageIdentity $page
+	 * @param RevisionRecord|null $revision
+	 * @param Language|null $pageLanguage
+	 * @param bool $stash
+	 * @param string $flavor
+	 *
+	 * @return HtmlOutputRendererHelper
+	 */
+	private function getHtmlOutputRendererHelper(
+		PageIdentity $page,
+		?RevisionRecord $revision = null,
+		Language $pageLanguage = null,
+		bool $stash = false,
+		string $flavor = self::FLAVOR_DEFAULT
+	): HtmlOutputRendererHelper {
+		$helper = new HtmlOutputRendererHelper(
+			$this->parsoidOutputStash,
+			$this->stats,
+			$this->parsoidOutputAccess
+		);
+
+		// Fake REST params
+		$params = [
+			'stash' => $stash,
+			'flavor' => $flavor,
+		];
+
+		$user = User::newFromIdentity( $this->performer->getUser() );
+		$helper->init( $page, $params, $user, $revision, $pageLanguage );
+		return $helper;
+	}
+
+	/**
+	 * @param PageIdentity $page
+	 * @param string $html
+	 * @param int|null $oldid
+	 * @param string|null $etag
+	 * @param Language|null $pageLanguage
+	 *
+	 * @return HtmlInputTransformHelper
+	 */
+	private function getHtmlInputTransformHelper(
+		PageIdentity $page,
+		string $html,
+		int $oldid = null,
+		string $etag = null,
+		Language $pageLanguage = null
+	): HtmlInputTransformHelper {
+		$helper = new HtmlInputTransformHelper(
+			$this->stats,
+			$this->htmlTransformFactory,
+			$this->parsoidOutputStash,
+			$this->parsoidOutputAccess
+		);
+
+		// Fake REST body
+		$body = [
+			'html' => [
+				'body' => $html,
+			],
+			'original' => [
+				'revid' => $oldid,
+				'etag' => $etag,
+			]
+		];
+
+		$helper->init( $page, $body, [], null, $pageLanguage );
+
+		return $helper;
+	}
+
+	/**
+	 * Request page HTML from Parsoid.
 	 *
 	 * @param RevisionRecord $revision Page revision
-	 * @param ?Language $targetLanguage Desired output language
+	 * @param ?Language $targetLanguage Page language (default: `null`)
 	 *
-	 * @return array The response
+	 * @return array An array mimicking a RESTbase server's response,
+	 *   with keys: 'error', 'headers' and 'body'
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array {
+	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage = null ): array {
+		// In the VE client, we always want to stash.
 		$page = $revision->getPage();
-		$title = Title::castFromPageIdentity( $page );
-		$targetLanguage = $targetLanguage ?: $title->getPageLanguage();
-		$oldid = $revision->getId();
-		$lang = $targetLanguage->getCode();
-		// This is /page/html/$title/$revision?redirect=false&stash=true
-		// With Accept-Language: $lang
-		$envOptions = [
-			// $attribs['envOptions'] is created in ParsoidHandler::getRequestAttributes()
-			'prefix' => WikiMap::getCurrentWikiId(),
-			'pageName' => $title->getPrefixedDBkey(),
-			'htmlVariantLanguage' => $lang,
-			'outputContentVersion' => Parsoid::resolveContentVersion(
-				self::PARSOID_VERSION
-			) ?? Parsoid::defaultHTMLVersion(),
-		];
-		// $pageConfig originally created in
-		// ParsoidHandler::tryToCreatePageConfig
-		$user = RequestContext::getMain()->getUser();
-		// Note: Parsoid by design isn't supposed to use the user
-		// context right now, and all user state is expected to be
-		// introduced as a post-parse transform.  So although we pass a
-		// User here, it only currently affects the output in obscure
-		// corner cases; see PageConfigFactory::create() for more.
-		$pageConfig = $this->pageConfigFactory->create(
-			$page, $user, $revision, null, $lang, $this->parsoidSettings
-		);
-		if ( $pageConfig->getRevisionContent() === null ) {
-			throw new \LogicException( "Specified revision does not exist" );
+		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, true );
+
+		try {
+			$parserOutput = $helper->getHtml();
+
+			return $this->fakeRESTbaseHTMLResponse( $parserOutput->getRawText(), $helper );
+		} catch ( HttpException $ex ) {
+			return $this->fakeRESTbaseError( $ex );
 		}
-		$parsoid = new Parsoid( $this->siteConfig, $this->dataAccess );
-		$parserOutput = new ParserOutput();
-		// Note that $headers is an out parameter
-		// $envOptions originally included $opts['contentmodel'] here as well
-		$out = $parsoid->wikitext2html(
-			$pageConfig, $envOptions, $headers, $parserOutput
-		);
-		$tid = $this->globalIdGenerator->newUUIDv1();
-		$etag = "W/\"{$oldid}/{$tid}\"";
-		# XXX: we could cache this locally using the $etag as a key,
-		# then reuse it when transforming back to wikitext below.
-		return [
-			'body' => $out,
-			'headers' => $headers + [
-				'etag' => $etag,
-			],
-		];
 	}
 
 	/**
-	 * Transform HTML to wikitext via Parsoid
+	 * @param PageIdentity $page
+	 * @param string $wikitext
+	 *
+	 * @return RevisionRecord
+	 */
+	private function makeFakeRevision(
+		PageIdentity $page,
+		string $wikitext
+	): RevisionRecord {
+		$rev = new MutableRevisionRecord( $page );
+		$rev->setId( 0 );
+		$rev->setPageId( $page->getId() );
+
+		$rev->setContent( SlotRecord::MAIN, new WikitextContent( $wikitext ) );
+
+		return $rev;
+	}
+
+	/**
+	 * Transform wikitext to HTML with Parsoid. Wrapper for ::postData().
+	 *
+	 * @param PageIdentity $page The page the content belongs to use as the parsing context
+	 * @param Language $targetLanguage Page language
+	 * @param string $wikitext The wikitext fragment to parse
+	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
+	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
+	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
+	 *
+	 * @return array An array mimicking a RESTbase server's response,
+	 *   with keys 'code', 'reason', 'headers' and 'body'
+	 */
+	public function transformWikitext(
+		PageIdentity $page,
+		Language $targetLanguage,
+		string $wikitext,
+		bool $bodyOnly,
+		?int $oldid,
+		bool $stash
+	): array {
+		$revision = $this->makeFakeRevision( $page, $wikitext );
+		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, $stash );
+
+		if ( $bodyOnly ) {
+			$helper->setFlavor( 'fragment' );
+		}
+
+		try {
+			$parserOutput = $helper->getHtml();
+			$html = $parserOutput->getRawText();
+
+			return $this->fakeRESTbaseHTMLResponse( $html, $helper );
+		} catch ( HttpException $ex ) {
+			return $this->fakeRESTbaseError( $ex );
+		}
+	}
+
+	/**
+	 * Transform HTML to wikitext with Parsoid
 	 *
 	 * @param PageIdentity $page The page the content belongs to
 	 * @param Language $targetLanguage The desired output language
@@ -144,120 +241,63 @@ class DirectParsoidClient implements ParsoidClient {
 	public function transformHTML(
 		PageIdentity $page, Language $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
-		// This is POST /transform/html/to/wikitext/$title/$oldid
-		// with header If-Match: $etag
-		// and data: [ 'html' => $html ]
-		$lang = $targetLanguage->getCode();
-		// $pageConfig originally created in
-		// ParsoidHandler::tryToCreatePageConfig
-		$user = RequestContext::getMain()->getUser();
-		// Note: Parsoid by design isn't supposed to use the user
-		// context right now, and all user state is expected to be
-		// introduced as a post-parse transform.  So although we pass a
-		// User here, it only currently affects the output in obscure
-		// corner cases; see PageConfigFactory::create() for more.
-		$pageConfig = $this->pageConfigFactory->create(
-			$page, $user, $oldid, null, $lang, $this->parsoidSettings
-		);
-		$doc = DOMUtils::parseHTML( $html, true );
-		$vEdited = DOMUtils::extractInlinedContentVersion( $doc ) ??
-				 Parsoid::defaultHTMLVersion();
-		// T267990: This should be replaced by PET's ParserCache/stash
-		// mechanism. (RESTBase did the fetch based on the etag, and then
-		// compared vEdited to vOriginal to determine if it was usable.)
-		$oldHtml = null;
-		$selserData = ( $oldid === null ) ? null : new SelserData(
-			$pageConfig->getPageMainContent(), $oldHtml
-		);
-		$parsoid = new Parsoid( $this->siteConfig, $this->dataAccess );
-		$wikitext = $parsoid->dom2wikitext( $pageConfig, $doc, [
-			'inputContentVersion' => $vEdited,
-			'htmlSize' => mb_strlen( $html ),
-		], $selserData );
+		$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
+
+		try {
+			$content = $helper->getContent();
+			$format = $content->getDefaultFormat();
+
+			return [
+				'code' => 200,
+				'headers' => [
+					'Content-Type' => $format,
+				],
+				'body' => $content->serialize( $format ),
+			];
+		} catch ( HttpException $ex ) {
+			return $this->fakeRESTbaseError( $ex );
+		}
+	}
+
+	/**
+	 * @param mixed $data
+	 * @param HtmlOutputRendererHelper $helper
+	 *
+	 * @return array
+	 */
+	private function fakeRESTbaseHTMLResponse( $data, HtmlOutputRendererHelper $helper ): array {
 		return [
-			'body' => $wikitext,
-			'headers' => [],
+			'code' => 200,
+			'headers' => [
+				'content-language' => $helper->getHtmlOutputContentLanguage(),
+				'etag' => $helper->getETag()
+			],
+			'body' => $data,
 		];
 	}
 
 	/**
-	 * Transform wikitext to HTML via Parsoid.
+	 * @param Exception $ex
 	 *
-	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $targetLanguage The desired output language
-	 * @param string $wikitext The wikitext fragment to parse
-	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
-	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
-	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
-	 *
-	 * @return array The response, 'code', 'reason', 'headers' and 'body'
+	 * @return array
 	 */
-	public function transformWikitext(
-		PageIdentity $page, Language $targetLanguage, string $wikitext,
-		bool $bodyOnly, ?int $oldid, bool $stash
-	): array {
-		$title = Title::castFromPageIdentity( $page );
+	private function fakeRESTbaseError( Exception $ex ): array {
+		if ( $ex instanceof LocalizedHttpException ) {
+			$msg = $ex->getMessageValue();
+		} elseif ( $ex instanceof LocalizedException ) {
+			$msg = $ex->getMessageObject();
+		} else {
+			$msg = new RawMessage( $ex->getMessage() );
+		}
 
-		// This is POST /transform/wikitext/to/html/$title/$oldid
-		// with data: [
-		//   'wikitext' => $wikitext,
-		//   'body_only' => $bodyOnly,
-		//   'stash' => $stash,
-		// ]
-		// T267990: Stashing features are not implemented in zero-conf mode;
-		// they will eventually be replaced by PET's ParserCache/stash mechanism
-		$lang = $targetLanguage->getCode();
-		$envOptions = [
-			// $attribs['envOptions'] is created in ParsoidHandler::getRequestAttributes()
-			'prefix' => WikiMap::getCurrentWikiId(),
-			'pageName' => $title->getPrefixedDBkey(),
-			'htmlVariantLanguage' => $lang,
-			'outputContentVersion' => Parsoid::resolveContentVersion(
-				self::PARSOID_VERSION
-			) ?? Parsoid::defaultHTMLVersion(),
-			'body_only' => $bodyOnly,
-			// When VE does a fragment expansion (for example when
-			// template arguments are edited and it wants an updated
-			// render of the template) it's not going to want section
-			// tags; in this case bodyOnly=true and wrapSections=false.
-			// (T181226)
-			// But on the other hand, VE doesn't do anything with section
-			// tags right now other than strip them, so we'll just always
-			// pass wrapSections=false for now.
-			'wrapSections' => false,
-		];
-		// $pageConfig originally created in
-		// ParsoidHandler::tryToCreatePageConfig
-		$user = RequestContext::getMain()->getUser();
-		// Note: Parsoid by design isn't supposed to use the user
-		// context right now, and all user state is expected to be
-		// introduced as a post-parse transform.  So although we pass a
-		// User here, it only currently affects the output in obscure
-		// corner cases; see PageConfigFactory::create() for more.
-
-		// Create a mutable revision record and set to the desired wikitext.
-		$tmpRevision = new MutableRevisionRecord( $page );
-		$tmpRevision->setSlot(
-			SlotRecord::newUnsaved(
-				SlotRecord::MAIN,
-				new WikitextContent( $wikitext )
-			)
-		);
-
-		$pageConfig = $this->pageConfigFactory->create(
-			$page, $user, $tmpRevision, null, $lang, $this->parsoidSettings
-		);
-		$parsoid = new Parsoid( $this->siteConfig, $this->dataAccess );
-		$parserOutput = new ParserOutput();
-		// Note that $headers is an out parameter
-		$out = $parsoid->wikitext2html(
-			$pageConfig, $envOptions, $headers, $parserOutput
-		);
-		// No etag generation in this pathway, and no caching
-		// This is just used to update previews when you edit a template
 		return [
-			'body' => $out,
-			'headers' => $headers,
+			'error' => [
+				'message' => $msg->getKey() ?? '',
+				'params' => $msg->getParams() ?? []
+			],
+			'headers' => [],
+			'body' => $ex->getMessage(),
 		];
 	}
+
 }

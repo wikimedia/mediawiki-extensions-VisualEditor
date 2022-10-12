@@ -6,6 +6,8 @@ use Generator;
 use Language;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Page\PageIdentityValue;
+use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 
 /**
@@ -20,11 +22,11 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 	private function createDirectClient(): DirectParsoidClient {
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
-			[],
-			$services->getParsoidSiteConfig(),
-			$services->getParsoidPageConfigFactory(),
-			$services->getParsoidDataAccess(),
-			$services->getGlobalIdGenerator()
+			$services->getParsoidOutputStash(),
+			$services->getStatsdDataFactory(),
+			$services->getParsoidOutputAccess(),
+			$services->getHTMLTransformFactory(),
+			$services->getUserFactory()->newAnonymous()
 		);
 
 		return $directClient;
@@ -81,7 +83,7 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( 'lang="' . $langCode . '"', $pageHtml );
 
 		$this->assertArrayHasKey( 'etag', $headers );
-		$this->assertStringContainsString( 'W/"' . $revision->getId(), $headers['etag'] );
+		$this->assertStringContainsString( (string)$revision->getId(), $headers['etag'] );
 	}
 
 	/**
@@ -100,19 +102,19 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 
 		$html = '<h2>Hello World</h2>';
 		$oldid = $pageIdentity->getId();
-		$etag = 'W/"' . $oldid . '/abc-123"';
 
 		$response = $directClient->transformHTML(
 			$pageIdentity,
 			$language,
 			$html,
 			$oldid,
-			$etag
+			// Supplying "null" will use the $oldid and look at recent rendering in ParserCache.
+			null
 		);
 
 		$this->assertIsArray( $response );
 		$this->assertArrayHasKey( 'headers', $response );
-		$this->assertSame( [], $response['headers'] );
+		$this->assertArrayHasKey( 'Content-Type', $response['headers'] );
 
 		$this->assertArrayHasKey( 'body', $response );
 		// Trim to remove trailing newline
@@ -128,15 +130,16 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$directClient = $this->createDirectClient();
 
 		$page = $this->getExistingTestPage( 'DirectParsoidClient' );
+		$pageRecord = $page->toPageRecord();
 		$wikitext = '== Hello World ==';
 		[ $language, $langCode ] = $this->createLanguage( $langCode );
 
 		$response = $directClient->transformWikitext(
-			$page,
+			$pageRecord,
 			$language,
 			$wikitext,
 			false,
-			$page->getId(),
+			$pageRecord->getLatest(),
 			false
 		);
 
@@ -150,6 +153,77 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$html = $response['body'];
 		$this->assertStringContainsString( $page->getTitle()->getText(), $html );
 		$this->assertStringContainsString( '>Hello World</h2>', $html );
+	}
+
+	/** @covers ::transformHTML */
+	public function testRoundTripSelserWithETag() {
+		$directClient = $this->createDirectClient();
+
+		// Nasty wikitext that would be reformated without selser.
+		$originalWikitext = '*a\n* b\n*  <i>c</I>';
+
+		/** @var RevisionRecord $revision */
+		$revision = $this->editPage( 'RoundTripSelserWithETag', $originalWikitext )
+			->getValue()['revision-record'];
+
+		$pageHtmlResponse = $directClient->getPageHtml( $revision );
+		$eTag = $pageHtmlResponse['headers']['etag'];
+		$oldHtml = $pageHtmlResponse['body'];
+		$updatedHtml = str_replace( '</body>', '<p>More Text</p></body>', $oldHtml );
+
+		// Now make a new client object, so we can mock the ParsoidOutputAccess.
+		$parsoidOutputAccess = $this->createNoOpMock( ParsoidOutputAccess::class );
+		$services = $this->getServiceContainer();
+		$directClient = new DirectParsoidClient(
+			$services->getParsoidOutputStash(),
+			$services->getStatsdDataFactory(),
+			$parsoidOutputAccess,
+			$services->getHTMLTransformFactory(),
+			$services->getUserFactory()->newAnonymous()
+		);
+
+		[ $targetLanguage, ] = $this->createLanguage( 'en' );
+		$transformHtmlResponse = $directClient->transformHTML(
+			$revision->getPage(),
+			$targetLanguage,
+			$updatedHtml,
+			$revision->getId(),
+			$eTag
+		);
+
+		$updatedWikitext = $transformHtmlResponse['body'];
+		$this->assertStringContainsString( $originalWikitext, $updatedWikitext );
+		$this->assertStringContainsString( 'More Text', $updatedWikitext );
+	}
+
+	/** @covers ::transformHTML */
+	public function testRoundTripSelserWithoutETag() {
+		$directClient = $this->createDirectClient();
+
+		// Nasty wikitext that would be reformated without selser.
+		$originalWikitext = '*a\n* b\n*  <i>c</I>';
+
+		/** @var RevisionRecord $revision */
+		$revision = $this->editPage( 'RoundTripSelserWithoutETag', $originalWikitext )
+			->getValue()['revision-record'];
+
+		$pageHtmlResponse = $directClient->getPageHtml( $revision );
+		$oldHtml = $pageHtmlResponse['body'];
+		$updatedHtml = str_replace( '</body>', '<p>More Text</p></body>', $oldHtml );
+
+		[ $targetLanguage, ] = $this->createLanguage( 'en' );
+		$transformHtmlResponse = $directClient->transformHTML(
+			$revision->getPage(),
+			$targetLanguage,
+			$updatedHtml,
+			$revision->getId(),
+			null
+		);
+
+		// Selser should still work, because the current rendering of the page still matches.
+		$updatedWikitext = $transformHtmlResponse['body'];
+		$this->assertStringContainsString( $originalWikitext, $updatedWikitext );
+		$this->assertStringContainsString( 'More Text', $updatedWikitext );
 	}
 
 }

@@ -3,19 +3,20 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use ConfigException;
+use IBufferingStatsdDataFactory;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
+use MediaWiki\Parser\Parsoid\HTMLTransformFactory;
+use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
+use MediaWiki\Permissions\Authority;
 use ParsoidVirtualRESTService;
 use Psr\Log\LoggerInterface;
+use RequestContext;
 use RestbaseVirtualRESTService;
 use VirtualRESTService;
 use VirtualRESTServiceClient;
-use Wikimedia\Assert\Assert;
-use Wikimedia\Parsoid\Config\DataAccess;
-use Wikimedia\Parsoid\Config\SiteConfig;
-use Wikimedia\UUID\GlobalIdGenerator;
 
 /**
  * @since 1.40
@@ -40,23 +41,10 @@ class VisualEditorParsoidClientFactory {
 	 * @var array
 	 */
 	public const CONSTRUCTOR_OPTIONS = [
-		MainConfigNames::ParsoidSettings,
 		MainConfigNames::VirtualRestConfig,
 		self::USE_AUTO_CONFIG,
 		self::ENABLE_COOKIE_FORWARDING
 	];
-
-	/** @var SiteConfig */
-	private $siteConfig;
-
-	/** @var PageConfigFactory */
-	private $pageConfigFactory;
-
-	/** @var DataAccess */
-	private $dataAccess;
-
-	/** @var GlobalIdGenerator */
-	private $globalIdGenerator;
 
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
@@ -70,45 +58,61 @@ class VisualEditorParsoidClientFactory {
 	/** @var LoggerInterface */
 	private $logger;
 
+	/** @var ParsoidOutputStash */
+	private $parsoidOutputStash;
+
+	/** @var IBufferingStatsdDataFactory */
+	private $statsDataFactory;
+
+	/** @var ParsoidOutputAccess */
+	private $parsoidOutputAccess;
+
+	/** @var HTMLTransformFactory */
+	private $htmlTransformFactory;
+
 	/**
 	 * @param ServiceOptions $options
-	 * @param SiteConfig $siteConfig
-	 * @param PageConfigFactory $pageConfigFactory
-	 * @param DataAccess $dataAccess
-	 * @param GlobalIdGenerator $globalIdGenerator
 	 * @param HttpRequestFactory $httpRequestFactory
 	 * @param LoggerInterface $logger
+	 * @param ParsoidOutputStash $parsoidOutputStash
+	 * @param IBufferingStatsdDataFactory $statsDataFactory
+	 * @param ParsoidOutputAccess $parsoidOutputAccess
+	 * @param HTMLTransformFactory $htmlTransformFactory
 	 */
 	public function __construct(
 		ServiceOptions $options,
-		SiteConfig $siteConfig,
-		PageConfigFactory $pageConfigFactory,
-		DataAccess $dataAccess,
-		GlobalIdGenerator $globalIdGenerator,
 		HttpRequestFactory $httpRequestFactory,
-		LoggerInterface $logger
+		LoggerInterface $logger,
+		ParsoidOutputStash $parsoidOutputStash,
+		IBufferingStatsdDataFactory $statsDataFactory,
+		ParsoidOutputAccess $parsoidOutputAccess,
+		HTMLTransformFactory $htmlTransformFactory
 	) {
 		$this->options = $options;
 		$this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
 
-		$this->siteConfig = $siteConfig;
-		$this->pageConfigFactory = $pageConfigFactory;
-		$this->dataAccess = $dataAccess;
-		$this->globalIdGenerator = $globalIdGenerator;
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->logger = $logger;
+		$this->parsoidOutputStash = $parsoidOutputStash;
+		$this->statsDataFactory = $statsDataFactory;
+		$this->parsoidOutputAccess = $parsoidOutputAccess;
+		$this->htmlTransformFactory = $htmlTransformFactory;
 	}
 
 	/**
 	 * Create a ParsoidClient for accessing Parsoid.
 	 *
 	 * @param string|string[]|false $cookiesToForward
+	 * @param Authority|null $performer
 	 *
 	 * @return ParsoidClient
 	 */
-	public function createParsoidClient( $cookiesToForward ): ParsoidClient {
+	public function createParsoidClient( $cookiesToForward, ?Authority $performer = null ): ParsoidClient {
+		if ( $performer === null ) {
+			$performer = RequestContext::getMain()->getAuthority();
+		}
 		// Default to using the direct client.
-		$client = $this->createDirectClient();
+		$client = $this->createDirectClient( $performer );
 
 		if ( !$client ) {
 			// Default to using the direct client.
@@ -122,9 +126,13 @@ class VisualEditorParsoidClientFactory {
 	}
 
 	/**
+	 * Create a ParsoidClient for accessing Parsoid.
+	 *
+	 * @param Authority $performer
+	 *
 	 * @return ?ParsoidClient
 	 */
-	private function createDirectClient(): ?ParsoidClient {
+	private function createDirectClient( Authority $performer ): ?ParsoidClient {
 		// We haven't checked configuration yet.
 		// Check to see if any of the restbase-related configuration
 		// variables are set, and bail if so:
@@ -142,11 +150,11 @@ class VisualEditorParsoidClientFactory {
 		}
 
 		return new DirectParsoidClient(
-			$this->options->get( MainConfigNames::ParsoidSettings ),
-			$this->siteConfig,
-			$this->pageConfigFactory,
-			$this->dataAccess,
-			$this->globalIdGenerator
+			$this->parsoidOutputStash,
+			$this->statsDataFactory,
+			$this->parsoidOutputAccess,
+			$this->htmlTransformFactory,
+			$performer
 		);
 	}
 
@@ -165,11 +173,6 @@ class VisualEditorParsoidClientFactory {
 	 * @return VirtualRESTService the VirtualRESTService object to use
 	 */
 	private function createVRSObject( $forwardCookies ): VirtualRESTService {
-		Assert::precondition(
-			!$this->createDirectClient(),
-			"Direct Parsoid access is configured but the VirtualRESTService was used"
-		);
-
 		// the params array to create the service object with
 		$params = [];
 		// the VRS class to use, defaults to Parsoid
