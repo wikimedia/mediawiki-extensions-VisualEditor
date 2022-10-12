@@ -44,4 +44,10 @@ describe( 'Content Editable', function () {
 		assert.strictEqual( await EditPage.notification.getText(), 'The page has been created.' );
 	} );
 
+	it( 'should insert a table', async function () {
+		await EditPage.insertTable();
+
+		assert( await EditPage.insertedTable.isDisplayed() );
+	} );
+
 } );
