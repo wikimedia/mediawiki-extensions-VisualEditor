@@ -1079,7 +1079,7 @@ class Hooks {
 
 		$parsoidClientFactory =
 			MediaWikiServices::getInstance()->getService( VisualEditorParsoidClientFactory::SERVICE_NAME );
-		$useRestbase = $parsoidClientFactory->useRestbase();
+		$useRestbase = $parsoidClientFactory->useParsoidOverHTTP();
 
 		$namespacesWithSubpages = $coreConfig->get( 'NamespacesWithSubpages' );
 		// Export as a list of namespaces where subpages are enabled instead of an object
