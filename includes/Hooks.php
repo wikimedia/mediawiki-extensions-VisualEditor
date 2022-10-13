@@ -1077,6 +1077,10 @@ class Hooks {
 			)
 		);
 
+		$parsoidClientFactory =
+			MediaWikiServices::getInstance()->getService( VisualEditorParsoidClientFactory::SERVICE_NAME );
+		$useRestbase = $parsoidClientFactory->useRestbase();
+
 		$namespacesWithSubpages = $coreConfig->get( 'NamespacesWithSubpages' );
 		// Export as a list of namespaces where subpages are enabled instead of an object
 		// mapping namespaces to if subpages are enabled or not, so filter out disabled
@@ -1124,8 +1128,8 @@ class Hooks {
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
-			'restbaseUrl' => $coreConfig->get( 'VisualEditorRestbaseURL' ),
-			'fullRestbaseUrl' => $coreConfig->get( 'VisualEditorFullRestbaseURL' ),
+			'restbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorRestbaseURL' ) : false,
+			'fullRestbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorFullRestbaseURL' ) : false,
 			'allowLossySwitching' => $coreConfig->get( 'VisualEditorAllowLossySwitching' ),
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),

@@ -111,28 +111,20 @@ class VisualEditorParsoidClientFactory {
 		if ( $performer === null ) {
 			$performer = RequestContext::getMain()->getAuthority();
 		}
-		// Default to using the direct client.
-		$client = $this->createDirectClient( $performer );
 
-		if ( !$client ) {
-			// Default to using the direct client.
+		if ( $this->useRestbase() ) {
 			$client = new VRSParsoidClient(
 				$this->getVRSClient( $cookiesToForward ),
 				$this->logger
 			);
+		} else {
+			$client = $this->createDirectClient( $performer );
 		}
 
 		return $client;
 	}
 
-	/**
-	 * Create a ParsoidClient for accessing Parsoid.
-	 *
-	 * @param Authority $performer
-	 *
-	 * @return ?ParsoidClient
-	 */
-	private function createDirectClient( Authority $performer ): ?ParsoidClient {
+	public function useRestbase(): bool {
 		// We haven't checked configuration yet.
 		// Check to see if any of the restbase-related configuration
 		// variables are set, and bail if so:
@@ -141,14 +133,26 @@ class VisualEditorParsoidClientFactory {
 			( isset( $vrs['modules']['restbase'] ) ||
 				isset( $vrs['modules']['parsoid'] ) )
 		) {
-			return null;
+			return true;
 		}
+
 		// Eventually we'll do something fancy, but I'm hacking here...
 		if ( !$this->options->get( self::USE_AUTO_CONFIG ) ) {
 			// explicit opt out
-			return null;
+			return true;
 		}
 
+		return false;
+	}
+
+	/**
+	 * Create a ParsoidClient for accessing Parsoid.
+	 *
+	 * @param Authority $performer
+	 *
+	 * @return ParsoidClient
+	 */
+	private function createDirectClient( Authority $performer ): ParsoidClient {
 		return new DirectParsoidClient(
 			$this->parsoidOutputStash,
 			$this->statsDataFactory,

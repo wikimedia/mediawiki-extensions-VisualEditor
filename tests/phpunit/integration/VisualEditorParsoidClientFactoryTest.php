@@ -62,7 +62,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
 				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
-			DirectParsoidClient::class
+			false
 		];
 
 		yield [
@@ -72,7 +72,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
 				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
-			DirectParsoidClient::class
+			false
 		];
 
 		yield [
@@ -84,7 +84,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
 				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
-			VRSParsoidClient::class
+			true
 		];
 
 		yield [
@@ -96,7 +96,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
 				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
-			VRSParsoidClient::class
+			true
 		];
 	}
 
@@ -104,9 +104,13 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 	 * @dataProvider provideGetClient
 	 * @covers ::createParsoidClient
 	 */
-	public function testGetClient( $optionValues, $expectedType ) {
-		$client = $this->newClientFactory( $optionValues )->createParsoidClient( false );
+	public function testGetClient( $optionValues, $useRestbase ) {
+		$expectedType = $useRestbase ? VRSParsoidClient::class : DirectParsoidClient::class;
 
+		$factory = $this->newClientFactory( $optionValues );
+		$this->assertSame( $useRestbase, $factory->useRestbase() );
+
+		$client = $factory->createParsoidClient( false );
 		$this->assertInstanceOf( $expectedType, $client );
 	}
 
