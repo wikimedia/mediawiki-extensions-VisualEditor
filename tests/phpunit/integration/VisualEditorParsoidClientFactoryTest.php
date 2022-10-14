@@ -60,7 +60,6 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 					'modules' => []
 				],
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
 			false
 		];
@@ -70,7 +69,6 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 				MainConfigNames::ParsoidSettings => [],
 				MainConfigNames::VirtualRestConfig => [],
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
 			false
 		];
@@ -82,7 +80,6 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 					'modules' => [ 'restbase' => [] ]
 				],
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
 			true
 		];
@@ -94,7 +91,6 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 					'modules' => [ 'parsoid' => [] ]
 				],
 				VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-				VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
 			],
 			true
 		];
@@ -108,7 +104,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		$expectedType = $useRestbase ? VRSParsoidClient::class : DirectParsoidClient::class;
 
 		$factory = $this->newClientFactory( $optionValues );
-		$this->assertSame( $useRestbase, $factory->useRestbase() );
+		$this->assertSame( $useRestbase, $factory->useParsoidOverHTTP() );
 
 		$client = $factory->createParsoidClient( false );
 		$this->assertInstanceOf( $expectedType, $client );
@@ -137,8 +133,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 					]
 				]
 			],
-			VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => true,
-			VisualEditorParsoidClientFactory::USE_AUTO_CONFIG => true
+			VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => true
 		];
 
 		$parsoidClient = $this->newClientFactory( $optionValues )->createParsoidClient( $cookie );

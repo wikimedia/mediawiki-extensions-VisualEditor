@@ -32,9 +32,6 @@ class VisualEditorParsoidClientFactory {
 	/** @var bool */
 	public const ENABLE_COOKIE_FORWARDING = 'EnableCookieForwarding';
 
-	/** @var bool */
-	public const USE_AUTO_CONFIG = 'VisualEditorParsoidAutoConfig';
-
 	/**
 	 * @internal For used by ServiceWiring.php
 	 *
@@ -42,7 +39,6 @@ class VisualEditorParsoidClientFactory {
 	 */
 	public const CONSTRUCTOR_OPTIONS = [
 		MainConfigNames::VirtualRestConfig,
-		self::USE_AUTO_CONFIG,
 		self::ENABLE_COOKIE_FORWARDING
 	];
 
@@ -112,7 +108,7 @@ class VisualEditorParsoidClientFactory {
 			$performer = RequestContext::getMain()->getAuthority();
 		}
 
-		if ( $this->useRestbase() ) {
+		if ( $this->useParsoidOverHTTP() ) {
 			$client = new VRSParsoidClient(
 				$this->getVRSClient( $cookiesToForward ),
 				$this->logger
@@ -124,21 +120,13 @@ class VisualEditorParsoidClientFactory {
 		return $client;
 	}
 
-	public function useRestbase(): bool {
-		// We haven't checked configuration yet.
-		// Check to see if any of the restbase-related configuration
-		// variables are set, and bail if so:
+	public function useParsoidOverHTTP(): bool {
+		// If we have VRS modules configured, use them
 		$vrs = $this->options->get( MainConfigNames::VirtualRestConfig );
 		if ( isset( $vrs['modules'] ) &&
 			( isset( $vrs['modules']['restbase'] ) ||
 				isset( $vrs['modules']['parsoid'] ) )
 		) {
-			return true;
-		}
-
-		// Eventually we'll do something fancy, but I'm hacking here...
-		if ( !$this->options->get( self::USE_AUTO_CONFIG ) ) {
-			// explicit opt out
 			return true;
 		}
 
@@ -193,11 +181,6 @@ class VisualEditorParsoidClientFactory {
 			// there's a global parsoid config, use it next
 			$params = $vrs['modules']['parsoid'];
 			$params['restbaseCompat'] = true;
-		} elseif ( $this->options->get( self::USE_AUTO_CONFIG ) ) {
-			$params = $vrs['modules']['parsoid'] ?? [];
-			$params['restbaseCompat'] = true;
-			// forward cookies on private wikis
-			$params['forwardCookies'] = $this->options->get( self::ENABLE_COOKIE_FORWARDING );
 		} else {
 			// No global modules defined, so no way to contact the document server.
 			throw new ConfigException( "The VirtualRESTService for the document server is not defined;" .

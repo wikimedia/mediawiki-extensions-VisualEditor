@@ -108,7 +108,8 @@
 			"value": false
 		},
 		"VisualEditorParsoidAutoConfig": {
-			"value": true
+			"value": true,
+			"description": "Deprecated since MW 1.40. Unused."
 		},
 		"VisualEditorParsoidSettings": {
 			"value": []
