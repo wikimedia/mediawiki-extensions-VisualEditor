@@ -13,7 +13,6 @@
 	"apierror-visualeditor-docserver-http-error": "خطأ في الاتصال بخادم Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "خطأ في الاتصال بخادم Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver": "خطأ في الاتصال بخادم Parsoid/RESTBase (بدون استجابة)",
-	"apierror-visualeditor-latestnotfound": "لم يمكن العثور على أحدث نسخة للعنوان",
 	"apihelp-visualeditor-description": "يرجع HTML5 لصفحة من الخدمة بارسويد (Parsoid).",
 	"apihelp-visualeditor-param-basetimestamp": "عندما تحفظ، وتعيين هذا إلى الطابع الزمني للمراجعة التي تم تحريرها. تستخدم لكشف الصراعات تحرير.",
 	"apihelp-visualeditor-param-badetag": "إذا أرجع استعلام RESTBase ETag غير صالح على ما يبدو، فقم بتمريره هنا لأغراض التسجيل.",

@@ -11,7 +11,6 @@
 	"apierror-visualeditor-docserver-http-error": "Galat menghubungi peladen Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "Galat menghubungi peladen Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver": "Galat menghubungi peladen Parsoid/RESTBase (tak ada tanggapan)",
-	"apierror-visualeditor-latestnotfound": "Tidak dapat menemukan revisi terkini untuk judul tersebut",
 	"apihelp-visualeditor-description": "Mengembalikan HTML5 untuk halaman yang berasal dari layanan parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat revisi ini dibuat. Digunakan untuk mendeteksi konflik penyuntingan.",
 	"apihelp-visualeditor-param-badetag": "Jika kueri RESTBase mengembalikan Etag yang tampaknya tidak valid, teruskan hasil tersebut di sini agar dapat dicatat.",

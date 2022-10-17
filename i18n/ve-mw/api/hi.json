@@ -14,7 +14,6 @@
 	"apierror-visualeditor-docserver-http-error": "Parsoid/RESTBase सर्वर से संपर्क करते समय त्रुटि हुई: $1",
 	"apierror-visualeditor-docserver-http": "Parsoid/RESTBase सर्वर से संपर्क करते समय त्रुटि हुई (HTTP $1): $2",
 	"apierror-visualeditor-docserver": "Parsoid/RESTBase सर्वर से संपर्क करते समय त्रुटि हुई (कोई जवाब नहीं मिला)",
-	"apierror-visualeditor-latestnotfound": "शीर्षक के लिए नवीनतम अवतरण नहीं खोजा जा सका",
 	"apihelp-visualeditor-description": "Parsoid सेवा से एक पृष्ठ के लिए HTML5 वापस करता है।",
 	"apihelp-visualeditor-param-basetimestamp": "सहेजते समय इस समय को भी अवतरण में लिख लें, जिससे सम्पादन टकरावों का पता लग सके।",
 	"apihelp-visualeditor-param-badetag": "अगर RESTBase में अमान्य ETag लौटाया जाता है, लॉग करने के लिए उसे यहाँ पर पास कर दें।",

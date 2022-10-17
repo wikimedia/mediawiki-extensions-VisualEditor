@@ -14,7 +14,6 @@
 	"apierror-visualeditor-docserver-http-error": "Greška pri kontaktiranju servera Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "Greška pri kontaktiranju servera Parsoid/RESTBase (HTTP $1): $2",
 	"apierror-visualeditor-docserver": "Greška pri kontaktiranju servera Parsoid/RESTBase",
-	"apierror-visualeditor-latestnotfound": "Nisam mogao naći posljednje uređivanje naslova",
 	"apihelp-visualeditor-description": "Vraća HTML5 za stranicu sa servisa Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Kada snimate, postavite ovo za vremenski pečat revizije koja je bila uređena. Koristi se za otkrivanje sukoba uređivanja.",
 	"apihelp-visualeditor-param-badetag": "Ako je RESTBase upit vratio naizgled nevažeći ETag, proslijedi ga ovdje za potrebe zapisivanja.",

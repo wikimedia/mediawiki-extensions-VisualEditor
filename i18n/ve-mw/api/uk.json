@@ -16,7 +16,6 @@
 	"apierror-visualeditor-docserver-http-error": "Помилка підключення до серверу Parsoid/RESTBase: $1",
 	"apierror-visualeditor-docserver-http": "Помилка підключення до серверу Parsoid/RESTBase (HTTP $1)",
 	"apierror-visualeditor-docserver": "Не вдалося зв'язатися із сервером Parsoid/RESTBase (немає відповіді)",
-	"apierror-visualeditor-latestnotfound": "Не вдалося знайти останню версію для цієї назви",
 	"apihelp-visualeditor-description": "Повертає HTML5 для сторінки від сервісу Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "При збереженні, встановіть тут мітку часу, коли сторінка була редагована. Використовується для виявлення конфліктів редагування.",
 	"apihelp-visualeditor-param-badetag": "Якщо RESTBase-запит повернув нібито некоректний ETag, помістити його тут для журналювання.",

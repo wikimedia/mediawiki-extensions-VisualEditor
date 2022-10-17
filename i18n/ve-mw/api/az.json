@@ -9,7 +9,6 @@
 	"apierror-visualeditor-docserver-http-error": "Parsoid/RESTBase serveri ilə əlaqə qurarkən xəta: $1",
 	"apierror-visualeditor-docserver-http": "Parsoid/RESTBase serveri ilə əlaqə qurarkən xəta (HTTP $1)",
 	"apierror-visualeditor-docserver": "Parsoid/RESTBase serveri ilə əlaqə qurarkən xəta (cavab gəlmədi)",
-	"apierror-visualeditor-latestnotfound": "Bu başlıq üçün sonuncu versiya tapıla bilmədi",
 	"apihelp-visualeditor-description": "Parsoid xidmətindən səhifə üçün HTML5 göndərir",
 	"apihelp-visualeditor-param-basetimestamp": "Yadda saxlayarkən bunu redaktə edilən versiyanın tarixi olaraq təyin edin. Redaktə toqquşmalarını görmək üçün istifadə edilir.",
 	"apihelp-visualeditor-param-badetag": "RESTBase sorğusu yanlış ETag göndərirsə, onu qeyd məqsədilə buraya göndərin.",

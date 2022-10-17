@@ -14,7 +14,6 @@
 	"apierror-visualeditor-docserver-http-error": "連線 Parsoid/RESTBase 伺服器錯誤：$1",
 	"apierror-visualeditor-docserver-http": "連線 Parsoid/RESTBase 伺服器錯誤（HTTP $1）",
 	"apierror-visualeditor-docserver": "連線 Parsoid/RESTBase 伺服器錯誤（無回應）",
-	"apierror-visualeditor-latestnotfound": "無法找到標題的最近修訂",
 	"apihelp-visualeditor-description": "從 Parsoid 服務回傳一個頁面的 HTML5。",
 	"apihelp-visualeditor-param-basetimestamp": "在儲存時，請將此設定爲該頁面編輯的時間戳記。 用於偵測編輯衝突。",
 	"apihelp-visualeditor-param-badetag": "若 RESTBase 查詢回傳一個看起來無效的 ETag，傳遞於此來進行記錄。",
