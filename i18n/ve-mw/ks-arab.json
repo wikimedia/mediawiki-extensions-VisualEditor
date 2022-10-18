@@ -7,7 +7,10 @@
 			"Teashae"
 		]
 	},
+	"collabpad-import-subtitle": "$1 پؠٹھ دَرآمَد کۆرمُت",
 	"tooltip-ca-createsource": "یَمہٕ صَفُک آگُر کوڈ بَنٲوِو",
+	"tooltip-ca-edit": "یہِ صَفہٕ کٔرِو وِکی مَتَن طور اؠڈِٹ",
+	"tooltip-ca-editsource": "یَمہٕ صَفُک آگُر کوڈ کٔرِو اؠڈِٹ",
 	"tooltip-ca-ve-edit": "یہِ صَفہٕ کٔرِو اؠڈِٹ",
 	"visualeditor-advancedsettings-tool": "اِضٲفی سؠٹِنگ",
 	"visualeditor-autosave-modified-prompt-accept": "اؠڈِٹ تھٲوِو جٲری",
@@ -21,6 +24,7 @@
 	"visualeditor-dialog-media-change-image": "شَکل بَدلٲئو",
 	"visualeditor-dialog-media-content-filename": "فَیِل ناو",
 	"visualeditor-dialog-media-goback": "واپَس",
+	"visualeditor-dialog-media-info-audiofile": "آڑیو فَیِل",
 	"visualeditor-dialog-media-info-created": "تَخلیٖق تٲریٖخ: $1",
 	"visualeditor-dialog-media-info-meta-artist": "فَن کار: $1",
 	"visualeditor-dialog-media-info-moreinfo": "مزیٖد معلوٗمات",
