@@ -111,6 +111,10 @@
 			"value": true,
 			"description": "Deprecated since MW 1.40. Unused."
 		},
+		"VisualEditorDefaultParsoidClient": {
+			"value": "vrs",
+			"description": "Sets the mechanism used by the VE API to talk to Parsoid. This should be removed as soon as the direct mode is stable."
+		},
 		"VisualEditorParsoidSettings": {
 			"value": []
 		},
