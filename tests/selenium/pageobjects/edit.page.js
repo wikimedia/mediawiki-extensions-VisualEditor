@@ -5,6 +5,9 @@ class EditPage extends Page {
 
 	get content() { return $( '#content' ); }
 	get edited() { return $( '*=Your edit was saved' ); }
+	get insert() { return $( '.ve-ui-toolbar-group-insert' ); }
+	get insertTableElement() { return $( '.oo-ui-tool-name-insertTable' ); }
+	get insertedTable() { return $( 'table.ve-ce-branchNode' ); }
 	get notices() { return $( '.ve-ui-mwNoticesPopupTool-items' ); }
 	get notification() { return $( 'div.mw-notification-content span.oo-ui-labelElement-label' ); }
 	get savePage() { return $( '.ve-ui-overlay-global .oo-ui-processDialog-actions-primary' ); }
@@ -23,6 +26,11 @@ class EditPage extends Page {
 				done();
 			} );
 		} );
+	}
+
+	async insertTable() {
+		await this.insert.click();
+		await this.insertTableElement.click();
 	}
 
 	saveComplete() {
