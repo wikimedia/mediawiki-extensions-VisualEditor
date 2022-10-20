@@ -16,7 +16,7 @@ use Language;
 use LocalizedException;
 use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Page\PageIdentity;
-use MediaWiki\Parser\Parsoid\HTMLTransformFactory;
+use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\HtmlInputTransformHelper;
@@ -51,21 +51,21 @@ class DirectParsoidClient implements ParsoidClient {
 	/** @var Authority */
 	private $performer;
 
-	/** @var HTMLTransformFactory */
+	/** @var HtmlTransformFactory */
 	private $htmlTransformFactory;
 
 	/**
 	 * @param ParsoidOutputStash $parsoidOutputStash
 	 * @param IBufferingStatsdDataFactory $statsDataFactory
 	 * @param ParsoidOutputAccess $parsoidOutputAccess
-	 * @param HTMLTransformFactory $htmlTransformFactory
+	 * @param HtmlTransformFactory $htmlTransformFactory
 	 * @param Authority $performer
 	 */
 	public function __construct(
 		ParsoidOutputStash $parsoidOutputStash,
 		IBufferingStatsdDataFactory $statsDataFactory,
 		ParsoidOutputAccess $parsoidOutputAccess,
-		HTMLTransformFactory $htmlTransformFactory,
+		HtmlTransformFactory $htmlTransformFactory,
 		Authority $performer
 	) {
 		$this->parsoidOutputStash = $parsoidOutputStash;

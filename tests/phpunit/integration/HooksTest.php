@@ -11,13 +11,6 @@ use MediaWikiIntegrationTestCase;
  */
 class HooksTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->markTestSkipped(
-			'Temporarily skip test while renaming HTMLTransform at I506f3303ae8f9e4db17299211366bef1558f142c'
-		);
-	}
-
 	/**
 	 * @dataProvider provideOnResourceLoaderGetConfigVars
 	 */

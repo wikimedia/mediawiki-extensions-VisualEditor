@@ -8,7 +8,7 @@ use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Parser\Parsoid\HTMLTransformFactory;
+use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Permissions\Authority;
 use ParsoidVirtualRESTService;
@@ -67,7 +67,7 @@ class VisualEditorParsoidClientFactory {
 	/** @var ParsoidOutputAccess */
 	private $parsoidOutputAccess;
 
-	/** @var HTMLTransformFactory */
+	/** @var HtmlTransformFactory */
 	private $htmlTransformFactory;
 
 	/**
@@ -77,7 +77,7 @@ class VisualEditorParsoidClientFactory {
 	 * @param ParsoidOutputStash $parsoidOutputStash
 	 * @param IBufferingStatsdDataFactory $statsDataFactory
 	 * @param ParsoidOutputAccess $parsoidOutputAccess
-	 * @param HTMLTransformFactory $htmlTransformFactory
+	 * @param HtmlTransformFactory $htmlTransformFactory
 	 */
 	public function __construct(
 		ServiceOptions $options,
@@ -86,7 +86,7 @@ class VisualEditorParsoidClientFactory {
 		ParsoidOutputStash $parsoidOutputStash,
 		IBufferingStatsdDataFactory $statsDataFactory,
 		ParsoidOutputAccess $parsoidOutputAccess,
-		HTMLTransformFactory $htmlTransformFactory
+		HtmlTransformFactory $htmlTransformFactory
 	) {
 		$this->options = $options;
 		$this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );

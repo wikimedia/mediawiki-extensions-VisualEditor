@@ -38,7 +38,7 @@ return [
 			$services->getParsoidOutputStash(),
 			$services->getStatsdDataFactory(),
 			$services->getParsoidOutputAccess(),
-			$services->getHTMLTransformFactory()
+			$services->getHtmlTransformFactory()
 		);
 	},
 ];

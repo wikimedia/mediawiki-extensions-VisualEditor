@@ -11,7 +11,7 @@ use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory;
 use MediaWiki\Extension\VisualEditor\VRSParsoidClient;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Parser\Parsoid\HTMLTransformFactory;
+use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Permissions\Authority;
 use MediaWikiIntegrationTestCase;
@@ -24,13 +24,6 @@ use Wikimedia\TestingAccessWrapper;
  * @coversDefaultClass \MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory
  */
 class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase {
-
-	protected function setUp(): void {
-		parent::setUp();
-		$this->markTestSkipped(
-			'Temporarily skip test while renaming HTMLTransform at I506f3303ae8f9e4db17299211366bef1558f142c'
-		);
-	}
 
 	/**
 	 * @covers ::__construct
@@ -57,7 +50,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 			$this->createNoOpMock( ParsoidOutputStash::class ),
 			$this->createNoOpMock( IBufferingStatsdDataFactory::class ),
 			$this->createNoOpMock( ParsoidOutputAccess::class ),
-			$this->createNoOpMock( HTMLTransformFactory::class )
+			$this->createNoOpMock( HtmlTransformFactory::class )
 		);
 	}
 
