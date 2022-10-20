@@ -36,7 +36,7 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Keep this in sync with the Accept: header in
 	 * ve.init.mw.ArticleTargetLoader.js
 	 */
-	public const PARSOID_VERSION = '2.4.0';
+	public const PARSOID_VERSION = '2.6.0';
 	private const FLAVOR_DEFAULT = 'view';
 
 	/** @var ParsoidOutputStash */
