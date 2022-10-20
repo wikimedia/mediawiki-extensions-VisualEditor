@@ -26,7 +26,13 @@ describe( 'Toolbar', function () {
 	it( 'should open switch editor', async function () {
 		await EditPage.switchEditorElement.click();
 
-		assert( await EditPage.switchEditorPopup.isDisplayed() );
+		assert( await EditPage.visualEditing.isDisplayed() );
+	} );
+
+	it( 'should open page options', async function () {
+		await EditPage.pageOptionsElement.click();
+
+		assert( await EditPage.options.isDisplayed() );
 	} );
 
 } );
