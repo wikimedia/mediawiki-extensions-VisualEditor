@@ -39,8 +39,12 @@ class VisualEditorParsoidClientFactory {
 	 */
 	public const CONSTRUCTOR_OPTIONS = [
 		MainConfigNames::VirtualRestConfig,
-		self::ENABLE_COOKIE_FORWARDING
+		self::ENABLE_COOKIE_FORWARDING,
+		self::DEFAULT_PARSOID_CLIENT_SETTING,
 	];
+
+	/** @var string */
+	public const DEFAULT_PARSOID_CLIENT_SETTING = 'VisualEditorDefaultParsoidClient';
 
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
@@ -100,15 +104,47 @@ class VisualEditorParsoidClientFactory {
 	 *
 	 * @param string|string[]|false $cookiesToForward
 	 * @param Authority|null $performer
+	 * @param array $hints An associative array of hints for client creation.
 	 *
 	 * @return ParsoidClient
 	 */
-	public function createParsoidClient( $cookiesToForward, ?Authority $performer = null ): ParsoidClient {
+	public function createParsoidClient(
+		$cookiesToForward,
+		?Authority $performer = null,
+		array $hints = []
+	): ParsoidClient {
 		if ( $performer === null ) {
 			$performer = RequestContext::getMain()->getAuthority();
 		}
 
-		if ( $this->useParsoidOverHTTP() ) {
+		if ( empty( $hints['NoDualClient'] ) ) {
+			return new DualParsoidClient( $this, $cookiesToForward, $performer );
+		}
+	}
+
+	/**
+	 * Create a ParsoidClient for accessing Parsoid.
+	 *
+	 * @internal For use by DualParsoidClient only.
+	 *
+	 * @param string|string[]|false $cookiesToForward
+	 * @param Authority $performer
+	 * @param array $hints An associative array of hints for client creation.
+	 *
+	 * @return ParsoidClient
+	 */
+	public function createParsoidClientInternal(
+		$cookiesToForward,
+		Authority $performer,
+		array $hints = []
+	): ParsoidClient {
+		// TODO: Delete when we no longer support VRS
+		$shouldUseVRS = $hints['ShouldUseVRS'] ?? null;
+		if ( $shouldUseVRS === null ) {
+			$shouldUseVRS = ( $this->options->get( self::DEFAULT_PARSOID_CLIENT_SETTING ) === 'vrs' );
+		}
+
+		if ( $shouldUseVRS && $this->canUseParsoidOverHTTP() ) {
 			$client = new VRSParsoidClient(
 				$this->getVRSClient( $cookiesToForward ),
 				$this->logger
@@ -120,7 +156,23 @@ class VisualEditorParsoidClientFactory {
 		return $client;
 	}
 
+	/**
+	 * Whether Parsoid should be used over HTTP, according to the configuration.
+	 * Note that we may still end up using direct mode, depending on information
+	 * from the request.
+	 *
+	 * @return bool
+	 */
 	public function useParsoidOverHTTP(): bool {
+		$shouldUseVRS = ( $this->options->get( self::DEFAULT_PARSOID_CLIENT_SETTING ) === 'vrs' );
+		return $this->canUseParsoidOverHTTP() && $shouldUseVRS;
+	}
+
+	/**
+	 * Whether Parsoid could be used over HTTP, based on the configuration provided.
+	 * @return bool
+	 */
+	private function canUseParsoidOverHTTP(): bool {
 		// If we have VRS modules configured, use them
 		$vrs = $this->options->get( MainConfigNames::VirtualRestConfig );
 		if ( isset( $vrs['modules'] ) &&

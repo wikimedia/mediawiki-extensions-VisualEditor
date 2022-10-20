@@ -34,7 +34,7 @@ describe( 'Visual Editor API', function () {
 		assert.nestedProperty( result.visualeditor, 'checkboxesMessages' );
 
 		assert.nestedProperty( result.visualeditor, 'etag' );
-		assert.match( result.visualeditor.etag, /^(W\/)?"\d+\// );
+		assert.match( result.visualeditor.etag, /^(W\/)?".*\d+\// );
 
 		assert.nestedProperty( result.visualeditor, 'oldid' );
 		assert.equal( result.visualeditor.oldid, pageInfo.newrevid );
