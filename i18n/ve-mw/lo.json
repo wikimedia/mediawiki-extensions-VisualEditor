@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aefgh39622"
+			"Aefgh39622",
+			"Bebiezaza"
 		]
 	},
 	"tooltip-ca-ve-edit": "ແກ້ໄຂໜ້ານີ້",
-	"visualeditor-ca-editsource": "ແກ້ໄຂຊອຣ໌ສ",
+	"visualeditor-ca-editsource": "ແກ້ໄຂຕົ້ນສະບັບ",
 	"visualeditor-ca-editsource-section": "ແກ້ໄຂຊອຣ໌ສ"
 }
