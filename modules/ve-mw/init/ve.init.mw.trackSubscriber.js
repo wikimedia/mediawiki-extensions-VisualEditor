@@ -321,13 +321,28 @@
 			log( topic, event );
 		} else {
 			mw.track( 'event.VisualEditorFeatureUse', event );
+
+			// T309602: Also log via the Metrics Platform:
+			var eventName = 'vefu.' + event.action;
+
+			/* eslint-disable camelcase */
+			var customData = {
+				feature: event.feature,
+				editing_session_id: event.editingSessionId,
+				editor_interface: event.editor_interface,
+				integration: event.integration
+			};
+			/* eslint-enable camelcase */
+
+			mw.eventLog.dispatch( eventName, customData );
 		}
 	}
 
 	// Only log events if the WikimediaEvents extension is installed.
 	// It provides variables that the above code depends on and registers the schemas.
 	if ( mw.config.exists( 'wgWMESchemaEditAttemptStepSamplingRate' ) ) {
-		// Ensure 'ext.eventLogging' first, it provides mw.eventLog.randomTokenMatch.
+		// Ensure 'ext.eventLogging' first, it provides mw.eventLog.randomTokenMatch and
+		// mw.eventLog.dispatch.
 		mw.loader.using( 'ext.eventLogging' ).done( function () {
 			ve.trackSubscribe( 'mwedit.', mwEditHandler );
 			ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
