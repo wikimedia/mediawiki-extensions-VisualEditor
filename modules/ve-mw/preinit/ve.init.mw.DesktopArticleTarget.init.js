@@ -772,7 +772,8 @@
 	}
 	pageExists = !!mw.config.get( 'wgRelevantArticleId' );
 	var isViewPage = mw.config.get( 'wgIsArticle' ) && !( 'diff' in uri.query );
-	var isEditPage = mw.config.get( 'wgAction' ) === 'edit' || mw.config.get( 'wgAction' ) === 'submit';
+	var wgAction = mw.config.get( 'wgAction' );
+	var isEditPage = wgAction === 'edit' || wgAction === 'submit';
 	var pageCanLoadEditor = isViewPage || isEditPage;
 	var pageIsProbablyEditable = mw.config.get( 'wgIsProbablyEditable' ) ||
 		mw.config.get( 'wgRelevantPageIsProbablyEditable' );
@@ -1512,13 +1513,14 @@
 		}
 
 		var showWikitextWelcome = true,
+			numEditButtons = $( '#ca-edit, #ca-viewsource' ).length,
 			section = parseSection( uri.query.section );
 
 		var requiredSkinElements =
 			$targetContainer.length &&
 			$( '#mw-content-text' ).length &&
 			// A link to open the editor is technically not necessary if it's going to open itself
-			( isEditPage || $( '#ca-edit, #ca-viewsource' ).length );
+			( isEditPage || numEditButtons );
 
 		if ( uri.query.action === 'edit' && $( '#wpTextbox1' ).length ) {
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
@@ -1539,7 +1541,11 @@
 				init.isWikitextAvailable,
 				pageCanLoadEditor,
 				pageIsProbablyEditable,
-				requiredSkinElements
+				$targetContainer.length,
+				$( '#mw-content-text' ).length,
+				wgAction,
+				numEditButtons
+
 			].map( function ( bool ) {
 				return Number( bool );
 			} ).join( '-' );
