@@ -39,8 +39,8 @@ ve.dm.MWMagicLinkNode.static.matchTagNames = [ 'a' ];
 
 ve.dm.MWMagicLinkNode.static.matchRdfaTypes = [ 'mw:WikiLink', 'mw:ExtLink' ];
 
-// Allow 'nofollow' in Parsoid output (T321437)
-ve.dm.MWMagicLinkNode.static.allowedRdfaTypes = [ 'nofollow' ];
+// Allow additional 'rel' values in Parsoid output (T321437)
+ve.dm.MWMagicLinkNode.static.allowedRdfaTypes = [ 'nofollow', 'noreferrer', 'noopener' ];
 
 ve.dm.MWMagicLinkNode.static.disallowedAnnotationTypes = [ 'link' ];
 
