@@ -268,7 +268,7 @@ ve.dm.MWMagicLinkType.prototype.getCode = function () {
  * @return {boolean}
  */
 ve.dm.MWMagicLinkType.prototype.matchHref = function ( href ) {
-	return href.replace( /^https?:/i, '' ) === this.getHref();
+	return href.replace( /^https?:/i, '' ) === this.getHref().replace( /^https?:/i, '' );
 };
 
 /**
