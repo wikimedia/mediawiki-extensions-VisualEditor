@@ -1543,7 +1543,6 @@
 				pageIsProbablyEditable,
 				$targetContainer.length,
 				$( '#mw-content-text' ).length,
-				wgAction,
 				numEditButtons
 
 			].map( function ( bool ) {
