@@ -39,8 +39,8 @@ ve.dm.MWNumberedExternalLinkNode.static.matchTagNames = [ 'a' ];
 
 ve.dm.MWNumberedExternalLinkNode.static.matchRdfaTypes = [ 'mw:ExtLink', 've:NumberedLink' ];
 
-// Allow 'nofollow' in Parsoid output (T321437)
-ve.dm.MWNumberedExternalLinkNode.static.allowedRdfaTypes = [ 'nofollow' ];
+// Allow additional 'rel' values in Parsoid output (T321437)
+ve.dm.MWNumberedExternalLinkNode.static.allowedRdfaTypes = [ 'nofollow', 'noreferrer', 'noopener' ];
 
 ve.dm.MWNumberedExternalLinkNode.static.disallowedAnnotationTypes = [ 'link' ];
 
