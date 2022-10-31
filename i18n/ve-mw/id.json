@@ -26,7 +26,9 @@
 			"TMg",
 			"WillsonEP09",
 			"Daud I.F. Argana",
-			"EkoITS94"
+			"EkoITS94",
+			"NFarras",
+			"Veracious"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -110,7 +112,7 @@
 	"visualeditor-dialog-media-type-frameless": "Nirbingkai",
 	"visualeditor-dialog-media-type-none": "Dasar",
 	"visualeditor-dialog-media-type-section": "Jenis gambar",
-	"visualeditor-dialog-media-type-section-help": "Anda dapat menentukan bagaimana butir media ditampilkan pada halaman. Hal ini seharusnya ditetapkan sebagai format jempol agar konsisten dengan halaman lainnya di hampir semua kasus.",
+	"visualeditor-dialog-media-type-section-help": "Anda dapat menentukan bagaimana butir media akan ditampilkan pada halaman. Format keluku digunakan agar konsisten dengan kebanyakan halaman lainnya.",
 	"visualeditor-dialog-media-type-thumb": "Gambar mini",
 	"visualeditor-dialog-media-upload": "Unggah",
 	"visualeditor-dialog-meta-advancedsettings-label": "Pengaturan lanjut",
