@@ -94,7 +94,8 @@ class DirectParsoidClient implements ParsoidClient {
 		$helper = new HtmlOutputRendererHelper(
 			$this->parsoidOutputStash,
 			$this->stats,
-			$this->parsoidOutputAccess
+			$this->parsoidOutputAccess,
+			$this->htmlTransformFactory
 		);
 
 		// Fake REST params
