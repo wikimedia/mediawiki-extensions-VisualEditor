@@ -10,7 +10,8 @@
 			"Xelgen",
 			"Աշոտ1997",
 			"Դավիթ Սարոյան",
-			"TMg"
+			"TMg",
+			"Սերգեյ Սաֆարյան"
 		]
 	},
 	"collabpad-doctitle": "CollabPad՝ $1",
@@ -208,7 +209,7 @@
 	"visualeditor-editsummary": "Նկարագրել արված փոփոխությունը",
 	"visualeditor-editsummary-characters-remaining": "Մնացած նիշերի քանակը",
 	"visualeditor-educationpopup-dismiss": "Լավ, հասկացա",
-	"visualeditor-feedback-defaultmessage": "URL: $1",
+	"visualeditor-feedback-defaultmessage": "URL՝ $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Էջի վերնագիր",
 	"visualeditor-formatdropdown-format-mw-heading2": "Վերնագիր",
 	"visualeditor-formatdropdown-format-mw-heading3": "Ենթավերնագիր 1",
