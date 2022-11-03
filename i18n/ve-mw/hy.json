@@ -153,6 +153,7 @@
 	"visualeditor-dialog-transclusion-collapse-options": "Թաքցնել կարգավորումներ",
 	"visualeditor-dialog-transclusion-confirmation-reject": "Շարունակել խմբագրել",
 	"visualeditor-dialog-transclusion-contextitem-description": "Ստացվել է $1-ից",
+	"visualeditor-dialog-transclusion-contextitem-loading": "Բեռնում…",
 	"visualeditor-dialog-transclusion-expand-options": "Ցույց տալ կարգավորումները",
 	"visualeditor-dialog-transclusion-deprecated-parameter": "Հնացած դաշտ",
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Դաշտը հնացած է: $1",

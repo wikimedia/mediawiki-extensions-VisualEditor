@@ -34,7 +34,8 @@
 			"Woytecr",
 			"Yejianfei",
 			"Zoranzoki21",
-			"Ата"
+			"Ата",
+			"Eleassar"
 		]
 	},
 	"accesskey-ca-editsource": "{{doc-accesskey}}",
@@ -263,8 +264,8 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Item in the MediaWiki formatting dropdown for a level 5 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading6": "Item in the MediaWiki formatting dropdown for a level 6 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-generating-wikitext-progress": "Label for progress bar shown while generating wikitext.",
-	"visualeditor-includes-noinclude-start": "Labed of the context item for an opening <code><nowiki><noinclude></nowiki></code> tag.",
-	"visualeditor-includes-noinclude-end": "Labed of the context item for a closing <code><nowiki></noinclude></nowiki></code> tag.",
+	"visualeditor-includes-noinclude-start": "Label of the context item for an opening <code><nowiki><noinclude></nowiki></code> tag.",
+	"visualeditor-includes-noinclude-end": "Label of the context item for a closing <code><nowiki></noinclude></nowiki></code> tag.",
 	"visualeditor-includes-onlyinclude-start": "Labed of the context item for an opening <code><nowiki><onlyinclude></nowiki></code> tag.",
 	"visualeditor-includes-onlyinclude-end": "Labed of the context item for a closing <code><nowiki></onlyinclude></nowiki></code> tag.",
 	"visualeditor-includes-includeonly": "Labed of the context item for a pair of <code><nowiki><includeonly></includeonly></nowiki></code> tags.",
