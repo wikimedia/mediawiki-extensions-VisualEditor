@@ -156,6 +156,7 @@
 	"visualeditor-dialog-transclusion-param-example-long": "Skouer: $1",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Arventennoù e $1",
 	"visualeditor-dialog-transclusion-placeholder": "Ouzhpennañ ur patrom",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Klask ur patrom",
 	"visualeditor-dialog-transclusion-required-parameter": "Maezienn rekis",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Rekis eo ar maezienn.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Distreiñ",
