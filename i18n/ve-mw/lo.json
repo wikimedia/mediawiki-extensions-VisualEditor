@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Aefgh39622",
-			"Bebiezaza"
+			"Bebiezaza",
+			"Lookruk"
 		]
 	},
 	"tooltip-ca-ve-edit": "ແກ້ໄຂໜ້ານີ້",
-	"visualeditor-ca-editsource": "ແກ້ໄຂຕົ້ນສະບັບ",
-	"visualeditor-ca-editsource-section": "ແກ້ໄຂຊອຣ໌ສ"
+	"visualeditor-ca-editsource": "ດັດແກ້ຕົ້ນສະບັບ",
+	"visualeditor-ca-editsource-section": "ດັດແກ້ຕົ້ນສະບັບ"
 }
