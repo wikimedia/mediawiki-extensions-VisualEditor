@@ -165,6 +165,74 @@ describe( 'Visual Editor API', function () {
 			assert.include( newWikitext, originalWikitext );
 			assert.include( newWikitext, 'More Text' );
 		} );
+
+		it( 'Should save edit after switching from source mode (T321862)', async () => {
+			const token = await alice.token();
+			let result;
+
+			// Create a page with messy wikitext
+			const originalWikitext = '*a\n* b\n*  <i>c</I>';
+
+			result = await alice.action(
+				'visualeditoredit',
+				{
+					page,
+					paction: 'save',
+					token,
+					wikitext: originalWikitext,
+					summary: 'editing wikitext'
+				},
+				'post'
+			);
+			assert.equal( result.visualeditoredit.result, 'success' );
+
+			// Modify wikitext
+			const modifiedWikitext = originalWikitext + '\nfirst addition';
+
+			// Switch to HTML using modified wikitext
+			result = await alice.action(
+				'visualeditor',
+				{
+					page,
+					paction: 'parse',
+					wikitext: modifiedWikitext,
+					stash: 'yes'
+				},
+				'post'
+			);
+			assert.equal( result.visualeditor.result, 'success' );
+
+			// Append to HTML and save, using the etag produced when switching to HTML
+			const html = result.visualeditor.content;
+			const etag = result.visualeditor.etag;
+			const modifiedHtml = html.replace( '</body>', '<p>second addition</p></body>' );
+
+			result = await alice.action(
+				'visualeditoredit',
+				{
+					page,
+					paction: 'save',
+					token,
+					html: modifiedHtml,
+					etag,
+					summary: 'appending html'
+				},
+				'post'
+			);
+
+			assert.equal( result.visualeditoredit.result, 'success' );
+
+			// Fetch wikitext to check
+			result = await alice.action( 'visualeditor', { page, paction: 'wikitext' } );
+			assert.equal( result.visualeditor.result, 'success' );
+
+			// Make sure the new content was appended, but the wikitext was kept
+			// in its original messy state.
+			const newWikitext = result.visualeditor.content;
+			assert.include( newWikitext, originalWikitext );
+			assert.include( newWikitext, 'first addition' );
+			assert.include( newWikitext, 'second addition' );
+		} );
 	} );
 
 	it( 'Should show page diff', async () => {
