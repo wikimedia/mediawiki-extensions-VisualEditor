@@ -18,6 +18,7 @@ use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
+use MediaWiki\Parser\Parsoid\ParsoidRenderID;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\HtmlInputTransformHelper;
 use MediaWiki\Rest\Handler\HtmlOutputRendererHelper;
@@ -98,14 +99,26 @@ class DirectParsoidClient implements ParsoidClient {
 			$this->htmlTransformFactory
 		);
 
-		// Fake REST params
-		$params = [
-			'stash' => $stash,
-			'flavor' => $flavor,
-		];
+		// TODO: remove this once we no longer need a User object for rate limiting (T310476).
+		if ( $this->performer instanceof User ) {
+			$user = $this->performer;
+		} else {
+			$user = User::newFromIdentity( $this->performer->getUser() );
+		}
 
-		$user = User::newFromIdentity( $this->performer->getUser() );
-		$helper->init( $page, $params, $user, $revision, $pageLanguage );
+		$helper->init( $page, [], $user, $revision );
+
+		$helper->setStashingEnabled( $stash );
+		$helper->setFlavor( $flavor );
+
+		if ( $revision ) {
+			$helper->setRevision( $revision );
+		}
+
+		if ( $pageLanguage ) {
+			$helper->setPageLanguage( $pageLanguage );
+		}
+
 		return $helper;
 	}
 
@@ -136,14 +149,16 @@ class DirectParsoidClient implements ParsoidClient {
 		$body = [
 			'html' => [
 				'body' => $html,
-			],
-			'original' => [
-				'revid' => $oldid,
-				'etag' => $etag,
 			]
 		];
 
+		$renderId = $etag ? ParsoidRenderID::newFromETag( $etag ) : null;
+
 		$helper->init( $page, $body, [], null, $pageLanguage );
+
+		if ( $oldid || $renderId ) {
+			$helper->setOriginal( $oldid, $renderId );
+		}
 
 		return $helper;
 	}
