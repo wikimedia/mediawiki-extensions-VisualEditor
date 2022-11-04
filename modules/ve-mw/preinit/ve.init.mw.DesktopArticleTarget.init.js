@@ -1535,22 +1535,14 @@
 				'Your skin is incompatible with VisualEditor. ' +
 				'See https://www.mediawiki.org/wiki/Extension:VisualEditor/Skin_requirements for the requirements.'
 			);
-			// aid debugging for additional context.
-			var errorCode = [
-				init.isVisualAvailable,
-				init.isWikitextAvailable,
-				pageCanLoadEditor,
-				pageIsProbablyEditable,
-				$targetContainer.length,
-				$( '#mw-content-text' ).length,
-				numEditButtons
-
-			].map( function ( bool ) {
-				return Number( bool );
-			} ).join( '-' );
-			var err = new Error( 'Incompatible with VisualEditor: ' + errorCode );
-			err.name = 'VeIncompatibleSkinWarning';
-			mw.errorLogger.logError( err, 'error.visualeditor' );
+			// If the edit buttons are not there it's likely a browser extension or gadget for anonymous user
+			// has removed them. We're not interested in errors from this scenario so don't log.
+			// If they exist log the error so we can address the problem.
+			if ( numEditButtons > 0 ) {
+				var err = new Error( 'Incompatible with VisualEditor' );
+				err.name = 'VeIncompatibleSkinWarning';
+				mw.errorLogger.logError( err, 'error.visualeditor' );
+			}
 		} else if ( init.isAvailable ) {
 			var mode = getEditModeFromUri( uri );
 			if ( mode ) {
