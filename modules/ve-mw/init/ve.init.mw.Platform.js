@@ -116,14 +116,19 @@ ve.init.mw.Platform.prototype.getUserConfig = function ( keys ) {
 		var values = mw.user.options.get( keys );
 		var parsedValues = {};
 		Object.keys( values ).forEach( function ( value ) {
-			parsedValues[ value ] = JSON.parse( values[ value ] );
+			try {
+				parsedValues[ value ] = JSON.parse( values[ value ] );
+			} catch ( e ) {
+				// We might encounter corrupted values in the store
+				parsedValues[ value ] = null;
+			}
 		} );
 		return parsedValues;
 	} else {
 		try {
 			return JSON.parse( mw.user.options.get( keys ) );
 		} catch ( e ) {
-			// We might encounter an old unencoded value in the store
+			// We might encounter corrupted values in the store
 			return null;
 		}
 	}
