@@ -34,9 +34,6 @@
 		"VisualEditorAllowExternalLinkPaste": {
 			"value": false
 		},
-		"VisualEditorAllowLossySwitching": {
-			"value": true
-		},
 		"VisualEditorAvailableContentModels": {
 			"value": {
 				"wikitext": "article"

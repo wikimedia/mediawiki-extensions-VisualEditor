@@ -1130,7 +1130,8 @@ class Hooks {
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
 			'restbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorRestbaseURL' ) : false,
 			'fullRestbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorFullRestbaseURL' ) : false,
-			'allowLossySwitching' => $coreConfig->get( 'VisualEditorAllowLossySwitching' ),
+			// XXX: Do we still need to be able to disable switching?
+			'allowSwitchingToVisualMode' => true,
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
