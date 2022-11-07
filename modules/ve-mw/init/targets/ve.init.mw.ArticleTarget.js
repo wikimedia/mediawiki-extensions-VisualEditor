@@ -2249,7 +2249,8 @@ ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () 
  */
 ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 	var config = mw.config.get( 'wgVisualEditorConfig' ),
-		canSwitch = config.fullRestbaseUrl || config.allowLossySwitching,
+		// NOTE: should be just config.allowSwitchingToVisualMode, but we need to preserve compatibility for a few minutes.
+		canSwitch = config.allowSwitchingToVisualMode || config.fullRestbaseUrl || config.allowLossySwitching,
 		target = this;
 
 	if ( !this.edited ) {

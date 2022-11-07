@@ -1180,7 +1180,8 @@
 				sectionVal = $( 'input[name=wpSection]' ).val(),
 				section = sectionVal !== '' && sectionVal !== undefined ? sectionVal : null,
 				config = mw.config.get( 'wgVisualEditorConfig' ),
-				canSwitch = config.fullRestbaseUrl || config.allowLossySwitching,
+				// NOTE: should be just config.allowSwitchingToVisualMode, but we need to preserve compatibility for a few minutes.
+				canSwitch = config.allowSwitchingToVisualMode || config.fullRestbaseUrl || config.allowLossySwitching,
 				modified = mw.config.get( 'wgAction' ) === 'submit' ||
 					(
 						mw.config.get( 'wgAction' ) === 'edit' &&
