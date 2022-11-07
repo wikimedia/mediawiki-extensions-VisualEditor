@@ -2,7 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Ernác",
-			"Iltever"
+			"Iltever",
+			"TMg",
+			"Къарачайлы"
 		]
 	},
 	"tooltip-ca-createsource": "Бетни чыкъгъан кодун къура",
@@ -149,7 +151,7 @@
 	"visualeditor-editsummary": "Тюрлендириулеригизни суратлагъыз",
 	"visualeditor-editsummary-bytes-remaining": "Къалгъан байтланы ёлчеми",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
-	"visualeditor-formatdropdown-format-mw-heading1": "Бетни аты",
+	"visualeditor-formatdropdown-format-mw-heading1": "Бетни башлыгъы",
 	"visualeditor-formatdropdown-format-mw-heading2": "Башлыкъ",
 	"visualeditor-formatdropdown-format-mw-heading3": "Тюббашлыкъ 1",
 	"visualeditor-formatdropdown-format-mw-heading4": "Тюббашлыкъ 2",
