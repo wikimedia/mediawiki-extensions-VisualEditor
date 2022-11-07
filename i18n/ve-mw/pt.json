@@ -142,7 +142,7 @@
 	"visualeditor-dialog-meta-settings-nocontentconvert-help": "Pode impedir que o conteúdo desta página seja automaticamente convertido noutras variantes da língua.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "Não converter o conteúdo entre variantes da língua",
 	"visualeditor-dialog-meta-settings-noeditsection-help": "Pode desativar, no caso raro em que tal seja apropriado, o aparecimento das hiperligações de edição ao lado do título de cada secção.",
-	"visualeditor-dialog-meta-settings-noeditsection-label": "Desativar ligações de edição ao lado de cada título nesta página.",
+	"visualeditor-dialog-meta-settings-noeditsection-label": "Desativar hiperligações de edição ao lado de cada título nesta página.",
 	"visualeditor-dialog-meta-settings-nogallery-help": "Pode impedir que esta categoria apresente os ficheiros incluídos na forma de galeria, se tal não for apropriado neste caso.",
 	"visualeditor-dialog-meta-settings-nogallery-label": "Desativar galeria",
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "Pode impedir que o título desta página seja automaticamente convertido noutra variante da língua.",
