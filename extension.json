@@ -191,6 +191,7 @@
 				"SpecialPageFactory",
 				"ReadOnlyMode",
 				"RestrictionStore",
+				"StatsdDataFactory",
 				"WikiPageFactory",
 				"HookContainer",
 				"UserFactory",
