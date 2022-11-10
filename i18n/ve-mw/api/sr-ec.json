@@ -36,7 +36,7 @@
 	"apihelp-visualeditoredit-param-etag": "ETag за слање.",
 	"apihelp-visualeditoredit-param-html": "HTML за слање Парсоиду у замену за викитекст.",
 	"apihelp-visualeditoredit-param-minor": "Ознака за мању измену.",
-	"apihelp-visualeditoredit-param-oldid": "Број измене коју треба користити. Подразумевана је последња измена. Користите 0 за нову страницу.",
+	"apihelp-visualeditoredit-param-oldid": "Број измене коју треба користити. Подразумевана је последња измена.",
 	"apihelp-visualeditoredit-param-paction": "Радња за извршавање.",
 	"apihelp-visualeditoredit-param-page": "Страница на коју треба извршити радње.",
 	"apihelp-visualeditoredit-param-section": "Одељак на коме треба деловати.",
