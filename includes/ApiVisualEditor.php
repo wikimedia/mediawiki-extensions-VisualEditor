@@ -577,9 +577,7 @@ class ApiVisualEditor extends ApiBase {
 				$block = null;
 				$blockinfo = null;
 				// Blocked user notice
-				if ( $user->isBlockedGlobally() ) {
-					$block = $user->getGlobalBlock();
-				} elseif ( $permissionManager->isBlockedFrom( $user, $title, true ) ) {
+				if ( $permissionManager->isBlockedFrom( $user, $title, true ) ) {
 					$block = $user->getBlock();
 				}
 				if ( $block ) {
