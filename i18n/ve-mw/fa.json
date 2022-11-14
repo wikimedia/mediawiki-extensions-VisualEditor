@@ -211,7 +211,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "بازگشت به عقب",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "به هر حال ادامه بده",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|پارامتر|پارامترهای}} موردنیاز موجود {{PLURAL:$1|نیست|نیستند}}",
-	"visualeditor-dialog-transclusion-required-parameter-is-blank": "اطمینان دارید که می‌خواهید بدون پرکردن $1 {{PLURAL:$2|بخش|بخش}} ادامه دهید؟",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "اطمینان دارید که می‌خواهید بدون پرکردن {{PLURAL:$2|بخش}} $1 ادامه دهید؟",
 	"visualeditor-dialog-transclusion-single-mode": "پنهان کردن گزینه‌ها",
 	"visualeditor-dialog-transclusion-title": "تراگنجانش",
 	"visualeditor-dialog-transclusion-templates-menu-aria-label": "منوی تنظیم فیلدهای الگو",
