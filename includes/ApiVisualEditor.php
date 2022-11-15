@@ -22,6 +22,7 @@ use DerivativeRequest;
 use EditPage;
 use ExtensionRegistry;
 use Html;
+use IBufferingStatsdDataFactory;
 use LogEventsList;
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Content\Transform\ContentTransformer;
@@ -108,6 +109,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param SpecialPageFactory $specialPageFactory
 	 * @param ReadOnlyMode $readOnlyMode
 	 * @param RestrictionStore $restrictionStore
+	 * @param IBufferingStatsdDataFactory $statsdDataFactory
 	 * @param WikiPageFactory $wikiPageFactory
 	 * @param HookContainer $hookContainer
 	 * @param UserFactory $userFactory
@@ -126,6 +128,7 @@ class ApiVisualEditor extends ApiBase {
 		SpecialPageFactory $specialPageFactory,
 		ReadOnlyMode $readOnlyMode,
 		RestrictionStore $restrictionStore,
+		IBufferingStatsdDataFactory $statsdDataFactory,
 		WikiPageFactory $wikiPageFactory,
 		HookContainer $hookContainer,
 		UserFactory $userFactory,
@@ -133,6 +136,7 @@ class ApiVisualEditor extends ApiBase {
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
+		$this->setStats( $statsdDataFactory );
 		$this->revisionLookup = $revisionLookup;
 		$this->userNameUtils = $userNameUtils;
 		$this->parser = $parser;

@@ -45,9 +45,6 @@ class ApiVisualEditorEdit extends ApiBase {
 	/** @var RevisionLookup */
 	private $revisionLookup;
 
-	/** @var IBufferingStatsdDataFactory */
-	private $statsdDataFactory;
-
 	/** @var PageEditStash */
 	private $pageEditStash;
 
@@ -84,9 +81,9 @@ class ApiVisualEditorEdit extends ApiBase {
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
+		$this->setStats( $statsdDataFactory );
 		$this->hookRunner = $hookRunner;
 		$this->revisionLookup = $revisionLookup;
-		$this->statsdDataFactory = $statsdDataFactory;
 		$this->pageEditStash = $pageEditStash;
 		$this->skinFactory = $skinFactory;
 		$this->wikiPageFactory = $wikiPageFactory;
@@ -303,7 +300,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		}
 
 		$status = $ok ? 'ok' : 'failed';
-		$this->statsdDataFactory->increment( "editstash.ve_serialization_cache.set_" . $status );
+		$this->getStats()->increment( "editstash.ve_serialization_cache.set_" . $status );
 
 		// Also parse and prepare the edit in case it might be saved later
 		$pageUpdater = $this->wikiPageFactory->newFromTitle( $title )->newPageUpdater( $this->getUser() );
@@ -314,7 +311,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			$logger = LoggerFactory::getInstance( 'StashEdit' );
 			$logger->debug( "Cached parser output for VE content key '$key'." );
 		}
-		$this->statsdDataFactory->increment( "editstash.ve_cache_stores.$status" );
+		$this->getStats()->increment( "editstash.ve_cache_stores.$status" );
 
 		return $hash;
 	}
@@ -349,7 +346,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$value = $cache->get( $key );
 
 		$status = ( $value !== false ) ? 'hit' : 'miss';
-		$this->statsdDataFactory->increment( "editstash.ve_serialization_cache.get_$status" );
+		$this->getStats()->increment( "editstash.ve_serialization_cache.get_$status" );
 
 		return $value;
 	}

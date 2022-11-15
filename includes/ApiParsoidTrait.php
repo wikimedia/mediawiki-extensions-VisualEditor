@@ -11,13 +11,17 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Language;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use Message;
+use NullStatsdDataFactory;
+use PrefixingStatsdDataFactoryProxy;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
 use WebRequest;
+use WikiMap;
 
 trait ApiParsoidTrait {
 
@@ -25,6 +29,11 @@ trait ApiParsoidTrait {
 	 * @var LoggerInterface
 	 */
 	private $logger = null;
+
+	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats = null;
 
 	/**
 	 * @return LoggerInterface
@@ -38,6 +47,36 @@ trait ApiParsoidTrait {
 	 */
 	protected function setLogger( LoggerInterface $logger ) {
 		$this->logger = $logger;
+	}
+
+	/**
+	 * @return StatsdDataFactoryInterface
+	 */
+	protected function getStats(): StatsdDataFactoryInterface {
+		return $this->stats ?: new NullStatsdDataFactory();
+	}
+
+	/**
+	 * @param StatsdDataFactoryInterface $stats
+	 */
+	protected function setStats( StatsdDataFactoryInterface $stats ) {
+		$this->stats = new PrefixingStatsdDataFactoryProxy( $stats, WikiMap::getCurrentWikiId() );
+	}
+
+	/**
+	 * @return float Return a start time for use with statsRecordTiming()
+	 */
+	private function statsGetStartTime(): float {
+		return microtime( true );
+	}
+
+	/**
+	 * @param string $key
+	 * @param float $startTime from statsGetStartTime()
+	 */
+	private function statsRecordTiming( string $key, float $startTime ) {
+		$duration = ( microtime( true ) - $startTime ) * 1000;
+		$this->getStats()->timing( $key, $duration );
 	}
 
 	/**
@@ -66,7 +105,9 @@ trait ApiParsoidTrait {
 		$title = Title::newFromLinkTarget( $revision->getPageAsLinkTarget() );
 		$lang = self::getPageLanguage( $title );
 
+		$startTime = $this->statsGetStartTime();
 		$response = $this->getParsoidClient()->getPageHtml( $revision, $lang );
+		$this->statsRecordTiming( 'ApiVisualEditor.ParsoidClient.getPageHtml', $startTime );
 
 		$this->forwardErrorsAndCacheHeaders( $response );
 
@@ -87,7 +128,9 @@ trait ApiParsoidTrait {
 	): array {
 		$lang = self::getPageLanguage( $title );
 
+		$startTime = $this->statsGetStartTime();
 		$response = $this->getParsoidClient()->transformHTML( $title, $lang, $html, $oldid, $etag );
+		$this->statsRecordTiming( 'ApiVisualEditor.ParsoidClient.transformHTML', $startTime );
 
 		$this->forwardErrorsAndCacheHeaders( $response );
 
@@ -109,6 +152,7 @@ trait ApiParsoidTrait {
 	): array {
 		$lang = self::getPageLanguage( $title );
 
+		$startTime = $this->statsGetStartTime();
 		$response = $this->getParsoidClient()->transformWikitext(
 			$title,
 			$lang,
@@ -117,6 +161,7 @@ trait ApiParsoidTrait {
 			$oldid,
 			$stash
 		);
+		$this->statsRecordTiming( 'ApiVisualEditor.ParsoidClient.transformWikitext', $startTime );
 
 		$this->forwardErrorsAndCacheHeaders( $response );
 
