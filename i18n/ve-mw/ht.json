@@ -3,16 +3,18 @@
 		"authors": [
 			"Bfpage",
 			"Tisave",
-			"Amire80"
+			"Amire80",
+			"Kitanago"
 		]
 	},
 	"tooltip-ca-createsource": "Kreye kòd sous paj sa a",
 	"tooltip-ca-ve-edit": "Edit paj sa a",
 	"visualeditor-ca-createlocaldescriptionsource": "Ajoute deskription lokal la nan kòd",
-	"visualeditor-ca-createsource": "Kreye nan kòd",
+	"visualeditor-ca-createsource": "Kreye ak wikikòd",
 	"visualeditor-ca-editsource": "Modifye kòd",
 	"visualeditor-ca-editsource-section": "modifye kòd",
 	"visualeditor-categories-tool": "Kategori yo",
+	"visualeditor-descriptionpagelink": "Pwojè:EditèVizyèl",
 	"visualeditor-dialog-media-change-image": "Chanje imaj",
 	"visualeditor-dialog-media-choose-image": "Sèvi imaj sa a",
 	"visualeditor-dialog-media-content-description-link": "(paj deskripsyon)",
