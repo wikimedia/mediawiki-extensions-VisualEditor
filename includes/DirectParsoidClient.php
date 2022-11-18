@@ -11,17 +11,14 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Exception;
-use IBufferingStatsdDataFactory;
 use Language;
 use LocalizedException;
-use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Page\PageIdentity;
-use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
-use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Parser\Parsoid\ParsoidRenderID;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\HtmlInputTransformHelper;
 use MediaWiki\Rest\Handler\HtmlOutputRendererHelper;
+use MediaWiki\Rest\Handler\PageRestHelperFactory;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\MutableRevisionRecord;
@@ -32,48 +29,32 @@ use User;
 use WikitextContent;
 
 class DirectParsoidClient implements ParsoidClient {
+
 	/**
 	 * Requested Parsoid HTML version.
 	 * Keep this in sync with the Accept: header in
 	 * ve.init.mw.ArticleTargetLoader.js
 	 */
 	public const PARSOID_VERSION = '2.6.0';
+
 	private const FLAVOR_DEFAULT = 'view';
 
-	/** @var ParsoidOutputStash */
-	private $parsoidOutputStash;
-
-	/** @var IBufferingStatsdDataFactory */
-	private $stats;
-
-	/** @var ParsoidOutputAccess */
-	private $parsoidOutputAccess;
+	/** @var PageRestHelperFactory */
+	private $helperFactory;
 
 	/** @var Authority */
 	private $performer;
 
-	/** @var HtmlTransformFactory */
-	private $htmlTransformFactory;
-
 	/**
-	 * @param ParsoidOutputStash $parsoidOutputStash
-	 * @param IBufferingStatsdDataFactory $statsDataFactory
-	 * @param ParsoidOutputAccess $parsoidOutputAccess
-	 * @param HtmlTransformFactory $htmlTransformFactory
+	 * @param PageRestHelperFactory $helperFactory
 	 * @param Authority $performer
 	 */
 	public function __construct(
-		ParsoidOutputStash $parsoidOutputStash,
-		IBufferingStatsdDataFactory $statsDataFactory,
-		ParsoidOutputAccess $parsoidOutputAccess,
-		HtmlTransformFactory $htmlTransformFactory,
+		PageRestHelperFactory $helperFactory,
 		Authority $performer
 	) {
-		$this->parsoidOutputStash = $parsoidOutputStash;
-		$this->stats = $statsDataFactory;
-		$this->parsoidOutputAccess = $parsoidOutputAccess;
-		$this->htmlTransformFactory = $htmlTransformFactory;
 		$this->performer = $performer;
+		$this->helperFactory = $helperFactory;
 	}
 
 	/**
@@ -92,12 +73,7 @@ class DirectParsoidClient implements ParsoidClient {
 		bool $stash = false,
 		string $flavor = self::FLAVOR_DEFAULT
 	): HtmlOutputRendererHelper {
-		$helper = new HtmlOutputRendererHelper(
-			$this->parsoidOutputStash,
-			$this->stats,
-			$this->parsoidOutputAccess,
-			$this->htmlTransformFactory
-		);
+		$helper = $this->helperFactory->newHtmlOutputRendererHelper();
 
 		// TODO: remove this once we no longer need a User object for rate limiting (T310476).
 		if ( $this->performer instanceof User ) {
@@ -138,12 +114,7 @@ class DirectParsoidClient implements ParsoidClient {
 		string $etag = null,
 		Language $pageLanguage = null
 	): HtmlInputTransformHelper {
-		$helper = new HtmlInputTransformHelper(
-			$this->stats,
-			$this->htmlTransformFactory,
-			$this->parsoidOutputStash,
-			$this->parsoidOutputAccess
-		);
+		$helper = $this->helperFactory->newHtmlInputTransformHelper();
 
 		// Fake REST body
 		$body = [

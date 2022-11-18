@@ -35,10 +35,7 @@ return [
 			),
 			$services->getHttpRequestFactory(),
 			LoggerFactory::getInstance( 'VisualEditor' ),
-			$services->getParsoidOutputStash(),
-			$services->getStatsdDataFactory(),
-			$services->getParsoidOutputAccess(),
-			$services->getHtmlTransformFactory()
+			$services->getPageRestHelperFactory()
 		);
 	},
 ];

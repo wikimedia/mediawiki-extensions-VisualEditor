@@ -22,10 +22,7 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 	private function createDirectClient(): DirectParsoidClient {
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
-			$services->getParsoidOutputStash(),
-			$services->getStatsdDataFactory(),
-			$services->getParsoidOutputAccess(),
-			$services->getHtmlTransformFactory(),
+			$services->getPageRestHelperFactory(),
 			$services->getUserFactory()->newAnonymous()
 		);
 
@@ -175,10 +172,7 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$parsoidOutputAccess = $this->createNoOpMock( ParsoidOutputAccess::class );
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
-			$services->getParsoidOutputStash(),
-			$services->getStatsdDataFactory(),
-			$parsoidOutputAccess,
-			$services->getHtmlTransformFactory(),
+			$services->getPageRestHelperFactory(),
 			$services->getUserFactory()->newAnonymous()
 		);
 

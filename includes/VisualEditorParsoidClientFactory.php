@@ -3,14 +3,11 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use ConfigException;
-use IBufferingStatsdDataFactory;
 use MediaWiki\Config\ServiceOptions;
-use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
-use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Permissions\Authority;
+use MediaWiki\Rest\Handler\PageRestHelperFactory;
 use ParsoidVirtualRESTService;
 use Psr\Log\LoggerInterface;
 use RequestContext;
@@ -58,45 +55,27 @@ class VisualEditorParsoidClientFactory {
 	/** @var LoggerInterface */
 	private $logger;
 
-	/** @var ParsoidOutputStash */
-	private $parsoidOutputStash;
-
-	/** @var IBufferingStatsdDataFactory */
-	private $statsDataFactory;
-
-	/** @var ParsoidOutputAccess */
-	private $parsoidOutputAccess;
-
-	/** @var HtmlTransformFactory */
-	private $htmlTransformFactory;
+	/** @var PageRestHelperFactory */
+	private $pageRestHelperFactory;
 
 	/**
 	 * @param ServiceOptions $options
 	 * @param HttpRequestFactory $httpRequestFactory
 	 * @param LoggerInterface $logger
-	 * @param ParsoidOutputStash $parsoidOutputStash
-	 * @param IBufferingStatsdDataFactory $statsDataFactory
-	 * @param ParsoidOutputAccess $parsoidOutputAccess
-	 * @param HtmlTransformFactory $htmlTransformFactory
+	 * @param PageRestHelperFactory $pageRestHelperFactory
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		HttpRequestFactory $httpRequestFactory,
 		LoggerInterface $logger,
-		ParsoidOutputStash $parsoidOutputStash,
-		IBufferingStatsdDataFactory $statsDataFactory,
-		ParsoidOutputAccess $parsoidOutputAccess,
-		HtmlTransformFactory $htmlTransformFactory
+		PageRestHelperFactory $pageRestHelperFactory
 	) {
 		$this->options = $options;
 		$this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
 
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->logger = $logger;
-		$this->parsoidOutputStash = $parsoidOutputStash;
-		$this->statsDataFactory = $statsDataFactory;
-		$this->parsoidOutputAccess = $parsoidOutputAccess;
-		$this->htmlTransformFactory = $htmlTransformFactory;
+		$this->pageRestHelperFactory = $pageRestHelperFactory;
 	}
 
 	/**
@@ -104,22 +83,18 @@ class VisualEditorParsoidClientFactory {
 	 *
 	 * @param string|string[]|false $cookiesToForward
 	 * @param Authority|null $performer
-	 * @param array $hints An associative array of hints for client creation.
 	 *
 	 * @return ParsoidClient
 	 */
 	public function createParsoidClient(
 		$cookiesToForward,
-		?Authority $performer = null,
-		array $hints = []
+		?Authority $performer = null
 	): ParsoidClient {
 		if ( $performer === null ) {
 			$performer = RequestContext::getMain()->getAuthority();
 		}
 
-		if ( empty( $hints['NoDualClient'] ) ) {
-			return new DualParsoidClient( $this, $cookiesToForward, $performer );
-		}
+		return new DualParsoidClient( $this, $cookiesToForward, $performer );
 	}
 
 	/**
@@ -194,10 +169,7 @@ class VisualEditorParsoidClientFactory {
 	 */
 	private function createDirectClient( Authority $performer ): ParsoidClient {
 		return new DirectParsoidClient(
-			$this->parsoidOutputStash,
-			$this->statsDataFactory,
-			$this->parsoidOutputAccess,
-			$this->htmlTransformFactory,
+			$this->pageRestHelperFactory,
 			$performer
 		);
 	}

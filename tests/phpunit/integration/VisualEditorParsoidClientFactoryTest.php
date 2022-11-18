@@ -2,18 +2,15 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
-use IBufferingStatsdDataFactory;
 use MediaWiki\Config\ServiceOptions;
-use MediaWiki\Edit\ParsoidOutputStash;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Extension\VisualEditor\DualParsoidClient;
 use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory;
 use MediaWiki\Extension\VisualEditor\VRSParsoidClient;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
-use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Permissions\Authority;
+use MediaWiki\Rest\Handler\PageRestHelperFactory;
 use MediaWikiIntegrationTestCase;
 use MultiHttpClient;
 use ParsoidVirtualRESTService;
@@ -47,10 +44,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 			$options,
 			$httpRequestFactory,
 			new NullLogger(),
-			$this->createNoOpMock( ParsoidOutputStash::class ),
-			$this->createNoOpMock( IBufferingStatsdDataFactory::class ),
-			$this->createNoOpMock( ParsoidOutputAccess::class ),
-			$this->createNoOpMock( HtmlTransformFactory::class )
+			$this->createNoOpMock( PageRestHelperFactory::class )
 		);
 	}
 
