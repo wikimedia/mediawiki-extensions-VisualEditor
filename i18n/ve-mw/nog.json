@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gorgich"
+			"Gorgich",
+			"TayfunEt."
 		]
 	},
 	"tooltip-ca-ve-edit": "Бу бетти туьрлентуьв",
+	"visualeditor-ca-createsource": "Булагын джаратув",
 	"visualeditor-ca-editsource": "Булагын туьрлентуьв",
 	"visualeditor-ca-editsource-section": "булагын туьрлентуьв"
 }
