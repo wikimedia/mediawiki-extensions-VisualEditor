@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"AlexandrL714",
 			"Amire80",
 			"Андрей Саг."
 		]
 	},
 	"tooltip-ca-ve-edit": "Пу страницаны тӱзедерге",
+	"visualeditor-ca-createsource": "Кодты пӱдірерге",
 	"visualeditor-ca-editsource": "Код тӱзедерге",
 	"visualeditor-ca-editsource-section": "код тӱзедерге",
 	"visualeditor-dialog-meta-settings-index-force": "Я",
