@@ -467,7 +467,7 @@
 		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( function () {
 			var linkUrl = new URL( this.href );
 			if ( section === parseSection( linkUrl.searchParams.get( 'section' ) ) ) {
-				$heading = $( this ).closest( 'h1, h2, h3, h4, h5, h6' );
+				$heading = $( this ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' );
 				return false;
 			}
 		} );
@@ -592,7 +592,7 @@
 				var linkUrl = new URL( firstVisibleSectionLink.href );
 				visibleSection = parseSection( linkUrl.searchParams.get( 'section' ) );
 
-				var firstVisibleHeading = $( firstVisibleEditSection ).closest( 'h1, h2, h3, h4, h5, h6' )[ 0 ];
+				var firstVisibleHeading = $( firstVisibleEditSection ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' )[ 0 ];
 				visibleSectionOffset = firstVisibleHeading.getBoundingClientRect().top;
 			}
 		} else if ( mode === 'visual' ) {
