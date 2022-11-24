@@ -18,6 +18,7 @@
  */
 ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 	var $image;
+	var hasHref = false;
 
 	if ( model.getAttribute( 'isError' ) ) {
 		this.$element = $( '<a>' )
@@ -26,6 +27,7 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 		$image = $( [] );
 	} else {
 		if ( model.getAttribute( 'href' ) ) {
+			hasHref = true;
 			this.$element = $( '<a>' );
 			$image = $( '<img>' ).appendTo( this.$element );
 		} else {
@@ -45,6 +47,11 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 		.attr( 'src', this.getResolvedAttribute( 'src' ) )
 		.attr( 'width', this.model.getAttribute( 'width' ) )
 		.attr( 'height', this.model.getAttribute( 'height' ) );
+
+	if ( hasHref ) {
+		// T322704
+		ve.setAttributeSafe( this.$element[ 0 ], 'href', this.getResolvedAttribute( 'href' ) || '', '#' );
+	}
 
 	this.showHandles( [ this.$element.css( 'direction' ) === 'rtl' ? 'sw' : 'se' ] );
 

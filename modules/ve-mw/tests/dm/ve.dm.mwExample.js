@@ -781,7 +781,7 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
 			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
-			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false">' +
+			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="' + ve.resolveUrl( './File:Wiki.png', document ) + '">' +
 				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
 			'</a>' +
 			ve.dm.example.inlineSlug +
@@ -800,7 +800,7 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
 			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
-			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false">' +
+			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="' + ve.resolveUrl( './File:Wiki.png', document ) + '">' +
 				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
 			'</a>' +
 			ve.dm.example.inlineSlug +
