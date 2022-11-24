@@ -145,7 +145,8 @@
 		tempWikitextEditorData = data;
 
 		// Bring forward some transformations that show the editor is now ready
-		$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
+		// Grey out the page title if it is below the editing toolbar (depending on skin), to show it is uneditable.
+		$( '.ve-init-mw-desktopArticleTarget-targetContainer #firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 		$( '#mw-content-text' )
 			.before( tempWikitextEditor.$element )
 			.addClass( 'oo-ui-element-hidden' );
