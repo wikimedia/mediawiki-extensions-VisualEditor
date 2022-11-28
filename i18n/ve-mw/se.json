@@ -3,7 +3,8 @@
 		"authors": [
 			"Jon Harald Søby (WMNO)",
 			"Yupik",
-			"Trondtr"
+			"Trondtr",
+			"Kimberli Mäkäräinen (WMNO)"
 		]
 	},
 	"visualeditor-ca-editsource": "Rievdat gáldu",
@@ -15,6 +16,7 @@
 	"visualeditor-dialog-media-info-moreinfo": "Lassedieđut",
 	"visualeditor-dialog-media-info-readmore": "Loga lasi",
 	"visualeditor-dialog-media-page-advanced": "Lasseásahusat",
+	"visualeditor-dialog-media-save": "Vurke",
 	"visualeditor-dialog-media-search-tab-search": "Oza",
 	"visualeditor-dialog-media-searchselect": "Vállje",
 	"visualeditor-dialog-media-title": "Mediaválljemat",
@@ -52,6 +54,8 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Gielat",
 	"visualeditor-mwsignature-tool": "Du vuolláičála",
 	"visualeditor-savedialog-label-review": "Dárkkis iežat rievdademiid",
+	"visualeditor-savedialog-label-save-short": "Vurke",
+	"visualeditor-savedialog-label-save-short-start": "Vurke…",
 	"visualeditor-savedialog-review-wikitext": "Wikiteaksta",
 	"visualeditor-savedialog-title-save": "Vurke iežat rievdadusaid"
 }
