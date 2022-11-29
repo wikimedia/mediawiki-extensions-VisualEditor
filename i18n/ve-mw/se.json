@@ -3,7 +3,8 @@
 		"authors": [
 			"Jon Harald Søby (WMNO)",
 			"Yupik",
-			"Trondtr"
+			"Trondtr",
+			"Kimberli Mäkäräinen (WMNO)"
 		]
 	},
 	"visualeditor-ca-editsource": "Rievdat gáldu",
@@ -15,9 +16,11 @@
 	"visualeditor-dialog-media-info-moreinfo": "Lassedieđut",
 	"visualeditor-dialog-media-info-readmore": "Loga lasi",
 	"visualeditor-dialog-media-page-advanced": "Lasseásahusat",
+	"visualeditor-dialog-media-save": "Vurke",
 	"visualeditor-dialog-media-search-tab-search": "Oza",
 	"visualeditor-dialog-media-searchselect": "Vállje",
 	"visualeditor-dialog-media-title": "Mediaválljemat",
+	"visualeditor-dialog-meta-categories-addcategory-label": "Lasit dán siidui kategoriija",
 	"visualeditor-dialog-meta-categories-category": "Kategoriija",
 	"visualeditor-dialog-meta-categories-data-label": "Kategoriijat",
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Ođđa kategoriija",
@@ -28,6 +31,7 @@
 	"visualeditor-dialog-meta-languages-section": "Gielat",
 	"visualeditor-dialog-meta-settings-redirect-label": "Sirdde dán siiddu siidui",
 	"visualeditor-dialog-template-title": "Málle",
+	"visualeditor-dialog-transclusion-action-save": "Vurke",
 	"visualeditor-dialog-transclusion-add-param": "Lasit lassedieđuid",
 	"visualeditor-dialogbutton-media-tooltip": "Govat ja media",
 	"visualeditor-dialogbutton-template-tooltip": "Málle",
@@ -52,6 +56,8 @@
 	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Gielat",
 	"visualeditor-mwsignature-tool": "Du vuolláičála",
 	"visualeditor-savedialog-label-review": "Dárkkis iežat rievdademiid",
+	"visualeditor-savedialog-label-save-short": "Vurke",
+	"visualeditor-savedialog-label-save-short-start": "Vurke…",
 	"visualeditor-savedialog-review-wikitext": "Wikiteaksta",
 	"visualeditor-savedialog-title-save": "Vurke iežat rievdadusaid"
 }
