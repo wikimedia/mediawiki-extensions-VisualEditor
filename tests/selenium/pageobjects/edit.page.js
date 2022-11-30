@@ -17,6 +17,8 @@ class EditPage extends Page {
 	get popupToolGroup() { return $( '.oo-ui-popupToolGroup-active-tools' ); }
 	get savePage() { return $( '.ve-ui-overlay-global .oo-ui-processDialog-actions-primary' ); }
 	get savePageDots() { return $( '.ve-ui-toolbar-saveButton' ); }
+	get specialCharacterElement() { return $( '.oo-ui-tool-name-specialCharacter' ); }
+	get specialCharacterMenu() { return $( '.oo-ui-menuLayout' ); }
 	get switchEditorElement() { return $( '.ve-ui-toolbar-group-editMode' ); }
 	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
 	get veBodyContent() { return $( '.mw-body-content.ve-ui-surface' ); }
