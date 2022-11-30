@@ -10,13 +10,16 @@ class EditPage extends Page {
 	get insertedTable() { return $( 'table.ve-ce-branchNode' ); }
 	get notices() { return $( '.ve-ui-mwNoticesPopupTool-items' ); }
 	get notification() { return $( 'div.mw-notification-content span.oo-ui-labelElement-label' ); }
+	get options() { return $( '.oo-ui-tool-name-meta' ); }
+	get pageOptionsElement() { return $( '.ve-ui-toolbar-group-pageMenu' ); }
+	get popupToolGroup() { return $( '.oo-ui-popupToolGroup-active-tools' ); }
 	get savePage() { return $( '.ve-ui-overlay-global .oo-ui-processDialog-actions-primary' ); }
 	get savePageDots() { return $( '.ve-ui-toolbar-saveButton' ); }
 	get switchEditorElement() { return $( '.ve-ui-toolbar-group-editMode' ); }
-	get switchEditorPopup() { return $( '.oo-ui-popupToolGroup-active-tools' ); }
 	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
 	get veBodyContent() { return $( '.mw-body-content.ve-ui-surface' ); }
 	get veRootNode() { return $( '.ve-ce-rootNode[role="textbox"]' ); }
+	get visualEditing() { return $( '.oo-ui-tool-name-editModeVisual' ); }
 
 	openForEditing( title ) {
 		super.openTitle( title, { veaction: 'edit', cxhidebetapopup: 1, hidewelcomedialog: 1, vehidebetadialog: 1 } );
