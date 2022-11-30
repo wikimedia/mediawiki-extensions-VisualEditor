@@ -29,4 +29,10 @@ describe( 'Toolbar', function () {
 		assert( await EditPage.switchEditorPopup.isDisplayed() );
 	} );
 
+	it( 'should open help popup', async function () {
+		await EditPage.helpElement.click();
+
+		assert( await EditPage.helpPopup.isDisplayed() );
+	} );
+
 } );

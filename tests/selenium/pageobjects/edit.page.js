@@ -5,6 +5,8 @@ class EditPage extends Page {
 
 	get content() { return $( '#content' ); }
 	get edited() { return $( '*=Your edit was saved' ); }
+	get helpPopup() { return $( '.ve-ui-mwHelpPopupTool-items' ); }
+	get helpElement() { return $( '.oo-ui-tool-name-help' ); }
 	get insert() { return $( '.ve-ui-toolbar-group-insert' ); }
 	get insertTableElement() { return $( '.oo-ui-tool-name-insertTable' ); }
 	get insertedTable() { return $( 'table.ve-ce-branchNode' ); }
