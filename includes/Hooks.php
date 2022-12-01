@@ -116,6 +116,11 @@ class Hooks {
 			'wgEditSubmitButtonLabelPublish',
 			$veConfig->get( 'EditSubmitButtonLabelPublish' )
 		);
+
+		// Don't index VE edit pages (T319124)
+		if ( $output->getRequest()->getVal( 'veaction' ) ) {
+			$output->setRobotPolicy( 'noindex,nofollow' );
+		}
 	}
 
 	/**
