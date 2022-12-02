@@ -67,4 +67,10 @@ describe( 'Toolbar', function () {
 		assert( await EditPage.boldTextStyleOption.isDisplayed() );
 	} );
 
+	it( 'should open format paragraph menu', async function () {
+		await EditPage.formatParagraphElement.click();
+
+		assert( await EditPage.paragraphFormatMenu.isDisplayed() );
+	} );
+
 } );

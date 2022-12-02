@@ -7,6 +7,7 @@ class EditPage extends Page {
 	get boldTextStyleOption() { return $( '.oo-ui-tool-name-bold' ); }
 	get content() { return $( '#content' ); }
 	get edited() { return $( '*=Your edit was saved' ); }
+	get formatParagraphElement() { return $( '.ve-ui-toolbar-group-format' ); }
 	get helpPopup() { return $( '.ve-ui-mwHelpPopupTool-items' ); }
 	get helpElement() { return $( '.oo-ui-tool-name-help' ); }
 	get insert() { return $( '.ve-ui-toolbar-group-insert' ); }
@@ -17,6 +18,7 @@ class EditPage extends Page {
 	get notification() { return $( 'div.mw-notification-content span.oo-ui-labelElement-label' ); }
 	get options() { return $( '.oo-ui-tool-name-meta' ); }
 	get pageOptionsElement() { return $( '.ve-ui-toolbar-group-pageMenu' ); }
+	get paragraphFormatMenu() { return $( '.oo-ui-tool-name-paragraph' ); }
 	get popupToolGroup() { return $( '.oo-ui-popupToolGroup-active-tools' ); }
 	get savePage() { return $( '.ve-ui-overlay-global .oo-ui-processDialog-actions-primary' ); }
 	get savePageDots() { return $( '.ve-ui-toolbar-saveButton' ); }
