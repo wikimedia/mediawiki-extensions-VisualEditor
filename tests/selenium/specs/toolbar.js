@@ -61,4 +61,10 @@ describe( 'Toolbar', function () {
 		assert( await EditPage.bulletListOption.isDisplayed() );
 	} );
 
+	it( 'should open style text options', async function () {
+		await EditPage.styleTextElement.click();
+
+		assert( await EditPage.boldTextStyleOption.isDisplayed() );
+	} );
+
 } );
