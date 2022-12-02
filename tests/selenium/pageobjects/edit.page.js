@@ -3,6 +3,7 @@ const Page = require( 'wdio-mediawiki/Page' );
 
 class EditPage extends Page {
 
+	get bulletListOption() { return $( '.oo-ui-tool-name-bullet' ); }
 	get content() { return $( '#content' ); }
 	get edited() { return $( '*=Your edit was saved' ); }
 	get helpPopup() { return $( '.ve-ui-mwHelpPopupTool-items' ); }
@@ -20,6 +21,7 @@ class EditPage extends Page {
 	get savePageDots() { return $( '.ve-ui-toolbar-saveButton' ); }
 	get specialCharacterElement() { return $( '.oo-ui-tool-name-specialCharacter' ); }
 	get specialCharacterMenu() { return $( '.oo-ui-menuLayout' ); }
+	get structureOptionsElement() { return $( '.ve-ui-toolbar-group-structure' ); }
 	get switchEditorElement() { return $( '.ve-ui-toolbar-group-editMode' ); }
 	get toolbar() { return $( '.ve-init-mw-desktopArticleTarget-toolbar-open' ); }
 	get veBodyContent() { return $( '.mw-body-content.ve-ui-surface' ); }
