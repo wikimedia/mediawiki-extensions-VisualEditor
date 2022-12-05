@@ -278,18 +278,31 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 	var isInternal = null;
 	// Protocol relative href
 	var relativeHref = href.replace( /^https?:/i, '' );
+	var uri, queryLength;
 
 	// Equivalent to `ve.init.platform.getExternalLinkUrlProtocolsRegExp()`, which can not be called here
 	var externalLinkUrlProtocolsRegExp = new RegExp( '^(' + mw.config.get( 'wgUrlProtocols' ) + ')', 'i' );
 	// Paths that don't start with a registered external url protocol
 	if ( !externalLinkUrlProtocolsRegExp.test( href ) ) {
 		isInternal = true;
+		if ( href.match( /^\.\// ) ) {
+			// The specific case of parsoid resource URIs, which are in the form `./Title`.
+			// If they're redlinks they now include a querystring which should be stripped.
+			uri = new mw.Uri( href );
+			queryLength = Object.keys( uri.query ).length;
+			if (
+				( queryLength === 2 && uri.query.action === 'edit' && uri.query.redlink === '1' )
+			) {
+				uri.query = {};
+				href = '.' + uri.getRelativePath();
+			}
+		}
 	} else {
 		// Check if this matches the server's script path (as used by red links)
 		var scriptBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
 		if ( relativeHref.indexOf( scriptBase ) === 0 ) {
-			var uri = new mw.Uri( relativeHref );
-			var queryLength = Object.keys( uri.query ).length;
+			uri = new mw.Uri( relativeHref );
+			queryLength = Object.keys( uri.query ).length;
 			if (
 				( queryLength === 1 && uri.query.title ) ||
 				( queryLength === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' )
