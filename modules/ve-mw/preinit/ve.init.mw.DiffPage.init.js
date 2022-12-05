@@ -87,6 +87,10 @@
 			}, function ( code, data ) {
 				mw.notify( new mw.Api().getErrorMessage( data ), { type: 'error' } );
 				reviewModeButtonSelect.selectItemByData( 'source' );
+			} ).catch( function ( error ) {
+				mw.notify( error.message, { type: 'error' } );
+				reviewModeButtonSelect.selectItemByData( 'source' );
+				throw error;
 			} );
 		}
 
