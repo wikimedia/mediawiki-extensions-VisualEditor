@@ -860,7 +860,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 	if ( this.pageExists && !this.restoring ) {
 		// Fix permalinks
 		if ( data.newrevid !== undefined ) {
-			$( '#t-permalink a, #coll-download-as-rl a' ).each( function () {
+			$( '#t-permalink' ).add( '#coll-download-as-rl' ).find( 'a' ).each( function () {
 				var uri = new mw.Uri( $( this ).attr( 'href' ) );
 				uri.query.oldid = data.newrevid;
 				$( this ).attr( 'href', uri.toString() );
@@ -932,7 +932,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 			namespaceTabId = 'ca-nstab-' + namespaceKey;
 		}
 		// Allow instant switching back to view mode, without refresh
-		$( '#ca-view a, #' + namespaceTabId + ' a' )
+		$( '#ca-view' ).add( '#' + namespaceTabId ).find( 'a' )
 			.on( 'click.ve-target', this.onViewTabClick.bind( this ) );
 	}
 
