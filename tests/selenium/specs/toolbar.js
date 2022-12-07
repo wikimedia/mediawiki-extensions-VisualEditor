@@ -49,4 +49,10 @@ describe( 'Toolbar', function () {
 		assert( await EditPage.specialCharacterMenu.isDisplayed() );
 	} );
 
+	it( 'should open insert menu', async function () {
+		await EditPage.insert.click();
+
+		assert( await EditPage.insertMenu.isDisplayed() );
+	} );
+
 } );

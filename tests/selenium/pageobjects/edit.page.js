@@ -8,6 +8,7 @@ class EditPage extends Page {
 	get helpPopup() { return $( '.ve-ui-mwHelpPopupTool-items' ); }
 	get helpElement() { return $( '.oo-ui-tool-name-help' ); }
 	get insert() { return $( '.ve-ui-toolbar-group-insert' ); }
+	get insertMenu() { return $( '.oo-ui-tool-name-media' ); }
 	get insertTableElement() { return $( '.oo-ui-tool-name-insertTable' ); }
 	get insertedTable() { return $( 'table.ve-ce-branchNode' ); }
 	get notices() { return $( '.ve-ui-mwNoticesPopupTool-items' ); }
