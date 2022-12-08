@@ -2,13 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"OC Ripper",
-			"Sf"
+			"Sf",
+			"Vlad5250"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje]]",
 	"tag-visualeditor-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditora]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualni uređivač: potrebna provjera]]",
 	"tag-visualeditor-needcheck-description": "Izmjena načinjena korištenjem [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditora]] gdje je sistem detektirao wikitekst s mogućim neželjenim izmjenama.",
+	"tag-visualeditor-wikitext": "uređivanje izvora (2017.)",
+	"tag-visualeditor-wikitext-description": "Izmjena napravljena uređivačem wikiteksta (2017.)",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno uređivanje: prebačeno]]",
 	"tag-visualeditor-switched-description": "Korisnik je počeo uređivati koristeći vizualni uređivač, pa se prebacio na izvorno uređivanje wikiteksta.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
@@ -19,5 +22,6 @@
 	"visualeditor-welcomedialog-content": "Bilo ko može uređivati i svako poboljšanje nam pomaže.",
 	"visualeditor-welcomedialog-content-thanks": "Ovim pomažete svijetu da otkrije više!",
 	"visualeditor-welcomedialog-switch": "Prebaci na uređivač koda",
+	"visualeditor-welcomedialog-switch-ve": "Prebaci me na vizualni uređivač",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Dobro došli}} na {{GRAMMAR:akuzativ|$2}}"
 }
