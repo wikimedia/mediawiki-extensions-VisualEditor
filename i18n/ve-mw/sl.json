@@ -217,7 +217,7 @@
 	"visualeditor-dialogbutton-template-tooltip": "Predloga",
 	"visualeditor-editconflict": "Zaradi navzkrižja urejanj vaše spremembe ni bilo mogoče shraniti. Želite navzkrižje razrešiti ročno?",
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} si zdaj zapomni, kateri urejevalnik vam je ljubši. Urejevalni način lahko preklopite med urejanjem in svojo nastavitev shranite pozneje.",
-	"visualeditor-editingtabdialog-ok": "Uporabi urejevalnik, ki sem ga uporabil(-a) pri zadnjem urejanju",
+	"visualeditor-editingtabdialog-ok": "Uporabi urejevalnik, ki sem ga uporabil_a pri zadnjem urejanju",
 	"visualeditor-editingtabdialog-title": "Urejevalni zavihki",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|obvestilo|obvestili|obvestila|obvestil}}",
 	"visualeditor-editnotices-tooltip": "Obvestila o urejanju",
