@@ -72,15 +72,16 @@ ve.ui.MWMediaContextItem.prototype.getDescription = function () {
  */
 ve.ui.MWMediaContextItem.prototype.renderBody = function () {
 	var title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.model.getAttribute( 'resource' ) ) );
-	this.$body.append(
-		$( '<a>' )
-			.text( this.getDescription() )
-			.attr( {
-				href: title.getUrl(),
-				target: '_blank',
-				rel: 'noopener'
-			} )
-	);
+	var $link = $( '<a>' )
+		.text( this.getDescription() )
+		.attr( {
+			target: '_blank',
+			rel: 'noopener'
+		} );
+	// T322704
+	ve.setAttributeSafe( $link[ 0 ], 'href', title.getUrl(), '#' );
+
+	this.$body.append( $link );
 };
 
 /* Registration */
