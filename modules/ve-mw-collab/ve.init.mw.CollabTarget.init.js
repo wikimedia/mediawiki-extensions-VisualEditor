@@ -236,13 +236,9 @@
 
 	function loadTitle( title, importTitle ) {
 		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
-		if ( history.pushState ) {
-			// TODO: Handle popstate
-			history.pushState( { tag: 'collabTarget', title: title.toString() }, '', specialTitle.getUrl() );
-			showPage( title, importTitle );
-		} else {
-			location.href = specialTitle.getUrl( { import: importTitle } );
-		}
+		// TODO: Handle popstate
+		history.pushState( { tag: 'collabTarget', title: title.toString() }, '', specialTitle.getUrl() );
+		showPage( title, importTitle );
 	}
 
 	function getRandomTitle() {
@@ -326,9 +322,7 @@
 	} );
 
 	// Tag current state
-	if ( history.replaceState ) {
-		history.replaceState( { tag: 'collabTarget', title: pageName }, '', location.href );
-	}
+	history.replaceState( { tag: 'collabTarget', title: pageName }, '', location.href );
 	window.addEventListener( 'popstate', function ( e ) {
 		if ( e.state && e.state.tag === 'collabTarget' ) {
 			if ( e.state.title ) {

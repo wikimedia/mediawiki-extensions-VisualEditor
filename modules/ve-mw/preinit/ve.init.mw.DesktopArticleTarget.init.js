@@ -199,7 +199,7 @@
 		active = false;
 		updateTabs( false );
 		// Push read tab URL to history
-		if ( history.pushState && $( '#ca-view a' ).length ) {
+		if ( $( '#ca-view a' ).length ) {
 			history.pushState( { tag: 'visualeditor' }, '', new mw.Uri( $( '#ca-view a' ).attr( 'href' ) ) );
 		}
 		clearLoading();
@@ -636,14 +636,12 @@
 
 		if ( !active ) {
 			if ( uri.query.action !== 'edit' && !( uri.query.veaction in veactionToMode ) ) {
-				if ( history.pushState ) {
-					// Replace the current state with one that is tagged as ours, to prevent the
-					// back button from breaking when used to exit VE. FIXME: there should be a better
-					// way to do this. See also similar code in the DesktopArticleTarget constructor.
-					history.replaceState( { tag: 'visualeditor' }, '', uri );
-					// Set action=edit or veaction=edit/editsource
-					history.pushState( { tag: 'visualeditor' }, '', mode === 'source' ? veEditSourceUri : veEditUri );
-				}
+				// Replace the current state with one that is tagged as ours, to prevent the
+				// back button from breaking when used to exit VE. FIXME: there should be a better
+				// way to do this. See also similar code in the DesktopArticleTarget constructor.
+				history.replaceState( { tag: 'visualeditor' }, '', uri );
+				// Set action=edit or veaction=edit/editsource
+				history.pushState( { tag: 'visualeditor' }, '', mode === 'source' ? veEditSourceUri : veEditUri );
 
 				// Update mw.Uri instance
 				uri = veEditUri;
@@ -1257,14 +1255,12 @@
 
 			if ( !active ) {
 				if ( uri.query.action !== 'edit' && !( uri.query.veaction in veactionToMode ) ) {
-					if ( history.pushState ) {
-						// Replace the current state with one that is tagged as ours, to prevent the
-						// back button from breaking when used to exit VE. FIXME: there should be a better
-						// way to do this. See also similar code in the DesktopArticleTarget constructor.
-						history.replaceState( { tag: 'visualeditor' }, '', uri );
-						// Use linkUri
-						history.pushState( { tag: 'visualeditor' }, '', linkUri );
-					}
+					// Replace the current state with one that is tagged as ours, to prevent the
+					// back button from breaking when used to exit VE. FIXME: there should be a better
+					// way to do this. See also similar code in the DesktopArticleTarget constructor.
+					history.replaceState( { tag: 'visualeditor' }, '', uri );
+					// Use linkUri
+					history.pushState( { tag: 'visualeditor' }, '', linkUri );
 				}
 				// Update mw.Uri instance
 				uri = linkUri;
@@ -1706,9 +1702,7 @@
 
 			delete uri.query.venotify;
 			// Get rid of the ?venotify= from the URL
-			if ( history.replaceState ) {
-				history.replaceState( null, '', uri );
-			}
+			history.replaceState( null, '', uri );
 		}
 	} );
 }() );

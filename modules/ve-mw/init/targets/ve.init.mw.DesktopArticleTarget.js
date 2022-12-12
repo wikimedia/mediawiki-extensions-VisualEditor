@@ -71,13 +71,11 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		.addClass( 've-init-mw-desktopArticleTarget' )
 		.append( this.$originalContent );
 
-	if ( history.replaceState ) {
-		// We replace the current state with one that's marked with our tag. This way, when users
-		// use the Back button to exit the editor we can restore Read mode. This is because we want
-		// to ignore foreign states in onWindowPopState. Without this, the Read state is foreign.
-		// FIXME: There should be a much better solution than this.
-		history.replaceState( this.popState, '', this.currentUri );
-	}
+	// We replace the current state with one that's marked with our tag. This way, when users
+	// use the Back button to exit the editor we can restore Read mode. This is because we want
+	// to ignore foreign states in onWindowPopState. Without this, the Read state is foreign.
+	// FIXME: There should be a much better solution than this.
+	history.replaceState( this.popState, '', this.currentUri );
 
 	this.setupSkinTabs();
 
@@ -1086,7 +1084,6 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 	// permalink then it will be there already and the constructor called #activate)
 	if (
 		!this.actFromPopState &&
-		history.pushState &&
 		(
 			this.currentUri.query.veaction !== veaction ||
 			this.currentUri.query.section !== section
@@ -1132,7 +1129,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	this.emit( 'restorePage' );
 
 	// Push article url into history
-	if ( !this.actFromPopState && history.pushState ) {
+	if ( !this.actFromPopState ) {
 		// Remove the VisualEditor query parameters
 		var uri = this.currentUri;
 		if ( 'veaction' in uri.query ) {

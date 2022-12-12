@@ -94,10 +94,8 @@
 			} );
 		}
 
-		if ( history.replaceState ) {
-			uri.query.diffmode = mode;
-			history.replaceState( history.state, '', uri );
-		}
+		uri.query.diffmode = mode;
+		history.replaceState( history.state, '', uri );
 
 	}
 
