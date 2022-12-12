@@ -15,12 +15,12 @@
 			saveSuccess: 'save_success',
 			saveFailure: 'save_failure'
 		},
-		trackdebug = !!mw.Uri().query.trackdebug,
+		trackdebug = new URL( location.href ).searchParams.has( 'trackdebug' ),
 		firstInitDone = false;
 
 	function getEditingSessionIdFromRequest() {
 		return mw.config.get( 'wgWMESchemaEditAttemptStepSessionId' ) ||
-			mw.Uri().query.editingStatsId;
+			new URL( location.href ).searchParams.get( 'editingStatsId' );
 	}
 
 	var timing = {};
