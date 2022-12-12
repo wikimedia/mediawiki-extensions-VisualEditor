@@ -288,30 +288,43 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 		if ( href.match( /^\.\// ) ) {
 			// The specific case of parsoid resource URIs, which are in the form `./Title`.
 			// If they're redlinks they now include a querystring which should be stripped.
-			uri = new mw.Uri( href );
-			queryLength = Object.keys( uri.query ).length;
-			if (
-				( queryLength === 2 && uri.query.action === 'edit' && uri.query.redlink === '1' )
-			) {
-				uri.query = {};
-				href = '.' + uri.getRelativePath();
+			try {
+				uri = new mw.Uri( href );
+			} catch ( e ) {
+				// probably an incorrecly encoded URI, try a very-naïve fallback
+				href = href.replace( /\?action=edit&redlink=1$/, '' );
+			}
+			if ( uri ) {
+				queryLength = Object.keys( uri.query ).length;
+				if (
+					( queryLength === 2 && uri.query.action === 'edit' && uri.query.redlink === '1' )
+				) {
+					uri.query = {};
+					href = '.' + uri.getRelativePath();
+				}
 			}
 		}
 	} else {
 		// Check if this matches the server's script path (as used by red links)
 		var scriptBase = mw.libs.ve.resolveUrl( mw.config.get( 'wgScript' ), doc ).replace( /^https?:/i, '' );
 		if ( relativeHref.indexOf( scriptBase ) === 0 ) {
-			uri = new mw.Uri( relativeHref );
-			queryLength = Object.keys( uri.query ).length;
-			if (
-				( queryLength === 1 && uri.query.title ) ||
-				( queryLength === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' )
-			) {
-				href = uri.query.title + ( uri.fragment ? '#' + uri.fragment : '' );
-				isInternal = true;
-			} else if ( queryLength > 1 ) {
-				href = relativeHref;
-				isInternal = false;
+			try {
+				uri = new mw.Uri( relativeHref );
+			} catch ( e ) {
+				// probably an incorrectly encoded URI
+			}
+			if ( uri ) {
+				queryLength = Object.keys( uri.query ).length;
+				if (
+					( queryLength === 1 && uri.query.title ) ||
+					( queryLength === 3 && uri.query.title && uri.query.action === 'edit' && uri.query.redlink === '1' )
+				) {
+					href = uri.query.title + ( uri.fragment ? '#' + uri.fragment : '' );
+					isInternal = true;
+				} else if ( queryLength > 1 ) {
+					href = relativeHref;
+					isInternal = false;
+				}
 			}
 		}
 		if ( isInternal === null ) {
