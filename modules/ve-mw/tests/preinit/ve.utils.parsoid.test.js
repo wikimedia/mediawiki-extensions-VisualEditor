@@ -109,8 +109,6 @@ QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 			msg: 'Valid protocol is handled as external link',
 			href: 'https://example.net/',
 			expectedInfo: {
-				title: 'https://example.net/',
-				rawTitle: 'https://example.net/',
 				isInternal: false
 			}
 		},
@@ -118,8 +116,6 @@ QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 			msg: 'Valid protocol is handled as external link',
 			href: 'mailto:example@example.net',
 			expectedInfo: {
-				title: 'mailto:example@example.net',
-				rawTitle: 'mailto:example@example.net',
 				isInternal: false
 			}
 		}

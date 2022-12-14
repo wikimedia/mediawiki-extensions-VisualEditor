@@ -261,12 +261,12 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
  * Parse URL to get title it points to.
  *
  * @param {string} href
- * @param {HTMLDocument|string} doc Document whose base URL to use, or base URL as a string.
+ * @param {HTMLDocument} doc Document whose base URL to use
  * @return {Object} Information about the given href
- * @return {string} return.title
- *    The title of the internal link, else the original href if href is external
- * @return {string} return.rawTitle
- *    The title without URL decoding and underscore normalization applied
+ * @return {string} [return.title]
+ *    The title of the internal link (if the href is internal)
+ * @return {string} [return.rawTitle]
+ *    The title without URL decoding and underscore normalization applied (if the href is internal)
  * @return {boolean} return.isInternal
  *    True if the href pointed to the local wiki, false if href is external
  */
@@ -342,10 +342,14 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 		}
 	}
 
+	if ( !isInternal ) {
+		return { isInternal: false };
+	}
+
 	// This href doesn't necessarily come from Parsoid (and it might not have the "./" prefix), but
 	// this method will work fine.
 	var data = mw.libs.ve.parseParsoidResourceName( href );
-	data.isInternal = isInternal;
+	data.isInternal = true;
 	return data;
 };
 
