@@ -419,7 +419,10 @@
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
-			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.less"
+			"styles": "modules/ve-mw/init/styles/ve.init.mw.DesktopArticleTarget.noscript.less",
+			"targets": [
+				"desktop"
+			]
 		},
 		"ext.visualEditor.targetLoader": {
 			"group": "visualEditorA",
@@ -462,7 +465,10 @@
 				"monobook": [
 					"modules/ve-mw/init/styles/ve.init.mw.DesktopTarget-monobook.less"
 				]
-			}
+			},
+			"targets": [
+				"desktop"
+			]
 		},
 		"ext.visualEditor.desktopArticleTarget": {
 			"group": "visualEditorA",
@@ -506,6 +512,9 @@
 				"postedit-confirmation-saved",
 				"visualeditor-section-body-placeholder",
 				"visualeditor-section-title-placeholder"
+			],
+			"targets": [
+				"desktop"
 			]
 		},
 		"ext.visualEditor.mobileArticleTarget": {
