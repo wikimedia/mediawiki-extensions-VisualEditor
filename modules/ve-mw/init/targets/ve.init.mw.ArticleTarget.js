@@ -604,8 +604,8 @@ ve.init.mw.ArticleTarget.prototype.replacePageContent = function (
 		$( '#catlinks' ).replaceWith( $categories );
 	}
 
-	// eslint-disable-next-line no-jquery/no-html
-	$( '#contentSub, .minerva__subtitle' ).html( contentSub );
+	mw.util.clearSubtitle();
+	mw.util.addSubtitle( contentSub );
 
 	this.setRealRedirectInterface();
 
