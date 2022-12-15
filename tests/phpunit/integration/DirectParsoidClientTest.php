@@ -7,6 +7,8 @@ use Language;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
+use MediaWiki\Rest\Handler\PageRestHelperFactory;
+use MediaWiki\Rest\HttpException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 
@@ -23,6 +25,28 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
 			$services->getPageRestHelperFactory(),
+			$services->getUserFactory()->newAnonymous()
+		);
+
+		return $directClient;
+	}
+
+	/**
+	 * @return DirectParsoidClient
+	 */
+	private function createDirectClientWithHttpExceptionFromFactory(): DirectParsoidClient {
+		$factory = $this->createNoOpMock( PageRestHelperFactory::class, [
+			'newHtmlOutputRendererHelper',
+			'newHtmlInputTransformHelper',
+		] );
+
+		$e = new HttpException( 'testing', 400 );
+		$factory->method( 'newHtmlOutputRendererHelper' )->willThrowException( $e );
+		$factory->method( 'newHtmlInputTransformHelper' )->willThrowException( $e );
+
+		$services = $this->getServiceContainer();
+		$directClient = new DirectParsoidClient(
+			$factory,
 			$services->getUserFactory()->newAnonymous()
 		);
 
@@ -218,6 +242,50 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$updatedWikitext = $transformHtmlResponse['body'];
 		$this->assertStringContainsString( $originalWikitext, $updatedWikitext );
 		$this->assertStringContainsString( 'More Text', $updatedWikitext );
+	}
+
+	/**
+	 * @covers ::getPageHtml
+	 */
+	public function testGetPageHtml_HttpException() {
+		$directClient = $this->createDirectClientWithHttpExceptionFromFactory();
+
+		$revision = $this->getExistingTestPage( 'DirectParsoidClient' )
+			->getRevisionRecord();
+
+		$response = $directClient->getPageHtml( $revision );
+		$this->assertArrayHasKey( 'error', $response );
+		$this->assertSame( 'testing', $response['error']['message'] );
+	}
+
+	/**
+	 * @covers ::getPageHtml
+	 */
+	public function testTransformHtml_HttpException() {
+		$directClient = $this->createDirectClientWithHttpExceptionFromFactory();
+
+		$page = $this->getExistingTestPage( 'DirectParsoidClient' );
+
+		$response = $directClient->transformHTML(
+			$page, Language::factory( 'en' ), 'some html', null, null
+		);
+		$this->assertArrayHasKey( 'error', $response );
+		$this->assertSame( 'testing', $response['error']['message'] );
+	}
+
+	/**
+	 * @covers ::getPageHtml
+	 */
+	public function testTransformWikitext_HttpException() {
+		$directClient = $this->createDirectClientWithHttpExceptionFromFactory();
+
+		$page = $this->getExistingTestPage( 'DirectParsoidClient' );
+
+		$response = $directClient->transformWikitext(
+			$page, Language::factory( 'en' ), 'some text', false, null, false
+		);
+		$this->assertArrayHasKey( 'error', $response );
+		$this->assertSame( 'testing', $response['error']['message'] );
 	}
 
 }

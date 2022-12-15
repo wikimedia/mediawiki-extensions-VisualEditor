@@ -146,9 +146,9 @@ class DirectParsoidClient implements ParsoidClient {
 	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage = null ): array {
 		// In the VE client, we always want to stash.
 		$page = $revision->getPage();
-		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, true );
 
 		try {
+			$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, true );
 			$parserOutput = $helper->getHtml();
 
 			return $this->fakeRESTbaseHTMLResponse( $parserOutput->getRawText(), $helper );
@@ -198,13 +198,14 @@ class DirectParsoidClient implements ParsoidClient {
 		bool $stash
 	): array {
 		$revision = $this->makeFakeRevision( $page, $wikitext );
-		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, $stash );
-
-		if ( $bodyOnly ) {
-			$helper->setFlavor( 'fragment' );
-		}
 
 		try {
+			$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, $stash );
+
+			if ( $bodyOnly ) {
+				$helper->setFlavor( 'fragment' );
+			}
+
 			$parserOutput = $helper->getHtml();
 			$html = $parserOutput->getRawText();
 
@@ -228,9 +229,9 @@ class DirectParsoidClient implements ParsoidClient {
 	public function transformHTML(
 		PageIdentity $page, Language $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
-		$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
-
 		try {
+			$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
+
 			$content = $helper->getContent();
 			$format = $content->getDefaultFormat();
 
