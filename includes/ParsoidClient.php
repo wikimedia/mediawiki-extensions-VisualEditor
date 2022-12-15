@@ -14,6 +14,7 @@ interface ParsoidClient {
 	 * @param Language|null $targetLanguage Desired output language
 	 *
 	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
+	 * @phan-return array{body:string,headers:array<string,string>,error?:non-empty-array}
 	 */
 	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array;
 
@@ -27,6 +28,7 @@ interface ParsoidClient {
 	 * @param ?string $etag The ETag to set in the HTTP request header
 	 *
 	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
+	 * @phan-return array{body:string,headers:array<string,string>,error?:non-empty-array}
 	 */
 	public function transformHTML(
 		PageIdentity $page,
@@ -47,6 +49,7 @@ interface ParsoidClient {
 	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
 	 *
 	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
+	 * @phan-return array{body:string,headers:array<string,string>,error?:non-empty-array}
 	 */
 	public function transformWikitext(
 		PageIdentity $page,
