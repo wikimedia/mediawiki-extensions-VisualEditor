@@ -642,11 +642,16 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	if ( !this.pageExists || this.restoring || !this.isViewPage ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
-
-			var newUrlParams = !target.pageExists || target.restoring ?
-				( data.newrevid === undefined ? {} : { venotify: target.restoring ? 'restored' : 'created' } ) :
-				{};
-
+			var newUrlParams = {};
+			if ( data.newrevid !== undefined ) {
+				if ( target.restoring ) {
+					newUrlParams.venotify = 'restored';
+				} else if ( !target.pageExists ) {
+					newUrlParams.venotify = 'created';
+				} else {
+					newUrlParams.venotify = 'saved';
+				}
+			}
 			if ( data.isRedirect ) {
 				newUrlParams.redirect = 'no';
 			}
