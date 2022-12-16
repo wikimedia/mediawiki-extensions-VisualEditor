@@ -49,13 +49,20 @@
 		);
 	}
 
-	function addABTestData( data ) {
-		// DiscussionTools New Topic A/B test for logged out users
+	function addABTestData( data, addToken ) {
+		// DiscussionTools A/B test for logged out users
 		if ( !mw.config.get( 'wgDiscussionToolsABTest' ) ) {
 			return;
 		}
 		if ( mw.config.get( 'wgDiscussionToolsABTestBucket' ) ) {
 			data.bucket = mw.config.get( 'wgDiscussionToolsABTestBucket' );
+		}
+		if ( mw.user.isAnon() && addToken ) {
+			var token = mw.cookie.get( 'DTABid', '' );
+			if ( token ) {
+				// eslint-disable-next-line camelcase
+				data.anonymous_user_token = token;
+			}
 		}
 	}
 
@@ -232,7 +239,7 @@
 		}
 		/* eslint-enable camelcase */
 
-		addABTestData( data );
+		addABTestData( data, true );
 
 		logEditViaMetricsPlatform( data, actionPrefix );
 
