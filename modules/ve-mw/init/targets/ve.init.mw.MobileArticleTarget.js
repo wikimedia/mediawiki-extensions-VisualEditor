@@ -429,7 +429,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
-	var fragment = this.getSectionFragmentFromPage();
+	var fragment = this.getSectionHashFromPage().slice( 1 );
 
 	this.overlay.sectionId = fragment;
 	this.overlay.onSaveComplete( data.newrevid );
@@ -460,9 +460,11 @@ ve.init.mw.MobileArticleTarget.prototype.teardown = function () {
 	// Parent method
 	return ve.init.mw.MobileArticleTarget.super.prototype.teardown.call( this ).then( function () {
 		if ( !target.isViewPage ) {
-			location.href = target.viewUri.clone().extend( {
-				redirect: mw.config.get( 'wgIsRedirect' ) ? 'no' : undefined
-			} );
+			var newUrl = new URL( target.viewUrl );
+			if ( mw.config.get( 'wgIsRedirect' ) ) {
+				newUrl.searchParams.set( 'redirect', 'no' );
+			}
+			location.href = newUrl;
 		}
 	} );
 };
