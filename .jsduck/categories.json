@@ -70,7 +70,6 @@
 					"mw.Api",
 					"mw.Message",
 					"mw.Title",
-					"mw.Uri",
 					"mw.widgets.*Widget"
 				]
 			},

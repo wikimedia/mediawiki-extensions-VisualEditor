@@ -440,7 +440,6 @@
 				"jquery.textSelection",
 				"mediawiki.api",
 				"web2017-polyfills",
-				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.storage"
 			],
@@ -756,7 +755,6 @@
 				"mediawiki.storage",
 				"mediawiki.Title",
 				"web2017-polyfills",
-				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
 				"ext.visualEditor.base",
@@ -2397,8 +2395,7 @@
 				"oojs-ui",
 				"oojs-ui.styles.icons-accessibility",
 				"oojs-ui.styles.icons-editing-advanced",
-				"web2017-polyfills",
-				"mediawiki.Uri"
+				"web2017-polyfills"
 			],
 			"messages": [
 				"visualeditor-savedialog-review-visual",
