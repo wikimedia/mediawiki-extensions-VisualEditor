@@ -7,7 +7,9 @@
 			"Jeluang Terluang",
 			"Karmadunya9-",
 			"Macofe",
-			"Pizza1016"
+			"Pizza1016",
+			"TMg",
+			"Tofeiku"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -52,7 +54,7 @@
 	"visualeditor-dialog-media-info-readmore": "Ketahui lebih lanjut",
 	"visualeditor-dialog-media-info-uploaded": "Dimuat naik pada $1",
 	"visualeditor-dialog-media-page-advanced": "Tetapan selanjutnya",
-	"visualeditor-dialog-media-page-general": "Tetapan umum",
+	"visualeditor-dialog-media-page-general": "Umum",
 	"visualeditor-dialog-media-position-center": "Tengah",
 	"visualeditor-dialog-media-position-checkbox": "Balutkan teks sekitar perkara ini",
 	"visualeditor-dialog-media-position-left": "Kiri",
@@ -165,7 +167,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Adakah anda betul-betul mahu teruskan tanpa mengisi {{PLURAL:$2|ruangan|ruangan-ruangan}} $1?",
 	"visualeditor-dialog-transclusion-single-mode": "Sembunyikan pilihan",
 	"visualeditor-dialog-transclusion-title": "Transklusi",
-	"visualeditor-dialogbutton-media-tooltip": "Media",
+	"visualeditor-dialogbutton-media-tooltip": "Imej dan media",
 	"visualeditor-dialogbutton-meta-tooltip": "Tetapan laman",
 	"visualeditor-dialogbutton-template-tooltip": "Templat",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Transklusi",
