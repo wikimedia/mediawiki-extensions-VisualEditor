@@ -55,4 +55,10 @@ describe( 'Toolbar', function () {
 		assert( await EditPage.insertMenu.isDisplayed() );
 	} );
 
+	it( 'should open structure options menu', async function () {
+		await EditPage.structureOptionsElement.click();
+
+		assert( await EditPage.bulletListOption.isDisplayed() );
+	} );
+
 } );
