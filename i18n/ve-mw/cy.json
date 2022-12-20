@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Afalau",
 			"Cymrodor",
 			"DChan (WMF)",
 			"Diafol",
@@ -126,7 +127,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Isbennawd 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Isbennawd 4",
 	"visualeditor-languages-tool": "Ieithoedd",
-	"visualeditor-linkinspector-button-link-external": "Dolen allanol",
+	"visualeditor-linkinspector-button-link-external": "Gwefan allanol",
 	"visualeditor-linkinspector-illegal-title": "Teitl tudalen annilys",
 	"visualeditor-meta-tool": "Opsiynau",
 	"visualeditor-mweditmodesource-warning-cancel": "Diddymu",
