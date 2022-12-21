@@ -226,7 +226,6 @@ ve.dm.mwExample.MWInternalLink.absoluteData = {
 	type: 'link/mwInternal',
 	attributes: {
 		title: 'Foo/Bar',
-		origTitle: 'Foo/Bar',
 		normalizedTitle: 'Foo/Bar',
 		lookupTitle: 'Foo/Bar'
 	}
@@ -241,7 +240,6 @@ ve.dm.mwExample.MWInternalSectionLink.absoluteData = {
 	type: 'link/mwInternal',
 	attributes: {
 		title: 'Foo#Bar',
-		origTitle: 'Foo#Bar',
 		normalizedTitle: 'Foo#Bar',
 		lookupTitle: 'Foo'
 	}
@@ -252,7 +250,6 @@ ve.dm.mwExample.MWMediaLinkExistsData = {
 	attributes: {
 		lookupTitle: 'Media:Exists.png',
 		normalizedTitle: 'Media:Exists.png',
-		origTitle: 'Media:Exists.png',
 		title: 'Media:Exists.png'
 	}
 };
@@ -262,7 +259,6 @@ ve.dm.mwExample.MWMediaLinkMissingData = {
 	attributes: {
 		lookupTitle: 'Media:Missing.png',
 		normalizedTitle: 'Media:Missing.png',
-		origTitle: 'Media:Missing.png',
 		title: 'Media:Missing.png'
 	}
 };
@@ -422,9 +418,7 @@ ve.dm.mwExample.withMeta = [
 		type: 'mwCategory',
 		attributes: {
 			category: 'Category:Bar',
-			origCategory: 'Category:Bar',
-			sortkey: '',
-			origSortkey: ''
+			sortkey: ''
 		}
 	},
 	{ type: '/mwCategory' },
@@ -470,9 +464,7 @@ ve.dm.mwExample.withMeta = [
 		type: 'mwCategory',
 		attributes: {
 			category: 'Category:Foo foo',
-			origCategory: 'Category:Foo_foo',
-			sortkey: 'Bar baz#quux',
-			origSortkey: 'Bar baz%23quux'
+			sortkey: 'Bar baz#quux'
 		}
 	},
 	{ type: '/mwCategory' },
@@ -527,9 +519,7 @@ ve.dm.mwExample.withMetaRealData = [
 		type: 'mwCategory',
 		attributes: {
 			category: 'Category:Bar',
-			origCategory: 'Category:Bar',
-			sortkey: '',
-			origSortkey: ''
+			sortkey: ''
 		}
 	},
 	{ type: '/mwCategory' },
@@ -561,9 +551,7 @@ ve.dm.mwExample.withMetaRealData = [
 		type: 'mwCategory',
 		attributes: {
 			category: 'Category:Foo foo',
-			origCategory: 'Category:Foo_foo',
-			sortkey: 'Bar baz#quux',
-			origSortkey: 'Bar baz%23quux'
+			sortkey: 'Bar baz#quux'
 		}
 	},
 	{ type: '/mwCategory' },
@@ -595,9 +583,7 @@ ve.dm.mwExample.withMetaMetaData = [
 			type: 'mwCategory',
 			attributes: {
 				category: 'Category:Bar',
-				origCategory: 'Category:Bar',
-				sortkey: '',
-				origSortkey: ''
+				sortkey: ''
 			}
 		}
 	],
@@ -632,9 +618,7 @@ ve.dm.mwExample.withMetaMetaData = [
 			type: 'mwCategory',
 			attributes: {
 				category: 'Category:Foo foo',
-				origCategory: 'Category:Foo_foo',
-				sortkey: 'Bar baz#quux',
-				origSortkey: 'Bar baz%23quux'
+				sortkey: 'Bar baz#quux'
 			}
 		},
 		{
@@ -1630,7 +1614,6 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'link/mwInternal',
 					attributes: {
 						title: '',
-						origTitle: '',
 						normalizedTitle: '',
 						lookupTitle: ''
 					}
@@ -1653,7 +1636,6 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'link/mwInternal',
 					attributes: {
 						title: 'Foo?+%&Bar',
-						origTitle: 'Foo%3F+%25&Bar',
 						normalizedTitle: 'Foo?+%&Bar',
 						lookupTitle: 'Foo?+%&Bar'
 					}
@@ -1857,19 +1839,19 @@ ve.dm.mwExample.domToDataCases = {
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
 			'<meta property="mw:foo" content="bar" />Ba<!-- inline -->z</p>' +
 			'<meta property="mw:bar" content="baz" /><!--barbaz-->' +
-			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
+			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar%20baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" No conversion ">&nbsp;</span><meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
 			'<meta property="mw:foo" content="bar" />Ba<span rel="ve:Comment" data-ve-comment=" inline ">&nbsp;</span>z</p>' +
 			'<meta property="mw:bar" content="baz" /><span rel="ve:Comment" data-ve-comment="barbaz">&nbsp;</span>' +
-			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
+			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar%20baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		previewBody: ve.dm.example.commentNodePreview( ' No conversion ' ) + '<meta property="mw:ThisIsAnAlien" /><p>Foo' +
 			'<link rel="mw:PageProp/Category" href="./Category:Bar" />Bar' +
 			'<meta property="mw:foo" content="bar" />Ba' + ve.dm.example.commentNodePreview( ' inline ' ) + 'z</p>' +
 			'<meta property="mw:bar" content="baz" />' + ve.dm.example.commentNodePreview( 'barbaz' ) +
-			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar baz%23quux" />' +
+			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar%20baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
 		head: '<base href="http://example.com" />',
 		data: ve.dm.mwExample.withMeta,
@@ -2178,7 +2160,6 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'link/mwInternal',
 					attributes: {
 						title: 'Bar',
-						origTitle: 'Bar',
 						normalizedTitle: 'Bar',
 						lookupTitle: 'Bar'
 					}
@@ -2190,7 +2171,6 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'link/mwInternal',
 					attributes: {
 						title: 'Bar',
-						origTitle: 'Bar',
 						normalizedTitle: 'Bar',
 						lookupTitle: 'Bar'
 					}
@@ -2202,7 +2182,6 @@ ve.dm.mwExample.domToDataCases = {
 					type: 'link/mwInternal',
 					attributes: {
 						title: 'Bar',
-						origTitle: 'Bar',
 						normalizedTitle: 'Bar',
 						lookupTitle: 'Bar'
 					}

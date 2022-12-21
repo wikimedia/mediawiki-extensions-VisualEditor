@@ -265,8 +265,6 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
  * @return {Object} Information about the given href
  * @return {string} [return.title]
  *    The title of the internal link (if the href is internal)
- * @return {string} [return.rawTitle]
- *    The title without URL decoding and underscore normalization applied (if the href is internal)
  * @return {boolean} return.isInternal
  *    True if the href pointed to the local wiki, false if href is external
  */
@@ -354,12 +352,34 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 };
 
 /**
+ * Encode a page title into a Parsoid resource name.
+ *
+ * @param {string} title
+ * @return {string}
+ */
+mw.libs.ve.encodeParsoidResourceName = function ( title ) {
+	// Parsoid: Sanitizer::sanitizeTitleURI, Env::makeLink
+	var idx = title.indexOf( '#' );
+	var anchor = null;
+	if ( idx !== -1 ) {
+		anchor = title.slice( idx + 1 );
+		title = title.slice( 0, idx );
+	}
+	var encodedTitle = title.replace( /[%? [\]#|<>]/g, function ( match ) {
+		return mw.util.wikiUrlencode( match );
+	} );
+	if ( anchor !== null ) {
+		encodedTitle += '#' + mw.util.escapeIdForLink( anchor );
+	}
+	return './' + encodedTitle;
+};
+
+/**
  * Split Parsoid resource name into the href prefix and the page title.
  *
  * @param {string} resourceName Resource name, from a `href` or `resource` attribute
  * @return {Object} Object with the following properties:
  * @return {string} return.title Full page title in text form (with namespace, and spaces instead of underscores)
- * @return {string} return.rawTitle The title without URL decoding and underscore normalization applied
  */
 mw.libs.ve.parseParsoidResourceName = function ( resourceName ) {
 	// Resource names are always prefixed with './' to prevent the MediaWiki namespace from being
@@ -369,8 +389,7 @@ mw.libs.ve.parseParsoidResourceName = function ( resourceName ) {
 	return {
 		// '%' and '?' are valid in page titles, but normally URI-encoded. This also changes underscores
 		// to spaces.
-		title: mw.libs.ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] ),
-		rawTitle: matches[ 2 ]
+		title: mw.libs.ve.decodeURIComponentIntoArticleTitle( matches[ 2 ] )
 	};
 };
 

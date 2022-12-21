@@ -95,7 +95,6 @@ QUnit.test( 'convert', function ( assert ) {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
-						origTitle: 'Foo',
 						title: 'Foo'
 					}
 				} ],
@@ -129,7 +128,6 @@ QUnit.test( 'convert', function ( assert ) {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
-						origTitle: 'Foo',
 						title: 'Foo'
 					}
 				} ],
