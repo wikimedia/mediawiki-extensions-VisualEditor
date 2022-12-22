@@ -19,7 +19,9 @@
 	"apihelp-visualeditor-param-page": "Stran, na kateri bodo dejanja izvedena.",
 	"apihelp-visualeditor-param-pst": "Pretvorjeno wvikibesedilo pred pošiljanjem Parsoidu predhodno shranite (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Razdelek, na katerem bo dejanje izvedeno.",
+	"apihelp-visualeditor-param-wikitext": "Vikibesedilo za pošiljanje v Parsoid za pretvorbo v HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Vrne HTML5 za stran iz storitve Parsoid.",
+	"apihelp-visualeditoredit-description": "Shrani v MediaWiki kot stran HTML5 (s storitvijo Parsoid pretvorjeno v vikibesedilo).",
 	"apihelp-visualeditoredit-param-etag": "ETag za pošiljanje.",
 	"apihelp-visualeditoredit-param-html": "HTML za pošiljanje Parsoidu za pretvorbo v vikibesedilo.",
 	"apihelp-visualeditoredit-param-minor": "Oznaka za manjše urejanje.",
@@ -27,5 +29,7 @@
 	"apihelp-visualeditoredit-param-paction": "Dejanje za izvedbo.",
 	"apihelp-visualeditoredit-param-page": "Stran, na kateri bodo dejanja izvedena.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Naslov novega razdelka.",
-	"apihelp-visualeditoredit-param-summary": "Povzetek urejanja"
+	"apihelp-visualeditoredit-param-summary": "Povzetek urejanja",
+	"apihelp-visualeditoredit-param-wikitext": "Vikibesedilo za obdelavo.",
+	"apihelp-visualeditoredit-summary": "Shrani stran HTML5 v MediaWiki (s storitvijo Parsoid pretvorjeno v vikibesedilo)."
 }
