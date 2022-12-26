@@ -8,7 +8,9 @@
 			"Jdforrester",
 			"Lloffiwr",
 			"Robin Owain",
-			"ОйЛ"
+			"ОйЛ",
+			"Afalau",
+			"TMg"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -153,7 +155,7 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Isbennawd 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Isbennawd 4",
 	"visualeditor-languages-tool": "Ieithoedd",
-	"visualeditor-linkinspector-button-link-external": "Dolen allanol",
+	"visualeditor-linkinspector-button-link-external": "Gwefan allanol",
 	"visualeditor-linkinspector-illegal-title": "Teitl tudalen annilys",
 	"visualeditor-mainnamespacepagelink": "Project:Y prif barth",
 	"visualeditor-meta-tool": "Opsiynau",
