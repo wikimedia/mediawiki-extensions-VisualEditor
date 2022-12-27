@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Inabat Allanova",
-			"Nurlan"
+			"Nurlan",
+			"Ajiniyaz Nurniyazov"
 		]
 	},
 	"collabpad-doctitle": "Sheriklik paneli: $1",
@@ -12,7 +13,7 @@
 	"tooltip-ca-edit": "Vikitekst járdeminde bul betti ózgertiw",
 	"tooltip-ca-editsource": "Bul bettiń derek kodın ózgertiw",
 	"tooltip-ca-ve-edit": "Bul betti ózgertiw",
-	"visualeditor-advancedsettings-tool": "Keńeytirilgen sazlawlar",
+	"visualeditor-advancedsettings-tool": "Keńeytilgen sazlawlar",
 	"visualeditor-annotations-default-description": "Bettiń bul bólimi túsindirme aralıǵınıń bir bólegi bolıp esaplanadı.",
 	"visualeditor-annotations-default-end": "Anıqlaması keltirilgen diapazonnıń aqırı",
 	"visualeditor-annotations-default-start": "Anıqlaması keltirilgen diapazonnıń baslanıwı",
