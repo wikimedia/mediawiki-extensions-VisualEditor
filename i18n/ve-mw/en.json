@@ -204,7 +204,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Press Space to add or remove parameters. Press Enter to add a parameter and immediately edit its value. When a parameter is already selected, press Enter to edit the value.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parameters in $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(undocumented parameter)",
-	"visualeditor-dialog-transclusion-placeholder": "Add a template",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Find template",
 	"visualeditor-dialog-transclusion-required-parameter": "Required field",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Field is required.",

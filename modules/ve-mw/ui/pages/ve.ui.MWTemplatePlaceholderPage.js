@@ -62,13 +62,6 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		}
 	);
 
-	var addTemplateFieldsetConfig = {
-		label: ve.msg( 'visualeditor-dialog-transclusion-placeholder' ),
-		icon: 'puzzle',
-		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
-		items: [ addTemplateActionFieldLayout ]
-	};
-
 	var dialogTitle = this.placeholder.getTransclusion().isSingleTemplate() ?
 		'visualeditor-dialog-transclusion-template-search' :
 		'visualeditor-dialog-transclusion-add-template';
@@ -76,12 +69,16 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	// TODO: Remove `mw.storage.remove` after a few months, let's say December 2022.
 	mw.storage.remove( 'mwe-visualeditor-hide-visualeditor-dialog-transclusion-feedback-message' );
 
-	addTemplateFieldsetConfig = ve.extendObject( addTemplateFieldsetConfig, {
+	var addTemplateFieldsetConfig = {
 		// The following messages are used here:
 		// * visualeditor-dialog-transclusion-template-search
 		// * visualeditor-dialog-transclusion-add-template
-		label: ve.msg( dialogTitle )
-	} );
+		label: ve.msg( dialogTitle ),
+		icon: 'puzzle',
+		classes: [ 've-ui-mwTransclusionDialog-addTemplateFieldset' ],
+		items: [ addTemplateActionFieldLayout ]
+	};
+
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
 
 	// Initialization

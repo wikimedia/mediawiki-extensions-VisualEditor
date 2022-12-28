@@ -225,7 +225,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "ARIA description for screen readers on the template parameter selection menu for the keyboard controls.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "ARIA label for screen readers on template parameter selection menu.\n\nParameters:\n* $1 - The title of the related template.",
 	"visualeditor-dialog-transclusion-param-undocumented": "Label shown next to a parameter's name indicating that the parameter is undocumented.",
-	"visualeditor-dialog-transclusion-placeholder": "Label for section with options for adding a new template to a multi part transclusion.\n{{Identical|Add template}}",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Placeholder for the input field to find and add a new template.",
 	"visualeditor-dialog-transclusion-required-parameter": "Tooltip for the indicator icon (a star) that marks required template parameter.\n{{Identical|Required field}}",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Label describing that a template parameter is required.",
