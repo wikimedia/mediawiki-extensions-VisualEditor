@@ -267,7 +267,11 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$page = $this->getExistingTestPage( 'DirectParsoidClient' );
 
 		$response = $directClient->transformHTML(
-			$page, Language::factory( 'en' ), 'some html', null, null
+			$page,
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),
+			'some html',
+			null,
+			null
 		);
 		$this->assertArrayHasKey( 'error', $response );
 		$this->assertSame( 'testing', $response['error']['message'] );
@@ -282,7 +286,12 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$page = $this->getExistingTestPage( 'DirectParsoidClient' );
 
 		$response = $directClient->transformWikitext(
-			$page, Language::factory( 'en' ), 'some text', false, null, false
+			$page,
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),
+			'some text',
+			false,
+			null,
+			false
 		);
 		$this->assertArrayHasKey( 'error', $response );
 		$this->assertSame( 'testing', $response['error']['message'] );
