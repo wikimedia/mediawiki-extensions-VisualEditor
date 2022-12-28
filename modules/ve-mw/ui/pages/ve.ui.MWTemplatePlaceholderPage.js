@@ -66,9 +66,6 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		'visualeditor-dialog-transclusion-template-search' :
 		'visualeditor-dialog-transclusion-add-template';
 
-	// TODO: Remove `mw.storage.remove` after a few months, let's say December 2022.
-	mw.storage.remove( 'mwe-visualeditor-hide-visualeditor-dialog-transclusion-feedback-message' );
-
 	var addTemplateFieldsetConfig = {
 		// The following messages are used here:
 		// * visualeditor-dialog-transclusion-template-search
