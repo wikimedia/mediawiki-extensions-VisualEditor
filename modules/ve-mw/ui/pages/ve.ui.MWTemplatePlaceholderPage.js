@@ -56,7 +56,10 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	var addTemplateActionFieldLayout = new OO.ui.ActionFieldLayout(
 		this.addTemplateInput,
 		this.addTemplateButton,
-		{ align: 'top' }
+		{
+			label: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
+			align: 'top'
+		}
 	);
 
 	var addTemplateFieldsetConfig = {
@@ -77,9 +80,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 		// The following messages are used here:
 		// * visualeditor-dialog-transclusion-template-search
 		// * visualeditor-dialog-transclusion-add-template
-		label: ve.msg( dialogTitle ),
-		help: ve.msg( 'visualeditor-dialog-transclusion-template-search-help' ),
-		helpInline: true
+		label: ve.msg( dialogTitle )
 	} );
 	this.addTemplateFieldset = new OO.ui.FieldsetLayout( addTemplateFieldsetConfig );
 
