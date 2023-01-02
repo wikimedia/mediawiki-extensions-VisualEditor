@@ -205,7 +205,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "יש ללחוץ על רווח כדי להוסיף או להסיר פרמטרים. יש ללחוץ על אנטר כדי להוסיף פרמטר ומייד לערוך את הערך שלו. כשהפרמטר כבר נבחר, יש ללחוץ על אנטר כדי לערוך את הערך.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "פרמטרים של $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(פרמטר לא מתועד)",
-	"visualeditor-dialog-transclusion-placeholder": "הוספת תבנית",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "מציאת תבנית",
 	"visualeditor-dialog-transclusion-required-parameter": "שדה נדרש",
 	"visualeditor-dialog-transclusion-required-parameter-description": "השדה נדרש.",

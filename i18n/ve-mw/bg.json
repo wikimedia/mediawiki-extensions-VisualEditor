@@ -120,7 +120,6 @@
 	"visualeditor-dialog-transclusion-deprecated-parameter-description": "Непрепоръчително поле. $1",
 	"visualeditor-dialog-transclusion-loading": "Зареждане...",
 	"visualeditor-dialog-transclusion-param-default": "По подразбиране: $1",
-	"visualeditor-dialog-transclusion-placeholder": "Добавяне на шаблон",
 	"visualeditor-dialog-transclusion-required-parameter": "Задължително поле",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Полето е задължително.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Връщане",

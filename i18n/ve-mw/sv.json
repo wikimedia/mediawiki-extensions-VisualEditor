@@ -212,7 +212,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Tryck på mellanslag för att lägga till eller ta bort parametrar. Tryck på Enter för att lägga till en parameter och omedelbart redigera dess värde. När en parameter är redan markerad trycker du på Enter för att redigera värdet.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parametrar i $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Odokumenterad parameter)",
-	"visualeditor-dialog-transclusion-placeholder": "Lägga till en mall",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Hitta mall",
 	"visualeditor-dialog-transclusion-required-parameter": "Obligatorisk fält",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Fältet är obligatoriskt.",

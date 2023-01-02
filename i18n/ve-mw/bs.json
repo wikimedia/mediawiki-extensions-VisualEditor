@@ -142,7 +142,6 @@
 	"visualeditor-dialog-transclusion-loading": "Učitavam...",
 	"visualeditor-dialog-transclusion-no-template-description": "Šablon \"$1\" zasad nema opis, ali je moguće da postoje neke informacije na [[$2|stranici šablona]].",
 	"visualeditor-dialog-transclusion-param-default": "Predodređeno: $1",
-	"visualeditor-dialog-transclusion-placeholder": "Dodaj šablon",
 	"visualeditor-dialog-transclusion-required-parameter": "Obavezno polje",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Polje je obavezno.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Idi nazad",

@@ -150,7 +150,6 @@
 	"visualeditor-dialog-transclusion-loading": "Įkeliama...",
 	"visualeditor-dialog-transclusion-no-template-description": "Šablonas \"$1\" kol kas neturi aprašymo, bet galite rasti informacijos [[$2|šablono puslapyje]].",
 	"visualeditor-dialog-transclusion-param-default": "Numatytoji: $1",
-	"visualeditor-dialog-transclusion-placeholder": "Pridėti šabloną",
 	"visualeditor-dialog-transclusion-required-parameter": "Būtinas laukas",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Šis laukas yra privalomas.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Grįžti atgal",

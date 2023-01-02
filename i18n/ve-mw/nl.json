@@ -229,7 +229,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Druk op de spatiebalk om parameters toe te voegen of te verwijderen. Druk op Enter om een parameter toe te voegen en de waarde onmiddellijk te bewerken. Als er al een parameter is geselecteerd, drukt u op Enter om de waarde te bewerken.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parameters in $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Niet-gedocumenteerde parameter)",
-	"visualeditor-dialog-transclusion-placeholder": "Sjabloon toevoegen",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Zoek sjabloon",
 	"visualeditor-dialog-transclusion-required-parameter": "Vereist veld",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Veld is vereist.",

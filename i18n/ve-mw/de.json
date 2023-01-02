@@ -210,7 +210,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Drücke die Leertaste, um Parameter hinzuzufügen oder zu entfernen. Drücke die Eingabetaste, um einen Parameter hinzuzufügen und seinen Wert sofort zu bearbeiten. Wenn ein Parameter bereits ausgewählt ist, drücke Enter, um den Wert zu bearbeiten.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Parameter in $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(undokumentierter Parameter)",
-	"visualeditor-dialog-transclusion-placeholder": "Eine Vorlage hinzufügen",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Vorlage finden",
 	"visualeditor-dialog-transclusion-required-parameter": "Erforderlicher Parameter",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Parameter ist erforderlich.",

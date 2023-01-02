@@ -224,7 +224,6 @@
 	"visualeditor-dialog-transclusion-param-default": "默认：$1",
 	"visualeditor-dialog-transclusion-param-example-long": "示例：$1",
 	"visualeditor-dialog-transclusion-param-undocumented": "（未记录的参数）",
-	"visualeditor-dialog-transclusion-placeholder": "添加模板",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "添加模板",
 	"visualeditor-dialog-transclusion-required-parameter": "必填字段",
 	"visualeditor-dialog-transclusion-required-parameter-description": "必填字段。",

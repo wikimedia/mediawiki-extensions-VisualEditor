@@ -242,7 +242,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Нажмите пробел, чтобы добавить или удалить параметры. Нажмите Enter, чтобы добавить параметр и сразу отредактировать его значение. Когда параметр уже выбран, нажмите Enter, чтобы отредактировать значение.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Параметры в $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Недокументированный параметр)",
-	"visualeditor-dialog-transclusion-placeholder": "Добавить шаблон",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Найти шаблон",
 	"visualeditor-dialog-transclusion-required-parameter": "Обязательное поле",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Это обязательное поле.",

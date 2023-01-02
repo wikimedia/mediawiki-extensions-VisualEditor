@@ -201,7 +201,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Πατήστε Κενό για να προσθέσετε ή να αφαιρέσετε παραμέτρους. Πατήστε Enter για να προσθέσετε μια παράμετρο και να επεξεργαστείτε αμέσως την τιμή της. Όταν μια παράμετρος είναι ήδη επιλεγμένη, πατήστε Enter για να επεξεργαστείτε την τιμή.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Παράμετροι στο $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(Ατεκμηρίωτη παράμετρος)",
-	"visualeditor-dialog-transclusion-placeholder": "Προσθήκη προτύπου",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Αναζήτηση προτύπου",
 	"visualeditor-dialog-transclusion-required-parameter": "Απαιτούμενο πεδίο",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Το πεδίο απαιτείται.",

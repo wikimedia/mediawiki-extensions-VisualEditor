@@ -187,7 +187,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "Прицишнї типку за розстоянє же би ши додал або одстранєл параметри. Прицишнї Enter же би ше додало параметер и такой кориґовало його вредносц. Кед же параметер уж вибрани прицишнї Enter же би ше кориґовало вредносц.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Параметри у $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(нєдокументовани параметер)",
-	"visualeditor-dialog-transclusion-placeholder": "Додай шаблон",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Найсц шаблон",
 	"visualeditor-dialog-transclusion-required-parameter": "Обовязнє польо",
 	"visualeditor-dialog-transclusion-required-parameter-description": "Польо обовязне.",

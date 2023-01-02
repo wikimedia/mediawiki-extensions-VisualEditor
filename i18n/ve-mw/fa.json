@@ -219,7 +219,6 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-description": "برای افزودن یا حذف پارامترها کلید Space را بفشارید. برای افزودن یک پارامتر و ویرایش بی‌درنگ مقدار آن، کلید Enter را بفشارید. اگر پارامتری از پیش انتخاب شده‌بود، برای ویرایش مقدار آن کلید Enter را بفشارید.",
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "پارامترها در $1",
 	"visualeditor-dialog-transclusion-param-undocumented": "(پارامتر مستندسازی‌نشده)",
-	"visualeditor-dialog-transclusion-placeholder": "افزودن یک الگو",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "یافتن الگو",
 	"visualeditor-dialog-transclusion-required-parameter": "بخش‌های مورد نیاز",
 	"visualeditor-dialog-transclusion-required-parameter-description": "بخش مورد نیاز است.",
