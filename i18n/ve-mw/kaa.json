@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Nurlan",
-			"Inabat Allanova"
+			"Inabat Allanova",
+			"Ajiniyaz Nurniyazov"
 		]
 	},
 	"collabpad-doctitle": "Sheriklik paneli: $1",
@@ -12,7 +13,7 @@
 	"tooltip-ca-edit": "Vikitekst járdeminde bul betti ózgertiw",
 	"tooltip-ca-editsource": "Bul bettiń derek kodın ózgertiw",
 	"tooltip-ca-ve-edit": "Bul betti ózgertiw",
-	"visualeditor-advancedsettings-tool": "Keńeytirilgen sazlawlar",
+	"visualeditor-advancedsettings-tool": "Keńeytilgen sazlawlar",
 	"visualeditor-autosave-modified-prompt-accept": "Redaktorlawdı dawam ettiriń",
 	"visualeditor-autosave-modified-prompt-message": "Siz aqırǵı ret júklegenińizden berli bul bet ózgertirilgen. {{GENDER:|siz}} eski versiyanı {{GENDER:|óz}} redaktorlawdı dawam ettirmekshimisiz yamasa aqırǵı versiyanı jańa redaktorlawdı baslawdı qáleysizbe?",
 	"visualeditor-autosave-modified-prompt-reject": "Jańa redaktorlawdı baslań",

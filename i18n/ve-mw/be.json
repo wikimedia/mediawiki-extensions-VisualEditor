@@ -25,7 +25,7 @@
 	"tooltip-ca-editsource": "Правіць зыходны код гэтай старонкі",
 	"tooltip-ca-ve-edit": "Правіць старонку",
 	"visualeditor-advancedsettings-tool": "Дадаткова",
-	"visualeditor-autosave-modified-prompt-accept": "Працягнуць праўку",
+	"visualeditor-autosave-modified-prompt-accept": "Працягнуць рэдагаванне",
 	"visualeditor-autosave-modified-prompt-message": "Гэтая старонка была змененая з моманту вашай апошняй загрузкі. {{GENDER:|Вы}} хочаце працягнуць праўку старой версіі ці пачаць новую праўку апошняй версіі?",
 	"visualeditor-autosave-modified-prompt-reject": "Пачаць новую праўку",
 	"visualeditor-autosave-modified-prompt-title": "Працягнуць {{GENDER:|вашу}} праўку?",
