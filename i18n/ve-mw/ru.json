@@ -211,6 +211,7 @@
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Имя параметра",
 	"visualeditor-dialog-transclusion-add-param-save": "Добавить",
 	"visualeditor-dialog-transclusion-add-template": "Добавить шаблон",
+	"visualeditor-dialog-transclusion-add-template-button": "Добавить шаблон",
 	"visualeditor-dialog-transclusion-add-template-save": "Добавить",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Добавить недокументированный параметр",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Вернуться к поиску? Ваши изменения будут потеряны, и это нельзя будет отменить.",
