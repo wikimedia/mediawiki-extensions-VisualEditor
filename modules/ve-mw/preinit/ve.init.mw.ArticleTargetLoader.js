@@ -24,20 +24,13 @@
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
-	var uri;
-	try {
-		uri = new mw.Uri();
-	} catch ( e ) {
-		// URI may not be parseable (T106244)
-		uri = false;
-	}
+	var url = new URL( location.href );
 	// Provide the new wikitext editor
 	if (
-		uri &&
 		conf.enableWikitext &&
 		(
 			mw.user.options.get( 'visualeditor-newwikitext' ) ||
-			uri.query.veaction === 'editsource'
+			url.searchParams.get( 'veaction' ) === 'editsource'
 		) &&
 		mw.loader.getState( 'ext.visualEditor.mwwikitext' )
 	) {

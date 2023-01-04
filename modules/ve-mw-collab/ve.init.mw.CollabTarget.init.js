@@ -308,8 +308,8 @@
 	onImportChange();
 
 	if ( pageTitle ) {
-		var uri = new mw.Uri( location.href ),
-			importTitleText = uri.query.import,
+		var url = new URL( location.href ),
+			importTitleText = url.searchParams.get( 'import' ),
 			importTitleParam = ( importTitleText ? mw.Title.newFromText( importTitleText ) : null );
 		showPage( pageTitle, importTitleParam );
 	} else {

@@ -81,11 +81,6 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.edited = false;
 	this.restoring = !!this.requestedRevId && this.requestedRevId !== this.currentRevisionId;
 	this.pageDeletedWarning = false;
-	this.submitUrl = ( new mw.Uri( mw.util.getUrl( this.getPageName() ) ) )
-		.extend( {
-			action: 'submit',
-			veswitched: 1
-		} );
 	this.events = {
 		track: function () {},
 		trackActivationStart: function () {},
@@ -1637,7 +1632,11 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
 	}
 	// Submit the form, mimicking a traditional edit
 	// Firefox requires the form to be attached
-	$form.attr( 'action', this.submitUrl ).appendTo( 'body' ).trigger( 'submit' );
+	var submitUrl = mw.util.getUrl( this.getPageName(), {
+		action: 'submit',
+		veswitched: '1'
+	} );
+	$form.attr( 'action', submitUrl ).appendTo( 'body' ).trigger( 'submit' );
 	return true;
 };
 

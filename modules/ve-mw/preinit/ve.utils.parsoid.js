@@ -216,7 +216,7 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 	Array.prototype.forEach.call( container.querySelectorAll( 'a[href*="#"]' ), function ( el ) {
 		var fragment = null;
 		if ( el.getAttribute( 'href' )[ 0 ] === '#' ) {
-			// Leagcy parser
+			// Legacy parser
 			fragment = el.getAttribute( 'href' ).slice( 1 );
 		} else {
 			// Parsoid HTML
@@ -225,7 +225,7 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 			if ( targetData.isInternal ) {
 				var title = mw.Title.newFromText( targetData.title );
 				if ( title && title.getPrefixedText() === docTitleText ) {
-					fragment = new mw.Uri( el.href ).fragment;
+					fragment = new URL( el.href ).hash.slice( 1 );
 				}
 			}
 		}
