@@ -398,6 +398,7 @@
 				"mediawiki.page.ready",
 				"mediawiki.storage",
 				"mediawiki.Title",
+				"web2017-polyfills",
 				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
@@ -438,6 +439,7 @@
 				"mediawiki.String",
 				"jquery.textSelection",
 				"mediawiki.api",
+				"web2017-polyfills",
 				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.storage"
@@ -753,6 +755,7 @@
 				"mediawiki.language",
 				"mediawiki.storage",
 				"mediawiki.Title",
+				"web2017-polyfills",
 				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
@@ -2394,6 +2397,7 @@
 				"oojs-ui",
 				"oojs-ui.styles.icons-accessibility",
 				"oojs-ui.styles.icons-editing-advanced",
+				"web2017-polyfills",
 				"mediawiki.Uri"
 			],
 			"messages": [

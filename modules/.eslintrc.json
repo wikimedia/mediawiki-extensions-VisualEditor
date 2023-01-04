@@ -27,5 +27,10 @@
 		"no-jquery/no-visibility": "error",
 		"max-len": "off",
 		"mediawiki/valid-package-file-require": "warn"
+	},
+	"settings": {
+		"polyfills": [
+			"URL"
+		]
 	}
 }
