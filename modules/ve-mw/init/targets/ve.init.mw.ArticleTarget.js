@@ -855,7 +855,7 @@ ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
 		).parseDom()
 	);
 
-	this.showSaveError( $msg );
+	this.showSaveError( $msg, true );
 };
 
 /**
