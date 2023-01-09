@@ -41,7 +41,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
-						origTitle: 'Foo',
 						title: 'Foo'
 					}
 				}
@@ -54,7 +53,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
-						origTitle: 'Foo',
 						title: 'Foo'
 					}
 				}
@@ -87,7 +85,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo',
-						origTitle: 'Foo',
 						title: 'Foo'
 					}
 				}
@@ -102,7 +99,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 						attributes: {
 							lookupTitle: 'Foo?',
 							normalizedTitle: 'Foo?',
-							origTitle: 'Foo?',
 							title: 'Foo?'
 						}
 					},
@@ -111,7 +107,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 						attributes: {
 							lookupTitle: 'Foo?',
 							normalizedTitle: 'Foo?',
-							origTitle: 'Foo%3F',
 							title: 'Foo?'
 						}
 					}
@@ -126,7 +121,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo#bar',
-						origTitle: 'Foo#bar',
 						title: 'Foo#bar'
 					}
 				}
@@ -140,7 +134,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					attributes: {
 						lookupTitle: 'Foo',
 						normalizedTitle: 'Foo#' + mw.util.escapeIdForLink( 'bar?' ),
-						origTitle: 'Foo#' + mw.util.escapeIdForLink( 'bar?' ),
 						title: 'Foo#' + mw.util.escapeIdForLink( 'bar?' )
 					}
 				}

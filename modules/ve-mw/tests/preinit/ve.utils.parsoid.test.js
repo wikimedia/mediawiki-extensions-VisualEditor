@@ -91,7 +91,6 @@ QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 			href: 'javascript:alert()',
 			expectedInfo: {
 				title: 'javascript:alert()',
-				rawTitle: 'javascript:alert()',
 				isInternal: true
 			}
 			/* eslint-enable no-script-url */
@@ -101,7 +100,6 @@ QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 			href: 'not-a-protocol:Some%20text',
 			expectedInfo: {
 				title: 'not-a-protocol:Some text',
-				rawTitle: 'not-a-protocol:Some%20text',
 				isInternal: true
 			}
 		},
