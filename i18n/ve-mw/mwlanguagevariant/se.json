@@ -8,5 +8,6 @@
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Giellakoda",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Giella",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Teaksta",
-	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Gielat"
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Gielat",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-placeholder": "Giellakoda"
 }
