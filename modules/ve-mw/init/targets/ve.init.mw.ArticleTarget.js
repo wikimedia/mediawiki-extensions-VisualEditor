@@ -48,8 +48,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	var enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
 	this.enableVisualSectionEditing = enableVisualSectionEditing === true || enableVisualSectionEditing === this.constructor.static.trackingName;
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
-	// A workaround, as default URI does not get updated after pushState (T74334)
-	this.currentUri = new mw.Uri( location.href );
+	this.currentUrl = new URL( location.href );
 	this.section = null;
 	this.visibleSection = null;
 	this.visibleSectionOffset = null;
@@ -58,10 +57,10 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.initialEditSummary = null;
 	this.initialCheckboxes = {};
 
-	this.viewUri = new mw.Uri( mw.util.getUrl( this.getPageName() ) );
+	this.viewUrl = new URL( mw.util.getUrl( this.getPageName() ), location.href );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
-		this.currentUri.query.diff === undefined
+		!this.currentUrl.searchParams.has( 'diff' )
 	);
 
 	this.copyrightWarning = null;
@@ -302,7 +301,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		// to make the VE API non-blocking in the future we will need to handle
 		// special-cases like this where the content doesn't come from RESTBase.
 		this.fromEditedState = !!data.fromEditedState || !!data.preloaded;
-		this.switched = data.switched || 'wteswitched' in new mw.Uri( location.href ).query;
+		this.switched = data.switched || new URL( location.href ).searchParams.has( 'wteswitched' );
 		var mode = this.getDefaultMode();
 		var section = ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, mode, section );
@@ -637,20 +636,20 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	if ( !this.pageExists || this.restoring || !this.isViewPage ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
-			var newUrlParams = {};
+			var newUrl = new URL( target.viewUrl );
 			if ( data.newrevid !== undefined ) {
 				if ( target.restoring ) {
-					newUrlParams.venotify = 'restored';
+					newUrl.searchParams.set( 'venotify', 'restored' );
 				} else if ( !target.pageExists ) {
-					newUrlParams.venotify = 'created';
+					newUrl.searchParams.set( 'venotify', 'created' );
 				} else {
-					newUrlParams.venotify = 'saved';
+					newUrl.searchParams.set( 'venotify', 'saved' );
 				}
 			}
 			if ( data.isRedirect ) {
-				newUrlParams.redirect = 'no';
+				newUrl.searchParams.set( 'redirect', 'no' );
 			}
-			location.href = target.viewUri.extend( newUrlParams );
+			location.href = newUrl;
 		} );
 	} else {
 		// Update watch link to match 'watch checkbox' in save dialog.
@@ -2058,7 +2057,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		} );
 		if ( headingModel ) {
 			var headingView = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
-			if ( setEditSummary && new mw.Uri().query.summary === undefined ) {
+			if ( setEditSummary && !new URL( location.href ).searchParams.has( 'summary' ) ) {
 				headingText = headingView.$element.text();
 			}
 			if ( setExactScrollOffset ) {
@@ -2148,13 +2147,13 @@ ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode, hea
 };
 
 /**
- * Get the hash fragment for the current section's ID using the page's HTML.
+ * Get the URL hash for the current section's ID using the page's HTML.
  *
  * TODO: Do this in a less skin-dependent way
  *
- * @return {string} Hash fragment, or empty string if not found
+ * @return {string} URL hash with leading '#', or empty string if not found
  */
-ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function () {
+ve.init.mw.ArticleTarget.prototype.getSectionHashFromPage = function () {
 	// Assume there are section edit links, as the user just did a section edit. This also means
 	// that the section numbers line up correctly, as not every H_ tag is a numbered section.
 	var $sections = this.$editableContent.find( '.mw-editsection' );
@@ -2170,7 +2169,7 @@ ve.init.mw.ArticleTarget.prototype.getSectionFragmentFromPage = function () {
 		var $section = $sections.eq( section - 1 ).parent().find( '.mw-headline' );
 
 		if ( $section.length && $section.attr( 'id' ) ) {
-			return $section.attr( 'id' ) || '';
+			return '#' + $section.attr( 'id' );
 		}
 	}
 	return '';
