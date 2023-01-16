@@ -7,6 +7,7 @@
 
 /**
  * Object literal
+ *
  * @class ve.dm.MWTransclusionPartInstruction
  * @private
  */

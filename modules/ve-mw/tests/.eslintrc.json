@@ -1,10 +1,15 @@
 {
+	"root": true,
 	"extends": [
+		"wikimedia/client-common",
+		"wikimedia/language/es2018",
+		"wikimedia/mediawiki",
+		"wikimedia/jquery",
 		"wikimedia/qunit",
-		"wikimedia/language/es6"
+		"../../eslint-shared.json"
 	],
 	"globals": {
-		"sinon": false
+		"sinon": "readonly"
 	},
 	"rules": {
 		"compat/compat": [ "error", "last 2 chrome versions, last 2 firefox versions" ],

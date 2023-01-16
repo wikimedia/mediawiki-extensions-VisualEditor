@@ -30,6 +30,7 @@
 
 /**
  * Object literal
+ *
  * @class ve.dm.MWTemplateParamDescription
  * @private
  */
