@@ -10,7 +10,7 @@ use MediaWiki\Extension\VisualEditor\VRSParsoidClient;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Authority;
-use MediaWiki\Rest\Handler\PageRestHelperFactory;
+use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 use MediaWikiIntegrationTestCase;
 use MultiHttpClient;
 use ParsoidVirtualRESTService;

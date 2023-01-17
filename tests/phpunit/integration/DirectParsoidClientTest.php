@@ -7,7 +7,7 @@ use Language;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
-use MediaWiki\Rest\Handler\PageRestHelperFactory;
+use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
