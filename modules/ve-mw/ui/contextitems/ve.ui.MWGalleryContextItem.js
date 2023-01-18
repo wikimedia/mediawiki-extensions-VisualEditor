@@ -44,9 +44,7 @@ ve.ui.MWGalleryContextItem.static.commandName = 'gallery';
  * @inheritdoc
  */
 ve.ui.MWGalleryContextItem.prototype.getDescription = function () {
-	return ve.msg( 'visualeditor-mwgallerycontext-description', this.model.children.filter( function ( node ) {
-		return node instanceof ve.dm.MWGalleryImageNode;
-	} ).length );
+	return ve.msg( 'visualeditor-mwgallerycontext-description', this.model.getImageNodes().length );
 };
 
 /* Registration */
