@@ -7,7 +7,7 @@
 QUnit.module( 've.dm.MWInternalLinkAnnotation', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'toDataElement', ( assert ) => {
-	const doc = ve.dm.example.createExampleDocumentFromData( [] ),
+	const doc = ve.dm.mwExample.createExampleDocumentFromData( [], null, location.origin ),
 		externalLink = ( href ) => {
 			return () => {
 				const link = document.createElement( 'a' );

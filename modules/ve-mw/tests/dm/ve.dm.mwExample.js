@@ -12,8 +12,13 @@
  */
 ve.dm.mwExample = {};
 
-ve.dm.mwExample.createExampleDocument = ( name, store ) =>
-	ve.dm.example.createExampleDocumentFromObject( name, store, ve.dm.mwExample );
+ve.dm.mwExample.baseUri = 'http://example.com/wiki/';
+
+ve.dm.mwExample.createExampleDocument = ( name, store, base ) =>
+	ve.dm.example.createExampleDocumentFromObject( name, store, ve.dm.mwExample, base || ve.dm.mwExample.baseUri );
+
+ve.dm.mwExample.createExampleDocumentFromData = ( data, store, base ) =>
+	ve.dm.example.createExampleDocumentFromData( data, store, base || ve.dm.mwExample.baseUri );
 
 ve.dm.mwExample.MWTransclusion = {
 	blockOpen:
@@ -218,7 +223,7 @@ ve.dm.mwExample.MWTransclusion.mixedStoreItems[ ve.dm.HashValueStore.prototype.h
 	$.parseHTML( ve.dm.mwExample.MWTransclusion.mixed );
 
 ve.dm.mwExample.MWInternalLink = {
-	absoluteHref: ve.resolveUrl( '/wiki/Foo/Bar', ve.dm.example.base )
+	absoluteHref: new URL( '/wiki/Foo/Bar', ve.dm.example.baseUri ).toString()
 };
 
 ve.dm.mwExample.MWInternalLink.absoluteOpen = '<a rel="mw:WikiLink" href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">';
@@ -232,7 +237,7 @@ ve.dm.mwExample.MWInternalLink.absoluteData = {
 };
 
 ve.dm.mwExample.MWInternalSectionLink = {
-	absoluteHref: ve.resolveUrl( '/wiki/Foo#Bar', ve.dm.example.base )
+	absoluteHref: new URL( '/wiki/Foo#Bar', ve.dm.example.baseUri ).toString()
 };
 
 ve.dm.mwExample.MWInternalSectionLink.absoluteOpen = '<a rel="mw:WikiLink" href="' + ve.dm.mwExample.MWInternalSectionLink.absoluteHref + '">';
@@ -765,7 +770,7 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
 			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
-			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="' + ve.resolveUrl( './File:Wiki.png', document ) + '">' +
+			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="' + new URL( './File:Wiki.png', ve.dm.mwExample.baseUri ) + '">' +
 				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
 			'</a>' +
 			ve.dm.example.inlineSlug +
@@ -784,7 +789,7 @@ ve.dm.mwExample.domToDataCases = {
 		],
 		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
 			'<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>' +
-			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="' + ve.resolveUrl( './File:Wiki.png', document ) + '">' +
+			'<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="' + new URL( './File:Wiki.png', ve.dm.mwExample.baseUri ) + '">' +
 				'<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">' +
 			'</a>' +
 			ve.dm.example.inlineSlug +
@@ -1555,6 +1560,7 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'internal link with absolute path': {
 		body: '<p>' + ve.dm.mwExample.MWInternalLink.absoluteOpen + 'Foo</a></p>',
+		base: ve.dm.example.baseUri,
 		data: [
 			{ type: 'paragraph' },
 			[
@@ -1580,6 +1586,7 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'internal link with absolute path and section': {
 		body: '<p>' + ve.dm.mwExample.MWInternalSectionLink.absoluteOpen + 'Foo</a></p>',
+		base: ve.dm.example.baseUri,
 		data: [
 			{ type: 'paragraph' },
 			[
@@ -1605,7 +1612,7 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'internal link with href set to ./': {
 		body: '<p><a rel="mw:WikiLink" href="./">x</a></p>',
-		head: '<base href="http://example.com" />',
+		base: 'http://example.com',
 		data: [
 			{ type: 'paragraph' },
 			[
@@ -1627,7 +1634,7 @@ ve.dm.mwExample.domToDataCases = {
 	'internal link with special characters': {
 		body: '<p><a rel="mw:WikiLink" href="./Foo%3F+%25&Bar">x</a></p>',
 		ignoreXmlWarnings: true,
-		head: '<base href="http://example.com" />',
+		base: 'http://example.com',
 		data: [
 			{ type: 'paragraph' },
 			[
@@ -1853,7 +1860,7 @@ ve.dm.mwExample.domToDataCases = {
 			'<meta property="mw:bar" content="baz" />' + ve.dm.example.commentNodePreview( 'barbaz' ) +
 			'<link rel="mw:PageProp/Category" href="./Category:Foo_foo#Bar%20baz%23quux" />' +
 			'<meta typeof="mw:Placeholder" data-parsoid="foobar" />',
-		head: '<base href="http://example.com" />',
+		base: 'http://example.com',
 		data: ve.dm.mwExample.withMeta,
 		realData: ve.dm.mwExample.withMetaRealData
 	},
@@ -2130,7 +2137,7 @@ ve.dm.mwExample.domToDataCases = {
 				' foo <a rel="mw:WikiLink" href="./Bar">bar</a> baz' +
 				'</figcaption>' +
 			'</figure>',
-		head: '<base href="http://example.com" />',
+		base: 'http://example.com',
 		data: [
 			{
 				type: 'mwBlockImage',
@@ -2262,6 +2269,7 @@ ve.dm.mwExample.domToDataCases = {
 	'plain internal links when pasted are converted to link/mwInternal': {
 		fromClipboard: true,
 		body: '<a href="' + ve.dm.mwExample.MWInternalLink.absoluteHref + '">ab</a>',
+		base: ve.dm.example.baseUri,
 		data: [
 			{
 				type: 'paragraph',

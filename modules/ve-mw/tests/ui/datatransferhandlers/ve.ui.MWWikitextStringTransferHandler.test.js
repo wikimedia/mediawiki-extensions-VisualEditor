@@ -19,7 +19,7 @@ QUnit.module( 've.ui.MWWikitextStringTransferHandler', ve.test.utils.newMwEnviro
 
 /* Tests */
 
-ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType, expectedResponse, expectedData, annotations, assertDom, msg ) => {
+ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType, expectedResponse, expectedData, annotations, assertDom, base, msg ) => {
 	const done = assert.async(),
 		item = ve.ui.DataTransferItem.static.newFromString( string, mimeType ),
 		doc = ve.dm.Document.static.newBlankDocument(),
@@ -31,6 +31,8 @@ ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType,
 			},
 			createProgress: () => ve.createDeferred().promise()
 		};
+
+	ve.fixBase( doc.getHtmlDocument(), doc.getHtmlDocument(), base );
 
 	// Preprocess the expectedData array
 	for ( let i = 0; i < expectedData.length; i++ ) {
@@ -260,7 +262,8 @@ QUnit.test( 'convert', function ( assert ) {
 	for ( let i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runWikitextStringHandlerTest(
 			assert, this.server, cases[ i ].pasteString, cases[ i ].pasteType, cases[ i ].parsoidResponse,
-			cases[ i ].expectedData, cases[ i ].annotations, cases[ i ].assertDom, cases[ i ].msg
+			cases[ i ].expectedData, cases[ i ].annotations, cases[ i ].assertDom, ve.dm.mwExample.baseUri,
+			cases[ i ].msg
 		);
 	}
 } );

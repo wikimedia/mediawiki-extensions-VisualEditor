@@ -83,7 +83,7 @@ QUnit.test( 'reduplicateStyles/deduplicateStyles', ( assert ) => {
 } );
 
 QUnit.test( 'getTargetDataFromHref', ( assert ) => {
-	const doc = ve.createDocumentFromHtml( '<base href="http://example.com/wiki/">' );
+	const doc = ve.createDocumentFromHtml( ve.test.utils.makeBaseTag( ve.dm.mwExample.baseUri ) );
 	mw.config.set( {
 		wgScript: '/w/index.php',
 		wgArticlePath: '/wiki/$1'
