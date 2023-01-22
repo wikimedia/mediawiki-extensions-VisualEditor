@@ -72,9 +72,7 @@ ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType,
 		server.respond( [ 200, { 'Content-Type': 'application/json' }, JSON.stringify( {
 			visualeditor: {
 				result: 'success',
-				content: '<body lang="en" class="mw-content-ltr sitedir-ltr ltr mw-body mw-body-content mediawiki" dir="ltr">' +
-					expectedResponse +
-					'</body>'
+				content: expectedResponse
 			}
 		} ) ] );
 	}
@@ -85,7 +83,7 @@ QUnit.test( 'convert', function ( assert ) {
 			{
 				msg: 'Simple link',
 				// Put link in the middle of text to verify that the
-				// start-of-line and end-or-line anchors on the heading
+				// start-of-line and end-of-line anchors on the heading
 				// identification pattern don't affect link identification
 				pasteString: 'some [[Foo]] text',
 				pasteType: 'text/plain',
