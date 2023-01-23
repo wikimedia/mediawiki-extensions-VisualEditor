@@ -2719,7 +2719,6 @@
 		"styles": "lib/ve/lib/jsdifflib/diffview.css",
 		"scripts": [
 			"lib/proposal-promise-finally/polyfill.js",
-			"modules/ve-mw/tests/mw-preload.js",
 			"lib/ve/lib/jsdifflib/diffview.js",
 			"lib/ve/lib/jsdifflib/difflib.js",
 			"lib/ve/tests/ve.qunit.js",
