@@ -47,7 +47,7 @@
 	"apihelp-visualeditoredit-param-html": "Kod HTML wysyłany do usługi Parsoid, konwertowany na wikikod.",
 	"apihelp-visualeditoredit-param-minor": "Oznacz jako drobną edycję.",
 	"apihelp-visualeditoredit-param-needcheck": "Podczas zapisywania ustaw ten parametr, jeżeli wersja może mieć jakieś problemy. Spowoduje to oznakowanie edycji.",
-	"apihelp-visualeditoredit-param-oldid": "Numer wersji do użycia. Domyślnie najnowsza wersja. Wpisz 0 dla nowej strony.",
+	"apihelp-visualeditoredit-param-oldid": "Numer wersji do użycia. Domyślnie najnowsza wersja.",
 	"apihelp-visualeditoredit-param-paction": "Działanie do wykonania.",
 	"apihelp-visualeditoredit-param-page": "Strona, na której wykonuje się działania.",
 	"apihelp-visualeditoredit-param-section": "Sekcja, na której wykonać działanie.",
