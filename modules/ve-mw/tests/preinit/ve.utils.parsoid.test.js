@@ -62,13 +62,13 @@ QUnit.test( 'reduplicateStyles/deduplicateStyles', ( assert ) => {
 	];
 
 	stylesCases.forEach( ( caseItem ) => {
-		const doc = ve.parseXhtml( caseItem.deduplicated );
+		const doc = ve.createDocumentFromHtml( caseItem.deduplicated );
 
 		// Test that we can re-duplicate styles, which were de-duplicated in Parsoid HTML
 		mw.libs.ve.reduplicateStyles( doc.body );
 		assert.equalDomElement(
 			doc.body,
-			ve.parseXhtml( caseItem.reduplicated ).body,
+			ve.createDocumentFromHtml( caseItem.reduplicated ).body,
 			caseItem.msg + ' (reduplicated)'
 		);
 
@@ -76,14 +76,14 @@ QUnit.test( 'reduplicateStyles/deduplicateStyles', ( assert ) => {
 		mw.libs.ve.deduplicateStyles( doc.body );
 		assert.equalDomElement(
 			doc.body,
-			ve.parseXhtml( caseItem.deduplicated ).body,
+			ve.createDocumentFromHtml( caseItem.deduplicated ).body,
 			caseItem.msg + ' (deduplicated)'
 		);
 	} );
 } );
 
 QUnit.test( 'getTargetDataFromHref', ( assert ) => {
-	const doc = ve.parseXhtml( '<base href="http://example.com/wiki/">' );
+	const doc = ve.createDocumentFromHtml( '<base href="http://example.com/wiki/">' );
 	mw.config.set( {
 		wgScript: '/w/index.php',
 		wgArticlePath: '/wiki/$1'
