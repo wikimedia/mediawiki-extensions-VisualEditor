@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Zakaria Tunsung"
+			"Zakaria Tunsung",
+			"Alhassan Mohammed Awal"
 		]
 	},
+	"visualeditor-ca-createsource": "Maale yizie",
 	"visualeditor-ca-editsource": "Maaleŋ e ayizie",
 	"visualeditor-ca-editsource-section": "Maaleŋ e ayizie",
-	"visualeditor-descriptionpagelink": "project:Nyiibo maaleenna"
+	"visualeditor-descriptionpagelink": "Project:Nyiibo maaleenna"
 }
