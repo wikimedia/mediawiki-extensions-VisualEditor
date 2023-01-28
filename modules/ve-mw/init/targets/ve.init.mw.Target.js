@@ -324,10 +324,10 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 		config = this.getSurfaceConfig( ve.extendObject( {}, config, {
 			importRules: importRules
 		} ) );
-		return new ve.ui.MWWikitextSurface( dmDoc, config );
+		return new ve.ui.MWWikitextSurface( this, dmDoc, config );
 	}
 
-	return new ve.ui.MWSurface( dmDoc, this.getSurfaceConfig( config ) );
+	return new ve.ui.MWSurface( this, dmDoc, this.getSurfaceConfig( config ) );
 };
 
 /**
