@@ -14,11 +14,6 @@
  */
 
 /**
- * @class mw.Uri
- * @source <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Uri>
- */
-
-/**
  * @class mw.widgets.TitleInputWidget
  * @source <https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.widgets.TitleInputWidget>
  */
