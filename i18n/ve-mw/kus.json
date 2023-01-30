@@ -1,8 +1,38 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bugirbiig"
+			"Bugirbiig",
+			"Agurwin Isaac",
+			"Musahfm"
 		]
 	},
-	"visualeditor-ca-editsource-section": "Maligim maal di yi zin'isi'ana/Maalim din yi zin'isiana"
+	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "li yine $1 san'an na",
+	"collabpad": "CollabPad",
+	"tooltip-ca-createsource": "dεmisim lak kaŋa sↄb zi'esim",
+	"tooltip-ca-edit": "Nↄkim wikisↄbʋg n dεmis lak kaŋa",
+	"tooltip-ca-editsource": "dεmisim lak kaŋa sↄb zi'esim",
+	"tooltip-ca-ve-edit": "Dεmisim lak kaŋa",
+	"visualeditor-advancedsettings-tool": "tuon ken maalʋg",
+	"visualeditor-autosave-modified-prompt-accept": "lεn Pin’il dεmisʋg",
+	"visualeditor-autosave-modified-prompt-message": "Fʋn daa kpεn’εs lak kaŋa la, ba dεmisi li. {GENDER:Fʋ } na bↄↄd ye {GENDER:Fʋ} lεn pin’ili dεmis fun daa kpεn’εs si’em kʋdʋmin la bεε fʋ bↄↄd ye fʋ pin’il din bε zi’esim sia la ni?",
+	"visualeditor-autosave-modified-prompt-reject": "Pin’ilim dεmis paal",
+	"visualeditor-autosave-modified-prompt-title": "Ye fʋ pin’ili {GENDER:fʋ} dεmisʋg laa?",
+	"visualeditor-autosave-not-recovered-text": "Ti pʋ nyaŋε paam tiakir kanε ka fʋ maal ka pʋ su’a la",
+	"visualeditor-autosave-not-recovered-title": "A nyaŋε paam banε ka fʋ tiak la gʋ’ʋŋya",
+	"visualeditor-autosave-recovered-text": "Tiakir kanε ka fʋ maal ka pʋ su’a la mεŋ yina",
+	"visualeditor-autosave-recovered-title": "Tiakir kanε ka fʋ maal la mεŋ yina",
+	"visualeditor-backbutton-tooltip": "Lεm nya’aŋ",
+	"visualeditor-beta-warning": "Fʋ ya’a paam daaʋŋ fʋ dεmisʋg la ni, m bεlmnε kε ti baŋi ba",
+	"visualeditor-browserwarning": "Fʋ dↄlnε vεεnsʋg suokanε pʋ siakid dεmisigↄ",
+	"visualeditor-ca-createlocaldescriptionsource": "Paasim yidim pa’alʋg suor",
+	"visualeditor-ca-createsource": "maalim zin'ig",
+	"visualeditor-ca-editlocaldescriptionsource": "Dεmisim yidim pa’alʋg suor",
+	"visualeditor-ca-editsource": "Dɛmisimi din yi zin'isiana",
+	"visualeditor-ca-editsource-section": "dɛmisimi din yi zin'isiana",
+	"visualeditor-categories-tool": "Buudi",
+	"visualeditor-changedesc-mwlanguagevariant": "Pian’ad buudi zanbin tiakya",
+	"visualeditor-changedesc-mwredirect": "Fεndigimi fʋ bↄↄdim tiaki yi $1 keŋ $2",
+	"visualeditor-desc": " MediaWiki dεmisbanε nyεt",
+	"visualeditor-descriptionpagelink": "Project:dεmisa banε nyεt"
 }
