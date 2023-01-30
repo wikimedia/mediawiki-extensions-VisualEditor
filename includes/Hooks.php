@@ -467,7 +467,7 @@ class Hooks {
 		// This logic matches getLastEditor in:
 		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
 		$editor = $req->getCookie( 'VEE', '' );
-		// Set editor to user's preference or site's default if …
+		// Set editor to user's preference or site's default if …
 		if (
 			// … user is logged in,
 			$user->isRegistered() ||
