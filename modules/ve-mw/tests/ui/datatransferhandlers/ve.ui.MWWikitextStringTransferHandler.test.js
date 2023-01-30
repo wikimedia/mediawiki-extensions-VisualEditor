@@ -259,9 +259,6 @@ QUnit.test( 'convert', function ( assert ) {
 			}
 		];
 
-	mw.config.set( {
-		wgArticlePath: '/wiki/$1'
-	} );
 	for ( let i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runWikitextStringHandlerTest(
 			assert, this.server, cases[ i ].pasteString, cases[ i ].pasteType, cases[ i ].parsoidResponse,
