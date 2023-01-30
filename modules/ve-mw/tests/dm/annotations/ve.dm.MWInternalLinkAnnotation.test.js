@@ -7,28 +7,22 @@
 QUnit.module( 've.dm.MWInternalLinkAnnotation', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'toDataElement', ( assert ) => {
-	// The expected data depends on site configuration, so we need to generate the cases several times.
-	const getCases = () => {
-		const
-			externalLink = ( href ) => {
+	const doc = ve.dm.mwExample.createExampleDocumentFromData( [], null, location.origin ),
+		externalLink = ( href ) => {
+			return () => {
 				const link = document.createElement( 'a' );
-				link.setAttribute( 'href', href );
-				return link;
-			},
-			internalLink = ( pageTitle, params ) => {
-				const link = document.createElement( 'a' );
-				link.setAttribute( 'href', mw.Title.newFromText( pageTitle ).getUrl( params ) );
-				return link;
-			},
-			parsoidLink = ( href ) => {
-				const link = document.createElement( 'a' );
-				if ( mw.config.get( 'wgArticlePath' ).includes( '?' ) ) {
-					href = href.replace( './', './index.php?title=' );
-				}
 				link.setAttribute( 'href', href );
 				return link;
 			};
-		return [
+		},
+		internalLink = ( pageTitle, params ) => {
+			return () => {
+				const link = document.createElement( 'a' );
+				link.setAttribute( 'href', location.origin + mw.Title.newFromText( pageTitle ).getUrl( params ) );
+				return link;
+			};
+		},
+		cases = [
 			{
 				msg: 'Not an internal link',
 				element: externalLink( 'http://example.com/' ),
@@ -53,7 +47,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 			},
 			{
 				msg: 'Relative path',
-				element: parsoidLink( './Foo' ),
+				element: externalLink( './Foo' ),
 				expected: {
 					type: 'link/mwInternal',
 					attributes: {
@@ -69,7 +63,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 				expected: {
 					type: 'link/mwExternal',
 					attributes: {
-						href: mw.Title.newFromText( 'Foo' ).getUrl( { action: 'history' } )
+						href: location.origin + mw.Title.newFromText( 'Foo' ).getUrl( { action: 'history' } )
 					}
 				}
 			},
@@ -79,7 +73,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 				expected: {
 					type: 'link/mwExternal',
 					attributes: {
-						href: mw.Title.newFromText( 'Foo' ).getUrl( { diff: '3', oldid: '2' } )
+						href: location.origin + mw.Title.newFromText( 'Foo' ).getUrl( { diff: '3', oldid: '2' } )
 					}
 				}
 			},
@@ -99,14 +93,24 @@ QUnit.test( 'toDataElement', ( assert ) => {
 				// Because percent-encoded URLs aren't valid titles, but what they decode to might be
 				msg: 'Percent encoded characters',
 				element: internalLink( 'Foo?' ),
-				expected: {
-					type: 'link/mwInternal',
-					attributes: {
-						lookupTitle: 'Foo?',
-						normalizedTitle: 'Foo?',
-						title: 'Foo?'
+				expected: [
+					{
+						type: 'link/mwInternal',
+						attributes: {
+							lookupTitle: 'Foo?',
+							normalizedTitle: 'Foo?',
+							title: 'Foo?'
+						}
+					},
+					{
+						type: 'link/mwInternal',
+						attributes: {
+							lookupTitle: 'Foo?',
+							normalizedTitle: 'Foo?',
+							title: 'Foo?'
+						}
 					}
-				}
+				]
 			},
 			{
 				// The fragment should make it into some parts of this, and not others
@@ -134,77 +138,41 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					}
 				}
 			}
-		];
-	};
+		],
+		converter = new ve.dm.Converter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory, ve.dm.metaItemFactory );
 
-	const converter = new ve.dm.Converter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory, ve.dm.metaItemFactory );
+	// toDataElement is called during a converter run, so we need to fake up a bit of state to test it.
+	// This would normally be done by ve.dm.converter.getModelFromDom.
+	converter.doc = doc.getHtmlDocument();
+	converter.targetDoc = doc.getHtmlDocument();
+	converter.store = doc.getStore();
+	converter.internalList = doc.getInternalList();
+	converter.contextStack = [];
+	converter.fromClipboard = true;
 
 	const articlePaths = [
 		{
-			// MediaWiki config settings:
-			// $wgScriptPath = '/w';
-			// $wgUsePathInfo = false;
 			msg: 'query string URL',
-			config: {
-				wgServer: 'http://example.org',
-				wgScript: '/w/index.php',
-				wgArticlePath: '/w/index.php?title=$1'
-			},
-			// Parsoid-generated <base href> given these MediaWiki config settings:
-			base: 'http://example.org/w/'
+			wgArticlePath: mw.config.get( 'wgScriptPath' ) + '/index.php?title=$1'
 		},
 		{
-			// MediaWiki config settings:
-			// $wgScriptPath = '/w';
-			// $wgUsePathInfo = true;
-			msg: 'short URL using pathinfo',
-			config: {
-				wgServer: 'http://example.org',
-				wgScript: '/w/index.php',
-				wgArticlePath: '/w/index.php/$1'
-			},
-			// Parsoid-generated <base href> given these MediaWiki config settings:
-			base: 'http://example.org/w/index.php/'
-		},
-		{
-			// MediaWiki config settings:
-			// $wgScriptPath = '/w';
-			// $wgArticlePath = '/wiki/$1';
-			msg: 'proper short URL',
-			config: {
-				wgServer: 'http://example.org',
-				wgScript: '/w/index.php',
-				wgArticlePath: '/wiki/$1'
-			},
-			// Parsoid-generated <base href> given these MediaWiki config settings:
-			base: 'http://example.org/wiki/'
+			msg: 'short URL',
+			wgArticlePath: mw.config.get( 'wgScriptPath' ) + '/index.php/$1'
 		}
 	];
 
-	articlePaths.forEach( function ( pathData ) {
-		// Set up global state (site configuration)
-		mw.config.set( pathData.config );
-
-		const doc = ve.dm.mwExample.createExampleDocumentFromData( [], null, pathData.base );
-		// toDataElement is called during a converter run, so we need to fake up a bit of state to test it.
-		// This would normally be done by ve.dm.converter.getModelFromDom.
-		converter.doc = doc.getHtmlDocument();
-		converter.targetDoc = doc.getHtmlDocument();
-		converter.store = doc.getStore();
-		converter.internalList = doc.getInternalList();
-		converter.contextStack = [];
-		converter.fromClipboard = true;
-
-		// Generate test cases for this site configuration
-		const cases = getCases();
-		for ( let i = 0; i < cases.length; i++ ) {
+	for ( let i = 0; i < cases.length; i++ ) {
+		articlePaths.forEach( function ( pathData, j ) {
+			mw.config.set( 'wgArticlePath', pathData.wgArticlePath );
 			assert.deepEqual(
-				ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element ], converter ),
-				cases[ i ].expected,
+				ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element() ], converter ),
+				Array.isArray( cases[ i ].expected ) ?
+					cases[ i ].expected[ j ] :
+					cases[ i ].expected,
 				cases[ i ].msg + ': ' + pathData.msg
 			);
-		}
-	} );
+		} );
+	}
 } );
 
 QUnit.test( 'getFragment', ( assert ) => {
