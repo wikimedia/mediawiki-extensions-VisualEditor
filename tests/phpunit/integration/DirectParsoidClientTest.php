@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use Generator;
 use Language;
+use LanguageCode;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
@@ -71,9 +72,11 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		} else {
 			$language = $this->createNoOpMock(
 				Language::class,
-				[ 'getCode' ]
+				[ 'getCode', 'toBcp47Code', 'getDir' ]
 			);
 			$language->method( 'getCode' )->willReturn( $langCode );
+			$language->method( 'toBcp47Code' )->willReturn( LanguageCode::bcp47( $langCode ) );
+			$language->method( 'getDir' )->willReturn( 'ltr' );
 		}
 
 		return [ $language, $langCode ];
