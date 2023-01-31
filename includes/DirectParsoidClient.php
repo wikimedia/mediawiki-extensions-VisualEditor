@@ -26,7 +26,6 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use RawMessage;
 use User;
-use Wikimedia\Bcp47Code\Bcp47CodeValue;
 use WikitextContent;
 
 class DirectParsoidClient implements ParsoidClient {
@@ -256,12 +255,6 @@ class DirectParsoidClient implements ParsoidClient {
 	 */
 	private function fakeRESTbaseHTMLResponse( $data, HtmlOutputRendererHelper $helper ): array {
 		$contentLanguage = $helper->getHtmlOutputContentLanguage();
-		// @phan-suppress-next-line PhanRedundantCondition
-		if ( is_string( $contentLanguage ) ) {
-			// Backwards-compatibility; remove after
-			// I982e0df706a633b05dcc02b5220b737c19adc401 is deployed
-			$contentLanguage = new Bcp47CodeValue( $contentLanguage );
-		}
 		return [
 			'code' => 200,
 			'headers' => [
