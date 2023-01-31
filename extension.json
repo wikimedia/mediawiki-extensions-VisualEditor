@@ -2713,7 +2713,6 @@
 		}
 	},
 	"QUnitTestModule": {
-		"targets": [ "desktop" ],
 		"localBasePath": "",
 		"remoteExtPath": "VisualEditor",
 		"styles": "lib/ve/lib/jsdifflib/diffview.css",
