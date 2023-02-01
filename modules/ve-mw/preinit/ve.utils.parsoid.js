@@ -48,6 +48,11 @@ mw.libs.ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscore
 /**
  * Unwrap Parsoid sections
  *
+ * data-mw-section-id attributes are copied to the first child (the heading) during
+ * this step so that we can place the cursor in the correct place when section editing.
+ * These attributes **must be removed** before being sent back to Parsoid to avoid
+ * unnecessary re-serialization.
+ *
  * @param {HTMLElement} element Parent element, e.g. document body
  * @param {string} [keepSection] Section to keep
  */
