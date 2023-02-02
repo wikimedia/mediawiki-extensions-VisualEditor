@@ -123,6 +123,38 @@ QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 			}
 		},
 		{
+			msg: 'Old parser link',
+			href: '/wiki/Foo',
+			expected: {
+				title: 'Foo',
+				isInternal: true
+			}
+		},
+		{
+			msg: 'Old parser red link',
+			href: '/w/index.php?title=Foo&action=edit&redlink=1',
+			expected: {
+				title: 'Foo',
+				isInternal: true
+			}
+		},
+		{
+			msg: 'Old parser link with fragment',
+			href: '/wiki/Foo#Bar',
+			expected: {
+				title: 'Foo#Bar',
+				isInternal: true
+			}
+		},
+		{
+			msg: 'Old parser red link with fragment (old parser does not actually generate links like this, but we recognize them)',
+			href: '/w/index.php?title=Foo&action=edit&redlink=1#Bar',
+			expected: {
+				title: 'Foo#Bar',
+				isInternal: true
+			}
+		},
+		{
 			msg: 'Full URL link to current wiki',
 			href: 'http://example.com/wiki/Foo',
 			expected: {
