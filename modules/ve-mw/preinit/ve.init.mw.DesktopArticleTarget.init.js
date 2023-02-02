@@ -840,7 +840,15 @@
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
 				).each( function () {
-					var linkUrl = new URL( this.href );
+					var linkUrl;
+					try {
+						linkUrl = new URL( this.href );
+					} catch ( err ) {
+						var customErr = new Error( 'URL error when parsing value: ' + JSON.stringify( this.href ) );
+						customErr.name = 'VeUrlError';
+						mw.errorLogger.logError( customErr, 'error.visualeditor' );
+						return;
+					}
 					if ( linkUrl.searchParams.has( 'action' ) ) {
 						linkUrl.searchParams.delete( 'action' );
 						linkUrl.searchParams.set( 'veaction', 'editsource' );
@@ -1215,8 +1223,16 @@
 		 * @param {string} [section] Override edit section, taken from link URL if not specified
 		 */
 		onEditSectionLinkClick: function ( mode, e, section ) {
-			var linkUrl = new URL( e.target.href ),
-				title = mw.Title.newFromText( linkUrl.searchParams.get( 'title' ) || '' );
+			var linkUrl;
+			try {
+				linkUrl = new URL( e.target.href );
+			} catch ( err ) {
+				var customErr = new Error( 'URL error when parsing value: ' + JSON.stringify( e.target.href ) );
+				customErr.name = 'VeUrlError';
+				mw.errorLogger.logError( customErr, 'error.visualeditor' );
+				return;
+			}
+			var title = mw.Title.newFromText( linkUrl.searchParams.get( 'title' ) || '' );
 
 			if (
 				// Modified click (e.g. ctrl+click)
