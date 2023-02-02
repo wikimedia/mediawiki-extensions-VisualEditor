@@ -14,7 +14,7 @@
  * @extends ve.init.mw.ArticleTarget
  *
  * @constructor
- * @param {Object} config Configuration options
+ * @param {Object} [config]
  */
 ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config ) {
 	// Parent constructor
