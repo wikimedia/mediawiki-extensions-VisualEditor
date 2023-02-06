@@ -368,7 +368,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWatchToggle = function ( isWatched )
 	if ( !this.active && !this.activating ) {
 		return;
 	}
-	if ( this.checkboxesByName.wpWatchthis ) {
+	if ( this.checkboxesByName && this.checkboxesByName.wpWatchthis ) {
 		this.checkboxesByName.wpWatchthis.setSelected(
 			!!mw.user.options.get( 'watchdefault' ) ||
 			( !!mw.user.options.get( 'watchcreations' ) && !this.pageExists ) ||
