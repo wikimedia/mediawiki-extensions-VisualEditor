@@ -551,7 +551,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surfac
  */
 ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
 	if ( this.deactivating || ( !this.active && !this.activating ) ) {
-		return this.teardownPromise || ve.createDeferred().reject().promise();
+		return this.teardownPromise || ve.createDeferred().resolve().promise();
 	}
 
 	// Just in case these weren't closed before
