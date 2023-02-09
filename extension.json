@@ -1894,7 +1894,7 @@
 				"ext.visualEditor.mwimage.core",
 				"mediawiki.widgets.MediaSearch",
 				"oojs-ui.styles.icons-media",
-				"oojs-ui.styles.icons-wikimedia",
+				"ext.visualEditor.icons-licenses",
 				"moment"
 			],
 			"messages": [
@@ -2678,6 +2678,17 @@
 				"oojs-ui.styles.indicators",
 				"ext.visualEditor.moduleIcons",
 				"ext.visualEditor.moduleIndicators"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.visualEditor.icons-licenses": {
+			"group": "visualEditorA",
+			"class": "MediaWiki\\ResourceLoader\\OOUIIconPackModule",
+			"icons": [
+				"logoCC"
 			],
 			"targets": [
 				"desktop",
