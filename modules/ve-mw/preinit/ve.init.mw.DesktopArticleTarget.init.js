@@ -1159,17 +1159,16 @@
 				} );
 			} else {
 				if ( section !== null ) {
-					this.onEditSectionLinkClick( mode, e, section );
+					init.activateVe( mode, e.target, section );
 				} else {
+					// Do not pass `section` to handle switching from section editing in WikiEditor if needed
 					init.activateVe( mode, e.target );
 				}
 			}
 		},
 
-		activateVe: function ( mode, link ) {
+		activateVe: function ( mode, link, section ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
-				sectionVal = $( 'input[name=wpSection]' ).val(),
-				section = sectionVal !== '' && sectionVal !== undefined ? sectionVal : null,
 				config = mw.config.get( 'wgVisualEditorConfig' ),
 				// NOTE: should be just config.allowSwitchingToVisualMode, but we need to preserve compatibility for a few minutes.
 				canSwitch = config.allowSwitchingToVisualMode || config.fullRestbaseUrl || config.allowLossySwitching,
@@ -1178,6 +1177,11 @@
 						mw.config.get( 'wgAction' ) === 'edit' &&
 						wikitext !== initialWikitext
 					);
+
+			if ( section === undefined ) {
+				var sectionVal = $( 'input[name=wpSection]' ).val();
+				section = sectionVal !== '' && sectionVal !== undefined ? sectionVal : null;
+			}
 
 			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
 			if ( $.fn.dialog ) {
