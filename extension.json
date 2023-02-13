@@ -78,7 +78,7 @@
 			"value": false
 		},
 		"VisualEditorEnableDiffPage": {
-			"value": false
+			"value": true
 		},
 		"VisualEditorEnableDiffPageBetaFeature": {
 			"value": false
