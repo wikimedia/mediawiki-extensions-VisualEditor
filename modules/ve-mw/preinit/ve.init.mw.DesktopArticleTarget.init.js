@@ -840,6 +840,11 @@
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
 				).each( function () {
+					if ( !this.href ) {
+						// Not a real link, probably added by a gadget or another extension (T328094)
+						return;
+					}
+
 					var linkUrl;
 					try {
 						linkUrl = new URL( this.href );
@@ -1227,6 +1232,11 @@
 		 * @param {string} [section] Override edit section, taken from link URL if not specified
 		 */
 		onEditSectionLinkClick: function ( mode, e, section ) {
+			if ( !e.target.href ) {
+				// Not a real link, probably added by a gadget or another extension (T328094)
+				return;
+			}
+
 			var linkUrl;
 			try {
 				linkUrl = new URL( e.target.href );
