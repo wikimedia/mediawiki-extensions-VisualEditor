@@ -37,7 +37,11 @@
 			"MathXplore",
 			"RYOUMA1117",
 			"Tmv",
-			"しぃ"
+			"しぃ",
+			"A2y4",
+			"Ryoya3",
+			"Sou0012",
+			"Yamagata Yusuke"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -332,6 +336,7 @@
 	"visualeditor-preference-core-label": "ビジュアルエディター",
 	"visualeditor-preference-enable": "ビジュアルエディターを有効にする。これは以下の{{PLURAL:$2|名前空間}}のみで利用できます: $1",
 	"visualeditor-preference-newwikitexteditor-description": "ビジュアルエディター内で新しいウィキテキストモードを有効にします。これは現在のビジュアルエディターにある多くのツールを搭載し、類似のデザインを採用しており、2つのモード間の行き来をより改善しています。",
+	"visualeditor-preference-newwikitexteditor-enable": "ウィキテキストエディターの代わりに、ビジュアルエディターのウィキテキストモードを使用する",
 	"visualeditor-preference-newwikitexteditor-label": "新しいウィキテキストモード",
 	"visualeditor-preference-tabs": "編集モード：",
 	"visualeditor-preference-tabs-multi-tab": "両方のエディタータブを表示する",
