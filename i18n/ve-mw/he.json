@@ -19,7 +19,8 @@
 			"ערן",
 			"פוילישער",
 			"קיפודנחש",
-			"תומר ט"
+			"תומר ט",
+			"מיכי י-ם"
 		]
 	},
 	"collabpad-doctitle": "פנקס שיתופי: $1",
@@ -259,7 +260,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "המרה לקישור ISBN",
 	"visualeditor-linkinspector-convert-link-pmid": "המרה לקישור PMID",
 	"visualeditor-linkinspector-convert-link-rfc": "המרה לקישור RFC",
-	"visualeditor-linkinspector-educationpopup-text": "{{GENDER:|קשר|קשרי}} מילים חשובות לדפי ויקי אחרים או אפילו אתרים אחרים. זה יעזור לקוראים להבין את ההקשר.",
+	"visualeditor-linkinspector-educationpopup-text": "{{GENDER:|קשר|קשרי}} מילים חשובות לדפי ויקי אחרים. זה יעזור לקוראים להבין את ההקשר.",
 	"visualeditor-linkinspector-educationpopup-title": "קישורים",
 	"visualeditor-linkinspector-illegal-title": "שם דף בלתי־תקין",
 	"visualeditor-linkinspector-invalid-external": "יש להזין כתובת URL מלאה, למשל https://example.org",

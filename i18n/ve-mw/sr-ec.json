@@ -312,6 +312,6 @@
 	"visualeditor-wikitext-warning": "Користите визуелни уређивач — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|викитекст]] овде не ради. У сваком тренутку можете да се пребаците на уређивање извора без губитка измена кликом на одговарајуће дугме.",
 	"visualeditor-wikitext-warning-title": "Откривено је означавање викитекста",
 	"visualeditor-wikitextconvert-title": "Претворити форматирање у викитекст?",
-	"visualeditor-wikitextconvert-message": "Ваш налепљен садржај садржи форматирање. Претворити у викитекст или налепити као обичан текст?",
+	"visualeditor-wikitextconvert-message": "Налепили сте садржај који садржи форматирање. Да ли желите да претворите ово форматирање у викитекст?",
 	"visualeditor-wikitextconvert-convert": "Претвори у викитекст"
 }
