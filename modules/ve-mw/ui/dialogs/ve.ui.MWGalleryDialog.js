@@ -429,6 +429,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 						resource: resource,
 						altText: image.getAttribute( 'altText' ),
 						altTextSame: image.getAttribute( 'altTextSame' ),
+						href: image.getAttribute( 'href' ),
 						src: image.getAttribute( 'src' ),
 						height: image.getAttribute( 'height' ),
 						width: image.getAttribute( 'width' ),
@@ -675,6 +676,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 					resource: title,
 					altText: null,
 					altTextSame: true,
+					href: null,
 					src: '',
 					height: thumbUrls[ title ].height,
 					width: thumbUrls[ title ].width,
@@ -1025,6 +1027,7 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 				galleryItem.originalAltText :
 				galleryItem.altText,
 			altTextSame: galleryItem.altTextSame,
+			href: galleryItem.href,
 			// For existing images use `src` to avoid triggering a diff if the
 			// thumbnail size changes. For new images we have to use `thumbUrl` (T310623).
 			src: galleryItem.src || galleryItem.thumbUrl,
