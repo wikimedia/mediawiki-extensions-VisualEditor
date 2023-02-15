@@ -847,83 +847,32 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: '<table><tr><td>Foo</td></tr></table>'
 	},
-	'mwGalleryImage (no caption in DOM)': {
-		body: '<ul class="gallery mw-gallery-packed-hover" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb" style="width: 120px;"><span typeof="mw:Image"><a href="./Foo"><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div></li></ul>',
-		data: [
-			{
-				type: 'mwGallery',
-				attributes: {
-					mw: {
-						attrs: {
-							mode: 'packed-hover'
-						},
-						body: {
-							extsrc: ''
-						},
-						name: 'gallery'
-					},
-					originalMw: '{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}'
-				}
-			},
-			{
-				type: 'mwGalleryImage',
-				attributes: {
-					mediaClass: 'Image',
-					mediaTag: 'img',
-					altText: null,
-					altTextSame: false,
-					width: 120,
-					height: 120,
-					resource: './Foo',
-					src: ve.ce.minImgDataUri,
-					isError: false
-				}
-			},
-			{ type: 'mwGalleryImageCaption' },
-			{
-				type: 'paragraph',
-				internal: {
-					generated: 'wrapper'
-				}
-			},
-			{ type: '/paragraph' },
-			{ type: '/mwGalleryImageCaption' },
-			{ type: '/mwGalleryImage' },
-			{ type: '/mwGallery' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
-		],
-		normalizedBody: '<ul class="gallery mw-gallery-packed-hover" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb"><span typeof="mw:Image"><a><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext"></div></li></ul>',
-		fromDataBody: '<ul typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:Image"><a><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext"></div></li></ul>'
-	},
 	'mwGalleryImage (broken image)': {
-		body: '<ul class="gallery mw-gallery-packed-hover" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb" style="width: 120px;"><span typeof="mw:Error mw:Image" data-mw=\'{"errors":[{"key":"apierror-filedoesnotexist","message":"This image does not exist."}]}\'><a href="./Foo"><span class="mw-broken-media" resource="./Foo" data-height="120" data-width="120">File:Foo</span></a></span></div></li></ul>',
+		body: '<ul class="gallery mw-gallery-traditional" typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{},"body":{"extsrc":"File:!Example.jpg"}}\'><li class="gallerybox" style="width: 155px;"><div class="thumb" style="width: 150px; height: 150px;"><span typeof="mw:Error mw:File" data-mw=\'{"errors":[{"key":"apierror-filedoesnotexist","message":"This image does not exist."}]}\'><a href="./Special:FilePath/!Example.jpg"><span class="mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span></a></span></div><div class="gallerytext"></div></li></ul>',
 		data: [
 			{
 				type: 'mwGallery',
 				attributes: {
 					mw: {
-						attrs: {
-							mode: 'packed-hover'
-						},
+						attrs: {},
 						body: {
-							extsrc: ''
+							extsrc: 'File:!Example.jpg'
 						},
 						name: 'gallery'
 					},
-					originalMw: '{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}'
+					originalMw: '{"name":"gallery","attrs":{},"body":{"extsrc":"File:!Example.jpg"}}'
 				}
 			},
 			{
 				type: 'mwGalleryImage',
 				attributes: {
-					mediaClass: 'Image',
+					mediaClass: 'File',
 					mediaTag: 'span',
 					altText: null,
 					altTextSame: false,
 					width: 120,
 					height: 120,
-					resource: './Foo',
+					resource: './File:!Example.jpg',
 					src: null,
 					isError: true
 				}
@@ -942,11 +891,11 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		normalizedBody: '<ul class="gallery mw-gallery-packed-hover" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb"><span typeof="mw:Error mw:Image"><a><span class="mw-broken-media" resource="./Foo" data-height="120" data-width="120">Foo</span></a></span></div><div class="gallerytext"></div></li></ul>',
-		fromDataBody: '<ul typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed-hover"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:Error mw:Image"><a><span class="mw-broken-media" resource="./Foo" data-height="120" data-width="120">Foo</span></a></span></div><div class="gallerytext"></div></li></ul>'
+		normalizedBody: '<ul class="gallery mw-gallery-traditional" typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{},"body":{"extsrc":"File:!Example.jpg"}}\'><li class="gallerybox" style="width: 155px;"><div class="thumb"><span typeof="mw:Error mw:File"><a><span class="mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span></a></span></div><div class="gallerytext"></div></li></ul>',
+		fromDataBody: '<ul typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{},"body":{"extsrc":"File:!Example.jpg"}}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:Error mw:File"><a><span class="mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span></a></span></div><div class="gallerytext"></div></li></ul>'
 	},
 	'mwGalleryImage (empty caption in DOM)': {
-		body: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb" style="width: 120px;"><span typeof="mw:Image"><a href="./Foo"><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext"></div></li></ul>',
+		body: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg"}}\'><li class="gallerybox" style="width: 182px;"><div class="thumb" style="width: 180px;"><span typeof="mw:File"><a href="./File:Example.jpg" class="mw-file-description"><img resource="./File:Example.jpg" src="' + ve.ce.minImgDataUri + '" decoding="async" data-file-width="400" data-file-height="267" data-file-type="bitmap" height="120" width="180" srcset="' + ve.ce.minImgDataUri + ' 2x"/></a></span></div><div class="gallerytext"></div></li></ul>',
 		data: [
 			{
 				type: 'mwGallery',
@@ -956,23 +905,23 @@ ve.dm.mwExample.domToDataCases = {
 							mode: 'packed'
 						},
 						body: {
-							extsrc: ''
+							extsrc: 'File:Example.jpg'
 						},
 						name: 'gallery'
 					},
-					originalMw: '{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}'
+					originalMw: '{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg"}}'
 				}
 			},
 			{
 				type: 'mwGalleryImage',
 				attributes: {
-					mediaClass: 'Image',
+					mediaClass: 'File',
 					mediaTag: 'img',
 					altText: null,
 					altTextSame: false,
-					width: 120,
+					width: 180,
 					height: 120,
-					resource: './Foo',
+					resource: './File:Example.jpg',
 					src: ve.ce.minImgDataUri,
 					isError: false
 				}
@@ -991,11 +940,11 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		normalizedBody: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb"><span typeof="mw:Image"><a><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext"></div></li></ul>',
-		fromDataBody: '<ul typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:Image"><a><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext"></div></li></ul>'
+		normalizedBody: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg"}}\'><li class="gallerybox" style="width: 182px;"><div class="thumb"><span typeof="mw:File"><a><img resource="./File:Example.jpg" src="' + ve.ce.minImgDataUri + '" height="120" width="180"/></a></span></div><div class="gallerytext"></div></li></ul>',
+		fromDataBody: '<ul typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg"}}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:File"><a><img resource="./File:Example.jpg" src="' + ve.ce.minImgDataUri + '" height="120" width="180"/></a></span></div><div class="gallerytext"></div></li></ul>'
 	},
-	'mwGalleryImage (caption with content in DOM)': {
-		body: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb" style="width: 120px;"><span typeof="mw:Image"><a href="./Foo"><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext">Caption</div></li></ul>',
+	'mwGalleryImage (caption with content)': {
+		body: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg|Caption"}}\'><li class="gallerybox" style="width: 182px;"><div class="thumb" style="width: 180px;"><span typeof="mw:File"><a href="./File:Example.jpg" class="mw-file-description"><img resource="./File:Example.jpg" src="' + ve.ce.minImgDataUri + '" data-file-width="400" data-file-height="267" data-file-type="bitmap" height="120" width="180"/></a></span></div><div class="gallerytext">Caption</div></li></ul>',
 		data: [
 			{
 				type: 'mwGallery',
@@ -1005,23 +954,23 @@ ve.dm.mwExample.domToDataCases = {
 							mode: 'packed'
 						},
 						body: {
-							extsrc: ''
+							extsrc: 'File:Example.jpg|Caption'
 						},
 						name: 'gallery'
 					},
-					originalMw: '{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}'
+					originalMw: '{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg|Caption"}}'
 				}
 			},
 			{
 				type: 'mwGalleryImage',
 				attributes: {
-					mediaClass: 'Image',
+					mediaClass: 'File',
 					mediaTag: 'img',
 					altText: null,
 					altTextSame: false,
-					width: 120,
+					width: 180,
 					height: 120,
-					resource: './Foo',
+					resource: './File:Example.jpg',
 					src: ve.ce.minImgDataUri,
 					isError: false
 				}
@@ -1041,8 +990,8 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		normalizedBody: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox" style="width: 122px;"><div class="thumb"><span typeof="mw:Image"><a><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext">Caption</div></li></ul>',
-		fromDataBody: '<ul typeof="mw:Extension/gallery" data-mw=\'{"attrs":{"mode":"packed"},"body":{"extsrc":""},"name":"gallery"}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:Image"><a><img resource="./Foo" src="' + ve.ce.minImgDataUri + '" height="120" width="120"/></a></span></div><div class="gallerytext">Caption</div></li></ul>'
+		normalizedBody: '<ul class="gallery mw-gallery-packed" typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg|Caption"}}\'><li class="gallerybox" style="width: 182px;"><div class="thumb"><span typeof="mw:File"><a><img resource="./File:Example.jpg" src="' + ve.ce.minImgDataUri + '" height="120" width="180"/></a></span></div><div class="gallerytext">Caption</div></li></ul>',
+		fromDataBody: '<ul typeof="mw:Extension/gallery" about="#mwt2" data-mw=\'{"name":"gallery","attrs":{"mode":"packed"},"body":{"extsrc":"File:Example.jpg|Caption"}}\'><li class="gallerybox"><div class="thumb"><span typeof="mw:File"><a><img resource="./File:Example.jpg" src="' + ve.ce.minImgDataUri + '" height="120" width="180"/></a></span></div><div class="gallerytext">Caption</div></li></ul>'
 	},
 	'mwGalleryImage (no caption in model)': {
 		data: [
