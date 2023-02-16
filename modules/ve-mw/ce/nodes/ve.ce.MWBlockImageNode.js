@@ -33,7 +33,7 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	// Build DOM:
 	if ( isError ) {
 		$image = $( [] );
-		var $missingImage = $( '<span>' ).text( this.model.getFilename() );
+		var $missingImage = $( '<span>' ).text( this.model.getAttribute( 'errorText' ) );
 		this.$a = $( '<a>' )
 			.addClass( 'new' )
 			.append( $missingImage );

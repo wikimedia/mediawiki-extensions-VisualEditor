@@ -290,6 +290,7 @@ ve.dm.mwExample.MWBlockImage = {
 				height: 2,
 				alt: 'alt text',
 				isError: false,
+				errorText: null,
 				resource: './FooBar',
 				mw: {},
 				originalClasses: 'mw-halign-right foobar',
@@ -328,6 +329,7 @@ ve.dm.mwExample.MWInlineImage = {
 			height: 155,
 			alt: 'alt text',
 			isError: false,
+			errorText: null,
 			valign: 'text-top',
 			resource: './File:Wiki.png',
 			mw: {},
@@ -361,6 +363,7 @@ ve.dm.mwExample.MWInlineImageWithWrapperClass = {
 			height: 155,
 			alt: 'alt text',
 			isError: false,
+			errorText: null,
 			valign: 'text-top',
 			resource: './File:Wiki.png',
 			mw: {},
@@ -875,7 +878,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:!Example.jpg',
 					src: null,
-					isError: true
+					isError: true,
+					errorText: 'File:!Example.jpg'
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -924,7 +928,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:Example.jpg',
 					src: ve.ce.minImgDataUri,
-					isError: false
+					isError: false,
+					errorText: null
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -973,7 +978,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:Example.jpg',
 					src: ve.ce.minImgDataUri,
-					isError: false
+					isError: false,
+					errorText: null
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -1022,7 +1028,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					isError: false
+					isError: false,
+					errorText: null
 				}
 			},
 			{ type: '/mwGalleryImage' },
@@ -1060,7 +1067,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					src: ve.ce.minImgDataUri,
-					isError: false
+					isError: false,
+					errorText: null
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -1085,6 +1093,7 @@ ve.dm.mwExample.domToDataCases = {
 					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
+					errorText: null,
 					mediaClass: 'Image',
 					mediaTag: 'img',
 					mw: {},
@@ -1122,6 +1131,7 @@ ve.dm.mwExample.domToDataCases = {
 					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
+					errorText: null,
 					mediaClass: 'Image',
 					mediaTag: 'img',
 					mw: {},
@@ -1158,6 +1168,7 @@ ve.dm.mwExample.domToDataCases = {
 					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
+					errorText: null,
 					mediaClass: 'Image',
 					mediaTag: 'img',
 					mw: {},
@@ -1194,6 +1205,7 @@ ve.dm.mwExample.domToDataCases = {
 					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
+					errorText: null,
 					mediaClass: 'Image',
 					mediaTag: 'img',
 					mw: {},
@@ -1221,6 +1233,7 @@ ve.dm.mwExample.domToDataCases = {
 					imageClassAttr: null,
 					imgWrapperClassAttr: null,
 					isError: false,
+					errorText: null,
 					mediaClass: 'Image',
 					mediaTag: 'img',
 					mw: {},
@@ -1989,6 +2002,7 @@ ve.dm.mwExample.domToDataCases = {
 					originalHeight: null,
 					alt: null,
 					isError: true,
+					errorText: 'File:Missing image.jpg',
 					resource: './File:Missing_image.jpg',
 					mw: {
 						errors: [ {
@@ -2043,6 +2057,7 @@ ve.dm.mwExample.domToDataCases = {
 					valign: 'default',
 					alt: null,
 					isError: true,
+					errorText: 'File:Missing image.jpg',
 					resource: './File:Missing_image.jpg',
 					mw: {
 						errors: [ {
@@ -2105,6 +2120,7 @@ ve.dm.mwExample.domToDataCases = {
 					alt: null,
 					mw: {},
 					isError: false,
+					errorText: null,
 					resource: './FooBar'
 				}
 			},

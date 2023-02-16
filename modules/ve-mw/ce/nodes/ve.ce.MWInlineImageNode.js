@@ -23,7 +23,7 @@ ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
 	if ( model.getAttribute( 'isError' ) ) {
 		this.$element = $( '<a>' )
 			.addClass( 'new' )
-			.text( model.getFilename() );
+			.text( model.getAttribute( 'errorText' ) );
 		$image = $( [] );
 	} else {
 		if ( model.getAttribute( 'href' ) ) {

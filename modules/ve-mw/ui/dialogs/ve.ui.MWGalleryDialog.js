@@ -434,7 +434,8 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 						width: image.getAttribute( 'width' ),
 						captionDocument: this.createCaptionDocument( imageCaptionNode ),
 						tagName: image.getAttribute( 'tagName' ),
-						isError: image.getAttribute( 'isError' )
+						isError: image.getAttribute( 'isError' ),
+						errorText: image.getAttribute( 'errorText' )
 					} );
 				}
 
@@ -679,7 +680,8 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 					width: thumbUrls[ title ].width,
 					thumbUrl: thumbUrls[ title ].thumbUrl,
 					captionDocument: this.createCaptionDocument( null ),
-					isError: false
+					isError: false,
+					errorText: null
 				}, config ) );
 				delete this.selectedFilenames[ title ];
 			}
@@ -1029,7 +1031,8 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 			height: size.height,
 			width: size.width,
 			tagName: galleryItem.tagName,
-			isError: galleryItem.isError
+			isError: galleryItem.isError,
+			errorText: galleryItem.errorText
 		};
 
 		return [
