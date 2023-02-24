@@ -133,6 +133,7 @@
 	"visualeditor-dialog-transclusion-template-search": "Úlgi izlew",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitekst",
 	"visualeditor-dialogbutton-template-tooltip": "Úlgi",
+	"visualeditor-editsummary": "Islegen ózgerislerińizge sıpatlama berińiz",
 	"visualeditor-expandable-more": "Jáne",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Bet ataması",
@@ -170,9 +171,12 @@
 	"visualeditor-rebase-client-export-start": "Eksport...",
 	"visualeditor-rebase-client-import": "Import",
 	"visualeditor-rebase-client-import-name": "Bet ataması",
+	"visualeditor-savedialog-label-review": "Ózgerislerińizdi tekserip shıǵıńız",
 	"visualeditor-savedialog-label-save-short": "Saqlań",
 	"visualeditor-savedialog-label-save-short-start": "Saqlań...",
 	"visualeditor-savedialog-review-visual": "Vizual",
 	"visualeditor-savedialog-review-wikitext": "Wikitekst",
+	"visualeditor-savedialog-title-review": "Islegen ózgerislerińizdi tekserip shıǵıńız",
+	"visualeditor-savedialog-title-save": "Ózgerislerińizdi saqlańız",
 	"visualeditor-version-label": "Versiyası"
 }
