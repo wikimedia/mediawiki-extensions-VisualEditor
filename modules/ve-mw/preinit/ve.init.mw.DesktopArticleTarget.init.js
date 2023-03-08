@@ -348,11 +348,7 @@
 		// user has expressed no choice by opening this editor. (T246259)
 		// Strictly speaking the same thing should happen if visual mode is
 		// available but source mode isn't, but that is never the case.
-		if (
-			!init.isVisualAvailable ||
-			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
-			( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null )
-		) {
+		if ( !init.isVisualAvailable ) {
 			return $.Deferred().resolve().promise();
 		}
 
