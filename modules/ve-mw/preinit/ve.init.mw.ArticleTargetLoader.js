@@ -48,15 +48,6 @@
 		modules.push( 'ext.visualEditor.mwsignature' );
 	}
 
-	// Add preference modules
-	for ( var prefName in conf.preferenceModules ) {
-		var prefValue = mw.user.options.get( prefName );
-		// Check "0" (T89513)
-		if ( prefValue && prefValue !== '0' ) {
-			modules.push( conf.preferenceModules[ prefName ] );
-		}
-	}
-
 	mw.libs.ve = mw.libs.ve || {};
 
 	mw.libs.ve.targetLoader = {
