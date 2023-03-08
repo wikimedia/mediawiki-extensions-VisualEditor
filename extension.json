@@ -2916,7 +2916,7 @@
 	"DefaultUserOptions": {
 		"visualeditor-autodisable": 0,
 		"visualeditor-betatempdisable": 0,
-		"visualeditor-editor": "wikitext",
+		"visualeditor-editor": "visualeditor",
 		"visualeditor-enable": 1,
 		"visualeditor-enable-experimental": 0,
 		"visualeditor-hidebetawelcome": 0,
