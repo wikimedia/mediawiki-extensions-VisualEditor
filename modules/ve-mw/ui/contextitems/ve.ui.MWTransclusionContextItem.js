@@ -77,6 +77,19 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWTransclusionContextItem.prototype.renderBody = function () {
+	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
+	// eslint-disable-next-line no-jquery/no-append-html
+	this.$body.append( ve.htmlMsg(
+		'visualeditor-dialog-transclusion-contextitem-description',
+		nodeClass.static.getDescriptionDom( this.model ),
+		this.model.getPartsList().length
+	) );
+};
+
+/**
  * @param {string} [source] Source for tracking in {@see ve.ui.WindowAction.open}
  */
 ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function ( source ) {
