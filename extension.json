@@ -118,11 +118,6 @@
 		"VisualEditorPluginModules": {
 			"value": []
 		},
-		"VisualEditorPreferenceModules": {
-			"value": {
-				"visualeditor-enable-experimental": "ext.visualEditor.experimental"
-			}
-		},
 		"VisualEditorPreloadModules": {
 			"value": [
 				"site",
@@ -2654,13 +2649,6 @@
 				"mobile"
 			]
 		},
-		"ext.visualEditor.experimental": {
-			"group": "visualEditorA",
-			"targets": [
-				"desktop",
-				"mobile"
-			]
-		},
 		"ext.visualEditor.icons": {
 			"group": "visualEditorA",
 			"dependencies": [
@@ -2903,7 +2891,6 @@
 			"ext.visualEditor.mwalienextension",
 			"ext.visualEditor.mwwikitext",
 			"ext.visualEditor.language",
-			"ext.visualEditor.experimental",
 			"ext.visualEditor.desktopArticleTarget.init",
 			"ext.visualEditor.desktopArticleTarget",
 			"ext.visualEditor.rebase"
@@ -2918,7 +2905,6 @@
 		"visualeditor-betatempdisable": 0,
 		"visualeditor-editor": "visualeditor",
 		"visualeditor-enable": 1,
-		"visualeditor-enable-experimental": 0,
 		"visualeditor-hidebetawelcome": 0,
 		"visualeditor-hidetabdialog": 0,
 		"visualeditor-newwikitext": 0,
