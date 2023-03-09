@@ -517,7 +517,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.captionTarget.connect( this, { change: 'updateActions' } );
 			this.highlightedAltTextInput.connect( this, { change: 'updateActions' } );
 			this.altTextSameAsCaption.connect( this, { change: 'onAltTextSameAsCaptionChange' } );
-			this.highlightedCaptionTarget.connect( this, { change: 'updateActions' } );
+			this.highlightedCaptionTarget.connect( this, { change: 'onHighlightedCaptionTargetChange' } );
 
 			return this.imagesPromise;
 		}, this );
@@ -840,11 +840,25 @@ ve.ui.MWGalleryDialog.prototype.onModeDropdownChange = function () {
 };
 
 /**
+ * Handle change event for this.highlightedCaptionTarget
+ */
+ve.ui.MWGalleryDialog.prototype.onHighlightedCaptionTargetChange = function () {
+	if ( this.altTextSameAsCaption.isSelected() ) {
+		var surfaceModel = this.highlightedCaptionTarget.getSurface().getModel();
+		var caption = surfaceModel.getLinearFragment(
+			surfaceModel.getDocument().getDocumentRange()
+		).getText();
+		this.highlightedAltTextInput.setValue( caption );
+	}
+	this.updateActions();
+};
+
+/**
  * Handle change event for this.altTextSameAsCaption
  */
 ve.ui.MWGalleryDialog.prototype.onAltTextSameAsCaptionChange = function () {
 	this.highlightedAltTextInput.setReadOnly( this.isReadOnly() || this.altTextSameAsCaption.isSelected() );
-	this.updateActions();
+	this.onHighlightedCaptionTargetChange();
 };
 
 /**
