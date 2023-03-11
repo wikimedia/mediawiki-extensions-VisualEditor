@@ -6,6 +6,7 @@
 	"rules": {
 		"no-descending-specificity": null,
 		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-",
-		"declaration-property-unit-disallowed-list": null
+		"declaration-property-unit-disallowed-list": null,
+		"selector-pseudo-element-colon-notation": null
 	}
 }

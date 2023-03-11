@@ -21,7 +21,7 @@
 		"@wdio/mocha-framework": "7.16.13",
 		"@wdio/spec-reporter": "7.16.13",
 		"eslint-config-wikimedia": "0.24.0",
-		"grunt": "1.5.3",
+		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.10.0",
 		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-watch": "1.1.0",
@@ -35,7 +35,7 @@
 		"api-testing": "1.5.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
-		"stylelint-config-wikimedia": "0.13.1",
+		"stylelint-config-wikimedia": "0.14.0",
 		"wdio-mediawiki": "2.1.0"
 	}
 }
