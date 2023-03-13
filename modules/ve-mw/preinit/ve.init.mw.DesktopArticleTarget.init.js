@@ -1527,7 +1527,7 @@
 		}
 
 		var showWikitextWelcome = true,
-			numEditButtons = $( '#ca-edit, #ca-viewsource' ).length,
+			numEditButtons = $( '#ca-edit, #ca-ve-edit' ).length,
 			section = parseSection( url.searchParams.get( 'section' ) );
 
 		var requiredSkinElements =
