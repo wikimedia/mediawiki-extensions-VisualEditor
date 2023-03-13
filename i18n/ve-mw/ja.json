@@ -41,7 +41,9 @@
 			"A2y4",
 			"Ryoya3",
 			"Sou0012",
-			"Yamagata Yusuke"
+			"Yamagata Yusuke",
+			"Kokage si",
+			"Marine-Blue"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -78,7 +80,7 @@
 	"visualeditor-desc": "MediaWiki 用のビジュアルエディター",
 	"visualeditor-descriptionpagelink": "Project:ビジュアルエディター",
 	"visualeditor-dialog-media-alttext-section": "代替テキスト",
-	"visualeditor-dialog-media-alttext-section-help": "アイテムが見えない人のためのテキストの説明を記述するためにこれを利用できます。この説明は、このメディアアイテムによって与えられる目的と情報が、理解するために十分なものである必要があります。目が見えない人や、スクリーンリーダー・ソフトウェアやテキストのみのブラウザーを利用する他の人たちにとって、これは非常に重要です。",
+	"visualeditor-dialog-media-alttext-section-help": "アイテムが見えない人のためにテキストによる説明を記述することができます。説明文はこのメディアによって与えられる目的と情報を理解するために十分なものでなければいけません。目が見えない人や、スクリーンリーダー・ソフトウェア、テキストブラウザなどを利用する人たちにとって、必要不可欠なものです。",
 	"visualeditor-dialog-media-change-image": "画像を変更",
 	"visualeditor-dialog-media-choose-image": "この画像を使用",
 	"visualeditor-dialog-media-content-description-link": "(説明ページ)",
@@ -246,6 +248,13 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "小見出し 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "小見出し 4",
 	"visualeditor-generating-wikitext-progress": "ウィキテキストを生成中",
+	"visualeditor-includes-noinclude-start": "抜粋から除外された内容の始まり",
+	"visualeditor-includes-noinclude-end": "抜粋から除外された内容の終わり",
+	"visualeditor-includes-onlyinclude-start": "抜粋に含めてよい内容の始まり",
+	"visualeditor-includes-onlyinclude-end": "抜粋に含めてよい内容の終わり",
+	"visualeditor-includes-includeonly": "抜粋だけに記す内容",
+	"visualeditor-includes-noinclude-description": "このページの内容を他のページで使う場合は、ここ以降、一致する終了マーカーまでの内容は含まれ<strong>ません</strong>。2つのマーカーに挟まれていない内容は他のページで使用されるかもしれないので、編集は慎重に確かめてください。",
+	"visualeditor-includes-onlyinclude-description": "このページの内容を他のページで使う場合は、ここ以降、一致する終了マーカーまでの内容に<strong>限定して</strong>対象になります。2つのマーカーに挟まれた内容は他のページで使用されるかもしれないので、編集は慎重に確かめてください。",
 	"visualeditor-languages-tool": "他言語",
 	"visualeditor-linkinspector-button-link-external": "外部サイト",
 	"visualeditor-linkinspector-button-link-internal": "内部ページを検索",
