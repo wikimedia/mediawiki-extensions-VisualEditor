@@ -50,7 +50,8 @@
 			"Themasterriot",
 			"Tiberius1701",
 			"Vikytinta",
-			"Wifidel"
+			"Wifidel",
+			"ZebaX2010"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -227,7 +228,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Continuar de todos modos",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Campo necesario faltante|Campos necesarios faltantes}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "¿Estás seguro de que quieres continuar sin rellenar {{PLURAL:$2|el campo|los campos}} $1?",
-	"visualeditor-dialog-transclusion-see-template": "Las plantillas son generadas por usarios y pueden carecer de descripciones completas. Puede que haya información adicional en este [[$2|página de plantilla]].",
+	"visualeditor-dialog-transclusion-see-template": "Las plantillas son generadas por usuarios y pueden carecer de descripciones completas. Puede que haya información adicional en su [[$2|página de plantilla]].",
 	"visualeditor-dialog-transclusion-title-insert-template": "Insertar una plantilla",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Insertar: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Editar: $1",
