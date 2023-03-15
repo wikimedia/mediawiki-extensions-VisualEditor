@@ -354,7 +354,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	if ( this.tableOfContentsTouched ) {
 		if ( newTableOfContentsData.data === 'default' ) {
 			if ( currentTableOfContents ) {
-				currentTableOfContents.remove();
+				this.fragment.removeMeta( currentTableOfContents );
 			}
 		} else {
 			var newTableOfContentsItem = { type: 'mwTOC', attributes: { property: newTableOfContentsData.data } };
@@ -386,7 +386,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 				}
 			} else {
 				// There was a redirect and is no new one, so remove
-				currentRedirectTargetItem.remove();
+				this.fragment.removeMeta( currentRedirectTargetItem );
 			}
 		} else {
 			if ( newRedirectData ) {
@@ -397,7 +397,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		}
 
 		if ( currentStaticRedirectItem && ( !newStaticRedirectState || !newRedirectData ) ) {
-			currentStaticRedirectItem.remove();
+			this.fragment.removeMeta( currentStaticRedirectItem );
 		}
 		if ( !currentStaticRedirectItem && newStaticRedirectState && newRedirectData ) {
 			this.fragment.insertMeta( { type: 'mwStaticRedirect' } );
@@ -409,9 +409,9 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {
-			currentItem.remove();
+			this.fragment.removeMeta( currentItem );
 		} else if ( !currentItem && isSelected ) {
-			settingsPage.frament.insertMeta( { type: metaItemCheckbox.metaName } );
+			settingsPage.fragment.insertMeta( { type: metaItemCheckbox.metaName } );
 		}
 	} );
 
