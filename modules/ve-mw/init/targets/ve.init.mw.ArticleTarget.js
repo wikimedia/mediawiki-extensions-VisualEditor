@@ -1516,12 +1516,12 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 
 	var config = mw.config.get( 'wgVisualEditorConfig' );
 
-	if ( config.useChangeTagging && !data.vetags ) {
-		if ( this.getSurface().getMode() === 'source' ) {
-			data.vetags = 'visualeditor-wikitext';
-		} else {
-			data.vetags = 'visualeditor';
-		}
+	var taglist = data.vetags ? data.vetags.split( ',' ) : [];
+
+	if ( config.useChangeTagging ) {
+		taglist.push(
+			this.getSurface().getMode() === 'source' ? 'visualeditor-wikitext' : 'visualeditor'
+		);
 	}
 
 	if (
@@ -1529,8 +1529,10 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging &&
 		mw.editcheck.doesAddedContentNeedReference( this.getSurface().getModel().getDocument() )
 	) {
-		// TODO: Add an "edit check" tag
+		taglist.push( 'editcheck-needreference' );
 	}
+
+	data.vetags = taglist.join( ',' );
 
 	var promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
 		.done( this.saveComplete.bind( this ) )

@@ -53,6 +53,8 @@ class Hooks {
 	private const TAGS = [
 		'visualeditor',
 		'visualeditor-wikitext',
+		// Edit check
+		'editcheck-needreference',
 		// No longer in active use:
 		'visualeditor-needcheck',
 		'visualeditor-switched'

@@ -166,7 +166,8 @@
 			"value": false
 		},
 		"VisualEditorUseChangeTagging": {
-			"value": true
+			"value": true,
+			"description": "Tag edits as having used visualeditor, or VE's wikitext mode."
 		},
 		"VisualEditorEditCheckTagging": {
 			"value": false,
