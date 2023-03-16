@@ -37,6 +37,10 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
+	if ( conf.editCheckTagging ) {
+		modules.push( 'ext.visualEditor.editCheck' );
+	}
+
 	var namespaces = mw.config.get( 'wgNamespaceIds' );
 	// Load signature tool if *any* namespace supports it.
 	// It will be shown disabled on namespaces that don't support it.

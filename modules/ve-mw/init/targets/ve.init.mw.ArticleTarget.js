@@ -1514,12 +1514,22 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		assertuser: mw.user.getName() || undefined
 	} );
 
-	if ( mw.config.get( 'wgVisualEditorConfig' ).useChangeTagging && !data.vetags ) {
+	var config = mw.config.get( 'wgVisualEditorConfig' );
+
+	if ( config.useChangeTagging && !data.vetags ) {
 		if ( this.getSurface().getMode() === 'source' ) {
 			data.vetags = 'visualeditor-wikitext';
 		} else {
 			data.vetags = 'visualeditor';
 		}
+	}
+
+	if (
+		this.getSurface().getMode() === 'visual' &&
+		mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging &&
+		mw.editcheck.doesAddedContentNeedReference( this.getSurface().getModel().getDocument() )
+	) {
+		// TODO: Add an "edit check" tag
 	}
 
 	var promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )

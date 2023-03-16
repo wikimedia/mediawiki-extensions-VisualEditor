@@ -1129,6 +1129,7 @@ class Hooks {
 				$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
 			),
 			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
+			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),

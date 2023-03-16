@@ -168,6 +168,10 @@
 		"VisualEditorUseChangeTagging": {
 			"value": true
 		},
+		"VisualEditorEditCheckTagging": {
+			"value": false,
+			"description": "For testing only. Tag edits for the Edit Check project."
+		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
@@ -583,6 +587,18 @@
 			"scripts": "modules/ve-mw/ve.track.js",
 			"dependencies": "ext.visualEditor.ve"
 		},
+		"ext.visualEditor.editCheck": {
+			"group": "visualEditorA",
+			"scripts": [
+				"modules/editcheck/init.js"
+			],
+			"dependencies": [],
+			"messages": [],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
 		"ext.visualEditor.core.utils": {
 			"group": "visualEditorA",
 			"scripts": [
@@ -809,6 +825,7 @@
 				"lib/ve/src/dm/ve.dm.TransactionProcessor.js",
 				"lib/ve/src/dm/ve.dm.Transaction.js",
 				"lib/ve/src/dm/ve.dm.TransactionBuilder.js",
+				"lib/ve/src/dm/ve.dm.TransactionSquasher.js",
 				"lib/ve/src/dm/ve.dm.Change.js",
 				"lib/ve/src/dm/ve.dm.TreeCursor.js",
 				"lib/ve/src/dm/ve.dm.TreeModifier.js",
@@ -1092,7 +1109,6 @@
 				"lib/ve/src/ui/pages/ve.ui.SpecialCharacterPage.js"
 			],
 			"debugScripts": [
-				"lib/ve/src/dm/ve.dm.TransactionSquasher.js",
 				"lib/ve/src/ce/ve.ce.debug.js",
 				"lib/ve/src/ui/ve.ui.DebugBar.js",
 				"lib/ve/src/ve.Filibuster.js"
