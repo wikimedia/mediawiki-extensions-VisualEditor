@@ -274,21 +274,6 @@
 		}
 	}
 
-	function mwTimingHandler( topic, data ) {
-		// Add type for save errors; not in the topic for stupid historical reasons
-		if ( topic === 'mwtiming.performance.user.saveError' ) {
-			topic = topic + '.' + data.type;
-		}
-
-		// Map mwtiming.foo --> timing.ve.foo.mobile
-		topic = topic.replace( /^mwtiming/, 'timing.ve.' + data.targetName );
-		if ( trackdebug ) {
-			log( topic, Math.round( data.duration ) + 'ms' );
-		} else {
-			mw.track( topic, data.duration );
-		}
-	}
-
 	function activityHandler( topic, data ) {
 		var feature = topic.split( '.' )[ 1 ];
 
@@ -352,7 +337,6 @@
 		// mw.eventLog.dispatch.
 		mw.loader.using( 'ext.eventLogging' ).done( function () {
 			ve.trackSubscribe( 'mwedit.', mwEditHandler );
-			ve.trackSubscribe( 'mwtiming.', mwTimingHandler );
 		} );
 	}
 

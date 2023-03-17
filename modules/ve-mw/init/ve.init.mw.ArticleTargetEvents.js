@@ -46,19 +46,25 @@ ve.init.mw.ArticleTargetEvents.prototype.track = function ( topic, data ) {
 };
 
 /**
- * Target specific ve.track wrapper, focused on mwtiming
+ * Target specific ve.track wrapper, focused on timing
  *
  * @param {string} topic Event name
  * @param {Object} data Additional data describing the event, encoded as an object
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackTiming = function ( topic, data ) {
-	data.targetName = this.target.constructor.static.trackingName;
-	this.track( 'mwtiming.' + topic, data );
-
 	if ( topic.indexOf( 'performance.system.serializeforcache' ) === 0 ) {
 		// HACK: track serializeForCache duration here, because there's no event for that
 		this.timings.serializeForCache = data.duration;
 	}
+
+	// Add type for save errors; not in the topic for stupid historical reasons
+	if ( topic === 'performance.user.saveError' ) {
+		topic = topic + '.' + data.type;
+	}
+
+	topic = 'timing.ve.' + this.target.constructor.static.trackingName + '.' + topic;
+
+	mw.track( topic, data.duration );
 };
 
 /**
@@ -68,8 +74,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onFirstTransaction = function () {
 	this.track( 'mwedit.firstChange' );
 
 	this.trackTiming( 'behavior.firstTransaction', {
-		duration: ve.now() - this.timings.surfaceReady,
-		mode: this.target.surface.getMode()
+		duration: ve.now() - this.timings.surfaceReady
 	} );
 };
 
@@ -125,7 +130,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( data ) {
  * @param {string} code Error code
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
-	// Maps mwtiming types to mwedit types
+	// Maps error codes to mwedit types
 	var typeMap = {
 			badtoken: 'userBadToken',
 			assertanonfailed: 'userNewUser',
@@ -149,7 +154,6 @@ ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
 	}
 	this.trackTiming( key, {
 		duration: ve.now() - this.timings.saveInitiated,
-		retries: this.timings.saveRetries,
 		type: code
 	} );
 

@@ -327,15 +327,10 @@
 				}
 			}
 			if ( !apiPromise ) {
-				apiPromise = apiXhr.then( function ( response, jqxhr ) {
+				apiPromise = apiXhr.then( function ( response ) {
 					ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
-					ve.track( 'mwtiming.performance.system.apiLoad', {
-						bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
-						duration: ve.now() - start,
-						cacheHit: /hit/i.test( jqxhr.getResponseHeader( 'X-Cache' ) ),
-						targetName: options.targetName,
-						mode: 'visual'
-					} );
+					mw.track( 'timing.ve.' + options.targetName + '.performance.system.apiLoad',
+						ve.now() - start );
 					if ( response.visualeditor ) {
 						response.visualeditor.switched = switched;
 						response.visualeditor.fromEditedState = fromEditedState;
@@ -403,12 +398,8 @@
 				var restbasePromise = restbaseXhr.then(
 					function ( response, status, jqxhr ) {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
-						ve.track( 'mwtiming.performance.system.restbaseLoad', {
-							bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
-							duration: ve.now() - start,
-							targetName: options.targetName,
-							mode: 'visual'
-						} );
+						mw.track( 'timing.ve.' + options.targetName + '.performance.system.restbaseLoad',
+							ve.now() - start );
 						return [ response, jqxhr.getResponseHeader( 'etag' ) ];
 					},
 					function ( xhr, code, _ ) {
