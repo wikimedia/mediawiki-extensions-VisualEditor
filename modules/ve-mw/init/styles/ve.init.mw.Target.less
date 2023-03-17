@@ -63,16 +63,16 @@
  * is now paragraph wrapped. Making these paragraphs display:inline would fix the
  * rendering but causes them to be destroyed by the CE when empty (T197987).
  */
-.ve-ce-mwTableNode.mw-collapsible :first-child tr:first-child th:last-child:before,
-.ve-ce-mwTableNode.mw-collapsible > caption:first-child:after,
-.ve-ui-diffElement table.mw-collapsible :first-child tr:first-child th:last-child:before,
-.ve-ui-diffElement table.mw-collapsible > caption:first-child:after {
+.ve-ce-mwTableNode.mw-collapsible :first-child tr:first-child th:last-child::before,
+.ve-ce-mwTableNode.mw-collapsible > caption:first-child::after,
+.ve-ui-diffElement table.mw-collapsible :first-child tr:first-child th:last-child::before,
+.ve-ui-diffElement table.mw-collapsible > caption:first-child::after {
 	color: #999;
 	float: none;
 }
 
-.ve-ce-surface div.mw-collapsible:before,
-.ve-ui-diffElement div.mw-collapsible:before {
+.ve-ce-surface div.mw-collapsible::before,
+.ve-ui-diffElement div.mw-collapsible::before {
 	color: #999;
 }
 
@@ -94,8 +94,8 @@ a[ rel~='mw:PageProp/Category' ] {
 }
 
 /* Reset section node styles */
-.ve-init-mw-target .ve-ce-sectionNode:before,
-.ve-init-mw-target .ve-ce-sectionNode:after {
+.ve-init-mw-target .ve-ce-sectionNode::before,
+.ve-init-mw-target .ve-ce-sectionNode::after {
 	content: normal;
 }
 
