@@ -646,7 +646,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 
 		// Event tracking
 		if ( trackMechanism ) {
-			ve.track( 'mwedit.abort', {
+			ve.track( 'editAttemptStep', {
+				action: 'abort',
 				type: abortType,
 				mechanism: trackMechanism,
 				mode: abortedMode
@@ -1387,7 +1388,8 @@ ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
 	if ( !this.submitting ) {
-		ve.track( 'mwedit.abort', {
+		ve.track( 'editAttemptStep', {
+			action: 'abort',
 			type: this.edited ? 'unknown-edited' : 'unknown',
 			mechanism: 'navigate',
 			mode: this.surface ? this.surface.getMode() : this.getDefaultMode()
@@ -1439,7 +1441,12 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 
 	if ( !modified ) {
 		ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
-		ve.track( 'mwedit.abort', { type: 'switchnochange', mechanism: 'navigate', mode: 'visual' } );
+		ve.track( 'editAttemptStep', {
+			action: 'abort',
+			type: 'switchnochange',
+			mechanism: 'navigate',
+			mode: 'visual'
+		} );
 		this.submitting = true;
 		return prefPromise.then( function () {
 			var url = new URL( target.viewUrl );
@@ -1462,7 +1469,12 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 	} else {
 		return this.serialize( this.getDocToSave() ).then( function ( data ) {
 			ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
-			ve.track( 'mwedit.abort', { type: 'switchwith', mechanism: 'navigate', mode: 'visual' } );
+			ve.track( 'editAttemptStep', {
+				action: 'abort',
+				type: 'switchwith',
+				mechanism: 'navigate',
+				mode: 'visual'
+			} );
 			target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, data.content );
 		} );
 	}
