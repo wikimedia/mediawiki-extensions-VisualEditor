@@ -387,6 +387,8 @@
 	"visualeditor-savedialog-title-save": "変更内容の保存",
 	"visualeditor-section-body-placeholder": "新しい節",
 	"visualeditor-section-title-placeholder": "題名",
+	"visualeditor-loaderror-revidconflict": "サーバが返したリビジョンIDと一致しません（ドキュメント：$1 、メタデータ：$2）",
+	"visualeditor-loaderror-wrongmode": "読み込もうとしたエディタモードが正しくありません（データ型：\"$1\"、エディタモード: \"$2\"。）",
 	"visualeditor-settings-tool": "ページの設定",
 	"visualeditor-special-characters-group-other": "よく使われるもの",
 	"visualeditor-templatesused-tool": "テンプレート一覧",
