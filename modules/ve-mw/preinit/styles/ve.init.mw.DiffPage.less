@@ -7,11 +7,6 @@
 
 @import 'mediawiki.mixins';
 
-.ve-init-mw-diffPage-diffMode {
-	text-align: right;
-	margin: 1em 0;
-}
-
 .client-nojs .ve-init-mw-diffPage-diffMode {
 	display: none;
 }
@@ -105,4 +100,8 @@
 			border-top-color: fade( @old, 80% );
 		}
 	}
+}
+
+.ve-init-diff-inline-legend-hidden {
+	visibility: hidden;
 }

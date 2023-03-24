@@ -13,11 +13,12 @@ namespace MediaWiki\Extension\VisualEditor;
 use Article;
 use Config;
 use DeferredUpdates;
-use DifferenceEngine;
 use ExtensionRegistry;
 use Html;
+use IContextSource;
 use Language;
 use MediaWiki;
+use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\ResourceLoader;
@@ -31,11 +32,12 @@ use RequestContext;
 use Skin;
 use SkinTemplate;
 use SpecialPage;
+use TextSlotDiffRenderer;
 use Title;
 use User;
 use WebRequest;
 
-class Hooks {
+class Hooks implements TextSlotDiffRendererTablePrefixHook {
 
 	// Known parameters that VE does not handle
 	// TODO: Other params too?
@@ -138,17 +140,23 @@ class Hooks {
 	/**
 	 * Handler for the DifferenceEngineViewHeader hook, to add visual diffs code as configured
 	 *
-	 * @param DifferenceEngine $diff The difference engine
+	 * @param TextSlotDiffRenderer $textSlotDiffRenderer
+	 * @param IContextSource $context
+	 * @param string[] &$parts
 	 * @return void
 	 */
-	public static function onDifferenceEngineViewHeader( DifferenceEngine $diff ) {
+	public function onTextSlotDiffRendererTablePrefix(
+		TextSlotDiffRenderer $textSlotDiffRenderer,
+		IContextSource $context,
+		array &$parts
+	) {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
-		$output = RequestContext::getMain()->getOutput();
+		$output = $context->getOutput();
 
 		// Return early if not viewing a diff of an allowed type.
-		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $diff->getTitle()->getContentModel() )
+		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $textSlotDiffRenderer->getContentModel() )
 			|| $output->getActionName() !== 'view'
 		) {
 			return;
@@ -161,8 +169,7 @@ class Hooks {
 		] );
 		$output->addModules( 'ext.visualEditor.diffPage.init' );
 		$output->enableOOUI();
-		$output->addHTML(
-			'<div class="ve-init-mw-diffPage-diffMode">' .
+		$parts['ve-init-mw-diffPage-diffMode'] = '<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
 			new ButtonGroupWidget( [
 				'items' => [
@@ -180,8 +187,7 @@ class Hooks {
 					] )
 				]
 			] ) .
-			'</div>'
-		);
+			'</div>';
 	}
 
 	/**
