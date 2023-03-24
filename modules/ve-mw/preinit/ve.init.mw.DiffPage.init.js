@@ -15,6 +15,7 @@
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		originalUrl = new URL( location.href ),
 		initMode = originalUrl.searchParams.get( 'diffmode' ) || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
+		initType = originalUrl.searchParams.get( 'diff-type' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 
@@ -45,6 +46,11 @@
 		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
 		var $revSlider = $( '.mw-revslider-container' );
 		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
+		if ( initType === 'inline' ) {
+			$( 'body' )
+				.toggleClass( 'mw-diff-type-not-inline', isVisual )
+				.toggleClass( 'mw-diff-type-inline', !isVisual );
+		}
 		if ( isVisual ) {
 			// Highlight the headers using the same styles as the diff, to better indicate
 			// the meaning of headers when not using two-column diff.
