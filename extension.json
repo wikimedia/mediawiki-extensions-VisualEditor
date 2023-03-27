@@ -580,7 +580,7 @@
 		},
 		"ext.visualEditor.track": {
 			"group": "visualEditorA",
-			"scripts": "lib/ve/src/ve.track.js",
+			"scripts": "modules/ve-mw/ve.track.js",
 			"dependencies": "ext.visualEditor.ve"
 		},
 		"ext.visualEditor.core.utils": {
@@ -636,8 +636,7 @@
 				"modules/ve-mw/init/apiresponsecache/ve.init.mw.GalleryImageInfoCache.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.init.js",
-				"modules/ve-mw/init/targets/ve.init.mw.Target.js",
-				"modules/ve-mw/init/ve.init.mw.trackSubscriber.js"
+				"modules/ve-mw/init/targets/ve.init.mw.Target.js"
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.Target.less"

@@ -240,15 +240,17 @@
 					formatversion: 2,
 					errorformat: 'html',
 					errorlang: mw.config.get( 'wgUserLanguage' ),
-					errorsuselocal: true,
-					editingStatsId: window.ve && window.ve.init && window.ve.init.editingSessionId
+					errorsuselocal: true
 				},
 				data
 			);
 
 			var action = data.action;
 
-			var request = api.postWithToken( 'csrf', data, { contentType: 'multipart/form-data' } );
+			var request = api.postWithToken( 'csrf', data, {
+				contentType: 'multipart/form-data',
+				trackEditAttemptStepSessionId: true
+			} );
 
 			return request.then(
 				function ( response, jqxhr ) {

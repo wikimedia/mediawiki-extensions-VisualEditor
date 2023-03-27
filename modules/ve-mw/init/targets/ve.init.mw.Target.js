@@ -131,7 +131,7 @@ ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove = ve.extendOb
 }, ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove );
 
 /**
- * Type of integration. Used by ve.init.mw.trackSubscriber.js for event tracking.
+ * Type of integration. Used for event tracking.
  *
  * @static
  * @property {string}
@@ -140,7 +140,7 @@ ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove = ve.extendOb
 ve.init.mw.Target.static.integrationType = null;
 
 /**
- * Type of platform. Used by ve.init.mw.trackSubscriber.js for event tracking.
+ * Type of platform. Used for event tracking.
  *
  * @static
  * @property {string}

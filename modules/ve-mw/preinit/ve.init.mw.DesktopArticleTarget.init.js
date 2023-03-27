@@ -155,7 +155,7 @@
 		// Resize the textarea to fit content. We could do this more often (e.g. on change)
 		// but hopefully this temporary textarea won't be visible for too long.
 		tempWikitextEditor.adjustSize().moveCursorToStart();
-		ve.track( 'mwedit.ready', { mode: 'source', platform: 'desktop' } );
+		ve.track( 'editAttemptStep', { action: 'ready', mode: 'source', platform: 'desktop' } );
 		mw.libs.ve.tempWikitextEditor = tempWikitextEditor;
 		mw.hook( 've.wikitextInteractive' ).fire();
 	}
@@ -312,11 +312,9 @@
 			initData.mechanism += '-sticky-header';
 		}
 		ve.track( 'trace.activate.enter', { mode: initData.mode } );
-		// ve.track normally tries to guess the current platform based on
-		// ve.init.target. We're in a pre-target-loaded state, so have it
-		// hardcode desktop here.
-		initData.platform = 'desktop';
-		ve.track( 'mwedit.init', initData );
+		initData.action = 'init';
+		initData.integration = 'page';
+		ve.track( 'editAttemptStep', initData );
 		mw.libs.ve.activationStart = ve.now();
 	}
 
@@ -609,16 +607,16 @@
 			} )
 			.then( function () {
 				if ( mode === 'visual' ) {
-					// 'mwedit.ready' has already been fired for source mode in setupTempWikitextEditor
-					ve.track( 'mwedit.ready', { mode: mode } );
+					// `action: 'ready'` has already been fired for source mode in setupTempWikitextEditor
+					ve.track( 'editAttemptStep', { action: 'ready', mode: mode } );
 				} else if ( !tempWikitextEditor ) {
 					// We're in source mode, but skipped the
 					// tempWikitextEditor, so make sure we do relevant
 					// tracking / hooks:
-					ve.track( 'mwedit.ready', { mode: mode } );
+					ve.track( 'editAttemptStep', { action: 'ready', mode: mode } );
 					mw.hook( 've.wikitextInteractive' ).fire();
 				}
-				ve.track( 'mwedit.loaded', { mode: mode } );
+				ve.track( 'editAttemptStep', { action: 'loaded', mode: mode } );
 			} )
 			.always( clearLoading );
 	}

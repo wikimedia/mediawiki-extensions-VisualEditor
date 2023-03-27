@@ -71,7 +71,7 @@ ve.init.mw.ArticleTargetEvents.prototype.trackTiming = function ( topic, data ) 
  * Track when the user makes their first transaction
  */
 ve.init.mw.ArticleTargetEvents.prototype.onFirstTransaction = function () {
-	this.track( 'mwedit.firstChange' );
+	this.track( 'editAttemptStep', { action: 'firstChange' } );
 
 	this.trackTiming( 'behavior.firstTransaction', {
 		duration: ve.now() - this.timings.surfaceReady
@@ -86,7 +86,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveWorkflowBegin = function () {
 	this.trackTiming( 'behavior.lastTransactionTillSaveDialogOpen', {
 		duration: this.timings.saveWorkflowBegin - this.timings.lastTransaction
 	} );
-	this.track( 'mwedit.saveIntent' );
+	this.track( 'editAttemptStep', { action: 'saveIntent' } );
 };
 
 /**
@@ -106,7 +106,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveInitiated = function () {
 	this.trackTiming( 'behavior.saveDialogOpenTillSave', {
 		duration: this.timings.saveInitiated - this.timings.saveWorkflowBegin
 	} );
-	this.track( 'mwedit.saveAttempt' );
+	this.track( 'editAttemptStep', { action: 'saveAttempt' } );
 };
 
 /**
@@ -117,7 +117,8 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveInitiated = function () {
 ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( data ) {
 	this.trackTiming( 'performance.user.saveComplete', { duration: ve.now() - this.timings.saveInitiated } );
 	this.timings.saveRetries = 0;
-	this.track( 'mwedit.saveSuccess', {
+	this.track( 'editAttemptStep', {
+		action: 'saveSuccess',
 		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 ),
 		// eslint-disable-next-line camelcase
 		revision_id: data.newrevid
@@ -130,7 +131,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( data ) {
  * @param {string} code Error code
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
-	// Maps error codes to mwedit types
+	// Maps error codes to editAttemptStep types
 	var typeMap = {
 			badtoken: 'userBadToken',
 			assertanonfailed: 'userNewUser',
@@ -157,12 +158,12 @@ ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
 		type: code
 	} );
 
-	var data = {
+	this.track( 'editAttemptStep', {
+		action: 'saveFailure',
 		message: code,
 		type: typeMap[ code ] || 'responseUnknown',
 		timing: ve.now() - this.timings.saveInitiated + ( this.timings.serializeForCache || 0 )
-	};
-	this.track( 'mwedit.saveFailure', data );
+	} );
 };
 
 /**
