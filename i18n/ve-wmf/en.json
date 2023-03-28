@@ -16,8 +16,8 @@
 			"Amir E. Aharoni"
 		]
 	},
-	"tag-editcheck-needreference": "-",
-	"tag-editcheck-needreference-description": "EditCheck thinks a reference might have been needed in this edit",
+	"tag-editcheck-references": "-",
+	"tag-editcheck-references-description": "EditCheck thinks a reference might have been needed in this edit",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
 	"tag-visualeditor-description": "Edit made using the [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit: Check]]",

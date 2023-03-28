@@ -1529,7 +1529,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging &&
 		mw.editcheck.doesAddedContentNeedReference( this.getSurface().getModel().getDocument() )
 	) {
-		taglist.push( 'editcheck-needreference' );
+		taglist.push( 'editcheck-references' );
 	}
 
 	data.vetags = taglist.join( ',' );
