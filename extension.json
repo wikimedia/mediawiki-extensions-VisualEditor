@@ -2158,6 +2158,14 @@
 			"styles": [
 				"lib/ve/src/ui/styles/elements/ve.ui.DiffElement.css"
 			],
+			"skinStyles": {
+				"vector": [
+					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.css"
+				],
+				"vector-2022": [
+					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.css"
+				]
+			},
 			"dependencies": [
 				"ext.visualEditor.core",
 				"treeDiffer",
