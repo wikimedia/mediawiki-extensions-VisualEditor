@@ -54,7 +54,7 @@ class Hooks {
 		'visualeditor',
 		'visualeditor-wikitext',
 		// Edit check
-		'editcheck-needreference',
+		'editcheck-references',
 		// No longer in active use:
 		'visualeditor-needcheck',
 		'visualeditor-switched'
