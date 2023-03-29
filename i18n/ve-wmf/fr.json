@@ -39,6 +39,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-references-description": "EditCHeck pense qu’une référence peut être nécessaire dans cette modification",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel]]",
 	"tag-visualeditor-description": "Modification effectuée avec l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|éditeur visuel]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel : à vérifier]]",
