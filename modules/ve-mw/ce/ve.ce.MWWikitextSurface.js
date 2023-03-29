@@ -113,7 +113,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 
 	// isPlainText is true but we still need sanitize (e.g. remove lists)
 	var promise = ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
-	if ( this.getSurface().getTarget().constructor.static.convertToWikitextOnPaste && !wasPlain ) {
+	if ( !wasPlain ) {
 		promise.then( function () {
 			// We need to wait for the selection change after paste as that triggers
 			// a contextChange event. Really we should wait for the afterPaste promise to resolve.

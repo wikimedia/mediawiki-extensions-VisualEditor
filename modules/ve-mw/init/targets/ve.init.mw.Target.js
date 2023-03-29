@@ -148,17 +148,6 @@ ve.init.mw.Target.static.integrationType = null;
  */
 ve.init.mw.Target.static.platformType = null;
 
-/**
- * Enable conversion of formatted text to wikitext in source mode
- *
- * Unstable, temporary flag.
- *
- * @static
- * @property {boolean}
- * @inheritable
- */
-ve.init.mw.Target.static.convertToWikitextOnPaste = true;
-
 /* Static Methods */
 
 /**
