@@ -283,7 +283,7 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 		if ( this.defaultSortKeyTouched ) {
 			if ( newDefaultSortKey === '' || newDefaultSortKey === this.fallbackDefaultSortKey ) {
 				if ( currentDefaultSortKeyItem ) {
-					currentDefaultSortKeyItem.remove();
+					this.fragment.removeMeta( currentDefaultSortKeyItem );
 				}
 			} else {
 				if ( !currentDefaultSortKeyItem ) {
