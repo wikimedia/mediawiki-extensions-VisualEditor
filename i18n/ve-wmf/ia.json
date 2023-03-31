@@ -4,6 +4,7 @@
 			"McDutchie"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck pensa que un referentia pote esser necessari in iste modification",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modification visual]]",
 	"tag-visualeditor-description": "Modification facite con le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual: a verificar]]",
