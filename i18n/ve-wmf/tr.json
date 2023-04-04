@@ -8,6 +8,7 @@
 			"Diyapazon",
 			"Emperyan",
 			"Incelemeelemani",
+			"Joseph",
 			"Kumkumuk",
 			"LuCKY",
 			"Maidis",
@@ -20,6 +21,7 @@
 			"TurkishStyles"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck bu değişikliğin bir kaynağa ihtiyacı olduğunu düşünüyor.",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleme]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleyiciyi]] kullanarak düzenleyin",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleme: Doğrula]]",
