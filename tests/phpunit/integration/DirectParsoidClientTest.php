@@ -195,6 +195,11 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$oldHtml = $pageHtmlResponse['body'];
 		$updatedHtml = str_replace( '</body>', '<p>More Text</p></body>', $oldHtml );
 
+		// Make sure the etag is for "stash" flavor HTML.
+		// The ETag should be transparent, but this is the easiest way to check that we are getting
+		// the correct flavor of HTML.
+		$this->assertMatchesRegularExpression( '@/stash\b@', $eTag );
+
 		// Now make a new client object, so we can mock the ParsoidOutputAccess.
 		$parsoidOutputAccess = $this->createNoOpMock( ParsoidOutputAccess::class );
 		$services = $this->getServiceContainer();

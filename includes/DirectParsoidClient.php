@@ -85,7 +85,9 @@ class DirectParsoidClient implements ParsoidClient {
 		$helper->init( $page, [], $user, $revision );
 
 		$helper->setStashingEnabled( $stash );
-		$helper->setFlavor( $flavor );
+		if ( !$stash ) {
+			$helper->setFlavor( $flavor );
+		}
 
 		if ( $revision ) {
 			$helper->setRevision( $revision );
