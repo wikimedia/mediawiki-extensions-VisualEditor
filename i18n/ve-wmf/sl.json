@@ -8,6 +8,7 @@
 			"Yerpo"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck meni, da bi bil pri tem urejanju morda potreben sklic",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno urejanje]]",
 	"tag-visualeditor-description": "Urejanje, opravljeno z [[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizualnim urejevalnikom]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|vizualno urejanje: preveri]]",
