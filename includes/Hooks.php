@@ -377,26 +377,12 @@ class Hooks {
 			$params = $req->getValues();
 			$params['venoscript'] = '1';
 			$url = wfScript() . '?' . wfArrayToCgi( $params );
-			$escapedUrl = htmlspecialchars( $url );
 
 			$out = $article->getContext()->getOutput();
 			$titleMsg = $title->exists() ? 'editing' : 'creating';
 			$out->setPageTitle( wfMessage( $titleMsg, $title->getPrefixedText() ) );
-			$out->addWikiMsg( 'visualeditor-toload', wfExpandUrl( $url ) );
+			$out->showPendingTakeover( $url, 'visualeditor-toload', wfExpandUrl( $url ) );
 
-			// Redirect if the user has no JS (<noscript>)
-			$out->addHeadItem(
-				've-noscript-fallback',
-				"<noscript><meta http-equiv=\"refresh\" content=\"0; url=$escapedUrl\"></noscript>"
-			);
-			// Redirect if the user has no ResourceLoader
-			$out->addScript( Html::inlineScript(
-				"(window.NORLQ=window.NORLQ||[]).push(" .
-					"function(){" .
-						"location.href=\"$url\";" .
-					"}" .
-				");"
-			) );
 			$out->setRevisionId( $req->getInt( 'oldid', $article->getRevIdFetched() ) );
 			return false;
 		}
