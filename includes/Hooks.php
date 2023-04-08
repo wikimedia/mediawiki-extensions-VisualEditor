@@ -356,6 +356,14 @@ class Hooks {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) ) {
+			// If mobilefrontend is involved it can make its own decisions about this
+			$mobFrontContext = MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' );
+			if ( $mobFrontContext->shouldDisplayMobileView() ) {
+				return true;
+			}
+		}
+
 		if (
 			!self::enabledForUser( $user ) ||
 			self::isUAUnsupported( $req, $veConfig )
