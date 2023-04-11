@@ -159,7 +159,7 @@
 	"visualeditor-dialog-transclusion-template-widget-aria": "Націсніце прабел каб выбраць шаблон.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Націсніце Ctrl+Del каб выдаліць шаблон, яго параметры і іхнія значэння. Націсніце Ctrl+Shift+стрэлкі каб перасунуць шаблон угору ці ўніз.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "Націсніце Ctrl+Del каб выдаліць шаблон, яго параметры і іхнія значэння.",
-	"visualeditor-dialog-transclusion-add-wikitext": "Дадаць вікі-тэкст",
+	"visualeditor-dialog-transclusion-add-wikitext": "Дадаць вікіразметку",
 	"visualeditor-dialog-transclusion-add-param-error-alias": "«$1» ужо дададзены як «$2». Калі ласка, праверце мажлівасці на бакавой панэлі. Гэта звязана з выкарыстаннем [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#aliases псеўданімаў] альбо [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#label ярлыкоў].",
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "Немагчыма дадаць «$1» бо параметр пазначаны як [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#deprecated састарэлы].",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Немагчыма дадаць параметр «$2» двойчы.",
@@ -215,7 +215,7 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "Змест шаблону",
 	"visualeditor-dialog-transclusion-template-search": "Пошук шаблону",
 	"visualeditor-dialog-transclusion-template-search-help": "Знайдзіце шаблон, які вы хочаце ўставіць, пашукаўшы ідэнтыфікацыйнае ключавое слова. Шаблоны, якія маюць апісанні, будуць працаваць лепш з візуальным рэдактарам.",
-	"visualeditor-dialog-transclusion-wikitext": "Вікі-тэкст",
+	"visualeditor-dialog-transclusion-wikitext": "Вікіразметка",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria": "Націсніце Прабел, каб выбраць элемент вікі-тэксту. Націсніце Enter, каб выбраць і правіць вікі-тэкст.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "Націсніце Ctrl+Del, каб выдаліць элемент вікі-тэксту. Націсніце Ctrl+Shift+Стрэлкі, каб перасунуць элемент угору ці ўніз.",
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "Націсніце Ctrl+Del, каб выдаліць элемент вікі-тэксту.",
@@ -350,7 +350,7 @@
 	"visualeditor-savedialog-label-visual-diff-report": "Паведаміць аб няправільным адлюстраванні для гэтай змены",
 	"visualeditor-savedialog-review-nosummary": "Няма тлумачэння праўкі",
 	"visualeditor-savedialog-review-visual": "Візуальна",
-	"visualeditor-savedialog-review-wikitext": "Вікі-тэкст",
+	"visualeditor-savedialog-review-wikitext": "Вікіразметка",
 	"visualeditor-savedialog-title-conflict": "Канфлікт",
 	"visualeditor-savedialog-title-preview": "Праверце вашы праўкі",
 	"visualeditor-savedialog-title-review": "Праверце вашы праўкі",
@@ -369,7 +369,7 @@
 	"visualeditor-wikitext-progress": "Пераўтварэнне вікі-тэксту",
 	"visualeditor-wikitext-warning": "Вы карыстаецеся візуальным рэдактарам — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вікітэкст]] тут не працуе. Каб пераключыцца на праўку вікітэксту ў кожны момант без страты змен, націсніце кнопку пераключэння.",
 	"visualeditor-wikitext-warning-title": "Выяўленае ўжыванне вікі-тэксту",
-	"visualeditor-wikitextconvert-title": "Пераўтварыць фарматаванне ў вікі-тэкст?",
+	"visualeditor-wikitextconvert-title": "Пераўтварыць фарматаванне ў вікіразметку?",
 	"visualeditor-wikitextconvert-message": "Вы ўставілі змест з пашыраным фарматаваннем. Ці жадаеце пераўтварыць гэтае фарматаванне ў вікі-тэкст?",
-	"visualeditor-wikitextconvert-convert": "Пераўтварыць у вікі-тэкст"
+	"visualeditor-wikitextconvert-convert": "Пераўтварыць у вікіразметку"
 }
