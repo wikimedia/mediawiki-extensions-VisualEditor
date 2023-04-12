@@ -107,9 +107,9 @@
 			mw.libs.ve.deduplicateStyles( newDoc.body );
 
 			// Add doctype manually
-			// ve.serializeXhtml is loaded separately from utils.parsing
+			// ve.properOuterHtml is loaded separately in ve.utils.parsing.js
 			// eslint-disable-next-line no-undef
-			return '<!doctype html>' + ve.serializeXhtml( newDoc );
+			return '<!doctype html>' + ve.properOuterHtml( newDoc.documentElement );
 		},
 
 		/**

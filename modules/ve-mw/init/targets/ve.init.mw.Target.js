@@ -202,8 +202,7 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		// Parent method
 		doc = ve.init.mw.Target.super.static.parseDocument.call( this, documentString, mode );
 	} else {
-		// Parsoid documents are XHTML so we can use parseXhtml which fixed some IE issues.
-		doc = ve.parseXhtml( documentString );
+		doc = ve.createDocumentFromHtml( documentString );
 		if ( section !== undefined ) {
 			if ( onlySection ) {
 				var sectionNode = doc.body.querySelector( '[data-mw-section-id="' + section + '"]' );
