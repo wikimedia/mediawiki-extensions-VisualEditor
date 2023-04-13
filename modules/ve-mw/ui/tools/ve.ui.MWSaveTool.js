@@ -24,6 +24,9 @@ ve.ui.MWSaveTool = function VeUiMWSaveTool() {
 		}
 
 		this.setTitle( this.toolbar.target.getSaveButtonLabel( true ) );
+		this.narrowConfig = {
+			title: this.toolbar.target.getSaveButtonLabel( true, true )
+		};
 	}
 };
 

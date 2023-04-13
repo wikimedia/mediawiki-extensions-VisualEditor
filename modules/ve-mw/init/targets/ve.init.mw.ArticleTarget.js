@@ -1846,11 +1846,26 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
 /**
  * Getting the message for the toolbar / save dialog save / publish button
  *
- * @param {boolean} [startProcess=false] Use version of the label for starting that process, i.e. with an ellipsis after it
+ * @param {boolean} [startProcess] Use version of the label for starting that process, i.e. with an ellipsis after it
+ * @param {boolean} [forceShort] Force the short version of the label, always used on mobile
  * @return {Function|string} An i18n message or resolveable function
  */
-ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess ) {
+ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess, forceShort ) {
 	var suffix = startProcess ? '-start' : '';
+
+	if ( forceShort || OO.ui.isMobile() ) {
+		// The following messages can be used here:
+		// * visualeditor-savedialog-label-publish-short
+		// * visualeditor-savedialog-label-publish-short-start
+		// * visualeditor-savedialog-label-save-short
+		// * visualeditor-savedialog-label-save-short-start
+		if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
+			return OO.ui.deferMsg( 'visualeditor-savedialog-label-publish-short' + suffix );
+		}
+
+		return OO.ui.deferMsg( 'visualeditor-savedialog-label-save-short' + suffix );
+	}
+
 	// The following messages can be used here
 	// * publishpage
 	// * publishpage-start
