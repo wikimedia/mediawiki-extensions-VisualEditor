@@ -133,6 +133,8 @@
 	"visualeditor-dialog-transclusion-template-search": "Úlgi izlew",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitekst",
 	"visualeditor-dialogbutton-template-tooltip": "Úlgi",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|dana eskertkish|dana eskertkish}}",
+	"visualeditor-editnotices-tooltip": "Redaktorlaw eskertkishleri",
 	"visualeditor-editsummary": "Islegen ózgerislerińizge sıpatlama berińiz",
 	"visualeditor-expandable-more": "Jáne",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
@@ -167,6 +169,7 @@
 	"visualeditor-mweditmodeve-tool-current": "Vizual redaktorlaw",
 	"visualeditor-mweditmodeve-tool-unavailable": "Vizual redaktorlaw bul jerde joq",
 	"visualeditor-mwgallerydialog-card-options": "Opciyalar",
+	"visualeditor-mwsignature-tool": "Siziń qolıńız",
 	"visualeditor-rebase-client-export": "Eksport",
 	"visualeditor-rebase-client-export-start": "Eksport...",
 	"visualeditor-rebase-client-import": "Import",
@@ -178,5 +181,6 @@
 	"visualeditor-savedialog-review-wikitext": "Wikitekst",
 	"visualeditor-savedialog-title-review": "Islegen ózgerislerińizdi tekserip shıǵıńız",
 	"visualeditor-savedialog-title-save": "Ózgerislerińizdi saqlańız",
+	"visualeditor-settings-tool": "Bet sazlawları",
 	"visualeditor-version-label": "Versiyası"
 }
