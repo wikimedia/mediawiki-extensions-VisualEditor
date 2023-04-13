@@ -29,14 +29,13 @@
 	);
 
 	function onReviewModeButtonSelectSelect( item ) {
-		var url = new URL( location.href );
-
 		var oldPageName, newPageName;
 		if ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ComparePages' ) {
 			oldPageName = newPageName = mw.config.get( 'wgRelevantPageName' );
 		} else {
-			oldPageName = url.searchParams.get( 'page1' );
-			newPageName = url.searchParams.get( 'page2' );
+			var params = new URLSearchParams( location.search );
+			oldPageName = params.get( 'page1' );
+			newPageName = params.get( 'page2' );
 		}
 
 		var mode = item.getData();
@@ -93,10 +92,6 @@
 				throw error;
 			} );
 		}
-
-		url.searchParams.set( 'diffmode', mode );
-		history.replaceState( history.state, '', url );
-
 	}
 
 	function onReviewModeButtonSelectChoose( item ) {
