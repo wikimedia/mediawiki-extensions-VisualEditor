@@ -110,10 +110,6 @@
 	font-style: italic;
 }
 
-.ve-ui-mwSaveDialog-visualDiffFeedback {
-	float: right;
-}
-
 .ve-ui-mwSaveDialog-preview .mw-body {
 	/* We use mw-body for realistic padding, but we don't need border/margin */
 	border: 0;

@@ -378,7 +378,6 @@
 	"visualeditor-savedialog-label-review-good": "Label for button to go back to a page in order to save form",
 	"visualeditor-savedialog-label-save-short": "Short label text for save button on private wikis for use on width-restricted devices like mobile phones. This should be as short as possible.\n{{Identical|Save}}",
 	"visualeditor-savedialog-label-save-short-start": "Short label text for button to start save process. Usually just {{msg-mw|visualeditor-savedialog-label-save-short}} with an ellipsis (…).\n{{Identical|Save}}",
-	"visualeditor-savedialog-label-visual-diff-report": "Label for button to report a problem with the visual diff",
 	"visualeditor-savedialog-review-nosummary": "Message shown when no edit summary was provided.",
 	"visualeditor-savedialog-review-visual": "Label for button to select visual diff mode.",
 	"visualeditor-savedialog-review-wikitext": "Label for button to select wikitext diff mode.\n{{Identical|Wikitext}}",
