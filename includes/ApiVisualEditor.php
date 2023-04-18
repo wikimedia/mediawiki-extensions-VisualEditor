@@ -181,6 +181,26 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	/**
+	 * If the given Title is Special:MyLanguage/Foo, resolve the language chain for the
+	 * actual target title desired.
+	 *
+	 * @param ?Title $title
+	 * @return ?Title
+	 */
+	private function getTargetTitleIfSpecialMyLanguage( ?Title $title ): ?Title {
+		if ( $title && $title->isSpecialPage() ) {
+			[ $spName, $spParam ] = $this->specialPageFactory->resolveAlias( $title->getText() );
+			if ( $spName ) {
+				$specialPage = $this->specialPageFactory->getPage( $spName );
+				if ( $specialPage instanceof SpecialMyLanguage ) {
+					$title = $specialPage->findTitleForTransclusion( $spParam );
+				}
+			}
+		}
+		return $title;
+	}
+
+	/**
 	 * Provide the preload content for a page being created from another page
 	 *
 	 * @param string $preload The title of the page to use as the preload content
@@ -191,17 +211,9 @@ class ApiVisualEditor extends ApiBase {
 		$content = '';
 		$preloadTitle = Title::newFromText( $preload );
 
-		// Use SpecialMyLanguage redirect so that nonexistent translated pages can
+		// (T299544) Use SpecialMyLanguage redirect so that nonexistent translated pages can
 		// fall back to the corresponding page in a suitable language
-		if ( $preloadTitle && $preloadTitle->isSpecialPage() ) {
-			[ $spName, $spParam ] = $this->specialPageFactory->resolveAlias( $preloadTitle->getText() );
-			if ( $spName ) {
-				$specialPage = $this->specialPageFactory->getPage( $spName );
-				if ( $specialPage instanceof SpecialMyLanguage ) {
-					$preloadTitle = $specialPage->findTitleForTransclusion( $spParam );
-				}
-			}
-		}
+		$preloadTitle = $this->getTargetTitleIfSpecialMyLanguage( $preloadTitle );
 
 		// Check for existence to avoid getting MediaWiki:Noarticletext
 		if (
@@ -403,6 +415,11 @@ class ApiVisualEditor extends ApiBase {
 				// From EditPage#showCustomIntro
 				if ( $params['editintro'] ) {
 					$eiTitle = Title::newFromText( $params['editintro'] );
+
+					// (T334855) Use SpecialMyLanguage redirect so that non-existent translated pages can
+					// fall back to the corresponding page in a suitable language
+					$eiTitle = $this->getTargetTitleIfSpecialMyLanguage( $eiTitle );
+
 					if (
 						$eiTitle instanceof Title &&
 						$eiTitle->exists() &&
