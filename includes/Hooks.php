@@ -145,15 +145,11 @@ class Hooks {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
-		$userOptionsLookup = $services->getUserOptionsLookup();
 		$output = RequestContext::getMain()->getOutput();
-		$user = RequestContext::getMain()->getUser();
 
 		if ( !(
 			// Enabled globally on wiki
 			$veConfig->get( 'VisualEditorEnableDiffPage' ) ||
-			// Enabled as user beta feature
-			$userOptionsLookup->getOption( $user, 'visualeditor-visualdiffpage' ) ||
 			// Enabled by query param (deprecated)
 			$output->getRequest()->getVal( 'visualdiff' ) !== null ||
 			// Enabled by query param
@@ -979,28 +975,6 @@ class Hooks {
 				],
 				'info-message' => 'visualeditor-preference-newwikitexteditor-info-link',
 				'discussion-message' => 'visualeditor-preference-newwikitexteditor-discussion-link',
-				'requirements' => [
-					'javascript' => true,
-					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
-				]
-			];
-		}
-
-		if (
-			$veConfig->get( 'VisualEditorEnableDiffPageBetaFeature' ) &&
-			// Don't try to register as a beta feature if enabled by default
-			!$veConfig->get( 'VisualEditorEnableDiffPage' )
-		) {
-			$preferences['visualeditor-visualdiffpage'] = [
-				'version' => '1.0',
-				'label-message' => 'visualeditor-preference-visualdiffpage-label',
-				'desc-message' => 'visualeditor-preference-visualdiffpage-description',
-				'screenshot' => [
-					'ltr' => "$iconpath/betafeatures-icon-VisualDiffPage-ltr.svg",
-					'rtl' => "$iconpath/betafeatures-icon-VisualDiffPage-rtl.svg",
-				],
-				'info-message' => 'visualeditor-preference-visualdiffpage-info-link',
-				'discussion-message' => 'visualeditor-preference-visualdiffpage-discussion-link',
 				'requirements' => [
 					'javascript' => true,
 					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
