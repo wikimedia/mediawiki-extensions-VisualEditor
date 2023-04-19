@@ -77,9 +77,6 @@
 		"VisualEditorEnableBetaFeature": {
 			"value": false
 		},
-		"VisualEditorEnableDiffPage": {
-			"value": true
-		},
 		"VisualEditorEnableTocWidget": {
 			"value": false
 		},

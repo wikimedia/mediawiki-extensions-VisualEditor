@@ -147,17 +147,6 @@ class Hooks {
 			->makeConfig( 'visualeditor' );
 		$output = RequestContext::getMain()->getOutput();
 
-		if ( !(
-			// Enabled globally on wiki
-			$veConfig->get( 'VisualEditorEnableDiffPage' ) ||
-			// Enabled by query param (deprecated)
-			$output->getRequest()->getVal( 'visualdiff' ) !== null ||
-			// Enabled by query param
-			$output->getRequest()->getVal( 'diffmode' ) === 'visual'
-		) ) {
-			return;
-		}
-
 		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $diff->getTitle()->getContentModel() ) ) {
 			return;
 		}
