@@ -80,9 +80,6 @@
 		"VisualEditorEnableDiffPage": {
 			"value": true
 		},
-		"VisualEditorEnableDiffPageBetaFeature": {
-			"value": false
-		},
 		"VisualEditorEnableTocWidget": {
 			"value": false
 		},
@@ -2693,8 +2690,7 @@
 		"visualeditor-hidebetawelcome": 0,
 		"visualeditor-hidetabdialog": 0,
 		"visualeditor-newwikitext": 0,
-		"visualeditor-tabs": "remember-last",
-		"visualeditor-visualdiffpage": 0
+		"visualeditor-tabs": "remember-last"
 	},
 	"SpecialPages": {
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad"
