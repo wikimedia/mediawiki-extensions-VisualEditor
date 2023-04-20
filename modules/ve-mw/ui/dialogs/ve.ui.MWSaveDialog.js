@@ -50,8 +50,6 @@ ve.ui.MWSaveDialog.static.name = 'mwSave';
 ve.ui.MWSaveDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-savedialog-title-save' );
 
-ve.ui.MWSaveDialog.static.feedbackUrl = 'https://www.mediawiki.org/wiki/Talk:VisualEditor/Diffs';
-
 ve.ui.MWSaveDialog.static.actions = [
 	{
 		action: 'save',
@@ -85,16 +83,6 @@ ve.ui.MWSaveDialog.static.actions = [
 		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-resolve-conflict' ),
 		flags: [ 'primary', 'progressive' ],
 		modes: 'conflict'
-	},
-	{
-		action: 'report',
-		label: OO.ui.deferMsg( 'visualeditor-savedialog-label-visual-diff-report' ),
-		flags: [ 'progressive' ],
-		modes: 'review',
-		framed: false,
-		icon: 'feedback',
-		classes: [ 've-ui-mwSaveDialog-visualDiffFeedback' ],
-		href: ve.ui.MWSaveDialog.static.feedbackUrl
 	}
 ];
 
@@ -714,15 +702,9 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	// * visualeditor-diffmode-source
 	ve.userConfig( 'visualeditor-diffmode-' + surfaceMode, diffMode );
 
-	// Hack: cache report action so it is getable even when hidden (see T174497)
-	if ( !this.report ) {
-		this.report = this.getActions().get( { actions: 'report' } )[ 0 ];
-	}
-
 	this.$reviewVisualDiff.toggleClass( 'oo-ui-element-hidden', !isVisual );
 	this.$reviewWikitextDiff.toggleClass( 'oo-ui-element-hidden', isVisual );
 	if ( isVisual ) {
-		this.report.toggle( true );
 		if ( !this.diffElement ) {
 			if ( !this.diffElementPromise ) {
 				this.diffElementPromise = this.getDiffElementPromise().then( function ( diffElement ) {
@@ -734,8 +716,6 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 			return;
 		}
 		this.positionDiffElement();
-	} else {
-		this.report.toggle( false );
 	}
 
 	// Support: iOS
@@ -890,7 +870,6 @@ ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
 			this.emit( 'close' );
-			this.report = null;
 		}, this );
 };
 
@@ -916,11 +895,6 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'approve' ) {
 		return new OO.ui.Process( function () {
 			this.swapPanel( 'save' );
-		}, this );
-	}
-	if ( action === 'report' ) {
-		return new OO.ui.Process( function () {
-			window.open( this.constructor.static.feedbackUrl );
 		}, this );
 	}
 
