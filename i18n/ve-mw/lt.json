@@ -254,8 +254,6 @@
 	"visualeditor-preference-tabs-prefer-ve": "Visada pateikti vizualų redaktorių, jeigu įmanoma",
 	"visualeditor-preference-tabs-prefer-wt": "Visada pateikti kodo redaktorių",
 	"visualeditor-preference-tabs-remember-last": "Prisiminti mano paskutinį redaktorių",
-	"visualeditor-preference-visualdiffpage-description": "Įgalina naują vizualinį režimą skirtumo tarp versijų puslapyje.",
-	"visualeditor-preference-visualdiffpage-label": "Vizualūs skirtumai",
 	"visualeditor-rebase-client-export": "Eksportuoti",
 	"visualeditor-rebase-client-export-start": "Eksportuoti…",
 	"visualeditor-rebase-client-import": "Importuoti",

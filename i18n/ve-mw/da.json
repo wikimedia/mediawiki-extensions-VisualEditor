@@ -206,7 +206,6 @@
 	"visualeditor-preference-enable": "Aktiver visuel redigering. Det vil være tilgængelig i følgende {{PLURAL:$2|navnerum}}: $1",
 	"visualeditor-preference-tabs": "Redigeringstilstand:",
 	"visualeditor-preference-tabs-multi-tab": "Vis mig begge redigeringsfaneblade",
-	"visualeditor-preference-visualdiffpage-label": "Visuelle forskelle",
 	"visualeditor-rebase-client-export": "Eksporter",
 	"visualeditor-rebase-client-export-start": "Eksporter...",
 	"visualeditor-rebase-client-import": "Importer",

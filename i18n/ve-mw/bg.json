@@ -202,8 +202,6 @@
 	"visualeditor-preference-tabs-prefer-ve": "Когато имам избор, искам винаги визуалния редактор",
 	"visualeditor-preference-tabs-prefer-wt": "Искам винаги редактора на кода",
 	"visualeditor-preference-tabs-remember-last": "Запомни последно използвания режим на редактиране",
-	"visualeditor-preference-visualdiffpage-description": "Включване на новия визуален режим на страниците за сравняване на версии.",
-	"visualeditor-preference-visualdiffpage-label": "Визуално сравнение на версиите",
 	"visualeditor-rebase-client-export": "Изнасяне",
 	"visualeditor-rebase-client-import": "Внасяне",
 	"visualeditor-rebase-client-import-name": "Заглавие на страницата",
