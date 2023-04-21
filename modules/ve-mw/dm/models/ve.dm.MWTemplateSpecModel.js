@@ -129,6 +129,9 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 	if ( !this.templateData.params ) {
 		this.templateData.params = {};
 	}
+	// Incomplete server validation makes this possible, but the empty string is reserved for
+	// {@see ve.ui.MWAddParameterPage}.
+	delete this.templateData.params[ '' ];
 
 	var resolveAliases = false;
 
@@ -216,7 +219,9 @@ ve.dm.MWTemplateSpecModel.prototype.isDocumented = function () {
  */
 ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 	return Array.isArray( this.templateData.paramOrder ) ?
-		this.templateData.paramOrder.slice() :
+		this.templateData.paramOrder.filter( function ( name ) {
+			return name;
+		} ) :
 		Object.keys( this.templateData.params );
 };
 
