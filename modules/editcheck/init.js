@@ -18,9 +18,10 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel ) {
 			// Reached the end of the doc / start of internal list, stop searching
 			return offset < endOffset;
 		} );
-	} catch ( e ) {
+	} catch ( err ) {
 		// TransactionSquasher can sometimes throw errors; until T333710 is
 		// fixed just count this as not needing a reference.
+		mw.errorLogger.logError( err, 'error.visualeditor' );
 		return false;
 	}
 	return ranges.some( function ( range ) {
