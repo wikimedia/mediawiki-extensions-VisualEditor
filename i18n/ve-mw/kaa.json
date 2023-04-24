@@ -100,6 +100,8 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Maydan toltırılıwı shárt",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Izge qaytıń",
 	"visualeditor-dialogbutton-template-tooltip": "Úlgi",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|dana eskertkish|dana eskertkish}}",
+	"visualeditor-editnotices-tooltip": "Redaktorlaw eskertkishleri",
 	"visualeditor-editsummary": "Islegen ózgerislerińizge sıpatlama berińiz",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Bet ataması",
@@ -133,6 +135,7 @@
 	"visualeditor-mweditmodeve-tool-current": "Vizual redaktorlaw",
 	"visualeditor-mweditmodeve-tool-unavailable": "Vizual redaktorlaw bul jerde joq",
 	"visualeditor-mwgallerydialog-card-options": "Opciyalar",
+	"visualeditor-mwsignature-tool": "Siziń qolıńız",
 	"visualeditor-rebase-client-export": "Eksport",
 	"visualeditor-rebase-client-import": "Import",
 	"visualeditor-rebase-client-import-name": "Bet ataması",
@@ -143,5 +146,6 @@
 	"visualeditor-savedialog-review-wikitext": "Wikitekst",
 	"visualeditor-savedialog-title-review": "Islegen ózgerislerińizdi tekserip shıǵıńız",
 	"visualeditor-savedialog-title-save": "Ózgerislerińizdi saqlańız",
+	"visualeditor-settings-tool": "Bet sazlawları",
 	"visualeditor-version-label": "Versiyası"
 }
