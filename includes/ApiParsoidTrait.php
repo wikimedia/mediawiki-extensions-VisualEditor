@@ -25,15 +25,8 @@ use WikiMap;
 
 trait ApiParsoidTrait {
 
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger = null;
-
-	/**
-	 * @var StatsdDataFactoryInterface
-	 */
-	private $stats = null;
+	private ?LoggerInterface $logger = null;
+	private ?StatsdDataFactoryInterface $stats = null;
 
 	/**
 	 * @return LoggerInterface

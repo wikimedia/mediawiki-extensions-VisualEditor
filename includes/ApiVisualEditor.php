@@ -54,70 +54,24 @@ class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
 	use ApiParsoidTrait;
 
-	/** @var RevisionLookup */
-	private $revisionLookup;
+	private RevisionLookup $revisionLookup;
+	private UserNameUtils $userNameUtils;
+	private Parser $parser;
+	private LinkRenderer $linkRenderer;
+	private UserOptionsLookup $userOptionsLookup;
+	private WatchlistManager $watchlistManager;
+	private ContentTransformer $contentTransformer;
+	private SpecialPageFactory $specialPageFactory;
+	private ReadOnlyMode $readOnlyMode;
+	private RestrictionStore $restrictionStore;
+	private WikiPageFactory $wikiPageFactory;
+	private HookContainer $hookContainer;
+	private UserFactory $userFactory;
+	private VisualEditorParsoidClientFactory $parsoidClientFactory;
 
-	/** @var UserNameUtils */
-	private $userNameUtils;
-
-	/** @var Parser */
-	private $parser;
-
-	/** @var LinkRenderer */
-	private $linkRenderer;
-
-	/** @var UserOptionsLookup */
-	private $userOptionsLookup;
-
-	/** @var WatchlistManager */
-	private $watchlistManager;
-
-	/** @var ContentTransformer */
-	private $contentTransformer;
-
-	/** @var SpecialPageFactory */
-	private $specialPageFactory;
-
-	/** @var ReadOnlyMode */
-	private $readOnlyMode;
-
-	/** @var RestrictionStore */
-	private $restrictionStore;
-
-	/** @var WikiPageFactory */
-	private $wikiPageFactory;
-
-	/** @var HookContainer */
-	private $hookContainer;
-
-	/** @var UserFactory */
-	private $userFactory;
-
-	/** @var VisualEditorParsoidClientFactory */
-	private $parsoidClientFactory;
-
-	/**
-	 * @param ApiMain $main
-	 * @param string $name
-	 * @param RevisionLookup $revisionLookup
-	 * @param UserNameUtils $userNameUtils
-	 * @param Parser $parser
-	 * @param LinkRenderer $linkRenderer
-	 * @param UserOptionsLookup $userOptionsLookup
-	 * @param WatchlistManager $watchlistManager
-	 * @param ContentTransformer $contentTransformer
-	 * @param SpecialPageFactory $specialPageFactory
-	 * @param ReadOnlyMode $readOnlyMode
-	 * @param RestrictionStore $restrictionStore
-	 * @param IBufferingStatsdDataFactory $statsdDataFactory
-	 * @param WikiPageFactory $wikiPageFactory
-	 * @param HookContainer $hookContainer
-	 * @param UserFactory $userFactory
-	 * @param VisualEditorParsoidClientFactory $parsoidClientFactory
-	 */
 	public function __construct(
 		ApiMain $main,
-		$name,
+		string $name,
 		RevisionLookup $revisionLookup,
 		UserNameUtils $userNameUtils,
 		Parser $parser,

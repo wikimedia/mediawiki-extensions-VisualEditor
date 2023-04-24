@@ -43,27 +43,13 @@ class VisualEditorParsoidClientFactory {
 	/** @var string */
 	public const DEFAULT_PARSOID_CLIENT_SETTING = 'VisualEditorDefaultParsoidClient';
 
-	/** @var HttpRequestFactory */
-	private $httpRequestFactory;
+	private ?VirtualRESTServiceClient $serviceClient = null;
 
-	/** @var VirtualRESTServiceClient */
-	private $serviceClient = null;
+	private ServiceOptions $options;
+	private HttpRequestFactory $httpRequestFactory;
+	private LoggerInterface $logger;
+	private PageRestHelperFactory $pageRestHelperFactory;
 
-	/** @var ServiceOptions */
-	private $options;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var PageRestHelperFactory */
-	private $pageRestHelperFactory;
-
-	/**
-	 * @param ServiceOptions $options
-	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param LoggerInterface $logger
-	 * @param PageRestHelperFactory $pageRestHelperFactory
-	 */
 	public function __construct(
 		ServiceOptions $options,
 		HttpRequestFactory $httpRequestFactory,

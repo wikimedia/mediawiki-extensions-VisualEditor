@@ -39,35 +39,13 @@ class ApiVisualEditorEdit extends ApiBase {
 	private const MAX_CACHE_RECENT = 2;
 	private const MAX_CACHE_TTL = 900;
 
-	/** @var VisualEditorHookRunner */
-	private $hookRunner;
+	private VisualEditorHookRunner $hookRunner;
+	private RevisionLookup $revisionLookup;
+	private PageEditStash $pageEditStash;
+	private SkinFactory $skinFactory;
+	private WikiPageFactory $wikiPageFactory;
+	private VisualEditorParsoidClientFactory $parsoidClientFactory;
 
-	/** @var RevisionLookup */
-	private $revisionLookup;
-
-	/** @var PageEditStash */
-	private $pageEditStash;
-
-	/** @var SkinFactory */
-	private $skinFactory;
-
-	/** @var WikiPageFactory */
-	private $wikiPageFactory;
-
-	/** @var VisualEditorParsoidClientFactory */
-	private $parsoidClientFactory;
-
-	/**
-	 * @param ApiMain $main
-	 * @param string $name Name of this module
-	 * @param VisualEditorHookRunner $hookRunner
-	 * @param RevisionLookup $revisionLookup
-	 * @param IBufferingStatsdDataFactory $statsdDataFactory
-	 * @param PageEditStash $pageEditStash
-	 * @param SkinFactory $skinFactory
-	 * @param WikiPageFactory $wikiPageFactory
-	 * @param VisualEditorParsoidClientFactory $parsoidClientFactory
-	 */
 	public function __construct(
 		ApiMain $main,
 		string $name,
