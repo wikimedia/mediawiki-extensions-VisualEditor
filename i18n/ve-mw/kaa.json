@@ -17,7 +17,7 @@
 	"visualeditor-annotations-default-description": "Bettiń bul bólimi túsindirme aralıǵınıń bir bólegi bolıp esaplanadı.",
 	"visualeditor-annotations-default-end": "Anıqlaması keltirilgen diapazonnıń aqırı",
 	"visualeditor-annotations-default-start": "Anıqlaması keltirilgen diapazonnıń baslanıwı",
-	"visualeditor-annotations-extended-documentation": "Bul túsindirme aralıǵı keńeytirildi, sebebi onıń qosıp qoyǵan kontenti jaqsı jaylaspaǵan. Anıqlaması keltirilgen quramdı redaktorlawdan aldın jaqsı jaylastırılǵanlıǵına isenim payda etiw usınıs etiledi; bolmasa kutilgeninen úlkenlew diapazon anıqlaması keltiriliwi múmkin.",
+	"visualeditor-annotations-extended-documentation": "Bul túsindirme aralıǵı keńeytildi, sebebi onıń qosıp qoyǵan kontenti jaqsı jaylaspaǵan. Anıqlaması berilgen kontentti redaktorlawdan aldın jaqsı jaylastırılǵanlıǵına isenim payda etiw usınıs etiledi; bolmasa kútilgeninen úlkenlew diapazon anıqlaması kórsetiliwi múmkin.",
 	"visualeditor-autosave-modified-prompt-accept": "Redaktorlawdı dawam ettiriń",
 	"visualeditor-autosave-modified-prompt-message": "Siz aqırǵı ret júklegenińizden berli bul bet ózgertirilgen. {{GENDER:|siz}} eski versiyanı {{GENDER:|óz}} redaktorlawdı dawam ettirmekshimisiz yamasa aqırǵı versiyanı jańa redaktorlawdı baslawdı qáleysizbe?",
 	"visualeditor-autosave-modified-prompt-reject": "Jańa redaktorlawdı baslań",
@@ -131,6 +131,8 @@
 	"visualeditor-dialog-transclusion-template-search": "Úlgi izlew",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitekst",
 	"visualeditor-dialogbutton-template-tooltip": "Úlgi",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|dana eskertkish|dana eskertkish}}",
+	"visualeditor-editnotices-tooltip": "Redaktorlaw eskertkishleri",
 	"visualeditor-editsummary": "Islegen ózgerislerińizge sıpatlama berińiz",
 	"visualeditor-expandable-more": "Jáne",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
@@ -165,6 +167,7 @@
 	"visualeditor-mweditmodeve-tool-current": "Vizual redaktorlaw",
 	"visualeditor-mweditmodeve-tool-unavailable": "Vizual redaktorlaw bul jerde joq",
 	"visualeditor-mwgallerydialog-card-options": "Opciyalar",
+	"visualeditor-mwsignature-tool": "Siziń qolıńız",
 	"visualeditor-rebase-client-export": "Eksport",
 	"visualeditor-rebase-client-export-start": "Eksport...",
 	"visualeditor-rebase-client-import": "Import",
@@ -176,5 +179,6 @@
 	"visualeditor-savedialog-review-wikitext": "Wikitekst",
 	"visualeditor-savedialog-title-review": "Islegen ózgerislerińizdi tekserip shıǵıńız",
 	"visualeditor-savedialog-title-save": "Ózgerislerińizdi saqlańız",
+	"visualeditor-settings-tool": "Bet sazlawları",
 	"visualeditor-version-label": "Versiyası"
 }
