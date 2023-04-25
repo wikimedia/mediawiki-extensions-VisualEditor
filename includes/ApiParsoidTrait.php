@@ -14,6 +14,7 @@ use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\WikiMap\WikiMap;
 use Message;
 use NullStatsdDataFactory;
 use PrefixingStatsdDataFactoryProxy;
@@ -21,7 +22,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
 use WebRequest;
-use WikiMap;
 
 trait ApiParsoidTrait {
 
