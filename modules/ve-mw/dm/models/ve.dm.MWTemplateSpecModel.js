@@ -252,23 +252,13 @@ ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
 	var undocumentedParameters = this.getUndocumentedParameterNames();
 
 	undocumentedParameters.sort( function ( a, b ) {
-		var aIsNaN = isNaN( a ),
-			bIsNaN = isNaN( b );
-
-		if ( aIsNaN && bIsNaN ) {
-			// Two strings
-			return a.localeCompare( b );
+		if ( isNaN( a ) ) {
+			// If a and b are string, order alphabetically, otherwise numbers before strings
+			return isNaN( b ) ? a.localeCompare( b ) : 1;
+		} else {
+			// If a and b are numeric, order incrementally, otherwise numbers before strings
+			return !isNaN( b ) ? a - b : -1;
 		}
-		if ( aIsNaN ) {
-			// A is a string
-			return 1;
-		}
-		if ( bIsNaN ) {
-			// B is a string
-			return -1;
-		}
-		// Two numbers
-		return a - b;
 	} );
 
 	return this.getDocumentedParameterOrder().concat( undocumentedParameters );
