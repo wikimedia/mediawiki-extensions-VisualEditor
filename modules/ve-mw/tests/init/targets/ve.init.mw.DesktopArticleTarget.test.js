@@ -96,17 +96,17 @@ QUnit.test( 'init', ( assert ) => {
 		assert.strictEqual( target.getSurface().getModel().getDocument().getDir(), 'rtl', 'Page direction is passed through from config' );
 		target.activatingDeferred.then( async () => {
 			assert.equalDomElement(
-				target.actionsToolbar.tools.notices.noticeItems[ 0 ].$element[ 0 ],
+				target.toolbar.tools.notices.noticeItems[ 0 ].$element[ 0 ],
 				$( '<div class="ve-ui-mwNoticesPopupTool-item"><b>HTML string notice</b> message</div>' )[ 0 ],
 				'HTML string notice message is passed through from API'
 			);
-			assert.strictEqual( target.actionsToolbar.tools.notices.noticeItems[ 0 ].type, undefined, 'Plain text notice type is undefined' );
+			assert.strictEqual( target.toolbar.tools.notices.noticeItems[ 0 ].type, undefined, 'Plain text notice type is undefined' );
 			assert.equalDomElement(
-				target.actionsToolbar.tools.notices.noticeItems[ 1 ].$element[ 0 ],
+				target.toolbar.tools.notices.noticeItems[ 1 ].$element[ 0 ],
 				$( '<div class="ve-ui-mwNoticesPopupTool-item"><b>object notice</b> message</div>' )[ 0 ],
 				'Object notice message is passed through from API'
 			);
-			assert.strictEqual( target.actionsToolbar.tools.notices.noticeItems[ 1 ].type, 'object notice', 'Object notice type is passed through from API' );
+			assert.strictEqual( target.toolbar.tools.notices.noticeItems[ 1 ].type, 'object notice', 'Object notice type is passed through from API' );
 
 			// Open the save dialog and examine it (this bypasses a bunch of stuff, and may fail in funny
 			// ways, but #showSaveDialog has many dependencies that I don't want to simulate here).

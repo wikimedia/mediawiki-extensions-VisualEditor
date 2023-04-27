@@ -268,7 +268,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 	// Make sure notices actually exists, because this might be a mode-switch and
 	// we've already removed it.
 	var editNotices = this.getEditNotices(),
-		actionTools = this.actionsToolbar.tools;
+		actionTools = this.toolbar.tools;
 	if ( editNotices && editNotices.length && actionTools.notices ) {
 		actionTools.notices.setNotices( editNotices );
 	} else if ( actionTools.notices ) {
@@ -295,7 +295,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupToolbarSaveButton = function () {
-	this.toolbarSaveButton = this.actionsToolbar.getToolGroupByName( 'save' ).items[ 0 ];
+	this.toolbarSaveButton = this.toolbar.getToolGroupByName( 'save' ).items[ 0 ];
 };
 
 /**
@@ -1339,11 +1339,11 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 				) {
 					// Show "switched" popup
 					var popup = new mw.libs.ve.SwitchPopupWidget( 'visual' );
-					target.actionsToolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
+					target.toolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
 					popup.toggle( true );
-				} else if ( target.actionsToolbar.tools.notices ) {
+				} else if ( target.toolbar.tools.notices ) {
 					// Show notices
-					target.actionsToolbar.tools.notices.getPopup().toggle( true );
+					target.toolbar.tools.notices.getPopup().toggle( true );
 				}
 			} );
 	}

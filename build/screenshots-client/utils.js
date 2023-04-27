@@ -32,11 +32,6 @@ module.exports = function () {
 					group.setActive( false );
 				}
 			} );
-			ve.init.target.actionsToolbar.items.forEach( function ( group ) {
-				if ( group.setActive ) {
-					group.setActive( false );
-				}
-			} );
 		},
 		runMenuTask: function ( done, tool, expanded, highlight, extraElements ) {
 			var toolGroup = tool.toolGroup;
@@ -111,7 +106,7 @@ module.exports = function () {
 		surfaceView.once( 'focus', function () {
 			target.surface.getModel().getFragment().insertContent( ' ' ).collapseToStart().select();
 			// Hide edit notices
-			target.actionsToolbar.tools.notices.getPopup().toggle( false );
+			target.toolbar.tools.notices.getPopup().toggle( false );
 			// Wait for save button fade
 			setTimeout( function () {
 				veDone( { width: window.innerWidth, height: window.innerHeight } );
