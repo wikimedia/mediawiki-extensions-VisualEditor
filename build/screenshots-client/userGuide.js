@@ -95,15 +95,15 @@ module.exports = {
 		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.referencesList, true, true );
 	},
 	toolbarSettings: function () {
-		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.advancedSettings, false, false,
+		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.advancedSettings, false, false,
 			[ ve.init.target.toolbarSaveButton.$element[ 0 ] ]
 		);
 	},
 	toolbarPageSettings: function () {
-		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.settings, false, true );
+		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.settings, false, true );
 	},
 	toolbarCategory: function () {
-		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.actionsToolbar.tools.categories, false, true );
+		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.categories, false, true );
 	},
 	toolbarTeardown: function () {
 		var done = arguments[ arguments.length - 1 ];

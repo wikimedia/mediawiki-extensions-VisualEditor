@@ -126,7 +126,7 @@
 								// Something (an animation?) steals focus during load, so wait a bit
 								// before opening and focusing the authorList.
 								setTimeout( function () {
-									target.actionsToolbar.tools.authorList.onSelect();
+									target.toolbar.tools.authorList.onSelect();
 								}, 500 );
 							}
 						} );
