@@ -24,7 +24,7 @@
 	"license-name": "MIT",
 	"type": "editor",
 	"requires": {
-		"MediaWiki": ">= 1.40.0"
+		"MediaWiki": ">= 1.41.0"
 	},
 	"callback": "MediaWiki\\Extension\\VisualEditor\\Hooks::onRegistration",
 	"ServiceWiringFiles": [
@@ -2492,7 +2492,6 @@
 		"remoteExtPath": "VisualEditor",
 		"styles": "lib/ve/lib/jsdifflib/diffview.css",
 		"scripts": [
-			"lib/proposal-promise-finally/polyfill.js",
 			"lib/ve/lib/jsdifflib/diffview.js",
 			"lib/ve/lib/jsdifflib/difflib.js",
 			"lib/ve/tests/ve.qunit.js",
