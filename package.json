@@ -25,7 +25,7 @@
 		"grunt-banana-checker": "0.10.0",
 		"grunt-contrib-copy": "1.0.0",
 		"grunt-contrib-watch": "1.1.0",
-		"grunt-eslint": "24.0.0",
+		"grunt-eslint": "24.0.1",
 		"grunt-image": "5.0.1",
 		"grunt-mocha-test": "0.13.3",
 		"grunt-stylelint": "0.18.0",
