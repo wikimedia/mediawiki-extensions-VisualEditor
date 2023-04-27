@@ -177,6 +177,7 @@
 			"services": [
 				"RevisionLookup",
 				"UserNameUtils",
+				"TempUserCreator",
 				"Parser",
 				"LinkRenderer",
 				"UserOptionsLookup",

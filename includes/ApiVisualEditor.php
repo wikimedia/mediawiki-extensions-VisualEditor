@@ -35,6 +35,7 @@ use MediaWiki\Permissions\RestrictionStore;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\SpecialPage\SpecialPageFactory;
+use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserNameUtils;
 use MediaWiki\User\UserOptionsLookup;
@@ -56,6 +57,7 @@ class ApiVisualEditor extends ApiBase {
 
 	private RevisionLookup $revisionLookup;
 	private UserNameUtils $userNameUtils;
+	private TempUserCreator $tempUserCreator;
 	private Parser $parser;
 	private LinkRenderer $linkRenderer;
 	private UserOptionsLookup $userOptionsLookup;
@@ -74,6 +76,7 @@ class ApiVisualEditor extends ApiBase {
 		string $name,
 		RevisionLookup $revisionLookup,
 		UserNameUtils $userNameUtils,
+		TempUserCreator $tempUserCreator,
 		Parser $parser,
 		LinkRenderer $linkRenderer,
 		UserOptionsLookup $userOptionsLookup,
@@ -93,6 +96,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->setStats( $statsdDataFactory );
 		$this->revisionLookup = $revisionLookup;
 		$this->userNameUtils = $userNameUtils;
+		$this->tempUserCreator = $tempUserCreator;
 		$this->parser = $parser;
 		$this->linkRenderer = $linkRenderer;
 		$this->userOptionsLookup = $userOptionsLookup;
@@ -633,6 +637,15 @@ class ApiVisualEditor extends ApiBase {
 					$this
 				);
 
+				// Copied from EditPage::maybeActivateTempUserCreate
+				// Used by code in MobileFrontend and DiscussionTools.
+				// TODO Make them use API
+				// action=query&prop=info&intestactions=edit&intestactionsautocreate=1
+				$wouldautocreate =
+					!$user->isRegistered()
+						&& $this->tempUserCreator->isAutoCreateAction( 'edit' )
+						&& $permissionManager->userHasRight( $user, 'createaccount' );
+
 				$result = [
 					'result' => 'success',
 					'notices' => $notices,
@@ -644,6 +657,7 @@ class ApiVisualEditor extends ApiBase {
 					'starttimestamp' => wfTimestampNow(),
 					'oldid' => $oldid,
 					'blockinfo' => $blockinfo,
+					'wouldautocreate' => $wouldautocreate,
 					'canEdit' => $canEdit,
 				];
 				if ( isset( $restbaseHeaders['etag'] ) ) {

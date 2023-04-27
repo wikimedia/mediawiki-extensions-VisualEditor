@@ -62,6 +62,7 @@ class ApiVisualEditorTest extends ApiTestCase {
 			'starttimestamp',
 			'oldid',
 			'blockinfo',
+			'wouldautocreate',
 			'canEdit',
 			'content',
 			// When updating this, also update the sample response in

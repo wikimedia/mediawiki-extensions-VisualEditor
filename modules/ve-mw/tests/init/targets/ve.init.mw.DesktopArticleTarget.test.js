@@ -64,6 +64,7 @@ QUnit.test( 'init', ( assert ) => {
 				starttimestamp: '20180831122319',
 				oldid: 1804,
 				blockinfo: null,
+				wouldautocreate: false,
 				canEdit: true,
 				content: '<!DOCTYPE html>\n' +
 					'<html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://localhost/MediaWiki/core/index.php/Special:Redirect/revision/1804">' +
@@ -132,7 +133,9 @@ QUnit.test( 'init', ( assert ) => {
 				content: true,
 				// Not stored because if you're blocked, the editor opens in read-only mode (or doesn't open
 				// at all, on mobile), so we'll never have to restore from auto-save
-				blockinfo: true
+				blockinfo: true,
+				// Not stored because we don't use it
+				wouldautocreate: true
 			};
 			Object.keys( response.visualeditor ).forEach( ( key ) => {
 				if ( !ignoredKeys[ key ] ) {
