@@ -377,7 +377,7 @@
 
 		// Save user preference if logged in
 		if (
-			!mw.user.isAnon() &&
+			mw.user.isNamed() &&
 			mw.user.options.get( 'visualeditor-editor' ) !== editor
 		) {
 			// Same as ve.init.target.getLocalApi()
@@ -644,10 +644,10 @@
 	function getLastEditor() {
 		// This logic matches VisualEditorHooks::getLastEditor
 		var editor = mw.cookie.get( 'VEE', '' );
-		// Set editor to user's preference or site's default if …
+		// Set editor to user's preference or site's default (ignore the cookie) if …
 		if (
 			// … user is logged in,
-			!mw.user.isAnon() ||
+			mw.user.isNamed() ||
 			// … no cookie is set, or
 			!editor ||
 			// value is invalid.
@@ -719,7 +719,7 @@
 		cookieName = cookieName || storageKey;
 		return mw.user.options.get( prefName ) ||
 			(
-				mw.user.isAnon() && (
+				!mw.user.isNamed() && (
 					mw.storage.get( storageKey ) ||
 					mw.cookie.get( cookieName, '' )
 				)
@@ -729,7 +729,7 @@
 	function setPreferenceOrStorage( prefName, storageKey, cookieName ) {
 		storageKey = storageKey || prefName;
 		cookieName = cookieName || storageKey;
-		if ( mw.user.isAnon() ) {
+		if ( !mw.user.isNamed() ) {
 			// Try local storage first; if that fails, set a cookie
 			if ( !mw.storage.set( storageKey, 1 ) ) {
 				mw.cookie.set( cookieName, 1, { path: '/', expires: 30 * 86400, prefix: '' } );
@@ -862,7 +862,7 @@
 				if (
 					!init.isSingleEditTab && init.isVisualAvailable &&
 					// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
-					!( conf.disableForAnons && mw.config.get( 'wgUserName' ) === null )
+					!( conf.disableForAnons && mw.user.isAnon() )
 				) {
 					// … set the skin up with both tabs and both section edit links.
 					init.setupMultiTabSkin();
