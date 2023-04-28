@@ -222,7 +222,7 @@
 		"BeforePageDisplay": "MediaWiki\\Extension\\VisualEditor\\Hooks::onBeforePageDisplay",
 		"ChangeTagsListActive": "MediaWiki\\Extension\\VisualEditor\\Hooks::onListDefinedTags",
 		"CustomEditor": "MediaWiki\\Extension\\VisualEditor\\Hooks::onCustomEditor",
-		"DifferenceEngineViewHeader": "MediaWiki\\Extension\\VisualEditor\\Hooks::onDifferenceEngineViewHeader",
+		"DifferenceEngineBeforeDiffTable": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "MediaWiki\\Extension\\VisualEditor\\Hooks::onEditPageShowEditFormFields",
 		"GetBetaFeaturePreferences": "MediaWiki\\Extension\\VisualEditor\\Hooks::onGetBetaPreferences",
 		"GetPreferences": "MediaWiki\\Extension\\VisualEditor\\Hooks::onGetPreferences",
@@ -241,6 +241,11 @@
 			"MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad::onSkinTemplateNavigationSpecialPage"
 		],
 		"UserLoggedIn": "MediaWiki\\Extension\\VisualEditor\\Hooks::onUserLoggedIn"
+	},
+	"HookHandlers": {
+		"VisualEditorHooks": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks"
+		}
 	},
 	"ResourceModules": {
 		"socket.io": {

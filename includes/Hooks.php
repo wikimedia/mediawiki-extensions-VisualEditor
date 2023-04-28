@@ -19,6 +19,7 @@ use ExtensionRegistry;
 use Html;
 use Language;
 use MediaWiki;
+use MediaWiki\Diff\Hook\DifferenceEngineBeforeDiffTableHook;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\User\UserIdentity;
@@ -35,7 +36,7 @@ use Title;
 use User;
 use WebRequest;
 
-class Hooks {
+class Hooks implements DifferenceEngineBeforeDiffTableHook {
 
 	// Known parameters that VE does not handle
 	// TODO: Other params too?
@@ -141,7 +142,7 @@ class Hooks {
 	 * @param DifferenceEngine $diff The difference engine
 	 * @return void
 	 */
-	public static function onDifferenceEngineViewHeader( DifferenceEngine $diff ) {
+	public function onDifferenceEngineBeforeDiffTable( DifferenceEngine $diff, array &$parts ) {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
@@ -158,8 +159,7 @@ class Hooks {
 		] );
 		$output->addModules( 'ext.visualEditor.diffPage.init' );
 		$output->enableOOUI();
-		$output->addHTML(
-			'<div class="ve-init-mw-diffPage-diffMode">' .
+		$parts['ve-init-mw-diffPage-diffMode'] = '<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
 			new ButtonGroupWidget( [
 				'items' => [
@@ -177,8 +177,7 @@ class Hooks {
 					] )
 				]
 			] ) .
-			'</div>'
-		);
+			'</div>';
 	}
 
 	/**
