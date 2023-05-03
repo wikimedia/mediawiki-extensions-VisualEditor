@@ -166,6 +166,9 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 			// wikitextDiff is an HTML string we trust from the API
 			// eslint-disable-next-line no-jquery/no-append-html
 			dialog.$reviewWikitextDiff.empty().append( wikitextDiff );
+			// Remove the HTML diff-mode ButtonGroupWidget because this.reviewModeButtonSelect replaces it.
+			// This matches what's done for action=diff in modules/ve-mw/preinit/ve.init.mw.DiffPage.init.js
+			dialog.$reviewWikitextDiff.find( '.ve-init-mw-diffPage-diffMode' ).empty();
 		} else {
 			dialog.$reviewWikitextDiff.empty().append(
 				$( '<div>' ).addClass( 've-ui-mwSaveDialog-no-changes' ).text( ve.msg( 'visualeditor-diff-no-changes' ) )
