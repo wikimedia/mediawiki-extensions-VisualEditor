@@ -169,6 +169,21 @@ class ApiVisualEditor extends ApiBase {
 		// fall back to the corresponding page in a suitable language
 		$preloadTitle = $this->getTargetTitleIfSpecialMyLanguage( $preloadTitle );
 
+		if ( $preloadTitle && $preloadTitle->getNamespace() == NS_MEDIAWIKI ) {
+			// When the preload source is in NS_MEDIAWIKI, get the content via the i18n system, to
+			// enable preloading from i18n messages. The message framework can work with normal
+			// pages in NS_MEDIAWIKI, so this does not restrict preloading only to i18n messages.
+			$msg = $this->msg( $preloadTitle->getText() );
+
+			if ( $msg->isDisabled() ) {
+				return '';
+			}
+
+			return $msg->params( $params )
+				->inContentLanguage()
+				->text();
+		}
+
 		// Check for existence to avoid getting MediaWiki:Noarticletext
 		if (
 			$preloadTitle instanceof Title &&
