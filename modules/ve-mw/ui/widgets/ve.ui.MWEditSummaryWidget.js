@@ -126,6 +126,8 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 		if ( mw.user.isAnon() ) {
 			this.getSummariesPromise = ve.createDeferred().resolve( [] ).promise();
 		} else {
+			// Allow this for temp users as well. The isAnon() check above is just to avoid autocompleting
+			// with someone else's summaries.
 			this.getSummariesPromise = ve.init.target.getLocalApi().get( {
 				action: 'query',
 				list: 'usercontribs',

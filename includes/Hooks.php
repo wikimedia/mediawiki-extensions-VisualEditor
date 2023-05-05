@@ -359,7 +359,7 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 
 		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
-			if ( $user->isRegistered() ) {
+			if ( $user->isNamed() ) {
 				self::deferredSetUserOption( $user, 'visualeditor-editor', 'wikitext' );
 			}
 			return true;
@@ -447,10 +447,10 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 		// This logic matches getLastEditor in:
 		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
 		$editor = $req->getCookie( 'VEE', '' );
-		// Set editor to user's preference or site's default if …
+		// Set editor to user's preference or site's default (ignore the cookie) if …
 		if (
 			// … user is logged in,
-			$user->isRegistered() ||
+			$user->isNamed() ||
 			// … no cookie is set, or
 			!$editor ||
 			// value is invalid.
@@ -498,7 +498,7 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 		if (
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			wfTimestampNow() < $config->get( 'VisualEditorSingleEditTabSwitchTimeEnd' ) &&
-			$user->isRegistered() &&
+			$user->isNamed() &&
 			self::enabledForUser( $user ) &&
 			!$userOptionsLookup->getOption( $user, 'visualeditor-hidetabdialog' ) &&
 			$userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
