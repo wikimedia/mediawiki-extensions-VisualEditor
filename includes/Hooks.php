@@ -788,61 +788,21 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 	}
 
 	/**
-	 * Convert a namespace index to the local text for display to the user.
-	 *
-	 * @param int $nsIndex
-	 * @return string
-	 */
-	private static function convertNs( $nsIndex ) {
-		global $wgLang;
-		if ( $nsIndex ) {
-			return MediaWikiServices::getInstance()->getLanguageConverterFactory()
-				->getLanguageConverter( $wgLang )
-				->convertNamespace( $nsIndex );
-		} else {
-			return wfMessage( 'blanknamespace' )->text();
-		}
-	}
-
-	/**
 	 * Handler for the GetPreferences hook, to add and hide user preferences as configured
 	 *
 	 * @param User $user
 	 * @param array &$preferences Their preferences object
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		global $wgLang;
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
 		$veConfig = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
 		if (
-			$veConfig->get( 'VisualEditorEnableBetaFeature' ) &&
+			!$veConfig->get( 'VisualEditorEnableBetaFeature' ) ||
 			!ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' )
 		) {
-			// Config option for visual editing "alpha" state (no Beta Feature)
-			$namespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
-
-			$visualEnablePreference = [
-				'type' => 'toggle',
-				'label-message' => [
-					'visualeditor-preference-enable',
-					$wgLang->commaList( array_map(
-						[ self::class, 'convertNs' ],
-						$namespaces
-					) ),
-					count( $namespaces )
-				],
-				'section' => 'editing/editor'
-			];
-			if ( $userOptionsLookup->getOption( $user, 'visualeditor-autodisable' ) ) {
-				$visualEnablePreference['default'] = false;
-			}
-			$preferences['visualeditor-enable'] = $visualEnablePreference;
-		}
-
-		if ( !$veConfig->get( 'VisualEditorEnableBetaFeature' ) ) {
 			// Config option for visual editing "deployed" state (opt-out)
 			$preferences['visualeditor-betatempdisable'] = [
 				'type' => 'toggle',

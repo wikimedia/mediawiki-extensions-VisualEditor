@@ -321,7 +321,6 @@
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-label": "Visual editing",
-	"visualeditor-preference-enable": "Enable the visual editor. It will be available in the following {{PLURAL:$2|namespace|namespaces}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "Enable the new wikitext mode inside the visual editor. It has many of the tools present in the visual editor, uses a similar design, and allows better switching between the two.",
 	"visualeditor-preference-newwikitexteditor-discussion-link": "//mediawiki.org/wiki/2017_wikitext_editor/Feedback",
 	"visualeditor-preference-newwikitexteditor-enable": "Use the wikitext mode inside the visual editor, instead of a different wikitext editor.",
