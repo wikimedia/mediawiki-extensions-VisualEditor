@@ -846,7 +846,7 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 			// Config option for visual editing "deployed" state (opt-out)
 			$preferences['visualeditor-betatempdisable'] = [
 				'type' => 'toggle',
-				'label-message' => 'visualeditor-preference-betatempdisable',
+				'label-message' => 'visualeditor-preference-disable',
 				'section' => 'editing/editor',
 				'default' => $userOptionsLookup->getOption( $user, 'visualeditor-betatempdisable' ) ||
 					$userOptionsLookup->getOption( $user, 'visualeditor-autodisable' )
