@@ -130,7 +130,6 @@
 	"visualeditor-mweditmodesource-warning-switch-discard": "Hylgiä muutokset",
 	"visualeditor-mwgallerydialog-title": "Gallerii",
 	"visualeditor-preference-core-label": "Vizualine edituičendu",
-	"visualeditor-preference-enable": "Ota käyttöh vizualine editoru. Se on käytös {{PLURAL:$2|täs nimitilas|nämmis nimitilois}}: $1",
 	"visualeditor-recreate": "Sivu on otettu iäre sil aigua, ku edituičit sidä. Painalda \"$1\" ku luadie sivu uvvelleh.",
 	"visualeditor-savedialog-error-badtoken": "Emmo voinnuh käzitellä sinun kohendustu, ku istundo on jo loppenuhes.",
 	"visualeditor-savedialog-identify-anon": "Tahtotgo tallendua sivun kirjuttamattomannu käyttäjänny? Sinun IP-adressu kirjatah tämän sivun muutoshistourieh.",

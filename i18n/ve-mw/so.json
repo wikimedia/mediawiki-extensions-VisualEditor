@@ -16,6 +16,5 @@
 	"visualeditor-categories-tool": "Qaybaha",
 	"visualeditor-desc": "Visual editor ee MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
-	"visualeditor-editnotices-tool": "{{PLURAL:$1|ma jirto wargalin|hal wargalin|laba wargalinood|$1 wargalinno|$1 wargalin}}",
-	"visualeditor-preference-betatempdisable": "Iga jooji tifaftir-muuqaalka si ku meel gaar ah inta aan ku guda jiro beta."
+	"visualeditor-editnotices-tool": "{{PLURAL:$1|ma jirto wargalin|hal wargalin|laba wargalinood|$1 wargalinno|$1 wargalin}}"
 }
