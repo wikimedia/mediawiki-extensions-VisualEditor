@@ -323,6 +323,7 @@
 	"visualeditor-mwpredialog-convert": "Povolit formátování textu",
 	"visualeditor-mwpredialog-title": "Předformátovaný prostý text",
 	"visualeditor-mwsignature-tool": "Váš podpis",
+	"visualeditor-preference-disable": "Vypnout vizuální editor",
 	"visualeditor-preference-core-description": "Povolit Vizuální editor. Nebude k dispozici v diskusích a některých dalších jmenných prostorech.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
