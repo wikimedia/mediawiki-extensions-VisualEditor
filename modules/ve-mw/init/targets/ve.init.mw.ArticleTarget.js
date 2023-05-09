@@ -1975,73 +1975,80 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 	this.saveDialogIsOpening = true;
 
-	this.emit( 'saveWorkflowBegin' );
+	var saveProcess = new OO.ui.Process();
+	mw.hook( 've.preSaveProcess' ).fire( saveProcess, target );
 
-	// Preload the serialization
-	this.prepareCacheKey( this.getDocToSave() );
+	saveProcess.execute().done( function () {
+		target.emit( 'saveWorkflowBegin' );
 
-	// Get the save dialog
-	this.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
-		var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+		// Preload the serialization
+		target.prepareCacheKey( target.getDocToSave() );
 
-		if ( !target.saveDialog ) {
-			target.saveDialog = win;
-			firstLoad = true;
+		// Get the save dialog
+		target.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
+			var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 
-			// Connect to save dialog
-			target.saveDialog.connect( target, {
-				save: 'onSaveDialogSave',
-				review: 'onSaveDialogReview',
-				preview: 'onSaveDialogPreview',
-				resolve: 'onSaveDialogResolveConflict',
-				retry: 'onSaveDialogRetry',
-				// The array syntax is a way to call `this.emit( 'saveWorkflowEnd' )`.
-				close: [ 'emit', 'saveWorkflowEnd' ]
-			} );
+			if ( !target.saveDialog ) {
+				target.saveDialog = win;
+				firstLoad = true;
 
-			// Attach custom overlay
-			target.saveDialog.$element.append( target.$saveDialogOverlay );
-		}
+				// Connect to save dialog
+				target.saveDialog.connect( target, {
+					save: 'onSaveDialogSave',
+					review: 'onSaveDialogReview',
+					preview: 'onSaveDialogPreview',
+					resolve: 'onSaveDialogResolveConflict',
+					retry: 'onSaveDialogRetry',
+					// The array syntax is a way to call `this.emit( 'saveWorkflowEnd' )`.
+					close: [ 'emit', 'saveWorkflowEnd' ]
+				} );
 
-		var data = target.getSaveDialogOpeningData();
+				// Attach custom overlay
+				target.saveDialog.$element.append( target.$saveDialogOverlay );
+			}
 
-		if (
-			( action === 'review' && !data.canReview ) ||
-			( action === 'preview' && !data.canPreview )
-		) {
-			target.saveDialogIsOpening = false;
-			return;
-		}
+			var data = target.getSaveDialogOpeningData();
 
-		if ( firstLoad ) {
-			for ( var name in target.checkboxesByName ) {
-				if ( target.initialCheckboxes[ name ] !== undefined ) {
-					target.checkboxesByName[ name ].setSelected( target.initialCheckboxes[ name ] );
+			if (
+				( action === 'review' && !data.canReview ) ||
+				( action === 'preview' && !data.canPreview )
+			) {
+				target.saveDialogIsOpening = false;
+				return;
+			}
+
+			if ( firstLoad ) {
+				for ( var name in target.checkboxesByName ) {
+					if ( target.initialCheckboxes[ name ] !== undefined ) {
+						target.checkboxesByName[ name ].setSelected( target.initialCheckboxes[ name ] );
+					}
 				}
 			}
-		}
 
-		var checkbox;
-		if ( checkboxName && ( checkbox = target.checkboxesByName[ checkboxName ] ) ) {
-			var isSelected = !checkbox.isSelected();
-			// Wait for native access key change to happen
-			setTimeout( function () {
-				checkbox.setSelected( isSelected );
-			} );
-		}
+			var checkbox;
+			if ( checkboxName && ( checkbox = target.checkboxesByName[ checkboxName ] ) ) {
+				var isSelected = !checkbox.isSelected();
+				// Wait for native access key change to happen
+				setTimeout( function () {
+					checkbox.setSelected( isSelected );
+				} );
+			}
 
-		// When calling review/preview action, switch to those panels immediately
-		if ( action === 'review' || action === 'preview' ) {
-			data.initialPanel = action;
-		}
+			// When calling review/preview action, switch to those panels immediately
+			if ( action === 'review' || action === 'preview' ) {
+				data.initialPanel = action;
+			}
 
-		// Open the dialog
-		var openPromise = windowAction.open( 'mwSave', data, action );
-		if ( openPromise ) {
-			openPromise.always( function () {
-				target.saveDialogIsOpening = false;
-			} );
-		}
+			// Open the dialog
+			var openPromise = windowAction.open( 'mwSave', data, action );
+			if ( openPromise ) {
+				openPromise.always( function () {
+					target.saveDialogIsOpening = false;
+				} );
+			}
+		} );
+	} ).fail( function () {
+		target.saveDialogIsOpening = false;
 	} );
 };
 
