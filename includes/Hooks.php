@@ -1133,7 +1133,7 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 	 */
 	public static function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
-		if ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) {
+		if ( $user->isNamed() && ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) ) {
 			self::deferredSetUserOption( $user, 'visualeditor-editor', $cookie );
 		}
 	}
