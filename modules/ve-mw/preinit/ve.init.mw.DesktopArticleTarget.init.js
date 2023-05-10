@@ -42,6 +42,11 @@
 		// Defined after document-ready below
 		$targetContainer = null;
 
+	if ( mw.config.get( 'wgMFMode' ) ) {
+		mw.log.warn( 'Attempted to load desktop target on mobile.' );
+		return;
+	}
+
 	function showLoading( /* mode */ ) {
 		if ( isLoading ) {
 			return;
