@@ -1,0 +1,14 @@
+{
+	"editcheck-dialog-action-no": "No",
+	"editcheck-dialog-action-yes": "Yes",
+	"editcheck-dialog-addref-description": "Help readers understand where this information is coming from by adding a citation.",
+	"editcheck-dialog-addref-reject-question": "Why are you not adding a citation?",
+	"editcheck-dialog-addref-reject-description": "Other editors would value learning more about your decision to dismiss the citation.",
+	"editcheck-dialog-addref-reject-no-info": "I didn't add new information",
+	"editcheck-dialog-addref-reject-already-cited": "My changes are already cited earlier",
+	"editcheck-dialog-addref-reject-not-sure": "I'm not sure what citation to add",
+	"editcheck-dialog-addref-reject-other": "Other",
+	"editcheck-dialog-addref-success-notify": "Thank you for adding a citation!",
+	"editcheck-dialog-addref-title": "Add a citation",
+	"editcheck-dialog-title": "Before publishing"
+}

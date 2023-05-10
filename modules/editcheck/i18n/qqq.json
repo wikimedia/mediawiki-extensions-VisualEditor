@@ -1,0 +1,14 @@
+{
+	"editcheck-dialog-action-no": "Label for the no option when asking users if they want to add a citation.",
+	"editcheck-dialog-action-yes": "Label for the no option when asking users if they want to add a citation.",
+	"editcheck-dialog-addref-description": "Help text explaining why it is helpful to add a citation.",
+	"editcheck-dialog-addref-reject-question": "Heading for form question asking why the user didn't add a citation.",
+	"editcheck-dialog-addref-reject-description": "Help text for form question asking why the user didn't add a citation.",
+	"editcheck-dialog-addref-reject-no-info": "Answer option in repsonse to {{msg-mw|editcheck-dialog-addref-reject-question}}",
+	"editcheck-dialog-addref-reject-already-cited": "Answer option in repsonse to {{msg-mw|editcheck-dialog-addref-reject-question}}",
+	"editcheck-dialog-addref-reject-not-sure": "Answer option in repsonse to {{msg-mw|editcheck-dialog-addref-reject-question}}",
+	"editcheck-dialog-addref-reject-other": "Answer option in repsonse to {{msg-mw|editcheck-dialog-addref-reject-question}}",
+	"editcheck-dialog-addref-success-notify": "Notification messages shown after a citation is added successfully.",
+	"editcheck-dialog-addref-title": "Title for the edit check context asking user to add a citation.",
+	"editcheck-dialog-title": "Title shown in the toolbar while the user is in the add a citation workflow."
+}

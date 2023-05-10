@@ -180,6 +180,10 @@
 			"value": false,
 			"description": "For testing only. Tag edits for the Edit Check project."
 		},
+		"VisualEditorEditCheck": {
+			"value": false,
+			"description": "Enable experimental Edit Check feature."
+		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
@@ -218,7 +222,8 @@
 			"i18n/ve-mw",
 			"i18n/ve-mw/api",
 			"i18n/ve-mw/mwlanguagevariant",
-			"i18n/ve-wmf"
+			"i18n/ve-wmf",
+			"modules/editcheck/i18n"
 		]
 	},
 	"ExtensionMessagesFiles": {
@@ -598,10 +603,32 @@
 		"ext.visualEditor.editCheck": {
 			"group": "visualEditorA",
 			"scripts": [
-				"modules/editcheck/init.js"
+				"modules/editcheck/init.js",
+				"modules/editcheck/EditCheckContextItem.js",
+				"modules/editcheck/EditCheckInspector.js"
 			],
-			"dependencies": [],
-			"messages": [],
+			"styles": [
+				"modules/editcheck/EditCheck.less"
+			],
+			"dependencies": [
+				"ext.visualEditor.core",
+				"ext.visualEditor.mwsave"
+			],
+			"messages": [
+				"editcheck-dialog-action-no",
+				"editcheck-dialog-action-yes",
+				"editcheck-dialog-addref-description",
+				"editcheck-dialog-addref-reject-question",
+				"editcheck-dialog-addref-reject-description",
+				"editcheck-dialog-addref-reject-no-info",
+				"editcheck-dialog-addref-reject-already-cited",
+				"editcheck-dialog-addref-reject-not-sure",
+				"editcheck-dialog-addref-reject-other",
+				"editcheck-dialog-addref-success-notify",
+				"editcheck-dialog-addref-title",
+				"editcheck-dialog-title",
+				"visualeditor-backbutton-tooltip"
+			],
 			"targets": [
 				"desktop",
 				"mobile"

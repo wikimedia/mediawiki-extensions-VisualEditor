@@ -37,7 +37,7 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
-	if ( conf.editCheckTagging ) {
+	if ( conf.editCheckTagging || conf.editCheck ) {
 		modules.push( 'ext.visualEditor.editCheck' );
 	}
 
