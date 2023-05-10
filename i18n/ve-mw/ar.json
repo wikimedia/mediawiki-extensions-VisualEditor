@@ -3,6 +3,7 @@
 		"authors": [
 			"Abanima",
 			"Aboulouei1",
+			"Alshamiri1",
 			"Asaifm",
 			"Bachounda",
 			"Ciphers",
@@ -304,6 +305,7 @@
 	"visualeditor-mwpredialog-convert": "السماح بتهيئة النص",
 	"visualeditor-mwpredialog-title": "نص خام قبل التهيئة",
 	"visualeditor-mwsignature-tool": "توقيعك",
+	"visualeditor-preference-disable": "قم بإيقاف تشغيل المحرر المرئي",
 	"visualeditor-preference-core-description": "تمكين المحرر المرئي. لن يكون متوفرًا في صفحات النقاش ونطاقات أخرى.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
