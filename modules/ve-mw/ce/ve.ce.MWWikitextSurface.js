@@ -137,6 +137,10 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 					name: 'wikitextPaste',
 					type: 'item'
 				} ];
+				// Ensure surface is deactivated on mobile so context can be shown (T336073)
+				if ( context.isMobile() ) {
+					surface.getView().deactivate();
+				}
 				context.afterContextChange();
 				surface.getModel().once( 'select', function () {
 					context.relatedSources = [];
