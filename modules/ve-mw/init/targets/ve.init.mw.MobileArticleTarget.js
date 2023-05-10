@@ -494,7 +494,6 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	this.toolbarGroups = originalToolbarGroups;
 
-	this.toolbar.$group.addClass( 've-init-mw-mobileArticleTarget-editTools' );
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
 	this.toolbar.$popups.addClass( 've-init-mw-mobileArticleTarget-toolbar-popups' );
 };
