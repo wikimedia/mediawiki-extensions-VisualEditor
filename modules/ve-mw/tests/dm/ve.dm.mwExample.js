@@ -876,6 +876,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:!Example.jpg',
 					href: './Special:FilePath/!Example.jpg',
+					imageClassAttr: 'mw-broken-media',
+					imgWrapperClassAttr: null,
 					src: null,
 					isError: true,
 					errorText: 'File:!Example.jpg'
@@ -924,6 +926,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:Example.jpg',
 					href: null,
+					imageClassAttr: null,
+					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
 					errorText: null
@@ -972,6 +976,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:Example.jpg',
 					href: null,
+					imageClassAttr: null,
+					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
 					errorText: null
@@ -1020,6 +1026,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					href: null,
+					imageClassAttr: null,
+					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
 					errorText: null
@@ -1058,6 +1066,8 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					href: null,
+					imageClassAttr: null,
+					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
 					errorText: null

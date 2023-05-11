@@ -207,12 +207,18 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 	if ( attributes.href ) {
 		firstChild = doc.createElement( 'a' );
 		firstChild.setAttribute( 'href', attributes.href );
-		if ( attributes.imgWrapperClassAttr ) {
-			// eslint-disable-next-line mediawiki/class-doc
-			firstChild.className = attributes.imgWrapperClassAttr;
-		}
 	} else {
 		firstChild = doc.createElement( 'span' );
+	}
+
+	if ( attributes.imgWrapperClassAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
+		firstChild.className = attributes.imgWrapperClassAttr;
+	}
+
+	if ( attributes.imageClassAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
+		img.className = attributes.imageClassAttr;
 	}
 
 	if ( attributes.isError ) {
@@ -221,11 +227,6 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		}
 		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
 		img.appendChild( doc.createTextNode( attributes.errorText ? attributes.errorText : filename ) );
-		// At the moment, preserving this is only relevant on mw:Error spans
-		if ( attributes.imageClassAttr ) {
-			// eslint-disable-next-line mediawiki/class-doc
-			img.className = attributes.imageClassAttr;
-		}
 	}
 
 	container.appendChild( firstChild );
