@@ -325,6 +325,7 @@
 	"visualeditor-mwpredialog-convert": "Tillåt textformatering",
 	"visualeditor-mwpredialog-title": "Förformaterad vanlig text",
 	"visualeditor-mwsignature-tool": "Din signatur",
+	"visualeditor-preference-disable": "Stäng av den visuella redigeraren",
 	"visualeditor-preference-core-description": "Aktivera den visuella redigeraren. Den kommer inte att vara tillgänglig på diskussionssidor och några andra namnrymder.",
 	"visualeditor-preference-core-label": "Visuell redigering",
 	"visualeditor-preference-newwikitexteditor-description": "Aktivera det nya wikitextläget inuti den visuella redigeraren. Den innehåller många av de verktyg som finns i den visuella redigeraren, har en liknande utformning och gör det lättare att växla mellan de två.",
