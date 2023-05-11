@@ -51,7 +51,8 @@
 			"忒有钱",
 			"神樂坂秀吉",
 			"铁桶",
-			"飞舞回堂前"
+			"飞舞回堂前",
+			"Func"
 		]
 	},
 	"collabpad-doctitle": "协作板：$1",
@@ -199,6 +200,7 @@
 	"visualeditor-dialog-transclusion-add-param-placeholder": "参数名称",
 	"visualeditor-dialog-transclusion-add-param-save": "添加",
 	"visualeditor-dialog-transclusion-add-template": "添加模板",
+	"visualeditor-dialog-transclusion-add-template-button": "添加模板",
 	"visualeditor-dialog-transclusion-add-template-save": "添加",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "添加未记录的参数",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "确认返回搜索页？您的修改将丢失，并且无法被找回。",
