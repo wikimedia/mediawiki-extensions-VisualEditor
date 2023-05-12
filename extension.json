@@ -2684,6 +2684,7 @@
 		"localBasePath": "",
 		"remoteExtPath": "VisualEditor"
 	},
+	"ForeignResourcesDir": "lib",
 	"DefaultUserOptions": {
 		"visualeditor-autodisable": 0,
 		"visualeditor-betatempdisable": 0,
