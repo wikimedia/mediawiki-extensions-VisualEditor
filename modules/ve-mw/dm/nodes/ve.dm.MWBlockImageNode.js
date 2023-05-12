@@ -185,8 +185,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 		imgWrapper.setAttribute( 'href', attributes.href );
 	}
 
-	// At the moment, preserving this is only relevant on mw:Error spans
-	if ( attributes.isError && attributes.imageClassAttr ) {
+	if ( attributes.imageClassAttr ) {
 		// eslint-disable-next-line mediawiki/class-doc
 		img.className = attributes.imageClassAttr;
 	}

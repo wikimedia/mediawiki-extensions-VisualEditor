@@ -113,7 +113,9 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			width: width !== null && width !== '' ? +width : null,
 			height: height !== null && height !== '' ? +height : null,
 			isError: isError,
-			errorText: errorText
+			errorText: errorText,
+			imageClassAttr: img.getAttribute( 'class' ),
+			imgWrapperClassAttr: a.getAttribute( 'class' )
 		}
 	};
 
@@ -150,12 +152,20 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		a.setAttribute( 'href', attributes.href );
 	} else {
 		a.setAttribute( 'href', attributes.resource );
-		a.setAttribute( 'class', 'mw-file-description' );
+	}
+
+	if ( attributes.imageClassAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
+		img.className = attributes.imageClassAttr;
+	}
+
+	if ( attributes.imgWrapperClassAttr ) {
+		// eslint-disable-next-line mediawiki/class-doc
+		a.className = attributes.imgWrapperClassAttr;
 	}
 
 	img.setAttribute( 'resource', attributes.resource );
 	if ( attributes.isError ) {
-		img.classList.add( 'mw-broken-media' );
 		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
 		img.appendChild( doc.createTextNode( attributes.errorText ? attributes.errorText : filename ) );
 	} else {
