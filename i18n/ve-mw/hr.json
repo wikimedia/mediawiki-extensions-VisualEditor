@@ -293,6 +293,7 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Širina slike",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Zadana širina: $1 točkica",
 	"visualeditor-mwsignature-tool": "Vaš potpis",
+	"visualeditor-preference-disable": "Isključi vizualni uređivač",
 	"visualeditor-preference-core-description": "Omogućavanje VisualEditora. Uređivanje VisualEditorom neće biti moguće na stranicama za razgovor i u nekim drugim imenskim prostorima.",
 	"visualeditor-preference-core-label": "Vizualno uređivanje",
 	"visualeditor-preference-newwikitexteditor-description": "Omogućava uređivanje wikiteksta unutar vizualnog uređivača. Sadrži većinu alata iz vizualnog uređivača, rabi sličan izgled i omogućava bolje prebacivanje između ova dva načina uređivanja.",
