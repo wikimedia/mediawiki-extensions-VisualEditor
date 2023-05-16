@@ -150,7 +150,7 @@ class Hooks implements DifferenceEngineBeforeDiffTableHook {
 
 		// Return early if not viewing a diff of an allowed type.
 		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $diff->getTitle()->getContentModel() )
-			|| $output->getActionName() !== 'view'
+			|| $output->getActionName() !== 'view' || $diff->getTitle()->getNamespace() == NS_SPECIAL
 		) {
 			return;
 		}
