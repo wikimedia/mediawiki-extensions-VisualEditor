@@ -356,6 +356,7 @@
 	"visualeditor-mwpredialog-convert": "Разрешить стилизацию текста",
 	"visualeditor-mwpredialog-title": "Неформатированный текст",
 	"visualeditor-mwsignature-tool": "Ваша подпись",
+	"visualeditor-preference-disable": "Отключить визуальный редактор",
 	"visualeditor-preference-core-description": "Включить визуальный редактор. Он будет недоступен на страницах обсуждения и в некоторых других пространствах имён.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
