@@ -150,7 +150,7 @@ class Hooks {
 		// Return early if not viewing a diff of an allowed type or
 		// if the diff namespace is NS_SPECIAL (ref. T336582)
 		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $diff->getTitle()->getContentModel() )
-			|| $output->getActionName() !== 'view' || $diff->getTitle()->getNamespace() == NS_SPECIAL
+			|| $output->getActionName() !== 'view'
 		) {
 			return;
 		}
