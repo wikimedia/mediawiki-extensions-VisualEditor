@@ -85,6 +85,7 @@ QUnit.test( 'init', ( assert ) => {
 							'<section data-mw-section-id="0" id="mwAQ"></section>' +
 						'</body>' +
 					'</html>',
+				preloaded: false,
 				etag: '"1804/a4fc0409-ad18-11e8-9b45-dd8cefbedb6d"'
 			}
 		},

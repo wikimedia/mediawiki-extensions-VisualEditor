@@ -65,6 +65,7 @@ class ApiVisualEditorTest extends ApiTestCase {
 			'wouldautocreate',
 			'canEdit',
 			'content',
+			'preloaded',
 			// When updating this, also update the sample response in
 			// ve.init.mw.DesktopArticleTarget.test.js
 		];

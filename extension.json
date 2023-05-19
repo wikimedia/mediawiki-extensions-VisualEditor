@@ -176,20 +176,14 @@
 			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditor",
 			"services": [
 				"RevisionLookup",
-				"UserNameUtils",
 				"TempUserCreator",
-				"Parser",
-				"LinkRenderer",
 				"UserOptionsLookup",
 				"WatchlistManager",
 				"ContentTransformer",
-				"SpecialPageFactory",
-				"ReadOnlyMode",
-				"RestrictionStore",
 				"StatsdDataFactory",
 				"WikiPageFactory",
-				"HookContainer",
-				"UserFactory",
+				"IntroMessageBuilder",
+				"PreloadedContentBuilder",
 				"VisualEditor.ParsoidClientFactory"
 			]
 		},
