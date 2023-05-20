@@ -22,7 +22,7 @@ class SpecialCollabPadTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideSubPages() {
+	public static function provideSubPages() {
 		return [
 			[ 'Special:CollabPad', null ],
 			[ 'Special:CollabPad/', null ],

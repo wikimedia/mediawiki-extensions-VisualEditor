@@ -86,7 +86,7 @@ class ApiVisualEditorTest extends ApiTestCase {
 		);
 	}
 
-	public function provideLoadEditorPreload() {
+	public static function provideLoadEditorPreload() {
 		return [
 			'load with preload content' => [
 				[

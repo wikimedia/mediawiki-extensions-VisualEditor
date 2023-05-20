@@ -51,7 +51,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** @return Generator */
-	public function provideLanguageCodes() {
+	public static function provideLanguageCodes() {
 		yield 'German language code' => [ 'de' ];
 		yield 'English language code' => [ 'en' ];
 		yield 'French language code' => [ 'fr' ];
@@ -120,7 +120,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return Generator
 	 */
-	public function restbaseErrorObjectProvider() {
+	public static function restbaseErrorObjectProvider() {
 		yield [
 			[
 				'code' => 200,
@@ -203,7 +203,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** @return Generator */
-	public function provideTransformHtmlData(): Generator {
+	public static function provideTransformHtmlData(): Generator {
 		yield 'No oldid and no eTag to set in request headers' => [ null, null ];
 
 		yield 'Oldid to set in request headers with no eTag' => [ 123, null ];
@@ -252,7 +252,7 @@ class VRSParsoidClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** @return Generator */
-	public function provideTransformWikitextData(): Generator {
+	public static function provideTransformWikitextData(): Generator {
 		// [ $bodyOnly, $oldid, $stash ]
 		yield 'Body only: false, oldid: null, stash: false' => [ false, null, false ];
 

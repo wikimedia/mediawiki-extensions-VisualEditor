@@ -29,7 +29,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideOnResourceLoaderGetConfigVars() {
+	public static function provideOnResourceLoaderGetConfigVars() {
 		// TODO: test a lot more config!
 
 		yield 'restbaseUrl: No VRS modules, DefaultParsoidClient=vrs' => [

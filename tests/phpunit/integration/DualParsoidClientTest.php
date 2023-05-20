@@ -104,7 +104,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		return $directClient;
 	}
 
-	public function provideDefaultModes() {
+	public static function provideDefaultModes() {
 		yield 'direct' => [ 'direct' ];
 		yield 'vrs' => [ 'vrs' ];
 	}
@@ -164,7 +164,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( 'mode:' . $default, $result['body'] );
 	}
 
-	public function provideTransformHTML() {
+	public static function provideTransformHTML() {
 		$fallbackMode = 'direct';
 
 		yield 'no etag' => [ null, $fallbackMode ];
