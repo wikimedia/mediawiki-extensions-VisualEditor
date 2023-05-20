@@ -41,6 +41,7 @@ ve.ui.MWSaveTool.static.name = 'showSave';
 ve.ui.MWSaveTool.static.flags = [ 'primary', 'progressive' ];
 ve.ui.MWSaveTool.static.displayBothIconAndLabel = true;
 ve.ui.MWSaveTool.static.group = 'save';
+ve.ui.MWSaveTool.static.fallbackIcon = 'next';
 ve.ui.MWSaveTool.static.commandName = 'showSave';
 ve.ui.MWSaveTool.static.autoAddToCatchall = false;
 ve.ui.MWSaveTool.static.autoAddToGroup = false;

@@ -1045,6 +1045,7 @@ class Hooks {
 			'enableVisualSectionEditing' => $veConfig->get( 'VisualEditorEnableVisualSectionEditing' ),
 			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
 			'allowExternalLinkPaste' => $veConfig->get( 'VisualEditorAllowExternalLinkPaste' ),
+			'enableHelpCompletion' => $veConfig->get( 'VisualEditorEnableHelpCompletion' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
 			'enableWikitext' => (
 				$veConfig->get( 'VisualEditorEnableWikitext' ) ||

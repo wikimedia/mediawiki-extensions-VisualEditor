@@ -462,6 +462,11 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 		}
 	}
 
+	if ( !mw.config.get( 'wgVisualEditorConfig' ).enableHelpCompletion ) {
+		this.getSurface().commandRegistry.unregister( 'openHelpCompletions' );
+		this.getSurface().commandRegistry.unregister( 'openHelpCompletionsTrigger' );
+	}
+
 	if ( !this.canEdit ) {
 		this.getSurface().setReadOnly( true );
 	} else {

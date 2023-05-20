@@ -80,6 +80,9 @@
 		"VisualEditorEnableTocWidget": {
 			"value": false
 		},
+		"VisualEditorEnableHelpCompletion": {
+			"value": true
+		},
 		"VisualEditorEnableVisualSectionEditing": {
 			"value": "mobile"
 		},
@@ -1029,6 +1032,7 @@
 				"lib/ve/src/ui/actions/ve.ui.CompletionAction.js",
 				"lib/ve/src/ui/actions/ve.ui.ContentAction.js",
 				"lib/ve/src/ui/actions/ve.ui.FormatAction.js",
+				"lib/ve/src/ui/actions/ve.ui.HelpCompletionAction.js",
 				"lib/ve/src/ui/actions/ve.ui.HistoryAction.js",
 				"lib/ve/src/ui/actions/ve.ui.IndentationAction.js",
 				"lib/ve/src/ui/actions/ve.ui.LinkAction.js",
