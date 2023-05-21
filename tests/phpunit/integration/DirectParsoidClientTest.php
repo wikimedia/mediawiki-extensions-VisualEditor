@@ -55,7 +55,7 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** @return Generator */
-	public function provideLanguageCodes() {
+	public static function provideLanguageCodes() {
 		yield 'German language code' => [ 'de' ];
 		yield 'English language code' => [ 'en' ];
 		yield 'French language code' => [ 'fr' ];

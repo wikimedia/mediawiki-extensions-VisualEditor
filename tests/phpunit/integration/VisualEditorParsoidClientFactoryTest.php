@@ -48,7 +48,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		);
 	}
 
-	public function provideGetClient() {
+	public static function provideGetClient() {
 		yield 'Empty VRS modules array, DefaultParsoidClient=vrs, no hints' => [
 			[
 				MainConfigNames::ParsoidSettings => [],
@@ -168,7 +168,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		$this->assertInstanceOf( DualParsoidClient::class, $client );
 	}
 
-	public function provideCookieToForward() {
+	public static function provideCookieToForward() {
 		yield 'When no cookie is sent' => [ false, false ];
 
 		yield 'When a cookie is sent as a string' => [ 'cookie', 'cookie' ];
@@ -247,7 +247,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		$this->assertSame( $expected, $parsoidClient->useParsoidOverHTTP() );
 	}
 
-	public function provideUseParsoidOverHTTP() {
+	public static function provideUseParsoidOverHTTP() {
 		// TODO: test a lot more config!
 
 		yield 'restbaseUrl: No VRS modules, DefaultParsoidClient=vrs' => [
