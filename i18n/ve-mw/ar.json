@@ -29,7 +29,10 @@
 			"محمد عصام",
 			"مشعل الحربي",
 			"SaldırganSincap",
-			"Mohanad Kh"
+			"Mohanad Kh",
+			"Alshamiri1",
+			"FShbib",
+			"Karim185.3"
 		]
 	},
 	"collabpad-doctitle": "كولاب باد: $1",
@@ -234,6 +237,9 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "عنوان فرعي 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "عنوان فرعي 4",
 	"visualeditor-generating-wikitext-progress": "توليد نص الويكي",
+	"visualeditor-includes-noinclude-description": "عندما يتم استخدام محتوى من هذه الصفحة بواسطة صفحة أخرى ، <strong>لن</strong> يتم تضمين المحتوى من هنا حتى علامة النهاية المطابقة. كن حذرًا عند تحرير المحتوى خارج هذه العلامات ، حيث قد تستخدمه الصفحات الأخرى.",
+	"visualeditor-includes-onlyinclude-description": "عندما يتم استخدام محتوى من هذه الصفحة بواسطة صفحة أخرى ، سيتم تضمين المحتوى <strong>فقط</strong> من هنا حتى علامة النهاية المطابقة. كن حذرًا عند تحرير المحتوى بين هذه العلامات ، حيث قد تستخدمه الصفحات الأخرى.",
+	"visualeditor-includes-includeonly-description": "عندما يتم استخدام محتوى من هذه الصفحة بواسطة صفحة أخرى ، سيتم تضمين المحتوى الإضافي التالي هنا:",
 	"visualeditor-languages-tool": "اللغات",
 	"visualeditor-linkinspector-button-link-external": "موقع خارجي",
 	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحةالداخلية",
