@@ -332,6 +332,7 @@
 	"visualeditor-mwpredialog-convert": "اجازهٔ تغییر سبک متن",
 	"visualeditor-mwpredialog-title": "ساختاربندی مجدد متن ساده",
 	"visualeditor-mwsignature-tool": "امضای شما",
+	"visualeditor-preference-disable": "خاموش کردن ویرایشگر دیداری",
 	"visualeditor-preference-core-description": "فعال‌سازی این ویرایشگر. در صفحه‌های بحث و سایر فضای نام‌ها ممکن است موجود نباشد.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
