@@ -326,6 +326,7 @@
 	"visualeditor-mwpredialog-convert": "Дозволити форматування тексту",
 	"visualeditor-mwpredialog-title": "Попередньо відформатований простий текст",
 	"visualeditor-mwsignature-tool": "Ваш підпис",
+	"visualeditor-preference-disable": "Вимкнути візуальний редактор",
 	"visualeditor-preference-core-description": "Увімкнути візуальний редактор. Він не буде доступний на сторінках обговорення та в деяких інших просторах назв.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",

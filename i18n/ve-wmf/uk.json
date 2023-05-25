@@ -21,6 +21,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck вважає, що в цьому редагуванні варто додати посилання на джерело",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор]]",
 	"tag-visualeditor-description": "Редагування виконано з використанням [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуального редактора]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальний редактор: Перевірити]]",
