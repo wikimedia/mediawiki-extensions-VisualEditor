@@ -55,6 +55,10 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		return null;
 	}
 	var img = imgWrapper.children[ 0 ]; // <img>, <video>, <audio>, or <span> if mw:Error
+	// Images copied from the old parser output can have typeof=mw:Image but aren't valid. T337438
+	if ( !img ) {
+		return [];
+	}
 	var typeofAttrs = ( container.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
 	var mwDataJSON = container.getAttribute( 'data-mw' );
 	var mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
