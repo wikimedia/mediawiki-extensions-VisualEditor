@@ -87,6 +87,7 @@ class Hooks {
 		$services = MediaWikiServices::getInstance();
 		$hookRunner = new VisualEditorHookRunner( $services->getHookContainer() );
 		if ( !$hookRunner->onVisualEditorBeforeEditor( $output, $skin ) ) {
+			$output->addJsConfigVars( 'wgVisualEditorDisabledByHook', true );
 			return;
 		}
 		if ( !(
