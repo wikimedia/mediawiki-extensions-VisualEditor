@@ -179,7 +179,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		padded: true,
 		expanded: true,
 		scrollable: true
-	} ).toggle( false );
+	} );
 	this.editSearchStack = new OO.ui.StackLayout( {
 		items: [ this.editPanel, this.searchPanel ]
 	} );
