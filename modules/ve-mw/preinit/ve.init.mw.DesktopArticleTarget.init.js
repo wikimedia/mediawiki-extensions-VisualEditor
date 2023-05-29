@@ -306,11 +306,13 @@
 		return targetPromise;
 	}
 
-	function trackActivateStart( initData, link ) {
-		var linkUrl;
-		if ( link ) {
-			linkUrl = new URL( $( link ).closest( 'a' ).attr( 'href' ), location.href );
-		} else {
+	/**
+	 * @private
+	 * @param {Object} initData
+	 * @param {URL} [linkUrl]
+	 */
+	function trackActivateStart( initData, linkUrl ) {
+		if ( !linkUrl ) {
 			linkUrl = url;
 		}
 		if ( linkUrl.searchParams.get( 'wvprov' ) === 'sticky-header' ) {
@@ -501,7 +503,7 @@
 	 *  If visual section editing is not enabled, we will jump to the start of this section, and still
 	 *  the heading to prefix the edit summary.
 	 * @param {jQuery.Promise} [tPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
-	 * @param {boolean} [modified] The page was been modified before loading (e.g. in source mode)
+	 * @param {boolean} [modified=false] The page has been modified before loading (e.g. in source mode)
 	 */
 	function activateTarget( mode, section, tPromise, modified ) {
 		var dataPromise;
@@ -626,8 +628,15 @@
 			.always( clearLoading );
 	}
 
-	function activatePageTarget( mode, section, modified, link ) {
-		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode }, link );
+	/**
+	 * @private
+	 * @param {string} mode Target mode: 'visual' or 'source'
+	 * @param {string} [section]
+	 * @param {boolean} [modified=false] The page has been modified before loading (e.g. in source mode)
+	 * @param {URL} [linkUrl] URL to navigate to, potentially with extra parameters
+	 */
+	function activatePageTarget( mode, section, modified, linkUrl ) {
+		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode }, linkUrl );
 
 		if ( !active ) {
 			if ( url.searchParams.get( 'action' ) !== 'edit' && !( url.searchParams.get( 'veaction' ) in veactionToMode ) ) {
@@ -1162,16 +1171,17 @@
 					}
 				} );
 			} else {
+				var linkUrl = e.target.href ? new URL( e.target.href ) : null;
 				if ( section !== null ) {
-					init.activateVe( mode, e.target, section );
+					init.activateVe( mode, linkUrl, section );
 				} else {
 					// Do not pass `section` to handle switching from section editing in WikiEditor if needed
-					init.activateVe( mode, e.target );
+					init.activateVe( mode, linkUrl );
 				}
 			}
 		},
 
-		activateVe: function ( mode, link, section ) {
+		activateVe: function ( mode, linkUrl, section ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
 				config = mw.config.get( 'wgVisualEditorConfig' ),
 				// NOTE: should be just config.allowSwitchingToVisualMode, but we need to preserve compatibility for a few minutes.
@@ -1219,7 +1229,7 @@
 				} );
 			} else {
 				releaseOldEditWarning();
-				activatePageTarget( mode, section, modified, link );
+				activatePageTarget( mode, section, modified, linkUrl );
 			}
 		},
 
@@ -1264,7 +1274,7 @@
 				return;
 			}
 
-			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode }, e.target );
+			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode }, linkUrl );
 
 			if ( !active ) {
 				if ( url.searchParams.get( 'action' ) !== 'edit' && !( url.searchParams.get( 'veaction' ) in veactionToMode ) ) {

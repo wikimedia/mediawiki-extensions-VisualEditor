@@ -195,11 +195,11 @@
 		 * @param {null|string} [options.section] Section to edit; number, 'T-'-prefixed, null or 'new' (currently just source mode)
 		 * @param {number} [options.oldId] Old revision ID. Current if omitted.
 		 * @param {string} [options.targetName] Optional target name for tracking
-		 * @param {boolean} [options.modified] The page was been modified before loading (e.g. in source mode)
+		 * @param {boolean} [options.modified] The page has been modified before loading (e.g. in source mode)
 		 * @param {string} [options.wikitext] Wikitext to convert to HTML. The original document is fetched if undefined.
 		 * @param {string} [options.editintro] Name of a page to use as edit intro message
 		 * @param {string} [options.preload] Name of a page to use as preloaded content if pageName is empty
-		 * @param {Array} [options.preloadparams] Parameters to substitute into preload if it's used
+		 * @param {string[]} [options.preloadparams] Parameters to substitute into preload if it's used
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestPageData: function ( mode, pageName, options ) {
