@@ -11,6 +11,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck hesab edir ki, bu redaktədə istinad lazım ola bilər",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizual redaktor]]",
 	"tag-visualeditor-description": "Redaktə [[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizual redaktorun]] köməyi ilə edilib",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizual redaktor: Yoxla]]",
