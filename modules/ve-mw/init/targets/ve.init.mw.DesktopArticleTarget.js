@@ -1170,6 +1170,13 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			url.searchParams.delete( 'oldid' );
 		}
 
+		// Remove parameters which are only intended for the editor, not for read mode
+		url.searchParams.delete( 'editintro' );
+		url.searchParams.delete( 'preload' );
+		url.searchParams.delete( 'preloadparams[]' );
+		url.searchParams.delete( 'preloadtitle' );
+		url.searchParams.delete( 'summary' );
+
 		// If there are any other query parameters left, re-use that URL object.
 		// Otherwise use the canonical style view URL (T44553, T102363).
 		var keys = [];

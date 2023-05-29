@@ -645,10 +645,10 @@
 				// way to do this. See also similar code in the DesktopArticleTarget constructor.
 				history.replaceState( { tag: 'visualeditor' }, '', url );
 				// Set action=edit or veaction=edit/editsource
-				history.pushState( { tag: 'visualeditor' }, '', mode === 'source' ? veEditSourceUrl : veEditUrl );
-
+				// Use linkUrl to preserve parameters like 'editintro' (T56029)
+				history.pushState( { tag: 'visualeditor' }, '', linkUrl || ( mode === 'source' ? veEditSourceUrl : veEditUrl ) );
 				// Update URL instance
-				url = veEditUrl;
+				url = linkUrl || veEditUrl;
 			}
 
 			activateTarget( mode, section, undefined, modified );
@@ -1282,7 +1282,7 @@
 					// back button from breaking when used to exit VE. FIXME: there should be a better
 					// way to do this. See also similar code in the DesktopArticleTarget constructor.
 					history.replaceState( { tag: 'visualeditor' }, '', url );
-					// Use linkUrl
+					// Use linkUrl to preserve the 'section' parameter and others like 'editintro' (T56029)
 					history.pushState( { tag: 'visualeditor' }, '', linkUrl );
 				}
 				// Update URL instance
