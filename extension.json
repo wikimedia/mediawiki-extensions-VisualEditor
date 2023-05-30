@@ -1889,6 +1889,9 @@
 			"messages": [
 				"visualeditor-advancedsettings-tool",
 				"visualeditor-categories-tool",
+				"visualeditor-changedesc-mwcategory-sortkey-changed",
+				"visualeditor-changedesc-mwcategory-sortkey-set",
+				"visualeditor-changedesc-mwcategory-sortkey-unset",
 				"visualeditor-changedesc-mwredirect",
 				"visualeditor-dialog-meta-advancedsettings-label",
 				"visualeditor-dialog-meta-advancedsettings-section",
