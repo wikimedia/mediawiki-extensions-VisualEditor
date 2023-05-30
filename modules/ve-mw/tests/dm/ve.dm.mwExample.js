@@ -910,7 +910,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb" style="width: 150px; height: 150px;">
 						<span typeof="mw:Error mw:File" data-mw='{"errors":[{"key":"apierror-filedoesnotexist","message":"This image does not exist."}]}'>
 							<a href="./Special:FilePath/!Example.jpg">
-								<span class="mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span>
+								<span class="mw-file-element mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span>
 							</a>
 						</span>
 					</div>
@@ -942,7 +942,7 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:!Example.jpg',
 					href: './Special:FilePath/!Example.jpg',
-					imageClassAttr: 'mw-broken-media',
+					imageClassAttr: 'mw-file-element mw-broken-media',
 					imgWrapperClassAttr: null,
 					src: null,
 					isError: true,
@@ -969,7 +969,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb">
 						<span typeof="mw:Error mw:File">
 							<a href="./Special:FilePath/!Example.jpg">
-								<span class="mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span>
+								<span class="mw-file-element mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span>
 							</a>
 						</span>
 					</div>
@@ -985,7 +985,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb" style="width: 180px;">
 						<span typeof="mw:File">
 							<a href="./File:Example.jpg" class="mw-file-description">
-								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" decoding="async" data-file-width="400"
+								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" class="mw-file-element" decoding="async" data-file-width="400"
 								 data-file-height="267" data-file-type="bitmap" height="120" width="180" srcset="${ve.ce.minImgDataUri} 2x"/>
 							</a>
 						</span>
@@ -1019,7 +1019,7 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:Example.jpg',
 					href: null,
-					imageClassAttr: null,
+					imageClassAttr: 'mw-file-element',
 					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
@@ -1046,7 +1046,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb">
 						<span typeof="mw:File">
 							<a href="./File:Example.jpg" class="mw-file-description">
-								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" height="120" width="180"/>
+								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" class="mw-file-element" height="120" width="180"/>
 							</a>
 						</span>
 					</div>
@@ -1062,7 +1062,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb" style="width: 180px;">
 						<span typeof="mw:File">
 							<a href="./File:Example.jpg" class="mw-file-description">
-								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" data-file-width="400" data-file-height="267" data-file-type="bitmap" height="120" width="180"/>
+								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" class="mw-file-element" data-file-width="400" data-file-height="267" data-file-type="bitmap" height="120" width="180"/>
 							</a>
 						</span>
 					</div>
@@ -1095,7 +1095,7 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './File:Example.jpg',
 					href: null,
-					imageClassAttr: null,
+					imageClassAttr: 'mw-file-element',
 					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
@@ -1123,7 +1123,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb">
 						<span typeof="mw:File">
 							<a href="./File:Example.jpg" class="mw-file-description">
-								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" height="120" width="180"/>
+								<img resource="./File:Example.jpg" src="${ve.ce.minImgDataUri}" class="mw-file-element" height="120" width="180"/>
 							</a>
 						</span>
 					</div>
@@ -1158,7 +1158,7 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					href: null,
-					imageClassAttr: null,
+					imageClassAttr: 'mw-file-element',
 					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
@@ -1176,7 +1176,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb">
 						<span typeof="mw:Image">
 							<a href="./Foo" class="mw-file-description">
-								<img resource="./Foo" src="${ve.ce.minImgDataUri}" height="120" width="120"/>
+								<img resource="./Foo" src="${ve.ce.minImgDataUri}" class="mw-file-element" height="120" width="120"/>
 							</a>
 						</span>
 					</div>
@@ -1210,7 +1210,7 @@ ve.dm.mwExample.domToDataCases = {
 					height: 120,
 					resource: './Foo',
 					href: null,
-					imageClassAttr: null,
+					imageClassAttr: 'mw-file-element',
 					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
@@ -1230,7 +1230,7 @@ ve.dm.mwExample.domToDataCases = {
 					<div class="thumb">
 						<span typeof="mw:Image">
 							<a href="./Foo" class="mw-file-description">
-								<img resource="./Foo" src="${ve.ce.minImgDataUri}" height="120" width="120"/>
+								<img resource="./Foo" src="${ve.ce.minImgDataUri}" class="mw-file-element" height="120" width="120"/>
 							</a>
 						</span>
 					</div>

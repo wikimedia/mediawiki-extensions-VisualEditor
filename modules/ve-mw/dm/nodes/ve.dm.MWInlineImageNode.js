@@ -49,16 +49,16 @@ ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
 	var container = domElements[ 0 ]; // <span>
-	var imgWrapper = container.children[ 0 ]; // <a> or <span>
-	if ( !imgWrapper ) {
-		// Malformed figure, alienate (T267282)
+	if ( !container.children.length ) {
+		// Malformed image, alienate (T267282)
 		return null;
 	}
-	var img = imgWrapper.children[ 0 ]; // <img>, <video>, <audio>, or <span> if mw:Error
-	// Images copied from the old parser output can have typeof=mw:Image but aren't valid. T337438
-	if ( !img ) {
+	var img = container.querySelector( '.mw-file-element' ); // <img>, <video>, <audio>, or <span> if mw:Error
+	// Images copied from the old parser output can have typeof=mw:Image but no resource information. T337438
+	if ( !img || !img.hasAttribute( 'resource' ) ) {
 		return [];
 	}
+	var imgWrapper = img.parentNode; // <a> or <span>
 	var typeofAttrs = ( container.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
 	var mwDataJSON = container.getAttribute( 'data-mw' );
 	var mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
