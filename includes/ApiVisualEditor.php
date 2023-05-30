@@ -303,9 +303,14 @@ class ApiVisualEditor extends ApiBase {
 				} else {
 					$notices = $this->introMessageBuilder->getIntroMessages(
 						IntroMessageBuilder::LESS_FRAMES,
-						// This message was not shown by VisualEditor before it was switched to use IntroMessageBuilder,
-						// and it may be unexpected to display it now, so skip it.
-						[ 'editpage-head-copy-warn' ],
+						[
+							// This message was not shown by VisualEditor before it was switched to use
+							// IntroMessageBuilder, and it may be unexpected to display it now, so skip it.
+							'editpage-head-copy-warn',
+							// This message was not shown by VisualEditor previously, and on many Wikipedias it's
+							// technically non-empty but hidden with CSS, and not a real edit notice (T337633).
+							'editnotice-notext',
+						],
 						$localizerWithTitle,
 						$title->toPageIdentity(),
 						$revision,
