@@ -67,6 +67,10 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 	var figure = domElements[ 0 ];
 	var imgWrapper = figure.children[ 0 ]; // <a> or <span>
 	var img = imgWrapper.children[ 0 ]; // <img>, <video>, <audio>, or <span> if mw:Error
+	// Images copied from the old parser output can have typeof=mw:Image but aren't valid. T337438
+	if ( !img.getAttribute( 'resource' ) ) {
+		return [];
+	}
 	var captionNode = figure.children[ 1 ]; // <figcaption> or undefined
 	var classAttr = figure.getAttribute( 'class' );
 	var typeofAttrs = figure.getAttribute( 'typeof' ).trim().split( /\s+/ );
