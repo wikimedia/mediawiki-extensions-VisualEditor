@@ -77,6 +77,24 @@ ve.dm.MWCategoryMetaItem.static.isDiffComparable = function ( element, other ) {
 	return element.type === other.type && element.attributes.category === other.attributes.category;
 };
 
+ve.dm.MWCategoryMetaItem.static.describeChange = function ( key, change ) {
+	if ( key === 'sortkey' ) {
+		if ( !change.from ) {
+			return ve.htmlMsg( 'visualeditor-changedesc-mwcategory-sortkey-set', this.wrapText( 'ins', change.to ) );
+		} else if ( !change.to ) {
+			return ve.htmlMsg( 'visualeditor-changedesc-mwcategory-sortkey-unset', this.wrapText( 'del', change.from ) );
+		} else {
+			return ve.htmlMsg( 'visualeditor-changedesc-mwcategory-sortkey-changed',
+				this.wrapText( 'del', change.from ),
+				this.wrapText( 'ins', change.to )
+			);
+		}
+	}
+
+	// Parent method
+	return ve.dm.MWCategoryMetaItem.parent.static.describeChange.apply( this, arguments );
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWCategoryMetaItem );
