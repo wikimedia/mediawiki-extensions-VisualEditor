@@ -71,6 +71,12 @@ ve.dm.MWCategoryMetaItem.static.toDomElements = function ( dataElement, doc, con
 	return [ domElement ];
 };
 
+ve.dm.MWCategoryMetaItem.static.isDiffComparable = function ( element, other ) {
+	// Don't try to compare different categories. Even fixing a typo in a category name
+	// results in one category being removed and another added, which we shoud show.
+	return element.type === other.type && element.attributes.category === other.attributes.category;
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWCategoryMetaItem );
