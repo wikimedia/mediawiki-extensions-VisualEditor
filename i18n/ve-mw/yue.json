@@ -10,7 +10,9 @@
 			"Roy17",
 			"TMg",
 			"William915",
-			"Yueman"
+			"Yueman",
+			"Al12si",
+			"捍粵者"
 		]
 	},
 	"tooltip-ca-createsource": "整呢版嘅代碼出嚟",
@@ -187,7 +189,7 @@
 	"visualeditor-mwgallerydialog-mode-dropdown-label-slideshow": "投影片",
 	"visualeditor-mwgallerydialog-mode-dropdown-label-traditional": "傳統",
 	"visualeditor-mwgallerydialog-mode-field-label": "顯示模式",
-	"visualeditor-mwgallerydialog-perrow-field-label": "每行幾多張圖",
+	"visualeditor-mwgallerydialog-perrow-field-label": "每行幾張圖？",
 	"visualeditor-mwgallerydialog-remove-button-label": "拎走張圖",
 	"visualeditor-mwgallerydialog-search-button-label": "加新圖",
 	"visualeditor-mwgallerydialog-show-filename-field-label": "顯示快勞名",
