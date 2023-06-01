@@ -66,25 +66,26 @@ QUnit.test( 'init', ( assert ) => {
 				blockinfo: null,
 				wouldautocreate: false,
 				canEdit: true,
-				content: '<!DOCTYPE html>\n' +
-					'<html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://localhost/MediaWiki/core/index.php/Special:Redirect/revision/1804">' +
-						'<head prefix="mwr: http://localhost/MediaWiki/core/index.php/Special:Redirect/"><meta property="mw:TimeUuid" content="a4fc0409-ad18-11e8-9b45-dd8cefbedb6d"/>' +
-							'<meta charset="utf-8"/>' +
-							'<meta property="mw:pageNamespace" content="0"/>' +
-							'<meta property="mw:pageId" content="643"/>' +
-							'<link rel="dc:replaces" resource="mwr:revision/0"/>' +
-							'<meta property="dc:modified" content="2016-11-19T00:51:07.000Z"/>' +
-							'<meta property="mw:revisionSHA1" content="da39a3ee5e6b4b0d3255bfef95601890afd80709"/>' +
-							'<meta property="mw:html:version" content="1.7.0"/>' +
-							'<link rel="dc:isVersionOf" href="http://localhost/MediaWiki/core/index.php/Empty"/>' +
-							'<title>Empty</title>' +
-							'<base href="http://localhost/MediaWiki/core/index.php/"/>' +
-							'<link rel="stylesheet" href="//localhost/MediaWiki/core/load.php?modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Csite.styles%7Cext.cite.style%7Cext.cite.styles%7Cmediawiki.page.gallery.styles&amp;only=styles&amp;skin=vector"/>' +
-						'</head>' +
-						'<body id="mwAA" lang="he" class="mw-content-rtl sitedir-rtl rtl mw-body-content parsoid-body mediawiki mw-parser-output" dir="rtl">' +
-							'<section data-mw-section-id="0" id="mwAQ"></section>' +
-						'</body>' +
-					'</html>',
+				content: '<!DOCTYPE html>\n' + ve.dm.example.singleLine`
+					<html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="http://localhost/MediaWiki/core/index.php/Special:Redirect/revision/1804">
+						<head prefix="mwr: http://localhost/MediaWiki/core/index.php/Special:Redirect/"><meta property="mw:TimeUuid" content="a4fc0409-ad18-11e8-9b45-dd8cefbedb6d"/>
+							<meta charset="utf-8"/>
+							<meta property="mw:pageNamespace" content="0"/>
+							<meta property="mw:pageId" content="643"/>
+							<link rel="dc:replaces" resource="mwr:revision/0"/>
+							<meta property="dc:modified" content="2016-11-19T00:51:07.000Z"/>
+							<meta property="mw:revisionSHA1" content="da39a3ee5e6b4b0d3255bfef95601890afd80709"/>
+							<meta property="mw:html:version" content="1.7.0"/>
+							<link rel="dc:isVersionOf" href="http://localhost/MediaWiki/core/index.php/Empty"/>
+							<title>Empty</title>
+							<base href="http://localhost/MediaWiki/core/index.php/"/>
+							<link rel="stylesheet" href="//localhost/MediaWiki/core/load.php?modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Csite.styles%7Cext.cite.style%7Cext.cite.styles%7Cmediawiki.page.gallery.styles&amp;only=styles&amp;skin=vector"/>
+						</head>
+						<body id="mwAA" lang="he" class="mw-content-rtl sitedir-rtl rtl mw-body-content parsoid-body mediawiki mw-parser-output" dir="rtl">
+							<section data-mw-section-id="0" id="mwAQ"></section>
+						</body>
+					</html>
+				`,
 				preloaded: false,
 				etag: '"1804/a4fc0409-ad18-11e8-9b45-dd8cefbedb6d"'
 			}
