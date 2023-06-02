@@ -23,7 +23,6 @@ use FlaggablePageView;
 use IBufferingStatsdDataFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\WikiPageFactory;
-use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\User\UserIdentity;
 use ObjectCache;
@@ -40,7 +39,6 @@ class ApiVisualEditorEdit extends ApiBase {
 	private const MAX_CACHE_TTL = 900;
 
 	private VisualEditorHookRunner $hookRunner;
-	private RevisionLookup $revisionLookup;
 	private PageEditStash $pageEditStash;
 	private SkinFactory $skinFactory;
 	private WikiPageFactory $wikiPageFactory;
@@ -50,7 +48,6 @@ class ApiVisualEditorEdit extends ApiBase {
 		ApiMain $main,
 		string $name,
 		VisualEditorHookRunner $hookRunner,
-		RevisionLookup $revisionLookup,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		PageEditStash $pageEditStash,
 		SkinFactory $skinFactory,
@@ -61,7 +58,6 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 		$this->setStats( $statsdDataFactory );
 		$this->hookRunner = $hookRunner;
-		$this->revisionLookup = $revisionLookup;
 		$this->pageEditStash = $pageEditStash;
 		$this->skinFactory = $skinFactory;
 		$this->wikiPageFactory = $wikiPageFactory;
@@ -138,7 +134,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 *
 	 * @param int $newRevId The revision to load
 	 * @param array $params Original request params
-	 * @return array|false The parsed of the save attempt
+	 * @return array Some properties haphazardly extracted from an action=parse API response
 	 */
 	protected function parseWikitext( $newRevId, array $params ) {
 		$apiParams = [
@@ -182,16 +178,6 @@ class ApiVisualEditorEdit extends ApiBase {
 			$result['parse']['modulestyles'] ?? []
 		);
 		$jsconfigvars = $result['parse']['jsconfigvars'] ?? [];
-
-		if (
-			$content === false ||
-			// TODO: Is this check still needed?
-			( strlen( $content ) && $this->revisionLookup
-				->getRevisionById( $result['parse']['revid'] ) === null
-			)
-		) {
-			return false;
-		}
 
 		if ( $displaytitle !== false ) {
 			// Escape entities as in OutputPage::setPageTitle()
@@ -465,9 +451,6 @@ class ApiVisualEditorEdit extends ApiBase {
 				// Return result of parseWikitext instead of saveWikitext so that the
 				// frontend can update the page rendering without a refresh.
 				$parseWikitextResult = $this->parseWikitext( $newRevId, $params );
-				if ( $parseWikitextResult === false ) {
-					$this->dieWithError( 'apierror-visualeditor-docserver', 'docserver' );
-				}
 
 				$result = array_merge( $result, $parseWikitextResult );
 

@@ -195,7 +195,6 @@
 			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditorEdit",
 			"services": [
 				"VisualEditorHookRunner",
-				"RevisionLookup",
 				"StatsdDataFactory",
 				"PageEditStash",
 				"SkinFactory",
