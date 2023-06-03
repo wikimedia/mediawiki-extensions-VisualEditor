@@ -615,6 +615,7 @@ ve.init.mw.ArticleTarget.prototype.replacePageContent = function (
  * Handle successful DOM save event.
  *
  * @param {Object} data Save data from the API
+ * @param {boolean} data.nocontent Indicates that page HTML and related properties were omitted
  * @param {string} data.content Rendered page HTML from server
  * @param {string} data.categorieshtml Rendered categories HTML from server
  * @param {number} data.newrevid New revision id, undefined if unchanged
@@ -638,7 +639,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	var target = this;
 
 	// This is a page creation, a restoration, or we loaded the editor from a non-view page: refresh the page.
-	if ( !this.pageExists || this.restoring || !this.isViewPage ) {
+	if ( data.nocontent ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
 			var newUrl = new URL( target.viewUrl );
@@ -1522,6 +1523,13 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		assert: mw.user.isAnon() ? 'anon' : 'user',
 		assertuser: mw.user.getName() || undefined
 	} );
+
+	if ( !this.pageExists || this.restoring || !this.isViewPage ) {
+		// This is a page creation, a restoration, or we loaded the editor from a non-view page.
+		// We can't update the interface to reflect this new state, so we're going to reload the whole page.
+		// Therefore we don't need the new revision's HTML content in the API response.
+		data.nocontent = true;
+	}
 
 	var config = mw.config.get( 'wgVisualEditorConfig' );
 

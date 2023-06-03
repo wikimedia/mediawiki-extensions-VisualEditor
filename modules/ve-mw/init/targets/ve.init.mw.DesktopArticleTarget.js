@@ -855,7 +855,8 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
-	if ( this.pageExists && !this.restoring ) {
+	// If there is no content, then parent method will reload the whole page
+	if ( !data.nocontent ) {
 		// Fix permalinks
 		if ( data.newrevid !== undefined ) {
 			$( '#t-permalink' ).add( '#coll-download-as-rl' ).find( 'a' ).each( function () {

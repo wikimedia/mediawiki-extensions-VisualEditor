@@ -21,6 +21,7 @@ use DifferenceEngine;
 use ExtensionRegistry;
 use FlaggablePageView;
 use IBufferingStatsdDataFactory;
+use IDBAccessObject;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Storage\PageEditStash;
@@ -442,17 +443,22 @@ class ApiVisualEditorEdit extends ApiBase {
 			} else {
 				// Success
 				$result['result'] = 'success';
-				if ( isset( $saveresult['edit']['newrevid'] ) ) {
-					$newRevId = intval( $saveresult['edit']['newrevid'] );
+
+				if ( $params['nocontent'] ) {
+					$result['nocontent'] = true;
 				} else {
-					$newRevId = $title->getLatestRevID();
+					if ( isset( $saveresult['edit']['newrevid'] ) ) {
+						$newRevId = intval( $saveresult['edit']['newrevid'] );
+					} else {
+						$newRevId = $title->getLatestRevID();
+					}
+
+					// Return result of parseWikitext instead of saveWikitext so that the
+					// frontend can update the page rendering without a refresh.
+					$parseWikitextResult = $this->parseWikitext( $newRevId, $params );
+
+					$result = array_merge( $result, $parseWikitextResult );
 				}
-
-				// Return result of parseWikitext instead of saveWikitext so that the
-				// frontend can update the page rendering without a refresh.
-				$parseWikitextResult = $this->parseWikitext( $newRevId, $params );
-
-				$result = array_merge( $result, $parseWikitextResult );
 
 				$result['isRedirect'] = (string)$title->isRedirect();
 
@@ -508,11 +514,8 @@ class ApiVisualEditorEdit extends ApiBase {
 			}
 
 			$this->hookRunner->onVisualEditorApiVisualEditorEditPostSave(
-			// The earlier call to $title->toPageIdentity() will have an article ID of 0 for new article
-			// creation. Because of title cache (Title::$titleCache), $title->getId() will change value during the
-			// parseWikitext() call in that case, but the ID of a PageIdentityValue object won't, so we need to create
-			// a new one here.
-				$title->toPageIdentity(),
+				// Refresh data (like article ID) in case we just created the page
+				$title->toPageRecord( IDBAccessObject::READ_LATEST ),
 				$user,
 				$wikitext,
 				$params,
@@ -577,6 +580,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			'captchaid' => null,
 			'captchaword' => null,
 			'cachekey' => null,
+			'nocontent' => false,
 			'useskin' => [
 				ParamValidator::PARAM_TYPE => array_keys( $this->skinFactory->getInstalledSkins() ),
 				ApiBase::PARAM_HELP_MSG => 'apihelp-parse-param-useskin',
