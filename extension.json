@@ -87,7 +87,8 @@
 			"value": "mobile"
 		},
 		"VisualEditorEnableWikitext": {
-			"value": false
+			"description": "Make the wikitext mode of VE available (also called 2017 Wikitext Editor). The corresponding per-user options is visualeditor-newwikitext.",
+			"value": true
 		},
 		"VisualEditorEnableWikitextBetaFeature": {
 			"value": false
