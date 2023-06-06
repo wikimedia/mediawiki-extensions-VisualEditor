@@ -32,7 +32,8 @@
 			"مشعل الحربي",
 			"Alshamiri1",
 			"FShbib",
-			"Karim185.3"
+			"Karim185.3",
+			"Hubaishan"
 		]
 	},
 	"collabpad-doctitle": "كولاب باد: $1",
@@ -317,7 +318,7 @@
 	"visualeditor-preference-enable": "تمكين المحرر المرئي. متوفر في {{PLURAL:$2|النطاق التالي|النطاقات التالية}}: $1",
 	"visualeditor-preference-newwikitexteditor-description": "فعل نمط نص الويكي الجديد داخل المحرر المرئي. لديه الكثير من الأدوات الموجودة في المحرر المرئي، ويستخدم تصميما مماثلا، ويسمح بتبديل أفضل بين الاثنين.",
 	"visualeditor-preference-newwikitexteditor-enable": "استخدم نمط نص الويكي داخل المحرر المرئي، بدلا من محرر نص ويكي مختلف.",
-	"visualeditor-preference-newwikitexteditor-label": "نمط نص الويكي الجديد",
+	"visualeditor-preference-newwikitexteditor-label": "نمط نص الويكي الجديد (محرر مصدري)",
 	"visualeditor-preference-tabs": "وضع التحرير:",
 	"visualeditor-preference-tabs-multi-tab": "أظهر تبويبي المحررين",
 	"visualeditor-preference-tabs-prefer-ve": "أظهر المحرر المرئي كلما أمكن",
