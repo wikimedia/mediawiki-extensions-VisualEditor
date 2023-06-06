@@ -21,6 +21,8 @@ ve.ui.MWEditSummaryWidget = function VeUiMWEditSummaryWidget( config ) {
 
 	// Parent method
 	ve.ui.MWEditSummaryWidget.super.call( this, ve.extendObject( {
+		autosize: true,
+		maxRows: 15,
 		inputFilter: function ( value ) {
 			// Prevent the user from inputting newlines (this kicks in on paste, etc.)
 			return value.replace( /\r?\n/g, ' ' );
@@ -101,6 +103,33 @@ ve.ui.MWEditSummaryWidget.static.getMatchingSummaries = function ( summaries, qu
 };
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWEditSummaryWidget.prototype.adjustSize = function () {
+	// To autosize, the widget will render another element beneath the input
+	// with the same text for measuring. This extra element could cause scrollbars
+	// to appear, changing the available width, so if scrollbars are intially
+	// hidden, force them to stay hidden during the adjustment.
+	// TODO: Consider upstreaming this?
+	var scrollContainer = this.getClosestScrollableElementContainer();
+	var hasScrollbar = scrollContainer.offsetWidth > scrollContainer.scrollWidth;
+	var overflowY;
+	if ( !hasScrollbar ) {
+		overflowY = scrollContainer.style.overflowY;
+		scrollContainer.style.overflowY = 'hidden';
+	}
+
+	// Parent method
+	ve.ui.MWEditSummaryWidget.super.prototype.adjustSize.apply( this, arguments );
+
+	if ( !hasScrollbar ) {
+		scrollContainer.style.overflowY = overflowY;
+	}
+
+	return this;
+};
 
 /**
  * @inheritdoc

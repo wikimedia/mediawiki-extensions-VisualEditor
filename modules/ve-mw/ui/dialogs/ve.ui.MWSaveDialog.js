@@ -572,6 +572,16 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 		dialog.updateOptionsBar();
 	} );
+	this.editSummaryInput.on( 'resize', function () {
+		if ( dialog.overflowTimeout !== undefined ) {
+			clearTimeout( dialog.overflowTimeout );
+		}
+		dialog.panels.$element.css( 'overflow', 'hidden' );
+		dialog.updateSize();
+		dialog.overflowTimeout = setTimeout( function () {
+			dialog.panels.$element.css( 'overflow', '' );
+		}, 250 );
+	} );
 
 	this.$saveCheckboxes = $( '<div>' ).addClass( 've-ui-mwSaveDialog-checkboxes' );
 	this.$saveOptions = $( '<div>' ).addClass( 've-ui-mwSaveDialog-options' ).append(
