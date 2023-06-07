@@ -93,7 +93,16 @@ ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 	{
 		name: 'help',
 		align: 'after',
-		include: [ 'help', 'notices' ]
+		type: 'mwHelpList',
+		icon: 'help',
+		indicator: null,
+		include: [ { group: 'help' } ],
+		promote: [ 'mwUserGuide' ]
+	},
+	{
+		name: 'notices',
+		align: 'after',
+		include: [ { group: 'notices' } ]
 	},
 	{
 		name: 'pageMenu',

@@ -32,6 +32,7 @@
 					"ve.ui.MW*Registry",
 					"ve.ui.MW*Surface",
 					"ve.ui.MW*Tool",
+					"ve.ui.MW*ToolGroup",
 					"ve.ui.MW*TransferHandler",
 					"ve.ui.MW*Widget",
 					"ve.ui.MW*Window"
