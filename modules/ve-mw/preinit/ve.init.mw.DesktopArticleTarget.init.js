@@ -761,8 +761,8 @@
 	// T156998: Don't trust 'oldid' query parameter, it'll be wrong if 'diff' or 'direction'
 	// is set to 'next' or 'prev'.
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
-	// wgFlaggedRevsEditLatestRevision is set by FlaggedRevs extension when viewing a stable revision
-	if ( oldId === mw.config.get( 'wgCurRevisionId' ) || mw.config.get( 'wgFlaggedRevsEditLatestRevision' ) ) {
+	// TODO: remove wgFlaggedRevsEditLatestRevision
+	if ( oldId === mw.config.get( 'wgCurRevisionId' ) || mw.config.get( 'wgEditLatestRevision' ) || mw.config.get( 'wgFlaggedRevsEditLatestRevision' ) ) {
 		// The page may have been edited by someone else after we loaded it, setting this to "undefined"
 		// indicates that we should load the actual latest revision.
 		oldId = undefined;
