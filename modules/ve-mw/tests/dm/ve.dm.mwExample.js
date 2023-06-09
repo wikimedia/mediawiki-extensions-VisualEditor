@@ -822,8 +822,8 @@ ve.dm.mwExample.domToDataCases = {
 		ceHtml: ve.dm.example.singleLine`
 			<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">
 			<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>
-			<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="${new URL( './File:Wiki.png', ve.dm.mwExample.baseUri )}">
-				<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">
+			<a class="mw-file-description ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="${new URL( './File:Wiki.png', ve.dm.mwExample.baseUri )}">
+				<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" class="mw-file-element" width="135" height="155" style="vertical-align: text-top;">
 			</a>
 			${ve.dm.example.inlineSlug}
 			</p>
@@ -843,8 +843,8 @@ ve.dm.mwExample.domToDataCases = {
 		ceHtml: ve.dm.example.singleLine`
 			<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">
 			<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>
-			<a class="ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="${new URL( './File:Wiki.png', ve.dm.mwExample.baseUri )}">
-				<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" width="135" height="155" style="vertical-align: text-top;">
+			<a class="mw-file-description ve-ce-leafNode ve-ce-focusableNode ve-ce-mwInlineImageNode" contenteditable="false" href="${new URL( './File:Wiki.png', ve.dm.mwExample.baseUri )}">
+				<img src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" class="mw-file-element" width="135" height="155" style="vertical-align: text-top;">
 			</a>
 			${ve.dm.example.inlineSlug}
 			</p>
