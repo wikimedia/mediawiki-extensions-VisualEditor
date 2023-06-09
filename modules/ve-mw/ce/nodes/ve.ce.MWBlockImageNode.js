@@ -33,15 +33,19 @@ ve.ce.MWBlockImageNode = function VeCeMWBlockImageNode() {
 	// Build DOM:
 	if ( isError ) {
 		$image = $( [] );
-		var $missingImage = $( '<span>' ).text( this.model.getAttribute( 'errorText' ) );
+		var $missingImage = $( '<span>' )
+			.addClass( 'mw-file-element mw-broken-media' )
+			.text( this.model.getAttribute( 'errorText' ) );
 		this.$a = $( '<a>' )
 			.addClass( 'new' )
 			.append( $missingImage );
 		$focusable = $missingImage;
 	} else {
 		$image = $( '<img>' )
+			.addClass( 'mw-file-element' )
 			.attr( 'src', this.getResolvedAttribute( 'src' ) );
 		this.$a = $( '<a>' )
+			.addClass( 'mw-file-description' )
 			.append( $image );
 		// T322704
 		ve.setAttributeSafe( this.$a[ 0 ], 'href', this.getResolvedAttribute( 'href' ) || '', '#' );
