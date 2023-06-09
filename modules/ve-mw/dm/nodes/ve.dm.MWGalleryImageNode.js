@@ -51,7 +51,7 @@ ve.dm.MWGalleryImageNode.static.handlesOwnChildren = true;
 ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converter ) {
 	// TODO: Improve handling of missing files. See 'isError' in MWBlockImageNode#toDataElement
 	var li = domElements[ 0 ];
-	var img = li.querySelector( 'img,audio,video,span[resource]' );
+	var img = li.querySelector( '.mw-file-element' );
 	var a = img.parentNode;
 	var container = a.parentNode;
 
