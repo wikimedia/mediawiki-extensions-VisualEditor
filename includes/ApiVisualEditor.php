@@ -474,7 +474,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @return bool
 	 */
 	public static function isAllowedNamespace( Config $config, $namespaceId ) {
-		return in_array( $namespaceId, self::getAvailableNamespaceIds( $config ) );
+		return in_array( $namespaceId, self::getAvailableNamespaceIds( $config ), true );
 	}
 
 	/**
