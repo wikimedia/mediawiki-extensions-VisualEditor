@@ -84,6 +84,9 @@ class DirectParsoidClient implements ParsoidClient {
 
 		$helper->init( $page, [], $user, $revision );
 
+		// Ensure we get a compatible version, not just the default
+		$helper->setOutputProfileVersion( self::PARSOID_VERSION );
+
 		$helper->setStashingEnabled( $stash );
 		if ( !$stash ) {
 			$helper->setFlavor( $flavor );
