@@ -643,13 +643,17 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 		this.teardown().then( function () {
 			var newUrl = new URL( target.viewUrl );
 			if ( data.newrevid !== undefined ) {
+				// For GrowthExperiments
+				newUrl.searchParams.set( 'venotify', 'saved' );
+				var action;
 				if ( target.restoring ) {
-					newUrl.searchParams.set( 'venotify', 'restored' );
+					action = 'restored';
 				} else if ( !target.pageExists ) {
-					newUrl.searchParams.set( 'venotify', 'created' );
+					action = 'created';
 				} else {
-					newUrl.searchParams.set( 'venotify', 'saved' );
+					action = 'saved';
 				}
+				require( 'mediawiki.action.view.postEdit' ).fireHookOnPageReload( action );
 			}
 			if ( data.isRedirect ) {
 				newUrl.searchParams.set( 'redirect', 'no' );

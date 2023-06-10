@@ -451,8 +451,6 @@
 				"lastmodifiedat",
 				"mw-widgets-abandonedit",
 				"pagetitle",
-				"postedit-confirmation-published",
-				"postedit-confirmation-saved",
 				"visualeditor-section-body-placeholder",
 				"visualeditor-section-title-placeholder"
 			]
@@ -749,6 +747,7 @@
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mwextensions",
 				"ext.visualEditor.mwsave",
+				"mediawiki.action.view.postEdit",
 				"mediawiki.widgets.AbandonEditDialog"
 			],
 			"messages": [
