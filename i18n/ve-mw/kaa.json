@@ -100,6 +100,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-description": "Maydan toltırılıwı shárt",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Artqa qaytıw",
 	"visualeditor-dialogbutton-template-tooltip": "Úlgi",
+	"visualeditor-editconflict": "Siziń ózgerislerińiz redaktorlaw konflikti sebepli saqlanbadı. {{GENDER:|Siz}} konfliktti qoldan sheshiwdi qáleysiz be?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|dana eskertkish|dana eskertkish}}",
 	"visualeditor-editnotices-tooltip": "Redaktorlaw eskertkishleri",
 	"visualeditor-editsummary": "Islegen ózgerislerińizge sıpatlama berińiz",
