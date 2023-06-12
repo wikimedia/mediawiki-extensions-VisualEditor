@@ -88,13 +88,16 @@ OO.inheritClass( ve.init.mw.DesktopArticleTarget, ve.init.mw.ArticleTarget );
 
 /* Static Properties */
 
-ve.init.mw.DesktopArticleTarget.static.actionGroups = [
+ve.init.mw.DesktopArticleTarget.static.toolbarGroups = ve.copy( ve.init.mw.DesktopArticleTarget.static.toolbarGroups );
+ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 	{
 		name: 'help',
+		align: 'after',
 		include: [ 'help', 'notices' ]
 	},
 	{
 		name: 'pageMenu',
+		align: 'after',
 		type: 'list',
 		icon: 'menu',
 		indicator: null,
@@ -105,6 +108,7 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 	},
 	{
 		name: 'editMode',
+		align: 'after',
 		type: 'list',
 		icon: 'edit',
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
@@ -114,10 +118,11 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 	},
 	{
 		name: 'save',
+		align: 'after',
 		type: 'bar',
 		include: [ 'showSave' ]
 	}
-];
+);
 
 /**
  * Compatibility map used with jQuery.client to decide if a browser should
