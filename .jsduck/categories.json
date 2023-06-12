@@ -20,8 +20,20 @@
 				"name": "User Interface",
 				"classes": [
 					"ve.ui.MWAriaDescribe",
+					"ve.ui.MW*Action",
+					"ve.ui.MW*Command",
+					"ve.ui.MW*ContextItem",
+					"ve.ui.MW*Dialog",
+					"ve.ui.MW*Element",
+					"ve.ui.MW*Factory",
+					"ve.ui.MW*Inspector",
 					"ve.ui.MW*Layout",
 					"ve.ui.MW*Page",
+					"ve.ui.MW*Registry",
+					"ve.ui.MW*Surface",
+					"ve.ui.MW*Tool",
+					"ve.ui.MW*TransferHandler",
+					"ve.ui.MW*Widget",
 					"ve.ui.MW*Window"
 				]
 			},
@@ -38,6 +50,10 @@
 			{
 				"name": "Data Model",
 				"classes": [
+					"ve.dm.MW*Annotation",
+					"ve.dm.MW*MetaItem",
+					"ve.dm.MW*Model",
+					"ve.dm.MW*Node",
 					"ve.dm.MW*Surface",
 					"ve.dm.MW*SurfaceFragment"
 				]
@@ -45,6 +61,8 @@
 			{
 				"name": "ContentEditable",
 				"classes": [
+					"ve.ce.MW*Annotation",
+					"ve.ce.MW*Node",
 					"ve.ce.MW*Surface"
 				]
 			}
