@@ -108,6 +108,12 @@
 	}
 
 	mw.hook( 'wikipage.diff' ).add( function () {
+		if ( mw.config.get( 'wgDiffOldId' ) === false || mw.config.get( 'wgDiffNewId' ) === false ) {
+			// Don't offer visual diffs for "fake" diffs where the revision to compare to is not given,
+			// e.g. when viewing a "diff" of page creation (T338388)
+			return;
+		}
+
 		$wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
 		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' )
 			.add( $wikitextDiffContainer.find( 'td.diff-multi, td.diff-notice' ).parent() );
