@@ -299,7 +299,9 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 		// Reset to visual mode for target widgets
 		modes: [ 'visual' ],
 		defaultMode: 'visual',
-		toolbarGroups: this.toolbarGroups,
+		toolbarGroups: this.toolbarGroups.filter( function ( group ) {
+			return group.align !== 'after';
+		} ),
 		surfaceClasses: this.getSurfaceClasses()
 	}, config ) );
 };
