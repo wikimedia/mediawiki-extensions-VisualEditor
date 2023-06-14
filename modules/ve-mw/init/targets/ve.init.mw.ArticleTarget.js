@@ -73,7 +73,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
 	// Use undefined instead of 0 for new documents (T262838)
-	this.requestedRevId = mw.config.get( 'wgRevisionId' ) || undefined;
+	this.requestedRevId = mw.config.get( 'wgEditLatestRevision' ) ? mw.config.get( 'wgCurRevisionId' ) : mw.config.get( 'wgRevisionId' ) || undefined;
 	this.currentRevisionId = mw.config.get( 'wgCurRevisionId' ) || undefined;
 	this.revid = this.requestedRevId || this.currentRevisionId;
 
