@@ -990,24 +990,32 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.changeDocumentTitle = function () {
 	var title = mw.Title.newFromText( this.getPageName() );
-
-	// Use the real title if we loaded a view page, otherwise reconstruct it
-	this.originalDocumentTitle = this.isViewPage ? document.title : ve.msg( 'pagetitle', title.getPrefixedText() );
-
-	// Reconstruct an edit title
-	document.title = ve.msg( 'pagetitle',
+	var pageTitleMsg = mw.message( 'pagetitle',
 		ve.msg(
 			this.pageExists ? 'editing' : 'creating',
 			title.getPrefixedText()
 		)
 	);
+
+	// T317600
+	if ( pageTitleMsg.isParseable() ) {
+		// Use the real title if we loaded a view page, otherwise reconstruct it
+		this.originalDocumentTitle = this.isViewPage ? document.title : ve.msg( 'pagetitle', title.getPrefixedText() );
+		// Reconstruct an edit title
+		document.title = pageTitleMsg.text();
+	} else {
+		mw.log.warn( 'VisualEditor: MediaWiki:Pagetitle contains unsupported syntax. ' +
+			'https://www.mediawiki.org/wiki/Manual:Messages_API#Feature_support_in_JavaScript' );
+	}
 };
 
 /**
  * Restore the original document title.
  */
 ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
-	document.title = this.originalDocumentTitle;
+	if ( this.originalDocumentTitle ) {
+		document.title = this.originalDocumentTitle;
+	}
 };
 
 /**
