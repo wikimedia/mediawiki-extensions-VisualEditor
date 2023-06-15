@@ -310,6 +310,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		// Properties that don't come from the API
 		this.initialSourceRange = data.initialSourceRange;
 		this.recovered = data.recovered;
+		this.isRedirect = false;
 
 		// Parse data this not available in RESTBase
 		if ( !this.parseMetadata( response ) ) {
@@ -363,6 +364,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	mw.messages.set( data.checkboxesMessages );
 
 	this.canEdit = data.canEdit;
+	this.wouldautocreate = data.wouldautocreate;
 
 	// When docRevId is `undefined` it indicates that the page doesn't exist
 	var docRevId;
@@ -523,6 +525,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			starttimestamp: this.startTimeStamp,
 			oldid: this.revid,
 			canEdit: this.canEdit,
+			wouldautocreate: this.wouldautocreate,
 			copyrightWarning: this.copyrightWarning,
 			checkboxesDef: this.checkboxesDef,
 			checkboxesMessages: this.checkboxesMessages
@@ -627,6 +630,8 @@ ve.init.mw.ArticleTarget.prototype.replacePageContent = function (
  * @param {Array} data.modules The modules to be loaded on the page
  * @param {Object} data.jsconfigvars The mw.config values needed on the page
  * @param {Array} data.sections Section data to display in the TOC
+ * @param {boolean} data.tempusercreated True if we just became logged in as a temporary user
+ * @param {string} data.tempusercreatedredirect URL to visit to finish creating temp account
  * @fires save
  */
 ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
@@ -638,28 +643,33 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 
 	var target = this;
 
-	// This is a page creation, a restoration, or we loaded the editor from a non-view page: refresh the page.
-	if ( data.nocontent ) {
+	// This is a page creation, a restoration, or we loaded the editor from a non-view page,
+	// or we just became logged in as a temporary user: refresh the page.
+	if ( data.nocontent || data.tempusercreated ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
-			var newUrl = new URL( target.viewUrl );
-			if ( data.newrevid !== undefined ) {
-				// For GrowthExperiments
-				newUrl.searchParams.set( 'venotify', 'saved' );
-				var action;
-				if ( target.restoring ) {
-					action = 'restored';
-				} else if ( !target.pageExists ) {
-					action = 'created';
-				} else {
-					action = 'saved';
+			if ( data.tempusercreatedredirect ) {
+				location.href = data.tempusercreatedredirect;
+			} else {
+				var newUrl = new URL( target.viewUrl );
+				if ( data.newrevid !== undefined ) {
+					// For GrowthExperiments
+					newUrl.searchParams.set( 'venotify', 'saved' );
+					var action;
+					if ( target.restoring ) {
+						action = 'restored';
+					} else if ( !target.pageExists ) {
+						action = 'created';
+					} else {
+						action = 'saved';
+					}
+					require( 'mediawiki.action.view.postEdit' ).fireHookOnPageReload( action );
 				}
-				require( 'mediawiki.action.view.postEdit' ).fireHookOnPageReload( action );
+				if ( data.isRedirect ) {
+					newUrl.searchParams.set( 'redirect', 'no' );
+				}
+				location.href = newUrl;
 			}
-			if ( data.isRedirect ) {
-				newUrl.searchParams.set( 'redirect', 'no' );
-			}
-			location.href = newUrl;
 		} );
 	} else {
 		// Update watch link to match 'watch checkbox' in save dialog.
@@ -1531,6 +1541,14 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 		data.nocontent = true;
 	}
 
+	if ( this.wouldautocreate ) {
+		// This means that we might need to redirect to an opaque URL,
+		// so we must set up query parameters we want ahead of time.
+		// TODO: `this.isRedirect` is only set in visual mode, not in source mode
+		data.returntoquery = this.isRedirect ? 'redirect=no' : '';
+		data.returntoanchor = this.getSectionHashFromPage();
+	}
+
 	var config = mw.config.get( 'wgVisualEditorConfig' );
 
 	var taglist = data.vetags ? data.vetags.split( ',' ) : [];
@@ -2261,6 +2279,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
 		data.starttimestamp = target.startTimeStamp;
 		data.oldid = target.revid;
 		data.canEdit = target.canEdit;
+		data.wouldautocreate = target.wouldautocreate;
 		data.checkboxesDef = target.checkboxesDef;
 		// Wrap up like a response object as that is what dataPromise is expected to be
 		return { visualeditoredit: data };
@@ -2428,6 +2447,7 @@ ve.init.mw.ArticleTarget.prototype.updateRedirectInterface = function ( $sub, $m
  * @param {string|null} title Current redirect target, or null if none
  */
 ve.init.mw.ArticleTarget.prototype.setFakeRedirectInterface = function ( title ) {
+	this.isRedirect = !!title;
 	this.updateRedirectInterface(
 		title ? this.constructor.static.buildRedirectSub() : $(),
 		title ? this.constructor.static.buildRedirectMsg( title ) : $()
