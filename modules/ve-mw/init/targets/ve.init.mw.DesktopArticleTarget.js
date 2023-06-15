@@ -101,7 +101,8 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		title: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 		label: ve.msg( 'visualeditor-pagemenu-tooltip' ),
 		invisibleLabel: true,
-		include: [ 'meta', 'categories', 'settings', 'advancedSettings', 'languages', 'templatesUsed', 'changeDirectionality', 'findAndReplace' ]
+		include: [ { group: 'utility' } ],
+		demote: [ 'changeDirectionality', 'findAndReplace' ]
 	},
 	{
 		name: 'editMode',
@@ -110,12 +111,12 @@ ve.init.mw.DesktopArticleTarget.static.actionGroups = [
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
 		label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
 		invisibleLabel: true,
-		include: [ 'editModeVisual', 'editModeSource' ]
+		include: [ { group: 'editMode' } ]
 	},
 	{
 		name: 'save',
 		type: 'bar',
-		include: [ 'showSave' ]
+		include: [ { group: 'save' } ]
 	}
 ];
 

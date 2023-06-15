@@ -92,7 +92,7 @@ OO.inheritClass( ve.ui.MWNoticesPopupTool, ve.ui.MWPopupTool );
 /* Static Properties */
 
 ve.ui.MWNoticesPopupTool.static.name = 'notices';
-ve.ui.MWNoticesPopupTool.static.group = 'utility';
+ve.ui.MWNoticesPopupTool.static.group = 'help';
 ve.ui.MWNoticesPopupTool.static.icon = 'alert';
 ve.ui.MWNoticesPopupTool.static.title = OO.ui.deferMsg( 'visualeditor-editnotices-tooltip' );
 ve.ui.MWNoticesPopupTool.static.autoAddToCatchall = false;
@@ -223,7 +223,7 @@ OO.inheritClass( ve.ui.MWHelpPopupTool, ve.ui.MWPopupTool );
 /* Static Properties */
 
 ve.ui.MWHelpPopupTool.static.name = 'help';
-ve.ui.MWHelpPopupTool.static.group = 'utility';
+ve.ui.MWHelpPopupTool.static.group = 'help';
 ve.ui.MWHelpPopupTool.static.icon = 'help';
 ve.ui.MWHelpPopupTool.static.title = OO.ui.deferMsg( 'visualeditor-help-tool' );
 ve.ui.MWHelpPopupTool.static.autoAddToCatchall = false;

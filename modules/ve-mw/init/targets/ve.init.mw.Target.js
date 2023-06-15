@@ -49,7 +49,7 @@ ve.init.mw.Target.static.name = null;
 ve.init.mw.Target.static.toolbarGroups = [
 	{
 		name: 'history',
-		include: [ 'undo', 'redo' ]
+		include: [ { group: 'history' } ]
 	},
 	{
 		name: 'format',
