@@ -134,6 +134,16 @@ ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove = ve.extendOb
 	'a[ href *= "#cite_note" ]': true
 }, ve.init.mw.Target.static.importRules.external.htmlBlacklist.remove );
 
+// This is required to prevent an invalid insertion (as mwHeading can only be at the root) (T339155)
+// TODO: This should be handled by the DM based on ve.dm.MWHeadingNode.static.suggestedParentNodeTypes,
+// rather than just throwing an exception.
+// This would also not prevent pasting from a VE standalone editor as that is considered
+// an internal paste.
+ve.init.mw.Target.static.importRules.external.htmlBlacklist.unwrap = ve.extendObject( {
+	'li h1, li h2, li h3, li h4, li h5, li h6': true,
+	'blockquote h1, blockquote h2, blockquote h3, blockquote h4, blockquote h5, blockquote h6': true
+}, ve.init.mw.Target.static.importRules.external.htmlBlacklist.unwrap );
+
 /**
  * Type of integration. Used for event tracking.
  *
