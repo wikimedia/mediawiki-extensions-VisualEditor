@@ -1096,6 +1096,7 @@
 				"lib/ve/src/ui/tools/ve.ui.CommentInspectorTool.js",
 				"lib/ve/src/ui/tools/ve.ui.ToolbarDialogTool.js",
 				"lib/ve/src/ui/tools/ve.ui.FormatTool.js",
+				"lib/ve/src/ui/tools/ve.ui.HelpCompletionTool.js",
 				"lib/ve/src/ui/tools/ve.ui.HistoryTool.js",
 				"lib/ve/src/ui/tools/ve.ui.IndentationTool.js",
 				"lib/ve/src/ui/tools/ve.ui.ListTool.js",
