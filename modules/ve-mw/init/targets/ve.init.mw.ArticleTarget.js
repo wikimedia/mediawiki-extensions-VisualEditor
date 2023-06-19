@@ -1109,11 +1109,15 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	this.events.trackActivationStart( mw.libs.ve.activationStart );
 	mw.libs.ve.activationStart = null;
 
+	var url = new URL( location.href );
 	dataPromise = dataPromise || mw.libs.ve.targetLoader.requestPageData( this.getDefaultMode(), this.getPageName(), {
 		sessionStore: true,
 		section: this.section,
 		oldId: this.requestedRevId,
-		targetName: this.constructor.static.trackingName
+		targetName: this.constructor.static.trackingName,
+		editintro: url.searchParams.get( 'editintro' ),
+		preload: url.searchParams.get( 'preload' ),
+		preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams )
 	} );
 
 	this.loading = dataPromise;
@@ -2295,12 +2299,16 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 				windowManager.destroy();
 			} );
 	} else {
+		var url = new URL( location.href );
 		var dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.getPageName(), {
 			oldId: this.revid,
 			targetName: this.constructor.static.trackingName,
 			modified: this.edited,
 			wikitext: this.getDocToSave(),
-			section: this.section
+			section: this.section,
+			editintro: url.searchParams.get( 'editintro' ),
+			preload: url.searchParams.get( 'preload' ),
+			preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams )
 		} );
 
 		this.reloadSurface( 'visual', dataPromise );
