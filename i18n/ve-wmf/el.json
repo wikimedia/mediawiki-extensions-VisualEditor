@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Astralnet",
+			"DesVaMan",
 			"Dipa1965",
 			"Evropi",
 			"FocalPoint",
@@ -14,6 +15,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-references-description": "To ΕδιτΨηεψκ θεωρεί ότι μπορεί να χρειαζόταν μια αναφορά σε αυτήν την τροποποίηση",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Οπτική επεξεργασία]]",
 	"tag-visualeditor-description": "Επεξεργασία που έγινε με χρήση του [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Οπτική επεξεργασία: Έλεγχος]]",

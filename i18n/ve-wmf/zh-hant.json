@@ -10,6 +10,7 @@
 			"Deryck Chan",
 			"Hydra",
 			"Justincheng12345",
+			"Kly",
 			"LNDDYL",
 			"Liflon",
 			"Liuxinyu970226",
@@ -25,6 +26,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck 認為此編輯可能需要參考來源",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯]]",
 	"tag-visualeditor-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]]完成的編輯",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器：需要檢查]]",
