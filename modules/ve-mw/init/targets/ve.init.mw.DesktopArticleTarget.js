@@ -418,6 +418,10 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 
 		$( 'html' ).addClass( 've-activating' );
 		ve.promiseAll( [ this.activatingDeferred, this.toolbarSetupDeferred ] ).done( function () {
+			if ( !target.suppressNormalStartupDialogs ) {
+				target.maybeShowWelcomeDialog();
+				target.maybeShowMetaDialog();
+			}
 			target.afterActivate();
 		} ).fail( function () {
 			$( 'html' ).removeClass( 've-activating' );
@@ -759,10 +763,6 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	}
 
 	this.setupUnloadHandlers();
-	if ( !this.suppressNormalStartupDialogs ) {
-		this.maybeShowWelcomeDialog();
-		this.maybeShowMetaDialog();
-	}
 
 	this.activatingDeferred.resolve();
 	this.events.trackActivationComplete();
