@@ -1293,7 +1293,7 @@
 					section = parseSection( linkUrl.searchParams.get( 'section' ) );
 				}
 				var tPromise = getTarget( mode, section );
-				activateTarget( mode, section, tPromise, e.target );
+				activateTarget( mode, section, tPromise );
 			}
 		},
 
