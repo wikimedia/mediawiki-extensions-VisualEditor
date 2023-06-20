@@ -853,15 +853,7 @@
 						return;
 					}
 
-					var linkUrl;
-					try {
-						linkUrl = new URL( this.href );
-					} catch ( err ) {
-						var customErr = new Error( 'URL error when parsing value: ' + JSON.stringify( this.href ) );
-						customErr.name = 'VeUrlError';
-						mw.errorLogger.logError( customErr, 'error.visualeditor' );
-						return;
-					}
+					var linkUrl = new URL( this.href );
 					if ( linkUrl.searchParams.has( 'action' ) ) {
 						linkUrl.searchParams.delete( 'action' );
 						linkUrl.searchParams.set( 'veaction', 'editsource' );
@@ -1246,15 +1238,7 @@
 				return;
 			}
 
-			var linkUrl;
-			try {
-				linkUrl = new URL( e.target.href );
-			} catch ( err ) {
-				var customErr = new Error( 'URL error when parsing value: ' + JSON.stringify( e.target.href ) );
-				customErr.name = 'VeUrlError';
-				mw.errorLogger.logError( customErr, 'error.visualeditor' );
-				return;
-			}
+			var linkUrl = new URL( e.target.href );
 			var title = mw.Title.newFromText( linkUrl.searchParams.get( 'title' ) || '' );
 
 			if (
