@@ -600,6 +600,7 @@
 
 				var deactivating = target.deactivatingDeferred || $.Deferred().resolve();
 				return deactivating.then( function () {
+					target.currentUrl = new URL( location.href );
 					var activatePromise = target.activate( dataPromise );
 
 					// toolbarSetupDeferred resolves slightly before activatePromise, use done
@@ -638,17 +639,15 @@
 		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode }, linkUrl );
 
 		if ( !active ) {
-			if ( url.searchParams.get( 'action' ) !== 'edit' && !( url.searchParams.get( 'veaction' ) in veactionToMode ) ) {
-				// Replace the current state with one that is tagged as ours, to prevent the
-				// back button from breaking when used to exit VE. FIXME: there should be a better
-				// way to do this. See also similar code in the DesktopArticleTarget constructor.
-				history.replaceState( { tag: 'visualeditor' }, '', url );
-				// Set action=edit or veaction=edit/editsource
-				// Use linkUrl to preserve parameters like 'editintro' (T56029)
-				history.pushState( { tag: 'visualeditor' }, '', linkUrl || ( mode === 'source' ? veEditSourceUrl : veEditUrl ) );
-				// Update URL instance
-				url = linkUrl || veEditUrl;
-			}
+			// Replace the current state with one that is tagged as ours, to prevent the
+			// back button from breaking when used to exit VE. FIXME: there should be a better
+			// way to do this. See also similar code in the DesktopArticleTarget constructor.
+			history.replaceState( { tag: 'visualeditor' }, '', url );
+			// Set action=edit or veaction=edit/editsource
+			// Use linkUrl to preserve parameters like 'editintro' (T56029)
+			history.pushState( { tag: 'visualeditor' }, '', linkUrl || ( mode === 'source' ? veEditSourceUrl : veEditUrl ) );
+			// Update URL instance
+			url = linkUrl || veEditUrl;
 
 			activateTarget( mode, section, undefined, modified );
 		}
@@ -1262,14 +1261,12 @@
 			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode }, linkUrl );
 
 			if ( !active ) {
-				if ( url.searchParams.get( 'action' ) !== 'edit' && !( url.searchParams.get( 'veaction' ) in veactionToMode ) ) {
-					// Replace the current state with one that is tagged as ours, to prevent the
-					// back button from breaking when used to exit VE. FIXME: there should be a better
-					// way to do this. See also similar code in the DesktopArticleTarget constructor.
-					history.replaceState( { tag: 'visualeditor' }, '', url );
-					// Use linkUrl to preserve the 'section' parameter and others like 'editintro' (T56029)
-					history.pushState( { tag: 'visualeditor' }, '', linkUrl );
-				}
+				// Replace the current state with one that is tagged as ours, to prevent the
+				// back button from breaking when used to exit VE. FIXME: there should be a better
+				// way to do this. See also similar code in the DesktopArticleTarget constructor.
+				history.replaceState( { tag: 'visualeditor' }, '', url );
+				// Use linkUrl to preserve the 'section' parameter and others like 'editintro' (T56029)
+				history.pushState( { tag: 'visualeditor' }, '', linkUrl );
 				// Update URL instance
 				url = linkUrl;
 

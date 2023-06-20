@@ -1094,8 +1094,8 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 	var veaction = this.getDefaultMode() === 'visual' ? 'edit' : 'editsource',
 		section = this.section;
 
-	// Push veaction=edit(source) url in history (if not already. If we got here by a veaction=edit(source)
-	// permalink then it will be there already and the constructor called #activate)
+	// Push veaction=edit(source) url in history (if not already present).
+	// If we got here from DesktopArticleTarget.init, then it will be already present.
 	if (
 		!this.actFromPopState &&
 		(
