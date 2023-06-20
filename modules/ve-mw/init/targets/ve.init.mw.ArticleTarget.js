@@ -2213,8 +2213,6 @@ ve.init.mw.ArticleTarget.prototype.getSectionHashFromPage = function () {
  * @param {boolean} [modified=false] Whether there were any changes at all.
  */
 ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
-	var target = this;
-
 	// When switching with changes we always pass the full page as changes in visual section mode
 	// can still affect the whole document (e.g. removing a reference)
 	if ( modified ) {
@@ -2222,24 +2220,12 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 	}
 
 	if ( this.isModeAvailable( 'source' ) ) {
-		var dataPromise;
 		if ( !modified ) {
-			dataPromise = mw.libs.ve.targetLoader.requestPageData( 'source', this.getPageName(), {
-				sessionStore: true,
-				section: this.section,
-				oldId: this.requestedRevId,
-				targetName: this.constructor.static.trackingName
-			} ).then(
-				function ( response ) { return response; },
-				function () {
-					// TODO: Some sort of progress bar?
-					return target.switchToFallbackWikitextEditor( modified );
-				}
-			);
+			this.reloadSurface( 'source' );
 		} else {
-			dataPromise = this.getWikitextDataPromiseForDoc( modified );
+			var dataPromise = this.getWikitextDataPromiseForDoc( modified );
+			this.reloadSurface( 'source', dataPromise );
 		}
-		this.reloadSurface( 'source', dataPromise );
 	} else {
 		this.switchToFallbackWikitextEditor( modified );
 	}
