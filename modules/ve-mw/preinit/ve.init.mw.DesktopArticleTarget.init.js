@@ -1163,7 +1163,8 @@
 					}
 				} );
 			} else {
-				var linkUrl = e.target.href ? new URL( e.target.href ) : null;
+				var link = $( e.target ).closest( 'a' )[ 0 ];
+				var linkUrl = link && link.href ? new URL( link.href ) : null;
 				if ( section !== null ) {
 					init.activateVe( mode, linkUrl, section );
 				} else {
@@ -1233,12 +1234,13 @@
 		 * @param {string} [section] Override edit section, taken from link URL if not specified
 		 */
 		onEditSectionLinkClick: function ( mode, e, section ) {
-			if ( !e.target.href ) {
+			var link = $( e.target ).closest( 'a' )[ 0 ];
+			if ( !link || !link.href ) {
 				// Not a real link, probably added by a gadget or another extension (T328094)
 				return;
 			}
 
-			var linkUrl = new URL( e.target.href );
+			var linkUrl = new URL( link.href );
 			var title = mw.Title.newFromText( linkUrl.searchParams.get( 'title' ) || '' );
 
 			if (
