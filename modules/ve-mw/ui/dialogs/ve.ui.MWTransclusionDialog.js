@@ -151,6 +151,10 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function ( e ) {
 		part = this.transclusionModel.getPartFromId( partId );
 	}
 
+	if ( this.transclusionModel.isSingleTemplate() ) {
+		part = this.transclusionModel.getParts()[ 0 ];
+	}
+
 	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
 		return;
 	}
