@@ -852,12 +852,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onViewTabClick = function ( e ) {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
-	// Desktop post-edit notification
-	if ( this.pageExists && !this.restoring && data.newrevid !== undefined ) {
-		// Append postEdit module to the list that will be loaded in the parent method
-		data.modules = data.modules.concat( [ 'mediawiki.action.view.postEdit' ] );
-	}
-
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
@@ -873,12 +867,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 
 		// Actually fire the postEdit hook now that the save is complete
 		if ( data.newrevid !== undefined ) {
-			mw.hook( 'postEdit' ).fire( {
-				// The following messages are used here:
-				// * postedit-confirmation-published
-				// * postedit-confirmation-saved
-				message: ve.msg( 'postedit-confirmation-' + ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ? 'published' : 'saved' ), mw.user )
-			} );
+			require( 'mediawiki.action.view.postEdit' ).fireHook( 'saved' );
 		}
 	}
 };

@@ -1701,15 +1701,6 @@
 		}
 
 		if ( url.searchParams.has( 'venotify' ) ) {
-			var notify = url.searchParams.get( 'venotify' );
-
-			// wgPostEdit can be "saved", "created", "restored" or null for null edits.
-			// TODO: Also set wgPostEdit on non-redirecting edits (T240041)
-			mw.config.set( 'wgPostEdit', notify );
-
-			// Loading postEdit code will trigger the post edit notification as wgPostEdit is set
-			mw.loader.load( 'mediawiki.action.view.postEdit' );
-
 			url.searchParams.delete( 'venotify' );
 			// Get rid of the ?venotify= from the URL
 			history.replaceState( null, '', url );
