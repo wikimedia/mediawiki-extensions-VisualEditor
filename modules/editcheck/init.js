@@ -14,10 +14,12 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel ) {
 			} else if ( op.type === 'replace' ) {
 				var insertedRange = new ve.Range( offset, offset + op.insert.length );
 				offset += op.insert.length;
-				ve.batchPush(
-					ranges,
-					mw.editcheck.getContentRanges( documentModel, insertedRange )
-				);
+				if ( op.remove.length === 0 ) {
+					ve.batchPush(
+						ranges,
+						mw.editcheck.getContentRanges( documentModel, insertedRange )
+					);
+				}
 			}
 			// Reached the end of the doc / start of internal list, stop searching
 			return offset < endOffset;
