@@ -1174,9 +1174,6 @@
 
 		activateVe: function ( mode, linkUrl, section ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
-				config = mw.config.get( 'wgVisualEditorConfig' ),
-				// NOTE: should be just config.allowSwitchingToVisualMode, but we need to preserve compatibility for a few minutes.
-				canSwitch = config.allowSwitchingToVisualMode || config.fullRestbaseUrl || config.allowLossySwitching,
 				modified = mw.config.get( 'wgAction' ) === 'submit' ||
 					(
 						mw.config.get( 'wgAction' ) === 'edit' &&
@@ -1194,34 +1191,8 @@
 			}
 
 			// Release the edit warning on #wpTextbox1 which was setup in mediawiki.action.edit.editWarning.js
-			function releaseOldEditWarning() {
-				$( window ).off( 'beforeunload.editwarning' );
-			}
-
-			if ( modified && !canSwitch ) {
-				mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
-					var windowManager = new OO.ui.WindowManager(),
-						switchWindow = new mw.libs.ve.SwitchConfirmDialog();
-
-					$( document.body ).append( windowManager.$element );
-					windowManager.addWindows( [ switchWindow ] );
-					windowManager.openWindow( switchWindow )
-						.closed.then( function ( data ) {
-							// TODO: windowManager.destroy()?
-							if ( data && data.action === 'discard' ) {
-								releaseOldEditWarning();
-								setEditorPreference( 'visualeditor' );
-								var oldUrl = new URL( veEditUrl );
-								oldUrl.searchParams.delete( 'veswitched' );
-								oldUrl.searchParams.set( 'wteswitched', '1' );
-								location.href = oldUrl;
-							}
-						} );
-				} );
-			} else {
-				releaseOldEditWarning();
-				activatePageTarget( mode, section, modified, linkUrl );
-			}
+			$( window ).off( 'beforeunload.editwarning' );
+			activatePageTarget( mode, section, modified, linkUrl );
 		},
 
 		/**
@@ -1495,10 +1466,6 @@
 		}
 		// Edit pages
 		if ( isEditPage && isSupportedEditPage( editUrl ) ) {
-			// Just did a discard-switch from wikitext editor to VE (in no RESTBase mode)
-			if ( editUrl.searchParams.get( 'wteswitched' ) === '1' ) {
-				return init.isVisualAvailable ? 'visual' : null;
-			}
 			// User has disabled VE, or we are in view source only mode, or we have landed here with posted data
 			if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
 				return null;

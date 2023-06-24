@@ -1460,7 +1460,6 @@
 		"ext.visualEditor.switching": {
 			"group": "visualEditorA",
 			"scripts": [
-				"modules/ve-mw/preinit/ve.init.MWVESwitchConfirmDialog.js",
 				"modules/ve-mw/preinit/ve.init.MWVESwitchPopupWidget.js",
 				"modules/ve-mw/preinit/ve.init.MWEditingTabDialog.js",
 				"modules/ve-mw/preinit/ve.init.MWEditModeTool.js"
@@ -1492,15 +1491,11 @@
 				"visualeditor-mweditmode-tooltip",
 				"visualeditor-mweditmodesource-tool-current",
 				"visualeditor-mweditmodesource-tool-unavailable",
-				"visualeditor-mweditmodesource-warning-cancel",
-				"visualeditor-mweditmodesource-warning-switch-discard",
 				"visualeditor-mweditmodeve-popup-body",
 				"visualeditor-mweditmodeve-popup-title",
 				"visualeditor-mweditmodeve-showagain",
-				"visualeditor-mweditmodeve-title",
 				"visualeditor-mweditmodeve-tool-current",
 				"visualeditor-mweditmodeve-tool-unavailable",
-				"visualeditor-mweditmodeve-warning",
 				"visualeditor-mweditmodewt-popup-body",
 				"visualeditor-mweditmodewt-popup-title",
 				"visualeditor-preference-tabs-multi-tab",
