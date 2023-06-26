@@ -35,6 +35,10 @@
 	"visualeditor-dialog-meta-languages-label": "Тилдер",
 	"visualeditor-dialog-meta-languages-name-label": "Тил",
 	"visualeditor-dialog-meta-languages-section": "Тилдер",
+	"visualeditor-dialog-meta-settings-index-disable": "Жок",
+	"visualeditor-dialog-meta-settings-index-force": "Ооба",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Жок",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ооба",
 	"visualeditor-dialog-template-title": "Калып",
 	"visualeditor-dialog-transclusion-action-save": "Сактоо",
 	"visualeditor-dialog-transclusion-add-template": "Калып кошуу",
@@ -43,8 +47,11 @@
 	"visualeditor-dialog-transclusion-loading": "Жүктөлүүдө...",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Артка кайтуу",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Баары бир улантуу",
+	"visualeditor-dialogbutton-template-tooltip": "Калып",
 	"visualeditor-formatdropdown-format-mw-heading2": "Баш сөз",
 	"visualeditor-languages-tool": "Тилдер",
+	"visualeditor-linkinspector-educationpopup-title": "Шилтемелер",
+	"visualeditor-mweditmodesource-warning-cancel": "Жокко чыгаруу",
 	"visualeditor-savedialog-title-review": "Өзгөртүүлөрдү карап чыгуу",
 	"visualeditor-savedialog-title-save": "Өзгөртүүлөрдү сактоо"
 }

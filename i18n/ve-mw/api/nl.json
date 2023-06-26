@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DiGro",
 			"Hex",
 			"Huhbakker",
 			"Mainframe98",
@@ -11,7 +12,6 @@
 	},
 	"apierror-visualeditor-difffailed": "Wijz mislukt",
 	"apierror-visualeditor-docserver": "Fout bij het contact opnemen met de Parsoid/RESTBase-server (geen antwoord)",
-	"apihelp-visualeditor-description": "Geeft HTML5 terug voor een pagina van de Parsoidservice.",
 	"apihelp-visualeditor-param-basetimestamp": "Stel dit in op de tijd waarop de versie is bewerkt tijdens het opslaan. Wordt gebruikt om bewerkingsconflicten te detecteren.",
 	"apihelp-visualeditor-param-cachekey": "Gebruik het resultaat van een eerder \"serializeforcache\"-verzoek met deze sleutel voor serialiseren of diff. Heeft voorrang boven $1html.",
 	"apihelp-visualeditor-param-etag": "Te sturen ETag.",
@@ -23,11 +23,11 @@
 	"apihelp-visualeditor-param-pst": "De wikitekst transformeren voor opslaan voordat deze naar Parsoid wordt gestuurd (paction=parsefragment).",
 	"apihelp-visualeditor-param-starttimestamp": "Stel dit tijdens het opslaan in op de tijd waarop de pagina is geladen. Wordt gebruikt om bewerkingsconflicten te detecteren.",
 	"apihelp-visualeditor-param-wikitext": "Wikitekst die naar Parsoid gestuurd moet worden om te converteren naar HTML (paction=parsefragment).",
-	"apihelp-visualeditoredit-description": "Sla een HTML5-pagina op in MediaWiki (geconverteerd naar wikitekst via de Parsoidservice).",
 	"apihelp-visualeditoredit-param-basetimestamp": "Stel dit in op de tijd waarop de versie is bewerkt tijdens het opslaan. Wordt gebruikt om bewerkingsconflicten te detecteren.",
 	"apihelp-visualeditoredit-param-cachekey": "Gebruik het resultaat van een eerder \"serializeforcache\"-verzoek met deze sleutel. Heeft voorrang boven $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Captcha-ID (bij het opslaan met een captcha-antwoord).",
 	"apihelp-visualeditoredit-param-captchaword": "Antwoord op de captcha (bij het opslaan met een captcha-antwoord).",
+	"apihelp-visualeditoredit-param-nocontent": "Laat de HTML-inhoud van de nieuwe revisie weg in het antwoord.",
 	"apihelp-visualeditoredit-param-etag": "Te sturen ETag.",
 	"apihelp-visualeditoredit-param-html": "HTML die naar Parsoid gestuurd moet worden in ruil voor wikitekst.",
 	"apihelp-visualeditoredit-param-minor": "Als kleine bewerking markeren.",
