@@ -15,14 +15,15 @@
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		originalUrl = new URL( location.href ),
 		initMode = originalUrl.searchParams.get( 'diffmode' ) || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
-		initType = originalUrl.searchParams.get( 'diff-type' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
-		pluginModules = conf.pluginModules.filter( mw.loader.getState );
+		pluginModules = conf.pluginModules.filter( mw.loader.getState ),
+		diffTypeSwitch;
 
 	if ( initMode !== 'visual' ) {
 		// Enforce a valid mode, to avoid visual glitches in button-selection.
 		initMode = 'source';
 	}
+	var mode = initMode;
 
 	$visualDiffContainer.append(
 		progress.$element.addClass( 'oo-ui-element-hidden' ),
@@ -39,16 +40,25 @@
 			newPageName = params.get( 'page2' );
 		}
 
-		var mode = item.getData();
+		mode = item.getData();
 		var isVisual = mode === 'visual';
 
-		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
-		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
+		$visualDiffContainer.toggleClass( 'mw-diff-element-hidden', !isVisual );
+		$wikitextDiffBody.toggleClass( 'mw-diff-element-hidden', isVisual );
+
+		if ( typeof diffTypeSwitch !== 'undefined' ) {
+			diffTypeSwitch.setDisabled( isVisual );
+			if ( !isVisual ) {
+				if ( diffTypeSwitch.getValue() ) {
+					$wikitextDiffBody.closest( 'tr:not(.inline-diff-row)' ).addClass( 'mw-diff-element-hidden' );
+				} else {
+					$wikitextDiffBody.closest( 'tr.inline-diff-row' ).addClass( 'mw-diff-element-hidden' );
+				}
+			}
+		}
+
 		var $revSlider = $( '.mw-revslider-container' );
 		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
-		if ( initType === 'inline' ) {
-			$( '.mw-diff-inline-legend' ).toggleClass( 've-init-diff-inline-legend-hidden', isVisual );
-		}
 		if ( isVisual ) {
 			// Highlight the headers using the same styles as the diff, to better indicate
 			// the meaning of headers when not using two-column diff.
@@ -99,7 +109,7 @@
 	}
 
 	function onReviewModeButtonSelectChoose( item ) {
-		var mode = item.getData();
+		mode = item.getData();
 		if ( mode !== mw.user.options.get( 'visualeditor-diffmode-historical' ) ) {
 			mw.user.options.set( 'visualeditor-diffmode-historical', mode );
 			// Same as ve.init.target.getLocalApi()
@@ -134,5 +144,14 @@
 		reviewModeButtonSelect.on( 'choose', onReviewModeButtonSelectChoose );
 		$( '.ve-init-mw-diffPage-diffMode' ).empty().append( reviewModeButtonSelect.$element );
 		reviewModeButtonSelect.selectItemByData( initMode );
+	} );
+
+	mw.hook( 'wikipage.diff.wikitextBodyUpdate' ).add( function ( $wikitextBody ) {
+		$wikitextDiffBody = $wikitextBody;
+	} );
+
+	mw.hook( 'wikipage.diff.diffTypeSwitch' ).add( function ( inlineToggleSwitch ) {
+		diffTypeSwitch = inlineToggleSwitch;
+		diffTypeSwitch.setDisabled( mode === 'visual' );
 	} );
 }() );

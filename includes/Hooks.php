@@ -170,7 +170,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		] );
 		$output->addModules( 'ext.visualEditor.diffPage.init' );
 		$output->enableOOUI();
-		$parts['ve-init-mw-diffPage-diffMode'] = '<div class="ve-init-mw-diffPage-diffMode">' .
+		$parts['50_ve-init-mw-diffPage-diffMode'] = '<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
 			new ButtonGroupWidget( [
 				'items' => [
