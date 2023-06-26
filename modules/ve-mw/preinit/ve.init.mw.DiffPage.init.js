@@ -43,16 +43,16 @@
 		mode = item.getData();
 		var isVisual = mode === 'visual';
 
-		$visualDiffContainer.toggleClass( 'mw-diff-element-hidden', !isVisual );
-		$wikitextDiffBody.toggleClass( 'mw-diff-element-hidden', isVisual );
+		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
+		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
 
 		if ( typeof diffTypeSwitch !== 'undefined' ) {
 			diffTypeSwitch.setDisabled( isVisual );
 			if ( !isVisual ) {
 				if ( diffTypeSwitch.getValue() ) {
-					$wikitextDiffBody.closest( 'tr:not(.inline-diff-row)' ).addClass( 'mw-diff-element-hidden' );
+					$wikitextDiffBody.closest( 'tr:not(.inline-diff-row)' ).addClass( 'oo-ui-element-hidden' );
 				} else {
-					$wikitextDiffBody.closest( 'tr.inline-diff-row' ).addClass( 'mw-diff-element-hidden' );
+					$wikitextDiffBody.closest( 'tr.inline-diff-row' ).addClass( 'oo-ui-element-hidden' );
 				}
 			}
 		}
