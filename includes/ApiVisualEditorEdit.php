@@ -513,9 +513,12 @@ class ApiVisualEditorEdit extends ApiBase {
 				$result['watchlistexpiry'] = $saveresult['edit']['watchlistexpiry'] ?? null;
 			}
 
+			// Refresh article ID (which is used by toPageIdentity()) in case we just created the page.
+			// Maybe it's not great to rely on this side-effect…
+			$title->getArticleID( IDBAccessObject::READ_LATEST );
+
 			$this->hookRunner->onVisualEditorApiVisualEditorEditPostSave(
-				// Refresh data (like article ID) in case we just created the page
-				$title->toPageRecord( IDBAccessObject::READ_LATEST ),
+				$title->toPageIdentity(),
 				$user,
 				$wikitext,
 				$params,
