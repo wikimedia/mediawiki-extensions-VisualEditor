@@ -19,7 +19,8 @@
 			"Tauhid16",
 			"YahyA",
 			"Yahya",
-			"আফতাবুজ্জামান"
+			"আফতাবুজ্জামান",
+			"আজিজ"
 		]
 	},
 	"collabpad-import-subtitle": "$1 থেকে আমদানিকৃত",
@@ -176,6 +177,7 @@
 	"visualeditor-dialog-transclusion-add-wikitext": "উইকিপাঠ্য যোগ করুন",
 	"visualeditor-dialog-transclusion-add-param": "আরও প্যারামিটার যোগ করুন",
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "\"$2\" প্যারামিটারটি দুইবার যোগ করা যাবে না।",
+	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 একটি নিষিদ্ধ অক্ষর। অনুগ্রহ করে প্যারামিটারটি যোগ করতে এটি সরান।",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "প্যারামিটারের নাম",
 	"visualeditor-dialog-transclusion-add-param-save": "প্যারামিটার যোগ করুন",
 	"visualeditor-dialog-transclusion-add-template": "টেমপ্লেট যোগ",
