@@ -806,13 +806,32 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
-		$veConfig = $services->getConfigFactory()
-			->makeConfig( 'visualeditor' );
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
+		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' );
 
-		if (
-			!$veConfig->get( 'VisualEditorEnableBetaFeature' ) ||
-			!ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' )
-		) {
+		if ( $veConfig->get( 'VisualEditorUnifiedPreference' ) ) {
+			// Use the old preference keys to avoid having to migrate data for now.
+			// (One day we might write and run a maintenance script to update the
+			// entries in the database and make this unnecessary.)
+			if ( $isBeta ) {
+				$preferences['visualeditor-enable'] = [
+					'type' => 'toggle',
+					'label-message' => 'visualeditor-preference-visualeditor',
+					'section' => 'editing/editor',
+				];
+			} else {
+				$preferences['visualeditor-betatempdisable'] = [
+					'invert' => true,
+					'type' => 'toggle',
+					'label-message' => 'visualeditor-preference-visualeditor',
+					'section' => 'editing/editor',
+					'default' => $userOptionsLookup->getOption( $user, 'visualeditor-betatempdisable' ) ||
+						$userOptionsLookup->getOption( $user, 'visualeditor-autodisable' )
+				];
+			}
+
+		} elseif ( !$isBeta ) {
 			// Config option for visual editing "deployed" state (opt-out)
 			$preferences['visualeditor-betatempdisable'] = [
 				'type' => 'toggle',
@@ -890,7 +909,10 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
-		if ( $veConfig->get( 'VisualEditorEnableBetaFeature' ) ) {
+		if (
+			!$veConfig->get( 'VisualEditorUnifiedPreference' ) &&
+			$veConfig->get( 'VisualEditorEnableBetaFeature' )
+		) {
 			$preferences['visualeditor-enable'] = [
 				'version' => '1.0',
 				'label-message' => 'visualeditor-preference-core-label',

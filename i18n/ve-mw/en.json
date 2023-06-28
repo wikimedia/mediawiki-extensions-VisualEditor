@@ -319,6 +319,7 @@
 	"visualeditor-mwpredialog-convert": "Allow text styling",
 	"visualeditor-mwpredialog-title": "Preformatted plain text",
 	"visualeditor-mwsignature-tool": "Your signature",
+	"visualeditor-preference-visualeditor": "Enable the visual editor",
 	"visualeditor-preference-disable": "Turn off the visual editor",
 	"visualeditor-preference-core-description": "Enable the visual editor. It will not be available on talk pages and some other namespaces.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
