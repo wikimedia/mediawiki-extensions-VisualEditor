@@ -438,23 +438,6 @@ ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.teardown = function () {
-	var target = this;
-	// Parent method
-	return ve.init.mw.MobileArticleTarget.super.prototype.teardown.call( this ).then( function () {
-		if ( !target.isViewPage ) {
-			var newUrl = new URL( target.viewUrl );
-			if ( mw.config.get( 'wgIsRedirect' ) ) {
-				newUrl.searchParams.set( 'redirect', 'no' );
-			}
-			location.href = newUrl;
-		}
-	} );
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var originalToolbarGroups = this.toolbarGroups;
 
