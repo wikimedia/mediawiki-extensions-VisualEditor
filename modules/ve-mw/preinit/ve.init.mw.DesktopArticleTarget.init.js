@@ -529,8 +529,7 @@
 						modified: modified,
 						editintro: url.searchParams.get( 'editintro' ),
 						preload: url.searchParams.get( 'preload' ),
-						// Handle numbered array parameters like MediaWiki's PHP code does (T231382)
-						preloadparams: new mw.Uri( url.toString(), { arrayParams: true } ).query.preloadparams,
+						preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams ),
 						// If switching to visual with modifications, check if we have wikitext to convert
 						wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
 					} );

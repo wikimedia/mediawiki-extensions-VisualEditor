@@ -352,7 +352,6 @@
 				"mediawiki.storage",
 				"mediawiki.Title",
 				"web2017-polyfills",
-				"mediawiki.Uri",
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.cookie",
