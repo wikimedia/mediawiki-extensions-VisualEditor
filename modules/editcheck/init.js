@@ -38,6 +38,11 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel ) {
 					return false;
 				}
 			}
+			// 3. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
+			var branchNode = documentModel.getBranchNodeFromOffset( range.start );
+			if ( branchNode.getParent() !== documentModel.attachedRoot ) {
+				return false;
+			}
 			return true;
 		}
 		return false;
