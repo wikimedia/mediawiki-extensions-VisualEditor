@@ -1,6 +1,14 @@
 mw.editcheck = {};
 
-mw.editcheck.doesAddedContentNeedReference = function ( documentModel ) {
+/**
+ * Check if added content in the document model might need a reference
+ *
+ * @param {ve.dm.DocumentModel} documentModel Document model
+ * @param {boolean} [includeReferencedContent] Include content ranges that already
+ *  have a reference.
+ * @return {boolean}
+ */
+mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeReferencedContent ) {
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
 	}
@@ -33,9 +41,11 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel ) {
 		// 1. Check that at least minimumCharacters characters have been inserted sequentially
 		if ( range.getLength() >= minimumCharacters ) {
 			// 2. Exclude any ranges that already contain references
-			for ( var i = range.start; i < range.end; i++ ) {
-				if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
-					return false;
+			if ( !includeReferencedContent ) {
+				for ( var i = range.start; i < range.end; i++ ) {
+					if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
+						return false;
+					}
 				}
 			}
 			// 3. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)

@@ -57,6 +57,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		'visualeditor-wikitext',
 		// Edit check
 		'editcheck-references',
+		'editcheck-newcontent',
 		// No longer in active use:
 		'visualeditor-needcheck',
 		'visualeditor-switched'

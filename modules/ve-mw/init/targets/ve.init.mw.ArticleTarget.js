@@ -1543,10 +1543,17 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 
 	if (
 		this.getSurface().getMode() === 'visual' &&
-		mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging &&
-		mw.editcheck.doesAddedContentNeedReference( this.getSurface().getModel().getDocument() )
+		mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging
 	) {
-		taglist.push( 'editcheck-references' );
+		var documentModel = this.getSurface().getModel().getDocument();
+		// New content needing a reference
+		if ( mw.editcheck.doesAddedContentNeedReference( documentModel ) ) {
+			taglist.push( 'editcheck-references' );
+		}
+		// New content, regardless of if it needs a reference
+		if ( mw.editcheck.doesAddedContentNeedReference( documentModel, true ) ) {
+			taglist.push( 'editcheck-newcontent' );
+		}
 	}
 
 	data.vetags = taglist.join( ',' );
