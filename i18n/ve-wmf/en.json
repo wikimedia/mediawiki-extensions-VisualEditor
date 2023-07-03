@@ -18,6 +18,8 @@
 	},
 	"tag-editcheck-newcontent": "-",
 	"tag-editcheck-newcontent-description": "EditCheck thinks new content was added to the page",
+	"tag-editcheck-newreference": "-",
+	"tag-editcheck-newreference-description": "A reference was added to the page",
 	"tag-editcheck-references": "-",
 	"tag-editcheck-references-description": "EditCheck thinks a reference might have been needed",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visual edit]]",
