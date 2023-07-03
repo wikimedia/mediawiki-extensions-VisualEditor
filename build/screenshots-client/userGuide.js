@@ -10,7 +10,7 @@ module.exports = {
 			done(
 				seleniumUtils.getBoundingRect( [
 					ve.init.target.toolbar.$element[ 0 ],
-					$( '#p-namespaces' )[ 0 ]
+					$( '#ca-view' )[ 0 ]
 				] )
 			);
 		} );
@@ -19,7 +19,7 @@ module.exports = {
 		var done = arguments[ arguments.length - 1 ];
 		done(
 			seleniumUtils.getBoundingRect( [
-				ve.init.target.toolbar.$actions[ 0 ]
+				ve.init.target.toolbar.$after[ 0 ]
 			] )
 		);
 	},
