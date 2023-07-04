@@ -17,7 +17,9 @@
 			"아라"
 		]
 	},
-	"tag-editcheck-references-description": "EditCheck חושב שאולי היה צורך בהערת שוליים בעריכה הזאת",
+	"tag-editcheck-newcontent-description": "מערכת בדיקת עריכה חושבת שנוסף תוכן חדש לדף.",
+	"tag-editcheck-newreference-description": "נוספה הערת שוליים לדף",
+	"tag-editcheck-references-description": "מערכת בדיקת עריכה חושבת שאולי היה צורך בהערת שוליים",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|עריכה חזותית]]",
 	"tag-visualeditor-description": "עריכה שנעשתה באמצעות [[{{MediaWiki:visualeditor-descriptionpagelink}}|העורך החזותי]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|עריכה חזותית: נא לבדוק]]",
