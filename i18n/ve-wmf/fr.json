@@ -39,7 +39,9 @@
 			"아라"
 		]
 	},
-	"tag-editcheck-references-description": "EditCHeck pense qu’une référence peut être nécessaire dans cette modification",
+	"tag-editcheck-newcontent-description": "EditCheck pense que du nouveau contenu a été ajouté à la page",
+	"tag-editcheck-newreference-description": "Une référence a été ajoutée à la page",
+	"tag-editcheck-references-description": "EditCheck pense qu’une référence peut être nécessaire",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel]]",
 	"tag-visualeditor-description": "Modification effectuée avec l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|éditeur visuel]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel : à vérifier]]",
