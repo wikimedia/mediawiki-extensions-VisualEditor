@@ -79,3 +79,33 @@ mw.editcheck.getContentRanges = function ( documentModel, range ) {
 	} );
 	return ranges;
 };
+
+if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
+	mw.hook( 've.activationComplete' ).add( function () {
+		var target = ve.init.target;
+
+		function getRefNodes() {
+			// The firstNodes list is a numerically indexed array of reference nodes in the document.
+			// The list is append only, and removed references are set to undefined in place.
+			// To check if a new reference is being published, we just need to know if a reference
+			// with an index beyond the initial list (initLength) is still set.
+			var internalList = target.getSurface().getModel().getDocument().getInternalList();
+			var group = internalList.getNodeGroup( 'mwReference/' );
+			return group ? group.firstNodes || [] : [];
+		}
+
+		var initLength = getRefNodes().length;
+		target.saveFields.vetags = function () {
+			var refNodes = getRefNodes();
+			var newLength = refNodes.length;
+			var newNodesInDoc = false;
+			for ( var i = initLength; i < newLength; i++ ) {
+				if ( refNodes[ i ] ) {
+					newNodesInDoc = true;
+					break;
+				}
+			}
+			return newNodesInDoc ? 'editcheck-newreference' : '';
+		};
+	} );
+}
