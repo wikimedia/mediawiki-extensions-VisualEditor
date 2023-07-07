@@ -916,11 +916,7 @@ ve.ui.MWGalleryDialog.prototype.updateDialogSize = function () {
  * @param {boolean} empty The gallery is empty
  */
 ve.ui.MWGalleryDialog.prototype.toggleEmptyGalleryMessage = function ( empty ) {
-	if ( empty ) {
-		this.$emptyGalleryMessage.removeClass( 'oo-ui-element-hidden' );
-	} else {
-		this.$emptyGalleryMessage.addClass( 'oo-ui-element-hidden' );
-	}
+	this.$emptyGalleryMessage.toggleClass( 'oo-ui-element-hidden', !empty );
 };
 
 /**

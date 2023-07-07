@@ -125,14 +125,9 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 	}
 
 	var type = this.model.getAttribute( 'type' );
-	var alignClass;
-	if ( type !== 'none' && type !== 'frameless' ) {
-		alignClass = this.getCssClass( 'default', align );
-		this.$image.addClass( 've-ce-mwBlockImageNode-thumbimage' );
-	} else {
-		alignClass = this.getCssClass( 'none', align );
-		this.$image.removeClass( 've-ce-mwBlockImageNode-thumbimage' );
-	}
+	var framed = type !== 'none' && type !== 'frameless';
+	var alignClass = this.getCssClass( framed ? 'default' : 'none', align );
+	this.$image.toggleClass( 've-ce-mwBlockImageNode-thumbimage', framed );
 	// eslint-disable-next-line mediawiki/class-doc
 	this.$element.addClass( alignClass );
 
