@@ -2,10 +2,10 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Language;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;
+use Wikimedia\Bcp47Code\Bcp47Code;
 
 /**
  * A decorator implementation of ParsoidClient that will delegate to the appropriate
@@ -84,7 +84,7 @@ class DualParsoidClient implements ParsoidClient {
 	/**
 	 * @inheritDoc
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage ): array {
+	public function getPageHtml( RevisionRecord $revision, ?Bcp47Code $targetLanguage ): array {
 		$client = $this->createParsoidClient();
 		$result = $client->getPageHtml( $revision, $targetLanguage );
 
@@ -97,7 +97,7 @@ class DualParsoidClient implements ParsoidClient {
 	 */
 	public function transformHTML(
 		PageIdentity $page,
-		Language $targetLanguage,
+		Bcp47Code $targetLanguage,
 		string $html,
 		?int $oldid,
 		?string $etag
@@ -119,7 +119,7 @@ class DualParsoidClient implements ParsoidClient {
 	 */
 	public function transformWikitext(
 		PageIdentity $page,
-		Language $targetLanguage,
+		Bcp47Code $targetLanguage,
 		string $wikitext,
 		bool $bodyOnly,
 		?int $oldid,

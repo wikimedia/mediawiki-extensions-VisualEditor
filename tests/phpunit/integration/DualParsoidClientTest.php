@@ -2,7 +2,6 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
-use Language;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Extension\VisualEditor\DualParsoidClient;
 use MediaWiki\Extension\VisualEditor\ParsoidClient;
@@ -12,6 +11,8 @@ use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
+use Wikimedia\Bcp47Code\Bcp47Code;
+use Wikimedia\Bcp47Code\Bcp47CodeValue;
 
 /**
  * @covers \MediaWiki\Extension\VisualEditor\DualParsoidClient
@@ -50,7 +51,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client->method( 'transformHTML' )->willReturnCallback(
 			static function (
 				PageIdentity $page,
-				Language $targetLanguage,
+				Bcp47Code $targetLanguage,
 				string $html,
 				?int $oldid,
 				?string $etag
@@ -105,7 +106,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client = $this->createDualClient( 'xyzzy' );
 		$result = $client->transformHTML(
 			PageIdentityValue::localIdentity( 0, NS_MAIN, 'Dummy' ),
-			$this->createNoOpMock( Language::class ),
+			new Bcp47CodeValue( 'qqx' ),
 			'input html',
 			null,
 			$etag
@@ -117,7 +118,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client = $this->createDualClient();
 		$result = $client->transformWikitext(
 			PageIdentityValue::localIdentity( 0, NS_MAIN, 'Dummy' ),
-			$this->createNoOpMock( Language::class ),
+			new Bcp47CodeValue( 'qqx' ),
 			'input wikitext',
 			false,
 			null,
@@ -133,7 +134,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client = $this->createDualClient( 'xyzzy' );
 		$result = $client->transformHTML(
 			PageIdentityValue::localIdentity( 0, NS_MAIN, 'Dummy' ),
-			$this->createNoOpMock( Language::class ),
+			new Bcp47CodeValue( 'qqx' ),
 			'input html',
 			null,
 			$etag
@@ -156,7 +157,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 
 		$result = $client->transformHTML(
 			PageIdentityValue::localIdentity( 0, NS_MAIN, 'Dummy' ),
-			$this->createNoOpMock( Language::class ),
+			new Bcp47CodeValue( 'qqx' ),
 			'input html',
 			null,
 			$etag
