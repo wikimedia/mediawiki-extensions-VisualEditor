@@ -61,7 +61,6 @@
 	"visualeditor-autosave-recovered-text": "Text shown when document recovery is successful",
 	"visualeditor-autosave-recovered-title": "Title shown when document recovery is successful",
 	"visualeditor-backbutton-tooltip": "Tooltip text for back button taking user to reading mode and closing the editor.\n{{Identical|Go back}}",
-	"visualeditor-beta-warning": "Note shown when user clicks on the 'help' label in the editor, asking users to report any technical issues they encounter in the software.",
 	"visualeditor-browserwarning": "Edit notice shown when VisualEditor loads, warning users that their browser is not officially supported.",
 	"visualeditor-ca-createlocaldescriptionsource": "Text for the \"Create local description source\" tab, shown if the local description page of a file in a foreign repository (e.g. Wikimedia Commons) does not yet exist. The tab allows the user to edit the local description page in the wikitext source code editor.\n\nCf. {{msg-mw|Create-local}}",
 	"visualeditor-ca-createsource": "Text for the create source link in the tab dropdown, if the page doesn't exist. It's shown next to the message {{msg-mw|vector-view-create}}, so they should be similar (for example, use a similar translation for \"Create\").\n\nThe difference between \"Create source\" and \"Create\" is that when \"Create source\" is for editing the page or the section in wikitext markup language, and \"Create\" is for editing the page in VisualEditor.\n\nIf the page exists, the following link text is used: {{msg-mw|Visualeditor-ca-editsource}}",
