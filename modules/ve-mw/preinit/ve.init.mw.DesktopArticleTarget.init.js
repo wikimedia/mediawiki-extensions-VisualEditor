@@ -327,7 +327,7 @@
 
 	function getTabMessage( key ) {
 		var tabMsgKey = tabMessages[ key ];
-		if ( !tabMsgKey && ( key === 'edit' || key === 'create' ) ) {
+		if ( !tabMsgKey && ( key === 'edit' || key === 'create' || key === 'edit-local' || key === 'create-local' ) ) {
 			// Some skins don't use the default 'edit' and 'create' message keys.
 			// e.g. vector-view-edit, vector-view-create
 			tabMsgKey = mw.config.get( 'skin' ) + '-view-' + key;
@@ -920,15 +920,15 @@
 				if ( $( '#ca-view-foreign' ).length ) {
 					if ( tabMessages[ action + 'localdescriptionsource' ] ) {
 						// The following messages can be used here:
-						// * editlocaldescriptionsource
-						// * createlocaldescriptionsource
+						// * visualeditor-ca-editlocaldescriptionsource
+						// * visualeditor-ca-createlocaldescriptionsource
 						$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
 					}
 				} else {
 					if ( tabMessages[ action + 'source' ] ) {
 						// The following messages can be used here:
-						// * editsource
-						// * createsource
+						// * visualeditor-ca-editsource
+						// * visualeditor-ca-createsource
 						$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
 					}
 				}
@@ -945,7 +945,7 @@
 						// 2) when onEditTabClick is not bound (!pageCanLoadEditor) it will
 						// just work.
 						veEditUrl,
-						getTabMessage( action ),
+						getTabMessage( action + ( $( '#ca-view-foreign' ).length ? '-local' : '' ) ),
 						'ca-ve-edit',
 						mw.msg( 'tooltip-ca-ve-edit' ),
 						mw.msg( 'accesskey-ca-ve-edit' ),
@@ -968,7 +968,7 @@
 						$caEdit.after( $caVeEdit );
 					}
 				}
-				$caVeEditLink.text( getTabMessage( action ) );
+				$caVeEditLink.text( getTabMessage( action + ( $( '#ca-view-foreign' ).length ? '-local' : '' ) ) );
 			}
 
 			// If the edit tab is hidden, remove it.
