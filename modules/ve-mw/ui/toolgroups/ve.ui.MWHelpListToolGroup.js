@@ -8,9 +8,8 @@
 /**
  * MediaWiki UserInterface edit mode tool.
  *
- * This extends ListToolGroup to add a header and footer above and below
- * the tool list. The header contains some help text, and the footer contains
- * the version number.
+ * This extends ListToolGroup to add a footer below the tool list.
+ * The footer contains the version number.
  *
  * @class
  * @extends OO.ui.ListToolGroup
@@ -20,7 +19,6 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MWHelpListToolGroup = function VeUiMwHelpListToolGroup() {
-	this.$header = $( '<div>' ).addClass( 've-ui-mwHelpListToolGroup-tools-header' ).text( ve.msg( 'visualeditor-beta-warning' ) );
 	this.$footer = $( '<div>' ).addClass( 've-ui-mwHelpListToolGroup-tools-footer' );
 
 	// Parent constructor
@@ -49,7 +47,7 @@ ve.ui.MWHelpListToolGroup.prototype.insertItemElements = function () {
 	// Mixin method
 	OO.ui.mixin.GroupElement.prototype.insertItemElements.apply( this, arguments );
 
-	this.$group.prepend( this.$header ).append( this.$footer );
+	this.$group.append( this.$footer );
 };
 
 ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
