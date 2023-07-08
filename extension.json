@@ -1554,6 +1554,7 @@
 				"modules/ve-mw/ui/elements/ve.ui.MWFloatingHelpElement.js",
 				"modules/ve-mw/ui/elements/ve.ui.MWPreviewElement.js",
 				"modules/ve-mw/ui/tools/ve.ui.MWPopupTool.js",
+				"modules/ve-mw/ui/toolgroups/ve.ui.MWHelpListToolGroup.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWExtensionInspector.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLiveExtensionInspector.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkAction.js",
@@ -1577,6 +1578,7 @@
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWFloatingHelpElement.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWPreviewElement.css",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
+				"modules/ve-mw/ui/styles/toolgroups/ve.ui.MWHelpListToolGroup.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.css"
 			],
