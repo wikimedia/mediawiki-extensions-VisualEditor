@@ -14,7 +14,6 @@
 	"tooltip-ca-ve-edit": "Бұл бетті өңдеу",
 	"visualeditor-advancedsettings-tool": "Кеңейтілген параметрлер",
 	"visualeditor-backbutton-tooltip": "Артқа қайту",
-	"visualeditor-beta-warning": "VisualEditor 'beta' нұсқада. Сіз бағдарламалық жасақтама шектеулеріне кездесуіңіз не беттің кейбір бөліктерін өңдей алмауыңыз мүмкін. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-tool}}\" дегенді таңдаңыз.",
 	"visualeditor-browserwarning": "Сіздің қолданып отырған шолғышыңызды VisualEditor ресми түрде қолдамайды.",
 	"visualeditor-ca-createlocaldescriptionsource": "Жергілікті сипаттама көзін қосу",
 	"visualeditor-ca-createsource": "Қайнарын құру",

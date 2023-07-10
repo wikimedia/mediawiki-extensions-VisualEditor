@@ -14,7 +14,6 @@
 	"tooltip-ca-editsource": "Eedit the soorce code o this page",
 	"tooltip-ca-ve-edit": "Chynge this page",
 	"visualeditor-advancedsettings-tool": "Advanced settins",
-	"visualeditor-beta-warning": "VeesualEeditor is in 'beta'. Ye micht encoonter saffware eessues, n ye michtna be able tae eedit pairts o the page. Tae switch back tae soorce eeditin at onie time wioot tintin yer chynges, apen the drapdown neix tae \"{{int:visualeditor-toolbar-savedialog}}\" n select \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Ye'r uisin ae brouser that's na offeeciallie supportit bi VeesualEediter.",
 	"visualeditor-ca-createlocaldescriptionsource": "Eik local descreeption soorce",
 	"visualeditor-ca-createsource": "Cræft soorce",

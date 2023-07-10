@@ -12,7 +12,6 @@
 	"tooltip-ca-ve-edit": "Redacter ti págine",
 	"visualeditor-advancedsettings-tool": "Normes avansat.",
 	"visualeditor-autosave-modified-prompt-accept": "Resumate redaction",
-	"visualeditor-beta-warning": "VisualEditor es in beta-version: Tu posse incontrar programmatic erras, e forsan tu ne posse redacter partes del págine. Ples cliccar a «{{int:visualeditor-ca-editsource}}» por changear al wikitext-modo. Tu va perdir ínconservat changes.",
 	"visualeditor-browserwarning": "Tu usa un navigator, quel ne es officialmen supportat de VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Addir fonte de descrition local",
 	"visualeditor-ca-createsource": "Crear fonte.",

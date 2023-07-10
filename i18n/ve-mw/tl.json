@@ -15,7 +15,6 @@
 	"tooltip-ca-edit": "Baguhin ang pahinang ito gamit ang wikitext",
 	"tooltip-ca-editsource": "Baguhin ang kodigong batayan ng pahinang ito",
 	"tooltip-ca-ve-edit": "Baguhin ito",
-	"visualeditor-beta-warning": "Nasa 'beta' ang editor na ito. Upang makabalik kailanman sa pamamatnugot gamit ang wikisintaksis nang hindi mawawala ang iyong mga pagbabago, buksan ang menung pahila-pababa sa tabi ng \"{{int:visualeditor-ca-editsource}}\" at piliin ang \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Gumagamit ka ng pambasa-basa na hindi opisyal na sinusuportahan ng editor na ito.",
 	"visualeditor-ca-createlocaldescriptionsource": "Magdagdag ng lokal na pinagmulan ng paglalarawan",
 	"visualeditor-ca-createsource": "Gawin ang wikitext",

@@ -13,7 +13,6 @@
 	"tooltip-ca-ve-edit": "Бу бетни тюрлендир",
 	"visualeditor-advancedsettings-tool": "Къошакъ джарашдырыула",
 	"visualeditor-backbutton-tooltip": "Артха",
-	"visualeditor-beta-warning": "Бу редактор бета-версия статусда турады. Этген тюрлендириулеригиз да сакъланыб, вики-текстни режимине кёчер ючюн «{{int:visualeditor-toolbar-savedialog}}» тиекни къатында ачылыучю тизмени ачыгъыз да, басыгъыз «{{int:visualeditor-mweditmodesource-tool}}» тиекден басагъыз.",
 	"visualeditor-browserwarning": "Сиз хайырланнган браузер, бу редакторну официал халда джюрютмейди.",
 	"visualeditor-ca-createlocaldescriptionsource": "Локал айгъакълауну къайнагъын къош",
 	"visualeditor-ca-createsource": "Вики-текстни къура",

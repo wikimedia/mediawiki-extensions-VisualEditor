@@ -9,7 +9,6 @@
 	"tooltip-ca-editsource": "Rætta keldukotuna fyri hesa síðuna",
 	"tooltip-ca-ve-edit": "Rætta hesa síðuna",
 	"visualeditor-advancedsettings-tool": "Framkomnar innstillingar",
-	"visualeditor-beta-warning": "VisualEditor er í 'beta'. Tú finnur møguliga fram til trupulleikar í ritbúnaðinum, og tað kann henda, at tú ikki fært rætta partar av síðuni. Fyri at vanda aftur til wiki-rætting nær sum helst uttan at missa tínar broytingar, lat so upp dropdown við síðuna av \"{{int:visualeditor-toolbar-savedialog}}\" og vel \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Tú brúkar ein internetkaga, sum ikki alment stuðlast av VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Skriva lokala wikitekst frágreiðing",
 	"visualeditor-ca-createsource": "Stovna keldu",

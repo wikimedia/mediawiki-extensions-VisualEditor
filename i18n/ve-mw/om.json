@@ -14,7 +14,6 @@
 	"tooltip-ca-ve-edit": "Fuula kana gulaali",
 	"visualeditor-advancedsettings-tool": "Qindaa'ina olaanaa",
 	"visualeditor-backbutton-tooltip": "Duubatti deebi'i",
-	"visualeditor-beta-warning": "Viizyuwaal'Ediiteriin yaalii beetaarra jira. Kanaafuu qabiyyee fuula tokko keessaa kan ati jijjiiruu hin dandeenye jiraachu danda'a - sababa moosaajitiin. Odoo wanti ati barreessite hin badin gara lakkaddaa jijjiirutti geeddaruuf, buufata gad-buusaa kan \"{{int:visualeditor-ca-editsource}}\" bukkee jiru baniitii \"{{int:visualeditor-mweditmodesource-tool}}\" irratti cuqaasi.",
 	"visualeditor-browserwarning": "Iyyaafataa ati itti fayyadamaa jirturratti Viizyuwaal'Ediiteriin  ammaaf hinhojjatu.",
 	"visualeditor-ca-createlocaldescriptionsource": "Ibsa biyya keessaa dabali",
 	"visualeditor-ca-createsource": "Lakkaddaa uumi",

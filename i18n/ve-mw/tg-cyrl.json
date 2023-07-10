@@ -19,7 +19,6 @@
 	"visualeditor-autosave-modified-prompt-reject": "Оғози вироишоти нав",
 	"visualeditor-autosave-modified-prompt-title": "Вироиши резюмеи {{GENDER:|шумо}}?",
 	"visualeditor-backbutton-tooltip": "Аз нав оғоз намоед",
-	"visualeditor-beta-warning": "ВироишгариВизуалӣ дар ҳоли 'бета' аст. Шумо шояд бо мушкилии нармафзор рӯ ба рӯ шавед ва баъзе аз қисмҳои саҳифаро вироиш карда наметавонед. Барои гузаштан ба намуди викиматн инҷо пахш \"{{int:visualeditor-ca-editsource}}\" кунед – тағийроти захиранашуда аз байн хоҳад рафт.",
 	"visualeditor-browserwarning": "Шумо аз мурургаре истифода мебаред, ки расман аз сӯи ВироишгариВизуалӣ пуштибонӣ намешавад.",
 	"visualeditor-ca-createlocaldescriptionsource": "Иловаи тавзеҳи маҳаллии манбаъ",
 	"visualeditor-ca-createsource": "Эҷоди манбаъ",
