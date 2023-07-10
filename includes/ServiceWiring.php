@@ -12,7 +12,6 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Config\ServiceOptions;
-use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
 return [
@@ -33,8 +32,6 @@ return [
 					VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => $isPrivateWiki
 				]
 			),
-			$services->getHttpRequestFactory(),
-			LoggerFactory::getInstance( 'VisualEditor' ),
 			$services->getPageRestHelperFactory()
 		);
 	},

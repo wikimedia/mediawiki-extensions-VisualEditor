@@ -24,9 +24,6 @@ class DualParsoidClient implements ParsoidClient {
 	/** @var VisualEditorParsoidClientFactory */
 	private VisualEditorParsoidClientFactory $factory;
 
-	/** @var string|string[]|null */
-	private $cookiesToForward;
-
 	/** @var Authority */
 	private Authority $authority;
 
@@ -34,33 +31,14 @@ class DualParsoidClient implements ParsoidClient {
 	 * @note Called by DiscussionTools, keep compatible!
 	 *
 	 * @param VisualEditorParsoidClientFactory $factory
-	 * @param string|string[]|false $cookiesToForward
 	 * @param Authority $authority
 	 */
 	public function __construct(
 		VisualEditorParsoidClientFactory $factory,
-		$cookiesToForward,
 		Authority $authority
 	) {
 		$this->factory = $factory;
-		$this->cookiesToForward = $cookiesToForward;
 		$this->authority = $authority;
-	}
-
-	/**
-	 * Detect the mode to use based on the given ETag
-	 *
-	 * @param string $etag
-	 *
-	 * @return string|null
-	 */
-	private static function detectMode( string $etag ): ?string {
-		// Extract the mode from between the double-quote and the colon
-		if ( preg_match( '/^(W\/)?"(\w+):/', $etag, $matches ) ) {
-			return $matches[2];
-		}
-
-		return null;
 	}
 
 	/**
@@ -71,7 +49,7 @@ class DualParsoidClient implements ParsoidClient {
 	 * @param ParsoidClient $client
 	 */
 	private static function injectMode( array &$result, ParsoidClient $client ) {
-		$mode = $client instanceof VRSParsoidClient ? 'vrs' : 'direct';
+		$mode = 'direct';
 
 		if ( isset( $result['headers']['etag'] ) ) {
 			$etag = $result['headers']['etag'];
@@ -95,29 +73,12 @@ class DualParsoidClient implements ParsoidClient {
 	}
 
 	/**
-	 * Create a ParsoidClient based on information embedded in the given ETag.
-	 *
-	 * @param string|null $etag
+	 * Create a DirectParsoidClient.
 	 *
 	 * @return ParsoidClient
 	 */
-	private function createParsoidClient( ?string $etag = null ): ParsoidClient {
-		$shouldUseVRS = null;
-
-		if ( $etag ) {
-			$mode = self::detectMode( $etag );
-			if ( $mode === 'vrs' ) {
-				$shouldUseVRS = true;
-			} elseif ( $mode === 'direct' ) {
-				$shouldUseVRS = false;
-			}
-		}
-
-		return $this->factory->createParsoidClientInternal(
-			$this->cookiesToForward,
-			$this->authority,
-			[ 'ShouldUseVRS' => $shouldUseVRS, 'NoDualClient' => true ]
-		);
+	private function createParsoidClient(): ParsoidClient {
+		return $this->factory->createParsoidClientInternal( $this->authority );
 	}
 
 	/**
@@ -141,7 +102,7 @@ class DualParsoidClient implements ParsoidClient {
 		?int $oldid,
 		?string $etag
 	): array {
-		$client = $this->createParsoidClient( $etag );
+		$client = $this->createParsoidClient();
 
 		if ( $etag ) {
 			$etag = self::stripMode( $etag );

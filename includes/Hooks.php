@@ -1009,10 +1009,6 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			)
 		);
 
-		$parsoidClientFactory =
-			MediaWikiServices::getInstance()->getService( VisualEditorParsoidClientFactory::SERVICE_NAME );
-		$useRestbase = $parsoidClientFactory->useParsoidOverHTTP();
-
 		$namespacesWithSubpages = $coreConfig->get( 'NamespacesWithSubpages' );
 		// Export as a list of namespaces where subpages are enabled instead of an object
 		// mapping namespaces to if subpages are enabled or not, so filter out disabled
@@ -1061,8 +1057,6 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
-			'restbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorRestbaseURL' ) : false,
-			'fullRestbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorFullRestbaseURL' ) : false,
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),

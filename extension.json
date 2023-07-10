@@ -100,7 +100,8 @@
 			"value": false
 		},
 		"VisualEditorFullRestbaseURL": {
-			"value": false
+			"value": false,
+			"description": "Deprecated since MW 1.41. Unused."
 		},
 		"VisualEditorParsoidAutoConfig": {
 			"value": true,
@@ -108,10 +109,11 @@
 		},
 		"VisualEditorDefaultParsoidClient": {
 			"value": "direct",
-			"description": "Sets the mechanism used by the VE API to talk to Parsoid. Can be set to 'vrs' for backwards compatibility, to make VisualEditor use a REST interface to talk to Parsoid."
+			"description": "Deprecated since MW 1.41. Unused."
 		},
 		"VisualEditorParsoidSettings": {
-			"value": []
+			"value": [],
+			"description": "Deprecated since MW 1.41. Unused."
 		},
 		"VisualEditorPluginModules": {
 			"value": []
@@ -126,7 +128,8 @@
 			"value": false
 		},
 		"VisualEditorRestbaseURL": {
-			"value": false
+			"value": false,
+			"description": "Deprecated since MW 1.41. Unused."
 		},
 		"VisualEditorShowBetaWelcome": {
 			"value": true
