@@ -120,31 +120,21 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 			setTimeout( function () {
 				var surface = view.getSurface(),
 					context = surface.getContext();
-				// HACK: Directly set the 'relatedSources' result in the context to trick it
-				// into showing a context at the end of the paste. This context will disappear
-				// as soon as the selection change as a contextChange will fire.
-				// TODO: Come up with a method to store this context on the surface model then
-				// have the LinearContext read it from there.
-				context.relatedSources = [ {
-					embeddable: false,
-					// HACK²: Pass the rich text document and original fragment (which should now cover
-					// the pasted text) to the context via the otherwise-unused 'model' property.
-					model: {
-						doc: pastedDocumentModel,
-						contextRange: contextRange,
-						fragment: targetFragment
-					},
-					name: 'wikitextPaste',
-					type: 'item'
-				} ];
 				// Ensure surface is deactivated on mobile so context can be shown (T336073)
 				if ( context.isMobile() ) {
 					surface.getView().deactivate();
 				}
-				context.afterContextChange();
+				context.addPersistentSource( {
+					embeddable: false,
+					name: 'wikitextPaste',
+					data: {
+						doc: pastedDocumentModel,
+						contextRange: contextRange,
+						fragment: targetFragment
+					}
+				} );
 				surface.getModel().once( 'select', function () {
-					context.relatedSources = [];
-					context.afterContextChange();
+					context.removePersistentSource( 'wikitextPaste' );
 				} );
 			} );
 		} );
