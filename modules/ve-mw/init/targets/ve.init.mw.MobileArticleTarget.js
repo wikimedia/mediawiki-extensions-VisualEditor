@@ -476,15 +476,15 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 				name: 'editMode',
 				type: 'list',
 				icon: 'edit',
-				title: OO.ui.deferMsg( 'visualeditor-mweditmode-tooltip' ),
-				label: OO.ui.deferMsg( 'visualeditor-mweditmode-tooltip' ),
+				title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+				label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
 				invisibleLabel: true,
-				include: [ 'editModeVisual', 'editModeSource' ]
+				include: [ { group: 'editMode' } ]
 			},
 			{
 				name: 'save',
 				type: 'bar',
-				include: [ 'showMobileSave' ]
+				include: [ 'showSave' ]
 			}
 		]
 	);
@@ -532,17 +532,3 @@ ve.init.mw.MobileArticleTarget.prototype.done = function () {
 /* Registration */
 
 ve.init.mw.targetFactory.register( ve.init.mw.MobileArticleTarget );
-
-/**
- * Mobile save tool
- */
-ve.ui.MWMobileSaveTool = function VeUiMWMobileSaveTool() {
-	// Parent Constructor
-	ve.ui.MWMobileSaveTool.super.apply( this, arguments );
-};
-OO.inheritClass( ve.ui.MWMobileSaveTool, ve.ui.MWSaveTool );
-ve.ui.MWMobileSaveTool.static.name = 'showMobileSave';
-ve.ui.MWMobileSaveTool.static.icon = 'next';
-ve.ui.MWMobileSaveTool.static.displayBothIconAndLabel = false;
-
-ve.ui.toolFactory.register( ve.ui.MWMobileSaveTool );
