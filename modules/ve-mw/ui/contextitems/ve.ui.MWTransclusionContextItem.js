@@ -90,11 +90,12 @@ ve.ui.MWTransclusionContextItem.prototype.renderBody = function () {
 };
 
 /**
- * @param {string} [source] Source for tracking in {@see ve.ui.WindowAction.open}
+ * @inheritdoc
  */
-ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function ( source ) {
+ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 	var surfaceModel = this.context.getSurface().getModel(),
-		selection = surfaceModel.getSelection();
+		selection = surfaceModel.getSelection(),
+		contextItem = this;
 
 	if ( selection instanceof ve.dm.TableSelection ) {
 		surfaceModel.setLinearSelection( selection.getOuterRanges(
@@ -102,18 +103,14 @@ ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function ( source 
 		)[ 0 ] );
 	}
 
-	this.toggleLoadingVisualization( true );
+	ve.ui.MWTransclusionContextItem.super.prototype.onEditButtonClick.apply( this, arguments );
 
-	// This replaces what the parent does because we can't store the `onTearDownCallback` argument
-	// in the {@see ve.ui.commandRegistry}.
-	this.getCommand().execute( this.context.getSurface(), [
-		// This will be passed as `name` and `data` arguments to {@see ve.ui.WindowAction.open}
-		ve.ui.MWTransclusionDialog.static.name,
-		{
-			onTearDownCallback: this.toggleLoadingVisualization.bind( this )
-		}
-	], source || 'context' );
-	this.emit( 'command' );
+	this.context.getSurface().getDialogs().once( 'opening', function ( win, opening ) {
+		opening.then( function () {
+			contextItem.toggleLoadingVisualization( false );
+		} );
+	} );
+	this.toggleLoadingVisualization( true );
 };
 
 /**
