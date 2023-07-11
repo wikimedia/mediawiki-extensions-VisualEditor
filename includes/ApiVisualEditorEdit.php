@@ -97,6 +97,9 @@ class ApiVisualEditorEdit extends ApiBase {
 			'sectiontitle' => $params['sectiontitle'],
 			'captchaid' => $params['captchaid'],
 			'captchaword' => $params['captchaword'],
+			'returnto' => $params['returnto'],
+			'returntoquery' => $params['returntoquery'],
+			'returntoanchor' => $params['returntoanchor'],
 			'errorformat' => 'html',
 			( $params['minor'] !== null ? 'minor' : 'notminor' ) => true,
 		];
@@ -509,6 +512,13 @@ class ApiVisualEditorEdit extends ApiBase {
 					$result['newrevid'] = intval( $saveresult['edit']['newrevid'] );
 				}
 
+				if ( isset( $saveresult['edit']['tempusercreated'] ) ) {
+					$result['tempusercreated'] = $saveresult['edit']['tempusercreated'];
+				}
+				if ( isset( $saveresult['edit']['tempusercreatedredirect'] ) ) {
+					$result['tempusercreatedredirect'] = $saveresult['edit']['tempusercreatedredirect'];
+				}
+
 				$result['watched'] = $saveresult['edit']['watched'] ?? false;
 				$result['watchlistexpiry'] = $saveresult['edit']['watchlistexpiry'] ?? null;
 			}
@@ -584,6 +594,20 @@ class ApiVisualEditorEdit extends ApiBase {
 			'captchaword' => null,
 			'cachekey' => null,
 			'nocontent' => false,
+			'returnto' => [
+				ParamValidator::PARAM_TYPE => 'title',
+				ApiBase::PARAM_HELP_MSG => 'apihelp-edit-param-returnto',
+			],
+			'returntoquery' => [
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_DEFAULT => '',
+				ApiBase::PARAM_HELP_MSG => 'apihelp-edit-param-returntoquery',
+			],
+			'returntoanchor' => [
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_DEFAULT => '',
+				ApiBase::PARAM_HELP_MSG => 'apihelp-edit-param-returntoanchor',
+			],
 			'useskin' => [
 				ParamValidator::PARAM_TYPE => array_keys( $this->skinFactory->getInstalledSkins() ),
 				ApiBase::PARAM_HELP_MSG => 'apihelp-parse-param-useskin',

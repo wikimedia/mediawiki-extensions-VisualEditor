@@ -415,7 +415,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 	var fragment = this.getSectionHashFromPage().slice( 1 );
 
 	this.overlay.sectionId = fragment;
-	this.overlay.onSaveComplete( data.newrevid );
+	this.overlay.onSaveComplete( data.newrevid, data.tempusercreatedredirect );
 };
 
 /**
