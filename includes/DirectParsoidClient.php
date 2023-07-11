@@ -26,6 +26,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use RawMessage;
 use User;
+use Wikimedia\Bcp47Code\Bcp47Code;
 use WikitextContent;
 
 class DirectParsoidClient implements ParsoidClient {
@@ -60,7 +61,7 @@ class DirectParsoidClient implements ParsoidClient {
 	/**
 	 * @param PageIdentity $page
 	 * @param RevisionRecord|null $revision
-	 * @param Language|null $pageLanguage
+	 * @param Bcp47Code|null $pageLanguage
 	 * @param bool $stash
 	 * @param string $flavor
 	 *
@@ -69,7 +70,7 @@ class DirectParsoidClient implements ParsoidClient {
 	private function getHtmlOutputRendererHelper(
 		PageIdentity $page,
 		?RevisionRecord $revision = null,
-		Language $pageLanguage = null,
+		Bcp47Code $pageLanguage = null,
 		bool $stash = false,
 		string $flavor = self::FLAVOR_DEFAULT
 	): HtmlOutputRendererHelper {
