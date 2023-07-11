@@ -301,7 +301,7 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		// to make the VE API non-blocking in the future we will need to handle
 		// special-cases like this where the content doesn't come from RESTBase.
 		this.fromEditedState = !!data.fromEditedState || !!data.preloaded;
-		this.switched = data.switched || new URL( location.href ).searchParams.has( 'wteswitched' );
+		this.switched = data.switched;
 		var mode = this.getDefaultMode();
 		var section = ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null;
 		this.doc = this.constructor.static.parseDocument( this.originalHtml, mode, section );
@@ -2311,46 +2311,24 @@ ve.init.mw.ArticleTarget.prototype.switchToFallbackWikitextEditor = function () 
  * Switch to the visual editor.
  */
 ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
-	var config = mw.config.get( 'wgVisualEditorConfig' ),
-		// NOTE: should be just config.allowSwitchingToVisualMode, but we need to preserve compatibility for a few minutes.
-		canSwitch = config.allowSwitchingToVisualMode || config.fullRestbaseUrl || config.allowLossySwitching,
-		target = this;
-
 	if ( !this.edited ) {
 		this.reloadSurface( 'visual' );
 		return;
 	}
 
-	// Show a discard-only confirm dialog, and then reload the whole page, if
-	// the server can't switch for us because that's not supported.
-	if ( !canSwitch ) {
-		var windowManager = new OO.ui.WindowManager();
-		var switchWindow = new mw.libs.ve.SwitchConfirmDialog();
-		$( document.body ).append( windowManager.$element );
-		windowManager.addWindows( [ switchWindow ] );
-		windowManager.openWindow( switchWindow, { mode: 'simple' } )
-			.closed.then( function ( data ) {
-				if ( data && data.action === 'discard' ) {
-					target.section = null;
-					target.reloadSurface( 'visual' );
-				}
-				windowManager.destroy();
-			} );
-	} else {
-		var url = new URL( location.href );
-		var dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.getPageName(), {
-			oldId: this.revid,
-			targetName: this.constructor.static.trackingName,
-			modified: this.edited,
-			wikitext: this.getDocToSave(),
-			section: this.section,
-			editintro: url.searchParams.get( 'editintro' ),
-			preload: url.searchParams.get( 'preload' ),
-			preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams )
-		} );
+	var url = new URL( location.href );
+	var dataPromise = mw.libs.ve.targetLoader.requestParsoidData( this.getPageName(), {
+		oldId: this.revid,
+		targetName: this.constructor.static.trackingName,
+		modified: this.edited,
+		wikitext: this.getDocToSave(),
+		section: this.section,
+		editintro: url.searchParams.get( 'editintro' ),
+		preload: url.searchParams.get( 'preload' ),
+		preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams )
+	} );
 
-		this.reloadSurface( 'visual', dataPromise );
-	}
+	this.reloadSurface( 'visual', dataPromise );
 };
 
 /**

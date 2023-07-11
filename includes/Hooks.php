@@ -256,10 +256,6 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			}
 		}
 
-		if ( $req->getVal( 'wteswitched' ) ) {
-			return self::isVisualAvailable( $title, $req, $user );
-		}
-
 		switch ( self::getEditPageEditor( $user, $req ) ) {
 			case 'visualeditor':
 				return self::isVisualAvailable( $title, $req, $user ) ||
@@ -1067,8 +1063,6 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),
 			'restbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorRestbaseURL' ) : false,
 			'fullRestbaseUrl' => $useRestbase ? $coreConfig->get( 'VisualEditorFullRestbaseURL' ) : false,
-			// XXX: Do we still need to be able to disable switching?
-			'allowSwitchingToVisualMode' => true,
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),

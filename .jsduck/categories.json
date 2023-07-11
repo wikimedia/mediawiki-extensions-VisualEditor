@@ -12,7 +12,6 @@
 			{
 				"name": "Switching",
 				"classes": [
-					"mw.libs.ve.SwitchConfirmDialog",
 					"mw.libs.ve.MWEditMode*Tool"
 				]
 			},
