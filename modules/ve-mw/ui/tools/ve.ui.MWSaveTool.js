@@ -44,6 +44,11 @@ ve.ui.MWSaveTool.static.group = 'save';
 ve.ui.MWSaveTool.static.fallbackIcon = 'next';
 ve.ui.MWSaveTool.static.commandName = 'showSave';
 ve.ui.MWSaveTool.static.autoAddToCatchall = false;
+if ( OO.ui.isMobile() ) {
+	// TODO: Have the mobile target build an icon-only version automatically.
+	ve.ui.MWSaveTool.static.icon = 'next';
+	ve.ui.MWSaveTool.static.displayBothIconAndLabel = false;
+}
 
 /* Methods */
 
