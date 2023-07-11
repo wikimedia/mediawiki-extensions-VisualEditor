@@ -1218,6 +1218,7 @@
 				"visualeditor-command-dialog-focus-context",
 				"visualeditor-commentinspector-title",
 				"visualeditor-commentinspector-tooltip",
+				"visualeditor-completionwidget-noresults",
 				"visualeditor-content-select-all",
 				"visualeditor-contextitemwidget-label-close",
 				"visualeditor-contextitemwidget-label-remove",
