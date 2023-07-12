@@ -11,7 +11,6 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use Exception;
-use Language;
 use LocalizedException;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Parser\Parsoid\ParsoidRenderID;
@@ -109,7 +108,7 @@ class DirectParsoidClient implements ParsoidClient {
 	 * @param string $html
 	 * @param int|null $oldid
 	 * @param string|null $etag
-	 * @param Language|null $pageLanguage
+	 * @param Bcp47Code|null $pageLanguage
 	 *
 	 * @return HtmlInputTransformHelper
 	 */
@@ -118,7 +117,7 @@ class DirectParsoidClient implements ParsoidClient {
 		string $html,
 		int $oldid = null,
 		string $etag = null,
-		Language $pageLanguage = null
+		Bcp47Code $pageLanguage = null
 	): HtmlInputTransformHelper {
 		$helper = $this->helperFactory->newHtmlInputTransformHelper();
 
@@ -144,12 +143,12 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Request page HTML from Parsoid.
 	 *
 	 * @param RevisionRecord $revision Page revision
-	 * @param ?Language $targetLanguage Page language (default: `null`)
+	 * @param ?Bcp47Code $targetLanguage Page language (default: `null`)
 	 *
 	 * @return array An array mimicking a RESTbase server's response,
 	 *   with keys: 'error', 'headers' and 'body'
 	 */
-	public function getPageHtml( RevisionRecord $revision, ?Language $targetLanguage = null ): array {
+	public function getPageHtml( RevisionRecord $revision, ?Bcp47Code $targetLanguage = null ): array {
 		// In the VE client, we always want to stash.
 		$page = $revision->getPage();
 
@@ -186,7 +185,7 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Transform wikitext to HTML with Parsoid. Wrapper for ::postData().
 	 *
 	 * @param PageIdentity $page The page the content belongs to use as the parsing context
-	 * @param Language $targetLanguage Page language
+	 * @param Bcp47Code $targetLanguage Page language
 	 * @param string $wikitext The wikitext fragment to parse
 	 * @param bool $bodyOnly Whether to provide only the contents of the `<body>` tag
 	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
@@ -197,7 +196,7 @@ class DirectParsoidClient implements ParsoidClient {
 	 */
 	public function transformWikitext(
 		PageIdentity $page,
-		Language $targetLanguage,
+		Bcp47Code $targetLanguage,
 		string $wikitext,
 		bool $bodyOnly,
 		?int $oldid,
@@ -225,7 +224,7 @@ class DirectParsoidClient implements ParsoidClient {
 	 * Transform HTML to wikitext with Parsoid
 	 *
 	 * @param PageIdentity $page The page the content belongs to
-	 * @param Language $targetLanguage The desired output language
+	 * @param Bcp47Code $targetLanguage The desired output language
 	 * @param string $html The HTML of the page to be transformed
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param ?string $etag The ETag to set in the HTTP request header
@@ -233,7 +232,7 @@ class DirectParsoidClient implements ParsoidClient {
 	 * @return array The response, 'code', 'reason', 'headers' and 'body'
 	 */
 	public function transformHTML(
-		PageIdentity $page, Language $targetLanguage, string $html, ?int $oldid, ?string $etag
+		PageIdentity $page, Bcp47Code $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
 		try {
 			$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
