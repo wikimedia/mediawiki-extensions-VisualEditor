@@ -52,7 +52,8 @@
 			"神樂坂秀吉",
 			"铁桶",
 			"飞舞回堂前",
-			"Func"
+			"Func",
+			"沈澄心"
 		]
 	},
 	"collabpad-doctitle": "协作板：$1",
@@ -74,9 +75,9 @@
 	"visualeditor-backbutton-tooltip": "返回",
 	"visualeditor-beta-warning": "如果您在编辑时遭遇任何技术问题，请汇报它们。",
 	"visualeditor-browserwarning": "此编辑器不支持您正在使用的浏览器。",
-	"visualeditor-ca-createlocaldescriptionsource": "添加本地说明源代码",
+	"visualeditor-ca-createlocaldescriptionsource": "添加本地描述源代码",
 	"visualeditor-ca-createsource": "创建源代码",
-	"visualeditor-ca-editlocaldescriptionsource": "编辑本地说明源代码",
+	"visualeditor-ca-editlocaldescriptionsource": "编辑本地描述源代码",
 	"visualeditor-ca-editsource": "编辑源代码",
 	"visualeditor-ca-editsource-section": "编辑源代码",
 	"visualeditor-categories-tool": "分类",

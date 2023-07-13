@@ -20,7 +20,8 @@
 			"ערן",
 			"פוילישער",
 			"קיפודנחש",
-			"תומר ט"
+			"תומר ט",
+			"Neriah"
 		]
 	},
 	"collabpad-doctitle": "פנקס שיתופי: $1",
@@ -53,7 +54,7 @@
 	"visualeditor-ca-editsource-section": "עריכת קוד מקור",
 	"visualeditor-categories-tool": "קטגוריות",
 	"visualeditor-changedesc-mwlanguagevariant": "השתנה סימון הגוון לשון",
-	"visualeditor-changedesc-mwredirect": "יעד ההפניה שוּנה מהדף $1 לדף $2",
+	"visualeditor-changedesc-mwredirect": "יעד ההפניה שונה מהדף $1 לדף $2",
 	"visualeditor-changedesc-mwtransclusion": "פרמטרי תבנית השתנו",
 	"visualeditor-desc": "עורך חזותי למדיה־ויקי",
 	"visualeditor-descriptionpagelink": "Project:עורך חזותי",
