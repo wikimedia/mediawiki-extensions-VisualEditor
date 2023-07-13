@@ -4,7 +4,6 @@ namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
-use MediaWiki\Extension\VisualEditor\DualParsoidClient;
 use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Permissions\Authority;
@@ -42,7 +41,6 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 	}
 
 	/**
-	 * @covers ::createParsoidClientInternal
 	 * @covers ::createParsoidClient
 	 */
 	public function testGetClient() {
@@ -53,11 +51,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 			VisualEditorParsoidClientFactory::DEFAULT_PARSOID_CLIENT_SETTING => 'direct',
 		] );
 
-		$client = $factory->createParsoidClientInternal( $authority );
+		$client = $factory->createParsoidClient( $authority );
 		$this->assertInstanceOf( DirectParsoidClient::class, $client );
-
-		// This just checks that nothing explodes.
-		$client = $factory->createParsoidClient( false, $authority );
-		$this->assertInstanceOf( DualParsoidClient::class, $client );
 	}
 }
