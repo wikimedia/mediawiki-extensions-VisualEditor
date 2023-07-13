@@ -1563,8 +1563,8 @@
 
 						switchToolbar.on( 'switchEditor', function ( m ) {
 							if ( m === 'visual' ) {
-								init.activateVe( 'visual' );
 								$( '#wpTextbox1' ).trigger( 'wikiEditor-switching-visualeditor' );
+								init.activateVe( 'visual' );
 							}
 						} );
 
