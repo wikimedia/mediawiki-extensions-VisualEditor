@@ -29,13 +29,13 @@
 		"grunt-eslint": "24.1.0",
 		"grunt-image": "5.0.1",
 		"grunt-mocha-test": "0.13.3",
-		"grunt-stylelint": "0.18.0",
+		"grunt-stylelint": "0.19.0",
 		"grunt-tyops": "0.1.1",
 		"jimp": "0.13.0",
 		"mocha": "5.2.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
-		"stylelint-config-wikimedia": "0.15.0",
+		"stylelint-config-wikimedia": "0.16.0",
 		"wdio-mediawiki": "2.1.0"
 	}
 }
