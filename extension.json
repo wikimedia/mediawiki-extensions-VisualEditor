@@ -157,7 +157,9 @@
 				"createlocaldescription": "create-local",
 				"createlocaldescriptionsource": "visualeditor-ca-createlocaldescriptionsource",
 				"editsection": "editsection",
-				"editsectionsource": "visualeditor-ca-editsource-section"
+				"editsectionhint": "editsectionhint",
+				"editsectionsource": "visualeditor-ca-editsource-section",
+				"editsectionsourcehint": "visualeditor-ca-editsource-section-hint"
 			}
 		},
 		"VisualEditorTabPosition": {

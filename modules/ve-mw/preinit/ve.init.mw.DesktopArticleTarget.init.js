@@ -1031,6 +1031,7 @@
 					var $editsection = $( this ),
 						$editSourceLink = $editsection.find( 'a' ).eq( 0 ),
 						$editLink = $editSourceLink.clone(),
+						sectionTitle = $editsection.siblings( '.mw-headline' ).text(),
 						$divider = $( '<span>' ),
 						dividerText = mw.msg( 'pipe-separator' );
 
@@ -1039,9 +1040,17 @@
 					// * config value of tabMessages.editsectionsource
 					$editSourceLink.text( mw.msg( tabMessages.editsectionsource ) );
 					// The following messages can be used here:
+					// * visualeditor-ca-editsource-section-hint
+					// * config value of tabMessages.editsectionsourcehint
+					$editSourceLink.attr( 'title', mw.msg( tabMessages.editsectionsourcehint, sectionTitle ) );
+					// The following messages can be used here:
 					// * editsection
-					// * config value of tabMessages.editsections
+					// * config value of tabMessages.editsection
 					$editLink.text( mw.msg( tabMessages.editsection ) );
+					// The following messages can be used here:
+					// * editsectionhint
+					// * config value of tabMessages.editsectionhint
+					$editLink.attr( 'title', mw.msg( tabMessages.editsectionhint, sectionTitle ) );
 
 					$divider
 						.addClass( 'mw-editsection-divider' )

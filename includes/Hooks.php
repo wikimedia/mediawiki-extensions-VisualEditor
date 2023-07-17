@@ -741,6 +741,11 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			// * visualeditor-ca-editsource-section
 			$sourceEditSection = $tabMessages['editsectionsource'];
 			$result['editsection']['text'] = $skin->msg( $sourceEditSection )->inLanguage( $lang )->text();
+			// The following messages can be used here:
+			// * visualeditor-ca-editsource-section-hint
+			$sourceEditSectionHint = $tabMessages['editsectionsourcehint'];
+			$result['editsection']['attribs']['title'] = $skin->msg( $sourceEditSectionHint )->rawParams( $tooltip )
+				->inLanguage( $lang )->text();
 		}
 
 		// Exit if we're using the single edit tab.
@@ -753,10 +758,17 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 
 		// add VE edit section in VE available namespaces
 		if ( self::isVisualAvailable( $title, $skin->getRequest(), $user ) ) {
+			// The following messages can be used here:
+			// * editsection
 			$veEditSection = $tabMessages['editsection'];
+			// The following messages can be used here:
+			// * editsectionhint
+			$veEditSectionHint = $tabMessages['editsectionhint'];
 
 			$attribs = $result['editsection']['attribs'];
 			$attribs['class'] = ( $attribs['class'] ?? '' ) . ' mw-editsection-visualeditor';
+			$attribs['title'] = $skin->msg( $veEditSectionHint )->rawParams( $tooltip )
+				->inLanguage( $lang )->text();
 
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
