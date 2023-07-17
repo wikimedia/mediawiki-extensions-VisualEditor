@@ -29,7 +29,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client->method( 'getPageHtml' )->willReturnCallback(
 			static function () {
 				return [
-					'body' => 'mode:direct',
+					'body' => '',
 					'headers' => [
 						'etag' => '"abcdef1234"',
 					]
@@ -40,7 +40,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client->method( 'transformWikitext' )->willReturnCallback(
 			static function () {
 				return [
-					'body' => 'mode:direct',
+					'body' => '',
 					'headers' => [
 						'etag' => '"abcdef1234"',
 					]
@@ -57,7 +57,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 				?string $etag
 			) {
 				return [
-					'body' => 'mode:direct; etag:' . $etag,
+					'body' => 'etag:' . $etag,
 					'headers' => []
 				];
 			}
@@ -97,10 +97,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$client = $this->createDualClient();
 		$result = $client->getPageHtml( $this->createNoOpMock( RevisionRecord::class ), null );
 
-		$this->assertSame( 'mode:direct', $result['body'] );
-
 		$etag = $result['headers']['etag'];
-		$this->assertStringContainsString( '"direct:', $etag );
 
 		// Check round trip using the etag returned by the call above
 		$client = $this->createDualClient( 'xyzzy' );
@@ -111,7 +108,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 			null,
 			$etag
 		);
-		$this->assertStringContainsString( 'mode:direct', $result['body'] );
+		$this->assertStringNotContainsString( 'mode:direct', $result['body'] );
 	}
 
 	public function testTransformWikitext() {
@@ -125,10 +122,8 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 			false
 		);
 
-		$this->assertSame( 'mode:direct', $result['body'] );
-
 		$etag = $result['headers']['etag'];
-		$this->assertStringContainsString( '"direct:', $etag );
+		$this->assertStringNotContainsString( '"direct:', $etag );
 
 		// Check round trip using the etag returned by the call above
 		$client = $this->createDualClient( 'xyzzy' );
@@ -139,7 +134,7 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 			null,
 			$etag
 		);
-		$this->assertStringContainsString( 'mode:direct', $result['body'] );
+		$this->assertStringNotContainsString( 'mode:direct', $result['body'] );
 	}
 
 	public static function provideTransformHTML() {
@@ -162,8 +157,6 @@ class DualParsoidClientTest extends MediaWikiIntegrationTestCase {
 			null,
 			$etag
 		);
-
-		$this->assertStringContainsString( "mode:direct", $result['body'] );
 
 		if ( $etag ) {
 			$this->assertStringContainsString( "abcdef", $result['body'] );
