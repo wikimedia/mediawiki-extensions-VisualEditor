@@ -1137,7 +1137,6 @@
 				"lib/ve/src/ui/styles/dialogs/ve.ui.ProgressDialog.css",
 				"lib/ve/src/ui/styles/dialogs/ve.ui.SpecialCharacterDialog.css",
 				"lib/ve/src/ui/styles/dialogs/ve.ui.TableDialog.css",
-				"lib/ve/src/ui/styles/elements/ve.ui.PreviewElement.css",
 				"lib/ve/src/ui/styles/tools/ve.ui.FormatTool.css",
 				"lib/ve/src/ui/styles/widgets/ve.ui.CompletionWidget.css",
 				"lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.css",
