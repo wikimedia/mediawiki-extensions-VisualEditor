@@ -42,24 +42,6 @@ class DualParsoidClient implements ParsoidClient {
 	}
 
 	/**
-	 * Inject information about what ParsoidClient implementation was used
-	 * into the ETag header.
-	 *
-	 * @param array &$result
-	 * @param ParsoidClient $client
-	 */
-	private static function injectMode( array &$result, ParsoidClient $client ) {
-		$mode = 'direct';
-
-		if ( isset( $result['headers']['etag'] ) ) {
-			$etag = $result['headers']['etag'];
-
-			// Inject $mode after double-quote
-			$result['headers']['etag'] = preg_replace( '/^(W\/)?"(.*)"$/', '$1"' . $mode . ':$2"', $etag );
-		}
-	}
-
-	/**
 	 * Strip information about what ParsoidClient implementation to use from the ETag,
 	 * restoring it to the original ETag originally emitted by that ParsoidClient.
 	 *
@@ -85,11 +67,7 @@ class DualParsoidClient implements ParsoidClient {
 	 * @inheritDoc
 	 */
 	public function getPageHtml( RevisionRecord $revision, ?Bcp47Code $targetLanguage ): array {
-		$client = $this->createParsoidClient();
-		$result = $client->getPageHtml( $revision, $targetLanguage );
-
-		self::injectMode( $result, $client );
-		return $result;
+		return $this->createParsoidClient()->getPageHtml( $revision, $targetLanguage );
 	}
 
 	/**
@@ -108,10 +86,7 @@ class DualParsoidClient implements ParsoidClient {
 			$etag = self::stripMode( $etag );
 		}
 
-		$result = $client->transformHTML( $page, $targetLanguage, $html, $oldid, $etag );
-
-		self::injectMode( $result, $client );
-		return $result;
+		return $client->transformHTML( $page, $targetLanguage, $html, $oldid, $etag );
 	}
 
 	/**
@@ -125,10 +100,8 @@ class DualParsoidClient implements ParsoidClient {
 		?int $oldid,
 		bool $stash
 	): array {
-		$client = $this->createParsoidClient();
-		$result = $client->transformWikitext( $page, $targetLanguage, $wikitext, $bodyOnly, $oldid, $stash );
-
-		self::injectMode( $result, $client );
-		return $result;
+		return $this->createParsoidClient()->transformWikitext(
+			$page, $targetLanguage, $wikitext, $bodyOnly, $oldid, $stash
+		);
 	}
 }
