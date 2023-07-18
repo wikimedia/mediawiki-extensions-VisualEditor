@@ -22,6 +22,8 @@
 	"visualeditor-categories-tool": "Категориялар",
 	"visualeditor-descriptionpagelink": "Project:Көрсөтмөлүү оңдоо",
 	"visualeditor-dialog-media-content-section": "Кол тамга",
+	"visualeditor-dialog-media-info-uploaded": "Жүктөлдү: $1",
+	"visualeditor-dialog-media-save": "Сактоо",
 	"visualeditor-dialog-media-search-tab-search": "Издөө",
 	"visualeditor-dialog-media-search-tab-upload": "Жүктөө",
 	"visualeditor-dialog-media-upload": "Жүктөө",
@@ -52,6 +54,8 @@
 	"visualeditor-languages-tool": "Тилдер",
 	"visualeditor-linkinspector-educationpopup-title": "Шилтемелер",
 	"visualeditor-mweditmodesource-warning-cancel": "Жокко чыгаруу",
+	"visualeditor-savedialog-label-save-short": "Сактоо",
+	"visualeditor-savedialog-label-save-short-start": "Сактоо…",
 	"visualeditor-savedialog-title-review": "Өзгөртүүлөрдү карап чыгуу",
 	"visualeditor-savedialog-title-save": "Өзгөртүүлөрдү сактоо"
 }
