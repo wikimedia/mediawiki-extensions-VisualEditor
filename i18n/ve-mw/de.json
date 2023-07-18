@@ -55,6 +55,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Lokalen Beschreibungsquelltext bearbeiten",
 	"visualeditor-ca-editsource": "Quelltext bearbeiten",
 	"visualeditor-ca-editsource-section": "Quelltext bearbeiten",
+	"visualeditor-ca-editsource-section-hint": "Quellcode des Abschnitts bearbeiten: $1",
 	"visualeditor-categories-tool": "Kategorien",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Sortierschlüssel von $1 auf $2 geändert",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Sortierschlüssel auf $1 gesetzt",
