@@ -190,6 +190,7 @@
 			"services": [
 				"RevisionLookup",
 				"TempUserCreator",
+				"UserFactory",
 				"UserOptionsLookup",
 				"WatchlistManager",
 				"ContentTransformer",

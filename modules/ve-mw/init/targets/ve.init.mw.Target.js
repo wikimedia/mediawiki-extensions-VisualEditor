@@ -615,13 +615,41 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
  * @return {jQuery.Promise} Abortable promise
  */
 ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, doc ) {
-	return this.getContentApi( doc ).post( {
-		action: 'visualeditor',
-		paction: 'parsefragment',
-		page: this.getPageName( doc ),
-		wikitext: wikitext,
-		pst: pst
-	} );
+	var target = this;
+	var abortable, aborted;
+	var abortedPromise = ve.createDeferred().reject( 'http',
+		{ textStatus: 'abort', exception: 'abort' } ).promise();
+
+	function abort() {
+		aborted = true;
+		if ( abortable && abortable.abort ) {
+			abortable.abort();
+		}
+	}
+
+	// Acquire a temporary user username before previewing or diffing, so that signatures and
+	// user-related magic words display the temp user instead of IP user in the preview. (T331397)
+	var tempUserNamePromise;
+	if ( pst ) {
+		tempUserNamePromise = mw.user.acquireTempUserName();
+	} else {
+		tempUserNamePromise = ve.createDeferred().resolve( null );
+	}
+
+	return tempUserNamePromise
+		.then( function () {
+			if ( aborted ) {
+				return abortedPromise;
+			}
+			return ( abortable = target.getContentApi( doc ).post( {
+				action: 'visualeditor',
+				paction: 'parsefragment',
+				page: target.getPageName( doc ),
+				wikitext: wikitext,
+				pst: pst
+			} ) );
+		} )
+		.promise( { abort: abort } );
 };
 
 /**

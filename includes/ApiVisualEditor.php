@@ -35,10 +35,12 @@ use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Title\Title;
 use MediaWiki\User\TempUser\TempUserCreator;
+use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
 use MessageLocalizer;
 use RequestContext;
+use User;
 use Wikimedia\ParamValidator\ParamValidator;
 use WikitextContent;
 
@@ -48,6 +50,7 @@ class ApiVisualEditor extends ApiBase {
 
 	private RevisionLookup $revisionLookup;
 	private TempUserCreator $tempUserCreator;
+	private UserFactory $userFactory;
 	private UserOptionsLookup $userOptionsLookup;
 	private WatchlistManager $watchlistManager;
 	private ContentTransformer $contentTransformer;
@@ -62,6 +65,7 @@ class ApiVisualEditor extends ApiBase {
 		string $name,
 		RevisionLookup $revisionLookup,
 		TempUserCreator $tempUserCreator,
+		UserFactory $userFactory,
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
 		ContentTransformer $contentTransformer,
@@ -77,6 +81,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->setStats( $statsdDataFactory );
 		$this->revisionLookup = $revisionLookup;
 		$this->tempUserCreator = $tempUserCreator;
+		$this->userFactory = $userFactory;
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->watchlistManager = $watchlistManager;
 		$this->contentTransformer = $contentTransformer;
@@ -97,6 +102,20 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	/**
+	 * @see ApiParse::getUserForPreview
+	 * @return User
+	 */
+	private function getUserForPreview() {
+		$user = $this->getUser();
+		if ( $this->tempUserCreator->shouldAutoCreate( $user, 'edit' ) ) {
+			return $this->userFactory->newUnsavedTempUser(
+				$this->tempUserCreator->getStashedName( $this->getRequest()->getSession() )
+			);
+		}
+		return $user;
+	}
+
+	/**
 	 * Run wikitext through the parser's Pre-Save-Transform
 	 *
 	 * @param Title $title The title of the page to use as the parsing context
@@ -108,7 +127,7 @@ class ApiVisualEditor extends ApiBase {
 		return $this->contentTransformer->preSaveTransform(
 			$content,
 			$title,
-			$this->getUser(),
+			$this->getUserForPreview(),
 			$this->wikiPageFactory->newFromTitle( $title )->makeParserOptions( $this->getContext() )
 		)
 		->serialize( 'text/x-wiki' );
