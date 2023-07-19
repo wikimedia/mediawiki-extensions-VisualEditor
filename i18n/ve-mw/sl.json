@@ -37,6 +37,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Uredi vir lokalnega opisa",
 	"visualeditor-ca-editsource": "Uredi kodo",
 	"visualeditor-ca-editsource-section": "uredi kodo",
+	"visualeditor-ca-editsource-section-hint": "Urejanje izvorne kode razdelka: $1",
 	"visualeditor-categories-tool": "Kategorije",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Razvrstilni ključ se je spremenil iz $1 v $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Razvrstilni ključ nastavljen v $1",

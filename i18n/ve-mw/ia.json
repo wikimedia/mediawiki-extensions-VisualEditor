@@ -32,6 +32,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Modificar description local (codice fonte)",
 	"visualeditor-ca-editsource": "Modificar fonte",
 	"visualeditor-ca-editsource-section": "modificar fonte",
+	"visualeditor-ca-editsource-section-hint": "Modificar le codice fonte del section: $1",
 	"visualeditor-categories-tool": "Categorias",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Clave de ordination cambiate de $1 in $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Calve de ordination mittite a $1",
