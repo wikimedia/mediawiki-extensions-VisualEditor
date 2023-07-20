@@ -88,6 +88,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Modifier la description locale (wikicode)",
 	"visualeditor-ca-editsource": "Modifier le wikicode",
 	"visualeditor-ca-editsource-section": "modifier le wikicode",
+	"visualeditor-ca-editsource-section-hint": "Modifier le code source de la section : $1",
 	"visualeditor-categories-tool": "Catégories",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Clé de tri changée de $1 en $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Clé de tri $1 définie",
