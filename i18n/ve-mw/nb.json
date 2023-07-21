@@ -49,6 +49,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Rediger lokal beskrivelse for kilde",
 	"visualeditor-ca-editsource": "Rediger kilde",
 	"visualeditor-ca-editsource-section": "rediger kilde",
+	"visualeditor-ca-editsource-section-hint": "Rediger kildekoden til seksjonen $1",
 	"visualeditor-categories-tool": "Kategorier",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Sorteringsnøkkel endret fra $1 til $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Sorteringsnøkkel satt til $1",

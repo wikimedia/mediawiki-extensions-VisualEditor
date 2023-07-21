@@ -35,6 +35,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Уреди изворен месен опис",
 	"visualeditor-ca-editsource": "Уреди извор",
 	"visualeditor-ca-editsource-section": "уреди извор",
+	"visualeditor-ca-editsource-section-hint": "Уреди изворен код на одделот: $1",
 	"visualeditor-categories-tool": "Категории",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Променет клучот на подредување од $1 на $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Клучот на подредување зададен како $1",
