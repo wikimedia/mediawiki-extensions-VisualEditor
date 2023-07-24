@@ -53,6 +53,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Επεξεργασία σελίδας τοπικής περιγραφής",
 	"visualeditor-ca-editsource": "Επεξεργασία κώδικα",
 	"visualeditor-ca-editsource-section": "επεξεργασία κώδικα",
+	"visualeditor-ca-editsource-section-hint": "Επεξεργαστείτε τον πηγαίο κώδικα της ενότητας: $1",
 	"visualeditor-categories-tool": "Κατηγορίες",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Το κλειδί ταξινόμησης άλλαξε από $1 σε $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Το κλειδί ταξινόμησης ορίστηκε σε $1",

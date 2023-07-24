@@ -44,6 +44,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "স্থানীয় বিবরণের উৎস সম্পাদনা করুন",
 	"visualeditor-ca-editsource": "উৎস সম্পাদনা",
 	"visualeditor-ca-editsource-section": "উৎস সম্পাদনা",
+	"visualeditor-ca-editsource-section-hint": "অনুচ্ছেদের উৎস কোড সম্পাদনা করুন: $1",
 	"visualeditor-categories-tool": "বিষয়শ্রেণীসমূহ",
 	"visualeditor-changedesc-mwlanguagevariant": "ভাষার বৈকল্পিক মার্কআপ পরিবর্তিত",
 	"visualeditor-changedesc-mwredirect": "পুনর্নির্দেশের লক্ষ্য $1 থেকে $2-এ পরিবর্তিত হয়েছে",
