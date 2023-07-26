@@ -7,7 +7,17 @@
 			"Гусейн"
 		]
 	},
-	"tooltip-ca-ve-edit": "İm səhifə sərost kardey",
+	"collabpad-doctitle": "CollabPad: $1",
+	"collabpad-import-subtitle": "Cyjo pegətə byə $1",
+	"collabpad": "CollabPad",
+	"tooltip-ca-createsource": "Iminə mətni redaktorədə səhifə soxtej",
+	"tooltip-ca-edit": "Ym səhifə viki-mətni režimədə sərost karde",
+	"tooltip-ca-editsource": "Ce ym səhifə iminə mətni sərost kardej",
+	"tooltip-ca-ve-edit": "Ym səhifə sərost kardej",
+	"visualeditor-advancedsettings-tool": "Zijodə səbəro",
+	"visualeditor-annotations-default-description": "Ce səhifə ym ǧysm ce annotasijon diapazoni ǧysme",
+	"visualeditor-annotations-default-end": "Annotasijon ǧysmi oxoj",
+	"visualeditor-annotations-default-start": "Annotasijon diapazoni bino",
 	"visualeditor-ca-createlocaldescriptionsource": "Buminə link soxte bənə kodi",
 	"visualeditor-ca-createsource": "Kodi bysoxtən",
 	"visualeditor-ca-editsource": "Mənbə sərost karde",

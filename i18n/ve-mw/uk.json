@@ -56,6 +56,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Редагувати джерело локального опису",
 	"visualeditor-ca-editsource": "Редагувати код",
 	"visualeditor-ca-editsource-section": "ред. код",
+	"visualeditor-ca-editsource-section-hint": "Редагувати вихідний код розділу: $1",
 	"visualeditor-categories-tool": "Категорії",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Ключ сортування змінено з $1 на $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Ключ сортування встановлено як $1",

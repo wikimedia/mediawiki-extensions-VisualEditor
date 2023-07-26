@@ -38,6 +38,7 @@
 	"apihelp-visualeditoredit-param-cachekey": "Використати результат попереднього запиту serializeforcache із цим ключем. Нехтує $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "ID капчі (при збереженні з показуванням капчі).",
 	"apihelp-visualeditoredit-param-captchaword": "Відповідь на капчу (при збереженні з показуванням капчі).",
+	"apihelp-visualeditoredit-param-nocontent": "Пропустити HTML-вміст нової версії у відповіді.",
 	"apihelp-visualeditoredit-param-plugins": "Плагіни, пов'язані із API-запитом.",
 	"apihelp-visualeditoredit-param-data-{plugin}": "Довільні дані, які надсилає плагін із API-запитом.",
 	"apihelp-visualeditoredit-param-etag": "ETag для надсилання.",
