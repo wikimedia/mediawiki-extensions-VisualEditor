@@ -66,10 +66,10 @@ ve.init.mw.Target.static.toolbarGroups = [
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		label: OO.ui.deferMsg( 'visualeditor-toolbar-style-tooltip' ),
 		invisibleLabel: true,
-		include: [ { group: 'textStyle' }, 'language', 'clear' ],
+		include: [ { group: 'textStyle' } ],
 		forceExpand: [ 'bold', 'italic', 'clear' ],
-		promote: [ 'bold', 'italic' ],
-		demote: [ 'strikethrough', 'code', 'underline', 'language', 'big', 'small', 'clear' ]
+		promote: [ 'bold', 'italic', 'superscript', 'subscript' ],
+		demote: [ 'clear' ]
 	},
 	{
 		name: 'link',
