@@ -63,18 +63,6 @@ class VisualEditorParsoidClientFactory {
 			$performer = RequestContext::getMain()->getAuthority();
 		}
 
-		return new DualParsoidClient( $this, $performer );
-	}
-
-	/**
-	 * Create a ParsoidClient for accessing Parsoid.
-	 *
-	 * @internal For use by DualParsoidClient only.
-	 * @param Authority $performer
-	 *
-	 * @return ParsoidClient
-	 */
-	public function createParsoidClientInternal( Authority $performer ): ParsoidClient {
 		return $this->createDirectClient( $performer );
 	}
 
