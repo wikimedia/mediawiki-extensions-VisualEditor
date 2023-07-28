@@ -1,13 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ante75",
 			"Kimberli Mäkäräinen (WMNO)"
 		]
 	},
+	"tag-editcheck-newcontent-description": "EditCheck doaivu ahte ođđa sisdoallu lea lasihuvvon siidui",
 	"tag-editcheck-newreference-description": "Siidui lasihuvvui gáldu",
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuála rievdadus]]",
-	"tag-visualeditor-wikitext": "Wikiteaksta rievdaduvvon 2017-rievdadanprográmmain",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuála rievdadus: molsojuvvon]]",
+	"tag-editcheck-references-description": "EditCheck doaivu ahte okta referánsa sáhttá leamáš dárbbašlaš",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Oinnolaš rievdadus]]",
+	"tag-visualeditor-description": "Rievdadus dahkkon [[{{MediaWiki:visualeditor-descriptionpagelink}}|oinnolaš divodemiid]] bokte",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Oinnolaš rievdadus: Dárkkis]]",
+	"tag-visualeditor-wikitext": "2017 gálduin rievdadus",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Oinnolaš rievdadus: Lonuluvvon]]",
 	"tag-visualeditor-switched-description": "Geavaheaddji rievdadišgođii visuála rievdadanprográmmain, muhto das maŋŋá son molssui wikiteavstta rievdadanprográmmii.",
 	"visualeditor-feedback-link": "Project:Visuála rievdadanprográmma/Máhcahat",
 	"visualeditor-feedback-tool": "Atte máhcahaga dán prográmmadaga birra",
