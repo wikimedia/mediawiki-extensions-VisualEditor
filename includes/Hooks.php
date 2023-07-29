@@ -550,6 +550,8 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		// us to splice into the middle of an associative array.
 		$newViews = [];
 		$wikiPageFactory = $services->getWikiPageFactory();
+		$isRemote = $title->inNamespace( NS_FILE ) &&
+			!$wikiPageFactory->newFromTitle( $title )->isLocal();
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
 				// Build the VisualEditor tab
@@ -567,32 +569,50 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 				// @phan-suppress-next-line PhanTypeInvalidDimOffset
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					$skin->msg( $veTabMessage )->text();
+				if ( $isRemote ) {
+					// The following messages can be used here:
+					// * tooltip-ca-ve-edit-local
+					// * tooltip-ca-ve-create-local
+					$veTooltip = 'ca-ve-' . $action . '-local';
+				} else {
+					// The following messages can be used here:
+					// * tooltip-ca-ve-edit
+					// * tooltip-ca-ve-create
+					$veTooltip = 'ca-ve-' . $action;
+				}
 				$veTab = [
 					'href' => $title->getLocalURL( $veParams ),
 					'text' => $veTabText,
+					'single-id' => $veTooltip,
 					'primary' => true,
 					'class' => '',
 				];
 
 				// Alter the edit tab
 				$editTab = $data;
-				if (
-					$title->inNamespace( NS_FILE ) &&
-					!$wikiPageFactory->newFromTitle( $title )->isLocal()
-				) {
+				if ( $isRemote ) {
 					// The following messages can be used here:
 					// * visualeditor-ca-editlocaldescriptionsource
 					// * visualeditor-ca-createlocaldescriptionsource
 					$editTabMessage = $tabMessages[$action . 'localdescriptionsource'];
+					// The following messages can be used here:
+					// * tooltip-ca-editsource-local
+					// * tooltip-ca-createsource-local
+					$editTabTooltip = 'ca-' . $action . 'source-local';
 				} else {
 					// The following messages can be used here:
 					// * visualeditor-ca-editsource
 					// * visualeditor-ca-createsource
 					$editTabMessage = $tabMessages[$action . 'source'];
+					// The following messages can be used here:
+					// * tooltip-ca-editsource
+					// * tooltip-ca-createsource
+					$editTabTooltip = 'ca-' . $action . 'source';
 				}
 
 				if ( $editTabMessage !== null ) {
 					$editTab['text'] = $skin->msg( $editTabMessage )->text();
+					$editTab['single-id'] = $editTabTooltip;
 				}
 
 				$editor = self::getLastEditor( $user, $skin->getRequest() );
