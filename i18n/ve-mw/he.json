@@ -53,7 +53,7 @@
 	"visualeditor-ca-editsource-section": "עריכת קוד מקור",
 	"visualeditor-ca-editsource-section-hint": "עריכת קוד המקור של הפרק: $1",
 	"visualeditor-categories-tool": "קטגוריות",
-	"visualeditor-changedesc-mwcategory-sortkey-changed": "מפתח המיון שוּנה מהמחרוזת \"$1\" אל \"$2\"",
+	"visualeditor-changedesc-mwcategory-sortkey-changed": "מפתח המיון שוּנה מהמחרוזת \"$1\" למחרוזת \"$2\"",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "מפתח המיון הוגדר למחרוזת $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "מפתח המיון \"$1\" הוסר",
 	"visualeditor-changedesc-mwlanguagevariant": "השתנה סימון הגוון לשון",

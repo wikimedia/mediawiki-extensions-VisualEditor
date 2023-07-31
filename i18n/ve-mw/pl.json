@@ -60,6 +60,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Edytuj kod źródłowy lokalnego opisu",
 	"visualeditor-ca-editsource": "Edytuj kod źródłowy",
 	"visualeditor-ca-editsource-section": "edytuj kod",
+	"visualeditor-ca-editsource-section-hint": "Edytuj kod źródłowy sekcji: $1",
 	"visualeditor-categories-tool": "Kategorie",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Zmieniono klucz sortowania z $1 na $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Ustawiono klucz sortowania $1",

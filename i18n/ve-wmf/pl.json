@@ -22,7 +22,9 @@
 			"아라"
 		]
 	},
-	"tag-editcheck-references-description": "Automatyczny pomocnik stwierdził, że w tej edycji przydałby się przypis",
+	"tag-editcheck-newcontent-description": "Automatyczny pomocnik uważa, że do strony została dodana nowa treść",
+	"tag-editcheck-newreference-description": "Do strony dodano przypis",
+	"tag-editcheck-references-description": "Automatyczny pomocnik stwierdził, że przydałby się przypis",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-description": "Edycja z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizualnego]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: do sprawdzenia]]",
