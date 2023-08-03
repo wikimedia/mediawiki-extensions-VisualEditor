@@ -340,7 +340,7 @@
 	"visualeditor-rebase-client-title-help": "תהיה לך הזדמנות לסקור את השינויים לפני השמירה.",
 	"visualeditor-recreate": "הדף הזה נמחק מאז שהתחלת לערוך. לחיצה על \"$1\" תיצור את הדף מחדש.",
 	"visualeditor-redirect-description": "הפניה ל{{GRAMMAR:תחילית|$1}}",
-	"visualeditor-savedialog-error-badtoken": "לא הצלחנו לשמור את העריכה שלך, כי ההתחברות איננה תקינה עוד.",
+	"visualeditor-savedialog-error-badtoken": "לא הצלחנו לשמור את העריכה שלך, כי ההתחברות כבר לא הייתה תקינה.",
 	"visualeditor-savedialog-identify-anon": "האם ברצונך לשמור את הדף הזה כמשתמש אלמוני? כתובת ה־IP שלך תישמר בהיסטוריית העריכות של הדף הזה.",
 	"visualeditor-savedialog-identify-trylogin": "לא נכנסת לחשבון. נא להיכנס שוב לחשבון בלשונית אחרת ולנסות שוב.",
 	"visualeditor-savedialog-identify-user": "נכנסת למערכת בשם [[User:$1|$1]]. העריכה שלך תשויך לחשבון הזה עם שמירת העריכה הזאת.",

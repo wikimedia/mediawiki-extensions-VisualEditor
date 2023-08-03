@@ -296,6 +296,7 @@
 	"visualeditor-rebase-client-export-start": "Извези…",
 	"visualeditor-rebase-client-import": "Увези",
 	"visualeditor-rebase-client-import-name": "Наслов странице",
+	"visualeditor-rebase-client-title-help": "Моћићете да прегледате измене пре чувања истих.",
 	"visualeditor-recreate": "Страница је у међувремену избрисана. Притисните „$1” да бисте је поново направили.",
 	"visualeditor-redirect-description": "Преусмерава на „$1”",
 	"visualeditor-savedialog-error-badtoken": "Нисмо могли да сачувамо вашу измену зато што сесија више није важећа.",
