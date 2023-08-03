@@ -909,14 +909,15 @@
 				caVeEditNextnode =
 					( conf.tabPosition === 'before' ) ?
 						$caEdit.get( 0 ) :
-						$caEdit.next().get( 0 );
+						$caEdit.next().get( 0 ),
+				isRemote = $( '#ca-view-foreign' ).length;
 
 			if ( !$caVeEdit.length ) {
 				// The below duplicates the functionality of VisualEditorHooks::onSkinTemplateNavigation()
 				// in case we're running on a cached page that doesn't have these tabs yet.
 
 				// Alter the edit tab (#ca-edit)
-				if ( $( '#ca-view-foreign' ).length ) {
+				if ( isRemote ) {
 					if ( tabMessages[ action + 'localdescriptionsource' ] ) {
 						// The following messages can be used here:
 						// * visualeditor-ca-editlocaldescriptionsource
@@ -931,6 +932,13 @@
 						$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
 					}
 				}
+				// The following messages can be used here:
+				// * tooltip-ca-editsource
+				// * tooltip-ca-createsource
+				// * tooltip-ca-editsource-local
+				// * tooltip-ca-createsource-local
+				$caEditLink.attr( 'title', mw.msg( 'tooltip-ca-' + action + 'source' + ( isRemote ? '-local' : '' ) ) );
+				$caEditLink.updateTooltipAccessKeys();
 
 				// If there is no edit tab or a view-source tab,
 				// the user doesn't have permission to edit.
@@ -944,9 +952,14 @@
 						// 2) when onEditTabClick is not bound (!pageCanLoadEditor) it will
 						// just work.
 						veEditUrl,
-						getTabMessage( action + ( $( '#ca-view-foreign' ).length ? '-local' : '' ) ),
+						getTabMessage( action + ( isRemote ? '-local' : '' ) ),
 						'ca-ve-edit',
-						mw.msg( 'tooltip-ca-ve-edit' ),
+						// The following messages can be used here:
+						// * tooltip-ca-ve-edit
+						// * tooltip-ca-ve-create
+						// * tooltip-ca-ve-edit-local
+						// * tooltip-ca-ve-create-local
+						mw.msg( 'tooltip-ca-ve-' + action + ( isRemote ? '-local' : '' ) ),
 						mw.msg( 'accesskey-ca-ve-edit' ),
 						caVeEditNextnode
 					);
@@ -967,7 +980,14 @@
 						$caEdit.after( $caVeEdit );
 					}
 				}
-				$caVeEditLink.text( getTabMessage( action + ( $( '#ca-view-foreign' ).length ? '-local' : '' ) ) );
+				$caVeEditLink.text( getTabMessage( action + ( isRemote ? '-local' : '' ) ) );
+				// The following messages can be used here:
+				// * tooltip-ca-ve-edit
+				// * tooltip-ca-ve-create
+				// * tooltip-ca-ve-edit-local
+				// * tooltip-ca-ve-create-local
+				$caVeEditLink.attr( 'title', mw.msg( 'tooltip-ca-ve-' + action + ( isRemote ? '-local' : '' ) ) );
+				$caVeEditLink.updateTooltipAccessKeys();
 			}
 
 			// If the edit tab is hidden, remove it.
