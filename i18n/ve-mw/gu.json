@@ -10,9 +10,9 @@
 			"The Discoverer"
 		]
 	},
-	"tooltip-ca-createsource": "આ પાનાંનો સ્રોત કોડ બનાવો",
-	"tooltip-ca-editsource": "આ પાનાંના સ્રોત કોડમાં ફેરફાર કરો",
 	"tooltip-ca-ve-edit": "આ પાનામાં ફેરફાર કરો",
+	"tooltip-ca-editsource": "આ પાનાંના સ્રોત કોડમાં ફેરફાર કરો",
+	"tooltip-ca-createsource": "આ પાનાંનો સ્રોત કોડ બનાવો",
 	"visualeditor-advancedsettings-tool": "ઉચ્ચ ગોઠવણીઓ",
 	"visualeditor-autosave-modified-prompt-accept": "ફેરફાર ચાલુ રાખો",
 	"visualeditor-autosave-modified-prompt-reject": "નવો ફેરફાર શરૂ કરો",

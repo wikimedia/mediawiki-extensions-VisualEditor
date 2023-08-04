@@ -11,10 +11,9 @@
 			"Suwa"
 		]
 	},
-	"tooltip-ca-createsource": "Loo selle lehekülje lähtetekst",
-	"tooltip-ca-edit": "Redigeeri lehekülge vikiteksti vahendusel",
-	"tooltip-ca-editsource": "Redigeeri selle lehekülje lähteteksti",
 	"tooltip-ca-ve-edit": "Muuda seda lehekülge",
+	"tooltip-ca-editsource": "Redigeeri selle lehekülje lähteteksti",
+	"tooltip-ca-createsource": "Loo selle lehekülje lähtetekst",
 	"visualeditor-advancedsettings-tool": "Täpsemad sätted",
 	"visualeditor-autosave-modified-prompt-accept": "Jätka muutmist",
 	"visualeditor-autosave-modified-prompt-message": "Pärast seda, kui lehekülje laadisid, on seda muudetud. Kas soovid jätkata vana versiooni muutmist või alustad uue versiooni muutmisega?",

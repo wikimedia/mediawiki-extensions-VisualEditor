@@ -8,10 +8,9 @@
 			"TMg"
 		]
 	},
-	"tooltip-ca-createsource": "Búa til frumkóða síðunnar",
-	"tooltip-ca-edit": "Breyta þessari síðu með wikikóða",
-	"tooltip-ca-editsource": "Breyta frumkóða síðunnar",
 	"tooltip-ca-ve-edit": "Breyta þessari síðu",
+	"tooltip-ca-editsource": "Breyta frumkóða síðunnar",
+	"tooltip-ca-createsource": "Búa til frumkóða síðunnar",
 	"visualeditor-advancedsettings-tool": "Ítarlegar stillingar",
 	"visualeditor-backbutton-tooltip": "Til baka",
 	"visualeditor-browserwarning": "Þú ert að nota vafra sem þessi ritill styður ekki opinberlega.",

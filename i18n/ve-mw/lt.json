@@ -18,10 +18,9 @@
 			"Zygimantus"
 		]
 	},
-	"tooltip-ca-createsource": "Sukurti šio puslapio išeities kodą",
-	"tooltip-ca-edit": "Redaguoti šį puslapį naudojant vikitekstą",
-	"tooltip-ca-editsource": "Redaguoti šio puslapio išeities kodą",
 	"tooltip-ca-ve-edit": "Redaguoti šį puslapį",
+	"tooltip-ca-editsource": "Redaguoti šio puslapio išeities kodą",
+	"tooltip-ca-createsource": "Sukurti šio puslapio išeities kodą",
 	"visualeditor-advancedsettings-tool": "Išplėstiniai nustatymai",
 	"visualeditor-autosave-modified-prompt-accept": "Tęsti redagavimą",
 	"visualeditor-autosave-modified-prompt-message": "Šis puslapis buvo redaguotas nuo paskutinio įkėlimo. Ar {{GENDER:|norėtumėte}} tęsti senosios versijos redagavimą, ar pradėti redaguoti naujausią versiją iš naujo?",

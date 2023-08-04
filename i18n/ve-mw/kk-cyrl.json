@@ -8,10 +8,9 @@
 			"СеніңШешең"
 		]
 	},
-	"tooltip-ca-createsource": "Бұл беттің қайнар мәтінін бастау",
-	"tooltip-ca-edit": "Уикимәтін қолданып бұл бетті өңдеу",
-	"tooltip-ca-editsource": "Бұл беттің қайнар мәтінін өңдеу",
 	"tooltip-ca-ve-edit": "Бұл бетті өңдеу",
+	"tooltip-ca-editsource": "Бұл беттің қайнар мәтінін өңдеу",
+	"tooltip-ca-createsource": "Бұл беттің қайнар мәтінін бастау",
 	"visualeditor-advancedsettings-tool": "Кеңейтілген параметрлер",
 	"visualeditor-backbutton-tooltip": "Артқа қайту",
 	"visualeditor-browserwarning": "Сіздің қолданып отырған шолғышыңызды VisualEditor ресми түрде қолдамайды.",

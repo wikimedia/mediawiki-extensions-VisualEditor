@@ -6,10 +6,9 @@
 			"TMg"
 		]
 	},
-	"tooltip-ca-createsource": "Luaji tämän sivun lähtehkoudu",
-	"tooltip-ca-edit": "Kohendele tädä sivuu wikitekstan vuoh",
-	"tooltip-ca-editsource": "Edituiče tämän sivun lähtehkoudua",
 	"tooltip-ca-ve-edit": "Kohendele tädä sivuu",
+	"tooltip-ca-editsource": "Edituiče tämän sivun lähtehkoudua",
+	"tooltip-ca-createsource": "Luaji tämän sivun lähtehkoudu",
 	"visualeditor-advancedsettings-tool": "Ližäazetukset",
 	"visualeditor-backbutton-tooltip": "Mene järilleh",
 	"visualeditor-ca-createlocaldescriptionsource": "Ližiä paikalline kuvavuslähteh",

@@ -18,10 +18,9 @@
 			"Yardom78"
 		]
 	},
-	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
-	"tooltip-ca-edit": "Upraviť túto stránku pomocou wikitextu",
-	"tooltip-ca-editsource": "Upraviť zdrojový kód tejto stránky",
 	"tooltip-ca-ve-edit": "Upraviť túto stránku",
+	"tooltip-ca-editsource": "Upraviť zdrojový kód tejto stránky",
+	"tooltip-ca-createsource": "Vytvoriť zdrojový kód tejto stránky",
 	"visualeditor-advancedsettings-tool": "Rozšírené nastavenia",
 	"visualeditor-autosave-modified-prompt-accept": "Pokračovať v editácii",
 	"visualeditor-autosave-modified-prompt-message": "Táto stránka bola od chvíle, kedy ste ju naposledy {{GENDER:|načítali}}, upravená. Chcete sa vrátiť k vašej úprave starej verzie alebo začať úpravu tej najnovšej?",

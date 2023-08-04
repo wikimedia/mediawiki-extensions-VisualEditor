@@ -16,10 +16,9 @@
 			"捍粵者"
 		]
 	},
-	"tooltip-ca-createsource": "整呢版嘅代碼出嚟",
-	"tooltip-ca-edit": "你可以編輯呢一頁。請在儲存之前先預覽一吓。",
-	"tooltip-ca-editsource": "改呢版嘅代碼",
 	"tooltip-ca-ve-edit": "用 VisualEditor 改呢版",
+	"tooltip-ca-editsource": "改呢版嘅代碼",
+	"tooltip-ca-createsource": "整呢版嘅代碼出嚟",
 	"visualeditor-advancedsettings-tool": "進階設定",
 	"visualeditor-backbutton-tooltip": "返去",
 	"visualeditor-browserwarning": "VisualEditor 並未正式支援你嘅瀏覽器",

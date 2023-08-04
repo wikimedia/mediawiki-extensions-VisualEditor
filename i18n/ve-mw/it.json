@@ -49,10 +49,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "Importato da $1",
-	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
-	"tooltip-ca-edit": "Modifica questa pagina utilizzando il wikitesto",
-	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
+	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
+	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
 	"visualeditor-autosave-modified-prompt-accept": "Riprendi la modifica",
 	"visualeditor-autosave-modified-prompt-message": "Questa pagina è stata modificata dopo che l'hai caricata. {{GENDER:|Vuoi}} riprendere la modifica della vecchia versione o iniziare una nuova modifica dell'ultima versione della pagina?",

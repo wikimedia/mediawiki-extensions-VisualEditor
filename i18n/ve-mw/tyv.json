@@ -8,9 +8,9 @@
 			"Монгуш Салим"
 		]
 	},
-	"tooltip-ca-createsource": "Үндезин сөзүглелдер \"эдикчизи\"-биле арынны чаяар",
-	"tooltip-ca-editsource": "Арынның үндезин сөзүглелин эдер",
 	"tooltip-ca-ve-edit": "Бо арынны эдер",
+	"tooltip-ca-editsource": "Арынның үндезин сөзүглелин эдер",
+	"tooltip-ca-createsource": "Үндезин сөзүглелдер \"эдикчизи\"-биле арынны чаяар",
 	"visualeditor-ca-createlocaldescriptionsource": "Локалдыг тайылбыр код кылдыр кылыр",
 	"visualeditor-ca-createsource": "Код чаяар",
 	"visualeditor-ca-editsource": "Вики-сөзүглелди эдер",

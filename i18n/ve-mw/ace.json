@@ -5,9 +5,9 @@
 			"Si Gam Acèh"
 		]
 	},
-	"tooltip-ca-createsource": "Peugöt kode nè laman nyoë",
-	"tooltip-ca-editsource": "Peusaneut kode nè laman nyoë",
 	"tooltip-ca-ve-edit": "Peusaneut ôn nyoe",
+	"tooltip-ca-editsource": "Peusaneut kode nè laman nyoë",
+	"tooltip-ca-createsource": "Peugöt kode nè laman nyoë",
 	"visualeditor-autosave-modified-prompt-accept": "Peusaneut lom",
 	"visualeditor-browserwarning": "Droëneuh neungui ''browser'' nyang hana jidukông raseumi lé VisualEditor",
 	"visualeditor-ca-createlocaldescriptionsource": "Tamah nè surah ata droe",

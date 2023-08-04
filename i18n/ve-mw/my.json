@@ -9,10 +9,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "$1 မှ တင်သွင်းခဲ့သည်",
-	"tooltip-ca-createsource": "ဤစာမျက်နှာ၏ ရင်းမြစ်ကုဒ်ကို ဖန်တီးရန်",
-	"tooltip-ca-edit": "Wikitext ဖြင့် ဤစာမျက်နှာကို တည်းဖြတ်ရန်",
-	"tooltip-ca-editsource": "ဤစာမျက်နှာ၏ ရင်းမြစ်ကုဒ်ကို တည်းဖြတ်ရန်",
 	"tooltip-ca-ve-edit": "ဤစာမျက်နှာကို တည်းဖြတ်ရန်",
+	"tooltip-ca-editsource": "ဤစာမျက်နှာ၏ ရင်းမြစ်ကုဒ်ကို တည်းဖြတ်ရန်",
+	"tooltip-ca-createsource": "ဤစာမျက်နှာ၏ ရင်းမြစ်ကုဒ်ကို ဖန်တီးရန်",
 	"visualeditor-advancedsettings-tool": "အဆင့်မြင့် အပြင်အဆင်များ",
 	"visualeditor-annotations-default-description": "စာမျက်နှာ၏ ဤအပိုင်းသည် မှတ်ချက်အပိုင်းအခြားတစ်ခု၏ တစ်စိတ်တစ်ပိုင်းဖြစ်သည်။",
 	"visualeditor-annotations-default-end": "အမှတ်အသားပြုထားသော အပိုင်းအခြား၏အဆုံး",

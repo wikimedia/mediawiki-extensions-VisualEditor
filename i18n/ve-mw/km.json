@@ -7,10 +7,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "ត្រូវបាននាំចូលពី $1",
-	"tooltip-ca-createsource": "បង្កើត​កូដ​នៃ​ទំព័រ​នេះ",
-	"tooltip-ca-edit": "កែប្រែទំព័រនេះដោយប្រើមុខងារអត្ថបទវិគី",
-	"tooltip-ca-editsource": "កែប្រែ​កូដ​របស់​ទំព័រ​នេះ",
 	"tooltip-ca-ve-edit": "កែ​ប្រែទំព័រ​នេះ​",
+	"tooltip-ca-editsource": "កែប្រែ​កូដ​របស់​ទំព័រ​នេះ",
+	"tooltip-ca-createsource": "បង្កើត​កូដ​នៃ​ទំព័រ​នេះ",
 	"visualeditor-advancedsettings-tool": "ការ​កំណត់​ថ្នាក់ខ្ពស់",
 	"visualeditor-backbutton-tooltip": "បកក្រោយ",
 	"visualeditor-browserwarning": "អ្នក​កំពុង​ប្រើ​កម្មវិធី​អ៊ីនធើណិត​ដែល​មិន​ត្រូវ​បាន​គាំទ្រជាផ្លូវការ​ដោយមុខងារកែប្រែនេះ។",

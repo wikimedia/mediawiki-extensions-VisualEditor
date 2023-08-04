@@ -7,9 +7,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "Importowane z: $1",
-	"tooltip-ca-createsource": "Žórłowy kod tuteje strony wutworić",
-	"tooltip-ca-editsource": "Žórłowy kod tuteje strony wobdźěłać",
 	"tooltip-ca-ve-edit": "VisualEditor k wobdźěłanju strony",
+	"tooltip-ca-editsource": "Žórłowy kod tuteje strony wobdźěłać",
+	"tooltip-ca-createsource": "Žórłowy kod tuteje strony wutworić",
 	"visualeditor-advancedsettings-tool": "Rozšěrjene nastajenja",
 	"visualeditor-autosave-modified-prompt-accept": "Dale wobdźěłać",
 	"visualeditor-autosave-modified-prompt-reject": "Aktualnu wersiju wobdźěłać",

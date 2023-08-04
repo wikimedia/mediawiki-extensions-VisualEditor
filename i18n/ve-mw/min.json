@@ -9,9 +9,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "Diimpor dari $1",
-	"tooltip-ca-createsource": "Buek kode sumber laman ko",
-	"tooltip-ca-editsource": "Suntiang kode sumber laman ko",
 	"tooltip-ca-ve-edit": "Suntiang laman ko",
+	"tooltip-ca-editsource": "Suntiang kode sumber laman ko",
+	"tooltip-ca-createsource": "Buek kode sumber laman ko",
 	"visualeditor-advancedsettings-tool": "Pangaturan lanjuik",
 	"visualeditor-autosave-modified-prompt-accept": "Lanjuik manyuntiang",
 	"visualeditor-autosave-modified-prompt-reject": "Mulai suntiangan baru",

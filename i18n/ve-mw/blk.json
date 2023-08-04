@@ -8,9 +8,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "$1 ဒင်ႏသော့ꩻခါꩻဒျာႏ",
-	"tooltip-ca-createsource": "ဖန်ဆင်ꩻ လိတ်မဲ့ငါယို ကိုဒ်ရွီးခိုႏ",
-	"tooltip-ca-editsource": "မွဉ်းဖျင် လိတ်မဲ့ငါယို ကိုဒ်ရွီးခိုႏ",
 	"tooltip-ca-ve-edit": "မွဉ်းဖျင် လိတ်မဲ့ငါယို",
+	"tooltip-ca-editsource": "မွဉ်းဖျင် လိတ်မဲ့ငါယို ကိုဒ်ရွီးခိုႏ",
+	"tooltip-ca-createsource": "ဖန်ဆင်ꩻ လိတ်မဲ့ငါယို ကိုဒ်ရွီးခိုႏ",
 	"visualeditor-advancedsettings-tool": "အရန်းထို အပွိုင်အဖျင်ဖိုင်ႏ",
 	"visualeditor-autosave-modified-prompt-accept": "မွဉ်းဖျင်ချာ ခင်ႏလမ်းလီꩻကရီးကို",
 	"visualeditor-autosave-modified-prompt-reject": "မွဉ်းဖျင်စ အတသာတဗာႏ",

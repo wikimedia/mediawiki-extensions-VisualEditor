@@ -9,10 +9,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "$1 کان درآمديل",
-	"tooltip-ca-createsource": "هن صفحي جو ذريعو ڪوڊ سرجيو",
-	"tooltip-ca-edit": "هن صفحي کي وڪي‌متن استعمال ڪندي سنواريو",
-	"tooltip-ca-editsource": "هن صفحي جو مصدر ڪوڊ سنواريو",
 	"tooltip-ca-ve-edit": "ھيءُ صفحو سنواريو",
+	"tooltip-ca-editsource": "هن صفحي جو مصدر ڪوڊ سنواريو",
+	"tooltip-ca-createsource": "هن صفحي جو ذريعو ڪوڊ سرجيو",
 	"visualeditor-advancedsettings-tool": "اعليٰ ترتيبون",
 	"visualeditor-autosave-modified-prompt-accept": "سنوارڻ جاري رکو",
 	"visualeditor-autosave-modified-prompt-reject": "نئين سنوار شروع ڪريو",

@@ -9,10 +9,9 @@
 			"عثمان منصور انصاري"
 		]
 	},
-	"tooltip-ca-createsource": "د دې مخ د سرچينې کوډ جوړول",
-	"tooltip-ca-edit": "د ويکي متن په کارولو سره دا مخ سمول.",
-	"tooltip-ca-editsource": "د دې مخ د سرچينې کوډ سمول",
 	"tooltip-ca-ve-edit": "دا مخ سمول",
+	"tooltip-ca-editsource": "د دې مخ د سرچينې کوډ سمول",
+	"tooltip-ca-createsource": "د دې مخ د سرچينې کوډ جوړول",
 	"visualeditor-advancedsettings-tool": "پرمختللې امستنې",
 	"visualeditor-backbutton-tooltip": "پر شا تلل",
 	"visualeditor-browserwarning": "تاسې يو داسې کتنمل کاروۍ چې په رسمي توگه د دې سمونگر ملاتړ نه کوي.",

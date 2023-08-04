@@ -4,9 +4,9 @@
 			"Servien"
 		]
 	},
-	"tooltip-ca-createsource": "Bronkode vöär disse syde anmaken",
-	"tooltip-ca-editsource": "Bronkode van disse syde bewarken",
 	"tooltip-ca-ve-edit": "Disse syde bewarken",
+	"tooltip-ca-editsource": "Bronkode van disse syde bewarken",
+	"tooltip-ca-createsource": "Bronkode vöär disse syde anmaken",
 	"visualeditor-advancedsettings-tool": "Vorderde instellingen",
 	"visualeditor-autosave-modified-prompt-accept": "Bewarking voordsetten",
 	"visualeditor-autosave-modified-prompt-reject": "Mid een nye bewarking anvangen",

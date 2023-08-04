@@ -11,10 +11,9 @@
 			"Unuaiga"
 		]
 	},
-	"tooltip-ca-createsource": "Crear lo còdi font d'aquela pagina",
-	"tooltip-ca-edit": "Modificar aquesta pagina en utilizant lo wikitèxte",
-	"tooltip-ca-editsource": "Modificar lo còdi font d'aquela pagina",
 	"tooltip-ca-ve-edit": "Modificar aquesta pagina",
+	"tooltip-ca-editsource": "Modificar lo còdi font d'aquela pagina",
+	"tooltip-ca-createsource": "Crear lo còdi font d'aquela pagina",
 	"visualeditor-advancedsettings-tool": "Paramètres avançats",
 	"visualeditor-autosave-modified-prompt-accept": "Tornar editar",
 	"visualeditor-autosave-modified-prompt-message": "Aquesta pagina es estada editada après que l'ajatz cargada. Volètz reprene l'edicion de l'anciana version, o començar de novèlas modificacions de la darrièra version ?",

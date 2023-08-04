@@ -12,9 +12,9 @@
 			"Sarvaturi"
 		]
 	},
-	"tooltip-ca-createsource": "Crea lu codici surgenti di sta pàggina",
-	"tooltip-ca-editsource": "Cancia lu codici surgenti di sta pàggina",
 	"tooltip-ca-ve-edit": "Cancia sta pàggina",
+	"tooltip-ca-editsource": "Cancia lu codici surgenti di sta pàggina",
+	"tooltip-ca-createsource": "Crea lu codici surgenti di sta pàggina",
 	"visualeditor-advancedsettings-tool": "Mpustazzioni avanzati",
 	"visualeditor-autosave-modified-prompt-reject": "Ncigna nu canciamentu novu",
 	"visualeditor-browserwarning": "Stai usannu nu browser ca nun è suppurtatu ufficiarmenti di VisualEditor.",

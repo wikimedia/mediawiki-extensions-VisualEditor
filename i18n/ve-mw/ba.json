@@ -21,10 +21,9 @@
 			"Янмурза Баки"
 		]
 	},
-	"tooltip-ca-createsource": "Битте сығанаҡ код мөхәррирендә булдырырға",
-	"tooltip-ca-edit": "Был битте вики-текст режимындә мөхәррирләргә",
-	"tooltip-ca-editsource": "Биттең сығанаҡ кодын үҙгәртергә",
 	"tooltip-ca-ve-edit": "Был битте үҙгәртергә",
+	"tooltip-ca-editsource": "Биттең сығанаҡ кодын үҙгәртергә",
+	"tooltip-ca-createsource": "Битте сығанаҡ код мөхәррирендә булдырырға",
 	"visualeditor-advancedsettings-tool": "Өҫтәмә көйләүҙәр",
 	"visualeditor-backbutton-tooltip": "Кире ҡайтырға",
 	"visualeditor-browserwarning": "Һеҙ Күҙләгес мөхәррирҙе рәсми танымаған браузерҙа ҡулланаһығыҙ.",

@@ -5,10 +5,9 @@
 			"TMg"
 		]
 	},
-	"tooltip-ca-createsource": "Partuaten ti taudan a kodigo iti daytoy a panid",
-	"tooltip-ca-edit": "Urnosen daytoy a panid nga agusar ti wikitext",
-	"tooltip-ca-editsource": "Urnosen ti taudan a kodigo iti daytoy a panid",
 	"tooltip-ca-ve-edit": "Urnosen daytoy a panid",
+	"tooltip-ca-editsource": "Urnosen ti taudan a kodigo iti daytoy a panid",
+	"tooltip-ca-createsource": "Partuaten ti taudan a kodigo iti daytoy a panid",
 	"visualeditor-advancedsettings-tool": "Dagiti napasayaat a pannakaisaad",
 	"visualeditor-backbutton-tooltip": "Agsubli",
 	"visualeditor-browserwarning": "Agus-usarka iti pagbasabasa a saan nga opisial a nasuportaran babaen daytoy nga editor.",

@@ -5,9 +5,9 @@
 			"Jduranboger"
 		]
 	},
-	"tooltip-ca-createsource": "Kay p'anqamanta pukyu qillqata kamariy",
-	"tooltip-ca-editsource": "Kay p'anqap pukyu qillqanta llamk'apuy",
 	"tooltip-ca-ve-edit": "Kay p'anqata llamk'apuy",
+	"tooltip-ca-editsource": "Kay p'anqap pukyu qillqanta llamk'apuy",
+	"tooltip-ca-createsource": "Kay p'anqamanta pukyu qillqata kamariy",
 	"visualeditor-advancedsettings-tool": "Ñawparikusqa allinkachinakuna",
 	"visualeditor-browserwarning": "Llamk'achichkasqayki wamp'unataqa VisualEditor tukri nisqakama manam q'imichinchu.",
 	"visualeditor-ca-createlocaldescriptionsource": "Kayllapi t'iktuna pukyuta yapay",

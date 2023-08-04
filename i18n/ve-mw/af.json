@@ -8,10 +8,9 @@
 			"Oesjaar"
 		]
 	},
-	"tooltip-ca-createsource": "Skep die bonkode vir hierdie bladsy",
-	"tooltip-ca-edit": "Redigeer hierdie bladsy deur wikiteks te gebruik",
-	"tooltip-ca-editsource": "Wysig die bladsy se bonkode",
 	"tooltip-ca-ve-edit": "Redigeer hierdie bladsy",
+	"tooltip-ca-editsource": "Wysig die bladsy se bonkode",
+	"tooltip-ca-createsource": "Skep die bonkode vir hierdie bladsy",
 	"visualeditor-advancedsettings-tool": "Gevorderde instellings",
 	"visualeditor-backbutton-tooltip": "Gaan terug",
 	"visualeditor-browserwarning": "Jy gebruik 'n webblaaier wat nie amptelik deur hierdie redigeerdeer ondersteun word nie.",

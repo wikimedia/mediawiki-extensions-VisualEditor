@@ -16,10 +16,9 @@
 			"రహ్మానుద్దీన్"
 		]
 	},
-	"tooltip-ca-createsource": "ఈ పేజీ సోర్సుకోడ్‌ను సృష్టించండి",
-	"tooltip-ca-edit": "వికీటెక్స్టును వాడి ఈ పేజీని దిద్దండి",
-	"tooltip-ca-editsource": "ఈ పేజీ సోర్సుకోడ్‌ను దిద్దండి",
 	"tooltip-ca-ve-edit": "ఈ పేజీని దిద్దండి",
+	"tooltip-ca-editsource": "ఈ పేజీ సోర్సుకోడ్‌ను దిద్దండి",
+	"tooltip-ca-createsource": "ఈ పేజీ సోర్సుకోడ్‌ను సృష్టించండి",
 	"visualeditor-advancedsettings-tool": "నిశిత అమరికలు",
 	"visualeditor-autosave-modified-prompt-accept": "దిద్దుబాటును తిరిగి సాగించండి",
 	"visualeditor-autosave-modified-prompt-message": "మీరు కిందటిసారి లోడు చేసిన తరువాత ఈ పేజీలో మార్పులు జరిగాయి. Would పాత కూర్పుకు {{GENDER:|మీరు}} చేస్తున్న దిద్దుబాటునే {{GENDER:|కొనసాగిస్తారా}}, లేక సరికొత్త కూర్పును దిద్దడం మొదలు పెడతారా?",

@@ -13,9 +13,9 @@
 			"Викиней"
 		]
 	},
-	"tooltip-ca-createsource": "Барактын баштапкы кодун түзүү",
-	"tooltip-ca-editsource": "Барактын баштапкы кодун оңдоо",
 	"tooltip-ca-ve-edit": "Бул баракты түзөтүү",
+	"tooltip-ca-editsource": "Барактын баштапкы кодун оңдоо",
+	"tooltip-ca-createsource": "Барактын баштапкы кодун түзүү",
 	"visualeditor-advancedsettings-tool": "Кошумча параметрлер",
 	"visualeditor-autosave-modified-prompt-accept": "Түзөтүүнү улантуу",
 	"visualeditor-autosave-modified-prompt-reject": "Жаңыдан түзөтүү",

@@ -5,10 +5,9 @@
 			"Joao Xavier"
 		]
 	},
-	"tooltip-ca-createsource": "Krear la fonto-kodexo di ca pagino",
-	"tooltip-ca-edit": "Redaktar ica pagino per wikitexto",
-	"tooltip-ca-editsource": "Redaktar la fonto-kodexo di ca pagino",
 	"tooltip-ca-ve-edit": "Redaktar ica pagino",
+	"tooltip-ca-editsource": "Redaktar la fonto-kodexo di ca pagino",
+	"tooltip-ca-createsource": "Krear la fonto-kodexo di ca pagino",
 	"visualeditor-advancedsettings-tool": "Specala figurizo",
 	"visualeditor-backbutton-tooltip": "Retroirar",
 	"visualeditor-browserwarning": "Vu uzas navigilo qua ne esas oficale suportata da ca redaktilo.",

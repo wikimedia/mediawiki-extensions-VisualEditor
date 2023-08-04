@@ -7,10 +7,9 @@
 			"Къарачайлы"
 		]
 	},
-	"tooltip-ca-createsource": "Бетни чыкъгъан кодун къура",
-	"tooltip-ca-edit": "Вики-текст режимде редакторлукъ этиу",
-	"tooltip-ca-editsource": "Бетни чыкъгъан кодун тюрлендир",
 	"tooltip-ca-ve-edit": "Бу бетни тюрлендир",
+	"tooltip-ca-editsource": "Бетни чыкъгъан кодун тюрлендир",
+	"tooltip-ca-createsource": "Бетни чыкъгъан кодун къура",
 	"visualeditor-advancedsettings-tool": "Къошакъ джарашдырыула",
 	"visualeditor-backbutton-tooltip": "Артха",
 	"visualeditor-browserwarning": "Сиз хайырланнган браузер, бу редакторну официал халда джюрютмейди.",

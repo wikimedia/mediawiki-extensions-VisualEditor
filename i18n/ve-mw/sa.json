@@ -7,10 +7,9 @@
 			"Soorya Hebbar"
 		]
 	},
-	"tooltip-ca-createsource": "अस्य पृष्ठस्य मूलपाठं रचयतु",
-	"tooltip-ca-edit": "विकिपाठ्यम् उपयुज्य पृष्ठं सम्पाद्यताम्",
-	"tooltip-ca-editsource": "अस्य पृष्ठस्य स्रोतपाठ्यं सम्पाद्यताम्",
 	"tooltip-ca-ve-edit": "इदं पृष्ठं सम्पाद्यताम्",
+	"tooltip-ca-editsource": "अस्य पृष्ठस्य स्रोतपाठ्यं सम्पाद्यताम्",
+	"tooltip-ca-createsource": "अस्य पृष्ठस्य मूलपाठं रचयतु",
 	"visualeditor-advancedsettings-tool": "उन्नतानि संयोजनानि",
 	"visualeditor-autosave-modified-prompt-accept": "सम्पादनं पुनरारभ्यताम्",
 	"visualeditor-autosave-modified-prompt-reject": "नूतनसम्पादनम् आरभ्यताम्",

@@ -13,10 +13,9 @@
 			"TMg"
 		]
 	},
-	"tooltip-ca-createsource": "Crèa 'o codece surgente 'e sta paggena",
-	"tooltip-ca-edit": "Edita sta paggena ausanno wikitesto",
-	"tooltip-ca-editsource": "Càgna 'o codece surgente 'e chesta paggena",
 	"tooltip-ca-ve-edit": "Cagna chesta paggena",
+	"tooltip-ca-editsource": "Càgna 'o codece surgente 'e chesta paggena",
+	"tooltip-ca-createsource": "Crèa 'o codece surgente 'e sta paggena",
 	"visualeditor-advancedsettings-tool": "Mpustaziune avanzate",
 	"visualeditor-backbutton-tooltip": "Torna arreto",
 	"visualeditor-browserwarning": "State ausanno nu browser ca nun è suppurtato ufficialmente 'a st'editore.",

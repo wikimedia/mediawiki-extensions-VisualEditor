@@ -19,10 +19,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "Importat de pe $1",
-	"tooltip-ca-createsource": "Creați codul sursă al acestei pagini",
-	"tooltip-ca-edit": "Modificați această pagină folosind text wiki",
-	"tooltip-ca-editsource": "Modificați codul sursă al acestei pagini",
 	"tooltip-ca-ve-edit": "Modificați această pagină cu EditorulVizual",
+	"tooltip-ca-editsource": "Modificați codul sursă al acestei pagini",
+	"tooltip-ca-createsource": "Creați codul sursă al acestei pagini",
 	"visualeditor-advancedsettings-tool": "Setări avansate",
 	"visualeditor-autosave-modified-prompt-accept": "Continuă editarea",
 	"visualeditor-autosave-modified-prompt-message": "Această pagină a fost editată de la ultima oară când ați încărcat-o. {{GENDER:|V-ar}} plăcea să {{GENDER:|vă}} reluați editarea versiunii vechi, sau să începeți o editare nouă a ultimei versiuni?",

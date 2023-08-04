@@ -15,10 +15,9 @@
 		]
 	},
 	"collabpad-import-subtitle": "لە $1ەوە ھاوردە کراوە",
-	"tooltip-ca-createsource": "کۆدی سەرچاوەی ئەم پەڕەیە دروست بکە",
-	"tooltip-ca-edit": "دەستکاریکردنی پەڕە بە ویکیدەق",
-	"tooltip-ca-editsource": "کۆدی سەرچاوەی ئەم پەڕەیە دەستکاری بکە",
 	"tooltip-ca-ve-edit": "دەستکاری ئەم پەڕەیە بکە‌",
+	"tooltip-ca-editsource": "کۆدی سەرچاوەی ئەم پەڕەیە دەستکاری بکە",
+	"tooltip-ca-createsource": "کۆدی سەرچاوەی ئەم پەڕەیە دروست بکە",
 	"visualeditor-advancedsettings-tool": "ڕێکخستنە پێشکەوتووەکان",
 	"visualeditor-autosave-modified-prompt-accept": "بەردەوامبوون لە دەستکاریکردن",
 	"visualeditor-autosave-modified-prompt-message": "لەوکاتەوەی ئەم پەڕەیەت کردووەتەوە، پەڕەکە دەستکاری کراوە. دەتەوێت دەستکارییە نوێکانت بەسەر وەشانە کۆنەکەدا پاشەکەوت بکەیت، یاخود سەرلەنوێ دەستکاری کۆتا وەشان بکەیت؟",
