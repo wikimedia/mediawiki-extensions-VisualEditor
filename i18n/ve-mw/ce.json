@@ -24,6 +24,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Тайе локалан хьост",
 	"visualeditor-ca-editsource": "Нисйе",
 	"visualeditor-ca-editsource-section": "нисйе",
+	"visualeditor-ca-editsource-section-hint": "Нисйе декъан код: $1",
 	"visualeditor-categories-tool": "Категореш",
 	"visualeditor-changedesc-mwtransclusion": "Кепан параметраш хийцина",
 	"visualeditor-desc": "MediaWiki-на бӀаьран редактор",
