@@ -77,6 +77,10 @@
 		"VisualEditorEnableBetaFeature": {
 			"value": false
 		},
+		"VisualEditorUnifiedPreference": {
+			"description": "Replace the old beta feature preference ('visualeditor-enable') and the old opt-out preference ('visualeditor-betatempdisable') with a new preference backed by the old values.",
+			"value": false
+		},
 		"VisualEditorEnableTocWidget": {
 			"value": false
 		},

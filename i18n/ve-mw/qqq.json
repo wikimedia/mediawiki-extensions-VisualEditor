@@ -346,6 +346,7 @@
 	"visualeditor-mwpredialog-convert": "Label for a button which will convert the preformatted text block into a form which can have text styles applied (e.g. bold, italic, links).",
 	"visualeditor-mwpredialog-title": "Title for the preformatted text dialog. It appears when clicking on a <nowiki><pre></nowiki> element.",
 	"visualeditor-mwsignature-tool": "Used as name of the tool for inserting signatures.",
+	"visualeditor-preference-visualeditor": "Label for the user preference to enable VisualEditor.",
 	"visualeditor-preference-disable": "Label for the user preference to disable VisualEditor.",
 	"visualeditor-preference-core-description": "Used in [[Special:Preferences]].\n\nUsed as description for the checkbox to enable the visual editor.\n\nThe label for this checkbox is {{msg-mw|Visualeditor-preference-core-label}}.",
 	"visualeditor-preference-core-discussion-link": "{{optional|Used on [[Special:Preferences]] as a link to a page where users can discuss this Beta Feature. Defaults to a page on MediaWiki.org.}}",
