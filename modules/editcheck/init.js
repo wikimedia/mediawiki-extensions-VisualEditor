@@ -93,6 +93,8 @@ mw.editcheck.getContentRanges = function ( documentModel, range ) {
 	return ranges;
 };
 
+mw.editcheck.refCheckShown = false;
+
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 	mw.hook( 've.activationComplete' ).add( function () {
 		var target = ve.init.target;
@@ -118,7 +120,14 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 					break;
 				}
 			}
-			return newNodesInDoc ? 'editcheck-newreference' : '';
+			var tags = [];
+			if ( newNodesInDoc ) {
+				tags.push( 'editcheck-newreference' );
+			}
+			if ( mw.editcheck.refCheckShown ) {
+				tags.push( 'editcheck-references-activated' );
+			}
+			return tags.join( ',' );
 		};
 	} );
 }
@@ -130,6 +139,8 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck ) {
 		var selections = mw.editcheck.findAddedContentNeedingReference( surface.getModel().getDocument() );
 
 		if ( selections.length ) {
+			mw.editcheck.refCheckShown = true;
+
 			var surfaceView = surface.getView();
 			var toolbar = target.getToolbar();
 			var reviewToolbar = new ve.ui.PositionedTargetToolbar( target, target.toolbarConfig );
