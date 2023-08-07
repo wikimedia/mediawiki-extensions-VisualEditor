@@ -272,8 +272,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	 */
 	private static function enabledForUser( $user ) {
 		$services = MediaWikiServices::getInstance();
-		$veConfig = $services->getConfigFactory()
-			->makeConfig( 'visualeditor' );
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$userOptionsLookup = $services->getUserOptionsLookup();
 		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' );
 
@@ -884,6 +883,10 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		}
 
 		$api = [ 'type' => 'api' ];
+		// The "autodisable" preference records whether the user has explicitly opted out of VE.
+		// This is saved even when VE is off by default, which allows changing it to be on by default
+		// without affecting the users who opted out. There's also a maintenance script to silently
+		// opt-out existing users en masse before changing the default, thus only affecting new users.
 		$preferences['visualeditor-autodisable'] = $api;
 		// The diff mode is persisted for each editor mode separately,
 		// e.g. use visual diffs for visual mode only.
@@ -971,21 +974,23 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$userOptionsManager = $services->getUserOptionsManager();
-		// On a wiki where enable is hidden and set to 1, if user sets betatempdisable=0
-		// then set autodisable=0
-		// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=1
-		// then set autodisable=0
+		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' );
+
+		// The "autodisable" preference records whether the user has explicitly opted out of VE
+		// while it was in beta (which would otherwise not be saved, since it's the same as default).
+
 		if (
+			// When the user enables VE, clear the preference.
 			$userOptionsManager->getOption( $user, 'visualeditor-autodisable' ) &&
-			$userOptionsManager->getOption( $user, 'visualeditor-enable' ) &&
-			!$userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' )
+			( $isBeta ?
+				$userOptionsManager->getOption( $user, 'visualeditor-enable' ) :
+				!$userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' ) )
 		) {
 			$userOptionsManager->setOption( $user, 'visualeditor-autodisable', false );
 		} elseif (
-			// On a wiki where betatempdisable is hidden and set to 0, if user sets enable=0,
-			// then set autodisable=1
+			// When the user disables VE (and we're in beta, but about to go opt-out), set the preference.
 			$veConfig->get( 'VisualEditorTransitionDefault' ) &&
-			!$userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' ) &&
+			$isBeta &&
 			!$userOptionsManager->getOption( $user, 'visualeditor-enable' ) &&
 			!$userOptionsManager->getOption( $user, 'visualeditor-autodisable' )
 		) {

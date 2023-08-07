@@ -2691,11 +2691,14 @@
 		"remoteExtPath": "VisualEditor"
 	},
 	"ForeignResourcesDir": "lib",
+	"@DefaultUserOptions1": "'visualeditor-enable' is only read when in beta feature mode ('VisualEditorEnableBetaFeature').",
+	"@DefaultUserOptions2": "'visualeditor-betatempdisable' is only read when NOT in beta feature mode.",
+	"@DefaultUserOptions3": "'visualeditor-autodisable' records whether the user has explicitly opted out of VE while it was in beta.",
 	"DefaultUserOptions": {
 		"visualeditor-autodisable": 0,
 		"visualeditor-betatempdisable": 0,
 		"visualeditor-editor": "visualeditor",
-		"visualeditor-enable": 1,
+		"visualeditor-enable": 0,
 		"visualeditor-hidebetawelcome": 0,
 		"visualeditor-hidetabdialog": 0,
 		"visualeditor-newwikitext": 0,
