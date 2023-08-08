@@ -267,36 +267,26 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 	// Options tab panel
 
 	// Input widgets
-	this.modeDropdown = new OO.ui.DropdownWidget( {
-		menu: {
-			items: [
-				new OO.ui.MenuOptionWidget( {
-					data: 'traditional',
-					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-traditional' )
-				} ),
-				new OO.ui.MenuOptionWidget( {
-					data: 'nolines',
-					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-nolines' )
-				} ),
-				new OO.ui.MenuOptionWidget( {
-					data: 'packed',
-					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed' )
-				} ),
-				new OO.ui.MenuOptionWidget( {
-					data: 'packed-overlay',
-					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay' )
-				} ),
-				new OO.ui.MenuOptionWidget( {
-					data: 'packed-hover',
-					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover' )
-				} ),
-				new OO.ui.MenuOptionWidget( {
-					data: 'slideshow',
-					label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-slideshow' )
-				} )
-			]
-		}
-	} );
+	this.modeDropdown = new OO.ui.DropdownWidget( { menu: { items: [
+		'traditional',
+		'nolines',
+		'packed',
+		'packed-overlay',
+		'packed-hover',
+		'slideshow'
+	].map( function ( data ) {
+		return new OO.ui.MenuOptionWidget( {
+			data: data,
+			// Messages used here:
+			// * visualeditor-mwgallerydialog-mode-dropdown-label-traditional
+			// * visualeditor-mwgallerydialog-mode-dropdown-label-nolines
+			// * visualeditor-mwgallerydialog-mode-dropdown-label-packed
+			// * visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay
+			// * visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover
+			// * visualeditor-mwgallerydialog-mode-dropdown-label-slideshow
+			label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-' + data )
+		} );
+	} ) } } );
 	this.captionTarget = ve.init.target.createTargetWidget( {
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
