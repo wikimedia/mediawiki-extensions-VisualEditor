@@ -102,6 +102,20 @@ class ApiVisualEditor extends ApiBase {
 	}
 
 	/**
+	 * @see EditPage::getUserForPermissions
+	 * @return User
+	 */
+	private function getUserForPermissions() {
+		$user = $this->getUser();
+		if ( $this->tempUserCreator->shouldAutoCreate( $user, 'edit' ) ) {
+			return $this->userFactory->newUnsavedTempUser(
+				$this->tempUserCreator->getStashedName( $this->getRequest()->getSession() )
+			);
+		}
+		return $user;
+	}
+
+	/**
 	 * @see ApiParse::getUserForPreview
 	 * @return User
 	 */
@@ -317,7 +331,8 @@ class ApiVisualEditor extends ApiBase {
 				// Simplified EditPage::getEditPermissionErrors()
 				// TODO: Use API
 				// action=query&prop=info&intestactions=edit&intestactionsdetail=full&errorformat=html&errorsuselocal=1
-				$permErrors = $permissionManager->getPermissionErrors( 'edit', $user, $title, 'full' );
+				$permErrors = $permissionManager->getPermissionErrors(
+					'edit', $this->getUserForPermissions(), $title, 'full' );
 				if ( $permErrors ) {
 					// Show generic permission errors, including page protection, user blocks, etc.
 					$notice = $this->getOutput()->formatPermissionsErrorMessage( $permErrors, 'edit' );
