@@ -281,6 +281,7 @@
 	"visualeditor-mwpredialog-convert": "Стилизовање текста",
 	"visualeditor-mwpredialog-title": "Преформатиран обичан текст",
 	"visualeditor-mwsignature-tool": "Ваш потпис",
+	"visualeditor-preference-visualeditor": "Омогући Визуелни уређивач",
 	"visualeditor-preference-disable": "Искључи визуелно уређивање",
 	"visualeditor-preference-core-description": "Омогућава визуелни уређивач. Неће бити доступан на страницама за разговор и неким другим именским просторима.",
 	"visualeditor-preference-core-label": "Визуелно уређивање",

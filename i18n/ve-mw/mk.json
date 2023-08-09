@@ -308,6 +308,7 @@
 	"visualeditor-mwpredialog-convert": "Допушти обликување на текстот",
 	"visualeditor-mwpredialog-title": "Претформатиран прост текст",
 	"visualeditor-mwsignature-tool": "Ваш потпис",
+	"visualeditor-preference-visualeditor": "Овозможи го нагледниот уредник",
 	"visualeditor-preference-disable": "Исклучи го нагледниот уредник",
 	"visualeditor-preference-core-description": "Овозможи го нагледниот уредник. Нема да се појавува во разговорни страници и некои други именски простори.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",

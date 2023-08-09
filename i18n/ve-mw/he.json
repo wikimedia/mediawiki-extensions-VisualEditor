@@ -322,6 +322,7 @@
 	"visualeditor-mwpredialog-convert": "לאפשר עיצוב טקסט",
 	"visualeditor-mwpredialog-title": "טקסט רגיל מעוצב מראש",
 	"visualeditor-mwsignature-tool": "החתימה שלך",
+	"visualeditor-preference-visualeditor": "הפעלת העורך החזותי",
 	"visualeditor-preference-disable": "כיבוי העורך החזותי",
 	"visualeditor-preference-core-description": "הפעלת העורך החזותי. הוא לא יהיה זמין בדפי שיחה ובחלק ממרחבי השם האחרים.",
 	"visualeditor-preference-core-label": "עריכה חזותית",
