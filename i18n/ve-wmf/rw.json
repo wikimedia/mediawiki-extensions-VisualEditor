@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Musindi250",
 			"Rodrigue"
 		]
 	},
@@ -17,7 +18,7 @@
 	"visualeditor-feedback-tool": "Siga ibitekerezo kuri iyi software",
 	"visualeditor-help-label": "Soma amabwiriza y'umukoresha",
 	"visualeditor-help-title": "Amabwiriza y'uburyo bwo gukoresha mugenzuzi",
-	"visualeditor-welcomedialog-action": "Tnagira gukosora",
+	"visualeditor-welcomedialog-action": "Tangira gukosora",
 	"visualeditor-welcomedialog-content": "Umuntu wese ashobora gukosora, kandi impinduka zose zirafasha.",
 	"visualeditor-welcomedialog-content-thanks": "Urakoze gufasha isi kuvumbura byinshi!",
 	"visualeditor-welcomedialog-switch": "Hindura ujye kuri mugenzuzi w'inkomoko",
