@@ -48,6 +48,27 @@ ve.dm.MWGalleryImageNode.static.preserveHtmlAttributes = function ( attribute ) 
 // are deep copied back by the converter (in renderHtmlAttributeList)
 ve.dm.MWGalleryImageNode.static.handlesOwnChildren = true;
 
+// This should be kept in sync with Parsoid's WTUtils::textContentFromCaption
+// which drops <ref>s and metadata tags
+ve.dm.MWGalleryImageNode.static.textContentFromCaption = function textContentFromCaption( node ) {
+	var metaDataTags = [ 'base', 'link', 'meta', 'noscript', 'script', 'style', 'template', 'title' ];
+	var content = '';
+	var c = node.firstChild;
+	while ( c ) {
+		if ( c.nodeName === '#text' ) {
+			content += c.nodeValue;
+		} else if (
+			c instanceof HTMLElement &&
+			( metaDataTags.indexOf( c.nodeName.toLowerCase() ) === -1 ) &&
+			!/\bmw:Extension\/ref\b/.test( c.getAttribute( 'typeOf' ) )
+		) {
+			content += textContentFromCaption( c );
+		}
+		c = c.nextSibling;
+	}
+	return content;
+};
+
 ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converter ) {
 	// TODO: Improve handling of missing files. See 'isError' in MWBlockImageNode#toDataElement
 	var li = domElements[ 0 ];
@@ -66,9 +87,8 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		}
 	}
 
-	// FIXME: This should match Parsoid's WTUtils::textContentFromCaption,
-	// which drops <ref>s
-	var altFromCaption = captionNode ? captionNode.textContent.trim() : '';
+	var altFromCaption = captionNode ?
+		ve.dm.MWGalleryImageNode.static.textContentFromCaption( captionNode ).trim() : '';
 	var altTextSame = img.hasAttribute( 'alt' ) && altFromCaption &&
 		( img.getAttribute( 'alt' ).trim() === altFromCaption );
 
@@ -188,7 +208,7 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 	}
 
 	if ( attributes.altTextSame ) {
-		img.setAttribute( 'alt', li.textContent.trim() );
+		img.setAttribute( 'alt', ve.dm.MWGalleryImageNode.static.textContentFromCaption( li ).trim() );
 	} else if ( typeof alt === 'string' ) {
 		img.setAttribute( 'alt', alt );
 	}
