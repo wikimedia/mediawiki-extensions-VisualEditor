@@ -115,8 +115,7 @@
 
 		$targetContainer.prepend( $toolbarPlaceholder );
 
-		// TODO: Would be better with ve.addPassiveEventListener
-		$( window ).on( 'scroll', onWindowScrollListener );
+		window.addEventListener( 'scroll', onWindowScrollListener, { passive: true } );
 
 		if ( wasFloating ) {
 			// Browser might not support scroll anchoring:
@@ -133,7 +132,7 @@
 
 	function hideToolbarPlaceholder() {
 		if ( $toolbarPlaceholder ) {
-			$( window ).off( 'scroll', onWindowScrollListener );
+			window.removeEventListener( 'scroll', onWindowScrollListener, { passive: true } );
 			$toolbarPlaceholder.detach();
 			$toolbarPlaceholder.removeClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
 		}
