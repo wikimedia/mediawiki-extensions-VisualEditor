@@ -25,7 +25,7 @@ ve.ui.EditCheckInspector = function VeUiEditCheckInspector( config ) {
 
 OO.inheritClass( ve.ui.EditCheckInspector, ve.ui.FragmentInspector );
 
-ve.ui.EditCheckInspector.static.name = 'editCheckInspector';
+ve.ui.EditCheckInspector.static.name = 'editCheckReferencesInspector';
 
 // ve.ui.EditCheckInspector.static.title = OO.ui.deferMsg( 'editcheck-dialog-title' );
 ve.ui.EditCheckInspector.static.title = OO.ui.deferMsg( 'editcheck-dialog-addref-title' );
@@ -140,6 +140,7 @@ ve.ui.EditCheckInspector.prototype.getActionProcess = function ( action ) {
 	if ( action === 'continue' ) {
 		return new OO.ui.Process( function () {
 			this.close( { action: 'reject', reason: this.answerRadioSelect.findSelectedItem().getData() } );
+			ve.track( 'activity.editCheckReferences', { action: 'dialog-choose-' + this.answerRadioSelect.findSelectedItem().getData() } );
 		}, this );
 	}
 

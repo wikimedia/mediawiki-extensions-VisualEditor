@@ -29,7 +29,7 @@ OO.inheritClass( ve.ui.EditCheckContextItem, ve.ui.PersistentContextItem );
 
 /* Static Properties */
 
-ve.ui.EditCheckContextItem.static.name = 'editCheck';
+ve.ui.EditCheckContextItem.static.name = 'editCheckReferences';
 
 ve.ui.EditCheckContextItem.static.icon = 'quotes';
 
@@ -76,9 +76,11 @@ ve.ui.EditCheckContextItem.prototype.close = function ( data ) {
 };
 
 ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
+	ve.track( 'activity.editCheckReferences', { action: 'edit-check-confirm' } );
+
 	var contextItem = this;
 	var fragment = this.data.fragment;
-	var windowAction = ve.ui.actionFactory.create( 'window', this.context.getSurface() );
+	var windowAction = ve.ui.actionFactory.create( 'window', this.context.getSurface(), 'check' );
 
 	var insertionPointFragment = fragment.collapseToEnd();
 
@@ -127,10 +129,12 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 };
 
 ve.ui.EditCheckContextItem.prototype.onRejectClick = function () {
+	ve.track( 'activity.editCheckReferences', { action: 'edit-check-reject' } );
+
 	var contextItem = this;
-	var windowAction = ve.ui.actionFactory.create( 'window', this.context.getSurface() );
+	var windowAction = ve.ui.actionFactory.create( 'window', this.context.getSurface(), 'check' );
 	windowAction.open(
-		'editCheckInspector',
+		'editCheckReferencesInspector',
 		{
 			fragment: this.data.fragment,
 			saveProcessDeferred: this.data.saveProcessDeferred

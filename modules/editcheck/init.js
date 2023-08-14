@@ -218,7 +218,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || new URL( location.href
 						fragment: fragment,
 						saveProcessDeferred: saveProcessDeferred
 					},
-					name: 'editCheck'
+					name: 'editCheckReferences'
 				} );
 
 				// Once the context is positioned, clear the selection
@@ -227,7 +227,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || new URL( location.href
 				} );
 
 				return saveProcessDeferred.promise().then( function ( data ) {
-					context.removePersistentSource( 'editCheck' );
+					context.removePersistentSource( 'editCheckReferences' );
 
 					surfaceView.drawSelections( 'editCheck', [] );
 					surfaceView.setReviewMode( false );
