@@ -726,7 +726,6 @@
 				"visualeditor-editconflict",
 				"visualeditor-editsummary",
 				"visualeditor-editsummary-characters-remaining",
-				"visualeditor-savedialog-error-badtoken",
 				"visualeditor-savedialog-keyboard-shortcut-submit",
 				"visualeditor-savedialog-label-publish-short",
 				"visualeditor-savedialog-label-publish-short-start",
@@ -788,6 +787,7 @@
 				"visualeditor-recreate",
 				"visualeditor-redirect-description",
 				"visualeditor-savedialog-identify-anon",
+				"visualeditor-savedialog-identify-temp",
 				"visualeditor-savedialog-identify-user"
 			]
 		},

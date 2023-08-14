@@ -525,11 +525,10 @@ ve.init.mw.Target.prototype.teardown = function () {
 };
 
 /**
- * Refresh our stored edit/csrf token
+ * Refresh our knowledge about the logged-in user.
  *
- * This should be called in response to a badtoken error, to resolve whether the
- * token was expired / the user changed. If the user did change, this updates
- * the current user.
+ * This should be called in response to a user assertion error, to look up
+ * the new user name, and update the current user variables in mw.config.
  *
  * @param {ve.dm.Document} [doc] Document to associate with the API request
  * @return {jQuery.Promise} Promise resolved with new username, or null if anonymous
@@ -541,10 +540,6 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
 	} ).then( function ( data ) {
 		var userInfo = data.query && data.query.userinfo;
 
-		if ( !userInfo ) {
-			return ve.createDeferred().reject();
-		}
-
 		if ( userInfo.anon !== undefined ) {
 			// New session is an anonymous user
 			mw.config.set( {
@@ -554,15 +549,18 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
 				// functions like mw.user.isAnon rely on this.
 				wgUserName: null
 			} );
+
+			// Call this only after clearing wgUserId, otherwise it does nothing
+			return mw.user.acquireTempUserName();
 		} else {
-			// New session is a logged in user
+			// New session is a logged in user (or a temporary user)
 			mw.config.set( {
 				wgUserId: userInfo.id,
 				wgUserName: userInfo.name
 			} );
-		}
 
-		return mw.user.getName();
+			return mw.user.getName();
+		}
 	} );
 };
 

@@ -852,20 +852,18 @@ ve.init.mw.ArticleTarget.prototype.saveErrorHookAborted = function ( data ) {
 /**
  * Handle assert error indicating another user is logged in.
  *
- * @param {string|null} username Name of newly logged-in user, or null if anonymous
+ * @param {string|null} username Name of newly logged-in user, or a temporary account name,
+ *   or null if logged-out and temporary accounts are disabled
  */
 ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
-	// TODO: Improve this message, concatenating it this way is a bad practice.
-	// This should read more like 'session_fail_preview' in MediaWiki core
-	// (but with the caveat that we know already whether you're logged in or not).
-	var $msg = $( document.createTextNode( mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' ) ).add(
-		mw.message(
-			username === null ?
-				'visualeditor-savedialog-identify-anon' :
+	var $msg = mw.message(
+		username === null ?
+			'visualeditor-savedialog-identify-anon' :
+			mw.util.isTemporaryUser( username ) ?
+				'visualeditor-savedialog-identify-temp' :
 				'visualeditor-savedialog-identify-user',
-			username
-		).parseDom()
-	);
+		username
+	).parseDom();
 
 	this.showSaveError( $msg, true );
 };
