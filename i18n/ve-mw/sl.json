@@ -310,6 +310,7 @@
 	"visualeditor-mwpredialog-convert": "Dovoli oblikovanje besedila",
 	"visualeditor-mwpredialog-title": "Predoblikovano golo besedilo",
 	"visualeditor-mwsignature-tool": "Moj podpis",
+	"visualeditor-preference-visualeditor": "Omogoči vizualni urejevalnik",
 	"visualeditor-preference-disable": "Izklopi vizualni urejevalnik",
 	"visualeditor-preference-core-description": "Omogoči Vizualni urejevalnik. Na voljo ne bo na pogovornih straneh in v nekaterih drugih imenskih prostorih.",
 	"visualeditor-preference-core-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Feedback",
