@@ -2173,6 +2173,9 @@
 				],
 				"vector-2022": [
 					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.css"
+				],
+				"minerva": [
+					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-minerva.css"
 				]
 			},
 			"dependencies": [
