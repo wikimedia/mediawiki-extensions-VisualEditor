@@ -78,13 +78,6 @@ trait ApiParsoidTrait {
 		if ( !empty( $response['error'] ) ) {
 			$this->dieWithError( $response['error'] );
 		}
-
-		// If response was received directly from Varnish, use the response
-		// (RP) header to declare the cache hit and pass the data to the client.
-		$headers = $response['headers'] ?? [];
-		if ( isset( $headers['x-cache'] ) && strpos( $headers['x-cache'], 'hit' ) !== false ) {
-			$this->getRequest()->response()->header( 'X-Cache: cached-response=true' );
-		}
 	}
 
 	/**
