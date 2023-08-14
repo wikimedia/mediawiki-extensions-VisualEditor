@@ -10,20 +10,15 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Exception;
-use LocalizedException;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Parser\Parsoid\ParsoidRenderID;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\HtmlInputTransformHelper;
 use MediaWiki\Rest\Handler\Helper\HtmlOutputRendererHelper;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
-use MediaWiki\Rest\HttpException;
-use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use RawMessage;
 use User;
 use Wikimedia\Bcp47Code\Bcp47Code;
 use WikitextContent;
@@ -145,21 +140,17 @@ class DirectParsoidClient implements ParsoidClient {
 	 * @param RevisionRecord $revision Page revision
 	 * @param ?Bcp47Code $targetLanguage Page language (default: `null`)
 	 *
-	 * @return array An array mimicking a RESTbase server's response,
-	 *   with keys: 'error', 'headers' and 'body'
+	 * @return array An array mimicking a RESTbase server's response, with keys: 'headers' and 'body'
+	 * @phan-return array{body:string,headers:array<string,string>}
 	 */
 	public function getPageHtml( RevisionRecord $revision, ?Bcp47Code $targetLanguage = null ): array {
 		// In the VE client, we always want to stash.
 		$page = $revision->getPage();
 
-		try {
-			$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, true );
-			$parserOutput = $helper->getHtml();
+		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, true );
+		$parserOutput = $helper->getHtml();
 
-			return $this->fakeRESTbaseHTMLResponse( $parserOutput->getRawText(), $helper );
-		} catch ( HttpException $ex ) {
-			return $this->fakeRESTbaseError( $ex );
-		}
+		return $this->fakeRESTbaseHTMLResponse( $parserOutput->getRawText(), $helper );
 	}
 
 	/**
@@ -182,7 +173,7 @@ class DirectParsoidClient implements ParsoidClient {
 	}
 
 	/**
-	 * Transform wikitext to HTML with Parsoid. Wrapper for ::postData().
+	 * Transform wikitext to HTML with Parsoid.
 	 *
 	 * @param PageIdentity $page The page the content belongs to use as the parsing context
 	 * @param Bcp47Code $targetLanguage Page language
@@ -191,8 +182,8 @@ class DirectParsoidClient implements ParsoidClient {
 	 * @param int|null $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
 	 *
-	 * @return array An array mimicking a RESTbase server's response,
-	 *   with keys 'code', 'reason', 'headers' and 'body'
+	 * @return array An array mimicking a RESTbase server's response, with keys: 'headers' and 'body'
+	 * @phan-return array{body:string,headers:array<string,string>}
 	 */
 	public function transformWikitext(
 		PageIdentity $page,
@@ -204,20 +195,16 @@ class DirectParsoidClient implements ParsoidClient {
 	): array {
 		$revision = $this->makeFakeRevision( $page, $wikitext );
 
-		try {
-			$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, $stash );
+		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, $stash );
 
-			if ( $bodyOnly ) {
-				$helper->setFlavor( 'fragment' );
-			}
-
-			$parserOutput = $helper->getHtml();
-			$html = $parserOutput->getRawText();
-
-			return $this->fakeRESTbaseHTMLResponse( $html, $helper );
-		} catch ( HttpException $ex ) {
-			return $this->fakeRESTbaseError( $ex );
+		if ( $bodyOnly ) {
+			$helper->setFlavor( 'fragment' );
 		}
+
+		$parserOutput = $helper->getHtml();
+		$html = $parserOutput->getRawText();
+
+		return $this->fakeRESTbaseHTMLResponse( $html, $helper );
 	}
 
 	/**
@@ -229,27 +216,23 @@ class DirectParsoidClient implements ParsoidClient {
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param ?string $etag The ETag to set in the HTTP request header
 	 *
-	 * @return array The response, 'code', 'reason', 'headers' and 'body'
+	 * @return array An array mimicking a RESTbase server's response, with keys: 'headers' and 'body'
+	 * @phan-return array{body:string,headers:array<string,string>}
 	 */
 	public function transformHTML(
 		PageIdentity $page, Bcp47Code $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
-		try {
-			$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
+		$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
 
-			$content = $helper->getContent();
-			$format = $content->getDefaultFormat();
+		$content = $helper->getContent();
+		$format = $content->getDefaultFormat();
 
-			return [
-				'code' => 200,
-				'headers' => [
-					'Content-Type' => $format,
-				],
-				'body' => $content->serialize( $format ),
-			];
-		} catch ( HttpException $ex ) {
-			return $this->fakeRESTbaseError( $ex );
-		}
+		return [
+			'headers' => [
+				'Content-Type' => $format,
+			],
+			'body' => $content->serialize( $format ),
+		];
 	}
 
 	/**
@@ -261,36 +244,11 @@ class DirectParsoidClient implements ParsoidClient {
 	private function fakeRESTbaseHTMLResponse( $data, HtmlOutputRendererHelper $helper ): array {
 		$contentLanguage = $helper->getHtmlOutputContentLanguage();
 		return [
-			'code' => 200,
 			'headers' => [
 				'content-language' => $contentLanguage->toBcp47Code(),
 				'etag' => $helper->getETag()
 			],
 			'body' => $data,
-		];
-	}
-
-	/**
-	 * @param Exception $ex
-	 *
-	 * @return array
-	 */
-	private function fakeRESTbaseError( Exception $ex ): array {
-		if ( $ex instanceof LocalizedHttpException ) {
-			$msg = $ex->getMessageValue();
-		} elseif ( $ex instanceof LocalizedException ) {
-			$msg = $ex->getMessageObject();
-		} else {
-			$msg = new RawMessage( $ex->getMessage() );
-		}
-
-		return [
-			'error' => [
-				'message' => $msg->getKey() ?? '',
-				'params' => $msg->getParams() ?? []
-			],
-			'headers' => [],
-			'body' => $ex->getMessage(),
 		];
 	}
 

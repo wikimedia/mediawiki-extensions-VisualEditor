@@ -13,8 +13,8 @@ interface ParsoidClient {
 	 * @param RevisionRecord $revision Page revision
 	 * @param Bcp47Code|null $targetLanguage Desired output language
 	 *
-	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
-	 * @phan-return array{body:string,headers:array<string,string>,error?:non-empty-array}
+	 * @return array An array mimicking a RESTbase server's response, with keys: 'headers' and 'body'
+	 * @phan-return array{body:string,headers:array<string,string>}
 	 */
 	public function getPageHtml( RevisionRecord $revision, ?Bcp47Code $targetLanguage ): array;
 
@@ -27,8 +27,8 @@ interface ParsoidClient {
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param ?string $etag The ETag to set in the HTTP request header
 	 *
-	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
-	 * @phan-return array{body:string,headers:array<string,string>,error?:non-empty-array}
+	 * @return array An array mimicking a RESTbase server's response, with keys: 'headers' and 'body'
+	 * @phan-return array{body:string,headers:array<string,string>}
 	 */
 	public function transformHTML(
 		PageIdentity $page,
@@ -48,8 +48,8 @@ interface ParsoidClient {
 	 * @param ?int $oldid What oldid revision, if any, to base the request from (default: `null`)
 	 * @param bool $stash Whether to stash the result in the server-side cache (default: `false`)
 	 *
-	 * @return array An array containing the keys 'body', 'headers', and optionally 'error'
-	 * @phan-return array{body:string,headers:array<string,string>,error?:non-empty-array}
+	 * @return array An array mimicking a RESTbase server's response, with keys: 'headers' and 'body'
+	 * @phan-return array{body:string,headers:array<string,string>}
 	 */
 	public function transformWikitext(
 		PageIdentity $page,
