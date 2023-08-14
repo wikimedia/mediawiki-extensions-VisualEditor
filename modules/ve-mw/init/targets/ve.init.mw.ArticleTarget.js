@@ -733,17 +733,13 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 /**
  * Handle an unsuccessful save request.
  *
- * TODO: This code should be mostly moved to ArticleTargetSaver,
- * in particular the badtoken error handling.
- *
  * @param {HTMLDocument} doc HTML document we tried to save
  * @param {Object} saveData Options that were used
- * @param {boolean} wasRetry Whether this was a retry after a 'badtoken' error
  * @param {string} code Error code
  * @param {Object|null} data Full API response data, or XHR error details
  * @fires saveError
  */
-ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, code, data ) {
+ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, data ) {
 	var saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
 		handled = false,
 		target = this;
@@ -1517,10 +1513,9 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
  *  - {string} summary Edit summary
  *  - {boolean} minor Edit is a minor edit
  *  - {boolean} watch Watch the page
- * @param {boolean} [isRetry=false] Whether this is a retry after a 'badtoken' error
  * @return {jQuery.Promise} Save promise, see mw.libs.ve.targetSaver.postHtml
  */
-ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
+ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 	var target = this;
 
 	// Prevent duplicate requests
@@ -1582,7 +1577,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options, isRetry ) {
 
 	var promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
 		.done( this.saveComplete.bind( this ) )
-		.fail( this.saveFail.bind( this, doc, data, !!isRetry ) )
+		.fail( this.saveFail.bind( this, doc, data ) )
 		.always( function () {
 			target.saving = null;
 		} );

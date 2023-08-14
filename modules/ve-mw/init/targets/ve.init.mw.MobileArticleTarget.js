@@ -421,7 +421,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry, code, data ) {
+ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, code, data ) {
 	// parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveFail.apply( this, arguments );
 
