@@ -485,6 +485,8 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		$config = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
+		self::onSkinTemplateNavigationSpecialPage( $skin, $links );
+
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
 			return;
@@ -565,7 +567,6 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 				// Set veaction=edit
 				$veParams['veaction'] = 'edit';
 				$veTabMessage = $tabMessages[$action];
-				// @phan-suppress-next-line PhanTypeInvalidDimOffset
 				$veTabText = $veTabMessage === null ? $data['text'] :
 					$skin->msg( $veTabMessage )->text();
 				if ( $isRemote ) {
@@ -637,6 +638,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 				) {
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
+						// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 						$editTab['class'] .= ' collapsible';
 						$newViews['ve-edit'] = $veTab;
 						$newViews['edit'] = $editTab;
@@ -665,6 +667,32 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			}
 		}
 		$links['views'] = $newViews;
+	}
+
+	/**
+	 * @param SkinTemplate $skin The skin template on which the UI is built.
+	 * @param array &$links Navigation links.
+	 */
+	private static function onSkinTemplateNavigationSpecialPage( SkinTemplate $skin, array &$links ) {
+		$title = $skin->getTitle();
+		if ( !$title || !$title->isSpecialPage() ) {
+			return;
+		}
+		[ $special, $subPage ] = MediaWikiServices::getInstance()->getSpecialPageFactory()
+			->resolveAlias( $title->getDBkey() );
+		if ( $special !== 'CollabPad' ) {
+			return;
+		}
+		$links['namespaces']['special']['text'] = $skin->msg( 'collabpad' )->text();
+		$subPageTitle = Title::newFromText( $subPage );
+		if ( $subPageTitle ) {
+			$links['namespaces']['special']['href'] = SpecialPage::getTitleFor( $special )->getLocalURL();
+			$links['namespaces']['special']['class'] = '';
+
+			$links['namespaces']['pad']['text'] = $subPageTitle->getPrefixedText();
+			$links['namespaces']['pad']['href'] = '';
+			$links['namespaces']['pad']['class'] = 'selected';
+		}
 	}
 
 	/**

@@ -197,6 +197,7 @@
 				"WikiPageFactory",
 				"IntroMessageBuilder",
 				"PreloadedContentBuilder",
+				"SpecialPageFactory",
 				"VisualEditor.ParsoidClientFactory"
 			]
 		},
@@ -208,6 +209,7 @@
 				"PageEditStash",
 				"SkinFactory",
 				"WikiPageFactory",
+				"SpecialPageFactory",
 				"VisualEditor.ParsoidClientFactory"
 			]
 		}
@@ -243,10 +245,7 @@
 		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\VisualEditor\\Hooks::onResourceLoaderGetConfigVars",
 		"ResourceLoaderRegisterModules": "MediaWiki\\Extension\\VisualEditor\\Hooks::onResourceLoaderRegisterModules",
 		"SkinEditSectionLinks": "MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinEditSectionLinks",
-		"SkinTemplateNavigation::Universal": [
-			"MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinTemplateNavigation",
-			"MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad::onSkinTemplateNavigationSpecialPage"
-		],
+		"SkinTemplateNavigation::Universal": "MediaWiki\\Extension\\VisualEditor\\Hooks::onSkinTemplateNavigation",
 		"UserLoggedIn": "MediaWiki\\Extension\\VisualEditor\\Hooks::onUserLoggedIn"
 	},
 	"HookHandlers": {

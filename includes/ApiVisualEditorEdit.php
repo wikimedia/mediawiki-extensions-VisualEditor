@@ -24,6 +24,7 @@ use IBufferingStatsdDataFactory;
 use IDBAccessObject;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\WikiPageFactory;
+use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\User\UserIdentity;
 use ObjectCache;
@@ -43,6 +44,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	private PageEditStash $pageEditStash;
 	private SkinFactory $skinFactory;
 	private WikiPageFactory $wikiPageFactory;
+	private SpecialPageFactory $specialPageFactory;
 	private VisualEditorParsoidClientFactory $parsoidClientFactory;
 
 	public function __construct(
@@ -53,6 +55,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		PageEditStash $pageEditStash,
 		SkinFactory $skinFactory,
 		WikiPageFactory $wikiPageFactory,
+		SpecialPageFactory $specialPageFactory,
 		VisualEditorParsoidClientFactory $parsoidClientFactory
 	) {
 		parent::__construct( $main, $name );
@@ -62,6 +65,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		$this->pageEditStash = $pageEditStash;
 		$this->skinFactory = $skinFactory;
 		$this->wikiPageFactory = $wikiPageFactory;
+		$this->specialPageFactory = $specialPageFactory;
 		$this->parsoidClientFactory = $parsoidClientFactory;
 	}
 
@@ -384,9 +388,12 @@ class ApiVisualEditorEdit extends ApiBase {
 
 		$result = [];
 		$title = Title::newFromText( $params['page'] );
-		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
+		if ( $title && $title->isSpecialPage() ) {
 			// Convert Special:CollabPad/MyPage to MyPage so we can serialize properly
-			$title = SpecialCollabPad::getSubPage( $title );
+			[ $special, $subPage ] = $this->specialPageFactory->resolveAlias( $title->getDBkey() );
+			if ( $special === 'CollabPad' ) {
+				$title = Title::newFromText( $subPage );
+			}
 		}
 		if ( !$title ) {
 			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
