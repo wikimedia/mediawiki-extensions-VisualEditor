@@ -804,9 +804,9 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, wasRetry
 
 	var errorCodes;
 	if ( data.errors ) {
-		errorCodes = data.errors.map( function ( err ) {
+		errorCodes = OO.unique( data.errors.map( function ( err ) {
 			return err.code;
-		} ).join( ',' );
+		} ) ).join( ',' );
 	} else if ( ve.getProp( data, 'visualeditoredit', 'edit', 'captcha' ) ) {
 		// Eww
 		errorCodes = 'captcha';
