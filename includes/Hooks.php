@@ -927,63 +927,6 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 	}
 
 	/**
-	 * Handler for the GetBetaPreferences hook, to add and hide user beta preferences as configured
-	 *
-	 * @param User $user
-	 * @param array &$preferences Their preferences object
-	 */
-	public static function onGetBetaPreferences( User $user, array &$preferences ) {
-		$coreConfig = RequestContext::getMain()->getConfig();
-		$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . "/VisualEditor/images";
-
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
-
-		if (
-			!$veConfig->get( 'VisualEditorUnifiedPreference' ) &&
-			$veConfig->get( 'VisualEditorEnableBetaFeature' )
-		) {
-			$preferences['visualeditor-enable'] = [
-				'version' => '1.0',
-				'label-message' => 'visualeditor-preference-core-label',
-				'desc-message' => 'visualeditor-preference-core-description',
-				'screenshot' => [
-					'ltr' => "$iconpath/betafeatures-icon-VisualEditor-ltr.svg",
-					'rtl' => "$iconpath/betafeatures-icon-VisualEditor-rtl.svg",
-				],
-				'info-message' => 'visualeditor-preference-core-info-link',
-				'discussion-message' => 'visualeditor-preference-core-discussion-link',
-				'requirements' => [
-					'javascript' => true,
-					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
-				]
-			];
-		}
-
-		if (
-			$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' ) &&
-			// Don't try to register as a beta feature if enabled by default
-			!$veConfig->get( 'VisualEditorEnableWikitext' )
-		) {
-			$preferences['visualeditor-newwikitext'] = [
-				'version' => '1.0',
-				'label-message' => 'visualeditor-preference-newwikitexteditor-label',
-				'desc-message' => 'visualeditor-preference-newwikitexteditor-description',
-				'screenshot' => [
-					'ltr' => "$iconpath/betafeatures-icon-WikitextEditor-ltr.svg",
-					'rtl' => "$iconpath/betafeatures-icon-WikitextEditor-rtl.svg",
-				],
-				'info-message' => 'visualeditor-preference-newwikitexteditor-info-link',
-				'discussion-message' => 'visualeditor-preference-newwikitexteditor-discussion-link',
-				'requirements' => [
-					'javascript' => true,
-					'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
-				]
-			];
-		}
-	}
-
-	/**
 	 * Implements the PreferencesFormPreSave hook, to remove the 'autodisable' flag
 	 * when the user it was set on explicitly enables VE.
 	 *

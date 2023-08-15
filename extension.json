@@ -231,7 +231,7 @@
 		"CustomEditor": "MediaWiki\\Extension\\VisualEditor\\Hooks::onCustomEditor",
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "MediaWiki\\Extension\\VisualEditor\\Hooks::onEditPageShowEditFormFields",
-		"GetBetaFeaturePreferences": "MediaWiki\\Extension\\VisualEditor\\Hooks::onGetBetaPreferences",
+		"GetBetaFeaturePreferences": "VisualEditorBetaFeaturesHooks",
 		"GetPreferences": "MediaWiki\\Extension\\VisualEditor\\Hooks::onGetPreferences",
 		"ListDefinedTags": "MediaWiki\\Extension\\VisualEditor\\Hooks::onListDefinedTags",
 		"MakeGlobalVariablesScript": "MediaWiki\\Extension\\VisualEditor\\Hooks::onMakeGlobalVariablesScript",
@@ -252,6 +252,13 @@
 	"HookHandlers": {
 		"VisualEditorHooks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks"
+		},
+		"VisualEditorBetaFeaturesHooks": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\BetaFeaturesHooks",
+			"services": [
+				"MainConfig",
+				"ConfigFactory"
+			]
 		}
 	},
 	"ResourceModules": {
