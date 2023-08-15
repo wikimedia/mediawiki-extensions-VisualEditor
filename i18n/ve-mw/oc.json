@@ -12,6 +12,7 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Modificar aquesta pagina",
+	"tooltip-ca-ve-create": "Crear aquesta pagina",
 	"tooltip-ca-editsource": "Modificar lo còdi font d'aquela pagina",
 	"tooltip-ca-createsource": "Crear lo còdi font d'aquela pagina",
 	"visualeditor-advancedsettings-tool": "Paramètres avançats",
