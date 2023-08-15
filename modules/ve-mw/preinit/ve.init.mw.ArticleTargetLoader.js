@@ -93,7 +93,12 @@
 					pluginCallbacks.push( ve.init.platform.getInitializedPromise.bind( ve.init.platform ) );
 					// Execute plugin callbacks and collect promises
 					return $.when.apply( $, pluginCallbacks.map( function ( callback ) {
-						return callback();
+						try {
+							return callback();
+						} catch ( e ) {
+							mw.log.warn( 'Failed to load VE plugin:', e );
+							return null;
+						}
 					} ) );
 				} );
 		},
