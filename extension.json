@@ -788,7 +788,6 @@
 				"visualeditor-recreate",
 				"visualeditor-redirect-description",
 				"visualeditor-savedialog-identify-anon",
-				"visualeditor-savedialog-identify-trylogin",
 				"visualeditor-savedialog-identify-user"
 			]
 		},

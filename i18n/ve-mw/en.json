@@ -351,7 +351,6 @@
 	"visualeditor-redirect-description": "Redirect to $1",
 	"visualeditor-savedialog-error-badtoken": "We could not save your edit because the session was no longer valid.",
 	"visualeditor-savedialog-identify-anon": "Do you want to save this page as an anonymous user instead? Your IP address will be recorded in this page's edit history.",
-	"visualeditor-savedialog-identify-trylogin": "You are no longer logged in. Please log back in from a different tab and try again.",
 	"visualeditor-savedialog-identify-user": "You are now logged in as [[User:$1|$1]]. Your edit will be associated with this account if you save this edit.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "You can press $1 to save your edit.",
 	"visualeditor-savedialog-label-publish-short": "Publish",

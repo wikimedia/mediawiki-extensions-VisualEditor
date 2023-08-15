@@ -756,10 +756,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 		for ( var i = 0; i < data.errors.length; i++ ) {
 			var error = data.errors[ i ];
 
-			if ( error.code === 'badtoken' ) {
-				this.saveErrorBadToken();
-				handled = true;
-			} else if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
+			if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
 				this.refreshUser().then( function ( username ) {
 					target.saveErrorNewUser( username );
 				}, function () {
@@ -871,19 +868,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
 	);
 
 	this.showSaveError( $msg, true );
-};
-
-/**
- * Handle token fetch errors.
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorBadToken = function () {
-	// TODO: Improve this message, concatenating it this way is a bad practice.
-	// Also, it's not always true that you're "no longer logged in".
-	// This should read more like 'session_fail_preview' in MediaWiki core.
-	this.showSaveError(
-		mw.msg( 'visualeditor-savedialog-error-badtoken' ) + ' ' +
-		mw.msg( 'visualeditor-savedialog-identify-trylogin' )
-	);
 };
 
 /**
