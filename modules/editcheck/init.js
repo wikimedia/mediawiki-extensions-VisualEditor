@@ -12,35 +12,39 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeRe
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
 	}
+
 	if ( !documentModel.completeHistory.getLength() ) {
 		return false;
 	}
-	var ranges = [];
-	var offset = 0;
-	var endOffset = documentModel.getDocumentRange().end;
+	var operations;
 	try {
-		documentModel.completeHistory.squash().transactions[ 0 ].operations.every( function ( op ) {
-			if ( op.type === 'retain' ) {
-				offset += op.length;
-			} else if ( op.type === 'replace' ) {
-				var insertedRange = new ve.Range( offset, offset + op.insert.length );
-				offset += op.insert.length;
-				if ( op.remove.length === 0 ) {
-					ve.batchPush(
-						ranges,
-						mw.editcheck.getContentRanges( documentModel, insertedRange )
-					);
-				}
-			}
-			// Reached the end of the doc / start of internal list, stop searching
-			return offset < endOffset;
-		} );
+		operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
 	} catch ( err ) {
 		// TransactionSquasher can sometimes throw errors; until T333710 is
 		// fixed just count this as not needing a reference.
 		mw.errorLogger.logError( err, 'error.visualeditor' );
 		return false;
 	}
+
+	var ranges = [];
+	var offset = 0;
+	var endOffset = documentModel.getDocumentRange().end;
+	operations.every( function ( op ) {
+		if ( op.type === 'retain' ) {
+			offset += op.length;
+		} else if ( op.type === 'replace' ) {
+			var insertedRange = new ve.Range( offset, offset + op.insert.length );
+			offset += op.insert.length;
+			if ( op.remove.length === 0 ) {
+				ve.batchPush(
+					ranges,
+					mw.editcheck.getContentRanges( documentModel, insertedRange )
+				);
+			}
+		}
+		// Reached the end of the doc / start of internal list, stop searching
+		return offset < endOffset;
+	} );
 	return ranges.some( function ( range ) {
 		var minimumCharacters = 50;
 		// 1. Check that at least minimumCharacters characters have been inserted sequentially
