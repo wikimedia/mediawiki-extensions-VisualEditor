@@ -22,7 +22,7 @@ use NullStatsdDataFactory;
 use PrefixingStatsdDataFactoryProxy;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use RawMessage;
+use Throwable;
 use Title;
 use WebRequest;
 
@@ -84,7 +84,7 @@ trait ApiParsoidTrait {
 		if ( $ex instanceof LocalizedHttpException ) {
 			$msg = $ex->getMessageValue();
 		} else {
-			$msg = new RawMessage( $ex->getMessage() );
+			$this->dieWithException( $ex );
 		}
 
 		$this->dieWithError( [
@@ -211,6 +211,14 @@ trait ApiParsoidTrait {
 	 * @throws ApiUsageException
 	 */
 	abstract public function dieWithError( $msg, $code = null, $data = null, $httpCode = null );
+
+	/**
+	 * @see ApiBase
+	 * @param Throwable $exception See ApiErrorFormatter::getMessageFromException()
+	 * @param array $options See ApiErrorFormatter::getMessageFromException()
+	 * @return never
+	 */
+	abstract public function dieWithException( Throwable $exception, array $options = [] );
 
 	/**
 	 * @see ContextSource
