@@ -31,6 +31,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageReference;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
@@ -53,6 +54,7 @@ class ApiVisualEditor extends ApiBase {
 	private WikiPageFactory $wikiPageFactory;
 	private IntroMessageBuilder $introMessageBuilder;
 	private PreloadedContentBuilder $preloadedContentBuilder;
+	private SpecialPageFactory $specialPageFactory;
 	private VisualEditorParsoidClientFactory $parsoidClientFactory;
 
 	public function __construct(
@@ -67,6 +69,7 @@ class ApiVisualEditor extends ApiBase {
 		WikiPageFactory $wikiPageFactory,
 		IntroMessageBuilder $introMessageBuilder,
 		PreloadedContentBuilder $preloadedContentBuilder,
+		SpecialPageFactory $specialPageFactory,
 		VisualEditorParsoidClientFactory $parsoidClientFactory
 	) {
 		parent::__construct( $main, $name );
@@ -80,6 +83,7 @@ class ApiVisualEditor extends ApiBase {
 		$this->wikiPageFactory = $wikiPageFactory;
 		$this->introMessageBuilder = $introMessageBuilder;
 		$this->preloadedContentBuilder = $preloadedContentBuilder;
+		$this->specialPageFactory = $specialPageFactory;
 		$this->parsoidClientFactory = $parsoidClientFactory;
 	}
 
@@ -120,9 +124,12 @@ class ApiVisualEditor extends ApiBase {
 		$permissionManager = $this->getPermissionManager();
 
 		$title = Title::newFromText( $params['page'] );
-		if ( $title && $title->isSpecial( 'CollabPad' ) ) {
+		if ( $title && $title->isSpecialPage() ) {
 			// Convert Special:CollabPad/MyPage to MyPage so we can parsefragment properly
-			$title = SpecialCollabPad::getSubPage( $title );
+			[ $special, $subPage ] = $this->specialPageFactory->resolveAlias( $title->getDBkey() );
+			if ( $special === 'CollabPad' ) {
+				$title = Title::newFromText( $subPage );
+			}
 		}
 		if ( !$title ) {
 			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $params['page'] ) ] );
