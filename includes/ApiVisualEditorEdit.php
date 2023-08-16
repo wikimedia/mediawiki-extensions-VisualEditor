@@ -96,7 +96,9 @@ class ApiVisualEditorEdit extends ApiBase {
 			'starttimestamp' => $params['starttimestamp'],
 			'token' => $params['token'],
 			'watchlist' => $params['watchlist'],
-			'tags' => $params['tags'],
+			// NOTE: Must use getText() to work; PHP array from $params['tags'] is not understood
+			// by the edit API.
+			'tags' => $this->getRequest()->getText( 'tags' ),
 			'section' => $params['section'],
 			'sectiontitle' => $params['sectiontitle'],
 			'captchaid' => $params['captchaid'],
