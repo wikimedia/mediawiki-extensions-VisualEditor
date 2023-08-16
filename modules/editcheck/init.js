@@ -12,6 +12,9 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeRe
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
 	}
+	if ( !documentModel.completeHistory.getLength() ) {
+		return false;
+	}
 	var ranges = [];
 	var offset = 0;
 	var endOffset = documentModel.getDocumentRange().end;
