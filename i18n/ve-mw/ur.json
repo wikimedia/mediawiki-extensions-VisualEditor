@@ -187,7 +187,6 @@
 	"visualeditor-redirect-description": "$1 کا رجوع مکرر",
 	"visualeditor-savedialog-error-badtoken": "ہم آپ کی ترمیم محفوظ نہیں کر سکے کیونکہ آپ کی نشست درست نہیں تھی۔",
 	"visualeditor-savedialog-identify-anon": "کیا آپ اس صفحہ کو گمنام صارف کے طور پر محفوظ کرنا چاہتے ہیں؟ اس صورت میں صفحے کے تاریخچے میں آپ کا آئی پی پتا محفوظ ہوگا۔",
-	"visualeditor-savedialog-identify-trylogin": "آپ اپنے کھاتے میں داخل نہیں ہیں۔ براہ کرم دوسرے ٹیب میں لاگ ان ہوں اور واپس تشریف لائیں۔",
 	"visualeditor-savedialog-identify-user": "اب آپ [[User:$1|$1]] کے نام سے داخل ہو چکے ہیں۔ اگر آپ اس ترمیم کو محفوظ کرتے ہیں تو یہ ترمیم آپ کے نام سے منسوب ہوگی۔",
 	"visualeditor-savedialog-label-publish-short": "شائع کریں",
 	"visualeditor-savedialog-label-publish-short-start": "شائع۔۔۔",

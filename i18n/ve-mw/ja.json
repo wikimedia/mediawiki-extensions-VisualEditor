@@ -358,7 +358,6 @@
 	"visualeditor-redirect-description": "$1 へのリダイレクト",
 	"visualeditor-savedialog-error-badtoken": "セッションが無効になったため、編集内容を保存できませんでした。",
 	"visualeditor-savedialog-identify-anon": "代わりに匿名利用者としてこのページに保存しますか? このページの編集履歴にあなたの IP アドレスが記録されます。",
-	"visualeditor-savedialog-identify-trylogin": "あなたは現在ログインしていません。別のタブでログインしてからもう一度お試しください。",
 	"visualeditor-savedialog-identify-user": "[[User:$1|$1]] としてログインしています。この編集内容を保存すると、編集内容はこのアカウントと関連付けられます。",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "$1 を押すと編集を保存できます",
 	"visualeditor-savedialog-label-publish-short": "投稿",

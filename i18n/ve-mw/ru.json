@@ -372,7 +372,6 @@
 	"visualeditor-redirect-description": "Перенаправление на $1",
 	"visualeditor-savedialog-error-badtoken": "Нам не удалось сохранить вашу правку, поскольку сессия больше не действительна.",
 	"visualeditor-savedialog-identify-anon": "Вы хотите сохранить эту страницу как анонимный пользователь? Ваш IP-адрес будет записан в историю редактирования этой страницы.",
-	"visualeditor-savedialog-identify-trylogin": "Вы больше не авторизованы. Пожалуйста, авторизуйтесь в другой вкладке и повторите попытку.",
 	"visualeditor-savedialog-identify-user": "Теперь вы вошли как [[User:$1|$1]]. Ваши изменения будут связаны с этой учётной записью, если вы их сохраните.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Вы можете нажать $1, чтобы сохранить свою правку.",
 	"visualeditor-savedialog-label-publish-short": "Опубликовать",

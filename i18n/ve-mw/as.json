@@ -272,7 +272,6 @@
 	"visualeditor-redirect-description": "$1 লৈ পুনঃনিৰ্দেশিত",
 	"visualeditor-savedialog-error-badtoken": "ছেচনৰ ম্যাদ শেষ হোৱা বাবে আমি আপোনাৰ সম্পাদনাটো সাঁচি থ'ব নোৱাৰিলোঁ।",
 	"visualeditor-savedialog-identify-anon": "আপুনি অজ্ঞাত ব্যৱহাৰকাৰীৰূপে এই পৃষ্ঠাটো সাঁচি ৰাখিব বিচাৰিছে নেকি? এই পৃষ্ঠাৰ সম্পাদনা ইতিহাসত আপোনাৰ আই পি ঠিকনা সংৰক্ষিত কৰা হ'ব।",
-	"visualeditor-savedialog-identify-trylogin": "আপুনি আৰু লগ্‌ ইন কৰি থকা নাই। অনুগ্ৰহ কৰি বেলেগ টেবৰ পৰা পুনৰ লগ্‌ ইন কৰক আৰু পুনৰ চেষ্টা কৰক।",
 	"visualeditor-savedialog-identify-user": "আপুনি এতিয়া [[User:$1|$1]] ৰূপে প্ৰৱেশ কৰিছে। সম্পাদনাটো সাঁচিলে ইয়াক এই একাউণ্টৰ সৈতে যুক্ত কৰা হ'ব।",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "সাঁচিবৰ বাবে আপুনি $1 টিপিব পাৰে।",
 	"visualeditor-savedialog-label-publish-short": "প্ৰকাশ কৰক",

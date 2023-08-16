@@ -347,7 +347,6 @@
 	"visualeditor-redirect-description": "Weiterleitung auf $1",
 	"visualeditor-savedialog-error-badtoken": "Deine Bearbeitung konnte nicht gespeichert werden, da die Sitzung nicht mehr gültig war.",
 	"visualeditor-savedialog-identify-anon": "Willst du stattdessen diese Seite als anonymer Benutzer speichern? Deine IP-Adresse wird in der Versionsgeschichte dieser Seite aufgezeichnet.",
-	"visualeditor-savedialog-identify-trylogin": "Du bist nicht mehr angemeldet. Bitte melde dich auf einer anderen Registerkarte wieder an und versuche es erneut.",
 	"visualeditor-savedialog-identify-user": "Du bist jetzt als [[User:$1|$1]] angemeldet. Wenn du speicherst, wird deine Bearbeitung diesem Benutzerkonto zugeordnet.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Du kannst $1 drücken, um deine Bearbeitung zu speichern.",
 	"visualeditor-savedialog-label-publish-short": "Veröffentlichen",

@@ -327,7 +327,6 @@
 	"visualeditor-redirect-description": "$1 səhifəsinə istiqamətləndirmə",
 	"visualeditor-savedialog-error-badtoken": "Sessiya artıq bitdiyi üçün redaktənizi saxlaya bilmədik.",
 	"visualeditor-savedialog-identify-anon": "Bu səhifəni anonim istifadəçi olaraq saxlamaq istəyirsiniz? IP-ünvanınız bu səhifənin redaktə tarixçəsində qeyd olunacaq.",
-	"visualeditor-savedialog-identify-trylogin": "Artıq daxil olmamısınız. Zəhmət olmasa başqa pəncərədə daxil olun və yenidən cəhd edin.",
 	"visualeditor-savedialog-identify-user": "[[User:$1|$1]] olaraq daxil oldunuz. Redaktənizi saxladığınız təqdirdə bu hesabla yayımlanacaq.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Redaktənizi saxlamaq üçün $1 basa bilərsiniz.",
 	"visualeditor-savedialog-label-publish-short": "Yayımla",

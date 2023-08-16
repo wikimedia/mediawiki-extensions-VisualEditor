@@ -324,7 +324,6 @@
 	"visualeditor-redirect-description": "Redirection a $1",
 	"visualeditor-savedialog-error-badtoken": "Non es possibile salveguardar tu modification perque le session ha expirate.",
 	"visualeditor-savedialog-identify-anon": "Esque tu vole salveguardar iste pagina qua usator anonyme in su loco? Le adresse IP de tu connexion essera registrate in le historia de modificationes de iste pagina.",
-	"visualeditor-savedialog-identify-trylogin": "Tu non es plus in session. Per favor reaperi session ab un altere scheda e tenta lo de novo.",
 	"visualeditor-savedialog-identify-user": "Tu ha aperite session como [[User:$1|$1]]. Le modification essera associate a iste conto si tu lo salveguarda.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Tu pote premer sur $1 pro salveguardar tu modification.",
 	"visualeditor-savedialog-label-publish-short": "Publicar",

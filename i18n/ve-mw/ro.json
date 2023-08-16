@@ -283,7 +283,6 @@
 	"visualeditor-redirect-description": "Redirecționează către $1",
 	"visualeditor-savedialog-error-badtoken": "Nu v-am putut salva modificarea, deoarece sesiunea nu mai era validă.",
 	"visualeditor-savedialog-identify-anon": "Doriți, în schimb, să salvați această pagină ca anonim? Adresa dumneavoastră IP va fi înregistrată în istoricul paginii.",
-	"visualeditor-savedialog-identify-trylogin": "Nu mai sunteți logat. Vă rugăm să vă logați din nou dintr-o filă diferită și să reîncercați.",
 	"visualeditor-savedialog-identify-user": "Acum sunteți autentificat ca [[User:$1|$1]]. Dacă o salvați, modificarea dumneavoastră va fi asociată acestui cont.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Puteți apăsa $1 pentru a vă salva modificare.",
 	"visualeditor-savedialog-label-publish-short": "Publică",

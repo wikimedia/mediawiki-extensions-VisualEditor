@@ -348,7 +348,6 @@
 	"visualeditor-redirect-description": "تغییرمسیر به $1",
 	"visualeditor-savedialog-error-badtoken": "ذخیرهٔ ویرایش شما مقدور نیست چون بخش مورد نظر وجود ندارد.",
 	"visualeditor-savedialog-identify-anon": "آیا می‌خواهید این صفحه را به‌عنوان کاربر ناشناس ذخیره کنید؟ نشانی آی‌پی شما در تاریخچهٔ ویرایش صفحه ذخیره خواهد شد.",
-	"visualeditor-savedialog-identify-trylogin": "مدتی است که با حساب کاربریتان به سامانه وصل نیستید. لطفاً با یک زبانهٔ دیگر مرورگر به صفحهٔ قبلی بازگردید و از نو تلاش کنید.",
 	"visualeditor-savedialog-identify-user": "شما به عنوان [[User:$1|$1]] وارد شده‌اید. اگر شما این ویرایش را ذخیره کنید ویرایشتان با این حساب مرتبط خواهد بود",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "برای ذخیرهٔ ویرایشتان دکمهٔ $1 را فشار دهید.",
 	"visualeditor-savedialog-label-publish-short": "انتشار",

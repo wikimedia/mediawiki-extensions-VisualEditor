@@ -273,7 +273,6 @@
 	"visualeditor-redirect-description": "Viruleedung op $1",
 	"visualeditor-savedialog-error-badtoken": "Mir konnten Är Ännerung net späichere well d'Sessioun net méi valabel war.",
 	"visualeditor-savedialog-identify-anon": "Wëllt Dir dës Säit als anonymme Benotzer späicheren? Är IP-Adress gëtt an de Versioune vun der Säit gespäichert.",
-	"visualeditor-savedialog-identify-trylogin": "Dir sidd net méi ageloggt. Loggt Iech wgl. aus engem aneren Tab an a probéiert nach eng Kéier.",
 	"visualeditor-savedialog-identify-user": "Dir sidd elo als [[User:$1|$1]] ageloggt. Är Ännerung gëtt mat dësem Benotzerkont associéiert wann Dir dës Ännerung elo späichert.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Dir kënnt $1 drécke fir Är Ännerung ze späicheren.",
 	"visualeditor-savedialog-label-publish-short": "Verëffentlechen",

@@ -338,7 +338,6 @@
 	"visualeditor-redirect-description": "Redirecionar para $1",
 	"visualeditor-savedialog-error-badtoken": "Não podemos gravar a sua edição porque a sessão expirou.",
 	"visualeditor-savedialog-identify-anon": "Prefere gravar esta página como utilizador anónimo? O seu endereço IP será registado no histórico de edições da página.",
-	"visualeditor-savedialog-identify-trylogin": "A sua sessão expirou. Por favor, inicie novamente a partir de um separador diferente e tente de novo.",
 	"visualeditor-savedialog-identify-user": "Iniciou agora a sessão como [[User:$1|$1]]. A sua edição será associada a esta conta se a gravar.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Pode premir $1 para gravar a sua edição.",
 	"visualeditor-savedialog-label-publish-short": "Publicar",

@@ -209,7 +209,6 @@
 	"visualeditor-redirect-description": "Ibaw-ing iti $1",
 	"visualeditor-savedialog-error-badtoken": "Saami a naidulin ti inurnosmo gapu ta ti sesion ket saanen a maipateg.",
 	"visualeditor-savedialog-identify-anon": "Kayatmo kadi nga idulin daytoy a panid? Ti IP nga adresmo ket mairehistronto iti pakasaritaan iti daytoy a panid.",
-	"visualeditor-savedialog-identify-trylogin": "Saankan a nakastrek. Pangngaasi a sumrek manen manipud iti sabali nga etiketa ken padasen manen.",
 	"visualeditor-savedialog-identify-user": "Nakastrekkan a kas ni [[User:$1|$1]]. Ti inurnosmo ket mairamanto iti daytoy a pakabilangan no idulimo daytoy nga urnos.",
 	"visualeditor-savedialog-label-publish-short": "Ipablaak",
 	"visualeditor-savedialog-label-resolve-conflict": "Ibanagan ti parikut",

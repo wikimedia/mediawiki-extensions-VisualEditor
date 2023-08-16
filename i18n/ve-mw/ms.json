@@ -219,7 +219,6 @@
 	"visualeditor-redirect-description": "Melencong ke $1",
 	"visualeditor-savedialog-error-badtoken": "Suntingan anda tidak dapat disimpan kerana sesi anda sudah tidak sah.",
 	"visualeditor-savedialog-identify-anon": "Adakah anda ingin menyimpan halaman ini sebagai pengguna awanama? Alamat IP anda akan direkodkan pada sejarah suntingan halaman ini.",
-	"visualeditor-savedialog-identify-trylogin": "Anda tidak lagi log masuk. Sila log kembali dari tab yang lain dan cuba lagi.",
 	"visualeditor-savedialog-identify-user": "Anda telah log masuk sebagai [[User:$1|$1]]. Suntingan anda akan dikaitkan dengan akaun ini jika anda menyimpan suntingan ini.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Anda boleh tekan $1 untuk menyimpan suntingan.",
 	"visualeditor-savedialog-label-publish-short": "Siarkan",

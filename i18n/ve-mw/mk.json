@@ -331,7 +331,6 @@
 	"visualeditor-redirect-description": "Пренасочување кон $1",
 	"visualeditor-savedialog-error-badtoken": "Не можев да го зачувам уредувањето бидејќи седницата повеќе не е важечка.",
 	"visualeditor-savedialog-identify-anon": "Дали тогаш би сакале да ја зачувате страницата како анонимен корисник? Вашата IP-адреса е биде заведена во историјата на измени на страницата.",
-	"visualeditor-savedialog-identify-trylogin": "Повеќе не сте најавени. Најавете се повторно од друго јазиче и обидете се пак.",
 	"visualeditor-savedialog-identify-user": "Сега сте најавени како [[User:$1|$1]]. Уредувањето ќе ѝ биде припишано на оваа сметка ако го зачувате.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Можете да стиснете $1 за да го зачувате уредувањето.",
 	"visualeditor-savedialog-label-publish-short": "Објави",

@@ -320,7 +320,6 @@
 	"visualeditor-redirect-description": "$1 문서로 넘겨주기",
 	"visualeditor-savedialog-error-badtoken": "세션이 더 이상 유효하지 않기 때문에 편집을 저장할 수 없습니다.",
 	"visualeditor-savedialog-identify-anon": "이 문서를 익명 사용자로 대신 저장하겠습니까? 당신의 IP 주소가 이 문서의 편집 역사에 기록됩니다.",
-	"visualeditor-savedialog-identify-trylogin": "더 이상 로그인된 상태가 아닙니다. 다른 탭에서 로그인하고 다시 시도하세요.",
 	"visualeditor-savedialog-identify-user": "지금 [[User:$1|$1]]님으로 로그인되어 있습니다. 이 편집을 저장하면 당신의 편집이 이 계정으로 연결됩니다.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "$1를 누르면 편집을 저장할 수 있습니다.",
 	"visualeditor-savedialog-label-publish-short": "게시",

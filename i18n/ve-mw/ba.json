@@ -197,7 +197,6 @@
 	"visualeditor-redirect-description": "$1-гә йүнәлтеү",
 	"visualeditor-savedialog-error-badtoken": "Үҙгәртеүҙәрегеҙҙе эшкәртә алманыҡ, сөнки сессия бүтән ғәмәлдә түгел.",
 	"visualeditor-savedialog-identify-anon": "Был битте танылмаған ҡулланыусы булараҡ һаҡларға теләйһегеҙме? IP-адресығыҙ биттең үҙгәртеүҙәр тарихына яҙыласаҡ.",
-	"visualeditor-savedialog-identify-trylogin": "Һеҙ системанан сыҡтығыҙ. Рәхим итеп, системаға икенсе ҡушымтанан инегеҙ һәм яңынан ҡабатлағыҙ.",
 	"visualeditor-savedialog-identify-user": "Һеҙ [[User:$1|$1]] булараҡ танылғанһығыҙ. Был үҙгәртеүҙәрҙе һаҡлаған осраҡта, улар ошо иҫәп яҙмаһына бәйле буласаҡ.",
 	"visualeditor-savedialog-label-resolve-conflict": "Ҡапма-ҡаршылыҡты хәл итергә",
 	"visualeditor-savedialog-label-resume-editing": "Мөхәррирләүҙе дауам итеү",

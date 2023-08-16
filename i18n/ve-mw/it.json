@@ -322,7 +322,6 @@
 	"visualeditor-redirect-description": "Reindirizzamento a $1",
 	"visualeditor-savedialog-error-badtoken": "Non è possibile salvare la tua modifica poiché la sessione non è più valida.",
 	"visualeditor-savedialog-identify-anon": "Vuoi salvare questa pagina come utente anonimo? Il tuo indirizzo IP sarà registrato nella cronologia della pagina.",
-	"visualeditor-savedialog-identify-trylogin": "Non sei più connesso. Accedi nuovamente da una diversa scheda e riprova.",
 	"visualeditor-savedialog-identify-user": "Hai effettuato l'accesso come [[User:$1|$1]]. Se salvi, la tua modifica sarà associata a questa utenza.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Puoi premere $1 per salvare la tua modifica.",
 	"visualeditor-savedialog-label-publish-short": "Pubblica",

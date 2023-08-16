@@ -258,7 +258,6 @@
 	"visualeditor-redirect-description": "redirigeix a $1",
 	"visualeditor-savedialog-error-badtoken": "No hem pogut processar la vostra edició perquè la sessió ha caducat.",
 	"visualeditor-savedialog-identify-anon": "Voleu desar aquesta pàgina com a usuari anònim? La vostra adreça IP serà emmagatzemada en l'historial d'edicions d'aquesta pàgina.",
-	"visualeditor-savedialog-identify-trylogin": "Ja no esteu connectats. Si us plau, identifiqueu-vos des d'una altra pestanya i proveu de nou.",
 	"visualeditor-savedialog-identify-user": "Us heu connectat com [[User:$1|$1]]. La vostra edició s'associarà amb aquest compte si deseu els canvis.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Podeu prémer $1 per desar la vostra edició.",
 	"visualeditor-savedialog-label-publish-short": "Publica",

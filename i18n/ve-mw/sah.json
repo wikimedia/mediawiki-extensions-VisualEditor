@@ -222,7 +222,6 @@
 	"visualeditor-redirect-description": "Манна $1 утаарыы",
 	"visualeditor-savedialog-error-badtoken": "Сиэссийэҥ быстан хаалан, уларытыыгын бигэргэтэр сатаммата.",
 	"visualeditor-savedialog-identify-anon": "Бу уларытыыны ааккын эппэккэ бигэргэтэҕин дуо? Оччоҕо сирэй устуоруйатыгар IP-аадырыс эрэ суруллуо.",
-	"visualeditor-savedialog-identify-trylogin": "Бэлиэ-ааттан тахсыбыккын. Бука, атын кыбытыгынан киирэн көр, ол кэннэ хатылаар.",
 	"visualeditor-savedialog-identify-user": "[[User:$1|$1]] аатынан киирдиҥ. Уларытыы оҥорор түгэҥҥэр сирэй устуоруйатыгар бу аат көстүө.",
 	"visualeditor-savedialog-label-publish-short": "Бигэргэт",
 	"visualeditor-savedialog-label-publish-short-start": "Бигэргэтии...",

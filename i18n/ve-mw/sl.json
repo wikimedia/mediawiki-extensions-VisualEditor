@@ -333,7 +333,6 @@
 	"visualeditor-redirect-description": "preusmeritev na $1",
 	"visualeditor-savedialog-error-badtoken": "Vašega urejanja nismo mogli shraniti, saj seja ni bila več veljavna.",
 	"visualeditor-savedialog-identify-anon": "Želite namesto tega shraniti stran kot anonimen uporabnik? V zgodovini urejanja te strani se bo zapisal vaš IP-naslov.",
-	"visualeditor-savedialog-identify-trylogin": "Niste več prijavljeni. Prosimo, prijavite se znova iz drugega zavihka in poskusite znova.",
 	"visualeditor-savedialog-identify-user": "Zdaj ste prijavljeni kot [[User:$1|$1]]. Če boste svoje urejanje shranili, bo povezano s tem računom.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Za shranitev urejanja pritisnite $1.",
 	"visualeditor-savedialog-label-publish-short": "Objavi",

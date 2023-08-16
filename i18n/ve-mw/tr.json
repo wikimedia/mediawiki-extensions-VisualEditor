@@ -361,7 +361,6 @@
 	"visualeditor-redirect-description": "$1 yönlendirildi",
 	"visualeditor-savedialog-error-badtoken": "Oturum artık geçerli olmadığı için düzenlemenizi kaydedemedik.",
 	"visualeditor-savedialog-identify-anon": "Bu sayfayı bir anonim kullanıcı olarak kaydetmek ister misiniz? IP adresiniz sayfanın düzenleme geçmişine kaydedilecektir.",
-	"visualeditor-savedialog-identify-trylogin": "Artık oturum açmadınız. Lütfen farklı bir sekmeden tekrar oturum açın ve tekrar deneyin.",
 	"visualeditor-savedialog-identify-user": "Şimdi [[User:$1|$1]] olarak oturum açtınız. Bu düzenlemeyi kaydederseniz, düzenlemeniz bu hesapla ilişkilendirilecektir.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Düzenlemenizi kaydetmek için $1 tuşuna basabilirsiniz.",
 	"visualeditor-savedialog-label-publish-short": "Yayımla",

@@ -289,7 +289,6 @@
 	"visualeditor-redirect-description": "Redirixir a $1",
 	"visualeditor-savedialog-error-badtoken": "Non se puido gardar a súa edición porque a sesión expirou.",
 	"visualeditor-savedialog-identify-anon": "Quere gardar esta páxina como usuario anónimo? O seu enderezo IP quedará rexistrado no historial de edicións da páxina.",
-	"visualeditor-savedialog-identify-trylogin": "A súa sesión expirou. Por favor, inicie a sesión de novo dende outra lapela e volva a intentalo.",
 	"visualeditor-savedialog-identify-user": "Agora está rexistrado como [[User:$1|$1]]. A súa edición quedará asociada a esta conta se a garda.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Pode premer $1 para gardar a súa edición.",
 	"visualeditor-savedialog-label-publish-short": "Publicar",

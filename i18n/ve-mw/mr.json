@@ -229,7 +229,6 @@
 	"visualeditor-redirect-description": "$1 कडे पुनर्निर्देशित करा",
 	"visualeditor-savedialog-error-badtoken": "आम्ही आपले संपादन जतन करु शकलो नाही कारण ते सत्र संपले होते.",
 	"visualeditor-savedialog-identify-anon": "हे पान आपणास अनामिक सदस्य म्हणून जतन करावयाचे आहे काय? या पानाच्या इतिहासात आपला अंकपत्ता नोंदविल्या जाईल.",
-	"visualeditor-savedialog-identify-trylogin": "आपण सनोंद प्रवेशित नाहीत.वेगळी कळ वापरुन पुन्हा सनोंद प्रवेश करा व नंतर प्रयत्न करा.",
 	"visualeditor-savedialog-identify-user": "[[User:$1|$1]] म्हणून आपण सनोंद प्रवेशित आहात. हे संपादन आपण जतन केले तर या खात्याशी आपले संपादन जोडले जाईल.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "तुमची संपादने साठवण्यासाठी $1 दाबा.",
 	"visualeditor-savedialog-label-publish-short": "प्रकाशित करा",

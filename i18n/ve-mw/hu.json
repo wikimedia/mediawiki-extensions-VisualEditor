@@ -293,7 +293,6 @@
 	"visualeditor-redirect-description": "Átirányítás ide: $1",
 	"visualeditor-savedialog-error-badtoken": "Nem tudtuk elmenteni a szerkesztésedet, mert a munkameneted már nem érvényes.",
 	"visualeditor-savedialog-identify-anon": "Szeretnéd az oldalt inkább egy anonim felhasználóként elmenteni? Az IP-címed látható lesz a laptörténetben.",
-	"visualeditor-savedialog-identify-trylogin": "Már nem vagy bejelentkezve. Jelentkezz vissza egy másik fülön és próbáld újra.",
 	"visualeditor-savedialog-identify-user": "Bejelentkeztél mint [[User:$1|$1]]. A szerkesztésed ehhez a felhasználóhoz fog tartozni, ha elmented.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "A $1 billentyűkombinációval mentheted el a szerkesztésedet.",
 	"visualeditor-savedialog-label-publish-short": "Közzététel",

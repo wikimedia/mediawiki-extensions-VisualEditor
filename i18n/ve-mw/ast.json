@@ -251,7 +251,6 @@
 	"visualeditor-redirect-description": "Redirixir a $1",
 	"visualeditor-savedialog-error-badtoken": "Nun pudimos guardar la edición porque la sesión yá nun ye válida.",
 	"visualeditor-savedialog-identify-anon": "¿Quier guardar esta páxina como usuariu anónimu? La so direición IP quedará rexistrada nel historial d'ediciones de la páxina.",
-	"visualeditor-savedialog-identify-trylogin": "Yá nun tienes la sesión abierta. Anicia sesión otra vuelta dende otra llingüeta y vuelve a tentalo.",
 	"visualeditor-savedialog-identify-user": "Anició sesión como [[User:$1|$1]]. La edición quedará asociada con esta cuenta si la guarda.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Puedes primir $1 pa guardar la edición.",
 	"visualeditor-savedialog-label-publish-short": "Publicar",

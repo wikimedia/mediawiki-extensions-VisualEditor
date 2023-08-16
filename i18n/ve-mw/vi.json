@@ -317,7 +317,6 @@
 	"visualeditor-redirect-description": "Đổi hướng đến $1",
 	"visualeditor-savedialog-error-badtoken": "Chúng tôi không lưu được sửa đổi của bạn vì phiên không còn hợp lệ.",
 	"visualeditor-savedialog-identify-anon": "Bạn có muốn lưu trang này là người dùng vô danh thay vì thành viên đăng ký? Địa chỉ IP của bạn sẽ được ghi vào lịch sử sửa đổi của trang này.",
-	"visualeditor-savedialog-identify-trylogin": "Bạn không còn đăng nhập. Xin hãy đăng nhập lại trong một thẻ khác và thử lại.",
 	"visualeditor-savedialog-identify-user": "Bạn hiện đăng nhập vào tài khoản [[User:$1|$1]]. Nếu bạn lưu sửa đổi này, tài khoản của bạn sẽ được ghi công trong lịch sử trang.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Bấm $1 để lưu sửa đổi của bạn.",
 	"visualeditor-savedialog-label-publish-short": "Đăng",

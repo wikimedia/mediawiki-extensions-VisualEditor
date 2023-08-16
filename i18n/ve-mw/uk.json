@@ -346,7 +346,6 @@
 	"visualeditor-redirect-description": "Перенаправлення на $1",
 	"visualeditor-savedialog-error-badtoken": "Ми не змогли зберегти Ваші зміни, оскільки сесія вже недійсна.",
 	"visualeditor-savedialog-identify-anon": "Ви бажаєте зберегти цю сторінку як анонімний користувач? Ваша IP-адреса буде записана в історію редагування цієї сторінки.",
-	"visualeditor-savedialog-identify-trylogin": "Ви вже не перебуваєте в системі. Будь ласка, повторно увійдіть в систему з іншої вкладки і спробуйте ще раз.",
 	"visualeditor-savedialog-identify-user": "Ви увійшли як [[User:$1|$1]]. Ваше редагування буде пов'язане з цим обліковим записом, якщо ви збережете його.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Можете натиснути $1, щоб зберегти своє редагування.",
 	"visualeditor-savedialog-label-publish-short": "Зберегти",

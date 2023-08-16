@@ -44,7 +44,6 @@
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem Sie zum Bearbeiten angefangen haben. Wählen Sie „$1“, um sie neu zu erstellen.",
 	"visualeditor-savedialog-error-badtoken": "Ihre Bearbeitung konnte nicht gespeichert werden, da die Sitzung nicht mehr gültig war.",
 	"visualeditor-savedialog-identify-anon": "Wollen Sie stattdessen diese Seite als anonymer Benutzer speichern? Ihre IP-Adresse wird in der Versionsgeschichte dieser Seite aufgezeichnet.",
-	"visualeditor-savedialog-identify-trylogin": "Sie sind nicht mehr angemeldet. Bitte melden Sie sich auf einer anderen Registerkarte wieder an und versuchen Sie es erneut.",
 	"visualeditor-savedialog-identify-user": "Sie sind jetzt als [[User:$1|$1]] angemeldet. Wenn Sie speichern, wird Ihre Bearbeitung diesem Benutzerkonto zugeordnet.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Sie können $1 drücken, um Ihre Bearbeitung zu speichern.",
 	"visualeditor-savedialog-label-review": "Überprüfen Sie Ihre Änderungen",

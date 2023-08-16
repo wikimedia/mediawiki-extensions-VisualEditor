@@ -346,7 +346,6 @@
 	"visualeditor-redirect-description": "Redirecionar para $1",
 	"visualeditor-savedialog-error-badtoken": "Não conseguimos salvar sua edição porque a sessão já não era válida.",
 	"visualeditor-savedialog-identify-anon": "Deseja salvar esta página como um usuário anônimo em vez disso? O seu endereço de IP será registrado no histórico de edições desta página.",
-	"visualeditor-savedialog-identify-trylogin": "Você não está mais logado. Faça o login novamente em uma aba diferente e tente novamente.",
 	"visualeditor-savedialog-identify-user": "Agora você está conectado como [[User:$1|$1]]. Sua edição será associada a esta conta se você salvar esta edição.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Você pode pressionar $1 para salvar sua edição.",
 	"visualeditor-savedialog-label-publish-short": "Publicar",

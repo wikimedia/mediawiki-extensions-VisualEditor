@@ -217,7 +217,6 @@
 	"visualeditor-redirect-description": "Reindirizzamento a $1",
 	"visualeditor-savedialog-error-badtoken": "Nun putimmo sarvà 'o cagnamiento vuosto pecché 'a sessione s'è ammaturata.",
 	"visualeditor-savedialog-identify-anon": "Vulite sarvà sta paggena comm'a n'utente anonimo mmece? Ll'IP r' 'a vosta sarrà riggistrata dint' 'a cronologgia r' 'a paggena.",
-	"visualeditor-savedialog-identify-trylogin": "Nun site cchiù cullegato/a. Trasite n'ata vota 'a na scheda differente, po' tentate n'ata vota.",
 	"visualeditor-savedialog-identify-user": "Mo' site trasuto comm'a [[User:$1|$1]]. 'O cagnamiento vuosto sarrà suocio a stu cunto si sarvate stu cagnamiento.",
 	"visualeditor-savedialog-label-publish-short": "Pubbreca",
 	"visualeditor-savedialog-label-resolve-conflict": "Arrecietta 'o conflitto",

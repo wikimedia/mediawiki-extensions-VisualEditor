@@ -266,7 +266,6 @@
 	"visualeditor-redirect-description": "Preusmerava na „$1”",
 	"visualeditor-savedialog-error-badtoken": "Nismo mogli da sačuvamo vašu izmenu zato što sesija više nije važeća.",
 	"visualeditor-savedialog-identify-anon": "Želite li sačuvati ovu stranicu kao anoniman korisnik? Vaša IP adresa će biti zabeležena u istoriji izmena ove stranice.",
-	"visualeditor-savedialog-identify-trylogin": "Više niste prijavljeni. Prijavite se u drugoj kartici i pokušajte ponovo.",
 	"visualeditor-savedialog-identify-user": "Sada ste prijavljeni kao [[User:$1|$1]]. Vaše izmene će biti povezane s ovim nalogom ako sačuvate izmenu.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Pritisnite $1 da biste sačuvali izmenu.",
 	"visualeditor-savedialog-label-publish-short": "Objavi",

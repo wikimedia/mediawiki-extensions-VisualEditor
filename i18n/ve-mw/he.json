@@ -343,7 +343,6 @@
 	"visualeditor-redirect-description": "הפניה ל{{GRAMMAR:תחילית|$1}}",
 	"visualeditor-savedialog-error-badtoken": "לא הצלחנו לשמור את העריכה שלך, כי ההתחברות כבר לא הייתה תקינה.",
 	"visualeditor-savedialog-identify-anon": "האם ברצונך לשמור את הדף הזה כמשתמש אלמוני? כתובת ה־IP שלך תישמר בהיסטוריית העריכות של הדף הזה.",
-	"visualeditor-savedialog-identify-trylogin": "לא נכנסת לחשבון. נא להיכנס שוב לחשבון בלשונית אחרת ולנסות שוב.",
 	"visualeditor-savedialog-identify-user": "נכנסת למערכת בשם [[User:$1|$1]]. העריכה שלך תשויך לחשבון הזה עם שמירת העריכה הזאת.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "באפשרותך ללחוץ $1 כדי לשמור את העריכה שלך.",
 	"visualeditor-savedialog-label-publish-short": "פרסום",

@@ -384,7 +384,6 @@
 	"visualeditor-redirect-description": "Redirection vers $1",
 	"visualeditor-savedialog-error-badtoken": "Nous n’avons pas pu enregistrer votre modification car la session n’était plus valide.",
 	"visualeditor-savedialog-identify-anon": "Voulez-vous plutôt enregistrer cette page en tant qu’utilisateur anonyme ? Votre adresse IP sera enregistrée dans l’historique des modifications de cette page.",
-	"visualeditor-savedialog-identify-trylogin": "Vous n’êtes plus connecté{{GENDER:||e}}. Reconnectez-vous à partir d’un onglet différent puis réessayez.",
 	"visualeditor-savedialog-identify-user": "Vous êtes maintenant connecté en tant que [[User:$1|$1]]. Votre modification sera associée avec ce compte si vous l’enregistrez.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Vous pouvez appuyer sur $1 pour enregistrer votre modification.",
 	"visualeditor-savedialog-label-publish-short": "Publier",

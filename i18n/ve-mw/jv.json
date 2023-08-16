@@ -231,7 +231,6 @@
 	"visualeditor-redirect-description": "Alih menyang $1",
 	"visualeditor-savedialog-error-badtoken": "Besutanmu ora kena disimpen merga sésiné wis kadaluwarsa.",
 	"visualeditor-savedialog-identify-anon": "Arep nyimpen kaca iki minangka anonim? Alamat IPmu bakal kacathet ing sajarahé besutan kaca iki.",
-	"visualeditor-savedialog-identify-trylogin": "Kowé wis metu log. Mlebua log manèh lumantar tab liyané lan jajala manèh.",
 	"visualeditor-savedialog-identify-user": "Kowé wis mlebu log minangka [[User:$1|$1]]. Besutanmu bakal kagayutaké marang akun iki manawa kowé nyimpen besutan iki.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Kowé bisa mencèt $1 saperlu nyimpen besutanmu.",
 	"visualeditor-savedialog-label-publish-short": "Babar",

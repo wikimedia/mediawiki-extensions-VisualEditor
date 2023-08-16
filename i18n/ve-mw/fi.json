@@ -321,7 +321,6 @@
 	"visualeditor-redirect-description": "Ohjaus sivulle $1",
 	"visualeditor-savedialog-error-badtoken": "Emme voineet tallentaa muokkaustasi, koska istunto ei ole enää voimassa.",
 	"visualeditor-savedialog-identify-anon": "Haluatko tallentaa sivun kirjautumattomana käyttäjänä? IP-osoitteesi kirjataan tämän sivun muutoshistoriaan.",
-	"visualeditor-savedialog-identify-trylogin": "Et ole enää sisäänkirjautuneena. Kirjaudu sisään toisen välilehden kautta ja yritä uudelleen.",
 	"visualeditor-savedialog-identify-user": "Olet kirjautunut käyttäjänä [[User:$1|$1]]. Muokkauksesi liitetään tähän tunnukseen, jos tallennat tämän muokkauksen.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Tallenna muutokset painamalla $1.",
 	"visualeditor-savedialog-label-publish-short": "Julkaise",

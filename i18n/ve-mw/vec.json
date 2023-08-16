@@ -245,7 +245,6 @@
 	"visualeditor-redirect-description": "Rimando a $1",
 	"visualeditor-savedialog-error-badtoken": "No xé sta pusìbiłe salvare el to canbiamento, parché ła sesion no ła xé pì vałida.",
 	"visualeditor-savedialog-identify-anon": "Vuto salvar sta pàjina cofà utente anonemo? El to indiriso IP el vegnarà rejistrà in tel istòrego de ła pàjina.",
-	"visualeditor-savedialog-identify-trylogin": "No te si pì conetesto. Va drento da novo da na difarente scheda e riproa.",
 	"visualeditor-savedialog-identify-user": "Te si ndà drento co el nome [[User:$1|$1]]. I to canbiamenti, se te i salvaré, i vegnarà insoçai a sta utensa.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Schicia $1 par salvar el to canbiamento.",
 	"visualeditor-savedialog-label-publish-short": "Publega",

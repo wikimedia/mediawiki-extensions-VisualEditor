@@ -348,7 +348,6 @@
 	"visualeditor-redirect-description": "Przekierowanie do $1",
 	"visualeditor-savedialog-error-badtoken": "Nie można zapisać twojej edycji, ponieważ sesja wygasła.",
 	"visualeditor-savedialog-identify-anon": "Czy chcesz mimo wszystko zapisać tę stronę jako anonimowy użytkownik? Twój adres IP zostanie zapisany w historii edycji strony.",
-	"visualeditor-savedialog-identify-trylogin": "Już nie jesteś zalogowany. Zaloguj się ponownie z innej karty i spróbuj jeszcze raz.",
 	"visualeditor-savedialog-identify-user": "Jesteś teraz {{GENDER:$1|zalogowany|zalogowana}} jako [[User:$1|$1]]. Twoja edycja będzie przypisana do tego konta, jeżeli ją zapiszesz.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Możesz nacisnąć $1, aby zapisać swoją edycję.",
 	"visualeditor-savedialog-label-publish-short": "Opublikuj",

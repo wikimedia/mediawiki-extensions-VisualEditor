@@ -316,7 +316,6 @@
 	"visualeditor-redirect-description": "Trochferwizing nei $1",
 	"visualeditor-savedialog-error-badtoken": "We kinne jo bewurking net bewarje, meidat de sesje net mear jildich is.",
 	"visualeditor-savedialog-identify-anon": "Wolle jo oars dizze side bewarje as anonime meidogger? Jo YP-adres wurdt dan opnaam yn 'e bewurkingsskiednis fan 'e side.",
-	"visualeditor-savedialog-identify-trylogin": "Jo binne net mear ynlogd. Meld jo wer oan yn in oar tabblêd en besykje it nochris.",
 	"visualeditor-savedialog-identify-user": "Jo binne no ynlogd as [[User:$1|$1]]. By it bewarjen wurdt jo bewurking oan dat akkount ferbûn.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Jo kinne $1 drukke om jo bewurking te bewarjen.",
 	"visualeditor-savedialog-label-publish-short": "Publisearje",

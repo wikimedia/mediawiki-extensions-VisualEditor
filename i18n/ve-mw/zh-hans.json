@@ -358,7 +358,6 @@
 	"visualeditor-redirect-description": "重定向至$1",
 	"visualeditor-savedialog-error-badtoken": "由于会话失效，我们无法保存您的编辑。",
 	"visualeditor-savedialog-identify-anon": "您想要以匿名用户身份保存该页面吗？您的IP地址将被记录在该页面的编辑历史中。",
-	"visualeditor-savedialog-identify-trylogin": "您已退出，请在其他页签登录后再试一次。",
 	"visualeditor-savedialog-identify-user": "您现在正以[[User:$1|$1]]的身份登录。如果您保存该编辑，该编辑将与您的账户关联。",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以点击$1来保存您的编辑。",
 	"visualeditor-savedialog-label-publish-short": "发布",
