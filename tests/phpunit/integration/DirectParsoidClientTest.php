@@ -4,7 +4,6 @@ namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use Generator;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
-use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
@@ -73,17 +72,13 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 	public function testTransformHtml( $langCode ) {
 		$directClient = $this->createDirectClient();
 
-		$pageIdentity = PageIdentityValue::localIdentity(
-			1,
-			NS_MAIN,
-			'DirectParsoidClient'
-		);
+		$page = $this->getExistingTestPage();
 
 		$html = '<h2>Hello World</h2>';
-		$oldid = $pageIdentity->getId();
+		$oldid = $page->getId();
 
 		$response = $directClient->transformHTML(
-			$pageIdentity,
+			$page,
 			new Bcp47CodeValue( $langCode ?? 'qqx' ),
 			$html,
 			$oldid,
