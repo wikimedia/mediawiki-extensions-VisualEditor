@@ -3,6 +3,7 @@
 		"authors": [
 			"Lizalizaufa",
 			"Азат Хәлилов",
+			"Айсар",
 			"З. ӘЙЛЕ",
 			"Лилиә",
 			"Ләйсән",
@@ -27,7 +28,7 @@
 	"apihelp-visualeditoredit-param-html": "\n\nвики- текста конвертларға Parsoid ебәреү өсөн HTML",
 	"apihelp-visualeditoredit-param-minor": "Бәләкәй үҙгәртеүгә флаг.",
 	"apihelp-visualeditoredit-param-needcheck": "Байҡау проблема бирһә, һаҡлағанда ошо параметрҙы бирегеҙ. Үҙгәртеүҙәрҙә билдәләр",
-	"apihelp-visualeditoredit-param-oldid": "Ҡулланған өлгө номеры. Программа көйләүе буйынса һуңғы өлгөлә.",
+	"apihelp-visualeditoredit-param-oldid": "Ҡулланылған версия номеры.",
 	"apihelp-visualeditoredit-param-page": "Мотлаҡ эште башҡарыу өсөн бит.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Һаҡлаған саҡта, үҙгәртеү ваҡытын ҡуйығыҙ. Был мөхәррирләгәндә конфликттарҙы күреү өсөн ҡулланыла.",
 	"apihelp-visualeditoredit-param-summary": "Үҙгәртеүҙәр тасуирламаһын мөхәррирләргә"
