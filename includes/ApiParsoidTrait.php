@@ -17,13 +17,13 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Title\Title;
 use Message;
 use NullStatsdDataFactory;
 use PrefixingStatsdDataFactoryProxy;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
-use Title;
 use WebRequest;
 
 trait ApiParsoidTrait {

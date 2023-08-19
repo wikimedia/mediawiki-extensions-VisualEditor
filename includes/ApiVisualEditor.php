@@ -32,13 +32,13 @@ use MediaWiki\Page\PageReference;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\SpecialPage\SpecialPageFactory;
+use MediaWiki\Title\Title;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
 use MessageLocalizer;
 use RawMessage;
 use RequestContext;
-use Title;
 use Wikimedia\ParamValidator\ParamValidator;
 use WikitextContent;
 

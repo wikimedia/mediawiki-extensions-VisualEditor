@@ -10,6 +10,7 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\Title\Title;
 use MediaWiki\Widget\TitleInputWidget;
 use OOUI\ActionFieldLayout;
 use OOUI\ButtonWidget;
@@ -18,7 +19,6 @@ use OOUI\FormLayout;
 use OOUI\ProgressBarWidget;
 use OOUI\TextInputWidget;
 use SpecialPage;
-use Title;
 use User;
 
 class SpecialCollabPad extends SpecialPage {

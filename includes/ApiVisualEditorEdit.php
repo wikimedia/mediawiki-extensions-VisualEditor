@@ -26,12 +26,12 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Storage\PageEditStash;
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use ObjectCache;
 use RequestContext;
 use Sanitizer;
 use SkinFactory;
-use Title;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiVisualEditorEdit extends ApiBase {

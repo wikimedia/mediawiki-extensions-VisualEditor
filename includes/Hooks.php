@@ -22,6 +22,7 @@ use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use OOUI\ButtonGroupWidget;
 use OOUI\ButtonWidget;
@@ -33,7 +34,6 @@ use Skin;
 use SkinTemplate;
 use SpecialPage;
 use TextSlotDiffRenderer;
-use Title;
 use User;
 use WebRequest;
 

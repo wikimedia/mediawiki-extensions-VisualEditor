@@ -2,6 +2,8 @@
 
 // @phpcs:disable MediaWiki.Files.ClassMatchesFilename.NotMatch
 
+use MediaWiki\Title\Title;
+
 /**
  * Phan stub for the soft dependency to FlaggedRevs extension
  * There is no hard dependency and VisualEditor is a dependency to many other extensions,
