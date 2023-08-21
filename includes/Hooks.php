@@ -907,6 +907,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			$preferences['visualeditor-newwikitext'] = [
 				'type' => 'toggle',
 				'label-message' => 'visualeditor-preference-newwikitexteditor-enable',
+				'help-message' => 'visualeditor-preference-newwikitexteditor-help',
 				'section' => 'editing/editor'
 			];
 		}
