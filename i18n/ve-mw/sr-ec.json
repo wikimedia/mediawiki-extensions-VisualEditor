@@ -14,7 +14,8 @@
 			"Милан Јелисавчић",
 			"Сербијана",
 			"Kizule",
-			"Srđan"
+			"Srđan",
+			"Zenfiric"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -375,6 +376,7 @@
 	"visualeditor-section-body-placeholder": "Нови одељак",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-serializeerror": "Грешка при учитавању података са сервера: $1.",
+	"visualeditor-loaderror-wrongmode": "Учитавање уређивача у погрешном режиму (тип података: „$1“, уређивачки режим: „$2“).",
 	"visualeditor-settings-tool": "Подешавања странице",
 	"visualeditor-special-characters-group-other": "Често коришћени",
 	"visualeditor-templatesused-tool": "Коришћени шаблони",
