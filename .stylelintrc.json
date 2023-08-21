@@ -5,8 +5,6 @@
 	],
 	"rules": {
 		"no-descending-specificity": null,
-		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-",
-		"plugin/no-unsupported-browser-features": null,
-		"declaration-property-unit-disallowed-list": null
+		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin)-"
 	}
 }
