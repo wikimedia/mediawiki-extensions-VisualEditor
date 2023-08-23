@@ -238,6 +238,7 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Vaizdo plotis",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Numatytasis plotis: $1 px",
 	"visualeditor-mwsignature-tool": "Jūsų parašas",
+	"visualeditor-preference-visualeditor": "Įgalinti vaizdinį redaktorių",
 	"visualeditor-preference-core-description": "Įjungti vizualų redaktorių. Jis neveiks aptarimų puslapiuose ir kai kuriose kitose vardų srityse.",
 	"visualeditor-preference-core-label": "Vizualus redagavimas",
 	"visualeditor-preference-newwikitexteditor-label": "Naujas viki teksto režimas",
