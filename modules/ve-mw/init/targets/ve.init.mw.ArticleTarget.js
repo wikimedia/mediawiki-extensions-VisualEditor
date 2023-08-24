@@ -648,6 +648,18 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	if ( data.nocontent || data.tempusercreated ) {
 		// Teardown the target, ensuring auto-save data is cleared
 		this.teardown().then( function () {
+			if ( data.newrevid !== undefined ) {
+				var action;
+				if ( target.restoring ) {
+					action = 'restored';
+				} else if ( !target.pageExists ) {
+					action = 'created';
+				} else {
+					action = 'saved';
+				}
+				require( 'mediawiki.action.view.postEdit' ).fireHookOnPageReload( action, data.tempusercreated );
+			}
+
 			if ( data.tempusercreatedredirect ) {
 				location.href = data.tempusercreatedredirect;
 			} else {
@@ -655,15 +667,6 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 				if ( data.newrevid !== undefined ) {
 					// For GrowthExperiments
 					newUrl.searchParams.set( 'venotify', 'saved' );
-					var action;
-					if ( target.restoring ) {
-						action = 'restored';
-					} else if ( !target.pageExists ) {
-						action = 'created';
-					} else {
-						action = 'saved';
-					}
-					require( 'mediawiki.action.view.postEdit' ).fireHookOnPageReload( action );
 				}
 				if ( data.isRedirect ) {
 					newUrl.searchParams.set( 'redirect', 'no' );
