@@ -551,8 +551,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 		// us to splice into the middle of an associative array.
 		$newViews = [];
 		$wikiPageFactory = $services->getWikiPageFactory();
-		$isRemote = $title->inNamespace( NS_FILE ) &&
-			!$wikiPageFactory->newFromTitle( $title )->isLocal();
+		$isRemote = !$wikiPageFactory->newFromTitle( $title )->isLocal();
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
 				// Build the VisualEditor tab
