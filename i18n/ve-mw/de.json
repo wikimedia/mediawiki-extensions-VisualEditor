@@ -332,6 +332,7 @@
 	"visualeditor-preference-core-label": "Visuelles Bearbeiten",
 	"visualeditor-preference-newwikitexteditor-description": "Aktiviere den neuen Wikitext-Modus innerhalb des visuellen Editors. Er hat viele der Werkzeuge, die auch im visuellen Editor vorhanden sind, er verwendet eine ähnliche Aufmachung und ermöglicht ein besseres Wechseln zwischen den beiden Modi.",
 	"visualeditor-preference-newwikitexteditor-enable": "Wikitextmodus innerhalb des visuellen Editors anstelle eines anderen Wikitexteditors verwenden",
+	"visualeditor-preference-newwikitexteditor-help": "Dies wird manchmal als „Wikitext-Editor von 2017“ bezeichnet.",
 	"visualeditor-preference-newwikitexteditor-label": "Neuer Wikitext-Modus",
 	"visualeditor-preference-tabs": "Bearbeitungsmodus:",
 	"visualeditor-preference-tabs-multi-tab": "Beide Editoren anbieten",

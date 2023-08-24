@@ -338,6 +338,7 @@
 	"visualeditor-mwpredialog-convert": "允许文本样式",
 	"visualeditor-mwpredialog-title": "预格式化纯文本",
 	"visualeditor-mwsignature-tool": "您的签名",
+	"visualeditor-preference-visualeditor": "激活可视化编辑器",
 	"visualeditor-preference-disable": "关闭可视化编辑器",
 	"visualeditor-preference-core-description": "启用可视化编辑器。它不能用于讨论页和某些其他命名空间。",
 	"visualeditor-preference-core-label": "可视化编辑",
