@@ -1,20 +1,20 @@
 mw.editcheck = {};
 
 /**
- * Check if added content in the document model might need a reference
+ * Find added content in the document model that might need a reference
  *
  * @param {ve.dm.DocumentModel} documentModel Document model
  * @param {boolean} [includeReferencedContent] Include content ranges that already
  *  have a reference.
- * @return {boolean}
+ * @return {ve.dm.Selection[]} Content ranges that might need a reference
  */
-mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeReferencedContent ) {
+mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
-		return false;
+		return [];
 	}
 
 	if ( !documentModel.completeHistory.getLength() ) {
-		return false;
+		return [];
 	}
 	var operations;
 	try {
@@ -23,7 +23,7 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeRe
 		// TransactionSquasher can sometimes throw errors; until T333710 is
 		// fixed just count this as not needing a reference.
 		mw.errorLogger.logError( err, 'error.visualeditor' );
-		return false;
+		return [];
 	}
 
 	var ranges = [];
@@ -45,7 +45,7 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeRe
 		// Reached the end of the doc / start of internal list, stop searching
 		return offset < endOffset;
 	} );
-	return ranges.some( function ( range ) {
+	var addedTextRanges = ranges.filter( function ( range ) {
 		var minimumCharacters = 50;
 		// 1. Check that at least minimumCharacters characters have been inserted sequentially
 		if ( range.getLength() >= minimumCharacters ) {
@@ -65,6 +65,10 @@ mw.editcheck.doesAddedContentNeedReference = function ( documentModel, includeRe
 			return true;
 		}
 		return false;
+	} );
+
+	return addedTextRanges.map( function ( range ) {
+		return new ve.dm.LinearSelection( range );
 	} );
 };
 
@@ -118,3 +122,152 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 		};
 	} );
 }
+
+if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck ) {
+	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {
+		var surface = target.getSurface();
+
+		var selections = mw.editcheck.findAddedContentNeedingReference( surface.getModel().getDocument() );
+
+		if ( selections.length ) {
+			var surfaceView = surface.getView();
+			var toolbar = target.getToolbar();
+			var reviewToolbar = new ve.ui.PositionedTargetToolbar( target, target.toolbarConfig );
+			reviewToolbar.setup( [
+				{
+					name: 'back',
+					type: 'bar',
+					include: [ 'editCheckBack' ]
+				},
+				// Placeholder toolbar groups
+				// TODO: Make a proper TitleTool?
+				{
+					name: 'title',
+					type: 'bar',
+					include: []
+				},
+				{
+					name: 'save',
+					// TODO: MobileArticleTarget should ignore 'align'
+					align: OO.ui.isMobile() ? 'before' : 'after',
+					type: 'bar',
+					include: [ 'showSaveDisabled' ]
+				}
+			], surface );
+
+			reviewToolbar.items[ 1 ].$element.removeClass( 'oo-ui-toolGroup-empty' );
+			reviewToolbar.items[ 1 ].$group.append(
+				$( '<span>' ).addClass( 've-ui-editCheck-toolbar-title' ).text( ve.msg( 'editcheck-dialog-title' ) )
+			);
+			if ( OO.ui.isMobile() ) {
+				reviewToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
+			}
+			target.toolbar.$element.before( reviewToolbar.$element );
+			target.toolbar = reviewToolbar;
+
+			var selection = selections[ 0 ];
+			var highlightNodes = surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( function ( spec ) {
+				return spec.node;
+			} );
+
+			surfaceView.drawSelections( 'editCheck', [ ve.ce.Selection.static.newFromModel( selection, surfaceView ) ] );
+			surfaceView.setReviewMode( true, highlightNodes );
+			toolbar.toggle( false );
+			target.onContainerScroll();
+
+			saveProcess.next( function () {
+				var saveProcessDeferred = ve.createDeferred();
+				var fragment = surface.getModel().getFragment( selection, true );
+
+				var context = surface.getContext();
+
+				// Select the found content to correctly the context on desktop
+				fragment.select();
+				// Deactivate to prevent selection suppressing mobile context
+				surface.getView().deactivate();
+
+				context.addPersistentSource( {
+					embeddable: false,
+					data: {
+						fragment: fragment,
+						saveProcessDeferred: saveProcessDeferred
+					},
+					name: 'editCheck'
+				} );
+
+				// Once the context is positioned, clear the selection
+				setTimeout( function () {
+					surface.getModel().setNullSelection();
+				} );
+
+				return saveProcessDeferred.promise().then( function ( data ) {
+					context.removePersistentSource( 'editCheck' );
+
+					surfaceView.drawSelections( 'editCheck', [] );
+					surfaceView.setReviewMode( false );
+
+					reviewToolbar.$element.remove();
+					toolbar.toggle( true );
+					target.toolbar = toolbar;
+					target.onContainerScroll();
+
+					// Check the user inserted a citation
+					if ( data && data.action ) {
+						if ( data.action !== 'reject' ) {
+							mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
+						}
+						var delay = ve.createDeferred();
+						// If they inserted, wait 2 seconds on desktop before showing save dialog
+						setTimeout( function () {
+							delay.resolve();
+						}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
+						return delay.promise();
+					} else {
+						return ve.createDeferred().reject().promise();
+					}
+				} );
+			} );
+		}
+	} );
+}
+
+ve.ui.EditCheckBack = function VeUiEditCheckBack() {
+	// Parent constructor
+	ve.ui.EditCheckBack.super.apply( this, arguments );
+
+	this.setDisabled( false );
+};
+OO.inheritClass( ve.ui.EditCheckBack, ve.ui.Tool );
+ve.ui.EditCheckBack.static.name = 'editCheckBack';
+ve.ui.EditCheckBack.static.icon = 'previous';
+ve.ui.EditCheckBack.static.autoAddToCatchall = false;
+ve.ui.EditCheckBack.static.autoAddToGroup = false;
+ve.ui.EditCheckBack.static.title =
+	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
+ve.ui.EditCheckBack.prototype.onSelect = function () {
+	var context = this.toolbar.getSurface().getContext();
+	if ( context.inspector ) {
+		context.inspector.close();
+	} else {
+		context.items[ 0 ].close();
+	}
+	this.setActive( false );
+};
+ve.ui.EditCheckBack.prototype.onUpdateState = function () {
+	this.setDisabled( false );
+};
+ve.ui.toolFactory.register( ve.ui.EditCheckBack );
+
+ve.ui.EditCheckSaveDisabled = function VeUiEditCheckSaveDisabled() {
+	// Parent constructor
+	ve.ui.EditCheckSaveDisabled.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.EditCheckSaveDisabled, ve.ui.MWSaveTool );
+ve.ui.EditCheckSaveDisabled.static.name = 'showSaveDisabled';
+ve.ui.EditCheckSaveDisabled.static.autoAddToCatchall = false;
+ve.ui.EditCheckSaveDisabled.static.autoAddToGroup = false;
+ve.ui.EditCheckSaveDisabled.prototype.onUpdateState = function () {
+	this.setDisabled( true );
+};
+
+ve.ui.toolFactory.register( ve.ui.EditCheckSaveDisabled );

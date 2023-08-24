@@ -1085,6 +1085,7 @@ class Hooks implements TextSlotDiffRendererTablePrefixHook {
 			),
 			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
 			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
+			'editCheck' => $veConfig->get( 'VisualEditorEditCheck' ),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),

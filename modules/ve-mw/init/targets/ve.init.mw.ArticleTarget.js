@@ -1548,11 +1548,11 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 	) {
 		var documentModel = this.getSurface().getModel().getDocument();
 		// New content needing a reference
-		if ( mw.editcheck.doesAddedContentNeedReference( documentModel ) ) {
+		if ( mw.editcheck.findAddedContentNeedingReference( documentModel ).length ) {
 			taglist.push( 'editcheck-references' );
 		}
 		// New content, regardless of if it needs a reference
-		if ( mw.editcheck.doesAddedContentNeedReference( documentModel, true ) ) {
+		if ( mw.editcheck.findAddedContentNeedingReference( documentModel, true ).length ) {
 			taglist.push( 'editcheck-newcontent' );
 		}
 	}
