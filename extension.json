@@ -2236,6 +2236,7 @@
 			"dependencies": [
 				"ext.visualEditor.diffLoader",
 				"oojs-ui",
+				"ext.visualEditor.diffPage.init.styles",
 				"oojs-ui.styles.icons-accessibility",
 				"oojs-ui.styles.icons-editing-advanced",
 				"web2017-polyfills"
