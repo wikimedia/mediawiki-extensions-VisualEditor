@@ -5,11 +5,19 @@
 	"editcheck-dialog-addref-description": "Help readers understand where this information is coming from by adding a citation.",
 	"editcheck-dialog-addref-reject-question": "Why are you not adding a citation?",
 	"editcheck-dialog-addref-reject-description": "Other editors would value learning more about your decision to dismiss the citation.",
-	"editcheck-dialog-addref-reject-no-info": "I didn't add new information",
-	"editcheck-dialog-addref-reject-already-cited": "My changes are already cited earlier",
-	"editcheck-dialog-addref-reject-not-sure": "I'm not sure what citation to add",
+	"editcheck-dialog-addref-reject-irrelevant": "I don't think citations are relevant to the change I'm making",
+	"editcheck-dialog-addref-reject-common-knowledge": "The information I'm adding is widely known",
+	"editcheck-dialog-addref-reject-uncertain": "I'm not sure what citation to add",
 	"editcheck-dialog-addref-reject-other": "Other",
 	"editcheck-dialog-addref-success-notify": "Thank you for adding a citation!",
 	"editcheck-dialog-addref-title": "Add a citation",
-	"editcheck-dialog-title": "Before publishing"
+	"editcheck-dialog-title": "Before publishing",
+	"tag-editcheck-reference-decline-common-knowledge": "NOREF: common knowledge",
+	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck reference was declined as common knowledge",
+	"tag-editcheck-reference-decline-irrelevant": "NOREF: irrelevant",
+	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck reference was declined as irrelevant",
+	"tag-editcheck-reference-decline-other": "NOREF: other",
+	"tag-editcheck-reference-decline-other-description": "EditCheck reference was declined for an unlisted reason",
+	"tag-editcheck-reference-decline-uncertain": "NOREF: uncertain",
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck reference was declined as being uncertain"
 }
