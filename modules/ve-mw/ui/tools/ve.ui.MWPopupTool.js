@@ -138,6 +138,8 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	this.popup.$body.append( this.$items );
 	// Fire content hook
 	mw.hook( 'wikipage.content' ).fire( this.popup.$body );
+
+	ve.track( 'activity.notices', { action: 'show' } );
 };
 
 /**
