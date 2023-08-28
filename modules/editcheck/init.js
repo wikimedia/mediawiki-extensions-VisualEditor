@@ -40,6 +40,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 		} else if ( op.type === 'replace' ) {
 			var insertedRange = new ve.Range( offset, offset + op.insert.length );
 			offset += op.insert.length;
+			// 0. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
 			if ( op.remove.length === 0 ) {
 				ve.batchPush(
 					ranges,
