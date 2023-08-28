@@ -323,7 +323,7 @@
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-label": "Vizuální editace",
 	"visualeditor-preference-newwikitexteditor-description": "Povolí nový režim wikitextu uvnitř Vizuálního editoru. Obsahuje mnoho nástrojů z Vizuálního editoru, má podobný vzhled a umožňuje lepší přepínání mezi nimi.",
-	"visualeditor-preference-newwikitexteditor-enable": "Používat mód editace wikitextu v rámci Vizuálního editoru, namísto jiného editoru wikitextu.",
+	"visualeditor-preference-newwikitexteditor-enable": "Používat mód editace wikitextu v rámci Vizuálního editoru, namísto jiného editoru wikitextu",
 	"visualeditor-preference-newwikitexteditor-label": "Nový režim wikitextu",
 	"visualeditor-preference-tabs": "Režim editace:",
 	"visualeditor-preference-tabs-multi-tab": "Ukažte mi obě editační záložky",
