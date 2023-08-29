@@ -335,7 +335,7 @@
 	"visualeditor-savedialog-title-save": "Simpen lu punya perobahan",
 	"visualeditor-section-body-placeholder": "Bagèan baru",
 	"visualeditor-section-title-placeholder": "Perihal",
-	"visualeditor-loaderror-revidconflict": "ID répisi nyang dikombaliin ama pengladèn kaga' cocok (dokumèn: $1, métadata: $2).",
+	"visualeditor-loaderror-revidconflict": "ID perbaèkan nyang dikombaliin ama pengladèn kaga' cocok (dokumèn: $1, métadata: $2).",
 	"visualeditor-loaderror-wrongmode": "Ngejal muat permakan di mode nyang salah (jenis data: \"$1\", mode pemermak: \"$2\").",
 	"visualeditor-settings-tool": "Penyetèlan halaman",
 	"visualeditor-special-characters-group-other": "Sering dipaké",
