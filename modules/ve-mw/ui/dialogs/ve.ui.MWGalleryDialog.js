@@ -217,7 +217,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		icon: 'image'
 	} );
 	this.$highlightedImage = $( '<div>' )
-		.addClass( 've-ui-mwGalleryDialog-highlighted-image' );
+		.addClass( 've-ui-mwGalleryDialog-highlighted-image mw-no-invert' );
 	this.filenameFieldset.$element.append( this.$highlightedImage );
 	this.highlightedCaptionTarget = ve.init.target.createTargetWidget( {
 		includeCommands: this.constructor.static.includeCommands,

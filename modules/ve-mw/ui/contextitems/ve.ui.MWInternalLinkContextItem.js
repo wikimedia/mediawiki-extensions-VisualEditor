@@ -88,7 +88,7 @@ ve.ui.MWInternalLinkContextItem.static.generateBody = function ( linkCache, mode
 			if ( usePageImages ) {
 				if ( linkData.imageUrl ) {
 					icon.$element
-						.addClass( 've-ui-mwInternalLinkContextItem-hasImage' )
+						.addClass( 've-ui-mwInternalLinkContextItem-hasImage mw-no-invert' )
 						.css( 'background-image', 'url(' + linkData.imageUrl + ')' );
 				} else {
 					icon.setIcon( ve.init.platform.linkCache.constructor.static.getIconForLink( linkData ) );

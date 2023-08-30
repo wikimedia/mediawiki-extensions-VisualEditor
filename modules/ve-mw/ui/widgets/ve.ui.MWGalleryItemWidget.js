@@ -43,7 +43,7 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 	ve.ui.MWGalleryItemWidget.super.call( this, config );
 
 	this.$element
-		.addClass( 've-ui-mwGalleryDialog-image-container' ) // TODO: put in new CSS file?
+		.addClass( 've-ui-mwGalleryDialog-image-container mw-no-invert' ) // TODO: put in new CSS file?
 		.addClass( config.isMobile ?
 			've-ui-mwGalleryDialog-image-container-mobile' :
 			've-ui-mwGalleryDialog-image-container-desktop'
