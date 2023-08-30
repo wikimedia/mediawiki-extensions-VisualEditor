@@ -11,6 +11,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-newreference-description": "Lapai tika pievienota atsauce",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuālā labošana]]",
 	"tag-visualeditor-description": "Labots ar [[{{MediaWiki:visualeditor-descriptionpagelink}}|vizuālo redaktoru]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizuālais labojums: pārbaudiet]]",
