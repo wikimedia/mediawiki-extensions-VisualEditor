@@ -915,14 +915,18 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 	if ( !this.saveDialog.hasDiff ) {
 		this.emit( 'saveReview' );
 		this.saveDialog.pushPending();
-		if ( this.pageExists ) {
-			// Has no callback, handled via target.showChangesDiff
-			this.showChanges( this.getDocToSave() );
-		} else {
-			this.serialize( this.getDocToSave() ).then( function ( data ) {
-				target.onSaveDialogReviewComplete( data.content );
-			} );
-		}
+		// Acquire a temporary user username before diffing, so that signatures and
+		// user-related magic words display the temp user instead of IP user in the diff. (T331397)
+		mw.user.acquireTempUserName().then( function () {
+			if ( target.pageExists ) {
+				// Has no callback, handled via target.showChangesDiff
+				target.showChanges( target.getDocToSave() );
+			} else {
+				target.serialize( target.getDocToSave() ).then( function ( data ) {
+					target.onSaveDialogReviewComplete( data.content );
+				} );
+			}
+		} );
 	} else {
 		this.saveDialog.swapPanel( 'review' );
 	}
@@ -952,19 +956,23 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			params.variant = mw.config.get( 'wgUserVariant' );
 		}
 
-		api.post( ve.extendObject( params, {
-			action: 'parse',
-			title: this.getPageName(),
-			text: this.getDocToSave(),
-			pst: true,
-			preview: true,
-			sectionpreview: this.section !== null,
-			disableeditsection: true,
-			uselang: mw.config.get( 'wgUserLanguage' ),
-			useskin: mw.config.get( 'skin' ),
-			mobileformat: OO.ui.isMobile(),
-			prop: [ 'text', 'categorieshtml', 'displaytitle', 'subtitle', 'modules', 'jsconfigvars' ]
-		} ) ).then( function ( response ) {
+		// Acquire a temporary user username before previewing, so that signatures and
+		// user-related magic words display the temp user instead of IP user in the preview. (T331397)
+		mw.user.acquireTempUserName().then( function () {
+			return api.post( ve.extendObject( params, {
+				action: 'parse',
+				title: target.getPageName(),
+				text: target.getDocToSave(),
+				pst: true,
+				preview: true,
+				sectionpreview: target.section !== null,
+				disableeditsection: true,
+				uselang: mw.config.get( 'wgUserLanguage' ),
+				useskin: mw.config.get( 'skin' ),
+				mobileformat: OO.ui.isMobile(),
+				prop: [ 'text', 'categorieshtml', 'displaytitle', 'subtitle', 'modules', 'jsconfigvars' ]
+			} ) );
+		} ).then( function ( response ) {
 			target.saveDialog.showPreview( response );
 		}, function ( errorCode, details ) {
 			target.saveDialog.showPreview( target.extractErrorMessages( details ) );
@@ -1035,14 +1043,18 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 		}
 
 		if ( mode === 'source' ) {
-			var newRevPromise = target.getContentApi().post( {
-				action: 'visualeditor',
-				paction: 'parse',
-				page: target.getPageName(),
-				wikitext: target.getSurface().getDom(),
-				section: target.section,
-				stash: 0,
-				pst: true
+			// Acquire a temporary user username before diffing, so that signatures and
+			// user-related magic words display the temp user instead of IP user in the diff. (T331397)
+			var newRevPromise = mw.user.acquireTempUserName().then( function () {
+				return target.getContentApi().post( {
+					action: 'visualeditor',
+					paction: 'parse',
+					page: target.getPageName(),
+					wikitext: target.getSurface().getDom(),
+					section: target.section,
+					stash: 0,
+					pst: true
+				} );
 			} ).then( function ( response ) {
 				// Source mode always fetches the whole document, so set section=null to unwrap sections
 				return mw.libs.ve.diffLoader.getModelFromResponse( response, null );
