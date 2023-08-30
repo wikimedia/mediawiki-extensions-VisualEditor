@@ -103,22 +103,6 @@
 		"VisualEditorFeedbackTitle": {
 			"value": false
 		},
-		"VisualEditorFullRestbaseURL": {
-			"value": false,
-			"description": "Deprecated since MW 1.41. Unused."
-		},
-		"VisualEditorParsoidAutoConfig": {
-			"value": true,
-			"description": "Deprecated since MW 1.40. Unused."
-		},
-		"VisualEditorDefaultParsoidClient": {
-			"value": "direct",
-			"description": "Deprecated since MW 1.41. Unused."
-		},
-		"VisualEditorParsoidSettings": {
-			"value": [],
-			"description": "Deprecated since MW 1.41. Unused."
-		},
 		"VisualEditorPluginModules": {
 			"value": []
 		},
@@ -130,10 +114,6 @@
 		},
 		"VisualEditorRebaserURL": {
 			"value": false
-		},
-		"VisualEditorRestbaseURL": {
-			"value": false,
-			"description": "Deprecated since MW 1.41. Unused."
 		},
 		"VisualEditorShowBetaWelcome": {
 			"value": true
