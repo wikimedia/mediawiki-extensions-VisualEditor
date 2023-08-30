@@ -4,7 +4,9 @@
 			"Martindimaggio"
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "Jungir gnë diskrizjon lokali",
 	"visualeditor-ca-createsource": "Kriar kroi",
 	"visualeditor-ca-editsource": "Ndroj surgentin",
-	"visualeditor-ca-editsource-section": "ndroj surgentin"
+	"visualeditor-ca-editsource-section": "ndroj surgentin",
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
