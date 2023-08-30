@@ -18,21 +18,12 @@ class VisualEditorParsoidClientFactory {
 	 */
 	public const SERVICE_NAME = 'VisualEditor.ParsoidClientFactory';
 
-	/** @var bool */
-	public const ENABLE_COOKIE_FORWARDING = 'EnableCookieForwarding';
-
 	/**
 	 * @internal For used by ServiceWiring.php
 	 *
 	 * @var array
 	 */
-	public const CONSTRUCTOR_OPTIONS = [
-		self::ENABLE_COOKIE_FORWARDING,
-		self::DEFAULT_PARSOID_CLIENT_SETTING,
-	];
-
-	/** @var string */
-	public const DEFAULT_PARSOID_CLIENT_SETTING = 'VisualEditorDefaultParsoidClient';
+	public const CONSTRUCTOR_OPTIONS = [];
 
 	private ServiceOptions $options;
 	private PageRestHelperFactory $pageRestHelperFactory;
