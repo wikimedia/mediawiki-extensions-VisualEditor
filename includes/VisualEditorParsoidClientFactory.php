@@ -2,7 +2,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 use RequestContext;
@@ -18,23 +17,11 @@ class VisualEditorParsoidClientFactory {
 	 */
 	public const SERVICE_NAME = 'VisualEditor.ParsoidClientFactory';
 
-	/**
-	 * @internal For used by ServiceWiring.php
-	 *
-	 * @var array
-	 */
-	public const CONSTRUCTOR_OPTIONS = [];
-
-	private ServiceOptions $options;
 	private PageRestHelperFactory $pageRestHelperFactory;
 
 	public function __construct(
-		ServiceOptions $options,
 		PageRestHelperFactory $pageRestHelperFactory
 	) {
-		$this->options = $options;
-		$this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
-
 		$this->pageRestHelperFactory = $pageRestHelperFactory;
 	}
 
