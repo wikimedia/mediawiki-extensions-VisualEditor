@@ -2,7 +2,6 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
-use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory;
 use MediaWiki\Http\HttpRequestFactory;
@@ -26,16 +25,13 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		$this->assertInstanceOf( VisualEditorParsoidClientFactory::class, $veParsoidClientFactory );
 	}
 
-	private function newClientFactory( array $optionValues ) {
-		$options = new ServiceOptions( VisualEditorParsoidClientFactory::CONSTRUCTOR_OPTIONS, $optionValues );
-
+	private function newClientFactory() {
 		$httpRequestFactory = $this->createNoOpMock( HttpRequestFactory::class, [ 'createMultiClient' ] );
 		$httpRequestFactory->method( 'createMultiClient' )->willReturn(
 			$this->createNoOpMock( MultiHttpClient::class )
 		);
 
 		return new VisualEditorParsoidClientFactory(
-			$options,
 			$this->createNoOpMock( PageRestHelperFactory::class )
 		);
 	}
@@ -46,7 +42,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 	public function testGetClient() {
 		$authority = $this->createNoOpMock( Authority::class );
 
-		$factory = $this->newClientFactory( [] );
+		$factory = $this->newClientFactory();
 
 		$client = $factory->createParsoidClient( $authority );
 		$this->assertInstanceOf( DirectParsoidClient::class, $client );

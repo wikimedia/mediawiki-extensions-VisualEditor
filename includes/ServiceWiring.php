@@ -11,7 +11,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use MediaWiki\Config\ServiceOptions;
 use MediaWiki\MediaWikiServices;
 
 return [
@@ -22,12 +21,6 @@ return [
 	VisualEditorParsoidClientFactory::SERVICE_NAME => static function (
 		MediaWikiServices $services
 	): VisualEditorParsoidClientFactory {
-		return new VisualEditorParsoidClientFactory(
-			new ServiceOptions(
-				VisualEditorParsoidClientFactory::CONSTRUCTOR_OPTIONS,
-				$services->getMainConfig()
-			),
-			$services->getPageRestHelperFactory()
-		);
+		return new VisualEditorParsoidClientFactory( $services->getPageRestHelperFactory() );
 	},
 ];
