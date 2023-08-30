@@ -22,15 +22,10 @@ return [
 	VisualEditorParsoidClientFactory::SERVICE_NAME => static function (
 		MediaWikiServices $services
 	): VisualEditorParsoidClientFactory {
-		$isPrivateWiki = !$services->getPermissionManager()->isEveryoneAllowed( 'read' );
-
 		return new VisualEditorParsoidClientFactory(
 			new ServiceOptions(
 				VisualEditorParsoidClientFactory::CONSTRUCTOR_OPTIONS,
-				$services->getMainConfig(),
-				[
-					VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => $isPrivateWiki
-				]
+				$services->getMainConfig()
 			),
 			$services->getPageRestHelperFactory()
 		);

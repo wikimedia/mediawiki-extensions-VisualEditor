@@ -46,10 +46,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 	public function testGetClient() {
 		$authority = $this->createNoOpMock( Authority::class );
 
-		$factory = $this->newClientFactory( [
-			VisualEditorParsoidClientFactory::ENABLE_COOKIE_FORWARDING => false,
-			VisualEditorParsoidClientFactory::DEFAULT_PARSOID_CLIENT_SETTING => 'direct',
-		] );
+		$factory = $this->newClientFactory( [] );
 
 		$client = $factory->createParsoidClient( $authority );
 		$this->assertInstanceOf( DirectParsoidClient::class, $client );
