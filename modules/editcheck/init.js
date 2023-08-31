@@ -1,4 +1,9 @@
+require( './EditCheckContextItem.js' );
+require( './EditCheckInspector.js' );
+
 mw.editcheck = {};
+
+mw.editcheck.config = require( './config.json' );
 
 /**
  * Find added content in the document model that might need a reference
@@ -46,7 +51,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 		return offset < endOffset;
 	} );
 	var addedTextRanges = ranges.filter( function ( range ) {
-		var minimumCharacters = 50;
+		var minimumCharacters = mw.editcheck.config.references.minimumCharacters;
 		// 1. Check that at least minimumCharacters characters have been inserted sequentially
 		if ( range.getLength() >= minimumCharacters ) {
 			// 2. Exclude any ranges that already contain references

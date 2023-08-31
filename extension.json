@@ -589,10 +589,14 @@
 		},
 		"ext.visualEditor.editCheck": {
 			"group": "visualEditorA",
-			"scripts": [
+			"packageFiles": [
 				"modules/editcheck/init.js",
 				"modules/editcheck/EditCheckContextItem.js",
-				"modules/editcheck/EditCheckInspector.js"
+				"modules/editcheck/EditCheckInspector.js",
+				{
+					"name": "modules/editcheck/config.json",
+					"callback": "\\MediaWiki\\Extension\\VisualEditor\\EditCheck\\ResourceLoaderData::getConfig"
+				}
 			],
 			"styles": [
 				"modules/editcheck/EditCheck.less"
