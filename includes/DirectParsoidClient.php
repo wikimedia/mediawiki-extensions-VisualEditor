@@ -10,6 +10,7 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Parser\Parsoid\ParsoidRenderID;
 use MediaWiki\Permissions\Authority;
@@ -124,6 +125,11 @@ class DirectParsoidClient implements ParsoidClient {
 		];
 
 		$renderId = $etag ? ParsoidRenderID::newFromETag( $etag ) : null;
+
+		$metrics = MediaWikiServices::getInstance()->getParsoidSiteConfig()->metrics();
+		if ( $metrics ) {
+			$helper->setMetrics( $metrics );
+		}
 
 		$helper->init( $page, $body, [], null, $pageLanguage );
 
