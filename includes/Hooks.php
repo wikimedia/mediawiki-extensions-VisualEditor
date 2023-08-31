@@ -22,6 +22,7 @@ use MediaWiki;
 use MediaWiki\Auth\Hook\UserLoggedInHook;
 use MediaWiki\ChangeTags\Hook\ChangeTagsListActiveHook;
 use MediaWiki\ChangeTags\Hook\ListDefinedTagsHook;
+use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\Hook\BeforeInitializeHook;
@@ -64,6 +65,7 @@ class Hooks implements
 	BeforePageDisplayHook,
 	ChangeTagsListActiveHook,
 	CustomEditorHook,
+	DifferenceEngineViewHeaderHook,
 	EditPage__showEditForm_fieldsHook,
 	GetPreferencesHook,
 	ListDefinedTagsHook,
@@ -182,6 +184,20 @@ class Hooks implements
 		];
 	}
 
+	/** @inheritDoc */
+	public function onDifferenceEngineViewHeader( $differenceEngine ) {
+		$output = $differenceEngine->getContext()->getOutput();
+		$output->addModuleStyles( [
+			'ext.visualEditor.diffPage.init.styles',
+			'oojs-ui.styles.icons-accessibility',
+			'oojs-ui.styles.icons-editing-advanced'
+		] );
+		// T344596: Must load this module unconditionally. The TextSlotDiffRendererTablePrefix hook
+		// below doesn't run when the diff is e.g. a log entry with no change to the content.
+		$output->addModules( 'ext.visualEditor.diffPage.init' );
+		$output->enableOOUI();
+	}
+
 	/**
 	 * Handler for the DifferenceEngineViewHeader hook, to add visual diffs code as configured
 	 *
@@ -207,13 +223,6 @@ class Hooks implements
 			return;
 		}
 
-		$output->addModuleStyles( [
-			'ext.visualEditor.diffPage.init.styles',
-			'oojs-ui.styles.icons-accessibility',
-			'oojs-ui.styles.icons-editing-advanced'
-		] );
-		$output->addModules( 'ext.visualEditor.diffPage.init' );
-		$output->enableOOUI();
 		$parts['50_ve-init-mw-diffPage-diffMode'] = '<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
 			new ButtonGroupWidget( [
