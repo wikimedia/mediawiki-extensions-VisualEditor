@@ -202,7 +202,6 @@
 	"visualeditor-rebase-client-import-name": "ชื่อหน้า",
 	"visualeditor-recreate": "หน้านี้ได้ถูกลบตั้งแต่คุณเริ่มแก้ไข กด \"$1\" เพื่อสร้างหน้านี้ใหม่อีกครั้ง",
 	"visualeditor-redirect-description": "เปลี่ยนทางไปยัง $1",
-	"visualeditor-savedialog-error-badtoken": "เราไม่สามารถบันทึกการแก้ไขของคุณได้เนื่องจากเซสชันนี้ใช้ไม่ได้แล้ว",
 	"visualeditor-savedialog-identify-anon": "คุณต้องบันทึกเพจนี้เป็นผู้ใช้ที่ไม่ระบุชื่อหรือไม่ ? ที่อยู่ IP ของคุณจะถูกบันทึกไว้ในประวัติการแก้ไขของหน้านี้",
 	"visualeditor-savedialog-identify-user": "ขณะนี้คุณได้ล็อกอินเป็น [[User:$1|$1]] การแก้ไขของคุณจะเชื่อมโยงกับบัญชีนี้ถ้าคุณกดบันทึก",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "คุณสามารถกด $1 เพื่อบันทึกการแก้ไขของคุณได้",

@@ -232,7 +232,6 @@
 	"visualeditor-rebase-client-import-name": "Orriaren izenburua",
 	"visualeditor-recreate": "Orria ezabatu da, zu aldaketak egiten hasi ondoren. Berriro sortzeko, sakatu «$1».",
 	"visualeditor-redirect-description": "«$1» orrira birzuzenduta",
-	"visualeditor-savedialog-error-badtoken": "Ezin izan dugu zure edizioa gorde, saioa dagoeneko ez zelako baliozkoa.",
 	"visualeditor-savedialog-identify-anon": "Orria lankide anonimotzat gorde nahi duzu? Zure IP helbidea orriaren aldaketa historian gordeko da.",
 	"visualeditor-savedialog-identify-user": "[[User:$1|$1]] erabiltzaile izenarekin duzu saioa hasita. Aldaketa hau gordetzen baduzu, zure aldaketa kontu horri lotuta geratuko da.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "$1 sakatu dezakezu zure aldaketa gordetzeko.",

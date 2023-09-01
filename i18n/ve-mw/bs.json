@@ -256,7 +256,6 @@
 	"visualeditor-preference-tabs-remember-last": "Zapamti moj posljednji uređivač",
 	"visualeditor-recreate": "Stranica je izbrisana otkad ste počeli uređivati. Pritisnite \"$1\" da biste je ponovo napravili.",
 	"visualeditor-redirect-description": "Preusmjerava na $1",
-	"visualeditor-savedialog-error-badtoken": "Nismo mogli sačuvati Vaše izmjene jer sesija više nije važeća.",
 	"visualeditor-savedialog-identify-anon": "Želite li umjesto toga sačuvati ovu stranicu kao anonimni korisnik? Vaša IP adresa će biti zabilježena u historiji uređivanja ove stranice.",
 	"visualeditor-savedialog-identify-user": "Sad ste prijavljeni kao [[User:$1|$1]]. Vaše će izmjene biti povezane s ovim računom ako sačuvate ovu izmjenu.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Možete pritisnuti $1 da biste sačuvali izmjenu.",

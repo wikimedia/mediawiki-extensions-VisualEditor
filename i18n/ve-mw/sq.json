@@ -301,7 +301,6 @@
 	"visualeditor-rebase-client-title-help": "Do të jeni në gjendje të shqyrtoni ndryshimet, para ruajtjes.",
 	"visualeditor-recreate": "Kjo faqe është fshirë, pasi filluat ta përpunoni. Që të rikrijohet, shtypni \"$1\".",
 	"visualeditor-redirect-description": "Ridrejtim për te $1",
-	"visualeditor-savedialog-error-badtoken": "S’e ruajtëm dot përpunimin tuaj, ngaqë sesioni s’qe i vlefshëm më gjatë.",
 	"visualeditor-savedialog-identify-anon": "Në vend të kësaj, doni ta ruani këtë faqe si përdorues anonim? Adresa juaj IP do të regjistrohet në historikun e përpunimeve të kësaj faqeje.",
 	"visualeditor-savedialog-identify-user": "Tani jeni i futur si [[User:$1|$1]]. Nëse e ruani këtë përpunim, përpunimi juaj do të përshoqërohet me këtë llogari.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Që të ruhet përpunimi juaj, mund të shtypni $1.",

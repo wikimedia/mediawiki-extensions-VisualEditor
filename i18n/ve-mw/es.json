@@ -350,7 +350,6 @@
 	"visualeditor-rebase-client-import-name": "Título de página",
 	"visualeditor-recreate": "La página fue borrada después de que comenzaste a editarla. Pulsa en «$1» para crearla de nuevo.",
 	"visualeditor-redirect-description": "Redirigir a $1",
-	"visualeditor-savedialog-error-badtoken": "No pudimos guardar tu edición porque la sesión ya no es válida.",
 	"visualeditor-savedialog-identify-anon": "¿Quieres guardar esta página como usuario anónimo? Tu dirección IP se registrará en el historial de edición de esta página.",
 	"visualeditor-savedialog-identify-user": "Has iniciado sesión como [[User:$1|$1]]. Si guardas esta edición, se asociará con esta cuenta.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Puedes presionar $1 para guardar tu edición.",

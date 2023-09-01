@@ -256,7 +256,6 @@
 	"visualeditor-rebase-client-import-name": "Títol de la pàgina",
 	"visualeditor-recreate": "La pàgina ha estat suprimida des de que vau començar a editar. Premeu \"$1\" per recrear-la.",
 	"visualeditor-redirect-description": "redirigeix a $1",
-	"visualeditor-savedialog-error-badtoken": "No hem pogut processar la vostra edició perquè la sessió ha caducat.",
 	"visualeditor-savedialog-identify-anon": "Voleu desar aquesta pàgina com a usuari anònim? La vostra adreça IP serà emmagatzemada en l'historial d'edicions d'aquesta pàgina.",
 	"visualeditor-savedialog-identify-user": "Us heu connectat com [[User:$1|$1]]. La vostra edició s'associarà amb aquest compte si deseu els canvis.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Podeu prémer $1 per desar la vostra edició.",

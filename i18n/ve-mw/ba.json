@@ -196,7 +196,6 @@
 	"visualeditor-preference-tabs-remember-last": "Минең һуңғы мөхәррирләүҙе хәтерҙә ҡалдырырға",
 	"visualeditor-recreate": "Был бит һеҙ мөхәррирләй башлағас юйылды. Яңынан башларға теләһәгеҙ, «$1» төймәһенә баҫығыҙ.",
 	"visualeditor-redirect-description": "$1-гә йүнәлтеү",
-	"visualeditor-savedialog-error-badtoken": "Үҙгәртеүҙәрегеҙҙе һаҡлай алманыҡ, сөнки сессия башҡаса ғәмәлдә түгел.",
 	"visualeditor-savedialog-identify-anon": "Был битте аноним ҡулланыусы булараҡ һаҡларға теләйһегеҙме? IP-адресығыҙ биттең үҙгәртеүҙәр тарихына яҙыласаҡ.",
 	"visualeditor-savedialog-identify-user": "Һеҙ [[User:$1|$1]] булараҡ танылдығыҙ. Был үҙгәртеүҙәрҙе һаҡлаған осраҡта, улар ошо иҫәп яҙмаһына бәйләнәсәк.",
 	"visualeditor-savedialog-label-resolve-conflict": "Низағты хәл итергә",
@@ -212,6 +211,6 @@
 	"visualeditor-toload": "Мөхәррир хәҙер йөкләнәсәк. Әгәр бер нисә секундтан һеҙ элеккесә шул уҡ хәбәрҙе күрәһегеҙ икән, [$1 битте яңыртығыҙ].",
 	"visualeditor-version-label": "Өлгө",
 	"visualeditor-wikitext-progress": "Вики-тексты үҙгәртеү",
-	"visualeditor-wikitext-warning": "Һеҙ күҙләгес мөхәррир ҡулланаһығыҙ -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билдә]] бында эшләмәй. Теләгән ваҡытта, индерелгән үҙгәрештәрҙе юғалтмайынса, кирегә күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
-	"visualeditor-wikitext-warning-title": "Вики-билдә табылды"
+	"visualeditor-wikitext-warning": "Һеҙ күҙләгес мөхәррир ҡулланаһығыҙ -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-текст]] бында эшләмәй. Теләгән ваҡытта, индерелгән үҙгәрештәрҙе юғалтмайынса, кирегә күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
+	"visualeditor-wikitext-warning-title": "Билдәләнгән вики-текст табылды"
 }

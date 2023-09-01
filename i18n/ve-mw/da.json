@@ -203,7 +203,6 @@
 	"visualeditor-rebase-client-import": "Importer",
 	"visualeditor-rebase-client-import-name": "Sidetitel",
 	"visualeditor-redirect-description": "Omdiriger til $1",
-	"visualeditor-savedialog-error-badtoken": "Vi kunne ikke gemme din redigering, fordi sessionen ikke længere er gyldig.",
 	"visualeditor-savedialog-identify-anon": "Vil du gemme siden som en anonym bruger i stedet? Din IP adresse vil blive registreret i denne sides versionshistorik.",
 	"visualeditor-savedialog-identify-user": "Du er nu logget på som [[User:$1|$1]]. Din redigering vil blive forbundet med denne konto, hvis du gemmer denne redigering.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Du kan trykke på $1 for at gemme din redigering.",

@@ -351,7 +351,6 @@
 	"visualeditor-rebase-client-title-help": "У Вас буде можливість переглянути зміни перед збереженням.",
 	"visualeditor-recreate": "Сторінка, яку Ви редагуєте, була вилучена в процесі редагування. Натисніть \"$1\" для того, аби створити її ще раз.",
 	"visualeditor-redirect-description": "Перенаправлення на $1",
-	"visualeditor-savedialog-error-badtoken": "Ми не змогли зберегти Ваші зміни, оскільки сесія вже недійсна.",
 	"visualeditor-savedialog-identify-anon": "Ви бажаєте зберегти цю сторінку як анонімний користувач? Ваша IP-адреса буде записана в історію редагування цієї сторінки.",
 	"visualeditor-savedialog-identify-user": "Ви увійшли як [[User:$1|$1]]. Ваше редагування буде пов'язане з цим обліковим записом, якщо ви збережете його.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Можете натиснути $1, щоб зберегти своє редагування.",

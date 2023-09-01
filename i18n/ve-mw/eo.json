@@ -254,7 +254,6 @@
 	"visualeditor-rebase-client-import-name": "Titolo de paĝo",
 	"visualeditor-recreate": "Ĉi tiu paĝo foriĝis post via ekredakto. Alklaku \"$1\" por rekrei ĝin.",
 	"visualeditor-redirect-description": "Alidirektas al $1",
-	"visualeditor-savedialog-error-badtoken": "Ni ne povis konservi vian redakton, ĉar la sesio eksvalidiĝis.",
 	"visualeditor-savedialog-identify-anon": "Ĉu vi volas konservi ĉi tiun paĝo kiel anonimulo anstataŭe? Via IP-adreso registriĝos en la redakta historio de ĉi tiu paĝo.",
 	"visualeditor-savedialog-identify-user": "Vi estas nun ensalutinta kiel [[User:$1|$1]]. Via redakto asociiĝos al ĉi tiu konto, se vi konservas ĉi tiun redakton.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Vi povas premi la klavkombinon $1 por konservi vian redakton.",

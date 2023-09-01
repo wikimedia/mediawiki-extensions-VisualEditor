@@ -7,6 +7,9 @@
 			"Pikne"
 		]
 	},
+	"tag-editcheck-newcontent-description": "EditCheck arvab, et leheküljele lisati uut sisu",
+	"tag-editcheck-newreference-description": "Leheküljele lisati viide",
+	"tag-editcheck-references-description": "EditCheck arvab, et vaja võis olla viidet",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus]]",
 	"tag-visualeditor-description": "Muudatus tehtud [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaaltoimetiga]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuaalmuudatus: Kontrollida]]",

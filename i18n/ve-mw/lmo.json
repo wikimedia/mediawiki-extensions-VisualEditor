@@ -310,7 +310,6 @@
 	"visualeditor-rebase-client-title-help": "Te podaret revardà i cambiament inanz de salvà.",
 	"visualeditor-recreate": "Questa pagina chì l'è stada scancelada dopo che t'hee comenzà a modifegala. Schiscia \"$1\" per creala de noeuv.",
 	"visualeditor-redirect-description": "Redirezzion a $1",
-	"visualeditor-savedialog-error-badtoken": "A l'è minga possibil salvà la toa modifica desgià che la session no l'è pu valida.",
 	"visualeditor-savedialog-identify-anon": "Te voeuret salvà questa pagina come utent anonim? Varda però che 'l to adress IP el vegnarà registrad idn la cronologìa de la pagina.",
 	"visualeditor-savedialog-identify-user": "Te se set identificad in del sistema come [[User:$1|$1]]. Se te salvet, la toa mudifìca la sarà registrada con questo nom chì.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Te podet schiscià $1 per salvare la toa modifica.",

@@ -261,7 +261,6 @@
 	"visualeditor-rebase-client-import-name": "Էջի վերնագիրը",
 	"visualeditor-recreate": "Այս էջը ջնջվել է ձեր խմբագրման ընթացքում: Սեղմեք «$1», որպեսզի վերաստեղծեք էջը:",
 	"visualeditor-redirect-description": "Վերահղել դեպի $1",
-	"visualeditor-savedialog-error-badtoken": "Հնարավոր չէ պահել ձեր խմբագրումը, քանի որ աշխատաշրջանը սպառվել է:",
 	"visualeditor-savedialog-identify-anon": "Ցանկանո՞ւմ եք պահպանել ձեր խմբագրումը որպես անանուն մասնակից: Ձեր IP հասցեն կպահպանվի էջի պատմության մեջ:",
 	"visualeditor-savedialog-identify-user": "Դուք այժմ գրանցված եք [[User:$1|$1]] մասնակցային հաշվով: Ձեր խմբագրումը կկապվի այս մասնակցային հաշվի հետ:",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Դուք կարող եք սեղմել $1՝ խմբագրումը պահպանելու համար",

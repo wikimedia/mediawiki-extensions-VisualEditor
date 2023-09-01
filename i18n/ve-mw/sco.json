@@ -135,7 +135,6 @@
 	"visualeditor-preference-core-description": "Enable VeesualEediter. It will na be available oan tauk pages n some ither namespaces.",
 	"visualeditor-preference-core-label": "VeesualEediter",
 	"visualeditor-recreate": "The page his been deletit synce ye startit makin chynges. Clap \"$1\" tae mak it again.",
-	"visualeditor-savedialog-error-badtoken": "We coudna process yer eedit cause the session wis nae langer valid.",
 	"visualeditor-savedialog-identify-anon": "Dae ye want tae hain this page aes aen anonimis uiser in steid? Yer IP address will be recordit in this page's eedit histerie.",
 	"visualeditor-savedialog-identify-user": "Ye'r nou loggit in aes [[User:$1|$1]]. Yer eedit will be associatit wi this accoont gif ye hain this eedit.",
 	"visualeditor-savedialog-label-resolve-conflict": "Resolve conflict",

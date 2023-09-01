@@ -217,7 +217,6 @@
 	"visualeditor-preference-tabs-remember-last": "Ingat editor terakhir saya",
 	"visualeditor-recreate": "Laman ini telah dihapuskan sejak anda mula menyunting. Tekan \"$1\" untuk menciptanya semula.",
 	"visualeditor-redirect-description": "Melencong ke $1",
-	"visualeditor-savedialog-error-badtoken": "Suntingan anda tidak dapat disimpan kerana sesi anda sudah tidak sah.",
 	"visualeditor-savedialog-identify-anon": "Adakah anda ingin menyimpan halaman ini sebagai pengguna awanama? Alamat IP anda akan direkodkan pada sejarah suntingan halaman ini.",
 	"visualeditor-savedialog-identify-user": "Anda telah log masuk sebagai [[User:$1|$1]]. Suntingan anda akan dikaitkan dengan akaun ini jika anda menyimpan suntingan ini.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Anda boleh tekan $1 untuk menyimpan suntingan.",

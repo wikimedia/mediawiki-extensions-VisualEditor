@@ -135,7 +135,6 @@
 	"visualeditor-preference-core-info-link": "//mediawiki.org/wiki/Special:MyLanguage/VisualEditor/Beta_Features/General",
 	"visualeditor-preference-core-label": "Визуал редактор",
 	"visualeditor-recreate": "Сиз редакторлукъ этиб башлагъанлы бу бет кетериглен этгенди. Аны джангыдан къурар ючюн «$1» тиекни басыгъыз.",
-	"visualeditor-savedialog-error-badtoken": "Сессия энди джараулу болмагъаны себебли сизни тюрлендириуюгюз ишленмеди.",
 	"visualeditor-savedialog-identify-anon": "Бу бетни аноним халда сакъларгъамы излейсиз? IP-адресигиз бу бетни тюрлендириу тарихине джазыллкъды.",
 	"visualeditor-savedialog-identify-user": "Энди сиз [[User:$1|$1]] ат бла кирдигиз. Сакълатхан сагъатыгъызда сизни тюрлендириулеригиз бу тергеу джазыу бла байламлы боллукъдула.",
 	"visualeditor-savedialog-label-resolve-conflict": "Конфликтни джарашдыр",

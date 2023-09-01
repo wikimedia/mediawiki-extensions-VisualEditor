@@ -344,7 +344,6 @@
 	"visualeditor-rebase-client-title-help": "Você poderá revisar as mudanças antes de salvar.",
 	"visualeditor-recreate": "A página foi eliminada desde o início da sua edição. Pressione \"$1\" para recriá-la.",
 	"visualeditor-redirect-description": "Redirecionar para $1",
-	"visualeditor-savedialog-error-badtoken": "Não conseguimos salvar sua edição porque a sessão já não era válida.",
 	"visualeditor-savedialog-identify-anon": "Deseja salvar esta página como um usuário anônimo em vez disso? O seu endereço de IP será registrado no histórico de edições desta página.",
 	"visualeditor-savedialog-identify-user": "Agora você está conectado como [[User:$1|$1]]. Sua edição será associada a esta conta se você salvar esta edição.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Você pode pressionar $1 para salvar sua edição.",

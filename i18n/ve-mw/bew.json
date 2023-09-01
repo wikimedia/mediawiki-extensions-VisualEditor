@@ -314,7 +314,6 @@
 	"visualeditor-rebase-client-title-help": "Lu bakal bisa merèksa ulang perobahan sebelonnya nyimpen.",
 	"visualeditor-recreate": "Halaman udah dipermak sedari lu mulain mermak. Pijet \"$1\" bakal ngeja ulang.",
 	"visualeditor-redirect-description": "Ngalihin ke $1",
-	"visualeditor-savedialog-error-badtoken": "Kita kaga' bisa nyimpen lu punya permakan sebab sèsi udah kaga' aci lagi.",
 	"visualeditor-savedialog-identify-anon": "Apa lu mau nyimpen ni halaman sebagé pemaké sondernama? Lu punya aderès IP bakal direkem di ni halaman punya riwayat permakan.",
 	"visualeditor-savedialog-identify-user": "Lu sekarang masup sebagé [[User:$1|$1]]. Lu punya permakan bakal dinisbatin ama ni rèkening kalo lu simpen ni permakan.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Lu bisa pijet $1 bakal nyimpen lu punya permakan.",

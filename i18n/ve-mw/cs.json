@@ -337,7 +337,6 @@
 	"visualeditor-rebase-client-title-help": "Před uložením budete moci zkontrolovat změny.",
 	"visualeditor-recreate": "Zatímco tuto stránku editujete, byla smazána. Pokud ji chcete znovu založit, klikněte na „$1“.",
 	"visualeditor-redirect-description": "Přesměrování na $1",
-	"visualeditor-savedialog-error-badtoken": "Vaši editaci jsme nemohli zpracovat, protože vypršela vaše relace.",
 	"visualeditor-savedialog-identify-anon": "Chcete stránku uložit jako neregistrovaný uživatel? Vaše IP adresa bude zveřejněna v historii této stránky.",
 	"visualeditor-savedialog-identify-user": "Nyní jste {{GENDER:|přihlášen|přihlášena}} jako [[User:$1|$1]]. Pokud tuto editaci uložíte, bude přiřazena tomuto účtu.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Svoji editaci můžete uložit stisknutím $1.",

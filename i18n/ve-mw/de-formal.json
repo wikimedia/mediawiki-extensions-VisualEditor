@@ -42,7 +42,6 @@
 	"visualeditor-mwsignature-tool": "Ihre Unterschrift",
 	"visualeditor-preference-newwikitexteditor-description": "Aktivieren Sie den neuen Wikitext-Modus innerhalb des visuellen Editors. Er hat viele der Werkzeuge, die auch im visuellen Editor vorhanden sind, er verwendet eine ähnliche Aufmachung und ermöglicht ein besseres Wechseln zwischen den beiden Modi.",
 	"visualeditor-recreate": "Die Seite wurde gelöscht, nachdem Sie zum Bearbeiten angefangen haben. Wählen Sie „$1“, um sie neu zu erstellen.",
-	"visualeditor-savedialog-error-badtoken": "Ihre Bearbeitung konnte nicht gespeichert werden, da die Sitzung nicht mehr gültig war.",
 	"visualeditor-savedialog-identify-anon": "Wollen Sie stattdessen diese Seite als anonymer Benutzer speichern? Ihre IP-Adresse wird in der Versionsgeschichte dieser Seite aufgezeichnet.",
 	"visualeditor-savedialog-identify-user": "Sie sind jetzt als [[User:$1|$1]] angemeldet. Wenn Sie speichern, wird Ihre Bearbeitung diesem Benutzerkonto zugeordnet.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Sie können $1 drücken, um Ihre Bearbeitung zu speichern.",

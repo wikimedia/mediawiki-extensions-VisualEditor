@@ -348,7 +348,6 @@
 	"visualeditor-rebase-client-title-help": "Du kommer kunna granska ändringar innan du sparar.",
 	"visualeditor-recreate": "Sidan har raderats sedan du började redigera. Tryck \"$1\" för att återskapa den.",
 	"visualeditor-redirect-description": "Omdirigerar till $1",
-	"visualeditor-savedialog-error-badtoken": "Vi kunde inte spara din redigering eftersom sessionen inte längre var giltig.",
 	"visualeditor-savedialog-identify-anon": "Vill du spara denna sida som en anonym användare istället? Din IP-adress registreras i sidans redigeringshistorik.",
 	"visualeditor-savedialog-identify-user": "Du är nu inloggad som [[User:$1|$1]]. Redigeringen kommer att kopplas ihop med det här kontot om du sparar denna redigering.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Du kan trycka $1 för att spara din redigering.",

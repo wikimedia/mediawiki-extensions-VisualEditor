@@ -372,7 +372,6 @@
 	"visualeditor-rebase-client-title-help": "Вы сможете посмотреть изменения перед сохранением.",
 	"visualeditor-recreate": "Эта страница была удалена, когда вы начали её редактировать. Нажмите «$1», чтобы создать её заново.",
 	"visualeditor-redirect-description": "Перенаправление на $1",
-	"visualeditor-savedialog-error-badtoken": "Нам не удалось сохранить вашу правку, поскольку сессия больше не действительна.",
 	"visualeditor-savedialog-identify-anon": "Вы хотите сохранить эту страницу как анонимный пользователь? Ваш IP-адрес будет записан в историю редактирования этой страницы.",
 	"visualeditor-savedialog-identify-user": "Теперь вы вошли как [[User:$1|$1]]. Ваши изменения будут связаны с этой учётной записью, если вы их сохраните.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Вы можете нажать $1, чтобы сохранить свою правку.",

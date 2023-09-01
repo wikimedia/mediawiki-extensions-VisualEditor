@@ -207,7 +207,6 @@
 	"visualeditor-preference-tabs-remember-last": "Laglagipem ti naudi nga editorko",
 	"visualeditor-recreate": "Ti panid ket naikkaten manipud idi nangrugika nga agurnos. Pinduten ti \"$1\" tapno mapartuat manen.",
 	"visualeditor-redirect-description": "Ibaw-ing iti $1",
-	"visualeditor-savedialog-error-badtoken": "Saami a naidulin ti inurnosmo gapu ta ti sesion ket saanen a maipateg.",
 	"visualeditor-savedialog-identify-anon": "Kayatmo kadi nga idulin daytoy a panid? Ti IP nga adresmo ket mairehistronto iti pakasaritaan iti daytoy a panid.",
 	"visualeditor-savedialog-identify-user": "Nakastrekkan a kas ni [[User:$1|$1]]. Ti inurnosmo ket mairamanto iti daytoy a pakabilangan no idulimo daytoy nga urnos.",
 	"visualeditor-savedialog-label-publish-short": "Ipablaak",

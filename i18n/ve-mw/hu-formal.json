@@ -113,7 +113,6 @@
 	"visualeditor-preference-core-description": "A vizuális szerkesztő engedélyezése. A vitalapokon és néhány egyéb névtérben nem elérhető.",
 	"visualeditor-preference-core-label": "Vizuális szerkesztés",
 	"visualeditor-recreate": "A lapot törölték, mióta elkezdte szerkeszteni. Kattintson a „$1” gombra az újbóli létrehozásához.",
-	"visualeditor-savedialog-error-badtoken": "Nem tudtuk elmenteni a szerkesztését, mert a munkamenete már nem érvényes.",
 	"visualeditor-savedialog-identify-anon": "Szeretné az oldalt inkább egy anonim felhasználóként elmenteni? Az IP-címe látható lesz a laptörténetben.",
 	"visualeditor-savedialog-identify-user": "Bejelentkezett mint [[User:$1|$1]]. A szerkesztése ehhez a felhasználóhoz fog tartozni, ha elmenti.",
 	"visualeditor-savedialog-label-resolve-conflict": "Ütközés feloldása",

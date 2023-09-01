@@ -128,7 +128,6 @@
 	"visualeditor-mwgallerydialog-title": "Gallerii",
 	"visualeditor-preference-core-label": "Vizualine edituičendu",
 	"visualeditor-recreate": "Sivu on otettu iäre sil aigua, ku edituičit sidä. Painalda \"$1\" ku luadie sivu uvvelleh.",
-	"visualeditor-savedialog-error-badtoken": "Emmo voinnuh käzitellä sinun kohendustu, ku istundo on jo loppenuhes.",
 	"visualeditor-savedialog-identify-anon": "Tahtotgo tallendua sivun kirjuttamattomannu käyttäjänny? Sinun IP-adressu kirjatah tämän sivun muutoshistourieh.",
 	"visualeditor-savedialog-identify-user": "Olet kirjutannuhes käyttäjänny [[User:$1|$1]]. Sinun kohendukset liitetäh täh tunnukseh, ku tallendanet kohenduksen.",
 	"visualeditor-savedialog-label-resolve-conflict": "Selvitä risturiidu",

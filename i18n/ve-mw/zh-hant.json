@@ -335,7 +335,6 @@
 	"visualeditor-rebase-client-title-help": "在儲存前，您可檢閱更改內容。",
 	"visualeditor-recreate": "此頁面在您編輯的這段期間已被刪除，請點選 \"$1\" 重新建立頁面。",
 	"visualeditor-redirect-description": "重新導向至 $1",
-	"visualeditor-savedialog-error-badtoken": "連線階段已失效，我們無法儲存您的編輯。",
 	"visualeditor-savedialog-identify-anon": "您是否要以匿名使用者的身份來儲存頁面？ 您的 IP 位址將記錄於本頁面的編輯歷史中。",
 	"visualeditor-savedialog-identify-user": "您目前以 [[User:$1|$1]] 的身份登入。 若您儲存本次的編輯，修訂歷史記錄將會記錄此帳號。",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以點選 $1 來儲存您的編輯。",

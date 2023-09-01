@@ -249,7 +249,6 @@
 	"visualeditor-rebase-client-import-name": "Títulu de la páxina",
 	"visualeditor-recreate": "La páxina desanicióse desque principiasti a editala. Calca «$1» pa volver a creala.",
 	"visualeditor-redirect-description": "Redirixir a $1",
-	"visualeditor-savedialog-error-badtoken": "Nun pudimos guardar la edición porque la sesión yá nun ye válida.",
 	"visualeditor-savedialog-identify-anon": "¿Quier guardar esta páxina como usuariu anónimu? La so direición IP quedará rexistrada nel historial d'ediciones de la páxina.",
 	"visualeditor-savedialog-identify-user": "Anició sesión como [[User:$1|$1]]. La edición quedará asociada con esta cuenta si la guarda.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Puedes primir $1 pa guardar la edición.",

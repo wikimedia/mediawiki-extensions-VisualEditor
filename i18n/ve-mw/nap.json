@@ -215,7 +215,6 @@
 	"visualeditor-preference-tabs-remember-last": "Arricòrda sempe ll'urdemo editore d' 'o mio",
 	"visualeditor-recreate": "'A paggena è stata scancellata 'a quanno avite accumminciato a 'a cagnà. Clickate \"$1\" p' 'a crià arreto.",
 	"visualeditor-redirect-description": "Reindirizzamento a $1",
-	"visualeditor-savedialog-error-badtoken": "Nun putimmo sarvà 'o cagnamiento vuosto pecché 'a sessione s'è ammaturata.",
 	"visualeditor-savedialog-identify-anon": "Vulite sarvà sta paggena comm'a n'utente anonimo mmece? Ll'IP r' 'a vosta sarrà riggistrata dint' 'a cronologgia r' 'a paggena.",
 	"visualeditor-savedialog-identify-user": "Mo' site trasuto comm'a [[User:$1|$1]]. 'O cagnamiento vuosto sarrà suocio a stu cunto si sarvate stu cagnamiento.",
 	"visualeditor-savedialog-label-publish-short": "Pubbreca",

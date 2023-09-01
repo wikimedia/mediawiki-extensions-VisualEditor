@@ -182,7 +182,6 @@
 	"visualeditor-preference-tabs-remember-last": "Muna alltaf þann ritill sem ég notaði síðast",
 	"visualeditor-recreate": "Þessari síðu hefur verið eytt síðan þú byrjaðir að breyta henni. Smelltu á „$1“ til að stofna hana aftur.",
 	"visualeditor-redirect-description": "Endurbeina á $1",
-	"visualeditor-savedialog-error-badtoken": "Við gátum ekki vistað breytinguna þína því setan var ekki lengur gild.",
 	"visualeditor-savedialog-identify-anon": "Vilt þú frekar vista þessa síðu sem nafnlaus notandi? Vistfangið þitt verður skráð í breytingaskrá þessarar síðu.",
 	"visualeditor-savedialog-identify-user": "Þú ert núna innskráð(ur) sem [[User:$1|$1]]. Breytingin þín verður skráð undir þessum aðgangi ef þú vistar þessa breytingu.",
 	"visualeditor-savedialog-label-publish-short": "Gefa út",

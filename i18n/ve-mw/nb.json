@@ -339,7 +339,6 @@
 	"visualeditor-rebase-client-title-help": "Du vil kunne gå gjennom endringene før du lagrer.",
 	"visualeditor-recreate": "Siden har blitt slettet etter at du begynte å redigere. Trykk \"$1\" for å gjenopprette den.",
 	"visualeditor-redirect-description": "Omdiriger til $1",
-	"visualeditor-savedialog-error-badtoken": "Vi kunne ikke lagre redigeringen din fordi sesjonen ikke lenger er gyldig.",
 	"visualeditor-savedialog-identify-anon": "Ønsker du å lagre siden som en anonym bruker i stedet? IP-adressen din vil bli lagret i sidens redigeringshistorikk.",
 	"visualeditor-savedialog-identify-user": "Du er nå innlogget som [[User:$1|$1]]. Redigeringen din vil knyttes til denne kontoen hvis du lagrer den.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Du kan trykke $1 for å lagre redigeringen din.",

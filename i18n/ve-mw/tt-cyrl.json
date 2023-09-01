@@ -172,7 +172,6 @@
 	"visualeditor-rebase-client-import": "Кертү",
 	"visualeditor-rebase-client-import-name": "Битнең исеме",
 	"visualeditor-redirect-description": "$1 битенә юнәлтү",
-	"visualeditor-savedialog-error-badtoken": "Без сезнең төзәтмәне саклый алмадык, чөнки сессия гамәлдә түгел.",
 	"visualeditor-savedialog-identify-anon": "Сез бу битне аноним кулланучы буларак сакларга телисезме? Сезнең IP адресы бу битнең үзгәртүләр тарихында сакланып калачак.",
 	"visualeditor-savedialog-identify-user": "Сез [[User:$1|$1]] буларак кердегез. Сезнең үзгәртүләр сакланган очракта, әлеге хисап язмасы белән бәйле булачаклар.",
 	"visualeditor-savedialog-label-publish-short": "Саклау",

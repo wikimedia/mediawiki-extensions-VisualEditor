@@ -168,7 +168,6 @@
 	"visualeditor-preference-tabs-multi-tab": "Afichar los dos onglets de modificacion",
 	"visualeditor-preference-tabs-prefer-wt": "Totjorn utilizar l’editor en mòde font",
 	"visualeditor-preference-tabs-remember-last": "Se remembrar del darrièr editor utilizat",
-	"visualeditor-savedialog-error-badtoken": "Avèm pas pogut enregistrar vòstra modificacion perque la session èra pas mai valida.",
 	"visualeditor-savedialog-identify-anon": "Volètz far pr'aquò l'enregistrament coma utilizaire anonim? Vòstra adreça IP serà enregistrada dins l'istoric de las modificacions d'aquela pagina.",
 	"visualeditor-savedialog-identify-user": "Sètz connectat (-ada) coma [[User:$1|$1]]. Vòstras modificacions seràn enregistradas jos aquel nom.",
 	"visualeditor-savedialog-label-resolve-conflict": "Resòlvre lo conflicte",

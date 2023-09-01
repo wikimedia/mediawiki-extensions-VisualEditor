@@ -308,7 +308,6 @@
 	"visualeditor-rebase-client-title-help": "Bit ćete u mogućnosti pregledati promjene prije spremanja.",
 	"visualeditor-recreate": "Stranica je izbrisana nakon što ste počeli s uređivanjem. Pritisnite \"$1\" da biste je ponovno stvorili.",
 	"visualeditor-redirect-description": "Preusmjeravanje na $1",
-	"visualeditor-savedialog-error-badtoken": "Nismo mogli spremiti Vaše uređivanje jer sesija više nije valjana.",
 	"visualeditor-savedialog-identify-anon": "Želite li snimiti ovu stranicu kao anonimni suradnik? Vaša IP adresa će biti zapisana u starim izmjenama stranice.",
 	"visualeditor-savedialog-identify-user": "Prijavljeni ste kao suradnik [[User:$1|$1]]. Vaše uređivanje će biti povezano s ovim računom ako snimite ovo uređivanje.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Da biste spremili uređivanje možete pritisnuti $1.",

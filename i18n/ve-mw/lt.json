@@ -253,7 +253,6 @@
 	"visualeditor-rebase-client-import-name": "Puslapio pavadinimas",
 	"visualeditor-recreate": "Puslapis buvo ištrintas kol jūs jį redagavote. Spauskite \"$1\", norėdami jį iš naujo sukurti.",
 	"visualeditor-redirect-description": "Nukreipti į $1",
-	"visualeditor-savedialog-error-badtoken": "Nepavyko išsaugoti jūsų pakeitimų, nes Jūsų sesija nebegaliojo.",
 	"visualeditor-savedialog-identify-anon": "Ar norite išsaugoti šį puslapį kaip anonimiškas naudotojas? Jūsų IP adresas bus išsaugotas šio puslapio redagavimo istorijoje.",
 	"visualeditor-savedialog-identify-user": "Esate prisijungęs kaip [[User:$1|$1]]. Jei išsaugosite pakeitimus, jie bus susieti su šia paskyra.",
 	"visualeditor-savedialog-label-publish-short": "Skelbti",

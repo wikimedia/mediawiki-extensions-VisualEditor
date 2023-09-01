@@ -340,7 +340,6 @@
 	"visualeditor-rebase-client-title-help": "Anda akan dapat meninjau perubahan sebelum menyimpan.",
 	"visualeditor-recreate": "Halaman ini telah dihapus ketika Anda mulai menyunting. Tekan \"$1\" untuk membuatnya lagi.",
 	"visualeditor-redirect-description": "Mengalihkan ke $1",
-	"visualeditor-savedialog-error-badtoken": "Kami tidak dapat menyimpan suntingan Anda karena sesi tidak lagi sah.",
 	"visualeditor-savedialog-identify-anon": "Apakah Anda ingin menyimpan halaman ini sebagai pengguna anonim saja? Alamat IP Anda akan tercatat dalam riwayat revisi halaman ini.",
 	"visualeditor-savedialog-identify-user": "Anda kini masuk log sebagai [[User:$1|$1]]. Suntingan Anda akan dikaitkan dengan akun ini jika Anda menyimpan perubahan.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Anda dapat menekan $1 untuk menyimpan suntingan.",

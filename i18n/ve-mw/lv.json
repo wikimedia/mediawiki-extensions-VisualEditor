@@ -290,7 +290,6 @@
 	"visualeditor-rebase-client-title-help": "Pirms saglabāšanas tu varēsi pārskatīt izmaiņas.",
 	"visualeditor-recreate": "Kamēr veici labojumus, lapa tika izdēsta. Spied uz \"$1\", lai izveidotu to no jauna.",
 	"visualeditor-redirect-description": "Pāradresēt uz $1",
-	"visualeditor-savedialog-error-badtoken": "Mēs nevarējām saglabāt tavu labojumu, jo pārlūka sesija ir izbeigusies.",
 	"visualeditor-savedialog-identify-anon": "Vai jūs gribat saglabāt šo lapu kā anonīms dalībnieks? Šīs lapas labojumu sarakstā tiks saglabāta jūsu IP adrese.",
 	"visualeditor-savedialog-identify-user": "Jūs esat ielogojies kā [[User:$1|$1]]. Ja saglabāsiet, šis labojums tiks saistīts ar šo dalībnieka kontu.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Tu vari nospiest $1, lai saglabātu savu labojumu.",

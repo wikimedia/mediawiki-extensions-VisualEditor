@@ -182,7 +182,6 @@
 	"visualeditor-rebase-client-import": "Mewnforio",
 	"visualeditor-rebase-client-import-name": "Teitl y dudalen",
 	"visualeditor-redirect-description": "Ailgyfeirio i $1",
-	"visualeditor-savedialog-error-badtoken": "Ni lwyddwyd i brosesu eich golygiad oherwydd nad oedd y sesiwn o hyd yn ddilys.",
 	"visualeditor-savedialog-identify-anon": "Ydych chi'n dymuno cadw'r dudalen fel defnyddiwr anhysbys? Bydd eich cyfeiriad IP yn cael ei gofnodi yn hanes y dudalen.",
 	"visualeditor-savedialog-identify-user": "Rydych wedi mewngofnodi yn enw [[User:$1|$1]]. Os y rhowch eich gwaith ar gadw nawr bydd eich golygiad yn cael ei dadogi i'r cyfri hwnnw.",
 	"visualeditor-savedialog-label-publish-short": "Cyhoeddi",

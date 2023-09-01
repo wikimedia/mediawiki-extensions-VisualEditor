@@ -133,7 +133,6 @@
 	"visualeditor-preference-tabs-prefer-wt": "Altied bronkodebewarking gebruken",
 	"visualeditor-preference-tabs-remember-last": "Leste tekstverwarker onthouwen",
 	"visualeditor-redirect-description": "Deurverwiezen naor $1",
-	"visualeditor-savedialog-error-badtoken": "Wulen konnen joew bewarking niet opslaon umdat joew sessie niet meer geldig was.",
 	"visualeditor-savedialog-identify-anon": "Wi'j disse zied as n anonieme gebruker opslaon? Joew IP-adres wörden dan op-esleugen in de geschiedenisse van disse zied.",
 	"visualeditor-savedialog-identify-user": "Je bin noen an-emeld as [[User:$1|$1]]. Disse bewarking zal an disse gebruker ekoppeld wörden a'j t opslaon.",
 	"visualeditor-savedialog-label-resolve-conflict": "Konflikt oplössen",

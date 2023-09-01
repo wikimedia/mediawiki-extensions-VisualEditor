@@ -164,7 +164,6 @@
 	"visualeditor-preference-tabs-remember-last": "Соңғы өңдегішті есте сақта!",
 	"visualeditor-recreate": "Сіз өңдей бастағанды бет жойылған. Оны қайта бастау үшін «$1» дегенді басыңыз.",
 	"visualeditor-redirect-description": "$1 дегенге бағыттату",
-	"visualeditor-savedialog-error-badtoken": "Біз сіздің өңдемеңізді сақтай алмадық, себебі, бұл сессия енді жарамсыз.",
 	"visualeditor-savedialog-identify-anon": "Анонимді қатысушы ретінде бетті сақтағыңыз келе ме? IP-мекенжайыңыз бұл беттің түзету тарихында жазылып алынады.",
 	"visualeditor-savedialog-identify-user": "Сіз [[User:$1|$1]] ретінде кіріп отырсыз. Егер сіз бұл өңдемені сақтасаңыз сіздің өзгертуіңіз осы тіркелгіге байланысты болады.",
 	"visualeditor-savedialog-label-resolve-conflict": "Қақтығысқа рұқсат ету",

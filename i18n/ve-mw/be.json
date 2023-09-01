@@ -324,7 +324,6 @@
 	"visualeditor-rebase-client-title-help": "Вы зможаце праглядзець змены перад запісваннем.",
 	"visualeditor-recreate": "Старонка была выдаленая пасля таго, як вы пачалі рэдагаваць. Націсніце «$1», каб узнавіць яго.",
 	"visualeditor-redirect-description": "Перанакіраваць на $1",
-	"visualeditor-savedialog-error-badtoken": "Не атрымалася захаваць вашую праўку з-за пратэрміноўкі сеансу.",
 	"visualeditor-savedialog-identify-anon": "Ці жадаеце захаваць гэтую старонку ў стане ананімнага ўдзельніка? У гэтым разе ў гісторыю правак старонкі трапіць ваш IP-адрас.",
 	"visualeditor-savedialog-identify-user": "Вы ўвайшлі як [[User:$1|$1]]. Вашая праўка будзе запісана да вашага ўліковага запісу, калі вы яе захаваеце.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Вы можаце націснуць $1, каб запісаць праўку.",

@@ -304,7 +304,6 @@
 	"visualeditor-rebase-client-title-help": "Моћићете да прегледате измене пре чувања истих.",
 	"visualeditor-recreate": "Страница је у међувремену избрисана. Притисните „$1” да бисте је поново направили.",
 	"visualeditor-redirect-description": "Преусмерава на „$1”",
-	"visualeditor-savedialog-error-badtoken": "Нисмо могли да сачувамо вашу измену зато што сесија више није важећа.",
 	"visualeditor-savedialog-identify-anon": "Желите ли сачувати ову страницу као анониман корисник? Ваша IP адреса ће бити забележена у историји измена ове странице.",
 	"visualeditor-savedialog-identify-user": "Сада сте пријављени као [[User:$1|$1]]. Ваше измене ће бити повезане с овим налогом ако сачувате измену.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Притисните $1 да бисте сачували измену.",

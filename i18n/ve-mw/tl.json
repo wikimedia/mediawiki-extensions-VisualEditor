@@ -130,7 +130,6 @@
 	"visualeditor-preference-tabs-prefer-wt": "Palaging ibigay sa akin ang wikitext editor",
 	"visualeditor-preference-tabs-remember-last": "Tandaan ang aking huling editor",
 	"visualeditor-recreate": "Ibinura ang pahinang ito nang nagsimula kang mamatnugot. Pindutin ang \"$1\" upang mailikha ito muli.",
-	"visualeditor-savedialog-error-badtoken": "Hindi naming maiproseso ang pagbabago mo dahil nawalan na ng saysay ang sesyon.",
 	"visualeditor-savedialog-identify-anon": "Nais mo bang itala na lang ang pahinang ito bilang isang 'di-kilalang tagagamit?  Matatala ang iyong direksiyong IP sa kasaysayan ng pagbabago ng pahinang ito.",
 	"visualeditor-savedialog-identify-user": "Naka-login ka na bilang si [[User:$1|$1]]. Iuugnay ang pagbabagong ito sa account mo kapag itinala mo ang pagbabagong ito.",
 	"visualeditor-savedialog-label-publish-short": "Ilathala",

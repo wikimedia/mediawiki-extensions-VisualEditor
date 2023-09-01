@@ -353,7 +353,6 @@
 	"visualeditor-rebase-client-title-help": "U kunt wijzigingen bekijken voordat u ze opslaat.",
 	"visualeditor-recreate": "De pagina is verwijderd sinds u bent begonnen met bewerken. Klik op \"$1\" om de pagina opnieuw aan te maken.",
 	"visualeditor-redirect-description": "Doorverwijzing naar $1",
-	"visualeditor-savedialog-error-badtoken": "Uw bewerking kon niet verwerkt worden omdat uw sessie niet meer geldig is.",
 	"visualeditor-savedialog-identify-anon": "Wilt u deze pagina opslaan als anonieme gebruiker? Uw IP-adres wordt dan opgeslagen in de paginageschiedenis.",
 	"visualeditor-savedialog-identify-user": "U bent nu aangemeld als [[User:$1|$1]]. Uw bewerking wordt aan deze gebruiker gekoppeld als u die opslaat.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Druk op $1 om uw bewerking op te slaan.",
