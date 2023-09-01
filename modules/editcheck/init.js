@@ -51,7 +51,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 		return offset < endOffset;
 	} );
 	var addedTextRanges = ranges.filter( function ( range ) {
-		var minimumCharacters = mw.editcheck.config.references.minimumCharacters;
+		var minimumCharacters = mw.editcheck.config.addReference.minimumCharacters;
 		// 1. Check that at least minimumCharacters characters have been inserted sequentially
 		if ( range.getLength() >= minimumCharacters ) {
 			// 2. Exclude any ranges that already contain references

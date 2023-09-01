@@ -13,7 +13,7 @@ use MessageLocalizer;
 
 class ResourceLoaderData {
 	protected static array $defaults = [
-		'references' => [
+		'addReference' => [
 			'minimumCharacters' => 50,
 		],
 	];
