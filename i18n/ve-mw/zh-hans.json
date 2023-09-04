@@ -359,7 +359,7 @@
 	"visualeditor-recreate": "此页面自从您开始编辑以来已被删除。请点击“$1”以重新创建。",
 	"visualeditor-redirect-description": "重定向至$1",
 	"visualeditor-savedialog-identify-anon": "您想要以匿名用户身份保存该页面吗？您的IP地址将被记录在该页面的编辑历史中。",
-	"visualeditor-savedialog-identify-user": "您现在正以[[User:$1|$1]]的身份登录。如果您保存该编辑，该编辑将与您的账户关联。",
+	"visualeditor-savedialog-identify-user": "您现在正以<strong>[[User:$1|$1]]</strong>的身份登录。如果继续，您做出的编辑将与此账号关联。",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以点击$1来保存您的编辑。",
 	"visualeditor-savedialog-label-publish-short": "发布",
 	"visualeditor-savedialog-label-publish-short-start": "发布…",

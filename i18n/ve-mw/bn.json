@@ -312,7 +312,7 @@
 	"visualeditor-recreate": "আপনি সম্পাদনা শুরু করার পর পাতাটি অপসারণ করা হয়েছে। এটি পুনঃতৈরি করতে \"$1\" চাপুন।",
 	"visualeditor-redirect-description": "$1-এ পুনঃনির্দেশিত",
 	"visualeditor-savedialog-identify-anon": "আপনি কি অনিবন্ধীকৃত ব্যবহারকারী হিসেবে এই পাতাটি সংরক্ষণ করতে চান? আপনার আইপি ঠিকানা এই পাতার সম্পাদনা ইতিহাসে রেকর্ড করা হবে।",
-	"visualeditor-savedialog-identify-user": "আপনি এইমাত্র [[User:$1|$1]] হিসেবে প্রবেশ করেছেন। আপনার সম্পাদনা এই অ্যাকাউন্টের সঙ্গে যুক্ত করা হবে যদি আপনি এই সম্পাদনাটি সংরক্ষণ করেন।",
+	"visualeditor-savedialog-identify-user": "আপনি এইমাত্র <strong>[[User:$1|$1]]</strong> হিসেবে প্রবেশ করেছেন। আপনি যদি সম্পাদনা অব্যাহত রাখেন, আপনার সম্পাদনা এই অ্যাকাউন্টের সঙ্গে যুক্ত করা হবে।",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "আপনি আপনার সম্পাদনা $1 চেপে সংরক্ষণ করতে পারেন।",
 	"visualeditor-savedialog-label-publish-short": "প্রকাশ করুন",
 	"visualeditor-savedialog-label-publish-short-start": "প্রকাশ করুন...",

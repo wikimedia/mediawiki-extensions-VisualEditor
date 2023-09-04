@@ -324,6 +324,7 @@
 	"visualeditor-recreate": "Le pagina ha essite delite post que tu ha comenciate a modificar. Preme sur \"$1\" pro recrear lo.",
 	"visualeditor-redirect-description": "Redirection a $1",
 	"visualeditor-savedialog-identify-anon": "Tu non es plus in session authenticate. Si tu continua, <strong>le adresse IP de tu connexion essera registrate</strong> in le historia de modificationes de iste pagina.",
+	"visualeditor-savedialog-identify-temp": "Tu usa ora le nomine de usator temporari <strong>$1</strong>. Si tu continua, tu modification essera associate con iste nomine de usator.",
 	"visualeditor-savedialog-identify-user": "Tu ha aperite session como <strong>[[User:$1|$1]]</strong>. Si tu continua, le modification essera associate a iste conto.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Tu pote premer sur $1 pro salveguardar tu modification.",
 	"visualeditor-savedialog-label-publish-short": "Publicar",
