@@ -75,10 +75,7 @@
 			"value": false
 		},
 		"VisualEditorEnableBetaFeature": {
-			"value": false
-		},
-		"VisualEditorUnifiedPreference": {
-			"description": "Replace the old beta feature preference ('visualeditor-enable') and the old opt-out preference ('visualeditor-betatempdisable') with a new preference backed by the old values.",
+			"description": "BetaFeatures integration has been removed. This option allows using the old beta feature preference values ('visualeditor-enable') on wikis where it was previously enabled, until it is migrated (T344762).",
 			"value": false
 		},
 		"VisualEditorEnableTocWidget": {
@@ -93,9 +90,6 @@
 		"VisualEditorEnableWikitext": {
 			"description": "Make the wikitext mode of VE available (also called 2017 Wikitext Editor). The corresponding per-user options is visualeditor-newwikitext.",
 			"value": true
-		},
-		"VisualEditorEnableWikitextBetaFeature": {
-			"value": false
 		},
 		"VisualEditorFeedbackAPIURL": {
 			"value": false
@@ -219,7 +213,6 @@
 		"CustomEditor": "VisualEditorHooks",
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "VisualEditorHooks",
-		"GetBetaFeaturePreferences": "VisualEditorBetaFeaturesHooks",
 		"GetPreferences": "VisualEditorHooks",
 		"ListDefinedTags": "VisualEditorHooks",
 		"MakeGlobalVariablesScript": "VisualEditorHooks",
@@ -237,13 +230,6 @@
 	"HookHandlers": {
 		"VisualEditorHooks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks"
-		},
-		"VisualEditorBetaFeaturesHooks": {
-			"class": "MediaWiki\\Extension\\VisualEditor\\BetaFeaturesHooks",
-			"services": [
-				"MainConfig",
-				"ConfigFactory"
-			]
 		}
 	},
 	"ResourceModules": {
@@ -2717,7 +2703,7 @@
 		"remoteExtPath": "VisualEditor"
 	},
 	"ForeignResourcesDir": "lib",
-	"@DefaultUserOptions1": "'visualeditor-enable' is only read when in beta feature mode ('VisualEditorEnableBetaFeature').",
+	"@DefaultUserOptions1": "'visualeditor-enable' is only read when in legacy beta feature mode ('VisualEditorEnableBetaFeature').",
 	"@DefaultUserOptions2": "'visualeditor-betatempdisable' is only read when NOT in beta feature mode.",
 	"@DefaultUserOptions3": "'visualeditor-autodisable' records whether the user has explicitly opted out of VE while it was in beta.",
 	"DefaultUserOptions": {

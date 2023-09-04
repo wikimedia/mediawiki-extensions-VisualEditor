@@ -906,45 +906,29 @@ class Hooks implements
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' );
+		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' );
 
-		if ( $veConfig->get( 'VisualEditorUnifiedPreference' ) ) {
-			// Use the old preference keys to avoid having to migrate data for now.
-			// (One day we might write and run a maintenance script to update the
-			// entries in the database and make this unnecessary.)
-			if ( $isBeta ) {
-				$preferences['visualeditor-enable'] = [
-					'type' => 'toggle',
-					'label-message' => 'visualeditor-preference-visualeditor',
-					'section' => 'editing/editor',
-				];
-			} else {
-				$preferences['visualeditor-betatempdisable'] = [
-					'invert' => true,
-					'type' => 'toggle',
-					'label-message' => 'visualeditor-preference-visualeditor',
-					'section' => 'editing/editor',
-					'default' => $userOptionsLookup->getOption( $user, 'visualeditor-betatempdisable' ) ||
-						$userOptionsLookup->getOption( $user, 'visualeditor-autodisable' )
-				];
-			}
-
-		} elseif ( !$isBeta ) {
-			// Config option for visual editing "deployed" state (opt-out)
-			$preferences['visualeditor-betatempdisable'] = [
+		// Use the old preference keys to avoid having to migrate data for now.
+		// (One day we might write and run a maintenance script to update the
+		// entries in the database and make this unnecessary.) (T344762)
+		if ( $isBeta ) {
+			$preferences['visualeditor-enable'] = [
 				'type' => 'toggle',
-				'label-message' => 'visualeditor-preference-disable',
+				'label-message' => 'visualeditor-preference-visualeditor',
+				'section' => 'editing/editor',
+			];
+		} else {
+			$preferences['visualeditor-betatempdisable'] = [
+				'invert' => true,
+				'type' => 'toggle',
+				'label-message' => 'visualeditor-preference-visualeditor',
 				'section' => 'editing/editor',
 				'default' => $userOptionsLookup->getOption( $user, 'visualeditor-betatempdisable' ) ||
 					$userOptionsLookup->getOption( $user, 'visualeditor-autodisable' )
 			];
 		}
 
-		// Config option for wikitext editing "deployed" state (opt-out)
-		if (
-			$veConfig->get( 'VisualEditorEnableWikitext' )
-		) {
+		if ( $veConfig->get( 'VisualEditorEnableWikitext' ) ) {
 			$preferences['visualeditor-newwikitext'] = [
 				'type' => 'toggle',
 				'label-message' => 'visualeditor-preference-newwikitexteditor-enable',
@@ -1130,10 +1114,7 @@ class Hooks implements
 			'allowExternalLinkPaste' => $veConfig->get( 'VisualEditorAllowExternalLinkPaste' ),
 			'enableHelpCompletion' => $veConfig->get( 'VisualEditorEnableHelpCompletion' ),
 			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
-			'enableWikitext' => (
-				$veConfig->get( 'VisualEditorEnableWikitext' ) ||
-				$veConfig->get( 'VisualEditorEnableWikitextBetaFeature' )
-			),
+			'enableWikitext' => $veConfig->get( 'VisualEditorEnableWikitext' ),
 			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
 			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
 			'editCheck' => $veConfig->get( 'VisualEditorEditCheck' ),
