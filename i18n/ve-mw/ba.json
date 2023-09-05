@@ -120,7 +120,7 @@
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "Был биттең эстәлеген башҡа хат системаларына автоматик конвертацияны туҡтата алаһығыҙ",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "Тел варианттары араһында бит атамаларын үҙгәртмәгеҙ",
 	"visualeditor-dialog-meta-settings-redirect-help": "Ҡулланыусыларҙы автоматик рәүештә викиҙың икенсе битенә күсереү өсөн, был битте йүнәлтмә-бит итеп яһай алаһығыҙ.  Был альтернатив исемдәр, аббревиатуралар йә мәғәнәләр күп булған осраҡта уңышлы. Шулай иткәндә, уҡыусылар йүнәлтмә-биттең эстәлеген күрмәйәсәк.",
-	"visualeditor-dialog-meta-settings-redirect-label": "Ошо биткә йүнәлтергә",
+	"visualeditor-dialog-meta-settings-redirect-label": "Ошо битте йүнәлтергә",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Йүнәлтү өсөн маҡсатлы бит",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Айырым осраҡта, бик кәрәккәндә, маҡсатлы биткә икенсе исем бирелгәндә, был йүнәлтеүҙең автоматик яңыртылыуын булдырмаҫҡа",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Маҡсатлы биттең исемен үҙгәрткәндә был йүнәлтеүҙең яңырыуын булдырмаҫҡа",
@@ -222,6 +222,6 @@
 	"visualeditor-toload": "Мөхәррир хәҙер йөкләнәсәк. Әгәр бер нисә секундтан һеҙ элеккесә шул уҡ хәбәрҙе күрәһегеҙ икән, [$1 битте яңыртығыҙ].",
 	"visualeditor-version-label": "Өлгө",
 	"visualeditor-wikitext-progress": "Вики-тексты үҙгәртеү",
-	"visualeditor-wikitext-warning": "Һеҙ күҙләгес мөхәррир ҡулланаһығыҙ -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билдә]] бында эшләмәй. Теләгән ваҡытта, индерелгән үҙгәрештәрҙе юғалтмайынса, кирегә күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
-	"visualeditor-wikitext-warning-title": "Вики-билдә табылды"
+	"visualeditor-wikitext-warning": "Һеҙ күҙләгес мөхәррир ҡулланаһығыҙ -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-текст]] бында эшләмәй. Теләгән ваҡытта, индерелгән үҙгәрештәрҙе юғалтмайынса, кирегә күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
+	"visualeditor-wikitext-warning-title": "Билдәләнгән вики-текст табылды"
 }
