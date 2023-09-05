@@ -137,7 +137,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 	} );
 }
 
-if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck ) {
+if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || new URL( location.href ).searchParams.get( 'ecenable' ) ) {
 	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {
 		var surface = target.getSurface();
 
