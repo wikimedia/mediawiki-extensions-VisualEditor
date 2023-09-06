@@ -32,7 +32,8 @@
 			"Valtlait",
 			"VezonThunder",
 			"Korjaus1",
-			"Valtlai"
+			"Valtlai",
+			"Jack Phoenix"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -186,12 +187,13 @@
 	"visualeditor-dialog-transclusion-absent-template": "Mallinetta \"$1\" ei löydy.",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Sitä mallinetta ei ole olemassa.",
 	"visualeditor-dialog-transclusion-template-widget-aria": "Paina välilyöntiä valitaksesi mallineen.",
+	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Paina Ctrl+Del poistaaksesi mallineen, sen parametrit ja niiden arvot. Paina Ctrl+Shift+nuolinäppäimet siirtääksesi mallinetta ylös tai alas.",
 	"visualeditor-dialog-transclusion-add-content": "Lisää sisältö",
 	"visualeditor-dialog-transclusion-add-wikitext": "Lisää wikiteksti",
 	"visualeditor-dialog-transclusion-add-param": "Lisää enemmän tietoa",
 	"visualeditor-dialog-transclusion-add-param-error-alias": "\"$1\" on jo lisätty parametrinä \"$2\". Tarkista vaihtoehdot sivupalkista. Tämä johtuu joko [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#aliases aliasten] tai [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#label labelien] käytöstä.",
 	"visualeditor-dialog-transclusion-add-param-error-deprecated": "Parametria \"$1\" ei voida lisätä, koska se on merkitty [//www.mediawiki.org/wiki/Special:MyLanguage/Help:TemplateData#deprecated käytöstä poistettavaksi].",
-	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Ei voi lisätä kahta parametria samalla nimellä.",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Parametria \"$2\" ei voi lisätä kahdesti.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Parametri \"$2\" on jo käytettävissä. Tarkista vaihtoehdot sivupalkista.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 on kielletty merkki. Poista se lisätäksesi parametrin.",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Parametrin nimi",
