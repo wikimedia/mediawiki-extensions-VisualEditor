@@ -300,6 +300,7 @@
 	"visualeditor-mwpredialog-convert": "텍스트 서식 허용",
 	"visualeditor-mwpredialog-title": "서식을 미리 지정한 플레인 텍스트",
 	"visualeditor-mwsignature-tool": "당신의 서명",
+	"visualeditor-preference-visualeditor": "시각편집기 활성화",
 	"visualeditor-preference-disable": "시각 편집기 끄기",
 	"visualeditor-preference-core-description": "시각편집기를 활성화합니다. 토론 문서와 몇몇 다른 이름공간에서는 사용할 수 없습니다.",
 	"visualeditor-preference-core-label": "시각 편집",

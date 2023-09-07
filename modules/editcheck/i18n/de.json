@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"editcheck-dialog-action-no": "Nein",
+	"editcheck-dialog-action-yes": "Ja",
+	"editcheck-dialog-addref-description": "Hilf den Lesern zu verstehen, woher diese Informationen stammen, indem du einen Beleg hinzufügst.",
+	"editcheck-dialog-addref-reject-question": "Warum fügst du keinen Beleg hinzu?",
+	"editcheck-dialog-addref-reject-description": "Andere Benutzer würden es begrüßen, mehr über deine Entscheidung, keinen Beleg einzutragen, zu erfahren.",
+	"editcheck-dialog-addref-reject-no-info": "Ich habe keine neuen Informationen hinzugefügt",
+	"editcheck-dialog-addref-reject-already-cited": "Meine Änderungen wurden bereits an andere Stelle belegt",
+	"editcheck-dialog-addref-reject-not-sure": "Ich bin mir nicht sicher, welchen Beleg ich hinzufügen soll",
+	"editcheck-dialog-addref-reject-other": "Andere",
+	"editcheck-dialog-addref-success-notify": "Vielen Dank für das Hinzufügen eines Belegs!",
+	"editcheck-dialog-addref-title": "Einen Beleg hinzufügen",
+	"editcheck-dialog-title": "Vor der Veröffentlichung"
+}

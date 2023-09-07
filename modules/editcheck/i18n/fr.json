@@ -1,4 +1,7 @@
 {
+	"@metadata": {
+		"authors": []
+	},
 	"editcheck-dialog-action-no": "Non",
 	"editcheck-dialog-action-yes": "Oui",
 	"editcheck-dialog-addref-description": "Aidez les lecteurs à comprendre d'où proviennent ces informations en ajoutant une source.",
