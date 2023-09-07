@@ -221,6 +221,6 @@
 	"visualeditor-toload": "Мөхәррир хәҙер йөкләнәсәк. Әгәр бер нисә секундтан һеҙ элеккесә шул уҡ хәбәрҙе күрәһегеҙ икән, [$1 битте яңыртығыҙ].",
 	"visualeditor-version-label": "Өлгө",
 	"visualeditor-wikitext-progress": "Вики-тексты үҙгәртеү",
-	"visualeditor-wikitext-warning": "Һеҙ күҙләгес мөхәррир ҡулланаһығыҙ -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билдә]] бында эшләмәй. Теләгән ваҡытта, индерелгән үҙгәрештәрҙе юғалтмайынса, кирегә күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
-	"visualeditor-wikitext-warning-title": "Вики-билдә табылды"
+	"visualeditor-wikitext-warning": "Һеҙ күҙләгес мөхәррир ҡулланаһығыҙ -  [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-текст]] бында эшләмәй. Теләгән ваҡытта, индерелгән үҙгәрештәрҙе юғалтмайынса, кирегә күсеп, төп тексты мөхәррирләү өсөн, күсереү төймәһенә баҫығыҙ.",
+	"visualeditor-wikitext-warning-title": "Билдәләнгән вики-текст табылды"
 }
