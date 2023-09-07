@@ -217,6 +217,7 @@
 		"BeforePageDisplay": "VisualEditorHooks",
 		"ChangeTagsListActive": "VisualEditorHooks",
 		"CustomEditor": "VisualEditorHooks",
+		"DifferenceEngineViewHeader": "VisualEditorHooks",
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "VisualEditorHooks",
 		"GetBetaFeaturePreferences": "VisualEditorBetaFeaturesHooks",
