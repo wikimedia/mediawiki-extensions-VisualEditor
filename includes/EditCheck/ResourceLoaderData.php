@@ -15,6 +15,7 @@ class ResourceLoaderData {
 	protected static array $defaults = [
 		'addReference' => [
 			'minimumCharacters' => 50,
+			'beforePunctuation' => false
 		],
 	];
 

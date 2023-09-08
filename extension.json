@@ -604,7 +604,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
-				"ext.visualEditor.mwsave"
+				"ext.visualEditor.mwsave",
+				"unicodejs"
 			],
 			"messages": [
 				"editcheck-dialog-action-no",
