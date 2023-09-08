@@ -108,6 +108,12 @@ mw.editcheck.getContentRanges = function ( documentModel, range, covers ) {
 	return ranges;
 };
 
+mw.editcheck.rejections = [];
+
+mw.editcheck.getRejectionReasons = function () {
+	return mw.editcheck.rejections;
+};
+
 mw.editcheck.refCheckShown = false;
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
@@ -150,6 +156,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || new URL( location.href ).searchParams.get( 'ecenable' ) ) {
 	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {
 		var surface = target.getSurface();
+
+		// clear rejection-reasons between runs of the save process, so only the last one counts
+		mw.editcheck.rejections.length = 0;
 
 		var selections = mw.editcheck.findAddedContentNeedingReference( surface.getModel().getDocument() );
 
@@ -241,6 +250,8 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || new URL( location.href
 					if ( data && data.action ) {
 						if ( data.action !== 'reject' ) {
 							mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
+						} else if ( data.reason ) {
+							mw.editcheck.rejections.push( data.reason );
 						}
 						var delay = ve.createDeferred();
 						// If they inserted, wait 2 seconds on desktop before showing save dialog

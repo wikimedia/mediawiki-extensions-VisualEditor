@@ -103,6 +103,10 @@ class Hooks implements
 		'editcheck-references-activated',
 		'editcheck-newcontent',
 		'editcheck-newreference',
+		'editcheck-reference-decline-common-knowledge',
+		'editcheck-reference-decline-irrelevant',
+		'editcheck-reference-decline-uncertain',
+		'editcheck-reference-decline-other',
 		// No longer in active use:
 		'visualeditor-needcheck',
 		'visualeditor-switched'

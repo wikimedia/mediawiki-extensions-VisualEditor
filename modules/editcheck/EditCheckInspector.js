@@ -59,16 +59,16 @@ ve.ui.EditCheckInspector.prototype.initialize = function () {
 	this.answerRadioSelect = new OO.ui.RadioSelectWidget( {
 		items: [
 			new OO.ui.RadioOptionWidget( {
-				data: 'no-info',
-				label: ve.msg( 'editcheck-dialog-addref-reject-no-info' )
+				data: 'uncertain',
+				label: ve.msg( 'editcheck-dialog-addref-reject-uncertain' )
 			} ),
 			new OO.ui.RadioOptionWidget( {
-				data: 'already-cited',
-				label: ve.msg( 'editcheck-dialog-addref-reject-already-cited' )
+				data: 'common-knowledge',
+				label: ve.msg( 'editcheck-dialog-addref-reject-common-knowledge' )
 			} ),
 			new OO.ui.RadioOptionWidget( {
-				data: 'not-sure',
-				label: ve.msg( 'editcheck-dialog-addref-reject-not-sure' )
+				data: 'irrelevant',
+				label: ve.msg( 'editcheck-dialog-addref-reject-irrelevant' )
 			} ),
 			new OO.ui.RadioOptionWidget( {
 				data: 'other',

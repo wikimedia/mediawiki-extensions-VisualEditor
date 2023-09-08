@@ -1568,6 +1568,13 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 		if ( mw.editcheck.findAddedContentNeedingReference( documentModel, true ).length ) {
 			taglist.push( 'editcheck-newcontent' );
 		}
+		// Rejection reasons for references
+		var rejections = mw.editcheck.getRejectionReasons();
+		if ( rejections.length > 0 ) {
+			rejections.forEach( function ( reason ) {
+				taglist.push( 'editcheck-reference-decline-' + reason );
+			} );
+		}
 	}
 
 	data.vetags = taglist.join( ',' );
