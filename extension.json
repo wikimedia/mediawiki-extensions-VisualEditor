@@ -162,7 +162,7 @@
 		},
 		"VisualEditorEditCheck": {
 			"value": false,
-			"description": "Enable experimental Edit Check feature."
+			"description": "Enable experimental Edit Check feature. Can also be enabled using ?ecenable=1."
 		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
