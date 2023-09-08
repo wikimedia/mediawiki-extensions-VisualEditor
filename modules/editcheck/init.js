@@ -40,11 +40,12 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 		} else if ( op.type === 'replace' ) {
 			var insertedRange = new ve.Range( offset, offset + op.insert.length );
 			offset += op.insert.length;
-			// 0. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
+			// 1. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
 			if ( op.remove.length === 0 ) {
 				ve.batchPush(
 					ranges,
-					mw.editcheck.getContentRanges( documentModel, insertedRange )
+					// 2. Only fully inserted paragraphs (ranges that cover the whole node) (T345121)
+					mw.editcheck.getContentRanges( documentModel, insertedRange, true )
 				);
 			}
 		}
@@ -53,9 +54,9 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 	} );
 	var addedTextRanges = ranges.filter( function ( range ) {
 		var minimumCharacters = mw.editcheck.config.addReference.minimumCharacters;
-		// 1. Check that at least minimumCharacters characters have been inserted sequentially
+		// 3. Check that at least minimumCharacters characters have been inserted sequentially
 		if ( range.getLength() >= minimumCharacters ) {
-			// 2. Exclude any ranges that already contain references
+			// 4. Exclude any ranges that already contain references
 			if ( !includeReferencedContent ) {
 				for ( var i = range.start; i < range.end; i++ ) {
 					if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
@@ -63,7 +64,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 					}
 				}
 			}
-			// 3. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
+			// 5. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
 			var branchNode = documentModel.getBranchNodeFromOffset( range.start );
 			if ( branchNode.getParent() !== documentModel.attachedRoot ) {
 				return false;
@@ -87,12 +88,20 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
  *
  * @param {ve.dm.Document} documentModel The documentModel to search
  * @param {ve.Range} range The range to include
+ * @param {boolean} covers Only include ranges which cover the whole of their node
  * @return {ve.Range[]} The contained content ranges (content branch node interiors)
  */
-mw.editcheck.getContentRanges = function ( documentModel, range ) {
+mw.editcheck.getContentRanges = function ( documentModel, range, covers ) {
 	var ranges = [];
 	documentModel.selectNodes( range, 'branches' ).forEach( function ( spec ) {
-		if ( spec.node.canContainContent() ) {
+		if (
+			spec.node.canContainContent() && (
+				!covers || (
+					!spec.range || // an empty range means the node is covered
+					spec.range.equalsSelection( spec.nodeRange )
+				)
+			)
+		) {
 			ranges.push( spec.range || spec.nodeRange );
 		}
 	} );
