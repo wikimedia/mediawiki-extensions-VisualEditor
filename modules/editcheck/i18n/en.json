@@ -12,12 +12,12 @@
 	"editcheck-dialog-addref-success-notify": "Thank you for adding a citation!",
 	"editcheck-dialog-addref-title": "Add a citation",
 	"editcheck-dialog-title": "Before publishing",
-	"tag-editcheck-reference-decline-common-knowledge": "NOREF: common knowledge",
+	"tag-editcheck-reference-decline-common-knowledge": "Edit Check (references) declined (common knowledge)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck reference was declined as common knowledge",
-	"tag-editcheck-reference-decline-irrelevant": "NOREF: irrelevant",
+	"tag-editcheck-reference-decline-irrelevant": "Edit Check (references) declined (irrelevant)",
 	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck reference was declined as irrelevant",
-	"tag-editcheck-reference-decline-other": "NOREF: other",
+	"tag-editcheck-reference-decline-other": "Edit Check (references) declined (other)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck reference was declined for an unlisted reason",
-	"tag-editcheck-reference-decline-uncertain": "NOREF: uncertain",
+	"tag-editcheck-reference-decline-uncertain": "Edit Check (references) declined (uncertain)",
 	"tag-editcheck-reference-decline-uncertain-description": "EditCheck reference was declined as being uncertain"
 }
