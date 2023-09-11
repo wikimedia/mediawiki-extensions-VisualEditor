@@ -15,7 +15,12 @@ class ResourceLoaderData {
 	protected static array $defaults = [
 		'addReference' => [
 			'minimumCharacters' => 50,
-			'beforePunctuation' => false
+			'beforePunctuation' => false,
+			// TODO: when we have multiple edit checks this will likely be a generic block:
+			// account: loggedin, loggedout, anything non-truthy means allow either
+			'account' => false,
+			// experience: [ comparison, number ], compared to wgUserEditCount
+			'experience' => [ '<', 100 ],
 		],
 	];
 
