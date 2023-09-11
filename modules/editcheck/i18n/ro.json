@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alesaru"
+		]
+	},
+	"editcheck-dialog-action-no": "Nu",
+	"editcheck-dialog-action-yes": "Da",
+	"editcheck-dialog-addref-description": "Ajută cititorii să înţeleagă de unde provin aceste informaţii, adăugând o citată.",
+	"editcheck-dialog-addref-reject-question": "De ce nu adaugi o citare?",
+	"editcheck-dialog-addref-reject-description": "Alți editori ar aprecia să afle mai multe despre decizia dvs. de a respinge citarea.",
+	"editcheck-dialog-addref-reject-irrelevant": "Nu cred că citările sunt relevante pentru schimbarea pe care o fac",
+	"editcheck-dialog-addref-reject-common-knowledge": "Informaţiile pe care le adaug sunt cunoscute pe scară largă.",
+	"editcheck-dialog-addref-reject-other": "Alte",
+	"editcheck-dialog-addref-success-notify": "Mulţumesc că ai adăugat o citatie!",
+	"editcheck-dialog-addref-title": "Adaugă descriere",
+	"editcheck-dialog-title": "Înainte de publicare",
+	"tag-editcheck-reference-decline-common-knowledge": "NOREF: cunoașterea comună",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Referința EditCheck a fost respinsă ca fiind cunoscută de toți",
+	"tag-editcheck-reference-decline-irrelevant": "NOREF: irelevant",
+	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck a fost respins că fiind incert",
+	"tag-editcheck-reference-decline-other": "NOREF: alte",
+	"tag-editcheck-reference-decline-other-description": "EditCheck a fost respins din motive neînsemnate",
+	"tag-editcheck-reference-decline-uncertain": "NOREF: incert",
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck a fost respins că fiind incert"
+}

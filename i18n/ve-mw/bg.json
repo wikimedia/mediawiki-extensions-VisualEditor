@@ -219,7 +219,7 @@
 	"visualeditor-preference-core-description": "Активира се визуалният редактор. Тази функционалност не е достъпна в беседите и някои други именни пространства.",
 	"visualeditor-preference-core-label": "Визуален редактор",
 	"visualeditor-preference-newwikitexteditor-description": "Активира нов режим на визуалния редактор. Включва много от инструментите, присъстващи в стандартния визуален редактор, използва подобен дизайн и позволява по-лесно превключване между двата.",
-	"visualeditor-preference-newwikitexteditor-enable": "Използване на режима на уикитекст във визуалния редактор, вместо друг редактор на уикитекст.",
+	"visualeditor-preference-newwikitexteditor-enable": "Използване на режима на уикитекст във визуалния редактор, вместо друг редактор на уикитекст",
 	"visualeditor-preference-newwikitexteditor-label": "Нов режим на редактиране",
 	"visualeditor-preference-tabs": "Режим на редактиране:",
 	"visualeditor-preference-tabs-multi-tab": "Искам да се виждат и двата режима на редактиране",

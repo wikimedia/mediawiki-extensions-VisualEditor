@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"editcheck-dialog-action-no": "না",
+	"editcheck-dialog-action-yes": "হ্যাঁ",
+	"editcheck-dialog-addref-description": "একটি উদ্ধৃতি যুক্ত করে পাঠকদের এই তথ্যটি কোথা থেকে আসছে তা বুঝতে সহায়তা করুন।",
+	"editcheck-dialog-addref-reject-question": "আপনি কেন একটি উদ্ধৃতি যোগ করছেন না?",
+	"editcheck-dialog-addref-reject-description": "উদ্ধৃতিটি খারিজ করার কারণ জানিয়ে অন্যান্য সম্পাদকদের এটি নিয়ে বুঝতে সহায়তা করুন।",
+	"editcheck-dialog-addref-reject-uncertain": "আমি নিশ্চিত নই যে কোন উদ্ধৃতিটি যোগ করতে হবে",
+	"editcheck-dialog-addref-reject-other": "অন্য",
+	"editcheck-dialog-addref-success-notify": "একটি উদ্ধৃতি যোগ করার জন্য আপনাকে ধন্যবাদ!",
+	"editcheck-dialog-addref-title": "উদ্ধৃতি যোগ করুন",
+	"editcheck-dialog-title": "প্রকাশের আগে"
+}

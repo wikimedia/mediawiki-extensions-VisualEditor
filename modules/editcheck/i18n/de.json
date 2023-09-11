@@ -7,11 +7,19 @@
 	"editcheck-dialog-addref-description": "Hilf den Lesern zu verstehen, woher diese Informationen stammen, indem du einen Beleg hinzufügst.",
 	"editcheck-dialog-addref-reject-question": "Warum fügst du keinen Beleg hinzu?",
 	"editcheck-dialog-addref-reject-description": "Andere Benutzer würden es begrüßen, mehr über deine Entscheidung, keinen Beleg einzutragen, zu erfahren.",
-	"editcheck-dialog-addref-reject-no-info": "Ich habe keine neuen Informationen hinzugefügt",
-	"editcheck-dialog-addref-reject-already-cited": "Meine Änderungen wurden bereits an andere Stelle belegt",
-	"editcheck-dialog-addref-reject-not-sure": "Ich bin mir nicht sicher, welchen Beleg ich hinzufügen soll",
+	"editcheck-dialog-addref-reject-irrelevant": "Ich glaube nicht, dass Belege für die Änderung, die ich vornehme, relevant sind.",
+	"editcheck-dialog-addref-reject-common-knowledge": "Die Informationen, die ich hinzufüge, sind allgemein bekannt",
+	"editcheck-dialog-addref-reject-uncertain": "Ich bin mir nicht sicher, welchen Beleg ich hinzufügen soll",
 	"editcheck-dialog-addref-reject-other": "Andere",
 	"editcheck-dialog-addref-success-notify": "Vielen Dank für das Hinzufügen eines Belegs!",
 	"editcheck-dialog-addref-title": "Einen Beleg hinzufügen",
-	"editcheck-dialog-title": "Vor der Veröffentlichung"
+	"editcheck-dialog-title": "Vor der Veröffentlichung",
+	"tag-editcheck-reference-decline-common-knowledge": "NOREF: Allgemeinwissen",
+	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Beleg wurde als allgemein bekannt abgelehnt",
+	"tag-editcheck-reference-decline-irrelevant": "NOREF: irrelevant",
+	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck: ein Beleg wurde als irrelevant abgelehnt",
+	"tag-editcheck-reference-decline-other": "NOREF: andere",
+	"tag-editcheck-reference-decline-other-description": "EditCheck: Beleg wurde aus einem nicht aufgeführten Grund abgelehnt",
+	"tag-editcheck-reference-decline-uncertain": "NOREF: unklar",
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck: Beleg wurde als unklar abgelehnt"
 }

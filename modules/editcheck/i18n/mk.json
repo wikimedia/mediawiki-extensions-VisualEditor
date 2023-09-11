@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"editcheck-dialog-action-no": "Не",
+	"editcheck-dialog-action-yes": "Да",
+	"editcheck-dialog-addref-description": "Помогнете им на читателите да разберат од каде доаѓаат информациите ставајќи навод.",
+	"editcheck-dialog-addref-reject-question": "Зошто не додавате навод?",
+	"editcheck-dialog-addref-reject-description": "Другите уредници би ценеле ако дознаат зошто сте решиле да не ставите навод.",
+	"editcheck-dialog-addref-reject-uncertain": "Не знам каков навод да ставам",
+	"editcheck-dialog-addref-reject-other": "Друго",
+	"editcheck-dialog-addref-success-notify": "Ви благодариме што ставивте навод!",
+	"editcheck-dialog-addref-title": "Додај навод",
+	"editcheck-dialog-title": "Пред да објавите"
+}
