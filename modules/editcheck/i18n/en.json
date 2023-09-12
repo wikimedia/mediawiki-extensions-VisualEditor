@@ -1,4 +1,10 @@
 {
+	"@metadata": {
+		"authors": [
+			"David Lynch",
+			"Ed Sanders"
+		]
+	},
 	"editcheck-config.json": "null",
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Yes",
