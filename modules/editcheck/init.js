@@ -184,6 +184,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			return tags.join( ',' );
 		};
 	} );
+	mw.hook( 've.deactivationComplete' ).add( function () {
+		var target = ve.init.target;
+		delete target.saveFields.vetags;
+	} );
 }
 
 if (
@@ -191,6 +195,7 @@ if (
 	// ecenable will bypass normal account-status checks as well:
 	new URL( location.href ).searchParams.get( 'ecenable' )
 ) {
+	var saveProcessDeferred;
 	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {
 		var surface = target.getSurface();
 
@@ -248,7 +253,7 @@ if (
 			target.onContainerScroll();
 
 			saveProcess.next( function () {
-				var saveProcessDeferred = ve.createDeferred();
+				saveProcessDeferred = ve.createDeferred();
 				var fragment = surface.getModel().getFragment( selection, true );
 
 				var context = surface.getContext();
@@ -302,6 +307,9 @@ if (
 				} );
 			} );
 		}
+	} );
+	mw.hook( 've.deactivationComplete' ).add( function () {
+		saveProcessDeferred.reject();
 	} );
 }
 
