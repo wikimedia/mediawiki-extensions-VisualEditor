@@ -13,5 +13,9 @@
 	"editcheck-dialog-addref-reject-other": "অন্য",
 	"editcheck-dialog-addref-success-notify": "একটি উদ্ধৃতি যোগ করার জন্য আপনাকে ধন্যবাদ!",
 	"editcheck-dialog-addref-title": "উদ্ধৃতি যোগ করুন",
-	"editcheck-dialog-title": "প্রকাশের আগে"
+	"editcheck-dialog-title": "প্রকাশের আগে",
+	"tag-editcheck-reference-decline-common-knowledge": "সম্পাদনা পরীক্ষা (তথ্যসূত্র) প্রত্যাখ্যান (সাধারণ জ্ঞান)",
+	"tag-editcheck-reference-decline-irrelevant": "সম্পাদনা পরীক্ষা (তথ্যসূত্র) প্রত্যাখ্যান (অপ্রাসঙ্গিক)",
+	"tag-editcheck-reference-decline-other": "সম্পাদনা পরীক্ষা (তথ্যসূত্র) প্রত্যাখ্যান (অন্যান্য)",
+	"tag-editcheck-reference-decline-uncertain": "সম্পাদনা পরীক্ষা (তথ্যসূত্র) প্রত্যাখ্যান (অনিশ্চিত)"
 }

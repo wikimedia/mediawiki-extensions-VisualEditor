@@ -14,12 +14,12 @@
 	"editcheck-dialog-addref-success-notify": "Vielen Dank für das Hinzufügen eines Belegs!",
 	"editcheck-dialog-addref-title": "Einen Beleg hinzufügen",
 	"editcheck-dialog-title": "Vor der Veröffentlichung",
-	"tag-editcheck-reference-decline-common-knowledge": "NOREF: Allgemeinwissen",
+	"tag-editcheck-reference-decline-common-knowledge": "Bearbeitungsprüfung (Belege) abgelehnt (Allgemeinwissen)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Beleg wurde als allgemein bekannt abgelehnt",
-	"tag-editcheck-reference-decline-irrelevant": "NOREF: irrelevant",
+	"tag-editcheck-reference-decline-irrelevant": "Bearbeitungsprüfung (Belege) abgelehnt (irrelevant)",
 	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck: ein Beleg wurde als irrelevant abgelehnt",
-	"tag-editcheck-reference-decline-other": "NOREF: andere",
+	"tag-editcheck-reference-decline-other": "Bearbeitungsprüfung (Belege) abgelehnt (andere)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck: Beleg wurde aus einem nicht aufgeführten Grund abgelehnt",
-	"tag-editcheck-reference-decline-uncertain": "NOREF: unklar",
+	"tag-editcheck-reference-decline-uncertain": "Bearbeitungsprüfung (Belege) abgelehnt (unklar)",
 	"tag-editcheck-reference-decline-uncertain-description": "EditCheck: Beleg wurde als unklar abgelehnt"
 }

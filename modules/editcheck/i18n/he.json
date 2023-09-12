@@ -16,12 +16,12 @@
 	"editcheck-dialog-addref-success-notify": "תודה על הוספת הערת שוליים!",
 	"editcheck-dialog-addref-title": "הוספת הערת שוליים",
 	"editcheck-dialog-title": "לפני הפרסום",
-	"tag-editcheck-reference-decline-common-knowledge": "NOREF: ידוע לציבור הרחב",
+	"tag-editcheck-reference-decline-common-knowledge": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (ידוע לציבור הרחב)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל היותה דבר ידוע לציבור הרחב",
-	"tag-editcheck-reference-decline-irrelevant": "NOREF: לא רלוונטי",
+	"tag-editcheck-reference-decline-irrelevant": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (לא רלוונטי)",
 	"tag-editcheck-reference-decline-irrelevant-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל היותה לא רלוונטית",
-	"tag-editcheck-reference-decline-other": "NOREF: אחר",
+	"tag-editcheck-reference-decline-other": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (אחר)",
 	"tag-editcheck-reference-decline-other-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל סיבה שאינה רשומה",
-	"tag-editcheck-reference-decline-uncertain": "NOREF: לא בטוח",
+	"tag-editcheck-reference-decline-uncertain": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (לא בטוח)",
 	"tag-editcheck-reference-decline-uncertain-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל היותה אל ודאית"
 }
