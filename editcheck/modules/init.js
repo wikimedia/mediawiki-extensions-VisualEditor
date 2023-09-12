@@ -176,7 +176,8 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 if (
 	( mw.config.get( 'wgVisualEditorConfig' ).editCheck && mw.editcheck.accountShouldSeeEditCheck( mw.editcheck.config.addReference ) ) ||
 	// ecenable will bypass normal account-status checks as well:
-	new URL( location.href ).searchParams.get( 'ecenable' )
+	new URL( location.href ).searchParams.get( 'ecenable' ) ||
+	!!window.MWVE_FORCE_EDIT_CHECK_ENABLED
 ) {
 	var saveProcessDeferred;
 	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {

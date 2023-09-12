@@ -37,7 +37,7 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
-	var editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' );
+	var editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' ) || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 	if ( conf.editCheckTagging || editCheck ) {
 		modules.push( 'ext.visualEditor.editCheck' );
 	}
