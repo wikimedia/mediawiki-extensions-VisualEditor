@@ -1,13 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Paraw2"
+			"Paraw2",
+			"TerranBoy"
 		]
 	},
 	"tooltip-ca-ve-edit": "ئەی پەڕە وێراشتە بکە",
 	"visualeditor-ca-createlocaldescriptionsource": "وەسف ناوچەیی ئزافە بکە",
 	"visualeditor-ca-createsource": "سەرچاوە درس بکە",
 	"visualeditor-ca-editsource": "وێراشتەکاری سەرچاوە",
-	"visualeditor-ca-editsource-section": "وێراشتەکاری سەرچاوە",
-	"visualeditor-descriptionpagelink": "Project:وێراشتەکەر دیداری"
+	"visualeditor-ca-editsource-section": "دەسکاری سەرچاوە",
+	"visualeditor-descriptionpagelink": "Project:وێراشتەکەر دیداری",
+	"visualeditor-dialog-template-title": "داڕێژە",
+	"visualeditor-dialog-transclusion-add-template": "ئزافەکردن داڕێژە",
+	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "پەێاکردن داڕێژە",
+	"visualeditor-dialog-transclusion-title-edit-transclusion": "ناواخن داڕێژە",
+	"visualeditor-dialogbutton-template-tooltip": "داڕێژە"
 }
