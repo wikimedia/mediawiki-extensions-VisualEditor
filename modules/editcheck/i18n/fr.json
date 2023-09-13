@@ -16,12 +16,12 @@
 	"editcheck-dialog-addref-success-notify": "Merci d'avoir ajouté une source !",
 	"editcheck-dialog-addref-title": "Ajouter une source",
 	"editcheck-dialog-title": "Avant de publier",
-	"tag-editcheck-reference-decline-common-knowledge": "NOREF : savoir commun",
+	"tag-editcheck-reference-decline-common-knowledge": "Vérification de modification (références) refusée (savoir commun)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "La référence EditCheck a été refusée comme étant un savoir commun",
-	"tag-editcheck-reference-decline-irrelevant": "NOREF : non pertinent",
+	"tag-editcheck-reference-decline-irrelevant": "Vérification de modification (références) refusée (non pertinent)",
 	"tag-editcheck-reference-decline-irrelevant-description": "La référence EditCheck a été refusée car non pertinente",
-	"tag-editcheck-reference-decline-other": "NOREF : autre",
+	"tag-editcheck-reference-decline-other": "Vérification de modification (références) refusée (autre)",
 	"tag-editcheck-reference-decline-other-description": "La référence EditCheck a été refusée pour une raison non listée",
-	"tag-editcheck-reference-decline-uncertain": "NOREF : incertain",
+	"tag-editcheck-reference-decline-uncertain": "Vérification de modification (références) refusée (incertain)",
 	"tag-editcheck-reference-decline-uncertain-description": "La référence EditCheck a été refusée comme étant incertaine"
 }

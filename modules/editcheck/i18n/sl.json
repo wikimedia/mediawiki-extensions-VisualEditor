@@ -16,12 +16,12 @@
 	"editcheck-dialog-addref-success-notify": "Hvala za dodani sklic!",
 	"editcheck-dialog-addref-title": "Dodajte sklic",
 	"editcheck-dialog-title": "Pred objavo",
-	"tag-editcheck-reference-decline-common-knowledge": "NOREF: splošno znanje",
+	"tag-editcheck-reference-decline-common-knowledge": "Preverjanje urejanja (sklici) odklonjeno (splošno znanje)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Sklic je bil odklonjen kot splošno znanje",
-	"tag-editcheck-reference-decline-irrelevant": "NOREF: nepotrebno",
+	"tag-editcheck-reference-decline-irrelevant": "Preverjanje urejanja (sklici) odklonjeno (nepotrebno)",
 	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck: Sklic je bil odklonjen kot nepotreben",
-	"tag-editcheck-reference-decline-other": "NOREF: drugo",
+	"tag-editcheck-reference-decline-other": "Preverjanje urejanja (sklici) odklonjeno (drugo)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck: Sklic je bil odklonjen iz nenavedenega razloga",
-	"tag-editcheck-reference-decline-uncertain": "NOREF: nezanesljivo",
+	"tag-editcheck-reference-decline-uncertain": "Preverjanje urejanja (sklici) odklonjeno (nezanesljivo)",
 	"tag-editcheck-reference-decline-uncertain-description": "EditCheck: Sklic je bil odklonjen kot nezanesljiv"
 }
