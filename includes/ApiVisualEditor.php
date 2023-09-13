@@ -358,7 +358,8 @@ class ApiVisualEditor extends ApiBase {
 						$user,
 						$params['editintro'],
 						null,
-						false
+						false,
+						$section
 					);
 				}
 
