@@ -123,6 +123,13 @@
 			// e.g. when viewing a "diff" of page creation (T338388)
 			return;
 		}
+		if ( !Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) ) ) {
+			// Don't offer visual diffs for non-wikitext pages.
+			// TODO: This is wrong if we're comparing revisions of two different pages, or if the content
+			// model of the page has changed between the revisions. The diff needs to give us more
+			// information about the revisions being compared… (T346252)
+			return;
+		}
 
 		$wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
 		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' )
