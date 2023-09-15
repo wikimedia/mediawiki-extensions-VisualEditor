@@ -230,7 +230,7 @@ ve.init.mw.ArticleTarget.static.buildRedirectMsg = function ( title ) {
 	ve.init.platform.linkCache.styleElement( title, $link );
 
 	// Page content header
-	// Compare: Article::getRedirectHeaderHtml()
+	// Compare: LinkRenderer::makeRedirectHeader()
 	return $( '<div>' )
 		.addClass( 'redirectMsg' )
 		// Hack: This is normally inside #mw-content-text, but we may insert it before, so we need this.
