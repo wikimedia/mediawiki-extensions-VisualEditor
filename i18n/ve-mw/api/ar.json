@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Matma Rex",
 			"Meno25",
 			"ديفيد",
@@ -15,7 +16,7 @@
 	"apierror-visualeditor-docserver": "خطأ في الاتصال بخادم Parsoid/RESTBase (بدون استجابة)",
 	"apihelp-visualeditor-param-basetimestamp": "عندما تحفظ، وتعيين هذا إلى الطابع الزمني للمراجعة التي تم تحريرها. تستخدم لكشف الصراعات تحرير.",
 	"apihelp-visualeditor-param-badetag": "إذا أرجع استعلام RESTBase ETag غير صالح على ما يبدو، فقم بتمريره هنا لأغراض التسجيل.",
-	"apihelp-visualeditor-param-cachekey": "لتسلسل أو فرق، استخدم نتيجة لتسلسل السابق لطلب مخبأ مع هذا المفتاح. يتجاوز  $1html.",
+	"apihelp-visualeditor-param-cachekey": "لتسلسل أو فرق، استخدم نتيجة لتسلسل السابق لطلب مخبأ مع هذا المفتاح. يتجاوز $1html.",
 	"apihelp-visualeditor-param-editintro": "مقدمة التعديل للإضافة للملاحظات.",
 	"apihelp-visualeditor-param-etag": "ETag للإرسال.",
 	"apihelp-visualeditor-param-format": "صيغة الخرج.",

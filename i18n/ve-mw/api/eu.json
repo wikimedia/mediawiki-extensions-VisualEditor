@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Iñaki LL",
 			"Sator"
 		]
@@ -14,7 +15,7 @@
 	"apihelp-visualeditor-param-page": "Ekintzak egin beharreko orria.",
 	"apihelp-visualeditor-param-pst": "Aurre-gordek wikitestua aldatzen du Parsoidera bidali aurretik (paction=parsefragment).",
 	"apihelp-visualeditor-param-starttimestamp": "Gordetzerakoan, data eta ordua finkatzen du orria kargatzerakoan . Hau edizio-gatazkak antzemateko erabiltzen da.",
-	"apihelp-visualeditor-param-wikitext": "Wikitestua  Parsoidera bidaltzeko eta HTML bihurtzeko (paction=parsefragment).",
+	"apihelp-visualeditor-param-wikitext": "Wikitestua Parsoidera bidaltzeko eta HTML bihurtzeko (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "HTML5 itzultzen du orri baterako Parsoid zerbitzutik.",
 	"apihelp-visualeditoredit-param-basetimestamp": "Gordetzerakoan, berrikuspenaren data eta ordua ezartzen du. Hau edizio-gatazkak antzemateko erabiltzen da.",
 	"apihelp-visualeditoredit-param-cachekey": "Erabili \"serializeforcache\" aurreko eskaera baten emaitza kode honekin. $1html gainidazten du.",
