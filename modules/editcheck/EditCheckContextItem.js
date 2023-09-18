@@ -112,19 +112,33 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 
 	windowAction.open( 'citoid' ).then( function ( instance ) {
 		return instance.closing;
-	} ).then( function ( data ) {
-		if ( !data ) {
-			// Reference was not inserted - re-open this context
-			setTimeout( function () {
-				// Deactivate again for mobile after teardown has modified selections
-				contextItem.context.getSurface().getView().deactivate();
-				contextItem.context.afterContextChange();
-			}, 500 );
+	} ).then( function ( citoidData ) {
+		var citoidOrCiteDataDeferred = ve.createDeferred();
+		if ( citoidData && citoidData.action === 'manual-choose' ) {
+			// The plain reference dialog has been launched. Wait for the data from
+			// the basic Cite closing promise instead.
+			contextItem.context.getSurface().getDialogs().once( 'closing', function ( win, closed, citeData ) {
+				citoidOrCiteDataDeferred.resolve( citeData );
+			} );
 		} else {
-			// Edit check inspector is already closed by this point, but
-			// we need to end the workflow.
-			contextItem.close( data );
+			// "Auto"/"re-use"/"close" means Citoid is finished and we can
+			// use the data form the Citoid closing promise.
+			citoidOrCiteDataDeferred.resolve( citoidData );
 		}
+		citoidOrCiteDataDeferred.promise().then( function ( data ) {
+			if ( !data ) {
+				// Reference was not inserted - re-open this context
+				setTimeout( function () {
+					// Deactivate again for mobile after teardown has modified selections
+					contextItem.context.getSurface().getView().deactivate();
+					contextItem.context.afterContextChange();
+				}, 500 );
+			} else {
+				// Edit check inspector is already closed by this point, but
+				// we need to end the workflow.
+				contextItem.close( citoidData );
+			}
+		} );
 	} );
 };
 
