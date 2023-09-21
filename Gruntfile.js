@@ -8,6 +8,7 @@
 
 module.exports = function ( grunt ) {
 	const modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
+		conf = grunt.file.readJSON( 'extension.json' ),
 		screenshotOptions = {
 			reporter: 'spec',
 			// TODO: Work out how to catch this timeout and continue.
@@ -163,11 +164,7 @@ module.exports = function ( grunt ) {
 				'!vendor/**'
 			]
 		},
-		banana: {
-			all: [
-				'i18n/{ve-mw,ve-mw/api,ve-wmf}'
-			]
-		},
+		banana: conf.MessagesDirs,
 		copy: {
 			jsduck: {
 				src: 'lib/ve/**/*',
