@@ -194,8 +194,6 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Billedbredde",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Standardbredde: $1 px",
 	"visualeditor-mwsignature-tool": "Din signatur",
-	"visualeditor-preference-core-description": "Aktiver visuel redigering. Den vil ikke være tilgængelig for diskussionssider og for nogle andre navnerum.",
-	"visualeditor-preference-core-label": "Visuel redigering",
 	"visualeditor-preference-tabs": "Redigeringstilstand:",
 	"visualeditor-preference-tabs-multi-tab": "Vis mig begge redigeringsfaneblade",
 	"visualeditor-rebase-client-export": "Eksporter",

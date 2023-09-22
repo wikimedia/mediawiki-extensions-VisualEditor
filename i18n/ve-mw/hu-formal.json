@@ -110,8 +110,6 @@
 	"visualeditor-linknodeinspector-title": "Egyszerű link",
 	"visualeditor-meta-tool": "Beállítások",
 	"visualeditor-mwgallerydialog-title": "Galéria",
-	"visualeditor-preference-core-description": "A vizuális szerkesztő engedélyezése. A vitalapokon és néhány egyéb névtérben nem elérhető.",
-	"visualeditor-preference-core-label": "Vizuális szerkesztés",
 	"visualeditor-recreate": "A lapot törölték, mióta elkezdte szerkeszteni. Kattintson a „$1” gombra az újbóli létrehozásához.",
 	"visualeditor-savedialog-identify-anon": "Szeretné az oldalt inkább egy anonim felhasználóként elmenteni? Az IP-címe látható lesz a laptörténetben.",
 	"visualeditor-savedialog-identify-user": "Bejelentkezett mint [[User:$1|$1]]. A szerkesztése ehhez a felhasználóhoz fog tartozni, ha elmenti.",

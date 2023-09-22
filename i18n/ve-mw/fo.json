@@ -80,8 +80,6 @@
 	"visualeditor-languages-tool": "Mál",
 	"visualeditor-linkinspector-illegal-title": "Ógyldugt síðunavn",
 	"visualeditor-meta-tool": "Møguleikar",
-	"visualeditor-preference-core-description": "Ger VisualEditor virknan. Hann verður ikki virkin á kjaksíðum og summum øðrum navnarúmum.",
-	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-savedialog-identify-anon": "Ynskir tú at goyma hesa síðuna sum ein dulnevndur brúkari í staðin? Tín IP adressa verður so skrásett í rættingarsøguni hjá hesi síðuni.",
 	"visualeditor-savedialog-identify-user": "Tú ert nú innritað/ur sum [[User:$1|$1]]. Tín rætting verður knýtt at hesi konto, um tú goymir hesa rætting.",
 	"visualeditor-savedialog-label-resolve-conflict": "Loys konflikt",

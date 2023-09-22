@@ -100,8 +100,6 @@
 	"visualeditor-linkinspector-illegal-title": "Tìtul ed pàgina mìa vàlid",
 	"visualeditor-meta-tool": "Siēlti",
 	"visualeditor-mwgallerydialog-title": "Galerìa",
-	"visualeditor-preference-core-description": "Ativèr VisualEditor. Al ne s'rà mìa dispunìbil ins al pàgini 'd discusiòun e ind un quèlc èter spàsi 'd nòm.",
-	"visualeditor-preference-core-label": "VisualEditor",
 	"visualeditor-savedialog-identify-anon": "Vōt salvèr cla pàgina chè cme utèint sèinsa nòm? Al tó indirés IP al srà registrê int la stòria 'd la pàgina.",
 	"visualeditor-savedialog-identify-user": "Uèter a sī entrè cùma [[User:$1|$1]]. La vòstra mudificasiòun la gnarà mìsa insèm al vòster còunt quànd a la salvarì.",
 	"visualeditor-savedialog-label-resolve-conflict": "Giustèr al cunflìt",

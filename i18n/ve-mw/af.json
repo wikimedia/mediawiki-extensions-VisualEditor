@@ -177,8 +177,6 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "Beeldwydte",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "Verstekwydte: $1 px",
 	"visualeditor-mwsignature-tool": "U handtekening",
-	"visualeditor-preference-core-description": "Aktiveer die visuele redigeerder. Dit sal nie beskikbaar wees om besprekingsbladsye en ander naamruimtes nie.",
-	"visualeditor-preference-core-label": "Visuele verwerking",
 	"visualeditor-rebase-client-export": "Voer uit",
 	"visualeditor-rebase-client-import": "Voer in",
 	"visualeditor-rebase-client-import-name": "Bladsynaam",

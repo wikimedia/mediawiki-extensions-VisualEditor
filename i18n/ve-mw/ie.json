@@ -59,8 +59,6 @@
 	"visualeditor-languages-tool": "Lingues",
 	"visualeditor-linkinspector-illegal-title": "Ínvalid titul del págine",
 	"visualeditor-meta-tool": "Optiones",
-	"visualeditor-preference-core-description": "Activar VisualEditor. It ne es attiņibil sur págines de conversation e in alquel altri nominal spacies.",
-	"visualeditor-preference-core-label": "Visual redaction",
 	"visualeditor-savedialog-identify-anon": "Esque tu vole conservar ti-ci págine quam anonym usator? Tui IP-adresse va esser conservat in li liste de versiones de ti-ci págine.",
 	"visualeditor-savedialog-identify-user": "Actualmen tu es registrat quam [[User:$1|$1]]. Si tu conserva ti redaction, it va esser associat con ti conto.",
 	"visualeditor-savedialog-label-resolve-conflict": "Soluer un conflicte",
