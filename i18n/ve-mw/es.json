@@ -332,6 +332,7 @@
 	"visualeditor-mwpredialog-convert": "Permitir la aplicación de estilos al texto",
 	"visualeditor-mwpredialog-title": "Texto sencillo preformateado",
 	"visualeditor-mwsignature-tool": "Tu firma",
+	"visualeditor-preference-visualeditor": "Habilitar el editor visual",
 	"visualeditor-preference-newwikitexteditor-enable": "Utilizar el modo de wikitexto dentro del editor visual, en lugar de un editor de wikitexto diferente",
 	"visualeditor-preference-newwikitexteditor-help": "A veces se le llama \"editor de wikitexto 2017\".",
 	"visualeditor-preference-tabs": "Modo de edición:",

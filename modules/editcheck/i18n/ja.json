@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"JNakayama-WMF"
+		]
+	},
+	"editcheck-dialog-action-no": "いいえ",
+	"editcheck-dialog-action-yes": "はい",
+	"editcheck-dialog-addref-description": "出典を追加することで、読者がこの情報の出所を理解できるようにします。",
+	"editcheck-dialog-addref-reject-question": "なぜ出典を追加しないのですか。",
+	"editcheck-dialog-addref-reject-description": "あなたが「出典を必要としない」と判断したことについて、他の編集者は「もっと知りたい」と思うことでしょう。",
+	"editcheck-dialog-addref-reject-irrelevant": "私が加えている変更と、出典とは、関係がないと思います",
+	"editcheck-dialog-addref-reject-common-knowledge": "私が付け加えている情報は、広く知られています",
+	"editcheck-dialog-addref-reject-uncertain": "どの出典をつければよいか、わかりまりません",
+	"editcheck-dialog-addref-reject-other": "その他",
+	"editcheck-dialog-addref-success-notify": "出典を追加していただき、ありがとうございます！",
+	"editcheck-dialog-addref-title": "出典を追加する",
+	"editcheck-dialog-title": "公開前"
+}
