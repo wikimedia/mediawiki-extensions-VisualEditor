@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Enye Lav"
+			"Enye Lav",
+			"Марина"
 		]
 	},
 	"visualeditor-ca-editsource": "Вежны кодировкаын",
-	"visualeditor-ca-editsource-section": "Вежны кодировкаын"
+	"visualeditor-ca-editsource-section": "Вежны кодировкаын",
+	"visualeditor-descriptionpagelink": "Project:Визуал редактор"
 }

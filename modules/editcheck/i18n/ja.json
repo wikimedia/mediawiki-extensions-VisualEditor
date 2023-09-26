@@ -15,5 +15,13 @@
 	"editcheck-dialog-addref-reject-other": "その他",
 	"editcheck-dialog-addref-success-notify": "出典を追加していただき、ありがとうございます！",
 	"editcheck-dialog-addref-title": "出典を追加する",
-	"editcheck-dialog-title": "公開前"
+	"editcheck-dialog-title": "公開前",
+	"tag-editcheck-reference-decline-common-knowledge": "編集チェック（出典）を拒否（一般的な知識）",
+	"tag-editcheck-reference-decline-common-knowledge-description": "編集チェックによる出典は、一般知識であるため、拒否されました",
+	"tag-editcheck-reference-decline-irrelevant": "編集チェック(出典) を拒否 (不適切)",
+	"tag-editcheck-reference-decline-irrelevant-description": "編集チェックによる出典は、不適切なため、拒否されました",
+	"tag-editcheck-reference-decline-other": "編集チェック（出典）を拒否（その他）",
+	"tag-editcheck-reference-decline-other-description": "編集チェックによる出典は、記載されていない理由により、拒否されました",
+	"tag-editcheck-reference-decline-uncertain": "編集チェック(出典) を拒否 (不明確)",
+	"tag-editcheck-reference-decline-uncertain-description": "編集チェックによる出典は、不明確なため、拒否されました"
 }
