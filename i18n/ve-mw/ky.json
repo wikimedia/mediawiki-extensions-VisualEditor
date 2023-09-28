@@ -64,9 +64,11 @@
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Жашыруун категория",
 	"visualeditor-dialog-meta-settings-index-disable": "Жок",
 	"visualeditor-dialog-meta-settings-index-force": "Ооба",
+	"visualeditor-dialog-meta-settings-label": "Барактын параметрлери",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Жок",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ооба",
 	"visualeditor-dialog-meta-settings-redirect-label": "Бул баракчты төмөнкү баракка багыттоо:",
+	"visualeditor-dialog-meta-settings-section": "Барактын параметрлери",
 	"visualeditor-dialog-meta-settings-toc-default": "Керек болсо",
 	"visualeditor-dialog-meta-settings-toc-disable": "Эч качан",
 	"visualeditor-dialog-meta-settings-toc-force": "Дайыма",
@@ -135,6 +137,7 @@
 	"visualeditor-savedialog-label-publish-short-start": "Жарыялоо…",
 	"visualeditor-savedialog-label-save-short": "Сактоо",
 	"visualeditor-savedialog-label-save-short-start": "Сактоо…",
+	"visualeditor-savedialog-review-nosummary": "Түзөтүүнүн түшүндүрмөсү жок",
 	"visualeditor-savedialog-review-visual": "Визуалдык",
 	"visualeditor-savedialog-review-wikitext": "Викитекст",
 	"visualeditor-savedialog-title-review": "Өзгөртүүлөрүңүздү карап чыгыңыз",
@@ -142,6 +145,8 @@
 	"visualeditor-section-body-placeholder": "Жаңы бөлүм",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-settings-tool": "Барактын параметрлери",
+	"visualeditor-special-characters-group-other": "Көп колдонулуучу",
 	"visualeditor-templatesused-tool": "Колдонуудагы калыптар",
-	"visualeditor-version-label": "Нуска"
+	"visualeditor-version-label": "Нуска",
+	"visualeditor-wikitextconvert-convert": "Викитекстке айландыруу"
 }
