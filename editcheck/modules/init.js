@@ -21,6 +21,41 @@ mw.editcheck.accountShouldSeeEditCheck = function ( config ) {
 	return true;
 };
 
+mw.editcheck.shouldApplyToSection = function ( documentModel, selection, config ) {
+	var ignoreSections = config.ignoreSections || [];
+	if ( ignoreSections.length === 0 && !config.ignoreLeadSection ) {
+		// Nothing is forbidden, so everything is permitted
+		return true;
+	}
+	var isHeading = function ( nodeType ) {
+		return nodeType === 'mwHeading';
+	};
+	// Note: we set a limit of 1 here because otherwise this will turn around
+	// to keep looking when it hits the document boundary:
+	var heading = documentModel.getNearestNodeMatching( isHeading, selection.getRange().start, -1, 1 );
+	if ( !heading ) {
+		// There's no preceding heading, so work out if we count as being in a
+		// lead section. It's only a lead section if there's more headings
+		// later in the document, otherwise it's just a stub article.
+		return !(
+			config.ignoreLeadSection &&
+			!!documentModel.getNearestNodeMatching( isHeading, selection.getRange().start, 1 )
+		);
+	}
+	if ( ignoreSections.length === 0 ) {
+		// There's nothing left to deny
+		return true;
+	}
+	var compare = new Intl.Collator( documentModel.getLang(), { sensitivity: 'accent' } ).compare;
+	var headingText = documentModel.data.getText( false, heading.getRange() );
+	for ( var i = ignoreSections.length - 1; i >= 0; i-- ) {
+		if ( compare( headingText, ignoreSections[ i ] ) === 0 ) {
+			return false;
+		}
+	}
+	return true;
+};
+
 /**
  * Find added content in the document model that might need a reference
  *
@@ -92,6 +127,8 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 
 	return addedTextRanges.map( function ( range ) {
 		return new ve.dm.LinearSelection( range );
+	} ).filter( function ( selection ) {
+		return mw.editcheck.shouldApplyToSection( documentModel, selection, mw.editcheck.config.addReference );
 	} );
 };
 
