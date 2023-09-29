@@ -987,6 +987,19 @@
 						init.onEditTabClick( isOnlyTabVE() ? 'visual' : 'source', e );
 					} );
 				}
+
+				if ( !mw.user.isAnon() && pageCanLoadEditor && init.isVisualAvailable() ) {
+					$( '#catlinks' ).prepend(
+						$( '<span>' )
+							.addClass( 've-init-mw-desktopArticleTarget-categoryEdit mw-editsection-like' )
+							.on( 'click', init.onCategoryEditLinkClick )
+							.append(
+								$( '<span>' ).addClass( 'mw-editsection-bracket' ).text( '[' ),
+								$( '<a>' ).text( mw.msg( 'editsection' ) ),
+								$( '<span>' ).addClass( 'mw-editsection-bracket' ).text( ']' )
+							)
+					);
+				}
 			}
 		},
 
@@ -1210,6 +1223,39 @@
 				const tPromise = getTarget( mode, section );
 				activateTarget( mode, section, tPromise );
 			}
+		},
+
+		onCategoryEditLinkClick: function ( e ) {
+			if ( !init.isUnmodifiedLeftClick( e ) ) {
+				return;
+			}
+			e.preventDefault();
+			if ( isLoading ) {
+				return;
+			}
+			// should perhaps have a new 'type' for 'categories' added?
+			trackActivateStart( { type: 'page', mechanism: 'click', mode: 'visual' } );
+			if ( currentUrl.searchParams.get( 'action' ) !== 'edit' && !( currentUrl.searchParams.get( 'veaction' ) in veactionToMode ) ) {
+				if ( history.pushState ) {
+					// Replace the current state with one that is tagged as ours, to prevent the
+					// back button from breaking when used to exit VE. FIXME: there should be a better
+					// way to do this. See also similar code in the DesktopArticleTarget constructor.
+					history.replaceState( { tag: 'visualeditor' }, document.title, currentUrl );
+					// Set veaction to edit
+					history.pushState( { tag: 'visualeditor' }, document.title, veEditUrl );
+				}
+
+				// Update mw.Uri instance
+				currentUrl = veEditUrl;
+			}
+			init.disableWelcomeDialog();
+			activateTarget( 'visual', null, getTarget( 'visual', null ).then( ( target ) => {
+				target.once( 'surfaceReady', () => {
+					const windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+					windowAction.open( 'meta', { page: 'categories' } );
+				} );
+				return target;
+			} ) );
 		},
 
 		/**
