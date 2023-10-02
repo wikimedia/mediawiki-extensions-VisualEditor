@@ -44,6 +44,7 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Правіць крыніцу лакальнага апісання",
 	"visualeditor-ca-editsource": "Правіць зыходнік",
 	"visualeditor-ca-editsource-section": "правіць зыходнік",
+	"visualeditor-ca-editsource-section-hint": "Правіць зыходнік раздзела: $1",
 	"visualeditor-categories-tool": "Катэгорыі",
 	"visualeditor-changedesc-mwlanguagevariant": "Змененая разметка варыянту мовы",
 	"visualeditor-changedesc-mwredirect": "Мэта перасылкі зменена з $1 на $2",

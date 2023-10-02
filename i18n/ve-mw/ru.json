@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"A.sav",
 			"Agilight",
 			"Alexandr Efremov",
 			"Amire80",
+			"Artsiom91",
 			"DR",
 			"Diralik",
 			"Eroha",
@@ -86,7 +88,10 @@
 	"visualeditor-ca-editlocaldescriptionsource": "Редактировать источник локального описания",
 	"visualeditor-ca-editsource": "Править код",
 	"visualeditor-ca-editsource-section": "править код",
+	"visualeditor-ca-editsource-section-hint": "Редактировать код раздела «$1»",
 	"visualeditor-categories-tool": "Категории",
+	"visualeditor-changedesc-mwcategory-sortkey-changed": "Ключ сортировки изменён с $1 на $2",
+	"visualeditor-changedesc-mwcategory-sortkey-set": "Для ключа сортировки установлено значение $1",
 	"visualeditor-changedesc-mwlanguagevariant": "Изменена разметка языкового варианта",
 	"visualeditor-changedesc-mwredirect": "Цель перенаправления изменена с $1 на $2",
 	"visualeditor-changedesc-mwtransclusion": "Параметры шаблона изменены",
