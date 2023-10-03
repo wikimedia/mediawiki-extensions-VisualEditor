@@ -5,23 +5,6 @@ mw.editcheck = {};
 
 mw.editcheck.config = require( './config.json' );
 
-var compares = function ( matcher, number ) {
-	// config is an array of [ comparison, value ]
-	try {
-		switch ( matcher[ 0 ] ) {
-			case '<': return number < matcher[ 1 ];
-			case '<=': return number <= matcher[ 1 ];
-			case '>': return number > matcher[ 1 ];
-			case '>=': return number >= matcher[ 1 ];
-			case '==': return number === matcher[ 1 ];
-			case '!=': return number !== matcher[ 1 ];
-			default: return false;
-		}
-	} catch ( err ) {
-		// In case something uncomparable was given as the number
-		return false;
-	}
-};
 mw.editcheck.accountShouldSeeEditCheck = function ( config ) {
 	// account status:
 	// loggedin, loggedout, or any-other-value meaning 'both'
@@ -32,7 +15,7 @@ mw.editcheck.accountShouldSeeEditCheck = function ( config ) {
 	if ( config.account === 'loggedin' && !mw.user.isNamed() ) {
 		return false;
 	}
-	if ( config.experience && !compares( config.experience, mw.config.get( 'wgUserEditCount', 0 ) ) ) {
+	if ( config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > config.maximumEditcount ) {
 		return false;
 	}
 	return true;
