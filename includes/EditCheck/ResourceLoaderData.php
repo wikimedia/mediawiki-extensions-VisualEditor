@@ -19,8 +19,7 @@ class ResourceLoaderData {
 			// TODO: when we have multiple edit checks this will likely be a generic block:
 			// account: loggedin, loggedout, anything non-truthy means allow either
 			'account' => false,
-			// experience: [ comparison, number ], compared to wgUserEditCount
-			'experience' => [ '<', 100 ],
+			'maximumEditcount' => 100
 		],
 	];
 
