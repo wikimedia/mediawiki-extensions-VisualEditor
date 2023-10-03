@@ -46,15 +46,9 @@
 		$visualDiffContainer.toggleClass( 'oo-ui-element-hidden', !isVisual );
 		$wikitextDiffBody.toggleClass( 'oo-ui-element-hidden', isVisual );
 
+		// If inline switch exists
 		if ( typeof diffTypeSwitch !== 'undefined' ) {
 			diffTypeSwitch.setDisabled( isVisual );
-			if ( !isVisual ) {
-				if ( diffTypeSwitch.getValue() ) {
-					$wikitextDiffBody.closest( 'tr:not(.inline-diff-row)' ).addClass( 'oo-ui-element-hidden' );
-				} else {
-					$wikitextDiffBody.closest( 'tr.inline-diff-row' ).addClass( 'oo-ui-element-hidden' );
-				}
-			}
 		}
 
 		var $revSlider = $( '.mw-revslider-container' );
