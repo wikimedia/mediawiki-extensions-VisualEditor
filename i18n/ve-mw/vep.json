@@ -2,13 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Sebranik",
-			"Игорь Бродский"
+			"Игорь Бродский",
+			"Лариса Чиркова"
 		]
 	},
 	"tooltip-ca-ve-edit": "Sab redaktiruida necidä lehtpol't.",
-	"visualeditor-ca-createsource": "Säta purde",
-	"visualeditor-ca-editsource": "Redaktiruida purde",
-	"visualeditor-ca-editsource-section": "redaktiruida purde",
+	"visualeditor-ca-createlocaldescriptionsource": "Ližada pen' kijutusen lähte",
+	"visualeditor-ca-createsource": "Tege lähte",
+	"visualeditor-ca-editsource": "Toimita lähtke",
+	"visualeditor-ca-editsource-section": "toimitada lähtke",
 	"visualeditor-descriptionpagelink": "Project:Vizualine redaktor",
 	"visualeditor-dialog-meta-languages-label": "Keled",
 	"visualeditor-dialog-meta-languages-section": "Keled",

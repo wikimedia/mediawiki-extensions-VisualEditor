@@ -40,7 +40,8 @@
 			"列维劳德",
 			"和平奮鬥救地球",
 			"烈羽",
-			"捍粵者"
+			"捍粵者",
+			"SunAfterRain"
 		]
 	},
 	"collabpad-doctitle": "CollabPad：$1",
@@ -344,8 +345,8 @@
 	"visualeditor-savedialog-identify-trylogin": "您已登出，請在其他頁籤登入後再試一次。",
 	"visualeditor-savedialog-identify-user": "您目前以 [[User:$1|$1]] 的身份登入。 若您儲存本次的編輯，修訂歷史記錄將會記錄此帳號。",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以點選 $1 來儲存您的編輯。",
-	"visualeditor-savedialog-label-publish-short": "發佈",
-	"visualeditor-savedialog-label-publish-short-start": "發佈",
+	"visualeditor-savedialog-label-publish-short": "發布",
+	"visualeditor-savedialog-label-publish-short-start": "發布",
 	"visualeditor-savedialog-label-resolve-conflict": "解決衝突",
 	"visualeditor-savedialog-label-resume-editing": "繼續編輯",
 	"visualeditor-savedialog-label-review": "複核您的變更",
