@@ -607,6 +607,14 @@ class Hooks implements
 		$newViews = [];
 		$wikiPageFactory = $services->getWikiPageFactory();
 		$isRemote = !$wikiPageFactory->newFromTitle( $title )->isLocal();
+
+		$skinHasEditIcons = in_array(
+			$skin->getSkinName(),
+			ExtensionRegistry::getInstance()->getAttribute(
+				'VisualEditorIconSkins'
+			)
+		);
+
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
 				// Build the VisualEditor tab
@@ -639,6 +647,7 @@ class Hooks implements
 					'text' => $veTabText,
 					'single-id' => $veTooltip,
 					'primary' => true,
+					'icon' => $skinHasEditIcons ? 'edit' : null,
 					'class' => '',
 				];
 
@@ -690,6 +699,8 @@ class Hooks implements
 						$userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab'
 					)
 				) {
+					// Change icon
+					$editTab['icon'] = $skinHasEditIcons ? 'wikiText' : null;
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
 						// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
