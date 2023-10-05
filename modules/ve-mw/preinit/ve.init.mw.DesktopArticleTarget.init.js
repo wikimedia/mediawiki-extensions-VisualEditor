@@ -894,104 +894,13 @@
 		},
 
 		setupMultiTabs: function () {
-			var action = pageExists ? 'edit' : 'create',
+			var
 				isMinerva = mw.config.get( 'skin' ) === 'minerva',
-				pTabsId = isMinerva ? 'page-actions' :
-					$( '#p-views' ).length ? 'p-views' : 'p-cactions',
 				// Minerva puts the '#ca-...' ids on <a> nodes
-				$caSource = $( '#ca-viewsource' ),
 				$caEdit = $( '#ca-edit, li#page-actions-edit' ),
-				$caVeEdit = $( '#ca-ve-edit' ),
-				$caEditLink = $caEdit.find( 'a' ),
-				$caVeEditLink = $caVeEdit.find( 'a' ),
-				caVeEditNextnode =
-					( conf.tabPosition === 'before' ) ?
-						$caEdit.get( 0 ) :
-						$caEdit.next().get( 0 ),
-				isRemote = $( '#ca-view-foreign' ).length;
+				$caVeEdit = $( '#ca-ve-edit' );
 
-			if ( !$caVeEdit.length ) {
-				// The below duplicates the functionality of VisualEditorHooks::onSkinTemplateNavigation()
-				// in case we're running on a cached page that doesn't have these tabs yet.
-
-				// Alter the edit tab (#ca-edit)
-				if ( isRemote ) {
-					if ( tabMessages[ action + 'localdescriptionsource' ] ) {
-						// The following messages can be used here:
-						// * visualeditor-ca-editlocaldescriptionsource
-						// * visualeditor-ca-createlocaldescriptionsource
-						$caEditLink.text( mw.msg( tabMessages[ action + 'localdescriptionsource' ] ) );
-					}
-				} else {
-					if ( tabMessages[ action + 'source' ] ) {
-						// The following messages can be used here:
-						// * visualeditor-ca-editsource
-						// * visualeditor-ca-createsource
-						$caEditLink.text( mw.msg( tabMessages[ action + 'source' ] ) );
-					}
-				}
-				// The following messages can be used here:
-				// * tooltip-ca-editsource
-				// * tooltip-ca-createsource
-				// * tooltip-ca-editsource-local
-				// * tooltip-ca-createsource-local
-				$caEditLink.attr( 'title', mw.msg( 'tooltip-ca-' + action + 'source' + ( isRemote ? '-local' : '' ) ) );
-				$caEditLink.updateTooltipAccessKeys();
-
-				// If there is no edit tab or a view-source tab,
-				// the user doesn't have permission to edit.
-				if ( $caEdit.length && !$caSource.length ) {
-					// Add the VisualEditor tab (#ca-ve-edit)
-					var caVeEdit = mw.util.addPortletLink(
-						pTabsId,
-						// Use url instead of '#'.
-						// So that 1) one can always open it in a new tab, even when
-						// onEditTabClick is bound.
-						// 2) when onEditTabClick is not bound (!pageCanLoadEditor) it will
-						// just work.
-						veEditUrl,
-						getTabMessage( action + ( isRemote ? '-local' : '' ) ),
-						'ca-ve-edit',
-						// The following messages can be used here:
-						// * tooltip-ca-ve-edit
-						// * tooltip-ca-ve-create
-						// * tooltip-ca-ve-edit-local
-						// * tooltip-ca-ve-create-local
-						mw.msg( 'tooltip-ca-ve-' + action + ( isRemote ? '-local' : '' ) ),
-						mw.msg( 'accesskey-ca-ve-edit' ),
-						caVeEditNextnode
-					);
-
-					$caVeEdit = $( caVeEdit );
-					if ( isMinerva ) {
-						$caVeEdit.find( '.mw-ui-icon' ).addClass( 'mw-ui-icon-wikimedia-edit-base20' );
-					}
-				}
-			} else if ( $caEdit.length && $caVeEdit.length ) {
-				// Make the state of the page consistent with the config if needed
-				if ( conf.tabPosition === 'before' ) {
-					if ( $caEdit.next()[ 0 ] === $caVeEdit[ 0 ] ) {
-						$caVeEdit.after( $caEdit );
-					}
-				} else {
-					if ( $caVeEdit.next()[ 0 ] === $caEdit[ 0 ] ) {
-						$caEdit.after( $caVeEdit );
-					}
-				}
-				$caVeEditLink.text( getTabMessage( action + ( isRemote ? '-local' : '' ) ) );
-				// The following messages can be used here:
-				// * tooltip-ca-ve-edit
-				// * tooltip-ca-ve-create
-				// * tooltip-ca-ve-edit-local
-				// * tooltip-ca-ve-create-local
-				$caVeEditLink.attr( 'title', mw.msg( 'tooltip-ca-ve-' + action + ( isRemote ? '-local' : '' ) ) );
-				$caVeEditLink.updateTooltipAccessKeys();
-			}
-
-			// If the edit tab is hidden, remove it.
-			if ( !( init.isVisualAvailable ) ) {
-				$caVeEdit.remove();
-			} else if ( pageCanLoadEditor ) {
+			if ( pageCanLoadEditor ) {
 				// Allow instant switching to edit mode, without refresh
 				$caVeEdit.off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'visual' ) );
 			}
@@ -1040,64 +949,6 @@
 			}
 
 			var isMinerva = mw.config.get( 'skin' ) === 'minerva';
-
-			// The "visibility" css construct ensures we always occupy the same space in the layout.
-			// This prevents the heading from changing its wrap when the user toggles editSourceLink.
-			if ( $editsections.find( '.mw-editsection-visualeditor' ).length === 0 ) {
-				// If PHP didn't build the section edit links (because of caching), build them
-				$editsections.each( function () {
-					var $editsection = $( this ),
-						$editSourceLink = $editsection.find( 'a' ).eq( 0 ),
-						$editLink = $editSourceLink.clone(),
-						sectionTitle = $editsection.siblings( '.mw-headline' ).text(),
-						$divider = $( '<span>' ),
-						dividerText = mw.msg( 'pipe-separator' );
-
-					// The following messages can be used here:
-					// * visualeditor-ca-editsource-section
-					// * config value of tabMessages.editsectionsource
-					$editSourceLink.text( mw.msg( tabMessages.editsectionsource ) );
-					// The following messages can be used here:
-					// * visualeditor-ca-editsource-section-hint
-					// * config value of tabMessages.editsectionsourcehint
-					$editSourceLink.attr( 'title', mw.msg( tabMessages.editsectionsourcehint, sectionTitle ) );
-					// The following messages can be used here:
-					// * editsection
-					// * config value of tabMessages.editsection
-					$editLink.text( mw.msg( tabMessages.editsection ) );
-					// The following messages can be used here:
-					// * editsectionhint
-					// * config value of tabMessages.editsectionhint
-					$editLink.attr( 'title', mw.msg( tabMessages.editsectionhint, sectionTitle ) );
-
-					$divider
-						.addClass( 'mw-editsection-divider' )
-						.text( dividerText );
-					// Don't mess with section edit links on foreign file description pages (T56259)
-					if ( !$( '#ca-view-foreign' ).length ) {
-						$editLink
-							.attr( 'href', function ( i, href ) {
-								var veUrl = new URL( veEditUrl );
-								var section = new URL( href, location.href ).searchParams.get( 'section' );
-								veUrl.searchParams.set( 'section', section );
-								return veUrl.toString();
-							} )
-							.addClass( 'mw-editsection-visualeditor' );
-
-						if ( conf.tabPosition === 'before' ) {
-							$editSourceLink.before( $editLink, $divider );
-							if ( isMinerva ) {
-								$editLink.removeClass( 'mw-ui-icon-flush-right' );
-							}
-						} else {
-							$editSourceLink.after( $divider, $editLink );
-							if ( isMinerva ) {
-								$editSourceLink.removeClass( 'mw-ui-icon-flush-right' );
-							}
-						}
-					}
-				} );
-			}
 
 			if ( isMinerva ) {
 				// Minerva hides the link text - display tiny icons instead

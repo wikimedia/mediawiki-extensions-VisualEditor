@@ -350,17 +350,7 @@
 				"ext.visualEditor.tempWikitextEditorWidget"
 			],
 			"messages": [
-				"accesskey-ca-editsource",
-				"accesskey-ca-ve-edit",
-				"pipe-separator",
-				"tooltip-ca-ve-edit",
-				"tooltip-ca-ve-create",
-				"tooltip-ca-ve-edit-local",
-				"tooltip-ca-ve-create-local",
-				"tooltip-ca-editsource",
-				"tooltip-ca-createsource",
-				"tooltip-ca-editsource-local",
-				"tooltip-ca-createsource-local"
+				"accesskey-ca-ve-edit"
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
