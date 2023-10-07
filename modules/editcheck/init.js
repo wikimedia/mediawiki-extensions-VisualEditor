@@ -292,7 +292,9 @@ if (
 		}
 	} );
 	mw.hook( 've.deactivationComplete' ).add( function () {
-		saveProcessDeferred.reject();
+		if ( saveProcessDeferred ) {
+			saveProcessDeferred.reject();
+		}
 	} );
 }
 
