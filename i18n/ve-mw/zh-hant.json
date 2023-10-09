@@ -40,7 +40,8 @@
 			"DinoWP",
 			"Diskdance",
 			"LuciferianThomas",
-			"捍粵者"
+			"捍粵者",
+			"SunAfterRain"
 		]
 	},
 	"collabpad-doctitle": "CollabPad：$1",
@@ -387,8 +388,8 @@
 	"visualeditor-savedialog-keyboard-shortcut-submit": "您可以點選 $1 來儲存您的編輯。",
 	"visualeditor-savedialog-label-create": "建立頁面",
 	"visualeditor-savedialog-label-error": "錯誤",
-	"visualeditor-savedialog-label-publish-short": "發佈",
-	"visualeditor-savedialog-label-publish-short-start": "發佈",
+	"visualeditor-savedialog-label-publish-short": "發布",
+	"visualeditor-savedialog-label-publish-short-start": "發布",
 	"visualeditor-savedialog-label-report": "回報問題",
 	"visualeditor-savedialog-label-resolve-conflict": "解決衝突",
 	"visualeditor-savedialog-label-resume-editing": "繼續編輯",
