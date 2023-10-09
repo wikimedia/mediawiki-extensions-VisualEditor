@@ -542,6 +542,14 @@ class Hooks implements
 
 		self::onSkinTemplateNavigationSpecialPage( $skin, $links );
 
+		if (
+			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			$services->getService( 'MobileFrontend.Context' )
+				->shouldDisplayMobileView()
+		) {
+			return;
+		}
+
 		// Exit if there's no edit link for whatever reason (e.g. protected page)
 		if ( !isset( $links['views']['edit'] ) ) {
 			return;
