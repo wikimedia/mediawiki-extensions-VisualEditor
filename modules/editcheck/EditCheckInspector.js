@@ -81,7 +81,7 @@ ve.ui.EditCheckInspector.prototype.initialize = function () {
 	this.answerConfirm = new OO.ui.ButtonWidget( {
 		flags: [ 'progressive' ],
 		framed: false,
-		label: 'Continue',
+		label: ve.msg( 'ooui-dialog-process-continue' ),
 		disabled: true
 	} );
 	this.answerConfirm.toggle( !OO.ui.isMobile() );
