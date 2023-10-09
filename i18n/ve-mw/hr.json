@@ -200,6 +200,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Svejedno nastavi",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|Nedostaje traženo polje|Nedostaju tražena polja}}",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "Jeste li sigurni da želite nastaviti bez ispunjavanja $1 {{PLURAL:$2|polje|polja}}?",
+	"visualeditor-dialog-transclusion-see-template": "Predloške stvaraju suradnici i moguće je da im nedostaju potpuni opisi. Dodatne informacije možda postoje na ovoj [[$2|stranici predloška]].",
 	"visualeditor-dialog-transclusion-title-insert-template": "Umetni predložak",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Umetni: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Uredi: $1",
