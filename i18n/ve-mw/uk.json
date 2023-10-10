@@ -52,7 +52,7 @@
 	"visualeditor-backbutton-tooltip": "Повернутися",
 	"visualeditor-beta-warning": "Якщо у Вас виникнуть будь-які технічні проблеми під час редагування, будь ласка, повідомте про них нижче.",
 	"visualeditor-browserwarning": "Ви використовуєте браузер, який не підтримується цим редактором офіційно.",
-	"visualeditor-ca-createlocaldescriptionsource": "Додати джерело локального опису",
+	"visualeditor-ca-createlocaldescriptionsource": "Створити локально як код",
 	"visualeditor-ca-createsource": "Створити код",
 	"visualeditor-ca-editlocaldescriptionsource": "Редагувати джерело локального опису",
 	"visualeditor-ca-editsource": "Редагувати код",
