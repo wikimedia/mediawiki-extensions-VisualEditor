@@ -351,7 +351,14 @@
 				tabMsgKey = 'skin-view-' + key;
 			}
 		}
-		return mw.msg( tabMsgKey );
+		// eslint-disable-next-line mediawiki/msg-doc
+		var msg = mw.message( tabMsgKey );
+		if ( !msg.isParseable() ) {
+			mw.log.warn( 'VisualEditor: MediaWiki:' + tabMsgKey + ' contains unsupported syntax. ' +
+				'https://www.mediawiki.org/wiki/Manual:Messages_API#Feature_support_in_JavaScript' );
+			return undefined;
+		}
+		return msg.text();
 	}
 
 	/**
