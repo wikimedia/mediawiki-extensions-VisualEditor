@@ -544,8 +544,7 @@ class Hooks implements
 
 		if (
 			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
-			$services->getService( 'MobileFrontend.Context' )
-				->shouldDisplayMobileView()
+			$services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView()
 		) {
 			return;
 		}
@@ -618,9 +617,7 @@ class Hooks implements
 
 		$skinHasEditIcons = in_array(
 			$skin->getSkinName(),
-			ExtensionRegistry::getInstance()->getAttribute(
-				'VisualEditorIconSkins'
-			)
+			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorIconSkins' )
 		);
 
 		foreach ( $links['views'] as $action => $data ) {
@@ -828,6 +825,13 @@ class Hooks implements
 			return;
 		}
 
+		if (
+			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			$services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView()
+		) {
+			return;
+		}
+
 		$user = $skin->getUser();
 		// Exit if the user doesn't have VE enabled
 		if (
@@ -876,6 +880,11 @@ class Hooks implements
 			return;
 		}
 
+		$skinHasEditIcons = in_array(
+			$skin->getSkinName(),
+			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorIconSkins' )
+		);
+
 		// add VE edit section in VE available namespaces
 		if ( self::isVisualAvailable( $title, $skin->getRequest(), $user ) ) {
 			// The following messages can be used here:
@@ -892,11 +901,14 @@ class Hooks implements
 
 			$veLink = [
 				'text' => $skin->msg( $veEditSection )->inLanguage( $lang )->text(),
+				'icon' => $skinHasEditIcons ? 'edit' : null,
 				'targetTitle' => $title,
 				'attribs' => $attribs,
 				'query' => [ 'veaction' => 'edit', 'section' => $section ],
 				'options' => [ 'noclasses', 'known' ]
 			];
+			// Change icon
+			$result['editsection']['icon'] = $skinHasEditIcons ? 'wikiText' : null;
 
 			$result['veeditsection'] = $veLink;
 			if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
