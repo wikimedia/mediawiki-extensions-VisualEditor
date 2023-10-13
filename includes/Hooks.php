@@ -992,6 +992,8 @@ class Hooks implements
 		// This is saved even when VE is off by default, which allows changing it to be on by default
 		// without affecting the users who opted out. There's also a maintenance script to silently
 		// opt-out existing users en masse before changing the default, thus only affecting new users.
+		// (This option is no longer set to 'true' anywhere, but we can still encounter old true
+		// values until they are migrated: T344760.)
 		$preferences['visualeditor-autodisable'] = $api;
 		// The diff mode is persisted for each editor mode separately,
 		// e.g. use visual diffs for visual mode only.
@@ -1039,14 +1041,6 @@ class Hooks implements
 				!$userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' ) )
 		) {
 			$userOptionsManager->setOption( $user, 'visualeditor-autodisable', false );
-		} elseif (
-			// When the user disables VE (and we're in beta, but about to go opt-out), set the preference.
-			$veConfig->get( 'VisualEditorTransitionDefault' ) &&
-			$isBeta &&
-			!$userOptionsManager->getOption( $user, 'visualeditor-enable' ) &&
-			!$userOptionsManager->getOption( $user, 'visualeditor-autodisable' )
-		) {
-			$userOptionsManager->setOption( $user, 'visualeditor-autodisable', true );
 		}
 	}
 

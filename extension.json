@@ -143,9 +143,6 @@
 		"VisualEditorTabPosition": {
 			"value": "before"
 		},
-		"VisualEditorTransitionDefault": {
-			"value": false
-		},
 		"VisualEditorUseChangeTagging": {
 			"value": true,
 			"description": "Tag edits as having used visualeditor, or VE's wikitext mode."
