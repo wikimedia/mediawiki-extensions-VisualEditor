@@ -959,11 +959,11 @@ class Hooks implements
 				'type' => 'select',
 				'label-message' => 'visualeditor-preference-tabs',
 				'section' => 'editing/editor',
-				'options' => [
-					wfMessage( 'visualeditor-preference-tabs-remember-last' )->escaped() => 'remember-last',
-					wfMessage( 'visualeditor-preference-tabs-prefer-ve' )->escaped() => 'prefer-ve',
-					wfMessage( 'visualeditor-preference-tabs-prefer-wt' )->escaped() => 'prefer-wt',
-					wfMessage( 'visualeditor-preference-tabs-multi-tab' )->escaped() => 'multi-tab'
+				'options-messages' => [
+					'visualeditor-preference-tabs-remember-last' => 'remember-last',
+					'visualeditor-preference-tabs-prefer-ve' => 'prefer-ve',
+					'visualeditor-preference-tabs-prefer-wt' => 'prefer-wt',
+					'visualeditor-preference-tabs-multi-tab' => 'multi-tab'
 				]
 			];
 		}
