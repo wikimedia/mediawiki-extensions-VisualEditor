@@ -324,17 +324,30 @@
 		mw.libs.ve.activationStart = ve.now();
 	}
 
-	function getTabMessage( key ) {
-		var tabMsgKey = tabMessages[ key ];
-		if ( !tabMsgKey && ( key === 'edit' || key === 'create' || key === 'edit-local' || key === 'create-local' ) ) {
-			// Some skins don't use the default 'edit' and 'create' message keys.
-			// e.g. vector-view-edit, vector-view-create
-			tabMsgKey = mw.config.get( 'skin' ) + '-view-' + key;
+	function getTabMessage( tabMsg ) {
+		var tabMsgKey = tabMessages[ tabMsg ];
+		var skinMsgKeys = {
+			edit: 'edit',
+			create: 'create',
+			editlocaldescription: 'edit-local',
+			createlocaldescription: 'create-local'
+		};
+		var key = skinMsgKeys[ tabMsg ];
+		if ( !tabMsgKey && key ) {
+			// Some skins don't use the default skin message keys.
 			// The following messages can be used here:
 			// * vector-view-edit
 			// * vector-view-create
+			// * vector-view-edit-local
+			// * vector-view-create-local
 			// * messages for other skins
+			tabMsgKey = mw.config.get( 'skin' ) + '-view-' + key;
 			if ( !mw.message( tabMsgKey ).exists() ) {
+				// The following messages can be used here:
+				// * skin-view-edit
+				// * skin-view-create
+				// * skin-view-edit-local
+				// * skin-view-create-local
 				tabMsgKey = 'skin-view-' + key;
 			}
 		}
