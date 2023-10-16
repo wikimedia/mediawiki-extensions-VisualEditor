@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Баир Балданов"
+			"Баир Балданов",
+			"Туяна Балданова"
 		]
 	},
-	"visualeditor-ca-editsource-section": "код заһаха"
+	"visualeditor-ca-createlocaldescriptionsource": "Код шэнгеэр тогтомол хизаартайгаар зохеохо",
+	"visualeditor-ca-createsource": "Код зохеохо",
+	"visualeditor-ca-editsource": "Код заһаха",
+	"visualeditor-ca-editsource-section": "код заһаха",
+	"visualeditor-descriptionpagelink": "Project:Нюдөөрөө хаража заһадаг эрхилэгшэ"
 }
