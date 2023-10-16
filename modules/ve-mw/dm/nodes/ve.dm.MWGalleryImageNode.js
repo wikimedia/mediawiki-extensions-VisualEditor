@@ -87,10 +87,28 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		}
 	}
 
+	// For video thumbnails, the `alt` attribute is only in the data-mw of the container (see: T348703)
+	var mwDataJSON = container.getAttribute( 'data-mw' );
+	var mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
+	var mwAttribs = mwData.attribs || [];
+	var containerAlt;
+	for ( var i = mwAttribs.length - 1; i >= 0; i-- ) {
+		if ( mwAttribs[ i ][ 0 ] === 'alt' && mwAttribs[ i ][ 1 ].txt ) {
+			containerAlt = mwAttribs[ i ][ 1 ].txt;
+			break;
+		}
+	}
+
+	var altPresent = img.hasAttribute( 'alt' ) || containerAlt !== undefined;
+	var altText = null;
+	if ( altPresent ) {
+		altText = img.hasAttribute( 'alt' ) ? img.getAttribute( 'alt' ) : containerAlt;
+	}
+
 	var altFromCaption = captionNode ?
 		ve.dm.MWGalleryImageNode.static.textContentFromCaption( captionNode ).trim() : '';
-	var altTextSame = img.hasAttribute( 'alt' ) && altFromCaption &&
-		( img.getAttribute( 'alt' ).trim() === altFromCaption );
+	var altTextSame = altPresent && altFromCaption &&
+		( altText.trim() === altFromCaption );
 
 	var caption;
 	if ( captionNode ) {
@@ -125,7 +143,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			mediaClass: types.mediaClass,
 			mediaTag: img.nodeName.toLowerCase(),
 			resource: img.getAttribute( 'resource' ),
-			altText: img.getAttribute( 'alt' ),
+			altText: altText,
 			altTextSame: altTextSame,
 			href: hrefSame ? null : a.getAttribute( 'href' ),
 			// 'src' for images, 'poster' for video/audio
