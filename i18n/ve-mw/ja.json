@@ -43,7 +43,8 @@
 			"Yamagata Yusuke",
 			"Yusuke1109",
 			"しぃ",
-			"ネイ"
+			"ネイ",
+			"春春眠眠"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -237,7 +238,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "続行",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "必須の{{PLURAL:$1|フィールド}}が不足しています",
 	"visualeditor-dialog-transclusion-required-parameter-is-blank": "{{PLURAL:$2|フィールド項目}} $1件を指定していませんが、本当に続行しますか?",
-	"visualeditor-dialog-transclusion-see-template": "利用者が作成したテンプレートは解説文書に不備があるかもしれません。こちらの[[$2|テンプレートのページ]]に追加情報がありかもしれません。",
+	"visualeditor-dialog-transclusion-see-template": "利用者が作成したテンプレートは解説文書に不備があるかもしれません。こちらの[[$2|テンプレートのページ]]に追加情報があるかもしれません。",
 	"visualeditor-dialog-transclusion-title-insert-template": "テンプレートを追加",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "挿入: $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "編集：$1",

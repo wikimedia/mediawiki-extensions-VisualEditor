@@ -3,7 +3,8 @@
 		"authors": [
 			"Ilja.mos",
 			"Mashoi7",
-			"TMg"
+			"TMg",
+			"Ruppijeva"
 		]
 	},
 	"tooltip-ca-ve-edit": "Kohendele tädä sivuu",
@@ -15,7 +16,7 @@
 	"visualeditor-ca-createsource": "Luaji lähteh",
 	"visualeditor-ca-editlocaldescriptionsource": "Edituiče paikallizen kuvavuksen lähtehtekstua",
 	"visualeditor-ca-editsource": "Kohendele tekstua",
-	"visualeditor-ca-editsource-section": "Kohendele tekstua",
+	"visualeditor-ca-editsource-section": "kohendele tekstua",
 	"visualeditor-categories-tool": "Kategouriet",
 	"visualeditor-desc": "Visualine editoru MediaWikile",
 	"visualeditor-descriptionpagelink": "Project:Vizualine redaktoru",
