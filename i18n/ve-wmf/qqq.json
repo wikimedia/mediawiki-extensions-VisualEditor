@@ -25,6 +25,7 @@
 			"Verdy p"
 		]
 	},
+	"editcheck-falsepositives-link": "{{notranslate}}\nLink to the false positives reporting page of EditCheck.\n\nUsed in:\n* {{msg-mw|tag-editcheck-references-activated}}",
 	"tag-editcheck-newcontent": "{{ignored}}Short description of the editcheck-newcontent tag.\n\nHidden tag added when EditCheck thinks new content was added to the page.\n\nSee also:\n* {{msg-mw|Tag-editcheck-newcontent-description}}\n{{Related|tag-newcontent-references-description}}",
 	"tag-editcheck-newcontent-description": "Long description of the editcheck-newcontent tag.\n\nHidden tag added when EditCheck thinks new content was added to the page.\n\nSee also:\n* {{msg-mw|Tag-editcheck-newcontent}}\n{{Related|tag-newcontent-references}}",
 	"tag-editcheck-newreference": "{{ignored}}Short description of the editcheck-newreference tag.\n\nHidden tag added when a reference is added to the page.\n\nSee also:\n* {{msg-mw|Tag-editcheck-newreference-description}}\n{{Related|tag-newreference-references-description}}",
