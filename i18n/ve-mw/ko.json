@@ -336,6 +336,7 @@
 	"visualeditor-section-body-placeholder": "새 문단",
 	"visualeditor-section-title-placeholder": "제목",
 	"visualeditor-loaderror-revidconflict": "서버에서 반환한 판 ID가 일치하지 않습니다 (문서: $1, 메타데이터: $2).",
+	"visualeditor-loaderror-wrongmode": "잘못된 모드로 편집기 불러오기를 시도하였습니다. (자료형: \"$1\", 편집기 모드: \"$2\")",
 	"visualeditor-settings-tool": "문서 설정",
 	"visualeditor-special-characters-group-other": "자주 사용됨",
 	"visualeditor-templatesused-tool": "사용된 틀",
