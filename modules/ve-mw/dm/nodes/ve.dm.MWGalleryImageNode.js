@@ -176,16 +176,14 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		thumbDiv = doc.createElement( 'div' ),
 		container = doc.createElement( 'span' ),
 		a = doc.createElement( 'a' ),
-		img = doc.createElement( attributes.isError ? 'span' : ( attributes.mediaTag || 'img' ) ),
+		img = doc.createElement( attributes.isError ? 'span' : attributes.mediaTag ),
 		alt = attributes.altText,
 		mwData = ve.copy( attributes.mw ) || {};
-
-	// FIXME: attributes.mediaTag and attributes.mediaClass aren't set after edit
 
 	li.classList.add( 'gallerybox' );
 	thumbDiv.classList.add( 'thumb' );
 	container.setAttribute( 'typeof', ve.dm.MWImageNode.static.getRdfa(
-		( attributes.mediaClass || 'File' ), 'none', attributes.isError
+		attributes.mediaClass, 'none', attributes.isError
 	) );
 
 	if ( attributes.href !== null ) {
@@ -227,7 +225,6 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		li.appendChild( captionWrapper.firstChild );
 	}
 
-	// Meh, see the FIXME above about the mediaTag not being set
 	if ( img.nodeName.toLowerCase() === 'img' ) {
 		if ( attributes.altTextSame ) {
 			img.setAttribute( 'alt', ve.dm.MWGalleryImageNode.static.textContentFromCaption( li ).trim() );
