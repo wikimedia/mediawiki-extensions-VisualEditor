@@ -263,7 +263,12 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 		return new ve.ui.MWLazyMultilineTextInputWidget( valueInputConfig );
 	}
 
-	return new OO.ui.TextInputWidget( valueInputConfig );
+	// Wrapping single line input (T348482)
+	return new ve.ui.MWLazyMultilineTextInputWidget( ve.extendObject( {
+		rows: 1,
+		autosize: true,
+		allowLinebreaks: false
+	}, valueInputConfig ) );
 };
 
 /**
