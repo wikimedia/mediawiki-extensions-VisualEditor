@@ -8,7 +8,8 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Пу страницаны тӱзедерге",
-	"visualeditor-ca-createsource": "Кодты пӱдірерге",
+	"visualeditor-ca-createlocaldescriptionsource": "Код чiли пос тілінең чарыдары",
+	"visualeditor-ca-createsource": "Кодты ит саларға",
 	"visualeditor-ca-editsource": "Кодты тӱзедерге",
 	"visualeditor-ca-editsource-section": "кодты тӱзедерге",
 	"visualeditor-descriptionpagelink": "Project:Визуал редакторы",
