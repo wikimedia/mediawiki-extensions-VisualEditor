@@ -41,7 +41,7 @@ ve.ui.MWConfirmationDialog.static.size = 'small';
  */
 ve.ui.MWConfirmationDialog.static.confirm = function ( prompt, successCmd ) {
 	var windowManager = new OO.ui.WindowManager();
-	$( document.body ).append( windowManager.$element );
+	$( OO.ui.getTeleportTarget() ).append( windowManager.$element );
 	var dialog = new ve.ui.MWConfirmationDialog();
 	windowManager.addWindows( [ dialog ] );
 	windowManager.openWindow( dialog, {

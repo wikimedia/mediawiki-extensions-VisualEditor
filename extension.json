@@ -1578,12 +1578,10 @@
 					"modules/ve-mw/themes/wikimediaui.css"
 				],
 				"vector": [
-					"modules/ve-mw/themes/wikimediaui.css",
-					"modules/ve-mw/ui/styles/tools/ve.ui.MWTargetWidget-vector.less"
+					"modules/ve-mw/themes/wikimediaui.css"
 				],
 				"vector-2022": [
-					"modules/ve-mw/themes/wikimediaui.css",
-					"modules/ve-mw/ui/styles/tools/ve.ui.MWTargetWidget-vector.less"
+					"modules/ve-mw/themes/wikimediaui.css"
 				],
 				"monobook": [
 					"modules/ve-mw/themes/apex.css"

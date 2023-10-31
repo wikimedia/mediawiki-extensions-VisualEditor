@@ -37,7 +37,7 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.preventReselection = false;
 
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
-	$( document.body ).append( this.confirmDialogs.$element );
+	$( OO.ui.getTeleportTarget() ).append( this.confirmDialogs.$element );
 };
 
 /* Inheritance */

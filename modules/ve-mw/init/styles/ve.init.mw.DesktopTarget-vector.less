@@ -15,11 +15,6 @@
 	}
 }
 
-.ve-ui-overlay-global {
-	/* Same as main content font-size in Vector */
-	font-size: 0.875em;
-}
-
 /* Slug animation needs more specific rules and skin-specific target margins */
 .mw-body-content p.ve-ce-branchNode-newSlug {
 	margin: -0.3em 0 -0.1em 0;
@@ -35,11 +30,4 @@
 	& > * {
 		color: #72777d;
 	}
-}
-
-.ve-ui-overlay .mw-body-content {
-	/* Fix font-size for surfaces inside UI overlays */
-	/* Increase specificity to deal with :not selector hack in core's typography.less */
-	/* stylelint-disable-next-line declaration-no-important */
-	font-size: 1em !important;
 }

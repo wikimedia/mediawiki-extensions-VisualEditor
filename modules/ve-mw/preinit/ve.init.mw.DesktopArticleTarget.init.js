@@ -1490,7 +1490,7 @@
 							$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 							// Set up a temporary window manager
 							windowManager = new OO.ui.WindowManager();
-							$( document.body ).append( windowManager.$element );
+							$( OO.ui.getTeleportTarget() ).append( windowManager.$element );
 							editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
 							windowManager.openWindow( editingTabDialog )
@@ -1541,7 +1541,7 @@
 				}
 				windowManager = new OO.ui.WindowManager();
 				welcomeDialog = new mw.libs.ve.WelcomeDialog();
-				$( document.body ).append( windowManager.$element );
+				$( OO.ui.getTeleportTarget() ).append( windowManager.$element );
 				windowManager.addWindows( [ welcomeDialog ] );
 				windowManager.openWindow(
 					welcomeDialog,
