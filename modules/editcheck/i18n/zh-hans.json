@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"星海"
+		]
+	},
+	"editcheck-dialog-action-no": "否",
+	"editcheck-dialog-action-yes": "是",
+	"editcheck-dialog-addref-title": "添加引用",
+	"editcheck-dialog-title": "发布前"
+}
