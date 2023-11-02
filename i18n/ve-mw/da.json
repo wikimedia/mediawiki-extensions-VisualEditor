@@ -236,6 +236,6 @@
 	"visualeditor-templatesused-tool": "Brugte skabeloner",
 	"visualeditor-title-error": "Ugyldig titel.",
 	"visualeditor-version-label": "Version",
-	"visualeditor-wikitext-warning": "Du bruger visuel redigering - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] virker ikke her. Du kan når som helst skifte til kilde redigering uden at miste dine ændringer, ved at åbne nedfalds-menuen ud for \"{{int:visualeditor-toolbar-savedialog}}\" og vælge \"{{int:visualeditor-mweditmodesource-title}}\".",
-	"visualeditor-wikitext-warning-title": "Wikitekst markup opdaget"
+	"visualeditor-wikitext-warning": "Du bruger visuel redigering - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] virker ikke her. Du kan når som helst skifte til kilderedigering uden at miste dine ændringer, ved at åbne nedfalds-menuen ud for \"{{int:visualeditor-toolbar-savedialog}}\" og vælge \"{{int:visualeditor-mweditmodesource-title}}\".",
+	"visualeditor-wikitext-warning-title": "Wikitekst-markup opdaget"
 }
