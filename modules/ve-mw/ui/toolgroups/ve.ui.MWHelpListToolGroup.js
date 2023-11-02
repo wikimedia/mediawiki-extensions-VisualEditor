@@ -111,7 +111,6 @@ ve.ui.MWUserGuideTool = function VeUiMWUserGuideTool() {
 	ve.ui.MWUserGuideTool.super.apply( this, arguments );
 
 	this.setDisabled( false );
-	this.$link.attr( 'title', 'QQQ' );
 };
 OO.inheritClass( ve.ui.MWUserGuideTool, ve.ui.Tool );
 ve.ui.MWUserGuideTool.static.name = 'mwUserGuide';

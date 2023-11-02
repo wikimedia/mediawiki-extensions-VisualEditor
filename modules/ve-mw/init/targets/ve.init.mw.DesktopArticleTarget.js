@@ -96,6 +96,7 @@ ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 		type: 'mwHelpList',
 		icon: 'help',
 		indicator: null,
+		title: ve.msg( 'visualeditor-help-tool' ),
 		include: [ { group: 'help' } ],
 		promote: [ 'mwUserGuide' ]
 	},
