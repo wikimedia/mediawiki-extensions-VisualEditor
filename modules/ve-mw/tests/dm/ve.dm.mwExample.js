@@ -946,7 +946,15 @@ ve.dm.mwExample.domToDataCases = {
 					imgWrapperClassAttr: null,
 					src: null,
 					isError: true,
-					errorText: 'File:!Example.jpg'
+					errorText: 'File:!Example.jpg',
+					mw: {
+						errors: [
+							{
+								key: 'apierror-filedoesnotexist',
+								message: 'This image does not exist.'
+							}
+						]
+					}
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -967,7 +975,7 @@ ve.dm.mwExample.domToDataCases = {
 			<ul typeof="mw:Extension/gallery" about="#mwt2" data-mw='{"name":"gallery","attrs":{},"body":{}}'>
 				<li class="gallerybox">
 					<div class="thumb">
-						<span typeof="mw:Error mw:File">
+						<span typeof="mw:Error mw:File" data-mw='{"errors":[{"key":"apierror-filedoesnotexist","message":"This image does not exist."}]}'>
 							<a href="./Special:FilePath/!Example.jpg">
 								<span class="mw-file-element mw-broken-media" resource="./File:!Example.jpg" data-width="120" data-height="120">File:!Example.jpg</span>
 							</a>
@@ -1023,7 +1031,8 @@ ve.dm.mwExample.domToDataCases = {
 					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
-					errorText: null
+					errorText: null,
+					mw: {}
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },
@@ -1099,7 +1108,8 @@ ve.dm.mwExample.domToDataCases = {
 					imgWrapperClassAttr: 'mw-file-description',
 					src: ve.ce.minImgDataUri,
 					isError: false,
-					errorText: null
+					errorText: null,
+					mw: {}
 				}
 			},
 			{ type: 'mwGalleryImageCaption' },

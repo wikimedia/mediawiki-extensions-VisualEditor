@@ -41,7 +41,7 @@ ve.dm.MWGalleryImageNode.static.matchFunction = function ( element ) {
 ve.dm.MWGalleryImageNode.static.parentNodeTypes = [ 'mwGallery' ];
 
 ve.dm.MWGalleryImageNode.static.preserveHtmlAttributes = function ( attribute ) {
-	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel', 'alt' ];
+	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'rel', 'alt', 'data-mw' ];
 	return attributes.indexOf( attribute ) === -1;
 };
 // By handling our own children we ensure that original DOM attributes
@@ -152,6 +152,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			height: height !== null && height !== '' ? +height : null,
 			isError: isError,
 			errorText: errorText,
+			mw: mwData,
 			imageClassAttr: img.getAttribute( 'class' ),
 			imgWrapperClassAttr: a.getAttribute( 'class' )
 		}
@@ -176,7 +177,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		container = doc.createElement( 'span' ),
 		a = doc.createElement( 'a' ),
 		img = doc.createElement( attributes.isError ? 'span' : ( attributes.mediaTag || 'img' ) ),
-		alt = attributes.altText;
+		alt = attributes.altText,
+		mwData = ve.copy( attributes.mw ) || {};
 
 	// FIXME: attributes.mediaTag and attributes.mediaClass aren't set after edit
 
@@ -225,10 +227,30 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		li.appendChild( captionWrapper.firstChild );
 	}
 
-	if ( attributes.altTextSame ) {
-		img.setAttribute( 'alt', ve.dm.MWGalleryImageNode.static.textContentFromCaption( li ).trim() );
-	} else if ( typeof alt === 'string' ) {
-		img.setAttribute( 'alt', alt );
+	// Meh, see the FIXME above about the mediaTag not being set
+	if ( img.nodeName.toLowerCase() === 'img' ) {
+		if ( attributes.altTextSame ) {
+			img.setAttribute( 'alt', ve.dm.MWGalleryImageNode.static.textContentFromCaption( li ).trim() );
+		} else if ( typeof alt === 'string' ) {
+			img.setAttribute( 'alt', alt );
+		}
+	} else {
+		var mwAttribs = mwData.attribs || [];
+		mwAttribs = mwAttribs.filter(
+			function ( attr ) { return attr[ 0 ] !== 'alt'; }
+		);
+		// Parsoid only sets an alt in the data-mw.attribs if it's explicit
+		// in the source
+		if ( !attributes.altTextSame && typeof alt === 'string' ) {
+			mwAttribs.push( [ 'alt', { txt: alt } ] );
+		}
+		if ( mwData.attribs || mwAttribs.length ) {
+			mwData.attribs = mwAttribs;
+		}
+	}
+
+	if ( !ve.isEmptyObject( mwData ) ) {
+		container.setAttribute( 'data-mw', JSON.stringify( mwData ) );
 	}
 
 	return [ li ];

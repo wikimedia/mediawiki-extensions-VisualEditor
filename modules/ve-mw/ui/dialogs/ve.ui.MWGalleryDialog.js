@@ -428,7 +428,8 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 						isError: image.getAttribute( 'isError' ),
 						errorText: image.getAttribute( 'errorText' ),
 						imageClassAttr: image.getAttribute( 'imageClassAttr' ),
-						imgWrapperClassAttr: image.getAttribute( 'imgWrapperClassAttr' )
+						imgWrapperClassAttr: image.getAttribute( 'imgWrapperClassAttr' ),
+						mw: image.getAttribute( 'mw' )
 					} );
 				}
 
@@ -676,7 +677,8 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 					captionDocument: this.createCaptionDocument( null ),
 					isError: false,
 					errorText: null,
-					imageClassAttr: 'mw-file-element'
+					imageClassAttr: 'mw-file-element',
+					mw: {}
 				}, config ) );
 				delete this.selectedFilenames[ title ];
 			}
@@ -1040,7 +1042,8 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 			isError: galleryItem.isError,
 			errorText: galleryItem.errorText,
 			imageClassAttr: galleryItem.imageClassAttr,
-			imgWrapperClassAttr: galleryItem.imgWrapperClassAttr
+			imgWrapperClassAttr: galleryItem.imgWrapperClassAttr,
+			mw: galleryItem.mw
 		};
 
 		return [
