@@ -73,8 +73,8 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 	// TODO: Improve handling of missing files. See 'isError' in MWBlockImageNode#toDataElement
 	var li = domElements[ 0 ];
 	var img = li.querySelector( '.mw-file-element' );
-	var a = img.parentNode;
-	var container = a.parentNode;
+	var imgWrapper = img.parentNode;
+	var container = imgWrapper.parentNode;
 
 	// Get caption (may be missing for mode="packed-hover" galleries)
 	var captionNode = li.querySelector( '.gallerytext' );
@@ -135,7 +135,15 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 
 	var types = ve.dm.MWImageNode.static.rdfaToTypes[ typeofAttrs[ 0 ] ];
 
-	var hrefSame = a.classList.contains( 'mw-file-description' );
+	var href = imgWrapper.getAttribute( 'href' );
+	if ( href ) {
+		// Convert absolute URLs to relative if the href refers to a page on this wiki.
+		// Otherwise Parsoid generates |link= options for copy-pasted images (T193253).
+		var targetData = mw.libs.ve.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
+		if ( targetData.isInternal ) {
+			href = mw.libs.ve.encodeParsoidResourceName( targetData.title );
+		}
+	}
 
 	var dataElement = {
 		type: this.name,
@@ -145,7 +153,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			resource: img.getAttribute( 'resource' ),
 			altText: altText,
 			altTextSame: altTextSame,
-			href: hrefSame ? null : a.getAttribute( 'href' ),
+			href: href,
 			// 'src' for images, 'poster' for video/audio
 			src: img.getAttribute( 'src' ) || img.getAttribute( 'poster' ),
 			width: width !== null && width !== '' ? +width : null,
@@ -154,7 +162,7 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 			errorText: errorText,
 			mw: mwData,
 			imageClassAttr: img.getAttribute( 'class' ),
-			imgWrapperClassAttr: a.getAttribute( 'class' )
+			imgWrapperClassAttr: imgWrapper.getAttribute( 'class' )
 		}
 	};
 
@@ -175,7 +183,7 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		li = doc.createElement( 'li' ),
 		thumbDiv = doc.createElement( 'div' ),
 		container = doc.createElement( 'span' ),
-		a = doc.createElement( 'a' ),
+		imgWrapper = doc.createElement( attributes.href ? 'a' : 'span' ),
 		img = doc.createElement( attributes.isError ? 'span' : attributes.mediaTag ),
 		alt = attributes.altText,
 		mwData = ve.copy( attributes.mw ) || {};
@@ -186,10 +194,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 		attributes.mediaClass, 'none', attributes.isError
 	) );
 
-	if ( attributes.href !== null ) {
-		a.setAttribute( 'href', attributes.href );
-	} else {
-		a.setAttribute( 'href', attributes.resource );
+	if ( attributes.href ) {
+		imgWrapper.setAttribute( 'href', attributes.href );
 	}
 
 	if ( attributes.imageClassAttr ) {
@@ -199,7 +205,7 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 
 	if ( attributes.imgWrapperClassAttr ) {
 		// eslint-disable-next-line mediawiki/class-doc
-		a.className = attributes.imgWrapperClassAttr;
+		imgWrapper.className = attributes.imgWrapperClassAttr;
 	}
 
 	img.setAttribute( 'resource', attributes.resource );
@@ -213,8 +219,8 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 	img.setAttribute( attributes.isError ? 'data-width' : 'width', attributes.width );
 	img.setAttribute( attributes.isError ? 'data-height' : 'height', attributes.height );
 
-	a.appendChild( img );
-	container.appendChild( a );
+	imgWrapper.appendChild( img );
+	container.appendChild( imgWrapper );
 	thumbDiv.appendChild( container );
 	li.appendChild( thumbDiv );
 
