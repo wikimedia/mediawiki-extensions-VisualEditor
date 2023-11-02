@@ -36,6 +36,8 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 	this.imageClassAttr = imageInfo.imageClassAttr;
 	this.imgWrapperClassAttr = imageInfo.imgWrapperClassAttr;
 	this.mw = imageInfo.mw;
+	this.mediaClass = imageInfo.mediaClass;
+	this.mediaTag = imageInfo.mediaTag;
 
 	// Configuration initialization
 	config = config || {};
