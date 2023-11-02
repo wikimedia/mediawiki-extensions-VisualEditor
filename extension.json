@@ -1191,7 +1191,6 @@
 				"visualeditor-align-desc-none",
 				"visualeditor-align-desc-right",
 				"visualeditor-align-widget-center",
-				"visualeditor-align-widget-default",
 				"visualeditor-align-widget-left",
 				"visualeditor-align-widget-right",
 				"visualeditor-alignablecontextitem-title",
@@ -1241,8 +1240,6 @@
 				"visualeditor-dialog-action-goback",
 				"visualeditor-dialog-action-insert",
 				"visualeditor-dialog-command-help-title",
-				"visualeditor-dialog-error",
-				"visualeditor-dialog-error-dismiss",
 				"visualeditor-dialog-table-caption",
 				"visualeditor-dialog-table-title",
 				"visualeditor-dimensionswidget-height",
@@ -1273,14 +1270,12 @@
 				"visualeditor-formatdropdown-format-heading6",
 				"visualeditor-formatdropdown-format-paragraph",
 				"visualeditor-formatdropdown-format-preformatted",
-				"visualeditor-formatdropdown-title",
 				"visualeditor-help-tool",
 				"visualeditor-historybutton-redo-tooltip",
 				"visualeditor-historybutton-undo-tooltip",
 				"visualeditor-horizontalrule-tooltip",
 				"visualeditor-indentationbutton-indent-tooltip",
 				"visualeditor-indentationbutton-outdent-tooltip",
-				"visualeditor-inspector-close-tooltip",
 				"visualeditor-inspector-remove-tooltip",
 				"visualeditor-key-alt",
 				"visualeditor-key-backspace",
@@ -1327,7 +1322,6 @@
 				"visualeditor-shortcuts-text-style",
 				"visualeditor-slug-insert",
 				"visualeditor-specialcharacter-button-tooltip",
-				"visualeditor-specialcharacterinspector-title",
 				"visualeditor-table-caption",
 				"visualeditor-table-context-col",
 				"visualeditor-table-context-row",
@@ -1436,9 +1430,6 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
-			],
-			"messages": [
-				"visualeditor-tablecell-contextitem"
 			]
 		},
 		"ext.visualEditor.welcome": {
