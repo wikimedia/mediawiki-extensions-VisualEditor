@@ -210,7 +210,7 @@ ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config 
 		// Other skins pass 'undefined' to use the default padding of +10px.
 		overlayPadding: mw.config.get( 'skin' ) === 'vector-2022' ? -10 : undefined
 	}, config );
-	return ve.init.mw.DesktopArticleTarget.parent.prototype.addSurface.call( this, dmDoc, config );
+	return ve.init.mw.DesktopArticleTarget.super.prototype.addSurface.call( this, dmDoc, config );
 };
 
 /**

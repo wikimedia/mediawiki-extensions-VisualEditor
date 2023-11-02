@@ -753,7 +753,7 @@ ve.ui.MWSaveDialog.prototype.onReviewChoose = function ( item ) {
  */
 ve.ui.MWSaveDialog.prototype.setDimensions = function () {
 	// Parent method
-	ve.ui.MWSaveDialog.parent.prototype.setDimensions.apply( this, arguments );
+	ve.ui.MWSaveDialog.super.prototype.setDimensions.apply( this, arguments );
 
 	if ( !this.positioning ) {
 		this.positionDiffElement();

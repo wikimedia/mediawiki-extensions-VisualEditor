@@ -92,7 +92,7 @@ ve.dm.MWCategoryMetaItem.static.describeChange = function ( key, change ) {
 	}
 
 	// Parent method
-	return ve.dm.MWCategoryMetaItem.parent.static.describeChange.apply( this, arguments );
+	return ve.dm.MWCategoryMetaItem.super.static.describeChange.apply( this, arguments );
 };
 
 /* Registration */

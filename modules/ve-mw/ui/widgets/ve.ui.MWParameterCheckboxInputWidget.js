@@ -15,7 +15,7 @@
  */
 ve.ui.MWParameterCheckboxInputWidget = function VeUiMWParameterCheckboxInputWidget() {
 	// Parent constructor
-	ve.ui.MWParameterCheckboxInputWidget.parent.apply( this, arguments );
+	ve.ui.MWParameterCheckboxInputWidget.super.apply( this, arguments );
 };
 
 /* Inheritance */
