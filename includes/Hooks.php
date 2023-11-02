@@ -640,11 +640,17 @@ class Hooks implements
 					// The following messages can be used here:
 					// * tooltip-ca-ve-edit-local
 					// * tooltip-ca-ve-create-local
+					// The following messages can be generated upstream:
+					// * accesskey-ca-ve-edit-local
+					// * accesskey-ca-ve-create-local
 					$veTooltip = 'ca-ve-' . $action . '-local';
 				} else {
 					// The following messages can be used here:
 					// * tooltip-ca-ve-edit
 					// * tooltip-ca-ve-create
+					// The following messages can be generated upstream:
+					// * accesskey-ca-ve-edit
+					// * accesskey-ca-ve-create
 					$veTooltip = 'ca-ve-' . $action;
 				}
 				$veTab = [
@@ -666,6 +672,9 @@ class Hooks implements
 					// The following messages can be used here:
 					// * tooltip-ca-editsource-local
 					// * tooltip-ca-createsource-local
+					// The following messages can be generated upstream:
+					// * accesskey-ca-editsource-local
+					// * accesskey-ca-createsource-local
 					$editTabTooltip = 'ca-' . $action . 'source-local';
 				} else {
 					// The following messages can be used here:
@@ -675,6 +684,9 @@ class Hooks implements
 					// The following messages can be used here:
 					// * tooltip-ca-editsource
 					// * tooltip-ca-createsource
+					// The following messages can be generated upstream:
+					// * accesskey-ca-editsource
+					// * accesskey-ca-createsource
 					$editTabTooltip = 'ca-' . $action . 'source';
 				}
 
