@@ -4,7 +4,8 @@
 			"Jumpy01",
 			"Macofe",
 			"Nemo bis",
-			"Paulu"
+			"Paulu",
+			"Jun Misugi"
 		]
 	},
 	"tooltip-ca-createsource": "Creà u codice fonte di 'ssa pagina",
@@ -32,12 +33,12 @@
 	"visualeditor-dialog-meta-languages-name-label": "Linguaghju",
 	"visualeditor-dialog-meta-languages-section": "Linguaghji",
 	"visualeditor-dialog-meta-settings-label": "Arrigulamenti per a pagina",
-	"visualeditor-dialog-meta-settings-toc-disable": "Ùn mustrà mai",
-	"visualeditor-dialog-meta-settings-toc-force": "Mustrà sempre",
+	"visualeditor-dialog-meta-settings-toc-disable": "Mai (in nisun tempu)",
+	"visualeditor-dialog-meta-settings-toc-force": "Sempre",
 	"visualeditor-dialog-meta-title": "Ozzione",
 	"visualeditor-dialog-transclusion-add-template": "Aghjustà un mudellu",
 	"visualeditor-dialog-transclusion-placeholder": "Aghjustà un mudellu",
-	"visualeditor-dialogbutton-media-tooltip": "Media",
+	"visualeditor-dialogbutton-media-tooltip": "Imàghjini è media",
 	"visualeditor-editsummary": "Discrive ciò chì hè statu cambiatu",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titulu di a pagina",
 	"visualeditor-formatdropdown-format-mw-heading2": "Intestatura",
