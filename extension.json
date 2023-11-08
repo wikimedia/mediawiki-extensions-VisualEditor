@@ -1563,7 +1563,6 @@
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTableNode.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWPreDialog.css",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
-				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLiveExtensionInspector.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableContentElement.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWFloatingHelpElement.css",
