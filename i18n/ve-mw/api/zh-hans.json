@@ -9,7 +9,8 @@
 			"Tranve",
 			"Xzonn",
 			"Yejianfei",
-			"科劳"
+			"科劳",
+			"星海"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "找不到带有该关键词的已缓存序列化内容",
@@ -39,6 +40,7 @@
 	"apihelp-visualeditoredit-param-cachekey": "使用之前的serializeforcache请求的结果带此密钥。覆盖$1html。",
 	"apihelp-visualeditoredit-param-captchaid": "验证码ID（当带验证码保存时）。",
 	"apihelp-visualeditoredit-param-captchaword": "回答验证码（当带验证码保存时）。",
+	"apihelp-visualeditoredit-param-nocontent": "省略在响应中的新版本 HTML 内容。",
 	"apihelp-visualeditoredit-param-plugins": "与API请求关联的插件。",
 	"apihelp-visualeditoredit-param-data-{plugin}": "插件随API请求发送的任意数据。",
 	"apihelp-visualeditoredit-param-etag": "要发送的ETag。",
