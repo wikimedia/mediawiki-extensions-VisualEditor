@@ -1114,8 +1114,8 @@ class Hooks implements
 	 */
 	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
 		$coreConfig = RequestContext::getMain()->getConfig();
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
+		$services = MediaWikiServices::getInstance();
+		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$extensionRegistry = ExtensionRegistry::getInstance();
 		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 		$availableContentModels = array_filter(
@@ -1135,11 +1135,17 @@ class Hooks implements
 		// to include those in the JavaScript data. See T291727.
 		// Run this filtering after the filter for subpages being enabled, to reduce
 		// the number of calls needed to namespace info.
-		$nsInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
+		$nsInfo = $services->getNamespaceInfo();
 		$namespacesWithSubpagesEnabled = array_values( array_filter(
 			$namespacesWithSubpagesEnabled,
 			[ $nsInfo, 'exists' ]
 		) );
+
+		$defaultSortPrefix = $services->getMagicWordFactory()->get( 'defaultsort' )->getSynonym( 0 );
+		// Sanitize trailing colon. /languages/messages/*.php are not consistent but the
+		// presence or absence of a trailing colon in the message makes no difference.
+		$defaultSortPrefix = preg_replace( '/:$/', '', $defaultSortPrefix );
+
 		$vars['wgVisualEditorConfig'] = [
 			'usePageImages' => $extensionRegistry->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => $extensionRegistry->isLoaded( 'WikibaseClient' ),
@@ -1177,6 +1183,7 @@ class Hooks implements
 			// TODO: Remove when all usages in .js files are removed
 			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' ),
+			'defaultSortPrefix' => $defaultSortPrefix,
 		];
 	}
 

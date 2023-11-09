@@ -2196,12 +2196,13 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},
 	'category default sort key': {
-		body: '<meta property="mw:PageProp/categorydefaultsort" content="foo">',
+		body: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DEFAULTSORT:foo","function":"defaultsort"}}}]}\'></span>',
 		data: [
 			{
 				type: 'mwDefaultSort',
 				attributes: {
-					content: 'foo'
+					prefix: 'DEFAULTSORT',
+					sortkey: 'foo'
 				}
 			},
 			{ type: '/mwDefaultSort' },
