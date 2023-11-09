@@ -43,7 +43,7 @@
 	"visualeditor-autosave-not-recovered-text": "לא היה אפשר לשחזר את השינויים הלא־שמורים שלך.",
 	"visualeditor-autosave-not-recovered-title": "שחזור השינוי נכשל",
 	"visualeditor-autosave-recovered-text": "השינויים הלא־שמורים שלך שוחזרו אוטומטית.",
-	"visualeditor-autosave-recovered-title": "השינויים בוטלו",
+	"visualeditor-autosave-recovered-title": "השינויים שוחזרו",
 	"visualeditor-backbutton-tooltip": "חזרה",
 	"visualeditor-beta-warning": "אם {{GENDER:|אתה נתקל|את נתקלת|אתם נתקלים}} בבעיות טכניות כלשהן בזמן העריכה, אנא {{GENDER:|דווח|דווחי|דווחו}} עליהן.",
 	"visualeditor-browserwarning": "העורך הזה אינו נתמך באופן רשמי בדפדפן שלך.",
