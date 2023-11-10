@@ -21,12 +21,18 @@ then
 fi
 cd ../..
 
-git fetch origin
+# Use 'gerrit' if it exists, otherwise 'origin'
+MW_REMOTE=$(git remote | grep -w gerrit || echo origin)
+
+git fetch $MW_REMOTE
 # Create sync-repos branch if needed and reset it to master
-git checkout -B sync-repos origin/master
+git checkout -B sync-repos $MW_REMOTE/master
 git submodule update
 cd lib/ve
-git fetch origin
+
+CORE_REMOTE=$(git remote | grep -w gerrit || echo origin)
+
+git fetch $CORE_REMOTE
 
 # Figure out what to set the submodule to
 if [ -n "${1:-}" ]
@@ -34,8 +40,8 @@ then
 	TARGET="$1"
 	TARGETDESC="$1"
 else
-	TARGET=origin/master
-	TARGETDESC="master ($(git rev-parse --short origin/master))"
+	TARGET=$CORE_REMOTE/master
+	TARGETDESC="master ($(git rev-parse --short $CORE_REMOTE/master))"
 fi
 
 # Generate commit summary
