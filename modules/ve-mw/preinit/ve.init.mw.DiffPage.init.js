@@ -144,7 +144,7 @@
 		reviewModeButtonSelect.on( 'select', onReviewModeButtonSelectSelect );
 		reviewModeButtonSelect.on( 'choose', onReviewModeButtonSelectChoose );
 		$( '.ve-init-mw-diffPage-diffMode' ).empty().append( reviewModeButtonSelect.$element );
-		reviewModeButtonSelect.selectItemByData( initMode );
+		reviewModeButtonSelect.selectItemByData( mode );
 	} );
 
 	mw.hook( 'wikipage.diff.wikitextBodyUpdate' ).add( function ( $wikitextBody ) {
