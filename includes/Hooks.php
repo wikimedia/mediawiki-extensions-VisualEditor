@@ -582,7 +582,7 @@ class Hooks implements
 				->field( '1' )
 				->where( [
 					'rev_actor' => $user->getActorId(),
-					'rev_timestamp < ' . $dbr->addQuotes( $dbr->timestamp(
+					$dbr->expr( 'rev_timestamp', '<', $dbr->timestamp(
 						$config->get( 'VisualEditorSingleEditTabSwitchTime' )
 					) )
 				] )
