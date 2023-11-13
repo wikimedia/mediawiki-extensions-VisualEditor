@@ -4,7 +4,8 @@
 			"Jumpy01",
 			"Macofe",
 			"Nemo bis",
-			"Paulu"
+			"Paulu",
+			"Jun Misugi"
 		]
 	},
 	"tooltip-ca-createsource": "Creà u codice fonte di 'ssa pagina",
@@ -35,8 +36,8 @@
 	"visualeditor-dialog-meta-languages-name-label": "Linguaghju",
 	"visualeditor-dialog-meta-languages-section": "Linguaghji",
 	"visualeditor-dialog-meta-settings-label": "Arrigulamenti per a pagina",
-	"visualeditor-dialog-meta-settings-toc-disable": "Ùn mustrà mai",
-	"visualeditor-dialog-meta-settings-toc-force": "Mustrà sempre",
+	"visualeditor-dialog-meta-settings-toc-disable": "Mai (in nisun tempu)",
+	"visualeditor-dialog-meta-settings-toc-force": "Sempre",
 	"visualeditor-dialog-meta-title": "Ozzione",
 	"visualeditor-dialog-transclusion-add-content": "Aghjustà u cuntenutu",
 	"visualeditor-dialog-transclusion-add-param": "Aghjustà u parametru",
@@ -48,7 +49,7 @@
 	"visualeditor-dialog-transclusion-remove-param": "Caccià u parametru",
 	"visualeditor-dialog-transclusion-remove-template": "Caccià u mudellu",
 	"visualeditor-dialog-transclusion-title": "Trasclusione",
-	"visualeditor-dialogbutton-media-tooltip": "Media",
+	"visualeditor-dialogbutton-media-tooltip": "Imàghjini è media",
 	"visualeditor-dialogbutton-meta-tooltip": "Arrigulamenti per a pagina",
 	"visualeditor-dialogbutton-transclusion-tooltip": "Trasclusione",
 	"visualeditor-editsummary": "Discrive ciò chì hè statu cambiatu",
