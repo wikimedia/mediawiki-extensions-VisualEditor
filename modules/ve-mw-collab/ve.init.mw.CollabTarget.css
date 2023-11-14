@@ -12,11 +12,6 @@
 	margin-top: 2em !important; /* stylelint-disable-line declaration-no-important */
 }
 
-/* MW theme hack */
-.ve-init-mw-collabTarget .ve-ui-authorListWidget-author.oo-ui-iconElement .oo-ui-iconElement-icon {
-	left: 0;
-}
-
 /* stylelint-disable-next-line selector-max-id */
 #ca-pad > span > a {
 	max-width: 15em;
