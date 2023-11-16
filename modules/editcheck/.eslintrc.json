@@ -1,7 +1,0 @@
-{
-	"globals": {
-	},
-	"rules": {
-		"no-implicit-globals": "off"
-	}
-}

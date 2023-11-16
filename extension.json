@@ -196,7 +196,7 @@
 			"i18n/ve-mw/api",
 			"i18n/ve-mw/mwlanguagevariant",
 			"i18n/ve-wmf",
-			"modules/editcheck/i18n"
+			"editcheck/i18n"
 		]
 	},
 	"ExtensionMessagesFiles": {
@@ -559,16 +559,16 @@
 		"ext.visualEditor.editCheck": {
 			"group": "visualEditorA",
 			"packageFiles": [
-				"modules/editcheck/init.js",
-				"modules/editcheck/EditCheckContextItem.js",
-				"modules/editcheck/EditCheckInspector.js",
+				"editcheck/modules/init.js",
+				"editcheck/modules/EditCheckContextItem.js",
+				"editcheck/modules/EditCheckInspector.js",
 				{
-					"name": "modules/editcheck/config.json",
+					"name": "editcheck/modules/config.json",
 					"callback": "\\MediaWiki\\Extension\\VisualEditor\\EditCheck\\ResourceLoaderData::getConfig"
 				}
 			],
 			"styles": [
-				"modules/editcheck/EditCheck.less"
+				"editcheck/modules/EditCheck.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
@@ -2691,7 +2691,8 @@
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad"
 	},
 	"AutoloadNamespaces": {
-		"MediaWiki\\Extension\\VisualEditor\\": "includes/"
+		"MediaWiki\\Extension\\VisualEditor\\": "includes/",
+		"MediaWiki\\Extension\\VisualEditor\\EditCheck\\": "editcheck/includes/"
 	},
 	"ConfigRegistry": {
 		"visualeditor": "GlobalVarConfig::newInstance"
