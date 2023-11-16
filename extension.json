@@ -689,7 +689,7 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWSaveTool.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.css"
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWSaveDialog.less"
 			],
 			"dependencies": [
 				"mediawiki.diff",
