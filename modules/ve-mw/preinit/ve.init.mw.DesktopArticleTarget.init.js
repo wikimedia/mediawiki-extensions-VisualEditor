@@ -914,11 +914,9 @@
 		},
 
 		setupMultiTabs: function () {
-			var
-				isMinerva = mw.config.get( 'skin' ) === 'minerva',
-				// Minerva puts the '#ca-...' ids on <a> nodes
-				$caEdit = $( '#ca-edit, li#page-actions-edit' ),
-				$caVeEdit = $( '#ca-ve-edit' );
+			// Minerva puts the '#ca-...' ids on <a> nodes, other skins put them on <li>
+			var $caEdit = $( '#ca-edit' );
+			var $caVeEdit = $( '#ca-ve-edit' );
 
 			if ( pageCanLoadEditor ) {
 				// Allow instant switching to edit mode, without refresh
@@ -932,20 +930,6 @@
 				// Only bind "Add topic" tab if NWE is available, because VE doesn't support section
 				// so we never have to switch from it when editing a section
 				$( '#ca-addsection' ).off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
-			}
-
-			if ( isMinerva ) {
-				// Minerva hides the link text - display tiny icons instead
-				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
-				$caEdit.find( '.mw-ui-icon' ).each( function () {
-					// Use <b> to dodge some styles targeting <span> to hide labels
-					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
-					$( this ).addClass( 've-edit-source' ).prepend( $icon );
-				} );
-				$caVeEdit.find( '.mw-ui-icon' ).each( function () {
-					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
-					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
-				} );
 			}
 
 			if ( init.isVisualAvailable ) {
@@ -966,22 +950,6 @@
 			if ( $editsections.css( 'direction' ) !== bodyDir ) {
 				// Avoid creating inline style attributes if the inherited value is already correct
 				$editsections.css( 'direction', bodyDir );
-			}
-
-			var isMinerva = mw.config.get( 'skin' ) === 'minerva';
-
-			if ( isMinerva ) {
-				// Minerva hides the link text - display tiny icons instead
-				mw.loader.load( [ 'oojs-ui.styles.icons-editing-advanced', 'oojs-ui.styles.icons-accessibility' ] );
-				$( '#mw-content-text .mw-editsection a:not(.mw-editsection-visualeditor)' ).each( function () {
-					// Use <b> to dodge some styles targeting <span> to hide labels
-					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-wikiText' );
-					$( this ).addClass( 've-edit-source' ).prepend( $icon );
-				} );
-				$( '#mw-content-text .mw-editsection a.mw-editsection-visualeditor' ).each( function () {
-					var $icon = $( '<b>' ).addClass( 'mw-ui-icon mw-ui-icon-element mw-ui-icon-eye' );
-					$( this ).addClass( 've-edit-visual' ).prepend( $icon );
-				} );
 			}
 
 			if ( pageCanLoadEditor ) {
