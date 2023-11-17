@@ -75,8 +75,6 @@ COMMITMSG+="
 
 $TASKS"
 
-echo "$COMMITMSG"
-exit 1
 # Check out master of VE core
 git checkout $TARGET
 
