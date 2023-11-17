@@ -49,15 +49,34 @@ fi
 NEWCHANGES=$(git log ..$TARGET --oneline --no-merges --topo-order --reverse --color=never)
 TASKS=$(git log ..$TARGET --no-merges --format=format:%B | grep "Bug: T" | sort | uniq)
 NEWCHANGESDISPLAY=$(git log ..$TARGET --oneline --no-merges --reverse --color=always)
-COMMITMSG=$(cat <<END
-Update VE core submodule to $TARGETDESC
+NEW_I18N_KEYS=$(git diff --color=never HEAD..$TARGET -- i18n/en.json | grep '^+' | grep -v '^+++' | sed -E 's/^\+\s*"([^"]+)":.*/\1/')
+NEW_FILES=$(git diff --color=never HEAD..$TARGET --name-only --diff-filter=A)
+
+COMMITMSG="Update VE core submodule to $TARGETDESC
 
 New changes:
-$NEWCHANGES
+$NEWCHANGES"
 
-$TASKS
-END
-)
+if [ -n "$NEW_I18N_KEYS" ]; then
+	COMMITMSG+="
+
+New i18n keys:
+$NEW_I18N_KEYS"
+fi
+
+if [ -n "$NEW_FILES" ]; then
+	COMMITMSG+="
+
+New files:
+$NEW_FILES"
+fi
+
+COMMITMSG+="
+
+$TASKS"
+
+echo "$COMMITMSG"
+exit 1
 # Check out master of VE core
 git checkout $TARGET
 
