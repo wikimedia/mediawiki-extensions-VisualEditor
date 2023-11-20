@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Adam Tuferu"
+			"Adam Tuferu",
+			"Bashiru Nurideen Pona",
+			"Sir Amugi"
 		]
 	},
-	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Nin'nyabu mali niŋ ]]"
+	"tag-editcheck-newcontent-description": "Labi maali niŋ ka baŋ ni yɛla pala nyɛla din pahi yaɣili ŋɔ",
+	"tag-editcheck-newreference-description": "Kundivihirili nyɛla din pahi yaɣili ŋɔ",
+	"tag-editcheck-references-description": "Labi lihi ka baŋ ni kundivihira nyɛla din ni tooi pahi",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Nin'nyabu mali niŋ ]]",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Welcome}} to $2"
 }

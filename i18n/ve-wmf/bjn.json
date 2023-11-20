@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Arcuscloud",
 			"Ezagren"
 		]
 	},
+	"tag-editcheck-newcontent-description": "EditCheck bapikir isi hanyar ditambahi ka tungkaran",
+	"tag-editcheck-newreference-description": "Referensi ditambahakan ka tungkaran",
+	"tag-editcheck-references-description": "EditCheck bapikir sabuah referensi pinanya diparluakan",
+	"tag-editcheck-references-activated": "[[{{MediaWiki:editcheck-falsepositives-link}}|Edit Check (references) activated]]",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Babakan visual]]",
 	"visualeditor-welcomedialog-action": "Mulai mambabak",
 	"visualeditor-welcomedialog-content": "Siapa haja kawa mambabak, wan saban pambaikan pacangan manulung.",
