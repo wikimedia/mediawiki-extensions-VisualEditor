@@ -3,7 +3,8 @@
 		"authors": [
 			"Bugirbiig",
 			"Musahfm",
-			"Agurwin Isaac"
+			"Agurwin Isaac",
+			"Awinimi"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -39,5 +40,15 @@
 	"visualeditor-changedesc-mwredirect": "Fεndigimi fʋ bↄↄdim tiaki yi $1 keŋ $2",
 	"visualeditor-desc": " MediaWiki dεmisbanε nyεt",
 	"visualeditor-descriptionpagelink": "Project:dεmisa banε nyεt",
-	"visualeditor-dialog-media-alttext-checkbox": "Nↄkim pian’azug la ka li lieb pian’ʋk"
+	"visualeditor-dialog-media-alttext-checkbox": "Nↄkim pian’azug la ka li lieb pian’ʋk",
+	"visualeditor-dialog-meta-languages-label": "Pian'ad nam",
+	"visualeditor-dialog-meta-languages-name-label": "Pian'ad",
+	"visualeditor-dialog-meta-languages-section": "Pian'ad nam",
+	"visualeditor-dialog-meta-settings-index-disable": "Ayee",
+	"visualeditor-dialog-meta-settings-index-force": "Ɛɛn",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Ayee",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ɛɛn",
+	"visualeditor-dialog-transclusion-add-param-save": "Paasim",
+	"visualeditor-dialog-transclusion-add-template-save": "Paasim",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Lɛm nya'aŋ"
 }
