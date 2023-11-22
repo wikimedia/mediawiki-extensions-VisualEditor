@@ -3,12 +3,33 @@
 		"authors": [
 			"Akakiiri",
 			"Amire80",
+			"Atalata Gumah",
 			"Ayire Adongo"
 		]
 	},
+	"collabpad-doctitle": "CollabPad: $1",
+	"tooltip-ca-ve-edit": "Leregere pɛgerɛ wa",
 	"visualeditor-ca-createlocaldescriptionsource": "Pa’asɛ yireduma pa’alegɔ sore",
 	"visualeditor-ca-createsource": "Naam zi'a",
 	"visualeditor-ca-editsource": "Demese nabara",
 	"visualeditor-ca-editsource-section": "demesego zia",
-	"visualeditor-descriptionpagelink": "Project:Aniipeelum"
+	"visualeditor-descriptionpagelink": "Project:Aniipeelum",
+	"visualeditor-savedialog-label-save-short": "Biŋe",
+	"visualeditor-savedialog-label-save-short-start": "Biŋe...",
+	"visualeditor-savedialog-review-nosummary": "Leregere zɔsega ka boi",
+	"visualeditor-savedialog-review-visual": "Bisega",
+	"visualeditor-savedialog-review-wikitext": "\"Wikitext\"",
+	"visualeditor-savedialog-title-conflict": "Nɔkpe'ene",
+	"visualeditor-savedialog-title-preview": "Fu niŋa bisega la tee",
+	"visualeditor-savedialog-title-review": "Mɛ fu teere la",
+	"visualeditor-savedialog-title-save": "Biŋɛ fu teere la",
+	"visualeditor-section-body-placeholder": "Bɔɔ paalega",
+	"visualeditor-section-title-placeholder": "Zuo",
+	"visualeditor-loaderror-revidconflict": "Revision IDs returned by the server do not match (document: $1, metadata: $2).",
+	"visualeditor-tooltip-non-breaking-space": "kɔ'ɔsɛ foole ka boi",
+	"visualeditor-version-label": "Gulesegɔ",
+	"visualeditor-wikitext-progress": "Teera \"wikitext\"",
+	"visualeditor-wikitextconvert-title": "Tee saalum la kiŋɛ \"wikitext?",
+	"visualeditor-wikitextconvert-message": "Fu labele yelzuo la la tibesum saalegɔ. Fu wa'am bɔta ti fu tee kiŋɛ \" wikitext?",
+	"visualeditor-wikitextconvert-convert": "Tee kiŋɛ \"wikitext\""
 }
