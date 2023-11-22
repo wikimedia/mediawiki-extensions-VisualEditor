@@ -23,7 +23,9 @@
 			"আফতাবুজ্জামান"
 		]
 	},
+	"collabpad-doctitle": "কোলাবপ্যাড: $1",
 	"collabpad-import-subtitle": "$1 থেকে আমদানিকৃত",
+	"collabpad": "কোলাবপ্যাড",
 	"tooltip-ca-ve-edit": "এই পাতাটি সম্পাদনা করুন",
 	"tooltip-ca-ve-edit-local": "স্থানীয় বিবরণের পাতা সম্পাদনা করুন",
 	"tooltip-ca-ve-create": "এই পাতাটি তৈরি করুন",
@@ -210,6 +212,8 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "টেমপ্লেটের বিষয়বস্তু",
 	"visualeditor-dialog-transclusion-template-search": "টেমপ্লেট অনুসন্ধান",
 	"visualeditor-dialog-transclusion-wikitext": "উইকিপাঠ্য",
+	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "উইকিপাঠ্য উপাদানটি মুছে ফেলতে Ctrl+Del টিপুন। উপাদানটিকে উপরে বা নিচে নিতে Ctrl+Shift+তীর টিপুন।",
+	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "উইকিপাঠ্য উপাদানটি মুছে ফেলতে Ctrl+Del টিপুন।",
 	"visualeditor-dialogbutton-media-tooltip": "চিত্র ও মিডিয়া",
 	"visualeditor-dialogbutton-template-tooltip": "টেমপ্লেট",
 	"visualeditor-editconflict": "আপনার পরিবর্তনগুলো সম্পাদনা দ্বন্দ্বের কারণে সংরক্ষণ করা যায়নি। {{GENDER:|আপনি}} ম্যানুয়ালি এই দ্বন্দ্ব সমাধান করতে ইচ্ছুক?",
@@ -306,7 +310,8 @@
 	"visualeditor-rebase-client-title-help": "পরিবর্তন সংরক্ষণের পূর্বে আপনি তা পর্যালোচনা করতে সক্ষম হবেন।",
 	"visualeditor-recreate": "আপনি সম্পাদনা শুরু করার পর পাতাটি অপসারণ করা হয়েছে। এটি পুনঃতৈরি করতে \"$1\" চাপুন।",
 	"visualeditor-redirect-description": "$1-এ পুনঃনির্দেশিত",
-	"visualeditor-savedialog-identify-anon": "আপনি কি অনিবন্ধীকৃত ব্যবহারকারী হিসেবে এই পাতাটি সংরক্ষণ করতে চান? আপনার আইপি ঠিকানা এই পাতার সম্পাদনা ইতিহাসে রেকর্ড করা হবে।",
+	"visualeditor-savedialog-identify-anon": "আপনি আর প্রবেশরত নন। আপনি যদি অগ্রসর হন, তাহলে <strong>আপনার আইপি ঠিকানাটি এই পাতার সম্পাদনা ইতিহাসে লিপিবদ্ধ করা হবে</strong>।",
+	"visualeditor-savedialog-identify-temp": "আপনি অস্থায়ী ব্যবহারকারী নাম <strong>$1</strong> ব্যবহার করছেন। আপনি যদি অগ্রসর হন, তবে এই ব্যবহারকারী নামের সাথে আপনার সম্পাদনা যুক্ত হবে।",
 	"visualeditor-savedialog-identify-user": "আপনি এইমাত্র <strong>[[User:$1|$1]]</strong> হিসেবে প্রবেশ করেছেন। আপনি যদি সম্পাদনা অব্যাহত রাখেন, আপনার সম্পাদনা এই অ্যাকাউন্টের সঙ্গে যুক্ত করা হবে।",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "আপনি আপনার সম্পাদনা $1 চেপে সংরক্ষণ করতে পারেন।",
 	"visualeditor-savedialog-label-publish-short": "প্রকাশ করুন",

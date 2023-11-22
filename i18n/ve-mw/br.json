@@ -36,9 +36,9 @@
 	"visualeditor-autosave-recovered-title": "Kemmoù restaolet",
 	"visualeditor-backbutton-tooltip": "Distreiñ",
 	"visualeditor-browserwarning": "Ober a rit gant ur merdeer ha n'eo ket embreget gant an aozer-mañ.",
-	"visualeditor-ca-createlocaldescriptionsource": "Ouzhpennañ deskrivadur lec'hel ar vammenn",
+	"visualeditor-ca-createlocaldescriptionsource": "Ouzhpennañ deskrivadur lec'hel (mammenn)",
 	"visualeditor-ca-createsource": "Krouiñ ar vammenn",
-	"visualeditor-ca-editlocaldescriptionsource": "Kemmañ deskrivadur lec'hel ar vammenn",
+	"visualeditor-ca-editlocaldescriptionsource": "Kemmañ deskrivadur lec'hel (mammenn)",
 	"visualeditor-ca-editsource": "Kemmañ ar vammenn",
 	"visualeditor-ca-editsource-section": "kemmañ ar vammenn",
 	"visualeditor-categories-tool": "Rummadoù",
@@ -137,6 +137,7 @@
 	"visualeditor-dialog-transclusion-action-save": "Enrollañ",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "N’eus ket eus ar patrom-mañ.",
 	"visualeditor-dialog-transclusion-add-wikitext": "Ouzhpennañ wikitestenn",
+	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "N'haller ket ouzhpennañ div arventenn \"$2\".",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Anv an arventenn",
 	"visualeditor-dialog-transclusion-add-param-save": "Ouzhpennañ",
 	"visualeditor-dialog-transclusion-add-template": "Ouzhpennañ ur patrom",
@@ -168,6 +169,7 @@
 	"visualeditor-dialog-transclusion-title-insert-template": "Ensoc'hañ ur patrom",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "Ensoc'hañ : $1",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "Kemmañ: $1",
+	"visualeditor-dialog-transclusion-template-search": "Klask ur patrom",
 	"visualeditor-dialog-transclusion-wikitext": "Wikitestenn",
 	"visualeditor-dialogbutton-media-tooltip": "Skeudennoù ha mediaoù",
 	"visualeditor-dialogbutton-template-tooltip": "Patrom",
@@ -276,5 +278,6 @@
 	"visualeditor-wikitext-progress": "O treuzkemm wikitestenn",
 	"visualeditor-wikitext-warning": "Emaoc’h oc’h implijout ar gwelaozer - ne c’heller ket ober gant [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitext]] amañ. Evit mont d’an aozer mammenn pa garit hep koll kemmoù, klikit war Mammenn.",
 	"visualeditor-wikitext-warning-title": "Balizennoù wikitestenn kavet",
-	"visualeditor-wikitextconvert-message": "Peget ho peus endalc’had pinvidik e furmad. Ha fellout a re deoc’h treuzkemm ar furmadiñ da wikitestenn?"
+	"visualeditor-wikitextconvert-message": "Peget ho peus endalc’had pinvidik e furmad. Ha fellout a re deoc’h treuzkemm ar furmadiñ da wikitestenn?",
+	"visualeditor-wikitextconvert-convert": "Treuzkemm da wikitestenn"
 }
