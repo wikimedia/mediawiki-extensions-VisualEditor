@@ -7,8 +7,6 @@
 
 mw.libs.ve = mw.libs.ve || {};
 /**
- *
- *
  * @class
  * @extends OO.ui.PopupWidget
  *

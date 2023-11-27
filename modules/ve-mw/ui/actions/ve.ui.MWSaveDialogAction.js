@@ -135,7 +135,9 @@ ve.ui.commandRegistry.register(
 			{
 				command: 'showSave',
 				accessKey: 'accesskey-save',
-				label: function () { return ve.init.target.getSaveButtonLabel(); }
+				label: function () {
+					return ve.init.target.getSaveButtonLabel();
+				}
 			},
 			{
 				command: 'showChanges',

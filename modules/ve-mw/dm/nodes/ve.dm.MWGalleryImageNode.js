@@ -240,7 +240,9 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 	} else {
 		var mwAttribs = mwData.attribs || [];
 		mwAttribs = mwAttribs.filter(
-			function ( attr ) { return attr[ 0 ] !== 'alt'; }
+			function ( attr ) {
+				return attr[ 0 ] !== 'alt';
+			}
 		);
 		// Parsoid only sets an alt in the data-mw.attribs if it's explicit
 		// in the source

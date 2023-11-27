@@ -1804,7 +1804,9 @@ ve.init.mw.ArticleTarget.prototype.getSurfaceConfig = function ( config ) {
 			// * mw-textarea-sproteced
 			.concat( this.protectedClasses )
 			// addClass doesn't like empty strings
-			.filter( function ( c ) { return c; } )
+			.filter( function ( c ) {
+				return c;
+			} )
 	}, config ) );
 };
 
