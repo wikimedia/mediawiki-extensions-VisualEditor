@@ -671,7 +671,11 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 					resource: title,
 					altText: null,
 					altTextSame: true,
-					href: null,
+					// TODO: support changing the link in the UI somewhere;
+					// for now, always link to the resource. Do it here when
+					// generating new results, so existing links from source
+					// will be preserved.
+					href: title,
 					src: '',
 					height: thumbUrls[ title ].height,
 					width: thumbUrls[ title ].width,

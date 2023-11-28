@@ -230,10 +230,11 @@ ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter 
 	while ( captionWrapper.firstChild ) {
 		li.appendChild( captionWrapper.firstChild );
 	}
+	var captionText = ve.dm.MWGalleryImageNode.static.textContentFromCaption( li ).trim();
 
 	if ( img.nodeName.toLowerCase() === 'img' ) {
-		if ( attributes.altTextSame ) {
-			img.setAttribute( 'alt', ve.dm.MWGalleryImageNode.static.textContentFromCaption( li ).trim() );
+		if ( attributes.altTextSame && captionText ) {
+			img.setAttribute( 'alt', captionText );
 		} else if ( typeof alt === 'string' ) {
 			img.setAttribute( 'alt', alt );
 		}
