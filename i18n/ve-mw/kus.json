@@ -3,7 +3,9 @@
 		"authors": [
 			"Agurwin Isaac",
 			"Bugirbiig",
-			"Musahfm"
+			"Musahfm",
+			"Awinimi",
+			"Poasana Anabah"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -39,5 +41,33 @@
 	"visualeditor-changedesc-mwredirect": "Fεndigimi fʋ bↄↄdim tiaki yi $1 keŋ $2",
 	"visualeditor-desc": " MediaWiki dεmisbanε nyεt",
 	"visualeditor-descriptionpagelink": "Project:dεmisa banε nyεt",
-	"visualeditor-dialog-media-alttext-checkbox": "Nↄkim pian’azug la ka li lieb pian’ʋk"
+	"visualeditor-dialog-media-alttext-checkbox": "Nↄkim pian’azug la ka li lieb pian’ʋk",
+	"visualeditor-dialog-media-alttext-section-help": "Fʋ tun'oe zaŋ nɛ' sɔb ps'alʋg la tis nidib banɛ pʋ nyɛt lak la. Pa'alʋg la sʋm ye li zɛmis linɛ na kɛ ka ba baŋ linɛ zug ka labaya tisidib la yis yɛlkaŋa tisid la. Nɛ' nwa anɛ linɛ nar ka zu'omnam nɛ nimbanɛ la'am tʋm nɛ screen-reader software bɛɛ text-only browsers",
+	"visualeditor-dialog-media-change-image": "Tiakim foto",
+	"visualeditor-dialog-media-choose-image": "Zaŋim foto kaŋa niŋ",
+	"visualeditor-dialog-media-content-description-link": "Pa'alʋg zink",
+	"visualeditor-dialog-media-content-filename": "Gbaʋŋ yʋ'ʋr",
+	"visualeditor-dialog-media-content-section": "Pian'azug",
+	"visualeditor-dialog-media-content-section-help": "Fʋ tun'oe zaŋ nɛ' pa'al makir linɛ na pa'al linɛ na dɔl lak la nya'aŋi tis banɛ karimid wʋsa. Nɛ'ŋa yeti pa'an dinɛ kɛt ka li sʋm ye ti pa'al lak la sʋm an siem pain'ad la ni. Li sʋm ka li an bi'ela ka yɛl nyain.",
+	"visualeditor-dialog-media-goback": "Nya'aŋ",
+	"visualeditor-dialog-media-info-artist": "Ta'asim nɛ $1",
+	"visualeditor-dialog-media-info-audiofile": "Kʋkɔr pian'ʋk",
+	"visualeditor-dialog-media-info-created": "Naamya $1",
+	"visualeditor-dialog-media-info-meta-artist": "Gbaʋŋ daan $1",
+	"visualeditor-dialog-media-info-moreinfo": "Labaar bɛdigʋ",
+	"visualeditor-dialog-media-info-readmore": "Karimim bɛdigʋ",
+	"visualeditor-dialog-media-info-uploaded": "Li ta'as ya: $1",
+	"visualeditor-dialog-media-page-advanced": "Keŋ tuon",
+	"visualeditor-dialog-media-page-general": "Si'el wʋsa",
+	"visualeditor-dialog-media-position-checkbox": "Lusim sɔb la lakin la",
+	"visualeditor-dialog-meta-languages-label": "Pian'ad nam",
+	"visualeditor-dialog-meta-languages-name-label": "Pian'ad",
+	"visualeditor-dialog-meta-languages-section": "Pian'ad nam",
+	"visualeditor-dialog-meta-settings-index-disable": "Ayee",
+	"visualeditor-dialog-meta-settings-index-force": "Ɛɛn",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Ayee",
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ɛɛn",
+	"visualeditor-dialog-transclusion-add-param-save": "Paasim",
+	"visualeditor-dialog-transclusion-add-template-save": "Paasim",
+	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Lɛm nya'aŋ"
 }

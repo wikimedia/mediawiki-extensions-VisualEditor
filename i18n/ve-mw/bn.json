@@ -23,7 +23,9 @@
 			"আফতাবুজ্জামান"
 		]
 	},
+	"collabpad-doctitle": "কোলাবপ্যাড: $1",
 	"collabpad-import-subtitle": "$1 থেকে আমদানিকৃত",
+	"collabpad": "কোলাবপ্যাড",
 	"tooltip-ca-createsource": "এই পাতার উৎস কোড তৈরি করুন",
 	"tooltip-ca-edit": "উইকিটেক্সট ব্যবহার করে এই পাতাটি সম্পাদনা করুন",
 	"tooltip-ca-editsource": "এই পাতার উৎস কোড সম্পাদনা করুন",
@@ -206,6 +208,8 @@
 	"visualeditor-dialog-transclusion-title-edit-transclusion": "টেমপ্লেটের বিষয়বস্তু",
 	"visualeditor-dialog-transclusion-template-search": "টেমপ্লেট অনুসন্ধান",
 	"visualeditor-dialog-transclusion-wikitext": "উইকিপাঠ্য",
+	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected": "উইকিপাঠ্য উপাদানটি মুছে ফেলতে Ctrl+Del টিপুন। উপাদানটিকে উপরে বা নিচে নিতে Ctrl+Shift+তীর টিপুন।",
+	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "উইকিপাঠ্য উপাদানটি মুছে ফেলতে Ctrl+Del টিপুন।",
 	"visualeditor-dialogbutton-media-tooltip": "চিত্র ও মিডিয়া",
 	"visualeditor-dialogbutton-template-tooltip": "টেমপ্লেট",
 	"visualeditor-editconflict": "আপনার পরিবর্তনগুলো সম্পাদনা দ্বন্দ্বের কারণে সংরক্ষণ করা যায়নি। {{GENDER:|আপনি}} ম্যানুয়ালি এই দ্বন্দ্ব সমাধান করতে ইচ্ছুক?",
