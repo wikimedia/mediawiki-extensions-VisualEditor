@@ -5,7 +5,7 @@
  * for MediaWiki itself (see mediawiki/core:/resources/startup.js).
  * Avoid use of: SVG, HTML5 DOM, ContentEditable etc.
  *
- * @copyright 2011-2020 VisualEditor Team and others; see AUTHORS.txt
+ * @copyright See AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
