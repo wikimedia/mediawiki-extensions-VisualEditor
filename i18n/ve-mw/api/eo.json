@@ -7,7 +7,8 @@
 			"NMaia",
 			"Psychoslave",
 			"Matma Rex",
-			"Amire80"
+			"Amire80",
+			"Ziko"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Neniu seriigaĵo kun tiu ŝlosilo troviĝis en kaŝmemoro.",
@@ -17,6 +18,7 @@
 	"apierror-visualeditor-latestnotfound": "Ne povis trovi plej lastan version de titolo",
 	"apihelp-visualeditor-description": "Liveras HTML5an kodon por paĝo el la servo de Parsoid.",
 	"apihelp-visualeditor-param-basetimestamp": "Kiam konservigu, asignu tempindikon de la redaktita revizio. Tio estas uzata por rekoni konflikoj pri redakto.",
+	"apihelp-visualeditor-param-badetag": "Se RESTBase-demando resendis ŝajne nevalidan ETag-on, donu ĝin ĉi tien por registraj celoj.",
 	"apihelp-visualeditor-param-cachekey": "Por vicigo aŭ diferencaĵo, uzu rezulton de antaŭa porkaŝmemorviciga peto (''serializeforcache request'') kun tiu vokilo. Transpasu $1html.",
 	"apihelp-visualeditor-param-editintro": "Redakti la enkondukon aldonotan al avizoj.",
 	"apihelp-visualeditor-param-etag": "[https://eo.wikipedia.org/wiki/HTTP_ETag ETag] Sendenda",
@@ -49,6 +51,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Titolo por nova sekcio.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Kiam konservanta, asignas tiun al tempindiko de la paĝŝarga dato. Tio estas uzata por rekoni konflikojn pri redakto.",
 	"apihelp-visualeditoredit-param-summary": "Redakta resumo.",
+	"apihelp-visualeditoredit-param-tags": "Ŝanĝu etikedojn por apliki al la redaktado.",
 	"apihelp-visualeditoredit-param-wikitext": "La uzota vikiteksto.",
 	"apihelp-visualeditoredit-summary": "Konservi HTML5-paĝon en MediaVikion (kun konverto al vikiteksto per la servo Parsoid)."
 }

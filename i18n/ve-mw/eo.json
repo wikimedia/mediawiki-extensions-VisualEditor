@@ -13,7 +13,8 @@
 			"Shirayuki",
 			"Yekrats",
 			"YvesNevelsteen",
-			"TMg"
+			"TMg",
+			"Ziko"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -215,6 +216,14 @@
 	"visualeditor-formatdropdown-format-mw-heading5": "Subtitolo 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Subtitolo 4",
 	"visualeditor-generating-wikitext-progress": "Produktante vikitekston",
+	"visualeditor-includes-noinclude-start": "Komenco de enhavo ekskludita de eltiraĵoj",
+	"visualeditor-includes-noinclude-end": "Fino de enhavo ekskludita de eltiraĵoj",
+	"visualeditor-includes-onlyinclude-start": "Komenco de enhavo permesita en eltiraĵoj",
+	"visualeditor-includes-onlyinclude-end": "Fino de enhavo permesita en eltiraĵoj",
+	"visualeditor-includes-includeonly": "Enhavo nur por eltiraĵoj",
+	"visualeditor-includes-noinclude-description": "Kiam enhavo de ĉi tiu paĝo estas uzata de alia paĝo, tiam enhavo el ĉi tie paĝo ĝis la kongrua finmarkilo <strong>Ne</strong> estos inkludita. Estu singarda kiam vi redaktas la enhavon ekster tiuj markiloj, ĉar eble aliaj paĝoj uzas ĝin.",
+	"visualeditor-includes-onlyinclude-description": "Kiam enhavo de ĉi tiu paĝo estas uzata de alia paĝo, <strong>nur</strong> la enhavo de ĉi tie ĝis la kongrua finmarko estos inkludita. Estu atentema kiam vi redaktas la enhavon inter ĉi tiuj markiloj, ĉar eble aliaj paĝoj uzas ĝin.",
+	"visualeditor-includes-includeonly-description": "Kiam enhavo de ĉi tiu paĝo estas uzata de alia paĝo, la sekva kroma enhavo estos inkludita ĉi tie:",
 	"visualeditor-languages-tool": "Lingvoj",
 	"visualeditor-linkinspector-button-link-external": "Ekstera retejo",
 	"visualeditor-linkinspector-button-link-internal": "Traserĉi internajn paĝojn",
@@ -373,6 +382,8 @@
 	"visualeditor-section-body-placeholder": "Nova sekcio",
 	"visualeditor-section-title-placeholder": "Temo",
 	"visualeditor-serializeerror": "Eraro dum ŝutado de datumoj de servilo: $1.",
+	"visualeditor-loaderror-revidconflict": "La reviziaj identigaĵoj, kiuj revenis de la servilo, ne egalas al (document: $1, metadata: $2).",
+	"visualeditor-loaderror-wrongmode": "Provis ŝargi la redaktilon en malĝusta modo (datumtipo: \"$1\", redaktila modo: \"$2\").",
 	"visualeditor-settings-tool": "Paĝaj agordoj",
 	"visualeditor-special-characters-group-other": "Ofte uzataj",
 	"visualeditor-templatesused-tool": "Ŝablonoj uzitaj",
