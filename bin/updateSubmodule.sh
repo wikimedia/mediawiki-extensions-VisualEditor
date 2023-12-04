@@ -48,7 +48,6 @@ fi
 # TODO recurse
 NEWCHANGES=$(git log ..$TARGET --oneline --no-merges --topo-order --reverse --color=never)
 TASKS=$(git log ..$TARGET --no-merges --format=format:%B | grep "Bug: T" | sort | uniq)
-NEWCHANGESDISPLAY=$(git log ..$TARGET --oneline --no-merges --reverse --color=always)
 NEW_I18N_KEYS=$(git diff HEAD..$TARGET -- i18n/en.json | grep '^+' | grep --color=never -v '^+++' | sed -E 's/^\+\s*"([^"]+)":.*/\1/')
 NEW_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=A | grep --color=never -E "\.(js|css|less)$")
 
@@ -88,7 +87,8 @@ else
 	cat >&2 <<END
 
 
-Created commit with changes:
-$NEWCHANGESDISPLAY
+Created commit:
+
+$COMMITMSG
 END
 fi
