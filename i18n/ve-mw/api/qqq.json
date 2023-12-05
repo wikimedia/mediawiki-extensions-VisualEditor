@@ -27,7 +27,8 @@
 			"UV",
 			"Umherirrender",
 			"Woytecr",
-			"Yejianfei"
+			"Yejianfei",
+			"McDutchie"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "{{doc-apierror}}",
@@ -73,7 +74,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "{{doc-apihelp-param|visualeditoredit|sectiontitle}}",
 	"apihelp-visualeditoredit-param-starttimestamp": "{{doc-apihelp-param|visualeditoredit|starttimestamp}}",
 	"apihelp-visualeditoredit-param-summary": "{{doc-apihelp-param|visualeditoredit|summary}}\n{{Identical|Edit summary}}",
-	"apihelp-visualeditoredit-param-tags": "{{doc-apihelp-param|visualeditoredit|tags}}",
+	"apihelp-visualeditoredit-param-tags": "A '''[[mw:Help:Tags|change tag]]''' is an annotation associated with an edit or log entry. \n\n{{doc-apihelp-param|visualeditoredit|tags}}",
 	"apihelp-visualeditoredit-param-watchlist": "{{notranslate}}\n{{doc-apihelp-param|visualeditoredit|watchlist}}",
 	"apihelp-visualeditoredit-param-wikitext": "{{doc-apihelp-param|visualeditoredit|wikitext}}",
 	"apihelp-visualeditoredit-summary": "{{doc-apihelp-summary|visualeditoredit}}"
