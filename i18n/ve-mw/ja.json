@@ -44,7 +44,8 @@
 			"Yusuke1109",
 			"しぃ",
 			"ネイ",
-			"春春眠眠"
+			"春春眠眠",
+			"Dragoniez"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -339,6 +340,7 @@
 	"visualeditor-mwpredialog-convert": "テキストのスタイルを許可",
 	"visualeditor-mwpredialog-title": "整形済みの平文",
 	"visualeditor-mwsignature-tool": "あなたの署名",
+	"visualeditor-preference-visualeditor": "ビジュアルエディターを有効にする",
 	"visualeditor-preference-newwikitexteditor-enable": "ウィキテキストエディターの代わりに、ビジュアルエディターのウィキテキストモードを使用する",
 	"visualeditor-preference-tabs": "編集モード：",
 	"visualeditor-preference-tabs-multi-tab": "両方のエディタータブを表示する",
