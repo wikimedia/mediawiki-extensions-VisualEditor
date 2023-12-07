@@ -61,6 +61,7 @@ ve.ui.MWInternalLinkAnnotationWidget.prototype.createInputWidget = function ( co
 		showDescriptions: mw.config.get( 'wgVisualEditorConfig' ).usePageDescriptions,
 		showDisambigsLast: true,
 		showInterwikis: true,
+		searchFragments: true,
 		addQueryInput: false,
 		api: ve.init.target.getContentApi(),
 		cache: ve.init.platform.linkCache
