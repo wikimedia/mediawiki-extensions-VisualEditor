@@ -49,7 +49,8 @@ fi
 NEWCHANGES=$(git log ..$TARGET --oneline --no-merges --topo-order --reverse --color=never)
 TASKS=$(git log ..$TARGET --no-merges --format=format:%B | grep "Bug: T" | sort | uniq)
 NEW_I18N_KEYS=$(git diff HEAD..$TARGET -- i18n/en.json | grep '^+' | grep --color=never -v '^+++' | sed -E 's/^\+\s*"([^"]+)":.*/\1/')
-NEW_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=A | grep --color=never -E "\.(js|css|less)$")
+# Ensure script continues if grep "fails" (returns nothing) with || : (due to -e flag in bash)
+NEW_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=A | grep --color=never -E "\.(js|css|less)$" || :)
 
 COMMITMSG="Update VE core submodule to $TARGETDESC
 
