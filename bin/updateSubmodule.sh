@@ -48,27 +48,44 @@ fi
 # TODO recurse
 NEWCHANGES=$(git log ..$TARGET --oneline --no-merges --topo-order --reverse --color=never)
 TASKS=$(git log ..$TARGET --no-merges --format=format:%B | grep "Bug: T" | sort | uniq)
-NEW_I18N_KEYS=$(git diff HEAD..$TARGET -- i18n/en.json | grep '^+' | grep --color=never -v '^+++' | sed -E 's/^\+\s*"([^"]+)":.*/\1/')
+  ADDED_I18N_KEYS=$(git diff HEAD..$TARGET -- i18n/en.json | grep '^\+' | grep --color=never -v '^\+\+\+' | sed -E 's/^\+\s*"([^"]+)":.*/\1/' | sed 's/^/- /' || :)
+DELETED_I18N_KEYS=$(git diff HEAD..$TARGET -- i18n/en.json | grep '^\-' | grep --color=never -v '^\-\-\-' | sed -E 's/^\-\s*"([^"]+)":.*/\1/' | sed 's/^/- /' || :)
+
 # Ensure script continues if grep "fails" (returns nothing) with || : (due to -e flag in bash)
-NEW_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=A | grep --color=never -E "\.(js|css|less)$" || :)
+  ADDED_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=A | grep --color=never -E "\.(js|css|less)$" | sed 's/^/- /' || :)
+DELETED_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=D | grep --color=never -E "\.(js|css|less)$" | sed 's/^/- /' || :)
 
 COMMITMSG="Update VE core submodule to $TARGETDESC
 
 New changes:
 $NEWCHANGES"
 
-if [ -n "$NEW_I18N_KEYS" ]; then
-	COMMITMSG+="
+if [ -n "$ADDED_I18N_KEYS" ]; then
+    COMMITMSG+="
 
-New i18n keys:
-$NEW_I18N_KEYS"
+Added i18n keys:
+$ADDED_I18N_KEYS"
 fi
 
-if [ -n "$NEW_FILES" ]; then
-	COMMITMSG+="
+if [ -n "$DELETED_I18N_KEYS" ]; then
+    COMMITMSG+="
 
-New files:
-$NEW_FILES"
+Deleted i18n keys:
+$DELETED_I18N_KEYS"
+fi
+
+if [ -n "$ADDED_FILES" ]; then
+    COMMITMSG+="
+
+Added files:
+$ADDED_FILES"
+fi
+
+if [ -n "$DELETED_FILES" ]; then
+    COMMITMSG+="
+
+Deleted files:
+$DELETED_FILES"
 fi
 
 COMMITMSG+="
