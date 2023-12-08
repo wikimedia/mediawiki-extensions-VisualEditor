@@ -132,7 +132,7 @@
 
 	function hideToolbarPlaceholder() {
 		if ( $toolbarPlaceholder ) {
-			window.removeEventListener( 'scroll', onWindowScrollListener, { passive: true } );
+			window.removeEventListener( 'scroll', onWindowScrollListener );
 			$toolbarPlaceholder.detach();
 			$toolbarPlaceholder.removeClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
 		}
