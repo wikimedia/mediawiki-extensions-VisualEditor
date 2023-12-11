@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ant176",
 			"JNakayama-WMF",
 			"Omotecho"
 		]
@@ -23,6 +24,6 @@
 	"tag-editcheck-reference-decline-irrelevant-description": "編集チェックによる出典は、不適切として却下されました",
 	"tag-editcheck-reference-decline-other": "編集チェック（出典）を却下（その他）",
 	"tag-editcheck-reference-decline-other-description": "編集チェックによる出典は却下され、理由の記載はありません",
-	"tag-editcheck-reference-decline-uncertain": "編集チェック（出典の）を却下ました（不確実）",
+	"tag-editcheck-reference-decline-uncertain": "編集チェック（出典）を却下（不確実）",
 	"tag-editcheck-reference-decline-uncertain-description": "編集チェックによる出典は、確実ではないとして却下されました"
 }
