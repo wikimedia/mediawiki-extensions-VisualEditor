@@ -44,7 +44,8 @@
 			"Ryoya3",
 			"Marine-Blue",
 			"Kokage si",
-			"春春眠眠"
+			"春春眠眠",
+			"Dragoniez"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -70,7 +71,7 @@
 	"visualeditor-backbutton-tooltip": "戻る",
 	"visualeditor-beta-warning": "もし編集中、技術的問題に遭遇したら、報告してください。",
 	"visualeditor-browserwarning": "このエディターは、ご使用中のブラウザーに正式には対応していません。",
-	"visualeditor-ca-createlocaldescriptionsource": "ローカルの解説を作成",
+	"visualeditor-ca-createlocaldescriptionsource": "ローカルの解説をソースで作成",
 	"visualeditor-ca-createsource": "ソースを作成",
 	"visualeditor-ca-editlocaldescriptionsource": "ローカルの解説を編集",
 	"visualeditor-ca-editsource": "ソースを編集",
@@ -139,7 +140,7 @@
 	"visualeditor-dialog-meta-categories-sortkey-label": "このページの整列順序を決めるとき、次の文字列で代用する",
 	"visualeditor-dialog-meta-languages-code-label": "言語コード",
 	"visualeditor-dialog-meta-languages-label": "他言語",
-	"visualeditor-dialog-meta-languages-link-label": "リンクされている<br />ページ",
+	"visualeditor-dialog-meta-languages-link-label": "リンクされているページ",
 	"visualeditor-dialog-meta-languages-name-label": "言語名",
 	"visualeditor-dialog-meta-languages-readonlynote": "この記事にリンクしている他の言語の記事の一覧です。現時点ではソース モードとウィキデータ上でのみ編集できます。",
 	"visualeditor-dialog-meta-languages-section": "他言語",
@@ -170,7 +171,7 @@
 	"visualeditor-dialog-meta-settings-redirect-label": "このページを以下のページにリダイレクト",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "リダイレクト先のページ",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "これが必要とされるのは非常に稀なケースですが、リダイレクト先のページが移動された際に、ここのリダイレクトが自動的に更新されることを防ぐことができます。",
-	"visualeditor-dialog-meta-settings-redirect-staticlabel": "ターゲット先のページが移動された際に、更新されることから、このリダイレクトを防ぐ。",
+	"visualeditor-dialog-meta-settings-redirect-staticlabel": "リダイレクト先のページが移動された際にこのリダイレクトが更新されないようにする。",
 	"visualeditor-dialog-meta-settings-section": "ページの設定",
 	"visualeditor-dialog-meta-settings-toc-default": "必要であれば表示",
 	"visualeditor-dialog-meta-settings-toc-disable": "常に非表示",
