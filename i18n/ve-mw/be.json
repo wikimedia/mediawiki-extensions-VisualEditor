@@ -144,7 +144,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Пры неабходнасці",
 	"visualeditor-dialog-meta-settings-toc-disable": "Ніколі",
 	"visualeditor-dialog-meta-settings-toc-force": "Заўсёды",
-	"visualeditor-dialog-meta-settings-toc-help": "Вы можаце прымусіць змест з пералікам кожнага загалоўка на старонцы адлюстроўвацца на старонках з менш чым чатырма загалоўкамі, або прымусіць яго не адлюстроўвацца наогул. Па змоўчанні ён адлюстроўваецца, калі на старонцы ёсць чатыры раздзела ці больш.",
+	"visualeditor-dialog-meta-settings-toc-help": "Вы можаце прымусова ўключыць адлюстраванне зместу з пералікам кожнага загалоўка на старонках, якія ўтрымліваюць не больш за чатыры загалоўкі, або прымусова адключыць адлюстроўванне наогул. \nАдлюстраванне прадвызначана ўключана для старонак, якія ўтрымліваюць не менш за чатыры загалоўкі.",
 	"visualeditor-dialog-meta-settings-toc-label": "Паказваць змест",
 	"visualeditor-dialog-meta-templatesused-noresults": "Шаблоны не знойдзены.",
 	"visualeditor-dialog-meta-title": "Параметры",
