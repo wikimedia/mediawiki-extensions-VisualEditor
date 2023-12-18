@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Paulu"
+			"Paulu",
+			"Jumpy01"
 		]
 	},
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Mudifica visuale]]",
 	"tag-visualeditor-description": "Edizione fatta per via di"
 }
