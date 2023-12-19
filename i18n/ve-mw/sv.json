@@ -167,7 +167,7 @@
 	"visualeditor-dialog-template-title": "Mall",
 	"visualeditor-dialog-transclusion-action-save": "Spara",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Den här mallen finns inte.",
-	"visualeditor-dialog-transclusion-template-title-modifier": "Template documentation and [//www.mediawiki.org/wiki/Special:MyLanguage/Manual:Glossary#Parameter parameter] names (if existing) are not available when editing templates utilizing nested syntax or modifiers, such as [//www.mediawiki.org/wiki/Special:MyLanguage/Help:Substitution subst].",
+	"visualeditor-dialog-transclusion-template-title-modifier": "Malldokumentation och  [//www.mediawiki.org/wiki/Special:MyLanguage/Manual:Glossary#Parameter parameternamn] (om det finns) är inte tillgängliga när man redigerar mallar som använder sig av kapslad syntax eller modifierare, såsom [//www.mediawiki.org/wiki/Special:MyLanguage/Help:Substitution subst].",
 	"visualeditor-dialog-transclusion-template-widget-aria": "Tryck på mellanslag för att markera mallen.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected": "Tryck på Ctrl+Del för att radera mallen, dess parametrar och dess värden. Tryck på Ctrl+Shift+Piltangenter för att flytta mallen uppåt och nedåt.",
 	"visualeditor-dialog-transclusion-template-widget-aria-selected-single": "Tryck på Ctrl+Del för att radera mallen, dess parametrar och dess värden.",
