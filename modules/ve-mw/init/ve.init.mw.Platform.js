@@ -248,6 +248,7 @@ ve.init.mw.Platform.prototype.getUserLanguages = mw.language.getFallbackLanguage
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
+	var platform = this;
 	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( function () {
 		var specialCharacterGroups = require( 'mediawiki.language.specialCharacters' ),
 			characters = {},
@@ -261,7 +262,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			if ( other ) {
 				characters.other = {
 					label: otherGroupName,
-					characters: other,
+					symbols: platform.processSpecialCharSymbols( other ),
 					attributes: { dir: mw.config.get( 'wgVisualEditorConfig' ).pageLanguageDir }
 				};
 			}
@@ -313,7 +314,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			// * special-characters-group-thai
 			characters[ groupName ] = {
 				label: mw.msg( 'special-characters-group-' + groupName ),
-				characters: groupObject,
+				symbols: platform.processSpecialCharSymbols( groupObject ),
 				attributes: { dir: rtlGroups.indexOf( groupName ) !== -1 ? 'rtl' : 'ltr' }
 			};
 		} );

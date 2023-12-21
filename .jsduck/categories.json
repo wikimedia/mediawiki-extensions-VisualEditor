@@ -210,6 +210,7 @@
 					"ve.ui.DataTransferItem",
 					"ve.ui.*Element",
 					"ve.ui.*Factory",
+					"ve.ui.*Layout",
 					"ve.ui.*Page",
 					"ve.ui.*Registry",
 					"ve.ui.*Sequence",

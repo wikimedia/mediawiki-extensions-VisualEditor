@@ -1170,7 +1170,8 @@
 				"lib/ve/src/ui/inspectors/ve.ui.NodeInspector.js",
 				"lib/ve/src/ui/inspectors/ve.ui.CommentInspector.js",
 				"lib/ve/src/ui/inspectors/ve.ui.LinkAnnotationInspector.js",
-				"lib/ve/src/ui/pages/ve.ui.SpecialCharacterPage.js"
+				"lib/ve/src/ui/layouts/ve.ui.SymbolListBookletLayout.js",
+				"lib/ve/src/ui/pages/ve.ui.SymbolListPage.js"
 			],
 			"debugScripts": [
 				"lib/ve/src/ce/ve.ce.debug.js",
@@ -1210,6 +1211,7 @@
 				"lib/ve/src/ui/styles/widgets/ve.ui.MediaSizeWidget.less",
 				"lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.less",
 				"lib/ve/src/ui/styles/inspectors/ve.ui.FragmentInspector.less",
+				"lib/ve/src/ui/styles/layouts/ve.ui.SymbolListBookletLayout.less",
 				"lib/ve/src/ui/styles/widgets/ve.ui.TargetWidget.less",
 				"lib/ve/src/ui/styles/ve.ui.Context.less",
 				"lib/ve/src/ui/styles/ve.ui.ContextItem.less",
