@@ -45,7 +45,8 @@
 			"しぃ",
 			"ネイ",
 			"春春眠眠",
-			"Dragoniez"
+			"Dragoniez",
+			"Ant176"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -342,6 +343,7 @@
 	"visualeditor-mwsignature-tool": "あなたの署名",
 	"visualeditor-preference-visualeditor": "ビジュアルエディターを有効にする",
 	"visualeditor-preference-newwikitexteditor-enable": "ウィキテキストエディターの代わりに、ビジュアルエディターのウィキテキストモードを使用する",
+	"visualeditor-preference-newwikitexteditor-help": "これの別名は「2017年版ウィキテキストエディター」です。",
 	"visualeditor-preference-tabs": "編集モード：",
 	"visualeditor-preference-tabs-multi-tab": "両方のエディタータブを表示する",
 	"visualeditor-preference-tabs-prefer-ve": "可能であれば常にビジュアルエディターを使用する",
