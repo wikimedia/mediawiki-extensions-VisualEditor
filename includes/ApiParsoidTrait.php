@@ -82,15 +82,12 @@ trait ApiParsoidTrait {
 	 */
 	private function dieWithRestHttpException( HttpException $ex ) {
 		if ( $ex instanceof LocalizedHttpException ) {
-			$msg = $ex->getMessageValue();
+			$converter = new \MediaWiki\Message\Converter();
+			$msg = $converter->convertMessageValue( $ex->getMessageValue() );
+			$this->dieWithError( $msg );
 		} else {
 			$this->dieWithException( $ex );
 		}
-
-		$this->dieWithError( [
-			'message' => $msg->getKey() ?? '',
-			'params' => $msg->getParams() ?? []
-		] );
 	}
 
 	/**
