@@ -18,7 +18,7 @@ use Html;
 use HTMLForm;
 use IContextSource;
 use Language;
-use MediaWiki;
+use MediaWiki\Actions\ActionEntryPoint;
 use MediaWiki\Auth\Hook\UserLoggedInHook;
 use MediaWiki\ChangeTags\Hook\ChangeTagsListActiveHook;
 use MediaWiki\ChangeTags\Hook\ListDefinedTagsHook;
@@ -1238,7 +1238,7 @@ class Hooks implements
 	 * @param OutputPage $output The page view.
 	 * @param User $user The user-specific settings.
 	 * @param WebRequest $request
-	 * @param MediaWiki $mediaWiki Helper class.
+	 * @param ActionEntryPoint $mediaWiki Helper class.
 	 */
 	public function onBeforeInitialize(
 		$title, $article, $output, $user, $request, $mediaWiki
