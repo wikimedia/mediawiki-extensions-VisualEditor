@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Anterdc99",
 			"LittlePaw365",
 			"星海"
 		]
@@ -14,6 +15,7 @@
 	"editcheck-dialog-addref-reject-common-knowledge": "我添加的信息广为人知",
 	"editcheck-dialog-addref-reject-uncertain": "我不确定该添加什么引证",
 	"editcheck-dialog-addref-reject-other": "其他",
+	"editcheck-dialog-addref-success-notify": "感谢您添加引用！",
 	"editcheck-dialog-addref-title": "添加引用",
 	"editcheck-dialog-title": "发布前"
 }
