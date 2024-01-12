@@ -589,10 +589,6 @@
 				"editcheck-dialog-addref-title",
 				"editcheck-dialog-title",
 				"visualeditor-backbutton-tooltip"
-			],
-			"targets": [
-				"desktop",
-				"mobile"
 			]
 		},
 		"ext.visualEditor.core.utils": {
