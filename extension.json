@@ -2466,7 +2466,7 @@
 		},
 		"ext.visualEditor.moduleIcons": {
 			"group": "visualEditorA",
-			"class": "ResourceLoaderOOUIImageModule",
+			"class": "MediaWiki\\ResourceLoader\\OOUIImageModule",
 			"name": "ve.ui.Icons",
 			"rootPath": "modules/ve-mw/ui/styles",
 			"selectorWithoutVariant": ".oo-ui-icon-{name}",
@@ -2474,7 +2474,7 @@
 		},
 		"ext.visualEditor.moduleIndicators": {
 			"group": "visualEditorA",
-			"class": "ResourceLoaderOOUIImageModule",
+			"class": "MediaWiki\\ResourceLoader\\OOUIImageModule",
 			"name": "ve.ui.Indicators",
 			"rootPath": "modules/ve-mw/ui/styles",
 			"selectorWithoutVariant": ".oo-ui-indicator-{name}",
