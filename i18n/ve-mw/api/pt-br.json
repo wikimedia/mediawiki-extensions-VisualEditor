@@ -4,6 +4,7 @@
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"Felipe L. Ewald",
+			"Fúlvio",
 			"TheGabrielZaum"
 		]
 	},
@@ -31,6 +32,7 @@
 	"apihelp-visualeditoredit-param-cachekey": "Usa o resultado de um pedido \"serializeforcache\" anterior com esta chave. Invalida $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "ID Captcha (quando salvar com uma resposta captcha).",
 	"apihelp-visualeditoredit-param-captchaword": "Responde ao captcha (ao salvar com uma resposta captcha).",
+	"apihelp-visualeditoredit-param-nocontent": "Omitir o conteúdo HTML da nova revisão na resposta.",
 	"apihelp-visualeditoredit-param-plugins": "Plug-ins associados à solicitação da API.",
 	"apihelp-visualeditoredit-param-data-{plugin}": "Dados arbitrários enviados por um plug-in com a solicitação de API.",
 	"apihelp-visualeditoredit-param-etag": "ETag para enviar.",
