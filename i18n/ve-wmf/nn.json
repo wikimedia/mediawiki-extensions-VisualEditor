@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jeblad",
-			"Njardarlogar"
+			"Njardarlogar",
+			"Jon Harald Søby"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring]]",
@@ -13,6 +14,7 @@
 	"tag-visualeditor-wikitext-description": "Endring gjord med 2017-tekstendraren",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuell endring: Bytte]]",
 	"tag-visualeditor-switched-description": "Brukaren byrja endra med visuell endring, men bytte så til wikitekstendring.",
+	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-tool": "Gje attendemelding på programvara",
 	"visualeditor-help-label": "Les brukarrettleiinga",
 	"visualeditor-help-title": "Handbok for bruk av tekstendraren",
