@@ -246,7 +246,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	// it is empty - in both cases we are going to skip appending <figcaption>.
 	if ( captionData.length > 2 ) {
 		var captionWrapper = doc.createElement( 'div' );
-		converter.getDomSubtreeFromData( data.slice( 1, -1 ), captionWrapper );
+		converter.getDomSubtreeFromData( captionData, captionWrapper );
 		while ( captionWrapper.firstChild ) {
 			figure.appendChild( captionWrapper.firstChild );
 		}
