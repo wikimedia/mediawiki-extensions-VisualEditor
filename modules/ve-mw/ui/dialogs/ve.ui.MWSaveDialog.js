@@ -120,6 +120,12 @@ ve.ui.MWSaveDialog.static.actions = [
  * @event ve.ui.MWSaveDialog#retry
  */
 
+/**
+ * Emitted when the save dialog changes panel, and when it opens
+ *
+ * @event ve.ui.MWSaveDialog#changePanel
+ */
+
 /* Methods */
 
 /**
@@ -516,6 +522,8 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 	// Properties
 	this.panels = new OO.ui.StackLayout( { scrollable: false } );
+	this.panels.connect( this, { set: [ 'emit', 'changePanel' ] } );
+
 	this.savePanel = new OO.ui.PanelLayout( {
 		expanded: false,
 		padded: true,
@@ -863,6 +871,7 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 				// This includes a #focus call
 				this.editSummaryInput.moveCursorToEnd();
 			}
+			this.emit( 'changePanel' );
 		} );
 };
 
