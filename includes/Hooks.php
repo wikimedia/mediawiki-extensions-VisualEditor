@@ -880,7 +880,8 @@ class Hooks implements
 			// The following messages can be used here:
 			// * visualeditor-ca-editsource-section-hint
 			$sourceEditSectionHint = $tabMessages['editsectionsourcehint'];
-			$result['editsection']['attribs']['title'] = $skin->msg( $sourceEditSectionHint )->rawParams( $tooltip )
+			$result['editsection']['attribs']['title'] = $skin->msg( $sourceEditSectionHint )
+				->plaintextParams( $tooltip )
 				->inLanguage( $lang )->text();
 		}
 
@@ -908,7 +909,8 @@ class Hooks implements
 
 			$attribs = $result['editsection']['attribs'];
 			$attribs['class'] = ( $attribs['class'] ?? '' ) . ' mw-editsection-visualeditor';
-			$attribs['title'] = $skin->msg( $veEditSectionHint )->rawParams( $tooltip )
+			$attribs['title'] = $skin->msg( $veEditSectionHint )
+				->plaintextParams( $tooltip )
 				->inLanguage( $lang )->text();
 
 			$veLink = [
