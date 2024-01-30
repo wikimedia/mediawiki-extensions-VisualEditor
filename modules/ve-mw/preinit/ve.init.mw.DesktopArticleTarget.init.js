@@ -1414,7 +1414,7 @@
 				$( '#wpTextbox1' ).length
 			) {
 				mw.loader.load( 'ext.visualEditor.switching' );
-				$( '#wpTextbox1' ).on( 'wikiEditor-toolbar-doneInitialSections', function () {
+				mw.hook( 'wikiEditor.toolbarReady' ).add( function ( $textarea ) {
 					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
 						var windowManager, editingTabDialog, switchToolbar, popup,
 							showPopup = url.searchParams.has( 'veswitched' ) && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' ),
@@ -1449,7 +1449,17 @@
 						switchToolbar.tools.editModeVisual.toolGroup.$element.append( popup.$element );
 						switchToolbar.emit( 'updateState' );
 
-						$( '.wikiEditor-ui-toolbar' ).prepend( switchToolbar.$element );
+						$textarea.wikiEditor( 'addToToolbar', {
+							section: 'secondary',
+							group: 'default',
+							tools: {
+								veEditSwitch: {
+									type: 'element',
+									element: switchToolbar.$element
+								}
+							}
+						} );
+
 						popup.toggle( showPopup );
 
 						// Duplicate of this code in ve.init.mw.DesktopArticleTarget.js
