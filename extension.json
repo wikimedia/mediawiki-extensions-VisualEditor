@@ -179,7 +179,7 @@
 		"visualeditoredit": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditorEdit",
 			"services": [
-				"VisualEditorHookRunner",
+				"HookContainer",
 				"StatsdDataFactory",
 				"PageEditStash",
 				"SkinFactory",

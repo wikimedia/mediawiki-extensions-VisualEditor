@@ -21,6 +21,7 @@ use ExtensionRegistry;
 use FlaggablePageView;
 use IBufferingStatsdDataFactory;
 use IDBAccessObject;
+use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Request\DerivativeRequest;
@@ -51,7 +52,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	public function __construct(
 		ApiMain $main,
 		string $name,
-		VisualEditorHookRunner $hookRunner,
+		HookContainer $hookContainer,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		PageEditStash $pageEditStash,
 		SkinFactory $skinFactory,
@@ -62,7 +63,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 		$this->setStats( $statsdDataFactory );
-		$this->hookRunner = $hookRunner;
+		$this->hookRunner = new VisualEditorHookRunner( $hookContainer );
 		$this->pageEditStash = $pageEditStash;
 		$this->skinFactory = $skinFactory;
 		$this->wikiPageFactory = $wikiPageFactory;
