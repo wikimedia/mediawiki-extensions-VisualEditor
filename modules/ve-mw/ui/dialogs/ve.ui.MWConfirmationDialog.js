@@ -60,12 +60,6 @@ ve.ui.MWConfirmationDialog.static.confirm = function ( prompt, successCmd ) {
 
 /**
  * @inheritdoc
- *
- * @param {Object} [data] Dialog opening data
- * @param {jQuery|string|Function|null} [data.title] Dialog title, omit to use
- *  the {@link #static-title static title}
- * @param {Object[]} [data.actions] List of configuration options for each
- *   {@link OO.ui.ActionWidget action widget}, omit to use the default "OK".
  */
 ve.ui.MWConfirmationDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
