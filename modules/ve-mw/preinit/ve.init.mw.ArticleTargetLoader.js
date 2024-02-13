@@ -37,6 +37,23 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
+	// A/B test enrollment for edit check (T342930)
+	if ( conf.editCheckABTest ) {
+		var inABTest;
+		if ( mw.user.isAnon() ) {
+			// can't just use mw.user.sessionId() because we need this to last across sessions
+			var token = mw.cookie.get( 'VEECid', '', mw.user.generateRandomSessionId() );
+			// Store the token so our state is consistent across pages
+			mw.cookie.set( 'VEECid', token, { path: '/', expires: 90 * 86400, prefix: '' } );
+			inABTest = parseInt( token.slice( 0, 8 ), 16 ) % 2 === 1;
+		} else {
+			inABTest = mw.user.getId() % 2 === 1;
+		}
+		conf.editCheck = inABTest;
+		// Communicate the bucket to instrumentation:
+		mw.config.set( 'wgVisualEditorEditCheckABTestBucket', '2024-02-editcheck-reference-' + ( inABTest ? 'test' : 'control' ) );
+	}
+
 	var editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' ) || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 	if ( conf.editCheckTagging || editCheck ) {
 		modules.push( 'ext.visualEditor.editCheck' );
