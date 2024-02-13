@@ -322,7 +322,8 @@
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-vector-2022.less"
 				],
 				"monobook": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css"
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css",
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-monobook.css"
 				]
 			},
 			"dependencies": [
