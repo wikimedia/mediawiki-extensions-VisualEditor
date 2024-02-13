@@ -19,7 +19,8 @@
 			"Ләйсән",
 			"Рустам Нурыев",
 			"Янмурза Баки",
-			"З. ӘЙЛЕ"
+			"З. ӘЙЛЕ",
+			"Bashkorttan"
 		]
 	},
 	"tooltip-ca-createsource": "Биттең сығанаҡ кодын булдырырға",
@@ -31,7 +32,7 @@
 	"visualeditor-beta-warning": "Мөхәррирләү барышында техник ҡыйынлыҡтар килеп сыҡһа, беҙгә хәбәр итегеҙ.",
 	"visualeditor-browserwarning": "Һеҙ Күҙләгес мөхәррир рәсми танымаған браузер ҡулланаһығыҙ.",
 	"visualeditor-ca-createlocaldescriptionsource": "Локаль тасурилама сығанағын өҫтәргә",
-	"visualeditor-ca-createsource": "Сығанаҡ код булдырырға",
+	"visualeditor-ca-createsource": "Код өҫтәү",
 	"visualeditor-ca-editlocaldescriptionsource": "Локаль тасуирлама сығанағын мөхәррирләргә",
 	"visualeditor-ca-editsource": "Вики-тексты үҙгәртергә",
 	"visualeditor-ca-editsource-section": "вики-тексты үҙгәртергә",
@@ -94,7 +95,7 @@
 	"visualeditor-dialog-meta-languages-label": "Телдәр",
 	"visualeditor-dialog-meta-languages-link-label": "Бәйле бит",
 	"visualeditor-dialog-meta-languages-name-label": "Тел",
-	"visualeditor-dialog-meta-languages-readonlynote": "Был — ошо бит менән бәйле башҡа телдәрҙәге  биттәр исемлеге. Әлеге ваҡытта ул сығанаҡ код режимында йәки Викидатала ғына үҙгәртелә ала.",
+	"visualeditor-dialog-meta-languages-readonlynote": "Был — ошо бит менән бәйле башҡа телдәрҙәге  биттәр исемлеге. Әлегә уны сығанаҡ код режимында йәки Викимәғлүмәттә генә үҙгәртеп була.",
 	"visualeditor-dialog-meta-languages-section": "Телдәр",
 	"visualeditor-dialog-meta-settings-displaytitle": "Күренгән исем",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Икенсе тамға ҡуйып, был биттең исеме нисек күренеүен билдәләй алаһығыҙ",
