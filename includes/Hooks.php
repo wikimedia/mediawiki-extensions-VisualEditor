@@ -576,7 +576,7 @@ class Hooks implements
 			$userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
 		) {
 			// Check if the user has made any edits before the SET switch time
-			$dbr = wfGetDB( DB_REPLICA );
+			$dbr = $services->getConnectionProvider()->getReplicaDatabase();
 			$revExists = $dbr->newSelectQueryBuilder()
 				->from( 'revision' )
 				->field( '1' )
