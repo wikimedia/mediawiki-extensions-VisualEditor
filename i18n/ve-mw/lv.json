@@ -283,6 +283,7 @@
 	"visualeditor-mwpredialog-convert": "Atļaut teksta formatēšanu",
 	"visualeditor-mwpredialog-title": "Noformatēts vienkāršs teksts",
 	"visualeditor-mwsignature-tool": "Tavs paraksts",
+	"visualeditor-preference-visualeditor": "Iespējot vizuālo redaktoru",
 	"visualeditor-preference-newwikitexteditor-enable": "Izmantot vikiteksta režīmu vizuālajā redaktorā, nevis citu vikiteksta redaktoru",
 	"visualeditor-preference-newwikitexteditor-help": "To dažkārt sauc par 2017. gada vikiteksta redaktoru.",
 	"visualeditor-preference-tabs": "Labošanas režīms:",
@@ -330,6 +331,6 @@
 	"visualeditor-wikitext-warning": "Tu lieto vizuālo redaktoru - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikiteksts]] šeit nedarbosies. Lai pārslēgtos uz koda labošanu nezaudējot izmaiņas, jebkurā brīdī spied uz pārslēgšanās pogas.",
 	"visualeditor-wikitext-warning-title": "Pamanītas vikiteksta iezīmes",
 	"visualeditor-wikitextconvert-title": "Pārveidot formatējumu uz vikitekstu?",
-	"visualeditor-wikitextconvert-message": "Tavs ievietotais saturs ir formatēts. Vai to vajadzētu pārveidot par vikitekstu vai ievietot kā vienkāršu tekstu?",
+	"visualeditor-wikitextconvert-message": "Tu ievietoji saturu ar formatējumu. Vai vēlies pārvērst šo formatējumu par vikitekstu?",
 	"visualeditor-wikitextconvert-convert": "Pārveidot uz vikitekstu"
 }
