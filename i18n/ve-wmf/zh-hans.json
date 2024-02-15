@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Anakmalaysia",
+			"Anterdc99",
 			"Bencmq",
 			"Demmy",
 			"Diskdance",
@@ -28,6 +29,7 @@
 	"tag-editcheck-newreference-description": "页面中添加了参考来源",
 	"tag-editcheck-references-description": "EditCheck 认为可能需要参考来源",
 	"tag-editcheck-references-activated": "[[{{MediaWiki:editcheck-falsepositives-link}}|编辑检查（参考资料）已激活]]",
+	"tag-editcheck-references-activated-description": "EditCheck认为可能需要参考文献，且显示了UI",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑]]",
 	"tag-visualeditor-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑器]]进行的编辑",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|可视化编辑：需检查]]",
