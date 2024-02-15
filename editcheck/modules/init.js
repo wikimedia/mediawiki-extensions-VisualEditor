@@ -220,6 +220,14 @@ if (
 	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {
 		var surface = target.getSurface();
 
+		if ( surface.getMode() !== 'visual' ) {
+			// Some checks will entirely work in source mode for most cases.
+			// But others will fail spectacularly -- e.g. reference check
+			// isn't aware of <ref> tags and so will suggest that all content
+			// has references added. As such, disable in source mode for now.
+			return;
+		}
+
 		// clear rejection-reasons between runs of the save process, so only the last one counts
 		mw.editcheck.rejections.length = 0;
 
