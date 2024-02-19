@@ -336,6 +336,6 @@
 	"visualeditor-wikitext-warning": "Tu lieto vizuālo redaktoru - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|vikiteksts]] šeit nedarbosies. Lai pārslēgtos uz koda labošanu nezaudējot izmaiņas, jebkurā brīdī spied uz pārslēgšanās pogas.",
 	"visualeditor-wikitext-warning-title": "Pamanītas vikiteksta iezīmes",
 	"visualeditor-wikitextconvert-title": "Pārveidot formatējumu uz vikitekstu?",
-	"visualeditor-wikitextconvert-message": "Tavs ievietotais saturs ir formatēts. Vai to vajadzētu pārveidot par vikitekstu vai ievietot kā vienkāršu tekstu?",
+	"visualeditor-wikitextconvert-message": "Tu ievietoji saturu ar formatējumu. Vai vēlies pārvērst šo formatējumu par vikitekstu?",
 	"visualeditor-wikitextconvert-convert": "Pārveidot uz vikitekstu"
 }
