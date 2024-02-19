@@ -154,6 +154,10 @@
 			"value": false,
 			"description": "Enable experimental Edit Check feature. Can also be enabled using ?ecenable=1."
 		},
+		"VisualEditorEditCheckABTest": {
+			"value": false,
+			"description": "A/B test Edit Check for all users. A/B bucket status will override VisualEditorEditCheck."
+		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
