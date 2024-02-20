@@ -65,13 +65,13 @@
  * - Documented aliases are also considered valid, known parameter names. Use
  *   {@link #isParameterAlias} to differentiate between the two.
  *
- * Therefore this is not the original specification but an accessor to the documentation for an
- * individual template invocation. It's possible different for every invocation.
+ * Therefore, this is not the original specification but an accessor to the documentation for an
+ * individual template invocation. It's possibly different for every invocation.
  *
- * Meant to be in a 1:1 relationship to ve.dm.MWTemplateModel.
+ * Meant to be in a 1:1 relationship to {@link ve.dm.MWTemplateModel}.
  *
- * The actual, unmodified specification can be found in the {@link #templateData} property, and
- * the local `specCache` in ve.dm.MWTransclusionModel.
+ * The actual, unmodified specification can be found in the {@link #templateData} property and
+ * the local `specCache` in {@link ve.dm.MWTransclusionModel}.
  *
  * See <https://github.com/wikimedia/mediawiki-extensions-TemplateData/blob/master/Specification.md>
  * for the latest version of the TemplateData specification.

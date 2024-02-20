@@ -139,7 +139,7 @@ ve.dm.MWTemplateModel.prototype.getTitle = function () {
  */
 ve.dm.MWTemplateModel.prototype.getTemplateDataQueryTitle = function () {
 	// FIXME: This currently doesn't strip localized versions of these magic words.
-	// Strip magic words {{subst:…}} and {{safesubst:…}}, see MagicWordFactory::$mSubstIDs
+	// Strip magic words {{subst:…}} and {{safesubst:…}}
 	const name = this.target.wt.replace( /^\s*(?:safe)?subst:/i, '' ),
 		templateNs = mw.config.get( 'wgNamespaceIds' ).template,
 		title = mw.Title.newFromText( name, templateNs );
