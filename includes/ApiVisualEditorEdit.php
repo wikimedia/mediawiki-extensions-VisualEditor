@@ -314,7 +314,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * Load some parsed wikitext of an edit from the serialisation cache.
 	 *
 	 * @param string $hash The key of the wikitext in the serialisation cache
-	 * @return string|null The wikitext
+	 * @return string|false The wikitext
 	 */
 	protected function trySerializationCache( $hash ) {
 		$cache = ObjectCache::getLocalClusterInstance();
