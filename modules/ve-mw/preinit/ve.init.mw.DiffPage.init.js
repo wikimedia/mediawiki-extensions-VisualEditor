@@ -8,14 +8,13 @@
 /* eslint-disable no-jquery/no-global-selector */
 
 ( function () {
-	const $visualDiffContainer = $( '<div>' ),
-		$visualDiff = $( '<div>' ),
+	const $visualDiff = $( '<div>' ),
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		originalUrl = new URL( location.href ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginModules = conf.pluginModules.filter( mw.loader.getState );
 	let reviewModeButtonSelect, lastDiff,
-		$wikitextDiffContainer, $wikitextDiffHeader, $wikitextDiffBody,
+		$wikitextDiffHeader, $wikitextDiffBody,
 		initMode = originalUrl.searchParams.get( 'diffmode' ) || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
 		diffTypeSwitch;
 
@@ -25,7 +24,7 @@
 	}
 	let mode = initMode;
 
-	$visualDiffContainer.append(
+	const $visualDiffContainer = $( '<div>' ).append(
 		progress.$element.addClass( 'oo-ui-element-hidden' ),
 		$visualDiff
 	);
@@ -51,16 +50,15 @@
 			diffTypeSwitch.setDisabled( isVisual );
 		}
 
-		const $revSlider = $( '.mw-revslider-container' );
-		$revSlider.toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
+		$( '.mw-revslider-container' ).toggleClass( 've-init-mw-diffPage-revSlider-visual', isVisual );
 		if ( isVisual ) {
 			// Highlight the headers using the same styles as the diff, to better indicate
 			// the meaning of headers when not using two-column diff.
 			$wikitextDiffHeader.find( '#mw-diff-otitle1' ).attr( 'data-diff-action', 'remove' );
 			$wikitextDiffHeader.find( '#mw-diff-ntitle1' ).attr( 'data-diff-action', 'insert' );
 		} else {
-			$wikitextDiffHeader.find( '#mw-diff-otitle1' ).removeAttr( 'data-diff-action' );
-			$wikitextDiffHeader.find( '#mw-diff-ntitle1' ).removeAttr( 'data-diff-action' );
+			$wikitextDiffHeader.find( '#mw-diff-otitle1, #mw-diff-ntitle1' )
+				.removeAttr( 'data-diff-action' );
 		}
 
 		const oldId = mw.config.get( 'wgDiffOldId' );
@@ -125,7 +123,7 @@
 			return;
 		}
 
-		$wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
+		const $wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
 		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' )
 			.add( $wikitextDiffContainer.find( 'td.diff-multi, td.diff-notice' ).parent() );
 		$wikitextDiffBody = $wikitextDiffContainer.find( 'tr' ).not( $wikitextDiffHeader );
