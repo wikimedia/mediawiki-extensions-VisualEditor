@@ -37,6 +37,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentity;
 use MediaWiki\Watchlist\WatchlistManager;
 use MessageLocalizer;
 use RequestContext;
@@ -104,9 +105,8 @@ class ApiVisualEditor extends ApiBase {
 
 	/**
 	 * @see EditPage::getUserForPermissions
-	 * @return User
 	 */
-	private function getUserForPermissions() {
+	private function getUserForPermissions(): User {
 		$user = $this->getUser();
 		if ( $this->tempUserCreator->shouldAutoCreate( $user, 'edit' ) ) {
 			return $this->userFactory->newUnsavedTempUser(
@@ -118,9 +118,8 @@ class ApiVisualEditor extends ApiBase {
 
 	/**
 	 * @see ApiParse::getUserForPreview
-	 * @return User
 	 */
-	private function getUserForPreview() {
+	private function getUserForPreview(): UserIdentity {
 		$user = $this->getUser();
 		if ( $this->tempUserCreator->shouldAutoCreate( $user, 'edit' ) ) {
 			return $this->userFactory->newUnsavedTempUser(
@@ -508,7 +507,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param int $namespaceId Namespace ID
 	 * @return bool
 	 */
-	public static function isAllowedNamespace( Config $config, $namespaceId ) {
+	public static function isAllowedNamespace( Config $config, int $namespaceId ): bool {
 		return in_array( $namespaceId, self::getAvailableNamespaceIds( $config ), true );
 	}
 
@@ -518,7 +517,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param Config $config
 	 * @return int[]
 	 */
-	public static function getAvailableNamespaceIds( Config $config ) {
+	public static function getAvailableNamespaceIds( Config $config ): array {
 		$namespaceInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
 		$configuredNamespaces = array_replace(
 			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' ),
@@ -541,7 +540,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @param string $contentModel Content model ID
 	 * @return bool
 	 */
-	public static function isAllowedContentType( Config $config, $contentModel ) {
+	public static function isAllowedContentType( Config $config, string $contentModel ): bool {
 		$availableContentModels = array_merge(
 			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
 			$config->get( 'VisualEditorAvailableContentModels' )

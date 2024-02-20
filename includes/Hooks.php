@@ -117,7 +117,7 @@ class Hooks implements
 	 * namespaces to it. This will run after LocalSettings.php is processed.
 	 * Also ensure Parsoid extension is loaded when necessary.
 	 */
-	public static function onRegistration() {
+	public static function onRegistration(): void {
 		global $wgVisualEditorAvailableNamespaces, $wgContentNamespaces;
 
 		foreach ( $wgContentNamespaces as $contentNamespace ) {
@@ -180,9 +180,8 @@ class Hooks implements
 
 	/**
 	 * @internal For internal use in extension.json only.
-	 * @return array
 	 */
-	public static function getDataForDesktopArticleTargetInitModule() {
+	public static function getDataForDesktopArticleTargetInitModule(): array {
 		return [
 			'unsupportedEditParams' => self::UNSUPPORTED_EDIT_PARAMS,
 		];
@@ -255,7 +254,7 @@ class Hooks implements
 	 * @param Config $config VE config object
 	 * @return bool The User Agent is unsupported
 	 */
-	private static function isUAUnsupported( WebRequest $req, $config ) {
+	private static function isUAUnsupported( WebRequest $req, Config $config ): bool {
 		if ( $req->getVal( 'vesupported' ) ) {
 			return false;
 		}
@@ -297,7 +296,7 @@ class Hooks implements
 	 * @param WebRequest $req
 	 * @return bool
 	 */
-	private static function isSupportedEditPage( Title $title, User $user, WebRequest $req ) {
+	private static function isSupportedEditPage( Title $title, User $user, WebRequest $req ): bool {
 		if (
 			$req->getVal( 'action' ) !== 'edit' ||
 			!MediaWikiServices::getInstance()->getPermissionManager()->quickUserCan( 'edit', $user, $title )
@@ -322,10 +321,10 @@ class Hooks implements
 	}
 
 	/**
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @return bool
 	 */
-	private static function enabledForUser( $user ) {
+	private static function enabledForUser( UserIdentity $user ): bool {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$userOptionsLookup = $services->getUserOptionsLookup();
@@ -340,10 +339,10 @@ class Hooks implements
 	/**
 	 * @param Title $title
 	 * @param WebRequest $req
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @return bool
 	 */
-	private static function isVisualAvailable( $title, $req, $user ) {
+	private static function isVisualAvailable( Title $title, WebRequest $req, UserIdentity $user ): bool {
 		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
@@ -363,10 +362,10 @@ class Hooks implements
 
 	/**
 	 * @param Title $title
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @return bool
 	 */
-	private static function isWikitextAvailable( $title, $user ) {
+	private static function isWikitextAvailable( Title $title, UserIdentity $user ): bool {
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
 		return $userOptionsLookup->getOption( $user, 'visualeditor-newwikitext' ) &&
@@ -378,7 +377,7 @@ class Hooks implements
 	 * @param string $key
 	 * @param string $value
 	 */
-	private static function deferredSetUserOption( UserIdentity $user, string $key, string $value ) {
+	private static function deferredSetUserOption( UserIdentity $user, string $key, string $value ): void {
 		DeferredUpdates::addCallableUpdate( static function () use ( $user, $key, $value ) {
 			$services = MediaWikiServices::getInstance();
 			if ( $services->getReadOnlyMode()->isReadOnly() ) {
@@ -449,7 +448,7 @@ class Hooks implements
 	 * @param WebRequest $req
 	 * @return string 'wikitext' or 'visual'
 	 */
-	private static function getEditPageEditor( User $user, WebRequest $req ) {
+	private static function getEditPageEditor( User $user, WebRequest $req ): string {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 		if ( $config->get( 'VisualEditorDisableForAnons' ) && !$user->isRegistered() ) {
@@ -471,8 +470,8 @@ class Hooks implements
 	 * @return string 'wikitext' or 'visual'
 	 */
 	public static function getPreferredEditor(
-		User $user, WebRequest $req, $useWikitextInMultiTab = false
-	) {
+		User $user, WebRequest $req, bool $useWikitextInMultiTab = false
+	): string {
 		// VisualEditor shouldn't even call this method when it's disabled, but it is a public API for
 		// other extensions (e.g. DiscussionTools), and the editor preferences might have surprising
 		// values if the user has tried VisualEditor in the past and then disabled it. (T257234)
@@ -506,7 +505,7 @@ class Hooks implements
 	 * @param WebRequest $req
 	 * @return string
 	 */
-	private static function getLastEditor( User $user, WebRequest $req ) {
+	private static function getLastEditor( User $user, WebRequest $req ): string {
 		// This logic matches getLastEditor in:
 		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
 		$editor = $req->getCookie( 'VEE', '' );
