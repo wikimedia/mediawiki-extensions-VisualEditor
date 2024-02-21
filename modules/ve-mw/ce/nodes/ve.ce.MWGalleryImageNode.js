@@ -30,7 +30,7 @@ ve.ce.MWGalleryImageNode = function VeCeMWGalleryImageNode( model ) {
 
 	var defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;
 	var attributes = model.getAttributes();
-	var galleryMwAttrs = model.parent.getAttributes().mw.attrs;
+	var galleryMwAttrs = model.parent.getAttribute( 'mw' ).attrs;
 
 	// Putting all this setup in the constructor works because MWGalleryImageNodes are never updated,
 	// only created from scratch
