@@ -22,7 +22,16 @@ ve.ui.MWNumberedExternalLinkNodeContextItem = function VeUiMWNumberedExternalLin
 	// Initialization
 	this.$element.addClass( 've-ui-mwNumberedExternalLinkNodeContextItem' );
 
-	if ( this.labelButton ) {
+	if ( this.context.isMobile() ) {
+		// Label editing button doesn't exist on mobile by default
+		this.labelButton = new OO.ui.ButtonWidget( {
+			label: OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' ),
+			framed: false,
+			flags: [ 'progressive' ]
+		} );
+		this.labelButton.connect( this, { click: 'onLabelButtonClick' } );
+		this.$labelLayout.empty().append( this.labelButton.$element );
+	} else {
 		this.labelButton.setLabel( OO.ui.deferMsg( 'visualeditor-linknodeinspector-add-label' ) );
 	}
 };
