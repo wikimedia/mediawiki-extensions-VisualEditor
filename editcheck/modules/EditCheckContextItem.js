@@ -72,7 +72,7 @@ ve.ui.EditCheckContextItem.prototype.close = function ( data ) {
 	if ( this.context.isMobile() ) {
 		this.context.closeButton.toggle( true );
 	}
-	this.data.saveProcessDeferred.resolve( data );
+	this.data.callback( data, this.data );
 };
 
 ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
@@ -146,6 +146,7 @@ ve.ui.EditCheckContextItem.prototype.onRejectClick = function () {
 		'editCheckReferencesInspector',
 		{
 			fragment: this.data.fragment,
+			callback: this.data.callback,
 			saveProcessDeferred: this.data.saveProcessDeferred
 		}
 	// eslint-disable-next-line arrow-body-style
