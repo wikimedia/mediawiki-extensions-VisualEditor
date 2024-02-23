@@ -191,6 +191,12 @@
 				"SpecialPageFactory",
 				"VisualEditor.ParsoidClientFactory"
 			]
+		},
+		"editcheckreferenceurl": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\ApiEditCheckReferenceUrl",
+			"optional_services": [
+				"AbuseFilterBlockedDomainStorage"
+			]
 		}
 	},
 	"MessagesDirs": {
@@ -200,7 +206,8 @@
 			"i18n/ve-mw/api",
 			"i18n/ve-mw/mwlanguagevariant",
 			"i18n/ve-wmf",
-			"editcheck/i18n"
+			"editcheck/i18n",
+			"editcheck/i18n/api"
 		]
 	},
 	"ExtensionMessagesFiles": {
