@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Snævar"
+			"Snævar",
+			"Stefán Örvar Sigmundsson"
 		]
 	},
 	"editcheck-dialog-action-no": "Nei",
 	"editcheck-dialog-action-yes": "Já",
-	"editcheck-dialog-addref-description": "Hjálpa notendum að skilja hvaðan gefnar upplýsingar koma með því að bæta við heimild.",
+	"editcheck-dialog-addref-description": "Hjálpa lesendum að skilja hvaðan þessar upplýsingar koma með því að bæta við tilvitnun.",
 	"editcheck-dialog-addref-reject-question": "Afhverju ert þú ekki að bæta við heimild?",
-	"editcheck-dialog-addref-reject-description": "Aðrir notendur vilja vita hvers vegna þú vilt ekki bæta við heimild.",
+	"editcheck-dialog-addref-reject-description": "Aðrir notendur myndu meta það að læra meira um ákvörðun þína um að vísa frá tilvitnuninni.",
 	"editcheck-dialog-addref-reject-irrelevant": "Mér finnst heimild ekki eiga við breytinguna sem ég er að gera",
 	"editcheck-dialog-addref-reject-common-knowledge": "Upplýsingarnar sem ég er að bæta við eru þekktar víða",
 	"editcheck-dialog-addref-reject-uncertain": "Ég er ekki viss hvaða heimild ég á að bæta við",

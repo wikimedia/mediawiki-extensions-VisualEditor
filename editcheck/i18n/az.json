@@ -15,5 +15,7 @@
 	"editcheck-dialog-addref-reject-other": "Digər",
 	"editcheck-dialog-addref-success-notify": "İstinad əlavə etdiyiniz üçün təşəkkür edirik!",
 	"editcheck-dialog-addref-title": "İstinad əlavə et",
-	"editcheck-dialog-title": "Yayımlamadan əvvəl"
+	"editcheck-dialog-title": "Yayımlamadan əvvəl",
+	"tag-editcheck-reference-decline-common-knowledge": "Redaktə Yoxlanışı (istinadlar) rədd edildi (hamının bildiyi)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck istinadı hamının bildiyi məlumat kimi rədd edildi"
 }
