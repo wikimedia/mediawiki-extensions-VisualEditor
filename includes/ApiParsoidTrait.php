@@ -84,9 +84,9 @@ trait ApiParsoidTrait {
 		if ( $ex instanceof LocalizedHttpException ) {
 			$converter = new \MediaWiki\Message\Converter();
 			$msg = $converter->convertMessageValue( $ex->getMessageValue() );
-			$this->dieWithError( $msg );
+			$this->dieWithError( $msg, null, $ex->getErrorData() );
 		} else {
-			$this->dieWithException( $ex );
+			$this->dieWithException( $ex, [ 'data' => $ex->getErrorData() ] );
 		}
 	}
 
