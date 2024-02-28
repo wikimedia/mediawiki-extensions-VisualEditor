@@ -40,7 +40,7 @@
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Konci penyortir berobah deri $1 jadi $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Konci penyortir disetèl jadi $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Konci penyortir dilepas setèlannya jadi $1",
-	"visualeditor-changedesc-mwlanguagevariant": "Opmak ragem basa dirobah",
+	"visualeditor-changedesc-mwlanguagevariant": "Tetengeran ragem basa dirobah",
 	"visualeditor-changedesc-mwredirect": "Sasaran pengalihan berobah deri $1 jadi $2",
 	"visualeditor-changedesc-mwtransclusion": "Patokan sablonan dirobah",
 	"visualeditor-desc": "Pemermak delengan bakal MediaWiki",
@@ -349,7 +349,7 @@
 	"visualeditor-version-label": "Pèrsi",
 	"visualeditor-wikitext-progress": "Nuker tèks wiki",
 	"visualeditor-wikitext-warning": "Lu maké pemermak delengan - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|tèks wiki]] kaga' jalan di mari. Bakal ngeganti ke pemermakan sumber kapan aja sonder keilangan lu punya permakan, klik tombol ganti.",
-	"visualeditor-wikitext-warning-title": "Opmak tèks wiki keendus",
+	"visualeditor-wikitext-warning-title": "Tetengeran tèks wiki keendus",
 	"visualeditor-wikitextconvert-title": "Nuker bentukan ke tèks wiki?",
 	"visualeditor-wikitextconvert-message": "Lu nèmpèlin isi nyang banyak pembentukannya. Apa lu pèngèn nuker ni bentukan jadi tèks wiki?",
 	"visualeditor-wikitextconvert-convert": "Tuker ke tèks wiki"
