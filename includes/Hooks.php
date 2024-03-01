@@ -153,6 +153,11 @@ class Hooks implements
 			] );
 			$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
 		}
+		// Joining a collab session
+		if ( $output->getRequest()->getVal( 'collabSession' ) ) {
+			$output->addModules( 'ext.visualEditor.collab' );
+		}
+
 		// add scroll offset js variable to output
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$skinsToolbarScrollOffset = $veConfig->get( 'VisualEditorSkinToolbarScrollOffset' );

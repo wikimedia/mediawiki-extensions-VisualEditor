@@ -246,6 +246,11 @@
 				"lib/ve/lib/socket.io-client/socket.io.min.js"
 			]
 		},
+		"peerjs": {
+			"scripts": [
+				"lib/ve/lib/peerjs/peerjs.min.js"
+			]
+		},
 		"dompurify": {
 			"scripts": [
 				"lib/ve/lib/dompurify/purify.js"
@@ -557,6 +562,47 @@
 		"ext.visualEditor.collabTarget.init.styles": {
 			"styles": [
 				"modules/ve-mw-collab/ve.init.mw.CollabTarget.css"
+			]
+		},
+		"ext.visualEditor.collab": {
+			"scripts": [
+				"lib/ve/rebaser/src/dm/ve.dm.RebaseDocState.js",
+				"lib/ve/rebaser/src/dm/ve.dm.RebaseServer.js",
+				"lib/ve/rebaser/src/dm/ve.dm.DocumentStore.js",
+				"lib/ve/rebaser/src/dm/ve.dm.ProtocolServer.js",
+				"lib/ve/src/dm/ve.dm.RebaseClient.js",
+				"lib/ve/src/dm/ve.dm.SurfaceSynchronizer.js",
+				"lib/ve/src/ui/widgets/ve.ui.AuthorItemWidget.js",
+				"lib/ve/src/ui/tools/ve.ui.AuthorListPopupTool.js",
+				"lib/ve/src/ve.FakePeer.js",
+				"lib/ve/collab/ve.collab.js",
+				"lib/ve/collab/ve.dm.CollabTransportServer.js",
+				"lib/ve/collab/ve.ui.CollabProcessDialog.js",
+				"lib/ve/collab/ve.ui.CollabTool.js",
+				"modules/ve-mw-collab/ve.init.mw.collab.init.js"
+			],
+			"styles": [
+				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorItemWidget.css"
+			],
+			"dependencies": [
+				"color-picker",
+				"peerjs",
+				"ext.visualEditor.core"
+			],
+			"messages": [
+				"visualeditor-collab-copy-title",
+				"visualeditor-collab-dialog-title",
+				"visualeditor-collab-dialog-privacy",
+				"visualeditor-collab-dialog-sessionend",
+				"visualeditor-collab-dialog-sharing",
+				"visualeditor-collab-dialog-summary-host",
+				"visualeditor-collab-dialog-summary-join",
+				"visualeditor-collab-hostbutton-label",
+				"visualeditor-collab-joinbutton-label",
+				"visualeditor-collab-url-mismatch",
+				"visualeditor-collab-url-placeholder",
+				"visualeditor-collab-url-prompt",
+				"visualeditor-collab-user-placeholder"
 			]
 		},
 		"ext.visualEditor.ve": {
