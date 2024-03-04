@@ -108,6 +108,10 @@
 		"VisualEditorRebaserURL": {
 			"value": false
 		},
+		"VisualEditorEnableCollabBeta": {
+			"description": "Enable the experimental ve.collab beta feature.",
+			"value": false
+		},
 		"VisualEditorShowBetaWelcome": {
 			"value": true
 		},
@@ -222,6 +226,7 @@
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "VisualEditorHooks",
 		"GetPreferences": "VisualEditorHooks",
+		"GetBetaFeaturePreferences": "VisualEditorHooks",
 		"ListDefinedTags": "VisualEditorHooks",
 		"MakeGlobalVariablesScript": "VisualEditorHooks",
 		"OutputPageBodyAttributes": "VisualEditorHooks",
@@ -2741,6 +2746,7 @@
 	"DefaultUserOptions": {
 		"visualeditor-autodisable": 0,
 		"visualeditor-betatempdisable": 0,
+		"visualeditor-collab": 0,
 		"visualeditor-editor": "visualeditor",
 		"visualeditor-enable": 0,
 		"visualeditor-hidebetawelcome": 0,
