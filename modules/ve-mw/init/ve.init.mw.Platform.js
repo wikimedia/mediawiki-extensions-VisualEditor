@@ -79,6 +79,14 @@ ve.init.mw.Platform.prototype.getMessage = mw.msg.bind( mw );
  * @method
  * @inheritdoc
  */
+ve.init.mw.Platform.prototype.getUserName = function () {
+	return mw.user.getName();
+};
+
+/**
+ * @method
+ * @inheritdoc
+ */
 ve.init.mw.Platform.prototype.parseNumber = function ( value ) {
 	var number = $.tablesorter.getParser( 'number' ).format( value );
 	// formatDigit returns -Infinity when parsing fails, change this to NaN
