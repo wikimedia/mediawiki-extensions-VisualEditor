@@ -25,7 +25,6 @@ use MediaWiki\ChangeTags\Hook\ListDefinedTagsHook;
 use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
-use MediaWiki\Extension\BetaFeatures\Hooks\GetBetaFeaturePreferencesHook;
 use MediaWiki\Hook\BeforeInitializeHook;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\CustomEditorHook;
@@ -69,7 +68,6 @@ class Hooks implements
 	DifferenceEngineViewHeaderHook,
 	EditPage__showEditForm_fieldsHook,
 	GetPreferencesHook,
-	GetBetaFeaturePreferencesHook,
 	ListDefinedTagsHook,
 	MakeGlobalVariablesScriptHook,
 	OutputPageBodyAttributesHook,
@@ -1048,37 +1046,6 @@ class Hooks implements
 		$preferences['visualeditor-findAndReplace-regex'] = $api;
 		$preferences['visualeditor-findAndReplace-matchCase'] = $api;
 		$preferences['visualeditor-findAndReplace-word'] = $api;
-	}
-
-	/**
-	 * Handler for the GetBetaFeaturePreferences hook, to add and hide user beta preferences as configured
-	 *
-	 * @param User $user
-	 * @param array &$preferences
-	 */
-	public function onGetBetaFeaturePreferences( User $user, array &$preferences ) {
-		$services = MediaWikiServices::getInstance();
-		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-
-		if ( $veConfig->get( 'VisualEditorEnableCollabBeta' ) ) {
-			$coreConfig = RequestContext::getMain()->getConfig();
-			$iconpath = $coreConfig->get( 'ExtensionAssetsPath' ) . '/VisualEditor/images';
-
-			$preferences['visualeditor-collab'] = [
-				'version' => '1.0',
-				'label-message' => 'visualeditor-preference-collab-label',
-				'desc-message' => 'visualeditor-preference-collab-description',
-				'screenshot' => [
-					'ltr' => "$iconpath/betafeatures-icon-collab-ltr.svg",
-					'rtl' => "$iconpath/betafeatures-icon-collab-rtl.svg",
-				],
-				'info-message' => 'visualeditor-preference-collab-info-link',
-				'discussion-message' => 'visualeditor-preference-collab-discussion-link',
-				'requirements' => [
-					'javascript' => true
-				]
-			];
-		}
 	}
 
 	/**
