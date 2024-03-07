@@ -296,6 +296,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Text shown in education popup for the link inspector tool.",
 	"visualeditor-linkinspector-educationpopup-title": "Title shown at the top of education popup for the link inspector tool.\n{{Identical|Link}}",
 	"visualeditor-linkinspector-illegal-title": "Warning that the entered text is not a valid page title.",
+	"visualeditor-linkinspector-invalid-blocked": "Warning that the entered URL is blocked",
 	"visualeditor-linkinspector-invalid-external": "Warning that the entered URL is not valid.",
 	"visualeditor-linknodeinspector-add-label": "Label of button that converts an auto-numbered, external, labelless link into a labeled external link",
 	"visualeditor-linknodeinspector-title": "Title of inspector for editing auto-numbered, external, labelless links.\n\nSee also:\n* {{msg-mw|Visualeditor-annotationbutton-linknode-tooltip}}",

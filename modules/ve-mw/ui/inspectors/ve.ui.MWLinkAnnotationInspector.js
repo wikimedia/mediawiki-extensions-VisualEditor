@@ -88,6 +88,8 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 		}
 	);
 
+	this.onExternalLinkInputChangeDebounced = ve.debounce( this.onExternalLinkInputChange, 750 );
+
 	// Events
 	this.linkTypeIndex.connect( this, { set: 'onLinkTypeIndexSet' } );
 	this.labelInput.connect( this, { change: 'onLabelInputChange' } );
@@ -100,7 +102,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.initialize = function () {
 		enter: 'onLinkInputEnter'
 	} );
 	this.externalAnnotationInput.getTextInputWidget().connect( this, {
-		change: 'onExternalLinkInputChange',
+		change: 'onExternalLinkInputChangeDebounced',
 		enter: 'onLinkInputEnter'
 	} );
 	// this.internalAnnotationInput is already bound by parent class
@@ -301,16 +303,26 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
  * @param {string} value Current value of input widget
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkInputChange = function () {
-	this.externalAnnotationInput.getTextInputWidget().getValidity()
-		.then(
-			() => {
-				this.externalAnnotationField.setErrors( [] );
-				this.updateSize();
-			}, () => {
-				this.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-invalid-external' ) ] );
-				this.updateSize();
+	this.externalAnnotationInput.getValidity().then(
+		() => {
+			// clear any invalid-protocol errors
+			this.externalAnnotationField.setErrors( [] );
+		}, ( errortype ) => {
+			// Messages that can be used here:
+			// * visualeditor-linkinspector-invalid-blocked
+			// * visualeditor-linkinspector-invalid-external
+			this.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-' + errortype ) ] );
+			if ( errortype === 'invalid-blocked' ) {
+				// This has been quite async, so:
+				this.actions.forEach( { actions: [ 'done', 'insert' ] }, ( action ) => {
+					action.setDisabled( true );
+				} );
+				ve.track( 'activity.editCheckReliability', { action: 'link-blocked' } );
 			}
-		);
+		}
+	).always( () => {
+		this.updateSize();
+	} );
 
 	if ( this.isActive && !this.trackedExternalLinkInputChange && !this.switchingLinkTypes ) {
 		ve.track( 'activity.' + this.constructor.static.name, { action: 'external-link-input' } );
