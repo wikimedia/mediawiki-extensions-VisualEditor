@@ -330,6 +330,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "הציגו לי תמיד את העורך החזותי אם אפשר",
 	"visualeditor-preference-tabs-prefer-wt": "הציגו לי תמיד את עורך קוד המקור",
 	"visualeditor-preference-tabs-remember-last": "זכרו את העורך האחרון שלי",
+	"visualeditor-preference-collab-label": "עריכה משותפת",
+	"visualeditor-preference-collab-description": "אפשרות להזמין משתמשים אחרים להצטרף לפעולת העריכה שלך בעורך החזותי.",
 	"visualeditor-rebase-client-export": "יצוא",
 	"visualeditor-rebase-client-export-start": "יצוא...",
 	"visualeditor-rebase-client-import": "יבוא",
