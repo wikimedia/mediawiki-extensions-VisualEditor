@@ -20,7 +20,8 @@
 			"Рустам Нурыев",
 			"Янмурза Баки",
 			"З. ӘЙЛЕ",
-			"Bashkorttan"
+			"Bashkorttan",
+			"MR973"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -284,7 +285,7 @@
 	"visualeditor-mweditmodeve-progress": "Күҙләгес мөхәрриргә күсеү...",
 	"visualeditor-mweditmodeve-showagain": "Был хәбәрҙе ҡабаттан күрһәтмәҫкә",
 	"visualeditor-mweditmodeve-title": "Күҙләгес мөхәррирләүгә күсергәме?",
-	"visualeditor-mweditmodeve-tool-current": "Күҙләгес мөхәррир",
+	"visualeditor-mweditmodeve-tool-current": "Визуаль мөхәррирләү",
 	"visualeditor-mweditmodeve-tool-unavailable": "Күҙләгес мөхәррир бында асыҡ түгел",
 	"visualeditor-mweditmodeve-warning": "Һеҙ тәүге тексты мөхәррирләүгә күсәһегеҙ. Дауам итергә теләйһегеҙме?",
 	"visualeditor-mweditmodewt-popup-body": "Ошо билдәгә баҫып, һеҙ теләгән мәлдә төп сығанаҡты мөхәррирләү битенә күсә алаһығыҙ.",
