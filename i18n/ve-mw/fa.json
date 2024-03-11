@@ -343,6 +343,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "در صورت امکان، همیشه از ویرایشگر دیداری استفاده می‌کنم",
 	"visualeditor-preference-tabs-prefer-wt": "همیشه از ویرایشگر متنی استفاده می‌کنم",
 	"visualeditor-preference-tabs-remember-last": "آخرین ویرایشگری که استفاده کردم را به خاطر بسپار",
+	"visualeditor-preference-collab-label": "ویرایش مشارکتی",
+	"visualeditor-preference-collab-description": "از کاربران دیگر دعوت کنید تا به نشست ویرایشی شما در ویرایشگر دیداری بپیوندند.",
 	"visualeditor-rebase-client-export": "برون‌بری",
 	"visualeditor-rebase-client-export-start": "برون‌بری...",
 	"visualeditor-rebase-client-import": "درون‌ریزی",
