@@ -284,7 +284,7 @@ class Hooks implements
 			}
 			$version = $matches[1];
 			foreach ( $rules as $rule ) {
-				list( $op, $matchVersion ) = $rule;
+				[ $op, $matchVersion ] = $rule;
 				if (
 					( $op === '<' && $version < $matchVersion ) ||
 					( $op === '>' && $version > $matchVersion ) ||
@@ -1219,7 +1219,7 @@ class Hooks implements
 						'lib/ve/lib/jquery.uls/src/jquery.uls.data.js',
 						'lib/ve/lib/jquery.uls/src/jquery.uls.data.utils.js',
 					],
-			] ] );
+				] ] );
 		}
 	}
 
