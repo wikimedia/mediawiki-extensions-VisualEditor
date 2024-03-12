@@ -1525,7 +1525,7 @@
 			],
 			"styles": [
 				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog.css",
-				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchPopupWidget.css"
+				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchPopupWidget.less"
 			],
 			"skinStyles": {
 				"default": [
