@@ -1529,10 +1529,10 @@
 			],
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-wikimedia.css"
+					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-wikimedia.less"
 				],
 				"monobook": [
-					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.css"
+					"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog-apex.less"
 				]
 			},
 			"dependencies": [
