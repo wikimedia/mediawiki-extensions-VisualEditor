@@ -6,7 +6,7 @@
  */
 
 /**
- * Inspector for editing Mediawiki comments.
+ * Inspector for editing MediaWiki comments.
  *
  * @class
  * @extends ve.ui.CommentInspector
