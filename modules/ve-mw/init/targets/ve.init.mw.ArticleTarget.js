@@ -472,8 +472,11 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 	if ( !this.canEdit ) {
 		this.getSurface().setReadOnly( true );
 	} else {
-		// Auto-save
-		this.initAutosave();
+		// TODO: If the user rejects joining the collab session, start auto-save
+		if ( !this.currentUrl.searchParams.has( 'collabSession' ) ) {
+			// Auto-save
+			this.initAutosave();
+		}
 
 		setTimeout( function () {
 			mw.libs.ve.targetSaver.preloadDeflate();
