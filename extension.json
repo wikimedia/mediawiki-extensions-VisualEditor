@@ -468,7 +468,7 @@
 			],
 			"styles": [
 				"modules/ve-mw/init/styles/ve.init.mw.MobileArticleTarget.less",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMobileSaveDialog.css"
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMobileSaveDialog.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.base",
@@ -1501,7 +1501,7 @@
 				"modules/ve-mw/preinit/ve.init.MWWelcomeDialog.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWWelcomeDialog.css"
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWWelcomeDialog.less"
 			],
 			"dependencies": [
 				"oojs",
@@ -1625,7 +1625,7 @@
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWIncludesNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWAnnotationNode.css",
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTableNode.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWPreDialog.css",
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWPreDialog.less",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableContentElement.css",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.css",
@@ -1793,7 +1793,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWMediaContextItem.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.css",
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaInfoFieldWidget.css"
 			],
 			"dependencies": [
@@ -1935,7 +1935,7 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMetaDialog.css"
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMetaDialog.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
@@ -2064,7 +2064,7 @@
 			],
 			"styles": [
 				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.css",
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.less",
 				"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css",
@@ -2452,7 +2452,7 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWGalleryItemWidget.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWGalleryDialog.css"
+				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWGalleryDialog.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
