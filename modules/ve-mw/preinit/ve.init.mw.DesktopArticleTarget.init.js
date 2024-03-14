@@ -1233,6 +1233,8 @@
 				!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
 				// Disabled for the current request?
 				this.isWelcomeDialogSuppressed() ||
+				// Joining a collab session
+				url.searchParams.has( 'collabSession' ) ||
 				// Hidden using preferences, local storage or cookie?
 				checkPreferenceOrStorage( 'visualeditor-hidebetawelcome', 've-beta-welcome-dialog' )
 			);
@@ -1426,17 +1428,21 @@
 	 * Get the edit mode for the given URL
 	 *
 	 * @param {URL} editUrl Edit URL
-	 * @return {string} 'visual' or 'source'
+	 * @return {string|null} 'visual' or 'source', null if the editor is not being loaded
 	 */
 	function getEditModeFromUrl( editUrl ) {
 		if ( mw.config.get( 'wgDiscussionToolsStartNewTopicTool' ) ) {
 			// Avoid conflicts with DiscussionTools
-			return false;
+			return null;
 		}
-		// On view pages if veaction is correctly set
-		var m = veactionToMode[ editUrl.searchParams.get( 'veaction' ) ];
-		if ( isViewPage && init.isAvailable && availableModes.indexOf( m ) !== -1 ) {
-			return m;
+		if ( isViewPage && init.isAvailable ) {
+			// On view pages if veaction is correctly set
+			var mode = veactionToMode[ editUrl.searchParams.get( 'veaction' ) ] ||
+				// Always load VE visual mode if collabSession is set
+				( editUrl.searchParams.has( 'collabSession' ) ? 'visual' : null );
+			if ( mode && availableModes.indexOf( mode ) !== -1 ) {
+				return mode;
+			}
 		}
 		// Edit pages
 		if ( isEditPage && isSupportedEditPage( editUrl ) ) {
