@@ -47,7 +47,12 @@
 		return;
 	}
 
-	function showLoading( /* mode */ ) {
+	/**
+	 * Show the loading progress bar
+	 *
+	 * @return {string} mode Edit mode, 'visual' or 'source'
+	 */
+	function showLoading() {
 		if ( isLoading ) {
 			return;
 		}
@@ -66,10 +71,18 @@
 		$toolbarPlaceholderBar.append( init.$loading );
 	}
 
+	/**
+	 * Increment loading progress by one step
+	 *
+	 * See mw.libs.ve.ProgressBarWidget for steps.
+	 */
 	function incrementLoadingProgress() {
 		init.progressBar.incrementLoadingProgress();
 	}
 
+	/**
+	 * Clear and hide the loading progress bar
+	 */
 	function clearLoading() {
 		init.progressBar.clearLoading();
 		isLoading = false;
@@ -85,6 +98,11 @@
 		hideToolbarPlaceholder();
 	}
 
+	/**
+	 * Handle window scroll events
+	 *
+	 * @param {Event} e
+	 */
 	function onWindowScroll() {
 		var scrollTop = $( document.documentElement ).scrollTop();
 		var floating = scrollTop > contentTop;
@@ -98,6 +116,9 @@
 
 	var onWindowScrollListener = mw.util.throttle( onWindowScroll, 250 );
 
+	/**
+	 * Show a placeholder for the VE toolbar
+	 */
 	function showToolbarPlaceholder() {
 		if ( !$toolbarPlaceholder ) {
 			// Create an equal-height placeholder for the toolbar to avoid vertical jump
@@ -130,6 +151,9 @@
 		} );
 	}
 
+	/**
+	 * Hide the placeholder for the VE toolbar
+	 */
 	function hideToolbarPlaceholder() {
 		if ( $toolbarPlaceholder ) {
 			window.removeEventListener( 'scroll', onWindowScrollListener );
@@ -138,6 +162,11 @@
 		}
 	}
 
+	/**
+	 * Create a temporary `<textarea>` wikitext editor while source mode loads
+	 *
+	 * @param {Object} data Initialisation data for VE
+	 */
 	function setupTempWikitextEditor( data ) {
 		var wikitext = data.content;
 		// Add trailing linebreak to non-empty wikitext documents for consistency
@@ -164,6 +193,9 @@
 		mw.hook( 've.wikitextInteractive' ).fire();
 	}
 
+	/**
+	 * Synchronise state of temporary wikitexteditor back to the VE initialisation data object
+	 */
 	function syncTempWikitextEditor() {
 		var wikitext = tempWikitextEditor.getValue();
 
@@ -188,6 +220,9 @@
 		tempWikitextEditor.$element.prop( 'readonly', true );
 	}
 
+	/**
+	 * Teardown the temporary wikitext editor
+	 */
 	function teardownTempWikitextEditor() {
 		// Destroy widget and placeholder
 		tempWikitextEditor.$element.remove();
@@ -198,6 +233,9 @@
 		$( 'html' ).removeClass( 've-tempSourceEditing' );
 	}
 
+	/**
+	 * Abort loading the editor
+	 */
 	function abortLoading() {
 		$( 'html' ).removeClass( 've-activated' );
 		active = false;
@@ -209,6 +247,11 @@
 		clearLoading();
 	}
 
+	/**
+	 * Handle keydown events on the document
+	 *
+	 * @param {jQuery.Event} e Keydown event
+	 */
 	function onDocumentKeyDown( e ) {
 		if ( e.which === 27 /* OO.ui.Keys.ESCAPE */ ) {
 			abortLoading();
@@ -324,6 +367,12 @@
 		mw.libs.ve.activationStart = ve.now();
 	}
 
+	/**
+	 * Get the skin-specific message for an edit tab
+	 *
+	 * @param {string} tabMsg Base tab message key
+	 * @return {string} Message text
+	 */
 	function getTabMessage( tabMsg ) {
 		var tabMsgKey = tabMessages[ tabMsg ];
 		var skinMsgKeys = {
@@ -672,6 +721,11 @@
 		}
 	}
 
+	/**
+	 * Get the last mode a user used
+	 *
+	 * @return {string|null} 'visualeditor', 'wikitext' or null
+	 */
 	function getLastEditor() {
 		// This logic matches VisualEditorHooks::getLastEditor
 		var editor = mw.cookie.get( 'VEE', '' );
@@ -694,7 +748,7 @@
 	 *
 	 * For the preferred *available* editor, use getAvailableEditPageEditor.
 	 *
-	 * @return {string} 'visualeditor' or 'wikitext'
+	 * @return {string|null} 'visualeditor', 'wikitext' or null
 	 */
 	function getEditPageEditor() {
 		// This logic matches VisualEditorHooks::getEditPageEditor
@@ -745,18 +799,35 @@
 		}
 	}
 
+	/**
+	 * Check if a boolean preference is set in user options, mw.storage or a cookie
+	 *
+	 * @param {string} prefName Preference name
+	 * @param {string} storageKey mw.storage key
+	 * @param {string} cookieName Cookie name
+	 * @return {boolean} Preference is set
+	 */
 	function checkPreferenceOrStorage( prefName, storageKey, cookieName ) {
 		storageKey = storageKey || prefName;
 		cookieName = cookieName || storageKey;
-		return mw.user.options.get( prefName ) ||
+		return !!( mw.user.options.get( prefName ) ||
 			(
 				!mw.user.isNamed() && (
 					mw.storage.get( storageKey ) ||
 					mw.cookie.get( cookieName, '' )
 				)
-			);
+			)
+		);
 	}
 
+	/**
+	 * Set a boolean preference to true in user options, mw.storage or a cookie
+	 *
+	 * @param {string} prefName Preference name
+	 * @param {string} storageKey mw.storage key
+	 * @param {string} cookieName Cookie name
+	 * @return {boolean} Preference is set
+	 */
 	function setPreferenceOrStorage( prefName, storageKey, cookieName ) {
 		storageKey = storageKey || prefName;
 		cookieName = cookieName || storageKey;
@@ -797,10 +868,20 @@
 	var autodisable = !!+mw.user.options.get( 'visualeditor-autodisable' );
 	tabPreference = mw.user.options.get( 'visualeditor-tabs' );
 
+	/**
+	 * The only edit tab shown to the user is for visual mode
+	 *
+	 * @return {boolean}
+	 */
 	function isOnlyTabVE() {
 		return conf.singleEditTab && getAvailableEditPageEditor() === 'visual';
 	}
 
+	/**
+	 * The only edit tab shown to the user is for source mode
+	 *
+	 * @return {boolean}
+	 */
 	function isOnlyTabWikitext() {
 		return conf.singleEditTab && getAvailableEditPageEditor() === 'source';
 	}
@@ -908,11 +989,17 @@
 			}
 		},
 
+		/**
+		 * Setup multiple edit tabs and section links (edit + edit source)
+		 */
 		setupMultiTabSkin: function () {
 			init.setupMultiTabs();
 			init.setupMultiSectionLinks();
 		},
 
+		/**
+		 * Setup multiple edit tabs (edit + edit source)
+		 */
 		setupMultiTabs: function () {
 			// Minerva puts the '#ca-...' ids on <a> nodes, other skins put them on <li>
 			var $caEdit = $( '#ca-edit' );
@@ -941,6 +1028,9 @@
 			}
 		},
 
+		/**
+		 * Setup multiple section links (edit + edit source)
+		 */
 		setupMultiSectionLinks: function () {
 			var $editsections = $( '#mw-content-text .mw-editsection' ),
 				bodyDir = $( document.body ).css( 'direction' );
@@ -984,6 +1074,12 @@
 			) || e.isTrigger );
 		},
 
+		/**
+		 * Handle click events on an edit tab
+		 *
+		 * @param {string} mode Edit mode, 'visual' or 'source'
+		 * @param {Event} e Event
+		 */
 		onEditTabClick: function ( mode, e ) {
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
@@ -1038,6 +1134,12 @@
 			}
 		},
 
+		/**
+		 * Activate VE
+		 * @param {string} mode Target mode: 'visual' or 'source'
+		 * @param {URL} [linkUrl] URL to navigate to, potentially with extra parameters
+		 * @param {string} [section]
+		 */
 		activateVe: function ( mode, linkUrl, section ) {
 			var wikitext = $( '#wpTextbox1' ).textSelection( 'getContents' ),
 				modified = mw.config.get( 'wgAction' ) === 'submit' ||
@@ -1308,6 +1410,12 @@
 		// for e.g. "Edit" > "Edit source" even when VE is not available.
 	}
 
+	/**
+	 * Check if a URL doesn't contain any params which would prevent VE from loading, e.g. 'undo'
+	 *
+	 * @param {URL} editUrl
+	 * @return {boolean} URL contains no unsupported params
+	 */
 	function isSupportedEditPage( editUrl ) {
 		return configData.unsupportedEditParams.every( function ( param ) {
 			return !editUrl.searchParams.has( param );
