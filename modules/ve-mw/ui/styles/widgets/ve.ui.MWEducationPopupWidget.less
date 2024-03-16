@@ -7,31 +7,31 @@
 
 .ve-ui-educationPopup {
 	position: relative;
-}
 
-.ve-ui-educationPopup > .mw-pulsating-dot {
-	pointer-events: none;
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	z-index: 1;
-}
+	> .mw-pulsating-dot {
+		pointer-events: none;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		z-index: 1;
 
-.oo-ui-widget-disabled .mw-pulsating-dot {
-	/* Don't show while container is (e.g. surface loading) */
-	/* stylelint-disable-next-line declaration-no-important */
-	display: none !important;
-}
+		.oo-ui-widget-disabled & {
+			/* Don't show while container is (e.g. surface loading) */
+			/* stylelint-disable-next-line declaration-no-important */
+			display: none !important;
+		}
+	}
 
-.ve-ui-educationPopup-dismiss {
-	margin-top: 0.5em;
-}
+	&-dismiss {
+		margin-top: 0.5em;
+	}
 
-.ve-ui-educationPopup .oo-ui-popupWidget {
-	/* Appear above local dialogs, e.g. toolbar dialog */
-	z-index: 3;
-}
+	.oo-ui-popupWidget {
+		/* Appear above local dialogs, e.g. toolbar dialog */
+		z-index: 3;
+	}
 
-.ve-ui-educationPopup .oo-ui-popupWidget-body {
-	padding: 1em;
+	.oo-ui-popupWidget-body {
+		padding: 1em;
+	}
 }

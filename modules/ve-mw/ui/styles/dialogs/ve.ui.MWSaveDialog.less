@@ -30,10 +30,10 @@
 		border: 1px solid #c8ccd1;
 		border-top: 0;
 		display: none;
-	}
 
-	&-withOptions &-options {
-		display: block;
+		.ve-ui-mwSaveDialog-withOptions & {
+			display: block;
+		}
 	}
 
 	&-checkboxes {
@@ -44,10 +44,10 @@
 			display: inline-block;
 			margin: 0 1.5em 0.5em 0;
 			vertical-align: middle;
-		}
 
-		> .oo-ui-fieldLayout:last-child {
-			margin-right: 0;
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 
 		&-withExpiry > .ve-ui-mwSaveDialog-field-wpMinoredit {

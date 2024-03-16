@@ -5,12 +5,14 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-/* Override paragraph margins inside of captions */
-.ve-ce-mwBlockImageNode > figcaption p {
-	margin: 0 !important; /* stylelint-disable-line declaration-no-important */
-}
+.ve-ce-mwBlockImageNode {
+	/* Override paragraph margins inside of captions */
+	> figcaption p {
+		margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+	}
 
-/* Disable zoom link */
-.ve-ce-mwBlockImageNode > a::after {
-	pointer-events: none;
+	/* Disable zoom link */
+	> a::after {
+		pointer-events: none;
+	}
 }
