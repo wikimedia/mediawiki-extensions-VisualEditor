@@ -27,10 +27,6 @@
 	margin-top: 0.5em;
 }
 
-.ve-ui-educationPopup-header {
-	margin-bottom: 1em;
-}
-
 .ve-ui-educationPopup .oo-ui-popupWidget {
 	/* Appear above local dialogs, e.g. toolbar dialog */
 	z-index: 3;
