@@ -17,7 +17,7 @@
 	"visualeditor-backbutton-tooltip": "Til baka",
 	"visualeditor-beta-warning": "Þú getur skipt yfir í upprunaritilinn hvenær sem er með því að smella á skiptihnappinn. Ef þú lendir í einhverjum vandræðum, vinsamlegast tilkynntu þau hér fyrir neðan.",
 	"visualeditor-browserwarning": "Þú ert að nota vafra sem þessi ritill styður ekki opinberlega.",
-	"visualeditor-ca-createlocaldescriptionsource": "Bæta við staðbundinni lýsingu með wikitexta",
+	"visualeditor-ca-createlocaldescriptionsource": "Bæta við staðbundinni lýsingu með wiki-texta",
 	"visualeditor-ca-createsource": "Búa til frumkóða",
 	"visualeditor-ca-editlocaldescriptionsource": "Breyta staðbundinni lýsingu með wikitexta",
 	"visualeditor-ca-editsource": "Breyta frumkóða",
@@ -213,6 +213,6 @@
 	"visualeditor-special-characters-group-other": "Notað oft",
 	"visualeditor-version-label": "Útgáfa",
 	"visualeditor-wikitext-progress": "Umbreyti wikitexta",
-	"visualeditor-wikitext-warning": "Þú ert að nota Visual Editor — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wikitexti]] virkar ekki hér. Til að breyta wikitexta síðunnar án þess að missa breytingarnar þínar, ýttu á skipta takkann.",
+	"visualeditor-wikitext-warning": "Þú ert að nota myndræna ritilinn - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|wiki-texti]] virkar ekki hér. Til að skipta yfir í upprunaritvinnslu hvenær sem er án þess að tapa breytingunum skalt þú smella á skiptihnappinn.",
 	"visualeditor-wikitext-warning-title": "Wiki-textauppmerking greindist"
 }
