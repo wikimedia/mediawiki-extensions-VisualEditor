@@ -153,7 +153,7 @@
 	"visualeditor-dialog-transclusion-param-selection-aria-label": "Paramehterat málles $1",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "Oza málle",
 	"visualeditor-dialog-transclusion-required-parameter": "Bákkolaš gieddi",
-	"visualeditor-dialog-transclusion-required-parameter-description": "Dát gieddi lea bákkolaš.",
+	"visualeditor-dialog-transclusion-required-parameter-description": "Dát gieddi dárbbašuvvo.",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "Ruovttoluotta",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "Joatkke goitge",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "Bákkolaš {{PLURAL:$1|gieddi váilu|giettit váilot}}",
