@@ -594,7 +594,7 @@
 				"modules/ve-mw-collab/ve.init.mw.collab.init.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorItemWidget.css"
+				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorItemWidget.less"
 			],
 			"dependencies": [
 				"color-picker",
@@ -1178,61 +1178,61 @@
 				"lib/ve/src/ve.Filibuster.js"
 			],
 			"styles": [
-				"lib/ve/src/ce/styles/nodes/ve.ce.FocusableNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.ActiveNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.AlienNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.BranchNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.ContentBranchNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.ParagraphNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.RootNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.GeneratedContentNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.HorizontalRuleNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.CommentNode.css",
-				"lib/ve/src/ce/styles/annotations/ve.ce.LanguageAnnotation.css",
-				"lib/ve/src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.ResizableNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.SectionNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.TableCellNode.css",
-				"lib/ve/src/ce/styles/nodes/ve.ce.TableNode.css",
-				"lib/ve/src/ce/styles/ve.ce.css",
-				"lib/ve/src/ce/styles/ve.ce.Surface.css",
-				"lib/ve/src/ui/styles/dialogs/ve.ui.ToolbarDialog.css",
-				"lib/ve/src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
-				"lib/ve/src/ui/styles/dialogs/ve.ui.FindAndReplaceDialog.css",
-				"lib/ve/src/ui/styles/dialogs/ve.ui.ProgressDialog.css",
-				"lib/ve/src/ui/styles/dialogs/ve.ui.SpecialCharacterDialog.css",
-				"lib/ve/src/ui/styles/dialogs/ve.ui.TableDialog.css",
-				"lib/ve/src/ui/styles/tools/ve.ui.FormatTool.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.CompletionWidget.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.ContextSelectWidget.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.DimensionsWidget.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.MediaSizeWidget.css",
-				"lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.css",
-				"lib/ve/src/ui/styles/inspectors/ve.ui.FragmentInspector.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.TargetWidget.css",
-				"lib/ve/src/ui/styles/ve.ui.Context.css",
-				"lib/ve/src/ui/styles/ve.ui.ContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.LinearContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.TableLineContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.AlignableContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.CommentContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.LanguageContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.MergeCellsContextItem.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.ToolContextItem.css",
-				"lib/ve/src/ui/styles/ve.ui.Overlay.css",
-				"lib/ve/src/ui/styles/ve.ui.Surface.css",
-				"lib/ve/src/ui/styles/ve.ui.Toolbar.css",
-				"lib/ve/src/ui/styles/ve.ui.TableLineContext.css",
-				"lib/ve/src/ui/styles/ve.ui.DebugBar.css"
+				"lib/ve/src/ce/styles/nodes/ve.ce.FocusableNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.ActiveNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.AlienNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.BranchNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.ContentBranchNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.ParagraphNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.RootNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.GeneratedContentNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.HorizontalRuleNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.CommentNode.less",
+				"lib/ve/src/ce/styles/annotations/ve.ce.LanguageAnnotation.less",
+				"lib/ve/src/ce/styles/annotations/ve.ce.LinkAnnotation.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.ResizableNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.SectionNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.TableCellNode.less",
+				"lib/ve/src/ce/styles/nodes/ve.ce.TableNode.less",
+				"lib/ve/src/ce/styles/ve.ce.less",
+				"lib/ve/src/ce/styles/ve.ce.Surface.less",
+				"lib/ve/src/ui/styles/dialogs/ve.ui.ToolbarDialog.less",
+				"lib/ve/src/ui/styles/dialogs/ve.ui.CommandHelpDialog.less",
+				"lib/ve/src/ui/styles/dialogs/ve.ui.FindAndReplaceDialog.less",
+				"lib/ve/src/ui/styles/dialogs/ve.ui.ProgressDialog.less",
+				"lib/ve/src/ui/styles/dialogs/ve.ui.SpecialCharacterDialog.less",
+				"lib/ve/src/ui/styles/dialogs/ve.ui.TableDialog.less",
+				"lib/ve/src/ui/styles/tools/ve.ui.FormatTool.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.CompletionWidget.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.ContextOptionWidget.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.ContextSelectWidget.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.DimensionsWidget.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.MediaSizeWidget.less",
+				"lib/ve/src/ui/styles/inspectors/ve.ui.CommentInspector.less",
+				"lib/ve/src/ui/styles/inspectors/ve.ui.FragmentInspector.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.TargetWidget.less",
+				"lib/ve/src/ui/styles/ve.ui.Context.less",
+				"lib/ve/src/ui/styles/ve.ui.ContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.LinearContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.TableLineContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.AlignableContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.CommentContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.LanguageContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.LinkContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.MergeCellsContextItem.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.ToolContextItem.less",
+				"lib/ve/src/ui/styles/ve.ui.Overlay.less",
+				"lib/ve/src/ui/styles/ve.ui.Surface.less",
+				"lib/ve/src/ui/styles/ve.ui.Toolbar.less",
+				"lib/ve/src/ui/styles/ve.ui.TableLineContext.less",
+				"lib/ve/src/ui/styles/ve.ui.DebugBar.less"
 			],
 			"skinStyles": {
 				"default": [
-					"lib/ve/src/themes/wikimediaui.css"
+					"lib/ve/src/themes/wikimediaui.less"
 				],
 				"monobook": [
-					"lib/ve/src/themes/apex.css"
+					"lib/ve/src/themes/apex.less"
 				]
 			},
 			"dependencies": [
@@ -1430,8 +1430,8 @@
 				"lib/ve/src/ui/inspectors/ve.ui.CommentAnnotationInspector.js"
 			],
 			"styles": [
-				"lib/ve/src/ce/styles/annotations/ve.ce.CommentAnnotation.css",
-				"lib/ve/src/ui/styles/contextitems/ve.ui.CommentAnnotationContextItem.css"
+				"lib/ve/src/ce/styles/annotations/ve.ce.CommentAnnotation.less",
+				"lib/ve/src/ui/styles/contextitems/ve.ui.CommentAnnotationContextItem.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
@@ -1449,7 +1449,7 @@
 				"lib/ve/src/ui/tools/ve.ui.AuthorListPopupTool.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorItemWidget.css"
+				"lib/ve/src/ui/styles/widgets/ve.ui.AuthorItemWidget.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
@@ -1476,7 +1476,7 @@
 				"lib/ve/src/ui/windowmanagers/ve.ui.DesktopInspectorWindowManager.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/ve.ui.DesktopContext.css"
+				"lib/ve/src/ui/styles/ve.ui.DesktopContext.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
@@ -1489,7 +1489,7 @@
 				"lib/ve/src/ui/windowmanagers/ve.ui.MobileWindowManager.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/ve.ui.MobileContext.css"
+				"lib/ve/src/ui/styles/ve.ui.MobileContext.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
@@ -2188,7 +2188,7 @@
 				"lib/ve/src/ui/tools/ve.ui.CheckListTool.js"
 			],
 			"styles": [
-				"lib/ve/src/ce/styles/nodes/ve.ce.CheckListNode.css"
+				"lib/ve/src/ce/styles/nodes/ve.ce.CheckListNode.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
@@ -2207,7 +2207,7 @@
 				"lib/ve/src/ui/widgets/ve.ui.ChangeDescriptionsSelectWidget.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/elements/ve.ui.DiffElement.css"
+				"lib/ve/src/ui/styles/elements/ve.ui.DiffElement.less"
 			],
 			"skinStyles": {
 				"vector": [
@@ -2298,9 +2298,9 @@
 				"lib/ve/src/ui/widgets/ve.ui.LanguageInputWidget.js"
 			],
 			"styles": [
-				"lib/ve/src/ui/styles/inspectors/ve.ui.LanguageInspector.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.LanguageInputWidget.css",
-				"lib/ve/src/ui/styles/widgets/ve.ui.LanguageSearchWidget.css"
+				"lib/ve/src/ui/styles/inspectors/ve.ui.LanguageInspector.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.LanguageInputWidget.less",
+				"lib/ve/src/ui/styles/widgets/ve.ui.LanguageSearchWidget.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
