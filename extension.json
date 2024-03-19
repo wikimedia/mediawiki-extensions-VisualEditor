@@ -1621,20 +1621,20 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWCommentInspector.js"
 			],
 			"styles": [
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWEntityNode.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWIncludesNode.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWAnnotationNode.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTableNode.css",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWEntityNode.less",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWIncludesNode.less",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWAnnotationNode.less",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTableNode.less",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWPreDialog.less",
-				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.css",
-				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableContentElement.css",
-				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.css",
-				"modules/ve-mw/ui/styles/elements/ve.ui.MWFloatingHelpElement.css",
-				"modules/ve-mw/ui/styles/elements/ve.ui.MWPreviewElement.css",
+				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWExtensionInspector.less",
+				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableContentElement.less",
+				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.less",
+				"modules/ve-mw/ui/styles/elements/ve.ui.MWFloatingHelpElement.less",
+				"modules/ve-mw/ui/styles/elements/ve.ui.MWPreviewElement.less",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
 				"modules/ve-mw/ui/styles/toolgroups/ve.ui.MWHelpListToolGroup.less",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.css"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.less",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.less"
 			],
 			"skinStyles": {
 				"default": [
@@ -1774,9 +1774,9 @@
 				"modules/ve-mw/ce/nodes/ve.ce.MWImageCaptionNode.js"
 			],
 			"styles": [
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWImageNode.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWBlockImageNode.css",
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWInlineImageNode.css"
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWImageNode.less",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWBlockImageNode.less",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWInlineImageNode.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
@@ -1794,7 +1794,7 @@
 			],
 			"styles": [
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMediaDialog.less",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaInfoFieldWidget.css"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWMediaInfoFieldWidget.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwimage.core",
@@ -1871,10 +1871,10 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWNumberedExternalLinkNodeContextItem.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.css",
-				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.css",
+				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.less",
+				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.less",
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWLinkInspectorTool.css",
-				"modules/ve-mw/ce/styles/annotations/ve.ce.MWExternalLinkAnnotation.css"
+				"modules/ve-mw/ce/styles/annotations/ve.ce.MWExternalLinkAnnotation.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
@@ -1930,9 +1930,9 @@
 				"modules/ve-mw/ui/tools/ve.ui.MWMetaDialogTool.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryInputWidget.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryItemWidget.css",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.css",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryInputWidget.less",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryItemWidget.less",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryWidget.css",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMetaDialog.less"
@@ -2063,26 +2063,26 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineWikitextWidget.js"
 			],
 			"styles": [
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.css",
+				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.less",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.less",
 				"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.less",
-				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.css",
-				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.css",
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.less",
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWAddParameterPage.less",
-				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.css",
+				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePlaceholderPage.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTransclusionOutlineControlsWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTransclusionOutlineWidget.less"
 			],
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-default.css",
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-default.css"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-default.less",
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-default.less"
 				],
 				"minerva": [
 					"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout-minerva.less",
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.css",
-					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.css"
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWParameterPage-minerva.less",
+					"modules/ve-mw/ui/styles/pages/ve.ui.MWTemplatePage-minerva.less"
 				]
 			},
 			"dependencies": [
@@ -2211,13 +2211,13 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.css"
+					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.css"
+					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-vector.less"
 				],
 				"minerva": [
-					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-minerva.css"
+					"modules/ve-mw/ui/styles/elements/ve.ui.DiffElement-minerva.less"
 				]
 			},
 			"dependencies": [
@@ -2336,7 +2336,7 @@
 				"modules/ve-mw/ui/inspectors/ve.ui.MWLanguageVariantInspector.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWLanguageVariantNodeContextItem.css"
+				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWLanguageVariantNodeContextItem.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core"
@@ -2396,7 +2396,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWAlienExtensionContextItem.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.css"
+				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWAlienExtensionInspector.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore",
