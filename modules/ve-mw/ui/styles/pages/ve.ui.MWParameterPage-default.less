@@ -5,28 +5,30 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwParameterPage-info {
-	/* To collapse the top margin of the first <p> in the .ve-ui-mwParameterPage-doc below */
-	margin-bottom: -0.4em;
-}
+.ve-ui-mwParameterPage {
+	&-info {
+		/* To collapse the top margin of the first <p> in the .ve-ui-mwParameterPage-doc below */
+		margin-bottom: -0.4em;
+	}
 
-.ve-ui-mwParameterPage-label {
-	font-size: 1.1em;
-	line-height: 1.705em;
-}
+	&-label {
+		font-size: 1.1em;
+		line-height: 1.705em;
+	}
 
-.ve-ui-mwParameterPage-doc {
-	line-height: 1.3em;
-	overflow-wrap: break-word;
-}
+	&-doc {
+		line-height: 1.3em;
+		overflow-wrap: break-word;
+	}
 
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-expandableContent-collapsible > :first-child {
-	margin-top: 0;
-}
+	&-inlineDescription .ve-ui-expandableContent-collapsible > :first-child {
+		margin-top: 0;
+	}
 
-.ve-ui-mwParameterPage-doc-required,
-.ve-ui-mwParameterPage-doc-deprecated,
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc-example {
-	font-style: italic;
-	color: #54595d;
+	&-doc-required,
+	&-doc-deprecated,
+	&-inlineDescription &-doc-example {
+		font-style: italic;
+		color: #54595d;
+	}
 }

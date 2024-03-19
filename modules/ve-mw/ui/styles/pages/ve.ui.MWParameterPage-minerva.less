@@ -5,21 +5,23 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mwParameterPage-inlineDescription {
-	max-width: 50em;
-}
+.ve-ui-mwParameterPage {
+	&-inlineDescription {
+		max-width: 50em;
+	}
 
-.ve-ui-mwParameterPage-doc-required,
-.ve-ui-mwParameterPage-doc-deprecated,
-.ve-ui-mwParameterPage-inlineDescription .ve-ui-mwParameterPage-doc-example {
-	font-style: italic;
-	color: #54595d;
-}
+	&-doc-required,
+	&-doc-deprecated,
+	&-inlineDescription &-doc-example {
+		font-style: italic;
+		color: #54595d;
+	}
 
-.ve-ui-mwParameterPage-inlineDescription > .ve-ui-expandableContent-container {
-	right: 0;
-}
+	&-inlineDescription > .ve-ui-expandableContent-container {
+		right: 0;
+	}
 
-.ve-ui-mwParameterPage .oo-ui-textInputWidget textarea {
-	height: 2.5em;
+	.oo-ui-textInputWidget textarea {
+		height: 2.5em;
+	}
 }
