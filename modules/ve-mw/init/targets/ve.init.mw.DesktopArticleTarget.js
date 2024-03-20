@@ -929,15 +929,15 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 	this.toolbar.$element
 		.addClass( 've-init-mw-desktopArticleTarget-toolbar-preclose' )
 		.css( 'height', this.toolbar.$bar[ 0 ].offsetHeight );
-	setTimeout( () => {
+	requestAnimationFrame( () => {
 		this.toolbar.$element
 			.css( 'height', '0' )
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar-close' );
-		setTimeout( () => {
+		this.toolbar.$element.one( 'transitionend', () => {
 			// Parent method
 			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( this );
 			deferred.resolve();
-		}, 250 );
+		} );
 	} );
 	return deferred.promise();
 };
