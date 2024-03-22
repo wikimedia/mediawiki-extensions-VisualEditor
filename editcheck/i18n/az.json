@@ -17,5 +17,7 @@
 	"editcheck-dialog-addref-title": "İstinad əlavə et",
 	"editcheck-dialog-title": "Yayımlamadan əvvəl",
 	"tag-editcheck-reference-decline-common-knowledge": "Redaktə Yoxlanışı (istinadlar) rədd edildi (hamının bildiyi)",
-	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck istinadı hamının bildiyi məlumat kimi rədd edildi"
+	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck istinadı hamının bildiyi məlumat kimi rədd edildi",
+	"tag-editcheck-reference-decline-irrelevant": "Redaktə yoxlanışı (istinadlar) rədd edildi (aidiyyatsız)",
+	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck istinadı əhəmiyyətsiz olduğu üçün rədd edildi"
 }
