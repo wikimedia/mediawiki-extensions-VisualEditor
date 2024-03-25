@@ -357,13 +357,13 @@ class Hooks implements
 
 		return (
 			// If forced by the URL parameter, skip the namespace check (T221892) and preference check
-			$req->getVal( 'veaction' ) === 'edit' || (
+			( $req->getVal( 'veaction' ) === 'edit' || (
 				// Only in enabled namespaces
 				ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) &&
 
 				// Enabled per user preferences
 				self::enabledForUser( $user )
-			) &&
+			) ) &&
 			// Only for pages with a supported content model
 			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() )
 		);
