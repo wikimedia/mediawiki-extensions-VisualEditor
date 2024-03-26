@@ -2003,9 +2003,9 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 	var saveProcess = new OO.ui.Process();
 	mw.hook( 've.preSaveProcess' ).fire( saveProcess, target );
 
-	saveProcess.execute().done( function () {
-		target.emit( 'saveWorkflowBegin' );
+	target.emit( 'saveWorkflowBegin' );
 
+	saveProcess.execute().done( function () {
 		// Preload the serialization
 		target.prepareCacheKey( target.getDocToSave() );
 
