@@ -82,6 +82,12 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 	);
 	$table.append( $header );
 
+	function languageNameIfKnown( code ) {
+		return ve.init.platform.hasLanguageCode( code ) ?
+			ve.init.platform.getLanguageName( code ) :
+			ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label' );
+	}
+
 	switch ( type ) {
 		case 'filter':
 		case 'name':
@@ -96,10 +102,8 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 			var languageCodes = ( type === 'filter' ) ?
 				variantInfo.filter.l : [ variantInfo.name.t ];
 			languageCodes.forEach( ( code ) => {
-				var name = ve.init.platform.getLanguageName( code.toLowerCase() );
-				if ( !name ) {
-					name = ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label' );
-				}
+				var name = languageNameIfKnown( code.toLowerCase() );
+
 				$table
 					.append( $( '<tr>' )
 						.append( $( '<td>' ).text( name ).attr( 'lang', code ) )
@@ -130,7 +134,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 					// eslint-disable-next-line no-jquery/no-html
 					$toText = $( '<td>' ).html( item.t ),
 					code = item.l,
-					name = ve.init.platform.getLanguageName( code.toLowerCase() );
+					name = languageNameIfKnown( code.toLowerCase() );
 				$table
 					.append( $( '<tr>' )
 						.append( $( '<td>' ).text( name ).attr( 'lang', code ) )
@@ -155,7 +159,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 
 			variantInfo.twoway.forEach( ( item ) => {
 				var code = item.l,
-					name = ve.init.platform.getLanguageName( code.toLowerCase() ),
+					name = languageNameIfKnown( code.toLowerCase() ),
 					// eslint-disable-next-line no-jquery/no-html
 					$text = $( '<td>' ).html( item.t );
 				ve.dm.MWLanguageVariantNode.static.processVariants(
