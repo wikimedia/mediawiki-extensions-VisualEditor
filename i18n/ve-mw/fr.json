@@ -363,7 +363,7 @@
 	"visualeditor-mwsignature-tool": "Votre signature",
 	"visualeditor-preference-visualeditor": "Activer l’éditeur visuel",
 	"visualeditor-preference-newwikitexteditor-enable": "Utiliser le mode wikicode dans l’éditeur visuel, au lieu d’un éditeur de wikicode distinct",
-	"visualeditor-preference-newwikitexteditor-help": "C’est quelquefois appelé l’'éditeur wikitexte 2017'.",
+	"visualeditor-preference-newwikitexteditor-help": "Ce mode est parfois appelé « éditeur de wikicode 2017 ».",
 	"visualeditor-preference-tabs": "Mode de modification :",
 	"visualeditor-preference-tabs-multi-tab": "Afficher les deux onglets de modification",
 	"visualeditor-preference-tabs-prefer-ve": "Toujours utiliser l’éditeur visuel quand c’est possible",
