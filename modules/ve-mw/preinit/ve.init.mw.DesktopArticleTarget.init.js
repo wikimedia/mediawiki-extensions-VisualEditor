@@ -1136,6 +1136,7 @@
 
 		/**
 		 * Activate VE
+		 *
 		 * @param {string} mode Target mode: 'visual' or 'source'
 		 * @param {URL} [linkUrl] URL to navigate to, potentially with extra parameters
 		 * @param {string} [section]
