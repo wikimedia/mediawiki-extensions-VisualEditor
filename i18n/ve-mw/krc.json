@@ -7,7 +7,7 @@
 			"Къарачайлы"
 		]
 	},
-	"tooltip-ca-ve-edit": "Бу бетни тюрлендир",
+	"tooltip-ca-ve-edit": "Бу бетни тюзет",
 	"tooltip-ca-editsource": "Бетни чыкъгъан кодун тюрлендир",
 	"tooltip-ca-createsource": "Бетни чыкъгъан кодун къура",
 	"visualeditor-advancedsettings-tool": "Къошакъ джарашдырыула",
@@ -16,8 +16,8 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Локал айгъакълауну къайнагъын къош",
 	"visualeditor-ca-createsource": "Вики-текстни къура",
 	"visualeditor-ca-editlocaldescriptionsource": "Локал айгъакълауну къайнагъын тюрлендириу",
-	"visualeditor-ca-editsource": "Кодну тюрлендир",
-	"visualeditor-ca-editsource-section": "кодну тюрлендир",
+	"visualeditor-ca-editsource": "Къайнакъны тюзет",
+	"visualeditor-ca-editsource-section": "къайнакъны тюзет",
 	"visualeditor-categories-tool": "Категорияла",
 	"visualeditor-desc": "MediaWiki ючюн визуал редактор",
 	"visualeditor-descriptionpagelink": "Project:Визуал редактор",
