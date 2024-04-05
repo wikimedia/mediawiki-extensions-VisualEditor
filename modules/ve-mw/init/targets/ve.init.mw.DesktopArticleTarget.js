@@ -254,14 +254,14 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
 	if ( !wasSetup ) {
+		toolbar.$element
+			.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
 		if ( !toolbar.isFloating() ) {
 			toolbar.$element.css( 'height', '' );
 		}
 		this.toolbarSetupDeferred.resolve();
 
 		this.toolbarSetupDeferred.done( function () {
-			toolbar.$element.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
-
 			var newSurface = target.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( newSurface ) {
