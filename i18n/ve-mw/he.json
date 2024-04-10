@@ -47,7 +47,7 @@
 	"visualeditor-autosave-not-recovered-text": "לא היה אפשר לשחזר את השינויים הלא־שמורים שלך.",
 	"visualeditor-autosave-not-recovered-title": "שחזור השינוי נכשל",
 	"visualeditor-autosave-recovered-text": "השינויים הלא־שמורים שלך שוחזרו אוטומטית.",
-	"visualeditor-autosave-recovered-title": "השינויים שוחזרו",
+	"visualeditor-autosave-recovered-title": "השינויים האבודים שוחזרו",
 	"visualeditor-backbutton-tooltip": "חזרה",
 	"visualeditor-browserwarning": "העורך הזה אינו נתמך באופן רשמי בדפדפן שלך.",
 	"visualeditor-ca-createlocaldescriptionsource": "הוספת תיאור מקומי בקוד מקור",
