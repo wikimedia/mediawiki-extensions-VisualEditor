@@ -35,7 +35,7 @@
 	"apihelp-visualeditoredit-param-html": "위키텍스트 대신 Parsoid로 보낼 HTML입니다.",
 	"apihelp-visualeditoredit-param-minor": "사소한 편집의 표시입니다.",
 	"apihelp-visualeditoredit-param-needcheck": "저장할 때 판이 라운드트립 문제가 있으면 이 변수를 설정하십시오. 이 경우 이 편집은 태그될 것입니다.",
-	"apihelp-visualeditoredit-param-oldid": "사용할 판 번호. 기본값은 최신 판입니다. 새 문서의 경우 0을 사용하십시오.",
+	"apihelp-visualeditoredit-param-oldid": "사용할 판 번호. 기본값은 최신 판입니다.",
 	"apihelp-visualeditoredit-param-paction": "수행할 동작입니다.",
 	"apihelp-visualeditoredit-param-page": "동작을 수행할 문서입니다.",
 	"apihelp-visualeditoredit-param-section": "동작을 적용할 문단입니다.",
