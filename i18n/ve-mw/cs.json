@@ -183,6 +183,7 @@
 	"visualeditor-dialog-transclusion-add-template": "Přidat šablonu",
 	"visualeditor-dialog-transclusion-add-template-save": "Přidat",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Přidat nezdokumentovaný parametr",
+	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Opravdu se chcete vrátit na hledání? Vaše změny budou ztraceny a nebude možné je vrátit zpět.",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Opravdu chcete zavřít editor šablony? Vaše změny budou ztraceny a nebude možné je vrátit zpět.",
 	"visualeditor-dialog-transclusion-collapse-options": "Skrýt možnosti",
 	"visualeditor-dialog-transclusion-confirmation-discard": "Zahodit úpravy",
