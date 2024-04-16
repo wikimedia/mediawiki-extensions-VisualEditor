@@ -425,6 +425,30 @@ ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
 };
 
 /**
+ * Show a confirm prompt before closing the dialog
+ *
+ * @param {string} prompt Prompt
+ * @return {jQuery.Promise} Close promise
+ */
+ve.ui.MWTransclusionDialog.prototype.closeConfirm = function ( prompt ) {
+	return OO.ui.confirm( prompt, {
+		actions: [
+			{
+				action: 'reject',
+				label: ve.msg( 'visualeditor-dialog-transclusion-confirmation-reject' ),
+				flags: 'safe'
+			},
+			{
+				action: 'accept',
+				label: ve.msg( 'visualeditor-dialog-transclusion-confirmation-discard' ),
+				// TODO: Destructive actions don't get focus by default, but maybe should here?
+				flags: 'destructive'
+			}
+		]
+	} );
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
@@ -438,10 +462,11 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 		case 'back':
 			return new OO.ui.Process( function () {
 				if ( willLoseProgress ) {
-					ve.ui.MWConfirmationDialog.static.confirm(
-						'visualeditor-dialog-transclusion-back-confirmation-prompt',
-						this.resetDialog.bind( this )
-					);
+					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-back-confirmation-prompt' ) ).then( function ( confirmed ) {
+						if ( confirmed ) {
+							this.resetDialog();
+						}
+					}.bind( this ) );
 				} else {
 					this.resetDialog();
 				}
@@ -454,9 +479,11 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 			// close action
 			if ( willLoseProgress ) {
 				return new OO.ui.Process( function () {
-					ve.ui.MWConfirmationDialog.static.confirm(
-						'visualeditor-dialog-transclusion-close-confirmation-prompt',
-						this.close.bind( this ) );
+					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-close-confirmation-prompt' ) ).then( function ( confirmed ) {
+						if ( confirmed ) {
+							this.close();
+						}
+					}.bind( this ) );
 				}, this );
 			}
 	}

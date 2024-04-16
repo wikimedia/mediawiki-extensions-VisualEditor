@@ -2043,7 +2043,6 @@
 				"modules/ve-mw/ui/pages/ve.ui.MWParameterPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWTemplatePlaceholderPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWTransclusionContentPage.js",
-				"modules/ve-mw/ui/dialogs/ve.ui.MWConfirmationDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWFloatingHelpDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWRequiredParamBlankConfirmDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWTemplateDialog.js",
