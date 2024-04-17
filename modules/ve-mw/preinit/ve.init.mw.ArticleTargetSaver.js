@@ -73,7 +73,7 @@
 					'script', // T54884, T65229, T96533, T103430
 					'noscript', // T144891
 					'object', // T65229
-					'style:not( [ data-mw ] )', // T55252, but allow <style data-mw/> e.g. TemplateStyles T188143
+					'style:not( [ data-mw ] ):not( [ data-mw-deduplicate ] )', // T55252, but allow <style data-mw(-deduplicate)/> e.g. TemplateStyles T188143
 					'embed', // T53521, T54791, T65121
 					'a[href^="javascript:"]', // T200971
 					'img[src^="data:"]', // T192392
