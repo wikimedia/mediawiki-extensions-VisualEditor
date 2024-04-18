@@ -1,10 +1,13 @@
 {
 	"root": true,
 	"extends": [
-		"wikimedia/client-es5",
+		"wikimedia/client-es6",
 		"wikimedia/jquery",
 		"wikimedia/mediawiki",
 		"wikimedia/jsduck",
 		"./eslint-shared.json"
-	]
+	],
+	"rules": {
+		"no-var": "off"
+	}
 }
