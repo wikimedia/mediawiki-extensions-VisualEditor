@@ -365,6 +365,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "如果可能，总是让我使用可视化编辑器",
 	"visualeditor-preference-tabs-prefer-wt": "总是让我使用源代码编辑器",
 	"visualeditor-preference-tabs-remember-last": "记住我上次使用的编辑器",
+	"visualeditor-preference-collab-label": "协作编辑",
+	"visualeditor-preference-collab-description": "邀请其他用户加入可视化编辑器中您的编辑会话。",
 	"visualeditor-rebase-client-export": "导出",
 	"visualeditor-rebase-client-export-start": "导出...",
 	"visualeditor-rebase-client-import": "导入",
