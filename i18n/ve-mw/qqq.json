@@ -87,6 +87,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Generic description of a template that has had some parameters changed\n{{Related|Visualeditor-changedesc}}",
 	"visualeditor-desc": "{{desc|name=VisualEditor|url=https://www.mediawiki.org/wiki/Extension:VisualEditor}}",
 	"visualeditor-descriptionpagelink": "{{doc-important|Do not translate \"Project\"; it is automatically converted to the wiki's project namespace.}}\nName of a page describing the use of VisualEditor in this project.\n\nUsed in:\n* {{msg-mw|Tag-visualeditor}}\n* {{msg-mw|Tag-visualeditor-description}}\n* {{msg-mw|Tag-visualeditor-needcheck}}\n* {{msg-mw|Tag-visualeditor-needcheck-description}}",
+	"visualeditor-dialog-extension-abandonedit": "Text shown when the user tries to leave an extension dialog box without applying their changes.\n\nFollowed by the following buttons:\n\n* {{msg-mw|mw-widgets-abandonedit-discard}}\n* {{msg-mw|mw-widgets-abandonedit-keep}}",
 	"visualeditor-dialog-media-alttext-checkbox": "Label for the checkbox to set the image caption as the image alternative text.",
 	"visualeditor-dialog-media-alttext-section": "Label for the image alternative text sub-section.",
 	"visualeditor-dialog-media-alttext-section-help": "Message displayed as contextual help about the alternative text box to editors in the media editing dialog.",

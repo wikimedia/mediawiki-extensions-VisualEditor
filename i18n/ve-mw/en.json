@@ -66,6 +66,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Template parameters changed",
 	"visualeditor-desc": "Visual editor for MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-extension-abandonedit": "Are you sure you want to close this dialog without applying your changes?",
 	"visualeditor-dialog-media-alttext-checkbox": "Use the caption as the alternative text",
 	"visualeditor-dialog-media-alttext-section": "Alternative text",
 	"visualeditor-dialog-media-alttext-section-help": "You can use this to write a text description for people who can't see the item. The description should be enough for them to understand the purpose and information given by the media item. This is vital for blind users and other people using screen-reader software or text-only browsers.",

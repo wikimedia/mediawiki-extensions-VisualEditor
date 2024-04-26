@@ -1546,6 +1546,7 @@
 				"oojs-ui.styles.icons-accessibility"
 			],
 			"messages": [
+				"visualeditor-dialog-extension-abandonedit",
 				"visualeditor-editingtabdialog-body",
 				"visualeditor-editingtabdialog-ok",
 				"visualeditor-editingtabdialog-title",

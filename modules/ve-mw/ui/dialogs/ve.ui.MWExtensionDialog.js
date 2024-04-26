@@ -83,6 +83,21 @@ ve.ui.MWExtensionDialog.prototype.getTeardownProcess = function ( data ) {
  * @inheritdoc
  */
 ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
+	if ( action === '' ) {
+		if ( this.hasMeaningfulEdits() ) {
+			return new OO.ui.Process( function () {
+				var dialog = this;
+				return dialog.confirmAbandon().then( function ( confirm ) {
+					if ( confirm ) {
+						/* We may need to rethink this if something in the
+						   dependency chain adds to the current behaviour */
+						dialog.close();
+					}
+				} );
+			}, this );
+		}
+	}
+
 	// Parent process
 	var process = ve.ui.MWExtensionDialog.super.prototype.getActionProcess.call( this, action );
 	// Mixin process
@@ -91,4 +106,31 @@ ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
 			this.close( { action: 'done' } );
 		}
 	}, this );
+};
+
+/**
+ * Show a confirmation prompt before closing the dialog.
+ * Displays a default prompt of `mw-widgets-abandonedit`.
+ *
+ * @param prompt Prompt (optional)
+ * @return {jQuery.Promise} Close promise
+ */
+ve.ui.MWExtensionDialog.prototype.confirmAbandon = function ( prompt ) {
+	if ( prompt === undefined ) {
+		prompt = ve.msg( 'visualeditor-dialog-extension-abandonedit' );
+	}
+	return OO.ui.confirm( prompt, {
+		actions: [
+			{
+				action: 'reject',
+				label: ve.msg( 'mw-widgets-abandonedit-keep' ),
+				flags: 'safe'
+			},
+			{
+				action: 'accept',
+				label: ve.msg( 'mw-widgets-abandonedit-discard' ),
+				flags: 'destructive'
+			}
+		]
+	} );
 };
