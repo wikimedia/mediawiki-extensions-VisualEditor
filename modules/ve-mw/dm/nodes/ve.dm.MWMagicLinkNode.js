@@ -257,7 +257,7 @@ ve.dm.MWMagicLinkType.prototype.getCode = function () {
 };
 
 /**
- * @method getHref
+ * @method ve.dm.MWMagicLinkNode.getHref
  * @inheritdoc ve.dm.MWMagicLinkNode#getHref
  */
 

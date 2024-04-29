@@ -72,12 +72,12 @@ OO.inheritClass( ve.ui.MWCategoryPopupWidget, OO.ui.PopupWidget );
 /* Events */
 
 /**
- * @event removeCategory
+ * @event ve.ui.MWCategoryPopupWidget#removeCategory
  * @param {string} category Category name
  */
 
 /**
- * @event updateSortkey
+ * @event ve.ui.MWCategoryPopupWidget#updateSortkey
  * @param {string} category Category name
  * @param {string} sortkey New sortkey
  */

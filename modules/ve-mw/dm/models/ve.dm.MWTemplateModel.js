@@ -48,14 +48,14 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
 /**
  * Emitted when a new parameter was added to the template.
  *
- * @event add
+ * @event ve.dm.MWTemplateModel#add
  * @param {ve.dm.MWParameterModel} param Added param
  */
 
 /**
  * Emitted when a parameter was removed from the template.
  *
- * @event remove
+ * @event ve.dm.MWTemplateModel#remove
  * @param {ve.dm.MWParameterModel} param Removed param
  */
 
@@ -63,7 +63,7 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  * Emitted when anything changed, e.g. a parameter was added or removed, or a parameter's value
  * edited.
  *
- * @event change
+ * @event ve.dm.MWTemplateModel#change
  */
 
 /* Static Methods */

@@ -6,6 +6,15 @@
  */
 
 /**
+ * See https://www.mediawiki.org/wiki/Extension:TemplateData#Set_object
+ *
+ * @typedef {Object} Set
+ * @memberof ve.dm.MWTemplateSpecModel
+ * @property {string|Object.<string, string>} label A brief name for the parameter set.
+ * @property {string[]} params One or more names of parameters to include in the set.
+ */
+
+/**
  * Object literal returned by the TemplataData API. Expected to be in formatversion=2,
  * guaranteed via ve.init.mw.Target#getContentApi.
  *
@@ -21,7 +30,7 @@
  * @property {Object.<string,ve.dm.MWTemplateParamDescription>} [params] Parameters by param name
  * @property {string[]} [paramOrder] Preferred parameter order as documented via TemplateData. If
  *  given, the TemplateData API makes sure this contains the same parameters as `params`.
- * @property {{label:(string|Object.<string,string>),params:string[]}[]} [sets] List of parameter
+ * @property {ve.dm.MWTemplateSpecModel.Set[]} [sets] List of parameter
  *  sets, i.e. parameters that belong together (whatever that means, this feature is underspecified
  *  and unused)
  * @property {Object.<string,Object.<string,string|string[]|string[][]>>} [maps] Source to target
@@ -443,9 +452,7 @@ ve.dm.MWTemplateSpecModel.prototype.getKnownParameterNames = function () {
 };
 
 /**
- * See https://www.mediawiki.org/wiki/Extension:TemplateData#Set_object
- *
- * @return {{label:(string|Object.<string,string>),params:string[]}[]}
+ * @return {ve.dm.MWTemplateSpecModel.Set[]}
  */
 ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
 	return this.templateData.sets || [];
@@ -454,7 +461,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterSets = function () {
 /**
  * See https://www.mediawiki.org/wiki/Extension:TemplateData#Maps_object
  *
- * @return {Object.<string,Object.<string,string|string[]|string[][]>>}
+ * @return {Object.<string,Object>}
  */
 ve.dm.MWTemplateSpecModel.prototype.getMaps = function () {
 	return this.templateData.maps || {};

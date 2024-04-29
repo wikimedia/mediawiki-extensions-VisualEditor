@@ -100,38 +100,38 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 /* Events */
 
 /**
- * @event save
+ * @event ve.init.mw.ArticleTarget#save
  * @param {Object} data Save data from the API, see ve.init.mw.ArticleTarget#saveComplete
  * Fired immediately after a save is successfully completed
  */
 
 /**
- * @event showChanges
+ * @event ve.init.mw.ArticleTarget#showChanges
  */
 
 /**
- * @event noChanges
+ * @event ve.init.mw.ArticleTarget#noChanges
  */
 
 /**
- * @event saveError
+ * @event ve.init.mw.ArticleTarget#saveError
  * @param {string} code Error code
  */
 
 /**
- * @event loadError
+ * @event ve.init.mw.ArticleTarget#loadError
  */
 
 /**
- * @event showChangesError
+ * @event ve.init.mw.ArticleTarget#showChangesError
  */
 
 /**
- * @event serializeError
+ * @event ve.init.mw.ArticleTarget#serializeError
  */
 
 /**
- * @event serializeComplete
+ * @event ve.init.mw.ArticleTarget#serializeComplete
  * Fired when serialization is complete
  */
 

@@ -76,7 +76,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
 /* Events */
 
 /**
- * @event newCategory
+ * @event ve.ui.MWCategoryWidget#newCategory
  * @param {Object} item Category item
  * @param {string} item.name Fully prefixed category name
  * @param {string} item.value Category value (name without prefix)
@@ -85,7 +85,7 @@ OO.mixinClass( ve.ui.MWCategoryWidget, OO.ui.mixin.DraggableGroupElement );
  */
 
 /**
- * @event updateSortkey
+ * @event ve.ui.MWCategoryWidget#updateSortkey
  * @param {Object} item Category item
  * @param {string} item.name Fully prefixed category name
  * @param {string} item.value Category value (name without prefix)

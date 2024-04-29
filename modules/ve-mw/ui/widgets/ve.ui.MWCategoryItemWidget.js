@@ -68,7 +68,7 @@ OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.mixin.DraggableElement );
 /* Events */
 
 /**
- * @event togglePopupMenu
+ * @event ve.ui.MWCategoryItemWidget#togglePopupMenu
  * @param {ve.ui.MWCategoryItemWidget} item Item to load into popup
  */
 

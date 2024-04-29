@@ -42,7 +42,7 @@ OO.mixinClass( ve.dm.MWParameterModel, OO.EventEmitter );
 /**
  * Emitted when the parameter's value changed.
  *
- * @event change
+ * @event ve.dm.MWParameterModel#change
  */
 
 /* Methods */

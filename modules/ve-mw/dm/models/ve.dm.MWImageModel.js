@@ -93,21 +93,21 @@ OO.mixinClass( ve.dm.MWImageModel, OO.EventEmitter );
 /**
  * Change of image alignment or of having alignment at all
  *
- * @event alignmentChange
+ * @event ve.dm.MWImageModel#alignmentChange
  * @param {string} Alignment 'left', 'right', 'center' or 'none'
  */
 
 /**
  * Change in size type between default and custom
  *
- * @event sizeDefaultChange
+ * @event ve.dm.MWImageModel#sizeDefaultChange
  * @param {boolean} Image is default size
  */
 
 /**
  * Change in the image type
  *
- * @event typeChange
+ * @event ve.dm.MWImageModel#typeChange
  * @param {string} Image type 'thumb', 'frame', 'frameless' or 'none'
  */
 

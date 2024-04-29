@@ -105,7 +105,7 @@ ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
 /**
  * Fired when a new entry is added to the cache.
  *
- * @event add
+ * @event ve.init.mw.ApiResponseCache#add
  * @param {Object} entries Cache entries that were added. Object mapping names to data objects.
  */
 

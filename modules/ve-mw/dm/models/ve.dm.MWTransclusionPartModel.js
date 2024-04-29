@@ -38,7 +38,7 @@ OO.mixinClass( ve.dm.MWTransclusionPartModel, OO.EventEmitter );
  * Emitted when anything changed in the content the part represents, e.g. a parameter was added to a
  * template, or a value edited.
  *
- * @event change
+ * @event ve.dm.MWTransclusionPartModel#change
  */
 
 /* Methods */

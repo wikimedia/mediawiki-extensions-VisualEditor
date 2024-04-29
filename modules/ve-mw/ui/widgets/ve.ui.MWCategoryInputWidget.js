@@ -51,7 +51,7 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.mixin.LookupElement );
 /* Events */
 
 /**
- * @event choose
+ * @event ve.ui.MWCategoryInputWidget#choose
  * A category was chosen
  * @param {OO.ui.MenuOptionWidget} item Chosen item
  */

@@ -61,7 +61,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /**
  * Triggered when the user uses the search widget at the top to filter the list of parameters.
  *
- * @event filterParametersById
+ * @event ve.ui.MWTransclusionOutlineTemplateWidget#filterParametersById
  * @param {Object.<string,boolean>} visibility Keyed by unique id of the parameter, e.g. something
  *  like "part_1/param1". Note this lists only parameters that are currently shown as a checkbox.
  *  The spec might contain more parameters (e.g. deprecated).

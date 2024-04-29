@@ -75,7 +75,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /**
  * "Soft" selection with space.
  *
- * @event transclusionPartSoftSelected
+ * @event ve.ui.MWTransclusionOutlinePartWidget#transclusionPartSoftSelected
  * @param {string} partId Unique id of the {@see ve.dm.MWTransclusionPartModel}, e.g. something like
  *  "part_1".
  */
@@ -85,7 +85,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
  * be reflected in the content pane of the dialog. This includes e.g. selecting something that was
  * already selected.
  *
- * @event transclusionOutlineItemSelected
+ * @event ve.ui.MWTransclusionOutlinePartWidget#transclusionOutlineItemSelected
  * @param {string} pageName Unique id of the {@see OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
  * @param {boolean} [soft] If true, focus should stay in the sidebar. Defaults to false.

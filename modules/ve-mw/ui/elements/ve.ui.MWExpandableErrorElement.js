@@ -51,7 +51,7 @@ OO.mixinClass( ve.ui.MWExpandableErrorElement, OO.EventEmitter );
 /* Events */
 
 /**
- * @event update
+ * @event ve.ui.MWExpandableErrorElement#update
  */
 
 /* Methods */

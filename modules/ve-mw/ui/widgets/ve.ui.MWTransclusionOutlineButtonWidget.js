@@ -59,7 +59,7 @@ ve.ui.MWTransclusionOutlineButtonWidget.static.pressable = false;
 /* Events */
 
 /**
- * @event keyPressed
+ * @event ve.ui.MWTransclusionOutlineButtonWidget#keyPressed
  * @param {number} key Typically one of the {@see OO.ui.Keys} constants
  */
 

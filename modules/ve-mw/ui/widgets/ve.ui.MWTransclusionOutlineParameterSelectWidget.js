@@ -52,7 +52,7 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, ve.ui.MWAriaDes
  * This is fired instead of the "choose" event from the {@see OO.ui.SelectWidget} base class when
  * pressing space on a parameter to toggle it or scroll it into view, without losing the focus.
  *
- * @event templateParameterSpaceDown
+ * @event ve.ui.MWTransclusionOutlineParameterSelectWidget#templateParameterSpaceDown
  * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
  * @param {boolean} selected
  */

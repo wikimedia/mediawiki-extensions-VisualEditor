@@ -211,7 +211,14 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	}
 
 	/**
-	 * @param {{pageid: number}[]} pages
+	 * @typedef {Object} PageResponse
+	 * @memberof ve.ui.MWTemplateTitleInputWidget
+	 * @param {number} pageId Page ID
+	 * @param {number} index Page ID
+	 */
+
+	/**
+	 * @param {ve.ui.MWTemplateTitleInputWidget.PageResponse[]} pages
 	 * @param {number} pageId
 	 * @return {boolean}
 	 */
@@ -222,7 +229,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	}
 
 	/**
-	 * @param {{index: number}[]} pages
+	 * @param {ve.ui.MWTemplateTitleInputWidget.PageResponse[]} pages
 	 * @param {Object} [newPage]
 	 */
 	function unshiftPages( pages, newPage ) {

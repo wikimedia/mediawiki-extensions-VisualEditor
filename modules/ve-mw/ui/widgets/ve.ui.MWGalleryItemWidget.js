@@ -73,7 +73,7 @@ OO.mixinClass( ve.ui.MWGalleryItemWidget, OO.ui.mixin.TabIndexedElement );
 /* Events */
 
 /**
- * @event edit
+ * @event ve.ui.MWGalleryItemWidget#edit
  */
 
 /* Methods */

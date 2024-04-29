@@ -41,5 +41,5 @@ OO.mixinClass( ve.ui.MWGalleryGroupWidget, OO.ui.mixin.DraggableGroupElement );
 /* Events */
 
 /**
- * @event editItem
+ * @event ve.ui.MWGalleryGroupWidget#editItem
  */

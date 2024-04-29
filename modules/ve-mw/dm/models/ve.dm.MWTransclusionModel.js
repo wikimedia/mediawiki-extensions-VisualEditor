@@ -62,7 +62,7 @@
 	 * Emitted when a part is added, removed, replaced (e.g. a placeholder with an actual template),
 	 * or an existing part changed position.
 	 *
-	 * @event replace
+	 * @event ve.dm.MWTransclusionPartInstruction#replace
 	 * @param {ve.dm.MWTransclusionPartModel|null} removed Removed part
 	 * @param {ve.dm.MWTransclusionPartModel|null} added Added or moved part
 	 * @param {number} [newPosition] Position the part was added or moved to
@@ -71,7 +71,7 @@
 	/**
 	 * Emitted when anything changed, including any changes in the content of the parts.
 	 *
-	 * @event change
+	 * @event ve.dm.MWTransclusionPartInstruction#change
 	 */
 
 	/* Methods */

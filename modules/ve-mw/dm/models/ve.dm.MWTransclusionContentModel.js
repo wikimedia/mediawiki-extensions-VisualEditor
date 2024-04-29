@@ -33,7 +33,7 @@ OO.inheritClass( ve.dm.MWTransclusionContentModel, ve.dm.MWTransclusionPartModel
 /**
  * Emitted when the wikitext changed.
  *
- * @event change
+ * @event ve.dm.MWTransclusionContentModel#change
  */
 
 /* Methods */

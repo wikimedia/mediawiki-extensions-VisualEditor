@@ -7,8 +7,7 @@
 'use strict';
 
 module.exports = function ( grunt ) {
-	const modules = grunt.file.readJSON( 'lib/ve/build/modules.json' ),
-		conf = grunt.file.readJSON( 'extension.json' ),
+	const conf = grunt.file.readJSON( 'extension.json' ),
 		screenshotOptions = {
 			reporter: 'spec',
 			// TODO: Work out how to catch this timeout and continue.
@@ -33,7 +32,6 @@ module.exports = function ( grunt ) {
 		};
 
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
-	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-image' );
@@ -44,38 +42,6 @@ module.exports = function ( grunt ) {
 	grunt.loadTasks( 'build/tasks' );
 
 	grunt.initConfig( {
-		jsduckcatconfig: {
-			main: {
-				target: '.jsduck/categories.json',
-				from: [
-					'.jsduck/mw-categories.json',
-					{
-						file: 'lib/ve/.jsduck/categories.json',
-						aggregate: {
-							'VisualEditor (core)': [
-								'General',
-								'Initialization',
-								'DataModel',
-								'ContentEditable',
-								'User Interface',
-								'Tests'
-							]
-						},
-						include: [ 'UnicodeJS', 'OOjs UI', 'Upstream' ]
-					}
-				]
-			}
-		},
-		buildloader: {
-			egiframe: {
-				targetFile: '.jsduck/eg-iframe.html',
-				template: '.jsduck/eg-iframe.html.template',
-				modules: modules,
-				load: [ 'visualEditor.desktop.standalone' ],
-				pathPrefix: 'lib/ve/',
-				indent: '\t\t'
-			}
-		},
 		mochaTest: {
 			'screenshots-en': {
 				options: screenshotOptions,
@@ -167,13 +133,6 @@ module.exports = function ( grunt ) {
 			]
 		},
 		banana: conf.MessagesDirs,
-		copy: {
-			jsduck: {
-				src: 'lib/ve/**/*',
-				dest: 'docs/',
-				expand: true
-			}
-		},
 		watch: {
 			files: [
 				'.{stylelintrc,eslintrc}.json',
@@ -204,9 +163,7 @@ module.exports = function ( grunt ) {
 		} );
 	} );
 
-	grunt.registerTask( 'build', [ 'jsduckcatconfig', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'tyops', 'eslint', 'stylelint', 'banana' ] );
-	grunt.registerTask( 'test', [ 'build', 'lint' ] );
+	grunt.registerTask( 'test', [ 'tyops', 'eslint', 'stylelint', 'banana' ] );
 	grunt.registerTask( 'test-ci', [ 'git-status' ] );
 	grunt.registerTask( 'screenshots', [ 'mochaTest:screenshots-en', 'image:pngs' ] );
 	grunt.registerTask( 'screenshots-all', [ 'mochaTest:screenshots-all', 'image:pngs' ] );
