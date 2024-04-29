@@ -196,18 +196,26 @@ class Hooks implements
 		];
 	}
 
-	/** @inheritDoc */
-	public function onDifferenceEngineViewHeader( $differenceEngine ) {
-		$output = $differenceEngine->getContext()->getOutput();
+	/**
+	 * Load modules required for a diff page
+	 *
+	 * @param OutputPage $output Output page
+	 */
+	private function loadDiffModules( OutputPage $output ) {
 		$output->addModuleStyles( [
 			'ext.visualEditor.diffPage.init.styles',
 			'oojs-ui.styles.icons-accessibility',
 			'oojs-ui.styles.icons-editing-advanced'
 		] );
-		// T344596: Must load this module unconditionally. The TextSlotDiffRendererTablePrefix hook
-		// below doesn't run when the diff is e.g. a log entry with no change to the content.
 		$output->addModules( 'ext.visualEditor.diffPage.init' );
 		$output->enableOOUI();
+	}
+
+	/** @inheritDoc */
+	public function onDifferenceEngineViewHeader( $differenceEngine ) {
+		// T344596: Must load this module unconditionally. The TextSlotDiffRendererTablePrefix hook
+		// below doesn't run when the diff is e.g. a log entry with no change to the content.
+		$this->loadDiffModules( $differenceEngine->getContext()->getOutput() );
 	}
 
 	/**
@@ -254,6 +262,9 @@ class Hooks implements
 				]
 			] ) .
 			'</div>';
+
+		// onDifferenceEngineViewHeader may not run, so load modules here as well for styling (T361775)
+		$this->loadDiffModules( $output );
 	}
 
 	/**
