@@ -935,7 +935,7 @@ ve.ui.MWGalleryDialog.prototype.toggleEmptyGalleryMessage = function ( empty ) {
  * TODO Disable the button until the user makes any changes
  */
 ve.ui.MWGalleryDialog.prototype.updateActions = function () {
-	this.actions.setAbilities( { done: this.isModified() } );
+	this.actions.setAbilities( { done: this.isSaveable() } );
 };
 
 /**
@@ -943,7 +943,7 @@ ve.ui.MWGalleryDialog.prototype.updateActions = function () {
  *
  * @return {boolean}
  */
-ve.ui.MWGalleryDialog.prototype.isModified = function () {
+ve.ui.MWGalleryDialog.prototype.isSaveable = function () {
 	// Check attributes
 	if ( this.originalMwDataNormalized ) {
 		var mwDataCopy = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
