@@ -87,7 +87,7 @@ OO.inheritClass( ve.ui.MWCategoryPopupWidget, OO.ui.PopupWidget );
 /**
  * Handle category remove events.
  *
- * @fires removeCategory
+ * @fires ve.ui.MWCategoryPopupWidget#removeCategory
  */
 ve.ui.MWCategoryPopupWidget.prototype.onRemoveCategory = function () {
 	this.removed = true;
@@ -100,7 +100,7 @@ ve.ui.MWCategoryPopupWidget.prototype.onRemoveCategory = function () {
  *
  * @param {jQuery.Event} e Form submit event
  * @return {boolean}
- * @fires updateSortkey
+ * @fires ve.ui.MWCategoryPopupWidget#updateSortkey
  */
 ve.ui.MWCategoryPopupWidget.prototype.onSortKeySubmit = function () {
 	this.closePopup();
@@ -124,7 +124,7 @@ ve.ui.MWCategoryPopupWidget.prototype.openPopup = function ( item ) {
  * Handle popup toggle events.
  *
  * @param {boolean} show Widget is being made visible
- * @fires updateSortkey
+ * @fires ve.ui.MWCategoryPopupWidget#updateSortkey
  */
 ve.ui.MWCategoryPopupWidget.prototype.onToggle = function ( show ) {
 	if ( show ) {

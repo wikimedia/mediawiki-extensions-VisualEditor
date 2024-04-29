@@ -224,7 +224,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 
 /**
  * @inheritdoc
- * @fires choose
+ * @fires ve.ui.MWCategoryInputWidget#choose
  */
 ve.ui.MWCategoryInputWidget.prototype.onLookupMenuChoose = function ( item ) {
 	this.emit( 'choose', item );

@@ -40,7 +40,7 @@ OO.inheritClass( ve.dm.MWTransclusionContentModel, ve.dm.MWTransclusionPartModel
 
 /**
  * @param {string} wikitext
- * @fires change
+ * @fires ve.dm.MWTransclusionContentModel#change
  */
 ve.dm.MWTransclusionContentModel.prototype.setWikitext = function ( wikitext ) {
 	if ( this.wikitext !== wikitext ) {

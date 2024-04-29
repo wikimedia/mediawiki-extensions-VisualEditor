@@ -848,11 +848,16 @@ ve.dm.MWImageModel.prototype.getScalable = function () {
 };
 
 /**
+ * @typedef {Object} Dimensions
+ * @memberof ve.ui.DimensionsWidget
+ * @property {number} width The value of the width input
+ * @property {number} height The value of the height input
+ */
+
+/**
  * Get the image current dimensions
  *
- * @return {Object} Current dimensions width/height
- * @return {number} dimensions.width The width of the image
- * @return {number} dimensions.height The height of the image
+ * @return {ve.ui.DimensionsWidget.Dimensions} Current dimensions width/height
  */
 ve.dm.MWImageModel.prototype.getCurrentDimensions = function () {
 	return this.scalable.getCurrentDimensions();
@@ -905,7 +910,7 @@ ve.dm.MWImageModel.prototype.toggleBorder = function ( hasBorder ) {
  * Toggle the default size flag of the image
  *
  * @param {boolean} [isDefault] Default size flag. Omit to toggle current value.
- * @fires sizeDefaultChange
+ * @fires ve.dm.MWImageModel#sizeDefaultChange
  */
 ve.dm.MWImageModel.prototype.toggleDefaultSize = function ( isDefault ) {
 	isDefault = isDefault !== undefined ? !!isDefault : !this.isDefaultSize();
@@ -963,7 +968,7 @@ ve.dm.MWImageModel.prototype.setAltText = function ( text ) {
  * @see #getType
  *
  * @param {string} type Image type
- * @fires typeChange
+ * @fires ve.dm.MWImageModel#typeChange
  */
 ve.dm.MWImageModel.prototype.setType = function ( type ) {
 	var isDefaultAligned = this.isDefaultAligned( this.imageCurrentType );
@@ -1062,7 +1067,7 @@ ve.dm.MWImageModel.prototype.setSizeType = function ( type ) {
  * @see #getAlignment
  *
  * @param {string} align Alignment
- * @fires alignmentChange
+ * @fires ve.dm.MWImageModel#alignmentChange
  */
 ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
 	if ( align === 'default' ) {
@@ -1080,7 +1085,7 @@ ve.dm.MWImageModel.prototype.setAlignment = function ( align ) {
  * @see #getVerticalAlignment
  *
  * @param {string} valign Alignment
- * @fires alignmentChange
+ * @fires ve.dm.MWImageModel#alignmentChange
  */
 ve.dm.MWImageModel.prototype.setVerticalAlignment = function ( valign ) {
 	this.verticalAlignment = valign;

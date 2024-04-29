@@ -77,7 +77,7 @@ OO.mixinClass( ve.ui.MWCategoryItemWidget, OO.ui.mixin.DraggableElement );
 /**
  * Handle button widget click events.
  *
- * @fires togglePopupMenu on click.
+ * @fires ve.ui.MWCategoryItemWidget#togglePopupMenu on click.
  */
 ve.ui.MWCategoryItemWidget.prototype.onButtonClick = function () {
 	this.emit( 'togglePopupMenu', this );

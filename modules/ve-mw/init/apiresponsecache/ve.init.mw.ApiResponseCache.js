@@ -113,7 +113,7 @@ ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
  * Add entries to the cache. Does not overwrite already-set entries.
  *
  * @param {Object} entries Object keyed by page title, with the values being data objects
- * @fires add
+ * @fires ve.init.mw.ApiResponseCache#add
  */
 ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
 	for ( var name in entries ) {
@@ -141,7 +141,7 @@ ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
  * Perform any scheduled API requests.
  *
  * @private
- * @fires add
+ * @fires ve.init.mw.ApiResponseCache#add
  */
 ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 	var cache = this;

@@ -81,7 +81,7 @@ OO.mixinClass( ve.ui.MWGalleryItemWidget, OO.ui.mixin.TabIndexedElement );
 /**
  * Handle clicking on an item
  *
- * @fires edit
+ * @fires ve.ui.MWGalleryItemWidget#edit
  */
 ve.ui.MWGalleryItemWidget.prototype.onItemClick = function () {
 	this.emit( 'edit', this );
@@ -91,8 +91,8 @@ ve.ui.MWGalleryItemWidget.prototype.onItemClick = function () {
  * Handle key press events
  *
  * @param {jQuery.Event} e Key press event
- * @return {boolean}
- * @fires edit
+ * @return {boolean|undefined}
+ * @fires ve.ui.MWGalleryItemWidget#edit
  */
 ve.ui.MWGalleryItemWidget.prototype.onItemKeyPress = function ( e ) {
 	if ( e.which === OO.ui.Keys.ENTER ) {

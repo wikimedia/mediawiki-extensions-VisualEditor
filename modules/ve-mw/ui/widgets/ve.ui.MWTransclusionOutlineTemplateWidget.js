@@ -67,6 +67,12 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
  *  The spec might contain more parameters (e.g. deprecated).
  */
 
+/**
+ * @event ve.ui.MWTransclusionOutlineTemplateWidget#transclusionOutlineItemSelected
+ * @param {string} id Item ID
+ * @param {boolean} soft If true, focus should stay in the sidebar.
+ */
+
 /* Static Properties */
 
 /**
@@ -301,7 +307,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSpaceDown
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
  * @param {boolean} soft If true, focus should stay in the sidebar.
- * @fires transclusionOutlineItemSelected
+ * @fires ve.ui.MWTransclusionOutlineTemplateWidget#transclusionOutlineItemSelected
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleParameter = function ( item, selected, soft ) {
 	var paramName = item.getData(),
@@ -406,7 +412,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function
  *
  * @private
  * @param {string} query user input
- * @fires filterParametersById
+ * @fires ve.ui.MWTransclusionOutlineTemplateWidget#filterParametersById
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function ( query ) {
 	var template = this.templateModel,

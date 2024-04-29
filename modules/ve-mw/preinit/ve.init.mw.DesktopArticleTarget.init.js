@@ -18,7 +18,7 @@
  * actual MediaWiki integration and VisualEditor library.
  *
  * @class mw.libs.ve
- * @alternateClassName ve.init.mw.DesktopArticleTarget.init
+ * @alias ve.init.mw.DesktopArticleTarget.init
  * @singleton
  */
 ( function () {
@@ -49,8 +49,6 @@
 
 	/**
 	 * Show the loading progress bar
-	 *
-	 * @return {string} mode Edit mode, 'visual' or 'source'
 	 */
 	function showLoading() {
 		if ( isLoading ) {
@@ -826,7 +824,6 @@
 	 * @param {string} prefName Preference name
 	 * @param {string} storageKey mw.storage key
 	 * @param {string} cookieName Cookie name
-	 * @return {boolean} Preference is set
 	 */
 	function setPreferenceOrStorage( prefName, storageKey, cookieName ) {
 		storageKey = storageKey || prefName;

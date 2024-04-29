@@ -96,7 +96,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
 /**
  * @private
  * @param {number} key
- * @fires transclusionPartSoftSelected
+ * @fires ve.ui.MWTransclusionOutlinePartWidget#transclusionPartSoftSelected
  */
 ve.ui.MWTransclusionOutlinePartWidget.prototype.onHeaderKeyPressed = function ( key ) {
 	if ( key === OO.ui.Keys.SPACE ) {

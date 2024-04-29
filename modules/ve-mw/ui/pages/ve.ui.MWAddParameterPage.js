@@ -49,6 +49,13 @@ ve.ui.MWAddParameterPage = function VeUiMWAddParameterPage( parameter, name, con
 
 OO.inheritClass( ve.ui.MWAddParameterPage, OO.ui.PageLayout );
 
+/* Events */
+
+/**
+ * @event ve.ui.MWAddParameterPage#templateParameterAdded
+ * @param {string} id Page ID
+ */
+
 /* Methods */
 
 /**
@@ -135,7 +142,7 @@ ve.ui.MWAddParameterPage.prototype.updateParameterNameValidation = function ( va
 
 /**
  * @private
- * @fires templateParameterAdded
+ * @fires ve.ui.MWAddParameterPage#templateParameterAdded
  */
 ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	var name = this.paramInputField.getValue().trim();

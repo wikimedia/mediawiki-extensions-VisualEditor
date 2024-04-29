@@ -266,7 +266,7 @@ ve.init.mw.Target.prototype.documentReady = function ( doc ) {
 /**
  * Once surface is ready, initialize the UI
  *
- * @fires surfaceReady
+ * @fires ve.init.Target#surfaceReady
  */
 ve.init.mw.Target.prototype.surfaceReady = function () {
 	this.emit( 'surfaceReady' );

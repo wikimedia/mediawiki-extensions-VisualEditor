@@ -60,7 +60,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.onReplacePart = function ( removed, 
  * Handle spacebar in a part header
  *
  * @param {string} pageName
- * @fires sidebarItemSelected
+ * @fires ve.ui.MWTransclusionOutlineWidget#sidebarItemSelected
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.onTransclusionPartSoftSelected = function ( pageName ) {
 	this.emit( 'sidebarItemSelected', pageName, true );
@@ -85,7 +85,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.removePartWidget = function ( part )
  * @param {ve.dm.MWTransclusionPartModel} part
  * @param {number} [newPosition]
  * @param {ve.dm.MWTransclusionPartModel|null} [removed]
- * @fires filterPagesByName
+ * @fires ve.ui.MWTransclusionOutlineWidget#filterPagesByName
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.addPartWidget = function ( part, newPosition, removed ) {
 	var keys = Object.keys( this.partWidgets ),
@@ -217,7 +217,7 @@ ve.ui.MWTransclusionOutlineWidget.prototype.clear = function () {
 /**
  * @private
  * @param {Object.<string,boolean>} visibility
- * @fires filterPagesByName
+ * @fires ve.ui.MWTransclusionOutlineWidget#filterPagesByName
  */
 ve.ui.MWTransclusionOutlineWidget.prototype.onFilterParametersByName = function ( visibility ) {
 	this.emit( 'filterPagesByName', visibility );
