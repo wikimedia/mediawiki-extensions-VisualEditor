@@ -9,7 +9,7 @@
  * MediaWiki image model.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixes OO.EventEmitter
  *
  * @constructor
  * @param {ve.dm.Document} parentDoc Document that contains or will contain the image

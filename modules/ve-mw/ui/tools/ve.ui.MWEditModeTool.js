@@ -43,7 +43,7 @@ ve.ui.MWEditModeTool.prototype.isModeAvailable = function ( mode ) {
  *
  * @class
  * @extends mw.libs.ve.MWEditModeVisualTool
- * @mixins ve.ui.MWEditModeTool
+ * @mixes ve.ui.MWEditModeTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Config options
@@ -69,7 +69,7 @@ ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
  *
  * @class
  * @extends mw.libs.ve.MWEditModeSourceTool
- * @mixins ve.ui.MWEditModeTool
+ * @mixes ve.ui.MWEditModeTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Config options

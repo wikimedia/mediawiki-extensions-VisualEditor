@@ -15,8 +15,8 @@
  * @class
  * @abstract
  * @extends ve.ce.LeafNode
- * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.GeneratedContentNode
+ * @mixes ve.ce.FocusableNode
+ * @mixes ve.ce.GeneratedContentNode
  *
  * @constructor
  */

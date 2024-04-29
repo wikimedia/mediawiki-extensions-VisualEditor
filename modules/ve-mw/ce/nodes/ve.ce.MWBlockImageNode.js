@@ -10,7 +10,7 @@
  *
  * @class
  * @extends ve.ce.BranchNode
- * @mixins ve.ce.MWImageNode
+ * @mixes ve.ce.MWImageNode
  *
  * @constructor
  * @param {ve.dm.MWBlockImageNode} model Model to observe

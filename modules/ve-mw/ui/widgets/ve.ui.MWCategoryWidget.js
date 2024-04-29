@@ -11,8 +11,8 @@
  * @class
  * @abstract
  * @extends OO.ui.Widget
- * @mixins OO.ui.mixin.GroupElement
- * @mixins OO.ui.mixin.DraggableGroupElement
+ * @mixes OO.ui.mixin.GroupElement
+ * @mixes OO.ui.mixin.DraggableGroupElement
  *
  * @constructor
  * @param {Object} [config] Configuration options

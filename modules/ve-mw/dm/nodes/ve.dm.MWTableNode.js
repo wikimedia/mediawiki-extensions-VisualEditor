@@ -10,7 +10,7 @@
  *
  * @class
  * @extends ve.dm.TableNode
- * @mixins ve.dm.ClassAttributeNode
+ * @mixes ve.dm.ClassAttributeNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model

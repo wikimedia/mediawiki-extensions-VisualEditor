@@ -12,7 +12,7 @@
  * @class
  * @abstract
  * @extends ve.ce.LeafNode
- * @mixins ve.ce.FocusableNode
+ * @mixes ve.ce.FocusableNode
  * @constructor
  * @param {ve.dm.MWLanguageVariantNode} model Model to observe
  * @param {Object} [config] Configuration options

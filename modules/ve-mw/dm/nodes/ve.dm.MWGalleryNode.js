@@ -10,7 +10,7 @@
  *
  * @class
  * @extends ve.dm.BranchNode
- * @mixins ve.dm.FocusableNode
+ * @mixes ve.dm.FocusableNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model

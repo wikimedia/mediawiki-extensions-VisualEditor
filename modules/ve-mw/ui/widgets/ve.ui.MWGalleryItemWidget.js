@@ -10,7 +10,7 @@
  *
  * @class
  * @extends OO.ui.Widget
- * @mixins OO.ui.mixin.DraggableElement
+ * @mixes OO.ui.mixin.DraggableElement
  *
  * @constructor
  * @param {Object} imageInfo Image information object

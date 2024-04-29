@@ -10,7 +10,7 @@
  *
  * @class
  * @extends ve.ce.BranchNode
- * @mixins ve.ce.FocusableNode
+ * @mixes ve.ce.FocusableNode
  *
  * @constructor
  * @param {ve.dm.MWGalleryNode} model Model to observe

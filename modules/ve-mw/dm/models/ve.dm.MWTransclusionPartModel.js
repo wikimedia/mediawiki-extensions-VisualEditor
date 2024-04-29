@@ -14,7 +14,7 @@
  *
  * @abstract
  * @class
- * @mixins OO.EventEmitter
+ * @mixes OO.EventEmitter
  *
  * @constructor
  * @param {ve.dm.MWTransclusionModel} transclusion

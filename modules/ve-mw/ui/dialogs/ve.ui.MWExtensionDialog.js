@@ -11,7 +11,7 @@
  * @class
  * @abstract
  * @extends ve.ui.NodeDialog
- * @mixins ve.ui.MWExtensionWindow
+ * @mixes ve.ui.MWExtensionWindow
  *
  * @constructor
  * @param {Object} [config] Configuration options

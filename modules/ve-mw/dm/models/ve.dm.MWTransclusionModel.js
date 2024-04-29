@@ -28,7 +28,7 @@
 	 * wikitext snippets. These individual "parts" are subclasses of ve.dm.MWTransclusionPartModel.
 	 *
 	 * @class
-	 * @mixins OO.EventEmitter
+	 * @mixes OO.EventEmitter
 	 *
 	 * @constructor
 	 * @param {ve.dm.Document} doc Document to use associate with API requests

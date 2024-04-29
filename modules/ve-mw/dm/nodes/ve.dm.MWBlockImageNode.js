@@ -10,8 +10,8 @@
  *
  * @class
  * @extends ve.dm.BranchNode
- * @mixins ve.dm.MWImageNode
- * @mixins ve.dm.ClassAttributeNode
+ * @mixes ve.dm.MWImageNode
+ * @mixes ve.dm.ClassAttributeNode
  *
  * @constructor
  * @param {Object} [element] Reference to element in linear model

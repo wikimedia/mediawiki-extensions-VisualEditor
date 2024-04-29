@@ -12,8 +12,8 @@
  *
  * @class
  * @extends OO.ui.Widget
- * @mixins OO.ui.mixin.IconElement
- * @mixins OO.ui.mixin.TitledElement
+ * @mixes OO.ui.mixin.IconElement
+ * @mixes OO.ui.mixin.TitledElement
  *
  * @constructor
  * @param {jQuery|string|OO.ui.HtmlSnippet} content API response data from which to build the display

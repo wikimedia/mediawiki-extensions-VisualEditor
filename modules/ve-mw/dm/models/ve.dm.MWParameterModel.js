@@ -12,7 +12,7 @@
  * is a sub-element of a {@see ve.dm.MWTransclusionModel}.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixes OO.EventEmitter
  *
  * @constructor
  * @param {ve.dm.MWTemplateModel} template Reference back to the template that contains the

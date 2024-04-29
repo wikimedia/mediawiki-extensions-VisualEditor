@@ -11,8 +11,8 @@
  * @class
  * @abstract
  * @extends ve.ce.GeneratedContentNode
- * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.MWResizableNode
+ * @mixes ve.ce.FocusableNode
+ * @mixes ve.ce.MWResizableNode
  *
  * @constructor
  * @param {jQuery} $focusable Focusable part of the node

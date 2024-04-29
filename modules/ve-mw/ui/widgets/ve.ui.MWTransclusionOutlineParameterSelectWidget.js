@@ -8,8 +8,8 @@
  *
  * @class
  * @extends OO.ui.SelectWidget
- * @mixins OO.ui.mixin.TabIndexedElement
- * @mixins ve.ui.MWAriaDescribe
+ * @mixes OO.ui.mixin.TabIndexedElement
+ * @mixes ve.ui.MWAriaDescribe
  *
  * @constructor
  * @param {Object} config

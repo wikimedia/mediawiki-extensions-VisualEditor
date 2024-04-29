@@ -10,7 +10,7 @@
  *
  * @class
  * @extends ve.ce.TableNode
- * @mixins ve.ce.ClassAttributeNode
+ * @mixes ve.ce.ClassAttributeNode
  *
  * @constructor
  * @param {ve.dm.MWTableNode} model Model to observe

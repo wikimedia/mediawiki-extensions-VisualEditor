@@ -11,8 +11,8 @@
  * @class
  * @abstract
  * @extends ve.ce.LeafNode
- * @mixins ve.ce.GeneratedContentNode
- * @mixins ve.ce.FocusableNode
+ * @mixes ve.ce.GeneratedContentNode
+ * @mixes ve.ce.FocusableNode
  *
  * @constructor
  * @param {ve.dm.MWTransclusionNode} model Model to observe

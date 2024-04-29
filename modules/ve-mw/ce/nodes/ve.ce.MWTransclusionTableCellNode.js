@@ -11,7 +11,7 @@
  * @class
  * @extends ve.ce.MWTransclusionNode
  * @constructor
- * @mixins ve.ce.TableCellableNode
+ * @mixes ve.ce.TableCellableNode
  * @param {ve.dm.MWTransclusionTableCellNode} model Model to observe
  */
 ve.ce.MWTransclusionTableCellNode = function VeCeMWTransclusionTableCellNode( model ) {

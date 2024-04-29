@@ -11,7 +11,7 @@
  * @class
  * @abstract
  * @extends OO.ui.ButtonWidget
- * @mixins OO.ui.mixin.DraggableElement
+ * @mixes OO.ui.mixin.DraggableElement
  *
  * @constructor
  * @param {Object} config
