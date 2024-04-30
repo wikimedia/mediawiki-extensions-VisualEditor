@@ -200,16 +200,16 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 	var surfaceModel = this.getFragment().getSurface();
 
 	if ( action === 'done' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			surfaceModel.applyStaging();
 			this.close( { action: action } );
-		}, this );
+		} );
 	}
 
 	return ve.ui.MWMetaDialog.super.prototype.getActionProcess.call( this, action )
 		.next( () => {
 			surfaceModel.popStaging();
-		}, this );
+		} );
 };
 
 /**
@@ -218,7 +218,7 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var surfaceModel = this.getFragment().getSurface(),
 				promises = [],
 				selectWidget = this.bookletLayout.outlineSelectWidget,
@@ -246,8 +246,8 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			promises.push( this.settingsPage.setup( surfaceModel.getFragment(), config ) );
 			promises.push( this.advancedSettingsPage.setup( surfaceModel.getFragment(), config ) );
 			return ve.promiseAll( promises );
-		}, this )
-		.next( function () {
+		} )
+		.next( () => {
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
 				// HACK: Prevent the setPage() call from focussing stuff in the selected page. For the
 				// 'categories' page, this causes a dropdown to appear, and if it's done in the setup
@@ -265,7 +265,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			this.oldSettings = this.extractSettings(); // setting that were just loaded
 
 			this.actions.setAbilities( { done: false } );
-		}, this );
+		} );
 };
 
 /**
@@ -274,11 +274,11 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			if ( data.page && this.bookletLayout.getPage( data.page ) ) {
 				this.bookletLayout.getPage( data.page ).focus();
 			}
-		}, this );
+		} );
 };
 
 /**
@@ -287,7 +287,7 @@ ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			// Let each page tear itself down ('languages' page doesn't need this yet)
 			this.categoriesPage.teardown( { action: data.action } );
 			this.settingsPage.teardown( { action: data.action } );
@@ -295,7 +295,7 @@ ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data ) {
 
 			this.bookletLayout.setPage( 'categories' );
 			this.bookletLayout.resetScroll();
-		}, this );
+		} );
 };
 
 /* Registration */

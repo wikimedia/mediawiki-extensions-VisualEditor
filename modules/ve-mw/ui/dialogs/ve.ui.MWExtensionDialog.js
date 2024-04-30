@@ -85,7 +85,7 @@ ve.ui.MWExtensionDialog.prototype.getTeardownProcess = function ( data ) {
 ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === '' ) {
 		if ( this.hasMeaningfulEdits() ) {
-			return new OO.ui.Process( function () {
+			return new OO.ui.Process( () => {
 				var dialog = this;
 				return dialog.confirmAbandon().then( ( confirm ) => {
 					if ( confirm ) {
@@ -94,18 +94,18 @@ ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
 						dialog.close();
 					}
 				} );
-			}, this );
+			} );
 		}
 	}
 
 	// Parent process
 	var process = ve.ui.MWExtensionDialog.super.prototype.getActionProcess.call( this, action );
 	// Mixin process
-	return ve.ui.MWExtensionWindow.prototype.getActionProcess.call( this, action, process ).next( function () {
+	return ve.ui.MWExtensionWindow.prototype.getActionProcess.call( this, action, process ).next( () => {
 		if ( action === 'done' ) {
 			this.close( { action: 'done' } );
 		}
-	}, this );
+	} );
 };
 
 /**

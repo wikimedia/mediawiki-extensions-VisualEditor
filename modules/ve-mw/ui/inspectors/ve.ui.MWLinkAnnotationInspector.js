@@ -334,7 +334,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.createAnnotationInput = function () {
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.isReady = false;
 
 			var isReadOnly = this.isReadOnly();
@@ -348,7 +348,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 			this.trackedInternalLinkInputChange = false;
 			this.trackedExternalLinkInputChange = false;
 			this.isActive = true;
-		}, this );
+		} );
 };
 
 /**
@@ -356,11 +356,11 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.isReady = true;
 			// Focus is skipped during setup. (T321026)
 			this.annotationInput.getTextInputWidget().focus();
-		}, this );
+		} );
 };
 
 /**
@@ -368,9 +368,9 @@ ve.ui.MWLinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getActionProcess = function ( action ) {
 	if ( action === 'convert' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			this.close( { action: 'done', convert: true } );
-		}, this );
+		} );
 	}
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getActionProcess.call( this, action );
 };
@@ -381,13 +381,13 @@ ve.ui.MWLinkAnnotationInspector.prototype.getActionProcess = function ( action )
 ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 	var fragment;
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			// Save the original fragment for later.
 			fragment = this.getFragment();
 
 			this.isActive = false;
-		}, this )
-		.next( function () {
+		} )
+		.next( () => {
 			var selection = fragment && fragment.getSelection();
 
 			// Handle conversion to magic link.
@@ -416,7 +416,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 			// Make sure both inputs are cleared
 			this.internalAnnotationInput.setAnnotation( null );
 			this.externalAnnotationInput.setAnnotation( null );
-		}, this );
+		} );
 };
 
 /**

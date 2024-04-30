@@ -48,7 +48,7 @@ ve.ui.MWExtensionPreviewDialog.prototype.initialize = function () {
  */
 ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExtensionPreviewDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var element;
 			if ( this.selectedNode ) {
 				element = this.selectedNode.getClonedElement();
@@ -68,7 +68,7 @@ ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 			var rootNode = doc.getDocumentNode().children[ 0 ];
 			this.previewNode = doc.getNodesByType( element.type )[ 0 ];
 			this.previewElement.setModel( rootNode );
-		}, this );
+		} );
 };
 
 /**

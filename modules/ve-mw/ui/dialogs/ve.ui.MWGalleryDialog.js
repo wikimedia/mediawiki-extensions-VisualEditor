@@ -388,7 +388,7 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
  */
 ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var namespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				dialog = this,
 				mwData = this.selectedNode && this.selectedNode.getAttribute( 'mw' ),
@@ -514,7 +514,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 			this.highlightedCaptionTarget.connect( this, { change: 'onHighlightedCaptionTargetChange' } );
 
 			return this.imagesPromise;
-		}, this );
+		} );
 };
 
 /**
@@ -542,9 +542,9 @@ ve.ui.MWGalleryDialog.prototype.createCaptionDocument = function ( captionNode )
  */
 ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.searchWidget.getQuery().focus().select();
-		}, this );
+		} );
 };
 
 /**
@@ -552,7 +552,7 @@ ve.ui.MWGalleryDialog.prototype.getReadyProcess = function ( data ) {
  */
 ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			// Layouts
 			this.indexLayout.setTabPanel( 'images' );
 			this.indexLayout.resetScroll();
@@ -589,12 +589,12 @@ ve.ui.MWGalleryDialog.prototype.getTeardownProcess = function ( data ) {
 			this.captionTarget.disconnect( this );
 			this.highlightedCaptionTarget.disconnect( this );
 
-		}, this );
+		} );
 };
 
 ve.ui.MWGalleryDialog.prototype.getActionProcess = function ( action ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getActionProcess.call( this, action )
-		.next( function () {
+		.next( () => {
 			if ( action === 'done' ) {
 				// Save the input values for the highlighted item
 				this.updateHighlightedItem();
@@ -602,7 +602,7 @@ ve.ui.MWGalleryDialog.prototype.getActionProcess = function ( action ) {
 				this.insertOrUpdateNode();
 				this.close( { action: 'done' } );
 			}
-		}, this );
+		} );
 };
 
 /**

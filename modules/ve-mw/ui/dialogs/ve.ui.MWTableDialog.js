@@ -82,7 +82,7 @@ ve.ui.MWTableDialog.prototype.initialize = function () {
  */
 ve.ui.MWTableDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTableDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var tableNode = this.getFragment().getSelection().getTableNode(
 					this.getFragment().getDocument()
 				),
@@ -109,7 +109,7 @@ ve.ui.MWTableDialog.prototype.getSetupProcess = function ( data ) {
 			} );
 
 			this.onCollapsibleChange( collapsible );
-		}, this );
+		} );
 };
 
 /**
@@ -117,7 +117,7 @@ ve.ui.MWTableDialog.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWTableDialog.prototype.getActionProcess = function ( action ) {
 	return ve.ui.MWTableDialog.super.prototype.getActionProcess.call( this, action )
-		.next( function () {
+		.next( () => {
 			if ( action === 'done' ) {
 				var surfaceModel = this.getFragment().getSurface();
 				var fragment = surfaceModel.getLinearFragment( this.getFragment().getSelection().tableRange, true );
@@ -128,7 +128,7 @@ ve.ui.MWTableDialog.prototype.getActionProcess = function ( action ) {
 					collapsed: this.collapsedToggle.getValue()
 				} );
 			}
-		}, this );
+		} );
 };
 
 /**

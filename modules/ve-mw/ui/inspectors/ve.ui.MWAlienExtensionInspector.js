@@ -56,7 +56,7 @@ ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
  */
 ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWAlienExtensionInspector.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var attributes = this.selectedNode.getAttribute( 'mw' ).attrs;
 
 			if ( attributes && !ve.isEmptyObject( attributes ) ) {
@@ -78,7 +78,7 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			}
 
 			this.title.setLabel( this.selectedNode.getExtensionName() );
-		}, this );
+		} );
 };
 
 /**
@@ -86,10 +86,10 @@ ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWAlienExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWAlienExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.$attributes.empty();
 			this.attributeInputs = {};
-		}, this );
+		} );
 };
 
 /**

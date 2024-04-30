@@ -66,10 +66,10 @@ ve.ui.MWExtensionInspector.prototype.getReadyProcess = function ( data ) {
 	// Parent process
 	var process = ve.ui.MWExtensionInspector.super.prototype.getReadyProcess.call( this, data );
 	// Mixin process
-	return ve.ui.MWExtensionWindow.prototype.getReadyProcess.call( this, data, process ).next( function () {
+	return ve.ui.MWExtensionWindow.prototype.getReadyProcess.call( this, data, process ).next( () => {
 		// Focus the input
 		this.input.focus();
-	}, this );
+	} );
 };
 
 /**

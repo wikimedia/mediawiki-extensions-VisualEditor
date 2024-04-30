@@ -56,7 +56,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 	// Annotation inspector stages the annotation, so call its parent
 	// Call grand-parent
 	return ve.ui.AnnotationInspector.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				internalLinkParser = this.constructor.static.internalLinkParser,
 				fragment = this.getFragment();
@@ -160,7 +160,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 			this.annotationInput.setAnnotation( this.initialAnnotation );
 
 			this.updateActions();
-		}, this );
+		} );
 };
 
 /**
@@ -170,7 +170,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 	data = data || {};
 	// Call grand-parent
 	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			var wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				annotation = this.getAnnotation(),
 				fragment = this.getFragment(),
@@ -233,8 +233,8 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				// Restore selection to what it was before we expanded it
 				this.initialFragment.select();
 			}
-		}, this )
-		.next( function () {
+		} )
+		.next( () => {
 			// Reset state
 			this.initialSelection = null;
 			this.initialAnnotation = null;
@@ -243,7 +243,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 			this.allowProtocolInInternal = false;
 			this.internalAnnotationInput.setAnnotation( null );
 			this.externalAnnotationInput.setAnnotation( null );
-		}, this );
+		} );
 };
 
 /* Registration */

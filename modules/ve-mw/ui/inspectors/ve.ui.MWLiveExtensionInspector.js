@@ -44,7 +44,7 @@ ve.ui.MWLiveExtensionInspector.prototype.initialize = function () {
  */
 ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLiveExtensionInspector.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var element = this.getNewElement();
 			// Initialization
 			this.getFragment().getSurface().pushStaging();
@@ -71,7 +71,7 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 			this.selectedNode.connect( this, {
 				generatedContentsError: 'showGeneratedContentsError'
 			} );
-		}, this );
+		} );
 };
 
 /**
@@ -79,7 +79,7 @@ ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWLiveExtensionInspector.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			this.input.off( 'change', this.onChangeHandler );
 			this.generatedContentsError.clear();
 			this.generatedContentsError.disconnect( this );
@@ -87,7 +87,7 @@ ve.ui.MWLiveExtensionInspector.prototype.getTeardownProcess = function ( data ) 
 			if ( data === undefined ) { // cancel
 				this.getFragment().getSurface().popStaging();
 			}
-		}, this );
+		} );
 };
 
 /**

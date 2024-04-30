@@ -1133,7 +1133,7 @@ ve.ui.MWMediaDialog.prototype.checkChanged = function () {
  */
 ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var isReadOnly = this.isReadOnly();
 
 			// Set language for search results
@@ -1181,7 +1181,7 @@ ve.ui.MWMediaDialog.prototype.getSetupProcess = function ( data ) {
 				this.searchTabs.setTabPanel( 'upload' );
 				this.mediaUploadBooklet.setFile( data.file );
 			}
-		}, this );
+		} );
 };
 
 /**
@@ -1337,13 +1337,13 @@ ve.ui.MWMediaDialog.prototype.resetCaption = function () {
  */
 ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			if ( !data.file ) {
 				this.switchPanels( this.selectedNode ? 'edit' : 'search' );
 			}
 			// Revalidate size
 			this.sizeWidget.validateDimensions();
-		}, this );
+		} );
 };
 
 /**
@@ -1351,7 +1351,7 @@ ve.ui.MWMediaDialog.prototype.getReadyProcess = function ( data ) {
  */
 ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWMediaDialog.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			this.mediaSettingsLayout.resetScroll();
 			// Cleanup
 			this.search.getQuery().setValue( '' );
@@ -1362,7 +1362,7 @@ ve.ui.MWMediaDialog.prototype.getTeardownProcess = function ( data ) {
 			}
 			this.captionTarget.clear();
 			this.imageModel = null;
-		}, this );
+		} );
 };
 
 /**

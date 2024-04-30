@@ -56,9 +56,9 @@ ve.ui.MWFloatingHelpDialog.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.MWFloatingHelpDialog.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWFloatingHelpDialog.super.prototype.getSetupProcess.call( this, data ).next( function () {
+	return ve.ui.MWFloatingHelpDialog.super.prototype.getSetupProcess.call( this, data ).next( () => {
 		this.title.setLabel( this.label );
-	}, this );
+	} );
 };
 
 ve.ui.MWFloatingHelpDialog.prototype.getSizeProperties = function () {

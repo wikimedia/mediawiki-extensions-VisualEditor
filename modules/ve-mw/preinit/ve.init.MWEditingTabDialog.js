@@ -74,7 +74,7 @@ mw.libs.ve.EditingTabDialog.prototype.getSetupProcess = function ( action ) {
 mw.libs.ve.EditingTabDialog.prototype.getActionProcess = function ( action ) {
 	var dialog = this;
 	if ( action ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			var actionWidget = this.getActions().get( { actions: action } )[ 0 ];
 			actionWidget.pushPending();
 			dialog.pushPending();
@@ -85,7 +85,7 @@ mw.libs.ve.EditingTabDialog.prototype.getActionProcess = function ( action ) {
 				mw.user.options.set( 'visualeditor-tabs', action );
 				dialog.close( { action: action } );
 			} );
-		}, this );
+		} );
 	} else {
 		// Parent method
 		return mw.libs.ve.EditingTabDialog.super.prototype.getActionProcess.call( this, action );

@@ -85,7 +85,7 @@ ve.ui.MWExtensionWindow.prototype.getInputPlaceholder = function () {
  */
 ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 	data = data || {};
-	return process.next( function () {
+	return process.next( () => {
 		// Initialization
 		this.whitespace = [ '', '' ];
 
@@ -110,7 +110,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 
 		this.actions.setAbilities( { done: false } );
 		this.input.connect( this, { change: 'onChangeHandler' } );
-	}, this );
+	} );
 };
 
 /**
@@ -124,18 +124,18 @@ ve.ui.MWExtensionWindow.prototype.getReadyProcess = function ( data, process ) {
  * @inheritdoc OO.ui.Window
  */
 ve.ui.MWExtensionWindow.prototype.getTeardownProcess = function ( data, process ) {
-	return process.next( function () {
+	return process.next( () => {
 		// Don't hold on to the original data, it's only refreshed on setup for existing nodes
 		this.originalMwData = null;
 		this.input.disconnect( this, { change: 'onChangeHandler' } );
-	}, this );
+	} );
 };
 
 /**
  * @inheritdoc OO.ui.Dialog
  */
 ve.ui.MWExtensionWindow.prototype.getActionProcess = function ( action, process ) {
-	return process.first( function () {
+	return process.first( () => {
 		if ( action === 'done' ) {
 			if ( this.constructor.static.allowedEmpty || this.input.getValue() !== '' ) {
 				this.insertOrUpdateNode();
@@ -145,7 +145,7 @@ ve.ui.MWExtensionWindow.prototype.getActionProcess = function ( action, process 
 				this.removeNode();
 			}
 		}
-	}, this );
+	} );
 };
 
 /**

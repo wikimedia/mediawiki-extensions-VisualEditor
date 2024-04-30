@@ -64,7 +64,7 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {};
  */
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			if ( this.transclusionModel.isEmpty() ) {
 				// Focus the template placeholder input field.
 				this.bookletLayout.focus();
@@ -75,7 +75,7 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 					page.updateSize();
 				}
 			} );
-		}, this );
+		} );
 };
 
 /**
@@ -418,7 +418,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var promise,
 				dialog = this;
 
@@ -493,7 +493,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
 				dialog.loaded = true;
 			} );
-		}, this );
+		} );
 };
 
 /**
@@ -515,7 +515,7 @@ ve.ui.MWTemplateDialog.prototype.onHasValueChange = function ( pageName, hasValu
  */
 ve.ui.MWTemplateDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			// Cleanup
 			this.$element.removeClass( 've-ui-mwTemplateDialog-ready' );
 			this.transclusionModel.disconnect( this );
@@ -523,5 +523,5 @@ ve.ui.MWTemplateDialog.prototype.getTeardownProcess = function ( data ) {
 			this.transclusionModel = null;
 			this.bookletLayout.clearPages();
 			this.content = null;
-		}, this );
+		} );
 };

@@ -796,7 +796,7 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
  */
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var surfaceMode = ve.init.target.getSurface().getMode();
 
 			this.canReview = !!data.canReview;
@@ -851,7 +851,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			this.actions.forEach( { actions: 'save' }, ( action ) => {
 				action.setLabel( data.saveButtonLabel );
 			} );
-		}, this );
+		} );
 };
 
 /**
@@ -859,7 +859,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			// HACK: iOS Safari sometimes makes the entire panel completely disappear (T221289).
 			// Rebuilding it makes it reappear.
 			OO.ui.Element.static.reconsiderScrollbars( this.panels.getCurrentItem().$element[ 0 ] );
@@ -872,7 +872,7 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
 				// This includes a #focus call
 				this.editSummaryInput.moveCursorToEnd();
 			}
-		}, this );
+		} );
 };
 
 /**
@@ -880,9 +880,9 @@ ve.ui.MWSaveDialog.prototype.getReadyProcess = function ( data ) {
  */
 ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getTeardownProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.emit( 'close' );
-		}, this );
+		} );
 };
 
 /**
@@ -892,22 +892,22 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	ve.track( 'activity.' + this.constructor.static.name, { action: 'dialog-' + ( action || 'abort' ) } );
 
 	if ( action === 'save' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			var saveDeferred = ve.createDeferred();
 			this.clearMessage( 'keyboard-shortcut-submit' );
 			this.emit( 'save', saveDeferred );
 			return saveDeferred.promise();
-		}, this );
+		} );
 	}
 	if ( action === 'review' || action === 'preview' || action === 'resolve' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			this.emit( action );
-		}, this );
+		} );
 	}
 	if ( action === 'approve' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			this.swapPanel( 'save' );
-		}, this );
+		} );
 	}
 
 	return ve.ui.MWSaveDialog.super.prototype.getActionProcess.call( this, action );

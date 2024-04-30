@@ -197,9 +197,9 @@ ve.ui.MWLanguageVariantInspector.prototype.initialize = function () {
  */
 ve.ui.MWLanguageVariantInspector.prototype.getActionProcess = function ( action ) {
 	if ( action === 'remove' || action === 'insert' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			this.close( { action: action } );
-		}, this );
+		} );
 	}
 	return ve.ui.MWLanguageVariantInspector.super.prototype.getActionProcess.call( this, action );
 };
@@ -212,7 +212,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getActionProcess = function ( action 
  */
 ve.ui.MWLanguageVariantInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantInspector.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.getFragment().getSurface().pushStaging();
 
 			this.variantNode = this.getSelectedNode();
@@ -228,7 +228,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getSetupProcess = function ( data ) {
 				] ).select();
 				this.variantNode = this.getSelectedNode();
 			}
-		}, this );
+		} );
 };
 
 /**
@@ -237,7 +237,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWLanguageVariantInspector.super.prototype.getTeardownProcess.call( this, data )
-		.first( function () {
+		.first( () => {
 			var surfaceModel = this.getFragment().getSurface();
 
 			if ( data.action === 'remove' ) {
@@ -263,7 +263,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data 
 				surfaceModel.popStaging();
 			}
 
-		}, this );
+		} );
 };
 
 /* Subclasses */
@@ -308,13 +308,13 @@ ve.ui.MWLanguageVariantDisabledInspector.prototype.getDefaultVariantInfo = funct
 };
 
 ve.ui.MWLanguageVariantDisabledInspector.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWLanguageVariantDisabledInspector.super.prototype.getSetupProcess.call( this, data ).next( function () {
+	return ve.ui.MWLanguageVariantDisabledInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
 		var variantInfo = this.variantNode.getVariantInfo();
 		this.textTargetDoc = this.setupTextTargetDoc(
 			this.textTarget,
 			variantInfo.disabled.t
 		);
-	}, this );
+	} );
 };
 
 ve.ui.MWLanguageVariantDisabledInspector.prototype.getContentFromInspector = function ( variantInfo ) {
@@ -335,18 +335,18 @@ ve.ui.MWLanguageVariantDisabledInspector.prototype.getContentFromInspector = fun
 
 ve.ui.MWLanguageVariantDisabledInspector.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantDisabledInspector.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.textTarget.focus();
-		}, this );
+		} );
 };
 
 ve.ui.MWLanguageVariantDisabledInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantDisabledInspector.super.prototype.getTeardownProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			// Reset inspector
 			this.textTarget.clear();
 			this.textTargetDoc = null;
-		}, this );
+		} );
 };
 
 /**
@@ -391,13 +391,13 @@ ve.ui.MWLanguageVariantNameInspector.prototype.getDefaultVariantInfo = function 
 
 ve.ui.MWLanguageVariantNameInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantNameInspector.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			var variantInfo = this.variantNode.getVariantInfo();
 			this.languageInput.setLangAndDir(
 				variantInfo.name.t,
 				'auto'
 			);
-		}, this );
+		} );
 };
 
 ve.ui.MWLanguageVariantNameInspector.prototype.getContentFromInspector = function ( variantInfo ) {
@@ -483,14 +483,14 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.getDefaultVariantInfo = functio
 };
 
 ve.ui.MWLanguageVariantFilterInspector.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWLanguageVariantFilterInspector.super.prototype.getSetupProcess.call( this, data ).next( function () {
+	return ve.ui.MWLanguageVariantFilterInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
 		var variantInfo = this.variantNode.getVariantInfo();
 		this.textTargetDoc = this.setupTextTargetDoc(
 			this.textTarget,
 			variantInfo.filter.t
 		);
 		this.langWidget.setValue( variantInfo.filter.l );
-	}, this );
+	} );
 };
 
 ve.ui.MWLanguageVariantFilterInspector.prototype.getContentFromInspector = function ( variantInfo ) {
@@ -512,20 +512,20 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.getContentFromInspector = funct
 
 ve.ui.MWLanguageVariantFilterInspector.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantFilterInspector.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.textTarget.focus();
-		}, this );
+		} );
 };
 
 ve.ui.MWLanguageVariantFilterInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantFilterInspector.super.prototype.getTeardownProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			// Reset inspector
 			this.langWidget.clearInput();
 			this.langWidget.clearItems();
 			this.textTarget.clear();
 			this.textTargetDoc = null;
-		}, this );
+		} );
 };
 
 /**
@@ -576,15 +576,15 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getDefaultVariantInfo = functio
 };
 
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWLanguageVariantTwoWayInspector.super.prototype.getSetupProcess.call( this, data ).next( function () {
+	return ve.ui.MWLanguageVariantTwoWayInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
 		var variantInfo = this.variantNode.getVariantInfo();
 		this.layout.clearItems();
 		this.items = [];
-		variantInfo.twoway.forEach( function ( tw, idx ) {
+		variantInfo.twoway.forEach( ( tw, idx ) => {
 			this.items[ idx ] = this.createItem( tw.l, tw.t );
 			this.layout.addItems( [ this.items[ idx ].layout ] );
-		}, this );
-	}, this );
+		} );
+	} );
 };
 
 /**
@@ -639,12 +639,10 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getContentFromInspector = funct
 	// TODO should allow type to depend on targetHtmlDoc, maybe switch
 	// from inline to block.
 	var type = this.variantNode.getType();
-	variantInfo.twoway = this.items.map( function ( item ) {
-		return {
-			l: item.languageInput.getLang(),
-			t: this.getHtmlForDoc( item.textTargetDoc )
-		};
-	}, this );
+	variantInfo.twoway = this.items.map( ( item ) => ( {
+		l: item.languageInput.getLang(),
+		t: this.getHtmlForDoc( item.textTargetDoc )
+	} ) );
 	return [
 		{
 			type: type,
@@ -725,15 +723,15 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getDefaultVariantInfo = functio
 };
 
 ve.ui.MWLanguageVariantOneWayInspector.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.MWLanguageVariantOneWayInspector.super.prototype.getSetupProcess.call( this, data ).next( function () {
+	return ve.ui.MWLanguageVariantOneWayInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
 		var variantInfo = this.variantNode.getVariantInfo();
 		this.layout.clearItems();
 		this.items = [];
-		variantInfo.oneway.forEach( function ( ow, idx ) {
+		variantInfo.oneway.forEach( ( ow, idx ) => {
 			this.items[ idx ] = this.createItem( ow.f, ow.l, ow.t );
 			this.layout.addItems( [ this.items[ idx ].layout ] );
-		}, this );
-	}, this );
+		} );
+	} );
 };
 
 /**
@@ -795,13 +793,11 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getContentFromInspector = funct
 	// TODO should allow type to depend on targetHtmlDoc, maybe switch
 	// from inline to block.
 	var type = this.variantNode.getType();
-	variantInfo.oneway = this.items.map( function ( item ) {
-		return {
-			f: this.getHtmlForDoc( item.fromTextTargetDoc ),
-			l: item.languageInput.getLang(),
-			t: this.getHtmlForDoc( item.toTextTargetDoc )
-		};
-	}, this );
+	variantInfo.oneway = this.items.map( ( item ) => ( {
+		f: this.getHtmlForDoc( item.fromTextTargetDoc ),
+		l: item.languageInput.getLang(),
+		t: this.getHtmlForDoc( item.toTextTargetDoc )
+	} ) );
 	return [
 		{
 			type: type,

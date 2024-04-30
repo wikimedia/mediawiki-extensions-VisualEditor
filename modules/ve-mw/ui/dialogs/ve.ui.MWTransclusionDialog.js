@@ -458,7 +458,7 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 
 	switch ( action ) {
 		case 'back':
-			return new OO.ui.Process( function () {
+			return new OO.ui.Process( () => {
 				if ( willLoseProgress ) {
 					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-back-confirmation-prompt' ) ).then( ( confirmed ) => {
 						if ( confirmed ) {
@@ -468,21 +468,21 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 				} else {
 					this.resetDialog();
 				}
-			}, this );
+			} );
 		case 'mode':
-			return new OO.ui.Process( function () {
+			return new OO.ui.Process( () => {
 				this.toggleSidebar( !this.isSidebarExpanded );
-			}, this );
+			} );
 		case '':
 			// close action
 			if ( willLoseProgress ) {
-				return new OO.ui.Process( function () {
+				return new OO.ui.Process( () => {
 					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-close-confirmation-prompt' ) ).then( ( confirmed ) => {
 						if ( confirmed ) {
 							this.close();
 						}
 					} );
-				}, this );
+				} );
 			}
 	}
 	return ve.ui.MWTransclusionDialog.super.prototype.getActionProcess.call( this, action );
@@ -573,7 +573,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWTransclusionDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.bookletLayout.getOutlineControls().toggle( !this.transclusionModel.isSingleTemplate() );
 			this.$element.toggleClass(
 				've-ui-mwTransclusionDialog-single-transclusion',
@@ -588,7 +588,7 @@ ve.ui.MWTransclusionDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			// We can do this only after the widget is visible on screen
 			this.sidebar.initializeAllStickyHeaderHeights();
-		}, this );
+		} );
 };
 
 /**
