@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel disable gallery meta item (for __NOGALLERY__).
+ * DataModel disable gallery meta item (for `__NOGALLERY__`).
  *
  * @class
  * @extends ve.dm.MetaItem

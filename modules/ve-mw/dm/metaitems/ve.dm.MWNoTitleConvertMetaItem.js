@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel disable title conversion meta item (for __NOTITILECONVERT__ and __NOTC__).
+ * DataModel disable title conversion meta item (for `__NOTITILECONVERT__` and `__NOTC__`).
  *
  * @class
  * @extends ve.dm.MetaItem
