@@ -212,8 +212,8 @@
 	 * @private
 	 * @param {ve.dm.MWTransclusionPartInstruction[]} queue List of objects containing parts to add and optionally
 	 * indexes to add them at, if no index is given parts will be added at the end
-	 * @fires replace For each item added
-	 * @fires change
+	 * @fires ve.dm.MWTransclusionPartInstruction#replace For each item added
+	 * @fires ve.dm.MWTransclusionPartInstruction#change
 	 */
 	ve.dm.MWTransclusionModel.prototype.resolveChangeQueue = function ( queue ) {
 		var resolveQueue = [];
@@ -483,7 +483,7 @@
 
 	/**
 	 * @param {ve.dm.MWTransclusionPartModel} part
-	 * @fires replace
+	 * @fires ve.dm.MWTransclusionPartInstruction#replace
 	 */
 	ve.dm.MWTransclusionModel.prototype.removePart = function ( part ) {
 		var index = this.parts.indexOf( part );

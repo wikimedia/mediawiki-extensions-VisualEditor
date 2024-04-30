@@ -100,7 +100,7 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
 /**
  * Setup the Ace editor
  *
- * @fires resize
+ * @fires ve.ui.MWAceEditorWidget#resize
  */
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	var widget = this;
@@ -316,7 +316,7 @@ ve.ui.MWAceEditorWidget.prototype.onEditorChange = function () {
 /**
  * Handle resize events from the Ace editor
  *
- * @fires resize
+ * @fires ve.ui.MWAceEditorWidget#resize
  */
 ve.ui.MWAceEditorWidget.prototype.onEditorResize = function () {
 	// On the first setup the editor doesn't resize until the end of the cycle

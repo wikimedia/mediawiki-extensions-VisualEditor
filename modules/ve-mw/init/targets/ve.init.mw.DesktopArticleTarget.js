@@ -591,7 +591,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
  * @inheritdoc
  *
  * @param {string} [trackMechanism]
- * @fires deactivate
+ * @fires ve.init.mw.DesktopArticleTarget#deactivate
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
 	var target = this;
@@ -1022,7 +1022,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreDocumentTitle = function () {
 /**
  * Page modifications for switching to edit mode.
  *
- * @fires transformPage
+ * @fires ve.init.mw.DesktopArticleTarget#transformPage
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	this.updateTabs();
@@ -1135,7 +1135,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 /**
  * Page modifications for switching back to view mode.
  *
- * @fires restorePage
+ * @fires ve.init.mw.DesktopArticleTarget#restorePage
  */
 ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// Restore any previous redirectMsg/redirectsub
@@ -1379,7 +1379,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 /**
  * Handle before unload event.
  *
- * @return {string} Message
+ * @return {string|undefined} Message
  */
 ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 	// Check if someone already set on onbeforeunload hook

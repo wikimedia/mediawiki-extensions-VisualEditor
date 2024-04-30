@@ -571,7 +571,7 @@ ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
  *
  * @param {string} code Error code from mw.Api
  * @param {Object} errorDetails API response
- * @fires loadError
+ * @fires ve.init.mw.ArticleTarget#loadError
  */
 ve.init.mw.ArticleTarget.prototype.loadFail = function () {
 	this.loading = null;
@@ -635,7 +635,7 @@ ve.init.mw.ArticleTarget.prototype.replacePageContent = function (
  * @param {Array} data.sections Section data to display in the TOC
  * @param {boolean} data.tempusercreated True if we just became logged in as a temporary user
  * @param {string} data.tempusercreatedredirect URL to visit to finish creating temp account
- * @fires save
+ * @fires ve.init.mw.ArticleTarget#save
  */
 ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	this.editSummaryValue = null;
@@ -743,7 +743,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
  * @param {Object} saveData Options that were used
  * @param {string} code Error code
  * @param {Object|null} data Full API response data, or XHR error details
- * @fires saveError
+ * @fires ve.init.mw.ArticleTarget#saveError
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, data ) {
 	var saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
@@ -912,7 +912,7 @@ ve.init.mw.ArticleTarget.prototype.editConflict = function () {
 /**
  * Handle clicks on the review button in the save dialog.
  *
- * @fires saveReview
+ * @fires ve.init.mw.ArticleTarget#saveReview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 	var target = this;
@@ -939,7 +939,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 /**
  * Handle clicks on the show preview button in the save dialog.
  *
- * @fires savePreview
+ * @fires ve.init.mw.ArticleTarget#savePreview
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 	var api = this.getContentApi(),
@@ -1389,7 +1389,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
  *
  * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
  *  succeeds/fails.
- * @fires saveInitiated
+ * @fires ve.init.mw.ArticleTarget#saveInitiated
  */
 ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) {
 	if ( this.deactivating ) {
@@ -1625,8 +1625,8 @@ ve.init.mw.ArticleTarget.prototype.clearDiff = function () {
  *
  * @param {HTMLDocument} doc Document to compare against (via wikitext)
  * @return {jQuery.Promise} Promise which resolves with the wikitext diff, or rejects with an error
- * @fires showChanges
- * @fires showChangesError
+ * @fires ve.init.mw.ArticleTarget#showChanges
+ * @fires ve.init.mw.ArticleTarget#showChangesError
  */
 ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 	var target = this;
@@ -1978,7 +1978,7 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
  * @param {string} [action] Window action to trigger after opening
  * @param {string} [checkboxName] Checkbox to toggle after opening
  *
- * @fires saveWorkflowBegin
+ * @fires ve.init.mw.ArticleTarget#saveWorkflowBegin
  */
 ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxName ) {
 	var firstLoad = false,

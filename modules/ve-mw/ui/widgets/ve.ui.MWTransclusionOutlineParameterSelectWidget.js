@@ -194,7 +194,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onFocus = function ( 
 /**
  * @inheritDoc OO.ui.SelectWidget
  * @param {jQuery.Event} e
- * @fires choose
+ * @fires OO.ui.SelectWidget#choose
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = function ( e ) {
 	if ( e.which === OO.ui.MouseButtons.LEFT ) {
@@ -214,8 +214,8 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onMouseDown = functio
 /**
  * @inheritDoc OO.ui.SelectWidget
  * @param {KeyboardEvent} e
- * @fires choose
- * @fires templateParameterSpaceDown
+ * @fires OO.ui.SelectWidget#choose
+ * @fires ve.ui.MWTransclusionOutlineParameterSelectWidget#templateParameterSpaceDown
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onDocumentKeyDown = function ( e ) {
 	var item;

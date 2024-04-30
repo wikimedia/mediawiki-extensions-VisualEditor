@@ -66,7 +66,7 @@ ve.ui.MWTransclusionOutlineButtonWidget.static.pressable = false;
 /**
  * @inheritDoc OO.ui.mixin.ButtonElement
  * @param {jQuery.Event} e
- * @fires keyPressed
+ * @fires ve.ui.MWTransclusionOutlineButtonWidget#keyPressed
  */
 ve.ui.MWTransclusionOutlineButtonWidget.prototype.onKeyDown = function ( e ) {
 	var isMac = ve.getSystemPlatform() === 'mac';

@@ -246,15 +246,18 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 };
 
 /**
+ * @typedef {Object} TargetData
+ * @memberof mw.libs.ve
+ * @property {string} title The title of the internal link (if the href is internal)
+ * @property {boolean} isInternal True if the href pointed to the local wiki, false if href is external
+ */
+
+/**
  * Parse URL to get title it points to.
  *
  * @param {string} href
  * @param {HTMLDocument} doc Document whose base URL to use
- * @return {Object} Information about the given href
- * @return {string} [return.title]
- *    The title of the internal link (if the href is internal)
- * @return {boolean} return.isInternal
- *    True if the href pointed to the local wiki, false if href is external
+ * @return {mw.libs.ve.TargetData} Information about the given href
  */
 mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 	function regexEscape( str ) {
@@ -343,11 +346,16 @@ mw.libs.ve.encodeParsoidResourceName = function ( title ) {
 };
 
 /**
+ * @typedef ParsedResource
+ * @memberof mw.libs.ve
+ * @property {string} title Full page title in text form (with namespace, and spaces instead of underscores)
+ */
+
+/**
  * Split Parsoid resource name into the href prefix and the page title.
  *
  * @param {string} resourceName Resource name, from a `href` or `resource` attribute
- * @return {Object} Object with the following properties:
- * @return {string} return.title Full page title in text form (with namespace, and spaces instead of underscores)
+ * @return {mw.libs.ve.ParsedResource} Parsed resource name
  */
 mw.libs.ve.parseParsoidResourceName = function ( resourceName ) {
 	// Resource names are always prefixed with './' to prevent the MediaWiki namespace from being

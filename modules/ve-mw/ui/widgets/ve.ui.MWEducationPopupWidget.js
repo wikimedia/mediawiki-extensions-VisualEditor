@@ -95,6 +95,7 @@ OO.inheritClass( ve.ui.MWEducationPopupWidget, OO.ui.Widget );
  * Handle mouse down events on the handle
  *
  * @param {jQuery.Event} e
+ * @return {boolean|undefined}
  */
 ve.ui.MWEducationPopupWidget.prototype.onTargetMouseDown = function () {
 	if ( ve.init.target.openEducationPopup ) {

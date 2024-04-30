@@ -265,8 +265,8 @@ ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 
 /**
  * @param {ve.dm.MWParameterModel} param Parameter to add
- * @fires add
- * @fires change
+ * @fires ve.dm.MWTemplateModel#add
+ * @fires ve.dm.MWTemplateModel#change
  */
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
 	var name = param.getName();
@@ -289,8 +289,8 @@ ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
  * parameter from the UI. Note this does *not* remove the parameter from the linked specification.
  *
  * @param {ve.dm.MWParameterModel} [param]
- * @fires remove
- * @fires change
+ * @fires ve.dm.MWTemplateModel#remove
+ * @fires ve.dm.MWTemplateModel#change
  */
 ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
 	if ( param ) {
