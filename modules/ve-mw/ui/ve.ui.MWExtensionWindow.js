@@ -159,7 +159,7 @@ ve.ui.MWExtensionWindow.prototype.onChange = function () {
  * Update the 'done' action according to whether there are changes
  */
 ve.ui.MWExtensionWindow.prototype.updateActions = function () {
-	this.actions.setAbilities( { done: this.isModified() } );
+	this.actions.setAbilities( { done: this.isSaveable() } );
 };
 
 /**
@@ -169,7 +169,7 @@ ve.ui.MWExtensionWindow.prototype.updateActions = function () {
  *
  * @return {boolean} mwData would be modified
  */
-ve.ui.MWExtensionWindow.prototype.isModified = function () {
+ve.ui.MWExtensionWindow.prototype.isSaveable = function () {
 	var modified;
 	if ( this.originalMwData ) {
 		var mwDataCopy = ve.copy( this.originalMwData );
@@ -180,6 +180,12 @@ ve.ui.MWExtensionWindow.prototype.isModified = function () {
 	}
 	return modified;
 };
+
+/**
+ * @deprecated Moved to ve.ui.MWExtensionWindow.prototype.isSaveable
+ * @return {boolean} mwData would be modified
+ */
+ve.ui.MWExtensionWindow.prototype.isModified = ve.ui.MWExtensionWindow.prototype.isSaveable;
 
 /**
  * Check if mwData has meaningful edits. This is used to determine if it's
