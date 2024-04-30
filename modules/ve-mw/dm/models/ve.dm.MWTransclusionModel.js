@@ -126,7 +126,7 @@
 				baseNodeClass.static.getWikitext( this.getPlainObject() ),
 				true,
 				surfaceFragment.getDocument()
-			).then( function ( response ) {
+			).then( ( response ) => {
 				if ( ve.getProp( response, 'visualeditor', 'result' ) === 'success' ) {
 					// This method is only ever run by a client, so it is okay to use jQuery
 					// eslint-disable-next-line no-undef
@@ -140,7 +140,7 @@
 					// Request failed - just assume inline
 					insertNode( true );
 				}
-			}, function () {
+			}, () => {
 				insertNode( true );
 			} );
 		}
@@ -272,7 +272,7 @@
 		// We need to go back and resolve the deferreds after emitting change.
 		// Otherwise we get silly situations like a single change event being
 		// guaranteed after the transclusion loaded promise gets resolved.
-		resolveQueue.forEach( function ( queueItem ) {
+		resolveQueue.forEach( ( queueItem ) => {
 			queueItem.resolve();
 		} );
 	};
@@ -498,9 +498,7 @@
 	 * @return {boolean} True if the transclusion is literally empty or contains only placeholders
 	 */
 	ve.dm.MWTransclusionModel.prototype.isEmpty = function () {
-		return this.parts.every( function ( part ) {
-			return part instanceof ve.dm.MWTemplatePlaceholderModel;
-		} );
+		return this.parts.every( ( part ) => part instanceof ve.dm.MWTemplatePlaceholderModel );
 	};
 
 	/**
@@ -577,7 +575,7 @@
 	 * Add missing required and suggested parameters to each transclusion.
 	 */
 	ve.dm.MWTransclusionModel.prototype.addPromptedParameters = function () {
-		this.parts.forEach( function ( part ) {
+		this.parts.forEach( ( part ) => {
 			if ( part instanceof ve.dm.MWTemplateModel ) {
 				part.addPromptedParameters();
 			}
@@ -588,9 +586,7 @@
 	 * @return {boolean} True if any transclusion part contains meaningful, non-default user input
 	 */
 	ve.dm.MWTransclusionModel.prototype.containsValuableData = function () {
-		return this.parts.some( function ( part ) {
-			return part.containsValuableData();
-		} );
+		return this.parts.some( ( part ) => part.containsValuableData() );
 	};
 
 	/**

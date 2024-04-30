@@ -87,7 +87,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 		linkCacheUpdate = {},
 		query = data.query || {};
 
-	( query.pages || [] ).forEach( function ( categoryPage ) {
+	( query.pages || [] ).forEach( ( categoryPage ) => {
 		result.push( mw.Title.newFromText( categoryPage.title ).getMainText() );
 		linkCacheUpdate[ categoryPage.title ] = {
 			missing: Object.prototype.hasOwnProperty.call( categoryPage, 'missing' ),
@@ -98,7 +98,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 		};
 	} );
 
-	( query.redirects || [] ).forEach( function ( redirect ) {
+	( query.redirects || [] ).forEach( ( redirect ) => {
 		if ( !Object.prototype.hasOwnProperty.call( linkCacheUpdate, redirect.to ) ) {
 			linkCacheUpdate[ redirect.to ] = ve.init.platform.linkCache.getCached( redirect.to ) ||
 				{ missing: false, redirectFrom: [ redirect.from ] };
@@ -144,7 +144,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 		canonicalQueryValue = canonicalQueryValue.getMainText();
 	}
 
-	data.forEach( function ( suggestedCategory ) {
+	data.forEach( ( suggestedCategory ) => {
 		var suggestedCategoryTitle = mw.Title.newFromText(
 				suggestedCategory,
 				mw.config.get( 'wgNamespaceIds' ).category
@@ -168,7 +168,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	} );
 
 	// Existing categories
-	existingCategories.forEach( function ( existingCategory, i ) {
+	existingCategories.forEach( ( existingCategory, i ) => {
 		if ( existingCategory === canonicalQueryValue ) {
 			exactMatch = true;
 		}
@@ -208,13 +208,13 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 			label: ve.msg( 'visualeditor-dialog-meta-categories-input-hiddencategorieslabel' ),
 			items: hiddenCategoryItems
 		}
-	].forEach( function ( sectionData ) {
+	].forEach( ( sectionData ) => {
 		if ( sectionData.items.length ) {
 			itemWidgets.push( new OO.ui.MenuSectionOptionWidget( {
 				data: sectionData.id,
 				label: sectionData.label
 			} ) );
-			sectionData.items.forEach( function ( categoryItem ) {
+			sectionData.items.forEach( ( categoryItem ) => {
 				itemWidgets.push( widget.getCategoryWidgetFromName( categoryItem ) );
 			} );
 		}

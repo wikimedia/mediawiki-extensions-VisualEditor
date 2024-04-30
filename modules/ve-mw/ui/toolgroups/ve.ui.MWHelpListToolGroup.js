@@ -61,10 +61,8 @@ ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
 			action: 'query',
 			meta: 'siteinfo',
 			siprop: 'extensions'
-		} ).then( function ( response ) {
-			var extension = response.query.extensions.filter( function ( ext ) {
-				return ext.name === 'VisualEditor';
-			} )[ 0 ];
+		} ).then( ( response ) => {
+			var extension = response.query.extensions.filter( ( ext ) => ext.name === 'VisualEditor' )[ 0 ];
 
 			if ( extension && extension[ 'vcs-version' ] ) {
 				$version
@@ -88,7 +86,7 @@ ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
 			} else {
 				$version.remove();
 			}
-		}, function () {
+		}, () => {
 			$version.remove();
 		} );
 	}
@@ -161,7 +159,7 @@ ve.ui.MWFeedbackDialogTool.prototype.onSelect = function () {
 	this.setActive( false );
 
 	if ( !this.feedbackPromise ) {
-		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( function () {
+		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( () => {
 			var mode = tool.toolbar.getSurface().getMode();
 
 			// This can't be constructed until the editor has loaded as it uses special messages
@@ -189,7 +187,7 @@ ve.ui.MWFeedbackDialogTool.prototype.onSelect = function () {
 			return new mw.Feedback( feedbackConfig );
 		} );
 	}
-	this.feedbackPromise.done( function ( feedback ) {
+	this.feedbackPromise.done( ( feedback ) => {
 		feedback.launch( {
 			message: ve.msg( 'visualeditor-feedback-defaultmessage', location.toString() )
 		} );

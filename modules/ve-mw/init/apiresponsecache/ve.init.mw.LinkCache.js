@@ -79,7 +79,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 		promise = this.get( title );
 	}
 
-	promise.done( function ( data ) {
+	promise.done( ( data ) => {
 		if ( data.missing && !data.known ) {
 			$element.addClass( 'new' );
 		} else {
@@ -114,7 +114,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 ve.init.mw.LinkCache.prototype.styleParsoidElements = function ( $elements ) {
 	if ( ve.dm.MWLanguageVariantNode ) {
 		// Render the user's preferred variant in language converter markup
-		$elements.each( function ( i, element ) {
+		$elements.each( ( i, element ) => {
 			ve.dm.MWLanguageVariantNode.static.processVariants( element );
 		} );
 	}

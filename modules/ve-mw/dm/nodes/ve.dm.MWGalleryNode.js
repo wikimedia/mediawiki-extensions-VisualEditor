@@ -122,9 +122,7 @@ ve.dm.MWGalleryNode.prototype.getCaptionNode = function () {
  * @return {ve.dm.MWGalleryImageNode[]} Gallery image nodes (may be empty if none are present)
  */
 ve.dm.MWGalleryNode.prototype.getImageNodes = function () {
-	var images = this.children.filter( function ( child ) {
-		return child instanceof ve.dm.MWGalleryImageNode;
-	} );
+	var images = this.children.filter( ( child ) => child instanceof ve.dm.MWGalleryImageNode );
 	return images;
 };
 

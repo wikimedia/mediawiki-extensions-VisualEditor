@@ -8,6 +8,9 @@
 		"./eslint-shared.json"
 	],
 	"rules": {
-		"no-var": "off"
+		"no-var": "off",
+		"prefer-arrow-callback": "error",
+		"implicit-arrow-linebreak": "error",
+		"arrow-body-style": "error"
 	}
 }

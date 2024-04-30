@@ -257,9 +257,7 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 	if ( !this.orderedParameterNames ) {
 		var params = this.params;
-		this.orderedParameterNames = this.getAllParametersOrdered().filter( function ( name ) {
-			return name in params;
-		} );
+		this.orderedParameterNames = this.getAllParametersOrdered().filter( ( name ) => name in params );
 	}
 	return this.orderedParameterNames;
 };
@@ -313,9 +311,7 @@ ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
 
 	for ( var i = 0; i < names.length; i++ ) {
 		var name = names[ i ];
-		var foundAlias = spec.getParameterAliases( name ).some( function ( alias ) {
-			return alias in params;
-		} );
+		var foundAlias = spec.getParameterAliases( name ).some( ( alias ) => alias in params );
 		if (
 			!foundAlias &&
 			!params[ name ] &&
@@ -387,7 +383,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 ve.dm.MWTemplateModel.prototype.containsValuableData = function () {
 	var params = this.params;
 
-	return Object.keys( params ).some( function ( name ) {
+	return Object.keys( params ).some( ( name ) => {
 		// Skip unnamed placeholders
 		if ( !name ) {
 			return false;

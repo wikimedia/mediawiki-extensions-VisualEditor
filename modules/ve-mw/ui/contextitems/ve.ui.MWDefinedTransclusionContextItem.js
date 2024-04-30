@@ -97,10 +97,10 @@ ve.ui.MWDefinedTransclusionContextItem.static.getToolsByTitle = function () {
 	if ( !this.toolsByTitle ) {
 		var toolsByTitle;
 		this.toolsByTitle = toolsByTitle = {};
-		( this.toolDefinitions[ this.name ] || [] ).forEach( function ( template ) {
+		( this.toolDefinitions[ this.name ] || [] ).forEach( ( template ) => {
 			var titles = Array.isArray( template.title ) ? template.title : [ template.title ];
 			// 'title' can be a single title, or list of titles (including redirects)
-			titles.forEach( function ( title ) {
+			titles.forEach( ( title ) => {
 				toolsByTitle[ mw.Title.newFromText( title, mw.config.get( 'wgNamespaceIds' ).template ).getPrefixedText() ] = template;
 			} );
 		} );

@@ -168,7 +168,7 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
 ve.dm.MWLanguageVariantNode.static.processVariants = function ( container, opts ) {
 	var self = this;
 
-	Array.prototype.forEach.call( container.querySelectorAll( '[typeof="mw:LanguageVariant"]' ), function ( element ) {
+	Array.prototype.forEach.call( container.querySelectorAll( '[typeof="mw:LanguageVariant"]' ), ( element ) => {
 		var dataMwvJSON = element.getAttribute( 'data-mw-variant' );
 		if ( dataMwvJSON && element.tagName !== 'META' ) {
 			self.insertPreviewElements(
@@ -223,12 +223,12 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 	} else if ( variantInfo.describe || ( opts && opts.describeAll ) ) {
 		var html = '';
 		if ( variantInfo.twoway && variantInfo.twoway.length ) {
-			variantInfo.twoway.forEach( function ( item ) {
+			variantInfo.twoway.forEach( ( item ) => {
 				html += ve.init.platform.getLanguageName( item.l.toLowerCase() ) + ':' +
 					item.t + ';';
 			} );
 		} else if ( variantInfo.oneway && variantInfo.oneway.length ) {
-			variantInfo.oneway.forEach( function ( item ) {
+			variantInfo.oneway.forEach( ( item ) => {
 				html += item.f + '⇒' +
 					ve.init.platform.getLanguageName( item.l.toLowerCase() ) + ':' +
 					item.t + ';';

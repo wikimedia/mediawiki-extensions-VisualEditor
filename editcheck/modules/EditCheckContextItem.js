@@ -110,14 +110,12 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 
 	insertionPointFragment.select();
 
-	windowAction.open( 'citoid' ).then( function ( instance ) {
-		return instance.closing;
-	} ).then( function ( citoidData ) {
+	windowAction.open( 'citoid' ).then( ( instance ) => instance.closing ).then( ( citoidData ) => {
 		var citoidOrCiteDataDeferred = ve.createDeferred();
 		if ( citoidData && citoidData.action === 'manual-choose' ) {
 			// The plain reference dialog has been launched. Wait for the data from
 			// the basic Cite closing promise instead.
-			contextItem.context.getSurface().getDialogs().once( 'closing', function ( win, closed, citeData ) {
+			contextItem.context.getSurface().getDialogs().once( 'closing', ( win, closed, citeData ) => {
 				citoidOrCiteDataDeferred.resolve( citeData );
 			} );
 		} else {
@@ -125,10 +123,10 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 			// use the data form the Citoid closing promise.
 			citoidOrCiteDataDeferred.resolve( citoidData );
 		}
-		citoidOrCiteDataDeferred.promise().then( function ( data ) {
+		citoidOrCiteDataDeferred.promise().then( ( data ) => {
 			if ( !data ) {
 				// Reference was not inserted - re-open this context
-				setTimeout( function () {
+				setTimeout( () => {
 					// Deactivate again for mobile after teardown has modified selections
 					contextItem.context.getSurface().getView().deactivate();
 					contextItem.context.afterContextChange();
@@ -153,10 +151,11 @@ ve.ui.EditCheckContextItem.prototype.onRejectClick = function () {
 			fragment: this.data.fragment,
 			saveProcessDeferred: this.data.saveProcessDeferred
 		}
-	).then( function ( instance ) {
+	// eslint-disable-next-line arrow-body-style
+	).then( ( instance ) => {
 		// contextItem.openingCitoid = false;
 		return instance.closing;
-	} ).then( function ( data ) {
+	} ).then( ( data ) => {
 		if ( !data ) {
 			// Form was closed, re-open this context
 			contextItem.context.afterContextChange();

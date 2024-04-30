@@ -41,7 +41,7 @@ ve.ui.MWWikitextWarningCommand.prototype.execute = function () {
 		$message.contents(),
 		ve.msg( 'visualeditor-wikitext-warning-title' ),
 		{ tag: 'visualeditor-wikitext-warning' }
-	).then( function ( message ) {
+	).then( ( message ) => {
 		command.warning = message;
 	} );
 	return true;

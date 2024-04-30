@@ -95,13 +95,9 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
 		mw.loader.load( 'jquery.tablesorter' );
 
 		cellModels = this.getTablesorterHeaderCells();
-		cellViews = cellModels.map( function ( cellModel ) {
-			return view.getNodeFromOffset( cellModel.getOffset() - view.model.getOffset() );
-		} );
+		cellViews = cellModels.map( ( cellModel ) => view.getNodeFromOffset( cellModel.getOffset() - view.model.getOffset() ) );
 
-		this.$sortableHeaders = $( cellViews.map( function ( cell ) {
-			return cell.$element[ 0 ];
-		} ) ).not( '.unsortable' );
+		this.$sortableHeaders = $( cellViews.map( ( cell ) => cell.$element[ 0 ] ) ).not( '.unsortable' );
 	} else {
 		this.$sortableHeaders = $( [] );
 	}
@@ -129,12 +125,8 @@ ve.ce.MWTableNode.prototype.getTablesorterHeaderCells = function () {
 
 	for ( i = 0, l = matrix.getRowCount(); i < l; i++ ) {
 		matrixCells = matrix.getRow( i );
-		cellModels = OO.unique( matrixCells.map( function ( matrixCell ) {
-			return matrixCell && matrixCell.getOwner().node;
-		} ) );
-		isAllHeaders = cellModels.every( function ( cellModel ) {
-			return cellModel && cellModel.getAttribute( 'style' ) === 'header';
-		} );
+		cellModels = OO.unique( matrixCells.map( ( matrixCell ) => matrixCell && matrixCell.getOwner().node ) );
+		isAllHeaders = cellModels.every( ( cellModel ) => cellModel && cellModel.getAttribute( 'style' ) === 'header' );
 		if ( !isAllHeaders ) {
 			// This is the end of table head (thead), stop looking further
 			break;

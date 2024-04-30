@@ -38,19 +38,19 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 		paction: 'templatesused',
 		page: target.getPageName(),
 		uselang: mw.config.get( 'wgUserLanguage' )
-	} ).then( function ( response ) {
+	} ).then( ( response ) => {
 		var templatesUsed = $.parseHTML( response.visualeditor );
 		if ( templatesUsed.length && $( templatesUsed ).find( 'li' ).length ) {
 			return templatesUsed;
 		} else {
 			return ve.createDeferred().reject().promise();
 		}
-	} ).then( function ( templatesUsed ) {
+	} ).then( ( templatesUsed ) => {
 		// templatesUsed is an array of nodes
 		// eslint-disable-next-line no-jquery/no-append-html
 		page.templatesUsedFieldset.$group.append( templatesUsed );
 		ve.targetLinksToNewWindow( page.templatesUsedFieldset.$group[ 0 ] );
-	}, function () {
+	}, () => {
 		page.templatesUsedFieldset.$group.append(
 			$( '<em>' ).text( ve.msg( 'visualeditor-dialog-meta-templatesused-noresults' ) )
 		);

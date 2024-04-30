@@ -91,7 +91,7 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	}
 
 	this.$description.find( 'a[href]' )
-		.on( 'click', function () {
+		.on( 'click', () => {
 			ve.track( 'activity.transclusion', { action: 'template-doc-link-click' } );
 		} );
 

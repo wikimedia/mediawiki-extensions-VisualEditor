@@ -33,9 +33,7 @@
 		 * @return {jQuery.Promise} Promise resolved with deflated HTML
 		 */
 		deflate: function ( html ) {
-			return mw.loader.using( 'mediawiki.deflate' ).then( function () {
-				return mw.deflate( html );
-			} );
+			return mw.loader.using( 'mediawiki.deflate' ).then( () => mw.deflate( html ) );
 
 		},
 
@@ -52,7 +50,7 @@
 		 */
 		getHtml: function ( newDoc, oldDoc ) {
 			function copyAttributes( from, to ) {
-				Array.prototype.forEach.call( from.attributes, function ( attr ) {
+				Array.prototype.forEach.call( from.attributes, ( attr ) => {
 					to.setAttribute( attr.name, attr.value );
 				} );
 			}
@@ -136,14 +134,12 @@
 		 */
 		saveDoc: function ( doc, extraData, options ) {
 			var saver = this;
-			return this.deflateDoc( doc ).then( function ( html ) {
-				return saver.postHtml(
-					html,
-					null,
-					extraData,
-					options
-				);
-			} );
+			return this.deflateDoc( doc ).then( ( html ) => saver.postHtml(
+				html,
+				null,
+				extraData,
+				options
+			) );
 		},
 
 		/**
@@ -188,7 +184,7 @@
 			}
 			return this.postContent( data, options ).then(
 				null,
-				function ( code, response ) {
+				( code, response ) => {
 					// This cache key is evidently bad, clear it
 					if ( options.onCacheKeyFail ) {
 						options.onCacheKeyFail();
@@ -254,7 +250,7 @@
 			} );
 
 			return request.then(
-				function ( response, jqxhr ) {
+				( response, jqxhr ) => {
 					var responseData = response[ action ];
 
 					// Log data about the request if eventName was set
@@ -307,7 +303,7 @@
 					}
 					return responseData;
 				},
-				function ( code, response ) {
+				( code, response ) => {
 					var responseText = OO.getProp( response, 'xhr', 'responseText' );
 
 					if ( responseText && options.track && options.eventName ) {

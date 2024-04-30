@@ -146,7 +146,7 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 	this.parsoidRequest = ve.init.target.parseWikitextFragment( wikitext, false, this.surface.getModel().getDocument() );
 
 	// Don't immediately chain, as this.parsoidRequest must be abortable
-	this.parsoidRequest.then( function ( response ) {
+	this.parsoidRequest.then( ( response ) => {
 		if ( ve.getProp( response, 'visualeditor', 'result' ) !== 'success' ) {
 			return failure();
 		}

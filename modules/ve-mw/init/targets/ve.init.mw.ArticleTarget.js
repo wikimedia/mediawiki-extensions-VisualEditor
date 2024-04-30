@@ -81,9 +81,9 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.restoring = !!this.requestedRevId && this.requestedRevId !== this.currentRevisionId;
 	this.pageDeletedWarning = false;
 	this.events = {
-		track: function () {},
-		trackActivationStart: function () {},
-		trackActivationComplete: function () {}
+		track: () => {},
+		trackActivationStart: () => {},
+		trackActivationComplete: () => {}
 	};
 
 	this.preparedCacheKeyPromise = null;
@@ -425,7 +425,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	this.checkboxFields = checkboxes.checkboxFields;
 	this.checkboxesByName = checkboxes.checkboxesByName;
 
-	this.checkboxFields.forEach( function ( field ) {
+	this.checkboxFields.forEach( ( field ) => {
 		// TODO: This method should be upstreamed or moved so that targetLoader
 		// can use it safely.
 		ve.targetLinksToNewWindow( field.$label[ 0 ] );
@@ -440,9 +440,7 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 ve.init.mw.ArticleTarget.prototype.documentReady = function () {
 	// We need to wait until documentReady as local notices may require special messages
 	this.editNotices = this.remoteNotices.concat(
-		this.localNoticeMessages.map( function ( msgKey ) {
-			return '<p>' + ve.init.platform.getParsedMessage( msgKey ) + '</p>';
-		} )
+		this.localNoticeMessages.map( ( msgKey ) => '<p>' + ve.init.platform.getParsedMessage( msgKey ) + '</p>' )
 	);
 
 	this.loading = null;
@@ -495,7 +493,7 @@ ve.init.mw.ArticleTarget.prototype.surfaceReady = function () {
 			this.initAutosave();
 		}
 
-		setTimeout( function () {
+		setTimeout( () => {
 			mw.libs.ve.targetSaver.preloadDeflate();
 		}, 500 );
 	}
@@ -559,11 +557,11 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
  * @param {string} key Access key
  */
 ve.init.mw.ArticleTarget.prototype.disableAccessKey = function ( key ) {
-	$( '[accesskey=' + key + ']' ).each( function () {
-		var $this = $( this );
+	$( '[accesskey=' + key + ']' ).each( ( i, el ) => {
+		var $el = $( el );
 
-		$this
-			.attr( 'data-old-accesskey', $this.attr( 'accesskey' ) )
+		$el
+			.attr( 'data-old-accesskey', $el.attr( 'accesskey' ) )
 			.removeAttr( 'accesskey' );
 	} );
 };
@@ -572,11 +570,11 @@ ve.init.mw.ArticleTarget.prototype.disableAccessKey = function ( key ) {
  * Re-enable all access keys
  */
 ve.init.mw.ArticleTarget.prototype.restoreAccessKeys = function () {
-	$( '[data-old-accesskey]' ).each( function () {
-		var $this = $( this );
+	$( '[data-old-accesskey]' ).each( ( i, el ) => {
+		var $el = $( el );
 
-		$this
-			.attr( 'accesskey', $this.attr( 'data-old-accesskey' ) )
+		$el
+			.attr( 'accesskey', $el.attr( 'data-old-accesskey' ) )
 			.removeAttr( 'data-old-accesskey' );
 	} );
 };
@@ -667,7 +665,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 	// or we just became logged in as a temporary user: refresh the page.
 	if ( data.nocontent || data.tempusercreated ) {
 		// Teardown the target, ensuring auto-save data is cleared
-		this.teardown().then( function () {
+		this.teardown().then( () => {
 			if ( data.newrevid !== undefined ) {
 				var action;
 				if ( target.restoring ) {
@@ -780,9 +778,9 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 			var error = data.errors[ i ];
 
 			if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
-				this.refreshUser().then( function ( username ) {
+				this.refreshUser().then( ( username ) => {
 					target.saveErrorNewUser( username );
-				}, function () {
+				}, () => {
 					target.saveErrorUnknown( data );
 				} );
 				handled = true;
@@ -820,9 +818,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 
 	var errorCodes;
 	if ( data.errors ) {
-		errorCodes = OO.unique( data.errors.map( function ( err ) {
-			return err.code;
-		} ) ).join( ',' );
+		errorCodes = OO.unique( data.errors.map( ( err ) => err.code ) ).join( ',' );
 	} else if ( ve.getProp( data, 'visualeditoredit', 'edit', 'captcha' ) ) {
 		// Eww
 		errorCodes = 'captcha';
@@ -938,12 +934,12 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReview = function () {
 		this.saveDialog.pushPending();
 		// Acquire a temporary user username before diffing, so that signatures and
 		// user-related magic words display the temp user instead of IP user in the diff. (T331397)
-		mw.user.acquireTempUserName().then( function () {
+		mw.user.acquireTempUserName().then( () => {
 			if ( target.pageExists ) {
 				// Has no callback, handled via target.showChangesDiff
 				target.showChanges( target.getDocToSave() );
 			} else {
-				target.serialize( target.getDocToSave() ).then( function ( data ) {
+				target.serialize( target.getDocToSave() ).then( ( data ) => {
 					target.onSaveDialogReviewComplete( data.content );
 				} );
 			}
@@ -979,25 +975,23 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 
 		// Acquire a temporary user username before previewing, so that signatures and
 		// user-related magic words display the temp user instead of IP user in the preview. (T331397)
-		mw.user.acquireTempUserName().then( function () {
-			return api.post( ve.extendObject( params, {
-				action: 'parse',
-				title: target.getPageName(),
-				text: target.getDocToSave(),
-				pst: true,
-				preview: true,
-				sectionpreview: target.section !== null,
-				disableeditsection: true,
-				uselang: mw.config.get( 'wgUserLanguage' ),
-				useskin: mw.config.get( 'skin' ),
-				mobileformat: OO.ui.isMobile(),
-				prop: [ 'text', 'categorieshtml', 'displaytitle', 'subtitle', 'modules', 'jsconfigvars' ]
-			} ) );
-		} ).then( function ( response ) {
+		mw.user.acquireTempUserName().then( () => api.post( ve.extendObject( params, {
+			action: 'parse',
+			title: target.getPageName(),
+			text: target.getDocToSave(),
+			pst: true,
+			preview: true,
+			sectionpreview: target.section !== null,
+			disableeditsection: true,
+			uselang: mw.config.get( 'wgUserLanguage' ),
+			useskin: mw.config.get( 'skin' ),
+			mobileformat: OO.ui.isMobile(),
+			prop: [ 'text', 'categorieshtml', 'displaytitle', 'subtitle', 'modules', 'jsconfigvars' ]
+		} ) ) ).then( ( response ) => {
 			target.saveDialog.showPreview( response );
-		}, function ( errorCode, details ) {
+		}, ( errorCode, details ) => {
 			target.saveDialog.showPreview( target.extractErrorMessages( details ) );
-		} ).always( function () {
+		} ).always( () => {
 			target.bindSaveDialogClearDiff();
 		} );
 	} else {
@@ -1040,7 +1034,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 	var target = this;
 
-	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( function () {
+	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( () => {
 		var mode = target.getSurface().getMode();
 
 		if ( !target.originalDmDocPromise ) {
@@ -1066,27 +1060,23 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 		if ( mode === 'source' ) {
 			// Acquire a temporary user username before diffing, so that signatures and
 			// user-related magic words display the temp user instead of IP user in the diff. (T331397)
-			var newRevPromise = mw.user.acquireTempUserName().then( function () {
-				return target.getContentApi().post( {
-					action: 'visualeditor',
-					paction: 'parse',
-					page: target.getPageName(),
-					wikitext: target.getSurface().getDom(),
-					section: target.section,
-					stash: 0,
-					pst: true
-				} );
-			} ).then( function ( response ) {
+			var newRevPromise = mw.user.acquireTempUserName().then( () => target.getContentApi().post( {
+				action: 'visualeditor',
+				paction: 'parse',
+				page: target.getPageName(),
+				wikitext: target.getSurface().getDom(),
+				section: target.section,
+				stash: 0,
+				pst: true
+			} ) ).then(
 				// Source mode always fetches the whole document, so set section=null to unwrap sections
-				return mw.libs.ve.diffLoader.getModelFromResponse( response, null );
-			} );
+				( response ) => mw.libs.ve.diffLoader.getModelFromResponse( response, null )
+			);
 
 			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
 		} else {
-			return target.originalDmDocPromise.then( function ( originalDmDoc ) {
-				return function () {
-					return new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() );
-				};
+			return target.originalDmDocPromise.then( ( originalDmDoc ) => function () {
+				return new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() );
 			} );
 		}
 	} );
@@ -1104,7 +1094,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogResolveConflict = function () {
 		fields.section = this.section;
 	}
 	// Get Wikitext from the DOM, and set up a submit call when it's done
-	this.serialize( this.getDocToSave() ).then( function ( data ) {
+	this.serialize( this.getDocToSave() ).then( ( data ) => {
 		target.submitWithSaveFields( fields, data.content );
 	} );
 };
@@ -1262,7 +1252,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 
 	var xhr;
 	this.preparedCacheKeyPromise = mw.libs.ve.targetSaver.deflateDoc( doc, this.doc )
-		.then( function ( deflatedHtml ) {
+		.then( ( deflatedHtml ) => {
 			if ( aborted ) {
 				return ve.createDeferred().reject();
 			}
@@ -1278,7 +1268,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 				{ contentType: 'multipart/form-data' }
 			);
 			return xhr.then(
-				function ( response ) {
+				( response ) => {
 					var trackData = { duration: ve.now() - start };
 					if ( response.visualeditoredit && typeof response.visualeditoredit.cachekey === 'string' ) {
 						target.events.track( 'performance.system.serializeforcache', trackData );
@@ -1292,7 +1282,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 						return ve.createDeferred().reject();
 					}
 				},
-				function () {
+				() => {
 					target.events.track( 'performance.system.serializeforcache.fail', { duration: ve.now() - start } );
 					return ve.createDeferred().reject();
 				}
@@ -1377,26 +1367,20 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
 		// Success, use promise as-is.
 		null,
 		// Fail, get deflatedHtml promise
-		function () {
-			return mw.libs.ve.targetSaver.deflateDoc( doc, target.doc ).then( function ( html ) {
-				return { html: html };
-			} );
-		} );
+		() => mw.libs.ve.targetSaver.deflateDoc( doc, target.doc ).then( ( html ) => ( { html: html } ) ) );
 
-	return htmlOrCacheKeyPromise.then( function ( htmlOrCacheKey ) {
-		return mw.libs.ve.targetSaver.postHtml(
-			htmlOrCacheKey.html,
-			htmlOrCacheKey.cacheKey,
-			extraData,
-			{
-				onCacheKeyFail: target.clearPreparedCacheKey.bind( target ),
-				api: target.getContentApi(),
-				track: target.events.track.bind( target.events ),
-				eventName: eventName,
-				now: ve.now
-			}
-		);
-	} );
+	return htmlOrCacheKeyPromise.then( ( htmlOrCacheKey ) => mw.libs.ve.targetSaver.postHtml(
+		htmlOrCacheKey.html,
+		htmlOrCacheKey.cacheKey,
+		extraData,
+		{
+			onCacheKeyFail: target.clearPreparedCacheKey.bind( target ),
+			api: target.getContentApi(),
+			track: target.events.track.bind( target.events ),
+			eventName: eventName,
+			now: ve.now
+		}
+	) );
 };
 
 /**
@@ -1591,7 +1575,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 		// Rejection reasons for references
 		var rejections = mw.editcheck.getRejectionReasons();
 		if ( rejections.length > 0 ) {
-			rejections.forEach( function ( reason ) {
+			rejections.forEach( ( reason ) => {
 				taglist.push( 'editcheck-reference-decline-' + reason );
 			} );
 		}
@@ -1602,7 +1586,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 	var promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
 		.done( this.saveComplete.bind( this ) )
 		.fail( this.saveFail.bind( this, doc, data ) )
-		.always( function () {
+		.always( () => {
 			target.saving = null;
 		} );
 
@@ -1617,7 +1601,7 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 ve.init.mw.ArticleTarget.prototype.showChanges = function ( doc ) {
 	var target = this;
 	// Invalidate the viewer diff on next change
-	this.getSurface().getModel().getDocument().once( 'transact', function () {
+	this.getSurface().getModel().getDocument().once( 'transact', () => {
 		target.clearDiff();
 	} );
 	this.saveDialog.setDiffAndReview(
@@ -1653,7 +1637,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 			page: this.getPageName(),
 			oldid: this.revid,
 			etag: this.etag
-		}, 'diff' ).then( function ( data ) {
+		}, 'diff' ).then( ( data ) => {
 			if ( !data.diff ) {
 				target.emit( 'noChanges' );
 			}
@@ -1744,13 +1728,13 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 	}, 'serialize' )
 		.done( this.emit.bind( this, 'serializeComplete' ) )
 		.fail( this.emit.bind( this, 'serializeError' ) )
-		.always( function () {
+		.always( () => {
 			target.serializing = null;
 		} );
 
 	if ( callback ) {
 		OO.ui.warnDeprecation( 'Passing a callback to ve.init.mw.ArticleTarget#serialize is deprecated. Use the returned promise instead.' );
-		promise.then( function ( data ) {
+		promise.then( ( data ) => {
 			callback.call( target, data.content );
 		} );
 	}
@@ -1824,9 +1808,7 @@ ve.init.mw.ArticleTarget.prototype.getSurfaceConfig = function ( config ) {
 			// * mw-textarea-sproteced
 			.concat( this.protectedClasses )
 			// addClass doesn't like empty strings
-			.filter( function ( c ) {
-				return c;
-			} )
+			.filter( ( c ) => c )
 	}, config ) );
 };
 
@@ -1859,11 +1841,9 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 		}
 
 		// Parent method
-		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( target ).then( function () {
-			return saveDialogPromise.then( function () {
-				mw.hook( 've.deactivationComplete' ).fire( target.edited );
-			} );
-		} );
+		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( target ).then( () => saveDialogPromise.then( () => {
+			mw.hook( 've.deactivationComplete' ).fire( target.edited );
+		} ) );
 	}
 	return this.teardownPromise;
 };
@@ -1882,7 +1862,7 @@ ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMecha
 
 	if ( !noPrompt && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
 		return this.getSurface().dialogs.openWindow( 'abandonedit' )
-			.closed.then( function ( data ) {
+			.closed.then( ( data ) => {
 				if ( data && data.action === 'discard' ) {
 					return target.teardown( trackMechanism );
 				}
@@ -2022,12 +2002,12 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 	target.emit( 'saveWorkflowBegin' );
 
-	saveProcess.execute().done( function () {
+	saveProcess.execute().done( () => {
 		// Preload the serialization
 		target.prepareCacheKey( target.getDocToSave() );
 
 		// Get the save dialog
-		target.getSurface().getDialogs().getWindow( 'mwSave' ).done( function ( win ) {
+		target.getSurface().getDialogs().getWindow( 'mwSave' ).done( ( win ) => {
 			var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 
 			if ( !target.saveDialog ) {
@@ -2071,7 +2051,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 			if ( checkboxName && ( checkbox = target.checkboxesByName[ checkboxName ] ) ) {
 				var isSelected = !checkbox.isSelected();
 				// Wait for native access key change to happen
-				setTimeout( function () {
+				setTimeout( () => {
 					checkbox.setSelected( isSelected );
 				} );
 			}
@@ -2084,12 +2064,12 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 			// Open the dialog
 			var openPromise = windowAction.open( 'mwSave', data, action );
 			if ( openPromise ) {
-				openPromise.always( function () {
+				openPromise.always( () => {
 					target.saveDialogIsOpening = false;
 				} );
 			}
 		} );
-	} ).fail( function () {
+	} ).fail( () => {
 		target.saveDialogIsOpening = false;
 	} );
 };
@@ -2145,7 +2125,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		// to the heading. Iterate over headings to find the one with the correct attribute
 		// in originalDomElements.
 		var headingModel;
-		dmDoc.getNodesByType( 'mwHeading' ).some( function ( heading ) {
+		dmDoc.getNodesByType( 'mwHeading' ).some( ( heading ) => {
 			var domElements = heading.getOriginalDomElements( dmDoc.getStore() );
 			if (
 				domElements && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
@@ -2311,7 +2291,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
  */
 ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( modified ) {
 	var target = this;
-	return this.serialize( this.getDocToSave() ).then( function ( data ) {
+	return this.serialize( this.getDocToSave() ).then( ( data ) => {
 		// HACK - add parameters the API doesn't provide for a VE->WT switch
 		data.etag = target.etag;
 		data.fromEditedState = modified;
@@ -2377,13 +2357,11 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 	var promise;
 	if ( !noPrompt && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
 		promise = this.getSurface().dialogs.openWindow( 'abandonedit' )
-			.closed.then( function ( data ) {
-				return data && data.action === 'discard';
-			} );
+			.closed.then( ( data ) => data && data.action === 'discard' );
 	} else {
 		promise = ve.createDeferred().resolve( true ).promise();
 	}
-	promise.then( function ( confirmed ) {
+	promise.then( ( confirmed ) => {
 		if ( confirmed ) {
 			// Section has changed and edits have been discarded, so edit summary is no longer valid
 			// TODO: Preserve summary if document changes can be preserved
@@ -2449,7 +2427,7 @@ ve.init.mw.ArticleTarget.prototype.updateRedirectInterface = function ( $sub, $m
 		$msg
 			// We need to be able to tell apart the real one and our fake one
 			.addClass( 've-redirect-header' )
-			.on( 'click', function ( e ) {
+			.on( 'click', ( e ) => {
 				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 				windowAction.open( 'meta', { page: 'settings' } );
 				e.preventDefault();
@@ -2500,10 +2478,10 @@ ve.init.mw.ArticleTarget.prototype.setRealRedirectInterface = function () {
 ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems ) {
 	var promises = [],
 		categories = { hidden: {}, normal: {} };
-	categoryItems.forEach( function ( categoryItem, index ) {
+	categoryItems.forEach( ( categoryItem, index ) => {
 		var attributes = ve.copy( ve.getProp( categoryItem, 'element', 'attributes' ) );
 		attributes.index = index;
-		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( function ( result ) {
+		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( ( result ) => {
 			var group = result.hidden ? categories.hidden : categories.normal;
 			// In case of duplicates, first entry wins (like in MediaWiki)
 			if ( !group[ attributes.category ] || group[ attributes.category ].index > attributes.index ) {
@@ -2511,7 +2489,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			}
 		} ) );
 	} );
-	return ve.promiseAll( promises ).then( function () {
+	return ve.promiseAll( promises ).then( () => {
 		var $output = $( '<div>' ).addClass( 'catlinks' );
 		function renderPageLink( page ) {
 			var title = mw.Title.newFromText( page ),

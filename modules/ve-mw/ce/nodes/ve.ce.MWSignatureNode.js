@@ -56,7 +56,7 @@ ve.ce.MWSignatureNode.static.getDescription = function () {
 };
 
 // Update the timestamp on inserted signatures every minute.
-setInterval( function () {
+setInterval( () => {
 	var liveSignatures = ve.ce.MWSignatureNode.static.liveSignatures;
 
 	var updatedSignatures = [];
@@ -121,7 +121,7 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 	// Acquire a temporary user username before previewing, so that signatures
 	// display the temp user instead of IP user. (T331397)
 	return mw.user.acquireTempUserName()
-		.then( function () {
+		.then( () => {
 			if ( aborted ) {
 				return abortedPromise;
 			}
@@ -141,7 +141,7 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 				onlypst: true
 			} ) );
 		} )
-		.then( function ( pstResponse ) {
+		.then( ( pstResponse ) => {
 			if ( aborted ) {
 				return abortedPromise;
 			}
@@ -151,7 +151,7 @@ ve.ce.MWSignatureNode.prototype.generateContents = function () {
 			}
 			return ( abortable = ve.init.target.parseWikitextFragment( wikitext, true, doc ) );
 		} )
-		.then( function ( parseResponse ) {
+		.then( ( parseResponse ) => {
 			if ( aborted ) {
 				return abortedPromise;
 			}

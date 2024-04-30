@@ -340,7 +340,7 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 		// Call for updated scalable if we don't have dimensions from the API info
 		if ( this.getFilename() ) {
 			// Update anyway
-			ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( function ( info ) {
+			ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( ( info ) => {
 				imageModel.scalable.setOriginalDimensions( {
 					width: info.width,
 					height: info.height
@@ -1199,7 +1199,7 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 
 	// Call for updated scalable
 	if ( imageName ) {
-		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( function ( info ) {
+		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( ( info ) => {
 			imageModel.scalable.setOriginalDimensions( {
 				width: info.width,
 				height: info.height

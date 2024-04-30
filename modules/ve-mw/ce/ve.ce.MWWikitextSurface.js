@@ -72,7 +72,7 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		this.surface.$scrollContainer.scrollTop( scrollTop );
 
 		// setTimeout: postpone until after the default copy action
-		setTimeout( function () {
+		setTimeout( () => {
 			// Change focus back
 			view.$attachedRootNode[ 0 ].focus();
 			view.showSelectionState( originalSelection );
@@ -114,10 +114,10 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 	// isPlainText is true but we still need sanitize (e.g. remove lists)
 	var promise = ve.ce.MWWikitextSurface.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
 	if ( !wasPlain ) {
-		promise.then( function () {
+		promise.then( () => {
 			// We need to wait for the selection change after paste as that triggers
 			// a contextChange event. Really we should wait for the afterPaste promise to resolve.
-			setTimeout( function () {
+			setTimeout( () => {
 				var surface = view.getSurface(),
 					context = surface.getContext();
 				// Ensure surface is deactivated on mobile so context can be shown (T336073)
@@ -133,7 +133,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 						fragment: targetFragment
 					}
 				} );
-				surface.getModel().once( 'select', function () {
+				surface.getModel().once( 'select', () => {
 					context.removePersistentSource( 'wikitextPaste' );
 				} );
 			} );

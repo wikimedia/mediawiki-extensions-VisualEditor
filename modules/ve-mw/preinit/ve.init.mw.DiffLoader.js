@@ -62,11 +62,7 @@
 					false,
 					// noMetadata, we only use `content` in getModelFromResponse
 					true
-				).then( function ( response ) {
-					return parseDocumentModulePromise.then( function () {
-						return mw.libs.ve.diffLoader.getModelFromResponse( response, section );
-					} );
-				}, function () {
+				).then( ( response ) => parseDocumentModulePromise.then( () => mw.libs.ve.diffLoader.getModelFromResponse( response, section ) ), function () {
 					// Clear promise. Do not cache errors.
 					delete revCache[ cacheKey ];
 					// Let caller handle the error code
@@ -93,7 +89,7 @@
 			var oldRevPromise = typeof oldIdOrPromise === 'number' ? this.fetchRevision( oldIdOrPromise, oldPageName, null, parseDocumentModulePromise ) : oldIdOrPromise;
 			var newRevPromise = typeof newIdOrPromise === 'number' ? this.fetchRevision( newIdOrPromise, newPageName, null, parseDocumentModulePromise ) : newIdOrPromise;
 
-			return $.when( oldRevPromise, newRevPromise, parseDocumentModulePromise ).then( function ( oldDoc, newDoc ) {
+			return $.when( oldRevPromise, newRevPromise, parseDocumentModulePromise ).then( ( oldDoc, newDoc ) => {
 				// TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.
 				// We may want to remove that assumption from the differ?
 				newDoc.getStore().merge( oldDoc.getStore() );

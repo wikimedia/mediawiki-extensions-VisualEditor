@@ -133,7 +133,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 		this.tableOfContents
 	] );
 
-	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
 		metaItemCheckbox.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
 			// See above for classes
@@ -212,7 +212,7 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 		 * OO.ui.LookupElement#onLookupInputFocus/OO.ui.LookupElement#populateLookupMenu.
 		 * https://phabricator.wikimedia.org/T137309
 		 */
-		setTimeout( function () {
+		setTimeout( () => {
 			page.redirectTargetInput.focus();
 		} );
 	} else {
@@ -314,7 +314,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
 	this.redirectOptionsTouched = false;
 
 	// Simple checkbox items
-	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
 		var isSelected = !!settingsPage.getMetaItem( metaItemCheckbox.metaName );
 		metaItemCheckbox.fieldLayout.getField()
 			.setSelected( isSelected )
@@ -404,7 +404,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
-	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
 		var currentItem = settingsPage.getMetaItem( metaItemCheckbox.metaName ),
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 

@@ -56,7 +56,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 		this.initialEditSummary = this.currentUrl.searchParams.get( 'summary' );
 	}
 	this.initialCheckboxes = $( '.editCheckboxes input' ).toArray()
-		.reduce( function ( initialCheckboxes, node ) {
+		.reduce( ( initialCheckboxes, node ) => {
 			initialCheckboxes[ node.name ] = node.checked;
 			return initialCheckboxes;
 		}, {} );
@@ -265,7 +265,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		}
 		this.toolbarSetupDeferred.resolve();
 
-		this.toolbarSetupDeferred.done( function () {
+		this.toolbarSetupDeferred.done( () => {
 			var newSurface = target.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( newSurface ) {
@@ -360,7 +360,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 		this.editingTabDialog = new mw.libs.ve.EditingTabDialog();
 		windowManager.addWindows( [ this.editingTabDialog ] );
 		windowManager.openWindow( this.editingTabDialog )
-			.closed.then( function ( data ) {
+			.closed.then( ( data ) => {
 				// Detach the temporary window manager
 				windowManager.destroy();
 
@@ -437,13 +437,13 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.toolbarSetupDeferred = ve.createDeferred();
 
 		$( 'html' ).addClass( 've-activating' );
-		ve.promiseAll( [ this.activatingDeferred, this.toolbarSetupDeferred ] ).done( function () {
+		ve.promiseAll( [ this.activatingDeferred, this.toolbarSetupDeferred ] ).done( () => {
 			if ( !target.suppressNormalStartupDialogs ) {
 				target.maybeShowWelcomeDialog();
 				target.maybeShowMetaDialog();
 			}
 			target.afterActivate();
-		} ).fail( function () {
+		} ).fail( () => {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
 
@@ -645,7 +645,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 	}
 
 	// Parent method
-	return ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( this ).then( function () {
+	return ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( this ).then( () => {
 		// After teardown
 		target.active = false;
 
@@ -720,7 +720,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			{ action: 'accept', label: OO.ui.msg( 'ooui-dialog-process-retry' ), flags: 'primary' },
 			{ action: 'reject', label: OO.ui.msg( 'ooui-dialog-message-reject' ), flags: 'safe' }
 		]
-	} ).done( function ( confirmed ) {
+	} ).done( ( confirmed ) => {
 		if ( confirmed ) {
 			// Retry load
 			target.load();
@@ -756,7 +756,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
 		surface.mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
-		surface.once( 'destroy', function () {
+		surface.once( 'destroy', () => {
 			surface.mwTocWidget.$element.remove();
 		} );
 	}
@@ -834,7 +834,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
  */
 ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categoryItems ) {
 	var target = this;
-	this.renderCategories( categoryItems ).done( function ( $categories ) {
+	this.renderCategories( categoryItems ).done( ( $categories ) => {
 		// Clone the existing catlinks for any specific properties which might
 		// be needed by the rest of the page. Also gives us a not-attached
 		// version, which we can pass to wikipage.categories as it requests.
@@ -901,7 +901,7 @@ ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 	var promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments ),
 		target = this;
 
-	return promise.fail( function ( error, response ) {
+	return promise.fail( ( error, response ) => {
 		var $errorMessages = target.extractErrorMessages( response );
 		OO.ui.alert( $errorMessages );
 
@@ -977,11 +977,11 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 	this.toolbar.$element
 		.addClass( 've-init-mw-desktopArticleTarget-toolbar-preclose' )
 		.css( 'height', this.toolbar.$bar[ 0 ].offsetHeight );
-	setTimeout( function () {
+	setTimeout( () => {
 		target.toolbar.$element
 			.css( 'height', '0' )
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar-close' );
-		setTimeout( function () {
+		setTimeout( () => {
 			// Parent method
 			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( target );
 			deferred.resolve();
@@ -1086,7 +1086,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $c
 	// Un-disable the catlinks wrapper, but not the links
 	if ( this.getSurface() && this.getSurface().getMode() === 'visual' ) {
 		$catlinks.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
-			.on( 'click.ve-target', function () {
+			.on( 'click.ve-target', () => {
 				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
 				windowAction.open( 'meta', { page: 'categories' } );
 				return false;
@@ -1171,7 +1171,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 
 				if ( target ) {
 					// Scroll the page to the edited section
-					setTimeout( function () {
+					setTimeout( () => {
 						target.scrollIntoView( true );
 					} );
 				}
@@ -1198,7 +1198,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 		// If there are any other query parameters left, re-use that URL object.
 		// Otherwise use the canonical style view URL (T44553, T102363).
 		var keys = [];
-		url.searchParams.forEach( function ( val, key ) {
+		url.searchParams.forEach( ( val, key ) => {
 			keys.push( key );
 		} );
 		if ( !keys.length || ( keys.length === 1 && keys[ 0 ] === 'title' ) ) {
@@ -1249,10 +1249,10 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 		// "Undo" the pop-state, as the event is not cancellable
 		history.pushState( this.popState, '', oldUrl );
 		this.currentUrl = oldUrl;
-		this.tryTeardown( false, 'navigate-back' ).then( function () {
+		this.tryTeardown( false, 'navigate-back' ).then( () => {
 			// Teardown was successful, re-apply the undone state
 			history.back();
-		} ).always( function () {
+		} ).always( () => {
 			target.actFromPopState = false;
 		} );
 	}
@@ -1333,7 +1333,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 				editor: editorMode
 			}
 		)
-			.closed.then( function ( data ) {
+			.closed.then( ( data ) => {
 				target.welcomeDialogPromise.resolve();
 				target.welcomeDialog = null;
 				if ( data && data.action === 'switch-wte' ) {
@@ -1357,7 +1357,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 	if ( this.welcomeDialogPromise ) {
 		// Pop out the notices when the welcome dialog is closed
 		this.welcomeDialogPromise
-			.always( function () {
+			.always( () => {
 				if (
 					target.switched &&
 					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
@@ -1473,7 +1473,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			mode: 'visual'
 		} );
 		this.submitting = true;
-		return prefPromise.then( function () {
+		return prefPromise.then( () => {
 			var url = new URL( target.viewUrl );
 			url.searchParams.set( 'action', 'edit' );
 			// No changes, safe to stay in section mode
@@ -1492,7 +1492,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 			location.href = url.toString();
 		} );
 	} else {
-		return this.serialize( this.getDocToSave() ).then( function ( data ) {
+		return this.serialize( this.getDocToSave() ).then( ( data ) => {
 			ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
 			ve.track( 'editAttemptStep', {
 				action: 'abort',
@@ -1517,7 +1517,7 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.reloadSurface.apply( this, arguments );
 
-	this.activatingDeferred.done( function () {
+	this.activatingDeferred.done( () => {
 		target.updateHistoryState();
 		target.afterActivate();
 		target.setupTriggerListeners();

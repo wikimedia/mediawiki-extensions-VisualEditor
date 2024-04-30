@@ -70,7 +70,7 @@ ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 				this.bookletLayout.focus();
 			}
 
-			this.bookletLayout.getPagesOrdered().forEach( function ( page ) {
+			this.bookletLayout.getPagesOrdered().forEach( ( page ) => {
 				if ( page instanceof ve.ui.MWParameterPage ) {
 					page.updateSize();
 				}
@@ -318,7 +318,7 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 	var blankRequired = [],
 		deferred = ve.createDeferred();
 
-	this.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+	this.bookletLayout.stackLayout.getItems().forEach( ( page ) => {
 		if ( !( page instanceof ve.ui.MWParameterPage ) ) {
 			return;
 		}
@@ -340,7 +340,7 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 				'visualeditor-dialog-transclusion-required-parameter-dialog-title',
 				blankRequired.length
 			)
-		} ).closed.then( function ( data ) {
+		} ).closed.then( ( data ) => {
 			if ( data && data.action === 'ok' ) {
 				deferred.resolve();
 			} else {
@@ -360,9 +360,9 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 	var dialog = this;
 
 	if ( action === 'done' ) {
-		return new OO.ui.Process( function () {
+		return new OO.ui.Process( () => {
 			var deferred = ve.createDeferred();
-			dialog.checkRequiredParameters().done( function () {
+			dialog.checkRequiredParameters().done( () => {
 				var surfaceModel = dialog.getFragment().getSurface(),
 					obj = dialog.transclusionModel.getPlainObject(),
 					modelPromise = ve.createDeferred().resolve().promise();
@@ -400,7 +400,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				}
 				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );
 
-				return modelPromise.then( function () {
+				return modelPromise.then( () => {
 					dialog.close( { action: action } ).closed.always( dialog.popPending.bind( dialog ) );
 				} );
 			} ).always( deferred.resolve );
@@ -452,7 +452,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					// Open the dialog to add a new template, always starting with a placeholder
 					var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
 					promise = this.transclusionModel.addPart( placeholderPage );
-					promise.then( function () {
+					promise.then( () => {
 						dialog.bookletLayout.setPage( placeholderPage.getId() );
 					} );
 					this.canGoBack = true;
@@ -485,7 +485,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 			}
 			this.actions.setAbilities( { done: false } );
 
-			return promise.then( function () {
+			return promise.then( () => {
 				// Add missing required and suggested parameters to each transclusion.
 				dialog.transclusionModel.addPromptedParameters();
 

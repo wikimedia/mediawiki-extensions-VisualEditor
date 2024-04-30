@@ -48,8 +48,8 @@ ve.ui.MWWikitextPasteContextItem.prototype.renderBody = function () {
 	var convertButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-wikitextconvert-convert' ),
 		flags: [ 'progressive' ]
-	} ).on( 'click', function () {
-		fragment.insertDocument( doc, contextRange ).getPending().then( function () {
+	} ).on( 'click', () => {
+		fragment.insertDocument( doc, contextRange ).getPending().then( () => {
 			fragment.collapseToEnd().select();
 		} );
 		// TODO: Show something if the promise (conversion) fails?

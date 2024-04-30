@@ -27,7 +27,7 @@ module.exports = function () {
 			return boundingRect;
 		},
 		collapseToolbar: function () {
-			ve.init.target.toolbar.items.forEach( function ( group ) {
+			ve.init.target.toolbar.items.forEach( ( group ) => {
 				if ( group.setActive ) {
 					group.setActive( false );
 				}
@@ -47,7 +47,7 @@ module.exports = function () {
 				tool.$link[ 0 ].focus();
 			}
 
-			setTimeout( function () {
+			setTimeout( () => {
 				done(
 					seleniumUtils.getBoundingRect( [
 						toolGroup.$element[ 0 ],
@@ -76,8 +76,8 @@ module.exports = function () {
 				target.constructor.static.createModelFromDom( target.constructor.static.parseDocument( newHtml ), 'visual' )
 			).collapseToEnd().adjustLinearSelection( 0, 3 ).removeContent();
 
-			target.once( 'saveReview', function () {
-				setTimeout( function () {
+			target.once( 'saveReview', () => {
+				setTimeout( () => {
 					var dialog = surface.dialogs.currentWindow;
 					dialog.reviewModeButtonSelect.selectItemByData( 'visual' );
 
@@ -98,21 +98,21 @@ module.exports = function () {
 	// Welcome dialog suppressed by query string (vehidebetadialog)
 	// Suppress user education indicators
 	mw.storage.set( 've-hideusered', 1 );
-	mw.hook( 've.activationComplete' ).add( function () {
+	mw.hook( 've.activationComplete' ).add( () => {
 		var target = ve.init.target,
 			surfaceView = target.getSurface().getView();
 
 		// eslint-disable-next-line no-jquery/no-deferred
 		var welcomeDialogPromise = target.welcomeDialogPromise || $.Deferred().resolve().promise();
 
-		welcomeDialogPromise.then( function () {
+		welcomeDialogPromise.then( () => {
 			// Hide edit notices
 			target.toolbar.tools.notices.getPopup().toggle( false );
 			surfaceView.focus();
 			// Modify the document to make the save button blue
 			target.surface.getModel().getFragment().insertContent( ' ' ).collapseToStart().select();
 			// Wait for save button fade
-			setTimeout( function () {
+			setTimeout( () => {
 				veDone( { width: window.innerWidth, height: window.innerHeight } );
 			}, 100 );
 		} );

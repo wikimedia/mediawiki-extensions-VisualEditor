@@ -75,9 +75,7 @@ ve.dm.MWTransclusionNode.static.getHashObject = function ( dataElement ) {
 
 ve.dm.MWTransclusionNode.static.isDiffComparable = function ( element, other ) {
 	function getTemplateNames( parts ) {
-		return parts.map( function ( part ) {
-			return part.template ? part.template.target.wt : '';
-		} ).join( '|' );
+		return parts.map( ( part ) => part.template ? part.template.target.wt : '' ).join( '|' );
 	}
 
 	return ve.dm.MWTransclusionNode.super.static.isDiffComparable.call( this, element, other ) &&
@@ -281,7 +279,7 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 						listItem.appendChild( document.createTextNode( change ) );
 					} else {
 						// eslint-disable-next-line no-loop-func
-						change.forEach( function ( node ) {
+						change.forEach( ( node ) => {
 							listItem.appendChild( node );
 						} );
 					}
@@ -456,9 +454,7 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplate
 	if ( typeof allowedTemplates === 'string' ) {
 		allowedTemplates = [ allowedTemplates ];
 	}
-	return allowedTemplates.some( function ( template ) {
-		return singlePart.templatePage === normalizeTemplateTitle( template );
-	} );
+	return allowedTemplates.some( ( template ) => singlePart.templatePage === normalizeTemplateTitle( template ) );
 };
 
 /**

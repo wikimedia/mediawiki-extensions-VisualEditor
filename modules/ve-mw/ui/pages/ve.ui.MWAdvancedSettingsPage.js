@@ -118,7 +118,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 		);
 	}
 
-	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
 		metaItemCheckbox.fieldLayout = new OO.ui.FieldLayout(
 			new OO.ui.CheckboxInputWidget(),
 			{
@@ -230,7 +230,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( fragment, config ) {
 	this.displayTitleTouched = false;
 
 	// Simple checkbox items
-	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
 		var isSelected = !!advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName );
 		metaItemCheckbox.fieldLayout.getField()
 			.setSelected( isSelected )
@@ -337,7 +337,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 		}
 	}
 
-	this.metaItemCheckboxes.forEach( function ( metaItemCheckbox ) {
+	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
 		var currentItem = advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName ),
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 

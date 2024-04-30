@@ -155,16 +155,14 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 	this.$reviewVisualDiff.append( new OO.ui.ProgressBarWidget().$element );
 	// Don't generate the DiffElement until the tab is switched to
 	this.getDiffElementPromise = function () {
-		return visualDiffGeneratorPromise.then( function ( visualDiffGenerator ) {
-			return createDiffElement( visualDiffGenerator() );
-		} );
+		return visualDiffGeneratorPromise.then( ( visualDiffGenerator ) => createDiffElement( visualDiffGenerator() ) );
 	};
 
 	this.baseDoc = baseDoc;
 
 	// Wikitext diff
 	this.$reviewWikitextDiff.append( new OO.ui.ProgressBarWidget().$element );
-	wikitextDiffPromise.then( function ( wikitextDiff ) {
+	wikitextDiffPromise.then( ( wikitextDiff ) => {
 		if ( wikitextDiff ) {
 			// wikitextDiff is an HTML string we trust from the API
 			// eslint-disable-next-line no-jquery/no-append-html
@@ -177,7 +175,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 				$( '<div>' ).addClass( 've-ui-mwSaveDialog-no-changes' ).text( ve.msg( 'visualeditor-diff-no-changes' ) )
 			);
 		}
-	}, function ( code, errorObject ) {
+	}, ( code, errorObject ) => {
 		var $errorMessage = ve.init.target.extractErrorMessages( errorObject );
 
 		dialog.$reviewWikitextDiff.empty().append(
@@ -186,7 +184,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 				label: $errorMessage
 			} ).$element
 		);
-	} ).always( function () {
+	} ).always( () => {
 		dialog.updateSize();
 	} );
 
@@ -312,7 +310,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		case 'save':
 			if ( !noFocus && this.panels.getCurrentItem() !== this.savePanel ) {
 				// HACK: FF needs *another* defer
-				setTimeout( function () {
+				setTimeout( () => {
 					dialog.editSummaryInput.moveCursorToEnd();
 				} );
 			}
@@ -328,7 +326,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		case 'review':
 			size = 'larger';
 			this.reviewModeButtonSelect.$element.after( this.$previewEditSummaryContainer );
-			setTimeout( function () {
+			setTimeout( () => {
 				dialog.updateReviewMode();
 
 				ve.track(
@@ -359,7 +357,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 					title: ve.init.target.getPageName(),
 					prop: '',
 					summary: currentEditSummaryWikitext
-				} ).done( function ( result ) {
+				} ).done( ( result ) => {
 					if ( result.parse.parsedsummary === '' ) {
 						dialog.$previewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 						dialog.$previewEditSummary.empty();
@@ -369,10 +367,10 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 						dialog.$previewEditSummary.html( ve.msg( 'parentheses', result.parse.parsedsummary ) );
 						ve.targetLinksToNewWindow( dialog.$previewEditSummary[ 0 ] );
 					}
-				} ).fail( function () {
+				} ).fail( () => {
 					dialog.$previewEditSummary.parent().addClass( 'oo-ui-element-hidden' );
 					dialog.$previewEditSummary.empty();
-				} ).always( function () {
+				} ).always( () => {
 					dialog.updateSize();
 				} );
 			}
@@ -387,12 +385,12 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 	this.actions.setMode( mode );
 
 	// Only show preview in source mode
-	this.actions.forEach( { actions: 'preview' }, function ( action ) {
+	this.actions.forEach( { actions: 'preview' }, ( action ) => {
 		action.toggle( dialog.canPreview && panel !== 'preview' );
 	} );
 
 	// Diff API doesn't support section=new
-	this.actions.forEach( { actions: 'review' }, function ( action ) {
+	this.actions.forEach( { actions: 'review' }, ( action ) => {
 		action.toggle( dialog.canReview && panel !== 'review' );
 	} );
 
@@ -453,7 +451,7 @@ ve.ui.MWSaveDialog.prototype.clearMessage = function ( name ) {
 		$message.slideUp( {
 			duration: 250,
 			progress: this.updateSize.bind( this )
-		} ).promise().then( function () {
+		} ).promise().then( () => {
 			$message.remove();
 			dialog.updateSize();
 		} );
@@ -491,8 +489,8 @@ ve.ui.MWSaveDialog.prototype.reset = function () {
  */
 ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( checkboxFields ) {
 	var dialog = this;
-	this.setupDeferred.done( function () {
-		checkboxFields.forEach( function ( field ) {
+	this.setupDeferred.done( () => {
+		checkboxFields.forEach( ( field ) => {
 			dialog.$saveCheckboxes.append( field.$element );
 		} );
 		dialog.updateOptionsBar();
@@ -508,7 +506,7 @@ ve.ui.MWSaveDialog.prototype.setupCheckboxes = function ( checkboxFields ) {
  */
 ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
 	var dialog = this;
-	this.setupDeferred.done( function () {
+	this.setupDeferred.done( () => {
 		dialog.editSummaryInput.setValue( summary );
 	} );
 };
@@ -549,21 +547,21 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 		classes: [ 've-ui-mwSaveDialog-summary' ]
 	} );
 	// Show a warning if the user presses Enter
-	this.editSummaryInput.on( 'enter', function () {
+	this.editSummaryInput.on( 'enter', () => {
 		dialog.showMessage(
 			'keyboard-shortcut-submit',
 			ve.msg(
 				'visualeditor-savedialog-keyboard-shortcut-submit',
 				new ve.ui.Trigger( ve.ui.commandHelpRegistry.lookup( 'dialogConfirm' ).shortcuts[ 0 ] ).getMessage()
 			)
-		).then( function () {
+		).then( () => {
 			// Restore focus after potential window resize
 			dialog.editSummaryInput.focus();
 		} );
 	} );
 	// Limit length, and display the remaining characters
 	this.editSummaryInput.$input.codePointLimit( this.editSummaryCodePointLimit );
-	this.editSummaryInput.on( 'change', function () {
+	this.editSummaryInput.on( 'change', () => {
 		var remaining = dialog.editSummaryCodePointLimit - mwString.codePointLength( dialog.editSummaryInput.getValue() );
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers.
 		dialog.changedEditSummary = true;
@@ -575,13 +573,13 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 
 		dialog.updateOptionsBar();
 	} );
-	this.editSummaryInput.on( 'resize', function () {
+	this.editSummaryInput.on( 'resize', () => {
 		if ( dialog.overflowTimeout !== undefined ) {
 			clearTimeout( dialog.overflowTimeout );
 		}
 		dialog.panels.$element.css( 'overflow', 'hidden' );
 		dialog.updateSize();
-		dialog.overflowTimeout = setTimeout( function () {
+		dialog.overflowTimeout = setTimeout( () => {
 			dialog.panels.$element.css( 'overflow', '' );
 		}, 250 );
 	} );
@@ -721,7 +719,7 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 	if ( isVisual ) {
 		if ( !this.diffElement ) {
 			if ( !this.diffElementPromise ) {
-				this.diffElementPromise = this.getDiffElementPromise().then( function ( diffElement ) {
+				this.diffElementPromise = this.getDiffElementPromise().then( ( diffElement ) => {
 					dialog.diffElement = diffElement;
 					dialog.$reviewVisualDiff.empty().append( diffElement.$element );
 					dialog.positionDiffElement();
@@ -769,8 +767,8 @@ ve.ui.MWSaveDialog.prototype.setDimensions = function () {
 ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 	var dialog = this;
 	if ( this.panels.getCurrentItem() === this.reviewPanel ) {
-		setTimeout( function () {
-			dialog.withoutSizeTransitions( function () {
+		setTimeout( () => {
+			dialog.withoutSizeTransitions( () => {
 				// This is delayed, so check the visual diff is still visible
 				if ( dialog.diffElement && dialog.isVisible() && dialog.reviewModeButtonSelect.findSelectedItem().getData() === 'visual' ) {
 					dialog.diffElement.positionDescriptions();
@@ -816,9 +814,9 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 				// Set initial state to match the watchthis checkbox.
 				this.checkboxesByName.wpWatchlistExpiry.setDisabled( !this.checkboxesByName.wpWatchthis.isSelected() );
 				// Change state on every change of the watchthis checkbox.
-				this.checkboxesByName.wpWatchthis.on( 'change', function ( enabled ) {
+				this.checkboxesByName.wpWatchthis.on( 'change', ( enabled ) => {
 					this.checkboxesByName.wpWatchlistExpiry.setDisabled( !enabled );
-				}.bind( this ) );
+				} );
 			}
 
 			function trackCheckbox( n ) {
@@ -850,7 +848,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			// Don't focus during setup to prevent scroll jumping (T153010)
 			this.swapPanel( data.initialPanel || 'save', true );
 			// Update save button label
-			this.actions.forEach( { actions: 'save' }, function ( action ) {
+			this.actions.forEach( { actions: 'save' }, ( action ) => {
 				action.setLabel( data.saveButtonLabel );
 			} );
 		}, this );

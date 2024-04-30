@@ -60,17 +60,11 @@ ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 	} else if ( variantInfo.filter ) {
 		languageCodes = variantInfo.filter.l;
 	} else if ( variantInfo.twoway ) {
-		languageCodes = variantInfo.twoway.map( function ( item ) {
-			return item.l;
-		} );
+		languageCodes = variantInfo.twoway.map( ( item ) => item.l );
 	} else if ( variantInfo.oneway ) {
-		languageCodes = variantInfo.oneway.map( function ( item ) {
-			return item.l;
-		} );
+		languageCodes = variantInfo.oneway.map( ( item ) => item.l );
 	}
-	var languageString = languageCodes.map( function ( code ) {
-		return ve.init.platform.getLanguageName( code.toLowerCase() );
-	} ).join( ve.msg( 'comma-separator' ) );
+	var languageString = languageCodes.map( ( code ) => ve.init.platform.getLanguageName( code.toLowerCase() ) ).join( ve.msg( 'comma-separator' ) );
 	// The following messages can be used here:
 	// * visualeditor-mwlanguagevariant-disabled
 	// * visualeditor-mwlanguagevariant-filter

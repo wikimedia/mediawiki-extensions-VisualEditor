@@ -78,7 +78,7 @@ ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, 
 		var offset = converter.documentData.indexOf( dataElement );
 
 		if ( offset !== -1 ) {
-			converter.documentData.slice( 0, offset ).forEach( function ( el ) {
+			converter.documentData.slice( 0, offset ).forEach( ( el ) => {
 				if ( el.type && el.type === node.name ) {
 					counter++;
 				}

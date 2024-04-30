@@ -126,7 +126,7 @@ ve.ce.MWExtensionNode.prototype.afterRender = function () {
 	// Images missing a dimension change size after load
 	// TODO: Ignore images which have dimensions defined in CSS, if performant
 	if ( $images.length ) {
-		$images.on( 'load', function () {
+		$images.on( 'load', () => {
 			// Mixin method
 			ve.ce.GeneratedContentNode.prototype.afterRender.call( node );
 		} );

@@ -74,7 +74,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.validate = function ( str ) {
 ve.ui.MWMagicLinkNodeInspector.prototype.onChange = function ( value ) {
 	// Disable the unsafe action buttons if the input isn't valid
 	var isValid = this.validate( value );
-	this.actions.forEach( null, function ( action ) {
+	this.actions.forEach( null, ( action ) => {
 		if ( !action.hasFlag( 'safe' ) ) {
 			action.setDisabled( !isValid );
 		}
@@ -170,10 +170,8 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 					surfaceModel.change(
 						ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 					);
-					setTimeout( function () {
-						surfaceView.selectAnnotation( function ( view ) {
-							return view.model instanceof ve.dm.LinkAnnotation;
-						} );
+					setTimeout( () => {
+						surfaceView.selectAnnotation( ( view ) => view.model instanceof ve.dm.LinkAnnotation );
 					} );
 				}
 			} else if ( done && this.validate( value ) ) {

@@ -140,7 +140,7 @@
 		}
 
 		// Add class for transition after first render
-		setTimeout( function () {
+		setTimeout( () => {
 			$toolbarPlaceholder.addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
 		} );
 	}
@@ -283,16 +283,14 @@
 			// The TargetLoader module is loaded in the bottom queue, so it should have been
 			// requested already but it might not have finished loading yet
 			targetPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
-				.then( function () {
-					mw.libs.ve.targetLoader.addPlugin( function () {
+				.then( () => {
+					mw.libs.ve.targetLoader.addPlugin(
 						// Run VisualEditorPreloadModules, but if they fail, we still want to continue
 						// loading, so convert failure to success
-						return mw.loader.using( conf.preloadModules ).catch(
-							function () {
-								return $.Deferred().resolve();
-							}
-						);
-					} );
+						() => mw.loader.using( conf.preloadModules ).catch(
+							() => $.Deferred().resolve()
+						)
+					);
 					// Add modules specific to desktop (modules shared between desktop
 					// and mobile are already added by TargetLoader)
 					[ 'ext.visualEditor.desktopArticleTarget' ]
@@ -302,7 +300,7 @@
 					plugins = [];
 					return mw.libs.ve.targetLoader.loadModules( mode );
 				} )
-				.then( function () {
+				.then( () => {
 					if ( !active ) {
 						// Loading was aborted
 						// TODO: Make loaders abortable instead of waiting
@@ -316,11 +314,11 @@
 							defaultMode: mode
 						}
 					);
-					target.on( 'deactivate', function () {
+					target.on( 'deactivate', () => {
 						active = false;
 						updateTabs( false );
 					} );
-					target.on( 'reactivate', function () {
+					target.on( 'reactivate', () => {
 						url = new URL( location.href );
 						activateTarget(
 							getEditModeFromUrl( url ),
@@ -330,12 +328,12 @@
 					target.setContainer( $targetContainer );
 					targetLoaded = true;
 					return target;
-				}, function ( e ) {
+				}, ( e ) => {
 					mw.log.warn( 'VisualEditor failed to load: ' + e );
 				} );
 		}
 
-		targetPromise.then( function ( target ) {
+		targetPromise.then( ( target ) => {
 			target.section = section;
 		} );
 
@@ -450,7 +448,7 @@
 			mw.user.options.get( 'visualeditor-editor' ) !== editor
 		) {
 			// Same as ve.init.target.getLocalApi()
-			return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( function () {
+			return new mw.Api().saveOption( 'visualeditor-editor', editor ).then( () => {
 				mw.user.options.set( 'visualeditor-editor', editor );
 			} );
 		}
@@ -579,26 +577,24 @@
 			// The TargetLoader module is loaded in the bottom queue, so it should have been
 			// requested already but it might not have finished loading yet
 			dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
-				.then( function () {
-					return mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
-						sessionStore: true,
-						section: section,
-						oldId: oldId,
-						// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
-						// class hasn't loaded yet.
-						// This is used for stats tracking, so do not change!
-						targetName: 'mwTarget',
-						modified: modified,
-						editintro: url.searchParams.get( 'editintro' ),
-						preload: url.searchParams.get( 'preload' ),
-						preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams ),
-						// If switching to visual with modifications, check if we have wikitext to convert
-						wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
-					} );
-				} );
+				.then( () => mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
+					sessionStore: true,
+					section: section,
+					oldId: oldId,
+					// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
+					// class hasn't loaded yet.
+					// This is used for stats tracking, so do not change!
+					targetName: 'mwTarget',
+					modified: modified,
+					editintro: url.searchParams.get( 'editintro' ),
+					preload: url.searchParams.get( 'preload' ),
+					preloadparams: mw.util.getArrayParam( 'preloadparams', url.searchParams ),
+					// If switching to visual with modifications, check if we have wikitext to convert
+					wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
+				} ) );
 
 			dataPromise
-				.then( function ( response ) {
+				.then( ( response ) => {
 					if (
 						// Check target promise hasn't already failed (isLoading=false)
 						isLoading &&
@@ -648,7 +644,7 @@
 
 		tPromise = tPromise || getTarget( mode, section );
 		tPromise
-			.then( function ( target ) {
+			.then( ( target ) => {
 				target.visibleSection = visibleSection;
 				target.visibleSectionOffset = visibleSectionOffset;
 
@@ -661,20 +657,20 @@
 				}
 
 				var deactivating = target.deactivatingDeferred || $.Deferred().resolve();
-				return deactivating.then( function () {
+				return deactivating.then( () => {
 					target.currentUrl = new URL( location.href );
 					var activatePromise = target.activate( dataPromise );
 
 					// toolbarSetupDeferred resolves slightly before activatePromise, use done
 					// to run in the same paint cycle as the VE toolbar being drawn
-					target.toolbarSetupDeferred.done( function () {
+					target.toolbarSetupDeferred.done( () => {
 						hideToolbarPlaceholder();
 					} );
 
 					return activatePromise;
 				} );
 			} )
-			.then( function () {
+			.then( () => {
 				if ( mode === 'visual' ) {
 					// `action: 'ready'` has already been fired for source mode in setupTempWikitextEditor
 					ve.track( 'editAttemptStep', { action: 'ready', mode: mode } );
@@ -970,12 +966,12 @@
 				) {
 					// … on single-edit-tab wikis, where VE or NWE is the user's preferred editor
 					// Handle section edit link clicks
-					$( '.mw-editsection a' ).off( '.ve-target' ).on( 'click.ve-target', function ( e ) {
+					$( '.mw-editsection a' ).off( '.ve-target' ).on( 'click.ve-target', ( e ) => {
 						// isOnlyTabVE is computed on click as it may have changed since load
 						init.onEditSectionLinkClick( isOnlyTabVE() ? 'visual' : 'source', e );
 					} );
 					// Allow instant switching to edit mode, without refresh
-					$( '#ca-edit' ).off( '.ve-target' ).on( 'click.ve-target', function ( e ) {
+					$( '#ca-edit' ).off( '.ve-target' ).on( 'click.ve-target', ( e ) => {
 						init.onEditTabClick( isOnlyTabVE() ? 'visual' : 'source', e );
 					} );
 				}
@@ -1091,7 +1087,7 @@
 			var section = $( e.target ).closest( '#ca-addsection' ).length ? 'new' : null;
 
 			if ( active ) {
-				targetPromise.done( function ( target ) {
+				targetPromise.done( ( target ) => {
 					if ( target.getDefaultMode() === 'source' ) {
 						if ( mode === 'visual' ) {
 							target.switchToVisualEditor();
@@ -1413,9 +1409,7 @@
 	 * @return {boolean} URL contains no unsupported params
 	 */
 	function isSupportedEditPage( editUrl ) {
-		return configData.unsupportedEditParams.every( function ( param ) {
-			return !editUrl.searchParams.has( param );
-		} );
+		return configData.unsupportedEditParams.every( ( param ) => !editUrl.searchParams.has( param ) );
 	}
 
 	/**
@@ -1449,7 +1443,7 @@
 		return null;
 	}
 
-	$( function () {
+	$( () => {
 		$targetContainer = $(
 			document.querySelector( '[data-mw-ve-target-container]' ) ||
 			document.getElementById( 'content' )
@@ -1522,8 +1516,8 @@
 				$( '#wpTextbox1' ).length
 			) {
 				mw.loader.load( 'ext.visualEditor.switching' );
-				mw.hook( 'wikiEditor.toolbarReady' ).add( function ( $textarea ) {
-					mw.loader.using( 'ext.visualEditor.switching' ).done( function () {
+				mw.hook( 'wikiEditor.toolbarReady' ).add( ( $textarea ) => {
+					mw.loader.using( 'ext.visualEditor.switching' ).done( () => {
 						var windowManager, editingTabDialog, switchToolbar, popup,
 							showPopup = url.searchParams.has( 'veswitched' ) && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' ),
 							toolFactory = new OO.ui.ToolFactory(),
@@ -1535,7 +1529,7 @@
 							classes: [ 've-init-mw-editSwitch' ]
 						} );
 
-						switchToolbar.on( 'switchEditor', function ( m ) {
+						switchToolbar.on( 'switchEditor', ( m ) => {
 							if ( m === 'visual' ) {
 								$( '#wpTextbox1' ).trigger( 'wikiEditor-switching-visualeditor' );
 								init.activateVe( 'visual' );
@@ -1580,7 +1574,7 @@
 							editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
 							windowManager.openWindow( editingTabDialog )
-								.closed.then( function ( data ) {
+								.closed.then( ( data ) => {
 									// Detach the temporary window manager
 									windowManager.destroy();
 
@@ -1617,7 +1611,7 @@
 			// Not on protected pages
 			pageIsProbablyEditable
 		) {
-			mw.loader.using( 'ext.visualEditor.welcome' ).done( function () {
+			mw.loader.using( 'ext.visualEditor.welcome' ).done( () => {
 				var windowManager, welcomeDialog;
 				// Check shouldShowWelcomeDialog() again: any code that might have called
 				// stopShowingWelcomeDialog() wouldn't have had an opportunity to do that
@@ -1636,7 +1630,7 @@
 						editor: 'source'
 					}
 				)
-					.closed.then( function ( data ) {
+					.closed.then( ( data ) => {
 						windowManager.destroy();
 						if ( data && data.action === 'switch-ve' ) {
 							init.activateVe( 'visual' );

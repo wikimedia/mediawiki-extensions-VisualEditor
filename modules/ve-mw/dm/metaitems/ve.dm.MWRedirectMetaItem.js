@@ -65,7 +65,7 @@ ve.dm.MWRedirectMetaItem.static.describeChange = function ( key, change ) {
 
 ve.dm.modelRegistry.register( ve.dm.MWRedirectMetaItem );
 
-ve.ui.metaListDiffRegistry.register( 'mwRedirect', function ( diffElement, diffQueue, documentNode, documentSpacerNode ) {
+ve.ui.metaListDiffRegistry.register( 'mwRedirect', ( diffElement, diffQueue, documentNode, documentSpacerNode ) => {
 	diffQueue = diffElement.processQueue( diffQueue );
 
 	if ( !diffQueue.length ) {

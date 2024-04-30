@@ -21,7 +21,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory = function VeUiMwWikitextDataTransfer
 		this.register( ve.ui.dataTransferHandlerFactory.registry[ name ] );
 	}
 
-	ve.ui.dataTransferHandlerFactory.on( 'register', function ( n, data ) {
+	ve.ui.dataTransferHandlerFactory.on( 'register', ( n, data ) => {
 		factory.register( data );
 	} );
 };
@@ -77,7 +77,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 
 			ve.init.target.getWikitextFragment( doc, false )
 				.done( resolve )
-				.fail( function () {
+				.fail( () => {
 					handler.abort();
 				} );
 		}

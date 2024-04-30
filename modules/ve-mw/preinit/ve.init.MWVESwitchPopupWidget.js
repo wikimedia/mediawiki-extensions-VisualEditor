@@ -36,7 +36,7 @@ mw.libs.ve.SwitchPopupWidget = function MWLibsVESwitchPopupWidget( mode, config 
 
 	if ( mw.user.isNamed() ) {
 		var showAgainCheckbox = new OO.ui.CheckboxInputWidget()
-			.on( 'change', function ( value ) {
+			.on( 'change', ( value ) => {
 				var configValue = value ? '1' : '';
 				new mw.Api().saveOption( option, configValue );
 				mw.user.options.set( option, configValue );

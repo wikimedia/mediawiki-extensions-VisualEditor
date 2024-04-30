@@ -103,9 +103,7 @@ ve.ui.MWLinkAction.prototype.getLinkAnnotation = function ( linktext ) {
  *   was executed; otherwise false.
  */
 ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
-	return this.autolink( function ( linktext ) {
-		return ve.dm.MWMagicLinkNode.static.validateContent( linktext );
-	}, function ( doc, range, linktext ) {
+	return this.autolink( ( linktext ) => ve.dm.MWMagicLinkNode.static.validateContent( linktext ), ( doc, range, linktext ) => {
 		var annotations = doc.data.getAnnotationsFromRange( range ),
 			data = new ve.dm.ElementLinearData( annotations.store, [
 				{

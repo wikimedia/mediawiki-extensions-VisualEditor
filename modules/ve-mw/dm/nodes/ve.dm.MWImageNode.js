@@ -55,7 +55,7 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 ve.dm.MWImageNode.static.rdfaToTypes = ( function () {
 	var rdfaToType = {};
 
-	[ 'File', 'Image', 'Video', 'Audio' ].forEach( function ( mediaClass ) {
+	[ 'File', 'Image', 'Video', 'Audio' ].forEach( ( mediaClass ) => {
 		rdfaToType[ 'mw:' + mediaClass ] = { mediaClass: mediaClass, frameType: 'none' };
 		rdfaToType[ 'mw:' + mediaClass + '/Frameless' ] = { mediaClass: mediaClass, frameType: 'frameless' };
 		// Block image only:
@@ -320,7 +320,7 @@ ve.dm.MWImageNode.static.getScalablePromise = function ( filename ) {
 	// On the first call set off an async call to update the scalable's
 	// original dimensions from the API.
 	if ( ve.init.platform.imageInfoCache ) {
-		return ve.init.platform.imageInfoCache.get( filename ).then( function ( info ) {
+		return ve.init.platform.imageInfoCache.get( filename ).then( ( info ) => {
 			if ( !info || info.missing ) {
 				return ve.createDeferred().reject().promise();
 			}
@@ -366,7 +366,7 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() );
 		// If the promise was already resolved before getScalablePromise returned, then jQuery will execute the done straight away.
 		// So don't just do getScalablePromise( ... ).done because we need to make sure that this.scalablePromise gets set first.
-		this.scalablePromise.done( function ( info ) {
+		this.scalablePromise.done( ( info ) => {
 			if ( info ) {
 				imageNode.getScalable().setOriginalDimensions( {
 					width: info.width,

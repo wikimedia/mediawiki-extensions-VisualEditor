@@ -85,7 +85,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 	var ranges = [];
 	var offset = 0;
 	var endOffset = documentModel.getDocumentRange().end;
-	operations.every( function ( op ) {
+	operations.every( ( op ) => {
 		if ( op.type === 'retain' ) {
 			offset += op.length;
 		} else if ( op.type === 'replace' ) {
@@ -103,7 +103,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 		// Reached the end of the doc / start of internal list, stop searching
 		return offset < endOffset;
 	} );
-	var addedTextRanges = ranges.filter( function ( range ) {
+	var addedTextRanges = ranges.filter( ( range ) => {
 		var minimumCharacters = mw.editcheck.config.addReference.minimumCharacters;
 		// 3. Check that at least minimumCharacters characters have been inserted sequentially
 		if ( range.getLength() >= minimumCharacters ) {
@@ -125,11 +125,9 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
 		return false;
 	} );
 
-	return addedTextRanges.map( function ( range ) {
-		return new ve.dm.LinearSelection( range );
-	} ).filter( function ( selection ) {
-		return mw.editcheck.shouldApplyToSection( documentModel, selection, mw.editcheck.config.addReference );
-	} );
+	return addedTextRanges
+		.map( ( range ) => new ve.dm.LinearSelection( range ) )
+		.filter( ( selection ) => mw.editcheck.shouldApplyToSection( documentModel, selection, mw.editcheck.config.addReference ) );
 };
 
 /**
@@ -146,7 +144,7 @@ mw.editcheck.findAddedContentNeedingReference = function ( documentModel, includ
  */
 mw.editcheck.getContentRanges = function ( documentModel, range, covers ) {
 	var ranges = [];
-	documentModel.selectNodes( range, 'branches' ).forEach( function ( spec ) {
+	documentModel.selectNodes( range, 'branches' ).forEach( ( spec ) => {
 		if (
 			spec.node.canContainContent() && (
 				!covers || (
@@ -170,7 +168,7 @@ mw.editcheck.getRejectionReasons = function () {
 mw.editcheck.refCheckShown = false;
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
-	mw.hook( 've.activationComplete' ).add( function () {
+	mw.hook( 've.activationComplete' ).add( () => {
 		var target = ve.init.target;
 
 		function getRefNodes() {
@@ -204,7 +202,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			return tags.join( ',' );
 		};
 	} );
-	mw.hook( 've.deactivationComplete' ).add( function () {
+	mw.hook( 've.deactivationComplete' ).add( () => {
 		var target = ve.init.target;
 		delete target.saveFields.vetags;
 	} );
@@ -217,7 +215,7 @@ if (
 	!!window.MWVE_FORCE_EDIT_CHECK_ENABLED
 ) {
 	var saveProcessDeferred;
-	mw.hook( 've.preSaveProcess' ).add( function ( saveProcess, target ) {
+	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, target ) => {
 		var surface = target.getSurface();
 
 		if ( surface.getMode() !== 'visual' ) {
@@ -272,16 +270,14 @@ if (
 			target.toolbar = reviewToolbar;
 
 			var selection = selections[ 0 ];
-			var highlightNodes = surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( function ( spec ) {
-				return spec.node;
-			} );
+			var highlightNodes = surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node );
 
 			surfaceView.drawSelections( 'editCheck', [ ve.ce.Selection.static.newFromModel( selection, surfaceView ) ] );
 			surfaceView.setReviewMode( true, highlightNodes );
 			toolbar.toggle( false );
 			target.onContainerScroll();
 
-			saveProcess.next( function () {
+			saveProcess.next( () => {
 				saveProcessDeferred = ve.createDeferred();
 				var fragment = surface.getModel().getFragment( selection, true );
 
@@ -302,11 +298,11 @@ if (
 				} );
 
 				// Once the context is positioned, clear the selection
-				setTimeout( function () {
+				setTimeout( () => {
 					surface.getModel().setNullSelection();
 				} );
 
-				return saveProcessDeferred.promise().then( function ( data ) {
+				return saveProcessDeferred.promise().then( ( data ) => {
 					context.removePersistentSource( 'editCheckReferences' );
 
 					surfaceView.drawSelections( 'editCheck', [] );
@@ -326,7 +322,7 @@ if (
 						}
 						var delay = ve.createDeferred();
 						// If they inserted, wait 2 seconds on desktop before showing save dialog
-						setTimeout( function () {
+						setTimeout( () => {
 							delay.resolve();
 						}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
 						return delay.promise();
@@ -337,7 +333,7 @@ if (
 			} );
 		}
 	} );
-	mw.hook( 've.deactivationComplete' ).add( function () {
+	mw.hook( 've.deactivationComplete' ).add( () => {
 		if ( saveProcessDeferred ) {
 			saveProcessDeferred.reject();
 		}

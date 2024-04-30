@@ -288,11 +288,9 @@ ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
 	var isSmallScreen = this.constructor.static.isSmallScreen();
 
 	var showOtherActions = isSmallScreen ||
-		this.actions.getOthers().some( function ( action ) {
-			// Check for unknown actions, show the toolbar if any are available.
-			return action.action !== 'mode';
-		} );
-	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
+		// Check for unknown actions, show the toolbar if any are available.
+		this.actions.getOthers().some( ( action ) => action.action !== 'mode' );
+	this.actions.forEach( { actions: [ 'mode' ] }, ( action ) => {
 		action.toggle( isSmallScreen );
 	} );
 	this.$otherActions.toggleClass( 'oo-ui-element-hidden', !showOtherActions );
@@ -343,8 +341,8 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 
 		// Updates the page sizes when the menu is toggled using the button. This needs
 		// to happen after the animation when the panel is visible.
-		setTimeout( function () {
-			dialog.bookletLayout.stackLayout.getItems().forEach( function ( page ) {
+		setTimeout( () => {
+			dialog.bookletLayout.stackLayout.getItems().forEach( ( page ) => {
 				if ( page instanceof ve.ui.MWParameterPage ) {
 					page.updateSize();
 				}
@@ -357,7 +355,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 			var name = selectedPage.getName();
 			// Align whichever panel is becoming visible, after animation completes.
 			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
-			setTimeout( function () {
+			setTimeout( () => {
 				if ( expandSidebar ) {
 					dialog.sidebar.setSelectionByPageName( name );
 				} else {
@@ -394,7 +392,7 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 			'visualeditor-dialog-transclusion-collapse-options' :
 			'visualeditor-dialog-transclusion-expand-options' );
 
-	this.actions.forEach( { actions: [ 'mode' ] }, function ( action ) {
+	this.actions.forEach( { actions: [ 'mode' ] }, ( action ) => {
 		action.setLabel( label );
 		action.$button.attr( 'aria-expanded', isExpanded ? 1 : 0 );
 	} );
@@ -462,11 +460,11 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 		case 'back':
 			return new OO.ui.Process( function () {
 				if ( willLoseProgress ) {
-					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-back-confirmation-prompt' ) ).then( function ( confirmed ) {
+					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-back-confirmation-prompt' ) ).then( ( confirmed ) => {
 						if ( confirmed ) {
 							this.resetDialog();
 						}
-					}.bind( this ) );
+					} );
 				} else {
 					this.resetDialog();
 				}
@@ -479,11 +477,11 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
 			// close action
 			if ( willLoseProgress ) {
 				return new OO.ui.Process( function () {
-					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-close-confirmation-prompt' ) ).then( function ( confirmed ) {
+					this.closeConfirm( ve.msg( 'visualeditor-dialog-transclusion-close-confirmation-prompt' ) ).then( ( confirmed ) => {
 						if ( confirmed ) {
 							this.close();
 						}
-					}.bind( this ) );
+					} );
 				}, this );
 			}
 	}
@@ -521,7 +519,7 @@ ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	this.bookletLayout.clearPages();
 	var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
 	this.transclusionModel.addPart( placeholderPage )
-		.done( function () {
+		.done( () => {
 			target.bookletLayout.focusPart( placeholderPage.getId() );
 			target.autoExpandSidebar();
 		} );
@@ -600,7 +598,7 @@ ve.ui.MWTransclusionDialog.prototype.onWindowResize = function () {
 	if ( this.transclusionModel ) {
 		this.autoExpandSidebar();
 
-		this.bookletLayout.getPagesOrdered().forEach( function ( page ) {
+		this.bookletLayout.getPagesOrdered().forEach( ( page ) => {
 			if ( page instanceof ve.ui.MWParameterPage ) {
 				page.updateSize();
 			}

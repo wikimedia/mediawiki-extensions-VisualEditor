@@ -135,15 +135,15 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	// TODO: Emit an event to trigger the progress bar
 	var progressPromise = ve.init.target.getSurface().createProgress(
 		wikitextPromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
-	).then( function ( progressBar, cancelPromise ) {
-		cancelPromise.fail( function () {
+	).then( ( progressBar, cancelPromise ) => {
+		cancelPromise.fail( () => {
 			wikitextPromise.abort();
 		} );
 	} );
 
-	return ve.promiseAll( [ wikitextPromise, progressPromise ] ).then( function ( wikitext ) {
+	return ve.promiseAll( [ wikitextPromise, progressPromise ] ).then( ( wikitext ) => {
 		var deferred = ve.createDeferred();
-		setTimeout( function () {
+		setTimeout( () => {
 			if ( wikitext !== undefined ) {
 				deferred.resolve( wikitext );
 			} else {
@@ -164,11 +164,9 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 			ve.dm.Document.static.newBlankDocument()
 		).promise();
 	} else {
-		parsePromise = ve.init.target.parseWikitextFragment( source, false, this.getDocument() ).then( function ( response ) {
-			return ve.dm.converter.getModelFromDom(
-				ve.createDocumentFromHtml( response.visualeditor.content )
-			);
-		} );
+		parsePromise = ve.init.target.parseWikitextFragment( source, false, this.getDocument() ).then( ( response ) => ve.dm.converter.getModelFromDom(
+			ve.createDocumentFromHtml( response.visualeditor.content )
+		) );
 	}
 
 	// TODO: Show progress bar without breaking WindowAction
@@ -176,7 +174,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 	ve.init.target.getSurface().createProgress(
 		parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
 	).done( function ( progressBar, cancelPromise ) {
-		cancelPromise.fail( function () {
+		cancelPromise.fail( () => {
 			parsePromise.abort();
 		} );
 	} );

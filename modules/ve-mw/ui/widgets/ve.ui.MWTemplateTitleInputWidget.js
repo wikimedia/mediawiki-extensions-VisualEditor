@@ -69,7 +69,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 		// Adding the asterisk to emulate a prefix search behavior. It does not make sense in all
 		// cases though. We're limiting it to be add only of the term ends with a letter or numeric
 		// character.
-		// eslint-disable-next-line es-x/no-regexp-u-flag, es-x/no-regexp-unicode-property-escapes, prefer-regex-literals
+		// eslint-disable-next-line es-x/no-regexp-unicode-property-escapes, prefer-regex-literals
 		var endsWithAlpha = new RegExp( '[0-9a-z\\p{L}\\p{N}]$', 'iu' );
 		if ( endsWithAlpha.test( params.gsrsearch ) ) {
 			params.gsrsearch += '*';
@@ -96,7 +96,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
 		promise = promise
 			.then( this.addExactMatch.bind( this ) )
-			.promise( { abort: function () {} } );
+			.promise( { abort: () => {} } );
 	}
 
 	if ( !this.showTemplateDescriptions ) {
@@ -104,11 +104,11 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 	}
 
 	return promise
-		.then( function ( response ) {
+		.then( ( response ) => {
 			var redirects = ( response.query && response.query.redirects ) || [],
 				newPages = ( response.query && response.query.pages ) || [];
 
-			newPages.forEach( function ( page ) {
+			newPages.forEach( ( page ) => {
 				if ( !( 'index' in page ) ) {
 					// Watch out for cases where the index is specified on the redirect object
 					// rather than the page object.
@@ -122,22 +122,18 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			} );
 
 			// Ensure everything goes into the order defined by the page's index key
-			newPages.sort( function ( a, b ) {
-				return a.index - b.index;
-			} );
+			newPages.sort( ( a, b ) => a.index - b.index );
 
 			// T54448: Filter out matches which end in /doc or as configured on-wiki
 			if ( templateDataInstalled ) {
-				newPages = newPages.filter( function ( page ) {
+				newPages = newPages.filter(
 					// Can't use String.endsWith() as that's ES6.
 					// page.title.endsWith( templateDocPageFragment )
-					return page.title.slice( -templateDocPageFragment.length ) !== templateDocPageFragment;
-				} );
+					( page ) => page.title.slice( -templateDocPageFragment.length ) !== templateDocPageFragment
+				);
 			}
 
-			var titles = newPages.map( function ( page ) {
-				return page.title;
-			} );
+			var titles = newPages.map( ( page ) => page.title );
 
 			ve.setProp( response, 'query', 'pages', newPages );
 			originalResponse = response; // lie!
@@ -155,7 +151,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				return xhr.promise( { abort: xhr.abort } );
 			}
 		} )
-		.then( function ( templateDataResponse ) {
+		.then( ( templateDataResponse ) => {
 			var pages = ( templateDataResponse && templateDataResponse.pages ) || {};
 			// Look for descriptions and cache them
 			for ( var i in pages ) {
@@ -174,11 +170,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			}
 			// Return the original response
 			return originalResponse;
-		}, function () {
-			// API request failed; most likely, we're on a wiki which doesn't have TemplateData.
-			return originalResponse || ve.createDeferred().reject();
-		} )
-		.promise( { abort: function () {} } );
+		// API request failed; most likely, we're on a wiki which doesn't have TemplateData.
+		}, () => originalResponse || ve.createDeferred().reject() )
+		.promise( { abort: () => {} } );
 };
 
 /**
@@ -202,9 +196,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 
 	var lowerTitle = title.getPrefixedText().toLowerCase(),
 		metadata = response.query.redirects || [],
-		foundMatchingMetadata = metadata.some( function ( redirect ) {
-			return redirect.from.toLowerCase() === lowerTitle;
-		} );
+		foundMatchingMetadata = metadata.some( ( redirect ) => redirect.from.toLowerCase() === lowerTitle );
 	if ( foundMatchingMetadata ) {
 		// Redirects will be carefully positioned later in TitleWidget.getOptionsFromData()
 		return response;
@@ -223,9 +215,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	 * @return {boolean}
 	 */
 	function containsPageId( pages, pageId ) {
-		return pageId && pages.some( function ( page ) {
-			return page.pageid === pageId;
-		} );
+		return pageId && pages.some( ( page ) => page.pageid === pageId );
 	}
 
 	/**
@@ -233,24 +223,20 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	 * @param {Object} [newPage]
 	 */
 	function unshiftPages( pages, newPage ) {
-		pages.forEach( function ( page ) {
+		pages.forEach( ( page ) => {
 			page.index++;
 		} );
 		if ( newPage && newPage.title ) {
 			newPage.index = 1;
 			pages.unshift( newPage );
 			if ( pages.length > widget.limit ) {
-				pages.sort( function ( a, b ) {
-					return a.index - b.index;
-				} ).splice( widget.limit );
+				pages.sort( ( a, b ) => a.index - b.index ).splice( widget.limit );
 			}
 		}
 	}
 
 	var i,
-		matchingRedirects = response.query.pages.filter( function ( page ) {
-			return page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle;
-		} );
+		matchingRedirects = response.query.pages.filter( ( page ) => page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle );
 	if ( matchingRedirects.length ) {
 		for ( i = matchingRedirects.length; i--; ) {
 			var matchingRedirect = matchingRedirects[ i ];
@@ -264,9 +250,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		return response;
 	}
 
-	var matchingTitles = response.query.pages.filter( function ( page ) {
-		return page.title.toLowerCase() === lowerTitle;
-	} );
+	var matchingTitles = response.query.pages.filter( ( page ) => page.title.toLowerCase() === lowerTitle );
 	if ( matchingTitles.length ) {
 		for ( i = matchingTitles.length; i--; ) {
 			// Make sure exact matches are at the very top
@@ -284,12 +268,10 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		gpsnamespace: this.namespace,
 		// Try to fill with prefix matches, otherwise just the top-1 prefix match
 		gpslimit: this.limit
-	} ).then( function ( prefixMatches ) {
+	} ).then( ( prefixMatches ) => {
 		// action=query returns page objects in `{ query: { pages: [] } }`, not keyed by page id
 		var pages = prefixMatches.query && prefixMatches.query.pages || [];
-		pages.sort( function ( a, b ) {
-			return a.index - b.index;
-		} );
+		pages.sort( ( a, b ) => a.index - b.index );
 		for ( i in pages ) {
 			var prefixMatch = pages[ i ];
 			if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
@@ -304,11 +286,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 			}
 		}
 		return response;
-	}, function () {
-		// Proceed with the unmodified response in case the additional API request failed
-		return response;
-	} )
-		.promise( { abort: function () {} } );
+	// Proceed with the unmodified response in case the additional API request failed
+	}, () => response )
+		.promise( { abort: () => {} } );
 };
 
 // @inheritdoc mw.widgets.TitleWidget

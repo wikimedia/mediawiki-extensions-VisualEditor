@@ -64,9 +64,7 @@
 	// Load signature tool if *any* namespace supports it.
 	// It will be shown disabled on namespaces that don't support it.
 	if (
-		Object.keys( namespaces ).some( function ( name ) {
-			return mw.Title.wantSignaturesNamespace( namespaces[ name ] );
-		} )
+		Object.keys( namespaces ).some( ( name ) => mw.Title.wantSignaturesNamespace( namespaces[ name ] ) )
 	) {
 		modules.push( 'ext.visualEditor.mwsignature' );
 	}
@@ -107,11 +105,11 @@
 			mw.hook( 've.loadModules' ).fire( this.addPlugin.bind( this ) );
 			ve.track( 'trace.moduleLoad.enter', { mode: mode } );
 			return mw.loader.using( modules )
-				.then( function () {
+				.then( () => {
 					ve.track( 'trace.moduleLoad.exit', { mode: mode } );
 					pluginCallbacks.push( ve.init.platform.getInitializedPromise.bind( ve.init.platform ) );
 					// Execute plugin callbacks and collect promises
-					return $.when.apply( $, pluginCallbacks.map( function ( callback ) {
+					return $.when.apply( $, pluginCallbacks.map( ( callback ) => {
 						try {
 							return callback();
 						} catch ( e ) {
@@ -135,7 +133,7 @@
 				checkboxesByName = {};
 
 			if ( checkboxesDef ) {
-				Object.keys( checkboxesDef ).forEach( function ( name ) {
+				Object.keys( checkboxesDef ).forEach( ( name ) => {
 					var options = checkboxesDef[ name ],
 						accesskey = null,
 						title = null;
@@ -270,23 +268,21 @@
 							// This prompt will throw off all of our timing data, so just disable tracking
 							// for this session
 							ve.track = function () {};
-							return mw.loader.using( 'oojs-ui-windows' ).then( function () {
-								return OO.ui.confirm( mw.msg( 'visualeditor-autosave-modified-prompt-message' ), {
-									title: mw.msg( 'visualeditor-autosave-modified-prompt-title' ),
-									actions: [
-										{ action: 'accept', label: mw.msg( 'visualeditor-autosave-modified-prompt-accept' ), flags: [ 'primary', 'progressive' ] },
-										{ action: 'reject', label: mw.msg( 'visualeditor-autosave-modified-prompt-reject' ), flags: 'destructive' }
-									] }
-								).then( function ( confirmed ) {
-									if ( confirmed ) {
-										return dataPromise;
-									} else {
-										// If they requested the latest version, invalidate the autosave state
-										mw.storage.session.remove( 've-docstate' );
-										return apiRequest();
-									}
-								} );
-							} );
+							return mw.loader.using( 'oojs-ui-windows' ).then( () => OO.ui.confirm( mw.msg( 'visualeditor-autosave-modified-prompt-message' ), {
+								title: mw.msg( 'visualeditor-autosave-modified-prompt-title' ),
+								actions: [
+									{ action: 'accept', label: mw.msg( 'visualeditor-autosave-modified-prompt-accept' ), flags: [ 'primary', 'progressive' ] },
+									{ action: 'reject', label: mw.msg( 'visualeditor-autosave-modified-prompt-reject' ), flags: 'destructive' }
+								] }
+							).then( ( confirmed ) => {
+								if ( confirmed ) {
+									return dataPromise;
+								} else {
+									// If they requested the latest version, invalidate the autosave state
+									mw.storage.session.remove( 've-docstate' );
+									return apiRequest();
+								}
+							} ) );
 						}
 					}
 				}
@@ -355,7 +351,7 @@
 				}
 			}
 			if ( !apiPromise ) {
-				apiPromise = apiXhr.then( function ( response ) {
+				apiPromise = apiXhr.then( ( response ) => {
 					ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
 					mw.track( 'timing.ve.' + options.targetName + '.performance.system.apiLoad',
 						ve.now() - start );
@@ -424,13 +420,13 @@
 					} );
 				}
 				var restbasePromise = restbaseXhr.then(
-					function ( response, status, jqxhr ) {
+					( response, status, jqxhr ) => {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
 						mw.track( 'timing.ve.' + options.targetName + '.performance.system.restbaseLoad',
 							ve.now() - start );
 						return [ response, jqxhr.getResponseHeader( 'etag' ) ];
 					},
-					function ( xhr, code, _ ) {
+					( xhr, code, _ ) => {
 						if ( xhr.status === 404 ) {
 							// Page does not exist, so let the user start with a blank document.
 							return $.Deferred().resolve( [ '', undefined ] ).promise();
@@ -442,7 +438,7 @@
 				);
 
 				dataPromise = $.when( apiPromise, restbasePromise )
-					.then( function ( apiData, restbaseData ) {
+					.then( ( apiData, restbaseData ) => {
 						if ( apiData.visualeditor ) {
 							if ( restbaseData[ 0 ] || !apiData.visualeditor.content ) {
 								// If we have actual content loaded, use it.
@@ -470,7 +466,7 @@
 				}
 			}
 
-			return dataPromise.then( function ( resp ) {
+			return dataPromise.then( ( resp ) => {
 				// Adapted from RESTBase mwUtil.parseETag()
 				var etagRegexp = /^(?:W\/)?"?([^"/]+)(?:\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))(?:\/([^"]+))?"?$/;
 
@@ -524,7 +520,7 @@
 			}
 
 			var dataPromise = new mw.Api().get( data );
-			return dataPromise.then( function ( resp ) {
+			return dataPromise.then( ( resp ) => {
 				resp.veMode = 'source';
 				return resp;
 			} ).promise( { abort: dataPromise.abort } );

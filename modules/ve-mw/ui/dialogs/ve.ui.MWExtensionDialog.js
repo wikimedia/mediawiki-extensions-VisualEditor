@@ -87,7 +87,7 @@ ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
 		if ( this.hasMeaningfulEdits() ) {
 			return new OO.ui.Process( function () {
 				var dialog = this;
-				return dialog.confirmAbandon().then( function ( confirm ) {
+				return dialog.confirmAbandon().then( ( confirm ) => {
 					if ( confirm ) {
 						/* We may need to rethink this if something in the
 						   dependency chain adds to the current behaviour */

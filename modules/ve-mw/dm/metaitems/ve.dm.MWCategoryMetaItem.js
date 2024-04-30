@@ -61,9 +61,7 @@ ve.dm.MWCategoryMetaItem.static.toDomElements = function ( dataElement, doc, con
 		// Parsoid: WikiLinkHandler::renderCategory
 		var href = mw.libs.ve.encodeParsoidResourceName( category );
 		if ( sortkey !== '' ) {
-			href += '#' + sortkey.replace( /[%? [\]#|<>]/g, function ( match ) {
-				return encodeURIComponent( match );
-			} );
+			href += '#' + sortkey.replace( /[%? [\]#|<>]/g, ( match ) => encodeURIComponent( match ) );
 		}
 
 		domElement.setAttribute( 'href', href );
@@ -99,7 +97,7 @@ ve.dm.MWCategoryMetaItem.static.describeChange = function ( key, change ) {
 
 ve.dm.modelRegistry.register( ve.dm.MWCategoryMetaItem );
 
-ve.ui.metaListDiffRegistry.register( 'mwCategory', function ( diffElement, diffQueue, documentNode /* , documentSpacerNode */ ) {
+ve.ui.metaListDiffRegistry.register( 'mwCategory', ( diffElement, diffQueue, documentNode /* , documentSpacerNode */ ) => {
 	diffQueue = diffElement.processQueue( diffQueue );
 
 	if ( !diffQueue.length ) {
@@ -123,7 +121,7 @@ ve.ui.metaListDiffRegistry.register( 'mwCategory', function ( diffElement, diffQ
 	catSpacerNode.appendChild( document.createTextNode( ' … ' ) );
 
 	// Wrap each item in the queue in an <li>
-	diffQueue.forEach( function ( diffItem ) {
+	diffQueue.forEach( ( diffItem ) => {
 		var listItem = document.createElement( 'li' );
 		diffElement.renderQueue(
 			[ diffItem ],

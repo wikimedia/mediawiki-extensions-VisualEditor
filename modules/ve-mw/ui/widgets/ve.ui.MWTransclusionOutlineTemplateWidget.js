@@ -118,7 +118,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createAllParameterCheckboxes
 	if ( !this.parameterListComplete ) {
 		var self = this;
 		this.initializeParameterList();
-		this.getRelevantTemplateParameters().forEach( function ( paramName ) {
+		this.getRelevantTemplateParameters().forEach( ( paramName ) => {
 			if ( !self.parameterList.findItemFromData( paramName ) ) {
 				self.parameterList.addItems(
 					[ self.createCheckbox( paramName ) ],
@@ -144,15 +144,13 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.getRelevantTemplateParameter
 			parameterNames = template.getOrderedParameterNames();
 			break;
 		case 'unused':
-			parameterNames = template.getAllParametersOrdered().filter( function ( name ) {
-				return !( name in template.getParameters() );
-			} );
+			parameterNames = template.getAllParametersOrdered().filter( ( name ) => !( name in template.getParameters() ) );
 			break;
 		default:
 			parameterNames = template.getAllParametersOrdered();
 	}
 
-	return parameterNames.filter( function ( name ) {
+	return parameterNames.filter( ( name ) => {
 		// Don't offer deprecated parameters, unless they are already used
 		if ( template.getSpec().isParameterDeprecated( name ) && !template.hasParameter( name ) ) {
 			return false;
@@ -424,7 +422,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	this.createAllParameterCheckboxes();
 
 	// Note: We can't really cache this because the list of know parameters can change any time
-	this.parameterList.items.forEach( function ( item ) {
+	this.parameterList.items.forEach( ( item ) => {
 		var paramName = item.getData(),
 			placesToSearch = [
 				spec.getPrimaryParameterName( paramName ),
@@ -432,10 +430,10 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 				spec.getParameterDescription( paramName )
 			].concat( spec.getParameterAliases( paramName ) );
 
-		var foundSomeMatch = placesToSearch.some( function ( term ) {
+		var foundSomeMatch = placesToSearch.some(
 			// Aliases missed validation for a long time and aren't guaranteed to be strings
-			return term && typeof term === 'string' && term.toLowerCase().indexOf( query ) !== -1;
-		} );
+			( term ) => term && typeof term === 'string' && term.toLowerCase().indexOf( query ) !== -1
+		);
 
 		item.toggle( foundSomeMatch );
 
@@ -466,14 +464,14 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = funct
 	}
 
 	if ( this.parameterList ) {
-		this.parameterList.items.forEach( function ( item ) {
+		this.parameterList.items.forEach( ( item ) => {
 			item.toggle( visibility || item.isSelected() );
 		} );
 	}
 
 	if ( !visibility && fromClick ) {
 		var self = this;
-		this.header.scrollElementIntoView().then( function () {
+		this.header.scrollElementIntoView().then( () => {
 			if ( self.parameterList ) {
 				self.parameterList.ensureVisibilityOfFirstCheckedParameter();
 			}

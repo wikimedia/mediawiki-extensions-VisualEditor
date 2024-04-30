@@ -274,19 +274,17 @@ ve.ui.MWGalleryDialog.prototype.initialize = function () {
 		'packed-overlay',
 		'packed-hover',
 		'slideshow'
-	].map( function ( data ) {
-		return new OO.ui.MenuOptionWidget( {
-			data: data,
-			// Messages used here:
-			// * visualeditor-mwgallerydialog-mode-dropdown-label-traditional
-			// * visualeditor-mwgallerydialog-mode-dropdown-label-nolines
-			// * visualeditor-mwgallerydialog-mode-dropdown-label-packed
-			// * visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay
-			// * visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover
-			// * visualeditor-mwgallerydialog-mode-dropdown-label-slideshow
-			label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-' + data )
-		} );
-	} ) } } );
+	].map( ( data ) => new OO.ui.MenuOptionWidget( {
+		data: data,
+		// Messages used here:
+		// * visualeditor-mwgallerydialog-mode-dropdown-label-traditional
+		// * visualeditor-mwgallerydialog-mode-dropdown-label-nolines
+		// * visualeditor-mwgallerydialog-mode-dropdown-label-packed
+		// * visualeditor-mwgallerydialog-mode-dropdown-label-packed-overlay
+		// * visualeditor-mwgallerydialog-mode-dropdown-label-packed-hover
+		// * visualeditor-mwgallerydialog-mode-dropdown-label-slideshow
+		label: ve.msg( 'visualeditor-mwgallerydialog-mode-dropdown-label-' + data )
+	} ) ) } } );
 	this.captionTarget = ve.init.target.createTargetWidget( {
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: this.constructor.static.excludeCommands,
@@ -438,7 +436,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				// Populate menu and edit panels
 				this.imagesPromise = this.requestImages( {
 					titles: imageTitles
-				} ).done( function () {
+				} ).done( () => {
 					dialog.onHighlightItem();
 				} );
 
@@ -658,7 +656,7 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
 	}
 
 	if ( this.initialImageData.length > 0 ) {
-		this.initialImageData.forEach( function ( image ) {
+		this.initialImageData.forEach( ( image ) => {
 			image.thumbUrl = thumbUrls[ image.resource ].thumbUrl;
 			items.push( new ve.ui.MWGalleryItemWidget( image, config ) );
 		} );
@@ -714,7 +712,7 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 	// Request image
 	this.requestImages( {
 		titles: [ title ]
-	} ).done( function () {
+	} ).done( () => {
 		// populate edit panel with the new image
 		var items = dialog.galleryGroup.items;
 		dialog.onHighlightItem( items[ items.length - 1 ] );

@@ -113,13 +113,13 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 				wikitextInput = this.wikitextLayout.textInput;
 			this.titleButton.setDisabled( true );
 			this.wikitextLayout.textInput.pushPending();
-			ve.init.target.getWikitextFragment( surface.getModel().getDocument() ).then( function ( wikitext ) {
+			ve.init.target.getWikitextFragment( surface.getModel().getDocument() ).then( ( wikitext ) => {
 				wikitextInput.setValue( wikitext.trim() );
 				wikitextInput.$input.scrollTop( 0 );
 				wikitextInput.popPending();
 				dialog.titleButton.setDisabled( false );
 				dialog.updateSize();
-			}, function () {
+			}, () => {
 				// TODO: Display API errors
 				wikitextInput.popPending();
 			} );

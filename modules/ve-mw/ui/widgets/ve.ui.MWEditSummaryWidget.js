@@ -79,7 +79,7 @@ ve.ui.MWEditSummaryWidget.static.getMatchingSummaries = function ( summaries, qu
 		return [];
 	}
 
-	summaries.forEach( function ( summary ) {
+	summaries.forEach( ( summary ) => {
 		var lowerSummary = summary.toLowerCase(),
 			index = lowerSummary.indexOf( lowerQuery );
 		if ( index === 0 ) {
@@ -147,21 +147,17 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 				ucuser: mw.user.getName(),
 				ucprop: 'comment',
 				uclimit: 500
-			} ).then( function ( response ) {
+			} ).then( ( response ) => {
 				var usedComments = {},
 					changes = ve.getProp( response, 'query', 'usercontribs' ) || [];
 
 				return changes
 					// Filter out changes without comment (e.g. due to RevisionDelete)
-					.filter( function ( change ) {
-						return Object.prototype.hasOwnProperty.call( change, 'comment' );
-					} )
+					.filter( ( change ) => Object.prototype.hasOwnProperty.call( change, 'comment' ) )
 					// Remove section /* headings */
-					.map( function ( change ) {
-						return splitSummary( change.comment ).comment.trim();
-					} )
+					.map( ( change ) => splitSummary( change.comment ).comment.trim() )
 					// Filter out duplicates and empty comments
-					.filter( function ( comment ) {
+					.filter( ( comment ) => {
 						if ( !comment || Object.prototype.hasOwnProperty.call( usedComments, comment ) ) {
 							return false;
 						}
@@ -183,14 +179,14 @@ ve.ui.MWEditSummaryWidget.prototype.getLookupRequest = function () {
 		limit = this.limit,
 		widget = this;
 
-	return this.getSummaries().then( function ( allSummaries ) {
+	return this.getSummaries().then( ( allSummaries ) => {
 		var matchingSummaries = widget.constructor.static.getMatchingSummaries( allSummaries, query.comment );
 		if ( matchingSummaries.length > limit ) {
 			// Quick in-place truncate
 			matchingSummaries.length = limit;
 		}
 		return { summaries: matchingSummaries, section: query.section };
-	} ).promise( { abort: function () {} } ); // don't abort, the actual request will be the same anyway
+	} ).promise( { abort: () => {} } ); // don't abort, the actual request will be the same anyway
 };
 
 /**
@@ -204,10 +200,8 @@ ve.ui.MWEditSummaryWidget.prototype.getLookupCacheDataFromResponse = function ( 
  * @inheritdoc
  */
 ve.ui.MWEditSummaryWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	return data.summaries.map( function ( item ) {
-		return new OO.ui.MenuOptionWidget( {
-			label: item,
-			data: data.section + item
-		} );
-	} );
+	return data.summaries.map( ( item ) => new OO.ui.MenuOptionWidget( {
+		label: item,
+		data: data.section + item
+	} ) );
 };

@@ -84,7 +84,7 @@ ve.ui.MWInternalLinkContextItem.static.generateBody = function ( linkCache, mode
 	}
 
 	if ( usePageImages || usePageDescriptions ) {
-		linkCache.get( lookupTitle ).then( function ( linkData ) {
+		linkCache.get( lookupTitle ).then( ( linkData ) => {
 			if ( usePageImages ) {
 				if ( linkData.imageUrl ) {
 					icon.$element

@@ -62,10 +62,10 @@
 		progressBar.toggle( true );
 		form.toggle( false );
 
-		modulePromise.done( function () {
+		modulePromise.done( () => {
 			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle: importTitle } );
 			// If the target emits a 'close' event (via the toolbar back button on mobile) then go to the landing page.
-			target.once( 'close', function () {
+			target.once( 'close', () => {
 				showForm( true );
 			} );
 
@@ -97,13 +97,13 @@
 			var progressDeferred = ve.createDeferred();
 			dummySurface.createProgress( progressDeferred.promise(), ve.msg( 'visualeditor-rebase-client-connecting' ), true );
 
-			surfaceModel.synchronizer.once( 'initDoc', function ( error ) {
+			surfaceModel.synchronizer.once( 'initDoc', ( error ) => {
 				var initPromise;
 
 				progressDeferred.resolve();
 				// Resolving the progress bar doesn't close the window in this cycle,
 				// so wait until we call clearSurfaces which destroys the window manager.
-				setTimeout( function () {
+				setTimeout( () => {
 					target.clearSurfaces();
 					// Don't add the surface until the history has been applied
 					target.addSurface( surfaceModel );
@@ -112,20 +112,20 @@
 						OO.ui.alert(
 							$( '<p>' ).append( $errorMsg ),
 							{ title: ve.msg( 'visualeditor-rebase-corrupted-document-title' ), size: 'large' }
-						).then( function () {
+						).then( () => {
 							showForm( true );
 						} );
 						return;
 					}
-					target.once( 'surfaceReady', function () {
-						initPromise.then( function () {
+					target.once( 'surfaceReady', () => {
+						initPromise.then( () => {
 							target.getSurface().getView().selectFirstSelectableContentOffset();
 							var isNewAuthor = !ve.init.platform.sessionStorage.get( 've-collab-author' );
 							// For new anon users, open the author list so they can set their name
 							if ( isNewAuthor && !username ) {
 								// Something (an animation?) steals focus during load, so wait a bit
 								// before opening and focusing the authorList.
-								setTimeout( function () {
+								setTimeout( () => {
 									target.toolbar.tools.authorList.onSelect();
 								}, 500 );
 							}
@@ -133,7 +133,7 @@
 					} );
 
 					if ( target.importTitle && !surfaceModel.getDocument().getCompleteHistoryLength() ) {
-						initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( function ( response ) {
+						initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( ( response ) => {
 							var data = response.visualeditor;
 
 							if ( data && data.content ) {
@@ -174,7 +174,7 @@
 
 						// Look for import metadata in document
 						surfaceModel = target.getSurface().getModel();
-						surfaceModel.getDocument().getMetaList().getItemsInGroup( 'misc' ).some( function ( item ) {
+						surfaceModel.getDocument().getMetaList().getItemsInGroup( 'misc' ).some( ( item ) => {
 							var importedDocument = item.getAttribute( 'importedDocument' );
 							if ( importedDocument ) {
 								target.importTitle = mw.Title.newFromText( importedDocument.title );
@@ -187,21 +187,21 @@
 							return false;
 						} );
 					}
-					initPromise.fail( function ( err ) {
-						setTimeout( function () {
+					initPromise.fail( ( err ) => {
+						setTimeout( () => {
 							throw new Error( err );
 						} );
 					} );
-					initPromise.always( function () {
+					initPromise.always( () => {
 						progressDeferred.resolve();
 					} );
 				} );
 			} );
 
-		} ).always( function () {
+		} ).always( () => {
 			form.toggle( false );
 			progressBar.toggle( false );
-		} ).fail( function ( err ) {
+		} ).fail( ( err ) => {
 			mw.log.error( err );
 			showForm( true );
 		} );
@@ -246,15 +246,15 @@
 	}
 
 	function onNameChange() {
-		documentNameInput.getValidity().then( function () {
+		documentNameInput.getValidity().then( () => {
 			documentNameButton.setDisabled( false );
-		}, function () {
+		}, () => {
 			documentNameButton.setDisabled( true );
 		} );
 	}
 
 	function loadFromName() {
-		documentNameInput.getValidity().then( function () {
+		documentNameInput.getValidity().then( () => {
 			var title = mw.Title.newFromText(
 				documentNameInput.getValue().trim() || getRandomTitle()
 			);
@@ -267,10 +267,8 @@
 		} );
 	}
 
-	documentNameInput.setValidation( function ( value ) {
-		// Empty input will create a random document name, otherwise must be valid
-		return value === '' || !!mw.Title.newFromText( value );
-	} );
+	// Empty input will create a random document name, otherwise must be valid
+	documentNameInput.setValidation( ( value ) => value === '' || !!mw.Title.newFromText( value ) );
 	documentNameButton.setDisabled( false );
 
 	documentNameInput.on( 'change', onNameChange );
@@ -279,15 +277,15 @@
 	onNameChange();
 
 	function onImportChange() {
-		importInput.getValidity().then( function () {
+		importInput.getValidity().then( () => {
 			importButton.setDisabled( false );
-		}, function () {
+		}, () => {
 			importButton.setDisabled( true );
 		} );
 	}
 
 	function onImportSubmit() {
-		importInput.getValidity().then( function () {
+		importInput.getValidity().then( () => {
 			var title = mw.Title.newFromText( importInput.getValue().trim() );
 
 			if ( title ) {
@@ -298,10 +296,8 @@
 		} );
 	}
 
-	importInput.setValidation( function ( value ) {
-		// TODO: Check page exists?
-		return !!mw.Title.newFromText( value );
-	} );
+	// TODO: Check page exists?
+	importInput.setValidation( ( value ) => !!mw.Title.newFromText( value ) );
 	importInput.on( 'change', onImportChange );
 	importInput.on( 'enter', onImportSubmit );
 	importButton.on( 'click', onImportSubmit );
@@ -316,14 +312,14 @@
 		showForm();
 	}
 
-	$specialTab.on( 'click', function ( e ) {
+	$specialTab.on( 'click', ( e ) => {
 		showForm( true );
 		e.preventDefault();
 	} );
 
 	// Tag current state
 	history.replaceState( { tag: 'collabTarget', title: pageName }, '', location.href );
-	window.addEventListener( 'popstate', function ( e ) {
+	window.addEventListener( 'popstate', ( e ) => {
 		if ( e.state && e.state.tag === 'collabTarget' ) {
 			if ( e.state.title ) {
 				showPage( mw.Title.newFromText( e.state.title ) );

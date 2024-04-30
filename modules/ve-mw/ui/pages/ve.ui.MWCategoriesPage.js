@@ -241,7 +241,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config ) {
 	var defaultSortKeyItem = this.getDefaultSortKeyItem();
 
 	this.categoryWidget.setFragment( fragment );
-	var promise = this.categoryWidget.addItems( this.getCategoryItems() ).then( function () {
+	var promise = this.categoryWidget.addItems( this.getCategoryItems() ).then( () => {
 		page.categoryWidget.setDisabled( config.isReadOnly );
 	} );
 
@@ -251,7 +251,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config ) {
 	this.defaultSortKeyTouched = false;
 
 	// Update input position after transition
-	setTimeout( function () {
+	setTimeout( () => {
 		page.categoryWidget.fitInput();
 	}, OO.ui.theme.getDialogTransitionDuration() );
 

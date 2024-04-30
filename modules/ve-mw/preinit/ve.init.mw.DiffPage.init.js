@@ -73,7 +73,7 @@
 			progress.$element.removeClass( 'oo-ui-element-hidden' );
 			// TODO: Load a smaller subset of VE for computing the visual diff
 			var modulePromise = mw.loader.using( [ 'ext.visualEditor.articleTarget', 'ext.visualEditor.mwmeta' ].concat( pluginModules ) );
-			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( function ( visualDiffGenerator ) {
+			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( ( visualDiffGenerator ) => {
 				// This class is loaded via modulePromise above
 				// eslint-disable-next-line no-undef
 				var diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
@@ -91,10 +91,10 @@
 				};
 
 				diffElement.positionDescriptions();
-			}, function ( code, data ) {
+			}, ( code, data ) => {
 				mw.notify( new mw.Api().getErrorMessage( data ), { type: 'error' } );
 				reviewModeButtonSelect.selectItemByData( 'source' );
-			} ).catch( function ( error ) {
+			} ).catch( ( error ) => {
 				mw.notify( error.message, { type: 'error' } );
 				reviewModeButtonSelect.selectItemByData( 'source' );
 				throw error;
@@ -111,7 +111,7 @@
 		}
 	}
 
-	mw.hook( 'wikipage.diff' ).add( function () {
+	mw.hook( 'wikipage.diff' ).add( () => {
 		if ( mw.config.get( 'wgDiffOldId' ) === false || mw.config.get( 'wgDiffNewId' ) === false ) {
 			// Don't offer visual diffs for "fake" diffs where the revision to compare to is not given,
 			// e.g. when viewing a "diff" of page creation (T338388)
@@ -147,11 +147,11 @@
 		reviewModeButtonSelect.selectItemByData( mode );
 	} );
 
-	mw.hook( 'wikipage.diff.wikitextBodyUpdate' ).add( function ( $wikitextBody ) {
+	mw.hook( 'wikipage.diff.wikitextBodyUpdate' ).add( ( $wikitextBody ) => {
 		$wikitextDiffBody = $wikitextBody;
 	} );
 
-	mw.hook( 'wikipage.diff.diffTypeSwitch' ).add( function ( inlineToggleSwitch ) {
+	mw.hook( 'wikipage.diff.diffTypeSwitch' ).add( ( inlineToggleSwitch ) => {
 		diffTypeSwitch = inlineToggleSwitch;
 		diffTypeSwitch.setDisabled( mode === 'visual' );
 	} );

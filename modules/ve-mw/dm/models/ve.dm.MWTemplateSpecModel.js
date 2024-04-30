@@ -228,9 +228,7 @@ ve.dm.MWTemplateSpecModel.prototype.isDocumented = function () {
  */
 ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 	return Array.isArray( this.templateData.paramOrder ) ?
-		this.templateData.paramOrder.filter( function ( name ) {
-			return name;
-		} ) :
+		this.templateData.paramOrder.filter( ( name ) => name ) :
 		Object.keys( this.templateData.params );
 };
 
@@ -242,9 +240,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDocumentedParameterOrder = function () {
 ve.dm.MWTemplateSpecModel.prototype.getUndocumentedParameterNames = function () {
 	var documentedParameters = this.templateData.params;
 
-	return this.getKnownParameterNames().filter( function ( name ) {
-		return !( name in documentedParameters );
-	} );
+	return this.getKnownParameterNames().filter( ( name ) => !( name in documentedParameters ) );
 };
 
 /**
@@ -260,7 +256,7 @@ ve.dm.MWTemplateSpecModel.prototype.getUndocumentedParameterNames = function () 
 ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
 	var undocumentedParameters = this.getUndocumentedParameterNames();
 
-	undocumentedParameters.sort( function ( a, b ) {
+	undocumentedParameters.sort( ( a, b ) => {
 		if ( isNaN( a ) ) {
 			// If a and b are string, order alphabetically, otherwise numbers before strings
 			return isNaN( b ) ? a.localeCompare( b ) : 1;

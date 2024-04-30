@@ -43,7 +43,7 @@ ve.ui.MWMobileSaveDialog.prototype.initialize = function () {
 	this.$reviewVisualDiff.addClass( 'content' );
 	this.previewPanel.$element.addClass( 'content' );
 
-	mw.loader.using( 'mobile.startup' ).then( function ( req ) {
+	mw.loader.using( 'mobile.startup' ).then( ( req ) => {
 		var licenseMsg = req( 'mobile.startup' ).license();
 		if ( licenseMsg ) {
 			// eslint-disable-next-line no-jquery/no-html

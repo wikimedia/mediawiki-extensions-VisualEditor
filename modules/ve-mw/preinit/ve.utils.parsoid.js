@@ -40,7 +40,7 @@ mw.libs.ve.decodeURIComponentIntoArticleTitle = function ( s, preserveUnderscore
  * @param {string} [keepSection] Section to keep
  */
 mw.libs.ve.unwrapParsoidSections = function ( element, keepSection ) {
-	Array.prototype.forEach.call( element.querySelectorAll( 'section[data-mw-section-id]' ), function ( section ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'section[data-mw-section-id]' ), ( section ) => {
 		var parent = section.parentNode,
 			sectionId = section.getAttribute( 'data-mw-section-id' );
 		// Copy section ID to first child (should be a heading)
@@ -65,7 +65,7 @@ mw.libs.ve.unwrapParsoidSections = function ( element, keepSection ) {
  * @param {HTMLElement} element Parent element, e.g. document body
  */
 mw.libs.ve.stripParsoidFallbackIds = function ( element ) {
-	Array.prototype.forEach.call( element.querySelectorAll( 'span[typeof="mw:FallbackId"][id]:empty' ), function ( legacySpan ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'span[typeof="mw:FallbackId"][id]:empty' ), ( legacySpan ) => {
 		legacySpan.parentNode.removeChild( legacySpan );
 	} );
 };
@@ -74,7 +74,7 @@ mw.libs.ve.restbaseIdRegExp = /^mw[a-zA-Z0-9\-_]{2,6}$/;
 
 mw.libs.ve.stripRestbaseIds = function ( doc ) {
 	var restbaseIdRegExp = mw.libs.ve.restbaseIdRegExp;
-	Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), function ( element ) {
+	Array.prototype.forEach.call( doc.querySelectorAll( '[id^="mw"]' ), ( element ) => {
 		if ( restbaseIdRegExp.test( element.id ) ) {
 			element.removeAttribute( 'id' );
 		}
@@ -88,7 +88,7 @@ mw.libs.ve.stripRestbaseIds = function ( doc ) {
  * @param {HTMLElement} element Parent element, e.g. document body
  */
 mw.libs.ve.reduplicateStyles = function ( element ) {
-	Array.prototype.forEach.call( element.querySelectorAll( 'link[rel~="mw-deduplicated-inline-style"]' ), function ( link ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'link[rel~="mw-deduplicated-inline-style"]' ), ( link ) => {
 		var href = link.getAttribute( 'href' );
 		if ( !href || href.slice( 0, 'mw-data:'.length ) !== 'mw-data:' ) {
 			return;
@@ -107,7 +107,7 @@ mw.libs.ve.reduplicateStyles = function ( element ) {
 			newStyle.appendChild( style.childNodes[ i ].cloneNode( true ) );
 		}
 		// Copy attributes from the old `link` node (for selser)
-		Array.prototype.forEach.call( link.attributes, function ( attr ) {
+		Array.prototype.forEach.call( link.attributes, ( attr ) => {
 			if ( attr.name !== 'rel' && attr.name !== 'href' ) {
 				newStyle.setAttribute( attr.name, attr.value );
 			}
@@ -116,7 +116,7 @@ mw.libs.ve.reduplicateStyles = function ( element ) {
 		link.parentNode.replaceChild( newStyle, link );
 	} );
 
-	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]:empty' ), function ( style ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]:empty' ), ( style ) => {
 		var key = style.getAttribute( 'data-mw-deduplicate' );
 		var firstStyle = element.querySelector( 'style[data-mw-deduplicate="' + key + '"]' );
 		if ( !firstStyle || firstStyle === style ) {
@@ -152,7 +152,7 @@ mw.libs.ve.deduplicateStyles = function ( element ) {
 
 	var styleTagKeys = {};
 
-	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]' ), function ( style ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]' ), ( style ) => {
 		var key = style.getAttribute( 'data-mw-deduplicate' );
 
 		if ( !styleTagKeys[ key ] ) {
@@ -168,7 +168,7 @@ mw.libs.ve.deduplicateStyles = function ( element ) {
 			link.setAttribute( 'href', 'mw-data:' + key );
 
 			// Copy attributes from the old `link` node (for selser)
-			Array.prototype.forEach.call( style.attributes, function ( attr ) {
+			Array.prototype.forEach.call( style.attributes, ( attr ) => {
 				if ( attr.name !== 'rel' && attr.name !== 'data-mw-deduplicate' ) {
 					link.setAttribute( attr.name, attr.value );
 				}
@@ -201,7 +201,7 @@ mw.libs.ve.deduplicateStyles = function ( element ) {
 mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 	var docTitleText = docTitle.getPrefixedText();
 	prefix = prefix || '';
-	Array.prototype.forEach.call( container.querySelectorAll( 'a[href*="#"]' ), function ( el ) {
+	Array.prototype.forEach.call( container.querySelectorAll( 'a[href*="#"]' ), ( el ) => {
 		var fragment = null;
 		if ( el.getAttribute( 'href' )[ 0 ] === '#' ) {
 			// Legacy parser
@@ -238,7 +238,7 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 		}
 	} );
 	// Remove any section heading anchors which weren't fixed above (T218492)
-	Array.prototype.forEach.call( container.querySelectorAll( 'h1, h2, h3, h4, h5, h6' ), function ( el ) {
+	Array.prototype.forEach.call( container.querySelectorAll( 'h1, h2, h3, h4, h5, h6' ), ( el ) => {
 		if ( el.hasAttribute( 'id' ) && !el.hasAttribute( 'data-mw-id-fixed' ) ) {
 			el.removeAttribute( 'id' );
 		}
@@ -293,7 +293,7 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 	}
 	// Count remaining query parameters
 	var keys = [];
-	url.searchParams.forEach( function ( val, key ) {
+	url.searchParams.forEach( ( val, key ) => {
 		keys.push( key );
 	} );
 	var queryLength = keys.length;
@@ -336,9 +336,7 @@ mw.libs.ve.encodeParsoidResourceName = function ( title ) {
 		anchor = title.slice( idx + 1 );
 		title = title.slice( 0, idx );
 	}
-	var encodedTitle = title.replace( /[%? [\]#|<>]/g, function ( match ) {
-		return mw.util.wikiUrlencode( match );
-	} );
+	var encodedTitle = title.replace( /[%? [\]#|<>]/g, ( match ) => mw.util.wikiUrlencode( match ) );
 	if ( anchor !== null ) {
 		encodedTitle += '#' + mw.util.escapeIdForLink( anchor );
 	}

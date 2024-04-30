@@ -95,7 +95,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 
 			var languageCodes = ( type === 'filter' ) ?
 				variantInfo.filter.l : [ variantInfo.name.t ];
-			languageCodes.forEach( function ( code ) {
+			languageCodes.forEach( ( code ) => {
 				var name = ve.init.platform.getLanguageName( code.toLowerCase() );
 				if ( !name ) {
 					name = ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label' );
@@ -123,7 +123,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-text-to-label' )
 				) );
 
-			variantInfo.oneway.forEach( function ( item ) {
+			variantInfo.oneway.forEach( ( item ) => {
 				// Safe HTML from the parser
 				// eslint-disable-next-line no-jquery/no-html
 				var $fromText = $( '<td>' ).html( item.f ),
@@ -153,7 +153,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 					ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label' )
 				) );
 
-			variantInfo.twoway.forEach( function ( item ) {
+			variantInfo.twoway.forEach( ( item ) => {
 				var code = item.l,
 					name = ve.init.platform.getLanguageName( code.toLowerCase() ),
 					// eslint-disable-next-line no-jquery/no-html
@@ -182,7 +182,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 		$body.append( $table );
 	}
 	// Show "extra" properties, like describe, title, etc.
-	[ 'describe', 'title', 'hidden' ].forEach( function ( flag ) {
+	[ 'describe', 'title', 'hidden' ].forEach( ( flag ) => {
 		var f = ( flag === 'hidden' ) ? isHidden : variantInfo[ flag ];
 		if ( f ) {
 			// The following messages can be used here:
@@ -209,7 +209,7 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.getCommand = function () {
 
 ve.ui.contextItemFactory.register( ve.ui.MWLanguageVariantNodeContextItem );
 
-[ 'disabled', 'filter', 'name', 'twoway', 'oneway' ].forEach( function ( type ) {
+[ 'disabled', 'filter', 'name', 'twoway', 'oneway' ].forEach( ( type ) => {
 	ve.ui.commandRegistry.register(
 		new ve.ui.Command(
 			'mwLanguageVariant-' + type, 'window', 'open',

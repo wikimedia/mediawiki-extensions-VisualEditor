@@ -40,7 +40,7 @@ ve.ui.MWPreviewElement.prototype.beforeAppend = function ( element ) {
 
 	// Remove any TemplateStyles stylesheets already present on the page, to avoid
 	// very slow repaints (T330781)
-	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]' ), function ( style ) {
+	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]' ), ( style ) => {
 		var key = style.getAttribute( 'data-mw-deduplicate' );
 
 		var duplicate = element.querySelector( 'style[data-mw-deduplicate="' + key + '"]' );

@@ -123,7 +123,7 @@ ve.init.mw.Platform.prototype.getUserConfig = function ( keys ) {
 	if ( Array.isArray( keys ) ) {
 		var values = mw.user.options.get( keys );
 		var parsedValues = {};
-		Object.keys( values ).forEach( function ( value ) {
+		Object.keys( values ).forEach( ( value ) => {
 			try {
 				parsedValues[ value ] = JSON.parse( values[ value ] );
 			} catch ( e ) {
@@ -161,7 +161,7 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 		}
 		// JSON encode all the values for API storage
 		var jsonValues = {};
-		Object.keys( keyOrValueMap ).forEach( function ( key ) {
+		Object.keys( keyOrValueMap ).forEach( ( key ) => {
 			jsonValues[ key ] = JSON.stringify( keyOrValueMap[ key ] );
 		} );
 		ve.init.target.getLocalApi().saveOptions( jsonValues );
@@ -249,7 +249,7 @@ ve.init.mw.Platform.prototype.getUserLanguages = mw.language.getFallbackLanguage
  */
 ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 	var platform = this;
-	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( function () {
+	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( () => {
 		var specialCharacterGroups = require( 'mediawiki.language.specialCharacters' ),
 			characters = {},
 			otherGroupName = mw.msg( 'visualeditor-special-characters-group-other' ),
@@ -272,10 +272,10 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 		}
 
 		// eslint-disable-next-line no-jquery/no-each-util
-		$.each( specialCharacterGroups, function ( groupName, groupCharacters ) {
+		$.each( specialCharacterGroups, ( groupName, groupCharacters ) => {
 			var groupObject = {}; // button label => character data to insert
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( groupCharacters, function ( charKey, charVal ) {
+			$.each( groupCharacters, ( charKey, charVal ) => {
 				var key, val;
 				// VE has a different format and it would be a pain to change it now
 				if ( typeof charVal === 'string' ) {

@@ -201,14 +201,14 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 
 		// The scroll back up must be after a delay, otherwise no scrolling happens and the
 		// viewports are not aligned.
-		setTimeout( function () {
+		setTimeout( () => {
 			// Scroll back up
 			$overlaySurface.css( 'transform', '' );
 			window.scroll( scrollX, scrollY );
 
 			// Animate toolbar sliding into view
 			$header.addClass( 'toolbar-shown' ).css( 'transform', '' );
-			setTimeout( function () {
+			setTimeout( () => {
 				$header.addClass( 'toolbar-shown-done' );
 				// Wait until the animation is done before allowing this event handler to trigger again
 				target.toolbarAnimating = false;
@@ -348,7 +348,7 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
 	var dataPromise;
 	if ( modified ) {
-		dataPromise = this.getWikitextDataPromiseForDoc( modified ).then( function ( response ) {
+		dataPromise = this.getWikitextDataPromiseForDoc( modified ).then( ( response ) => {
 			var content = ve.getProp( response, 'visualeditoredit', 'content' );
 			return { text: content };
 		} );

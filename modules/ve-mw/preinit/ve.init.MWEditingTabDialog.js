@@ -61,7 +61,7 @@ mw.libs.ve.EditingTabDialog.static.actions = [
  */
 mw.libs.ve.EditingTabDialog.prototype.getSetupProcess = function ( action ) {
 	return mw.libs.ve.EditingTabDialog.super.prototype.getSetupProcess.call( this, action )
-		.next( function () {
+		.next( () => {
 			// Same as ve.init.target.getLocalApi()
 			new mw.Api().saveOption( 'visualeditor-hidetabdialog', 1 );
 			mw.user.options.set( 'visualeditor-hidetabdialog', 1 );
@@ -80,7 +80,7 @@ mw.libs.ve.EditingTabDialog.prototype.getActionProcess = function ( action ) {
 			dialog.pushPending();
 
 			// Same as ve.init.target.getLocalApi()
-			new mw.Api().saveOption( 'visualeditor-tabs', action ).done( function () {
+			new mw.Api().saveOption( 'visualeditor-tabs', action ).done( () => {
 				actionWidget.popPending();
 				mw.user.options.set( 'visualeditor-tabs', action );
 				dialog.close( { action: action } );

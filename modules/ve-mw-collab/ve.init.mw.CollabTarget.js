@@ -63,9 +63,7 @@ ve.init.mw.CollabTarget.static.toolbarGroups.splice( 4, 0, {
 	include: [ 'commentAnnotation' ]
 } );
 // HACK: Disable references until supported (T194838)
-ve.init.mw.CollabTarget.static.toolbarGroups = ve.init.mw.CollabTarget.static.toolbarGroups.filter( function ( group ) {
-	return group.name !== 'reference';
-} );
+ve.init.mw.CollabTarget.static.toolbarGroups = ve.init.mw.CollabTarget.static.toolbarGroups.filter( ( group ) => group.name !== 'reference' );
 ve.init.mw.CollabTarget.static.toolbarGroups.push(
 	{
 		name: 'help',
@@ -173,7 +171,7 @@ ve.ui.MWExportTool.static.name = 'export';
 ve.ui.MWExportTool.static.displayBothIconAndLabel = !OO.ui.isMobile();
 ve.ui.MWExportTool.static.group = 'export';
 ve.ui.MWExportTool.static.autoAddToCatchall = false;
-// eslint-disable-next-line es-x/no-regexp-prototype-flags
+
 ve.ui.MWExportTool.static.flags = [ 'progressive', 'primary' ];
 ve.ui.MWExportTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-rebase-client-export-start' );

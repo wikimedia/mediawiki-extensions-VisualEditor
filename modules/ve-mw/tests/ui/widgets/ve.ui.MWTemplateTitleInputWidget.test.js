@@ -178,7 +178,7 @@
 						{ from: '', to: 'A', index: 0 }
 					]
 				} } )
-				.promise( { abort: function () {} } )
+				.promise( { abort: () => {} } )
 			)
 			.onSecondCall().returns( ve.createDeferred()
 				.resolve( { query: { pages: [

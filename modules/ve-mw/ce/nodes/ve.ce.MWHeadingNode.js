@@ -56,7 +56,7 @@ ve.ce.MWHeadingNode.prototype.onUpdate = function () {
 	ve.ce.MWHeadingNode.super.prototype.onUpdate.call( this );
 
 	if ( surface && surface.mwTocWidget ) {
-		surface.getModel().getDocument().once( 'transact', function () {
+		surface.getModel().getDocument().once( 'transact', () => {
 			surface.mwTocWidget.updateNode( node );
 		} );
 	}
@@ -66,7 +66,7 @@ ve.ce.MWHeadingNode.prototype.rebuildToc = function () {
 	var surface = this.surface;
 
 	if ( surface && surface.mwTocWidget ) {
-		surface.getModel().getDocument().once( 'transact', function () {
+		surface.getModel().getDocument().once( 'transact', () => {
 			surface.mwTocWidget.rebuild();
 		} );
 	}

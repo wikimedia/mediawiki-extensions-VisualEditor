@@ -210,7 +210,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkInputEnter = function () {
 		this.executeAction( 'done' );
 	}
 	this.annotationInput.getTextInputWidget().getValidity()
-		.done( function () {
+		.done( () => {
 			inspector.executeAction( 'done' );
 		} );
 };
@@ -234,7 +234,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
 
 	// Once we toggle the visibility of the ActionWidget, we can't filter
 	// it with `get` any more.  So we have to use `forEach`:
-	this.actions.forEach( null, function ( action ) {
+	this.actions.forEach( null, ( action ) => {
 		if ( action.getAction() === 'convert' ) {
 			if ( msg ) {
 				// The following messages are used here:
@@ -286,10 +286,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 
 	this.internalAnnotationInput.getTextInputWidget().getValidity()
 		.then(
-			function () {
+			() => {
 				inspector.internalAnnotationField.setErrors( [] );
 				inspector.updateSize();
-			}, function () {
+			}, () => {
 				inspector.internalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-illegal-title' ) ] );
 				inspector.updateSize();
 			}
@@ -307,10 +307,10 @@ ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkInputChange = function (
 
 	this.externalAnnotationInput.getTextInputWidget().getValidity()
 		.then(
-			function () {
+			() => {
 				inspector.externalAnnotationField.setErrors( [] );
 				inspector.updateSize();
-			}, function () {
+			}, () => {
 				inspector.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-invalid-external' ) ] );
 				inspector.updateSize();
 			}
@@ -395,9 +395,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 				var annotations = fragment.getDocument().data
 					.getAnnotationsFromRange( selection.getRange() )
 					// Remove link annotations
-					.filter( function ( annotation ) {
-						return !/^link/.test( annotation.name );
-					} );
+					.filter( ( annotation ) => !/^link/.test( annotation.name ) );
 				var linearData = new ve.dm.ElementLinearData( annotations.store, [
 					{
 						type: 'link/mwMagic',

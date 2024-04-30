@@ -120,7 +120,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 	this.$items = $( '<div>' ).addClass( 've-ui-mwNoticesPopupTool-items' );
 	this.noticeItems = [];
 
-	notices.forEach( function ( item ) {
+	notices.forEach( ( item ) => {
 		// eslint-disable-next-line no-jquery/no-html
 		var $element = $( '<div>' )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )

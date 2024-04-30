@@ -77,10 +77,8 @@ ve.ui.MWNumberedExternalLinkNodeContextItem.prototype.onLabelButtonClick = funct
 	surfaceModel.change(
 		ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 	);
-	setTimeout( function () {
-		surfaceView.selectAnnotation( function ( view ) {
-			return view.model instanceof ve.dm.MWExternalLinkAnnotation;
-		} );
+	setTimeout( () => {
+		surfaceView.selectAnnotation( ( view ) => view.model instanceof ve.dm.MWExternalLinkAnnotation );
 	} );
 };
 

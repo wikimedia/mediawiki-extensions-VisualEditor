@@ -133,10 +133,8 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 				surfaceModel.change(
 					ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )
 				);
-				setTimeout( function () {
-					surfaceView.selectAnnotation( function ( view ) {
-						return view.model instanceof ve.dm.MWExternalLinkAnnotation;
-					} );
+				setTimeout( () => {
+					surfaceView.selectAnnotation( ( view ) => view.model instanceof ve.dm.MWExternalLinkAnnotation );
 				} );
 			} else {
 				surfaceModel.change(

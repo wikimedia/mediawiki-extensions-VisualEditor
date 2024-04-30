@@ -93,10 +93,10 @@ ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
 	var widgetList = [];
 
 	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( this.bookletLayout.pages, function ( pageName, page ) {
+	$.each( this.bookletLayout.pages, ( pageName, page ) => {
 		var fieldsets = page.getFieldsets();
-		fieldsets.forEach( function ( fieldset, fieldsetIndex ) {
-			fieldset.items.forEach( function ( item, itemIndex ) {
+		fieldsets.forEach( ( fieldset, fieldsetIndex ) => {
+			fieldset.items.forEach( ( item, itemIndex ) => {
 				var widget = item.fieldWidget;
 				// we can recheck the value
 				widgetList.push( {
@@ -118,7 +118,7 @@ ve.ui.MWMetaDialog.prototype.assignEvents = function () {
 	var widgetList = this.getAllWidgets(),
 		dialog = this;
 
-	widgetList.forEach( function ( value ) {
+	widgetList.forEach( ( value ) => {
 		value.widget.connect( dialog, {
 			change: 'updateActions',
 			select: 'updateActions'
@@ -157,9 +157,9 @@ ve.ui.MWMetaDialog.prototype.extractSettings = function () {
 	var ret = [],
 		dialog = this; // return value
 
-	this.widgetList.forEach( function ( value ) {
+	this.widgetList.forEach( ( value ) => {
 		if ( value.hasChildren ) {
-			value.widget.items.forEach( function ( item, index ) {
+			value.widget.items.forEach( ( item, index ) => {
 				ret.push( {
 					name: item.name + '/' + index,
 					value: dialog.extractValue( item )
@@ -207,7 +207,7 @@ ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
 	}
 
 	return ve.ui.MWMetaDialog.super.prototype.getActionProcess.call( this, action )
-		.next( function () {
+		.next( () => {
 			surfaceModel.popStaging();
 		}, this );
 };
@@ -225,7 +225,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 				visualOnlyPages = [ 'categories', 'settings', 'advancedSettings', 'languages' ],
 				isSource = ve.init.target.getSurface().getMode() === 'source';
 
-			visualOnlyPages.forEach( function ( page ) {
+			visualOnlyPages.forEach( ( page ) => {
 				selectWidget.findItemFromData( page ).setDisabled( isSource );
 			} );
 

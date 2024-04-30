@@ -222,7 +222,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				}
 
 				// Fix selection after annotating is complete
-				fragment.getPending().then( function () {
+				fragment.getPending().then( () => {
 					if ( insert ) {
 						fragment.collapseToEnd().select();
 					} else {

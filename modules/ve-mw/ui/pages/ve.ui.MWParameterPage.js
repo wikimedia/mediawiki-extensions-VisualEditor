@@ -248,12 +248,10 @@ ve.ui.MWParameterPage.prototype.createValueInput = function () {
 	) {
 		valueInputConfig.menu = { filterFromInput: true, highlightOnFilter: true };
 		valueInputConfig.options =
-			this.parameter.getSuggestedValues().filter( function ( suggestedValue ) {
+			this.parameter.getSuggestedValues().filter(
 				// This wasn't validated for a while, existing templates can do anything here
-				return typeof suggestedValue === 'string';
-			} ).map( function ( suggestedValue ) {
-				return { data: suggestedValue, label: suggestedValue || '\xA0' };
-			} );
+				( suggestedValue ) => typeof suggestedValue === 'string'
+			).map( ( suggestedValue ) => ( { data: suggestedValue, label: suggestedValue || '\xA0' } ) );
 		return new OO.ui.ComboBoxInputWidget( valueInputConfig );
 	} else if ( type !== 'line' || value.indexOf( '\n' ) !== -1 ) {
 		// If the type is line, but there are already newlines in the provided

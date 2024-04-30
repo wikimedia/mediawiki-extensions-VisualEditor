@@ -105,8 +105,8 @@ ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 
 	ve.ui.MWTransclusionContextItem.super.prototype.onEditButtonClick.apply( this, arguments );
 
-	this.context.getSurface().getDialogs().once( 'opening', function ( win, opening ) {
-		opening.then( function () {
+	this.context.getSurface().getDialogs().once( 'opening', ( win, opening ) => {
+		opening.then( () => {
 			contextItem.toggleLoadingVisualization( false );
 		} );
 	} );

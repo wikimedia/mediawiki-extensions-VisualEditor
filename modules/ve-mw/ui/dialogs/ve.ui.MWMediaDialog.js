@@ -708,7 +708,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 
 	// Call for a bigger image
 	this.fetchThumbnail( imageTitleText, newDimensions )
-		.done( function ( thumburl ) {
+		.done( ( thumburl ) => {
 			if ( thumburl ) {
 				$image.prop( 'src', thumburl );
 			}
@@ -757,7 +757,7 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 		params.iiurlheight = dimensions.height;
 	}
 	return ve.init.target.getContentApi( this.getFragment().getDocument() ).get( params )
-		.then( function ( response ) {
+		.then( ( response ) => {
 			var thumburl = ve.getProp( response.query.pages[ 0 ], 'imageinfo', 0, 'thumburl' );
 			// Cache
 			dialog.searchCache[ imageName ] = thumburl;

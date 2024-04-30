@@ -235,7 +235,7 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		// Fix relative or missing base URL if needed
 		this.fixBase( doc );
 		// Test: Remove tags injected by plugins during parse (T298147)
-		Array.prototype.forEach.call( doc.querySelectorAll( 'script' ), function ( element ) {
+		Array.prototype.forEach.call( doc.querySelectorAll( 'script' ), ( element ) => {
 			function truncate( text, l ) {
 				return text.length > l ? text.slice( 0, l ) + '…' : text;
 			}
@@ -307,9 +307,7 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 		// Reset to visual mode for target widgets
 		modes: [ 'visual' ],
 		defaultMode: 'visual',
-		toolbarGroups: this.toolbarGroups.filter( function ( group ) {
-			return group.align !== 'after';
-		} ),
+		toolbarGroups: this.toolbarGroups.filter( ( group ) => group.align !== 'after' ),
 		surfaceClasses: this.getSurfaceClasses()
 	}, config ) );
 };
@@ -355,7 +353,7 @@ ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
  */
 ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
 	var target = this;
-	setTimeout( function () {
+	setTimeout( () => {
 		// Build model
 		target.track( 'trace.convertModelFromDom.enter' );
 		var dmDoc = target.constructor.static.createModelFromDom( doc, target.getDefaultMode() );
@@ -366,7 +364,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
 		dmDoc.buildNodeTree();
 		target.track( 'trace.buildModelTree.exit' );
 
-		setTimeout( function () {
+		setTimeout( () => {
 			target.addSurface( dmDoc );
 		} );
 	} );
@@ -395,7 +393,7 @@ ve.init.mw.Target.prototype.addSurface = function () {
 
 	this.setSurface( surface );
 
-	setTimeout( function () {
+	setTimeout( () => {
 		// Initialize surface
 		target.track( 'trace.initializeSurface.enter' );
 
@@ -479,7 +477,7 @@ ve.init.mw.Target.prototype.initAutosave = function ( config ) {
 			this.storeDocState( this.originalHtml );
 		} else {
 			// Only store after the first change if this is an unmodified document
-			surfaceModel.once( 'undoStackChange', function () {
+			surfaceModel.once( 'undoStackChange', () => {
 				// Check the surface hasn't been destroyed
 				if ( target.getSurface() ) {
 					target.storeDocState( target.originalHtml );
@@ -535,7 +533,7 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
 	return this.getContentApi( doc ).get( {
 		action: 'query',
 		meta: 'userinfo'
-	} ).then( function ( data ) {
+	} ).then( ( data ) => {
 		var userInfo = data.query && data.query.userinfo;
 
 		if ( userInfo.anon !== undefined ) {
@@ -594,7 +592,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
 		{ contentType: 'multipart/form-data' }
 	);
 
-	return xhr.then( function ( response ) {
+	return xhr.then( ( response ) => {
 		if ( response.visualeditoredit ) {
 			return response.visualeditoredit.content;
 		}
@@ -633,7 +631,7 @@ ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, do
 	}
 
 	return tempUserNamePromise
-		.then( function () {
+		.then( () => {
 			if ( aborted ) {
 				return abortedPromise;
 			}

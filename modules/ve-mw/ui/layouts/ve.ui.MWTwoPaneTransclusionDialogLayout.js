@@ -172,7 +172,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( sho
 		// HACK: Kill dumb scrollbars when the sidebar stops animating, see T161798.
 		// Only necessary when outline controls are present, delay matches transition on
 		// `.oo-ui-menuLayout-menu`.
-		setTimeout( function () {
+		setTimeout( () => {
 			OO.ui.Element.static.reconsiderScrollbars( self.outlinePanel.$element[ 0 ] );
 		}, OO.ui.theme.getDialogTransitionDuration() );
 	}
@@ -278,7 +278,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 		isCurrentPageRemoved = false,
 		prevSelectionCandidate, nextSelectionCandidate;
 
-	this.stackLayout.getItems().forEach( function ( page ) {
+	this.stackLayout.getItems().forEach( ( page ) => {
 		var pageName = page.getName();
 
 		if ( pagesNamesToRemove.indexOf( pageName ) !== -1 ) {
