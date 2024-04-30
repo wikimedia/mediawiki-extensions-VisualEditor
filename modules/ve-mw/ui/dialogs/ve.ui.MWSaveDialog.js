@@ -89,30 +89,35 @@ ve.ui.MWSaveDialog.static.actions = [
 /* Events */
 
 /**
+ * Emitted when the user clicks the save button
+ *
  * @event ve.ui.MWSaveDialog#save
  * @param {jQuery.Deferred} saveDeferred Deferred object to resolve/reject when the save
  *  succeeds/fails.
- * Emitted when the user clicks the save button
  */
 
 /**
- * @event ve.ui.MWSaveDialog#review
  * Emitted when the user clicks the review changes button
+ *
+ * @event ve.ui.MWSaveDialog#review
  */
 
 /**
- * @event ve.ui.MWSaveDialog#preview
  * Emitted when the user clicks the show preview button
+ *
+ * @event ve.ui.MWSaveDialog#preview
  */
 
 /**
- * @event ve.ui.MWSaveDialog#resolve
  * Emitted when the user clicks the resolve conflict button
+ *
+ * @event ve.ui.MWSaveDialog#resolve
  */
 
 /**
- * @event ve.ui.MWSaveDialog#retry
  * Emitted when the user clicks the retry/continue save button after an error.
+ *
+ * @event ve.ui.MWSaveDialog#retry
  */
 
 /* Methods */

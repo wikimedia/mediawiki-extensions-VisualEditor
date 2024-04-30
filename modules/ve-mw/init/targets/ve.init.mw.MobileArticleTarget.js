@@ -6,7 +6,7 @@
  */
 
 /**
- * @external VisualEditorOverlay
+ * @external mw.mobileFrontend.VisualEditorOverlay
  */
 
 /**
@@ -16,7 +16,7 @@
  * @extends ve.init.mw.ArticleTarget
  *
  * @constructor
- * @param {VisualEditorOverlay} overlay Mobile frontend overlay
+ * @param {mw.mobileFrontend.VisualEditorOverlay} overlay Mobile frontend overlay
  * @param {Object} [config] Configuration options
  * @cfg {Object} [toolbarConfig]
  * @cfg {string|null} [section] Number of the section target should scroll to

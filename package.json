@@ -31,7 +31,7 @@
 		"grunt-tyops": "0.1.1",
 		"jsdoc": "4.0.2",
 		"jsdoc-class-hierarchy": "1.1.2",
-		"jsdoc-wmf-theme": "0.0.12",
+		"jsdoc-wmf-theme": "1.0.0",
 		"jimp": "0.13.0",
 		"mocha": "5.2.0",
 		"selenium-webdriver": "3.6.0",

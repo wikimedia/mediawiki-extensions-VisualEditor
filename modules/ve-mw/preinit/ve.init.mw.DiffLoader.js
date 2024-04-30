@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/* global ve */
+
 /**
  * Diff loader.
  *
@@ -19,10 +21,6 @@
 
 	mw.libs.ve.diffLoader = {
 		/**
-		 * @external ve
-		 */
-
-		/**
 		 * Get a ve.dm.Document model from a Parsoid response
 		 *
 		 * @param {Object} response Parsoid response from the VisualEditor API
@@ -31,7 +29,6 @@
 		 */
 		getModelFromResponse: function ( response, section ) {
 			// This method is only called after actually loading these, see `parseDocumentModulePromise`
-			// eslint-disable-next-line no-undef
 			var targetClass = ve.init.mw.ArticleTarget,
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
@@ -101,7 +98,6 @@
 				// We may want to remove that assumption from the differ?
 				newDoc.getStore().merge( oldDoc.getStore() );
 				return function () {
-					// eslint-disable-next-line no-undef
 					return new ve.dm.VisualDiff( oldDoc, newDoc );
 				};
 			} );

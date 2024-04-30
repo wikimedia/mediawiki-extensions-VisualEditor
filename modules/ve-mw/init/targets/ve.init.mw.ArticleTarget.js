@@ -147,8 +147,9 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
  */
 
 /**
- * @event ve.init.mw.ArticleTarget#serializeComplete
  * Fired when serialization is complete
+ *
+ * @event ve.init.mw.ArticleTarget#serializeComplete
  */
 
 /* Static Properties */

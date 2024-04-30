@@ -174,23 +174,27 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
  */
 
 /**
- * @event ve.init.mw.DesktopArticleTarget#saveWorkflowBegin
  * Fired when user clicks the button to open the save dialog.
+ *
+ * @event ve.init.mw.DesktopArticleTarget#saveWorkflowBegin
  */
 
 /**
- * @event ve.init.mw.DesktopArticleTarget#saveWorkflowEnd
  * Fired when user exits the save workflow
+ *
+ * @event ve.init.mw.DesktopArticleTarget#saveWorkflowEnd
  */
 
 /**
- * @event ve.init.mw.DesktopArticleTarget#saveReview
  * Fired when user initiates review changes in save workflow
+ *
+ * @event ve.init.mw.DesktopArticleTarget#saveReview
  */
 
 /**
- * @event ve.init.mw.DesktopArticleTarget#saveInitiated
  * Fired when user initiates saving of the document
+ *
+ * @event ve.init.mw.DesktopArticleTarget#saveInitiated
  */
 
 /* Methods */
