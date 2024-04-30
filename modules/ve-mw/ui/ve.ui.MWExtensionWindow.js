@@ -163,7 +163,9 @@ ve.ui.MWExtensionWindow.prototype.updateActions = function () {
 };
 
 /**
- * Check if mwData would be modified if window contents were applied
+ * Check if mwData would be modified if window contents were applied.
+ * This is used to determine if it's meaningful for the user to save the
+ * contents into the document; this is likely true of newly-created elements.
  *
  * @return {boolean} mwData would be modified
  */
@@ -177,6 +179,40 @@ ve.ui.MWExtensionWindow.prototype.isModified = function () {
 		modified = true;
 	}
 	return modified;
+};
+
+/**
+ * Check if mwData has meaningful edits. This is used to determine if it's
+ * meaningful to warn the user before closing the dialog without saving. Unlike
+ * `isModified()` above, we consider a newly-created but unmodified element to
+ * be non-meaningful because the user can simply re-open the dialog to restore
+ * their state.
+ *
+ * @return {boolean} mwData would contain new user input
+ */
+ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
+	var mwDataBaseline;
+	if ( this.originalMwData ) {
+		mwDataBaseline = this.originalMwData;
+	} else {
+		mwDataBaseline = this.getNewElement().attributes.mw;
+	}
+	var mwDataCopy = ve.copy( mwDataBaseline );
+	this.updateMwData( mwDataCopy );
+
+	// We have some difficulty here. `updateMwData()` in this class calls on
+	// `this.input.getValueAndWhitespace()`. The 'and whitespace' means that
+	// we cannot directly compare a new element's mwData with a newly-opened
+	// dialog's mwData because it may have additional newlines.
+	// We don't want to touch `this.input` or `prototype.updateMwData` because
+	// they're overridden in subclasses. Therefore, we consider whitespace-only
+	// changes to a new element to be non-meaningful too.
+	var changed = OO.getProp( mwDataCopy, 'body', 'extsrc' );
+	if ( changed !== undefined ) {
+		OO.setProp( mwDataCopy, 'body', 'extsrc', changed.trim() );
+	}
+
+	return !ve.compare( mwDataBaseline, mwDataCopy );
 };
 
 /**
