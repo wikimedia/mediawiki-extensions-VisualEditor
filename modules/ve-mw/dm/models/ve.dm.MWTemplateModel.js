@@ -73,7 +73,8 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  *
  * @param {ve.dm.MWTransclusionModel} transclusion Transclusion template is in
  * @param {Object} data Template data
- * @param {Object.<string,{wt:string}>} data.params
+ * @param {Object} data.params
+ * @param {string} data.params.wt Wikitext
  * @return {ve.dm.MWTemplateModel} New template model
  */
 ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {

@@ -46,6 +46,8 @@
 			"linkMap": {
 				"Mixed": "#",
 
+				"VisualEditorOverlay": "https://doc.wikimedia.org/MobileFrontend/master/js/js/VisualEditorOverlay.html",
+
 				"Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
 				"Error": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
 				"Object": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -57,6 +59,7 @@
 				"Event": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
 				"HTMLDocument": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLDocument",
 				"HTMLElement": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement",
+				"KeyboardEvent": "https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent",
 				"MutationRecord": "https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord",
 				"Node": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
 				"NodeList": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",

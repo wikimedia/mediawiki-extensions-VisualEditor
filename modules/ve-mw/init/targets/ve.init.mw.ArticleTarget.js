@@ -106,6 +106,22 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
  */
 
 /**
+ * @event ve.init.mw.ArticleTarget#savePreview
+ */
+
+/**
+ * @event ve.init.mw.ArticleTarget#saveReview
+ */
+
+/**
+ * @event ve.init.mw.ArticleTarget#saveInitiated
+ */
+
+/**
+ * @event ve.init.mw.ArticleTarget#saveWorkflowBegin
+ */
+
+/**
  * @event ve.init.mw.ArticleTarget#showChanges
  */
 
