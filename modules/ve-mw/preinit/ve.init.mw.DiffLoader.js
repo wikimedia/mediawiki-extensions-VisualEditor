@@ -10,6 +10,7 @@
  *
  * @class mw.libs.ve.diffLoader
  * @singleton
+ * @hideconstructor
  */
 ( function () {
 	var revCache = {};
@@ -17,10 +18,8 @@
 	mw.libs.ve = mw.libs.ve || {};
 
 	mw.libs.ve.diffLoader = {
-
 		/**
-		 * @class ve
-		 * TODO: Use @-external when we switch to JSDoc
+		 * @external ve
 		 */
 
 		/**

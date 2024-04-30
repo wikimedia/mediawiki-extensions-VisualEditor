@@ -16,10 +16,6 @@
 /**
  * Platform preparation for the MediaWiki view page. This loads (when user needs it) the
  * actual MediaWiki integration and VisualEditor library.
- *
- * @class mw.libs.ve
- * @alias ve.init.mw.DesktopArticleTarget.init
- * @singleton
  */
 ( function () {
 	var conf, tabMessages, url, pageExists, viewUrl, veEditUrl, veEditSourceUrl,

@@ -12,6 +12,7 @@
  *
  * @class mw.libs.ve.targetSaver
  * @singleton
+ * @hideconstructor
  */
 ( function () {
 	mw.libs.ve = mw.libs.ve || {};

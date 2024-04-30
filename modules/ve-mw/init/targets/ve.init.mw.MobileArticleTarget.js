@@ -6,8 +6,7 @@
  */
 
 /**
- * @class VisualEditorOverlay
- * TODO: Use @-external when we switch to JSDoc
+ * @external VisualEditorOverlay
  */
 
 /**

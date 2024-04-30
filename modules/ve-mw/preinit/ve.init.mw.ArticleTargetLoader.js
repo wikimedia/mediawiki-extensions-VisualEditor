@@ -16,6 +16,7 @@
  *
  * @class mw.libs.ve.targetLoader
  * @singleton
+ * @hideconstructor
  */
 ( function () {
 	var conf = mw.config.get( 'wgVisualEditorConfig' ),
