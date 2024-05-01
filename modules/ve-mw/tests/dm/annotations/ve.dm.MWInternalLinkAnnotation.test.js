@@ -245,7 +245,7 @@ QUnit.test( 'getFragment', ( assert ) => {
 			}
 		];
 
-	for ( let i = 0; i < cases.length; i++ ) {
-		assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( cases[ i ].original ), cases[ i ].expected, cases[ i ].msg );
-	}
+	cases.forEach( ( caseItem ) => {
+		assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( caseItem.original ), caseItem.expected, caseItem.msg );
+	} );
 } );

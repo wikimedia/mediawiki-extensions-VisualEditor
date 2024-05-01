@@ -68,15 +68,15 @@ QUnit.test( 'convert (MW-specific types)', ( assert ) => {
 			}
 		];
 
-	for ( let i = 0; i < cases.length; i++ ) {
+	cases.forEach( ( caseItem ) => {
 		ve.test.utils.runActionTest(
-			'format', assert, cases[ i ].html || ve.dm.example.isolationHtml, false, 'convert',
-			[ cases[ i ].type, cases[ i ].attributes ], cases[ i ].rangeOrSelection, cases[ i ].msg,
+			'format', assert, caseItem.html || ve.dm.example.isolationHtml, false, 'convert',
+			[ caseItem.type, caseItem.attributes ], caseItem.rangeOrSelection, caseItem.msg,
 			{
-				expectedData: cases[ i ].expectedData,
-				expectedRangeOrSelection: cases[ i ].expectedRangeOrSelection,
-				undo: cases[ i ].undo
+				expectedData: caseItem.expectedData,
+				expectedRangeOrSelection: caseItem.expectedRangeOrSelection,
+				undo: caseItem.undo
 			}
 		);
-	}
+	} );
 } );
