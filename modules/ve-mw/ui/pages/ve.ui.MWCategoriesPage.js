@@ -230,8 +230,6 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, 
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config ) {
-	var page = this;
-
 	this.fragment = fragment;
 	this.fragment.getDocument().getMetaList().connect( this, {
 		insert: 'onMetaListInsert',
@@ -242,7 +240,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config ) {
 
 	this.categoryWidget.setFragment( fragment );
 	var promise = this.categoryWidget.addItems( this.getCategoryItems() ).then( () => {
-		page.categoryWidget.setDisabled( config.isReadOnly );
+		this.categoryWidget.setDisabled( config.isReadOnly );
 	} );
 
 	this.defaultSortInput.setValue(
@@ -252,7 +250,7 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config ) {
 
 	// Update input position after transition
 	setTimeout( () => {
-		page.categoryWidget.fitInput();
+		this.categoryWidget.fitInput();
 	}, OO.ui.theme.getDialogTransitionDuration() );
 
 	return promise;

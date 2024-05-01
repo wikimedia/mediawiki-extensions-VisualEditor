@@ -109,8 +109,7 @@ ve.ui.MWCategoryWidget.prototype.setFragment = function ( fragment ) {
  * @param {OO.ui.MenuOptionWidget} item Selected item
  */
 ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
-	var value = item.getData(),
-		widget = this;
+	var value = item.getData();
 
 	if ( value && value !== '' ) {
 		// Add new item
@@ -118,11 +117,11 @@ ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 		this.queryCategoryStatus( [ categoryItem.name ] ).done( () => {
 			// Remove existing items by name
 			var toRemove = mw.Title.newFromText( categoryItem.name ).getMainText();
-			if ( Object.prototype.hasOwnProperty.call( widget.categories, toRemove ) ) {
-				widget.fragment.removeMeta( widget.categories[ toRemove ].metaItem );
+			if ( Object.prototype.hasOwnProperty.call( this.categories, toRemove ) ) {
+				this.fragment.removeMeta( this.categories[ toRemove ].metaItem );
 			}
-			categoryItem.name = widget.normalizedTitles[ categoryItem.name ];
-			widget.emit( 'newCategory', categoryItem );
+			categoryItem.name = this.normalizedTitles[ categoryItem.name ];
+			this.emit( 'newCategory', categoryItem );
 		} );
 	}
 };
@@ -299,19 +298,17 @@ ve.ui.MWCategoryWidget.prototype.getCategories = function () {
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames ) {
-	var widget = this;
-
 	// Get rid of any we already know the hidden status of, or have an entry
 	// if normalizedTitles (i.e. have been fetched before)
 	var categoryNamesToQuery = categoryNames.filter( ( name ) => {
 		var cacheEntry;
-		if ( widget.normalizedTitles[ name ] ) {
+		if ( this.normalizedTitles[ name ] ) {
 			return false;
 		}
 		cacheEntry = ve.init.platform.linkCache.getCached( name );
 		if ( cacheEntry && cacheEntry.hidden ) {
 			// As we aren't doing an API request for this category, mark it in the cache.
-			widget.normalizedTitles[ name ] = name;
+			this.normalizedTitles[ name ] = name;
 			return false;
 		}
 		return true;
@@ -344,7 +341,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 			}
 			if ( result && result.query && result.query.redirects ) {
 				result.query.redirects.forEach( ( redirectInfo ) => {
-					widget.categoryRedirects[ redirectInfo.from ] = redirectInfo.to;
+					this.categoryRedirects[ redirectInfo.from ] = redirectInfo.to;
 				} );
 			}
 			ve.init.platform.linkCache.set( linkCacheUpdate );
@@ -356,7 +353,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 			}
 
 			categoryNames.forEach( ( name ) => {
-				widget.normalizedTitles[ name ] = normalizedTitles[ name ] || name;
+				this.normalizedTitles[ name ] = normalizedTitles[ name ] || name;
 			} );
 		} ) );
 		index += batchSize;
@@ -376,8 +373,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 	var categoryItems = [],
 		existingCategoryItems = [],
 		// eslint-disable-next-line no-jquery/no-map-util
-		categoryNames = $.map( items, ( item ) => item.name ),
-		widget = this;
+		categoryNames = $.map( items, ( item ) => item.name );
 
 	return this.queryCategoryStatus( categoryNames ).then( () => {
 		var config;
@@ -386,7 +382,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 		};
 
 		items.forEach( ( item ) => {
-			item.name = widget.normalizedTitles[ item.name ];
+			item.name = this.normalizedTitles[ item.name ];
 
 			var itemTitle = new mw.Title( item.name, mw.config.get( 'wgNamespaceIds' ).category );
 			// Create a widget using the item data
@@ -394,46 +390,46 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 				item: item
 			};
 			var cachedData;
-			if ( Object.prototype.hasOwnProperty.call( widget.categoryRedirects, itemTitle.getPrefixedText() ) ) {
+			if ( Object.prototype.hasOwnProperty.call( this.categoryRedirects, itemTitle.getPrefixedText() ) ) {
 				config.redirectTo = new mw.Title(
-					widget.categoryRedirects[ itemTitle.getPrefixedText() ],
+					this.categoryRedirects[ itemTitle.getPrefixedText() ],
 					mw.config.get( 'wgNamespaceIds' ).category
 				).getMainText();
-				cachedData = ve.init.platform.linkCache.getCached( widget.categoryRedirects[ itemTitle.getPrefixedText() ] );
+				cachedData = ve.init.platform.linkCache.getCached( this.categoryRedirects[ itemTitle.getPrefixedText() ] );
 			} else {
 				cachedData = ve.init.platform.linkCache.getCached( item.name );
 			}
 			config.hidden = cachedData.hidden;
 			config.missing = cachedData.missing;
-			config.disabled = widget.disabled;
+			config.disabled = this.disabled;
 
 			var categoryItem = new ve.ui.MWCategoryItemWidget( config );
-			categoryItem.connect( widget, {
+			categoryItem.connect( this, {
 				togglePopupMenu: 'onTogglePopupMenu'
 			} );
 
 			// Index item
-			widget.categories[ itemTitle.getMainText() ] = categoryItem;
+			this.categories[ itemTitle.getMainText() ] = categoryItem;
 			// Copy sortKey from old item when "moving"
-			existingCategoryItems = widget.items.filter( checkValueMatches );
+			existingCategoryItems = this.items.filter( checkValueMatches );
 			if ( existingCategoryItems.length ) {
 				// There should only be one element in existingCategoryItems
 				categoryItem.sortKey = existingCategoryItems[ 0 ].sortKey;
-				widget.removeItems( [ existingCategoryItems[ 0 ] ] );
+				this.removeItems( [ existingCategoryItems[ 0 ] ] );
 			}
 
 			categoryItems.push( categoryItem );
 		} );
 
-		OO.ui.mixin.DraggableGroupElement.prototype.addItems.call( widget, categoryItems, index );
+		OO.ui.mixin.DraggableGroupElement.prototype.addItems.call( this, categoryItems, index );
 
 		// Ensure the input remains the last item in the list, and preserve focus
-		var hadFocus = widget.getElementDocument().activeElement === widget.input.$input[ 0 ];
-		widget.$group.append( widget.input.$element );
+		var hadFocus = this.getElementDocument().activeElement === this.input.$input[ 0 ];
+		this.$group.append( this.input.$element );
 		if ( hadFocus ) {
-			widget.input.$input[ 0 ].focus();
+			this.input.$input[ 0 ].focus();
 		}
-		widget.fitInput();
+		this.fitInput();
 	} );
 };
 

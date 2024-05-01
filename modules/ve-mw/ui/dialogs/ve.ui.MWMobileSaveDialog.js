@@ -35,8 +35,6 @@ OO.inheritClass( ve.ui.MWMobileSaveDialog, ve.ui.MWSaveDialog );
  * @inheritdoc
  */
 ve.ui.MWMobileSaveDialog.prototype.initialize = function () {
-	var dialog = this;
-
 	// Parent method
 	ve.ui.MWMobileSaveDialog.super.prototype.initialize.call( this );
 
@@ -47,7 +45,7 @@ ve.ui.MWMobileSaveDialog.prototype.initialize = function () {
 		var licenseMsg = req( 'mobile.startup' ).license();
 		if ( licenseMsg ) {
 			// eslint-disable-next-line no-jquery/no-html
-			dialog.$license.html( licenseMsg );
+			this.$license.html( licenseMsg );
 		}
 	} );
 };

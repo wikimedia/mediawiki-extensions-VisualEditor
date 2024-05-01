@@ -337,12 +337,10 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 	this.$content.find( 'input:focus' ).trigger( 'blur' );
 
 	if ( this.loaded && this.constructor.static.isSmallScreen() ) {
-		var dialog = this;
-
 		// Updates the page sizes when the menu is toggled using the button. This needs
 		// to happen after the animation when the panel is visible.
 		setTimeout( () => {
-			dialog.bookletLayout.stackLayout.getItems().forEach( ( page ) => {
+			this.bookletLayout.stackLayout.getItems().forEach( ( page ) => {
 				if ( page instanceof ve.ui.MWParameterPage ) {
 					page.updateSize();
 				}
@@ -357,7 +355,7 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
 			setTimeout( () => {
 				if ( expandSidebar ) {
-					dialog.sidebar.setSelectionByPageName( name );
+					this.sidebar.setSelectionByPageName( name );
 				} else {
 					selectedPage.scrollElementIntoView( { alignToTop: true, padding: { top: 20 } } );
 					if ( !OO.ui.isMobile() ) {
@@ -514,14 +512,13 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
-	var target = this;
 	this.transclusionModel.reset();
 	this.bookletLayout.clearPages();
 	var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
 	this.transclusionModel.addPart( placeholderPage )
 		.done( () => {
-			target.bookletLayout.focusPart( placeholderPage.getId() );
-			target.autoExpandSidebar();
+			this.bookletLayout.focusPart( placeholderPage.getId() );
+			this.autoExpandSidebar();
 		} );
 };
 

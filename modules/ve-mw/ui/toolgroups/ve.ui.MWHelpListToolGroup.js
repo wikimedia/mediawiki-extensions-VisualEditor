@@ -154,13 +154,11 @@ ve.ui.MWFeedbackDialogTool.static.autoAddToCatchall = false;
 ve.ui.MWFeedbackDialogTool.prototype.onUpdateState = function () {};
 
 ve.ui.MWFeedbackDialogTool.prototype.onSelect = function () {
-	var tool = this;
-
 	this.setActive( false );
 
 	if ( !this.feedbackPromise ) {
 		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( () => {
-			var mode = tool.toolbar.getSurface().getMode();
+			var mode = this.toolbar.getSurface().getMode();
 
 			// This can't be constructed until the editor has loaded as it uses special messages
 			var feedbackConfig = {

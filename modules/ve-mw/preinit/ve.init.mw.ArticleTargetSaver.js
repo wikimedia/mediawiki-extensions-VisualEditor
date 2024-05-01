@@ -133,8 +133,7 @@
 		 * @return {jQuery.Promise} Promise which resolves if the post was successful
 		 */
 		saveDoc: function ( doc, extraData, options ) {
-			var saver = this;
-			return this.deflateDoc( doc ).then( ( html ) => saver.postHtml(
+			return this.deflateDoc( doc ).then( ( html ) => this.postHtml(
 				html,
 				null,
 				extraData,
@@ -173,8 +172,6 @@
 		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
 		postHtml: function ( html, cacheKey, extraData, options ) {
-			var saver = this;
-
 			options = options || {};
 			var data;
 			if ( cacheKey ) {
@@ -191,7 +188,7 @@
 					}
 					if ( code === 'badcachekey' ) {
 						// If the cache key failed, try again without the cache key
-						return saver.postHtml(
+						return this.postHtml(
 							html,
 							null,
 							extraData,

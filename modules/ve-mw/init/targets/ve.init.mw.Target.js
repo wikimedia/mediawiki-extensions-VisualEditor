@@ -352,20 +352,19 @@ ve.init.mw.Target.prototype.getSurfaceConfig = function ( config ) {
  * @param {HTMLDocument|string} doc HTML document or source text
  */
 ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
-	var target = this;
 	setTimeout( () => {
 		// Build model
-		target.track( 'trace.convertModelFromDom.enter' );
-		var dmDoc = target.constructor.static.createModelFromDom( doc, target.getDefaultMode() );
-		target.track( 'trace.convertModelFromDom.exit' );
+		this.track( 'trace.convertModelFromDom.enter' );
+		var dmDoc = this.constructor.static.createModelFromDom( doc, this.getDefaultMode() );
+		this.track( 'trace.convertModelFromDom.exit' );
 
 		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
-		target.track( 'trace.buildModelTree.enter' );
+		this.track( 'trace.buildModelTree.enter' );
 		dmDoc.buildNodeTree();
-		target.track( 'trace.buildModelTree.exit' );
+		this.track( 'trace.buildModelTree.exit' );
 
 		setTimeout( () => {
-			target.addSurface( dmDoc );
+			this.addSurface( dmDoc );
 		} );
 	} );
 };
@@ -374,8 +373,6 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
  * @inheritdoc
  */
 ve.init.mw.Target.prototype.addSurface = function () {
-	var target = this;
-
 	// Clear dummy surfaces
 	// TODO: Move to DesktopArticleTarget
 	this.clearSurfaces();
@@ -395,15 +392,15 @@ ve.init.mw.Target.prototype.addSurface = function () {
 
 	setTimeout( () => {
 		// Initialize surface
-		target.track( 'trace.initializeSurface.enter' );
+		this.track( 'trace.initializeSurface.enter' );
 
-		target.active = true;
+		this.active = true;
 		// Now that the surface is attached to the document and ready,
 		// let it initialize itself
 		surface.initialize();
 
-		target.track( 'trace.initializeSurface.exit' );
-		target.surfaceReady();
+		this.track( 'trace.initializeSurface.exit' );
+		this.surfaceReady();
 	} );
 
 	return surface;
@@ -431,8 +428,6 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
  * @cfg {number} [storageExpiry] Storage expiry time in seconds (optional)
  */
 ve.init.mw.Target.prototype.initAutosave = function ( config ) {
-	var target = this;
-
 	// Old function signature
 	// TODO: Remove after fixed downstream
 	if ( typeof config === 'boolean' ) {
@@ -479,8 +474,8 @@ ve.init.mw.Target.prototype.initAutosave = function ( config ) {
 			// Only store after the first change if this is an unmodified document
 			surfaceModel.once( 'undoStackChange', () => {
 				// Check the surface hasn't been destroyed
-				if ( target.getSurface() ) {
-					target.storeDocState( target.originalHtml );
+				if ( this.getSurface() ) {
+					this.storeDocState( this.originalHtml );
 				}
 			} );
 		}
@@ -609,7 +604,6 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
  * @return {jQuery.Promise} Abortable promise
  */
 ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, doc ) {
-	var target = this;
 	var abortable, aborted;
 	var abortedPromise = ve.createDeferred().reject( 'http',
 		{ textStatus: 'abort', exception: 'abort' } ).promise();
@@ -635,10 +629,10 @@ ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, do
 			if ( aborted ) {
 				return abortedPromise;
 			}
-			return ( abortable = target.getContentApi( doc ).post( {
+			return ( abortable = this.getContentApi( doc ).post( {
 				action: 'visualeditor',
 				paction: 'parsefragment',
-				page: target.getPageName( doc ),
+				page: this.getPageName( doc ),
 				wikitext: wikitext,
 				pst: pst
 			} ) );

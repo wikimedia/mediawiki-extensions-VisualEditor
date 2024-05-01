@@ -30,8 +30,7 @@ OO.inheritClass( ve.ce.MWWikitextSurface, ve.ce.Surface );
  * @inheritdoc
  */
 ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
-	var view = this,
-		clipboardData = e.originalEvent.clipboardData,
+	var clipboardData = e.originalEvent.clipboardData,
 		text = this.getModel().getFragment().getText( true ).replace( /\n\n/g, '\n' );
 
 	if ( !text ) {
@@ -74,14 +73,14 @@ ve.ce.MWWikitextSurface.prototype.onCopy = function ( e ) {
 		// setTimeout: postpone until after the default copy action
 		setTimeout( () => {
 			// Change focus back
-			view.$attachedRootNode[ 0 ].focus();
-			view.showSelectionState( originalSelection );
+			this.$attachedRootNode[ 0 ].focus();
+			this.showSelectionState( originalSelection );
 			// Restore scroll position
-			view.surface.$scrollContainer.scrollTop( scrollTop );
-			view.surfaceObserver.clear();
-			view.surfaceObserver.enable();
+			this.surface.$scrollContainer.scrollTop( scrollTop );
+			this.surfaceObserver.clear();
+			this.surfaceObserver.enable();
 			// Detach input
-			view.pasteTargetInput.$element.detach();
+			this.pasteTargetInput.$element.detach();
 		} );
 	}
 };
@@ -93,8 +92,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 	var wasSpecial = this.pasteSpecial,
 		// TODO: This check returns true if the paste contains meaningful structure (tables, lists etc.)
 		// but no annotations (bold, links etc.).
-		wasPlain = wasSpecial || pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ),
-		view = this;
+		wasPlain = wasSpecial || pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true );
 
 	var plainPastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
 	plainPastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
@@ -118,7 +116,7 @@ ve.ce.MWWikitextSurface.prototype.afterPasteInsertExternalData = function ( targ
 			// We need to wait for the selection change after paste as that triggers
 			// a contextChange event. Really we should wait for the afterPaste promise to resolve.
 			setTimeout( () => {
-				var surface = view.getSurface(),
+				var surface = this.getSurface(),
 					context = surface.getContext();
 				// Ensure surface is deactivated on mobile so context can be shown (T336073)
 				if ( context.isMobile() ) {

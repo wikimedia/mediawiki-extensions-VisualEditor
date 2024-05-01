@@ -64,8 +64,7 @@ ve.dm.MWNumberedExternalLinkNode.static.toDataElement = function ( domElements )
 };
 
 ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var node = this,
-		domElement = doc.createElement( 'a' );
+	var domElement = doc.createElement( 'a' );
 
 	domElement.setAttribute( 'href', dataElement.attributes.href );
 	domElement.setAttribute( 'rel', 'mw:ExtLink' );
@@ -79,7 +78,7 @@ ve.dm.MWNumberedExternalLinkNode.static.toDomElements = function ( dataElement, 
 
 		if ( offset !== -1 ) {
 			converter.documentData.slice( 0, offset ).forEach( ( el ) => {
-				if ( el.type && el.type === node.name ) {
+				if ( el.type && el.type === this.name ) {
 					counter++;
 				}
 			} );

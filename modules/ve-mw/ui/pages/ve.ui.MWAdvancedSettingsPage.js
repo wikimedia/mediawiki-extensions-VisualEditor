@@ -17,8 +17,6 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config ) {
-	var advancedSettingsPage = this;
-
 	// Parent constructor
 	ve.ui.MWAdvancedSettingsPage.super.apply( this, arguments );
 
@@ -128,7 +126,7 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 				help: metaItemCheckbox.help
 			}
 		);
-		advancedSettingsPage.advancedSettingsFieldset.addItems( [ metaItemCheckbox.fieldLayout ] );
+		this.advancedSettingsFieldset.addItems( [ metaItemCheckbox.fieldLayout ] );
 	} );
 
 	this.$element.append( this.advancedSettingsFieldset.$element );
@@ -196,8 +194,6 @@ ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = functi
  * @return {jQuery.Promise}
  */
 ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( fragment, config ) {
-	var advancedSettingsPage = this;
-
 	this.fragment = fragment;
 
 	// Indexing items
@@ -231,7 +227,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( fragment, config ) {
 
 	// Simple checkbox items
 	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
-		var isSelected = !!advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName );
+		var isSelected = !!this.getMetaItem( metaItemCheckbox.metaName );
 		metaItemCheckbox.fieldLayout.getField()
 			.setSelected( isSelected )
 			.setDisabled( config.isReadOnly );
@@ -246,8 +242,6 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( fragment, config ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
-	var advancedSettingsPage = this;
-
 	// Data initialization
 	data = data || {};
 	if ( data.action !== 'done' ) {
@@ -338,13 +332,13 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data ) {
 	}
 
 	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
-		var currentItem = advancedSettingsPage.getMetaItem( metaItemCheckbox.metaName ),
+		var currentItem = this.getMetaItem( metaItemCheckbox.metaName ),
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {
-			advancedSettingsPage.fragment.removeMeta( currentItem );
+			this.fragment.removeMeta( currentItem );
 		} else if ( !currentItem && isSelected ) {
-			advancedSettingsPage.fragment.insertMeta( { type: metaItemCheckbox.metaName } );
+			this.fragment.insertMeta( { type: metaItemCheckbox.metaName } );
 		}
 	} );
 

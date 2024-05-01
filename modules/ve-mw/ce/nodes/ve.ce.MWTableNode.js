@@ -72,10 +72,6 @@ ve.ce.MWTableNode.prototype.destroy = function () {
  * @private
  */
 ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
-	var
-		view = this,
-		cellModels, cellViews;
-
 	if ( !this.model ) {
 		// Fired after teardown due to debounce
 		return;
@@ -94,8 +90,8 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
 		// ends up saving this change, it will be loaded anyway to render the real sortable table.
 		mw.loader.load( 'jquery.tablesorter' );
 
-		cellModels = this.getTablesorterHeaderCells();
-		cellViews = cellModels.map( ( cellModel ) => view.getNodeFromOffset( cellModel.getOffset() - view.model.getOffset() ) );
+		var cellModels = this.getTablesorterHeaderCells();
+		var cellViews = cellModels.map( ( cellModel ) => this.getNodeFromOffset( cellModel.getOffset() - this.model.getOffset() ) );
 
 		this.$sortableHeaders = $( cellViews.map( ( cell ) => cell.$element[ 0 ] ) ).not( '.unsortable' );
 	} else {

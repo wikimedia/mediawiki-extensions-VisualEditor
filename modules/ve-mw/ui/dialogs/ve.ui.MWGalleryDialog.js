@@ -390,7 +390,6 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWGalleryDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
 			var namespaceIds = mw.config.get( 'wgNamespaceIds' ),
-				dialog = this,
 				mwData = this.selectedNode && this.selectedNode.getAttribute( 'mw' ),
 				attributes = mwData && mwData.attrs,
 				captionNode = this.selectedNode && this.selectedNode.getCaptionNode(),
@@ -437,7 +436,7 @@ ve.ui.MWGalleryDialog.prototype.getSetupProcess = function ( data ) {
 				this.imagesPromise = this.requestImages( {
 					titles: imageTitles
 				} ).done( () => {
-					dialog.onHighlightItem();
+					this.onHighlightItem();
 				} );
 
 			// ...Otherwise show the search panel
@@ -619,20 +618,15 @@ ve.ui.MWGalleryDialog.prototype.getBodyHeight = function () {
  * @return {jQuery.Promise} Promise which resolves when image data has been fetched
  */
 ve.ui.MWGalleryDialog.prototype.requestImages = function ( options ) {
-	var dialog = this,
-		promises = [];
+	var promises = options.titles.map( ( title ) => ve.init.platform.galleryImageInfoCache.get( title ) );
 
-	var i, len;
-	for ( i = 0, len = options.titles.length; i < len; i++ ) {
-		promises.push( ve.init.platform.galleryImageInfoCache.get( options.titles[ i ] ) );
-	}
 	return ve.promiseAll( promises )
-		.done( function () {
+		.done( ( ...args ) => {
 			var resp = {};
-			for ( i = 0; i < len; i++ ) {
-				resp[ options.titles[ i ] ] = arguments[ i ];
-			}
-			dialog.onRequestImagesSuccess( resp );
+			options.titles.forEach( ( title, i ) => {
+				resp[ title ] = args[ i ];
+			} );
+			this.onRequestImagesSuccess( resp );
 		} );
 };
 
@@ -704,8 +698,6 @@ ve.ui.MWGalleryDialog.prototype.onRequestImagesSuccess = function ( response ) {
  * @param {string} title Normalized title of the new image
  */
 ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
-	var dialog = this;
-
 	// Make list of unique pending images, for onRequestImagesSuccess
 	this.selectedFilenames[ title ] = true;
 
@@ -714,9 +706,9 @@ ve.ui.MWGalleryDialog.prototype.addNewImage = function ( title ) {
 		titles: [ title ]
 	} ).done( () => {
 		// populate edit panel with the new image
-		var items = dialog.galleryGroup.items;
-		dialog.onHighlightItem( items[ items.length - 1 ] );
-		dialog.highlightedCaptionTarget.focus();
+		var items = this.galleryGroup.items;
+		this.onHighlightItem( items[ items.length - 1 ] );
+		this.highlightedCaptionTarget.focus();
 	} );
 };
 

@@ -243,8 +243,7 @@ ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState )
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	var mode = surface.getMode(),
-		wasSetup = !!this.toolbar,
-		target = this;
+		wasSetup = !!this.toolbar;
 
 	ve.track( 'trace.setupToolbar.enter', { mode: mode } );
 
@@ -266,11 +265,11 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		this.toolbarSetupDeferred.resolve();
 
 		this.toolbarSetupDeferred.done( () => {
-			var newSurface = target.getSurface();
+			var newSurface = this.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( newSurface ) {
 				ve.track( 'trace.initializeToolbar.enter', { mode: mode } );
-				target.getToolbar().initialize();
+				this.getToolbar().initialize();
 				newSurface.getView().emit( 'position' );
 				newSurface.getContext().updateDimensions();
 				ve.track( 'trace.initializeToolbar.exit', { mode: mode } );
@@ -344,8 +343,6 @@ ve.init.mw.DesktopArticleTarget.prototype.updateTabs = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
-	var target = this;
-
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadSuccess.apply( this, arguments );
 
@@ -365,7 +362,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 				windowManager.destroy();
 
 				if ( data && data.action === 'prefer-wt' ) {
-					target.switchToWikitextEditor( false );
+					this.switchToWikitextEditor( false );
 				} else if ( data && data.action === 'multi-tab' ) {
 					location.reload();
 				}
@@ -425,8 +422,6 @@ ve.init.mw.DesktopArticleTarget.prototype.unbindHandlers = function () {
  * @return {jQuery.Promise}
  */
 ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
-	var target = this;
-
 	// We may be re-activating an old target, during which time ve.init.target
 	// has been overridden.
 	ve.init.target = ve.init.articleTarget;
@@ -438,11 +433,11 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 
 		$( 'html' ).addClass( 've-activating' );
 		ve.promiseAll( [ this.activatingDeferred, this.toolbarSetupDeferred ] ).done( () => {
-			if ( !target.suppressNormalStartupDialogs ) {
-				target.maybeShowWelcomeDialog();
-				target.maybeShowMetaDialog();
+			if ( !this.suppressNormalStartupDialogs ) {
+				this.maybeShowWelcomeDialog();
+				this.maybeShowMetaDialog();
 			}
-			target.afterActivate();
+			this.afterActivate();
 		} ).fail( () => {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
@@ -598,8 +593,6 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
  * @fires ve.init.mw.DesktopArticleTarget#deactivate
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
-	var target = this;
-
 	// Event tracking
 	var abortType, abortedMode;
 	if ( trackMechanism ) {
@@ -647,25 +640,25 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 	// Parent method
 	return ve.init.mw.DesktopArticleTarget.super.prototype.teardown.call( this ).then( () => {
 		// After teardown
-		target.active = false;
+		this.active = false;
 
 		// If there is a load in progress, try to abort it
-		if ( target.loading && target.loading.abort ) {
-			target.loading.abort();
+		if ( this.loading && this.loading.abort ) {
+			this.loading.abort();
 		}
 
-		target.clearState();
-		target.initialEditSummary = new URL( location.href ).searchParams.get( 'summary' );
-		target.editSummaryValue = null;
+		this.clearState();
+		this.initialEditSummary = new URL( location.href ).searchParams.get( 'summary' );
+		this.editSummaryValue = null;
 
 		// Move original content back out of the target
-		target.$element.parent().append( target.$originalContent.children() );
+		this.$element.parent().append( this.$originalContent.children() );
 
 		$( '.ve-init-mw-desktopArticleTarget-uneditableContent' )
 			.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
-		target.deactivating = false;
-		target.deactivatingDeferred.resolve();
+		this.deactivating = false;
+		this.deactivatingDeferred.resolve();
 		$( 'html' ).removeClass( 've-deactivating' );
 
 		// Event tracking
@@ -678,8 +671,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 			} );
 		}
 
-		if ( !target.isViewPage ) {
-			var newUrl = new URL( target.viewUrl );
+		if ( !this.isViewPage ) {
+			var newUrl = new URL( this.viewUrl );
 			if ( mw.config.get( 'wgIsRedirect' ) ) {
 				newUrl.searchParams.set( 'redirect', 'no' );
 			}
@@ -692,15 +685,13 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetails ) {
-	var target = this;
-
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.loadFail.apply( this, arguments );
 
 	if ( this.wikitextFallbackLoading ) {
 		// Failed twice now
 		mw.log.warn( 'Failed to fall back to wikitext', code, errorDetails );
-		var newUrl = new URL( target.viewUrl );
+		var newUrl = new URL( this.viewUrl );
 		newUrl.searchParams.set( 'action', 'edit' );
 		newUrl.searchParams.set( 'veswitched', '1' );
 		location.href = newUrl;
@@ -723,17 +714,17 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 	} ).done( ( confirmed ) => {
 		if ( confirmed ) {
 			// Retry load
-			target.load();
+			this.load();
 		} else {
 			// User pressed "cancel"
-			if ( target.getSurface() ) {
+			if ( this.getSurface() ) {
 				// Restore the mode of the current surface
-				target.setDefaultMode( target.getSurface().getMode() );
-				target.activatingDeferred.reject();
+				this.setDefaultMode( this.getSurface().getMode() );
+				this.activatingDeferred.reject();
 			} else {
 				// We're switching from read mode or the 2010 wikitext editor:
 				// just give up and stay where you are
-				target.tryTeardown( true );
+				this.tryTeardown( true );
 			}
 		}
 	} );
@@ -833,7 +824,6 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
  * @param {ve.dm.MetaItem[]} categoryItems Array of category metaitems to display
  */
 ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categoryItems ) {
-	var target = this;
 	this.renderCategories( categoryItems ).done( ( $categories ) => {
 		// Clone the existing catlinks for any specific properties which might
 		// be needed by the rest of the page. Also gives us a not-attached
@@ -849,7 +839,7 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 			// eslint-disable-next-line no-jquery/no-sizzle
 			$catlinks.find( '.mw-hidden-catlinks:visible' ).length === 0
 		);
-		target.transformCategoryLinks( $catlinks );
+		this.transformCategoryLinks( $catlinks );
 		mw.hook( 'wikipage.categories' ).fire( $catlinks );
 		$( '#catlinks' ).replaceWith( $catlinks );
 	} );
@@ -898,17 +888,16 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
  */
 ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 	// Parent method
-	var promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments ),
-		target = this;
+	var promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments );
 
 	return promise.fail( ( error, response ) => {
-		var $errorMessages = target.extractErrorMessages( response );
+		var $errorMessages = this.extractErrorMessages( response );
 		OO.ui.alert( $errorMessages );
 
 		// It's possible to get here while the save dialog has never been opened (if the user uses
 		// the switch to source mode option)
-		if ( target.saveDialog ) {
-			target.saveDialog.popPending();
+		if ( this.saveDialog ) {
+			this.saveDialog.popPending();
 		}
 	} );
 };
@@ -967,8 +956,7 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
-	var target = this,
-		deferred = ve.createDeferred();
+	var deferred = ve.createDeferred();
 
 	if ( !this.toolbar ) {
 		return deferred.resolve().promise();
@@ -978,12 +966,12 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 		.addClass( 've-init-mw-desktopArticleTarget-toolbar-preclose' )
 		.css( 'height', this.toolbar.$bar[ 0 ].offsetHeight );
 	setTimeout( () => {
-		target.toolbar.$element
+		this.toolbar.$element
 			.css( 'height', '0' )
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar-close' );
 		setTimeout( () => {
 			// Parent method
-			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( target );
+			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( this );
 			deferred.resolve();
 		}, 250 );
 	} );
@@ -1082,12 +1070,11 @@ ve.init.mw.DesktopArticleTarget.prototype.restoreEditTabsIfNeeded = function ( $
  * @param {jQuery} $catlinks Category links container element
  */
 ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $catlinks ) {
-	var target = this;
 	// Un-disable the catlinks wrapper, but not the links
 	if ( this.getSurface() && this.getSurface().getMode() === 'visual' ) {
 		$catlinks.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
 			.on( 'click.ve-target', () => {
-				var windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+				var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 				windowAction.open( 'meta', { page: 'categories' } );
 				return false;
 			} )
@@ -1213,8 +1200,6 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
  * @param {Event} e Native event object
  */
 ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
-	var target = this;
-
 	if ( !this.verifyPopState( e.state ) ) {
 		// Ignore popstate events fired for states not created by us
 		// This also filters out the initial fire in Chrome (T59901).
@@ -1253,7 +1238,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 			// Teardown was successful, re-apply the undone state
 			history.back();
 		} ).always( () => {
-			target.actFromPopState = false;
+			this.actFromPopState = false;
 		} );
 	}
 };
@@ -1318,8 +1303,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 	var editorMode = this.getDefaultMode(),
-		windowManager = this.getSurface().dialogs,
-		target = this;
+		windowManager = this.getSurface().dialogs;
 
 	this.welcomeDialogPromise = ve.createDeferred();
 
@@ -1334,12 +1318,12 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 			}
 		)
 			.closed.then( ( data ) => {
-				target.welcomeDialogPromise.resolve();
-				target.welcomeDialog = null;
+				this.welcomeDialogPromise.resolve();
+				this.welcomeDialog = null;
 				if ( data && data.action === 'switch-wte' ) {
-					target.switchToWikitextEditor( false );
+					this.switchToWikitextEditor( false );
 				} else if ( data && data.action === 'switch-ve' ) {
-					target.switchToVisualEditor();
+					this.switchToVisualEditor();
 				}
 			} );
 		mw.libs.ve.stopShowingWelcomeDialog();
@@ -1352,23 +1336,21 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
  * Show the meta dialog as needed on load.
  */
 ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
-	var target = this;
-
 	if ( this.welcomeDialogPromise ) {
 		// Pop out the notices when the welcome dialog is closed
 		this.welcomeDialogPromise
 			.always( () => {
 				if (
-					target.switched &&
+					this.switched &&
 					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
 				) {
 					// Show "switched" popup
 					var popup = new mw.libs.ve.SwitchPopupWidget( 'visual' );
-					target.toolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
+					this.toolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
 					popup.toggle( true );
-				} else if ( target.toolbar.tools.notices ) {
+				} else if ( this.toolbar.tools.notices ) {
 					// Show notices
-					target.toolbar.tools.notices.getPopup().toggle( true );
+					this.toolbar.tools.notices.getPopup().toggle( true );
 				}
 			} );
 	}
@@ -1460,7 +1442,6 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextSection = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
-	var target = this;
 	var oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
 	var prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
@@ -1474,11 +1455,11 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 		} );
 		this.submitting = true;
 		return prefPromise.then( () => {
-			var url = new URL( target.viewUrl );
+			var url = new URL( this.viewUrl );
 			url.searchParams.set( 'action', 'edit' );
 			// No changes, safe to stay in section mode
-			if ( target.section !== null ) {
-				url.searchParams.set( 'section', target.section );
+			if ( this.section !== null ) {
+				url.searchParams.set( 'section', this.section );
 			} else {
 				url.searchParams.delete( 'section' );
 			}
@@ -1500,7 +1481,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 				mechanism: 'navigate',
 				mode: 'visual'
 			} );
-			target.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, data.content );
+			this.submitWithSaveFields( { wpDiff: true, wpAutoSummary: '' }, data.content );
 		} );
 	}
 };
@@ -1509,8 +1490,6 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
-	var target = this;
-
 	this.activating = true;
 	this.activatingDeferred = ve.createDeferred();
 
@@ -1518,9 +1497,9 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.reloadSurface.apply( this, arguments );
 
 	this.activatingDeferred.done( () => {
-		target.updateHistoryState();
-		target.afterActivate();
-		target.setupTriggerListeners();
+		this.updateHistoryState();
+		this.afterActivate();
+		this.setupTriggerListeners();
 	} );
 	this.toolbarSetupDeferred.resolve();
 };

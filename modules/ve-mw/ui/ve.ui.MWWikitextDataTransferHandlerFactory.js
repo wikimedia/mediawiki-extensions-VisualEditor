@@ -12,8 +12,6 @@
  * @constructor
  */
 ve.ui.MWWikitextDataTransferHandlerFactory = function VeUiMwWikitextDataTransferHandlerFactory() {
-	var factory = this;
-
 	// Parent constructor
 	ve.ui.MWWikitextDataTransferHandlerFactory.super.apply( this, arguments );
 
@@ -22,7 +20,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory = function VeUiMwWikitextDataTransfer
 	}
 
 	ve.ui.dataTransferHandlerFactory.on( 'register', ( n, data ) => {
-		factory.register( data );
+		this.register( data );
 	} );
 };
 

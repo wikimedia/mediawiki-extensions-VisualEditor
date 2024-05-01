@@ -176,11 +176,10 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
  */
 ve.ui.MWEditSummaryWidget.prototype.getLookupRequest = function () {
 	var query = this.constructor.static.splitSummary( this.value ),
-		limit = this.limit,
-		widget = this;
+		limit = this.limit;
 
 	return this.getSummaries().then( ( allSummaries ) => {
-		var matchingSummaries = widget.constructor.static.getMatchingSummaries( allSummaries, query.comment );
+		var matchingSummaries = this.constructor.static.getMatchingSummaries( allSummaries, query.comment );
 		if ( matchingSummaries.length > limit ) {
 			// Quick in-place truncate
 			matchingSummaries.length = limit;

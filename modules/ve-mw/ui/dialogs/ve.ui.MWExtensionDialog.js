@@ -85,13 +85,13 @@ ve.ui.MWExtensionDialog.prototype.getTeardownProcess = function ( data ) {
 ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === '' ) {
 		if ( this.hasMeaningfulEdits() ) {
+			// eslint-disable-next-line arrow-body-style
 			return new OO.ui.Process( () => {
-				var dialog = this;
-				return dialog.confirmAbandon().then( ( confirm ) => {
+				return this.confirmAbandon().then( ( confirm ) => {
 					if ( confirm ) {
 						/* We may need to rethink this if something in the
 						   dependency chain adds to the current behaviour */
-						dialog.close();
+						this.close();
 					}
 				} );
 			} );

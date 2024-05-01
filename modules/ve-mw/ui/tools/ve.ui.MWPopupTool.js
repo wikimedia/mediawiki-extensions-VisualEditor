@@ -105,8 +105,7 @@ ve.ui.MWNoticesPopupTool.static.autoAddToCatchall = false;
  * @param {string[]} notices A (non-empty) list of notices
  */
 ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
-	var tool = this,
-		count = notices.length;
+	var count = notices.length;
 
 	this.popup.setLabel( ve.msg(
 		'visualeditor-editnotices-tool',
@@ -127,12 +126,12 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 			.html( typeof item === 'string' ? item : item.message );
 		ve.targetLinksToNewWindow( $element[ 0 ] );
 
-		tool.noticeItems.push( {
+		this.noticeItems.push( {
 			$element: $element,
 			type: item.type
 		} );
 
-		tool.$items.append( $element );
+		this.$items.append( $element );
 	} );
 
 	this.popup.$body.append( this.$items );

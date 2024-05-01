@@ -30,7 +30,6 @@ OO.inheritClass( ve.ui.MWWikitextWarningCommand, ve.ui.Command );
  * @inheritdoc
  */
 ve.ui.MWWikitextWarningCommand.prototype.execute = function () {
-	var command = this;
 	if ( this.warning && this.warning.isOpen ) {
 		return false;
 	}
@@ -42,7 +41,7 @@ ve.ui.MWWikitextWarningCommand.prototype.execute = function () {
 		ve.msg( 'visualeditor-wikitext-warning-title' ),
 		{ tag: 'visualeditor-wikitext-warning' }
 	).then( ( message ) => {
-		command.warning = message;
+		this.warning = message;
 	} );
 	return true;
 };

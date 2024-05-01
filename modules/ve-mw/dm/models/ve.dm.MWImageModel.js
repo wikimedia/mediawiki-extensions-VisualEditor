@@ -279,8 +279,6 @@ ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
  * @throws {Error} Image has insufficient details to compute the imageModel details.
  */
 ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
-	var imageModel = this;
-
 	this.changedImageSource = true;
 
 	if ( attrs.mediaType ) {
@@ -341,19 +339,19 @@ ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
 		if ( this.getFilename() ) {
 			// Update anyway
 			ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() ).done( ( info ) => {
-				imageModel.scalable.setOriginalDimensions( {
+				this.scalable.setOriginalDimensions( {
 					width: info.width,
 					height: info.height
 				} );
 				// Update media type
-				imageModel.setMediaType( info.mediatype );
+				this.setMediaType( info.mediatype );
 				// Update defaults
 				ve.dm.MWImageNode.static.syncScalableToType(
-					imageModel.getType(),
+					this.getType(),
 					info.mediatype,
-					imageModel.scalable
+					this.scalable
 				);
-				imageModel.updateScalableDetails( {
+				this.updateScalableDetails( {
 					width: info.width,
 					height: info.height
 				} );
@@ -1186,8 +1184,7 @@ ve.dm.MWImageModel.prototype.getImgWrapperClassAttr = function () {
  * @param {ve.dm.Scalable} scalable
  */
 ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
-	var imageName = mw.libs.ve.normalizeParsoidResourceName( this.getResourceName() ),
-		imageModel = this;
+	var imageName = mw.libs.ve.normalizeParsoidResourceName( this.getResourceName() );
 
 	if ( this.scalable instanceof ve.dm.Scalable ) {
 		this.scalable.disconnect( this );
@@ -1200,24 +1197,24 @@ ve.dm.MWImageModel.prototype.attachScalable = function ( scalable ) {
 	// Call for updated scalable
 	if ( imageName ) {
 		ve.dm.MWImageNode.static.getScalablePromise( imageName ).done( ( info ) => {
-			imageModel.scalable.setOriginalDimensions( {
+			this.scalable.setOriginalDimensions( {
 				width: info.width,
 				height: info.height
 			} );
 			// Update media type
-			imageModel.setMediaType( info.mediatype );
+			this.setMediaType( info.mediatype );
 			// Update according to type
 			ve.dm.MWImageNode.static.syncScalableToType(
-				imageModel.getType(),
-				imageModel.getMediaType(),
-				imageModel.getScalable()
+				this.getType(),
+				this.getMediaType(),
+				this.getScalable()
 			);
 
 			// We have to adjust the details in the initial hash if the original
 			// image was 'default' since we didn't have default until now and the
 			// default dimensions that were 'recorded' were wrong
-			if ( !ve.isEmptyObject( imageModel.initialHash ) && imageModel.initialHash.scalable.isDefault ) {
-				imageModel.initialHash.scalable.currentDimensions = imageModel.scalable.getDefaultDimensions();
+			if ( !ve.isEmptyObject( this.initialHash ) && this.initialHash.scalable.isDefault ) {
+				this.initialHash.scalable.currentDimensions = this.scalable.getDefaultDimensions();
 			}
 
 		} );

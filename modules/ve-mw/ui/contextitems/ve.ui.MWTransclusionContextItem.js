@@ -94,8 +94,7 @@ ve.ui.MWTransclusionContextItem.prototype.renderBody = function () {
  */
 ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 	var surfaceModel = this.context.getSurface().getModel(),
-		selection = surfaceModel.getSelection(),
-		contextItem = this;
+		selection = surfaceModel.getSelection();
 
 	if ( selection instanceof ve.dm.TableSelection ) {
 		surfaceModel.setLinearSelection( selection.getOuterRanges(
@@ -107,7 +106,7 @@ ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
 
 	this.context.getSurface().getDialogs().once( 'opening', ( win, opening ) => {
 		opening.then( () => {
-			contextItem.toggleLoadingVisualization( false );
+			this.toggleLoadingVisualization( false );
 		} );
 	} );
 	this.toggleLoadingVisualization( true );

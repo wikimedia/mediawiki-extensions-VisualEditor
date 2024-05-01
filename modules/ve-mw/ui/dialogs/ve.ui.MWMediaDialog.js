@@ -737,18 +737,17 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
  * @return {jQuery.Promise} Thumbnail promise that resolves with new thumb url
  */
 ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions ) {
-	var dialog = this,
-		params = {
-			action: 'query',
-			prop: 'imageinfo',
-			iiprop: 'url',
-			titles: imageName
-		};
-
 	// Check cache first
 	if ( this.searchCache[ imageName ] ) {
 		return ve.createDeferred().resolve( this.searchCache[ imageName ] );
 	}
+
+	var params = {
+		action: 'query',
+		prop: 'imageinfo',
+		iiprop: 'url',
+		titles: imageName
+	};
 
 	if ( dimensions.width ) {
 		params.iiurlwidth = dimensions.width;
@@ -760,7 +759,7 @@ ve.ui.MWMediaDialog.prototype.fetchThumbnail = function ( imageName, dimensions 
 		.then( ( response ) => {
 			var thumburl = ve.getProp( response.query.pages[ 0 ], 'imageinfo', 0, 'thumburl' );
 			// Cache
-			dialog.searchCache[ imageName ] = thumburl;
+			this.searchCache[ imageName ] = thumburl;
 			return thumburl;
 		} );
 };

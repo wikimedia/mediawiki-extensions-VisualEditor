@@ -205,13 +205,12 @@ ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkChange = function () {
  * @param {jQuery.Event} e Key press event
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onLinkInputEnter = function () {
-	var inspector = this;
 	if ( this.annotationInput.getTextInputWidget().getValue().trim() === '' ) {
 		this.executeAction( 'done' );
 	}
 	this.annotationInput.getTextInputWidget().getValidity()
 		.done( () => {
-			inspector.executeAction( 'done' );
+			this.executeAction( 'done' );
 		} );
 };
 
@@ -256,8 +255,6 @@ ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
  * @param {string} value Current value of input widget
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function ( value ) {
-	var inspector = this;
-
 	// If this looks like an external link, switch to the correct tabPanel.
 	// Note: We don't care here if it's a *valid* link, so we just
 	// check whether it looks like a URI -- i.e. whether it starts with
@@ -287,11 +284,11 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
 	this.internalAnnotationInput.getTextInputWidget().getValidity()
 		.then(
 			() => {
-				inspector.internalAnnotationField.setErrors( [] );
-				inspector.updateSize();
+				this.internalAnnotationField.setErrors( [] );
+				this.updateSize();
 			}, () => {
-				inspector.internalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-illegal-title' ) ] );
-				inspector.updateSize();
+				this.internalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-illegal-title' ) ] );
+				this.updateSize();
 			}
 		);
 
@@ -303,16 +300,14 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkInputChange = function (
  * @param {string} value Current value of input widget
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onExternalLinkInputChange = function () {
-	var inspector = this;
-
 	this.externalAnnotationInput.getTextInputWidget().getValidity()
 		.then(
 			() => {
-				inspector.externalAnnotationField.setErrors( [] );
-				inspector.updateSize();
+				this.externalAnnotationField.setErrors( [] );
+				this.updateSize();
 			}, () => {
-				inspector.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-invalid-external' ) ] );
-				inspector.updateSize();
+				this.externalAnnotationField.setErrors( [ ve.msg( 'visualeditor-linkinspector-invalid-external' ) ] );
+				this.updateSize();
 			}
 		);
 

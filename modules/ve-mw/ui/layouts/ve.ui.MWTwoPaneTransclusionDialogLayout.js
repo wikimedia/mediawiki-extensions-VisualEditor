@@ -168,12 +168,11 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = functi
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.toggleOutline = function ( show ) {
 	this.toggleMenu( show );
 	if ( show ) {
-		var self = this;
 		// HACK: Kill dumb scrollbars when the sidebar stops animating, see T161798.
 		// Only necessary when outline controls are present, delay matches transition on
 		// `.oo-ui-menuLayout-menu`.
 		setTimeout( () => {
-			OO.ui.Element.static.reconsiderScrollbars( self.outlinePanel.$element[ 0 ] );
+			OO.ui.Element.static.reconsiderScrollbars( this.outlinePanel.$element[ 0 ] );
 		}, OO.ui.theme.getDialogTransitionDuration() );
 	}
 };
@@ -272,8 +271,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  * @param {string[]} pagesNamesToRemove
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesNamesToRemove ) {
-	var layout = this,
-		pagesToRemove = [],
+	var pagesToRemove = [],
 		isCurrentParameter = this.pages[ this.currentPageName ] instanceof ve.ui.MWParameterPage,
 		isCurrentPageRemoved = false,
 		prevSelectionCandidate, nextSelectionCandidate;
@@ -283,9 +281,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pages
 
 		if ( pagesNamesToRemove.indexOf( pageName ) !== -1 ) {
 			pagesToRemove.push( page );
-			delete layout.pages[ pageName ];
-			if ( layout.currentPageName === pageName ) {
-				layout.currentPageName = null;
+			delete this.pages[ pageName ];
+			if ( this.currentPageName === pageName ) {
+				this.currentPageName = null;
 				isCurrentPageRemoved = true;
 			}
 			return;

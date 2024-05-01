@@ -49,15 +49,14 @@ ve.ce.MWHeadingNode.prototype.onTeardown = function () {
 };
 
 ve.ce.MWHeadingNode.prototype.onUpdate = function () {
-	var surface = this.surface,
-		node = this;
+	var surface = this.surface;
 
 	// Parent method
 	ve.ce.MWHeadingNode.super.prototype.onUpdate.call( this );
 
 	if ( surface && surface.mwTocWidget ) {
 		surface.getModel().getDocument().once( 'transact', () => {
-			surface.mwTocWidget.updateNode( node );
+			surface.mwTocWidget.updateNode( this );
 		} );
 	}
 };

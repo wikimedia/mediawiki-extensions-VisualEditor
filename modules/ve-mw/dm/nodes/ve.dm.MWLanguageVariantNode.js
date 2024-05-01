@@ -166,12 +166,10 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
  *   text, not just the one appropriate for the current user.
  */
 ve.dm.MWLanguageVariantNode.static.processVariants = function ( container, opts ) {
-	var self = this;
-
 	Array.prototype.forEach.call( container.querySelectorAll( '[typeof="mw:LanguageVariant"]' ), ( element ) => {
 		var dataMwvJSON = element.getAttribute( 'data-mw-variant' );
 		if ( dataMwvJSON && element.tagName !== 'META' ) {
-			self.insertPreviewElements(
+			this.insertPreviewElements(
 				element, JSON.parse( dataMwvJSON ), opts
 			);
 		}

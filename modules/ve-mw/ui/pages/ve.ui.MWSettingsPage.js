@@ -17,8 +17,6 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
-	var settingsPage = this;
-
 	// Parent constructor
 	ve.ui.MWSettingsPage.super.apply( this, arguments );
 
@@ -146,7 +144,7 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 				help: metaItemCheckbox.help || ''
 			}
 		);
-		settingsPage.settingsFieldset.addItems( [ metaItemCheckbox.fieldLayout ] );
+		this.settingsFieldset.addItems( [ metaItemCheckbox.fieldLayout ] );
 	} );
 
 	this.$element.append( this.settingsFieldset.$element );
@@ -197,7 +195,6 @@ ve.ui.MWSettingsPage.prototype.onTableOfContentsFieldChange = function () {
  * @param {boolean} value Whether a redirect is to be set for this page
  */
 ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
-	var page = this;
 	this.redirectTargetInput.setDisabled( !value );
 	this.enableStaticRedirectInput.setDisabled( !value );
 	if ( value ) {
@@ -213,7 +210,7 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 		 * https://phabricator.wikimedia.org/T137309
 		 */
 		setTimeout( () => {
-			page.redirectTargetInput.focus();
+			this.redirectTargetInput.focus();
 		} );
 	} else {
 		this.redirectTargetInput.setValue( '' );
@@ -284,8 +281,6 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
  * @return {jQuery.Promise}
  */
 ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
-	var settingsPage = this;
-
 	this.fragment = fragment;
 
 	// Table of Contents items
@@ -315,7 +310,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
 
 	// Simple checkbox items
 	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
-		var isSelected = !!settingsPage.getMetaItem( metaItemCheckbox.metaName );
+		var isSelected = !!this.getMetaItem( metaItemCheckbox.metaName );
 		metaItemCheckbox.fieldLayout.getField()
 			.setSelected( isSelected )
 			.setDisabled( config.isReadOnly );
@@ -330,8 +325,6 @@ ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
-	var settingsPage = this;
-
 	// Data initialisation
 	data = data || {};
 	if ( data.action !== 'done' ) {
@@ -405,13 +398,13 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	}
 
 	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
-		var currentItem = settingsPage.getMetaItem( metaItemCheckbox.metaName ),
+		var currentItem = this.getMetaItem( metaItemCheckbox.metaName ),
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {
-			settingsPage.fragment.removeMeta( currentItem );
+			this.fragment.removeMeta( currentItem );
 		} else if ( !currentItem && isSelected ) {
-			settingsPage.fragment.insertMeta( { type: metaItemCheckbox.metaName } );
+			this.fragment.insertMeta( { type: metaItemCheckbox.metaName } );
 		}
 	} );
 

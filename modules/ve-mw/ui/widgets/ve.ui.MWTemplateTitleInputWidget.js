@@ -86,8 +86,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 
 // @inheritdoc mw.widgets.TitleInputWidget
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
-	var widget = this,
-		originalResponse,
+	var originalResponse,
 		templateDataMessage = mw.message( 'templatedata-doc-subpage' ),
 		templateDataInstalled = templateDataMessage.exists(),
 		templateDocPageFragment = '/' + templateDataMessage.text(),
@@ -141,10 +140,10 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 			// Also get descriptions
 			// FIXME: This should go through MWTransclusionModel rather than duplicate.
 			if ( titles.length > 0 ) {
-				var xhr = widget.getApi().get( {
+				var xhr = this.getApi().get( {
 					action: 'templatedata',
 					titles: titles,
-					redirects: !!widget.showRedirects,
+					redirects: !!this.showRedirects,
 					includeMissingTitles: '1',
 					lang: mw.config.get( 'wgUserLanguage' )
 				} );
@@ -165,7 +164,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					ve.init.platform.linkCache.setMissing( missingTitle );
 				} else if ( !page.notemplatedata ) {
 					// Cache descriptions
-					widget.descriptions[ page.title ] = page.description;
+					this.descriptions[ page.title ] = page.description;
 				}
 			}
 			// Return the original response
@@ -182,8 +181,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
  * @return {Object} Modified response
  */
 ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response ) {
-	var widget = this,
-		query = this.getQueryValue(),
+	var query = this.getQueryValue(),
 		title = mw.Title.newFromText( query, this.namespace );
 	// No point in trying anything when the title is invalid
 	if ( !title ) {
@@ -218,6 +216,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		return pageId && pages.some( ( page ) => page.pageid === pageId );
 	}
 
+	var widget = this;
 	/**
 	 * @param {ve.ui.MWTemplateTitleInputWidget.PageResponse[]} pages
 	 * @param {Object} [newPage]
@@ -277,11 +276,11 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 			if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
 				// Move prefix matches to the top, indexed from -9 to 0, relevant for e.g. {{!!}}
 				// Note: Sorting happens later in mw.widgets.TitleWidget.getOptionsFromData()
-				prefixMatch.index -= widget.limit;
+				prefixMatch.index -= this.limit;
 				response.query.pages.push( prefixMatch );
 			}
 			// Check only after the top-1 prefix match is guaranteed to be present
-			if ( response.query.pages.length >= widget.limit ) {
+			if ( response.query.pages.length >= this.limit ) {
 				break;
 			}
 		}

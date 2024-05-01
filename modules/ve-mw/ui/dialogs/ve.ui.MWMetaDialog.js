@@ -115,11 +115,10 @@ ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
  * Assigns updateActions to all widget updates.
  */
 ve.ui.MWMetaDialog.prototype.assignEvents = function () {
-	var widgetList = this.getAllWidgets(),
-		dialog = this;
+	var widgetList = this.getAllWidgets();
 
 	widgetList.forEach( ( value ) => {
-		value.widget.connect( dialog, {
+		value.widget.connect( this, {
 			change: 'updateActions',
 			select: 'updateActions'
 		} );
@@ -154,21 +153,20 @@ ve.ui.MWMetaDialog.prototype.extractValue = function ( field ) {
  * }
  */
 ve.ui.MWMetaDialog.prototype.extractSettings = function () {
-	var ret = [],
-		dialog = this; // return value
+	var ret = []; // return value
 
 	this.widgetList.forEach( ( value ) => {
 		if ( value.hasChildren ) {
 			value.widget.items.forEach( ( item, index ) => {
 				ret.push( {
 					name: item.name + '/' + index,
-					value: dialog.extractValue( item )
+					value: this.extractValue( item )
 				} );
 			} );
 		} else {
 			ret.push( {
 				name: value.name,
-				value: dialog.extractValue( value.widget )
+				value: this.extractValue( value.widget )
 			} );
 		}
 	} );

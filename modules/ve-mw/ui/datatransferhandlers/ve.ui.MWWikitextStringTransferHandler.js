@@ -117,8 +117,7 @@ ve.ui.MWWikitextStringTransferHandler.static.createDocumentFromParsoidHtml = fun
  * @inheritdoc
  */
 ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
-	var handler = this,
-		wikitext = this.item.getAsString();
+	var wikitext = this.item.getAsString();
 
 	// We already know how to handle wikitext magic links, no need for the API call
 	if ( ve.dm.MWMagicLinkNode.static.validateContent( wikitext.trim() ) ) {
@@ -136,6 +135,7 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 		return;
 	}
 
+	var handler = this;
 	function failure() {
 		// There's no DTH fallback handling for failures, so just paste
 		// the raw wikitext if things go wrong.
@@ -151,16 +151,16 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 			return failure();
 		}
 
-		var doc = handler.constructor.static.createDocumentFromParsoidHtml(
+		var doc = this.constructor.static.createDocumentFromParsoidHtml(
 			response.visualeditor.content,
-			handler.surface.getModel().getDocument()
+			this.surface.getModel().getDocument()
 		);
 
 		if ( !doc.data.hasContent() ) {
 			return failure();
 		}
 
-		handler.resolve( doc );
+		this.resolve( doc );
 	}, failure );
 
 	this.createProgress( this.parsoidRequest, ve.msg( 'visualeditor-wikitext-progress' ) );

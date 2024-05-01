@@ -122,8 +122,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	var widget = this,
-		exactMatch = false,
+	var exactMatch = false,
 		itemWidgets = [],
 		existingCategoryItems = [],
 		matchingCategoryItems = [],
@@ -215,7 +214,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 				label: sectionData.label
 			} ) );
 			sectionData.items.forEach( ( categoryItem ) => {
-				itemWidgets.push( widget.getCategoryWidgetFromName( categoryItem ) );
+				itemWidgets.push( this.getCategoryWidgetFromName( categoryItem ) );
 			} );
 		}
 	} );

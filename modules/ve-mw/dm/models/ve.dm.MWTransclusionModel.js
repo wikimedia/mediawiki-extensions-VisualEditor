@@ -89,10 +89,10 @@
 	 *   forceType was specified this will be instant.
 	 */
 	ve.dm.MWTransclusionModel.prototype.insertTransclusionNode = function ( surfaceFragment, forceType ) {
-		var model = this,
-			deferred = ve.createDeferred(),
+		var deferred = ve.createDeferred(),
 			baseNodeClass = ve.dm.MWTransclusionNode;
 
+		var model = this;
 		function insertNode( isInline, generatedContents ) {
 			var type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType,
 				data = [

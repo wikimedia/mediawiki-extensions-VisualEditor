@@ -87,13 +87,12 @@ ve.ui.MWAceEditorWidget.prototype.setup = function () {
  * Destroy the Ace editor instance
  */
 ve.ui.MWAceEditorWidget.prototype.teardown = function () {
-	var widget = this;
 	this.loadingPromise.done( () => {
-		widget.$input.removeClass( 'oo-ui-element-hidden' );
-		widget.editor.destroy();
-		widget.editor = null;
+		this.$input.removeClass( 'oo-ui-element-hidden' );
+		this.editor.destroy();
+		this.editor = null;
 	} ).always( () => {
-		widget.loadingPromise = null;
+		this.loadingPromise = null;
 	} );
 };
 
@@ -103,7 +102,6 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
  * @fires ve.ui.MWAceEditorWidget#resize
  */
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
-	var widget = this;
 	var basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
 
 	if ( basePath.slice( 0, 2 ) === '//' ) {
@@ -123,8 +121,8 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 	} );
 	if ( this.autocompleteWordList ) {
 		var completer = {
-			getCompletions: function ( editor, session, pos, prefix, callback ) {
-				var wordList = widget.autocompleteWordList;
+			getCompletions: ( editor, session, pos, prefix, callback ) => {
+				var wordList = this.autocompleteWordList;
 				callback( null, wordList.map( ( word ) => ( {
 					caption: word,
 					value: word,
@@ -151,12 +149,11 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.setAutocomplete = function ( mode ) {
-	var widget = this;
 	this.autocomplete = mode;
 	this.loadingPromise.done( () => {
-		widget.editor.renderer.setOptions( {
-			enableBasicAutocompletion: widget.autocomplete !== 'none',
-			enableLiveAutocompletion: widget.autocomplete === 'live'
+		this.editor.renderer.setOptions( {
+			enableBasicAutocompletion: this.autocomplete !== 'none',
+			enableLiveAutocompletion: this.autocomplete === 'live'
 		} );
 	} );
 	return this;
@@ -200,12 +197,11 @@ ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.setMinRows = function ( minRows ) {
-	var widget = this;
 	this.minRows = minRows;
 	this.loadingPromise.done( () => {
-		widget.editor.setOptions( {
-			minLines: widget.minRows || 3,
-			maxLines: widget.autosize ? widget.maxRows : widget.minRows || 3
+		this.editor.setOptions( {
+			minLines: this.minRows || 3,
+			maxLines: this.autosize ? this.maxRows : this.minRows || 3
 		} );
 	} );
 	// TODO: Implement minRows setter for OO.ui.TextInputWidget
@@ -217,13 +213,11 @@ ve.ui.MWAceEditorWidget.prototype.setMinRows = function ( minRows ) {
  * @inheritdoc
  */
 ve.ui.MWAceEditorWidget.prototype.setReadOnly = function ( readOnly ) {
-	var widget = this;
-
 	// Parent method
 	ve.ui.MWAceEditorWidget.super.prototype.setReadOnly.call( this, readOnly );
 
 	this.loadingPromise.done( () => {
-		widget.editor.setReadOnly( widget.isReadOnly() );
+		this.editor.setReadOnly( this.isReadOnly() );
 	} );
 
 	this.$element.toggleClass( 've-ui-mwAceEditorWidget-readOnly', !!this.isReadOnly() );
@@ -267,10 +261,9 @@ ve.ui.MWAceEditorWidget.prototype.getRange = function () {
  * @inheritdoc
  */
 ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
-	var widget = this;
 	this.focus();
 	this.loadingPromise.done( () => {
-		var doc = widget.editor.getSession().getDocument(),
+		var doc = this.editor.getSession().getDocument(),
 			lines = doc.getAllLines();
 
 		to = to || from;
@@ -292,13 +285,13 @@ ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 		var fromOffset = offsetToPos( from );
 		var toOffset = offsetToPos( to );
 
-		var selection = widget.editor.getSelection();
+		var selection = this.editor.getSelection();
 		var range = selection.getRange();
 		range.setStart( fromOffset.row, fromOffset.column );
 		range.setEnd( toOffset.row, toOffset.column );
 		selection.setSelectionRange( range );
 	} ).fail( () => {
-		ve.ui.MWAceEditorWidget.super.prototype.selectRange.call( widget, from, to );
+		ve.ui.MWAceEditorWidget.super.prototype.selectRange.call( this, from, to );
 	} );
 	return this;
 };
@@ -328,9 +321,8 @@ ve.ui.MWAceEditorWidget.prototype.onEditorResize = function () {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.clearUndoStack = function () {
-	var widget = this;
 	this.loadingPromise.done( () => {
-		widget.editor.session.setUndoManager(
+		this.editor.session.setUndoManager(
 			new ace.UndoManager()
 		);
 	} );
@@ -345,9 +337,8 @@ ve.ui.MWAceEditorWidget.prototype.clearUndoStack = function () {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.toggleLineNumbers = function ( visible ) {
-	var widget = this;
 	this.loadingPromise.done( () => {
-		widget.editor.setOption( 'showLineNumbers', visible );
+		this.editor.setOption( 'showLineNumbers', visible );
 	} );
 	return this;
 };
@@ -360,9 +351,8 @@ ve.ui.MWAceEditorWidget.prototype.toggleLineNumbers = function ( visible ) {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.togglePrintMargin = function ( visible ) {
-	var widget = this;
 	this.loadingPromise.done( () => {
-		widget.editor.renderer.setShowPrintMargin( visible );
+		this.editor.renderer.setShowPrintMargin( visible );
 	} );
 	return this;
 };
@@ -375,13 +365,12 @@ ve.ui.MWAceEditorWidget.prototype.togglePrintMargin = function ( visible ) {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.setLanguage = function ( lang ) {
-	var widget = this;
 	this.loadingPromise.done( () => {
 		ace.config.loadModule( 'ace/ext/modelist', ( modelist ) => {
 			if ( !modelist || !modelist.modesByName[ lang ] ) {
 				lang = 'text';
 			}
-			widget.editor.getSession().setMode( 'ace/mode/' + lang );
+			this.editor.getSession().setMode( 'ace/mode/' + lang );
 		} );
 	} );
 	return this;
@@ -394,11 +383,10 @@ ve.ui.MWAceEditorWidget.prototype.setLanguage = function ( lang ) {
  * @chainable
  */
 ve.ui.MWAceEditorWidget.prototype.focus = function () {
-	var widget = this;
 	this.loadingPromise.done( () => {
-		widget.editor.focus();
+		this.editor.focus();
 	} ).fail( () => {
-		ve.ui.MWAceEditorWidget.super.prototype.focus.call( widget );
+		ve.ui.MWAceEditorWidget.super.prototype.focus.call( this );
 	} );
 	return this;
 };
@@ -408,18 +396,17 @@ ve.ui.MWAceEditorWidget.prototype.focus = function () {
  * @param {boolean} [force=false] Force a resize call on Ace editor
  */
 ve.ui.MWAceEditorWidget.prototype.adjustSize = function ( force ) {
-	var widget = this;
 	// If the editor has loaded, resize events are emitted from #onEditorResize
 	// so do nothing here unless this is a user triggered resize, otherwise call the parent method.
 	if ( force ) {
 		this.loadingPromise.done( () => {
 			// eslint-disable-next-line es-x/no-resizable-and-growable-arraybuffers
-			widget.editor.resize();
+			this.editor.resize();
 		} );
 	}
 	this.loadingPromise.fail( () => {
 		// Parent method
-		ve.ui.MWAceEditorWidget.super.prototype.adjustSize.call( widget );
+		ve.ui.MWAceEditorWidget.super.prototype.adjustSize.call( this );
 	} );
 	return this;
 };

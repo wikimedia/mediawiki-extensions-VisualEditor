@@ -116,13 +116,12 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeParameterList = fu
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createAllParameterCheckboxes = function () {
 	if ( !this.parameterListComplete ) {
-		var self = this;
 		this.initializeParameterList();
 		this.getRelevantTemplateParameters().forEach( ( paramName ) => {
-			if ( !self.parameterList.findItemFromData( paramName ) ) {
-				self.parameterList.addItems(
-					[ self.createCheckbox( paramName ) ],
-					self.findCanonicalPosition( paramName )
+			if ( !this.parameterList.findItemFromData( paramName ) ) {
+				this.parameterList.addItems(
+					[ this.createCheckbox( paramName ) ],
+					this.findCanonicalPosition( paramName )
 				);
 			}
 		} );
@@ -470,10 +469,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onToggleUnusedFields = funct
 	}
 
 	if ( !visibility && fromClick ) {
-		var self = this;
 		this.header.scrollElementIntoView().then( () => {
-			if ( self.parameterList ) {
-				self.parameterList.ensureVisibilityOfFirstCheckedParameter();
+			if ( this.parameterList ) {
+				this.parameterList.ensureVisibilityOfFirstCheckedParameter();
 			}
 		} );
 	}

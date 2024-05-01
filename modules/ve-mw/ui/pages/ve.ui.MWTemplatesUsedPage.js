@@ -17,8 +17,7 @@
  * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
-	var page = this,
-		target = ve.init.target;
+	var target = ve.init.target;
 
 	// Parent constructor
 	ve.ui.MWTemplatesUsedPage.super.apply( this, arguments );
@@ -48,10 +47,10 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 	} ).then( ( templatesUsed ) => {
 		// templatesUsed is an array of nodes
 		// eslint-disable-next-line no-jquery/no-append-html
-		page.templatesUsedFieldset.$group.append( templatesUsed );
-		ve.targetLinksToNewWindow( page.templatesUsedFieldset.$group[ 0 ] );
+		this.templatesUsedFieldset.$group.append( templatesUsed );
+		ve.targetLinksToNewWindow( this.templatesUsedFieldset.$group[ 0 ] );
 	}, () => {
-		page.templatesUsedFieldset.$group.append(
+		this.templatesUsedFieldset.$group.append(
 			$( '<em>' ).text( ve.msg( 'visualeditor-dialog-meta-templatesused-noresults' ) )
 		);
 	} );

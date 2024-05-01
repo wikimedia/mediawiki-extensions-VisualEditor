@@ -80,9 +80,8 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.static.createItem = function ( 
  * @return {ve.ui.MWTransclusionOutlineParameterSelectWidget}
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.addItems = function ( items, index ) {
-	var self = this;
 	items.forEach( ( item ) => {
-		item.connect( self, {
+		item.connect( this, {
 			change: [ 'onCheckboxChange', item ]
 		} );
 	} );

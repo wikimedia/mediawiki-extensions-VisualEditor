@@ -357,25 +357,23 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
  * @inheritdoc
  */
 ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
-	var dialog = this;
-
 	if ( action === 'done' ) {
 		return new OO.ui.Process( () => {
 			var deferred = ve.createDeferred();
-			dialog.checkRequiredParameters().done( () => {
-				var surfaceModel = dialog.getFragment().getSurface(),
-					obj = dialog.transclusionModel.getPlainObject(),
+			this.checkRequiredParameters().done( () => {
+				var surfaceModel = this.getFragment().getSurface(),
+					obj = this.transclusionModel.getPlainObject(),
 					modelPromise = ve.createDeferred().resolve().promise();
 
-				dialog.pushPending();
+				this.pushPending();
 
-				if ( dialog.selectedNode instanceof ve.dm.MWTransclusionNode ) {
-					dialog.transclusionModel.updateTransclusionNode( surfaceModel, dialog.selectedNode );
+				if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
+					this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
 					// TODO: updating the node could result in the inline/block state change
 				} else if ( obj !== null ) {
-					// Collapse returns a new fragment, so update dialog.fragment
-					dialog.fragment = dialog.getFragment().collapseToEnd();
-					modelPromise = dialog.transclusionModel.insertTransclusionNode( dialog.getFragment() );
+					// Collapse returns a new fragment, so update this.fragment
+					this.fragment = this.getFragment().collapseToEnd();
+					modelPromise = this.transclusionModel.insertTransclusionNode( this.getFragment() );
 				}
 
 				// TODO tracking will only be implemented temporarily to answer questions on
@@ -390,7 +388,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 					// eslint-disable-next-line camelcase
 					templateEvent.user_edit_count_bucket = editCountBucket;
 				}
-				var parts = dialog.transclusionModel.getParts();
+				var parts = this.transclusionModel.getParts();
 				for ( var i = 0; i < parts.length; i++ ) {
 					// Only {@see ve.dm.MWTemplateModel} have a title
 					var title = parts[ i ].getTitle && parts[ i ].getTitle();
@@ -401,7 +399,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );
 
 				return modelPromise.then( () => {
-					dialog.close( { action: action } ).closed.always( dialog.popPending.bind( dialog ) );
+					this.close( { action: action } ).closed.always( this.popPending.bind( this ) );
 				} );
 			} ).always( deferred.resolve );
 
@@ -419,8 +417,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWTemplateDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var promise,
-				dialog = this;
+			var promise;
 
 			// Properties
 			this.loaded = false;
@@ -453,7 +450,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 					var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
 					promise = this.transclusionModel.addPart( placeholderPage );
 					promise.then( () => {
-						dialog.bookletLayout.setPage( placeholderPage.getId() );
+						this.bookletLayout.setPage( placeholderPage.getId() );
 					} );
 					this.canGoBack = true;
 				}
@@ -487,11 +484,11 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data ) {
 
 			return promise.then( () => {
 				// Add missing required and suggested parameters to each transclusion.
-				dialog.transclusionModel.addPromptedParameters();
+				this.transclusionModel.addPromptedParameters();
 
-				dialog.$body.append( dialog.bookletLayout.$element );
-				dialog.$element.addClass( 've-ui-mwTemplateDialog-ready' );
-				dialog.loaded = true;
+				this.$body.append( this.bookletLayout.$element );
+				this.$element.addClass( 've-ui-mwTemplateDialog-ready' );
+				this.loaded = true;
 			} );
 		} );
 };

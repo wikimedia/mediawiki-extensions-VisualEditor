@@ -361,27 +361,26 @@ ve.dm.MWImageNode.prototype.getFilename = function () {
  * @inheritdoc
  */
 ve.dm.MWImageNode.prototype.getScalable = function () {
-	var imageNode = this;
 	if ( !this.scalablePromise ) {
 		this.scalablePromise = ve.dm.MWImageNode.static.getScalablePromise( this.getFilename() );
 		// If the promise was already resolved before getScalablePromise returned, then jQuery will execute the done straight away.
 		// So don't just do getScalablePromise( ... ).done because we need to make sure that this.scalablePromise gets set first.
 		this.scalablePromise.done( ( info ) => {
 			if ( info ) {
-				imageNode.getScalable().setOriginalDimensions( {
+				this.getScalable().setOriginalDimensions( {
 					width: info.width,
 					height: info.height
 				} );
-				var oldMediaType = imageNode.mediaType;
+				var oldMediaType = this.mediaType;
 				// Update media type
-				imageNode.mediaType = info.mediatype;
+				this.mediaType = info.mediatype;
 				// Update according to type
-				imageNode.constructor.static.syncScalableToType(
-					imageNode.getAttribute( 'type' ),
-					imageNode.mediaType,
-					imageNode.getScalable()
+				this.constructor.static.syncScalableToType(
+					this.getAttribute( 'type' ),
+					this.mediaType,
+					this.getScalable()
 				);
-				imageNode.emit( 'attributeChange', 'mediaType', oldMediaType, imageNode.mediaType );
+				this.emit( 'attributeChange', 'mediaType', oldMediaType, this.mediaType );
 			}
 		} );
 	}

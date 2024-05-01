@@ -68,8 +68,7 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
  * @param {boolean} [hasFragment=false] Whether the link goes to a fragment
  */
 ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFragment ) {
-	var cache = this,
-		cachedMissingData = this.getCached( '_missing/' + title );
+	var cachedMissingData = this.getCached( '_missing/' + title );
 
 	var promise;
 	// Use the synchronous missing link cache data if it exists
@@ -84,7 +83,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 			$element.addClass( 'new' );
 		} else {
 			// Provided by core MediaWiki, styled like a <strong> element by default.
-			if ( !hasFragment && cache.constructor.static.normalizeTitle( title ) === cache.constructor.static.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) ) ) {
+			if ( !hasFragment && this.constructor.static.normalizeTitle( title ) === this.constructor.static.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) ) ) {
 				$element.addClass( 'mw-selflink' );
 			}
 			// Provided by core MediaWiki, no styles by default.
