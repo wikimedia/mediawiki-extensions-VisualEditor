@@ -409,7 +409,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {
-			this.fragment.removeMeta( currentItem );
+			settingsPage.fragment.removeMeta( currentItem );
 		} else if ( !currentItem && isSelected ) {
 			settingsPage.fragment.insertMeta( { type: metaItemCheckbox.metaName } );
 		}
