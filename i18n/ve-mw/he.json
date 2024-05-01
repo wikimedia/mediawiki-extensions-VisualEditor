@@ -65,6 +65,7 @@
 	"visualeditor-changedesc-mwtransclusion": "פרמטרי תבנית השתנו",
 	"visualeditor-desc": "עורך חזותי למדיה־ויקי",
 	"visualeditor-descriptionpagelink": "Project:עורך חזותי",
+	"visualeditor-dialog-extension-abandonedit": "האם לסגור את תיבת הדו־שיח הזאת מבלי להחיל את השינויים שלך?",
 	"visualeditor-dialog-media-alttext-checkbox": "להשתמש בכיתוב כטקסט חלופי",
 	"visualeditor-dialog-media-alttext-section": "טקסט חלופי",
 	"visualeditor-dialog-media-alttext-section-help": "אפשר להשתמש בזה כדי לכתוב תיאור טקסט בשביל אנשים שאינם יכולים לראות את הפריט. התיאור צריך להיות מספיק בשביל להבין את המטרה של פריט המדיה ואת המידע שהוא מספק. זה חיוני למשתמשים עיוורים ולמשתמשים אחרים שמשתמשים בתכנה להקראת מסך או בדפדפני טקסט.",
