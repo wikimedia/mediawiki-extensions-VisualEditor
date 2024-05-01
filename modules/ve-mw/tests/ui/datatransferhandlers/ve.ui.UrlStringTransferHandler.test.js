@@ -32,7 +32,7 @@ QUnit.test( 'paste', ( assert ) => {
 			}
 		];
 
-	for ( let i = 0; i < cases.length; i++ ) {
-		ve.test.utils.runUrlStringHandlerTest( assert, cases[ i ].pasteString, cases[ i ].pasteHtml, cases[ i ].pasteType, cases[ i ].expectedData, location.origin, cases[ i ].msg );
-	}
+	cases.forEach( ( caseItem ) => {
+		ve.test.utils.runUrlStringHandlerTest( assert, caseItem.pasteString, caseItem.pasteHtml, caseItem.pasteType, caseItem.expectedData, location.origin, caseItem.msg );
+	} );
 } );

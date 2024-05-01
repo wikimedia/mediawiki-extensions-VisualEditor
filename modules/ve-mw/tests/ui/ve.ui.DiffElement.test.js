@@ -64,8 +64,8 @@ QUnit.test( 'Diffing', ( assert ) => {
 			}
 		];
 
-	for ( let i = 0; i < cases.length; i++ ) {
-		ve.test.utils.runDiffElementTest( assert, cases[ i ] );
-	}
+	cases.forEach( ( caseItem ) => {
+		ve.test.utils.runDiffElementTest( assert, caseItem );
+	} );
 
 } );

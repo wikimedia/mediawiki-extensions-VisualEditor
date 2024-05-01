@@ -43,11 +43,11 @@ QUnit.test( 'getRenderedContents', ( assert ) => {
 			`
 		} ];
 
-	for ( let i = 0; i < cases.length; i++ ) {
-		const doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( cases[ i ].data ) ),
+	cases.forEach( ( caseItem ) => {
+		const doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( caseItem.data ) ),
 			$wrapper = $( new ve.ce.ParagraphNode( doc.getDocumentNode().getChildren()[ 0 ] ).getRenderedContents() );
 		// HACK strip out all the class="ve-ce-textStyleAnnotation ve-ce-textStyleBoldAnnotation" crap
 		$wrapper.find( '.ve-ce-textStyleAnnotation' ).removeAttr( 'class' );
-		assert.equalDomElement( $wrapper[ 0 ], $( '<div>' ).html( cases[ i ].html )[ 0 ], cases[ i ].msg );
-	}
+		assert.equalDomElement( $wrapper[ 0 ], $( '<div>' ).html( caseItem.html )[ 0 ], caseItem.msg );
+	} );
 } );
