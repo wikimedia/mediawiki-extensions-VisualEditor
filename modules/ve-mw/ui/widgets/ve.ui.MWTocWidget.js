@@ -119,8 +119,8 @@ ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
  * Hides or shows the TOC based on page and default settings
  */
 ve.ui.MWTocWidget.prototype.updateVisibility = function () {
-	// In MediaWiki if __FORCETOC__ is anywhere TOC is always displayed
-	// ... Even if there is a __NOTOC__ in the article
+	// In MediaWiki if `__FORCETOC__` is anywhere TOC is always displayed
+	// ... Even if there is a `__NOTOC__` in the article
 	this.toggle( !this.mwTOCDisable && ( this.mwTOCForce || this.rootLength >= 3 ) );
 };
 

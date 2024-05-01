@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel hidden category meta item (for __HIDDENCAT__).
+ * DataModel hidden category meta item (for `__HIDDENCAT__`).
  *
  * @class
  * @extends ve.dm.MetaItem

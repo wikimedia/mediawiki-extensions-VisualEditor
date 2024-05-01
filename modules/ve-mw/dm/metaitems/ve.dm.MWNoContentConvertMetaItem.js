@@ -6,7 +6,7 @@
  */
 
 /**
- * DataModel disable content conversion meta item (for __NOCONTENTCONVERT__ and __NOCC__).
+ * DataModel disable content conversion meta item (for `__NOCONTENTCONVERT__` and `__NOCC__`).
  *
  * @class
  * @extends ve.dm.MetaItem
