@@ -12,8 +12,10 @@
 		} );
 		return {
 			params,
-			getTemplateDataQueryTitle: () => null,
-			getTarget: () => {
+			getTemplateDataQueryTitle: function () {
+				return null;
+			},
+			getTarget: function () {
 				return { wt: 'RawTemplateName' };
 			},
 			getParameters: function () {

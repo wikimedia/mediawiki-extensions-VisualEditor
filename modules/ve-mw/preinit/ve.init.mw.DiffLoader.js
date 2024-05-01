@@ -62,12 +62,15 @@
 					false,
 					// noMetadata, we only use `content` in getModelFromResponse
 					true
-				).then( ( response ) => parseDocumentModulePromise.then( () => mw.libs.ve.diffLoader.getModelFromResponse( response, section ) ), function () {
+				).then(
+					( response ) => parseDocumentModulePromise.then( () => mw.libs.ve.diffLoader.getModelFromResponse( response, section ) ),
+					() => {
 					// Clear promise. Do not cache errors.
-					delete revCache[ cacheKey ];
-					// Let caller handle the error code
-					return $.Deferred().rejectWith( this, arguments );
-				} );
+						delete revCache[ cacheKey ];
+						// Let caller handle the error code
+						return $.Deferred().rejectWith( this, arguments );
+					}
+				);
 
 			return revCache[ cacheKey ];
 		},
@@ -93,9 +96,7 @@
 				// TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.
 				// We may want to remove that assumption from the differ?
 				newDoc.getStore().merge( oldDoc.getStore() );
-				return function () {
-					return new ve.dm.VisualDiff( oldDoc, newDoc );
-				};
+				return () => new ve.dm.VisualDiff( oldDoc, newDoc );
 			} );
 		}
 

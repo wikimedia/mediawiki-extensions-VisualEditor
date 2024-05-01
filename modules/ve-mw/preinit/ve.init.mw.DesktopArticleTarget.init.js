@@ -505,10 +505,10 @@
 		}
 
 		var $heading;
-		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( function () {
-			var linkUrl = new URL( this.href );
+		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( ( i, el ) => {
+			var linkUrl = new URL( el.href );
 			if ( section === parseSection( linkUrl.searchParams.get( 'section' ) ) ) {
-				$heading = $( this ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' );
+				$heading = $( el ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' );
 				return false;
 			}
 		} );
@@ -617,10 +617,10 @@
 		var visibleSectionOffset = null;
 		if ( section === null ) {
 			var firstVisibleEditSection = null;
-			$( '#firstHeading, #mw-content-text .mw-editsection' ).each( function () {
-				var top = this.getBoundingClientRect().top;
+			$( '#firstHeading, #mw-content-text .mw-editsection' ).each( ( i, el ) => {
+				var top = el.getBoundingClientRect().top;
 				if ( top > 0 ) {
-					firstVisibleEditSection = this;
+					firstVisibleEditSection = el;
 					// break
 					return false;
 				}
@@ -900,14 +900,12 @@
 		 *     mw.libs.ve.addPlugin( 'ext.gadget.foobar' );
 		 *
 		 *     // Register a callback
-		 *     mw.libs.ve.addPlugin( function ( target ) {
+		 *     mw.libs.ve.addPlugin( ( target ) => {
 		 *         ve.dm.Foobar = .....
 		 *     } );
 		 *
 		 *     // Register a callback that loads another script
-		 *     mw.libs.ve.addPlugin( function () {
-		 *         return $.getScript( 'http://example.com/foobar.js' );
-		 *     } );
+		 *     mw.libs.ve.addPlugin( () => $.getScript( 'http://example.com/foobar.js' ) );
 		 *
 		 * @param {string|Function} plugin Module name or callback that optionally returns a promise
 		 */
@@ -933,17 +931,17 @@
 					'#ca-edit a,' +
 					// Add section is currently a wikitext-only feature
 					'#ca-addsection a'
-				).each( function () {
-					if ( !this.href ) {
+				).each( ( i, el ) => {
+					if ( !el.href ) {
 						// Not a real link, probably added by a gadget or another extension (T328094)
 						return;
 					}
 
-					var linkUrl = new URL( this.href );
+					var linkUrl = new URL( el.href );
 					if ( linkUrl.searchParams.has( 'action' ) ) {
 						linkUrl.searchParams.delete( 'action' );
 						linkUrl.searchParams.set( 'veaction', 'editsource' );
-						$( this ).attr( 'href', linkUrl.toString() );
+						$( el ).attr( 'href', linkUrl.toString() );
 					}
 				} );
 			}

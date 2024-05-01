@@ -1075,9 +1075,9 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 
 			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
 		} else {
-			return target.originalDmDocPromise.then( ( originalDmDoc ) => function () {
-				return new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() );
-			} );
+			return target.originalDmDocPromise.then(
+				( originalDmDoc ) => ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() )
+			);
 		}
 	} );
 };
@@ -1289,7 +1289,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 			);
 		} )
 		.promise( {
-			abort: function () {
+			abort: () => {
 				if ( xhr ) {
 					xhr.abort();
 				}
@@ -1705,7 +1705,7 @@ ve.init.mw.ArticleTarget.prototype.submit = function ( wikitext, fields ) {
  *
  * This method performs an asynchronous action and uses a callback function to handle the result.
  *
- *     target.serialize( doc ).then( function ( data ) {
+ *     target.serialize( doc ).then( ( data ) => {
  *         // Do something with data.content (wikitext)
  *     } );
  *

@@ -84,17 +84,17 @@
 					'div.donut-container', // Web of Trust (T189148)
 					'div.shield-container' // Web of Trust (T297862)
 				].join( ',' ) )
-				.each( function () {
+				.each( ( j, el ) => {
 					function truncate( text, l ) {
 						return text.length > l ? text.slice( 0, l ) + '…' : text;
 					}
-					var errorMessage = 'DOM content matching deny list found:\n' + truncate( this.outerHTML, 100 ) +
-						'\nContext:\n' + truncate( this.parentNode.outerHTML, 200 );
+					var errorMessage = 'DOM content matching deny list found:\n' + truncate( el.outerHTML, 100 ) +
+						'\nContext:\n' + truncate( el.parentNode.outerHTML, 200 );
 					mw.log.error( errorMessage );
 					var err = new Error( errorMessage );
 					err.name = 'VeDomDenyListWarning';
 					mw.errorLogger.logError( err, 'error.visualeditor' );
-					$( this ).remove();
+					$( el ).remove();
 				} );
 
 			// data-mw-section-id is copied to headings by mw.libs.ve.unwrapParsoidSections

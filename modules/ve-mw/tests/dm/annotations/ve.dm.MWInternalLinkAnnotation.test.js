@@ -181,7 +181,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 		}
 	];
 
-	articlePaths.forEach( function ( pathData ) {
+	articlePaths.forEach( ( pathData ) => {
 		// Set up global state (site configuration)
 		mw.config.set( pathData.config );
 
@@ -196,14 +196,13 @@ QUnit.test( 'toDataElement', ( assert ) => {
 		converter.fromClipboard = true;
 
 		// Generate test cases for this site configuration
-		const cases = getCases();
-		for ( let i = 0; i < cases.length; i++ ) {
+		getCases().forEach( ( caseItem ) => {
 			assert.deepEqual(
-				ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ cases[ i ].element ], converter ),
-				cases[ i ].expected,
-				cases[ i ].msg + ': ' + pathData.msg
+				ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ caseItem.element ], converter ),
+				caseItem.expected,
+				caseItem.msg + ': ' + pathData.msg
 			);
-		}
+		} );
 	} );
 } );
 

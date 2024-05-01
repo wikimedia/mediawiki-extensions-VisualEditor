@@ -54,9 +54,7 @@ ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget = func
 	var inputWidget = new OO.ui.TextInputWidget( ve.extendObject( {}, config, {
 		icon: 'linkExternal',
 		type: 'url',
-		validate: function ( text ) {
-			return !!ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( text.trim() );
-		}
+		validate: ( text ) => !!ve.init.platform.getExternalLinkUrlProtocolsRegExp().exec( text.trim() )
 	} ) );
 
 	inputWidget.$input.attr( 'aria-label', mw.msg( 'visualeditor-linkinspector-button-link-external' ) );

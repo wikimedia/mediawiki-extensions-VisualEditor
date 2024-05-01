@@ -173,7 +173,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 	/*
 	ve.init.target.getSurface().createProgress(
 		parsePromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
-	).done( function ( progressBar, cancelPromise ) {
+	).done( ( progressBar, cancelPromise ) => {
 		cancelPromise.fail( () => {
 			parsePromise.abort();
 		} );

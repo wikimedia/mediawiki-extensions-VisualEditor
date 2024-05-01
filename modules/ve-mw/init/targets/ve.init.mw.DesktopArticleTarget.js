@@ -879,10 +879,10 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 	if ( !data.nocontent ) {
 		// Fix permalinks
 		if ( data.newrevid !== undefined ) {
-			$( '#t-permalink' ).add( '#coll-download-as-rl' ).find( 'a' ).each( function () {
-				var permalinkUrl = new URL( this.href );
+			$( '#t-permalink' ).add( '#coll-download-as-rl' ).find( 'a' ).each( ( i, el ) => {
+				var permalinkUrl = new URL( el.href );
 				permalinkUrl.searchParams.set( 'oldid', data.newrevid );
-				$( this ).attr( 'href', permalinkUrl.toString() );
+				$( el ).attr( 'href', permalinkUrl.toString() );
 			} );
 		}
 
