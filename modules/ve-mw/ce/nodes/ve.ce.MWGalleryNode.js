@@ -99,8 +99,8 @@ ve.ce.MWGalleryNode.prototype.onUpdate = function () {
  * Handle attribute changes to keep the live HTML element updated.
  *
  * @param {string} key Attribute name
- * @param {Mixed} from Old value
- * @param {Mixed} to New value
+ * @param {any} from Old value
+ * @param {any} to New value
  */
 ve.ce.MWGalleryNode.prototype.onAttributeChange = function ( key, from, to ) {
 	var defaults = mw.config.get( 'wgVisualEditorConfig' ).galleryOptions;

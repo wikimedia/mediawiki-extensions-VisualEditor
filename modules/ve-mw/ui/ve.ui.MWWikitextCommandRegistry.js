@@ -31,7 +31,7 @@ OO.inheritClass( ve.ui.MWWikitextCommandRegistry, ve.ui.CommandRegistry );
  * See https://doc.wikimedia.org/oojs/master/OO.Registry.html
  *
  * @param {string} name Symbolic name
- * @return {Mixed|undefined} Data associated with symbolic name
+ * @return {any|undefined} Data associated with symbolic name
  */
 ve.ui.MWWikitextCommandRegistry.prototype.lookup = function ( name ) {
 	// Parent method
