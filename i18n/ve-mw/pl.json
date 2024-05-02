@@ -74,6 +74,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Zmieniono parametry szablonu",
 	"visualeditor-desc": "Edytor wizualny dla MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-extension-abandonedit": "Czy na pewno chcesz zamknąć okno bez zastosowania zmian?",
 	"visualeditor-dialog-media-alttext-checkbox": "Użyj podpisu jako tekstu alternatywnego",
 	"visualeditor-dialog-media-alttext-section": "Tekst alternatywny",
 	"visualeditor-dialog-media-alttext-section-help": "Możesz napisać opis użyteczny dla osób, które nie widzą pliku multimedialnego. Opis powinien zawierać informacje, które daje plik multimedialny. Jest to bardzo ważne dla osób używających oprogramowania odczytującego zawartość ekranu, w tym dla niewidomych, a także dla korzystających z przeglądarek ładujących wyłącznie tekst.",

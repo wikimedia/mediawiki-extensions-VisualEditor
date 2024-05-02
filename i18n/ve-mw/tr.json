@@ -83,6 +83,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Şablon parametreleri değiştirildi",
 	"visualeditor-desc": "MediaWiki için görsel düzenleyici",
 	"visualeditor-descriptionpagelink": "Project:Görsel Düzenleyici",
+	"visualeditor-dialog-extension-abandonedit": "Değişikliklerinizi uygulamadan bu iletişim kutusunu kapatmak istediğinizden emin misiniz?",
 	"visualeditor-dialog-media-alttext-checkbox": "Altyazıyı alternatif metin olarak kullan",
 	"visualeditor-dialog-media-alttext-section": "Alternatif metin",
 	"visualeditor-dialog-media-alttext-section-help": "Öğeyi göremeyen kişiler için bir metin açıklaması yazmak için bunu kullanabilirsiniz. Açıklama, medya ögesi tarafından verilen amacı ve bilgileri anlamaları için yeterli olmalıdır. Bu, görme engelli kullanıcılar ve ekran okuyucu yazılımı veya salt metin tarayıcıları kullanan diğer kişiler için hayati önem taşır.",
