@@ -11,8 +11,9 @@
 	"tag-editcheck-references-activated": "[[{{MediaWiki:editcheck-falsepositives-link}}|Edit Check (references) activated]]",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Babakan visual]]",
 	"visualeditor-welcomedialog-action": "Mulai mambabak",
-	"visualeditor-welcomedialog-content": "Siapa haja kawa mambabak, wan saban pambaikan pacangan manulung.",
+	"visualeditor-welcomedialog-content": "Siapa haja kawa mambabak, satu babakan gin pacangan manulung.",
 	"visualeditor-welcomedialog-content-thanks": "Tarima kasih sudah manulung pamakai lain mandapati hal hanyar!",
+	"visualeditor-welcomedialog-switch": "Alih ka pambabak asal mulanya",
 	"visualeditor-welcomedialog-switch-ve": "Ganti ka pambabak visual",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Salamat datang}} di $2"
 }
