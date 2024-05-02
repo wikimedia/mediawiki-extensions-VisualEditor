@@ -231,7 +231,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setContainer = function ( $container )
 /**
  * Verify that a PopStateEvent correlates to a state we created.
  *
- * @param {Mixed} popState From PopStateEvent#state
+ * @param {any} popState From PopStateEvent#state
  * @return {boolean}
  */
 ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState ) {

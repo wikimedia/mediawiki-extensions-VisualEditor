@@ -41,7 +41,7 @@ OO.inheritClass( ve.ui.MWWikitextDataTransferHandlerFactory, ve.ui.DataTransferH
  * See https://doc.wikimedia.org/oojs/master/OO.Factory.html
  *
  * @param {string} name Object name
- * @param {...Mixed} [args] Arguments to pass to the constructor
+ * @param {...any} [args] Arguments to pass to the constructor
  * @return {Object} The new object
  * @throws {Error} Unknown object name
  */

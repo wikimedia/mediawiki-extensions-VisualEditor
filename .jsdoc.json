@@ -46,8 +46,6 @@
 				"mw.libs.ve."
 			],
 			"linkMap": {
-				"Mixed": "#",
-
 				"VisualEditorOverlay": "https://doc.wikimedia.org/MobileFrontend/master/js/js/VisualEditorOverlay.html",
 
 				"Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
