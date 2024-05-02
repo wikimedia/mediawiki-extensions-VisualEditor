@@ -1076,7 +1076,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 			return mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( target.originalDmDocPromise, newRevPromise );
 		} else {
 			return target.originalDmDocPromise.then(
-				( originalDmDoc ) => ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() )
+				( originalDmDoc ) => new ve.dm.VisualDiff( originalDmDoc, target.getSurface().getModel().getAttachedRoot() )
 			);
 		}
 	} );
