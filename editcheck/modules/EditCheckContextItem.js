@@ -78,7 +78,6 @@ ve.ui.EditCheckContextItem.prototype.close = function ( data ) {
 ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 	ve.track( 'activity.editCheckReferences', { action: 'edit-check-confirm' } );
 
-	var contextItem = this;
 	var fragment = this.data.fragment;
 	var windowAction = ve.ui.actionFactory.create( 'window', this.context.getSurface(), 'check' );
 
@@ -115,7 +114,7 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 		if ( citoidData && citoidData.action === 'manual-choose' ) {
 			// The plain reference dialog has been launched. Wait for the data from
 			// the basic Cite closing promise instead.
-			contextItem.context.getSurface().getDialogs().once( 'closing', ( win, closed, citeData ) => {
+			this.context.getSurface().getDialogs().once( 'closing', ( win, closed, citeData ) => {
 				citoidOrCiteDataDeferred.resolve( citeData );
 			} );
 		} else {
@@ -128,13 +127,13 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 				// Reference was not inserted - re-open this context
 				setTimeout( () => {
 					// Deactivate again for mobile after teardown has modified selections
-					contextItem.context.getSurface().getView().deactivate();
-					contextItem.context.afterContextChange();
+					this.context.getSurface().getView().deactivate();
+					this.context.afterContextChange();
 				}, 500 );
 			} else {
 				// Edit check inspector is already closed by this point, but
 				// we need to end the workflow.
-				contextItem.close( citoidData );
+				this.close( citoidData );
 			}
 		} );
 	} );
@@ -143,7 +142,6 @@ ve.ui.EditCheckContextItem.prototype.onAcceptClick = function () {
 ve.ui.EditCheckContextItem.prototype.onRejectClick = function () {
 	ve.track( 'activity.editCheckReferences', { action: 'edit-check-reject' } );
 
-	var contextItem = this;
 	var windowAction = ve.ui.actionFactory.create( 'window', this.context.getSurface(), 'check' );
 	windowAction.open(
 		'editCheckReferencesInspector',
@@ -153,14 +151,14 @@ ve.ui.EditCheckContextItem.prototype.onRejectClick = function () {
 		}
 	// eslint-disable-next-line arrow-body-style
 	).then( ( instance ) => {
-		// contextItem.openingCitoid = false;
+		// this.openingCitoid = false;
 		return instance.closing;
 	} ).then( ( data ) => {
 		if ( !data ) {
 			// Form was closed, re-open this context
-			contextItem.context.afterContextChange();
+			this.context.afterContextChange();
 		} else {
-			contextItem.close( data );
+			this.close( data );
 		}
 	} );
 };

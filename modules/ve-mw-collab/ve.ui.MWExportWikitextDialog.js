@@ -107,9 +107,8 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
  */
 ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getSetupProcess.call( this, data )
-		.next( function () {
-			var dialog = this,
-				surface = ve.init.target.getSurface(),
+		.next( () => {
+			var surface = ve.init.target.getSurface(),
 				wikitextInput = this.wikitextLayout.textInput;
 			this.titleButton.setDisabled( true );
 			this.wikitextLayout.textInput.pushPending();
@@ -117,13 +116,13 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 				wikitextInput.setValue( wikitext.trim() );
 				wikitextInput.$input.scrollTop( 0 );
 				wikitextInput.popPending();
-				dialog.titleButton.setDisabled( false );
-				dialog.updateSize();
+				this.titleButton.setDisabled( false );
+				this.updateSize();
 			}, () => {
 				// TODO: Display API errors
 				wikitextInput.popPending();
 			} );
-		}, this );
+		} );
 };
 
 /**
@@ -131,7 +130,7 @@ ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
  */
 ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.titleInput.focus();
 
 			// Fix height of wikitext input
@@ -148,7 +147,7 @@ ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
 				);
 			}
 
-		}, this );
+		} );
 };
 
 /**
@@ -156,9 +155,9 @@ ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
  */
 ve.ui.MWExportWikitextDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getTeardownProcess.call( this, data )
-		.next( function () {
+		.next( () => {
 			this.wikitextLayout.textInput.setValue( '' );
-		}, this );
+		} );
 };
 
 /**
