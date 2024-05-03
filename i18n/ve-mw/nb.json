@@ -63,6 +63,7 @@
 	"visualeditor-changedesc-mwtransclusion": "Malparametere endret",
 	"visualeditor-desc": "Visuell redigering for MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
+	"visualeditor-dialog-extension-abandonedit": "Er du sikker på at du ønsker å lukke denne dialogen uten å ta i bruk endringene dine?",
 	"visualeditor-dialog-media-alttext-checkbox": "Bruk bildeteksten som alternativ tekst",
 	"visualeditor-dialog-media-alttext-section": "Alternativ tekst",
 	"visualeditor-dialog-media-alttext-section-help": "Feltet brukes for å gi en beskrivelse av medieobjektet for brukere som ikke kan se det. Beskrivelsen bør være nok til at de kan forstå meningen og informasjonen som gis av det. Dette er viktig for blinde og andre som bruker skjermleserprogramvare eller tekstbaserte nettlesere.",
