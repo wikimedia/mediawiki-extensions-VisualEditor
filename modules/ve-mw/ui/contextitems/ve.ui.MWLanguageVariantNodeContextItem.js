@@ -84,8 +84,10 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 
 	function languageNameIfKnown( code ) {
 		return ve.init.platform.hasLanguageCode( code ) ?
-			ve.init.platform.getLanguageName( code ) :
-			ve.msg( 'visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label' );
+			mw.html.escape( ve.init.platform.getLanguageName( code ) ) :
+			mw.message(
+				'visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label'
+			).parse();
 	}
 
 	switch ( type ) {
@@ -106,7 +108,8 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 
 				$table
 					.append( $( '<tr>' )
-						.append( $( '<td>' ).text( name ).attr( 'lang', code ) )
+						// eslint-disable-next-line no-jquery/no-html
+						.append( $( '<td>' ).html( name ).attr( 'lang', code ) )
 						.append( $( '<td>' ).text( code ) )
 					);
 			} );
@@ -137,7 +140,8 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 					name = languageNameIfKnown( code.toLowerCase() );
 				$table
 					.append( $( '<tr>' )
-						.append( $( '<td>' ).text( name ).attr( 'lang', code ) )
+						// eslint-disable-next-line no-jquery/no-html
+						.append( $( '<td>' ).html( name ).attr( 'lang', code ) )
 						.append( $( '<td>' ).text( code ) )
 						.append( $fromText )
 						.append( $toText )
@@ -167,7 +171,8 @@ ve.ui.MWLanguageVariantNodeContextItem.prototype.renderBody = function () {
 				);
 				$table
 					.append( $( '<tr>' )
-						.append( $( '<td>' ).text( name ).attr( 'lang', code ) )
+						// eslint-disable-next-line no-jquery/no-html
+						.append( $( '<td>' ).html( name ).attr( 'lang', code ) )
 						.append( $( '<td>' ).text( code ) )
 						.append( $text )
 					);
