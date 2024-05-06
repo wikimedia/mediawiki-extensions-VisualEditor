@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Beta16",
 			"Greis",
 			"S4b1nuz E.656",
@@ -9,7 +10,7 @@
 	},
 	"visualeditor-mwlanguagevariant-name": "Nome della lingua: $1",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Codice lingua",
-	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<Invalido>",
+	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<em>Invalido</em>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Lingua",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Sorgente",
 	"visualeditor-mwlanguagevariantcontextitem-rule-text-to-label": "Destinazione",
