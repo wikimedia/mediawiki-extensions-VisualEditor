@@ -7,7 +7,7 @@
 		"eslint": "eslint --cache --ext .js,.json .",
 		"eslint-fix": "eslint --cache --ext .js,.json --fix .",
 		"api-testing": "mocha --timeout 0 --parallel --recursive tests/api-testing",
-		"test": "grunt test",
+		"test": "grunt test && node build/checkModules.js",
 		"doc": "jsdoc -c .jsdoc.json",
 		"screenshots-all": "grunt screenshots-all",
 		"selenium-daily": "npm run selenium-test -- --mochaOpts.grep @daily",
