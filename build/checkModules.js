@@ -2,8 +2,8 @@
 
 const path = require( 'path' );
 
-const extensionJson = require( '../../extension.json' );
-const modulesJson = require( '../../lib/ve/build/modules.json' );
+const extensionJson = require( '../extension.json' );
+const modulesJson = require( '../lib/ve/build/modules.json' );
 
 const ignored = [
 	'node_modules/',
@@ -29,7 +29,6 @@ const ignored = [
 	'tests/dm/ve.dm.FakeSocket.js',
 	'tests/dm/ve.dm.DocumentStore.test.js',
 	'tests/dm/ve.dm.TransportServer.test.js'
-
 ];
 
 function addFilesToSet( files, set, basePath = '' ) {
