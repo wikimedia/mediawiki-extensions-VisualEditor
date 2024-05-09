@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"NMW03"
+			"NMW03",
+			"Nemoralis"
 		]
 	},
 	"editcheck-dialog-action-no": "Xeyr",
@@ -19,5 +20,9 @@
 	"tag-editcheck-reference-decline-common-knowledge": "Redaktə Yoxlanışı (istinadlar) rədd edildi (hamının bildiyi)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck istinadı hamının bildiyi məlumat kimi rədd edildi",
 	"tag-editcheck-reference-decline-irrelevant": "Redaktə yoxlanışı (istinadlar) rədd edildi (aidiyyatsız)",
-	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck istinadı əhəmiyyətsiz olduğu üçün rədd edildi"
+	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck istinadı əhəmiyyətsiz olduğu üçün rədd edildi",
+	"tag-editcheck-reference-decline-other": "Redaktə Yoxlanışı (istinadlar) rədd edildi (digər)",
+	"tag-editcheck-reference-decline-other-description": "EditCheck istinadı siyahıya alınmamış səbəbə görə rədd edildi",
+	"tag-editcheck-reference-decline-uncertain": "Redaktə Yoxlanışı (istinadlar) rədd edildi (qeyri-müəyyən)",
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck istinadı qeyri-müəyyən olduğu üçün rədd edildi"
 }
