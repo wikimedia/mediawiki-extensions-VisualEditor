@@ -1,10 +1,9 @@
 'use strict';
 
-const fs = require( 'fs' );
 const path = require( 'path' );
 
-const extensionJsonPath = '../../extension.json';
-const modulesJsonPath = '../../lib/ve/build/modules.json';
+const extensionJson = require( '../../extension.json' );
+const modulesJson = require( '../../lib/ve/build/modules.json' );
 
 const ignored = [
 	'node_modules/',
@@ -32,17 +31,6 @@ const ignored = [
 	'tests/dm/ve.dm.TransportServer.test.js'
 
 ];
-
-function readJson( filePath ) {
-	try {
-		// eslint-disable-next-line security/detect-non-literal-fs-filename
-		const rawData = fs.readFileSync( filePath );
-		return JSON.parse( rawData );
-	} catch ( error ) {
-		console.error( `Error reading file ${ filePath }:`, error );
-		return null;
-	}
-}
 
 function addFilesToSet( files, set, basePath = '' ) {
 	if ( Array.isArray( files ) ) {
@@ -79,13 +67,6 @@ function addModulesToSet( modules, set, basePath = '' ) {
 }
 
 function checkFiles() {
-	const extensionJson = readJson( extensionJsonPath );
-	const modulesJson = readJson( modulesJsonPath );
-
-	if ( !extensionJson || !modulesJson ) {
-		return;
-	}
-
 	const extensionFiles = new Set();
 	addModulesToSet( extensionJson.ResourceModules, extensionFiles );
 	addModulesToSet( { QUnitTestModule: extensionJson.QUnitTestModule }, extensionFiles );
