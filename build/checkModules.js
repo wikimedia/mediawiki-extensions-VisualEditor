@@ -10,7 +10,6 @@ const ignored = [
 	'lib/',
 	'dist/',
 	'src/ve.track.js', // Re-implemented in MW
-	'src/ce/ve.ce.debug.js',
 	'tests/ve.qunit.local.js',
 	// Standalone / Demos
 	'demos/',
@@ -19,8 +18,6 @@ const ignored = [
 	'src/ui/dialogs/ve.ui.DiffDialog.js',
 	// Rebaser
 	'rebaser/',
-	'collab/',
-	'src/ve.FakePeer.js',
 	// TODO: Put these is a folder
 	'tests/ve.FakePeer.test.js',
 	'tests/dm/ve.dm.TransactionSquasher.test.js',
@@ -30,6 +27,8 @@ const ignored = [
 	'tests/dm/ve.dm.DocumentStore.test.js',
 	'tests/dm/ve.dm.TransportServer.test.js'
 ];
+
+const unusedIgnores = new Set( ignored );
 
 function addFilesToSet( files, set, basePath = '' ) {
 	if ( Array.isArray( files ) ) {
@@ -42,7 +41,11 @@ function addFilesToSet( files, set, basePath = '' ) {
 function isIgnored( filePath ) {
 	return ignored.some( ( ignorePath ) => {
 		const fullIgnorePath = path.join( 'lib/ve', ignorePath );
-		return filePath === fullIgnorePath || filePath.startsWith( fullIgnorePath );
+		const match = filePath === fullIgnorePath || filePath.startsWith( fullIgnorePath );
+		if ( match ) {
+			unusedIgnores.delete( ignorePath );
+		}
+		return match;
 	} );
 }
 
@@ -76,6 +79,13 @@ function checkFiles() {
 	const missingFiles = Array.from( modulesFiles ).filter( ( file ) => {
 		return !extensionFiles.has( file ) && !isIgnored( file );
 	} );
+
+	if ( unusedIgnores.size ) {
+		console.warn(
+			'Unused ignore path(s) in checkModules.js:\n\n' +
+			Array.from( unusedIgnores ).map( ( ignore ) => `* ${ ignore }\n` ).join( '' )
+		);
+	}
 
 	if ( missingFiles.length ) {
 		console.error(
