@@ -1394,10 +1394,6 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 		case 'cancelchoose':
 			handler = function () {
 				this.switchPanels( 'search' );
-				if ( this.mediaUploadBooklet ) {
-					// Reset upload booklet, in case we got here by uploading a file
-					return this.mediaUploadBooklet.initialize();
-				}
 			};
 			ve.track( 'activity.' + this.constructor.static.name, {
 				action: 'search-change-image'
