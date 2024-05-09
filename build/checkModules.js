@@ -78,8 +78,13 @@ function checkFiles() {
 	} );
 
 	if ( missingFiles.length ) {
-		console.log( missingFiles.length + ' missing file(s):' );
-		console.log( missingFiles.join( '\n' ) );
+		console.error(
+			`${ missingFiles.length } file(s) from lib/ve/modules.json are missing from extension.json:\n\n` +
+			missingFiles.map( ( file ) => `* ${ file }\n` ).join( '' ) +
+			'\nIf any of these files are not required, add them to the ignore list in build/checkModules.js.'
+		);
+		// eslint-disable-next-line n/no-process-exit
+		process.exit( 1 );
 	} else {
 		console.log( 'No missing files.' );
 	}
