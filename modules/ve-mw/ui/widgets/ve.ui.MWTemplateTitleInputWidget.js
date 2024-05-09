@@ -212,27 +212,24 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	 * @param {number} pageId
 	 * @return {boolean}
 	 */
-	function containsPageId( pages, pageId ) {
-		return pageId && pages.some( ( page ) => page.pageid === pageId );
-	}
+	var containsPageId = ( pages, pageId ) => pageId && pages.some( ( page ) => page.pageid === pageId );
 
-	var widget = this;
 	/**
 	 * @param {ve.ui.MWTemplateTitleInputWidget.PageResponse[]} pages
 	 * @param {Object} [newPage]
 	 */
-	function unshiftPages( pages, newPage ) {
+	var unshiftPages = ( pages, newPage ) => {
 		pages.forEach( ( page ) => {
 			page.index++;
 		} );
 		if ( newPage && newPage.title ) {
 			newPage.index = 1;
 			pages.unshift( newPage );
-			if ( pages.length > widget.limit ) {
-				pages.sort( ( a, b ) => a.index - b.index ).splice( widget.limit );
+			if ( pages.length > this.limit ) {
+				pages.sort( ( a, b ) => a.index - b.index ).splice( this.limit );
 			}
 		}
-	}
+	};
 
 	var i,
 		matchingRedirects = response.query.pages.filter( ( page ) => page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle );

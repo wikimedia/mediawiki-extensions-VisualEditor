@@ -135,12 +135,11 @@ ve.ui.MWWikitextStringTransferHandler.prototype.process = function () {
 		return;
 	}
 
-	var handler = this;
-	function failure() {
+	var failure = () => {
 		// There's no DTH fallback handling for failures, so just paste
 		// the raw wikitext if things go wrong.
-		handler.resolve( wikitext );
-	}
+		this.resolve( wikitext );
+	};
 
 	// Convert wikitext to html using Parsoid.
 	this.parsoidRequest = ve.init.target.parseWikitextFragment( wikitext, false, this.surface.getModel().getDocument() );

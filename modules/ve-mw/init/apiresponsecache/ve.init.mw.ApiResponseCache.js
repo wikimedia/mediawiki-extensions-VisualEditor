@@ -144,15 +144,13 @@ ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
  * @fires ve.init.mw.ApiResponseCache#add
  */
 ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
-	var cache = this;
-
-	function rejectSubqueue( rejectQueue ) {
+	var rejectSubqueue = ( rejectQueue ) => {
 		for ( var i = 0, len = rejectQueue.length; i < len; i++ ) {
-			cache.deferreds[ rejectQueue[ i ] ].reject();
+			this.deferreds[ rejectQueue[ i ] ].reject();
 		}
-	}
+	};
 
-	function processResult( data ) {
+	var processResult = ( data ) => {
 		var mappedTitles = [],
 			pages = ( data.query && data.query.pages ) || data.pages,
 			processed = {};
@@ -165,7 +163,7 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 			var page, processedPage;
 			for ( var pageid in pages ) {
 				page = pages[ pageid ];
-				processedPage = cache.constructor.static.processPage( page );
+				processedPage = this.constructor.static.processPage( page );
 				if ( processedPage !== undefined ) {
 					processed[ page.title ] = processedPage;
 				}
@@ -180,9 +178,9 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 					break;
 				}
 			}
-			cache.set( processed );
+			this.set( processed );
 		}
-	}
+	};
 
 	var queue = this.queue;
 	this.queue = [];

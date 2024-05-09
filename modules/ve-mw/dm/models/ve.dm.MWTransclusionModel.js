@@ -92,14 +92,13 @@
 		var deferred = ve.createDeferred(),
 			baseNodeClass = ve.dm.MWTransclusionNode;
 
-		var model = this;
-		function insertNode( isInline, generatedContents ) {
+		var insertNode = ( isInline, generatedContents ) => {
 			var type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType,
 				data = [
 					{
 						type: type,
 						attributes: {
-							mw: model.getPlainObject()
+							mw: this.getPlainObject()
 						}
 					},
 					{ type: '/' + type }
@@ -117,7 +116,7 @@
 			surfaceFragment.insertContent( data );
 
 			deferred.resolve();
-		}
+		};
 
 		if ( forceType ) {
 			insertNode( forceType === 'inline' );
