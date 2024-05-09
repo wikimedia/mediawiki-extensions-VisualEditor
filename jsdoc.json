@@ -13,12 +13,7 @@
 		}
 	},
 	"plugins": [
-		"plugins/markdown",
-		"node_modules/jsdoc-wmf-theme/plugins/allow-dots-in-modules",
-		"node_modules/jsdoc-wmf-theme/plugins/betterlinks",
-		"node_modules/jsdoc-wmf-theme/plugins/externals",
-		"node_modules/jsdoc-wmf-theme/plugins/summarize",
-		"node_modules/jsdoc-class-hierarchy"
+		"node_modules/jsdoc-wmf-theme/plugins/default"
 	],
 	"source": {
 		"include": [ "modules/ve-mw", "modules/ve-mw-collab" ],
@@ -33,43 +28,16 @@
 			"maintitle": "VisualEditor-MediaWiki",
 			"repository": "https://gerrit.wikimedia.org/g/mediawiki/extensions/VisualEditor/",
 			"prefixMap": {
-				"OO.ui.": "https://doc.wikimedia.org/oojs-ui/master/js/{type}.html",
-				"OO.": "https://doc.wikimedia.org/oojs/master/{type}.html",
 				"ve.": "https://doc.wikimedia.org/visualeditor-standalone/master/{type}.html",
-				"mw.": "https://doc.wikimedia.org/mediawiki-core/master/js/{type}.html"
+				"mw.": "https://doc.wikimedia.org/mediawiki-core/master/js/{type}.html",
+				"ve.ce.MW": true,
+				"ve.dm.MW": true,
+				"ve.init.mw.": true,
+				"ve.ui.MW": true,
+				"mw.libs.ve.": true
 			},
-			"prefixMapIgnore": [
-				"ve.ce.MW",
-				"ve.dm.MW",
-				"ve.init.mw.",
-				"ve.ui.MW",
-				"mw.libs.ve."
-			],
 			"linkMap": {
-				"VisualEditorOverlay": "https://doc.wikimedia.org/MobileFrontend/master/js/js/VisualEditorOverlay.html",
-
-				"Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-				"Error": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
-				"Object": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-				"Promise": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
-
-				"Blob": "https://developer.mozilla.org/en-US/docs/Web/API/Blob",
-				"DataTransfer": "https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer",
-				"DataTransferItem": "https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem",
-				"Event": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
-				"HTMLDocument": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLDocument",
-				"HTMLElement": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement",
-				"KeyboardEvent": "https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent",
-				"MutationRecord": "https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord",
-				"Node": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
-				"NodeList": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
-				"Range": "https://developer.mozilla.org/en-US/docs/Web/API/Range",
-				"Selection": "https://developer.mozilla.org/en-US/docs/Web/API/Selection",
-
-				"jQuery": "http://api.jquery.com/",
-				"jQuery.Deferred": "http://api.jquery.com/jQuery.Deferred/",
-				"jQuery.Event": "http://api.jquery.com/Types/#Event",
-				"jQuery.Promise": "http://api.jquery.com/Types/#Promise"
+				"VisualEditorOverlay": "https://doc.wikimedia.org/MobileFrontend/master/js/js/VisualEditorOverlay.html"
 			}
 		}
 	}
