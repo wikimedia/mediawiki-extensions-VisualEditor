@@ -3,7 +3,8 @@
 		"authors": [
 			"Kimberli Mäkäräinen (WMNO)",
 			"Ante75",
-			"Lea-Christine Sara"
+			"Lea-Christine Sara",
+			"Ed g2s"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Rievdaduvvon visuála rievdadanprográmmain]]",
@@ -19,7 +20,7 @@
 	"visualeditor-help-title": "Rievdadanprográmma geavahanrávvagat",
 	"visualeditor-welcomedialog-action": "Rievdadišgoađe",
 	"visualeditor-welcomedialog-content": "Buohkat sáhttet rievdadit, ja juohke buorideapmi veahkeha.",
-	"visualeditor-welcomedialog-content-thanks": "Giitu go veahkehat máilmmi oahppat ođđa diŋggaid! ",
+	"visualeditor-welcomedialog-content-thanks": "Giitu go veahkehat máilmmi oahppat ođđa diŋggaid!",
 	"visualeditor-welcomedialog-switch": "Molsso wikiteavstta rievdadanprográmmii",
 	"visualeditor-welcomedialog-switch-ve": "Molsso visuála rievdadanprográmmii",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bures boahtin}} siidui $2"
