@@ -155,7 +155,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	// getBoundingClientRect returns incorrect values during scrolling, so make sure to calculate
 	// it only after the scrolling ends (https://openradar.appspot.com/radar?id=6668472289329152).
 	var animateToolbarIntoView;
-	this.onContainerScrollTimer = setTimeout( animateToolbarIntoView = function () {
+	this.onContainerScrollTimer = setTimeout( animateToolbarIntoView = () => {
 		if ( this.toolbarAnimating ) {
 			// We can't do this while the 'transform' transition is happening, because
 			// getBoundingClientRect() returns values that reflect that (and are negative).
