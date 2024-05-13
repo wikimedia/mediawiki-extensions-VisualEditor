@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Aey Tai Nuea",
+			"AeyTaiNuea",
 			"咽頭べさ"
 		]
 	},
@@ -25,9 +26,9 @@
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "ᥑᥣᥭᥳᥙᥫᥒᥴᥗᥣᥢᥲᥓᥧᥰᥖᥤᥲᥢᥭᥲ",
 	"visualeditor-dialog-meta-categories-input-placeholder": "ᥗᥦᥛᥴᥔᥬᥱ ᥙᥫᥒᥴᥗᥣᥢᥲ",
 	"visualeditor-dialog-meta-categories-section": "ᥙᥫᥒᥴᥗᥣᥢᥲ",
-	"visualeditor-dialog-meta-languages-label": "ᥚᥣᥱᥔᥣᥱᥐᥣᥛᥰ",
-	"visualeditor-dialog-meta-languages-name-label": "ᥚᥣᥱᥔᥣᥱᥐᥣᥛᥰ",
-	"visualeditor-dialog-meta-languages-section": "ᥚᥣᥱᥔᥣᥱᥐᥣᥛᥰ",
+	"visualeditor-dialog-meta-languages-label": "ᥚᥣᥱ ᥔᥣᥱ ᥑᥣᥛᥰ",
+	"visualeditor-dialog-meta-languages-name-label": "ᥚᥣᥱ ᥔᥣᥱ ᥑᥣᥛᥰ",
+	"visualeditor-dialog-meta-languages-section": "ᥚᥣᥱ ᥔᥣᥱ ᥑᥣᥛᥰ",
 	"visualeditor-dialog-meta-settings-index-disable": "ᥟᥛᥱ",
 	"visualeditor-dialog-meta-settings-index-force": "ᥓᥬᥲᥕᥝᥳ",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "ᥟᥛᥱ",
