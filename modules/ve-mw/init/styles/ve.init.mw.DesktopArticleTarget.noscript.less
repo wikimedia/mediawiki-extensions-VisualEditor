@@ -9,6 +9,7 @@
  * For script users they're always visible unless and until ve-not-available is added.
  */
 
+@import 'mediawiki.skin.variables.less';
 /* stylelint-disable selector-max-id */
 
 .client-nojs,
@@ -30,7 +31,7 @@
 		/* @noflip */
 		margin-right: 0.25em;
 		/* @noflip */
-		color: #54595d;
+		color: @color-subtle;
 	}
 
 	.mw-content-rtl .mw-editsection-bracket:first-of-type,
@@ -38,6 +39,6 @@
 		/* @noflip */
 		margin-left: 0.25em;
 		/* @noflip */
-		color: #54595d;
+		color: @color-subtle;
 	}
 }
