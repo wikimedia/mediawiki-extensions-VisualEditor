@@ -181,7 +181,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 		}
 	];
 
-	articlePaths.forEach( ( pathData ) => {
+	for ( const pathData of articlePaths ) {
 		// Set up global state (site configuration)
 		mw.config.set( pathData.config );
 
@@ -196,56 +196,45 @@ QUnit.test( 'toDataElement', ( assert ) => {
 		converter.fromClipboard = true;
 
 		// Generate test cases for this site configuration
-		getCases().forEach( ( caseItem ) => {
+		for ( const caseItem of getCases() ) {
 			assert.deepEqual(
 				ve.dm.MWInternalLinkAnnotation.static.toDataElement( [ caseItem.element ], converter ),
 				caseItem.expected,
 				caseItem.msg + ': ' + pathData.msg
 			);
-		} );
-	} );
+		}
+	}
 } );
 
-QUnit.test( 'getFragment', ( assert ) => {
-	const cases = [
-			{
-				msg: 'No fragment returns null',
-				original: 'Foo',
-				expected: null
-			},
-			{
-				msg: 'Invalid title returns null',
-				original: 'A%20B',
-				expected: null
-			},
-			{
-				msg: 'Blank fragment returns empty string',
-				original: 'Foo#',
-				expected: ''
-			},
-			{
-				msg: 'Extant fragment returns same string',
-				original: 'Foo#bar',
-				expected: 'bar'
-			},
-			{
-				msg: 'Hash-bang works returns full string',
-				original: 'Foo#!bar',
-				expected: '!bar'
-			},
-			{
-				msg: 'Double-hash returns everything after the first hash',
-				original: 'Foo##bar',
-				expected: '#bar'
-			},
-			{
-				msg: 'Multi-fragment returns everything after the first hash',
-				original: 'Foo#bar#baz#bat',
-				expected: 'bar#baz#bat'
-			}
-		];
-
-	cases.forEach( ( caseItem ) => {
-		assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( caseItem.original ), caseItem.expected, caseItem.msg );
-	} );
+QUnit.test.each( 'getFragment', {
+	'No fragment returns null': {
+		original: 'Foo',
+		expected: null
+	},
+	'Invalid title returns null': {
+		original: 'A%20B',
+		expected: null
+	},
+	'Blank fragment returns empty string': {
+		original: 'Foo#',
+		expected: ''
+	},
+	'Extant fragment returns same string': {
+		original: 'Foo#bar',
+		expected: 'bar'
+	},
+	'Hash-bang works returns full string': {
+		original: 'Foo#!bar',
+		expected: '!bar'
+	},
+	'Double-hash returns everything after the first hash': {
+		original: 'Foo##bar',
+		expected: '#bar'
+	},
+	'Multi-fragment returns everything after the first hash': {
+		original: 'Foo#bar#baz#bat',
+		expected: 'bar#baz#bat'
+	}
+}, function ( assert, { original, expected } ) {
+	assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( original ), expected );
 } );

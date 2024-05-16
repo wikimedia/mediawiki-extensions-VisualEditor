@@ -137,7 +137,7 @@ QUnit.test( 'init', ( assert ) => {
 				// at all, on mobile), so we'll never have to restore from auto-save
 				blockinfo: true
 			};
-			Object.keys( response.visualeditor ).forEach( ( key ) => {
+			for ( const key in response.visualeditor ) {
 				if ( !ignoredKeys[ key ] ) {
 					assert.deepEqual(
 						storedData.response[ key ],
@@ -145,7 +145,7 @@ QUnit.test( 'init', ( assert ) => {
 						key + ' can be restored from auto-save data'
 					);
 				}
-			} );
+			}
 
 			await target.destroy();
 			done();
