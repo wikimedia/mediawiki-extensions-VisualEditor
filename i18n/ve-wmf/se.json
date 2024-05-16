@@ -3,7 +3,8 @@
 		"authors": [
 			"Ante75",
 			"Kimberli Mäkäräinen (WMNO)",
-			"Lea-Christine Sara"
+			"Lea-Christine Sara",
+			"Ed g2s"
 		]
 	},
 	"tag-editcheck-newcontent-description": "EditCheck doaivu ahte ođđa sisdoallu lea lasihuvvon siidui",
@@ -21,7 +22,7 @@
 	"visualeditor-help-label": "Loga rávagihppaga",
 	"visualeditor-welcomedialog-action": "Rievdadišgoađe",
 	"visualeditor-welcomedialog-content": "Buohkat sáhttet rievdadit, ja juohke buorideapmi veahkeha.",
-	"visualeditor-welcomedialog-content-thanks": "Giitu go veahkehat máilmmi oahppat ođđa diŋggaid! ",
+	"visualeditor-welcomedialog-content-thanks": "Giitu go veahkehat máilmmi oahppat ođđa diŋggaid!",
 	"visualeditor-welcomedialog-switch": "Molsso wikiteavstta rievdadanprográmmii",
 	"visualeditor-welcomedialog-switch-ve": "Molsso visuála rievdadanprográmmii",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Bures boahtin}} siidui $2"
