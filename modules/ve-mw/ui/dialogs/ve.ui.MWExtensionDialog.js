@@ -112,7 +112,7 @@ ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
  * Show a confirmation prompt before closing the dialog.
  * Displays a default prompt of `mw-widgets-abandonedit`.
  *
- * @param prompt Prompt (optional)
+ * @param {jQuery|string|Function} [prompt] Prompt, defaults to visualeditor-dialog-extension-abandonedit
  * @return {jQuery.Promise} Close promise
  */
 ve.ui.MWExtensionDialog.prototype.confirmAbandon = function ( prompt ) {
