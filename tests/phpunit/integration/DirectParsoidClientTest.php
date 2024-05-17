@@ -4,7 +4,6 @@ namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use Generator;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
-use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 use Wikimedia\Bcp47Code\Bcp47CodeValue;
@@ -150,8 +149,6 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		// the correct flavor of HTML.
 		$this->assertMatchesRegularExpression( '@/stash\b@', $eTag );
 
-		// Now make a new client object, so we can mock the ParsoidOutputAccess.
-		$parsoidOutputAccess = $this->createNoOpMock( ParsoidOutputAccess::class );
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
 			$services->getPageRestHelperFactory(),
