@@ -197,13 +197,13 @@ ve.ui.MWExtensionWindow.prototype.isModified = ve.ui.MWExtensionWindow.prototype
  * @return {boolean} mwData would contain new user input
  */
 ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
-	var mwDataBaseline;
+	let mwDataBaseline;
 	if ( this.originalMwData ) {
 		mwDataBaseline = this.originalMwData;
 	} else {
 		mwDataBaseline = this.getNewElement().attributes.mw;
 	}
-	var mwDataCopy = ve.copy( mwDataBaseline );
+	const mwDataCopy = ve.copy( mwDataBaseline );
 	this.updateMwData( mwDataCopy );
 
 	// We have some difficulty here. `updateMwData()` in this class calls on
@@ -213,9 +213,17 @@ ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
 	// We don't want to touch `this.input` or `prototype.updateMwData` because
 	// they're overridden in subclasses. Therefore, we consider whitespace-only
 	// changes to a new element to be non-meaningful too.
-	var changed = OO.getProp( mwDataCopy, 'body', 'extsrc' );
+	const changed = OO.getProp( mwDataCopy, 'body', 'extsrc' );
 	if ( changed !== undefined ) {
 		OO.setProp( mwDataCopy, 'body', 'extsrc', changed.trim() );
+	}
+
+	// Also trim the baseline. In "edit" mode we likely have added whitespace,
+	// and in "insert" mode we don't want to break if the default value starts
+	// or ends with whitespace.
+	const baselineChanged = OO.getProp( mwDataBaseline, 'body', 'extsrc' );
+	if ( baselineChanged !== undefined ) {
+		OO.setProp( mwDataBaseline, 'body', 'extsrc', baselineChanged.trim() );
 	}
 
 	return !ve.compare( mwDataBaseline, mwDataCopy );
