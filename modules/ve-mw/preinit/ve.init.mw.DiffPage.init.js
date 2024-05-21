@@ -8,15 +8,15 @@
 /* eslint-disable no-jquery/no-global-selector */
 
 ( function () {
-	let reviewModeButtonSelect, lastDiff,
-		$wikitextDiffContainer, $wikitextDiffHeader, $wikitextDiffBody,
-		$visualDiffContainer = $( '<div>' ),
+	const $visualDiffContainer = $( '<div>' ),
 		$visualDiff = $( '<div>' ),
 		progress = new OO.ui.ProgressBarWidget( { classes: [ 've-init-mw-diffPage-loading' ] } ),
 		originalUrl = new URL( location.href ),
-		initMode = originalUrl.searchParams.get( 'diffmode' ) || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
-		pluginModules = conf.pluginModules.filter( mw.loader.getState ),
+		pluginModules = conf.pluginModules.filter( mw.loader.getState );
+	let reviewModeButtonSelect, lastDiff,
+		$wikitextDiffContainer, $wikitextDiffHeader, $wikitextDiffBody,
+		initMode = originalUrl.searchParams.get( 'diffmode' ) || mw.user.options.get( 'visualeditor-diffmode-historical' ) || 'source',
 		diffTypeSwitch;
 
 	if ( initMode !== 'visual' ) {

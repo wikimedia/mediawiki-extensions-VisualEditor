@@ -217,8 +217,8 @@
 		const resolveQueue = [];
 
 		for ( let i = 0; i < queue.length; i++ ) {
-			let item = queue[ i ],
-				remove = 0;
+			const item = queue[ i ];
+			let remove = 0;
 
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
 				const title = item.add.getTemplateDataQueryTitle();
@@ -547,9 +547,9 @@
 	 * @return {number} Page index of model
 	 */
 	ve.dm.MWTransclusionModel.prototype.getIndex = function ( model ) {
-		let parts = this.parts,
-			index = 0;
+		const parts = this.parts;
 
+		let index = 0;
 		for ( let i = 0; i < parts.length; i++ ) {
 			const part = parts[ i ];
 			if ( part === model ) {

@@ -42,9 +42,9 @@ ve.ui.MWWikitextAction.static.methods = [ 'toggleWrapSelection', 'wrapSelection'
  * @return {boolean} Action was executed
  */
 ve.ui.MWWikitextAction.prototype.toggleWrapSelection = function ( before, after, placeholder, expandOffsetsCallback, unwrapOffsetsCallback ) {
-	let originalFragment = this.surface.getModel().getFragment( null, false, true /* excludeInsertions */ ),
-		fragment = originalFragment;
+	const originalFragment = this.surface.getModel().getFragment( null, false, true /* excludeInsertions */ );
 
+	let fragment = originalFragment;
 	let textBefore, textAfter;
 	if ( expandOffsetsCallback ) {
 		const contextRange = fragment.expandLinearSelection( 'siblings' ).getSelection().getCoveringRange();
@@ -102,8 +102,8 @@ ve.ui.MWWikitextAction.prototype.wrapSelection = function ( before, after, place
  * @return {boolean} Action was executed
  */
 ve.ui.MWWikitextAction.prototype.wrapLine = function ( before, after, placeholder, unwrapOffsetsCallback ) {
-	let originalFragment = this.surface.getModel().getFragment( null, false, true /* excludeInsertions */ ),
-		selectedNodes = originalFragment.getLeafNodes();
+	let originalFragment = this.surface.getModel().getFragment( null, false, true /* excludeInsertions */ );
+	const selectedNodes = originalFragment.getLeafNodes();
 
 	let unwrapped = false;
 	for ( let i = selectedNodes.length - 1; i >= 0; i-- ) {

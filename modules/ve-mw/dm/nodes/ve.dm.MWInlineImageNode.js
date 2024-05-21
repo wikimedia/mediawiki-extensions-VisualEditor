@@ -148,11 +148,10 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 };
 
 ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	let attributes = dataElement.attributes,
+	const attributes = dataElement.attributes,
 		container = doc.createElement( 'span' ),
 		imgWrapper = doc.createElement( attributes.href ? 'a' : 'span' ),
 		img = doc.createElement( attributes.isError ? 'span' : attributes.mediaTag ),
-		classes = [],
 		originalClasses = attributes.originalClasses;
 
 	ve.setDomAttributes( img, attributes, [ 'resource' ] );
@@ -181,6 +180,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		container.setAttribute( 'data-mw', JSON.stringify( attributes.mw ) );
 	}
 
+	let classes = [];
 	if ( attributes.defaultSize ) {
 		classes.push( 'mw-default-size' );
 	}

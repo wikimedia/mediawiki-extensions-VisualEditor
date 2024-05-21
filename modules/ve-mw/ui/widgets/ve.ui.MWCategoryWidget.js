@@ -301,11 +301,10 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 	// Get rid of any we already know the hidden status of, or have an entry
 	// if normalizedTitles (i.e. have been fetched before)
 	const categoryNamesToQuery = categoryNames.filter( ( name ) => {
-		let cacheEntry;
 		if ( this.normalizedTitles[ name ] ) {
 			return false;
 		}
-		cacheEntry = ve.init.platform.linkCache.getCached( name );
+		const cacheEntry = ve.init.platform.linkCache.getCached( name );
 		if ( cacheEntry && cacheEntry.hidden ) {
 			// As we aren't doing an API request for this category, mark it in the cache.
 			this.normalizedTitles[ name ] = name;
@@ -318,7 +317,8 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
 		return ve.createDeferred().resolve( {} ).promise();
 	}
 
-	let index = 0, batchSize = 50, promises = [];
+	let index = 0;
+	const batchSize = 50, promises = [];
 	// Batch this up into groups of 50
 	while ( index < categoryNamesToQuery.length ) {
 		promises.push( ve.init.target.getContentApi().get( {
@@ -370,8 +370,7 @@ ve.ui.MWCategoryWidget.prototype.queryCategoryStatus = function ( categoryNames 
  * @return {jQuery.Promise}
  */
 ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
-	let categoryItems = [],
-		existingCategoryItems = [],
+	const categoryItems = [],
 		// eslint-disable-next-line no-jquery/no-map-util
 		categoryNames = $.map( items, ( item ) => item.name );
 
@@ -411,7 +410,7 @@ ve.ui.MWCategoryWidget.prototype.addItems = function ( items, index ) {
 			// Index item
 			this.categories[ itemTitle.getMainText() ] = categoryItem;
 			// Copy sortKey from old item when "moving"
-			existingCategoryItems = this.items.filter( checkValueMatches );
+			const existingCategoryItems = this.items.filter( checkValueMatches );
 			if ( existingCategoryItems.length ) {
 				// There should only be one element in existingCategoryItems
 				categoryItem.sortKey = existingCategoryItems[ 0 ].sortKey;

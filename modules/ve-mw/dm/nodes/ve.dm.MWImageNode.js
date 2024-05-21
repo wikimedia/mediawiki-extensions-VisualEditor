@@ -227,12 +227,12 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
  * @return {Object} The new width and height of the scaled image.
  */
 ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox ) {
-	let newDimensions = ve.copy( imageDimensions ),
-		scale = Math.min(
-			boundingBox.height / imageDimensions.height,
-			boundingBox.width / imageDimensions.width
-		);
+	const scale = Math.min(
+		boundingBox.height / imageDimensions.height,
+		boundingBox.width / imageDimensions.width
+	);
 
+	let newDimensions = ve.copy( imageDimensions );
 	if ( scale < 1 ) {
 		// Scale down
 		newDimensions = {

@@ -284,8 +284,8 @@ ve.ui.MWExtensionWindow.prototype.removeNode = function () {
  * @param {Object} mwData MediaWiki data object
  */
 ve.ui.MWExtensionWindow.prototype.updateMwData = function ( mwData ) {
-	let tagName = mwData.name,
-		value = this.input.getValueAndWhitespace();
+	const tagName = mwData.name;
+	let value = this.input.getValueAndWhitespace();
 
 	// XML-like tags in wikitext are not actually XML and don't expect their contents to be escaped.
 	// This means that it is not possible for a tag '<foo>…</foo>' to contain the string '</foo>'.

@@ -96,11 +96,11 @@ ve.ce.MWImageNode.prototype.onGeneratedContentNodeUpdate = function () {
  * @inheritdoc ve.ce.GeneratedContentNode
  */
 ve.ce.MWImageNode.prototype.generateContents = function () {
-	let model = this.getModel(),
-		width = model.getAttribute( 'width' ),
+	const model = this.getModel(),
 		height = model.getAttribute( 'height' ),
 		mwData = model.getAttribute( 'mw' ) || {},
 		deferred = ve.createDeferred();
+	let width = model.getAttribute( 'width' );
 
 	// If the current rendering is larger don't fetch a new image, just let the browser resize
 	if ( this.renderedDimensions && this.renderedDimensions.width > width ) {

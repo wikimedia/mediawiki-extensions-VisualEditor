@@ -100,11 +100,11 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWLinkNodeInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
-			let surfaceView = this.manager.getSurface().getView(),
+			let value = this.targetInput.getValue();
+			const surfaceView = this.manager.getSurface().getView(),
 				surfaceModel = this.getFragment().getSurface(),
 				doc = surfaceModel.getDocument(),
 				nodeRange = this.selectedNode.getOuterRange(),
-				value = this.targetInput.getValue(),
 				convert = data.action === 'convert',
 				remove = data.action === 'remove' || !value;
 

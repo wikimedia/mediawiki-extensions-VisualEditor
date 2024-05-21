@@ -181,9 +181,9 @@ ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
 			forbiddenCharacter[ 0 ] ).parseDom() ];
 	}
 
-	let key,
-		spec = this.template.getSpec();
+	const spec = this.template.getSpec();
 
+	let key;
 	if ( spec.getParameterAliases( name ).indexOf( name ) !== -1 ) {
 		key = 'visualeditor-dialog-transclusion-add-param-error-alias';
 	} else if ( this.template.hasParameter( name ) ) {

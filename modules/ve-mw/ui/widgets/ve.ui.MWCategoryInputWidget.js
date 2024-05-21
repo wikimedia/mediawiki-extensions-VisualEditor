@@ -122,15 +122,15 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	let exactMatch = false,
-		itemWidgets = [],
+	const itemWidgets = [],
 		existingCategoryItems = [],
 		matchingCategoryItems = [],
 		hiddenCategoryItems = [],
 		newCategoryItems = [],
 		existingCategories = this.categoryWidget.getCategories(),
-		linkCacheUpdate = {},
-		canonicalQueryValue = mw.Title.newFromText( this.value ),
+		linkCacheUpdate = {};
+
+	let canonicalQueryValue = mw.Title.newFromText( this.value ),
 		prefixedCanonicalQueryValue = mw.Title.newFromText(
 			this.value,
 			mw.config.get( 'wgNamespaceIds' ).category
@@ -143,6 +143,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 		canonicalQueryValue = canonicalQueryValue.getMainText();
 	}
 
+	let exactMatch = false;
 	data.forEach( ( suggestedCategory ) => {
 		const suggestedCategoryTitle = mw.Title.newFromText(
 				suggestedCategory,
@@ -240,11 +241,11 @@ ve.ui.MWCategoryInputWidget.prototype.onLookupMenuChoose = function ( item ) {
  * @return {OO.ui.MenuOptionWidget} Menu item widget to be shown
  */
 ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( name ) {
-	let cachedData = ve.init.platform.linkCache.getCached( mw.Title.newFromText(
-			name,
-			mw.config.get( 'wgNamespaceIds' ).category
-		).getPrefixedText() ),
-		optionWidget, labelText;
+	const cachedData = ve.init.platform.linkCache.getCached( mw.Title.newFromText(
+		name,
+		mw.config.get( 'wgNamespaceIds' ).category
+	).getPrefixedText() );
+	let optionWidget, labelText;
 	if ( cachedData && cachedData.redirectFrom ) {
 		labelText = mw.Title.newFromText( cachedData.redirectFrom[ 0 ] ).getMainText();
 		optionWidget = new OO.ui.MenuOptionWidget( {

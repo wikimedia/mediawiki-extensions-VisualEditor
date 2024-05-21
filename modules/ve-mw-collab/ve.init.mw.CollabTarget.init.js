@@ -9,8 +9,8 @@
 
 ( function () {
 	let target,
-		$specialTab = $( '#ca-nstab-special' ),
-		$padTab = $( '#ca-pad' ),
+		$padTab = $( '#ca-pad' );
+	const $specialTab = $( '#ca-nstab-special' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pageName = mw.config.get( 'collabPadPageName' ) || '',
 		pageTitle = mw.Title.newFromText( pageName ),

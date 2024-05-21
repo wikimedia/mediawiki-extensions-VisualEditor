@@ -361,12 +361,12 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 		return new OO.ui.Process( () => {
 			const deferred = ve.createDeferred();
 			this.checkRequiredParameters().done( () => {
-				let surfaceModel = this.getFragment().getSurface(),
-					obj = this.transclusionModel.getPlainObject(),
-					modelPromise = ve.createDeferred().resolve().promise();
+				const surfaceModel = this.getFragment().getSurface(),
+					obj = this.transclusionModel.getPlainObject();
 
 				this.pushPending();
 
+				let modelPromise = ve.createDeferred().resolve().promise();
 				if ( this.selectedNode instanceof ve.dm.MWTransclusionNode ) {
 					this.transclusionModel.updateTransclusionNode( surfaceModel, this.selectedNode );
 					// TODO: updating the node could result in the inline/block state change

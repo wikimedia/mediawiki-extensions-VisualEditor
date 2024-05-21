@@ -57,15 +57,15 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 	// Call grand-parent
 	return ve.ui.AnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			let wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
-				internalLinkParser = this.constructor.static.internalLinkParser,
-				fragment = this.getFragment();
+			const wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
+				internalLinkParser = this.constructor.static.internalLinkParser;
 
 			// Only supports linear selections
 			if ( !( this.initialFragment && this.initialFragment.getSelection() instanceof ve.dm.LinearSelection ) ) {
 				return ve.createDeferred().reject().promise();
 			}
 
+			let fragment = this.getFragment();
 			let linkMatches;
 			// Initialize range
 			if ( !data.noExpand ) {
