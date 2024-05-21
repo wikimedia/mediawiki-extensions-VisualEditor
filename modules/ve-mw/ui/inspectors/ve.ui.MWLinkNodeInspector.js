@@ -100,7 +100,7 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWLinkNodeInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
-			var surfaceView = this.manager.getSurface().getView(),
+			let surfaceView = this.manager.getSurface().getView(),
 				surfaceModel = this.getFragment().getSurface(),
 				doc = surfaceModel.getDocument(),
 				nodeRange = this.selectedNode.getOuterRange(),
@@ -120,15 +120,15 @@ ve.ui.MWLinkNodeInspector.prototype.getTeardownProcess = function ( data ) {
 					ve.dm.TransactionBuilder.static.newFromRemoval( doc, nodeRange )
 				);
 			} else if ( convert ) {
-				var annotation = new ve.dm.MWExternalLinkAnnotation( {
+				const annotation = new ve.dm.MWExternalLinkAnnotation( {
 					type: 'link/mwExternal',
 					attributes: {
 						href: value
 					}
 				} );
-				var annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
+				const annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
 				annotations.push( annotation );
-				var content = value.split( '' );
+				const content = value.split( '' );
 				ve.dm.Document.static.addAnnotationsToData( content, annotations );
 				surfaceModel.change(
 					ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )

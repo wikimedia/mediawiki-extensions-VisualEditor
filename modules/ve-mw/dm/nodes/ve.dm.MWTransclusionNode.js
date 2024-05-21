@@ -110,12 +110,12 @@ ve.dm.MWTransclusionNode.static.blockType = 'mwTransclusionBlock';
 ve.dm.MWTransclusionNode.static.cellType = 'mwTransclusionTableCell';
 
 ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converter ) {
-	var mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
+	const mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		isInline = this.isHybridInline( domElements, converter ),
 		type = isInline ? this.inlineType : this.blockType;
 
-	var dataElement = {
+	const dataElement = {
 		type: type,
 		attributes: {
 			mw: mwData,
@@ -136,20 +136,20 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 };
 
 ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var store = converter.getStore(),
+	const store = converter.getStore(),
 		originalMw = dataElement.attributes.originalMw,
 		originalDomElements = store.value( dataElement.originalDomElementsHash );
 
 	function wrapTextNode( node ) {
 		if ( node.nodeType === Node.TEXT_NODE ) {
-			var wrapper = doc.createElement( 'span' );
+			const wrapper = doc.createElement( 'span' );
 			wrapper.appendChild( node );
 			return wrapper;
 		}
 		return node;
 	}
 
-	var els;
+	let els;
 	// If the transclusion is unchanged just send back the
 	// original DOM elements so selser can skip over it
 	if (
@@ -159,7 +159,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		// originalDomElements is also used for CE rendering so return a copy
 		els = ve.copyDomElements( originalDomElements, doc );
 	} else {
-		var value;
+		let value;
 		if (
 			converter.doesModeNeedRendering() &&
 			// Use getHashObjectForRendering to get the rendering from the store
@@ -185,7 +185,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		// If the first element is a <link>, <meta> or <style> tag, e.g. a category or TemplateStyles,
 		// ensure it is not destroyed by copy-paste by replacing it with a span
 		if ( els[ 0 ].tagName === 'LINK' || els[ 0 ].tagName === 'META' || els[ 0 ].tagName === 'STYLE' ) {
-			var span = doc.createElement( 'span' );
+			const span = doc.createElement( 'span' );
 			span.setAttribute( 'typeof', 'mw:Transclusion' );
 			span.setAttribute( 'data-mw', els[ 0 ].getAttribute( 'data-mw' ) );
 			els[ 0 ] = span;
@@ -201,15 +201,15 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		els[ 0 ].setAttribute( 'data-ve-no-generated-contents', true );
 
 		// ... and mark all but the first child as ignorable
-		for ( var i = 1; i < els.length; i++ ) {
+		for ( let i = 1; i < els.length; i++ ) {
 			// Wrap plain text nodes so we can give them an attribute
 			els[ i ] = wrapTextNode( els[ i ] );
 			els[ i ].setAttribute( 'data-ve-ignore', 'true' );
 		}
 	} else if ( converter.isForPreview() ) {
-		var modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
+		const modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
 		modelNode.setDocument( converter.internalList.getDocument() );
-		var viewNode = ve.ce.nodeFactory.createFromModel( modelNode );
+		const viewNode = ve.ce.nodeFactory.createFromModel( modelNode );
 		// HACK: Node must be attached to check for rendering
 		viewNode.$element.appendTo( 'body' );
 		if ( !viewNode.hasRendering() ) {
@@ -226,7 +226,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 };
 
 ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) {
-	var descriptions = [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
+	const descriptions = [ ve.msg( 'visualeditor-changedesc-mwtransclusion' ) ];
 
 	// This method assumes that the behavior of isDiffComparable above remains
 	// the same, so it doesn't have to consider whether the actual template
@@ -248,8 +248,8 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 		// The bits of a template we care about are deeply-nested inside an
 		// attribute. We'll restructure this so that we can pretend template
 		// params are the direct attributes of the template.
-		var params = {};
-		var param;
+		const params = {};
+		let param;
 		for ( param in attributeChanges.mw.from.parts[ 0 ].template.params ) {
 			params[ param ] = { from: getLabel( attributeChanges.mw.from.parts[ 0 ].template.params[ param ] ) };
 		}
@@ -259,26 +259,25 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 				params[ param ]
 			);
 		}
-		var paramChanges;
+		let paramChanges;
 		for ( param in params ) {
 			// All we know is that *something* changed, without the normal
 			// helpful just-being-given-the-changed-bits, so we have to filter
 			// this ourselves.
 			// Trim string values, and convert empty strings to undefined
-			var from = ( params[ param ].from || '' ).trim() || undefined,
+			const from = ( params[ param ].from || '' ).trim() || undefined,
 				to = ( params[ param ].to || '' ).trim() || undefined;
 			if ( from !== to ) {
-				var change = this.describeChange( param, { from: from, to: to } );
+				const change = this.describeChange( param, { from: from, to: to } );
 				if ( change ) {
 					if ( !paramChanges ) {
 						paramChanges = document.createElement( 'ul' );
 						descriptions.push( paramChanges );
 					}
-					var listItem = document.createElement( 'li' );
+					const listItem = document.createElement( 'li' );
 					if ( typeof change === 'string' ) {
 						listItem.appendChild( document.createTextNode( change ) );
 					} else {
-						// eslint-disable-next-line no-loop-func
 						change.forEach( ( node ) => {
 							listItem.appendChild( node );
 						} );
@@ -296,7 +295,7 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
  */
 ve.dm.MWTransclusionNode.static.cloneElement = function () {
 	// Parent method
-	var clone = ve.dm.MWTransclusionNode.super.static.cloneElement.apply( this, arguments );
+	const clone = ve.dm.MWTransclusionNode.super.static.cloneElement.apply( this, arguments );
 	delete clone.attributes.originalMw;
 	return clone;
 };
@@ -309,14 +308,14 @@ ve.dm.MWTransclusionNode.static.cloneElement = function () {
  * @return {string} Escaped parameter value
  */
 ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
-	var input = param,
+	let input = param,
 		output = '',
 		inNowiki = false,
 		bracketStack = 0,
 		linkStack = 0;
 
 	while ( input.length > 0 ) {
-		var match = input.match( /\[\[|]]|{{|}}|\|+|<\/?nowiki>|<nowiki\s*\/>/ );
+		const match = input.match( /\[\[|]]|{{|}}|\|+|<\/?nowiki>|<nowiki\s*\/>/ );
 		if ( !match ) {
 			output += input;
 			break;
@@ -332,7 +331,7 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
 			continue;
 		}
 
-		var needsNowiki = true;
+		let needsNowiki = true;
 		switch ( match[ 0 ].charAt( 0 ) ) {
 			case '<':
 				if ( match[ 0 ] === '<nowiki>' ) {
@@ -383,20 +382,20 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
  * @return {string} Wikitext
  */
 ve.dm.MWTransclusionNode.static.getWikitext = function ( content ) {
-	var wikitext = '';
+	let wikitext = '';
 
 	// Normalize to multi template format
 	if ( content.params ) {
 		content = { parts: [ { template: content } ] };
 	}
 	// Build wikitext from content
-	for ( var i = 0, len = content.parts.length; i < len; i++ ) {
-		var part = content.parts[ i ];
+	for ( let i = 0, len = content.parts.length; i < len; i++ ) {
+		const part = content.parts[ i ];
 		if ( part.template ) {
 			// Template
-			var template = part.template;
+			const template = part.template;
 			wikitext += '{{' + template.target.wt;
-			for ( var param in template.params ) {
+			for ( const param in template.params ) {
 				wikitext += '|' + param + '=' +
 					this.escapeParameter( template.params[ param ].wt );
 			}
@@ -431,21 +430,21 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
  * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
 ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplates ) {
-	var templateNS = mw.config.get( 'wgNamespaceIds' ).template,
+	const templateNS = mw.config.get( 'wgNamespaceIds' ).template,
 		parts = this.getPartsList();
 
 	function normalizeTemplateTitle( name ) {
-		var title = mw.Title.newFromText( name, templateNS );
+		const title = mw.Title.newFromText( name, templateNS );
 		return title ? title.getPrefixedText() : name;
 	}
 
 	// Bail out as early as possible when no filter is given, or it's not a single part anyway
-	var isSingle = parts.length === 1;
+	const isSingle = parts.length === 1;
 	if ( !isSingle || !allowedTemplates ) {
 		return isSingle;
 	}
 
-	var singlePart = parts[ 0 ];
+	const singlePart = parts[ 0 ];
 	// It's not a template but e.g. a parser function or raw wikitext content
 	if ( !singlePart.templatePage ) {
 		return false;
@@ -465,12 +464,12 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplate
 ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 	if ( !this.partsList ) {
 		this.partsList = [];
-		var content = this.getAttribute( 'mw' );
-		for ( var i = 0; i < content.parts.length; i++ ) {
-			var part = content.parts[ i ];
+		const content = this.getAttribute( 'mw' );
+		for ( let i = 0; i < content.parts.length; i++ ) {
+			const part = content.parts[ i ];
 			// A template as serialized by {@see ve.dm.MWTemplateModel.serialize}
 			if ( part.template ) {
-				var href = part.template.target.href,
+				const href = part.template.target.href,
 					page = href ? mw.libs.ve.normalizeParsoidResourceName( href ) : null;
 				this.partsList.push( {
 					template: part.template.target.wt,

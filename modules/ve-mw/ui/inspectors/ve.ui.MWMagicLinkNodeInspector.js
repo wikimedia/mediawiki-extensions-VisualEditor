@@ -67,13 +67,13 @@ ve.ui.MWMagicLinkNodeInspector.prototype.initialize = function () {
  * @return {boolean} String is valid
  */
 ve.ui.MWMagicLinkNodeInspector.prototype.validate = function ( str ) {
-	var node = this.getFragment().getSelectedNode();
+	const node = this.getFragment().getSelectedNode();
 	return node.constructor.static.validateContent( str, node.getMagicType() );
 };
 
 ve.ui.MWMagicLinkNodeInspector.prototype.onChange = function ( value ) {
 	// Disable the unsafe action buttons if the input isn't valid
-	var isValid = this.validate( value );
+	const isValid = this.validate( value );
 	this.actions.forEach( null, ( action ) => {
 		if ( !action.hasFlag( 'safe' ) ) {
 			action.setDisabled( !isValid );
@@ -103,7 +103,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getActionProcess = function ( action ) 
  */
 ve.ui.MWMagicLinkNodeInspector.prototype.getSetupProcess = function ( data ) {
 	// Set the title based on the node type
-	var fragment = data.fragment,
+	const fragment = data.fragment,
 		node = fragment instanceof ve.dm.SurfaceFragment ?
 			fragment.getSelectedNode() : null,
 		type = node instanceof ve.dm.MWMagicLinkNode ?
@@ -145,7 +145,7 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 	data = data || {};
 	return ve.ui.MWMagicLinkNodeInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
-			var surfaceView = this.manager.getSurface().getView(),
+			const surfaceView = this.manager.getSurface().getView(),
 				surfaceModel = this.getFragment().getSurface(),
 				doc = surfaceModel.getDocument(),
 				nodeRange = this.selectedNode.getOuterRange(),
@@ -159,13 +159,13 @@ ve.ui.MWMagicLinkNodeInspector.prototype.getTeardownProcess = function ( data ) 
 					ve.dm.TransactionBuilder.static.newFromRemoval( doc, nodeRange )
 				);
 			} else if ( convert ) {
-				var annotation = ve.dm.MWMagicLinkNode.static.annotationFromContent(
+				const annotation = ve.dm.MWMagicLinkNode.static.annotationFromContent(
 					value
 				);
 				if ( annotation ) {
-					var annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
+					const annotations = doc.data.getAnnotationsFromOffset( nodeRange.start ).clone();
 					annotations.push( annotation );
-					var content = value.split( '' );
+					const content = value.split( '' );
 					ve.dm.Document.static.addAnnotationsToData( content, annotations );
 					surfaceModel.change(
 						ve.dm.TransactionBuilder.static.newFromReplacement( doc, nodeRange, content )

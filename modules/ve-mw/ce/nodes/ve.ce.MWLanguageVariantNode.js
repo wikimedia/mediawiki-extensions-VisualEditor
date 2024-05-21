@@ -52,7 +52,7 @@ ve.ce.MWLanguageVariantNode.static.iconWhenInvisible = 'language';
  */
 ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 	// This is shown when you hover over the node.
-	var variantInfo = model.getVariantInfo(),
+	let variantInfo = model.getVariantInfo(),
 		messageKey = 'visualeditor-mwlanguagevariant-' + model.getRuleType(),
 		languageCodes = [];
 	if ( variantInfo.name ) {
@@ -64,7 +64,7 @@ ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 	} else if ( variantInfo.oneway ) {
 		languageCodes = variantInfo.oneway.map( ( item ) => item.l );
 	}
-	var languageString = languageCodes.map( ( code ) => ve.init.platform.getLanguageName( code.toLowerCase() ) ).join( ve.msg( 'comma-separator' ) );
+	const languageString = languageCodes.map( ( code ) => ve.init.platform.getLanguageName( code.toLowerCase() ) ).join( ve.msg( 'comma-separator' ) );
 	// The following messages can be used here:
 	// * visualeditor-mwlanguagevariant-disabled
 	// * visualeditor-mwlanguagevariant-filter
@@ -100,10 +100,10 @@ ve.ce.MWLanguageVariantNode.prototype.onUpdate = function () {
  * node / hovering.
  */
 ve.ce.MWLanguageVariantNode.prototype.getInvisibleIconLabel = function () {
-	var variantInfo = this.model.getVariantInfo();
+	const variantInfo = this.model.getVariantInfo();
 
 	if ( this.model.isHidden() ) {
-		var $element = $( '<div>' );
+		const $element = $( '<div>' );
 		this.model.constructor.static.insertPreviewElements(
 			// For compactness, just annotate hidden rule w/ its
 			// current variant output.
@@ -121,7 +121,7 @@ ve.ce.MWLanguageVariantNode.prototype.getInvisibleIconLabel = function () {
  * @return {jQuery}
  */
 ve.ce.MWLanguageVariantNode.prototype.appendHolder = function () {
-	var tagName = this.constructor.static.tagName,
+	const tagName = this.constructor.static.tagName,
 		document = this.$element[ 0 ].ownerDocument,
 		$holder = $( document.createElement( tagName ) );
 	$holder.addClass( 've-ce-mwLanguageVariantNode-holder' );

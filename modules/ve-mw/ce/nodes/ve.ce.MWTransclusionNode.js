@@ -78,11 +78,11 @@ ve.ce.MWTransclusionNode.static.getDescription = function ( model ) {
  * @return {HTMLElement} DOM node with comma-separated list of template names
  */
 ve.ce.MWTransclusionNode.static.getDescriptionDom = function ( model ) {
-	var nodes = model.getPartsList()
+	const nodes = model.getPartsList()
 		.map( ( part ) => {
 			if ( part.templatePage ) {
-				var title = mw.Title.newFromText( part.templatePage );
-				var link = document.createElement( 'a' );
+				const title = mw.Title.newFromText( part.templatePage );
+				const link = document.createElement( 'a' );
 				link.textContent = title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
 				link.setAttribute( 'href', title.getUrl() );
 				return link;
@@ -91,7 +91,7 @@ ve.ce.MWTransclusionNode.static.getDescriptionDom = function ( model ) {
 			return part.template ? document.createTextNode( part.template ) : null;
 		} )
 		.filter( ( desc ) => desc );
-	var span = document.createElement( 'span' );
+	const span = document.createElement( 'span' );
 	nodes.forEach( ( node, i ) => {
 		if ( i ) {
 			span.appendChild( document.createTextNode( ve.msg( 'comma-separator' ) ) );
@@ -114,11 +114,11 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
 		return [];
 	}
 
-	var whitespaceRegex = new RegExp( '^[' + ve.dm.Converter.static.whitespaceList + ']+$' );
+	const whitespaceRegex = new RegExp( '^[' + ve.dm.Converter.static.whitespaceList + ']+$' );
 
 	// Filter out auto-generated items, e.g. reference lists
 	contentNodes = contentNodes.filter( ( node ) => {
-		var dataMw = node &&
+		const dataMw = node &&
 			node.nodeType === Node.ELEMENT_NODE &&
 			node.hasAttribute( 'data-mw' ) &&
 			JSON.parse( node.getAttribute( 'data-mw' ) );
@@ -155,8 +155,8 @@ ve.ce.MWTransclusionNode.static.filterRendering = function ( contentNodes ) {
 
 /** @inheritDoc */
 ve.ce.MWTransclusionNode.prototype.executeCommand = function () {
-	var contextItems = this.focusableSurface.getSurface().getContext().items;
-	var contextClicked = contextItems.some( ( contextItem ) => {
+	const contextItems = this.focusableSurface.getSurface().getContext().items;
+	const contextClicked = contextItems.some( ( contextItem ) => {
 		if ( contextItem instanceof ve.ui.MWTransclusionContextItem ) {
 			// Utilize the context item when it's there instead of triggering the command manually.
 			// Required to make the context item show the "Loading…" message (see T297773).
@@ -178,8 +178,8 @@ ve.ce.MWTransclusionNode.prototype.executeCommand = function () {
  * @inheritdoc
  */
 ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
-	var deferred = ve.createDeferred();
-	var xhr = ve.init.target.parseWikitextFragment(
+	const deferred = ve.createDeferred();
+	const xhr = ve.init.target.parseWikitextFragment(
 		( config && config.wikitext ) || this.model.getWikitext(),
 		true,
 		this.getModel().getDocument()
@@ -203,7 +203,7 @@ ve.ce.MWTransclusionNode.prototype.onParseSuccess = function ( deferred, respons
 	}
 
 	// Work around https://github.com/jquery/jquery/issues/1997
-	var contentNodes = $.parseHTML( response.visualeditor.content, this.model && this.getModelHtmlDocument() ) || [];
+	const contentNodes = $.parseHTML( response.visualeditor.content, this.model && this.getModelHtmlDocument() ) || [];
 	deferred.resolve( this.constructor.static.filterRendering( contentNodes ) );
 };
 
@@ -235,7 +235,7 @@ ve.ce.MWTransclusionNode.prototype.onSetup = function () {
  */
 ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function () {
 	// Parent method
-	var elements = ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.apply( this, arguments );
+	const elements = ve.ce.GeneratedContentNode.prototype.getRenderedDomElements.apply( this, arguments );
 
 	if ( this.model && this.getModelHtmlDocument() ) {
 		ve.init.platform.linkCache.styleParsoidElements(
@@ -251,7 +251,7 @@ ve.ce.MWTransclusionNode.prototype.getRenderedDomElements = function () {
  */
 ve.ce.MWTransclusionNode.prototype.filterRenderedDomElements = function ( domElements ) {
 	// We want to remove all styles and links which aren't from TemplateStyles.
-	var selector = 'style:not([data-mw-deduplicate^="TemplateStyles:"]), link:not([rel~="mw-deduplicated-inline-style"][href^="mw-data:TemplateStyles:"])';
+	const selector = 'style:not([data-mw-deduplicate^="TemplateStyles:"]), link:not([rel~="mw-deduplicated-inline-style"][href^="mw-data:TemplateStyles:"])';
 	return $( domElements ).find( selector ).addBack( selector ).remove().end().end().toArray();
 };
 

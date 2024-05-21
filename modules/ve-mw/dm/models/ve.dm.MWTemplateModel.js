@@ -78,9 +78,9 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  * @return {ve.dm.MWTemplateModel} New template model
  */
 ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
-	var template = new ve.dm.MWTemplateModel( transclusion, data.target );
+	const template = new ve.dm.MWTemplateModel( transclusion, data.target );
 
-	for ( var key in data.params ) {
+	for ( const key in data.params ) {
 		template.addParameter(
 			new ve.dm.MWParameterModel( template, key, data.params[ key ].wt )
 		);
@@ -100,7 +100,7 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
  * @return {ve.dm.MWTemplateModel|null} New template model
  */
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
-	var title,
+	let title,
 		templateNs = mw.config.get( 'wgNamespaceIds' ).template;
 	if ( name instanceof mw.Title ) {
 		title = name;
@@ -109,7 +109,7 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 		title = mw.Title.newFromText( name, templateNs );
 	}
 	if ( title !== null ) {
-		var href = title.getPrefixedText();
+		const href = title.getPrefixedText();
 		return new ve.dm.MWTemplateModel( transclusion, { href: href, wt: name } );
 	}
 
@@ -140,7 +140,7 @@ ve.dm.MWTemplateModel.prototype.getTitle = function () {
 ve.dm.MWTemplateModel.prototype.getTemplateDataQueryTitle = function () {
 	// FIXME: This currently doesn't strip localized versions of these magic words.
 	// Strip magic words {{subst:…}} and {{safesubst:…}}, see MagicWordFactory::$mSubstIDs
-	var name = this.target.wt.replace( /^\s*(?:safe)?subst:/i, '' ),
+	const name = this.target.wt.replace( /^\s*(?:safe)?subst:/i, '' ),
 		templateNs = mw.config.get( 'wgNamespaceIds' ).template,
 		title = mw.Title.newFromText( name, templateNs );
 	return title ? title.getPrefixedText() : this.getTitle();
@@ -190,9 +190,9 @@ ve.dm.MWTemplateModel.prototype.getOriginalParameterName = function ( name ) {
 	if ( name in this.params ) {
 		return name;
 	}
-	var aliases = this.spec.getParameterAliases( name );
+	const aliases = this.spec.getParameterAliases( name );
 	// FIXME: Should use .filter() when we dropped IE11 support
-	for ( var i = 0; i < aliases.length; i++ ) {
+	for ( let i = 0; i < aliases.length; i++ ) {
 		if ( aliases[ i ] in this.params ) {
 			return aliases[ i ];
 		}
@@ -210,11 +210,11 @@ ve.dm.MWTemplateModel.prototype.getOriginalParameterName = function ( name ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	var primaryName,
+	let primaryName,
 		spec = this.spec,
 		usedAliases = {};
 
-	for ( var alias in this.params ) {
+	for ( const alias in this.params ) {
 		if ( spec.isParameterAlias( alias ) ) {
 			primaryName = spec.getPrimaryParameterName( alias );
 			if ( !usedAliases[ primaryName ] ) {
@@ -226,11 +226,11 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
 		}
 	}
 
-	var parameters = spec.getCanonicalParameterOrder();
+	let parameters = spec.getCanonicalParameterOrder();
 
 	// Restore aliases originally used in the wikitext. The spec doesn't know which alias was used.
 	for ( primaryName in usedAliases ) {
-		var i = parameters.indexOf( primaryName );
+		const i = parameters.indexOf( primaryName );
 		// TODO: parameters.splice( i, 1, ...usedAliases[ primaryName ] ) when we can use ES6
 		parameters = parameters.slice( 0, i ).concat( usedAliases[ primaryName ],
 			parameters.slice( i + 1 ) );
@@ -256,7 +256,7 @@ ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
  */
 ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
 	if ( !this.orderedParameterNames ) {
-		var params = this.params;
+		const params = this.params;
 		this.orderedParameterNames = this.getAllParametersOrdered().filter( ( name ) => name in params );
 	}
 	return this.orderedParameterNames;
@@ -268,7 +268,7 @@ ve.dm.MWTemplateModel.prototype.getOrderedParameterNames = function () {
  * @fires ve.dm.MWTemplateModel#change
  */
 ve.dm.MWTemplateModel.prototype.addParameter = function ( param ) {
-	var name = param.getName();
+	const name = param.getName();
 	if ( name in this.params ) {
 		return;
 	}
@@ -305,13 +305,13 @@ ve.dm.MWTemplateModel.prototype.removeParameter = function ( param ) {
  * Add all non-existing required and suggested parameters, if any.
  */
 ve.dm.MWTemplateModel.prototype.addPromptedParameters = function () {
-	var params = this.params,
+	const params = this.params,
 		spec = this.spec,
 		names = spec.getKnownParameterNames();
 
-	for ( var i = 0; i < names.length; i++ ) {
-		var name = names[ i ];
-		var foundAlias = spec.getParameterAliases( name ).some( ( alias ) => alias in params );
+	for ( let i = 0; i < names.length; i++ ) {
+		const name = names[ i ];
+		const foundAlias = spec.getParameterAliases( name ).some( ( alias ) => alias in params );
 		if (
 			!foundAlias &&
 			!params[ name ] &&
@@ -340,13 +340,13 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.serialize = function () {
-	var origData = this.originalData || {},
+	let origData = this.originalData || {},
 		origParams = origData.params || {},
 		template = { target: this.target, params: {} },
 		spec = this.spec,
 		params = this.params;
 
-	for ( var name in params ) {
+	for ( const name in params ) {
 		if ( name === '' ) {
 			continue;
 		}
@@ -362,7 +362,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 			continue;
 		}
 
-		var origName = params[ name ].getOriginalName();
+		const origName = params[ name ].getOriginalName();
 		template.params[ origName ] = ve.extendObject(
 			{},
 			origParams[ origName ],
@@ -381,7 +381,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.containsValuableData = function () {
-	var params = this.params;
+	const params = this.params;
 
 	return Object.keys( params ).some( ( name ) => {
 		// Skip unnamed placeholders
@@ -389,7 +389,7 @@ ve.dm.MWTemplateModel.prototype.containsValuableData = function () {
 			return false;
 		}
 
-		var param = params[ name ],
+		const param = params[ name ],
 			value = param.getValue();
 		return value &&
 			// This will automatically be restored, see {@see ve.dm.MWParameterModel.getValue}

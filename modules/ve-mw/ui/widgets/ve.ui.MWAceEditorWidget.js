@@ -102,7 +102,7 @@ ve.ui.MWAceEditorWidget.prototype.teardown = function () {
  * @fires ve.ui.MWAceEditorWidget#resize
  */
 ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
-	var basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
+	let basePath = mw.config.get( 'wgExtensionAssetsPath', '' );
 
 	if ( basePath.slice( 0, 2 ) === '//' ) {
 		// ACE uses web workers, which have importScripts, which don't like relative links.
@@ -120,9 +120,9 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 		enableLiveAutocompletion: this.autocomplete === 'live'
 	} );
 	if ( this.autocompleteWordList ) {
-		var completer = {
+		const completer = {
 			getCompletions: ( editor, session, pos, prefix, callback ) => {
-				var wordList = this.autocompleteWordList;
+				const wordList = this.autocompleteWordList;
 				callback( null, wordList.map( ( word ) => ( {
 					caption: word,
 					value: word,
@@ -182,7 +182,7 @@ ve.ui.MWAceEditorWidget.prototype.setValue = function ( value ) {
  */
 ve.ui.MWAceEditorWidget.prototype.setEditorValue = function ( value ) {
 	if ( value !== this.editor.getValue() ) {
-		var selectionState = this.editor.session.selection.toJSON();
+		const selectionState = this.editor.session.selection.toJSON();
 		this.editor.setValue( value );
 		this.editor.session.selection.fromJSON( selectionState );
 	}
@@ -228,11 +228,11 @@ ve.ui.MWAceEditorWidget.prototype.setReadOnly = function ( readOnly ) {
  * @inheritdoc
  */
 ve.ui.MWAceEditorWidget.prototype.getRange = function () {
-	var lines;
+	let lines;
 	function posToOffset( row, col ) {
-		var offset = 0;
+		let offset = 0;
 
-		for ( var r = 0; r < row; r++ ) {
+		for ( let r = 0; r < row; r++ ) {
 			offset += lines[ r ].length;
 			offset++; // for the newline character
 		}
@@ -242,11 +242,11 @@ ve.ui.MWAceEditorWidget.prototype.getRange = function () {
 	if ( this.editor ) {
 		lines = this.editor.getSession().getDocument().getAllLines();
 
-		var selection = this.editor.getSelection();
-		var isBackwards = selection.isBackwards();
-		var range = selection.getRange();
-		var start = posToOffset( range.start.row, range.start.column );
-		var end = posToOffset( range.end.row, range.end.column );
+		const selection = this.editor.getSelection();
+		const isBackwards = selection.isBackwards();
+		const range = selection.getRange();
+		const start = posToOffset( range.start.row, range.start.column );
+		const end = posToOffset( range.end.row, range.end.column );
 
 		return {
 			from: isBackwards ? end : start,
@@ -263,13 +263,13 @@ ve.ui.MWAceEditorWidget.prototype.getRange = function () {
 ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 	this.focus();
 	this.loadingPromise.done( () => {
-		var doc = this.editor.getSession().getDocument(),
+		const doc = this.editor.getSession().getDocument(),
 			lines = doc.getAllLines();
 
 		to = to || from;
 
 		function offsetToPos( offset ) {
-			var row = 0,
+			let row = 0,
 				col,
 				pos = 0;
 
@@ -282,11 +282,11 @@ ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 			return { row: row, column: col };
 		}
 
-		var fromOffset = offsetToPos( from );
-		var toOffset = offsetToPos( to );
+		const fromOffset = offsetToPos( from );
+		const toOffset = offsetToPos( to );
 
-		var selection = this.editor.getSelection();
-		var range = selection.getRange();
+		const selection = this.editor.getSelection();
+		const range = selection.getRange();
 		range.setStart( fromOffset.row, fromOffset.column );
 		range.setEnd( toOffset.row, toOffset.column );
 		selection.setSelectionRange( range );

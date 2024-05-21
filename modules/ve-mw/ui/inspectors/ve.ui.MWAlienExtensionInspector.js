@@ -57,16 +57,16 @@ ve.ui.MWAlienExtensionInspector.prototype.initialize = function () {
 ve.ui.MWAlienExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWAlienExtensionInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var attributes = this.selectedNode.getAttribute( 'mw' ).attrs;
+			const attributes = this.selectedNode.getAttribute( 'mw' ).attrs;
 
 			if ( attributes && !ve.isEmptyObject( attributes ) ) {
-				for ( var key in attributes ) {
-					var attributeInput = new OO.ui.TextInputWidget( {
+				for ( const key in attributes ) {
+					const attributeInput = new OO.ui.TextInputWidget( {
 						value: attributes[ key ]
 					} );
 					attributeInput.connect( this, { change: 'onChangeHandler' } );
 					this.attributeInputs[ key ] = attributeInput;
-					var field = new OO.ui.FieldLayout(
+					const field = new OO.ui.FieldLayout(
 						attributeInput,
 						{
 							align: 'left',
@@ -102,7 +102,7 @@ ve.ui.MWAlienExtensionInspector.prototype.updateMwData = function ( mwData ) {
 	if ( !ve.isEmptyObject( this.attributeInputs ) ) {
 		// Make sure we have an attrs object to populate
 		mwData.attrs = mwData.attrs || {};
-		for ( var key in this.attributeInputs ) {
+		for ( const key in this.attributeInputs ) {
 			mwData.attrs[ key ] = this.attributeInputs[ key ].getValue();
 		}
 	}

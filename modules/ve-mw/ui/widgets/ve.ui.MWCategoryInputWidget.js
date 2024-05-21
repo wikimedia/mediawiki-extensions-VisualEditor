@@ -63,7 +63,7 @@ OO.mixinClass( ve.ui.MWCategoryInputWidget, OO.ui.mixin.LookupElement );
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
-	var title = mw.Title.newFromText( this.value );
+	let title = mw.Title.newFromText( this.value );
 	if ( title && title.getNamespaceId() === mw.config.get( 'wgNamespaceIds' ).category ) {
 		title = title.getMainText();
 	} else {
@@ -83,7 +83,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupRequest = function () {
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function ( data ) {
-	var result = [],
+	const result = [],
 		linkCacheUpdate = {},
 		query = data.query || {};
 
@@ -122,7 +122,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
  * @inheritdoc
  */
 ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( data ) {
-	var exactMatch = false,
+	let exactMatch = false,
 		itemWidgets = [],
 		existingCategoryItems = [],
 		matchingCategoryItems = [],
@@ -144,7 +144,7 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupMenuOptionsFromData = function ( 
 	}
 
 	data.forEach( ( suggestedCategory ) => {
-		var suggestedCategoryTitle = mw.Title.newFromText(
+		const suggestedCategoryTitle = mw.Title.newFromText(
 				suggestedCategory,
 				mw.config.get( 'wgNamespaceIds' ).category
 			).getPrefixedText(),
@@ -240,7 +240,7 @@ ve.ui.MWCategoryInputWidget.prototype.onLookupMenuChoose = function ( item ) {
  * @return {OO.ui.MenuOptionWidget} Menu item widget to be shown
  */
 ve.ui.MWCategoryInputWidget.prototype.getCategoryWidgetFromName = function ( name ) {
-	var cachedData = ve.init.platform.linkCache.getCached( mw.Title.newFromText(
+	let cachedData = ve.init.platform.linkCache.getCached( mw.Title.newFromText(
 			name,
 			mw.config.get( 'wgNamespaceIds' ).category
 		).getPrefixedText() ),

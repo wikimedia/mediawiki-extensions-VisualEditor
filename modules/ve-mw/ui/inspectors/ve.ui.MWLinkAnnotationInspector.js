@@ -218,16 +218,16 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkInputEnter = function () {
  * @inheritdoc
  */
 ve.ui.MWLinkAnnotationInspector.prototype.updateActions = function () {
-	var msg = null;
+	let msg = null;
 
 	ve.ui.MWLinkAnnotationInspector.super.prototype.updateActions.call( this );
 
 	// show/hide convert action
-	var content = this.fragment ? this.fragment.getText() : '';
-	var annotation = this.annotationInput.getAnnotation();
-	var href = annotation && annotation.getHref();
+	const content = this.fragment ? this.fragment.getText() : '';
+	const annotation = this.annotationInput.getAnnotation();
+	const href = annotation && annotation.getHref();
 	if ( href && ve.dm.MWMagicLinkNode.static.validateHref( content, href ) ) {
-		var type = ve.dm.MWMagicLinkType.static.fromContent( content ).type;
+		const type = ve.dm.MWMagicLinkType.static.fromContent( content ).type;
 		msg = 'visualeditor-linkinspector-convert-link-' + type.toLowerCase();
 	}
 
@@ -332,7 +332,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 		.next( () => {
 			this.isReady = false;
 
-			var isReadOnly = this.isReadOnly();
+			const isReadOnly = this.isReadOnly();
 			this.linkTypeIndex.setTabPanel(
 				this.initialAnnotation instanceof ve.dm.MWExternalLinkAnnotation ? 'external' : 'internal'
 			);
@@ -374,7 +374,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getActionProcess = function ( action )
  * @inheritdoc
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
-	var fragment;
+	let fragment;
 	return ve.ui.MWLinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
 			// Save the original fragment for later.
@@ -383,15 +383,15 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
 			this.isActive = false;
 		} )
 		.next( () => {
-			var selection = fragment && fragment.getSelection();
+			const selection = fragment && fragment.getSelection();
 
 			// Handle conversion to magic link.
 			if ( data && data.convert && selection instanceof ve.dm.LinearSelection ) {
-				var annotations = fragment.getDocument().data
+				const annotations = fragment.getDocument().data
 					.getAnnotationsFromRange( selection.getRange() )
 					// Remove link annotations
 					.filter( ( annotation ) => !/^link/.test( annotation.name ) );
-				var linearData = new ve.dm.ElementLinearData( annotations.store, [
+				const linearData = new ve.dm.ElementLinearData( annotations.store, [
 					{
 						type: 'link/mwMagic',
 						attributes: {
@@ -420,7 +420,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.getTeardownProcess = function ( data )
  * @param {OO.ui.TabPanelLayout} tabPanel Current tabPanel
  */
 ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function ( tabPanel ) {
-	var text = this.annotationInput.getTextInputWidget().getValue(),
+	const text = this.annotationInput.getTextInputWidget().getValue(),
 		end = text.length,
 		isExternal = this.isExternal(),
 		inputHasProtocol = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( text );
@@ -475,7 +475,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet = function ( tabPan
  * @return {ve.dm.MWInternalLinkAnnotation|ve.dm.MWExternalLinkAnnotation|null}
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getAnnotationFromFragment = function ( fragment ) {
-	var target = fragment.getText(),
+	const target = fragment.getText(),
 		title = mw.Title.newFromText( target );
 
 	// Figure out if this is an internal or external link
@@ -518,7 +518,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.newExternalLinkAnnotation = function (
  */
 ve.ui.MWLinkAnnotationInspector.prototype.getInsertionText = function () {
 	// Prefer user input, not normalized annotation, to preserve case
-	var label = this.labelInput.getValue().trim();
+	const label = this.labelInput.getValue().trim();
 	if ( label ) {
 		return label;
 	} else if ( this.isNew && this.isExternal() ) {

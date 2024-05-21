@@ -138,7 +138,7 @@ ve.ui.MWCategoriesPage.prototype.onUpdateSortKey = function ( item ) {
 ve.ui.MWCategoriesPage.prototype.onMetaListInsert = function ( metaItem ) {
 	// Responsible for adding UI components
 	if ( metaItem.element.type === 'mwCategory' ) {
-		var index = this.fragment.getDocument().getMetaList().getItemsInGroup( 'mwCategory' ).indexOf( metaItem );
+		const index = this.fragment.getDocument().getMetaList().getItemsInGroup( 'mwCategory' ).indexOf( metaItem );
 		this.categoryWidget.addItems(
 			[ this.getCategoryItemFromMetaListItem( metaItem ) ],
 			index
@@ -153,7 +153,7 @@ ve.ui.MWCategoriesPage.prototype.onMetaListInsert = function ( metaItem ) {
  */
 ve.ui.MWCategoriesPage.prototype.onMetaListRemove = function ( metaItem ) {
 	if ( metaItem.element.type === 'mwCategory' ) {
-		var item = this.categoryWidget.categories[ this.getCategoryItemFromMetaListItem( metaItem ).value ];
+		const item = this.categoryWidget.categories[ this.getCategoryItemFromMetaListItem( metaItem ).value ];
 		this.categoryWidget.removeItems( [ item ] );
 	}
 };
@@ -173,11 +173,11 @@ ve.ui.MWCategoriesPage.prototype.getDefaultSortKeyItem = function () {
  * @return {Object[]} items
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItems = function () {
-	var items = [],
+	const items = [],
 		categories = this.fragment.getDocument().getMetaList().getItemsInGroup( 'mwCategory' );
 
 	// Loop through MwCategories and build out items
-	for ( var i = 0; i < categories.length; i++ ) {
+	for ( let i = 0; i < categories.length; i++ ) {
 		items.push( this.getCategoryItemFromMetaListItem( categories[ i ] ) );
 	}
 	return items;
@@ -190,7 +190,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItems = function () {
  * @return {Object} item
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItemFromMetaListItem = function ( metaItem ) {
-	var title = mw.Title.newFromText( metaItem.element.attributes.category ),
+	const title = mw.Title.newFromText( metaItem.element.attributes.category ),
 		value = title ? title.getMainText() : '';
 
 	return {
@@ -210,7 +210,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemFromMetaListItem = function ( me
  * @return {Object} metaBase
  */
 ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, oldData ) {
-	var newData = {
+	const newData = {
 		attributes: { category: item.name, sortkey: item.sortKey || '' },
 		type: 'mwCategory'
 	};
@@ -236,10 +236,10 @@ ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config ) {
 		remove: 'onMetaListRemove'
 	} );
 
-	var defaultSortKeyItem = this.getDefaultSortKeyItem();
+	const defaultSortKeyItem = this.getDefaultSortKeyItem();
 
 	this.categoryWidget.setFragment( fragment );
-	var promise = this.categoryWidget.addItems( this.getCategoryItems() ).then( () => {
+	const promise = this.categoryWidget.addItems( this.getCategoryItems() ).then( () => {
 		this.categoryWidget.setDisabled( config.isReadOnly );
 	} );
 
@@ -269,7 +269,7 @@ ve.ui.MWCategoriesPage.prototype.focus = function () {
  * @param {Object} [data] Dialog tear down data
  */
 ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
-	var currentDefaultSortKeyItem = this.getDefaultSortKeyItem(),
+	const currentDefaultSortKeyItem = this.getDefaultSortKeyItem(),
 		newDefaultSortKey = this.defaultSortInput.getValue();
 
 	if ( data && data.action === 'done' ) {
@@ -280,14 +280,14 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 					this.fragment.removeMeta( currentDefaultSortKeyItem );
 				}
 			} else {
-				var newDefaultSortKeyData = {
+				const newDefaultSortKeyData = {
 					type: 'mwDefaultSort',
 					attributes: {
 						sortkey: newDefaultSortKey
 					}
 				};
 				if ( !currentDefaultSortKeyItem ) {
-					var firstCategory = this.fragment.getDocument().getMetaList().getItemsInGroup( 'mwCategory' )[ 0 ],
+					const firstCategory = this.fragment.getDocument().getMetaList().getItemsInGroup( 'mwCategory' )[ 0 ],
 						offset = firstCategory && firstCategory.getOffset();
 					this.fragment.insertMeta( newDefaultSortKeyData, offset );
 				} else if ( currentDefaultSortKeyItem.getAttribute( 'sortkey' ) !== newDefaultSortKey ) {

@@ -48,7 +48,7 @@ ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) 
 	this.trackingName = config.trackingName;
 	this.$pulsatingDot = $( '<div>' ).addClass( 'mw-pulsating-dot' );
 
-	var $popupContent = $( '<div>' ).append(
+	const $popupContent = $( '<div>' ).append(
 		$( '<h3>' ).text( config.popupTitle ),
 		// eslint-disable-next-line no-jquery/no-append-html
 		$( '<p>' ).append(
@@ -124,7 +124,7 @@ ve.ui.MWEducationPopupWidget.prototype.onPopupCloseButtonClick = function () {
 	ve.init.target.openEducationPopup = null;
 	mw.libs.ve.stopShowingEducationPopups();
 
-	var mouseLeft = { which: OO.ui.MouseButtons.LEFT };
+	const mouseLeft = { which: OO.ui.MouseButtons.LEFT };
 	this.$target
 		.trigger( $.Event( 'mousedown', mouseLeft ) )
 		.trigger( $.Event( 'mouseup', mouseLeft ) )

@@ -45,7 +45,7 @@ ve.ui.MWLiveExtensionInspector.prototype.initialize = function () {
 ve.ui.MWLiveExtensionInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLiveExtensionInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var element = this.getNewElement();
+			const element = this.getNewElement();
 			// Initialization
 			this.getFragment().getSurface().pushStaging();
 
@@ -130,7 +130,7 @@ ve.ui.MWLiveExtensionInspector.prototype.updatePreview = function () {
 		// Method is called debounced, so selectedNode may not still exist
 		return;
 	}
-	var mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
+	const mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
 
 	this.updateMwData( mwData );
 

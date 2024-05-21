@@ -19,13 +19,13 @@
  * @hideconstructor
  */
 ( function () {
-	var conf = mw.config.get( 'wgVisualEditorConfig' ),
+	const conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
 		modules = [ 'ext.visualEditor.articleTarget' ]
 			// Add modules from $wgVisualEditorPluginModules
 			.concat( conf.pluginModules.filter( mw.loader.getState ) );
 
-	var url = new URL( location.href );
+	const url = new URL( location.href );
 	// Provide the new wikitext editor
 	if (
 		conf.enableWikitext &&
@@ -40,10 +40,10 @@
 
 	// A/B test enrollment for edit check (T342930)
 	if ( conf.editCheckABTest ) {
-		var inABTest;
+		let inABTest;
 		if ( mw.user.isAnon() ) {
 			// can't just use mw.user.sessionId() because we need this to last across sessions
-			var token = mw.cookie.get( 'VEECid', '', mw.user.generateRandomSessionId() );
+			const token = mw.cookie.get( 'VEECid', '', mw.user.generateRandomSessionId() );
 			// Store the token so our state is consistent across pages
 			mw.cookie.set( 'VEECid', token, { path: '/', expires: 90 * 86400, prefix: '' } );
 			inABTest = parseInt( token.slice( 0, 8 ), 16 ) % 2 === 1;
@@ -55,12 +55,12 @@
 		mw.config.set( 'wgVisualEditorEditCheckABTestBucket', '2024-02-editcheck-reference-' + ( inABTest ? 'test' : 'control' ) );
 	}
 
-	var editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' ) || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+	const editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' ) || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 	if ( conf.editCheckTagging || editCheck ) {
 		modules.push( 'ext.visualEditor.editCheck' );
 	}
 
-	var namespaces = mw.config.get( 'wgNamespaceIds' );
+	const namespaces = mw.config.get( 'wgNamespaceIds' );
 	// Load signature tool if *any* namespace supports it.
 	// It will be shown disabled on namespaces that don't support it.
 	if (
@@ -129,12 +129,12 @@
 		 *  checkboxesByName (keyed object of OO.ui.CheckboxInputWidget).
 		 */
 		createCheckboxFields: function ( checkboxesDef, widgetConfig ) {
-			var checkboxFields = [],
+			const checkboxFields = [],
 				checkboxesByName = {};
 
 			if ( checkboxesDef ) {
 				Object.keys( checkboxesDef ).forEach( ( name ) => {
-					var options = checkboxesDef[ name ],
+					let options = checkboxesDef[ name ],
 						accesskey = null,
 						title = null;
 
@@ -158,9 +158,9 @@
 					// The following messages are used here:
 					// * minoredit
 					// * watchthis
-					var $label = mw.message( options[ 'label-message' ] ).parseDom();
+					const $label = mw.message( options[ 'label-message' ] ).parseDom();
 
-					var config = $.extend( {
+					const config = $.extend( {
 						accessKey: accesskey,
 						// The following classes are used here:
 						// * ve-ui-mwSaveDialog-checkbox-wpMinoredit
@@ -169,7 +169,7 @@
 						classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
 					}, widgetConfig );
 
-					var checkbox;
+					let checkbox;
 					switch ( options.class ) {
 						case 'OOUI\\DropdownInputWidget':
 							checkbox = new OO.ui.DropdownInputWidget( $.extend( config, {
@@ -226,22 +226,22 @@
 		 */
 		requestPageData: function ( mode, pageName, options ) {
 			options = options || {};
-			var apiRequest = mode === 'source' ?
+			const apiRequest = mode === 'source' ?
 				this.requestWikitext.bind( this, pageName, options ) :
 				this.requestParsoidData.bind( this, pageName, options );
 
 			if ( options.sessionStore ) {
-				var sessionState;
+				let sessionState;
 				try {
 					// ve.init.platform.getSessionObject is not available yet
 					sessionState = JSON.parse( mw.storage.session.get( 've-docstate' ) );
 				} catch ( e ) {}
 
 				if ( sessionState ) {
-					var request = sessionState.request || {};
+					const request = sessionState.request || {};
 					// Check true section editing is in use
-					var enableVisualSectionEditing = conf.enableVisualSectionEditing;
-					var section = request.mode === 'source' || enableVisualSectionEditing === true || enableVisualSectionEditing === options.targetName ?
+					const enableVisualSectionEditing = conf.enableVisualSectionEditing;
+					const section = request.mode === 'source' || enableVisualSectionEditing === true || enableVisualSectionEditing === options.targetName ?
 						options.section : null;
 					// Check the requested page, mode and section match the stored one
 					if (
@@ -251,7 +251,7 @@
 						// NB we don't cache by oldid so that cached results can be recovered
 						// even if the page has been since edited
 					) {
-						var dataPromise = $.Deferred().resolve( {
+						const dataPromise = $.Deferred().resolve( {
 							visualeditor: $.extend(
 								{ content: mw.storage.session.get( 've-dochtml' ) },
 								sessionState.response,
@@ -303,13 +303,13 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options, noRestbase, noMetadata ) {
-			var section = options.section !== undefined ? options.section : null,
+			let section = options.section !== undefined ? options.section : null,
 				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
 				switched = false,
 				fromEditedState = false;
 
 			options = options || {};
-			var data = {
+			const data = {
 				action: 'visualeditor',
 				paction: useRestbase ? 'metadata' : 'parse',
 				page: pageName,
@@ -329,10 +329,10 @@
 				data.oldid = options.oldId;
 			}
 			// Load DOM
-			var start = ve.now();
+			const start = ve.now();
 			ve.track( 'trace.apiLoad.enter', { mode: 'visual' } );
 
-			var apiXhr, apiPromise;
+			let apiXhr, apiPromise;
 			if ( !useRestbase && options.wikitext !== undefined ) {
 				// Non-RESTBase custom wikitext parse
 				data.paction = 'parse';
@@ -363,18 +363,18 @@
 				} );
 			}
 
-			var dataPromise, abort;
+			let dataPromise, abort;
 			if ( useRestbase ) {
 				ve.track( 'trace.restbaseLoad.enter', { mode: 'visual' } );
 
-				var headers = {
+				const headers = {
 					// Should be synchronised with DirectParsoidClient.php
 					Accept: 'text/html; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/HTML/2.8.0"',
 					'Accept-Language': mw.config.get( 'wgVisualEditor' ).pageLanguageCode,
 					'Api-User-Agent': 'VisualEditor-MediaWiki/' + mw.config.get( 'wgVersion' )
 				};
 
-				var restbaseXhr, pageHtmlUrl;
+				let restbaseXhr, pageHtmlUrl;
 				// Convert specified Wikitext to HTML
 				if (
 					// wikitext can be an empty string
@@ -419,7 +419,7 @@
 						dataType: 'text'
 					} );
 				}
-				var restbasePromise = restbaseXhr.then(
+				const restbasePromise = restbaseXhr.then(
 					( response, status, jqxhr ) => {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
 						mw.track( 'timing.ve.' + options.targetName + '.performance.system.restbaseLoad',
@@ -468,7 +468,7 @@
 
 			return dataPromise.then( ( resp ) => {
 				// Adapted from RESTBase mwUtil.parseETag()
-				var etagRegexp = /^(?:W\/)?"?([^"/]+)(?:\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))(?:\/([^"]+))?"?$/;
+				const etagRegexp = /^(?:W\/)?"?([^"/]+)(?:\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))(?:\/([^"]+))?"?$/;
 
 				// `etag` is expected to be undefined when creating a new page.
 				// We can detect that case by `content` being empty, and not retry.
@@ -499,7 +499,7 @@
 		 */
 		requestWikitext: function ( pageName, options ) {
 			options = options || {};
-			var data = {
+			const data = {
 				action: 'visualeditor',
 				paction: 'wikitext',
 				page: pageName,
@@ -519,7 +519,7 @@
 				data.oldid = options.oldId;
 			}
 
-			var dataPromise = new mw.Api().get( data );
+			const dataPromise = new mw.Api().get( data );
 			return dataPromise.then( ( resp ) => {
 				resp.veMode = 'source';
 				return resp;

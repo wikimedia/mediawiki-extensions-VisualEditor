@@ -95,7 +95,7 @@ ve.init.mw.MobileCollabTarget.static.toolbarGroups = [
  * @inheritdoc
  */
 ve.init.mw.MobileCollabTarget.prototype.getSurfaceClasses = function () {
-	var classes = ve.init.mw.MobileCollabTarget.super.prototype.getSurfaceClasses.call( this );
+	const classes = ve.init.mw.MobileCollabTarget.super.prototype.getSurfaceClasses.call( this );
 	return classes.concat( [ 'content' ] );
 };
 

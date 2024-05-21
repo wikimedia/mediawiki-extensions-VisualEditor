@@ -68,7 +68,7 @@ ve.ui.MWTransclusionContextItem.static.isCompatibleWith =
  */
 ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
 	/** @type {ve.ce.MWTransclusionNode} */
-	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
+	const nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
 	return ve.msg(
 		'visualeditor-dialog-transclusion-contextitem-description',
 		nodeClass.static.getDescription( this.model ),
@@ -80,7 +80,7 @@ ve.ui.MWTransclusionContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.MWTransclusionContextItem.prototype.renderBody = function () {
-	var nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
+	const nodeClass = ve.ce.nodeFactory.lookup( this.model.constructor.static.name );
 	// eslint-disable-next-line no-jquery/no-append-html
 	this.$body.append( ve.htmlMsg(
 		'visualeditor-dialog-transclusion-contextitem-description',
@@ -93,7 +93,7 @@ ve.ui.MWTransclusionContextItem.prototype.renderBody = function () {
  * @inheritdoc
  */
 ve.ui.MWTransclusionContextItem.prototype.onEditButtonClick = function () {
-	var surfaceModel = this.context.getSurface().getModel(),
+	const surfaceModel = this.context.getSurface().getModel(),
 		selection = surfaceModel.getSelection();
 
 	if ( selection instanceof ve.dm.TableSelection ) {

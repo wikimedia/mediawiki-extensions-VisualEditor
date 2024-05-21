@@ -87,7 +87,7 @@ ve.ui.MWPreDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWPreDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'convert' ) {
 		return new OO.ui.Process( () => {
-			var
+			const
 				value = this.input.getValue(),
 				nodeRange = this.selectedNode.getOuterRange(),
 				surfaceModel = this.getFragment().getSurface(),

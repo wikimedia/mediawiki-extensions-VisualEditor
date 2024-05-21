@@ -44,7 +44,7 @@ ve.ce.MWEntityNode.static.name = 'mwEntity';
  * Handle model update events.
  */
 ve.ce.MWEntityNode.prototype.onUpdate = function () {
-	var
+	let
 		chr = this.model.getAttribute( 'character' ),
 		whitespaceHtmlChars = ve.visibleWhitespaceCharacters,
 		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();

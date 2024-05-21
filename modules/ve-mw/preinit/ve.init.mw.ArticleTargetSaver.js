@@ -57,7 +57,7 @@
 
 			if ( oldDoc ) {
 				// Copy the head from the old document
-				for ( var i = 0, len = oldDoc.head.childNodes.length; i < len; i++ ) {
+				for ( let i = 0, len = oldDoc.head.childNodes.length; i < len; i++ ) {
 					newDoc.head.appendChild( oldDoc.head.childNodes[ i ].cloneNode( true ) );
 				}
 				// Copy attributes from the old document for the html, head and body
@@ -88,10 +88,10 @@
 					function truncate( text, l ) {
 						return text.length > l ? text.slice( 0, l ) + '…' : text;
 					}
-					var errorMessage = 'DOM content matching deny list found:\n' + truncate( el.outerHTML, 100 ) +
+					const errorMessage = 'DOM content matching deny list found:\n' + truncate( el.outerHTML, 100 ) +
 						'\nContext:\n' + truncate( el.parentNode.outerHTML, 200 );
 					mw.log.error( errorMessage );
-					var err = new Error( errorMessage );
+					const err = new Error( errorMessage );
 					err.name = 'VeDomDenyListWarning';
 					mw.errorLogger.logError( err, 'error.visualeditor' );
 					$( el ).remove();
@@ -173,7 +173,7 @@
 		 */
 		postHtml: function ( html, cacheKey, extraData, options ) {
 			options = options || {};
-			var data;
+			let data;
 			if ( cacheKey ) {
 				data = $.extend( { cachekey: cacheKey }, extraData );
 			} else {
@@ -217,9 +217,9 @@
 		 */
 		postContent: function ( data, options ) {
 			options = options || {};
-			var api = options.api || new mw.Api();
+			const api = options.api || new mw.Api();
 
-			var start;
+			let start;
 			if ( options.now ) {
 				start = options.now();
 			}
@@ -239,29 +239,29 @@
 				data
 			);
 
-			var action = data.action;
+			const action = data.action;
 
-			var request = api.postWithToken( 'csrf', data, {
+			const request = api.postWithToken( 'csrf', data, {
 				contentType: 'multipart/form-data',
 				trackEditAttemptStepSessionId: true
 			} );
 
 			return request.then(
 				( response, jqxhr ) => {
-					var responseData = response[ action ];
+					const responseData = response[ action ];
 
 					// Log data about the request if eventName was set
 					if ( options.track && options.eventName ) {
-						var eventData = {
+						const eventData = {
 							bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
 							duration: options.now() - start
 						};
-						var fullEventName = 'performance.system.' + options.eventName +
+						const fullEventName = 'performance.system.' + options.eventName +
 							( responseData.cachekey ? '.withCacheKey' : '.withoutCacheKey' );
 						options.track( fullEventName, eventData );
 					}
 
-					var error;
+					let error;
 					if ( !responseData ) {
 						error = {
 							code: 'invalidresponse',
@@ -301,14 +301,14 @@
 					return responseData;
 				},
 				( code, response ) => {
-					var responseText = OO.getProp( response, 'xhr', 'responseText' );
+					const responseText = OO.getProp( response, 'xhr', 'responseText' );
 
 					if ( responseText && options.track && options.eventName ) {
-						var eventData = {
+						const eventData = {
 							bytes: require( 'mediawiki.String' ).byteLength( responseText ),
 							duration: options.now() - start
 						};
-						var fullEventName;
+						let fullEventName;
 						if ( code === 'badcachekey' ) {
 							fullEventName = 'performance.system.' + options.eventName + '.badCacheKey';
 						} else {

@@ -28,11 +28,11 @@ OO.inheritClass( ve.dm.MWWikitextSurfaceFragment, ve.dm.SourceSurfaceFragment );
  * @inheritdoc
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type, attributes ) {
-	var nodes = this.getSelectedLeafNodes(),
+	let nodes = this.getSelectedLeafNodes(),
 		all = !!nodes.length;
 
-	for ( var i = 0, len = nodes.length; i < len; i++ ) {
-		var text = this.document.data.getText( false, nodes[ i ].getRange() );
+	for ( let i = 0, len = nodes.length; i < len; i++ ) {
+		const text = this.document.data.getText( false, nodes[ i ].getRange() );
 		// TODO: Use a registry to do this matching
 		switch ( type ) {
 			case 'paragraph':
@@ -77,7 +77,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.wrapText = function ( before, after, p
 	placeholder = OO.ui.resolveMsg( placeholder );
 
 	function unwrap( fragment ) {
-		var text = fragment.getText();
+		const text = fragment.getText();
 		if (
 			( !before || text.slice( 0, before.length ) === before ) &&
 			( !after || text.slice( -after.length ) === after )
@@ -98,8 +98,8 @@ ve.dm.MWWikitextSurfaceFragment.prototype.wrapText = function ( before, after, p
 		if ( placeholder && this.getSelection().isCollapsed() ) {
 			this.insertContent( placeholder );
 		}
-		var wrappedFragment = this.clone();
-		var wasExcludingInsertions = this.willExcludeInsertions();
+		const wrappedFragment = this.clone();
+		const wasExcludingInsertions = this.willExcludeInsertions();
 		this.setExcludeInsertions( true );
 		this.collapseToStart().insertContent( before );
 		this.collapseToEnd().insertContent( after );
@@ -130,10 +130,10 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 		return ve.createDeferred().resolve( '' ).promise();
 	}
 
-	var wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
+	const wikitextPromise = ve.init.target.getWikitextFragment( doc, false );
 
 	// TODO: Emit an event to trigger the progress bar
-	var progressPromise = ve.init.target.getSurface().createProgress(
+	const progressPromise = ve.init.target.getSurface().createProgress(
 		wikitextPromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
 	).then( ( progressBar, cancelPromise ) => {
 		cancelPromise.fail( () => {
@@ -142,7 +142,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	} );
 
 	return ve.promiseAll( [ wikitextPromise, progressPromise ] ).then( ( wikitext ) => {
-		var deferred = ve.createDeferred();
+		const deferred = ve.createDeferred();
 		setTimeout( () => {
 			if ( wikitext !== undefined ) {
 				deferred.resolve( wikitext );
@@ -158,7 +158,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
  * @inheritdoc
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source ) {
-	var parsePromise;
+	let parsePromise;
 	if ( !source ) {
 		parsePromise = ve.createDeferred().resolve(
 			ve.dm.Document.static.newBlankDocument()

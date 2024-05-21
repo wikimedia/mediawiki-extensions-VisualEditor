@@ -41,11 +41,11 @@ ve.ui.MWWikitextPasteContextItem.static.label = OO.ui.deferMsg( 'visualeditor-wi
  * @inheritdoc
  */
 ve.ui.MWWikitextPasteContextItem.prototype.renderBody = function () {
-	var fragment = this.data.fragment,
+	const fragment = this.data.fragment,
 		doc = this.data.doc,
 		contextRange = this.data.contextRange;
 
-	var convertButton = new OO.ui.ButtonWidget( {
+	const convertButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-wikitextconvert-convert' ),
 		flags: [ 'progressive' ]
 	} ).on( 'click', () => {

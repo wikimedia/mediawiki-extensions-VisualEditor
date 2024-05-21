@@ -2,7 +2,7 @@
 
 module.exports = {
 	toolbar: function () {
-		var done = arguments[ arguments.length - 1 ];
+		const done = arguments[ arguments.length - 1 ];
 		// HACK: The test page is on the help namespace, so overwrite the
 		// read tab with the nstab-main message.
 		new mw.Api().loadMessagesIfMissing( [ 'nstab-main' ], { amenableparser: true } ).then( () => {
@@ -16,7 +16,7 @@ module.exports = {
 		} );
 	},
 	toolbarActions: function () {
-		var done = arguments[ arguments.length - 1 ];
+		const done = arguments[ arguments.length - 1 ];
 		done(
 			seleniumUtils.getBoundingRect( [
 				ve.init.target.toolbar.$after[ 0 ]
@@ -24,7 +24,7 @@ module.exports = {
 		);
 	},
 	citoidInspector: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		ve.init.target.toolbar.tools.citoid.onSelect();
 		setTimeout( () => {
@@ -37,7 +37,7 @@ module.exports = {
 		}, 500 );
 	},
 	citoidInspectorManual: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.context.inspectors.currentWindow.setModePanel( 'manual' );
 		setTimeout( () => {
@@ -50,7 +50,7 @@ module.exports = {
 		} );
 	},
 	citoidInspectorReuse: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.context.inspectors.currentWindow.setModePanel( 'reuse' );
 		setTimeout( () => {
@@ -63,7 +63,7 @@ module.exports = {
 		} );
 	},
 	citoidInspectorTeardown: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.context.inspectors.currentWindow.close().closed.then( done );
 	},
@@ -106,12 +106,12 @@ module.exports = {
 		seleniumUtils.runMenuTask( arguments[ arguments.length - 1 ], ve.init.target.toolbar.tools.categories, false, true );
 	},
 	toolbarTeardown: function () {
-		var done = arguments[ arguments.length - 1 ];
+		const done = arguments[ arguments.length - 1 ];
 		seleniumUtils.collapseToolbar();
 		done();
 	},
 	save: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
 		surface.dialogs.once( 'opening', ( win, opening ) => {
@@ -128,12 +128,12 @@ module.exports = {
 		ve.init.target.toolbarSaveButton.onSelect();
 	},
 	saveTeardown: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.dialogs.currentWindow.close().closed.then( done );
 	},
 	specialCharacters: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
 		surface.getToolbarDialogs().once( 'opening', ( win, opening ) => {
@@ -151,12 +151,12 @@ module.exports = {
 		ve.init.target.toolbar.tools.specialCharacter.onSelect();
 	},
 	specialCharactersTeardown: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.getToolbarDialogs().currentWindow.close().closed.then( done );
 	},
 	formula: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
 		surface.dialogs.once( 'opening', ( win, opening ) => {
@@ -176,12 +176,12 @@ module.exports = {
 		surface.executeCommand( 'mathDialog' );
 	},
 	formulaTeardown: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.dialogs.currentWindow.close().closed.then( done );
 	},
 	referenceList: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
 		surface.dialogs.once( 'opening', ( win, opening ) => {
@@ -200,7 +200,7 @@ module.exports = {
 		surface.executeCommand( 'referencesList' );
 	},
 	referenceListTeardown: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 		surface.dialogs.currentWindow.close().closed.then( () => {
 			// Remove the reference list
@@ -209,7 +209,7 @@ module.exports = {
 		} );
 	},
 	toolbarCite: function () {
-		var done = arguments[ arguments.length - 1 ];
+		const done = arguments[ arguments.length - 1 ];
 
 		ve.init.target.toolbar.tools.citoid.$element.css( 'font-size', '250%' );
 		// Wait for re-paint
@@ -222,12 +222,12 @@ module.exports = {
 		}, 100 );
 	},
 	toolbarCiteTeardown: function () {
-		var done = arguments[ arguments.length - 1 ];
+		const done = arguments[ arguments.length - 1 ];
 		ve.init.target.toolbar.tools.citoid.$element.css( 'font-size', '' );
 		done();
 	},
 	linkSearchResults: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
 		surface.getModel().getFragment()
@@ -254,7 +254,7 @@ module.exports = {
 		ve.init.target.surface.executeCommand( 'link' );
 	},
 	linkSearchResultsTeardown: function () {
-		var done = arguments[ arguments.length - 1 ],
+		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
 		surface.context.inspectors.currentWindow.close().closed.then( () => {

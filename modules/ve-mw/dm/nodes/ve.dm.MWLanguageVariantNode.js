@@ -99,13 +99,13 @@ ve.dm.MWLanguageVariantNode.static.migrateFieldNames = function ( dataMwv ) {
  * @inheritdoc
  */
 ve.dm.MWLanguageVariantNode.static.toDataElement = function ( domElements, converter ) {
-	var firstElement = domElements[ 0 ],
+	const firstElement = domElements[ 0 ],
 		dataMwvJSON = firstElement.getAttribute( 'data-mw-variant' ),
 		dataMwv = dataMwvJSON ? JSON.parse( dataMwvJSON ) : {};
 
 	this.migrateFieldNames( dataMwv );
 
-	var dataElement = {
+	const dataElement = {
 		attributes: {
 			variantInfo: dataMwv,
 			originalVariantInfo: dataMwvJSON
@@ -117,7 +117,7 @@ ve.dm.MWLanguageVariantNode.static.toDataElement = function ( domElements, conve
 		return dataElement;
 	}
 
-	var isInline = this.isHybridInline( domElements, converter );
+	const isInline = this.isHybridInline( domElements, converter );
 	dataElement.type = isInline ? this.inlineType : this.blockType;
 	return dataElement;
 };
@@ -126,7 +126,7 @@ ve.dm.MWLanguageVariantNode.static.toDataElement = function ( domElements, conve
  * @inheritdoc
  */
 ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var variantInfo = dataElement.attributes.variantInfo,
+	let variantInfo = dataElement.attributes.variantInfo,
 		tagName = this.matchTagNames[ 0 ],
 		rdfaType = this.matchRdfaTypes[ 0 ],
 		domElement = doc.createElement( tagName ),
@@ -167,7 +167,7 @@ ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, 
  */
 ve.dm.MWLanguageVariantNode.static.processVariants = function ( container, opts ) {
 	Array.prototype.forEach.call( container.querySelectorAll( '[typeof="mw:LanguageVariant"]' ), ( element ) => {
-		var dataMwvJSON = element.getAttribute( 'data-mw-variant' );
+		const dataMwvJSON = element.getAttribute( 'data-mw-variant' );
 		if ( dataMwvJSON && element.tagName !== 'META' ) {
 			this.insertPreviewElements(
 				element, JSON.parse( dataMwvJSON ), opts
@@ -219,7 +219,7 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 	} else if ( variantInfo.filter ) {
 		return variantInfo.filter.t;
 	} else if ( variantInfo.describe || ( opts && opts.describeAll ) ) {
-		var html = '';
+		let html = '';
 		if ( variantInfo.twoway && variantInfo.twoway.length ) {
 			variantInfo.twoway.forEach( ( item ) => {
 				html += ve.init.platform.getLanguageName( item.l.toLowerCase() ) + ':' +
@@ -234,7 +234,7 @@ ve.dm.MWLanguageVariantNode.static.getPreviewHtml = function ( variantInfo, opts
 		}
 		return html;
 	} else {
-		var languageIndex;
+		let languageIndex;
 		if ( variantInfo.twoway && variantInfo.twoway.length ) {
 			languageIndex = this.matchLanguage( variantInfo.twoway );
 			return variantInfo.twoway[ languageIndex ].t;
@@ -259,7 +259,7 @@ ve.dm.MWLanguageVariantNode.static.describeChanges = function () {
  */
 ve.dm.MWLanguageVariantNode.static.cloneElement = function () {
 	// Parent method
-	var clone = ve.dm.MWLanguageVariantNode.super.static.cloneElement.apply( this, arguments );
+	const clone = ve.dm.MWLanguageVariantNode.super.static.cloneElement.apply( this, arguments );
 	delete clone.attributes.originalVariantInfo;
 	return clone;
 };
@@ -275,13 +275,13 @@ ve.dm.MWLanguageVariantNode.static.cloneElement = function () {
  *  code.
  */
 ve.dm.MWLanguageVariantNode.static.matchLanguage = function ( items ) {
-	var userVariant = mw.config.get( 'wgUserVariant' ),
+	const userVariant = mw.config.get( 'wgUserVariant' ),
 		fallbacks = mw.config.get( 'wgVisualEditor' ).pageVariantFallbacks,
 		languageCodes =
 			( userVariant ? [ userVariant ] : [] ).concat( fallbacks || [] );
-	for ( var j = 0; j < languageCodes.length; j++ ) {
-		var code = languageCodes[ j ].toLowerCase();
-		for ( var i = 0; i < items.length; i++ ) {
+	for ( let j = 0; j < languageCodes.length; j++ ) {
+		const code = languageCodes[ j ].toLowerCase();
+		for ( let i = 0; i < items.length; i++ ) {
 			if (
 				items[ i ].l === '*' ||
 				items[ i ].l.toLowerCase() === code

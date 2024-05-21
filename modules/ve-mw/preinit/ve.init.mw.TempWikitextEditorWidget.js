@@ -23,7 +23,7 @@ mw.libs.ve = mw.libs.ve || {};
  * @cfg {string} value Raw wikitext to edit
  */
 mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget( config ) {
-	var conf = mw.config.get( 'wgVisualEditor' ),
+	const conf = mw.config.get( 'wgVisualEditor' ),
 		dir = conf.pageLanguageDir,
 		lang = conf.pageLanguageCode;
 
@@ -94,7 +94,7 @@ mw.libs.ve.MWTempWikitextEditorWidget.prototype.getValue = function () {
  * @return {Object} Object containing numbers 'from' and 'to'
  */
 mw.libs.ve.MWTempWikitextEditorWidget.prototype.getRange = function () {
-	var input = this.$element[ 0 ],
+	const input = this.$element[ 0 ],
 		start = input.selectionStart,
 		end = input.selectionEnd,
 		isBackwards = input.selectionDirection === 'backward';

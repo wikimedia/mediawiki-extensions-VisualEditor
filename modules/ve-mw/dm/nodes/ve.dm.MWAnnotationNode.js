@@ -34,7 +34,7 @@ ve.dm.MWAnnotationNode.static.preserveHtmlAttributes = true;
  * @inheritdoc
  */
 ve.dm.MWAnnotationNode.static.toDataElement = function ( domElements ) {
-	var dataElement,
+	let dataElement,
 		mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		type = domElements[ 0 ].getAttribute( 'typeof' );
 
@@ -53,7 +53,7 @@ ve.dm.MWAnnotationNode.static.toDataElement = function ( domElements ) {
 };
 
 ve.dm.MWAnnotationNode.static.toDomElements = function ( dataElement, doc ) {
-	var el;
+	let el;
 
 	el = doc.createElement( 'meta' );
 	el.setAttribute( 'typeof', dataElement.attributes.type );

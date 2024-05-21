@@ -8,7 +8,7 @@
 /* eslint-disable no-jquery/no-global-selector */
 
 ( function () {
-	var target,
+	let target,
 		$specialTab = $( '#ca-nstab-special' ),
 		$padTab = $( '#ca-pad' ),
 		conf = mw.config.get( 'wgVisualEditorConfig' ),
@@ -44,7 +44,7 @@
 	}
 
 	function showPage( title, importTitle ) {
-		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
+		const specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
 
 		setTitle( mw.msg( 'collabpad-doctitle', title.getPrefixedText() ) );
 
@@ -77,12 +77,12 @@
 			$( '#firstHeading' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 
 			// Add a dummy surface while the doc is loading
-			var dummySurface = target.addSurface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
+			const dummySurface = target.addSurface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
 			dummySurface.setReadOnly( true );
 
 			// TODO: Create the correct model surface type (ve.ui.Surface#createModel)
-			var surfaceModel = new ve.dm.Surface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
-			var username = mw.user.getName();
+			let surfaceModel = new ve.dm.Surface( ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '' ) ) );
+			const username = mw.user.getName();
 			surfaceModel.createSynchronizer(
 				mw.config.get( 'wgWikiID' ) + '/' + title.toString(),
 				{
@@ -94,11 +94,11 @@
 				}
 			);
 
-			var progressDeferred = ve.createDeferred();
+			const progressDeferred = ve.createDeferred();
 			dummySurface.createProgress( progressDeferred.promise(), ve.msg( 'visualeditor-rebase-client-connecting' ), true );
 
 			surfaceModel.synchronizer.once( 'initDoc', ( error ) => {
-				var initPromise;
+				let initPromise;
 
 				progressDeferred.resolve();
 				// Resolving the progress bar doesn't close the window in this cycle,
@@ -108,7 +108,7 @@
 					// Don't add the surface until the history has been applied
 					target.addSurface( surfaceModel );
 					if ( error ) {
-						var $errorMsg = ve.htmlMsg( 'visualeditor-rebase-corrupted-document-error', $( '<pre>' ).text( error.stack ) );
+						const $errorMsg = ve.htmlMsg( 'visualeditor-rebase-corrupted-document-error', $( '<pre>' ).text( error.stack ) );
 						OO.ui.alert(
 							$( '<p>' ).append( $errorMsg ),
 							{ title: ve.msg( 'visualeditor-rebase-corrupted-document-title' ), size: 'large' }
@@ -120,7 +120,7 @@
 					target.once( 'surfaceReady', () => {
 						initPromise.then( () => {
 							target.getSurface().getView().selectFirstSelectableContentOffset();
-							var isNewAuthor = !ve.init.platform.sessionStorage.get( 've-collab-author' );
+							const isNewAuthor = !ve.init.platform.sessionStorage.get( 've-collab-author' );
 							// For new anon users, open the author list so they can set their name
 							if ( isNewAuthor && !username ) {
 								// Something (an animation?) steals focus during load, so wait a bit
@@ -134,12 +134,12 @@
 
 					if ( target.importTitle && !surfaceModel.getDocument().getCompleteHistoryLength() ) {
 						initPromise = mw.libs.ve.targetLoader.requestParsoidData( target.importTitle.toString(), { targetName: 'collabpad' } ).then( ( response ) => {
-							var data = response.visualeditor;
+							const data = response.visualeditor;
 
 							if ( data && data.content ) {
-								var doc = target.constructor.static.parseDocument( data.content );
-								var dmDoc = target.constructor.static.createModelFromDom( doc );
-								var fragment = surfaceModel.getLinearFragment( new ve.Range( 0, 2 ) );
+								const doc = target.constructor.static.parseDocument( data.content );
+								const dmDoc = target.constructor.static.createModelFromDom( doc );
+								const fragment = surfaceModel.getLinearFragment( new ve.Range( 0, 2 ) );
 								fragment.insertDocument( dmDoc );
 
 								target.etag = data.etag;
@@ -175,7 +175,7 @@
 						// Look for import metadata in document
 						surfaceModel = target.getSurface().getModel();
 						surfaceModel.getDocument().getMetaList().getItemsInGroup( 'misc' ).some( ( item ) => {
-							var importedDocument = item.getAttribute( 'importedDocument' );
+							const importedDocument = item.getAttribute( 'importedDocument' );
 							if ( importedDocument ) {
 								target.importTitle = mw.Title.newFromText( importedDocument.title );
 								target.etag = importedDocument.etag;
@@ -208,7 +208,7 @@
 	}
 
 	function showForm( pushState ) {
-		var specialTitle = mw.Title.newFromText( 'Special:CollabPad' );
+		const specialTitle = mw.Title.newFromText( 'Special:CollabPad' );
 
 		if ( pushState ) {
 			history.pushState( { tag: 'collabTarget' }, '', specialTitle.getUrl() );
@@ -235,7 +235,7 @@
 	}
 
 	function loadTitle( title, importTitle ) {
-		var specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
+		const specialTitle = mw.Title.newFromText( 'Special:CollabPad/' + title.toString() );
 		// TODO: Handle popstate
 		history.pushState( { tag: 'collabTarget', title: title.toString() }, '', specialTitle.getUrl() );
 		showPage( title, importTitle );
@@ -255,7 +255,7 @@
 
 	function loadFromName() {
 		documentNameInput.getValidity().then( () => {
-			var title = mw.Title.newFromText(
+			const title = mw.Title.newFromText(
 				documentNameInput.getValue().trim() || getRandomTitle()
 			);
 
@@ -286,7 +286,7 @@
 
 	function onImportSubmit() {
 		importInput.getValidity().then( () => {
-			var title = mw.Title.newFromText( importInput.getValue().trim() );
+			const title = mw.Title.newFromText( importInput.getValue().trim() );
 
 			if ( title ) {
 				loadTitle( mw.Title.newFromText( getRandomTitle() ), title );
@@ -304,7 +304,7 @@
 	onImportChange();
 
 	if ( pageTitle ) {
-		var url = new URL( location.href ),
+		const url = new URL( location.href ),
 			importTitleText = url.searchParams.get( 'import' ),
 			importTitleParam = ( importTitleText ? mw.Title.newFromText( importTitleText ) : null );
 		showPage( pageTitle, importTitleParam );

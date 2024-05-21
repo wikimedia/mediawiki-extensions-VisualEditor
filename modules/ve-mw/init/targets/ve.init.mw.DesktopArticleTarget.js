@@ -242,7 +242,7 @@ ve.init.mw.DesktopArticleTarget.prototype.verifyPopState = function ( popState )
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
-	var mode = surface.getMode(),
+	const mode = surface.getMode(),
 		wasSetup = !!this.toolbar;
 
 	ve.track( 'trace.setupToolbar.enter', { mode: mode } );
@@ -250,7 +250,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
-	var toolbar = this.getToolbar();
+	const toolbar = this.getToolbar();
 
 	// Allow the toolbar to start floating now if necessary
 	this.onContainerScroll();
@@ -265,7 +265,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		this.toolbarSetupDeferred.resolve();
 
 		this.toolbarSetupDeferred.done( () => {
-			var newSurface = this.getSurface();
+			const newSurface = this.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( newSurface ) {
 				ve.track( 'trace.initializeToolbar.enter', { mode: mode } );
@@ -286,7 +286,7 @@ ve.init.mw.DesktopArticleTarget.prototype.attachToolbar = function () {
 	// Set edit notices, will be shown after welcome dialog.
 	// Make sure notices actually exists, because this might be a mode-switch and
 	// we've already removed it.
-	var editNotices = this.getEditNotices(),
+	const editNotices = this.getEditNotices(),
 		actionTools = this.toolbar.tools;
 	if ( editNotices && editNotices.length && actionTools.notices ) {
 		actionTools.notices.setNotices( editNotices );
@@ -352,7 +352,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadSuccess = function () {
 	if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
 		$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 		// Set up a temporary window manager
-		var windowManager = new OO.ui.WindowManager();
+		const windowManager = new OO.ui.WindowManager();
 		$( OO.ui.getTeleportTarget() ).append( windowManager.$element );
 		this.editingTabDialog = new mw.libs.ve.EditingTabDialog();
 		windowManager.addWindows( [ this.editingTabDialog ] );
@@ -482,8 +482,8 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 		}
 		// Transfer and initial source range to the surface (e.g. from tempWikitextEditor)
 		if ( this.initialSourceRange && this.getSurface().getMode() === 'source' ) {
-			var surfaceModel = this.getSurface().getModel();
-			var range = surfaceModel.getRangeFromSourceOffsets( this.initialSourceRange.from, this.initialSourceRange.to );
+			const surfaceModel = this.getSurface().getModel();
+			const range = surfaceModel.getRangeFromSourceOffsets( this.initialSourceRange.from, this.initialSourceRange.to );
 			surfaceModel.setLinearSelection( range );
 		}
 	}
@@ -493,7 +493,7 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
-	var resetSurface = surface !== this.surface;
+	const resetSurface = surface !== this.surface;
 
 	if ( resetSurface ) {
 		this.$editableContent.after( surface.$element );
@@ -594,7 +594,7 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism ) {
 	// Event tracking
-	var abortType, abortedMode;
+	let abortType, abortedMode;
 	if ( trackMechanism ) {
 		if ( this.activating ) {
 			abortType = 'preinit';
@@ -672,7 +672,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 		}
 
 		if ( !this.isViewPage ) {
-			var newUrl = new URL( this.viewUrl );
+			const newUrl = new URL( this.viewUrl );
 			if ( mw.config.get( 'wgIsRedirect' ) ) {
 				newUrl.searchParams.set( 'redirect', 'no' );
 			}
@@ -691,7 +691,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 	if ( this.wikitextFallbackLoading ) {
 		// Failed twice now
 		mw.log.warn( 'Failed to fall back to wikitext', code, errorDetails );
-		var newUrl = new URL( this.viewUrl );
+		const newUrl = new URL( this.viewUrl );
 		newUrl.searchParams.set( 'action', 'edit' );
 		newUrl.searchParams.set( 'veswitched', '1' );
 		location.href = newUrl;
@@ -704,7 +704,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 		return;
 	}
 
-	var $confirmPromptMessage = this.extractErrorMessages( errorDetails );
+	const $confirmPromptMessage = this.extractErrorMessages( errorDetails );
 
 	OO.ui.confirm( $confirmPromptMessage, {
 		actions: [
@@ -740,7 +740,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		return;
 	}
 
-	var surface = this.getSurface();
+	const surface = this.getSurface();
 
 	this.activating = false;
 
@@ -752,7 +752,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 		} );
 	}
 
-	var metaList = this.getSurface().getModel().getDocument().getMetaList();
+	const metaList = this.getSurface().getModel().getDocument().getMetaList();
 
 	metaList.connect( this, {
 		insert: 'onMetaItemInserted',
@@ -766,7 +766,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
-	var redirectMetaItems = metaList.getItemsInGroup( 'mwRedirect' );
+	const redirectMetaItems = metaList.getItemsInGroup( 'mwRedirect' );
 	if ( redirectMetaItems.length ) {
 		this.setFakeRedirectInterface( redirectMetaItems[ 0 ].getAttribute( 'title' ) );
 	} else {
@@ -789,10 +789,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemInserted = function ( metaIt
 		case 'mwRedirect':
 			this.setFakeRedirectInterface( metaItem.getAttribute( 'title' ) );
 			break;
-		case 'mwCategory':
-			var metaList = this.getSurface().getModel().getDocument().getMetaList();
+		case 'mwCategory': {
+			const metaList = this.getSurface().getModel().getDocument().getMetaList();
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
 			break;
+		}
 	}
 };
 
@@ -808,10 +809,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
 		case 'mwRedirect':
 			this.setFakeRedirectInterface( null );
 			break;
-		case 'mwCategory':
-			var metaList = this.getSurface().getModel().getDocument().getMetaList();
+		case 'mwCategory': {
+			let metaList = this.getSurface().getModel().getDocument().getMetaList();
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
 			break;
+		}
 	}
 };
 
@@ -828,7 +830,7 @@ ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categor
 		// Clone the existing catlinks for any specific properties which might
 		// be needed by the rest of the page. Also gives us a not-attached
 		// version, which we can pass to wikipage.categories as it requests.
-		var $catlinks = $( '#catlinks' ).clone().empty().removeClass( 'categories-allhidden' )
+		const $catlinks = $( '#catlinks' ).clone().empty().removeClass( 'categories-allhidden' )
 			.append( $categories.children() );
 		// If all categories are hidden, we need to hide the box.
 		$catlinks.toggleClass( 'catlinks-allhidden',
@@ -870,7 +872,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 		// Fix permalinks
 		if ( data.newrevid !== undefined ) {
 			$( '#t-permalink' ).add( '#coll-download-as-rl' ).find( 'a' ).each( ( i, el ) => {
-				var permalinkUrl = new URL( el.href );
+				const permalinkUrl = new URL( el.href );
 				permalinkUrl.searchParams.set( 'oldid', data.newrevid );
 				$( el ).attr( 'href', permalinkUrl.toString() );
 			} );
@@ -888,10 +890,10 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
  */
 ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 	// Parent method
-	var promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments );
+	const promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments );
 
 	return promise.fail( ( error, response ) => {
-		var $errorMessages = this.extractErrorMessages( response );
+		const $errorMessages = this.extractErrorMessages( response );
 		OO.ui.alert( $errorMessages );
 
 		// It's possible to get here while the save dialog has never been opened (if the user uses
@@ -919,15 +921,15 @@ ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function ()
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 	if ( this.isViewPage ) {
-		var namespaceNumber = mw.config.get( 'wgNamespaceNumber' );
-		var namespaceName = mw.config.get( 'wgCanonicalNamespace' );
-		var isTalkNamespace = mw.Title.isTalkNamespace( namespaceNumber );
+		const namespaceNumber = mw.config.get( 'wgNamespaceNumber' );
+		const namespaceName = mw.config.get( 'wgCanonicalNamespace' );
+		const isTalkNamespace = mw.Title.isTalkNamespace( namespaceNumber );
 		// Title::getNamespaceKey()
-		var namespaceKey = namespaceName.toLowerCase() || 'main';
+		let namespaceKey = namespaceName.toLowerCase() || 'main';
 		if ( namespaceKey === 'file' ) {
 			namespaceKey = 'image';
 		}
-		var namespaceTabId;
+		let namespaceTabId;
 		// SkinTemplate::buildContentNavigationUrls()
 		if ( isTalkNamespace ) {
 			namespaceTabId = 'ca-talk';
@@ -947,7 +949,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
-	var data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
+	const data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
 	data.editSummary = this.editSummaryValue || this.initialEditSummary;
 	return data;
 };
@@ -956,7 +958,7 @@ ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function ()
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
-	var deferred = ve.createDeferred();
+	const deferred = ve.createDeferred();
 
 	if ( !this.toolbar ) {
 		return deferred.resolve().promise();
@@ -982,8 +984,8 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
  * Change the document title to state that we are now editing.
  */
 ve.init.mw.DesktopArticleTarget.prototype.changeDocumentTitle = function () {
-	var title = mw.Title.newFromText( this.getPageName() );
-	var pageTitleMsg = mw.message( 'pagetitle',
+	const title = mw.Title.newFromText( this.getPageName() );
+	const pageTitleMsg = mw.message( 'pagetitle',
 		ve.msg(
 			this.pageExists ? 'editing' : 'creating',
 			title.getPrefixedText()
@@ -1039,7 +1041,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
 	this.$originalCategories.detach();
 
 	// Mark every non-direct ancestor between editableContent and the container as uneditable
-	var $content = this.$editableContent;
+	let $content = this.$editableContent;
 	while ( $content && $content.length && !$content.parent().is( this.$container ) ) {
 		$content.prevAll( ':not( .ve-init-mw-tempWikitextEditorWidget )' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 		$content.nextAll( ':not( .ve-init-mw-tempWikitextEditorWidget )' ).addClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
@@ -1057,7 +1059,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformPage = function () {
  * @param {jQuery} $content area
  */
 ve.init.mw.DesktopArticleTarget.prototype.restoreEditTabsIfNeeded = function ( $content ) {
-	var $viewTab = $content.find( '.ve-init-mw-desktopArticleTarget-uneditableContent #ca-view' );
+	const $viewTab = $content.find( '.ve-init-mw-desktopArticleTarget-uneditableContent #ca-view' );
 	if ( $viewTab.length ) {
 		$viewTab.parents( '.ve-init-mw-desktopArticleTarget-uneditableContent' ).removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' );
 	}
@@ -1074,7 +1076,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $c
 	if ( this.getSurface() && this.getSurface().getMode() === 'visual' ) {
 		$catlinks.removeClass( 've-init-mw-desktopArticleTarget-uneditableContent' )
 			.on( 'click.ve-target', () => {
-				var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+				const windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 				windowAction.open( 'meta', { page: 'categories' } );
 				return false;
 			} )
@@ -1088,7 +1090,7 @@ ve.init.mw.DesktopArticleTarget.prototype.transformCategoryLinks = function ( $c
  * Update the history state based on the editor mode
  */
 ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
-	var veaction = this.getDefaultMode() === 'visual' ? 'edit' : 'editsource',
+	const veaction = this.getDefaultMode() === 'visual' ? 'edit' : 'editsource',
 		section = this.section;
 
 	// Push veaction=edit(source) url in history (if not already present).
@@ -1102,7 +1104,7 @@ ve.init.mw.DesktopArticleTarget.prototype.updateHistoryState = function () {
 		this.currentUrl.searchParams.get( 'action' ) !== 'edit'
 	) {
 		// Set the current URL
-		var url = this.currentUrl;
+		const url = this.currentUrl;
 
 		if ( mw.libs.ve.isSingleEditTab ) {
 			url.searchParams.set( 'action', 'edit' );
@@ -1142,7 +1144,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 	// Push article url into history
 	if ( !this.actFromPopState ) {
 		// Remove the VisualEditor query parameters
-		var url = this.currentUrl;
+		const url = this.currentUrl;
 		if ( url.searchParams.has( 'veaction' ) ) {
 			url.searchParams.delete( 'veaction' );
 		}
@@ -1150,11 +1152,11 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 			// Translate into a hash for the new URL:
 			// This should be after replacePageContent if this is post-save, so we can just look
 			// at the headers on the page.
-			var hash = this.getSectionHashFromPage();
+			const hash = this.getSectionHashFromPage();
 			if ( hash ) {
 				url.hash = hash;
 				this.viewUrl.hash = hash;
-				var target = document.getElementById( hash.slice( 1 ) );
+				const target = document.getElementById( hash.slice( 1 ) );
 
 				if ( target ) {
 					// Scroll the page to the edited section
@@ -1184,7 +1186,7 @@ ve.init.mw.DesktopArticleTarget.prototype.restorePage = function () {
 
 		// If there are any other query parameters left, re-use that URL object.
 		// Otherwise use the canonical style view URL (T44553, T102363).
-		var keys = [];
+		const keys = [];
 		url.searchParams.forEach( ( val, key ) => {
 			keys.push( key );
 		} );
@@ -1206,11 +1208,11 @@ ve.init.mw.DesktopArticleTarget.prototype.onWindowPopState = function ( e ) {
 		return;
 	}
 
-	var oldUrl = this.currentUrl;
+	const oldUrl = this.currentUrl;
 
 	this.currentUrl = new URL( location.href );
-	var veaction = this.currentUrl.searchParams.get( 'veaction' );
-	var action = this.currentUrl.searchParams.get( 'action' );
+	let veaction = this.currentUrl.searchParams.get( 'veaction' );
+	const action = this.currentUrl.searchParams.get( 'action' );
 
 	if ( !veaction && action === 'edit' ) {
 		veaction = this.getDefaultMode() === 'source' ? 'editsource' : 'edit';
@@ -1302,7 +1304,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
  * Show the beta dialog as needed
  */
 ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
-	var editorMode = this.getDefaultMode(),
+	const editorMode = this.getDefaultMode(),
 		windowManager = this.getSurface().dialogs;
 
 	this.welcomeDialogPromise = ve.createDeferred();
@@ -1345,7 +1347,7 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 					!mw.user.options.get( 'visualeditor-hidevisualswitchpopup' )
 				) {
 					// Show "switched" popup
-					var popup = new mw.libs.ve.SwitchPopupWidget( 'visual' );
+					const popup = new mw.libs.ve.SwitchPopupWidget( 'visual' );
 					this.toolbar.tools.editModeSource.toolGroup.$element.append( popup.$element );
 					popup.toggle( true );
 				} else if ( this.toolbar.tools.notices ) {
@@ -1355,9 +1357,9 @@ ve.init.mw.DesktopArticleTarget.prototype.maybeShowMetaDialog = function () {
 			} );
 	}
 
-	var redirectMetaItems = this.getSurface().getModel().getDocument().getMetaList().getItemsInGroup( 'mwRedirect' );
+	const redirectMetaItems = this.getSurface().getModel().getDocument().getMetaList().getItemsInGroup( 'mwRedirect' );
 	if ( redirectMetaItems.length ) {
-		var windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+		const windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 		windowAction.open( 'meta', { page: 'settings' } );
 	}
 };
@@ -1371,7 +1373,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 	// Check if someone already set on onbeforeunload hook
 	if ( this.onBeforeUnloadFallback ) {
 		// Get the result of their onbeforeunload hook
-		var fallbackResult = this.onBeforeUnloadFallback();
+		const fallbackResult = this.onBeforeUnloadFallback();
 		// If it returned something, exit here and return their message
 		if ( fallbackResult !== undefined ) {
 			return fallbackResult;
@@ -1442,8 +1444,8 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextSection = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
-	var oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
-	var prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
+	const oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	const prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( !modified ) {
 		ve.track( 'activity.editor-switch', { action: 'source-desktop' } );
@@ -1455,7 +1457,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 		} );
 		this.submitting = true;
 		return prefPromise.then( () => {
-			var url = new URL( this.viewUrl );
+			const url = new URL( this.viewUrl );
 			url.searchParams.set( 'action', 'edit' );
 			// No changes, safe to stay in section mode
 			if ( this.section !== null ) {

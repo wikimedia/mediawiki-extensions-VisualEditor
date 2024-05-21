@@ -15,7 +15,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory = function VeUiMwWikitextDataTransfer
 	// Parent constructor
 	ve.ui.MWWikitextDataTransferHandlerFactory.super.apply( this, arguments );
 
-	for ( var name in ve.ui.dataTransferHandlerFactory.registry ) {
+	for ( const name in ve.ui.dataTransferHandlerFactory.registry ) {
 		this.register( ve.ui.dataTransferHandlerFactory.registry[ name ] );
 	}
 
@@ -45,7 +45,7 @@ OO.inheritClass( ve.ui.MWWikitextDataTransferHandlerFactory, ve.ui.DataTransferH
  */
 ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 	// Parent method
-	var handler = ve.ui.MWWikitextDataTransferHandlerFactory.super.prototype.create.apply( this, arguments ),
+	const handler = ve.ui.MWWikitextDataTransferHandlerFactory.super.prototype.create.apply( this, arguments ),
 		resolve = handler.resolve.bind( handler );
 
 	function isPlain( data ) {
@@ -56,7 +56,7 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 		if ( typeof dataOrDoc === 'string' || ( Array.isArray( dataOrDoc ) && dataOrDoc.every( isPlain ) ) ) {
 			resolve( dataOrDoc );
 		} else {
-			var doc = dataOrDoc instanceof ve.dm.Document ?
+			const doc = dataOrDoc instanceof ve.dm.Document ?
 				dataOrDoc :
 				// The handler may have also written items to the store
 				new ve.dm.Document( new ve.dm.ElementLinearData( handler.surface.getModel().getDocument().getStore(), dataOrDoc ) );
@@ -65,9 +65,9 @@ ve.ui.MWWikitextDataTransferHandlerFactory.prototype.create = function () {
 			// with no title, whose href is equal to the contained text. This
 			// avoids a stutter in the common case of pasting a link into the
 			// document.
-			var annotations = doc.data.getAnnotationsFromRange( new ve.Range( 0, doc.data.getLength() ) );
+			const annotations = doc.data.getAnnotationsFromRange( new ve.Range( 0, doc.data.getLength() ) );
 			if ( annotations.getLength() === 1 ) {
-				var text = doc.data.getText();
+				const text = doc.data.getText();
 				if ( annotations.get( 0 ).getAttribute( 'href' ) === text ) {
 					return resolve( text );
 				}
