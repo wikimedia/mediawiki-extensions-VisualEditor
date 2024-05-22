@@ -358,7 +358,7 @@
 	"visualeditor-mwpredialog-title": "预格式化纯文本",
 	"visualeditor-mwsignature-tool": "您的签名",
 	"visualeditor-preference-visualeditor": "启用可视化编辑器",
-	"visualeditor-preference-newwikitexteditor-enable": "使用可视化编辑器的wikitext模式，而非另一独立的wikitext编辑器",
+	"visualeditor-preference-newwikitexteditor-enable": "使用可视化编辑器内置的wikitext模式，而不是其他wikitext编辑器",
 	"visualeditor-preference-newwikitexteditor-help": "此功能有时称作“2017版wikitext编辑器”。",
 	"visualeditor-preference-tabs": "编辑模式：",
 	"visualeditor-preference-tabs-multi-tab": "向我显示两个编辑器标签",
