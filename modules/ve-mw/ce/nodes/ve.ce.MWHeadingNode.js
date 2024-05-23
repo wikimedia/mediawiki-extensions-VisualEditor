@@ -49,7 +49,7 @@ ve.ce.MWHeadingNode.prototype.onTeardown = function () {
 };
 
 ve.ce.MWHeadingNode.prototype.onUpdate = function () {
-	var surface = this.surface;
+	const surface = this.surface;
 
 	// Parent method
 	ve.ce.MWHeadingNode.super.prototype.onUpdate.call( this );
@@ -62,7 +62,7 @@ ve.ce.MWHeadingNode.prototype.onUpdate = function () {
 };
 
 ve.ce.MWHeadingNode.prototype.rebuildToc = function () {
-	var surface = this.surface;
+	const surface = this.surface;
 
 	if ( surface && surface.mwTocWidget ) {
 		surface.getModel().getDocument().once( 'transact', () => {

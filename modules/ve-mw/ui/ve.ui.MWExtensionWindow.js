@@ -90,7 +90,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 		this.whitespace = [ '', '' ];
 
 		if ( this.selectedNode ) {
-			var mwData = this.selectedNode.getAttribute( 'mw' );
+			const mwData = this.selectedNode.getAttribute( 'mw' );
 			// mwData.body can be null in <selfclosing/> extensions
 			this.input.setValueAndWhitespace( ( mwData.body && mwData.body.extsrc ) || '' );
 			this.originalMwData = mwData;
@@ -104,7 +104,7 @@ ve.ui.MWExtensionWindow.prototype.getSetupProcess = function ( data, process ) {
 
 		this.input.$input.attr( 'placeholder', this.getInputPlaceholder() );
 
-		var dir = this.constructor.static.dir || data.dir;
+		const dir = this.constructor.static.dir || data.dir;
 		this.input.setDir( dir );
 		this.input.setReadOnly( this.isReadOnly() );
 
@@ -170,9 +170,9 @@ ve.ui.MWExtensionWindow.prototype.updateActions = function () {
  * @return {boolean} mwData would be modified
  */
 ve.ui.MWExtensionWindow.prototype.isSaveable = function () {
-	var modified;
+	let modified;
 	if ( this.originalMwData ) {
-		var mwDataCopy = ve.copy( this.originalMwData );
+		const mwDataCopy = ve.copy( this.originalMwData );
 		this.updateMwData( mwDataCopy );
 		modified = !ve.compare( this.originalMwData, mwDataCopy );
 	} else {
@@ -197,13 +197,13 @@ ve.ui.MWExtensionWindow.prototype.isModified = ve.ui.MWExtensionWindow.prototype
  * @return {boolean} mwData would contain new user input
  */
 ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
-	var mwDataBaseline;
+	let mwDataBaseline;
 	if ( this.originalMwData ) {
 		mwDataBaseline = this.originalMwData;
 	} else {
 		mwDataBaseline = this.getNewElement().attributes.mw;
 	}
-	var mwDataCopy = ve.copy( mwDataBaseline );
+	const mwDataCopy = ve.copy( mwDataBaseline );
 	this.updateMwData( mwDataCopy );
 
 	// We have some difficulty here. `updateMwData()` in this class calls on
@@ -213,7 +213,7 @@ ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
 	// We don't want to touch `this.input` or `prototype.updateMwData` because
 	// they're overridden in subclasses. Therefore, we consider whitespace-only
 	// changes to a new element to be non-meaningful too.
-	var changed = OO.getProp( mwDataCopy, 'body', 'extsrc' );
+	const changed = OO.getProp( mwDataCopy, 'body', 'extsrc' );
 	if ( changed !== undefined ) {
 		OO.setProp( mwDataCopy, 'body', 'extsrc', changed.trim() );
 	}
@@ -229,7 +229,7 @@ ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
 ve.ui.MWExtensionWindow.prototype.getNewElement = function () {
 	// Extension inspectors which create elements should either match
 	// a single modelClass or override this method.
-	var modelClass = this.constructor.static.modelClasses[ 0 ];
+	const modelClass = this.constructor.static.modelClasses[ 0 ];
 	return {
 		type: modelClass.static.name,
 		attributes: {
@@ -248,9 +248,9 @@ ve.ui.MWExtensionWindow.prototype.getNewElement = function () {
  * Insert or update the node in the document model from the new values
  */
 ve.ui.MWExtensionWindow.prototype.insertOrUpdateNode = function () {
-	var surfaceModel = this.getFragment().getSurface();
+	const surfaceModel = this.getFragment().getSurface();
 	if ( this.selectedNode ) {
-		var mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
+		const mwData = ve.copy( this.selectedNode.getAttribute( 'mw' ) );
 		this.updateMwData( mwData );
 		surfaceModel.change(
 			ve.dm.TransactionBuilder.static.newFromAttributeChanges(
@@ -260,7 +260,7 @@ ve.ui.MWExtensionWindow.prototype.insertOrUpdateNode = function () {
 			)
 		);
 	} else {
-		var element = this.getNewElement();
+		const element = this.getNewElement();
 		this.updateMwData( element.attributes.mw );
 		// Collapse returns a new fragment, so update this.fragment
 		this.fragment = this.getFragment().collapseToEnd();
@@ -284,7 +284,7 @@ ve.ui.MWExtensionWindow.prototype.removeNode = function () {
  * @param {Object} mwData MediaWiki data object
  */
 ve.ui.MWExtensionWindow.prototype.updateMwData = function ( mwData ) {
-	var tagName = mwData.name,
+	let tagName = mwData.name,
 		value = this.input.getValueAndWhitespace();
 
 	// XML-like tags in wikitext are not actually XML and don't expect their contents to be escaped.

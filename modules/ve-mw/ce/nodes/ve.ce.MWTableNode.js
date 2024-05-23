@@ -90,8 +90,8 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
 		// ends up saving this change, it will be loaded anyway to render the real sortable table.
 		mw.loader.load( 'jquery.tablesorter' );
 
-		var cellModels = this.getTablesorterHeaderCells();
-		var cellViews = cellModels.map( ( cellModel ) => this.getNodeFromOffset( cellModel.getOffset() - this.model.getOffset() ) );
+		const cellModels = this.getTablesorterHeaderCells();
+		const cellViews = cellModels.map( ( cellModel ) => this.getNodeFromOffset( cellModel.getOffset() - this.model.getOffset() ) );
 
 		this.$sortableHeaders = $( cellViews.map( ( cell ) => cell.$element[ 0 ] ) ).not( '.unsortable' );
 	} else {
@@ -113,7 +113,7 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
  * @return {ve.dm.TableCellNode[]}
  */
 ve.ce.MWTableNode.prototype.getTablesorterHeaderCells = function () {
-	var
+	let
 		matrix = this.model.getMatrix(),
 		longestRow = [],
 		longestRowLength = 0,

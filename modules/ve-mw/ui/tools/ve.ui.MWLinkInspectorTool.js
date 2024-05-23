@@ -22,7 +22,7 @@ ve.ui.MWLinkInspectorTool = function VeUiMwLinkInspectorTool() {
 	// Parent constructor
 	ve.ui.MWLinkInspectorTool.super.apply( this, arguments );
 
-	var educationPopup = new ve.ui.MWEducationPopupWidget( this.$link, {
+	const educationPopup = new ve.ui.MWEducationPopupWidget( this.$link, {
 		popupTitle: ve.msg( 'visualeditor-linkinspector-educationpopup-title' ),
 		popupText: mw.message( 'visualeditor-linkinspector-educationpopup-text' ).parseDom(),
 		popupImage: 'link',

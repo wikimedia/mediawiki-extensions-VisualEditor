@@ -183,7 +183,7 @@ ve.init.mw.Target.static.fixBase = function ( doc ) {
  * @inheritdoc
  */
 ve.init.mw.Target.static.createModelFromDom = function ( doc, mode, options ) {
-	var conf = mw.config.get( 'wgVisualEditor' );
+	const conf = mw.config.get( 'wgVisualEditor' );
 
 	options = ve.extendObject( {
 		lang: conf.pageLanguageCode,
@@ -209,7 +209,7 @@ ve.init.mw.Target.prototype.createModelFromDom = function () {
  * @return {HTMLDocument|string} HTML document, or document string (source mode)
  */
 ve.init.mw.Target.static.parseDocument = function ( documentString, mode, section, onlySection ) {
-	var doc;
+	let doc;
 	if ( mode === 'source' ) {
 		// Parent method
 		doc = ve.init.mw.Target.super.static.parseDocument.call( this, documentString, mode );
@@ -217,7 +217,7 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 		doc = ve.createDocumentFromHtml( documentString );
 		if ( section !== undefined ) {
 			if ( onlySection ) {
-				var sectionNode = doc.body.querySelector( '[data-mw-section-id="' + section + '"]' );
+				const sectionNode = doc.body.querySelector( '[data-mw-section-id="' + section + '"]' );
 				doc.body.innerHTML = '';
 				if ( sectionNode ) {
 					doc.body.appendChild( sectionNode );
@@ -239,10 +239,10 @@ ve.init.mw.Target.static.parseDocument = function ( documentString, mode, sectio
 			function truncate( text, l ) {
 				return text.length > l ? text.slice( 0, l ) + '…' : text;
 			}
-			var errorMessage = 'DOM content matching deny list found during parse:\n' + truncate( element.outerHTML, 100 ) +
+			const errorMessage = 'DOM content matching deny list found during parse:\n' + truncate( element.outerHTML, 100 ) +
 				'\nContext:\n' + truncate( element.parentNode.outerHTML, 200 );
 			mw.log.error( errorMessage );
-			var err = new Error( errorMessage );
+			const err = new Error( errorMessage );
 			err.name = 'VeDomDenyListWarning';
 			mw.errorLogger.logError( err, 'error.visualeditor' );
 			element.parentNode.removeChild( element );
@@ -317,7 +317,7 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
  */
 ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config ) {
 	if ( config && config.mode === 'source' ) {
-		var importRules = ve.copy( this.constructor.static.importRules );
+		const importRules = ve.copy( this.constructor.static.importRules );
 		importRules.all = importRules.all || {};
 		// Preserve empty linebreaks on paste in source editor
 		importRules.all.keepEmptyContentBranches = true;
@@ -355,7 +355,7 @@ ve.init.mw.Target.prototype.setupSurface = function ( doc ) {
 	setTimeout( () => {
 		// Build model
 		this.track( 'trace.convertModelFromDom.enter' );
-		var dmDoc = this.constructor.static.createModelFromDom( doc, this.getDefaultMode() );
+		const dmDoc = this.constructor.static.createModelFromDom( doc, this.getDefaultMode() );
 		this.track( 'trace.convertModelFromDom.exit' );
 
 		// Build DM tree now (otherwise it gets lazily built when building the CE tree)
@@ -380,7 +380,7 @@ ve.init.mw.Target.prototype.addSurface = function () {
 	// Create ui.Surface (also creates ce.Surface and dm.Surface and builds CE tree)
 	this.track( 'trace.createSurface.enter' );
 	// Parent method
-	var surface = ve.init.mw.Target.super.prototype.addSurface.apply( this, arguments );
+	const surface = ve.init.mw.Target.super.prototype.addSurface.apply( this, arguments );
 	// Add classes specific to surfaces attached directly to the target,
 	// as opposed to TargetWidget surfaces
 	if ( !surface.inTargetWidget ) {
@@ -436,7 +436,7 @@ ve.init.mw.Target.prototype.initAutosave = function ( config ) {
 		config = config || {};
 	}
 
-	var surfaceModel = this.getSurface().getModel();
+	const surfaceModel = this.getSurface().getModel();
 
 	if ( config.docId ) {
 		surfaceModel.setAutosaveDocId( config.docId );
@@ -491,7 +491,7 @@ ve.init.mw.Target.prototype.initAutosave = function ( config ) {
  * @param {string} [html] Document HTML, will generate from current state if not provided
  */
 ve.init.mw.Target.prototype.storeDocState = function ( html ) {
-	var mode = this.getSurface().getMode();
+	const mode = this.getSurface().getMode();
 	this.getSurface().getModel().storeDocState( { mode: mode }, html );
 };
 
@@ -529,7 +529,7 @@ ve.init.mw.Target.prototype.refreshUser = function ( doc ) {
 		action: 'query',
 		meta: 'userinfo'
 	} ).then( ( data ) => {
-		var userInfo = data.query && data.query.userinfo;
+		const userInfo = data.query && data.query.userinfo;
 
 		if ( userInfo.anon !== undefined ) {
 			// New session is an anonymous user
@@ -568,7 +568,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
 		return ve.createDeferred().resolve( '' );
 	}
 
-	var params = {
+	const params = {
 		action: 'visualeditoredit',
 		paction: 'serialize',
 		html: mw.libs.ve.targetSaver.getHtml(
@@ -582,7 +582,7 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
 		params.etag = this.etag;
 	}
 
-	var xhr = this.getContentApi( doc ).postWithToken( 'csrf',
+	const xhr = this.getContentApi( doc ).postWithToken( 'csrf',
 		params,
 		{ contentType: 'multipart/form-data' }
 	);
@@ -604,8 +604,8 @@ ve.init.mw.Target.prototype.getWikitextFragment = function ( doc, useRevision ) 
  * @return {jQuery.Promise} Abortable promise
  */
 ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, doc ) {
-	var abortable, aborted;
-	var abortedPromise = ve.createDeferred().reject( 'http',
+	let abortable, aborted;
+	const abortedPromise = ve.createDeferred().reject( 'http',
 		{ textStatus: 'abort', exception: 'abort' } ).promise();
 
 	function abort() {
@@ -617,7 +617,7 @@ ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, do
 
 	// Acquire a temporary user username before previewing or diffing, so that signatures and
 	// user-related magic words display the temp user instead of IP user in the preview. (T331397)
-	var tempUserNamePromise;
+	let tempUserNamePromise;
 	if ( pst ) {
 		tempUserNamePromise = mw.user.acquireTempUserName();
 	} else {

@@ -133,7 +133,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 	this.clearDiff();
 
 	function createDiffElement( visualDiff ) {
-		var diffElement = new ve.ui.DiffElement( visualDiff );
+		const diffElement = new ve.ui.DiffElement( visualDiff );
 		// The following classes are used here:
 		// * mw-content-ltr
 		// * mw-content-rtl
@@ -174,7 +174,7 @@ ve.ui.MWSaveDialog.prototype.setDiffAndReview = function ( wikitextDiffPromise, 
 			);
 		}
 	}, ( code, errorObject ) => {
-		var $errorMessage = ve.init.target.extractErrorMessages( errorObject );
+		const $errorMessage = ve.init.target.extractErrorMessages( errorObject );
 
 		this.$reviewWikitextDiff.empty().append(
 			new OO.ui.MessageWidget( {
@@ -203,7 +203,7 @@ ve.ui.MWSaveDialog.prototype.showPreview = function ( response ) {
 			$( '<em>' ).append( response )
 		);
 	} else {
-		var data = response.parse,
+		const data = response.parse,
 			config = mw.config.get( 'wgVisualEditor' );
 
 		mw.config.set( data.jsconfigvars );
@@ -250,7 +250,7 @@ ve.ui.MWSaveDialog.prototype.pushPending = function () {
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.popPending = function () {
-	var ret = ve.ui.MWSaveDialog.super.prototype.popPending.call( this );
+	const ret = ve.ui.MWSaveDialog.super.prototype.popPending.call( this );
 	if ( !this.isPending() ) {
 		this.getActions().setAbilities( { review: true, preview: true } );
 	}
@@ -282,7 +282,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
 
-	var mode = panel,
+	const mode = panel,
 		panelObj = this[ panel + 'Panel' ];
 
 	// Update the window title
@@ -302,7 +302,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 		this.$content[ 0 ].focus();
 	}
 
-	var size = 'medium';
+	let size = 'medium';
 	switch ( panel ) {
 		case 'save':
 			if ( !noFocus && this.panels.getCurrentItem() !== this.savePanel ) {
@@ -334,7 +334,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 			break;
 	}
 	if ( panel === 'preview' || panel === 'review' ) {
-		var currentEditSummaryWikitext = this.editSummaryInput.getValue();
+		const currentEditSummaryWikitext = this.editSummaryInput.getValue();
 		if ( this.lastEditSummaryWikitext === undefined || this.lastEditSummaryWikitext !== currentEditSummaryWikitext ) {
 			if ( this.editSummaryXhr ) {
 				this.editSummaryXhr.abort();
@@ -347,7 +347,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
 				this.$previewEditSummary.text( ve.msg( 'visualeditor-savedialog-review-nosummary' ) );
 			} else {
 				this.$previewEditSummary.parent().removeClass( 'oo-ui-element-hidden' );
-				var $spinner = $.createSpinner();
+				const $spinner = $.createSpinner();
 				this.$previewEditSummary.append( $spinner );
 				this.editSummaryXhr = ve.init.target.getContentApi().post( {
 					action: 'parse',
@@ -409,7 +409,7 @@ ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
  */
 ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
 	if ( !this.messages[ name ] ) {
-		var messageWidget = new OO.ui.MessageWidget( ve.extendObject( {
+		const messageWidget = new OO.ui.MessageWidget( ve.extendObject( {
 			classes: [ 've-ui-mwSaveDialog-message' ],
 			label: label,
 			inline: true,
@@ -419,7 +419,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
 
 		// FIXME: Use CSS transitions
 		// eslint-disable-next-line no-jquery/no-slide
-		var promise = messageWidget.$element.slideDown( {
+		const promise = messageWidget.$element.slideDown( {
 			duration: 250,
 			progress: this.updateSize.bind( this )
 		} ).promise();
@@ -440,7 +440,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
  * @param {string} name Message's unique name
  */
 ve.ui.MWSaveDialog.prototype.clearMessage = function ( name ) {
-	var $message = this.messages[ name ];
+	const $message = this.messages[ name ];
 	if ( $message ) {
 		// FIXME: Use CSS transitions
 		// eslint-disable-next-line no-jquery/no-slide
@@ -509,7 +509,7 @@ ve.ui.MWSaveDialog.prototype.setEditSummary = function ( summary ) {
  * @inheritdoc
  */
 ve.ui.MWSaveDialog.prototype.initialize = function () {
-	var mwString = require( 'mediawiki.String' );
+	const mwString = require( 'mediawiki.String' );
 
 	// Parent method
 	ve.ui.MWSaveDialog.super.prototype.initialize.call( this );
@@ -555,7 +555,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 	// Limit length, and display the remaining characters
 	this.editSummaryInput.$input.codePointLimit( this.editSummaryCodePointLimit );
 	this.editSummaryInput.on( 'change', () => {
-		var remaining = this.editSummaryCodePointLimit - mwString.codePointLength( this.editSummaryInput.getValue() );
+		const remaining = this.editSummaryCodePointLimit - mwString.codePointLength( this.editSummaryInput.getValue() );
 		// TODO: This looks a bit weird, there is no unit in the UI, just numbers.
 		this.changedEditSummary = true;
 		if ( remaining > 99 ) {
@@ -679,7 +679,7 @@ ve.ui.MWSaveDialog.prototype.initialize = function () {
 };
 
 ve.ui.MWSaveDialog.prototype.updateOptionsBar = function () {
-	var showOptions = !!this.editSummaryCountLabel.getLabel() || !this.$saveCheckboxes.is( ':empty' );
+	const showOptions = !!this.editSummaryCountLabel.getLabel() || !this.$saveCheckboxes.is( ':empty' );
 	if ( showOptions !== this.showOptions ) {
 		this.savePanel.$element.toggleClass( 've-ui-mwSaveDialog-withOptions', showOptions );
 		this.showOptions = showOptions;
@@ -697,7 +697,7 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 		return;
 	}
 
-	var diffMode = this.reviewModeButtonSelect.findSelectedItem().getData(),
+	const diffMode = this.reviewModeButtonSelect.findSelectedItem().getData(),
 		surfaceMode = ve.init.target.getSurface().getMode(),
 		isVisual = diffMode === 'visual';
 
@@ -788,7 +788,7 @@ ve.ui.MWSaveDialog.prototype.positionDiffElement = function () {
 ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWSaveDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var surfaceMode = ve.init.target.getSurface().getMode();
+			const surfaceMode = ve.init.target.getSurface().getMode();
 
 			this.canReview = !!data.canReview;
 			this.canPreview = !!data.canPreview;
@@ -813,7 +813,7 @@ ve.ui.MWSaveDialog.prototype.getSetupProcess = function ( data ) {
 			function trackCheckbox( n ) {
 				ve.track( 'activity.mwSave', { action: 'checkbox-' + n } );
 			}
-			for ( var name in this.checkboxesByName ) {
+			for ( const name in this.checkboxesByName ) {
 				this.checkboxesByName[ name ].$element.off( '.mwSave' ).on( 'click.mwSave', trackCheckbox.bind( this, name ) );
 			}
 
@@ -884,7 +884,7 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 
 	if ( action === 'save' ) {
 		return new OO.ui.Process( () => {
-			var saveDeferred = ve.createDeferred();
+			const saveDeferred = ve.createDeferred();
 			this.clearMessage( 'keyboard-shortcut-submit' );
 			this.emit( 'save', saveDeferred );
 			return saveDeferred.promise();

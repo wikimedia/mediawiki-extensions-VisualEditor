@@ -56,7 +56,7 @@ ve.init.mw.ApiResponseCache.static.processPage = null;
  * @return {string}
  */
 ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
-	var titleObj = mw.Title.newFromText( title );
+	const titleObj = mw.Title.newFromText( title );
 	if ( !titleObj ) {
 		return title;
 	}
@@ -116,7 +116,7 @@ ve.init.mw.ApiResponseCache.prototype.getCached = function ( name ) {
  * @fires ve.init.mw.ApiResponseCache#add
  */
 ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
-	for ( var name in entries ) {
+	for ( const name in entries ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.deferreds, name ) ) {
 			this.deferreds[ name ] = ve.createDeferred();
 		}
@@ -144,14 +144,14 @@ ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
  * @fires ve.init.mw.ApiResponseCache#add
  */
 ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
-	var rejectSubqueue = ( rejectQueue ) => {
-		for ( var i = 0, len = rejectQueue.length; i < len; i++ ) {
+	const rejectSubqueue = ( rejectQueue ) => {
+		for ( let i = 0, len = rejectQueue.length; i < len; i++ ) {
 			this.deferreds[ rejectQueue[ i ] ].reject();
 		}
 	};
 
-	var processResult = ( data ) => {
-		var mappedTitles = [],
+	const processResult = ( data ) => {
+		let mappedTitles = [],
 			pages = ( data.query && data.query.pages ) || data.pages,
 			processed = {};
 
@@ -160,18 +160,18 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 		} );
 
 		if ( pages ) {
-			var page, processedPage;
-			for ( var pageid in pages ) {
+			let page, processedPage;
+			for ( const pageid in pages ) {
 				page = pages[ pageid ];
 				processedPage = this.constructor.static.processPage( page );
 				if ( processedPage !== undefined ) {
 					processed[ page.title ] = processedPage;
 				}
 			}
-			for ( var i = 0; i < mappedTitles.length; i++ ) {
+			for ( let i = 0; i < mappedTitles.length; i++ ) {
 				// Locate the title in mapped titles, if any.
 				if ( mappedTitles[ i ].to === page.title ) {
-					var from = mappedTitles[ i ].fromencoded === '' ?
+					const from = mappedTitles[ i ].fromencoded === '' ?
 						decodeURIComponent( mappedTitles[ i ].from ) :
 						mappedTitles[ i ].from;
 					processed[ from ] = processedPage;
@@ -182,10 +182,10 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 		}
 	};
 
-	var queue = this.queue;
+	const queue = this.queue;
 	this.queue = [];
 	while ( queue.length ) {
-		var subqueue = queue.splice( 0, 50 ).map( this.constructor.static.normalizeTitle );
+		const subqueue = queue.splice( 0, 50 ).map( this.constructor.static.normalizeTitle );
 		this.getRequestPromise( subqueue )
 			.then( processResult )
 

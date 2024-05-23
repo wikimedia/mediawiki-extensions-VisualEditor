@@ -130,7 +130,7 @@ ve.ui.commandRegistry.register(
 /* Triggers & command help */
 
 ( function () {
-	var accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
+	const accessKeyPrefix = $.fn.updateTooltipAccessKeys.getAccessKeyPrefix().replace( /-/g, '+' ),
 		shortcuts = [
 			{
 				command: 'showSave',
@@ -168,7 +168,7 @@ ve.ui.commandRegistry.register(
 		// * accesskey-preview
 		// * accesskey-minoredit
 		// * accesskey-watch
-		var accessKey = ve.msg( shortcut.accessKey );
+		const accessKey = ve.msg( shortcut.accessKey );
 		if ( accessKey !== '-' && accessKey !== '' ) {
 			try {
 				ve.ui.triggerRegistry.register(

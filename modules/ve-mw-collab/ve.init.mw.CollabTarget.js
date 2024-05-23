@@ -111,7 +111,7 @@ ve.init.mw.CollabTarget.prototype.getSurfaceConfig = function ( config ) {
  * @inheritdoc
  */
 ve.init.mw.CollabTarget.prototype.getSurfaceClasses = function () {
-	var classes = ve.init.mw.CollabTarget.super.prototype.getSurfaceClasses.call( this );
+	const classes = ve.init.mw.CollabTarget.super.prototype.getSurfaceClasses.call( this );
 	return classes.concat( [ 'mw-body-content' ] );
 };
 

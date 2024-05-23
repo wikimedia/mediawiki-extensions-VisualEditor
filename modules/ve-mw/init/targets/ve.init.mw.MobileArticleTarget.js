@@ -132,7 +132,7 @@ ve.init.mw.MobileArticleTarget.prototype.clearSurfaces = function () {
  */
 ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	// Editor may not have loaded yet, in which case `this.surface` is undefined
-	var surfaceView = this.surface && this.surface.getView(),
+	const surfaceView = this.surface && this.surface.getView(),
 		isActiveWithKeyboard = surfaceView && surfaceView.isFocused() && !surfaceView.isDeactivated();
 
 	// On iOS Safari, when the keyboard is open, the layout viewport reported by the browser is not
@@ -154,7 +154,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 	// browser paints, so the toolbar would lag behind in a very unseemly manner. Additionally,
 	// getBoundingClientRect returns incorrect values during scrolling, so make sure to calculate
 	// it only after the scrolling ends (https://openradar.appspot.com/radar?id=6668472289329152).
-	var animateToolbarIntoView;
+	let animateToolbarIntoView;
 	this.onContainerScrollTimer = setTimeout( animateToolbarIntoView = () => {
 		if ( this.toolbarAnimating ) {
 			// We can't do this while the 'transform' transition is happening, because
@@ -162,31 +162,31 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 			return;
 		}
 
-		var $header = this.overlay.$el.find( '.overlay-header-container' );
+		const $header = this.overlay.$el.find( '.overlay-header-container' );
 
 		// Check if toolbar is offscreen. In a better world, this would reject all negative values
 		// (pos >= 0), but getBoundingClientRect often returns funny small fractional values after
 		// this function has done its job (which triggers another 'scroll' event) and before the
 		// user scrolled again. If we allowed it to run, it would trigger a hilarious loop! Toolbar
 		// being 1px offscreen is not a big deal anyway.
-		var pos = $header[ 0 ].getBoundingClientRect().top;
+		const pos = $header[ 0 ].getBoundingClientRect().top;
 		if ( pos >= -1 ) {
 			return;
 		}
 
 		// We don't know how much we have to scroll because we don't know how large the real
 		// viewport is. This value is bigger than the screen height of all iOS devices.
-		var viewportHeight = 2000;
+		const viewportHeight = 2000;
 		// OK so this one is really weird. Normally on iOS, the scroll position is set on <body>.
 		// But on our sites, when using iOS 13, it's on <html> instead - maybe due to some funny
 		// CSS we set on html and body? Anyway, this seems to work...
-		var scrollY = document.body.scrollTop || document.documentElement.scrollTop;
-		var scrollX = document.body.scrollLeft || document.documentElement.scrollLeft;
+		const scrollY = document.body.scrollTop || document.documentElement.scrollTop;
+		const scrollX = document.body.scrollLeft || document.documentElement.scrollLeft;
 
 		// Prevent the scrolling we're about to do from triggering this event handler again.
 		this.toolbarAnimating = true;
 
-		var $overlaySurface = this.$overlaySurface;
+		const $overlaySurface = this.$overlaySurface;
 		// Scroll down and translate the surface by the same amount, otherwise the content at new
 		// scroll position visibly flashes.
 		$overlaySurface.css( 'transform', 'translateY( ' + viewportHeight + 'px )' );
@@ -194,8 +194,8 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 
 		// Prepate to animate toolbar sliding into view
 		$header.removeClass( 'toolbar-shown toolbar-shown-done' );
-		var headerHeight = $header[ 0 ].offsetHeight;
-		var headerTranslateY = Math.max( -headerHeight, pos );
+		const headerHeight = $header[ 0 ].offsetHeight;
+		const headerTranslateY = Math.max( -headerHeight, pos );
 		$header.css( 'transform', 'translateY( ' + headerTranslateY + 'px )' );
 
 		// The scroll back up must be after a delay, otherwise no scrolling happens and the
@@ -230,9 +230,9 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceScroll = function () {
 		// iOS has a bug where if you change the scroll offset of a
 		// contentEditable or textarea with a cursor visible, it disappears.
 		// This function works around it by removing and reapplying the selection.
-		var nativeSelection = this.getSurface().getView().nativeSelection;
+		const nativeSelection = this.getSurface().getView().nativeSelection;
 		if ( nativeSelection.rangeCount && document.activeElement.contentEditable === 'true' ) {
-			var range = nativeSelection.getRangeAt( 0 );
+			const range = nativeSelection.getRangeAt( 0 );
 			nativeSelection.removeAllRanges();
 			nativeSelection.addRange( range );
 		}
@@ -250,7 +250,7 @@ ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, confi
 	}
 
 	// Parent method
-	var surface = ve.init.mw.MobileArticleTarget
+	const surface = ve.init.mw.MobileArticleTarget
 		.super.prototype.createSurface.call( this, dmDoc, config );
 
 	surface.connect( this, { scroll: 'onSurfaceScroll' } );
@@ -262,7 +262,7 @@ ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, confi
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.getSurfaceClasses = function () {
-	var classes = ve.init.mw.MobileArticleTarget.super.prototype.getSurfaceClasses.call( this );
+	const classes = ve.init.mw.MobileArticleTarget.super.prototype.getSurfaceClasses.call( this );
 	return classes.concat( [ 'content' ] );
 };
 
@@ -270,7 +270,7 @@ ve.init.mw.MobileArticleTarget.prototype.getSurfaceClasses = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.setSurface = function ( surface ) {
-	var changed = surface !== this.surface;
+	const changed = surface !== this.surface;
 
 	// Parent method
 	// FIXME This actually skips ve.init.mw.Target.prototype.setSurface. Why?
@@ -328,7 +328,7 @@ ve.init.mw.MobileArticleTarget.prototype.afterSurfaceReady = function () {
  * Match the content padding to the toolbar height
  */
 ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
-	var surface = this.getSurface(),
+	const surface = this.getSurface(),
 		surfaceView = surface.getView(),
 		toolbarHeight = this.getToolbar().$element[ 0 ].clientHeight;
 
@@ -345,10 +345,10 @@ ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
-	var dataPromise;
+	let dataPromise;
 	if ( modified ) {
 		dataPromise = this.getWikitextDataPromiseForDoc( modified ).then( ( response ) => {
-			var content = ve.getProp( response, 'visualeditoredit', 'content' );
+			const content = ve.getProp( response, 'visualeditoredit', 'content' );
 			return { text: content };
 		} );
 	}
@@ -361,7 +361,7 @@ ve.init.mw.MobileArticleTarget.prototype.switchToFallbackWikitextEditor = functi
  */
 ve.init.mw.MobileArticleTarget.prototype.save = function () {
 	// Parent method
-	var promise = ve.init.mw.MobileArticleTarget.super.prototype.save.apply( this, arguments );
+	const promise = ve.init.mw.MobileArticleTarget.super.prototype.save.apply( this, arguments );
 
 	this.overlay.log( {
 		action: 'saveAttempt'
@@ -410,7 +410,7 @@ ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
 
-	var fragment = this.getSectionHashFromPage().slice( 1 );
+	const fragment = this.getSectionHashFromPage().slice( 1 );
 
 	this.overlay.sectionId = fragment;
 	this.overlay.onSaveComplete( data.newrevid, data.tempusercreatedredirect, data.tempusercreated );
@@ -437,7 +437,7 @@ ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
-	var originalToolbarGroups = this.toolbarGroups;
+	const originalToolbarGroups = this.toolbarGroups;
 
 	// We don't want any of these tools to show up in subordinate widgets, so we
 	// temporarily add them here. We need to do it _here_ rather than in their

@@ -105,7 +105,7 @@ ve.ui.MWNoticesPopupTool.static.autoAddToCatchall = false;
  * @param {string[]} notices A (non-empty) list of notices
  */
 ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
-	var count = notices.length;
+	const count = notices.length;
 
 	this.popup.setLabel( ve.msg(
 		'visualeditor-editnotices-tool',
@@ -121,7 +121,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 
 	notices.forEach( ( item ) => {
 		// eslint-disable-next-line no-jquery/no-html
-		var $element = $( '<div>' )
+		const $element = $( '<div>' )
 			.addClass( 've-ui-mwNoticesPopupTool-item' )
 			.html( typeof item === 'string' ? item : item.message );
 		ve.targetLinksToNewWindow( $element[ 0 ] );
@@ -147,7 +147,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
  * @inheritdoc
  */
 ve.ui.MWNoticesPopupTool.prototype.getTitle = function () {
-	var items = this.toolbar.getTarget().getEditNotices();
+	const items = this.toolbar.getTarget().getEditNotices();
 
 	// eslint-disable-next-line mediawiki/msg-doc
 	return ve.msg( this.constructor.static.title, items.length );

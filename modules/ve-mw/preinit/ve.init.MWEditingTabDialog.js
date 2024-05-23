@@ -74,7 +74,7 @@ mw.libs.ve.EditingTabDialog.prototype.getSetupProcess = function ( action ) {
 mw.libs.ve.EditingTabDialog.prototype.getActionProcess = function ( action ) {
 	if ( action ) {
 		return new OO.ui.Process( () => {
-			var actionWidget = this.getActions().get( { actions: action } )[ 0 ];
+			const actionWidget = this.getActions().get( { actions: action } )[ 0 ];
 			actionWidget.pushPending();
 			this.pushPending();
 

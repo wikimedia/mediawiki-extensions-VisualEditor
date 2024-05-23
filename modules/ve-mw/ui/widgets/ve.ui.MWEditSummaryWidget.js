@@ -56,7 +56,7 @@ ve.ui.MWEditSummaryWidget.static.summarySplitter = /^(\/\*.*?\*\/\s*)?([^]*)$/;
  * @return {Object} Object with section and comment string properties
  */
 ve.ui.MWEditSummaryWidget.static.splitSummary = function ( summary ) {
-	var result = summary.match( this.summarySplitter );
+	const result = summary.match( this.summarySplitter );
 	return {
 		section: result[ 1 ] || '',
 		comment: result[ 2 ]
@@ -71,7 +71,7 @@ ve.ui.MWEditSummaryWidget.static.splitSummary = function ( summary ) {
  * @return {string[]} Filtered edit summaries
  */
 ve.ui.MWEditSummaryWidget.static.getMatchingSummaries = function ( summaries, query ) {
-	var summaryPrefixMatches = [], wordPrefixMatches = [], otherMatches = [],
+	const summaryPrefixMatches = [], wordPrefixMatches = [], otherMatches = [],
 		lowerQuery = query.toLowerCase();
 
 	if ( !query.trim() ) {
@@ -80,7 +80,7 @@ ve.ui.MWEditSummaryWidget.static.getMatchingSummaries = function ( summaries, qu
 	}
 
 	summaries.forEach( ( summary ) => {
-		var lowerSummary = summary.toLowerCase(),
+		const lowerSummary = summary.toLowerCase(),
 			index = lowerSummary.indexOf( lowerQuery );
 		if ( index === 0 ) {
 			// Exclude exact matches
@@ -110,9 +110,9 @@ ve.ui.MWEditSummaryWidget.prototype.adjustSize = function () {
 	// to appear, changing the available width, so if scrollbars are intially
 	// hidden, force them to stay hidden during the adjustment.
 	// TODO: Consider upstreaming this?
-	var scrollContainer = this.getClosestScrollableElementContainer();
-	var hasScrollbar = scrollContainer.offsetWidth > scrollContainer.scrollWidth;
-	var overflowY;
+	const scrollContainer = this.getClosestScrollableElementContainer();
+	const hasScrollbar = scrollContainer.offsetWidth > scrollContainer.scrollWidth;
+	let overflowY;
 	if ( !hasScrollbar ) {
 		overflowY = scrollContainer.style.overflowY;
 		scrollContainer.style.overflowY = 'hidden';
@@ -134,7 +134,7 @@ ve.ui.MWEditSummaryWidget.prototype.adjustSize = function () {
  * @return {jQuery.Promise} Promise which resolves with a list of summaries
  */
 ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
-	var splitSummary = this.constructor.static.splitSummary.bind( this.constructor.static );
+	const splitSummary = this.constructor.static.splitSummary.bind( this.constructor.static );
 	if ( !this.getSummariesPromise ) {
 		if ( mw.user.isAnon() ) {
 			this.getSummariesPromise = ve.createDeferred().resolve( [] ).promise();
@@ -148,7 +148,7 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
 				ucprop: 'comment',
 				uclimit: 500
 			} ).then( ( response ) => {
-				var usedComments = {},
+				const usedComments = {},
 					changes = ve.getProp( response, 'query', 'usercontribs' ) || [];
 
 				return changes
@@ -175,11 +175,11 @@ ve.ui.MWEditSummaryWidget.prototype.getSummaries = function () {
  * @inheritdoc
  */
 ve.ui.MWEditSummaryWidget.prototype.getLookupRequest = function () {
-	var query = this.constructor.static.splitSummary( this.value ),
+	const query = this.constructor.static.splitSummary( this.value ),
 		limit = this.limit;
 
 	return this.getSummaries().then( ( allSummaries ) => {
-		var matchingSummaries = this.constructor.static.getMatchingSummaries( allSummaries, query.comment );
+		const matchingSummaries = this.constructor.static.getMatchingSummaries( allSummaries, query.comment );
 		if ( matchingSummaries.length > limit ) {
 			// Quick in-place truncate
 			matchingSummaries.length = limit;

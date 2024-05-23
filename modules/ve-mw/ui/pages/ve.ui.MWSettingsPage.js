@@ -224,7 +224,7 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
  */
 ve.ui.MWSettingsPage.prototype.checkValidRedirect = function () {
 	if ( this.enableRedirectInput.isSelected() ) {
-		var title = this.redirectTargetInput.getValue();
+		const title = this.redirectTargetInput.getValue();
 
 		if ( !mw.Title.newFromText( title ) ) {
 			/*
@@ -284,18 +284,18 @@ ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
 	this.fragment = fragment;
 
 	// Table of Contents items
-	var tableOfContentsField = this.tableOfContents.getField();
-	var tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
-	var tableOfContentsMode = tableOfContentsMetaItem && tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
+	const tableOfContentsField = this.tableOfContents.getField();
+	const tableOfContentsMetaItem = this.getMetaItem( 'mwTOC' );
+	const tableOfContentsMode = tableOfContentsMetaItem && tableOfContentsMetaItem.getAttribute( 'property' ) || 'default';
 	tableOfContentsField
 		.selectItemByData( tableOfContentsMode )
 		.setDisabled( config.isReadOnly );
 	this.tableOfContentsTouched = false;
 
 	// Redirect items (disabled states set by change event)
-	var redirectTargetItem = this.getMetaItem( 'mwRedirect' );
-	var redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '';
-	var redirectStatic = this.getMetaItem( 'mwStaticRedirect' );
+	const redirectTargetItem = this.getMetaItem( 'mwRedirect' );
+	const redirectTarget = redirectTargetItem && redirectTargetItem.getAttribute( 'title' ) || '';
+	const redirectStatic = this.getMetaItem( 'mwStaticRedirect' );
 	this.enableRedirectInput
 		.setSelected( !!redirectTargetItem )
 		.setDisabled( config.isReadOnly );
@@ -310,7 +310,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
 
 	// Simple checkbox items
 	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
-		var isSelected = !!this.getMetaItem( metaItemCheckbox.metaName );
+		const isSelected = !!this.getMetaItem( metaItemCheckbox.metaName );
 		metaItemCheckbox.fieldLayout.getField()
 			.setSelected( isSelected )
 			.setDisabled( config.isReadOnly );
@@ -332,16 +332,16 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	}
 
 	// Table of Contents items
-	var currentTableOfContents = this.getMetaItem( 'mwTOC' );
-	var newTableOfContentsData = this.tableOfContents.getField().findSelectedItem();
+	const currentTableOfContents = this.getMetaItem( 'mwTOC' );
+	const newTableOfContentsData = this.tableOfContents.getField().findSelectedItem();
 
 	// Redirect items
-	var currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
-	var newRedirectData = this.redirectTargetInput.getValue();
-	var newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } };
+	const currentRedirectTargetItem = this.getMetaItem( 'mwRedirect' );
+	const newRedirectData = this.redirectTargetInput.getValue();
+	const newRedirectItemData = { type: 'mwRedirect', attributes: { title: newRedirectData } };
 
-	var currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' );
-	var newStaticRedirectState = this.enableStaticRedirectInput.isSelected();
+	const currentStaticRedirectItem = this.getMetaItem( 'mwStaticRedirect' );
+	const newStaticRedirectState = this.enableStaticRedirectInput.isSelected();
 
 	// Alter the TOC option flag iff it's been touched & is actually different
 	if ( this.tableOfContentsTouched ) {
@@ -350,7 +350,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 				this.fragment.removeMeta( currentTableOfContents );
 			}
 		} else {
-			var newTableOfContentsItem = { type: 'mwTOC', attributes: { property: newTableOfContentsData.data } };
+			const newTableOfContentsItem = { type: 'mwTOC', attributes: { property: newTableOfContentsData.data } };
 
 			if ( !currentTableOfContents ) {
 				this.fragment.insertMeta( newTableOfContentsItem );
@@ -398,7 +398,7 @@ ve.ui.MWSettingsPage.prototype.teardown = function ( data ) {
 	}
 
 	this.metaItemCheckboxes.forEach( ( metaItemCheckbox ) => {
-		var currentItem = this.getMetaItem( metaItemCheckbox.metaName ),
+		const currentItem = this.getMetaItem( metaItemCheckbox.metaName ),
 			isSelected = metaItemCheckbox.fieldLayout.getField().isSelected();
 
 		if ( currentItem && !isSelected ) {

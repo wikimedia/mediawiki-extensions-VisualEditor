@@ -52,7 +52,7 @@ ve.ui.MWExtensionDialog.prototype.initialize = function () {
 ve.ui.MWExtensionDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	// Parent process
-	var process = ve.ui.MWExtensionDialog.super.prototype.getSetupProcess.call( this, data );
+	const process = ve.ui.MWExtensionDialog.super.prototype.getSetupProcess.call( this, data );
 	// Mixin process
 	return ve.ui.MWExtensionWindow.prototype.getSetupProcess.call( this, data, process );
 };
@@ -63,7 +63,7 @@ ve.ui.MWExtensionDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.MWExtensionDialog.prototype.getReadyProcess = function ( data ) {
 	data = data || {};
 	// Parent process
-	var process = ve.ui.MWExtensionDialog.super.prototype.getReadyProcess.call( this, data );
+	const process = ve.ui.MWExtensionDialog.super.prototype.getReadyProcess.call( this, data );
 	// Mixin process
 	return ve.ui.MWExtensionWindow.prototype.getReadyProcess.call( this, data, process );
 };
@@ -74,7 +74,7 @@ ve.ui.MWExtensionDialog.prototype.getReadyProcess = function ( data ) {
 ve.ui.MWExtensionDialog.prototype.getTeardownProcess = function ( data ) {
 	data = data || {};
 	// Parent process
-	var process = ve.ui.MWExtensionDialog.super.prototype.getTeardownProcess.call( this, data );
+	const process = ve.ui.MWExtensionDialog.super.prototype.getTeardownProcess.call( this, data );
 	// Mixin process
 	return ve.ui.MWExtensionWindow.prototype.getTeardownProcess.call( this, data, process );
 };
@@ -99,7 +99,7 @@ ve.ui.MWExtensionDialog.prototype.getActionProcess = function ( action ) {
 	}
 
 	// Parent process
-	var process = ve.ui.MWExtensionDialog.super.prototype.getActionProcess.call( this, action );
+	const process = ve.ui.MWExtensionDialog.super.prototype.getActionProcess.call( this, action );
 	// Mixin process
 	return ve.ui.MWExtensionWindow.prototype.getActionProcess.call( this, action, process ).next( () => {
 		if ( action === 'done' ) {

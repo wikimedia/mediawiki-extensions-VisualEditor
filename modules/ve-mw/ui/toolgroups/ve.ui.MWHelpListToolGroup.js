@@ -55,14 +55,14 @@ ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
 	ve.ui.MWHelpListToolGroup.super.prototype.setActive.apply( this, arguments );
 
 	if ( this.active && !this.versionPromise ) {
-		var $version = $( '<div>' ).addClass( 'oo-ui-pendingElement-pending' ).text( '\u00a0' );
+		const $version = $( '<div>' ).addClass( 'oo-ui-pendingElement-pending' ).text( '\u00a0' );
 		this.$footer.append( $version );
 		this.versionPromise = ve.init.target.getLocalApi().get( {
 			action: 'query',
 			meta: 'siteinfo',
 			siprop: 'extensions'
 		} ).then( ( response ) => {
-			var extension = response.query.extensions.filter( ( ext ) => ext.name === 'VisualEditor' )[ 0 ];
+			const extension = response.query.extensions.filter( ( ext ) => ext.name === 'VisualEditor' )[ 0 ];
 
 			if ( extension && extension[ 'vcs-version' ] ) {
 				$version
@@ -158,17 +158,17 @@ ve.ui.MWFeedbackDialogTool.prototype.onSelect = function () {
 
 	if ( !this.feedbackPromise ) {
 		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( () => {
-			var mode = this.toolbar.getSurface().getMode();
+			const mode = this.toolbar.getSurface().getMode();
 
 			// This can't be constructed until the editor has loaded as it uses special messages
-			var feedbackConfig = {
+			const feedbackConfig = {
 				bugsLink: 'https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projects=VisualEditor',
 				showUseragentCheckbox: true,
 				useragentCheckboxMandatory: true
 			};
 
 			// If so configured, tell mw.feedback that we're posting to a remote wiki and set the title
-			var veConfig = mw.config.get( 'wgVisualEditorConfig' );
+			const veConfig = mw.config.get( 'wgVisualEditorConfig' );
 			if ( veConfig.feedbackApiUrl ) {
 				feedbackConfig.apiUrl = veConfig.feedbackApiUrl;
 				feedbackConfig.title = new mw.Title(

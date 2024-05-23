@@ -33,7 +33,7 @@ mw.libs.ve.ProgressBarWidget = function VeUiMwProgressBarWidget() {
 };
 
 mw.libs.ve.ProgressBarWidget.prototype.setLoadingProgress = function ( target, duration ) {
-	var $bar = this.$bar.stop();
+	const $bar = this.$bar.stop();
 	$bar.css( 'transition', 'width ' + duration + 'ms ease-in' );
 	setTimeout( () => {
 		$bar.css( 'width', target + '%' );
@@ -41,7 +41,7 @@ mw.libs.ve.ProgressBarWidget.prototype.setLoadingProgress = function ( target, d
 };
 
 mw.libs.ve.ProgressBarWidget.prototype.incrementLoadingProgress = function () {
-	var step = this.progressSteps[ this.progressStep ];
+	const step = this.progressSteps[ this.progressStep ];
 	if ( step ) {
 		this.setLoadingProgress( step[ 0 ], step[ 1 ] );
 		this.progressStep++;

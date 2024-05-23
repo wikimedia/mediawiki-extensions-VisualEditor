@@ -146,7 +146,7 @@ ve.ui.MWLanguageVariantInspector.prototype.createTextTarget = function ( placeho
  * @return {ve.dm.Document} The document model now backing the widget.
  */
 ve.ui.MWLanguageVariantInspector.prototype.setupTextTargetDoc = function ( textTarget, htmlString ) {
-	var doc = this.variantNode.getDocument().newFromHtml( htmlString );
+	const doc = this.variantNode.getDocument().newFromHtml( htmlString );
 	textTarget.setDocument( doc );
 	return doc;
 };
@@ -164,7 +164,7 @@ ve.ui.MWLanguageVariantInspector.prototype.setupTextTargetDoc = function ( textT
  *  language variant node.
  */
 ve.ui.MWLanguageVariantInspector.prototype.getHtmlForDoc = function ( doc ) {
-	var surface = new ve.dm.Surface( doc );
+	const surface = new ve.dm.Surface( doc );
 
 	// Remove outermost p-wrapping, if present
 	try {
@@ -177,7 +177,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getHtmlForDoc = function ( doc ) {
 		// That's okay: ignore the error and use what we've got.
 	}
 	// XXX return a flag to indicate whether contents are now inline or block?
-	var targetHtmlDoc = ve.dm.converter.getDomFromModel( doc );
+	const targetHtmlDoc = ve.dm.converter.getDomFromModel( doc );
 	return ve.properInnerHtml( targetHtmlDoc.body );
 };
 
@@ -238,7 +238,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data 
 	data = data || {};
 	return ve.ui.MWLanguageVariantInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
-			var surfaceModel = this.getFragment().getSurface();
+			const surfaceModel = this.getFragment().getSurface();
 
 			if ( data.action === 'remove' ) {
 				surfaceModel.popStaging();
@@ -246,7 +246,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data 
 				this.getFragment().removeContent();
 			} else if ( data.action === 'done' ) {
 				// Edit language variant node
-				var newContent = this.getContentFromInspector(
+				const newContent = this.getContentFromInspector(
 					ve.copy( this.variantNode.getVariantInfo() )
 				);
 				if ( newContent[ 0 ].type === this.variantNode.getType() ) {
@@ -309,7 +309,7 @@ ve.ui.MWLanguageVariantDisabledInspector.prototype.getDefaultVariantInfo = funct
 
 ve.ui.MWLanguageVariantDisabledInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantDisabledInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
-		var variantInfo = this.variantNode.getVariantInfo();
+		const variantInfo = this.variantNode.getVariantInfo();
 		this.textTargetDoc = this.setupTextTargetDoc(
 			this.textTarget,
 			variantInfo.disabled.t
@@ -320,7 +320,7 @@ ve.ui.MWLanguageVariantDisabledInspector.prototype.getSetupProcess = function ( 
 ve.ui.MWLanguageVariantDisabledInspector.prototype.getContentFromInspector = function ( variantInfo ) {
 	// TODO should allow type to depend on targetHtmlDoc, maybe switch
 	// from inline to block.
-	var type = this.variantNode.getType();
+	const type = this.variantNode.getType();
 	variantInfo.disabled.t = this.getHtmlForDoc( this.textTargetDoc );
 	return [
 		{
@@ -392,7 +392,7 @@ ve.ui.MWLanguageVariantNameInspector.prototype.getDefaultVariantInfo = function 
 ve.ui.MWLanguageVariantNameInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantNameInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var variantInfo = this.variantNode.getVariantInfo();
+			const variantInfo = this.variantNode.getVariantInfo();
 			this.languageInput.setLangAndDir(
 				variantInfo.name.t,
 				'auto'
@@ -401,7 +401,7 @@ ve.ui.MWLanguageVariantNameInspector.prototype.getSetupProcess = function ( data
 };
 
 ve.ui.MWLanguageVariantNameInspector.prototype.getContentFromInspector = function ( variantInfo ) {
-	var type = this.variantNode.getType();
+	const type = this.variantNode.getType();
 	variantInfo.name.t = this.languageInput.getLang();
 	return [
 		{
@@ -457,7 +457,7 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.initialize = function () {
 		icon: 'language'
 	} );
 	this.langWidget.createTagItemWidget = function ( data, label ) {
-		var name = ve.init.platform.getLanguageName( data.toLowerCase() );
+		const name = ve.init.platform.getLanguageName( data.toLowerCase() );
 		label = label || ( name ? ( name + ' (' + data + ')' ) : data );
 		return OO.ui.TagMultiselectWidget.prototype.createTagItemWidget.call(
 			this, data, label
@@ -484,7 +484,7 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.getDefaultVariantInfo = functio
 
 ve.ui.MWLanguageVariantFilterInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantFilterInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
-		var variantInfo = this.variantNode.getVariantInfo();
+		const variantInfo = this.variantNode.getVariantInfo();
 		this.textTargetDoc = this.setupTextTargetDoc(
 			this.textTarget,
 			variantInfo.filter.t
@@ -496,7 +496,7 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.getSetupProcess = function ( da
 ve.ui.MWLanguageVariantFilterInspector.prototype.getContentFromInspector = function ( variantInfo ) {
 	// TODO should allow type to depend on targetHtmlDoc, maybe switch
 	// from inline to block.
-	var type = this.variantNode.getType();
+	const type = this.variantNode.getType();
 	variantInfo.filter.t = this.getHtmlForDoc( this.textTargetDoc );
 	variantInfo.filter.l = this.langWidget.getValue();
 	return [
@@ -577,7 +577,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getDefaultVariantInfo = functio
 
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantTwoWayInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
-		var variantInfo = this.variantNode.getVariantInfo();
+		const variantInfo = this.variantNode.getVariantInfo();
 		this.layout.clearItems();
 		this.items = [];
 		variantInfo.twoway.forEach( ( tw, idx ) => {
@@ -596,21 +596,21 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getSetupProcess = function ( da
  *  documents for this mapping item.
  */
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.createItem = function ( lang, content ) {
-	var languageInput = new ve.ui.LanguageInputWidget( {
+	const languageInput = new ve.ui.LanguageInputWidget( {
 		dialogManager: this.manager.getSurface().getDialogs(),
 		dirInput: 'none'
 	} );
-	var textTarget = this.createTextTarget( OO.ui.msg(
+	const textTarget = this.createTextTarget( OO.ui.msg(
 		'visualeditor-mwlanguagevariantinspector-twoway-text-placeholder'
 	) );
-	var clearButton = new OO.ui.ButtonInputWidget( {
+	const clearButton = new OO.ui.ButtonInputWidget( {
 		icon: 'clear',
 		title: OO.ui.deferMsg(
 			'visualeditor-mwlanguagevariantinspector-twoway-clear-button'
 		),
 		framed: false
 	} );
-	var layout = new OO.ui.FieldLayout(
+	const layout = new OO.ui.FieldLayout(
 		new OO.ui.Widget( {
 			content: [
 				new OO.ui.ActionFieldLayout(
@@ -621,7 +621,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.createItem = function ( lang, c
 			]
 		} ), {}
 	);
-	var item = {
+	const item = {
 		languageInput: languageInput,
 		textTarget: textTarget,
 		clearButton: clearButton,
@@ -638,7 +638,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.createItem = function ( lang, c
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.getContentFromInspector = function ( variantInfo ) {
 	// TODO should allow type to depend on targetHtmlDoc, maybe switch
 	// from inline to block.
-	var type = this.variantNode.getType();
+	const type = this.variantNode.getType();
 	variantInfo.twoway = this.items.map( ( item ) => ( {
 		l: item.languageInput.getLang(),
 		t: this.getHtmlForDoc( item.textTargetDoc )
@@ -658,7 +658,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getContentFromInspector = funct
  * Create a new mapping item in the inspector.
  */
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.onAddButtonClick = function () {
-	var idx = this.items.length;
+	const idx = this.items.length;
 	this.items[ idx ] = this.createItem( mw.config.get( 'wgUserVariant' ), '' );
 	this.layout.addItems( [ this.items[ idx ].layout ] );
 };
@@ -669,7 +669,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.onAddButtonClick = function () 
  * @param {Object} item
  */
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.onClearButtonClick = function ( item ) {
-	var idx = this.items.indexOf( item );
+	const idx = this.items.indexOf( item );
 	this.items.splice( idx, 1 );
 	this.layout.removeItems( [ item.layout ] );
 	item.clearButton.disconnect( this );
@@ -724,7 +724,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getDefaultVariantInfo = functio
 
 ve.ui.MWLanguageVariantOneWayInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWLanguageVariantOneWayInspector.super.prototype.getSetupProcess.call( this, data ).next( () => {
-		var variantInfo = this.variantNode.getVariantInfo();
+		const variantInfo = this.variantNode.getVariantInfo();
 		this.layout.clearItems();
 		this.items = [];
 		variantInfo.oneway.forEach( ( ow, idx ) => {
@@ -744,24 +744,24 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getSetupProcess = function ( da
  *  documents for this mapping item.
  */
 ve.ui.MWLanguageVariantOneWayInspector.prototype.createItem = function ( from, lang, to ) {
-	var fromTextTarget = this.createTextTarget( OO.ui.msg(
+	const fromTextTarget = this.createTextTarget( OO.ui.msg(
 		'visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder'
 	) );
-	var languageInput = new ve.ui.LanguageInputWidget( {
+	const languageInput = new ve.ui.LanguageInputWidget( {
 		dialogManager: this.manager.getSurface().getDialogs(),
 		dirInput: 'none'
 	} );
-	var toTextTarget = this.createTextTarget( OO.ui.msg(
+	const toTextTarget = this.createTextTarget( OO.ui.msg(
 		'visualeditor-mwlanguagevariantinspector-oneway-to-text-placeholder'
 	) );
-	var clearButton = new OO.ui.ButtonInputWidget( {
+	const clearButton = new OO.ui.ButtonInputWidget( {
 		icon: 'clear',
 		title: OO.ui.deferMsg(
 			'visualeditor-mwlanguagevariantinspector-oneway-clear-button'
 		),
 		framed: false
 	} );
-	var layout = new OO.ui.FieldLayout(
+	const layout = new OO.ui.FieldLayout(
 		new OO.ui.Widget( {
 			content: [
 				new OO.ui.ActionFieldLayout(
@@ -773,7 +773,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.createItem = function ( from, l
 			]
 		} ), {}
 	);
-	var item = {
+	const item = {
 		fromTextTarget: fromTextTarget,
 		languageInput: languageInput,
 		toTextTarget: toTextTarget,
@@ -792,7 +792,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.createItem = function ( from, l
 ve.ui.MWLanguageVariantOneWayInspector.prototype.getContentFromInspector = function ( variantInfo ) {
 	// TODO should allow type to depend on targetHtmlDoc, maybe switch
 	// from inline to block.
-	var type = this.variantNode.getType();
+	const type = this.variantNode.getType();
 	variantInfo.oneway = this.items.map( ( item ) => ( {
 		f: this.getHtmlForDoc( item.fromTextTargetDoc ),
 		l: item.languageInput.getLang(),
@@ -813,7 +813,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.getContentFromInspector = funct
  * Create a new mapping item in the inspector.
  */
 ve.ui.MWLanguageVariantOneWayInspector.prototype.onAddButtonClick = function () {
-	var idx = this.items.length;
+	const idx = this.items.length;
 	this.items[ idx ] = this.createItem( '', mw.config.get( 'wgUserVariant' ), '' );
 	this.layout.addItems( [ this.items[ idx ].layout ] );
 };
@@ -824,7 +824,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.onAddButtonClick = function () 
  * @param {Object} item
  */
 ve.ui.MWLanguageVariantOneWayInspector.prototype.onClearButtonClick = function ( item ) {
-	var idx = this.items.indexOf( item );
+	const idx = this.items.indexOf( item );
 	this.items.splice( idx, 1 );
 	this.layout.removeItems( [ item.layout ] );
 	item.clearButton.disconnect( this );

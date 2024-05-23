@@ -88,13 +88,13 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 	this.wikitextLayout.$field.css( 'max-width', 'none' );
 	this.wikitextLayout.textInput.$element.css( 'max-width', 'none' );
 
-	var $content = $( '<div>' );
+	const $content = $( '<div>' );
 	$content.append(
 		this.titleField.$element,
 		this.wikitextLayout.$element
 	);
 
-	var panel = new OO.ui.PanelLayout( {
+	const panel = new OO.ui.PanelLayout( {
 		padded: true,
 		expanded: false,
 		$content: $content
@@ -108,7 +108,7 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 ve.ui.MWExportWikitextDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.MWExportWikitextDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var surface = ve.init.target.getSurface(),
+			const surface = ve.init.target.getSurface(),
 				wikitextInput = this.wikitextLayout.textInput;
 			this.titleButton.setDisabled( true );
 			this.wikitextLayout.textInput.pushPending();
@@ -135,7 +135,7 @@ ve.ui.MWExportWikitextDialog.prototype.getReadyProcess = function ( data ) {
 
 			// Fix height of wikitext input
 			this.wikitextLayout.textInput.$input.css( 'max-height', '' );
-			var overflow = this.$body[ 0 ].scrollHeight - this.$body[ 0 ].clientHeight;
+			const overflow = this.$body[ 0 ].scrollHeight - this.$body[ 0 ].clientHeight;
 			if ( overflow > 0 ) {
 				// If body is too tall, take the excess height off the wikitext input
 				this.wikitextLayout.textInput.$input.css(
@@ -164,12 +164,12 @@ ve.ui.MWExportWikitextDialog.prototype.getTeardownProcess = function ( data ) {
  * Export the document to a specific title
  */
 ve.ui.MWExportWikitextDialog.prototype.export = function () {
-	var wikitext = this.wikitextLayout.textInput.getValue(),
+	const wikitext = this.wikitextLayout.textInput.getValue(),
 		title = this.titleInput.getMWTitle(),
 		importTitle = ve.init.target.getImportTitle();
 
-	var $form = $( '<form>' ).attr( { method: 'post', enctype: 'multipart/form-data' } ).addClass( 'oo-ui-element-hidden' );
-	var params = {
+	const $form = $( '<form>' ).attr( { method: 'post', enctype: 'multipart/form-data' } ).addClass( 'oo-ui-element-hidden' );
+	let params = {
 		format: 'text/x-wiki',
 		model: 'wikitext',
 		wpTextbox1: wikitext,
@@ -191,12 +191,12 @@ ve.ui.MWExportWikitextDialog.prototype.export = function () {
 		}, params );
 	}
 	// Add params as hidden fields
-	for ( var key in params ) {
+	for ( const key in params ) {
 		$form.append( $( '<input>' ).attr( { type: 'hidden', name: key, value: params[ key ] } ) );
 	}
 	// Submit the form, mimicking a traditional edit
 	// Firefox requires the form to be attached
-	var submitUrl = title.getUrl( {
+	const submitUrl = title.getUrl( {
 		action: 'submit',
 		veswitched: '1'
 	} );

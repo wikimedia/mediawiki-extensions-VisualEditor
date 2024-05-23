@@ -35,7 +35,7 @@ OO.inheritClass( ve.ui.MWWikitextCommandRegistry, ve.ui.CommandRegistry );
  */
 ve.ui.MWWikitextCommandRegistry.prototype.lookup = function ( name ) {
 	// Parent method
-	var data = ve.ui.MWWikitextCommandRegistry.super.prototype.lookup.call( this, name );
+	const data = ve.ui.MWWikitextCommandRegistry.super.prototype.lookup.call( this, name );
 	if ( data !== undefined ) {
 		return data;
 	}
@@ -75,7 +75,7 @@ ve.ui.wikitextCommandRegistry.register(
 				OO.ui.deferMsg( 'visualeditor-annotationbutton-italic-tooltip' ),
 				/* expandOffsetsCallback */
 				function ( textBefore, textAfter ) {
-					var matches, lengthBefore, lengthAfter;
+					let matches, lengthBefore, lengthAfter;
 					if ( ( matches = textBefore.match( /('+)$/ ) ) ) {
 						lengthBefore = -matches[ 1 ].length;
 					}
@@ -87,7 +87,7 @@ ve.ui.wikitextCommandRegistry.register(
 				/* unwrapOffsetsCallback */
 				function ( text ) {
 					/* Text is only italic if there are 2 or 5+ apostrophes */
-					var matches = /^(''([^'].*|.*[^'])''|'{5,}([^'].*|.*[^'])'{5,})$/.test( text );
+					const matches = /^(''([^'].*|.*[^'])''|'{5,}([^'].*|.*[^'])'{5,})$/.test( text );
 
 					return matches ? [ 2, 2 ] : null;
 				}
@@ -142,18 +142,18 @@ ve.ui.wikitextCommandRegistry.register(
 
 	function unformat( text ) {
 		/* Use lazy .+? in the middle so whitespace is matched to wrappers */
-		var headings;
+		let headings;
 		if ( ( headings = text.match( /^((={1,6})\s*).+?(\s*\2\s*)$/ ) ) ) {
 			return [ headings[ 1 ].length, headings[ 3 ].length ];
 		}
-		var pre;
+		let pre;
 		if ( ( pre = text.match( /^ +/ ) ) ) {
 			return [ pre[ 0 ].length, 0 ];
 		}
 	}
 
-	var heading = '';
-	for ( var i = 1; i <= 6; i++ ) {
+	let heading = '';
+	for ( let i = 1; i <= 6; i++ ) {
 		heading += '=';
 		ve.ui.wikitextCommandRegistry.register(
 			new ve.ui.Command(
@@ -198,7 +198,7 @@ ve.ui.wikitextCommandRegistry.register(
 	);
 
 	function unlist( keepType, text ) {
-		var matches;
+		let matches;
 		if ( ( matches = text.match( /^[*#] */ ) ) && text.slice( 0, 1 ) !== keepType ) {
 			return [ matches[ 0 ].length, 0 ];
 		}

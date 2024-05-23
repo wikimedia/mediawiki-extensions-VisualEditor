@@ -45,7 +45,7 @@ ve.ui.MWExpandableContentElement.prototype.getLineHeight = function () {
  * @return {number}
  */
 ve.ui.MWExpandableContentElement.prototype.calculateCurrentTextHeight = function () {
-	var currentHeight = this.$content.height(),
+	const currentHeight = this.$content.height(),
 		expandedHeight = this.$content.css( 'height', 'auto' ).height();
 	if ( expandedHeight !== currentHeight ) {
 		this.$content.css( 'height', currentHeight );
@@ -82,7 +82,7 @@ ve.ui.MWExpandableContentElement.prototype.makeCollapsible = function () {
  * @private
  */
 ve.ui.MWExpandableContentElement.prototype.recalculateVisuals = function () {
-	var height = this.calculateCurrentTextHeight() + this.button.$element.height(),
+	const height = this.calculateCurrentTextHeight() + this.button.$element.height(),
 		collapsedHeight = this.getLineHeight(),
 		label = this.collapsed ? 'visualeditor-expandable-more' : 'visualeditor-expandable-less';
 

@@ -17,8 +17,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.MWInlineImageNode = function VeCeMWInlineImageNode( model, config ) {
-	var $image;
-	var hasHref = false;
+	let $image;
+	let hasHref = false;
 
 	if ( model.getAttribute( 'isError' ) ) {
 		this.$element = $( '<a>' )
@@ -85,7 +85,7 @@ ve.ce.MWInlineImageNode.static.name = 'mwInlineImage';
  * Update CSS classes based on current attributes
  */
 ve.ce.MWInlineImageNode.prototype.updateClasses = function () {
-	var valign = this.model.getAttribute( 'valign' );
+	const valign = this.model.getAttribute( 'valign' );
 
 	// Border
 	this.$element.toggleClass( 'mw-image-border', !!this.model.getAttribute( 'borderImage' ) );

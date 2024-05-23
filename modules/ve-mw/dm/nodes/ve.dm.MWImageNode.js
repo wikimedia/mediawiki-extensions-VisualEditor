@@ -53,7 +53,7 @@ OO.mixinClass( ve.dm.MWImageNode, ve.dm.ResizableNode );
 /* Static methods */
 
 ve.dm.MWImageNode.static.rdfaToTypes = ( function () {
-	var rdfaToType = {};
+	const rdfaToType = {};
 
 	[ 'File', 'Image', 'Video', 'Audio' ].forEach( ( mediaClass ) => {
 		rdfaToType[ 'mw:' + mediaClass ] = { mediaClass: mediaClass, frameType: 'none' };
@@ -123,7 +123,7 @@ ve.dm.MWImageNode.static.isDiffComparable = function ( element, other ) {
 };
 
 ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attributes ) {
-	var customKeys = [ 'width', 'height', 'defaultSize', 'src', 'href' ],
+	const customKeys = [ 'width', 'height', 'defaultSize', 'src', 'href' ],
 		descriptions = [];
 
 	function describeSize( width, height ) {
@@ -131,7 +131,7 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 	}
 
 	if ( 'width' in attributeChanges || 'height' in attributeChanges ) {
-		var sizeFrom, sizeTo;
+		let sizeFrom, sizeTo;
 		if ( attributeChanges.defaultSize && attributeChanges.defaultSize.from === true ) {
 			sizeFrom = ve.msg( 'visualeditor-mediasizewidget-sizeoptions-default' );
 		} else {
@@ -153,13 +153,13 @@ ve.dm.MWImageNode.static.describeChanges = function ( attributeChanges, attribut
 			ve.htmlMsg( 'visualeditor-changedesc-image-size', this.wrapText( 'del', sizeFrom ), this.wrapText( 'ins', sizeTo ) )
 		);
 	}
-	for ( var key in attributeChanges ) {
+	for ( const key in attributeChanges ) {
 		if ( customKeys.indexOf( key ) === -1 ) {
 			if ( key === 'borderImage' && !attributeChanges.borderImage.from && !attributeChanges.borderImage.to ) {
 				// Skip noise from the data model
 				continue;
 			}
-			var change = this.describeChange( key, attributeChanges[ key ] );
+			const change = this.describeChange( key, attributeChanges[ key ] );
 			if ( change ) {
 				descriptions.push( change );
 			}
@@ -200,7 +200,7 @@ ve.dm.MWImageNode.static.describeChange = function ( key, change ) {
  * @return {Object} The new width and height of the scaled image
  */
 ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType ) {
-	var defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+	const defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
 		.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
 
 	mediaType = mediaType || 'BITMAP';
@@ -227,7 +227,7 @@ ve.dm.MWImageNode.static.scaleToThumbnailSize = function ( dimensions, mediaType
  * @return {Object} The new width and height of the scaled image.
  */
 ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, boundingBox ) {
-	var newDimensions = ve.copy( imageDimensions ),
+	let newDimensions = ve.copy( imageDimensions ),
 		scale = Math.min(
 			boundingBox.height / imageDimensions.height,
 			boundingBox.width / imageDimensions.width
@@ -251,10 +251,10 @@ ve.dm.MWImageNode.static.resizeToBoundingBox = function ( imageDimensions, bound
  * @param {ve.dm.Scalable} scalable The scalable object to update
  */
 ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalable ) {
-	var defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
+	const defaultThumbSize = mw.config.get( 'wgVisualEditorConfig' )
 		.thumbLimits[ mw.user.options.get( 'thumbsize' ) ];
 
-	var originalDimensions = scalable.getOriginalDimensions();
+	const originalDimensions = scalable.getOriginalDimensions();
 
 	// We can only set default dimensions if we have the original ones
 	if ( originalDimensions ) {
@@ -262,7 +262,7 @@ ve.dm.MWImageNode.static.syncScalableToType = function ( type, mediaType, scalab
 			// Set the default size to that in the wiki configuration if
 			// 1. The original image width is not smaller than the default
 			// 2. If the image is an SVG drawing
-			var dimensions;
+			let dimensions;
 			if ( originalDimensions.width >= defaultThumbSize || mediaType === 'DRAWING' ) {
 				dimensions = ve.dm.Scalable.static.getDimensionsFromValue( {
 					width: defaultThumbSize
@@ -371,7 +371,7 @@ ve.dm.MWImageNode.prototype.getScalable = function () {
 					width: info.width,
 					height: info.height
 				} );
-				var oldMediaType = this.mediaType;
+				const oldMediaType = this.mediaType;
 				// Update media type
 				this.mediaType = info.mediatype;
 				// Update according to type

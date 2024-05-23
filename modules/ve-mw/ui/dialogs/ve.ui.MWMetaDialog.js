@@ -77,7 +77,7 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
  * @return {boolean} Whether settings were changed.
  */
 ve.ui.MWMetaDialog.prototype.compareSettings = function () {
-	var newSettings = this.extractSettings();
+	const newSettings = this.extractSettings();
 	return !ve.compare( newSettings, this.oldSettings );
 };
 
@@ -90,14 +90,14 @@ ve.ui.MWMetaDialog.prototype.compareSettings = function () {
  * }
  */
 ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
-	var widgetList = [];
+	const widgetList = [];
 
 	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( this.bookletLayout.pages, ( pageName, page ) => {
-		var fieldsets = page.getFieldsets();
+		const fieldsets = page.getFieldsets();
 		fieldsets.forEach( ( fieldset, fieldsetIndex ) => {
 			fieldset.items.forEach( ( item, itemIndex ) => {
-				var widget = item.fieldWidget;
+				const widget = item.fieldWidget;
 				// we can recheck the value
 				widgetList.push( {
 					widget: widget,
@@ -115,7 +115,7 @@ ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
  * Assigns updateActions to all widget updates.
  */
 ve.ui.MWMetaDialog.prototype.assignEvents = function () {
-	var widgetList = this.getAllWidgets();
+	const widgetList = this.getAllWidgets();
 
 	widgetList.forEach( ( value ) => {
 		value.widget.connect( this, {
@@ -153,7 +153,7 @@ ve.ui.MWMetaDialog.prototype.extractValue = function ( field ) {
  * }
  */
 ve.ui.MWMetaDialog.prototype.extractSettings = function () {
-	var ret = []; // return value
+	const ret = []; // return value
 
 	this.widgetList.forEach( ( value ) => {
 		if ( value.hasChildren ) {
@@ -195,7 +195,7 @@ ve.ui.MWMetaDialog.prototype.isEditing = function () {
  * @inheritdoc
  */
 ve.ui.MWMetaDialog.prototype.getActionProcess = function ( action ) {
-	var surfaceModel = this.getFragment().getSurface();
+	const surfaceModel = this.getFragment().getSurface();
 
 	if ( action === 'done' ) {
 		return new OO.ui.Process( () => {
@@ -217,7 +217,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 	data = data || {};
 	return ve.ui.MWMetaDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( () => {
-			var surfaceModel = this.getFragment().getSurface(),
+			const surfaceModel = this.getFragment().getSurface(),
 				promises = [],
 				selectWidget = this.bookletLayout.outlineSelectWidget,
 				visualOnlyPages = [ 'categories', 'settings', 'advancedSettings', 'languages' ],
@@ -234,7 +234,7 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data ) {
 			// Force all previous transactions to be separate from this history state
 			surfaceModel.pushStaging();
 
-			var config = {
+			const config = {
 				data: data,
 				isReadOnly: this.isReadOnly()
 			};

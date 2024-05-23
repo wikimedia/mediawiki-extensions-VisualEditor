@@ -56,7 +56,7 @@ if ( OO.ui.isMobile() ) {
  * @inheritdoc
  */
 ve.ui.MWSaveTool.prototype.onUpdateState = function () {
-	var wasSaveable = !this.isDisabled(),
+	const wasSaveable = !this.isDisabled(),
 		isSaveable = this.toolbar instanceof ve.ui.TargetToolbar &&
 			this.toolbar.target.isSaveable();
 

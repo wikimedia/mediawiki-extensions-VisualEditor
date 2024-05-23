@@ -20,7 +20,7 @@
  * @cfg {boolean} [readOnly] Parameter is read-only
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, config ) {
-	var paramName = parameter.getName();
+	const paramName = parameter.getName();
 
 	// Configuration initialization
 	config = ve.extendObject( {
@@ -42,10 +42,10 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, config ) {
 	this.$field = $( '<div>' );
 
 	// Construct the field docs for the template description
-	var $doc = $( '<div>' )
+	const $doc = $( '<div>' )
 		.attr( 'id', OO.ui.generateElementId() )
 		.addClass( 've-ui-mwParameterPage-doc' );
-	var description = this.spec.getParameterDescription( paramName );
+	const description = this.spec.getParameterDescription( paramName );
 	if ( description ) {
 		$( '<p>' ).text( description ).appendTo( $doc );
 	}
@@ -61,13 +61,13 @@ ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, config ) {
 		this.valueInput.setReadOnly( true );
 	}
 
-	var labelElement = new OO.ui.LabelWidget( {
+	const labelElement = new OO.ui.LabelWidget( {
 		input: this.valueInput,
 		label: this.spec.getParameterLabel( paramName ),
 		classes: [ 've-ui-mwParameterPage-label' ]
 	} );
 
-	var statusIndicator;
+	let statusIndicator;
 	if ( this.parameter.isRequired() ) {
 		$( '<p>' )
 			.addClass( 've-ui-mwParameterPage-doc-required' )
@@ -163,7 +163,7 @@ OO.inheritClass( ve.ui.MWParameterPage, OO.ui.PageLayout );
  * @return {Object}
  */
 ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
-	var valueInputConfig = {
+	const valueInputConfig = {
 		autosize: true,
 		required: this.parameter.isRequired()
 	};
@@ -186,7 +186,7 @@ ve.ui.MWParameterPage.prototype.getDefaultInputConfig = function () {
  * @return {OO.ui.InputWidget}
  */
 ve.ui.MWParameterPage.prototype.createValueInput = function () {
-	var type = this.parameter.getType(),
+	const type = this.parameter.getType(),
 		value = this.parameter.getValue(),
 		valueInputConfig = this.getDefaultInputConfig();
 
@@ -297,7 +297,7 @@ ve.ui.MWParameterPage.prototype.containsSomeValue = function () {
  * @param {string} value
  */
 ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
-	var value = this.valueInput.getValue();
+	const value = this.valueInput.getValue();
 
 	if ( !this.edited ) {
 		ve.track( 'activity.transclusion', { action: 'edit-parameter-value' } );

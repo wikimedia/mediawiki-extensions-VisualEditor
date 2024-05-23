@@ -7,7 +7,7 @@
 		"./eslint-shared.json"
 	],
 	"rules": {
-		"no-var": "off",
+		"prefer-const": "off",
 		"prefer-arrow-callback": "error",
 		"implicit-arrow-linebreak": "error",
 		"arrow-body-style": "error"

@@ -51,7 +51,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	// non-arrow functions that return this. We can't just return
 	// this.$textbox either as the collection could be cloned.
 	/* eslint es-x/no-arrow-functions: error */
-	var surface = this;
+	const surface = this;
 	// Backwards support for the textSelection API
 	this.$textbox.textSelection( 'register', {
 		getContents: function () {
@@ -62,7 +62,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 			return this;
 		},
 		getSelection: function () {
-			var range = surface.getModel().getSelection().getCoveringRange();
+			const range = surface.getModel().getSelection().getCoveringRange();
 			if ( !range ) {
 				return '';
 			}
@@ -75,7 +75,7 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 			return this;
 		},
 		getCaretPosition: function ( options ) {
-			var range = surface.getModel().getSelection().getCoveringRange(),
+			const range = surface.getModel().getSelection().getCoveringRange(),
 				surfaceModel = surface.getModel(),
 				caretPos = range ? surfaceModel.getSourceOffsetFromOffset( range.start ) : 0;
 

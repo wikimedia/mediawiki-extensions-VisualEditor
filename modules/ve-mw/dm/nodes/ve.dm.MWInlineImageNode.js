@@ -39,7 +39,7 @@ ve.dm.MWInlineImageNode.static.isContent = true;
 ve.dm.MWInlineImageNode.static.name = 'mwInlineImage';
 
 ve.dm.MWInlineImageNode.static.preserveHtmlAttributes = function ( attribute ) {
-	var attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'data-mw' ];
+	const attributes = [ 'typeof', 'class', 'src', 'resource', 'width', 'height', 'href', 'data-mw' ];
 	return attributes.indexOf( attribute ) === -1;
 };
 
@@ -48,33 +48,33 @@ ve.dm.MWInlineImageNode.static.matchTagNames = [ 'span' ];
 ve.dm.MWInlineImageNode.static.disallowedAnnotationTypes = [ 'link' ];
 
 ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter ) {
-	var container = domElements[ 0 ]; // <span>
+	const container = domElements[ 0 ]; // <span>
 	if ( !container.children.length ) {
 		// Malformed image, alienate (T267282)
 		return null;
 	}
-	var img = container.querySelector( '.mw-file-element' ); // <img>, <video>, <audio>, or <span> if mw:Error
+	const img = container.querySelector( '.mw-file-element' ); // <img>, <video>, <audio>, or <span> if mw:Error
 	// Images copied from the old parser output can have typeof=mw:Image but no resource information. T337438
 	if ( !img || !img.hasAttribute( 'resource' ) ) {
 		return [];
 	}
-	var imgWrapper = img.parentNode; // <a> or <span>
-	var typeofAttrs = ( container.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
-	var mwDataJSON = container.getAttribute( 'data-mw' );
-	var mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
-	var classes = container.getAttribute( 'class' );
-	var recognizedClasses = [];
-	var errorIndex = typeofAttrs.indexOf( 'mw:Error' );
-	var isError = errorIndex !== -1;
-	var errorText = isError ? img.textContent : null;
-	var width = img.getAttribute( isError ? 'data-width' : 'width' );
-	var height = img.getAttribute( isError ? 'data-height' : 'height' );
+	const imgWrapper = img.parentNode; // <a> or <span>
+	const typeofAttrs = ( container.getAttribute( 'typeof' ) || '' ).trim().split( /\s+/ );
+	const mwDataJSON = container.getAttribute( 'data-mw' );
+	const mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
+	let classes = container.getAttribute( 'class' );
+	const recognizedClasses = [];
+	const errorIndex = typeofAttrs.indexOf( 'mw:Error' );
+	const isError = errorIndex !== -1;
+	const errorText = isError ? img.textContent : null;
+	const width = img.getAttribute( isError ? 'data-width' : 'width' );
+	const height = img.getAttribute( isError ? 'data-height' : 'height' );
 
-	var href = imgWrapper.getAttribute( 'href' );
+	let href = imgWrapper.getAttribute( 'href' );
 	if ( href ) {
 		// Convert absolute URLs to relative if the href refers to a page on this wiki.
 		// Otherwise Parsoid generates |link= options for copy-pasted images (T193253).
-		var targetData = mw.libs.ve.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
+		const targetData = mw.libs.ve.getTargetDataFromHref( href, converter.getTargetHtmlDocument() );
 		if ( targetData.isInternal ) {
 			href = mw.libs.ve.encodeParsoidResourceName( targetData.title );
 		}
@@ -84,9 +84,9 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 		typeofAttrs.splice( errorIndex, 1 );
 	}
 
-	var types = this.rdfaToTypes[ typeofAttrs[ 0 ] ];
+	const types = this.rdfaToTypes[ typeofAttrs[ 0 ] ];
 
-	var attributes = {
+	const attributes = {
 		mediaClass: types.mediaClass,
 		mediaTag: img.nodeName.toLowerCase(),
 		type: types.frameType,
@@ -116,7 +116,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	// Vertical alignment
 	attributes.valign = 'default';
 	[ 'midde', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' ].some( ( valign ) => {
-		var className = 'mw-valign-' + valign;
+		const className = 'mw-valign-' + valign;
 		if ( classes.indexOf( className ) !== -1 ) {
 			attributes.valign = valign;
 			recognizedClasses.push( className );
@@ -140,7 +140,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 	// Store unrecognized classes so we can restore them on the way out
 	attributes.unrecognizedClasses = OO.simpleArrayDifference( classes, recognizedClasses );
 
-	var dataElement = { type: this.name, attributes: attributes };
+	const dataElement = { type: this.name, attributes: attributes };
 
 	this.storeGeneratedContents( dataElement, dataElement.attributes.src, converter.getStore() );
 
@@ -148,7 +148,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 };
 
 ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	var attributes = dataElement.attributes,
+	let attributes = dataElement.attributes,
 		container = doc.createElement( 'span' ),
 		imgWrapper = doc.createElement( attributes.href ? 'a' : 'span' ),
 		img = doc.createElement( attributes.isError ? 'span' : attributes.mediaTag ),
@@ -156,8 +156,8 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		originalClasses = attributes.originalClasses;
 
 	ve.setDomAttributes( img, attributes, [ 'resource' ] );
-	var width = attributes.width;
-	var height = attributes.height;
+	const width = attributes.width;
+	const height = attributes.height;
 	if ( width !== null ) {
 		img.setAttribute( attributes.isError ? 'data-width' : 'width', width );
 	}
@@ -165,7 +165,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		img.setAttribute( attributes.isError ? 'data-width' : 'height', height );
 	}
 
-	var srcAttr = this.tagsToSrcAttrs[ img.nodeName.toLowerCase() ];
+	const srcAttr = this.tagsToSrcAttrs[ img.nodeName.toLowerCase() ];
 	if ( srcAttr && !attributes.isError ) {
 		img.setAttribute( srcAttr, attributes.src );
 	}
@@ -226,7 +226,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		if ( converter.isForPreview() ) {
 			imgWrapper.classList.add( 'new' );
 		}
-		var filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
+		const filename = mw.libs.ve.normalizeParsoidResourceName( attributes.resource || '' );
 		img.appendChild( doc.createTextNode( attributes.errorText ? attributes.errorText : filename ) );
 	}
 

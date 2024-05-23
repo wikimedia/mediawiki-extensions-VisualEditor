@@ -57,7 +57,7 @@ OO.inheritClass( ve.ui.MWFloatingHelpElement, OO.ui.Element );
 
 ve.ui.MWFloatingHelpElement.prototype.onClick = function () {
 	if ( !this.helpButton.hasFlag( 'primary' ) ) {
-		var window = this.windowManager.openWindow( this.helpDialog );
+		const window = this.windowManager.openWindow( this.helpDialog );
 
 		window.opening.then( this.updateButton.bind( this, true ) );
 		window.closing.then( this.updateButton.bind( this, false ) );

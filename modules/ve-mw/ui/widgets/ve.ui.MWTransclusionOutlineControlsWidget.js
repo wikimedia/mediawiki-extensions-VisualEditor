@@ -73,7 +73,7 @@ ve.ui.MWTransclusionOutlineControlsWidget = function OoUiOutlineControlsWidget()
 			this.addTemplateButton.$element,
 			this.addWikitextButton.$element
 		);
-	var $movers = $( '<div>' )
+	const $movers = $( '<div>' )
 		.addClass( 've-ui-mwTransclusionOutlineControlsWidget-movers' )
 		.append(
 			this.upButton.$element,

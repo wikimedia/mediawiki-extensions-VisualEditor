@@ -15,7 +15,7 @@
  * @hideconstructor
  */
 ( function () {
-	var revCache = {};
+	const revCache = {};
 
 	mw.libs.ve = mw.libs.ve || {};
 
@@ -29,10 +29,10 @@
 		 */
 		getModelFromResponse: function ( response, section ) {
 			// This method is only called after actually loading these, see `parseDocumentModulePromise`
-			var targetClass = ve.init.mw.ArticleTarget,
+			const targetClass = ve.init.mw.ArticleTarget,
 				data = response ? ( response.visualeditor || response.visualeditoredit ) : null;
 			if ( data && typeof data.content === 'string' ) {
-				var doc = targetClass.static.parseDocument( data.content, 'visual', section, section !== null );
+				const doc = targetClass.static.parseDocument( data.content, 'visual', section, section !== null );
 				mw.libs.ve.stripRestbaseIds( doc );
 				return targetClass.static.createModelFromDom( doc, 'visual' );
 			}
@@ -53,7 +53,7 @@
 			parseDocumentModulePromise = parseDocumentModulePromise || $.Deferred().resolve().promise();
 			section = section !== undefined ? section : null;
 
-			var cacheKey = revId + ( section !== null ? '/' + section : '' );
+			const cacheKey = revId + ( section !== null ? '/' + section : '' );
 
 			revCache[ cacheKey ] = revCache[ cacheKey ] ||
 				mw.libs.ve.targetLoader.requestParsoidData(
@@ -89,8 +89,8 @@
 			parseDocumentModulePromise = parseDocumentModulePromise || $.Deferred().resolve().promise();
 			oldPageName = oldPageName || mw.config.get( 'wgRelevantPageName' );
 
-			var oldRevPromise = typeof oldIdOrPromise === 'number' ? this.fetchRevision( oldIdOrPromise, oldPageName, null, parseDocumentModulePromise ) : oldIdOrPromise;
-			var newRevPromise = typeof newIdOrPromise === 'number' ? this.fetchRevision( newIdOrPromise, newPageName, null, parseDocumentModulePromise ) : newIdOrPromise;
+			const oldRevPromise = typeof oldIdOrPromise === 'number' ? this.fetchRevision( oldIdOrPromise, oldPageName, null, parseDocumentModulePromise ) : oldIdOrPromise;
+			const newRevPromise = typeof newIdOrPromise === 'number' ? this.fetchRevision( newIdOrPromise, newPageName, null, parseDocumentModulePromise ) : newIdOrPromise;
 
 			return $.when( oldRevPromise, newRevPromise, parseDocumentModulePromise ).then( ( oldDoc, newDoc ) => {
 				// TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.

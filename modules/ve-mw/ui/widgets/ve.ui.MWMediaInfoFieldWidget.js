@@ -41,7 +41,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 
 	// Initialization
 	if ( typeof content === 'string' ) {
-		var datetime;
+		let datetime;
 		if ( config.isDate && ( datetime = moment( content ) ).isValid() ) {
 			content = datetime.fromNow();
 		}
@@ -138,8 +138,8 @@ ve.ui.MWMediaInfoFieldWidget.static.threshold = 24;
  */
 ve.ui.MWMediaInfoFieldWidget.prototype.initialize = function () {
 	if ( this.getType() === 'description' ) {
-		var actualHeight = this.$text.prop( 'scrollHeight' );
-		var containerHeight = this.$text.outerHeight( true );
+		const actualHeight = this.$text.prop( 'scrollHeight' );
+		const containerHeight = this.$text.outerHeight( true );
 
 		if ( actualHeight < containerHeight + this.constructor.static.threshold ) {
 			// The contained result is big enough to show. Remove the maximum height

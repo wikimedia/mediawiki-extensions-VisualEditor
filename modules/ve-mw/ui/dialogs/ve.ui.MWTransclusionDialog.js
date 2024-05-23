@@ -76,18 +76,18 @@ ve.ui.MWTransclusionDialog.static.isSmallScreen = function () {
  * @param {number} places Number of places to move the selected item
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places ) {
-	var part = this.transclusionModel.getPartFromId( this.bookletLayout.getSelectedTopLevelPartId() );
+	const part = this.transclusionModel.getPartFromId( this.bookletLayout.getSelectedTopLevelPartId() );
 	if ( !part ) {
 		return;
 	}
 
-	var newPlace = this.transclusionModel.getParts().indexOf( part ) + places;
+	const newPlace = this.transclusionModel.getParts().indexOf( part ) + places;
 	if ( newPlace < 0 || newPlace >= this.transclusionModel.getParts().length ) {
 		return;
 	}
 
 	// Move part to new location, and if dialog is loaded switch to new part page
-	var promise = this.transclusionModel.addPart( part, newPlace );
+	const promise = this.transclusionModel.addPart( part, newPlace );
 	if ( this.loaded && !this.preventReselection ) {
 		// FIXME: Should be handled internally {@see ve.ui.MWTwoPaneTransclusionDialogLayout}
 		promise.done( this.bookletLayout.focusPart.bind( this.bookletLayout, part.getId() ) );
@@ -100,7 +100,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsMove = function ( places )
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
-	var controls = this.bookletLayout.getOutlineControls();
+	const controls = this.bookletLayout.getOutlineControls();
 	// T301914: Safe-guard for when a keyboard shortcut triggers this, instead of the actual button
 	if ( !controls.isVisible() ||
 		!controls.removeButton.isVisible() ||
@@ -109,7 +109,7 @@ ve.ui.MWTransclusionDialog.prototype.onOutlineControlsRemove = function () {
 		return;
 	}
 
-	var partId = this.bookletLayout.getSelectedTopLevelPartId(),
+	const partId = this.bookletLayout.getSelectedTopLevelPartId(),
 		part = this.transclusionModel.getPartFromId( partId );
 	if ( part ) {
 		this.transclusionModel.removePart( part );
@@ -142,7 +142,7 @@ ve.ui.MWTransclusionDialog.prototype.addWikitext = function () {
  */
 ve.ui.MWTransclusionDialog.prototype.addParameter = function ( e ) {
 	// Check if the focus was in e.g. a parameter list or filter input when the hotkey was pressed
-	var partId = this.bookletLayout.sidebar.findPartIdContainingElement( e.target ),
+	let partId = this.bookletLayout.sidebar.findPartIdContainingElement( e.target ),
 		part = this.transclusionModel.getPartFromId( partId );
 
 	if ( !( part instanceof ve.dm.MWTemplateModel ) ) {
@@ -161,7 +161,7 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function ( e ) {
 
 	// TODO: Use a distinct class for placeholder model rather than
 	// these magical "empty" constants.
-	var placeholderParameter = new ve.dm.MWParameterModel( part );
+	const placeholderParameter = new ve.dm.MWParameterModel( part );
 	part.addParameter( placeholderParameter );
 	this.bookletLayout.focusPart( placeholderParameter.getId() );
 
@@ -173,7 +173,7 @@ ve.ui.MWTransclusionDialog.prototype.addParameter = function ( e ) {
  */
 ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added ) {
 	ve.ui.MWTransclusionDialog.super.prototype.onReplacePart.call( this, removed, added );
-	var parts = this.transclusionModel.getParts();
+	const parts = this.transclusionModel.getParts();
 
 	if ( parts.length === 0 ) {
 		this.addPart( new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel ) );
@@ -195,9 +195,9 @@ ve.ui.MWTransclusionDialog.prototype.onReplacePart = function ( removed, added )
  */
 ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 	// Lower-case modifier and key names as specified in {@see ve.ui.Trigger}
-	var isMac = ve.getSystemPlatform() === 'mac',
+	const isMac = ve.getSystemPlatform() === 'mac',
 		meta = isMac ? 'meta+' : 'ctrl+';
-	var hotkeys = {
+	const hotkeys = {
 		addTemplate: meta + 'd',
 		addWikitext: meta + 'shift+y',
 		addParameter: meta + 'shift+d',
@@ -207,7 +207,7 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 		removeBackspace: meta + 'backspace'
 	};
 
-	var notInTextFields = /^(?!INPUT|TEXTAREA)/i;
+	const notInTextFields = /^(?!INPUT|TEXTAREA)/i;
 	this.connectHotKeyBinding( hotkeys.addTemplate, this.addTemplatePlaceholder.bind( this ) );
 	this.connectHotKeyBinding( hotkeys.addWikitext, this.addWikitext.bind( this ) );
 	this.connectHotKeyBinding( hotkeys.addParameter, this.addParameter.bind( this ) );
@@ -218,7 +218,7 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
 		this.connectHotKeyBinding( hotkeys.removeBackspace, this.onOutlineControlsRemove.bind( this ), notInTextFields );
 	}
 
-	var controls = this.bookletLayout.getOutlineControls();
+	const controls = this.bookletLayout.getOutlineControls();
 	this.addHotkeyToTitle( controls.addTemplateButton, hotkeys.addTemplate );
 	this.addHotkeyToTitle( controls.addWikitextButton, hotkeys.addWikitext );
 	this.addHotkeyToTitle( controls.upButton, hotkeys.moveUp );
@@ -256,7 +256,7 @@ ve.ui.MWTransclusionDialog.prototype.addHotkeyToTitle = function ( element, hotk
  * @param {jQuery.Event} e Key down event
  */
 ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
-	var hotkey = new ve.ui.Trigger( e ).toString(),
+	const hotkey = new ve.ui.Trigger( e ).toString(),
 		trigger = this.hotkeyTriggers[ hotkey ];
 
 	if ( trigger && ( !trigger.validTypes || trigger.validTypes.test( e.target.nodeName ) ) ) {
@@ -270,7 +270,7 @@ ve.ui.MWTransclusionDialog.prototype.onKeyDown = function ( e ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
-	var page = ve.ui.MWTransclusionDialog.super.prototype.getPageFromPart.call( this, part );
+	const page = ve.ui.MWTransclusionDialog.super.prototype.getPageFromPart.call( this, part );
 	if ( !page && part instanceof ve.dm.MWTransclusionContentModel ) {
 		return new ve.ui.MWTransclusionContentPage( part, part.getId(), { $overlay: this.$overlay, isReadOnly: this.isReadOnly() } );
 	}
@@ -283,11 +283,11 @@ ve.ui.MWTransclusionDialog.prototype.getPageFromPart = function ( part ) {
  * @protected
  */
 ve.ui.MWTransclusionDialog.prototype.autoExpandSidebar = function () {
-	var expandSidebar;
+	let expandSidebar;
 
-	var isSmallScreen = this.constructor.static.isSmallScreen();
+	const isSmallScreen = this.constructor.static.isSmallScreen();
 
-	var showOtherActions = isSmallScreen ||
+	const showOtherActions = isSmallScreen ||
 		// Check for unknown actions, show the toolbar if any are available.
 		this.actions.getOthers().some( ( action ) => action.action !== 'mode' );
 	this.actions.forEach( { actions: [ 'mode' ] }, ( action ) => {
@@ -348,9 +348,9 @@ ve.ui.MWTransclusionDialog.prototype.toggleSidebar = function ( expandSidebar ) 
 		}, OO.ui.theme.getDialogTransitionDuration() );
 
 		// Reapply selection and scrolling when switching between panes.
-		var selectedPage = this.bookletLayout.getCurrentPage();
+		const selectedPage = this.bookletLayout.getCurrentPage();
 		if ( selectedPage ) {
-			var name = selectedPage.getName();
+			const name = selectedPage.getName();
 			// Align whichever panel is becoming visible, after animation completes.
 			// TODO: Should hook onto an animation promise—but is this possible when pure CSS?
 			setTimeout( () => {
@@ -385,7 +385,7 @@ ve.ui.MWTransclusionDialog.prototype.updateTitle = function () {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
-	var isExpanded = this.isSidebarExpanded,
+	const isExpanded = this.isSidebarExpanded,
 		label = ve.msg( isExpanded ?
 			'visualeditor-dialog-transclusion-collapse-options' :
 			'visualeditor-dialog-transclusion-expand-options' );
@@ -397,7 +397,7 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
 
 	// The button is only visible on very narrow screens, {@see autoExpandSidebar}.
 	// It's always needed, except in the initial placeholder state.
-	var isInitialState = !isExpanded && this.transclusionModel.isEmpty(),
+	const isInitialState = !isExpanded && this.transclusionModel.isEmpty(),
 		canCollapse = !isInitialState;
 	this.actions.setAbilities( { mode: canCollapse } );
 };
@@ -408,13 +408,13 @@ ve.ui.MWTransclusionDialog.prototype.updateModeActionState = function () {
  * @param {ve.dm.MWTransclusionPartModel} part Part to add
  */
 ve.ui.MWTransclusionDialog.prototype.addPart = function ( part ) {
-	var parts = this.transclusionModel.getParts(),
+	const parts = this.transclusionModel.getParts(),
 		partId = this.bookletLayout.getTopLevelPartIdForSelection(),
 		selectedPart = this.transclusionModel.getPartFromId( partId );
 	// Insert after selected part, or at the end if nothing is selected
-	var index = selectedPart ? parts.indexOf( selectedPart ) + 1 : parts.length;
+	const index = selectedPart ? parts.indexOf( selectedPart ) + 1 : parts.length;
 	// Add the part, and if dialog is loaded switch to part page
-	var promise = this.transclusionModel.addPart( part, index );
+	const promise = this.transclusionModel.addPart( part, index );
 	if ( this.loaded && !this.preventReselection ) {
 		promise.done( this.bookletLayout.focusPart.bind( this.bookletLayout, part.getId() ) );
 	}
@@ -448,7 +448,7 @@ ve.ui.MWTransclusionDialog.prototype.closeConfirm = function ( prompt ) {
  * @inheritdoc
  */
 ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
-	var willLoseProgress = this.getMode() === 'insert' ?
+	const willLoseProgress = this.getMode() === 'insert' ?
 		// A new template with no parameters is not considered valuable.
 		this.transclusionModel.containsValuableData() :
 		// The user has changed a parameter, and is not on the template search page.
@@ -492,14 +492,14 @@ ve.ui.MWTransclusionDialog.prototype.getActionProcess = function ( action ) {
  * @private
  */
 ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
-	var backButton = this.actions.get( { flags: [ 'back' ] } ).pop(),
+	const backButton = this.actions.get( { flags: [ 'back' ] } ).pop(),
 		saveButton = this.actions.get( { actions: [ 'done' ] } ).pop();
 
 	if ( saveButton && this.getMode() === 'edit' ) {
 		saveButton.setLabel( ve.msg( 'visualeditor-dialog-transclusion-action-save' ) );
 	}
 
-	var closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
+	const closeButton = this.actions.get( { flags: [ 'close' ] } ).pop(),
 		canGoBack = this.getMode() === 'insert' && this.canGoBack && !this.transclusionModel.isEmpty();
 
 	closeButton.toggle( !canGoBack );
@@ -514,7 +514,7 @@ ve.ui.MWTransclusionDialog.prototype.updateActionSet = function () {
 ve.ui.MWTransclusionDialog.prototype.resetDialog = function () {
 	this.transclusionModel.reset();
 	this.bookletLayout.clearPages();
-	var placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
+	const placeholderPage = new ve.dm.MWTemplatePlaceholderModel( this.transclusionModel );
 	this.transclusionModel.addPart( placeholderPage )
 		.done( () => {
 			this.bookletLayout.focusPart( placeholderPage.getId() );
@@ -538,7 +538,7 @@ ve.ui.MWTransclusionDialog.prototype.initialize = function () {
 	} );
 	ve.targetLinksToNewWindow( this.multipartMessage.$element[ 0 ] );
 
-	var helpPopup = new ve.ui.MWFloatingHelpElement( {
+	const helpPopup = new ve.ui.MWFloatingHelpElement( {
 		label: mw.message( 'visualeditor-dialog-transclusion-help-title' ).text(),
 		title: mw.message( 'visualeditor-dialog-transclusion-help-title' ).text(),
 		$message: new OO.ui.FieldsetLayout( {
@@ -625,7 +625,7 @@ ve.ui.MWTemplateDialog.prototype.getMessageButton = function ( message, icon ) {
 	// Messages that can be used here:
 	// * visualeditor-dialog-transclusion-help-page-help
 	// * visualeditor-dialog-transclusion-help-page-shortcuts
-	var $link = mw.message( message ).parseDom(),
+	const $link = mw.message( message ).parseDom(),
 		button = new OO.ui.ButtonWidget( {
 			label: $link.text(),
 			href: $link.attr( 'href' ),

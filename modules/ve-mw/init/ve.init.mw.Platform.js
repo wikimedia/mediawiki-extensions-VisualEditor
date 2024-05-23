@@ -88,7 +88,7 @@ ve.init.mw.Platform.prototype.getUserName = function () {
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.parseNumber = function ( value ) {
-	var number = $.tablesorter.getParser( 'number' ).format( value );
+	const number = $.tablesorter.getParser( 'number' ).format( value );
 	// formatDigit returns -Infinity when parsing fails, change this to NaN
 	return number !== -Infinity ? number : NaN;
 };
@@ -121,8 +121,8 @@ ve.init.mw.Platform.prototype.getConfig = mw.config.get.bind( mw.config );
  */
 ve.init.mw.Platform.prototype.getUserConfig = function ( keys ) {
 	if ( Array.isArray( keys ) ) {
-		var values = mw.user.options.get( keys );
-		var parsedValues = {};
+		const values = mw.user.options.get( keys );
+		const parsedValues = {};
 		Object.keys( values ).forEach( ( value ) => {
 			try {
 				parsedValues[ value ] = JSON.parse( values[ value ] );
@@ -160,7 +160,7 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 			return false;
 		}
 		// JSON encode all the values for API storage
-		var jsonValues = {};
+		const jsonValues = {};
 		Object.keys( keyOrValueMap ).forEach( ( key ) => {
 			jsonValues[ key ] = JSON.stringify( keyOrValueMap[ key ] );
 		} );
@@ -171,7 +171,7 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 			return false;
 		}
 		// JSON encode the value for API storage
-		var jsonValue = JSON.stringify( value );
+		const jsonValue = JSON.stringify( value );
 		ve.init.target.getLocalApi().saveOption( keyOrValueMap, jsonValue );
 		return mw.user.options.set( keyOrValueMap, jsonValue );
 	}
@@ -189,7 +189,7 @@ ve.init.mw.Platform.prototype.createSessionStorage = function () {
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.addParsedMessages = function ( messages ) {
-	for ( var key in messages ) {
+	for ( const key in messages ) {
 		this.parsedMessages[ key ] = messages[ key ];
 	}
 };
@@ -221,7 +221,7 @@ ve.init.mw.Platform.prototype.getLanguageCodes = function () {
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.getLanguageName = function ( code ) {
-	var languageNames = mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
+	const languageNames = mw.language.getData( mw.config.get( 'wgUserLanguage' ), 'languageNames' ) ||
 		$.uls.data.getAutonyms();
 	return languageNames[ code ] || code;
 };
@@ -249,7 +249,7 @@ ve.init.mw.Platform.prototype.getUserLanguages = mw.language.getFallbackLanguage
  */
 ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 	return mw.loader.using( 'mediawiki.language.specialCharacters' ).then( () => {
-		var specialCharacterGroups = require( 'mediawiki.language.specialCharacters' ),
+		const specialCharacterGroups = require( 'mediawiki.language.specialCharacters' ),
 			characters = {},
 			otherGroupName = mw.msg( 'visualeditor-special-characters-group-other' ),
 			otherMsg = mw.message( 'visualeditor-quick-access-characters.json' ).plain(),
@@ -257,7 +257,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			rtlGroups = [ 'arabic', 'arabicextended', 'hebrew' ];
 
 		try {
-			var other = JSON.parse( otherMsg );
+			const other = JSON.parse( otherMsg );
 			if ( other ) {
 				characters.other = {
 					label: otherGroupName,
@@ -272,10 +272,10 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 
 		// eslint-disable-next-line no-jquery/no-each-util
 		$.each( specialCharacterGroups, ( groupName, groupCharacters ) => {
-			var groupObject = {}; // button label => character data to insert
+			const groupObject = {}; // button label => character data to insert
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( groupCharacters, ( charKey, charVal ) => {
-				var key, val;
+				let key, val;
 				// VE has a different format and it would be a pain to change it now
 				if ( typeof charVal === 'string' ) {
 					key = charVal;
@@ -326,7 +326,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.decodeEntities = function ( html ) {
-	var character = ve.safeDecodeEntities( html );
+	const character = ve.safeDecodeEntities( html );
 	return [
 		{
 			type: 'mwEntity',
