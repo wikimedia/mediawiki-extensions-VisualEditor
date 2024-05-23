@@ -39,10 +39,10 @@ ve.dm.MWDefaultSortMetaItem.static.matchFunction = function ( domElement ) {
 };
 
 ve.dm.MWDefaultSortMetaItem.static.toDataElement = function ( domElements ) {
-	let mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
+	const mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
-		input = ve.getProp( mwData, 'parts', '0', 'template', 'target', 'wt' ),
-		prefix, sortKey;
+		input = ve.getProp( mwData, 'parts', '0', 'template', 'target', 'wt' );
+	let prefix, sortKey;
 	if ( input ) {
 		prefix = input.split( ':' )[ 0 ];
 		sortKey = input.slice( prefix.length + 1 );

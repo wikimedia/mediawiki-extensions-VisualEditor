@@ -96,9 +96,9 @@ ve.ui.MWTocWidget.prototype.onMetaListRemove = function ( metaItem ) {
  * Initialize TOC based on the presence of magic words
  */
 ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
-	let i = 0,
-		items = this.metaList.getItemsInGroup( 'mwTOC' ),
+	const items = this.metaList.getItemsInGroup( 'mwTOC' ),
 		len = items.length;
+	let i = 0;
 	if ( len > 0 ) {
 		for ( ; i < len; i++ ) {
 			if ( items[ i ] instanceof ve.dm.MWTOCMetaItem ) {
@@ -153,11 +153,10 @@ ve.ui.MWTocWidget.prototype.updateNode = function ( viewNode ) {
  * Based on generateTOC in Linker.php
  */
 ve.ui.MWTocWidget.prototype.build = function () {
-	let $newTocList = $( '<ul>' ),
+	const $newTocList = $( '<ul>' ),
 		nodes = this.doc.getNodesByType( 'mwHeading', true ),
 		surfaceView = this.surface.getView(),
 		documentView = surfaceView.getDocument(),
-		lastLevel = 0,
 		stack = [],
 		url = new URL( location.href );
 
@@ -171,6 +170,7 @@ ve.ui.MWTocWidget.prototype.build = function () {
 		return false;
 	}
 
+	let lastLevel = 0;
 	for ( let i = 0, l = nodes.length; i < l; i++ ) {
 		const modelNode = nodes[ i ];
 		const level = modelNode.getAttribute( 'level' );

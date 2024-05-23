@@ -601,10 +601,9 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 			.addClass( 've-ui-mwMediaDialog-panel-imageinfo-title' )
 	);
 
-	let i, field;
 	// Clean data from the API responses
-	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
-		field = apiDataKeysConfig[ i ].name;
+	for ( let i = 0; i < apiDataKeysConfig.length; i++ ) {
+		const field = apiDataKeysConfig[ i ].name;
 		if ( apiDataKeysConfig[ i ].format === 'html' ) {
 			apiData[ field ] = new OO.ui.HtmlSnippet( apiDataKeysConfig[ i ].value );
 
@@ -644,8 +643,8 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	}
 
 	// Attach all fields in order
-	for ( i = 0; i < apiDataKeysConfig.length; i++ ) {
-		field = apiDataKeysConfig[ i ].name;
+	for ( let i = 0; i < apiDataKeysConfig.length; i++ ) {
+		const field = apiDataKeysConfig[ i ].name;
 		if ( apiData[ field ] ) {
 			const $section = apiDataKeysConfig[ i ].view.primary ? $main : $details;
 
@@ -722,7 +721,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	}
 
 	// Initialize fields
-	for ( field in fields ) {
+	for ( const field in fields ) {
 		fields[ field ].initialize();
 	}
 	// Let the scrollbar appear naturally if it should

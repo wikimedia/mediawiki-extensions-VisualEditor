@@ -132,10 +132,10 @@ ve.ui.MWLinkAction.prototype.autolinkMagicLink = function () {
  * @return {boolean} Action was executed
  */
 ve.ui.MWLinkAction.prototype.open = function () {
-	let fragment = this.surface.getModel().getFragment(),
-		selectedNode = fragment.getSelectedNode(),
-		windowName = 'link';
+	const fragment = this.surface.getModel().getFragment(),
+		selectedNode = fragment.getSelectedNode();
 
+	let windowName = 'link';
 	if ( selectedNode instanceof ve.dm.MWNumberedExternalLinkNode ) {
 		windowName = 'linkNode';
 	} else if ( selectedNode instanceof ve.dm.MWMagicLinkNode ) {

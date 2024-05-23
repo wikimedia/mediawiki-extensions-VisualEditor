@@ -991,11 +991,11 @@ ve.ui.MWGalleryDialog.prototype.isHighlightedItemModified = function () {
  * Insert or update the node in the document model from the new values
  */
 ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
-	let surfaceModel = this.getFragment().getSurface(),
+	const surfaceModel = this.getFragment().getSurface(),
 		surfaceModelDocument = surfaceModel.getDocument(),
-		items = this.galleryGroup.items,
-		data = [];
+		items = this.galleryGroup.items;
 
+	let data = [];
 	let mwData;
 
 	function scaleImage( height, width, maxHeight, maxWidth ) {
@@ -1100,9 +1100,8 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 			{ type: '/mwGalleryCaption' }
 		] );
 	}
-	let i, ilen;
 	// Build node for each image
-	for ( i = 0, ilen = items.length; i < ilen; i++ ) {
+	for ( let i = 0, ilen = items.length; i < ilen; i++ ) {
 		data = data.concat( getImageLinearData.call( this, items[ i ] ) );
 	}
 	// Replace whole contents of this node with the new ones
@@ -1117,7 +1116,7 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 	// Minus 2 to skip past </mwGalleryImageCaption></mwGalleryImage>
 	let captionInsertionOffset = innerRange.from + data.length - 2;
 	// Update image captions. In reverse order to avoid having to adjust offsets for each insertion.
-	for ( i = items.length - 1; i >= 0; i-- ) {
+	for ( let i = items.length - 1; i >= 0; i-- ) {
 		surfaceModel.change(
 			ve.dm.TransactionBuilder.static.newFromDocumentInsertion(
 				surfaceModel.getDocument(),

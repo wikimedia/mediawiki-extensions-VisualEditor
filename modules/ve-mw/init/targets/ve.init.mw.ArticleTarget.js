@@ -759,11 +759,9 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
  * @fires ve.init.mw.ArticleTarget#saveError
  */
 ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, data ) {
-	let saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory,
-		handled = false;
-
 	this.pageDeletedWarning = false;
 
+	let handled = false;
 	// Handle empty response
 	if ( !data ) {
 		this.saveErrorEmpty();
@@ -798,6 +796,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 	}
 
 	if ( !handled ) {
+		const saveErrorHandlerFactory = ve.init.mw.saveErrorHandlerFactory;
 		for ( const name in saveErrorHandlerFactory.registry ) {
 			const handler = saveErrorHandlerFactory.lookup( name );
 			if ( handler.static.matchFunction( data ) ) {
@@ -1229,8 +1228,7 @@ ve.init.mw.ArticleTarget.prototype.clearDocToSave = function () {
  * @param {HTMLDocument} doc Document to serialize
  */
 ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
-	let aborted = false,
-		start = ve.now();
+	const start = ve.now();
 
 	if ( this.getSurface().getMode() === 'source' ) {
 		return;
@@ -1242,6 +1240,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 	this.clearPreparedCacheKey();
 
 	let xhr;
+	let aborted = false;
 	this.preparedCacheKeyPromise = mw.libs.ve.targetSaver.deflateDoc( doc, this.doc )
 		.then( ( deflatedHtml ) => {
 			if ( aborted ) {
@@ -2159,11 +2158,11 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
  * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
  */
 ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
-	let offsetNode = headingNode,
-		surface = this.getSurface(),
-		surfaceView = surface.getView(),
-		lastHeadingLevel = -1;
+	const surface = this.getSurface(),
+		surfaceView = surface.getView();
 
+	let offsetNode = headingNode,
+		lastHeadingLevel = -1;
 	let nextNode;
 	// Find next sibling which isn't a heading
 	while ( offsetNode instanceof ve.ce.HeadingNode && offsetNode.getModel().getAttribute( 'level' ) > lastHeadingLevel ) {
@@ -2476,8 +2475,8 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 			return $link;
 		}
 		function renderPageLinks( pages ) {
-			let i, $list = $( '<ul>' );
-			for ( i = 0; i < pages.length; i++ ) {
+			const $list = $( '<ul>' );
+			for ( let i = 0; i < pages.length; i++ ) {
 				const $link = renderPageLink( pages[ i ] );
 				$list.append( $( '<li>' ).append( $link ) );
 			}

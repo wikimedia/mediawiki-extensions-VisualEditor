@@ -100,8 +100,8 @@ ve.dm.MWTemplateModel.newFromData = function ( transclusion, data ) {
  * @return {ve.dm.MWTemplateModel|null} New template model
  */
 ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
-	let title,
-		templateNs = mw.config.get( 'wgNamespaceIds' ).template;
+	const templateNs = mw.config.get( 'wgNamespaceIds' ).template;
+	let title;
 	if ( name instanceof mw.Title ) {
 		title = name;
 		name = title.getRelativeText( templateNs );
@@ -210,10 +210,10 @@ ve.dm.MWTemplateModel.prototype.getOriginalParameterName = function ( name ) {
  * @return {string[]}
  */
 ve.dm.MWTemplateModel.prototype.getAllParametersOrdered = function () {
-	let primaryName,
-		spec = this.spec,
+	const spec = this.spec,
 		usedAliases = {};
 
+	let primaryName;
 	for ( const alias in this.params ) {
 		if ( spec.isParameterAlias( alias ) ) {
 			primaryName = spec.getPrimaryParameterName( alias );
@@ -340,7 +340,7 @@ ve.dm.MWTemplateModel.prototype.setOriginalData = function ( data ) {
  * @inheritdoc
  */
 ve.dm.MWTemplateModel.prototype.serialize = function () {
-	let origData = this.originalData || {},
+	const origData = this.originalData || {},
 		origParams = origData.params || {},
 		template = { target: this.target, params: {} },
 		spec = this.spec,
@@ -373,8 +373,7 @@ ve.dm.MWTemplateModel.prototype.serialize = function () {
 
 	// Performs a non-deep extend, so this won't reintroduce
 	// deleted parameters (T75134)
-	template = ve.extendObject( {}, origData, template );
-	return { template: template };
+	return { template: ve.extendObject( {}, origData, template ) };
 };
 
 /**

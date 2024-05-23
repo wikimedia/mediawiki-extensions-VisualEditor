@@ -270,7 +270,6 @@ ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 
 		function offsetToPos( offset ) {
 			let row = 0,
-				col,
 				pos = 0;
 
 			while ( row < lines.length && pos + lines[ row ].length < offset ) {
@@ -278,7 +277,7 @@ ve.ui.MWAceEditorWidget.prototype.selectRange = function ( from, to ) {
 				pos++; // for the newline character
 				row++;
 			}
-			col = offset - pos;
+			const col = offset - pos;
 			return { row: row, column: col };
 		}
 

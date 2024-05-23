@@ -28,9 +28,9 @@ OO.inheritClass( ve.dm.MWWikitextSurfaceFragment, ve.dm.SourceSurfaceFragment );
  * @inheritdoc
  */
 ve.dm.MWWikitextSurfaceFragment.prototype.hasMatchingAncestor = function ( type, attributes ) {
-	let nodes = this.getSelectedLeafNodes(),
-		all = !!nodes.length;
+	const nodes = this.getSelectedLeafNodes();
 
+	let all = !!nodes.length;
 	for ( let i = 0, len = nodes.length; i < len; i++ ) {
 		const text = this.document.data.getText( false, nodes[ i ].getRange() );
 		// TODO: Use a registry to do this matching

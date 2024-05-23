@@ -280,9 +280,9 @@ ve.dm.MWMagicLinkType.prototype.matchHref = function ( href ) {
  * @return {ve.dm.MWMagicLinkType|null}
  */
 ve.dm.MWMagicLinkType.static.fromContent = function ( content ) {
-	let m = /^(ISBN|PMID|RFC)/.exec( content ),
-		typeStr = m && m[ 1 ],
-		type = null;
+	let type = null;
+	const m = /^(ISBN|PMID|RFC)/.exec( content ),
+		typeStr = m && m[ 1 ];
 	if ( typeStr === 'ISBN' ) {
 		type = new ve.dm.MWMagicLinkIsbnType( content );
 	} else if ( typeStr === 'PMID' ) {

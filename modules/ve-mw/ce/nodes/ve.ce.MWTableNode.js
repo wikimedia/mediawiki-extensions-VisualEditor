@@ -113,21 +113,19 @@ ve.ce.MWTableNode.prototype.updateSortableHeaders = function () {
  * @return {ve.dm.TableCellNode[]}
  */
 ve.ce.MWTableNode.prototype.getTablesorterHeaderCells = function () {
-	let
-		matrix = this.model.getMatrix(),
-		longestRow = [],
-		longestRowLength = 0,
-		i, l, matrixCells, isAllHeaders, rowLength, cellModels;
+	const matrix = this.model.getMatrix();
 
-	for ( i = 0, l = matrix.getRowCount(); i < l; i++ ) {
-		matrixCells = matrix.getRow( i );
-		cellModels = OO.unique( matrixCells.map( ( matrixCell ) => matrixCell && matrixCell.getOwner().node ) );
-		isAllHeaders = cellModels.every( ( cellModel ) => cellModel && cellModel.getAttribute( 'style' ) === 'header' );
+	let longestRow = [];
+	let longestRowLength = 0;
+	for ( let i = 0, l = matrix.getRowCount(); i < l; i++ ) {
+		const matrixCells = matrix.getRow( i );
+		const cellModels = OO.unique( matrixCells.map( ( matrixCell ) => matrixCell && matrixCell.getOwner().node ) );
+		const isAllHeaders = cellModels.every( ( cellModel ) => cellModel && cellModel.getAttribute( 'style' ) === 'header' );
 		if ( !isAllHeaders ) {
 			// This is the end of table head (thead), stop looking further
 			break;
 		}
-		rowLength = cellModels.length;
+		const rowLength = cellModels.length;
 		if ( rowLength >= longestRowLength ) {
 			longestRowLength = rowLength;
 			longestRow = cellModels;

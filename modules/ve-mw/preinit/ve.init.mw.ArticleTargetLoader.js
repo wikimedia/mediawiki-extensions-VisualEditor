@@ -134,8 +134,8 @@
 
 			if ( checkboxesDef ) {
 				Object.keys( checkboxesDef ).forEach( ( name ) => {
-					let options = checkboxesDef[ name ],
-						accesskey = null,
+					const options = checkboxesDef[ name ];
+					let accesskey = null,
 						title = null;
 
 					// The messages documented below are just the ones defined in core.
@@ -303,10 +303,8 @@
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
 		requestParsoidData: function ( pageName, options, noRestbase, noMetadata ) {
-			let section = options.section !== undefined ? options.section : null,
-				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null,
-				switched = false,
-				fromEditedState = false;
+			const section = options.section !== undefined ? options.section : null,
+				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null;
 
 			options = options || {};
 			const data = {
@@ -333,6 +331,8 @@
 			ve.track( 'trace.apiLoad.enter', { mode: 'visual' } );
 
 			let apiXhr, apiPromise;
+			let switched = false,
+				fromEditedState = false;
 			if ( !useRestbase && options.wikitext !== undefined ) {
 				// Non-RESTBase custom wikitext parse
 				data.paction = 'parse';

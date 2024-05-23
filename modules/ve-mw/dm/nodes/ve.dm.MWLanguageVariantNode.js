@@ -126,12 +126,12 @@ ve.dm.MWLanguageVariantNode.static.toDataElement = function ( domElements, conve
  * @inheritdoc
  */
 ve.dm.MWLanguageVariantNode.static.toDomElements = function ( dataElement, doc, converter ) {
-	let variantInfo = dataElement.attributes.variantInfo,
+	const variantInfo = dataElement.attributes.variantInfo,
 		tagName = this.matchTagNames[ 0 ],
 		rdfaType = this.matchRdfaTypes[ 0 ],
-		domElement = doc.createElement( tagName ),
-		dataMwvJSON = JSON.stringify( variantInfo );
+		domElement = doc.createElement( tagName );
 
+	let dataMwvJSON = JSON.stringify( variantInfo );
 	// Preserve exact equality of this attribute for selser.
 	if ( dataElement.attributes.originalVariantInfo ) {
 		if ( OO.compare(

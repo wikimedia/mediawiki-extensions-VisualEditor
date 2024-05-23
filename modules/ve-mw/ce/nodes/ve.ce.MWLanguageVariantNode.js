@@ -52,9 +52,9 @@ ve.ce.MWLanguageVariantNode.static.iconWhenInvisible = 'language';
  */
 ve.ce.MWLanguageVariantNode.static.getDescription = function ( model ) {
 	// This is shown when you hover over the node.
-	let variantInfo = model.getVariantInfo(),
-		messageKey = 'visualeditor-mwlanguagevariant-' + model.getRuleType(),
-		languageCodes = [];
+	const variantInfo = model.getVariantInfo(),
+		messageKey = 'visualeditor-mwlanguagevariant-' + model.getRuleType();
+	let languageCodes = [];
 	if ( variantInfo.name ) {
 		languageCodes = [ variantInfo.name.t ];
 	} else if ( variantInfo.filter ) {

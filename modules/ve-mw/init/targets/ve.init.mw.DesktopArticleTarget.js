@@ -810,7 +810,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
 			this.setFakeRedirectInterface( null );
 			break;
 		case 'mwCategory': {
-			let metaList = this.getSurface().getModel().getDocument().getMetaList();
+			const metaList = this.getSurface().getModel().getDocument().getMetaList();
 			this.rebuildCategories( metaList.getItemsInGroup( 'mwCategory' ) );
 			break;
 		}

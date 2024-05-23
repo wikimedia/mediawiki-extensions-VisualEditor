@@ -18,18 +18,24 @@
  * actual MediaWiki integration and VisualEditor library.
  */
 ( function () {
-	let conf, tabMessages, url, pageExists, viewUrl, veEditUrl, veEditSourceUrl,
-		init, targetPromise,
-		tabPreference, initialWikitext, oldId,
-		isLoading, tempWikitextEditor, tempWikitextEditorData,
-		$toolbarPlaceholder, $toolbarPlaceholderBar,
-		contentTop, wasFloating,
-		configData = require( './data.json' ),
+	const configData = require( './data.json' ),
 		veactionToMode = {
 			edit: 'visual',
 			editsource: 'source'
 		},
-		availableModes = [],
+		availableModes = [];
+	let init = null,
+		conf = null,
+		tabMessages = null,
+		pageExists = null,
+		viewUrl = null,
+		veEditUrl = null,
+		tabPreference = null;
+	let veEditSourceUrl, targetPromise, url,
+		initialWikitext, oldId,
+		isLoading, tempWikitextEditor, tempWikitextEditorData,
+		$toolbarPlaceholder, $toolbarPlaceholderBar,
+		contentTop, wasFloating,
 		active = false,
 		targetLoaded = false,
 		plugins = [],
@@ -1450,8 +1456,8 @@
 			$targetContainer.addClass( 've-init-mw-desktopArticleTarget-targetContainer' );
 		}
 
-		let showWikitextWelcome = true,
-			numEditButtons = $( '#ca-edit, #ca-ve-edit' ).length,
+		let showWikitextWelcome = true;
+		const numEditButtons = $( '#ca-edit, #ca-ve-edit' ).length,
 			section = parseSection( url.searchParams.get( 'section' ) );
 
 		const requiredSkinElements =
@@ -1516,14 +1522,13 @@
 				mw.loader.load( 'ext.visualEditor.switching' );
 				mw.hook( 'wikiEditor.toolbarReady' ).add( ( $textarea ) => {
 					mw.loader.using( 'ext.visualEditor.switching' ).done( () => {
-						let windowManager, editingTabDialog, switchToolbar, popup,
-							showPopup = url.searchParams.has( 'veswitched' ) && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' ),
+						const showPopup = url.searchParams.has( 'veswitched' ) && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' ),
 							toolFactory = new OO.ui.ToolFactory(),
 							toolGroupFactory = new OO.ui.ToolGroupFactory();
 
 						toolFactory.register( mw.libs.ve.MWEditModeVisualTool );
 						toolFactory.register( mw.libs.ve.MWEditModeSourceTool );
-						switchToolbar = new OO.ui.Toolbar( toolFactory, toolGroupFactory, {
+						const switchToolbar = new OO.ui.Toolbar( toolFactory, toolGroupFactory, {
 							classes: [ 've-init-mw-editSwitch' ]
 						} );
 
@@ -1544,7 +1549,7 @@
 							include: [ 'editModeVisual', 'editModeSource' ]
 						} ] );
 
-						popup = new mw.libs.ve.SwitchPopupWidget( 'source' );
+						const popup = new mw.libs.ve.SwitchPopupWidget( 'source' );
 
 						switchToolbar.tools.editModeVisual.toolGroup.$element.append( popup.$element );
 						switchToolbar.emit( 'updateState' );
@@ -1567,9 +1572,9 @@
 						if ( $( '#ca-edit' ).hasClass( 'visualeditor-showtabdialog' ) ) {
 							$( '#ca-edit' ).removeClass( 'visualeditor-showtabdialog' );
 							// Set up a temporary window manager
-							windowManager = new OO.ui.WindowManager();
+							const windowManager = new OO.ui.WindowManager();
 							$( OO.ui.getTeleportTarget() ).append( windowManager.$element );
-							editingTabDialog = new mw.libs.ve.EditingTabDialog();
+							const editingTabDialog = new mw.libs.ve.EditingTabDialog();
 							windowManager.addWindows( [ editingTabDialog ] );
 							windowManager.openWindow( editingTabDialog )
 								.closed.then( ( data ) => {
@@ -1610,15 +1615,14 @@
 			pageIsProbablyEditable
 		) {
 			mw.loader.using( 'ext.visualEditor.welcome' ).done( () => {
-				let windowManager, welcomeDialog;
 				// Check shouldShowWelcomeDialog() again: any code that might have called
 				// stopShowingWelcomeDialog() wouldn't have had an opportunity to do that
 				// yet by the first time we checked
 				if ( !init.shouldShowWelcomeDialog() ) {
 					return;
 				}
-				windowManager = new OO.ui.WindowManager();
-				welcomeDialog = new mw.libs.ve.WelcomeDialog();
+				const windowManager = new OO.ui.WindowManager();
+				const welcomeDialog = new mw.libs.ve.WelcomeDialog();
 				$( OO.ui.getTeleportTarget() ).append( windowManager.$element );
 				windowManager.addWindows( [ welcomeDialog ] );
 				windowManager.openWindow(

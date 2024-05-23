@@ -235,14 +235,13 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.getTopLevelPartIdForSelection 
  * @param {number} index Index of the insertion point
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, index ) {
-	let i, name, page,
-		stackLayoutPages = this.stackLayout.getItems();
+	const stackLayoutPages = this.stackLayout.getItems();
 
 	// Remove pages with same names
 	const remove = [];
-	for ( i = 0; i < pages.length; i++ ) {
-		page = pages[ i ];
-		name = page.getName();
+	for ( let i = 0; i < pages.length; i++ ) {
+		const page = pages[ i ];
+		const name = page.getName();
 
 		if ( Object.prototype.hasOwnProperty.call( this.pages, name ) ) {
 			// Correct the insertion index
@@ -258,10 +257,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
 	}
 
 	// Add new pages
-	for ( i = 0; i < pages.length; i++ ) {
-		page = pages[ i ];
-		name = page.getName();
-		this.pages[ page.getName() ] = page;
+	for ( let i = 0; i < pages.length; i++ ) {
+		const page = pages[ i ];
+		const name = page.getName();
+		this.pages[ name ] = page;
 	}
 
 	this.stackLayout.addItems( pages, index );
@@ -271,9 +270,9 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.addPages = function ( pages, i
  * @param {string[]} pagesNamesToRemove
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.removePages = function ( pagesNamesToRemove ) {
-	let pagesToRemove = [],
-		isCurrentParameter = this.pages[ this.currentPageName ] instanceof ve.ui.MWParameterPage,
-		isCurrentPageRemoved = false,
+	const pagesToRemove = [],
+		isCurrentParameter = this.pages[ this.currentPageName ] instanceof ve.ui.MWParameterPage;
+	let isCurrentPageRemoved = false,
 		prevSelectionCandidate, nextSelectionCandidate;
 
 	this.stackLayout.getItems().forEach( ( page ) => {
@@ -351,10 +350,10 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.setPage = function ( name ) {
  * @private
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () {
-	let partId = this.getSelectedTopLevelPartId(),
-		canMoveUp, canMoveDown = false,
+	const partId = this.getSelectedTopLevelPartId(),
 		canBeDeleted = !!partId;
 
+	let canMoveUp, canMoveDown = false;
 	if ( partId ) {
 		const pages = this.stackLayout.getItems(),
 			page = this.getPage( partId ),

@@ -135,9 +135,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createAllParameterCheckboxes
  * @return {string[]}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.getRelevantTemplateParameters = function ( filter ) {
-	let parameterNames,
-		template = this.templateModel;
+	const template = this.templateModel;
 
+	let parameterNames;
 	switch ( filter ) {
 		case 'used':
 			parameterNames = template.getOrderedParameterNames();
@@ -183,9 +183,9 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.createCheckbox = function ( 
  * @return {number}
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.findCanonicalPosition = function ( paramName ) {
-	let insertAt = 0,
-		// Note this might include parameters that don't have a checkbox, e.g. deprecated
-		allParamNames = this.templateModel.getAllParametersOrdered();
+	// Note this might include parameters that don't have a checkbox, e.g. deprecated
+	const allParamNames = this.templateModel.getAllParametersOrdered();
+	let insertAt = 0;
 	for ( let i = 0; i < allParamNames.length; i++ ) {
 		if ( allParamNames[ i ] === paramName || !this.parameterList.items[ insertAt ] ) {
 			break;
@@ -307,8 +307,8 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSpaceDown
  * @fires ve.ui.MWTransclusionOutlineTemplateWidget#transclusionOutlineItemSelected
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleParameter = function ( item, selected, soft ) {
-	let paramName = item.getData(),
-		param = this.templateModel.getParameter( paramName );
+	const paramName = item.getData();
+	let param = this.templateModel.getParameter( paramName );
 	if ( !selected ) {
 		this.templateModel.removeParameter( param );
 	} else if ( !param ) {
@@ -412,10 +412,10 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.initializeFilters = function
  * @fires ve.ui.MWTransclusionOutlineTemplateWidget#filterParametersById
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function ( query ) {
-	let template = this.templateModel,
+	const template = this.templateModel,
 		spec = this.templateModel.getSpec(),
-		visibility = {},
-		nothingFound = true;
+		visibility = {};
+	let nothingFound = true;
 
 	query = query.trim().toLowerCase();
 	this.createAllParameterCheckboxes();

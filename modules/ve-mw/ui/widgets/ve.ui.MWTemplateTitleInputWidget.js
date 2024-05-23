@@ -86,12 +86,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 
 // @inheritdoc mw.widgets.TitleInputWidget
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
-	let originalResponse,
-		templateDataMessage = mw.message( 'templatedata-doc-subpage' ),
-		templateDataInstalled = templateDataMessage.exists(),
-		templateDocPageFragment = '/' + templateDataMessage.text(),
-		promise = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
-
+	let promise = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
 	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
 		promise = promise
 			.then( this.addExactMatch.bind( this ) )
@@ -102,10 +97,15 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 		return promise;
 	}
 
+	const templateDataMessage = mw.message( 'templatedata-doc-subpage' ),
+		templateDataInstalled = templateDataMessage.exists(),
+		templateDocPageFragment = '/' + templateDataMessage.text();
+
+	let originalResponse;
 	return promise
 		.then( ( response ) => {
-			let redirects = ( response.query && response.query.redirects ) || [],
-				newPages = ( response.query && response.query.pages ) || [];
+			const redirects = ( response.query && response.query.redirects ) || [];
+			let newPages = ( response.query && response.query.pages ) || [];
 
 			newPages.forEach( ( page ) => {
 				if ( !( 'index' in page ) ) {
@@ -231,10 +231,9 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		}
 	};
 
-	let i,
-		matchingRedirects = response.query.pages.filter( ( page ) => page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle );
+	const matchingRedirects = response.query.pages.filter( ( page ) => page.redirecttitle && page.redirecttitle.toLowerCase() === lowerTitle );
 	if ( matchingRedirects.length ) {
-		for ( i = matchingRedirects.length; i--; ) {
+		for ( let i = matchingRedirects.length; i--; ) {
 			const matchingRedirect = matchingRedirects[ i ];
 			// Offer redirects as separate options when the user's input is an exact match
 			unshiftPages( response.query.pages, {
@@ -248,7 +247,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 
 	const matchingTitles = response.query.pages.filter( ( page ) => page.title.toLowerCase() === lowerTitle );
 	if ( matchingTitles.length ) {
-		for ( i = matchingTitles.length; i--; ) {
+		for ( let i = matchingTitles.length; i--; ) {
 			// Make sure exact matches are at the very top
 			unshiftPages( response.query.pages );
 			matchingTitles[ i ].index = 1;
@@ -268,7 +267,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 		// action=query returns page objects in `{ query: { pages: [] } }`, not keyed by page id
 		const pages = prefixMatches.query && prefixMatches.query.pages || [];
 		pages.sort( ( a, b ) => a.index - b.index );
-		for ( i in pages ) {
+		for ( const i in pages ) {
 			const prefixMatch = pages[ i ];
 			if ( !containsPageId( response.query.pages, prefixMatch.pageid ) ) {
 				// Move prefix matches to the top, indexed from -9 to 0, relevant for e.g. {{!!}}
