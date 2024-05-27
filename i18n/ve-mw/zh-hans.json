@@ -293,7 +293,7 @@
 	"visualeditor-includes-onlyinclude-start": "允许嵌入的内容的起点",
 	"visualeditor-includes-onlyinclude-end": "允许嵌入的内容的终点",
 	"visualeditor-includes-includeonly": "只在嵌入时显示的内容",
-	"visualeditor-includes-noinclude-description": "当该页面的内容被另一个页面使用时，从这里到匹配结束标记的内容将<strong>不</strong>被包括在内。编辑这些标记之外的内容时要小心，因为其他页面可能会使用它。",
+	"visualeditor-includes-noinclude-description": "当其他页面使用来自该页面的内容时，从这里到对应的结束标记之间的内容<strong>不会</strong>嵌入。请小心编辑标记之外的内容，因为其他页面可能会使用这些内容。",
 	"visualeditor-includes-onlyinclude-description": "当该页面的内容被另一个页面使用时，<strong>仅</strong>从这里到匹配结束标记的内容将被包含在内。编辑这些标记之间的内容时要小心，因为其他页面可能会使用它。",
 	"visualeditor-includes-includeonly-description": "当此页面的内容被另一个页面使用时，以下附加内容将包含在此处：",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion 了解有关部分嵌入的更多信息]",
