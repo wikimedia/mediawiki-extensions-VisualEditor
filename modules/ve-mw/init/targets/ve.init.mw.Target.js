@@ -13,7 +13,7 @@
  *
  * @constructor
  * @param {Object} config
- * @cfg {string[]} [surfaceClasses=[]] Surface classes to apply
+ * @param {string[]} [config.surfaceClasses=[]] Surface classes to apply
  */
 ve.init.mw.Target = function VeInitMwTarget( config ) {
 	this.surfaceClasses = config.surfaceClasses || [];
@@ -422,10 +422,10 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
  * Intialise autosave, recovering changes if applicable
  *
  * @param {Object} [config] Configuration options
- * @cfg {boolean} [suppressNotification=false] Don't notify the user if changes are recovered
- * @cfg {string} [docId] Document ID for storage grouping
- * @cfg {ve.init.SafeStorage} [storage] Storage interface
- * @cfg {number} [storageExpiry] Storage expiry time in seconds (optional)
+ * @param {boolean} [config.suppressNotification=false] Don't notify the user if changes are recovered
+ * @param {string} [config.docId] Document ID for storage grouping
+ * @param {ve.init.SafeStorage} [config.storage] Storage interface
+ * @param {number} [config.storageExpiry] Storage expiry time in seconds (optional)
  */
 ve.init.mw.Target.prototype.initAutosave = function ( config ) {
 	// Old function signature

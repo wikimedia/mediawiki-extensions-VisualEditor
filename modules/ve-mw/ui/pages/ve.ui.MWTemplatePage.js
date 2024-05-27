@@ -16,8 +16,8 @@
  * @param {ve.dm.MWTemplateModel} template Template model
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
- * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
- * @cfg {boolean} [isReadOnly] Page is read-only
+ * @param {jQuery} [config.$overlay] Overlay to render dropdowns in
+ * @param {boolean} [config.isReadOnly] Page is read-only
  */
 ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	const link = template.getTemplateDataQueryTitle();

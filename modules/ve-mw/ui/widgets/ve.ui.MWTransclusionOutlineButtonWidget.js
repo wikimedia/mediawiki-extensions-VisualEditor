@@ -11,8 +11,8 @@
  *
  * @constructor
  * @param {Object} config
- * @cfg {string} [icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
- * @cfg {string} label
+ * @param {string} [config.icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
+ * @param {string} config.label
  */
 ve.ui.MWTransclusionOutlineButtonWidget = function VeUiMWTransclusionOutlineButtonWidget( config ) {
 	// Parent constructor

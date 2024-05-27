@@ -20,7 +20,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {boolean} [autosize=false]
+ * @param {boolean} [config.autosize=false]
  */
 ve.ui.MWLazyMultilineTextInputWidget = function VeUiMWLazyMultilineTextInputWidget() {
 	// Parent constructor

@@ -13,8 +13,8 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {string} label
- * @cfg {jQuery} $message
+ * @param {string} config.label
+ * @param {jQuery} config.$message
  */
 ve.ui.MWFloatingHelpDialog = function VeUiMWFloatingHelpDialog( config ) {
 	// Parent constructor

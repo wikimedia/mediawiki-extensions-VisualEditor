@@ -9,7 +9,7 @@
  *
  * @constructor
  * @param {Object} config
- * @cfg {jQuery} $content
+ * @param {jQuery} config.$content
  */
 ve.ui.MWExpandableContentElement = function VeUiMWExpandableContentElement( config ) {
 	// Parent constructor

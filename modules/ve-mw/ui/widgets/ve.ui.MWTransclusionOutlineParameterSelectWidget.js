@@ -13,7 +13,7 @@
  *
  * @constructor
  * @param {Object} config
- * @cfg {ve.ui.MWTransclusionOutlineParameterWidget[]} items
+ * @param {ve.ui.MWTransclusionOutlineParameterWidget[]} config.items
  * @property {string|null} activeParameter Name of the currently selected parameter
  * @property {number} stickyHeaderHeight
  */

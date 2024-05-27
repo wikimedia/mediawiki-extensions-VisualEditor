@@ -15,11 +15,11 @@
  * @constructor
  * @param {ve.dm.MWTransclusionPartModel} part
  * @param {Object} config
- * @cfg {string} [icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
- * @cfg {string} label
- * @cfg {string} ariaDescriptionUnselected
- * @cfg {string} ariaDescriptionSelected
- * @cfg {string} ariaDescriptionSelectedSingle
+ * @param {string} [config.icon=''] Symbolic name of an icon, e.g. "puzzle" or "wikiText"
+ * @param {string} config.label
+ * @param {string} config.ariaDescriptionUnselected
+ * @param {string} config.ariaDescriptionSelected
+ * @param {string} config.ariaDescriptionSelectedSingle
  */
 ve.ui.MWTransclusionOutlinePartWidget = function VeUiMWTransclusionOutlinePartWidget( part, config ) {
 	this.part = part;

@@ -14,7 +14,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {number} [limit=6] Number of suggestions to show
+ * @param {number} [config.limit=6] Number of suggestions to show
  */
 ve.ui.MWEditSummaryWidget = function VeUiMWEditSummaryWidget( config ) {
 	config = config || {};

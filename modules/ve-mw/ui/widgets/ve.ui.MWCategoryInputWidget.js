@@ -15,8 +15,8 @@
  * @constructor
  * @param {ve.ui.MWCategoryWidget} categoryWidget
  * @param {Object} [config] Configuration options
- * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
- * @cfg {mw.Api} [api] API object to use, uses Target#getContentApi if not specified
+ * @param {jQuery} [config.$overlay] Overlay to render dropdowns in
+ * @param {mw.Api} [config.api] API object to use, uses Target#getContentApi if not specified
  */
 ve.ui.MWCategoryInputWidget = function VeUiMWCategoryInputWidget( categoryWidget, config ) {
 	// Config initialization

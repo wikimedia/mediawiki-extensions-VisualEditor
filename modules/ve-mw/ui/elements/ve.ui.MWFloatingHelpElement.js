@@ -14,8 +14,8 @@
  *
  * @constructor
  * @param {Object} config
- * @cfg {string} label
- * @cfg {jQuery} $message
+ * @param {string} config.label
+ * @param {jQuery} config.$message
  */
 ve.ui.MWFloatingHelpElement = function VeUiMWFloatingHelpElement( config ) {
 	// Parent constructor
