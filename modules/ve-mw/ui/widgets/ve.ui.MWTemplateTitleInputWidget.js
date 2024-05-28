@@ -70,7 +70,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 		// cases though. We're limiting it to be add only of the term ends with a letter or numeric
 		// character.
 		// eslint-disable-next-line es-x/no-regexp-unicode-property-escapes, prefer-regex-literals
-		const endsWithAlpha = new RegExp( '[0-9a-z\\p{L}\\p{N}]$', 'iu' );
+		const endsWithAlpha = new RegExp( '[\\p{L}\\p{N}]$', 'u' );
 		if ( endsWithAlpha.test( params.gsrsearch ) ) {
 			params.gsrsearch += '*';
 		}
