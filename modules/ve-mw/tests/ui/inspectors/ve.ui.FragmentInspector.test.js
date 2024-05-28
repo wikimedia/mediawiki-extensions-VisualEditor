@@ -34,7 +34,7 @@ QUnit.test( 'Wikitext link inspector', function ( assert ) {
 				expectedData: ( data ) => {
 					data.splice(
 						1, 3,
-						'[', '[', 'F', 'o', 'o', ']', ']'
+						...'[[Foo]]'
 					);
 				}
 			},
