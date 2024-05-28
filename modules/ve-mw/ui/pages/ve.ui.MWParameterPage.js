@@ -16,8 +16,8 @@
  * @constructor
  * @param {ve.dm.MWParameterModel} parameter Template parameter
  * @param {Object} [config] Configuration options
- * @cfg {jQuery} [$overlay] Overlay to render dropdowns in
- * @cfg {boolean} [readOnly] Parameter is read-only
+ * @param {jQuery} [config.$overlay] Overlay to render dropdowns in
+ * @param {boolean} [config.readOnly] Parameter is read-only
  */
 ve.ui.MWParameterPage = function VeUiMWParameterPage( parameter, config ) {
 	const paramName = parameter.getName();

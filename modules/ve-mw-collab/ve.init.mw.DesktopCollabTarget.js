@@ -17,7 +17,7 @@
  * @param {mw.Title} title Page sub-title
  * @param {string} rebaserUrl Rebaser server URL
  * @param {Object} [config] Configuration options
- * @cfg {mw.Title} [importTitle] Title to import
+ * @param {mw.Title} [config.importTitle] Title to import
  */
 ve.init.mw.DesktopCollabTarget = function VeInitMwDesktopCollabTarget( title, rebaserUrl, config ) {
 	// Parent constructor

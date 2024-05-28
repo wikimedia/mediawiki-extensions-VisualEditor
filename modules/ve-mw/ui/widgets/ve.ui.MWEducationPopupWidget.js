@@ -17,10 +17,10 @@
  * @extends OO.ui.Widget
  * @param {jQuery} $target Element to attach to
  * @param {Object} config Configuration options
- * @cfg {string} popupTitle
- * @cfg {string|jQuery} popupText
- * @cfg {string} [popupImage] Popup image class
- * @cfg {string} [trackingName]
+ * @param {string} config.popupTitle
+ * @param {string|jQuery} config.popupText
+ * @param {string} [config.popupImage] Popup image class
+ * @param {string} [config.trackingName]
  */
 ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) {
 	config = config || {};

@@ -24,10 +24,10 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {string} [autocomplete='none'] Symbolic name of autocomplete
+ * @param {string} [config.autocomplete='none'] Symbolic name of autocomplete
  * mode: 'none', 'basic' (requires the user to press Ctrl-Space) or
  * 'live' (shows a list of suggestions as the user types)
- * @cfg {Array} [autocompleteWordList=null] List of words to
+ * @param {Array} [config.autocompleteWordList=null] List of words to
  * autocomplete to
  */
 ve.ui.MWAceEditorWidget = function VeUiMWAceEditorWidget( config ) {

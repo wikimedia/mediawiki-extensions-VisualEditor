@@ -20,7 +20,7 @@ mw.libs.ve = mw.libs.ve || {};
  *
  * @constructor
  * @param {Object} config Configuration options
- * @cfg {string} value Raw wikitext to edit
+ * @param {string} config.value Raw wikitext to edit
  */
 mw.libs.ve.MWTempWikitextEditorWidget = function VeUiMwTempWikitextEditorWidget( config ) {
 	const conf = mw.config.get( 'wgVisualEditor' ),

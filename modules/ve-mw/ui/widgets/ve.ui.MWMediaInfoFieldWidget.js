@@ -18,11 +18,11 @@
  * @constructor
  * @param {jQuery|string|OO.ui.HtmlSnippet} content API response data from which to build the display
  * @param {Object} [config] Configuration options
- * @cfg {string} [href] A url encapsulating the field text. If a label is attached it will include the label.
- * @cfg {string} [labelMsg] A ve.msg() label string for the field.
- * @cfg {boolean} [isDate=false] Field text is a date that will be converted to 'fromNow' string.
- * @cfg {string} [type='attribute'] Field type, either 'description' or 'attribute'
- * @cfg {string} [descriptionHeight='4em'] Height limit for description fields
+ * @param {string} [config.href] A url encapsulating the field text. If a label is attached it will include the label.
+ * @param {string} [config.labelMsg] A ve.msg() label string for the field.
+ * @param {boolean} [config.isDate=false] Field text is a date that will be converted to 'fromNow' string.
+ * @param {string} [config.type='attribute'] Field type, either 'description' or 'attribute'
+ * @param {string} [config.descriptionHeight='4em'] Height limit for description fields
  */
 ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, config ) {
 	// Configuration initialization

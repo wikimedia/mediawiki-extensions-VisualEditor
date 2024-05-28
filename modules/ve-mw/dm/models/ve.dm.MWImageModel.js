@@ -14,10 +14,10 @@
  * @constructor
  * @param {ve.dm.Document} parentDoc Document that contains or will contain the image
  * @param {Object} [config] Configuration options
- * @cfg {string} [resourceName] The resource name of the given media file
- * @cfg {Object} [currentDimensions={}] Current dimensions, width & height
- * @cfg {Object} [minDimensions={}] Minimum dimensions, width & height
- * @cfg {boolean} [isDefaultSize=false] Object is using its default size dimensions
+ * @param {string} [config.resourceName] The resource name of the given media file
+ * @param {Object} [config.currentDimensions={}] Current dimensions, width & height
+ * @param {Object} [config.minDimensions={}] Minimum dimensions, width & height
+ * @param {boolean} [config.isDefaultSize=false] Object is using its default size dimensions
  */
 ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
 	config = config || {};

@@ -15,7 +15,7 @@
  * @param {string} title
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config]
- * @cfg {number} [width] Popup width. Upstream default is 320.
+ * @param {number} [config.width] Popup width. Upstream default is 320.
  */
 ve.ui.MWPopupTool = function VeUiMWPopupTool( title, toolGroup, config ) {
 	// Configuration initialization
