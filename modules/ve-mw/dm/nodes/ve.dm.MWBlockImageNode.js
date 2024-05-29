@@ -161,9 +161,11 @@ ve.dm.MWBlockImageNode.static.toDataElement = function ( domElements, converter 
 
 	this.storeGeneratedContents( dataElement, dataElement.attributes.src, converter.getStore() );
 
-	return [ dataElement ]
-		.concat( caption )
-		.concat( { type: '/' + this.name } );
+	return [].concat(
+		dataElement,
+		caption,
+		{ type: '/' + this.name }
+	);
 };
 
 // TODO: At this moment node is not resizable but when it will be then adding defaultSize class

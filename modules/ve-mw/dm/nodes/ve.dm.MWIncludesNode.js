@@ -70,10 +70,10 @@ ve.dm.MWIncludesNode.static.toDomElements = function ( dataElement, doc, convert
 		el.setAttribute( 'data-mw', JSON.stringify( dataElement.attributes.mw ) );
 	}
 
-	let els = [ el ];
+	const els = [ el ];
 	if ( dataElement.attributes.type === 'mw:Includes/IncludeOnly' ) {
 		// includeonly nodes have an implicit closing tag
-		els = els.concat( ve.dm.MWIncludesNode.static.toDomElements( {
+		ve.batchPush( els, ve.dm.MWIncludesNode.static.toDomElements( {
 			type: 'mwIncludes',
 			attributes: {
 				type: 'mw:Includes/IncludeOnly/End'

@@ -40,7 +40,8 @@ ve.ui.MWTransclusionDialog.static.name = 'transclusion';
 
 ve.ui.MWTransclusionDialog.static.size = 'larger';
 
-ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.actions.concat( [
+ve.ui.MWTransclusionDialog.static.actions = [
+	...ve.ui.MWTemplateDialog.static.actions,
 	{
 		action: 'mode',
 		modes: [ 'edit', 'insert' ],
@@ -54,7 +55,7 @@ ve.ui.MWTransclusionDialog.static.actions = ve.ui.MWTemplateDialog.static.action
 		modes: [ 'edit', 'insert' ],
 		flags: [ 'safe', 'back' ]
 	}
-] );
+];
 
 ve.ui.MWTransclusionDialog.static.smallScreenMaxWidth = 540;
 

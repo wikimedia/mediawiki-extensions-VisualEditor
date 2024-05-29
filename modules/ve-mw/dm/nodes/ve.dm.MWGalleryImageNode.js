@@ -166,9 +166,11 @@ ve.dm.MWGalleryImageNode.static.toDataElement = function ( domElements, converte
 		}
 	};
 
-	return [ dataElement ]
-		.concat( caption )
-		.concat( { type: '/' + this.name } );
+	return [].concat(
+		dataElement,
+		caption,
+		{ type: '/' + this.name }
+	);
 };
 
 ve.dm.MWGalleryImageNode.static.toDomElements = function ( data, doc, converter ) {

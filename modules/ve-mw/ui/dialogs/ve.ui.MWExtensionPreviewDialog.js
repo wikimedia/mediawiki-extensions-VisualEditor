@@ -55,15 +55,17 @@ ve.ui.MWExtensionPreviewDialog.prototype.getSetupProcess = function ( data ) {
 			} else {
 				element = this.getNewElement();
 			}
-			let linearData = [ element, { type: '/' + element.type } ];
+			const linearData = [ element, { type: '/' + element.type } ];
 			if ( ve.dm.nodeFactory.isNodeContent( element.type ) ) {
-				linearData = [ { type: 'paragraph' } ].concat( linearData, { type: '/paragraph' } );
+				linearData.unshift( { type: 'paragraph' } );
+				linearData.push( { type: '/paragraph' } );
 			}
-			// We assume that WindowAction pass
-			const doc = data.fragment.getDocument().cloneWithData( linearData.concat( [
+			linearData.push(
 				{ type: 'internalList' },
 				{ type: '/internalList' }
-			] ) );
+			);
+			// We assume that WindowAction pass
+			const doc = data.fragment.getDocument().cloneWithData( linearData );
 
 			const rootNode = doc.getDocumentNode().children[ 0 ];
 			this.previewNode = doc.getNodesByType( element.type )[ 0 ];

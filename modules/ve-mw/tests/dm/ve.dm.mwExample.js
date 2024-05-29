@@ -2189,10 +2189,11 @@ ve.dm.mwExample.domToDataCases = {
 	},
 	'thumb image': {
 		body: ve.dm.mwExample.MWBlockImage.html,
-		data: ve.dm.mwExample.MWBlockImage.data.concat( [
+		data: [
+			...ve.dm.mwExample.MWBlockImage.data,
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		] ),
+		],
 		storeItems: ve.dm.mwExample.MWBlockImage.storeItems
 	},
 	'broken block image': {

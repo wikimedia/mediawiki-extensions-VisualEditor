@@ -38,11 +38,11 @@ OO.inheritClass( ve.ui.MWLinkInspectorTool, ve.ui.LinkInspectorTool );
 
 /* Static Properties */
 
-ve.ui.MWLinkInspectorTool.static.modelClasses =
-	ve.ui.MWLinkInspectorTool.super.static.modelClasses.concat( [
-		ve.dm.MWNumberedExternalLinkNode,
-		ve.dm.MWMagicLinkNode
-	] );
+ve.ui.MWLinkInspectorTool.static.modelClasses = [
+	...ve.ui.MWLinkInspectorTool.super.static.modelClasses,
+	ve.dm.MWNumberedExternalLinkNode,
+	ve.dm.MWMagicLinkNode
+];
 
 ve.ui.MWLinkInspectorTool.static.associatedWindows = [ 'link', 'linkNode', 'linkMagicNode' ];
 

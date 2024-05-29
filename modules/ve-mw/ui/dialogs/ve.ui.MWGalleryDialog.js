@@ -993,9 +993,9 @@ ve.ui.MWGalleryDialog.prototype.isHighlightedItemModified = function () {
 ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 	const surfaceModel = this.getFragment().getSurface(),
 		surfaceModelDocument = surfaceModel.getDocument(),
-		items = this.galleryGroup.items;
+		items = this.galleryGroup.items,
+		data = [];
 
-	let data = [];
 	let mwData;
 
 	function scaleImage( height, width, maxHeight, maxWidth ) {
@@ -1095,14 +1095,14 @@ ve.ui.MWGalleryDialog.prototype.insertOrUpdateNode = function () {
 
 	// Update all child elements' data, but without the contents of the captions
 	if ( this.captionDocument.data.hasContent() ) {
-		data = data.concat( [
+		data.push(
 			{ type: 'mwGalleryCaption' },
 			{ type: '/mwGalleryCaption' }
-		] );
+		);
 	}
 	// Build node for each image
 	for ( let i = 0, ilen = items.length; i < ilen; i++ ) {
-		data = data.concat( getImageLinearData.call( this, items[ i ] ) );
+		ve.batchPush( data, getImageLinearData.call( this, items[ i ] ) );
 	}
 	// Replace whole contents of this node with the new ones
 	surfaceModel.change(

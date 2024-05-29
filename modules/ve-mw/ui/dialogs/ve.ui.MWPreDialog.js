@@ -35,13 +35,14 @@ ve.ui.MWPreDialog.static.title = OO.ui.deferMsg( 'visualeditor-mwpredialog-title
 
 ve.ui.MWPreDialog.static.modelClasses = [ ve.dm.MWPreNode ];
 
-ve.ui.MWPreDialog.static.actions = ve.ui.MWPreDialog.super.static.actions.concat( [
+ve.ui.MWPreDialog.static.actions = [
+	...ve.ui.MWPreDialog.super.static.actions,
 	{
 		action: 'convert',
 		label: OO.ui.deferMsg( 'visualeditor-mwpredialog-convert' ),
 		modes: [ 'edit' ]
 	}
-] );
+];
 
 /* Methods */
 
