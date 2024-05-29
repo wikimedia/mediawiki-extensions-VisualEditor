@@ -218,6 +218,14 @@ ve.ui.MWExtensionWindow.prototype.hasMeaningfulEdits = function () {
 		OO.setProp( mwDataCopy, 'body', 'extsrc', changed.trim() );
 	}
 
+	// Also trim the baseline. In "edit" mode we likely have added whitespace,
+	// and in "insert" mode we don't want to break if the default value starts
+	// or ends with whitespace.
+	const baselineChanged = OO.getProp( mwDataBaseline, 'body', 'extsrc' );
+	if ( baselineChanged !== undefined ) {
+		OO.setProp( mwDataBaseline, 'body', 'extsrc', baselineChanged.trim() );
+	}
+
 	return !ve.compare( mwDataBaseline, mwDataCopy );
 };
 
