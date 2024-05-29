@@ -44,8 +44,9 @@ ve.ui.MWLanguageVariantInspector.static.actions = [
 		label: OO.ui.deferMsg( 'visualeditor-inspector-remove-tooltip' ),
 		flags: 'destructive',
 		modes: 'edit'
-	}
-].concat( ve.ui.MWLanguageVariantInspector.super.static.actions );
+	},
+	...ve.ui.MWLanguageVariantInspector.super.static.actions
+];
 
 ve.ui.MWLanguageVariantInspector.static.defaultVariantType =
 	'mwLanguageVariantInline';

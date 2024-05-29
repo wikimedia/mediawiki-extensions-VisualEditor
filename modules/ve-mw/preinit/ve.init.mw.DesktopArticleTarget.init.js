@@ -299,10 +299,11 @@
 					);
 					// Add modules specific to desktop (modules shared between desktop
 					// and mobile are already added by TargetLoader)
-					[ 'ext.visualEditor.desktopArticleTarget' ]
+					[
+						'ext.visualEditor.desktopArticleTarget',
 						// Add requested plugins
-						.concat( plugins )
-						.forEach( mw.libs.ve.targetLoader.addPlugin );
+						...plugins
+					].forEach( mw.libs.ve.targetLoader.addPlugin );
 					plugins = [];
 					return mw.libs.ve.targetLoader.loadModules( mode );
 				} )

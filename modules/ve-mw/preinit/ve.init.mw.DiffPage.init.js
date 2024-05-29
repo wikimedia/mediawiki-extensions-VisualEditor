@@ -70,7 +70,7 @@
 			$visualDiff.empty();
 			progress.$element.removeClass( 'oo-ui-element-hidden' );
 			// TODO: Load a smaller subset of VE for computing the visual diff
-			const modulePromise = mw.loader.using( [ 'ext.visualEditor.articleTarget', 'ext.visualEditor.mwmeta' ].concat( pluginModules ) );
+			const modulePromise = mw.loader.using( [ 'ext.visualEditor.articleTarget', 'ext.visualEditor.mwmeta', ...pluginModules ] );
 			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( ( visualDiffGenerator ) => {
 				// This class is loaded via modulePromise above
 				// eslint-disable-next-line no-undef

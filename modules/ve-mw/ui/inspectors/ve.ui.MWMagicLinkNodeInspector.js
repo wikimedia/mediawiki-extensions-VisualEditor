@@ -31,13 +31,14 @@ ve.ui.MWMagicLinkNodeInspector.static.title = null; // see #getSetupProcess
 
 ve.ui.MWMagicLinkNodeInspector.static.modelClasses = [ ve.dm.MWMagicLinkNode ];
 
-ve.ui.MWMagicLinkNodeInspector.static.actions = ve.ui.MWMagicLinkNodeInspector.super.static.actions.concat( [
+ve.ui.MWMagicLinkNodeInspector.static.actions = [
+	...ve.ui.MWMagicLinkNodeInspector.super.static.actions,
 	{
 		action: 'convert',
 		label: OO.ui.deferMsg( 'visualeditor-magiclinknodeinspector-convert-link' ),
 		modes: [ 'edit' ]
 	}
-] );
+];
 
 /* Methods */
 

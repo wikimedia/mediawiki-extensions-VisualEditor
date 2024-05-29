@@ -34,13 +34,14 @@ ve.ui.MWLinkAnnotationInspector.static.modelClasses = [
 	ve.dm.MWInternalLinkAnnotation
 ];
 
-ve.ui.MWLinkAnnotationInspector.static.actions = ve.ui.MWLinkAnnotationInspector.static.actions.concat( [
+ve.ui.MWLinkAnnotationInspector.static.actions = [
+	...ve.ui.MWLinkAnnotationInspector.static.actions,
 	{
 		action: 'convert',
 		label: null, // see #updateActions
 		modes: [ 'edit', 'insert' ]
 	}
-] );
+];
 
 /* Methods */
 

@@ -230,8 +230,8 @@ ve.ui.wikitextCommandRegistry.register(
 		'insertTable', 'mwWikitext', 'toggleWrapSelection',
 		{
 			args: [
-				[ { type: 'paragraph' } ].concat( '{| class="wikitable"'.split( '' ) ).concat( { type: '/paragraph' } ),
-				[ { type: 'paragraph' } ].concat( '|}'.split( '' ) ).concat( { type: '/paragraph' } ),
+				[ { type: 'paragraph' }, ...'{| class="wikitable"', { type: '/paragraph' } ],
+				[ { type: 'paragraph' }, ...'|}', { type: '/paragraph' } ],
 				function () {
 					return '' +
 						'|+ ' + ve.msg( 'visualeditor-dialog-table-caption' ) +

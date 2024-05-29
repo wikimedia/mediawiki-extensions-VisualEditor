@@ -263,7 +263,7 @@ ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, confi
  */
 ve.init.mw.MobileArticleTarget.prototype.getSurfaceClasses = function () {
 	const classes = ve.init.mw.MobileArticleTarget.super.prototype.getSurfaceClasses.call( this );
-	return classes.concat( [ 'content' ] );
+	return [ ...classes, 'content' ];
 };
 
 /**
@@ -443,32 +443,28 @@ ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// temporarily add them here. We need to do it _here_ rather than in their
 	// own static variable to make sure that other tools which meddle with
 	// toolbarGroups (Cite, mostly) have a chance to do so.
-	this.toolbarGroups = [].concat(
-		[
-			// Back
-			{
-				name: 'back',
-				include: [ 'back' ]
-			}
-		],
-		this.toolbarGroups,
-		[
-			{
-				name: 'editMode',
-				type: 'list',
-				icon: 'edit',
-				title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-				label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-				invisibleLabel: true,
-				include: [ { group: 'editMode' } ]
-			},
-			{
-				name: 'save',
-				type: 'bar',
-				include: [ 'showSave' ]
-			}
-		]
-	);
+	this.toolbarGroups = [
+		// Back
+		{
+			name: 'back',
+			include: [ 'back' ]
+		},
+		...this.toolbarGroups,
+		{
+			name: 'editMode',
+			type: 'list',
+			icon: 'edit',
+			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+			label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+			invisibleLabel: true,
+			include: [ { group: 'editMode' } ]
+		},
+		{
+			name: 'save',
+			type: 'bar',
+			include: [ 'showSave' ]
+		}
+	];
 
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );

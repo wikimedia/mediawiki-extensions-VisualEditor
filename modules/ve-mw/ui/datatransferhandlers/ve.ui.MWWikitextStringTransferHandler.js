@@ -31,10 +31,10 @@ OO.inheritClass( ve.ui.MWWikitextStringTransferHandler, ve.ui.PlainTextStringTra
 
 ve.ui.MWWikitextStringTransferHandler.static.name = 'wikitextString';
 
-ve.ui.MWWikitextStringTransferHandler.static.types =
-	ve.ui.MWWikitextStringTransferHandler.super.static.types.concat(
-		[ 'text/x-wiki' ]
-	);
+ve.ui.MWWikitextStringTransferHandler.static.types = [
+	...ve.ui.MWWikitextStringTransferHandler.super.static.types,
+	'text/x-wiki'
+];
 
 ve.ui.MWWikitextStringTransferHandler.static.handlesPaste = true;
 

@@ -21,9 +21,11 @@
 ( function () {
 	const conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
-		modules = [ 'ext.visualEditor.articleTarget' ]
+		modules = [
+			'ext.visualEditor.articleTarget',
 			// Add modules from $wgVisualEditorPluginModules
-			.concat( conf.pluginModules.filter( mw.loader.getState ) );
+			...conf.pluginModules.filter( mw.loader.getState )
+		];
 
 	const url = new URL( location.href );
 	// Provide the new wikitext editor

@@ -181,7 +181,8 @@ ve.init.mw.ArticleTarget.static.platformType = 'other';
 /**
  * @inheritdoc
  */
-ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.super.static.documentCommands.concat( [
+ve.init.mw.ArticleTarget.static.documentCommands = [
+	...ve.init.mw.ArticleTarget.super.static.documentCommands,
 	// Make help dialog triggerable from anywhere
 	'commandHelp',
 	// Make save commands triggerable from anywhere
@@ -190,7 +191,7 @@ ve.init.mw.ArticleTarget.static.documentCommands = ve.init.mw.ArticleTarget.supe
 	'showPreview',
 	'showMinoredit',
 	'showWatchthis'
-] );
+];
 
 /* Static methods */
 
@@ -1772,7 +1773,7 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
  */
 ve.init.mw.ArticleTarget.prototype.getSurfaceClasses = function () {
 	const classes = ve.init.mw.ArticleTarget.super.prototype.getSurfaceClasses.call( this );
-	return classes.concat( [ 'mw-body-content' ] );
+	return [ ...classes, 'mw-body-content' ];
 };
 
 /**

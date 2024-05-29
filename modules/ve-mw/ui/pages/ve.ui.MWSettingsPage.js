@@ -106,8 +106,9 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 			label: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-label' ),
 			help: ve.msg( 'visualeditor-dialog-meta-settings-noeditsection-help' ),
 			classes: [ 've-test-page-settings-noeditsection' ]
-		}
-	].concat( ve.ui.MWSettingsPage.static.extraMetaCheckboxes );
+		},
+		...ve.ui.MWSettingsPage.static.extraMetaCheckboxes
+	];
 
 	if ( mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' ).category ) {
 		this.metaItemCheckboxes.push(
