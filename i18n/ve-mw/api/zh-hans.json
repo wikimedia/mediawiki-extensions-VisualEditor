@@ -10,10 +10,11 @@
 			"Xzonn",
 			"Yejianfei",
 			"星海",
-			"科劳"
+			"科劳",
+			"LittlePaw365"
 		]
 	},
-	"apierror-visualeditor-badcachekey": "找不到带有该关键词的已缓存序列化内容",
+	"apierror-visualeditor-badcachekey": "没有找到该键的缓存序列化",
 	"apierror-visualeditor-difffailed": "差异失败",
 	"apihelp-visualeditor-param-basetimestamp": "在保存时，将此设置为编辑该修订版本时的时间戳。用于检测编辑冲突。",
 	"apihelp-visualeditor-param-badetag": "如果RESTBase查询返回一个看似无效的ETag，请将其传递到此处以进行记录。",
