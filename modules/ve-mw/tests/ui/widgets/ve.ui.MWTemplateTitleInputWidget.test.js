@@ -166,7 +166,7 @@
 						{ pageid: 101, title: 'B' },
 						{ pageid: 102, title: 'A' },
 						// Documentation subpage, expected to be stripped
-						{ pageid: 103, title: 'A/(templatedata-doc-subpage)' }
+						{ pageid: 103, title: 'A/(templatedata-doc-subpage)', index: 2 }
 					],
 					redirects: [
 						// Alternative source for indexes, expected to be copied to the pages array

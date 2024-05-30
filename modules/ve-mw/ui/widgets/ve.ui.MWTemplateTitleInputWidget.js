@@ -120,9 +120,6 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 				}
 			} );
 
-			// Ensure everything goes into the order defined by the page's index key
-			newPages.sort( ( a, b ) => a.index - b.index );
-
 			// T54448: Filter out matches which end in /doc or as configured on-wiki
 			if ( templateDataInstalled ) {
 				newPages = newPages.filter(
@@ -131,6 +128,15 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
 					( page ) => page.title.slice( -templateDocPageFragment.length ) !== templateDocPageFragment
 				);
 			}
+
+			// Ensure everything goes into the order defined by the page's index key
+			newPages.sort( ( a, b ) => {
+				// T366299: Avoid unstable sort.
+				if ( a.index === undefined || b.index === undefined ) {
+					return 0;
+				}
+				return a.index - b.index;
+			} );
 
 			const titles = newPages.map( ( page ) => page.title );
 
