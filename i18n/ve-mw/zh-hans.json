@@ -3,6 +3,7 @@
 		"authors": [
 			"A Retired User",
 			"Anakmalaysia",
+			"Anterdc99",
 			"Bencmq",
 			"Bo77le",
 			"Byfserag",
@@ -98,6 +99,7 @@
 	"visualeditor-changedesc-mwtransclusion": "模板参数已更改",
 	"visualeditor-desc": "MediaWiki的可视化编辑器",
 	"visualeditor-descriptionpagelink": "Project:可视化编辑器",
+	"visualeditor-dialog-extension-abandonedit": "您确定要关闭此对话框而不应用更改吗？",
 	"visualeditor-dialog-media-alttext-checkbox": "使用说明作为替代文本",
 	"visualeditor-dialog-media-alttext-section": "替代文本",
 	"visualeditor-dialog-media-alttext-section-help": "您可以使用此功能给视障人士撰写媒体对象的文字描述。描述应足以让他们理解媒体对象的目的和所提供的信息。这对盲人用户和其他使用屏幕阅读器软件或纯文本浏览器的人们至关重要。",
