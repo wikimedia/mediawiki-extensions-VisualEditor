@@ -13,7 +13,8 @@
 			"Vigorous action",
 			"Whym",
 			"おはぐろ蜻蛉",
-			"아라"
+			"아라",
+			"Ant176"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ビジュアルエディター]]",
@@ -21,7 +22,7 @@
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ビジュアルエディター: 要確認]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ビジュアルエディター]]を使用した編集のうち、意図しない変更点を含むおそれがあるとシステムが判断したもの",
 	"tag-visualeditor-wikitext": "2017年版ソースエディター",
-	"tag-visualeditor-wikitext-description": "2017年版ビジュアルエディターを使用した編集",
+	"tag-visualeditor-wikitext-description": "2017年版ウィキテキストエディターを使用した編集",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|ビジュアルエディター: 中途切替]]",
 	"tag-visualeditor-switched-description": "ビジュアルエディターで編集を開始したあと、ウィキテキストエディターに変更したもの",
 	"visualeditor-feedback-link": "Project:ビジュアルエディター/フィードバック",
