@@ -76,9 +76,7 @@ function checkFiles() {
 	const modulesFiles = new Set();
 	addModulesToSet( modulesJson, modulesFiles, 'lib/ve' );
 
-	const missingFiles = Array.from( modulesFiles ).filter( ( file ) => {
-		return !extensionFiles.has( file ) && !isIgnored( file );
-	} );
+	const missingFiles = Array.from( modulesFiles ).filter( ( file ) => !extensionFiles.has( file ) && !isIgnored( file ) );
 
 	if ( unusedIgnores.size ) {
 		console.warn(
