@@ -12,7 +12,8 @@ namespace MediaWiki\Extension\VisualEditor\EditCheck;
 use MessageLocalizer;
 
 class ResourceLoaderData {
-	protected static array $defaults = [
+
+	private const DEFAULTS = [
 		'addReference' => [
 			'minimumCharacters' => 50,
 			'beforePunctuation' => false,
@@ -34,6 +35,6 @@ class ResourceLoaderData {
 	public static function getConfig( MessageLocalizer $context ): array {
 		$raw_config = json_decode( $context->msg( 'editcheck-config.json' )->inContentLanguage()->plain(), true );
 
-		return array_replace_recursive( self::$defaults, $raw_config ?? [] );
+		return array_replace_recursive( self::DEFAULTS, $raw_config ?? [] );
 	}
 }
