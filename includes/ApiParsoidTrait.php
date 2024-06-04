@@ -31,31 +31,19 @@ trait ApiParsoidTrait {
 	private ?LoggerInterface $logger = null;
 	private ?StatsdDataFactoryInterface $stats = null;
 
-	/**
-	 * @return LoggerInterface
-	 */
 	protected function getLogger(): LoggerInterface {
 		return $this->logger ?: new NullLogger();
 	}
 
-	/**
-	 * @param LoggerInterface $logger
-	 */
-	protected function setLogger( LoggerInterface $logger ) {
+	protected function setLogger( LoggerInterface $logger ): void {
 		$this->logger = $logger;
 	}
 
-	/**
-	 * @return StatsdDataFactoryInterface
-	 */
 	protected function getStats(): StatsdDataFactoryInterface {
 		return $this->stats ?: new NullStatsdDataFactory();
 	}
 
-	/**
-	 * @param StatsdDataFactoryInterface $stats
-	 */
-	protected function setStats( StatsdDataFactoryInterface $stats ) {
+	protected function setStats( StatsdDataFactoryInterface $stats ): void {
 		$this->stats = new PrefixingStatsdDataFactoryProxy( $stats, 'VE' );
 	}
 
@@ -70,17 +58,16 @@ trait ApiParsoidTrait {
 	 * @param string $key
 	 * @param float $startTime from statsGetStartTime()
 	 */
-	private function statsRecordTiming( string $key, float $startTime ) {
+	private function statsRecordTiming( string $key, float $startTime ): void {
 		$duration = ( microtime( true ) - $startTime ) * 1000;
 		$this->getStats()->timing( $key, $duration );
 	}
 
 	/**
-	 * @param HttpException $ex
 	 * @return never
 	 * @throws ApiUsageException
 	 */
-	private function dieWithRestHttpException( HttpException $ex ) {
+	private function dieWithRestHttpException( HttpException $ex ): void {
 		if ( $ex instanceof LocalizedHttpException ) {
 			$converter = new \MediaWiki\Message\Converter();
 			$msg = $converter->convertMessageValue( $ex->getMessageValue() );
@@ -194,7 +181,6 @@ trait ApiParsoidTrait {
 
 	/**
 	 * @see VisualEditorParsoidClientFactory
-	 * @return ParsoidClient
 	 */
 	abstract protected function getParsoidClient(): ParsoidClient;
 

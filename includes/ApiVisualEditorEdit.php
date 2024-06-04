@@ -292,12 +292,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		return $hash;
 	}
 
-	/**
-	 * @param BagOStuff $cache
-	 * @param UserIdentity $user
-	 * @param string $newKey
-	 */
-	private function pruneExcessStashedEntries( BagOStuff $cache, UserIdentity $user, $newKey ) {
+	private function pruneExcessStashedEntries( BagOStuff $cache, UserIdentity $user, string $newKey ): void {
 		$key = $cache->makeKey( 'visualeditor-serialization-recent', $user->getName() );
 
 		$keyList = $cache->get( $key ) ?: [];

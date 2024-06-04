@@ -32,7 +32,7 @@ class ApiVisualEditorTest extends ApiTestCase {
 		parent::tearDown();
 	}
 
-	private function loadEditor( $overrideParams = [] ) {
+	private function loadEditor( array $overrideParams = [] ): array {
 		$params = array_merge( [
 			'action' => 'visualeditor',
 			'paction' => 'metadata',

@@ -2,7 +2,6 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
-use Generator;
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
@@ -14,9 +13,6 @@ use Wikimedia\Bcp47Code\Bcp47CodeValue;
  */
 class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @return DirectParsoidClient
-	 */
 	private function createDirectClient(): DirectParsoidClient {
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
@@ -27,7 +23,6 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		return $directClient;
 	}
 
-	/** @return Generator */
 	public static function provideLanguageCodes() {
 		yield 'German language code' => [ 'de' ];
 		yield 'English language code' => [ 'en' ];

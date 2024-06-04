@@ -25,7 +25,7 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		$this->assertInstanceOf( VisualEditorParsoidClientFactory::class, $veParsoidClientFactory );
 	}
 
-	private function newClientFactory() {
+	private function newClientFactory(): VisualEditorParsoidClientFactory {
 		$httpRequestFactory = $this->createNoOpMock( HttpRequestFactory::class, [ 'createMultiClient' ] );
 		$httpRequestFactory->method( 'createMultiClient' )->willReturn(
 			$this->createNoOpMock( MultiHttpClient::class )

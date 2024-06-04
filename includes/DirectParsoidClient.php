@@ -34,16 +34,9 @@ class DirectParsoidClient implements ParsoidClient {
 
 	private const FLAVOR_DEFAULT = 'view';
 
-	/** @var PageRestHelperFactory */
-	private $helperFactory;
+	private PageRestHelperFactory $helperFactory;
+	private Authority $performer;
 
-	/** @var Authority */
-	private $performer;
-
-	/**
-	 * @param PageRestHelperFactory $helperFactory
-	 * @param Authority $performer
-	 */
 	public function __construct(
 		PageRestHelperFactory $helperFactory,
 		Authority $performer
@@ -52,15 +45,6 @@ class DirectParsoidClient implements ParsoidClient {
 		$this->helperFactory = $helperFactory;
 	}
 
-	/**
-	 * @param PageIdentity $page
-	 * @param RevisionRecord|null $revision
-	 * @param Bcp47Code|null $pageLanguage
-	 * @param bool $stash
-	 * @param string $flavor
-	 *
-	 * @return HtmlOutputRendererHelper
-	 */
 	private function getHtmlOutputRendererHelper(
 		PageIdentity $page,
 		?RevisionRecord $revision = null,
@@ -98,15 +82,6 @@ class DirectParsoidClient implements ParsoidClient {
 		return $helper;
 	}
 
-	/**
-	 * @param PageIdentity $page
-	 * @param string $html
-	 * @param int|null $oldid
-	 * @param string|null $etag
-	 * @param Bcp47Code|null $pageLanguage
-	 *
-	 * @return HtmlInputTransformHelper
-	 */
 	private function getHtmlInputTransformHelper(
 		PageIdentity $page,
 		string $html,
@@ -157,12 +132,6 @@ class DirectParsoidClient implements ParsoidClient {
 		return $this->fakeRESTbaseHTMLResponse( $parserOutput->getRawText(), $helper );
 	}
 
-	/**
-	 * @param PageIdentity $page
-	 * @param string $wikitext
-	 *
-	 * @return RevisionRecord
-	 */
 	private function makeFakeRevision(
 		PageIdentity $page,
 		string $wikitext
