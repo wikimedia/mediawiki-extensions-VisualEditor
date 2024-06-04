@@ -18,8 +18,7 @@
 		],
 		"indent": "off",
 		"no-jquery/no-html": "off",
-		"no-jquery/no-parse-html-literal": "off",
-		"implicit-arrow-linebreak": "warn"
+		"no-jquery/no-parse-html-literal": "off"
 	},
 	"parserOptions": {
 		"ecmaVersion": 2018
