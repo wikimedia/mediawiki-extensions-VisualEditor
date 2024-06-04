@@ -235,6 +235,6 @@ QUnit.test.each( 'getFragment', {
 		original: 'Foo#bar#baz#bat',
 		expected: 'bar#baz#bat'
 	}
-}, function ( assert, { original, expected } ) {
+}, ( assert, { original, expected } ) => {
 	assert.strictEqual( ve.dm.MWInternalLinkAnnotation.static.getFragment( original ), expected );
 } );

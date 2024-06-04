@@ -1,20 +1,15 @@
 {
-	const toggleCirrusSearchLookup = ( enabled ) =>
-		mw.config.set( 'wgVisualEditorConfig', ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
+	const toggleCirrusSearchLookup = ( enabled ) => mw.config.set( 'wgVisualEditorConfig', ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
 			cirrusSearchLookup: enabled !== false
 		} ) );
 
-	const makeFakeApi = () => {
-		return {
+	const makeFakeApi = () => ( {
 			defaults: { parameters: {} },
-			get: () => {
-				return {
+			get: () => ( {
 					abort: { bind: () => {} },
 					then: () => {}
-				};
-			}
-		};
-	};
+				} )
+		} );
 
 	QUnit.module( 've.ui.MWTemplateTitleInputWidget', ve.test.utils.newMwEnvironment( {
 		// Config will be reset by newMwEnvironment's teardown

@@ -12,10 +12,14 @@
 		"sinon": "readonly"
 	},
 	"rules": {
-		"compat/compat": [ "error", "last 2 chrome versions, last 2 firefox versions" ],
+		"compat/compat": [
+			"error",
+			"last 2 chrome versions, last 2 firefox versions"
+		],
 		"indent": "off",
 		"no-jquery/no-html": "off",
-		"no-jquery/no-parse-html-literal": "off"
+		"no-jquery/no-parse-html-literal": "off",
+		"implicit-arrow-linebreak": "warn"
 	},
 	"parserOptions": {
 		"ecmaVersion": 2018

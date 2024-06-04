@@ -14,11 +14,9 @@ ve.dm.mwExample = {};
 
 ve.dm.mwExample.baseUri = 'http://example.com/wiki/';
 
-ve.dm.mwExample.createExampleDocument = ( name, store, base ) =>
-	ve.dm.example.createExampleDocumentFromObject( name, store, ve.dm.mwExample, base || ve.dm.mwExample.baseUri );
+ve.dm.mwExample.createExampleDocument = ( name, store, base ) => ve.dm.example.createExampleDocumentFromObject( name, store, ve.dm.mwExample, base || ve.dm.mwExample.baseUri );
 
-ve.dm.mwExample.createExampleDocumentFromData = ( data, store, base ) =>
-	ve.dm.example.createExampleDocumentFromData( data, store, base || ve.dm.mwExample.baseUri );
+ve.dm.mwExample.createExampleDocumentFromData = ( data, store, base ) => ve.dm.example.createExampleDocumentFromData( data, store, base || ve.dm.mwExample.baseUri );
 
 ve.dm.mwExample.MWTransclusion = {
 	blockOpen: ve.dm.example.singleLine`

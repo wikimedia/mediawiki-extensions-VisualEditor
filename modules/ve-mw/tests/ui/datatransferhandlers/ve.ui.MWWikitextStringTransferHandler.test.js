@@ -22,11 +22,9 @@ ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType,
 		item = ve.ui.DataTransferItem.static.newFromString( string, mimeType ),
 		doc = ve.dm.Document.static.newBlankDocument(),
 		mockSurface = {
-			getModel: () => {
-				return {
+			getModel: () => ( {
 					getDocument: () => doc
-				};
-			},
+				} ),
 			createProgress: () => ve.createDeferred().promise()
 		};
 
