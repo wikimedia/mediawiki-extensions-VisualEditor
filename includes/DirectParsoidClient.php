@@ -52,8 +52,6 @@ class DirectParsoidClient implements ParsoidClient {
 		bool $stash = false,
 		string $flavor = self::FLAVOR_DEFAULT
 	): HtmlOutputRendererHelper {
-		$helper = $this->helperFactory->newHtmlOutputRendererHelper();
-
 		// TODO: remove this once we no longer need a User object for rate limiting (T310476).
 		if ( $this->performer instanceof User ) {
 			$user = $this->performer;
@@ -61,7 +59,7 @@ class DirectParsoidClient implements ParsoidClient {
 			$user = User::newFromIdentity( $this->performer->getUser() );
 		}
 
-		$helper->init( $page, [], $user, $revision );
+		$helper = $this->helperFactory->newHtmlOutputRendererHelper( $page, [], $user, $revision );
 
 		// Ensure we get a compatible version, not just the default
 		$helper->setOutputProfileVersion( self::PARSOID_VERSION );
