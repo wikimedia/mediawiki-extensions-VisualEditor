@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			555,
 			"Agripinoduarte",
 			"Amgauna",
 			"Cainamarques",
@@ -30,8 +31,7 @@
 			"Teles",
 			"TheEduGobi",
 			"TheGabrielZaum",
-			"Tuliouel",
-			555
+			"Tuliouel"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
