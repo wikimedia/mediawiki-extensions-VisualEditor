@@ -87,8 +87,6 @@ class DirectParsoidClient implements ParsoidClient {
 		string $etag = null,
 		Bcp47Code $pageLanguage = null
 	): HtmlInputTransformHelper {
-		$helper = $this->helperFactory->newHtmlInputTransformHelper();
-
 		// Fake REST body
 		$body = [
 			'html' => [
@@ -96,17 +94,24 @@ class DirectParsoidClient implements ParsoidClient {
 			]
 		];
 
-		$metrics = MediaWikiServices::getInstance()->getParsoidSiteConfig()->metrics();
-		if ( $metrics ) {
-			$helper->setMetrics( $metrics );
-		}
-
 		if ( $oldid || $etag ) {
 			$body['original']['revid'] = $oldid;
 			$body['original']['renderid'] = $etag;
 		}
 
-		$helper->init( $page, $body, [], null, $pageLanguage );
+		$helper = $this->helperFactory->newHtmlInputTransformHelper(
+			/* envOptions: */ [],
+			$page,
+			$body,
+			/* parameters: */ [],
+			/* originalRevision: */ null,
+			$pageLanguage
+		);
+
+		$metrics = MediaWikiServices::getInstance()->getParsoidSiteConfig()->metrics();
+		if ( $metrics ) {
+			$helper->setMetrics( $metrics );
+		}
 
 		return $helper;
 	}
