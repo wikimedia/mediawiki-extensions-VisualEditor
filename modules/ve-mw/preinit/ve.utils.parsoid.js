@@ -276,7 +276,13 @@ mw.libs.ve.getTargetDataFromHref = function ( href, doc ) {
 		return data;
 	}
 
-	const url = new URL( href, doc.baseURI );
+	let url;
+	try {
+		url = new URL( href, doc.baseURI );
+	} catch ( e ) {
+		// An invalid URL was provided (e.g. `https://`)
+		return returnExternalData();
+	}
 
 	// Equivalent to `ve.init.platform.getExternalLinkUrlProtocolsRegExp()`, which can not be called here
 	const externalLinkUrlProtocolsRegExp = new RegExp( '^(' + mw.config.get( 'wgUrlProtocols' ) + ')', 'i' );
