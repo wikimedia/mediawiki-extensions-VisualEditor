@@ -12,11 +12,13 @@ use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiEditCheckReferenceUrl extends ApiBase {
 
+	/** @phan-suppress-next-line PhanUndeclaredTypeProperty */
 	private ?BlockedDomainStorage $blockedDomainStorage;
 
 	public function __construct(
 		ApiMain $main,
 		string $name,
+		// @phan-suppress-next-line PhanUndeclaredTypeParameter
 		?BlockedDomainStorage $blockedDomainStorage
 	) {
 		parent::__construct( $main, $name );
@@ -46,7 +48,9 @@ class ApiEditCheckReferenceUrl extends ApiBase {
 			return false;
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredClassMethod
 		$domain = $this->blockedDomainStorage->validateDomain( $url );
+		// @phan-suppress-next-line PhanUndeclaredClassMethod
 		$blockedDomains = $this->blockedDomainStorage->loadComputed();
 		return !empty( $blockedDomains[ $domain ] );
 	}
@@ -60,6 +64,7 @@ class ApiEditCheckReferenceUrl extends ApiBase {
 			$url = 'https://' . $url;
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredClassMethod
 		$matches = BaseBlacklist::getSpamBlacklist()->filter(
 			[ $url ],
 			null,
