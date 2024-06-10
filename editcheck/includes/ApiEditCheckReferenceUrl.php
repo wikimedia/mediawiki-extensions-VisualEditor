@@ -76,6 +76,17 @@ class ApiEditCheckReferenceUrl extends ApiBase {
 	}
 
 	/**
+	 * Check if the required extensions are available for this API to be usable
+	 *
+	 * @return bool
+	 */
+	public static function isAvailable(): bool {
+		return ExtensionRegistry::getInstance()->isLoaded( 'SpamBlacklist' ) ||
+			// BlockedExternalDomains is within AbuseFilter:
+			ExtensionRegistry::getInstance()->isLoaded( 'AbuseFilter' );
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function getAllowedParams() {

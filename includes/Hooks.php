@@ -25,6 +25,7 @@ use MediaWiki\ChangeTags\Hook\ListDefinedTagsHook;
 use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
+use MediaWiki\Extension\VisualEditor\EditCheck\ApiEditCheckReferenceUrl;
 use MediaWiki\Hook\BeforeInitializeHook;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\CustomEditorHook;
@@ -1195,6 +1196,7 @@ class Hooks implements
 			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
 			'editCheck' => $veConfig->get( 'VisualEditorEditCheck' ),
 			'editCheckABTest' => $veConfig->get( 'VisualEditorEditCheckABTest' ),
+			'editCheckReliabilityAvailable' => ApiEditCheckReferenceUrl::isAvailable(),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $coreConfig->get( 'VisualEditorRebaserURL' ),

@@ -72,3 +72,33 @@ ve.ui.MWExternalLinkAnnotationWidget.static.createExternalLinkInputWidget = func
 ve.ui.MWExternalLinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
 	return this.constructor.static.createExternalLinkInputWidget( config );
 };
+
+/**
+ * Get the validity of current value
+ *
+ * @see OO.ui.TextInputWidget#getValidity
+ *
+ * @return {jQuery.Promise} A promise that resolves if the value is valid,
+ *  rejects if not. If it's rejected, it'll resolve with an error code.
+ */
+ve.ui.MWExternalLinkAnnotationWidget.prototype.getValidity = function () {
+	const url = this.input.getValue().trim();
+	return this.input.getValidity().then(
+		// input validity check covers whether it's a valid external link, now check whether it's blocked:
+		() => {
+			if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckReliabilityAvailable ) {
+				return ( new mw.Api().get( {
+					action: 'editcheckreferenceurl',
+					url: url,
+					formatversion: 2
+				} ) ).then( ( reliablityResults ) => {
+					if ( reliablityResults && reliablityResults.editcheckreferenceurl[ url ] === 'blocked' ) {
+						return ve.createDeferred().reject( 'invalid-blocked' );
+					}
+				} );
+			}
+		},
+		// invalid link, so provide a reason
+		() => ve.createDeferred().reject( 'invalid-external' )
+	);
+};
