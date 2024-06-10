@@ -24,6 +24,7 @@ use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Sanitizer;
 use MediaWiki\Request\DerivativeRequest;
@@ -32,7 +33,6 @@ use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
-use ObjectCache;
 use SkinFactory;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -265,7 +265,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			return false;
 		}
 
-		$cache = ObjectCache::getLocalClusterInstance();
+		$cache = MediaWikiServices::getInstance()->getObjectCacheFactory()->getLocalClusterInstance();
 
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
@@ -312,7 +312,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * @return string|false The wikitext
 	 */
 	protected function trySerializationCache( $hash ) {
-		$cache = ObjectCache::getLocalClusterInstance();
+		$cache = MediaWikiServices::getInstance()->getObjectCacheFactory()->getLocalClusterInstance();
 		$key = $cache->makeKey( 'visualeditor', 'serialization', $hash );
 		$value = $cache->get( $key );
 
