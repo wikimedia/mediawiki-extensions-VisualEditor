@@ -2,6 +2,7 @@
 
 // @phpcs:disable MediaWiki.Files.ClassMatchesFilename.NotMatch
 
+use MediaWiki\Context\ContextSource;
 use MediaWiki\Title\Title;
 
 /**

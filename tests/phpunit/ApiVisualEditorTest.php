@@ -2,10 +2,10 @@
 
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
-use ApiTestCase;
 use ExtensionRegistry;
-use HashConfig;
+use MediaWiki\Config\HashConfig;
 use MediaWiki\Extension\VisualEditor\ApiVisualEditor;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikimedia\ScopedCallback;
 
 /**

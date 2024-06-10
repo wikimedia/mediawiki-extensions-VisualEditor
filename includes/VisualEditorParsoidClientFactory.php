@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
-use RequestContext;
 
 /**
  * @since 1.40

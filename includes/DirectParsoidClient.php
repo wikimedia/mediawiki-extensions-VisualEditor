@@ -19,7 +19,7 @@ use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use User;
+use MediaWiki\User\User;
 use Wikimedia\Bcp47Code\Bcp47Code;
 use WikitextContent;
 
