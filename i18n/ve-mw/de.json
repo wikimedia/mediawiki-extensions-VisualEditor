@@ -277,6 +277,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Verlinkt wichtige Wörter zu anderen Wikiartikeln oder anderen Websites. Dies hilft Lesern, den Kontext zu verstehen.",
 	"visualeditor-linkinspector-educationpopup-title": "Links",
 	"visualeditor-linkinspector-illegal-title": "Ungültiger Seitentitel",
+	"visualeditor-linkinspector-invalid-blocked": "Die Benutzer in diesem Wiki haben beschlossen, Links zu dieser Site zu blockieren. Bitte {{#FORMAL|versuche es|versuchen Sie}} es mit einem anderen Link.",
 	"visualeditor-linkinspector-invalid-external": "Gib eine vollständige URL ein, z. B. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Beschriftung hinzufügen",
 	"visualeditor-linknodeinspector-title": "Einfacher Link",
