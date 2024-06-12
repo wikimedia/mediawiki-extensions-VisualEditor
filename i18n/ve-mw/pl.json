@@ -283,6 +283,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Linkuj ważne pojęcia do innych stron wiki. Pomoże to czytelnikom zrozumieć kontekst.",
 	"visualeditor-linkinspector-educationpopup-title": "Linki",
 	"visualeditor-linkinspector-illegal-title": "Nieprawidłowy tytuł strony",
+	"visualeditor-linkinspector-invalid-blocked": "Społeczność wiki zdecydowała, by zablokować linki do tej witryny. Spróbuj użyć innego linku.",
 	"visualeditor-linkinspector-invalid-external": "Wprowadź pełen adres URL, np. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Dodaj etykietę",
 	"visualeditor-linknodeinspector-title": "Prosty link",

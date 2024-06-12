@@ -290,6 +290,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Önemli kelimeleri diğer viki maddelerine ya da diğer internet sitelerine bağlayın. Bu, okuyucuların içeriği anlamasına yardımcı olacaktır.",
 	"visualeditor-linkinspector-educationpopup-title": "Bağlantılar",
 	"visualeditor-linkinspector-illegal-title": "Geçersiz sayfa başlığı",
+	"visualeditor-linkinspector-invalid-blocked": "Bu vikideki kişiler bu siteye olan bağlantıları engellemeye karar verdi. Lütfen başka bir bağlantı deneyin.",
 	"visualeditor-linkinspector-invalid-external": "Tam bir URL girin, ör. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Etiket ekle",
 	"visualeditor-linknodeinspector-title": "Basit bağlantı",

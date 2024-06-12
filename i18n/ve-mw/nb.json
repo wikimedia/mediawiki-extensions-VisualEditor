@@ -270,6 +270,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Lag lenker fra viktige ord til andre wikiartikler eller andre nettsider. Det hjelper leserne å forstå konteksten.",
 	"visualeditor-linkinspector-educationpopup-title": "Lenker",
 	"visualeditor-linkinspector-illegal-title": "Ugyldig sidetittel",
+	"visualeditor-linkinspector-invalid-blocked": "Folk på denne wikien har bestemt seg for å blokkere lenker til dette nettstedet. Prøv en annen lenke i stedet.",
 	"visualeditor-linkinspector-invalid-external": "Skriv inn en full URL, f.eks. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Legg til etikett",
 	"visualeditor-linknodeinspector-title": "Enkel lenke",

@@ -263,6 +263,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Digər viki məqalələrinə və ya hətta digər veb saytlara vacib sözlərlə keçid verin. Bu oxucuların məzmunu anlamalarına kömək edəcək.",
 	"visualeditor-linkinspector-educationpopup-title": "Keçidlər",
 	"visualeditor-linkinspector-illegal-title": "Yanlış səhifənin adı",
+	"visualeditor-linkinspector-invalid-blocked": "Bu vikidəki insanlar bu sayta keçidləri bloklamaq qərarına gəliblər. Zəhmət olmasa başqa link yoxlayın.",
 	"visualeditor-linkinspector-invalid-external": "URL əlavə edin, məs. https://numune.org",
 	"visualeditor-linknodeinspector-add-label": "Etiket əlavə et",
 	"visualeditor-linknodeinspector-title": "Sadə keçid",

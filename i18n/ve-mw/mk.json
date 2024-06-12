@@ -258,6 +258,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Ставајте ги важните зборови како врски кон други викистатии, па дури и други мрежни места. Ова ќе им помогне на читателтие да го разберат контекстот.",
 	"visualeditor-linkinspector-educationpopup-title": "Врски",
 	"visualeditor-linkinspector-illegal-title": "Неважечки наслов на страница",
+	"visualeditor-linkinspector-invalid-blocked": "Луѓето на ова вики решија да блокираат врски до тоа мрежно место. Ставете друга врска.",
 	"visualeditor-linkinspector-invalid-external": "Внесете целосна URL, како на пр. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Додај натпис",
 	"visualeditor-linknodeinspector-title": "Проста врска",
