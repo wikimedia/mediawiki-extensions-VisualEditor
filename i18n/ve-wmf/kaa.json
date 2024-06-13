@@ -5,9 +5,12 @@
 			"Nurlan"
 		]
 	},
-	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VizualRedaktor]]dı qollanıp islengen redaktorlaw.",
+	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualRedaktor arqalı]]",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VizualRedaktor]] arqalı islengen redaktorlaw.",
+	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualRedaktor: Tekseriw]]",
 	"tag-visualeditor-wikitext": "Derekti redaktorlaw",
-	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VizualRedaktor: Wikitekst Redaktorǵa ózgerdi]]",
+	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VizualRedaktordan Wikitekst redaktorına ótildi]]",
+	"tag-visualeditor-switched-description": "Paydalanıwshı VizualRedaktor kómeginde redaktorlap basladı, sońınan Wikitekst redaktorına ótti.",
 	"visualeditor-feedback-tool": "Bul programma haqqında pikir qaldırıw",
 	"visualeditor-help-label": "Paydalanıwshı qollanbasın oqıńız",
 	"visualeditor-welcomedialog-action": "Redaktorlawdı baslaw",

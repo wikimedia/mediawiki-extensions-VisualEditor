@@ -253,6 +253,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Ligar parolas importante a altere articulos de wiki o mesmo altere sitos web. Isto adjutara le lectores a comprender le contexto.",
 	"visualeditor-linkinspector-educationpopup-title": "Ligamines",
 	"visualeditor-linkinspector-illegal-title": "Titulo de pagina non valide",
+	"visualeditor-linkinspector-invalid-blocked": "Le gente sur iste wiki ha decidite de blocar le ligamines a iste sito. Per favor essaya un altere ligamine.",
 	"visualeditor-linkinspector-invalid-external": "Entra un URL complete, p.ex. https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Adder etiquetta",
 	"visualeditor-linknodeinspector-title": "Ligamine simple",
