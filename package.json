@@ -20,14 +20,14 @@
 		"@wdio/mocha-framework": "7.16.13",
 		"@wdio/spec-reporter": "7.16.13",
 		"api-testing": "1.6.0",
-		"eslint-config-wikimedia": "0.28.0",
+		"eslint-config-wikimedia": "0.28.2",
 		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.13.0",
 		"grunt-contrib-watch": "1.1.0",
 		"grunt-eslint": "24.3.0",
 		"grunt-image": "5.0.1",
 		"grunt-mocha-test": "0.13.3",
-		"grunt-stylelint": "0.20.0",
+		"grunt-stylelint": "0.20.1",
 		"grunt-tyops": "0.1.1",
 		"jimp": "0.13.0",
 		"jsdoc": "4.0.2",
@@ -36,7 +36,7 @@
 		"mocha": "5.2.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
-		"stylelint-config-wikimedia": "0.17.1",
+		"stylelint-config-wikimedia": "0.17.2",
 		"wdio-mediawiki": "2.5.0"
 	}
 }
