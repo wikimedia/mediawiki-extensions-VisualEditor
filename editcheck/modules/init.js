@@ -229,7 +229,7 @@ if (
 		// clear rejection-reasons between runs of the save process, so only the last one counts
 		mw.editcheck.rejections.length = 0;
 
-		const selections = mw.editcheck.findAddedContentNeedingReference( surface.getModel().getDocument() );
+		let selections = mw.editcheck.findAddedContentNeedingReference( surface.getModel().getDocument() );
 
 		if ( selections.length ) {
 			mw.editcheck.refCheckShown = true;
@@ -269,38 +269,92 @@ if (
 			target.toolbar.$element.before( reviewToolbar.$element );
 			target.toolbar = reviewToolbar;
 
-			const selection = selections[ 0 ];
-			const highlightNodes = surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node );
+			saveProcessDeferred = ve.createDeferred();
+			const context = surface.getContext();
 
-			surfaceView.drawSelections( 'editCheck', [ ve.ce.Selection.static.newFromModel( selection, surfaceView ) ] );
-			surfaceView.setReviewMode( true, highlightNodes );
-			toolbar.toggle( false );
-			target.onContainerScroll();
+			// TODO: Allow multiple selections to be shown when multicheck is enabled
+			selections = selections.slice( 0, 1 );
 
-			saveProcess.next( () => {
-				saveProcessDeferred = ve.createDeferred();
+			// eslint-disable-next-line no-shadow
+			const drawSelections = ( selections ) => {
+				const highlightNodes = [];
+				selections.forEach( ( selection ) => {
+					highlightNodes.push.apply( highlightNodes, surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
+				} );
+				// TODO: Make selections clickable when multicheck is enabled
+				surfaceView.drawSelections(
+					'editCheck',
+					selections.map( ( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView ) )
+				);
+				surfaceView.setReviewMode( true, highlightNodes );
+			};
+
+			const contextDone = ( responseData, contextData ) => {
+				if ( !responseData ) {
+					// this is the back button
+					return saveProcessDeferred.resolve();
+				}
+				const selectionIndex = selections.indexOf( contextData.selection );
+
+				if ( responseData.action !== 'reject' ) {
+					mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
+				} else if ( responseData.reason ) {
+					mw.editcheck.rejections.push( responseData.reason );
+				}
+				// TODO: Move on to the next issue, when multicheck is enabled
+				// selections = mw.editcheck.findAddedContentNeedingReference( surface.getModel().getDocument() );
+				selections = [];
+
+				if ( selections.length ) {
+					context.removePersistentSource( 'editCheckReferences' );
+					setTimeout( () => {
+						// timeout needed to wait out the newly added content being focused
+						surface.getModel().setNullSelection();
+						drawSelections( selections );
+						setTimeout( () => {
+							// timeout needed to allow the context to reposition
+							showCheckContext( selections[ Math.min( selectionIndex, selections.length - 1 ) ] );
+						} );
+					}, 500 );
+				} else {
+					saveProcessDeferred.resolve( true );
+				}
+			};
+
+			// eslint-disable-next-line no-inner-declarations
+			function showCheckContext( selection ) {
 				const fragment = surface.getModel().getFragment( selection, true );
 
-				const context = surface.getContext();
-
-				// Select the found content to correctly the context on desktop
+				// Select the found content to correctly position the context on desktop
 				fragment.select();
-				// Deactivate to prevent selection suppressing mobile context
-				surface.getView().deactivate();
 
 				context.addPersistentSource( {
 					embeddable: false,
 					data: {
 						fragment: fragment,
+						selection: selection,
+						callback: contextDone,
 						saveProcessDeferred: saveProcessDeferred
 					},
 					name: 'editCheckReferences'
 				} );
 
+				// Deactivate to prevent selection suppressing mobile context
+				surface.getView().deactivate();
+
 				// Once the context is positioned, clear the selection
 				setTimeout( () => {
 					surface.getModel().setNullSelection();
 				} );
+			}
+
+			drawSelections( selections );
+			toolbar.toggle( false );
+			target.onContainerScroll();
+
+			saveProcess.next( () => {
+
+				showCheckContext( selections[ 0 ] );
 
 				return saveProcessDeferred.promise().then( ( data ) => {
 					context.removePersistentSource( 'editCheckReferences' );
@@ -314,12 +368,7 @@ if (
 					target.onContainerScroll();
 
 					// Check the user inserted a citation
-					if ( data && data.action ) {
-						if ( data.action !== 'reject' ) {
-							mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
-						} else if ( data.reason ) {
-							mw.editcheck.rejections.push( data.reason );
-						}
+					if ( data ) {
 						const delay = ve.createDeferred();
 						// If they inserted, wait 2 seconds on desktop before showing save dialog
 						setTimeout( () => {
