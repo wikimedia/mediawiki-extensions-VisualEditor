@@ -268,49 +268,6 @@ class Hooks implements
 	}
 
 	/**
-	 * Detect incompatible browsers which we can't expect to load VE
-	 *
-	 * @param WebRequest $req The web request to check the details of
-	 * @param Config $config VE config object
-	 * @return bool The User Agent is unsupported
-	 */
-	private static function isUAUnsupported( WebRequest $req, Config $config ): bool {
-		if ( $req->getVal( 'vesupported' ) ) {
-			return false;
-		}
-		$unsupportedList = $config->get( 'VisualEditorBrowserUnsupportedList' );
-		$ua = strtolower( $req->getHeader( 'User-Agent' ) );
-		foreach ( $unsupportedList as $uaSubstr => $rules ) {
-			if ( !strpos( $ua, $uaSubstr . '/' ) ) {
-				continue;
-			}
-			if ( !is_array( $rules ) ) {
-				return true;
-			}
-
-			$matches = [];
-			$ret = preg_match( '/' . $uaSubstr . '\/([0-9\.]*) ?/i', $ua, $matches );
-			if ( $ret !== 1 ) {
-				continue;
-			}
-			$version = $matches[1];
-			foreach ( $rules as $rule ) {
-				[ $op, $matchVersion ] = $rule;
-				if (
-					( $op === '<' && $version < $matchVersion ) ||
-					( $op === '>' && $version > $matchVersion ) ||
-					( $op === '<=' && $version <= $matchVersion ) ||
-					( $op === '>=' && $version >= $matchVersion )
-				) {
-					return true;
-				}
-			}
-
-		}
-		return false;
-	}
-
-	/**
 	 * @param Title $title
 	 * @param User $user
 	 * @param WebRequest $req
@@ -430,10 +387,7 @@ class Hooks implements
 			}
 		}
 
-		if (
-			!self::enabledForUser( $user ) ||
-			self::isUAUnsupported( $req, $veConfig )
-		) {
+		if ( !self::enabledForUser( $user ) ) {
 			return true;
 		}
 
@@ -1182,7 +1136,6 @@ class Hooks implements
 			),
 			'thumbLimits' => $coreConfig->get( 'ThumbLimits' ),
 			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
-			'unsupportedList' => $veConfig->get( 'VisualEditorBrowserUnsupportedList' ),
 			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
 			'tabMessages' => array_filter( $veConfig->get( 'VisualEditorTabMessages' ) ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),

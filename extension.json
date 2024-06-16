@@ -47,28 +47,6 @@
 			},
 			"merge_strategy": "array_plus"
 		},
-		"VisualEditorBrowserUnsupportedList": {
-			"value": {
-				"firefox": [
-					[
-						"<=",
-						11
-					]
-				],
-				"safari": [
-					[
-						"<=",
-						6
-					]
-				],
-				"opera": [
-					[
-						"<",
-						12
-					]
-				]
-			}
-		},
 		"VisualEditorDisableForAnons": {
 			"description": "Do not change the edit tabs/links for anon users, regardless of other settings. Does not affect temporary users. Note that this does not actually disable the visual editor, contrary to the name, and you should probably set the user preferences so that wikitext editor is the default. (T253941)",
 			"value": false
@@ -355,7 +333,6 @@
 				]
 			},
 			"dependencies": [
-				"jquery.client",
 				"jquery.textSelection",
 				"mediawiki.page.ready",
 				"mediawiki.storage",
@@ -700,6 +677,7 @@
 				"oojs",
 				"oojs-ui",
 				"unicodejs",
+				"jquery.client",
 				"ext.visualEditor.core.utils",
 				"ext.visualEditor.core.utils.parsing"
 			]
@@ -832,7 +810,6 @@
 				"savechanges",
 				"savechanges-start",
 				"showpreview",
-				"visualeditor-browserwarning",
 				"visualeditor-loaderror-revidconflict",
 				"visualeditor-loaderror-wrongmode",
 				"visualeditor-mweditmodesource-progress",
