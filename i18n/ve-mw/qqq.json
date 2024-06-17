@@ -35,14 +35,15 @@
 			"Yejianfei",
 			"Zoranzoki21",
 			"Ата",
-			"Eleassar"
+			"Eleassar",
+			"Jack who built the house"
 		]
 	},
 	"accesskey-ca-editsource": "{{doc-accesskey}}",
 	"accesskey-ca-ve-edit": "{{doc-accesskey}}",
 	"collabpad-doctitle": "Name of CollabPad special page with a document subtitle",
 	"collabpad-import-subtitle": "Subtitle of CollabPad page, linking to the page the content was imported from",
-	"collabpad": "Name of CollabPad special page",
+	"collabpad": "{{doc-special|CollabPad}}",
 	"tooltip-ca-createsource": "Tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist.\n\nSee also:\n* {{msg-mw|Tooltip-ca-editsource}} - tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists",
 	"tooltip-ca-edit": "Over-ridden tooltip of the wikitext \"Edit source\" tab.",
 	"tooltip-ca-editsource": "Tooltip of the {{msg-mw|Visualeditor-ca-editsource}} tab, used if the page already exists.\n\nSee also:\n* {{msg-mw|Tooltip-ca-createsource}} - tooltip of the {{msg-mw|Visualeditor-ca-createsource}} tab, used if the page does not exist",

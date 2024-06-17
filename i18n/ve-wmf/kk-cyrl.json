@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Arystanbek",
-			"Ajiniyaz Nurniyazov"
+			"Ajiniyaz Nurniyazov",
+			"Casserium"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
-	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] қолданылып жасаған өңдеме.",
+	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] арқылы жасалған өңдеме",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Тексеру]]",
 	"tag-visualeditor-needcheck-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]] қолданылып жасалған өңдеменде жүйе уикитекстіге күтпеген өзгерістер болуы мүмкіндігін жүйе анықтады. .",
-	"tag-visualeditor-wikitext": "2017 қайнарын өңдеу",
-	"tag-visualeditor-wikitext-description": "2017 уикитекст өңдеуішті қолданып жасаған өңдеме",
+	"tag-visualeditor-wikitext": "Уики-мәтін редакторы 2017",
+	"tag-visualeditor-wikitext-description": "2017 жылғы уикимәтін редакторын қолданып жасаған өңдеме",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor: Ауысты]]",
 	"tag-visualeditor-switched-description": "Қатысушы VisualEditor қолданып өңдеуді бастады содан кейін уикимәтін өңдегішке ауыстырды.",
 	"visualeditor-feedback-link": "Project:VisualEditor/Пікірлер",
