@@ -13,7 +13,7 @@
 	"editcheck-dialog-addref-reject-description": "其他編者希望能更了解您拒絕新增引註的原因。",
 	"editcheck-dialog-addref-reject-irrelevant": "我認為引註內容與我所做的修改無關",
 	"editcheck-dialog-addref-reject-common-knowledge": "我新增的資訊是眾所周知的",
-	"editcheck-dialog-addref-reject-uncertain": "我不確定要新增什麼引註",
+	"editcheck-dialog-addref-reject-uncertain": "我不確定該新增什麼引註",
 	"editcheck-dialog-addref-reject-other": "其他",
 	"editcheck-dialog-addref-success-notify": "感謝您新增引註！",
 	"editcheck-dialog-addref-title": "新增引註",

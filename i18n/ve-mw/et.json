@@ -239,6 +239,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Lingi olulised sõnad viki teistele artiklitele või ka teistele võrgukohtadele. Sedasi saavad lugejad kontekstist paremini aru.",
 	"visualeditor-linkinspector-educationpopup-title": "Lingid",
 	"visualeditor-linkinspector-illegal-title": "Vigane lehekülje pealkiri",
+	"visualeditor-linkinspector-invalid-blocked": "Selle viki tegijad on otsustanud lingid sellele saidile blokeerida. Palun proovi teist linki.",
 	"visualeditor-linkinspector-invalid-external": "Sisesta terve aadress, nt https://näide.org.",
 	"visualeditor-linknodeinspector-add-label": "Lisa silt",
 	"visualeditor-linknodeinspector-title": "Lihtlink",
