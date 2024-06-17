@@ -8,5 +8,8 @@
 		"Node": "readonly",
 		"document": "readonly",
 		"$": "off"
+	},
+	"rules": {
+		"no-jquery/no-append-html": "warn"
 	}
 }
