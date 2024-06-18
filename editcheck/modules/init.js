@@ -103,6 +103,16 @@ mw.editcheck.Diff.prototype.getModifiedRanges = function ( coveredNodesOnly ) {
 	return ranges;
 };
 
+mw.editcheck.hasAddedContentNeedingReference = function ( surface, includeReferencedContent ) {
+	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck
+	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
+		return false;
+	}
+	const diff = new mw.editcheck.Diff( surface );
+	const check = mw.editcheck.editCheckFactory.create( 'addReference', mw.editcheck.config.addReference );
+	return check.findAddedContent( diff, includeReferencedContent ).length > 0;
+};
+
 mw.editcheck.rejections = [];
 
 mw.editcheck.getRejectionReasons = function () {
