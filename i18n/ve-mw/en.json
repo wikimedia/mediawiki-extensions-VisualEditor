@@ -338,7 +338,7 @@
 	"visualeditor-preference-collab-label": "Collaborative editing",
 	"visualeditor-preference-collab-description": "Invite other users to join your edit session in the visual editor.",
 	"visualeditor-preference-collab-info-link": "//mediawiki.org/wiki/VisualEditor/Real-time_collaboration",
-	"visualeditor-preference-collab-discussion-link": "//mediawiki.org/wiki/VisualEditor/Talk:Real-time_collaboration",
+	"visualeditor-preference-collab-discussion-link": "//mediawiki.org/wiki/Talk:VisualEditor/Real-time_collaboration",
 	"visualeditor-quick-access-characters.json": "null",
 	"visualeditor-rebase-client-export": "Export",
 	"visualeditor-rebase-client-export-start": "Export…",
