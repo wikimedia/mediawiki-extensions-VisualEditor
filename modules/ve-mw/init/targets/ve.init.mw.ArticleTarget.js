@@ -1550,13 +1550,12 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 		this.getSurface().getMode() === 'visual' &&
 		mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging
 	) {
-		const documentModel = this.getSurface().getModel().getDocument();
 		// New content needing a reference
-		if ( mw.editcheck.findAddedContentNeedingReference( documentModel ).length ) {
+		if ( mw.editcheck.hasAddedContentNeedingReference( this.getSurface() ) ) {
 			taglist.push( 'editcheck-references' );
 		}
 		// New content, regardless of if it needs a reference
-		if ( mw.editcheck.findAddedContentNeedingReference( documentModel, true ).length ) {
+		if ( mw.editcheck.hasAddedContentNeedingReference( this.getSurface(), true ) ) {
 			taglist.push( 'editcheck-newcontent' );
 		}
 		// Rejection reasons for references

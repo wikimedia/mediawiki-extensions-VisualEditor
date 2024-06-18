@@ -10,12 +10,26 @@ mw.editcheck.AddReferenceEditCheck.static.name = 'addReference';
 mw.editcheck.AddReferenceEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
 mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( diff ) {
+	return this.findAddedContent( diff ).map( ( range ) => {
+		const fragment = diff.surface.getModel().getFragment( new ve.dm.LinearSelection( range ) );
+		return new mw.editcheck.EditCheckAction( {
+			highlight: fragment,
+			selection: this.adjustForPunctuation( fragment.collapseToEnd() ),
+			check: this
+		} );
+	} );
+};
+
+mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( diff, includeReferencedContent ) {
+	// Broken out so a helper for tagging can call it
 	const documentModel = diff.documentModel;
 	const ranges = this.getModifiedRangesFromDiff( diff ).filter( ( range ) => {
-		// 4. Exclude any ranges that already contain references
-		for ( let i = range.start; i < range.end; i++ ) {
-			if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
-				return false;
+		if ( !includeReferencedContent ) {
+			// 4. Exclude any ranges that already contain references
+			for ( let i = range.start; i < range.end; i++ ) {
+				if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
+					return false;
+				}
 			}
 		}
 		// 5. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
@@ -25,14 +39,8 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( diff ) {
 		}
 		return true;
 	} );
-	return ranges.map( ( range ) => {
-		const fragment = diff.surface.getModel().getFragment( new ve.dm.LinearSelection( range ) );
-		return new mw.editcheck.EditCheckAction( {
-			highlight: fragment,
-			selection: this.adjustForPunctuation( fragment.collapseToEnd() ),
-			check: this
-		} );
-	} );
+
+	return ranges;
 };
 
 mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, contextItem ) {
