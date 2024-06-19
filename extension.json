@@ -602,6 +602,7 @@
 				"ext.visualEditor.core"
 			],
 			"messages": [
+				"visualeditor-rebase-client-author-name",
 				"visualeditor-collab-copy-title",
 				"visualeditor-collab-dialog-title",
 				"visualeditor-collab-dialog-privacy",
