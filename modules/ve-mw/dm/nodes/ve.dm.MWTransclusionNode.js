@@ -123,9 +123,9 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 		}
 	};
 
-	if ( domElements.length === 1 && [ 'td', 'th' ].indexOf( domElements[ 0 ].nodeName.toLowerCase() ) !== -1 ) {
+	if ( ve.dm.TableCellableNode.static.areNodesCellable( domElements ) ) {
 		dataElement.type = this.cellType;
-		ve.dm.TableCellableNode.static.setAttributes( dataElement.attributes, domElements );
+		ve.dm.TableCellableNode.static.setAttributes( dataElement.attributes, domElements, true );
 	}
 
 	if ( !domElements[ 0 ].getAttribute( 'data-ve-no-generated-contents' ) ) {

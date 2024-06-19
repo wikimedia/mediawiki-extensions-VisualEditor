@@ -32,6 +32,15 @@ OO.mixinClass( ve.ce.MWTransclusionTableCellNode, ve.ce.TableCellableNode );
 
 ve.ce.MWTransclusionTableCellNode.static.name = 'mwTransclusionTableCell';
 
+/* Methods */
+
+ve.ce.MWTransclusionTableCellNode.prototype.getTagName = function () {
+	// mwTransclusionTableCells have no style attribute. Give them a table
+	// cell to start with, although it will get overwritten with
+	// originalDomElements.
+	return 'td';
+};
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.MWTransclusionTableCellNode );
