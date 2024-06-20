@@ -883,8 +883,6 @@
 	}
 
 	init = {
-		unsupportedList: conf.unsupportedList,
-
 		/**
 		 * Add a plugin module or function.
 		 *
@@ -1330,11 +1328,8 @@
 
 	// Whether VisualEditor should be available for the current user, page, wiki, mediawiki skin,
 	// browser etc.
-	init.isAvailable = (
-		VisualEditorSupportCheck() &&
-		( url.searchParams.has( 'vesupported' ) || !$.client.test( init.unsupportedList, null, true ) )
-		// Extensions can disable VE in certain circumstances using the VisualEditorBeforeEditor hook (T174180)
-	);
+	init.isAvailable = VisualEditorSupportCheck();
+	// Extensions can disable VE in certain circumstances using the VisualEditorBeforeEditor hook (T174180)
 
 	const enabledForUser = (
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
@@ -1387,9 +1382,9 @@
 
 	init.updateTabs = updateTabs;
 
-	// Note: Though VisualEditor itself only needs this exposure for a very small reason
-	// (namely to access init.unsupportedList from the unit tests...) this has become one of the nicest
-	// ways to easily detect whether the VisualEditor initialisation code is present.
+	// Note: Though VisualEditor itself only needed this exposure for a very small reason
+	// (namely to access the old init.unsupportedList from the unit tests...) this has become one
+	// of the nicest ways to easily detect whether the VisualEditor initialisation code is present.
 	//
 	// The VE global was once available always, but now that platform integration initialisation
 	// is properly separated, it doesn't exist until the platform loads VisualEditor core.
