@@ -881,7 +881,15 @@ class Hooks implements
 			$veEditSectionHint = $tabMessages['editsectionhint'];
 
 			$attribs = $result['editsection']['attribs'];
-			$attribs['class'] = ( $attribs['class'] ?? '' ) . ' mw-editsection-visualeditor';
+			// class goes to SkinComponentLink which will accept a string or
+			// an array, and either might be provided at this point.
+			$class = $attribs['class'] ?? '';
+			if ( is_array( $class ) ) {
+				$class[] = 'mw-editsection-visualeditor';
+			} else {
+				$class .= ' mw-editsection-visualeditor';
+			}
+			$attribs['class'] = $class;
 			$attribs['title'] = $skin->msg( $veEditSectionHint )
 				->plaintextParams( $tooltip )
 				->inLanguage( $lang )->text();
