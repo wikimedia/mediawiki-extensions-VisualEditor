@@ -6,7 +6,8 @@
 			"Hopea",
 			"Nike",
 			"Pyscowicz",
-			"Rönttönen"
+			"Rönttönen",
+			"Samoasambia"
 		]
 	},
 	"visualeditor-mwlanguagevariant-disabled": "Variantin muunnos on pois päältä",
@@ -14,7 +15,9 @@
 	"visualeditor-mwlanguagevariant-oneway": "Yksisuuntainen muunnos: $1",
 	"visualeditor-mwlanguagevariant-twoway": "Kielen muunnos: $1",
 	"visualeditor-mwlanguagevariant-unknown": "Kielen muunnelma",
-	"visualeditor-mwlanguagevariantcontextitem-flag-hidden": "Tämä sääntö on piilotettu.",
+	"visualeditor-mwlanguagevariantcontextitem-flag-describe": "Tämä on määrätty sääntö.",
+	"visualeditor-mwlanguagevariantcontextitem-flag-hidden": "Tämä on piilotettu sääntö.",
+	"visualeditor-mwlanguagevariantcontextitem-flag-title": "Tämä sääntö vaikuttaa sivun otsikkoon.",
 	"visualeditor-mwlanguagevariantcontextitem-rule-code-label": "Kielikoodi",
 	"visualeditor-mwlanguagevariantcontextitem-rule-invalid-language-label": "<em>Virheellinen</em>",
 	"visualeditor-mwlanguagevariantcontextitem-rule-name-label": "Kieli",
