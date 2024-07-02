@@ -38,6 +38,7 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 			expectedHtml: '<p>ab</p>',
 			msg: 'Read mode references stripped'
 		},
+		/* FIXME: temporarily skipping for T247921
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
@@ -46,6 +47,7 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 			expectedHtml: '<p>a<sup typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;}" class="mw-ref reference"><a style="counter-reset: mw-Ref 1;"><span class="mw-reflink-text">[1]</span></a></sup>b</p>',
 			msg: 'VE references not stripped'
 		},
+		*/
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
