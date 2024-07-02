@@ -4,10 +4,11 @@
  * @copyright See AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
+@import 'mediawiki.skin.variables.less';
 
 /* All debug bars (includes target widgets) */
 .ve-ui-debugBar {
-	border-top: 1px solid #c8ccd1;
+	border-top: @border-subtle;
 	box-shadow: 0 10px 10px -10px rgba( 0, 0, 0, 0.15 ) inset;
 
 	ol {
@@ -28,6 +29,6 @@
 	opacity: 1;
 
 	& > * {
-		color: #72777d;
+		color: @color-placeholder;
 	}
 }
