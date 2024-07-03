@@ -243,6 +243,9 @@ class Hooks implements
 			return;
 		}
 
+		// onDifferenceEngineViewHeader may not run, so load modules here as well for styling (T361775)
+		$this->loadDiffModules( $output );
+
 		$parts['50_ve-init-mw-diffPage-diffMode'] = '<div class="ve-init-mw-diffPage-diffMode">' .
 			// Will be replaced by a ButtonSelectWidget in JS
 			new ButtonGroupWidget( [
@@ -262,9 +265,6 @@ class Hooks implements
 				]
 			] ) .
 			'</div>';
-
-		// onDifferenceEngineViewHeader may not run, so load modules here as well for styling (T361775)
-		$this->loadDiffModules( $output );
 	}
 
 	/**
