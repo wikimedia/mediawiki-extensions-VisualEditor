@@ -94,6 +94,9 @@ QUnit.test( 'init', ( assert ) => {
 		dataPromise = ve.createDeferred().resolve( response ).promise(),
 		done = assert.async();
 
+	// eslint-disable-next-line no-jquery/no-global-selector
+	$( '#qunit-fixture' ).append( target.$element );
+
 	target.on( 'surfaceReady', () => {
 		assert.strictEqual( target.getSurface().getModel().getDocument().getLang(), 'he', 'Page language is passed through from config' );
 		assert.strictEqual( target.getSurface().getModel().getDocument().getDir(), 'rtl', 'Page direction is passed through from config' );
