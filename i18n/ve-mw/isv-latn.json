@@ -5,8 +5,8 @@
 		]
 	},
 	"visualeditor-ca-createlocaldescriptionsource": "Dodati izvor lokalnogo opisa",
-	"visualeditor-ca-createsource": "Iztvoriti izvorny kod",
-	"visualeditor-ca-editsource": "Praviti kod",
-	"visualeditor-ca-editsource-section": "praviti kod",
+	"visualeditor-ca-createsource": "Stvoriti izvorny kod",
+	"visualeditor-ca-editsource": "Praviti izvorny kod",
+	"visualeditor-ca-editsource-section": "praviti izvorny kod",
 	"visualeditor-descriptionpagelink": "Project:Vizualny redaktor"
 }

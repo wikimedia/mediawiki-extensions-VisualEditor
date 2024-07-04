@@ -15,5 +15,8 @@
 	"visualeditor-dialog-media-info-artist": "Diunggah ulih $1",
 	"visualeditor-dialog-meta-languages-link-label": "Laman tarait",
 	"visualeditor-dialog-table-collapsed": "Ungsutakan di awal",
+	"visualeditor-preference-visualeditor": "Nyalaakan visual editor",
+	"visualeditor-preference-newwikitexteditor-enable": "Pakai mode naskah wiki di dalam pambabak visual daripada mamakai pambabak naskah wiki lain",
+	"visualeditor-preference-newwikitexteditor-help": "Ini bahanu disambat 'pambabak naskah wiki 2017'.",
 	"visualeditor-savedialog-review-nosummary": "Kadada kasimpulan babakan"
 }
