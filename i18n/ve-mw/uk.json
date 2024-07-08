@@ -278,6 +278,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Створюйте посилання з ключових слів на інші статті у вікі чи навіть інші веб-сайти. Це допоможе читачам розуміти контекст.",
 	"visualeditor-linkinspector-educationpopup-title": "Посилання",
 	"visualeditor-linkinspector-illegal-title": "Невірний заголовок сторінки",
+	"visualeditor-linkinspector-invalid-blocked": "Дописувачі цієї вікі вирішили заблокувати посилання на цей сайт. Спробуйте дати інше посилання.",
 	"visualeditor-linkinspector-invalid-external": "Вкажіть повний URL, наприклад https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Додати підпис",
 	"visualeditor-linknodeinspector-title": "Просте посилання",
