@@ -191,6 +191,7 @@
 	"visualeditor-linkinspector-educationpopup-title": "Pautan",
 	"visualeditor-linkinspector-illegal-title": "Tajuk laman tidak sah",
 	"visualeditor-linkinspector-invalid-blocked": "Komuniti wiki ini memutuskan untuk menyekat pautan ke tapak ini. Sila cuba guna pautan lain.",
+	"visualeditor-linkinspector-invalid-external": "Masukkan URL penuh, contoh: https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Tambah label",
 	"visualeditor-linknodeinspector-title": "Pautan ringkas",
 	"visualeditor-magiclinknodeinspector-convert-link": "Tukarkan kepada pautan ringkas",
