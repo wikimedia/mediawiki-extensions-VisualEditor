@@ -96,23 +96,22 @@ ve.ui.MWTocWidget.prototype.onMetaListRemove = function ( metaItem ) {
  * Initialize TOC based on the presence of magic words
  */
 ve.ui.MWTocWidget.prototype.initFromMetaList = function () {
-	const items = this.metaList.getItemsInGroup( 'mwTOC' ),
-		len = items.length;
-	let i = 0;
-	if ( len > 0 ) {
-		for ( ; i < len; i++ ) {
-			if ( items[ i ] instanceof ve.dm.MWTOCMetaItem ) {
-				const property = items[ i ].getAttribute( 'property' );
-				if ( property === 'mw:PageProp/forcetoc' ) {
-					this.mwTOCForce = true;
-				}
-				if ( property === 'mw:PageProp/notoc' ) {
-					this.mwTOCDisable = true;
-				}
+	const items = this.metaList.getItemsInGroup( 'mwTOC' );
+	if ( items.length === 0 ) {
+		return;
+	}
+	for ( let i = 0; i < items.length; i++ ) {
+		if ( items[ i ] instanceof ve.dm.MWTOCMetaItem ) {
+			const property = items[ i ].getAttribute( 'property' );
+			if ( property === 'mw:PageProp/forcetoc' ) {
+				this.mwTOCForce = true;
+			}
+			if ( property === 'mw:PageProp/notoc' ) {
+				this.mwTOCDisable = true;
 			}
 		}
-		this.updateVisibility();
 	}
+	this.updateVisibility();
 };
 
 /**
