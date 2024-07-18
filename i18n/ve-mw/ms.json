@@ -190,6 +190,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Pautan perkataan penting kepada rencana wiki lain ataupun laman web lain untuk membantu pembaca memahami konteks.",
 	"visualeditor-linkinspector-educationpopup-title": "Pautan",
 	"visualeditor-linkinspector-illegal-title": "Tajuk laman tidak sah",
+	"visualeditor-linkinspector-invalid-external": "Masukkan URL penuh, contoh: https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Tambah label",
 	"visualeditor-linknodeinspector-title": "Pautan ringkas",
 	"visualeditor-magiclinknodeinspector-convert-link": "Tukarkan kepada pautan ringkas",
