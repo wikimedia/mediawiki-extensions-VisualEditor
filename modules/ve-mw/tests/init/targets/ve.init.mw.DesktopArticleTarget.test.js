@@ -18,6 +18,16 @@ QUnit.module( 've.init.mw.DesktopArticleTarget', ve.test.utils.newMwEnvironment(
 		wgAction: 'view',
 		wgNamespaceNumber: 0,
 		wgCanonicalNamespace: ''
+	},
+	beforeEach: function () {
+		this.originalLocation = location.href;
+	},
+	afterEach: function () {
+		// Clean up after history.pushState in ve.init.mw.DesktopArticleTarget#restorePage,
+		// which replaces JavaScriptTest with Badtitle and leaves it behind
+		if ( location.href !== this.originalLocation ) {
+			history.replaceState( null, '', this.originalLocation );
+		}
 	}
 } ) );
 
