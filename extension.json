@@ -136,6 +136,10 @@
 			"value": false,
 			"description": "Enable experimental Edit Check feature. Can also be enabled using ?ecenable=1."
 		},
+		"VisualEditorEditCheckSingleCheckMode": {
+			"value": true,
+			"description": "Only allow a single edit check to be surfaced"
+		},
 		"VisualEditorEditCheckABTest": {
 			"value": false,
 			"description": "A/B test Edit Check for all users. A/B bucket status will override VisualEditorEditCheck."
@@ -647,7 +651,10 @@
 				"editcheck-dialog-addref-success-notify",
 				"editcheck-dialog-addref-title",
 				"editcheck-dialog-title",
-				"visualeditor-backbutton-tooltip"
+				"editcheck-review-title",
+				"visualeditor-backbutton-tooltip",
+				"next",
+				"last"
 			]
 		},
 		"ext.visualEditor.core.utils": {
