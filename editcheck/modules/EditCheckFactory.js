@@ -66,7 +66,7 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * @return {mw.editcheck.EditCheckActions[]} Actions, sorted by range
  */
 mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listener, surfaceModel ) {
-	const newChecks = [];
+	let newChecks = [];
 	this.getNamesByListener( listener ).forEach( ( checkName ) => {
 		const check = this.create( checkName, mw.editcheck.config[ checkName ] );
 		if ( !check.canBeShown() ) {
@@ -78,8 +78,12 @@ mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listene
 		}
 	} );
 	newChecks.sort(
-		( a, b ) => a.highlights[ 0 ].getSelection().getCoveringRange().start - b.highlights[ 0 ].getSelection().getCoveringRange().start
+		( a, b ) => a.getHighlightSelections()[ 0 ].getCoveringRange().start - b.getHighlightSelections()[ 0 ].getCoveringRange().start
 	);
+	if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle && listener === 'onBeforeSave' ) {
+		newChecks = newChecks.filter( ( action ) => action.getName() === 'addReference' );
+		newChecks.splice( 1 );
+	}
 	return newChecks;
 };
 

@@ -26,7 +26,18 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	ignoreLeadSection: false
 };
 
+mw.editcheck.BaseEditCheck.static.title = ve.msg( 'editcheck-review-title' );
+
 mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
+
+/**
+ * Get the name of the check type
+ *
+ * @return {string} Check type name
+ */
+mw.editcheck.BaseEditCheck.prototype.getName = function () {
+	return this.constructor.static.name;
+};
 
 /**
  * @param {ve.dm.Surface} surfaceModel
@@ -43,7 +54,8 @@ mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
 /**
  * @param {string} choice `action` key from static.choices
  * @param {mw.editcheck.EditCheckAction} action
- * @param {ve.ui.EditCheckContextItem} contextItem
+ * @param {ve.ui.Surface} surface
+ * @return {jQuery.Promise} Promise which resolves when action is complete
  */
 mw.editcheck.BaseEditCheck.prototype.act = null;
 
@@ -53,6 +65,16 @@ mw.editcheck.BaseEditCheck.prototype.act = null;
  */
 mw.editcheck.BaseEditCheck.prototype.getChoices = function () {
 	return this.constructor.static.choices;
+};
+
+/**
+ * Get the title of the check
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
+mw.editcheck.BaseEditCheck.prototype.getTitle = function () {
+	return this.constructor.static.title;
 };
 
 /**
