@@ -178,6 +178,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Parametria \"$2\" ei voi lisätä kahdesti.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Parametri \"$2\" on jo käytettävissä. Tarkista vaihtoehdot sivupalkista.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 on kielletty merkki. Poista se lisätäksesi parametrin.",
+	"visualeditor-dialog-transclusion-add-param-help": "Lisää tuntemasi [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters dokumentoimattoman parametrin] nimi. Huomaa, että vain mallineen tuntemilla parametreilla on vaikutusta mallineeseen. Lisätietoja olemassa olevista parametreista saattaa löytyä [[$1|mallineen sivulta]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Parametrin nimi",
 	"visualeditor-dialog-transclusion-add-param-save": "Lisää",
 	"visualeditor-dialog-transclusion-add-template": "Lisää malline",
