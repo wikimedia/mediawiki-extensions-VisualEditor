@@ -544,6 +544,8 @@
 				"ext.visualEditor.supportCheck"
 			],
 			"messages": [
+				"visualeditor-rebase-corrupted-document-error",
+				"visualeditor-rebase-corrupted-document-title",
 				"collabpad",
 				"collabpad-doctitle"
 			]
@@ -580,6 +582,8 @@
 			],
 			"messages": [
 				"visualeditor-rebase-client-author-name",
+				"visualeditor-rebase-corrupted-document-error",
+				"visualeditor-rebase-corrupted-document-title",
 				"visualeditor-collab-copy-title",
 				"visualeditor-collab-dialog-title",
 				"visualeditor-collab-dialog-privacy",
