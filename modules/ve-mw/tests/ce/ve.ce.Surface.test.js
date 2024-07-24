@@ -38,7 +38,6 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 			expectedHtml: '<p>ab</p>',
 			msg: 'Read mode references stripped'
 		},
-		/* Temporarily disabled for T370512
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
@@ -47,7 +46,6 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 			expectedHtml: '<p>a<sup typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;}" class="mw-ref reference"><a><span class="mw-reflink-text"><span class="cite-bracket">[</span>1<span class="cite-bracket">]</span></span></a></sup>b</p>',
 			msg: 'VE references not stripped'
 		},
-		*/
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
