@@ -34,8 +34,14 @@ ve.ui.MWEditModeTool.prototype.getMode = function () {
  * @inheritdoc mw.libs.ve.MWEditModeTool
  */
 ve.ui.MWEditModeTool.prototype.isModeAvailable = function ( mode ) {
+	const target = this.toolbar.getTarget();
+	const surface = target.getSurface();
+	const canSwitch = surface && !surface.getModel().isMultiUser();
+
 	// Source mode is always available
-	return mode === 'source' || this.toolbar.getTarget().isModeAvailable( mode );
+	return canSwitch && (
+		mode === 'source' || target.isModeAvailable( mode )
+	);
 };
 
 /**
