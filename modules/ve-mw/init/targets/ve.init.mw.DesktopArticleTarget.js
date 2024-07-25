@@ -840,8 +840,15 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			} );
 		}
 
-		// Actually fire the postEdit hook now that the save is complete
 		if ( data.newrevid !== undefined ) {
+			// (T370771) Update wgCurRevisionId and wgRevisionId (!)
+			// Mirror of DiscussionTools's cb5d585b93d83f9a7b4df10a71a0d574295f861c
+			mw.config.set( {
+				wgCurRevisionId: data.newrevid,
+				wgRevisionId: data.newrevid
+			} );
+
+			// Actually fire the postEdit hook, now that the save is complete
 			require( 'mediawiki.action.view.postEdit' ).fireHook( 'saved' );
 		}
 	}
