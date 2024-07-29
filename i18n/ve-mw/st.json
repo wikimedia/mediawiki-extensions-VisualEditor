@@ -3,12 +3,16 @@
 		"authors": [
 			"Coldfact",
 			"Gustave London",
+			"Maryam AlAkini",
 			"Tšepo"
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "Kenya mohloli oa litlhaloso sebakeng sa heno",
+	"visualeditor-ca-createsource": "Theha mohloli",
 	"visualeditor-ca-editsource": "Fetola mohloli",
 	"visualeditor-ca-editsource-section": "fetola mohloli",
 	"visualeditor-categories-tool": "Mekhahlelo",
+	"visualeditor-descriptionpagelink": "Morero: VisualEditor",
 	"visualeditor-dialog-media-content-filename": "Lebitso la faele",
 	"visualeditor-dialog-media-content-section": "Sehlooho",
 	"visualeditor-dialog-media-save": "Boloka",
