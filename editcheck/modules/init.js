@@ -166,6 +166,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 	let saveProcessDeferred;
 
 	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, target ) => {
+		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 		const surface = target.getSurface();
 
 		if ( surface.getMode() !== 'visual' ) {
@@ -181,6 +182,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 
 		let checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface );
 		if ( checks.length ) {
+			ve.track( 'counter.editcheck.preSaveChecksShown' );
 			mw.editcheck.refCheckShown = true;
 
 			const surfaceView = surface.getView();
@@ -323,10 +325,12 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 						const delay = ve.createDeferred();
 						// If they inserted, wait 2 seconds on desktop before showing save dialog
 						setTimeout( () => {
+							ve.track( 'counter.editcheck.preSaveChecksCompleted' );
 							delay.resolve();
 						}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
 						return delay.promise();
 					} else {
+						ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
 						return ve.createDeferred().reject().promise();
 					}
 				} );
