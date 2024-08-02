@@ -1024,17 +1024,9 @@
 		 * Setup multiple section links (edit + edit source)
 		 */
 		setupMultiSectionLinks: function () {
-			const $editsections = $( '#mw-content-text .mw-editsection' ),
-				bodyDir = $( document.body ).css( 'direction' );
-
-			// Match direction of the user interface
-			// TODO: Why is this needed? It seems to work fine without.
-			if ( $editsections.css( 'direction' ) !== bodyDir ) {
-				// Avoid creating inline style attributes if the inherited value is already correct
-				$editsections.css( 'direction', bodyDir );
-			}
-
 			if ( pageCanLoadEditor ) {
+				const $editsections = $( '#mw-content-text .mw-editsection' );
+
 				// Only init without refresh if we're on a view page. Though section edit links
 				// are rarely shown on non-view pages, they appear in one other case, namely
 				// when on a diff against the latest version of a page. In that case we mustn't
