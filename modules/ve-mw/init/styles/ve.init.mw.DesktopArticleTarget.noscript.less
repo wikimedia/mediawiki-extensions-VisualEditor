@@ -26,19 +26,17 @@
 /* For script users, expand brackets by default, unless and until ve-not-available is added */
 
 .client-js {
-	.mw-content-ltr .mw-editsection-bracket:first-of-type,
-	.mw-content-rtl .mw-editsection-bracket:not( :first-of-type ) {
-		/* @noflip */
-		margin-right: 0.25em;
-		/* @noflip */
+	.mw-editsection-bracket {
 		color: @color-subtle;
-	}
 
-	.mw-content-rtl .mw-editsection-bracket:first-of-type,
-	.mw-content-ltr .mw-editsection-bracket:not( :first-of-type ) {
-		/* @noflip */
-		margin-left: 0.25em;
-		/* @noflip */
-		color: @color-subtle;
+		&:first-of-type {
+			margin-right: 0.25em;
+			margin-inline: 0 0.25em;
+		}
+
+		&:not( :first-of-type ) {
+			margin-left: 0.25em;
+			margin-inline: 0.25em 0;
+		}
 	}
 }
