@@ -323,7 +323,7 @@
 	"visualeditor-special-characters-group-other": "Usado frecuentemente",
 	"visualeditor-templatesused-tool": "Modelos usados",
 	"visualeditor-title-error": "Título non válido.",
-	"visualeditor-toload": "O editor estáse a cargar nestes momentos. Se aínda ve esta mensaxe tras uns poucos segundos, por favor [$1 recargue a páxina].",
+	"visualeditor-toload": "O editor estase a cargar nestes momentos. Se aínda ve esta mensaxe tras uns poucos segundos, [$1 recargue a páxina].",
 	"visualeditor-tooltip-non-breaking-space": "Espazo inseparable",
 	"visualeditor-version-label": "Versión",
 	"visualeditor-wikitext-progress": "Convertendo o texto wiki",
