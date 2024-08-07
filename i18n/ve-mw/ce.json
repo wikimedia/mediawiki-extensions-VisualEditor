@@ -346,7 +346,7 @@
 	"visualeditor-version-label": "Верси",
 	"visualeditor-wikitext-progress": "Вики-текст хийцар",
 	"visualeditor-wikitext-warning": "Ахьа лелош йу бӀаьран редактор — [[{{MediaWiki:visualeditor-wikitext-warning-link}}|вики-билгало]] кхузахь болхбеш йац. Бина хийцамаш хӀаллак цахуьлуьйтуш чухулара таран кор схьадела белла «{{int:visualeditor-toolbar-savedialog}}» хӀара могӀам тӀакха харжа «{{int:visualeditor-mweditmodesource-title}}».",
-	"visualeditor-wikitext-warning-title": "Карина вики-билгало",
+	"visualeditor-wikitext-warning-title": "Карийна вики-билгало",
 	"visualeditor-wikitextconvert-title": "Вики-текст тӀе хуьйций?",
 	"visualeditor-wikitextconvert-message": "Ахьа копи йина чулацаман йу формат. Лаьий хьуна хӀокху чулацамах вики-йаза дан?",
 	"visualeditor-wikitextconvert-convert": "Хийца вики-код тӀе"
