@@ -335,6 +335,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					}
 				} );
 			} );
+		} else {
+			// Counterpart to earlier preSaveChecksShown, for use in tracking
+			// errors in check-generation:
+			ve.track( 'counter.editcheck.preSaveChecksNotShown' );
 		}
 	} );
 	mw.hook( 've.deactivationComplete' ).add( () => {
