@@ -31,6 +31,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageReference;
 use MediaWiki\Page\WikiPageFactory;
+use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Request\DerivativeRequest;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\SpecialPage\SpecialPageFactory;
@@ -322,14 +323,14 @@ class ApiVisualEditor extends ApiBase {
 				$builder = new TextboxBuilder();
 				$protectedClasses = $builder->getTextboxProtectionCSSClasses( $title );
 
-				// Simplified EditPage::getEditPermissionErrors()
+				// Simplified EditPage::getEditPermissionStatus()
 				// TODO: Use API
 				// action=query&prop=info&intestactions=edit&intestactionsdetail=full&errorformat=html&errorsuselocal=1
-				$permErrors = $permissionManager->getPermissionErrors(
-					'edit', $this->getUserForPermissions(), $title, 'full' );
-				if ( $permErrors ) {
+				$status = $permissionManager->getPermissionStatus(
+					'edit', $this->getUserForPermissions(), $title, PermissionManager::RIGOR_FULL );
+				if ( !$status->isGood() ) {
 					// Show generic permission errors, including page protection, user blocks, etc.
-					$notice = $this->getOutput()->formatPermissionsErrorMessage( $permErrors, 'edit' );
+					$notice = $this->getOutput()->formatPermissionStatus( $status, 'edit' );
 					// That method returns wikitext (eww), hack to get it parsed:
 					$notice = ( new RawMessage( '$1', [ $notice ] ) )->page( $title )->parseAsBlock();
 					// Invent a message key 'permissions-error' to store in $notices
@@ -358,14 +359,14 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Will be false e.g. if user is blocked or page is protected
-				$canEdit = !$permErrors;
+				$canEdit = $status->isGood();
 
 				$blockinfo = null;
 				// Blocked user notice
 				if ( $permissionManager->isBlockedFrom( $user, $title, true ) ) {
 					$block = $user->getBlock();
 					if ( $block ) {
-						// Already added to $notices via #getPermissionErrors above.
+						// Already added to $notices via #getPermissionStatus above.
 						// Add block info for MobileFrontend:
 						$blockinfo = $this->getBlockDetails( $block );
 					}
