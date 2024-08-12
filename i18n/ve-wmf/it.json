@@ -21,11 +21,13 @@
 			"Minerva Titani",
 			"Mpiva",
 			"Nemo bis",
+			"Pierpao",
 			"Raoli",
 			"Una giornata uggiosa '94",
 			"아라"
 		]
 	},
+	"tag-editcheck-references-activated": "[[{{MediaWiki:editcheck-falsepositives-link}}|Edit Check (citazioni) attivato]]",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale]]",
 	"tag-visualeditor-description": "Modifica eseguita usando l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visuale]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale: controllare]]",
