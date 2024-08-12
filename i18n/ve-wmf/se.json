@@ -4,12 +4,14 @@
 			"Kimberli Mäkäräinen (WMNO)",
 			"Ante75",
 			"Lea-Christine Sara",
-			"Ed g2s"
+			"Ed g2s",
+			"WMNO sámeprošeakta"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Rievdaduvvon visuála rievdadanprográmmain]]",
 	"tag-visualeditor-description": "Rievdadus dahkkon [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuála rievdadanprográmmain]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Rievdaduvvon visuála rievdadanprográmmain: Dárkkis]]",
+	"tag-visualeditor-needcheck-description": "Rievdadeapmi lea dahkkojuvvon [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditorin]] mas vuogádat lea fuobmán ahte soitet šaddan muhtun rievdadusat wikitekstii mat eai lean galgat.",
 	"tag-visualeditor-wikitext": "Rievdaduvvon jagi 2017 wikiteavstta rievdadanprográmmain",
 	"tag-visualeditor-wikitext-description": "Rievdaduvvon jagi 2017 wikiteavstta rievdadanprográmmain",
 	"tag-visualeditor-switched": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Rievdaduvvon visuála rievdadanprográmmain: rievdadanprográmma lonuhuvvui]]",
