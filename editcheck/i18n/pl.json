@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rail"
+			"Rail",
+			"Tufor2"
 		]
 	},
 	"editcheck-dialog-action-no": "Nie",
@@ -15,5 +16,9 @@
 	"editcheck-dialog-addref-reject-other": "Inny powód",
 	"editcheck-dialog-addref-success-notify": "Dziękujemy za dodanie przypisu!",
 	"editcheck-dialog-addref-title": "Dodaj przypis",
-	"editcheck-dialog-title": "Przed publikacją"
+	"editcheck-dialog-title": "Przed publikacją",
+	"tag-editcheck-reference-decline-common-knowledge": "Edit Check: odrzucono (wiedza powszechna)",
+	"tag-editcheck-reference-decline-irrelevant": "Edit Check: odrzucono (niestotne)",
+	"tag-editcheck-reference-decline-other": "Edit Check: odrzucono (inne)",
+	"tag-editcheck-reference-decline-uncertain": "Edit Check: odrzucono (niepewny)"
 }
