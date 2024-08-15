@@ -353,6 +353,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "如果可以，讓我使用視覺化編輯器",
 	"visualeditor-preference-tabs-prefer-wt": "總是讓我使用原始碼編輯器",
 	"visualeditor-preference-tabs-remember-last": "記住我最後使用的編輯器",
+	"visualeditor-preference-collab-label": "協作編輯",
+	"visualeditor-preference-collab-description": "邀請其他使用者加入在視覺化編輯器裡您的編輯集會。",
 	"visualeditor-rebase-client-export": "匯出",
 	"visualeditor-rebase-client-export-start": "匯出…",
 	"visualeditor-rebase-client-import": "匯入",
