@@ -486,7 +486,7 @@
 		[ '{{a}}', 'subst:b', 'subst:b', 'falls back to unmodified getTitle' ],
 		[ 'subst:a', 'b', 'Template:A', 'strips subst:' ],
 		[ 'safesubst:a', 'b', 'Template:A', 'strips safesubst:' ],
-		[ ' SUBST: a', 'b', 'Template:A', 'ignores capitalization and whitespace' ],
+		[ ' SUBST: a\n', 'b', 'Template:A', 'ignores capitalization and whitespace' ],
 		[ 'subst :a', 'b', 'Template:Subst :a', 'leaves bad whitespace untouched' ],
 		[ 'int:a', 'b', 'Template:Int:a', 'leaves other prefixes untouched' ]
 	].forEach( ( [ wt, href, expected, message ] ) => QUnit.test( 'getTemplateDataQueryTitle: ' + message, ( assert ) => {
