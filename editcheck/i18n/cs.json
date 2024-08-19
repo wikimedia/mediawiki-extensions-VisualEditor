@@ -1,17 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Martin Urbanec"
+			"Martin Urbanec",
+			"Matěj Suchánek"
 		]
 	},
 	"editcheck-dialog-action-no": "Ne",
 	"editcheck-dialog-action-yes": "Ano",
-	"editcheck-dialog-addref-description": "Pomožte čtenářům pochopit, odkud vámi přidaná informace pochází tím, že přidáte referenci.",
+	"editcheck-dialog-addref-description": "Pomozte čtenářům pochopit, odkud vámi přidaná informace pochází tím, že přidáte referenci.",
 	"editcheck-dialog-addref-reject-question": "Z jakého důvodu nepřidáváte žádnou referenci?",
-	"editcheck-dialog-addref-reject-description": "Ostatní wikipedisté by rádi věděli více o tom, proč jste se {{GENDER:|rozhodl|rozhodla}} nepřidat žádnou referenci.",
+	"editcheck-dialog-addref-reject-description": "Ostatní wikipedisté by rádi věděli více o tom, proč jste se {{GENDER:|rozhodl|rozhodla|rozhodl(a)}} nepřidat žádnou referenci.",
 	"editcheck-dialog-addref-reject-irrelevant": "Nemyslím si, že reference je pro mou změnu relevantní",
-	"editcheck-dialog-addref-reject-common-knowledge": "Informace, kterou jsem {{GENDER:|přidal|přidala}}, je všeobecně známá.",
-	"editcheck-dialog-addref-reject-uncertain": "Nejsem si {{GENDER:|jistý|jistá}}, jakou referenci přidat",
+	"editcheck-dialog-addref-reject-common-knowledge": "Informace, kterou jsem {{GENDER:|přidal|přidala|přidal(a)}}, je všeobecně známá.",
+	"editcheck-dialog-addref-reject-uncertain": "Nejsem si {{GENDER:|jistý|jistá|jist(a)}}, jakou referenci přidat",
 	"editcheck-dialog-addref-reject-other": "Jiné",
 	"editcheck-dialog-addref-success-notify": "Děkujeme za přidání reference!",
 	"editcheck-dialog-addref-title": "Přidat referenci",
