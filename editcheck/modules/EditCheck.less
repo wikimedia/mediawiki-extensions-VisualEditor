@@ -1,9 +1,29 @@
 /* Toolbar */
 
+.ve-ui-editCheck-toolbar {
+	.oo-ui-toolbar-bar {
+		display: flex;
+	}
+
+	.oo-ui-toolbar-tools {
+		flex: 1;
+		display: flex;
+	}
+
+	.oo-ui-toolbar-tools.oo-ui-toolbar-after {
+		flex: 0;
+	}
+
+	&.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools.oo-ui-toolbar-after {
+		display: none;
+	}
+}
+
 .ve-ui-toolbar-group-title {
 	font-weight: bold;
 	flex: 5 !important; /* stylelint-disable-line declaration-no-important */
 	line-height: 3em;
+	text-align: center;
 }
 
 /* Context item */
