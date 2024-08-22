@@ -12,6 +12,10 @@
 		} );
 
 	QUnit.module( 've.ui.MWTemplateTitleInputWidget', ve.test.utils.newMwEnvironment( {
+		messages: {
+			// Force `templateDataInstalled` condition
+			'templatedata-doc-subpage': '(templatedata-doc-subpage)'
+		},
 		// Config will be reset by newMwEnvironment's teardown
 		beforeEach: toggleCirrusSearchLookup
 	} ) );
