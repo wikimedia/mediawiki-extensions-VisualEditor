@@ -209,6 +209,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					include: [ 'showSaveDisabled' ]
 				}
 			], surface );
+			reviewToolbar.$element.addClass( 've-ui-editCheck-toolbar' );
 
 			reviewToolbar.items[ 1 ].$element.removeClass( 'oo-ui-toolGroup-empty' );
 			reviewToolbar.items[ 1 ].$group.append(
