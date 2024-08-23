@@ -296,6 +296,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Koppel belangrijke woorden aan andere pagina's in de wiki of zelfs andere websites. Hierdoor zijn lezers in de gelegenheid de context te begrijpen.",
 	"visualeditor-linkinspector-educationpopup-title": "Koppelingen",
 	"visualeditor-linkinspector-illegal-title": "Ongeldige paginanaam",
+	"visualeditor-linkinspector-invalid-blocked": "Koppelingen naar deze site zijn op deze wiki geblokkeerd. Probeer een andere koppeling.",
 	"visualeditor-linkinspector-invalid-external": "Voeg een volledige URL in, bijvoorbeeld https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Label toevoegen",
 	"visualeditor-linknodeinspector-title": "Eenvoudige koppeling",
