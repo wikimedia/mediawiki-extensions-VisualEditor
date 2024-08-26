@@ -30,12 +30,8 @@
 	const url = new URL( location.href );
 	// Provide the new wikitext editor
 	if (
-		conf.enableWikitext &&
-		(
-			mw.user.options.get( 'visualeditor-newwikitext' ) ||
-			url.searchParams.get( 'veaction' ) === 'editsource'
-		) &&
-		mw.loader.getState( 'ext.visualEditor.mwwikitext' )
+		mw.user.options.get( 'visualeditor-newwikitext' ) ||
+		url.searchParams.get( 'veaction' ) === 'editsource'
 	) {
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
