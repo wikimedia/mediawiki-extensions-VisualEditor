@@ -40,5 +40,5 @@
 	"visualeditor-welcomedialog-content-thanks": "Kiitos, että autat maailmaa löytämään enemmän!",
 	"visualeditor-welcomedialog-switch": "Vaihda wikitekstimuokkaimeen",
 	"visualeditor-welcomedialog-switch-ve": "Vaihda visuaaliseen muokkaimeen",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|Tervetuloa}} sivustolle $2"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Tervetuloa}} {{GRAMMAR:illative|$2}}"
 }
