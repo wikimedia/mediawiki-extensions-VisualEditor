@@ -163,7 +163,7 @@
 	"visualeditor-editingtabdialog-body": "{{SITENAME}} kini mengingati editor keutamaan anda. Anda boleh bertukar mod sambil menyunting, dan menukar keutamaan kemudian.",
 	"visualeditor-editingtabdialog-ok": "Gunakan alat sunting yang saya gunakan pada suntingan terakhir saya",
 	"visualeditor-editingtabdialog-title": "Menyunting tab",
-	"visualeditor-editnotices-tool": "$1 pemberitahuan",
+	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|notis}}",
 	"visualeditor-editnotices-tooltip": "Pemberitahuan suntingan",
 	"visualeditor-editsummary": "Huraikan suntingan anda",
 	"visualeditor-educationpopup-dismiss": "Baik, saya faham",
