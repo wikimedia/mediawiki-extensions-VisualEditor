@@ -777,7 +777,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 				this.refreshUser().then( ( username ) => {
 					// Reattempt the save after successfully refreshing the
 					// user, but only if it's a temporary account (T345975)
-					if ( mw.util.isTemporaryUser( username ) ) {
+					if ( error.code === 'assertanonfailed' && mw.util.isTemporaryUser( username ) ) {
 						this.startSave( this.getSaveOptions() );
 					} else {
 						this.saveErrorNewUser( username );
