@@ -775,7 +775,13 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 
 			if ( error.code === 'assertanonfailed' || error.code === 'assertuserfailed' || error.code === 'assertnameduserfailed' ) {
 				this.refreshUser().then( ( username ) => {
-					this.saveErrorNewUser( username );
+					// Reattempt the save after successfully refreshing the
+					// user, but only if it's a temporary account (T345975)
+					if ( mw.util.isTemporaryUser( username ) ) {
+						this.startSave( this.getSaveOptions() );
+					} else {
+						this.saveErrorNewUser( username );
+					}
 				}, () => {
 					this.saveErrorUnknown( data );
 				} );
