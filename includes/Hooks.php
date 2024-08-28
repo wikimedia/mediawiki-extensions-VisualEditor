@@ -409,7 +409,7 @@ class Hooks implements
 			$out = $article->getContext()->getOutput();
 			$titleMsg = $title->exists() ? 'editing' : 'creating';
 			$out->setPageTitleMsg( wfMessage( $titleMsg, $title->getPrefixedText() ) );
-			$out->showPendingTakeover( $url, 'visualeditor-toload', wfExpandUrl( $url ) );
+			$out->showPendingTakeover( $url, 'visualeditor-toload', wfGetUrlUtils()->expand( $url ) );
 
 			$out->setRevisionId( $req->getInt( 'oldid', $article->getRevIdFetched() ) );
 			return false;
