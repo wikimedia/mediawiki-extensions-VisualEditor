@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Rail",
-			"Tufor2"
+			"Tufor2",
+			"Woytecr"
 		]
 	},
 	"editcheck-dialog-action-no": "Nie",
@@ -18,7 +19,11 @@
 	"editcheck-dialog-addref-title": "Dodaj przypis",
 	"editcheck-dialog-title": "Przed publikacją",
 	"tag-editcheck-reference-decline-common-knowledge": "Edit Check: odrzucono (wiedza powszechna)",
-	"tag-editcheck-reference-decline-irrelevant": "Edit Check: odrzucono (niestotne)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Sprawdzanie edycji: odrzucono dodanie przypisu, ponieważ uznano informację za wiedzę powszechną",
+	"tag-editcheck-reference-decline-irrelevant": "Edit Check: odrzucono (nieistotne)",
+	"tag-editcheck-reference-decline-irrelevant-description": "Sprawdzanie edycji: odrzucono dodanie przypisu, ponieważ uznano to za nieistotne",
 	"tag-editcheck-reference-decline-other": "Edit Check: odrzucono (inne)",
-	"tag-editcheck-reference-decline-uncertain": "Edit Check: odrzucono (niepewny)"
+	"tag-editcheck-reference-decline-other-description": "Sprawdzanie edycji: odrzucono dodanie przypisu z innego powodu",
+	"tag-editcheck-reference-decline-uncertain": "Edit Check: odrzucono (niepewny)",
+	"tag-editcheck-reference-decline-uncertain-description": "Sprawdzanie edycji: odrzucono dodanie przypisu, ponieważ nie było to pewne"
 }
