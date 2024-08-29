@@ -153,6 +153,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			'action' => 'parse',
 			'oldid' => $newRevId,
 			'prop' => 'text|revid|categorieshtml|sections|displaytitle|subtitle|modules|jsconfigvars',
+			'usearticle' => true,
 			'useskin' => $params['useskin'],
 		];
 		// Boolean parameters must be omitted completely to be treated as false.
