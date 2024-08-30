@@ -1351,11 +1351,14 @@
 	init.isWikitextAvailable = (
 		init.isAvailable &&
 
-		// Enabled on site
-		conf.enableWikitext &&
+		// If forced by the URL parameter, skip the checks (T239796)
+		( url.searchParams.get( 'veaction' ) === 'editsource' || (
+			// Enabled on site
+			conf.enableWikitext &&
 
-		// User preference
-		mw.user.options.get( 'visualeditor-newwikitext' ) &&
+			// User preference
+			mw.user.options.get( 'visualeditor-newwikitext' )
+		) ) &&
 
 		// Only on wikitext pages
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
