@@ -178,6 +178,7 @@
 	"visualeditor-savedialog-title-save": "Өзгертулеріңізді сақтаңыз",
 	"visualeditor-settings-tool": "Бет баптаулары",
 	"visualeditor-special-characters-group-other": "Жиі қолданатын",
+	"visualeditor-toload": "Редактор жүктеліп жатыр. Егер осы хабарлама бірнеше секунд өтсе де көрініп тұрса, [$1 бетті қайта жүктеп көріңіз].",
 	"visualeditor-version-label": "Нұсқа",
 	"visualeditor-wikitext-progress": "Уикимәтінді түрлендіру",
 	"visualeditor-wikitext-warning": "Сіз VisualEditor қолданудасыз - [[{{MediaWiki:visualeditor-wikitext-warning-link}}|уикимәтін]] мұнда жұмыс істемейді. Кез келген уақытта қайнарын өңдеуге ауыса алысыз, бірақ жасаған өзгерістеріңіз жоғалады. Келесі сырмалыны ашыңыз \"{{int:visualeditor-toolbar-savedialog}}\" және \"{{int:visualeditor-mweditmodesource-title}}\" дегенді таңдаңыз.",
