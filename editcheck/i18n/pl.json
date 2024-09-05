@@ -3,7 +3,8 @@
 		"authors": [
 			"Rail",
 			"Tufor2",
-			"Woytecr"
+			"Woytecr",
+			"Msz2001"
 		]
 	},
 	"editcheck-dialog-action-no": "Nie",
@@ -18,12 +19,12 @@
 	"editcheck-dialog-addref-success-notify": "Dziękujemy za dodanie przypisu!",
 	"editcheck-dialog-addref-title": "Dodaj przypis",
 	"editcheck-dialog-title": "Przed publikacją",
-	"tag-editcheck-reference-decline-common-knowledge": "Edit Check: odrzucono (wiedza powszechna)",
-	"tag-editcheck-reference-decline-common-knowledge-description": "Sprawdzanie edycji: odrzucono dodanie przypisu, ponieważ uznano informację za wiedzę powszechną",
-	"tag-editcheck-reference-decline-irrelevant": "Edit Check: odrzucono (nieistotne)",
-	"tag-editcheck-reference-decline-irrelevant-description": "Sprawdzanie edycji: odrzucono dodanie przypisu, ponieważ uznano to za nieistotne",
-	"tag-editcheck-reference-decline-other": "Edit Check: odrzucono (inne)",
-	"tag-editcheck-reference-decline-other-description": "Sprawdzanie edycji: odrzucono dodanie przypisu z innego powodu",
-	"tag-editcheck-reference-decline-uncertain": "Edit Check: odrzucono (niepewny)",
-	"tag-editcheck-reference-decline-uncertain-description": "Sprawdzanie edycji: odrzucono dodanie przypisu, ponieważ nie było to pewne"
+	"tag-editcheck-reference-decline-common-knowledge": "Automatyczny pomocnik (przypisy): odrzucono (wiedza powszechna)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Automatyczny pomocnik: użytkownik odrzucił sugestię dodania przypisu, ponieważ uznał informację za wiedzę powszechną",
+	"tag-editcheck-reference-decline-irrelevant": "Automatyczny pomocnik (przypisy): odrzucono (nieistotne)",
+	"tag-editcheck-reference-decline-irrelevant-description": "Automatyczny pomocnik: użytkownik odrzucił sugestię dodania przypisu, ponieważ uznał go za nieistotny w tym miejscu",
+	"tag-editcheck-reference-decline-other": "Automatyczny pomocnik (przypisy): odrzucono (inne)",
+	"tag-editcheck-reference-decline-other-description": "Automatyczny pomocnik: użytkownik odrzucił sugestię dodania przypisu z innego powodu",
+	"tag-editcheck-reference-decline-uncertain": "Automatyczny pomocnik (przypisy): odrzucono (niepewność)",
+	"tag-editcheck-reference-decline-uncertain-description": "Automatyczny pomocnik: użytkownik odrzucił sugestię dodania przypisu, ponieważ nie był pewien, jaki przypis dodać"
 }
