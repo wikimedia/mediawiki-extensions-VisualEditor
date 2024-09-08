@@ -377,6 +377,7 @@ class Hooks implements
 	public function onCustomEditor( $article, $user ) {
 		$req = $article->getContext()->getRequest();
 		$services = MediaWikiServices::getInstance();
+		$urlUtils = $services->getUrlUtils();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) ) {
@@ -409,7 +410,7 @@ class Hooks implements
 			$out = $article->getContext()->getOutput();
 			$titleMsg = $title->exists() ? 'editing' : 'creating';
 			$out->setPageTitleMsg( wfMessage( $titleMsg, $title->getPrefixedText() ) );
-			$out->showPendingTakeover( $url, 'visualeditor-toload', wfGetUrlUtils()->expand( $url ) );
+			$out->showPendingTakeover( $url, 'visualeditor-toload', $urlUtils->expand( $url ) );
 
 			$out->setRevisionId( $req->getInt( 'oldid', $article->getRevIdFetched() ) );
 			return false;
