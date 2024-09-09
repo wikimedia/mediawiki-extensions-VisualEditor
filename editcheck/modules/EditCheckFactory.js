@@ -58,6 +58,9 @@ mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listene
 	const newChecks = [];
 	this.getNamesByListener( listener ).forEach( ( checkName ) => {
 		const check = this.create( checkName, mw.editcheck.config[ checkName ] );
+		if ( !check.canBeShown() ) {
+			return;
+		}
 		const actions = check[ listener ]( diff );
 		if ( actions.length > 0 ) {
 			ve.batchPush( newChecks, actions );

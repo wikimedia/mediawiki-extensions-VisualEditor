@@ -11,6 +11,9 @@ require( './EditCheckAction.js' );
 require( './BaseEditCheck.js' );
 
 mw.editcheck.accountShouldSeeEditCheck = function ( config ) {
+	if ( mw.editcheck.ecenable ) {
+		return true;
+	}
 	// account status:
 	// loggedin, loggedout, or any-other-value meaning 'both'
 	// we'll count temporary users as "logged out" by using isNamed here
@@ -26,9 +29,7 @@ mw.editcheck.accountShouldSeeEditCheck = function ( config ) {
 // TODO: Load these checks behind feature flags
 // require( './ConvertReferenceEditCheck.js' );
 // require( './TextMatchEditCheck.js' );
-if ( mw.editcheck.accountShouldSeeEditCheck( mw.editcheck.config.addReference ) || mw.editcheck.ecenable ) {
-	require( './AddReferenceEditCheck.js' );
-}
+require( './AddReferenceEditCheck.js' );
 
 /**
  * Return the content ranges (content branch node interiors) contained within a range
@@ -104,7 +105,9 @@ mw.editcheck.Diff.prototype.getModifiedRanges = function ( coveredNodesOnly ) {
 };
 
 mw.editcheck.hasAddedContentNeedingReference = function ( surface, includeReferencedContent ) {
-	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck
+	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck.
+	// This is bypassing the normal "should this check apply?" logic for creation, so we need to manually
+	// apply the "only the main namespace" rule.
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
 	}

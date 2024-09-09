@@ -47,10 +47,33 @@ mw.editcheck.BaseEditCheck.prototype.getDescription = function ( /* action */ ) 
 	return this.constructor.static.description;
 };
 
-mw.editcheck.BaseEditCheck.prototype.getModifiedRangesFromDiff = function ( diff ) {
-	if ( !mw.editcheck.ecenable && this.config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > this.config.maximumEditcount ) {
-		return [];
+/**
+ * Find out whether the check should be applied
+ *
+ * This is a general check for its applicability to the viewer / page, rather
+ * than a specific check based on the current edit. It's used to filter out
+ * checks before any maybe-expensive content analysis happens.
+ *
+ * @return {boolean} Whether the check should be shown
+ */
+mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
+	// all checks are only in the main namespace for now
+	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
+		return false;
 	}
+	// some checks are configured to only be for logged in / out users
+	if ( !mw.editcheck.accountShouldSeeEditCheck( this.config ) ) {
+		// includes checking for mw.editcheck.ecenable
+		return false;
+	}
+	// some checks are only shown for newer users
+	if ( this.config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > this.config.maximumEditcount ) {
+		return false;
+	}
+	return true;
+};
+
+mw.editcheck.BaseEditCheck.prototype.getModifiedRangesFromDiff = function ( diff ) {
 	return diff.getModifiedRanges( this.constructor.static.onlyCoveredNodes )
 		.filter( ( range ) => this.shouldApplyToSection( diff, range ) && range.getLength() >= this.config.minimumCharacters );
 };
