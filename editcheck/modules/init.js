@@ -10,22 +10,6 @@ require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './BaseEditCheck.js' );
 
-mw.editcheck.accountShouldSeeEditCheck = function ( config ) {
-	if ( mw.editcheck.ecenable ) {
-		return true;
-	}
-	// account status:
-	// loggedin, loggedout, or any-other-value meaning 'both'
-	// we'll count temporary users as "logged out" by using isNamed here
-	if ( config.account === 'loggedout' && mw.user.isNamed() ) {
-		return false;
-	}
-	if ( config.account === 'loggedin' && !mw.user.isNamed() ) {
-		return false;
-	}
-	return true;
-};
-
 // TODO: Load these checks behind feature flags
 // require( './ConvertReferenceEditCheck.js' );
 // require( './TextMatchEditCheck.js' );

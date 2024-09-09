@@ -62,8 +62,16 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 		return false;
 	}
 	// some checks are configured to only be for logged in / out users
-	if ( !mw.editcheck.accountShouldSeeEditCheck( this.config ) ) {
-		// includes checking for mw.editcheck.ecenable
+	if ( mw.editcheck.ecenable ) {
+		return true;
+	}
+	// account status:
+	// loggedin, loggedout, or any-other-value meaning 'both'
+	// we'll count temporary users as "logged out" by using isNamed here
+	if ( this.config.account === 'loggedout' && mw.user.isNamed() ) {
+		return false;
+	}
+	if ( this.config.account === 'loggedin' && !mw.user.isNamed() ) {
 		return false;
 	}
 	// some checks are only shown for newer users
