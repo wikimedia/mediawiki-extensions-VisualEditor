@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"EbelleMarcel",
 			"Olivier Moukodi"
 		]
 	},
+	"visualeditor-ca-editsource": "Tukwa lá wikicode",
 	"visualeditor-ca-editsource-section": "Tukwa lá wikicode"
 }
