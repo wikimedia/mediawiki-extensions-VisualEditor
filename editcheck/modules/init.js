@@ -153,7 +153,6 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 	let saveProcessDeferred;
 
 	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, target ) => {
-		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 		const surface = target.getSurface();
 
 		if ( surface.getMode() !== 'visual' ) {
@@ -163,6 +162,8 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 			// has references added. As such, disable in source mode for now.
 			return;
 		}
+
+		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 
 		// clear rejection-reasons between runs of the save process, so only the last one counts
 		mw.editcheck.rejections.length = 0;
