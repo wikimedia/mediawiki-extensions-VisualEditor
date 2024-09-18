@@ -3,21 +3,16 @@
 			cirrusSearchLookup: enabled !== false
 		} ) );
 
-	const makeFakeApi = () => ( {
-			defaults: { parameters: {} },
-			get: () => ( {
-					abort: { bind: () => {} },
-					then: () => {}
-				} )
-		} );
-
 	QUnit.module( 've.ui.MWTemplateTitleInputWidget', ve.test.utils.newMwEnvironment( {
 		messages: {
 			// Force `templateDataInstalled` condition
 			'templatedata-doc-subpage': '(templatedata-doc-subpage)'
 		},
 		// Config will be reset by newMwEnvironment's teardown
-		beforeEach: toggleCirrusSearchLookup
+		beforeEach: function () {
+			this.server = this.sandbox.useFakeServer();
+			toggleCirrusSearchLookup();
+		}
 	} ) );
 
 	QUnit.test( 'default prefixsearch', ( assert ) => {
@@ -157,7 +152,7 @@
 	} );
 
 	QUnit.test( 'CirrusSearch with prefixsearch fallback', async function ( assert ) {
-		const api = makeFakeApi();
+		const api = new mw.Api();
 		this.sandbox.stub( api, 'get' )
 			.onFirstCall().returns( ve.createDeferred()
 				.resolve( { query: {
