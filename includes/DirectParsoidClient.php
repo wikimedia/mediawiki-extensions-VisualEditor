@@ -108,10 +108,8 @@ class DirectParsoidClient implements ParsoidClient {
 			$pageLanguage
 		);
 
-		$metrics = MediaWikiServices::getInstance()->getParsoidSiteConfig()->metrics();
-		if ( $metrics ) {
-			$helper->setMetrics( $metrics );
-		}
+		$statsFactory = MediaWikiServices::getInstance()->getParsoidSiteConfig()->prefixedStatsFactory();
+		$helper->setMetrics( $statsFactory );
 
 		return $helper;
 	}
