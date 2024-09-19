@@ -83,7 +83,7 @@ class ApiEditCheckReferenceUrl extends ApiBase {
 	public static function isAvailable(): bool {
 		return ExtensionRegistry::getInstance()->isLoaded( 'SpamBlacklist' ) ||
 			// BlockedExternalDomains is within AbuseFilter:
-			ExtensionRegistry::getInstance()->isLoaded( 'AbuseFilter' );
+			ExtensionRegistry::getInstance()->isLoaded( 'Abuse Filter' );
 	}
 
 	/**
