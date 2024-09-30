@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"IdrisSeid"
+			"IdrisSeid",
+			"Kassala"
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "ወስፍ ናይ ቀበት መበገሲ ወስክ",
+	"visualeditor-ca-createsource": "ዒን ክለቅ",
 	"visualeditor-ca-editsource": "ዒን አስኔ",
 	"visualeditor-ca-editsource-section": "አሳነዮት ዒን",
 	"visualeditor-descriptionpagelink": "Project:ለልትርኤ መዐድላይ"
