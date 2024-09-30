@@ -165,6 +165,7 @@
 	"visualeditor-dialog-transclusion-add-template-save": "Dodaj",
 	"visualeditor-dialog-transclusion-add-undocumented-param": "Dodaj nedokumentirani parametar",
 	"visualeditor-dialog-transclusion-back-confirmation-prompt": "Vraćate se na pretragu? Vaše će izmjene biti nepovratno izgubljene.",
+	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Želite zatvoriti uređivač predloška? Vaše će izmjene nepovratno biti izgubljene.",
 	"visualeditor-dialog-transclusion-collapse-options": "Sakrij mogućnosti",
 	"visualeditor-dialog-transclusion-confirmation-discard": "Odbaci uređivanja",
 	"visualeditor-dialog-transclusion-confirmation-reject": "Nastavi s uređivanjem",
