@@ -51,7 +51,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 
 ve.ui.EditCheckDialog.prototype.update = function () {
 	const surfaceView = this.surface.getView();
-	const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onDocumentChange', this.surface );
+	const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onDocumentChange', this.surface.getModel() );
 	const $checks = $( '<div>' );
 	const selections = [];
 	checks.forEach( ( check ) => {

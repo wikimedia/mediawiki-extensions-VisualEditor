@@ -7,19 +7,20 @@ OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCh
 
 mw.editcheck.ConvertReferenceEditCheck.static.name = 'convertReference';
 
-mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( diff ) {
+mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const seenIndexes = {};
-	return diff.documentModel.getNodesByType( 'mwReference' ).map( ( node ) => {
+	const documentModel = surfaceModel.getDocument();
+	return documentModel.getNodesByType( 'mwReference' ).map( ( node ) => {
 		const refModel = ve.dm.MWReferenceModel.static.newFromReferenceNode( node );
 		const index = refModel.getListIndex();
 		if ( seenIndexes[ index ] ) {
 			return null;
 		}
 		seenIndexes[ index ] = true;
-		const referenceNode = diff.documentModel.getInternalList().getItemNode( index );
+		const referenceNode = documentModel.getInternalList().getItemNode( index );
 		const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( referenceNode );
 		if ( href ) {
-			const fragment = diff.surface.getModel().getFragment( new ve.dm.LinearSelection( node.getOuterRange() ) );
+			const fragment = surfaceModel().getFragment( new ve.dm.LinearSelection( node.getOuterRange() ) );
 			return new mw.editcheck.EditCheckAction( {
 				highlight: fragment,
 				selection: fragment,

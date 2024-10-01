@@ -44,13 +44,18 @@ mw.editcheck.getContentRanges = function ( documentModel, range, covers ) {
 	return ranges;
 };
 
-mw.editcheck.Diff = function MWEditCheckDiff( surface ) {
-	this.surface = surface;
-	this.documentModel = surface.getModel().getDocument();
+mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
+	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck.
+	// This is bypassing the normal "should this check apply?" logic for creation, so we need to manually
+	// apply the "only the main namespace" rule.
+	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
+		return false;
+	}
+	const check = mw.editcheck.editCheckFactory.create( 'addReference', mw.editcheck.config.addReference );
+	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
-OO.initClass( mw.editcheck.Diff );
-mw.editcheck.Diff.prototype.getModifiedRanges = function ( coveredNodesOnly ) {
-	const documentModel = this.documentModel;
+
+mw.editcheck.getModifiedRanges = function ( documentModel, coveredNodesOnly ) {
 	if ( !documentModel.completeHistory.getLength() ) {
 		return [];
 	}
@@ -86,18 +91,6 @@ mw.editcheck.Diff.prototype.getModifiedRanges = function ( coveredNodesOnly ) {
 		return offset < endOffset;
 	} );
 	return ranges;
-};
-
-mw.editcheck.hasAddedContentNeedingReference = function ( surface, includeReferencedContent ) {
-	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck.
-	// This is bypassing the normal "should this check apply?" logic for creation, so we need to manually
-	// apply the "only the main namespace" rule.
-	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
-		return false;
-	}
-	const diff = new mw.editcheck.Diff( surface );
-	const check = mw.editcheck.editCheckFactory.create( 'addReference', mw.editcheck.config.addReference );
-	return check.findAddedContent( diff, includeReferencedContent ).length > 0;
 };
 
 mw.editcheck.rejections = [];
@@ -168,7 +161,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 		// clear rejection-reasons between runs of the save process, so only the last one counts
 		mw.editcheck.rejections.length = 0;
 
-		let checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface );
+		let checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface.getModel() );
 		if ( checks.length ) {
 			ve.track( 'counter.editcheck.preSaveChecksShown' );
 			mw.editcheck.refCheckShown = true;
@@ -245,7 +238,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					mw.editcheck.rejections.push( responseData.reason );
 				}
 				// TODO: Move on to the next issue, when multicheck is enabled
-				// checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface );
+				// checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface.getModel() );
 				checks = [];
 
 				if ( checks.length ) {

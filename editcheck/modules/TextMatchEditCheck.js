@@ -15,11 +15,11 @@ mw.editcheck.TextMatchEditCheck.static.replacers = [
 	}
 ];
 
-mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( diff ) {
+mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const actions = [];
 	this.constructor.static.replacers.forEach( ( replacer ) => {
-		diff.documentModel.findText( replacer.query ).forEach( ( range ) => {
-			const fragment = diff.surface.getModel().getFragment( new ve.dm.LinearSelection( range ) );
+		surfaceModel.getDocument().findText( replacer.query ).forEach( ( range ) => {
+			const fragment = surfaceModel.getFragment( new ve.dm.LinearSelection( range ) );
 			actions.push(
 				new mw.editcheck.EditCheckAction( {
 					highlight: fragment,
