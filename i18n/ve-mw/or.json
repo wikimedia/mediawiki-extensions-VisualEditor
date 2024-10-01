@@ -157,6 +157,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "ପଛକୁ ଫେରିବେ",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "ଯେମିତି ହେଉ ଆଗେଇ ନିଅନ୍ତୁ",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "ଦରକାରୀ {{PLURAL:$1|କ୍ଷେତ୍ରଟି|କ୍ଷେତ୍ରସବୁ}} ନିଖୋଜ",
+	"visualeditor-dialog-transclusion-required-parameter-is-blank": "$1 {{PLURAL:$2|ଘର}} ନ ଭରି ଆଗକୁ ବଢ଼ିବାକୁ ଆପଣ ନିଶ୍ଚିତ?",
 	"visualeditor-dialog-transclusion-title-insert-template": "ଛାଞ୍ଚଟିଏ ଭରନ୍ତୁ",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "$1 ପୂରାନ୍ତୁ",
 	"visualeditor-dialog-transclusion-title-edit-known-template": "$1 ସମ୍ପାଦନା କରନ୍ତୁ",
