@@ -29,6 +29,8 @@
 		$visualDiff
 	);
 
+	let diffElement;
+
 	function onReviewModeButtonSelectSelect( item ) {
 		let oldPageName, newPageName;
 		if ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ComparePages' ) {
@@ -74,7 +76,7 @@
 			mw.libs.ve.diffLoader.getVisualDiffGeneratorPromise( oldId, newId, modulePromise, oldPageName, newPageName ).then( ( visualDiffGenerator ) => {
 				// This class is loaded via modulePromise above
 				// eslint-disable-next-line no-undef
-				const diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
+				diffElement = new ve.ui.DiffElement( visualDiffGenerator(), { classes: [ 've-init-mw-diffPage-diff' ] } );
 				diffElement.$document.addClass( 'mw-parser-output content' );
 
 				mw.libs.ve.fixFragmentLinks( diffElement.$document[ 0 ], mw.Title.newFromText( newPageName ), 'mw-diffpage-visualdiff-' );
@@ -108,6 +110,12 @@
 			new mw.Api().saveOption( 'visualeditor-diffmode-historical', mode );
 		}
 	}
+
+	$( window ).on( 'resize', OO.ui.debounce( () => {
+		if ( diffElement ) {
+			diffElement.positionDescriptions();
+		}
+	}, 500 ) );
 
 	mw.hook( 'wikipage.diff' ).add( () => {
 		if ( mw.config.get( 'wgDiffOldId' ) === false || mw.config.get( 'wgDiffNewId' ) === false ) {
