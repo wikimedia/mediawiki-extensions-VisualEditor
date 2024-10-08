@@ -337,6 +337,7 @@
 					return target;
 				}, ( e ) => {
 					mw.log.warn( 'VisualEditor failed to load: ' + e );
+					return $.Deferred().reject( e ).promise();
 				} );
 		}
 
