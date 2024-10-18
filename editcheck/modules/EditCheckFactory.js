@@ -53,15 +53,14 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
 	return this.checksByListener[ listener ];
 };
 
-mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listener, surface ) {
-	const diff = new mw.editcheck.Diff( surface );
+mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listener, surfaceModel ) {
 	const newChecks = [];
 	this.getNamesByListener( listener ).forEach( ( checkName ) => {
 		const check = this.create( checkName, mw.editcheck.config[ checkName ] );
 		if ( !check.canBeShown() ) {
 			return;
 		}
-		const actions = check[ listener ]( diff );
+		const actions = check[ listener ]( surfaceModel );
 		if ( actions.length > 0 ) {
 			ve.batchPush( newChecks, actions );
 		}

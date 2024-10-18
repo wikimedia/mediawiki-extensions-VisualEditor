@@ -9,9 +9,9 @@ mw.editcheck.AddReferenceEditCheck.static.name = 'addReference';
 
 mw.editcheck.AddReferenceEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
-mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( diff ) {
-	return this.findAddedContent( diff ).map( ( range ) => {
-		const fragment = diff.surface.getModel().getFragment( new ve.dm.LinearSelection( range ) );
+mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
+	return this.findAddedContent( surfaceModel.getDocument() ).map( ( range ) => {
+		const fragment = surfaceModel.getFragment( new ve.dm.LinearSelection( range ) );
 		return new mw.editcheck.EditCheckAction( {
 			highlight: fragment,
 			selection: this.adjustForPunctuation( fragment.collapseToEnd() ),
@@ -20,10 +20,9 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( diff ) {
 	} );
 };
 
-mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( diff, includeReferencedContent ) {
+mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( documentModel, includeReferencedContent ) {
 	// Broken out so a helper for tagging can call it
-	const documentModel = diff.documentModel;
-	const ranges = this.getModifiedRangesFromDiff( diff ).filter( ( range ) => {
+	const ranges = this.getModifiedContentRanges( documentModel ).filter( ( range ) => {
 		if ( !includeReferencedContent ) {
 			// 4. Exclude any ranges that already contain references
 			for ( let i = range.start; i < range.end; i++ ) {

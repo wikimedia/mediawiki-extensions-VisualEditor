@@ -22,13 +22,13 @@ mw.editcheck.BaseEditCheck.static.choices = [
 mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
 /**
- * @param {mw.editcheck.Diff} diff
+ * @param {ve.dm.Surface} surfaceModel
  * @return {mw.editcheck.EditCheckAction[]}
  */
 mw.editcheck.BaseEditCheck.prototype.onBeforeSave = null;
 
 /**
- * @param {mw.editcheck.Diff} diff
+ * @param {ve.dm.Surface} surfaceModel
  * @return {mw.editcheck.EditCheckAction[]}
  */
 mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
@@ -93,14 +93,14 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 /**
  * Get content ranges where at least the minimum about of text has been changed
  *
- * @param {mw.editcheck.Diff} diff
+ * @param {ve.dm.Document} documentModel
  * @return {ve.Range[]}
  */
-mw.editcheck.BaseEditCheck.prototype.getModifiedRangesFromDiff = function ( diff ) {
-	return diff.getModifiedRanges( this.constructor.static.onlyCoveredNodes )
+mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( documentModel ) {
+	return mw.editcheck.getModifiedRanges( documentModel, this.constructor.static.onlyCoveredNodes )
 		.filter(
 			( range ) => range.getLength() >= this.config.minimumCharacters &&
-				this.isRangeInValidSection( range, diff.documentModel )
+				this.isRangeInValidSection( range, documentModel )
 		);
 };
 
