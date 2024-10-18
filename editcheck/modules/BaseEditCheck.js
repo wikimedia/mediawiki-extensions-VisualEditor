@@ -100,26 +100,24 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRangesFromDiff = function ( diff
 	return diff.getModifiedRanges( this.constructor.static.onlyCoveredNodes )
 		.filter(
 			( range ) => range.getLength() >= this.config.minimumCharacters &&
-				this.shouldApplyToSection( diff.documentModel, range )
+				this.isRangeInValidSection( range, diff.documentModel )
 		);
 };
 
 /**
  * Check if a modified range is a section we don't ignore (config.ignoreSections)
  *
- * @param {ve.dm.Document} documentModel
  * @param {ve.Range} range
+ * @param {ve.dm.Document} documentModel
  * @return {boolean}
  */
-mw.editcheck.BaseEditCheck.prototype.shouldApplyToSection = function ( documentModel, range ) {
+mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel ) {
 	const ignoreSections = this.config.ignoreSections || [];
 	if ( ignoreSections.length === 0 && !this.config.ignoreLeadSection ) {
 		// Nothing is forbidden, so everything is permitted
 		return true;
 	}
-	const isHeading = function ( nodeType ) {
-		return nodeType === 'mwHeading';
-	};
+	const isHeading = ( nodeType ) => nodeType === 'mwHeading';
 	// Note: we set a limit of 1 here because otherwise this will turn around
 	// to keep looking when it hits the document boundary:
 	const heading = documentModel.getNearestNodeMatching( isHeading, range.start, -1, 1 );
@@ -138,10 +136,6 @@ mw.editcheck.BaseEditCheck.prototype.shouldApplyToSection = function ( documentM
 	}
 	const compare = new Intl.Collator( documentModel.getLang(), { sensitivity: 'accent' } ).compare;
 	const headingText = documentModel.data.getText( false, heading.getRange() );
-	for ( let i = ignoreSections.length - 1; i >= 0; i-- ) {
-		if ( compare( headingText, ignoreSections[ i ] ) === 0 ) {
-			return false;
-		}
-	}
-	return true;
+	// If the heading text matches any of ignoreSections, return false.
+	return !ignoreSections.some( ( section ) => compare( headingText, section ) === 0 );
 };
