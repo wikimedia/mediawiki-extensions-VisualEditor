@@ -17,7 +17,7 @@
 			"phpcbf"
 		],
 		"phan": "phan -d . --long-progress-bar",
-		"phpcs": "phpcs -sp --cache --ignore=*/node_modules/"
+		"phpcs": "phpcs -sp --cache"
 	},
 	"config": {
 		"allow-plugins": {
