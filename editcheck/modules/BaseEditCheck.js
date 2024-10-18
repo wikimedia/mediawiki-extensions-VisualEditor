@@ -40,10 +40,19 @@ mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
  */
 mw.editcheck.BaseEditCheck.prototype.act = null;
 
-mw.editcheck.BaseEditCheck.prototype.getChoices = function ( /* action */ ) {
+/**
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {Object[]}
+ */
+mw.editcheck.BaseEditCheck.prototype.getChoices = function () {
 	return this.constructor.static.choices;
 };
-mw.editcheck.BaseEditCheck.prototype.getDescription = function ( /* action */ ) {
+
+/**
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {string}
+ */
+mw.editcheck.BaseEditCheck.prototype.getDescription = function () {
 	return this.constructor.static.description;
 };
 
@@ -81,18 +90,33 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 	return true;
 };
 
+/**
+ * Get content ranges where at least the minimum about of text has been changed
+ *
+ * @param {mw.editcheck.Diff} diff
+ * @return {ve.Range[]}
+ */
 mw.editcheck.BaseEditCheck.prototype.getModifiedRangesFromDiff = function ( diff ) {
 	return diff.getModifiedRanges( this.constructor.static.onlyCoveredNodes )
-		.filter( ( range ) => this.shouldApplyToSection( diff, range ) && range.getLength() >= this.config.minimumCharacters );
+		.filter(
+			( range ) => range.getLength() >= this.config.minimumCharacters &&
+				this.shouldApplyToSection( diff.documentModel, range )
+		);
 };
 
-mw.editcheck.BaseEditCheck.prototype.shouldApplyToSection = function ( diff, range ) {
+/**
+ * Check if a modified range is a section we don't ignore (config.ignoreSections)
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {ve.Range} range
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.shouldApplyToSection = function ( documentModel, range ) {
 	const ignoreSections = this.config.ignoreSections || [];
 	if ( ignoreSections.length === 0 && !this.config.ignoreLeadSection ) {
 		// Nothing is forbidden, so everything is permitted
 		return true;
 	}
-	const documentModel = diff.documentModel;
 	const isHeading = function ( nodeType ) {
 		return nodeType === 'mwHeading';
 	};
@@ -122,6 +146,12 @@ mw.editcheck.BaseEditCheck.prototype.shouldApplyToSection = function ( diff, ran
 	return true;
 };
 
+/**
+ * Adjust a fragment to include/exclude trailing punctuation
+ *
+ * @param {ve.dm.SurfaceFragment} insertionPointFragment
+ * @return {ve.dm.SurfaceFragment}
+ */
 mw.editcheck.BaseEditCheck.prototype.adjustForPunctuation = function ( insertionPointFragment ) {
 	if ( this.config.beforePunctuation ) {
 		// TODO: Use UnicodeJS properties directly once is https://gerrit.wikimedia.org/r/c/unicodejs/+/893832 merged
