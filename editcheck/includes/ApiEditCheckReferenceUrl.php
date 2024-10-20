@@ -2,12 +2,12 @@
 
 namespace MediaWiki\Extension\VisualEditor\EditCheck;
 
-use ApiBase;
-use ApiMain;
-use ApiUsageException;
-use ExtensionRegistry;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Extension\AbuseFilter\BlockedDomainStorage;
 use MediaWiki\Extension\SpamBlacklist\BaseBlacklist;
+use MediaWiki\Registration\ExtensionRegistry;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiEditCheckReferenceUrl extends ApiBase {

@@ -8,7 +8,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 use MediaWikiIntegrationTestCase;
-use MultiHttpClient;
+use Wikimedia\Http\MultiHttpClient;
 
 /**
  * @coversDefaultClass \MediaWiki\Extension\VisualEditor\VisualEditorParsoidClientFactory
