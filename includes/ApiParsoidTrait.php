@@ -10,9 +10,9 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use ApiUsageException;
-use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Message\Message;
 use MediaWiki\Request\WebRequest;
@@ -20,11 +20,11 @@ use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
-use NullStatsdDataFactory;
-use PrefixingStatsdDataFactoryProxy;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
+use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\PrefixingStatsdDataFactoryProxy;
 
 trait ApiParsoidTrait {
 

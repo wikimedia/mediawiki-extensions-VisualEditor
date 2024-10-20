@@ -10,6 +10,7 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Permissions\Authority;
@@ -21,7 +22,6 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\User;
 use Wikimedia\Bcp47Code\Bcp47Code;
-use WikitextContent;
 
 class DirectParsoidClient implements ParsoidClient {
 

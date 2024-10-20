@@ -10,16 +10,15 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use ApiBase;
-use ApiBlockInfoTrait;
-use ApiMain;
-use ApiResult;
 use Article;
-use ContentHandler;
-use ExtensionRegistry;
-use IBufferingStatsdDataFactory;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiBlockInfoTrait;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Config\Config;
+use MediaWiki\Content\ContentHandler;
 use MediaWiki\Content\Transform\ContentTransformer;
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\EditPage\EditPage;
@@ -32,6 +31,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageReference;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Request\DerivativeRequest;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\SpecialPage\SpecialPageFactory;
@@ -45,7 +45,7 @@ use MediaWiki\Watchlist\WatchlistManager;
 use MessageLocalizer;
 use Wikimedia\Assert\Assert;
 use Wikimedia\ParamValidator\ParamValidator;
-use WikitextContent;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;

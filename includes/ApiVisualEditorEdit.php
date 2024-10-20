@@ -10,16 +10,12 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use ApiBase;
-use ApiMain;
-use BagOStuff;
-use ContentHandler;
 use Deflate;
 use DifferenceEngine;
-use ExtensionRegistry;
 use FlaggablePageView;
-use IBufferingStatsdDataFactory;
-use IDBAccessObject;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Content\ContentHandler;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\HookContainer\HookContainer;
@@ -27,6 +23,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Sanitizer;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Request\DerivativeRequest;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\SpecialPage\SpecialPageFactory;
@@ -34,7 +31,10 @@ use MediaWiki\Storage\PageEditStash;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use SkinFactory;
+use Wikimedia\ObjectCache\BagOStuff;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Rdbms\IDBAccessObject;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 class ApiVisualEditorEdit extends ApiBase {
 	use ApiParsoidTrait;
