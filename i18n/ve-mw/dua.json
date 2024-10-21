@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"EbelleMarcel",
 			"Olivier Moukodi"
 		]
@@ -8,6 +9,6 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Ɓata beteledi ba teten",
 	"visualeditor-ca-createsource": "Weka wikicode",
 	"visualeditor-ca-editsource": "Tukwa lá wikicode",
-	"visualeditor-ca-editsource-section": "Tukwa lá wikicode",
-	"visualeditor-descriptionpagelink": "Project: Jɛnɛ di ɗɔ́li ó disɔ́"
+	"visualeditor-ca-editsource-section": "tukwa lá wikicode",
+	"visualeditor-descriptionpagelink": "Project:Jɛnɛ di ɗɔ́li ó disɔ́"
 }
