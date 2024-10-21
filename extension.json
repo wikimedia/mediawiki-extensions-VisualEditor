@@ -978,6 +978,7 @@
 				"lib/ve/src/ce/ve.ce.ResizableNode.js",
 				"lib/ve/src/ce/ve.ce.TableCellableNode.js",
 				"lib/ve/src/ce/ve.ce.Selection.js",
+				"lib/ve/src/ce/ve.ce.ClipboardHandler.js",
 				"lib/ve/src/ce/ve.ce.Surface.js",
 				"lib/ve/src/ce/ve.ce.SurfaceObserver.js",
 				"lib/ve/src/ce/ve.ce.KeyDownHandlerFactory.js",
@@ -2401,6 +2402,7 @@
 			"scripts": [
 				"modules/ve-mw/dm/ve.dm.MWWikitextSurface.js",
 				"modules/ve-mw/dm/ve.dm.MWWikitextSurfaceFragment.js",
+				"modules/ve-mw/ce/ve.ce.MWWikitextClipboardHandler.js",
 				"modules/ve-mw/ce/ve.ce.MWWikitextSurface.js",
 				"modules/ve-mw/ui/ve.ui.MWWikitextCommandRegistry.js",
 				"modules/ve-mw/ui/ve.ui.MWWikitextSequenceRegistry.js",
@@ -2611,6 +2613,7 @@
 			"lib/ve/tests/ce/ve.ce.test.js",
 			"lib/ve/tests/ce/ve.ce.Document.test.js",
 			"modules/ve-mw/tests/ce/ve.ce.Document.test.js",
+			"lib/ve/tests/ce/ve.ce.ClipboardHandler.test.js",
 			"lib/ve/tests/ce/ve.ce.Surface.test.js",
 			"modules/ve-mw/tests/ce/ve.ce.Surface.test.js",
 			"lib/ve/tests/ce/ve.ce.RangeState.test.js",

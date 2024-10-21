@@ -24,7 +24,7 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
 			pasteHtml: '<span typeof="mw:Entity" id="mwAB">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span>',
-			pasteTargetHtml: '<span>-</span><span>-</span>',
+			clipboardHandlerHtml: '<span>-</span><span>-</span>',
 			fromVe: true,
 			expectedRangeOrSelection: new ve.Range( 5 ),
 			expectedHtml: '<p><span typeof="mw:Entity">-</span><span typeof="mw:Entity" id="mw-reference-cite">-</span></p>',
