@@ -112,7 +112,7 @@ trait ApiParsoidTrait {
 	 * @throws ApiUsageException
 	 */
 	protected function transformHTML(
-		Title $title, string $html, int $oldid = null, string $etag = null
+		Title $title, string $html, ?int $oldid = null, ?string $etag = null
 	): array {
 		$lang = self::getPageLanguage( $title );
 
@@ -140,7 +140,7 @@ trait ApiParsoidTrait {
 	 * @throws ApiUsageException
 	 */
 	protected function transformWikitext(
-		Title $title, string $wikitext, bool $bodyOnly, int $oldid = null, bool $stash = false
+		Title $title, string $wikitext, bool $bodyOnly, ?int $oldid = null, bool $stash = false
 	): array {
 		$lang = self::getPageLanguage( $title );
 
