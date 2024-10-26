@@ -48,7 +48,7 @@ class DirectParsoidClient implements ParsoidClient {
 	private function getHtmlOutputRendererHelper(
 		PageIdentity $page,
 		?RevisionRecord $revision = null,
-		Bcp47Code $pageLanguage = null,
+		?Bcp47Code $pageLanguage = null,
 		bool $stash = false,
 		string $flavor = self::FLAVOR_DEFAULT
 	): HtmlOutputRendererHelper {
@@ -83,9 +83,9 @@ class DirectParsoidClient implements ParsoidClient {
 	private function getHtmlInputTransformHelper(
 		PageIdentity $page,
 		string $html,
-		int $oldid = null,
-		string $etag = null,
-		Bcp47Code $pageLanguage = null
+		?int $oldid = null,
+		?string $etag = null,
+		?Bcp47Code $pageLanguage = null
 	): HtmlInputTransformHelper {
 		// Fake REST body
 		$body = [
