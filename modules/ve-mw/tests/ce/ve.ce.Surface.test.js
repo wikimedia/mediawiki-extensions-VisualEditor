@@ -86,5 +86,11 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 		}
 	];
 
-	cases.forEach( ve.test.utils.runSurfacePasteTest.bind( this, assert ) );
+	const done = assert.async();
+	( async function () {
+		for ( const caseItem of cases ) {
+			await ve.test.utils.runSurfacePasteTest( assert, caseItem );
+		}
+		done();
+	}() );
 } );

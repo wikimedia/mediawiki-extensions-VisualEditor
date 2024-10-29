@@ -209,7 +209,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					selections.push( selection );
 				} );
 				// TODO: Make selections clickable when multicheck is enabled
-				surfaceView.drawSelections(
+				surfaceView.getSelectionManager().drawSelections(
 					'editCheck',
 					checks.map( ( check ) => ve.ce.Selection.static.newFromModel( check.highlight.getSelection(), surfaceView ) )
 				);
@@ -285,7 +285,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 				return saveProcessDeferred.promise().then( ( data ) => {
 					context.removePersistentSource( 'editCheckReferences' );
 
-					surfaceView.drawSelections( 'editCheck', [] );
+					surfaceView.getSelectionManager().drawSelections( 'editCheck', [] );
 					surfaceView.setReviewMode( false );
 
 					reviewToolbar.$element.remove();
