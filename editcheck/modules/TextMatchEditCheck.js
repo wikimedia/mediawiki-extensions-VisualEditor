@@ -19,7 +19,7 @@ mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( surfaceM
 	const actions = [];
 	this.constructor.static.replacers.forEach( ( replacer ) => {
 		surfaceModel.getDocument().findText( replacer.query ).forEach( ( range ) => {
-			const fragment = surfaceModel.getFragment( new ve.dm.LinearSelection( range ) );
+			const fragment = surfaceModel.getLinearFragment( range );
 			actions.push(
 				new mw.editcheck.EditCheckAction( {
 					highlight: fragment,

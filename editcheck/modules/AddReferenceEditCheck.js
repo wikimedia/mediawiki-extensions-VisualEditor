@@ -11,7 +11,7 @@ mw.editcheck.AddReferenceEditCheck.static.description = ve.msg( 'editcheck-dialo
 
 mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.findAddedContent( surfaceModel.getDocument() ).map( ( range ) => {
-		const fragment = surfaceModel.getFragment( new ve.dm.LinearSelection( range ) );
+		const fragment = surfaceModel.getLinearFragment( range );
 		return new mw.editcheck.EditCheckAction( {
 			highlight: fragment,
 			selection: this.adjustForPunctuation( fragment.collapseToEnd() ),

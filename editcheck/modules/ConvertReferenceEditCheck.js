@@ -20,7 +20,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 		const referenceNode = documentModel.getInternalList().getItemNode( index );
 		const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( referenceNode );
 		if ( href ) {
-			const fragment = surfaceModel().getFragment( new ve.dm.LinearSelection( node.getOuterRange() ) );
+			const fragment = surfaceModel().getLinearFragment( node.getOuterRange() );
 			return new mw.editcheck.EditCheckAction( {
 				highlight: fragment,
 				selection: fragment,
