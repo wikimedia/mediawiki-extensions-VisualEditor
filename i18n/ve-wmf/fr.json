@@ -1,7 +1,6 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80",
 			"Automatik",
 			"Benoit Rochon",
 			"Boniface",
@@ -36,7 +35,8 @@
 			"Verdy p",
 			"Wladek92",
 			"Wyz",
-			"아라"
+			"아라",
+			"BlueCamille"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Éditeur visuel]]",

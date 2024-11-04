@@ -1,7 +1,6 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80",
 			"Babanwalia",
 			"Chrumps",
 			"Doctore",
@@ -18,7 +17,8 @@
 			"WTM",
 			"Woytecr",
 			"Wpedzich",
-			"아라"
+			"아라",
+			"Msz2001"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",

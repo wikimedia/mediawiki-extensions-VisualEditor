@@ -1,7 +1,6 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80",
 			"Bluyten",
 			"Breghtje",
 			"Catrope",
@@ -20,7 +19,8 @@
 			"Siebrand",
 			"Sjoerddebruin",
 			"Southparkfan",
-			"सरोज कुमार ढकाल"
+			"सरोज कुमार ढकाल",
+			"McDutchie"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuele tekstverwerker]]",

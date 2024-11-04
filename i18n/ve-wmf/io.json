@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Idojc"
+			"Idojc",
+			"Joao Xavier"
 		]
 	},
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Redakto per VisualEditor]]",
