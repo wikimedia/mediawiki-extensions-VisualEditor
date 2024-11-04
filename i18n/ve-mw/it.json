@@ -46,11 +46,13 @@
 			"Una giornata uggiosa '94",
 			"Valepert",
 			"Vivbod",
-			"Wikitoni"
+			"Wikitoni",
+			"ZandDev"
 		]
 	},
 	"collabpad-import-subtitle": "Importato da $1",
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
+	"tooltip-ca-ve-create": "Crea questa pagina",
 	"tooltip-ca-editsource": "Modifica il wikitesto di questa pagina",
 	"tooltip-ca-createsource": "Crea il codice sorgente di questa pagina",
 	"visualeditor-advancedsettings-tool": "Impostazioni avanzate",
@@ -58,6 +60,7 @@
 	"visualeditor-autosave-modified-prompt-message": "Questa pagina è stata modificata dopo che l'hai caricata. {{GENDER:|Vuoi}} riprendere la modifica della vecchia versione o iniziare una nuova modifica dell'ultima versione della pagina?",
 	"visualeditor-autosave-modified-prompt-reject": "Inizia una nuova modifica",
 	"visualeditor-autosave-modified-prompt-title": "Riprendere la {{GENDER:|tua}} modifica?",
+	"visualeditor-autosave-not-recovered-text": "Le tue modifiche non salvate non possono essere ripristinate.",
 	"visualeditor-autosave-recovered-text": "Le tue modifiche non salvate sono state automaticamente ripristinate.",
 	"visualeditor-autosave-recovered-title": "Modifiche ripristinate",
 	"visualeditor-backbutton-tooltip": "Indietro",
