@@ -160,6 +160,11 @@ OO.inheritClass( ve.init.mw.ArticleTarget, ve.init.mw.Target );
 ve.init.mw.ArticleTarget.static.name = 'article';
 
 /**
+ * @inheritdoc
+ */
+ve.init.mw.ArticleTarget.static.annotateImportedData = true;
+
+/**
  * Tracking name of target class. Used by ArticleTargetEvents to identify which target we are tracking.
  *
  * @static

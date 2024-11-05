@@ -656,6 +656,8 @@
 				"editcheck-dialog-addref-success-notify",
 				"editcheck-dialog-addref-title",
 				"editcheck-dialog-title",
+				"editcheck-copyvio-title",
+				"editcheck-copyvio-description",
 				"editcheck-review-title",
 				"visualeditor-backbutton-tooltip",
 				"next",
