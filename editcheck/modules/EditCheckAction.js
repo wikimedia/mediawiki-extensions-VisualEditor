@@ -1,6 +1,6 @@
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.check = config.check;
-	this.highlight = config.highlight;
+	this.highlights = config.highlights;
 	this.selection = config.selection;
 	this.message = config.message;
 };

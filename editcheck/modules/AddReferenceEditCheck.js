@@ -13,7 +13,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 	return this.findAddedContent( surfaceModel.getDocument() ).map( ( range ) => {
 		const fragment = surfaceModel.getLinearFragment( range );
 		return new mw.editcheck.EditCheckAction( {
-			highlight: fragment,
+			highlights: [ fragment ],
 			selection: this.adjustForPunctuation( fragment.collapseToEnd() ),
 			check: this
 		} );
@@ -83,7 +83,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, co
 			return windowAction.open(
 				'editCheckReferencesInspector',
 				{
-					fragment: action.highlight,
+					fragment: action.highlights[ 0 ],
 					callback: contextItem.data.callback,
 					saveProcessDeferred: contextItem.data.saveProcessDeferred
 				}
