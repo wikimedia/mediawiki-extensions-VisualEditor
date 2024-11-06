@@ -22,7 +22,7 @@ mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( surfaceM
 			const fragment = surfaceModel.getLinearFragment( range );
 			actions.push(
 				new mw.editcheck.EditCheckAction( {
-					highlight: fragment,
+					highlights: [ fragment ],
 					selection: fragment,
 					message: replacer.message,
 					check: this
