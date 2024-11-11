@@ -213,7 +213,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 				// TODO: Make selections clickable when multicheck is enabled
 				surfaceView.getSelectionManager().drawSelections(
 					'editCheck',
-					checks.map( ( check ) => ve.ce.Selection.static.newFromModel( check.highlight.getSelection(), surfaceView ) )
+					selections
 				);
 				surfaceView.setReviewMode( true, highlightNodes );
 			};
