@@ -3,7 +3,6 @@
 		"authors": [
 			"Abanima",
 			"Alshamiri1",
-			"Amire80",
 			"Ciphers",
 			"Claw eg",
 			"Elfalem",
@@ -21,7 +20,7 @@
 			"아라"
 		]
 	},
-	"tag-editcheck-references-description": "يعتقد EditCheck أنه ربما كانت هناك حاجة إلى مرجع في هذا التعديل",
+	"tag-editcheck-references-description": "يعتقد (إديت تشيك) أنّه قد يكون هناك حاجة إلى مرجع",
 	"tag-editcheck-references-activated": "[[{{MediaWiki:editcheck-falsepositives-link}}|فحص التحرير (أداة التحقق) مفعلّة]]",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|تحرير مرئي]]",
 	"tag-visualeditor-description": "تم التعديل باستخدام [[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
