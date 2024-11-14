@@ -87,6 +87,8 @@ ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
 // FIXME Some of these users will be on tablets, check for this
 ve.init.mw.MobileArticleTarget.static.platformType = 'phone';
 
+ve.init.mw.MobileArticleTarget.static.enforceResizesContent = true;
+
 /* Methods */
 
 /**
