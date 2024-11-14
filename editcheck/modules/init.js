@@ -11,9 +11,9 @@ require( './EditCheckAction.js' );
 require( './BaseEditCheck.js' );
 
 // TODO: Load these checks behind feature flags
-// require( './ConvertReferenceEditCheck.js' );
-// require( './TextMatchEditCheck.js' );
-require( './AddReferenceEditCheck.js' );
+// require( './editchecks/ConvertReferenceEditCheck.js' );
+// require( './editchecks/TextMatchEditCheck.js' );
+require( './editchecks/AddReferenceEditCheck.js' );
 
 /**
  * Return the content ranges (content branch node interiors) contained within a range
