@@ -618,9 +618,9 @@
 				"editcheck/modules/EditCheckFactory.js",
 				"editcheck/modules/EditCheckAction.js",
 				"editcheck/modules/BaseEditCheck.js",
-				"editcheck/modules/AddReferenceEditCheck.js",
-				"editcheck/modules/ConvertReferenceEditCheck.js",
-				"editcheck/modules/TextMatchEditCheck.js",
+				"editcheck/modules/editchecks/AddReferenceEditCheck.js",
+				"editcheck/modules/editchecks/ConvertReferenceEditCheck.js",
+				"editcheck/modules/editchecks/TextMatchEditCheck.js",
 				{
 					"name": "editcheck/modules/config.json",
 					"callback": "\\MediaWiki\\Extension\\VisualEditor\\EditCheck\\ResourceLoaderData::getConfig"
