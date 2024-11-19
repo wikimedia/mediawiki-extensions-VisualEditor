@@ -20,6 +20,13 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 	} );
 };
 
+/**
+ * Find content ranges which have been inserted
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {boolean} includeReferencedContent Include contents that already contains a reference
+ * @return {ve.Range[]}
+ */
 mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( documentModel, includeReferencedContent ) {
 	// Broken out so a helper for tagging can call it
 	const ranges = this.getModifiedContentRanges( documentModel ).filter( ( range ) => {

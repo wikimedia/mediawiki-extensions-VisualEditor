@@ -135,6 +135,9 @@ ve.ui.EditCheckInspector.prototype.getReadyProcess = function ( data ) {
 		}, this );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.EditCheckInspector.prototype.getActionProcess = function ( action ) {
 	if ( action === '' ) {
 		return new OO.ui.Process( function () {

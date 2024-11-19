@@ -64,6 +64,11 @@ ve.ui.EditCheckContextItem.prototype.renderBody = function () {
 	);
 };
 
+/**
+ * Close the context item
+ *
+ * @param {Object} data Window closing data
+ */
 ve.ui.EditCheckContextItem.prototype.close = function ( data ) {
 	// HACK: Un-suppress close button on mobile context
 	if ( this.context.isMobile() ) {
@@ -72,6 +77,11 @@ ve.ui.EditCheckContextItem.prototype.close = function ( data ) {
 	this.data.callback( data, this.data );
 };
 
+/**
+ * Handle click events on a choice button
+ *
+ * @param {string} choice Choice identifier, e.g. 'accept' or 'reject'
+ */
 ve.ui.EditCheckContextItem.prototype.onChoiceClick = function ( choice ) {
 	this.data.action.check.act( choice, this.data.action, this );
 };
