@@ -59,7 +59,16 @@ mw.editcheck.getModifiedRanges = function ( documentModel, coveredNodesOnly ) {
 	if ( !documentModel.completeHistory.getLength() ) {
 		return [];
 	}
-	const operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
+	let operations;
+	try {
+		operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
+	} catch ( err ) {
+		// TransactionSquasher can sometimes throw errors; until T333710 is
+		// fixed just count this as not needing a reference.
+		mw.errorLogger.logError( err, 'error.visualeditor' );
+		return [];
+	}
+
 	const ranges = [];
 	let offset = 0;
 	const endOffset = documentModel.getDocumentRange().end;
