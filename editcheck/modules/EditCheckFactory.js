@@ -14,6 +14,9 @@ OO.inheritClass( mw.editcheck.EditCheckFactory, OO.Factory );
 
 /* Methods */
 
+/**
+ * @inheritdoc
+ */
 mw.editcheck.EditCheckFactory.prototype.register = function ( constructor, name ) {
 	name = name || ( constructor.static && constructor.static.name );
 
@@ -53,6 +56,15 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
 	return this.checksByListener[ listener ];
 };
 
+/**
+ * Create all checks actions for a given listener
+ *
+ * TODO: Rename to createAllActionsByListener
+ *
+ * @param {string} listener Listener name
+ * @param {ve.dm.Surface} surfaceModel Surface model
+ * @return {mw.editcheck.EditCheckActions[]} Actions, sorted by range
+ */
 mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listener, surfaceModel ) {
 	const newChecks = [];
 	this.getNamesByListener( listener ).forEach( ( checkName ) => {

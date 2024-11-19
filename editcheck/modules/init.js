@@ -44,6 +44,13 @@ mw.editcheck.getContentRanges = function ( documentModel, range, covers ) {
 	return ranges;
 };
 
+/**
+ * Check if the document has content needing a reference, for AddReferenceEditCheck
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {boolean} includeReferencedContent Include contents that already contains a reference
+ * @return {boolean}
+ */
 mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
 	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck.
 	// This is bypassing the normal "should this check apply?" logic for creation, so we need to manually
@@ -55,6 +62,13 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
 
+/**
+ * Get content ranges which have been inserted
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {boolean} coveredNodesOnly Only include ranges which cover the whole of their node
+ * @return {ve.Range[]}
+ */
 mw.editcheck.getModifiedRanges = function ( documentModel, coveredNodesOnly ) {
 	if ( !documentModel.completeHistory.getLength() ) {
 		return [];
