@@ -17,14 +17,13 @@ mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, m
 } );
 
 mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
-	return this.findAddedContent( surfaceModel.getDocument() ).map( ( range ) => {
-		const fragment = surfaceModel.getLinearFragment( range );
-		return new mw.editcheck.EditCheckAction( {
-			fragments: [ fragment ],
-			check: this
-			// icon: 'quotes',
-		} );
-	} );
+	return this.findAddedContent( surfaceModel.getDocument() ).filter( ( range ) => !this.isDismissedRange( range ) )
+		.map(
+			( range ) => new mw.editcheck.EditCheckAction( {
+				fragments: [ surfaceModel.getLinearFragment( range ) ],
+				check: this
+			} )
+		);
 };
 mw.editcheck.AddReferenceEditCheck.prototype.onDocumentChange = mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave;
 
@@ -100,6 +99,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 			} ).done( ( data ) => {
 				if ( data && data.action === 'reject' && data.reason ) {
 					mw.editcheck.rejections.push( data.reason );
+					this.dismiss( action );
 				}
 			} );
 	}

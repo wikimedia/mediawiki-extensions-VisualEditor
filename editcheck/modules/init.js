@@ -1,6 +1,8 @@
 mw.editcheck = {
 	config: require( './config.json' ),
-	ecenable: !!( new URL( location.href ).searchParams.get( 'ecenable' ) || window.MWVE_FORCE_EDIT_CHECK_ENABLED )
+	ecenable: !!( new URL( location.href ).searchParams.get( 'ecenable' ) || window.MWVE_FORCE_EDIT_CHECK_ENABLED ),
+	dismissedFragments: {},
+	dismissedIds: {}
 };
 
 require( './EditCheckContextItem.js' );

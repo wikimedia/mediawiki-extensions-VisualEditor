@@ -11,6 +11,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.check = config.check;
 	this.fragments = config.fragments;
 	this.message = config.message;
+	this.id = config.id;
 	this.title = config.title;
 	this.icon = config.icon;
 	this.type = config.type || 'warning';

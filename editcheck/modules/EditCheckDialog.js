@@ -317,12 +317,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( widget, choice, actionChosen,
 			setTimeout( () => this.surface.getModel().setNullSelection(), 300 );
 		}
 
-		if ( !data ) {
-			// Nothing happened, just fall back and leave the check
-			return;
-		}
-
-		if ( this.listener === 'onBeforeSave' ) {
+		if ( data && this.listener === 'onBeforeSave' ) {
 			// If an action has been taken, we want to linger for a brief moment
 			// to show the result of the action before moving away
 			// TODO: This was written for AddReferenceEditCheck but should be
@@ -334,6 +329,8 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( widget, choice, actionChosen,
 				this.currentOffset = Math.max( 0, this.currentOffset - 1 );
 				this.update();
 			}, pause );
+		} else {
+			this.updateDebounced();
 		}
 	} );
 };

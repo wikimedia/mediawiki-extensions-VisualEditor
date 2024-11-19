@@ -274,3 +274,45 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 	// If the heading text matches any of ignoreSections, return false.
 	return !ignoreSections.some( ( section ) => compare( headingText, section ) === 0 );
 };
+
+/**
+ * Dismiss a check action
+ *
+ * @param {mw.editCheck.EditCheckAction} action
+ */
+mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
+	const name = this.constructor.static.name;
+	if ( action.id ) {
+		const dismissedIds = mw.editcheck.dismissedIds;
+		dismissedIds[ name ] = dismissedIds[ name ] || [];
+		dismissedIds[ name ].push( action.id );
+	} else {
+		const dismissedFragments = mw.editcheck.dismissedFragments;
+		dismissedFragments[ name ] = dismissedFragments[ name ] || [];
+		dismissedFragments[ name ].push( ...action.fragments );
+	}
+};
+
+/**
+ * Check if this type of check has been dismissed covering a specific range
+ *
+ * @param {ve.Range} range
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
+	const fragments = mw.editcheck.dismissedFragments[ this.constructor.static.name ];
+	return !!fragments && fragments.some(
+		( fragment ) => fragment.getSelection().getCoveringRange().containsRange( range )
+	);
+};
+
+/**
+ * Check if an action with a given ID has been dismissed
+ *
+ * @param {string} id
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isDismissedId = function ( id ) {
+	const ids = mw.editcheck.dismissedIds[ this.constructor.static.name ];
+	return ids && ids.indexOf( id ) !== -1;
+};
