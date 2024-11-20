@@ -192,7 +192,7 @@
 	"visualeditor-dialog-meta-settings-toc-disable": "Никогда",
 	"visualeditor-dialog-meta-settings-toc-force": "Всегда",
 	"visualeditor-dialog-meta-settings-toc-help": "Вы можете сделать и так, что оглавление, в котором показываются все заголовки со страницы, появлялись, даже если там менее четырёх заголовков, или же заставить его не появляется вообще. По умолчанию содержание показывается, если на странице присутствует четыре и более заголовков.",
-	"visualeditor-dialog-meta-settings-toc-label": "Показать оглавление",
+	"visualeditor-dialog-meta-settings-toc-label": "Показать содержание",
 	"visualeditor-dialog-meta-templatesused-noresults": "Шаблоны не обнаружены.",
 	"visualeditor-dialog-meta-title": "Настройки",
 	"visualeditor-dialog-table-collapsed": "Изначально свёрнута",
