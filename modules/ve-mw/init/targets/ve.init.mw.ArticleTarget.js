@@ -2114,7 +2114,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		dmDoc.getNodesByType( 'mwHeading' ).some( ( heading ) => {
 			const domElements = heading.getOriginalDomElements( dmDoc.getStore() );
 			if (
-				domElements && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
+				domElements && domElements.length && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
 				domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
 			) {
 				headingModel = heading;
