@@ -1,5 +1,5 @@
 mw.editcheck.BaseEditCheck = function MWBaseEditCheck( config ) {
-	this.config = config;
+	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, config );
 };
 
 OO.initClass( mw.editcheck.BaseEditCheck );
@@ -18,6 +18,13 @@ mw.editcheck.BaseEditCheck.static.choices = [
 		icon: 'close'
 	}
 ];
+
+mw.editcheck.BaseEditCheck.static.defaultConfig = {
+	account: false, // 'loggedin', 'loggedout', anything non-truthy means allow either
+	maximumEditcount: 100,
+	ignoreSections: [],
+	ignoreLeadSection: false
+};
 
 mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
