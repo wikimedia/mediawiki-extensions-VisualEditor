@@ -9,6 +9,11 @@ mw.editcheck.AddReferenceEditCheck.static.name = 'addReference';
 
 mw.editcheck.AddReferenceEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
+mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+	minimumCharacters: 50,
+	beforePunctuation: false
+} );
+
 mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.findAddedContent( surfaceModel.getDocument() ).map( ( range ) => {
 		const fragment = surfaceModel.getLinearFragment( range );
