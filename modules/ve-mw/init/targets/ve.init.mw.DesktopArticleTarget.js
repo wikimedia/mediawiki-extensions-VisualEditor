@@ -424,7 +424,12 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
  * Edit mode has finished activating
  */
 ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
-	$( 'html' ).removeClass( 've-activating' ).addClass( 've-active' );
+	// eslint-disable-next-line mediawiki/class-doc
+	$( 'html' )
+		// Remove ve-activating when loading for the first time,
+		// and when switching remove previous mode's class.
+		.removeClass( 've-activating ve-active-visual ve-active-source' )
+		.addClass( 've-active ve-active-' + this.getSurface().getMode() );
 
 	// Disable TemplateStyles in the original content
 	// (We do this here because toggling 've-active' class above hides it)
