@@ -104,11 +104,97 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
  * @return {ve.Range[]}
  */
 mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( documentModel ) {
-	return mw.editcheck.getModifiedRanges( documentModel, this.constructor.static.onlyCoveredNodes )
-		.filter(
-			( range ) => range.getLength() >= this.config.minimumCharacters &&
-				this.isRangeInValidSection( range, documentModel )
-		);
+	return this.getModifiedRanges( documentModel, this.constructor.static.onlyCoveredNodes, true );
+};
+
+/**
+ * Get content ranges which have been inserted
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {boolean} coveredNodesOnly Only include ranges which cover the whole of their node
+ * @param {boolean} onlyContentRanges Only return ranges which are content branch node interiors
+ * @return {ve.Range[]}
+ */
+mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentModel, coveredNodesOnly, onlyContentRanges ) {
+	if ( !documentModel.completeHistory.getLength() ) {
+		return [];
+	}
+	let operations;
+	try {
+		operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
+	} catch ( err ) {
+		// TransactionSquasher can sometimes throw errors; until T333710 is
+		// fixed just count this as not needing a reference.
+		mw.errorLogger.logError( err, 'error.visualeditor' );
+		return [];
+	}
+
+	const ranges = [];
+	let offset = 0;
+	const endOffset = documentModel.getDocumentRange().end;
+	operations.every( ( op ) => {
+		if ( op.type === 'retain' ) {
+			offset += op.length;
+		} else if ( op.type === 'replace' ) {
+			const insertedRange = new ve.Range( offset, offset + op.insert.length );
+			offset += op.insert.length;
+			// 1. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
+			if ( op.remove.length === 0 ) {
+				if ( onlyContentRanges ) {
+					ve.batchPush(
+						ranges,
+						// 2. Only fully inserted paragraphs (ranges that cover the whole node) (T345121)
+						this.getContentRangesFromRange( documentModel, insertedRange, coveredNodesOnly )
+					);
+				} else {
+					ranges.push( insertedRange );
+				}
+			}
+		}
+		// Reached the end of the doc / start of internal list, stop searching
+		return offset < endOffset;
+	} );
+	return ranges.filter( ( range ) => this.isRangeValid( range, documentModel ) );
+};
+
+/**
+ * Return the content ranges (content branch node interiors) contained within a range
+ *
+ * For a content branch node entirely contained within the range, its entire interior
+ * range will be included. For a content branch node overlapping with the range boundary,
+ * only the covered part of its interior range will be included.
+ *
+ * @param {ve.dm.Document} documentModel The documentModel to search
+ * @param {ve.Range} range The range to include
+ * @param {boolean} covers Only include ranges which cover the whole of their node
+ * @return {ve.Range[]} The contained content ranges (content branch node interiors)
+ */
+mw.editcheck.BaseEditCheck.prototype.getContentRangesFromRange = function ( documentModel, range, covers ) {
+	const ranges = [];
+	documentModel.selectNodes( range, 'branches' ).forEach( ( spec ) => {
+		if (
+			spec.node.canContainContent() && (
+				!covers || (
+					!spec.range || // an empty range means the node is covered
+					spec.range.equalsSelection( spec.nodeRange )
+				)
+			)
+		) {
+			ranges.push( spec.range || spec.nodeRange );
+		}
+	} );
+	return ranges;
+};
+
+/**
+ * Test whether the range is valid for the check to apply
+ *
+ * @param {ve.Range} range
+ * @param {ve.dm.Document} documentModel
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentModel ) {
+	return this.isRangeInValidSection( range, documentModel );
 };
 
 /**
