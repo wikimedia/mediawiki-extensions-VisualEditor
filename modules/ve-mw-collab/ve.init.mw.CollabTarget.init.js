@@ -69,7 +69,7 @@
 				showForm( true );
 			} );
 
-			$( 'body' ).addClass( 've-activated ve-active' );
+			$( 'html' ).addClass( 've-activated ve-active' );
 
 			$targetContainer.prepend( target.$element );
 
@@ -219,7 +219,7 @@
 			target.restorePage();
 			target.destroy();
 
-			$( 'body' ).removeClass( 've-activated ve-active' );
+			$( 'html' ).removeClass( 've-activated ve-active' );
 		}
 
 		setTitle( mw.msg( 'collabpad' ) );
