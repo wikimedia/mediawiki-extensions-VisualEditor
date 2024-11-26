@@ -211,7 +211,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Невозможно дважды добавить параметр \"$2\".",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Параметр \"$2\" уже доступен для использования. Пожалуйста, проверьте параметры на боковой панели.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "$1 — запрещенный символ. Удалите его, чтобы добавить параметр.",
-	"visualeditor-dialog-transclusion-add-param-help": "Если известно, введите имена [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters недокументированного параметра]. Обратите внимание, что только параметры, известные шаблону, будут иметь эффект. Вы можете найти информацию о существующих параметрах на [[$1|странице шаблона]].",
+	"visualeditor-dialog-transclusion-add-param-help": "Введите имена [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters недокументированных параметров], если вы знаете их. Обратите внимание, что будут работать только известные шаблону имена параметров. Информацию о существующих параметрах можно найти на [[$1|странице шаблона]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Имя параметра",
 	"visualeditor-dialog-transclusion-add-param-save": "Добавить",
 	"visualeditor-dialog-transclusion-add-template": "Добавить шаблон",
