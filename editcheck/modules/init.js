@@ -16,35 +16,6 @@ require( './BaseEditCheck.js' );
 require( './editchecks/AddReferenceEditCheck.js' );
 
 /**
- * Return the content ranges (content branch node interiors) contained within a range
- *
- * For a content branch node entirely contained within the range, its entire interior
- * range will be included. For a content branch node overlapping with the range boundary,
- * only the covered part of its interior range will be included.
- *
- * @param {ve.dm.Document} documentModel The documentModel to search
- * @param {ve.Range} range The range to include
- * @param {boolean} covers Only include ranges which cover the whole of their node
- * @return {ve.Range[]} The contained content ranges (content branch node interiors)
- */
-mw.editcheck.getContentRanges = function ( documentModel, range, covers ) {
-	const ranges = [];
-	documentModel.selectNodes( range, 'branches' ).forEach( ( spec ) => {
-		if (
-			spec.node.canContainContent() && (
-				!covers || (
-					!spec.range || // an empty range means the node is covered
-					spec.range.equalsSelection( spec.nodeRange )
-				)
-			)
-		) {
-			ranges.push( spec.range || spec.nodeRange );
-		}
-	} );
-	return ranges;
-};
-
-/**
  * Check if the document has content needing a reference, for AddReferenceEditCheck
  *
  * @param {ve.dm.Document} documentModel
@@ -60,51 +31,6 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	}
 	const check = mw.editcheck.editCheckFactory.create( 'addReference', mw.editcheck.config.addReference );
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
-};
-
-/**
- * Get content ranges which have been inserted
- *
- * @param {ve.dm.Document} documentModel
- * @param {boolean} coveredNodesOnly Only include ranges which cover the whole of their node
- * @return {ve.Range[]}
- */
-mw.editcheck.getModifiedRanges = function ( documentModel, coveredNodesOnly ) {
-	if ( !documentModel.completeHistory.getLength() ) {
-		return [];
-	}
-	let operations;
-	try {
-		operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
-	} catch ( err ) {
-		// TransactionSquasher can sometimes throw errors; until T333710 is
-		// fixed just count this as not needing a reference.
-		mw.errorLogger.logError( err, 'error.visualeditor' );
-		return [];
-	}
-
-	const ranges = [];
-	let offset = 0;
-	const endOffset = documentModel.getDocumentRange().end;
-	operations.every( ( op ) => {
-		if ( op.type === 'retain' ) {
-			offset += op.length;
-		} else if ( op.type === 'replace' ) {
-			const insertedRange = new ve.Range( offset, offset + op.insert.length );
-			offset += op.insert.length;
-			// 1. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
-			if ( op.remove.length === 0 ) {
-				ve.batchPush(
-					ranges,
-					// 2. Only fully inserted paragraphs (ranges that cover the whole node) (T345121)
-					mw.editcheck.getContentRanges( documentModel, insertedRange, coveredNodesOnly )
-				);
-			}
-		}
-		// Reached the end of the doc / start of internal list, stop searching
-		return offset < endOffset;
-	} );
-	return ranges;
 };
 
 mw.editcheck.rejections = [];

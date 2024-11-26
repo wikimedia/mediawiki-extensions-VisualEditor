@@ -115,6 +115,14 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, co
 };
 
 /**
+ * @inheritdoc
+ */
+mw.editcheck.AddReferenceEditCheck.prototype.isRangeValid = function ( range, documentModel ) {
+	return range.getLength() >= ( this.config.minimumCharacters || 0 ) &&
+		mw.editcheck.AddReferenceEditCheck.super.prototype.isRangeValid.call( this, range, documentModel );
+};
+
+/**
  * Adjust a fragment to include/exclude trailing punctuation
  *
  * @param {ve.dm.SurfaceFragment} insertionPointFragment
