@@ -108,6 +108,26 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
 };
 
 /**
+ * Find nodes that were added during the edit session
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {string} [type] Type of nodes to find, or all nodes if false
+ * @return {ve.dm.Node[]}
+ */
+mw.editcheck.BaseEditCheck.prototype.getAddedNodes = function ( documentModel, type ) {
+	const matchedNodes = [];
+	this.getModifiedRanges( documentModel ).forEach( ( range ) => {
+		const nodes = documentModel.selectNodes( range, 'covered' );
+		nodes.forEach( ( node ) => {
+			if ( !type || node.node.getType() === type ) {
+				matchedNodes.push( node.node );
+			}
+		} );
+	} );
+	return matchedNodes;
+};
+
+/**
  * Get content ranges which have been inserted
  *
  * @param {ve.dm.Document} documentModel
