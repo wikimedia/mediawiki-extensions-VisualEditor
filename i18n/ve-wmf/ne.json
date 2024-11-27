@@ -11,6 +11,7 @@
 	"tag-editcheck-newcontent-description": "सम्पादन जाँचले पृष्ठमा नयाँ सामग्री थपिएको ठान्छ",
 	"tag-editcheck-newreference-description": "पृष्ठमा एउटा सन्दर्भ थपियो",
 	"tag-editcheck-references-description": "सम्पादन जाँचले एउटा सन्दर्भ आवश्यक भएको हुन सक्छ भन्ने सोच्छ",
+	"tag-editcheck-references-activated": "सम्पादन जाँच गर्नुहोस् (सन्दर्भहरू) सक्रिय",
 	"tag-editcheck-references-activated-description": "सम्पादन जाँचले एउटा सन्दर्भ आवश्यक भएको हुन सक्छ भन्ने सोच्छ, र युआई देखाइएको छ",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|दृश्य सम्पादक]]",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|दृश्य सम्पादक]] प्रयोग गरेर सम्पादन गरिएको",

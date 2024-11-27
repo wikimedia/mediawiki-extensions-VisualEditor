@@ -19,6 +19,7 @@
 			"Steenth"
 		]
 	},
+	"tag-editcheck-references-activated": "Redigeringstjek (referencer) aktiveret",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering]]",
 	"tag-visualeditor-description": "Redigeret ved hjælp af [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuel redigering]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering: Tjek]]",

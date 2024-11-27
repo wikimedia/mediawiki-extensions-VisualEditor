@@ -26,6 +26,7 @@
 			"Pierpao"
 		]
 	},
+	"tag-editcheck-references-activated": "Edit Check (citazioni) attivato",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale]]",
 	"tag-visualeditor-description": "Modifica eseguita usando l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visuale]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Modifica visuale: controllare]]",

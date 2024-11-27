@@ -7,6 +7,7 @@
 	"tag-editcheck-newcontent-description": "ايديت شيك يكول اكو محتوه جديد اجه لهاي الصفحه",
 	"tag-editcheck-newreference-description": "خليت مرجع للصفحه",
 	"tag-editcheck-references-description": "ايديت شيك يكول المصدر المفروض يصير ضروري",
+	"tag-editcheck-references-activated": "ايديت شيك (المصادر) مشتعله",
 	"tag-editcheck-references-activated-description": "ايديت شيك يكول ضروري يصير مصدر، والواجهه جانت طالعه",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|تحرير مرئي]]",
 	"tag-visualeditor-description": "إنته عدلت بـ[[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",

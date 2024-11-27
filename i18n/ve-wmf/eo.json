@@ -15,6 +15,7 @@
 	"tag-editcheck-newcontent-description": "Redakto-kontrolo kredas, ke nova enhavo estis aldonita al la paĝo",
 	"tag-editcheck-newreference-description": "Referenco estis aldonita al la paĝo",
 	"tag-editcheck-references-description": "Redakto-kontrolo opinias, ke referenco eble estis bezonata",
+	"tag-editcheck-references-activated": "Redakto-kontrolo (referencoj) aktivigita",
 	"tag-editcheck-references-activated-description": "Redakto-kontrolo kredas, ke referenco eble estis bezonata, kaj la UI estis montrita",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Vida redakto]]",
 	"tag-visualeditor-description": "Redakto farita per [[{{MediaWiki:visualeditor-descriptionpagelink}}|vida redaktilo]]",
