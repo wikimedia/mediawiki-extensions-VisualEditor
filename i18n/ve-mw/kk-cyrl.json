@@ -150,6 +150,7 @@
 	"visualeditor-linkinspector-educationpopup-text": "Басқа уики мақалаларына немесе тіпті басқа сайттарға маңызды сөздерді сілтеңіз. Бұл оқырмандарға контекст түсінуге көмектеседі.",
 	"visualeditor-linkinspector-educationpopup-title": "Сілтемелер",
 	"visualeditor-linkinspector-illegal-title": "Жарамсыз бет атауы",
+	"visualeditor-linkinspector-invalid-external": "Толық URL енгізіңіз, мысалы https://example.org",
 	"visualeditor-linknodeinspector-add-label": "Деңгей қосу",
 	"visualeditor-linknodeinspector-title": "Мысал сілтеме",
 	"visualeditor-magiclinknodeinspector-convert-link": "Қарапайым сілтемеге түрлендіру",
