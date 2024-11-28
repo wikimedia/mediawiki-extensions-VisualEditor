@@ -9,7 +9,8 @@
 			"Gmelfi",
 			"HalanTul",
 			"Pippinu",
-			"Sarvaturi"
+			"Sarvaturi",
+			"GianAntonucci"
 		]
 	},
 	"tooltip-ca-ve-edit": "Cancia sta pàggina",
@@ -22,7 +23,7 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Agghiunci na discrizzioni lucali tràmiti surgenti",
 	"visualeditor-ca-createsource": "Crea surgenti",
 	"visualeditor-ca-editsource": "Cancia surgenti",
-	"visualeditor-ca-editsource-section": "cancia la surgenti",
+	"visualeditor-ca-editsource-section": "cancia u wikitestu",
 	"visualeditor-categories-tool": "Catigurìi",
 	"visualeditor-desc": "Editor visivu pi MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
