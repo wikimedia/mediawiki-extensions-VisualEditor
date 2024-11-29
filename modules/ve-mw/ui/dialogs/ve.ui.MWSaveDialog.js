@@ -879,6 +879,17 @@ ve.ui.MWSaveDialog.prototype.getTeardownProcess = function ( data ) {
 /**
  * @inheritdoc
  */
+ve.ui.MWSaveDialog.prototype.getEscapeAction = function () {
+	const backOrClose = this.actions.get( { flags: [ 'back', 'close' ], visible: true } );
+	if ( backOrClose.length ) {
+		return backOrClose[ 0 ].getAction();
+	}
+	return null;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 	ve.track( 'activity.' + this.constructor.static.name, { action: 'dialog-' + ( action || 'abort' ) } );
 

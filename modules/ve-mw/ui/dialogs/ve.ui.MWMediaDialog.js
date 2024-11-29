@@ -176,6 +176,17 @@ ve.ui.MWMediaDialog.static.getImportRules = function () {
 /**
  * @inheritdoc
  */
+ve.ui.MWMediaDialog.prototype.getEscapeAction = function () {
+	const backOrClose = this.actions.get( { flags: [ 'back', 'close' ], visible: true } );
+	if ( backOrClose.length ) {
+		return backOrClose[ 0 ].getAction();
+	}
+	return null;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWMediaDialog.prototype.getBodyHeight = function () {
 	// FIXME: This should vary on panel.
 	return 600;
