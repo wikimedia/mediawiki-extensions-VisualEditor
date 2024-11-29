@@ -30,7 +30,7 @@
 		"grunt-stylelint": "0.20.1",
 		"grunt-tyops": "0.1.1",
 		"jimp": "0.13.0",
-		"jsdoc": "4.0.3",
+		"jsdoc": "4.0.4",
 		"jsdoc-wmf-theme": "1.1.0",
 		"mocha": "5.2.0",
 		"selenium-webdriver": "3.6.0",
