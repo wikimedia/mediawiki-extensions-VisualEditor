@@ -69,6 +69,17 @@ ve.ui.MWTransclusionDialog.static.isSmallScreen = function () {
 /* Methods */
 
 /**
+ * @inheritdoc
+ */
+ve.ui.MWTransclusionDialog.prototype.getEscapeAction = function () {
+	const backOrClose = this.actions.get( { flags: [ 'back', 'close' ], visible: true } );
+	if ( backOrClose.length ) {
+		return backOrClose[ 0 ].getAction();
+	}
+	return null;
+};
+
+/**
  * Handle outline controls move events.
  *
  * @private
