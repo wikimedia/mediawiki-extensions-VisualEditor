@@ -44,10 +44,8 @@ ve.ui.MWTransclusionDialog.static.actions = [
 	...ve.ui.MWTemplateDialog.static.actions,
 	{
 		action: 'mode',
-		modes: [ 'edit', 'insert' ],
-		// HACK: Will be set later, but we want measurements to be accurate in the mean time, this
-		// will not be needed when T93290 is resolved
-		label: $( document.createTextNode( '\u00a0' ) )
+		// label is set by updateModeActionState
+		modes: [ 'edit', 'insert' ]
 	},
 	{
 		action: 'back',
