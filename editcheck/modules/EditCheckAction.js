@@ -3,14 +3,12 @@
  *
  * @param {Object} config
  * @param {mw.editcheck.BaseEditCheck} check
- * @param {ve.dm.SurfaceFragment[]} highlights Fragments to highlight
- * @param {ve.dm.SurfaceFragment} selection Fragment to select when acting
+ * @param {ve.dm.SurfaceFragment[]} fragments Affected fragments
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} message Check message body
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.check = config.check;
-	this.highlights = config.highlights;
-	this.selection = config.selection;
+	this.fragments = config.fragments;
 	this.message = config.message;
 };
 
@@ -23,6 +21,15 @@ OO.initClass( mw.editcheck.EditCheckAction );
  */
 mw.editcheck.EditCheckAction.prototype.getChoices = function () {
 	return this.check.getChoices( this );
+};
+
+/**
+ * Get selections to highlight for this check
+ *
+ * @return {ve.dm.Selection[]}
+ */
+mw.editcheck.EditCheckAction.prototype.getHighlightSelections = function () {
+	return this.fragments.map( ( fragment ) => fragment.getSelection() );
 };
 
 /**

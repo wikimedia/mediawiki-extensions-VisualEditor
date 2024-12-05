@@ -60,8 +60,8 @@ ve.ui.EditCheckDialog.prototype.update = function () {
 			label: check.message,
 			framed: false
 		} ).$element );
-		check.highlights.forEach( ( highlight ) => {
-			selections.push( ve.ce.Selection.static.newFromModel( highlight.getSelection(), surfaceView ) );
+		check.getHighlightSelections().forEach( ( selection ) => {
+			selections.push( ve.ce.Selection.static.newFromModel( selection, surfaceView ) );
 		} );
 	} );
 	surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', selections );

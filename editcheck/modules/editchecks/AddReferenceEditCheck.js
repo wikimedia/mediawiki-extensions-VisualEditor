@@ -18,8 +18,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 	return this.findAddedContent( surfaceModel.getDocument() ).map( ( range ) => {
 		const fragment = surfaceModel.getLinearFragment( range );
 		return new mw.editcheck.EditCheckAction( {
-			highlights: [ fragment ],
-			selection: this.adjustForPunctuation( fragment.collapseToEnd() ),
+			fragments: [ fragment ],
 			check: this
 		} );
 	} );
@@ -60,7 +59,8 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, co
 	switch ( choice ) {
 		case 'accept':
 			ve.track( 'activity.editCheckReferences', { action: 'edit-check-confirm' } );
-			action.selection.select();
+
+			this.adjustForPunctuation( action.fragments[ 0 ].collapseToEnd() ).select();
 
 			return windowAction.open( 'citoid' ).then( ( instance ) => instance.closing ).then( ( citoidData ) => {
 				const citoidOrCiteDataDeferred = ve.createDeferred();
@@ -95,7 +95,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, co
 			return windowAction.open(
 				'editCheckReferencesInspector',
 				{
-					fragment: action.highlights[ 0 ],
+					fragment: action.fragments[ 0 ],
 					callback: contextItem.data.callback,
 					saveProcessDeferred: contextItem.data.saveProcessDeferred
 				}

@@ -78,7 +78,7 @@ mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listene
 		}
 	} );
 	newChecks.sort(
-		( a, b ) => a.highlights[ 0 ].getSelection().getCoveringRange().start - b.highlights[ 0 ].getSelection().getCoveringRange().start
+		( a, b ) => a.getHighlightSelections()[ 0 ].getCoveringRange().start - b.getHighlightSelections()[ 0 ].getCoveringRange().start
 	);
 	return newChecks;
 };

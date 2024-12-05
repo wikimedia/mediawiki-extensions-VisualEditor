@@ -22,8 +22,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 		if ( href ) {
 			const fragment = surfaceModel.getLinearFragment( node.getOuterRange() );
 			return new mw.editcheck.EditCheckAction( {
-				highlights: [ fragment ],
-				selection: fragment,
+				fragments: [ fragment ],
 				message: ve.msg( 'citoid-referencecontextitem-convert-message' ),
 				check: this
 			} );

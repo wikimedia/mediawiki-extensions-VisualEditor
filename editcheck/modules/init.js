@@ -153,10 +153,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 				const highlightNodes = [];
 				const selections = [];
 				checks.forEach( ( check ) => {
-					check.highlights.forEach( ( highlight ) => {
-						highlightNodes.push.apply( highlightNodes, surfaceView.getDocument().selectNodes( highlight.getSelection().getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
-						const selection = ve.ce.Selection.static.newFromModel( highlight.getSelection(), surfaceView );
-						selections.push( selection );
+					check.getHighlightSelections().forEach( ( selection ) => {
+						highlightNodes.push.apply( highlightNodes, surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
+						const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
+						selections.push( selectionView );
 					} );
 				} );
 				// TODO: Make selections clickable when multicheck is enabled
@@ -201,7 +201,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 
 			// eslint-disable-next-line no-inner-declarations
 			function showCheckContext( check ) {
-				const fragment = check.highlights[ 0 ];
+				const fragment = check.fragments[ 0 ];
 
 				// Select the found content to correctly position the context on desktop
 				fragment.select();
