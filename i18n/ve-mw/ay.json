@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AleElDestructor",
 			"Jduranboger",
 			"Macofe",
 			"Vikytinta"
@@ -40,7 +41,7 @@
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Katiyuriy imantatanaka",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Niya kipka katiyuriyanaka",
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Aka ..aksar jittayaña",
-	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Machaq katiyuria",
+	"visualeditor-dialog-meta-categories-input-newcategorylabel": "Machaqa katiyuria",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Katiyuriy yapxataña",
 	"visualeditor-dialog-meta-categories-options": "Ajllinaka",
 	"visualeditor-dialog-meta-categories-section": "Katiyuriyanaka",
