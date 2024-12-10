@@ -122,6 +122,7 @@
 	"visualeditor-dialog-transclusion-loading": "ਲੱਦ ਰਿਹਾ ਹੈ...",
 	"visualeditor-dialog-transclusion-param-default": "ਪੂਰਵ-ਨਿਰਧਾਰਤ: $1",
 	"visualeditor-dialog-transclusion-param-example-long": "ਉਦਾਹਰਨ: $1",
+	"visualeditor-dialog-transclusion-param-selection-aria-label": "$1 ਵਿੱਚ ਮਾਪਦੰਡ",
 	"visualeditor-dialog-transclusion-placeholder-input-placeholder": "ਫਰਮਾ ਲੱਭੋ",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "ਪਿੱਛੇ ਜਾਉ",
 	"visualeditor-dialog-transclusion-required-parameter-dialog-ok": "ਜਿਵੇਂ-ਕਿਵੇਂ ਜਾਰੀ ਰੱਖੋ",
