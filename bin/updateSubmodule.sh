@@ -56,8 +56,8 @@ DELETED_I18N_KEYS=$(git diff HEAD..$TARGET -- i18n/en.json | grep -E '^\-' | gre
 # Find common keys (modified keys)
 MODIFIED_KEYS=$(echo -e "$ADDED_I18N_KEYS\n$DELETED_I18N_KEYS" | sort | uniq -d)
 # Remove modified keys from the added and removed lists
-  ADDED_I18N_KEYS=$(echo "$ADDED_I18N_KEYS" | grep -vxF -f <(echo "$MODIFIED_KEYS") | sed 's/^/- /')
-DELETED_I18N_KEYS=$(echo "$DELETED_I18N_KEYS" | grep -vxF -f <(echo "$MODIFIED_KEYS") | sed 's/^/- /')
+  ADDED_I18N_KEYS=$(echo "$ADDED_I18N_KEYS" | grep -vxF -f <(echo "$MODIFIED_KEYS"))
+DELETED_I18N_KEYS=$(echo "$DELETED_I18N_KEYS" | grep -vxF -f <(echo "$MODIFIED_KEYS"))
 
 # Added/removed files
   ADDED_FILES=$(git diff HEAD..$TARGET --name-only --diff-filter=A | grep --color=never -E "\.(js|css|less)$" | sed 's/^/- /' || :)
