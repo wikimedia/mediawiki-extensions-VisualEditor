@@ -1021,6 +1021,7 @@ class Hooks implements
 		$preferences['visualeditor-findAndReplace-regex'] = $api;
 		$preferences['visualeditor-findAndReplace-matchCase'] = $api;
 		$preferences['visualeditor-findAndReplace-word'] = $api;
+		$preferences['visualeditor-symbolList-recentlyUsed-specialCharacters'] = $api;
 	}
 
 	/**
