@@ -177,6 +177,11 @@ ve.init.mw.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 	}
 };
 
+/**
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.canUseUserConfig = mw.user.isNamed;
+
 ve.init.mw.Platform.prototype.createLocalStorage = function () {
 	return this.createConflictableStorage( mw.storage );
 };
