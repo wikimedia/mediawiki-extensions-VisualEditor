@@ -25,7 +25,8 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 			} )
 		);
 };
-mw.editcheck.AddReferenceEditCheck.prototype.onDocumentChange = mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave;
+// Only show these before save (for now)
+// mw.editcheck.AddReferenceEditCheck.prototype.onDocumentChange = mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave;
 
 /**
  * Find content ranges which have been inserted
