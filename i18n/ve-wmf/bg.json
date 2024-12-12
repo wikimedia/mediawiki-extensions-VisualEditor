@@ -14,7 +14,7 @@
 	},
 	"tag-visualeditor": "Визуална редакция",
 	"tag-visualeditor-description": "Редакция, направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]]",
-	"tag-visualeditor-needcheck": "Визуална редакция за проверка",
+	"tag-visualeditor-needcheck": "Визуална редакция: Проверете",
 	"tag-visualeditor-needcheck-description": "Редакция, направена с [[{{MediaWiki:visualeditor-descriptionpagelink}}|визуалния редактор]], за която системата откри възможно нежелани промени по уикикода.",
 	"tag-visualeditor-wikitext": "Уикитекстов редактор – 2017",
 	"tag-visualeditor-wikitext-description": "Редакцията е извършена чрез уикитекстов редактор – 2017",
