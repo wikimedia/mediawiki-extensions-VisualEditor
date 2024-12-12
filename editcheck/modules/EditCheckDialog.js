@@ -36,6 +36,8 @@ ve.ui.EditCheckDialog.static.size = OO.ui.isMobile() ? 'full' : 'medium';
 
 ve.ui.EditCheckDialog.static.framed = false;
 
+ve.ui.EditCheckDialog.static.activeSurface = true;
+
 // Invisible title for accessibility
 ve.ui.EditCheckDialog.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
 
@@ -103,7 +105,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.positionDebounced = ve.debounce( this.position.bind( this ), 100 );
 };
 
-ve.ui.EditCheckDialog.prototype.update = function () {
+ve.ui.EditCheckDialog.prototype.update = function ( fromUserAction ) {
 	const surfaceView = this.surface.getView();
 	// We only regenerate the checks on-change during the edit. If we're in
 	// the proofreading step, no new checks should appear based on changes:
@@ -137,12 +139,14 @@ ve.ui.EditCheckDialog.prototype.update = function () {
 		surfaceView.setReviewMode( true, highlightNodes );
 	}
 
-	this.setCurrentOffset( newOffset );
+	this.setCurrentOffset( newOffset, fromUserAction );
 };
 
 ve.ui.EditCheckDialog.prototype.position = function () {
 	this.drawHighlights();
-	this.scrollCurrentCheckIntoViewDebounced();
+	if ( this.reviewMode ) {
+		this.scrollCurrentCheckIntoViewDebounced();
+	}
 };
 
 ve.ui.EditCheckDialog.prototype.drawHighlights = function () {
@@ -179,8 +183,9 @@ ve.ui.EditCheckDialog.prototype.drawHighlights = function () {
  * Set the offset of the current check, within the list of all checks
  *
  * @param {number} offset
+ * @param {boolean} fromUserAction
  */
-ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset ) {
+ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction ) {
 	// TODO: work out how to tell the window to recalculate height here
 	this.currentOffset = Math.max( 0, offset );
 
@@ -214,7 +219,9 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset ) {
 			)
 		);
 
-		this.scrollCurrentCheckIntoViewDebounced();
+		if ( fromUserAction || this.reviewMode ) {
+			this.scrollCurrentCheckIntoViewDebounced();
+		}
 	} else {
 		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );
 	}
@@ -332,7 +339,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( widget, choice, actionChosen,
 				this.update();
 			}, pause );
 		} else {
-			this.updateDebounced();
+			this.updateDebounced( true );
 		}
 	} );
 };
@@ -347,7 +354,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( widget, choice, actionChosen,
 ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( check, index, collapsed ) {
 	if ( !collapsed ) {
 		// expanded one
-		this.setCurrentOffset( this.currentChecks.indexOf( check ) );
+		this.setCurrentOffset( this.currentChecks.indexOf( check ), true );
 	}
 };
 
@@ -365,14 +372,14 @@ ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
  * Handle click events from the next button
  */
 ve.ui.EditCheckDialog.prototype.onNextButtonClick = function () {
-	this.setCurrentOffset( this.currentOffset + 1 );
+	this.setCurrentOffset( this.currentOffset + 1, true );
 };
 
 /**
  * Handle click events from the previous button
  */
 ve.ui.EditCheckDialog.prototype.onPreviousButtonClick = function () {
-	this.setCurrentOffset( this.currentOffset - 1 );
+	this.setCurrentOffset( this.currentOffset - 1, true );
 };
 
 /* Registration */
