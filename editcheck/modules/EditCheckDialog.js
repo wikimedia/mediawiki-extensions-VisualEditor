@@ -113,7 +113,7 @@ ve.ui.EditCheckDialog.prototype.update = function ( fromUserAction ) {
 	if ( this.listener === 'onDocumentChange' || !this.currentChecks ) {
 		this.currentChecks = mw.editcheck.editCheckFactory.createAllByListener( this.listener, this.surface.getModel() );
 	}
-	if ( this.listener === 'onBeforeSave' && this.currentChecks.length === 0 ) {
+	if ( this.currentChecks.length === 0 ) {
 		return this.close( 'complete' );
 	}
 	const checks = this.currentChecks;
@@ -389,7 +389,13 @@ ve.ui.windowFactory.register( ve.ui.EditCheckDialog );
 
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
-		'editCheckDialogInProcess', 'window', 'toggle', { args: [ 'editCheckDialog', { listener: 'onDocumentChange' } ] }
+		'editCheckDialogInProcessOpen', 'window', 'open', { args: [ 'editCheckDialog', { listener: 'onDocumentChange' } ] }
+	)
+);
+
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'editCheckDialogInProcessToggle', 'window', 'toggle', { args: [ 'editCheckDialog', { listener: 'onDocumentChange' } ] }
 	)
 );
 
@@ -415,7 +421,7 @@ ve.ui.EditCheckDialogTool.static.group = 'notices';
 ve.ui.EditCheckDialogTool.static.icon = 'robot';
 ve.ui.EditCheckDialogTool.static.title = 'Edit check'; // OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' );
 ve.ui.EditCheckDialogTool.static.autoAddToCatchall = false;
-ve.ui.EditCheckDialogTool.static.commandName = 'editCheckDialogInProcess';
+ve.ui.EditCheckDialogTool.static.commandName = 'editCheckDialogInProcessToggle';
 // ve.ui.EditCheckDialogTool.static.commandName = 'editCheckDialogBeforeSave';
 
 // Demo button for opening edit check sidebar

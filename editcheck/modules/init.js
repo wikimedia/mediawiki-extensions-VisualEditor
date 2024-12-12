@@ -86,6 +86,25 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 }
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable ) {
+	mw.hook( 've.activationComplete' ).add( () => {
+		const surface = ve.init.target.getSurface();
+		const surfaceModel = surface.getModel();
+		const surfaceView = surface.getView();
+
+		// TODO: De-duplicate with this listener in EditCheckDialog
+		surfaceModel.on( 'undoStackChange', ve.debounce( () => {
+			if ( !surfaceView.reviewMode ) {
+				const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onDocumentChange', surfaceModel );
+				if ( checks.length ) {
+					const currentWindow = surface.getToolbarDialogs( 'side' ).getCurrentWindow();
+					if ( !currentWindow || currentWindow.constructor.static.name !== 'editCheckDialog' ) {
+						const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
+						return windowAction.open( 'editCheckDialog', { listener: 'onDocumentChange' } );
+					}
+				}
+			}
+		}, 100 ) );
+	} );
 	mw.hook( 've.activationStart' ).add( () => {
 		document.documentElement.classList.add( 've-editcheck-available' );
 	} );
