@@ -83,8 +83,12 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 }
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable ) {
-	let saveProcessDeferred;
-
+	mw.hook( 've.activationStart' ).add( () => {
+		document.documentElement.classList.add( 've-editcheck-available' );
+	} );
+	mw.hook( 've.deactivationComplete' ).add( () => {
+		document.documentElement.classList.remove( 've-editcheck-available' );
+	} );
 	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, target ) => {
 		const surface = target.getSurface();
 
@@ -101,12 +105,11 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 		// clear rejection-reasons between runs of the save process, so only the last one counts
 		mw.editcheck.rejections.length = 0;
 
-		let checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface.getModel() );
+		const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface.getModel() );
 		if ( checks.length ) {
 			ve.track( 'counter.editcheck.preSaveChecksShown' );
 			mw.editcheck.refCheckShown = true;
 
-			const surfaceView = surface.getView();
 			const toolbar = target.getToolbar();
 			const reviewToolbar = new ve.ui.PositionedTargetToolbar( target, target.toolbarConfig );
 			reviewToolbar.setup( [
@@ -142,132 +145,56 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 			target.toolbar.$element.before( reviewToolbar.$element );
 			target.toolbar = reviewToolbar;
 
-			saveProcessDeferred = ve.createDeferred();
-			const context = surface.getContext();
-
-			// TODO: Allow multiple checks to be shown when multicheck is enabled
-			checks = checks.slice( 0, 1 );
-
-			// eslint-disable-next-line no-shadow
-			const drawSelections = ( checks ) => {
-				const highlightNodes = [];
-				const selections = [];
-				checks.forEach( ( check ) => {
-					check.getHighlightSelections().forEach( ( selection ) => {
-						highlightNodes.push.apply( highlightNodes, surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
-						const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
-						selections.push( selectionView );
-					} );
-				} );
-				// TODO: Make selections clickable when multicheck is enabled
-				surfaceView.getSelectionManager().drawSelections(
-					'editCheck',
-					selections
-				);
-				surfaceView.setReviewMode( true, highlightNodes );
-			};
-
-			const contextDone = ( responseData, contextData ) => {
-				if ( !responseData ) {
-					// this is the back button
-					return saveProcessDeferred.resolve();
-				}
-				const selectionIndex = checks.indexOf( contextData.action );
-
-				if ( responseData.action !== 'reject' ) {
-					mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
-				} else if ( responseData.reason ) {
-					mw.editcheck.rejections.push( responseData.reason );
-				}
-				// TODO: Move on to the next issue, when multicheck is enabled
-				// checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface.getModel() );
-				checks = [];
-
-				if ( checks.length ) {
-					context.removePersistentSource( 'editCheckReferences' );
-					setTimeout( () => {
-						// timeout needed to wait out the newly added content being focused
-						surface.getModel().setNullSelection();
-						drawSelections( checks );
-						setTimeout( () => {
-							// timeout needed to allow the context to reposition
-							showCheckContext( checks[ Math.min( selectionIndex, checks.length - 1 ) ] );
-						} );
-					}, 500 );
-				} else {
-					saveProcessDeferred.resolve( true );
-				}
-			};
-
-			// eslint-disable-next-line no-inner-declarations
-			function showCheckContext( check ) {
-				const fragment = check.fragments[ 0 ];
-
-				// Select the found content to correctly position the context on desktop
-				fragment.select();
-
-				context.addPersistentSource( {
-					embeddable: false,
-					data: {
-						action: check,
-						fragment: fragment,
-						callback: contextDone,
-						saveProcessDeferred: saveProcessDeferred
-					},
-					name: 'editCheckReferences'
-				} );
-
-				// Deactivate to prevent selection suppressing mobile context
-				surface.getView().deactivate();
-
-				// Once the context is positioned, clear the selection
-				setTimeout( () => {
-					surface.getModel().setNullSelection();
-				} );
+			let $contextContainer, contextPadding;
+			if ( surface.context.popup ) {
+				contextPadding = surface.context.popup.containerPadding;
+				$contextContainer = surface.context.popup.$container;
+				surface.context.popup.$container = surface.$element;
+				surface.context.popup.containerPadding = 20;
 			}
 
-			drawSelections( checks );
-			toolbar.toggle( false );
-			target.onContainerScroll();
-
 			saveProcess.next( () => {
-				showCheckContext( checks[ 0 ] );
+				toolbar.toggle( false );
+				target.onContainerScroll();
+				// surface.executeCommand( 'editCheckDialogBeforeSave' );
+				const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
+				return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', reviewMode: true } )
+					.then( ( instance ) => instance.closing )
+					.then( ( data ) => {
+						reviewToolbar.$element.remove();
+						toolbar.toggle( true );
+						target.toolbar = toolbar;
+						if ( $contextContainer ) {
+							surface.context.popup.$container = $contextContainer;
+							surface.context.popup.containerPadding = contextPadding;
+						}
+						// Creating a new PositionedTargetToolbar stole the
+						// toolbar windowmanagers, so we need to make the
+						// original toolbar reclaim them:
+						toolbar.disconnect( target );
+						target.setupToolbar( surface );
+						target.onContainerScroll();
 
-				return saveProcessDeferred.promise().then( ( data ) => {
-					context.removePersistentSource( 'editCheckReferences' );
-
-					surfaceView.getSelectionManager().drawSelections( 'editCheck', [] );
-					surfaceView.setReviewMode( false );
-
-					reviewToolbar.$element.remove();
-					toolbar.toggle( true );
-					target.toolbar = toolbar;
-					target.onContainerScroll();
-
-					// Check the user inserted a citation
-					if ( data ) {
-						const delay = ve.createDeferred();
-						// If they inserted, wait 2 seconds on desktop before showing save dialog
-						setTimeout( () => {
-							ve.track( 'counter.editcheck.preSaveChecksCompleted' );
-							delay.resolve();
-						}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
-						return delay.promise();
-					} else {
-						ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
-						return ve.createDeferred().reject().promise();
-					}
-				} );
+						if ( data ) {
+							const delay = ve.createDeferred();
+							// If they inserted, wait 2 seconds on desktop
+							// before showing save dialog to make sure insertions are finialized
+							setTimeout( () => {
+								ve.track( 'counter.editcheck.preSaveChecksCompleted' );
+								delay.resolve();
+							}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
+							return delay.promise();
+						} else {
+							// closed via "back" or otherwise
+							ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
+							return ve.createDeferred().reject().promise();
+						}
+					} );
 			} );
 		} else {
 			// Counterpart to earlier preSaveChecksShown, for use in tracking
 			// errors in check-generation:
 			ve.track( 'counter.editcheck.preSaveChecksNotShown' );
-		}
-	} );
-	mw.hook( 've.deactivationComplete' ).add( () => {
-		if ( saveProcessDeferred ) {
-			saveProcessDeferred.reject();
 		}
 	} );
 }
@@ -286,12 +213,9 @@ ve.ui.EditCheckBack.static.autoAddToGroup = false;
 ve.ui.EditCheckBack.static.title =
 	OO.ui.deferMsg( 'visualeditor-backbutton-tooltip' );
 ve.ui.EditCheckBack.prototype.onSelect = function () {
-	const context = this.toolbar.getSurface().getContext();
-	if ( context.inspector ) {
-		context.inspector.close();
-	} else {
-		context.items[ 0 ].close();
-	}
+	const surface = this.toolbar.getSurface();
+	surface.getContext().hide();
+	surface.execute( 'window', 'close', 'editCheckDialog' );
 	this.setActive( false );
 };
 ve.ui.EditCheckBack.prototype.onUpdateState = function () {
