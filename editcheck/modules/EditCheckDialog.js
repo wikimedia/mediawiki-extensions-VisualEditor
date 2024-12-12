@@ -66,6 +66,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	} );
 
 	this.currentOffset = 0;
+	this.currentChecks = null;
 
 	this.footerLabel = new OO.ui.LabelWidget();
 	this.previousButton = new OO.ui.ButtonWidget( {
@@ -245,6 +246,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.EditCheckDialog.super.prototype.getSetupProcess.call( this, data )
 		.first( () => {
 			this.currentOffset = 0;
+			this.currentChecks = null;
 			this.listener = data.listener || 'onDocumentChange';
 			this.reviewMode = data.reviewMode;
 			this.surface = data.surface;
