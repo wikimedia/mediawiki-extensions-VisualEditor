@@ -323,13 +323,17 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( widget, choice, actionChosen,
 		}
 
 		if ( this.listener === 'onBeforeSave' ) {
-			// We must have been acting on the currentOffset
+			// If an action has been taken, we want to linger for a brief moment
+			// to show the result of the action before moving away
+			// TODO: This was written for AddReferenceEditCheck but should be
+			// more generic
+			const pause = data.action !== 'reject' ? 500 : 0;
 			setTimeout( () => {
-				// We want to linger for a brief moment before moving away
+				// We must have been acting on the currentOffset
 				this.currentChecks.splice( this.currentOffset, 1 );
 				this.currentOffset = Math.max( 0, this.currentOffset - 1 );
 				this.update();
-			}, 500 );
+			}, pause );
 		}
 	} );
 };
