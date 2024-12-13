@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gomoko"
+			"Gomoko",
+			"Mahabarata"
 		]
 	},
 	"editcheck-dialog-action-no": "Non",
@@ -16,6 +17,7 @@
 	"editcheck-dialog-addref-success-notify": "Merci d'avoir ajouté une source !",
 	"editcheck-dialog-addref-title": "Ajouter une source",
 	"editcheck-dialog-title": "Avant de publier",
+	"editcheck-review-title": "Relire les modifications",
 	"tag-editcheck-reference-decline-common-knowledge": "Vérification de modification (références) refusée (savoir commun)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "La référence EditCheck a été refusée comme étant un savoir commun",
 	"tag-editcheck-reference-decline-irrelevant": "Vérification de modification (références) refusée (non pertinent)",
