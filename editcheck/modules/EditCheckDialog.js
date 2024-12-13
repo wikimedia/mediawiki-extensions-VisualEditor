@@ -17,6 +17,9 @@ ve.ui.EditCheckDialog = function VeUiEditCheckDialog( config ) {
 	// Parent constructor
 	ve.ui.EditCheckDialog.super.call( this, config );
 
+	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
+	this.scrollCurrentCheckIntoViewDebounced = ve.debounce( this.scrollCurrentCheckIntoView.bind( this ), 200, true );
+
 	// Pre-initialization
 	this.$element.addClass( 've-ui-editCheckDialog' );
 };
@@ -138,7 +141,7 @@ ve.ui.EditCheckDialog.prototype.update = function () {
 
 ve.ui.EditCheckDialog.prototype.position = function () {
 	this.drawHighlights();
-	this.scrollCurrentCheckIntoView();
+	this.scrollCurrentCheckIntoViewDebounced();
 };
 
 ve.ui.EditCheckDialog.prototype.drawHighlights = function () {
@@ -195,6 +198,10 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset ) {
 
 	this.updateSize();
 
+	if ( this.isOpening() ) {
+		return;
+	}
+
 	const surfaceView = this.surface.getView();
 	if ( this.currentChecks.length > 0 ) {
 		// The currently-focused check gets a selection:
@@ -206,7 +213,7 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset ) {
 			)
 		);
 
-		this.scrollCurrentCheckIntoView();
+		this.scrollCurrentCheckIntoViewDebounced();
 	} else {
 		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );
 	}
@@ -265,12 +272,11 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data ) {
 ve.ui.EditCheckDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.EditCheckDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( () => {
-			// The end of the ready process triggers a reflow after an
-			// animation, so we need to get past that to avoid the content
-			// being immediately scrolled away
+			// Call update again after the dialog has transitioned open, as the first
+			// call of update will not have drawn any selections.
 			setTimeout( () => {
-				this.scrollCurrentCheckIntoView();
-			}, 500 );
+				this.update();
+			}, OO.ui.theme.getDialogTransitionDuration() );
 		}, this );
 };
 
