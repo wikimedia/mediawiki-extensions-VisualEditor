@@ -6,5 +6,6 @@
 	},
 	"editcheck-dialog-action-no": "Не",
 	"editcheck-dialog-action-yes": "Да",
-	"editcheck-dialog-addref-reject-other": "Друго"
+	"editcheck-dialog-addref-reject-other": "Друго",
+	"editcheck-review-title": "Преглед измена"
 }
