@@ -677,7 +677,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 	$thumbContainer
 		.append( $image.prop( 'src', imageinfo.thumburl ) );
 
-	this.$infoPanelWrapper.append(
+	this.$infoPanelWrapper.empty().append(
 		$thumbContainer,
 		$info
 	);
@@ -877,7 +877,6 @@ ve.ui.MWMediaDialog.prototype.onSearchQueryClear = function () {
  * @param {Object} info Image info
  */
 ve.ui.MWMediaDialog.prototype.chooseImageInfo = function ( info ) {
-	this.$infoPanelWrapper.empty();
 	// Switch panels
 	this.selectedImageInfo = info;
 	this.switchPanels( 'imageInfo' );
