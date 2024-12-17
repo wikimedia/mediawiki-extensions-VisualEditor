@@ -36,7 +36,8 @@ ve.ui.EditCheckDialog.static.size = OO.ui.isMobile() ? 'full' : 'medium';
 
 ve.ui.EditCheckDialog.static.framed = false;
 
-ve.ui.EditCheckDialog.static.activeSurface = true;
+// TODO: Keep surface active on mobile for some checks?
+ve.ui.EditCheckDialog.static.activeSurface = !OO.ui.isMobile();
 
 // Invisible title for accessibility
 ve.ui.EditCheckDialog.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
