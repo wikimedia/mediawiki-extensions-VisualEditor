@@ -140,6 +140,10 @@
 			"value": true,
 			"description": "Only allow a single edit check to be surfaced"
 		},
+		"VisualEditorEditCheckLoadExperimental": {
+			"value": false,
+			"description": "Load experimental edit checks"
+		},
 		"VisualEditorEditCheckABTest": {
 			"value": false,
 			"description": "A/B test Edit Check for all users. A/B bucket status will override VisualEditorEditCheck."
@@ -217,7 +221,7 @@
 		"RecentChange_save": "VisualEditorHooks",
 		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks",
 		"ResourceLoaderGetConfigVars": "VisualEditorHooks",
-		"ResourceLoaderRegisterModules": "VisualEditorHooks",
+		"ResourceLoaderRegisterModules": [ "VisualEditorHooks", "EditCheckHooks" ],
 		"SkinEditSectionLinks": "VisualEditorHooks",
 		"SkinTemplateNavigation::Universal": "VisualEditorHooks",
 		"UserLoggedIn": "VisualEditorHooks"
@@ -225,6 +229,9 @@
 	"HookHandlers": {
 		"VisualEditorHooks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks"
+		},
+		"EditCheckHooks": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\Hooks"
 		},
 		"betapreferences": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\BetaPreferenceHooks",
@@ -623,8 +630,6 @@
 				"editcheck/modules/EditCheckAction.js",
 				"editcheck/modules/BaseEditCheck.js",
 				"editcheck/modules/editchecks/AddReferenceEditCheck.js",
-				"editcheck/modules/editchecks/ConvertReferenceEditCheck.js",
-				"editcheck/modules/editchecks/TextMatchEditCheck.js",
 				{
 					"name": "editcheck/modules/config.json",
 					"callback": "\\MediaWiki\\Extension\\VisualEditor\\EditCheck\\ResourceLoaderData::getConfig"

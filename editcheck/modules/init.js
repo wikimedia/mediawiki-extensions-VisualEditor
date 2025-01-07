@@ -12,10 +12,11 @@ require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './BaseEditCheck.js' );
 
-// TODO: Load these checks behind feature flags
-// require( './editchecks/ConvertReferenceEditCheck.js' );
-// require( './editchecks/TextMatchEditCheck.js' );
 require( './editchecks/AddReferenceEditCheck.js' );
+
+if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental ) {
+	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
+}
 
 /**
  * Check if the document has content needing a reference, for AddReferenceEditCheck
