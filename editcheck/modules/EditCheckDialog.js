@@ -124,8 +124,10 @@ ve.ui.EditCheckDialog.prototype.update = function ( fromUserAction ) {
 	checks.forEach( ( check, index ) => {
 		const widget = check.render( index !== newOffset, this.listener === 'onBeforeSave', this.surface );
 		widget.on( 'togglecollapse', this.onToggleCollapse, [ check, index ], this );
-		widget.on( 'act', this.onAct, [ widget ], this );
+		check.on( 'act', this.onAct, [ widget ], this );
 		this.$checks.append( widget.$element );
+
+		// for scrolling later
 		check.widget = widget;
 	} );
 
@@ -309,11 +311,9 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data ) {
  * Handle 'act' events from the mw.widget.EditCheckActionWidget
  *
  * @param {mw.editcheck.EditCheckActionWidget} widget
- * @param {Object} choice Choice object (with 'reason', 'object', 'label')
- * @param {string} actionChosen Choice action
  * @param {jQuery.Promise} promise Promise which resolves when the action is complete
  */
-ve.ui.EditCheckDialog.prototype.onAct = function ( widget, choice, actionChosen, promise ) {
+ve.ui.EditCheckDialog.prototype.onAct = function ( widget, promise ) {
 	widget.setDisabled( true );
 	this.nextButton.setDisabled( true );
 	this.previousButton.setDisabled( true );

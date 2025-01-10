@@ -8,6 +8,9 @@
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} title Check title
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
+	// Mixin constructors
+	OO.EventEmitter.call( this );
+
 	this.check = config.check;
 	this.fragments = config.fragments;
 	this.message = config.message;
@@ -18,6 +21,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 };
 
 OO.initClass( mw.editcheck.EditCheckAction );
+OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
 
 /**
  * Get the action's title
@@ -75,20 +79,22 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		label: this.getTitle(),
 		message: this.getDescription(),
 		classes: collapsed ? [ 've-ui-editCheckActionWidget-collapsed' ] : '',
+		mode: this.check.mode,
 		singleAction: singleAction
 	} );
-	this.getChoices().forEach( ( choice ) => {
-		const button = new OO.ui.ButtonWidget( choice );
-		button.connect( this, {
-			click: () => {
-				const promise = this.check.act( choice.action, this, surface ) || ve.createDeferred().resolve().promise();
-				widget.emit( 'act', choice, choice.action, promise );
-			}
-		} );
-		widget.addAction( button );
+	widget.actions.connect( this, {
+		click: [ 'onActionClick', surface ]
 	} );
+	widget.actions.add( this.getChoices().map(
+		( choice ) => new OO.ui.ActionWidget( ve.extendObject( { modes: [ '' ], framed: true }, choice ) )
+	) );
 
 	return widget;
+};
+
+mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actionWidget ) {
+	const promise = this.check.act( actionWidget.action, this, surface );
+	this.emit( 'act', promise || ve.createDeferred().resolve().promise() );
 };
 
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
@@ -96,8 +102,13 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	config = config || {};
 
 	this.singleAction = config.singleAction;
+	this.mode = config.mode || '';
 
-	this.actions = [];
+	this.actions = new OO.ui.ActionSet();
+
+	this.actions.connect( this, {
+		change: 'onActionsChange'
+	} );
 
 	// Parent constructor
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
@@ -137,20 +148,30 @@ OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.LabelElement );
 OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.TitledElement );
 OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.FlaggedElement );
 
+mw.editcheck.EditCheckActionWidget.static.iconMap = {
+	notice: 'infoFilled',
+	error: 'error',
+	warning: 'alert'
+};
+
+/**
+ * Called when actions are changed
+ */
+mw.editcheck.EditCheckActionWidget.prototype.onActionsChange = function () {
+	this.$actions.empty().addClass( 'oo-ui-element-hidden' );
+	this.actions.get( { modes: [ this.mode ] } ).forEach( ( actionWidget ) => {
+		this.$actions.append( actionWidget.$element ).removeClass( 'oo-ui-element-hidden' );
+	} );
+};
+
 /**
  * @inheritdoc
  */
 mw.editcheck.EditCheckActionWidget.prototype.setDisabled = function ( disabled ) {
 	OO.ui.Widget.prototype.setDisabled.call( this, disabled );
-	this.actions.forEach( ( action ) => {
+	this.actions.forEach( null, ( action ) => {
 		action.setDisabled( disabled );
 	} );
-};
-
-mw.editcheck.EditCheckActionWidget.static.iconMap = {
-	notice: 'infoFilled',
-	error: 'error',
-	warning: 'alert'
 };
 
 mw.editcheck.EditCheckActionWidget.prototype.setType = function ( type ) {
@@ -168,11 +189,6 @@ mw.editcheck.EditCheckActionWidget.prototype.setType = function ( type ) {
 
 mw.editcheck.EditCheckActionWidget.prototype.getType = function () {
 	return this.type;
-};
-
-mw.editcheck.EditCheckActionWidget.prototype.addAction = function ( action ) {
-	this.actions.push( action );
-	this.$actions.append( action.$element ).removeClass( 'oo-ui-element-hidden' );
 };
 
 mw.editcheck.EditCheckActionWidget.prototype.onHeadClick = function ( e ) {
