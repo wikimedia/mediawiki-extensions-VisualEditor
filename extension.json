@@ -623,7 +623,6 @@
 			"group": "visualEditorA",
 			"packageFiles": [
 				"editcheck/modules/init.js",
-				"editcheck/modules/EditCheckContextItem.js",
 				"editcheck/modules/EditCheckInspector.js",
 				"editcheck/modules/EditCheckDialog.js",
 				"editcheck/modules/EditCheckFactory.js",
