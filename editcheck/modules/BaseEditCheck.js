@@ -61,14 +61,6 @@ mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
 mw.editcheck.BaseEditCheck.prototype.act = null;
 
 /**
- * @param {mw.editcheck.EditCheckAction} action
- * @return {Object[]}
- */
-mw.editcheck.BaseEditCheck.prototype.getChoices = function () {
-	return this.constructor.static.choices;
-};
-
-/**
  * Get the title of the check
  *
  * @param {mw.editcheck.EditCheckAction} action
@@ -128,6 +120,20 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
  */
 mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( documentModel ) {
 	return this.getModifiedRanges( documentModel, this.constructor.static.onlyCoveredNodes, true );
+};
+
+/**
+ * Get ContentBranchNodes where some text has been changed
+ *
+ * @param {ve.dm.Document} documentModel
+ * @return {ve.dm.ContentBranchNode[]}
+ */
+mw.editcheck.BaseEditCheck.prototype.getModifiedContentBranchNodes = function ( documentModel ) {
+	const modified = new Set();
+	this.getModifiedRanges( documentModel, false, true ).forEach( ( range ) => {
+		modified.add( documentModel.getBranchNodeFromOffset( range.start ) );
+	} );
+	return Array.from( modified );
 };
 
 /**
@@ -245,7 +251,7 @@ mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentMo
  *
  * @param {ve.Range} range
  * @param {ve.dm.Document} documentModel
- * @return {boolean}
+ * @return {boolean} Whether the range is in a section we don't ignore
  */
 mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel ) {
 	const ignoreSections = this.config.ignoreSections || [];
@@ -280,17 +286,33 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
  * Dismiss a check action
  *
  * @param {mw.editCheck.EditCheckAction} action
+ * @
  */
 mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
+	this.tag( 'dismissed', action );
+};
+
+/**
+ * Tag a check action
+ *
+ * TODO: This is asymmetrical. Do we want to split this into two functions, or
+ * unify isTaggedRange/isTaggedId into one function?
+ *
+ * @param {string} tag
+ * @param {mw.editCheck.EditCheckAction} action
+ */
+mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
 	const name = this.constructor.static.name;
 	if ( action.id ) {
-		const dismissedIds = this.controller.dismissedIds;
-		dismissedIds[ name ] = dismissedIds[ name ] || [];
-		dismissedIds[ name ].push( action.id );
+		const taggedIds = this.controller.taggedIds;
+		taggedIds[ name ] = taggedIds[ name ] || {};
+		taggedIds[ name ][ tag ] = taggedIds[ name ][ tag ] || new Set();
+		taggedIds[ name ][ tag ].add( action.id );
 	} else {
-		const dismissedFragments = this.controller.dismissedFragments;
-		dismissedFragments[ name ] = dismissedFragments[ name ] || [];
-		dismissedFragments[ name ].push(
+		const taggedFragments = this.controller.taggedFragments;
+		taggedFragments[ name ] = taggedFragments[ name ] || {};
+		taggedFragments[ name ][ tag ] = taggedFragments[ name ][ tag ] || [];
+		taggedFragments[ name ][ tag ].push(
 			// Exclude insertions so we don't accidentally block unrelated changes:
 			...action.fragments.map( ( fragment ) => fragment.clone().setExcludeInsertions( true ) )
 		);
@@ -304,7 +326,23 @@ mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
-	const fragments = this.controller.dismissedFragments[ this.constructor.static.name ];
+	return this.isTaggedRange( 'dismissed', range );
+};
+
+/**
+ * Check if this type of check has a given tag
+ *
+ * @param {string} tag
+ * @param {ve.Range} range
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isTaggedRange = function ( tag, range ) {
+	const tags = this.controller.taggedFragments[ this.constructor.static.name ];
+	if ( tags === undefined ) {
+		return false;
+	}
+
+	const fragments = tags[ tag ];
 	return !!fragments && fragments.some(
 		( fragment ) => fragment.getSelection().getCoveringRange().containsRange( range )
 	);
@@ -317,6 +355,21 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedId = function ( id ) {
-	const ids = this.controller.dismissedIds[ this.constructor.static.name ];
-	return ids && ids.includes( id );
+	return this.isTaggedId( 'dismissed', id );
+};
+
+/**
+ * Check if an action with a given ID has a given tag
+ *
+ * @param {string} tag
+ * @param {string} id
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isTaggedId = function ( tag, id ) {
+	const tags = this.controller.taggedIds[ this.constructor.static.name ];
+	if ( tags === undefined ) {
+		return false;
+	}
+	const ids = tags[ tag ];
+	return !!ids && ids.has( id );
 };

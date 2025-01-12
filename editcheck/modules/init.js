@@ -3,11 +3,13 @@ mw.editcheck = {
 	ecenable: !!( new URL( location.href ).searchParams.get( 'ecenable' ) || window.MWVE_FORCE_EDIT_CHECK_ENABLED )
 };
 
+require( './utils.js' );
 require( './EditCheckDialog.js' );
 require( './EditCheckGutterSidebarDialog.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './BaseEditCheck.js' );
+require( './AsyncTextCheck.js' );
 
 require( './editchecks/AddReferenceEditCheck.js' );
 

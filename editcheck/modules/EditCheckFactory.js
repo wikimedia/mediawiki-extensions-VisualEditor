@@ -4,6 +4,7 @@ mw.editcheck.EditCheckFactory = function MWEditEditCheckFactory() {
 
 	this.checksByListener = {
 		onDocumentChange: [],
+		onBranchNodeChange: [],
 		onBeforeSave: []
 	};
 };
@@ -80,30 +81,43 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * TODO: Rename to createAllActionsByListener
  *
  * @param {mw.editcheck.Controller} controller
- * @param {string} listener Listener name
+ * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
- * @return {mw.editcheck.EditCheckActions[]} Actions, sorted by range
+ * @param {mw.editcheck.EditCheckActions[]} existing Existing actions
+ * @return {Promise} Promise that resolves with an updated list of Actions
  */
-mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listener, surfaceModel ) {
-	let newChecks = [];
-	this.getNamesByListener( listener ).forEach( ( checkName ) => {
+mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel, existing ) {
+	const actionOrPromiseList = [];
+	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
 		const check = this.create( checkName, controller, mw.editcheck.config[ checkName ] );
 		if ( !check.canBeShown() ) {
 			return;
 		}
-		const actions = check[ listener ]( surfaceModel );
-		if ( actions.length > 0 ) {
-			ve.batchPush( newChecks, actions );
+		if (
+			mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle &&
+			listenerName === 'onBeforeSave' &&
+			check.getName() !== 'addReference'
+		) {
+			return;
 		}
+		const checkListener = check[ listenerName ];
+		let actionOrPromise;
+		try {
+			actionOrPromise = checkListener.call( check, surfaceModel, existing );
+		} catch ( ex ) {
+			// HACK: ensure that synchronous exceptions are returned as rejected promises.
+			// TODO: Consider making all checks return promises. This would unify exception
+			// handling, at the cost of making debugging be async.
+			actionOrPromise = Promise.reject( ex );
+		}
+		ve.batchPush( actionOrPromiseList, actionOrPromise );
 	} );
-	newChecks.sort(
-		( a, b ) => a.getHighlightSelections()[ 0 ].getCoveringRange().start - b.getHighlightSelections()[ 0 ].getCoveringRange().start
-	);
-	if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle && listener === 'onBeforeSave' ) {
-		newChecks = newChecks.filter( ( action ) => action.getName() === 'addReference' );
-		newChecks.splice( 1 );
-	}
-	return newChecks;
+	return Promise.all( actionOrPromiseList )
+		.then( ( actions ) => actions.filter( ( action ) => action !== null ) )
+		.then( ( actions ) => {
+			actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
+			return actions;
+		} );
 };
 
 mw.editcheck.editCheckFactory = new mw.editcheck.EditCheckFactory();

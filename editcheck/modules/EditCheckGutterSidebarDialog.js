@@ -29,14 +29,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 	const process = this.constructor.super.prototype.getSetupProcess.call( this, data );
 	return process.first( () => {
 		this.controller = data.controller;
-		this.listener = data.listener || data.controller.listener;
+		if ( !Object.prototype.hasOwnProperty.call( data, 'inBeforeSave' ) ) {
+			throw new Error( 'inBeforeSave argument required' );
+		}
+		this.inBeforeSave = data.inBeforeSave;
 		this.surface = data.controller.surface;
 		this.surface.getTarget().$element.addClass( 've-ui-editCheck-gutter-active' );
 
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
 
-		this.renderActions( data.actions || this.controller.getActions( this.listener ) );
+		this.renderActions( data.actions || this.controller.getActions() );
 	}, this );
 };
 
@@ -51,15 +54,15 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 	}, this );
 };
 
-ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( listener, actions ) {
-	if ( listener !== this.listener ) {
+ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( inBeforeSave, actions ) {
+	if ( inBeforeSave !== this.inBeforeSave ) {
 		return;
 	}
 	this.renderActions( actions );
 };
 
 ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
-	this.renderActions( this.controller.getActions( this.listener ) );
+	this.renderActions( this.controller.getActions() );
 };
 
 ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions ) {
@@ -127,7 +130,10 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 					.addClass( 've-ui-editCheck-gutter-action-' + action.getType() )
 					.append( icon.$element, iconLabel.$element )
 					.on( 'click', () => {
-						if ( this.listener === 'onDocumentChange' ) {
+						// Should we trigger the popup? By default yes, unless
+						// we're in the onBeforeSave mode where we can assume
+						// something else is handling it.
+						if ( !this.inBeforeSave ) {
 							// mid-edit
 							const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
 							if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
@@ -136,7 +142,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 									'fixedEditCheckDialog',
 									{
 										controller: this.controller,
-										listener: this.listener,
+										inBeforeSave: false,
 										actions: section.actions,
 										footer: section.actions.length !== 1,
 										// just filter out any discarded actions from the allowed set
