@@ -95,7 +95,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 			if ( !surfaceView.reviewMode ) {
 				const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onDocumentChange', surfaceModel );
 				if ( checks.length ) {
-					const currentWindow = surface.getToolbarDialogs( 'side' ).getCurrentWindow();
+					const currentWindow = surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
 					if ( !currentWindow || currentWindow.constructor.static.name !== 'editCheckDialog' ) {
 						const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
 						return windowAction.open( 'editCheckDialog', { listener: 'onDocumentChange' } );
