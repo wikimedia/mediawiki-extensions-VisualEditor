@@ -44,6 +44,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Título de la sección nueva.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Al guardar, establece esto a la fecha y hora en que la página se cargó. Se utiliza para detectar conflictos de edición.",
 	"apihelp-visualeditoredit-param-summary": "Resumen de edición.",
+	"apihelp-visualeditoredit-param-tags": "Etiquetas de cambio que aplicar a la edición.",
 	"apihelp-visualeditoredit-param-wikitext": "El wikicódigo que se utilizará.",
 	"apihelp-visualeditoredit-summary": "Guardar una página HTML5 en MediaWiki (convertida en wikicódigo mediante el servicio Parsoid)."
 }
