@@ -5,7 +5,6 @@ mw.editcheck = {
 	dismissedIds: {}
 };
 
-require( './EditCheckContextItem.js' );
 require( './EditCheckInspector.js' );
 require( './EditCheckDialog.js' );
 require( './EditCheckFactory.js' );
