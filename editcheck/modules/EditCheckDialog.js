@@ -262,13 +262,15 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data ) {
 			this.surface.getModel().on( 'undoStackChange', this.updateDebounced );
 			this.surface.getView().on( 'position', this.positionDebounced );
 
+			const singleAction = ( this.listener === 'onBeforeSave' ) || OO.ui.isMobile();
+
 			this.closeButton.toggle( OO.ui.isMobile() );
 			this.footer.toggle(
-				this.listener === 'onBeforeSave' &&
+				singleAction &&
+				// If we're in single-check mode don't show even the disabled pagers:
 				!mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle
 			);
-
-			this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.listener === 'onBeforeSave' );
+			this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', singleAction );
 
 			this.surface.context.hide();
 
