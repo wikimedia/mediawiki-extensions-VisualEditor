@@ -17,6 +17,8 @@
 	"editcheck-dialog-addref-success-notify": "شكرًا لكم على إضافة استشهاد!",
 	"editcheck-dialog-addref-title": "إضافة استشهاد",
 	"editcheck-dialog-title": "قبل النشر",
+	"editcheck-copyvio-title": "محتوى مُلصَق",
+	"editcheck-copyvio-description": "كقاعدة عامة، لا تنسخ نصًا من مصادر أخرى. هذا عادة ما يشكل انتهاكًا لحقوق الطبع والنشر وسرقة أدبية.",
 	"editcheck-review-title": "مراجعة التغييرات",
 	"tag-editcheck-reference-decline-common-knowledge": "تم رفض (ثقافة عامة) التحقّق من التحرير (مراجع)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "تم رفض مرجع EditCheck (أداة التحقّق) باعتباره ثقافةً عامة",
