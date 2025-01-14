@@ -1123,6 +1123,9 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogRetry = function () {
  * @return {jQuery.Promise} Data promise
  */
 ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
+	if ( this.getDefaultMode() === 'visual' && this.section === 'new' ) {
+		throw new Error( 'Adding new section is not supported in visual mode' );
+	}
 	// Prevent duplicate requests
 	if ( this.loading ) {
 		return this.loading;

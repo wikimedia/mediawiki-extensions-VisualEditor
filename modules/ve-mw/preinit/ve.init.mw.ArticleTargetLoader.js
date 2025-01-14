@@ -224,6 +224,9 @@
 		 */
 		requestPageData: function ( mode, pageName, options ) {
 			options = options || {};
+			if ( mode === 'visual' && options.section === 'new' ) {
+				throw new Error( 'Adding new section is not supported in visual mode' );
+			}
 			const apiRequest = mode === 'source' ?
 				this.requestWikitext.bind( this, pageName, options ) :
 				this.requestParsoidData.bind( this, pageName, options );

@@ -480,6 +480,9 @@ ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
  * @param {ve.ui.Surface} surface
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupNewSection = function ( surface ) {
+	if ( surface.getMode() === 'visual' && this.section === 'new' ) {
+		throw new Error( 'Adding new section is not supported in visual mode' );
+	}
 	if ( surface.getMode() === 'source' && this.section === 'new' ) {
 		if ( !this.sectionTitle ) {
 			this.sectionTitle = new OO.ui.TextInputWidget( {
