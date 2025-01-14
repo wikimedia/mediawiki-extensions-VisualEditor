@@ -436,6 +436,10 @@ class Hooks implements
 		if ( !$config->get( 'VisualEditorUseSingleEditTab' ) && !$isRedLink ) {
 			return 'wikitext';
 		}
+		// Adding a new section is not supported in visual mode
+		if ( $req->getRawVal( 'section' ) === 'new' ) {
+			return 'wikitext';
+		}
 		return self::getPreferredEditor( $user, $req, !$isRedLink );
 	}
 
