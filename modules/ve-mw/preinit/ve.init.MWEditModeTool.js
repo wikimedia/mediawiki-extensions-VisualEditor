@@ -116,6 +116,18 @@ mw.libs.ve.MWEditModeVisualTool.static.unavailableTooltip =
 	OO.ui.deferMsg( 'visualeditor-mweditmodeve-tool-unavailable' );
 
 /**
+ * @inheritdoc
+ */
+mw.libs.ve.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
+	// Adding a new section is not supported in visual mode
+	// eslint-disable-next-line no-jquery/no-global-selector
+	if ( mode === 'visual' && $( 'input[name=wpSection]' ).val() === 'new' ) {
+		return false;
+	}
+	return mw.libs.ve.MWEditModeVisualTool.super.prototype.isModeAvailable( mode );
+};
+
+/**
  * MediaWiki edit mode source tool.
  *
  * @class
