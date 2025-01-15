@@ -90,8 +90,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 		const surfaceModel = surface.getModel();
 		const surfaceView = surface.getView();
 
-		// TODO: De-duplicate with this listener in EditCheckDialog
-		surfaceModel.on( 'undoStackChange', ve.debounce( () => {
+		function onDocumentChange() {
 			if ( !surfaceView.reviewMode ) {
 				const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onDocumentChange', surfaceModel );
 				if ( checks.length ) {
@@ -102,7 +101,13 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					}
 				}
 			}
-		}, 100 ) );
+		}
+
+		// TODO: De-duplicate with this listener in EditCheckDialog
+		surfaceModel.on( 'undoStackChange', ve.debounce( () => onDocumentChange, 100 ) );
+
+		// Run on load (e.g. recovering from auto-save)
+		onDocumentChange();
 	} );
 	mw.hook( 've.activationStart' ).add( () => {
 		document.documentElement.classList.add( 've-editcheck-available' );
