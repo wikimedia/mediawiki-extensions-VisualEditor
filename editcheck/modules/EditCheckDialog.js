@@ -107,17 +107,25 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 };
 
 ve.ui.EditCheckDialog.prototype.update = function ( fromUserAction ) {
+	let newChecks;
 	const surfaceView = this.surface.getView();
 	// We only regenerate the checks on-change during the edit. If we're in
 	// the proofreading step, no new checks should appear based on changes:
 	if ( this.listener === 'onDocumentChange' || !this.currentChecks ) {
+		const previousChecks = this.currentChecks;
 		this.currentChecks = mw.editcheck.editCheckFactory.createAllByListener( this.listener, this.surface.getModel() );
+		newChecks = previousChecks && this.currentChecks.filter( ( check ) => previousChecks.every( ( oldCheck ) => !check.equals( oldCheck ) ) );
 	}
 	if ( this.currentChecks.length === 0 ) {
 		return this.close( 'complete' );
 	}
 	const checks = this.currentChecks;
-	const newOffset = Math.min( this.currentOffset, checks.length - 1 );
+	// This just adjusts so the previously selected check remains selected:
+	let newOffset = Math.min( this.currentOffset, checks.length - 1 );
+	if ( newChecks && newChecks.length ) {
+		// If new checks were found, automatically select the first new check
+		newOffset = this.currentChecks.indexOf( newChecks[ 0 ] );
+	}
 	this.$checks.empty();
 	this.$highlights.empty();
 

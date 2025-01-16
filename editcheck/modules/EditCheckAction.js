@@ -97,6 +97,35 @@ mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actio
 	this.emit( 'act', promise || ve.createDeferred().resolve().promise() );
 };
 
+/**
+ * @param {mw.editcheck.EditCheckAction} other
+ * @return {boolean}
+ */
+mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
+	// Same check type?
+	if ( this.check.constructor !== other.check.constructor ) {
+		return false;
+	}
+	// If ids are present, they're the only thing that counts
+	if ( this.id || other.id ) {
+		return this.id === other.id;
+	}
+	// Shortcut the fragment check if possible
+	if ( this.fragments.length !== other.fragments.length ) {
+		return false;
+	}
+	// Now they're the same if every fragment is found in both actions
+	return this.fragments.every( ( fragment ) => {
+		const selection = fragment.getSelection();
+		for ( let i = other.fragments.length - 1; i >= 0; i-- ) {
+			if ( selection.equals( other.fragments[ i ].getSelection() ) ) {
+				return true;
+			}
+		}
+		return false;
+	} );
+};
+
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
 	// Configuration initialization
 	config = config || {};
