@@ -41,14 +41,6 @@ describe( 'Toolbar', () => {
 		await expect( await EditPage.helpPopup ).toBeDisplayed();
 	} );
 
-	// Skipped on 2023-06-21 in 931997 because of T296187
-	it.skip( 'should open special characters menu', async () => {
-		await EditPage.specialCharacterElement.click();
-		await EditPage.specialCharacterMenu.waitForDisplayed( { timeout: 1000 } );
-
-		await expect( await EditPage.specialCharacterMenu ).toBeDisplayed();
-	} );
-
 	it( 'should open insert menu', async () => {
 		await EditPage.insert.click();
 
