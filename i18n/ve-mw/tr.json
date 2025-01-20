@@ -39,7 +39,8 @@
 			"TurkishStyles",
 			"Uncitoyen",
 			"Uğurkent",
-			"Violetanka"
+			"Violetanka",
+			"Vito Genovese"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -68,8 +69,8 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Yerel açıklama kaynağı ekle",
 	"visualeditor-ca-createsource": "Kaynak oluştur",
 	"visualeditor-ca-editlocaldescriptionsource": "Yerel açıklama kaynağını düzenle",
-	"visualeditor-ca-editsource": "Kaynağı değiştir",
-	"visualeditor-ca-editsource-section": "kaynağı değiştir",
+	"visualeditor-ca-editsource": "Kaynağı düzenle",
+	"visualeditor-ca-editsource-section": "kaynağı düzenle",
 	"visualeditor-categories-tool": "Kategoriler",
 	"visualeditor-changedesc-mwlanguagevariant": "Dil değişkeni işaretlemesi değişti",
 	"visualeditor-changedesc-mwredirect": "Yönlendirme hedefi $1 olarak $2 değiştirildi",
