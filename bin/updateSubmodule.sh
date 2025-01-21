@@ -46,6 +46,8 @@ fi
 
 # Generate commit summary
 NEWCHANGES=$(git log ..$TARGET --oneline --no-merges --topo-order --reverse --color=never)
+LOCALISATION_UPDATES=$(echo "$NEWCHANGES" | grep "Localisation updates from https://translatewiki.net" | awk '{print $1}' | paste -sd, - | sed -E 's/,/, /g' | sed -E 's/(([^,]+, ?){6}) /\1\n/g')
+NEWCHANGES=$(echo "$NEWCHANGES" | grep -v "Localisation updates from https://translatewiki.net")
 TASKS=$(git log ..$TARGET --no-merges --format=format:%B | grep "Bug: T" | sort | uniq)
 
 # Ensure script continues if grep "fails" (returns nothing) with || : (due to -e flag in bash)
@@ -69,6 +71,13 @@ COMMITMSG="Update VE core submodule to $TARGETDESC
 
 New changes:
 $NEWCHANGES"
+
+if [ -n "$LOCALISATION_UPDATES" ]; then
+    COMMITMSG+="
+
+Localisation Updates:
+$LOCALISATION_UPDATES"
+fi
 
 if [ -n "$ADDED_I18N_KEYS" ]; then
     COMMITMSG+="
