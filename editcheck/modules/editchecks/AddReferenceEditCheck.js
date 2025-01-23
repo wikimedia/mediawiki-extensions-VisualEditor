@@ -16,6 +16,8 @@ mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, m
 	beforePunctuation: false
 } );
 
+mw.editcheck.AddReferenceEditCheck.static.onlyCoveredNodes = true;
+
 mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.findAddedContent( surfaceModel.getDocument() ).filter( ( range ) => !this.isDismissedRange( range ) )
 		.map(
