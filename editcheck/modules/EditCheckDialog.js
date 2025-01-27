@@ -175,6 +175,7 @@ ve.ui.EditCheckDialog.prototype.drawHighlights = function () {
 					top: rect.top - 2,
 					height: rect.height + 4
 				} )
+				.on( 'click', () => this.setCurrentOffset( index ) )
 			);
 		} );
 	} );
