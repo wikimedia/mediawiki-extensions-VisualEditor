@@ -17,7 +17,11 @@
 	"editcheck-dialog-addref-title": "Додавање референце",
 	"editcheck-dialog-title": "Пре објављивања",
 	"tag-editcheck-reference-decline-common-knowledge": "Edit Check референцирање одбачено (опште знање)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Референцирање је одбачено зато што је у питању опште знање",
 	"tag-editcheck-reference-decline-irrelevant": "Edit Check референцирање одбачено (нерелевантно)",
+	"tag-editcheck-reference-decline-irrelevant-description": "Референцирање је небитно за конкретну измену",
 	"tag-editcheck-reference-decline-other": "Edit Check референцирање одбачено (друго)",
-	"tag-editcheck-reference-decline-uncertain": "Edit Check референцирање одбачено (није сигуран)"
+	"tag-editcheck-reference-decline-other-description": "Референцирање је одбачено из неког другог разлога",
+	"tag-editcheck-reference-decline-uncertain": "Edit Check референцирање одбачено (нисам сигуран/на)",
+	"tag-editcheck-reference-decline-uncertain-description": "Референцирање је одбачено из незнања"
 }
