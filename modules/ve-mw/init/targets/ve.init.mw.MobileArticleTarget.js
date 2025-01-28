@@ -52,12 +52,10 @@ OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.ArticleTarget );
 /* Static Properties */
 
 ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
-	// History
 	{
 		name: 'history',
 		include: [ 'undo' ]
 	},
-	// Style
 	{
 		name: 'style',
 		classes: [ 've-test-toolbar-style' ],
@@ -71,12 +69,29 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		promote: [ 'bold', 'italic' ],
 		demote: [ 'strikethrough', 'code', 'underline', 'language', 'clear' ]
 	},
-	// Link
 	{
 		name: 'link',
 		include: [ 'link' ]
 	}
 ];
+
+if ( mw.config.get( 'wgVisualEditorConfig' ).mobileInsertMenu ) {
+	ve.init.mw.MobileArticleTarget.static.toolbarGroups.push(
+		{
+			name: 'insert',
+			label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+			title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+			narrowConfig: {
+				invisibleLabel: true,
+				icon: 'add'
+			},
+			include: '*',
+			forceExpand: [ 'transclusion', 'insertTable' ],
+			promote: [ 'transclusion', 'insertTable' ],
+			exclude: [ { group: 'format' }, { group: 'history' }, { group: 'structure' } ]
+		}
+	);
+}
 
 ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
 
