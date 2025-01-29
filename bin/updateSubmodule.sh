@@ -46,6 +46,12 @@ fi
 
 # Generate commit summary
 NEWCHANGES=$(git log ..$TARGET --oneline --no-merges --topo-order --reverse --color=never)
+
+if [ -z "$NEWCHANGES" ]; then
+	echo >&2 "No new changes"
+	exit 1
+fi
+
 LOCALISATION_UPDATES=$(echo "$NEWCHANGES" | grep "Localisation updates from https://translatewiki.net" | awk '{print $1}' | paste -sd, - | sed -E 's/,/, /g' | sed -E 's/(([^,]+, ?){6}) /\1\n/g')
 NEWCHANGES=$(echo "$NEWCHANGES" | grep -v "Localisation updates from https://translatewiki.net")
 TASKS=$(git log ..$TARGET --no-merges --format=format:%B | grep "Bug: T" | sort | uniq)
