@@ -104,7 +104,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 		}
 
 		// TODO: De-duplicate with this listener in EditCheckDialog
-		surfaceModel.on( 'undoStackChange', ve.debounce( () => onDocumentChange, 100 ) );
+		surfaceModel.on( 'undoStackChange', ve.debounce( onDocumentChange, 100 ) );
 
 		// Run on load (e.g. recovering from auto-save)
 		onDocumentChange();
