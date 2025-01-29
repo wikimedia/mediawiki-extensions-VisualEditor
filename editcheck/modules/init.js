@@ -187,36 +187,42 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					target.onContainerScroll();
 					// surface.executeCommand( 'editCheckDialogBeforeSave' );
 					return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', reviewMode: true } )
-						.then( ( instance ) => instance.closing )
-						.then( ( data ) => {
-							reviewToolbar.$element.remove();
-							toolbar.toggle( true );
-							target.toolbar = toolbar;
-							if ( $contextContainer ) {
-								surface.context.popup.$container = $contextContainer;
-								surface.context.popup.containerPadding = contextPadding;
-							}
-							// Creating a new PositionedTargetToolbar stole the
-							// toolbar windowmanagers, so we need to make the
-							// original toolbar reclaim them:
-							toolbar.disconnect( target );
-							target.setupToolbar( surface );
-							target.onContainerScroll();
+						.then( ( instance ) => {
+							instance.closed.then( () => {}, () => {} ).then( () => {
+								// Re-open the mid-edit sidebar if necessary.
+								// TODO: Do this without triggering a fake undoStackChange event.
+								surface.getModel().emit( 'undoStackChange' );
+							} );
+							return instance.closing.then( ( data ) => {
+								reviewToolbar.$element.remove();
+								toolbar.toggle( true );
+								target.toolbar = toolbar;
+								if ( $contextContainer ) {
+									surface.context.popup.$container = $contextContainer;
+									surface.context.popup.containerPadding = contextPadding;
+								}
+								// Creating a new PositionedTargetToolbar stole the
+								// toolbar windowmanagers, so we need to make the
+								// original toolbar reclaim them:
+								toolbar.disconnect( target );
+								target.setupToolbar( surface );
+								target.onContainerScroll();
 
-							if ( data ) {
-								const delay = ve.createDeferred();
-								// If they inserted, wait 2 seconds on desktop
-								// before showing save dialog to make sure insertions are finialized
-								setTimeout( () => {
-									ve.track( 'counter.editcheck.preSaveChecksCompleted' );
-									delay.resolve();
-								}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
-								return delay.promise();
-							} else {
-								// closed via "back" or otherwise
-								ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
-								return ve.createDeferred().reject().promise();
-							}
+								if ( data ) {
+									const delay = ve.createDeferred();
+									// If they inserted, wait 2 seconds on desktop
+									// before showing save dialog to make sure insertions are finialized
+									setTimeout( () => {
+										ve.track( 'counter.editcheck.preSaveChecksCompleted' );
+										delay.resolve();
+									}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
+									return delay.promise();
+								} else {
+									// closed via "back" or otherwise
+									ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
+									return ve.createDeferred().reject().promise();
+								}
+							} );
 						} );
 				} );
 			} );
