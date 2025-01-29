@@ -97,7 +97,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					const currentWindow = surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
 					if ( !currentWindow || currentWindow.constructor.static.name !== 'editCheckDialog' ) {
 						const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-						return windowAction.open( 'editCheckDialog', { listener: 'onDocumentChange' } );
+						return windowAction.open(
+							'editCheckDialog',
+							{ listener: 'onDocumentChange', checks: checks }
+						);
 					}
 				}
 			}
@@ -189,7 +192,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 					toolbar.toggle( false );
 					target.onContainerScroll();
 					// surface.executeCommand( 'editCheckDialogBeforeSave' );
-					return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', reviewMode: true } )
+					return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', reviewMode: true, checks: checks } )
 						.then( ( instance ) => {
 							instance.closed.then( () => {}, () => {} ).then( () => {
 								// Re-open the mid-edit sidebar if necessary.
