@@ -76,9 +76,9 @@ mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( surfaceM
 	return this.handleListener( surfaceModel, 'onDocumentChange' );
 };
 
-mw.editcheck.TextMatchEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
-	return this.handleListener( surfaceModel, 'onBeforeSave' );
-};
+// For now it doesn't make sense to run a TextMatchEditCheck in review mode
+// as there isn't a way to edit the text.
+mw.editcheck.TextMatchEditCheck.prototype.onBeforeSave = null;
 
 mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , surface */ ) {
 	switch ( choice ) {
