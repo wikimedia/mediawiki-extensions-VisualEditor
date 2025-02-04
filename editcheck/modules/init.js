@@ -114,6 +114,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable 
 	} );
 	mw.hook( 've.deactivationComplete' ).add( () => {
 		document.documentElement.classList.remove( 've-editcheck-available' );
+
+		mw.editcheck.dismissedFragments = {};
+		mw.editcheck.dismissedIds = {};
 	} );
 	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, target ) => {
 		const surface = target.getSurface();

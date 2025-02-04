@@ -289,7 +289,10 @@ mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
 	} else {
 		const dismissedFragments = mw.editcheck.dismissedFragments;
 		dismissedFragments[ name ] = dismissedFragments[ name ] || [];
-		dismissedFragments[ name ].push( ...action.fragments );
+		dismissedFragments[ name ].push(
+			// Exclude insertions so we don't accidentally block unrelated changes:
+			...action.fragments.map( ( fragment ) => fragment.clone().setExcludeInsertions( true ) )
+		);
 	}
 };
 
