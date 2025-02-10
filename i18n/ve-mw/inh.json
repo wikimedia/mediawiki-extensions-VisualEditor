@@ -30,6 +30,7 @@
 	"visualeditor-dialogbutton-media-tooltip": "Сурташи медиафайлаши",
 	"visualeditor-dialogbutton-template-tooltip": "Ло",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|хоам}}",
+	"visualeditor-editsummary": "Ӏайха даьча хувцамех лаьца язде лоацца",
 	"visualeditor-linkinspector-educationpopup-title": "Тӏатовжамаш",
 	"visualeditor-mweditmodeve-popup-body": "МоллагӀча хана юха дӀатоха йиш я хьа визуальни хувцамаш деча ражагахьа, укх хьарака тӀа тоӀабаь.",
 	"visualeditor-mweditmodeve-showagain": "Кхы хьа ма гойта ер хоам",
@@ -37,5 +38,7 @@
 	"visualeditor-preference-newwikitexteditor-description": "Вики-текста керда раж хьалсага визуальни редактора чу. Цу ражача визуальни редактора дукха кечалаш я, цун тарра йола дизайн а лелаю, иштта, хувцам беш йола ши раж дIа-хьа етта аттагIа да.",
 	"visualeditor-preference-newwikitexteditor-label": "Вики-текста керда раж",
 	"visualeditor-preference-visualdiffpage-description": "Хьалсага керда визуальни раж эршаш вӀаший юстача оагӀонашка.",
-	"visualeditor-preference-visualdiffpage-label": "Эршаш визуальни вIаши йистар"
+	"visualeditor-preference-visualdiffpage-label": "Эршаш визуальни вIаши йистар",
+	"visualeditor-savedialog-label-review": "Хьадаь хувцамаш",
+	"visualeditor-savedialog-title-save": "ДӀаязде хьай хувцамаш"
 }
