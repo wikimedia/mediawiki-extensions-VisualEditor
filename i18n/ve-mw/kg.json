@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"BOKOBA VEROLY",
 			"Cgmbo"
 		]
 	},
-	"visualeditor-ca-editsource": "Soba kisina"
+	"visualeditor-ca-editsource": "Soba kisina",
+	"visualeditor-ca-editsource-section": "edit source"
 }
