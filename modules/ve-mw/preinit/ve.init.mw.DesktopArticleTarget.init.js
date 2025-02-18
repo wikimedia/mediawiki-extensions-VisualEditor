@@ -757,6 +757,10 @@
 		if ( !mw.config.get( 'wgVisualEditorConfig' ).singleEditTab && !isRedLink ) {
 			return 'wikitext';
 		}
+		// Adding a new section is not supported in visual mode
+		if ( url.searchParams.get( 'section' ) === 'new' ) {
+			return 'wikitext';
+		}
 
 		switch ( tabPreference ) {
 			case 'prefer-ve':
