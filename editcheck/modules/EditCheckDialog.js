@@ -65,7 +65,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 		click: 'onCloseButtonClick'
 	} );
 
-	this.currentOffset = 0;
+	this.currentOffset = null;
 	this.currentActions = null;
 
 	this.footerLabel = new OO.ui.LabelWidget();
@@ -135,26 +135,37 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 /**
  * Set the offset of the current check, within the list of all checks
  *
- * @param {number} offset
+ * @param {number|null} offset
  * @param {boolean} fromUserAction
  * @param {boolean} internal
  */
 ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction, internal ) {
 	// TODO: work out how to tell the window to recalculate height here
-	this.currentOffset = Math.max( 0, offset );
+
+	if ( offset === null ) {
+		/* That's valid, carry on */
+	} else if ( !Number.isSafeInteger( offset ) || ( this.offset < 0 || this.offset > ( this.currentActions.length - 1 ) ) ) {
+		throw new Error( `Bad offset ${ offset }, expected an integer between 0 and ${ this.currentActions.length - 1 }` );
+	}
+
+	this.currentOffset = offset;
 
 	this.$body.find( '.ve-ui-editCheckActionWidget' ).each( ( i, el ) => {
 		$( el ).toggleClass( 've-ui-editCheckActionWidget-collapsed', i !== this.currentOffset );
 	} );
 
-	this.footerLabel.setLabel(
-		ve.msg( 'visualeditor-find-and-replace-results',
-			ve.init.platform.formatNumber( this.currentOffset + 1 ),
-			ve.init.platform.formatNumber( this.currentActions.length )
-		)
-	);
-	this.nextButton.setDisabled( this.currentOffset >= this.currentActions.length - 1 );
-	this.previousButton.setDisabled( this.currentOffset <= 0 );
+	if ( this.currentOffset !== null ) {
+		this.footerLabel.setLabel(
+			ve.msg( 'visualeditor-find-and-replace-results',
+				ve.init.platform.formatNumber( this.currentOffset + 1 ),
+				ve.init.platform.formatNumber( this.currentActions.length )
+			)
+		);
+	} else {
+		this.footerLabel.setLabel( '' );
+	}
+	this.nextButton.setDisabled( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 );
+	this.previousButton.setDisabled( this.currentOffset === null || this.currentOffset <= 0 );
 
 	this.updateSize();
 
@@ -257,6 +268,22 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, col
 	if ( !collapsed ) {
 		// expanded one
 		this.setCurrentOffset( this.currentActions.indexOf( action ), true );
+		if ( !OO.ui.isMobile() ) {
+			const surfaceModel = this.surface.getModel();
+			const checkRange = action.getHighlightSelections()[ 0 ].getCoveringRange();
+			const surfaceRange = surfaceModel.getSelection().getCoveringRange();
+			// Collapse and move the selection to the nearest part of the check range
+			// Don't alter it if it touches the check range
+			if ( surfaceRange === null || surfaceRange.end < checkRange.start ) {
+				surfaceModel.setSelection( new ve.dm.LinearSelection( new ve.Range( checkRange.start ) ) );
+				this.surface.getView().activate();
+				this.surface.getView().focus();
+			} else if ( surfaceRange.start > checkRange.end ) {
+				surfaceModel.setSelection( new ve.dm.LinearSelection( new ve.Range( checkRange.end ) ) );
+				this.surface.getView().activate();
+				this.surface.getView().focus();
+			}
+		}
 	}
 };
 
@@ -274,14 +301,14 @@ ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
  * Handle click events from the next button
  */
 ve.ui.EditCheckDialog.prototype.onNextButtonClick = function () {
-	this.setCurrentOffset( this.currentOffset + 1, true );
+	this.setCurrentOffset( this.currentOffset === null ? 0 : this.currentOffset + 1, true );
 };
 
 /**
  * Handle click events from the previous button
  */
 ve.ui.EditCheckDialog.prototype.onPreviousButtonClick = function () {
-	this.setCurrentOffset( this.currentOffset - 1, true );
+	this.setCurrentOffset( this.currentOffset === null ? this.currentActions.length - 1 : this.currentOffset - 1, true );
 };
 
 /* Registration */
