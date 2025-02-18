@@ -2,7 +2,8 @@ mw.editcheck = {
 	config: require( './config.json' ),
 	ecenable: !!( new URL( location.href ).searchParams.get( 'ecenable' ) || window.MWVE_FORCE_EDIT_CHECK_ENABLED ),
 	dismissedFragments: {},
-	dismissedIds: {}
+	dismissedIds: {},
+	controller: require( './controller.js' ).instance
 };
 
 require( './EditCheckInspector.js' );
@@ -85,160 +86,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 }
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable ) {
-	mw.hook( 've.activationComplete' ).add( () => {
-		const surface = ve.init.target.getSurface();
-		const surfaceModel = surface.getModel();
-		const surfaceView = surface.getView();
-
-		function onDocumentChange() {
-			if ( !surfaceView.reviewMode ) {
-				const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onDocumentChange', surfaceModel );
-				if ( checks.length ) {
-					const currentWindow = surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
-					if ( !currentWindow || currentWindow.constructor.static.name !== 'editCheckDialog' ) {
-						const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-						return windowAction.open(
-							'editCheckDialog',
-							{ listener: 'onDocumentChange', checks: checks }
-						);
-					}
-				}
-			}
-		}
-
-		// TODO: De-duplicate with this listener in EditCheckDialog
-		surfaceModel.on( 'undoStackChange', ve.debounce( onDocumentChange, 100 ) );
-
-		// Run on load (e.g. recovering from auto-save)
-		onDocumentChange();
-	} );
-	mw.hook( 've.activationStart' ).add( () => {
-		document.documentElement.classList.add( 've-editcheck-available' );
-	} );
-	mw.hook( 've.deactivationComplete' ).add( () => {
-		document.documentElement.classList.remove( 've-editcheck-available' );
-
-		mw.editcheck.dismissedFragments = {};
-		mw.editcheck.dismissedIds = {};
-	} );
-	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, target ) => {
-		const surface = target.getSurface();
-
-		if ( surface.getMode() !== 'visual' ) {
-			// Some checks will entirely work in source mode for most cases.
-			// But others will fail spectacularly -- e.g. reference check
-			// isn't aware of <ref> tags and so will suggest that all content
-			// has references added. As such, disable in source mode for now.
-			return;
-		}
-
-		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
-
-		// clear rejection-reasons between runs of the save process, so only the last one counts
-		mw.editcheck.rejections.length = 0;
-
-		const checks = mw.editcheck.editCheckFactory.createAllByListener( 'onBeforeSave', surface.getModel() );
-		if ( checks.length ) {
-			ve.track( 'counter.editcheck.preSaveChecksShown' );
-			mw.editcheck.refCheckShown = true;
-
-			const toolbar = target.getToolbar();
-			const reviewToolbar = new ve.ui.PositionedTargetToolbar( target, target.toolbarConfig );
-			reviewToolbar.setup( [
-				{
-					name: 'back',
-					type: 'bar',
-					include: [ 'editCheckBack' ]
-				},
-				// Placeholder toolbar groups
-				// TODO: Make a proper TitleTool?
-				{
-					name: 'title',
-					type: 'bar',
-					include: []
-				},
-				{
-					name: 'save',
-					// TODO: MobileArticleTarget should ignore 'align'
-					align: OO.ui.isMobile() ? 'before' : 'after',
-					type: 'bar',
-					include: [ 'showSaveDisabled' ]
-				}
-			], surface );
-			reviewToolbar.$element.addClass( 've-ui-editCheck-toolbar' );
-
-			reviewToolbar.items[ 1 ].$element.removeClass( 'oo-ui-toolGroup-empty' );
-			reviewToolbar.items[ 1 ].$group.append(
-				$( '<span>' ).addClass( 've-ui-editCheck-toolbar-title' ).text( ve.msg( 'editcheck-dialog-title' ) )
-			);
-			if ( OO.ui.isMobile() ) {
-				reviewToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
-			}
-			target.toolbar.$element.before( reviewToolbar.$element );
-			target.toolbar = reviewToolbar;
-
-			let $contextContainer, contextPadding;
-			if ( surface.context.popup ) {
-				contextPadding = surface.context.popup.containerPadding;
-				$contextContainer = surface.context.popup.$container;
-				surface.context.popup.$container = surface.$element;
-				surface.context.popup.containerPadding = 20;
-			}
-
-			saveProcess.next( () => {
-				const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-				// .always is not chainable
-				return windowAction.close( 'editCheckDialog' ).closed.then( () => {}, () => {} ).then( () => {
-					toolbar.toggle( false );
-					target.onContainerScroll();
-					// surface.executeCommand( 'editCheckDialogBeforeSave' );
-					return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', reviewMode: true, checks: checks } )
-						.then( ( instance ) => {
-							instance.closed.then( () => {}, () => {} ).then( () => {
-								// Re-open the mid-edit sidebar if necessary.
-								// TODO: Do this without triggering a fake undoStackChange event.
-								surface.getModel().emit( 'undoStackChange' );
-							} );
-							return instance.closing.then( ( data ) => {
-								reviewToolbar.$element.remove();
-								toolbar.toggle( true );
-								target.toolbar = toolbar;
-								if ( $contextContainer ) {
-									surface.context.popup.$container = $contextContainer;
-									surface.context.popup.containerPadding = contextPadding;
-								}
-								// Creating a new PositionedTargetToolbar stole the
-								// toolbar windowmanagers, so we need to make the
-								// original toolbar reclaim them:
-								toolbar.disconnect( target );
-								target.setupToolbar( surface );
-								target.onContainerScroll();
-
-								if ( data ) {
-									const delay = ve.createDeferred();
-									// If they inserted, wait 2 seconds on desktop
-									// before showing save dialog to make sure insertions are finialized
-									setTimeout( () => {
-										ve.track( 'counter.editcheck.preSaveChecksCompleted' );
-										delay.resolve();
-									}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
-									return delay.promise();
-								} else {
-									// closed via "back" or otherwise
-									ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
-									return ve.createDeferred().reject().promise();
-								}
-							} );
-						} );
-				} );
-			} );
-		} else {
-			// Counterpart to earlier preSaveChecksShown, for use in tracking
-			// errors in check-generation:
-			ve.track( 'counter.editcheck.preSaveChecksNotShown' );
-		}
-	} );
+	mw.editcheck.controller.setup();
 }
+
+// This is for the toolbar:
 
 ve.ui.EditCheckBack = function VeUiEditCheckBack() {
 	// Parent constructor
