@@ -231,7 +231,10 @@
 	},
 	"HookHandlers": {
 		"VisualEditorHooks": {
-			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks"
+			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks",
+			"services": [
+				"ExtensionRegistry"
+			]
 		},
 		"EditCheckHooks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\Hooks"

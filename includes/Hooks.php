@@ -113,6 +113,12 @@ class Hooks implements
 		'visualeditor-switched'
 	];
 
+	private ExtensionRegistry $extensionRegistry;
+
+	public function __construct( ExtensionRegistry $extensionRegistry ) {
+		$this->extensionRegistry = $extensionRegistry;
+	}
+
 	/**
 	 * Initialise the 'VisualEditorAvailableNamespaces' setting, and add content
 	 * namespaces to it. This will run after LocalSettings.php is processed.
@@ -144,7 +150,7 @@ class Hooks implements
 			return;
 		}
 		if ( !(
-			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
 			$services->getService( 'MobileFrontend.Context' )
 				->shouldDisplayMobileView()
 		) ) {
@@ -380,7 +386,7 @@ class Hooks implements
 		$urlUtils = $services->getUrlUtils();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) ) {
+		if ( $this->extensionRegistry->isLoaded( 'MobileFrontend' ) ) {
 			// If mobilefrontend is involved it can make its own decisions about this
 			$mobFrontContext = MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' );
 			if ( $mobFrontContext->shouldDisplayMobileView() ) {
@@ -522,7 +528,7 @@ class Hooks implements
 		self::onSkinTemplateNavigationSpecialPage( $skin, $links );
 
 		if (
-			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
 			$services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView()
 		) {
 			return;
@@ -596,7 +602,7 @@ class Hooks implements
 
 		$skinHasEditIcons = in_array(
 			$skin->getSkinName(),
-			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorIconSkins' )
+			$this->extensionRegistry->getAttribute( 'VisualEditorIconSkins' )
 		);
 
 		foreach ( $links['views'] as $action => $data ) {
@@ -817,7 +823,7 @@ class Hooks implements
 		}
 
 		if (
-			ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) &&
+			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
 			$services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView()
 		) {
 			return;
@@ -874,7 +880,7 @@ class Hooks implements
 
 		$skinHasEditIcons = in_array(
 			$skin->getSkinName(),
-			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorIconSkins' )
+			$this->extensionRegistry->getAttribute( 'VisualEditorIconSkins' )
 		);
 
 		// add VE edit section in VE available namespaces
@@ -1106,11 +1112,10 @@ class Hooks implements
 		$coreConfig = RequestContext::getMain()->getConfig();
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-		$extensionRegistry = ExtensionRegistry::getInstance();
 		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
 		$availableContentModels = array_filter(
 			array_merge(
-				$extensionRegistry->getAttribute( 'VisualEditorAvailableContentModels' ),
+				$this->extensionRegistry->getAttribute( 'VisualEditorAvailableContentModels' ),
 				$veConfig->get( 'VisualEditorAvailableContentModels' )
 			)
 		);
@@ -1137,15 +1142,15 @@ class Hooks implements
 		$defaultSortPrefix = preg_replace( '/:$/', '', $defaultSortPrefix );
 
 		$vars['wgVisualEditorConfig'] = [
-			'usePageImages' => $extensionRegistry->isLoaded( 'PageImages' ),
-			'usePageDescriptions' => $extensionRegistry->isLoaded( 'WikibaseClient' ),
+			'usePageImages' => $this->extensionRegistry->isLoaded( 'PageImages' ),
+			'usePageDescriptions' => $this->extensionRegistry->isLoaded( 'WikibaseClient' ),
 			'isBeta' => $veConfig->get( 'VisualEditorEnableBetaFeature' ),
 			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
 			'preloadModules' => $veConfig->get( 'VisualEditorPreloadModules' ),
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
 			'pluginModules' => array_merge(
-				$extensionRegistry->getAttribute( 'VisualEditorPluginModules' ),
+				$this->extensionRegistry->getAttribute( 'VisualEditorPluginModules' ),
 				// @todo deprecate the global setting
 				$veConfig->get( 'VisualEditorPluginModules' )
 			),
@@ -1175,9 +1180,17 @@ class Hooks implements
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
 			// TODO: Remove when all usages in .js files are removed
 			'transclusionDialogNewSidebar' => true,
-			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' ),
+			'cirrusSearchLookup' => $this->extensionRegistry->isLoaded( 'CirrusSearch' ),
 			'defaultSortPrefix' => $defaultSortPrefix,
 		];
+
+		// This can be removed and the module added in TemplateData's extension.json
+		// after the feature flag has been removed. T377976.
+		if ( $this->extensionRegistry->isLoaded( 'TemplateData' )
+			&& $coreConfig->get( 'TemplateDataEnableDiscovery' )
+		) {
+			$vars['wgVisualEditorConfig']['pluginModules'][] = 'ext.templateData.templateDiscovery';
+		}
 	}
 
 	/**
