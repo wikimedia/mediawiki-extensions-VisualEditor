@@ -47,9 +47,9 @@ mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, 
 			break;
 		case 'edit':
 			setTimeout( () => {
-				action.selection.select();
+				action.fragments[ 0 ].select();
 				surface.execute( 'window', 'open', 'link' );
-			}, 500 );
+			} );
 			break;
 	}
 };
