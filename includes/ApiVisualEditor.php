@@ -498,7 +498,38 @@ class ApiVisualEditor extends ApiBase {
 				break;
 		}
 
+		if (
+			is_array( $result ) &&
+			isset( $result['content'] ) &&
+			is_string( $result['content'] )
+		) {
+			// Protect content from being corrupted by conversion to Unicode NFC.
+			// Without this, MediaWiki::Api::ApiResult::addValue can break html tags.
+			// See T382756
+			$result['content'] = $this->makeSafeHtmlForNfc( $result['content'] );
+		}
+
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
+	}
+
+	/**
+	 * Protect html-like content from being corrupted by conversion to Unicode NFC.
+	 *
+	 * Encodes U+0338 COMBINING LONG SOLIDUS OVERLAY as an html numeric character reference.
+	 * Otherwise, conversion to Unicode NFC can break html tags by converting
+	 * '>' + U+0338 to U+226F (NOT GREATER THAN), and
+	 * '<' + U+0338 to U+226E (NOT LESS THAN)
+	 *
+	 * Note we cannot just search for those two combinations, because sequences of combining
+	 * characters can get reordered, e.g. '>' + U+0339 + U+0338 will become U+226F + U+0339.
+	 * See https://unicode.org/reports/tr15/
+	 *
+	 * @param string $html
+	 * @return string
+	 */
+	public static function makeSafeHtmlForNfc( string $html ) {
+		$html = str_replace( "\u{0338}", '&#x338;', $html );
+		return $html;
 	}
 
 	/**
