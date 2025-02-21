@@ -106,7 +106,7 @@ ve.ui.EditCheckBack.static.title =
 ve.ui.EditCheckBack.prototype.onSelect = function () {
 	const surface = this.toolbar.getSurface();
 	surface.getContext().hide();
-	surface.execute( 'window', 'close', 'editCheckDialog' );
+	surface.execute( 'window', 'close', 'fixedEditCheckDialog' );
 	this.setActive( false );
 };
 ve.ui.EditCheckBack.prototype.onUpdateState = function () {

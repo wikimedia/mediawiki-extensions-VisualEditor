@@ -13,25 +13,16 @@
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.EditCheckDialog = function VeUiEditCheckDialog( config ) {
-	// Parent constructor
-	ve.ui.EditCheckDialog.super.call( this, config );
-
+ve.ui.EditCheckDialog = function VeUiEditCheckDialog() {
 	// Pre-initialization
 	this.$element.addClass( 've-ui-editCheckDialog' );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.EditCheckDialog, ve.ui.ToolbarDialog );
+OO.initClass( ve.ui.EditCheckDialog );
 
-ve.ui.EditCheckDialog.static.name = 'editCheckDialog';
-
-ve.ui.EditCheckDialog.static.position = OO.ui.isMobile() ? 'below' : 'side';
-
-ve.ui.EditCheckDialog.static.size = OO.ui.isMobile() ? 'full' : 'medium';
-
-ve.ui.EditCheckDialog.static.framed = false;
+/* Static Properties */
 
 // TODO: Keep surface active on mobile for some checks?
 ve.ui.EditCheckDialog.static.activeSurface = !OO.ui.isMobile();
@@ -45,9 +36,6 @@ ve.ui.EditCheckDialog.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
  * @inheritdoc
  */
 ve.ui.EditCheckDialog.prototype.initialize = function () {
-	// Parent method
-	ve.ui.EditCheckDialog.super.prototype.initialize.call( this );
-
 	this.title = new OO.ui.LabelWidget( {
 		label: this.constructor.static.title,
 		classes: [ 've-ui-editCheckDialog-title' ]
@@ -95,7 +83,10 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	} );
 
 	this.$actions = $( '<div>' );
-	this.$body.append( this.title.$element, this.closeButton.$element, this.$actions, this.footer.$element );
+	if ( OO.ui.isMobile() ) {
+		this.$body.append( this.title.$element );
+	}
+	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
 };
 
 ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions ) {
@@ -181,44 +172,42 @@ ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scroll
 /**
  * @inheritdoc
  */
-ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data ) {
-	return ve.ui.EditCheckDialog.super.prototype.getSetupProcess.call( this, data )
-		.first( () => {
-			this.controller = data.controller;
-			this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
-			this.controller.on( 'focusAction', this.onFocusAction, false, this );
+ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
+	return process.first( () => {
+		this.controller = data.controller;
+		this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
+		this.controller.on( 'focusAction', this.onFocusAction, false, this );
 
-			this.listener = data.listener || 'onDocumentChange';
-			this.currentOffset = 0;
-			this.currentActions = data.actions || this.controller.getActions( this.listener );
-			this.surface = data.surface;
+		this.listener = data.listener || 'onDocumentChange';
+		this.currentOffset = 0;
+		this.currentActions = data.actions || this.controller.getActions( this.listener );
+		this.surface = data.surface;
 
-			this.singleAction = ( this.listener === 'onBeforeSave' ) || OO.ui.isMobile();
+		this.singleAction = ( this.listener === 'onBeforeSave' ) || OO.ui.isMobile();
 
-			this.closeButton.toggle( OO.ui.isMobile() );
-			this.footer.toggle(
-				this.singleAction &&
-				// If we're in single-check mode don't show even the disabled pagers:
-				!mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle
-			);
-			this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.singleAction );
+		this.closeButton.toggle( OO.ui.isMobile() );
+		this.footer.toggle(
+			this.singleAction &&
+			// If we're in single-check mode don't show even the disabled pagers:
+			!mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle
+		);
+		this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.singleAction );
 
-			this.surface.context.hide();
+		this.surface.context.hide();
 
-			this.onActionsUpdated( this.listener, this.currentActions, this.currentActions, [] );
-		}, this );
+		this.onActionsUpdated( this.listener, this.currentActions, this.currentActions, [] );
+	}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data ) {
-	return ve.ui.EditCheckDialog.super.prototype.getTeardownProcess.call( this, data )
-		.next( () => {
-			this.controller.off( 'actionsUpdated', this.onActionsUpdated, this );
-			this.controller.off( 'focusAction', this.onFocusAction, this );
-			this.$actions.empty();
-		}, this );
+ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) {
+	return process.next( () => {
+		this.controller.off( 'actionsUpdated', this.onActionsUpdated, this );
+		this.controller.off( 'focusAction', this.onFocusAction, this );
+		this.$actions.empty();
+	}, this );
 };
 
 /**
@@ -285,6 +274,7 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, col
 			}
 		}
 	}
+	this.controller.align();
 };
 
 /**
@@ -311,9 +301,89 @@ ve.ui.EditCheckDialog.prototype.onPreviousButtonClick = function () {
 	this.setCurrentOffset( this.currentOffset === null ? this.currentActions.length - 1 : this.currentOffset - 1, true );
 };
 
+ve.ui.SidebarEditCheckDialog = function VeUiSidebarEditCheckDialog( config ) {
+	// Parent constructor
+	ve.ui.SidebarEditCheckDialog.super.call( this, config );
+
+	// Mixin constructor
+	ve.ui.EditCheckDialog.call( this, config );
+};
+
+OO.inheritClass( ve.ui.SidebarEditCheckDialog, ve.ui.SidebarDialog );
+
+OO.mixinClass( ve.ui.SidebarEditCheckDialog, ve.ui.EditCheckDialog );
+
+ve.ui.SidebarEditCheckDialog.static.name = 'sidebarEditCheckDialog';
+
+ve.ui.SidebarEditCheckDialog.static.size = 'medium';
+
+ve.ui.SidebarEditCheckDialog.prototype.initialize = function () {
+	// Parent method
+	ve.ui.SidebarEditCheckDialog.super.prototype.initialize.call( this );
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.initialize.call( this );
+};
+
+ve.ui.SidebarEditCheckDialog.prototype.getSetupProcess = function ( data ) {
+	// Parent method
+	const process = ve.ui.SidebarEditCheckDialog.super.prototype.getSetupProcess.call( this, data );
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.getSetupProcess.call( this, data, process );
+};
+
+ve.ui.SidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
+	// Parent method
+	const process = ve.ui.SidebarEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process );
+};
+
 /* Registration */
 
-ve.ui.windowFactory.register( ve.ui.EditCheckDialog );
+ve.ui.windowFactory.register( ve.ui.SidebarEditCheckDialog );
+
+ve.ui.FixedEditCheckDialog = function VeUiFixedEditCheckDialog( config ) {
+	// Parent constructor
+	ve.ui.FixedEditCheckDialog.super.call( this, config );
+
+	// Mixin constructor
+	ve.ui.EditCheckDialog.call( this, config );
+};
+
+OO.inheritClass( ve.ui.FixedEditCheckDialog, ve.ui.ToolbarDialog );
+
+OO.mixinClass( ve.ui.FixedEditCheckDialog, ve.ui.EditCheckDialog );
+
+ve.ui.FixedEditCheckDialog.static.name = 'fixedEditCheckDialog';
+
+ve.ui.FixedEditCheckDialog.static.position = OO.ui.isMobile() ? 'below' : 'side';
+
+ve.ui.FixedEditCheckDialog.static.size = OO.ui.isMobile() ? 'full' : 'medium';
+
+ve.ui.FixedEditCheckDialog.prototype.initialize = function () {
+	// Parent method
+	ve.ui.FixedEditCheckDialog.super.prototype.initialize.call( this );
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.initialize.call( this );
+};
+
+ve.ui.FixedEditCheckDialog.prototype.getSetupProcess = function ( data ) {
+	// Parent method
+	const process = ve.ui.FixedEditCheckDialog.super.prototype.getSetupProcess.call( this, data );
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.getSetupProcess.call( this, data, process );
+};
+
+ve.ui.FixedEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
+	// Parent method
+	const process = ve.ui.FixedEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process );
+};
+
+/* Registration */
+
+ve.ui.windowFactory.register( ve.ui.FixedEditCheckDialog );
 
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(

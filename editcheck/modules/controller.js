@@ -63,11 +63,11 @@ Controller.prototype.setup = function () {
 				return;
 			}
 			let shownPromise;
-			const currentWindow = this.surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
-			if ( !currentWindow || currentWindow.constructor.static.name !== 'editCheckDialog' ) {
+			const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
+			if ( !currentWindow || currentWindow.constructor.static.name !== 'sidebarEditCheckDialog' ) {
 				const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 				shownPromise = windowAction.open(
-					'editCheckDialog',
+					'sidebarEditCheckDialog',
 					{ listener: 'onDocumentChange', actions: actions, controller: this }
 				).then( () => {
 					ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
@@ -220,10 +220,10 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 		saveProcess.next( () => {
 			const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
 			// .always is not chainable
-			return windowAction.close( 'editCheckDialog' ).closed.then( () => {}, () => {} ).then( () => {
+			return windowAction.close( 'sidebarEditCheckDialog' ).closed.then( () => {}, () => {} ).then( () => {
 				this.originalToolbar.toggle( false );
 				target.onContainerScroll();
-				return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
+				return windowAction.open( 'fixedEditCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
 					.then( ( instance ) => {
 						ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
 						actions.forEach( ( action ) => {
@@ -371,6 +371,7 @@ Controller.prototype.drawGutter = function () {
 	const surfaceView = this.surface.getView();
 
 	actions.forEach( ( action ) => {
+		action.top = Infinity;
 		action.getHighlightSelections().forEach( ( selection ) => {
 			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
 			const rect = selectionView.getSelectionBoundingRect();
@@ -394,10 +395,29 @@ Controller.prototype.drawGutter = function () {
 				} )
 				.on( 'click', () => this.focusAction( action ) )
 			);
+			action.top = Math.min( action.top, rect.top );
 		} );
 	} );
 
 	surfaceView.appendHighlights( this.$highlights, false );
+
+	this.align();
+};
+
+Controller.prototype.align = function () {
+	if ( this.listener !== 'onDocumentChange' ) {
+		return;
+	}
+	const surfaceTop = this.surface.getView().$element.offset().top + 10;
+	this.getActions().forEach( ( action ) => {
+		if ( action.widget ) {
+			action.widget.$element.css( 'margin-top', '' );
+			action.widget.$element.css(
+				'margin-top',
+				Math.max( 0, action.top + surfaceTop - action.widget.$element.offset().top )
+			);
+		}
+	} );
 };
 
 Controller.prototype.scrollActionIntoView = function ( action ) {
@@ -408,9 +428,9 @@ Controller.prototype.scrollActionIntoView = function ( action ) {
 		top: OO.ui.isMobile() ? 80 : action.widget.$element[ 0 ].getBoundingClientRect().top,
 		bottom: 20
 	};
-	if ( ve.ui.EditCheckDialog.static.position === 'below' ) {
+	if ( ve.ui.FixedEditCheckDialog.static.position === 'below' ) {
 		// TODO: ui.surface getPadding should really be fixed for this
-		const currentWindow = this.surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
+		const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
 		if ( currentWindow ) {
 			padding.bottom += currentWindow.getContentHeight();
 		}
