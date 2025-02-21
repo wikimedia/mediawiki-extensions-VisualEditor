@@ -265,7 +265,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.EditCheckDialog.super.prototype.getSetupProcess.call( this, data )
 		.first( () => {
 			this.currentOffset = 0;
-			this.currentChecks = null;
+			this.currentChecks = data.checks; // if these weren't passed they'll be regenerated
 			this.listener = data.listener || 'onDocumentChange';
 			this.reviewMode = data.reviewMode;
 			this.surface = data.surface;
