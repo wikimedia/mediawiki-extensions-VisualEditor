@@ -4,7 +4,7 @@ function Controller() {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
-	this.checksByListener = {};
+	this.actionsByListener = {};
 
 	this.target = false;
 	this.surface = false;
@@ -16,7 +16,7 @@ function Controller() {
 	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
-	this.scrollCheckIntoViewDebounced = ve.debounce( this.scrollCheckIntoView.bind( this ), 200, true );
+	this.scrollActionIntoViewDebounced = ve.debounce( this.scrollActionIntoView.bind( this ), 200, true );
 }
 
 OO.mixinClass( Controller, OO.EventEmitter );
@@ -33,11 +33,11 @@ Controller.prototype.setup = function () {
 		this.surface.getView().on( 'position', this.onPositionDebounced );
 		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
 
-		this.on( 'checksUpdated', ( listener, checks, newChecks, discardedChecks ) => {
+		this.on( 'actionsUpdated', ( listener, actions, newActions, discardedActions ) => {
 			// do we need to redraw anything?
-			if ( newChecks.length || discardedChecks.length ) {
-				if ( this.focusedCheck && discardedChecks.indexOf( this.focusedCheck ) !== -1 ) {
-					this.focusedCheck = undefined;
+			if ( newActions.length || discardedActions.length ) {
+				if ( this.focused && discardedActions.indexOf( this.focused ) !== -1 ) {
+					this.focused = undefined;
 				}
 				this.drawSelections();
 				this.drawGutter();
@@ -47,7 +47,7 @@ Controller.prototype.setup = function () {
 			if ( listener !== 'onDocumentChange' ) {
 				return;
 			}
-			if ( !checks.length ) {
+			if ( !actions.length ) {
 				return;
 			}
 			const currentWindow = this.surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
@@ -55,7 +55,7 @@ Controller.prototype.setup = function () {
 				const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 				return windowAction.open(
 					'editCheckDialog',
-					{ listener: 'onDocumentChange', checks: checks, controller: this }
+					{ listener: 'onDocumentChange', actions: actions, controller: this }
 				);
 			}
 		} );
@@ -75,7 +75,7 @@ Controller.prototype.setup = function () {
 
 		this.target = false;
 		this.surface = false;
-		this.checksByListener = {};
+		this.actionsByListener = {};
 	} );
 	mw.hook( 've.preSaveProcess' ).add( this.onPreSaveProcess.bind( this ) );
 };
@@ -83,61 +83,61 @@ Controller.prototype.setup = function () {
 Controller.prototype.refresh = function ( listener ) {
 	if ( listener === 'onBeforeSave' ) {
 		// These shouldn't be recalculated
-		this.emit( 'checksUpdated', listener, this.getChecks( listener ), [], [] );
+		this.emit( 'actionsUpdated', listener, this.getActions( listener ), [], [] );
 	} else {
-		this.updateChecksForListener( listener, true );
+		this.updateForListener( listener, true );
 	}
 };
 
-Controller.prototype.updateChecksForListener = function ( listener, always ) {
+Controller.prototype.updateForListener = function ( listener, always ) {
 	listener = listener || this.listener;
-	const existing = this.checksByListener[ listener ] || [];
-	const checks = mw.editcheck.editCheckFactory.createAllByListener( listener, this.surface.getModel() )
-		.map( ( check ) => existing.find( ( oldCheck ) => oldCheck.equals( check ) ) || check );
+	const existing = this.actionsByListener[ listener ] || [];
+	const actions = mw.editcheck.editCheckFactory.createAllByListener( listener, this.surface.getModel() )
+		.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action );
 
-	this.checksByListener[ listener ] = checks;
+	this.actionsByListener[ listener ] = actions;
 
-	const newChecks = checks.filter( ( check ) => existing.every( ( oldCheck ) => !check.equals( oldCheck ) ) );
-	const discardedChecks = existing.filter( ( check ) => checks.every( ( newCheck ) => !check.equals( newCheck ) ) );
-	if ( always || checks.length !== existing.length || newChecks.length || discardedChecks.length ) {
-		this.emit( 'checksUpdated', listener, checks, newChecks, discardedChecks );
+	const newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
+	const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
+	if ( always || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+		this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions );
 	}
-	return checks;
+	return actions;
 };
 
-Controller.prototype.removeCheck = function ( listener, check ) {
-	const checks = this.getChecks( listener );
-	const index = checks.indexOf( check );
+Controller.prototype.removeAction = function ( listener, action ) {
+	const actions = this.getActions( listener );
+	const index = actions.indexOf( action );
 	if ( index === -1 ) {
 		return;
 	}
-	const removed = checks.splice( index, 1 );
+	const removed = actions.splice( index, 1 );
 
-	if ( check === this.focusedCheck ) {
-		this.focusedCheck = undefined;
+	if ( action === this.focused ) {
+		this.focused = undefined;
 	}
 
-	this.emit( 'checksUpdated', listener, checks, [], removed );
+	this.emit( 'actionsUpdated', listener, actions, [], removed );
 };
 
-Controller.prototype.focusCheck = function ( check, scrollTo ) {
-	this.focusedCheck = check;
+Controller.prototype.focusAction = function ( action, scrollTo ) {
+	this.focused = action;
 
 	this.drawSelections();
 	this.drawGutter();
 
-	this.emit( 'focusCheck', check, this.getChecks().indexOf( check ), scrollTo );
+	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
 };
 
-Controller.prototype.getChecks = function ( listener ) {
-	return this.checksByListener[ listener || this.listener ] || [];
+Controller.prototype.getActions = function ( listener ) {
+	return this.actionsByListener[ listener || this.listener ] || [];
 };
 
 Controller.prototype.onPosition = function () {
 	this.drawGutter();
 
-	if ( this.getChecks().length && this.focusedCheck && this.surface.getView().reviewMode ) {
-		this.scrollCheckIntoViewDebounced( this.focusedCheck );
+	if ( this.getActions().length && this.focused && this.surface.getView().reviewMode ) {
+		this.scrollActionIntoViewDebounced( this.focused );
 	}
 };
 
@@ -146,7 +146,7 @@ Controller.prototype.onDocumentChange = function () {
 		return;
 	}
 	if ( this.listener !== 'onBeforeSave' ) {
-		this.updateChecksForListener( 'onDocumentChange' );
+		this.updateForListener( 'onDocumentChange' );
 	}
 
 	this.drawSelections();
@@ -169,10 +169,10 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess, target ) {
 	// clear rejection-reasons between runs of the save process, so only the last one counts
 	mw.editcheck.rejections.length = 0;
 
-	const oldFocusedCheck = this.focusedCheck;
+	const oldFocused = this.focused;
 	this.listener = 'onBeforeSave';
-	const checks = this.updateChecksForListener( 'onBeforeSave' );
-	if ( checks.length ) {
+	const actions = this.updateForListener( 'onBeforeSave' );
+	if ( actions.length ) {
 		ve.track( 'counter.editcheck.preSaveChecksShown' );
 		mw.editcheck.refCheckShown = true;
 
@@ -192,12 +192,12 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess, target ) {
 			return windowAction.close( 'editCheckDialog' ).closed.then( () => {}, () => {} ).then( () => {
 				this.originalToolbar.toggle( false );
 				target.onContainerScroll();
-				return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', checks: checks, controller: this } )
+				return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
 					.then( ( instance ) => {
 						instance.closed.then( () => {}, () => {} ).then( () => {
 							surface.getView().setReviewMode( false );
 							this.listener = 'onDocumentChange';
-							this.focusedCheck = oldFocusedCheck;
+							this.focused = oldFocused;
 							// Re-open the mid-edit sidebar if necessary.
 							this.refresh();
 						} );
@@ -298,12 +298,12 @@ Controller.prototype.restoreToolbar = function ( target ) {
 
 Controller.prototype.drawSelections = function () {
 	const surfaceView = this.surface.getView();
-	if ( this.focusedCheck ) {
+	if ( this.focused ) {
 		// The currently-focused check gets a selection:
 		// TODO: clicking the selection should activate the sidebar-action
 		surfaceView.getSelectionManager().drawSelections(
 			'editCheckWarning',
-			this.focusedCheck.getHighlightSelections().map(
+			this.focused.getHighlightSelections().map(
 				( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
 			)
 		);
@@ -314,8 +314,8 @@ Controller.prototype.drawSelections = function () {
 	if ( this.listener === 'onBeforeSave' ) {
 		// Review mode grays out everything that's not highlighted:
 		const highlightNodes = [];
-		this.getChecks().forEach( ( check ) => {
-			check.getHighlightSelections().forEach( ( selection ) => {
+		this.getActions().forEach( ( action ) => {
+			action.getHighlightSelections().forEach( ( selection ) => {
 				highlightNodes.push.apply( highlightNodes, surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
 			} );
 		} );
@@ -325,14 +325,14 @@ Controller.prototype.drawSelections = function () {
 
 Controller.prototype.drawGutter = function () {
 	this.$highlights.empty();
-	const checks = this.getChecks();
-	if ( checks.length === 0 ) {
+	const actions = this.getActions();
+	if ( actions.length === 0 ) {
 		return;
 	}
 	const surfaceView = this.surface.getView();
 
-	checks.forEach( ( check ) => {
-		check.getHighlightSelections().forEach( ( selection ) => {
+	actions.forEach( ( action ) => {
+		action.getHighlightSelections().forEach( ( selection ) => {
 			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
 			const rect = selectionView.getSelectionBoundingRect();
 			if ( !rect ) {
@@ -347,13 +347,13 @@ Controller.prototype.drawGutter = function () {
 			// * ve-ui-editCheck-gutter-highlight-inactive
 			this.$highlights.append( $( '<div>' )
 				.addClass( 've-ui-editCheck-gutter-highlight' )
-				.addClass( 've-ui-editCheck-gutter-highlight-' + check.getType() )
-				.addClass( 've-ui-editCheck-gutter-highlight-' + ( check === this.focusedCheck ? 'active' : 'inactive' ) )
+				.addClass( 've-ui-editCheck-gutter-highlight-' + action.getType() )
+				.addClass( 've-ui-editCheck-gutter-highlight-' + ( action === this.focused ? 'active' : 'inactive' ) )
 				.css( {
 					top: rect.top - 2,
 					height: rect.height + 4
 				} )
-				.on( 'click', () => this.focusCheck( check ) )
+				.on( 'click', () => this.focusAction( action ) )
 			);
 		} );
 	} );
@@ -361,12 +361,12 @@ Controller.prototype.drawGutter = function () {
 	surfaceView.appendHighlights( this.$highlights, false );
 };
 
-Controller.prototype.scrollCheckIntoView = function ( check ) {
+Controller.prototype.scrollActionIntoView = function ( action ) {
 	// scrollSelectionIntoView scrolls to the focus of a selection, but we
 	// want the very beginning to be in view, so collapse it:
-	const selection = check.getHighlightSelections()[ 0 ].collapseToStart();
+	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
 	const padding = {
-		top: OO.ui.isMobile() ? 80 : check.widget.$element[ 0 ].getBoundingClientRect().top,
+		top: OO.ui.isMobile() ? 80 : action.widget.$element[ 0 ].getBoundingClientRect().top,
 		bottom: 20
 	};
 	if ( ve.ui.EditCheckDialog.static.position === 'below' ) {
