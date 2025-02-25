@@ -35,6 +35,14 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 
 OO.inheritClass( ve.init.mw.Target, ve.init.Target );
 
+/* Events */
+
+/**
+ * Fired when the target has been torn down
+ *
+ * @event ve.init.mw.Target#teardown
+ */
+
 /* Static Properties */
 
 /**
@@ -512,7 +520,9 @@ ve.init.mw.Target.prototype.teardown = function () {
 	this.clearDocState();
 
 	// Parent method
-	return ve.init.mw.Target.super.prototype.teardown.call( this );
+	return ve.init.mw.Target.super.prototype.teardown.call( this ).then( () => {
+		this.emit( 'teardown' );
+	} );
 };
 
 /**

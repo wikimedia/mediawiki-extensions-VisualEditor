@@ -40,6 +40,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.saveDialog = null;
 	this.saveDeferred = null;
 	this.saveFields = {};
+	this.wasSaveable = null;
 	this.docToSave = null;
 	this.originalDmDocPromise = null;
 	this.originalHtml = null;
@@ -1959,9 +1960,15 @@ ve.init.mw.ArticleTarget.prototype.isSaveable = function () {
  * Update the toolbar save button to reflect if the article can be saved
  */
 ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
-	// This should really be an emit('updateState') but that would cause
+	// This should really be an emit( 'updateState' ) but that would cause
 	// every tool to be updated on every transaction.
 	this.toolbarSaveButton.onUpdateState();
+
+	const isSaveable = this.isSaveable();
+	if ( isSaveable !== this.wasSaveable ) {
+		this.emit( 'toolbarSaveButtonStateChanged' );
+		this.wasSaveable = isSaveable;
+	}
 };
 
 /**
@@ -2016,7 +2023,8 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 					resolve: 'onSaveDialogResolveConflict',
 					retry: 'onSaveDialogRetry',
 					// The array syntax is a way to call `this.emit( 'saveWorkflowEnd' )`.
-					close: [ 'emit', 'saveWorkflowEnd' ]
+					close: [ 'emit', 'saveWorkflowEnd' ],
+					changePanel: [ 'emit', 'saveWorkflowChangePanel' ]
 				} );
 
 				// Attach custom overlay

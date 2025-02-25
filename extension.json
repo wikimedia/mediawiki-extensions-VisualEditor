@@ -717,6 +717,7 @@
 				"modules/ve-mw/init/apiresponsecache/ve.init.mw.GalleryImageInfoCache.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.js",
 				"modules/ve-mw/init/ve.init.mw.Platform.init.js",
+				"modules/ve-mw/init/ve.init.mw.TargetFactory.js",
 				"modules/ve-mw/init/targets/ve.init.mw.Target.js"
 			],
 			"styles": [
