@@ -319,7 +319,7 @@ ve.init.mw.Platform.prototype.fetchSpecialCharList = function () {
 			characters[ groupName ] = {
 				label: mw.msg( 'special-characters-group-' + groupName ),
 				symbols: this.processSpecialCharSymbols( groupObject ),
-				attributes: { dir: rtlGroups.indexOf( groupName ) !== -1 ? 'rtl' : 'ltr' }
+				attributes: { dir: rtlGroups.includes( groupName ) ? 'rtl' : 'ltr' }
 			};
 		} );
 

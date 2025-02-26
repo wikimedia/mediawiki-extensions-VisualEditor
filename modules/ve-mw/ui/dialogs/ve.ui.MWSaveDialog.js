@@ -284,7 +284,7 @@ ve.ui.MWSaveDialog.prototype.clearDiff = function () {
  * @throws {Error} Unknown saveDialog panel
  */
 ve.ui.MWSaveDialog.prototype.swapPanel = function ( panel, noFocus ) {
-	if ( ( [ 'save', 'review', 'preview', 'conflict' ].indexOf( panel ) ) === -1 ) {
+	if ( ![ 'save', 'review', 'preview', 'conflict' ].includes( panel ) ) {
 		throw new Error( 'Unknown saveDialog panel: ' + panel );
 	}
 

@@ -10,6 +10,7 @@
 		"$": "off"
 	},
 	"rules": {
-		"no-jquery/no-append-html": "warn"
+		"no-jquery/no-append-html": "warn",
+		"no-jquery/no-done-fail": "warn"
 	}
 }

@@ -318,5 +318,5 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedId = function ( id ) {
 	const ids = this.controller.dismissedIds[ this.constructor.static.name ];
-	return ids && ids.indexOf( id ) !== -1;
+	return ids && ids.includes( id );
 };

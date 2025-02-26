@@ -101,7 +101,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 		let widget;
 		const index = oldWidgets.findIndex(
 			( owidget ) => owidget.actions.length === section.actions.length &&
-				owidget.actions.every( ( oact ) => section.actions.indexOf( oact ) !== -1 )
+				owidget.actions.every( ( oact ) => section.actions.includes( oact ) )
 		);
 		if ( index !== -1 ) {
 			widget = oldWidgets.splice( index, 1 )[ 0 ];
@@ -140,7 +140,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 										actions: section.actions,
 										footer: section.actions.length !== 1,
 										// just filter out any discarded actions from the allowed set
-										updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => discardedActions.indexOf( pact ) === -1 )
+										updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
 									}
 								);
 							} else if ( section.actions.every( ( sact ) => currentWindow.hasAction( sact ) ) ) {
@@ -156,7 +156,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 			};
 			this.$body.append( widget.$element );
 		}
-		if ( widget.actions.indexOf( this.controller.focused ) !== -1 ) {
+		if ( widget.actions.includes( this.controller.focused ) ) {
 			widget.icon.setFlags( action.getType() );
 		} else {
 			widget.icon.clearFlags();
@@ -164,7 +164,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 		widget.$element.css( {
 			top: section.rect.top + 2,
 			height: section.rect.height
-		} ).toggleClass( 've-ui-editCheck-gutter-action-inactive', section.actions.indexOf( this.controller.focused ) === -1 );
+		} ).toggleClass( 've-ui-editCheck-gutter-action-inactive', !section.actions.includes( this.controller.focused ) );
 
 		this.widgets.push( widget );
 	} );

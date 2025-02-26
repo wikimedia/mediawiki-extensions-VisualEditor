@@ -279,7 +279,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 					} else {
 						labelText = this.initialLabel;
 					}
-					if ( labelText.indexOf( ']]' ) !== -1 ) {
+					if ( labelText.includes( ']]' ) ) {
 						labelText = labelText.replace( /(\]{2,})/g, '<nowiki>$1</nowiki>' );
 					}
 					const labelTitle = mw.Title.newFromText( labelText );

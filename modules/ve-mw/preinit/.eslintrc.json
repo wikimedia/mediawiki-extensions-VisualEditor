@@ -5,6 +5,7 @@
 	"rules": {
 		"no-jquery/no-extend": "off",
 		"no-jquery/no-deferred": "off",
-		"no-jquery/no-when": "off"
+		"no-jquery/no-when": "off",
+		"no-jquery/no-done-fail": "warn"
 	}
 }

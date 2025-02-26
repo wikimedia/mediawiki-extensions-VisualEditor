@@ -1342,7 +1342,7 @@
 		// If forced by the URL parameter, skip the namespace check (T221892) and preference check
 		( url.searchParams.get( 'veaction' ) === 'edit' || (
 			// Only in enabled namespaces
-			conf.namespaces.indexOf( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) !== -1 &&
+			conf.namespaces.includes( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) &&
 
 			// Enabled per user preferences
 			enabledForUser
@@ -1428,7 +1428,7 @@
 			const mode = veactionToMode[ editUrl.searchParams.get( 'veaction' ) ] ||
 				// Always load VE visual mode if collabSession is set
 				( editUrl.searchParams.has( 'collabSession' ) ? 'visual' : null );
-			if ( mode && availableModes.indexOf( mode ) !== -1 ) {
+			if ( mode && availableModes.includes( mode ) ) {
 				return mode;
 			}
 		}

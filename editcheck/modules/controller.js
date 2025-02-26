@@ -223,7 +223,7 @@ Controller.prototype.onDocumentChange = function () {
 Controller.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
 	// do we need to redraw anything?
 	if ( newActions.length || discardedActions.length ) {
-		if ( this.focused && discardedActions.indexOf( this.focused ) !== -1 ) {
+		if ( this.focused && discardedActions.includes( this.focused ) ) {
 			this.focused = undefined;
 		}
 		this.updatePositions();
