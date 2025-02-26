@@ -6,8 +6,8 @@ function Controller() {
 
 	this.actionsByListener = {};
 
-	this.target = false;
-	this.surface = false;
+	this.target = null;
+	this.surface = null;
 	this.listener = 'onDocumentChange';
 
 	this.$highlights = $( '<div>' );
@@ -73,8 +73,8 @@ Controller.prototype.setup = function () {
 
 		this.disconnect( this );
 
-		this.target = false;
-		this.surface = false;
+		this.target = null;
+		this.surface = null;
 		this.actionsByListener = {};
 	} );
 	mw.hook( 've.preSaveProcess' ).add( this.onPreSaveProcess.bind( this ) );
