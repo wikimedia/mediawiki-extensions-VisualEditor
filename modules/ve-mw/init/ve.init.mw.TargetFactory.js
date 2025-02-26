@@ -25,6 +25,19 @@ OO.inheritClass( ve.init.mw.TargetFactory, OO.Factory );
 /**
  * @inheritdoc
  */
+ve.init.mw.TargetFactory.prototype.register = function ( constructor ) {
+	// Validate arguments
+	if ( !( constructor.prototype instanceof ve.init.mw.Target ) ) {
+		throw new Error( 'Targets must be subclasses of ve.init.mw.Target' );
+	}
+
+	// Parent method
+	ve.init.mw.TargetFactory.super.prototype.register.apply( this, arguments );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.init.mw.TargetFactory.prototype.create = function () {
 	// Parent method
 	const target = ve.init.mw.TargetFactory.super.prototype.create.apply( this, arguments );
