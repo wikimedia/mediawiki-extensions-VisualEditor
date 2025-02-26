@@ -81,23 +81,25 @@
 
 	.ve-ui-editCheckActionWidget {
 		box-sizing: border-box;
-		border: @border-base;
-		margin: @spacing-100 0;
 		white-space: normal; // Minerva needs this
+		padding: @spacing-50 @spacing-75;
+		cursor: pointer;
+		overflow: hidden;
 
-		&-head {
-			position: relative;
-			padding: @spacing-50 @spacing-75;
+		> .oo-ui-iconElement-icon {
+			// Fixes icon placement in WMUI theme
+			top: -@spacing-50;
+		}
 
-			> .oo-ui-labelElement-label {
-				display: block;
-				margin-left: 2em;
-				font-weight: @font-weight-semi-bold;
-			}
+		> .oo-ui-labelElement-label {
+			font-weight: @font-weight-semi-bold;
 		}
 
 		&-body {
-			margin: @spacing-50 @spacing-75 @spacing-100;
+			cursor: auto;
+			background-color: @background-color-base;
+			margin: @spacing-50 -@spacing-75 -@spacing-50 -@spacing-75;
+			padding: @spacing-50 @spacing-75 @spacing-100;
 		}
 
 		&-actions {
@@ -190,14 +192,12 @@
 		.ve-ui-editCheckActionWidget {
 			margin: 0;
 			border-width: 0;
-
-			&-head {
-				background-color: transparent !important;  /* stylelint-disable-line declaration-no-important */
-			}
+			background-color: transparent !important;  /* stylelint-disable-line declaration-no-important */
 
 			&-body {
+				background-color: transparent;
 				padding-left: 2em;
-				margin-bottom: @spacing-75;
+				margin-left: 0;
 			}
 		}
 	}

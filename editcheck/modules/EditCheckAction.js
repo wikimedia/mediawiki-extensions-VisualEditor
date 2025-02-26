@@ -142,46 +142,21 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	// Parent constructor
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
-	// Mixin constructors
-	OO.ui.mixin.IconElement.call( this, config );
-	OO.ui.mixin.LabelElement.call( this, config );
-	OO.ui.mixin.TitledElement.call( this, config );
-	OO.ui.mixin.FlaggedElement.call( this, config );
-
-	this.setType( config.type );
-
-	if ( config.icon ) {
-		this.setIcon( config.icon );
-	}
-
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
 	this.$actions = $( '<div>' ).addClass( 've-ui-editCheckActionWidget-actions oo-ui-element-hidden' );
 
-	this.$head = $( '<div>' )
-		.append( this.$icon, this.$label )
-		.addClass( 've-ui-editCheckActionWidget-head' )
-		.on( 'click', this.onHeadClick.bind( this ) );
+	this.$element.on( 'click', this.onClick.bind( this ) );
+
 	this.$body = $( '<div>' )
 		.append( this.message.$element, this.$actions )
 		.addClass( 've-ui-editCheckActionWidget-body' );
 
 	this.$element
-		.append( this.$head, this.$body )
-		// .append( this.$icon, this.$label, this.closeButton && this.closeButton.$element )
+		.append( this.$body )
 		.addClass( 've-ui-editCheckActionWidget' );
 };
 
-OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.Widget );
-OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.IconElement );
-OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.LabelElement );
-OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.TitledElement );
-OO.mixinClass( mw.editcheck.EditCheckActionWidget, OO.ui.mixin.FlaggedElement );
-
-mw.editcheck.EditCheckActionWidget.static.iconMap = {
-	notice: 'infoFilled',
-	error: 'error',
-	warning: 'alert'
-};
+OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.MessageWidget );
 
 /**
  * Called when actions are changed
@@ -203,25 +178,11 @@ mw.editcheck.EditCheckActionWidget.prototype.setDisabled = function ( disabled )
 	} );
 };
 
-mw.editcheck.EditCheckActionWidget.prototype.setType = function ( type ) {
-	if ( !this.constructor.static.iconMap[ type ] ) {
-		type = 'notice';
-	}
-	if ( type !== this.type ) {
-		this.clearFlags();
-		this.setFlags( type );
-
-		this.setIcon( this.constructor.static.iconMap[ type ] );
-	}
-	this.type = type;
-};
-
-mw.editcheck.EditCheckActionWidget.prototype.getType = function () {
-	return this.type;
-};
-
-mw.editcheck.EditCheckActionWidget.prototype.onHeadClick = function ( e ) {
+mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
 	if ( this.singleAction ) {
+		return;
+	}
+	if ( this.$body[ 0 ].contains( e.target ) ) {
 		return;
 	}
 
