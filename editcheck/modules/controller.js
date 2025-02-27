@@ -80,12 +80,12 @@ Controller.prototype.setup = function () {
 	mw.hook( 've.preSaveProcess' ).add( this.onPreSaveProcess.bind( this ) );
 };
 
-Controller.prototype.refresh = function ( listener ) {
-	if ( listener === 'onBeforeSave' ) {
+Controller.prototype.refresh = function () {
+	if ( this.listener === 'onBeforeSave' ) {
 		// These shouldn't be recalculated
-		this.emit( 'actionsUpdated', listener, this.getActions( listener ), [], [] );
+		this.emit( 'actionsUpdated', this.listener, this.getActions( this.listener ), [], [] );
 	} else {
-		this.updateForListener( listener, true );
+		this.updateForListener( this.listener, true );
 	}
 };
 
