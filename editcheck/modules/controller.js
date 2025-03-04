@@ -91,6 +91,8 @@ Controller.prototype.setup = function () {
 
 			this.dismissedFragments = {};
 			this.dismissedIds = {};
+
+			mw.editcheck.refCheckShown = false;
 		} );
 	}, null, this );
 
@@ -181,15 +183,13 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 
 	ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 
-	// clear rejection-reasons between runs of the save process, so only the last one counts
-	mw.editcheck.rejections.length = 0;
-
 	const oldFocused = this.focused;
 	this.listener = 'onBeforeSave';
 	const actions = this.updateForListener( 'onBeforeSave' );
 	if ( actions.length ) {
 		ve.track( 'counter.editcheck.preSaveChecksShown' );
-		mw.editcheck.refCheckShown = true;
+		mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
+			actions.some( ( action ) => action.getName() === 'addReference' );
 
 		this.setupToolbar( target );
 

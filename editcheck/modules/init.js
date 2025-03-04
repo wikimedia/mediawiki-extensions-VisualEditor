@@ -34,12 +34,6 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
 
-mw.editcheck.rejections = [];
-
-mw.editcheck.getRejectionReasons = function () {
-	return mw.editcheck.rejections;
-};
-
 mw.editcheck.refCheckShown = false;
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
@@ -72,7 +66,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 				tags.push( 'editcheck-newreference' );
 			}
 			if ( mw.editcheck.refCheckShown ) {
-				tags.push( 'editcheck-references-activated' );
+				tags.push( 'editcheck-references-shown' );
 			}
 			return tags.join( ',' );
 		};

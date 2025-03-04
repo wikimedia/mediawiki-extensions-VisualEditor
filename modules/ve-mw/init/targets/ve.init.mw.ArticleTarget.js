@@ -1574,13 +1574,6 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 		if ( mw.editcheck.hasAddedContentNeedingReference( documentModel, true ) ) {
 			taglist.push( 'editcheck-newcontent' );
 		}
-		// Rejection reasons for references
-		const rejections = mw.editcheck.getRejectionReasons();
-		if ( rejections.length > 0 ) {
-			rejections.forEach( ( reason ) => {
-				taglist.push( 'editcheck-reference-decline-' + reason );
-			} );
-		}
 	}
 
 	data.vetags = taglist.join( ',' );
