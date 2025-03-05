@@ -60,14 +60,24 @@ Controller.prototype.setup = function () {
 			if ( !actions.length ) {
 				return;
 			}
+			let shownPromise;
 			const currentWindow = this.surface.getToolbarDialogs( ve.ui.EditCheckDialog.static.position ).getCurrentWindow();
 			if ( !currentWindow || currentWindow.constructor.static.name !== 'editCheckDialog' ) {
 				const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-				return windowAction.open(
+				shownPromise = windowAction.open(
 					'editCheckDialog',
 					{ listener: 'onDocumentChange', actions: actions, controller: this }
-				);
+				).then( () => {
+					ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
+				} );
+			} else {
+				shownPromise = ve.createDeferred().resolve().promise();
 			}
+			shownPromise.then( () => {
+				newActions.forEach( ( action ) => {
+					ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-midedit' } );
+				} );
+			} );
 		}, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
@@ -199,6 +209,10 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 				target.onContainerScroll();
 				return windowAction.open( 'editCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
 					.then( ( instance ) => {
+						ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
+						actions.forEach( ( action ) => {
+							ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
+						} );
 						instance.closed.then( () => {}, () => {} ).then( () => {
 							surface.getView().setReviewMode( false );
 							this.listener = 'onDocumentChange';
