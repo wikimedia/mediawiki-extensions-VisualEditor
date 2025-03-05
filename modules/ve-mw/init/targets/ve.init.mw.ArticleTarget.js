@@ -2126,17 +2126,10 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
 		// to the heading. Iterate over headings to find the one with the correct attribute
 		// in originalDomElements.
-		let headingModel;
-		dmDoc.getNodesByType( 'mwHeading' ).some( ( heading ) => {
+		const headingModel = dmDoc.getNodesByType( 'mwHeading' ).find( ( heading ) => {
 			const domElements = heading.getOriginalDomElements( dmDoc.getStore() );
-			if (
-				domElements && domElements.length && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
-				domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section
-			) {
-				headingModel = heading;
-				return true;
-			}
-			return false;
+			return domElements && domElements.length && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
+				domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section;
 		} );
 		if ( headingModel ) {
 			const headingView = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
