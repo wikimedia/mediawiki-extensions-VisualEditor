@@ -274,6 +274,8 @@ Controller.prototype.setupToolbar = function ( target ) {
 	target.toolbar.$element.before( reviewToolbar.$element );
 	target.toolbar = reviewToolbar;
 
+	reviewToolbar.initialize();
+
 	this.originalToolbar = toolbar;
 	this.reviewToolbar = reviewToolbar;
 };
@@ -291,6 +293,9 @@ Controller.prototype.restoreToolbar = function ( target ) {
 	// original toolbar reclaim them:
 	this.originalToolbar.disconnect( target );
 	target.setupToolbar( target.getSurface() );
+	// If the window was resized while the originalToolbar was hidden then
+	// the cached measurements will be wrong. Recalculate.
+	this.originalToolbar.onWindowResize();
 
 	this.reviewToolbar = false;
 	this.originalToolbar = false;
