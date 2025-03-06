@@ -1,12 +1,13 @@
 'use strict';
 
-function Controller() {
+function Controller( target ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
 	this.actionsByListener = {};
 
-	this.target = null;
+	this.target = target;
+
 	this.surface = null;
 	this.listener = 'onDocumentChange';
 
@@ -22,13 +23,19 @@ function Controller() {
 OO.mixinClass( Controller, OO.EventEmitter );
 
 Controller.prototype.setup = function () {
-	mw.hook( 've.activationStart' ).add( () => {
+	const target = this.target;
+	target.on( 'surfaceReady', () => {
+		if ( target.getSurface().getMode() !== 'visual' ) {
+			// Some checks will entirely work in source mode for most cases.
+			// But others will fail spectacularly -- e.g. reference check
+			// isn't aware of <ref> tags and so will suggest that all content
+			// has references added. As such, disable in source mode for now.
+			return;
+		}
+		// ideally this would happen slightly earlier:
 		document.documentElement.classList.add( 've-editcheck-available' );
 
-	} );
-	mw.hook( 've.activationComplete' ).add( () => {
-		this.target = ve.init.target;
-		this.surface = this.target.getSurface();
+		this.surface = target.getSurface();
 
 		this.surface.getView().on( 'position', this.onPositionDebounced );
 		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
@@ -58,26 +65,36 @@ Controller.prototype.setup = function () {
 					{ listener: 'onDocumentChange', actions: actions, controller: this }
 				);
 			}
-		} );
+		}, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
 		setTimeout( () => this.onDocumentChange(), 100 );
-	} );
-	mw.hook( 've.deactivationComplete' ).add( () => {
+
+		this.surface.on( 'destroy', () => {
+			this.off( 'actionsUpdated' );
+
+			this.surface.getView().off( 'position', this.onPositionDebounced );
+			this.surface.getModel().off( 'undoStackChange', this.onDocumentChangeDebounced );
+
+			this.surface = null;
+			this.actionsByListener = {};
+
+			mw.editcheck.dismissedFragments = {};
+			mw.editcheck.dismissedIds = {};
+		} );
+	}, null, this );
+
+	target.on( 'teardown', () => {
 		document.documentElement.classList.remove( 've-editcheck-available' );
 
-		mw.editcheck.dismissedFragments = {};
-		mw.editcheck.dismissedIds = {};
+		target.disconnect( this );
+	}, null, this );
 
-		this.surface.getModel().off( 'undoStackChange', this.onDocumentChangeDebounced );
-
-		this.disconnect( this );
-
-		this.target = null;
-		this.surface = null;
-		this.actionsByListener = {};
+	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, saveTarget ) => {
+		if ( saveTarget === this.target ) {
+			this.onPreSaveProcess( saveProcess );
+		}
 	} );
-	mw.hook( 've.preSaveProcess' ).add( this.onPreSaveProcess.bind( this ) );
 };
 
 Controller.prototype.refresh = function () {
@@ -142,9 +159,6 @@ Controller.prototype.onPosition = function () {
 };
 
 Controller.prototype.onDocumentChange = function () {
-	if ( this.surface.getMode() !== 'visual' ) {
-		return;
-	}
 	if ( this.listener !== 'onBeforeSave' ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
@@ -153,16 +167,9 @@ Controller.prototype.onDocumentChange = function () {
 	this.drawGutter();
 };
 
-Controller.prototype.onPreSaveProcess = function ( saveProcess, target ) {
+Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
+	const target = this.target;
 	const surface = target.getSurface();
-
-	if ( surface.getMode() !== 'visual' ) {
-		// Some checks will entirely work in source mode for most cases.
-		// But others will fail spectacularly -- e.g. reference check
-		// isn't aware of <ref> tags and so will suggest that all content
-		// has references added. As such, disable in source mode for now.
-		return;
-	}
 
 	ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 
@@ -389,6 +396,5 @@ Controller.prototype.scrollActionIntoView = function ( action ) {
 };
 
 module.exports = {
-	Controller: Controller,
-	instance: new Controller()
+	Controller: Controller
 };

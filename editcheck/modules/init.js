@@ -2,8 +2,7 @@ mw.editcheck = {
 	config: require( './config.json' ),
 	ecenable: !!( new URL( location.href ).searchParams.get( 'ecenable' ) || window.MWVE_FORCE_EDIT_CHECK_ENABLED ),
 	dismissedFragments: {},
-	dismissedIds: {},
-	controller: require( './controller.js' ).instance
+	dismissedIds: {}
 };
 
 require( './EditCheckInspector.js' );
@@ -86,7 +85,14 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 }
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable ) {
-	mw.editcheck.controller.setup();
+	const Controller = require( './controller.js' ).Controller;
+	mw.hook( 've.newTarget' ).add( ( target ) => {
+		if ( target.constructor.static.name !== 'article' ) {
+			return;
+		}
+		const controller = new Controller( target );
+		controller.setup();
+	} );
 }
 
 // This is for the toolbar:
