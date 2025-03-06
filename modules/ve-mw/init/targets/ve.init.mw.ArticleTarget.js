@@ -2287,6 +2287,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( modified ) {
 	return this.serialize( this.getDocToSave() ).then( ( data ) => {
 		// HACK - add parameters the API doesn't provide for a VE->WT switch
+		data.copyrightWarning = this.copyrightWarning;
 		data.etag = this.etag;
 		data.fromEditedState = modified;
 		data.notices = this.remoteNotices;
