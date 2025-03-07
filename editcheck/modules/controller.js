@@ -86,7 +86,9 @@ Controller.prototype.setup = function () {
 	}, null, this );
 
 	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, saveTarget ) => {
-		if ( saveTarget === this.target ) {
+		// This being a global hook means that it could fire on a different
+		// target, or on our target when it's not in visual mode.
+		if ( saveTarget === this.target && this.surface ) {
 			this.onPreSaveProcess( saveProcess );
 		}
 	} );
