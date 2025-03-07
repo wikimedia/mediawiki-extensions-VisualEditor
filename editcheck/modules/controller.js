@@ -73,9 +73,6 @@ Controller.prototype.setup = function () {
 		this.surface.on( 'destroy', () => {
 			this.off( 'actionsUpdated' );
 
-			this.surface.getView().off( 'position', this.onPositionDebounced );
-			this.surface.getModel().off( 'undoStackChange', this.onDocumentChangeDebounced );
-
 			this.surface = null;
 			this.actionsByListener = {};
 
@@ -86,8 +83,6 @@ Controller.prototype.setup = function () {
 
 	target.on( 'teardown', () => {
 		document.documentElement.classList.remove( 've-editcheck-available' );
-
-		target.disconnect( this );
 	}, null, this );
 
 	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, saveTarget ) => {
@@ -297,15 +292,14 @@ Controller.prototype.restoreToolbar = function ( target ) {
 
 	// Creating a new PositionedTargetToolbar stole the
 	// toolbar windowmanagers, so we need to make the
-	// original toolbar reclaim them:
-	this.originalToolbar.disconnect( target );
+	// original toolbar reclaims them:
 	target.setupToolbar( target.getSurface() );
 	// If the window was resized while the originalToolbar was hidden then
 	// the cached measurements will be wrong. Recalculate.
 	this.originalToolbar.onWindowResize();
 
-	this.reviewToolbar = false;
-	this.originalToolbar = false;
+	this.reviewToolbar = null;
+	this.originalToolbar = null;
 };
 
 Controller.prototype.drawSelections = function () {
