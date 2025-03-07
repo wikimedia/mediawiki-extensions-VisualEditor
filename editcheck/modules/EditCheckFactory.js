@@ -61,14 +61,15 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  *
  * TODO: Rename to createAllActionsByListener
  *
+ * @param {mw.editcheck.Controller} controller
  * @param {string} listener Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
  * @return {mw.editcheck.EditCheckActions[]} Actions, sorted by range
  */
-mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( listener, surfaceModel ) {
+mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listener, surfaceModel ) {
 	let newChecks = [];
 	this.getNamesByListener( listener ).forEach( ( checkName ) => {
-		const check = this.create( checkName, mw.editcheck.config[ checkName ] );
+		const check = this.create( checkName, controller, mw.editcheck.config[ checkName ] );
 		if ( !check.canBeShown() ) {
 			return;
 		}

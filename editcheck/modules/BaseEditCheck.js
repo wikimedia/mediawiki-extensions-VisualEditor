@@ -1,4 +1,5 @@
-mw.editcheck.BaseEditCheck = function MWBaseEditCheck( config ) {
+mw.editcheck.BaseEditCheck = function MWBaseEditCheck( controller, config ) {
+	this.controller = controller;
 	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, config );
 };
 
@@ -283,11 +284,11 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
 	const name = this.constructor.static.name;
 	if ( action.id ) {
-		const dismissedIds = mw.editcheck.dismissedIds;
+		const dismissedIds = this.controller.dismissedIds;
 		dismissedIds[ name ] = dismissedIds[ name ] || [];
 		dismissedIds[ name ].push( action.id );
 	} else {
-		const dismissedFragments = mw.editcheck.dismissedFragments;
+		const dismissedFragments = this.controller.dismissedFragments;
 		dismissedFragments[ name ] = dismissedFragments[ name ] || [];
 		dismissedFragments[ name ].push(
 			// Exclude insertions so we don't accidentally block unrelated changes:
@@ -303,7 +304,7 @@ mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
-	const fragments = mw.editcheck.dismissedFragments[ this.constructor.static.name ];
+	const fragments = this.controller.dismissedFragments[ this.constructor.static.name ];
 	return !!fragments && fragments.some(
 		( fragment ) => fragment.getSelection().getCoveringRange().containsRange( range )
 	);
@@ -316,6 +317,6 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedId = function ( id ) {
-	const ids = mw.editcheck.dismissedIds[ this.constructor.static.name ];
+	const ids = this.controller.dismissedIds[ this.constructor.static.name ];
 	return ids && ids.indexOf( id ) !== -1;
 };

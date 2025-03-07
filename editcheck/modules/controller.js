@@ -13,6 +13,9 @@ function Controller( target ) {
 
 	this.$highlights = $( '<div>' );
 
+	this.dismissedFragments = {};
+	this.dismissedIds = {};
+
 	this.onDocumentChangeDebounced = ve.debounce( this.onDocumentChange.bind( this ), 100 );
 	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
 
@@ -76,8 +79,8 @@ Controller.prototype.setup = function () {
 			this.surface = null;
 			this.actionsByListener = {};
 
-			mw.editcheck.dismissedFragments = {};
-			mw.editcheck.dismissedIds = {};
+			this.dismissedFragments = {};
+			this.dismissedIds = {};
 		} );
 	}, null, this );
 
@@ -104,7 +107,7 @@ Controller.prototype.refresh = function () {
 Controller.prototype.updateForListener = function ( listener, always ) {
 	listener = listener || this.listener;
 	const existing = this.actionsByListener[ listener ] || [];
-	const actions = mw.editcheck.editCheckFactory.createAllByListener( listener, this.surface.getModel() )
+	const actions = mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
 		.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action );
 
 	this.actionsByListener[ listener ] = actions;

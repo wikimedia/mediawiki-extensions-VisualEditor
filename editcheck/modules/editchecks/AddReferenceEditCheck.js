@@ -1,6 +1,6 @@
-mw.editcheck.AddReferenceEditCheck = function MWAddReferenceEditCheck( config ) {
+mw.editcheck.AddReferenceEditCheck = function MWAddReferenceEditCheck() {
 	// Parent constructor
-	mw.editcheck.AddReferenceEditCheck.super.call( this, config );
+	mw.editcheck.AddReferenceEditCheck.super.apply( this, arguments );
 };
 
 OO.inheritClass( mw.editcheck.AddReferenceEditCheck, mw.editcheck.BaseEditCheck );
