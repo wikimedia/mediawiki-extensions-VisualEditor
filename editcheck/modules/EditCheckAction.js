@@ -92,9 +92,16 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	return widget;
 };
 
+/**
+ * Called when a button in the rendered widget is clicked
+ *
+ * @param {ve.ui.Surface} surface
+ * @param {OO.ui.ActionWidget} actionWidget ActionWidget for the choice that was clicked
+ */
 mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actionWidget ) {
 	const promise = this.check.act( actionWidget.action, this, surface );
 	this.emit( 'act', promise || ve.createDeferred().resolve().promise() );
+	ve.track( 'activity.editCheck-' + this.getName(), { action: 'action-' + ( actionWidget.getAction() || 'unknown' ) } );
 };
 
 /**
