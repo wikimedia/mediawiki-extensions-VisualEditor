@@ -101,7 +101,6 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 				return instance.closing;
 			} ).done( ( data ) => {
 				if ( data && data.action === 'reject' && data.reason ) {
-					mw.editcheck.rejections.push( data.reason );
 					this.dismiss( action );
 				}
 			} );
