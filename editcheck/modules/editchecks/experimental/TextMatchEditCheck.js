@@ -3,7 +3,7 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck( /* config */ ) 
 	mw.editcheck.TextMatchEditCheck.super.apply( this, arguments );
 
 	this.replacers = [
-		...mw.editcheck.TextMatchEditCheck.static.replacers,
+		...this.constructor.static.replacers,
 		...( this.config.replacers || [] )
 	];
 };
