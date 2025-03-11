@@ -19,7 +19,7 @@
 	"editcheck-dialog-addref-title": "Lisää viite",
 	"editcheck-dialog-title": "Ennen julkaisua",
 	"editcheck-copyvio-title": "Liitetty sisältö",
-	"editcheck-copyvio-description": "Tekstin kopiointi muista lähteistä on pääsääntöisesti kiellettyä. Näin toimiminen on yleensä sekä tekijänoikeusrikkomus että plagiarismia.",
+	"editcheck-copyvio-description": "Tekstin kopiointi muista lähteistä on pääsääntöisesti kiellettyä. Se on usein sekä tekijänoikeusrikkomus että plagiarismia.",
 	"editcheck-review-title": "Tarkasta muutokset",
 	"tag-editcheck-reference-decline-common-knowledge": "Muokkaustarkistin (lähteet) hylätty (yleistietoa)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Muokkaustarkistimen ehdotus hylättiin, koska lisäys on yleistä tietoa",
