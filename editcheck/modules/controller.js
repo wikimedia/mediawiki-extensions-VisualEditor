@@ -18,6 +18,7 @@ function Controller( target ) {
 
 	this.onDocumentChangeDebounced = ve.debounce( this.onDocumentChange.bind( this ), 100 );
 	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
+	this.onSelectDebounced = ve.debounce( this.onSelect.bind( this ), 100 );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
 	this.scrollActionIntoViewDebounced = ve.debounce( this.scrollActionIntoView.bind( this ), 200, true );
@@ -42,6 +43,7 @@ Controller.prototype.setup = function () {
 
 		this.surface.getView().on( 'position', this.onPositionDebounced );
 		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
+		this.surface.getModel().on( 'select', this.onSelectDebounced );
 
 		this.on( 'actionsUpdated', ( listener, actions, newActions, discardedActions ) => {
 			// do we need to redraw anything?
@@ -160,6 +162,18 @@ Controller.prototype.focusAction = function ( action, scrollTo ) {
 
 Controller.prototype.getActions = function ( listener ) {
 	return this.actionsByListener[ listener || this.listener ] || [];
+};
+
+Controller.prototype.onSelect = function ( selection ) {
+	if ( this.getActions().length === 0 || selection.isNull() ) {
+		// Nothing to do
+		return;
+	}
+	const action = this.getActions().find(
+		( check ) => check.getHighlightSelections().some(
+			( highlight ) => highlight.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
+
+	this.focusAction( action || null, false );
 };
 
 Controller.prototype.onPosition = function () {
