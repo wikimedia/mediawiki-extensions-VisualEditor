@@ -29,7 +29,7 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
 	}
-	const check = mw.editcheck.editCheckFactory.create( null, 'addReference', mw.editcheck.config.addReference );
+	const check = mw.editcheck.editCheckFactory.create( 'addReference', null, mw.editcheck.config.addReference );
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
