@@ -206,6 +206,91 @@
 	margin-bottom: 100%;
 }
 
+/* Mobile sidebar */
+
+.ve-ui-editCheck-gutter {
+	display: none;
+}
+
+.ve-ui-editCheck-gutter-active {
+	div.ve-init-mw-target-surface.ve-ui-surface-visual {
+		// margin-right: 52px;
+	}
+
+	div.ve-ui-editCheckGutterSidebarDialog {
+		// display: block;
+		// position: absolute;
+		// top: 0;
+		// right: -52px;
+		// width: 44px;
+		// height: 100%;
+		background-color: @background-color-interactive-subtle;
+
+		.ve-ui-editCheck-gutter-action {
+			position: absolute;
+			width: 42px;
+			text-align: center;
+			margin-top: -3px;
+			min-height: 24px;
+
+			> .oo-ui-iconElement-icon {
+				width: 20px;
+				height: 20px;
+				margin-top: -4px;
+			}
+
+			label {
+				position: absolute;
+				top: 16px;
+				right: 5px;
+				display: block;
+				border-radius: 3px;
+				background-color: @accent-color-base;
+				color: @color-inverted;
+				font-size: @font-size-x-small;
+				line-height: 0.9;
+				padding: 3px;
+			}
+
+			&-error {
+				border-left: 2px solid @color-error;
+			}
+
+			&-warning {
+				border-left: 2px solid @color-warning;
+			}
+
+			&-notice {
+				border-left: 2px solid @color-notice;
+			}
+
+			&-success {
+				border-left: 2px solid @color-success;
+			}
+
+			&-inactive {
+				border-left: 2px solid @border-color-base;
+			}
+		}
+	}
+}
+
+.ve-editcheck-available .mw-mf {
+	.ve-init-mw-target-surface {
+		// 16 + (44 / 2)
+		margin: 0 38px;
+	}
+
+	.ve-ui-editCheck-sidebar-active .ve-init-mw-target-surface {
+		margin: 0 44px 0 16px;
+
+		.ve-ui-sidebarDialogWindowManager {
+			margin-left: 16px;
+			margin-right: -44px;
+		}
+	}
+}
+
 /* Selections */
 
 .ve-ce-surface-reviewMode + .ve-ui-overlay .ve-ce-surface-selections-editCheck .ve-ce-surface-selection {
