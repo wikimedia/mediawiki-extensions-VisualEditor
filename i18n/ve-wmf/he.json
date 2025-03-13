@@ -22,6 +22,8 @@
 	"tag-editcheck-references-description": "מערכת בדיקת עריכה חושבת שאולי היה צורך בהערת שוליים",
 	"tag-editcheck-references-activated": "מערכת בדיקת עריכה (הערות שוליים) הופעלה",
 	"tag-editcheck-references-activated-description": "מערכת בדיקת עריכה חושבת שאולי נוספת הערת שוליים, וממשק המשתמש של זה הוצג",
+	"tag-editcheck-references-shown": "הוצגה מערכת בדיקת עריכה (הערות שוליים)",
+	"tag-editcheck-references-shown-description": "מערכת בדיקת העריכת חושבת שהייתה נחוצה הערת שוליים, וממשק המשתמש שלה הוצג",
 	"tag-visualeditor": "עריכה חזותית",
 	"tag-visualeditor-description": "עריכה שנעשתה באמצעות [[{{MediaWiki:visualeditor-descriptionpagelink}}|העורך החזותי]]",
 	"tag-visualeditor-needcheck": "עריכה חזותית: נא לבדוק",
