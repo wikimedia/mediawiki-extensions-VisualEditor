@@ -208,22 +208,8 @@
 
 /* Mobile sidebar */
 
-.ve-ui-editCheck-gutter {
-	display: none;
-}
-
 .ve-ui-editCheck-gutter-active {
-	div.ve-init-mw-target-surface.ve-ui-surface-visual {
-		// margin-right: 52px;
-	}
-
 	div.ve-ui-editCheckGutterSidebarDialog {
-		// display: block;
-		// position: absolute;
-		// top: 0;
-		// right: -52px;
-		// width: 44px;
-		// height: 100%;
 		background-color: @background-color-interactive-subtle;
 
 		.ve-ui-editCheck-gutter-action {
@@ -275,19 +261,42 @@
 	}
 }
 
-.ve-editcheck-available .mw-mf {
-	.ve-init-mw-target-surface {
-		// 16 + (44 / 2)
-		margin: 0 38px;
-	}
+.ve-editcheck-available .mw-mf .ve-ce-surface {
+	margin-right: 16px;
+}
 
-	.ve-ui-editCheck-sidebar-active .ve-init-mw-target-surface {
-		margin: 0 44px 0 16px;
-
-		.ve-ui-sidebarDialogWindowManager {
-			margin-left: 16px;
-			margin-right: -44px;
+@media all and ( max-width: 993.4px ) {
+	.ve-editcheck-available .mw-mf {
+		.ve-init-mw-target-surface {
+			margin: 0 0 1em;
 		}
+
+		.ve-ce-surface {
+			// Stop reflow during the transition
+			max-width: calc( 100% - (44px + 16px + 16px) );
+			margin: 0 16px 0 32px;
+		}
+
+		.ve-ui-editCheck-sidebar-active .ve-ce-surface {
+			margin-left: 16px;
+		}
+
+		.ve-ui-editCheck-sidebar-active .ve-init-mw-target-surface {
+			margin: 0;
+		}
+	}
+}
+
+@media all and ( min-width: 993.4px ) and ( max-width: @min-width-breakpoint-desktop ) {
+	.mw-mf .ve-ui-editCheck-sidebar-active .ve-ui-sidebarDialogWindowManager {
+		margin-right: -44px;
+	}
+}
+
+@media all and ( min-width: @min-width-breakpoint-desktop ) {
+	/* stylelint-disable-next-line selector-class-pattern */
+	.mw-mf .ve-ui-editCheck-sidebar-active .overlay-content {
+		width: auto;
 	}
 }
 
