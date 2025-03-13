@@ -169,11 +169,14 @@ Controller.prototype.onSelect = function ( selection ) {
 		// Nothing to do
 		return;
 	}
-	const action = this.getActions().find(
+	const actions = this.getActions().filter(
 		( check ) => check.getHighlightSelections().some(
 			( highlight ) => highlight.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
 
-	this.focusAction( action || null, false );
+	if ( actions.length > 0 && actions.indexOf( this.focused ) === -1 ) {
+		// If the currently focused action is within the selection, don't jump around
+		this.focusAction( actions[ 0 ] || null, false );
+	}
 };
 
 Controller.prototype.onPosition = function () {
