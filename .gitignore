@@ -20,3 +20,4 @@ tests/selenium/log
 
 # OS
 .DS_Store
+/.stylelintcache
