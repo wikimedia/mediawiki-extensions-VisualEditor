@@ -5,6 +5,7 @@ mw.editcheck = {
 
 require( './EditCheckInspector.js' );
 require( './EditCheckDialog.js' );
+require( './EditCheckGutterSidebarDialog.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './BaseEditCheck.js' );

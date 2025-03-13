@@ -19,6 +19,7 @@ function Controller( target ) {
 	this.onDocumentChangeDebounced = ve.debounce( this.onDocumentChange.bind( this ), 100 );
 	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
 	this.onSelectDebounced = ve.debounce( this.onSelect.bind( this ), 100 );
+	this.onContextChangeDebounced = ve.debounce( this.onContextChange.bind( this ), 100 );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
 	this.scrollActionIntoViewDebounced = ve.debounce( this.scrollActionIntoView.bind( this ), 200, true );
@@ -44,43 +45,9 @@ Controller.prototype.setup = function () {
 		this.surface.getView().on( 'position', this.onPositionDebounced );
 		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
 		this.surface.getModel().on( 'select', this.onSelectDebounced );
+		this.surface.getModel().on( 'contextChange', this.onContextChangeDebounced );
 
-		this.on( 'actionsUpdated', ( listener, actions, newActions, discardedActions ) => {
-			// do we need to redraw anything?
-			if ( newActions.length || discardedActions.length ) {
-				if ( this.focused && discardedActions.indexOf( this.focused ) !== -1 ) {
-					this.focused = undefined;
-				}
-				this.drawSelections();
-				this.drawGutter();
-			}
-
-			// do we need to show mid-edit actions?
-			if ( listener !== 'onDocumentChange' ) {
-				return;
-			}
-			if ( !actions.length ) {
-				return;
-			}
-			let shownPromise;
-			const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
-			if ( !currentWindow || currentWindow.constructor.static.name !== 'sidebarEditCheckDialog' ) {
-				const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-				shownPromise = windowAction.open(
-					'sidebarEditCheckDialog',
-					{ listener: 'onDocumentChange', actions: actions, controller: this }
-				).then( () => {
-					ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
-				} );
-			} else {
-				shownPromise = ve.createDeferred().resolve().promise();
-			}
-			shownPromise.then( () => {
-				newActions.forEach( ( action ) => {
-					ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-midedit' } );
-				} );
-			} );
-		}, null, this );
+		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
 		setTimeout( () => this.onDocumentChange(), 100 );
@@ -109,6 +76,13 @@ Controller.prototype.setup = function () {
 			this.onPreSaveProcess( saveProcess );
 		}
 	} );
+};
+
+Controller.prototype.updatePositions = function () {
+	this.drawSelections();
+	this.drawGutter();
+
+	this.emit( 'position' );
 };
 
 Controller.prototype.refresh = function () {
@@ -154,10 +128,9 @@ Controller.prototype.removeAction = function ( listener, action ) {
 Controller.prototype.focusAction = function ( action, scrollTo ) {
 	this.focused = action;
 
-	this.drawSelections();
-	this.drawGutter();
-
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
+
+	this.updatePositions();
 };
 
 Controller.prototype.getActions = function ( listener ) {
@@ -165,6 +138,13 @@ Controller.prototype.getActions = function ( listener ) {
 };
 
 Controller.prototype.onSelect = function ( selection ) {
+	if ( OO.ui.isMobile() ) {
+		// On mobile we want to close the drawer if the keyboard is shown
+		if ( this.surface.getView().hasNativeCursorSelection() ) {
+			// A native cursor selection means the keyboard will be visible
+			this.closeDialog();
+		}
+	}
 	if ( this.getActions().length === 0 || selection.isNull() ) {
 		// Nothing to do
 		return;
@@ -176,8 +156,14 @@ Controller.prototype.onSelect = function ( selection ) {
 	this.focusAction( action || null, false );
 };
 
+Controller.prototype.onContextChange = function () {
+	if ( this.surface.getContext().isVisible() ) {
+		this.closeDialog();
+	}
+};
+
 Controller.prototype.onPosition = function () {
-	this.drawGutter();
+	this.updatePositions();
 
 	if ( this.getActions().length && this.focused && this.surface.getView().reviewMode ) {
 		this.scrollActionIntoViewDebounced( this.focused );
@@ -189,8 +175,48 @@ Controller.prototype.onDocumentChange = function () {
 		this.updateForListener( 'onDocumentChange' );
 	}
 
-	this.drawSelections();
-	this.drawGutter();
+	this.updatePositions();
+};
+
+Controller.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
+	// do we need to redraw anything?
+	if ( newActions.length || discardedActions.length ) {
+		if ( this.focused && discardedActions.indexOf( this.focused ) !== -1 ) {
+			this.focused = undefined;
+		}
+		this.updatePositions();
+	}
+
+	// do we need to show mid-edit actions?
+	if ( listener !== 'onDocumentChange' ) {
+		return;
+	}
+	if ( !actions.length ) {
+		return;
+	}
+	const windowName = OO.ui.isMobile() ? 'gutterSidebarEditCheckDialog' : 'sidebarEditCheckDialog';
+	let shownPromise;
+	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
+	if ( !currentWindow || currentWindow.constructor.static.name !== windowName ) {
+		this.target.$element.addClass( 've-ui-editCheck-sidebar-active' );
+		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
+		shownPromise = windowAction.open(
+			windowName,
+			{ listener: listener, actions: actions, controller: this }
+		).then( ( instance ) => {
+			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
+			instance.closed.then( () => {
+				this.target.$element.removeClass( 've-ui-editCheck-sidebar-active' );
+			} );
+		} );
+	} else {
+		shownPromise = ve.createDeferred().resolve().promise();
+	}
+	shownPromise.then( () => {
+		newActions.forEach( ( action ) => {
+			ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-midedit' } );
+		} );
+	} );
 };
 
 Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
@@ -217,53 +243,50 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 			surface.context.popup.containerPadding = 20;
 		}
 
-		saveProcess.next( () => {
+		saveProcess.next( () => this.closeSidebars().then( () => this.closeDialog().then( () => {
+			this.originalToolbar.toggle( false );
+			target.onContainerScroll();
 			const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-			// .always is not chainable
-			return windowAction.close( 'sidebarEditCheckDialog' ).closed.then( () => {}, () => {} ).then( () => {
-				this.originalToolbar.toggle( false );
-				target.onContainerScroll();
-				return windowAction.open( 'fixedEditCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
-					.then( ( instance ) => {
-						ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
-						actions.forEach( ( action ) => {
-							ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
-						} );
-						instance.closed.then( () => {}, () => {} ).then( () => {
-							surface.getView().setReviewMode( false );
-							this.listener = 'onDocumentChange';
-							this.focused = oldFocused;
-							// Re-open the mid-edit sidebar if necessary.
-							this.refresh();
-						} );
-						return instance.closing.then( ( data ) => {
-							this.restoreToolbar( target );
-
-							if ( $contextContainer ) {
-								surface.context.popup.$container = $contextContainer;
-								surface.context.popup.containerPadding = contextPadding;
-							}
-
-							target.onContainerScroll();
-
-							if ( data ) {
-								const delay = ve.createDeferred();
-								// If they inserted, wait 2 seconds on desktop
-								// before showing save dialog to make sure insertions are finialized
-								setTimeout( () => {
-									ve.track( 'counter.editcheck.preSaveChecksCompleted' );
-									delay.resolve();
-								}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
-								return delay.promise();
-							} else {
-								// closed via "back" or otherwise
-								ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
-								return ve.createDeferred().reject().promise();
-							}
-						} );
+			return windowAction.open( 'fixedEditCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
+				.then( ( instance ) => {
+					ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
+					actions.forEach( ( action ) => {
+						ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
 					} );
-			} );
-		} );
+					instance.closed.then( () => {}, () => {} ).then( () => {
+						surface.getView().setReviewMode( false );
+						this.listener = 'onDocumentChange';
+						this.focused = oldFocused;
+						// Re-open the mid-edit sidebar if necessary.
+						this.refresh();
+					} );
+					return instance.closing.then( ( data ) => {
+						this.restoreToolbar( target );
+
+						if ( $contextContainer ) {
+							surface.context.popup.$container = $contextContainer;
+							surface.context.popup.containerPadding = contextPadding;
+						}
+
+						target.onContainerScroll();
+
+						if ( data ) {
+							const delay = ve.createDeferred();
+							// If they inserted, wait 2 seconds on desktop
+							// before showing save dialog to make sure insertions are finialized
+							setTimeout( () => {
+								ve.track( 'counter.editcheck.preSaveChecksCompleted' );
+								delay.resolve();
+							}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
+							return delay.promise();
+						} else {
+							// closed via "back" or otherwise
+							ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
+							return ve.createDeferred().reject().promise();
+						}
+					} );
+				} );
+		} ) ) );
 	} else {
 		this.listener = 'onDocumentChange';
 		// Counterpart to earlier preSaveChecksShown, for use in tracking
@@ -363,6 +386,9 @@ Controller.prototype.drawSelections = function () {
 };
 
 Controller.prototype.drawGutter = function () {
+	if ( OO.ui.isMobile() ) {
+		return;
+	}
 	this.$highlights.empty();
 	const actions = this.getActions();
 	if ( actions.length === 0 ) {
@@ -400,24 +426,6 @@ Controller.prototype.drawGutter = function () {
 	} );
 
 	surfaceView.appendHighlights( this.$highlights, false );
-
-	this.align();
-};
-
-Controller.prototype.align = function () {
-	if ( this.listener !== 'onDocumentChange' ) {
-		return;
-	}
-	const surfaceTop = this.surface.getView().$element.offset().top + 10;
-	this.getActions().forEach( ( action ) => {
-		if ( action.widget ) {
-			action.widget.$element.css( 'margin-top', '' );
-			action.widget.$element.css(
-				'margin-top',
-				Math.max( 0, action.top + surfaceTop - action.widget.$element.offset().top )
-			);
-		}
-	} );
 };
 
 Controller.prototype.scrollActionIntoView = function ( action ) {
@@ -440,6 +448,23 @@ Controller.prototype.scrollActionIntoView = function ( action ) {
 		padding: padding,
 		alignToTop: true
 	} );
+};
+
+Controller.prototype.closeDialog = function ( keepFocus ) {
+	if ( !keepFocus ) {
+		this.focusAction( undefined );
+	}
+	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
+	return windowAction.close( 'fixedEditCheckDialog' ).closed.then( () => {}, () => {} );
+};
+
+Controller.prototype.closeSidebars = function () {
+	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
+	if ( currentWindow ) {
+		// .always is not chainable
+		return currentWindow.close().closed.then( () => {}, () => {} );
+	}
+	return ve.createDeferred().resolve().promise();
 };
 
 module.exports = {

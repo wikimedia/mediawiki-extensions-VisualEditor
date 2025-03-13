@@ -89,10 +89,17 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
 };
 
-ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions ) {
+ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
 	if ( listener !== this.listener ) {
 		return;
 	}
+	if ( this.updateFilter ) {
+		actions = this.updateFilter( actions, newActions, discardedActions, this.currentActions );
+	}
+	this.showActions( actions, newActions );
+};
+
+ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions ) {
 	this.currentActions = actions;
 	if ( actions.length === 0 ) {
 		return this.close( 'complete' );
@@ -107,6 +114,10 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
 	this.refresh();
 
 	this.setCurrentOffset( newOffset, false );
+};
+
+ve.ui.EditCheckDialog.prototype.hasAction = function ( action ) {
+	return this.currentActions.some( ( caction ) => action.equals( caction ) );
 };
 
 ve.ui.EditCheckDialog.prototype.refresh = function () {
@@ -166,7 +177,7 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 };
 
 ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
-	this.setCurrentOffset( index, scrollTo, true );
+	this.setCurrentOffset( this.currentActions.indexOf( action ), scrollTo, true );
 };
 
 /**
@@ -178,24 +189,29 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
 		this.controller.on( 'focusAction', this.onFocusAction, false, this );
 
+		const actions = data.actions || this.controller.getActions( this.listener );
+
 		this.listener = data.listener || 'onDocumentChange';
-		this.currentOffset = 0;
-		this.currentActions = data.actions || this.controller.getActions( this.listener );
 		this.surface = data.surface;
+		this.updateFilter = data.updateFilter;
 
 		this.singleAction = ( this.listener === 'onBeforeSave' ) || OO.ui.isMobile();
 
 		this.closeButton.toggle( OO.ui.isMobile() );
-		this.footer.toggle(
-			this.singleAction &&
-			// If we're in single-check mode don't show even the disabled pagers:
-			!mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle
-		);
+		if ( data.footer !== undefined ) {
+			this.footer.toggle( data.footer );
+		} else {
+			this.footer.toggle(
+				this.singleAction &&
+				// If we're in single-check mode don't show even the disabled pagers:
+				!mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle
+			);
+		}
 		this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.singleAction );
 
 		this.surface.context.hide();
 
-		this.onActionsUpdated( this.listener, this.currentActions, this.currentActions, [] );
+		this.showActions( actions, actions );
 	}, this );
 };
 
@@ -274,7 +290,6 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, col
 			}
 		}
 	}
-	this.controller.align();
 };
 
 /**
@@ -328,14 +343,52 @@ ve.ui.SidebarEditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.SidebarEditCheckDialog.super.prototype.getSetupProcess.call( this, data );
 	// Mixin method
-	return ve.ui.EditCheckDialog.prototype.getSetupProcess.call( this, data, process );
+	return ve.ui.EditCheckDialog.prototype.getSetupProcess.call( this, data, process ).next( () => {
+		this.controller.on( 'position', this.onPosition, null, this );
+	} );
 };
 
 ve.ui.SidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.SidebarEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
 	// Mixin method
-	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process );
+	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process ).next( () => {
+		this.controller.off( 'position', this.onPosition, this );
+	} );
+};
+
+ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
+	if ( this.listener !== 'onDocumentChange' ) {
+		return;
+	}
+	const surfaceView = this.surface.getView();
+	const surfaceTop = surfaceView.$element.offset().top + 10;
+	this.currentActions.forEach( ( action ) => {
+		const widget = action.widget;
+		if ( widget ) {
+			let top = Infinity;
+			action.getHighlightSelections().forEach( ( selection ) => {
+				const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
+				const rect = selectionView.getSelectionBoundingRect();
+				if ( !rect ) {
+					return;
+				}
+				top = Math.min( top, rect.top );
+			} );
+			widget.$element.css( 'margin-top', '' );
+			widget.$element.css(
+				'margin-top',
+				Math.max( 0, top + surfaceTop - widget.$element.offset().top )
+			);
+		}
+	} );
+};
+
+ve.ui.SidebarEditCheckDialog.prototype.onToggleCollapse = function () {
+	// mixin
+	ve.ui.EditCheckDialog.prototype.onToggleCollapse.apply( this, arguments );
+
+	this.onPosition();
 };
 
 /* Registration */
