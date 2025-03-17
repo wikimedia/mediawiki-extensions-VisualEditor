@@ -17,6 +17,9 @@ ve.ui.GutterSidebarEditCheckDialog.static.name = 'gutterSidebarEditCheckDialog';
 
 ve.ui.GutterSidebarEditCheckDialog.static.size = 'gutter';
 
+// The gutter should never steal the focus, as it's intended to be a discreet notification
+ve.ui.GutterSidebarEditCheckDialog.static.activeSurface = true;
+
 ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.GutterSidebarEditCheckDialog.super.prototype.initialize.call( this );
