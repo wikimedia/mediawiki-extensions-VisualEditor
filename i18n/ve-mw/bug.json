@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Notanotheramy"
+			"Notanotheramy",
+			"Rdwnnr"
 		]
 	},
-	"tooltip-ca-ve-edit": "ᨄᨉᨙᨌᨙᨂᨗ ᨕᨗᨐᨕᨙ ᨒᨛᨄᨂᨙ"
+	"visualeditor-ca-editsource-section": "padéccéng apoléng",
+	"visualeditor-dialog-transclusion-add-param-save": "Tambai",
+	"visualeditor-dialog-transclusion-add-template": "Tambai accuwang",
+	"visualeditor-dialog-transclusion-add-template-save": "Tambai"
 }

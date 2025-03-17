@@ -13,7 +13,7 @@
 			"GianAntonucci"
 		]
 	},
-	"tooltip-ca-createsource": "Crea lu codici surgenti di sta pàggina",
+	"tooltip-ca-createsource": "Crìa lu còdici di sta pàggina",
 	"tooltip-ca-editsource": "Cancia lu codici surgenti di sta pàggina",
 	"tooltip-ca-ve-edit": "Cancia sta pàggina",
 	"visualeditor-advancedsettings-tool": "Mpustazzioni avanzati",
@@ -21,7 +21,7 @@
 	"visualeditor-beta-warning": "VisualEditor è n virsioni 'beta'. Putìssitu ncuntrari erruri ntô software, e certi parti dâ pàggina putìssiru non arrisurtari canciàbbili. Pi turnari a canciari direttamenti la surgenti quannu voi voi, senza pèrdiri li canciamenti, grapi lu menù a scìnniri a latu di \"{{int:visualeditor-toolbar-savedialog}}\" e scegghi \"{{int:visualeditor-mweditmodesource-tool}}\".",
 	"visualeditor-browserwarning": "Stai usannu nu browser ca nun è suppurtatu ufficiarmenti di VisualEditor.",
 	"visualeditor-ca-createlocaldescriptionsource": "Agghiunci na discrizzioni lucali tràmiti surgenti",
-	"visualeditor-ca-createsource": "Crea surgenti",
+	"visualeditor-ca-createsource": "Crìa còdici",
 	"visualeditor-ca-editsource": "Cancia lu còdici",
 	"visualeditor-ca-editsource-section": "cancia lu còdici",
 	"visualeditor-categories-tool": "Catigurìi",
@@ -145,7 +145,7 @@
 	"visualeditor-savedialog-identify-user": "Trasisti n qualitati di [[User:$1|$1]]. Siddu sarbi, lu tò canciamentu veni assuciatu a sta utenza.",
 	"visualeditor-savedialog-label-resolve-conflict": "Risorvi nu cunflittu",
 	"visualeditor-savedialog-label-review": "Ritalìa li to canciamenti",
-	"visualeditor-savedialog-label-review-good": "Arritorna ô modulu di sarbataggiu",
+	"visualeditor-savedialog-label-review-good": "Torna ô mòdulu di sarbamentu",
 	"visualeditor-savedialog-label-save-short": "Sarva",
 	"visualeditor-savedialog-label-save-short-start": "Sarva...",
 	"visualeditor-savedialog-review-visual": "Visuali",

@@ -203,7 +203,7 @@
 	"visualeditor-mweditmodeve-warning": "دەگوێزرێیتەوە بۆ دەستکاریکردنی دیداری.\nبەردەوام دەبیت؟",
 	"visualeditor-mweditmodewt-popup-body": "ھەرکاتێک ویستت دەتوانیت بە کرتەکردن لەسەر ئەم وێنۆچکەیە بگەڕێیتەوە بۆ دەستکاریکردنی سەرچاوە.",
 	"visualeditor-mweditmodewt-popup-title": "بۆ دەستکاریکردنی دیداری گوێزرایتەوە",
-	"visualeditor-mwgallerycontext-description": "$1 وێنە",
+	"visualeditor-mwgallerycontext-description": "$1 {{PLURAL:$1|وێنە}}",
 	"visualeditor-mwgallerydialog-caption-field-label": "شرۆڤەی پێشانگا",
 	"visualeditor-mwgallerydialog-card-images": "وێنەکان",
 	"visualeditor-mwgallerydialog-card-options": "ھەڵبژاردەکان",
