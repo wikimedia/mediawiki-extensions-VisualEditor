@@ -13,6 +13,8 @@
 	"tag-editcheck-references-description": "EditCheck мисли дека треба навод",
 	"tag-editcheck-references-activated": "Вклучена проверката на уредувања (наводи)",
 	"tag-editcheck-references-activated-description": "Проверката на уредувања смета дека може да треба навод, и се покажа корисничкиот посредник",
+	"tag-editcheck-references-shown": "Прикажана проверка на уредување (наводи)",
+	"tag-editcheck-references-shown-description": "Проверката на уредувања смета дека може да треба навод, и се покажа корисничкиот посредник",
 	"tag-visualeditor": "Нагледно уредување",
 	"tag-visualeditor-description": "Уредување направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|нагледниот уредник]]",
 	"tag-visualeditor-needcheck": "Нагледен уредник: Проверка",
