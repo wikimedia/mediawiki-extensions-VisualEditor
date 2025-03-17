@@ -1164,7 +1164,7 @@ class Hooks implements
 			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
 			'editCheck' => $veConfig->get( 'VisualEditorEditCheck' ),
 			'editCheckSingle' => $veConfig->get( 'VisualEditorEditCheckSingleCheckMode' ),
-			'editCheckExperimental' => $veConfig->get( 'VisualEditorEditCheckLoadExperimental' ),
+			'editCheckExperimental' => (bool)$veConfig->get( 'VisualEditorEditCheckLoadExperimental' ),
 			'editCheckABTest' => $veConfig->get( 'VisualEditorEditCheckABTest' ),
 			'editCheckReliabilityAvailable' => ApiEditCheckReferenceUrl::isAvailable(),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
