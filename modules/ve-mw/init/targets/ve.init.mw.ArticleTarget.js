@@ -2293,7 +2293,7 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( mod
 		// `blockinfo` is not used by this client
 		data.canEdit = this.canEdit;
 		data.checkboxesDef = this.checkboxesDef;
-		// `checkboxesMessages` is not needed, it's only used once per page load
+		data.checkboxesMessages = this.checkboxesMessages; // needed in case we end up autosaving with this data
 		// `content` is already set
 		data.copyrightWarning = this.copyrightWarning;
 		data.etag = this.etag;
