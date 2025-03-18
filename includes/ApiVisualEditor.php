@@ -435,20 +435,29 @@ class ApiVisualEditor extends ApiBase {
 						&& $this->tempUserCreator->isAutoCreateAction( 'edit' )
 						&& $permissionManager->userHasRight( $user, 'createaccount' );
 
+				// phpcs:disable MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment
+				/** @phpcs-require-sorted-array */
 				$result = [
-					'result' => 'success',
-					'notices' => $notices,
-					'copyrightWarning' => $copyrightWarning,
+					// --------------------------------------------------------------------------------
+					// This should match ArticleTarget#getWikitextDataPromiseForDoc and ArticleTarget#storeDocState
+					// --------------------------------------------------------------------------------
+					'basetimestamp' => $baseTimestamp,
+					'blockinfo' => $blockinfo, // only used by MobileFrontend EditorGateway
+					'canEdit' => $canEdit,
 					'checkboxesDef' => $checkboxesDef,
 					'checkboxesMessages' => $checkboxesMessages,
-					'protectedClasses' => implode( ' ', $protectedClasses ),
-					'basetimestamp' => $baseTimestamp,
-					'starttimestamp' => wfTimestampNow(),
+					// 'content' => ..., // optional, see below
+					'copyrightWarning' => $copyrightWarning,
+					// 'etag' => ..., // optional, see below
+					'notices' => $notices,
 					'oldid' => $oldid,
-					'blockinfo' => $blockinfo,
+					// 'preloaded' => ..., // optional, see below
+					'protectedClasses' => implode( ' ', $protectedClasses ),
+					'result' => 'success', // probably unused?
+					'starttimestamp' => wfTimestampNow(),
 					'wouldautocreate' => $wouldautocreate,
-					'canEdit' => $canEdit,
 				];
+				// phpcs:enable MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment
 				if ( isset( $restbaseHeaders['etag'] ) ) {
 					$result['etag'] = $restbaseHeaders['etag'];
 				}

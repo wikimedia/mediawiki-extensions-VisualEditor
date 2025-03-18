@@ -540,20 +540,26 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 			section: ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null
 		},
 		response: {
-			etag: this.etag,
-			fromEditedState: this.fromEditedState,
-			switched: this.switched,
-			preloaded: this.preloaded,
-			notices: this.remoteNotices,
-			protectedClasses: this.protectedClasses,
+			// --------------------------------------------------------------------------------
+			// This should match the API result in ApiVisualEditor.php and ArticleTarget#getWikitextDataPromiseForDoc
+			// --------------------------------------------------------------------------------
 			basetimestamp: this.baseTimeStamp,
-			starttimestamp: this.startTimeStamp,
-			oldid: this.revid,
+			// `blockinfo` is not used by this client
 			canEdit: this.canEdit,
-			wouldautocreate: this.wouldautocreate,
-			copyrightWarning: this.copyrightWarning,
 			checkboxesDef: this.checkboxesDef,
-			checkboxesMessages: this.checkboxesMessages
+			checkboxesMessages: this.checkboxesMessages,
+			// `content` is not needed here, we store `html` instead
+			copyrightWarning: this.copyrightWarning,
+			etag: this.etag,
+			fromEditedState: this.fromEditedState, // extra
+			notices: this.remoteNotices,
+			oldid: this.revid,
+			preloaded: this.preloaded,
+			protectedClasses: this.protectedClasses,
+			// `result` is not used
+			starttimestamp: this.startTimeStamp,
+			switched: this.switched,
+			wouldautocreate: this.wouldautocreate
 		}
 	}, html );
 };
@@ -2280,17 +2286,24 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 ve.init.mw.ArticleTarget.prototype.getWikitextDataPromiseForDoc = function ( modified ) {
 	return this.serialize( this.getDocToSave() ).then( ( data ) => {
 		// HACK - add parameters the API doesn't provide for a VE->WT switch
+		// --------------------------------------------------------------------------------
+		// This should match the API result in ApiVisualEditor.php and ArticleTarget#storeDocState
+		// --------------------------------------------------------------------------------
+		data.basetimestamp = this.baseTimeStamp;
+		// `blockinfo` is not used by this client
+		data.canEdit = this.canEdit;
+		data.checkboxesDef = this.checkboxesDef;
+		// `checkboxesMessages` is not needed, it's only used once per page load
+		// `content` is already set
 		data.copyrightWarning = this.copyrightWarning;
 		data.etag = this.etag;
-		data.fromEditedState = modified;
+		data.fromEditedState = modified; // this replaces data.preloaded
 		data.notices = this.remoteNotices;
-		data.protectedClasses = this.protectedClasses;
-		data.basetimestamp = this.baseTimeStamp;
-		data.starttimestamp = this.startTimeStamp;
 		data.oldid = this.revid;
-		data.canEdit = this.canEdit;
+		data.protectedClasses = this.protectedClasses;
+		// `result` is not used
+		data.starttimestamp = this.startTimeStamp;
 		data.wouldautocreate = this.wouldautocreate;
-		data.checkboxesDef = this.checkboxesDef;
 		// Wrap up like a response object as that is what dataPromise is expected to be
 		return { visualeditoredit: data };
 	} );
