@@ -14,6 +14,8 @@
 	"tag-editcheck-references-description": "Hervez EditCheck e vefe ezhomm eus un daveenn",
 	"tag-editcheck-references-activated": "Edit Check (daveoù) gweredekaet",
 	"tag-editcheck-references-activated-description": "Hervez EditCheck e vefe ezhomm eus un daveenn, ha diskouezet eo bet an etrefas implijer",
+	"tag-editcheck-references-shown": "Edit Check (daveoù) diskouezet",
+	"tag-editcheck-references-shown-description": "Hervez EditCheck e vefe ezhomm eus un daveenn, ha diskouezet eo bet an etrefas implijer",
 	"tag-visualeditor": "Gwelaozer",
 	"tag-visualeditor-description": "Kemm graet gant ar [[{{MediaWiki:visualeditor-descriptionpagelink}}|gwelaozer]]",
 	"tag-visualeditor-needcheck": "Gwelaozer: Da wiriañ",
