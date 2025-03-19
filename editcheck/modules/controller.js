@@ -54,6 +54,7 @@ Controller.prototype.setup = function () {
 
 		this.surface.on( 'destroy', () => {
 			this.off( 'actionsUpdated' );
+			this.$highlights.empty();
 
 			this.surface = null;
 			this.actionsByListener = {};
@@ -138,6 +139,10 @@ Controller.prototype.getActions = function ( listener ) {
 };
 
 Controller.prototype.onSelect = function ( selection ) {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
 	if ( OO.ui.isMobile() ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
@@ -160,12 +165,21 @@ Controller.prototype.onSelect = function ( selection ) {
 };
 
 Controller.prototype.onContextChange = function () {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
 	if ( this.surface.getContext().isVisible() ) {
 		this.closeDialog();
 	}
 };
 
 Controller.prototype.onPosition = function () {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
+
 	this.updatePositions();
 
 	if ( this.getActions().length && this.focused && this.surface.getView().reviewMode ) {
@@ -174,6 +188,10 @@ Controller.prototype.onPosition = function () {
 };
 
 Controller.prototype.onDocumentChange = function () {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
 	if ( this.listener !== 'onBeforeSave' ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
