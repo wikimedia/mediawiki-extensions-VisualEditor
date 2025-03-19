@@ -123,20 +123,25 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 
 			this.initialSelection = fragment.getSelection();
 			this.fragment = fragment;
-			this.initialLabelText = this.fragment.getText();
+			this.initialLabel = this.fragment.getText();
 
 			let title;
 			if ( linkMatches ) {
 				// Group 1 is the link target, group 2 is the label after | if present
 				title = mw.Title.newFromText( linkMatches[ 1 ] );
-				this.initialLabelText = linkMatches[ 2 ] || linkMatches[ 1 ];
+				this.initialLabel = linkMatches[ 2 ] || linkMatches[ 1 ];
 				// HACK: Remove escaping probably added by this tool.
 				// We should really do a full parse from wikitext to HTML if
 				// we see any syntax
-				this.initialLabelText = this.initialLabelText.replace( /<nowiki>(\]{2,})<\/nowiki>/g, '$1' );
+				this.initialLabel = this.initialLabel.replace( /<nowiki>(\]{2,})<\/nowiki>/g, '$1' );
 			} else {
-				title = mw.Title.newFromText( this.initialLabelText );
+				title = mw.Title.newFromText( this.initialLabel );
 			}
+
+			// We've skipped ve.ui.AnnotationInspector#getSetupProcess. Set isNew here so
+			// that getInsertionData works correctly.
+			this.isNew = !linkMatches;
+
 			if ( title ) {
 				this.initialAnnotation = this.newInternalLinkAnnotationFromTitle( title );
 			}
@@ -151,6 +156,8 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 			);
 
 			this.title.setLabel( inspectorTitle ).setTitle( inspectorTitle );
+			this.labelInput.setValue( this.initialLabel );
+
 			this.annotationInput.setReadOnly( this.isReadOnly() );
 
 			this.actions.setMode( this.getMode() );
@@ -173,21 +180,20 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 		.first( () => {
 			const wgNamespaceIds = mw.config.get( 'wgNamespaceIds' ),
 				annotation = this.getAnnotation(),
-				fragment = this.getFragment(),
-				insertion = this.getInsertionText();
+				fragment = this.getFragment();
+
+			const insertionText = this.getInsertionText();
+			const insertText = this.initialSelection.isCollapsed() && insertionText.length;
 
 			if ( data && data.action === 'done' && annotation ) {
-				const insert = this.initialSelection.isCollapsed() && insertion.length;
-				let labelText;
-				if ( insert ) {
-					fragment.insertContent( insertion );
-					labelText = insertion;
-				} else {
-					labelText = this.initialLabelText;
-				}
-
 				// Build internal links locally
 				if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
+					let labelText;
+					if ( insertText ) {
+						labelText = insertionText;
+					} else {
+						labelText = this.initialLabel;
+					}
 					if ( labelText.indexOf( ']]' ) !== -1 ) {
 						labelText = labelText.replace( /(\]{2,})/g, '<nowiki>$1</nowiki>' );
 					}
@@ -214,6 +220,10 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 
 					fragment.insertContent( '[[' + prefix + targetText + labelText + ']]' );
 				} else {
+					const replace = !this.isNew;
+					if ( replace || this.shouldInsertText() ) {
+						fragment.insertContent( this.getInsertionData() );
+					}
 					// Annotating the surface will send the content to Parsoid before
 					// it is inserted into the wikitext document. It is slower but it
 					// will handle all cases.
@@ -223,7 +233,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 
 				// Fix selection after annotating is complete
 				fragment.getPending().then( () => {
-					if ( insert ) {
+					if ( insertText ) {
 						fragment.collapseToEnd().select();
 					} else {
 						fragment.select();
