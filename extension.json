@@ -959,6 +959,7 @@
 				"lib/ve/src/dm/annotations/ve.dm.DatetimeAnnotation.js",
 				"lib/ve/src/dm/annotations/ve.dm.DefinitionAnnotation.js",
 				"lib/ve/src/dm/annotations/ve.dm.DeleteAnnotation.js",
+				"lib/ve/src/dm/annotations/ve.dm.DiffAnnotation.js",
 				"lib/ve/src/dm/annotations/ve.dm.FontAnnotation.js",
 				"lib/ve/src/dm/annotations/ve.dm.HighlightAnnotation.js",
 				"lib/ve/src/dm/annotations/ve.dm.InsertAnnotation.js",
