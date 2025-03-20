@@ -28,6 +28,8 @@
 	"tag-editcheck-references-description": "EditCheck denkt dat er een referentie nodig kan zijn",
 	"tag-editcheck-references-activated": "EditCheck (referenties) geactiveerd",
 	"tag-editcheck-references-activated-description": "EditCheck denkt dat er een referentie nodig kan zijn, en de gebruikersinterface is weergegeven",
+	"tag-editcheck-references-shown": "EditCheck (referenties) weergegeven",
+	"tag-editcheck-references-shown-description": "EditCheck denkt dat er een referentie nodig kan zijn, en de gebruikersinterface is weergegeven",
 	"tag-visualeditor": "Visuele tekstverwerker",
 	"tag-visualeditor-description": "Bewerking gedaan met de [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuele tekstverwerker]]",
 	"tag-visualeditor-needcheck": "Visuele tekstverwerker: nakijken",
