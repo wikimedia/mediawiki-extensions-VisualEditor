@@ -23,7 +23,7 @@
 	"license-name": "MIT",
 	"type": "editor",
 	"requires": {
-		"MediaWiki": ">= 1.43"
+		"MediaWiki": ">= 1.44"
 	},
 	"callback": "MediaWiki\\Extension\\VisualEditor\\Hooks::onRegistration",
 	"ServiceWiringFiles": [
@@ -221,7 +221,10 @@
 		"RecentChange_save": "VisualEditorHooks",
 		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks",
 		"ResourceLoaderGetConfigVars": "VisualEditorHooks",
-		"ResourceLoaderRegisterModules": [ "VisualEditorHooks", "EditCheckHooks" ],
+		"ResourceLoaderRegisterModules": [
+			"VisualEditorHooks",
+			"EditCheckHooks"
+		],
 		"SkinEditSectionLinks": "VisualEditorHooks",
 		"SkinTemplateNavigation::Universal": "VisualEditorHooks",
 		"UserLoggedIn": "VisualEditorHooks"
