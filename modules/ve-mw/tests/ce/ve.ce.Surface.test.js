@@ -33,22 +33,6 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 		{
 			documentHtml: '<p></p>',
 			rangeOrSelection: new ve.Range( 1 ),
-			pasteHtml: 'a<sup id="cite_ref-1" class="reference"><a href="./Article#cite_note-1">[1]</a></sup>b',
-			expectedRangeOrSelection: new ve.Range( 3 ),
-			expectedHtml: '<p>ab</p>',
-			msg: 'Read mode references stripped'
-		},
-		{
-			documentHtml: '<p></p>',
-			rangeOrSelection: new ve.Range( 1 ),
-			pasteHtml: 'a<sup typeof="mw:Extension/ref" data-mw="{}" class="mw-ref reference" about="#mwt1" id="cite_ref-foo-0" rel="dc:references"><a href="./Article#cite_note-foo-0"><span class="mw-reflink-text ve-pasteProtect">[1]</span></a></sup>b',
-			expectedRangeOrSelection: new ve.Range( 5 ),
-			expectedHtml: '<p>a<sup typeof="mw:Extension/ref" data-mw="{&quot;name&quot;:&quot;ref&quot;}" class="mw-ref reference"><a style="counter-reset: mw-Ref 1;"><span class="mw-reflink-text">[1]</span></a></sup>b</p>',
-			msg: 'VE references not stripped'
-		},
-		{
-			documentHtml: '<p></p>',
-			rangeOrSelection: new ve.Range( 1 ),
 			pasteHtml: '<a href="https://example.net/">Lorem</a> <a href="not-a-protocol:Some%20text">ipsum</a> <a href="mailto:example@example.net">dolor</a> <a href="javascript:alert()">sit amet</a>',
 			expectedRangeOrSelection: new ve.Range( 27 ),
 			// hrefs with invalid protocols get removed by DOMPurify, and these links become spans in
