@@ -64,7 +64,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
 
 ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions ) {
 	if ( actions.length === 0 ) {
-		return this.close();
+		return this.close( 'complete' );
 	}
 
 	const surfaceView = this.surface.getView();

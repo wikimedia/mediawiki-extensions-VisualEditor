@@ -166,7 +166,7 @@ Controller.prototype.onSelect = function ( selection ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
 			// A native cursor selection means the keyboard will be visible
-			this.closeDialog();
+			this.closeDialog( 'mobile-keyboard' );
 		}
 	}
 	if ( this.getActions().length === 0 || selection.isNull() ) {
@@ -187,7 +187,7 @@ Controller.prototype.onContextChange = function () {
 	}
 	if ( OO.ui.isMobile() && this.surface.getContext().isVisible() ) {
 		// The context overlaps the drawer on mobile, so we should get rid of the drawer
-		this.closeDialog();
+		this.closeDialog( 'context' );
 	}
 };
 
@@ -281,7 +281,7 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 			surface.context.popup.containerPadding = 20;
 		}
 
-		saveProcess.next( () => this.closeSidebars().then( () => this.closeDialog().then( () => {
+		saveProcess.next( () => this.closeSidebars( 'saveProcess' ).then( () => this.closeDialog( 'saveProcess' ).then( () => {
 			this.originalToolbar.toggle( false );
 			target.onContainerScroll();
 			const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
@@ -488,19 +488,17 @@ Controller.prototype.scrollActionIntoView = function ( action ) {
 	} );
 };
 
-Controller.prototype.closeDialog = function ( keepFocus ) {
-	if ( !keepFocus ) {
-		this.focusAction( undefined );
-	}
+Controller.prototype.closeDialog = function ( action ) {
+	this.focusAction( undefined );
 	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-	return windowAction.close( 'fixedEditCheckDialog' ).closed.then( () => {}, () => {} );
+	return windowAction.close( 'fixedEditCheckDialog', action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
 };
 
-Controller.prototype.closeSidebars = function () {
+Controller.prototype.closeSidebars = function ( action ) {
 	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 	if ( currentWindow ) {
 		// .always is not chainable
-		return currentWindow.close().closed.then( () => {}, () => {} );
+		return currentWindow.close( action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
 	}
 	return ve.createDeferred().resolve().promise();
 };
