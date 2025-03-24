@@ -26,7 +26,8 @@
 			"Toniher",
 			"Unapersona",
 			"Vriullop",
-			"Lluis Cat"
+			"Lluis Cat",
+			"Lhanars"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -158,8 +159,10 @@
 	"visualeditor-dialog-table-wikitable": "Amb estil (Wikitable)",
 	"visualeditor-dialog-template-title": "Plantilla",
 	"visualeditor-dialog-transclusion-template-title-nonexistent": "Aquesta plantilla no existeix.",
+	"visualeditor-dialog-transclusion-add-wikitext": "Afegeix el codi wiki",
 	"visualeditor-dialog-transclusion-add-template": "Afegeix una plantilla",
 	"visualeditor-dialog-transclusion-add-template-save": "Afegeix",
+	"visualeditor-dialog-transclusion-add-undocumented-param": "Afegeix un paràmetre no documentat.",
 	"visualeditor-dialog-transclusion-close-confirmation-prompt": "Voleu tancar l'editor de plantilles? Perdreu tots els canvis. Aquesta acció no es pot desfer.",
 	"visualeditor-dialog-transclusion-collapse-options": "Amaga les opcions",
 	"visualeditor-dialog-transclusion-confirmation-discard": "Descarta les modificacions.",
