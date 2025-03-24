@@ -105,6 +105,10 @@
 		"VisualEditorSourceFeedbackTitle": {
 			"value": false
 		},
+		"VisualEditorMobileInsertMenu": {
+			"description": "Temporary deployment flag for adding an insert menu on mobile.",
+			"value": false
+		},
 		"VisualEditorTabMessages": {
 			"value": {
 				"edit": null,

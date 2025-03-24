@@ -1173,6 +1173,7 @@ class Hooks implements
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
 			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
+			'mobileInsertMenu' => $veConfig->get( 'VisualEditorMobileInsertMenu' ),
 			// TODO: Remove when all usages in .js files are removed
 			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $extensionRegistry->isLoaded( 'CirrusSearch' ),
