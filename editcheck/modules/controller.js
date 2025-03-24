@@ -127,6 +127,11 @@ Controller.prototype.removeAction = function ( listener, action ) {
 };
 
 Controller.prototype.focusAction = function ( action, scrollTo ) {
+	if ( !scrollTo && action === this.focused ) {
+		// Don't emit unnecessary events if there is no change or scroll
+		return;
+	}
+
 	this.focused = action;
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
@@ -158,10 +163,7 @@ Controller.prototype.onSelect = function ( selection ) {
 		( check ) => check.getHighlightSelections().some(
 			( highlight ) => highlight.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
 
-	if ( actions.length > 0 && actions.indexOf( this.focused ) === -1 ) {
-		// If the currently focused action is within the selection, don't jump around
-		this.focusAction( actions[ 0 ] || null, false );
-	}
+	this.focusAction( actions[ 0 ] || null, false );
 };
 
 Controller.prototype.onContextChange = function () {
