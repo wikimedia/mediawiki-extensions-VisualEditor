@@ -101,10 +101,11 @@ class Hooks implements
 		'visualeditor-wikitext',
 		// Edit check
 		'editcheck-references',
-		'editcheck-references-activated',
+		'editcheck-references-shown',
 		'editcheck-newcontent',
 		'editcheck-newreference',
 		// No longer in active use:
+		'editcheck-references-activated',
 		'editcheck-reference-decline-common-knowledge',
 		'editcheck-reference-decline-irrelevant',
 		'editcheck-reference-decline-uncertain',
