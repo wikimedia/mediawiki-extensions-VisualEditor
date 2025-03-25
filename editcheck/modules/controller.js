@@ -171,7 +171,8 @@ Controller.prototype.onContextChange = function () {
 		// This is debounced, and could potentially be called after teardown
 		return;
 	}
-	if ( this.surface.getContext().isVisible() ) {
+	if ( OO.ui.isMobile() && this.surface.getContext().isVisible() ) {
+		// The context overlaps the drawer on mobile, so we should get rid of the drawer
 		this.closeDialog();
 	}
 };
