@@ -162,6 +162,10 @@ Controller.prototype.onSelect = function ( selection ) {
 		// This is debounced, and could potentially be called after teardown
 		return;
 	}
+	if ( this.surface.getView().reviewMode ) {
+		// In review mode the selection and display of checks is being managed by the dialog
+		return;
+	}
 	if ( OO.ui.isMobile() ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
