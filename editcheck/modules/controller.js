@@ -37,6 +37,9 @@ Controller.prototype.setup = function () {
 			// has references added. As such, disable in source mode for now.
 			return;
 		}
+		if ( !this.editChecksArePossible() ) {
+			return;
+		}
 		// ideally this would happen slightly earlier:
 		document.documentElement.classList.add( 've-editcheck-available' );
 
@@ -77,6 +80,17 @@ Controller.prototype.setup = function () {
 			this.onPreSaveProcess( saveProcess );
 		}
 	} );
+};
+
+Controller.prototype.editChecksArePossible = function () {
+	return [ 'onBeforeSave', 'onDocumentChange' ].some(
+		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
+			( checkName ) => {
+				const check = mw.editcheck.editCheckFactory.create( checkName, this, mw.editcheck.config[ checkName ] );
+				return check.canBeShown();
+			}
+		)
+	);
 };
 
 Controller.prototype.updatePositions = function () {
