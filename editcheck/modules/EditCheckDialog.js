@@ -144,9 +144,10 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction, internal ) {
 	// TODO: work out how to tell the window to recalculate height here
 
-	if ( offset === null ) {
+	if ( offset === null || offset === -1 ) {
 		/* That's valid, carry on */
-	} else if ( !Number.isSafeInteger( offset ) || ( this.offset < 0 || this.offset > ( this.currentActions.length - 1 ) ) ) {
+		offset = null;
+	} else if ( !Number.isSafeInteger( offset ) || ( offset < 0 || offset > ( this.currentActions.length - 1 ) ) ) {
 		throw new Error( `Bad offset ${ offset }, expected an integer between 0 and ${ this.currentActions.length - 1 }` );
 	}
 
@@ -432,6 +433,15 @@ ve.ui.FixedEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	const process = ve.ui.FixedEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
 	// Mixin method
 	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process );
+};
+
+ve.ui.FixedEditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
+	if ( this.singleAction && action === null ) {
+		// Can't unset the offset in single-action mode, because it hides the sidebar contents
+		return;
+	}
+	// Mixin method
+	return ve.ui.EditCheckDialog.prototype.onFocusAction.call( this, action, index, scrollTo );
 };
 
 /* Registration */
