@@ -1,11 +1,11 @@
 /*!
- * VisualEditor MediaWiki-specific ContentEditable Surface tests.
+ * VisualEditor MediaWiki-specific ContentEditable ClipboardHandler tests.
  *
  * @copyright See AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.ce.Surface (MW)', ve.test.utils.newMwEnvironment() );
+QUnit.module( 've.ce.ClipboardHandler (MW)', ve.test.utils.newMwEnvironment() );
 
 /* Tests */
 
