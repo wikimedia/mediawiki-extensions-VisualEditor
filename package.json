@@ -14,11 +14,11 @@
 		"test": "grunt test && node build/checkModules.js"
 	},
 	"devDependencies": {
-		"@wdio/cli": "7.16.13",
-		"@wdio/junit-reporter": "7.16.13",
-		"@wdio/local-runner": "7.16.13",
-		"@wdio/mocha-framework": "7.33.0",
-		"@wdio/spec-reporter": "7.16.13",
+		"@wdio/cli": "7.40.0",
+		"@wdio/junit-reporter": "7.40.0",
+		"@wdio/local-runner": "7.40.0",
+		"@wdio/mocha-framework": "7.40.0",
+		"@wdio/spec-reporter": "7.40.0",
 		"api-testing": "1.6.0",
 		"eslint-config-wikimedia": "0.29.1",
 		"grunt": "1.6.1",
