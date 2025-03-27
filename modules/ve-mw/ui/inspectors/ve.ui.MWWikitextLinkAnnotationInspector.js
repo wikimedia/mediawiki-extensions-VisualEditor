@@ -267,13 +267,14 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 				fragment = this.getFragment();
 
 			const insertionText = this.getInsertionText();
+			const replace = !this.isNew;
 			const insertText = this.initialSelection.isCollapsed() && insertionText.length;
 
 			if ( data && data.action === 'done' && annotation ) {
 				// Build internal links locally
 				if ( annotation instanceof ve.dm.MWInternalLinkAnnotation ) {
 					let labelText;
-					if ( insertText ) {
+					if ( replace || insertText ) {
 						labelText = insertionText;
 					} else {
 						labelText = this.initialLabel;
@@ -308,7 +309,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 						fragment.insertContent( annotation.element.attributes.href );
 					} else {
 						let labelText = '';
-						if ( insertText ) {
+						if ( replace || insertText ) {
 							labelText = insertionText;
 						} else if ( annotation.name === 'link/mwExternal' ) {
 							labelText = this.initialLabel;
@@ -319,7 +320,6 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 						fragment.insertContent( '[' + annotation.element.attributes.href + labelText + ']' );
 					}
 				} else {
-					const replace = !this.isNew;
 					if ( replace || this.shouldInsertText() ) {
 						fragment.insertContent( this.getInsertionData() );
 					}
