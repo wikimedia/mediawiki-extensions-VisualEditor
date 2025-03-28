@@ -181,17 +181,16 @@ ve.init.mw.DesktopArticleTarget.static.platformType = 'desktop';
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.addSurface = function ( dmDoc, config ) {
+	const skinPadding = {
+		// Vector-2022 content area less padding, so popups can render too close
+		// to the edge of the text (T258501). The default of 10px is reduced to 3px.
+		// We still need a bit of padding to keep popups from touching the sidebar.
+		'vector-2022': 3,
+		monobook: -10
+	};
+	const skin = mw.config.get( 'skin' );
 	config = ve.extendObject( {
-		$overlayContainer: $(
-			document.querySelector( '[data-mw-ve-target-container]' ) ||
-			document.getElementById( 'content' )
-		),
-		// Vector-2022 content area has no padding itself, so popups render too close
-		// to the edge of the text (T258501). Use a negative value to allow popups to
-		// position slightly outside the content. Padding elsewhere means we are
-		// guaranteed 30px of space between the content and the edge of the viewport.
-		// Other skins pass 'undefined' to use the default padding of +10px.
-		overlayPadding: mw.config.get( 'skin' ) === 'vector-2022' ? -10 : undefined
+		overlayPadding: skin in skinPadding ? skinPadding[ skin ] : undefined
 	}, config );
 	return ve.init.mw.DesktopArticleTarget.super.prototype.addSurface.call( this, dmDoc, config );
 };
