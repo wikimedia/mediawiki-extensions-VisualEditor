@@ -12,6 +12,8 @@
 	"tag-editcheck-references-description": "EditCheck arvab, et vaja võis olla viidet",
 	"tag-editcheck-references-activated": "Muudatuse kontroll (viited) aktiveeritud",
 	"tag-editcheck-references-activated-description": "EditCheck arvab, et vaja võis olla viidet ning näidati selle kasutajaliidest.",
+	"tag-editcheck-references-shown": "Muudatuse kontroll (viited) näidatud",
+	"tag-editcheck-references-shown-description": "EditCheck arvab, et vaja võis olla viidet ning näidati selle kasutajaliidest.",
 	"tag-visualeditor": "Visuaalmuudatus",
 	"tag-visualeditor-description": "Muudatus tehtud [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaaltoimetiga]]",
 	"tag-visualeditor-needcheck": "Visuaalmuudatus: kontrollida",
