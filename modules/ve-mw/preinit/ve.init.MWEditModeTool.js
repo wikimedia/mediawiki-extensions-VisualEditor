@@ -120,9 +120,14 @@ mw.libs.ve.MWEditModeVisualTool.static.unavailableTooltip =
  */
 mw.libs.ve.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
 	// Adding a new section is not supported in visual mode
-	// eslint-disable-next-line no-jquery/no-global-selector
-	if ( mode === 'visual' && $( 'input[name=wpSection]' ).val() === 'new' ) {
-		return false;
+	if ( mode === 'visual' ) {
+		// eslint-disable-next-line no-jquery/no-global-selector
+		if ( $( 'input[name=wpSection]' ).val() === 'new' ) {
+			return false;
+		}
+		if ( !mw.config.get( 'wgVisualEditorConfig' ).namespaces.includes( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) ) {
+			return false;
+		}
 	}
 	return mw.libs.ve.MWEditModeVisualTool.super.prototype.isModeAvailable( mode );
 };
