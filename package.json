@@ -32,7 +32,7 @@
 		"jimp": "0.13.0",
 		"jsdoc": "4.0.4",
 		"jsdoc-wmf-theme": "1.1.0",
-		"mocha": "5.2.0",
+		"mocha": "11.1.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
 		"stylelint-config-wikimedia": "0.18.0",
