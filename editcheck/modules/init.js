@@ -108,6 +108,7 @@ ve.ui.EditCheckBack.prototype.onSelect = function () {
 	surface.getContext().hide();
 	surface.execute( 'window', 'close', 'fixedEditCheckDialog' );
 	this.setActive( false );
+	ve.track( 'activity.' + this.getName(), { action: 'tool-used' } );
 };
 ve.ui.EditCheckBack.prototype.onUpdateState = function () {
 	this.setDisabled( false );
