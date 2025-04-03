@@ -88,7 +88,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).mobileInsertMenu ) {
 			include: '*',
 			forceExpand: [ 'transclusion', 'insertTable' ],
 			promote: [ 'transclusion', 'insertTable' ],
-			exclude: [ { group: 'format' }, { group: 'history' }, { group: 'structure' } ]
+			exclude: [ { group: 'format' }, { group: 'history' }, { group: 'structure' }, 'gallery', 'media', 'mwSignature' ]
 		}
 	);
 }
