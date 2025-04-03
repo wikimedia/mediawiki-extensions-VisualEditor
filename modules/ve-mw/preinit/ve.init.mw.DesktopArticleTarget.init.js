@@ -1304,6 +1304,16 @@
 		}
 	};
 
+	/**
+	 * Check if a URL doesn't contain any params which would prevent VE from loading, e.g. 'undo'
+	 *
+	 * @param {URL} editUrl
+	 * @return {boolean} URL contains no unsupported params
+	 */
+	function isSupportedEditPage( editUrl ) {
+		return configData.unsupportedEditParams.every( ( param ) => !editUrl.searchParams.has( param ) );
+	}
+
 	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
 
 	// On a view page, extend the current URL so extra parameters are carried over
@@ -1347,6 +1357,9 @@
 			// Enabled per user preferences
 			enabledForUser
 		) ) &&
+
+		// Only if the current page isn't using unsupported URL parameters
+		isSupportedEditPage( url ) &&
 
 		// Only for pages with a supported content model
 		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) )
@@ -1400,16 +1413,6 @@
 		$( 'html' ).addClass( 've-not-available' );
 		// Don't return here because we do want the skin setup to consistently happen
 		// for e.g. "Edit" > "Edit source" even when VE is not available.
-	}
-
-	/**
-	 * Check if a URL doesn't contain any params which would prevent VE from loading, e.g. 'undo'
-	 *
-	 * @param {URL} editUrl
-	 * @return {boolean} URL contains no unsupported params
-	 */
-	function isSupportedEditPage( editUrl ) {
-		return configData.unsupportedEditParams.every( ( param ) => !editUrl.searchParams.has( param ) );
 	}
 
 	/**
