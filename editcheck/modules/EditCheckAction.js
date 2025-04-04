@@ -124,12 +124,7 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
 	// Now they're the same if every fragment is found in both actions
 	return this.fragments.every( ( fragment ) => {
 		const selection = fragment.getSelection();
-		for ( let i = other.fragments.length - 1; i >= 0; i-- ) {
-			if ( selection.equals( other.fragments[ i ].getSelection() ) ) {
-				return true;
-			}
-		}
-		return false;
+		return other.fragments.some( ( otherFragment ) => otherFragment.getSelection().equals( selection ) );
 	} );
 };
 
