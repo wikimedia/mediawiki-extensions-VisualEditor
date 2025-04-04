@@ -110,13 +110,13 @@
 			env = env || {};
 			return QUnit.newMwEnvironment( ve.extendObject( {}, env, {
 				beforeEach: function () {
-					setupOverrides.call( this );
+					setupOverrides();
 					if ( env.beforeEach ) {
 						env.beforeEach.call( this );
 					}
 				},
 				afterEach: function () {
-					teardownOverrides.call( this );
+					teardownOverrides();
 					if ( env.afterEach ) {
 						env.afterEach.call( this );
 					}
