@@ -242,11 +242,6 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 		widget.setDisabled( false );
 		this.nextButton.setDisabled( false );
 		this.previousButton.setDisabled( false );
-		this.surface.getModel().setNullSelection();
-		if ( OO.ui.isMobile() ) {
-			// Delay on mobile means we need to rehide this
-			setTimeout( () => this.surface.getModel().setNullSelection(), 300 );
-		}
 
 		if ( data && this.listener === 'onBeforeSave' ) {
 			// If an action has been taken, we want to linger for a brief moment
