@@ -599,7 +599,15 @@ class Hooks implements
 		// us to splice into the middle of an associative array.
 		$newViews = [];
 		$wikiPageFactory = $services->getWikiPageFactory();
-		$isRemote = !$wikiPageFactory->newFromTitle( $title )->isLocal();
+		if ( $title->inNamespace( NS_SPECIAL ) ) {
+			// @see https://phabricator.wikimedia.org/T376487
+			// The WikiPageFactory call would fatal if $title points to a special page, but sometimes,
+			// as unusual as it might be, a special page *can* call the relevant hooks to add an "edit"
+			// tab to itself. Luckily most special pages are smarter than that.
+			$isRemote = false;
+		} else {
+			$isRemote = !$wikiPageFactory->newFromTitle( $title )->isLocal();
+		}
 
 		$skinHasEditIcons = in_array(
 			$skin->getSkinName(),
