@@ -93,7 +93,6 @@ class Hooks implements
 		// Only for WTE. This parameter is not supported right now, and NWE has a very different design
 		// for previews, so we might not want to support this at all.
 		'preview',
-		'veswitched'
 	];
 
 	private const TAGS = [
@@ -445,6 +444,10 @@ class Hooks implements
 		}
 		// Adding a new section is not supported in visual mode
 		if ( $req->getRawVal( 'section' ) === 'new' ) {
+			return 'wikitext';
+		}
+		// Force switched from VE
+		if ( $req->getVal( 'veswitched' ) !== null ) {
 			return 'wikitext';
 		}
 		return self::getPreferredEditor( $user, $req, !$isRedLink );

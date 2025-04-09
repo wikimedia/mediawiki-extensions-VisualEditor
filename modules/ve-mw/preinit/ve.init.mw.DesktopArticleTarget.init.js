@@ -767,6 +767,10 @@
 		if ( url.searchParams.get( 'section' ) === 'new' ) {
 			return 'wikitext';
 		}
+		// Force switched from VE
+		if ( url.searchParams.has( 'veswitched' ) ) {
+			return 'wikitext';
+		}
 
 		switch ( tabPreference ) {
 			case 'prefer-ve':
