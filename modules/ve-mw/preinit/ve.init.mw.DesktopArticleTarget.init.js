@@ -444,8 +444,14 @@
 				sectionKey += 'source';
 			}
 
-			$( '#ca-edit a' ).text( getTabMessage( key ) );
-			$( '.mw-editsection a' ).text( getTabMessage( sectionKey ) );
+			const fallbackSelector = function ( selector, fallback ) {
+				const $result = $( selector );
+				return $result.length > 0 ? $result : $( fallback );
+			};
+
+			// Depending on skin these might contain text nested in a span
+			fallbackSelector( '#ca-edit a span', '#ca-edit a' ).text( getTabMessage( key ) );
+			fallbackSelector( '.mw-editsection a span', '.mw-editsection a' ).text( getTabMessage( sectionKey ) );
 		}
 
 		mw.cookie.set( 'VEE', editor, { path: '/', expires: 30 * 86400, prefix: '' } );
