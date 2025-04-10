@@ -101,6 +101,9 @@ Controller.prototype.updatePositions = function () {
 };
 
 Controller.prototype.refresh = function () {
+	if ( this.target.deactivating || !this.target.active ) {
+		return;
+	}
 	if ( this.listener === 'onBeforeSave' ) {
 		// These shouldn't be recalculated
 		this.emit( 'actionsUpdated', this.listener, this.getActions( this.listener ), [], [] );
@@ -303,6 +306,12 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 						this.refresh();
 					} );
 					return instance.closing.then( ( data ) => {
+						if ( target.deactivating || !target.active ) {
+							// Someone clicking "read" to leave the article
+							// will trigger the closing of this; in that
+							// case, just abandon what we're doing
+							return ve.createDeferred().reject().promise();
+						}
 						this.restoreToolbar( target );
 
 						if ( $contextContainer ) {
