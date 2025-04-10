@@ -354,7 +354,7 @@ ve.ui.SidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 };
 
 ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
-	if ( this.listener !== 'onDocumentChange' ) {
+	if ( this.listener === 'onBeforeSave' ) {
 		return;
 	}
 	const surfaceView = this.surface.getView();
