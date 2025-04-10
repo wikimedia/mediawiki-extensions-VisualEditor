@@ -2003,6 +2003,12 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 	this.emit( 'saveWorkflowBegin' );
 
 	saveProcess.execute().done( () => {
+		if ( this.deactivating || !this.active ) {
+			// It's possible to trigger deactivating VE during the
+			// saveProcess (e.g. by clicking the "read" tab), and in that
+			// case we should immediately discard what we're doing.
+			return;
+		}
 		// Preload the serialization
 		this.prepareCacheKey( this.getDocToSave() );
 
