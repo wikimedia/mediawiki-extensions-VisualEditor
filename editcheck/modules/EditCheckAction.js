@@ -13,6 +13,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 
 	this.check = config.check;
 	this.fragments = config.fragments;
+	this.focusFragment = config.focusFragment;
 	this.message = config.message;
 	this.id = config.id;
 	this.title = config.title;
@@ -48,6 +49,11 @@ mw.editcheck.EditCheckAction.prototype.getChoices = function () {
  */
 mw.editcheck.EditCheckAction.prototype.getHighlightSelections = function () {
 	return this.fragments.map( ( fragment ) => fragment.getSelection() );
+};
+
+mw.editcheck.EditCheckAction.prototype.getFocusSelection = function () {
+	// TOOD: Instead of fragments[0], create a fragment that covers all fragments?
+	return ( this.focusFragment || this.fragments[ 0 ] ).getSelection();
 };
 
 /**
