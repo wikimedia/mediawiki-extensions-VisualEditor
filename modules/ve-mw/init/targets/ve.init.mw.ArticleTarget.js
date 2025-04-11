@@ -57,6 +57,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
 	this.editSummaryValue = null;
 	this.initialEditSummary = null;
 	this.initialCheckboxes = {};
+	this.preSaveProcess = new OO.ui.Process();
 
 	this.viewUrl = new URL( mw.util.getUrl( this.getPageName() ), location.href );
 	this.isViewPage = (
@@ -1971,6 +1972,17 @@ ve.init.mw.ArticleTarget.prototype.updateToolbarSaveButtonState = function () {
 };
 
 /**
+ * Get the pre-save process, which is executed before opening the save dialog
+ *
+ * If the process rejects, the save dialog is not opened.
+ *
+ * @return {OO.ui.Process}
+ */
+ve.init.mw.ArticleTarget.prototype.getPreSaveProcess = function () {
+	return this.preSaveProcess;
+};
+
+/**
  * Show a save dialog
  *
  * @param {string} [action] Window action to trigger after opening
@@ -1997,15 +2009,14 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 	this.saveDialogIsOpening = true;
 
-	const saveProcess = new OO.ui.Process();
-	mw.hook( 've.preSaveProcess' ).fire( saveProcess, this );
+	mw.hook( 've.preSaveProcess' ).deprecate( 'Use target.getPreSaveProcess() instead.' ).fire( this.preSaveProcess, this );
 
 	this.emit( 'saveWorkflowBegin' );
 
-	saveProcess.execute().done( () => {
+	this.preSaveProcess.execute().done( () => {
 		if ( this.deactivating || !this.active ) {
 			// It's possible to trigger deactivating VE during the
-			// saveProcess (e.g. by clicking the "read" tab), and in that
+			// preSaveProcess (e.g. by clicking the "read" tab), and in that
 			// case we should immediately discard what we're doing.
 			return;
 		}
