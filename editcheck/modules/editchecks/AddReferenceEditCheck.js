@@ -113,6 +113,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 			this.mode = '';
 			return; // again triggers a redraw
 		case 'feedback':
+			this.mode = '';
 			// eslint-disable-next-line no-case-declarations
 			const selectedItem = action.widget.answerRadioSelect.findSelectedItem();
 			if ( selectedItem && selectedItem.getData() ) {
@@ -121,7 +122,6 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 				this.dismiss( action );
 				return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
 			}
-			this.mode = '';
 			break;
 	}
 };
