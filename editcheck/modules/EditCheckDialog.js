@@ -89,20 +89,20 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
 };
 
-ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
+ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions, rejected ) {
 	if ( listener !== this.listener ) {
 		return;
 	}
 	if ( this.updateFilter ) {
 		actions = this.updateFilter( actions, newActions, discardedActions, this.currentActions );
 	}
-	this.showActions( actions, newActions );
+	this.showActions( actions, newActions, rejected );
 };
 
-ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions ) {
+ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
 	this.currentActions = actions;
 	if ( actions.length === 0 ) {
-		return this.close( 'complete' );
+		return this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
 	}
 
 	// This just adjusts so the previously selected check remains selected:
@@ -250,7 +250,8 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 			// more generic
 			const pause = data.action !== 'reject' ? 500 : 0;
 			setTimeout( () => {
-				this.controller.removeAction( this.listener, action );
+				const rejected = [ 'feedback', 'reject', 'dismiss' ].includes( data.action );
+				this.controller.removeAction( this.listener, action, rejected );
 			}, pause );
 		} else {
 			this.controller.refresh();
