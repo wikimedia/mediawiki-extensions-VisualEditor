@@ -106,7 +106,7 @@ Controller.prototype.refresh = function () {
 	}
 	if ( this.listener === 'onBeforeSave' ) {
 		// These shouldn't be recalculated
-		this.emit( 'actionsUpdated', this.listener, this.getActions( this.listener ), [], [] );
+		this.emit( 'actionsUpdated', this.listener, this.getActions( this.listener ), [], [], false );
 	} else {
 		this.updateForListener( this.listener, true );
 	}
@@ -123,12 +123,12 @@ Controller.prototype.updateForListener = function ( listener, always ) {
 	const newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 	const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 	if ( always || actions.length !== existing.length || newActions.length || discardedActions.length ) {
-		this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions );
+		this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions, false );
 	}
 	return actions;
 };
 
-Controller.prototype.removeAction = function ( listener, action ) {
+Controller.prototype.removeAction = function ( listener, action, rejected ) {
 	const actions = this.getActions( listener );
 	const index = actions.indexOf( action );
 	if ( index === -1 ) {
@@ -140,7 +140,7 @@ Controller.prototype.removeAction = function ( listener, action ) {
 		this.focused = undefined;
 	}
 
-	this.emit( 'actionsUpdated', listener, actions, [], removed );
+	this.emit( 'actionsUpdated', listener, actions, [], removed, rejected );
 };
 
 Controller.prototype.focusAction = function ( action, scrollTo ) {
@@ -324,7 +324,8 @@ Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
 						if ( data ) {
 							const delay = ve.createDeferred();
 							// If they inserted, wait 2 seconds on desktop
-							// before showing save dialog to make sure insertions are finialized
+							// before showing save dialog to give user time
+							// to see success notification.
 							setTimeout( () => {
 								ve.track( 'counter.editcheck.preSaveChecksCompleted' );
 								delay.resolve();
