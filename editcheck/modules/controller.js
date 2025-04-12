@@ -30,7 +30,9 @@ OO.mixinClass( Controller, OO.EventEmitter );
 Controller.prototype.setup = function () {
 	const target = this.target;
 	target.on( 'surfaceReady', () => {
-		if ( target.getSurface().getMode() !== 'visual' ) {
+		this.surface = target.getSurface();
+
+		if ( this.surface.getMode() !== 'visual' ) {
 			// Some checks will entirely work in source mode for most cases.
 			// But others will fail spectacularly -- e.g. reference check
 			// isn't aware of <ref> tags and so will suggest that all content
@@ -42,8 +44,6 @@ Controller.prototype.setup = function () {
 		}
 		// ideally this would happen slightly earlier:
 		document.documentElement.classList.add( 've-editcheck-available' );
-
-		this.surface = target.getSurface();
 
 		this.surface.getView().on( 'position', this.onPositionDebounced );
 		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
@@ -73,13 +73,7 @@ Controller.prototype.setup = function () {
 		document.documentElement.classList.remove( 've-editcheck-available' );
 	}, null, this );
 
-	mw.hook( 've.preSaveProcess' ).add( ( saveProcess, saveTarget ) => {
-		// This being a global hook means that it could fire on a different
-		// target, or on our target when it's not in visual mode.
-		if ( saveTarget === this.target && this.surface ) {
-			this.onPreSaveProcess( saveProcess );
-		}
-	} );
+	this.setupPreSaveProcess();
 };
 
 Controller.prototype.editChecksArePossible = function () {
@@ -264,87 +258,92 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	} );
 };
 
-Controller.prototype.onPreSaveProcess = function ( saveProcess ) {
+Controller.prototype.setupPreSaveProcess = function () {
 	const target = this.target;
-	const surface = target.getSurface();
-
-	ve.track( 'counter.editcheck.preSaveChecksAvailable' );
-
-	const oldFocused = this.focused;
-	this.listener = 'onBeforeSave';
-	const actions = this.updateForListener( 'onBeforeSave' );
-	if ( actions.length ) {
-		ve.track( 'counter.editcheck.preSaveChecksShown' );
-		mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
-			actions.some( ( action ) => action.getName() === 'addReference' );
-
-		this.setupToolbar( target );
-
-		let $contextContainer, contextPadding;
-		if ( surface.context.popup ) {
-			contextPadding = surface.context.popup.containerPadding;
-			$contextContainer = surface.context.popup.$container;
-			surface.context.popup.$container = surface.$element;
-			surface.context.popup.containerPadding = 20;
+	const preSaveProcess = target.getPreSaveProcess();
+	preSaveProcess.next( () => {
+		const surface = target.getSurface();
+		if ( surface.getMode() !== 'visual' ) {
+			return;
 		}
+		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 
-		saveProcess.next( () => this.closeSidebars( 'saveProcess' ).then( () => this.closeDialog( 'saveProcess' ).then( () => {
-			this.originalToolbar.toggle( false );
-			target.onContainerScroll();
-			const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-			return windowAction.open( 'fixedEditCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
-				.then( ( instance ) => {
-					ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
-					actions.forEach( ( action ) => {
-						ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
+		const oldFocused = this.focused;
+		this.listener = 'onBeforeSave';
+		const actions = this.updateForListener( 'onBeforeSave' );
+		if ( actions.length ) {
+			ve.track( 'counter.editcheck.preSaveChecksShown' );
+			mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
+				actions.some( ( action ) => action.getName() === 'addReference' );
+
+			this.setupToolbar( target );
+
+			let $contextContainer, contextPadding;
+			if ( surface.context.popup ) {
+				contextPadding = surface.context.popup.containerPadding;
+				$contextContainer = surface.context.popup.$container;
+				surface.context.popup.$container = surface.$element;
+				surface.context.popup.containerPadding = 20;
+			}
+
+			return this.closeSidebars( 'preSaveProcess' ).then( () => this.closeDialog( 'preSaveProcess' ).then( () => {
+				this.originalToolbar.toggle( false );
+				target.onContainerScroll();
+				const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
+				return windowAction.open( 'fixedEditCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
+					.then( ( instance ) => {
+						ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
+						actions.forEach( ( action ) => {
+							ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
+						} );
+						instance.closed.then( () => {}, () => {} ).then( () => {
+							surface.getView().setReviewMode( false );
+							this.listener = 'onDocumentChange';
+							this.focused = oldFocused;
+							// Re-open the mid-edit sidebar if necessary.
+							this.refresh();
+						} );
+						return instance.closing.then( ( data ) => {
+							if ( target.deactivating || !target.active ) {
+								// Someone clicking "read" to leave the article
+								// will trigger the closing of this; in that
+								// case, just abandon what we're doing
+								return ve.createDeferred().reject().promise();
+							}
+							this.restoreToolbar( target );
+
+							if ( $contextContainer ) {
+								surface.context.popup.$container = $contextContainer;
+								surface.context.popup.containerPadding = contextPadding;
+							}
+
+							target.onContainerScroll();
+
+							if ( data ) {
+								const delay = ve.createDeferred();
+								// If they inserted, wait 2 seconds on desktop
+								// before showing save dialog to give user time
+								// to see success notification.
+								setTimeout( () => {
+									ve.track( 'counter.editcheck.preSaveChecksCompleted' );
+									delay.resolve();
+								}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
+								return delay.promise();
+							} else {
+								// closed via "back" or otherwise
+								ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
+								return ve.createDeferred().reject().promise();
+							}
+						} );
 					} );
-					instance.closed.then( () => {}, () => {} ).then( () => {
-						surface.getView().setReviewMode( false );
-						this.listener = 'onDocumentChange';
-						this.focused = oldFocused;
-						// Re-open the mid-edit sidebar if necessary.
-						this.refresh();
-					} );
-					return instance.closing.then( ( data ) => {
-						if ( target.deactivating || !target.active ) {
-							// Someone clicking "read" to leave the article
-							// will trigger the closing of this; in that
-							// case, just abandon what we're doing
-							return ve.createDeferred().reject().promise();
-						}
-						this.restoreToolbar( target );
-
-						if ( $contextContainer ) {
-							surface.context.popup.$container = $contextContainer;
-							surface.context.popup.containerPadding = contextPadding;
-						}
-
-						target.onContainerScroll();
-
-						if ( data ) {
-							const delay = ve.createDeferred();
-							// If they inserted, wait 2 seconds on desktop
-							// before showing save dialog to give user time
-							// to see success notification.
-							setTimeout( () => {
-								ve.track( 'counter.editcheck.preSaveChecksCompleted' );
-								delay.resolve();
-							}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
-							return delay.promise();
-						} else {
-							// closed via "back" or otherwise
-							ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
-							return ve.createDeferred().reject().promise();
-						}
-					} );
-				} );
-		} ) ) );
-	} else {
-		this.listener = 'onDocumentChange';
-		// Counterpart to earlier preSaveChecksShown, for use in tracking
-		// errors in check-generation:
-		ve.track( 'counter.editcheck.preSaveChecksNotShown' );
-	}
+			} ) );
+		} else {
+			this.listener = 'onDocumentChange';
+			// Counterpart to earlier preSaveChecksShown, for use in tracking
+			// errors in check-generation:
+			ve.track( 'counter.editcheck.preSaveChecksNotShown' );
+		}
+	} );
 };
 
 Controller.prototype.setupToolbar = function ( target ) {
