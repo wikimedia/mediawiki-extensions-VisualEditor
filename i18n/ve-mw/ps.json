@@ -21,6 +21,13 @@
 	"visualeditor-annotations-default-description": "د پاڼې دا برخه د سپيناوي لړۍ برخه ده.",
 	"visualeditor-annotations-default-end": "د سپيناوي لړۍ پای",
 	"visualeditor-annotations-default-start": "سپيناوي لړۍ پيلول",
+	"visualeditor-autosave-modified-prompt-accept": "سمون بياپيلول",
+	"visualeditor-autosave-modified-prompt-reject": "نوی سمون پيلول",
+	"visualeditor-autosave-modified-prompt-title": "{{GENDER:|ستاسو}} سمون بيا پيل کړي؟",
+	"visualeditor-autosave-not-recovered-text": "ستاسو ناخوندي شوي بدلونونه نشي ترلاسه کېدای.",
+	"visualeditor-autosave-not-recovered-title": "بدلون بياترلاسنه نابريالۍ شوه",
+	"visualeditor-autosave-recovered-text": "ستاسو ناخوندي شوي سمونونه په خپلکاري ډول بېرته ترلاسه شول.",
+	"visualeditor-autosave-recovered-title": "بدلونونه بېرته ترلاسه شول",
 	"visualeditor-backbutton-tooltip": "پر شا تلل",
 	"visualeditor-beta-warning": "د اليشولو تڼۍ په کېښکاږلو سره تاسې هر وخت سرچينې سمونگر ته وراړولی شئ. که تاسې هر ډول ستونزو سره مخ کېږئ، نو لطفاً راپور يې ورکړئ.",
 	"visualeditor-browserwarning": "تاسې يو داسې کتنمل کاروۍ چې په رسمي توگه د دې سمونگر ملاتړ نه کوي.",
@@ -202,5 +209,6 @@
 	"visualeditor-settings-tool": "مخ امستنې",
 	"visualeditor-special-characters-group-other": "اکثر کارېدونکی",
 	"visualeditor-version-label": "بڼه",
-	"visualeditor-wikitext-progress": "ويکي متن ته اړونه"
+	"visualeditor-wikitext-progress": "ويکي متن ته اړونه",
+	"visualeditor-wikitextconvert-convert": "ويکي‌ليک ته اړول"
 }
