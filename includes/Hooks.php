@@ -10,7 +10,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Article;
 use MediaWiki\Actions\ActionEntryPoint;
 use MediaWiki\Auth\Hook\UserLoggedInHook;
 use MediaWiki\ChangeTags\Hook\ChangeTagsListActiveHook;
@@ -38,13 +37,17 @@ use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Output\Hook\MakeGlobalVariablesScriptHook;
 use MediaWiki\Output\Hook\OutputPageBodyAttributesHook;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Page\Article;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderGetConfigVarsHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\Skin\Skin;
+use MediaWiki\Skin\SkinTemplate;
 use MediaWiki\SpecialPage\Hook\RedirectSpecialArticleRedirectParamsHook;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
@@ -52,9 +55,6 @@ use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
 use OOUI\ButtonGroupWidget;
 use OOUI\ButtonWidget;
-use RecentChange;
-use Skin;
-use SkinTemplate;
 use TextSlotDiffRenderer;
 
 /**

@@ -10,7 +10,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Article;
 use MediaWiki\Api\ApiBase;
 use MediaWiki\Api\ApiBlockInfoTrait;
 use MediaWiki\Api\ApiMain;
@@ -28,6 +27,7 @@ use MediaWiki\EditPage\TextboxBuilder;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\Article;
 use MediaWiki\Page\PageReference;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
