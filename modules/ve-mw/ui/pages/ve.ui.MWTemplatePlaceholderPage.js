@@ -34,7 +34,7 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 	this.usingTemplateDiscovery = mw.templateData !== undefined && mw.templateData.TemplateSearchLayout !== undefined;
 	if ( this.usingTemplateDiscovery ) {
 		// This variable name is slightly misleading here as this isn't a fieldset.
-		this.addTemplateFieldset = new mw.templateData.TemplateSearchLayout();
+		this.addTemplateFieldset = new mw.templateData.TemplateSearchLayout( { padded: false } );
 		this.addTemplateFieldset.connect( this, { choose: this.onAddTemplate } );
 		// Expose the internal widget for now, but this will be removed once we've switched to the new widget.
 		this.addTemplateInput = this.addTemplateFieldset.searchWidget;
