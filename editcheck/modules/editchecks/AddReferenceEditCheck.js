@@ -97,13 +97,15 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 					// use the data form the Citoid closing promise.
 					citoidOrCiteDataDeferred.resolve( citoidData );
 				}
-				return citoidOrCiteDataDeferred.promise().done( ( data ) => {
+				const citoidOrCiteDataPromise = citoidOrCiteDataDeferred.promise();
+				citoidOrCiteDataPromise.then( ( data ) => {
 					if ( data ) {
 						// Edit check inspector is already closed by this point, but
 						// we need to end the workflow.
 						mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
 					}
 				} );
+				return citoidOrCiteDataPromise;
 			} );
 		case 'reject':
 			ve.track( 'activity.editCheckReferences', { action: 'edit-check-reject' } );
