@@ -166,7 +166,7 @@
 				"UserOptionsLookup",
 				"WatchlistManager",
 				"ContentTransformer",
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikiPageFactory",
 				"IntroMessageBuilder",
 				"PreloadedContentBuilder",
@@ -178,7 +178,7 @@
 			"class": "MediaWiki\\Extension\\VisualEditor\\ApiVisualEditorEdit",
 			"services": [
 				"HookContainer",
-				"StatsdDataFactory",
+				"StatsFactory",
 				"PageEditStash",
 				"SkinFactory",
 				"WikiPageFactory",
