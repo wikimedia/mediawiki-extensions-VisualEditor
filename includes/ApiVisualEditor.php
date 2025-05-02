@@ -45,7 +45,7 @@ use MediaWiki\Watchlist\WatchlistManager;
 use MessageLocalizer;
 use Wikimedia\Assert\Assert;
 use Wikimedia\ParamValidator\ParamValidator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
@@ -72,7 +72,7 @@ class ApiVisualEditor extends ApiBase {
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
 		ContentTransformer $contentTransformer,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		StatsFactory $statsFactory,
 		WikiPageFactory $wikiPageFactory,
 		IntroMessageBuilder $introMessageBuilder,
 		PreloadedContentBuilder $preloadedContentBuilder,
@@ -81,7 +81,7 @@ class ApiVisualEditor extends ApiBase {
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
-		$this->setStats( $statsdDataFactory );
+		$this->setStatsFactory( $statsFactory );
 		$this->revisionLookup = $revisionLookup;
 		$this->tempUserCreator = $tempUserCreator;
 		$this->userFactory = $userFactory;
