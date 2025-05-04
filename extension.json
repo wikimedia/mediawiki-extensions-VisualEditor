@@ -2194,7 +2194,8 @@
 				"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single",
 				"visualeditor-dialogbutton-template-tooltip",
 				"visualeditor-expandable-less",
-				"visualeditor-expandable-more"
+				"visualeditor-expandable-more",
+				"visualeditor-template-sandbox-subpage"
 			]
 		},
 		"treeDiffer": {
