@@ -48,7 +48,7 @@ ve.test.utils.runWikitextStringHandlerTest = ( assert, server, string, mimeType,
 	// Invoke the handler
 	const handler = ve.ui.dataTransferHandlerFactory.create( 'wikitextString', mockSurface, item );
 
-	handler.getInsertableData().done( ( docOrData ) => {
+	handler.getInsertableData().then( ( docOrData ) => {
 		let actualData, store;
 		if ( docOrData instanceof ve.dm.Document ) {
 			actualData = docOrData.getData();

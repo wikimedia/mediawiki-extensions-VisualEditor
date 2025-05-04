@@ -177,9 +177,12 @@ ve.ce.MWTransclusionNode.prototype.generateContents = function ( config ) {
 		( config && config.wikitext ) || this.model.getWikitext(),
 		true,
 		this.getModel().getDocument()
-	)
-		.done( this.onParseSuccess.bind( this, deferred ) )
-		.fail( this.onParseError.bind( this, deferred ) );
+	);
+
+	xhr.then(
+		this.onParseSuccess.bind( this, deferred ),
+		this.onParseError.bind( this, deferred )
+	);
 
 	return deferred.promise( { abort: xhr.abort } );
 };

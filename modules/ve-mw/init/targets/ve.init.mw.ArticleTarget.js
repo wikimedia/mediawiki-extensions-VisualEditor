@@ -1122,9 +1122,10 @@ ve.init.mw.ArticleTarget.prototype.load = function ( dataPromise ) {
 	} );
 
 	this.loading = dataPromise;
-	dataPromise
-		.done( this.loadSuccess.bind( this ) )
-		.fail( this.loadFail.bind( this ) );
+	dataPromise.then(
+		this.loadSuccess.bind( this ),
+		this.loadFail.bind( this )
+	);
 
 	return dataPromise;
 };
@@ -1554,12 +1555,12 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 
 	data.vetags = taglist.join( ',' );
 
-	const promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' )
-		.done( this.saveComplete.bind( this ) )
-		.fail( this.saveFail.bind( this, doc, data ) )
-		.always( () => {
-			this.saving = null;
-		} );
+	const promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' ).then(
+		this.saveComplete.bind( this ),
+		this.saveFail.bind( this, doc, data )
+	).always( () => {
+		this.saving = null;
+	} );
 
 	return promise;
 };
@@ -1612,9 +1613,10 @@ ve.init.mw.ArticleTarget.prototype.getWikitextDiffPromise = function ( doc ) {
 			}
 			return data.diff;
 		} );
-		this.wikitextDiffPromise
-			.done( this.emit.bind( this, 'showChanges' ) )
-			.fail( this.emit.bind( this, 'showChangesError' ) );
+		this.wikitextDiffPromise.then(
+			this.emit.bind( this, 'showChanges' ),
+			this.emit.bind( this, 'showChangesError' )
+		);
 	}
 	return this.wikitextDiffPromise;
 };
@@ -1693,12 +1695,12 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 		page: this.getPageName(),
 		oldid: this.revid,
 		etag: this.etag
-	}, 'serialize' )
-		.done( this.emit.bind( this, 'serializeComplete' ) )
-		.fail( this.emit.bind( this, 'serializeError' ) )
-		.always( () => {
-			this.serializing = null;
-		} );
+	}, 'serialize' ).then(
+		this.emit.bind( this, 'serializeComplete' ),
+		this.emit.bind( this, 'serializeError' )
+	).always( () => {
+		this.serializing = null;
+	} );
 
 	if ( callback ) {
 		OO.ui.warnDeprecation( 'Passing a callback to ve.init.mw.ArticleTarget#serialize is deprecated. Use the returned promise instead.' );
@@ -1982,7 +1984,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 	this.emit( 'saveWorkflowBegin' );
 
-	this.preSaveProcess.execute().done( () => {
+	this.preSaveProcess.execute().then( () => {
 		if ( this.deactivating || !this.active ) {
 			// It's possible to trigger deactivating VE during the
 			// preSaveProcess (e.g. by clicking the "read" tab), and in that
@@ -1993,7 +1995,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 		this.prepareCacheKey( this.getDocToSave() );
 
 		// Get the save dialog
-		this.getSurface().getDialogs().getWindow( 'mwSave' ).done( ( win ) => {
+		this.getSurface().getDialogs().getWindow( 'mwSave' ).then( ( win ) => {
 			const windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
 			if ( !this.saveDialog ) {
@@ -2056,7 +2058,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 				} );
 			}
 		} );
-	} ).fail( () => {
+	}, () => {
 		this.saveDialogIsOpening = false;
 	} );
 };
@@ -2465,7 +2467,7 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 	categoryItems.forEach( ( categoryItem, index ) => {
 		const attributes = ve.copy( ve.getProp( categoryItem, 'element', 'attributes' ) );
 		attributes.index = index;
-		promises.push( ve.init.platform.linkCache.get( attributes.category ).done( ( result ) => {
+		promises.push( ve.init.platform.linkCache.get( attributes.category ).then( ( result ) => {
 			const group = result.hidden ? categories.hidden : categories.normal;
 			// In case of duplicates, first entry wins (like in MediaWiki)
 			if ( !group[ attributes.category ] || group[ attributes.category ].index > attributes.index ) {
