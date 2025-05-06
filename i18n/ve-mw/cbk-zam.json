@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Aristorkle",
+			"Noooote",
 			"WikiEditor50"
 		]
 	},
-	"visualeditor-ca-createsource": "Hace codigo",
-	"visualeditor-ca-editsource": "Revisa con el codigo",
-	"visualeditor-ca-editsource-section": "revisa codigo"
+	"visualeditor-ca-createsource": "Hace source",
+	"visualeditor-ca-editsource": "Hace edit con el source",
+	"visualeditor-ca-editsource-section": "hace edit el source"
 }
