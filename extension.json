@@ -62,6 +62,7 @@
 			"value": true
 		},
 		"VisualEditorEnableVisualSectionEditing": {
+			"description": "When opened from a section edit link, only show that section in the editor (like in the wikitext editor). Can be boolean true for desktop and mobile, or 'mobile' for just mobile.",
 			"value": "mobile"
 		},
 		"VisualEditorEnableWikitext": {
