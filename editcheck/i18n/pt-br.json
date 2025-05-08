@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Eduardoaddad",
 			"Fúlvio"
 		]
 	},
@@ -16,6 +17,8 @@
 	"editcheck-dialog-addref-success-notify": "Agradecemos por adicionar uma citação!",
 	"editcheck-dialog-addref-title": "Adicionar uma citação",
 	"editcheck-dialog-title": "Antes de publicar",
+	"editcheck-copyvio-title": "Conteúdo promovido",
+	"editcheck-review-title": "Revisar mudanças",
 	"tag-editcheck-reference-decline-common-knowledge": "Verificação de edição (referências) recusada (conhecimento comum)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "A referência do EditCheck foi recusada como conhecimento comum",
 	"tag-editcheck-reference-decline-irrelevant": "Verificação de edição (referências) recusada (irrelevante)",
