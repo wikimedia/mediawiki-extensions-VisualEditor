@@ -1621,6 +1621,7 @@
 				"modules/ve-mw/ui/ve.ui.MWSurface.js",
 				"modules/ve-mw/ui/ve.ui.MWExtensionWindow.js",
 				"modules/ve-mw/ui/ve.ui.MWWikitextTransferRegistry.js",
+				"modules/ve-mw/ui/commands/ve.ui.MWLinkCommand.js",
 				"modules/ve-mw/ui/commands/ve.ui.MWWikitextWarningCommand.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextStringTransferHandler.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWAceEditorWidget.js",
@@ -1912,6 +1913,7 @@
 			"messages": [
 				"pubmedurl",
 				"rfcurl",
+				"visualeditor-linkcontext-uneditable",
 				"visualeditor-linkinspector-button-link-external",
 				"visualeditor-linkinspector-button-link-internal",
 				"visualeditor-linkinspector-convert-link-isbn",
