@@ -10,7 +10,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
@@ -23,13 +22,13 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
 use Wikimedia\Message\MessageSpecifier;
-use Wikimedia\Stats\NullStatsdDataFactory;
-use Wikimedia\Stats\PrefixingStatsdDataFactoryProxy;
+use Wikimedia\Stats\StatsFactory;
 
 trait ApiParsoidTrait {
 
 	private ?LoggerInterface $logger = null;
-	private ?StatsdDataFactoryInterface $stats = null;
+	/** @var StatsFactory|null */
+	private $stats = null;
 
 	protected function getLogger(): LoggerInterface {
 		return $this->logger ?: new NullLogger();
@@ -39,12 +38,12 @@ trait ApiParsoidTrait {
 		$this->logger = $logger;
 	}
 
-	protected function getStats(): StatsdDataFactoryInterface {
-		return $this->stats ?: new NullStatsdDataFactory();
+	protected function getStatsFactory(): StatsFactory {
+		return $this->stats ?: StatsFactory::newNull();
 	}
 
-	protected function setStats( StatsdDataFactoryInterface $stats ): void {
-		$this->stats = new PrefixingStatsdDataFactoryProxy( $stats, 'VE' );
+	protected function setStatsFactory( StatsFactory $statsFactory ): void {
+		$this->stats = $statsFactory;
 	}
 
 	/**
@@ -60,7 +59,7 @@ trait ApiParsoidTrait {
 	 */
 	private function statsRecordTiming( string $key, float $startTime ): void {
 		$duration = ( microtime( true ) - $startTime ) * 1000;
-		$this->getStats()->timing( $key, $duration );
+		$this->getStatsFactory()->getTiming( $key )->observe( $duration );
 	}
 
 	/**
@@ -93,7 +92,7 @@ trait ApiParsoidTrait {
 		} catch ( HttpException $ex ) {
 			$this->dieWithRestHttpException( $ex );
 		}
-		$this->statsRecordTiming( 'ApiVisualEditor.ParsoidClient.getPageHtml', $startTime );
+		$this->statsRecordTiming( 'ApiVisualEditor_ParsoidClient_getPageHtml_seconds', $startTime );
 
 		return $response;
 	}
@@ -120,7 +119,7 @@ trait ApiParsoidTrait {
 		} catch ( HttpException $ex ) {
 			$this->dieWithRestHttpException( $ex );
 		}
-		$this->statsRecordTiming( 'ApiVisualEditor.ParsoidClient.transformHTML', $startTime );
+		$this->statsRecordTiming( 'ApiVisualEditor_ParsoidClient_transformHTML_seconds', $startTime );
 
 		return $response;
 	}
@@ -155,7 +154,7 @@ trait ApiParsoidTrait {
 		} catch ( HttpException $ex ) {
 			$this->dieWithRestHttpException( $ex );
 		}
-		$this->statsRecordTiming( 'ApiVisualEditor.ParsoidClient.transformWikitext', $startTime );
+		$this->statsRecordTiming( 'ApiVisualEditor_ParsoidClient_transformWikitext_seconds', $startTime );
 
 		return $response;
 	}
