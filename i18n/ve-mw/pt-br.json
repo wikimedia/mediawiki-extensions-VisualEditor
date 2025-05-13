@@ -340,6 +340,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Sempre me dê o editor visual, se possível",
 	"visualeditor-preference-tabs-prefer-wt": "Sempre me dê o editor de origem",
 	"visualeditor-preference-tabs-remember-last": "Lembre-se do meu último editor",
+	"visualeditor-preference-collab-label": "Edição colaborativa",
+	"visualeditor-preference-collab-description": "Convide outros usuários para participar na sua sessão de edição no editor visual.",
 	"visualeditor-rebase-client-export": "Exportar",
 	"visualeditor-rebase-client-export-start": "Exportar...",
 	"visualeditor-rebase-client-import": "Importar",
