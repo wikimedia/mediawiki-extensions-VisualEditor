@@ -2201,7 +2201,8 @@
 		},
 		"treeDiffer": {
 			"scripts": [
-				"lib/ve/lib/treeDiffer/treeDiffer-dist.js"
+				"lib/ve/lib/treeDiffer/treeDiffer-dist.js",
+				"modules/ve-mw/treeDiffer-global.js"
 			]
 		},
 		"diffMatchPatch": {
