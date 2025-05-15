@@ -349,7 +349,7 @@
 	"visualeditor-recreate": "Sivu on poistettu sillä aikaa kun muokkasit sitä. Luo sivu uudelleen painamalla ”$1”.",
 	"visualeditor-redirect-description": "Ohjaus sivulle $1",
 	"visualeditor-savedialog-identify-anon": "Et ole enää kirjautuneena sisään. Jos jatkat, <strong>IP-osoitteesi kirjataan</strong> tämän sivun muutoshistoriaan.",
-	"visualeditor-savedialog-identify-temp": "Käytät tällä hetkellä väliaikaista käyttäjänimeä <strong>$1</strong>. Jos jatkat, muokkauksesi liitetään tähän käyttäjänimeen.",
+	"visualeditor-savedialog-identify-temp": "Käytät tällä hetkellä tilapäistä tunnusta <strong>$1</strong>. Jos jatkat, muokkauksesi liitetään tähän käyttäjänimeen.",
 	"visualeditor-savedialog-identify-user": "Olet kirjautunut käyttäjänä <strong>[[User:$1|$1]]</strong>. Jos jatkat, muokkauksesi liitetään tähän tunnukseen.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Tallenna muutokset painamalla $1.",
 	"visualeditor-savedialog-label-publish-short": "Julkaise",
