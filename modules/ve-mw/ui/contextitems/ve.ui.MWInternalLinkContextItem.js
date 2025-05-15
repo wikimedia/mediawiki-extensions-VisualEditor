@@ -127,6 +127,15 @@ ve.ui.MWInternalLinkContextItem.prototype.renderBody = function () {
 		this.context
 	);
 	this.$body.empty().append( $body );
+	if ( this.model.getAttribute( 'hasGeneratedHref' ) ) {
+		const warning = new OO.ui.MessageWidget( {
+			type: 'warning',
+			inline: true,
+			classes: [ 've-ui-mwInternalLinkContextItem-hasGeneratedHref' ],
+			label: ve.msg( 'visualeditor-linkcontext-uneditable' )
+		} );
+		this.$body.prepend( warning.$element );
+	}
 	if ( !this.context.isMobile() ) {
 		this.$body.append( this.$labelLayout );
 	}
