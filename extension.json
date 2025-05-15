@@ -190,7 +190,8 @@
 		"editcheckreferenceurl": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\ApiEditCheckReferenceUrl",
 			"optional_services": [
-				"AbuseFilterBlockedDomainStorage"
+				"AbuseFilterBlockedDomainStorage",
+				"AbuseFilterBlockedDomainValidator"
 			]
 		}
 	},
