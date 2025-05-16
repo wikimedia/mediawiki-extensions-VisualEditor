@@ -372,6 +372,7 @@
 	"visualeditor-loaderror-wrongmode": "Tried to load the editor in wrong mode (data type: \"$1\", editor mode: \"$2\").",
 	"visualeditor-settings-tool": "Page settings",
 	"visualeditor-special-characters-group-other": "Often used",
+	"visualeditor-template-sandbox-subpage": "sandbox",
 	"visualeditor-template-tools-definition.json": "null",
 	"visualeditor-templatesused-tool": "Templates used",
 	"visualeditor-title-error": "Invalid title.",
