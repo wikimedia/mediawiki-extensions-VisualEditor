@@ -272,6 +272,7 @@
 	"visualeditor-includes-includeonly-description": "Kun tällä sivulla olevaa sisältöä käytetään toisella sivulla, seuraava sisältö tullaan lisäksi sisällyttämään tähän kohtaan:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Lisätietoja osittaisesta sisällytyksestä]",
 	"visualeditor-languages-tool": "Kielet",
+	"visualeditor-linkcontext-uneditable": "Pahoittelut, tätä linkkiä voi muokata tällä hetkellä vain wikitekstitilassa.",
 	"visualeditor-linkinspector-button-link-external": "Ulkoinen sivusto",
 	"visualeditor-linkinspector-button-link-internal": "Hae sisäisiä sivuja",
 	"visualeditor-linkinspector-convert-link-isbn": "Muunna ISBN-linkiksi",

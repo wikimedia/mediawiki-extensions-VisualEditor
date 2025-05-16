@@ -269,6 +269,7 @@
 	"visualeditor-includes-includeonly-description": "Wenn Inhalt von dieser Seite von einer anderen Seite verwendet wird, wird der folgende zusätzliche Inhalt hier aufgenommen:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Erfahre mehr über partielle Tranklusion]",
 	"visualeditor-languages-tool": "Sprachen",
+	"visualeditor-linkcontext-uneditable": "Entschuldigung, dieser Link kann derzeit nur im Quelltextmodus bearbeitet werden.",
 	"visualeditor-linkinspector-button-link-external": "Externe Seite",
 	"visualeditor-linkinspector-button-link-internal": "Interne Seiten suchen",
 	"visualeditor-linkinspector-convert-link-isbn": "In einen ISBN-Link konvertieren",

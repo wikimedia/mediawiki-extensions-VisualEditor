@@ -253,6 +253,7 @@
 	"visualeditor-formatdropdown-format-mw-heading6": "Sottotitolo 4",
 	"visualeditor-generating-wikitext-progress": "Genera wikitesto",
 	"visualeditor-languages-tool": "Lingue",
+	"visualeditor-linkcontext-uneditable": "Spiacenti, attualmente questo collegamento può essere modificato solo in modalità sorgente.",
 	"visualeditor-linkinspector-button-link-external": "Sito esterno",
 	"visualeditor-linkinspector-button-link-internal": "Cerca nelle pagine interne",
 	"visualeditor-linkinspector-convert-link-isbn": "Converti in collegamento ISBN",
