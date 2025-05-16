@@ -111,7 +111,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 								namespaceId === wgNamespaceIds.file ||
 								namespaceId === wgNamespaceIds.category
 							) &&
-							matches[ 1 ].indexOf( ':' ) !== 0
+							!matches[ 1 ].startsWith( ':' )
 						)
 					) {
 						linkMatches = matches;

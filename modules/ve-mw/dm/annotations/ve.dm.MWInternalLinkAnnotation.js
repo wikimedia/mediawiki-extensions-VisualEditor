@@ -142,7 +142,7 @@ ve.dm.MWInternalLinkAnnotation.static.toDomElements = function () {
 ve.dm.MWInternalLinkAnnotation.static.getHref = function ( dataElement ) {
 	let title = dataElement.attributes.title;
 
-	if ( title.slice( 0, 1 ) === '#' ) {
+	if ( title.startsWith( '#' ) ) {
 		// Special case: For a newly created link to a #fragment with
 		// no explicit title use the current title as prefix (T218581)
 		// TODO: Pass a 'doc' param to getPageName

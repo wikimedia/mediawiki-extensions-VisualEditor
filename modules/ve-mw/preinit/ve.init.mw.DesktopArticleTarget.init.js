@@ -200,7 +200,7 @@
 		let wikitext = tempWikitextEditor.getValue();
 
 		// Strip trailing linebreak. Will get re-added in ArticleTarget#parseDocument.
-		if ( wikitext.slice( -1 ) === '\n' ) {
+		if ( wikitext.endsWith( '\n' ) ) {
 			wikitext = wikitext.slice( 0, -1 );
 		}
 
