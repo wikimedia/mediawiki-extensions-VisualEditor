@@ -279,6 +279,7 @@
 	"visualeditor-includes-includeonly-description": "عندما يتم استخدام محتوى من هذه الصفحة بواسطة صفحة أخرى ، سيتم تضمين المحتوى الإضافي التالي هنا:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion تعرف على المزيد حول التحويل الجزئي]",
 	"visualeditor-languages-tool": "اللغات",
+	"visualeditor-linkcontext-uneditable": "عذراً، لا يمكن تعديل هذا الرابط إلا في وضع المصدر في الوقت الحالي.",
 	"visualeditor-linkinspector-button-link-external": "موقع خارجي",
 	"visualeditor-linkinspector-button-link-internal": "ابحث عن الصفحةالداخلية",
 	"visualeditor-linkinspector-convert-link-isbn": "تحويل إلى الرابط ISBN",

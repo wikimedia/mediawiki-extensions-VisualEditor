@@ -256,6 +256,7 @@
 	"visualeditor-includes-includeonly-description": "Cando outra páxina utiliza contidos desta páxina, incluirase aquí o seguinte contido adicional:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Máis información sobre a transclusión parcial]",
 	"visualeditor-languages-tool": "Linguas",
+	"visualeditor-linkcontext-uneditable": "Sentímolo, polo de agora esta ligazón só se pode editar no modo fonte.",
 	"visualeditor-linkinspector-button-link-external": "Sitio externo",
 	"visualeditor-linkinspector-button-link-internal": "Procurar páxinas internas",
 	"visualeditor-linkinspector-convert-link-isbn": "Converter a ligazón de ISBN",

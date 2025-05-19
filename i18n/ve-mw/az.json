@@ -256,6 +256,7 @@
 	"visualeditor-includes-includeonly-description": "Bu səhifədəki məzmun başqa bir səhifə tərəfindən istifadə edildikdə, aşağıdakı əlavə məzmun buraya daxil olacaq:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Qismən keçid haqqında daha çox məlumat əldə edin]",
 	"visualeditor-languages-tool": "Dillər",
+	"visualeditor-linkcontext-uneditable": "Təəssüf ki, hal-hazırda bu keçidin redaktəsi yalnız vikimətn rejimində mümkündür.",
 	"visualeditor-linkinspector-button-link-external": "Xarici sayt",
 	"visualeditor-linkinspector-button-link-internal": "Daxili səhifələrdə axtar",
 	"visualeditor-linkinspector-convert-link-isbn": "ISBN keçidinə çevir",
