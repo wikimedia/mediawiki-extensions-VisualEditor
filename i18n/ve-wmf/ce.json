@@ -5,6 +5,8 @@
 		]
 	},
 	"tag-editcheck-newreference-description": "АгӀонна хьажорг тӀетоьхна",
+	"tag-editcheck-references-activated": "Хийцамаш бар талларан (хьажоргаш) активаци йина",
+	"tag-editcheck-references-shown": "Хийцамаш таллар гуш ду (хьажоргаш)",
 	"tag-visualeditor": "БӀаьран редактор",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|БӀаьран редакторца]] дина нисдарш",
 	"tag-visualeditor-needcheck": "БӀаьран редактор: талла",
