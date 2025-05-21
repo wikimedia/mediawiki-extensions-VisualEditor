@@ -107,7 +107,7 @@
 			"value": false
 		},
 		"VisualEditorMobileInsertMenu": {
-			"description": "Temporary deployment flag for adding an insert menu on mobile.",
+			"description": "Temporary deployment flag for adding an insert menu on mobile. If true, includes all tools. If an array of strings, includes only the listed tools.",
 			"value": false
 		},
 		"VisualEditorTabMessages": {
