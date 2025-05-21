@@ -778,7 +778,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 	let handled = false;
 	// Handle empty response
 	if ( !data ) {
-		this.saveErrorEmpty();
+		this.showSaveError( this.extractErrorMessages( null ) );
 		handled = true;
 	}
 
@@ -796,20 +796,22 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 						this.saveErrorNewUser( username );
 					}
 				}, () => {
-					this.saveErrorUnknown( data );
+					this.showSaveError( this.extractErrorMessages( data ) );
 				} );
 				handled = true;
 			} else if ( error.code === 'editconflict' ) {
 				this.editConflict();
 				handled = true;
 			} else if ( error.code === 'pagedeleted' ) {
-				this.saveErrorPageDeleted();
+				this.pageDeletedWarning = true;
+				// The API error message 'apierror-pagedeleted' is poor, make our own
+				this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true );
 				handled = true;
 			} else if ( error.code === 'hookaborted' ) {
 				this.saveErrorHookAborted( data );
 				handled = true;
 			} else if ( error.code === 'readonly' ) {
-				this.saveErrorReadOnly( data );
+				this.showSaveError( this.extractErrorMessages( data ), true );
 				handled = true;
 			}
 		}
@@ -828,7 +830,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 
 	// Handle (other) unknown and/or unrecoverable errors
 	if ( !handled ) {
-		this.saveErrorUnknown( data );
+		this.showSaveError( this.extractErrorMessages( data ) );
 		handled = true;
 	}
 
@@ -845,7 +847,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 };
 
 /**
- * Show an save process error message
+ * Show a save process error message
  *
  * @param {string|jQuery|Node[]} msg Message content (string of HTML, jQuery object or array of
  *  Node objects)
@@ -869,14 +871,8 @@ ve.init.mw.ArticleTarget.prototype.extractErrorMessages = function ( data ) {
 };
 
 /**
- * Handle general save error
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorEmpty = function () {
-	this.showSaveError( this.extractErrorMessages( null ) );
-};
-
-/**
- * Handle hook abort save error
+ * Handle hook abort save error. Intended to be overridden by extensions implementing the
+ * VisualEditorApiVisualEditorEditPreSave hook.
  *
  * @param {Object} data API response data
  */
@@ -901,33 +897,6 @@ ve.init.mw.ArticleTarget.prototype.saveErrorNewUser = function ( username ) {
 	).parseDom();
 
 	this.showSaveError( $msg, true );
-};
-
-/**
- * Handle unknown save error
- *
- * @param {Object|null} data API response data
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorUnknown = function ( data ) {
-	this.showSaveError( this.extractErrorMessages( data ) );
-};
-
-/**
- * Handle page deleted error
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorPageDeleted = function () {
-	this.pageDeletedWarning = true;
-	// The API error message 'apierror-pagedeleted' is poor, make our own
-	this.showSaveError( mw.msg( 'visualeditor-recreate', mw.msg( 'ooui-dialog-process-continue' ) ), true );
-};
-
-/**
- * Handle read only error
- *
- * @param {Object} data API response data
- */
-ve.init.mw.ArticleTarget.prototype.saveErrorReadOnly = function ( data ) {
-	this.showSaveError( this.extractErrorMessages( data ), true );
 };
 
 /**
