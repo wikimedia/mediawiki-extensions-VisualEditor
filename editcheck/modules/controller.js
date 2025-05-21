@@ -383,6 +383,10 @@ Controller.prototype.setupToolbar = function ( target ) {
 	target.toolbar.$element.before( reviewToolbar.$element );
 	target.toolbar = reviewToolbar;
 
+	reviewToolbar.connect( target, {
+		resize: 'onToolbarResize'
+	} );
+
 	reviewToolbar.initialize();
 
 	this.originalToolbar = toolbar;
