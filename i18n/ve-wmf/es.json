@@ -9,6 +9,7 @@
 			"Fitoschido",
 			"Imre",
 			"Invadinado",
+			"JaimeDes",
 			"Jdforrester",
 			"Jduranboger",
 			"Macofe",
@@ -20,6 +21,7 @@
 			"아라"
 		]
 	},
+	"tag-editcheck-newreference-description": "Se agregó una referencia a la página.",
 	"tag-visualeditor": "Edición visual",
 	"tag-visualeditor-description": "Modificación hecha con el [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
 	"tag-visualeditor-needcheck": "Edición visual: comprobar",
