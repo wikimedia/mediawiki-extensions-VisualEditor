@@ -363,9 +363,11 @@
 			} else if ( data.pages[ id ].notemplatedata && !OO.isPlainObject( data.pages[ id ].params ) ) {
 				// (T243868) Prevent asking again for templates that have neither user-provided specs
 				// nor automatically detected params
-				specCache[ title ] = null;
+				specCache[ title ] = {};
+				specCache[ title ].pageId = id;
 			} else {
 				specCache[ title ] = data.pages[ id ];
+				specCache[ title ].pageId = id;
 			}
 		}
 
