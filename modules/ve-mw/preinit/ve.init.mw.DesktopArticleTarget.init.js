@@ -516,7 +516,7 @@
 		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( ( i, el ) => {
 			const linkUrl = new URL( el.href );
 			if ( section === getSectionFromUrl( linkUrl ) ) {
-				$heading = $( el ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' );
+				$heading = $( el ).closest( '.mw-heading' );
 				return false;
 			}
 		} );
@@ -639,7 +639,7 @@
 				const linkUrl = new URL( firstVisibleSectionLink.href );
 				visibleSection = getSectionFromUrl( linkUrl );
 
-				const firstVisibleHeading = $( firstVisibleEditSection ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' )[ 0 ];
+				const firstVisibleHeading = $( firstVisibleEditSection ).closest( '.mw-heading' )[ 0 ];
 				visibleSectionOffset = firstVisibleHeading.getBoundingClientRect().top;
 			}
 		} else if ( mode === 'visual' ) {

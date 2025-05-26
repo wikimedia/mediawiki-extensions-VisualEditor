@@ -2223,10 +2223,9 @@ ve.init.mw.ArticleTarget.prototype.getSectionHashFromPage = function () {
 		section = this.section;
 	}
 	if ( section > 0 ) {
-		// Compatibility with pre-T13555 markup
 		const $section = $sections.eq( section - 1 )
-			.closest( '.mw-heading, h1, h2, h3, h4, h5, h6' )
-			.find( 'h1, h2, h3, h4, h5, h6, .mw-headline' );
+			.closest( '.mw-heading' )
+			.find( 'h1, h2, h3, h4, h5, h6' );
 
 		if ( $section.length && $section.attr( 'id' ) ) {
 			return '#' + $section.attr( 'id' );
