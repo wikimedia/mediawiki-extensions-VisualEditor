@@ -91,6 +91,7 @@
 	"visualeditor-dialog-meta-settings-toc-default": "Se necesa",
 	"visualeditor-dialog-meta-settings-toc-disable": "Nultempe",
 	"visualeditor-dialog-meta-settings-toc-force": "Sempre",
+	"visualeditor-dialog-meta-settings-toc-help": "Vu povas krear indexo-tabelo qui montros la titulo qua aparos en pagini kun min kam 4 paragrafi, o koaktigar por ke ol ne aparez. Implicite, ol aparos se la pagino havas 4 paragrafi o plusa.",
 	"visualeditor-dialog-meta-settings-toc-label": "Montrar la Tabelo de kontenajo",
 	"visualeditor-dialog-meta-templatesused-noresults": "Nula shabloni esis trovata.",
 	"visualeditor-dialog-meta-title": "Selekti",
