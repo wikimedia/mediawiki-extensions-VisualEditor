@@ -278,7 +278,7 @@
 	"visualeditor-linkinspector-convert-link-isbn": "Muunna ISBN-linkiksi",
 	"visualeditor-linkinspector-convert-link-pmid": "Muunna PMID-linkiksi",
 	"visualeditor-linkinspector-convert-link-rfc": "Muunna RFC-linkiksi",
-	"visualeditor-linkinspector-educationpopup-text": "Linkitä tärkeät sanat muihin wikiartikkeleihin tai muille verkkosivustoille. Se auttaa lukijoita ymmärtämään kontekstia.",
+	"visualeditor-linkinspector-educationpopup-text": "Linkitä tärkeät sanat muihin wikiartikkeleihin tai jopa muille verkkosivustoille. Tämä auttaa lukijoita ymmärtämään kontekstia.",
 	"visualeditor-linkinspector-educationpopup-title": "Linkit",
 	"visualeditor-linkinspector-illegal-title": "Virheellinen sivun otsikko",
 	"visualeditor-linkinspector-invalid-blocked": "Tämän wikin käyttäjät ovat päättäneet estää linkit tälle sivustolle. Kokeile toista linkkiä.",
