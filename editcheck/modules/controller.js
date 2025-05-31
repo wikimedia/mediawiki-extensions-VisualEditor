@@ -485,7 +485,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 		if ( surface.getMode() !== 'visual' ) {
 			return;
 		}
-		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
+		ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Available' } );
 
 		const oldFocusedAction = this.focusedAction;
 		this.inBeforeSave = true;
@@ -528,6 +528,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 									// Someone clicking "read" to leave the article
 									// will trigger the closing of this; in that
 									// case, just abandon what we're doing
+									ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Abandoned' } );
 									return ve.createDeferred().reject().promise();
 								}
 								this.restoreToolbar( target );
@@ -545,13 +546,13 @@ Controller.prototype.setupPreSaveProcess = function () {
 									// before showing save dialog to give user time
 									// to see success notification.
 									setTimeout( () => {
-										ve.track( 'counter.editcheck.preSaveChecksCompleted' );
+										ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Completed' } );
 										delay.resolve();
 									}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
 									return delay.promise();
 								} else {
 									// closed via "back" or otherwise
-									ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
+									ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Abandoned' } );
 									return ve.createDeferred().reject().promise();
 								}
 							} );
@@ -561,7 +562,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 				this.inBeforeSave = false;
 				// Counterpart to earlier preSaveChecksShown, for use in tracking
 				// errors in check-generation:
-				ve.track( 'counter.editcheck.preSaveChecksNotShown' );
+				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'NotShown' } );
 			}
 		} );
 	} );
