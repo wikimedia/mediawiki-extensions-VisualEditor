@@ -13,6 +13,7 @@ function Controller( target ) {
 	this.surface = null;
 	this.inBeforeSave = false;
 	this.branchNode = null;
+	this.focusedAction = null;
 
 	this.$highlights = $( '<div>' );
 
@@ -64,6 +65,7 @@ Controller.prototype.setup = function () {
 
 			this.surface = null;
 			this.actionsByListener = {};
+			this.focusedAction = null;
 
 			this.taggedFragments = {};
 			this.taggedIds = {};
@@ -141,20 +143,20 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
 	}
 	const removed = actions.splice( index, 1 );
 
-	if ( action === this.focused ) {
-		this.focused = undefined;
+	if ( action === this.focusedAction ) {
+		this.focusedAction = null;
 	}
 
 	this.emit( 'actionsUpdated', listener, actions, [], removed, rejected );
 };
 
 Controller.prototype.focusAction = function ( action, scrollTo ) {
-	if ( !scrollTo && action === this.focused ) {
+	if ( !scrollTo && action === this.focusedAction ) {
 		// Don't emit unnecessary events if there is no change or scroll
 		return;
 	}
 
-	this.focused = action;
+	this.focusedAction = action;
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
 
@@ -239,8 +241,8 @@ Controller.prototype.onPosition = function () {
 
 	this.updatePositions();
 
-	if ( this.getActions().length && this.focused && this.surface.getView().reviewMode ) {
-		this.scrollActionIntoViewDebounced( this.focused );
+	if ( this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
+		this.scrollActionIntoViewDebounced( this.focusedAction );
 	}
 };
 
@@ -259,8 +261,8 @@ Controller.prototype.onDocumentChange = function () {
 Controller.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
 	// do we need to redraw anything?
 	if ( newActions.length || discardedActions.length ) {
-		if ( this.focused && discardedActions.includes( this.focused ) ) {
-			this.focused = undefined;
+		if ( this.focusedAction && discardedActions.includes( this.focusedAction ) ) {
+			this.focusedAction = null;
 		}
 		this.updatePositions();
 	}
@@ -307,7 +309,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 		}
 		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 
-		const oldFocused = this.focused;
+		const oldFocusedAction = this.focusedAction;
 		this.inBeforeSave = true;
 		return this.updateForListener( 'onBeforeSave' ).then( ( actions ) => {
 			if ( actions.length ) {
@@ -337,10 +339,10 @@ Controller.prototype.setupPreSaveProcess = function () {
 							actions.forEach( ( action ) => {
 								ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
 							} );
-							instance.closed.then( () => { }, () => { } ).then( () => {
+							instance.closed.then( () => {}, () => {} ).then( () => {
 								surface.getView().setReviewMode( false );
 								this.inBeforeSave = false;
-								this.focused = oldFocused;
+								this.focusedAction = oldFocusedAction;
 								// Re-open the mid-edit sidebar if necessary.
 								this.refresh();
 							} );
@@ -453,15 +455,15 @@ Controller.prototype.restoreToolbar = function ( target ) {
 
 Controller.prototype.drawSelections = function () {
 	const surfaceView = this.surface.getView();
-	if ( this.focused ) {
-		// The currently-focused check gets a selection:
+	if ( this.focusedAction ) {
+		// The currently-focused action gets a selection:
 		// TODO: clicking the selection should activate the sidebar-action
 		surfaceView.getSelectionManager().drawSelections(
 			'editCheckWarning',
-			this.focused.getHighlightSelections().map(
+			this.focusedAction.getHighlightSelections().map(
 				( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
 			),
-			this.focused.paused ? { color: '#888' } : {}
+			this.focusedAction.paused ? { color: '#888' } : {}
 		);
 	} else {
 		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );
@@ -508,7 +510,7 @@ Controller.prototype.drawGutter = function () {
 			this.$highlights.append( $( '<div>' )
 				.addClass( 've-ui-editCheck-gutter-highlight' )
 				.addClass( 've-ui-editCheck-gutter-highlight-' + action.getType() )
-				.addClass( 've-ui-editCheck-gutter-highlight-' + ( action === this.focused ? 'active' : 'inactive' ) )
+				.addClass( 've-ui-editCheck-gutter-highlight-' + ( action === this.focusedAction ? 'active' : 'inactive' ) )
 				.css( {
 					top: rect.top - 2,
 					height: rect.height + 4

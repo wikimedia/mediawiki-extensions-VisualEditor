@@ -162,7 +162,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 			};
 			this.$body.append( widget.$element );
 		}
-		if ( widget.actions.includes( this.controller.focused ) ) {
+		if ( widget.actions.includes( this.controller.focusedAction ) ) {
 			widget.icon.setFlags( action.getType() );
 		} else {
 			widget.icon.clearFlags();
@@ -170,7 +170,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 		widget.$element.css( {
 			top: section.rect.top + 2,
 			height: section.rect.height
-		} ).toggleClass( 've-ui-editCheck-gutter-action-inactive', !section.actions.includes( this.controller.focused ) );
+		} ).toggleClass( 've-ui-editCheck-gutter-action-inactive', !section.actions.includes( this.controller.focusedAction ) );
 
 		this.widgets.push( widget );
 	} );
