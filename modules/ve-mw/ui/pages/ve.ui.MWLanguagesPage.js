@@ -119,40 +119,6 @@ ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( response 
 };
 
 /**
- * Gets language item from meta list item
- *
- * @param {ve.dm.MWLanguageMetaItem} metaItem
- * @return {Object} item
- */
-ve.ui.MWLanguagesPage.prototype.getLanguageItemFromMetaListItem = function ( metaItem ) {
-	// TODO: get real values from metaItem once Parsoid actually provides them - T50970
-	return {
-		lang: 'lang',
-		langname: 'langname',
-		title: 'title',
-		metaItem: metaItem
-	};
-};
-
-/**
- * Get array of language items from meta list
- *
- * @return {Object[]} items
- */
-ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
-	const items = [],
-		languages = this.metaList.getItemsInGroup( 'mwLanguage' ),
-		languageslength = languages.length;
-
-	// Loop through MWLanguages and build out items
-
-	for ( let i = 0; i < languageslength; i++ ) {
-		items.push( this.getLanguageItemFromMetaListItem( languages[ i ] ) );
-	}
-	return items;
-};
-
-/**
  * Get array of language items from meta list
  *
  * @return {jQuery.Promise}
