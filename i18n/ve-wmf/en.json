@@ -28,6 +28,8 @@
 	"tag-editcheck-references-shown": "Edit Check (references) shown",
 	"tag-editcheck-references-shown-description": "EditCheck thinks a reference might have been needed, and the UI was shown",
 	"tag-editcheck-references-shown-helppage": "mediawikiwiki:Special:MyLanguage/Edit check/False positives",
+	"tag-editcheck-tone-shown": "Edit Check (tone) shown",
+	"tag-editcheck-tone-shown-description": "EditCheck thinks an adjustment to the tone in some content might have been needed, and the UI was shown",
 	"tag-visualeditor": "Visual edit",
 	"tag-visualeditor-description": "Edit made using the [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]",
 	"tag-visualeditor-helppage": "{{MediaWiki:visualeditor-descriptionpagelink}}",

@@ -66,6 +66,7 @@ Controller.prototype.setup = function () {
 			this.dismissedIds = {};
 
 			mw.editcheck.refCheckShown = false;
+			mw.editcheck.toneCheckShown = false;
 		} );
 	}, null, this );
 
@@ -275,6 +276,8 @@ Controller.prototype.setupPreSaveProcess = function () {
 			ve.track( 'counter.editcheck.preSaveChecksShown' );
 			mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
 				actions.some( ( action ) => action.getName() === 'addReference' );
+			mw.editcheck.toneCheckShown = mw.editcheck.toneCheckShown ||
+				actions.some( ( action ) => action.getName() === 'tone' );
 
 			this.setupToolbar( target );
 

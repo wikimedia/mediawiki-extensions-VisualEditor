@@ -34,8 +34,6 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
 
-mw.editcheck.refCheckShown = false;
-
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 	mw.hook( 've.activationComplete' ).add( () => {
 		const target = ve.init.target;
@@ -67,6 +65,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			}
 			if ( mw.editcheck.refCheckShown ) {
 				tags.push( 'editcheck-references-shown' );
+			}
+			if ( mw.editcheck.toneCheckShown ) {
+				tags.push( 'editcheck-tone-shown' );
 			}
 			return tags.join( ',' );
 		};
