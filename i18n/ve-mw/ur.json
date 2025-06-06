@@ -123,6 +123,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-cancel": "پیچھے جائیں",
 	"visualeditor-dialog-transclusion-title-insert-template": "سانچہ درج کریں",
 	"visualeditor-dialog-transclusion-title-insert-known-template": "اندراج: $1",
+	"visualeditor-dialog-transclusion-template-search-help": "جس سانچے کو شامل کرنا ہو، اس کے لیے کسی موزوں کلیدی لفظ کے ذریعے تلاش کریں۔ وہ سانچے جن کے ساتھ وضاحتی معلومات شامل ہوں، بصری خانہ ترمیم میں بہتر کام کرتے ہیں۔",
 	"visualeditor-dialog-transclusion-wikitext": "ویکی متن",
 	"visualeditor-dialogbutton-media-tooltip": "میڈیا",
 	"visualeditor-dialogbutton-template-tooltip": "سانچہ",
