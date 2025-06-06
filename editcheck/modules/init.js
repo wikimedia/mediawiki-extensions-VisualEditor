@@ -26,7 +26,17 @@ require( './editchecks/AddReferenceEditCheck.js' );
 
 if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
+} else {
+	// Load Tone check regardless for tagging
+	require( './editchecks/experimental/ToneCheck.js' );
+	// Disable by unregistering
+	mw.editcheck.editCheckFactory.unregister( mw.editcheck.ToneCheck );
 }
+
+const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];
+
+// Helper functions for ve.init.mw.ArticleTarget save-tagging, keep logic
+// in-sync with AddReferenceEditCheck and ToneCheck.
 
 /**
  * Check if the document has content needing a reference, for AddReferenceEditCheck
@@ -36,15 +46,24 @@ if ( mw.editcheck.experimental ) {
  * @return {boolean}
  */
 mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
-	// helper for ve.init.mw.ArticleTarget save-tagging, keep logic below in-sync with AddReferenceEditCheck.
-	// This is bypassing the normal "should this check apply?" logic for creation, so we need to manually
-	// apply the "only the main namespace" rule.
-	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
+	// Tag anything in the main namespace, regardless of other eligibility checks
+	if ( !isMainNamespace ) {
 		return false;
 	}
-	const check = mw.editcheck.editCheckFactory.create( 'addReference', null, mw.editcheck.config.addReference );
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
+	const check = mw.editcheck.editCheckFactory.create( 'addReference', null, mw.editcheck.config.addReference );
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
+};
+
+mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
+	// Check might not be registered so we can't use the factory.
+	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.config.tone );
+	// Run actual check eligibility before calling API
+	if ( !check.canBeShown() ) {
+		return ve.createDeferred().resolve( false ).promise();
+	}
+	return Promise.all( check.handleListener( 'onCheckAll', surfaceModel ) )
+		.then( ( results ) => results.some( ( result ) => result !== null ) );
 };
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
@@ -60,6 +79,17 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			const group = internalList.getNodeGroup( 'mwReference/' );
 			return group ? group.firstNodes || [] : [];
 		}
+
+		let hasFailingToneCheck = null;
+		target.getPreSaveProcess().first( () => {
+			// Start checking for tone in the pre-save process, but don't block the save dialog
+			// from appearing. If the tone check isn't finished by save time we will just log
+			// an error.
+			hasFailingToneCheck = null;
+			mw.editcheck.hasFailingToneCheck( target.getSurface().getModel() ).then( ( result ) => {
+				hasFailingToneCheck = result;
+			} );
+		} );
 
 		const initLength = getRefNodes().length;
 		target.saveFields.vetags = function () {
@@ -81,6 +111,11 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			}
 			if ( mw.editcheck.toneCheckShown ) {
 				tags.push( 'editcheck-tone-shown' );
+			}
+			if ( hasFailingToneCheck ) {
+				tags.push( 'editcheck-tone' );
+			} else if ( hasFailingToneCheck === null ) {
+				ve.track( 'activity.editCheck-tone', { action: 'save-before-check-finalized' } );
 			}
 			return tags.join( ',' );
 		};

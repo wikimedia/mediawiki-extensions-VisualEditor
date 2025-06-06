@@ -61,8 +61,12 @@ mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surf
 	if ( selection instanceof ve.dm.LinearSelection && listener !== 'onBeforeSave' ) {
 		// TODO currentBranchNode = surfaceModel.getDocument().getBranchNodeFromOffset( selection.getRange().to );
 	}
-	let modifiedContentRanges = this.getModifiedContentRanges( documentModel )
-		.filter( ( range ) => !this.isDismissedRange( range ) );
+	let modifiedContentRanges = this.getModifiedContentRanges( documentModel );
+	if ( listener !== 'onCheckAll' ) {
+		// mw.editcheck.hasAddedContentFailingToneCheck wants to check for any violations, even dismissed ones.
+		// Used for tagging.
+		modifiedContentRanges = modifiedContentRanges.filter( ( range ) => !this.isDismissedRange( range ) );
+	}
 
 	if ( listener === 'onBeforeSave' ) {
 		modifiedContentRanges = modifiedContentRanges.filter( ( range ) => !this.isTaggedRange( 'interacted', range ) );
