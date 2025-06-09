@@ -18,6 +18,8 @@
 	"tag-editcheck-references-activated-description": "EditCheck istinad lazım olduğunu düşünür və interfeys göstərilir",
 	"tag-editcheck-references-shown": "Redaktə Yoxlanışı (istinadlar) göstərilib",
 	"tag-editcheck-references-shown-description": "EditCheck istinad lazım olduğunu düşünüb və interfeys göstərib",
+	"tag-editcheck-tone-shown": "Redaktə Yoxlanışı (ton) göstərildi",
+	"tag-editcheck-tone-shown-description": "EditCheck hesab edib ki, bəzi məzmunun tonuna düzəliş lazım ola bilər və buna görə də müvafiq interfeysi göstərib",
 	"tag-visualeditor": "Vizual redaktə",
 	"tag-visualeditor-description": "Redaktə [[{{MediaWiki:visualeditor-descriptionpagelink}}|Vizual redaktorun]] köməyi ilə edilib",
 	"tag-visualeditor-needcheck": "Vizual redaktor: Yoxla",

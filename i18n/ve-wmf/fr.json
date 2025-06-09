@@ -47,6 +47,8 @@
 	"tag-editcheck-references-activated-description": "EditCheck pense qu’une référence peut être nécessaire, et l’IHM a été affichée",
 	"tag-editcheck-references-shown": "Vérification de modification (références) affichées",
 	"tag-editcheck-references-shown-description": "EditCheck pense qu’une référence peut être nécessaire, et l’IHM a été affichée",
+	"tag-editcheck-tone-shown": "Modifier la vérification (tonalité) affichée",
+	"tag-editcheck-tone-shown-description": "EditCheck pense qu'un ajustement du ton de certains contenus aurait pu être nécessaire, et l'interface utilisateur a été affichée",
 	"tag-visualeditor": "Éditeur visuel",
 	"tag-visualeditor-description": "Modification effectuée avec l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|éditeur visuel]]",
 	"tag-visualeditor-needcheck": "Éditeur visuel : à vérifier",
