@@ -265,24 +265,6 @@ ve.dm.mwExample.MWInternalSectionLink.absoluteData = {
 	}
 };
 
-ve.dm.mwExample.MWMediaLinkExistsData = {
-	type: 'link/mwInternal',
-	attributes: {
-		lookupTitle: 'Media:Exists.png',
-		normalizedTitle: 'Media:Exists.png',
-		title: 'Media:Exists.png'
-	}
-};
-
-ve.dm.mwExample.MWMediaLinkMissingData = {
-	type: 'link/mwInternal',
-	attributes: {
-		lookupTitle: 'Media:Missing.png',
-		normalizedTitle: 'Media:Missing.png',
-		title: 'Media:Missing.png'
-	}
-};
-
 ve.dm.mwExample.MWBlockImage = {
 	html: ve.dm.example.singleLine`
 		<figure typeof="mw:Image/Thumb" class="mw-halign-right foobar">
@@ -401,13 +383,7 @@ ve.dm.mwExample.mwNowikiAnnotation = {
 ve.dm.mwExample.mwNowiki = [
 	{ type: 'paragraph' },
 	...'Foo',
-	[ '[', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
-	[ '[', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
-	[ 'B', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
-	[ 'a', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
-	[ 'r', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
-	[ ']', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
-	[ ']', [ ve.dm.mwExample.mwNowikiAnnotation ] ],
+	...ve.dm.example.annotateText( '[[Bar]]', ve.dm.mwExample.mwNowikiAnnotation ),
 	...'Baz',
 	{ type: '/paragraph' },
 	{ type: 'internalList' },
@@ -1867,22 +1843,14 @@ ve.dm.mwExample.domToDataCases = {
 		body: '<p><a rel="mw:MediaLink" href="//localhost/w/images/x/xx/Exists.png" resource="./Media:Exists.png" title="Exists.png">Media:Exists.png</a></p>',
 		data: [
 			{ type: 'paragraph' },
-			[ 'M', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'e', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'd', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'i', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'a', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ ':', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'E', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'x', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'i', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 's', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 't', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 's', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ '.', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'p', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'n', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
-			[ 'g', [ ve.dm.mwExample.MWMediaLinkExistsData ] ],
+			...ve.dm.example.annotateText( 'Media:Exists.png', {
+				type: 'link/mwInternal',
+				attributes: {
+					lookupTitle: 'Media:Exists.png',
+					normalizedTitle: 'Media:Exists.png',
+					title: 'Media:Exists.png'
+				}
+			} ),
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
@@ -1894,23 +1862,14 @@ ve.dm.mwExample.domToDataCases = {
 		body: '<p><a rel="mw:MediaLink" href="./Special:FilePath/Missing.png" resource="./Media:Missing.png" title="Missing.png" typeof="mw:Error" data-mw=\'{"errors":[{"key":"apierror-filedoesnotexist","message":"This image does not exist."}]}\'>Media:Missing.png</a></p>',
 		data: [
 			{ type: 'paragraph' },
-			[ 'M', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'e', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'd', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'i', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'a', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ ':', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'M', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'i', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 's', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 's', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'i', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'n', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'g', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ '.', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'p', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'n', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
-			[ 'g', [ ve.dm.mwExample.MWMediaLinkMissingData ] ],
+			...ve.dm.example.annotateText( 'Media:Missing.png', {
+				type: 'link/mwInternal',
+				attributes: {
+					lookupTitle: 'Media:Missing.png',
+					normalizedTitle: 'Media:Missing.png',
+					title: 'Media:Missing.png'
+				}
+			} ),
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
