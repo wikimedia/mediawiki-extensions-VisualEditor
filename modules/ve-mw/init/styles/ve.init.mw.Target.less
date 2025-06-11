@@ -45,6 +45,17 @@
 	}
 }
 
+/* Fix list styles in Vector 2022 (T368302) */
+.skin-vector-2022 .mw-body p.ve-ce-generated-wrapper {
+	& + ul,
+	& + ol,
+	& + table,
+	& + dl,
+	& + blockquote {
+		margin-top: 0;
+	}
+}
+
 /*
  * Grey out the fake toggles to make it more obvious they are not interactive.
  * Don't bother trying to float the toggles, as the text they are floating around
