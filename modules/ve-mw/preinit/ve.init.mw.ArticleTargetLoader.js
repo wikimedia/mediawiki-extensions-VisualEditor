@@ -108,7 +108,7 @@
 					ve.track( 'trace.moduleLoad.exit', { mode: mode } );
 					pluginCallbacks.push( ve.init.platform.getInitializedPromise.bind( ve.init.platform ) );
 					// Execute plugin callbacks and collect promises
-					return $.when.apply( $, pluginCallbacks.map( ( callback ) => {
+					return $.when( ...pluginCallbacks.map( ( callback ) => {
 						try {
 							return callback();
 						} catch ( e ) {
