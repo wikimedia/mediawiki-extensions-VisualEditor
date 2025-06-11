@@ -173,7 +173,7 @@ ve.dm.MWExtensionNode.static.describeChanges = function ( attributeChanges, attr
 		}
 		// Append attribute changes
 		// Parent method
-		Array.prototype.push.apply( descriptions, ve.dm.MWExtensionNode.super.static.describeChanges.call(
+		descriptions.push( ...ve.dm.MWExtensionNode.super.static.describeChanges.call(
 			this,
 			ve.ui.DiffElement.static.compareAttributes( attributeChanges.mw.from.attrs || {}, attributeChanges.mw.to.attrs || {} ),
 			attributes

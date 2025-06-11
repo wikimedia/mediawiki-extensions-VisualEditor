@@ -436,7 +436,7 @@ Controller.prototype.drawSelections = function () {
 		const highlightNodes = [];
 		this.getActions().forEach( ( action ) => {
 			action.getHighlightSelections().forEach( ( selection ) => {
-				highlightNodes.push.apply( highlightNodes, surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
+				highlightNodes.push( ...surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
 			} );
 		} );
 		surfaceView.setReviewMode( true, highlightNodes );
