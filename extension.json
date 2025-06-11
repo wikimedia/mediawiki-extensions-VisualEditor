@@ -308,13 +308,13 @@
 		"ext.visualEditor.progressBarWidget": {
 			"group": "visualEditorA",
 			"scripts": "modules/ve-mw/preinit/ve.init.mw.ProgressBarWidget.js",
-			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget.css",
+			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget.less",
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget-wikimediatheme.css"
+					"modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget-wikimediatheme.less"
 				],
 				"monobook": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget-apextheme.css"
+					"modules/ve-mw/preinit/styles/ve.init.mw.ProgressBarWidget-apextheme.less"
 				]
 			}
 		},
@@ -340,19 +340,19 @@
 			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init.less",
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css"
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.less"
 				],
 				"vector": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css",
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.less",
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-vector.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.css",
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-wikimediatheme.less",
 					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-vector-2022.less"
 				],
 				"monobook": [
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.css",
-					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-monobook.css"
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-apextheme.less",
+					"modules/ve-mw/preinit/styles/ve.init.mw.DesktopArticleTarget.init-monobook.less"
 				]
 			},
 			"dependencies": [
@@ -575,7 +575,7 @@
 		},
 		"ext.visualEditor.collabTarget.init.styles": {
 			"styles": [
-				"modules/ve-mw-collab/ve.init.mw.CollabTarget.css"
+				"modules/ve-mw-collab/ve.init.mw.CollabTarget.less"
 			]
 		},
 		"ext.visualEditor.collab": {
@@ -1554,7 +1554,7 @@
 				"modules/ve-mw/preinit/ve.init.MWEditModeTool.js"
 			],
 			"styles": [
-				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog.css",
+				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchConfirmDialog.less",
 				"modules/ve-mw/preinit/styles/ve.init.MWVESwitchPopupWidget.less"
 			],
 			"skinStyles": {
@@ -1663,23 +1663,23 @@
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWExpandableErrorElement.less",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWFloatingHelpElement.less",
 				"modules/ve-mw/ui/styles/elements/ve.ui.MWPreviewElement.less",
-				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.css",
+				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.less",
 				"modules/ve-mw/ui/styles/toolgroups/ve.ui.MWHelpListToolGroup.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.less"
 			],
 			"skinStyles": {
 				"default": [
-					"modules/ve-mw/themes/wikimediaui.css"
+					"modules/ve-mw/themes/wikimediaui.less"
 				],
 				"vector": [
-					"modules/ve-mw/themes/wikimediaui.css"
+					"modules/ve-mw/themes/wikimediaui.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/themes/wikimediaui.css"
+					"modules/ve-mw/themes/wikimediaui.less"
 				],
 				"monobook": [
-					"modules/ve-mw/themes/apex.css"
+					"modules/ve-mw/themes/apex.less"
 				]
 			},
 			"dependencies": [
@@ -1768,16 +1768,16 @@
 			],
 			"skinStyles": {
 				"vector": [
-					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-vector.css"
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-vector.less"
 				],
 				"vector-2022": [
-					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-vector.css"
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-vector.less"
 				],
 				"minerva": [
-					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-minerva.css"
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-minerva.less"
 				],
 				"monobook": [
-					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-monobook.css"
+					"modules/ve-mw/ui/styles/tools/ve.ui.MWFormatTool-monobook.less"
 				]
 			},
 			"dependencies": [
@@ -1905,7 +1905,7 @@
 			"styles": [
 				"modules/ve-mw/ui/styles/contextitems/ve.ui.MWInternalLinkContextItem.less",
 				"modules/ve-mw/ui/styles/inspectors/ve.ui.MWLinkAnnotationInspector.less",
-				"modules/ve-mw/ui/styles/tools/ve.ui.MWLinkInspectorTool.css",
+				"modules/ve-mw/ui/styles/tools/ve.ui.MWLinkInspectorTool.less",
 				"modules/ve-mw/ce/styles/annotations/ve.ce.MWExternalLinkAnnotation.less"
 			],
 			"dependencies": [
@@ -1968,7 +1968,7 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryItemWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryWidget.less",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.css",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.less",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMetaDialog.less"
 			],
 			"dependencies": [
@@ -2455,7 +2455,7 @@
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextPlainTextStringTransferHandler.js"
 			],
 			"styles": [
-				"modules/ve-mw/ui/styles/ve.ui.MWWikitextSurface.css"
+				"modules/ve-mw/ui/styles/ve.ui.MWWikitextSurface.less"
 			],
 			"dependencies": [
 				"mediawiki.editfont.styles",
