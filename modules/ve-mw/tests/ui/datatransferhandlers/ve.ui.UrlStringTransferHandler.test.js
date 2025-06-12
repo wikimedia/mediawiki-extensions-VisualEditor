@@ -20,5 +20,11 @@ QUnit.test.each( 'paste', [
 		)
 	}
 ], ( assert, caseItem ) => {
-	ve.test.utils.runUrlStringHandlerTest( assert, caseItem.pasteString, caseItem.pasteHtml, caseItem.pasteType, caseItem.expectedData, location.origin, caseItem.msg );
+	ve.test.utils.runUrlStringHandlerTest(
+		assert,
+		{
+			base: location.origin,
+			...caseItem
+		}
+	);
 } );
