@@ -16,13 +16,21 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.focusFragment = config.focusFragment;
 	this.message = config.message;
 	this.id = config.id;
+	this.paused = config.paused || false;
 	this.title = config.title;
 	this.icon = config.icon;
 	this.type = config.type || 'warning';
+	this.choices = config.choices || config.check.constructor.static.choices;
 };
 
 OO.initClass( mw.editcheck.EditCheckAction );
 OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
+
+mw.editcheck.EditCheckAction.static.compareStarts = function ( a, b ) {
+	const aStart = a.getHighlightSelections()[ 0 ].getCoveringRange().start;
+	const bStart = b.getHighlightSelections()[ 0 ].getCoveringRange().start;
+	return aStart - bStart;
+};
 
 /**
  * Get the action's title
@@ -39,7 +47,7 @@ mw.editcheck.EditCheckAction.prototype.getTitle = function () {
  * @return {Object[]}
  */
 mw.editcheck.EditCheckAction.prototype.getChoices = function () {
-	return this.check.getChoices( this );
+	return this.choices;
 };
 
 /**
@@ -112,9 +120,10 @@ mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actio
 
 /**
  * @param {mw.editcheck.EditCheckAction} other
+ * @param {boolean} ignorePaused Ignore whether the action is paused
  * @return {boolean}
  */
-mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
+mw.editcheck.EditCheckAction.prototype.equals = function ( other, ignorePaused ) {
 	// Same check type?
 	if ( this.check.constructor !== other.check.constructor ) {
 		return false;
@@ -122,6 +131,9 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
 	// If ids are present, they're the only thing that counts
 	if ( this.id || other.id ) {
 		return this.id === other.id;
+	}
+	if ( !ignorePaused && this.paused !== other.paused ) {
+		return false;
 	}
 	// Shortcut the fragment check if possible
 	if ( this.fragments.length !== other.fragments.length ) {

@@ -1,0 +1,134 @@
+/*!
+ * EditCheck ContentBranchNode check class
+ *
+ * @copyright See AUTHORS.txt
+ */
+
+/**
+ * Abstract class for async checks that run on the plain text of a ContentBranchNode.
+ *
+ * The check runs when selection focus changes branch node, or on pre-save. The subclass
+ * implements `.checkAsync`. This is called with the ContentBranchNode's plain text
+ * and returns an outcome, which gets processed by the subclass's `.newAction` method,
+ * returning a new EditCheckAction if appropriate.
+ *
+ * @class
+ * @constructor
+ */
+mw.editcheck.AsyncTextCheck = function MWAsyncTextCheck( /* config */ ) {
+	// Parent constructor
+	mw.editcheck.AsyncTextCheck.super.apply( this, arguments );
+
+	// Construct memoizeCheckAsync if running for the first time for this constructor
+	if ( this.constructor.static.memoizedCheckAsync === null ) {
+		this.constructor.static.memoizedCheckAsync = mw.editcheck.memoize(
+			( text ) => this.constructor.static.checkAsync( text )
+		);
+	}
+};
+
+OO.inheritClass( mw.editcheck.AsyncTextCheck, mw.editcheck.BaseEditCheck );
+
+mw.editcheck.AsyncTextCheck.static.name = null;
+
+/**
+ * This static method gets implemented inside the AsyncTextCheck constructor. It
+ * memoizes the subclass's static method `checkAsync`.
+ *
+ * @static
+ * @param {string} text The text to check
+ * @return {Promise|any} The outcome of the check
+ */
+mw.editcheck.AsyncTextCheck.static.memoizedCheckAsync = null;
+
+/**
+ * @param {string} listener Type of listener, such as 'onBeforeSave' or 'onBranchNodeChange'
+ * @param {ve.dm.Surface} surfaceModel The surface
+ * @param {mw.editcheck.EditCheckAction[]} oldActions The actions last returned by this method
+ * @return {Promise[]} An array of promises containing either an action or null
+ */
+mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surfaceModel /* , oldActions */ ) {
+	const documentModel = surfaceModel.getDocument();
+	const selection = surfaceModel.getSelection();
+	// TODO let currentBranchNode = null;
+	if ( selection instanceof ve.dm.LinearSelection && listener !== 'onBeforeSave' ) {
+		// TODO currentBranchNode = surfaceModel.getDocument().getBranchNodeFromOffset( selection.getRange().to );
+	}
+	let modifiedContentRanges = this.getModifiedContentRanges( documentModel )
+		.filter( ( range ) => !this.isDismissedRange( range ) );
+
+	if ( listener === 'onBeforeSave' ) {
+		modifiedContentRanges = modifiedContentRanges.filter( ( range ) => !this.isTaggedRange( 'interacted', range ) );
+	}
+
+	const actionPromises = [];
+	this.getModifiedContentBranchNodes( documentModel ).forEach( ( node ) => {
+		const nodeFragment = new ve.dm.SurfaceFragment( surfaceModel, new ve.dm.LinearSelection( node.getRange() ) );
+		const fragments = modifiedContentRanges
+			.filter( ( range ) => node.getRange().containsRange( range ) )
+			.map( ( range ) => surfaceModel.getLinearFragment( range ) );
+
+		/* All fragments have been dismissed */
+		if ( !fragments.length ) {
+			return;
+		}
+		actionPromises.push( Promise.resolve(
+			this.constructor.static.memoizedCheckAsync(
+				documentModel.data.getText( true, node.getRange() )
+			)
+		).then( ( outcome ) => {
+			if ( !outcome ) {
+				return null;
+			}
+			return this.newAction( nodeFragment, outcome );
+		} ) );
+	} );
+	return actionPromises;
+};
+
+mw.editcheck.AsyncTextCheck.prototype.onBeforeSave = function ( ...args ) {
+	return this.handleListener( 'onBeforeSave', ...args );
+};
+
+mw.editcheck.AsyncTextCheck.prototype.onBranchNodeChange = function ( ...args ) {
+	return this.handleListener( 'onBranchNodeChange', ...args );
+};
+
+/**
+ * Perform a possibly-asynchronous check on the plaintext of a ContentBranchNode.
+ *
+ * The check must be deterministic; i.e. it must always return the same value for the same
+ * arguments. This allows the result to be memoized.
+ *
+ * @abstract
+ * @param {string} text The plaintext of the ContentBranchNode
+ * @return {Promise|any} The outcome of the check, to be passed into #newAction
+ */
+mw.editcheck.AsyncTextCheck.prototype.checkAsync = null;
+
+/**
+ * Build an action (or not), depending on the outcome of #checkAsync
+ *
+ * Caution: The ContentBranchNode may have changed while waiting for #checkAsync to settle.
+ * For example, the fragment could be empty if the ContentBranchNode has been deleted.
+ *
+ * @param {ve.dm.SurfaceFragment} fragment Fragment whose range was the ContentBranchNode
+ * @param {any} outcome The outcome returned by #checkAsync
+ * @return {mw.editcheck.EditCheckAction|null} A new action if appropriate, else null
+ */
+mw.editcheck.AsyncTextCheck.prototype.newAction = null;
+
+mw.editcheck.AsyncTextCheck.prototype.act = function ( choice, action, surface ) {
+	this.tag( 'interacted', action );
+	if ( choice === 'dismiss' ) {
+		this.dismiss( action );
+		// HACK: Recalculate check list
+		this.controller.updateForListener( 'onBranchNodeChange' );
+		return ve.createDeferred().resolve( { action: choice } ).promise();
+	} else if ( choice === 'edit' && surface ) {
+		return this.controller.closeDialog().then( () => {
+			surface.getView().activate();
+			action.fragments[ action.fragments.length - 1 ].collapseToEnd().select();
+		} );
+	}
+};

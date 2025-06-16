@@ -1,5 +1,7 @@
 'use strict';
 
+const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
+
 function Controller( target ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
@@ -9,12 +11,13 @@ function Controller( target ) {
 	this.target = target;
 
 	this.surface = null;
-	this.listener = 'onDocumentChange';
+	this.inBeforeSave = false;
+	this.branchNode = null;
 
 	this.$highlights = $( '<div>' );
 
-	this.dismissedFragments = {};
-	this.dismissedIds = {};
+	this.taggedFragments = {};
+	this.taggedIds = {};
 
 	this.onDocumentChangeDebounced = ve.debounce( this.onDocumentChange.bind( this ), 100 );
 	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
@@ -62,8 +65,8 @@ Controller.prototype.setup = function () {
 			this.surface = null;
 			this.actionsByListener = {};
 
-			this.dismissedFragments = {};
-			this.dismissedIds = {};
+			this.taggedFragments = {};
+			this.taggedIds = {};
 
 			mw.editcheck.refCheckShown = false;
 			mw.editcheck.toneCheckShown = false;
@@ -99,28 +102,35 @@ Controller.prototype.refresh = function () {
 	if ( this.target.deactivating || !this.target.active ) {
 		return;
 	}
-	if ( this.listener === 'onBeforeSave' ) {
+	if ( this.inBeforeSave ) {
 		// These shouldn't be recalculated
-		this.emit( 'actionsUpdated', this.listener, this.getActions( this.listener ), [], [], false );
+		this.emit( 'actionsUpdated', 'onBeforeSave', this.getActions(), [], [], false );
 	} else {
-		this.updateForListener( this.listener, true );
+		midEditListeners.forEach(
+			( listener ) => this.updateForListener( listener, true )
+		);
 	}
 };
 
 Controller.prototype.updateForListener = function ( listener, always ) {
-	listener = listener || this.listener;
-	const existing = this.actionsByListener[ listener ] || [];
-	const actions = mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
-		.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action );
+	const existing = this.getActions( listener ) || [];
+	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
+	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel(), existing )
+		.then( ( actions ) => actions.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action ) )
+		.then( ( actions ) => {
+			this.actionsByListener[ listener ] = actions;
 
-	this.actionsByListener[ listener ] = actions;
-
-	const newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
-	const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
-	if ( always || actions.length !== existing.length || newActions.length || discardedActions.length ) {
-		this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions, false );
-	}
-	return actions;
+			const newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
+			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
+			if ( always || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+				actions = actions.concat( otherListenersExisting );
+				actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
+				// TODO: We need to consider a consistency check here as the document state may have changed since the
+				// action within the promise was created
+				this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions, false );
+			}
+			return actions;
+		} );
 };
 
 Controller.prototype.removeAction = function ( listener, action, rejected ) {
@@ -151,8 +161,22 @@ Controller.prototype.focusAction = function ( action, scrollTo ) {
 	this.updatePositions();
 };
 
+/**
+ * Get actions by listener
+ *
+ * If no listener is specified, then get all actions relevant to the current moment, i.e.:
+ * - During beforeSave, get onBeforeSave listeners
+ * - Otherwise, get all mid-edit listeners
+ *
+ * @param {string} [listener] The listener; if omitted, get all relevant actions
+ * @return {mw.editcheck.EditCheckAction[]} The actions
+ */
 Controller.prototype.getActions = function ( listener ) {
-	return this.actionsByListener[ listener || this.listener ] || [];
+	if ( listener ) {
+		return this.actionsByListener[ listener ];
+	}
+	const listeners = this.inBeforeSave ? [ 'onBeforeSave' ] : midEditListeners;
+	return [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
 };
 
 Controller.prototype.onSelect = function ( selection ) {
@@ -164,6 +188,20 @@ Controller.prototype.onSelect = function ( selection ) {
 		// In review mode the selection and display of checks is being managed by the dialog
 		return;
 	}
+
+	if ( !this.inBeforeSave ) {
+		let newBranchNode;
+		if ( selection instanceof ve.dm.LinearSelection ) {
+			newBranchNode = this.surface.model.documentModel.getBranchNodeFromOffset( selection.range.to );
+		} else {
+			newBranchNode = null;
+		}
+		if ( newBranchNode !== this.branchNode ) {
+			this.branchNode = newBranchNode;
+			this.updateForListener( 'onBranchNodeChange' );
+		}
+	}
+
 	if ( OO.ui.isMobile() ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
@@ -211,7 +249,7 @@ Controller.prototype.onDocumentChange = function () {
 		// This is debounced, and could potentially be called after teardown
 		return;
 	}
-	if ( this.listener !== 'onBeforeSave' ) {
+	if ( !this.inBeforeSave ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
 
@@ -228,7 +266,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	}
 
 	// do we need to show mid-edit actions?
-	if ( listener !== 'onDocumentChange' ) {
+	if ( listener === 'onBeforeSave' ) {
 		return;
 	}
 	if ( !actions.length ) {
@@ -242,7 +280,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 		shownPromise = windowAction.open(
 			windowName,
-			{ listener: listener, actions: actions, controller: this }
+			{ inBeforeSave: this.inBeforeSave, actions: actions, controller: this }
 		).then( ( instance ) => {
 			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
 			instance.closed.then( () => {
@@ -270,82 +308,83 @@ Controller.prototype.setupPreSaveProcess = function () {
 		ve.track( 'counter.editcheck.preSaveChecksAvailable' );
 
 		const oldFocused = this.focused;
-		this.listener = 'onBeforeSave';
-		const actions = this.updateForListener( 'onBeforeSave' );
-		if ( actions.length ) {
-			ve.track( 'counter.editcheck.preSaveChecksShown' );
-			mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
-				actions.some( ( action ) => action.getName() === 'addReference' );
-			mw.editcheck.toneCheckShown = mw.editcheck.toneCheckShown ||
-				actions.some( ( action ) => action.getName() === 'tone' );
+		this.inBeforeSave = true;
+		return this.updateForListener( 'onBeforeSave' ).then( ( actions ) => {
+			if ( actions.length ) {
+				ve.track( 'counter.editcheck.preSaveChecksShown' );
+				mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
+					actions.some( ( action ) => action.getName() === 'addReference' );
+				mw.editcheck.toneCheckShown = mw.editcheck.toneCheckShown ||
+					actions.some( ( action ) => action.getName() === 'tone' );
 
-			this.setupToolbar( target );
+				this.setupToolbar( target );
 
-			let $contextContainer, contextPadding;
-			if ( surface.context.popup ) {
-				contextPadding = surface.context.popup.containerPadding;
-				$contextContainer = surface.context.popup.$container;
-				surface.context.popup.$container = surface.$element;
-				surface.context.popup.containerPadding = 20;
+				let $contextContainer, contextPadding;
+				if ( surface.context.popup ) {
+					contextPadding = surface.context.popup.containerPadding;
+					$contextContainer = surface.context.popup.$container;
+					surface.context.popup.$container = surface.$element;
+					surface.context.popup.containerPadding = 20;
+				}
+
+				return this.closeSidebars( 'preSaveProcess' ).then( () => this.closeDialog( 'preSaveProcess' ).then( () => {
+					this.originalToolbar.toggle( false );
+					target.onContainerScroll();
+					const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
+					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions: actions, controller: this } )
+						.then( ( instance ) => {
+							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
+							actions.forEach( ( action ) => {
+								ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
+							} );
+							instance.closed.then( () => { }, () => { } ).then( () => {
+								surface.getView().setReviewMode( false );
+								this.inBeforeSave = false;
+								this.focused = oldFocused;
+								// Re-open the mid-edit sidebar if necessary.
+								this.refresh();
+							} );
+							return instance.closing.then( ( data ) => {
+								if ( target.deactivating || !target.active ) {
+									// Someone clicking "read" to leave the article
+									// will trigger the closing of this; in that
+									// case, just abandon what we're doing
+									return ve.createDeferred().reject().promise();
+								}
+								this.restoreToolbar( target );
+
+								if ( $contextContainer ) {
+									surface.context.popup.$container = $contextContainer;
+									surface.context.popup.containerPadding = contextPadding;
+								}
+
+								target.onContainerScroll();
+
+								if ( data ) {
+									const delay = ve.createDeferred();
+									// If they inserted, wait 2 seconds on desktop
+									// before showing save dialog to give user time
+									// to see success notification.
+									setTimeout( () => {
+										ve.track( 'counter.editcheck.preSaveChecksCompleted' );
+										delay.resolve();
+									}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
+									return delay.promise();
+								} else {
+									// closed via "back" or otherwise
+									ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
+									return ve.createDeferred().reject().promise();
+								}
+							} );
+						} );
+				} ) );
+			} else {
+				this.inBeforeSave = false;
+				// Counterpart to earlier preSaveChecksShown, for use in tracking
+				// errors in check-generation:
+				ve.track( 'counter.editcheck.preSaveChecksNotShown' );
 			}
-
-			return this.closeSidebars( 'preSaveProcess' ).then( () => this.closeDialog( 'preSaveProcess' ).then( () => {
-				this.originalToolbar.toggle( false );
-				target.onContainerScroll();
-				const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-				return windowAction.open( 'fixedEditCheckDialog', { listener: 'onBeforeSave', actions: actions, controller: this } )
-					.then( ( instance ) => {
-						ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
-						actions.forEach( ( action ) => {
-							ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
-						} );
-						instance.closed.then( () => {}, () => {} ).then( () => {
-							surface.getView().setReviewMode( false );
-							this.listener = 'onDocumentChange';
-							this.focused = oldFocused;
-							// Re-open the mid-edit sidebar if necessary.
-							this.refresh();
-						} );
-						return instance.closing.then( ( data ) => {
-							if ( target.deactivating || !target.active ) {
-								// Someone clicking "read" to leave the article
-								// will trigger the closing of this; in that
-								// case, just abandon what we're doing
-								return ve.createDeferred().reject().promise();
-							}
-							this.restoreToolbar( target );
-
-							if ( $contextContainer ) {
-								surface.context.popup.$container = $contextContainer;
-								surface.context.popup.containerPadding = contextPadding;
-							}
-
-							target.onContainerScroll();
-
-							if ( data ) {
-								const delay = ve.createDeferred();
-								// If they inserted, wait 2 seconds on desktop
-								// before showing save dialog to give user time
-								// to see success notification.
-								setTimeout( () => {
-									ve.track( 'counter.editcheck.preSaveChecksCompleted' );
-									delay.resolve();
-								}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
-								return delay.promise();
-							} else {
-								// closed via "back" or otherwise
-								ve.track( 'counter.editcheck.preSaveChecksAbandoned' );
-								return ve.createDeferred().reject().promise();
-							}
-						} );
-					} );
-			} ) );
-		} else {
-			this.listener = 'onDocumentChange';
-			// Counterpart to earlier preSaveChecksShown, for use in tracking
-			// errors in check-generation:
-			ve.track( 'counter.editcheck.preSaveChecksNotShown' );
-		}
+		} );
 	} );
 };
 
@@ -386,10 +425,6 @@ Controller.prototype.setupToolbar = function ( target ) {
 	target.toolbar.$element.before( reviewToolbar.$element );
 	target.toolbar = reviewToolbar;
 
-	reviewToolbar.connect( target, {
-		resize: 'onToolbarResize'
-	} );
-
 	reviewToolbar.initialize();
 
 	this.originalToolbar = toolbar;
@@ -425,13 +460,14 @@ Controller.prototype.drawSelections = function () {
 			'editCheckWarning',
 			this.focused.getHighlightSelections().map(
 				( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
-			)
+			),
+			this.focused.paused ? { color: '#888' } : {}
 		);
 	} else {
 		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );
 	}
 
-	if ( this.listener === 'onBeforeSave' ) {
+	if ( this.inBeforeSave ) {
 		// Review mode grays out everything that's not highlighted:
 		const highlightNodes = [];
 		this.getActions().forEach( ( action ) => {

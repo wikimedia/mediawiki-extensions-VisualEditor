@@ -90,7 +90,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 };
 
 ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions, rejected ) {
-	if ( listener !== this.listener ) {
+	if ( this.inBeforeSave !== ( listener === 'onBeforeSave' ) ) {
 		return;
 	}
 	if ( this.updateFilter ) {
@@ -190,13 +190,16 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
 		this.controller.on( 'focusAction', this.onFocusAction, false, this );
 
-		const actions = data.actions || this.controller.getActions( this.listener );
+		const actions = data.actions || this.controller.getActions();
 
-		this.listener = data.listener || 'onDocumentChange';
+		if ( !Object.prototype.hasOwnProperty.call( data, 'inBeforeSave' ) ) {
+			throw new Error( 'inBeforeSave argument required' );
+		}
+		this.inBeforeSave = data.inBeforeSave;
 		this.surface = data.surface;
 		this.updateFilter = data.updateFilter;
 
-		this.singleAction = ( this.listener === 'onBeforeSave' ) || OO.ui.isMobile();
+		this.singleAction = this.inBeforeSave || OO.ui.isMobile();
 
 		this.closeButton.toggle( OO.ui.isMobile() );
 		if ( data.footer !== undefined ) {
@@ -243,7 +246,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 		this.nextButton.setDisabled( false );
 		this.previousButton.setDisabled( false );
 
-		if ( data && this.listener === 'onBeforeSave' ) {
+		if ( data && this.inBeforeSave ) {
 			// If an action has been taken, we want to linger for a brief moment
 			// to show the result of the action before moving away
 			// TODO: This was written for AddReferenceEditCheck but should be
@@ -251,7 +254,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 			const pause = data.action !== 'reject' ? 500 : 0;
 			setTimeout( () => {
 				const rejected = [ 'feedback', 'reject', 'dismiss' ].includes( data.action );
-				this.controller.removeAction( this.listener, action, rejected );
+				this.controller.removeAction( 'onBeforeSave', action, rejected );
 			}, pause );
 		} else {
 			this.controller.refresh();
@@ -355,7 +358,7 @@ ve.ui.SidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 };
 
 ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
-	if ( this.listener === 'onBeforeSave' ) {
+	if ( this.inBeforeSave ) {
 		return;
 	}
 	const surfaceView = this.surface.getView();
