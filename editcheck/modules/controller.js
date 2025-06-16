@@ -72,11 +72,9 @@ Controller.prototype.setup = function () {
 
 			mw.editcheck.refCheckShown = false;
 			mw.editcheck.toneCheckShown = false;
-		} );
-	}, null, this );
 
-	target.on( 'teardown', () => {
-		document.documentElement.classList.remove( 've-editcheck-available' );
+			document.documentElement.classList.remove( 've-editcheck-available' );
+		} );
 	}, null, this );
 
 	this.setupPreSaveProcess();
