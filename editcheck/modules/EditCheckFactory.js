@@ -35,12 +35,30 @@ mw.editcheck.EditCheckFactory.prototype.register = function ( constructor, name 
 	// Parent method
 	mw.editcheck.EditCheckFactory.super.prototype.register.call( this, constructor, name );
 
-	if ( constructor.prototype.onDocumentChange ) {
-		this.checksByListener.onDocumentChange.push( name );
+	Object.keys( this.checksByListener ).forEach( ( listener ) => {
+		if ( constructor.prototype[ listener ] ) {
+			this.checksByListener[ listener ].push( name );
+		}
+	} );
+};
+
+/**
+ * @inheritdoc
+ */
+mw.editcheck.EditCheckFactory.prototype.unregister = function ( key ) {
+	if ( typeof key === 'function' ) {
+		key = key.key || ( key.static && key.static.name );
 	}
-	if ( constructor.prototype.onBeforeSave ) {
-		this.checksByListener.onBeforeSave.push( name );
-	}
+
+	// Parent method
+	mw.editcheck.EditCheckFactory.super.prototype.unregister.apply( this, arguments );
+
+	Object.keys( this.checksByListener ).forEach( ( listener ) => {
+		const index = this.checksByListener[ listener ].indexOf( key );
+		if ( index !== -1 ) {
+			this.checksByListener[ listener ].splice( index, 1 );
+		}
+	} );
 };
 
 /**
