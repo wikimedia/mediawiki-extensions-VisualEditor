@@ -26,6 +26,10 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
+	this.footer = config.footer && new OO.ui.LabelWidget( {
+		label: config.footer,
+		classes: [ 've-ui-editCheckActionWidget-footer' ]
+	} );
 	this.$actions = $( '<div>' ).addClass( 've-ui-editCheckActionWidget-actions oo-ui-element-hidden' );
 
 	this.$element.on( 'click', this.onClick.bind( this ) );
@@ -33,6 +37,10 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	this.$body = $( '<div>' )
 		.append( this.message.$element, this.$actions )
 		.addClass( 've-ui-editCheckActionWidget-body' );
+
+	if ( this.footer ) {
+		this.$body.append( this.footer.$element );
+	}
 
 	this.$element
 		.append( this.$body )

@@ -60,6 +60,11 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 			.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
 				ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-learn-more' } );
 			} ).end(),
+		// eslint-disable-next-line no-jquery/no-append-html
+		footer: $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-footer', ve.msg( 'editcheck-tone-footerlink' ) ) )
+			.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
+				ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-model-card' } );
+			} ).end(),
 		check: this,
 		choices: [
 			{

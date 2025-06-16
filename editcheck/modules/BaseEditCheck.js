@@ -99,6 +99,16 @@ mw.editcheck.BaseEditCheck.prototype.getTitle = function () {
 };
 
 /**
+ * Get the footer of the check, if any
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet|undefined}
+ */
+mw.editcheck.BaseEditCheck.prototype.getFooter = function () {
+	return this.constructor.static.footer || undefined;
+};
+
+/**
  * @param {mw.editcheck.EditCheckAction} action
  * @return {string}
  */
