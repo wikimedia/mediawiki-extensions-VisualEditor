@@ -93,7 +93,7 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 		return false;
 	}
 	// some checks are configured to only be for logged in / out users
-	if ( mw.editcheck.ecenable ) {
+	if ( mw.editcheck.forceEnable ) {
 		return true;
 	}
 	// account status:

@@ -26,10 +26,6 @@ class Hooks implements
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
 		$experimentalConfig = $veConfig->get( 'VisualEditorEditCheckLoadExperimental' );
 
-		if ( !$experimentalConfig ) {
-			return;
-		}
-
 		$experimentalDir = dirname( __DIR__ ) . '/modules/editchecks/experimental';
 		$files = array_diff( scandir( $experimentalDir ), [ '..', '.' ] );
 		if ( is_array( $experimentalConfig ) ) {

@@ -86,6 +86,15 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	if ( OO.ui.isMobile() ) {
 		this.$body.append( this.title.$element );
 	}
+	if ( mw.editcheck.experimental ) {
+		this.$body.append(
+			new OO.ui.MessageWidget( {
+				type: 'error',
+				label: 'Currently using experimental edit checks. For testing purposes only.',
+				inline: true
+			} ).$element
+		);
+	}
 	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
 };
 

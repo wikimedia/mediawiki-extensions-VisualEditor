@@ -1,6 +1,14 @@
+/*
+ * `ecenable` query string:
+ *   1: override user eligiblity criteria for all checks
+ *   2: also load experimental checks
+ */
+const ecenable = new URL( location.href ).searchParams.get( 'ecenable' );
+
 mw.editcheck = {
 	config: require( './config.json' ),
-	ecenable: !!( new URL( location.href ).searchParams.get( 'ecenable' ) || window.MWVE_FORCE_EDIT_CHECK_ENABLED )
+	forceEnable: !!( ecenable || window.MWVE_FORCE_EDIT_CHECK_ENABLED ),
+	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental || ecenable === '2' )
 };
 
 require( './utils.js' );
@@ -13,7 +21,7 @@ require( './AsyncTextCheck.js' );
 
 require( './editchecks/AddReferenceEditCheck.js' );
 
-if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental ) {
+if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
 }
 
@@ -80,7 +88,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 	} );
 }
 
-if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.ecenable ) {
+if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnable ) {
 	const Controller = require( './controller.js' ).Controller;
 	mw.hook( 've.newTarget' ).add( ( target ) => {
 		if ( target.constructor.static.name !== 'article' ) {
