@@ -1,12 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Derugon",
 			"Gomoko",
 			"Mahabarata"
 		]
 	},
 	"editcheck-dialog-action-no": "Non",
 	"editcheck-dialog-action-yes": "Oui",
+	"editcheck-dialog-action-decline": "Refuser",
+	"editcheck-dialog-action-revise": "Réviser",
 	"editcheck-dialog-addref-description": "Aidez les lecteurs à comprendre d'où proviennent ces informations en ajoutant une source.",
 	"editcheck-dialog-addref-reject-question": "Pourquoi n'ajoutez-vous pas une source ?",
 	"editcheck-dialog-addref-reject-description": "Les autres éditeurs aimeraient en savoir plus sur votre décision de ne pas ajouter une source.",
@@ -19,6 +22,8 @@
 	"editcheck-dialog-title": "Avant de publier",
 	"editcheck-copyvio-title": "Contenu copié-collé",
 	"editcheck-copyvio-description": "En règle générale, ne copiez pas de texte provenant d'autres sources. Cela constitue généralement une violation des droits d'auteur et un plagiat.",
+	"editcheck-tone-title": "Réviser le ton ?",
+	"editcheck-tone-description": "D’autres éditeurs révisent souvent ce type de formulation pour avoir un ton plus équilibré. [$1 En savoir plus]",
 	"editcheck-review-title": "Relire les modifications",
 	"tag-editcheck-reference-decline-common-knowledge": "Vérification de modification (références) refusée (savoir commun)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "La référence EditCheck a été refusée comme étant un savoir commun",
