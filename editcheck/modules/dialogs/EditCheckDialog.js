@@ -257,11 +257,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		if ( data.footer !== undefined ) {
 			this.footer.toggle( data.footer );
 		} else {
-			this.footer.toggle(
-				this.singleAction &&
-				// If we're in single-check mode don't show even the disabled pagers:
-				!mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle
-			);
+			this.footer.toggle( this.singleAction );
 		}
 		this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.singleAction );
 

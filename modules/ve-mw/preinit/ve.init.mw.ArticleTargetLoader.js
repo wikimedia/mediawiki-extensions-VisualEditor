@@ -48,8 +48,6 @@
 		} else {
 			inABTest = mw.user.getId() % 2 === 1;
 		}
-		// Test group gets edit check in multiple-checks mode
-		conf.editCheckSingle = !inABTest;
 		// Communicate the bucket to instrumentation:
 		mw.config.set( 'wgVisualEditorEditCheckABTestBucket', '2025-03-editcheck-multicheck-reference-' + ( inABTest ? 'test' : 'control' ) );
 	}

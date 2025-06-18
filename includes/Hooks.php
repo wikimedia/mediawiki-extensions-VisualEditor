@@ -1181,7 +1181,6 @@ class Hooks implements
 			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
 			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
 			'editCheck' => $veConfig->get( 'VisualEditorEditCheck' ),
-			'editCheckSingle' => $veConfig->get( 'VisualEditorEditCheckSingleCheckMode' ),
 			'editCheckExperimental' => (bool)$veConfig->get( 'VisualEditorEditCheckLoadExperimental' ),
 			'editCheckABTest' => $veConfig->get( 'VisualEditorEditCheckABTest' ),
 			'editCheckReliabilityAvailable' => ApiEditCheckReferenceUrl::isAvailable(),

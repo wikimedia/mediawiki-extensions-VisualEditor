@@ -141,10 +141,6 @@
 			"value": false,
 			"description": "Enable experimental Edit Check feature. Can also be enabled using ?ecenable=1."
 		},
-		"VisualEditorEditCheckSingleCheckMode": {
-			"value": true,
-			"description": "Only allow a single edit check to be surfaced"
-		},
 		"VisualEditorEditCheckLoadExperimental": {
 			"value": false,
 			"description": "Load experimental edit checks from the `editchecks/experimental` directory. Can be `false` to not load anything, `true` to load everything, or an array of filenames to load only those checks"

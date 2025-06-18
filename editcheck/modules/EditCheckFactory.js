@@ -111,13 +111,6 @@ mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( control
 		if ( !check.canBeShown() ) {
 			return;
 		}
-		if (
-			mw.config.get( 'wgVisualEditorConfig' ).editCheckSingle &&
-			listenerName === 'onBeforeSave' &&
-			check.getName() !== 'addReference'
-		) {
-			return;
-		}
 		const checkListener = check[ listenerName ];
 		let actionOrPromise;
 		try {
