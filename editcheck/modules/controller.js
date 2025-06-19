@@ -46,8 +46,12 @@ Controller.prototype.setup = function () {
 		if ( !this.editChecksArePossible() ) {
 			return;
 		}
-		// ideally this would happen slightly earlier:
-		document.documentElement.classList.add( 've-editcheck-available' );
+		// Ideally this would happen slightly earlier:
+		$( document.documentElement ).addClass( 've-editcheck-available' );
+		// Adding the class can cause large layout changes (e.g. hiding Vector
+		// side panels), so emit a window resize event to notify any components
+		// that may be affected, e.g. the VE toolbar
+		window.dispatchEvent( new Event( 'resize' ) );
 
 		this.surface.getView().on( 'position', this.onPositionDebounced );
 		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
@@ -73,7 +77,8 @@ Controller.prototype.setup = function () {
 			mw.editcheck.refCheckShown = false;
 			mw.editcheck.toneCheckShown = false;
 
-			document.documentElement.classList.remove( 've-editcheck-available' );
+			$( document.documentElement ).removeClass( 've-editcheck-available' );
+			window.dispatchEvent( new Event( 'resize' ) );
 		} );
 	}, null, this );
 
