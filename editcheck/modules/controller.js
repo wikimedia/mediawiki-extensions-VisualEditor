@@ -130,6 +130,12 @@ Controller.prototype.updatePositions = function () {
 	this.emit( 'position' );
 };
 
+/**
+ * Re-executes mid-edit checks.
+ *
+ * Used when state may have changed, for example upon exiting the pre-save dialog
+ * or after the user has interacted with a mid-edit action.
+ */
 Controller.prototype.refresh = function () {
 	if ( this.target.deactivating || !this.target.active ) {
 		return;
@@ -144,6 +150,21 @@ Controller.prototype.refresh = function () {
 	}
 };
 
+/**
+ * Fires all edit checks associated with a given listener.
+ *
+ * Actions are created anew for every run, but we want continuity for certain
+ * state changes such as 'paused' state. We therefore match them up to existing
+ * actions by checking for equality, ie, the same constructor and same ID or
+ * fragments.
+ *
+ * We return a promise so that UI actions such as opening the pre-save dialog
+ * do not occur until checks have completed.
+ *
+ * @param listener {string} eg onBeforeSave, onDocumentChange, onBranchNodeChange
+ * @param always {bool}
+ * @return {Promise} An updated set of actions.
+ */
 Controller.prototype.updateForListener = function ( listener, always ) {
 	const existing = this.getActions( listener ) || [];
 	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
@@ -301,6 +322,17 @@ Controller.prototype.onDocumentChange = function () {
 	this.updatePositions();
 };
 
+/**
+ * Handler when 'actionsUpdated' fires.
+ *
+ * Updates gutter and highlights when the action list has changed.
+ * Displays the edit check dialog if it is not already on screen.
+ *
+ * @param listener {string} eg onBeforeSave, onDocumentChange, onBranchNodeChange
+ * @param actions {mw.editcheck.EditCheckAction[]}
+ * @param newActions {mw.editcheck.EditCheckAction[]}
+ * @param discardedActions {mw.editcheck.EditCheckAction[]}
+ */
 Controller.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
 	// do we need to redraw anything?
 	if ( newActions.length || discardedActions.length ) {
@@ -342,6 +374,17 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	} );
 };
 
+/**
+ * Adds the pre-save edit check dialog before the normal page commit dialog.
+ * Handles closing the mid-edit dialog, as well as restoring it if the user
+ * exits the pre-save check dialog.
+ *
+ * We execute all pre-save checks, which may be asynchronous, and wait for them
+ * to complete before opening the pre-save dialog.
+ *
+ * TODO: Set a time-out so that we don't hang forever if an async check takes
+ * too long.
+ */
 Controller.prototype.setupPreSaveProcess = function () {
 	const target = this.target;
 	const preSaveProcess = target.getPreSaveProcess();
