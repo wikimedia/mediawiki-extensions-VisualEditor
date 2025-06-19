@@ -417,7 +417,6 @@ Controller.prototype.setupPreSaveProcess = function () {
 				}
 
 				return this.closeSidebars( 'preSaveProcess' ).then( () => this.closeDialog( 'preSaveProcess' ).then( () => {
-					this.originalToolbar.toggle( false );
 					target.onContainerScroll();
 					const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
 					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions: actions, controller: this } )
@@ -480,7 +479,9 @@ Controller.prototype.setupPreSaveProcess = function () {
 Controller.prototype.setupToolbar = function ( target ) {
 	const surface = target.getSurface();
 	const toolbar = target.getToolbar();
-	const reviewToolbar = new ve.ui.PositionedTargetToolbar( target, target.toolbarConfig );
+	this.$originalToolbarTools = toolbar.$group.add( toolbar.$after ).addClass( 'oo-ui-element-hidden' );
+
+	const reviewToolbar = new ve.ui.TargetToolbar( target, target.toolbarConfig );
 	reviewToolbar.setup( [
 		{
 			name: 'back',
@@ -496,48 +497,34 @@ Controller.prototype.setupToolbar = function ( target ) {
 		},
 		{
 			name: 'save',
-			// TODO: MobileArticleTarget should ignore 'align'
-			align: OO.ui.isMobile() ? 'before' : 'after',
 			type: 'bar',
 			include: [ 'showSaveDisabled' ]
 		}
 	], surface );
-	reviewToolbar.$element.addClass( 've-ui-editCheck-toolbar' );
 
 	reviewToolbar.items[ 1 ].$element.removeClass( 'oo-ui-toolGroup-empty' );
 	reviewToolbar.items[ 1 ].$group.append(
 		$( '<span>' ).addClass( 've-ui-editCheck-toolbar-title' ).text( ve.msg( 'editcheck-dialog-title' ) )
 	);
-	if ( OO.ui.isMobile() ) {
-		reviewToolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
-	}
-	target.toolbar.$element.before( reviewToolbar.$element );
-	target.toolbar = reviewToolbar;
+	// Just append the $group of the new toolbar, so we don't have to wire up all the toolbar events.
+	this.$reviewToolbarGroup = reviewToolbar.$group.addClass( 've-ui-editCheck-toolbar-tools' );
+	toolbar.$group.after( this.$reviewToolbarGroup );
 
-	reviewToolbar.initialize();
-
-	this.originalToolbar = toolbar;
-	this.reviewToolbar = reviewToolbar;
+	toolbar.onWindowResize();
 };
 
 Controller.prototype.restoreToolbar = function ( target ) {
-	if ( !this.reviewToolbar ) {
+	if ( !this.$reviewToolbarGroup ) {
 		return;
 	}
-	this.reviewToolbar.$element.remove();
-	this.originalToolbar.toggle( true );
-	target.toolbar = this.originalToolbar;
+	const toolbar = target.getToolbar();
 
-	// Creating a new PositionedTargetToolbar stole the
-	// toolbar windowmanagers, so we need to make the
-	// original toolbar reclaims them:
-	target.setupToolbar( target.getSurface() );
-	// If the window was resized while the originalToolbar was hidden then
-	// the cached measurements will be wrong. Recalculate.
-	this.originalToolbar.onWindowResize();
+	this.$reviewToolbarGroup.remove();
+	this.$reviewToolbarGroup = null;
 
-	this.reviewToolbar = null;
-	this.originalToolbar = null;
+	this.$originalToolbarTools.removeClass( 'oo-ui-element-hidden' );
+
+	toolbar.onWindowResize();
 };
 
 Controller.prototype.drawSelections = function () {

@@ -96,36 +96,8 @@
 
 /* Toolbar */
 
-.ve-ui-editCheck-toolbar {
-	font-size: 0.875rem; // ignore content scaling
-
-	.mw-mf & {
-		font-size: inherit;
-	}
-
-	.oo-ui-toolbar-bar {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.oo-ui-toolbar-tools {
-		flex: 1;
-		display: flex;
-	}
-
-	.oo-ui-toolbar-tools.oo-ui-toolbar-after {
-		flex: 0;
-	}
-
-	.oo-ui-toolbar-actions + div {
-		// There's a clear div that we need to enhance slightly
-		flex-basis: 100%;
-		height: 0;
-	}
-
-	&.ve-init-mw-mobileArticleTarget-toolbar .oo-ui-toolbar-tools.oo-ui-toolbar-after {
-		display: none;
-	}
+.ve-ui-editCheck-toolbar-tools {
+	display: flex;
 }
 
 .ve-ui-toolbar-group-title {
