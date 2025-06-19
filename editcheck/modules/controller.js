@@ -603,13 +603,9 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 	// want the very beginning to be in view, so collapse it:
 	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
 	const padding = ve.copy( this.surface.getPadding() );
-	if ( alignToTop ) {
-		padding.top = action.widget.$element[ 0 ].getBoundingClientRect().top;
-	}
-	if ( OO.ui.isMobile() ) {
-		// TODO: Fix mobile surface padding
-		padding.top = 80;
-	}
+
+	padding.top += 10;
+	padding.bottom += 10;
 
 	if ( ve.ui.FixedEditCheckDialog.static.position === 'below' ) {
 		// TODO: ui.surface getPadding should really be fixed for this
