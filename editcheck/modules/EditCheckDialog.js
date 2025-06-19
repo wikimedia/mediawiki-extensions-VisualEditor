@@ -225,6 +225,11 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.surface.context.hide();
 
 		this.showActions( actions, actions );
+		if ( this.onPosition ) {
+			// This currently only applies to SidebarEditCheckDialog but needs to be
+			// called immediately so margin-top is set before the animation starts.
+			this.onPosition();
+		}
 	}, this );
 };
 
@@ -237,6 +242,17 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 		this.controller.off( 'focusAction', this.onFocusAction, this );
 		this.$actions.empty();
 	}, this );
+};
+
+/**
+ * HACK: Override #ready to prevent trying to focus $content
+ */
+ve.ui.EditCheckDialog.prototype.ready = function ( data ) {
+	return this.getReadyProcess( data ).execute().then( () => {
+		// Force redraw by asking the browser to measure the elements' widths
+		this.$element.addClass( 'oo-ui-window-ready' ).width();
+		this.$content.addClass( 'oo-ui-window-content-ready' ).width();
+	} );
 };
 
 /**

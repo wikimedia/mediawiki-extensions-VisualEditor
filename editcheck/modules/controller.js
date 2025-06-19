@@ -58,6 +58,11 @@ Controller.prototype.setup = function () {
 		this.surface.getModel().on( 'select', this.onSelectDebounced );
 		this.surface.getModel().on( 'contextChange', this.onContextChangeDebounced );
 
+		this.surface.getSidebarDialogs().connect( this, {
+			opening: 'onSidebarDialogsOpeningOrClosing',
+			closing: 'onSidebarDialogsOpeningOrClosing'
+		} );
+
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
@@ -83,6 +88,28 @@ Controller.prototype.setup = function () {
 	}, null, this );
 
 	this.setupPreSaveProcess();
+};
+
+Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingOrClosing ) {
+	if ( win.constructor.static.name !== 'sidebarEditCheckDialog' ) {
+		return;
+	}
+	const isOpening = !win.isOpened();
+	// Wait for sidebar to render before applying CSS which starts transitions
+	requestAnimationFrame( () => {
+		$( document.documentElement ).toggleClass( 've-editcheck-enabled', isOpening );
+	} );
+	if ( isOpening ) {
+		$( document.documentElement ).addClass( 've-editcheck-transitioning' );
+	} else {
+		openingOrClosing.then( () => {
+			$( document.documentElement ).removeClass( 've-editcheck-transitioning' );
+		} );
+	}
+	// Adjust toolbar position after animation ends
+	setTimeout( () => {
+		this.target.toolbar.onWindowResize();
+	}, OO.ui.theme.getDialogTransitionDuration() );
 };
 
 Controller.prototype.editChecksArePossible = function () {

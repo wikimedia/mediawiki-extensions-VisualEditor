@@ -1,15 +1,97 @@
 @import '../../lib/codex-design-tokens/theme-wikimedia-ui.less';
 
-@media ( max-width: 1492px ) {
-	/* Hides the Vector sidebar while an editcheck-enabled editing session is occurring. See T379443. */
-	/* stylelint-disable selector-class-pattern */
-	.ve-editcheck-available {
+.skin-vector-2022 {
+	.ve-editcheck-available & {
+		.mw-page-container-inner {
+			transition: grid-template-columns 250ms, column-gap 250ms; /* stylelint-disable-line plugin/no-unsupported-browser-features */
+		}
+
+		.mw-body {
+			transition: padding 250ms;
+			padding-right: 0;
+
+			.vector-column-end {
+				transition: width 250ms;
+			}
+		}
+
+		.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-sidebarDialog {
+			// Sidebar fades in and slides in from the right side of the screen
+			margin-right: -300px;
+			overflow-x: visible;
+			opacity: 0;
+			left: 150px;
+			transition: opacity 250ms, left 250ms;
+		}
+
 		.mw-body .vector-column-end,
 		.vector-pinnable-header-pin-button {
+			@media screen and ( max-width: 1492px ) {
+				// Pre-emptively hide right sidebar below width at which it would start
+				// squashing the main content area. Not 100% necessary but reduces amount
+				// of movement when EditCheck opens at these widths.
+				display: none !important;  /* stylelint-disable-line declaration-no-important */
+			}
+		}
+	}
+
+	.ve-editcheck-enabled &,
+	.ve-editcheck-transitioning & {
+		.mw-body .vector-column-end,
+		.vector-main-menu-landmark,
+		.vector-pinnable-header-pin-button {
+			// Hide sidebars during transitions as they reflow their own text when the change width
 			display: none !important;  /* stylelint-disable-line declaration-no-important */
 		}
 	}
-	/* stylelint-enable selector-class-pattern */
+
+	/* stylelint-disable-next-line selector-not-notation */
+	.ve-editcheck-enabled:not( .vector-feature-main-menu-pinned-disabled.vector-toc-not-available, .vector-feature-main-menu-pinned-disabled.vector-feature-toc-pinned-clientpref-0 ) & {
+		.mw-page-container-inner {
+			// At maximum width:
+			// 7rem is approximate half the difference between the maximum width
+			// of the main page container and VE + EditCheck, so this places VE
+			// in the center. Using a numeric value for centering allows the
+			// transition to animate correctly.
+			grid-template-columns: ~'7rem minmax( 0, 1fr )';
+			column-gap: 0;
+
+			@media screen and ( max-width: @max-width-breakpoint-desktop ) {
+				// Width constrained by viewport:
+				// Calculate centering value as ( 100vw - <VE+EC width> ) / 2
+				grid-template-columns: ~'calc(50vw - 44rem) minmax( 0, 1fr )';
+			}
+		}
+	}
+
+	.ve-editcheck-enabled & {
+		.mw-body {
+			// Padding to prevent EditCheck sidebar from going off screen
+			padding-right: 300px;
+		}
+
+		.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-sidebarDialog {
+			opacity: 1;
+			left: 0;
+		}
+	}
+
+	.ve-editcheck-transitioning.vector-feature-main-menu-pinned-disabled.vector-toc-not-available &,
+	.ve-editcheck-enabled.vector-feature-main-menu-pinned-disabled.vector-toc-not-available &,
+	.ve-editcheck-transitioning.vector-feature-main-menu-pinned-disabled.vector-feature-toc-pinned-clientpref-0 &,
+	.ve-editcheck-enabled.vector-feature-main-menu-pinned-disabled.vector-feature-toc-pinned-clientpref-0 & {
+		@media screen and ( min-width: @min-width-breakpoint-desktop ) {
+			.mw-body {
+				padding-right: 0;
+			}
+		}
+
+		.mw-body .vector-column-end {
+			display: block !important;  /* stylelint-disable-line declaration-no-important */
+			visibility: hidden;
+			width: 300px;
+		}
+	}
 }
 
 /* Toolbar */
