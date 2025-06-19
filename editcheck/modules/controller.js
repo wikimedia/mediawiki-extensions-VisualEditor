@@ -298,7 +298,7 @@ Controller.prototype.onContextChange = function () {
 	}
 };
 
-Controller.prototype.onPosition = function () {
+Controller.prototype.onPosition = function ( passive ) {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
 		return;
@@ -306,7 +306,7 @@ Controller.prototype.onPosition = function () {
 
 	this.updatePositions();
 
-	if ( this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
+	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
 		this.scrollActionIntoViewDebounced( this.focusedAction, true, !OO.ui.isMobile() );
 	}
 };
