@@ -148,6 +148,15 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
 	this.emit( 'actionsUpdated', listener, actions, [], removed, rejected );
 };
 
+/**
+ * Trigger a focus state for a given action
+ *
+ * Will emit a focusAction event if the focused action changed or if scrolling
+ * was requested.
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @param {boolean} scrollTo
+ */
 Controller.prototype.focusAction = function ( action, scrollTo ) {
 	if ( !scrollTo && action === this.focusedAction ) {
 		// Don't emit unnecessary events if there is no change or scroll
@@ -155,6 +164,10 @@ Controller.prototype.focusAction = function ( action, scrollTo ) {
 	}
 
 	this.focusedAction = action;
+
+	if ( scrollTo ) {
+		this.scrollActionIntoViewDebounced( action );
+	}
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
 
