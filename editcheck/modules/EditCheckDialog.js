@@ -182,7 +182,13 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 	this.updateSize();
 
 	if ( !internal ) {
-		this.controller.focusAction( this.currentActions[ this.currentOffset ], fromUserAction );
+		this.controller.focusAction(
+			this.currentActions[ this.currentOffset ],
+			// Scroll selection into view if user interacted with dialog
+			fromUserAction,
+			// Scroll to top of page in desktop fixed dialog (pre-save)
+			this.constructor.static.name === 'fixedEditCheckDialog' && !OO.ui.isMobile()
+		);
 	}
 };
 
