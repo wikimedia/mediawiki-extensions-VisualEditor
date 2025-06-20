@@ -4,6 +4,12 @@
  * @copyright See AUTHORS.txt
  */
 
+/**
+ * @class
+ * @extends ve.ui.SidebarDialog
+ * @constructor
+ * @param {Object} config Configuration options
+ */
 ve.ui.GutterSidebarEditCheckDialog = function VeUiGutterSidebarEditCheckDialog( config ) {
 	// Parent constructor
 	ve.ui.GutterSidebarEditCheckDialog.super.call( this, config );
@@ -11,7 +17,11 @@ ve.ui.GutterSidebarEditCheckDialog = function VeUiGutterSidebarEditCheckDialog( 
 	this.$element.addClass( 've-ui-editCheckGutterSidebarDialog' );
 };
 
+/* Inheritance */
+
 OO.inheritClass( ve.ui.GutterSidebarEditCheckDialog, ve.ui.SidebarDialog );
+
+/* Static properties */
 
 ve.ui.GutterSidebarEditCheckDialog.static.name = 'gutterSidebarEditCheckDialog';
 
@@ -20,11 +30,19 @@ ve.ui.GutterSidebarEditCheckDialog.static.size = 'gutter';
 // The gutter should never steal the focus, as it's intended to be a discreet notification
 ve.ui.GutterSidebarEditCheckDialog.static.activeSurface = true;
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
 ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.GutterSidebarEditCheckDialog.super.prototype.initialize.call( this );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	const process = this.constructor.super.prototype.getSetupProcess.call( this, data );
 	return process.first( () => {
@@ -43,6 +61,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 	}, this );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.GutterSidebarEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
@@ -54,6 +75,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 	}, this );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( inBeforeSave, actions ) {
 	if ( inBeforeSave !== this.inBeforeSave ) {
 		return;
@@ -61,13 +85,22 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( inBef
 	this.renderActions( actions );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
 	this.renderActions( this.controller.getActions() );
 };
 
+/**
+ * Render the edit check actions as gutter icons, grouping overlapping actions.
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions List of actions to render
+ */
 ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions ) {
 	if ( actions.length === 0 ) {
-		return this.close( 'complete' );
+		this.close( 'complete' );
+		return;
 	}
 
 	const surfaceView = this.surface.getView();

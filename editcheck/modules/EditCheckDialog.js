@@ -5,13 +5,14 @@
  */
 
 /**
- * Find and replace dialog.
+ * Edit check dialog
+ *
+ * Abstract mixin for FixedEditCheckDialog and SidebarEditCheckDialog.
  *
  * @class
- * @extends ve.ui.ToolbarDialog
+ * @abstract
  *
  * @constructor
- * @param {Object} [config] Configuration options
  */
 ve.ui.EditCheckDialog = function VeUiEditCheckDialog() {
 	// Pre-initialization
@@ -101,6 +102,15 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
 };
 
+/**
+ * Handle updates to the list of edit check actions.
+ *
+ * @param {string} listener Check listener
+ * @param {mw.editcheck.EditCheckAction[]} actions All current actions
+ * @param {mw.editcheck.EditCheckAction[]} newActions Newly added actions
+ * @param {mw.editcheck.EditCheckAction[]} discardedActions Newly removed actions
+ * @param {boolean} rejected The last action was rejected/dismissed
+ */
 ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions, rejected ) {
 	if ( this.inBeforeSave !== ( listener === 'onBeforeSave' ) ) {
 		return;
@@ -111,10 +121,18 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
 	this.showActions( actions, newActions, rejected );
 };
 
+/**
+ * Show the actions list
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions Actions
+ * @param {mw.editcheck.EditCheckAction[]} newActions Newly added actions
+ * @param {boolean} lastActionRejected Last action was rejected/dismissed
+ */
 ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
 	this.currentActions = actions;
 	if ( actions.length === 0 ) {
-		return this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
+		this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
+		return;
 	}
 
 	// This just adjusts so the previously selected check remains selected:
@@ -128,10 +146,19 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 	this.setCurrentOffset( newOffset, false );
 };
 
+/**
+ * Check if an action exists in the current actions.
+ *
+ * @param {Object} action Action
+ * @return {boolean}
+ */
 ve.ui.EditCheckDialog.prototype.hasAction = function ( action ) {
-	return this.currentActions.some( ( caction ) => action.equals( caction ) );
+	return this.currentActions.some( ( a ) => action.equals( a ) );
 };
 
+/**
+ * Refresh the action list
+ */
 ve.ui.EditCheckDialog.prototype.refresh = function () {
 	this.$actions.empty();
 
@@ -147,11 +174,11 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 };
 
 /**
- * Set the offset of the current check, within the list of all checks
+ * Set the offset of the current check, within the list of all checks.
  *
- * @param {number|null} offset
- * @param {boolean} fromUserAction
- * @param {boolean} internal
+ * @param {number|null} offset New offset
+ * @param {boolean} fromUserAction The change was triggered by a user action
+ * @param {boolean} [internal] Change was triggered internally
  */
 ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction, internal ) {
 	// TODO: work out how to tell the window to recalculate height here
@@ -195,6 +222,13 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 	}
 };
 
+/**
+ * Handle focusAction events from the controller
+ *
+ * @param {mw.editcheck.EditCheckAction} action Action
+ * @param {number} index Index of the action in #getActions
+ * @param {boolean} scrollTo Scroll the action's selection into view
+ */
 ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
 	this.setCurrentOffset( this.currentActions.indexOf( action ), scrollTo, true );
 };
@@ -255,6 +289,9 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 
 /**
  * HACK: Override #ready to prevent trying to focus $content
+ *
+ * @param {Object} data
+ * @return {jQuery.Promise}
  */
 ve.ui.EditCheckDialog.prototype.ready = function ( data ) {
 	return this.getReadyProcess( data ).execute().then( () => {
@@ -265,10 +302,10 @@ ve.ui.EditCheckDialog.prototype.ready = function ( data ) {
 };
 
 /**
- * Handle 'act' events from the mw.widget.EditCheckActionWidget
+ * Handle 'act' events from the mw.widget.EditCheckActionWidget.
  *
- * @param {mw.editcheck.EditCheckAction} action
- * @param {mw.editcheck.EditCheckActionWidget} widget
+ * @param {mw.editcheck.EditCheckAction} action Action
+ * @param {mw.editcheck.EditCheckActionWidget} widget Action's widget
  * @param {jQuery.Promise} promise Promise which resolves when the action is complete
  */
 ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
@@ -297,11 +334,11 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 };
 
 /**
- * Handle 'togglecollapse' events from the mw.widget.EditCheckActionWidget
+ * Handle 'togglecollapse' events from the mw.widget.EditCheckActionWidget.
  *
- * @param {mw.editcheck.EditCheckAction} action
- * @param {number} index
- * @param {boolean} collapsed
+ * @param {mw.editcheck.EditCheckAction} action Action being expanded/collapsed
+ * @param {number} index Index of action in list
+ * @param {boolean} collapsed Whether the action is collapsed
  */
 ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, collapsed ) {
 	if ( !collapsed ) {
@@ -327,7 +364,7 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, col
 };
 
 /**
- * Handle click events from the close button
+ * Handle click events from the close button.
  */
 ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
 	// eslint-disable-next-line no-jquery/no-class-state
@@ -337,19 +374,25 @@ ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
 };
 
 /**
- * Handle click events from the next button
+ * Handle click events from the next button.
  */
 ve.ui.EditCheckDialog.prototype.onNextButtonClick = function () {
 	this.setCurrentOffset( this.currentOffset === null ? 0 : this.currentOffset + 1, true );
 };
 
 /**
- * Handle click events from the previous button
+ * Handle click events from the previous button.
  */
 ve.ui.EditCheckDialog.prototype.onPreviousButtonClick = function () {
 	this.setCurrentOffset( this.currentOffset === null ? this.currentActions.length - 1 : this.currentOffset - 1, true );
 };
 
+/**
+ * @class
+ * @extends ve.ui.SidebarDialog
+ * @mixes ve.ui.EditCheckDialog
+ * @param {Object} config
+ */
 ve.ui.SidebarEditCheckDialog = function VeUiSidebarEditCheckDialog( config ) {
 	// Parent constructor
 	ve.ui.SidebarEditCheckDialog.super.call( this, config );
@@ -358,14 +401,23 @@ ve.ui.SidebarEditCheckDialog = function VeUiSidebarEditCheckDialog( config ) {
 	ve.ui.EditCheckDialog.call( this, config );
 };
 
+/* Inheritance */
+
 OO.inheritClass( ve.ui.SidebarEditCheckDialog, ve.ui.SidebarDialog );
 
 OO.mixinClass( ve.ui.SidebarEditCheckDialog, ve.ui.EditCheckDialog );
+
+/* Static properties */
 
 ve.ui.SidebarEditCheckDialog.static.name = 'sidebarEditCheckDialog';
 
 ve.ui.SidebarEditCheckDialog.static.size = 'medium';
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
 ve.ui.SidebarEditCheckDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.SidebarEditCheckDialog.super.prototype.initialize.call( this );
@@ -373,6 +425,9 @@ ve.ui.SidebarEditCheckDialog.prototype.initialize = function () {
 	return ve.ui.EditCheckDialog.prototype.initialize.call( this );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.SidebarEditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.SidebarEditCheckDialog.super.prototype.getSetupProcess.call( this, data );
@@ -382,6 +437,9 @@ ve.ui.SidebarEditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	} );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.SidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.SidebarEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
@@ -391,6 +449,9 @@ ve.ui.SidebarEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	} );
 };
 
+/**
+ * Handle position events from the controller
+ */
 ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
 	if ( this.inBeforeSave ) {
 		return;
@@ -418,6 +479,9 @@ ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
 	} );
 };
 
+/**
+ * @inheritdoc ve.ui.EditCheckDialog
+ */
 ve.ui.SidebarEditCheckDialog.prototype.onToggleCollapse = function () {
 	// mixin
 	ve.ui.EditCheckDialog.prototype.onToggleCollapse.apply( this, arguments );
@@ -429,6 +493,14 @@ ve.ui.SidebarEditCheckDialog.prototype.onToggleCollapse = function () {
 
 ve.ui.windowFactory.register( ve.ui.SidebarEditCheckDialog );
 
+/**
+ * FixedEditCheckDialog constructor.
+ *
+ * @class
+ * @extends ve.ui.ToolbarDialog
+ * @mixes ve.ui.EditCheckDialog
+ * @param {Object} config
+ */
 ve.ui.FixedEditCheckDialog = function VeUiFixedEditCheckDialog( config ) {
 	// Parent constructor
 	ve.ui.FixedEditCheckDialog.super.call( this, config );
@@ -437,9 +509,13 @@ ve.ui.FixedEditCheckDialog = function VeUiFixedEditCheckDialog( config ) {
 	ve.ui.EditCheckDialog.call( this, config );
 };
 
+/* Inheritance */
+
 OO.inheritClass( ve.ui.FixedEditCheckDialog, ve.ui.ToolbarDialog );
 
 OO.mixinClass( ve.ui.FixedEditCheckDialog, ve.ui.EditCheckDialog );
+
+/* Static properties */
 
 ve.ui.FixedEditCheckDialog.static.name = 'fixedEditCheckDialog';
 
@@ -447,6 +523,11 @@ ve.ui.FixedEditCheckDialog.static.position = OO.ui.isMobile() ? 'below' : 'side'
 
 ve.ui.FixedEditCheckDialog.static.size = OO.ui.isMobile() ? 'full' : 'medium';
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
 ve.ui.FixedEditCheckDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.FixedEditCheckDialog.super.prototype.initialize.call( this );
@@ -454,6 +535,9 @@ ve.ui.FixedEditCheckDialog.prototype.initialize = function () {
 	return ve.ui.EditCheckDialog.prototype.initialize.call( this );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.FixedEditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.FixedEditCheckDialog.super.prototype.getSetupProcess.call( this, data );
@@ -461,6 +545,9 @@ ve.ui.FixedEditCheckDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.EditCheckDialog.prototype.getSetupProcess.call( this, data, process );
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.FixedEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	// Parent method
 	const process = ve.ui.FixedEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
@@ -468,6 +555,9 @@ ve.ui.FixedEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process );
 };
 
+/**
+ * @inheritdoc ve.ui.EditCheckDialog
+ */
 ve.ui.FixedEditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
 	if ( this.singleAction && action === null ) {
 		// Can't unset the offset in single-action mode, because it hides the sidebar contents

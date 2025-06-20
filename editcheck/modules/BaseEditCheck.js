@@ -1,9 +1,26 @@
+/**
+ * BaseEditCheck
+ *
+ * Abstract base class for edit checks. Provides common configuration, tagging,
+ * and utility methods for subclasses implementing specific edit check logic.
+ *
+ * Subclasses should implement event handler methods such as onBeforeSave and onDocumentChange.
+ *
+ * @class
+ * @abstract
+ * @param {mw.editcheck.Controller} controller Edit check controller
+ * @param {Object} [config] Configuration options
+ */
 mw.editcheck.BaseEditCheck = function MWBaseEditCheck( controller, config ) {
 	this.controller = controller;
 	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, config );
 };
 
+/* Inheritance */
+
 OO.initClass( mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.BaseEditCheck.static.onlyCoveredNodes = false;
 
@@ -31,6 +48,8 @@ mw.editcheck.BaseEditCheck.static.title = ve.msg( 'editcheck-review-title' );
 
 mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
+/* Methods */
+
 /**
  * Get the name of the check type
  *
@@ -41,18 +60,27 @@ mw.editcheck.BaseEditCheck.prototype.getName = function () {
 };
 
 /**
+ * Get actions to show before save
+ *
+ * @abstract
  * @param {ve.dm.Surface} surfaceModel
  * @return {mw.editcheck.EditCheckAction[]}
  */
 mw.editcheck.BaseEditCheck.prototype.onBeforeSave = null;
 
 /**
+ * Get actions to show when document changed
+ *
+ * @abstract
  * @param {ve.dm.Surface} surfaceModel
  * @return {mw.editcheck.EditCheckAction[]}
  */
 mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
 
 /**
+ * User performs an action on an check
+ *
+ * @abstract
  * @param {string} choice `action` key from static.choices
  * @param {mw.editcheck.EditCheckAction} action
  * @param {ve.ui.Surface} surface
@@ -286,7 +314,6 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
  * Dismiss a check action
  *
  * @param {mw.editCheck.EditCheckAction} action
- * @
  */
 mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
 	this.tag( 'dismissed', action );

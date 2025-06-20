@@ -2,6 +2,16 @@
 
 const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
 
+/**
+ * EditCheck controller
+ *
+ * Manages triggering and updating edit checks.
+ *
+ * @class
+ * @constructor
+ * @mixes OO.EventEmitter
+ * @param {ve.init.mw.Target} target The VisualEditor target
+ */
 function Controller( target ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
@@ -29,8 +39,41 @@ function Controller( target ) {
 	this.scrollActionIntoViewDebounced = ve.debounce( this.scrollActionIntoView.bind( this ), 200, true );
 }
 
+/* Inheritance */
+
 OO.mixinClass( Controller, OO.EventEmitter );
 
+/* Events */
+
+/**
+ * Actions for a given listener are updated
+ *
+ * @event Controller#actionsUpdated
+ * @param {string} listener The listener type (e.g. 'onBeforeSave')
+ * @param {mw.editcheck.EditCheckAction[]} actions All current actions
+ * @param {mw.editcheck.EditCheckAction[]} newActions Actions newly added
+ * @param {mw.editcheck.EditCheckAction[]} discardedActions Actions newly removed
+ * @param {boolean} rejected The update was due to a user rejecting/dismissing a check
+ */
+
+/**
+ * An action is focused
+ *
+ * @event Controller#focusAction
+ * @param {mw.editcheck.EditCheckAction} action Action
+ * @param {number} index Index of the action in #getActions
+ * @param {boolean} scrollTo Scroll the action's selection into view
+ */
+
+/**
+ * Actions have been redrawn or repositioned
+ *
+ * @event Controller#position
+ */
+
+/**
+ * Set up controller
+ */
 Controller.prototype.setup = function () {
 	const target = this.target;
 	target.on( 'surfaceReady', () => {
@@ -54,9 +97,11 @@ Controller.prototype.setup = function () {
 		window.dispatchEvent( new Event( 'resize' ) );
 
 		this.surface.getView().on( 'position', this.onPositionDebounced );
-		this.surface.getModel().on( 'undoStackChange', this.onDocumentChangeDebounced );
-		this.surface.getModel().on( 'select', this.onSelectDebounced );
-		this.surface.getModel().on( 'contextChange', this.onContextChangeDebounced );
+		this.surface.getModel().connect( this, {
+			undoStackChange: 'onDocumentChangeDebounced',
+			select: 'onSelectDebounced',
+			contextChange: 'onContextChangeDebounced'
+		} );
 
 		this.surface.getSidebarDialogs().connect( this, {
 			opening: 'onSidebarDialogsOpeningOrClosing',
@@ -90,6 +135,14 @@ Controller.prototype.setup = function () {
 	this.setupPreSaveProcess();
 };
 
+/**
+ * Handle sidebar dialog open/close events
+ *
+ * Transition skin/VE components around to make room for sidebar
+ *
+ * @param {OO.ui.Window} win The window instance
+ * @param {jQuery.Promise} openingOrClosing Promise that resolves when closing finishes
+ */
 Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingOrClosing ) {
 	if ( win.constructor.static.name !== 'sidebarEditCheckDialog' ) {
 		return;
@@ -112,6 +165,11 @@ Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingO
 	}, OO.ui.theme.getDialogTransitionDuration() );
 };
 
+/**
+ * Check if any edit checks could be run for the current user/context
+ *
+ * @return {boolean}
+ */
 Controller.prototype.editChecksArePossible = function () {
 	return [ 'onBeforeSave', 'onDocumentChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
@@ -123,6 +181,11 @@ Controller.prototype.editChecksArePossible = function () {
 	);
 };
 
+/**
+ * Update position of edit check highlights
+ *
+ * @fires Controller#position
+ */
 Controller.prototype.updatePositions = function () {
 	this.drawSelections();
 	this.drawGutter();
@@ -131,10 +194,9 @@ Controller.prototype.updatePositions = function () {
 };
 
 /**
- * Re-executes mid-edit checks.
+ * Update edit check list
  *
- * Used when state may have changed, for example upon exiting the pre-save dialog
- * or after the user has interacted with a mid-edit action.
+ * @fires Controller#actionsUpdated
  */
 Controller.prototype.refresh = function () {
 	if ( this.target.deactivating || !this.target.active ) {
@@ -161,9 +223,10 @@ Controller.prototype.refresh = function () {
  * We return a promise so that UI actions such as opening the pre-save dialog
  * do not occur until checks have completed.
  *
- * @param listener {string} eg onBeforeSave, onDocumentChange, onBranchNodeChange
- * @param always {bool}
- * @return {Promise} An updated set of actions.
+ * @param {string} listener e.g. onBeforeSave, onDocumentChange, onBranchNodeChange
+ * @param {boolean} always Emit updates even if no actions changed
+ * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of actions.
+ * @fires Controller#actionsUpdated
  */
 Controller.prototype.updateForListener = function ( listener, always ) {
 	const existing = this.getActions( listener ) || [];
@@ -186,6 +249,14 @@ Controller.prototype.updateForListener = function ( listener, always ) {
 		} );
 };
 
+/**
+ * Remove an edit check action
+ *
+ * @param {string} listener Listener which triggered the action
+ * @param {mw.editcheck.EditCheckAction} action Action to remove
+ * @param {boolean} rejected The action was rejected
+ * @fires Controller#actionsUpdated
+ */
 Controller.prototype.removeAction = function ( listener, action, rejected ) {
 	const actions = this.getActions( listener );
 	const index = actions.indexOf( action );
@@ -207,9 +278,11 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
  * Will emit a focusAction event if the focused action changed or if scrolling
  * was requested.
  *
- * @param {mw.editcheck.EditCheckAction} action
- * @param {boolean} [scrollTo] Scroll focused selection into view
+ * @param {mw.editcheck.EditCheckAction} action Action to focus
+ * @param {boolean} [scrollTo] Scroll action's selection into view
  * @param {boolean} [alignToTop] Align selection to top of page when scrolling
+ * @fires Controller#focusAction
+ * @fires Controller#position
  */
 Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 	if ( !scrollTo && action === this.focusedAction ) {
@@ -236,7 +309,7 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
  * - Otherwise, get all mid-edit listeners
  *
  * @param {string} [listener] The listener; if omitted, get all relevant actions
- * @return {mw.editcheck.EditCheckAction[]} The actions
+ * @return {mw.editcheck.EditCheckAction[]} Actions
  */
 Controller.prototype.getActions = function ( listener ) {
 	if ( listener ) {
@@ -246,6 +319,13 @@ Controller.prototype.getActions = function ( listener ) {
 	return [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
 };
 
+/**
+ * Handle select events from the surface model
+ *
+ * @param {ve.dm.Selection} selection New selection
+ * @fires Controller#actionsUpdated
+ * @fires Controller#focusAction
+ */
 Controller.prototype.onSelect = function ( selection ) {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
@@ -287,6 +367,9 @@ Controller.prototype.onSelect = function ( selection ) {
 	this.focusAction( actions[ 0 ] || null, false );
 };
 
+/**
+ * Handle contextChange events from the surface model
+ */
 Controller.prototype.onContextChange = function () {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
@@ -298,6 +381,11 @@ Controller.prototype.onContextChange = function () {
 	}
 };
 
+/**
+ * Handle position events from the surface view
+ *
+ * @param {boolean} passive Event is passive (don't scroll)
+ */
 Controller.prototype.onPosition = function ( passive ) {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
@@ -311,6 +399,9 @@ Controller.prototype.onPosition = function ( passive ) {
 	}
 };
 
+/**
+ * Handle changes to the document model (undoStackChange)
+ */
 Controller.prototype.onDocumentChange = function () {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
@@ -329,10 +420,10 @@ Controller.prototype.onDocumentChange = function () {
  * Updates gutter and highlights when the action list has changed.
  * Displays the edit check dialog if it is not already on screen.
  *
- * @param listener {string} eg onBeforeSave, onDocumentChange, onBranchNodeChange
- * @param actions {mw.editcheck.EditCheckAction[]}
- * @param newActions {mw.editcheck.EditCheckAction[]}
- * @param discardedActions {mw.editcheck.EditCheckAction[]}
+ * @param {string} listener e.g. onBeforeSave, onDocumentChange, onBranchNodeChange
+ * @param {mw.editcheck.EditCheckAction[]} actions
+ * @param {mw.editcheck.EditCheckAction[]} newActions
+ * @param {mw.editcheck.EditCheckAction[]} discardedActions
  */
 Controller.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
 	// do we need to redraw anything?
@@ -476,6 +567,11 @@ Controller.prototype.setupPreSaveProcess = function () {
 	} );
 };
 
+/**
+ * Replace toolbar tools for review mode during pre-save checks.
+ *
+ * @param {ve.init.mw.ArticleTarget} target
+ */
 Controller.prototype.setupToolbar = function ( target ) {
 	const surface = target.getSurface();
 	const toolbar = target.getToolbar();
@@ -513,6 +609,11 @@ Controller.prototype.setupToolbar = function ( target ) {
 	toolbar.onWindowResize();
 };
 
+/**
+ * Restores the original toolbar tools after review mode is complete.
+ *
+ * @param {ve.init.mw.ArticleTarget} target
+ */
 Controller.prototype.restoreToolbar = function ( target ) {
 	if ( !this.$reviewToolbarGroup ) {
 		return;
@@ -527,6 +628,9 @@ Controller.prototype.restoreToolbar = function ( target ) {
 	toolbar.onWindowResize();
 };
 
+/**
+ * Redraw selection highlights
+ */
 Controller.prototype.drawSelections = function () {
 	const surfaceView = this.surface.getView();
 	if ( this.focusedAction ) {
@@ -555,6 +659,9 @@ Controller.prototype.drawSelections = function () {
 	}
 };
 
+/**
+ * Draw gutter indicators next to each action's selection (on desktop).
+ */
 Controller.prototype.drawGutter = function () {
 	if ( OO.ui.isMobile() ) {
 		return;
@@ -598,6 +705,12 @@ Controller.prototype.drawGutter = function () {
 	surfaceView.appendHighlights( this.$highlights, false );
 };
 
+/**
+ * Scrolls an action's selection into view
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @param {boolean} [alignToTop] Align the selection to the top of the viewport
+ */
 Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 	// scrollSelectionIntoView scrolls to the focus of a selection, but we
 	// want the very beginning to be in view, so collapse it:
@@ -621,12 +734,24 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 	} );
 };
 
+/**
+ * Closes the fixed edit check dialog (pre-save).
+ *
+ * @param {string} [action] Name of action which triggered the close ('mobile-keyboard', 'context', 'preSaveProcess')
+ * @return {jQuery.Promise}
+ */
 Controller.prototype.closeDialog = function ( action ) {
 	this.focusAction( undefined );
 	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 	return windowAction.close( 'fixedEditCheckDialog', action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
 };
 
+/**
+ * Closes the sidebar edit check dialogs (mid-edit).
+ *
+ * @param {string} [action] Name of action which triggered the close (currently only 'preSaveProcess')
+ * @return {jQuery.Promise}
+ */
 Controller.prototype.closeSidebars = function ( action ) {
 	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 	if ( currentWindow ) {

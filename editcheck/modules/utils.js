@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @param {Function} handler A deterministic asynchronous function taking a string and returning Any
  * @return {Function} Memoized version (returns the original promise on subsequent calls)

@@ -1,4 +1,4 @@
-mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck( /* config */ ) {
+mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	// Parent constructor
 	mw.editcheck.TextMatchEditCheck.super.apply( this, arguments );
 

@@ -1,4 +1,4 @@
-mw.editcheck.ToneCheck = function MWToneCheck( /* config */ ) {
+mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Parent constructor
 	mw.editcheck.ToneCheck.super.apply( this, arguments );
 };

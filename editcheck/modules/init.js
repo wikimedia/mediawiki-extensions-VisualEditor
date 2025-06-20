@@ -1,6 +1,6 @@
 /*
  * `ecenable` query string:
- *   1: override user eligiblity criteria for all checks
+ *   1: override user eligibility criteria for all checks
  *   2: also load experimental checks
  */
 const ecenable = new URL( location.href ).searchParams.get( 'ecenable' );
@@ -29,7 +29,7 @@ if ( mw.editcheck.experimental ) {
  * Check if the document has content needing a reference, for AddReferenceEditCheck
  *
  * @param {ve.dm.Document} documentModel
- * @param {boolean} includeReferencedContent Include contents that already contains a reference
+ * @param {boolean} includeReferencedContent Include content that already contains a reference
  * @return {boolean}
  */
 mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {

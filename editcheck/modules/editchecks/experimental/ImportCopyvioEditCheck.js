@@ -1,4 +1,4 @@
-mw.editcheck.ImportCopyvioEditCheck = function MWImportCopyvioEditCheck( /* config */ ) {
+mw.editcheck.ImportCopyvioEditCheck = function MWImportCopyvioEditCheck() {
 	// Parent constructor
 	mw.editcheck.ImportCopyvioEditCheck.super.apply( this, arguments );
 };

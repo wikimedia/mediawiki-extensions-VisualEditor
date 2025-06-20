@@ -1,14 +1,23 @@
 /**
  * EditCheckAction
  *
- * @param {Object} config
- * @param {mw.editcheck.BaseEditCheck} check
- * @param {ve.dm.SurfaceFragment[]} fragments Affected fragments
- * @param {jQuery|string|Function|OO.ui.HtmlSnippet} message Check message body
- * @param {jQuery|string|Function|OO.ui.HtmlSnippet} title Check title
+ * @class
+ * @mixes OO.EventEmitter
+ *
+ * @param {Object} config Configuration options
+ * @param {mw.editcheck.BaseEditCheck} config.check Check which created this action
+ * @param {ve.dm.SurfaceFragment[]} config.fragments Affected fragments
+ * @param {ve.dm.SurfaceFragment} [config.focusFragment] Fragment to focus
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.title] Title
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.message] Body message
+ * @param {string} [config.id] Optional unique identifier
+ * @param {boolean} [config.paused=false] The check is paused
+ * @param {string} [config.icon] Optional icon name
+ * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
+ * @param {Object[]} [config.choices] User choices
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
-	// Mixin constructors
+	// Mixin constructor
 	OO.EventEmitter.call( this );
 
 	this.check = config.check;
@@ -23,9 +32,28 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.choices = config.choices || config.check.constructor.static.choices;
 };
 
-OO.initClass( mw.editcheck.EditCheckAction );
+/* Inheritance */
+
 OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
 
+/* Events */
+
+/**
+ * Fired when the user selects an action (e.g., clicks a suggestion button).
+ *
+ * @event mw.editcheck.EditCheckAction#act
+ * @param {jQuery.Promise} promise A promise that resolves when the action is complete
+ */
+
+/* Methods */
+
+/**
+ * Compare the start offsets of two actions.
+ *
+ * @param {mw.editcheck.EditCheckAction} a
+ * @param {mw.editcheck.EditCheckAction} b
+ * @return {number}
+ */
 mw.editcheck.EditCheckAction.static.compareStarts = function ( a, b ) {
 	const aStart = a.getHighlightSelections()[ 0 ].getCoveringRange().start;
 	const bStart = b.getHighlightSelections()[ 0 ].getCoveringRange().start;
@@ -59,8 +87,13 @@ mw.editcheck.EditCheckAction.prototype.getHighlightSelections = function () {
 	return this.fragments.map( ( fragment ) => fragment.getSelection() );
 };
 
+/**
+ * Get the selection to focus for this check
+ *
+ * @return {ve.dm.Selection}
+ */
 mw.editcheck.EditCheckAction.prototype.getFocusSelection = function () {
-	// TOOD: Instead of fragments[0], create a fragment that covers all fragments?
+	// TODO: Instead of fragments[0], create a fragment that covers all fragments?
 	return ( this.focusFragment || this.fragments[ 0 ] ).getSelection();
 };
 
@@ -73,6 +106,11 @@ mw.editcheck.EditCheckAction.prototype.getDescription = function () {
 	return this.message || this.check.getDescription( this );
 };
 
+/**
+ * Get the type of this action (e.g., 'warning', 'error')
+ *
+ * @return {string}
+ */
 mw.editcheck.EditCheckAction.prototype.getType = function () {
 	return this.type;
 };
@@ -86,6 +124,14 @@ mw.editcheck.EditCheckAction.prototype.getName = function () {
 	return this.check.getName();
 };
 
+/**
+ * Render as an EditCheckActionWidget
+ *
+ * @param {boolean} collapsed Start collapsed
+ * @param {boolean} singleAction This is the only action shown
+ * @param {ve.ui.Surface} surface Surface
+ * @return {mw.editcheck.EditCheckActionWidget}
+ */
 mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface ) {
 	const widget = new mw.editcheck.EditCheckActionWidget( {
 		type: this.type,
@@ -107,59 +153,71 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 };
 
 /**
- * Called when a button in the rendered widget is clicked
+ * Handle click events from an action button
  *
- * @param {ve.ui.Surface} surface
- * @param {OO.ui.ActionWidget} actionWidget ActionWidget for the choice that was clicked
+ * @param {ve.ui.Surface} surface Surface
+ * @param {OO.ui.ActionWidget} actionWidget Clicked action widget
+ * @fires mw.editcheck.EditCheckAction#act
  */
 mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actionWidget ) {
 	const promise = this.check.act( actionWidget.action, this, surface );
 	this.emit( 'act', promise || ve.createDeferred().resolve().promise() );
-	ve.track( 'activity.editCheck-' + this.getName(), { action: 'action-' + ( actionWidget.getAction() || 'unknown' ) } );
+	ve.track( 'activity.editCheck-' + this.getName(), {
+		action: 'action-' + ( actionWidget.getAction() || 'unknown' )
+	} );
 };
 
 /**
- * @param {mw.editcheck.EditCheckAction} other
- * @param {boolean} ignorePaused Ignore whether the action is paused
+ * Compare to another action
+ *
+ * @param {mw.editcheck.EditCheckAction} other Other action
+ * @param {boolean} [ignorePaused] Ignore `paused` flag
  * @return {boolean}
  */
 mw.editcheck.EditCheckAction.prototype.equals = function ( other, ignorePaused ) {
-	// Same check type?
 	if ( this.check.constructor !== other.check.constructor ) {
 		return false;
 	}
-	// If ids are present, they're the only thing that counts
 	if ( this.id || other.id ) {
 		return this.id === other.id;
 	}
 	if ( !ignorePaused && this.paused !== other.paused ) {
 		return false;
 	}
-	// Shortcut the fragment check if possible
 	if ( this.fragments.length !== other.fragments.length ) {
 		return false;
 	}
-	// Now they're the same if every fragment is found in both actions
 	return this.fragments.every( ( fragment ) => {
 		const selection = fragment.getSelection();
 		return other.fragments.some( ( otherFragment ) => otherFragment.getSelection().equals( selection ) );
 	} );
 };
 
+/**
+ * EditCheckActionWidget
+ *
+ * @class
+ * @extends OO.ui.MessageWidget
+ *
+ * @param {Object} config Configuration options
+ * @param {string} config.type Type of message (e.g., 'warning', 'error')
+ * @param {string} [config.icon] Icon name
+ * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.label Title
+ * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.message Body message
+ * @param {boolean} [config.singleAction] This is the only action shown
+ * @param {string} [config.mode] Mode for the action set widget
+ */
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
-	// Configuration initialization
 	config = config || {};
 
 	this.singleAction = config.singleAction;
 	this.mode = config.mode || '';
 
 	this.actions = new OO.ui.ActionSet();
-
 	this.actions.connect( this, {
 		change: 'onActionsChange'
 	} );
 
-	// Parent constructor
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
@@ -176,10 +234,23 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 		.addClass( 've-ui-editCheckActionWidget' );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.MessageWidget );
 
+/* Events */
+
 /**
- * Called when actions are changed
+ * Fired when the user toggles the collapsed state of the widget.
+ *
+ * @event mw.editcheck.EditCheckActionWidget#togglecollapse
+ * @param {boolean} collapsed Whether the widget is now collapsed
+ */
+
+/* Methods */
+
+/**
+ * Handle change events on the action set
  */
 mw.editcheck.EditCheckActionWidget.prototype.onActionsChange = function () {
 	this.$actions.empty().addClass( 'oo-ui-element-hidden' );
@@ -198,6 +269,12 @@ mw.editcheck.EditCheckActionWidget.prototype.setDisabled = function ( disabled )
 	} );
 };
 
+/**
+ * Handle click events anywhere on the widget
+ *
+ * @param {jQuery.Event} e Click event
+ * @fires mw.editcheck.EditCheckActionWidget#togglecollapse
+ */
 mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
 	if ( this.singleAction ) {
 		return;

@@ -1,6 +1,13 @@
-mw.editcheck.EditCheckFactory = function MWEditEditCheckFactory() {
+/**
+ * EditCheckFactory
+ *
+ * @class
+ * @constructor
+ * @extends OO.Factory
+ */
+mw.editcheck.EditCheckFactory = function MWEditCheckFactory() {
 	// Parent constructor
-	mw.editcheck.EditCheckFactory.super.call( this, this.arguments );
+	mw.editcheck.EditCheckFactory.super.call( this, arguments );
 
 	this.checksByListener = {
 		onDocumentChange: [],
@@ -83,7 +90,7 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * @param {mw.editcheck.Controller} controller
  * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
- * @param {mw.editcheck.EditCheckActions[]} existing Existing actions
+ * @param {mw.editcheck.EditCheckAction[]} existing Existing actions
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
 mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel, existing ) {

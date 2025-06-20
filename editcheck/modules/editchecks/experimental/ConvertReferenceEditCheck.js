@@ -1,4 +1,4 @@
-mw.editcheck.ConvertReferenceEditCheck = function MWConvertReferenceEditCheck( /* config */ ) {
+mw.editcheck.ConvertReferenceEditCheck = function MWConvertReferenceEditCheck() {
 	// Parent constructor
 	mw.editcheck.ConvertReferenceEditCheck.super.apply( this, arguments );
 };

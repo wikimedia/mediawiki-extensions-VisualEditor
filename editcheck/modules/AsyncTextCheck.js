@@ -14,8 +14,10 @@
  *
  * @class
  * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
  */
-mw.editcheck.AsyncTextCheck = function MWAsyncTextCheck( /* config */ ) {
+mw.editcheck.AsyncTextCheck = function MWAsyncTextCheck() {
 	// Parent constructor
 	mw.editcheck.AsyncTextCheck.super.apply( this, arguments );
 
@@ -27,7 +29,11 @@ mw.editcheck.AsyncTextCheck = function MWAsyncTextCheck( /* config */ ) {
 	}
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.AsyncTextCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.AsyncTextCheck.static.name = null;
 
@@ -40,6 +46,8 @@ mw.editcheck.AsyncTextCheck.static.name = null;
  * @return {Promise|any} The outcome of the check
  */
 mw.editcheck.AsyncTextCheck.static.memoizedCheckAsync = null;
+
+/* Methods */
 
 /**
  * @param {string} listener Type of listener, such as 'onBeforeSave' or 'onBranchNodeChange'
@@ -86,10 +94,16 @@ mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surf
 	return actionPromises;
 };
 
+/**
+ * @inheritdoc
+ */
 mw.editcheck.AsyncTextCheck.prototype.onBeforeSave = function ( ...args ) {
 	return this.handleListener( 'onBeforeSave', ...args );
 };
 
+/**
+ * @inheritdoc
+ */
 mw.editcheck.AsyncTextCheck.prototype.onBranchNodeChange = function ( ...args ) {
 	return this.handleListener( 'onBranchNodeChange', ...args );
 };
@@ -118,6 +132,9 @@ mw.editcheck.AsyncTextCheck.prototype.checkAsync = null;
  */
 mw.editcheck.AsyncTextCheck.prototype.newAction = null;
 
+/**
+ * @inheritdoc
+ */
 mw.editcheck.AsyncTextCheck.prototype.act = function ( choice, action, surface ) {
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
