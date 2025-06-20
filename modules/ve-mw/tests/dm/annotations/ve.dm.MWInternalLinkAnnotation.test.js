@@ -185,7 +185,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 		// Set up global state (site configuration)
 		mw.config.set( pathData.config );
 
-		const doc = ve.dm.mwExample.createExampleDocumentFromData( [], null, pathData.base );
+		const doc = ve.dm.mwExample.createExampleDocumentFromData( [], undefined, pathData.base );
 		// toDataElement is called during a converter run, so we need to fake up a bit of state to test it.
 		// This would normally be done by ve.dm.converter.getModelFromDom.
 		converter.doc = doc.getHtmlDocument();
