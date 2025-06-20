@@ -92,7 +92,10 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 				type: 'error',
 				label: 'Currently using experimental edit checks. For testing purposes only.',
 				inline: true
-			} ).$element
+			} ).$element.css( {
+				'white-space': 'normal',
+				margin: '0.5em 1em'
+			} )
 		);
 	}
 	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
