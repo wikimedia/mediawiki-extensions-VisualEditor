@@ -6,6 +6,7 @@
 	},
 	"editcheck-dialog-action-no": "Не",
 	"editcheck-dialog-action-yes": "Да",
+	"editcheck-dialog-action-decline": "Одбаци",
 	"editcheck-dialog-addref-description": "Помозите читаоцима да знају одакле информација долази додавањем референце.",
 	"editcheck-dialog-addref-reject-question": "Зашто не додајете референцу?",
 	"editcheck-dialog-addref-reject-description": "Остали уредници радо би знали зашто сте одлучили не додати референцу.",

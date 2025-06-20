@@ -10,6 +10,7 @@
 			"Kghbln",
 			"Kurt Jansson",
 			"Metalhead64",
+			"MoritzMT20",
 			"Murma174",
 			"Se4598",
 			"Tomabrafix"
@@ -22,6 +23,7 @@
 	"tag-editcheck-references-activated-description": "EditCheck geht davon aus, dass möglicherweise ein Einzelnachweis erforderlich war, und die Benutzeroberfläche wurde angezeigt",
 	"tag-editcheck-references-shown": "Bearbeitungsprüfung (Belege) wurde angezeigt",
 	"tag-editcheck-references-shown-description": "Die Bearbeitungsprüfung ist der Meinung, dass ein Beleg erforderlich gewesen sein könnte; die Benutzeroberfläche wurde angezeigt",
+	"tag-editcheck-tone-shown-description": "EditCheck meint, dass eine Anpassung des Tons in einigen Inhalten nötig gewesen wäre, und die Benutzeroberfläche wurde angezeigt",
 	"tag-visualeditor": "Visuelle Bearbeitung",
 	"tag-visualeditor-description": "Bearbeitungen, die mit dem [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuellen Editor]] ausgeführt wurden.",
 	"tag-visualeditor-needcheck": "Visuelle Bearbeitung: Überprüfung",
