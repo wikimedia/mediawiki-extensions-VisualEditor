@@ -351,13 +351,10 @@ ve.init.mw.MobileArticleTarget.prototype.afterSurfaceReady = function () {
 ve.init.mw.MobileArticleTarget.prototype.adjustContentPadding = function () {
 	const surface = this.getSurface(),
 		surfaceView = surface.getView(),
-		toolbarHeight = this.getToolbar().$element[ 0 ].clientHeight;
+		paddingTop = surface.getPadding().top;
 
-	surface.setPadding( {
-		top: toolbarHeight
-	} );
-	surfaceView.$attachedRootNode.css( 'padding-top', toolbarHeight );
-	surface.$placeholder.css( 'padding-top', toolbarHeight );
+	surfaceView.$attachedRootNode.css( 'padding-top', paddingTop );
+	surface.$placeholder.css( 'padding-top', paddingTop );
 	surfaceView.emit( 'position' );
 	surface.scrollSelectionIntoView();
 };
@@ -503,6 +500,9 @@ ve.init.mw.MobileArticleTarget.prototype.attachToolbar = function () {
 	// Move the toolbar to the overlay header
 	this.overlay.$el.find( '.overlay-header > .toolbar' ).append( this.toolbar.$element );
 	this.toolbar.initialize();
+	// MobileFrontend handles toolbar floating, but mark it as floating so we
+	// calculate a height for surface padding.
+	this.toolbar.float();
 };
 
 /**
