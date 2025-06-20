@@ -208,9 +208,10 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
  * was requested.
  *
  * @param {mw.editcheck.EditCheckAction} action
- * @param {boolean} scrollTo
+ * @param {boolean} [scrollTo] Scroll focused selection into view
+ * @param {boolean} [alignToTop] Align selection to top of page when scrolling
  */
-Controller.prototype.focusAction = function ( action, scrollTo ) {
+Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 	if ( !scrollTo && action === this.focusedAction ) {
 		// Don't emit unnecessary events if there is no change or scroll
 		return;
@@ -219,7 +220,7 @@ Controller.prototype.focusAction = function ( action, scrollTo ) {
 	this.focusedAction = action;
 
 	if ( scrollTo ) {
-		this.scrollActionIntoViewDebounced( action );
+		this.scrollActionIntoViewDebounced( action, alignToTop );
 	}
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
@@ -306,7 +307,7 @@ Controller.prototype.onPosition = function () {
 	this.updatePositions();
 
 	if ( this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
-		this.scrollActionIntoViewDebounced( this.focusedAction );
+		this.scrollActionIntoViewDebounced( this.focusedAction, true, !OO.ui.isMobile() );
 	}
 };
 
@@ -610,14 +611,19 @@ Controller.prototype.drawGutter = function () {
 	surfaceView.appendHighlights( this.$highlights, false );
 };
 
-Controller.prototype.scrollActionIntoView = function ( action ) {
+Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 	// scrollSelectionIntoView scrolls to the focus of a selection, but we
 	// want the very beginning to be in view, so collapse it:
 	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
-	const padding = {
-		top: OO.ui.isMobile() ? 80 : action.widget.$element[ 0 ].getBoundingClientRect().top,
-		bottom: 20
-	};
+	const padding = ve.copy( this.surface.getPadding() );
+	if ( alignToTop ) {
+		padding.top = action.widget.$element[ 0 ].getBoundingClientRect().top;
+	}
+	if ( OO.ui.isMobile() ) {
+		// TODO: Fix mobile surface padding
+		padding.top = 80;
+	}
+
 	if ( ve.ui.FixedEditCheckDialog.static.position === 'below' ) {
 		// TODO: ui.surface getPadding should really be fixed for this
 		const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
@@ -628,7 +634,7 @@ Controller.prototype.scrollActionIntoView = function ( action ) {
 	this.surface.scrollSelectionIntoView( selection, {
 		animate: true,
 		padding: padding,
-		alignToTop: true
+		alignToTop: alignToTop
 	} );
 };
 
