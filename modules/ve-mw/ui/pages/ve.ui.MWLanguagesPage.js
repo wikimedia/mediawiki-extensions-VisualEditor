@@ -33,7 +33,7 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage() {
 	);
 	this.$element.append( this.languagesFieldset.$element );
 
-	this.getAllLanguageItems().done( this.onLoadLanguageData.bind( this ) );
+	this.getAllLanguageItems().then( this.onLoadLanguageData.bind( this ) );
 };
 
 /* Inheritance */
@@ -99,10 +99,10 @@ ve.ui.MWLanguagesPage.prototype.onLoadLanguageData = function ( languages ) {
 /**
  * Handle language items being loaded.
  *
- * @param {jQuery.Deferred} deferred Deferred to resolve with language data
  * @param {Object} response API response
+ * @return {Array}
  */
-ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred, response ) {
+ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( response ) {
 	const languages = [],
 		langlinks = OO.getProp( response, 'query', 'pages', 0, 'langlinks' );
 	if ( langlinks ) {
@@ -115,7 +115,7 @@ ve.ui.MWLanguagesPage.prototype.onAllLanguageItemsSuccess = function ( deferred,
 			} );
 		}
 	}
-	deferred.resolve( languages );
+	return languages;
 };
 
 /**
@@ -158,18 +158,17 @@ ve.ui.MWLanguagesPage.prototype.getLocalLanguageItems = function () {
  * @return {jQuery.Promise}
  */
 ve.ui.MWLanguagesPage.prototype.getAllLanguageItems = function () {
-	const deferred = ve.createDeferred();
 	// TODO: Detect paging token if results exceed limit
-	ve.init.target.getContentApi().get( {
+	return ve.init.target.getContentApi().get( {
 		action: 'query',
 		prop: 'langlinks',
 		llprop: 'autonym',
 		lllimit: 500,
 		titles: ve.init.target.getPageName()
-	} )
-		.done( this.onAllLanguageItemsSuccess.bind( this, deferred ) )
-		.fail( this.onAllLanguageItemsError.bind( this, deferred ) );
-	return deferred.promise();
+	} ).then(
+		this.onAllLanguageItemsSuccess.bind( this ),
+		this.onAllLanguageItemsError.bind( this )
+	);
 };
 
 /**

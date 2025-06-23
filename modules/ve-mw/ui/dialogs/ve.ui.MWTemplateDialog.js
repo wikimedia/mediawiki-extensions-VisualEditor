@@ -360,7 +360,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 	if ( action === 'done' ) {
 		return new OO.ui.Process( () => {
 			const deferred = ve.createDeferred();
-			this.checkRequiredParameters().done( () => {
+			this.checkRequiredParameters().then( () => {
 				const surfaceModel = this.getFragment().getSurface(),
 					obj = this.transclusionModel.getPlainObject();
 

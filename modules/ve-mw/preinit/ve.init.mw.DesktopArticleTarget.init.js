@@ -677,7 +677,7 @@
 
 					// toolbarSetupDeferred resolves slightly before activatePromise, use done
 					// to run in the same paint cycle as the VE toolbar being drawn
-					target.toolbarSetupDeferred.done( () => {
+					target.toolbarSetupDeferred.then( () => {
 						hideToolbarPlaceholder();
 					} );
 
@@ -1097,7 +1097,7 @@
 			const section = $( e.target ).closest( '#ca-addsection' ).length ? 'new' : null;
 
 			if ( active ) {
-				targetPromise.done( ( target ) => {
+				targetPromise.then( ( target ) => {
 					if ( target.getDefaultMode() === 'source' ) {
 						if ( mode === 'visual' ) {
 							target.switchToVisualEditor();
@@ -1530,7 +1530,7 @@
 			) {
 				mw.loader.load( 'ext.visualEditor.switching' );
 				mw.hook( 'wikiEditor.toolbarReady' ).add( ( $textarea ) => {
-					mw.loader.using( 'ext.visualEditor.switching' ).done( () => {
+					mw.loader.using( 'ext.visualEditor.switching' ).then( () => {
 						const showPopup = url.searchParams.has( 'veswitched' ) && !mw.user.options.get( 'visualeditor-hidesourceswitchpopup' ),
 							toolFactory = new OO.ui.ToolFactory(),
 							toolGroupFactory = new OO.ui.ToolGroupFactory();
@@ -1623,7 +1623,7 @@
 			// Not on protected pages
 			pageIsProbablyEditable
 		) {
-			mw.loader.using( 'ext.visualEditor.welcome' ).done( () => {
+			mw.loader.using( 'ext.visualEditor.welcome' ).then( () => {
 				// Check shouldShowWelcomeDialog() again: any code that might have called
 				// stopShowingWelcomeDialog() wouldn't have had an opportunity to do that
 				// yet by the first time we checked

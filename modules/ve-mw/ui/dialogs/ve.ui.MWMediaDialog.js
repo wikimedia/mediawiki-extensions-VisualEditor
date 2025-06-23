@@ -718,7 +718,7 @@ ve.ui.MWMediaDialog.prototype.buildMediaInfoPanel = function ( imageinfo ) {
 
 	// Call for a bigger image
 	this.fetchThumbnail( imageTitleText, newDimensions )
-		.done( ( thumburl ) => {
+		.then( ( thumburl ) => {
 			if ( thumburl ) {
 				$image.prop( 'src', thumburl );
 			}

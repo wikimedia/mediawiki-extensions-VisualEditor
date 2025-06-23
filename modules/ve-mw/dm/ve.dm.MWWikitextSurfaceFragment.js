@@ -136,7 +136,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 	const progressPromise = ve.init.target.getSurface().createProgress(
 		wikitextPromise, ve.msg( 'visualeditor-generating-wikitext-progress' )
 	).then( ( progressBar, cancelPromise ) => {
-		cancelPromise.fail( () => {
+		cancelPromise.then( null, () => {
 			wikitextPromise.abort();
 		} );
 	} );

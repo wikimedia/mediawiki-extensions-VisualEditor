@@ -79,7 +79,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 		promise = this.get( title );
 	}
 
-	promise.done( ( data ) => {
+	promise.then( ( data ) => {
 		// eslint-disable-next-line mediawiki/class-doc
 		$element.addClass( data.linkclasses );
 		if ( data.missing && !data.known ) {
@@ -89,10 +89,6 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 			if ( !hasFragment && this.constructor.static.normalizeTitle( title ) === this.constructor.static.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) ) ) {
 				$element.addClass( 'mw-selflink' );
 			}
-
-			// The following two classes should already be added by data.linkclasses
-			// TODO: Decide if the linkclasses or the pageprop is canonical, and only use one.
-
 			// Provided by core MediaWiki, no styles by default.
 			if ( data.redirect ) {
 				$element.addClass( 'mw-redirect' );

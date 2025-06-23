@@ -241,7 +241,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 		}
 		this.toolbarSetupDeferred.resolve();
 
-		this.toolbarSetupDeferred.done( () => {
+		this.toolbarSetupDeferred.then( () => {
 			const newSurface = this.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( newSurface ) {
@@ -394,13 +394,13 @@ ve.init.mw.DesktopArticleTarget.prototype.activate = function ( dataPromise ) {
 		this.toolbarSetupDeferred = ve.createDeferred();
 
 		$( 'html' ).addClass( 've-activating' );
-		ve.promiseAll( [ this.activatingDeferred, this.toolbarSetupDeferred ] ).done( () => {
+		ve.promiseAll( [ this.activatingDeferred, this.toolbarSetupDeferred ] ).then( () => {
 			if ( !this.suppressNormalStartupDialogs ) {
 				this.maybeShowWelcomeDialog();
 				this.maybeShowMetaDialog();
 			}
 			this.afterActivate();
-		} ).fail( () => {
+		}, () => {
 			$( 'html' ).removeClass( 've-activating' );
 		} );
 
@@ -680,7 +680,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			{ action: 'accept', label: OO.ui.msg( 'ooui-dialog-process-retry' ), flags: 'primary' },
 			{ action: 'reject', label: OO.ui.msg( 'ooui-dialog-message-reject' ), flags: 'safe' }
 		]
-	} ).done( ( confirmed ) => {
+	} ).then( ( confirmed ) => {
 		if ( confirmed ) {
 			// Retry load
 			this.load();
@@ -795,7 +795,7 @@ ve.init.mw.DesktopArticleTarget.prototype.onMetaItemRemoved = function ( metaIte
  * @param {ve.dm.MetaItem[]} categoryItems Array of category metaitems to display
  */
 ve.init.mw.DesktopArticleTarget.prototype.rebuildCategories = function ( categoryItems ) {
-	this.renderCategories( categoryItems ).done( ( $categories ) => {
+	this.renderCategories( categoryItems ).then( ( $categories ) => {
 		// Clone the existing catlinks for any specific properties which might
 		// be needed by the rest of the page. Also gives us a not-attached
 		// version, which we can pass to wikipage.categories as it requests.
@@ -868,7 +868,7 @@ ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
 	// Parent method
 	const promise = ve.init.mw.DesktopArticleTarget.super.prototype.serialize.apply( this, arguments );
 
-	return promise.fail( ( error, response ) => {
+	return promise.then( null, ( error, response ) => {
 		const $errorMessages = this.extractErrorMessages( response );
 		OO.ui.alert( $errorMessages );
 
@@ -1471,7 +1471,7 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.reloadSurface.apply( this, arguments );
 
-	this.activatingDeferred.done( () => {
+	this.activatingDeferred.then( () => {
 		this.updateHistoryState();
 		this.afterActivate();
 		this.setupTriggerListeners();

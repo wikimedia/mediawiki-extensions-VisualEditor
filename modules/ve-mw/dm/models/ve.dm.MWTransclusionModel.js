@@ -332,8 +332,9 @@
 			lang: mw.config.get( 'wgUserLanguage' ),
 			includeMissingTitles: '1',
 			redirects: '1'
-		} ).done( this.cacheTemplateDataApiResponse.bind( this ) );
-		xhr.always(
+		} );
+
+		xhr.then( this.cacheTemplateDataApiResponse.bind( this ) ).always(
 			this.markRequestAsDone.bind( this, xhr ),
 			this.resolveChangeQueue.bind( this, queue )
 		);
