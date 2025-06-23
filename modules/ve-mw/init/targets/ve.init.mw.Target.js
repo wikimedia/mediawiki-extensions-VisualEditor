@@ -432,13 +432,7 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
  * @param {number} [config.storageExpiry] Storage expiry time in seconds (optional)
  */
 ve.init.mw.Target.prototype.initAutosave = function ( config ) {
-	// Old function signature
-	// TODO: Remove after fixed downstream
-	if ( typeof config === 'boolean' ) {
-		config = { suppressNotification: config };
-	} else {
-		config = config || {};
-	}
+	config = config || {};
 
 	const surfaceModel = this.getSurface().getModel();
 
