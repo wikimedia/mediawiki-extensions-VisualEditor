@@ -25,6 +25,9 @@ mw.editcheck.ToneCheck.static.checkAsync = function ( text ) {
 		return false;
 	}
 
+	const title = mw.Title.newFromText( mw.config.get( 'wgRelevantPageName' ) );
+	const titleText = title ? title.getMainText() : '';
+
 	return fetch( 'https://api.wikimedia.org/service/lw/inference/v1/models/edit-check:predict', {
 		method: 'POST',
 		headers: {
@@ -32,8 +35,15 @@ mw.editcheck.ToneCheck.static.checkAsync = function ( text ) {
 		},
 		body: JSON.stringify( {
 			instances: [
-				// eslint-disable-next-line camelcase
-				{ original_text: '', modified_text: text, check_type: 'tone', lang: 'en' }
+				/* eslint-disable camelcase */
+				{
+					modified_text: text,
+					page_title: titleText,
+					original_text: '',
+					check_type: 'tone',
+					lang: 'en'
+				}
+				/* eslint-enable camelcase */
 			]
 		} )
 	} ).then(
