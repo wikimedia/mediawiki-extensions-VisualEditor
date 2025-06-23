@@ -18,8 +18,7 @@
  * @param {Object} [config.toolbarConfig]
  * @param {boolean} [config.register=true]
  */
-ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config ) {
-	config = config || {};
+ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	config.toolbarConfig = ve.extendObject( {
 		shadow: true,
 		actions: true,
@@ -1732,7 +1731,7 @@ ve.init.mw.ArticleTarget.prototype.track = function ( name ) {
 /**
  * @inheritdoc
  */
-ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
+ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config = {} ) {
 	const sections = dmDoc.getNodesByType( 'section' );
 	let attachedRoot;
 	if ( sections.length && sections.length === 1 ) {

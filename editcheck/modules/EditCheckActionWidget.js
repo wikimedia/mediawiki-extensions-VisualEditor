@@ -13,8 +13,6 @@
  * @param {string} [config.mode] Mode for the action set widget
  */
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
-	config = config || {};
-
 	this.singleAction = config.singleAction;
 	this.mode = config.mode || '';
 

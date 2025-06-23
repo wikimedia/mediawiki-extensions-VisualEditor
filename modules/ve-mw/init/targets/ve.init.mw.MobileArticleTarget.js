@@ -21,12 +21,11 @@
  * @param {Object} [config.toolbarConfig]
  * @param {string|null} [config.section] Number of the section target should scroll to
  */
-ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, config ) {
+ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, config = {} ) {
 	this.overlay = overlay;
 	this.$overlay = overlay.$el;
 	this.$overlaySurface = overlay.$el.find( '.surface' );
 
-	config = config || {};
 	config.toolbarConfig = ve.extendObject( {
 		actions: false
 	}, config.toolbarConfig );
@@ -263,7 +262,7 @@ ve.init.mw.MobileArticleTarget.prototype.onSurfaceScroll = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, config ) {
+ve.init.mw.MobileArticleTarget.prototype.createSurface = function ( dmDoc, config = {} ) {
 	if ( this.overlay.isNewPage ) {
 		config = ve.extendObject( {
 			placeholder: this.overlay.options.placeholder

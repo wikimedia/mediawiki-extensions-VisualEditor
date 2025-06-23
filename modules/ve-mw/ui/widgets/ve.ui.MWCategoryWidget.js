@@ -19,9 +19,6 @@
  * @param {jQuery} [config.$overlay] Overlay to render dropdowns in
  */
 ve.ui.MWCategoryWidget = function VeUiMWCategoryWidget( config ) {
-	// Config initialization
-	config = config || {};
-
 	// Parent constructor
 	ve.ui.MWCategoryWidget.super.call( this, config );
 

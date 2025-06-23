@@ -24,10 +24,7 @@
  * @param {string} [config.type='attribute'] Field type, either 'description' or 'attribute'
  * @param {string} [config.descriptionHeight='4em'] Height limit for description fields
  */
-ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, config ) {
-	// Configuration initialization
-	config = config || {};
-
+ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, config = {} ) {
 	// Parent constructor
 	ve.ui.MWMediaInfoFieldWidget.super.call( this, config );
 

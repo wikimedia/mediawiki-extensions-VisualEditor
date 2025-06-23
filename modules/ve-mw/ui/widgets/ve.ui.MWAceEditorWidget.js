@@ -31,9 +31,6 @@
  * autocomplete to
  */
 ve.ui.MWAceEditorWidget = function VeUiMWAceEditorWidget( config ) {
-	// Configuration
-	config = config || {};
-
 	this.autocomplete = config.autocomplete || 'none';
 	this.autocompleteWordList = config.autocompleteWordList || null;
 

@@ -18,7 +18,7 @@
  * @param {boolean} [config.isMobile=false]
  * @param {boolean} [config.draggable=true]
  */
-ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config ) {
+ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config = {} ) {
 	this.resource = imageInfo.resource;
 	this.altText = imageInfo.altText || '';
 	this.altTextSame = imageInfo.altTextSame;
@@ -38,9 +38,6 @@ ve.ui.MWGalleryItemWidget = function VeUiMWGalleryItemWidget( imageInfo, config 
 	this.mw = imageInfo.mw;
 	this.mediaClass = imageInfo.mediaClass;
 	this.mediaTag = imageInfo.mediaTag;
-
-	// Configuration initialization
-	config = config || {};
 
 	// Parent constructor
 	ve.ui.MWGalleryItemWidget.super.call( this, config );

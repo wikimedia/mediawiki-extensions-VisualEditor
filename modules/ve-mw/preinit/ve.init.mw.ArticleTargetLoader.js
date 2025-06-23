@@ -223,8 +223,7 @@
 		 * @param {string[]} [options.preloadparams] Parameters to substitute into preload if it's used
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestPageData: function ( mode, pageName, options ) {
-			options = options || {};
+		requestPageData: function ( mode, pageName, options = {} ) {
 			if ( mode === 'visual' && options.section === 'new' ) {
 				throw new Error( 'Adding new section is not supported in visual mode' );
 			}
@@ -304,11 +303,10 @@
 		 *  is not required for some use cases, e.g. diffing.
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestParsoidData: function ( pageName, options, noRestbase, noMetadata ) {
+		requestParsoidData: function ( pageName, options = {}, noRestbase = false, noMetadata = false ) {
 			const section = options.section !== undefined ? options.section : null,
 				useRestbase = !noRestbase && ( conf.fullRestbaseUrl || conf.restbaseUrl ) && section === null;
 
-			options = options || {};
 			const data = {
 				action: 'visualeditor',
 				paction: useRestbase ? 'metadata' : 'parse',
@@ -499,8 +497,7 @@
 		 * @param {Object} [options] See #requestPageData
 		 * @return {jQuery.Promise} Abortable promise resolved with a JSON object
 		 */
-		requestWikitext: function ( pageName, options ) {
-			options = options || {};
+		requestWikitext: function ( pageName, options = {} ) {
 			const data = {
 				action: 'visualeditor',
 				paction: 'wikitext',
