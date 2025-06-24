@@ -24,6 +24,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.fragments = config.fragments;
 	this.focusFragment = config.focusFragment;
 	this.message = config.message;
+	this.footer = config.footer;
 	this.id = config.id;
 	this.paused = config.paused || false;
 	this.title = config.title;
@@ -67,6 +68,15 @@ mw.editcheck.EditCheckAction.static.compareStarts = function ( a, b ) {
  */
 mw.editcheck.EditCheckAction.prototype.getTitle = function () {
 	return this.title || this.check.getTitle( this );
+};
+
+/**
+ * Get the action's footer, if any
+ *
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
+mw.editcheck.EditCheckAction.prototype.getFooter = function () {
+	return this.footer || this.check.getFooter();
 };
 
 /**
@@ -138,6 +148,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		icon: this.icon,
 		label: this.getTitle(),
 		message: this.getDescription(),
+		footer: this.getFooter(),
 		classes: collapsed ? [ 've-ui-editCheckActionWidget-collapsed' ] : '',
 		mode: this.check.mode,
 		singleAction: singleAction
