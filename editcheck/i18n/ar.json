@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Dyolf77 (WMF)",
-			"Meno25"
+			"Meno25",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
 	"editcheck-dialog-action-no": "لا",
@@ -19,7 +20,7 @@
 	"editcheck-dialog-addref-success-notify": "شكرًا لكم على إضافة استشهاد!",
 	"editcheck-dialog-addref-title": "إضافة استشهاد",
 	"editcheck-dialog-title": "قبل النشر",
-	"editcheck-copyvio-title": "محتوى مُلصَق",
+	"editcheck-copyvio-title": "محتوى ملصوق",
 	"editcheck-copyvio-description": "كقاعدة عامة، لا تنسخ نصًا من مصادر أخرى. هذا عادة ما يشكل انتهاكًا لحقوق الطبع والنشر وسرقة أدبية.",
 	"editcheck-tone-title": "إعادة النظر في الأسلوب؟",
 	"editcheck-tone-description": "غالبًا ما يقوم المحررون الآخرون بمراجعة هذا النوع من الكلمات للحصول على أسلوب أكثر توازنًا. [$1 التعرف على المزيد]",
