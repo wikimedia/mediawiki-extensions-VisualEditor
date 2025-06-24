@@ -1,6 +1,11 @@
 /**
  * EditCheckFactory
  *
+ * This class provides a registry of Edit Checks, and instantiates and calls them when createAllByListener() is called.
+ *
+ * The controller keeps track of the actions which have been returned by previous invocations, and deduplicates actions
+ * which it has seen before. This allows us to keep state (mostly) out of the checks and EditCheckFactory itself.
+ *
  * @class
  * @constructor
  * @extends OO.Factory
@@ -84,6 +89,12 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
 
 /**
  * Create all checks actions for a given listener
+ *
+ * Invoked by Controller.prototype.updateForListener, which itself is called in response to user actions such as
+ * navigating away from a paragraph, making changes to the document, or clicking 'Save changes...'
+ *
+ * Checks are created statelessly and then mapped to their 'originals' by the controller. The existing actions are
+ * provided so that checks may, if necessary, do this mapping themselves in order to add state.
  *
  * TODO: Rename to createAllActionsByListener
  *
