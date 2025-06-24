@@ -257,8 +257,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getSetupProcess = function ( d
 /**
  * @inheritdoc
  */
-ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
-	data = data || {};
+ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function ( data = {} ) {
 	// Call grand-parent
 	return ve.ui.FragmentInspector.prototype.getTeardownProcess.call( this, data )
 		.first( () => {

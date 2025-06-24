@@ -17,8 +17,7 @@
  * @param {Object} [config] Configuration options
  * @param {mw.Title} [config.importTitle] Title to import
  */
-ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, config ) {
-	config = config || {};
+ve.init.mw.CollabTarget = function VeInitMwCollabTarget( title, rebaserUrl, config = {} ) {
 	config.toolbarConfig = ve.extendObject( {
 		shadow: true,
 		actions: true,

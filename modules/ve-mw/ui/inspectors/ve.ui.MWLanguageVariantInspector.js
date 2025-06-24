@@ -235,8 +235,7 @@ ve.ui.MWLanguageVariantInspector.prototype.getSetupProcess = function ( data ) {
 /**
  * @inheritdoc
  */
-ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data ) {
-	data = data || {};
+ve.ui.MWLanguageVariantInspector.prototype.getTeardownProcess = function ( data = {} ) {
 	return ve.ui.MWLanguageVariantInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
 			const surfaceModel = this.getFragment().getSurface();

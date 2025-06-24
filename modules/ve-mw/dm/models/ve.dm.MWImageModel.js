@@ -19,9 +19,7 @@
  * @param {Object} [config.minDimensions={}] Minimum dimensions, width & height
  * @param {boolean} [config.isDefaultSize=false] Object is using its default size dimensions
  */
-ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config ) {
-	config = config || {};
-
+ve.dm.MWImageModel = function VeDmMWImageModel( parentDoc, config = {} ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
