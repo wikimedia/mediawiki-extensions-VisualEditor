@@ -640,7 +640,7 @@
 				"editcheck/modules/EditCheckDialog.js",
 				"editcheck/modules/FixedEditCheckDialog.js",
 				"editcheck/modules/SidebarEditCheckDialog.js",
-				"editcheck/modules/EditCheckGutterSidebarDialog.js",
+				"editcheck/modules/GutterSidebarEditCheckDialog.js",
 				"editcheck/modules/EditCheckPreSaveToolbarTools.js",
 				"editcheck/modules/EditCheckFactory.js",
 				"editcheck/modules/EditCheckAction.js",

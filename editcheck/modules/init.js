@@ -15,7 +15,7 @@ require( './utils.js' );
 require( './EditCheckDialog.js' );
 require( './FixedEditCheckDialog.js' );
 require( './SidebarEditCheckDialog.js' );
-require( './EditCheckGutterSidebarDialog.js' );
+require( './GutterSidebarEditCheckDialog.js' );
 require( './EditCheckPreSaveToolbarTools.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );

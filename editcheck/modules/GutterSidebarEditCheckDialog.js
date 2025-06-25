@@ -1,5 +1,5 @@
 /*!
- * VisualEditor UserInterface EditCheckGutterSidebarDialog class.
+ * VisualEditor UserInterface GutterSidebarEditCheckDialog class.
  *
  * @copyright See AUTHORS.txt
  */
@@ -14,7 +14,7 @@ ve.ui.GutterSidebarEditCheckDialog = function VeUiGutterSidebarEditCheckDialog( 
 	// Parent constructor
 	ve.ui.GutterSidebarEditCheckDialog.super.call( this, config );
 
-	this.$element.addClass( 've-ui-editCheckGutterSidebarDialog' );
+	this.$element.addClass( 've-ui-gutterSidebarEditCheckDialog' );
 };
 
 /* Inheritance */
