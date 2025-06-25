@@ -108,24 +108,14 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 
 	// First join overlapping actions into "sections"
 	actions.forEach( ( action ) => {
-		let boundingRect = null;
-		action.getHighlightSelections().forEach( ( selection ) => {
+		const rects = action.getHighlightSelections().map( ( selection ) => {
 			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
-			const rect = selectionView.getSelectionBoundingRect();
-			if ( !boundingRect ) {
-				boundingRect = rect;
-			} else {
-				boundingRect.top = Math.min( boundingRect.top, rect.top );
-				boundingRect.left = Math.min( boundingRect.left, rect.left );
-				boundingRect.bottom = Math.max( boundingRect.bottom, rect.bottom );
-				boundingRect.right = Math.max( boundingRect.right, rect.right );
-			}
+			return selectionView.getSelectionBoundingRect();
 		} );
+		const boundingRect = ve.getBoundingRect( rects );
 		if ( !boundingRect ) {
 			return;
 		}
-		boundingRect.width = boundingRect.right - boundingRect.left;
-		boundingRect.height = boundingRect.bottom - boundingRect.top;
 
 		// Look for any other section that the new one overlaps with
 		// TODO: join when two other sections are joined by the new one?
