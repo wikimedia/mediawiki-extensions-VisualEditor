@@ -12,17 +12,16 @@ mw.editcheck = {
 };
 
 require( './utils.js' );
-require( './EditCheckDialog.js' );
-require( './FixedEditCheckDialog.js' );
-require( './SidebarEditCheckDialog.js' );
-require( './GutterSidebarEditCheckDialog.js' );
 require( './EditCheckPreSaveToolbarTools.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './EditCheckActionWidget.js' );
-require( './BaseEditCheck.js' );
-require( './AsyncTextCheck.js' );
-
+require( './dialogs/EditCheckDialog.js' );
+require( './dialogs/FixedEditCheckDialog.js' );
+require( './dialogs/SidebarEditCheckDialog.js' );
+require( './dialogs/GutterSidebarEditCheckDialog.js' );
+require( './editchecks/BaseEditCheck.js' );
+require( './editchecks/AsyncTextCheck.js' );
 require( './editchecks/AddReferenceEditCheck.js' );
 
 if ( mw.editcheck.experimental ) {
