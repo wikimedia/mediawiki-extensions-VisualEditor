@@ -1464,7 +1464,7 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = funct
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
+ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function ( newMode ) {
 	this.activating = true;
 	this.activatingDeferred = ve.createDeferred();
 
@@ -1472,6 +1472,10 @@ ve.init.mw.DesktopArticleTarget.prototype.reloadSurface = function () {
 	ve.init.mw.DesktopArticleTarget.super.prototype.reloadSurface.apply( this, arguments );
 
 	this.activatingDeferred.then( () => {
+		if ( newMode === 'source' ) {
+			mw.hook( 've.wikitextInteractive' ).fire();
+		}
+
 		this.updateHistoryState();
 		this.afterActivate();
 		this.setupTriggerListeners();
