@@ -1555,7 +1555,8 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 
 	data.vetags = taglist.join( ',' );
 
-	const promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' ).then(
+	const promise = this.saving = this.tryWithPreparedCacheKey( doc, data, 'save' );
+	promise.then(
 		this.saveComplete.bind( this ),
 		this.saveFail.bind( this, doc, data )
 	).always( () => {
@@ -1695,7 +1696,8 @@ ve.init.mw.ArticleTarget.prototype.serialize = function ( doc, callback ) {
 		page: this.getPageName(),
 		oldid: this.revid,
 		etag: this.etag
-	}, 'serialize' ).then(
+	}, 'serialize' );
+	promise.then(
 		this.emit.bind( this, 'serializeComplete' ),
 		this.emit.bind( this, 'serializeError' )
 	).always( () => {
