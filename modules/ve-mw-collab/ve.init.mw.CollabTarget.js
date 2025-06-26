@@ -65,11 +65,13 @@ ve.init.mw.CollabTarget.static.toolbarGroups.push(
 	{
 		name: 'help',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		include: [ 'help' ]
 	},
 	{
 		name: 'pageMenu',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		type: 'list',
 		icon: 'menu',
 		indicator: null,
@@ -81,11 +83,13 @@ ve.init.mw.CollabTarget.static.toolbarGroups.push(
 	{
 		name: 'authorList',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		include: [ 'authorList' ]
 	},
 	{
 		name: 'export',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		include: [ 'export' ]
 	}
 );

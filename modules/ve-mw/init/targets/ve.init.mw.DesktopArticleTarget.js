@@ -93,6 +93,7 @@ ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 	{
 		name: 'help',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		type: 'mwHelpList',
 		icon: 'help',
 		indicator: null,
@@ -103,11 +104,13 @@ ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 	{
 		name: 'notices',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		include: [ { group: 'notices' } ]
 	},
 	{
 		name: 'pageMenu',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		type: 'list',
 		icon: 'menu',
 		indicator: null,
@@ -120,6 +123,7 @@ ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 	{
 		name: 'editMode',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		type: 'list',
 		icon: 'edit',
 		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
@@ -130,6 +134,7 @@ ve.init.mw.DesktopArticleTarget.static.toolbarGroups.push(
 	{
 		name: 'save',
 		align: 'after',
+		excludeFromTargetWidget: true,
 		type: 'bar',
 		include: [ { group: 'save' } ]
 	}

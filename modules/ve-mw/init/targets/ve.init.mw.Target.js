@@ -311,7 +311,10 @@ ve.init.mw.Target.prototype.createTargetWidget = function ( config ) {
 		// Reset to visual mode for target widgets
 		modes: [ 'visual' ],
 		defaultMode: 'visual',
-		toolbarGroups: this.toolbarGroups.filter( ( group ) => group.align !== 'after' ),
+		toolbarGroups: this.toolbarGroups.filter( ( group ) => !group.excludeFromTargetWidget &&
+			// Deprecated: Don't rely on alignment to exclude from target widgets, use
+			// excludeFromTargetWidget instead.
+			group.align !== 'after' ),
 		surfaceClasses: this.getSurfaceClasses()
 	}, config ) );
 };

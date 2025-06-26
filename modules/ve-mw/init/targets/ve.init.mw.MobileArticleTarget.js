@@ -51,6 +51,12 @@ OO.inheritClass( ve.init.mw.MobileArticleTarget, ve.init.mw.ArticleTarget );
 /* Static Properties */
 
 ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
+	// Back
+	{
+		name: 'back',
+		include: [ 'back' ],
+		excludeFromTargetWidget: true
+	},
 	{
 		name: 'history',
 		include: [ 'undo' ]
@@ -71,6 +77,22 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 	{
 		name: 'link',
 		include: [ 'link' ]
+	},
+	{
+		name: 'editMode',
+		type: 'list',
+		icon: 'edit',
+		title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+		label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
+		invisibleLabel: true,
+		include: [ { group: 'editMode' } ],
+		excludeFromTargetWidget: true
+	},
+	{
+		name: 'save',
+		type: 'bar',
+		include: [ 'showSave' ],
+		excludeFromTargetWidget: true
 	}
 ];
 
@@ -453,40 +475,9 @@ ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function ( surface ) {
-	const originalToolbarGroups = this.toolbarGroups;
-
-	// We don't want any of these tools to show up in subordinate widgets, so we
-	// temporarily add them here. We need to do it _here_ rather than in their
-	// own static variable to make sure that other tools which meddle with
-	// toolbarGroups (Cite, mostly) have a chance to do so.
-	this.toolbarGroups = [
-		// Back
-		{
-			name: 'back',
-			include: [ 'back' ]
-		},
-		...this.toolbarGroups,
-		{
-			name: 'editMode',
-			type: 'list',
-			icon: 'edit',
-			title: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-			label: ve.msg( 'visualeditor-mweditmode-tooltip' ),
-			invisibleLabel: true,
-			include: [ { group: 'editMode' } ]
-		},
-		{
-			name: 'save',
-			type: 'bar',
-			include: [ 'showSave' ]
-		}
-	];
-
+ve.init.mw.MobileArticleTarget.prototype.setupToolbar = function () {
 	// Parent method
-	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.call( this, surface );
-
-	this.toolbarGroups = originalToolbarGroups;
+	ve.init.mw.MobileArticleTarget.super.prototype.setupToolbar.apply( this, arguments );
 
 	this.toolbar.$element.addClass( 've-init-mw-mobileArticleTarget-toolbar' );
 	this.toolbar.$popups.addClass( 've-init-mw-mobileArticleTarget-toolbar-popups' );
