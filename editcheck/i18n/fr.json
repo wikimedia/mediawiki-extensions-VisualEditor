@@ -3,6 +3,7 @@
 		"authors": [
 			"Derugon",
 			"Gomoko",
+			"JLTRY",
 			"Mahabarata"
 		]
 	},
@@ -23,7 +24,8 @@
 	"editcheck-copyvio-title": "Contenu copié-collé",
 	"editcheck-copyvio-description": "En règle générale, ne copiez pas de texte provenant d'autres sources. Cela constitue généralement une violation des droits d'auteur et un plagiat.",
 	"editcheck-tone-title": "Réviser le ton ?",
-	"editcheck-tone-description": "D’autres éditeurs révisent souvent ce type de formulation pour avoir un ton plus équilibré. [$1 En savoir plus]",
+	"editcheck-tone-description": "D'autres utilisateurs révisent souvent ce genre de formulation, disant que le ton est déséquilibré. [$1 En savoir plus]",
+	"editcheck-tone-footer": "Identifié à l'aide d'un [ modèle BERT $1 ]",
 	"editcheck-tone-title-acted": "Révision du ton",
 	"editcheck-tone-description-acted": "Faites attention aux expressions flatteuses, désobligeantes, vagues, clichées ou qui soutiennent un point de vue particulier.",
 	"editcheck-review-title": "Relire les modifications",
