@@ -231,7 +231,7 @@ Controller.prototype.refresh = function () {
 Controller.prototype.updateForListener = function ( listener, always ) {
 	const existing = this.getActions( listener ) || [];
 	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
-	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel(), existing )
+	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
 		.then( ( actions ) => actions.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action ) )
 		.then( ( actions ) => {
 			this.actionsByListener[ listener ] = actions;

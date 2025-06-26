@@ -93,18 +93,17 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * Invoked by Controller.prototype.updateForListener, which itself is called in response to user actions such as
  * navigating away from a paragraph, making changes to the document, or clicking 'Save changes...'
  *
- * Checks are created statelessly and then mapped to their 'originals' by the controller. The existing actions are
- * provided so that checks may, if necessary, do this mapping themselves in order to add state.
+ * Checks are created statelessly and then mapped to their 'originals' by the controller. This way if we track state
+ * on the original, or use object identity with the actions to track UI updates, the object remains stable.
  *
  * TODO: Rename to createAllActionsByListener
  *
  * @param {mw.editcheck.Controller} controller
  * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
- * @param {mw.editcheck.EditCheckAction[]} existing Existing actions
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
-mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel, existing ) {
+mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel ) {
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
 		const check = this.create( checkName, controller, mw.editcheck.config[ checkName ] );
@@ -114,7 +113,7 @@ mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( control
 		const checkListener = check[ listenerName ];
 		let actionOrPromise;
 		try {
-			actionOrPromise = checkListener.call( check, surfaceModel, existing );
+			actionOrPromise = checkListener.call( check, surfaceModel );
 		} catch ( ex ) {
 			// HACK: ensure that synchronous exceptions are returned as rejected promises.
 			// TODO: Consider making all checks return promises. This would unify exception
