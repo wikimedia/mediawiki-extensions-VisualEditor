@@ -52,10 +52,9 @@ mw.editcheck.AsyncTextCheck.static.memoizedCheckAsync = null;
 /**
  * @param {string} listener Type of listener, such as 'onBeforeSave' or 'onBranchNodeChange'
  * @param {ve.dm.Surface} surfaceModel The surface
- * @param {mw.editcheck.EditCheckAction[]} oldActions The actions last returned by this method
  * @return {Promise[]} An array of promises containing either an action or null
  */
-mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surfaceModel /* , oldActions */ ) {
+mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surfaceModel ) {
 	const documentModel = surfaceModel.getDocument();
 	const selection = surfaceModel.getSelection();
 	// TODO let currentBranchNode = null;
