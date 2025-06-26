@@ -215,10 +215,8 @@ Controller.prototype.refresh = function () {
 /**
  * Fires all edit checks associated with a given listener.
  *
- * Actions are created anew for every run, but we want continuity for certain
- * state changes such as 'paused' state. We therefore match them up to existing
- * actions by checking for equality, ie, the same constructor and same ID or
- * fragments.
+ * Actions are created anew for every run, but we want continuity for certain state changes. We therefore match them up
+ * to existing actions by checking for equality, ie, the same constructor and same ID or fragments.
  *
  * We return a promise so that UI actions such as opening the pre-save dialog
  * do not occur until checks have completed.
@@ -641,7 +639,7 @@ Controller.prototype.drawSelections = function () {
 			this.focusedAction.getHighlightSelections().map(
 				( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
 			),
-			this.focusedAction.paused ? { color: '#888' } : {}
+			{}
 		);
 	} else {
 		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );

@@ -11,7 +11,6 @@
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.title] Title
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.message] Body message
  * @param {string} [config.id] Optional unique identifier
- * @param {boolean} [config.paused=false] The check is paused
  * @param {string} [config.icon] Optional icon name
  * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
  * @param {Object[]} [config.choices] User choices
@@ -26,7 +25,6 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.message = config.message;
 	this.footer = config.footer;
 	this.id = config.id;
-	this.paused = config.paused || false;
 	this.title = config.title;
 	this.icon = config.icon;
 	this.type = config.type || 'warning';
@@ -182,18 +180,14 @@ mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actio
  * Compare to another action
  *
  * @param {mw.editcheck.EditCheckAction} other Other action
- * @param {boolean} [ignorePaused] Ignore `paused` flag
  * @return {boolean}
  */
-mw.editcheck.EditCheckAction.prototype.equals = function ( other, ignorePaused ) {
+mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
 	if ( this.check.constructor !== other.check.constructor ) {
 		return false;
 	}
 	if ( this.id || other.id ) {
 		return this.id === other.id;
-	}
-	if ( !ignorePaused && this.paused !== other.paused ) {
-		return false;
 	}
 	if ( this.fragments.length !== other.fragments.length ) {
 		return false;
