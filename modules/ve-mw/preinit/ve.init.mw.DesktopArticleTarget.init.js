@@ -22,8 +22,7 @@
 		veactionToMode = {
 			edit: 'visual',
 			editsource: 'source'
-		},
-		availableModes = [];
+		};
 	let init = null,
 		conf = null,
 		tabMessages = null,
@@ -315,7 +314,7 @@
 
 					const target = ve.init.mw.targetFactory.create(
 						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ], {
-							modes: availableModes,
+							modes: getAvailableModes(),
 							defaultMode: mode
 						}
 					);
@@ -1387,12 +1386,15 @@
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
 
-	if ( init.isVisualAvailable() ) {
-		availableModes.push( 'visual' );
-	}
-
-	if ( init.isWikitextAvailable() ) {
-		availableModes.push( 'source' );
+	function getAvailableModes() {
+		const availableModes = [];
+		if ( init.isVisualAvailable() ) {
+			availableModes.push( 'visual' );
+		}
+		if ( init.isWikitextAvailable() ) {
+			availableModes.push( 'source' );
+		}
+		return availableModes;
 	}
 
 	// FIXME: We should do this more elegantly
@@ -1436,7 +1438,7 @@
 			const mode = veactionToMode[ url.searchParams.get( 'veaction' ) ] ||
 				// Always load VE visual mode if collabSession is set
 				( url.searchParams.has( 'collabSession' ) ? 'visual' : null );
-			if ( mode && availableModes.includes( mode ) ) {
+			if ( mode && getAvailableModes().includes( mode ) ) {
 				return mode;
 			}
 		}
