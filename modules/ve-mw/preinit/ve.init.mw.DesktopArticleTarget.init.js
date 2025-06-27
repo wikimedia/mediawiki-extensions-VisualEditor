@@ -416,7 +416,7 @@
 		// user has expressed no choice by opening this editor. (T246259)
 		// Strictly speaking the same thing should happen if visual mode is
 		// available but source mode isn't, but that is never the case.
-		if ( !init.isVisualAvailable ) {
+		if ( !init.isVisualAvailable() ) {
 			return $.Deferred().resolve().promise();
 		}
 
@@ -792,17 +792,17 @@
 	function getAvailableEditPageEditor() {
 		switch ( getEditPageEditor() ) {
 			case 'visualeditor':
-				if ( init.isVisualAvailable ) {
+				if ( init.isVisualAvailable() ) {
 					return 'visual';
 				}
-				if ( init.isWikitextAvailable ) {
+				if ( init.isWikitextAvailable() ) {
 					return 'source';
 				}
 				return null;
 
 			case 'wikitext':
 			default:
-				return init.isWikitextAvailable ? 'source' : null;
+				return init.isWikitextAvailable() ? 'source' : null;
 		}
 	}
 
@@ -938,7 +938,7 @@
 		 */
 		setupEditLinks: function () {
 			// NWE
-			if ( init.isWikitextAvailable && !isOnlyTabVE() ) {
+			if ( init.isWikitextAvailable() && !isOnlyTabVE() ) {
 				$(
 					// Edit section links, except VE ones when both editors visible
 					'.mw-editsection a:not( .mw-editsection-visualeditor ),' +
@@ -965,7 +965,7 @@
 			if ( init.isAvailable ) {
 				// … on two-edit-tab wikis, or single-edit-tab wikis, where the user wants both …
 				if (
-					!init.isSingleEditTab && init.isVisualAvailable &&
+					!init.isSingleEditTab && init.isVisualAvailable() &&
 					// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
 					!( conf.disableForAnons && mw.user.isAnon() )
 				) {
@@ -973,8 +973,8 @@
 					init.setupMultiTabSkin();
 				} else if (
 					pageCanLoadEditor && (
-						( init.isVisualAvailable && isOnlyTabVE() ) ||
-						( init.isWikitextAvailable && isOnlyTabWikitext() )
+						( init.isVisualAvailable() && isOnlyTabVE() ) ||
+						( init.isWikitextAvailable() && isOnlyTabWikitext() )
 					)
 				) {
 					// … on single-edit-tab wikis, where VE or NWE is the user's preferred editor
@@ -1015,13 +1015,13 @@
 				// Always bind "Edit source" tab, because we want to handle switching with changes
 				$caEdit.off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
 			}
-			if ( pageCanLoadEditor && init.isWikitextAvailable ) {
+			if ( pageCanLoadEditor && init.isWikitextAvailable() ) {
 				// Only bind "Add topic" tab if NWE is available, because VE doesn't support section
 				// so we never have to switch from it when editing a section
 				$( '#ca-addsection' ).off( '.ve-target' ).on( 'click.ve-target', init.onEditTabClick.bind( init, 'source' ) );
 			}
 
-			if ( init.isVisualAvailable ) {
+			if ( init.isVisualAvailable() ) {
 				if ( conf.tabPosition === 'before' ) {
 					$caEdit.addClass( 'collapsible' );
 				} else {
@@ -1044,7 +1044,7 @@
 				// and would preserve the wrong DOM with a diff on top.
 				$editsections.find( '.mw-editsection-visualeditor' )
 					.off( '.ve-target' ).on( 'click.ve-target', init.onEditSectionLinkClick.bind( init, 'visual' ) );
-				if ( init.isWikitextAvailable ) {
+				if ( init.isWikitextAvailable() ) {
 					// TOOD: Make this less fragile
 					$editsections.find( 'a:not( .mw-editsection-visualeditor )' )
 						.off( '.ve-target' ).on( 'click.ve-target', init.onEditSectionLinkClick.bind( init, 'source' ) );
@@ -1078,7 +1078,7 @@
 			if ( !init.isUnmodifiedLeftClick( e ) ) {
 				return;
 			}
-			if ( !active && mode === 'source' && !init.isWikitextAvailable ) {
+			if ( !active && mode === 'source' && !init.isWikitextAvailable() ) {
 				// We're not active so we don't need to manage a switch, and
 				// we don't have source mode available so we don't need to
 				// activate VE. Just follow the link.
@@ -1350,12 +1350,12 @@
 		( conf.isBeta ? enable : !tempdisable ) && !autodisable
 	);
 
-	// Duplicated in VisualEditor.hooks.php#isVisualAvailable()
-	init.isVisualAvailable = (
+	// Partially duplicated in includes/Hooks.php#isVisualAvailable
+	init.isVisualAvailable = ( url = currentUrl ) => (
 		init.isAvailable &&
 
 		// If forced by the URL parameter, skip the namespace check (T221892) and preference check
-		( currentUrl.searchParams.get( 'veaction' ) === 'edit' || (
+		( url.searchParams.get( 'veaction' ) === 'edit' || (
 			// Only in enabled namespaces
 			conf.namespaces.includes( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) &&
 
@@ -1364,18 +1364,18 @@
 		) ) &&
 
 		// Only if the current page isn't using unsupported URL parameters
-		isSupportedEditPage( currentUrl ) &&
+		isSupportedEditPage( url ) &&
 
 		// Only for pages with a supported content model
 		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) )
 	);
 
-	// Duplicated in VisualEditor.hooks.php#isWikitextAvailable()
-	init.isWikitextAvailable = (
+	// Partially duplicated in includes/Hooks.php#isWikitextAvailable
+	init.isWikitextAvailable = ( url = currentUrl ) => (
 		init.isAvailable &&
 
 		// If forced by the URL parameter, skip the checks (T239796)
-		( currentUrl.searchParams.get( 'veaction' ) === 'editsource' || (
+		( url.searchParams.get( 'veaction' ) === 'editsource' || (
 			// Enabled on site
 			conf.enableWikitext &&
 
@@ -1387,11 +1387,11 @@
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
 
-	if ( init.isVisualAvailable ) {
+	if ( init.isVisualAvailable() ) {
 		availableModes.push( 'visual' );
 	}
 
-	if ( init.isWikitextAvailable ) {
+	if ( init.isWikitextAvailable() ) {
 		availableModes.push( 'source' );
 	}
 
@@ -1412,7 +1412,7 @@
 	// on this page. See above for why it may be false.
 	mw.libs.ve = $.extend( mw.libs.ve || {}, init );
 
-	if ( init.isVisualAvailable ) {
+	if ( init.isVisualAvailable() ) {
 		$( 'html' ).addClass( 've-available' );
 	} else {
 		$( 'html' ).addClass( 've-not-available' );
@@ -1474,7 +1474,7 @@
 			initialWikitext = $( '#wpTextbox1' ).textSelection( 'getContents' );
 		}
 
-		if ( ( init.isVisualAvailable || init.isWikitextAvailable ) &&
+		if ( ( init.isVisualAvailable() || init.isWikitextAvailable() ) &&
 			pageCanLoadEditor &&
 			pageIsProbablyEditable &&
 			!requiredSkinElements
@@ -1502,7 +1502,7 @@
 				} );
 				activateTarget( mode, section );
 			} else if (
-				init.isVisualAvailable &&
+				init.isVisualAvailable() &&
 				pageCanLoadEditor &&
 				init.isSingleEditTab
 			) {
@@ -1519,7 +1519,7 @@
 
 			// Add the switch button to WikiEditor on edit pages
 			if (
-				init.isVisualAvailable &&
+				init.isVisualAvailable() &&
 				isEditPage &&
 				$( '#wpTextbox1' ).length
 			) {
@@ -1612,7 +1612,7 @@
 			pageCanLoadEditor &&
 			showWikitextWelcome &&
 			// At least one editor is available (T201928)
-			( init.isVisualAvailable || init.isWikitextAvailable || $( '#wpTextbox1' ).length ) &&
+			( init.isVisualAvailable() || init.isWikitextAvailable() || $( '#wpTextbox1' ).length ) &&
 			isEditPage &&
 			init.shouldShowWelcomeDialog() &&
 			// Not on protected pages
@@ -1632,7 +1632,7 @@
 				windowManager.openWindow(
 					welcomeDialog,
 					{
-						switchable: init.isVisualAvailable,
+						switchable: init.isVisualAvailable(),
 						editor: 'source'
 					}
 				)
