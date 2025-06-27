@@ -59,7 +59,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 
 	this.footerLabel = new OO.ui.LabelWidget();
 	this.previousButton = new OO.ui.ButtonWidget( {
-		icon: 'previous',
+		icon: 'collapse',
 		title: ve.msg( 'last' ),
 		invisibleLabel: true,
 		framed: false
@@ -67,7 +67,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 		click: 'onPreviousButtonClick'
 	} );
 	this.nextButton = new OO.ui.ButtonWidget( {
-		icon: 'next',
+		icon: 'expand',
 		title: ve.msg( 'next' ),
 		invisibleLabel: true,
 		framed: false
