@@ -260,15 +260,13 @@
 	}
 
 	/**
-	 * Parse a section value from a query string object
+	 * Get a section value from a URL
 	 *
-	 *     @example
-	 *     parseSection( new URL( location.href ).searchParams.get( 'section' ) )
-	 *
-	 * @param {string|undefined} section Section value from query object
+	 * @param {URL} sectionUrl URL
 	 * @return {string|null} Section if valid, null otherwise
 	 */
-	function parseSection( section ) {
+	function getSectionFromUrl( sectionUrl ) {
+		const section = sectionUrl.searchParams.get( 'section' );
 		// Section must be a number, 'new' or 'T-' prefixed
 		if ( section && /^(new|\d+|T-\d+)$/.test( section ) ) {
 			return section;
@@ -329,7 +327,7 @@
 						url = new URL( location.href );
 						activateTarget(
 							getEditModeFromUrl( url ),
-							parseSection( url.searchParams.get( 'section' ) )
+							getSectionFromUrl( url )
 						);
 					} );
 					target.setContainer( $targetContainer );
@@ -521,7 +519,7 @@
 		let $heading;
 		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( ( i, el ) => {
 			const linkUrl = new URL( el.href );
-			if ( section === parseSection( linkUrl.searchParams.get( 'section' ) ) ) {
+			if ( section === getSectionFromUrl( linkUrl ) ) {
 				$heading = $( el ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' );
 				return false;
 			}
@@ -643,7 +641,7 @@
 			if ( firstVisibleEditSection && firstVisibleEditSection.id !== 'firstHeading' ) {
 				const firstVisibleSectionLink = firstVisibleEditSection.querySelector( 'a' );
 				const linkUrl = new URL( firstVisibleSectionLink.href );
-				visibleSection = parseSection( linkUrl.searchParams.get( 'section' ) );
+				visibleSection = getSectionFromUrl( linkUrl );
 
 				const firstVisibleHeading = $( firstVisibleEditSection ).closest( '.mw-heading, h1, h2, h3, h4, h5, h6' )[ 0 ];
 				visibleSectionOffset = firstVisibleHeading.getBoundingClientRect().top;
@@ -1211,7 +1209,7 @@
 
 				// Use section from URL
 				if ( section === undefined ) {
-					section = parseSection( linkUrl.searchParams.get( 'section' ) );
+					section = getSectionFromUrl( linkUrl );
 				}
 				const tPromise = getTarget( mode, section );
 				activateTarget( mode, section, tPromise );
@@ -1467,7 +1465,7 @@
 
 		let showWikitextWelcome = true;
 		const numEditButtons = $( '#ca-edit, #ca-ve-edit' ).length,
-			section = parseSection( url.searchParams.get( 'section' ) );
+			section = getSectionFromUrl( url );
 
 		const requiredSkinElements =
 			$targetContainer.length &&
