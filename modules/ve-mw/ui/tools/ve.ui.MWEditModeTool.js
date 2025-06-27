@@ -69,17 +69,6 @@ OO.mixinClass( ve.ui.MWEditModeVisualTool, ve.ui.MWEditModeTool );
 ve.ui.MWEditModeVisualTool.prototype.switch = function () {
 	this.toolbar.getTarget().switchToVisualEditor();
 };
-
-/**
- * @inheritdoc
- */
-ve.ui.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
-	// Adding a new section is not supported in visual mode
-	if ( mode === 'visual' && this.toolbar.getTarget().section === 'new' ) {
-		return false;
-	}
-	return ve.ui.MWEditModeVisualTool.super.prototype.isModeAvailable.call( this, mode );
-};
 ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
 
 /**

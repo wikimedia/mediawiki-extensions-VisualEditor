@@ -1366,7 +1366,10 @@
 		isSupportedEditPage( url ) &&
 
 		// Only for pages with a supported content model
-		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) )
+		Object.prototype.hasOwnProperty.call( conf.contentModels, mw.config.get( 'wgPageContentModel' ) ) &&
+
+		// Adding a section is not supported in visual mode
+		getSectionFromUrl( url ) !== 'new'
 	);
 
 	// Partially duplicated in includes/Hooks.php#isWikitextAvailable
