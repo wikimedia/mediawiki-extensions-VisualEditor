@@ -192,8 +192,8 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 
 	this.currentOffset = offset;
 
-	this.$body.find( '.ve-ui-editCheckActionWidget' ).each( ( i, el ) => {
-		$( el ).toggleClass( 've-ui-editCheckActionWidget-collapsed', i !== this.currentOffset );
+	this.currentActions.forEach( ( action, i ) => {
+		action.widget.toggleCollapse( i !== this.currentOffset );
 	} );
 
 	if ( this.currentOffset !== null ) {
@@ -334,11 +334,10 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
  *
  * @param {mw.editcheck.EditCheckAction} action Action being expanded/collapsed
  * @param {number} index Index of action in list
- * @param {boolean} collapsed Whether the action is collapsed
  */
-ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, collapsed ) {
-	if ( !collapsed ) {
-		// expanded one
+ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
+	if ( action.widget.collapsed ) {
+		// Expand
 		this.setCurrentOffset( this.currentActions.indexOf( action ), true );
 		if ( !OO.ui.isMobile() ) {
 			const surfaceModel = this.surface.getModel();
@@ -356,6 +355,8 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action, index, col
 				this.surface.getView().focus();
 			}
 		}
+	} else {
+		this.setCurrentOffset( null );
 	}
 };
 
