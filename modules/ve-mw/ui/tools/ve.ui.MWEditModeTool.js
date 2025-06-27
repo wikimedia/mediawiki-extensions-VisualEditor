@@ -78,7 +78,7 @@ ve.ui.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
 	if ( mode === 'visual' && this.toolbar.getTarget().section === 'new' ) {
 		return false;
 	}
-	return ve.ui.MWEditModeVisualTool.super.prototype.isModeAvailable( mode );
+	return ve.ui.MWEditModeVisualTool.super.prototype.isModeAvailable.call( this, mode );
 };
 ve.ui.toolFactory.register( ve.ui.MWEditModeVisualTool );
 

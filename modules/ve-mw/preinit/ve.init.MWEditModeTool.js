@@ -129,7 +129,7 @@ mw.libs.ve.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
 			return false;
 		}
 	}
-	return mw.libs.ve.MWEditModeVisualTool.super.prototype.isModeAvailable( mode );
+	return mw.libs.ve.MWEditModeVisualTool.super.prototype.isModeAvailable.call( this, mode );
 };
 
 /**
