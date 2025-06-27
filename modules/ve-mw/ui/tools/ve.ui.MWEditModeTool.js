@@ -35,13 +35,19 @@ ve.ui.MWEditModeTool.prototype.getMode = function () {
  */
 ve.ui.MWEditModeTool.prototype.isModeAvailable = function ( mode ) {
 	const target = this.toolbar.getTarget();
-	const surface = target.getSurface();
-	const canSwitch = surface && !surface.getModel().isMultiUser();
-
-	// Source mode is always available
-	return canSwitch && (
-		mode === 'source' || target.isModeAvailable( mode )
-	);
+	if ( !target.getSurface() ) {
+		// Disable switching before surface is loaded
+		return false;
+	}
+	if ( target.getSurface().getModel().isMultiUser() ) {
+		// Disable switching in multi-user mode
+		return false;
+	}
+	if ( mode === 'source' ) {
+		// A fallback source mode should always available (e.g. EditPage.php)
+		return true;
+	}
+	return target.isModeAvailable( mode );
 };
 
 /**
