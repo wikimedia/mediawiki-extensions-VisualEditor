@@ -108,7 +108,7 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
  *
  * @param {Object} data
  * @param {string} data.title
- * @param {string} data.description
+ * @param {string} [data.description]
  * @param {Object[]} data.choices
  * @return {jQuery.Promise} Promise which resolves when feedback is submitted or is rejected when back is chosen
  */
@@ -136,7 +136,7 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 	} );
 	form.addItems( [
 		new OO.ui.FieldLayout( answerRadioSelect, {
-			label: data.description,
+			label: data.description || ve.msg( 'editcheck-reject-description' ),
 			align: 'top'
 		} ),
 		new OO.ui.HorizontalLayout( {

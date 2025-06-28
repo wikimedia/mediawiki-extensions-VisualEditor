@@ -84,8 +84,25 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
-		this.dismiss( action );
-		return ve.createDeferred().resolve( { action: choice } ).promise();
+		return action.widget.showFeedback( {
+			choices: [
+				{
+					data: 'appropriate',
+					label: ve.msg( 'editcheck-tone-reject-appropriate' )
+				},
+				{
+					data: 'uncertain',
+					label: ve.msg( 'editcheck-tone-reject-uncertain' )
+				},
+				{
+					data: 'other',
+					label: ve.msg( 'editcheck-tone-reject-other' )
+				}
+			]
+		} ).then( ( reason ) => {
+			this.dismiss( action );
+			return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
+		} );
 	} else if ( choice === 'edit' && surface ) {
 		return this.controller.closeDialog().then( () => {
 			surface.getView().activate();
