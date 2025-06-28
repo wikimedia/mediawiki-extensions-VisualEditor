@@ -145,7 +145,8 @@
 			font-weight: @font-weight-semi-bold;
 		}
 
-		&-body {
+		&-body,
+		&-feedback {
 			cursor: auto;
 			background-color: @background-color-base;
 			margin: @spacing-50 -@spacing-75 -@spacing-50 -@spacing-75;
@@ -213,6 +214,14 @@
 			.oo-ui-labelElement-label {
 				font-size: inherit;
 			}
+
+			.oo-ui-radioSelectWidget {
+				padding-bottom: @spacing-50;
+			}
+		}
+
+		.ve-ui-editCheckActionWidget-feedback ~ .ve-ui-editCheckActionWidget-body {
+			display: none;
 		}
 	}
 
