@@ -206,9 +206,8 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 	} else {
 		this.footerLabel.setLabel( '' );
 	}
-	this.nextButton.setDisabled( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 );
-	this.previousButton.setDisabled( this.currentOffset === null || this.currentOffset <= 0 );
 
+	this.updateNavigationState();
 	this.updateSize();
 
 	if ( !internal ) {
@@ -220,6 +219,11 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 			this.constructor.static.name === 'fixedEditCheckDialog' && !OO.ui.isMobile()
 		);
 	}
+};
+
+ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
+	this.nextButton.setDisabled( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 );
+	this.previousButton.setDisabled( this.currentOffset === null || this.currentOffset <= 0 );
 };
 
 /**
@@ -308,11 +312,8 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 	widget.setDisabled( true );
 	this.nextButton.setDisabled( true );
 	this.previousButton.setDisabled( true );
+	this.updateSize();
 	promise.then( ( data ) => {
-		widget.setDisabled( false );
-		this.nextButton.setDisabled( false );
-		this.previousButton.setDisabled( false );
-
 		if ( data && this.inBeforeSave ) {
 			// If an action has been taken, we want to linger for a brief moment
 			// to show the result of the action before moving away
@@ -326,6 +327,9 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 		} else {
 			this.controller.refresh();
 		}
+	} ).always( () => {
+		widget.setDisabled( false );
+		this.updateNavigationState();
 	} );
 };
 
