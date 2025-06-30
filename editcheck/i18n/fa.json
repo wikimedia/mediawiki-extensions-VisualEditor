@@ -18,6 +18,7 @@
 	"editcheck-dialog-title": "پیش از انتشار",
 	"editcheck-copyvio-title": "متن چسبانده‌شده",
 	"editcheck-copyvio-description": "به‌عنوان یک قاعدهٔ کلی، متن را از سایر منابع کپی نکنید. چنین کاری معمولاً ترکیبی است از نقض حق تکثیر و سرقت ادبی.",
+	"editcheck-tone-description": "کاربران دیگر معمولاً چنین جمله‌بندی‌هایی را اصلاح می‌کنند، زیرا معتقدند که لحن آن نامتعادل است. [$1 بیشتر بدانید]",
 	"editcheck-review-title": "بازبینی تغییرات",
 	"tag-editcheck-reference-decline-common-knowledge": "بررسی ویرایش (ارجاعات) رد شد (دانش عمومی)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "ارجاع بررسی ویرایش تحت عنوان دانش عمومی رد شد",
