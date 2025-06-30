@@ -662,6 +662,8 @@
 				"editcheck-dialog-action-yes",
 				"editcheck-dialog-action-decline",
 				"editcheck-dialog-action-revise",
+				"editcheck-dialog-action-back",
+				"editcheck-dialog-action-submit",
 				"editcheck-dialog-addref-description",
 				"editcheck-dialog-addref-reject-question",
 				"editcheck-dialog-addref-reject-description",

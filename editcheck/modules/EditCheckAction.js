@@ -144,6 +144,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	const widget = new mw.editcheck.EditCheckActionWidget( {
 		type: this.type,
 		icon: this.icon,
+		name: this.getName(),
 		label: this.getTitle(),
 		message: this.getDescription(),
 		footer: this.getFooter(),

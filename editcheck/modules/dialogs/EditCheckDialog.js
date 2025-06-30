@@ -321,7 +321,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 			// more generic
 			const pause = data.action !== 'reject' ? 500 : 0;
 			setTimeout( () => {
-				const rejected = [ 'feedback', 'reject', 'dismiss' ].includes( data.action );
+				const rejected = [ 'reject', 'dismiss' ].includes( data.action );
 				this.controller.removeAction( 'onBeforeSave', action, rejected );
 			}, pause );
 		} else {

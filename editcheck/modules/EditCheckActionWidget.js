@@ -16,6 +16,8 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	this.singleAction = config.singleAction;
 	this.mode = config.mode || '';
 
+	this.name = config.name;
+
 	this.actions = new OO.ui.ActionSet();
 	this.actions.connect( this, {
 		change: 'onActionsChange'
@@ -99,4 +101,70 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
 	this.$element.toggleClass( 've-ui-editCheckActionWidget-collapsed' );
 	// eslint-disable-next-line no-jquery/no-class-state
 	this.emit( 'togglecollapse', this.$element.hasClass( 've-ui-editCheckActionWidget-collapsed' ) );
+};
+
+/**
+ * Show a feedback panel
+ *
+ * @param {Object} data
+ * @param {string} data.title
+ * @param {string} data.description
+ * @param {Object[]} data.choices
+ * @return {jQuery.Promise} Promise which resolves when feedback is submitted or is rejected when back is chosen
+ */
+mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
+	const deferred = ve.createDeferred();
+
+	const form = new OO.ui.FieldsetLayout( {
+		classes: [ 've-ui-editCheckActionWidget-feedback' ]
+	} );
+	const answerRadioSelect = new OO.ui.RadioSelectWidget( {
+		items: data.choices.map( ( choice ) => new OO.ui.RadioOptionWidget( choice ) )
+	} );
+	const submit = new OO.ui.ButtonInputWidget( {
+		label: ve.msg( 'editcheck-dialog-action-submit' ),
+		flags: [ 'progressive', 'primary' ],
+		disabled: true
+	} );
+	const back = new OO.ui.ButtonInputWidget( {
+		label: ve.msg( 'editcheck-dialog-action-back' ),
+		flags: [ 'safe', 'back' ],
+		icon: 'previous'
+	} );
+	answerRadioSelect.on( 'select', () => {
+		submit.setDisabled( !answerRadioSelect.findSelectedItem() );
+	} );
+	form.addItems( [
+		new OO.ui.FieldLayout( answerRadioSelect, {
+			label: data.description,
+			align: 'top'
+		} ),
+		new OO.ui.HorizontalLayout( {
+			items: [
+				new OO.ui.FieldLayout( back ),
+				new OO.ui.FieldLayout( submit )
+			]
+		} )
+	] );
+	const cleanup = () => {
+		form.$element.remove();
+	};
+	submit.on( 'click', () => {
+		const selectedItem = answerRadioSelect.findSelectedItem();
+		const reason = selectedItem && selectedItem.getData();
+		if ( reason ) {
+			cleanup();
+			deferred.resolve( reason );
+			ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-reason-' + reason } );
+		}
+	} );
+	back.on( 'click', () => {
+		cleanup();
+		deferred.reject();
+	} );
+
+	this.$body.before( form.$element );
+
+	ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
+	return deferred.promise();
 };

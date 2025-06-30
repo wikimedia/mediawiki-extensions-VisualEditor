@@ -11,6 +11,8 @@
 	"editcheck-dialog-action-yes": "Label for the yes option when asking users if they want to act on a check.\n\n{{Identical|Yes}}",
 	"editcheck-dialog-action-decline": "Label for the decline option when asking users if they want to act on a check.\n\n{{Identical|Decline}}",
 	"editcheck-dialog-action-revise": "Label for the revise option when asking users if they want to act on a check.\n\n{{Identical|Revise}}",
+	"editcheck-dialog-action-back": "Label for the back option when asking users if they want to act on a check.\n\n{{Identical|Back}}",
+	"editcheck-dialog-action-submit": "Label for the submit option when asking users if they want to act on a check.\n\n{{Identical|Submit}}",
 	"editcheck-dialog-addref-description": "Help text explaining why it is helpful to add a citation.",
 	"editcheck-dialog-addref-reject-question": "Heading for form question asking why the user didn't add a citation.",
 	"editcheck-dialog-addref-reject-description": "Help text for form question asking why the user didn't add a citation.",
