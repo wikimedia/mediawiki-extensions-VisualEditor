@@ -76,7 +76,11 @@ mw.editcheck.EditCheckActionWidget.prototype.onActionsChange = function () {
  * @inheritdoc
  */
 mw.editcheck.EditCheckActionWidget.prototype.setDisabled = function ( disabled ) {
-	OO.ui.Widget.prototype.setDisabled.call( this, disabled );
+	// Calling setDisabled on the parent doesn't do anything useful,
+	// and causes the icon to become the wrong color due to an
+	// upstream bug
+	// Parent method
+	// OO.ui.Widget.prototype.setDisabled.call( this, disabled );
 	this.actions.forEach( null, ( action ) => {
 		action.setDisabled( disabled );
 	} );

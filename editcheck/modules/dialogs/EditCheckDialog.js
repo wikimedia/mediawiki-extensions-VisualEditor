@@ -221,6 +221,9 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 	}
 };
 
+/**
+ * Update the disabled state of the navigation buttons
+ */
 ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
 	this.nextButton.setDisabled( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 );
 	this.previousButton.setDisabled( this.currentOffset === null || this.currentOffset <= 0 );
