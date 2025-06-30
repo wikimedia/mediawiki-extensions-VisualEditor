@@ -17,6 +17,8 @@
 ve.ui.EditCheckDialog = function VeUiEditCheckDialog() {
 	// Pre-initialization
 	this.$element.addClass( 've-ui-editCheckDialog' );
+
+	this.acting = false;
 };
 
 /* Inheritance */
@@ -225,8 +227,19 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
  * Update the disabled state of the navigation buttons
  */
 ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
-	this.nextButton.setDisabled( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 );
-	this.previousButton.setDisabled( this.currentOffset === null || this.currentOffset <= 0 );
+	const currentAction = this.currentActions[ this.currentOffset ];
+	if ( currentAction ) {
+		currentAction.widget.setDisabled( this.acting );
+	}
+	this.footerLabel.setDisabled( this.acting );
+	this.nextButton.setDisabled(
+		this.acting ||
+		( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 )
+	);
+	this.previousButton.setDisabled(
+		this.acting ||
+		this.currentOffset === null || this.currentOffset <= 0
+	);
 };
 
 /**
@@ -312,9 +325,8 @@ ve.ui.EditCheckDialog.prototype.ready = function ( data ) {
  * @param {jQuery.Promise} promise Promise which resolves when the action is complete
  */
 ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
-	widget.setDisabled( true );
-	this.nextButton.setDisabled( true );
-	this.previousButton.setDisabled( true );
+	this.acting = true;
+	this.updateNavigationState();
 	this.updateSize();
 	promise.then( ( data ) => {
 		if ( data && this.inBeforeSave ) {
@@ -331,7 +343,7 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 			this.controller.refresh();
 		}
 	} ).always( () => {
-		widget.setDisabled( false );
+		this.acting = false;
 		this.updateNavigationState();
 	} );
 };
