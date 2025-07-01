@@ -1466,6 +1466,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
 			wpSummary: 'summary',
 			wpMinoredit: 'minor',
 			wpWatchthis: 'watchlist',
+			wpWatchlistExpiry: 'watchlistexpiry',
 			wpCaptchaId: 'captchaid',
 			wpCaptchaWord: 'captchaword'
 		};
