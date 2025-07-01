@@ -483,13 +483,13 @@ Controller.prototype.setupPreSaveProcess = function () {
 		if ( surface.getMode() !== 'visual' ) {
 			return;
 		}
-		ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Available' } );
+		ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Available' } );
 
 		const oldFocusedAction = this.focusedAction;
 		this.inBeforeSave = true;
 		return this.updateForListener( 'onBeforeSave' ).then( ( actions ) => {
 			if ( actions.length ) {
-				ve.track( 'counter.editcheck.preSaveChecksShown' );
+				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Shown' } );
 				mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
 					actions.some( ( action ) => action.getName() === 'addReference' );
 				mw.editcheck.toneCheckShown = mw.editcheck.toneCheckShown ||
@@ -526,7 +526,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 									// Someone clicking "read" to leave the article
 									// will trigger the closing of this; in that
 									// case, just abandon what we're doing
-									ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Abandoned' } );
+									ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Abandoned' } );
 									return ve.createDeferred().reject().promise();
 								}
 								this.restoreToolbar( target );
@@ -544,13 +544,13 @@ Controller.prototype.setupPreSaveProcess = function () {
 									// before showing save dialog to give user time
 									// to see success notification.
 									setTimeout( () => {
-										ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Completed' } );
+										ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Completed' } );
 										delay.resolve();
 									}, !OO.ui.isMobile() && data.action !== 'reject' ? 2000 : 0 );
 									return delay.promise();
 								} else {
 									// closed via "back" or otherwise
-									ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'Abandoned' } );
+									ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Abandoned' } );
 									return ve.createDeferred().reject().promise();
 								}
 							} );
@@ -560,7 +560,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 				this.inBeforeSave = false;
 				// Counterpart to earlier preSaveChecksShown, for use in tracking
 				// errors in check-generation:
-				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', { kind: 'NotShown' } );
+				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'NotShown' } );
 			}
 		} );
 	} );
