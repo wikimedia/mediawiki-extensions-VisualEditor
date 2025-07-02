@@ -152,8 +152,7 @@
 			font-weight: @font-weight-semi-bold;
 		}
 
-		&-body,
-		&-feedback {
+		&-body {
 			cursor: auto;
 			background-color: @background-color-base;
 			margin: @spacing-50 -@spacing-75 -@spacing-50 -@spacing-75;
@@ -227,7 +226,7 @@
 			}
 		}
 
-		.ve-ui-editCheckActionWidget-feedback ~ .ve-ui-editCheckActionWidget-body {
+		.ve-ui-editCheckActionWidget-feedback ~ * {
 			display: none;
 		}
 	}

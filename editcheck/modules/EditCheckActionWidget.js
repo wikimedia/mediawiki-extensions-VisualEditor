@@ -174,7 +174,7 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 		deferred.reject();
 	} );
 
-	this.$body.before( form.$element );
+	this.$body.prepend( form.$element );
 
 	ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
 	return deferred.promise();
