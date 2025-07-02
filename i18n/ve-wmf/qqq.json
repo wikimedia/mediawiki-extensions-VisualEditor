@@ -22,7 +22,8 @@
 			"Siebrand",
 			"Trevor Parscal",
 			"Umherirrender",
-			"Verdy p"
+			"Verdy p",
+			"Ponor"
 		]
 	},
 	"tag-editcheck-newcontent": "{{ignored}}Short description of the editcheck-newcontent tag.\n\nHidden tag added when EditCheck thinks new content was added to the page.\n\nSee also:\n* {{msg-mw|Tag-editcheck-newcontent-description}}\n{{Related|tag-newcontent-references-description}}",
@@ -34,7 +35,7 @@
 	"tag-editcheck-references-activated": "Short description of the editcheck-references-activated tag.\n\nHidden tag added when EditCheck thinks that added content might need a reference, and the UI was shown.\n\nSee also:\n* {{msg-mw|Tag-editcheck-references-activated-description}}\n{{Related|tag-editcheck-references-activated-description}}",
 	"tag-editcheck-references-activated-description": "Long description of the editcheck-references-activated tag.\n\nHidden tag added when EditCheck thinks added content might need a reference, and the UI was shown.\n\nSee also:\n* {{msg-mw|Tag-editcheck-references-activated}}\n{{Related|tag-editcheck-references-activated}}",
 	"tag-editcheck-references-activated-helppage": "{{notranslate}}\nLink to the false positives reporting page of EditCheck.\n\nUsed in:\n* {{msg-mw|tag-editcheck-references-activated}}",
-	"tag-editcheck-references-shown": "Short description of the editcheck-references-shown tag.\n\nHidden tag added when EditCheck thinks that added content might need a reference, and the UI was shown.\n\nSee also:\n* {{msg-mw|Tag-editcheck-references-shown-description}}\n{{Related|tag-editcheck-references-shown-description}}",
+	"tag-editcheck-references-shown": "Short description of the editcheck-references-shown tag.\n\nTag added when EditCheck thinks that added content might need a reference, and the UI was shown.\n\nSee also:\n* {{msg-mw|Tag-editcheck-references-shown-description}}\n{{Related|tag-editcheck-references-shown-description}}",
 	"tag-editcheck-references-shown-description": "Long description of the editcheck-references-shown tag.\n\nHidden tag added when EditCheck thinks added content might need a reference, and the UI was shown.\n\nSee also:\n* {{msg-mw|Tag-editcheck-references-shown}}\n{{Related|tag-editcheck-references-shown}}",
 	"tag-editcheck-references-shown-helppage": "{{notranslate}}\nLink to the false positives reporting page of EditCheck.\n\nUsed in:\n* {{msg-mw|tag-editcheck-references-shown}}",
 	"tag-visualeditor": "Short description of the visualeditor tag. Do not translate the link target, but do translate the words \"Visual edit\".\n\nShown on lists of changes (history, recentchanges, etc.) for each edit made using VisualEditor.\n\nRefers to {{msg-mw|Visualeditor-descriptionpagelink}}.\n\nSee also:\n* {{msg-mw|Tag-visualeditor-needcheck}}\n{{Related|Tag-visualeditor}}\n{{Identical|VisualEditor}}",
