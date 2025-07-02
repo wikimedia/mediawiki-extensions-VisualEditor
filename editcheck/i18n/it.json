@@ -7,6 +7,8 @@
 	},
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Sì",
+	"editcheck-dialog-action-back": "Indietro",
+	"editcheck-dialog-action-submit": "Invia",
 	"editcheck-dialog-addref-description": "Aiuta i lettori a capire da dove provengono queste informazioni aggiungendo una fonte.",
 	"editcheck-dialog-addref-reject-question": "Perché non aggiungi una fonte?",
 	"editcheck-dialog-addref-reject-description": "Altri editori apprezzerebbero saperne di più sulla tua decisione di non inserire la fonte.",
@@ -17,6 +19,7 @@
 	"editcheck-dialog-addref-success-notify": "Grazie per aver aggiunto una fonte!",
 	"editcheck-dialog-addref-title": "Aggiungi una fonte",
 	"editcheck-dialog-title": "Prima della pubblicazione",
+	"editcheck-tone-reject-other": "Altro",
 	"editcheck-review-title": "Rivedi modifiche",
 	"tag-editcheck-reference-decline-other": "Edit Check (citazioni) rifiutato (altro)"
 }

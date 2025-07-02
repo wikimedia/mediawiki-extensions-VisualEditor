@@ -7,8 +7,12 @@
 	"editcheck-dialog-action-no": "Neen",
 	"editcheck-dialog-action-yes": "Jo",
 	"editcheck-dialog-action-revise": "Iwwerschaffen",
+	"editcheck-dialog-action-back": "Zréck",
 	"editcheck-tone-title": "Tounfall iwwerschaffen?",
 	"editcheck-tone-description": "Aner Benotzer iwwerschaffen dës Zort vu Ausdrocksweis dacks, well se fannen, datt den Tounfall net equilibréiert ass. [$1 Méi gewuer ginn]",
 	"editcheck-tone-title-acted": "Tounfall iwwerschaffen",
+	"editcheck-tone-reject-appropriate": "Den Tounfall ass passend",
+	"editcheck-tone-reject-uncertain": "Ech weess net genee, wéi ech den Tounfall iwwerschaffe soll",
+	"editcheck-reject-description": "Aner Editeure géifen et appreciéiere fir gewuer ze ginn, firwat Dir dëse Choix gemaach hutt.",
 	"editcheck-review-title": "Ännerungen nokucken"
 }

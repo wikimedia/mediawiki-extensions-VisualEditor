@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"David Lynch",
 			"Ed Sanders",
 			"Stjn"
@@ -31,7 +32,7 @@
 	"editcheck-tone-footer": "Footer explaining the tone check model",
 	"editcheck-tone-footerlink": "{{notranslate}}\nLink to the tone check model card, shown as part of {{msg-mw|editcheck-tone-footer}}",
 	"editcheck-tone-title-acted": "Title of tone check after it has been acted on",
-	"editcheck-tone-description-acted": "Help text explaining the tone check after it has been acted on",
+	"editcheck-tone-description-acted": "Help text explaining the tone check after it has been acted on. \"Look out\" here means \"Be aware of\" or \"Be careful of\".",
 	"editcheck-tone-reject-appropriate": "Answer option for tone check in response to {{msg-mw|editcheck-reject-description}}",
 	"editcheck-tone-reject-uncertain": "Answer option for tone check in response to {{msg-mw|editcheck-reject-description}}",
 	"editcheck-tone-reject-other": "Answer option for tone check in response to {{msg-mw|editcheck-reject-description}}",

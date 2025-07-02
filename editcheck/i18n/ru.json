@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Okras",
 			"Stjn"
 		]
 	},
 	"editcheck-dialog-action-no": "Нет",
 	"editcheck-dialog-action-yes": "Да",
+	"editcheck-dialog-action-back": "Назад",
 	"editcheck-dialog-addref-description": "Добавьте источник, чтобы помочь читателям понять, откуда взята эта информация.",
 	"editcheck-dialog-addref-reject-question": "Почему вы не добавили источник?",
 	"editcheck-dialog-addref-reject-description": "Другим редакторам будет полезно узнать, почему вы решили не добавлять источник.",
