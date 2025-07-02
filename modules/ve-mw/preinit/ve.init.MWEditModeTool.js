@@ -1,5 +1,13 @@
 /*!
- * VisualEditor MediaWiki edit mode tool classes.
+ * MediaWiki edit mode tool classes.
+ *
+ * These versions of the tools should only be used when building
+ * a toolbar **outside** of VE, e.g. the toolbar built in
+ * ve.init.mw.DesktopArticleTarget.init.js that is appended to the
+ * WikiEditor toolbar.
+ *
+ * When using a toolbar in VE, always use the ve.ui.MWEditModeTool
+ * classes.
  *
  * @copyright See AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt

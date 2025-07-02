@@ -1,6 +1,11 @@
 /*!
  * VisualEditor MediaWiki UserInterface edit mode tool classes.
  *
+ * Used for making edit mode switcher tools within VE.
+ *
+ * When building a toolbar for use outside of VE you can use
+ * the mw.libs.ve.MWEditModeTool classes.
+ *
  * @copyright See AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
  */
