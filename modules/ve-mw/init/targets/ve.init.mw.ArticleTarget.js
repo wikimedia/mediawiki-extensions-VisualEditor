@@ -1801,9 +1801,6 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 
 		// Parent method
 		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( this ).then( () => saveDialogPromise.then( () => {
-			// HACK: Re-clear toolbar (T397914). Remove in next release when fixed
-			// upstream in VE core.
-			this.toolbar = null;
 			mw.hook( 've.deactivationComplete' ).fire( this.edited );
 		} ) );
 	}
