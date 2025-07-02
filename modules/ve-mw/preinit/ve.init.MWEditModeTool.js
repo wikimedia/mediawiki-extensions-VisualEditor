@@ -118,18 +118,17 @@ mw.libs.ve.MWEditModeVisualTool.static.unavailableTooltip =
 /**
  * @inheritdoc
  */
-mw.libs.ve.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
-	// Adding a new section is not supported in visual mode
-	if ( mode === 'visual' && OO.getProp( this, 'toolbar', 'target', 'constructor', 'static', 'name' ) === 'article' ) {
-		// eslint-disable-next-line no-jquery/no-global-selector
-		if ( $( 'input[name=wpSection]' ).val() === 'new' ) {
-			return false;
-		}
-		if ( !mw.config.get( 'wgVisualEditorConfig' ).namespaces.includes( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) ) {
-			return false;
-		}
+mw.libs.ve.MWEditModeVisualTool.prototype.isModeAvailable = function () {
+	// eslint-disable-next-line no-jquery/no-global-selector
+	if ( $( 'input[name=wpSection]' ).val() === 'new' ) {
+		// Adding a new section is not supported in visual mode
+		return false;
 	}
-	return mw.libs.ve.MWEditModeVisualTool.super.prototype.isModeAvailable.call( this, mode );
+	if ( !mw.config.get( 'wgVisualEditorConfig' ).namespaces.includes( new mw.Title( mw.config.get( 'wgRelevantPageName' ) ).getNamespaceId() ) ) {
+		return false;
+	}
+	// Parent method
+	return mw.libs.ve.MWEditModeVisualTool.super.prototype.isModeAvailable.apply( this, arguments );
 };
 
 /**
