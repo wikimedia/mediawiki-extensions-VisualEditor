@@ -209,6 +209,11 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 		this.footerLabel.setLabel( '' );
 	}
 
+	// Warning: the toggleCollapse calls above may result in a promise's
+	// `always` unsetting this.acting. This currently only happens for an
+	// action widget's feedback form. If we switch away from jquery promises
+	// or add anything which isn't completely synchronous, this call may need
+	// to be deferred until this.acting settles:
 	this.updateNavigationState();
 	this.updateSize();
 

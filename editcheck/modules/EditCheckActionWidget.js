@@ -25,6 +25,8 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
+	this.feedbackDeferred = null;
+
 	this.collapsed = false;
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
 	this.footer = config.footer && new OO.ui.LabelWidget( {
@@ -110,8 +112,13 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
  * @param {boolean} [collapsed] The new collapsed state, toggles if unset
  */
 mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collapsed ) {
+	const previousState = this.collapsed;
 	this.collapsed = collapsed !== undefined ? collapsed : !this.collapsed;
 	this.$element.toggleClass( 've-ui-editCheckActionWidget-collapsed', this.collapsed );
+
+	if ( this.collapsed && previousState !== this.collapsed && this.feedbackDeferred ) {
+		this.feedbackDeferred.reject();
+	}
 };
 
 /**
@@ -124,7 +131,7 @@ mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collaps
  * @return {jQuery.Promise} Promise which resolves when feedback is submitted or is rejected when back is chosen
  */
 mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
-	const deferred = ve.createDeferred();
+	const deferred = this.feedbackDeferred = ve.createDeferred();
 
 	const form = new OO.ui.FieldsetLayout( {
 		classes: [ 've-ui-editCheckActionWidget-feedback' ]
@@ -157,25 +164,23 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 			]
 		} )
 	] );
-	const cleanup = () => {
-		form.$element.remove();
-	};
 	submit.on( 'click', () => {
 		const selectedItem = answerRadioSelect.findSelectedItem();
 		const reason = selectedItem && selectedItem.getData();
 		if ( reason ) {
-			cleanup();
 			deferred.resolve( reason );
 			ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-reason-' + reason } );
 		}
 	} );
 	back.on( 'click', () => {
-		cleanup();
 		deferred.reject();
 	} );
 
 	this.$body.prepend( form.$element );
 
 	ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
-	return deferred.promise();
+	return deferred.promise().always( () => {
+		form.$element.remove();
+		this.feedbackDeferred = null;
+	} );
 };
