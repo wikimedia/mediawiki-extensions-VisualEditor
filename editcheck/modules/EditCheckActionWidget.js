@@ -25,6 +25,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
+	this.collapsed = false;
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
 	this.footer = config.footer && new OO.ui.LabelWidget( {
 		label: config.footer,
@@ -57,7 +58,6 @@ OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.MessageWidget );
  * Fired when the user toggles the collapsed state of the widget.
  *
  * @event mw.editcheck.EditCheckActionWidget#togglecollapse
- * @param {boolean} collapsed Whether the widget is now collapsed
  */
 
 /* Methods */
@@ -99,12 +99,19 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
 	if ( this.$body[ 0 ].contains( e.target ) ) {
 		return;
 	}
+	this.emit( 'togglecollapse' );
 
 	e.preventDefault();
-	// eslint-disable-next-line no-jquery/no-class-state
-	this.$element.toggleClass( 've-ui-editCheckActionWidget-collapsed' );
-	// eslint-disable-next-line no-jquery/no-class-state
-	this.emit( 'togglecollapse', this.$element.hasClass( 've-ui-editCheckActionWidget-collapsed' ) );
+};
+
+/**
+ * Toggle the collapsed state of the widget
+ *
+ * @param {boolean} [collapsed] The new collapsed state, toggles if unset
+ */
+mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collapsed ) {
+	this.collapsed = collapsed !== undefined ? collapsed : !this.collapsed;
+	this.$element.toggleClass( 've-ui-editCheckActionWidget-collapsed', this.collapsed );
 };
 
 /**
