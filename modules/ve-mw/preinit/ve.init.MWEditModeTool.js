@@ -120,7 +120,7 @@ mw.libs.ve.MWEditModeVisualTool.static.unavailableTooltip =
  */
 mw.libs.ve.MWEditModeVisualTool.prototype.isModeAvailable = function ( mode ) {
 	// Adding a new section is not supported in visual mode
-	if ( mode === 'visual' ) {
+	if ( mode === 'visual' && OO.getProp( this, 'toolbar', 'target', 'constructor', 'static', 'name' ) === 'article' ) {
 		// eslint-disable-next-line no-jquery/no-global-selector
 		if ( $( 'input[name=wpSection]' ).val() === 'new' ) {
 			return false;
