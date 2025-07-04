@@ -913,6 +913,7 @@
 				"lib/ve/src/dm/ve.dm.LeafNode.js",
 				"lib/ve/src/dm/ve.dm.Annotation.js",
 				"lib/ve/src/dm/ve.dm.InternalList.js",
+				"lib/ve/src/dm/ve.dm.InternalListNodeGroup.js",
 				"lib/ve/src/dm/ve.dm.MetaItem.js",
 				"lib/ve/src/dm/ve.dm.MetaList.js",
 				"lib/ve/src/dm/ve.dm.TableMatrix.js",
