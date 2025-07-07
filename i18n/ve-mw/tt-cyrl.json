@@ -6,7 +6,8 @@
 			"Ерней",
 			"Ильнар",
 			"З. ӘЙЛЕ",
-			"Don Alessandro"
+			"Don Alessandro",
+			"Ильгиз"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -25,7 +26,7 @@
 	"visualeditor-ca-createlocaldescriptionsource": "Локаль тасвирлама өстәү",
 	"visualeditor-ca-createsource": "Чыганак коды булдыру",
 	"visualeditor-ca-editsource": "Вики-текстны үзгәртү",
-	"visualeditor-ca-editsource-section": "вики-текстны үзгәртү",
+	"visualeditor-ca-editsource-section": "вики-текстны үзгәрт",
 	"visualeditor-categories-tool": "Төркемнәр",
 	"visualeditor-desc": "MediaWiki өчен күрсәтмәле төзәткеч",
 	"visualeditor-descriptionpagelink": "Project:Күрсәтмәле төзәтмә",
@@ -145,7 +146,7 @@
 	"visualeditor-mweditmodeve-progress": "Күрсәтмә үзгәртүгә күчү…",
 	"visualeditor-mweditmodeve-showagain": "Бу хәбәрне бүтән күрсәтелмесен",
 	"visualeditor-mweditmodeve-title": "Күрсәтмә үзгәртүгә күчергәме?",
-	"visualeditor-mweditmodeve-tool-current": "Күрсәтмә үзгәртү",
+	"visualeditor-mweditmodeve-tool-current": "Күрсәтмәле үзгәртү",
 	"visualeditor-mweditmodeve-warning": "Сез күрсәтмә үзгәртүгә күчәсез.\nДәвам иттерегез киләме?",
 	"visualeditor-mweditmodewt-popup-body": "Шушы тамгага басып, сез теләсә кайсы вакытта, кире чыганак текстны мөхәррирләүгә кайта аласыз.",
 	"visualeditor-mweditmodewt-popup-title": "Сез күрсәтмә үзгәртүгә күчтегез",
