@@ -229,6 +229,8 @@
 	"visualeditor-mwpredialog-title": "واردمخ‌ترتيب‌شوی ساده ليک",
 	"visualeditor-mwsignature-tool": "ستاسې لاسليک",
 	"visualeditor-preference-visualeditor": "ليدنيز سمونگر چارنول",
+	"visualeditor-preference-newwikitexteditor-enable": "د بېلابېلو ويکي‌ليک سمونگر پرځای د ليدنيز سمونگر دننه ويکي‌ليک ونگډول وکاروئ",
+	"visualeditor-preference-newwikitexteditor-help": "دا ځينې وختونه د '۲۰۱۷ ويکي‌ليک سمونگر' هم بلل کېږي.",
 	"visualeditor-preference-tabs": "سمون ونگ‌ډول:",
 	"visualeditor-preference-tabs-multi-tab": "دواړه سمونگرې ريښکې راته وښاياست",
 	"visualeditor-preference-tabs-prefer-ve": "که شونې وي تل راته ليدنيز سمونگر راکړه",
