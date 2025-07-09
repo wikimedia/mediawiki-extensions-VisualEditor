@@ -1,5 +1,6 @@
 /**
  * Checks that all files referenced in lib/ve/build/modules.json are either:
+ *   - referenced by a ResourceModule's veModules in extension.json (and thus loaded dynamically), or
  *   - explicitly listed in scripts/styles in extension.json, or
  *   - ignored via the ignore list in this script.
  *
@@ -112,9 +113,17 @@ const extensionFiles = new Set();
 addModulesToSet( extensionJson.ResourceModules, extensionFiles );
 addModulesToSet( { QUnitTestModule: extensionJson.QUnitTestModule }, extensionFiles );
 
+// Modules listed in veModules of ResourceModules are loaded automatically.
+Object.values( extensionJson.ResourceModules ).forEach( ( module ) => {
+	if ( module.veModules ) {
+		module.veModules.forEach( ( veModule ) => {
+			addModulesToSet( { [ veModule ]: modulesJson[ veModule ] || {} }, extensionFiles, 'lib/ve' );
+		} );
+	}
+} );
+
 const modulesFiles = new Set();
 addModulesToSet( modulesJson, modulesFiles, 'lib/ve' );
-
 const missingFiles = Array.from( modulesFiles ).filter( ( file ) => !extensionFiles.has( file ) && !isIgnored( file ) );
 
 if ( unusedIgnores.size ) {
