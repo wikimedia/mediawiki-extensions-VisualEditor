@@ -494,8 +494,15 @@ ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
 	try {
 		return this.constructor.static.getWikitext( this.getAttribute( 'mw' ) );
 	} catch ( e ) {
+		let message;
+		const originalDomElements = this.getOriginalDomElements( this.getStore() );
+		if ( originalDomElements.length ) {
+			message = originalDomElements.map( ve.getNodeHtml ).join( '' );
+		} else {
+			message = '[DOM elements not found]';
+		}
 		// Temporary logging for T380432
-		throw new Error( 'Failed to generate wikitext for MWTransclusionNode: ' + JSON.stringify( this.element ) );
+		throw new Error( `Failed to generate wikitext for MWTransclusionNode: ${ message }` );
 	}
 };
 
