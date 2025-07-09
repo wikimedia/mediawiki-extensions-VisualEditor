@@ -9,7 +9,7 @@
 		"eslint-fix": "eslint --cache --ext .js,.json --fix .",
 		"eslint": "eslint --cache --ext .js,.json .",
 		"screenshots-all": "grunt screenshots-all",
-		"selenium-daily": "npm run selenium-test -- --mochaOpts.grep @daily",
+		"selenium-daily": "npm run selenium-test -- --suite daily --mochaOpts.grep @daily",
 		"selenium-test": "wdio tests/selenium/wdio.conf.js",
 		"test": "grunt test && node build/checkModules.js"
 	},

@@ -9,5 +9,10 @@ exports.config = { ...config,
 	// Example:
 	// logLevel: 'info',
 
-	maxInstances: 4
+	maxInstances: 4,
+	suites: {
+		daily: [
+			'specs/content_editable.js'
+		]
+	}
 };
