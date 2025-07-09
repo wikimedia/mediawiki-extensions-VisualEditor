@@ -137,8 +137,6 @@ QUnit.test( 'toDataElement', ( assert ) => {
 		];
 	};
 
-	const converter = new ve.dm.Converter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory, ve.dm.metaItemFactory );
-
 	const articlePaths = [
 		{
 			// MediaWiki config settings:
@@ -187,7 +185,7 @@ QUnit.test( 'toDataElement', ( assert ) => {
 
 		const doc = ve.dm.mwExample.createExampleDocumentFromData( [], undefined, pathData.base );
 		// toDataElement is called during a converter run, so we need to fake up a bit of state to test it.
-		// This would normally be done by ve.dm.converter.getModelFromDom.
+		const converter = new ve.dm.ModelFromDomConverter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory );
 		converter.doc = doc.getHtmlDocument();
 		converter.targetDoc = doc.getHtmlDocument();
 		converter.store = doc.getStore();

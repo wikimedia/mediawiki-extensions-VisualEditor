@@ -64,7 +64,7 @@ ve.dm.MWExtensionNode.static.getMatchRdfaTypes = function () {
 /**
  * @inheritdoc
  * @param {Node[]} domElements
- * @param {ve.dm.Converter} converter
+ * @param {ve.dm.ModelFromDomConverter} converter
  * @param {string} [type] Type to give dataElement, defaults to static.name
  */
 ve.dm.MWExtensionNode.static.toDataElement = function ( domElements, converter, type ) {
