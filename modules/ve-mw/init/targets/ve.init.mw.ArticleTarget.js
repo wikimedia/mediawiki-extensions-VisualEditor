@@ -1159,18 +1159,6 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 };
 
 /**
- * Switch to edit source mode
- *
- * Opens a confirmation dialog if the document is modified or VE wikitext mode
- * is not available.
- */
-ve.init.mw.ArticleTarget.prototype.editSource = function () {
-	const modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
-
-	this.switchToWikitextEditor( modified );
-};
-
-/**
  * Get a document to save, cached until the surface is modified
  *
  * The default implementation returns an HTMLDocument, but other targets
@@ -2249,9 +2237,12 @@ ve.init.mw.ArticleTarget.prototype.getSectionHashFromPage = function () {
 /**
  * Switches to the wikitext editor, either keeping (default) or discarding changes.
  *
- * @param {boolean} [modified=false] Whether there were any changes at all.
+ * @param {boolean} [modified] Whether there were any changes at all, will be evaluated if not provided
  */
 ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified ) {
+	if ( modified === undefined ) {
+		modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();
+	}
 	// When switching with changes we always pass the full page as changes in visual section mode
 	// can still affect the whole document (e.g. removing a reference)
 	if ( modified ) {
@@ -2268,6 +2259,12 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextEditor = function ( modified 
 	} else {
 		this.switchToFallbackWikitextEditor( modified );
 	}
+};
+
+// Deprecated alias
+ve.init.mw.ArticleTarget.prototype.editSource = function () {
+	OO.ui.warnDeprecation( 'ArticleTarget#editSource: Use #switchToWikitextEditor instead.' );
+	this.switchToWikitextEditor( ...arguments );
 };
 
 /**

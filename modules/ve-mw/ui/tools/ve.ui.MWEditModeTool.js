@@ -104,6 +104,6 @@ OO.mixinClass( ve.ui.MWEditModeSourceTool, ve.ui.MWEditModeTool );
  * @inheritdoc
  */
 ve.ui.MWEditModeSourceTool.prototype.switch = function () {
-	this.toolbar.getTarget().editSource();
+	this.toolbar.getTarget().switchToWikitextEditor();
 };
 ve.ui.toolFactory.register( ve.ui.MWEditModeSourceTool );
