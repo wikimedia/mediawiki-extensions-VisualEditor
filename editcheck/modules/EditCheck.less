@@ -421,6 +421,40 @@
 	}
 }
 
+.ve-ce-surface-selections-editCheckWarning-stale .ve-ce-surface-selection-bounding {
+	@padding: 3px;
+	@border: 2px;
+	@color: #36c;
+	padding: @padding;
+	margin: -( @padding + @border ) 0 0 -@padding;
+	border-style: solid;
+	border-color: @color;
+	border-width: @border 0;
+	@triangleSize: 5px;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 0;
+	}
+
+	&::before {
+		left: 0;
+		top: 0;
+		border-left: @triangleSize solid @color;
+		border-bottom: @triangleSize solid transparent;
+	}
+
+	&::after {
+		right: 0;
+		bottom: 0;
+		border-right: @triangleSize solid @color;
+		border-top: @triangleSize solid transparent;
+	}
+}
+
 .ve-ui-editCheck-gutter-highlight {
 	position: absolute;
 	left: 0;

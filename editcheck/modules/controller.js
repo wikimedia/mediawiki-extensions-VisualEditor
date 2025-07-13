@@ -235,27 +235,43 @@ Controller.prototype.refresh = function () {
  * do not occur until checks have completed.
  *
  * @param {string} listener e.g. onBeforeSave, onDocumentChange, onBranchNodeChange
- * @param {boolean} always Emit updates even if no actions changed
+ * @param {boolean} fromRefresh Update comes from a manual refresh, not a real event
  * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of actions.
  * @fires Controller#actionsUpdated
  */
-Controller.prototype.updateForListener = function ( listener, always ) {
+Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
+	// Get the existing actions for this listener
 	const existing = this.getActions( listener );
-	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
+	// Get existing actions for other listeners (excludes the existing actions for this listener)
+	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( existingAction ) => !action.equals( existingAction ) ) );
+
+	// Create all actions for this listener
 	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
-		.then( ( actions ) => actions.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action ) )
-		.then( ( actions ) => {
+		.then( ( actionsFromListener ) => {
+			// Try to match each new action to an existing one (to preserve state)
+			let actions = actionsFromListener.map( ( action ) => existing.find( ( existingAction ) => action.equals( existingAction ) ) || action );
+
+			if ( !fromRefresh ) {
+				actions.forEach( ( action ) => action.setStale( false ) );
+			}
+
+			// Update the actions for this listener
 			this.actionsByListener[ listener ] = actions;
 
 			const newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
-			if ( always || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+
+			// If the actions list changed, update
+			if ( fromRefresh || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+				// Add actions from other listeners and sort
 				actions = actions.concat( otherListenersExisting );
 				actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
 				// TODO: We need to consider a consistency check here as the document state may have changed since the
 				// action within the promise was created
+				// Notify listeners that actions have been updated
 				this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions, false );
 			}
+			// Return the updated actions
 			return actions;
 		} );
 };
@@ -644,13 +660,15 @@ Controller.prototype.drawSelections = function () {
 	const surfaceView = this.surface.getView();
 	if ( this.focusedAction ) {
 		// The currently-focused action gets a selection:
-		// TODO: clicking the selection should activate the sidebar-action
+		// TODO: clicking the selection should activate the sidebar-action in pre-save mode
 		surfaceView.getSelectionManager().drawSelections(
 			'editCheckWarning',
 			this.focusedAction.getHighlightSelections().map(
 				( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
 			),
-			{}
+			this.focusedAction.isStale() ?
+				{ wrapperClass: 've-ce-surface-selections-editCheckWarning-stale', showBounding: true, showRects: false } :
+				{}
 		);
 	} else {
 		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );

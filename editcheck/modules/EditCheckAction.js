@@ -21,6 +21,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 
 	this.check = config.check;
 	this.fragments = config.fragments;
+	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
 	this.focusFragment = config.focusFragment;
 	this.message = config.message;
 	this.footer = config.footer;
@@ -197,4 +198,25 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
 		const selection = fragment.getSelection();
 		return other.fragments.some( ( otherFragment ) => otherFragment.getSelection().equals( selection ) );
 	} );
+};
+
+/**
+ * Force the action into a stale or not-stale state
+ *
+ * @param {boolean} stale
+ */
+mw.editcheck.EditCheckAction.prototype.setStale = function ( stale ) {
+	this.originalText = stale ? null : this.fragments.map( ( fragment ) => fragment.getText() );
+};
+
+/**
+ * Check whether the text has changed since this action was created
+ *
+ * @return {boolean} Whether the text has changed since this action was created
+ */
+mw.editcheck.EditCheckAction.prototype.isStale = function () {
+	return !this.originalText || !OO.compare(
+		this.originalText,
+		this.fragments.map( ( fragment ) => fragment.getText() )
+	);
 };

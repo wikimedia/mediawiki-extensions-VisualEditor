@@ -131,11 +131,13 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
+		action.setStale( true );
+		action.clickedRevise = true;
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
 			surface.getView().activate();
-			action.fragments[ action.fragments.length - 1 ].collapseToStart().select();
+			action.fragments[ action.fragments.length - 1 ].collapseToEnd().select();
 		} );
 	}
 };
