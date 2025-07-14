@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bjarki S",
 			"Maxí",
 			"Snævar",
 			"Stefán Örvar Sigmundsson"
 		]
 	},
-	"tag-visualeditor": "Sýnileg breyting",
+	"tag-visualeditor": "Sýnilegi ritillinn",
 	"tag-visualeditor-description": "Breyting gerð með [[{{MediaWiki:visualeditor-descriptionpagelink}}|Sýnilega ritlinum]]",
 	"tag-visualeditor-needcheck": "Sýnileg breyting: Athuga",
 	"tag-visualeditor-needcheck-description": "Breyting gerð með [[{{MediaWiki:visualeditor-descriptionpagelink}}|sýnilega ritlinum]] þar sem kerfið greindi að wiki-textinn hafi mögulega ófyrirsjáanlegar breytingar.",
