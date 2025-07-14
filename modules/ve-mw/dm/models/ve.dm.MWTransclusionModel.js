@@ -132,7 +132,7 @@
 					let contentNodes = $.parseHTML( response.visualeditor.content, surfaceFragment.getDocument().getHtmlDocument() ) || [];
 					contentNodes = ve.ce.MWTransclusionNode.static.filterRendering( contentNodes );
 					insertNode(
-						baseNodeClass.static.isHybridInline( contentNodes, ve.dm.converter ),
+						baseNodeClass.static.isHybridInline( contentNodes, ve.dm.converter.modelFromDomConverter ),
 						contentNodes
 					);
 				} else {
