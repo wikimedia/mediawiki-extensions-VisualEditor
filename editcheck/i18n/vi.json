@@ -1,11 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bluetpp"
+			"Bluetpp",
+			"NgocAnMaster"
 		]
 	},
 	"editcheck-dialog-action-no": "Không",
 	"editcheck-dialog-action-yes": "Có",
+	"editcheck-dialog-action-decline": "Từ chối",
+	"editcheck-dialog-action-revise": "Xem lại",
+	"editcheck-dialog-action-back": "Quay lại",
+	"editcheck-dialog-action-submit": "Xác nhận",
 	"editcheck-dialog-addref-description": "Giúp người đọc hiểu thông tin này đến từ đâu bằng cách thêm trích dẫn.",
 	"editcheck-dialog-addref-reject-question": "Tại sao bạn không thêm trích dẫn?",
 	"editcheck-dialog-addref-reject-description": "Các biên tập viên khác sẽ đánh giá cao việc được hiểu thêm về quyết định loại bỏ trích dẫn của bạn.",
@@ -16,6 +21,18 @@
 	"editcheck-dialog-addref-success-notify": "Cảm ơn bạn đã thêm một trích dẫn!",
 	"editcheck-dialog-addref-title": "Thêm một trích dẫn",
 	"editcheck-dialog-title": "Trước khi xuất bản",
+	"editcheck-copyvio-title": "Nội dung được dán",
+	"editcheck-copyvio-description": "Nguyên tắc chung là đừng sao chép văn bản từ các nguồn khác. Làm như vậy thường sẽ đồng thời cấu thành hành vi vi phạm bản quyền và đạo văn.",
+	"editcheck-tone-title": "Sửa lại giọng điệu?",
+	"editcheck-tone-description": "Những thành viên khác thường sửa lại cách diễn đạt này vì cho rằng giọng điệu không được cân bằng lắm. [$1 Tìm hiểu thêm]",
+	"editcheck-tone-footer": "Được xác định sử dụng [$1 mô hình BERT]",
+	"editcheck-tone-title-acted": "Sửa lại giọng điệu",
+	"editcheck-tone-description-acted": "Hãy cẩn thận với các đoạn có biểu hiện tâng bốc, coi thường, mơ hồ, sáo rỗng hoặc tán thành một quan điểm cụ thể.",
+	"editcheck-tone-reject-appropriate": "Giọng điệu này phù hợp",
+	"editcheck-tone-reject-uncertain": "Tôi không biết cách sửa lại giọng điệu thế nào",
+	"editcheck-tone-reject-other": "Khác",
+	"editcheck-reject-description": "Các biên tập viên khác sẽ đánh giá cao việc tìm hiểu lý do tại sao bạn đưa ra lựa chọn này.",
+	"editcheck-review-title": "Xem lại thay đổi",
 	"tag-editcheck-reference-decline-common-knowledge": "Kiểm tra chỉnh sửa (tài liệu tham khảo) bị từ chối (kiến thức chung)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Tham khảo Kiểm tra Chỉnh sửa bị từ chối vì là kiến thức chung",
 	"tag-editcheck-reference-decline-irrelevant": "Kiểm tra chỉnh sửa (tài liệu tham khảo) bị từ chối (không liên quan)",
