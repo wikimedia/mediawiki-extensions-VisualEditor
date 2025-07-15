@@ -394,7 +394,7 @@
 	pointer-events: auto;
 }
 
-.ve-ce-surface-selections-editCheck .ve-ce-surface-selection > div {
+.ve-ce-surface-selections-editCheck .ve-ce-surface-selection-rect {
 	mix-blend-mode: darken;
 	// Adjust target colours to account for 50% opacity
 	background: ( ( #fce7fe - 0.8 * ( #fff ) ) / 0.2 );
@@ -405,10 +405,11 @@
 }
 
 .ve-ce-surface-selections-editCheckWarning .ve-ce-surface-selection {
-	opacity: 0.2;
+	&-rects {
+		opacity: 0.2;
+	}
 
-	> div {
-		mix-blend-mode: darken;
+	&-rect {
 		// Adjust target colours to account for 50% opacity
 		background: ( ( #fef6e7 - 0.8 * ( #fff ) ) / 0.2 );
 		// border: 1px solid ( ( #a66200 - 0.8 * ( #fff ) ) / 0.2 );
