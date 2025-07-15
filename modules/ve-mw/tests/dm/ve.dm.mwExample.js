@@ -54,7 +54,7 @@ ve.dm.mwExample.MWTransclusion = {
 		</span>
 	`,
 	blockContent: '<p about="#mwt1" data-parsoid="{}">Hello, world!</p>',
-	blockContentClipboard: '<p about="#mwt1" data-parsoid="{}" data-ve-ignore="true">Hello, world!</p>',
+	blockContentClipboard: '<p about="#mwt1" data-parsoid="{}" data-ve-ignore="1">Hello, world!</p>',
 	inlineOpen: ve.dm.example.singleLine`
 		<span about="#mwt1" typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"1,234"}},"i":0}}]}'>
@@ -101,7 +101,7 @@ ve.dm.mwExample.MWTransclusion = {
 			 data-ve-no-generated-contents="true">
 			&nbsp;
 		</span>
-		<span about="#mwt1" data-ve-ignore="true">Foo</span>
+		<span about="#mwt1" data-ve-ignore="1">Foo</span>
 	`,
 	pairOne: ve.dm.example.singleLine`
 		<p about="#mwt1" typeof="mw:Transclusion"
