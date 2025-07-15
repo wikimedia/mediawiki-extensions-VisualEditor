@@ -34,6 +34,7 @@ function Controller( target ) {
 	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
 	this.onSelectDebounced = ve.debounce( this.onSelect.bind( this ), 100 );
 	this.onContextChangeDebounced = ve.debounce( this.onContextChange.bind( this ), 100 );
+	this.updatePositionsDebounced = ve.debounce( this.updatePositions.bind( this ) );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
 	this.scrollActionIntoViewDebounced = ve.debounce( this.scrollActionIntoView.bind( this ), 200, true );
@@ -206,9 +207,14 @@ Controller.prototype.refresh = function () {
 		// These shouldn't be recalculated
 		this.emit( 'actionsUpdated', 'onBeforeSave', this.getActions(), [], [], false );
 	} else {
+		// Use a process so that updateForListener doesn't run twice in parallel,
+		// which causes problems as the active actions list can change.
+		const process = new OO.ui.Process();
 		midEditListeners.forEach(
-			( listener ) => this.updateForListener( listener, true )
+			( listener ) => process.next( () => this.updateForListener( listener, true ) )
 		);
+		process.next( () => this.updatePositionsDebounced() );
+		process.execute();
 	}
 };
 
@@ -296,7 +302,7 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
 
-	this.updatePositions();
+	this.updatePositionsDebounced();
 };
 
 /**
@@ -390,7 +396,7 @@ Controller.prototype.onPosition = function ( passive ) {
 		return;
 	}
 
-	this.updatePositions();
+	this.updatePositionsDebounced();
 
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
 		this.scrollActionIntoViewDebounced( this.focusedAction, true, !OO.ui.isMobile() );
@@ -409,7 +415,7 @@ Controller.prototype.onDocumentChange = function () {
 		this.updateForListener( 'onDocumentChange' );
 	}
 
-	this.updatePositions();
+	this.updatePositionsDebounced();
 };
 
 /**
@@ -429,7 +435,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		if ( this.focusedAction && discardedActions.includes( this.focusedAction ) ) {
 			this.focusedAction = null;
 		}
-		this.updatePositions();
+		this.updatePositionsDebounced();
 	}
 
 	// do we need to show mid-edit actions?
