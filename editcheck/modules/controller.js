@@ -118,6 +118,11 @@ Controller.prototype.setup = function () {
 			this.off( 'actionsUpdated' );
 			this.$highlights.empty();
 
+			const win = this.surface.getSidebarDialogs().getCurrentWindow();
+			if ( win ) {
+				win.close();
+			}
+
 			this.surface = null;
 			this.actionsByListener = {};
 			this.focusedAction = null;
@@ -162,7 +167,10 @@ Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingO
 	}
 	// Adjust toolbar position after animation ends
 	setTimeout( () => {
-		this.target.toolbar.onWindowResize();
+		// Check the toolbar still exists (i.e. we haven't closed the editor)
+		if ( this.target.toolbar ) {
+			this.target.toolbar.onWindowResize();
+		}
 	}, OO.ui.theme.getDialogTransitionDuration() );
 };
 
