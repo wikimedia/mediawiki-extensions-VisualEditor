@@ -233,7 +233,7 @@ Controller.prototype.refresh = function () {
  * @fires Controller#actionsUpdated
  */
 Controller.prototype.updateForListener = function ( listener, always ) {
-	const existing = this.getActions( listener ) || [];
+	const existing = this.getActions( listener );
 	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
 		.then( ( actions ) => actions.map( ( action ) => existing.find( ( oldAction ) => oldAction.equals( action ) ) || action ) )
@@ -317,7 +317,7 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
  */
 Controller.prototype.getActions = function ( listener ) {
 	if ( listener ) {
-		return this.actionsByListener[ listener ];
+		return this.actionsByListener[ listener ] || [];
 	}
 	const listeners = this.inBeforeSave ? [ 'onBeforeSave' ] : midEditListeners;
 	return [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
