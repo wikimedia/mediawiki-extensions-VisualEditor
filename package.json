@@ -8,10 +8,11 @@
 		"doc": "jsdoc -c jsdoc.json",
 		"eslint-fix": "eslint --cache --ext .js,.json --fix .",
 		"eslint": "eslint --cache --ext .js,.json .",
+		"minify-svg": "svgo --config=.svgo.config.js -q -r -f images/",
 		"screenshots-all": "grunt screenshots-all",
 		"selenium-daily": "npm run selenium-test -- --suite daily --mochaOpts.grep @daily",
 		"selenium-test": "wdio tests/selenium/wdio.conf.js",
-		"test": "grunt test && node build/checkModules.js"
+		"test": "grunt test && node build/checkModules.js && npm run minify-svg"
 	},
 	"devDependencies": {
 		"@wdio/cli": "9.15.0",
@@ -36,6 +37,7 @@
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
 		"stylelint-config-wikimedia": "0.18.0",
+		"svgo": "4.0.0",
 		"wdio-mediawiki": "4.1.3"
 	}
 }

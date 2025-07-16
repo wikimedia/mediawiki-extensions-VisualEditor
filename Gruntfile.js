@@ -77,22 +77,6 @@ module.exports = function ( grunt ) {
 					expand: true,
 					src: 'screenshots/*.png'
 				}
-			},
-			svgs: {
-				options: {
-					svgo: [
-						'--pretty',
-						'--enable=removeRasterImages',
-						'--enable=sortAttrs',
-						'--disable=cleanupIDs',
-						'--disable=removeDesc',
-						'--disable=removeTitle',
-						'--disable=removeViewBox',
-						'--disable=removeXMLProcInst'
-					]
-				},
-				expand: true,
-				src: 'images/*.svg'
 			}
 		},
 		tyops: {
@@ -174,6 +158,6 @@ module.exports = function ( grunt ) {
 		grunt.renameTask( 'test', 'test-internal' );
 		grunt.registerTask( 'test', [ 'test-internal', 'test-ci' ] );
 	} else {
-		grunt.registerTask( 'ci', [ 'test', 'image:svgs', 'test-ci' ] );
+		grunt.registerTask( 'ci', [ 'test', 'test-ci' ] );
 	}
 };
