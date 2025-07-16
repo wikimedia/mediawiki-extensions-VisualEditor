@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bluetpp"
+			"Bluetpp",
+			"NgocAnMaster"
 		]
 	},
 	"editcheck-dialog-action-no": "Không",
@@ -16,6 +17,9 @@
 	"editcheck-dialog-addref-success-notify": "Cảm ơn bạn đã thêm một trích dẫn!",
 	"editcheck-dialog-addref-title": "Thêm một trích dẫn",
 	"editcheck-dialog-title": "Trước khi xuất bản",
+	"editcheck-copyvio-title": "Nội dung được dán",
+	"editcheck-copyvio-description": "Nguyên tắc chung là đừng sao chép văn bản từ các nguồn khác. Làm như vậy thường sẽ đồng thời cấu thành hành vi vi phạm bản quyền và đạo văn.",
+	"editcheck-review-title": "Xem lại thay đổi",
 	"tag-editcheck-reference-decline-common-knowledge": "Kiểm tra chỉnh sửa (tài liệu tham khảo) bị từ chối (kiến thức chung)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Tham khảo Kiểm tra Chỉnh sửa bị từ chối vì là kiến thức chung",
 	"tag-editcheck-reference-decline-irrelevant": "Kiểm tra chỉnh sửa (tài liệu tham khảo) bị từ chối (không liên quan)",
