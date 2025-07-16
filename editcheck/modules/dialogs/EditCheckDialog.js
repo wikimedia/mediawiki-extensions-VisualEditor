@@ -173,6 +173,9 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 		// for scrolling later
 		action.widget = widget;
 	} );
+
+	// Update positions immediately to prevent flicker
+	this.controller.updatePositions();
 };
 
 /**

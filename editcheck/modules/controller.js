@@ -213,7 +213,6 @@ Controller.prototype.refresh = function () {
 		midEditListeners.forEach(
 			( listener ) => process.next( () => this.updateForListener( listener, true ) )
 		);
-		process.next( () => this.updatePositionsDebounced() );
 		process.execute();
 	}
 };
@@ -414,8 +413,6 @@ Controller.prototype.onDocumentChange = function () {
 	if ( !this.inBeforeSave ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
-
-	this.updatePositionsDebounced();
 };
 
 /**
@@ -435,7 +432,6 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		if ( this.focusedAction && discardedActions.includes( this.focusedAction ) ) {
 			this.focusedAction = null;
 		}
-		this.updatePositionsDebounced();
 	}
 
 	// do we need to show mid-edit actions?
