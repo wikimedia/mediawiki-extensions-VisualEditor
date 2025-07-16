@@ -6,9 +6,10 @@
  *
  * @param {Object} config Configuration options
  * @param {string} config.type Type of message (e.g., 'warning', 'error')
- * @param {string} [config.icon] Icon name
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.label Title
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.message Body message
+ * @param {string|jQuery|Function|OO.ui.HtmlSnippet} [config.footer] Footer message
+ * @param {string} [config.icon] Icon name
  * @param {boolean} [config.singleAction] This is the only action shown
  * @param {string} [config.mode] Mode for the action set widget
  */
