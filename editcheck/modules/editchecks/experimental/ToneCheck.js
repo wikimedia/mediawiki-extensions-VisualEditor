@@ -43,7 +43,7 @@ mw.editcheck.ToneCheck.static.checkAsync = function ( text ) {
 					page_title: titleText,
 					original_text: '',
 					check_type: 'tone',
-					lang: 'en'
+					lang: mw.config.get( 'wgContentLanguage' )
 				}
 				/* eslint-enable camelcase */
 			]
