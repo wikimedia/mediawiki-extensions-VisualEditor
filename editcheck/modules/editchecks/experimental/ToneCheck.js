@@ -11,6 +11,8 @@ mw.editcheck.ToneCheck.static.name = 'tone';
 
 mw.editcheck.ToneCheck.static.predictionThreshold = 0.8;
 
+mw.editcheck.ToneCheck.static.allowedContentLanguages = [ 'en', 'es', 'fr', 'ja', 'pt' ];
+
 /* Static methods */
 
 /**
@@ -56,6 +58,17 @@ mw.editcheck.ToneCheck.static.checkAsync = function ( text ) {
 };
 
 /* Instance methods */
+
+/**
+ * @inheritdoc
+ */
+mw.editcheck.ToneCheck.prototype.canBeShown = function ( ...args ) {
+	if ( !this.constructor.static.allowedContentLanguages.includes( mw.config.get( 'wgContentLanguage' ) ) ) {
+		return false;
+	}
+
+	return mw.editcheck.ToneCheck.super.prototype.canBeShown.call( this, ...args );
+};
 
 mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 	if ( !outcome ) {
