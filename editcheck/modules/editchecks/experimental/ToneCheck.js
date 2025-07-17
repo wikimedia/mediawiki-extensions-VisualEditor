@@ -9,9 +9,11 @@ OO.inheritClass( mw.editcheck.ToneCheck, mw.editcheck.AsyncTextCheck );
 
 mw.editcheck.ToneCheck.static.name = 'tone';
 
-mw.editcheck.ToneCheck.static.predictionThreshold = 0.8;
-
 mw.editcheck.ToneCheck.static.allowedContentLanguages = [ 'en', 'es', 'fr', 'ja', 'pt' ];
+
+mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+	predictionThreshold: 0.8
+} );
 
 /* Static methods */
 
@@ -68,7 +70,7 @@ mw.editcheck.ToneCheck.prototype.canBeShown = function ( ...args ) {
 
 mw.editcheck.ToneCheck.prototype.afterMemoized = function ( data ) {
 	const outcome = data.predictions[ 0 ].prediction === true &&
-		data.predictions[ 0 ].probability >= mw.editcheck.ToneCheck.static.predictionThreshold;
+		data.predictions[ 0 ].probability >= this.config.predictionThreshold;
 	return !!outcome;
 };
 
