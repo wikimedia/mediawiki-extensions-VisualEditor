@@ -47,6 +47,19 @@ mw.editcheck.AsyncTextCheck.static.name = null;
  */
 mw.editcheck.AsyncTextCheck.static.memoizedCheckAsync = null;
 
+/**
+ * Perform a possibly-asynchronous check on the plaintext of a ContentBranchNode.
+ *
+ * The check must be deterministic; i.e. it must always return the same value for the same
+ * arguments. This allows the result to be memoized.
+ *
+ * @abstract
+ * @static
+ * @param {string} text The plaintext of the ContentBranchNode
+ * @return {Promise|any} The outcome of the check, to be passed into #newAction
+ */
+mw.editcheck.AsyncTextCheck.static.checkAsync = null;
+
 /* Methods */
 
 /**
@@ -87,6 +100,8 @@ mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surf
 			this.constructor.static.memoizedCheckAsync(
 				documentModel.data.getText( true, node.getRange() )
 			)
+		).then(
+			( outcome ) => this.afterMemoized( outcome )
 		).then( ( outcome ) => {
 			if ( !outcome ) {
 				return null;
@@ -112,18 +127,6 @@ mw.editcheck.AsyncTextCheck.prototype.onBranchNodeChange = function ( ...args ) 
 };
 
 /**
- * Perform a possibly-asynchronous check on the plaintext of a ContentBranchNode.
- *
- * The check must be deterministic; i.e. it must always return the same value for the same
- * arguments. This allows the result to be memoized.
- *
- * @abstract
- * @param {string} text The plaintext of the ContentBranchNode
- * @return {Promise|any} The outcome of the check, to be passed into #newAction
- */
-mw.editcheck.AsyncTextCheck.prototype.checkAsync = null;
-
-/**
  * Build an action (or not), depending on the outcome of #checkAsync
  *
  * Caution: The ContentBranchNode may have changed while waiting for #checkAsync to settle.
@@ -134,6 +137,18 @@ mw.editcheck.AsyncTextCheck.prototype.checkAsync = null;
  * @return {mw.editcheck.EditCheckAction|null} A new action if appropriate, else null
  */
 mw.editcheck.AsyncTextCheck.prototype.newAction = null;
+
+/**
+ * A filter to apply after the memoized call has occurred
+ *
+ * This is where instance-specific configuration would be applied
+ *
+ * @param {any} outcome The outcome returned by #checkAsync
+ * @return {any}
+ */
+mw.editcheck.AsyncTextCheck.prototype.afterMemoized = function ( outcome ) {
+	return outcome;
+};
 
 /**
  * @inheritdoc

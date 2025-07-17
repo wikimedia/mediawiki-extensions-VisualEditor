@@ -50,11 +50,7 @@ mw.editcheck.ToneCheck.static.checkAsync = function ( text ) {
 		} )
 	} ).then(
 		( response ) => response.json()
-	).then( ( data ) => {
-		const outcome = data.predictions[ 0 ].prediction === true &&
-			data.predictions[ 0 ].probability >= mw.editcheck.ToneCheck.static.predictionThreshold;
-		return !!outcome;
-	} );
+	);
 };
 
 /* Instance methods */
@@ -68,6 +64,12 @@ mw.editcheck.ToneCheck.prototype.canBeShown = function ( ...args ) {
 	}
 
 	return mw.editcheck.ToneCheck.super.prototype.canBeShown.call( this, ...args );
+};
+
+mw.editcheck.ToneCheck.prototype.afterMemoized = function ( data ) {
+	const outcome = data.predictions[ 0 ].prediction === true &&
+		data.predictions[ 0 ].probability >= mw.editcheck.ToneCheck.static.predictionThreshold;
+	return !!outcome;
 };
 
 mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
