@@ -623,12 +623,10 @@ Controller.prototype.setupToolbar = function ( target ) {
 			type: 'bar',
 			include: [ 'editCheckBack' ]
 		},
-		// Placeholder toolbar groups
-		// TODO: Make a proper TitleTool?
 		{
 			name: 'title',
-			type: 'bar',
-			include: []
+			type: 'label',
+			label: ve.msg( 'editcheck-dialog-title' )
 		},
 		{
 			name: 'save',
@@ -638,9 +636,6 @@ Controller.prototype.setupToolbar = function ( target ) {
 	], surface );
 
 	reviewToolbar.items[ 1 ].$element.removeClass( 'oo-ui-toolGroup-empty' );
-	reviewToolbar.items[ 1 ].$group.append(
-		$( '<span>' ).addClass( 've-ui-editCheck-toolbar-title' ).text( ve.msg( 'editcheck-dialog-title' ) )
-	);
 	// Just append the $group of the new toolbar, so we don't have to wire up all the toolbar events.
 	this.$reviewToolbarGroup = reviewToolbar.$group.addClass( 've-ui-editCheck-toolbar-tools' );
 	toolbar.$group.after( this.$reviewToolbarGroup );
