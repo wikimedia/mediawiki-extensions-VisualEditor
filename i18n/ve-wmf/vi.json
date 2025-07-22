@@ -9,9 +9,14 @@
 			"Minh Nguyen",
 			"Nghiemtrongdai VN",
 			"아라",
-			"Nvdtn19"
+			"Nvdtn19",
+			"NgocAnMaster"
 		]
 	},
+	"tag-editcheck-newcontent-description": "Kiểm tra Sửa đổi cho rằng nội dung mới đã được thêm vào trang",
+	"tag-editcheck-newreference-description": "Một nguồn tham khảo mới đã được thêm vào trang",
+	"tag-editcheck-references-description": "Kiểm tra Sửa đổi cho rằng có thể cần phải có một nguồn tham khảo",
+	"tag-editcheck-references-activated-description": "Kiểm tra Sửa đổi cho rằng có thể cần phải có một nguồn tham khảo, và giao diện người dùng được hiển thị",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Soạn thảo trực quan]]",
 	"tag-visualeditor-description": "Đã sửa đổi dùng [[{{MediaWiki:visualeditor-descriptionpagelink}}|Trình soạn thảo trực quan]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Qua trình soạn thảo trực quan: Cần kiểm tra]]",
