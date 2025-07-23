@@ -25,6 +25,7 @@
 	"tag-editcheck-references-activated-description": "Muokkaustarkistimen mukaan lähde olisi ehkä ollut tarpeen, ja käyttöliittymä näytettiin",
 	"tag-editcheck-references-shown": "Muokkaustarkistin (lähteet) näytetty",
 	"tag-editcheck-references-shown-description": "Muokkaustarkistimen mukaan lähde olisi ehkä ollut tarpeen, ja käyttöliittymä näytettiin",
+	"tag-editcheck-tone-description": "EditCheck havaitsi mahdollisen ongelman lisätyn sisällön sävyssä.",
 	"tag-editcheck-tone-shown": "Muokkaustarkistin (sävy) näytetty",
 	"tag-editcheck-tone-shown-description": "Muokkaustarkistimen mukaan sisällön sävyä olisi ehkä ollut tarpeen kohentaa, ja käyttöliittymä näytettiin",
 	"tag-visualeditor": "Visuaalinen muokkaus",

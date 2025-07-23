@@ -15,6 +15,7 @@
 	"tag-editcheck-references-activated-description": "EditCheck cre que podería ser necesaria unha referencia e mostrou a interface de usuario",
 	"tag-editcheck-references-shown": "Verificación de modificacións (referencias) amosada",
 	"tag-editcheck-references-shown-description": "EditCheck cre que podería ser necesaria unha referencia e mostrou a interface de usuario",
+	"tag-editcheck-tone-description": "EditCheck detectou un posible problema co ton dalgúns contidos engadidos",
 	"tag-editcheck-tone-shown": "Verificación de modificacións (ton) amosada",
 	"tag-editcheck-tone-shown-description": "EditCheck cre que podería ser necesario axustar o ton dalgúns contidos e mostrou a interface de usuario",
 	"tag-visualeditor": "Edición visual",
