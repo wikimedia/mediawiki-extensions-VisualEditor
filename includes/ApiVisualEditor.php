@@ -352,7 +352,7 @@ class ApiVisualEditor extends ApiBase {
 						$revision,
 						$user,
 						$params['editintro'],
-						null,
+						$params['paction'] === 'wikitext' ? 'veaction=editsource' : 'veaction=edit',
 						false,
 						$section
 					);
