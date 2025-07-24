@@ -30,6 +30,7 @@
 	"tag-editcheck-references-activated-description": "EditCheck denkt dat er een referentie nodig kan zijn, en de gebruikersinterface is weergegeven",
 	"tag-editcheck-references-shown": "EditCheck (referenties) weergegeven",
 	"tag-editcheck-references-shown-description": "EditCheck denkt dat er een referentie nodig kan zijn, en de gebruikersinterface is weergegeven",
+	"tag-editcheck-tone-description": "EditCheck heeft een mogelijk probleem ontdekt met de toon van bepaalde toegevoegde inhoud",
 	"tag-editcheck-tone-shown": "Bewerkingscontrole (toon) weergegeven",
 	"tag-editcheck-tone-shown-description": "EditCheck denkt dat een aanpassing van de toon in bepaalde inhoud nodig was geweest, en de gebruikersinterface is weergegeven",
 	"tag-visualeditor": "Visuele tekstverwerker",

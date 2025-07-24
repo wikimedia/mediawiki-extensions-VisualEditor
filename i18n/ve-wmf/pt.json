@@ -10,6 +10,7 @@
 			"Jaideraf",
 			"Jdforrester",
 			"Luckas",
+			"Mansil alfalb",
 			"SandroHc",
 			"Vitorvicentevalente",
 			"아라"
@@ -20,6 +21,7 @@
 	"tag-editcheck-references-description": "A Verificação de Edições acha que podia ter sido necessária uma referência",
 	"tag-editcheck-references-activated": "Verificação de Edições (referências) ativada",
 	"tag-editcheck-references-activated-description": "A Verificação de Edições acha que podia ter sido necessária uma referência e foi mostrada a interface do utilizador",
+	"tag-editcheck-references-shown": "Verificação de Edição (referências) mostradas",
 	"tag-visualeditor": "Editor Visual",
 	"tag-visualeditor-description": "Edição realizada utilizando o [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor Visual]]",
 	"tag-visualeditor-needcheck": "Editor Visual: Verificar",
