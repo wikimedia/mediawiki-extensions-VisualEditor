@@ -15,6 +15,7 @@
 	"tag-editcheck-references-activated-description": "Проверката на уредувања смета дека може да треба навод, и се покажа корисничкиот посредник",
 	"tag-editcheck-references-shown": "Прикажана проверка на уредување (наводи)",
 	"tag-editcheck-references-shown-description": "Проверката на уредувања смета дека може да треба навод, и се покажа корисничкиот посредник",
+	"tag-editcheck-tone-description": "EditCheck пронајде потенцијален проблем со тонот во додадената содржина",
 	"tag-editcheck-tone-shown": "Прикажана проверката на уредувања (тон)",
 	"tag-editcheck-tone-shown-description": "Проверката на уредувања смета дека може да е потребно прилагодување на тонот во некои содржини, и бил прикажан корисничкиот посредник",
 	"tag-visualeditor": "Нагледно уредување",
