@@ -106,7 +106,11 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
 mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel ) {
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
-		const check = this.create( checkName, controller, mw.editcheck.config[ checkName ] );
+		const check = this.create(
+			checkName,
+			controller,
+			ve.extendObject( {}, mw.editcheck.config[ '*' ], mw.editcheck.config[ checkName ] )
+		);
 		if ( !check.canBeShown() ) {
 			return;
 		}
