@@ -69,7 +69,7 @@ mw.editcheck.ToneCheck.prototype.canBeShown = function ( ...args ) {
 };
 
 mw.editcheck.ToneCheck.prototype.afterMemoized = function ( data ) {
-	const outcome = data.predictions[ 0 ].prediction === true &&
+	const outcome = data && data.predictions[ 0 ].prediction === true &&
 		data.predictions[ 0 ].probability >= this.config.predictionThreshold;
 	return !!outcome;
 };
