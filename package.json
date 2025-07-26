@@ -21,7 +21,7 @@
 		"@wdio/mocha-framework": "9.15.0",
 		"@wdio/spec-reporter": "9.15.0",
 		"api-testing": "1.7.1",
-		"eslint-config-wikimedia": "0.30.0",
+		"eslint-config-wikimedia": "0.31.0",
 		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.13.0",
 		"grunt-contrib-watch": "1.1.0",
