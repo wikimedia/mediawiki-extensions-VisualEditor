@@ -169,7 +169,9 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
 mw.editcheck.BaseEditCheck.prototype.getModifiedContentBranchNodes = function ( documentModel ) {
 	const modified = new Set();
 	this.getModifiedRanges( documentModel, false, true ).forEach( ( range ) => {
-		modified.add( documentModel.getBranchNodeFromOffset( range.start ) );
+		if ( !range.isCollapsed() ) {
+			modified.add( documentModel.getBranchNodeFromOffset( range.start ) );
+		}
 	} );
 	return Array.from( modified );
 };
