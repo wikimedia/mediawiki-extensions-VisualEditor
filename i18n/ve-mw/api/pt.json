@@ -5,7 +5,8 @@
 			"Emma Franzen",
 			"Fúlvio",
 			"Hamilton Abreu",
-			"Vitorvicentevalente"
+			"Vitorvicentevalente",
+			"Mansil alfalb"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Não foi encontrada nenhuma seriação em cache com essa chave",
@@ -22,7 +23,7 @@
 	"apihelp-visualeditor-param-etag": "ETag para enviar.",
 	"apihelp-visualeditor-param-format": "O formato do resultado.",
 	"apihelp-visualeditor-param-html": "HTML a enviar ao Parsoid, para convertê-lo em texto wiki.",
-	"apihelp-visualeditor-param-oldid": "O número da revisão (por omissão, a revisão mais recente).",
+	"apihelp-visualeditor-param-oldid": "O número da revisão a utilizar (predefine para a última revisão).",
 	"apihelp-visualeditor-param-paction": "Operação a executar.",
 	"apihelp-visualeditor-param-page": "A página na qual serão realizadas as operações.",
 	"apihelp-visualeditor-param-preload": "A página cujo conteúdo será utilizado se a página obtida ainda não tem conteúdo.",
