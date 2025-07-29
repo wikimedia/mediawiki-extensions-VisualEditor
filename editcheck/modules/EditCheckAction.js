@@ -19,6 +19,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	// Mixin constructor
 	OO.EventEmitter.call( this );
 
+	this.mode = '';
 	this.check = config.check;
 	this.fragments = config.fragments;
 	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
@@ -150,7 +151,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		message: this.getDescription(),
 		footer: this.getFooter(),
 		classes: collapsed ? [ 've-ui-editCheckActionWidget-collapsed' ] : '',
-		mode: this.check.mode,
+		mode: this.mode,
 		singleAction: singleAction
 	} );
 	widget.actions.connect( this, {
@@ -161,6 +162,10 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	) );
 
 	return widget;
+};
+
+mw.editcheck.EditCheckAction.prototype.setMode = function ( mode ) {
+	this.mode = mode;
 };
 
 /**
@@ -206,6 +211,7 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
  * @param {boolean} stale
  */
 mw.editcheck.EditCheckAction.prototype.setStale = function ( stale ) {
+	this.setMode( stale ? 'revising' : '' );
 	this.originalText = stale ? null : this.fragments.map( ( fragment ) => fragment.getText() );
 };
 
@@ -219,4 +225,11 @@ mw.editcheck.EditCheckAction.prototype.isStale = function () {
 		this.originalText,
 		this.fragments.map( ( fragment ) => fragment.getText() )
 	);
+};
+
+/**
+ * Method called by the controller when the action is removed from the action list
+ */
+mw.editcheck.EditCheckAction.prototype.discarded = function () {
+	this.emit( 'discard' );
 };

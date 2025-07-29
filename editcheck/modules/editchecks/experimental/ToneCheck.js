@@ -97,12 +97,19 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 			{
 				action: 'edit',
 				label: ve.msg( 'editcheck-dialog-action-revise' ),
-				icon: 'edit'
+				modes: [ '' ]
+			},
+			{
+				action: 'recheck',
+				label: ve.msg( 'editcheck-dialog-action-recheck' ),
+				flags: [ 'primary', 'progressive' ],
+				icon: 'check',
+				modes: [ 'revising' ]
 			},
 			{
 				action: 'dismiss',
 				label: ve.msg( 'editcheck-dialog-action-decline' ),
-				icon: 'check'
+				modes: [ '', 'revising' ]
 			}
 		]
 	} );
@@ -132,6 +139,11 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		} );
 	} else if ( choice === 'edit' && surface ) {
 		action.setStale( true );
+		if ( action.clickedRevise !== true ) { // first time
+			action.once( 'discard', () => {
+				mw.notify( ve.msg( 'editcheck-tone-thank' ), { type: 'success' } );
+			} );
+		}
 		action.clickedRevise = true;
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
@@ -139,6 +151,31 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			surface.getView().activate();
 			action.fragments[ action.fragments.length - 1 ].collapseToEnd().select();
 		} );
+	} else if ( choice === 'recheck' ) {
+		const recheckDeferred = ve.createDeferred();
+
+		const progress = new OO.ui.ProgressBarWidget( {
+			progress: false,
+			inline: true
+		} );
+		action.widget.$body.prepend( progress.$element );
+
+		this.controller.updateForListener( 'onBranchNodeChange' ).then( () => {
+			recheckDeferred.resolve();
+		} );
+
+		const minimumTimeDeferred = ve.createDeferred();
+		setTimeout( () => {
+			minimumTimeDeferred.resolve();
+		}, 500 );
+
+		setTimeout( () => {
+			/* Silently fail if it takes too long */
+			recheckDeferred.resolve();
+		}, 3000 );
+		// Caller requires a Deferred as it then calls '.always()'
+		// eslint-disable-next-line no-jquery/no-when
+		return $.when( recheckDeferred, minimumTimeDeferred );
 	}
 };
 

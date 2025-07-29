@@ -251,8 +251,14 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			// Try to match each new action to an existing one (to preserve state)
 			let actions = actionsFromListener.map( ( action ) => existing.find( ( existingAction ) => action.equals( existingAction ) ) || action );
 
+			let staleUpdated = false;
 			if ( !fromRefresh ) {
-				actions.forEach( ( action ) => action.setStale( false ) );
+				actions.forEach( ( action ) => {
+					if ( action.isStale() ) {
+						action.setStale( false );
+						staleUpdated = true;
+					}
+				} );
 			}
 
 			// Update the actions for this listener
@@ -262,7 +268,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 
 			// If the actions list changed, update
-			if ( fromRefresh || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
 				// Add actions from other listeners and sort
 				actions = actions.concat( otherListenersExisting );
 				actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
@@ -456,6 +462,11 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		if ( this.focusedAction && discardedActions.includes( this.focusedAction ) ) {
 			this.focusedAction = null;
 		}
+	}
+
+	// Let actions know they've been discarded
+	for ( const action of discardedActions ) {
+		action.discarded();
 	}
 
 	// do we need to show mid-edit actions?
