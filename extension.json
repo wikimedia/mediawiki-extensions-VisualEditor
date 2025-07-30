@@ -1240,6 +1240,7 @@
 				"lib/ve/src/ce/styles/nodes/ve.ce.TableNode.less",
 				"lib/ve/src/ce/styles/ve.ce.less",
 				"lib/ve/src/ce/styles/ve.ce.Surface.less",
+				"lib/ve/src/ce/styles/ve.ce.SelectionManager.less",
 				"lib/ve/src/ui/styles/ve.ui.icons.less",
 				"lib/ve/src/ui/styles/dialogs/ve.ui.SidebarDialog.less",
 				"lib/ve/src/ui/styles/dialogs/ve.ui.ToolbarDialog.less",

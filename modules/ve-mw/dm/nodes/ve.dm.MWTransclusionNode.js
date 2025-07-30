@@ -204,7 +204,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		for ( let i = 1; i < els.length; i++ ) {
 			// Wrap plain text nodes so we can give them an attribute
 			els[ i ] = wrapTextNode( els[ i ] );
-			els[ i ].setAttribute( 'data-ve-ignore', '1' );
+			els[ i ].setAttribute( 'data-ve-ignore', '' );
 		}
 	} else if ( converter.isForPreview() ) {
 		const modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
