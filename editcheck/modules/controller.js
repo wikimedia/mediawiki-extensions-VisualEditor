@@ -701,6 +701,9 @@ Controller.prototype.drawGutter = function () {
 	const surfaceView = this.surface.getView();
 
 	actions.forEach( ( action ) => {
+		if ( action.isStale() ) {
+			return;
+		}
 		action.top = Infinity;
 		action.getHighlightSelections().forEach( ( selection ) => {
 			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
