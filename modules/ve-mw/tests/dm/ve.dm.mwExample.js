@@ -1235,7 +1235,7 @@ ve.dm.mwExample.domToDataCases = {
 					mediaTag: 'img',
 					mw: {},
 					resource: './Foo',
-					src: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+					src: ve.ce.minImgDataUri,
 					type: 'thumb',
 					width: 300
 				}
@@ -1287,7 +1287,7 @@ ve.dm.mwExample.domToDataCases = {
 					mediaTag: 'img',
 					mw: {},
 					resource: './Foo',
-					src: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+					src: ve.ce.minImgDataUri,
 					type: 'thumb',
 					width: 300
 				}
@@ -1331,7 +1331,7 @@ ve.dm.mwExample.domToDataCases = {
 					mediaTag: 'img',
 					mw: {},
 					resource: './Foo',
-					src: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+					src: ve.ce.minImgDataUri,
 					type: 'thumb',
 					width: 300
 				}
@@ -1368,7 +1368,7 @@ ve.dm.mwExample.domToDataCases = {
 					mediaTag: 'img',
 					mw: {},
 					resource: './Foo',
-					src: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+					src: ve.ce.minImgDataUri,
 					type: 'thumb',
 					width: 300
 				}
@@ -1402,7 +1402,7 @@ ve.dm.mwExample.domToDataCases = {
 					mediaTag: 'img',
 					mw: {},
 					resource: './Foo',
-					src: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+					src: ve.ce.minImgDataUri,
 					type: 'thumb',
 					width: 300
 				}
