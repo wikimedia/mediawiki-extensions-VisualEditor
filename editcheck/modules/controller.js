@@ -25,8 +25,6 @@ function Controller( target ) {
 	this.branchNode = null;
 	this.focusedAction = null;
 
-	this.$highlights = $( '<div>' );
-
 	this.taggedFragments = {};
 	this.taggedIds = {};
 
@@ -116,7 +114,6 @@ Controller.prototype.setup = function () {
 
 		this.surface.on( 'destroy', () => {
 			this.off( 'actionsUpdated' );
-			this.$highlights.empty();
 
 			const win = this.surface.getSidebarDialogs().getCurrentWindow();
 			if ( win ) {
@@ -197,7 +194,6 @@ Controller.prototype.editChecksArePossible = function () {
  */
 Controller.prototype.updatePositions = function () {
 	this.drawSelections();
-	this.drawGutter();
 
 	this.emit( 'position' );
 };
@@ -669,22 +665,6 @@ Controller.prototype.restoreToolbar = function ( target ) {
  */
 Controller.prototype.drawSelections = function () {
 	const surfaceView = this.surface.getView();
-	if ( this.focusedAction ) {
-		// The currently-focused action gets a selection:
-		// TODO: clicking the selection should activate the sidebar-action in pre-save mode
-		surfaceView.getSelectionManager().drawSelections(
-			'editCheckWarning',
-			this.focusedAction.getHighlightSelections().map(
-				( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
-			),
-			this.focusedAction.isStale() ?
-				{ wrapperClass: 've-ce-surface-selections-editCheckWarning-stale', showBounding: true, showRects: false } :
-				{}
-		);
-	} else {
-		surfaceView.getSelectionManager().drawSelections( 'editCheckWarning', [] );
-	}
-
 	if ( this.inBeforeSave ) {
 		// Review mode grays out everything that's not highlighted:
 		const highlightNodes = [];
@@ -694,56 +674,63 @@ Controller.prototype.drawSelections = function () {
 			} );
 		} );
 		surfaceView.setReviewMode( true, highlightNodes );
-	}
-};
-
-/**
- * Draw gutter indicators next to each action's selection (on desktop).
- */
-Controller.prototype.drawGutter = function () {
-	if ( OO.ui.isMobile() ) {
 		return;
 	}
-	this.$highlights.empty();
+
 	const actions = this.getActions();
 	if ( actions.length === 0 ) {
 		return;
 	}
-	const surfaceView = this.surface.getView();
+	const isStale = !!this.focusedAction && this.focusedAction.isStale();
+	const showGutter = !isStale && !OO.ui.isMobile();
+	const activeOptions = { showGutter: showGutter, showRects: !isStale, showBounding: isStale };
+	const inactiveOptions = { showGutter: showGutter, showRects: false };
 
+	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
+		( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
+	) : [];
+	const inactiveSelections = [];
+	// Optimization: When showGutter is false inactive selections currently render nothing
+	if ( showGutter ) {
+		actions.forEach( ( action ) => {
+			const isActive = ( action === this.focusedAction );
+			action.getHighlightSelections().forEach( ( selection ) => {
+				const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
+				if ( isActive ) {
+					activeSelections.push( selectionView );
+				} else {
+					inactiveSelections.push( selectionView );
+				}
+			} );
+		} );
+	}
+
+	// The following classes are used here:
+	// * ve-ce-surface-selections-editCheck-active
+	// * ve-ce-surface-selections-editCheck-inactive
+	surfaceView.getSelectionManager().drawSelections( 'editCheck-active', activeSelections, activeOptions );
+	surfaceView.getSelectionManager().drawSelections( 'editCheck-inactive', inactiveSelections, inactiveOptions );
+
+	// Add 'type' classes
 	actions.forEach( ( action ) => {
-		if ( action.isStale() ) {
-			return;
-		}
-		action.top = Infinity;
+		const type = action.getType();
+		const isActive = action === this.focusedAction;
 		action.getHighlightSelections().forEach( ( selection ) => {
-			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
-			const rect = selectionView.getSelectionBoundingRect();
-			if ( !rect ) {
+			if ( !isActive && !showGutter ) {
+				// Optimization: When showGutter is false inactive selections currently render nothing
 				return;
 			}
-			// The following classes are used here:
-			// * ve-ui-editCheck-gutter-highlight-error
-			// * ve-ui-editCheck-gutter-highlight-warning
-			// * ve-ui-editCheck-gutter-highlight-notice
-			// * ve-ui-editCheck-gutter-highlight-success
-			// * ve-ui-editCheck-gutter-highlight-active
-			// * ve-ui-editCheck-gutter-highlight-inactive
-			this.$highlights.append( $( '<div>' )
-				.addClass( 've-ui-editCheck-gutter-highlight' )
-				.addClass( 've-ui-editCheck-gutter-highlight-' + action.getType() )
-				.addClass( 've-ui-editCheck-gutter-highlight-' + ( action === this.focusedAction ? 'active' : 'inactive' ) )
-				.css( {
-					top: rect.top - 2,
-					height: rect.height + 4
-				} )
-				.on( 'click', () => this.focusAction( action ) )
-			);
-			action.top = Math.min( action.top, rect.top );
+			const selectionElements = surfaceView.getSelectionManager().getCachedSelection( isActive ? 'editCheck-active' : 'editCheck-inactive', selection, isActive ? activeOptions : inactiveOptions );
+			if ( selectionElements ) {
+				// The following classes are used here:
+				// * ve-ce-surface-selection-editCheck-error
+				// * ve-ce-surface-selection-editCheck-warning
+				// * ve-ce-surface-selection-editCheck-notice
+				// * ve-ce-surface-selection-editCheck-success
+				selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-' + type );
+			}
 		} );
 	} );
-
-	surfaceView.appendHighlights( this.$highlights, false );
 };
 
 /**

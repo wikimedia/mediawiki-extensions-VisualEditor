@@ -391,102 +391,82 @@
 
 /* Selections */
 
-.ve-ce-surface-reviewMode + .ve-ui-overlay .ve-ce-surface-selections-editCheck .ve-ce-surface-selection {
-	opacity: 0.2;
-	pointer-events: auto;
-}
-
-.ve-ce-surface-selections-editCheck .ve-ce-surface-selection-rect {
-	mix-blend-mode: darken;
-	// Adjust target colours to account for 50% opacity
-	background: ( ( #fce7fe - 0.8 * ( #fff ) ) / 0.2 );
-	// border: 1px solid ( ( #d02aac - 0.8 * ( #fff ) ) / 0.2 );
-	border-radius: 2px;
-	padding: 2px;
-	margin: -2px 0 0 -2px;
-}
-
-.ve-ce-surface-selections-editCheckWarning .ve-ce-surface-selection {
-	&-rects {
-		opacity: 0.2;
-	}
-
-	&-rect {
-		// Adjust target colours to account for 50% opacity
-		background: ( ( #fef6e7 - 0.8 * ( #fff ) ) / 0.2 );
-		// border: 1px solid ( ( #a66200 - 0.8 * ( #fff ) ) / 0.2 );
-		border-radius: 2px;
-		padding: 2px;
-		margin: -2px 0 0 -2px;
-	}
-}
-
-.ve-ce-surface-selections-editCheckWarning-stale .ve-ce-surface-selection-bounding {
-	@padding: 3px;
-	@border: 2px;
-	@color: #36c;
-	padding: @padding;
-	margin: -( @padding + @border ) 0 0 -@padding;
-	border-style: solid;
-	border-color: @color;
-	border-width: @border 0;
-	@triangleSize: 5px;
-
-	&::before,
-	&::after {
-		content: '';
-		position: absolute;
-		width: 0;
-		height: 0;
-	}
-
-	&::before {
-		left: 0;
-		top: 0;
-		border-left: @triangleSize solid @color;
-		border-bottom: @triangleSize solid transparent;
-	}
-
-	&::after {
-		right: 0;
-		bottom: 0;
-		border-right: @triangleSize solid @color;
-		border-top: @triangleSize solid transparent;
-	}
-}
-
-.ve-ui-editCheck-gutter-highlight {
-	position: absolute;
-	left: 0;
-	width: 2px;
-	overflow: hidden;
-	background-color: @color-base;
-
+.ve-ce-surface-selections-editCheck {
 	&-active {
-		z-index: 1;
+		.ve-ce-surface-selection {
+			&-rects {
+				opacity: 0.2;
+			}
+
+			&-rect {
+				// Adjust target colours to account for 50% opacity
+				background: ( ( #fef6e7 - 0.8 * ( #fff ) ) / 0.2 );
+				// border: 1px solid ( ( #a66200 - 0.8 * ( #fff ) ) / 0.2 );
+				border-radius: 2px;
+				padding: 2px;
+				margin: -2px 0 0 -2px;
+			}
+
+			&-bounding {
+				@padding: 3px;
+				@border: 2px;
+				@color: #36c;
+				padding: @padding;
+				margin: -( @padding + @border ) 0 0 -@padding;
+				border-style: solid;
+				border-color: @color;
+				border-width: @border 0;
+				@triangleSize: 5px;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					width: 0;
+					height: 0;
+				}
+
+				&::before {
+					left: 0;
+					top: 0;
+					border-left: @triangleSize solid @color;
+					border-bottom: @triangleSize solid transparent;
+				}
+
+				&::after {
+					right: 0;
+					bottom: 0;
+					border-right: @triangleSize solid @color;
+					border-top: @triangleSize solid transparent;
+				}
+			}
+		}
+
+		.ve-ce-surface-selection-gutter {
+			background-color: @color-base;
+			z-index: 1;
+		}
+
+		.ve-ce-surface-selection-editCheck {
+			&-error .ve-ce-surface-selection-gutter {
+				background-color: @color-error;
+			}
+
+			&-warning .ve-ce-surface-selection-gutter {
+				background-color: @color-warning;
+			}
+
+			&-notice .ve-ce-surface-selection-gutter {
+				background-color: @color-notice;
+			}
+
+			&-success .ve-ce-surface-selection-gutter {
+				background-color: @color-success;
+			}
+		}
 	}
 
-	&-error {
-		background-color: @color-error;
-	}
-
-	&-warning {
-		background-color: @color-warning;
-	}
-
-	&-notice {
-		background-color: @color-notice;
-	}
-
-	&-success {
-		background-color: @color-success;
-	}
-
-	&-inactive {
+	&-inactive .ve-ce-surface-selection-gutter {
 		background-color: @border-color-base;
-	}
-
-	.mw-mf & {
-		left: -10px;
 	}
 }
