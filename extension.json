@@ -678,6 +678,7 @@
 				"editcheck-dialog-title",
 				"editcheck-copyvio-title",
 				"editcheck-copyvio-description",
+				"editcheck-copyvio-prompt",
 				"editcheck-copyvio-action-keep",
 				"editcheck-copyvio-action-remove",
 				"editcheck-copyvio-keep-description",

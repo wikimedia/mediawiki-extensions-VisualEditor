@@ -25,6 +25,7 @@
 	"editcheck-dialog-title": "Before publishing",
 	"editcheck-copyvio-title": "Pasted content",
 	"editcheck-copyvio-description": "As a general rule, do not copy text from other sources. Doing so usually constitutes both a copyright violation and plagiarism.",
+	"editcheck-copyvio-prompt": "Did you write this text?",
 	"editcheck-copyvio-action-keep": "Yes, keep it",
 	"editcheck-copyvio-action-remove": "No, remove it",
 	"editcheck-copyvio-keep-description": "Other editors would value learning more about your reason to keep this pasted text.",

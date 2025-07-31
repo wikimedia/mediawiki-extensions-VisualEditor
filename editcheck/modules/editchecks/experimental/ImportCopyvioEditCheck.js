@@ -11,6 +11,10 @@ mw.editcheck.ImportCopyvioEditCheck.static.defaultConfig = ve.extendObject( {}, 
 
 mw.editcheck.ImportCopyvioEditCheck.static.title = ve.msg( 'editcheck-copyvio-title' );
 
+mw.editcheck.ImportCopyvioEditCheck.static.description = ve.msg( 'editcheck-copyvio-description' );
+
+mw.editcheck.ImportCopyvioEditCheck.static.prompt = ve.msg( 'editcheck-copyvio-prompt' );
+
 mw.editcheck.ImportCopyvioEditCheck.static.name = 'paste';
 
 mw.editcheck.ImportCopyvioEditCheck.static.choices = [
@@ -44,7 +48,6 @@ mw.editcheck.ImportCopyvioEditCheck.prototype.onDocumentChange = function ( surf
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
 		return new mw.editcheck.EditCheckAction( {
 			fragments: fragments,
-			message: ve.msg( 'editcheck-copyvio-description' ),
 			id: id,
 			check: this
 		} );
