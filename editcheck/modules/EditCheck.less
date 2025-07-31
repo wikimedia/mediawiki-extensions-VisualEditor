@@ -156,15 +156,15 @@
 			cursor: auto;
 			background-color: @background-color-base;
 			margin: @spacing-50 -@spacing-75 -@spacing-50 -@spacing-75;
-			padding: @spacing-50 @spacing-75 @spacing-75;
+			padding: @spacing-75;
 		}
 
 		&-actions {
 			margin-top: @spacing-100;
-			margin-bottom: @spacing-100;
 		}
 
 		&-footer {
+			margin-top: @spacing-100;
 			color: @color-subtle;
 		}
 
@@ -245,7 +245,8 @@
 		/* Transition out faster, as keyboard may be coming up */
 		transition: transform 100ms;
 		transform: translateY( 0% );
-		max-width: 995px;
+		// See: .ve-init-mw-target-surface in ve.init.mw.MobileArticleTarget.less
+		max-width: calc( 993.3px + (2 * 1em) );
 		margin: 0 auto;
 
 		&-title {
@@ -280,6 +281,7 @@
 
 			&-body {
 				background-color: transparent;
+				padding-top: 0;
 				padding-left: 2em;
 				margin-left: 0;
 			}
