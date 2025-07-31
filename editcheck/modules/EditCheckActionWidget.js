@@ -30,11 +30,19 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	this.collapsed = false;
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
+	this.prompt = config.prompt && new OO.ui.LabelWidget( {
+		label: config.prompt,
+		classes: [ 've-ui-editCheckActionWidget-prompt' ]
+	} );
 	this.footer = config.footer && new OO.ui.LabelWidget( {
 		label: config.footer,
 		classes: [ 've-ui-editCheckActionWidget-footer' ]
 	} );
 	this.$actions = $( '<div>' ).addClass( 've-ui-editCheckActionWidget-actions oo-ui-element-hidden' );
+	if ( this.prompt ) {
+		this.$actions.addClass( 've-ui-editCheckActionWidget-actions-prompted' )
+			.append( this.prompt.$element );
+	}
 
 	this.$element.on( 'click', this.onClick.bind( this ) );
 
@@ -69,7 +77,7 @@ OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.MessageWidget );
  * Handle change events on the action set
  */
 mw.editcheck.EditCheckActionWidget.prototype.onActionsChange = function () {
-	this.$actions.empty().addClass( 'oo-ui-element-hidden' );
+	this.$actions.addClass( 'oo-ui-element-hidden' ).find( '.oo-ui-actionWidget' ).remove();
 	this.actions.get( { modes: [ this.mode ] } ).forEach( ( actionWidget ) => {
 		this.$actions.append( actionWidget.$element ).removeClass( 'oo-ui-element-hidden' );
 	} );

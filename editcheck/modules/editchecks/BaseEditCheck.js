@@ -99,6 +99,16 @@ mw.editcheck.BaseEditCheck.prototype.getTitle = function () {
 };
 
 /**
+ * Get the prompt for the check's actions, if any
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet|undefined}
+ */
+mw.editcheck.BaseEditCheck.prototype.getPrompt = function () {
+	return this.constructor.static.prompt || undefined;
+};
+
+/**
  * Get the footer of the check, if any
  *
  * @param {mw.editcheck.EditCheckAction} action

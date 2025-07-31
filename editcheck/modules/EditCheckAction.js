@@ -10,6 +10,7 @@
  * @param {ve.dm.SurfaceFragment} [config.focusFragment] Fragment to focus
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.title] Title
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.message] Body message
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.prompt] Prompt to show before choices
  * @param {string} [config.id] Optional unique identifier
  * @param {string} [config.icon] Optional icon name
  * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
@@ -25,6 +26,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
 	this.focusFragment = config.focusFragment;
 	this.message = config.message;
+	this.prompt = config.prompt;
 	this.footer = config.footer;
 	this.id = config.id;
 	this.title = config.title;
@@ -73,10 +75,19 @@ mw.editcheck.EditCheckAction.prototype.getTitle = function () {
 /**
  * Get the action's footer, if any
  *
- * @return {jQuery|string|Function|OO.ui.HtmlSnippet}
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet|undefined}
  */
 mw.editcheck.EditCheckAction.prototype.getFooter = function () {
-	return this.footer || this.check.getFooter();
+	return this.footer || this.check.getFooter( this );
+};
+
+/**
+ * Get the prompt question for the current choices
+ *
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet|undefined}
+ */
+mw.editcheck.EditCheckAction.prototype.getPrompt = function () {
+	return this.prompt || this.check.getPrompt( this );
 };
 
 /**
@@ -150,6 +161,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		label: this.getTitle(),
 		message: this.getDescription(),
 		footer: this.getFooter(),
+		prompt: this.getPrompt(),
 		classes: collapsed ? [ 've-ui-editCheckActionWidget-collapsed' ] : '',
 		mode: this.mode,
 		singleAction: singleAction
