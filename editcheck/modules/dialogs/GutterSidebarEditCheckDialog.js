@@ -111,7 +111,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 		const rects = action.getHighlightSelections().map( ( selection ) => {
 			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
 			return selectionView.getSelectionBoundingRect();
-		} );
+		} ).filter( ( rect ) => rect );
 		const boundingRect = ve.getBoundingRect( rects );
 		if ( !boundingRect ) {
 			return;
