@@ -79,6 +79,17 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 		include: [ 'link' ]
 	},
 	{
+		name: 'insert',
+		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		narrowConfig: {
+			invisibleLabel: true,
+			icon: 'add'
+		},
+		// This is the default for include=*, but that's not guaranteed:
+		type: 'list'
+	},
+	{
 		name: 'editMode',
 		type: 'list',
 		icon: 'edit',
@@ -97,18 +108,9 @@ ve.init.mw.MobileArticleTarget.static.toolbarGroups = [
 ];
 
 const mobileInsertMenu = mw.config.get( 'wgVisualEditorConfig' ).mobileInsertMenu;
+const insertGroupIndex = ve.init.mw.MobileArticleTarget.static.toolbarGroups.findIndex( ( toolGroup ) => toolGroup.name === 'insert' );
 if ( mobileInsertMenu ) {
-	const insertGroup = {
-		name: 'insert',
-		label: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
-		narrowConfig: {
-			invisibleLabel: true,
-			icon: 'add'
-		},
-		// This is the default for include=*, but that's not guaranteed:
-		type: 'list'
-	};
+	const insertGroup = ve.init.mw.MobileArticleTarget.static.toolbarGroups[ insertGroupIndex ];
 	if ( mobileInsertMenu === true ) {
 		insertGroup.include = '*';
 		insertGroup.forceExpand = [ 'transclusion', 'insertTable' ];
@@ -119,7 +121,9 @@ if ( mobileInsertMenu ) {
 		// Citoid sets this up, so we need to force it for everything:
 		insertGroup.forceExpand = mobileInsertMenu;
 	}
-	ve.init.mw.MobileArticleTarget.static.toolbarGroups.push( insertGroup );
+} else {
+	// Feature disabled, remove the insert group
+	ve.init.mw.MobileArticleTarget.static.toolbarGroups.splice( insertGroupIndex, 1 );
 }
 
 ve.init.mw.MobileArticleTarget.static.trackingName = 'mobile';
