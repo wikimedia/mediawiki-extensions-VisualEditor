@@ -15,14 +15,12 @@ mw.editcheck.ImportCopyvioEditCheck.static.name = 'importCopyvio';
 
 mw.editcheck.ImportCopyvioEditCheck.static.choices = [
 	{
-		action: 'rewrite',
-		label: 'Rewrite', // ve.msg( 'editcheck-dialog-action-yes' ),
-		icon: 'edit'
+		action: 'keep',
+		label: ve.msg( 'editcheck-copyvio-action-keep' )
 	},
 	{
-		action: 'dismiss',
-		label: 'Keep', // ve.msg( 'editcheck-dialog-action-no' ),
-		icon: 'check'
+		action: 'remove',
+		label: ve.msg( 'editcheck-copyvio-action-remove' )
 	}
 ];
 
@@ -55,10 +53,25 @@ mw.editcheck.ImportCopyvioEditCheck.prototype.onDocumentChange = function ( surf
 
 mw.editcheck.ImportCopyvioEditCheck.prototype.act = function ( choice, action, surface ) {
 	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-		case 'rewrite':
+		case 'keep':
+			return action.widget.showFeedback( {
+				description: ve.msg( 'editcheck-copyvio-keep-description' ),
+				choices: [ 'wrote', 'permission', 'free', 'other' ].map(
+					( key ) => ( {
+						data: key,
+						// Messages that can be used here:
+						// * editcheck-copyvio-keep-wrote
+						// * editcheck-copyvio-keep-permission
+						// * editcheck-copyvio-keep-free
+						// * editcheck-copyvio-keep-other
+						label: ve.msg( 'editcheck-copyvio-keep-' + key )
+					} ) )
+			} ).then( ( reason ) => {
+				this.dismiss( action );
+				mw.notify( ve.msg( 'editcheck-copyvio-keep-notify' ), { type: 'success' } );
+				return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
+			} );
+		case 'remove':
 			action.fragments.forEach( ( fragment ) => {
 				fragment.removeContent();
 			} );
@@ -67,6 +80,8 @@ mw.editcheck.ImportCopyvioEditCheck.prototype.act = function ( choice, action, s
 				action.fragments[ action.fragments.length - 1 ].select();
 				surface.getView().focus();
 			}, 500 );
+
+			mw.notify( ve.msg( 'editcheck-copyvio-remove-notify' ), { type: 'success' } );
 			break;
 	}
 };
