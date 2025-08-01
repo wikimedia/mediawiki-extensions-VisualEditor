@@ -65,7 +65,8 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 		// * ve-ui-editCheck-gutter-action-success
 		.addClass( 've-ui-editCheck-gutter-action-' + action.getType() )
 		.toggleClass( 've-ui-editCheck-gutter-action-inactive', !this.isFocused() )
-		.toggleClass( 've-ui-editCheck-gutter-action-stale', action.isStale() );
+		.toggleClass( 've-ui-editCheck-gutter-action-stale', action.isStale() )
+		.toggleClass( 've-ui-editCheck-gutter-action-suggestion', action.isSuggestion() );
 
 	if ( action.gutterQuickAction ) {
 		this.$element.addClass( 've-ui-editCheck-gutter-action-quickaction' );
