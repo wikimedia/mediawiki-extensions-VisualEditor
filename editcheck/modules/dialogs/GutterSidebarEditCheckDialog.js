@@ -5,6 +5,11 @@
  */
 
 /**
+ * GutterSidebarEditCheckDialog constructor.
+ *
+ * The edit check dialog which is created when the user is on mobile. It adds a narrow gutter wide enough to show an
+ * icon. When clicked, we create (or reuse) a ve.ui.FixedEditCheckDialog instance to show the check details.
+ *
  * @class
  * @extends ve.ui.SidebarDialog
  * @constructor

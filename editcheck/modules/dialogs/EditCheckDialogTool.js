@@ -1,4 +1,7 @@
 /**
+ * Adds a robot button to the toolbar to enable/disable edit check.
+ * Note: Not currently added to extension.json or init.js, and therefore does not load.
+ *
  * @class
  * @extends ve.ui.ToolbarDialogTool
  * @constructor

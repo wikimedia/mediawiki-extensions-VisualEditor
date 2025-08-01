@@ -1,6 +1,9 @@
 /**
  * FixedEditCheckDialog constructor.
  *
+ * This dialog displays edit checks in the pre-save moment, and shows single edit checks at the bottom of the display
+ * while on mobile.
+ *
  * @class
  * @extends ve.ui.ToolbarDialog
  * @mixes ve.ui.EditCheckDialog

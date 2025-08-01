@@ -1,4 +1,8 @@
 /**
+ * SidebarEditCheckDialog constructor.
+ *
+ * This dialog is shown to the side of a desktop editing session while the user is editing.
+ *
  * @class
  * @extends ve.ui.SidebarDialog
  * @mixes ve.ui.EditCheckDialog

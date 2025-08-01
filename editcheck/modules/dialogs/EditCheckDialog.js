@@ -5,7 +5,7 @@
  */
 
 /**
- * Edit check dialog
+ * EditCheckDialog constructor.
  *
  * Abstract mixin for FixedEditCheckDialog and SidebarEditCheckDialog.
  *
