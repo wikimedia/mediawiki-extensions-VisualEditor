@@ -11,8 +11,10 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  * @constructor
  * @mixes OO.EventEmitter
  * @param {ve.init.mw.Target} target The VisualEditor target
+ * @param {Object} config
+ * @param {boolean} config.suggestions Enable suggestion mode
  */
-function Controller( target ) {
+function Controller( target, config ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
@@ -24,6 +26,7 @@ function Controller( target ) {
 	this.inBeforeSave = false;
 	this.branchNode = null;
 	this.focusedAction = null;
+	this.suggestionsMode = config.suggestions;
 
 	this.taggedFragments = {};
 	this.taggedIds = {};
@@ -119,7 +122,7 @@ Controller.prototype.setup = function () {
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
-		setTimeout( () => this.onDocumentChange(), 100 );
+		setTimeout( () => this.refresh(), 100 );
 
 		this.surface.on( 'destroy', () => {
 			this.off( 'actionsUpdated' );
@@ -221,12 +224,21 @@ Controller.prototype.refresh = function () {
 	} else {
 		// Use a process so that updateForListener doesn't run twice in parallel,
 		// which causes problems as the active actions list can change.
+		// TODO: this causes problems if the refresh triggers a sidebar opening
+		// and both listeners have actions, as the second actionsUpdated won't be
+		// caught by the still-opening sidebar.
 		const process = new OO.ui.Process();
 		midEditListeners.forEach(
 			( listener ) => process.next( () => this.updateForListener( listener, true ) )
 		);
 		process.execute();
 	}
+};
+
+Controller.prototype.toggleSuggestionsMode = function () {
+	this.suggestionsMode = !this.suggestionsMode;
+	this.actionsByListener = {};
+	this.refresh();
 };
 
 /**
@@ -247,11 +259,30 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	// Get the existing actions for this listener
 	const existing = this.getActions( listener );
 
+	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
 	// Create all actions for this listener
-	return mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel() )
+	if ( this.suggestionsMode && !this.inBeforeSave ) {
+		// eslint-disable-next-line no-jquery/no-when
+		actionsPromise = $.when(
+			actionsPromise,
+			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), true )
+		).then( ( checkActions, suggestionActions ) => [
+			...checkActions,
+			// Discard any suggestions that have an equivalent non-suggestion
+			...suggestionActions.filter( ( suggestion ) => !checkActions.find( ( action ) => action.equals( suggestion, true ) ) )
+		] );
+	}
+	return actionsPromise
 		.then( ( actionsFromListener ) => {
 			// Try to match each new action to an existing one (to preserve state)
-			const actions = actionsFromListener.map( ( action ) => existing.find( ( existingAction ) => action.equals( existingAction ) ) || action );
+			const actions = actionsFromListener.map( ( action ) => {
+				const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
+				if ( oldAction && !( oldAction.isSuggestion() && !action.isSuggestion() ) ) {
+					// Let a new non-suggestion take over from an old suggestion
+					return oldAction;
+				}
+				return action;
+			} );
 
 			let staleUpdated = false;
 			if ( !fromRefresh ) {
@@ -830,9 +861,12 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 
 Controller.prototype.updateShownStats = function ( actions, moment ) {
 	actions.forEach( ( action ) => {
-		mw.editcheck.checksShown[ action.getName() ] = true;
-
-		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-' + moment } );
+		if ( action.isSuggestion() ) {
+			ve.track( 'activity.editCheck-' + action.getName(), { action: 'suggestion-shown-' + moment } );
+		} else {
+			mw.editcheck.checksShown[ action.getName() ] = true;
+			ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-' + moment } );
+		}
 	} );
 };
 

@@ -2,6 +2,9 @@
  * `ecenable` query string:
  *   1: override user eligibility criteria for all checks
  *   2: also load experimental checks
+ * Can also be a comma-separated series of flags:
+ *   experimental: also load experimental checks
+ *   suggestions: enable suggestions mode
  */
 const ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
 const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
@@ -13,6 +16,12 @@ mw.editcheck = {
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental || ecenable === '2' ),
 	checksShown: {}
 };
+
+if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
+	const ecenableFlags = ecenable.split( ',' );
+	mw.editcheck.experimental = mw.editcheck.experimental || ecenableFlags.includes( 'experimental' );
+	mw.editcheck.suggestions = mw.editcheck.suggestions || ecenableFlags.includes( 'suggestions' );
+}
 
 // Checks which are loaded for logging but shouldn't show by default yet
 const nonDefaultChecks = new Set();
@@ -154,8 +163,12 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		if ( target.constructor.static.name !== 'article' ) {
 			return;
 		}
-		const controller = new Controller( target );
+		const controller = new Controller( target, {
+			suggestions: mw.editcheck.suggestions
+		} );
 		controller.setup();
+
+		target.editcheckController = controller;
 
 		// Temporary logging for T394952
 		if ( abCheck === 'tone' && abGroup === 'control' ) {

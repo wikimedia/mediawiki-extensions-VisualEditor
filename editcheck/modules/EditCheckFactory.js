@@ -99,12 +99,13 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * @param {mw.editcheck.Controller} controller
  * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
+ * @param {boolean} [includeSuggestions=false]
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
-mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel ) {
+mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel, includeSuggestions ) {
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
-		const check = this.create( checkName, controller );
+		const check = this.create( checkName, controller, {}, includeSuggestions );
 		if ( !check.canBeShown() ) {
 			return;
 		}
@@ -123,6 +124,9 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 	return Promise.all( actionOrPromiseList )
 		.then( ( actions ) => actions.filter( ( action ) => action !== null ) )
 		.then( ( actions ) => {
+			actions.forEach( ( action ) => {
+				action.suggestion = includeSuggestions;
+			} );
 			actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
 			return actions;
 		} );
@@ -136,14 +140,16 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
  * @param {string} checkName
  * @param {mw.editcheck.Controller} controller
  * @param {Object} [extraConfig={}] extra configuration to apply
+ * @param {boolean} [includeSuggestions=false]
  * @return {mw.editcheck.BaseEditCheck}
  */
-mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controller, extraConfig = {} ) {
+mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controller, extraConfig = {}, includeSuggestions = false ) {
 	return this.constructor.super.prototype.create.call(
 		this,
 		checkName,
 		controller,
-		this.buildConfig( checkName, extraConfig )
+		this.buildConfig( checkName, extraConfig ),
+		includeSuggestions
 	);
 };
 

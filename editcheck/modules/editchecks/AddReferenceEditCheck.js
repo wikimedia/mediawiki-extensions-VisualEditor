@@ -28,7 +28,12 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 		);
 };
 // Only show these before save (for now)
-// mw.editcheck.AddReferenceEditCheck.prototype.onDocumentChange = mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave;
+mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
+	if ( this.includeSuggestions || mw.editcheck.suggestions ) {
+		return mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave.apply( this, arguments );
+	}
+	return [];
+};
 
 /**
  * Find content ranges which have been inserted

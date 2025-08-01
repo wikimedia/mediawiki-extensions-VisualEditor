@@ -12,10 +12,12 @@
  * @param {string} [config.icon] Icon name
  * @param {boolean} [config.singleAction] This is the only action shown
  * @param {string} [config.mode] Mode for the action set widget
+ * @param {boolean} [config.suggestion] This is a suggestion
  */
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
 	this.singleAction = config.singleAction;
 	this.mode = config.mode || '';
+	this.suggestion = config.suggestion;
 
 	this.name = config.name;
 
@@ -52,6 +54,10 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	if ( this.footer ) {
 		this.$body.append( this.footer.$element );
+	}
+
+	if ( this.suggestion ) {
+		this.$element.addClass( 've-ui-editCheckActionWidget-suggestion' );
 	}
 
 	this.$element
@@ -141,6 +147,10 @@ mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collaps
  */
 mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 	const deferred = this.feedbackDeferred = ve.createDeferred();
+	if ( this.suggestion ) {
+		// Suggestions bypass feedback surveys
+		return deferred.resolve().promise();
+	}
 
 	const form = new OO.ui.FieldsetLayout( {
 		classes: [ 've-ui-editCheckActionWidget-feedback' ]

@@ -14,6 +14,7 @@
  * @param {string} [config.id] Optional unique identifier
  * @param {string} [config.icon] Optional icon name
  * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
+ * @param {boolean} [config.suggestion] Whether this is a suggestion
  * @param {Object[]} [config.choices] User choices
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
@@ -33,6 +34,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.icon = config.icon;
 	this.type = config.type || 'warning';
 	this.choices = config.choices || config.check.constructor.static.choices;
+	this.suggestion = config.suggestion;
 };
 
 /* Inheritance */
@@ -133,6 +135,9 @@ mw.editcheck.EditCheckAction.prototype.getDescription = function () {
  * @return {string}
  */
 mw.editcheck.EditCheckAction.prototype.getType = function () {
+	if ( this.suggestion ) {
+		return 'success';
+	}
 	return this.type;
 };
 
@@ -146,6 +151,15 @@ mw.editcheck.EditCheckAction.prototype.getName = function () {
 };
 
 /**
+ * Whether this is a suggestion
+ *
+ * @return {boolean}
+ */
+mw.editcheck.EditCheckAction.prototype.isSuggestion = function () {
+	return this.suggestion;
+};
+
+/**
  * Render as an EditCheckActionWidget
  *
  * @param {boolean} collapsed Start collapsed
@@ -155,7 +169,7 @@ mw.editcheck.EditCheckAction.prototype.getName = function () {
  */
 mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface ) {
 	const widget = new mw.editcheck.EditCheckActionWidget( {
-		type: this.type,
+		type: this.getType(),
 		icon: this.icon,
 		name: this.getName(),
 		label: this.getTitle(),
@@ -163,7 +177,8 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		footer: this.getFooter(),
 		prompt: this.getPrompt(),
 		mode: this.mode,
-		singleAction: singleAction
+		singleAction: singleAction,
+		suggestion: this.suggestion
 	} );
 	widget.actions.connect( this, {
 		click: [ 'onActionClick', surface ]
@@ -199,9 +214,10 @@ mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actio
  * Compare to another action
  *
  * @param {mw.editcheck.EditCheckAction} other Other action
+ * @param {boolean} allowOverlaps Count overlaps rather than a perfect match
  * @return {boolean}
  */
-mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
+mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps ) {
 	if ( this.check.constructor !== other.check.constructor ) {
 		return false;
 	}
@@ -213,7 +229,13 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
 	}
 	return this.fragments.every( ( fragment ) => {
 		const selection = fragment.getSelection();
-		return other.fragments.some( ( otherFragment ) => otherFragment.getSelection().equals( selection ) );
+		return other.fragments.some( ( otherFragment ) => {
+			if ( allowOverlaps ) {
+				return otherFragment.getSelection().getCoveringRange().overlapsRange( selection.getCoveringRange() );
+			} else {
+				return otherFragment.getSelection().equals( selection );
+			}
+		} );
 	} );
 };
 

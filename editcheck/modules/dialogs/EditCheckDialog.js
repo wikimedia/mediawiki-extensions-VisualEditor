@@ -173,6 +173,7 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 		const widget = action.render( index !== this.currentOffset, this.singleAction, this.surface );
 		widget.on( 'togglecollapse', this.onToggleCollapse, [ action, index ], this );
 		action.off( 'act' ).on( 'act', this.onAct, [ action, widget ], this );
+
 		this.$actions.append( widget.$element );
 
 		// for scrolling later

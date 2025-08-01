@@ -10,10 +10,12 @@
  * @abstract
  * @param {mw.editcheck.Controller} controller Edit check controller
  * @param {Object} [config] Configuration options
+ * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.BaseEditCheck = function MWBaseEditCheck( controller, config ) {
+mw.editcheck.BaseEditCheck = function MWBaseEditCheck( controller, config, includeSuggestions ) {
 	this.controller = controller;
 	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, config );
+	this.includeSuggestions = includeSuggestions;
 };
 
 /* Inheritance */
@@ -258,40 +260,50 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 	if ( !documentModel.completeHistory.getLength() ) {
 		return [];
 	}
-	let operations;
-	try {
-		operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
-	} catch ( err ) {
-		// TransactionSquasher can sometimes throw errors; until T333710 is
-		// fixed just count this as not needing a reference.
-		mw.errorLogger.logError( err, 'error.visualeditor' );
-		return [];
-	}
+	let candidates = [];
+	if ( this.includeSuggestions ) {
+		candidates = documentModel.getDocumentNode().getChildren()
+			.filter( ( branchNode ) => !( branchNode instanceof ve.dm.InternalListNode ) )
+			.map( ( branchNode ) => branchNode.getRange() );
+	} else {
+		let operations;
+		try {
+			operations = documentModel.completeHistory.squash().transactions[ 0 ].operations;
+		} catch ( err ) {
+			// TransactionSquasher can sometimes throw errors; until T333710 is
+			// fixed just count this as not needing a reference.
+			mw.errorLogger.logError( err, 'error.visualeditor' );
+			return [];
+		}
 
-	const ranges = [];
-	let offset = 0;
-	const endOffset = documentModel.getDocumentRange().end;
-	operations.every( ( op ) => {
-		if ( op.type === 'retain' ) {
-			offset += op.length;
-		} else if ( op.type === 'replace' ) {
-			const insertedRange = new ve.Range( offset, offset + op.insert.length );
-			offset += op.insert.length;
-			// 1. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
-			if ( op.remove.length === 0 ) {
-				if ( onlyContentRanges ) {
-					ve.batchPush(
-						ranges,
-						// 2. Only fully inserted paragraphs (ranges that cover the whole node) (T345121)
-						this.getContentRangesFromRange( documentModel, insertedRange, coveredNodesOnly )
-					);
-				} else {
-					ranges.push( insertedRange );
+		let offset = 0;
+		const endOffset = documentModel.getDocumentRange().end;
+		operations.every( ( op ) => {
+			if ( op.type === 'retain' ) {
+				offset += op.length;
+			} else if ( op.type === 'replace' ) {
+				const insertedRange = new ve.Range( offset, offset + op.insert.length );
+				offset += op.insert.length;
+				// 1. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
+				if ( op.remove.length === 0 ) {
+					candidates.push( insertedRange );
 				}
 			}
+			// Reached the end of the doc / start of internal list, stop searching
+			return offset < endOffset;
+		} );
+	}
+	const ranges = [];
+	candidates.forEach( ( range ) => {
+		if ( onlyContentRanges ) {
+			ve.batchPush(
+				ranges,
+				// 2. Only fully inserted paragraphs (ranges that cover the whole node) (T345121)
+				this.getContentRangesFromRange( documentModel, range, coveredNodesOnly )
+			);
+		} else {
+			ranges.push( range );
 		}
-		// Reached the end of the doc / start of internal list, stop searching
-		return offset < endOffset;
 	} );
 	return ranges.filter( ( range ) => this.isRangeValid( range, documentModel ) );
 };
