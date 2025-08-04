@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Brettchenweber"
+		]
 	},
 	"editcheck-dialog-action-no": "Nein",
 	"editcheck-dialog-action-yes": "Ja",
@@ -24,10 +26,10 @@
 	"editcheck-copyvio-action-remove": "Nein, entfernen.",
 	"editcheck-copyvio-keep-description": "Andere Redakteure würden gerne mehr über deine Gründe für die Beibehaltung dieses eingefügten Textes erfahren.",
 	"editcheck-copyvio-keep-wrote": "Ich habe diesen Inhalt geschrieben und er ist nirgendwo anders veröffentlicht",
-	"editcheck-copyvio-keep-permission": "Ich habe die Erlaubnis , diesen Inhalt wieder zu verwenden .",
+	"editcheck-copyvio-keep-permission": "Ich habe die Erlaubnis, diesen Inhalt weiterzuverwenden.",
 	"editcheck-copyvio-keep-free": "Dieser Text ist gemeinfrei oder steht unter freier Lizenz.",
 	"editcheck-copyvio-keep-other": "Andere",
-	"editcheck-copyvio-keep-notify": "Danke, dass du uns deinen Grund für die Aufbewahrung des eingesteckten Textes genannt hast!",
+	"editcheck-copyvio-keep-notify": "Danke, dass du uns deinen Grund für die Beibehaltung des eingefügten Textes genannt hast!",
 	"editcheck-copyvio-remove-notify": "Danke, dass du diesen Text entfernt hast!",
 	"editcheck-tone-title": "Tonfall überarbeiten?",
 	"editcheck-tone-description": "Andere Benutzer überarbeiteten diese Art der Formulierung häufig, weil sie den Tonfall als unausgewogen ansehen. [$1 Mehr erfahren]",
