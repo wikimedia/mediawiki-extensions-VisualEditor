@@ -32,6 +32,7 @@
 	"tag-editcheck-tone-description": "EditCheck detected a potential issue with the tone of some added content",
 	"tag-editcheck-tone-shown": "Edit Check (tone) shown",
 	"tag-editcheck-tone-shown-description": "EditCheck thinks an adjustment to the tone in some content might have been needed, and the UI was shown",
+	"tag-editcheck-tone-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#Tone_check",
 	"tag-visualeditor": "Visual edit",
 	"tag-visualeditor-description": "Edit made using the [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]",
 	"tag-visualeditor-helppage": "{{MediaWiki:visualeditor-descriptionpagelink}}",
