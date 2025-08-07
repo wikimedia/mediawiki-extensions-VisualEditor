@@ -682,8 +682,8 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 
 	OO.ui.confirm( $confirmPromptMessage, {
 		actions: [
-			{ action: 'accept', label: OO.ui.msg( 'ooui-dialog-process-retry' ), flags: 'primary' },
-			{ action: 'reject', label: OO.ui.msg( 'ooui-dialog-message-reject' ), flags: 'safe' }
+			{ action: 'accept', label: ve.msg( 'ooui-dialog-process-retry' ), flags: 'primary' },
+			{ action: 'reject', label: ve.msg( 'ooui-dialog-message-reject' ), flags: 'safe' }
 		]
 	} ).then( ( confirmed ) => {
 		if ( confirmed ) {
