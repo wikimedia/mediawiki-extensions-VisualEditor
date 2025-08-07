@@ -11,7 +11,7 @@ mw.editcheck.ImportCopyvioEditCheck.static.defaultConfig = ve.extendObject( {}, 
 
 mw.editcheck.ImportCopyvioEditCheck.static.title = ve.msg( 'editcheck-copyvio-title' );
 
-mw.editcheck.ImportCopyvioEditCheck.static.name = 'importCopyvio';
+mw.editcheck.ImportCopyvioEditCheck.static.name = 'paste';
 
 mw.editcheck.ImportCopyvioEditCheck.static.choices = [
 	{
