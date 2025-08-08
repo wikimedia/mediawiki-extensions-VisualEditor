@@ -15,7 +15,7 @@
 		"test": "grunt test && node build/checkModules.js && npm run minify-svg"
 	},
 	"devDependencies": {
-		"@wdio/cli": "9.15.0",
+		"@wdio/cli": "9.18.4",
 		"@wdio/junit-reporter": "9.15.0",
 		"@wdio/local-runner": "9.15.0",
 		"@wdio/mocha-framework": "9.15.0",
