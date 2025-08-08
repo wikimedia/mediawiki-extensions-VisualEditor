@@ -268,6 +268,7 @@
 	"visualeditor-includes-includeonly-description": "Коли вміст цієї сторінки використовується на іншій сторінці, тут буде включено такий додатковий вміст:",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion Докладніше про часткове включення]",
 	"visualeditor-languages-tool": "Мови",
+	"visualeditor-linkcontext-uneditable": "Вибачте, це посилання наразі можна редагувати лише у режимі вихідного тексту.",
 	"visualeditor-linkinspector-button-link-external": "Зовнішній сайт",
 	"visualeditor-linkinspector-button-link-internal": "Пошук внутрішніх сторінок",
 	"visualeditor-linkinspector-convert-link-isbn": "Перетворити в ISBN-посилання",
