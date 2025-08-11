@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cohuoucan",
+			"Gutypc712",
+			"JhonRambo",
+			"Tunichmay",
+			"ValentinaTec"
+		]
+	},
+	"tag-editcheck-newcontent-description": "EditCheck ku tuukultik u ts'áabal túumben contenido ti' le link tia'al u paginail",
+	"tag-editcheck-newreference-description": "junp'eel referencia san t'aabak tia'al le paginao'",
+	"tag-editcheck-references-description": "EditCheck ku tukultik jump'éel referencia je'el u páajtal u k'a'abéettal",
+	"tag-editcheck-references-activated": "paakat edicion T’aab",
+	"tag-editcheck-references-activated-description": "EditCheck ku tukultik jump'éel referencia je'el u páajtal u k'a'abéettal, ka le UI bin u ye'esa'al",
+	"tag-editcheck-references-shown": "Editar Check (referencias) ku ye'esik",
+	"tag-editcheck-references-shown-description": "EditCheck ku tukultik jump'éel referencia je'el u páajtal u k'a'abéettal, ka le UI bin u ye'esa'al",
+	"tag-editcheck-tone-description": "EditCheck tu yilaj jump'éel talamil yéetel u tono yaan contenido añadido",
+	"tag-editcheck-tone-shown": "Editar Check (tono) ku ye'esik",
+	"tag-editcheck-tone-shown-description": "EditCheck ku tukultik jump'éel ajuste ti' le tono ti' yaan contenido je'el u páajtal u sido k'a'abéet, ka le UI bin u ye'esa'al",
+	"tag-visualeditor": "Edición visual",
+	"tag-visualeditor-description": "Edición beeta'an yéetel le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]].",
+	"tag-visualeditor-needcheck": "Edición visual: Compruebe",
+	"tag-visualeditor-needcheck-description": "Edición beeta'an yéetel le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] tu'ux le yaan detectó le wikitexto posiblemente yaantal cambios ma' previstos.",
+	"tag-visualeditor-wikitext": "editor de código 2017",
+	"tag-visualeditor-wikitext-description": "Edición beeta'an yéetel le editor wikitexto 2017",
+	"tag-visualeditor-switched": "Edición visual: K'ex",
+	"tag-visualeditor-switched-description": "Le máax meyajtiko' káaj u editar yéetel le editor visual, ts'o'okole' tu k'exaj u editor wikitexto.",
+	"visualeditor-feedback-link": "Proyectó: k'eex paakat/ya'alo'ob",
+	"visualeditor-feedback-tool": "P'aat a tsiikbal  yóolal le\"software\"'",
+	"visualeditor-help-label": "xookle \"guia de Usuario\"",
+	"visualeditor-welcomedialog-action": "kasej a je'el ts'iibtik",
+	"visualeditor-welcomedialog-content": "je'el máaxake'je'el u páajtal  u je'el ts'íibtike' beyo ku saasiltaj",
+	"visualeditor-welcomedialog-content-thanks": "Niib óolal a wáantik yóok'ol kaab u kaaxaant láak' ba'alob",
+	"visualeditor-welcomedialog-switch": "K'ex le \"editor de codigo\"'",
+	"visualeditor-welcomedialog-switch-ve": "K'ex ti' le editor visual",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1| Bienvenido}} ti' $2"
+}

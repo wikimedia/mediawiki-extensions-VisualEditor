@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"JeffreyKim",
+			"Ktchankt",
 			"Winston Sung"
 		]
 	},
 	"tag-editcheck-newcontent-description": "EditCheck認為頁面加入咗新內容",
 	"tag-editcheck-newreference-description": "喺頁面加入咗參考資料",
 	"tag-editcheck-references-description": "EditCheck認為可能需要啲參考資料",
-	"tag-editcheck-references-activated": "編輯已經啟動咗檢查（參考資料）",
+	"tag-editcheck-references-activated": "編輯檢查（參考）啟動咗",
 	"tag-editcheck-references-activated-description": "EditCheck認為可能需要返啲參考資料，並且顯示埋用戶介面",
-	"tag-editcheck-references-shown": "編輯顯示咗嘅檢查（參考文獻）",
+	"tag-editcheck-references-shown": "編輯檢查（參考）顯示咗",
 	"tag-editcheck-references-shown-description": "EditCheck認為可能需要返啲參考資料，並且顯示埋用戶介面",
 	"tag-editcheck-tone-description": "EditCheck偵測到部分新增內容嘅語氣有潛在問題",
 	"tag-editcheck-tone-shown": "編輯顯示咗嘅檢查（音色）",
