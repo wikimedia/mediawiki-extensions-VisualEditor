@@ -96,13 +96,7 @@ mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surf
 		if ( !fragments.length ) {
 			return;
 		}
-		actionPromises.push( Promise.resolve(
-			this.constructor.static.memoizedCheckAsync(
-				documentModel.data.getText( true, node.getRange() )
-			)
-		).then(
-			( outcome ) => this.afterMemoized( outcome )
-		).then( ( outcome ) => {
+		actionPromises.push( this.checkText( documentModel.data.getText( true, node.getRange() ) ).then( ( outcome ) => {
 			if ( !outcome ) {
 				return null;
 			}
@@ -137,6 +131,21 @@ mw.editcheck.AsyncTextCheck.prototype.onBranchNodeChange = function ( ...args ) 
  * @return {mw.editcheck.EditCheckAction|null} A new action if appropriate, else null
  */
 mw.editcheck.AsyncTextCheck.prototype.newAction = null;
+
+/**
+ * Check provided text
+ *
+ * @param {string} text
+ * @param {boolean} [bypass] Whether to bypass any memoized result
+ * @return {Promise}
+ */
+mw.editcheck.AsyncTextCheck.prototype.checkText = function ( text, bypass ) {
+	return Promise.resolve(
+		this.constructor.static.memoizedCheckAsync( text, bypass )
+	).then(
+		( outcome ) => this.afterMemoized( outcome )
+	);
+};
 
 /**
  * A filter to apply after the memoized call has occurred

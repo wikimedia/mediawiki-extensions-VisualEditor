@@ -4,12 +4,12 @@
  */
 mw.editcheck.memoize = function ( handler ) {
 	const memory = new Map();
-	return ( arg ) => {
+	return ( arg, bypass ) => {
 		if ( typeof arg !== 'string' ) {
 			throw new Error( 'Argument must be a string' );
 		}
 
-		if ( !memory.has( arg ) ) {
+		if ( bypass || !memory.has( arg ) ) {
 			memory.set( arg, handler( arg ) );
 		}
 		return memory.get( arg );

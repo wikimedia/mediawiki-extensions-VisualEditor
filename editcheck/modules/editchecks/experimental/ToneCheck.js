@@ -1,6 +1,10 @@
 mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Parent constructor
 	mw.editcheck.ToneCheck.super.apply( this, arguments );
+
+	this.notifySuccess = () => {
+		mw.notify( ve.msg( 'editcheck-tone-thank' ), { type: 'success' } );
+	};
 };
 
 OO.inheritClass( mw.editcheck.ToneCheck, mw.editcheck.AsyncTextCheck );
@@ -116,6 +120,7 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 };
 
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
+	action.off( 'discard', this.notifySuccess );
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
 		return action.widget.showFeedback( {
@@ -139,12 +144,10 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		} );
 	} else if ( choice === 'edit' && surface ) {
 		action.setStale( true );
-		if ( action.clickedRevise !== true ) { // first time
-			action.once( 'discard', () => {
-				mw.notify( ve.msg( 'editcheck-tone-thank' ), { type: 'success' } );
-			} );
-		}
-		action.clickedRevise = true;
+		// Once revising has started the user will either make enough of an
+		// edit that this action is discarded, or will `act` again and this
+		// event-handler will be removed above:
+		action.once( 'discard', this.notifySuccess );
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
@@ -161,9 +164,10 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		} );
 		action.widget.$body.prepend( progress.$element );
 
-		this.controller.updateForListener( 'onBranchNodeChange' ).then( () => {
-			recheckDeferred.resolve();
-		} );
+		this.checkText( action.fragments[ action.fragments.length - 1 ].getText() )
+			.then( ( result ) => {
+				recheckDeferred.resolve( result );
+			} );
 
 		const minimumTimeDeferred = ve.createDeferred();
 		setTimeout( () => {
@@ -176,7 +180,13 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		}, 3000 );
 		// Caller requires a Deferred as it then calls '.always()'
 		// eslint-disable-next-line no-jquery/no-when
-		return $.when( recheckDeferred, minimumTimeDeferred );
+		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
+			action.setStale( false );
+			if ( !result ) {
+				this.notifySuccess();
+				this.controller.removeAction( 'onBranchNodeChange', action, false );
+			}
+		} );
 	}
 };
 
