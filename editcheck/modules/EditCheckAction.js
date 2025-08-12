@@ -162,7 +162,6 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		message: this.getDescription(),
 		footer: this.getFooter(),
 		prompt: this.getPrompt(),
-		classes: collapsed ? [ 've-ui-editCheckActionWidget-collapsed' ] : '',
 		mode: this.mode,
 		singleAction: singleAction
 	} );
@@ -172,6 +171,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	widget.actions.add( this.getChoices().map(
 		( choice ) => new OO.ui.ActionWidget( ve.extendObject( { modes: [ '' ], framed: true }, choice ) )
 	) );
+	widget.toggleCollapse( collapsed );
 
 	return widget;
 };
