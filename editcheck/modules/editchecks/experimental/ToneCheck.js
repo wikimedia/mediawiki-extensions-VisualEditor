@@ -148,8 +148,9 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
-			surface.getView().activate();
 			action.fragments[ action.fragments.length - 1 ].collapseToEnd().select();
+			surface.getView().activate( true );
+			surface.getView().focus();
 		} );
 	} else if ( choice === 'recheck' ) {
 		const recheckDeferred = ve.createDeferred();
