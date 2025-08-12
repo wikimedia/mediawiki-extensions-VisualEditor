@@ -23,6 +23,7 @@
 	"editcheck-dialog-title": "Vor der Veröffentlichung",
 	"editcheck-copyvio-title": "Eingefügter Inhalt",
 	"editcheck-copyvio-description": "Kopiere in der Regel keinen Text aus anderen Quellen. Dies stellt in der Regel sowohl eine Verletzung des Urheberrechts als auch ein Plagiat dar.",
+	"editcheck-copyvio-prompt": "Hast du diesen Text geschrieben?",
 	"editcheck-copyvio-action-keep": "Ja, behalten.",
 	"editcheck-copyvio-action-remove": "Nein, entfernen.",
 	"editcheck-copyvio-keep-description": "Andere Redakteure würden gerne mehr über deine Gründe für die Beibehaltung dieses eingefügten Textes erfahren.",

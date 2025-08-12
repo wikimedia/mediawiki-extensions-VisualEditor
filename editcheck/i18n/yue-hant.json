@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"JeffreyKim",
 			"Ktchankt"
 		]
 	},
@@ -23,6 +24,7 @@
 	"editcheck-dialog-title": "發佈前",
 	"editcheck-copyvio-title": "貼上嘅內容",
 	"editcheck-copyvio-description": "一般情況下唔好由其他來源直接複製文字貼過嚟。咁做多數都係侵犯版權同抄襲。",
+	"editcheck-copyvio-prompt": "你係咪寫咗呢段文字？",
 	"editcheck-copyvio-action-keep": "好，保留佢",
 	"editcheck-copyvio-action-remove": "唔好，剷走佢",
 	"editcheck-copyvio-keep-description": "其他編者想知點解你貼呢堆字。",
@@ -33,6 +35,7 @@
 	"editcheck-copyvio-keep-notify": "多謝你解釋點解你貼呢堆字！",
 	"editcheck-copyvio-remove-notify": "多謝你剷走呢堆字！",
 	"editcheck-tone-reject-other": "其他",
+	"editcheck-tone-thank": "多謝晒你修改啲語氣！",
 	"editcheck-review-title": "審核改動",
 	"tag-editcheck-reference-decline-common-knowledge": "編輯檢查（參考）被拒（常識）",
 	"tag-editcheck-reference-decline-common-knowledge-description": "編輯檢查參考功能被拒，畀嘅原因係加嘅內容係常識",

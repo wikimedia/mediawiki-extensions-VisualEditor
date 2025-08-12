@@ -7,6 +7,7 @@
 	"editcheck-dialog-action-no": "Nee",
 	"editcheck-dialog-action-yes": "Jo",
 	"editcheck-dialog-action-revise": "Iwwerschaffen",
+	"editcheck-dialog-action-recheck": "Nach eng Kéier iwwerpréiwen",
 	"editcheck-dialog-action-back": "Zréck",
 	"editcheck-copyvio-action-keep": "Jo, halen",
 	"editcheck-copyvio-action-remove": "Nee, ewechhuelen",
@@ -19,6 +20,7 @@
 	"editcheck-tone-title-acted": "Tounfall iwwerschaffen",
 	"editcheck-tone-reject-appropriate": "Den Tounfall ass passend",
 	"editcheck-tone-reject-uncertain": "Ech weess net genee, wéi ech den Tounfall iwwerschaffe soll",
+	"editcheck-tone-thank": "Merci, datt Dir den Tounfall iwwerschafft hutt!",
 	"editcheck-reject-description": "Aner Editeure géifen et appreciéiere fir gewuer ze ginn, firwat Dir dëse Choix gemaach hutt.",
 	"editcheck-review-title": "Ännerungen nokucken"
 }
