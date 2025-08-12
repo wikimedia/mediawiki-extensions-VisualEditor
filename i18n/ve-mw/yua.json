@@ -3,9 +3,21 @@
 		"authors": [
 			"Lorenzoitza",
 			"Juanchuy0",
-			"VicenteCancheM"
+			"VicenteCancheM",
+			"Tunichmay",
+			"ValentinaTec"
 		]
 	},
+	"collabpad-doctitle": "Taak’in: $1",
+	"collabpad-import-subtitle": "Tojol $1",
+	"collabpad": "Plataforma u múul meyaj",
+	"tooltip-ca-ve-edit": "K'ex le waala'",
+	"tooltip-ca-ve-edit-local": "Edit le linki abas kaambal u tsoolil le kúuchila'",
+	"tooltip-ca-ve-create": "beet a \"pagina\"",
+	"tooltip-ca-ve-create-local": "beet a\"pagina\"u tsoolil le kúuchila'",
+	"tooltip-ca-editsource": "je'el beet \"código fuente\"ti le\"pagina\"'",
+	"tooltip-ca-editsource-local": "je'el beet le \"codigo fuente\" ti' le \"pagina\" tu tsololil kuuchil",
+	"tooltip-ca-createsource": "beet u \"codigo fuente\"ti le\"pagina\"",
 	"visualeditor-ca-createlocaldescriptionsource": "A'al tu'ux u taal",
 	"visualeditor-ca-createsource": "A'al tu'ux u taal",
 	"visualeditor-ca-editsource": "k'ex le coodigóo",
