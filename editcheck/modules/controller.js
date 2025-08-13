@@ -362,17 +362,8 @@ Controller.prototype.onSelect = function ( selection ) {
 		return;
 	}
 
-	if ( !this.inBeforeSave ) {
-		let newBranchNode;
-		if ( selection instanceof ve.dm.LinearSelection ) {
-			newBranchNode = this.surface.model.documentModel.getBranchNodeFromOffset( selection.range.to );
-		} else {
-			newBranchNode = null;
-		}
-		if ( newBranchNode !== this.branchNode ) {
-			this.branchNode = newBranchNode;
-			this.updateForListener( 'onBranchNodeChange' );
-		}
+	if ( !this.inBeforeSave && this.updateCurrentBranchNodeFromSelection( selection ) ) {
+		this.updateForListener( 'onBranchNodeChange' );
 	}
 
 	if ( OO.ui.isMobile() ) {
@@ -794,6 +785,24 @@ Controller.prototype.closeSidebars = function ( action ) {
 		return currentWindow.close( action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
 	}
 	return ve.createDeferred().resolve().promise();
+};
+
+/**
+ * Set the current branch node from a selection
+ *
+ * @param {ve.dm.Selection} selection New selection
+ * @return {boolean} whether the branch node changed
+ */
+Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection ) {
+	let newBranchNode = null;
+	if ( selection instanceof ve.dm.LinearSelection ) {
+		newBranchNode = this.surface.model.documentModel.getBranchNodeFromOffset( selection.range.to );
+	}
+	if ( newBranchNode !== this.branchNode ) {
+		this.branchNode = newBranchNode;
+		return true;
+	}
+	return false;
 };
 
 module.exports = {

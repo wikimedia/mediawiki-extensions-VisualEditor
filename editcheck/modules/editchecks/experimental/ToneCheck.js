@@ -151,8 +151,11 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
-			action.fragments[ action.fragments.length - 1 ].collapseToEnd().select();
-			surface.getView().activate( true );
+			const fragment = action.fragments[ action.fragments.length - 1 ].collapseToEnd();
+			// prevent triggering branch node change listeners and thus clearing staleness immediately:
+			this.controller.updateCurrentBranchNodeFromSelection( fragment.getSelection() );
+			fragment.select();
+			// select won't have refocused the article if it didn't change:
 			surface.getView().focus();
 		} );
 	} else if ( choice === 'recheck' ) {
