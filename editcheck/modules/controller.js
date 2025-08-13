@@ -665,6 +665,13 @@ Controller.prototype.restoreToolbar = function ( target ) {
  */
 Controller.prototype.drawSelections = function () {
 	const surfaceView = this.surface.getView();
+	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
+		( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
+	) : [];
+	const isStale = !!this.focusedAction && this.focusedAction.isStale();
+	const showGutter = !isStale && !OO.ui.isMobile();
+	const activeOptions = { showGutter: showGutter, showRects: !isStale, showBounding: isStale };
+
 	if ( this.inBeforeSave ) {
 		// Review mode grays out everything that's not highlighted:
 		const highlightNodes = [];
@@ -674,21 +681,21 @@ Controller.prototype.drawSelections = function () {
 			} );
 		} );
 		surfaceView.setReviewMode( true, highlightNodes );
+		// The following classes are used here:
+		// * ve-ce-surface-selections-editCheck-active
+		surfaceView.getSelectionManager().drawSelections( 'editCheck-active', activeSelections, activeOptions );
 		return;
 	}
 
 	const actions = this.getActions();
 	if ( actions.length === 0 ) {
+		// Clear any previously drawn selections
+		surfaceView.getSelectionManager().drawSelections( 'editCheck-active', [] );
+		surfaceView.getSelectionManager().drawSelections( 'editCheck-inactive', [] );
 		return;
 	}
-	const isStale = !!this.focusedAction && this.focusedAction.isStale();
-	const showGutter = !isStale && !OO.ui.isMobile();
-	const activeOptions = { showGutter: showGutter, showRects: !isStale, showBounding: isStale };
 	const inactiveOptions = { showGutter: showGutter, showRects: false };
 
-	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
-		( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
-	) : [];
 	const inactiveSelections = [];
 	// Optimization: When showGutter is false inactive selections currently render nothing
 	if ( showGutter ) {
