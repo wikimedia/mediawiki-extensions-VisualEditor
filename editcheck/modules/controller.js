@@ -298,7 +298,7 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
 		this.focusedAction = null;
 	}
 
-	this.emit( 'actionsUpdated', listener, actions, [], removed, rejected );
+	this.emit( 'actionsUpdated', listener, this.getActions(), [], removed, rejected );
 };
 
 /**
