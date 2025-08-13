@@ -390,7 +390,10 @@ Controller.prototype.onSelect = function ( selection ) {
 		( check ) => check.getHighlightSelections().some(
 			( highlight ) => highlight.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
 
-	this.focusAction( actions[ 0 ] || null, false );
+	if ( actions.length > 0 ) {
+		// Focus the last action returned, because it should be the most-specific
+		this.focusAction( actions[ actions.length - 1 ], false );
+	}
 };
 
 /**
