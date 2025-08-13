@@ -25,6 +25,7 @@
 	"editcheck-dialog-title": "قبل النشر",
 	"editcheck-copyvio-title": "محتوى ملصوق",
 	"editcheck-copyvio-description": "كقاعدة عامة، لا تنسخ نصًا من مصادر أخرى. عادة، يُشكل هذا انتهاكًا لحقوق الطبع والنشر وسرقة أدبية.",
+	"editcheck-copyvio-prompt": "هل كتبت هذا النص؟",
 	"editcheck-copyvio-action-keep": "نعم، احتفظ به",
 	"editcheck-copyvio-action-remove": "لا، أزله",
 	"editcheck-copyvio-keep-description": "يقدر المحررون الآخرون معرفة المزيد عن سبب احتفاظك بهذا النص الملصق.",

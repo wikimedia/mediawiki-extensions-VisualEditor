@@ -24,6 +24,7 @@
 	"editcheck-dialog-title": "Yayımlamadan əvvəl",
 	"editcheck-copyvio-title": "Yapışdırılmış məzmun",
 	"editcheck-copyvio-description": "Bir qayda olaraq, mətni digər mənbələrdən olduğu kimi kopyalamayın. Bunu etmək adətən həm müəllif hüquqlarının pozulması, həm də plagiat sayılır.",
+	"editcheck-copyvio-prompt": "Bu mətni siz özünüz yazmısınız?",
 	"editcheck-copyvio-action-keep": "Bəli, saxla",
 	"editcheck-copyvio-action-remove": "Xeyr, sil",
 	"editcheck-copyvio-keep-description": "Digər redaktorlar bu yapışdırılmış mətni saxlamaq səbəbiniz haqqında daha çox öyrənmək istəyə bilərlər.",

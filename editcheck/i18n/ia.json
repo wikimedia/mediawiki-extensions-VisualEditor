@@ -23,6 +23,7 @@
 	"editcheck-dialog-title": "Ante de publicar",
 	"editcheck-copyvio-title": "Contento collate",
 	"editcheck-copyvio-description": "Como regula general, non copia contento de altere fontes. Isto es generalmente un violation del derecto de autor e un plagiato.",
+	"editcheck-copyvio-prompt": "Ha tu scribite iste texto?",
 	"editcheck-copyvio-action-keep": "Si, mantener",
 	"editcheck-copyvio-action-remove": "No, remover",
 	"editcheck-copyvio-keep-description": "Altere redactores volerea cognoscer tu ration pro conservar iste texto collate.",
