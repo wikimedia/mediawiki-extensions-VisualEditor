@@ -33,6 +33,8 @@ ve.ui.EditCheckDialog.static.activeSurface = !OO.ui.isMobile();
 // Invisible title for accessibility
 ve.ui.EditCheckDialog.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
 
+ve.ui.EditCheckDialog.static.alwaysFocusAction = false;
+
 /* Methods */
 
 /**
@@ -131,21 +133,29 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
  * @param {boolean} lastActionRejected Last action was rejected/dismissed
  */
 ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
+	let currentAction;
+	if ( this.currentActions && this.currentOffset && actions.includes( this.currentActions[ this.currentOffset ] ) ) {
+		currentAction = this.currentActions[ this.currentOffset ];
+	}
 	this.currentActions = actions;
 	if ( actions.length === 0 ) {
 		this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
 		return;
 	}
 
-	// This just adjusts so the previously selected check remains selected:
-	let newOffset = Math.min( this.currentOffset, actions.length - 1 );
-	if ( newActions.length ) {
-		newOffset = actions.indexOf( newActions[ 0 ] );
-	}
-
 	this.refresh();
 
-	this.setCurrentOffset( newOffset, false );
+	if ( currentAction ) {
+		// This just adjusts so the previously selected check remains selected:
+		this.setCurrentOffset( actions.indexOf( currentAction ), false, true );
+	} else if ( newActions.length > 0 ) {
+		this.setCurrentOffset( actions.indexOf( newActions[ 0 ] ), false, false );
+	} else if ( this.constructor.static.alwaysFocusAction ) {
+		// This dialog always wants to have an action focused, so slip the focus onto
+		// a nearby action if the current one was removed.
+		const newOffset = Math.min( this.currentOffset, actions.length - 1 );
+		this.setCurrentOffset( newOffset, true, false );
+	}
 };
 
 /**

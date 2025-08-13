@@ -490,6 +490,11 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		newActions.forEach( ( action ) => {
 			ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-midedit' } );
 		} );
+
+		if ( newActions.length ) {
+			// Check if any new actions are relevant to our current selection:
+			this.onSelect( this.surface.getModel().getSelection() );
+		}
 	} );
 };
 

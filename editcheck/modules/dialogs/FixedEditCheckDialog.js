@@ -31,6 +31,8 @@ ve.ui.FixedEditCheckDialog.static.position = OO.ui.isMobile() ? 'below' : 'side'
 
 ve.ui.FixedEditCheckDialog.static.size = OO.ui.isMobile() ? 'full' : 'medium';
 
+ve.ui.FixedEditCheckDialog.static.alwaysFocusAction = true;
+
 /* Methods */
 
 /**
