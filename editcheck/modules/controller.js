@@ -238,14 +238,12 @@ Controller.prototype.refresh = function () {
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	// Get the existing actions for this listener
 	const existing = this.getActions( listener );
-	// Get existing actions for other listeners (excludes the existing actions for this listener)
-	const otherListenersExisting = this.getActions().filter( ( action ) => existing.every( ( existingAction ) => !action.equals( existingAction ) ) );
 
 	// Create all actions for this listener
 	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
 		.then( ( actionsFromListener ) => {
 			// Try to match each new action to an existing one (to preserve state)
-			let actions = actionsFromListener.map( ( action ) => existing.find( ( existingAction ) => action.equals( existingAction ) ) || action );
+			const actions = actionsFromListener.map( ( action ) => existing.find( ( existingAction ) => action.equals( existingAction ) ) || action );
 
 			let staleUpdated = false;
 			if ( !fromRefresh ) {
@@ -265,13 +263,10 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 
 			// If the actions list changed, update
 			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
-				// Add actions from other listeners and sort
-				actions = actions.concat( otherListenersExisting );
-				actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
 				// TODO: We need to consider a consistency check here as the document state may have changed since the
 				// action within the promise was created
 				// Notify listeners that actions have been updated
-				this.emit( 'actionsUpdated', listener, actions, newActions, discardedActions, false );
+				this.emit( 'actionsUpdated', listener, this.getActions(), newActions, discardedActions, false );
 			}
 			// Return the updated actions
 			return actions;
