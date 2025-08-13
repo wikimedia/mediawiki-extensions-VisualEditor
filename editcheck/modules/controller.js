@@ -345,7 +345,9 @@ Controller.prototype.getActions = function ( listener ) {
 		return this.actionsByListener[ listener ] || [];
 	}
 	const listeners = this.inBeforeSave ? [ 'onBeforeSave' ] : midEditListeners;
-	return [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
+	const actions = [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
+	actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
+	return actions;
 };
 
 /**
