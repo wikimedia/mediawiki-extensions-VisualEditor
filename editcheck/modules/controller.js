@@ -193,6 +193,11 @@ Controller.prototype.editChecksArePossible = function () {
  * @fires Controller#position
  */
 Controller.prototype.updatePositions = function () {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
+
 	this.drawSelections();
 
 	this.emit( 'position' );
