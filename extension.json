@@ -2657,6 +2657,7 @@
 			"modules/ve-mw/tests/dm/ve.dm.Document.test.js",
 			"lib/ve/tests/dm/ve.dm.HashValueStore.test.js",
 			"lib/ve/tests/dm/ve.dm.InternalList.test.js",
+			"lib/ve/tests/dm/ve.dm.InternalListNodeGroup.test.js",
 			"lib/ve/tests/dm/ve.dm.LinearData.test.js",
 			"lib/ve/tests/dm/ve.dm.Transaction.test.js",
 			"lib/ve/tests/dm/ve.dm.TransactionBuilder.test.js",
