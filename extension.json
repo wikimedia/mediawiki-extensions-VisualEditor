@@ -2383,7 +2383,7 @@
 		"MediaWiki\\Extension\\VisualEditor\\EditCheck\\": "editcheck/includes/"
 	},
 	"ConfigRegistry": {
-		"visualeditor": "GlobalVarConfig::newInstance"
+		"visualeditor": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"attributes": {
 		"EventLogging": {
