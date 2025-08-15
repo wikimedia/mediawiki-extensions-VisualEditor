@@ -376,7 +376,7 @@
 	"visualeditor-template-tools-definition.json": "null",
 	"visualeditor-templatesused-tool": "Templates used",
 	"visualeditor-title-error": "Invalid title.",
-	"visualeditor-toload": "The editor will now load. If you still see this message after a few seconds, please [$1 reload the page].",
+	"visualeditor-toload": "The editor will now load. If you still see this message after a few seconds, please [$1 refresh the page].",
 	"visualeditor-tooltip-non-breaking-space": "Non-breaking space",
 	"visualeditor-version-label": "Version",
 	"visualeditor-wikitext-progress": "Converting wikitext",
