@@ -24,6 +24,7 @@
 	"tag-editcheck-references-activated-description": "מערכת בדיקת עריכה חושבת שאולי נוספת הערת שוליים, וממשק המשתמש של זה הוצג",
 	"tag-editcheck-references-shown": "הוצגה מערכת בדיקת עריכה (הערות שוליים)",
 	"tag-editcheck-references-shown-description": "מערכת בדיקת העריכת חושבת שהייתה נחוצה הערת שוליים, וממשק המשתמש שלה הוצג",
+	"tag-editcheck-tone-description": "מערכת בדיקת עריכה זיהתה בעיה אפשרית בנימה של תוכן שנוסף",
 	"tag-editcheck-tone-shown": "הוצגה הודעה של בדיקת עריכה (נימה)",
 	"tag-editcheck-tone-shown-description": "מערכת בדיקת עריכה חושבת שאולי היה נחוץ תיקון בנימה של חלק מהתוכן והוצג ממשק המשתמש של זה",
 	"tag-visualeditor": "עריכה חזותית",
