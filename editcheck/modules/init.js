@@ -28,10 +28,22 @@ require( './editchecks/AddReferenceEditCheck.js' );
 if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
 } else {
-	// Load Tone check regardless for tagging
-	require( './editchecks/experimental/ToneCheck.js' );
-	// Disable by unregistering
-	mw.editcheck.editCheckFactory.unregister( mw.editcheck.ToneCheck );
+	const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
+	const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
+
+	if ( !abCheck || ( abCheck === 'tone' && abGroup === 'control' ) ) {
+		// Load Tone check regardless for tagging
+		require( './editchecks/experimental/ToneCheck.js' );
+		mw.editcheck.editCheckFactory.unregister( mw.editcheck.ToneCheck );
+	} else if ( abCheck && abGroup === 'test' ) {
+		mw.loader.using( 'ext.visualEditor.editCheck.experimental' ).then( () => {
+			[ 'tone', 'paste', 'convertReference', 'disambiguation', 'externalLink', 'textMatch' ].forEach( ( name ) => {
+				if ( name !== abCheck ) {
+					mw.editcheck.editCheckFactory.unregister( name );
+				}
+			} );
+		} );
+	}
 }
 
 const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];

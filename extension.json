@@ -147,7 +147,7 @@
 		},
 		"VisualEditorEditCheckABTest": {
 			"value": false,
-			"description": "A/B test Edit Check for all users. A/B bucket status will override VisualEditorEditCheck."
+			"description": "A/B test Edit Check for all users. A/B bucket status will override VisualEditorEditCheck. Value is a check name to test."
 		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
