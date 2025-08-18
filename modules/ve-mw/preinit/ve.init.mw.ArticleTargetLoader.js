@@ -36,7 +36,9 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
-	// A/B test enrollment for edit check (T384372)
+	// A/B test enrollment for edit check (T389231)
+	// Note: this happens here rather than inside editcheck so that the bucket will
+	// get logged for EditAttemptStep init events
 	if ( conf.editCheck && conf.editCheckABTest ) {
 		let inABTest;
 		if ( mw.user.isAnon() ) {
@@ -48,8 +50,12 @@
 		} else {
 			inABTest = mw.user.getId() % 2 === 1;
 		}
+		conf.editCheckABTestGroup = inABTest ? 'test' : 'control';
 		// Communicate the bucket to instrumentation:
-		mw.config.set( 'wgVisualEditorEditCheckABTestBucket', '2025-03-editcheck-multicheck-reference-' + ( inABTest ? 'test' : 'control' ) );
+		mw.config.set(
+			'wgVisualEditorEditCheckABTestBucket',
+			'2025-09-editcheck-' + conf.editCheckABTest + '-' + ( inABTest ? 'test' : 'control' )
+		);
 	}
 
 	const editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' ) || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
