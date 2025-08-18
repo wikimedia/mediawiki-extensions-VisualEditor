@@ -39,21 +39,17 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 		label: this.spec.getLabel(),
 		icon: 'puzzle'
 	} );
-	this.pageId = this.spec.templateData.pageId;
 
 	// Add favorite button
-	this.usingTemplateDiscovery = mw.templateData !== undefined && mw.templateData.FavoriteButton !== undefined;
-	if ( this.usingTemplateDiscovery ) {
-		this.favoritesStore = new mw.templateData.FavoritesStore();
-		this.favoriteButton = new mw.templateData.FavoriteButton( {
-			pageId: this.pageId,
-			favoritesStore: this.favoritesStore
+	const usingTemplateDiscovery = mw.templateData !== undefined && mw.templateData.FavoriteButton !== undefined;
+	if ( this.spec.templateData.pageId && usingTemplateDiscovery ) {
+		const favoriteButton = new mw.templateData.FavoriteButton( {
+			pageId: this.spec.templateData.pageId
 		} );
-
 		this.$element.prepend(
 			$( '<div>' )
 				.addClass( 've-ui-mwTemplatePage-favorite' )
-				.append( this.favoriteButton.$element )
+				.append( favoriteButton.$element )
 		);
 	}
 
