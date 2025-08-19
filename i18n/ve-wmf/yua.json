@@ -5,13 +5,14 @@
 			"Gutypc712",
 			"JhonRambo",
 			"Tunichmay",
-			"ValentinaTec"
+			"ValentinaTec",
+			"Coala23"
 		]
 	},
-	"tag-editcheck-newcontent-description": "EditCheck ku tuukultik u ts'áabal túumben contenido ti' le link tia'al u paginail",
+	"tag-editcheck-newcontent-description": "EditCheck ku tukultik ts'áab túumben kaambal tu' wáalal u link.",
 	"tag-editcheck-newreference-description": "junp'eel referencia san t'aabak tia'al le paginao'",
-	"tag-editcheck-references-description": "EditCheck ku tukultik jump'éel referencia je'el u páajtal u k'a'abéettal",
-	"tag-editcheck-references-activated-description": "EditCheck ku tukultik jump'éel referencia je'el u páajtal u k'a'abéettal, ka le UI bin u ye'esa'al",
+	"tag-editcheck-references-description": "EditCheck ku tukultik jump'éel éesajile' je'el u páajtal u k'a'ana'antale'",
+	"tag-editcheck-references-activated-description": "EditCheck ku tukultik junp'éel éesajile' je'el u páajtal u k'a'abéettal, yéetel chikpají le máax meyajtiko'",
 	"tag-visualeditor-description": "Edición beeta'an yéetel le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]].",
 	"tag-visualeditor-needcheck-description": "Edición beeta'an yéetel le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]] tu'ux le yaan detectó le wikitexto posiblemente yaantal cambios ma' previstos.",
 	"tag-visualeditor-wikitext": "editor de código 2017",
