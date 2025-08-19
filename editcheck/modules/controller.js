@@ -107,6 +107,7 @@ Controller.prototype.setup = function () {
 			closing: 'onSidebarDialogsOpeningOrClosing'
 		} );
 
+		this.on( 'branchNodeChange', this.onBranchNodeChange, null, this );
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
@@ -368,7 +369,7 @@ Controller.prototype.onSelect = function ( selection ) {
 	}
 
 	if ( !this.inBeforeSave && this.updateCurrentBranchNodeFromSelection( selection ) ) {
-		this.updateForListener( 'onBranchNodeChange' );
+		this.emit( 'branchNodeChange', this.branchNode );
 	}
 
 	if ( OO.ui.isMobile() ) {
@@ -434,6 +435,19 @@ Controller.prototype.onDocumentChange = function () {
 	}
 	if ( !this.inBeforeSave ) {
 		this.updateForListener( 'onDocumentChange' );
+	}
+};
+
+/**
+ * Handle changes to the selection moving between branch nodes
+ */
+Controller.prototype.onBranchNodeChange = function () {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
+	if ( !this.inBeforeSave ) {
+		this.updateForListener( 'onBranchNodeChange' );
 	}
 };
 

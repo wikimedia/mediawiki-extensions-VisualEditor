@@ -4,6 +4,8 @@
  *   2: also load experimental checks
  */
 const ecenable = new URL( location.href ).searchParams.get( 'ecenable' );
+const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
+const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
 
 mw.editcheck = {
 	config: require( './config.json' ),
@@ -28,9 +30,6 @@ require( './editchecks/AddReferenceEditCheck.js' );
 if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
 } else {
-	const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
-	const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
-
 	if ( !abCheck || ( abCheck === 'tone' && abGroup === 'control' ) ) {
 		// Load Tone check regardless for tagging
 		require( './editchecks/experimental/ToneCheck.js' );
@@ -147,5 +146,22 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		}
 		const controller = new Controller( target );
 		controller.setup();
+
+		// Temporary logging for T394952
+		if ( abCheck === 'tone' && abGroup === 'control' ) {
+			const checkForTone = function ( listener ) {
+				mw.editcheck.hasFailingToneCheck( controller.surface.getModel() ).then( ( result ) => {
+					if ( result ) {
+						ve.track( 'activity.editCheck-tone', { action: 'check-control-' + listener } );
+					}
+				} );
+			};
+			controller.on( 'branchNodeChange', () => {
+				checkForTone( 'branchNodeChange' );
+			} );
+			controller.on( 'onBeforeSave', () => {
+				checkForTone( 'onBeforeSave' );
+			} );
+		}
 	} );
 }
