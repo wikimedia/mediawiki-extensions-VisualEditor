@@ -3,7 +3,8 @@
 		"authors": [
 			"JeffreyKim",
 			"Ktchankt",
-			"Winston Sung"
+			"Winston Sung",
+			"Yueman"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "搵唔到嗰個密匙嘅緩存序列化",
@@ -18,7 +19,7 @@
 	"apihelp-visualeditor-param-oldid": "所用嘅修訂版本號（默認設成上一個版本）",
 	"apihelp-visualeditor-param-paction": "要操嘅作",
 	"apihelp-visualeditor-param-page": "要喺上面執行操作嘅頁面。",
-	"apihelp-visualeditor-param-preload": "如果擷取嘅頁面仲未有內容，就要用嘅頁面。",
+	"apihelp-visualeditor-param-preload": "如果攞咗嘅頁面仲未有內容，就要用嘅頁面。",
 	"apihelp-visualeditor-param-preloadparams": "如果有，要將參數替換入預載頁面。",
 	"apihelp-visualeditor-param-pst": "喺將轉換維基文字傳送去Parsoid之前預先儲存佢（paction = 解析片段）。",
 	"apihelp-visualeditor-param-section": "要採取行動嘅部分。",
