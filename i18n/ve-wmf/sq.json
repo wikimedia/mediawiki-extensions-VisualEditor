@@ -5,10 +5,11 @@
 			"Besnik b",
 			"Euriditi",
 			"Kosovastar",
-			"Liridon"
+			"Liridon",
+			"Xhulianoo"
 		]
 	},
-	"tag-visualeditor": "Përpunim pamor",
+	"tag-visualeditor": "Redaktim pamor",
 	"tag-visualeditor-description": "Përpunim i bërë duke përdorur [[{{MediaWiki:visualeditor-descriptionpagelink}}|përpunuesin pamor]]",
 	"tag-visualeditor-needcheck": "Përpunim pamor: Kontrollojeni",
 	"tag-visualeditor-needcheck-description": "Përpunim i bërë duke përdorur [[{{MediaWiki:visualeditor-descriptionpagelink}}|përpunuesin pamor]] kur sistemi pikasi tekst wiki sipas gjasash me ndryshime të pasynuara.",
