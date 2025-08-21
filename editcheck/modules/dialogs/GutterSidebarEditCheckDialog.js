@@ -83,8 +83,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 /**
  * @inheritdoc
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( inBeforeSave, actions ) {
-	if ( inBeforeSave !== this.inBeforeSave ) {
+ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( listener, actions ) {
+	if ( ( this.inBeforeSave && listener !== 'onBeforeSave' ) || ( !this.inBeforeSave && listener === 'onBeforeSave' ) ) {
 		return;
 	}
 	this.renderActions( actions );
