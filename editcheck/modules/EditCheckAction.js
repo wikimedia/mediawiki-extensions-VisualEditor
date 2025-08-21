@@ -223,8 +223,11 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other ) {
  * @param {boolean} stale
  */
 mw.editcheck.EditCheckAction.prototype.setStale = function ( stale ) {
-	this.setMode( stale ? 'revising' : '' );
+	const previousState = this.isStale();
 	this.originalText = stale ? null : this.fragments.map( ( fragment ) => fragment.getText() );
+	if ( previousState !== this.isStale() ) {
+		this.emit( 'stale', this.isStale() );
+	}
 };
 
 /**

@@ -144,10 +144,17 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		} );
 	} else if ( choice === 'edit' && surface ) {
 		action.setStale( true );
+		action.setMode( 'revising' );
 		// Once revising has started the user will either make enough of an
 		// edit that this action is discarded, or will `act` again and this
 		// event-handler will be removed above:
 		action.once( 'discard', this.notifySuccess );
+		action.once( 'stale', () => {
+			// Clean up the mode after we're done; any other act or anything
+			// that can trigger an update should un-stale the action.
+			action.setMode( '' );
+			action.gutterQuickAction = null;
+		} );
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
