@@ -75,6 +75,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 	return process.first( () => {
 		this.controller.disconnect( this );
 
+		this.widgets.forEach( ( widget ) => widget.teardown() );
+
 		this.surface = null;
 		this.controller = null;
 	}, this );
@@ -141,7 +143,6 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 	const oldWidgets = this.widgets || [];
 	this.widgets = [];
 	sections.forEach( ( section ) => {
-		const action = section.actions[ 0 ];
 		let widget;
 		const index = oldWidgets.findIndex(
 			( owidget ) => owidget.actions.length === section.actions.length &&
@@ -150,73 +151,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 		if ( index !== -1 ) {
 			widget = oldWidgets.splice( index, 1 )[ 0 ];
 		} else {
-			const icon = new OO.ui.IconWidget( {
-				icon: mw.editcheck.EditCheckActionWidget.static.iconMap[ action.getType() ] || 'notice'
-			} );
-			const iconLabel = new OO.ui.LabelWidget( {
-				label: section.actions.length.toString(),
-				invisibleLabel: section.actions.length === 1
-			} );
-			widget = {
+			widget = new mw.editcheck.EditCheckGutterSectionWidget( {
 				actions: section.actions,
-				icon: icon,
-				iconLabel: iconLabel,
-				$element: $( '<div>' )
-					.addClass( 've-ui-editCheck-gutter-action' )
-					// The following classes are used here:
-					// * ve-ui-editCheck-gutter-action-error
-					// * ve-ui-editCheck-gutter-action-warning
-					// * ve-ui-editCheck-gutter-action-notice
-					// * ve-ui-editCheck-gutter-action-success
-					.addClass( 've-ui-editCheck-gutter-action-' + action.getType() )
-					.append( icon.$element, iconLabel.$element )
-					.on( 'click', () => {
-						// Should we trigger the popup? By default yes, unless
-						// we're in the onBeforeSave mode where we can assume
-						// something else is handling it.
-						if ( !this.inBeforeSave ) {
-							// mid-edit
-							const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
-							if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
-								const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-								windowAction.open(
-									'fixedEditCheckDialog',
-									{
-										controller: this.controller,
-										inBeforeSave: false,
-										actions: section.actions,
-										footer: section.actions.length !== 1,
-										// just filter out any discarded actions from the allowed set
-										updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
-									}
-								);
-							} else if ( section.actions.every( ( sact ) => currentWindow.hasAction( sact ) ) ) {
-								// Second click: defocus and close
-								return this.controller.closeDialog();
-							} else {
-								currentWindow.showActions( section.actions, [ action ] );
-								currentWindow.footer.toggle( section.actions.length !== 1 );
-							}
-						}
-						this.controller.focusAction( action, true );
-					} )
-			};
+				controller: this.controller
+			} );
 			this.$body.append( widget.$element );
 		}
-		if ( widget.actions.includes( this.controller.focusedAction ) ) {
-			widget.icon.setFlags( action.getType() );
-		} else {
-			widget.icon.clearFlags();
-		}
-		widget.$element.css( {
-			top: section.rect.top + 2,
-			height: section.rect.height
-		} ).toggleClass( 've-ui-editCheck-gutter-action-inactive', !section.actions.includes( this.controller.focusedAction ) );
-
+		widget.setPosition( section.rect );
 		this.widgets.push( widget );
 	} );
 
-	oldWidgets.forEach( ( widget ) => widget.$element.remove() );
+	oldWidgets.forEach( ( widget ) => widget.teardown() );
 
 	// surfaceView.$element.after( this.$mobile );
 };

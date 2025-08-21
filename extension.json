@@ -627,6 +627,7 @@
 				"editcheck/modules/EditCheckFactory.js",
 				"editcheck/modules/EditCheckAction.js",
 				"editcheck/modules/EditCheckActionWidget.js",
+				"editcheck/modules/EditCheckGutterSectionWidget.js",
 				"editcheck/modules/dialogs/EditCheckDialog.js",
 				"editcheck/modules/dialogs/FixedEditCheckDialog.js",
 				"editcheck/modules/dialogs/SidebarEditCheckDialog.js",
