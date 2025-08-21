@@ -454,6 +454,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		if ( this.focusedAction && discardedActions.includes( this.focusedAction ) ) {
 			this.focusedAction = null;
 		}
+		this.updatePositionsDebounced();
 	}
 
 	// Let actions know they've been discarded
@@ -723,6 +724,7 @@ Controller.prototype.drawSelections = function () {
 	actions.forEach( ( action ) => {
 		const type = action.getType();
 		const isActive = action === this.focusedAction;
+		const isPending = action.isTagged( 'pending' );
 		action.getHighlightSelections().forEach( ( selection ) => {
 			if ( !isActive && !showGutter ) {
 				// Optimization: When showGutter is false inactive selections currently render nothing
@@ -736,6 +738,9 @@ Controller.prototype.drawSelections = function () {
 				// * ve-ce-surface-selection-editCheck-notice
 				// * ve-ce-surface-selection-editCheck-success
 				selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-' + type );
+				if ( isPending ) {
+					selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-pending' );
+				}
 			}
 		} );
 	} );

@@ -353,6 +353,19 @@
 			&-inactive {
 				border-left: 2px solid @border-color-base;
 			}
+
+			&-quickaction {
+				border-left: 0;
+
+				.oo-ui-buttonElement-button {
+					background: @background-color-progressive;
+					margin-top: -6px;
+				}
+
+				.oo-ui-widget-disabled .oo-ui-buttonElement-button {
+					background: @background-color-disabled;
+				}
+			}
 		}
 	}
 }
@@ -445,6 +458,18 @@
 					bottom: 0;
 					border-right: @triangleSize solid @color;
 					border-top: @triangleSize solid transparent;
+				}
+			}
+
+			&-editCheck-pending .ve-ce-surface-selection-bounding {
+				border-color: @color-disabled;
+
+				&::before {
+					border-left-color: @color-disabled;
+				}
+
+				&::after {
+					border-right-color: @color-disabled;
 				}
 			}
 		}

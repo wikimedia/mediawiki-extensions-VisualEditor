@@ -143,6 +143,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
+		action.gutterQuickAction = 'recheck';
 		action.setStale( true );
 		action.setMode( 'revising' );
 		// Once revising has started the user will either make enough of an
@@ -188,10 +189,17 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			/* Silently fail if it takes too long */
 			recheckDeferred.resolve();
 		}, 3000 );
+
+		action.tag( 'pending' );
+
 		// Caller requires a Deferred as it then calls '.always()'
 		// eslint-disable-next-line no-jquery/no-when
 		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
+			action.gutterQuickAction = null;
 			action.setStale( false );
+			action.untag( 'pending' );
+
+			progress.$element.remove();
 			if ( !result ) {
 				this.notifySuccess();
 				this.controller.removeAction( 'onBranchNodeChange', action, false );
