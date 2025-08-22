@@ -369,6 +369,42 @@ mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
 };
 
 /**
+ * Untag a check action
+ *
+ * TODO: This is asymmetrical. Do we want to split this into two functions, or
+ * unify isTaggedRange/isTaggedId into one function?
+ *
+ * @param {string} tag
+ * @param {mw.editCheck.EditCheckAction} action
+ * @return {boolean} Whether anything was untagged
+ */
+mw.editcheck.BaseEditCheck.prototype.untag = function ( tag, action ) {
+	const name = this.constructor.static.name;
+	if ( action.id ) {
+		const taggedIds = this.controller.taggedIds;
+		if ( taggedIds[ name ] && taggedIds[ name ][ tag ] ) {
+			taggedIds[ name ][ tag ].delete( action.id );
+			return true;
+		}
+	} else {
+		const taggedFragments = this.controller.taggedFragments;
+		if ( taggedFragments[ name ] && taggedFragments[ name ][ tag ] ) {
+			action.fragments.forEach( ( fragment ) => {
+				const selection = fragment.getSelection();
+				const index = taggedFragments[ name ][ tag ].findIndex(
+					( taggedFragment ) => taggedFragment.getSelection().equals( selection )
+				);
+				if ( index !== -1 ) {
+					taggedFragments[ name ][ tag ].splice( index, 1 );
+					return true;
+				}
+			} );
+		}
+	}
+	return false;
+};
+
+/**
  * Check if this type of check has been dismissed covering a specific range
  *
  * @param {ve.Range} range

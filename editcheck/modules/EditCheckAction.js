@@ -248,3 +248,36 @@ mw.editcheck.EditCheckAction.prototype.isStale = function () {
 mw.editcheck.EditCheckAction.prototype.discarded = function () {
 	this.emit( 'discard' );
 };
+
+/**
+ * Tag this action
+ *
+ * @param {string} tag
+ */
+mw.editcheck.EditCheckAction.prototype.tag = function ( tag ) {
+	this.check.tag( tag, this );
+};
+
+/**
+ * Untag this action
+ *
+ * @param {string} tag
+ * @return {boolean} Whether anything was untagged
+ */
+mw.editcheck.EditCheckAction.prototype.untag = function ( tag ) {
+	return this.check.untag( tag, this );
+};
+
+/**
+ * Is this action tagged?
+ *
+ * @param {string} tag
+ * @return {boolean}
+ */
+mw.editcheck.EditCheckAction.prototype.isTagged = function ( tag ) {
+	if ( this.id ) {
+		return this.check.isTaggedId( tag, this.id );
+	} else {
+		return this.fragments.some( ( fragment ) => this.check.isTaggedRange( tag, fragment.getSelection().getRange() ) );
+	}
+};
