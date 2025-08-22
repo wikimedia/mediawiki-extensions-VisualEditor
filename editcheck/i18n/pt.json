@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BraunOBruno",
 			"Hamilton Abreu",
 			"Mansil alfalb"
 		]
@@ -24,6 +25,8 @@
 	"editcheck-dialog-title": "Antes de publicar",
 	"editcheck-copyvio-title": "Conteúdo colado",
 	"editcheck-copyvio-prompt": "Você escreveu este texto?",
+	"editcheck-tone-description": "Outros utilizadores costumam revisar esse tipo de redação, dizendo que o tom é desequilibrado. [$1 Saiba mais]",
+	"editcheck-tone-footer": "Identificado usando um [$1 modelo BERT]",
 	"editcheck-tone-reject-uncertain": "Eu não tenho a certeza de como rever o tom",
 	"editcheck-tone-reject-other": "Outros",
 	"editcheck-tone-thank": "Obrigado por rever o tom!",

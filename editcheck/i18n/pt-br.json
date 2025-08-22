@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BraunOBruno",
 			"Eduardoaddad",
 			"Fúlvio"
 		]
@@ -19,6 +20,7 @@
 	"editcheck-dialog-title": "Antes de publicar",
 	"editcheck-copyvio-title": "Conteúdo promovido",
 	"editcheck-copyvio-description": "Como regra geral, não copie textos de outras fontes. Isso geralmente constitui uma violação de direitos autorais e plágio.",
+	"editcheck-tone-description": "Outros usuários frequentemente revisam esse tipo de redação, dizendo que o tom é desequilibrado. [$1 Saiba mais]",
 	"editcheck-review-title": "Revisar mudanças",
 	"tag-editcheck-reference-decline-common-knowledge": "Verificação de edição (referências) recusada (conhecimento comum)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "A referência do EditCheck foi recusada como conhecimento comum",
