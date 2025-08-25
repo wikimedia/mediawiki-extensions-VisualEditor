@@ -14,7 +14,6 @@
 	"tag-editcheck-tone-description": "EditCheck ha detegite un problema potential con le tono de certe contento addite",
 	"tag-editcheck-tone-shown": "Verification de modification (tono) monstrate",
 	"tag-editcheck-tone-shown-description": "EditCheck pensa que un adjustamento del tono in alcun contento poterea haber essite necessari, e le interfacie de usator ha essite monstrate",
-	"tag-editcheck-tone-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#Tone_check",
 	"tag-visualeditor": "Modification visual",
 	"tag-visualeditor-description": "Modification facite con le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
 	"tag-visualeditor-needcheck": "Editor visual: a verificar",

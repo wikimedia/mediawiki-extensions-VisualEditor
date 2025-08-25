@@ -18,7 +18,6 @@
 	"tag-editcheck-tone-description": "EditCheck пронајде потенцијален проблем со тонот во додадената содржина",
 	"tag-editcheck-tone-shown": "Прикажана проверката на уредувања (тон)",
 	"tag-editcheck-tone-shown-description": "Проверката на уредувања смета дека може да е потребно прилагодување на тонот во некои содржини, и бил прикажан корисничкиот посредник",
-	"tag-editcheck-tone-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#Tone_check",
 	"tag-visualeditor": "Нагледно уредување",
 	"tag-visualeditor-description": "Уредување направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|нагледниот уредник]]",
 	"tag-visualeditor-needcheck": "Нагледен уредник: Проверка",

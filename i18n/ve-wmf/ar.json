@@ -30,7 +30,6 @@
 	"tag-editcheck-tone-description": "اكتشف EditCheck وجود مشكلة محتملة في نغمة بعض المحتوى المضاف",
 	"tag-editcheck-tone-shown": "تم عرض علامة التحرير (النغمة)",
 	"tag-editcheck-tone-shown-description": "يعتقد EditCheck أنه قد يكون من الضروري إجراء تعديل على النغمة في بعض المحتوى، وقد تم عرض واجهة المستخدم",
-	"tag-editcheck-tone-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#Tone_check",
 	"tag-visualeditor": "تحرير مرئي",
 	"tag-visualeditor-description": "تم التعديل باستخدام [[{{MediaWiki:visualeditor-descriptionpagelink}}|المحرر المرئي]]",
 	"tag-visualeditor-needcheck": "المحرر المرئي: تحقق",

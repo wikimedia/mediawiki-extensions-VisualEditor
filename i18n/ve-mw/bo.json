@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Phurbutsering",
+			"Tenzin Thoesam",
 			"ཁ་བཏགས་ནག་པོ"
 		]
 	},
 	"tooltip-ca-ve-edit": "དྲ་ངོས་དེ་རྩོམ་སྒྲིག་བྱ་བ།",
+	"visualeditor-ca-editsource-section": "མ་ངོས་ཞུ་དག",
 	"visualeditor-dialog-meta-languages-readonlynote": "འདི་དང་སྐད་ཡིག་གཞན་གྱི་ཝེ་ཁེ་དང་སྦྲེལ་མཐུད་བྱས་ཡོད་པའི་ཤོགངོས་གི་ཐོ་གཞུང། ད་ལྟའི་ཆར་ཡོངས་ཁུངས་ལམ་འམ་ཝེ་ཁེ་གྲངས་མཛོང་ནང་རྩོམ་སྒྲིག་བྱེད་ཆོག།"
 }
