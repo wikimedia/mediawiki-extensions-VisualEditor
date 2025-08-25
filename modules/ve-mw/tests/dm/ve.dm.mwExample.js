@@ -2190,6 +2190,22 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'display title': {
+		body: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"}}}]}\'></span>',
+		data: [
+			{
+				type: 'mwDisplayTitle',
+				attributes: {
+					content: 'foo'
+				}
+			},
+			{ type: '/mwDisplayTitle' },
+			{ type: 'paragraph', internal: { generated: 'empty' } },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
 	'thumb image': {
 		body: ve.dm.mwExample.MWBlockImage.html,
 		data: [

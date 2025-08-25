@@ -28,12 +28,23 @@ ve.dm.MWDisplayTitleMetaItem.static.name = 'mwDisplayTitle';
 
 ve.dm.MWDisplayTitleMetaItem.static.group = 'mwDisplayTitle';
 
-ve.dm.MWDisplayTitleMetaItem.static.matchTagNames = [ 'meta' ];
+ve.dm.MWDisplayTitleMetaItem.static.matchTagNames = [ 'span' ];
 
-ve.dm.MWDisplayTitleMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/displaytitle' ];
+ve.dm.MWDisplayTitleMetaItem.static.matchRdfaTypes = [ 'mw:Transclusion' ];
+
+ve.dm.MWDisplayTitleMetaItem.static.matchFunction = function ( domElement ) {
+	const mwDataJSON = domElement.getAttribute( 'data-mw' ),
+		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
+	return ve.getProp( mwData, 'parts', '0', 'template', 'target', 'function' ) === 'displaytitle' ||
+		ve.getProp( mwData, 'parts', '0', 'parserfunction', 'target', 'key' ) === 'displaytitle';
+};
 
 ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
-	const content = domElements[ 0 ].getAttribute( 'content' );
+	const mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
+		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
+	const wt = ( ve.getProp( mwData, 'parts', '0', 'template', 'target', 'wt' ) || '' ) ||
+    ve.getProp( mwData, 'parts', '0', 'parserfunction', 'params', '1', 'wt' );
+	const content = wt.replace( /^DISPLAYTITLE:/i, '' );
 	return {
 		type: this.name,
 		attributes: {
@@ -43,10 +54,26 @@ ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
 };
 
 ve.dm.MWDisplayTitleMetaItem.static.toDomElements = function ( dataElement, doc ) {
-	const meta = doc.createElement( 'meta' );
-	meta.setAttribute( 'property', 'mw:PageProp/displaytitle' );
-	meta.setAttribute( 'content', dataElement.attributes.content );
-	return [ meta ];
+
+	const prefix = 'DISPLAYTITLE',
+		displayTitle = dataElement.attributes.content,
+		mwData = {
+			parts: [
+				{
+					template: {
+						target: {
+							wt: prefix + ':' + displayTitle,
+							function: 'displaytitle'
+						}
+					}
+				}
+			]
+		};
+
+	const span = doc.createElement( 'span' );
+	span.setAttribute( 'typeof', 'mw:Transclusion' );
+	span.setAttribute( 'data-mw', JSON.stringify( mwData ) );
+	return [ span ];
 };
 
 /* Registration */
