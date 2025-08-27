@@ -18,10 +18,16 @@
 			"Themasterriot",
 			"YoViajo",
 			"아라",
-			"JaimeDes"
+			"JaimeDes",
+			"Teen12"
 		]
 	},
+	"tag-editcheck-newcontent-description": "Bix a beel",
 	"tag-editcheck-newreference-description": "Se agregó una referencia a la página.",
+	"tag-editcheck-references-description": "EditCheeck a wojel waaj je'el u beeyta'al u yaantal Google ti' jump'èel referenciae'",
+	"tag-editcheck-references-activated": " Verificarta'ab le edicióna'.",
+	"tag-editcheck-references-activated-description": "EdiChek a wojel waaj je'el u beeyta'al jump'èel referencia waaj tu yesaj u yochel de usuarioa'",
+	"tag-editcheck-references-shown": "Ku ye'esik waaj máax beet le edicióna'",
 	"tag-visualeditor": "Edición visual",
 	"tag-visualeditor-description": "Modificación hecha con el [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
 	"tag-visualeditor-needcheck": "Edición visual: comprobar",
