@@ -47,7 +47,7 @@
 	"editcheck-tone-reject-appropriate": "Answer option for tone check in response to {{msg-mw|editcheck-reject-description}}",
 	"editcheck-tone-reject-uncertain": "Answer option for tone check in response to {{msg-mw|editcheck-reject-description}}",
 	"editcheck-tone-reject-other": "Answer option for tone check in response to {{msg-mw|editcheck-reject-description}}",
-	"editcheck-tone-thank": "Toast pop up to thank the user for their revisions if they resolve the check after clicking {{msg-mw|editcheck-dialog-action-revise}}",
+	"editcheck-tone-thank": "Toast pop up to thank the user for considering the tone, whether they dismissed the check or revised the text",
 	"editcheck-reject-description": "Other editors would value learning more about your decision to skip this check.",
 	"editcheck-review-title": "Title shown in the sidebar / drawer while checks are displayed",
 	"tag-editcheck-reference-decline-common-knowledge": "Short description of the editcheck-reference-decline-common-knowledge tag.\n\nTag added when a user declines to add a suggested reference and selects the \"common knowledge\" reason.\n\nSee also:\n* {{msg-mw|editcheck-dialog-addref-reject-common-knowledge}}",

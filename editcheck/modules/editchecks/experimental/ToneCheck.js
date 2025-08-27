@@ -2,7 +2,7 @@ mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Parent constructor
 	mw.editcheck.ToneCheck.super.apply( this, arguments );
 
-	this.notifySuccess = () => {
+	this.showThankToast = () => {
 		mw.notify( ve.msg( 'editcheck-tone-thank' ), { type: 'success' } );
 	};
 };
@@ -120,7 +120,7 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 };
 
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
-	action.off( 'discard', this.notifySuccess );
+	action.off( 'discard', this.showThankToast );
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
 		return action.widget.showFeedback( {
@@ -140,6 +140,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			]
 		} ).then( ( reason ) => {
 			this.dismiss( action );
+			this.showThankToast();
 			return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
@@ -149,7 +150,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// Once revising has started the user will either make enough of an
 		// edit that this action is discarded, or will `act` again and this
 		// event-handler will be removed above:
-		action.once( 'discard', this.notifySuccess );
+		action.once( 'discard', this.showThankToast );
 		action.once( 'stale', () => {
 			// Clean up the mode after we're done; any other act or anything
 			// that can trigger an update should un-stale the action.
@@ -201,7 +202,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 
 			progress.$element.remove();
 			if ( !result ) {
-				this.notifySuccess();
+				this.showThankToast();
 				this.controller.removeAction( 'onBranchNodeChange', action, false );
 			}
 		} );
