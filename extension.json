@@ -366,7 +366,7 @@
 				"mediawiki.cookie",
 				"mediawiki.api",
 				"ext.visualEditor.supportCheck",
-				"ext.visualEditor.core.utils",
+				"ext.visualEditor.track",
 				"ext.visualEditor.progressBarWidget",
 				"ext.visualEditor.tempWikitextEditorWidget"
 			],
@@ -385,7 +385,7 @@
 				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetSaver.js"
 			],
 			"dependencies": [
-				"ext.visualEditor.core.utils",
+				"ext.visualEditor.track",
 				"ext.visualEditor.core.utils.parsing",
 				"mediawiki.jqueryMsg",
 				"jquery.textSelection",
@@ -617,6 +617,11 @@
 			],
 			"group": "visualEditorA"
 		},
+		"ext.visualEditor.track": {
+			"group": "visualEditorA",
+			"scripts": "modules/ve-mw/ve.track.js",
+			"dependencies": "ext.visualEditor.ve"
+		},
 		"ext.visualEditor.editCheck": {
 			"group": "visualEditorA",
 			"packageFiles": [
@@ -703,11 +708,9 @@
 				"visualEditor.core.utils"
 			],
 			"group": "visualEditorA",
-			"scripts": [
-				"modules/ve-mw/ve.track.js"
-			],
 			"dependencies": [
 				"ext.visualEditor.ve",
+				"ext.visualEditor.track",
 				"oojs-ui"
 			]
 		},
@@ -765,7 +768,7 @@
 				"mediawiki.user",
 				"mediawiki.util",
 				"ext.visualEditor.base",
-				"ext.visualEditor.core.utils",
+				"ext.visualEditor.track",
 				"ext.visualEditor.targetLoader",
 				"mediawiki.language.names",
 				"jquery.uls.data"
