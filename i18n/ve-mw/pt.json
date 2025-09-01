@@ -25,7 +25,8 @@
 			"TMg",
 			"Toliño",
 			"Vitorvicentevalente",
-			"Mbs262"
+			"Mbs262",
+			"Albertoleoncio"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -121,7 +122,7 @@
 	"visualeditor-dialog-meta-languages-label": "Idiomas",
 	"visualeditor-dialog-meta-languages-link-label": "Página ligada",
 	"visualeditor-dialog-meta-languages-name-label": "Idioma",
-	"visualeditor-dialog-meta-languages-readonlynote": "Esta é uma lista de páginas noutros idiomas que estão interligadas a esta. Por enquanto, só pode ser editada no modo de código ou na Wikidados.",
+	"visualeditor-dialog-meta-languages-readonlynote": "Esta é uma lista de páginas noutras línguas que estão hiperligadas a esta. Por enquanto, só pode ser editada no modo de código-fonte ou na wiki Wikidata.",
 	"visualeditor-dialog-meta-languages-section": "Idiomas",
 	"visualeditor-dialog-meta-settings-displaytitle": "Mostrar o título",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Pode substituir o modo como o título desta página é apresentado através da definição de uma etiqueta diferente a ser mostrada.",
