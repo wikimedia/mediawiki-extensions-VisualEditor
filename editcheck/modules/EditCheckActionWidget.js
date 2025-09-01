@@ -189,6 +189,9 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 
 	ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
 	return deferred.promise().always( () => {
+		// HACK: This causes the answerRadioSelect.onDocumentKeyDownHandler to be unbound
+		// Otherwise, it'll swallow certain key events (arrow keys, enter, pagedown/up) forever.
+		answerRadioSelect.$element.blur();
 		form.$element.remove();
 		this.feedbackDeferred = null;
 	} );
