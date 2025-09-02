@@ -19,13 +19,14 @@
 			"YoViajo",
 			"아라",
 			"JaimeDes",
-			"Teen12"
+			"Teen12",
+			"Virum Mundi"
 		]
 	},
-	"tag-editcheck-newcontent-description": "Bix a beel",
+	"tag-editcheck-newcontent-description": "EditCheck cree que se ha añadido nuevo contenido a la página",
 	"tag-editcheck-newreference-description": "Se agregó una referencia a la página.",
-	"tag-editcheck-references-description": "EditCheeck a wojel waaj je'el u beeyta'al u yaantal Google ti' jump'èel referenciae'",
-	"tag-editcheck-references-activated-description": "EdiChek a wojel waaj je'el u beeyta'al jump'èel referencia waaj tu yesaj u yochel de usuarioa'",
+	"tag-editcheck-references-description": "EditCheck cree que podría haber faltado una referencia",
+	"tag-editcheck-references-activated-description": "EditCheck cree que una referencia podría ser necesaria, se ha mostrado la interfaz de usuario",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edición visual]]",
 	"tag-visualeditor-description": "Modificación hecha con el [[{{MediaWiki:visualeditor-descriptionpagelink}}|Editor visual]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Edición visual: comprobar]]",
