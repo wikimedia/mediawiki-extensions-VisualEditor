@@ -23,6 +23,7 @@
 	"editcheck-dialog-title": "Перед публікацією",
 	"editcheck-copyvio-title": "Вставлений вміст",
 	"editcheck-copyvio-description": "Як правило, не копіюйте текст з інших джерел. Зазвичай це є порушенням авторських прав та плагіатом.",
+	"editcheck-copyvio-prompt": "Ви самі написали цей текст?",
 	"editcheck-copyvio-action-keep": "Так, залишити це.",
 	"editcheck-copyvio-action-remove": "Ні, прибрати це",
 	"editcheck-copyvio-keep-description": "Іншим редакторам буде цінно дізнатися, чому ви зберігаєте цей вставлений текст.",
