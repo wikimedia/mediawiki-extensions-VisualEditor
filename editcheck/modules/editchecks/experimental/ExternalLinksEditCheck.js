@@ -23,7 +23,7 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	},
 	{
 		action: 'dismiss',
-		label: ve.msg( 'editcheck-dialog-action-no' ),
+		label: OO.ui.deferMsg( 'editcheck-dialog-action-no' ),
 		icon: 'check'
 	}
 ];

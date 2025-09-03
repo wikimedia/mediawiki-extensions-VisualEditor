@@ -7,9 +7,9 @@ OO.inheritClass( mw.editcheck.AddReferenceEditCheck, mw.editcheck.BaseEditCheck 
 
 mw.editcheck.AddReferenceEditCheck.static.name = 'addReference';
 
-mw.editcheck.AddReferenceEditCheck.static.title = ve.msg( 'editcheck-dialog-addref-title' );
+mw.editcheck.AddReferenceEditCheck.static.title = OO.ui.deferMsg( 'editcheck-dialog-addref-title' );
 
-mw.editcheck.AddReferenceEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
+mw.editcheck.AddReferenceEditCheck.static.description = OO.ui.deferMsg( 'editcheck-dialog-addref-description' );
 
 mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	minimumCharacters: 50,

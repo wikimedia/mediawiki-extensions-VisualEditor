@@ -5,18 +5,18 @@ mw.editcheck.ConvertReferenceEditCheck = function MWConvertReferenceEditCheck() 
 
 OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCheck );
 
-mw.editcheck.ConvertReferenceEditCheck.static.title = ve.msg( 'citoid-referencecontextitem-convert-button' );
+mw.editcheck.ConvertReferenceEditCheck.static.title = OO.ui.deferMsg( 'citoid-referencecontextitem-convert-button' );
 
 mw.editcheck.ConvertReferenceEditCheck.static.name = 'convertReference';
 
 mw.editcheck.ConvertReferenceEditCheck.static.choices = [
 	{
 		action: 'convert',
-		label: ve.msg( 'citoid-referencecontextitem-convert-button' )
+		label: OO.ui.deferMsg( 'citoid-referencecontextitem-convert-button' )
 	},
 	{
 		action: 'dismiss',
-		label: ve.msg( 'ooui-dialog-process-dismiss' )
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 

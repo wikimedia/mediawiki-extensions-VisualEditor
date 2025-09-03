@@ -29,12 +29,12 @@ mw.editcheck.BaseEditCheck.static.onlyCoveredNodes = false;
 mw.editcheck.BaseEditCheck.static.choices = [
 	{
 		action: 'accept',
-		label: ve.msg( 'editcheck-dialog-action-yes' ),
+		label: OO.ui.deferMsg( 'editcheck-dialog-action-yes' ),
 		icon: 'check'
 	},
 	{
 		action: 'reject',
-		label: ve.msg( 'editcheck-dialog-action-no' ),
+		label: OO.ui.deferMsg( 'editcheck-dialog-action-no' ),
 		icon: 'close'
 	}
 ];
@@ -47,9 +47,9 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	ignoreLeadSection: false
 };
 
-mw.editcheck.BaseEditCheck.static.title = ve.msg( 'editcheck-review-title' );
+mw.editcheck.BaseEditCheck.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
 
-mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
+mw.editcheck.BaseEditCheck.static.description = OO.ui.deferMsg( 'editcheck-dialog-addref-description' );
 
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
 

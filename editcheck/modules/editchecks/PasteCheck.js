@@ -10,22 +10,22 @@ mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck
 	minimumCharacters: 50
 } );
 
-mw.editcheck.PasteCheck.static.title = ve.msg( 'editcheck-copyvio-title' );
+mw.editcheck.PasteCheck.static.title = OO.ui.deferMsg( 'editcheck-copyvio-title' );
 
-mw.editcheck.PasteCheck.static.description = ve.msg( 'editcheck-copyvio-description' );
+mw.editcheck.PasteCheck.static.description = OO.ui.deferMsg( 'editcheck-copyvio-description' );
 
-mw.editcheck.PasteCheck.static.prompt = ve.msg( 'editcheck-copyvio-prompt' );
+mw.editcheck.PasteCheck.static.prompt = OO.ui.deferMsg( 'editcheck-copyvio-prompt' );
 
 mw.editcheck.PasteCheck.static.name = 'paste';
 
 mw.editcheck.PasteCheck.static.choices = [
 	{
 		action: 'keep',
-		label: ve.msg( 'editcheck-copyvio-action-keep' )
+		label: OO.ui.deferMsg( 'editcheck-copyvio-action-keep' )
 	},
 	{
 		action: 'remove',
-		label: ve.msg( 'editcheck-copyvio-action-remove' )
+		label: OO.ui.deferMsg( 'editcheck-copyvio-action-remove' )
 	}
 ];
 
