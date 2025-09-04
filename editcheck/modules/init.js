@@ -125,6 +125,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			if ( mw.editcheck.checksShown.tone ) {
 				tags.push( 'editcheck-tone-shown' );
 			}
+			if ( mw.editcheck.checksShown.paste ) {
+				tags.push( 'editcheck-paste-shown' );
+			}
 			if ( hasFailingToneCheck ) {
 				tags.push( 'editcheck-tone' );
 			} else if ( hasFailingToneCheck === null ) {
