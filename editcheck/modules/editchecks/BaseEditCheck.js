@@ -38,6 +38,7 @@ mw.editcheck.BaseEditCheck.static.choices = [
 ];
 
 mw.editcheck.BaseEditCheck.static.defaultConfig = {
+	enabled: true,
 	account: false, // 'loggedin', 'loggedout', anything non-truthy means allow either
 	maximumEditcount: 100,
 	ignoreSections: [],
@@ -154,6 +155,9 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 	// some checks are configured to only be for logged in / out users
 	if ( mw.editcheck.forceEnable ) {
 		return true;
+	}
+	if ( !this.config.enabled ) {
+		return false;
 	}
 	// account status:
 	// loggedin, loggedout, or any-other-value meaning 'both'
