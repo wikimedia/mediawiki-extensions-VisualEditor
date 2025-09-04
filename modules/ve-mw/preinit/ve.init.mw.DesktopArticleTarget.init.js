@@ -1118,7 +1118,7 @@
 			} else {
 				const link = $( e.target ).closest( 'a' )[ 0 ];
 				const linkUrl = link && link.href ? new URL( link.href ) : undefined;
-				if ( section !== undefined ) {
+				if ( section !== null ) {
 					init.activateVe( mode, linkUrl, section );
 				} else {
 					// Do not pass `section` to handle switching from section editing in WikiEditor if needed
