@@ -128,8 +128,7 @@ Controller.prototype.setup = function () {
 			this.taggedFragments = {};
 			this.taggedIds = {};
 
-			mw.editcheck.refCheckShown = false;
-			mw.editcheck.toneCheckShown = false;
+			mw.editcheck.checksShown = {};
 
 			$( document.documentElement ).removeClass( 've-editcheck-available' );
 			window.dispatchEvent( new Event( 'resize' ) );
@@ -502,9 +501,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		shownPromise = ve.createDeferred().resolve().promise();
 	}
 	shownPromise.then( () => {
-		newActions.forEach( ( action ) => {
-			ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-midedit' } );
-		} );
+		this.updateShownStats( newActions, 'midedit' );
 
 		if ( newActions.length ) {
 			// Check if any new actions are relevant to our current selection:
@@ -539,10 +536,6 @@ Controller.prototype.setupPreSaveProcess = function () {
 		return this.updateForListener( 'onBeforeSave' ).then( ( actions ) => {
 			if ( actions.length ) {
 				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Shown' } );
-				mw.editcheck.refCheckShown = mw.editcheck.refCheckShown ||
-					actions.some( ( action ) => action.getName() === 'addReference' );
-				mw.editcheck.toneCheckShown = mw.editcheck.toneCheckShown ||
-					actions.some( ( action ) => action.getName() === 'tone' );
 
 				this.setupToolbar( target );
 
@@ -560,9 +553,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions: actions, controller: this } )
 						.then( ( instance ) => {
 							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
-							actions.forEach( ( action ) => {
-								ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-presave' } );
-							} );
+							this.updateShownStats( actions, 'presave' );
 							instance.closed.then( () => {}, () => {} ).then( () => {
 								surface.getView().setReviewMode( false );
 								this.inBeforeSave = false;
@@ -832,6 +823,14 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 		return true;
 	}
 	return false;
+};
+
+Controller.prototype.updateShownStats = function ( actions, moment ) {
+	actions.forEach( ( action ) => {
+		mw.editcheck.checksShown[ action.getName() ] = true;
+
+		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-' + moment } );
+	} );
 };
 
 module.exports = {

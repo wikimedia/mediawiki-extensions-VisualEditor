@@ -10,7 +10,8 @@ const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!( ecenable || window.MWVE_FORCE_EDIT_CHECK_ENABLED ),
-	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental || ecenable === '2' )
+	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental || ecenable === '2' ),
+	checksShown: {}
 };
 
 require( './utils.js' );
@@ -118,10 +119,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			if ( newNodesInDoc ) {
 				tags.push( 'editcheck-newreference' );
 			}
-			if ( mw.editcheck.refCheckShown ) {
+			if ( mw.editcheck.checksShown.addReference ) {
 				tags.push( 'editcheck-references-shown' );
 			}
-			if ( mw.editcheck.toneCheckShown ) {
+			if ( mw.editcheck.checksShown.tone ) {
 				tags.push( 'editcheck-tone-shown' );
 			}
 			if ( hasFailingToneCheck ) {
