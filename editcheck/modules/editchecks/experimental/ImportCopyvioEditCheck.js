@@ -48,6 +48,11 @@ mw.editcheck.ImportCopyvioEditCheck.prototype.onDocumentChange = function ( surf
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
 		return new mw.editcheck.EditCheckAction( {
 			fragments: fragments,
+			// eslint-disable-next-line no-jquery/no-append-html
+			message: $( '<span>' ).append( ve.htmlMsg( 'editcheck-copyvio-description', ve.msg( 'editcheck-copyvio-descriptionlink' ) ) )
+				.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
+					ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-learn-more' } );
+				} ).end(),
 			id: id,
 			check: this
 		} );
