@@ -48,6 +48,8 @@ mw.editcheck.BaseEditCheck.static.title = ve.msg( 'editcheck-review-title' );
 
 mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref-description' );
 
+mw.editcheck.BaseEditCheck.static.canBeStale = false;
+
 /* Methods */
 
 /**
@@ -57,6 +59,15 @@ mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref
  */
 mw.editcheck.BaseEditCheck.prototype.getName = function () {
 	return this.constructor.static.name;
+};
+
+/**
+ * Check if the edit check can be stale
+ *
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.canBeStale = function () {
+	return this.constructor.static.canBeStale;
 };
 
 /**

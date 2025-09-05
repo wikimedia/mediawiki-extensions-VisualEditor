@@ -236,9 +236,11 @@ mw.editcheck.EditCheckAction.prototype.setStale = function ( stale ) {
  * @return {boolean} Whether the text has changed since this action was created
  */
 mw.editcheck.EditCheckAction.prototype.isStale = function () {
-	return !this.originalText || !OO.compare(
-		this.originalText,
-		this.fragments.map( ( fragment ) => fragment.getText() )
+	return this.check.canBeStale() && (
+		!this.originalText || !OO.compare(
+			this.originalText,
+			this.fragments.map( ( fragment ) => fragment.getText() )
+		)
 	);
 };
 

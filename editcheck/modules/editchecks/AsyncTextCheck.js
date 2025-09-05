@@ -37,6 +37,8 @@ OO.inheritClass( mw.editcheck.AsyncTextCheck, mw.editcheck.BaseEditCheck );
 
 mw.editcheck.AsyncTextCheck.static.name = null;
 
+mw.editcheck.AsyncTextCheck.static.canBeStale = true;
+
 /**
  * This static method gets implemented inside the AsyncTextCheck constructor. It
  * memoizes the subclass's static method `checkAsync`.
