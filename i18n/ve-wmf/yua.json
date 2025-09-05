@@ -4,7 +4,9 @@
 			"Chester1",
 			"Coala23",
 			"Cohuoucan",
+			"DeBolsillo",
 			"Ebenezer",
+			"Geom",
 			"Gutypc712",
 			"JhonRambo",
 			"Miguelos1976",
@@ -20,7 +22,7 @@
 	"tag-editcheck-references-shown": "Editar Check (referencias) ku ye'esik",
 	"tag-editcheck-references-shown-description": "EditCheck ku tukultik jump'éel referencia je'el u páajtal u k'a'abéettal, ka le UI bin u ye'esa'al",
 	"tag-editcheck-tone-description": "EditCheck tu yilaj jump'éel talamil yéetel u tono yaan contenido añadido",
-	"tag-editcheck-tone-shown": "Editar Check (tono) ku ye'esik",
+	"tag-editcheck-tone-shown": "Editar Check (tono) mostrado",
 	"tag-editcheck-tone-shown-description": "EditCheck ku tukultik jump'éel ajuste ti' le tono ti' yaan contenido je'el u páajtal u sido k'a'abéet, ka le UI bin u ye'esa'al",
 	"tag-visualeditor": "Edición visual",
 	"tag-visualeditor-description": "Edición beeta'an yéetel le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]].",
@@ -38,5 +40,5 @@
 	"visualeditor-welcomedialog-content-thanks": "¡Gracias por ayudar al mundo a descubrir más!",
 	"visualeditor-welcomedialog-switch": "K'ex le \"editor de codigo\"'",
 	"visualeditor-welcomedialog-switch-ve": "K'ex ti' le editor visual",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|} ti' $2"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|}} ti' $2"
 }
