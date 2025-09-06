@@ -115,10 +115,7 @@ class Hooks implements
 		'visualeditor-switched'
 	];
 
-	private ExtensionRegistry $extensionRegistry;
-
-	public function __construct( ExtensionRegistry $extensionRegistry ) {
-		$this->extensionRegistry = $extensionRegistry;
+	public function __construct( private readonly ExtensionRegistry $extensionRegistry ) {
 	}
 
 	/**
