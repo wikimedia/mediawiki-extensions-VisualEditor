@@ -9,7 +9,9 @@
 			"ValentinaTec",
 			"Chester1",
 			"Ebenezer",
-			"Miguelos1976"
+			"Miguelos1976",
+			"DeBolsillo",
+			"Geom"
 		]
 	},
 	"tag-visualeditor-description": "Edición beeta'an yéetel le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]].",
@@ -25,5 +27,5 @@
 	"visualeditor-welcomedialog-content-thanks": "¡Gracias por ayudar al mundo a descubrir más!",
 	"visualeditor-welcomedialog-switch": "K'ex le \"editor de codigo\"'",
 	"visualeditor-welcomedialog-switch-ve": "K'ex ti' le editor visual",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|} ti' $2"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|}} ti' $2"
 }

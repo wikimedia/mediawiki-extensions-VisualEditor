@@ -46,7 +46,7 @@
 	"visualeditor-ca-editsource-section": "redakto burimin",
 	"visualeditor-categories-tool": "Kategoritë",
 	"visualeditor-changedesc-mwlanguagevariant": "Shënimi i variantit të gjuhës ndryshoi",
-	"visualeditor-changedesc-mwredirect": "Objektivi i ridrejtimit ndryshoi nga $1 në $2",
+	"visualeditor-changedesc-mwredirect": "Objektivi i ridrejtimit u ndryshua nga $1 te $2",
 	"visualeditor-changedesc-mwtransclusion": "Parametrat e stampës u ndryshuan",
 	"visualeditor-desc": "Redaktues pamor për MediaWiki-n",
 	"visualeditor-descriptionpagelink": "Project:Përpunuesi Pamor",
