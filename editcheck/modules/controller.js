@@ -554,6 +554,9 @@ Controller.prototype.setupPreSaveProcess = function () {
 						.then( ( instance ) => {
 							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
 							this.updateShownStats( actions, 'presave' );
+
+							this.scrollActionIntoViewDebounced( this.focusedAction, true );
+
 							instance.closed.then( () => {}, () => {} ).then( () => {
 								surface.getView().setReviewMode( false );
 								this.inBeforeSave = false;
