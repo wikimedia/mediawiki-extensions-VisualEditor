@@ -420,7 +420,7 @@ Controller.prototype.onPosition = function ( passive ) {
 	this.updatePositionsDebounced();
 
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
-		this.scrollActionIntoViewDebounced( this.focusedAction, true, !OO.ui.isMobile() );
+		this.scrollActionIntoViewDebounced( this.focusedAction, !OO.ui.isMobile() );
 	}
 };
 
