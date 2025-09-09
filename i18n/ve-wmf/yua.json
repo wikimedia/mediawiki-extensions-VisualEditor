@@ -9,7 +9,9 @@
 			"Coala23",
 			"Chester1",
 			"Ebenezer",
-			"Miguelos1976"
+			"Miguelos1976",
+			"DeBolsillo",
+			"Geom"
 		]
 	},
 	"tag-editcheck-newcontent-description": "EditCheck ku tukultik ts'áab túumben kaambal tu' páaginaí",
@@ -29,5 +31,5 @@
 	"visualeditor-welcomedialog-content-thanks": "¡Gracias por ayudar al mundo a descubrir más!",
 	"visualeditor-welcomedialog-switch": "K'ex le \"editor de codigo\"'",
 	"visualeditor-welcomedialog-switch-ve": "K'ex ti' le editor visual",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1|} ti' $2"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|}} ti' $2"
 }
