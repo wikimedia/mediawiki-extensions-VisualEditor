@@ -31,7 +31,10 @@ require( './editchecks/BaseEditCheck.js' );
 require( './editchecks/AsyncTextCheck.js' );
 require( './editchecks/AddReferenceEditCheck.js' );
 require( './editchecks/ToneCheck.js' );
+require( './editchecks/PasteCheck.js' );
+
 nonDefaultChecks.add( 'tone' );
+nonDefaultChecks.add( 'paste' );
 
 if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
@@ -164,6 +167,18 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			} );
 			controller.on( 'onBeforeSave', () => {
 				checkForTone( 'onBeforeSave' );
+			} );
+		}
+		// Temporary logging for T402460
+		if ( nonDefaultChecks.has( 'paste' ) ) {
+			target.on( 'surfaceReady', () => {
+				target.getSurface().getView().on( 'paste', ( data ) => {
+					// Check might not be registered so we can't use the factory.
+					const check = new mw.editcheck.PasteCheck( null, mw.editcheck.config.paste );
+					if ( check.canBeShown() && !data.source && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
+						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
+					}
+				} );
 			} );
 		}
 	} );

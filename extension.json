@@ -641,6 +641,7 @@
 				"editcheck/modules/editchecks/AsyncTextCheck.js",
 				"editcheck/modules/editchecks/AddReferenceEditCheck.js",
 				"editcheck/modules/editchecks/ToneCheck.js",
+				"editcheck/modules/editchecks/PasteCheck.js",
 				{
 					"name": "editcheck/modules/config.json",
 					"callback": "\\MediaWiki\\Extension\\VisualEditor\\EditCheck\\ResourceLoaderData::getConfig"
