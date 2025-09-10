@@ -374,7 +374,7 @@
 	"visualeditor-special-characters-group-other": "Oft verwendet",
 	"visualeditor-templatesused-tool": "Verwendete Vorlagen",
 	"visualeditor-title-error": "Ungültiger Titel.",
-	"visualeditor-toload": "Der Editor wird jetzt geladen. Wenn du diese Meldung nach einigen Sekunden noch siehst, [$1 lade bitte die Seite] neu.",
+	"visualeditor-toload": "Der Editor wird jetzt geladen. Wenn diese Meldung nach einigen Sekunden noch siehst, [$1 bitte aktualisiere die Seite].",
 	"visualeditor-tooltip-non-breaking-space": "Nicht umbrechendes Leerzeichen",
 	"visualeditor-version-label": "Version",
 	"visualeditor-wikitext-progress": "Konvertiere Wikitext",

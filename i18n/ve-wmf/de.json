@@ -26,6 +26,8 @@
 	"tag-editcheck-tone-description": "EditCheck hat ein potenzielles Problem mit dem Tonfall einiger hinzugefügter Inhalte festgestellt",
 	"tag-editcheck-tone-shown": "EditCheck (Tonfall) angezeigt",
 	"tag-editcheck-tone-shown-description": "EditCheck meint, dass eine Anpassung des Tonfalls in einigen Inhalten nötig gewesen wäre, und die Benutzeroberfläche wurde angezeigt",
+	"tag-editcheck-paste-shown": "Bearbeitungsprüfung (Einfügen) angezeigt",
+	"tag-editcheck-paste-shown-description": "Die Bearbeitungsprüfung bat um Klarstellung über den Inhalt, den der Benutzer eingefügt hat, der dann entweder entfernt oder als zulässig bestätigt wurde",
 	"tag-visualeditor": "Visuelle Bearbeitung",
 	"tag-visualeditor-description": "Bearbeitungen, die mit dem [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuellen Editor]] ausgeführt wurden.",
 	"tag-visualeditor-needcheck": "Visuelle Bearbeitung: Überprüfung",

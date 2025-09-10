@@ -32,6 +32,8 @@
 	"tag-editcheck-tone-description": "EditCheck, eklenen bazı içeriğin tonuyla ilgili olası bir sorun belirledi",
 	"tag-editcheck-tone-shown": "Düzenleme Kontrolü (üslup) gösterildi",
 	"tag-editcheck-tone-shown-description": "DüzenlemeKontrolü, bazı içeriklerdeki üslup ayarlamalarının gerekli olabileceğini ve kullanıcı arayüzünün gösterildiğini düşünüyor",
+	"tag-editcheck-paste-shown": "Düzenleme Kontrolü (yapıştır) gösterildi",
+	"tag-editcheck-paste-shown-description": "EditCheck, düzenleyicinin yapıştırdığı ve daha sonra, kaldırılan ya da izin verilebilir olduğu onaylanan içerik hakkında açıklama istedi",
 	"tag-visualeditor": "Görsel düzenleme",
 	"tag-visualeditor-description": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Görsel düzenleyiciyi]] kullanarak düzenleyin",
 	"tag-visualeditor-needcheck": "Görsel düzenleme: Doğrula",

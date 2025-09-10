@@ -28,6 +28,8 @@
 	"tag-editcheck-tone-description": "EditCheck havaitsi mahdollisen ongelman lisätyn sisällön sävyssä.",
 	"tag-editcheck-tone-shown": "Muokkaustarkistin (sävy) näytetty",
 	"tag-editcheck-tone-shown-description": "Muokkaustarkistimen mukaan sisällön sävyä olisi ehkä ollut tarpeen kohentaa, ja käyttöliittymä näytettiin",
+	"tag-editcheck-paste-shown": "Muokkaustarkistin (liittäminen) näytetty",
+	"tag-editcheck-paste-shown-description": "Muokkaustarkistin kysyi selvennystä muokkaajan liittämästä sisällöstä. Sisältö joko postettiin tai vahvistettiin sallituksi",
 	"tag-visualeditor": "Visuaalinen muokkaus",
 	"tag-visualeditor-description": "Muutos tehtiin [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaalisella muokkaimella]]",
 	"tag-visualeditor-needcheck": "Visuaalinen muokkaus: Tarkista",

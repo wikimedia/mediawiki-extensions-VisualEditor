@@ -33,6 +33,8 @@
 	"tag-editcheck-tone-description": "EditCheck heeft een mogelijk probleem ontdekt met de toon van bepaalde toegevoegde inhoud",
 	"tag-editcheck-tone-shown": "Bewerkingscontrole (toon) weergegeven",
 	"tag-editcheck-tone-shown-description": "EditCheck denkt dat een aanpassing van de toon in bepaalde inhoud nodig was geweest, en de gebruikersinterface is weergegeven",
+	"tag-editcheck-paste-shown": "Bewerkingscontrole (plakken) weergegeven",
+	"tag-editcheck-paste-shown-description": "EditCheck vroeg om opheldering over de inhoud die de editor had geplakt, die vervolgens of werd verwijderd, of als toegestaan werd bevestigd",
 	"tag-visualeditor": "Visuele tekstverwerker",
 	"tag-visualeditor-description": "Bewerking gedaan met de [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuele tekstverwerker]]",
 	"tag-visualeditor-needcheck": "Visuele tekstverwerker: nakijken",
