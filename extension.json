@@ -876,6 +876,7 @@
 				"visualeditor-mweditmodeve-progress",
 				"visualeditor-pagemenu-tooltip",
 				"visualeditor-recreate",
+				"ooui-dialog-process-continue",
 				"visualeditor-redirect-description",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-temp",
@@ -1331,7 +1332,6 @@
 				"oojs-ui.styles.icons-editing-advanced"
 			],
 			"messages": [
-				"ooui-dialog-process-continue",
 				"toc",
 				"visualeditor-dialog-table-collapsed",
 				"visualeditor-dialog-table-collapsible",
