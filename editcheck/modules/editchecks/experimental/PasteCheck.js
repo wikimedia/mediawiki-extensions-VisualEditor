@@ -1,23 +1,23 @@
-mw.editcheck.ImportCopyvioEditCheck = function MWImportCopyvioEditCheck() {
+mw.editcheck.PasteCheck = function MWPasteCheck() {
 	// Parent constructor
-	mw.editcheck.ImportCopyvioEditCheck.super.apply( this, arguments );
+	mw.editcheck.PasteCheck.super.apply( this, arguments );
 };
 
-OO.inheritClass( mw.editcheck.ImportCopyvioEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.PasteCheck, mw.editcheck.BaseEditCheck );
 
-mw.editcheck.ImportCopyvioEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	minimumCharacters: 50
 } );
 
-mw.editcheck.ImportCopyvioEditCheck.static.title = ve.msg( 'editcheck-copyvio-title' );
+mw.editcheck.PasteCheck.static.title = ve.msg( 'editcheck-copyvio-title' );
 
-mw.editcheck.ImportCopyvioEditCheck.static.description = ve.msg( 'editcheck-copyvio-description' );
+mw.editcheck.PasteCheck.static.description = ve.msg( 'editcheck-copyvio-description' );
 
-mw.editcheck.ImportCopyvioEditCheck.static.prompt = ve.msg( 'editcheck-copyvio-prompt' );
+mw.editcheck.PasteCheck.static.prompt = ve.msg( 'editcheck-copyvio-prompt' );
 
-mw.editcheck.ImportCopyvioEditCheck.static.name = 'paste';
+mw.editcheck.PasteCheck.static.name = 'paste';
 
-mw.editcheck.ImportCopyvioEditCheck.static.choices = [
+mw.editcheck.PasteCheck.static.choices = [
 	{
 		action: 'keep',
 		label: ve.msg( 'editcheck-copyvio-action-keep' )
@@ -28,7 +28,7 @@ mw.editcheck.ImportCopyvioEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.ImportCopyvioEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const pastesById = {};
 	surfaceModel.documentModel.documentNode.getAnnotationRanges().forEach( ( annRange ) => {
 		const annotation = annRange.annotation;
@@ -59,7 +59,7 @@ mw.editcheck.ImportCopyvioEditCheck.prototype.onDocumentChange = function ( surf
 	} );
 };
 
-mw.editcheck.ImportCopyvioEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 	switch ( choice ) {
 		case 'keep':
 			return action.widget.showFeedback( {
@@ -94,4 +94,4 @@ mw.editcheck.ImportCopyvioEditCheck.prototype.act = function ( choice, action, s
 	}
 };
 
-mw.editcheck.editCheckFactory.register( mw.editcheck.ImportCopyvioEditCheck );
+mw.editcheck.editCheckFactory.register( mw.editcheck.PasteCheck );
