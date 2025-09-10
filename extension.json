@@ -353,7 +353,8 @@
 			],
 			"messages": [
 				"accesskey-ca-ve-edit",
-				"editsection"
+				"editsection",
+				"visualeditor-mweditmode-tooltip"
 			]
 		},
 		"ext.visualEditor.desktopArticleTarget.noscript": {
@@ -377,6 +378,7 @@
 				"mediawiki.storage"
 			],
 			"messages": [
+				"api-clientside-error-invalidresponse",
 				"visualeditor-autosave-modified-prompt-accept",
 				"visualeditor-autosave-modified-prompt-message",
 				"visualeditor-autosave-modified-prompt-reject",
@@ -433,7 +435,12 @@
 				"creating",
 				"editing",
 				"mw-widgets-abandonedit",
+				"ooui-dialog-message-reject",
+				"ooui-dialog-process-retry",
 				"pagetitle",
+				"visualeditor-help-tool",
+				"visualeditor-mweditmode-tooltip",
+				"visualeditor-pagemenu-tooltip",
 				"visualeditor-section-body-placeholder",
 				"visualeditor-section-title-placeholder"
 			]
@@ -460,7 +467,8 @@
 				"ext.visualEditor.mwlink"
 			],
 			"messages": [
-				"visualeditor-backbutton-tooltip"
+				"visualeditor-backbutton-tooltip",
+				"visualeditor-mweditmode-tooltip"
 			]
 		},
 		"ext.visualEditor.collabTarget": {
@@ -518,7 +526,6 @@
 			],
 			"messages": [
 				"collabpad",
-				"collabpad-doctitle",
 				"collabpad-import-subtitle"
 			]
 		},
@@ -548,6 +555,7 @@
 				"ext.visualEditor.supportCheck"
 			],
 			"messages": [
+				"visualeditor-rebase-client-connecting",
 				"visualeditor-rebase-corrupted-document-error",
 				"visualeditor-rebase-corrupted-document-title",
 				"collabpad",
@@ -679,6 +687,7 @@
 				"editcheck-reject-description",
 				"editcheck-review-title",
 				"visualeditor-backbutton-tooltip",
+				"visualeditor-contextitemwidget-label-close",
 				"next",
 				"last"
 			]
@@ -789,9 +798,9 @@
 				"accesskey-preview",
 				"accesskey-save",
 				"accesskey-watch",
-				"hidden-categories",
 				"newsectionsummary",
 				"parentheses",
+				"showpreview",
 				"summary-preview",
 				"tooltip-minoredit",
 				"tooltip-watch",
@@ -800,14 +809,10 @@
 				"visualeditor-editsummary",
 				"visualeditor-editsummary-characters-remaining",
 				"visualeditor-savedialog-keyboard-shortcut-submit",
-				"visualeditor-savedialog-label-publish-short",
-				"visualeditor-savedialog-label-publish-short-start",
 				"visualeditor-savedialog-label-resolve-conflict",
 				"visualeditor-savedialog-label-resume-editing",
 				"visualeditor-savedialog-label-review",
 				"visualeditor-savedialog-label-review-good",
-				"visualeditor-savedialog-label-save-short",
-				"visualeditor-savedialog-label-save-short-start",
 				"visualeditor-savedialog-review-nosummary",
 				"visualeditor-savedialog-review-visual",
 				"visualeditor-savedialog-review-wikitext",
@@ -836,6 +841,7 @@
 			],
 			"messages": [
 				"accesskey-save",
+				"api-clientside-error-invalidresponse",
 				"colon-separator",
 				"hidden-categories",
 				"pagecategories",
@@ -850,15 +856,17 @@
 				"savearticle-start",
 				"savechanges",
 				"savechanges-start",
-				"showpreview",
 				"visualeditor-loaderror-revidconflict",
 				"visualeditor-loaderror-wrongmode",
 				"visualeditor-mweditmodesource-progress",
 				"visualeditor-mweditmodeve-progress",
-				"visualeditor-pagemenu-tooltip",
 				"visualeditor-recreate",
 				"ooui-dialog-process-continue",
 				"visualeditor-redirect-description",
+				"visualeditor-savedialog-label-publish-short",
+				"visualeditor-savedialog-label-publish-short-start",
+				"visualeditor-savedialog-label-save-short",
+				"visualeditor-savedialog-label-save-short-start",
 				"visualeditor-savedialog-identify-anon",
 				"visualeditor-savedialog-identify-temp",
 				"visualeditor-savedialog-identify-user"
@@ -986,7 +994,6 @@
 				"visualeditor-formatdropdown-format-heading6",
 				"visualeditor-formatdropdown-format-paragraph",
 				"visualeditor-formatdropdown-format-preformatted",
-				"visualeditor-help-tool",
 				"visualeditor-historybutton-redo-tooltip",
 				"visualeditor-historybutton-undo-tooltip",
 				"visualeditor-horizontalrule-tooltip",
@@ -1179,7 +1186,6 @@
 				"visualeditor-editingtabdialog-body",
 				"visualeditor-editingtabdialog-ok",
 				"visualeditor-editingtabdialog-title",
-				"visualeditor-mweditmode-tooltip",
 				"visualeditor-mweditmodesource-tool-current",
 				"visualeditor-mweditmodesource-tool-unavailable",
 				"visualeditor-mweditmodeve-popup-body",
@@ -1312,6 +1318,8 @@
 				"visualeditor-editnotices-tool",
 				"visualeditor-editnotices-tooltip",
 				"visualeditor-educationpopup-dismiss",
+				"visualeditor-expandable-less",
+				"visualeditor-expandable-more",
 				"visualeditor-feedback-defaultmessage",
 				"visualeditor-feedback-tool",
 				"visualeditor-help-label",
@@ -1334,7 +1342,8 @@
 				"visualeditor-tooltip-non-breaking-space",
 				"visualeditor-version-label",
 				"visualeditor-wikitext-progress",
-				"visualeditor-wikitext-warning-title"
+				"visualeditor-wikitext-warning-title",
+				"word-separator"
 			]
 		},
 		"ext.visualEditor.mwextensions": {
@@ -1414,6 +1423,11 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwcore"
+			],
+			"messages": [
+				"visualeditor-dimensionswidget-px",
+				"visualeditor-dimensionswidget-times",
+				"visualeditor-mediasizewidget-sizeoptions-default"
 			]
 		},
 		"ext.visualEditor.mwimage": {
@@ -1438,7 +1452,6 @@
 				"moment"
 			],
 			"messages": [
-				"visualeditor-dialog-media-alttext-checkbox",
 				"visualeditor-dialog-media-alttext-section",
 				"visualeditor-dialog-media-alttext-section-help",
 				"visualeditor-dialog-media-change-image",
@@ -1478,6 +1491,8 @@
 				"visualeditor-dialog-media-type-thumb",
 				"visualeditor-dialog-media-upload",
 				"visualeditor-dialogbutton-media-tooltip",
+				"visualeditor-dimensionswidget-px",
+				"visualeditor-dimensionswidget-times",
 				"visualeditor-media-title-audio",
 				"visualeditor-media-title-image",
 				"visualeditor-media-title-video"
@@ -1527,6 +1542,7 @@
 				"visualeditor-linkinspector-illegal-title",
 				"visualeditor-linkinspector-invalid-blocked",
 				"visualeditor-linkinspector-invalid-external",
+				"visualeditor-linkinspector-title",
 				"visualeditor-linknodeinspector-add-label",
 				"visualeditor-linknodeinspector-title",
 				"visualeditor-magiclinknodeinspector-convert-link",
@@ -1579,6 +1595,9 @@
 				"mediawiki.action.view.redirectPage"
 			],
 			"messages": [
+				"colon-separator",
+				"pagecategorieslink",
+				"visualeditor-inspector-remove-tooltip",
 				"visualeditor-advancedsettings-tool",
 				"visualeditor-categories-tool",
 				"visualeditor-changedesc-mwcategory-sortkey-changed",
@@ -1727,8 +1746,12 @@
 				"mediawiki.widgets.UserInputWidget"
 			],
 			"messages": [
+				"comma-separator",
 				"quotation-marks",
 				"redirectedfrom",
+				"ooui-outline-control-move-up",
+				"ooui-outline-control-move-down",
+				"ooui-outline-control-remove",
 				"visualeditor-changedesc-mwtransclusion",
 				"visualeditor-dialog-template-title",
 				"visualeditor-dialog-transclusion-action-save",
@@ -1798,8 +1821,6 @@
 				"visualeditor-dialog-transclusion-wikitext-widget-aria-selected",
 				"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single",
 				"visualeditor-dialogbutton-template-tooltip",
-				"visualeditor-expandable-less",
-				"visualeditor-expandable-more",
 				"visualeditor-template-sandbox-subpage"
 			],
 			"factory": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDataModule::addOptional",
@@ -1936,6 +1957,7 @@
 				"ext.visualEditor.core"
 			],
 			"messages": [
+				"comma-separator",
 				"visualeditor-changedesc-mwlanguagevariant",
 				"visualeditor-mwlanguagevariant-disabled",
 				"visualeditor-mwlanguagevariant-filter",
@@ -2023,7 +2045,10 @@
 				"ext.visualEditor.mediawiki"
 			],
 			"messages": [
+				"visualeditor-dialog-table-caption",
 				"visualeditor-generating-wikitext-progress",
+				"visualeditor-table-format-data",
+				"visualeditor-table-format-header",
 				"visualeditor-wikitextconvert-convert",
 				"visualeditor-wikitextconvert-message",
 				"visualeditor-wikitextconvert-title"
@@ -2056,6 +2081,7 @@
 				"mediawiki.page.gallery.styles"
 			],
 			"messages": [
+				"visualeditor-dialog-media-alttext-checkbox",
 				"visualeditor-dialog-media-alttext-section",
 				"visualeditor-dialog-media-content-description-link",
 				"visualeditor-dialog-media-content-filename",
