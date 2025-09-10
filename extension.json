@@ -1206,7 +1206,6 @@
 				"oojs-ui.styles.icons-accessibility"
 			],
 			"messages": [
-				"visualeditor-dialog-extension-abandonedit",
 				"visualeditor-editingtabdialog-body",
 				"visualeditor-editingtabdialog-ok",
 				"visualeditor-editingtabdialog-title",
@@ -1338,6 +1337,9 @@
 				"visualeditor-dialog-table-collapsible",
 				"visualeditor-dialog-table-sortable",
 				"visualeditor-dialog-table-wikitable",
+				"visualeditor-dialog-extension-abandonedit",
+				"mw-widgets-abandonedit-keep",
+				"mw-widgets-abandonedit-discard",
 				"visualeditor-editnotices-tool",
 				"visualeditor-editnotices-tooltip",
 				"visualeditor-educationpopup-dismiss",
