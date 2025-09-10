@@ -14,6 +14,9 @@ mw.editcheck = {
 	checksShown: {}
 };
 
+// Checks which are loaded for logging but shouldn't show by default yet
+const nonDefaultChecks = new Set();
+
 require( './utils.js' );
 require( './EditCheckPreSaveToolbarTools.js' );
 require( './EditCheckFactory.js' );
@@ -27,23 +30,19 @@ require( './dialogs/GutterSidebarEditCheckDialog.js' );
 require( './editchecks/BaseEditCheck.js' );
 require( './editchecks/AsyncTextCheck.js' );
 require( './editchecks/AddReferenceEditCheck.js' );
+require( './editchecks/ToneCheck.js' );
+nonDefaultChecks.add( 'tone' );
 
 if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
-} else {
-	if ( !abCheck || ( abCheck === 'tone' && abGroup === 'control' ) ) {
-		// Load Tone check regardless for tagging
-		require( './editchecks/experimental/ToneCheck.js' );
-		mw.editcheck.editCheckFactory.unregister( mw.editcheck.ToneCheck );
-	} else if ( abCheck && abGroup === 'test' ) {
-		mw.loader.using( 'ext.visualEditor.editCheck.experimental' ).then( () => {
-			[ 'tone', 'paste', 'convertReference', 'disambiguation', 'externalLink', 'textMatch' ].forEach( ( name ) => {
-				if ( name !== abCheck ) {
-					mw.editcheck.editCheckFactory.unregister( name );
-				}
-			} );
-		} );
-	}
+	nonDefaultChecks.clear();
+}
+if ( abGroup === 'test' ) {
+	nonDefaultChecks.delete( abCheck );
+}
+
+for ( const check of nonDefaultChecks ) {
+	mw.editcheck.editCheckFactory.unregister( check );
 }
 
 const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];
