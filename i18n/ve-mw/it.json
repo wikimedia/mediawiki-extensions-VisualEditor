@@ -348,7 +348,7 @@
 	"visualeditor-special-characters-group-other": "Usato spesso",
 	"visualeditor-templatesused-tool": "Template utilizzati",
 	"visualeditor-title-error": "Titolo non valido.",
-	"visualeditor-toload": "Verrà caricato l'editor. Se vedi ancora questo messaggio dopo alcuni secondi, [$1 ricarica la pagina].",
+	"visualeditor-toload": "Verrà caricato l'editor. Se vedi ancora questo messaggio dopo alcuni secondi, [$1 aggiorna la pagina].",
 	"visualeditor-tooltip-non-breaking-space": "Spazio unificatore",
 	"visualeditor-version-label": "Versione",
 	"visualeditor-wikitext-progress": "Conversione wikitesto",

@@ -335,7 +335,7 @@
 	"visualeditor-special-characters-group-other": "Често коришћени",
 	"visualeditor-templatesused-tool": "Коришћени шаблони",
 	"visualeditor-title-error": "Неважећи наслов.",
-	"visualeditor-toload": "Уређивач ће се сада учитати. Ако и даље видите ову поруку након неколико секунди, [$1 поново учитајте страницу].",
+	"visualeditor-toload": "Уређивач ће се сада учитати. Ако и даље видите ову поруку након неколико секунди, [$1 освежите страницу].",
 	"visualeditor-tooltip-non-breaking-space": "Непреломни размак",
 	"visualeditor-version-label": "Верзија",
 	"visualeditor-wikitext-progress": "Претварање викитекста",

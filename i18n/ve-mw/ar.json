@@ -387,7 +387,7 @@
 	"visualeditor-special-characters-group-other": "مستخدمة عادة",
 	"visualeditor-templatesused-tool": "القوالب المستخدمة",
 	"visualeditor-title-error": "عنوان غير صحيح.",
-	"visualeditor-toload": "المحرر سيُحمَّل الآن. إذا كنت لا تزال ترى هذه الرسالة بعد بضع ثوان، يرجى [$1 إعادة تحميل الصفحة].",
+	"visualeditor-toload": "سيتم تحميل المحرر الآن. إذا استمرت هذه الرسالة بالظهور بعد ثوان قليلة، يُرجى [$1 تحديث الصفحة].",
 	"visualeditor-tooltip-non-breaking-space": "مسافة غير منقسمة",
 	"visualeditor-version-label": "نسخة",
 	"visualeditor-wikitext-progress": "جار تحويل نص الويكي",

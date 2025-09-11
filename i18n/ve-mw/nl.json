@@ -393,7 +393,7 @@
 	"visualeditor-special-characters-group-other": "Vaak gebruikt",
 	"visualeditor-templatesused-tool": "Gebruikte sjablonen",
 	"visualeditor-title-error": "Ongeldige paginanaam.",
-	"visualeditor-toload": "De tekstverwerker wordt nu geladen. Als u dit bericht na een paar seconden nog steeds ziet, [$1 herlaad de pagina].",
+	"visualeditor-toload": "De editor wordt nu geladen. Als u dit bericht na een paar seconden nog ziet, kunt u [$1 de pagina vernieuwen].",
 	"visualeditor-tooltip-non-breaking-space": "harde spatie",
 	"visualeditor-version-label": "Versie",
 	"visualeditor-wikitext-progress": "Wikitekst aan het omzetten",

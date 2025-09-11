@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Derugon",
+			"Escargot bleu",
 			"Gomoko",
 			"JLTRY",
 			"Mahabarata",
@@ -45,7 +46,7 @@
 	"editcheck-tone-reject-appropriate": "Le ton est approprié",
 	"editcheck-tone-reject-uncertain": "Je ne sais pas comment réviser le ton.",
 	"editcheck-tone-reject-other": "Autre",
-	"editcheck-tone-thank": "Merci d’avoir révisé le ton !",
+	"editcheck-tone-thank": "Merci d’avoir réfléchi au ton !",
 	"editcheck-reject-description": "D'autres rédacteurs apprécieront d'apprendre pourquoi vous avez fait ce choix.",
 	"editcheck-review-title": "Relire les modifications",
 	"tag-editcheck-reference-decline-common-knowledge": "Vérification de modification (références) refusée (savoir commun)",
