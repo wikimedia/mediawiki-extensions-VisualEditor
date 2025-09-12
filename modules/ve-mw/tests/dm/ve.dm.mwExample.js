@@ -2191,7 +2191,9 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},
 	'display title': {
-		body: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"}}}]}\'></span>',
+		body: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"}}},"\\n"]}\'></span>',
+		fromDataBody: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"}}},"\\n"]}\'></span>',
+		normalizedBody: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"}}}]}\'></span>',
 		data: [
 			{
 				type: 'mwDisplayTitle',

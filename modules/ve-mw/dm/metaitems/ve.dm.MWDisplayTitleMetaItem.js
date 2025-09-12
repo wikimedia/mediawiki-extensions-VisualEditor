@@ -43,7 +43,7 @@ ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
 	const mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 	const wt = ( ve.getProp( mwData, 'parts', '0', 'template', 'target', 'wt' ) || '' ) ||
-    ve.getProp( mwData, 'parts', '0', 'parserfunction', 'params', '1', 'wt' );
+		ve.getProp( mwData, 'parts', '0', 'parserfunction', 'params', '1', 'wt' );
 	const content = wt.replace( /^DISPLAYTITLE:/i, '' );
 	return {
 		type: this.name,
@@ -54,7 +54,6 @@ ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
 };
 
 ve.dm.MWDisplayTitleMetaItem.static.toDomElements = function ( dataElement, doc ) {
-
 	const prefix = 'DISPLAYTITLE',
 		displayTitle = dataElement.attributes.content,
 		mwData = {
@@ -70,9 +69,15 @@ ve.dm.MWDisplayTitleMetaItem.static.toDomElements = function ( dataElement, doc 
 			]
 		};
 
+	if ( !dataElement.originalDomElementsHash ) {
+		// If this is a new addition to the page, we need to enforce a newline:
+		mwData.parts.push( '\n' );
+	}
+
 	const span = doc.createElement( 'span' );
 	span.setAttribute( 'typeof', 'mw:Transclusion' );
 	span.setAttribute( 'data-mw', JSON.stringify( mwData ) );
+	span.setAttribute( 'about', '#mwt-ve-' + Math.floor( 1000000000 * Math.random() ) );
 	return [ span ];
 };
 
