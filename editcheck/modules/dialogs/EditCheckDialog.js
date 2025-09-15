@@ -134,7 +134,7 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
  */
 ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
 	let currentAction;
-	if ( this.currentActions && this.currentOffset && actions.includes( this.currentActions[ this.currentOffset ] ) ) {
+	if ( this.currentActions && this.currentOffset !== null && actions.includes( this.currentActions[ this.currentOffset ] ) ) {
 		currentAction = this.currentActions[ this.currentOffset ];
 	}
 	this.currentActions = actions;
