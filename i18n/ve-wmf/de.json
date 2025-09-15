@@ -41,7 +41,7 @@
 	"visualeditor-help-label": "Lies das Benutzerhandbuch",
 	"visualeditor-welcomedialog-action": "Jetzt bearbeiten",
 	"visualeditor-welcomedialog-content": "Jeder kann hier mitarbeiten und Artikel verbessern.",
-	"visualeditor-welcomedialog-content-thanks": "Damit hilfst du, das menschliche Wissen allen zugänglich zu machen!",
+	"visualeditor-welcomedialog-content-thanks": "Damit {{#FORMAL:hilfst du|helfen Sie}}, das menschliche Wissen allen zugänglich zu machen!",
 	"visualeditor-welcomedialog-switch": "Zum Quelltext-Editor",
 	"visualeditor-welcomedialog-switch-ve": "Zum visuellen Editor wechseln",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Willkommen}} bei $2"
