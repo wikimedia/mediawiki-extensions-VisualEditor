@@ -22,7 +22,7 @@
 	"editcheck-dialog-addref-title": "Einen Beleg hinzufügen",
 	"editcheck-dialog-title": "Vor der Veröffentlichung",
 	"editcheck-copyvio-title": "Eingefügter Inhalt",
-	"editcheck-copyvio-description": "Kopiere in der Regel keinen Text aus anderen Quellen. Dies stellt in der Regel sowohl eine Verletzung des Urheberrechts als auch ein Plagiat dar.",
+	"editcheck-copyvio-description": "Bitte vermeide das Kopieren von Texten aus anderen Quellen, auch wenn diese umformuliert oder zitiert werden. Dies könnte als [$1 Urheberrechtsverletzung oder Plagiat] angesehen werden und zur Entfernung deiner Inhalte oder zur Sperrung deines Kontos führen.",
 	"editcheck-copyvio-prompt": "Hast du diesen Text geschrieben?",
 	"editcheck-copyvio-action-keep": "Ja, behalten.",
 	"editcheck-copyvio-action-remove": "Nein, entfernen.",
