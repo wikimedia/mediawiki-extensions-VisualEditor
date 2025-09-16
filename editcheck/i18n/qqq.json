@@ -34,7 +34,6 @@
 	"editcheck-copyvio-keep-description": "Heading for form question asking why the user wants to keep pasted content",
 	"editcheck-copyvio-keep-wrote": "Answer option for pasted content check in response to {{msg-mw|editcheck-copyvio-keep-description}}",
 	"editcheck-copyvio-keep-permission": "Answer option for pasted content check in response to {{msg-mw|editcheck-copyvio-keep-description}}",
-	"editcheck-copyvio-keep-free": "Answer option for pasted content check in response to {{msg-mw|editcheck-copyvio-keep-description}}",
 	"editcheck-copyvio-keep-other": "Answer option for pasted content check in response to {{msg-mw|editcheck-copyvio-keep-description}}",
 	"editcheck-copyvio-keep-notify": "Notification message shown after pasted content is kept",
 	"editcheck-copyvio-remove-notify": "Notification message shown after pasted content is removed",

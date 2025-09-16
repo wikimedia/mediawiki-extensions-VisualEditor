@@ -64,13 +64,12 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 		case 'keep':
 			return action.widget.showFeedback( {
 				description: ve.msg( 'editcheck-copyvio-keep-description' ),
-				choices: [ 'wrote', 'permission', 'free', 'other' ].map(
+				choices: [ 'wrote', 'permission', 'other' ].map(
 					( key ) => ( {
 						data: key,
 						// Messages that can be used here:
 						// * editcheck-copyvio-keep-wrote
 						// * editcheck-copyvio-keep-permission
-						// * editcheck-copyvio-keep-free
 						// * editcheck-copyvio-keep-other
 						label: ve.msg( 'editcheck-copyvio-keep-' + key )
 					} ) )
