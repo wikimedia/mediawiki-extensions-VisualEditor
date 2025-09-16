@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"TimumachtikanNawat",
-			"Canjura"
+			"Canjura",
+			"Jose Antonio Guillen Landaverde"
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "Takutunchin ka ijtik ne wiki",
 	"visualeditor-ca-editsource": "Shikpata ne tajkwilulchin",
 	"visualeditor-ca-editsource-section": "Shikpata ne tajkwilulchin"
 }
