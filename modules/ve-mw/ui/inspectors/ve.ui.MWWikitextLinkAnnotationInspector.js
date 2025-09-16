@@ -304,7 +304,7 @@ ve.ui.MWWikitextLinkAnnotationInspector.prototype.getTeardownProcess = function 
 
 					fragment.insertContent( '[[' + prefix + targetText + labelText + ']]' );
 				} else if ( annotation instanceof ve.dm.MWExternalLinkAnnotation ) {
-					if ( this.initialAnnotation.element.type === 'link/mwMagic' ) {
+					if ( this.initialAnnotation && this.initialAnnotation.element.type === 'link/mwMagic' ) {
 						fragment.insertContent( annotation.element.attributes.href );
 					} else {
 						let labelText = '';
