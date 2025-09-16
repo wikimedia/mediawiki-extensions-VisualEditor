@@ -1961,7 +1961,9 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 	const currentWindow = this.getSurface().getDialogs().getCurrentWindow();
 	if ( currentWindow && currentWindow.constructor.static.name === 'mwSave' && ( action === 'save' || action === null ) ) {
 		// The current window is the save dialog, and we've gotten here via
-		// the save action. Trigger a save. We're doing this here instead of
+		// the save action. Trigger a save action on the dialog, which will
+		// either switch to the save panel or immediately save depending on
+		// the currently active panel. We're doing this here instead of
 		// relying on an accesskey on the save button, because that has some
 		// cross-browser issues that makes it not work in Firefox.
 		currentWindow.executeAction( 'save' );
