@@ -57,9 +57,6 @@ use OOUI\ButtonGroupWidget;
 use OOUI\ButtonWidget;
 use TextSlotDiffRenderer;
 
-/**
- * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
- */
 class Hooks implements
 	TextSlotDiffRendererTablePrefixHook,
 	BeforeInitializeHook,
@@ -795,7 +792,7 @@ class Hooks implements
 	 *
 	 * @param RecentChange $rc The new RC entry.
 	 */
-	public function onRecentChange_Save( $rc ) {
+	public function onRecentChange_save( $rc ) {
 		$request = RequestContext::getMain()->getRequest();
 		if ( $request->getBool( 'veswitched' ) && $rc->getAttribute( 'rc_this_oldid' ) ) {
 			$rc->addTags( 'visualeditor-switched' );
