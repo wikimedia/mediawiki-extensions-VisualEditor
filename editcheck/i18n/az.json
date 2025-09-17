@@ -23,7 +23,7 @@
 	"editcheck-dialog-addref-title": "İstinad əlavə et",
 	"editcheck-dialog-title": "Yayımlamadan əvvəl",
 	"editcheck-copyvio-title": "Yapışdırılmış məzmun",
-	"editcheck-copyvio-description": "Bir qayda olaraq, mətni digər mənbələrdən olduğu kimi kopyalamayın. Bunu etmək adətən həm müəllif hüquqlarının pozulması, həm də plagiat sayılır.",
+	"editcheck-copyvio-description": "Zəhmət olmasa, mətni başqa mənbələrdən kopiyalamaqdan çəkinin, hətta cümlələr sıfırdan yazılsa və ya istinad edilsə belə. Bu [$1 müəllif hüquqları pozuntusu və ya plagiat] hesab edilə bilər və məzmununuzun silinməsi və ya hesabınızın bloklanması ilə nəticələnə bilər.",
 	"editcheck-copyvio-prompt": "Bu mətni siz özünüz yazmısınız?",
 	"editcheck-copyvio-action-keep": "Bəli, saxla",
 	"editcheck-copyvio-action-remove": "Xeyr, sil",

@@ -23,7 +23,7 @@
 	"editcheck-dialog-addref-title": "Legg til en referanse",
 	"editcheck-dialog-title": "Før publisering",
 	"editcheck-copyvio-title": "Innhold som er limt inn",
-	"editcheck-copyvio-description": "Generelt må du ikke kopiere tekst fra andre kilder. Det utgjør ofte plagiarisme og et brudd på opphavsrett.",
+	"editcheck-copyvio-description": "Unngå å kopiere tekst fra andre kilder, selv om du parafraserer eller siterer den. Dette kan anses som [$1 opphavsrettsbrudd eller plagiat], og kan føre til at innholdet blir fjernet eller kontoen din blir blokkert.",
 	"editcheck-copyvio-prompt": "Skrev du denne teksten?",
 	"editcheck-copyvio-action-keep": "Ja, behold den",
 	"editcheck-copyvio-action-remove": "Nei, fjern den",

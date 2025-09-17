@@ -24,7 +24,7 @@
 	"editcheck-dialog-addref-title": "Lisää lähdeviite",
 	"editcheck-dialog-title": "Ennen julkaisemista",
 	"editcheck-copyvio-title": "Liitetty sisältö",
-	"editcheck-copyvio-description": "Tekstin kopiointi muista lähteistä on pääsääntöisesti kiellettyä. Se on usein sekä tekijänoikeusrikkomus että plagiarismia.",
+	"editcheck-copyvio-description": "Vältä tekstin kopiointia muista lähteistä, vaikka muotoilisit sen uudelleen tai lisäisit lähdeviitteen. Kopiointia pidetään [$1 tekijänoikeusrikkomuksena tai plagiarismia], ja se voi johtaa lisäämäsi sisällön poistamiseen tai tunnuksesi estoon.",
 	"editcheck-copyvio-prompt": "Kirjoititko tämän tekstin itse?",
 	"editcheck-copyvio-action-keep": "Kyllä, säilytä",
 	"editcheck-copyvio-action-remove": "Ei, poista",

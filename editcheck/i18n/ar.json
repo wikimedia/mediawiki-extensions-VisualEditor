@@ -24,7 +24,7 @@
 	"editcheck-dialog-addref-title": "إضافة استشهاد",
 	"editcheck-dialog-title": "قبل النشر",
 	"editcheck-copyvio-title": "محتوى ملصوق",
-	"editcheck-copyvio-description": "كقاعدة عامة، لا تنسخ نصًا من مصادر أخرى. عادة، يُشكل هذا انتهاكًا لحقوق الطبع والنشر وسرقة أدبية.",
+	"editcheck-copyvio-description": "يرجى تجنب نسخ النصوص من مصادر أخرى، حتى لو أُعيدت صياغتها أو استُشهد بها. قد يُعدّ هذا [$1 انتهاكًا لحقوق الطبع والنشر أو انتحالًا]، وقد يؤدي إلى إزالة محتواك أو حظر حسابك.",
 	"editcheck-copyvio-prompt": "هل كتبت هذا النص؟",
 	"editcheck-copyvio-action-keep": "نعم، احتفظ به",
 	"editcheck-copyvio-action-remove": "لا، أزله",
