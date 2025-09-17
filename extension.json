@@ -2175,7 +2175,6 @@
 			"messages": [
 				"quotation-marks",
 				"redirectedfrom",
-				"templatedata-doc-subpage",
 				"visualeditor-changedesc-mwtransclusion",
 				"visualeditor-dialog-template-title",
 				"visualeditor-dialog-transclusion-action-save",
@@ -2251,7 +2250,15 @@
 			"targets": [
 				"desktop",
 				"mobile"
-			]
+			],
+			"factory": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDataModule::addOptional",
+			"optional": {
+				"TemplateData": {
+					"messages": [
+						"templatedata-doc-subpage"
+					]
+				}
+			}
 		},
 		"treeDiffer": {
 			"scripts": [

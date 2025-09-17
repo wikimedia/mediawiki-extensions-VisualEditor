@@ -10,7 +10,9 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use ExtensionRegistry;
 use MediaWiki\ResourceLoader\Context as ResourceLoaderContext;
+use MediaWiki\ResourceLoader\FileModule as ResourceLoaderFileModule;
 use MediaWiki\ResourceLoader\Module as ResourceLoaderModule;
 use Title;
 
@@ -125,5 +127,41 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 			'ext.visualEditor.base',
 			'ext.visualEditor.mediawiki',
 		];
+	}
+
+	/**
+	 * Add optional array values to a ResourceLoader module definition depending on loaded extensions.
+	 *
+	 * "factory": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDataModule::addOptional"
+	 * "optional": {
+	 *   "MyExtension": {
+	 *     "dependencies": [ ... ],
+	 *     "messages": [ ... ],
+	 *     "packageFiles": [ ... ],
+	 *     ...
+	 *   }
+	 * }
+	 *
+	 * @inheritDoc
+	 */
+	public static function addOptional( array $info ): ResourceLoaderModule {
+		$extensionRegistry = ExtensionRegistry::getInstance();
+
+		if ( isset( $info['optional'] ) ) {
+			foreach ( $info['optional'] as $ext => $extOptions ) {
+				if ( $extensionRegistry->isLoaded( $ext ) ) {
+					foreach ( $extOptions as $key => $values ) {
+						if ( !isset( $info[$key] ) ) {
+							$info[$key] = [];
+						}
+						// TODO: Support non-array properties
+						$info[$key] = array_merge( $info[$key], (array)$values );
+					}
+				}
+			}
+		}
+
+		$class = $info['class'] ?? ResourceLoaderFileModule::class;
+		return new $class( $info );
 	}
 }
