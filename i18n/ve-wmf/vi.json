@@ -36,5 +36,5 @@
 	"visualeditor-welcomedialog-content-thanks": "Xin cảm ơn bạn muốn giúp người ta khám phá và tìm hiểu!",
 	"visualeditor-welcomedialog-switch": "Chuyển sang trình soạn thảo mã nguồn",
 	"visualeditor-welcomedialog-switch-ve": "Chuyển sang trình soạn thảo trực quan",
-	"visualeditor-welcomedialog-title": "{{GENDER:$1}}Hoan nghênh bạn đã đến $2"
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Chào mừng bạn}} đến với $2"
 }
