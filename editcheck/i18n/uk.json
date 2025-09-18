@@ -29,7 +29,6 @@
 	"editcheck-copyvio-keep-description": "Іншим редакторам буде цінно дізнатися, чому ви зберігаєте цей вставлений текст.",
 	"editcheck-copyvio-keep-wrote": "Цей контент написано мною, і це ще ніде не опубліковано",
 	"editcheck-copyvio-keep-permission": "Я маю дозвіл на повторне використання цього контенту",
-	"editcheck-copyvio-keep-free": "Цей текст є суспільним надбанням або вільноліцензований",
 	"editcheck-copyvio-keep-other": "Інше",
 	"editcheck-copyvio-keep-notify": "Дякуємо вам, що поділилися своєю причиною, чому ви зберігаєте вставлений текст!",
 	"editcheck-copyvio-remove-notify": "Дякуємо, що прибрали цей текст!",
