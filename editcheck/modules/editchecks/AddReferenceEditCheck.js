@@ -43,14 +43,20 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
  * @return {ve.Range[]}
  */
 mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( documentModel, includeReferencedContent ) {
+	const containsReference = ( range ) => {
+		for ( let i = range.start; i < range.end; i++ ) {
+			if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
+				return true;
+			}
+		}
+		return false;
+	};
 	// Broken out so a helper for tagging can call it
 	const ranges = this.getAddedContentRanges( documentModel ).filter( ( range ) => {
 		if ( !includeReferencedContent ) {
 			// 4. Exclude any ranges that already contain references
-			for ( let i = range.start; i < range.end; i++ ) {
-				if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
-					return false;
-				}
+			if ( containsReference( range ) ) {
+				return false;
 			}
 		}
 		// 5. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
@@ -58,6 +64,17 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 		if ( branchNode.getParent() !== documentModel.attachedRoot ) {
 			return false;
 		}
+
+		// 6. If a paragraph is followed by a list, consider it to be part of this paragraph
+		//    for the purpose of this check, and exclude if it contains a reference (T405092)
+		const nextSibling = branchNode.parent.children[ branchNode.parent.indexOf( branchNode ) + 1 ];
+		if ( nextSibling instanceof ve.dm.ListNode ) {
+			const siblingRange = nextSibling.getRange();
+			if ( containsReference( siblingRange ) ) {
+				return false;
+			}
+		}
+
 		return true;
 	} );
 
