@@ -12,7 +12,11 @@ mw.editcheck.ExternalLinksEditCheck.static.name = 'externalLink';
 mw.editcheck.ExternalLinksEditCheck.static.description = 'Generally, external links should not appear in the body of the article. Please refer to WP:ELNO. Edit this link?';
 
 mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	ignoreSections: [ 'External links' ]
+	ignoreSections: [
+		'External links',
+		'References',
+		'Further reading'
+	]
 } );
 
 mw.editcheck.ExternalLinksEditCheck.static.choices = [
