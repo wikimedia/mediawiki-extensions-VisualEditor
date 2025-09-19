@@ -76,28 +76,20 @@ mw.editcheck.AsyncTextCheck.prototype.handleListener = function ( listener, surf
 	if ( selection instanceof ve.dm.LinearSelection && listener !== 'onBeforeSave' ) {
 		// TODO currentBranchNode = surfaceModel.getDocument().getBranchNodeFromOffset( selection.getRange().to );
 	}
-	let modifiedContentRanges = this.getModifiedContentRanges( documentModel );
-	if ( listener !== 'onCheckAll' ) {
-		// mw.editcheck.hasAddedContentFailingToneCheck wants to check for any violations, even dismissed ones.
-		// Used for tagging.
-		modifiedContentRanges = modifiedContentRanges.filter( ( range ) => !this.isDismissedRange( range ) );
-	}
-
-	if ( listener === 'onBeforeSave' ) {
-		modifiedContentRanges = modifiedContentRanges.filter( ( range ) => !this.isTaggedRange( 'interacted', range ) );
-	}
 
 	const actionPromises = [];
 	this.getModifiedContentBranchNodes( documentModel ).forEach( ( node ) => {
 		const nodeFragment = new ve.dm.SurfaceFragment( surfaceModel, new ve.dm.LinearSelection( node.getRange() ) );
-		const fragments = modifiedContentRanges
-			.filter( ( range ) => node.getRange().containsRange( range ) )
-			.map( ( range ) => surfaceModel.getLinearFragment( range ) );
-
-		/* All fragments have been dismissed */
-		if ( !fragments.length ) {
+		const range = node.getRange();
+		if (
+			( listener === 'onBeforeSave' && this.isTaggedRange( 'interacted', range ) ) ||
+			// mw.editcheck.hasAddedContentFailingToneCheck wants to check for any violations, even dismissed ones.
+			// Used for tagging.
+			( listener !== 'onCheckAll' && this.isDismissedRange( range ) )
+		) {
 			return;
 		}
+
 		actionPromises.push( this.checkText( documentModel.data.getText( true, node.getRange() ) ).then( ( outcome ) => {
 			if ( !outcome ) {
 				return null;
