@@ -19,6 +19,8 @@ mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.
 	predictionThreshold: 0.8
 } );
 
+mw.editcheck.AsyncTextCheck.static.queue = [];
+
 /* Static methods */
 
 /**
@@ -33,31 +35,63 @@ mw.editcheck.ToneCheck.static.checkAsync = function ( text ) {
 		return false;
 	}
 
+	const deferred = ve.createDeferred();
+
+	// we don't need to think about deduplication because the memoization has
+	// handled that for us
+	this.queue.push( { text, deferred } );
+
+	this.doCheckRequestsDebounced();
+
+	return deferred.promise();
+};
+
+/**
+ * Make the actual API request, batching together all pending checks
+ */
+mw.editcheck.ToneCheck.static.doCheckRequests = function () {
 	const title = mw.Title.newFromText( mw.config.get( 'wgRelevantPageName' ) );
 	const titleText = title ? title.getMainText() : '';
 
-	return fetch( 'https://api.wikimedia.org/service/lw/inference/v1/models/edit-check:predict', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'text/html'
-		},
-		body: JSON.stringify( {
-			instances: [
+	// API will only accept at most 100 instances
+	const batchSize = 100;
+	while ( this.queue.length ) {
+		const subqueue = this.queue.splice( 0, batchSize );
+		fetch( 'https://api.wikimedia.org/service/lw/inference/v1/models/edit-check:predict', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/html'
+			},
+			body: JSON.stringify( { instances: subqueue.map( ( item ) => (
 				/* eslint-disable camelcase */
 				{
-					modified_text: text,
+					modified_text: item.text,
 					page_title: titleText,
 					original_text: '',
 					check_type: 'tone',
 					lang: mw.config.get( 'wgContentLanguage' )
 				}
 				/* eslint-enable camelcase */
-			]
+			) ) } )
 		} )
-	} ).then(
-		( response ) => response.json()
-	);
+			.then( ( response ) => response.json() )
+			.then( ( data ) => {
+				if ( data && data.predictions && subqueue.length === data.predictions.length ) {
+					subqueue.forEach( ( item, index ) => {
+						const prediction = data.predictions[ index ];
+						item.deferred.resolve( prediction );
+					} );
+				} else {
+					subqueue.forEach( ( item ) => {
+						item.deferred.reject();
+					} );
+				}
+			} );
+	}
+	this.queue = [];
 };
+
+mw.editcheck.ToneCheck.static.doCheckRequestsDebounced = ve.debounce( mw.editcheck.ToneCheck.static.doCheckRequests, 1 );
 
 /* Instance methods */
 
@@ -73,10 +107,7 @@ mw.editcheck.ToneCheck.prototype.canBeShown = function ( ...args ) {
 };
 
 mw.editcheck.ToneCheck.prototype.afterMemoized = function ( data ) {
-	return !!(
-		ve.getProp( data, 'predictions', 0, 'prediction' ) &&
-		ve.getProp( data, 'predictions', 0, 'probability' ) >= this.config.predictionThreshold
-	);
+	return !!( data.prediction && data.probability >= this.config.predictionThreshold );
 };
 
 mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
