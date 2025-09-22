@@ -3,6 +3,7 @@
 		"authors": [
 			"Dyolf77 (WMF)",
 			"Meno25",
+			"Mohammed Qays",
 			"محمد أحمد عبد الفتاح"
 		]
 	},
@@ -14,7 +15,7 @@
 	"editcheck-dialog-action-back": "رجوع",
 	"editcheck-dialog-action-submit": "إرسال",
 	"editcheck-dialog-addref-description": "ساعدوا القراء على فهم مصدر هذه المعلومات عن طريق إضافة استشهاد.",
-	"editcheck-dialog-addref-reject-question": "لماذا لن تضيفوا استشهادًا؟",
+	"editcheck-dialog-addref-reject-question": "لماذا لا تُضيف استشهادًا؟",
 	"editcheck-dialog-addref-reject-description": "سيقدر المحرّرون الآخرون معرفة المزيد عن قرارك بتجاوز الاستشهاد.",
 	"editcheck-dialog-addref-reject-irrelevant": "لا أعتقد أن الاستشهادات ضروريّة للتعديل الذي أقوم به",
 	"editcheck-dialog-addref-reject-common-knowledge": "المعلومات التي أقوم بإضافتها معروفة على نطاق واسع",
@@ -28,10 +29,10 @@
 	"editcheck-copyvio-prompt": "هل كتبت هذا النص؟",
 	"editcheck-copyvio-action-keep": "نعم، احتفظ به",
 	"editcheck-copyvio-action-remove": "لا، أزله",
-	"editcheck-copyvio-keep-description": "يقدر المحررون الآخرون معرفة المزيد عن سبب احتفاظك بهذا النص الملصق.",
+	"editcheck-copyvio-keep-description": "من فضلك ساعد المحررين الآخرين في فهم سبب احتفاظك بالنص الملصق.",
 	"editcheck-copyvio-keep-wrote": "لقد كتبت هذا المحتوى ولم يتم نشره في أي مكان آخر",
 	"editcheck-copyvio-keep-permission": "لدي الإذن لإعادة استخدام هذا المحتوى",
-	"editcheck-copyvio-keep-other": "آخر",
+	"editcheck-copyvio-keep-other": "لا ينطبق أي مما سبق",
 	"editcheck-copyvio-keep-notify": "شكرًا لك على مشاركة سببك للاحتفاظ بالنص الملصق!",
 	"editcheck-copyvio-remove-notify": "شكرًا لك على إزالة هذا النص!",
 	"editcheck-tone-title": "إعادة النظر في الأسلوب؟",

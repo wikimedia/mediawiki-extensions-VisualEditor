@@ -21,7 +21,7 @@
 	"editcheck-dialog-addref-title": "Додавање референце",
 	"editcheck-dialog-title": "Пре објављивања",
 	"editcheck-copyvio-title": "Налепљен садржај",
-	"editcheck-copyvio-description": "Опште правило је да се не копира текст из других извора. Копирање текста је кршење ауторских права и плагијат.",
+	"editcheck-copyvio-description": "Опште правило је да се не копира текст из других извора. Копирање туђих текстова је [$1 кршење ауторских права и плагијат]. И такође може довести до уклањања садржаја и блокаде.",
 	"editcheck-copyvio-action-keep": "Да, задржи",
 	"editcheck-copyvio-action-remove": "Не, уклони",
 	"editcheck-copyvio-keep-other": "Друго",
