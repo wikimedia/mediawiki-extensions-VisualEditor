@@ -44,17 +44,20 @@ ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {};
 	const wt = ( ve.getProp( mwData, 'parts', '0', 'template', 'target', 'wt' ) || '' ) ||
 		ve.getProp( mwData, 'parts', '0', 'parserfunction', 'params', '1', 'wt' );
-	const content = wt.replace( /^DISPLAYTITLE:/i, '' );
+	const localizedPrefix = wt.split( ':' )[ 0 ];
+	const content = wt.slice( localizedPrefix.length + 1 );
 	return {
 		type: this.name,
 		attributes: {
+			localizedPrefix: localizedPrefix,
 			content: content
 		}
 	};
 };
 
 ve.dm.MWDisplayTitleMetaItem.static.toDomElements = function ( dataElement, doc ) {
-	const prefix = 'DISPLAYTITLE',
+	const prefix = dataElement.attributes.localizedPrefix ||
+			mw.config.get( 'wgVisualEditorConfig' ).displayTitlePrefix,
 		displayTitle = dataElement.attributes.content,
 		mwData = {
 			parts: [

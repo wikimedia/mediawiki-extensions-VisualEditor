@@ -1150,6 +1150,9 @@ class Hooks implements
 		// presence or absence of a trailing colon in the message makes no difference.
 		$defaultSortPrefix = preg_replace( '/:$/', '', $defaultSortPrefix );
 
+		$displayTitlePrefix = $services->getMagicWordFactory()->get( 'displaytitle' )->getSynonym( 0 );
+		$displayTitlePrefix = preg_replace( '/:$/', '', $displayTitlePrefix );
+
 		$vars['wgVisualEditorConfig'] = [
 			'usePageImages' => $this->extensionRegistry->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => $this->extensionRegistry->isLoaded( 'WikibaseClient' ),
@@ -1191,6 +1194,7 @@ class Hooks implements
 			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $this->extensionRegistry->isLoaded( 'CirrusSearch' ),
 			'defaultSortPrefix' => $defaultSortPrefix,
+			'displayTitlePrefix' => $displayTitlePrefix,
 		];
 
 		// This can be removed and the module added in TemplateData's extension.json

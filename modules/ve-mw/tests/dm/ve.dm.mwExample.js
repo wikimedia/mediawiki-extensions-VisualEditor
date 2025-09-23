@@ -2198,7 +2198,8 @@ ve.dm.mwExample.domToDataCases = {
 			{
 				type: 'mwDisplayTitle',
 				attributes: {
-					content: 'foo'
+					content: 'foo',
+					localizedPrefix: 'DISPLAYTITLE'
 				}
 			},
 			{ type: '/mwDisplayTitle' },
