@@ -106,11 +106,7 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
 mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel ) {
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
-		const check = this.create(
-			checkName,
-			controller,
-			ve.extendObject( {}, mw.editcheck.config[ '*' ], mw.editcheck.config[ checkName ] )
-		);
+		const check = this.create( checkName, controller );
 		if ( !check.canBeShown() ) {
 			return;
 		}
@@ -132,6 +128,36 @@ mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( control
 			actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
 			return actions;
 		} );
+};
+
+/**
+ * Create a check
+ *
+ * This generates the configuration to pass to the check from the various overrides.
+ *
+ * @param {string} checkName
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [extraConfig={}] extra configuration to apply
+ * @return {mw.editcheck.BaseEditCheck}
+ */
+mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controller, extraConfig = {} ) {
+	return this.constructor.super.prototype.create.call(
+		this,
+		checkName,
+		controller,
+		this.buildConfig( checkName, extraConfig )
+	);
+};
+
+/**
+ * Build the config for a check
+ *
+ * @param {string} checkName
+ * @param {Object} [extraConfig={}] extra configuration to apply
+ * @return {Object}
+ */
+mw.editcheck.EditCheckFactory.prototype.buildConfig = function ( checkName, extraConfig ) {
+	return ve.extendObject( {}, mw.editcheck.config[ '*' ], mw.editcheck.config[ checkName ], extraConfig );
 };
 
 mw.editcheck.editCheckFactory = new mw.editcheck.EditCheckFactory();

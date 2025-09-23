@@ -66,13 +66,13 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 		return false;
 	}
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
-	const check = mw.editcheck.editCheckFactory.create( 'addReference', null, mw.editcheck.config.addReference );
+	const check = mw.editcheck.editCheckFactory.create( 'addReference', null, { enabled: true } );
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
 
 mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.config.tone );
+	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone', { enabled: true } ) );
 	// Run actual check eligibility before calling API
 	if ( !check.canBeShown() ) {
 		return ve.createDeferred().resolve( false ).promise();
@@ -174,7 +174,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			target.on( 'surfaceReady', () => {
 				target.getSurface().getView().on( 'paste', ( data ) => {
 					// Check might not be registered so we can't use the factory.
-					const check = new mw.editcheck.PasteCheck( null, mw.editcheck.config.paste );
+					const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { enabled: true } ) );
 					if ( check.canBeShown() && !data.source && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
 					}

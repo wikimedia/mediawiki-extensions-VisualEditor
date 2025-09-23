@@ -180,7 +180,7 @@ Controller.prototype.editChecksArePossible = function () {
 	return [ 'onBeforeSave', 'onDocumentChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
 			( checkName ) => {
-				const check = mw.editcheck.editCheckFactory.create( checkName, this, mw.editcheck.config[ checkName ] );
+				const check = mw.editcheck.editCheckFactory.create( checkName, this );
 				return check.canBeShown();
 			}
 		)
