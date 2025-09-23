@@ -733,7 +733,9 @@ Controller.prototype.drawSelections = function () {
 				// Optimization: When showGutter is false inactive selections currently render nothing
 				return;
 			}
-			const selectionElements = surfaceView.getSelectionManager().getCachedSelection( isActive ? 'editCheck-active' : 'editCheck-inactive', selection, isActive ? activeOptions : inactiveOptions );
+			const selectionElements = surfaceView.getSelectionManager().getCachedSelectionElements(
+				isActive ? 'editCheck-active' : 'editCheck-inactive', selection, isActive ? activeOptions : inactiveOptions
+			);
 			if ( selectionElements ) {
 				// The following classes are used here:
 				// * ve-ce-surface-selection-editCheck-error
