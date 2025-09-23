@@ -34,7 +34,6 @@ require( './editchecks/ToneCheck.js' );
 require( './editchecks/PasteCheck.js' );
 
 nonDefaultChecks.add( 'tone' );
-nonDefaultChecks.add( 'paste' );
 
 if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
@@ -46,6 +45,11 @@ if ( abGroup === 'test' ) {
 
 for ( const check of nonDefaultChecks ) {
 	mw.editcheck.editCheckFactory.unregister( check );
+}
+
+if ( abCheck === 'paste' ) {
+	// In the a/b test, force-enable/disable the check
+	mw.editcheck.config.paste = ve.extendObject( mw.editcheck.config.paste || {}, { enabled: abGroup === 'test' } );
 }
 
 const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];
@@ -173,8 +177,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		if ( nonDefaultChecks.has( 'paste' ) ) {
 			target.on( 'surfaceReady', () => {
 				target.getSurface().getView().on( 'paste', ( data ) => {
-					// Check might not be registered so we can't use the factory.
-					const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { enabled: true } ) );
+					const check = mw.editcheck.editCheckFactory.create( 'paste', null, { enabled: true } );
 					if ( check.canBeShown() && !data.source && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
 					}
