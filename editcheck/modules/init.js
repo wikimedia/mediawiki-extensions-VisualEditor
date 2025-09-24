@@ -174,15 +174,18 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			} );
 		}
 		// Temporary logging for T402460
-		if ( nonDefaultChecks.has( 'paste' ) ) {
-			target.on( 'surfaceReady', () => {
-				target.getSurface().getView().on( 'paste', ( data ) => {
+		target.on( 'surfaceReady', () => {
+			target.getSurface().getView().on( 'paste', ( data ) => {
+				// Only run when the check is disabled:
+				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
+				if ( !defaults.enabled ) {
+					// Now only run when the rest of the check's config means it would have applied if not disabled:
 					const check = mw.editcheck.editCheckFactory.create( 'paste', null, { enabled: true } );
 					if ( check.canBeShown() && !data.source && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
 					}
-				} );
+				}
 			} );
-		}
+		} );
 	} );
 }
