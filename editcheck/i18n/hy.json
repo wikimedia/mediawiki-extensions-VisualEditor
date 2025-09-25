@@ -7,5 +7,15 @@
 	},
 	"editcheck-dialog-action-no": "Ոչ",
 	"editcheck-dialog-action-yes": "Այո",
-	"editcheck-copyvio-keep-other": "Այլ"
+	"editcheck-dialog-action-decline": "Մերժել",
+	"editcheck-dialog-action-revise": "Վերանայել",
+	"editcheck-dialog-action-recheck": "Վերստուգել",
+	"editcheck-dialog-action-back": "Հետ",
+	"editcheck-dialog-action-submit": "Ուղարկել",
+	"editcheck-dialog-addref-reject-other": "Այլ",
+	"editcheck-dialog-addref-success-notify": "Շնորհակալություն մեջբերում ավելացնելու համար",
+	"editcheck-dialog-addref-title": "Ավելացնել մեջբերում",
+	"editcheck-dialog-title": "Հրապարակումից առաջ",
+	"editcheck-copyvio-keep-other": "Վերը նշվածներից ոչ մեկը չի վերաբերում",
+	"editcheck-tone-reject-other": "Այլ"
 }
