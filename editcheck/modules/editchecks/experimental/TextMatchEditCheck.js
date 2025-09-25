@@ -12,6 +12,15 @@ OO.inheritClass( mw.editcheck.TextMatchEditCheck, mw.editcheck.BaseEditCheck );
 
 mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
 
+/**
+ * The configs of TextMatchEditCheck take priority over individual replacer configs.
+ * So we make TextMatch’s defaults nonrestrictive,
+ * and let the finer limitations be handled by individual replacers.
+ */
+mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+	maximumEditcount: null
+} );
+
 mw.editcheck.TextMatchEditCheck.static.choices = [
 	{
 		action: 'delete',
@@ -27,7 +36,21 @@ mw.editcheck.TextMatchEditCheck.static.replacers = [
 	{
 		query: 'unfortunately',
 		title: 'Adverb usage',
-		message: new OO.ui.HtmlSnippet( 'Use of adverbs such as "unfortunately" should usually be avoided so as to maintain an impartial tone. <a href="#">Read more</a>.' )
+		message: new OO.ui.HtmlSnippet( 'Use of adverbs such as "unfortunately" should usually be avoided so as to maintain an impartial tone. <a href="#">Read more</a>.' ),
+		config: {
+			maximumEditcount: 500,
+			account: 'loggedin',
+			enabled: true
+		}
+	},
+	{
+		query: 'sadly',
+		title: 'Adverb usage',
+		message: new OO.ui.HtmlSnippet( 'Use of adverbs such as "sadly" should usually be avoided so as to maintain an impartial tone. <a href="#">Read more</a>.' ),
+		config: {
+			account: false,
+			enabled: true
+		}
 	}
 ];
 
@@ -36,6 +59,9 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
 	this.replacers.forEach( ( replacer ) => {
 		if ( replacer.listener && replacer.listener !== listener ) {
+			return;
+		}
+		if ( replacer.config && !this.constructor.static.doesConfigMatch( replacer.config ) ) {
 			return;
 		}
 		surfaceModel.getDocument().findText( replacer.query )

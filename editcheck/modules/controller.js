@@ -245,7 +245,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	const existing = this.getActions( listener );
 
 	// Create all actions for this listener
-	return mw.editcheck.editCheckFactory.createAllByListener( this, listener, this.surface.getModel() )
+	return mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel() )
 		.then( ( actionsFromListener ) => {
 			// Try to match each new action to an existing one (to preserve state)
 			const actions = actionsFromListener.map( ( action ) => existing.find( ( existingAction ) => action.equals( existingAction ) ) || action );

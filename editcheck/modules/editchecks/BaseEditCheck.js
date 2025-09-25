@@ -51,6 +51,34 @@ mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref
 
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
 
+/* Static methods */
+
+/**
+ * Find out if any conditions in the provided config are met
+ *
+ * @param {Object} [config] Configuration options
+ * @return {boolean} Whether the config matches
+ */
+mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config ) {
+	if ( !config.enabled ) {
+		return false;
+	}
+	// account status:
+	// loggedin, loggedout, or any-other-value meaning 'both'
+	// we'll count temporary users as "logged out" by using isNamed here
+	if ( config.account === 'loggedout' && mw.user.isNamed() ) {
+		return false;
+	}
+	if ( config.account === 'loggedin' && !mw.user.isNamed() ) {
+		return false;
+	}
+	// some checks are only shown for newer users
+	if ( config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > config.maximumEditcount ) {
+		return false;
+	}
+	return true;
+};
+
 /* Methods */
 
 /**
@@ -156,20 +184,7 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 	if ( mw.editcheck.forceEnable ) {
 		return true;
 	}
-	if ( !this.config.enabled ) {
-		return false;
-	}
-	// account status:
-	// loggedin, loggedout, or any-other-value meaning 'both'
-	// we'll count temporary users as "logged out" by using isNamed here
-	if ( this.config.account === 'loggedout' && mw.user.isNamed() ) {
-		return false;
-	}
-	if ( this.config.account === 'loggedin' && !mw.user.isNamed() ) {
-		return false;
-	}
-	// some checks are only shown for newer users
-	if ( this.config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > this.config.maximumEditcount ) {
+	if ( !this.constructor.static.doesConfigMatch( this.config ) ) {
 		return false;
 	}
 	return true;

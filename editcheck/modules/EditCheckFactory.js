@@ -1,7 +1,7 @@
 /**
  * EditCheckFactory
  *
- * This class provides a registry of Edit Checks, and instantiates and calls them when createAllByListener() is called.
+ * This class provides a registry of Edit Checks, and instantiates and calls them when createAllActionsByListener() is called.
  *
  * The controller keeps track of the actions which have been returned by previous invocations, and deduplicates actions
  * which it has seen before. This allows us to keep state (mostly) out of the checks and EditCheckFactory itself.
@@ -96,14 +96,12 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * Checks are created statelessly and then mapped to their 'originals' by the controller. This way if we track state
  * on the original, or use object identity with the actions to track UI updates, the object remains stable.
  *
- * TODO: Rename to createAllActionsByListener
- *
  * @param {mw.editcheck.Controller} controller
  * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
-mw.editcheck.EditCheckFactory.prototype.createAllByListener = function ( controller, listenerName, surfaceModel ) {
+mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel ) {
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
 		const check = this.create( checkName, controller );
