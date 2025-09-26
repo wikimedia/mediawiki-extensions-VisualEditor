@@ -1918,9 +1918,12 @@
 			]
 		},
 		"ext.visualEditor.diffPage.init.styles": {
-			"styles": [
-				"modules/ve-mw/preinit/styles/ve.init.mw.DiffPage.less"
-			]
+			"styles": "modules/ve-mw/preinit/styles/ve.init.mw.DiffPage.less",
+			"skinStyles": {
+				"minerva": [
+					"modules/ve-mw/preinit/styles/ve.init.mw.DiffPage-minerva.less"
+				]
+			}
 		},
 		"ext.visualEditor.diffLoader": {
 			"group": "visualEditorA",
