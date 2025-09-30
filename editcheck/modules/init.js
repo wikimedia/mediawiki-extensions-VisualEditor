@@ -3,7 +3,7 @@
  *   1: override user eligibility criteria for all checks
  *   2: also load experimental checks
  */
-const ecenable = new URL( location.href ).searchParams.get( 'ecenable' );
+const ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
 const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
 const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
 

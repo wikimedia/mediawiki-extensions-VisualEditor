@@ -19,6 +19,8 @@
  * @hideconstructor
  */
 ( function () {
+	mw.libs.ve = mw.libs.ve || {};
+
 	const conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
 		modules = [
@@ -28,6 +30,9 @@
 		];
 
 	const url = new URL( location.href );
+
+	mw.libs.ve.initialUrl = url;
+
 	// Provide the new wikitext editor
 	if (
 		mw.user.options.get( 'visualeditor-newwikitext' ) ||
@@ -71,8 +76,6 @@
 	) {
 		modules.push( 'ext.visualEditor.mwsignature' );
 	}
-
-	mw.libs.ve = mw.libs.ve || {};
 
 	mw.libs.ve.targetLoader = {
 		/**
