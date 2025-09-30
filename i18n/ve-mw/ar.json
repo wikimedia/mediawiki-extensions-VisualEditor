@@ -77,7 +77,7 @@
 	"visualeditor-changedesc-mwcategory-sortkey-set": "تم تعيين مفتاح الفرز على $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "لم يتم ضبط مفتاح الفرز من $1",
 	"visualeditor-changedesc-mwlanguagevariant": "صيغة تنويعة اللغة تغيرت",
-	"visualeditor-changedesc-mwredirect": "تم تغيير التحويلة من $1 إلى $2",
+	"visualeditor-changedesc-mwredirect": "هدف التحويلة تغيّر من $1 إلى $2",
 	"visualeditor-changedesc-mwtransclusion": "محددات القالب تغيرت",
 	"visualeditor-desc": "المحرر المرئي لميدياويكي",
 	"visualeditor-descriptionpagelink": "Project:المحرر المرئي",
