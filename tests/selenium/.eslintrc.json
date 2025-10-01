@@ -6,5 +6,9 @@
 	"globals": {
 		"mw": "readonly",
 		"ve": "readonly"
+	},
+	"parserOptions": {
+		"ecmaVersion": "2022",
+		"sourceType": "module"
 	}
 }
