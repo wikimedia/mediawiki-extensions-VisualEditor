@@ -1082,24 +1082,12 @@
 				"visualeditor-toolbar-text-style"
 			]
 		},
-		"ext.visualEditor.commentAnnotation": {
-			"group": "visualEditorA",
-			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorFileModule",
-			"veModules": [
-				"visualEditor.commentAnnotation"
-			],
-			"dependencies": [
-				"ext.visualEditor.core"
-			],
-			"messages": [
-				"visualeditor-commentannotationcontextitem-comment"
-			]
-		},
 		"ext.visualEditor.rebase": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorFileModule",
 			"veModules": [
 				"socket.io",
-				"visualEditor.rebase"
+				"visualEditor.rebase",
+				"visualEditor.commentAnnotation"
 			],
 			"group": "visualEditorA",
 			"dependencies": [
@@ -1107,10 +1095,10 @@
 				"ext.visualEditor.sanitize",
 				"color-picker",
 				"oojs-ui.styles.icons-user",
-				"ext.visualEditor.commentAnnotation",
 				"ext.visualEditor.checkList"
 			],
 			"messages": [
+				"visualeditor-commentannotationcontextitem-comment",
 				"visualeditor-rebase-client-author-name",
 				"visualeditor-rebase-client-connecting",
 				"visualeditor-rebase-corrupted-document-error",
