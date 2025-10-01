@@ -110,14 +110,6 @@
 /* Actions */
 
 .ve-ui-editCheckDialog {
-	&-title {
-		display: block;
-		font-weight: bold;
-		padding: @spacing-50 0;
-		margin-bottom: @spacing-50;
-		border-bottom: 1px solid @border-color-base;
-	}
-
 	&-footer {
 		display: flex;
 		justify-content: flex-end;
@@ -242,9 +234,9 @@
 		display: none;
 	}
 
+	// See: .ve-ui-mobileContext, which this is closely mimicking
 	.mw-mf & {
 		top: auto;
-		// See: .ve-ui-mobileContext, which this is closely mimicking
 		/* Match toolbar border & shadow */
 		border-top: @border-subtle;
 		box-shadow: 0 -1px 1px 0 rgba( 0, 0, 0, 0.1 );
@@ -255,19 +247,16 @@
 		max-width: calc( 993.3px + (2 * 1em) );
 		margin: 0 auto;
 
-		&-title {
-			padding: @spacing-75 @spacing-100;
-			margin-bottom: 0;
-		}
-
 		&-close {
 			position: absolute;
 			right: 0;
 			top: 2px;
+			z-index: 1;
 		}
 
 		&-footer {
-			margin: 0 @spacing-100 @spacing-50;
+			border-top: 1px solid #eaecf0;
+			padding: @spacing-12 @spacing-100;
 		}
 
 		&.ve-ui-editCheckDialog-collapsed {
@@ -282,14 +271,17 @@
 
 		.ve-ui-editCheckActionWidget {
 			margin: 0;
+			padding: 0.5em 1em;
 			border-width: 0;
+			box-shadow: none;
 			background-color: transparent !important;  /* stylelint-disable-line declaration-no-important */
 
+			/* Matches .ve-ui-mobileContext .ve-ui-linearContextItem-body */
 			&-body {
+				border-top: 1px solid #eaecf0;
 				background-color: transparent;
-				padding-top: 0;
-				padding-left: 2em;
-				margin-left: 0;
+				margin: 0.5em -1em 0 -1em;
+				padding: 0.5em 1em;
 			}
 		}
 	}

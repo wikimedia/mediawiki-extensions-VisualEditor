@@ -41,11 +41,6 @@ ve.ui.EditCheckDialog.static.alwaysFocusAction = false;
  * @inheritdoc
  */
 ve.ui.EditCheckDialog.prototype.initialize = function () {
-	this.title = new OO.ui.LabelWidget( {
-		label: this.constructor.static.title,
-		classes: [ 've-ui-editCheckDialog-title' ]
-	} );
-
 	// FIXME: click handlers are getting unbound when the window is closed
 
 	this.closeButton = new OO.ui.ButtonWidget( {
@@ -88,22 +83,22 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	} );
 
 	this.$actions = $( '<div>' );
-	if ( OO.ui.isMobile() ) {
-		this.$body.append( this.title.$element );
-	}
-	if ( mw.editcheck.experimental ) {
-		this.$body.append(
-			new OO.ui.MessageWidget( {
-				type: 'error',
-				label: 'Currently using experimental edit checks. For testing purposes only.',
-				inline: true
-			} ).$element.css( {
-				'white-space': 'normal',
-				margin: '0.5em 1em'
-			} )
-		);
-	}
 	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
+	if ( mw.editcheck.experimental ) {
+		const $warning = new OO.ui.MessageWidget( {
+			type: 'error',
+			label: 'Currently using experimental edit checks. For testing purposes only.',
+			inline: true
+		} ).$element.css( {
+			'white-space': 'normal',
+			margin: '0.5em 1em'
+		} );
+		if ( OO.ui.isMobile() ) {
+			this.footer.$element.before( $warning );
+		} else {
+			this.$body.append( $warning );
+		}
+	}
 };
 
 /**
