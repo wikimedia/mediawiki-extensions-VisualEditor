@@ -142,6 +142,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 
 	// Now try to reuse old widgets if possible, to avoid icons flickering
 	const oldWidgets = this.widgets || [];
+	let shown = false;
 	this.widgets = [];
 	sections.forEach( ( section ) => {
 		let widget;
@@ -149,6 +150,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 			( owidget ) => owidget.actions.length === section.actions.length &&
 				owidget.actions.every( ( oact ) => section.actions.includes( oact ) )
 		);
+		let actionToShow;
 		if ( index !== -1 ) {
 			widget = oldWidgets.splice( index, 1 )[ 0 ];
 		} else {
@@ -156,10 +158,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 				actions: section.actions,
 				controller: this.controller
 			} );
+			if ( !shown ) {
+				actionToShow = section.actions.find( ( action ) => action.check.constructor.static.takesFocus );
+			}
 			this.$body.append( widget.$element );
 		}
 		widget.setPosition( section.rect );
 		this.widgets.push( widget );
+		if ( actionToShow ) {
+			widget.showDialogWithAction( actionToShow );
+			shown = true;
+		}
 	} );
 
 	oldWidgets.forEach( ( widget ) => widget.teardown() );

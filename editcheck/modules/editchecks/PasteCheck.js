@@ -29,6 +29,8 @@ mw.editcheck.PasteCheck.static.choices = [
 	}
 ];
 
+mw.editcheck.PasteCheck.static.takesFocus = true;
+
 mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const pastesById = {};
 	surfaceModel.documentModel.documentNode.getAnnotationRanges().forEach( ( annRange ) => {

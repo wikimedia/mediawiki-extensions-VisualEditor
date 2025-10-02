@@ -51,6 +51,16 @@ mw.editcheck.BaseEditCheck.static.description = ve.msg( 'editcheck-dialog-addref
 
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
 
+/**
+ * Takes focus from the surface to show the check as soon as it is detected (on mobile)
+ *
+ * On desktop the check cards are always visible so
+ * this config does nothing.
+ *
+ * @type {boolean}
+ */
+mw.editcheck.BaseEditCheck.static.takesFocus = false;
+
 /* Static methods */
 
 /**
