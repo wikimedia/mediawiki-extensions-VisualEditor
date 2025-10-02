@@ -163,8 +163,6 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 	} );
 
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
-
-	// surfaceView.$element.after( this.$mobile );
 };
 
 /* Registration */
