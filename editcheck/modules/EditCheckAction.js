@@ -21,7 +21,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	// Mixin constructor
 	OO.EventEmitter.call( this );
 
-	this.mode = '';
+	this.mode = config.mode || '';
 	this.check = config.check;
 	this.fragments = config.fragments;
 	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
@@ -304,4 +304,13 @@ mw.editcheck.EditCheckAction.prototype.isTagged = function ( tag ) {
 	} else {
 		return this.fragments.some( ( fragment ) => this.check.isTaggedRange( tag, fragment.getSelection().getRange() ) );
 	}
+};
+
+/**
+ * Get unique tag name for this action
+ *
+ * @return {string}
+ */
+mw.editcheck.EditCheckAction.prototype.getTagName = function () {
+	return this.check.constructor.static.name;
 };

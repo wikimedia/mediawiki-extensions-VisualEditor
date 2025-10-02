@@ -403,7 +403,7 @@ mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
  * @param {mw.editCheck.EditCheckAction} action
  */
 mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
-	const name = this.constructor.static.name;
+	const name = action.getTagName();
 	if ( action.id ) {
 		const taggedIds = this.controller.taggedIds;
 		taggedIds[ name ] = taggedIds[ name ] || {};
@@ -431,7 +431,7 @@ mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
  * @return {boolean} Whether anything was untagged
  */
 mw.editcheck.BaseEditCheck.prototype.untag = function ( tag, action ) {
-	const name = this.constructor.static.name;
+	const name = action.getTagName();
 	if ( action.id ) {
 		const taggedIds = this.controller.taggedIds;
 		if ( taggedIds[ name ] && taggedIds[ name ][ tag ] ) {
@@ -460,10 +460,14 @@ mw.editcheck.BaseEditCheck.prototype.untag = function ( tag, action ) {
  * Check if this type of check has been dismissed covering a specific range
  *
  * @param {ve.Range} range
+ * @param name of the tag
  * @return {boolean}
  */
-mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
-	return this.isTaggedRange( 'dismissed', range );
+mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range, name ) {
+	if ( !name ) {
+		name = this.constructor.static.name;
+	}
+	return this.isTaggedRange( 'dismissed', range, name );
 };
 
 /**
@@ -471,10 +475,11 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range ) {
  *
  * @param {string} tag
  * @param {ve.Range} range
+ * @param name of the tag
  * @return {boolean}
  */
-mw.editcheck.BaseEditCheck.prototype.isTaggedRange = function ( tag, range ) {
-	const tags = this.controller.taggedFragments[ this.constructor.static.name ];
+mw.editcheck.BaseEditCheck.prototype.isTaggedRange = function ( tag, range, name ) {
+	const tags = this.controller.taggedFragments[ name ];
 	if ( tags === undefined ) {
 		return false;
 	}
