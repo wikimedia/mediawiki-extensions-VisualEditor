@@ -354,10 +354,25 @@ Controller.prototype.getActions = function ( listener ) {
  * Handle select events from the surface model
  *
  * @param {ve.dm.Selection} selection New selection
+ */
+Controller.prototype.onSelect = function () {
+	if ( OO.ui.isMobile() ) {
+		// On mobile we want to close the drawer if the keyboard is shown
+		if ( this.surface.getView().hasNativeCursorSelection() ) {
+			// A native cursor selection means the keyboard will be visible
+			this.closeDialog( 'mobile-keyboard' );
+		}
+	}
+	this.updateActions();
+};
+
+/**
+ * Update actions based on the current selection
+ *
  * @fires Controller#actionsUpdated
  * @fires Controller#focusAction
  */
-Controller.prototype.onSelect = function ( selection ) {
+Controller.prototype.updateActions = function () {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
 		return;
@@ -367,17 +382,12 @@ Controller.prototype.onSelect = function ( selection ) {
 		return;
 	}
 
+	const selection = this.surface.getModel().getSelection();
+
 	if ( !this.inBeforeSave && this.updateCurrentBranchNodeFromSelection( selection ) ) {
 		this.emit( 'branchNodeChange', this.branchNode );
 	}
 
-	if ( OO.ui.isMobile() ) {
-		// On mobile we want to close the drawer if the keyboard is shown
-		if ( this.surface.getView().hasNativeCursorSelection() ) {
-			// A native cursor selection means the keyboard will be visible
-			this.closeDialog( 'mobile-keyboard' );
-		}
-	}
 	if ( this.getActions().length === 0 || selection.isNull() ) {
 		// Nothing to do
 		return;
@@ -505,7 +515,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 
 		if ( newActions.length ) {
 			// Check if any new actions are relevant to our current selection:
-			this.onSelect( this.surface.getModel().getSelection() );
+			this.updateActions();
 		}
 	} );
 };
@@ -787,6 +797,9 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
  * @return {jQuery.Promise}
  */
 Controller.prototype.closeDialog = function ( action ) {
+	if ( !this.focusedAction ) {
+		return;
+	}
 	this.focusAction( undefined );
 	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 	return windowAction.close( 'fixedEditCheckDialog', action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
