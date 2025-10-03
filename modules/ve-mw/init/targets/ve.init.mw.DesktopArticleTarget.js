@@ -848,6 +848,8 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 			$( '#t-permalink' ).add( '#coll-download-as-rl' ).find( 'a' ).each( ( i, el ) => {
 				const permalinkUrl = new URL( el.href );
 				permalinkUrl.searchParams.set( 'oldid', data.newrevid );
+				// permalinkUrl is safe
+				// eslint-disable-next-line local/no-unsanitized-href
 				$( el ).attr( 'href', permalinkUrl.toString() );
 			} );
 		}

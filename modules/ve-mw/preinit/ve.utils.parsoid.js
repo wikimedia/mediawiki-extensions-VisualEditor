@@ -165,6 +165,7 @@ mw.libs.ve.deduplicateStyles = function ( element ) {
 			// Dupe - replace with a placeholder <link> reference
 			const link = style.ownerDocument.createElement( 'link' );
 			link.setAttribute( 'rel', 'mw-deduplicated-inline-style' );
+			// eslint-disable-next-line local/no-unsanitized-href
 			link.setAttribute( 'href', 'mw-data:' + key );
 
 			// Copy attributes from the old `link` node (for selser)
@@ -232,6 +233,9 @@ mw.libs.ve.fixFragmentLinks = function ( container, docTitle, prefix ) {
 						target.setAttribute( 'data-mw-id-fixed', '' );
 					}
 				}
+				// This utility doesn't need to enforce href safety, that
+				// is up to the user when building the DOM nodes originally
+				// eslint-disable-next-line local/no-unsanitized-href
 				el.setAttribute( 'href', '#' + prefix + fragment );
 			}
 			el.removeAttribute( 'target' );

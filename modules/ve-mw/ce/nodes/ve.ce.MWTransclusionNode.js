@@ -84,7 +84,7 @@ ve.ce.MWTransclusionNode.static.getDescriptionDom = function ( model ) {
 				const title = mw.Title.newFromText( part.templatePage );
 				const link = document.createElement( 'a' );
 				link.textContent = title.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template );
-				link.setAttribute( 'href', title.getUrl() );
+				ve.setAttributeSafe( link, 'href', title.getUrl() );
 				return link;
 			}
 			// Not actually a template, but e.g. a parser function

@@ -955,6 +955,8 @@
 					if ( linkUrl.searchParams.has( 'action' ) ) {
 						linkUrl.searchParams.delete( 'action' );
 						linkUrl.searchParams.set( 'veaction', 'editsource' );
+						// linkUrl is safe
+						// eslint-disable-next-line local/no-unsanitized-href
 						$( el ).attr( 'href', linkUrl.toString() );
 					}
 				} );
@@ -1562,6 +1564,8 @@
 				// with accesskey 'v' so create one
 				$( document.body ).append(
 					$( '<a>' )
+						// veEditUrl is safe
+						// eslint-disable-next-line local/no-unsanitized-href
 						.attr( { accesskey: mw.msg( 'accesskey-ca-ve-edit' ), href: veEditUrl } )
 						// Accesskey fires a click event
 						.on( 'click.ve-target', init.onEditTabClick.bind( init, 'visual' ) )

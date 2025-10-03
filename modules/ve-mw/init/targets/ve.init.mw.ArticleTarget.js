@@ -247,6 +247,8 @@ ve.init.mw.ArticleTarget.static.buildRedirectSub = function () {
 ve.init.mw.ArticleTarget.static.buildRedirectMsg = function ( title ) {
 	const $link = $( '<a>' )
 		.attr( {
+			// Redirect target is safe
+			// eslint-disable-next-line local/no-unsanitized-href
 			href: mw.Title.newFromText( title ).getUrl(),
 			title: mw.msg( 'visualeditor-redirect-description', title )
 		} )
@@ -2479,8 +2481,9 @@ ve.init.mw.ArticleTarget.prototype.renderCategories = function ( categoryItems )
 	return ve.promiseAll( promises ).then( () => {
 		const $output = $( '<div>' ).addClass( 'catlinks' );
 		function renderPageLink( page ) {
-			const title = mw.Title.newFromText( page ),
-				$link = $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).attr( 'href', title.getUrl() ).text( title.getMainText() );
+			const title = mw.Title.newFromText( page );
+			const $link = $( '<a>' ).attr( 'rel', 'mw:WikiLink' ).text( title.getMainText() );
+			ve.setAttributeSafe( $link[ 0 ], 'href', title.getUrl() );
 			// Style missing links. The data should already have been fetched
 			// as part of the earlier processing of categoryItems.
 			ve.init.platform.linkCache.styleElement( title.getPrefixedText(), $link, false );

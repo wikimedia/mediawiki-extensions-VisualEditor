@@ -10,6 +10,7 @@
 		"$": "off"
 	},
 	"rules": {
+		"local/no-unsanitized-href": "off",
 		"no-jquery/no-append-html": "warn",
 		"no-jquery/no-done-fail": "warn"
 	}

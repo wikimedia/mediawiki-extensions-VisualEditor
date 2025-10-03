@@ -68,6 +68,8 @@ ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
 				$version
 					.removeClass( 'oo-ui-pendingElement-pending' )
 					.empty()
+					// API response 'vcs-url' is trusted to be safe
+					// eslint-disable-next-line local/no-unsanitized-href
 					.append( $( '<a>' )
 						.addClass( 've-ui-mwHelpListToolGroup-version-link' )
 						.attr( 'target', '_blank' )
