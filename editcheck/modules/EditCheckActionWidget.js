@@ -201,7 +201,7 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 	return deferred.promise().always( () => {
 		// HACK: This causes the answerRadioSelect.onDocumentKeyDownHandler to be unbound
 		// Otherwise, it'll swallow certain key events (arrow keys, enter, pagedown/up) forever.
-		answerRadioSelect.$element.blur();
+		answerRadioSelect.$element.trigger( 'blur' );
 		form.$element.remove();
 		this.feedbackDeferred = null;
 	} );
