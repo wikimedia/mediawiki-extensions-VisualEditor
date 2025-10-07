@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Geraki"
+		]
+	},
+	"editcheck-dialog-action-no": "Όχι",
+	"editcheck-dialog-action-yes": "Ναι",
+	"editcheck-dialog-addref-description": "Βοηθήστε τους αναγνώστες να κατανοήσουν από πού προέρχονται αυτές οι πληροφορίες προσθέτοντας μια παραπομπή.",
+	"editcheck-dialog-addref-reject-question": "Γιατί δεν προσθέτεις μια παραπομπή;",
+	"editcheck-dialog-addref-reject-description": "Άλλοι συντάκτες θα εκτιμούσαν να μάθουν περισσότερα σχετικά με την απόφασή σας να απορρίψετε την παραπομπή.",
+	"editcheck-dialog-addref-reject-irrelevant": "Δεν νομίζω ότι οι παραπομπές είναι σχετικές με την αλλαγή που κάνω",
+	"editcheck-dialog-addref-reject-common-knowledge": "Οι πληροφορίες που προσθέτω είναι ευρέως γνωστές",
+	"editcheck-dialog-addref-reject-uncertain": "Δεν είμαι σίγουρος ποια παραπομπή να προσθέσω",
+	"editcheck-dialog-addref-reject-other": "Άλλο",
+	"editcheck-dialog-addref-success-notify": "Ευχαριστούμε που προσθέσατε μια παραπομπή!",
+	"editcheck-dialog-addref-title": "Προσθήκη παραπομπής",
+	"editcheck-dialog-title": "Πριν τη δημοσίευση",
+	"tag-editcheck-reference-decline-common-knowledge": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε (κοινή γνώση)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Η αναφορά EditCheck απορρίφθηκε ως κοινή γνώση.",
+	"tag-editcheck-reference-decline-irrelevant": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε (άσχετο)",
+	"tag-editcheck-reference-decline-irrelevant-description": "Η EditCheck παραπομπής απορρίφθηκε ως άσχετη.",
+	"tag-editcheck-reference-decline-other": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε (άλλο)",
+	"tag-editcheck-reference-decline-other-description": "Η αναφορά EditCheck απορρίφθηκε για μη καταχωρημένο λόγο.",
+	"tag-editcheck-reference-decline-uncertain": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε =(αβέβαιο)",
+	"tag-editcheck-reference-decline-uncertain-description": "Η αναφορά EditCheck απορρίφθηκε ως αβέβαιη"
+}
