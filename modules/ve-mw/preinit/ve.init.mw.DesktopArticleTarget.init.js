@@ -988,7 +988,8 @@
 					} );
 				}
 
-				if ( !mw.user.isAnon() && pageCanLoadEditor && init.isVisualAvailable() ) {
+				if ( !mw.user.isAnon() && pageCanLoadEditor && init.isVisualAvailable() && ( !init.isSingleEditTab || isOnlyTabVE() ) ) {
+					// Show a category-edit link for logged in users who would be given VE if they clicked an "edit" link
 					$( '#catlinks' ).prepend(
 						$( '<span>' )
 							.addClass( 've-init-mw-desktopArticleTarget-categoryEdit mw-editsection-like' )
