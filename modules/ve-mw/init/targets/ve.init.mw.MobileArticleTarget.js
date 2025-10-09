@@ -473,7 +473,32 @@ ve.init.mw.MobileArticleTarget.prototype.saveFail = function ( doc, saveData, co
  * @inheritdoc
  */
 ve.init.mw.MobileArticleTarget.prototype.tryTeardown = function () {
-	this.overlay.onExitClick( $.Event() );
+	// This is working around the MobileFrontend overlay manager requiring
+	// that the exit/cancel callbacks be called synchronously, which means
+	// the cancel callback is unreliable for telling whether the teardown was
+	// actually canceled.
+	const deferred = ve.createDeferred();
+	const onClosing = ( win, compatClosing, data ) => {
+		// If we're not receiving the only data that would trigger
+		// EditorOverlay to do the teardown...
+		if ( !( data && data.action === 'discard' ) ) {
+			deferred.reject();
+		}
+	};
+	this.overlay.onBeforeExit( () => {
+		// exit; if this is called we're *actually* exiting.
+		this.overlay.hide();
+		deferred.resolve();
+		if ( this.overlay.windowManager ) {
+			this.overlay.windowManager.off( 'closing', onClosing );
+		}
+	}, () => {
+		// cancel; this is called just before the "are you sure?" dialog is
+		// shown. Later the exit callback will be called if the user chooses
+		// not to cancel after all.
+		this.overlay.windowManager.once( 'closing', onClosing );
+	} );
+	return deferred.promise();
 };
 
 /**
