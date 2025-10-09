@@ -28,14 +28,22 @@ function Controller( target ) {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 
-	this.onDocumentChangeDebounced = ve.debounce( this.onDocumentChange.bind( this ), 100 );
-	this.onPositionDebounced = ve.debounce( this.onPosition.bind( this ), 100 );
-	this.onSelectDebounced = ve.debounce( this.onSelect.bind( this ), 100 );
-	this.onContextChangeDebounced = ve.debounce( this.onContextChange.bind( this ), 100 );
-	this.updatePositionsDebounced = ve.debounce( this.updatePositions.bind( this ) );
+	const debounceWithTeardownCheck = ( func, wait, immediate ) => ve.debounce( ( ...args ) => {
+		// This could potentially be called after teardown
+		if ( !this.surface ) {
+			return;
+		}
+		return func( ...args );
+	}, wait, immediate );
+
+	this.onDocumentChangeDebounced = debounceWithTeardownCheck( this.onDocumentChange.bind( this ), 100 );
+	this.onPositionDebounced = debounceWithTeardownCheck( this.onPosition.bind( this ), 100 );
+	this.onSelectDebounced = debounceWithTeardownCheck( this.onSelect.bind( this ), 100 );
+	this.onContextChangeDebounced = debounceWithTeardownCheck( this.onContextChange.bind( this ), 100 );
+	this.updatePositionsDebounced = debounceWithTeardownCheck( this.updatePositions.bind( this ) );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
-	this.scrollActionIntoViewDebounced = ve.debounce( this.scrollActionIntoView.bind( this ), 200, true );
+	this.scrollActionIntoViewDebounced = debounceWithTeardownCheck( this.scrollActionIntoView.bind( this ), 200, true );
 }
 
 /* Inheritance */
@@ -193,11 +201,6 @@ Controller.prototype.editChecksArePossible = function () {
  * @fires Controller#position
  */
 Controller.prototype.updatePositions = function () {
-	if ( !this.surface ) {
-		// This is debounced, and could potentially be called after teardown
-		return;
-	}
-
 	this.drawSelections();
 
 	this.emit( 'position' );
@@ -356,10 +359,6 @@ Controller.prototype.getActions = function ( listener ) {
  * @param {ve.dm.Selection} selection New selection
  */
 Controller.prototype.onSelect = function () {
-	if ( !this.surface ) {
-		// This is debounced, and could potentially be called after teardown
-		return;
-	}
 	if ( OO.ui.isMobile() ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
@@ -410,10 +409,6 @@ Controller.prototype.updateActions = function () {
  * Handle contextChange events from the surface model
  */
 Controller.prototype.onContextChange = function () {
-	if ( !this.surface ) {
-		// This is debounced, and could potentially be called after teardown
-		return;
-	}
 	if ( OO.ui.isMobile() && this.surface.getContext().isVisible() ) {
 		// The context overlaps the drawer on mobile, so we should get rid of the drawer
 		this.closeDialog( 'context' );
@@ -426,11 +421,6 @@ Controller.prototype.onContextChange = function () {
  * @param {boolean} passive Event is passive (don't scroll)
  */
 Controller.prototype.onPosition = function ( passive ) {
-	if ( !this.surface ) {
-		// This is debounced, and could potentially be called after teardown
-		return;
-	}
-
 	this.updatePositionsDebounced();
 
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
@@ -442,10 +432,6 @@ Controller.prototype.onPosition = function ( passive ) {
  * Handle changes to the document model (undoStackChange)
  */
 Controller.prototype.onDocumentChange = function () {
-	if ( !this.surface ) {
-		// This is debounced, and could potentially be called after teardown
-		return;
-	}
 	if ( !this.inBeforeSave ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
