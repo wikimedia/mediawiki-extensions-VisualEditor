@@ -356,6 +356,10 @@ Controller.prototype.getActions = function ( listener ) {
  * @param {ve.dm.Selection} selection New selection
  */
 Controller.prototype.onSelect = function () {
+	if ( !this.surface ) {
+		// This is debounced, and could potentially be called after teardown
+		return;
+	}
 	if ( OO.ui.isMobile() ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
