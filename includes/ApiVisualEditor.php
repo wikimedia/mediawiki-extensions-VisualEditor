@@ -457,7 +457,7 @@ class ApiVisualEditor extends ApiBase {
 					'starttimestamp' => wfTimestampNow(),
 					'wouldautocreate' => $wouldautocreate,
 				];
-				// phpcs:enable MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment
+				// phpcs:enable
 				if ( isset( $restbaseHeaders['etag'] ) ) {
 					$result['etag'] = $restbaseHeaders['etag'];
 				}
