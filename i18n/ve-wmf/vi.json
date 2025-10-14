@@ -29,8 +29,8 @@
 	"visualeditor-feedback-tool": "Để lại phản hồi về phần mềm này",
 	"visualeditor-help-label": "Đọc hướng dẫn sử dụng",
 	"visualeditor-welcomedialog-action": "Bắt đầu sửa đổi",
-	"visualeditor-welcomedialog-content": "Bất cứ người nào có thể góp tay xây dựng và cải thiện nội dung.",
-	"visualeditor-welcomedialog-content-thanks": "Xin cảm ơn bạn muốn giúp người ta khám phá và tìm hiểu!",
+	"visualeditor-welcomedialog-content": "Bất cứ ai cũng có thể cùng chung tay xây dựng và cải thiện nội dung.",
+	"visualeditor-welcomedialog-content-thanks": "Xin cảm ơn bạn đã giúp những người khác cùng khám phá và tìm hiểu!",
 	"visualeditor-welcomedialog-switch": "Chuyển sang trình soạn thảo mã nguồn",
 	"visualeditor-welcomedialog-switch-ve": "Chuyển sang trình soạn thảo trực quan",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Chào mừng bạn}} đến với $2"
