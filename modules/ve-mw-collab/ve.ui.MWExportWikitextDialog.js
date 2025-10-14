@@ -97,7 +97,7 @@ ve.ui.MWExportWikitextDialog.prototype.initialize = function () {
 	const panel = new OO.ui.PanelLayout( {
 		padded: true,
 		expanded: false,
-		$content: $content
+		$content
 	} );
 	this.$body.append( panel.$element );
 };

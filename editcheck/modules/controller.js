@@ -526,7 +526,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 		shownPromise = windowAction.open(
 			windowName,
-			{ inBeforeSave: this.inBeforeSave, actions: actions, controller: this }
+			{ inBeforeSave: this.inBeforeSave, actions, controller: this }
 		).then( ( instance ) => {
 			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
 			instance.closed.then( () => {
@@ -586,7 +586,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 				return this.closeSidebars( 'preSaveProcess' ).then( () => this.closeDialog( 'preSaveProcess' ).then( () => {
 					target.onContainerScroll();
 					const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions: actions, controller: this } )
+					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions, controller: this } )
 						.then( ( instance ) => {
 							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
 							this.updateShownStats( actions, 'presave' );
@@ -711,7 +711,7 @@ Controller.prototype.drawSelections = function () {
 	) : [];
 	const isStale = !!this.focusedAction && this.focusedAction.isStale();
 	const showGutter = !isStale && !OO.ui.isMobile();
-	const activeOptions = { showGutter: showGutter, showRects: !isStale, showBounding: isStale };
+	const activeOptions = { showGutter, showRects: !isStale, showBounding: isStale };
 
 	if ( this.inBeforeSave ) {
 		// Review mode grays out everything that's not highlighted:
@@ -735,7 +735,7 @@ Controller.prototype.drawSelections = function () {
 		surfaceView.getSelectionManager().drawSelections( 'editCheck-inactive', [] );
 		return;
 	}
-	const inactiveOptions = { showGutter: showGutter, showRects: false };
+	const inactiveOptions = { showGutter, showRects: false };
 
 	const inactiveSelections = [];
 	// Optimization: When showGutter is false inactive selections currently render nothing
@@ -811,8 +811,8 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 	}
 	this.surface.scrollSelectionIntoView( selection, {
 		animate: true,
-		padding: padding,
-		alignToTop: alignToTop
+		padding,
+		alignToTop
 	} );
 };
 
@@ -828,7 +828,7 @@ Controller.prototype.closeDialog = function ( action ) {
 	}
 	this.focusAction( undefined );
 	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-	return windowAction.close( 'fixedEditCheckDialog', action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
+	return windowAction.close( 'fixedEditCheckDialog', action ? { action } : undefined ).closed.then( () => {}, () => {} );
 };
 
 /**
@@ -841,7 +841,7 @@ Controller.prototype.closeSidebars = function ( action ) {
 	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 	if ( currentWindow ) {
 		// .always is not chainable
-		return currentWindow.close( action ? { action: action } : undefined ).closed.then( () => {}, () => {} );
+		return currentWindow.close( action ? { action } : undefined ).closed.then( () => {}, () => {} );
 	}
 	return ve.createDeferred().resolve().promise();
 };
@@ -876,5 +876,5 @@ Controller.prototype.updateShownStats = function ( actions, moment ) {
 };
 
 module.exports = {
-	Controller: Controller
+	Controller
 };

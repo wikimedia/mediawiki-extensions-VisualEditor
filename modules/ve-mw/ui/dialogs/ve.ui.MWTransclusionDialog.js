@@ -243,10 +243,7 @@ ve.ui.MWTransclusionDialog.prototype.setupHotkeyTriggers = function () {
  * @param {RegExp} [validTypes]
  */
 ve.ui.MWTransclusionDialog.prototype.connectHotKeyBinding = function ( hotkey, handler, validTypes ) {
-	this.hotkeyTriggers[ hotkey ] = {
-		handler: handler,
-		validTypes: validTypes
-	};
+	this.hotkeyTriggers[ hotkey ] = { handler, validTypes };
 };
 
 /**
@@ -641,7 +638,7 @@ ve.ui.MWTemplateDialog.prototype.getMessageButton = function ( message, icon ) {
 			href: $link.attr( 'href' ),
 			target: '_blank',
 			flags: 'progressive',
-			icon: icon,
+			icon,
 			framed: false
 		} );
 	button.$button.attr( 'role', 'link' );

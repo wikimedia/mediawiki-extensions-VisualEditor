@@ -22,7 +22,7 @@
 		const fragment = surface.getLinearFragment( new ve.Range( 1 ) );
 
 		// return fragment as data for the dialog
-		return { fragment: fragment };
+		return { fragment };
 	};
 
 	QUnit.test.skip( 'onReplacePart', ( assert ) => {

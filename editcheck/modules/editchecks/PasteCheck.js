@@ -50,13 +50,13 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	return Object.keys( pastesById ).map( ( id ) => {
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
 		return new mw.editcheck.EditCheckAction( {
-			fragments: fragments,
+			fragments,
 			// eslint-disable-next-line no-jquery/no-append-html
 			message: $( '<span>' ).append( ve.htmlMsg( 'editcheck-copyvio-description', ve.msg( 'editcheck-copyvio-descriptionlink' ) ) )
 				.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
 					ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-learn-more' } );
 				} ).end(),
-			id: id,
+			id,
 			check: this
 		} );
 	} );
@@ -82,7 +82,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 			} ).then( ( reason ) => {
 				this.dismiss( action );
 				mw.notify( ve.msg( 'editcheck-copyvio-keep-notify' ), { type: 'success' } );
-				return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
+				return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 			} );
 		case 'remove': {
 			action.fragments.forEach( ( fragment ) => {

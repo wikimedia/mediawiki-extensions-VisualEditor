@@ -329,7 +329,7 @@ ve.init.mw.Target.prototype.createSurface = function ( dmDoc, config = {} ) {
 		// Preserve empty linebreaks on paste in source editor
 		importRules.all.keepEmptyContentBranches = true;
 		config = this.getSurfaceConfig( ve.extendObject( {}, config, {
-			importRules: importRules
+			importRules
 		} ) );
 		return new ve.ui.MWWikitextSurface( this, dmDoc, config );
 	}
@@ -491,7 +491,7 @@ ve.init.mw.Target.prototype.initAutosave = function ( config = {} ) {
  */
 ve.init.mw.Target.prototype.storeDocState = function ( html ) {
 	const mode = this.getSurface().getMode();
-	this.getSurface().getModel().storeDocState( { mode: mode }, html );
+	this.getSurface().getModel().storeDocState( { mode }, html );
 };
 
 /**
@@ -623,8 +623,8 @@ ve.init.mw.Target.prototype.parseWikitextFragment = function ( wikitext, pst, do
 			action: 'visualeditor',
 			paction: 'parsefragment',
 			page: this.getPageName( doc ),
-			wikitext: wikitext,
-			pst: pst
+			wikitext,
+			pst
 		}, ajaxOptions ) )
 		.promise( abortable );
 };

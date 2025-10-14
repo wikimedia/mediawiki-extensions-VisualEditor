@@ -186,7 +186,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		footer: this.getFooter(),
 		prompt: this.getPrompt(),
 		mode: this.mode,
-		singleAction: singleAction,
+		singleAction,
 		suggestion: this.suggestion
 	} );
 	widget.actions.connect( this, {

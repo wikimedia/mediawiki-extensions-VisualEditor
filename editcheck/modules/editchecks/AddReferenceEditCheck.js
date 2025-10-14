@@ -139,7 +139,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 			} ).then( ( reason ) => {
 				ve.track( 'activity.editCheckReferences', { action: 'dialog-choose-' + reason } );
 				this.dismiss( action );
-				return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
+				return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 			} );
 	}
 };

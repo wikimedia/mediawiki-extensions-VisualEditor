@@ -110,7 +110,7 @@ ve.dm.MWTemplateModel.newFromName = function ( transclusion, name ) {
 	}
 	if ( title !== null ) {
 		const href = title.getPrefixedText();
-		return new ve.dm.MWTemplateModel( transclusion, { href: href, wt: name } );
+		return new ve.dm.MWTemplateModel( transclusion, { href, wt: name } );
 	}
 
 	return null;

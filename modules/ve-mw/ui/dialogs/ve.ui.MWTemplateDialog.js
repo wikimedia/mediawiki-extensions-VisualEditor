@@ -396,7 +396,7 @@ ve.ui.MWTemplateDialog.prototype.getActionProcess = function ( action ) {
 				mw.track( 'event.VisualEditorTemplateDialogUse', templateEvent );
 
 				return modelPromise.then( () => {
-					this.close( { action: action } ).closed.always( this.popPending.bind( this ) );
+					this.close( { action } ).closed.always( this.popPending.bind( this ) );
 				} );
 			} ).always( deferred.resolve );
 

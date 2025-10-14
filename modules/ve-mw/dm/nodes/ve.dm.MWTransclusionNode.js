@@ -116,7 +116,7 @@ ve.dm.MWTransclusionNode.static.toDataElement = function ( domElements, converte
 		type = isInline ? this.inlineType : this.blockType;
 
 	const dataElement = {
-		type: type,
+		type,
 		attributes: {
 			mw: mwData,
 			originalMw: mwDataJSON
@@ -268,7 +268,7 @@ ve.dm.MWTransclusionNode.static.describeChanges = function ( attributeChanges ) 
 			const from = ( params[ param ].from || '' ).trim() || undefined,
 				to = ( params[ param ].to || '' ).trim() || undefined;
 			if ( from !== to ) {
-				const change = this.describeChange( param, { from: from, to: to } );
+				const change = this.describeChange( param, { from, to } );
 				if ( change ) {
 					if ( !paramChanges ) {
 						paramChanges = document.createElement( 'ul' );

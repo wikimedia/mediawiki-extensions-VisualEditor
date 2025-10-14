@@ -129,10 +129,7 @@ ve.ui.MWNoticesPopupTool.prototype.setNotices = function ( notices ) {
 			.html( typeof item === 'string' ? item : item.message );
 		ve.targetLinksToNewWindow( $element[ 0 ] );
 
-		this.noticeItems.push( {
-			$element: $element,
-			type: item.type
-		} );
+		this.noticeItems.push( { $element, type: item.type } );
 
 		this.$items.append( $element );
 	} );

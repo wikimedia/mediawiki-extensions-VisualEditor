@@ -50,7 +50,7 @@ ve.init.mw.Platform.prototype.getUnanchoredExternalLinkUrlProtocolsRegExp = func
 
 /** @inheritdoc */
 ve.init.mw.Platform.prototype.notify = function ( message, title, options ) {
-	return mw.notify( message, ve.extendObject( { title: title }, options ) );
+	return mw.notify( message, ve.extendObject( { title }, options ) );
 };
 
 /**
@@ -336,7 +336,7 @@ ve.init.mw.Platform.prototype.decodeEntities = function ( html ) {
 	return [
 		{
 			type: 'mwEntity',
-			attributes: { character: character }
+			attributes: { character }
 		},
 		{
 			type: '/mwEntity'

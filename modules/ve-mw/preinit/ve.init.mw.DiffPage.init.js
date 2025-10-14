@@ -83,12 +83,7 @@
 
 				progress.$element.addClass( 'oo-ui-element-hidden' );
 				$visualDiff.append( diffElement.$element );
-				lastDiff = {
-					oldId: oldId,
-					newId: newId,
-					oldPageName: oldPageName,
-					newPageName: newPageName
-				};
+				lastDiff = { oldId, newId, oldPageName, newPageName };
 
 				diffElement.positionDescriptions();
 			}, ( code, data ) => {

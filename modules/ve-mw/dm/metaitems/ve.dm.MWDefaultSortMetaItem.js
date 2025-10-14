@@ -42,17 +42,14 @@ ve.dm.MWDefaultSortMetaItem.static.toDataElement = function ( domElements ) {
 	const mwDataJSON = domElements[ 0 ].getAttribute( 'data-mw' ),
 		mwData = mwDataJSON ? JSON.parse( mwDataJSON ) : {},
 		input = ve.getProp( mwData, 'parts', '0', 'template', 'target', 'wt' );
-	let prefix, sortKey;
+	let prefix, sortkey;
 	if ( input ) {
 		prefix = input.split( ':' )[ 0 ];
-		sortKey = input.slice( prefix.length + 1 );
+		sortkey = input.slice( prefix.length + 1 );
 	}
 	return {
 		type: this.name,
-		attributes: {
-			prefix: prefix,
-			sortkey: sortKey
-		}
+		attributes: { prefix, sortkey }
 	};
 };
 

@@ -538,7 +538,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 	this.getSurface().getModel().storeDocState( {
 		request: {
 			pageName: this.getPageName(),
-			mode: mode,
+			mode,
 			// Check true section editing is in use
 			section: ( mode === 'source' || this.enableVisualSectionEditing ) ? this.section : null
 		},
@@ -857,7 +857,7 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
  * @param {boolean} [warning=false] Whether or not this is a warning.
  */
 ve.init.mw.ArticleTarget.prototype.showSaveError = function ( msg, warning ) {
-	this.saveDeferred.reject( [ new OO.ui.Error( msg, { warning: warning } ) ] );
+	this.saveDeferred.reject( [ new OO.ui.Error( msg, { warning } ) ] );
 };
 
 /**
@@ -1270,7 +1270,7 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 				}
 				aborted = true;
 			},
-			doc: doc
+			doc
 		} );
 };
 
@@ -1340,7 +1340,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
 		// Success, use promise as-is.
 		null,
 		// Fail, get deflatedHtml promise
-		() => mw.libs.ve.targetSaver.deflateDoc( doc, this.doc ).then( ( html ) => ( { html: html } ) ) );
+		() => mw.libs.ve.targetSaver.deflateDoc( doc, this.doc ).then( ( html ) => ( { html } ) ) );
 
 	return htmlOrCacheKeyPromise.then( ( htmlOrCacheKey ) => mw.libs.ve.targetSaver.postHtml(
 		htmlOrCacheKey.html,
@@ -1350,7 +1350,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
 			onCacheKeyFail: this.clearPreparedCacheKey.bind( this ),
 			api: this.getContentApi(),
 			track: this.events.track.bind( this.events ),
-			eventName: eventName,
+			eventName,
 			now: ve.now
 		}
 	) );
@@ -1723,7 +1723,7 @@ ve.init.mw.ArticleTarget.prototype.getEditNotices = function () {
  */
 ve.init.mw.ArticleTarget.prototype.track = function ( name ) {
 	const mode = this.surface ? this.surface.getMode() : this.getDefaultMode();
-	ve.track( name, { mode: mode } );
+	ve.track( name, { mode } );
 };
 
 /**
@@ -1743,7 +1743,7 @@ ve.init.mw.ArticleTarget.prototype.createSurface = function ( dmDoc, config = {}
 	const surface = ve.init.mw.ArticleTarget.super.prototype.createSurface.call(
 		this,
 		dmDoc,
-		ve.extendObject( { attachedRoot: attachedRoot }, config )
+		ve.extendObject( { attachedRoot }, config )
 	);
 
 	return surface;

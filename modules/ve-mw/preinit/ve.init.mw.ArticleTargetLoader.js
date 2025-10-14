@@ -117,10 +117,10 @@
 		 */
 		loadModules: function ( mode ) {
 			mw.hook( 've.loadModules' ).fire( this.addPlugin.bind( this ) );
-			ve.track( 'trace.moduleLoad.enter', { mode: mode } );
+			ve.track( 'trace.moduleLoad.enter', { mode } );
 			return mw.loader.using( modules )
 				.then( () => {
-					ve.track( 'trace.moduleLoad.exit', { mode: mode } );
+					ve.track( 'trace.moduleLoad.exit', { mode } );
 					pluginCallbacks.push( ve.init.platform.getInitializedPromise.bind( ve.init.platform ) );
 					// Execute plugin callbacks and collect promises
 					return $.when( ...pluginCallbacks.map( ( callback ) => {
@@ -149,7 +149,7 @@
 			if ( checkboxesDef ) {
 				Object.keys( checkboxesDef ).forEach( ( name ) => {
 					const options = checkboxesDef[ name ];
-					let accesskey = null,
+					let accessKey = null,
 						title = null;
 
 					// The messages documented below are just the ones defined in core.
@@ -158,7 +158,7 @@
 						// The following messages are used here:
 						// * accesskey-minoredit
 						// * accesskey-watch
-						accesskey = mw.message( 'accesskey-' + options.tooltip ).text();
+						accessKey = mw.message( 'accesskey-' + options.tooltip ).text();
 						// The following messages are used here:
 						// * tooltip-minoredit
 						// * tooltip-watch
@@ -175,7 +175,7 @@
 					const $label = mw.message( options[ 'label-message' ] ).parseDom();
 
 					const config = $.extend( {
-						accessKey: accesskey,
+						accessKey,
 						// The following classes are used here:
 						// * ve-ui-mwSaveDialog-checkbox-wpMinoredit
 						// * ve-ui-mwSaveDialog-checkbox-wpWatchthis
@@ -203,7 +203,7 @@
 						new OO.ui.FieldLayout( checkbox, {
 							align: 'inline',
 							label: $label,
-							title: title,
+							title,
 							invisibleLabel: !!options.invisibleLabel,
 							// * ve-ui-mwSaveDialog-field-wpMinoredit
 							// * ve-ui-mwSaveDialog-field-wpWatchthis
@@ -215,8 +215,8 @@
 				} );
 			}
 			return {
-				checkboxFields: checkboxFields,
-				checkboxesByName: checkboxesByName
+				checkboxFields,
+				checkboxesByName
 			};
 		},
 
@@ -415,7 +415,7 @@
 							wikitext: options.wikitext,
 							stash: 'true'
 						},
-						headers: headers,
+						headers,
 						dataType: 'text'
 					} );
 				} else {
@@ -430,7 +430,7 @@
 							( data.oldid === undefined ? '' : '/' + data.oldid ) +
 							'?redirect=false&stash=true',
 						type: 'GET',
-						headers: headers,
+						headers,
 						dataType: 'text'
 					} );
 				}
@@ -502,7 +502,7 @@
 
 				resp.veMode = 'visual';
 				return resp;
-			} ).promise( { abort: abort } );
+			} ).promise( { abort } );
 		},
 
 		/**

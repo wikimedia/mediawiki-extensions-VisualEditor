@@ -421,7 +421,7 @@ ve.ui.MWSaveDialog.prototype.showMessage = function ( name, label, config ) {
 	if ( !this.messages[ name ] ) {
 		const messageWidget = new OO.ui.MessageWidget( ve.extendObject( {
 			classes: [ 've-ui-mwSaveDialog-message' ],
-			label: label,
+			label,
 			inline: true,
 			type: 'warning'
 		}, config ) );

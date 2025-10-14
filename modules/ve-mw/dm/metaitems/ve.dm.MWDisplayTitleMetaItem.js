@@ -48,10 +48,7 @@ ve.dm.MWDisplayTitleMetaItem.static.toDataElement = function ( domElements ) {
 	const content = wt.slice( localizedPrefix.length + 1 );
 	return {
 		type: this.name,
-		attributes: {
-			localizedPrefix: localizedPrefix,
-			content: content
-		}
+		attributes: { localizedPrefix, content }
 	};
 };
 

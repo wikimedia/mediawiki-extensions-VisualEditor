@@ -227,7 +227,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	const mode = surface.getMode(),
 		wasSetup = !!this.toolbar;
 
-	ve.track( 'trace.setupToolbar.enter', { mode: mode } );
+	ve.track( 'trace.setupToolbar.enter', { mode } );
 
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.setupToolbar.call( this, surface );
@@ -237,7 +237,7 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	// Allow the toolbar to start floating now if necessary
 	this.onContainerScroll();
 
-	ve.track( 'trace.setupToolbar.exit', { mode: mode } );
+	ve.track( 'trace.setupToolbar.exit', { mode } );
 	if ( !wasSetup ) {
 		toolbar.$element
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
@@ -250,12 +250,12 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 			const newSurface = this.getSurface();
 			// Check the surface wasn't torn down while the toolbar was animating
 			if ( newSurface ) {
-				ve.track( 'trace.initializeToolbar.enter', { mode: mode } );
+				ve.track( 'trace.initializeToolbar.enter', { mode } );
 				this.getToolbar().initialize();
 				newSurface.getView().emit( 'position' );
 				newSurface.getContext().updateDimensions();
-				ve.track( 'trace.initializeToolbar.exit', { mode: mode } );
-				ve.track( 'trace.activate.exit', { mode: mode } );
+				ve.track( 'trace.initializeToolbar.exit', { mode } );
+				ve.track( 'trace.activate.exit', { mode } );
 			}
 		} );
 	}

@@ -173,7 +173,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		} ).then( ( reason ) => {
 			this.dismiss( action );
 			this.showThankToast();
-			return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
+			return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
 		action.gutterQuickAction = 'recheck';

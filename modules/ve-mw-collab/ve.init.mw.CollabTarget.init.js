@@ -63,7 +63,7 @@
 		form.toggle( false );
 
 		modulePromise.then( () => {
-			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle: importTitle } );
+			target = ve.init.mw.targetFactory.create( 'collab', title, conf.rebaserUrl, { importTitle } );
 			// If the target emits a 'close' event (via the toolbar back button on mobile) then go to the landing page.
 			target.once( 'close', () => {
 				showForm( true );

@@ -96,7 +96,7 @@
 			const type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType,
 				data = [
 					{
-						type: type,
+						type,
 						attributes: {
 							mw: this.getPlainObject()
 						}
@@ -187,14 +187,14 @@
 					promises.push( deferred.promise() );
 					this.changeQueue.push( {
 						add: ve.dm.MWTemplateModel.newFromData( this, part.template ),
-						deferred: deferred
+						deferred
 					} );
 				} else if ( typeof part === 'string' ) {
 					const deferred = ve.createDeferred();
 					promises.push( deferred.promise() );
 					this.changeQueue.push( {
 						add: new ve.dm.MWTransclusionContentModel( this, part ),
-						deferred: deferred
+						deferred
 					} );
 				}
 			}
@@ -328,7 +328,7 @@
 	ve.dm.MWTransclusionModel.prototype.callTemplateDataApi = function ( titles, queue ) {
 		const xhr = ve.init.target.getContentApi( this.doc ).get( {
 			action: 'templatedata',
-			titles: titles,
+			titles,
 			lang: mw.config.get( 'wgUserLanguage' ),
 			includeMissingTitles: '1',
 			redirects: '1'
@@ -423,7 +423,7 @@
 			}
 		}
 
-		return parts.length ? { parts: parts } : null;
+		return parts.length ? { parts } : null;
 	};
 
 	/**
@@ -451,7 +451,7 @@
 		) {
 			throw new Error( 'Invalid transclusion part' );
 		}
-		this.changeQueue.push( { remove: remove, add: add, deferred: deferred } );
+		this.changeQueue.push( { remove, add, deferred } );
 
 		// Fetch on next yield to process items in the queue together, subsequent calls will
 		// have no effect because the queue will be clear
@@ -473,7 +473,7 @@
 		if ( !( part instanceof ve.dm.MWTransclusionPartModel ) ) {
 			throw new Error( 'Invalid transclusion part' );
 		}
-		this.changeQueue.push( { add: part, index: index, deferred: deferred } );
+		this.changeQueue.push( { add: part, index, deferred } );
 
 		// Fetch on next yield to process items in the queue together, subsequent calls to fetch will
 		// have no effect because the queue will be clear

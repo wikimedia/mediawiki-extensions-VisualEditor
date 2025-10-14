@@ -369,8 +369,8 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.refreshControls = function () 
 	}
 
 	this.outlineControlsWidget.setButtonsEnabled( {
-		canMoveUp: canMoveUp,
-		canMoveDown: canMoveDown,
-		canBeDeleted: canBeDeleted
+		canMoveUp,
+		canMoveDown,
+		canBeDeleted
 	} );
 };

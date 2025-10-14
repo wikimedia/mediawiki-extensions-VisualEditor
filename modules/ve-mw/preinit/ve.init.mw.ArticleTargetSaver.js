@@ -156,7 +156,7 @@
 		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
 		postWikitext: function ( wikitext, extraData, options ) {
-			return this.postContent( $.extend( { wikitext: wikitext }, extraData ), options );
+			return this.postContent( $.extend( { wikitext }, extraData ), options );
 		},
 
 		/**
@@ -176,7 +176,7 @@
 			if ( cacheKey ) {
 				data = $.extend( { cachekey: cacheKey }, extraData );
 			} else {
-				data = $.extend( { html: html }, extraData );
+				data = $.extend( { html }, extraData );
 			}
 			return this.postContent( data, options ).then(
 				null,

@@ -1450,7 +1450,7 @@ ve.ui.MWMediaDialog.prototype.getActionProcess = function ( action ) {
 					this.fragment = this.imageModel.insertImageNode( this.getFragment() );
 				}
 
-				this.close( { action: action } );
+				this.close( { action } );
 			};
 			break;
 		default:

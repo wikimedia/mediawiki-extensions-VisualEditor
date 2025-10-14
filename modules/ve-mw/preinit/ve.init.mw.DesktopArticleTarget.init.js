@@ -559,13 +559,13 @@
 		if ( !targetLoaded ) {
 			dataPromise = mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
 				sessionStore: true,
-				section: section,
-				oldId: oldId,
+				section,
+				oldId,
 				// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
 				// class hasn't loaded yet.
 				// This is used for stats tracking, so do not change!
 				targetName: 'mwTarget',
-				modified: modified,
+				modified,
 				editintro: currentUrl.searchParams.get( 'editintro' ),
 				preload: currentUrl.searchParams.get( 'preload' ),
 				preloadparams: mw.util.getArrayParam( 'preloadparams', currentUrl.searchParams ),
@@ -653,15 +653,15 @@
 			.then( () => {
 				if ( mode === 'visual' ) {
 					// `action: 'ready'` has already been fired for source mode in setupTempWikitextEditor
-					ve.track( 'editAttemptStep', { action: 'ready', mode: mode } );
+					ve.track( 'editAttemptStep', { action: 'ready', mode } );
 				} else if ( !tempWikitextEditor ) {
 					// We're in source mode, but skipped the
 					// tempWikitextEditor, so make sure we do relevant
 					// tracking / hooks:
-					ve.track( 'editAttemptStep', { action: 'ready', mode: mode } );
+					ve.track( 'editAttemptStep', { action: 'ready', mode } );
 					mw.hook( 've.wikitextInteractive' ).fire();
 				}
-				ve.track( 'editAttemptStep', { action: 'loaded', mode: mode } );
+				ve.track( 'editAttemptStep', { action: 'loaded', mode } );
 			} )
 			.always( clearLoading );
 	}
@@ -674,7 +674,7 @@
 	 * @param {URL} [linkUrl] URL to navigate to, potentially with extra parameters
 	 */
 	function activatePageTarget( mode, section, modified, linkUrl ) {
-		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode: mode }, linkUrl );
+		trackActivateStart( { type: 'page', mechanism: mw.config.get( 'wgArticleId' ) ? 'click' : 'new', mode }, linkUrl );
 
 		if ( !active ) {
 			// Replace the current state with one that is tagged as ours, to prevent the
@@ -1179,7 +1179,7 @@
 				return;
 			}
 
-			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode: mode }, linkUrl );
+			trackActivateStart( { type: 'section', mechanism: section === 'new' ? 'new' : 'click', mode }, linkUrl );
 
 			if ( !active ) {
 				// Replace the current state with one that is tagged as ours, to prevent the
@@ -1524,7 +1524,7 @@
 				trackActivateStart( {
 					type: section === null ? 'page' : 'section',
 					mechanism: ( section === 'new' || !mw.config.get( 'wgArticleId' ) ) ? 'url-new' : 'url',
-					mode: mode
+					mode
 				} );
 				activateTarget( mode, section );
 			} else if (
