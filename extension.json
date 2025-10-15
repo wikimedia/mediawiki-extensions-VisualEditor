@@ -2370,6 +2370,7 @@
 			"ext.visualEditor.mwwikitext",
 			"ext.visualEditor.desktopArticleTarget.init",
 			"ext.visualEditor.desktopArticleTarget",
+			"ext.visualEditor.core.mobile",
 			"ext.visualEditor.rebase"
 		]
 	},
