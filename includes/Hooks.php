@@ -22,6 +22,7 @@ use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\Extension\VisualEditor\EditCheck\ApiEditCheckReferenceUrl;
+use MediaWiki\Extension\VisualEditor\Services\VisualEditorAvailabilityLookup;
 use MediaWiki\Hook\BeforeInitializeHook;
 use MediaWiki\Hook\CustomEditorHook;
 use MediaWiki\Hook\EditPage__showEditForm_fieldsHook;
@@ -113,7 +114,10 @@ class Hooks implements
 		'visualeditor-switched'
 	];
 
-	public function __construct( private readonly ExtensionRegistry $extensionRegistry ) {
+	public function __construct(
+		private readonly ExtensionRegistry $extensionRegistry,
+		private readonly VisualEditorAvailabilityLookup $visualEditorAvailabilityLookup,
+	) {
 	}
 
 	/**
@@ -234,13 +238,10 @@ class Hooks implements
 		IContextSource $context,
 		array &$parts
 	) {
-		$services = MediaWikiServices::getInstance();
-		$veConfig = $services->getConfigFactory()
-			->makeConfig( 'visualeditor' );
 		$output = $context->getOutput();
 
 		// Return early if not viewing a diff of an allowed type.
-		if ( !ApiVisualEditor::isAllowedContentType( $veConfig, $textSlotDiffRenderer->getContentModel() )
+		if ( !$this->visualEditorAvailabilityLookup->isAllowedContentType( $textSlotDiffRenderer->getContentModel() )
 			|| $output->getActionName() !== 'view'
 		) {
 			return;
@@ -1121,7 +1122,10 @@ class Hooks implements
 		$coreConfig = RequestContext::getMain()->getConfig();
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-		$availableNamespaces = ApiVisualEditor::getAvailableNamespaceIds( $veConfig );
+
+		$availableNamespaces = $this->visualEditorAvailabilityLookup->getAvailableNamespaceIds();
+		sort( $availableNamespaces );
+
 		$availableContentModels = array_filter(
 			array_merge(
 				$this->extensionRegistry->getAttribute( 'VisualEditorAvailableContentModels' ),

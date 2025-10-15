@@ -544,6 +544,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Check if the configured allowed namespaces include the specified namespace
 	 *
+	 * @deprecated Since 1.45. Use {@link VisualEditorAvailabilityLookup::isAllowedNamespace} instead
 	 * @param Config $config
 	 * @param int $namespaceId Namespace ID
 	 * @return bool
@@ -555,6 +556,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Get a list of allowed namespace IDs
 	 *
+	 * @deprecated Since 1.45. Use {@link VisualEditorAvailabilityLookup::getAvailableNamespaceIds} instead
 	 * @param Config $config
 	 * @return int[]
 	 */
@@ -577,6 +579,7 @@ class ApiVisualEditor extends ApiBase {
 	/**
 	 * Check if the configured allowed content models include the specified content model
 	 *
+	 * @deprecated Since 1.45. Use {@link VisualEditorAvailabilityLookup::isAllowedContentType} instead
 	 * @param Config $config
 	 * @param string $contentModel Content model ID
 	 * @return bool

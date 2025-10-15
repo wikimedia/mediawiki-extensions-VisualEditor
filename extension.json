@@ -235,7 +235,8 @@
 		"VisualEditorHooks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks",
 			"services": [
-				"ExtensionRegistry"
+				"ExtensionRegistry",
+				"VisualEditor.VisualEditorAvailabilityLookup"
 			]
 		},
 		"EditCheckHooks": {
