@@ -277,7 +277,7 @@ class Hooks implements
 	 * @param WebRequest $req
 	 * @return bool
 	 */
-	private static function isSupportedEditPage( Title $title, User $user, WebRequest $req ): bool {
+	private function isSupportedEditPage( Title $title, User $user, WebRequest $req ): bool {
 		if (
 			$req->getVal( 'action' ) !== 'edit' ||
 			!MediaWikiServices::getInstance()->getPermissionManager()->quickUserCan( 'edit', $user, $title )
@@ -293,52 +293,12 @@ class Hooks implements
 
 		switch ( self::getEditPageEditor( $user, $req ) ) {
 			case 'visualeditor':
-				return self::isVisualAvailable( $title, $req, $user ) ||
+				return $this->visualEditorAvailabilityLookup->isAvailable( $title, $req, $user ) ||
 					self::isWikitextAvailable( $title, $user );
 			case 'wikitext':
 			default:
 				return self::isWikitextAvailable( $title, $user );
 		}
-	}
-
-	/**
-	 * @param UserIdentity $user
-	 * @return bool
-	 */
-	private static function enabledForUser( UserIdentity $user ): bool {
-		$services = MediaWikiServices::getInstance();
-		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-		$userOptionsLookup = $services->getUserOptionsLookup();
-		$isBeta = $veConfig->get( 'VisualEditorEnableBetaFeature' );
-
-		return ( $isBeta ?
-			$userOptionsLookup->getOption( $user, 'visualeditor-enable' ) :
-			!$userOptionsLookup->getOption( $user, 'visualeditor-betatempdisable' ) ) &&
-			!$userOptionsLookup->getOption( $user, 'visualeditor-autodisable' );
-	}
-
-	/**
-	 * @param Title $title
-	 * @param WebRequest $req
-	 * @param UserIdentity $user
-	 * @return bool
-	 */
-	private static function isVisualAvailable( Title $title, WebRequest $req, UserIdentity $user ): bool {
-		$veConfig = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'visualeditor' );
-
-		return (
-			// If forced by the URL parameter, skip the namespace check (T221892) and preference check
-			( $req->getVal( 'veaction' ) === 'edit' || (
-				// Only in enabled namespaces
-				ApiVisualEditor::isAllowedNamespace( $veConfig, $title->getNamespace() ) &&
-
-				// Enabled per user preferences
-				self::enabledForUser( $user )
-			) ) &&
-			// Only for pages with a supported content model
-			ApiVisualEditor::isAllowedContentType( $veConfig, $title->getContentModel() )
-		);
 	}
 
 	/**
@@ -392,7 +352,7 @@ class Hooks implements
 			}
 		}
 
-		if ( !self::enabledForUser( $user ) ) {
+		if ( !$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) ) {
 			return true;
 		}
 
@@ -406,7 +366,7 @@ class Hooks implements
 			return true;
 		}
 
-		if ( self::isSupportedEditPage( $title, $user, $req ) ) {
+		if ( $this->isSupportedEditPage( $title, $user, $req ) ) {
 			$params = $req->getValues();
 			$params['venoscript'] = '1';
 			$url = wfScript() . '?' . wfArrayToCgi( $params );
@@ -463,11 +423,13 @@ class Hooks implements
 		// VisualEditor shouldn't even call this method when it's disabled, but it is a public API for
 		// other extensions (e.g. DiscussionTools), and the editor preferences might have surprising
 		// values if the user has tried VisualEditor in the past and then disabled it. (T257234)
-		if ( !self::enabledForUser( $user ) ) {
+		$services = MediaWikiServices::getInstance();
+		/** @var VisualEditorAvailabilityLookup $visualEditorAvailabilityLookup */
+		$visualEditorAvailabilityLookup = $services->get( 'VisualEditorAvailabilityLookup' );
+		if ( !$visualEditorAvailabilityLookup->isEnabledForUser( $user ) ) {
 			return 'wikitext';
 		}
 
-		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();
 
 		switch ( $userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) ) {
@@ -558,7 +520,7 @@ class Hooks implements
 			$config->get( 'VisualEditorUseSingleEditTab' ) &&
 			wfTimestampNow() < $config->get( 'VisualEditorSingleEditTabSwitchTimeEnd' ) &&
 			$user->isNamed() &&
-			self::enabledForUser( $user ) &&
+			$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) &&
 			!$userOptionsLookup->getOption( $user, 'visualeditor-hidetabdialog' ) &&
 			$userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
 		) {
@@ -582,7 +544,7 @@ class Hooks implements
 
 		// Exit if the user doesn't have VE enabled
 		if (
-			!self::enabledForUser( $user ) ||
+			!$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) ||
 			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
 			( $config->get( 'VisualEditorDisableForAnons' ) && !$user->isRegistered() )
 		) {
@@ -592,7 +554,7 @@ class Hooks implements
 		$title = $skin->getRelevantTitle();
 		// Don't exit if this page isn't VE-enabled, since we should still
 		// change "Edit" to "Edit source".
-		$isAvailable = self::isVisualAvailable( $title, $skin->getRequest(), $user );
+		$isAvailable = $this->visualEditorAvailabilityLookup->isAvailable( $title, $skin->getRequest(), $user );
 
 		$tabMessages = $config->get( 'VisualEditorTabMessages' );
 		// Rebuild the $links['views'] array and inject the VisualEditor tab before or after
@@ -842,7 +804,7 @@ class Hooks implements
 		$user = $skin->getUser();
 		// Exit if the user doesn't have VE enabled
 		if (
-			!self::enabledForUser( $user ) ||
+			!$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) ||
 			// T253941: This option does not actually disable the editor, only leaves the tabs/links unchanged
 			( $config->get( 'VisualEditorDisableForAnons' ) && !$user->isRegistered() )
 		) {
@@ -894,7 +856,7 @@ class Hooks implements
 		);
 
 		// add VE edit section in VE available namespaces
-		if ( self::isVisualAvailable( $title, $skin->getRequest(), $user ) ) {
+		if ( $this->visualEditorAvailabilityLookup->isAvailable( $title, $skin->getRequest(), $user ) ) {
 			// The following messages can be used here:
 			// * editsection
 			$veEditSection = $tabMessages['editsection'];
@@ -1001,7 +963,7 @@ class Hooks implements
 		// Config option for Single Edit Tab
 		if (
 			$veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
-			self::enabledForUser( $user )
+			$this->visualEditorAvailabilityLookup->isEnabledForUser( $user )
 		) {
 			$preferences['visualeditor-tabs'] = [
 				'type' => 'select',

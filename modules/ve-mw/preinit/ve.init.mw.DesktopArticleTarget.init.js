@@ -1396,7 +1396,7 @@
 		( conf.isBeta ? enable : !tempdisable ) && !autodisable
 	);
 
-	// Partially duplicated in includes/Hooks.php#isVisualAvailable
+	// Partially duplicated in includes/Services/VisualEditorAvailabilityLookup::isAvailable
 	init.isVisualAvailable = ( url = currentUrl ) => (
 		init.isAvailable &&
 
