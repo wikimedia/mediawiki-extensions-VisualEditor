@@ -44,7 +44,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
  */
 mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( documentModel, includeReferencedContent ) {
 	// Broken out so a helper for tagging can call it
-	const ranges = this.getModifiedContentRanges( documentModel ).filter( ( range ) => {
+	const ranges = this.getAddedContentRanges( documentModel ).filter( ( range ) => {
 		if ( !includeReferencedContent ) {
 			// 4. Exclude any ranges that already contain references
 			for ( let i = range.start; i < range.end; i++ ) {

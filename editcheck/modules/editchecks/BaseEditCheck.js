@@ -213,6 +213,16 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
 };
 
 /**
+ * Get content ranges where at least the minimum about of text has been added
+ *
+ * @param {ve.dm.Document} documentModel
+ * @return {ve.Range[]}
+ */
+mw.editcheck.BaseEditCheck.prototype.getAddedContentRanges = function ( documentModel ) {
+	return this.getAddedRanges( documentModel, this.constructor.static.onlyCoveredNodes, true );
+};
+
+/**
  * Get ContentBranchNodes where some text has been changed
  *
  * @param {ve.dm.Document} documentModel
@@ -263,7 +273,20 @@ mw.editcheck.BaseEditCheck.prototype.getAddedNodes = function ( documentModel, t
  * @param {boolean} onlyContentRanges Only return ranges which are content branch node interiors
  * @return {ve.Range[]}
  */
-mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentModel, coveredNodesOnly, onlyContentRanges ) {
+mw.editcheck.BaseEditCheck.prototype.getAddedRanges = function ( documentModel, coveredNodesOnly, onlyContentRanges ) {
+	return this.getModifiedRanges( documentModel, coveredNodesOnly, onlyContentRanges, true );
+};
+
+/**
+ * Get content ranges which have been modified
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {boolean} coveredNodesOnly Only include ranges which cover the whole of their node
+ * @param {boolean} onlyContentRanges Only return ranges which are content branch node interiors
+ * @param {boolean} onlyPureInsertions Only return ranges which didn't replace any other content
+ * @return {ve.Range[]}
+ */
+mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentModel, coveredNodesOnly, onlyContentRanges, onlyPureInsertions ) {
 	if ( !documentModel.completeHistory.getLength() ) {
 		return [];
 	}
@@ -291,8 +314,10 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 			} else if ( op.type === 'replace' ) {
 				const insertedRange = new ve.Range( offset, offset + op.insert.length );
 				offset += op.insert.length;
-				// 1. Only trigger if the check is a pure insertion, with no adjacent content removed (T340088)
-				if ( op.remove.length === 0 ) {
+				// 1. Only trigger if the check is a pure insertion with no
+				// adjacent content removed (T340088), or if we're allowing
+				// non-pure insertions. Either way, a pure removal won't be included.
+				if ( ( !onlyPureInsertions && op.insert.length > 0 ) || op.remove.length === 0 ) {
 					candidates.push( insertedRange );
 				}
 			}
