@@ -460,7 +460,7 @@ mw.editcheck.BaseEditCheck.prototype.untag = function ( tag, action ) {
  * Check if this type of check has been dismissed covering a specific range
  *
  * @param {ve.Range} range
- * @param name of the tag
+ * @param {string} name of the tag
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range, name ) {
@@ -475,7 +475,7 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range, name )
  *
  * @param {string} tag
  * @param {ve.Range} range
- * @param name of the tag
+ * @param {string} name of the tag
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isTaggedRange = function ( tag, range, name ) {
