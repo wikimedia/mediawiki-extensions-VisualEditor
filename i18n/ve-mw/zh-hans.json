@@ -298,6 +298,7 @@
 	"visualeditor-includes-includeonly-description": "当此页面的内容被另一个页面使用时，以下附加内容将包含在此处：",
 	"visualeditor-includes-documentation": "[//www.mediawiki.org/wiki/Special:MyLanguage/Transclusion#Partial_transclusion 了解有关部分嵌入的更多信息]",
 	"visualeditor-languages-tool": "语言",
+	"visualeditor-linkcontext-uneditable": "抱歉，此链接目前只能在源代码模式下编辑。",
 	"visualeditor-linkinspector-button-link-external": "外部链接",
 	"visualeditor-linkinspector-button-link-internal": "搜索内部页面",
 	"visualeditor-linkinspector-convert-link-isbn": "转换为ISBN链接",
