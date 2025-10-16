@@ -819,7 +819,7 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
  */
 Controller.prototype.closeDialog = function ( action ) {
 	if ( !this.focusedAction ) {
-		return;
+		return ve.createDeferred().resolve().promise();
 	}
 	this.focusAction( undefined );
 	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
