@@ -237,6 +237,13 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentBranchNodes = function ( 
  */
 mw.editcheck.BaseEditCheck.prototype.getAddedNodes = function ( documentModel, type ) {
 	const matchedNodes = [];
+	if ( this.includeSuggestions ) {
+		if ( type ) {
+			return documentModel.getNodesByType( type, true );
+		}
+		return documentModel.selectNodes( documentModel.getDocumentRange(), 'covered' )
+			.map( ( node ) => node.node );
+	}
 	this.getModifiedRanges( documentModel ).forEach( ( range ) => {
 		const nodes = documentModel.selectNodes( range, 'covered' );
 		nodes.forEach( ( node ) => {
