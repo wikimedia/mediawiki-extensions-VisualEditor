@@ -189,12 +189,15 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		// Temporary logging for T402460
 		target.on( 'surfaceReady', () => {
 			target.getSurface().getView().on( 'paste', ( data ) => {
-				// Only run when the check is disabled:
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
-				if ( !defaults.enabled ) {
-					// Now only run when the rest of the check's config means it would have applied if not disabled:
-					const check = mw.editcheck.editCheckFactory.create( 'paste', null, { enabled: true } );
-					if ( check.canBeShown() && !data.source && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
+				const check = mw.editcheck.editCheckFactory.create( 'paste', null, { enabled: true } );
+				if ( check.canBeShown() && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
+					// The check would be shown for the current viewer, and there's enough content that we care about it:
+					if ( data.source ) {
+						// Known-source pastes that we're not showing regardless of the check being enabled/disabled
+						ve.track( 'activity.editCheck-paste', { action: 'ignored-paste-' + data.source } );
+					} else if ( !defaults.enabled ) {
+						// The check is disabled, and there's no source so we would have shown the check otherwise
 						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
 					}
 				}
