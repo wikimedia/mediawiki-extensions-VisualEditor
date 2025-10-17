@@ -550,6 +550,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @return bool
 	 */
 	public static function isAllowedNamespace( Config $config, int $namespaceId ): bool {
+		wfDeprecated( __METHOD__, '1.45' );
 		return in_array( $namespaceId, self::getAvailableNamespaceIds( $config ), true );
 	}
 
@@ -561,6 +562,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @return int[]
 	 */
 	public static function getAvailableNamespaceIds( Config $config ): array {
+		wfDeprecated( __METHOD__, '1.45' );
 		$namespaceInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
 		$configuredNamespaces = array_replace(
 			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableNamespaces' ),
@@ -585,6 +587,7 @@ class ApiVisualEditor extends ApiBase {
 	 * @return bool
 	 */
 	public static function isAllowedContentType( Config $config, string $contentModel ): bool {
+		wfDeprecated( __METHOD__, '1.45' );
 		$availableContentModels = array_merge(
 			ExtensionRegistry::getInstance()->getAttribute( 'VisualEditorAvailableContentModels' ),
 			$config->get( 'VisualEditorAvailableContentModels' )
