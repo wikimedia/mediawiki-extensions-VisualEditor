@@ -15,3 +15,20 @@ mw.editcheck.memoize = function ( handler ) {
 		return memory.get( arg );
 	};
 };
+
+mw.editcheck.fetchTimeout = function ( resource, options = {} ) {
+	// eslint-disable-next-line compat/compat
+	const abortController = window.AbortController ? new AbortController() :
+		{ signal: undefined, abort: () => {} };
+	const timeoutID = setTimeout( () => abortController.abort(), options.timeout || 6000 );
+
+	options.signal = abortController.signal;
+	return fetch( resource, options ).then( ( response ) => {
+		clearTimeout( timeoutID );
+		return response;
+	} ).catch( ( error ) => {
+		clearTimeout( timeoutID );
+		// If we want to specifically handle the abort case, check for an AbortError here
+		throw error;
+	} );
+};

@@ -57,7 +57,7 @@ mw.editcheck.ToneCheck.static.doCheckRequests = function () {
 	const batchSize = 100;
 	while ( this.queue.length ) {
 		const subqueue = this.queue.splice( 0, batchSize );
-		fetch( 'https://api.wikimedia.org/service/lw/inference/v1/models/edit-check:predict', {
+		mw.editcheck.fetchTimeout( 'https://api.wikimedia.org/service/lw/inference/v1/models/edit-check:predict', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'text/html'
