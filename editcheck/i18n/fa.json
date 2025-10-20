@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jeeputer"
+			"Jeeputer",
+			"LordProfo"
 		]
 	},
 	"editcheck-dialog-action-no": "خیر",
 	"editcheck-dialog-action-yes": "بله",
-	"editcheck-dialog-action-recheck": "بررسی مجدد",
+	"editcheck-dialog-action-recheck": "بررسی دوباره",
 	"editcheck-dialog-addref-description": "با افزودن یک یادکرد، به مخاطبان در یافتن مبدأ این اطلاعات کمک کنید.",
 	"editcheck-dialog-addref-reject-question": "چرا نمی‌خواهید یادکرد اضافه کنید؟",
 	"editcheck-dialog-addref-reject-description": "سایر ویرایشگران ممکن است بخواهند از دلیل تصمیم شما برای رد کردن یادکرد آگاه شوند.",
@@ -23,7 +24,7 @@
 	"editcheck-copyvio-action-remove": "خیر، حذفش کن",
 	"editcheck-copyvio-keep-description": "برای سایر ویرایشگران مهم است که دربارهٔ دلیل شما برای نگه داشتن این متن چسبانده‌شده بیشتر بدانند.",
 	"editcheck-copyvio-keep-wrote": "خودم این متن را نوشته‌ام و جای دیگری منتشر نشده است",
-	"editcheck-copyvio-keep-permission": "من اجازهٔ استفادهٔ مجدد از این محتوا را دارم",
+	"editcheck-copyvio-keep-permission": "این محتوا اجازه‌نامهٔ آزاد دارد",
 	"editcheck-copyvio-keep-other": "سایر",
 	"editcheck-copyvio-keep-notify": "از این که دلیل نگه داشتن متن چسبانده‌شده را به اشتراک گذاشتید ممنونیم!",
 	"editcheck-copyvio-remove-notify": "از این که این متن را حذف کردید ممنونیم!",
