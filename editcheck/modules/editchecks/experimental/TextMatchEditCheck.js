@@ -2,36 +2,35 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	// Parent constructor
 	mw.editcheck.TextMatchEditCheck.super.apply( this, arguments );
 
+	this.lang = mw.config.get( 'wgContentLanguage' );
+	this.sensitivity = 'accent'; // TODO figure out how to determine this on an editcheck level
+	this.collator = new Intl.Collator( this.lang, { sensitivity: this.sensitivity } );
+
 	const rawMatchItems = [
 		...this.constructor.static.matchItems,
 		...( this.config.matchItems || [] )
 	];
-	// Normalize queries to allow support for both objects and arrays
-	this.matchItems = rawMatchItems.map( ( matchItem ) => {
-		let normalizedQuery = matchItem.query;
 
-		if ( Array.isArray( matchItem.query ) ) {
-			normalizedQuery = matchItem.query.reduce( ( acc, word ) => {
-				acc[ word ] = null;
-				return acc;
-			}, Object.create( null ) );
-		}
-		return Object.assign( Object.create( null ), matchItem, {
-			query: normalizedQuery
-		} );
-	} );
+	// Create matchItem instances
+	this.matchItems = rawMatchItems.map(
+		( matchItem, index ) => new mw.editcheck.TextMatchItem( matchItem, index, this.collator )
+	);
 
-	this.matchItemsByTerm = {};
-	this.matchItemsByTitle = {};
+	// Initialize lookup maps
+	this.matchItemsSensitiveByTerm = {};
+	this.matchItemsInsensitiveByTerm = {};
+
 	this.matchItems.forEach( ( matchItem ) => {
-		Object.keys( matchItem.query ).forEach( ( word ) => {
-			word = word.toLowerCase();
-			if ( !this.matchItemsByTerm[ word ] ) {
-				this.matchItemsByTerm[ word ] = [];
+		const targetMap = matchItem.isCaseSensitive() ?
+			this.matchItemsSensitiveByTerm :
+			this.matchItemsInsensitiveByTerm;
+
+		Object.keys( matchItem.query ).forEach( ( key ) => {
+			if ( !targetMap[ key ] ) {
+				targetMap[ key ] = [];
 			}
-			this.matchItemsByTerm[ word ].push( matchItem );
+			targetMap[ key ].push( matchItem );
 		} );
-		this.matchItemsByTitle[ matchItem.title ] = matchItem;
 	} );
 
 };
@@ -69,67 +68,93 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 
 mw.editcheck.TextMatchEditCheck.static.matchItems = [];
 
+/**
+ * Given a term, find all the equivalent keys that exist in case-insensitive matchItem queries
+ *
+ * @param {string} term Term to find keys for
+ * @return {string} Array of keys that match
+ */
+mw.editcheck.TextMatchEditCheck.prototype.getMatchingKeys = function ( term ) {
+	const matches = Object.keys( this.matchItemsInsensitiveByTerm ).filter(
+		( key ) => this.collator.compare( key, term ) === 0
+	);
+	return matches;
+};
+
 mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceModel, listener ) {
 	const actions = [];
-	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
+	const document = surfaceModel.getDocument();
+	const modified = this.getModifiedContentRanges( document );
 
-	const matchedRanges = [];
-	// TODO update to directly pass the set to findText
-	Object.keys( this.matchItemsByTerm ).forEach( ( term ) => {
-		surfaceModel.getDocument().findText( term )
-			.filter( ( range ) => modified.some( ( modRange ) => range.touchesRange( modRange ) ) )
-			.filter( ( range ) => this.isRangeInValidSection( range, surfaceModel.documentModel ) )
-			.forEach( ( range ) => {
-				matchedRanges.push( range );
-			} );
-	} );
-
-	for ( const range of matchedRanges ) {
-		const term = surfaceModel.getLinearFragment( range ).getText();
-		// TODO: make i18n-safe
-		const relevantMatchItems = this.matchItemsByTerm[ term.toLowerCase() ];
-		if ( !relevantMatchItems ) {
-			continue;
+	const matchConfigs = [
+		{
+			caseSensitive: true,
+			terms: Object.keys( this.matchItemsSensitiveByTerm ),
+			lookup: ( term ) => this.matchItemsSensitiveByTerm[ term ] || [ ]
+		},
+		{
+			caseSensitive: false,
+			terms: Object.keys( this.matchItemsInsensitiveByTerm ),
+			lookup: ( term ) => {
+				const keys = this.getMatchingKeys( term );
+				return keys
+					.map( ( key ) => this.matchItemsInsensitiveByTerm[ key ] || [] )
+					.reduce( ( acc, arr ) => acc.concat( arr ), [] );
+			}
 		}
-		for ( const matchItem of relevantMatchItems ) {
-			const name = this.getTagNameByMatchItem( matchItem, term );
-			if ( this.isDismissedRange( range, name ) ) {
+	];
+
+	for ( const { caseSensitive, terms, lookup } of matchConfigs ) {
+		const ranges = document.findText(
+			new Set( terms ),
+			{
+				caseSensitiveString: caseSensitive,
+				wholeWord: true
+			}
+		);
+
+		for ( const range of ranges ) {
+			if ( !modified.some( ( modRange ) => range.touchesRange( modRange ) ) ) {
 				continue;
 			}
-			if ( matchItem.listener && matchItem.listener !== listener ) {
+			if ( !this.isRangeInValidSection( range, surfaceModel.documentModel ) ) {
 				continue;
 			}
-			if ( matchItem.config && !this.constructor.static.doesConfigMatch( matchItem.config ) ) {
+			const term = surfaceModel.getLinearFragment( range ).getText();
+
+			const relevantMatchItems = lookup( term );
+			if ( !relevantMatchItems ) {
 				continue;
 			}
-			let fragment = surfaceModel.getLinearFragment( range );
-			switch ( matchItem.expand ) {
-				case 'sentence':
-					// TODO: implement once unicodejs support is added
-					break;
-				case 'paragraph':
-					fragment = fragment.expandLinearSelection( 'closest', ve.dm.ContentBranchNode )
-						// …but that covered the entire CBN, we only want the contents
-						.adjustLinearSelection( 1, -1 );
-					break;
-				case 'word':
-				case 'siblings':
-				case 'parent':
-					fragment = fragment.expandLinearSelection( matchItem.expand );
-					break;
+			for ( const matchItem of relevantMatchItems ) {
+				const name = this.getTagNameByMatchItem( matchItem, term );
+				if ( this.isDismissedRange( range, name ) ) {
+					continue;
+				}
+				if ( matchItem.listener && matchItem.listener !== listener ) {
+					continue;
+				}
+				if ( matchItem.config && !this.constructor.static.doesConfigMatch( matchItem.config ) ) {
+					continue;
+				}
+
+				let fragment = surfaceModel.getLinearFragment( range );
+				fragment = matchItem.getExpandedFragment( fragment );
+				const isValidMode = this.constructor.static.choices.some(
+					( choice ) => choice.modes.includes( matchItem.mode )
+				);
+				const mode = isValidMode ? matchItem.mode : '';
+				actions.push(
+					new mw.editcheck.TextMatchEditCheckAction( {
+						fragments: [ fragment ],
+						title: matchItem.title,
+						message: matchItem.message,
+						check: this,
+						mode: mode,
+						matchItem: matchItem
+					} )
+				);
 			}
-			const isValidMode = this.constructor.static.choices.some( ( choice ) => choice.modes.includes( matchItem.mode ) );
-			const mode = isValidMode ? matchItem.mode : '';
-			actions.push(
-				new mw.editcheck.TextMatchEditCheckAction( {
-					fragments: [ fragment ],
-					title: matchItem.title,
-					message: matchItem.message,
-					check: this,
-					mode: mode,
-					matchItem: matchItem
-				} )
-			);
 		}
 	}
 	return actions;
@@ -139,24 +164,18 @@ mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( surfaceM
 	return this.handleListener( surfaceModel, 'onDocumentChange' );
 };
 
-mw.editcheck.TextMatchEditCheck.prototype.getReplacement = function ( oldWord, matchItem ) {
-	const query = matchItem.query;
-	let newWord = query[ oldWord ];
-	if ( newWord === undefined ) {
-		/* We didn't find a replacement listed under the lower-case version.
-		   Do a slow scan instead. */
-		// TODO: make i18n-safe
-		const key = Object.keys( query ).find( ( k ) => k.toLowerCase() === oldWord.toLowerCase() );
-		newWord = query[ key ];
-	}
-	return newWord;
-};
-
+/**
+ * Get a unique tag name for a given matchItem-term pair.
+ * Builds the tag name from:
+ * - the name of this editcheck
+ * - and the unique subtag of this matchitem-term pair
+ *
+ * @param {Object} matchItem
+ * @param {string} term
+ * @return {string} A tag name in the format 'textMatch-{subtag}'
+ */
 mw.editcheck.TextMatchEditCheck.prototype.getTagNameByMatchItem = function ( matchItem, term ) {
-	const matchIndex = this.matchItems.indexOf( matchItem );
-	const termIndex = Object.keys( matchItem.query ).indexOf( term.toLowerCase() );
-
-	return this.constructor.static.name + `-${ matchIndex }-${ termIndex }`;
+	return this.constructor.static.name + matchItem.getSubTag( term );
 };
 
 // For now it doesn't make sense to run a TextMatchEditCheck in review mode
@@ -174,12 +193,13 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , s
 		case 'accept': {
 			const fragment = action.fragments[ 0 ];
 			const oldWord = fragment.getText();
-			const matchItem = this.matchItemsByTitle[ action.title ];
+			const matchItem = action.matchItem;
 			if ( !matchItem ) {
 				ve.log( `mw.editcheck.TextMatchEditCheck.prototype.act(): did not find matchItem for ${ oldWord }` );
 				return;
 			}
-			const newWord = this.getReplacement( oldWord, matchItem );
+			const newWord = matchItem.getReplacement( oldWord );
+			// TODO match case of old word
 			if ( !newWord ) {
 				ve.log( `mw.editcheck.TextMatchEditCheck.prototype.act(): did not find replacement for ${ oldWord }` );
 				return;
@@ -250,18 +270,130 @@ mw.editcheck.TextMatchEditCheckAction.prototype.equals = function ( other ) {
 /**
  * Get unique tag name for this action
  *
- * @return {string}
+ * @return {string} unique tag
  */
 mw.editcheck.TextMatchEditCheckAction.prototype.getTagName = function () {
 	if ( !this.matchItem ) {
 		return this.check.getName();
 	}
-	const matchIndex = this.check.matchItems.indexOf( this.matchItem );
-	const terms = Object.keys( this.matchItem.query );
-	// TODO: make i18n-safe
-	const termIndex = terms.indexOf( this.originalText[ 0 ].toLowerCase() );
-	if ( matchIndex === -1 || termIndex === -1 ) {
-		return this.check.getName();
+	return this.check.getTagNameByMatchItem( this.matchItem, this.originalText[ 0 ] );
+};
+
+/**
+ * TextMatchItem
+ *
+ * Class to represent a single matchItem for TextMatchEditCheck
+ *
+ * @class
+ *
+ * @param {Object} matchItem
+ * @param item
+ * @param {number} index of this matchitem in the TextMatchEditCheck's collection of all match items
+ * @param {Collator} collator to use for comparisons
+ */
+mw.editcheck.TextMatchItem = function MWTextMatchItem( item, index, collator ) {
+	this.title = item.title;
+	this.mode = item.mode || '';
+	this.message = item.message;
+	this.config = item.config || {};
+	this.expand = item.expand;
+	this.listener = item.listener || null;
+
+	this.index = index;
+	this.collator = collator;
+
+	// Normalize queries to allow support for both objects and arrays
+	this.query = this.normalizeQuery( item.query );
+};
+
+/* Methods */
+
+/**
+ * Transform any query type into a dictionary of terms and their replacements,
+ * with a null replacement if none exists
+ *
+ * @param {Object.<string,string>|string[]} query
+ * @return {Object.<string,string>} Dictionary of each term and its replacement
+ */
+mw.editcheck.TextMatchItem.prototype.normalizeQuery = function ( query ) {
+	if ( Array.isArray( query ) ) {
+		const normalized = Object.create( null );
+		for ( const word of query ) {
+			normalized[ word ] = null;
+		}
+		return normalized;
 	}
-	return this.check.getName() + `-${ matchIndex }-${ termIndex }`;
+	return query || Object.create( null );
+};
+
+/**
+ * @return {boolean} if this matchItem is configured to be case sensitive
+ */
+mw.editcheck.TextMatchItem.prototype.isCaseSensitive = function () {
+	return this.config && this.config.caseSensitive;
+};
+
+/**
+ * Return the corresponding replacement word,
+ * as defined for the given word in this matchItem's query
+ *
+ * @param {string} term to get replacement for
+ * @return {string} replacement term
+ */
+mw.editcheck.TextMatchItem.prototype.getReplacement = function ( term ) {
+	if ( this.isCaseSensitive() ) {
+		return this.query[ term ];
+	}
+	const key = Object.keys( this.query ).find(
+		( k ) => this.collator.compare( k, term ) === 0
+	);
+	return key ? this.query[ key ] : null;
+};
+
+/**
+ * Expand a fragment given the match item's config
+ *
+ * @param {ve.dm.SurfaceFragment} fragment
+ * @return {ve.dm.SurfaceFragment} Expanded fragment
+ */
+mw.editcheck.TextMatchItem.prototype.getExpandedFragment = function ( fragment ) {
+	switch ( this.expand ) {
+		case 'sentence':
+			// TODO: implement once unicodejs support is added
+			break;
+		case 'paragraph':
+			fragment = fragment.expandLinearSelection( 'closest', ve.dm.ContentBranchNode )
+				// …but that covered the entire CBN, we only want the contents
+				.adjustLinearSelection( 1, -1 );
+			break;
+		case 'word':
+		case 'siblings':
+		case 'parent':
+			fragment = fragment.expandLinearSelection( this.expand );
+			break;
+	}
+	return fragment;
+};
+
+/**
+ * Get a unique subtag for this matchitem-term pair.
+ * Builds the subtag from:
+ * - the index of the matchItem when created
+ * - and the index of the term in the list of keys from the matchItem's query
+ *
+ * @param {string} term
+ * @return {string} A subtag in the format '-{matchIndex}-{termIndex}'
+ */
+mw.editcheck.TextMatchItem.prototype.getSubTag = function ( term ) {
+	const queries = Object.keys( this.query );
+	let termIndex;
+	if ( this.caseSensitive ) {
+		termIndex = queries.indexOf( term );
+	} else {
+		termIndex = queries.findIndex( ( q ) => this.collator.compare( q, term ) === 0 );
+	}
+	if ( this.index === -1 || termIndex === -1 ) {
+		return '';
+	}
+	return `-${ this.index }-${ termIndex }`;
 };
