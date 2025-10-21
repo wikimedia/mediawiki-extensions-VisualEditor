@@ -425,7 +425,7 @@ class Hooks implements
 		// values if the user has tried VisualEditor in the past and then disabled it. (T257234)
 		$services = MediaWikiServices::getInstance();
 		/** @var VisualEditorAvailabilityLookup $visualEditorAvailabilityLookup */
-		$visualEditorAvailabilityLookup = $services->get( 'VisualEditorAvailabilityLookup' );
+		$visualEditorAvailabilityLookup = $services->get( VisualEditorAvailabilityLookup::SERVICE_NAME );
 		if ( !$visualEditorAvailabilityLookup->isEnabledForUser( $user ) ) {
 			return 'wikitext';
 		}
