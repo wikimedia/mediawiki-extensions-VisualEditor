@@ -14,7 +14,8 @@
 			"Wertuose",
 			"Şeyx Şamil",
 			"Əkrəm",
-			"Əkrəm Cəfər"
+			"Əkrəm Cəfər",
+			"Gadir"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -55,7 +56,7 @@
 	"visualeditor-changedesc-mwlanguagevariant": "Dil variantının işarələnməsi dəyişdirildi",
 	"visualeditor-changedesc-mwredirect": "$1 olan yönləndirmə hədəfi $2 olaraq dəyişdirildi",
 	"visualeditor-changedesc-mwtransclusion": "Şablon parametrləri dəyişdi",
-	"visualeditor-desc": "MediaViki üçün Vizual redaktor",
+	"visualeditor-desc": "MediaWiki üçün Vizual redaktor",
 	"visualeditor-descriptionpagelink": "Project:Vizual redaktor",
 	"visualeditor-dialog-extension-abandonedit": "Dəyişikliklərinizi tətbiq etmədən bu pəncərəni bağlamaq istədiyinizə əminsiniz?",
 	"visualeditor-dialog-media-alttext-checkbox": "Alternativ mətn kimi başlıqdan istifadə edin",
