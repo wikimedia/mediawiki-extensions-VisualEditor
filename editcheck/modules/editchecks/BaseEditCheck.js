@@ -116,7 +116,7 @@ mw.editcheck.BaseEditCheck.prototype.canBeStale = function () {
  *
  * @abstract
  * @param {ve.dm.Surface} surfaceModel
- * @return {mw.editcheck.EditCheckAction[]}
+ * @return {mw.editcheck.EditCheckAction[]|void}
  */
 mw.editcheck.BaseEditCheck.prototype.onBeforeSave = null;
 
@@ -125,9 +125,18 @@ mw.editcheck.BaseEditCheck.prototype.onBeforeSave = null;
  *
  * @abstract
  * @param {ve.dm.Surface} surfaceModel
- * @return {mw.editcheck.EditCheckAction[]}
+ * @return {mw.editcheck.EditCheckAction[]|void}
  */
 mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
+
+/**
+ * Get actions to show when the focused branch node changed
+ *
+ * @abstract
+ * @param {ve.dm.Surface} surfaceModel
+ * @return {mw.editcheck.EditCheckAction[]|void}
+ */
+mw.editcheck.BaseEditCheck.prototype.onBranchNodeChange = null;
 
 /**
  * User performs an action on an check

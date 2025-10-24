@@ -119,7 +119,9 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 			// handling, at the cost of making debugging be async.
 			actionOrPromise = Promise.reject( ex );
 		}
-		ve.batchPush( actionOrPromiseList, actionOrPromise );
+		if ( actionOrPromise ) {
+			ve.batchPush( actionOrPromiseList, actionOrPromise );
+		}
 	} );
 	return Promise.all( actionOrPromiseList )
 		.then( ( actions ) => actions.filter( ( action ) => action !== null ) )
