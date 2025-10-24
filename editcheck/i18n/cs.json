@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bilykralik16",
 			"Martin Urbanec",
 			"Matěj Suchánek",
 			"WikipedistaOndra"
@@ -27,6 +28,7 @@
 	"editcheck-copyvio-prompt": "Napsal jste tento text?",
 	"editcheck-copyvio-action-keep": "Ano, ponechat",
 	"editcheck-copyvio-action-remove": "Ne, odstranit",
+	"editcheck-tone-reject-other": "Další",
 	"tag-editcheck-reference-decline-common-knowledge": "Kontrola editace (reference) odmítnuta (všeobecné znalosti)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Kontrola editace (reference) odmítnuta jako všeobecná znalost",
 	"tag-editcheck-reference-decline-irrelevant": "Kontrola editace (reference) odmítnuta (irelevantní)",
