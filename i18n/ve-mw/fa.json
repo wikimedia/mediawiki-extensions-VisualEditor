@@ -33,7 +33,8 @@
 			"الناز",
 			"درفش کاویانی",
 			"فلورانس",
-			"Ebrahim"
+			"Ebrahim",
+			"LordProfo"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -329,7 +330,7 @@
 	"visualeditor-mwgallerydialog-widths-field-label": "پهنای تصویر",
 	"visualeditor-mwgallerydialog-widths-input-placeholder": "عرض پیش‌فرض: $1 px",
 	"visualeditor-mwpredialog-convert": "اجازهٔ تغییر سبک متن",
-	"visualeditor-mwpredialog-title": "ساختاربندی مجدد متن ساده",
+	"visualeditor-mwpredialog-title": "متن سادهٔ از پیش قالب‌بندی شده",
 	"visualeditor-mwsignature-tool": "امضای شما",
 	"visualeditor-preference-betatempdisable": "غیرفعال‌سازی ویرایشگر دیداری در حالی که هنوز آزمایشی است",
 	"visualeditor-preference-core-description": "فعال‌سازی این ویرایشگر. در صفحه‌های بحث و سایر فضای نام‌ها ممکن است موجود نباشد.",
@@ -353,7 +354,7 @@
 	"visualeditor-rebase-client-import": "درون‌ریزی",
 	"visualeditor-rebase-client-import-name": "عنوان صفحه",
 	"visualeditor-rebase-client-title-help": "شما پیش از ذخیره قادر به بازبینی تغییرات خواهید بود.",
-	"visualeditor-recreate": "صفحه از زمانی که شما مشغول ویرایش شدید حذف شد. برای ساخت مجدد صفحه \"$1\" را فشار دهید.",
+	"visualeditor-recreate": "صفحه از زمانی که شما مشغول ویرایش شدید حذف شد. برای ساخت دوبارهٔ صفحه \"$1\" را فشار دهید.",
 	"visualeditor-redirect-description": "تغییرمسیر به $1",
 	"visualeditor-savedialog-error-badtoken": "ذخیرهٔ ویرایش شما مقدور نیست چون بخش مورد نظر وجود ندارد.",
 	"visualeditor-savedialog-identify-anon": "آیا می‌خواهید این صفحه را به‌عنوان کاربر ناشناس ذخیره کنید؟ نشانی آی‌پی شما در تاریخچهٔ ویرایش صفحه ذخیره خواهد شد.",
