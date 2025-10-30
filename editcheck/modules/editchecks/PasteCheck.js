@@ -62,6 +62,8 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	} );
 };
 
+mw.editcheck.PasteCheck.prototype.onBeforeSave = mw.editcheck.PasteCheck.prototype.onDocumentChange;
+
 mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 	switch ( choice ) {
 		case 'keep':
