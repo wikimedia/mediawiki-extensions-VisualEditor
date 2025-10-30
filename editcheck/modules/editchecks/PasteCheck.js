@@ -83,18 +83,21 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 				mw.notify( ve.msg( 'editcheck-copyvio-keep-notify' ), { type: 'success' } );
 				return ve.createDeferred().resolve( { action: choice, reason: reason } ).promise();
 			} );
-		case 'remove':
+		case 'remove': {
 			action.fragments.forEach( ( fragment ) => {
 				fragment.removeContent();
 			} );
-			// Auto-scrolling causes selection and focus changes...
-			setTimeout( () => {
-				action.fragments[ action.fragments.length - 1 ].select();
-				surface.getView().focus();
-			}, 500 );
-
-			mw.notify( ve.msg( 'editcheck-copyvio-remove-notify' ), { type: 'success' } );
-			break;
+			// If in pre-save mode, close the check dialog
+			const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
+			return closePromise.then( () => {
+				// Auto-scrolling causes selection and focus changes...
+				setTimeout( () => {
+					action.fragments[ action.fragments.length - 1 ].select();
+					surface.getView().focus();
+				}, 500 );
+				mw.notify( ve.msg( 'editcheck-copyvio-remove-notify' ), { type: 'success' } );
+			} );
+		}
 	}
 };
 
