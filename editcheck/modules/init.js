@@ -95,65 +95,69 @@ mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 };
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
-	mw.hook( 've.activationComplete' ).add( () => {
-		const target = ve.init.target;
-
-		function getRefNodes() {
-			// The firstNodes list is a numerically indexed array of reference nodes in the document.
-			// The list is append only, and removed references are set to undefined in place.
-			// To check if a new reference is being published, we just need to know if a reference
-			// with an index beyond the initial list (initLength) is still set.
-			const internalList = target.getSurface().getModel().getDocument().getInternalList();
-			const group = internalList.getNodeGroup( 'mwReference/' );
-			return group ? group.firstNodes || [] : [];
+	mw.hook( 've.newTarget' ).add( ( target ) => {
+		if ( target.constructor.static.name !== 'article' ) {
+			return;
 		}
 
-		let hasFailingToneCheck = null;
-		target.getPreSaveProcess().first( () => {
-			// Start checking for tone in the pre-save process, but don't block the save dialog
-			// from appearing. If the tone check isn't finished by save time we will just log
-			// an error.
-			hasFailingToneCheck = null;
-			mw.editcheck.hasFailingToneCheck( target.getSurface().getModel() ).then( ( result ) => {
-				hasFailingToneCheck = result;
+		target.on( 'surfaceReady', () => {
+			function getRefNodes() {
+				// The firstNodes list is a numerically indexed array of reference nodes in the document.
+				// The list is append only, and removed references are set to undefined in place.
+				// To check if a new reference is being published, we just need to know if a reference
+				// with an index beyond the initial list (initLength) is still set.
+				const internalList = target.getSurface().getModel().getDocument().getInternalList();
+				const group = internalList.getNodeGroup( 'mwReference/' );
+				return group ? group.firstNodes || [] : [];
+			}
+
+			let hasFailingToneCheck = null;
+			target.getPreSaveProcess().first( () => {
+				// Start checking for tone in the pre-save process, but don't block the save dialog
+				// from appearing. If the tone check isn't finished by save time we will just log
+				// an error.
+				hasFailingToneCheck = null;
+				mw.editcheck.hasFailingToneCheck( target.getSurface().getModel() ).then( ( result ) => {
+					hasFailingToneCheck = result;
+				} );
 			} );
+
+			const initLength = getRefNodes().length;
+			target.saveFields.vetags = function () {
+				const refNodes = getRefNodes();
+				const newLength = refNodes.length;
+				let newNodesInDoc = false;
+				for ( let i = initLength; i < newLength; i++ ) {
+					if ( refNodes[ i ] ) {
+						newNodesInDoc = true;
+						break;
+					}
+				}
+				const tags = [];
+				if ( newNodesInDoc ) {
+					tags.push( 'editcheck-newreference' );
+				}
+				if ( mw.editcheck.checksShown.addReference ) {
+					tags.push( 'editcheck-references-shown' );
+				}
+				if ( mw.editcheck.checksShown.tone ) {
+					tags.push( 'editcheck-tone-shown' );
+				}
+				if ( mw.editcheck.checksShown.paste ) {
+					tags.push( 'editcheck-paste-shown' );
+				}
+				if ( hasFailingToneCheck ) {
+					tags.push( 'editcheck-tone' );
+				} else if ( hasFailingToneCheck === null ) {
+					ve.track( 'activity.editCheck-tone', { action: 'save-before-check-finalized' } );
+				}
+				return tags.join( ',' );
+			};
 		} );
 
-		const initLength = getRefNodes().length;
-		target.saveFields.vetags = function () {
-			const refNodes = getRefNodes();
-			const newLength = refNodes.length;
-			let newNodesInDoc = false;
-			for ( let i = initLength; i < newLength; i++ ) {
-				if ( refNodes[ i ] ) {
-					newNodesInDoc = true;
-					break;
-				}
-			}
-			const tags = [];
-			if ( newNodesInDoc ) {
-				tags.push( 'editcheck-newreference' );
-			}
-			if ( mw.editcheck.checksShown.addReference ) {
-				tags.push( 'editcheck-references-shown' );
-			}
-			if ( mw.editcheck.checksShown.tone ) {
-				tags.push( 'editcheck-tone-shown' );
-			}
-			if ( mw.editcheck.checksShown.paste ) {
-				tags.push( 'editcheck-paste-shown' );
-			}
-			if ( hasFailingToneCheck ) {
-				tags.push( 'editcheck-tone' );
-			} else if ( hasFailingToneCheck === null ) {
-				ve.track( 'activity.editCheck-tone', { action: 'save-before-check-finalized' } );
-			}
-			return tags.join( ',' );
-		};
-	} );
-	mw.hook( 've.deactivationComplete' ).add( () => {
-		const target = ve.init.target;
-		delete target.saveFields.vetags;
+		target.on( 'teardown', () => {
+			delete target.saveFields.vetags;
+		} );
 	} );
 }
 
