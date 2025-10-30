@@ -62,7 +62,16 @@ OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
 mw.editcheck.EditCheckAction.static.compareStarts = function ( a, b ) {
 	const aStart = a.getHighlightSelections()[ 0 ].getCoveringRange().start;
 	const bStart = b.getHighlightSelections()[ 0 ].getCoveringRange().start;
-	return aStart - bStart;
+	const difference = aStart - bStart;
+	if ( difference === 0 ) {
+		if ( a.check.takesFocus() ) {
+			return -1;
+		}
+		if ( b.check.takesFocus() ) {
+			return 1;
+		}
+	}
+	return difference;
 };
 
 /**

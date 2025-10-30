@@ -159,7 +159,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 				controller: this.controller
 			} );
 			if ( !shown ) {
-				actionToShow = section.actions.find( ( action ) => action.check.constructor.static.takesFocus );
+				actionToShow = section.actions.find( ( action ) => action.check.takesFocus() );
 			}
 			this.$body.append( widget.$element );
 		}

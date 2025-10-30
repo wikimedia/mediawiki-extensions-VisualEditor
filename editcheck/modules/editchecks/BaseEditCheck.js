@@ -188,6 +188,13 @@ mw.editcheck.BaseEditCheck.prototype.getDescription = function () {
 };
 
 /**
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.takesFocus = function () {
+	return this.constructor.static.takesFocus;
+};
+
+/**
  * Find out whether the check should be applied
  *
  * This is a general check for its applicability to the viewer / page, rather
