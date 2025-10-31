@@ -6,13 +6,17 @@
  *   experimental: also load experimental checks
  *   suggestions: enable suggestions mode
  */
-const ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
+let ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
+if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
+	// if edit check isn't forcibly disabled, override from this global
+	ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+}
 const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
 const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
 
 mw.editcheck = {
 	config: require( './config.json' ),
-	forceEnable: !!( ecenable || window.MWVE_FORCE_EDIT_CHECK_ENABLED ),
+	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental || ecenable === '2' ),
 	checksShown: {}
 };
