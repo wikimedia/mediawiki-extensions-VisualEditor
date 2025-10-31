@@ -512,9 +512,6 @@ mw.editcheck.BaseEditCheck.prototype.untag = function ( tag, action ) {
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range, name ) {
-	if ( !name ) {
-		name = this.constructor.static.name;
-	}
 	return this.isTaggedRange( 'dismissed', range, name );
 };
 
@@ -527,6 +524,9 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range, name )
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isTaggedRange = function ( tag, range, name ) {
+	if ( !name ) {
+		name = this.constructor.static.name;
+	}
 	const tags = this.controller.taggedFragments[ name ];
 	if ( tags === undefined ) {
 		return false;
