@@ -62,7 +62,8 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	} );
 };
 
-mw.editcheck.PasteCheck.prototype.onBeforeSave = mw.editcheck.PasteCheck.prototype.onDocumentChange;
+// TODO: enable this once issues editing content from pre-save are resolved (T407543)
+// mw.editcheck.PasteCheck.prototype.onBeforeSave = mw.editcheck.PasteCheck.prototype.onDocumentChange;
 
 mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 	switch ( choice ) {
