@@ -41,6 +41,14 @@
 		modules.push( 'ext.visualEditor.mwwikitext' );
 	}
 
+	// Collab
+	if (
+		mw.user.options.get( 'visualeditor-collab' ) ||
+		url.searchParams.has( 'collabSession' )
+	) {
+		modules.push( 'ext.visualEditor.collab' );
+	}
+
 	// A/B test enrollment for edit check (T389231)
 	// Note: this happens here rather than inside editcheck so that the bucket will
 	// get logged for EditAttemptStep init events
