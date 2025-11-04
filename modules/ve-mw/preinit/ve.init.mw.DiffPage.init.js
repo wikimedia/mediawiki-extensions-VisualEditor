@@ -126,7 +126,9 @@
 			return;
 		}
 
-		const $wikitextDiffContainer = $( 'table.diff[data-mw="interface"]' );
+		// T409187: data-mw="interface" can be removed 2 weeks after
+		// I7f298a9002228b28c2b81f2209d3e23f00a613e7 is deployed
+		const $wikitextDiffContainer = $( 'table.diff[data-mw-interface], table.diff[data-mw="interface"]' );
 		$wikitextDiffHeader = $wikitextDiffContainer.find( 'tr.diff-title' )
 			.add( $wikitextDiffContainer.find( 'td.diff-multi, td.diff-notice' ).parent() );
 		$wikitextDiffBody = $wikitextDiffContainer.find( 'tr' ).not( $wikitextDiffHeader );
