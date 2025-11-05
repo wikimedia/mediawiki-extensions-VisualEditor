@@ -58,7 +58,7 @@
 	"visualeditor-ca-createsource": "Criar código fonte",
 	"visualeditor-ca-editlocaldescriptionsource": "Editar a fonte da descrição local",
 	"visualeditor-ca-editsource": "Editar código fonte",
-	"visualeditor-ca-editsource-section": "editar código fonte",
+	"visualeditor-ca-editsource-section": "editar código",
 	"visualeditor-ca-editsource-section-hint": "Editar código fonte da secção: $1",
 	"visualeditor-categories-tool": "Categorias",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Chave de ordenação alterada de $1 para $2",
