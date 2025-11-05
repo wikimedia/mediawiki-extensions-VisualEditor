@@ -54,6 +54,9 @@ if ( mw.editcheck.experimental ) {
 }
 if ( abGroup === 'test' ) {
 	nonDefaultChecks.delete( abCheck );
+} else if ( abGroup === 'control' ) {
+	// This means that we can make any default check a/b testable
+	nonDefaultChecks.add( abCheck );
 }
 
 for ( const check of nonDefaultChecks ) {
@@ -83,7 +86,8 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 		return false;
 	}
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
-	const check = mw.editcheck.editCheckFactory.create( 'addReference', null, { enabled: true } );
+	// Check might not be registered so we can't use the factory.
+	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { enabled: true } ) );
 	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 };
 
@@ -198,7 +202,8 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		target.on( 'surfaceReady', () => {
 			target.getSurface().getView().on( 'paste', ( data ) => {
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
-				const check = mw.editcheck.editCheckFactory.create( 'paste', null, { enabled: true } );
+				// Check might not be registered so we can't use the factory.
+				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { enabled: true } ) );
 				if ( check.canBeShown() && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 					// The check would be shown for the current viewer, and there's enough content that we care about it:
 					if ( data.source ) {
