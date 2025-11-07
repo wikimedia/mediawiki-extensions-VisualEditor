@@ -134,7 +134,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 				if ( matchItem.listener && matchItem.listener !== listener ) {
 					continue;
 				}
-				if ( matchItem.config && !this.constructor.static.doesConfigMatch( matchItem.config ) ) {
+				if ( !this.constructor.static.doesConfigMatch( matchItem.config ) ) {
 					continue;
 				}
 
@@ -295,7 +295,7 @@ mw.editcheck.TextMatchItem = function MWTextMatchItem( item, index, collator ) {
 	this.title = item.title;
 	this.mode = item.mode || '';
 	this.message = item.message;
-	this.config = item.config || {};
+	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, item.config );
 	this.expand = item.expand;
 	this.listener = item.listener || null;
 
@@ -306,16 +306,29 @@ mw.editcheck.TextMatchItem = function MWTextMatchItem( item, index, collator ) {
 	this.query = this.normalizeQuery( item.query );
 };
 
+/* Inheritance */
+
+OO.initClass( mw.editcheck.TextMatchItem );
+
+/* Static properties */
+
+mw.editcheck.TextMatchItem.static.defaultConfig = {
+	enabled: true
+};
+
 /* Methods */
 
 /**
  * Transform any query type into a dictionary of terms and their replacements,
  * with a null replacement if none exists
  *
- * @param {Object.<string,string>|string[]} query
+ * @param {Object.<string,string>|string[]|string} query
  * @return {Object.<string,string>} Dictionary of each term and its replacement
  */
 mw.editcheck.TextMatchItem.prototype.normalizeQuery = function ( query ) {
+	if ( typeof query === 'string' ) {
+		query = [ query ];
+	}
 	if ( Array.isArray( query ) ) {
 		const normalized = Object.create( null );
 		for ( const word of query ) {
