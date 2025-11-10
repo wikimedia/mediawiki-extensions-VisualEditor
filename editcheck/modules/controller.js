@@ -390,7 +390,7 @@ Controller.prototype.getActions = function ( listener ) {
  * @param {ve.dm.Selection} selection New selection
  */
 Controller.prototype.onSelect = function () {
-	if ( OO.ui.isMobile() ) {
+	if ( OO.ui.isMobile() && !this.inBeforeSave ) {
 		// On mobile we want to close the drawer if the keyboard is shown
 		if ( this.surface.getView().hasNativeCursorSelection() ) {
 			// A native cursor selection means the keyboard will be visible
@@ -441,8 +441,13 @@ Controller.prototype.updateActions = function () {
  */
 Controller.prototype.onContextChange = function () {
 	if ( OO.ui.isMobile() && this.surface.getContext().isVisible() ) {
-		// The context overlaps the drawer on mobile, so we should get rid of the drawer
-		this.closeDialog( 'context' );
+		if ( !this.inBeforeSave ) {
+			// The context overlaps the drawer on mobile, so we should get rid of the drawer
+			this.closeDialog( 'context' );
+		} else {
+			// We still want to hide the context, just not close the dialog
+			this.surface.getModel().setNullSelection();
+		}
 	}
 };
 
