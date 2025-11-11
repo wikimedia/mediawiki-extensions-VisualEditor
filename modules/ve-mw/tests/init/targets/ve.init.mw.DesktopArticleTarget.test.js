@@ -140,6 +140,7 @@ QUnit.test( 'init', ( assert ) => {
 
 			// Store doc state and examine it
 			target.storeDocState();
+			// eslint-disable-next-line mediawiki/no-storage
 			const storedData = JSON.parse( sessionStorage.getItem( 've-docstate' ) );
 			const ignoredKeys = {
 				// Not stored because it's always 'success'

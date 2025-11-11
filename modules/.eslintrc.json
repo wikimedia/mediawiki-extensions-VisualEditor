@@ -8,6 +8,7 @@
 	],
 	"rules": {
 		"no-jquery/no-append-html": "warn",
-		"no-jquery/no-done-fail": "warn"
+		"no-jquery/no-done-fail": "warn",
+		"mediawiki/no-unlabeled-buttonwidget": "warn"
 	}
 }
