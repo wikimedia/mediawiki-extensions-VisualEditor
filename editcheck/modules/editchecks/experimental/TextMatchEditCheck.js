@@ -12,9 +12,12 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 		this.config.matchItems || {}
 	);
 	this.matchItems = [];
+	this.matchItemsById = new Map();
 	// Create matchItem instances
 	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
-		this.matchItems.push( new mw.editcheck.TextMatchItem( item, id, this.collator ) );
+		const textMatchItem = new mw.editcheck.TextMatchItem( item, id, this.collator );
+		this.matchItems.push( textMatchItem );
+		this.matchItemsById.set( id, textMatchItem );
 	} );
 
 	// Initialize lookup maps
@@ -22,6 +25,9 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	this.matchItemsInsensitiveByTerm = {};
 
 	this.matchItems.forEach( ( matchItem ) => {
+		if ( !matchItem.expand && matchItem.config.minOccurrences ) {
+			mw.log.warn( 'MatchItem \'' + matchItem.title + '\' sets minOccurrences but is missing expand value.' );
+		}
 		const targetMap = matchItem.isCaseSensitive() ?
 			this.matchItemsSensitiveByTerm :
 			this.matchItemsInsensitiveByTerm;
@@ -84,6 +90,7 @@ mw.editcheck.TextMatchEditCheck.prototype.getMatchingKeys = function ( term ) {
 
 mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceModel, listener ) {
 	const actions = [];
+	const fragmentCountsByItem = new Map();
 	const document = surfaceModel.getDocument();
 	const modified = this.getModifiedContentRanges( document );
 
@@ -141,6 +148,28 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 
 				let fragment = surfaceModel.getLinearFragment( range );
 				fragment = matchItem.getExpandedFragment( fragment );
+				const id = matchItem.id;
+				if ( !fragmentCountsByItem.has( id ) ) {
+					fragmentCountsByItem.set( id, new Map() );
+				}
+				const fragRange = fragment.getSelection().getRange();
+				const key = `${ fragRange.start }-${ fragRange.end }`;
+				const fragMap = fragmentCountsByItem.get( id );
+				// The term is only relevant to the action if the matchItem has no expansion rules.
+				const entry = fragMap.get( key ) || { fragment, count: 0, term: matchItem.expand ? ' ' : term };
+				entry.count++;
+				fragMap.set( key, entry );
+			}
+		}
+	}
+
+	// Once we finish all the searches, we do another pass through the matched fragments
+	// so that we can handle matchItems with a min occurrences constraint.
+	for ( const [ id, fragMap ] of fragmentCountsByItem.entries() ) {
+		const matchItem = this.matchItemsById.get( id );
+		const min = matchItem.config.minOccurrences || 1;
+		for ( const { fragment, count, term } of fragMap.values() ) {
+			if ( count >= min ) {
 				const isValidMode = this.constructor.static.choices.some(
 					( choice ) => choice.modes.includes( matchItem.mode )
 				);
@@ -411,7 +440,7 @@ mw.editcheck.TextMatchItem.prototype.getExpandedFragment = function ( fragment )
  * Get a unique subtag for this matchitem-term pair.
  * Builds the subtag from:
  * - the index of the matchItem when created
- * - and the index of the term in the list of keys from the matchItem's query
+ * - and, optionally, the index of the term in the list of keys from the matchItem's query
  *
  * @param {string} term
  * @return {string} A subtag in the format '-{matchIndex}-{termIndex}'
@@ -419,6 +448,11 @@ mw.editcheck.TextMatchItem.prototype.getExpandedFragment = function ( fragment )
 mw.editcheck.TextMatchItem.prototype.getSubTag = function ( term ) {
 	const queries = Object.keys( this.query );
 	let termIndex;
+	if ( this.expand ) {
+		// This operates under the assumption that, if the expand property is set,
+		// there can only be one action from this matchitem for any given fragment.
+		return `-${ this.id }`;
+	}
 	if ( this.caseSensitive ) {
 		termIndex = queries.indexOf( term );
 	} else {
