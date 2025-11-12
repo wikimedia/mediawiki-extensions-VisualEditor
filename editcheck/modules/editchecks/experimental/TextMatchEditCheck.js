@@ -6,15 +6,16 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	this.sensitivity = 'accent'; // TODO figure out how to determine this on an editcheck level
 	this.collator = new Intl.Collator( this.lang, { sensitivity: this.sensitivity } );
 
-	const rawMatchItems = [
-		...this.constructor.static.matchItems,
-		...( this.config.matchItems || [] )
-	];
-
-	// Create matchItem instances
-	this.matchItems = rawMatchItems.map(
-		( matchItem, index ) => new mw.editcheck.TextMatchItem( matchItem, index, this.collator )
+	const rawMatchItems = Object.assign(
+		{},
+		this.constructor.static.matchItems || {},
+		this.config.matchItems || {}
 	);
+	this.matchItems = [];
+	// Create matchItem instances
+	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
+		this.matchItems.push( new mw.editcheck.TextMatchItem( item, id, this.collator ) );
+	} );
 
 	// Initialize lookup maps
 	this.matchItemsSensitiveByTerm = {};
@@ -151,7 +152,8 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 						message: matchItem.message,
 						check: this,
 						mode: mode,
-						matchItem: matchItem
+						matchItem: matchItem,
+						term: term
 					} )
 				);
 			}
@@ -186,11 +188,17 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , s
 	switch ( choice ) {
 		case 'dismiss':
 			this.dismiss( action );
+			ve.track( 'activity.editCheck-' + action.getName(),
+				{ action: 'dismiss' } );
 			break;
 		case 'delete':
 			action.fragments[ 0 ].removeContent();
+			ve.track( 'activity.editCheck-' + action.getName(),
+				{ action: 'delete' } );
 			break;
 		case 'accept': {
+			ve.track( 'activity.editCheck-' + action.getName(),
+				{ action: 'accept' } );
 			const fragment = action.fragments[ 0 ];
 			const oldWord = fragment.getText();
 			const matchItem = action.matchItem;
@@ -223,10 +231,12 @@ mw.editcheck.editCheckFactory.register( mw.editcheck.TextMatchEditCheck );
  *
  * @param {Object} config Configuration options
  * @param {Object} config.matchItem the associated matchItem for this action
+ * @param {string} config.term term that prompted the action
  */
 mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( config ) {
 	mw.editcheck.TextMatchEditCheckAction.super.call( this, config );
 	this.matchItem = config.matchItem;
+	this.term = config.term;
 };
 
 /* Inheritance */
@@ -276,7 +286,16 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getTagName = function () {
 	if ( !this.matchItem ) {
 		return this.check.getName();
 	}
-	return this.check.getTagNameByMatchItem( this.matchItem, this.originalText[ 0 ] );
+	return this.check.getTagNameByMatchItem( this.matchItem, this.term );
+};
+
+/**
+ * Get the name of the check type
+ *
+ * @return {string} Check type name
+ */
+mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
+	return this.check.getName() + '-' + this.matchItem.id;
 };
 
 /**
@@ -288,10 +307,10 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getTagName = function () {
  *
  * @param {Object} matchItem
  * @param item
- * @param {number} index of this matchitem in the TextMatchEditCheck's collection of all match items
+ * @param {string} id of matchitem in config
  * @param {Collator} collator to use for comparisons
  */
-mw.editcheck.TextMatchItem = function MWTextMatchItem( item, index, collator ) {
+mw.editcheck.TextMatchItem = function MWTextMatchItem( item, id, collator ) {
 	this.title = item.title;
 	this.mode = item.mode || '';
 	this.message = item.message;
@@ -299,7 +318,7 @@ mw.editcheck.TextMatchItem = function MWTextMatchItem( item, index, collator ) {
 	this.expand = item.expand;
 	this.listener = item.listener || null;
 
-	this.index = index;
+	this.id = id;
 	this.collator = collator;
 
 	// Normalize queries to allow support for both objects and arrays
@@ -405,8 +424,8 @@ mw.editcheck.TextMatchItem.prototype.getSubTag = function ( term ) {
 	} else {
 		termIndex = queries.findIndex( ( q ) => this.collator.compare( q, term ) === 0 );
 	}
-	if ( this.index === -1 || termIndex === -1 ) {
+	if ( !this.id || termIndex === -1 ) {
 		return '';
 	}
-	return `-${ this.index }-${ termIndex }`;
+	return `-${ this.id }-${ termIndex }`;
 };
