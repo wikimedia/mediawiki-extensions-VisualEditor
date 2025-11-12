@@ -215,7 +215,7 @@ mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actio
 	const promise = this.check.act( actionWidget.action, this, surface );
 	this.emit( 'act', promise || ve.createDeferred().resolve().promise() );
 	ve.track( 'activity.editCheck-' + this.getName(), {
-		action: 'action-' + ( actionWidget.getAction() || 'unknown' )
+		action: ( this.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionWidget.getAction() || 'unknown' )
 	} );
 };
 
