@@ -2267,6 +2267,7 @@
 			"lib/ve/tests/init/ve.init.ConflictableStorage.test.js",
 			"lib/ve/tests/ui/dialogs/ve.ui.FindAndReplaceDialog.test.js",
 			"lib/ve/tests/ui/ve.ui.Trigger.test.js",
+			"lib/ve/tests/ui/ve.ui.TriggerRegistry.test.js",
 			"lib/ve/tests/ui/ve.ui.Sequence.test.js",
 			"lib/ve/tests/ui/ve.ui.DiffElement.test.js",
 			"lib/ve/tests/ui/ve.ui.PreviewElement.test.js",
