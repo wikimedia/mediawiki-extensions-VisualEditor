@@ -146,4 +146,30 @@
 			return value;
 		} );
 	};
+
+	// Setup overrides for core environment (done in ve.qunit.local.js in core)
+
+	const origModule = QUnit.module;
+
+	const wrappedModule = function ( name, localEnv = {} ) {
+		// Copy all hooks so before/after/each are preserved
+		const hooks = Object.assign( {}, localEnv );
+		const origBeforeEach = hooks.beforeEach;
+		hooks.beforeEach = function () {
+			// Ensure the current target is appended to the current fixture
+			// eslint-disable-next-line no-jquery/no-global-selector
+			$( '#qunit-fixture' ).append( ve.init.target.$element );
+			if ( origBeforeEach ) {
+				return origBeforeEach.apply( this, arguments );
+			}
+		};
+		origModule( name, hooks );
+	};
+
+	// Preserve other properties (only, skip, if, ...)
+	Object.keys( origModule ).forEach( ( key ) => {
+		wrappedModule[ key ] = origModule[ key ];
+	} );
+
+	QUnit.module = wrappedModule;
 }
