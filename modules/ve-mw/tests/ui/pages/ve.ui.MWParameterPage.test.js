@@ -1,4 +1,4 @@
-QUnit.module( 've.ui.MWParameterPage', ve.test.utils.newMwEnvironment );
+QUnit.module( 've.ui.MWParameterPage', ve.test.utils.newMwEnvironment() );
 
 [
 	[ undefined, '', ve.ui.MWLazyMultilineTextInputWidget ],
