@@ -217,17 +217,11 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , s
 	switch ( choice ) {
 		case 'dismiss':
 			this.dismiss( action );
-			ve.track( 'activity.editCheck-' + action.getName(),
-				{ action: 'dismiss' } );
 			break;
 		case 'delete':
 			action.fragments[ 0 ].removeContent();
-			ve.track( 'activity.editCheck-' + action.getName(),
-				{ action: 'delete' } );
 			break;
 		case 'accept': {
-			ve.track( 'activity.editCheck-' + action.getName(),
-				{ action: 'accept' } );
 			const fragment = action.fragments[ 0 ];
 			const oldWord = fragment.getText();
 			const matchItem = action.matchItem;
