@@ -43,9 +43,9 @@ describe( 'Content Editable', () => {
 		await expect( await EditPage.notification ).toHaveText( 'The page has been created.' );
 	} );
 
-	// Skipped starting 2025-08-14 because of T401573
-	it.skip( 'should insert a table', async () => {
-		await EditPage.insertTable();
+	it( 'should insert a table', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '{|' );
 
 		await expect( await EditPage.insertedTable ).toBeDisplayed();
 	} );
