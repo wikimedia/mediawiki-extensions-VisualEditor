@@ -467,7 +467,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 		const content = this.getAttribute( 'mw' );
 		for ( let i = 0; i < content.parts.length; i++ ) {
 			const part = content.parts[ i ];
-			// A template as serialized by {@see ve.dm.MWTemplateModel.serialize}
+			// A template as serialized by {@link ve.dm.MWTemplateModel#serialize}
 			if ( part.template ) {
 				const href = part.template.target.href,
 					page = href ? mw.libs.ve.normalizeParsoidResourceName( href ) : null;
@@ -476,7 +476,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 					templatePage: page
 				} );
 			} else {
-				// Raw wikitext as serialized by {@see ve.dm.MWTransclusionContentModel.serialize}
+				// Raw wikitext as serialized by {@link ve.dm.MWTransclusionContentModel#serialize}
 				this.partsList.push( { content: part } );
 			}
 		}
@@ -486,7 +486,7 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 };
 
 /**
- * Wrapper for static method, {@see ve.dm.MWTransclusionNode.static.getWikitext} above.
+ * Wrapper for static method, {@link ve.dm.MWTransclusionNode.static.getWikitext} above.
  *
  * @return {string} Wikitext
  */

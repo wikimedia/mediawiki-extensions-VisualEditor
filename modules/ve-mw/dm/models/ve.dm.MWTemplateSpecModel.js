@@ -86,7 +86,7 @@ ve.dm.MWTemplateSpecModel = function VeDmMWTemplateSpecModel( template ) {
 	/**
 	 * @property {Object.<string,boolean>} seenParameterNames Keeps track of any parameter from any
 	 *  source and in which order they have been seen first. Includes parameters that have been removed
-	 *  during the lifetime of this object, i.e. {@see fillFromTemplate} doesn't remove parameters that
+	 *  during the lifetime of this object, i.e. {@link #fillFromTemplate} doesn't remove parameters that
 	 *  have been seen before. The order is typically but not necessarily the original order in which
 	 *  the parameters appear in the template. Aliases are resolved and don't appear on their original
 	 *  position any more.
@@ -139,7 +139,7 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 		this.templateData.params = {};
 	}
 	// Incomplete server validation makes this possible, but the empty string is reserved for
-	// {@see ve.ui.MWAddParameterPage}.
+	// {@link ve.ui.MWAddParameterPage}.
 	delete this.templateData.params[ '' ];
 
 	let resolveAliases = false;
@@ -168,7 +168,7 @@ ve.dm.MWTemplateSpecModel.prototype.setTemplateData = function ( data ) {
 
 /**
  * Adds all (possibly undocumented) parameters from the linked template to the list of known
- * parameters, {@see getKnownParameterNames}. This should be called every time a parameter is added
+ * parameters, {@link #getKnownParameterNames}. This should be called every time a parameter is added
  * to the template.
  */
 ve.dm.MWTemplateSpecModel.prototype.fillFromTemplate = function () {
@@ -210,7 +210,7 @@ ve.dm.MWTemplateSpecModel.prototype.getDescription = function ( languageCode ) {
 /**
  * True it the template does have any user-provided documentation. Note that undocumented templates
  * can still have auto-detected `params` and a `paramOrder`, while documented templates might not
- * have `params`. Use `{@see getDocumentedParameterOrder()}.length` to differentiate.
+ * have `params`. Use `{@link #getDocumentedParameterOrder}.length` to differentiate.
  *
  * @return {boolean}
  */
@@ -244,7 +244,7 @@ ve.dm.MWTemplateSpecModel.prototype.getUndocumentedParameterNames = function () 
 };
 
 /**
- * Same as {@see getKnownParameterNames}, but in a canonical order that's always the same, unrelated
+ * Same as {@link #getKnownParameterNames}, but in a canonical order that's always the same, unrelated
  * to how the parameters appear in the wikitext. Primary parameter names documented via TemplateData
  * are first, in their documented order. Undocumented parameters are sorted with numeric names
  * first, followed by alphabetically sorted names.
@@ -272,8 +272,8 @@ ve.dm.MWTemplateSpecModel.prototype.getCanonicalParameterOrder = function () {
 /**
  * Check if a parameter name or alias was seen before. This includes parameters and aliases
  * documented via TemplateData as well as undocumented parameters, e.g. from the original template
- * invocation. When undocumented parameters are removed from the linked {@see ve.dm.MWTemplateModel}
- * they are still known and will still be offered via {@see getKnownParameterNames} for the lifetime
+ * invocation. When undocumented parameters are removed from the linked {@link ve.dm.MWTemplateModel}
+ * they are still known and will still be offered via {@link #getKnownParameterNames} for the lifetime
  * of this object.
  *
  * @param {string} name Parameter name or alias
@@ -436,7 +436,7 @@ ve.dm.MWTemplateSpecModel.prototype.getParameterDeprecationDescription = functio
  * Get all known primary parameter names, without aliases, in their original order as they became
  * known (usually but not necessarily the order in which they appear in the template). This still
  * includes undocumented parameters that have been part of the template at some point during the
- * lifetime of this object, but have been removed from the linked {@see ve.dm.MWTemplateModel} in
+ * lifetime of this object, but have been removed from the linked {@link ve.dm.MWTemplateModel} in
  * the meantime.
  *
  * The returned array is a copy, i.e. it's safe to manipulate.
