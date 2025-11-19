@@ -30,6 +30,7 @@ ve.ui.MWExpandableErrorElement = function VeUiMWExpandableErrorElement( config )
 	this.label = new OO.ui.LabelWidget( {
 		classes: [ 've-ui-mwExpandableErrorElement-label' ]
 	} );
+	// TODO: Add expand/collapse invisible label to icon button for accessibility
 	this.button = new OO.ui.ButtonWidget( {
 		framed: false,
 		classes: [ 've-ui-mwExpandableErrorElement-button' ],
