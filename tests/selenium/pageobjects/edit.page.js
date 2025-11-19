@@ -70,6 +70,10 @@ class EditPage extends Page {
 		return $( 'div.ve-ui-mwLinkAnnotationInspector input' );
 	}
 
+	get insertedInternalLink() {
+		return $( 'a.ve-ce-mwInternalLinkAnnotation' );
+	}
+
 	get insertedExternalLink() {
 		return $( 'span.ve-ce-mwNumberedExternalLinkNode' );
 	}
