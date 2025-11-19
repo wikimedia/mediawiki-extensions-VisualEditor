@@ -2076,6 +2076,29 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 };
 
 /**
+ * Get the heading node for a specified section
+ *
+ * @param {string} section Section number
+ * @return {ve.ce.MWHeadingNode|null} Heading node, null if not found
+ */
+ve.init.mw.ArticleTarget.prototype.getSectionHeadingNode = function ( section ) {
+	const surface = this.getSurface();
+	const dmDoc = surface.getModel().getDocument();
+	// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
+	// to the heading. Iterate over headings to find the one with the correct attribute
+	// in originalDomElements.
+	const headingModel = dmDoc.getNodesByType( 'mwHeading' ).find( ( heading ) => {
+		const domElements = heading.getOriginalDomElements( dmDoc.getStore() );
+		return domElements && domElements.length && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
+			domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section;
+	} );
+	if ( !headingModel ) {
+		return null;
+	}
+	return surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
+};
+
+/**
  * Move the cursor in the editor to section specified by this.section.
  * Do nothing if this.section is undefined.
  */
@@ -2103,24 +2126,15 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 
 	let headingText;
 	if ( mode === 'visual' ) {
-		const dmDoc = surface.getModel().getDocument();
-		// In mw.libs.ve.unwrapParsoidSections we copy the data-mw-section-id from the section element
-		// to the heading. Iterate over headings to find the one with the correct attribute
-		// in originalDomElements.
-		const headingModel = dmDoc.getNodesByType( 'mwHeading' ).find( ( heading ) => {
-			const domElements = heading.getOriginalDomElements( dmDoc.getStore() );
-			return domElements && domElements.length && domElements[ 0 ].nodeType === Node.ELEMENT_NODE &&
-				domElements[ 0 ].getAttribute( 'data-mw-section-id' ) === section;
-		} );
-		if ( headingModel ) {
-			const headingView = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( headingModel.getRange().start );
+		const headingNode = this.getSectionHeadingNode( section );
+		if ( headingNode ) {
 			if ( setEditSummary && !new URL( location.href ).searchParams.has( 'summary' ) ) {
-				headingText = headingView.$element.text();
+				headingText = headingNode.$element.text();
 			}
 			if ( setExactScrollOffset ) {
-				this.scrollToHeading( headingView, this.visibleSectionOffset );
+				this.scrollToHeading( headingNode, this.visibleSectionOffset );
 			} else if ( goToStartOfHeading ) {
-				this.goToHeading( headingView );
+				this.goToHeading( headingNode );
 			}
 		}
 	} else if ( mode === 'source' && setEditSummary ) {
