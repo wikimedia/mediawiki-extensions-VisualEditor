@@ -60,6 +60,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.previousButton = new OO.ui.ButtonWidget( {
 		icon: 'collapse',
 		title: ve.msg( 'last' ),
+		label: ve.msg( 'last' ),
 		invisibleLabel: true,
 		framed: false
 	} ).connect( this, {
@@ -68,6 +69,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.nextButton = new OO.ui.ButtonWidget( {
 		icon: 'expand',
 		title: ve.msg( 'next' ),
+		label: ve.msg( 'next' ),
 		invisibleLabel: true,
 		framed: false
 	} ).connect( this, {
