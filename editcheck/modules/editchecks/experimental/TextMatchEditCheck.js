@@ -328,10 +328,9 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
  *
  * @class
  *
- * @param {Object} matchItem
- * @param item
- * @param {string} id of matchitem in config
- * @param {Collator} collator to use for comparisons
+ * @param {Object} item Match item
+ * @param {string} id ID of matchitem in config
+ * @param {Intl.Collator} collator Collator to use for comparisons
  */
 mw.editcheck.TextMatchItem = function MWTextMatchItem( item, id, collator ) {
 	this.title = item.title;
