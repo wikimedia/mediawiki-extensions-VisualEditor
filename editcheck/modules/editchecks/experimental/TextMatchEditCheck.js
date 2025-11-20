@@ -283,21 +283,11 @@ OO.inheritClass( mw.editcheck.TextMatchEditCheckAction, mw.editcheck.EditCheckAc
  * @param {mw.editcheck.EditCheckAction} other Other action
  * @return {boolean}
  */
-mw.editcheck.TextMatchEditCheckAction.prototype.equals = function ( other ) {
-	if ( !( other instanceof mw.editcheck.TextMatchEditCheckAction ) ||
-		this.check.constructor !== other.check.constructor ) {
+mw.editcheck.TextMatchEditCheckAction.prototype.equals = function ( other, ...args ) {
+	if ( !this.constructor.super.prototype.equals.call( this, other, ...args ) ) {
 		return false;
 	}
-	if ( this.matchItem !== other.matchItem ) {
-		return false;
-	}
-	if ( this.fragments.length !== other.fragments.length ) {
-		return false;
-	}
-	return this.fragments.every( ( fragment ) => {
-		const selection = fragment.getSelection();
-		return other.fragments.some( ( otherFragment ) => otherFragment.getSelection().equals( selection ) );
-	} );
+	return this.matchItem.id === other.matchItem.id;
 };
 
 /**
