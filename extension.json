@@ -365,6 +365,7 @@
 			"group": "visualEditorA",
 			"scripts": [
 				"modules/ve-mw/preinit/ve.utils.parsoid.js",
+				"modules/ve-mw/preinit/ve.utils.client.js",
 				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js",
 				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetSaver.js"
 			],

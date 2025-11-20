@@ -530,26 +530,7 @@
 			offset = parseInt( $heading.css( 'margin-top' ) ) + $toolbarPlaceholder.outerHeight();
 		}
 
-		// Support for CSS `scroll-behavior: smooth;` and JS `window.scroll( { behavior: 'smooth' } )`
-		// is correlated:
-		// * https://caniuse.com/css-scroll-behavior
-		// * https://caniuse.com/mdn-api_window_scroll_options_behavior_parameter
-		const supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
-		const newScrollTop = $heading.offset().top - offset;
-		if ( supportsSmoothScroll ) {
-			window.scroll( {
-				top: newScrollTop,
-				behavior: 'smooth'
-			} );
-		} else {
-			// Ideally we would use OO.ui.Element.static.getRootScrollableElement here
-			// as it has slightly better browser support (Chrome < 60)
-			const scrollContainer = document.documentElement;
-
-			$( scrollContainer ).animate( {
-				scrollTop: newScrollTop
-			} );
-		}
+		mw.libs.ve.smoothScrollTo( $heading.offset().top - offset );
 	}
 
 	/**
