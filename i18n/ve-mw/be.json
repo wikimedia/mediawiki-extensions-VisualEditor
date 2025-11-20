@@ -14,7 +14,8 @@
 			"Tīgelika",
 			"ZlyiLev",
 			"Дзяніс Тутэйшы",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Ucukor"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -218,7 +219,7 @@
 	"visualeditor-dialog-transclusion-wikitext-widget-aria-selected-single": "Націсніце Ctrl+Del, каб выдаліць элемент вікіразметкі.",
 	"visualeditor-dialogbutton-media-tooltip": "Выявы і медыя",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблон",
-	"visualeditor-editconflict": "Вашы змены не атрымалася запісаць, таму што адбыўся канфлікт правак. Жадаеце вырашыць канфлікт уручную?",
+	"visualeditor-editconflict": "Вашы змены не атрымалася запісаць, таму што адбыўся канфлікт правак. Жадаеце развязаць канфлікт самастойна?",
 	"visualeditor-editingtabdialog-body": "Цяпер пляцоўка {{SITENAME}} запомніла якому рэдактару вы аддаеце перавагу. Вы можаце пераключаць рэжым падчас праўкі і змяняць свае перавагі пазней.",
 	"visualeditor-editingtabdialog-ok": "Выкарыстоўваць рэдактар, як у сваёй апошняй праўцы",
 	"visualeditor-editingtabdialog-title": "Укладкі праўкі",
