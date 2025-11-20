@@ -157,6 +157,8 @@ class Hooks implements
 		) ) {
 			$output->addModules( 'ext.visualEditor.desktopArticleTarget.init' );
 			$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
+		} else {
+			$output->addModules( 'ext.visualEditor.targetLoader' );
 		}
 
 		// add scroll offset js variable to output
