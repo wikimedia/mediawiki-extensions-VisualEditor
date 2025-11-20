@@ -344,8 +344,12 @@ ve.init.mw.MobileArticleTarget.prototype.surfaceReady = function () {
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.surfaceReady.apply( this, arguments );
 
-	// If no selection has been set yet, set it to the start of the document.
-	if ( this.getSurface().getModel().getSelection().isNull() ) {
+	// In section editing mode, if no selection has been set yet,
+	// set it to the start of the visible document.
+	if (
+		this.enableVisualSectionEditing &&
+		this.getSurface().getModel().getSelection().isNull()
+	) {
 		this.getSurface().getView().selectFirstSelectableContentOffset();
 	}
 
