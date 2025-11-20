@@ -349,7 +349,8 @@
 				"ext.visualEditor.supportCheck",
 				"ext.visualEditor.track",
 				"ext.visualEditor.progressBarWidget",
-				"ext.visualEditor.tempWikitextEditorWidget"
+				"ext.visualEditor.tempWikitextEditorWidget",
+				"ext.visualEditor.targetLoader"
 			],
 			"messages": [
 				"accesskey-ca-ve-edit",

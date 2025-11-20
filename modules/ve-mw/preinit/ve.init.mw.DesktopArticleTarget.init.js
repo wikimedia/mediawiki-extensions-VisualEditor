@@ -283,59 +283,53 @@
 	 */
 	function getTarget( mode, section ) {
 		if ( !targetPromise ) {
-			// The TargetLoader module is loaded in the bottom queue, so it should have been
-			// requested already but it might not have finished loading yet
-			targetPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
-				.then( () => {
-					mw.libs.ve.targetLoader.addPlugin(
-						// Run VisualEditorPreloadModules, but if they fail, we still want to continue
-						// loading, so convert failure to success
-						() => mw.loader.using( conf.preloadModules ).catch(
-							() => $.Deferred().resolve()
-						)
-					);
-					// Add modules specific to desktop (modules shared between desktop
-					// and mobile are already added by TargetLoader)
-					[
-						'ext.visualEditor.desktopArticleTarget',
-						// Add requested plugins
-						...plugins
-					].forEach( mw.libs.ve.targetLoader.addPlugin );
-					plugins = [];
-					return mw.libs.ve.targetLoader.loadModules( mode );
-				} )
-				.then( () => {
-					if ( !active ) {
-						// Loading was aborted
-						// TODO: Make loaders abortable instead of waiting
-						targetPromise = null;
-						return $.Deferred().reject().promise();
-					}
+			mw.libs.ve.targetLoader.addPlugin(
+				// Run VisualEditorPreloadModules, but if they fail, we still want to continue
+				// loading, so convert failure to success
+				() => mw.loader.using( conf.preloadModules ).catch(
+					() => $.Deferred().resolve()
+				)
+			);
+			// Add modules specific to desktop (modules shared between desktop
+			// and mobile are already added by TargetLoader)
+			[
+				'ext.visualEditor.desktopArticleTarget',
+				// Add requested plugins
+				...plugins
+			].forEach( mw.libs.ve.targetLoader.addPlugin );
+			plugins = [];
+			targetPromise = mw.libs.ve.targetLoader.loadModules( mode ).then( () => {
+				if ( !active ) {
+					// Loading was aborted
+					// TODO: Make loaders abortable instead of waiting
+					targetPromise = null;
+					return $.Deferred().reject().promise();
+				}
 
-					const target = ve.init.mw.targetFactory.create(
-						conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ], {
-							modes: getAvailableModes(),
-							defaultMode: mode
-						}
-					);
-					target.on( 'deactivate', () => {
-						active = false;
-						updateTabs( false );
-					} );
-					target.on( 'reactivate', () => {
-						currentUrl = new URL( location.href );
-						activateTarget(
-							getEditModeFromUrl( currentUrl ),
-							getSectionFromUrl( currentUrl )
-						);
-					} );
-					target.setContainer( $targetContainer );
-					targetLoaded = true;
-					return target;
-				}, ( e ) => {
-					mw.log.warn( 'VisualEditor failed to load: ' + e );
-					return $.Deferred().reject( e ).promise();
+				const target = ve.init.mw.targetFactory.create(
+					conf.contentModels[ mw.config.get( 'wgPageContentModel' ) ], {
+						modes: getAvailableModes(),
+						defaultMode: mode
+					}
+				);
+				target.on( 'deactivate', () => {
+					active = false;
+					updateTabs( false );
 				} );
+				target.on( 'reactivate', () => {
+					currentUrl = new URL( location.href );
+					activateTarget(
+						getEditModeFromUrl( currentUrl ),
+						getSectionFromUrl( currentUrl )
+					);
+				} );
+				target.setContainer( $targetContainer );
+				targetLoaded = true;
+				return target;
+			}, ( e ) => {
+				mw.log.warn( 'VisualEditor failed to load: ' + e );
+				return $.Deferred().reject( e ).promise();
+			} );
 		}
 
 		targetPromise.then( ( target ) => {
@@ -582,24 +576,21 @@
 		// If the target object is there, this is a second or subsequent load, and the
 		// internal state of the target object can influence the load request.
 		if ( !targetLoaded ) {
-			// The TargetLoader module is loaded in the bottom queue, so it should have been
-			// requested already but it might not have finished loading yet
-			dataPromise = mw.loader.using( 'ext.visualEditor.targetLoader' )
-				.then( () => mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
-					sessionStore: true,
-					section: section,
-					oldId: oldId,
-					// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
-					// class hasn't loaded yet.
-					// This is used for stats tracking, so do not change!
-					targetName: 'mwTarget',
-					modified: modified,
-					editintro: currentUrl.searchParams.get( 'editintro' ),
-					preload: currentUrl.searchParams.get( 'preload' ),
-					preloadparams: mw.util.getArrayParam( 'preloadparams', currentUrl.searchParams ),
-					// If switching to visual with modifications, check if we have wikitext to convert
-					wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
-				} ) );
+			dataPromise = mw.libs.ve.targetLoader.requestPageData( mode, mw.config.get( 'wgRelevantPageName' ), {
+				sessionStore: true,
+				section: section,
+				oldId: oldId,
+				// Should be ve.init.mw.DesktopArticleTarget.static.trackingName, but the
+				// class hasn't loaded yet.
+				// This is used for stats tracking, so do not change!
+				targetName: 'mwTarget',
+				modified: modified,
+				editintro: currentUrl.searchParams.get( 'editintro' ),
+				preload: currentUrl.searchParams.get( 'preload' ),
+				preloadparams: mw.util.getArrayParam( 'preloadparams', currentUrl.searchParams ),
+				// If switching to visual with modifications, check if we have wikitext to convert
+				wikitext: mode === 'visual' && modified ? $( '#wpTextbox1' ).textSelection( 'getContents' ) : undefined
+			} );
 
 			dataPromise
 				.then( ( response ) => {

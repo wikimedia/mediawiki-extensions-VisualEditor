@@ -155,10 +155,7 @@ class Hooks implements
 			$services->getService( 'MobileFrontend.Context' )
 				->shouldDisplayMobileView()
 		) ) {
-			$output->addModules( [
-				'ext.visualEditor.desktopArticleTarget.init',
-				'ext.visualEditor.targetLoader'
-			] );
+			$output->addModules( 'ext.visualEditor.desktopArticleTarget.init' );
 			$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
 		}
 
