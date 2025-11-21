@@ -1,6 +1,7 @@
 import EditPage from '../pageobjects/edit.page.js';
 import LoginPage from 'wdio-mediawiki/LoginPage';
 import * as Util from 'wdio-mediawiki/Util';
+import { Key } from 'webdriverio';
 
 describe( 'Content Editable', () => {
 
@@ -48,6 +49,42 @@ describe( 'Content Editable', () => {
 		await EditPage.veRootNode.setValue( '{|' );
 
 		await expect( await EditPage.insertedTable ).toBeDisplayed();
+	} );
+
+	it( 'should insert Bullet list', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '* ' );
+
+		await expect( await EditPage.insertedBulletList ).toBeDisplayed();
+	} );
+
+	it( 'should insert Numbered list', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '1. ' );
+
+		await expect( await EditPage.insertedNumberedList ).toBeDisplayed();
+	} );
+
+	it( 'should insert and indent Bullet list', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '* ' );
+
+		await expect( await EditPage.insertedBulletList ).toBeDisplayed();
+
+		await browser.keys( [ Key.Tab ] );
+
+		await expect( await EditPage.indentedBulletList ).toBeDisplayed();
+	} );
+
+	it( 'should insert and indent Numbered list', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '1. ' );
+
+		await expect( await EditPage.insertedNumberedList ).toBeDisplayed();
+
+		await browser.keys( [ Key.Tab ] );
+
+		await expect( await EditPage.indentedNumberedList ).toBeDisplayed();
 	} );
 
 } );

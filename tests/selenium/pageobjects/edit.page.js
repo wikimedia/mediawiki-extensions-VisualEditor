@@ -46,6 +46,22 @@ class EditPage extends Page {
 		return $( 'table.ve-ce-branchNode' );
 	}
 
+	get insertedBulletList() {
+		return $( 'ul.ve-ce-branchNode' );
+	}
+
+	get insertedNumberedList() {
+		return $( 'ol.ve-ce-branchNode' );
+	}
+
+	get indentedBulletList() {
+		return $( 'ul.ve-ce-branchNode ul.ve-ce-branchNode' );
+	}
+
+	get indentedNumberedList() {
+		return $( 'ol.ve-ce-branchNode ol.ve-ce-branchNode' );
+	}
+
 	get notices() {
 		return $( '.ve-ui-mwNoticesPopupTool-items' );
 	}
