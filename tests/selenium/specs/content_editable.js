@@ -99,4 +99,68 @@ describe( 'Content Editable', () => {
 		await expect( await EditPage.insertedExternalLink ).toBeDisplayed();
 	} );
 
+	it( 'should change text to Page title', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Page title' );
+
+		await browser.keys( [ Key.Control, '1' ] );
+		await expect( await EditPage.pageTitle ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Heading', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Heading' );
+
+		await browser.keys( [ Key.Control, '2' ] );
+		await expect( await EditPage.heading ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Sub-heading 1', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Sub-heading 1' );
+
+		await browser.keys( [ Key.Control, '3' ] );
+		await expect( await EditPage.subHeadingOne ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Sub-heading 2', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Sub-heading 2' );
+
+		await browser.keys( [ Key.Control, '4' ] );
+		await expect( await EditPage.subHeadingTwo ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Sub-heading 3', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Sub-heading 3' );
+
+		await browser.keys( [ Key.Control, '5' ] );
+		await expect( await EditPage.subHeadingThree ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Sub-heading 4', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Sub-heading 4' );
+
+		await browser.keys( [ Key.Control, '6' ] );
+		await expect( await EditPage.subHeadingFour ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Preformatted', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Preformatted' );
+
+		await browser.keys( [ Key.Control, '7' ] );
+		await expect( await EditPage.preformatted ).toBeDisplayed();
+	} );
+
+	it( 'should change text to Block quote', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( 'Block quote' );
+
+		await browser.keys( [ Key.Control, '8' ] );
+		await expect( await EditPage.blockQuote ).toBeDisplayed();
+	} );
+
 } );

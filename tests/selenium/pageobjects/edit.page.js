@@ -74,6 +74,38 @@ class EditPage extends Page {
 		return $( 'span.ve-ce-mwNumberedExternalLinkNode' );
 	}
 
+	get pageTitle() {
+		return $( 'h1.ve-ce-headingNode' );
+	}
+
+	get heading() {
+		return $( 'h2.ve-ce-headingNode' );
+	}
+
+	get subHeadingOne() {
+		return $( 'h3.ve-ce-headingNode' );
+	}
+
+	get subHeadingTwo() {
+		return $( 'h4.ve-ce-headingNode' );
+	}
+
+	get subHeadingThree() {
+		return $( 'h5.ve-ce-headingNode' );
+	}
+
+	get subHeadingFour() {
+		return $( 'h6.ve-ce-headingNode' );
+	}
+
+	get preformatted() {
+		return $( 'pre.ve-ce-branchNode' );
+	}
+
+	get blockQuote() {
+		return $( 'blockquote.ve-ce-branchNode' );
+	}
+
 	get notices() {
 		return $( '.ve-ui-mwNoticesPopupTool-items' );
 	}
