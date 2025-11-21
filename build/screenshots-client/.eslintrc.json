@@ -5,5 +5,8 @@
 	],
 	"globals": {
 		"seleniumUtils": "readonly"
+	},
+	"rules": {
+		"object-shorthand": [ "error", "properties" ]
 	}
 }

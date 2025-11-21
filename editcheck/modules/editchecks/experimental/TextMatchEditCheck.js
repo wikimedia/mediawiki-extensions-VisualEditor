@@ -180,9 +180,9 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 						title: matchItem.title,
 						message: matchItem.message,
 						check: this,
-						mode: mode,
-						matchItem: matchItem,
-						term: term
+						mode,
+						matchItem,
+						term
 					} )
 				);
 			}

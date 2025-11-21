@@ -10,5 +10,8 @@
 	"parserOptions": {
 		"ecmaVersion": "2022",
 		"sourceType": "module"
+	},
+	"rules": {
+		"object-shorthand": [ "error", "properties" ]
 	}
 }
