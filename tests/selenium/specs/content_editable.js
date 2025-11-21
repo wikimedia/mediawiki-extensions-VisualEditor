@@ -224,4 +224,16 @@ describe( 'Content Editable', () => {
 		await expect( await EditPage.underline ).toBeDisplayed();
 	} );
 
+	it( 'should insert a comment', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '<!--' );
+
+		await expect( await EditPage.commentMenu ).toBeDisplayed();
+
+		await EditPage.commentInput.setValue( 'foobar' );
+		await browser.keys( [ Key.Control, Key.Enter ] );
+
+		await expect( await EditPage.insertedComment ).toBeDisplayed();
+	} );
+
 } );

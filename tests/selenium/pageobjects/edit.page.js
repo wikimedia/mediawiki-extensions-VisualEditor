@@ -138,6 +138,18 @@ class EditPage extends Page {
 		return $( 'u.ve-ce-underlineAnnotation' );
 	}
 
+	get commentMenu() {
+		return $( 'div.ve-ui-commentInspector-content' );
+	}
+
+	get commentInput() {
+		return $( 'div.ve-ui-commentInspector-content textarea' );
+	}
+
+	get insertedComment() {
+		return $( 'span.ve-ce-commentNode' );
+	}
+
 	get notices() {
 		return $( '.ve-ui-mwNoticesPopupTool-items' );
 	}
