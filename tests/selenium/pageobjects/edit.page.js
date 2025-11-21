@@ -106,6 +106,34 @@ class EditPage extends Page {
 		return $( 'blockquote.ve-ce-branchNode' );
 	}
 
+	get bold() {
+		return $( 'b.ve-ce-boldAnnotation' );
+	}
+
+	get italic() {
+		return $( 'i.ve-ce-italicAnnotation' );
+	}
+
+	get superscript() {
+		return $( 'sup.ve-ce-superscriptAnnotation' );
+	}
+
+	get subscript() {
+		return $( 'sub.ve-ce-subscriptAnnotation' );
+	}
+
+	get code() {
+		return $( 'code.ve-ce-codeAnnotation' );
+	}
+
+	get strikethrough() {
+		return $( 's.ve-ce-strikethroughAnnotation' );
+	}
+
+	get underline() {
+		return $( 'u.ve-ce-underlineAnnotation' );
+	}
+
 	get notices() {
 		return $( '.ve-ui-mwNoticesPopupTool-items' );
 	}

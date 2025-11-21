@@ -163,4 +163,53 @@ describe( 'Content Editable', () => {
 		await expect( await EditPage.blockQuote ).toBeDisplayed();
 	} );
 
+	it( 'should change formatting to Bold', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, 'b' ] );
+
+		await expect( await EditPage.bold ).toBeDisplayed();
+	} );
+
+	it( 'should change formatting to Italic', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, 'i' ] );
+
+		await expect( await EditPage.italic ).toBeDisplayed();
+	} );
+
+	it( 'should change formatting to Superscript', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, '.' ] );
+
+		await expect( await EditPage.superscript ).toBeDisplayed();
+	} );
+
+	it( 'should change formatting to Subscript', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, ',' ] );
+
+		await expect( await EditPage.subscript ).toBeDisplayed();
+	} );
+
+	it( 'should change formatting to Computer code', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, Key.Shift, '6' ] );
+
+		await expect( await EditPage.code ).toBeDisplayed();
+	} );
+
+	it( 'should change formatting to Strikethrough', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, Key.Shift, '5' ] );
+
+		await expect( await EditPage.strikethrough ).toBeDisplayed();
+	} );
+
+	it( 'should change formatting to Underline', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await browser.keys( [ Key.Control, 'u' ] );
+
+		await expect( await EditPage.underline ).toBeDisplayed();
+	} );
+
 } );
