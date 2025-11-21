@@ -62,6 +62,18 @@ class EditPage extends Page {
 		return $( 'ol.ve-ce-branchNode ol.ve-ce-branchNode' );
 	}
 
+	get linkMenu() {
+		return $( 'div.ve-ui-mwLinkAnnotationInspector' );
+	}
+
+	get linkInput() {
+		return $( 'div.ve-ui-mwLinkAnnotationInspector input' );
+	}
+
+	get insertedExternalLink() {
+		return $( 'span.ve-ce-mwNumberedExternalLinkNode' );
+	}
+
 	get notices() {
 		return $( '.ve-ui-mwNoticesPopupTool-items' );
 	}

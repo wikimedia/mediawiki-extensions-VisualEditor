@@ -87,4 +87,16 @@ describe( 'Content Editable', () => {
 		await expect( await EditPage.indentedNumberedList ).toBeDisplayed();
 	} );
 
+	it( 'should insert an external link', async () => {
+		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
+		await EditPage.veRootNode.setValue( '[[' );
+
+		await expect( await EditPage.linkMenu ).toBeDisplayed();
+
+		await EditPage.linkInput.setValue( 'https://mediawiki.org' );
+		await browser.keys( [ Key.Enter ] );
+
+		await expect( await EditPage.insertedExternalLink ).toBeDisplayed();
+	} );
+
 } );
