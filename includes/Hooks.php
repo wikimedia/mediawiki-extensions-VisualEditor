@@ -1115,8 +1115,6 @@ class Hooks implements
 			'usePageImages' => $this->extensionRegistry->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => $this->extensionRegistry->isLoaded( 'WikibaseClient' ),
 			'isBeta' => $veConfig->get( 'VisualEditorEnableBetaFeature' ),
-			'disableForAnons' => $veConfig->get( 'VisualEditorDisableForAnons' ),
-			'preloadModules' => $veConfig->get( 'VisualEditorPreloadModules' ),
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
 			'pluginModules' => array_merge(
@@ -1126,36 +1124,51 @@ class Hooks implements
 			),
 			'thumbLimits' => $coreConfig->get( 'ThumbLimits' ),
 			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
-			'tabPosition' => $veConfig->get( 'VisualEditorTabPosition' ),
-			'tabMessages' => array_filter( $veConfig->get( 'VisualEditorTabMessages' ) ),
 			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
-			'enableSectionEditingFullPageButtons' =>
-				$veConfig->get( 'VisualEditorEnableSectionEditingFullPageButtons' ),
-			'enableVisualSectionEditing' => $veConfig->get( 'VisualEditorEnableVisualSectionEditing' ),
-			'showBetaWelcome' => $veConfig->get( 'VisualEditorShowBetaWelcome' ),
-			'allowExternalLinkPaste' => $veConfig->get( 'VisualEditorAllowExternalLinkPaste' ),
-			'enableHelpCompletion' => $veConfig->get( 'VisualEditorEnableHelpCompletion' ),
-			'enableTocWidget' => $veConfig->get( 'VisualEditorEnableTocWidget' ),
-			'enableWikitext' => $veConfig->get( 'VisualEditorEnableWikitext' ),
-			'useChangeTagging' => $veConfig->get( 'VisualEditorUseChangeTagging' ),
-			'editCheckTagging' => $veConfig->get( 'VisualEditorEditCheckTagging' ),
-			'editCheck' => $veConfig->get( 'VisualEditorEditCheck' ),
 			'editCheckExperimental' => (bool)$veConfig->get( 'VisualEditorEditCheckLoadExperimental' ),
-			'editCheckABTest' => $veConfig->get( 'VisualEditorEditCheckABTest' ),
 			'editCheckReliabilityAvailable' => ApiEditCheckReferenceUrl::isAvailable(),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
 			'rebaserUrl' => $veConfig->get( 'VisualEditorRebaserURL' ),
 			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
-			'feedbackTitle' => $veConfig->get( 'VisualEditorFeedbackTitle' ),
-			'sourceFeedbackTitle' => $veConfig->get( 'VisualEditorSourceFeedbackTitle' ),
-			'mobileInsertMenu' => $veConfig->get( 'VisualEditorMobileInsertMenu' ),
 			// TODO: Remove when all usages in .js files are removed
 			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $this->extensionRegistry->isLoaded( 'CirrusSearch' ),
 			'defaultSortPrefix' => $defaultSortPrefix,
 			'displayTitlePrefix' => $displayTitlePrefix,
 		];
+
+		// VisualEditor config keys, automatically mapped to config vars:
+		//   VisualEditorAllowExternalLinkPaste -> allowExternalLinkPaste
+		$veConfigKeys = [
+			'VisualEditorDisableForAnons',
+			'VisualEditorPreloadModules',
+			'VisualEditorTabPosition',
+			'VisualEditorTabMessages',
+			'VisualEditorEnableSectionEditingFullPageButtons',
+			'VisualEditorEnableVisualSectionEditing',
+			'VisualEditorShowBetaWelcome',
+			'VisualEditorAllowExternalLinkPaste',
+			'VisualEditorEnableHelpCompletion',
+			'VisualEditorEnableTocWidget',
+			'VisualEditorEnableWikitext',
+			'VisualEditorUseChangeTagging',
+			'VisualEditorEditCheckTagging',
+			'VisualEditorEditCheck',
+			'VisualEditorEditCheckABTest',
+			'VisualEditorFeedbackTitle',
+			'VisualEditorSourceFeedbackTitle',
+			'VisualEditorMobileInsertMenu',
+		];
+
+		foreach ( $veConfigKeys as $key ) {
+			$jsKey = lcfirst( preg_replace( '/^VisualEditor/', '', $key ) );
+			$value = $veConfig->get( $key );
+			if ( $key === 'VisualEditorTabMessages' ) {
+				$value = array_filter( $value );
+			}
+			$vars['wgVisualEditorConfig'][$jsKey] = $value;
+		}
 
 		// This can be removed and the module added in TemplateData's extension.json
 		// after the feature flag has been removed. T377976.
