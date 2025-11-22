@@ -17,7 +17,7 @@ const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
-	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckExperimental || ecenable === '2' ),
+	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckLoadExperimental || ecenable === '2' ),
 	checksShown: {}
 };
 

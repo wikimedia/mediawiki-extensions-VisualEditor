@@ -1114,7 +1114,6 @@ class Hooks implements
 		$vars['wgVisualEditorConfig'] = [
 			'usePageImages' => $this->extensionRegistry->isLoaded( 'PageImages' ),
 			'usePageDescriptions' => $this->extensionRegistry->isLoaded( 'WikibaseClient' ),
-			'isBeta' => $veConfig->get( 'VisualEditorEnableBetaFeature' ),
 			'namespaces' => $availableNamespaces,
 			'contentModels' => $availableContentModels,
 			'pluginModules' => array_merge(
@@ -1124,13 +1123,9 @@ class Hooks implements
 			),
 			'thumbLimits' => $coreConfig->get( 'ThumbLimits' ),
 			'galleryOptions' => $coreConfig->get( 'GalleryOptions' ),
-			'singleEditTab' => $veConfig->get( 'VisualEditorUseSingleEditTab' ),
-			'editCheckExperimental' => (bool)$veConfig->get( 'VisualEditorEditCheckLoadExperimental' ),
 			'editCheckReliabilityAvailable' => ApiEditCheckReferenceUrl::isAvailable(),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
-			'rebaserUrl' => $veConfig->get( 'VisualEditorRebaserURL' ),
-			'feedbackApiUrl' => $veConfig->get( 'VisualEditorFeedbackAPIURL' ),
 			// TODO: Remove when all usages in .js files are removed
 			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $this->extensionRegistry->isLoaded( 'CirrusSearch' ),
@@ -1142,9 +1137,11 @@ class Hooks implements
 		//   VisualEditorAllowExternalLinkPaste -> allowExternalLinkPaste
 		$veConfigKeys = [
 			'VisualEditorDisableForAnons',
+			'VisualEditorEnableBetaFeature',
 			'VisualEditorPreloadModules',
 			'VisualEditorTabPosition',
 			'VisualEditorTabMessages',
+			'VisualEditorUseSingleEditTab',
 			'VisualEditorEnableSectionEditingFullPageButtons',
 			'VisualEditorEnableVisualSectionEditing',
 			'VisualEditorShowBetaWelcome',
@@ -1152,10 +1149,13 @@ class Hooks implements
 			'VisualEditorEnableHelpCompletion',
 			'VisualEditorEnableTocWidget',
 			'VisualEditorEnableWikitext',
+			'VisualEditorRebaserURL',
+			'VisualEditorFeedbackAPIURL',
 			'VisualEditorUseChangeTagging',
 			'VisualEditorEditCheckTagging',
 			'VisualEditorEditCheck',
 			'VisualEditorEditCheckABTest',
+			'VisualEditorEditCheckLoadExperimental',
 			'VisualEditorFeedbackTitle',
 			'VisualEditorSourceFeedbackTitle',
 			'VisualEditorMobileInsertMenu',
@@ -1164,6 +1164,9 @@ class Hooks implements
 		foreach ( $veConfigKeys as $key ) {
 			$jsKey = lcfirst( preg_replace( '/^VisualEditor/', '', $key ) );
 			$value = $veConfig->get( $key );
+			if ( $key === 'VisualEditorEditCheckLoadExperimental' ) {
+				$value = (bool)$value;
+			}
 			if ( $key === 'VisualEditorTabMessages' ) {
 				$value = array_filter( $value );
 			}

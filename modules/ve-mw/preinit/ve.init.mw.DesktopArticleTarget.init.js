@@ -421,7 +421,7 @@
 			sectionKey = 'editsection';
 
 		if (
-			mw.config.get( 'wgVisualEditorConfig' ).singleEditTab &&
+			mw.config.get( 'wgVisualEditorConfig' ).useSingleEditTab &&
 			tabPreference === 'remember-last'
 		) {
 			if ( $( '#ca-view-foreign' ).length ) {
@@ -726,7 +726,7 @@
 		const isRedLink = !!+currentUrl.searchParams.get( 'redlink' );
 		// On dual-edit-tab wikis, the edit page must mean the user wants wikitext,
 		// unless following a redlink
-		if ( !mw.config.get( 'wgVisualEditorConfig' ).singleEditTab && !isRedLink ) {
+		if ( !mw.config.get( 'wgVisualEditorConfig' ).useSingleEditTab && !isRedLink ) {
 			return 'wikitext';
 		}
 		// Adding a new section is not supported in visual mode
@@ -851,7 +851,7 @@
 	 * @return {boolean}
 	 */
 	function isOnlyTabVE() {
-		return conf.singleEditTab && getAvailableEditPageEditor() === 'visual';
+		return conf.useSingleEditTab && getAvailableEditPageEditor() === 'visual';
 	}
 
 	/**
@@ -860,7 +860,7 @@
 	 * @return {boolean}
 	 */
 	function isOnlyTabWikitext() {
-		return conf.singleEditTab && getAvailableEditPageEditor() === 'source';
+		return conf.useSingleEditTab && getAvailableEditPageEditor() === 'source';
 	}
 
 	init = {
@@ -1339,7 +1339,7 @@
 		return configData.unsupportedEditParams.every( ( param ) => !url.searchParams.has( param ) );
 	}
 
-	init.isSingleEditTab = conf.singleEditTab && tabPreference !== 'multi-tab';
+	init.isSingleEditTab = conf.useSingleEditTab && tabPreference !== 'multi-tab';
 
 	// On a view page, extend the current URL so extra parameters are carried over
 	// On a non-view page, use viewUrl
@@ -1367,7 +1367,7 @@
 		// User has 'visualeditor-enable' preference enabled (for alpha opt-in)
 		// User has 'visualeditor-betatempdisable' preference disabled
 		// User has 'visualeditor-autodisable' preference disabled
-		( conf.isBeta ? enable : !tempdisable ) && !autodisable
+		( conf.enableBetaFeature ? enable : !tempdisable ) && !autodisable
 	);
 
 	// Partially duplicated in includes/Services/VisualEditorAvailabilityLookup::isAvailable

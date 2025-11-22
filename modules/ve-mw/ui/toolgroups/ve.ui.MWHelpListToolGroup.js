@@ -179,8 +179,8 @@ ve.ui.MWFeedbackDialogTool.prototype.onSelect = function () {
 
 			// If so configured, tell mw.feedback that we're posting to a remote wiki and set the title
 			const veConfig = mw.config.get( 'wgVisualEditorConfig' );
-			if ( veConfig.feedbackApiUrl ) {
-				feedbackConfig.apiUrl = veConfig.feedbackApiUrl;
+			if ( veConfig.feedbackAPIURL ) {
+				feedbackConfig.apiUrl = veConfig.feedbackAPIURL;
 				feedbackConfig.title = new mw.Title(
 					mode === 'source' ?
 						veConfig.sourceFeedbackTitle : veConfig.feedbackTitle
