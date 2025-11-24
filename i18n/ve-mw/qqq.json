@@ -279,6 +279,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Item in the MediaWiki formatting dropdown for a level 4 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading5": "Item in the MediaWiki formatting dropdown for a level 5 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
 	"visualeditor-formatdropdown-format-mw-heading6": "Item in the MediaWiki formatting dropdown for a level 6 heading (sub-section)\n{{Related|Visualeditor-formatdropdown}}",
+	"visualeditor-fullpage-switch-label": "Label for button that switches to full page editing mode.",
 	"visualeditor-generating-wikitext-progress": "Label for progress bar shown while generating wikitext.",
 	"visualeditor-includes-noinclude-start": "Label of the context item for an opening <code>&lt;noinclude></code> tag.",
 	"visualeditor-includes-noinclude-end": "Label of the context item for a closing <code>&lt;/noinclude></code> tag.",

@@ -74,10 +74,10 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.$editableContent = this.getEditableContent();
 
 	this.switchToFullPageButtonTop = new OO.ui.ButtonWidget( {
-		label: 'Edit full page'
+		label: ve.msg( 'visualeditor-fullpage-switch-label' )
 	} ).on( 'click', this.switchToVisualSection.bind( this, null, -1 ) );
 	this.switchToFullPageButtonBottom = new OO.ui.ButtonWidget( {
-		label: 'Edit full page'
+		label: ve.msg( 'visualeditor-fullpage-switch-label' )
 	} ).on( 'click', this.switchToVisualSection.bind( this, null, 1 ) );
 	const $skeleton = $( '<div>' )
 		.prop( 'contentEditable', 'false' )
