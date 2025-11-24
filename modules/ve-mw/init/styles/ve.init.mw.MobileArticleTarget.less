@@ -20,7 +20,11 @@
 	> .ve-ce-surface {
 		// Ensure surface is full height so top "Edit full page" button can
 		// be scrolled out of view.
-		min-height: 100vh;
+		min-height: ~'calc( 100vh + 2.5em )';
+
+		.ve-ce-attachedRootNode {
+			min-height: ~'calc( 100vh - 15em )';
+		}
 
 		.ve-ce-attachedRootNode.ve-ce-documentNode {
 			// Ensure whole page is focusable (T109508)

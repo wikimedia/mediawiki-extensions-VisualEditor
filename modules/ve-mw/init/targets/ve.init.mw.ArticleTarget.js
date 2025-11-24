@@ -82,13 +82,13 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	const $skeleton = $( '<div>' )
 		.prop( 'contentEditable', 'false' )
 		.addClass( 've-init-mw-articleTarget-switchFull-skeleton' )
-		.append( $( '<div>' ), $( '<div>' ), $( '<div>' ) );
+		.append( $( '<div>' ), $( '<div>' ), $( '<div>' ), $( '<div>' ) );
 	this.$switchToFullPageContainerTop = $( '<div>' )
-		.addClass( 've-init-mw-articleTarget-switchFull' )
-		.append( this.switchToFullPageButtonTop.$element, $skeleton.clone().addClass( 've-init-mw-articleTarget-switchFull-skeleton-top' ) );
+		.addClass( 've-init-mw-articleTarget-switchFull ve-init-mw-articleTarget-switchFull-top' )
+		.append( this.switchToFullPageButtonTop.$element, $skeleton.clone() );
 	this.$switchToFullPageContainerBottom = $( '<div>' )
-		.addClass( 've-init-mw-articleTarget-switchFull' )
-		.append( this.switchToFullPageButtonBottom.$element, $skeleton.clone().addClass( 've-init-mw-articleTarget-switchFull-skeleton-bottom' ) );
+		.addClass( 've-init-mw-articleTarget-switchFull ve-init-mw-articleTarget-switchFull-bottom' )
+		.append( this.switchToFullPageButtonBottom.$element, $skeleton.clone() );
 
 	// Sometimes we actually don't want to send a useful oldid
 	// if we do, PostEdit will give us a 'page restored' message
@@ -2168,7 +2168,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		mode === 'source' ||
 		( this.enableVisualSectionEditing && this.section !== null )
 	) {
-		this.$scrollContainer.scrollTop( this.$switchToFullPageContainerTop.outerHeight( true ) || 0 );
+		this.$scrollContainer.scrollTop( surface.getView().attachedRoot.$element.position().top );
 	}
 
 	if ( section === null || section === 'new' || section === '0' || section === 'T-0' ) {
