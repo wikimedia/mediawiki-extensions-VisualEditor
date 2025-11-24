@@ -255,6 +255,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "Sub-heading 2",
 	"visualeditor-formatdropdown-format-mw-heading5": "Sub-heading 3",
 	"visualeditor-formatdropdown-format-mw-heading6": "Sub-heading 4",
+	"visualeditor-fullpage-switch-label": "Edit full page",
 	"visualeditor-generating-wikitext-progress": "Generating wikitext",
 	"visualeditor-includes-noinclude-start": "Start of content excluded from excerpts",
 	"visualeditor-includes-noinclude-end": "End of content excluded from excerpts",
