@@ -18,7 +18,6 @@
 	&-skeleton {
 		position: absolute;
 		width: 100%;
-		top: -1em;
 		z-index: -1;
 
 		> div {
@@ -27,25 +26,43 @@
 			border-radius: 2px;
 		}
 
-		> div + div + div {
+		> div:first-child {
 			width: 80%;
 		}
 
-		&-top {
+		> div + div + div + div {
+			width: 70%;
+		}
+	}
+
+	&-top {
+		.ve-init-mw-articleTarget-switchFull-skeleton {
+			top: -2.5em;
+
 			> div {
-				background: #fafafa;
+				background: #fcfcfc;
 			}
 
 			> div + div {
-				background: #f7f7f7;
+				background: #fafafa;
 			}
 
 			> div + div + div {
+				background: #f7f7f7;
+			}
+
+			> div + div + div + div {
 				background: #f4f4f4;
 			}
 		}
+	}
 
-		&-bottom {
+	&-bottom {
+		margin-bottom: 1.5em;
+
+		.ve-init-mw-articleTarget-switchFull-skeleton {
+			top: -1em;
+
 			> div {
 				background: #f4f4f4;
 			}
@@ -56,6 +73,10 @@
 
 			> div + div + div {
 				background: #fafafa;
+			}
+
+			> div + div + div + div {
+				background: #fcfcfc;
 			}
 		}
 	}
