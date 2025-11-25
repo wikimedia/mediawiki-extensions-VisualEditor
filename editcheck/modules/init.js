@@ -198,6 +198,12 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 				checkForTone( 'onBeforeSave' );
 			} );
 		}
+		if ( mw.editcheck.experimental ) {
+			ve.track( 'activity.editCheck', { action: 'session-initialized-with-experimental' } );
+		}
+		if ( mw.editcheck.suggestions ) {
+			ve.track( 'activity.editCheck', { action: 'session-initialized-with-suggestions' } );
+		}
 		// Temporary logging for T402460
 		target.on( 'surfaceReady', () => {
 			target.getSurface().getView().on( 'paste', ( data ) => {
