@@ -52,7 +52,8 @@ mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
  * and let the finer limitations be handled by individual matchItems.
  */
 mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	maximumEditcount: null
+	maximumEditcount: null,
+	minimumEditcount: null
 } );
 
 mw.editcheck.TextMatchEditCheck.static.choices = [

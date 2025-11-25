@@ -43,6 +43,7 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	enabled: true,
 	account: false, // 'loggedin', 'loggedout', anything non-truthy means allow either
 	maximumEditcount: 100,
+	minimumEditcount: 0,
 	ignoreSections: [],
 	ignoreLeadSection: false
 };
@@ -87,6 +88,10 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config ) {
 	}
 	// some checks are only shown for newer users
 	if ( config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > config.maximumEditcount ) {
+		return false;
+	}
+	// and some checks are only shown for more experienced users
+	if ( config.minimumEditcount && mw.config.get( 'wgUserEditCount', 0 ) < config.minimumEditcount ) {
 		return false;
 	}
 	return true;
