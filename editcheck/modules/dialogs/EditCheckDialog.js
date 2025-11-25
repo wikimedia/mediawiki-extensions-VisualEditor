@@ -48,9 +48,18 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 		framed: false,
 		label: ve.msg( 'visualeditor-contextitemwidget-label-close' ),
 		invisibleLabel: true,
-		icon: 'expand'
+		icon: 'close'
 	} ).connect( this, {
 		click: 'onCloseButtonClick'
+	} );
+
+	this.collapseExpandButton = new OO.ui.ButtonWidget( {
+		classes: [ 've-ui-editCheckDialog-collapseExpand' ],
+		framed: false,
+		// TODO: Add collapse/expand accessibility labels
+		icon: 'expand'
+	} ).connect( this, {
+		click: 'onCollapseExpandButtonClick'
 	} );
 
 	this.currentOffset = null;
@@ -85,7 +94,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	} );
 
 	this.$actions = $( '<div>' );
-	this.$body.append( this.closeButton.$element, this.$actions, this.footer.$element );
+	this.$body.append( this.closeButton.$element, this.collapseExpandButton.$element, this.$actions, this.footer.$element );
 	if ( mw.editcheck.experimental ) {
 		const $warning = new OO.ui.MessageWidget( {
 			type: 'error',
@@ -291,9 +300,10 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		// session won't produce unexpected behavior. (T404661)
 		this.currentOffset = null;
 
-		this.singleAction = this.inBeforeSave || OO.ui.isMobile();
+		this.closeButton.toggle( OO.ui.isMobile() && !this.inBeforeSave );
+		this.collapseExpandButton.toggle( OO.ui.isMobile() && this.inBeforeSave );
 
-		this.closeButton.toggle( OO.ui.isMobile() );
+		this.singleAction = this.inBeforeSave || OO.ui.isMobile();
 		if ( data.footer !== undefined ) {
 			this.footer.toggle( data.footer );
 		} else {
@@ -403,10 +413,17 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
  * Handle click events from the close button.
  */
 ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
+	this.close();
+};
+
+/**
+ * Handle click events from the collapse/expand button.
+ */
+ve.ui.EditCheckDialog.prototype.onCollapseExpandButtonClick = function () {
 	// eslint-disable-next-line no-jquery/no-class-state
 	const collapse = !this.$element.hasClass( 've-ui-editCheckDialog-collapsed' );
 	this.$element.toggleClass( 've-ui-editCheckDialog-collapsed', collapse );
-	this.closeButton.setIcon( collapse ? 'collapse' : 'expand' );
+	this.collapseExpandButton.setIcon( collapse ? 'collapse' : 'expand' );
 };
 
 /**
