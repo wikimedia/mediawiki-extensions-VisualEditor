@@ -106,7 +106,10 @@ Controller.prototype.setup = function () {
 		// that may be affected, e.g. the VE toolbar
 		window.dispatchEvent( new Event( 'resize' ) );
 
-		this.surface.getView().on( 'position', this.onPositionDebounced );
+		this.surface.getView().connect( this, {
+			position: 'onPositionDebounced',
+			focus: 'onSurfaceFocus'
+		} );
 		this.surface.getModel().connect( this, {
 			undoStackChange: 'onDocumentChangeDebounced',
 			select: 'onSelectDebounced',
@@ -385,18 +388,22 @@ Controller.prototype.getActions = function ( listener ) {
 };
 
 /**
+ * Handle focus events from the surface view
+ */
+Controller.prototype.onSurfaceFocus = function () {
+	// On mobile we want to close the drawer if the keyboard is shown
+	// A native cursor selection means the keyboard will be visible
+	if ( OO.ui.isMobile() && !this.inBeforeSave && this.surface.getView().hasNativeCursorSelection() ) {
+		this.closeDialog( 'mobile-keyboard' );
+	}
+};
+
+/**
  * Handle select events from the surface model
  *
  * @param {ve.dm.Selection} selection New selection
  */
 Controller.prototype.onSelect = function () {
-	if ( OO.ui.isMobile() && !this.inBeforeSave ) {
-		// On mobile we want to close the drawer if the keyboard is shown
-		if ( this.surface.getView().hasNativeCursorSelection() ) {
-			// A native cursor selection means the keyboard will be visible
-			this.closeDialog( 'mobile-keyboard' );
-		}
-	}
 	this.updateActions();
 };
 
