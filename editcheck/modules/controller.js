@@ -824,7 +824,7 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 };
 
 /**
- * Closes the fixed edit check dialog (pre-save).
+ * Closes the edit check dialog
  *
  * @param {string} [action] Name of action which triggered the close ('mobile-keyboard', 'context', 'preSaveProcess')
  * @return {jQuery.Promise}
@@ -833,7 +833,6 @@ Controller.prototype.closeDialog = function ( action ) {
 	if ( !this.focusedAction ) {
 		return ve.createDeferred().resolve().promise();
 	}
-	this.focusAction( undefined );
 	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 	return windowAction.close( 'fixedEditCheckDialog', action ? { action } : undefined ).closed.then( () => {}, () => {} );
 };
