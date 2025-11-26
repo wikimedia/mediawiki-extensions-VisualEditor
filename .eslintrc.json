@@ -9,6 +9,9 @@
 		"mocha": true
 	},
 	"rules": {
-		"object-shorthand": [ "error", "properties" ]
+		"object-shorthand": [
+			"error",
+			"properties"
+		]
 	}
 }
