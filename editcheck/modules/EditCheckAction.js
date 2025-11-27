@@ -35,6 +35,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.type = config.type || 'warning';
 	this.choices = config.choices || config.check.constructor.static.choices;
 	this.suggestion = config.suggestion;
+	this.widget = null;
 };
 
 /* Inheritance */
@@ -177,7 +178,7 @@ mw.editcheck.EditCheckAction.prototype.isSuggestion = function () {
  * @return {mw.editcheck.EditCheckActionWidget}
  */
 mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface ) {
-	const widget = new mw.editcheck.EditCheckActionWidget( {
+	this.widget = new mw.editcheck.EditCheckActionWidget( {
 		type: this.getType(),
 		icon: this.icon,
 		name: this.getName(),
@@ -185,23 +186,29 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		message: this.getDescription(),
 		footer: this.getFooter(),
 		prompt: this.getPrompt(),
+		choices: this.getChoices(),
 		mode: this.mode,
 		singleAction,
 		suggestion: this.suggestion
 	} );
-	widget.actions.connect( this, {
-		click: [ 'onActionClick', surface ]
+	this.widget.connect( this, {
+		actionClick: [ 'onActionClick', surface ]
 	} );
-	widget.actions.add( this.getChoices().map(
-		( choice ) => new OO.ui.ActionWidget( ve.extendObject( { modes: [ '' ], framed: true }, choice ) )
-	) );
-	widget.toggleCollapse( collapsed );
+	this.widget.toggleCollapse( collapsed );
 
-	return widget;
+	return this.widget;
 };
 
+/**
+ * Set the mode used by the action widget
+ *
+ * @param {string} mode
+ */
 mw.editcheck.EditCheckAction.prototype.setMode = function ( mode ) {
 	this.mode = mode;
+	if ( this.widget ) {
+		this.widget.setMode( mode );
+	}
 };
 
 /**

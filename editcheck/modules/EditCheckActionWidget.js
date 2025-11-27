@@ -11,6 +11,7 @@
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} [config.footer] Footer message
  * @param {string} [config.icon] Icon name
  * @param {boolean} [config.singleAction] This is the only action shown
+ * @param {Object[]} [config.choices] User choices
  * @param {string} [config.mode] Mode for the action set widget
  * @param {boolean} [config.suggestion] This is a suggestion
  */
@@ -23,7 +24,8 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	this.actions = new OO.ui.ActionSet();
 	this.actions.connect( this, {
-		change: 'onActionsChange'
+		change: 'onActionsChange',
+		click: [ 'emit', 'actionClick' ]
 	} );
 
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
@@ -45,6 +47,12 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 		this.$actions.addClass( 've-ui-editCheckActionWidget-actions-prompted' )
 			.append( this.prompt.$element );
 	}
+	if ( config.choices ) {
+		this.actions.add( config.choices.map(
+			( choice ) => new OO.ui.ActionWidget( ve.extendObject( { modes: [ '' ], framed: true }, choice ) )
+		) );
+	}
+	this.actions.setMode( this.mode );
 
 	this.$element.on( 'click', this.onClick.bind( this ) );
 
@@ -77,16 +85,34 @@ OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.MessageWidget );
  * @event mw.editcheck.EditCheckActionWidget#togglecollapse
  */
 
+/**
+ * Fired when action set emits a click event
+ *
+ * @event mw.editcheck.EditCheckActionWidget#actionClick
+ */
+
 /* Methods */
+
+/**
+ * Set the mode
+ *
+ * @param {string} mode
+ */
+mw.editcheck.EditCheckActionWidget.prototype.setMode = function ( mode ) {
+	this.mode = mode;
+	this.actions.setMode( mode );
+};
 
 /**
  * Handle change events on the action set
  */
 mw.editcheck.EditCheckActionWidget.prototype.onActionsChange = function () {
-	this.$actions.addClass( 'oo-ui-element-hidden' ).find( '.oo-ui-actionWidget' ).remove();
-	this.actions.get( { modes: [ this.mode ] } ).forEach( ( actionWidget ) => {
-		this.$actions.append( actionWidget.$element ).removeClass( 'oo-ui-element-hidden' );
+	let hasVisibleActions = false;
+	this.actions.get().forEach( ( actionWidget ) => {
+		this.$actions.append( actionWidget.$element );
+		hasVisibleActions = hasVisibleActions || actionWidget.isVisible();
 	} );
+	this.$actions.toggleClass( 'oo-ui-element-hidden', !hasVisibleActions );
 };
 
 /**

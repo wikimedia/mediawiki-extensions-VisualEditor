@@ -186,9 +186,6 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 		action.off( 'act' ).on( 'act', this.onAct, [ action, widget ], this );
 
 		this.$actions.append( widget.$element );
-
-		// for scrolling later
-		action.widget = widget;
 	} );
 
 	// Update positions immediately to prevent flicker
