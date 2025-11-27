@@ -177,7 +177,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		} );
 	} else if ( choice === 'edit' && surface ) {
 		action.gutterQuickAction = 'recheck';
-		action.setStale( true );
+		action.updateStale( true );
 		action.setMode( 'revising' );
 		// Once revising has started the user will either make enough of an
 		// edit that this action is discarded, or will `act` again and this
@@ -229,7 +229,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// eslint-disable-next-line no-jquery/no-when
 		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
 			action.gutterQuickAction = null;
-			action.setStale( false );
+			action.updateStale( false );
 			action.untag( 'pending' );
 
 			progress.$element.remove();

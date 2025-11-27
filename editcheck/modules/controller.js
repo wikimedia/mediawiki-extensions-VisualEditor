@@ -291,7 +291,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			if ( !fromRefresh ) {
 				actions.forEach( ( action ) => {
 					if ( action.isStale() ) {
-						action.setStale( false );
+						action.updateStale( false );
 						staleUpdated = true;
 					}
 				} );
@@ -716,6 +716,9 @@ Controller.prototype.drawSelections = function () {
 	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
 		( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
 	) : [];
+	if ( this.focusedAction ) {
+		this.focusedAction.updateStale();
+	}
 	const isStale = !!this.focusedAction && this.focusedAction.isStale();
 	const showGutter = !isStale && !OO.ui.isMobile();
 	const activeOptions = { showGutter, showRects: !isStale, showBounding: isStale };

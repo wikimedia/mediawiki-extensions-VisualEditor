@@ -36,6 +36,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.choices = config.choices || config.check.constructor.static.choices;
 	this.suggestion = config.suggestion;
 	this.widget = null;
+	this.stale = false;
 };
 
 /* Inheritance */
@@ -49,6 +50,13 @@ OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
  *
  * @event mw.editcheck.EditCheckAction#act
  * @param {jQuery.Promise} promise A promise that resolves when the action is complete
+ */
+
+/**
+ * Fired when the action's stale state changes
+ *
+ * @event mw.editcheck.EditCheckAction#stale
+ * @param {boolean} stale The check is stale
  */
 
 /* Methods */
@@ -256,30 +264,34 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps 
 };
 
 /**
- * Force the action into a stale or not-stale state
+ * Update the stale state of the action based on the text, or force a specific state
  *
- * @param {boolean} stale
+ * @param {boolean} [forceStale] Force the action into a stale or not-stale state
  */
-mw.editcheck.EditCheckAction.prototype.setStale = function ( stale ) {
-	const previousState = this.isStale();
-	this.originalText = stale ? null : this.fragments.map( ( fragment ) => fragment.getText() );
-	if ( previousState !== this.isStale() ) {
-		this.emit( 'stale', this.isStale() );
+mw.editcheck.EditCheckAction.prototype.updateStale = function ( forceStale ) {
+	const wasStale = this.isStale();
+	if ( forceStale !== undefined ) {
+		this.originalText = forceStale ? null : this.fragments.map( ( fragment ) => fragment.getText() );
+	}
+	this.stale = !this.originalText || !OO.compare(
+		this.originalText,
+		this.fragments.map( ( fragment ) => fragment.getText() )
+	);
+	if ( wasStale !== this.stale ) {
+		this.emit( 'stale', this.stale );
 	}
 };
 
 /**
- * Check whether the text has changed since this action was created
+ * Get the stale state of the action
  *
- * @return {boolean} Whether the text has changed since this action was created
+ * Users must call #updateStale first if they want to get the latest
+ * state based on the current text.
+ *
+ * @return {boolean} The action is stale
  */
 mw.editcheck.EditCheckAction.prototype.isStale = function () {
-	return this.check.canBeStale() && (
-		!this.originalText || !OO.compare(
-			this.originalText,
-			this.fragments.map( ( fragment ) => fragment.getText() )
-		)
-	);
+	return this.check.canBeStale() && this.stale;
 };
 
 /**
