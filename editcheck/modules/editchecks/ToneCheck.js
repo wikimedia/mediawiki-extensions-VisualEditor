@@ -115,7 +115,7 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 		return null;
 	}
 	// TODO: variant message/labels when in back-from-presave state
-	return new mw.editcheck.EditCheckAction( {
+	const action = new mw.editcheck.EditCheckAction( {
 		fragments: [ fragment ],
 		title: ve.msg( 'editcheck-tone-title' ),
 		// eslint-disable-next-line no-jquery/no-append-html
@@ -149,6 +149,13 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 			}
 		]
 	} );
+
+	action.on( 'stale', ( stale ) => {
+		action.setMode( stale ? 'revising' : '' );
+		action.gutterQuickAction = stale ? 'recheck' : null;
+	} );
+
+	return action;
 };
 
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
@@ -176,19 +183,11 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
-		action.gutterQuickAction = 'recheck';
 		action.updateStale( true );
-		action.setMode( 'revising' );
 		// Once revising has started the user will either make enough of an
 		// edit that this action is discarded, or will `act` again and this
 		// event-handler will be removed above:
 		action.once( 'discard', this.showThankToast );
-		action.once( 'stale', () => {
-			// Clean up the mode after we're done; any other act or anything
-			// that can trigger an update should un-stale the action.
-			action.setMode( '' );
-			action.gutterQuickAction = null;
-		} );
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
@@ -228,7 +227,6 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// Caller requires a Deferred as it then calls '.always()'
 		// eslint-disable-next-line no-jquery/no-when
 		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
-			action.gutterQuickAction = null;
 			action.updateStale( false );
 			action.untag( 'pending' );
 
