@@ -292,6 +292,7 @@
 	"visualeditor-mwsignature-tool": "Vaš potpis",
 	"visualeditor-preference-visualeditor": "Vizualni uređivač",
 	"visualeditor-preference-newwikitexteditor-enable": "Režim wikiteksta unutar vizualnog uređivača, umjesto drugog uređivača wikiteksta",
+	"visualeditor-preference-newwikitexteditor-help": "Ponekad se naziva \"uređivačem wikiteksta iz 2017. godine\".",
 	"visualeditor-preference-tabs": "Režim uređivanja:",
 	"visualeditor-preference-tabs-multi-tab": "Prikaži kartice oba uređivača",
 	"visualeditor-preference-tabs-prefer-ve": "Otvori vizualni uređivač kad god je moguće",
