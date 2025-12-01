@@ -25,19 +25,23 @@ mw.editcheck.DisambiguationEditCheck.static.choices = [
 ];
 
 mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	const isDisambig = ( annotation ) => {
-		const linkData = ve.init.platform.linkCache.getCached( annotation.getAttribute( 'lookupTitle' ) );
-		return linkData && linkData.disambiguation;
-	};
+	const checkDisambig = ( annotation ) => ve.init.platform.linkCache.get(
+		annotation.getAttribute( 'lookupTitle' )
+	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
+
+	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
+
 	return surfaceModel.documentModel.documentNode.getAnnotationRanges().filter(
 		( annRange ) => annRange.annotation instanceof ve.dm.MWInternalLinkAnnotation &&
-			isDisambig( annRange.annotation ) &&
 			this.isRangeInValidSection( annRange.range, surfaceModel.documentModel ) &&
-			!this.isDismissedRange( annRange.range )
-	).map( ( annRange ) => new mw.editcheck.EditCheckAction( {
-		fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-		check: this
-	} ) );
+			!this.isDismissedRange( annRange.range ) &&
+			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) )
+	).map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
+		new mw.editcheck.EditCheckAction( {
+			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
+			check: this
+		} ) : null
+	) );
 };
 
 mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, surface ) {
