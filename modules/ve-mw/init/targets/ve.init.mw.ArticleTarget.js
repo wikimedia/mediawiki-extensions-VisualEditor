@@ -2434,8 +2434,17 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, d
 		dataPromise = this.originalDataPromise;
 	}
 
+	const surfaceModel = this.getSurface().getModel();
+	const attachedRootRange = surfaceModel.getAttachedRoot().getOuterRange();
+	const documentRange = surfaceModel.getDocument().getDocumentRange();
+
 	const oldHeadingNode = this.getSectionHeadingNode( this.section );
-	const oldSectionRange = this.getSurface().getModel().getAttachedRoot().getOuterRange();
+	const oldSectionRange = surfaceModel.getAttachedRoot().getOuterRange();
+
+	ve.track( 'activity.section-switch', { action: 'switch-' +
+		( attachedRootRange.start === 0 ? 'lead' : ( attachedRootRange.end === documentRange.end ? 'last' : 'middle' ) ) +
+		( direction > 0 ? '-bottom' : '-top' )
+	} );
 
 	if ( section === null ) {
 		this.enableVisualSectionEditing = false;
