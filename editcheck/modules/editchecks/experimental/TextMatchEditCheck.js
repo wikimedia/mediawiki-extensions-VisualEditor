@@ -281,6 +281,7 @@ OO.inheritClass( mw.editcheck.TextMatchEditCheckAction, mw.editcheck.EditCheckAc
  * Compare to another action
  *
  * @param {mw.editcheck.EditCheckAction} other Other action
+ * @param {...any} args
  * @return {boolean}
  */
 mw.editcheck.TextMatchEditCheckAction.prototype.equals = function ( other, ...args ) {
