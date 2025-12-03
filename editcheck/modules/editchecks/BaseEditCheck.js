@@ -295,6 +295,24 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
 };
 
 /**
+ * Get annotation ranges where at least some content has been modified
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {string} [name] Name of annotation to filter for
+ * @return {ve.dm.LinearData.AnnotationRange[]} Annotation ranges, containing an annotation and its range
+ */
+mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, name ) {
+	const modified = this.getModifiedContentRanges( documentModel );
+
+	return documentModel.getDocumentNode().getAnnotationRanges().filter(
+		( annRange ) => this.isRangeInValidSection( annRange.range, documentModel ) &&
+			!this.isDismissedRange( annRange.range ) &&
+			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
+			( !name || annRange.annotation.name === name )
+	);
+};
+
+/**
  * Get content ranges where at least the minimum about of text has been added
  *
  * @param {ve.dm.Document} documentModel

@@ -28,20 +28,17 @@ mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( sur
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
 
-	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
-
-	return surfaceModel.documentModel.documentNode.getAnnotationRanges().filter(
-		( annRange ) => annRange.annotation instanceof ve.dm.MWInternalLinkAnnotation &&
-			this.isRangeInValidSection( annRange.range, surfaceModel.documentModel ) &&
-			!this.isDismissedRange( annRange.range ) &&
-			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) )
-	).map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
-		new mw.editcheck.EditCheckAction( {
-			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
-			check: this
-		} ) : null
-	) );
+	return this.getModifiedAnnotationRanges(
+		surfaceModel.getDocument(),
+		ve.dm.MWInternalLinkAnnotation.static.name
+	).map(
+		( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
+			new mw.editcheck.EditCheckAction( {
+				fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
+				focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
+				check: this
+			} ) : null
+		) );
 };
 
 mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, surface ) {

@@ -66,24 +66,21 @@ mw.editcheck.ExternalLinksEditCheck.prototype.getInterwikiUrlPatternsPromise = f
 };
 
 mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
-	return surfaceModel.documentModel.documentNode.getAnnotationRanges()
-		.filter( ( annRange ) => annRange.annotation instanceof ve.dm.MWExternalLinkAnnotation &&
-			!this.isDismissedRange( annRange.range ) &&
-			this.isRangeInValidSection( annRange.range, surfaceModel.documentModel ) &&
-			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) )
-		).map( ( annRange ) => this.getInterwikiUrlPatternsPromise().then( ( interwikiUrlPatterns ) => {
-			const href = annRange.annotation.getAttribute( 'href' );
-			if ( interwikiUrlPatterns.some( ( regex ) => regex.test( href ) ) ) {
-				// Ignore interwiki links
-				return null;
-			}
-			return new mw.editcheck.EditCheckAction( {
-				fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-				focusAnnotation: ( annView ) => annView instanceof ve.ce.MWExternalLinkAnnotation,
-				check: this
-			} );
-		} ) );
+	return this.getModifiedAnnotationRanges(
+		surfaceModel.getDocument(),
+		ve.dm.MWExternalLinkAnnotation.static.name
+	).map( ( annRange ) => this.getInterwikiUrlPatternsPromise().then( ( interwikiUrlPatterns ) => {
+		const href = annRange.annotation.getAttribute( 'href' );
+		if ( interwikiUrlPatterns.some( ( regex ) => regex.test( href ) ) ) {
+			// Ignore interwiki links
+			return null;
+		}
+		return new mw.editcheck.EditCheckAction( {
+			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
+			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWExternalLinkAnnotation,
+			check: this
+		} );
+	} ) );
 };
 
 mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, surface ) {
