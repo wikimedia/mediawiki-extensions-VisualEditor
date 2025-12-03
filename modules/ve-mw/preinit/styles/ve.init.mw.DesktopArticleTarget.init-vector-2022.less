@@ -7,8 +7,11 @@
 
 // Temporarily disable TOC in edit mode until TOC
 // works with both visual and source editors (T294950)
-.ve-activated .vector-toc {
-	display: none;
+.ve-activated {
+	.vector-toc,
+	.vector-page-titlebar-toc {
+		display: none;
+	}
 }
 
 .ve-init-mw-desktopArticleTarget-toolbar,
