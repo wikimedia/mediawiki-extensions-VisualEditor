@@ -27,8 +27,7 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	},
 	{
 		action: 'dismiss',
-		label: OO.ui.deferMsg( 'editcheck-dialog-action-no' ),
-		icon: 'check'
+		label: 'Dismiss' // TODO: i18n
 	}
 ];
 
@@ -41,6 +40,7 @@ mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surf
 			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) )
 		).map( ( annRange ) => new mw.editcheck.EditCheckAction( {
 			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
+			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWExternalLinkAnnotation,
 			check: this
 		} ) );
 };

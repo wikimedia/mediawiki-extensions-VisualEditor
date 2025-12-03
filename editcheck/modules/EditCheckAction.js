@@ -8,6 +8,7 @@
  * @param {mw.editcheck.BaseEditCheck} config.check Check which created this action
  * @param {ve.dm.SurfaceFragment[]} config.fragments Affected fragments
  * @param {ve.dm.SurfaceFragment} [config.focusFragment] Fragment to focus
+ * @param {Function} [config.focusAnnotation] Annotation to focus, see ve.ce.Surface#selectAnnotation
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.title] Title
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.message] Body message
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.prompt] Prompt to show before choices
@@ -26,6 +27,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.fragments = config.fragments;
 	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
 	this.focusFragment = config.focusFragment;
+	this.focusAnnotation = config.focusAnnotation;
 	this.message = config.message;
 	this.prompt = config.prompt;
 	this.footer = config.footer;
@@ -341,4 +343,30 @@ mw.editcheck.EditCheckAction.prototype.isTagged = function ( tag ) {
  */
 mw.editcheck.EditCheckAction.prototype.getTagName = function () {
 	return this.check.constructor.static.name;
+};
+
+/**
+ * Select the action in the surface
+ *
+ * @param {ve.ui.Surface} surface
+ */
+mw.editcheck.EditCheckAction.prototype.select = function ( surface ) {
+	const surfaceModel = surface.getModel();
+	const surfaceView = surface.getView();
+	if ( this.focusAnnotation ) {
+		surfaceModel.setSelection( this.getFocusSelection() );
+		surfaceView.selectAnnotation( this.focusAnnotation );
+	} else {
+		const checkRange = this.getFocusSelection().getCoveringRange();
+		const surfaceRange = surfaceModel.getSelection().getCoveringRange();
+		// Collapse and move the selection to the nearest part of the check range
+		// Don't alter it if it touches the check range
+		if ( surfaceRange === null || surfaceRange.end < checkRange.start ) {
+			surfaceModel.setLinearSelection( new ve.Range( checkRange.start ) );
+		} else if ( surfaceRange.start > checkRange.end ) {
+			surfaceModel.setLinearSelection( new ve.Range( checkRange.end ) );
+		}
+		surfaceView.activate();
+		surfaceView.focus();
+	}
 };

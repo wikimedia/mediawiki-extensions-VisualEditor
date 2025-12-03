@@ -386,20 +386,7 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
 		// Expand
 		this.setCurrentOffset( this.currentActions.indexOf( action ), true );
 		if ( !OO.ui.isMobile() ) {
-			const surfaceModel = this.surface.getModel();
-			const checkRange = action.getFocusSelection().getCoveringRange();
-			const surfaceRange = surfaceModel.getSelection().getCoveringRange();
-			// Collapse and move the selection to the nearest part of the check range
-			// Don't alter it if it touches the check range
-			if ( surfaceRange === null || surfaceRange.end < checkRange.start ) {
-				surfaceModel.setLinearSelection( new ve.Range( checkRange.start ) );
-				this.surface.getView().activate();
-				this.surface.getView().focus();
-			} else if ( surfaceRange.start > checkRange.end ) {
-				surfaceModel.setLinearSelection( new ve.Range( checkRange.end ) );
-				this.surface.getView().activate();
-				this.surface.getView().focus();
-			}
+			action.select( this.surface );
 		}
 	} else {
 		this.setCurrentOffset( null );

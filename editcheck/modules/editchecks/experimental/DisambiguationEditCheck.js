@@ -14,13 +14,12 @@ mw.editcheck.DisambiguationEditCheck.static.description = 'Link to a specific pa
 mw.editcheck.DisambiguationEditCheck.static.choices = [
 	{
 		action: 'edit',
-		label: 'Edit link', // ve.msg( 'editcheck-dialog-action-yes' ),
+		label: 'Edit link', // TODO: i18n
 		icon: 'edit'
 	},
 	{
 		action: 'dismiss',
-		label: 'Ignore', // ve.msg( 'editcheck-dialog-action-no' ),
-		icon: 'check'
+		label: 'Ignore' // TODO: i18n
 	}
 ];
 
@@ -39,6 +38,7 @@ mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( sur
 	).map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
 		new mw.editcheck.EditCheckAction( {
 			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
+			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
 			check: this
 		} ) : null
 	) );
