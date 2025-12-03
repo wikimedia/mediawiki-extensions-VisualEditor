@@ -287,6 +287,7 @@
 	"visualeditor-formatdropdown-format-mw-heading4": "2级子标题",
 	"visualeditor-formatdropdown-format-mw-heading5": "3级子标题",
 	"visualeditor-formatdropdown-format-mw-heading6": "4级子标题",
+	"visualeditor-fullpage-switch-label": "编辑整页",
 	"visualeditor-generating-wikitext-progress": "正在生成wikitext",
 	"visualeditor-includes-noinclude-start": "在嵌入时排除的内容的起点",
 	"visualeditor-includes-noinclude-end": "在嵌入时排除的内容的终点",
