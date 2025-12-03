@@ -2467,10 +2467,9 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, d
 		this.getSurface().getModel().setLinearSelection( new ve.Range( offset ) );
 		if ( direction ) {
 			const scrollTop = this.$scrollContainer.scrollTop();
-			// Smooth scroll up or down by half of the viewport height
+			// Smooth scroll up or down by a few lines (T411669)
 			mw.libs.ve.smoothScrollTo(
-				scrollTop +
-				( direction * ( this.$scrollContainer[ 0 ].clientHeight / 2 ) )
+				scrollTop + ( direction * 130 )
 			);
 		}
 	} );
