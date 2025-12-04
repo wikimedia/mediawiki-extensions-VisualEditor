@@ -31,22 +31,16 @@ function Controller( target, config ) {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 
-	const debounceWithTeardownCheck = ( func, wait, immediate ) => ve.debounce( ( ...args ) => {
-		// This could potentially be called after teardown
-		if ( !this.surface ) {
-			return;
-		}
-		return func( ...args );
-	}, wait, immediate );
+	const teardownCheck = () => !!this.surface;
 
-	this.onDocumentChangeDebounced = debounceWithTeardownCheck( this.onDocumentChange.bind( this ), 100 );
-	this.onPositionDebounced = debounceWithTeardownCheck( this.onPosition.bind( this ), 100 );
-	this.onSelectDebounced = debounceWithTeardownCheck( this.onSelect.bind( this ), 100 );
-	this.onContextChangeDebounced = debounceWithTeardownCheck( this.onContextChange.bind( this ), 100 );
-	this.updatePositionsDebounced = debounceWithTeardownCheck( this.updatePositions.bind( this ) );
+	this.onDocumentChangeDebounced = ve.debounceWithTest( teardownCheck, this.onDocumentChange.bind( this ), 100 );
+	this.onPositionDebounced = ve.debounceWithTest( teardownCheck, this.onPosition.bind( this ), 100 );
+	this.onSelectDebounced = ve.debounceWithTest( teardownCheck, this.onSelect.bind( this ), 100 );
+	this.onContextChangeDebounced = ve.debounceWithTest( teardownCheck, this.onContextChange.bind( this ), 100 );
+	this.updatePositionsDebounced = ve.debounceWithTest( teardownCheck, this.updatePositions.bind( this ) );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
-	this.scrollActionIntoViewDebounced = debounceWithTeardownCheck( this.scrollActionIntoView.bind( this ), 200, true );
+	this.scrollActionIntoViewDebounced = ve.debounceWithTest( teardownCheck, this.scrollActionIntoView.bind( this ), 200, true );
 }
 
 /* Inheritance */
