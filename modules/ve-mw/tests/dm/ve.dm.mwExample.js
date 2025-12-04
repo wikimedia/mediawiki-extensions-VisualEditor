@@ -2209,6 +2209,26 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		]
 	},
+	'display title (noerror)': {
+		body: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"},"params":{"1":{"wt":"noerror"}}}},"\\n"]}\'></span>',
+		fromDataBody: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"},"params":{"1":{"wt":"noerror"}}}},"\\n"]}\'></span>',
+		normalizedBody: '<span typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"DISPLAYTITLE:foo","function":"displaytitle"},"params":{"1":{"wt":"noerror"}}}}]}\'></span>',
+		data: [
+			{
+				type: 'mwDisplayTitle',
+				attributes: {
+					content: 'foo',
+					localizedPrefix: 'DISPLAYTITLE',
+					params: { 1: { wt: 'noerror' } }
+				}
+			},
+			{ type: '/mwDisplayTitle' },
+			{ type: 'paragraph', internal: { generated: 'empty' } },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
 	'thumb image': {
 		body: ve.dm.mwExample.MWBlockImage.html,
 		data: [
