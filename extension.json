@@ -695,6 +695,11 @@
 				"last"
 			]
 		},
+		"ext.visualEditor.editCheck.special": {
+			"styles": [
+				"editcheck/modules/editCheck.special/editchecks.less"
+			]
+		},
 		"ext.visualEditor.core.utils": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorFileModule",
 			"veModules": [
@@ -2392,7 +2397,8 @@
 		"visualeditor-tabs": "remember-last"
 	},
 	"SpecialPages": {
-		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad"
+		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad",
+		"EditChecks": "MediaWiki\\Extension\\VisualEditor\\SpecialEditChecks"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\VisualEditor\\": "includes/",

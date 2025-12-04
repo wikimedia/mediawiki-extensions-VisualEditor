@@ -7,6 +7,8 @@ OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCh
 
 mw.editcheck.ConvertReferenceEditCheck.static.title = OO.ui.deferMsg( 'citoid-referencecontextitem-convert-button' );
 
+mw.editcheck.ConvertReferenceEditCheck.static.description = OO.ui.deferMsg( 'citoid-referencecontextitem-convert-message' );
+
 mw.editcheck.ConvertReferenceEditCheck.static.name = 'convertReference';
 
 mw.editcheck.ConvertReferenceEditCheck.static.choices = [
@@ -39,7 +41,6 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 	} ).filter( ( obj ) => obj ).filter( ( range ) => !this.isDismissedRange( range ) ).map( ( range ) => (
 		new mw.editcheck.EditCheckAction( {
 			fragments: [ surfaceModel.getLinearFragment( range ) ],
-			message: ve.msg( 'citoid-referencecontextitem-convert-message' ),
 			check: this
 		} )
 	) );
