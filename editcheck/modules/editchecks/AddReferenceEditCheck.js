@@ -63,6 +63,8 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 		const branchNode = documentModel.getBranchNodeFromOffset( range.start );
 		if ( branchNode.getParent() !== documentModel.attachedRoot ) {
 			return false;
+		} else if ( branchNode instanceof ve.dm.HeadingNode ) {
+			return false;
 		}
 
 		// 6. If a paragraph is followed by a list, consider it to be part of this paragraph
