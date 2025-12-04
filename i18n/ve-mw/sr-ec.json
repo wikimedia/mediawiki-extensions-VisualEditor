@@ -139,7 +139,7 @@
 	"visualeditor-dialog-meta-settings-notitleconvert-help": "Можете спречити да се наслов ове странице аутоматски пребацује у друга писма.",
 	"visualeditor-dialog-meta-settings-notitleconvert-label": "Не пребацуј наслов на друге варијанте језика",
 	"visualeditor-dialog-meta-settings-redirect-help": "Можете од ове странице направити преусмерење, страницу која ће аутоматски водити читаоца до друге странице на овом викију. Ово је корисно за погрешно уписане појмове и алтернативна имена или појмове. Ако је направите, читаоци неће видети садржај ове странице.",
-	"visualeditor-dialog-meta-settings-redirect-label": "Преусмери страницу на",
+	"visualeditor-dialog-meta-settings-redirect-label": "Преусмери страницу на:",
 	"visualeditor-dialog-meta-settings-redirect-placeholder": "Одредишна страница",
 	"visualeditor-dialog-meta-settings-redirect-statichelp": "Можете спречити да се ово преусмерење аутоматски ажурира када се страница на коју оно води премести, у врло ретком случају када је то потребно.",
 	"visualeditor-dialog-meta-settings-redirect-staticlabel": "Статичко преусмерење.",

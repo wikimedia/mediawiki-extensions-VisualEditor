@@ -20,7 +20,7 @@
 	"editcheck-dialog-action-submit": "提交",
 	"editcheck-dialog-addref-description": "添加引证来帮助读者了解此信息的出处。",
 	"editcheck-dialog-addref-reject-question": "您为何未添加引证？",
-	"editcheck-dialog-addref-reject-description": "其他编者会想要进一步了解您作出拒绝引证的决定的原因。",
+	"editcheck-dialog-addref-reject-description": "其他编者会想要进一步了解您决定不新增引证的原因。",
 	"editcheck-dialog-addref-reject-irrelevant": "我认为引证与我所做的更改无关",
 	"editcheck-dialog-addref-reject-common-knowledge": "我添加的信息广为人知",
 	"editcheck-dialog-addref-reject-uncertain": "我不确定该添加什么引证",
