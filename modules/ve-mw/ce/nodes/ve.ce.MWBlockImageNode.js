@@ -164,7 +164,11 @@ ve.ce.MWBlockImageNode.prototype.updateSize = function ( dimensions ) {
 		};
 	}
 
-	this.$image.css( dimensions );
+	// Apply dimensions with !important to override responsive CSS rules in Minerva.
+	// Withouth this fixed height, the image will resize as the page loads, which can
+	// break our scroll restoration logic (T411669)
+	this.$image[ 0 ].style.setProperty( 'width', dimensions.width + 'px', 'important' );
+	this.$image[ 0 ].style.setProperty( 'height', dimensions.height + 'px', 'important' );
 
 	const type = this.model.getAttribute( 'type' );
 	const borderImage = this.model.getAttribute( 'borderImage' );
