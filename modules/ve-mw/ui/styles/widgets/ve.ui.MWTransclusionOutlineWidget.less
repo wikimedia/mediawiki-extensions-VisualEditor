@@ -1,17 +1,6 @@
 @import 'mediawiki.skin.variables.less';
 @import 'mediawiki.mixins.less';
 
-@selected-text-color: @color-progressive;
-// This shade on a white background results in #eaf3ff a.k.a. @background-color-progressive-subtle
-@selected-shading: rgba( 0, 109, 255, 0.082 );
-
-// This shade on a white background results in #eaecf0 a.k.a. @background-color-interactive
-@hover-shading: @background-color-button-quiet--active;
-
-@on-click-text-color: @color-progressive;
-// Same as .oo-ui-optionWidget-pressed, a.k.a. @background-color-primary--hover
-@on-click-shading: rgba( 41, 98, 204, 0.1 );
-
 .ve-ui-mwTransclusionOutlineWidget {
 	.ve-ui-mwTransclusionOutline-ariaHidden {
 		display: none;
@@ -46,13 +35,13 @@
 
 				&:hover,
 				&:focus {
-					background-color: @hover-shading;
+					background-color: @background-color-button-quiet--active;
 				}
 
 				/* click */
 				&:active {
-					background-color: @on-click-shading;
-					color: @on-click-text-color;
+					background-color: @background-color-progressive-subtle;
+					color: @color-progressive;
 				}
 
 				> .oo-ui-iconElement-icon {
@@ -62,11 +51,11 @@
 
 			/* selected */
 			&.oo-ui-optionWidget-selected > .oo-ui-buttonElement-button {
-				background-color: @selected-shading;
+				background-color: @background-color-progressive-subtle;
 
 				&:hover {
-					background-color: @hover-shading;
-					color: @selected-text-color;
+					background-color: @background-color-button-quiet--active;
+					color: @color-progressive;
 				}
 			}
 		}
@@ -130,21 +119,21 @@
 
 		/* click */
 		&:active {
-			background-color: @on-click-shading;
-			color: @on-click-text-color;
+			background-color: @background-color-progressive-subtle;
+			color: @color-progressive;
 		}
 
 		&.ve-ui-mwTransclusionOutlineParameterWidget-activePage {
-			background-color: @selected-shading;
+			background-color: @background-color-progressive-subtle;
 
 			&,
 			&.oo-ui-optionWidget-highlighted {
-				color: @selected-text-color;
+				color: @color-progressive;
 			}
 		}
 
 		&.oo-ui-optionWidget-highlighted {
-			background-color: @hover-shading;
+			background-color: @background-color-button-quiet--active;
 			color: @color-emphasized;
 		}
 
