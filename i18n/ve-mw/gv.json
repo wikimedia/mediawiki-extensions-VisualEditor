@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"MacTire02",
 			"Xð"
 		]
 	},
-	"tooltip-ca-ve-edit": "Reagh y ghuillag shoh"
+	"tooltip-ca-ve-edit": "Reagh y ghuillag shoh",
+	"tooltip-ca-ve-create": "Croo yn duillag shoh",
+	"tooltip-ca-editsource": "Reagh bun-choad y duillag shoh",
+	"tooltip-ca-createsource": "Croo bun-choad y duillag shoh"
 }
