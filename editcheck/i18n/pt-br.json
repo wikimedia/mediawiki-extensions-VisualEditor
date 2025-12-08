@@ -3,6 +3,7 @@
 		"authors": [
 			"BraunOBruno",
 			"Eduardoaddad",
+			"Erol",
 			"Fúlvio"
 		]
 	},
@@ -15,7 +16,7 @@
 	"editcheck-dialog-action-submit": "Enviar",
 	"editcheck-dialog-addref-description": "Ajuda os leitores a entender de onde vêm essas informações ao adicionar uma citação.",
 	"editcheck-dialog-addref-reject-question": "Por que você não está adicionando uma citação?",
-	"editcheck-dialog-addref-reject-description": "Outros editores gostariam de saber mais sobre sua decisão de descartar a citação.",
+	"editcheck-dialog-addref-reject-description": "Outros editores gostariam de saber mais sobre sua decisão de não adicionar uma citação.",
 	"editcheck-dialog-addref-reject-irrelevant": "Não acho que as citações sejam relevantes para a alteração que estou fazendo",
 	"editcheck-dialog-addref-reject-common-knowledge": "A informação que estou adicionando é amplamente conhecida",
 	"editcheck-dialog-addref-reject-uncertain": "Não tenho certeza de qual citação adicionar",
