@@ -189,7 +189,7 @@ Controller.prototype.editChecksArePossible = function () {
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
 			( checkName ) => {
 				const check = mw.editcheck.editCheckFactory.create( checkName, this );
-				return check.canBeShown();
+				return check.canBeShown( this.surface.getModel().getDocument() );
 			}
 		)
 	);

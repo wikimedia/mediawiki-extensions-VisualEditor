@@ -69,6 +69,7 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
  * Find out if any conditions in the provided config are met
  *
  * @param {Object} [config] Configuration options
+ * @param {ve.dm.Document} [documentModel] if attached to a known document
  * @return {boolean} Whether the config matches
  */
 mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config ) {
@@ -201,9 +202,10 @@ mw.editcheck.BaseEditCheck.prototype.takesFocus = function () {
  * than a specific check based on the current edit. It's used to filter out
  * checks before any maybe-expensive content analysis happens.
  *
+ * @param {ve.dm.Document} [documentModel] if attached to a known document
  * @return {boolean} Whether the check should be shown
  */
-mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
+mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel ) {
 	// all checks are only in the main namespace for now
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
@@ -212,7 +214,7 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function () {
 	if ( mw.editcheck.forceEnable ) {
 		return true;
 	}
-	if ( !this.constructor.static.doesConfigMatch( this.config ) ) {
+	if ( !this.constructor.static.doesConfigMatch( this.config, documentModel ) ) {
 		return false;
 	}
 	return true;

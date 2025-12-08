@@ -106,7 +106,7 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
 		const check = this.create( checkName, controller, {}, includeSuggestions );
-		if ( !check.canBeShown() ) {
+		if ( !check.canBeShown( surfaceModel.getDocument() ) ) {
 			return;
 		}
 		const checkListener = check[ listenerName ];

@@ -142,7 +142,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 				if ( matchItem.listener && matchItem.listener !== listener ) {
 					continue;
 				}
-				if ( !this.constructor.static.doesConfigMatch( matchItem.config ) ) {
+				if ( !this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) ) {
 					continue;
 				}
 
