@@ -1727,7 +1727,6 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWTransclusionOutlineWikitextWidget.js"
 			],
 			"styles": [
-				"modules/ve-mw/ce/styles/nodes/ve.ce.MWTransclusionNode.less",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWTransclusionDialog.less",
 				"modules/ve-mw/ui/styles/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.less",
 				"modules/ve-mw/ui/styles/pages/ve.ui.MWTransclusionContentPage.less",
@@ -2218,6 +2217,7 @@
 			"modules/ve-mw/tests/dm/nodes/ve.dm.MWTransclusionNode.test.js",
 			"lib/ve/tests/dm/ve.dm.Document.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.Document.test.js",
+			"lib/ve/tests/dm/ve.dm.TextFinder.test.js",
 			"lib/ve/tests/dm/ve.dm.HashValueStore.test.js",
 			"lib/ve/tests/dm/ve.dm.InternalList.test.js",
 			"lib/ve/tests/dm/ve.dm.InternalListNodeGroup.test.js",
