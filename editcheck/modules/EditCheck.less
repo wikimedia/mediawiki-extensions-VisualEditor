@@ -149,6 +149,16 @@
 			background-color: @background-color-base;
 			margin: @spacing-50 -@spacing-75 -@spacing-50 -@spacing-75;
 			padding: @spacing-75;
+
+			/* Progress bar positioning within the margin and without causing layout changes */
+			position: relative;
+
+			> .oo-ui-progressBarWidget {
+				position: absolute;
+				width: 100%;
+				top: 0;
+				left: 0;
+			}
 		}
 
 		&-prompt {
