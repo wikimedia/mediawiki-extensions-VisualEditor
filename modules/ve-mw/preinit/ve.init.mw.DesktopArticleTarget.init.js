@@ -34,7 +34,6 @@
 		initialWikitext, oldId,
 		isLoading, tempWikitextEditor, tempWikitextEditorData,
 		$toolbarPlaceholder, $toolbarPlaceholderBar,
-		contentTop, wasFloating,
 		active = false,
 		targetLoaded = false,
 		plugins = [],
@@ -98,24 +97,6 @@
 	}
 
 	/**
-	 * Handle window scroll events
-	 *
-	 * @param {Event} e
-	 */
-	function onWindowScroll() {
-		const scrollTop = $( document.documentElement ).scrollTop();
-		const floating = scrollTop > contentTop;
-		if ( floating !== wasFloating ) {
-			const width = $targetContainer.outerWidth();
-			$toolbarPlaceholder.toggleClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-floating', floating );
-			$toolbarPlaceholderBar.css( 'width', width );
-			wasFloating = floating;
-		}
-	}
-
-	const onWindowScrollListener = mw.util.throttle( onWindowScroll, 250 );
-
-	/**
 	 * Show a placeholder for the VE toolbar
 	 */
 	function showToolbarPlaceholder() {
@@ -126,23 +107,8 @@
 			$toolbarPlaceholderBar = $( '<div>' ).addClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-bar' );
 			$toolbarPlaceholder.append( $toolbarPlaceholderBar );
 		}
-		// Toggle -floating class before append (if required) to avoid content moving later
-		contentTop = $targetContainer.offset().top;
-		wasFloating = null;
-		onWindowScroll();
-
-		const scrollTopBefore = $( document.documentElement ).scrollTop();
 
 		$targetContainer.prepend( $toolbarPlaceholder );
-
-		window.addEventListener( 'scroll', onWindowScrollListener, { passive: true } );
-
-		if ( wasFloating ) {
-			// Browser might not support scroll anchoring:
-			// https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor/Guide_to_scroll_anchoring
-			// ...so compute the new scroll offset ourselves.
-			window.scrollTo( 0, scrollTopBefore + $toolbarPlaceholder.outerHeight() );
-		}
 
 		// Add class for transition after first render
 		setTimeout( () => {
@@ -155,7 +121,6 @@
 	 */
 	function hideToolbarPlaceholder() {
 		if ( $toolbarPlaceholder ) {
-			window.removeEventListener( 'scroll', onWindowScrollListener );
 			$toolbarPlaceholder.detach();
 			$toolbarPlaceholder.removeClass( 've-init-mw-desktopArticleTarget-toolbarPlaceholder-open' );
 		}
