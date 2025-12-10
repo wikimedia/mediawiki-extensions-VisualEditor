@@ -74,7 +74,7 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
  * @param {ve.dm.Document} [documentModel] if attached to a known document
  * @return {boolean} Whether the config matches
  */
-mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config ) {
+mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentModel ) {
 	if ( !config.enabled ) {
 		return false;
 	}
@@ -94,6 +94,32 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config ) {
 	// and some checks are only shown for more experienced users
 	if ( config.minimumEditcount && mw.config.get( 'wgUserEditCount', 0 ) < config.minimumEditcount ) {
 		return false;
+	}
+	if ( documentModel ) {
+		if ( config.inCategory || config.notInCategory ) {
+			const categories = documentModel.getOrInsertCachedData( () => (
+				documentModel.getMetaList().getItemsInGroup( 'mwCategory' )
+					.map( ( metaItem ) => {
+						const title = mw.Title.newFromText( metaItem.element.attributes.category );
+						return title ? title.getMainText().toLowerCase() : '';
+					} )
+			), 'editcheck-categories' );
+			// Is the page in any of the specified categories?
+			if ( config.inCategory && !categories.some(
+				( category ) => config.inCategory.some(
+					( inCat ) => category === inCat.toLowerCase()
+				)
+			) ) {
+				return false;
+			}
+			if ( config.notInCategory && categories.some(
+				( category ) => config.notInCategory.some(
+					( inCat ) => category === inCat.toLowerCase()
+				)
+			) ) {
+				return false;
+			}
+		}
 	}
 	return true;
 };
