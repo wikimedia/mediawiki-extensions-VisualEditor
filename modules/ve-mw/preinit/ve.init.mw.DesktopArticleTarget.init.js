@@ -851,7 +851,8 @@
 	 * @return {boolean}
 	 */
 	function isOnlyTabVE() {
-		return conf.useSingleEditTab && getAvailableEditPageEditor() === 'visual';
+		const visibleModes = getVisibleModes();
+		return visibleModes.length === 1 && visibleModes[ 0 ] === 'visual';
 	}
 
 	/**
@@ -860,7 +861,8 @@
 	 * @return {boolean}
 	 */
 	function isOnlyTabWikitext() {
-		return conf.useSingleEditTab && getAvailableEditPageEditor() === 'source';
+		const visibleModes = getVisibleModes();
+		return visibleModes.length === 1 && visibleModes[ 0 ] === 'source';
 	}
 
 	init = {
@@ -1410,6 +1412,11 @@
 		mw.config.get( 'wgPageContentModel' ) === 'wikitext'
 	);
 
+	/**
+	 * Get all available edit modes
+	 *
+	 * @return {string[]} Edit modes, none or some of 'visual'/'source'
+	 */
 	function getAvailableModes() {
 		const availableModes = [];
 		if ( init.isVisualAvailable() ) {
@@ -1419,6 +1426,20 @@
 			availableModes.push( 'source' );
 		}
 		return availableModes;
+	}
+
+	/**
+	 * Get the available edit modes which are shown as tabs
+	 *
+	 * @return {string[]} Edit modes, none or some of 'visual'/'source'
+	 */
+	function getVisibleModes() {
+		if ( init.isSingleEditTab ) {
+			const preferredEditor = getAvailableEditPageEditor();
+			return preferredEditor ? [ preferredEditor ] : [];
+		} else {
+			return getAvailableModes();
+		}
 	}
 
 	// FIXME: We should do this more elegantly
