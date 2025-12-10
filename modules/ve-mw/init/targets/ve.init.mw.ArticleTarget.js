@@ -59,6 +59,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.initialEditSummary = null;
 	this.initialCheckboxes = {};
 	this.preSaveProcess = new OO.ui.Process();
+	this.saveOptionsProcess = new OO.ui.Process();
 
 	this.viewUrl = new URL( mw.util.getUrl( this.getPageName() ), location.href );
 	this.isViewPage = (
@@ -849,7 +850,14 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 					// Reattempt the save after successfully refreshing the
 					// user, but only if it's a temporary account (T345975)
 					if ( error.code === 'assertanonfailed' && mw.util.isTemporaryUser( username ) ) {
-						this.startSave( this.getSaveOptions() );
+						this.saveOptionsProcess.execute().then(
+							() => {
+								this.startSave( this.getSaveOptions() );
+							},
+							() => {
+								this.showSaveError( this.extractErrorMessages( data ) );
+							}
+						);
 					} else {
 						this.saveErrorNewUser( username );
 					}
@@ -1425,23 +1433,36 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 		return;
 	}
 
-	const saveOptions = this.getSaveOptions();
+	this.saveDeferred = saveDeferred;
 
-	if (
-		+mw.user.options.get( 'forceeditsummary' ) &&
-		( saveOptions.summary === '' || saveOptions.summary === this.initialEditSummary ) &&
-		!this.saveDialog.messages.missingsummary
-	) {
-		this.saveDialog.showMessage(
-			'missingsummary',
-			new OO.ui.HtmlSnippet( ve.init.platform.getParsedMessage( 'missingsummary' ) )
-		);
-		this.saveDialog.popPending();
-	} else {
-		this.emit( 'saveInitiated' );
-		this.startSave( saveOptions );
-		this.saveDeferred = saveDeferred;
-	}
+	this.saveOptionsProcess.execute().then(
+		() => {
+			const saveOptions = this.getSaveOptions();
+
+			if (
+				+mw.user.options.get( 'forceeditsummary' ) &&
+				( saveOptions.summary === '' || saveOptions.summary === this.initialEditSummary ) &&
+				!this.saveDialog.messages.missingsummary
+			) {
+				this.saveDialog.showMessage(
+					'missingsummary',
+					new OO.ui.HtmlSnippet( ve.init.platform.getParsedMessage( 'missingsummary' ) )
+				);
+				this.saveDialog.popPending();
+				this.saveDeferred.reject();
+			} else {
+				this.emit( 'saveInitiated' );
+				this.startSave( saveOptions );
+			}
+		},
+		() => {
+			// Indicate that the save has stopped. The code that rejected the
+			// execution of the Process should have added an error to the save
+			// dialog
+			this.saveDialog.popPending();
+			this.saveDeferred.reject();
+		}
+	);
 };
 
 /**
@@ -1506,6 +1527,9 @@ ve.init.mw.ArticleTarget.prototype.submitWithSaveFields = function ( fields, wik
 /**
  * Get edit API options from the save dialog form.
  *
+ * If calling this method to get it's return value, the caller should execute
+ * {@link this.getSaveOptionsProcess} first.
+ *
  * @return {Object} Save options for submission to the MediaWiki API
  */
 ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
@@ -1529,6 +1553,25 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptions = function () {
 	options.watchlist = 'watchlist' in options ? 'watch' : 'unwatch';
 
 	return options;
+};
+
+/**
+ * Get the save options process, which is executed just prior to calling
+ * {@link this.getSaveOptions}.
+ *
+ * Steps in the process should modify the {@link this.saveFields} dictionary
+ * if they want to add something to the edit API options.
+ *
+ * Steps can stop fetching of the options (and by extension the edit
+ * submission) by return a rejected promise or false. For example,
+ * the ConfirmEdit extension hCaptcha integration returns a rejected
+ * promise if hCaptcha execution fails (as successful hCaptcha execution
+ * is required to submit the edit).
+ *
+ * @return {OO.ui.Process}
+ */
+ve.init.mw.ArticleTarget.prototype.getSaveOptionsProcess = function () {
+	return this.saveOptionsProcess;
 };
 
 /**
