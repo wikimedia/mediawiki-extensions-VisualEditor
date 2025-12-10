@@ -744,6 +744,7 @@ ve.init.mw.ArticleTarget.prototype.saveComplete = function ( data ) {
 				} else {
 					action = 'saved';
 				}
+				mw.config.set( 'wgPostEdit', action );
 				require( 'mediawiki.action.view.postEdit' ).fireHookOnPageReload( action, data.tempusercreated );
 			}
 

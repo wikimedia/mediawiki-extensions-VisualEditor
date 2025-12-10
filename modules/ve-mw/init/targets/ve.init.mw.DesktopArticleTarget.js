@@ -862,6 +862,7 @@ ve.init.mw.DesktopArticleTarget.prototype.saveComplete = function ( data ) {
 				wgRevisionId: data.newrevid
 			} );
 
+			mw.config.set( 'wgPostEdit', 'saved' );
 			// Actually fire the postEdit hook, now that the save is complete
 			require( 'mediawiki.action.view.postEdit' ).fireHook( 'saved' );
 		}
