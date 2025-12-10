@@ -120,6 +120,34 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 				return false;
 			}
 		}
+		if ( config.hasTemplate || config.lacksTemplate ) {
+			// By class rather than by name because we want the subclasses as well.
+			const templates = documentModel.getOrInsertCachedData( () => {
+				const dmTemplates = new Set();
+				documentModel.getNodesByType( ve.dm.MWTransclusionNode, false ).forEach( ( node ) => {
+					node.getPartsList().forEach( ( part ) => {
+						if ( part.templatePage ) {
+							// part.template varies depending on how it was specified, so normalize via mw.Title
+							const title = mw.Title.newFromText( part.templatePage );
+							if ( title ) {
+								dmTemplates.add( title.getMainText() );
+							}
+						}
+					} );
+				} );
+				return dmTemplates;
+			}, 'editcheck-templates' );
+			if ( config.hasTemplate && !config.hasTemplate.some(
+				( template ) => templates.has( template )
+			) ) {
+				return false;
+			}
+			if ( config.lacksTemplate && config.lacksTemplate.some(
+				( template ) => templates.has( template )
+			) ) {
+				return false;
+			}
+		}
 	}
 	return true;
 };
