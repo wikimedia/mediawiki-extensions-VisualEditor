@@ -1147,7 +1147,6 @@ class Hooks implements
 			'VisualEditorShowBetaWelcome',
 			'VisualEditorAllowExternalLinkPaste',
 			'VisualEditorEnableHelpCompletion',
-			'VisualEditorEnableTocWidget',
 			'VisualEditorEnableWikitext',
 			'VisualEditorRebaserURL',
 			'VisualEditorFeedbackAPIURL',

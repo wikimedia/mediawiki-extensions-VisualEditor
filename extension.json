@@ -55,9 +55,6 @@
 			"description": "BetaFeatures integration has been removed. This option allows using the old beta feature preference values ('visualeditor-enable') on wikis where it was previously enabled, until it is migrated (T344762).",
 			"value": false
 		},
-		"VisualEditorEnableTocWidget": {
-			"value": false
-		},
 		"VisualEditorEnableHelpCompletion": {
 			"value": true
 		},
@@ -1246,7 +1243,6 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWEditSummaryWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWLazyMultilineTextInputWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWTargetWidget.js",
-				"modules/ve-mw/ui/widgets/ve.ui.MWTocWidget.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWExtensionPreviewDialog.js",
 				"modules/ve-mw/ui/dialogs/ve.ui.MWCommandHelpDialog.js",
@@ -1596,7 +1592,6 @@
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryItemWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryPopupWidget.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWCategoryWidget.less",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWTocWidget.less",
 				"modules/ve-mw/ui/styles/dialogs/ve.ui.MWMetaDialog.less"
 			],
 			"dependencies": [

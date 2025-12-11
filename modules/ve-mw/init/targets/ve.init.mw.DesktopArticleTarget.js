@@ -718,15 +718,7 @@ ve.init.mw.DesktopArticleTarget.prototype.surfaceReady = function () {
 
 	this.activating = false;
 
-	// TODO: mwTocWidget should probably live in a ve.ui.MWSurface subclass
-	if ( mw.config.get( 'wgVisualEditorConfig' ).enableTocWidget ) {
-		surface.mwTocWidget = new ve.ui.MWTocWidget( this.getSurface() );
-		surface.once( 'destroy', () => {
-			surface.mwTocWidget.$element.remove();
-		} );
-	}
-
-	const metaList = this.getSurface().getModel().getDocument().getMetaList();
+	const metaList = surface.getModel().getDocument().getMetaList();
 
 	metaList.connect( this, {
 		insert: 'onMetaItemInserted',
