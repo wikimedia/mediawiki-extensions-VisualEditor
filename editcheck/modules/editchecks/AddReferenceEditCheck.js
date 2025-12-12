@@ -13,7 +13,8 @@ mw.editcheck.AddReferenceEditCheck.static.description = OO.ui.deferMsg( 'editche
 
 mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	minimumCharacters: 50,
-	beforePunctuation: false
+	beforePunctuation: false,
+	ignoreDisambiguationPages: true
 } );
 
 mw.editcheck.AddReferenceEditCheck.static.onlyCoveredNodes = true;

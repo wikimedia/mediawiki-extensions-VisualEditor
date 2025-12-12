@@ -180,6 +180,11 @@ class Hooks implements
 			$veConfig->get( 'EditSubmitButtonLabelPublish' )
 		);
 
+		// TODO: Move to EditCheck
+		$isDisambiguation = $output->getTitle()->exists() &&
+			$services->getPageProps()->getProperties( $output->getTitle(), 'disambiguation' ) !== [];
+		$output->addJsConfigVars( 'wgVisualEditorPageIsDisambiguation', $isDisambiguation );
+
 		// Don't index VE edit pages (T319124)
 		if ( $output->getRequest()->getVal( 'veaction' ) ) {
 			$output->setRobotPolicy( 'noindex,nofollow' );

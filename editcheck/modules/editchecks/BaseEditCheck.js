@@ -45,7 +45,8 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	maximumEditcount: 100,
 	minimumEditcount: 0,
 	ignoreSections: [],
-	ignoreLeadSection: false
+	ignoreLeadSection: false,
+	ignoreDisambiguationPages: false
 };
 
 mw.editcheck.BaseEditCheck.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
@@ -211,11 +212,15 @@ mw.editcheck.BaseEditCheck.prototype.takesFocus = function () {
  * @return {boolean} Whether the check should be shown
  */
 mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel ) {
-	// all checks are only in the main namespace for now
+	// All checks are only in the main namespace for now
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
 	}
-	// some checks are configured to only be for logged in / out users
+	// Disambiguation page check
+	if ( this.config.ignoreDisambiguationPages && mw.config.get( 'wgVisualEditorPageIsDisambiguation' ) ) {
+		return false;
+	}
+	// Some checks are configured to only be for logged in / out users
 	if ( mw.editcheck.forceEnable ) {
 		return true;
 	}
@@ -302,6 +307,8 @@ mw.editcheck.BaseEditCheck.prototype.getAddedRanges = function ( documentModel, 
 
 /**
  * Get content ranges which have been modified
+ *
+ * In suggestions mode, this will return all content ranges.
  *
  * @param {ve.dm.Document} documentModel
  * @param {boolean} coveredNodesOnly Only include ranges which cover the whole of their node
