@@ -11,8 +11,6 @@ if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 	// if edit check isn't forcibly disabled, override from this global
 	ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 }
-const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
-const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
 
 mw.editcheck = {
 	config: require( './config.json' ),
@@ -26,6 +24,10 @@ if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
 	mw.editcheck.experimental = mw.editcheck.experimental || ecenableFlags.includes( 'experimental' );
 	mw.editcheck.suggestions = mw.editcheck.suggestions || ecenableFlags.includes( 'suggestions' );
 }
+
+const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
+const abGroup = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTestGroup;
+const enableAbCheck = abGroup === 'test' || mw.editcheck.forceEnable;
 
 // Checks which are loaded for logging but shouldn't show by default yet
 const nonDefaultChecks = new Set();
@@ -52,10 +54,11 @@ if ( mw.editcheck.experimental ) {
 	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
 	nonDefaultChecks.clear();
 }
-if ( abGroup === 'test' ) {
+
+if ( enableAbCheck ) {
 	nonDefaultChecks.delete( abCheck );
 } else if ( abGroup === 'control' ) {
-	// This means that we can make any default check a/b testable
+	// This allows us to make default checks a/b testable
 	nonDefaultChecks.add( abCheck );
 }
 
@@ -65,7 +68,7 @@ for ( const check of nonDefaultChecks ) {
 
 if ( abCheck === 'paste' ) {
 	// In the a/b test, force-enable/disable the check
-	mw.editcheck.config.paste = ve.extendObject( mw.editcheck.config.paste || {}, { enabled: abGroup === 'test' } );
+	mw.editcheck.config.paste = ve.extendObject( mw.editcheck.config.paste || {}, { enabled: enableAbCheck } );
 }
 
 const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];
@@ -183,7 +186,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		target.editcheckController = controller;
 
 		// Temporary logging for T394952
-		if ( abCheck === 'tone' && abGroup === 'control' ) {
+		if ( abCheck === 'tone' && !enableAbCheck ) {
 			const checkForTone = function ( listener ) {
 				mw.editcheck.hasFailingToneCheck( controller.surface.getModel() ).then( ( result ) => {
 					if ( result ) {
