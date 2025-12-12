@@ -2461,11 +2461,12 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, d
 	this.reloadSurface( 'visual', dataPromise ).then( () => {
 		// oldSectionRange was based on the old attached root, which has no been
 		// unwrapped, so adjust offsets accordingly.
-		const offset = this.getSurface().getView().getRelativeSelectableContentOffset(
-			direction > 0 ? oldSectionRange.end - 2 : oldSectionRange.start - 1,
-			direction
-		);
-		this.getSurface().getModel().setLinearSelection( new ve.Range( offset ) );
+		const fixedOffset = direction > 0 ? oldSectionRange.end - 2 : oldSectionRange.start - 1;
+		// Try to move the selection in the direction of the expand
+		const offset = this.getSurface().getView().getRelativeSelectableContentOffset( fixedOffset, direction );
+
+		this.getSurface().getModel().setLinearSelection( new ve.Range( offset !== -1 ? offset : fixedOffset ) );
+
 		if ( direction ) {
 			const scrollTop = this.$scrollContainer.scrollTop();
 			// Smooth scroll up or down by a few lines (T411669)
