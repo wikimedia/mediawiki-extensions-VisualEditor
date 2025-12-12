@@ -432,6 +432,7 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 	$( 'html' )
 		// Remove ve-activating when loading for the first time,
 		// and when switching remove previous mode's class.
+		// All classes below must be removed in teardown
 		.removeClass( 've-activating ve-active-visual ve-active-source' )
 		.addClass( 've-active ve-active-' + this.getSurface().getMode() );
 
@@ -589,7 +590,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardown = function ( trackMechanism )
 	this.deactivatingDeferred = ve.createDeferred();
 	this.activating = false;
 	this.activatingDeferred.reject();
-	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active' );
+	$( 'html' ).addClass( 've-deactivating' ).removeClass( 've-activated ve-active ve-active-visual ve-active-source' );
 
 	this.emit( 'deactivate' );
 
