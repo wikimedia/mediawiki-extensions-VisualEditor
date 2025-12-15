@@ -295,6 +295,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 
 		// Reset currentOffset so that reusing the dialog multiple times in a
 		// session won't produce unexpected behavior. (T404661)
+		this.acting = false;
 		this.currentOffset = null;
 
 		this.closeButton.toggle( OO.ui.isMobile() && !this.inBeforeSave );
