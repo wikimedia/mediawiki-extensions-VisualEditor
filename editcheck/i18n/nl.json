@@ -4,7 +4,8 @@
 			"ABPMAB",
 			"Jeroen N",
 			"Mainframe98",
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"editcheck-dialog-action-no": "Nee",
@@ -16,7 +17,7 @@
 	"editcheck-dialog-action-submit": "Indienen",
 	"editcheck-dialog-addref-description": "Help lezers te begrijpen waar deze informatie vandaan komt door een referentie toe te voegen.",
 	"editcheck-dialog-addref-reject-question": "Waarom voegt u geen referentie toe?",
-	"editcheck-dialog-addref-reject-description": "Andere redacteuren willen graag weten waarom u het verzoek een referentie op te geven afwijst.",
+	"editcheck-dialog-addref-reject-description": "Andere redacteuren willen graag weten waarom u geen referentie opgeeft.",
 	"editcheck-dialog-addref-reject-irrelevant": "Ik denk niet dat referenties relevant zijn voor de wijziging die ik doorvoer",
 	"editcheck-dialog-addref-reject-common-knowledge": "De informatie die ik toevoeg, is algemeen bekend",
 	"editcheck-dialog-addref-reject-uncertain": "Ik weet niet zeker welke referentie ik moet toevoegen",
