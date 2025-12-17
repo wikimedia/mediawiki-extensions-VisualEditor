@@ -4,7 +4,8 @@
 			"Daud I.F. Argana",
 			"Gombang",
 			"Rachmat04",
-			"William Surya Permana"
+			"William Surya Permana",
+			"Penyuwangi"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Tidak ditemukan serialisasi tembolok dengan kunci tersebut",
@@ -29,8 +30,8 @@
 	"apihelp-visualeditor-summary": "Mengembalikan HTML5 untuk halaman dari layanan Parsoid.",
 	"apihelp-visualeditoredit-param-basetimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat revisi ini dibuat. Digunakan untuk mendeteksi konflik penyuntingan.",
 	"apihelp-visualeditoredit-param-cachekey": "Gunakan hasil dari permintaan serializeforcache dengan kunci ini sebelumnya. Menimpa $1html.",
-	"apihelp-visualeditoredit-param-captchaid": "ID Captcha (ketika menyimpan dengan respons captcha).",
-	"apihelp-visualeditoredit-param-captchaword": "Jawaban captcha (ketika menyimpan dengan respons captcha).",
+	"apihelp-visualeditoredit-param-captchaid": "ID Captcha (ketika menyimpan dengan tanggapan captcha).",
+	"apihelp-visualeditoredit-param-captchaword": "Jawaban captcha (ketika menyimpan dengan tanggapan captcha).",
 	"apihelp-visualeditoredit-param-plugins": "Plugin yang terkait dengan permintaan API.",
 	"apihelp-visualeditoredit-param-data-{plugin}": "Sembarang data yang dikirim oleh plugin dengan permintaan API.",
 	"apihelp-visualeditoredit-param-etag": "ETag untuk dikirim.",
