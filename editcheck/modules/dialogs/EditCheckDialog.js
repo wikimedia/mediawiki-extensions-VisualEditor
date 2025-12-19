@@ -63,6 +63,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	} );
 
 	this.currentOffset = null;
+	this.currentAction = null;
 	this.currentActions = null;
 
 	this.footerLabel = new OO.ui.LabelWidget();
@@ -139,29 +140,33 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
  * @param {boolean} lastActionRejected Last action was rejected/dismissed
  */
 ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
-	let currentAction;
-	if ( this.currentActions && this.currentOffset !== null && actions.includes( this.currentActions[ this.currentOffset ] ) ) {
-		currentAction = this.currentActions[ this.currentOffset ];
-	}
-	this.currentActions = actions;
 	if ( actions.length === 0 ) {
 		this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
 		return;
 	}
+	this.currentActions = actions;
 
 	this.refresh();
 
-	if ( currentAction ) {
-		// This just adjusts so the previously selected check remains selected:
-		this.setCurrentOffset( actions.indexOf( currentAction ), false, true );
-	} else if ( newActions.length > 0 ) {
-		this.setCurrentOffset( actions.indexOf( newActions[ 0 ] ), false, false );
-	} else if ( this.constructor.static.alwaysFocusAction ) {
-		// This dialog always wants to have an action focused, so slip the focus onto
-		// a nearby action if the current one was removed.
-		const newOffset = Math.min( this.currentOffset, actions.length - 1 );
-		this.setCurrentOffset( newOffset, true, false );
+	let currentAction = this.currentAction;
+	let fromUserAction = false;
+	if ( currentAction && !actions.includes( this.currentAction ) ) {
+		// The current action has been removed
+		if ( this.constructor.static.alwaysFocusAction ) {
+			// This dialog always wants to have an action focused, so slip the focus onto
+			// a nearby action.
+			const newOffset = Math.min( this.currentOffset, actions.length - 1 );
+			currentAction = actions[ newOffset ];
+			fromUserAction = true;
+		} else {
+			currentAction = null;
+		}
 	}
+	if ( !this.currentAction && newActions.length > 0 ) {
+		// There was no focused action, and new actions have arrived
+		currentAction = newActions[ 0 ];
+	}
+	this.setCurrentAction( currentAction, fromUserAction, currentAction === this.currentAction );
 };
 
 /**
@@ -181,7 +186,7 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 	this.$actions.empty();
 
 	this.currentActions.forEach( ( action, index ) => {
-		const widget = action.render( index !== this.currentOffset, this.singleAction, this.surface );
+		const widget = action.render( action !== this.currentAction, this.singleAction, this.surface );
 		widget.on( 'togglecollapse', this.onToggleCollapse, [ action, index ], this );
 		action.off( 'act' ).on( 'act', this.onAct, [ action, widget ], this );
 
@@ -193,32 +198,32 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 };
 
 /**
- * Set the offset of the current check, within the list of all checks.
+ * Set currently active check
  *
- * @param {number|null} offset New offset
+ * @param {mw.editcheck.EditCheckAction|null} action New action
  * @param {boolean} fromUserAction The change was triggered by a user action
  * @param {boolean} [internal] Change was triggered internally
  */
-ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction, internal ) {
+ve.ui.EditCheckDialog.prototype.setCurrentAction = function ( action, fromUserAction, internal ) {
 	// TODO: work out how to tell the window to recalculate height here
 
-	if ( offset === null || offset === -1 ) {
-		/* That's valid, carry on */
+	let offset = this.currentActions.indexOf( action );
+	if ( !this.currentActions || !this.currentActions.includes( action ) ) {
+		action = null;
 		offset = null;
-	} else if ( !Number.isSafeInteger( offset ) || ( offset < 0 || offset > ( this.currentActions.length - 1 ) ) ) {
-		throw new Error( `Bad offset ${ offset }, expected an integer between 0 and ${ this.currentActions.length - 1 }` );
 	}
 
+	this.currentAction = action;
 	this.currentOffset = offset;
 
-	this.currentActions.forEach( ( action, i ) => {
-		action.widget.toggleCollapse( i !== this.currentOffset );
+	this.currentActions.forEach( ( cAction, i ) => {
+		cAction.widget.toggleCollapse( i !== offset );
 	} );
 
-	if ( this.currentOffset !== null ) {
+	if ( offset !== null ) {
 		this.footerLabel.setLabel(
 			ve.msg( 'visualeditor-find-and-replace-results',
-				ve.init.platform.formatNumber( this.currentOffset + 1 ),
+				ve.init.platform.formatNumber( offset + 1 ),
 				ve.init.platform.formatNumber( this.currentActions.length )
 			)
 		);
@@ -236,7 +241,7 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 
 	if ( !internal ) {
 		this.controller.focusAction(
-			this.currentActions[ this.currentOffset ],
+			action,
 			// Scroll selection into view if user interacted with dialog
 			fromUserAction,
 			// Scroll to top of page in desktop fixed dialog (pre-save)
@@ -246,10 +251,27 @@ ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAc
 };
 
 /**
+ * Set the offset of the current check, within the list of all checks.
+ *
+ * @param {number|null} offset New offset
+ * @param {boolean} fromUserAction The change was triggered by a user action
+ * @param {boolean} [internal] Change was triggered internally
+ */
+ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction, internal ) {
+	if ( offset === null || offset === -1 ) {
+		/* That's valid, carry on */
+		offset = null;
+	} else if ( !Number.isSafeInteger( offset ) || ( offset < 0 || offset > ( this.currentActions.length - 1 ) ) ) {
+		throw new Error( `Bad offset ${ offset }, expected an integer between 0 and ${ this.currentActions.length - 1 }` );
+	}
+	this.setCurrentAction( this.currentActions[ offset ] || null, fromUserAction, internal );
+};
+
+/**
  * Update the disabled state of the navigation buttons
  */
 ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
-	const currentAction = this.currentActions[ this.currentOffset ];
+	const currentAction = this.currentAction;
 	if ( currentAction ) {
 		currentAction.widget.setDisabled( this.acting );
 	}
@@ -272,7 +294,7 @@ ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
  * @param {boolean} scrollTo Scroll the action's selection into view
  */
 ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
-	this.setCurrentOffset( this.currentActions.indexOf( action ), scrollTo, true );
+	this.setCurrentAction( action, scrollTo, true );
 };
 
 /**
@@ -297,6 +319,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		// session won't produce unexpected behavior. (T404661)
 		this.acting = false;
 		this.currentOffset = null;
+		this.currentAction = null;
 
 		this.closeButton.toggle( OO.ui.isMobile() && !this.inBeforeSave );
 		this.collapseExpandButton.toggle( OO.ui.isMobile() && this.inBeforeSave );
@@ -385,12 +408,12 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
 	if ( action.widget.collapsed ) {
 		// Expand
-		this.setCurrentOffset( this.currentActions.indexOf( action ), true );
+		this.setCurrentAction( action, true );
 		if ( !OO.ui.isMobile() ) {
 			action.select( this.surface );
 		}
 	} else {
-		this.setCurrentOffset( null );
+		this.setCurrentAction( null );
 	}
 };
 
