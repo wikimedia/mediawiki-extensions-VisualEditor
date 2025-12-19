@@ -827,11 +827,12 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
  * @return {jQuery.Promise}
  */
 Controller.prototype.closeDialog = function ( action ) {
-	if ( !this.focusedAction ) {
-		return ve.createDeferred().resolve().promise();
+	const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
+	if ( currentWindow && currentWindow.constructor.static.name === 'fixedEditCheckDialog' ) {
+		// .always is not chainable
+		return currentWindow.close( action ? { action } : undefined ).closed.then( () => {}, () => {} );
 	}
-	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-	return windowAction.close( 'fixedEditCheckDialog', action ? { action } : undefined ).closed.then( () => {}, () => {} );
+	return ve.createDeferred().resolve().promise();
 };
 
 /**
@@ -842,7 +843,7 @@ Controller.prototype.closeDialog = function ( action ) {
  */
 Controller.prototype.closeSidebars = function ( action ) {
 	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
-	if ( currentWindow ) {
+	if ( currentWindow && currentWindow.constructor.static.name === 'sidebarEditCheckDialog' ) {
 		// .always is not chainable
 		return currentWindow.close( action ? { action } : undefined ).closed.then( () => {}, () => {} );
 	}
