@@ -5,7 +5,8 @@
 			"Gombang",
 			"Rachmat04",
 			"William Surya Permana",
-			"Penyuwangi"
+			"Penyuwangi",
+			"Bennylin"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Tidak ditemukan serialisasi tembolok dengan kunci tersebut",
@@ -46,6 +47,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat halaman ini dimuat. Digunakan untuk mendeteksi konflik penyuntingan.",
 	"apihelp-visualeditoredit-param-summary": "Ringkasan suntingan",
 	"apihelp-visualeditoredit-param-tags": "Tag perubahan untuk diterapkan pada suntingan.",
-	"apihelp-visualeditoredit-param-wikitext": "Teks wiki dimana tindakan akan dilakukan.",
+	"apihelp-visualeditoredit-param-wikitext": "Teks wiki untuk dilakukan tindakan.",
 	"apihelp-visualeditoredit-summary": "Simpan halaman HTML5 ke MediaWiki (dikonversi menjadi teks wiki melalui layanan Parsoid)."
 }

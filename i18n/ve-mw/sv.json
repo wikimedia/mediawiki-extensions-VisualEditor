@@ -27,7 +27,8 @@
 			"Tobulos1",
 			"Umeaboy",
 			"Warrakkk",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Stefan2255"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -369,7 +370,7 @@
 	"visualeditor-special-characters-group-other": "Används ofta",
 	"visualeditor-templatesused-tool": "Mallar som används",
 	"visualeditor-title-error": "Ogiltig titel.",
-	"visualeditor-toload": "Editorn kommer nu laddas. Prova att [$1 ladda om sidan] om du fortfarande ser det här meddelandet efter några sekunder.",
+	"visualeditor-toload": "Redigeraren laddas nu. Om du fortfarande ser det här meddelandet efter några sekunder, vänligen [$1 ladda om sidan].",
 	"visualeditor-tooltip-non-breaking-space": "Hårt mellanslag",
 	"visualeditor-version-label": "Version",
 	"visualeditor-wikitext-progress": "Konverterar wikitext",
