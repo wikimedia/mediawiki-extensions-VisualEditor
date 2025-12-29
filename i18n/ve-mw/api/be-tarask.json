@@ -10,7 +10,7 @@
 	"apihelp-visualeditor-param-cachekey": "Для serialize або diff выкарыстоўвае вынік папярэдняга запыту serializeforcache з гэтым ключом. Перазапісвае $1html.",
 	"apihelp-visualeditor-param-etag": "ETag на адсыланьне.",
 	"apihelp-visualeditor-param-html": "HTML дзеля адпраўкі ў Parsoid і канвэртаваньня ў вікітэкст.",
-	"apihelp-visualeditor-param-oldid": "Нумар вэрсіі для выкарыстаньня (дапомна — апошняя вэрсія).",
+	"apihelp-visualeditor-param-oldid": "Нумар вэрсіі для выкарыстаньня (перадвызначана — апошняя вэрсія).",
 	"apihelp-visualeditor-param-paction": "Дзеяньне, якое неабходна выканаць.",
 	"apihelp-visualeditor-param-page": "Старонка для выкананьня дзеяньня.",
 	"apihelp-visualeditor-param-pst": "Папярэдне захавайце ператварэньне вікітэксту перад адпраўкай яго ў Parsoid (paction=parsefragment).",
