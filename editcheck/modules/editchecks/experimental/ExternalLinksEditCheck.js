@@ -31,6 +31,40 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	}
 ];
 
+let interwikiUrlPatternsPromise = null;
+
+/**
+ * Get a promise for interwiki URL patterns.
+ *
+ * TODO: De-duplicate with similar code in mw.TitleWidget.
+ *
+ * @return {Promise<RegExp[]>} Promise resolving to array of regexes for interwiki URL patterns
+ */
+mw.editcheck.ExternalLinksEditCheck.prototype.getInterwikiUrlPatternsPromise = function () {
+	const api = this.controller.target.getContentApi();
+
+	if ( !interwikiUrlPatternsPromise ) {
+		// Cache client-side for a day since this info is mostly static
+		const oneDay = 60 * 60 * 24;
+		interwikiUrlPatternsPromise = api.get( {
+			action: 'query',
+			meta: 'siteinfo',
+			siprop: 'interwikimap',
+			maxage: oneDay,
+			smaxage: oneDay,
+			// Workaround T97096 by setting uselang=content
+			uselang: 'content'
+		} ).then( ( data ) => data.query.interwikimap.map(
+			( iw ) => mw.libs.ve.getRegexFromUrlPattern( iw.url ) )
+		);
+		// Do not cache errors
+		interwikiUrlPatternsPromise.catch( () => {
+			interwikiUrlPatternsPromise = null;
+		} );
+	}
+	return interwikiUrlPatternsPromise;
+};
+
 mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
 	return surfaceModel.documentModel.documentNode.getAnnotationRanges()
@@ -38,10 +72,17 @@ mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surf
 			!this.isDismissedRange( annRange.range ) &&
 			this.isRangeInValidSection( annRange.range, surfaceModel.documentModel ) &&
 			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) )
-		).map( ( annRange ) => new mw.editcheck.EditCheckAction( {
-			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWExternalLinkAnnotation,
-			check: this
+		).map( ( annRange ) => this.getInterwikiUrlPatternsPromise().then( ( interwikiUrlPatterns ) => {
+			const href = annRange.annotation.getAttribute( 'href' );
+			if ( interwikiUrlPatterns.some( ( regex ) => regex.test( href ) ) ) {
+				// Ignore interwiki links
+				return null;
+			}
+			return new mw.editcheck.EditCheckAction( {
+				fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
+				focusAnnotation: ( annView ) => annView instanceof ve.ce.MWExternalLinkAnnotation,
+				check: this
+			} );
 		} ) );
 };
 
