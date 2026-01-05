@@ -52,7 +52,7 @@
 	"apihelp-visualeditoredit-param-sectiontitle": "Judul untuk bagian baru.",
 	"apihelp-visualeditoredit-param-starttimestamp": "Ketika menyimpan, atur nilai ini menjadi waktu saat halaman ini dimuat. Digunakan untuk mendeteksi konflik penyuntingan.",
 	"apihelp-visualeditoredit-param-summary": "Ringkasan suntingan",
-	"apihelp-visualeditoredit-param-tags": "Tag perubahan untuk diterapkan pada suntingan.",
+	"apihelp-visualeditoredit-param-tags": "Tanda perubahan yang ingin diterapkan ke revisi.",
 	"apihelp-visualeditoredit-param-wikitext": "Teks wiki untuk dilakukan tindakan.",
 	"apihelp-visualeditoredit-summary": "Simpan halaman HTML5 ke MediaWiki (dikonversi menjadi teks wiki melalui layanan Parsoid)."
 }
