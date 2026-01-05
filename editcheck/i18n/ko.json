@@ -19,7 +19,7 @@
 	"editcheck-dialog-addref-reject-other": "그 외",
 	"editcheck-dialog-addref-success-notify": "인용 추가해주셔서 감사합니다!",
 	"editcheck-dialog-addref-title": "인용 추가",
-	"editcheck-copyvio-keep-other": "기타",
+	"editcheck-copyvio-keep-other": "위의 어느 것도 해당되지 않습니다",
 	"editcheck-tone-reject-other": "기타",
 	"editcheck-review-title": "변경사항 검토",
 	"tag-editcheck-reference-decline-common-knowledge": "편집 검사(출처)를 거부함 (상식)",
