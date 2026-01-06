@@ -414,3 +414,81 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 		);
 	} );
 } );
+
+QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) => {
+	const cases = [
+		{
+			categories: [ 'Foo' ],
+			inCategory: [ 'Foo' ],
+			notInCategory: [],
+			matches: true,
+			description: 'matches when page is in required category'
+		},
+		{
+			categories: [ 'Foo' ],
+			inCategory: [ 'foo' ],
+			notInCategory: [],
+			matches: true,
+			description: 'matches when inCategory is normalized'
+		},
+		{
+			categories: [ 'Foo' ],
+			inCategory: [],
+			notInCategory: [ 'Foo' ],
+			matches: false,
+			description: 'does not match when page is in a forbidden category'
+		},
+		{
+			categories: [ 'Bar' ],
+			inCategory: [ 'Foo' ],
+			notInCategory: [],
+			matches: false,
+			description: 'does not match when page is in none of the required categories'
+		},
+		{
+			categories: [ 'Bar' ],
+			inCategory: [],
+			notInCategory: [ 'Foo' ],
+			matches: true,
+			description: 'matches when page is not in any forbidden categories'
+		},
+		{
+			categories: [ 'Foo' ],
+			inCategory: [ 'Foo', 'Bar' ],
+			notInCategory: [],
+			matches: true,
+			description: 'matches when page is in any one of the required categories'
+		},
+		{
+			categories: [ 'Foo' ],
+			inCategory: [ 'Foo' ],
+			notInCategory: [ 'Baz' ],
+			matches: true,
+			description: 'matches when required category present and forbidden absent'
+		},
+		{
+			categories: [ 'Bar' ],
+			inCategory: [ 'Foo' ],
+			notInCategory: [ 'bar' ],
+			matches: false,
+			description: 'does not match when forbidden category present (with title normalization)'
+		}
+	];
+
+	const doc = new ve.dm.Document( [ { type: 'paragraph' }, { type: '/paragraph' } ] );
+	const originalCategories = mw.config.values.wgCategories;
+
+	cases.forEach( ( caseItem ) => {
+		mw.config.values.wgCategories = caseItem.categories;
+		assert.strictEqual(
+			mw.editcheck.BaseEditCheck.static.doesConfigMatch(
+				{ enabled: true, inCategory: caseItem.inCategory, notInCategory: caseItem.notInCategory },
+				doc
+			),
+			caseItem.matches,
+			caseItem.description
+		);
+	} );
+
+	mw.config.values.wgCategories = originalCategories;
+} );

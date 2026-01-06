@@ -103,25 +103,27 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 	}
 	if ( documentModel ) {
 		if ( config.inCategory || config.notInCategory ) {
-			const categories = documentModel.getOrInsertCachedData( () => (
-				documentModel.getMetaList().getItemsInGroup( 'mwCategory' )
-					.map( ( metaItem ) => {
-						const title = mw.Title.newFromText( metaItem.element.attributes.category );
-						return title ? title.getMainText().toLowerCase() : '';
-					} )
-			), 'editcheck-categories' );
+			// wgCategories is populated at load time, so won't reflect
+			// changes during the edit session but it does include
+			// categories added by templates.
+			const categories = mw.config.get( 'wgCategories' ) || [];
+
+			const normalizeTitle = ( title ) => {
+				const mwTitle = mw.Title.newFromText( title );
+				return mwTitle ? mwTitle.getMainText() : title;
+			};
+
+			const inCategory = ( config.inCategory || [] ).map( normalizeTitle );
+			const notInCategory = ( config.notInCategory || [] ).map( normalizeTitle );
+
 			// Is the page in any of the specified categories?
-			if ( config.inCategory && !categories.some(
-				( category ) => config.inCategory.some(
-					( inCat ) => category === inCat.toLowerCase()
-				)
+			if ( inCategory.length && !categories.some(
+				( category ) => inCategory.includes( category )
 			) ) {
 				return false;
 			}
-			if ( config.notInCategory && categories.some(
-				( category ) => config.notInCategory.some(
-					( inCat ) => category === inCat.toLowerCase()
-				)
+			if ( notInCategory.length && categories.some(
+				( category ) => notInCategory.includes( category )
 			) ) {
 				return false;
 			}
