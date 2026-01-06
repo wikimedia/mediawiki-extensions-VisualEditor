@@ -238,10 +238,9 @@ class ApiVisualEditor extends ApiBase {
 							'action' => 'query',
 							'revids' => $oldid,
 							'prop' => 'revisions',
-							'rvprop' => 'content|ids'
+							'rvprop' => 'content|ids',
+							'rvsection' => $section,
 						];
-
-						$apiParams['rvsection'] = $section;
 
 						$context = new DerivativeContext( $this->getContext() );
 						$context->setRequest(
