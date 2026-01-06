@@ -7,7 +7,20 @@
 	},
 	"editcheck-dialog-action-no": "Nej",
 	"editcheck-dialog-action-yes": "Ja",
+	"editcheck-dialog-addref-description": "Hjälp läsarna att förstå var informationen kommer ifrån genom att lägga till en hänvisning.",
+	"editcheck-dialog-addref-reject-question": "Varför lägger du inte till en hänvisning?",
+	"editcheck-dialog-addref-reject-irrelevant": "Jag tror inte att hänvisningarna är relevanta för den ändring jag gör",
 	"editcheck-dialog-addref-reject-common-knowledge": "Informationen jag lägger till är allmänt känd",
+	"editcheck-dialog-addref-reject-uncertain": "Jag är inte säker på vilken hänvisning jag ska lägga till",
 	"editcheck-dialog-addref-reject-other": "Övrigt",
-	"editcheck-dialog-title": "Innan publicering"
+	"editcheck-dialog-addref-success-notify": "Tack för att du lade till en hänvisning!",
+	"editcheck-dialog-title": "Innan publicering",
+	"tag-editcheck-reference-decline-common-knowledge": "Edit Check (referenser) avvisad (allmän kunskap)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck referensen avvisades som allmänt kunskap",
+	"tag-editcheck-reference-decline-irrelevant": "Edit Check (referenser) avvisad (irrelevant)",
+	"tag-editcheck-reference-decline-irrelevant-description": "EditCheck-referensen avvisades som irrelevant",
+	"tag-editcheck-reference-decline-other": "Edit Check (referenser) avvisad (annat)",
+	"tag-editcheck-reference-decline-other-description": "EditCheck referensen avvisades av en icke listad anledning",
+	"tag-editcheck-reference-decline-uncertain": "EditCheck (referenser) avvisad (osäker)",
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck referensen avvisades som osäker"
 }
