@@ -334,7 +334,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 
 		this.surface.context.hide();
 
-		this.showActions( actions, actions );
+		this.showActions( actions, data.newActions || [] );
 		if ( this.onPosition ) {
 			// This currently only applies to SidebarEditCheckDialog but needs to be
 			// called immediately so margin-top is set before the animation starts.

@@ -27,6 +27,7 @@ function Controller( target, config ) {
 	this.branchNode = null;
 	this.focusedAction = null;
 	this.suggestionsMode = config.suggestions;
+	this.inSetup = null;
 
 	this.taggedFragments = {};
 	this.taggedIds = {};
@@ -119,7 +120,10 @@ Controller.prototype.setup = function () {
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 
 		// Run on load (e.g. recovering from auto-save)
-		setTimeout( () => this.refresh(), 100 );
+		this.inSetup = true;
+		setTimeout( () => this.refresh().always( () => {
+			this.inSetup = null;
+		} ), 100 );
 
 		this.surface.on( 'destroy', () => {
 			this.off( 'actionsUpdated' );
@@ -132,6 +136,7 @@ Controller.prototype.setup = function () {
 			this.surface = null;
 			this.actionsByListener = {};
 			this.focusedAction = null;
+			this.inSetup = null;
 
 			this.taggedFragments = {};
 			this.taggedIds = {};
@@ -303,11 +308,19 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			// Update the actions for this listener
 			this.actionsByListener[ listener ] = actions;
 
-			const newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
+			let newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 
 			// If the actions list changed, update
 			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+				if ( this.inSetup ) {
+					// Any actions that are present during initial setup
+					// shouldn't be treated as being "new". They're either
+					// restored from a saved session, or are suggestions, and
+					// in either case we don't want them treated as if the
+					// user just caused them.
+					newActions = [];
+				}
 				// TODO: We need to consider a consistency check here as the document state may have changed since the
 				// action within the promise was created
 				// Notify listeners that actions have been updated
@@ -536,7 +549,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 		shownPromise = windowAction.open(
 			windowName,
-			{ inBeforeSave: this.inBeforeSave, actions, controller: this }
+			{ inBeforeSave: this.inBeforeSave, actions, newActions, controller: this }
 		).then( ( instance ) => {
 			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
 			instance.closed.then( () => {

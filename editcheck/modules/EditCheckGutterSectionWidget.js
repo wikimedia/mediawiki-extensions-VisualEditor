@@ -146,6 +146,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 			controller: this.controller,
 			inBeforeSave: false,
 			actions: this.actions,
+			newActions: [ action ],
 			footer: this.actions.length !== 1,
 			// just filter out any discarded actions from the allowed set
 			updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
