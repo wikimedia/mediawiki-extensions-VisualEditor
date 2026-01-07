@@ -1,0 +1,29 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/client/common",
+		"wikimedia/language/es2018",
+		"wikimedia/mediawiki",
+		"wikimedia/jquery",
+		"wikimedia/qunit",
+		"../../../modules/eslint-shared.json"
+	],
+	"globals": {
+		"sinon": "readonly"
+	},
+	"rules": {
+		"local/no-unsanitized-href": "off",
+		"compat/compat": [
+			"error",
+			"last 2 chrome versions, last 2 firefox versions"
+		],
+		"indent": "off",
+		"no-jquery/no-html": "off",
+		"no-jquery/no-parse-html-literal": "off",
+		"no-jquery/no-done-fail": "warn",
+		"object-shorthand": [ "error", "properties" ]
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018
+	}
+}

@@ -2351,7 +2351,8 @@
 			"lib/ve/src/ve.freeze.js",
 			"lib/ve/rebaser/src/dm/ve.dm.RebaseServer.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseClient.js",
-			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js"
+			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js",
+			"editcheck/modules/tests/BaseEditCheck.test.js"
 		],
 		"dependencies": [
 			"ext.visualEditor.core",
@@ -2367,6 +2368,7 @@
 			"ext.visualEditor.desktopArticleTarget.init",
 			"ext.visualEditor.desktopArticleTarget",
 			"ext.visualEditor.core.mobile",
+			"ext.visualEditor.editCheck",
 			"ext.visualEditor.rebase"
 		]
 	},

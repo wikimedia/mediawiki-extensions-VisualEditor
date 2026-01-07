@@ -465,6 +465,43 @@ mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentMo
 };
 
 /**
+ * Get the heading hierarchy at a given range
+ *
+ * @param {number} offset
+ * @param {ve.dm.Document} documentModel
+ * @return {ve.dm.MWHeadingNode[]} Heading nodes from nearest to furthest
+ */
+mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( offset, documentModel ) {
+	const headings = documentModel.getNodesByType( 'mwHeading', true );
+	if ( !headings.length ) {
+		return [];
+	}
+	let headingIndex = headings.findIndex( ( heading ) => heading.getRange().start > offset );
+
+	if ( headingIndex === -1 ) {
+		headingIndex = headings.length;
+	}
+	headingIndex--;
+
+	const headingHierarchy = [];
+	let minLevelSeen = Infinity;
+	while ( headingIndex >= 0 ) {
+		const nextHeading = headings[ headingIndex ];
+		const level = nextHeading.getAttribute( 'level' );
+		if ( level < minLevelSeen ) {
+			headingHierarchy.push( nextHeading );
+			minLevelSeen = level;
+			if ( minLevelSeen <= 1 ) {
+				// <h1> is the highest level, no need to search further
+				break;
+			}
+		}
+		headingIndex--;
+	}
+	return headingHierarchy;
+};
+
+/**
  * Check if a modified range is a section we don't ignore (config.ignoreSections)
  *
  * @param {ve.Range} range
@@ -477,27 +514,33 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 		// Nothing is forbidden, so everything is permitted
 		return true;
 	}
-	const isHeading = ( nodeType ) => nodeType === 'mwHeading';
-	// Note: we set a limit of 1 here because otherwise this will turn around
-	// to keep looking when it hits the document boundary:
-	const heading = documentModel.getNearestNodeMatching( isHeading, range.start, -1, 1 );
-	if ( !heading ) {
+	const headingHierarchy = this.getHeadingHierarchyFromOffset( range.start, documentModel );
+
+	if ( headingHierarchy.length === 0 ) {
 		// There's no preceding heading, so work out if we count as being in a
-		// lead section. It's only a lead section if there's more headings
+		// lead section. It's only a lead section if there are more headings
 		// later in the document, otherwise it's just a stub article.
 		return !(
 			this.config.ignoreLeadSection &&
-			!!documentModel.getNearestNodeMatching( isHeading, range.start, 1 )
+			documentModel.getNodesByType( 'mwHeading', true ).some(
+				( heading ) => heading.getRange().start > range.start
+			)
 		);
 	}
+
 	if ( ignoreSections.length === 0 ) {
-		// There's nothing left to deny
+		// We have checked ignoreLeadSection now, so if there
+		// are no other ignored sections we can stop checking.
 		return true;
 	}
+
 	const compare = new Intl.Collator( documentModel.getLang(), { sensitivity: 'accent' } ).compare;
-	const headingText = documentModel.data.getText( false, heading.getRange() );
-	// If the heading text matches any of ignoreSections, return false.
-	return !ignoreSections.some( ( section ) => compare( headingText, section ) === 0 );
+
+	// Check if any section in the hierarchy matches ignoreSections
+	return !headingHierarchy.some( ( heading ) => {
+		const headingText = documentModel.data.getText( false, heading.getRange() );
+		return ignoreSections.some( ( section ) => compare( headingText, section ) === 0 );
+	} );
 };
 
 /**
