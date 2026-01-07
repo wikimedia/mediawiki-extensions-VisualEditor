@@ -152,19 +152,25 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 	let fromUserAction = false;
 	if ( currentAction && !actions.includes( this.currentAction ) ) {
 		// The current action has been removed
+		currentAction = null;
 		if ( this.constructor.static.alwaysFocusAction ) {
-			// This dialog always wants to have an action focused, so slip the focus onto
-			// a nearby action.
-			const newOffset = Math.min( this.currentOffset, actions.length - 1 );
-			currentAction = actions[ newOffset ];
 			fromUserAction = true;
-		} else {
-			currentAction = null;
 		}
 	}
 	if ( !this.currentAction && newActions.length > 0 ) {
 		// There was no focused action, and new actions have arrived
 		currentAction = newActions[ 0 ];
+	}
+	if ( !currentAction && this.constructor.static.alwaysFocusAction ) {
+		// This dialog must always have an action focused
+		if ( this.currentOffset !== null ) {
+			// There was a focused action, so slip the focus onto an adjacent action
+			const newOffset = Math.min( this.currentOffset, actions.length - 1 );
+			currentAction = actions[ newOffset ];
+		} else {
+			// There wasn't a focused action, so focus the first available action
+			currentAction = actions[ 0 ];
+		}
 	}
 	this.setCurrentAction( currentAction, fromUserAction, currentAction === this.currentAction );
 };
