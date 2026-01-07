@@ -210,14 +210,20 @@ Controller.prototype.updatePositions = function () {
  * Update edit check list
  *
  * @fires Controller#actionsUpdated
+ * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of
+ *  actions. This promise will resolve *after* any actionsUpdated events are
+ *  fired.
  */
 Controller.prototype.refresh = function () {
+	const deferred = ve.createDeferred();
 	if ( this.target.deactivating || !this.target.active ) {
-		return;
+		return deferred.reject().promise();
 	}
 	if ( this.inBeforeSave ) {
 		// These shouldn't be recalculated
-		this.emit( 'actionsUpdated', 'onBeforeSave', this.getActions(), [], [], false );
+		const actions = this.getActions();
+		this.emit( 'actionsUpdated', 'onBeforeSave', actions, [], [], false );
+		return deferred.resolve( actions ).promise();
 	} else {
 		// Use a process so that updateForListener doesn't run twice in parallel,
 		// which causes problems as the active actions list can change.
@@ -228,7 +234,10 @@ Controller.prototype.refresh = function () {
 		midEditListeners.forEach(
 			( listener ) => process.next( () => this.updateForListener( listener, true ) )
 		);
-		process.execute();
+		process.execute().always( () => {
+			deferred.resolve( this.getActions() );
+		} );
+		return deferred.promise();
 	}
 };
 
