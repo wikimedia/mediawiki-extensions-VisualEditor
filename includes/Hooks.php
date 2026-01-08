@@ -486,8 +486,6 @@ class Hooks implements
 		$config = $services->getConfigFactory()
 			->makeConfig( 'visualeditor' );
 
-		self::onSkinTemplateNavigationSpecialPage( $skin, $links );
-
 		if (
 			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
 			$services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView()
@@ -588,7 +586,7 @@ class Hooks implements
 				// Set veaction=edit
 				$veParams['veaction'] = 'edit';
 				$veTabMessage = $tabMessages[$action];
-				$veTabText = $veTabMessage === null ? $data['text'] :
+				$veTabText = $veTabMessage === null ? ( $data['text'] ?? '' ) :
 					$skin->msg( $veTabMessage )->text();
 				if ( $isRemote ) {
 					// The following messages can be used here:
@@ -674,7 +672,6 @@ class Hooks implements
 					$editTab['icon'] = $skinHasEditIcons ? 'wikiText' : null;
 					// Inject the VE tab before or after the edit tab
 					if ( $config->get( 'VisualEditorTabPosition' ) === 'before' ) {
-						// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 						$editTab['class'] .= ' collapsible';
 						$newViews['ve-edit'] = $veTab;
 						$newViews['edit'] = $editTab;
@@ -703,32 +700,6 @@ class Hooks implements
 			}
 		}
 		$links['views'] = $newViews;
-	}
-
-	/**
-	 * @param SkinTemplate $skin The skin template on which the UI is built.
-	 * @param array &$links Navigation links.
-	 */
-	private static function onSkinTemplateNavigationSpecialPage( SkinTemplate $skin, array &$links ) {
-		$title = $skin->getTitle();
-		if ( !$title || !$title->isSpecialPage() ) {
-			return;
-		}
-		[ $special, $subPage ] = MediaWikiServices::getInstance()->getSpecialPageFactory()
-			->resolveAlias( $title->getDBkey() );
-		if ( $special !== 'CollabPad' ) {
-			return;
-		}
-		$links['namespaces']['special']['text'] = $skin->msg( 'collabpad' )->text();
-		$subPageTitle = Title::newFromText( $subPage );
-		if ( $subPageTitle ) {
-			$links['namespaces']['special']['href'] = SpecialPage::getTitleFor( $special )->getLocalURL();
-			$links['namespaces']['special']['class'] = '';
-
-			$links['namespaces']['pad']['text'] = $subPageTitle->getPrefixedText();
-			$links['namespaces']['pad']['href'] = '';
-			$links['namespaces']['pad']['class'] = 'selected';
-		}
 	}
 
 	/**

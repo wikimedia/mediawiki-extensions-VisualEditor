@@ -52,9 +52,33 @@ class SpecialCollabPad extends SpecialPage {
 	/**
 	 * @inheritDoc
 	 */
+	public function getShortDescription( string $path = '' ): string {
+		switch ( $path ) {
+			case 'CollabPad':
+				return $this->msg( 'collabpad' );
+			default:
+				return implode( '/', array_slice( explode( '/', $path ), 1 ) );
+		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getAssociatedNavigationLinks() {
+		$thisTitle = $this->getSkin()->getTitle()->getFullText();
+		$title = SpecialPage::getTitleFor( 'CollabPad' )->getFullText();
+		$links = [ $title ];
+		if ( $title !== $thisTitle ) {
+			$links[] = $thisTitle;
+		}
+		return $links;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
 	public function execute( $subPage ) {
 		$this->setHeaders();
-		$this->checkPermissions();
 
 		$output = $this->getOutput();
 
