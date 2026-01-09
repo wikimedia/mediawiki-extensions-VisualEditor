@@ -46,6 +46,7 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	minimumEditcount: 0,
 	ignoreSections: [],
 	ignoreLeadSection: false,
+	includeSections: true, // any non-array means to include all; array of names means to include only those
 	ignoreDisambiguationPages: false,
 	ignoreQuotedContent: false
 };
@@ -531,7 +532,13 @@ mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( 
 };
 
 /**
- * Check if a modified range is a section we don't ignore (config.ignoreSections)
+ * Check if a modified range is a section we allow
+ *
+ * This checks config.ignoreSections and config.includeSections, which are
+ * arrays containing strings that will be compared to the heading names. As a
+ * special-case, an empty string will be treated as referring to the lead
+ * section. Articles that don't contain any headings at all are "stubs" and
+ * won't be treated as having a lead section.
  *
  * @param {ve.Range} range
  * @param {ve.dm.Document} documentModel
@@ -541,8 +548,14 @@ mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( 
 mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel, config ) {
 	config = config || this.config;
 	const ignoreSections = config.ignoreSections || [];
-	if ( ignoreSections.length === 0 && !config.ignoreLeadSection ) {
-		// Nothing is forbidden, so everything is permitted
+	const includeSections = config.includeSections;
+	const shouldIncludeSections = Array.isArray( includeSections );
+	if ( config.ignoreLeadSection ) {
+		// backwards compatibility
+		ignoreSections.push( '' );
+	}
+	if ( ignoreSections.length === 0 && !shouldIncludeSections ) {
+		// No restrictions, so skip the rest
 		return true;
 	}
 	const headingHierarchy = this.getHeadingHierarchyFromOffset( range.start, documentModel );
@@ -551,27 +564,37 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 		// There's no preceding heading, so work out if we count as being in a
 		// lead section. It's only a lead section if there are more headings
 		// later in the document, otherwise it's just a stub article.
-		return !(
-			config.ignoreLeadSection &&
-			documentModel.getNodesByType( 'mwHeading', true ).some(
-				( heading ) => heading.getRange().start > range.start
-			)
-		);
-	}
-
-	if ( ignoreSections.length === 0 ) {
-		// We have checked ignoreLeadSection now, so if there
-		// are no other ignored sections we can stop checking.
-		return true;
+		if ( documentModel.getNodesByType( 'mwHeading', true ).some(
+			( heading ) => heading.getRange().start > range.start
+		) ) {
+			if ( shouldIncludeSections ) {
+				return includeSections.includes( '' );
+			}
+			return !ignoreSections.includes( '' );
+		}
+		// We're in a non-sectioned document, so ignoreSections can't apply.
+		// We can skip the checks below by just seeing whether there are any
+		// includeSections restrictions present at all. (Just like ignoring
+		// the lead wouldn't count, explicitly including the lead also wouldn't.)
+		return !shouldIncludeSections;
 	}
 
 	const compare = new Intl.Collator( documentModel.getLang(), { sensitivity: 'accent' } ).compare;
 
-	// Check if any section in the hierarchy matches ignoreSections
-	return !headingHierarchy.some( ( heading ) => {
-		const headingText = documentModel.data.getText( false, heading.getRange() );
-		return ignoreSections.some( ( section ) => compare( headingText, section ) === 0 );
-	} );
+	// Climb the heirarchy bottom-up and return the first time we find an
+	// ignored or excluded section
+	for ( let i = 0; i < headingHierarchy.length; i++ ) {
+		const headingText = documentModel.data.getText( false, headingHierarchy[ i ].getRange() );
+		if ( shouldIncludeSections && includeSections.some( ( section ) => compare( headingText, section ) === 0 ) ) {
+			return true;
+		}
+		if ( ignoreSections.length > 0 && ignoreSections.some( ( section ) => compare( headingText, section ) === 0 ) ) {
+			return false;
+		}
+	}
+
+	// Nothing matched, so return true only if we weren't restricting to specific sections
+	return !shouldIncludeSections;
 };
 
 mw.editcheck.BaseEditCheck.static.quoteGroupings = new Map( [

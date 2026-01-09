@@ -34,13 +34,86 @@ const sectionCases = [
 		expectedValid: false
 	},
 	{
-		name: 'Section allowed when no sections ignored',
+		name: 'Lead section ignored when ignoreSections contains an empty string and later heading exists',
+		config: { ignoreSections: [ '' ] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: false
+	},
+	{
+		name: 'Lead section ignored when includeSections is present',
+		config: { ignoreSections: [], includeSections: [] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: false
+	},
+	{
+		name: 'Lead section ignored when includeSections is provided',
+		config: { ignoreSections: [], includeSections: [ 'foo' ] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: false
+	},
+	{
+		name: 'Lead section allowed when includeSections contains an empty string',
+		config: { includeSections: [ '' ] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: true
+	},
+	{
+		name: 'includeSections set to true allows all sections',
+		config: { ignoreSections: [], includeSections: true },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 1,
+		expectedHierarchy: [ 'History' ],
+		expectedValid: true
+	},
+	{
+		name: 'includeSections set to false also allows all sections',
+		config: { ignoreSections: [], includeSections: true },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 1,
+		expectedHierarchy: [ 'History' ],
+		expectedValid: true
+	},
+	{
+		name: 'Section allowed when no sections ignored and includeSections not provided',
 		config: { ignoreSections: [], ignoreLeadSection: true },
 		headings: [ { level: 2, text: 'History' } ],
 		section: 1,
 		expectedHierarchy: [ 'History' ],
 		expectedValid: true
 	},
+	{
+		name: 'Section not allowed when no sections ignored and includeSections is empty',
+		config: { ignoreSections: [], ignoreLeadSection: true, includeSections: [] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 1,
+		expectedHierarchy: [ 'History' ],
+		expectedValid: false
+	},
+	{
+		name: 'Section allowed when no sections ignored and includeSections includes that section',
+		config: { ignoreSections: [], ignoreLeadSection: true, includeSections: [ 'History' ] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 1,
+		expectedHierarchy: [ 'History' ],
+		expectedValid: true
+	},
+	{
+		name: 'Section not allowed when no sections ignored and includeSections does not include that section',
+		config: { ignoreSections: [], ignoreLeadSection: true, includeSections: [ 'Unhistory' ] },
+		headings: [ { level: 2, text: 'History' } ],
+		section: 1,
+		expectedHierarchy: [ 'History' ],
+		expectedValid: false
+	},
+	// Stub articles (without any headings) get special treatment
 	{
 		name: 'Lead section allowed in stub (no headings) when ignoreLeadSection=true',
 		config: { ignoreSections: [], ignoreLeadSection: true },
@@ -49,6 +122,39 @@ const sectionCases = [
 		expectedHierarchy: [],
 		expectedValid: true
 	},
+	{
+		name: 'Lead section allowed in stub (no headings) when includeSections is false',
+		config: { ignoreSections: [], includeSections: false },
+		headings: [],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: true
+	},
+	{
+		name: 'Lead section not allowed in stub (no headings) when includeSections contains an empty string',
+		config: { ignoreSections: [], includeSections: [ '', 'foo' ] },
+		headings: [],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: false
+	},
+	{
+		name: 'Lead section not allowed in stub (no headings) when includeSections is empty',
+		config: { ignoreSections: [], includeSections: [] },
+		headings: [],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: false
+	},
+	{
+		name: 'Lead section not allowed in stub (no headings) when includeSections set',
+		config: { ignoreSections: [], includeSections: [ 'foo' ] },
+		headings: [],
+		section: 0,
+		expectedHierarchy: [],
+		expectedValid: false
+	},
+	// Interactions with the heading hierarchy
 	{
 		name: 'Parent section (h3 inside h2) checked',
 		config: { ignoreSections: [ 'External links' ], ignoreLeadSection: false },
@@ -77,6 +183,30 @@ const sectionCases = [
 		section: 4,
 		expectedHierarchy: [ 'Bar', 'Sibling' ],
 		expectedValid: true
+	},
+	{
+		name: 'Allowed lower-level heading overrides ignored higher-level heading',
+		config: { ignoreSections: [ 'Parent' ], includeSections: [ 'Grandchild' ] },
+		headings: [
+			{ level: 2, text: 'Parent' },
+			{ level: 3, text: 'Child' },
+			{ level: 4, text: 'Grandchild' }
+		],
+		section: 3,
+		expectedHierarchy: [ 'Grandchild', 'Child', 'Parent' ],
+		expectedValid: true
+	},
+	{
+		name: 'Ignored lower-level heading overrides allowed higher-level heading',
+		config: { ignoreSections: [ 'Grandchild' ], includeSections: [ 'Parent' ] },
+		headings: [
+			{ level: 2, text: 'Parent' },
+			{ level: 3, text: 'Child' },
+			{ level: 4, text: 'Grandchild' }
+		],
+		section: 3,
+		expectedHierarchy: [ 'Grandchild', 'Child', 'Parent' ],
+		expectedValid: false
 	}
 ];
 
