@@ -590,9 +590,10 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.createItem = function ( lang, c
 	) );
 	const clearButton = new OO.ui.ButtonInputWidget( {
 		icon: 'clear',
-		title: OO.ui.deferMsg(
+		label: OO.ui.deferMsg(
 			'visualeditor-mwlanguagevariantinspector-twoway-clear-button'
 		),
+		invisibleLabel: true,
 		framed: false
 	} );
 	const layout = new OO.ui.FieldLayout(
@@ -736,9 +737,10 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.createItem = function ( from, l
 	) );
 	const clearButton = new OO.ui.ButtonInputWidget( {
 		icon: 'clear',
-		title: OO.ui.deferMsg(
+		label: OO.ui.deferMsg(
 			'visualeditor-mwlanguagevariantinspector-oneway-clear-button'
 		),
+		invisibleLabel: true,
 		framed: false
 	} );
 	const layout = new OO.ui.FieldLayout(
