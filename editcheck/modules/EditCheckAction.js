@@ -81,6 +81,9 @@ mw.editcheck.EditCheckAction.static.compareStarts = function ( a, b ) {
 		if ( b.check.takesFocus() ) {
 			return 1;
 		}
+		const aEnd = a.getHighlightSelections()[ 0 ].getCoveringRange().end;
+		const bEnd = b.getHighlightSelections()[ 0 ].getCoveringRange().end;
+		return bEnd - aEnd;
 	}
 	return difference;
 };
