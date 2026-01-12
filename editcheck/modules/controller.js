@@ -28,6 +28,7 @@ function Controller( target, config ) {
 	this.focusedAction = null;
 	this.suggestionsMode = config.suggestions;
 	this.inSetup = null;
+	this.ignoreNextSelectionChange = null;
 
 	this.taggedFragments = {};
 	this.taggedIds = {};
@@ -137,6 +138,7 @@ Controller.prototype.setup = function () {
 			this.actionsByListener = {};
 			this.focusedAction = null;
 			this.inSetup = null;
+			this.ignoreNextSelectionChange = null;
 
 			this.taggedFragments = {};
 			this.taggedIds = {};
@@ -420,7 +422,11 @@ Controller.prototype.onSurfaceFocus = function () {
  * @param {ve.dm.Selection} selection New selection
  */
 Controller.prototype.onSelect = function () {
-	this.updateActions();
+	if ( this.ignoreNextSelectionChange ) {
+		this.ignoreNextSelectionChange = null;
+		return;
+	}
+	this.focusActionForSelection();
 };
 
 /**
@@ -429,7 +435,7 @@ Controller.prototype.onSelect = function () {
  * @fires Controller#actionsUpdated
  * @fires Controller#focusAction
  */
-Controller.prototype.updateActions = function () {
+Controller.prototype.focusActionForSelection = function () {
 	if ( !this.surface ) {
 		// This is debounced, and could potentially be called after teardown
 		return;
@@ -457,6 +463,15 @@ Controller.prototype.updateActions = function () {
 		// Focus the last action returned, because it should be the most-specific
 		this.focusAction( actions[ actions.length - 1 ], false );
 	}
+};
+
+/**
+ * Whether to ignore the next select event that is received
+ *
+ * @param {boolean} [ignore=true]
+ */
+Controller.prototype.setIgnoreNextSelectionChange = function ( ignore = true ) {
+	this.ignoreNextSelectionChange = ignore;
 };
 
 /**
@@ -564,7 +579,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 
 		if ( newActions.length ) {
 			// Check if any new actions are relevant to our current selection:
-			this.updateActions();
+			this.focusActionForSelection();
 		}
 	} );
 };

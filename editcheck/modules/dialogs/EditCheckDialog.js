@@ -414,8 +414,9 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
 ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
 	if ( action.widget.collapsed ) {
 		// Expand
-		this.setCurrentAction( action, true );
+		this.setCurrentAction( action, true, false );
 		if ( !OO.ui.isMobile() ) {
+			this.controller.setIgnoreNextSelectionChange();
 			action.select( this.surface );
 		}
 	} else {
