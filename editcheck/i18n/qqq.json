@@ -7,6 +7,7 @@
 			"Stjn"
 		]
 	},
+	"editchecks": "{{doc-special|EditChecks}}",
 	"editcheck-config.json": "{{notranslate}}\n{{ignored}}\nJSON object configuring some edit check behavior.",
 	"editcheck-dialog-action-no": "Label for the no option when asking users if they want to act on a check.\n\n{{Identical|No}}",
 	"editcheck-dialog-action-yes": "Label for the yes option when asking users if they want to act on a check.\n\n{{Identical|Yes}}",
@@ -50,7 +51,6 @@
 	"editcheck-tone-thank": "Toast pop up to thank the user for considering the tone, whether they dismissed the check or revised the text",
 	"editcheck-reject-description": "Other editors would value learning more about your decision to skip this check.",
 	"editcheck-review-title": "Title shown in the sidebar / drawer while checks are displayed",
-	"editchecks": "{{doc-special|EditChecks}}",
 	"editcheck-specialeditchecks-info": "Information line on Special:Editchecks pointing to the on-wiki configuration page.",
 	"editcheck-specialeditchecks-header-abtest": "Section heading for A/B test checks.",
 	"editcheck-specialeditchecks-header-base": "Section heading for base configuration.",

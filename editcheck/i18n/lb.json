@@ -36,5 +36,8 @@
 	"editcheck-tone-reject-other": "Anerer",
 	"editcheck-tone-thank": "Merci, datt Dir den Tounfall iwwerpréift hutt!",
 	"editcheck-reject-description": "Aner Editeure géifen et appreciéiere fir gewuer ze ginn, firwat Dir dëse Choix gemaach hutt.",
-	"editcheck-review-title": "Ännerungen nokucken"
+	"editcheck-review-title": "Ännerungen nokucken",
+	"editcheck-specialeditchecks-col-title": "Titel",
+	"editcheck-specialeditchecks-col-name": "Numm",
+	"editcheck-specialeditchecks-col-description": "Beschreiwung"
 }
