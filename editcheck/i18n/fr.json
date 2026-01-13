@@ -6,6 +6,7 @@
 			"Gomoko",
 			"JLTRY",
 			"Mahabarata",
+			"SleaY",
 			"Trizek (WMF)"
 		]
 	},
@@ -48,6 +49,11 @@
 	"editcheck-tone-thank": "Merci d’avoir réfléchi au ton !",
 	"editcheck-reject-description": "D'autres rédacteurs apprécieront d'apprendre pourquoi vous avez fait ce choix.",
 	"editcheck-review-title": "Relire les modifications",
+	"editcheck-specialeditchecks-col-title": "Titre",
+	"editcheck-specialeditchecks-col-name": "Nom",
+	"editcheck-specialeditchecks-col-description": "Description",
+	"editcheck-specialeditchecks-config-summary": "Configuration",
+	"editcheck-specialeditchecks-config-default": "Configuration par défaut",
 	"tag-editcheck-reference-decline-common-knowledge": "Vérification de modification (références) refusée (savoir commun)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "La référence EditCheck a été refusée comme étant un savoir commun",
 	"tag-editcheck-reference-decline-irrelevant": "Vérification de modification (références) refusée (non pertinent)",
