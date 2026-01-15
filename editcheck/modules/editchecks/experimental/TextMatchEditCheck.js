@@ -6,39 +6,11 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	this.sensitivity = 'accent'; // TODO figure out how to determine this on an editcheck level
 	this.collator = new Intl.Collator( this.lang, { sensitivity: this.sensitivity } );
 
-	const rawMatchItems = Object.assign(
-		{},
-		this.constructor.static.matchItems || {},
-		this.config.matchItems || {}
-	);
+	// Initialize lookup maps
 	this.matchItems = [];
 	this.matchItemsById = new Map();
-	// Create matchItem instances
-	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
-		const textMatchItem = new mw.editcheck.TextMatchItem( item, id, this.collator );
-		this.matchItems.push( textMatchItem );
-		this.matchItemsById.set( id, textMatchItem );
-	} );
-
-	// Initialize lookup maps
 	this.matchItemsSensitiveByTerm = {};
 	this.matchItemsInsensitiveByTerm = {};
-
-	this.matchItems.forEach( ( matchItem ) => {
-		if ( !matchItem.expand && matchItem.config.minOccurrences ) {
-			mw.log.warn( 'MatchItem \'' + matchItem.title + '\' sets minOccurrences but is missing expand value.' );
-		}
-		const targetMap = matchItem.isCaseSensitive() ?
-			this.matchItemsSensitiveByTerm :
-			this.matchItemsInsensitiveByTerm;
-
-		Object.keys( matchItem.query ).forEach( ( key ) => {
-			if ( !targetMap[ key ] ) {
-				targetMap[ key ] = [];
-			}
-			targetMap[ key ].push( matchItem );
-		} );
-	} );
 
 };
 
@@ -74,13 +46,164 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.TextMatchEditCheck.static.matchItems = [];
+/**
+ * Promise which holds the loading and processing of matchItems
+ *
+ * @type {Promise<Object>}
+ */
+mw.editcheck.TextMatchEditCheck.static.matchItemsPromise = null;
+
+/**
+ * Fully processed matchItems with all imports
+ *
+ * @type {Object}
+ */
+mw.editcheck.TextMatchEditCheck.static.processedMatchItems = null;
+
+/**
+ * Fetch matchItem config from a MediaWiki json file
+ *
+ * @param {string[]} filenames to fetch
+ * @return {jQuery.Promise} Promise which resolves to a map of filename/imported matchItem object
+ */
+mw.editcheck.TextMatchEditCheck.static.getImportedConfig = function ( filenames ) {
+	// TODO to what extent should we dictate the format of the filename; require MW namespace?
+	return new mw.Api().get( {
+		action: 'query',
+		format: 'json',
+		prop: 'revisions',
+		titles: filenames.join( '|' ),
+		formatversion: '2',
+		rvprop: 'content'
+	} ).then( ( response ) => {
+		const pageMap = {};
+		const pages = response.query.pages || [];
+		pages.forEach( ( page ) => {
+			if ( !page || !page.revisions ) {
+				mw.log.warn( ' Could not fetch imported config: ' + page.title );
+				return;
+			}
+			try {
+				pageMap[ page.title ] = JSON.parse( page.revisions[ 0 ].content );
+			} catch ( err ) {
+				mw.log.error( ' Failed to parse imported config: ' + page.title, err );
+			}
+		} );
+		return pageMap;
+	} ).catch( ( err ) => {
+		mw.log.error( ' Failed to import configs', err );
+		return;
+	} );
+};
+
+/**
+ * Fetch corresponding MW file for any matchItems with the "import" property
+ * and leave all other matchItems unchanged
+ *
+ * @param {Object} rawMatchItems map of matchItem IDs to raw config objects
+ * @return {Promise<Object>} Promise which resolves to map of processed matchItems
+ */
+mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchItems ) {
+	const processed = {};
+	const pageMap = {};
+	const filenames = [];
+
+	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
+		if ( item.import ) {
+			const filename = item.import;
+			if ( !filename.startsWith( 'MediaWiki:' ) ) {
+				mw.log.warn( `Skipped import for matchItem id:${ id } (${ filename } must be in mediawiki namespace.)` );
+				return;
+			}
+			if ( !filename.endsWith( '.json' ) ) {
+				mw.log.warn( `Skipped import for matchItem id:${ id } (${ filename } must be a json file.)` );
+				return;
+			}
+			filenames.push( item.import );
+			pageMap[ id ] = item.import;
+		} else {
+			processed[ id ] = item;
+		}
+	} );
+	if ( !filenames ) {
+		return Promise.resolve( processed );
+	}
+	return mw.editcheck.TextMatchEditCheck.static.getImportedConfig( filenames )
+		.then( ( imported ) => {
+			Object.entries( pageMap ).forEach( ( [ id, filename ] ) => {
+				if ( imported[ filename ] ) {
+					processed[ id ] = imported[ filename ];
+				}
+			} );
+			return processed;
+		} );
+};
+
+/**
+ * Ensure matchItems and any imported configs are loaded exactly once
+ *
+ * @return {Promise<Object>} Promise which resolves to processed matchItems
+ */
+mw.editcheck.TextMatchEditCheck.static.ensureMatchItemsLoaded = function () {
+	// If we've already started loading config, then every caller waits on same promise.
+	if ( this.matchItemsPromise ) {
+		return this.matchItemsPromise;
+	}
+	const rawMatchItems = Object.assign(
+		{},
+		mw.editcheck.TextMatchEditCheck.static.matchItems || {},
+		mw.editcheck.config.textMatch.matchItems || {}
+	);
+
+	// Begin async processing and cache promise
+	this.matchItemsPromise = this.processMatchItems( rawMatchItems )
+		.then( ( processed ) => {
+			this.processedMatchItems = processed;
+			return processed;
+		} )
+		.catch( ( err ) => {
+			mw.log.error( 'Failed to process matchItems', err );
+			this.matchItemsPromise = null;
+		} );
+	return this.matchItemsPromise;
+};
+
+/**
+ * Create a matchItem instance for each matchItem
+ * and populate lookup maps
+ *
+ * @param {Object} rawMatchItems all matchitem objects from config
+ */
+mw.editcheck.TextMatchEditCheck.prototype.buildMatchItemMaps = function ( rawMatchItems ) {
+	// Create matchItem instances
+	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
+		const textMatchItem = new mw.editcheck.TextMatchItem( item, id, this.collator );
+		this.matchItems.push( textMatchItem );
+		this.matchItemsById.set( id, textMatchItem );
+	} );
+
+	this.matchItems.forEach( ( matchItem ) => {
+		if ( !matchItem.expand && matchItem.config.minOccurrences ) {
+			mw.log.warn( 'MatchItem \'' + matchItem.title + '\' sets minOccurrences but is missing expand value.' );
+		}
+		const targetMap = matchItem.isCaseSensitive() ?
+			this.matchItemsSensitiveByTerm :
+			this.matchItemsInsensitiveByTerm;
+
+		Object.keys( matchItem.query ).forEach( ( key ) => {
+			if ( !targetMap[ key ] ) {
+				targetMap[ key ] = [];
+			}
+			targetMap[ key ].push( matchItem );
+		} );
+	} );
+};
 
 /**
  * Given a term, find all the equivalent keys that exist in case-insensitive matchItem queries
  *
  * @param {string} term Term to find keys for
- * @return {string} Array of keys that match
+ * @return {string[]} Array of keys that match
  */
 mw.editcheck.TextMatchEditCheck.prototype.getMatchingKeys = function ( term ) {
 	const matches = Object.keys( this.matchItemsInsensitiveByTerm ).filter(
@@ -89,112 +212,126 @@ mw.editcheck.TextMatchEditCheck.prototype.getMatchingKeys = function ( term ) {
 	return matches;
 };
 
+/**
+ * @param {ve.dm.SurfaceModel} surfaceModel
+ * @param {string} listener
+ * @return {Promise<mw.editcheck.TextMatchEditCheckAction[]>}
+ */
 mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceModel, listener ) {
-	const actions = [];
-	const fragmentCountsByItem = new Map();
-	const document = surfaceModel.getDocument();
-	const modified = this.getModifiedContentRanges( document );
-
-	const matchConfigs = [
-		{
-			caseSensitive: true,
-			terms: Object.keys( this.matchItemsSensitiveByTerm ),
-			lookup: ( term ) => this.matchItemsSensitiveByTerm[ term ] || [ ]
-		},
-		{
-			caseSensitive: false,
-			terms: Object.keys( this.matchItemsInsensitiveByTerm ),
-			lookup: ( term ) => {
-				const keys = this.getMatchingKeys( term );
-				return keys
-					.map( ( key ) => this.matchItemsInsensitiveByTerm[ key ] || [] )
-					.reduce( ( acc, arr ) => acc.concat( arr ), [] );
-			}
-		}
-	];
-
-	for ( const { caseSensitive, terms, lookup } of matchConfigs ) {
-		const ranges = document.findText(
-			new Set( terms ),
-			{
-				caseSensitiveString: caseSensitive,
-				wholeWord: true
-			}
-		);
-
-		for ( const range of ranges ) {
-			if ( !modified.some( ( modRange ) => range.touchesRange( modRange ) ) ) {
-				continue;
-			}
-			if ( !this.isRangeInValidSection( range, surfaceModel.documentModel ) ) {
-				continue;
-			}
-			const term = surfaceModel.getLinearFragment( range ).getText();
-
-			const relevantMatchItems = lookup( term );
-			if ( !relevantMatchItems ) {
-				continue;
-			}
-			for ( const matchItem of relevantMatchItems ) {
-				const name = this.getTagNameByMatchItem( matchItem, term );
-				if ( this.isDismissedRange( range, name ) ) {
-					continue;
-				}
-				if ( matchItem.listener && matchItem.listener !== listener ) {
-					continue;
-				}
-				// Above we checked for the overall textmatch config, but now
-				// we need to know if this rule is more-specific:
-				if ( !(
-					this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) &&
-					this.isRangeInValidSection( range, surfaceModel.documentModel, matchItem.config )
-				) ) {
-					continue;
-				}
-
-				let fragment = surfaceModel.getLinearFragment( range );
-				fragment = matchItem.getExpandedFragment( fragment );
-				const id = matchItem.id;
-				if ( !fragmentCountsByItem.has( id ) ) {
-					fragmentCountsByItem.set( id, new Map() );
-				}
-				const fragRange = fragment.getSelection().getRange();
-				const key = `${ fragRange.start }-${ fragRange.end }`;
-				const fragMap = fragmentCountsByItem.get( id );
-				// The term is only relevant to the action if the matchItem has no expansion rules.
-				const entry = fragMap.get( key ) || { fragment, count: 0, term: matchItem.expand ? ' ' : term };
-				entry.count++;
-				fragMap.set( key, entry );
-			}
-		}
-	}
-
-	// Once we finish all the searches, we do another pass through the matched fragments
-	// so that we can handle matchItems with a min occurrences constraint.
-	for ( const [ id, fragMap ] of fragmentCountsByItem.entries() ) {
-		const matchItem = this.matchItemsById.get( id );
-		const min = matchItem.config.minOccurrences || 1;
-		for ( const { fragment, count, term } of fragMap.values() ) {
-			if ( count >= min ) {
-				const isValidMode = this.constructor.static.choices.some(
-					( choice ) => choice.modes.includes( matchItem.mode )
-				);
-				const mode = isValidMode ? matchItem.mode : '';
-				actions.push(
-					new mw.editcheck.TextMatchEditCheckAction( {
-						fragments: [ fragment ],
-						title: matchItem.title,
-						message: matchItem.message,
-						check: this,
-						mode,
-						matchItem,
-						term
-					} )
+	// wait here until matchitems are guaraunteed to exist!
+	return this.constructor.static.ensureMatchItemsLoaded()
+		.then( () => {
+			if ( !this.matchItems.length ) {
+				this.buildMatchItemMaps(
+					this.constructor.static.processedMatchItems
 				);
 			}
-		}
-	}
-	return actions;
+			const actions = [];
+			const fragmentCountsByItem = new Map();
+			const document = surfaceModel.getDocument();
+			const modified = this.getModifiedContentRanges( document );
+
+			const matchConfigs = [
+				{
+					caseSensitive: true,
+					terms: Object.keys( this.matchItemsSensitiveByTerm ),
+					lookup: ( term ) => this.matchItemsSensitiveByTerm[ term ] || [ ]
+				},
+				{
+					caseSensitive: false,
+					terms: Object.keys( this.matchItemsInsensitiveByTerm ),
+					lookup: ( term ) => {
+						const keys = this.getMatchingKeys( term );
+						return keys
+							.map( ( key ) => this.matchItemsInsensitiveByTerm[ key ] || [] )
+							.reduce( ( acc, arr ) => acc.concat( arr ), [] );
+					}
+				}
+			];
+
+			for ( const { caseSensitive, terms, lookup } of matchConfigs ) {
+				const ranges = document.findText(
+					new Set( terms ),
+					{
+						caseSensitiveString: caseSensitive,
+						wholeWord: true
+					}
+				);
+
+				for ( const range of ranges ) {
+					if ( !modified.some( ( modRange ) => range.touchesRange( modRange ) ) ) {
+						continue;
+					}
+					if ( !this.isRangeInValidSection( range, surfaceModel.documentModel ) ) {
+						continue;
+					}
+					const term = surfaceModel.getLinearFragment( range ).getText();
+
+					const relevantMatchItems = lookup( term );
+					if ( !relevantMatchItems ) {
+						continue;
+					}
+					for ( const matchItem of relevantMatchItems ) {
+						const name = this.getTagNameByMatchItem( matchItem, term );
+						if ( this.isDismissedRange( range, name ) ) {
+							continue;
+						}
+						if ( matchItem.listener && matchItem.listener !== listener ) {
+							continue;
+						}
+						// Above we checked for the overall textmatch config, but now
+						// we need to know if this rule is more-specific:
+						if ( !(
+							this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) &&
+							this.isRangeInValidSection( range, surfaceModel.documentModel, matchItem.config )
+						) ) {
+							continue;
+						}
+
+						let fragment = surfaceModel.getLinearFragment( range );
+						fragment = matchItem.getExpandedFragment( fragment );
+						const id = matchItem.id;
+						if ( !fragmentCountsByItem.has( id ) ) {
+							fragmentCountsByItem.set( id, new Map() );
+						}
+						const fragRange = fragment.getSelection().getRange();
+						const key = `${ fragRange.start }-${ fragRange.end }`;
+						const fragMap = fragmentCountsByItem.get( id );
+						// The term is only relevant to the action if the matchItem has no expansion rules.
+						const entry = fragMap.get( key ) || { fragment, count: 0, term: matchItem.expand ? ' ' : term };
+						entry.count++;
+						fragMap.set( key, entry );
+					}
+				}
+			}
+
+			// Once we finish all the searches, we do another pass through the matched fragments
+			// so that we can handle matchItems with a min occurrences constraint.
+			for ( const [ id, fragMap ] of fragmentCountsByItem.entries() ) {
+				const matchItem = this.matchItemsById.get( id );
+				const min = matchItem.config.minOccurrences || 1;
+				for ( const { fragment, count, term } of fragMap.values() ) {
+					if ( count >= min ) {
+						const isValidMode = this.constructor.static.choices.some(
+							( choice ) => choice.modes.includes( matchItem.mode )
+						);
+						const mode = isValidMode ? matchItem.mode : '';
+						actions.push(
+							new mw.editcheck.TextMatchEditCheckAction( {
+								fragments: [ fragment ],
+								title: matchItem.title,
+								message: matchItem.message,
+								check: this,
+								mode,
+								matchItem,
+								term
+							} )
+						);
+					}
+				}
+			}
+			return actions;
+		} );
 };
 
 mw.editcheck.TextMatchEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
