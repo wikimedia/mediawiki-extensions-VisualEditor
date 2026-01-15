@@ -177,7 +177,7 @@ mw.editcheck.BaseEditCheck.prototype.canBeStale = function () {
  *
  * @abstract
  * @param {ve.dm.Surface} surfaceModel
- * @return {mw.editcheck.EditCheckAction[]|Promise[]} Action, or Promise which resolves with an Action or null
+ * @return {mw.editcheck.EditCheckAction[]|Promise[]|mw.editcheck.EditCheckAction|Promise} Action, or Promise which resolves with an Action or null
  */
 mw.editcheck.BaseEditCheck.prototype.onBeforeSave = null;
 
@@ -186,7 +186,7 @@ mw.editcheck.BaseEditCheck.prototype.onBeforeSave = null;
  *
  * @abstract
  * @param {ve.dm.Surface} surfaceModel
- * @return {mw.editcheck.EditCheckAction[]|Promise[]} Action, or Promise which resolves with an Action or null
+ * @return {mw.editcheck.EditCheckAction[]|Promise[]|mw.editcheck.EditCheckAction|Promise} Action, or Promise which resolves with an Action or null
  */
 mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
 
@@ -195,7 +195,7 @@ mw.editcheck.BaseEditCheck.prototype.onDocumentChange = null;
  *
  * @abstract
  * @param {ve.dm.Surface} surfaceModel
- * @return {mw.editcheck.EditCheckAction[]|Promise[]} Action, or Promise which resolves with an Action or null
+ * @return {mw.editcheck.EditCheckAction[]|Promise[]|mw.editcheck.EditCheckAction|Promise} Action, or Promise which resolves with an Action or null
  */
 mw.editcheck.BaseEditCheck.prototype.onBranchNodeChange = null;
 

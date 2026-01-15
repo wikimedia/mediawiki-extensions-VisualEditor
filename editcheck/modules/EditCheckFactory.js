@@ -110,20 +110,38 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 			return;
 		}
 		const checkListener = check[ listenerName ];
-		let actionOrPromise;
+		let actionsOrPromises;
 		try {
-			actionOrPromise = checkListener.call( check, surfaceModel );
+			actionsOrPromises = checkListener.call( check, surfaceModel );
+			// This will have returned either an array of EditCheckActions, an
+			// array of Promises which will each resolve to a single
+			// EditCheckAction, a single EditCheckAction, or a single Promise
+			// which could resolve to an array of EditCheckActions.
+			if ( !Array.isArray( actionsOrPromises ) ) {
+				actionsOrPromises = [ actionsOrPromises ];
+			}
 		} catch ( ex ) {
 			// HACK: ensure that synchronous exceptions are returned as rejected promises.
 			// TODO: Consider making all checks return promises. This would unify exception
 			// handling, at the cost of making debugging be async.
-			actionOrPromise = Promise.reject( ex );
+			actionsOrPromises = [ Promise.reject( ex ) ];
 		}
-		if ( actionOrPromise ) {
-			ve.batchPush( actionOrPromiseList, actionOrPromise );
+		if ( actionsOrPromises ) {
+			ve.batchPush( actionOrPromiseList, actionsOrPromises );
 		}
 	} );
 	return Promise.all( actionOrPromiseList )
+		.then( ( actions ) => (
+			// TODO: replace with `actions.flat()` when that's allowed
+			actions.reduce( ( acc, action ) => {
+				if ( Array.isArray( action ) ) {
+					ve.batchPush( acc, action );
+				} else {
+					acc.push( action );
+				}
+				return acc;
+			}, [] )
+		) )
 		.then( ( actions ) => actions.filter( ( action ) => action !== null ) )
 		.then( ( actions ) => {
 			actions.forEach( ( action ) => {
