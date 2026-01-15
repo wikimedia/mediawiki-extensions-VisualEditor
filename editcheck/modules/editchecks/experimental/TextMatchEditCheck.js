@@ -143,7 +143,12 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 				if ( matchItem.listener && matchItem.listener !== listener ) {
 					continue;
 				}
-				if ( !this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) ) {
+				// Above we checked for the overall textmatch config, but now
+				// we need to know if this rule is more-specific:
+				if ( !(
+					this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) &&
+					this.isRangeInValidSection( range, surfaceModel.documentModel, matchItem.config )
+				) ) {
 					continue;
 				}
 

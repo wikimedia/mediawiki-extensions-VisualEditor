@@ -512,10 +512,12 @@ mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( 
  *
  * @param {ve.Range} range
  * @param {ve.dm.Document} documentModel
+ * @param {Object} [config] Override config to use instead of the check's default
  * @return {boolean} Whether the range is in a section we don't ignore
  */
-mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel ) {
-	const ignoreSections = this.config.ignoreSections || [];
+mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel, config ) {
+	config = config || this.config;
+	const ignoreSections = config.ignoreSections || [];
 	if ( ignoreSections.length === 0 && !this.config.ignoreLeadSection ) {
 		// Nothing is forbidden, so everything is permitted
 		return true;
@@ -527,7 +529,7 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 		// lead section. It's only a lead section if there are more headings
 		// later in the document, otherwise it's just a stub article.
 		return !(
-			this.config.ignoreLeadSection &&
+			config.ignoreLeadSection &&
 			documentModel.getNodesByType( 'mwHeading', true ).some(
 				( heading ) => heading.getRange().start > range.start
 			)
