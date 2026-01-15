@@ -151,10 +151,18 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 	let currentAction = this.currentAction;
 	let fromUserAction = false;
 	if ( currentAction && !actions.includes( this.currentAction ) ) {
-		// The current action has been removed
-		currentAction = null;
-		if ( this.constructor.static.alwaysFocusAction ) {
-			fromUserAction = true;
+		// The current action has been removed. Was this a replacement with an
+		// equivalent action due to a focus-change? (Allow overlaps in
+		// equals, because the most likely reason for this would be an edit
+		// causing the range covered to shift.)
+		const replacementAction = actions.find( ( action ) => action.equals( currentAction, true ) );
+		if ( replacementAction ) {
+			currentAction = replacementAction;
+		} else {
+			currentAction = null;
+			if ( this.constructor.static.alwaysFocusAction ) {
+				fromUserAction = true;
+			}
 		}
 	}
 	if ( !this.currentAction && newActions.length > 0 ) {

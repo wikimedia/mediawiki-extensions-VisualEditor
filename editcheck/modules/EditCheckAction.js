@@ -250,8 +250,8 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps 
 	if ( this.check.constructor !== other.check.constructor ) {
 		return false;
 	}
-	if ( this.id || other.id ) {
-		return this.id === other.id;
+	if ( this.id !== other.id ) {
+		return false;
 	}
 	if ( this.fragments.length !== other.fragments.length ) {
 		return false;
