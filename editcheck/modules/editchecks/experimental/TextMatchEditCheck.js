@@ -125,7 +125,7 @@ mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchIt
 			processed[ id ] = item;
 		}
 	} );
-	if ( !filenames ) {
+	if ( filenames.length === 0 ) {
 		return Promise.resolve( processed );
 	}
 	return mw.editcheck.TextMatchEditCheck.static.getImportedConfig( filenames )
