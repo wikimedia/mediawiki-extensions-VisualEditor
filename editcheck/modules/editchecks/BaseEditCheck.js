@@ -46,7 +46,8 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	minimumEditcount: 0,
 	ignoreSections: [],
 	ignoreLeadSection: false,
-	ignoreDisambiguationPages: false
+	ignoreDisambiguationPages: false,
+	ignoreQuotedContent: false
 };
 
 mw.editcheck.BaseEditCheck.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
@@ -485,7 +486,10 @@ mw.editcheck.BaseEditCheck.prototype.getContentRangesFromRange = function ( docu
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentModel ) {
-	return this.isRangeInValidSection( range, documentModel );
+	return (
+		this.isRangeInValidSection( range, documentModel ) &&
+		( !this.config.ignoreQuotedContent || this.isOffsetQuoted( range.start, documentModel ) )
+	);
 };
 
 /**
@@ -567,6 +571,84 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 		const headingText = documentModel.data.getText( false, heading.getRange() );
 		return ignoreSections.some( ( section ) => compare( headingText, section ) === 0 );
 	} );
+};
+
+mw.editcheck.BaseEditCheck.static.quoteGroupings = new Map( [
+	// This groups various quote-types together so we'll know which count
+	// as opening/closing each other.
+	// See: https://en.wikipedia.org/wiki/Quotation_mark#Summary_table
+	// [ character, grouping ]
+	[ '"', '"' ], // plain quotation mark
+	[ '“', '“' ], [ '”', '“' ], [ '„', '“' ], // various curly quotes
+	[ '‘', '‘' ], [ '’', '‘' ], [ '‚', '‘' ], // curly single quotes (that last one is SINGLE LOW-9 QUOTATION MARK, not a comma)
+	[ '「', '「' ], [ '」', '「' ], // CJK brackets
+	[ '『', '『' ], [ '』', '『' ], // CJK brackets
+	[ '«', '«' ], [ '»', '«' ], // guillemets
+	[ '‹', '‹' ], [ '›', '‹' ], // guillemets
+	[ '《', '《' ], [ '》', '《' ], // "Far East angle bracket quotation marks"
+	[ '⟪', '⟪' ], [ '⟫', '⟪' ],
+	[ '⟨', '⟨' ], [ '⟩', '⟨' ]
+] );
+
+/**
+ * Check if a specific offset in the document counts as being quoted
+ *
+ * This is approximate because "quoted" is complicated. Various types of
+ * quotes are grouped together, and we count whether there's an odd number of
+ * any group preceding the offset within the current content-containing
+ * node.
+ *
+ * Special attention is paid to distinguishing apostrophes from single-quotes,
+ * and blockquote nodes are explicitly always quoted.
+ *
+ * @param {number} offset
+ * @param {ve.dm.Document} documentModel
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documentModel ) {
+	const closestBlockNode = documentModel.getNearestNodeMatching( ( nodeType ) => (
+		ve.dm.nodeFactory.canNodeContainContent( nodeType )
+	), offset, -1, 0 );
+	if ( !closestBlockNode ) {
+		// You'd need a really weird range to manage this, but just in case
+		return false;
+	}
+	if ( closestBlockNode instanceof ve.dm.BlockquoteNode ) {
+		return true;
+	}
+	// This is going to ignore template content, which might be non-ideal in
+	// some edge cases. A future enhancement could be to allow configuration
+	// of templates that count as unbalanced quotes.
+	// Fetch to offset+1 because we want inclusive.
+	const data = documentModel.getData( new ve.Range( closestBlockNode.getRange().start, offset + 1 ) );
+	const quotes = new Map();
+	for ( const [ index, item ] of data.entries() ) {
+		if ( typeof item === 'string' ) {
+			let quote = false;
+			if ( item === '\'' ) {
+				// The single non-curly quote requires extra work to be distinguished from an apostrophe
+				const previous = data[ index - 1 ];
+				if (
+					// If it's at the beginning it must be a quote
+					!previous || ve.dm.LinearData.static.isElementData( previous ) ||
+					// Otherwise, check whether it looks like a break compared
+					// to the previous character. Note: unicodeJS does
+					// somewhat-complicated things here to look back and
+					// decide whether this is a break, so it actually does
+					// need the entire data -- just [previous,item] would not work.
+					unicodeJS.wordbreak.isBreak( new ve.dm.DataString( data ), index )
+				) {
+					quote = '\'';
+				}
+			} else {
+				quote = this.constructor.static.quoteGroupings.get( item );
+			}
+			if ( quote ) {
+				quotes.set( quote, ( quotes.get( quote ) || 0 ) + 1 );
+			}
+		}
+	}
+	return quotes.values().some( ( count ) => count % 2 === 1 );
 };
 
 /**
