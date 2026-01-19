@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
+			"McDutchie",
 			"Pierpao"
 		]
 	},
-	"editchecks": "Modifica controlli",
+	"editchecks": "Controlli di modifica",
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Sì",
 	"editcheck-dialog-action-recheck": "Ricontrolla",
