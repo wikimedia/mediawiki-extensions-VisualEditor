@@ -536,7 +536,7 @@ mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( 
 mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel, config ) {
 	config = config || this.config;
 	const ignoreSections = config.ignoreSections || [];
-	if ( ignoreSections.length === 0 && !this.config.ignoreLeadSection ) {
+	if ( ignoreSections.length === 0 && !config.ignoreLeadSection ) {
 		// Nothing is forbidden, so everything is permitted
 		return true;
 	}
