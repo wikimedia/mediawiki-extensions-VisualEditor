@@ -150,6 +150,10 @@
 			"value": false,
 			"description": "A/B test Edit Check for all users. A/B bucket status will override VisualEditorEditCheck. Value is a check name to test."
 		},
+		"VisualEditorEnableEditCheckSuggestionsBeta": {
+			"value": false,
+			"description": "Enable the Edit Check Suggestions beta feature."
+		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
@@ -215,7 +219,10 @@
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "VisualEditorHooks",
 		"GetPreferences": "VisualEditorHooks",
-		"GetBetaFeaturePreferences": "betapreferences",
+		"GetBetaFeaturePreferences": [
+			"betapreferences",
+			"EditCheckBetaPreferences"
+		],
 		"ListDefinedTags": "VisualEditorHooks",
 		"MakeGlobalVariablesScript": "VisualEditorHooks",
 		"OutputPageBodyAttributes": "VisualEditorHooks",
@@ -245,6 +252,13 @@
 		},
 		"betapreferences": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\BetaPreferenceHooks",
+			"services": [
+				"MainConfig",
+				"ConfigFactory"
+			]
+		},
+		"EditCheckBetaPreferences": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\BetaPreferenceHooks",
 			"services": [
 				"MainConfig",
 				"ConfigFactory"

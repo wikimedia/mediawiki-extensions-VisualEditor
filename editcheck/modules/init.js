@@ -12,10 +12,13 @@ if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 	ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 }
 
+const suggestionsPref = !!mw.user.options.get( 'visualeditor-editcheck-suggestions' );
+
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
-	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).editCheckLoadExperimental || ecenable === '2' ),
+	experimental: !!( suggestionsPref || mw.config.get( 'wgVisualEditorConfig' ).editCheckLoadExperimental || ecenable === '2' ),
+	suggestions: suggestionsPref,
 	checksShown: {}
 };
 
