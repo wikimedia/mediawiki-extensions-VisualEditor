@@ -46,8 +46,15 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
 mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( documentModel, includeReferencedContent ) {
 	const containsReference = ( range ) => {
 		for ( let i = range.start; i < range.end; i++ ) {
-			if ( documentModel.data.isElementData( i ) && documentModel.data.getType( i ) === 'mwReference' ) {
-				return true;
+			if ( documentModel.data.isElementData( i ) ) {
+				if ( documentModel.data.getType( i ) === 'mwReference' ) {
+					return true;
+				}
+
+				// Exclude references generated from sfn template (T407849)
+				if ( ve.getProp( documentModel.data.data[ i ], 'attributes', 'mw', 'name' ) === 'ref' ) {
+					return true;
+				}
 			}
 		}
 		return false;
