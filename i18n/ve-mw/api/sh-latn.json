@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"Aca"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Nisam našao međuspremljenu serijalizaciju za taj ključ",
@@ -14,7 +15,7 @@
 	"apihelp-visualeditor-param-format": "Format izlaza.",
 	"apihelp-visualeditor-param-html": "HTML poslan Parsoidu kako bi se konvertirao u wikitest.",
 	"apihelp-visualeditor-param-oldid": "Broj revizija za korišćenje (zadano za posljednje revizije).",
-	"apihelp-visualeditor-param-paction": "Akcija za izvesti.",
+	"apihelp-visualeditor-param-paction": "Radnja za izvođenje.",
 	"apihelp-visualeditor-param-page": "Stranica na kojoj se izvode akcije.",
 	"apihelp-visualeditor-param-preload": "Sa koje stranice koristiti sadržaj ako dobavljena stranica još nema sadržaja.",
 	"apihelp-visualeditor-param-preloadparams": "Koje parametre zamijeniti na predučitanu stranicu, ako je zadana.",
@@ -35,7 +36,7 @@
 	"apihelp-visualeditoredit-param-minor": "Označite kao manje uređivanje.",
 	"apihelp-visualeditoredit-param-needcheck": "Kada snimate, postavite ovaj parametar ako revizija ima cirkulrane probleme. To će rezultati u tagiranom uređivanju.",
 	"apihelp-visualeditoredit-param-oldid": "Broj izmjena za korištenje. Zadano za posljednju izmjenu.",
-	"apihelp-visualeditoredit-param-paction": "Akcija za izvesti.",
+	"apihelp-visualeditoredit-param-paction": "Radnja za izvođenje.",
 	"apihelp-visualeditoredit-param-page": "Stranica na kojoj se izvode akcije.",
 	"apihelp-visualeditoredit-param-section": "Na kome podnaslovu treba djelovati.",
 	"apihelp-visualeditoredit-param-sectiontitle": "Naziv na novi podnaslov",
