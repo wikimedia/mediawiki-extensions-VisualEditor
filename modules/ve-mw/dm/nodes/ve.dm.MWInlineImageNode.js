@@ -115,15 +115,14 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 
 	// Vertical alignment
 	attributes.valign = 'default';
-	[ 'midde', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' ].some( ( valign ) => {
+	for ( const valign of [ 'midde', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' ] ) {
 		const className = 'mw-valign-' + valign;
 		if ( classes.includes( className ) ) {
 			attributes.valign = valign;
 			recognizedClasses.push( className );
-			return true;
+			break;
 		}
-		return false;
-	} );
+	}
 
 	// Border
 	if ( classes.includes( 'mw-image-border' ) ) {
