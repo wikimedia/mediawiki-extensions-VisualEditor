@@ -282,7 +282,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 						// Above we checked for the overall textmatch config, but now
 						// we need to know if this rule is more-specific:
 						if ( !(
-							this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) &&
+							this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel, this.includeSuggestions ) &&
 							this.isRangeValid( range, surfaceModel.documentModel, matchItem.config )
 						) ) {
 							continue;

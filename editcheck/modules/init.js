@@ -98,7 +98,7 @@ mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 	// Check might not be registered so we can't use the factory.
 	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone', { enabled: true } ) );
 	// Run actual check eligibility before calling API
-	if ( !check.canBeShown( surfaceModel.getDocument() ) ) {
+	if ( !check.canBeShown( surfaceModel.getDocument(), false ) ) {
 		return ve.createDeferred().resolve( false ).promise();
 	}
 	return Promise.all( check.handleListener( 'onCheckAll', surfaceModel ) )
@@ -213,7 +213,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
 				// Check might not be registered so we can't use the factory.
 				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { enabled: true } ) );
-				if ( check.canBeShown( target.getSurface().getModel().getDocument() ) && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
+				if ( check.canBeShown( target.getSurface().getModel().getDocument(), false ) && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 					// The check would be shown for the current viewer, and there's enough content that we care about it:
 					if ( data.source ) {
 						// Known-source pastes that we're not showing regardless of the check being enabled/disabled

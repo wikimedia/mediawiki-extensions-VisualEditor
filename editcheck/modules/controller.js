@@ -192,6 +192,10 @@ Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingO
  * @return {boolean}
  */
 Controller.prototype.editChecksArePossible = function () {
+	if ( mw.editcheck.suggestions ) {
+		// Suggestions override user checks so assume something can be shown
+		return true;
+	}
 	return [ 'onBeforeSave', 'onDocumentChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
 			( checkName ) => {

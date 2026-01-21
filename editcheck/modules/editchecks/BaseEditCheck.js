@@ -72,30 +72,34 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
 /**
  * Find out if any conditions in the provided config are met
  *
- * @param {Object} [config] Configuration options
+ * @param {Object} config Configuration options
  * @param {ve.dm.Document} [documentModel] if attached to a known document
+ * @param {boolean} [suggestion=false] Whether we are checking for suggestions mode
  * @return {boolean} Whether the config matches
  */
-mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentModel ) {
+mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentModel = undefined, suggestion = false ) {
 	if ( !config.enabled ) {
 		return false;
 	}
-	// account status:
-	// loggedin, loggedout, or any-other-value meaning 'both'
-	// we'll count temporary users as "logged out" by using isNamed here
-	if ( config.account === 'loggedout' && mw.user.isNamed() ) {
-		return false;
-	}
-	if ( config.account === 'loggedin' && !mw.user.isNamed() ) {
-		return false;
-	}
-	// some checks are only shown for newer users
-	if ( config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > config.maximumEditcount ) {
-		return false;
-	}
-	// and some checks are only shown for more experienced users
-	if ( config.minimumEditcount && mw.config.get( 'wgUserEditCount', 0 ) < config.minimumEditcount ) {
-		return false;
+	// Skip account status checks when in suggestion mode
+	if ( !suggestion ) {
+		// account status:
+		// loggedin, loggedout, or any-other-value meaning 'both'
+		// we'll count temporary users as "logged out" by using isNamed here
+		if ( config.account === 'loggedout' && mw.user.isNamed() ) {
+			return false;
+		}
+		if ( config.account === 'loggedin' && !mw.user.isNamed() ) {
+			return false;
+		}
+		// some checks are only shown for newer users
+		if ( config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > config.maximumEditcount ) {
+			return false;
+		}
+		// and some checks are only shown for more experienced users
+		if ( config.minimumEditcount && mw.config.get( 'wgUserEditCount', 0 ) < config.minimumEditcount ) {
+			return false;
+		}
 	}
 	if ( documentModel ) {
 		if ( config.inCategory || config.notInCategory ) {
@@ -265,9 +269,10 @@ mw.editcheck.BaseEditCheck.prototype.takesFocus = function () {
  * checks before any maybe-expensive content analysis happens.
  *
  * @param {ve.dm.Document} [documentModel] if attached to a known document
+ * @param {boolean} [suggestion=false] Whether we are checking for suggestions mode
  * @return {boolean} Whether the check should be shown
  */
-mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel ) {
+mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel = undefined, suggestion = false ) {
 	// All checks are only in the main namespace for now
 	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
 		return false;
@@ -280,7 +285,7 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel ) {
 	if ( mw.editcheck.forceEnable ) {
 		return true;
 	}
-	if ( !this.constructor.static.doesConfigMatch( this.config, documentModel ) ) {
+	if ( !this.constructor.static.doesConfigMatch( this.config, documentModel, suggestion ) ) {
 		return false;
 	}
 	return true;
