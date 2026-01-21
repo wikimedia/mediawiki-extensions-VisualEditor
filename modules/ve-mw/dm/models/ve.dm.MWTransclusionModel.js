@@ -93,24 +93,44 @@
 			baseNodeClass = ve.dm.MWTransclusionNode;
 
 		const insertNode = ( isInline, generatedContents ) => {
-			const type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType,
-				data = [
-					{
-						type,
-						attributes: {
-							mw: this.getPlainObject()
-						}
-					},
-					{ type: '/' + type }
-				];
+			const type = isInline ? baseNodeClass.static.inlineType : baseNodeClass.static.blockType;
+			let data = [
+				{
+					type,
+					attributes: {
+						mw: this.getPlainObject()
+					}
+				},
+				{ type: '/' + type }
+			];
 
 			// If we just fetched the generated contents, put them in the store
 			// so we don't do a duplicate API call later.
 			if ( generatedContents ) {
-				const nodeClass = ve.dm.modelRegistry.lookup( type );
-				const store = surfaceFragment.getDocument().getStore();
-				const hash = OO.getHash( [ nodeClass.static.getHashObjectForRendering( data[ 0 ] ), undefined ] );
-				store.hash( generatedContents, hash );
+				let generatedData = false;
+				try {
+					// First, try to do a full import of the generated HTML.
+					const generatedDocumentModel = ve.dm.converter.modelFromDomConverter.getModelFromDom(
+						ve.createDocumentFromHtml( generatedContents.map( ( node ) => node.outerHTML ).join( '' ) ),
+						{ targetDoc: this.doc }
+					);
+					const generatedNodes = generatedDocumentModel.selectNodes( generatedDocumentModel.getDocumentRange(), 'siblings' );
+					if ( generatedNodes.length === 1 && generatedNodes[ 0 ].node.canContainContent() ) {
+						generatedData = generatedDocumentModel.getDataFromNode( generatedNodes[ 0 ].node );
+						if ( generatedData.length > 0 ) {
+							data = generatedData;
+						}
+					}
+				} catch ( e ) {
+					mw.log.warn( 'Error parsing template generated contents', e );
+				}
+				if ( !generatedData || generatedData.length === 0 ) {
+					// Fall back on just storing the sparse template data
+					const nodeClass = ve.dm.modelRegistry.lookup( type );
+					const store = surfaceFragment.getDocument().getStore();
+					const hash = OO.getHash( [ nodeClass.static.getHashObjectForRendering( data[ 0 ] ), undefined ] );
+					store.hash( generatedContents, hash );
+				}
 			}
 
 			surfaceFragment.insertContent( data );
