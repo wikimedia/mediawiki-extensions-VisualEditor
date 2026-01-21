@@ -431,7 +431,12 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 					// 1. Only trigger if the check is a pure insertion with no
 					// adjacent content removed (T340088), or if we're allowing
 					// non-pure insertions. Either way, a pure removal won't be included.
-					if ( ( !onlyPureInsertions && op.insert.length > 0 ) || op.remove.length === 0 ) {
+					if (
+						( !onlyPureInsertions && op.insert.length > 0 ) ||
+						// Only removals of content count, not element open/closes.
+						// TODO: this could be extended so removals of inline elements do count
+						!op.remove.some( ( item ) => !ve.dm.LinearData.static.isElementData( item ) )
+					) {
 						candidates.push( insertedRange );
 					}
 				}
