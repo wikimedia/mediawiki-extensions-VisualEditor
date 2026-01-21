@@ -262,7 +262,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 					if ( !modified.some( ( modRange ) => range.touchesRange( modRange ) ) ) {
 						continue;
 					}
-					if ( !this.isRangeInValidSection( range, surfaceModel.documentModel ) ) {
+					if ( !this.isRangeValid( range, surfaceModel.documentModel ) ) {
 						continue;
 					}
 					const term = surfaceModel.getLinearFragment( range ).getText();
@@ -283,7 +283,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 						// we need to know if this rule is more-specific:
 						if ( !(
 							this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel ) &&
-							this.isRangeInValidSection( range, surfaceModel.documentModel, matchItem.config )
+							this.isRangeValid( range, surfaceModel.documentModel, matchItem.config )
 						) ) {
 							continue;
 						}

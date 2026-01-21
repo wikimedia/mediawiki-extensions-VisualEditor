@@ -483,12 +483,13 @@ mw.editcheck.BaseEditCheck.prototype.getContentRangesFromRange = function ( docu
  *
  * @param {ve.Range} range
  * @param {ve.dm.Document} documentModel
+ * @param {Object} [config] Override config to use instead of the check's default
  * @return {boolean}
  */
-mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentModel ) {
+mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentModel, config ) {
 	return (
-		this.isRangeInValidSection( range, documentModel ) &&
-		( !this.config.ignoreQuotedContent || this.isOffsetQuoted( range.start, documentModel ) )
+		this.isRangeInValidSection( range, documentModel, config ) &&
+		( !( config || this.config ).ignoreQuotedContent || this.isOffsetQuoted( range.start, documentModel ) )
 	);
 };
 
