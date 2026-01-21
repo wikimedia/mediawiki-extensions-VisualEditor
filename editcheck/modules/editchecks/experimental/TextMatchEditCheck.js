@@ -152,7 +152,7 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchItemsLoaded = function () {
 	const rawMatchItems = Object.assign(
 		{},
 		mw.editcheck.TextMatchEditCheck.static.matchItems || {},
-		mw.editcheck.config.textMatch.matchItems || {}
+		ve.getProp( mw.editcheck.config, 'textMatch', 'matchItems' ) || {}
 	);
 
 	// Begin async processing and cache promise
