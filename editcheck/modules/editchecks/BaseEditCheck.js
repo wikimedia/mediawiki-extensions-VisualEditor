@@ -50,9 +50,9 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	ignoreQuotedContent: false
 };
 
-mw.editcheck.BaseEditCheck.static.title = OO.ui.deferMsg( 'editcheck-review-title' );
+mw.editcheck.BaseEditCheck.static.title = null;
 
-mw.editcheck.BaseEditCheck.static.description = OO.ui.deferMsg( 'editcheck-dialog-addref-description' );
+mw.editcheck.BaseEditCheck.static.description = null;
 
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
 
