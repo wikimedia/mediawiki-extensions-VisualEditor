@@ -9,11 +9,11 @@ mw.editcheck.DuplicateLinksEditCheck.static.title = 'Duplicate links';
 
 mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
 
-// TODO: Add "Learn more", localise. Eg in english to https://en.wikipedia.org/wiki/MOS:REPEATLINK
-mw.editcheck.DuplicateLinksEditCheck.static.description = 'This link appears more than once in this section. Help make Wikipedia easier for people to read by removing this link.';
-
-mw.editcheck.DuplicateLinksEditCheck.static.learnMoreHref = 'https://en.wikipedia.org/wiki/MOS:REPEATLINK';
-mw.editcheck.DuplicateLinksEditCheck.static.learnMore = 'Learn more';
+// TODO: i18n
+mw.editcheck.DuplicateLinksEditCheck.static.description = new OO.ui.HtmlSnippet(
+	'This link appears more than once in this section. Help make Wikipedia easier for people to read by removing this link.<br>' +
+	'<a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">Learn more</a>'
+);
 
 mw.editcheck.DuplicateLinksEditCheck.static.successToast = 'Thank you for helping to make this section easier for people to read.';
 
@@ -122,18 +122,9 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 			highlights.splice( index, 1 );
 			highlights.unshift( annRange );
 
-			// Set up the message
-			const $learnMore = $( '<a>' ).text( this.constructor.static.learnMore );
-			ve.setAttributeSafe( $learnMore[ 0 ], 'href', this.constructor.static.learnMoreHref );
-			const $checkMessage = $( '<span>' )
-				.append( $( '<span>' ).text( this.constructor.static.description ) )
-				.append( $( '<span>' ).text( ' ' ) )
-				.append( $learnMore );
-
 			actions.push( new mw.editcheck.EditCheckAction( {
 				fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
 				focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
-				message: $checkMessage,
 				check: this
 			} ) );
 		}
