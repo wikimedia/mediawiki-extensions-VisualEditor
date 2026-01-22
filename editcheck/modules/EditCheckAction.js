@@ -159,7 +159,7 @@ mw.editcheck.EditCheckAction.prototype.getDescription = function () {
  */
 mw.editcheck.EditCheckAction.prototype.getType = function () {
 	if ( this.suggestion ) {
-		return 'success';
+		return 'progressive';
 	}
 	return this.type;
 };

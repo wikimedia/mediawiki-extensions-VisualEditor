@@ -83,6 +83,9 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 OO.inheritClass( mw.editcheck.EditCheckActionWidget, OO.ui.MessageWidget );
 
+mw.editcheck.EditCheckActionWidget.static.iconMap = ve.copy( mw.editcheck.EditCheckActionWidget.static.iconMap );
+mw.editcheck.EditCheckActionWidget.static.iconMap.progressive = 'lightbulb';
+
 /* Events */
 
 /**

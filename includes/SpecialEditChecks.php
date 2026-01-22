@@ -44,6 +44,7 @@ class SpecialEditChecks extends SpecialPage {
 		$out = $this->getOutput();
 		$out->enableOOUI();
 		$out->addModuleStyles( [
+			'oojs-ui.styles.icons-interactions',
 			'ext.visualEditor.editCheck.special',
 			'mediawiki.content.json'
 		] );
@@ -223,11 +224,15 @@ class SpecialEditChecks extends SpecialPage {
 	private function buildEditCheckActionWidget( array $checkData, bool $suggestion ): MessageWidget {
 		$widget = new MessageWidget(
 			[
-				'type' => $suggestion ? 'success' : 'warning',
+				'type' => $suggestion ? 'progressive' : 'warning',
+				'icon' => $suggestion ? 'lightbulb' : null,
 				'label' => $checkData['title'] ?: "\u{00A0}",
 				'classes' => [ 've-ui-editCheckActionWidget' ]
 			]
 		);
+		if ( $suggestion ) {
+			$widget->clearFlags()->setFlags( [ 'progressive' ] );
+		}
 		if ( $suggestion ) {
 			$widget->addClasses( [ 've-ui-editCheckActionWidget-suggestion' ] );
 		}

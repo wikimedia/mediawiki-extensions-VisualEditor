@@ -780,23 +780,20 @@ Controller.prototype.drawSelections = function () {
 		surfaceView.getSelectionManager().drawSelections( 'editCheck-inactive', [] );
 		return;
 	}
-	const inactiveOptions = { showGutter, showRects: false };
+	const inactiveOptions = { showGutter, showRects: true };
 
 	const inactiveSelections = [];
-	// Optimization: When showGutter is false inactive selections currently render nothing
-	if ( showGutter ) {
-		actions.forEach( ( action ) => {
-			const isActive = ( action === this.focusedAction );
-			action.getHighlightSelections().forEach( ( selection ) => {
-				const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
-				if ( isActive ) {
-					activeSelections.push( selectionView );
-				} else {
-					inactiveSelections.push( selectionView );
-				}
-			} );
+	actions.forEach( ( action ) => {
+		const isActive = ( action === this.focusedAction );
+		action.getHighlightSelections().forEach( ( selection ) => {
+			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
+			if ( isActive ) {
+				activeSelections.push( selectionView );
+			} else {
+				inactiveSelections.push( selectionView );
+			}
 		} );
-	}
+	} );
 
 	// The following classes are used here:
 	// * ve-ce-surface-selections-editCheck-active

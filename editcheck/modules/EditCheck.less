@@ -191,8 +191,24 @@
 			box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.2 );
 		}
 
+		&.oo-ui-flaggedElement-progressive {
+			border-color: @border-color-progressive;
+			background: @background-color-progressive-subtle;
+
+			> .oo-ui-labelElement-label {
+				font-weight: normal;
+			}
+		}
+
 		&.ve-ui-editCheckActionWidget-collapsed {
-			filter: grayscale( 1 );
+			&:not( :hover ) {
+				background: @background-color-base;
+				border-color: @border-color-base;
+
+				&.oo-ui-flaggedElement-progressive {
+					border-color: @border-color-muted;
+				}
+			}
 
 			> .ve-ui-editCheckActionWidget-body {
 				display: none;
@@ -244,14 +260,6 @@
 
 		.ve-ui-editCheckActionWidget-feedback ~ * {
 			display: none;
-		}
-
-		&-suggestion {
-			background: @background-color-success-subtle;
-
-			> .oo-ui-labelElement-label {
-				color: @color-success;
-			}
 		}
 	}
 
@@ -359,16 +367,8 @@
 				border-left: 2px solid @color-warning;
 			}
 
-			&-notice {
-				border-left: 2px solid @color-notice;
-			}
-
-			&-success {
-				border-left: 2px solid @color-success;
-			}
-
-			&-inactive {
-				border-left: 2px solid @border-color-base;
+			&-progressive {
+				border-left: 2px solid @color-progressive;
 			}
 
 			&-quickaction {
@@ -430,21 +430,23 @@
 /* Selections */
 
 .ve-ce-surface-selections-editCheck {
-	&-active {
+	&-active,
+	&-inactive {
 		.ve-ce-surface-selection {
 			&-rects {
 				opacity: 0.2;
 			}
 
 			&-rect {
-				// Adjust target colours to account for 50% opacity
-				background: ( ( #fef6e7 - 0.8 * ( #fff ) ) / 0.2 );
-				// border: 1px solid ( ( #a66200 - 0.8 * ( #fff ) ) / 0.2 );
 				border-radius: 2px;
 				padding: 2px;
 				margin: -2px 0 0 -2px;
 			}
+		}
+	}
 
+	&-active {
+		.ve-ce-surface-selection {
 			&-bounding {
 				@padding: 3px;
 				@border: 2px;
@@ -498,25 +500,42 @@
 		}
 
 		.ve-ce-surface-selection-editCheck {
-			&-error .ve-ce-surface-selection-gutter {
-				background-color: @color-error;
+			&-warning .ve-ce-surface-selection-rect {
+				// Adjust target colours to account for 50% opacity
+				// @background-color-warning-subtle
+				background: ( ( #fdf2d5 - 0.7 * ( #fff ) ) / 0.3 );
 			}
 
-			&-warning .ve-ce-surface-selection-gutter {
-				background-color: @color-warning;
+			&-error .ve-ce-surface-selection-rect {
+				// @background-color-error-subtle
+				background: ( ( #ffe9e5 - 0.7 * ( #fff ) ) / 0.3 );
 			}
 
-			&-notice .ve-ce-surface-selection-gutter {
-				background-color: @color-notice;
-			}
-
-			&-success .ve-ce-surface-selection-gutter {
-				background-color: @color-success;
+			&-progressive .ve-ce-surface-selection-rect {
+				// @background-color-progressive-subtle
+				background: ( ( #e8eeff - 0.7 * ( #fff ) ) / 0.3 );
 			}
 		}
 	}
 
-	&-inactive .ve-ce-surface-selection-gutter {
-		background-color: @border-color-base;
+	&-inactive {
+		.ve-ce-surface-selection-rect {
+			// @background-color-interactive-subtle
+			background: ( ( #f8f9fa - 0.9 * ( #fff ) ) / 0.1 );
+		}
+	}
+}
+
+.ve-ce-surface-selection-editCheck {
+	&-warning .ve-ce-surface-selection-gutter {
+		background-color: @color-warning;
+	}
+
+	&-error .ve-ce-surface-selection-gutter {
+		background-color: @color-error;
+	}
+
+	&-progressive .ve-ce-surface-selection-gutter {
+		background-color: @color-progressive;
 	}
 }

@@ -658,7 +658,8 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
-				"ext.visualEditor.mwsave"
+				"ext.visualEditor.mwsave",
+				"oojs-ui.styles.icons-interactions"
 			],
 			"messages": [
 				"editcheck-dialog-action-no",
