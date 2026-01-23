@@ -5,20 +5,16 @@ mw.editcheck.ExternalLinksEditCheck = function MWExternalLinksEditCheck() {
 
 OO.inheritClass( mw.editcheck.ExternalLinksEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.ExternalLinksEditCheck.static.title = 'Remove external link';
-
 mw.editcheck.ExternalLinksEditCheck.static.name = 'externalLink';
 
-mw.editcheck.ExternalLinksEditCheck.static.description = '<a href="//en.wikipedia.org/wiki/WP:EL">External links</a> should generally not appear in the body of an article. Help readers stay focused on the content by either removing this link, moving it to an "External links" section, or by <a href="//en.wikipedia.org/wiki/WP:INTREFVE">converting it into a citation</a> if appropriate.';
+mw.editcheck.ExternalLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-external-link-title' );
 
-// HACK: Use plain string above so Special:EditChecks can parse.
-const description = mw.editcheck.ExternalLinksEditCheck.static.description;
-mw.editcheck.ExternalLinksEditCheck.static.description = () => $( $.parseHTML( description ) );
+mw.editcheck.ExternalLinksEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-external-link-description' );
 
 mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
-		label: 'Remove link'
+		label: OO.ui.deferMsg( 'editcheck-action-remove-link' )
 	},
 	{
 		action: 'dismiss',

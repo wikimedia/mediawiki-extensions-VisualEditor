@@ -13,16 +13,16 @@ mw.editcheck.ConvertReferenceEditCheck.static.defaultConfig = ve.extendObject( {
 	strict: 'url-only'
 } );
 
-mw.editcheck.ConvertReferenceEditCheck.static.title = OO.ui.deferMsg( 'citoid-referencecontextitem-convert-button' );
+mw.editcheck.ConvertReferenceEditCheck.static.title = OO.ui.deferMsg( 'editcheck-convertreference-title' );
 
-mw.editcheck.ConvertReferenceEditCheck.static.description = OO.ui.deferMsg( 'citoid-referencecontextitem-convert-message' );
+mw.editcheck.ConvertReferenceEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-convertreference-description' );
 
 mw.editcheck.ConvertReferenceEditCheck.static.name = 'convertReference';
 
 mw.editcheck.ConvertReferenceEditCheck.static.choices = [
 	{
 		action: 'convert',
-		label: OO.ui.deferMsg( 'citoid-referencecontextitem-convert-button' )
+		label: OO.ui.deferMsg( 'editcheck-action-convert-reference' )
 	},
 	{
 		action: 'dismiss',

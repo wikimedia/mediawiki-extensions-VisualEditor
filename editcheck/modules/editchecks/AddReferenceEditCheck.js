@@ -16,7 +16,7 @@ mw.editcheck.AddReferenceEditCheck.static.success = OO.ui.deferMsg( 'editcheck-d
 mw.editcheck.AddReferenceEditCheck.static.choices = [
 	{
 		action: 'accept',
-		label: OO.ui.deferMsg( 'editcheck-dialog-action-yes' ),
+		label: OO.ui.deferMsg( 'editcheck-action-add-citation' ),
 		icon: 'check'
 	},
 	{

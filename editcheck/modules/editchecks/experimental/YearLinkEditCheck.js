@@ -12,22 +12,22 @@ mw.editcheck.YearLinkEditCheck = function MWYearLinkEditCheck() {
 
 OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.YearLinkEditCheck.static.title = 'Fix year link';
-
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
 
-mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a different year than the one shown in the text. Help make the article more accurate by updating the displayed year and linked year to match.';
+mw.editcheck.YearLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-yearlink-title' );
+
+mw.editcheck.YearLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-yearlink-description' );
 
 mw.editcheck.YearLinkEditCheck.static.choices = [
 	{
 		action: 'useTarget',
 		// Example value for Special:EditChecks, actual value is set later
-		label: 'Use 2001'
+		label: OO.ui.deferMsg( 'editcheck-yearlink-action-use', '1999' )
 	},
 	{
 		action: 'useLabel',
 		// Example value for Special:EditChecks, actual value is set later
-		label: 'Use 2003'
+		label: OO.ui.deferMsg( 'editcheck-yearlink-action-use', '2003' )
 	},
 	{
 		action: 'dismiss',
@@ -75,8 +75,8 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 		}
 
 		const choices = ve.copy( mw.editcheck.YearLinkEditCheck.static.choices );
-		choices[ 0 ].label = 'Use ' + targetYear;
-		choices[ 1 ].label = 'Use ' + labelYear;
+		choices[ 0 ].label = ve.msg( 'editcheck-yearlink-action-use', targetYear );
+		choices[ 1 ].label = ve.msg( 'editcheck-yearlink-action-use', labelYear );
 
 		return this.buildActionFromLinkRange( annRange.range, surfaceModel, { choices } );
 	} );

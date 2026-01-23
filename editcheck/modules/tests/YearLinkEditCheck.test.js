@@ -99,8 +99,8 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		if ( caseItem.expectedActions ) {
 			const action = actions[ 0 ];
 			assert.deepEqual(
-				action.getChoices().slice( 0, 2 ).map( ( c ) => c.label ),
-				[ 'Use ' + caseItem.expectedTargetYear, 'Use ' + caseItem.expectedLabelYear ],
+				action.getChoices().slice( 0, 2 ).map( ( c ) => String( c.label ).split( ',' ).pop() ),
+				[ caseItem.expectedTargetYear, caseItem.expectedLabelYear ],
 				msg + ': choices'
 			);
 		}

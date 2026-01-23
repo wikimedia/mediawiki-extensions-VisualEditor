@@ -5,15 +5,11 @@ mw.editcheck.DuplicateLinksEditCheck = function MWDuplicateLinksEditCheck() {
 
 OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.DuplicateLinksEditCheck.static.title = 'Remove duplicated link';
-
 mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
 
-mw.editcheck.DuplicateLinksEditCheck.static.description = 'This link appears more than once in this section. Help readers navigate the article more easily by removing <a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">repeated links</a>.';
+mw.editcheck.DuplicateLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-duplicate-link-title' );
 
-// HACK: Use plain string above so Special:EditChecks can parse.
-const description = mw.editcheck.DuplicateLinksEditCheck.static.description;
-mw.editcheck.DuplicateLinksEditCheck.static.description = () => $( $.parseHTML( description ) );
+mw.editcheck.DuplicateLinksEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-duplicate-link-description' );
 
 mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	scope: 'paragraph' // 'section'
@@ -22,7 +18,7 @@ mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {},
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
-		label: 'Remove link'
+		label: OO.ui.deferMsg( 'editcheck-action-remove-link' )
 	},
 	{
 		action: 'dismiss',

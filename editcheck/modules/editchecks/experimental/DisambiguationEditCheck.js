@@ -5,20 +5,16 @@ mw.editcheck.DisambiguationEditCheck = function MWDisambiguationEditCheck() {
 
 OO.inheritClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.DisambiguationEditCheck.static.title = 'Link to a more specific page';
-
 mw.editcheck.DisambiguationEditCheck.static.name = 'disambiguation';
 
-mw.editcheck.DisambiguationEditCheck.static.description = 'This link points to a <a href="//en.wikipedia.org/wiki/Wikipedia:Disambiguation">disambiguation page</a>. Help readers find the right topic by linking to a more specific page.';
+mw.editcheck.DisambiguationEditCheck.static.title = OO.ui.deferMsg( 'editcheck-disambiguation-title' );
 
-// HACK: Use plain string above so Special:EditChecks can parse.
-const description = mw.editcheck.DisambiguationEditCheck.static.description;
-mw.editcheck.DisambiguationEditCheck.static.description = () => $( $.parseHTML( description ) );
+mw.editcheck.DisambiguationEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-disambiguation-description' );
 
 mw.editcheck.DisambiguationEditCheck.static.choices = [
 	{
 		action: 'edit',
-		label: 'Edit link' // TODO: i18n
+		label: OO.ui.deferMsg( 'editcheck-action-update-link' )
 	},
 	{
 		action: 'dismiss',

@@ -7,22 +7,18 @@ OO.inheritClass( mw.editcheck.ImageCaptionEditCheck, mw.editcheck.BaseEditCheck 
 
 mw.editcheck.ImageCaptionEditCheck.static.name = 'imageCaption';
 
-mw.editcheck.ImageCaptionEditCheck.static.title = 'Add image caption';
+mw.editcheck.ImageCaptionEditCheck.static.title = OO.ui.deferMsg( 'editcheck-image-caption-title' );
 
-mw.editcheck.ImageCaptionEditCheck.static.description = 'This image does not have a caption. Help readers understand why the image is relevant by adding a <a href="//en.wikipedia.org/wiki/WP:CAP">short caption</a>.';
-
-// HACK: Use plain string above so Special:EditChecks can parse.
-const description = mw.editcheck.ImageCaptionEditCheck.static.description;
-mw.editcheck.ImageCaptionEditCheck.static.description = () => $( $.parseHTML( description ) );
+mw.editcheck.ImageCaptionEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-image-caption-description' );
 
 mw.editcheck.ImageCaptionEditCheck.static.choices = [
 	{
 		action: 'edit',
-		label: 'Add caption'
+		label: OO.ui.deferMsg( 'editcheck-action-add-caption' )
 	},
 	{
 		action: 'dismiss',
-		label: 'Dismiss'
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 
