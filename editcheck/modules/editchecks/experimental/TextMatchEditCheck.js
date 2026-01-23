@@ -54,11 +54,15 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 mw.editcheck.TextMatchEditCheck.static.matchItemsPromise = null;
 
 /**
- * Fully processed matchItems with all imports
+ * Cache containing fully processed matchItems will all imports,
+ * as well as any TextFinders created for them
  *
  * @type {Object}
  */
-mw.editcheck.TextMatchEditCheck.static.processedMatchItems = null;
+mw.editcheck.TextMatchEditCheck.static.matchCache = {
+	matchItems: null,
+	memoizedFinders: {}
+};
 
 /**
  * Fetch matchItem config from a MediaWiki json file
@@ -140,7 +144,7 @@ mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchIt
 };
 
 /**
- * Ensure matchItems and any imported configs are loaded exactly once
+ * Ensure matchItems and any imported configs are loaded exactly once per edit session
  *
  * @return {Promise<Object>} Promise which resolves to processed matchItems
  */
@@ -158,8 +162,13 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchItemsLoaded = function () {
 	// Begin async processing and cache promise
 	this.matchItemsPromise = this.processMatchItems( rawMatchItems )
 		.then( ( processed ) => {
-			this.processedMatchItems = processed;
-			return processed;
+			const cache = {
+				matchItems: processed,
+				memoizedFinders: {}
+			};
+			// Reset the cache when we get new matchItems
+			this.matchCache = cache;
+			return cache;
 		} )
 		.catch( ( err ) => {
 			mw.log.error( 'Failed to process matchItems', err );
@@ -169,8 +178,9 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchItemsLoaded = function () {
 };
 
 /**
- * Create a matchItem instance for each matchItem
- * and populate lookup maps
+ * Create a matchItem instance for each matchItem and populate lookup maps
+ *
+ * NOTE: rawMatchItems should never be anything but this.constructor.static.matchCache.matchItems
  *
  * @param {Object} rawMatchItems all matchitem objects from config
  */
@@ -223,21 +233,26 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 		.then( () => {
 			if ( !this.matchItems.length ) {
 				this.buildMatchItemMaps(
-					this.constructor.static.processedMatchItems
+					this.constructor.static.matchCache.matchItems
 				);
 			}
+			const finders = this.constructor.static.matchCache.memoizedFinders;
 			const actions = [];
 			const fragmentCountsByItem = new Map();
 			const document = surfaceModel.getDocument();
 			const modified = this.getModifiedContentRanges( document );
+			const matchConfigs = [ ];
 
-			const matchConfigs = [
-				{
+			// Only create matchConfig for a search strategy if that search strategy contains any terms
+			if ( Object.keys( this.matchItemsSensitiveByTerm ).length ) {
+				matchConfigs.push( {
 					caseSensitive: true,
 					terms: Object.keys( this.matchItemsSensitiveByTerm ),
 					lookup: ( term ) => this.matchItemsSensitiveByTerm[ term ] || [ ]
-				},
-				{
+				} );
+			}
+			if ( Object.keys( this.matchItemsInsensitiveByTerm ).length ) {
+				matchConfigs.push( {
 					caseSensitive: false,
 					terms: Object.keys( this.matchItemsInsensitiveByTerm ),
 					lookup: ( term ) => {
@@ -246,12 +261,20 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 							.map( ( key ) => this.matchItemsInsensitiveByTerm[ key ] || [] )
 							.reduce( ( acc, arr ) => acc.concat( arr ), [] );
 					}
-				}
-			];
+				} );
+			}
 
 			for ( const { caseSensitive, terms, lookup } of matchConfigs ) {
+				if ( !finders[ caseSensitive ] ) {
+					const textFinder = new ve.dm.SetTextFinder( new Set( terms ),
+						{
+							caseSensitiveString: caseSensitive,
+							wholeWord: true
+						} );
+					finders[ caseSensitive ] = new ve.dm.MemoizedTextFinder( textFinder );
+				}
 				const ranges = document.findText(
-					new Set( terms ),
+					finders[ caseSensitive ],
 					{
 						caseSensitiveString: caseSensitive,
 						wholeWord: true
