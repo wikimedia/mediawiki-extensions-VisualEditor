@@ -32,3 +32,16 @@ mw.editcheck.fetchTimeout = function ( resource, options = {} ) {
 		throw error;
 	} );
 };
+
+/**
+ * Add click tracking to all links in an element
+ *
+ * @param {jQuery} $element Element containing links
+ * @param {string} name Name of the edit check
+ * @param {string} action Action name for tracking
+ */
+mw.editcheck.trackActionLinks = function ( $element, name, action ) {
+	$element.find( 'a' ).on( 'click', () => {
+		ve.track( 'activity.editCheck-' + name, { action } );
+	} );
+};

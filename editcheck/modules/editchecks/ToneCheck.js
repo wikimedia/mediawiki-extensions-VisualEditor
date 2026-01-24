@@ -116,19 +116,22 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 	if ( !outcome ) {
 		return null;
 	}
+
+	// eslint-disable-next-line no-jquery/no-append-html
+	const $message = $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-description', ve.msg( 'editcheck-tone-descriptionlink' ) ) );
+	mw.editcheck.trackActionLinks( $message, this.getName(), 'click-learn-more' );
+	ve.targetLinksToNewWindow( $message[ 0 ] );
+
+	// eslint-disable-next-line no-jquery/no-append-html
+	const $footer = $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-footer', ve.msg( 'editcheck-tone-footerlink' ) ) );
+	mw.editcheck.trackActionLinks( $footer, this.getName(), 'click-model-card' );
+	ve.targetLinksToNewWindow( $footer[ 0 ] );
+
 	// TODO: variant message/labels when in back-from-presave state
 	const action = new mw.editcheck.EditCheckAction( {
 		fragments: [ fragment ],
-		// eslint-disable-next-line no-jquery/no-append-html
-		message: $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-description', ve.msg( 'editcheck-tone-descriptionlink' ) ) )
-			.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
-				ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-learn-more' } );
-			} ).end(),
-		// eslint-disable-next-line no-jquery/no-append-html
-		footer: $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-footer', ve.msg( 'editcheck-tone-footerlink' ) ) )
-			.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
-				ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-model-card' } );
-			} ).end(),
+		message: $message,
+		footer: $footer,
 		check: this,
 		choices: [
 			{

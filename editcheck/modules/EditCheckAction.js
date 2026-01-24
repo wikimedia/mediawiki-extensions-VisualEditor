@@ -146,7 +146,7 @@ mw.editcheck.EditCheckAction.prototype.getFocusSelection = function () {
 /**
  * Get a description of the check
  *
- * @return {string}
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet}
  */
 mw.editcheck.EditCheckAction.prototype.getDescription = function () {
 	return this.message || this.check.getDescription( this );

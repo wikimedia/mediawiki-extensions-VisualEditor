@@ -49,13 +49,15 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	} );
 	return Object.keys( pastesById ).map( ( id ) => {
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
+
+		// eslint-disable-next-line no-jquery/no-append-html
+		const $message = $( '<span>' ).append( ve.htmlMsg( 'editcheck-copyvio-description', ve.msg( 'editcheck-copyvio-descriptionlink' ) ) );
+		mw.editcheck.trackActionLinks( $message, this.getName(), 'click-learn-more' );
+		ve.targetLinksToNewWindow( $message[ 0 ] );
+
 		return new mw.editcheck.EditCheckAction( {
 			fragments,
-			// eslint-disable-next-line no-jquery/no-append-html
-			message: $( '<span>' ).append( ve.htmlMsg( 'editcheck-copyvio-description', ve.msg( 'editcheck-copyvio-descriptionlink' ) ) )
-				.find( 'a' ).attr( 'target', '_blank' ).on( 'click', () => {
-					ve.track( 'activity.editCheck-' + this.getName(), { action: 'click-learn-more' } );
-				} ).end(),
+			message: $message,
 			id,
 			check: this
 		} );
