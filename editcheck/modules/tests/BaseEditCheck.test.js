@@ -295,6 +295,13 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 			expectedValid: true
 		},
 		{
+			name: 'Outside quoted text, without quotes ignored',
+			config: { ignoreQuotedContent: false },
+			range: new ve.Range( 2, 3 ),
+			expectedState: false,
+			expectedValid: true
+		},
+		{
 			name: 'Referencing specifically the opening quote character',
 			config: { ignoreQuotedContent: true },
 			range: new ve.Range( 4 ),
@@ -409,7 +416,7 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 		);
 		assert.strictEqual(
 			check.isRangeValid( caseItem.range, doc ),
-			caseItem.expectedState,
+			caseItem.expectedValid,
 			caseItem.name + ': validity'
 		);
 	} );

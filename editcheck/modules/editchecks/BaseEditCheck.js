@@ -500,10 +500,13 @@ mw.editcheck.BaseEditCheck.prototype.getContentRangesFromRange = function ( docu
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentModel, config ) {
-	return (
-		this.isRangeInValidSection( range, documentModel, config ) &&
-		( !( config || this.config ).ignoreQuotedContent || this.isOffsetQuoted( range.start, documentModel ) )
-	);
+	if ( !this.isRangeInValidSection( range, documentModel, config ) ) {
+		return false;
+	}
+	if ( ( config || this.config ).ignoreQuotedContent && this.isOffsetQuoted( range.start, documentModel ) ) {
+		return false;
+	}
+	return true;
 };
 
 /**
