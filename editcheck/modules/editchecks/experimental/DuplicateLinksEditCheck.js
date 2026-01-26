@@ -15,8 +15,6 @@ mw.editcheck.DuplicateLinksEditCheck.static.description = new OO.ui.HtmlSnippet(
 	'<a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">Learn more</a>'
 );
 
-mw.editcheck.DuplicateLinksEditCheck.static.successToast = 'Thank you for helping to make this section easier for people to read.';
-
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
@@ -140,7 +138,6 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.act = function ( choice, action )
 			break;
 		case 'remove':
 			action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
-			mw.notify( action.check.constructor.static.successToast, { type: 'success' } );
 			break;
 	}
 };
