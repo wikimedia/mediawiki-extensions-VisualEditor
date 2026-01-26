@@ -58,6 +58,7 @@
 	"editcheck-specialeditchecks-info": "Information line on Special:Editchecks pointing to the on-wiki configuration page.",
 	"editcheck-specialeditchecks-header-abtest": "Section heading for A/B test checks.",
 	"editcheck-specialeditchecks-header-base": "Section heading for base configuration.",
+	"editcheck-specialeditchecks-header-betafeatures": "Section heading for beta feature checks.",
 	"editcheck-specialeditchecks-header-default": "Section heading for default checks (non-experimental).",
 	"editcheck-specialeditchecks-header-experimental": "Section heading for experimental checks.",
 	"editcheck-specialeditchecks-col-title": "Column header label for the check display title.",

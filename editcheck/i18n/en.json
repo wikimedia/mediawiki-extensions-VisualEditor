@@ -56,6 +56,7 @@
 	"editcheck-specialeditchecks-info": "Edit checks are configured at [[MediaWiki:Editcheck-config.json]]. For documentation, see [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
 	"editcheck-specialeditchecks-header-abtest": "A/B test checks",
 	"editcheck-specialeditchecks-header-base": "Base configuration",
+	"editcheck-specialeditchecks-header-betafeatures": "Beta features",
 	"editcheck-specialeditchecks-header-default": "Default checks",
 	"editcheck-specialeditchecks-header-experimental": "Experimental checks",
 	"editcheck-specialeditchecks-col-title": "Title",

@@ -5,6 +5,8 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\Config\Config;
+use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Content\JsonContent;
 use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
@@ -12,12 +14,18 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
 
 class SpecialEditChecks extends SpecialPage {
+	private readonly Config $config;
 
 	/**
 	 * @inheritDoc
 	 */
-	public function __construct() {
+	public function __construct(
+		private readonly Config $coreConfig,
+		ConfigFactory $configFactory
+	) {
 		parent::__construct( 'EditChecks' );
+
+		$this->config = $configFactory->makeConfig( 'visualeditor' );
 	}
 
 	/**
@@ -53,7 +61,7 @@ class SpecialEditChecks extends SpecialPage {
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
 			$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-base' )->text() ) );
 			$out->addHTML( $this->configDetails(
-				$this->tryJsonifyObjectLiteral( $baseCheck[ 0 ]['defaultConfig'] ),
+				$this->jsonTableFromObjectString( $baseCheck[ 0 ]['defaultConfig'] ),
 				isset( $onWikiConfig['*'] ) ? $this->jsonTable( $onWikiConfig['*'] ) : ''
 			) );
 		}
@@ -82,9 +90,24 @@ class SpecialEditChecks extends SpecialPage {
 
 		if ( is_dir( $experimentalDir ) ) {
 			$experimentalChecks = $this->collectChecks( $experimentalDir . '/*.js' );
-			$out->addHTML( Html::element( 'h2', [],
-				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
-			$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig ) );
+			if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
+				// Split beta and experimental checks based on if they are enabled by default
+				$out->addHTML( Html::rawElement( 'h2', [],
+					Html::element( 'a', [
+						'href' => $this->getTitleFor( 'Preferences' )->getLocalURL() . '#mw-prefsection-betafeatures',
+					],
+					$this->msg( 'editcheck-specialeditchecks-header-betafeatures' )->text() ) )
+				);
+				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, true ) );
+
+				$out->addHTML( Html::element( 'h2', [],
+					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
+				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, false ) );
+			} else {
+				$out->addHTML( Html::element( 'h2', [],
+					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
+				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, null ) );
+			}
 		}
 	}
 
@@ -108,13 +131,18 @@ class SpecialEditChecks extends SpecialPage {
 			}
 
 			$name = $this->extractStaticValue( $src, 'name' );
+			if ( $name === '' ) {
+				// Abstrct class
+				continue;
+			}
+
 			$title = $this->extractStaticValue( $src, 'title' );
 			$description = $this->extractStaticValue( $src, 'description' );
 			$defaultConfig = $this->extractDefaultConfig( $src );
 
 			$checks[] = [
 				'file' => $file,
-				'name' => $name ?: '',
+				'name' => $name,
 				'title' => $title,
 				'description' => $description,
 				'defaultConfig' => $defaultConfig,
@@ -129,12 +157,13 @@ class SpecialEditChecks extends SpecialPage {
 	/**
 	 * Build HTML table listing the given edit checks.
 	 *
-	 * @param array $rows List of edit checks
+	 * @param array $checks List of edit checks
 	 * @param array $onWikiConfig On-wiki configuration overrides
+	 * @param bool|null $onlyWithEnabledValue If a boolean, only checks whose 'enabled' value matches this
 	 * @return string
 	 */
-	private function buildTableHtml( array $rows, array $onWikiConfig ): string {
-		if ( !$rows ) {
+	private function buildTableHtml( array $checks, array $onWikiConfig, ?bool $onlyWithEnabledValue = null ): string {
+		if ( !$checks ) {
 			return Html::element( 'p', [], $this->msg( 'table_pager_empty' )->text() );
 		}
 		$html = Html::openElement( 'table', [ 'class' => 'wikitable mw-editchecks' ] );
@@ -146,23 +175,30 @@ class SpecialEditChecks extends SpecialPage {
 			Html::element( 'th', [ 'class' => 'mw-editchecks-description' ],
 				$this->msg( 'editcheck-specialeditchecks-col-description' )->text() )
 		);
-		foreach ( $rows as $r ) {
+		foreach ( $checks as $checkData ) {
+			// Filter by enabled value if requested
+			if ( $onlyWithEnabledValue !== null ) {
+				$enabled = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'enabled' ) ?? true;
+				if ( $enabled !== $onlyWithEnabledValue ) {
+					continue;
+				}
+			}
 			$override = '';
-			if ( $r['name'] !== '' && isset( $onWikiConfig[$r['name']] ) ) {
-				$override = $this->jsonTable( $onWikiConfig[$r['name']] );
+			if ( isset( $onWikiConfig[$checkData['name']] ) ) {
+				$override = $this->jsonTable( $onWikiConfig[$checkData['name']] );
 			}
 			$defaultConfig = '';
-			if ( $r['defaultConfig'] ) {
-				$defaultConfig = $this->tryJsonifyObjectLiteral( $r['defaultConfig'] );
+			if ( $checkData['defaultConfig'] ) {
+				$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
 			}
 			$html .= Html::rawElement( 'tr', [],
-				Html::element( 'td', [], $r['title'] ) .
+				Html::element( 'td', [], $checkData['title'] ) .
 				Html::rawElement( 'td', [],
-					Html::element( 'strong', [], $r['name'] ) .
-					Html::element( 'div', [], basename( $r['file'] ) )
+					Html::element( 'strong', [], $checkData['name'] ) .
+					Html::element( 'div', [], basename( $checkData['file'] ) )
 				) .
 				Html::rawElement( 'td', [],
-					Html::element( 'div', [], $r['description'] ) .
+					Html::element( 'div', [], $checkData['description'] ) .
 					( $defaultConfig !== '' || $override !== '' ?
 						$this->configDetails( $defaultConfig, $override ) : ''
 					)
@@ -171,6 +207,31 @@ class SpecialEditChecks extends SpecialPage {
 		}
 		$html .= Html::closeElement( 'table' );
 		return $html;
+	}
+
+	/**
+	 * Get a configuration value for a given check from on-wiki config or default config.
+	 *
+	 * @param array $checkData Check metadata
+	 * @param array $onWikiConfig On-wiki configuration overrides
+	 * @param string $key Configuration key to retrieve
+	 * @return mixed|null JSON encoded value or null if not found
+	 */
+	private function getConfigValueFromData( array $checkData, array $onWikiConfig, string $key ) {
+		// Check on-wiki config first
+		if ( isset( $onWikiConfig[$checkData['name']] ) &&
+			is_array( $onWikiConfig[$checkData['name']] ) &&
+			array_key_exists( $key, $onWikiConfig[$checkData['name']] )
+		) {
+			return $onWikiConfig[$checkData['name']][$key];
+		} elseif ( $checkData['defaultConfig'] !== '' ) {
+			// Fallback to default config
+			$defaultConfig = $this->tryJsonDecodeObjectString( $checkData['defaultConfig'] );
+			if ( is_array( $defaultConfig ) && array_key_exists( $key, $defaultConfig ) ) {
+				return $defaultConfig[$key];
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -258,9 +319,9 @@ class SpecialEditChecks extends SpecialPage {
 	 * Returns pretty-printed JSON string or null on failure.
 	 *
 	 * @param string $js JS object literal
-	 * @return string
+	 * @return mixed|null JSON decoded data or null on failure
 	 */
-	private function tryJsonifyObjectLiteral( string $js ): string {
+	private function tryJsonDecodeObjectString( string $js ) {
 		$src = trim( $js );
 		// Remove comments
 		$src = preg_replace( '/\/\/.*?(?=\n|$)/', '', $src );
@@ -277,9 +338,22 @@ class SpecialEditChecks extends SpecialPage {
 		// Try decode
 		$data = json_decode( $src, true );
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
-			return $js;
+			return null;
 		}
-		return $this->jsonTable( $data );
+		return $data;
+	}
+
+	/**
+	 * Attempt to convert a JS object literal to valid JSON for display.
+	 * Returns pretty-printed JSON string or null on failure.
+	 *
+	 * @param string $js JS object literal
+	 * @return string
+	 */
+	private function jsonTableFromObjectString( string $js ): string {
+		$data = $this->tryJsonDecodeObjectString( $js );
+
+		return $data === null ? $js : $this->jsonTable( $data );
 	}
 
 	/**

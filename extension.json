@@ -2412,7 +2412,13 @@
 	},
 	"SpecialPages": {
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad",
-		"EditChecks": "MediaWiki\\Extension\\VisualEditor\\SpecialEditChecks"
+		"EditChecks": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\SpecialEditChecks",
+			"services": [
+				"MainConfig",
+				"ConfigFactory"
+			]
+		}
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\VisualEditor\\": "includes/",
