@@ -514,7 +514,7 @@ mw.editcheck.BaseEditCheck.prototype.isRangeValid = function ( range, documentMo
  * @return {ve.dm.MWHeadingNode[]} Heading nodes from nearest to furthest
  */
 mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( offset, documentModel ) {
-	const headings = documentModel.getNodesByType( 'mwHeading', true );
+	const headings = this.getHeadingsFromDocument( documentModel );
 	if ( !headings.length ) {
 		return [];
 	}
@@ -541,6 +541,12 @@ mw.editcheck.BaseEditCheck.prototype.getHeadingHierarchyFromOffset = function ( 
 		headingIndex--;
 	}
 	return headingHierarchy;
+};
+
+mw.editcheck.BaseEditCheck.prototype.getHeadingsFromDocument = function ( documentModel ) {
+	return documentModel.getOrInsertCachedData( () => (
+		documentModel.getNodesByType( 'mwHeading', true )
+	), 'editcheck-headings' );
 };
 
 /**
@@ -576,7 +582,7 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 		// There's no preceding heading, so work out if we count as being in a
 		// lead section. It's only a lead section if there are more headings
 		// later in the document, otherwise it's just a stub article.
-		if ( documentModel.getNodesByType( 'mwHeading', true ).some(
+		if ( this.getHeadingsFromDocument( documentModel ).some(
 			( heading ) => heading.getRange().start > range.start
 		) ) {
 			if ( shouldIncludeSections ) {
