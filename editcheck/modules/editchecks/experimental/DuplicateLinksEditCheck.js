@@ -19,7 +19,7 @@ mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
 		label: 'Remove link',
-		icon: 'edit'
+		icon: 'trash'
 	},
 	{
 		action: 'dismiss',

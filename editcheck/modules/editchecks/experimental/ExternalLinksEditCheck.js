@@ -21,9 +21,9 @@ mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, 
 
 mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	{
-		action: 'edit',
-		label: 'Edit link',
-		icon: 'edit'
+		action: 'remove',
+		label: 'Remove link',
+		icon: 'trash'
 	},
 	{
 		action: 'dismiss',
@@ -83,16 +83,13 @@ mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surf
 	} ) );
 };
 
-mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action ) {
 	switch ( choice ) {
 		case 'dismiss':
 			this.dismiss( action );
 			break;
-		case 'edit':
-			setTimeout( () => {
-				action.fragments[ 0 ].select();
-				surface.execute( 'window', 'open', 'link' );
-			} );
+		case 'remove':
+			action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
 			break;
 	}
 };
