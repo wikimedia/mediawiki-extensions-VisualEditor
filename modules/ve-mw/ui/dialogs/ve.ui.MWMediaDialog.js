@@ -958,10 +958,9 @@ ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
 	const title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.imageModel.getResourceName() ) );
 	const $link = $( '<a>' )
 		.addClass( 've-ui-mwMediaDialog-description-link' )
-		.attr( 'target', '_blank' )
-		.attr( 'rel', 'noopener' )
 		.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) );
 	ve.setAttributeSafe( $link[ 0 ], 'href', title.getUrl() );
+	ve.targetLinksToNewWindow( $link[ 0 ] );
 	this.filenameFieldset.setLabel(
 		$( '<span>' ).append(
 			$( document.createTextNode( this.imageModel.getFilename() + ' ' ) ),

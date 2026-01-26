@@ -72,8 +72,6 @@ ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
 					// eslint-disable-next-line local/no-unsanitized-href
 					.append( $( '<a>' )
 						.addClass( 've-ui-mwHelpListToolGroup-version-link' )
-						.attr( 'target', '_blank' )
-						.attr( 'rel', 'noopener' )
 						.attr( 'href', extension[ 'vcs-url' ] )
 						.append( $( '<span>' )
 							.addClass( 've-ui-mwHelpListToolGroup-version-label' )
@@ -85,6 +83,7 @@ ve.ui.MWHelpListToolGroup.prototype.setActive = function () {
 						.addClass( 've-ui-mwHelpListToolGroup-version-date' )
 						.text( extension[ 'vcs-date' ] )
 					);
+				ve.targetLinksToNewWindow( $version[ 0 ] );
 			} else {
 				$version.remove();
 			}
