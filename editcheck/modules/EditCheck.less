@@ -127,13 +127,20 @@
 	}
 
 	.ve-ui-editCheckActionWidget {
-		box-sizing: border-box;
-		white-space: normal; // Minerva needs this
-		margin: @spacing-50 0;
-		padding: @spacing-50 @spacing-75;
-		cursor: pointer;
-		overflow: hidden;
-		border-radius: @border-radius-base;
+		/**
+		 * Increase specificity over core styles in case they are
+		 * loaded later, such as on Special:EditChecks where order
+		 * can't be guaranteed.
+		 */
+		&.oo-ui-messageWidget {
+			box-sizing: border-box;
+			white-space: normal; // Minerva needs this
+			margin: @spacing-50 0;
+			padding: @spacing-50 @spacing-75;
+			cursor: pointer;
+			overflow: hidden;
+			border-radius: @border-radius-base;
+		}
 
 		> .oo-ui-iconElement-icon {
 			// Fixes icon placement in WMUI theme

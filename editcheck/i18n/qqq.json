@@ -63,7 +63,7 @@
 	"editcheck-specialeditchecks-header-experimental": "Section heading for experimental checks.",
 	"editcheck-specialeditchecks-col-title": "Column header label for the check display title.",
 	"editcheck-specialeditchecks-col-name": "Column header label for the check symbolic name (and source file).",
-	"editcheck-specialeditchecks-col-description": "Column header label for the check description and configuration details.",
+	"editcheck-specialeditchecks-col-appearance": "Column header label for the check appearance.",
 	"editcheck-specialeditchecks-abtest": "Badge label shown next to a check name when it is selected via the VisualEditorEditCheckABTest configuration option.",
 	"editcheck-specialeditchecks-config-summary": "Label for the <details>/<summary> element that contains configuration.",
 	"editcheck-specialeditchecks-config-default": "Subheading for the default configuration block.",

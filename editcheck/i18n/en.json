@@ -61,7 +61,7 @@
 	"editcheck-specialeditchecks-header-experimental": "Experimental checks",
 	"editcheck-specialeditchecks-col-title": "Title",
 	"editcheck-specialeditchecks-col-name": "Name",
-	"editcheck-specialeditchecks-col-description": "Description",
+	"editcheck-specialeditchecks-col-appearance": "Appearance",
 	"editcheck-specialeditchecks-abtest": "(A/B test)",
 	"editcheck-specialeditchecks-config-summary": "Configuration",
 	"editcheck-specialeditchecks-config-default": "Default configuration",

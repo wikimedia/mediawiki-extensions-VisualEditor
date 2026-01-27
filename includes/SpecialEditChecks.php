@@ -12,6 +12,7 @@ use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
+use OOUI\MessageWidget;
 
 class SpecialEditChecks extends SpecialPage {
 	private readonly Config $config;
@@ -41,6 +42,7 @@ class SpecialEditChecks extends SpecialPage {
 	public function execute( $par ) {
 		$this->setHeaders();
 		$out = $this->getOutput();
+		$out->enableOOUI();
 		$out->addModuleStyles( [
 			'ext.visualEditor.editCheck.special',
 			'mediawiki.content.json'
@@ -56,15 +58,6 @@ class SpecialEditChecks extends SpecialPage {
 		$onWikiConfig = ResourceLoaderData::getConfig( $this->getContext() );
 
 		$out->addHtml( $this->msg( 'editcheck-specialeditchecks-info' )->parseAsBlock() );
-
-		$baseCheck = $this->collectChecks( $checksDir . '/BaseEditCheck.js' );
-		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
-			$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-base' )->text() ) );
-			$out->addHTML( $this->configDetails(
-				$this->jsonTableFromObjectString( $baseCheck[ 0 ]['defaultConfig'] ),
-				isset( $onWikiConfig['*'] ) ? $this->jsonTable( $onWikiConfig['*'] ) : ''
-			) );
-		}
 
 		$abChecks = [];
 		$defaultChecks = $this->collectChecks( $checksDir . '/*.js', $abstractClasses );
@@ -98,16 +91,25 @@ class SpecialEditChecks extends SpecialPage {
 					],
 					$this->msg( 'editcheck-specialeditchecks-header-betafeatures' )->text() ) )
 				);
-				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, true ) );
+				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, true, true ) );
 
 				$out->addHTML( Html::element( 'h2', [],
 					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
-				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, false ) );
+				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, false, true ) );
 			} else {
 				$out->addHTML( Html::element( 'h2', [],
 					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
-				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, null ) );
+				$out->addHTML( $this->buildTableHtml( $experimentalChecks, $onWikiConfig, null, true ) );
 			}
+		}
+
+		$baseCheck = $this->collectChecks( $checksDir . '/BaseEditCheck.js' );
+		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
+			$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-base' )->text() ) );
+			$out->addHTML( $this->configDetails(
+				$this->jsonTableFromObjectString( $baseCheck[ 0 ]['defaultConfig'] ),
+				isset( $onWikiConfig['*'] ) ? $this->jsonTable( $onWikiConfig['*'] ) : ''
+			) );
 		}
 	}
 
@@ -131,21 +133,15 @@ class SpecialEditChecks extends SpecialPage {
 			}
 
 			$name = $this->extractStaticValue( $src, 'name' );
-			if ( $name === '' ) {
-				// Abstrct class
-				continue;
-			}
-
-			$title = $this->extractStaticValue( $src, 'title' );
-			$description = $this->extractStaticValue( $src, 'description' );
-			$defaultConfig = $this->extractDefaultConfig( $src );
 
 			$checks[] = [
 				'file' => $file,
 				'name' => $name,
-				'title' => $title,
-				'description' => $description,
-				'defaultConfig' => $defaultConfig,
+				'title' => $this->extractStaticValue( $src, 'title' ),
+				'description' => $this->extractStaticValue( $src, 'description' ),
+				'prompt' => $this->extractStaticValue( $src, 'prompt' ),
+				'footer' => $this->extractStaticValue( $src, 'footer' ),
+				'defaultConfig' => $this->extractDefaultConfig( $src ),
 			];
 		}
 		usort( $checks, static function ( $a, $b ) {
@@ -160,20 +156,23 @@ class SpecialEditChecks extends SpecialPage {
 	 * @param array $checks List of edit checks
 	 * @param array $onWikiConfig On-wiki configuration overrides
 	 * @param bool|null $onlyWithEnabledValue If a boolean, only checks whose 'enabled' value matches this
+	 * @param bool $suggestions
 	 * @return string
 	 */
-	private function buildTableHtml( array $checks, array $onWikiConfig, ?bool $onlyWithEnabledValue = null ): string {
+	private function buildTableHtml(
+		array $checks, array $onWikiConfig, ?bool $onlyWithEnabledValue = null, bool $suggestions = false
+	): string {
 		if ( !$checks ) {
 			return Html::element( 'p', [], $this->msg( 'table_pager_empty' )->text() );
 		}
 		$html = Html::openElement( 'table', [ 'class' => 'wikitable mw-editchecks' ] );
 		$html .= Html::rawElement( 'tr', [],
-			Html::element( 'th', [ 'class' => 'mw-editchecks-title' ],
-				$this->msg( 'editcheck-specialeditchecks-col-title' )->text() ) .
 			Html::element( 'th', [ 'class' => 'mw-editchecks-name' ],
 				$this->msg( 'editcheck-specialeditchecks-col-name' )->text() ) .
-			Html::element( 'th', [ 'class' => 'mw-editchecks-description' ],
-				$this->msg( 'editcheck-specialeditchecks-col-description' )->text() )
+			Html::element( 'th', [ 'class' => 'mw-editchecks-appearance' ],
+				$this->msg( 'editcheck-specialeditchecks-col-appearance' )->text() ) .
+			Html::element( 'th', [ 'class' => 'mw-editchecks-config' ],
+				$this->msg( 'editcheck-specialeditchecks-config-summary' )->text() )
 		);
 		foreach ( $checks as $checkData ) {
 			// Filter by enabled value if requested
@@ -191,16 +190,26 @@ class SpecialEditChecks extends SpecialPage {
 			if ( $checkData['defaultConfig'] ) {
 				$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
 			}
+
+			if ( empty( $checkData['title'] ) && empty( $checkData['description'] ) ) {
+				$widget = '';
+			} else {
+				$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
+			}
+
 			$html .= Html::rawElement( 'tr', [],
-				Html::element( 'td', [], $checkData['title'] ) .
 				Html::rawElement( 'td', [],
 					Html::element( 'strong', [], $checkData['name'] ) .
 					Html::element( 'div', [], basename( $checkData['file'] ) )
 				) .
 				Html::rawElement( 'td', [],
-					is_string( $checkData['description'] ) ?
-						Html::element( 'div', [], $checkData['description'] ) :
-						Html::rawElement( 'div', [], $checkData['description'] ) .
+					Html::rawElement(
+						'div',
+						[ 'class' => 've-ui-editCheckDialog' ],
+						$widget
+					)
+				) .
+				Html::rawElement( 'td', [],
 					( $defaultConfig !== '' || $override !== '' ?
 						$this->configDetails( $defaultConfig, $override ) : ''
 					)
@@ -209,6 +218,47 @@ class SpecialEditChecks extends SpecialPage {
 		}
 		$html .= Html::closeElement( 'table' );
 		return $html;
+	}
+
+	private function buildEditCheckActionWidget( array $checkData, bool $suggestion ): MessageWidget {
+		$widget = new MessageWidget(
+			[
+				'type' => $suggestion ? 'success' : 'warning',
+				'label' => $checkData['title'] ?: "\u{00A0}",
+				'classes' => [ 've-ui-editCheckActionWidget' ]
+			]
+		);
+		if ( $suggestion ) {
+			$widget->addClasses( [ 've-ui-editCheckActionWidget-suggestion' ] );
+		}
+		$actions = new \OOUI\Tag( 'div' );
+		$actions->addClasses( [ 've-ui-editCheckActionWidget-actions', 'oo-ui-element-hidden' ]	);
+		if ( $checkData['prompt'] ) {
+			$actions
+				->addClasses( [ 've-ui-editCheckActionWidget-actions-prompted' ] )
+				->removeClasses( [ 'oo-ui-element-hidden' ] )
+				->appendContent(
+					new \OOUI\LabelWidget( [
+						'label' => $checkData['prompt'],
+						'classes' => [ 've-ui-editCheckActionWidget-prompt' ]
+					] ),
+				);
+		}
+		$body = ( new \OOUI\Tag( 'div' ) )->addClasses( [ 've-ui-editCheckActionWidget-body' ] );
+		$widget->appendContent(
+			$body
+				->appendContent( new \OOUI\LabelWidget( [ 'label' => $checkData['description'] ] ) )
+				->appendContent( $actions )
+		);
+		if ( $checkData['footer'] ) {
+			$body->appendContent(
+				new \OOUI\LabelWidget( [
+					'label' => $checkData['footer'],
+					'classes' => [ 've-ui-editCheckActionWidget-footer' ]
+				] ),
+			);
+		}
+		return $widget;
 	}
 
 	/**
@@ -244,16 +294,20 @@ class SpecialEditChecks extends SpecialPage {
 	 * @return string
 	 */
 	private function configDetails( string $defaultConfig, string $override ): string {
-		return Html::rawElement( 'details', [],
-			Html::element( 'summary', [], $this->msg( 'editcheck-specialeditchecks-config-summary' )->text() ) .
-			( $defaultConfig !== '' ?
-				Html::element( 'h4', [], $this->msg( 'editcheck-specialeditchecks-config-default' )->text() ) .
-				$defaultConfig
-			: '' ) .
-			( $override !== '' ?
-				Html::element( 'h4', [], $this->msg( 'editcheck-specialeditchecks-config-onwiki' )->text() ) .
+		return ( $defaultConfig !== '' ?
+			Html::element( 'strong', [ 'class' => 'mw-editchecks-config-header' ],
+				$this->msg( 'editcheck-specialeditchecks-config-default' )->text() ) .
+			$defaultConfig
+		: '' ) .
+		( $override !== '' ?
+			Html::rawElement( 'details', [],
+				Html::rawElement( 'summary', [],
+					Html::element( 'strong', [ 'class' => 'mw-editchecks-config-header' ],
+						$this->msg( 'editcheck-specialeditchecks-config-onwiki' )->text() )
+				) .
 				$override
-			: '' )
+			)
+			: ''
 		);
 	}
 

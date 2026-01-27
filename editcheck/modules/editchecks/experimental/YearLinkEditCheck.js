@@ -12,7 +12,7 @@ mw.editcheck.YearLinkEditCheck = function MWYearLinkEditCheck() {
 
 OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.BaseEditCheck );
 
-mw.editcheck.YearLinkEditCheck.static.title = 'Year link doesn\'t match label';
+mw.editcheck.YearLinkEditCheck.static.title = "Year link doesn't match label";
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
 mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a year that is different from the label.';
 

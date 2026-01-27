@@ -711,7 +711,8 @@
 		},
 		"ext.visualEditor.editCheck.special": {
 			"styles": [
-				"editcheck/modules/editCheck.special/editchecks.less"
+				"editcheck/modules/editCheck.special/editchecks.less",
+				"editcheck/modules/EditCheck.less"
 			]
 		},
 		"ext.visualEditor.core.utils": {
