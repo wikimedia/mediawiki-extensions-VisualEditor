@@ -115,7 +115,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		const promise = action.check.act( action.gutterQuickAction, action, surface );
 		this.actionButton.setDisabled( true );
 		this.acting = true;
-		promise.then( () => {
+		( promise || ve.createDeferred().resolve().promise() ).always( () => {
 			this.actionButton.setDisabled( false );
 			this.acting = false;
 			controller.updatePositionsDebounced();

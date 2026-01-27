@@ -220,7 +220,7 @@ mw.editcheck.BaseEditCheck.prototype.onBranchNodeChange = null;
  * @param {string} choice `action` key from static.choices
  * @param {mw.editcheck.EditCheckAction} action
  * @param {ve.ui.Surface} surface
- * @return {jQuery.Promise} Promise which resolves when action is complete
+ * @return {jQuery.Promise|undefined} Promise which resolves when action is complete, or undefined if there's nothing to wait on
  */
 mw.editcheck.BaseEditCheck.prototype.act = null;
 
