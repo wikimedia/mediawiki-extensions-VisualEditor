@@ -48,7 +48,8 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	ignoreLeadSection: false,
 	includeSections: true, // any non-array means to include all; array of names means to include only those
 	ignoreDisambiguationPages: false,
-	ignoreQuotedContent: false
+	ignoreQuotedContent: false,
+	context: [ 'suggestion', 'check ' ]
 };
 
 mw.editcheck.BaseEditCheck.static.title = null;
@@ -79,6 +80,9 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
  */
 mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentModel = undefined, suggestion = false ) {
 	if ( !config.enabled ) {
+		return false;
+	}
+	if ( config.context && !config.context.includes( suggestion ? 'suggestion' : 'check' ) ) {
 		return false;
 	}
 	// Skip account status checks when in suggestion mode
