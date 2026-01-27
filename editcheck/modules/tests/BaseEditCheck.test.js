@@ -1,5 +1,107 @@
 QUnit.module( 'mw.editcheck.BaseEditCheck', ve.test.utils.newMwEnvironment() );
 
+QUnit.test( 'getModifiedRanges', ( assert ) => {
+	const cases = [
+		{
+			name: 'No modifications',
+			transactions: [],
+			expectedRanges: []
+		},
+		{
+			name: 'Simple insertion',
+			transactions: [
+				[ 'newFromInsertion', 4, [ ...'def' ] ]
+			],
+			expectedRanges: [ new ve.Range( 4, 7 ) ]
+		},
+		{
+			name: 'Simple removal',
+			transactions: [
+				[ 'newFromRemoval', new ve.Range( 1, 3 ) ]
+			],
+			expectedRanges: []
+		},
+		{
+			name: 'Annotation clear',
+			transactions: [
+				[ 'newFromAnnotation', new ve.Range( 2, 3 ), 'clear', ve.dm.example.bold ]
+			],
+			expectedRanges: [ new ve.Range( 2, 3 ) ]
+		},
+		{
+			name: 'Annotation set',
+			transactions: [
+				[ 'newFromAnnotation', new ve.Range( 1, 2 ), 'set', ve.dm.example.bold ]
+			],
+			expectedRanges: [ new ve.Range( 1, 2 ) ]
+		},
+		{
+			name: 'Impure insertion with onlyPureInsertions',
+			transactions: [
+				[ 'newFromRemoval', new ve.Range( 1, 2 ) ],
+				[ 'newFromInsertion', 1, [ ...'XYZ' ] ]
+			],
+			onlyPureInsertions: true,
+			expectedRanges: []
+		},
+		{
+			name: 'Impure insertion without onlyPureInsertions',
+			transactions: [
+				[ 'newFromRemoval', new ve.Range( 1, 2 ) ],
+				[ 'newFromInsertion', 1, [ ...'XYZ' ] ]
+			],
+			onlyPureInsertions: false,
+			expectedRanges: [ new ve.Range( 1, 4 ) ]
+		},
+		{
+			name: 'Insertion of new paragraph and list, with onlyPureInsertions',
+			transactions: [
+				[ 'newFromInsertion', 5, [
+					{ type: 'paragraph' },
+					'1',
+					{ type: '/paragraph' },
+					{ type: 'list', attributes: { style: 'bullet' } },
+					{ type: 'listItem' },
+					{ type: 'paragraph' },
+					'2',
+					{ type: '/paragraph' },
+					{ type: '/listItem' },
+					{ type: '/list' }
+				] ]
+			],
+			onlyPureInsertions: true,
+			expectedRanges: [ new ve.Range( 5, 15 ) ]
+		}
+	];
+
+	const docData = [
+		//  0 - Beginning of paragraph
+		{ type: 'paragraph' },
+		//  1 - Plain "a"
+		'a',
+		//  2 - Bold "b"
+		[ 'b', [ ve.dm.example.boldHash ] ],
+		//  3 - Italic "c"
+		[ 'c', [ ve.dm.example.italicHash ] ],
+		//  4 - End of paragraph
+		{ type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	];
+
+	cases.forEach( ( caseItem ) => {
+		const doc = ve.dm.example.createExampleDocumentFromData( caseItem.data || docData );
+		caseItem.transactions.forEach( ( txData ) => {
+			doc.commit( ve.dm.TransactionBuilder.static[ txData[ 0 ] ]( doc, ...txData.slice( 1 ) ) );
+		} );
+		const check = new mw.editcheck.BaseEditCheck( {}, caseItem.config, caseItem.suggestions );
+		assert.deepEqual(
+			check.getModifiedRanges( doc, caseItem.coveredNodesOnly, caseItem.onlyContentRanges, caseItem.onlyPureInsertions ),
+			caseItem.expectedRanges,
+			caseItem.name
+		);
+	} );
+} );
+
 QUnit.test( 'isRangeInValidSection', ( assert ) => {
 	const cases = [
 		{
