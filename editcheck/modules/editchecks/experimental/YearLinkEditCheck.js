@@ -50,7 +50,13 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 
 		const fragment = surfaceModel.getLinearFragment( annRange.range );
 		const label = fragment.getText();
+		// If label and target are the same, there's no issue
 		if ( label === target ) {
+			return null;
+		}
+
+		// Check label is a 3 or 4-digit number (a year)
+		if ( !label.match( /^\d{3,4}$/ ) ) {
 			return null;
 		}
 
