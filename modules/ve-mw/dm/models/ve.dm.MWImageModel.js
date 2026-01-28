@@ -892,8 +892,7 @@ ve.dm.MWImageModel.prototype.getScalable = function () {
 };
 
 /**
- * @typedef {Object} Dimensions
- * @memberof ve.ui.DimensionsWidget
+ * @typedef {Object} ve.ui.DimensionsWidget.Dimensions
  * @property {number} width The value of the width input
  * @property {number} height The value of the height input
  */

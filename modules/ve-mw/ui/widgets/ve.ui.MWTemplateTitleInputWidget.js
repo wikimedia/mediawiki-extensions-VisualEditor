@@ -207,8 +207,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.addExactMatch = function ( response )
 	}
 
 	/**
-	 * @typedef {Object} PageResponse
-	 * @memberof ve.ui.MWTemplateTitleInputWidget
+	 * @typedef {Object} ve.ui.MWTemplateTitleInputWidget.PageResponse
 	 * @param {number} pageId Page ID
 	 * @param {number} index Page ID
 	 */

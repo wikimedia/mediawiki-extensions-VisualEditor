@@ -8,8 +8,7 @@
 /**
  * See https://www.mediawiki.org/wiki/Extension:TemplateData#Set_object
  *
- * @typedef {Object} Set
- * @memberof ve.dm.MWTemplateSpecModel
+ * @typedef {Object} ve.dm.MWTemplateSpecModel.Set
  * @property {string|Object.<string, string>} label A brief name for the parameter set.
  * @property {string[]} params One or more names of parameters to include in the set.
  */

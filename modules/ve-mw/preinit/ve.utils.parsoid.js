@@ -262,8 +262,7 @@ mw.libs.ve.getRegexFromUrlPattern = function ( urlPattern ) {
 };
 
 /**
- * @typedef {Object} TargetData
- * @memberof mw.libs.ve
+ * @typedef {Object} mw.libs.ve.TargetData
  * @property {string} title The title of the internal link (if the href is internal)
  * @property {boolean} isInternal True if the href pointed to the local wiki, false if href is external
  */
@@ -362,8 +361,7 @@ mw.libs.ve.encodeParsoidResourceName = function ( title ) {
 };
 
 /**
- * @typedef ParsedResource
- * @memberof mw.libs.ve
+ * @typedef mw.libs.ve.ParsedResource
  * @property {string} title Full page title in text form (with namespace, and spaces instead of underscores)
  */
 
