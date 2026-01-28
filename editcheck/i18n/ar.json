@@ -36,6 +36,8 @@
 	"editcheck-copyvio-keep-other": "لا ينطبق أي مما سبق",
 	"editcheck-copyvio-keep-notify": "شكرًا لك على مشاركة سببك للاحتفاظ بالنص الملصق!",
 	"editcheck-copyvio-remove-notify": "شكراً لمساعدتك على إبقاء المعرفة متاحة بحرية!",
+	"editcheck-preference-suggestions-label": "وضع الاقتراحات",
+	"editcheck-preference-suggestions-description": "اقتراحات تحرير مُخصصة من قِبل المجتمع لتحسين المقالات. متوفرة في [[:mw:Special:MyLanguage/VisualEditor|المحرر المرئي]].",
 	"editcheck-tone-title": "إعادة النظر في الأسلوب؟",
 	"editcheck-tone-description": "غالبًا ما يقوم المستخدمون الآخرون بمراجعة هذا النوع من العبارات، استنادًا على أنّ الأسلوب غير متّزن. [$1 التعرف على المزيد]",
 	"editcheck-tone-footer": "تم التحديد باستخدام [$1 نموذج BERT]",

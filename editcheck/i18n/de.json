@@ -33,6 +33,8 @@
 	"editcheck-copyvio-keep-other": "Keines der oben genannten trifft zu",
 	"editcheck-copyvio-keep-notify": "Danke, dass du uns deinen Grund für die Beibehaltung des eingefügten Textes genannt hast!",
 	"editcheck-copyvio-remove-notify": "Vielen Dank, dass du dazu beiträgst, Wissen frei verfügbar zu halten!",
+	"editcheck-preference-suggestions-label": "Vorschlags-Modus",
+	"editcheck-preference-suggestions-description": "Von der Community konfigurierte Bearbeitungsvorschläge zur Verbesserung von Artikeln. Verfügbar im [[:mw:Special:MyLanguage/VisualEditor|visuellen Editor]].",
 	"editcheck-tone-title": "Tonfall überarbeiten?",
 	"editcheck-tone-description": "Andere Benutzer überarbeiteten diese Art der Formulierung häufig, weil sie den Tonfall als unausgewogen ansehen. [$1 Mehr erfahren]",
 	"editcheck-tone-footer": "Identifiziert mit dem [$1 Sprachmodell BERT]",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hakimi97"
+			"Hakimi97",
+			"Tofeiku"
 		]
 	},
 	"editcheck-dialog-action-no": "Tidak",
@@ -32,6 +33,7 @@
 	"editcheck-tone-reject-other": "Lain-lain",
 	"editcheck-reject-description": "Penyunting lain akan belajar dan menilai mengapa anda melakukan pilihan sedemikian",
 	"editcheck-review-title": "Semak perubahan",
+	"editcheck-specialeditchecks-col-name": "Nama",
 	"tag-editcheck-reference-decline-common-knowledge": "Semak Suntingan (rujukan) ditolak (pengetahuan umum)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Rujukan SemakSuntingan ditolak kerana ia merupakan pengetahuan am",
 	"tag-editcheck-reference-decline-irrelevant": "Semak Suntingan (rujukan) ditolak (tidak berkaitan)",

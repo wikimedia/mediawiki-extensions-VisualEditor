@@ -33,6 +33,8 @@
 	"editcheck-copyvio-keep-other": "Necun option supra es applicabile",
 	"editcheck-copyvio-keep-notify": "Gratias pro indicar tu ration pro conservar le texto collate!",
 	"editcheck-copyvio-remove-notify": "Gratias pro adjutar a mantener le cognoscentia a disposition libere!",
+	"editcheck-preference-suggestions-label": "Modo de suggestiones",
+	"editcheck-preference-suggestions-description": "Suggestiones de modification configurate per le communitate pro meliorar articulos. Disponibile in le [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
 	"editcheck-tone-title": "Revisar le tono?",
 	"editcheck-tone-description": "Altere usatores sovente corrige iste genere de formulation perque le tono non se considera como equilibrate. [$1 Leger plus]",
 	"editcheck-tone-footer": "Identificate usante un [$1 modello BERT]",

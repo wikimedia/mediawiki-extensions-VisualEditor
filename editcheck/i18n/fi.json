@@ -35,6 +35,7 @@
 	"editcheck-copyvio-keep-other": "Ei mikään yllä mainituista",
 	"editcheck-copyvio-keep-notify": "Kiitos, kun kerroit syysi liitetyn tekstin säilyttämiseksi!",
 	"editcheck-copyvio-remove-notify": "Kiitos, kun autat pitämään sisällön vapaana!",
+	"editcheck-preference-suggestions-label": "Ehdotustila",
 	"editcheck-tone-title": "Korjaa sävyä?",
 	"editcheck-tone-description": "Muut käyttäjät korjaavat usein tämänkaltaisia ilmauksia, koska niitä pidetään sävyltään epäneutraaleina. [$1 Lisätietoja]",
 	"editcheck-tone-footer": "Tunnistettu [$1 BERT-mallin] avulla",
