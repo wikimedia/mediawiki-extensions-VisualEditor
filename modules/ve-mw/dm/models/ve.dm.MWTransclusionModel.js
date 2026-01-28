@@ -8,10 +8,7 @@
 /**
  * Object literal
  *
- * @class ve.dm.MWTransclusionPartInstruction
- * @private
- */
-/**
+ * @typedef ve.dm.MWTransclusionPartInstruction
  * @property {ve.dm.MWTransclusionPartModel} [remove]
  * @property {ve.dm.MWTransclusionPartModel} [add]
  * @property {number} [index]

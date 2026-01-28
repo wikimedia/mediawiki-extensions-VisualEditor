@@ -18,10 +18,7 @@
  * Object literal returned by the TemplataData API. Expected to be in formatversion=2,
  * guaranteed via ve.init.mw.Target#getContentApi.
  *
- * @class ve.dm.MWTemplatePageMetadata
- * @private
- */
-/**
+ * @typedef ve.dm.MWTemplatePageMetadata
  * @property {string|boolean} [missing] Either "1" or true
  * @property {string|boolean} [notemplatedata] Either "1" or true when there is no user-provided
  *   documentation `params` are auto-detected in this case.
@@ -33,17 +30,14 @@
  * @property {ve.dm.MWTemplateSpecModel.Set[]} [sets] List of parameter
  *  sets, i.e. parameters that belong together (whatever that means, this feature is underspecified
  *  and unused)
- * @property {Object.<string,Object.<string,string|string[]|string[][]>>} [maps] Source to target
- *  parameter mappings for consumers like Citoid or gadgets
+ * @property {Object.<string,Object>} [maps] Source to target parameter mappings for consumers
+ *  like Citoid or gadgets
  */
 
 /**
  * Object literal
  *
- * @class ve.dm.MWTemplateParamDescription
- * @private
- */
-/**
+ * @typedef ve.dm.MWTemplateParamDescription
  * @property {string|Object.<string,string>} [label]
  * @property {string|Object.<string,string>} [description]
  * @property {string[]} [suggestedvalues]
