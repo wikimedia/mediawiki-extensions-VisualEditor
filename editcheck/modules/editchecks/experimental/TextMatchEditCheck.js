@@ -47,6 +47,15 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 ];
 
 /**
+ * Object into which default matchItem configs can be placed
+ *
+ * This is largely a place for scripts to interact with the check
+ *
+ * @type {Object}
+ */
+mw.editcheck.TextMatchEditCheck.static.matchItems = {};
+
+/**
  * Promise which holds the loading and processing of matchItems
  *
  * @type {Promise<Object>}
