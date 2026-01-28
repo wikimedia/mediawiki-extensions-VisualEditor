@@ -3,7 +3,7 @@ mw.editcheck.DuplicateLinksEditCheck = function MWDuplicateLinksEditCheck() {
 	mw.editcheck.DuplicateLinksEditCheck.super.apply( this, arguments );
 };
 
-OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.LinkEditCheck );
 
 mw.editcheck.DuplicateLinksEditCheck.static.title = 'Duplicate links';
 
@@ -27,15 +27,15 @@ mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	}
 ];
 
+mw.editcheck.DuplicateLinksEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
 /*
  * Break down the document into sections
  */
 function getSectionRanges( document ) {
 	const headingRanges = document.getNodesByType( 'mwHeading', true )
 		.filter( ( node ) => node.getAttribute( 'level' ) === 2 )
-		.map(
-			( node ) => node.getOuterRange()
-		);
+		.map( ( node ) => node.getOuterRange() );
 
 	const sections = [];
 	let start = 0;
@@ -77,11 +77,8 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 
 	// Traverse again for links we want to show a Check on. This could be a small set, or all links.
 	// Filter out any links that appear only once in the document.
-	// getModifiedAnnotationRanges magically handles filtering sections and dismissed actions.
-	const candidateModifiedLinks = this.getModifiedAnnotationRanges(
-		documentModel,
-		ve.dm.MWInternalLinkAnnotation.static.name
-	).filter( ( annRange ) => internalLinkMap.get( annRange.annotation.getAttribute( field ) ).length > 1 );
+	// getModifiedLinkRanges handles filtering sections and dismissed actions.
+	const candidateModifiedLinks = this.getModifiedLinkRanges( surfaceModel ).filter( ( annRange ) => internalLinkMap.get( annRange.annotation.getAttribute( field ) ).length > 1 );
 
 	// Now we have a list of modified links which, if they're root links and duplicated in the same section by another root link, are duplicates.
 	let i = 0; // Index into candidate links
@@ -114,16 +111,13 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 				continue;
 			}
 
-			// Build a list where we're at the start.
-			// Set this to [ annRange ] if we don't want to highlight after all.
+			// Highlight all duplicates with the one being acted on first
 			const highlights = Array.from( duplicateRanges );
 			highlights.splice( index, 1 );
 			highlights.unshift( annRange );
 
-			actions.push( new mw.editcheck.EditCheckAction( {
-				fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
-				focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
-				check: this
+			actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
+				fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) )
 			} ) );
 		}
 	}

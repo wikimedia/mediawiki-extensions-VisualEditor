@@ -3,7 +3,7 @@ mw.editcheck.DisambiguationEditCheck = function MWDisambiguationEditCheck() {
 	mw.editcheck.DisambiguationEditCheck.super.apply( this, arguments );
 };
 
-OO.inheritClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.LinkEditCheck );
 
 mw.editcheck.DisambiguationEditCheck.static.title = 'Disambiguation link';
 
@@ -23,21 +23,16 @@ mw.editcheck.DisambiguationEditCheck.static.choices = [
 	}
 ];
 
+mw.editcheck.DisambiguationEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
 mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const checkDisambig = ( annotation ) => ve.init.platform.linkCache.get(
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
 
-	return this.getModifiedAnnotationRanges(
-		surfaceModel.getDocument(),
-		ve.dm.MWInternalLinkAnnotation.static.name
-	).map(
+	return this.getModifiedLinkRanges( surfaceModel ).map(
 		( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
-			new mw.editcheck.EditCheckAction( {
-				fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-				focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
-				check: this
-			} ) : null
+			this.buildActionFromLinkRange( annRange.range, surfaceModel ) : null
 		) );
 };
 
@@ -47,10 +42,7 @@ mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, 
 			this.dismiss( action );
 			break;
 		case 'edit':
-			setTimeout( () => {
-				action.fragments[ 0 ].select();
-				surface.execute( 'window', 'open', 'link' );
-			} );
+			this.selectAnnotation( action.fragments[ 0 ], surface );
 			break;
 	}
 };

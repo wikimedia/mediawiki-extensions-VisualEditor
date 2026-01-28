@@ -46,6 +46,7 @@ require( './dialogs/FixedEditCheckDialog.js' );
 require( './dialogs/SidebarEditCheckDialog.js' );
 require( './dialogs/GutterSidebarEditCheckDialog.js' );
 require( './editchecks/BaseEditCheck.js' );
+require( './editchecks/LinkEditCheck.js' );
 require( './editchecks/AsyncTextCheck.js' );
 require( './editchecks/AddReferenceEditCheck.js' );
 require( './editchecks/ToneCheck.js' );

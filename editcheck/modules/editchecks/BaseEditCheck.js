@@ -339,17 +339,17 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
  * Get annotation ranges where at least some content has been modified
  *
  * @param {ve.dm.Document} documentModel
- * @param {string} [name] Name of annotation to filter for
+ * @param {string[]} [names] Names of annotations to filter for
  * @return {ve.dm.LinearData.AnnotationRange[]} Annotation ranges, containing an annotation and its range
  */
-mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, name ) {
+mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, names ) {
 	const modified = this.getModifiedContentRanges( documentModel );
 
 	return documentModel.getDocumentNode().getAnnotationRanges().filter(
 		( annRange ) => this.isRangeInValidSection( annRange.range, documentModel ) &&
 			!this.isDismissedRange( annRange.range ) &&
 			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
-			( !name || annRange.annotation.name === name )
+			( !names || names.includes( annRange.annotation.name ) )
 	);
 };
 

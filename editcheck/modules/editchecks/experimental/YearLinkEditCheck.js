@@ -10,7 +10,7 @@ mw.editcheck.YearLinkEditCheck = function MWYearLinkEditCheck() {
 	mw.editcheck.YearLinkEditCheck.super.apply( this, arguments );
 };
 
-OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.LinkEditCheck );
 
 mw.editcheck.YearLinkEditCheck.static.title = "Year link doesn't match label";
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
@@ -33,13 +33,10 @@ mw.editcheck.YearLinkEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	const documentModel = surfaceModel.documentModel;
+mw.editcheck.YearLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
 
-	return this.getModifiedAnnotationRanges(
-		documentModel,
-		ve.dm.MWInternalLinkAnnotation.static.name
-	).map( ( annRange ) => {
+mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
 		const title = mw.Title.newFromText( annRange.annotation.getDisplayTitle() );
 		if ( !title ) {
 			return null;
@@ -63,18 +60,13 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 			{ action: 'dismiss', label: 'Dismiss' }
 		];
 
-		return new mw.editcheck.EditCheckAction( {
-			fragments: [ fragment ],
-			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
-			check: this,
-			choices
-		} );
+		return this.buildActionFromLinkRange( annRange.range, surfaceModel, { choices } );
 	} );
 };
 
 mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surface ) {
 	const fragment = action.fragments[ 0 ];
-	const linkAnnotation = fragment.getAnnotations().getAnnotationsWithName( ve.dm.MWInternalLinkAnnotation.static.name ).get( 0 );
+	const linkAnnotation = this.getLinkFromFragment( fragment );
 	const title = mw.Title.newFromText( linkAnnotation.getDisplayTitle() );
 
 	switch ( choice ) {
@@ -91,16 +83,15 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 			const link = ve.dm.MWInternalLinkAnnotation.static.newFromTitle(
 				mw.Title.newFromText( fragment.getText(), title.getNamespaceId() )
 			);
-			fragment.annotateContent( 'clear', 'link/mwInternal' );
+			for ( const linkClass of this.constructor.static.linkClasses ) {
+				fragment.annotateContent( 'clear', linkClass.static.name );
+			}
 			fragment.annotateContent( 'set', link );
 			break;
 		}
 	}
 
-	setTimeout( () => {
-		fragment.select();
-		surface.getView().selectAnnotation( ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation );
-	}, 100 );
+	this.selectAnnotation( fragment, surface );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.YearLinkEditCheck );

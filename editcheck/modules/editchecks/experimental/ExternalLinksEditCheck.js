@@ -3,7 +3,7 @@ mw.editcheck.ExternalLinksEditCheck = function MWExternalLinksEditCheck() {
 	mw.editcheck.ExternalLinksEditCheck.super.apply( this, arguments );
 };
 
-OO.inheritClass( mw.editcheck.ExternalLinksEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.ExternalLinksEditCheck, mw.editcheck.LinkEditCheck );
 
 mw.editcheck.ExternalLinksEditCheck.static.title = 'External link';
 
@@ -11,7 +11,7 @@ mw.editcheck.ExternalLinksEditCheck.static.name = 'externalLink';
 
 mw.editcheck.ExternalLinksEditCheck.static.description = 'Generally, external links should not appear in the body of the article. Please refer to WP:ELNO. Edit this link?';
 
-mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.LinkEditCheck.static.defaultConfig, {
 	ignoreSections: [
 		'External links',
 		'References',
@@ -30,6 +30,8 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 		label: 'Dismiss' // TODO: i18n
 	}
 ];
+
+mw.editcheck.ExternalLinksEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAnnotation ];
 
 let interwikiUrlPatternsPromise = null;
 
@@ -66,21 +68,16 @@ mw.editcheck.ExternalLinksEditCheck.prototype.getInterwikiUrlPatternsPromise = f
 };
 
 mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	return this.getModifiedAnnotationRanges(
-		surfaceModel.getDocument(),
-		ve.dm.MWExternalLinkAnnotation.static.name
-	).map( ( annRange ) => this.getInterwikiUrlPatternsPromise().then( ( interwikiUrlPatterns ) => {
-		const href = annRange.annotation.getAttribute( 'href' );
-		if ( interwikiUrlPatterns.some( ( regex ) => regex.test( href ) ) ) {
-			// Ignore interwiki links
-			return null;
-		}
-		return new mw.editcheck.EditCheckAction( {
-			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWExternalLinkAnnotation,
-			check: this
-		} );
-	} ) );
+	return this.getModifiedLinkRanges( surfaceModel ).map(
+		( annRange ) => this.getInterwikiUrlPatternsPromise().then( ( interwikiUrlPatterns ) => {
+			const href = annRange.annotation.getAttribute( 'href' );
+			if ( interwikiUrlPatterns.some( ( regex ) => regex.test( href ) ) ) {
+				// Ignore interwiki links
+				return null;
+			}
+			return this.buildActionFromLinkRange( annRange.range, surfaceModel );
+		} )
+	);
 };
 
 mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action ) {

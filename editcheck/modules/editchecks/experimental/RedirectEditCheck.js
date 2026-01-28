@@ -3,7 +3,7 @@ mw.editcheck.RedirectEditCheck = function MWRedirectEditCheck() {
 	mw.editcheck.RedirectEditCheck.super.apply( this, arguments );
 };
 
-OO.inheritClass( mw.editcheck.RedirectEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.RedirectEditCheck, mw.editcheck.LinkEditCheck );
 
 mw.editcheck.RedirectEditCheck.static.title = 'Redirect link';
 
@@ -24,21 +24,19 @@ mw.editcheck.RedirectEditCheck.static.choices = [
 	}
 ];
 
+mw.editcheck.RedirectEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
 mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const checkRedirect = ( annotation ) => ve.init.platform.linkCache.get(
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.redirect ) );
 
-	return this.getModifiedAnnotationRanges(
-		surfaceModel.getDocument(),
-		ve.dm.MWInternalLinkAnnotation.static.name
-	).map( ( annRange ) => checkRedirect( annRange.annotation ).then( ( isRedirect ) => isRedirect ?
-		new mw.editcheck.EditCheckAction( {
-			fragments: [ surfaceModel.getLinearFragment( annRange.range ) ],
-			focusAnnotation: ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation,
-			check: this
-		} ) : null
-	) );
+	return this.getModifiedLinkRanges( surfaceModel )
+		.map( ( annRange ) => checkRedirect( annRange.annotation )
+			.then( ( isRedirect ) => isRedirect ?
+				this.buildActionFromLinkRange( annRange.range, surfaceModel ) : null
+			)
+		);
 };
 
 mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surface ) {
@@ -48,7 +46,7 @@ mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surfac
 			break;
 		case 'fix': {
 			const fragment = action.fragments[ 0 ];
-			const linkAnnotation = fragment.getAnnotations().getAnnotationWithName( ve.dm.MWInternalLinkAnnotation.static.name ).get( 0 );
+			const linkAnnotation = this.getLinkFromFragment( fragment );
 
 			if ( !linkAnnotation ) {
 				return;
@@ -68,11 +66,7 @@ mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surfac
 						.annotateContent( 'clear', linkAnnotation )
 						.annotateContent( 'add', newLinkAnnotation );
 
-					setTimeout( () => {
-						// fragment.collapseToStart().adjustLinearSelection( 1, 1 ).select();
-						fragment.select();
-						surface.getView().selectAnnotation( ( annView ) => annView instanceof ve.ce.MWInternalLinkAnnotation );
-					}, 100 );
+					this.selectAnnotation( fragment, surface );
 				}
 			} );
 		}

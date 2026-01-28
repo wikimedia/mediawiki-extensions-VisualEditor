@@ -644,6 +644,7 @@
 				"editcheck/modules/dialogs/SidebarEditCheckDialog.js",
 				"editcheck/modules/dialogs/GutterSidebarEditCheckDialog.js",
 				"editcheck/modules/editchecks/BaseEditCheck.js",
+				"editcheck/modules/editchecks/LinkEditCheck.js",
 				"editcheck/modules/editchecks/AsyncTextCheck.js",
 				"editcheck/modules/editchecks/AddReferenceEditCheck.js",
 				"editcheck/modules/editchecks/ToneCheck.js",
