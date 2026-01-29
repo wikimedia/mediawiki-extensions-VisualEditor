@@ -9,11 +9,11 @@ mw.editcheck.DuplicateLinksEditCheck.static.title = 'Duplicate links';
 
 mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
 
-// eslint-disable-next-line no-jquery/no-parse-html-literal
-mw.editcheck.DuplicateLinksEditCheck.static.description = () => $( $.parseHTML(
-	'This link appears more than once in this section. Help make Wikipedia easier for people to read by removing this link.<br>' +
-	'<a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">Learn more</a>'
-) );
+mw.editcheck.DuplicateLinksEditCheck.static.description = 'This link appears more than once in this section. Help make Wikipedia easier for people to read by removing this link.<br><a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">Learn more</a>';
+
+// HACK: Use plain string above so Special:EditChecks can parse.
+const description = mw.editcheck.DuplicateLinksEditCheck.static.description;
+mw.editcheck.DuplicateLinksEditCheck.static.description = () => $( $.parseHTML( description ) );
 
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{

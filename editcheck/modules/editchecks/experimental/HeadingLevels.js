@@ -9,11 +9,11 @@ mw.editcheck.HeadingLevelsEditCheck.static.title = 'Heading level';
 
 mw.editcheck.HeadingLevelsEditCheck.static.name = 'headingLevels';
 
-// eslint-disable-next-line no-jquery/no-parse-html-literal
-mw.editcheck.HeadingLevelsEditCheck.static.description = () => $( $.parseHTML(
-	'Help make this page easier for people to navigate and read by adjusting this heading level.<br>' +
-	'<a href="//www.mediawiki.org/wiki/Documentation/Style_guide#Titles_and_headings">Learn more</a>'
-) );
+mw.editcheck.HeadingLevelsEditCheck.static.description = 'Help make this page easier for people to navigate and read by adjusting this heading level.<br><a href="//www.mediawiki.org/wiki/Documentation/Style_guide#Titles_and_headings">Learn more</a>';
+
+// HACK: Use plain string above so Special:EditChecks can parse.
+const description = mw.editcheck.HeadingLevelsEditCheck.static.description;
+mw.editcheck.HeadingLevelsEditCheck.static.description = () => $( $.parseHTML( description ) );
 
 mw.editcheck.HeadingLevelsEditCheck.static.choices = [
 	{
