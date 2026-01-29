@@ -12,7 +12,7 @@ mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck
 
 mw.editcheck.PasteCheck.static.title = OO.ui.deferMsg( 'editcheck-copyvio-title' );
 
-mw.editcheck.PasteCheck.static.description = OO.ui.deferMsg( 'editcheck-copyvio-description' );
+mw.editcheck.PasteCheck.static.description = ve.deferJQueryMsg( 'editcheck-copyvio-description' );
 
 mw.editcheck.PasteCheck.static.prompt = OO.ui.deferMsg( 'editcheck-copyvio-prompt' );
 
@@ -52,14 +52,8 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	return Object.keys( pastesById ).map( ( id ) => {
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
 
-		// eslint-disable-next-line no-jquery/no-append-html
-		const $message = $( '<span>' ).append( ve.htmlMsg( 'editcheck-copyvio-description', ve.msg( 'editcheck-copyvio-descriptionlink' ) ) );
-		mw.editcheck.trackActionLinks( $message, this.getName(), 'click-learn-more' );
-		ve.targetLinksToNewWindow( $message[ 0 ] );
-
 		return new mw.editcheck.EditCheckAction( {
 			fragments,
-			message: $message,
 			id,
 			check: this
 		} );

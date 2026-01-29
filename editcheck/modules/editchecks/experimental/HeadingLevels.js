@@ -9,10 +9,11 @@ mw.editcheck.HeadingLevelsEditCheck.static.title = 'Heading level';
 
 mw.editcheck.HeadingLevelsEditCheck.static.name = 'headingLevels';
 
-mw.editcheck.HeadingLevelsEditCheck.static.description = new OO.ui.HtmlSnippet(
+// eslint-disable-next-line no-jquery/no-parse-html-literal
+mw.editcheck.HeadingLevelsEditCheck.static.description = () => $( $.parseHTML(
 	'Help make this page easier for people to navigate and read by adjusting this heading level.<br>' +
 	'<a href="//www.mediawiki.org/wiki/Documentation/Style_guide#Titles_and_headings">Learn more</a>'
-);
+) );
 
 mw.editcheck.HeadingLevelsEditCheck.static.choices = [
 	{
@@ -43,16 +44,10 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.onDocumentChange = function ( surf
 				// the opening/closing tags.
 				const range = heading.getOuterRange();
 				if ( !this.isDismissedRange( range ) && modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) ) ) {
-					// eslint-disable-next-line no-jquery/no-append-html, no-jquery/no-html
-					const $message = $( '<span>' ).html( this.constructor.static.description.toString() );
-					mw.editcheck.trackActionLinks( $message, this.getName(), 'click-learn-more' );
-					ve.targetLinksToNewWindow( $message[ 0 ] );
-
 					actions.push( new mw.editcheck.EditCheckAction( {
 						// But the better range for display is the content range:
 						fragments: [ surfaceModel.getLinearFragment( heading.getRange() ) ],
-						check: this,
-						message: $message
+						check: this
 					} ) );
 				}
 			}

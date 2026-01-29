@@ -16,9 +16,9 @@ mw.editcheck.ToneCheck.static.allowedContentLanguages = [ 'en', 'es', 'fr', 'ja'
 
 mw.editcheck.ToneCheck.static.title = OO.ui.deferMsg( 'editcheck-tone-title' );
 
-mw.editcheck.ToneCheck.static.description = OO.ui.deferMsg( 'editcheck-tone-description' );
+mw.editcheck.ToneCheck.static.description = ve.deferJQueryMsg( 'editcheck-tone-description' );
 
-mw.editcheck.ToneCheck.static.footer = OO.ui.deferMsg( 'editcheck-tone-footer' );
+mw.editcheck.ToneCheck.static.footer = ve.deferJQueryMsg( 'editcheck-tone-footer' );
 
 mw.editcheck.ToneCheck.static.success = OO.ui.deferMsg( 'editcheck-tone-thank' );
 
@@ -122,21 +122,9 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 		return null;
 	}
 
-	// eslint-disable-next-line no-jquery/no-append-html
-	const $message = $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-description', ve.msg( 'editcheck-tone-descriptionlink' ) ) );
-	mw.editcheck.trackActionLinks( $message, this.getName(), 'click-learn-more' );
-	ve.targetLinksToNewWindow( $message[ 0 ] );
-
-	// eslint-disable-next-line no-jquery/no-append-html
-	const $footer = $( '<span>' ).append( ve.htmlMsg( 'editcheck-tone-footer', ve.msg( 'editcheck-tone-footerlink' ) ) );
-	mw.editcheck.trackActionLinks( $footer, this.getName(), 'click-model-card' );
-	ve.targetLinksToNewWindow( $footer[ 0 ] );
-
 	// TODO: variant message/labels when in back-from-presave state
 	const action = new mw.editcheck.EditCheckAction( {
 		fragments: [ fragment ],
-		message: $message,
-		footer: $footer,
 		check: this,
 		choices: [
 			{

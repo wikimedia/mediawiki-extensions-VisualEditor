@@ -54,8 +54,34 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 
 mw.editcheck.BaseEditCheck.static.title = null;
 
+/**
+ * Main message of the edit check
+ *
+ * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
 mw.editcheck.BaseEditCheck.static.description = null;
 
+/**
+ * Footer message of the edit check
+ *
+ * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
+mw.editcheck.BaseEditCheck.static.footer = null;
+
+/**
+ * Prompt message of the edit check
+ *
+ * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
+mw.editcheck.BaseEditCheck.static.prompt = null;
+
+/**
+ * Success message of the edit check
+ *
+ * TODO: Add a default success message?
+ *
+ * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
 mw.editcheck.BaseEditCheck.static.success = null;
 
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
@@ -256,7 +282,7 @@ mw.editcheck.BaseEditCheck.prototype.getFooter = function () {
 
 /**
  * @param {mw.editcheck.EditCheckAction} action
- * @return {string}
+ * @return {jQuery|string|Function|OO.ui.HtmlSnippet}
  */
 mw.editcheck.BaseEditCheck.prototype.getDescription = function () {
 	return this.constructor.static.description;

@@ -198,7 +198,9 @@ class SpecialEditChecks extends SpecialPage {
 					Html::element( 'div', [], basename( $checkData['file'] ) )
 				) .
 				Html::rawElement( 'td', [],
-					Html::element( 'div', [], $checkData['description'] ) .
+					is_string( $checkData['description'] ) ?
+						Html::element( 'div', [], $checkData['description'] ) :
+						Html::rawElement( 'div', [], $checkData['description'] ) .
 					( $defaultConfig !== '' || $override !== '' ?
 						$this->configDetails( $defaultConfig, $override ) : ''
 					)
@@ -256,14 +258,13 @@ class SpecialEditChecks extends SpecialPage {
 	}
 
 	/**
-	 * Extract a static property value which can be a string literal or a message expression.
-	 * Returns an array describing the value.
+	 * Extract a static property value.
 	 *
 	 * @param string $src Source code
 	 * @param string $prop Property name
-	 * @return string
+	 * @return string|\OOUI\HtmlSnippet
 	 */
-	private function extractStaticValue( string $src, string $prop ): string {
+	private function extractStaticValue( string $src, string $prop ) {
 		// Capture the assigned expression allowing semicolons inside quoted strings
 		$pattern =
 			'/static\s*\.\s*' .
@@ -276,11 +277,27 @@ class SpecialEditChecks extends SpecialPage {
 
 		// Literal
 		if ( preg_match( '/^([\"\\\'])(.*?)\1$/', $expr, $mm ) ) {
-			return $mm[2];
+			if ( $prop === 'name' ) {
+				return $mm[2];
+			} else {
+				return new \OOUI\HtmlSnippet( $mm[2] );
+			}
 		}
 
-		// Message calls: ve.msg(...), mw.msg(...), OO.ui.deferMsg(...)
-		if ( preg_match( '/^(ve\.msg|mw\.msg|OO\.ui\.deferMsg)\s*\(\s*([\"\\\'])([^\"\']+)\2(.*)\)$/', $expr, $mm ) ) {
+		// Message calls:
+		// - ve.msg(...)
+		// - ve.htmlMsg(...)
+		// - ve.deferHtmlMsg(...)
+		// - ve.deferJQueryMsg(...)
+		// - mw.msg(...)
+		// - OO.ui.deferMsg(...)
+		if ( preg_match(
+			'/^' .
+				'(ve\.msg|ve\.htmlMsg|ve\.deferHtmlMsg|ve\.deferJQueryMsg|mw\.msg|OO\.ui\.deferMsg)' .
+				'\s*\(\s*([\"\\\'])([^\"\']+)\2(.*)\)' .
+			'$/',
+			$expr, $mm
+		) ) {
 			$argsStr = $mm[4];
 			$args = [];
 			if ( preg_match_all( '/,\s*([\"\\\'])(.*?)\1/', $argsStr, $am, PREG_SET_ORDER ) ) {
@@ -289,7 +306,14 @@ class SpecialEditChecks extends SpecialPage {
 				}
 			}
 			$msg = $this->getContext()->msg( $mm[3], ...$args );
-			return $msg->text();
+			switch ( $mm[1] ) {
+				case 've.htmlMsg':
+				case 've.deferHtmlMsg':
+				case 've.deferJQueryMsg':
+					return new \OOUI\HtmlSnippet( $msg->parse() );
+				default:
+					return $msg->text();
+			}
 		}
 
 		return '';

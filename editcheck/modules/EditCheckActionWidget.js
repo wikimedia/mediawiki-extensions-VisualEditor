@@ -34,6 +34,9 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	this.collapsed = false;
 	this.message = new OO.ui.LabelWidget( { label: config.message } );
+	mw.editcheck.trackActionLinks( this.message.$element, this.name, 'click-learn-more' );
+	ve.targetLinksToNewWindow( this.message.$element[ 0 ] );
+
 	this.prompt = config.prompt && new OO.ui.LabelWidget( {
 		label: config.prompt,
 		classes: [ 've-ui-editCheckActionWidget-prompt' ]
@@ -62,6 +65,9 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	if ( this.footer ) {
 		this.$body.append( this.footer.$element );
+		// TODO: Give this action a more generic event name
+		mw.editcheck.trackActionLinks( this.footer.$element, this.name, 'click-model-card' );
+		ve.targetLinksToNewWindow( this.footer.$element[ 0 ] );
 	}
 
 	if ( this.suggestion ) {
