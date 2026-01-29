@@ -71,11 +71,20 @@
 		);
 	}
 
-	const ecenable = url.searchParams.get( 'ecenable' );
-	const editCheck = conf.editCheck || !!ecenable || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+	let ecenable = url.searchParams.get( 'ecenable' );
+	if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
+		ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+	}
+	const editCheck = conf.editCheck || !!ecenable;
 	if ( conf.editCheckTagging || editCheck ) {
 		modules.push( 'ext.visualEditor.editCheck' );
-		if ( ecenable && ecenable.split( ',' ).includes( 'experimental' ) ) {
+
+		if (
+			mw.user.options.get( 'visualeditor-editcheck-suggestions' ) ||
+			conf.editCheckLoadExperimental ||
+			ecenable === '2' ||
+			( ecenable && ecenable.split( ',' ).includes( 'experimental' ) )
+		) {
 			modules.push( 'ext.visualEditor.editCheck.experimental' );
 		}
 	}

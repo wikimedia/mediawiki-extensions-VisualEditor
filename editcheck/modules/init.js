@@ -5,6 +5,10 @@
  * Can also be a comma-separated series of flags:
  *   experimental: also load experimental checks
  *   suggestions: enable suggestions mode
+ *
+ * NOTE: everything here involving enabling edit check and experimental mode
+ * needs to be kept in sync with ve.init.mw.ArticleTargetLoader, which is
+ * responsible for actually loading the modules.
  */
 let ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
 if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
