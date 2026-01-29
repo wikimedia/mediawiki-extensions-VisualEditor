@@ -54,7 +54,7 @@ require( './editchecks/PasteCheck.js' );
 nonDefaultChecks.add( 'tone' );
 
 if ( mw.editcheck.experimental ) {
-	mw.loader.using( 'ext.visualEditor.editCheck.experimental' );
+	// ext.visualEditor.editCheck.experimental already loaded by ve.init.mw.ArticleTargetLoader
 	nonDefaultChecks.clear();
 }
 

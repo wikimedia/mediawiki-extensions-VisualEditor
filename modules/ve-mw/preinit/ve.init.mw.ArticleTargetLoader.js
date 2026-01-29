@@ -71,9 +71,13 @@
 		);
 	}
 
-	const editCheck = conf.editCheck || !!url.searchParams.get( 'ecenable' ) || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+	const ecenable = url.searchParams.get( 'ecenable' );
+	const editCheck = conf.editCheck || !!ecenable || !!window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 	if ( conf.editCheckTagging || editCheck ) {
 		modules.push( 'ext.visualEditor.editCheck' );
+		if ( ecenable && ecenable.split( ',' ).includes( 'experimental' ) ) {
+			modules.push( 'ext.visualEditor.editCheck.experimental' );
+		}
 	}
 
 	const namespaces = mw.config.get( 'wgNamespaceIds' );
