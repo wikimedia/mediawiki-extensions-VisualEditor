@@ -56,6 +56,8 @@ mw.editcheck.BaseEditCheck.static.title = null;
 
 mw.editcheck.BaseEditCheck.static.description = null;
 
+mw.editcheck.BaseEditCheck.static.success = null;
+
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
 
 /**
@@ -830,4 +832,13 @@ mw.editcheck.BaseEditCheck.prototype.isTaggedId = function ( tag, id ) {
 	}
 	const ids = tags[ tag ];
 	return !!ids && ids.has( id );
+};
+
+/**
+ * Show a success notification
+ *
+ * @param {string} [message] Message to show; defaults to static.success
+ */
+mw.editcheck.BaseEditCheck.prototype.showSuccess = function ( message ) {
+	mw.notify( message || this.constructor.static.success, { type: 'success' } );
 };

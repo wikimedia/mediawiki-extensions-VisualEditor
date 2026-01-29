@@ -11,6 +11,8 @@ mw.editcheck.AddReferenceEditCheck.static.title = OO.ui.deferMsg( 'editcheck-dia
 
 mw.editcheck.AddReferenceEditCheck.static.description = OO.ui.deferMsg( 'editcheck-dialog-addref-description' );
 
+mw.editcheck.AddReferenceEditCheck.static.success = OO.ui.deferMsg( 'editcheck-dialog-addref-success-notify' );
+
 mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	minimumCharacters: 50,
 	beforePunctuation: false,
@@ -118,7 +120,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 					if ( data ) {
 						// Edit check inspector is already closed by this point, but
 						// we need to end the workflow.
-						mw.notify( ve.msg( 'editcheck-dialog-addref-success-notify' ), { type: 'success' } );
+						this.showSuccess();
 					}
 				} );
 				return citoidOrCiteDataPromise;

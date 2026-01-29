@@ -2,9 +2,8 @@ mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Parent constructor
 	mw.editcheck.ToneCheck.super.apply( this, arguments );
 
-	this.showThankToast = () => {
-		mw.notify( ve.msg( 'editcheck-tone-thank' ), { type: 'success' } );
-	};
+	// Bind with no arguments so it can be used as an event listener
+	this.showSuccessHandler = this.showSuccess.bind( this );
 };
 
 OO.inheritClass( mw.editcheck.ToneCheck, mw.editcheck.AsyncTextCheck );
@@ -20,6 +19,8 @@ mw.editcheck.ToneCheck.static.title = OO.ui.deferMsg( 'editcheck-tone-title' );
 mw.editcheck.ToneCheck.static.description = OO.ui.deferMsg( 'editcheck-tone-description' );
 
 mw.editcheck.ToneCheck.static.footer = OO.ui.deferMsg( 'editcheck-tone-footer' );
+
+mw.editcheck.ToneCheck.static.success = OO.ui.deferMsg( 'editcheck-tone-thank' );
 
 mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	predictionThreshold: 0.8
@@ -167,7 +168,7 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 };
 
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
-	action.off( 'discard', this.showThankToast );
+	action.off( 'discard', this.showSuccessHandler );
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
 		return action.widget.showFeedback( {
@@ -187,7 +188,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			]
 		} ).then( ( reason ) => {
 			this.dismiss( action );
-			this.showThankToast();
+			this.showSuccess();
 			return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
@@ -195,7 +196,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// Once revising has started the user will either make enough of an
 		// edit that this action is discarded, or will `act` again and this
 		// event-handler will be removed above:
-		action.once( 'discard', this.showThankToast );
+		action.once( 'discard', this.showSuccessHandler );
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
@@ -240,7 +241,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 
 			progress.$element.remove();
 			if ( !result ) {
-				this.showThankToast();
+				this.showSuccess();
 				this.controller.removeAction( 'onBranchNodeChange', action, false );
 			}
 		} );

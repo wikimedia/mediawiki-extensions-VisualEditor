@@ -16,6 +16,8 @@ mw.editcheck.PasteCheck.static.description = OO.ui.deferMsg( 'editcheck-copyvio-
 
 mw.editcheck.PasteCheck.static.prompt = OO.ui.deferMsg( 'editcheck-copyvio-prompt' );
 
+mw.editcheck.PasteCheck.static.success = OO.ui.deferMsg( 'editcheck-copyvio-remove-notify' );
+
 mw.editcheck.PasteCheck.static.name = 'paste';
 
 mw.editcheck.PasteCheck.static.choices = [
@@ -83,7 +85,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 					} ) )
 			} ).then( ( reason ) => {
 				this.dismiss( action );
-				mw.notify( ve.msg( 'editcheck-copyvio-keep-notify' ), { type: 'success' } );
+				this.showSuccess( ve.msg( 'editcheck-copyvio-keep-notify' ) );
 				return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 			} );
 		case 'remove': {
@@ -98,7 +100,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 					action.fragments[ action.fragments.length - 1 ].select();
 					surface.getView().focus();
 				}, 500 );
-				mw.notify( ve.msg( 'editcheck-copyvio-remove-notify' ), { type: 'success' } );
+				this.showSuccess();
 			} );
 		}
 	}
