@@ -49,6 +49,7 @@
 	"editcheck-specialeditchecks-info": "Bearbeitungsprüfungen werden unter [[MediaWiki:Editcheck-config.json]] konfiguriert. Die Dokumentation steht auf [https://www.mediawiki\n.org/wiki/Edit_check/Configuration Bearbeitungsprüfung/Konfiguration].",
 	"editcheck-specialeditchecks-header-abtest": "A/B-Test-Prüfungen",
 	"editcheck-specialeditchecks-header-base": "Grundkonfiguration",
+	"editcheck-specialeditchecks-header-betafeatures": "Beta-Funktionen",
 	"editcheck-specialeditchecks-header-default": "Standardprüfungen",
 	"editcheck-specialeditchecks-header-experimental": "Experimentelle Prüfungen",
 	"editcheck-specialeditchecks-col-title": "Titel",

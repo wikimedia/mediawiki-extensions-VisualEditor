@@ -52,6 +52,7 @@
 	"editcheck-specialeditchecks-info": "يتم ضبط إعدادات فحص التحرير في [[MediaWiki:Editcheck-config.json]]. للاطلاع على التوثيق، يُرجى زيارة [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
 	"editcheck-specialeditchecks-header-abtest": "اختبارات A/B",
 	"editcheck-specialeditchecks-header-base": "الإعداد الأساسي",
+	"editcheck-specialeditchecks-header-betafeatures": "مزايا تجريبية",
 	"editcheck-specialeditchecks-header-default": "عمليات الفحص الافتراضية",
 	"editcheck-specialeditchecks-header-experimental": "الفحوصات التجريبية",
 	"editcheck-specialeditchecks-col-title": "العنوان",

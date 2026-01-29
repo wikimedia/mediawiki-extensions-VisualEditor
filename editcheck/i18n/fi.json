@@ -48,6 +48,7 @@
 	"editcheck-reject-description": "Muut muokkaajat arvostaisivat kuulla, miksi teit tämän valinnan.",
 	"editcheck-review-title": "Tarkasta muutokset",
 	"editcheck-specialeditchecks-header-abtest": "A/B-testauksessa olevat tarkistukset",
+	"editcheck-specialeditchecks-header-betafeatures": "Beetaominaisuudet",
 	"editcheck-specialeditchecks-header-default": "Oletustarkistimet",
 	"editcheck-specialeditchecks-header-experimental": "Kokeelliset tarkistimet",
 	"editcheck-specialeditchecks-col-title": "Otsikko",

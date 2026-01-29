@@ -49,6 +49,7 @@
 	"editcheck-specialeditchecks-info": "Le controlos de modification se configura sur [[MediaWiki:Editcheck-config.json]]. Pro le documentation, vide [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
 	"editcheck-specialeditchecks-header-abtest": "Controlos de test A/B",
 	"editcheck-specialeditchecks-header-base": "Configuration de base",
+	"editcheck-specialeditchecks-header-betafeatures": "Functionalitate beta",
 	"editcheck-specialeditchecks-header-default": "Controlos predefinite",
 	"editcheck-specialeditchecks-header-experimental": "Controlos experimental",
 	"editcheck-specialeditchecks-col-title": "Titulo",
