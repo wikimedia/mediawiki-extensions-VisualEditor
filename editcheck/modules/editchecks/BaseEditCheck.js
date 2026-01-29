@@ -49,7 +49,7 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	includeSections: true, // any non-array means to include all; array of names means to include only those
 	ignoreDisambiguationPages: false,
 	ignoreQuotedContent: false,
-	context: [ 'suggestion', 'check ' ]
+	context: [ 'suggestion', 'check' ]
 };
 
 mw.editcheck.BaseEditCheck.static.title = null;
