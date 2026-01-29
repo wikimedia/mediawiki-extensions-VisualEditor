@@ -17,6 +17,10 @@ mw.editcheck.ToneCheck.static.allowedContentLanguages = [ 'en', 'es', 'fr', 'ja'
 
 mw.editcheck.ToneCheck.static.title = OO.ui.deferMsg( 'editcheck-tone-title' );
 
+mw.editcheck.ToneCheck.static.description = OO.ui.deferMsg( 'editcheck-tone-description' );
+
+mw.editcheck.ToneCheck.static.footer = OO.ui.deferMsg( 'editcheck-tone-footer' );
+
 mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	predictionThreshold: 0.8
 } );
