@@ -104,7 +104,7 @@ class SpecialEditChecks extends SpecialPage {
 			}
 		}
 
-		$baseCheck = $this->collectChecks( $checksDir . '/BaseEditCheck.js' );
+		$baseCheck = $this->collectChecks( $checksDir . '/BaseEditCheck.js', [], true );
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
 			$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-base' )->text() ) );
 			$out->addHTML( $this->configDetails(
@@ -119,9 +119,10 @@ class SpecialEditChecks extends SpecialPage {
 	 *
 	 * @param string $glob Glob pattern for files
 	 * @param array $excludeFiles List of filenames to exclude
+	 * @param bool $includeAbstract Whether to include abstract classes
 	 * @return array List of edit checks with metadata
 	 */
-	private function collectChecks( string $glob, array $excludeFiles = [] ): array {
+	private function collectChecks( string $glob, array $excludeFiles = [], bool $includeAbstract = false ): array {
 		$checks = [];
 		$files = glob( $glob ) ?: [];
 		foreach ( $files as $file ) {
@@ -134,6 +135,11 @@ class SpecialEditChecks extends SpecialPage {
 			}
 
 			$name = $this->extractStaticValue( $src, 'name' );
+
+			// Skip abstract classes (those without a name)
+			if ( !$includeAbstract && $name === '' ) {
+				continue;
+			}
 
 			$checks[] = [
 				'file' => $file,
