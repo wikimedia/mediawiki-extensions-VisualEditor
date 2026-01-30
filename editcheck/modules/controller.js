@@ -180,10 +180,10 @@ Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingO
 		$( document.documentElement ).toggleClass( 've-editcheck-enabled', isOpening );
 	} );
 	if ( isOpening ) {
-		$( document.documentElement ).addClass( 've-editcheck-transitioning' );
+		mw.hook( 've.hideVectorColumns' ).fire();
 	} else {
 		openingOrClosing.then( () => {
-			$( document.documentElement ).removeClass( 've-editcheck-transitioning' );
+			mw.hook( 've.restoreVectorColumns' ).fire();
 		} );
 	}
 	// Adjust toolbar position after animation ends

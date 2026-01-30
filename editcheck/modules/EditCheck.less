@@ -23,26 +23,6 @@
 			left: 150px;
 			transition: opacity 250ms, left 250ms;
 		}
-
-		.mw-body .vector-column-end,
-		.vector-pinnable-header-pin-button {
-			@media screen and ( max-width: 1492px ) {
-				// Pre-emptively hide right sidebar below width at which it would start
-				// squashing the main content area. Not 100% necessary but reduces amount
-				// of movement when EditCheck opens at these widths.
-				display: none !important;  /* stylelint-disable-line declaration-no-important */
-			}
-		}
-	}
-
-	.ve-editcheck-enabled &,
-	.ve-editcheck-transitioning & {
-		.mw-body .vector-column-end,
-		.vector-main-menu-landmark,
-		.vector-pinnable-header-pin-button {
-			// Hide sidebars during transitions as they reflow their own text when the change width
-			display: none !important;  /* stylelint-disable-line declaration-no-important */
-		}
 	}
 
 	/* stylelint-disable-next-line selector-not-notation */
@@ -73,23 +53,6 @@
 		.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-sidebarDialog {
 			opacity: 1;
 			left: 0;
-		}
-	}
-
-	.ve-editcheck-transitioning.vector-feature-main-menu-pinned-disabled.vector-toc-not-available &,
-	.ve-editcheck-enabled.vector-feature-main-menu-pinned-disabled.vector-toc-not-available &,
-	.ve-editcheck-transitioning.vector-feature-main-menu-pinned-disabled.vector-feature-toc-pinned-clientpref-0 &,
-	.ve-editcheck-enabled.vector-feature-main-menu-pinned-disabled.vector-feature-toc-pinned-clientpref-0 & {
-		@media screen and ( min-width: @min-width-breakpoint-desktop ) {
-			.mw-body {
-				padding-right: 0;
-			}
-		}
-
-		.mw-body .vector-column-end {
-			display: block !important;  /* stylelint-disable-line declaration-no-important */
-			visibility: hidden;
-			width: 300px;
 		}
 	}
 }
