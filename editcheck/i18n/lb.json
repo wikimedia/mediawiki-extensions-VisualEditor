@@ -29,7 +29,7 @@
 	"editcheck-copyvio-keep-notify": "Merci, datt Dir Äre Grond gedeelt hutt fir den agepechten Text ze halen",
 	"editcheck-copyvio-remove-notify": "Merci, datt Dir dësen Text ewechgeholl hutt!",
 	"editcheck-tone-title": "Tounfall iwwerschaffen?",
-	"editcheck-tone-description": "Aner Benotzer iwwerschaffen dës Zort vu Ausdrocksweis dacks, well se fannen, datt den Tounfall net equilibréiert ass. [$1 Méi gewuer ginn]",
+	"editcheck-tone-description": "Aner Benotzer iwwerschaffen dës Zort vu Ausdrocksweis dacks, well se fannen, datt den Tounfall net equilibréiert ass. [{{int:editcheck-tone-descriptionlink}} Méi gewuer ginn]",
 	"editcheck-tone-title-acted": "Tounfall iwwerschaffen",
 	"editcheck-tone-reject-appropriate": "Den Tounfall ass passend",
 	"editcheck-tone-reject-uncertain": "Ech weess net genee, wéi ech den Tounfall iwwerschaffe soll",
@@ -38,6 +38,5 @@
 	"editcheck-reject-description": "Aner Editeure géifen et appreciéiere fir gewuer ze ginn, firwat Dir dëse Choix gemaach hutt.",
 	"editcheck-review-title": "Ännerungen nokucken",
 	"editcheck-specialeditchecks-col-title": "Titel",
-	"editcheck-specialeditchecks-col-name": "Numm",
-	"editcheck-specialeditchecks-col-description": "Beschreiwung"
+	"editcheck-specialeditchecks-col-name": "Numm"
 }

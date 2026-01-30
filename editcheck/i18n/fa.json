@@ -28,7 +28,7 @@
 	"editcheck-copyvio-keep-other": "سایر",
 	"editcheck-copyvio-keep-notify": "از این که دلیل نگه داشتن متن چسبانده‌شده را به اشتراک گذاشتید ممنونیم!",
 	"editcheck-copyvio-remove-notify": "از این که این متن را حذف کردید ممنونیم!",
-	"editcheck-tone-description": "کاربران دیگر معمولاً چنین جمله‌بندی‌هایی را اصلاح می‌کنند، زیرا معتقدند که لحن آن نامتعادل است. [$1 بیشتر بدانید]",
+	"editcheck-tone-description": "کاربران دیگر معمولاً چنین جمله‌بندی‌هایی را اصلاح می‌کنند، زیرا معتقدند که لحن آن نامتعادل است. [{{int:editcheck-tone-descriptionlink}} بیشتر بدانید]",
 	"editcheck-tone-thank": "از این که این لحن را بازبینی کردید ممنونیم!",
 	"editcheck-review-title": "بازبینی تغییرات",
 	"tag-editcheck-reference-decline-common-knowledge": "بررسی ویرایش (ارجاعات) رد شد (دانش عمومی)",
