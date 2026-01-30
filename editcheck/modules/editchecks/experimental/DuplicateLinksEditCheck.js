@@ -15,6 +15,10 @@ mw.editcheck.DuplicateLinksEditCheck.static.description = 'This link appears mor
 const description = mw.editcheck.DuplicateLinksEditCheck.static.description;
 mw.editcheck.DuplicateLinksEditCheck.static.description = () => $( $.parseHTML( description ) );
 
+mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+	scope: 'paragraph' // 'section'
+} );
+
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
@@ -32,8 +36,8 @@ mw.editcheck.DuplicateLinksEditCheck.static.linkClasses = [ ve.dm.MWInternalLink
 /*
  * Break down the document into sections
  */
-function getSectionRanges( document ) {
-	const headingRanges = document.getNodesByType( 'mwHeading', true )
+function getSectionRanges( documentModel ) {
+	const headingRanges = documentModel.getNodesByType( 'mwHeading', true )
 		.filter( ( node ) => node.getAttribute( 'level' ) === 2 )
 		.map( ( node ) => node.getOuterRange() );
 
@@ -43,7 +47,7 @@ function getSectionRanges( document ) {
 		sections.push( new ve.Range( start, headingRange.start ) );
 		start = headingRange.end;
 	}
-	sections.push( new ve.Range( start, document.getDocumentRange().end ) );
+	sections.push( new ve.Range( start, documentModel.getDocumentRange().end ) );
 	return sections;
 }
 
@@ -68,8 +72,13 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 
 	const documentModel = surfaceModel.getDocument();
 
-	// Each section in the document, as divided by H2 headers
-	const sections = getSectionRanges( documentModel );
+	// Each section of the document that we want to detect duplicates within
+	let sections;
+	if ( this.config.scope === 'section' ) {
+		sections = getSectionRanges( documentModel );
+	} else if ( this.config.scope === 'paragraph' ) {
+		sections = documentModel.getNodesByType( 'paragraph' ).map( ( node ) => node.getOuterRange() );
+	}
 
 	// Traverse the tree once to find internal links, and build a map
 	const allInternalLinks = documentModel.getDocumentNode().getAnnotationRanges().filter( ( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name );
