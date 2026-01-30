@@ -72,6 +72,42 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	if ( this.suggestion ) {
 		this.$element.addClass( 've-ui-editCheckActionWidget-suggestion' );
+
+		const wikiID = mw.config.get( 'wgWikiID' ),
+			pageName = mw.config.get( 'wgRelevantPageName' );
+		const suggestionFeedbackMenuSelect = new OO.ui.ButtonMenuSelectWidget( {
+			label: ve.msg( 'visualeditor-feedback-tool' ),
+			icon: 'ellipsis',
+			framed: false,
+			invisibleLabel: true,
+			classes: [ 've-ui-editCheckActionWidget-suggestion-feedbackMenu' ],
+			$overlay: true,
+			menu: {
+				horizontalPosition: 'end',
+				items: [
+					new OO.ui.MenuOptionWidget( {
+						data: '//www.mediawiki.org/wiki/VisualEditor/Suggestion_Mode',
+						label: 'About Suggestions',
+						icon: 'linkExternal'
+					} ),
+					new OO.ui.MenuOptionWidget( {
+						data: '//www.mediawiki.org/wiki/Talk:VisualEditor/Suggestion_Mode/Feedback' +
+							'?action=edit&section=new&dtpreload=1&preloadtitle=' +
+							encodeURIComponent( `${ this.name } on ${ pageName } at ${ wikiID }` ),
+						label: 'Report a problem',
+						icon: 'linkExternal'
+					} )
+				]
+			}
+		} );
+		suggestionFeedbackMenuSelect.getMenu().on( 'choose', ( menuOption ) => {
+			const url = menuOption.getData();
+			if ( !url ) {
+				return;
+			}
+			window.open( url );
+		} );
+		this.$actions.append( suggestionFeedbackMenuSelect.$element );
 	}
 
 	this.$element
@@ -117,6 +153,7 @@ mw.editcheck.EditCheckActionWidget.prototype.setMode = function ( mode ) {
  */
 mw.editcheck.EditCheckActionWidget.prototype.onActionsChange = function () {
 	let hasVisibleActions = false;
+	this.$actions.children( '.oo-ui-actionWidget' ).detach();
 	this.actions.get().forEach( ( actionWidget ) => {
 		this.$actions.append( actionWidget.$element );
 		hasVisibleActions = hasVisibleActions || actionWidget.isVisible();
