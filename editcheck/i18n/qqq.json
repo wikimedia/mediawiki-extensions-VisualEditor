@@ -68,6 +68,7 @@
 	"editcheck-specialeditchecks-config-summary": "Label for the <details>/<summary> element that contains configuration.",
 	"editcheck-specialeditchecks-config-default": "Subheading for the default configuration block.",
 	"editcheck-specialeditchecks-config-onwiki": "Subheading for the on-wiki override configuration block.",
+	"editcheck-specialeditchecks-config-matchitem": "Subheading for the text match configuration block.",
 	"tag-editcheck-reference-decline-common-knowledge": "Short description of the editcheck-reference-decline-common-knowledge tag.\n\nTag added when a user declines to add a suggested reference and selects the \"common knowledge\" reason.\n\nSee also:\n* {{msg-mw|editcheck-dialog-addref-reject-common-knowledge}}",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Long description of the editcheck-reference-decline-common-knowledge tag.\n\nTag added when a user declines to add a suggested reference and selects the \"common knowledge\" reason.\n\nSee also:\n* {{msg-mw|editcheck-dialog-addref-reject-common-knowledge}}",
 	"tag-editcheck-reference-decline-irrelevant": "Short description of the editcheck-reference-decline-irrelevant tag.\n\nTag added when a user declines to add a suggested reference and selects the \"irrelevant\" reason.\n\nSee also:\n* {{msg-mw|editcheck-dialog-addref-reject-irrelevant}}",
