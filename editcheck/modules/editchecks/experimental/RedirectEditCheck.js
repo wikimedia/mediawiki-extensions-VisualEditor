@@ -24,6 +24,10 @@ mw.editcheck.RedirectEditCheck.static.choices = [
 	}
 ];
 
+mw.editcheck.RedirectEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+	enabled: false
+} );
+
 mw.editcheck.RedirectEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
 
 mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
