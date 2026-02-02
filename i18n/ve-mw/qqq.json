@@ -272,6 +272,7 @@
 	"visualeditor-educationpopup-dismiss": "Text on dismiss button shown on the educational popups drawing user attention to specific tools.",
 	"visualeditor-expandable-less": "Label for collapsing an expanded region.\n{{identical|Less}}",
 	"visualeditor-expandable-more": "Label for expanding a collapsed region.\n{{identical|More}}",
+	"visualeditor-expandableerror-toggle": "Hidden accessibility label for the collapse/expand button shown in an expandable error message",
 	"visualeditor-feedback-defaultmessage": "Default message text for the feedback dialog.\n\nParameters:\n* $1 - URL of the page\n{{Identical|URL}}",
 	"visualeditor-formatdropdown-format-mw-heading1": "Item in the MediaWiki formatting dropdown for a level 1 heading (page title).\n{{Related|Visualeditor-formatdropdown}}\n{{Identical|Page title}}",
 	"visualeditor-formatdropdown-format-mw-heading2": "Item in the MediaWiki formatting dropdown for a level 2 heading (section).\n{{Related|Visualeditor-formatdropdown}}\n{{Identical|Heading}}",
