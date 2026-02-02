@@ -5,11 +5,11 @@ mw.editcheck.DuplicateLinksEditCheck = function MWDuplicateLinksEditCheck() {
 
 OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.DuplicateLinksEditCheck.static.title = 'Duplicate links';
+mw.editcheck.DuplicateLinksEditCheck.static.title = 'Remove duplicated link';
 
 mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
 
-mw.editcheck.DuplicateLinksEditCheck.static.description = 'This link appears more than once in this section. Help make Wikipedia easier for people to read by removing this link.<br><a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">Learn more</a>';
+mw.editcheck.DuplicateLinksEditCheck.static.description = 'This link appears more than once in this section. Help readers navigate the article more easily by removing <a href="https://en.wikipedia.org/wiki/MOS:REPEATLINK">repeated links</a>.';
 
 // HACK: Use plain string above so Special:EditChecks can parse.
 const description = mw.editcheck.DuplicateLinksEditCheck.static.description;
@@ -22,12 +22,11 @@ mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {},
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
-		label: 'Remove link',
-		icon: 'trash'
+		label: 'Remove link'
 	},
 	{
 		action: 'dismiss',
-		label: 'Dismiss' // TODO: i18n
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 

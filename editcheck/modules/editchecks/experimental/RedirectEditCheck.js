@@ -5,22 +5,24 @@ mw.editcheck.RedirectEditCheck = function MWRedirectEditCheck() {
 
 OO.inheritClass( mw.editcheck.RedirectEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.RedirectEditCheck.static.title = 'Redirect link';
+mw.editcheck.RedirectEditCheck.static.title = 'Link to the final page';
 
 mw.editcheck.RedirectEditCheck.static.name = 'redirect';
 
-mw.editcheck.RedirectEditCheck.static.description = 'Link to the redirect target instead?';
+mw.editcheck.RedirectEditCheck.static.description = 'This link points to a redirect page. Link to the final page instead.';
+
+// HACK: Use plain string above so Special:EditChecks can parse.
+const description = mw.editcheck.RedirectEditCheck.static.description;
+mw.editcheck.RedirectEditCheck.static.description = () => $( $.parseHTML( description ) );
 
 mw.editcheck.RedirectEditCheck.static.choices = [
 	{
 		action: 'fix',
-		label: 'Fix link', // ve.msg( 'editcheck-dialog-action-yes' ),
-		icon: 'check'
+		label: 'Update link'
 	},
 	{
 		action: 'dismiss',
-		label: 'Ignore', // ve.msg( 'editcheck-dialog-action-no' ),
-		icon: 'close'
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 

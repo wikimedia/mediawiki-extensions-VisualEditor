@@ -12,24 +12,24 @@ mw.editcheck.YearLinkEditCheck = function MWYearLinkEditCheck() {
 
 OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.LinkEditCheck );
 
-mw.editcheck.YearLinkEditCheck.static.title = "Year link doesn't match label";
+mw.editcheck.YearLinkEditCheck.static.title = 'Fix year link';
+
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
-mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a year that is different from the label.';
+
+mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a different year than the one shown in the text. Help readers avoid confusion by updating the link to match the displayed year.';
 
 mw.editcheck.YearLinkEditCheck.static.choices = [
 	{
 		action: 'useTarget',
-		label: 'Use target year',
-		icon: 'check'
+		label: 'Use target year'
 	},
 	{
 		action: 'useLabel',
-		label: 'Use label year',
-		icon: 'check'
+		label: 'Use label year'
 	},
 	{
 		action: 'dismiss',
-		label: 'Dismiss'
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 
