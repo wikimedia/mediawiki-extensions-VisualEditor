@@ -40,10 +40,20 @@ OO.initClass( mw.editcheck.EditCheckGutterSectionWidget );
 
 /* Methods */
 
+/**
+ * Check if any of the actions in this section are focused
+ *
+ * @return {boolean}
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.isFocused = function () {
 	return this.actions.includes( this.controller.focusedAction );
 };
 
+/**
+ * Get the primary action for this section (the focused one, or the first one)
+ *
+ * @return {mw.editcheck.EditCheckAction}
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.getPrimaryAction = function () {
 	if ( this.controller.focusedAction && this.actions.includes( this.controller.focusedAction ) ) {
 		return this.controller.focusedAction;
@@ -51,6 +61,9 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.getPrimaryAction = function 
 	return this.actions[ 0 ];
 };
 
+/**
+ * Update the rendering of the gutter section
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 	const action = this.getPrimaryAction();
 
@@ -86,6 +99,11 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 	}
 };
 
+/**
+ * Set the position of the gutter section
+ *
+ * @param {DOMRect|Object} rect DOMRect or DOMRect-like object describing rectangle
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.setPosition = function ( rect ) {
 	this.$element.css( {
 		top: rect.top + 2,
@@ -95,6 +113,9 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.setPosition = function ( rec
 	this.update();
 };
 
+/**
+ * Handle click events
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 	if ( this.acting ) {
 		return;
@@ -131,13 +152,19 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		this.showDialogWithAction( action );
 	} else if ( this.actions.every( ( sact ) => currentWindow.hasAction( sact ) ) ) {
 		// Second click: defocus and close
-		return this.controller.closeDialog();
+		this.controller.closeDialog();
+		return;
 	} else {
 		currentWindow.showActions( this.actions, [ action ] );
 		currentWindow.footer.toggle( this.actions.length !== 1 );
 	}
 };
 
+/**
+ * Show the edit check dialog with a specific action focused
+ *
+ * @param {mw.editcheck.EditCheckAction} action Action to focus
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action ) {
 	const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
 	windowAction.open(
@@ -155,6 +182,9 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 	this.controller.focusAction( action, true );
 };
 
+/**
+ * Teardown the widget
+ */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.teardown = function () {
 	this.$element.remove();
 
