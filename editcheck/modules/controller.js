@@ -907,6 +907,12 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 	return false;
 };
 
+/**
+ * Track some actions as having been shown
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions
+ * @param {string} moment 'midedit' or 'presave'
+ */
 Controller.prototype.updateShownStats = function ( actions, moment ) {
 	actions.forEach( ( action ) => {
 		if ( action.isSuggestion() ) {
