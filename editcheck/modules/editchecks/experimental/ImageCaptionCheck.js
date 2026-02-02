@@ -6,8 +6,25 @@ mw.editcheck.ImageCaptionEditCheck = function () {
 OO.inheritClass( mw.editcheck.ImageCaptionEditCheck, mw.editcheck.BaseEditCheck );
 
 mw.editcheck.ImageCaptionEditCheck.static.name = 'imageCaption';
-mw.editcheck.ImageCaptionEditCheck.static.title = 'Image needs caption';
-mw.editcheck.ImageCaptionEditCheck.static.description = 'This image is lacking a caption, which can be important to readers to explain why the image is present. Not every image needs a caption; some are simply decorative. Relatively few may be genuinely self-explanatory. Does this image need a caption?';
+
+mw.editcheck.ImageCaptionEditCheck.static.title = 'Add image caption';
+
+mw.editcheck.ImageCaptionEditCheck.static.description = 'This image does not have a caption. Help readers understand why the image is relevant by adding a <a href="//en.wikipedia.org/wiki/WP:CAP">short caption</a>.';
+
+// HACK: Use plain string above so Special:EditChecks can parse.
+const description = mw.editcheck.ImageCaptionEditCheck.static.description;
+mw.editcheck.ImageCaptionEditCheck.static.description = () => $( $.parseHTML( description ) );
+
+mw.editcheck.ImageCaptionEditCheck.static.choices = [
+	{
+		action: 'edit',
+		label: 'Add caption'
+	},
+	{
+		action: 'dismiss',
+		label: 'Dismiss'
+	}
+];
 
 mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.getAddedNodes( surfaceModel.getDocument(), 'mwBlockImage' )
@@ -24,10 +41,10 @@ mw.editcheck.ImageCaptionEditCheck.prototype.onBranchNodeChange = mw.editcheck.I
 mw.editcheck.ImageCaptionEditCheck.prototype.act = function ( choice, action, surface ) {
 	const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
 	switch ( choice ) {
-		case 'accept':
+		case 'edit':
 			action.fragments[ 0 ].select();
 			return windowAction.open( 'media' ).then( ( instance ) => instance.closing );
-		case 'reject':
+		case 'dismiss':
 			this.dismiss( action );
 			return ve.createDeferred().resolve( true ).promise();
 	}

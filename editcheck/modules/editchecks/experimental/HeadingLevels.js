@@ -5,11 +5,11 @@ mw.editcheck.HeadingLevelsEditCheck = function MWHeadingLevelsEditCheck() {
 
 OO.inheritClass( mw.editcheck.HeadingLevelsEditCheck, mw.editcheck.BaseEditCheck );
 
-mw.editcheck.HeadingLevelsEditCheck.static.title = 'Heading level';
+mw.editcheck.HeadingLevelsEditCheck.static.title = 'Adjust heading level';
 
 mw.editcheck.HeadingLevelsEditCheck.static.name = 'headingLevels';
 
-mw.editcheck.HeadingLevelsEditCheck.static.description = 'Help make this page easier for people to navigate and read by adjusting this heading level.<br><a href="//www.mediawiki.org/wiki/Documentation/Style_guide#Titles_and_headings">Learn more</a>';
+mw.editcheck.HeadingLevelsEditCheck.static.description = 'This heading level may not follow the article structure. Help readers navigate and read the content more easily by using the correct <a href="//www.mediawiki.org/wiki/Documentation/Style_guide#Titles_and_headings">heading level</a>.';
 
 // HACK: Use plain string above so Special:EditChecks can parse.
 const description = mw.editcheck.HeadingLevelsEditCheck.static.description;
@@ -18,12 +18,11 @@ mw.editcheck.HeadingLevelsEditCheck.static.description = () => $( $.parseHTML( d
 mw.editcheck.HeadingLevelsEditCheck.static.choices = [
 	{
 		action: 'fix',
-		label: 'Fix heading',
-		icon: 'edit'
+		label: 'Adjust heading'
 	},
 	{
 		action: 'dismiss',
-		label: 'Dismiss'
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 
