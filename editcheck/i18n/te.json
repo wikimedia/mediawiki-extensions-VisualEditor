@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chaduvari"
+		]
+	},
+	"editcheck-tone-description": "స్వరంలో సమతుల్యత లేదని భావించి, ఇతర వాడుకరులు ఇలాంటి భాషను మారుస్తూ ఉంటారు. [{{int:editcheck-tone-descriptionlink}} మరింత తెలుసుకోండి]",
+	"editcheck-tone-footer": "[{{int:editcheck-tone-footerlink}} BERT మోడల్] ఉపయోగించి గుర్తించబడింది.",
+	"editcheck-specialeditchecks-col-appearance": "స్వరూపం"
+}

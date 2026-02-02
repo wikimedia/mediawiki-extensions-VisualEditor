@@ -59,6 +59,7 @@
 	"editcheck-specialeditchecks-config-summary": "Konfiguration",
 	"editcheck-specialeditchecks-config-default": "Standard-Konfiguration",
 	"editcheck-specialeditchecks-config-onwiki": "On-Wiki-Überschreibung",
+	"editcheck-specialeditchecks-config-matchitem": "Textübereinstimmungskonfiguration",
 	"tag-editcheck-reference-decline-common-knowledge": "Bearbeitungsprüfung (Belege) abgelehnt (Allgemeinwissen)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Beleg wurde als allgemein bekannt abgelehnt",
 	"tag-editcheck-reference-decline-irrelevant": "Bearbeitungsprüfung (Belege) abgelehnt (irrelevant)",
