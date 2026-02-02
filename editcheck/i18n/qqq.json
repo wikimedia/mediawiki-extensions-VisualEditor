@@ -16,6 +16,7 @@
 	"editcheck-dialog-action-recheck": "Label for the revise option when asking users if they want to re-run a check.",
 	"editcheck-dialog-action-back": "Label for the back option when asking users if they want to act on a check.\n\n{{Identical|Back}}",
 	"editcheck-dialog-action-submit": "Label for the submit option when asking users if they want to act on a check.\n\n{{Identical|Submit}}",
+	"editcheck-dialog-toggle": "Hidden accessibility label for the collapse/expand button shown in the edit check dialog's title on mobile during the pre-save process",
 	"editcheck-dialog-addref-description": "Help text explaining why it is helpful to add a citation.",
 	"editcheck-dialog-addref-reject-question": "Heading for form question asking why the user didn't add a citation.",
 	"editcheck-dialog-addref-reject-description": "Help text for form question asking why the user didn't add a citation.",

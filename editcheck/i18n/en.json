@@ -14,6 +14,7 @@
 	"editcheck-dialog-action-recheck": "Recheck",
 	"editcheck-dialog-action-back": "Back",
 	"editcheck-dialog-action-submit": "Submit",
+	"editcheck-dialog-toggle": "Toggle visibility",
 	"editcheck-dialog-addref-description": "Help readers understand where this information is coming from by adding a citation.",
 	"editcheck-dialog-addref-reject-question": "Why are you not adding a citation?",
 	"editcheck-dialog-addref-reject-description": "Other editors would value learning more about your decision not to add a citation.",

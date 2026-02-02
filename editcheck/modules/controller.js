@@ -7,7 +7,7 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  *
  * Manages triggering and updating edit checks.
  *
- * @class
+ * @class EditCheckController
  * @constructor
  * @mixes OO.EventEmitter
  * @param {ve.init.mw.Target} target The VisualEditor target
@@ -54,7 +54,7 @@ OO.mixinClass( Controller, OO.EventEmitter );
 /**
  * Actions for a given listener are updated
  *
- * @event Controller#actionsUpdated
+ * @event EditCheckController#actionsUpdated
  * @param {string} listener The listener type (e.g. 'onBeforeSave')
  * @param {mw.editcheck.EditCheckAction[]} actions All current actions
  * @param {mw.editcheck.EditCheckAction[]} newActions Actions newly added
@@ -65,7 +65,7 @@ OO.mixinClass( Controller, OO.EventEmitter );
 /**
  * An action is focused
  *
- * @event Controller#focusAction
+ * @event EditCheckController#focusAction
  * @param {mw.editcheck.EditCheckAction} action Action
  * @param {number} index Index of the action in #getActions
  * @param {boolean} scrollTo Scroll the action's selection into view
@@ -74,7 +74,7 @@ OO.mixinClass( Controller, OO.EventEmitter );
 /**
  * Actions have been redrawn or repositioned
  *
- * @event Controller#position
+ * @event EditCheckController#position
  */
 
 /**
@@ -209,7 +209,7 @@ Controller.prototype.editChecksArePossible = function () {
 /**
  * Update position of edit check highlights
  *
- * @fires Controller#position
+ * @fires EditCheckController#position
  */
 Controller.prototype.updatePositions = function () {
 	this.drawSelections();
@@ -220,7 +220,7 @@ Controller.prototype.updatePositions = function () {
 /**
  * Update edit check list
  *
- * @fires Controller#actionsUpdated
+ * @fires EditCheckController#actionsUpdated
  * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of
  *  actions. This promise will resolve *after* any actionsUpdated events are
  *  fired.
@@ -270,7 +270,7 @@ Controller.prototype.toggleSuggestionsMode = function () {
  * @param {string} listener e.g. onBeforeSave, onDocumentChange, onBranchNodeChange
  * @param {boolean} fromRefresh Update comes from a manual refresh, not a real event
  * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of actions.
- * @fires Controller#actionsUpdated
+ * @fires EditCheckController#actionsUpdated
  */
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	// Get the existing actions for this listener
@@ -343,7 +343,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
  * @param {string} listener Listener which triggered the action
  * @param {mw.editcheck.EditCheckAction} action Action to remove
  * @param {boolean} rejected The action was rejected
- * @fires Controller#actionsUpdated
+ * @fires EditCheckController#actionsUpdated
  */
 Controller.prototype.removeAction = function ( listener, action, rejected ) {
 	const actions = this.getActions( listener );
@@ -369,8 +369,8 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
  * @param {mw.editcheck.EditCheckAction} action Action to focus
  * @param {boolean} [scrollTo] Scroll action's selection into view
  * @param {boolean} [alignToTop] Align selection to top of page when scrolling
- * @fires Controller#focusAction
- * @fires Controller#position
+ * @fires EditCheckController#focusAction
+ * @fires EditCheckController#position
  */
 Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 	if ( !scrollTo && action === this.focusedAction ) {
@@ -436,8 +436,8 @@ Controller.prototype.onSelect = function () {
 /**
  * Update actions based on the current selection
  *
- * @fires Controller#actionsUpdated
- * @fires Controller#focusAction
+ * @fires EditCheckController#actionsUpdated
+ * @fires EditCheckController#focusAction
  */
 Controller.prototype.focusActionForSelection = function () {
 	if ( !this.surface ) {
@@ -534,6 +534,7 @@ Controller.prototype.onBranchNodeChange = function () {
  * Updates gutter and highlights when the action list has changed.
  * Displays the edit check dialog if it is not already on screen.
  *
+ * @listens EditCheckController#actionsUpdated
  * @param {string} listener e.g. onBeforeSave, onDocumentChange, onBranchNodeChange
  * @param {mw.editcheck.EditCheckAction[]} actions
  * @param {mw.editcheck.EditCheckAction[]} newActions

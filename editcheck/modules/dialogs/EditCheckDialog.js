@@ -56,7 +56,8 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	this.collapseExpandButton = new OO.ui.ButtonWidget( {
 		classes: [ 've-ui-editCheckDialog-collapseExpand' ],
 		framed: false,
-		// TODO: Add collapse/expand accessibility labels
+		label: ve.msg( 'editcheck-dialog-toggle' ),
+		invisibleLabel: true,
 		icon: 'expand'
 	} ).connect( this, {
 		click: 'onCollapseExpandButtonClick'
