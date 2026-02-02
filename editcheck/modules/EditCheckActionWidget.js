@@ -83,19 +83,18 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 			classes: [ 've-ui-editCheckActionWidget-suggestion-feedbackMenu' ],
 			$overlay: true,
 			menu: {
+				verticalPosition: OO.ui.isMobile() ? 'above' : 'below',
 				horizontalPosition: 'end',
 				items: [
 					new OO.ui.MenuOptionWidget( {
 						data: '//www.mediawiki.org/wiki/VisualEditor/Suggestion_Mode',
-						label: 'About Suggestions',
-						icon: 'linkExternal'
+						label: 'About Suggestions'
 					} ),
 					new OO.ui.MenuOptionWidget( {
 						data: '//www.mediawiki.org/wiki/Talk:VisualEditor/Suggestion_Mode/Feedback' +
 							'?action=edit&section=new&dtpreload=1&preloadtitle=' +
 							encodeURIComponent( `${ this.name } on ${ pageName } at ${ wikiID }` ),
-						label: 'Report a problem',
-						icon: 'linkExternal'
+						label: 'Report a problem'
 					} )
 				]
 			}
