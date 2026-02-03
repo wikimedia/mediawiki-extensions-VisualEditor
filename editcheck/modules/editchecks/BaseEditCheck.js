@@ -715,6 +715,17 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 					// need the entire data -- just [previous,item] would not work.
 					unicodeJS.wordbreak.isBreak( new ve.dm.DataString( data ), index )
 				) {
+					if (
+						previous && mw.config.get( 'wgContentLanguage' ) === 'en' &&
+						previous === 's' && ( quotes.get( '\'' ) || 0 ) % 2 === 0
+					) {
+						// One extra check to rule out English's possessive
+						// apostrophes following a `s`. There's no way to
+						// tell the difference between a closing single-quote
+						// and a possessive, but we can say that they can't
+						// count as opening quotes.
+						continue;
+					}
 					quote = '\'';
 				}
 			} else {

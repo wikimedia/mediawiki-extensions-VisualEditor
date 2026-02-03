@@ -497,6 +497,22 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 			expectedValid: false
 		},
 		{
+			name: 'A possessive apostrophe after an s is not an opening single-quote',
+			config: { ignoreQuotedContent: true },
+			data: [ { type: 'paragraph' }, ..."the bees' knees", { type: '/paragraph' } ],
+			range: new ve.Range( 12 ),
+			expectedState: false,
+			expectedValid: true
+		},
+		{
+			name: 'A possessive apostrophe after an s is, unfortunately, a closing single-quote',
+			config: { ignoreQuotedContent: true },
+			data: [ { type: 'paragraph' }, ..."'the bees' knees'", { type: '/paragraph' } ],
+			range: new ve.Range( 12 ),
+			expectedState: false,
+			expectedValid: true
+		},
+		{
 			name: 'Nested quotes of different types work',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."A \"B 'c' D\" E", { type: '/paragraph' } ],
