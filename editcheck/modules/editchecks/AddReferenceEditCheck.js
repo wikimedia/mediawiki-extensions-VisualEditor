@@ -13,6 +13,19 @@ mw.editcheck.AddReferenceEditCheck.static.description = OO.ui.deferMsg( 'editche
 
 mw.editcheck.AddReferenceEditCheck.static.success = OO.ui.deferMsg( 'editcheck-dialog-addref-success-notify' );
 
+mw.editcheck.AddReferenceEditCheck.static.choices = [
+	{
+		action: 'accept',
+		label: OO.ui.deferMsg( 'editcheck-dialog-action-yes' ),
+		icon: 'check'
+	},
+	{
+		action: 'reject',
+		label: OO.ui.deferMsg( 'editcheck-dialog-action-no' ),
+		icon: 'close'
+	}
+];
+
 mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	minimumCharacters: 50,
 	beforePunctuation: false,

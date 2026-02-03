@@ -148,6 +148,7 @@ class SpecialEditChecks extends SpecialPage {
 				'description' => $this->extractStaticValue( $src, 'description' ),
 				'prompt' => $this->extractStaticValue( $src, 'prompt' ),
 				'footer' => $this->extractStaticValue( $src, 'footer' ),
+				'choices' => $this->extractStaticValue( $src, 'choices' ),
 				'defaultConfig' => $this->extractDefaultConfig( $src ),
 			];
 		}
@@ -182,75 +183,48 @@ class SpecialEditChecks extends SpecialPage {
 				$this->msg( 'editcheck-specialeditchecks-config-summary' )->text() )
 		);
 		foreach ( $checks as $checkData ) {
-			$html .= $this->buildRowHtml( $checkData, $onWikiConfig, $onlyWithEnabledValue, $suggestions );
-			if ( $checkData['name'] === 'textMatch' ) {
-				$matchItems = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' ) ?? [];
-				foreach ( $matchItems as $name => $item ) {
-					$matchCheckData = [
-						'file' => '',
-						'name' => $checkData['name'] . " ($name)",
-						'title' => $item['title'] ?? '',
-						'description' => $item['message'] ?? '',
-						'prompt' => $item['prompt'] ?? '',
-						'footer' => $item['footer'] ?? '',
-						'defaultConfig' => json_encode( $item['config'] ?? '' ),
-						'matchItem' => $item,
-					];
-					$html .= $this->buildRowHtml( $matchCheckData, $onWikiConfig, $onlyWithEnabledValue, $suggestions );
+			// Filter by enabled value if requested
+			if ( $onlyWithEnabledValue !== null ) {
+				$enabled = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'enabled' ) ?? true;
+				if ( $enabled !== $onlyWithEnabledValue ) {
+					continue;
 				}
 			}
+			$override = '';
+			if ( isset( $onWikiConfig[$checkData['name']] ) ) {
+				$override = $this->jsonTable( $onWikiConfig[$checkData['name']] );
+			}
+			$defaultConfig = '';
+			if ( $checkData['defaultConfig'] ) {
+				$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
+			}
+
+			if ( empty( $checkData['title'] ) && empty( $checkData['description'] ) ) {
+				$widget = '';
+			} else {
+				$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
+			}
+
+			$html .= Html::rawElement( 'tr', [],
+				Html::rawElement( 'td', [],
+					Html::element( 'strong', [], $checkData['name'] ) .
+					Html::element( 'div', [], basename( $checkData['file'] ) )
+				) .
+				Html::rawElement( 'td', [],
+					Html::rawElement(
+						'div',
+						[ 'class' => 've-ui-editCheckDialog' ],
+						$widget
+					)
+				) .
+				Html::rawElement( 'td', [],
+					( $defaultConfig !== '' || $override !== '' ?
+						$this->configDetails( $defaultConfig, $override ) : ''
+					)
+				)
+			);
 		}
 		$html .= Html::closeElement( 'table' );
-		return $html;
-	}
-
-	private function buildRowHtml(
-		array $checkData, array $onWikiConfig, ?bool $onlyWithEnabledValue = null, bool $suggestions = false
-	): string {
-		$html = '';
-		// Filter by enabled value if requested
-		if ( $onlyWithEnabledValue !== null ) {
-			$enabled = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'enabled' ) ?? true;
-			if ( $enabled !== $onlyWithEnabledValue ) {
-				return '';
-			}
-		}
-		$override = '';
-		if ( isset( $onWikiConfig[$checkData['name']] ) ) {
-			$override = $this->jsonTable( $onWikiConfig[$checkData['name']] );
-		}
-		$defaultConfig = '';
-		if ( $checkData['defaultConfig'] ) {
-			$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
-		}
-
-		if ( empty( $checkData['title'] ) && empty( $checkData['description'] ) ) {
-			$widget = '';
-		} else {
-			$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
-		}
-
-		$html .= Html::rawElement( 'tr', [],
-			Html::rawElement( 'td', [],
-				Html::element( 'strong', [], $checkData['name'] ) .
-				Html::element( 'div', [], basename( $checkData['file'] ) )
-			) .
-			Html::rawElement( 'td', [],
-				Html::rawElement(
-					'div',
-					[ 'class' => 've-ui-editCheckDialog' ],
-					$widget
-				)
-			) .
-			Html::rawElement( 'td', [],
-				( $defaultConfig !== '' || $override !== '' ?
-					$this->configDetails( $defaultConfig, $override ) : ''
-				) .
-				( !empty( $checkData['matchItem'] ) ?
-					$this->matchItemDetails( $checkData['matchItem'] ) : ''
-				)
-			)
-		);
 		return $html;
 	}
 
@@ -270,11 +244,10 @@ class SpecialEditChecks extends SpecialPage {
 			$widget->addClasses( [ 've-ui-editCheckActionWidget-suggestion' ] );
 		}
 		$actions = new \OOUI\Tag( 'div' );
-		$actions->addClasses( [ 've-ui-editCheckActionWidget-actions', 'oo-ui-element-hidden' ]	);
+		$actions->addClasses( [ 've-ui-editCheckActionWidget-actions' ]	);
 		if ( $checkData['prompt'] ) {
 			$actions
 				->addClasses( [ 've-ui-editCheckActionWidget-actions-prompted' ] )
-				->removeClasses( [ 'oo-ui-element-hidden' ] )
 				->appendContent(
 					new \OOUI\LabelWidget( [
 						'label' => $checkData['prompt'],
@@ -295,6 +268,18 @@ class SpecialEditChecks extends SpecialPage {
 					'classes' => [ 've-ui-editCheckActionWidget-footer' ]
 				] ),
 			);
+		}
+
+		if ( $checkData['choices'] ) {
+			foreach ( $checkData['choices'] as $choice ) {
+				$actionButton = new \OOUI\ButtonWidget( [
+					'label' => $choice[ 'label' ],
+					'flags' => $choice['flags'] ?? [],
+					'icon' => $choice['icon'] ?? null,
+					'classes' => [ 'oo-ui-actionWidget' ],
+				] );
+				$actions->appendContent( $actionButton );
+			}
 		}
 		return $widget;
 	}
@@ -350,57 +335,33 @@ class SpecialEditChecks extends SpecialPage {
 	}
 
 	/**
-	 * Build the details element showing a textMatch matchItem configuration.
+	 * Build a regex for matching supported message-call expressions.
 	 *
-	 * @param array $matchItem Match item data
+	 * @param bool $anchored Whether to anchor the pattern to the whole string
 	 * @return string
 	 */
-	private function matchItemDetails( array $matchItem ): string {
-		// Skip already displayed fields
-		$matchItemFiltered = array_filter(
-			$matchItem,
-			static function ( $key ) {
-				return !in_array( $key, [ 'config', 'title', 'message', 'prompt', 'footer' ], true );
-			},
-			ARRAY_FILTER_USE_KEY
-		);
-
-		return Html::rawElement( 'details', [],
-			Html::rawElement( 'summary', [],
-				Html::element( 'strong', [ 'class' => 'mw-editchecks-config-header' ],
-					$this->msg( 'editcheck-specialeditchecks-config-matchitem' )->text() )
-			) .
-			$this->jsonTable( $matchItemFiltered )
-		);
+	private function getMessageExpressionPattern( bool $anchored ): string {
+		$start = $anchored ? '^' : '\b';
+		$end = $anchored ? '$' : '';
+		$pattern =
+			'/' .
+			$start .
+			'(ve\.msg|ve\.htmlMsg|ve\.deferHtmlMsg|ve\.deferJQueryMsg|mw\.msg|OO\.ui\.deferMsg)' .
+			"\\s*\\(\\s*(\"|')" .
+			"([^\"']+)" .
+			"\\2(.*?)\\)" .
+			$end .
+			'/s';
+		return $pattern;
 	}
 
 	/**
-	 * Extract a static property value.
+	 * Parse a JS message expression and return the rendered message.
 	 *
-	 * @param string $src Source code
-	 * @param string $prop Property name
-	 * @return string|\OOUI\HtmlSnippet
+	 * @param string $expr
+	 * @return string|\OOUI\HtmlSnippet Empty string if the expression doesn't match.
 	 */
-	private function extractStaticValue( string $src, string $prop ) {
-		// Capture the assigned expression allowing semicolons inside quoted strings
-		$pattern =
-			'/static\s*\.\s*' .
-			preg_quote( $prop, '/' ) .
-			'\s*=\s*((?:\"(?:\\.|[^\\\"])*\"|\'(?:\\.|[^\\\'])*\'|[^;\"\']+)*)\s*;/';
-		if ( !preg_match( $pattern, $src, $m ) ) {
-			return '';
-		}
-		$expr = trim( $m[1] );
-
-		// Literal
-		if ( preg_match( '/^([\"\\\'])(.*?)\1$/', $expr, $mm ) ) {
-			if ( $prop === 'name' ) {
-				return $mm[2];
-			} else {
-				return new \OOUI\HtmlSnippet( $mm[2] );
-			}
-		}
-
+	private function parseMessage( string $expr ) {
 		// Message calls:
 		// - ve.msg(...)
 		// - ve.htmlMsg(...)
@@ -408,13 +369,7 @@ class SpecialEditChecks extends SpecialPage {
 		// - ve.deferJQueryMsg(...)
 		// - mw.msg(...)
 		// - OO.ui.deferMsg(...)
-		if ( preg_match(
-			'/^' .
-				'(ve\.msg|ve\.htmlMsg|ve\.deferHtmlMsg|ve\.deferJQueryMsg|mw\.msg|OO\.ui\.deferMsg)' .
-				'\s*\(\s*([\"\\\'])([^\"\']+)\2(.*)\)' .
-			'$/',
-			$expr, $mm
-		) ) {
+		if ( preg_match( $this->getMessageExpressionPattern( true ), $expr, $mm ) ) {
 			$argsStr = $mm[4];
 			$args = [];
 			if ( preg_match_all( '/,\s*([\"\\\'])(.*?)\1/', $argsStr, $am, PREG_SET_ORDER ) ) {
@@ -434,6 +389,66 @@ class SpecialEditChecks extends SpecialPage {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Extract a static property value.
+	 *
+	 * @param string $src Source code
+	 * @param string $prop Property name
+	 * @return string|\OOUI\HtmlSnippet
+	 */
+	private function extractStaticValue( string $src, string $prop ) {
+		$expr = $this->extractStaticAssignmentExpression( $src, $prop );
+		if ( $expr === '' ) {
+			return '';
+		}
+
+		// Literal
+		if ( preg_match( '/^([\"\\\'])(.*?)\1$/', $expr, $mm ) ) {
+			if ( $prop === 'name' ) {
+				return $mm[2];
+			} else {
+				return new \OOUI\HtmlSnippet( $mm[2] );
+			}
+		}
+
+		$message = $this->parseMessage( $expr );
+		if ( $message !== '' ) {
+			return $message;
+		}
+
+		// For non-literal, non-message values, only expose data we explicitly care about.
+		// The common use-case here is extracting multi-line arrays/objects like `static.choices = [ ... ];`.
+		if ( $prop === 'choices' ) {
+			$decoded = $this->tryJsonDecodeObjectString( $expr );
+			if ( $decoded !== null ) {
+				return $decoded;
+			}
+			return '';
+		}
+
+		return '';
+	}
+
+	/**
+	 * Extract the full RHS expression of a `static.<prop> = ...;` assignment.
+	 *
+	 * @param string $src Code
+	 * @param string $prop Property name
+	 * @return string RHS expression or empty string if not found
+	 */
+	private function extractStaticAssignmentExpression( string $src, string $prop ): string {
+		$pattern = '/static\s*\.\s*' . preg_quote( $prop, '/' ) . '\s*=\s*/';
+		if ( !preg_match( $pattern, $src, $m, PREG_OFFSET_CAPTURE ) ) {
+			return '';
+		}
+		$start = $m[ 0 ][ 1 ] + strlen( $m[ 0 ][ 0 ] );
+		$end = strpos( $src, ';', $start );
+		if ( $end === false ) {
+			return trim( substr( $src, $start ) );
+		}
+		return trim( substr( $src, $start, $end - $start ) );
 	}
 
 	/**
@@ -473,6 +488,15 @@ class SpecialEditChecks extends SpecialPage {
 		$src = preg_replace( '/\bundefined\b/', 'null', $src );
 		// Quote unquoted keys: { key: ... } or , key: ...
 		$src = preg_replace( '/([\{,]\s*)([A-Za-z_$][A-Za-z0-9_$]*)\s*:/', '$1"$2":', $src );
+		// Message expressions, e.g. ve.msg('...'), OO.ui.deferMsg('...'), mw.msg('...')
+		$messageExprPattern = $this->getMessageExpressionPattern( false );
+		$src = preg_replace_callback(
+			$messageExprPattern,
+			function ( $mm ) {
+				return json_encode( (string)$this->parseMessage( $mm[0] ) );
+			},
+			$src
+		);
 
 		$src = $this->convertSingleQuotedToDoubleQuoted( $src );
 

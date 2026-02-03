@@ -22,6 +22,26 @@ mw.editcheck.ToneCheck.static.footer = ve.deferJQueryMsg( 'editcheck-tone-footer
 
 mw.editcheck.ToneCheck.static.success = OO.ui.deferMsg( 'editcheck-tone-thank' );
 
+mw.editcheck.ToneCheck.static.choices = [
+	{
+		action: 'edit',
+		label: ve.msg( 'editcheck-dialog-action-revise' ),
+		modes: [ '' ]
+	},
+	{
+		action: 'recheck',
+		label: ve.msg( 'editcheck-dialog-action-recheck' ),
+		flags: [ 'primary', 'progressive' ],
+		icon: 'check',
+		modes: [ 'revising' ]
+	},
+	{
+		action: 'dismiss',
+		label: ve.msg( 'editcheck-dialog-action-decline' ),
+		modes: [ '', 'revising' ]
+	}
+];
+
 mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	predictionThreshold: 0.8
 } );
@@ -125,26 +145,7 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 	// TODO: variant message/labels when in back-from-presave state
 	const action = new mw.editcheck.EditCheckAction( {
 		fragments: [ fragment ],
-		check: this,
-		choices: [
-			{
-				action: 'edit',
-				label: ve.msg( 'editcheck-dialog-action-revise' ),
-				modes: [ '' ]
-			},
-			{
-				action: 'recheck',
-				label: ve.msg( 'editcheck-dialog-action-recheck' ),
-				flags: [ 'primary', 'progressive' ],
-				icon: 'check',
-				modes: [ 'revising' ]
-			},
-			{
-				action: 'dismiss',
-				label: ve.msg( 'editcheck-dialog-action-decline' ),
-				modes: [ '', 'revising' ]
-			}
-		]
+		check: this
 	} );
 
 	action.on( 'stale', ( stale ) => {
