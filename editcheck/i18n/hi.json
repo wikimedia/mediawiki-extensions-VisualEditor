@@ -1,7 +1,27 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abijeet Patro"
+			"Abijeet Patro",
+			"Saurmandal"
 		]
-	}
+	},
+	"editcheck-dialog-action-no": "नहीं",
+	"editcheck-dialog-action-yes": "हाँ",
+	"editcheck-dialog-addref-description": "एक उद्धरण जोड़कर पाठकों की यह समझने में मदद करें कि जानकारी कहाँ से आई है।",
+	"editcheck-dialog-addref-reject-question": "आप एक उद्धरण क्यों नहीं जोड़ रहे हैं?",
+	"editcheck-dialog-addref-reject-irrelevant": "मुझे नहीं लगता कि उद्धरण मेरे द्वारा किए जा रहे बदलाव के लिए प्रासंगिक हैं",
+	"editcheck-dialog-addref-reject-common-knowledge": "मैं जो जानकारी जोड़ रहा/रही हूँ वह सामान्य ज्ञान है",
+	"editcheck-dialog-addref-reject-uncertain": "मुझे नहीं पता कौन-सा उद्धरण जोड़ना है",
+	"editcheck-dialog-addref-reject-other": "अन्य",
+	"editcheck-dialog-addref-success-notify": "उद्धरण जोड़ने के लिए धन्यवाद!",
+	"editcheck-dialog-addref-title": "उद्धरण जोड़ें",
+	"editcheck-dialog-title": "प्रकाशन से पहले",
+	"tag-editcheck-reference-decline-common-knowledge": "सम्पादन जाँच (संदर्भ) अस्वीकृत (सामान्य ज्ञान)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "सम्पादन जाँच संदर्भ को सामान्य ज्ञान होने के नाते अस्वीकार किया गया था",
+	"tag-editcheck-reference-decline-irrelevant": "सम्पादन जाँच (संदर्भ) अस्वीकृत (अप्रासंगिक)",
+	"tag-editcheck-reference-decline-irrelevant-description": "सम्पादन जाँच संदर्भ को अप्रासंगिक होने के नाते अस्वीकार किया गया था",
+	"tag-editcheck-reference-decline-other": "सम्पादन जाँच (संदर्भ) अस्वीकृत (अन्य)",
+	"tag-editcheck-reference-decline-other-description": "सम्पादन जाँच संदर्भ को किसी अन्य कारण से अस्वीकार किया गया था",
+	"tag-editcheck-reference-decline-uncertain": "सम्पादन जाँच (संदर्भ) अस्वीकृत (अनिश्चित)",
+	"tag-editcheck-reference-decline-uncertain-description": "सम्पादन जाँच संदर्भ को अनिश्चित होने के कारण अस्वीकार किया गया था"
 }

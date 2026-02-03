@@ -11,7 +11,7 @@
 	"apihelp-visualeditor-param-etag": "ETag на адсыланьне.",
 	"apihelp-visualeditor-param-html": "HTML дзеля адпраўкі ў Parsoid і канвэртаваньня ў вікітэкст.",
 	"apihelp-visualeditor-param-oldid": "Нумар вэрсіі для ўжытку (перадвызначана — апошняя вэрсія).",
-	"apihelp-visualeditor-param-paction": "Дзеяньне, якое неабходна выканаць.",
+	"apihelp-visualeditor-param-paction": "Дзея на выкананьне.",
 	"apihelp-visualeditor-param-page": "Старонка для выкананьня дзеяньня.",
 	"apihelp-visualeditor-param-pst": "Папярэдне захавайце ператварэньне вікітэксту перад адпраўкай яго ў Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-starttimestamp": "Пры захаваньні, выстаўце час, калі старонка была загружаная. Выкарыстоўваецца для вызначэньня канфліктаў рэдагаваньня.",
