@@ -12,6 +12,7 @@
 	"editcheck-dialog-action-recheck": "Erneut überprüfen",
 	"editcheck-dialog-action-back": "Zurück",
 	"editcheck-dialog-action-submit": "Speichern",
+	"editcheck-dialog-toggle": "Sichtbarkeit umschalten",
 	"editcheck-dialog-addref-description": "Hilf den Lesern zu verstehen, woher diese Informationen stammen, indem du einen Beleg hinzufügst.",
 	"editcheck-dialog-addref-reject-question": "Warum fügst du keinen Beleg hinzu?",
 	"editcheck-dialog-addref-reject-description": "Andere Benutzer würden es begrüßen, mehr über deine Entscheidung, keinen Beleg einzutragen, zu erfahren.",

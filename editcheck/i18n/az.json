@@ -13,6 +13,7 @@
 	"editcheck-dialog-action-recheck": "Yenidən yoxla",
 	"editcheck-dialog-action-back": "Geriyə",
 	"editcheck-dialog-action-submit": "Təsdiq et",
+	"editcheck-dialog-toggle": "Görünməni dəyişdir",
 	"editcheck-dialog-addref-description": "İstinad əlavə etməklə oxuculara bu məlumatın haradan gəldiyini anlamağa kömək edin.",
 	"editcheck-dialog-addref-reject-question": "Niyə mənbə əlavə etmirsiniz?",
 	"editcheck-dialog-addref-reject-description": "Digər redaktorlar sitat əlavə etməmək qərarınız haqqında daha ətraflı məlumat öyrənmək istəyəcəklər",

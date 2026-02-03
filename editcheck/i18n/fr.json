@@ -53,6 +53,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Fonctionnalités bêta",
 	"editcheck-specialeditchecks-col-title": "Titre",
 	"editcheck-specialeditchecks-col-name": "Nom",
+	"editcheck-specialeditchecks-col-appearance": "Apparence",
 	"editcheck-specialeditchecks-config-summary": "Configuration",
 	"editcheck-specialeditchecks-config-default": "Configuration par défaut",
 	"tag-editcheck-reference-decline-common-knowledge": "Vérification de modification (références) refusée (savoir commun)",
