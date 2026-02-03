@@ -259,11 +259,24 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps 
 	return this.fragments.every( ( fragment ) => {
 		const selection = fragment.getSelection();
 		return other.fragments.some( ( otherFragment ) => {
-			if ( allowOverlaps ) {
-				return otherFragment.getSelection().getCoveringRange().overlapsRange( selection.getCoveringRange() );
-			} else {
-				return otherFragment.getSelection().equals( selection );
+			if ( otherFragment.getSelection().equals( selection ) ) {
+				// A perfect match always counts, and also covers the case of
+				// zero-width ranges on the same point which don't "overlap"
+				return true;
 			}
+			if ( allowOverlaps ) {
+				// This case is meant to catch suggestions which were generated on
+				// the same content but which don't perfectly match up because the
+				// modified range is different.
+				const range = selection.getCoveringRange(),
+					otherRange = otherFragment.getSelection().getCoveringRange();
+				// If one is collapsed we accept them touching, otherwise we
+				// only allow overlaps.
+				return ( range.isCollapsed() || otherRange.isCollapsed() ) ?
+					otherRange.touchesRange( range ) :
+					otherRange.overlapsRange( range );
+			}
+			return false;
 		} );
 	} );
 };
