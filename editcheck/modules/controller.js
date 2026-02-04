@@ -144,6 +144,10 @@ Controller.prototype.setup = function () {
 			this.taggedIds = {};
 
 			mw.editcheck.checksShown = {};
+			// Track checks that are not just triggered (shown) but expanded (seen),
+			// based on the definitions decided on in T412334
+			mw.editcheck.checksSeen = {};
+			mw.editcheck.suggestionsSeen = {};
 
 			$( document.documentElement ).removeClass( 've-editcheck-available' );
 			window.dispatchEvent( new Event( 'resize' ) );
@@ -316,6 +320,10 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 
 			let newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
+
+			newActions.forEach( ( action ) => {
+				action.once( 'seen', this.onActionSeen.bind( this, action ) );
+			} );
 
 			// If the actions list changed, update
 			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
@@ -918,6 +926,22 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 		return true;
 	}
 	return false;
+};
+
+/**
+ * Handle instrumentation and tracking when an action is marked as seen
+ *
+ * @param {mw.editcheck.EditCheckAction} action that was seen
+ */
+Controller.prototype.onActionSeen = function ( action ) {
+	const moment = this.inBeforeSave ? 'presave' : 'midedit';
+	if ( action.isSuggestion() ) {
+		mw.editcheck.suggestionsSeen[ action.getName() ] = true;
+		ve.track( 'activity.editCheck-' + action.getName(), { action: 'suggestion-seen-' + moment } );
+	} else {
+		mw.editcheck.checksSeen[ action.getName() ] = true;
+		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-seen-' + moment } );
+	}
 };
 
 /**

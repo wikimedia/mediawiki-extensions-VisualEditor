@@ -199,6 +199,11 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
  */
 mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collapsed ) {
 	const previousState = this.collapsed;
+	// Assume that the widget being expanded means the suggestion/check is seen.
+	// (For instrumentation and tagging purposes per T412334)
+	if ( !collapsed && previousState ) {
+		this.emit( 'actionSeen' );
+	}
 	this.collapsed = collapsed !== undefined ? collapsed : !this.collapsed;
 	this.$element.toggleClass( 've-ui-editCheckActionWidget-collapsed', this.collapsed );
 
