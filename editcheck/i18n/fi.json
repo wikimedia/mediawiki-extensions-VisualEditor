@@ -14,6 +14,7 @@
 	"editcheck-dialog-action-recheck": "Tarkista uudelleen",
 	"editcheck-dialog-action-back": "Takaisin",
 	"editcheck-dialog-action-submit": "Lähetä",
+	"editcheck-dialog-toggle": "Vaihda näkyvyyttä",
 	"editcheck-dialog-addref-description": "Auta lukijoita ymmärtämään, mistä tämä tieto on peräisin lisäämällä lähdeviite.",
 	"editcheck-dialog-addref-reject-question": "Mikset lisää lähdeviitettä?",
 	"editcheck-dialog-addref-reject-description": "Muut muokkaajat arvostaisivat kuulla, mistä syystä päätit olla lisäämättä lähdeviitettä.",

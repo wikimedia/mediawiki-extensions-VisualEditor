@@ -15,6 +15,7 @@
 	"editcheck-dialog-action-recheck": "إعادة فحص",
 	"editcheck-dialog-action-back": "رجوع",
 	"editcheck-dialog-action-submit": "إرسال",
+	"editcheck-dialog-toggle": "إظهار/إخفاء",
 	"editcheck-dialog-addref-description": "ساعدوا القراء على فهم مصدر هذه المعلومات عن طريق إضافة استشهاد.",
 	"editcheck-dialog-addref-reject-question": "لماذا لا تُضيف استشهادًا؟",
 	"editcheck-dialog-addref-reject-description": "سيقدر المحررون الآخرون معرفة المزيد عن قرارك بعدم إضافة اقتباس.",
