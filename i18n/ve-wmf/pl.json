@@ -26,6 +26,8 @@
 	"tag-editcheck-references-description": "Automatyczny pomocnik stwierdził, że przydałby się przypis",
 	"tag-editcheck-references-activated": "Aktywowano automatycznego pomocnika (przypisy)",
 	"tag-editcheck-references-activated-description": "Automatyczny pomocnik stwierdził, że przypis może być potrzebny i odpowiedni komunikat został wyświetlony",
+	"tag-editcheck-references-shown": "Kontrola edycji (przypisy) – wyświetlono",
+	"tag-editcheck-references-shown-description": "Automatyczny pomocnik stwierdził, że może być potrzebny przypis i odpowiedni komunikat został wyświetlony",
 	"tag-visualeditor": "VisualEditor",
 	"tag-visualeditor-description": "Edycja z wykorzystaniem [[{{MediaWiki:visualeditor-descriptionpagelink}}|edytora wizualnego]]",
 	"tag-visualeditor-needcheck": "VisualEditor: do sprawdzenia",
