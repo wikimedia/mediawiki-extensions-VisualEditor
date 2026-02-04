@@ -40,14 +40,12 @@ mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( sur
 };
 
 mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, surface ) {
-	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-		case 'edit':
-			this.selectAnnotation( action.fragments[ 0 ], surface );
-			break;
+	if ( choice === 'edit' ) {
+		this.selectAnnotation( action.fragments[ 0 ], surface );
+		return;
 	}
+	// Parent method
+	return mw.editcheck.DisambiguationEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.DisambiguationEditCheck );

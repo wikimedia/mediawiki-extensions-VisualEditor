@@ -39,15 +39,13 @@ mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceMo
 mw.editcheck.ImageCaptionEditCheck.prototype.onBranchNodeChange = mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave;
 
 mw.editcheck.ImageCaptionEditCheck.prototype.act = function ( choice, action, surface ) {
-	const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-	switch ( choice ) {
-		case 'edit':
-			action.fragments[ 0 ].select();
-			return windowAction.open( 'media' ).then( ( instance ) => instance.closing );
-		case 'dismiss':
-			this.dismiss( action );
-			return ve.createDeferred().resolve( true ).promise();
+	if ( choice === 'edit' ) {
+		const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
+		action.fragments[ 0 ].select();
+		return windowAction.open( 'media' ).then( ( instance ) => instance.closing );
 	}
+	// Parent method
+	return mw.editcheck.ImageCaptionEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ImageCaptionEditCheck );

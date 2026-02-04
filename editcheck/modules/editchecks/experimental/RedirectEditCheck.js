@@ -46,37 +46,34 @@ mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceMo
 };
 
 mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surface ) {
-	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-		case 'fix': {
-			const fragment = action.fragments[ 0 ];
-			const linkAnnotation = this.getLinkFromFragment( fragment );
+	if ( choice === 'fix' ) {
+		const fragment = action.fragments[ 0 ];
+		const linkAnnotation = this.getLinkFromFragment( fragment );
 
-			if ( !linkAnnotation ) {
-				return;
-			}
-
-			return surface.getTarget().getContentApi().get( {
-				action: 'query',
-				titles: linkAnnotation.getAttribute( 'lookupTitle' ),
-				redirects: true
-			} ).then( ( data ) => {
-				const targetTitle = ve.getProp( data, 'query', 'redirects', 0, 'to' );
-				if ( targetTitle ) {
-					const newLinkAnnotation = ve.dm.MWInternalLinkAnnotation.static.newFromTitle(
-						new mw.Title( targetTitle )
-					);
-					fragment
-						.annotateContent( 'clear', linkAnnotation )
-						.annotateContent( 'add', newLinkAnnotation );
-
-					this.selectAnnotation( fragment, surface );
-				}
-			} );
+		if ( !linkAnnotation ) {
+			return;
 		}
+
+		return surface.getTarget().getContentApi().get( {
+			action: 'query',
+			titles: linkAnnotation.getAttribute( 'lookupTitle' ),
+			redirects: true
+		} ).then( ( data ) => {
+			const targetTitle = ve.getProp( data, 'query', 'redirects', 0, 'to' );
+			if ( targetTitle ) {
+				const newLinkAnnotation = ve.dm.MWInternalLinkAnnotation.static.newFromTitle(
+					new mw.Title( targetTitle )
+				);
+				fragment
+					.annotateContent( 'clear', linkAnnotation )
+					.annotateContent( 'add', newLinkAnnotation );
+
+				this.selectAnnotation( fragment, surface );
+			}
+		} );
 	}
+	// Parent method
+	return mw.editcheck.RedirectEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.RedirectEditCheck );

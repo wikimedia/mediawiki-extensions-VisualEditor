@@ -134,14 +134,12 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 };
 
 mw.editcheck.DuplicateLinksEditCheck.prototype.act = function ( choice, action ) {
-	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-		case 'remove':
-			action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
-			break;
+	if ( choice === 'remove' ) {
+		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
+		return;
 	}
+	// Parent method
+	return mw.editcheck.DuplicateLinksEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.DuplicateLinksEditCheck );

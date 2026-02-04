@@ -390,12 +390,9 @@ mw.editcheck.TextMatchEditCheck.prototype.onBeforeSave = null;
 
 mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , surface */ ) {
 	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
 		case 'delete':
 			action.fragments[ 0 ].removeContent();
-			break;
+			return;
 		case 'accept': {
 			const fragment = action.fragments[ 0 ];
 			const oldWord = fragment.getText();
@@ -411,10 +408,11 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , s
 				return;
 			}
 			fragment.removeContent().insertContent( newWord );
+			return;
 		}
-
 	}
-	return ve.createDeferred().resolve( {} );
+	// Parent method
+	return mw.editcheck.TextMatchEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.TextMatchEditCheck );

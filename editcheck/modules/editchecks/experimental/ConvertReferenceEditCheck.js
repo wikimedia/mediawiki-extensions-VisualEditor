@@ -90,19 +90,17 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 };
 
 mw.editcheck.ConvertReferenceEditCheck.prototype.act = function ( choice, action, surface ) {
-	switch ( choice ) {
-		case 'convert': {
-			action.fragments[ 0 ].select();
-			const node = action.fragments[ 0 ].getSelectedNode();
-			const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( node.getInternalItem() );
-			const citoidAction = ve.ui.actionFactory.create( 'citoid', surface );
-			citoidAction.open( { replace: true, lookup: href } );
-			break;
-		}
-		case 'dismiss':
-			this.dismiss( action );
-			break;
+	if ( choice === 'convert' ) {
+		action.fragments[ 0 ].select();
+		const node = action.fragments[ 0 ].getSelectedNode();
+		const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( node.getInternalItem() );
+		const citoidAction = ve.ui.actionFactory.create( 'citoid', surface );
+		citoidAction.open( { replace: true, lookup: href } );
+		return;
 	}
+
+	// Parent method
+	return mw.editcheck.ConvertReferenceEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ConvertReferenceEditCheck );

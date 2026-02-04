@@ -248,7 +248,11 @@ mw.editcheck.BaseEditCheck.prototype.onBranchNodeChange = null;
  * @param {ve.ui.Surface} surface
  * @return {jQuery.Promise|undefined} Promise which resolves when action is complete, or undefined if there's nothing to wait on
  */
-mw.editcheck.BaseEditCheck.prototype.act = null;
+mw.editcheck.BaseEditCheck.prototype.act = function ( choice, action ) {
+	if ( choice === 'dismiss' ) {
+		this.dismiss( action );
+	}
+};
 
 /**
  * Get the title of the check

@@ -90,10 +90,6 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 	const text = fragment.getText();
 
 	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-
 		case 'useTarget': {
 			// Replace the year in the link label with the year from the target page,
 			// e.g. [[1999|2003]] becomes [[1999]]
@@ -103,7 +99,8 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 				text.replace( /\b\d{3,4}\b/, targetYear ),
 				true
 			);
-			break;
+			this.selectAnnotation( fragment, surface );
+			return;
 		}
 
 		case 'useLabel': {
@@ -121,11 +118,12 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 				fragment.annotateContent( 'clear', linkClass.static.name );
 			}
 			fragment.annotateContent( 'set', link );
-			break;
+			this.selectAnnotation( fragment, surface );
+			return;
 		}
 	}
-
-	this.selectAnnotation( fragment, surface );
+	// Parent method
+	return mw.editcheck.YearLinkEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.YearLinkEditCheck );

@@ -84,14 +84,12 @@ mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surf
 };
 
 mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action ) {
-	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-		case 'remove':
-			action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
-			break;
+	if ( choice === 'remove' ) {
+		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
+		return;
 	}
+	// Parent method
+	return mw.editcheck.ExternalLinksEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ExternalLinksEditCheck );
