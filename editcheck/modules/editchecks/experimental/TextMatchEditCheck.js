@@ -435,6 +435,9 @@ mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( con
 	mw.editcheck.TextMatchEditCheckAction.super.call( this, config );
 	this.matchItem = config.matchItem;
 	this.term = config.term;
+	const msgkey = `editcheck-textmatch-${ config.matchItem.id }-description`;
+	ve.init.platform.addMessages( { [ msgkey ]: config.message } );
+	this.message = ve.deferJQueryMsg( msgkey );
 };
 
 /* Inheritance */
