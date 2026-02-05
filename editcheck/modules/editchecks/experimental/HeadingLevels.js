@@ -74,9 +74,6 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, s
 				);
 				surface.getView().activate();
 				action.fragments[ 0 ].collapseToEnd().select();
-			} else {
-				// This shouldn't happen, but if it ever does...
-				this.dismiss( action );
 			}
 			break;
 		}
