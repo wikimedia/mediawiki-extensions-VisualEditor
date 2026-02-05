@@ -16,7 +16,7 @@ mw.editcheck.YearLinkEditCheck.static.title = 'Fix year link';
 
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
 
-mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a different year than the one shown in the text. Help readers avoid confusion by updating the link to match the displayed year.';
+mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a different year than the one shown in the text. Help make the article more accurate by updating the displayed year and linked year to match.';
 
 mw.editcheck.YearLinkEditCheck.static.choices = [
 	{
