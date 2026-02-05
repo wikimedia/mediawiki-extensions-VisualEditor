@@ -58,19 +58,20 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.onDocumentChange = function ( surf
 
 mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'fix' ) {
-		const heading = surface.getModel().documentModel.getNearestNodeMatching(
-			( nodeType ) => nodeType === 'mwHeading',
-			// Note: we set a limit of 1 here because otherwise this will turn around
-			// to keep looking when it hits the document boundary:
-			action.fragments[ 0 ].getSelection().getCoveringRange().start - 1, -1, 1
-		);
-		if ( heading ) {
-			action.fragments[ 0 ].convertNodes( 'mwHeading',
-				{ level: heading.getAttribute( 'level' ) + 1 }
+		action.fragments.forEach( ( fragment ) => {
+			const heading = surface.getModel().documentModel.getNearestNodeMatching(
+				( nodeType ) => nodeType === 'mwHeading',
+				// Note: we set a limit of 1 here because otherwise this will turn around
+				// to keep looking when it hits the document boundary:
+				fragment.getSelection().getCoveringRange().start - 1, -1, 1
 			);
-			surface.getView().activate();
-			action.fragments[ 0 ].collapseToEnd().select();
-		}
+			if ( heading ) {
+				fragment.convertNodes( 'mwHeading',
+					{ level: heading.getAttribute( 'level' ) + 1 }
+				);
+			}
+		} );
+		action.select( surface, true );
 		return;
 	}
 	// Parent method

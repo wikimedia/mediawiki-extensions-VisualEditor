@@ -365,24 +365,30 @@ mw.editcheck.EditCheckAction.prototype.getTagName = function () {
  * Select the action in the surface
  *
  * @param {ve.ui.Surface} surface
+ * @param {boolean} selectFocusRange Whether to select the focus range of the check,
+ *  or just move the cursor to the nearest point in the selection if outside the check range
  */
-mw.editcheck.EditCheckAction.prototype.select = function ( surface ) {
+mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusRange ) {
 	const surfaceModel = surface.getModel();
 	const surfaceView = surface.getView();
+	surfaceView.activate();
 	if ( this.focusAnnotation ) {
 		surfaceModel.setSelection( this.getFocusSelection() );
 		surfaceView.selectAnnotation( this.focusAnnotation );
 	} else {
 		const checkRange = this.getFocusSelection().getCoveringRange();
-		const surfaceRange = surfaceModel.getSelection().getCoveringRange();
-		// Collapse and move the selection to the nearest part of the check range
-		// Don't alter it if it touches the check range
-		if ( surfaceRange === null || surfaceRange.end < checkRange.start ) {
-			surfaceModel.setLinearSelection( new ve.Range( checkRange.start ) );
-		} else if ( surfaceRange.start > checkRange.end ) {
-			surfaceModel.setLinearSelection( new ve.Range( checkRange.end ) );
+		if ( selectFocusRange ) {
+			surfaceModel.setLinearSelection( checkRange );
+		} else {
+			const surfaceRange = surfaceModel.getSelection().getCoveringRange();
+			// Collapse and move the selection to the nearest part of the check range
+			// Don't alter it if it touches the check range
+			if ( surfaceRange === null || surfaceRange.end < checkRange.start ) {
+				surfaceModel.setLinearSelection( new ve.Range( checkRange.start ) );
+			} else if ( surfaceRange.start > checkRange.end ) {
+				surfaceModel.setLinearSelection( new ve.Range( checkRange.end ) );
+			}
 		}
-		surfaceView.activate();
 		surfaceView.focus();
 	}
 };

@@ -41,7 +41,8 @@ mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( sur
 
 mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'edit' ) {
-		this.selectAnnotation( action.fragments[ 0 ], surface );
+		action.select( surface );
+		surface.executeCommand( 'link' );
 		return;
 	}
 	// Parent method

@@ -83,9 +83,12 @@ mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surf
 	);
 };
 
-mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action ) {
+mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'remove' ) {
-		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
+		action.fragments.forEach( ( fragment ) => {
+			fragment.annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
+		} );
+		action.select( surface, true );
 		return;
 	}
 	// Parent method

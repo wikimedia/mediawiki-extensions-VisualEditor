@@ -133,9 +133,10 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 	return actions;
 };
 
-mw.editcheck.DuplicateLinksEditCheck.prototype.act = function ( choice, action ) {
+mw.editcheck.DuplicateLinksEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
+		action.select( surface, true );
 		return;
 	}
 	// Parent method

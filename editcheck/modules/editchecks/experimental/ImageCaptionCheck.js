@@ -32,7 +32,7 @@ mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceMo
 		.filter( ( image ) => image.children[ 0 ] && image.children[ 0 ].getType() === 'mwImageCaption' && image.children[ 0 ].length === 2 )
 		.map( ( image ) => new mw.editcheck.EditCheckAction( {
 			check: this,
-			fragments: [ surfaceModel.getFragment( new ve.dm.LinearSelection( image.getOuterRange() ) ) ]
+			fragments: [ surfaceModel.getLinearFragment( image.getOuterRange() ) ]
 		} ) );
 };
 
@@ -40,9 +40,8 @@ mw.editcheck.ImageCaptionEditCheck.prototype.onBranchNodeChange = mw.editcheck.I
 
 mw.editcheck.ImageCaptionEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'edit' ) {
-		const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
 		action.fragments[ 0 ].select();
-		return windowAction.open( 'media' ).then( ( instance ) => instance.closing );
+		surface.executeCommand( 'media' );
 	}
 	// Parent method
 	return mw.editcheck.ImageCaptionEditCheck.super.prototype.act.apply( this, arguments );

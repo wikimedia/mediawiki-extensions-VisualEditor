@@ -68,7 +68,7 @@ mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surfac
 					.annotateContent( 'clear', linkAnnotation )
 					.annotateContent( 'add', newLinkAnnotation );
 
-				this.selectAnnotation( fragment, surface );
+				action.select( surface, true );
 			}
 		} );
 	}

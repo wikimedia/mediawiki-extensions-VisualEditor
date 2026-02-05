@@ -388,10 +388,11 @@ mw.editcheck.TextMatchEditCheck.prototype.getTagNameByMatchItem = function ( mat
 // as there isn't a way to edit the text.
 mw.editcheck.TextMatchEditCheck.prototype.onBeforeSave = null;
 
-mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , surface */ ) {
+mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action, surface ) {
 	switch ( choice ) {
 		case 'delete':
 			action.fragments[ 0 ].removeContent();
+			action.select( surface, true );
 			return;
 		case 'accept': {
 			const fragment = action.fragments[ 0 ];
@@ -408,6 +409,7 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action /* , s
 				return;
 			}
 			fragment.removeContent().insertContent( newWord );
+			action.select( surface, true );
 			return;
 		}
 	}
