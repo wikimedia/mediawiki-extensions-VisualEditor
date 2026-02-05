@@ -62,7 +62,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
 
-		this.renderActions( data.actions || this.controller.getActions() );
+		this.renderActions( data.actions || this.controller.getActions(), data.newActions || [] );
 	}, this );
 };
 
@@ -84,28 +84,35 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 };
 
 /**
- * @inheritdoc
+ * Handle updates to the list of edit check actions.
+ *
+ * @param {string} listener Check listener
+ * @param {mw.editcheck.EditCheckAction[]} actions All current actions
+ * @param {mw.editcheck.EditCheckAction[]} newActions Newly added actions
+ * @param {mw.editcheck.EditCheckAction[]} discardedActions Newly removed actions
+ * @param {boolean} rejected The last action was rejected/dismissed
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( listener, actions ) {
+ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions ) {
 	if ( ( this.inBeforeSave && listener !== 'onBeforeSave' ) || ( !this.inBeforeSave && listener === 'onBeforeSave' ) ) {
 		return;
 	}
-	this.renderActions( actions );
+	this.renderActions( actions, newActions );
 };
 
 /**
- * @inheritdoc
+ * Handle position events from the controller
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
-	this.renderActions( this.controller.getActions() );
+	this.renderActions( this.controller.getActions(), [] );
 };
 
 /**
  * Render the edit check actions as gutter icons, grouping overlapping actions.
  *
  * @param {mw.editcheck.EditCheckAction[]} actions List of actions to render
+ * @param {mw.editcheck.EditCheckAction[]} newActions Newly found actions, which could takeFocus
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions ) {
+ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions, newActions = [] ) {
 	if ( actions.length === 0 ) {
 		this.close( 'complete' );
 		return;
@@ -142,7 +149,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 
 	// Now try to reuse old widgets if possible, to avoid icons flickering
 	const oldWidgets = this.widgets || [];
-	let shown = false;
+	let shown = newActions.length === 0; // Skip this entirely if there are no new actions
 	this.widgets = [];
 	sections.forEach( ( section ) => {
 		let widget;
@@ -150,7 +157,6 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 			( owidget ) => owidget.actions.length === section.actions.length &&
 				owidget.actions.every( ( oact ) => section.actions.includes( oact ) )
 		);
-		let actionToShow;
 		if ( index !== -1 ) {
 			widget = oldWidgets.splice( index, 1 )[ 0 ];
 		} else {
@@ -158,13 +164,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 				actions: section.actions,
 				controller: this.controller
 			} );
-			if ( !shown ) {
-				actionToShow = section.actions.find( ( action ) => action.check.takesFocus() );
-			}
 			this.$body.append( widget.$element );
 		}
 		widget.setPosition( section.rect );
 		this.widgets.push( widget );
+
+		// See if one of these should be autofocused; it's simplest to check
+		// here rather than doing a separate loop because we need to call this
+		// on the section widget.
+		const actionToShow = !shown && section.actions.find( ( action ) => (
+			action.check.takesFocus() && newActions.includes( action )
+		) );
 		if ( actionToShow ) {
 			widget.showDialogWithAction( actionToShow );
 			shown = true;
