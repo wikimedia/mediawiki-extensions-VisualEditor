@@ -72,6 +72,8 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, s
 				action.fragments[ 0 ].convertNodes( 'mwHeading',
 					{ level: heading.getAttribute( 'level' ) + 1 }
 				);
+				surface.getView().activate();
+				action.fragments[ 0 ].collapseToEnd().select();
 			} else {
 				// This shouldn't happen, but if it ever does...
 				this.dismiss( action );
