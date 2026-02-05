@@ -37,6 +37,17 @@ mw.editcheck.YearLinkEditCheck.static.choices = [
 
 mw.editcheck.YearLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
 
+/**
+ * Extract a single year from the given text.
+ *
+ * @param {string} text
+ * @return {string|null} The year found, or null if there isn't exactly one valid year
+ */
+mw.editcheck.YearLinkEditCheck.prototype.matchSingleYear = function ( text ) {
+	const matches = text.match( /\b\d{3,4}\b/ );
+	return matches && matches.length === 1 ? matches[ 0 ] : null;
+};
+
 mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
 		const title = mw.Title.newFromText( annRange.annotation.getDisplayTitle() );
@@ -45,26 +56,27 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 		}
 
 		const target = title.getMainText();
-		// Check target is a 3 or 4-digit number (a year)
-		if ( !target.match( /^\d{3,4}$/ ) ) {
+		// Check target contains one 3 or 4-digit number (a year),
+		// e.g. "1999" or "2003 in film", but not "1999-2003"
+		const targetYear = this.matchSingleYear( target );
+		if ( !targetYear ) {
 			return null;
 		}
 
 		const fragment = surfaceModel.getLinearFragment( annRange.range );
-		const label = fragment.getText();
-		// If label and target are the same, there's no issue
-		if ( label === target ) {
+		const labelYear = this.matchSingleYear( fragment.getText() );
+		if ( !labelYear ) {
 			return null;
 		}
 
-		// Check label is a 3 or 4-digit number (a year)
-		if ( !label.match( /^\d{3,4}$/ ) ) {
+		// If label and target years are the same, there's no issue
+		if ( labelYear === targetYear ) {
 			return null;
 		}
 
 		const choices = ve.copy( mw.editcheck.YearLinkEditCheck.static.choices );
-		choices[ 0 ].label = 'Use ' + target;
-		choices[ 1 ].label = 'Use ' + label;
+		choices[ 0 ].label = 'Use ' + targetYear;
+		choices[ 1 ].label = 'Use ' + labelYear;
 
 		return this.buildActionFromLinkRange( annRange.range, surfaceModel, { choices } );
 	} );
@@ -74,6 +86,8 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 	const fragment = action.fragments[ 0 ];
 	const linkAnnotation = this.getLinkFromFragment( fragment );
 	const title = mw.Title.newFromText( linkAnnotation.getDisplayTitle() );
+	const target = title.getMainText();
+	const text = fragment.getText();
 
 	switch ( choice ) {
 		case 'dismiss':
@@ -81,13 +95,27 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 			break;
 
 		case 'useTarget': {
-			fragment.insertContent( title.getMainText(), true );
+			// Replace the year in the link label with the year from the target page,
+			// e.g. [[1999|2003]] becomes [[1999]]
+			// or [[1999 in film|films of 2003]] becomes [[1999 in film|films of 1999]]
+			const targetYear = this.matchSingleYear( target );
+			fragment.insertContent(
+				text.replace( /\b\d{3,4}\b/, targetYear ),
+				true
+			);
 			break;
 		}
 
 		case 'useLabel': {
+			// Replace the year in the link target with the year from the label,
+			// e.g. [[1999|2003]] becomes [[2003]]
+			// or [[1999 in film|films of 2003]] becomes [[2003 in film|films of 2003]]
+			const labelYear = this.matchSingleYear( text );
 			const link = ve.dm.MWInternalLinkAnnotation.static.newFromTitle(
-				mw.Title.newFromText( fragment.getText(), title.getNamespaceId() )
+				mw.Title.newFromText(
+					target.replace( /\b\d{3,4}\b/, labelYear ),
+					title.getNamespaceId()
+				)
 			);
 			for ( const linkClass of this.constructor.static.linkClasses ) {
 				fragment.annotateContent( 'clear', linkClass.static.name );
