@@ -148,15 +148,15 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		return;
 	}
 	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
-	if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
-		this.showDialogWithAction( action );
-	} else if ( this.actions.every( ( sact ) => currentWindow.hasAction( sact ) ) ) {
+	if (
+		currentWindow && currentWindow.constructor.static.name === 'fixedEditCheckDialog' &&
+		this.actions.every( ( sact ) => currentWindow.hasAction( sact ) )
+	) {
 		// Second click: defocus and close
-		this.controller.closeDialog();
+		this.controller.closeDialog( 'gutter-toggle' );
 		return;
 	} else {
-		currentWindow.showActions( this.actions, [ action ] );
-		currentWindow.footer.toggle( this.actions.length !== 1 );
+		this.showDialogWithAction( action );
 	}
 };
 
@@ -166,20 +166,28 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
  * @param {mw.editcheck.EditCheckAction} action Action to focus
  */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action ) {
-	const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
-	windowAction.open(
-		'fixedEditCheckDialog',
-		{
-			controller: this.controller,
-			inBeforeSave: false,
-			actions: this.actions,
-			newActions: [ action ],
-			footer: this.actions.length !== 1,
-			// just filter out any discarded actions from the allowed set
-			updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
-		}
-	);
-	this.controller.focusAction( action, true );
+	const controller = this.controller;
+	const surface = controller.surface;
+	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
+	if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
+		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
+		windowAction.open(
+			'fixedEditCheckDialog',
+			{
+				controller: this.controller,
+				inBeforeSave: false,
+				actions: this.actions,
+				newActions: [ action ],
+				footer: this.actions.length !== 1,
+				// just filter out any discarded actions from the allowed set
+				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
+			}
+		);
+		this.controller.focusAction( action, true );
+	} else {
+		currentWindow.showActions( this.actions, [ action ] );
+		currentWindow.footer.toggle( this.actions.length !== 1 );
+	}
 };
 
 /**

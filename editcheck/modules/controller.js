@@ -389,6 +389,19 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 	this.updatePositionsDebounced();
 };
 
+Controller.prototype.ensureActionIsShown = function ( action ) {
+	if ( OO.ui.isMobile() ) {
+		const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
+		if ( !currentWindow || currentWindow.constructor.static.name !== 'gutterSidebarEditCheckDialog' ) {
+			return;
+		}
+		// This will ultimately focus the action and scroll it into view as well:
+		currentWindow.showDialogWithAction( action );
+	} else {
+		this.focusAction( action, true );
+	}
+};
+
 /**
  * Get actions by listener
  *

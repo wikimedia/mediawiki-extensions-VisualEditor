@@ -174,6 +174,22 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions 
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
 };
 
+ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( action ) {
+	// The focus changing will also trigger onPosition after this, so we don't
+	// need to update the state of anything. We do need to trigger the drawer
+	// showing if this is an action that takesFocus, however. We can assume
+	// that the widgets will have been redrawn already by an earlier
+	// actionsUpdated when the actions were actually discovered.
+	if ( action ) {
+		for ( const widget of this.widgets ) {
+			if ( widget.actions.includes( action ) ) {
+				widget.showDialogWithAction( action, false );
+				return;
+			}
+		}
+	}
+};
+
 /* Registration */
 
 ve.ui.windowFactory.register( ve.ui.GutterSidebarEditCheckDialog );
