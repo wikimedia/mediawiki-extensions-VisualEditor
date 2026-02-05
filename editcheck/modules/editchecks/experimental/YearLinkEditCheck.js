@@ -21,11 +21,13 @@ mw.editcheck.YearLinkEditCheck.static.description = 'This link points to a diffe
 mw.editcheck.YearLinkEditCheck.static.choices = [
 	{
 		action: 'useTarget',
-		label: 'Use target year'
+		// Example value for Special:EditChecks, actual value is set later
+		label: 'Use 2001'
 	},
 	{
 		action: 'useLabel',
-		label: 'Use label year'
+		// Example value for Special:EditChecks, actual value is set later
+		label: 'Use 2003'
 	},
 	{
 		action: 'dismiss',
@@ -60,11 +62,9 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 			return null;
 		}
 
-		const choices = [
-			{ action: 'useTarget', label: 'Use ' + target },
-			{ action: 'useLabel', label: 'Use ' + label },
-			{ action: 'dismiss', label: 'Dismiss' }
-		];
+		const choices = ve.copy( mw.editcheck.YearLinkEditCheck.static.choices );
+		choices[ 0 ].label = 'Use ' + target;
+		choices[ 1 ].label = 'Use ' + label;
 
 		return this.buildActionFromLinkRange( annRange.range, surfaceModel, { choices } );
 	} );
