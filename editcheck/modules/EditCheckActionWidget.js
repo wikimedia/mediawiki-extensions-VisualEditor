@@ -30,6 +30,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
+	this.inactiveSelectionElements = null;
 	this.feedbackDeferred = null;
 
 	this.collapsed = false;
@@ -57,7 +58,11 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	}
 	this.actions.setMode( this.mode );
 
-	this.$element.on( 'click', this.onClick.bind( this ) );
+	this.$element.on( {
+		click: this.onClick.bind( this ),
+		mouseenter: this.onMouseEnter.bind( this ),
+		mouseleave: this.onMouseLeave.bind( this )
+	} );
 
 	this.$body = $( '<div>' )
 		.append( this.message.$element, this.$actions )
@@ -190,6 +195,33 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
 	this.emit( 'togglecollapse' );
 
 	e.preventDefault();
+};
+
+/**
+ * Handle mouse enter events on the widget
+ */
+mw.editcheck.EditCheckActionWidget.prototype.onMouseEnter = function () {
+	if ( this.inactiveSelectionElements ) {
+		this.inactiveSelectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-highlighted' );
+	}
+};
+
+/**
+ * Handle mouse leave events on the widget
+ */
+mw.editcheck.EditCheckActionWidget.prototype.onMouseLeave = function () {
+	if ( this.inactiveSelectionElements ) {
+		this.inactiveSelectionElements.$selection.removeClass( 've-ce-surface-selection-editCheck-highlighted' );
+	}
+};
+
+/**
+ * Set the selection elements for this action
+ *
+ * @param {ve.ce.SelectionManager.SelectionElements} selectionElements
+ */
+mw.editcheck.EditCheckActionWidget.prototype.setInactiveSelectionElements = function ( selectionElements ) {
+	this.inactiveSelectionElements = selectionElements;
 };
 
 /**

@@ -836,6 +836,9 @@ Controller.prototype.drawSelections = function () {
 			const selectionElements = surfaceView.getSelectionManager().getCachedSelectionElements(
 				isActive ? 'editCheck-active' : 'editCheck-inactive', selection, isActive ? activeOptions : inactiveOptions
 			);
+			if ( !isActive && action.widget ) {
+				action.widget.setInactiveSelectionElements( selectionElements );
+			}
 			if ( selectionElements ) {
 				// The following classes are used here:
 				// * ve-ce-surface-selection-editCheck-error

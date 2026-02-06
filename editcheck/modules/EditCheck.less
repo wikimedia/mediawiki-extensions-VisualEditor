@@ -462,6 +462,7 @@
 				border-radius: 2px;
 				padding: 2px;
 				margin: -2px 0 0 -2px;
+				transition: background @transition-duration-base;
 			}
 		}
 	}
@@ -519,23 +520,24 @@
 			background-color: @color-base;
 			z-index: 1;
 		}
+	}
 
-		.ve-ce-surface-selection-editCheck {
-			&-warning .ve-ce-surface-selection-rect {
-				// Adjust target colours to account for 50% opacity
-				// @background-color-warning-subtle
-				background: ( ( #fdf2d5 - 0.7 * ( #fff ) ) / 0.3 );
-			}
+	&-active .ve-ce-surface-selection-editCheck,
+	&-inactive .ve-ce-surface-selection-editCheck-highlighted.ve-ce-surface-selection-editCheck {
+		&-warning .ve-ce-surface-selection-rect {
+			// Adjust target colours to account for 50% opacity
+			// @background-color-warning-subtle
+			background: ( ( #fdf2d5 - 0.7 * ( #fff ) ) / 0.3 );
+		}
 
-			&-error .ve-ce-surface-selection-rect {
-				// @background-color-error-subtle
-				background: ( ( #ffe9e5 - 0.7 * ( #fff ) ) / 0.3 );
-			}
+		&-error .ve-ce-surface-selection-rect {
+			// @background-color-error-subtle
+			background: ( ( #ffe9e5 - 0.7 * ( #fff ) ) / 0.3 );
+		}
 
-			&-progressive .ve-ce-surface-selection-rect {
-				// @background-color-progressive-subtle
-				background: ( ( #e8eeff - 0.7 * ( #fff ) ) / 0.3 );
-			}
+		&-progressive .ve-ce-surface-selection-rect {
+			// @background-color-progressive-subtle
+			background: ( ( #e8eeff - 0.7 * ( #fff ) ) / 0.3 );
 		}
 	}
 
