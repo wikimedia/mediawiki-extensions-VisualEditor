@@ -38,6 +38,19 @@ mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceMo
 	).then( ( linkData ) => !!( linkData && linkData.redirect ) );
 
 	return this.getModifiedLinkRanges( surfaceModel )
+		// exclude links where the link target matches the link text
+		.filter( ( annRange ) => {
+			const labelTitle = mw.Title.newFromText( surfaceModel.getLinearFragment( annRange.range ).getText() );
+			if ( !labelTitle ) {
+				// Label isn't a valid title, so can't be equal to the target.
+				return true;
+			}
+			const title = mw.Title.newFromText( annRange.annotation.getDisplayTitle() );
+			// Normalise titles, and compare. If the titles are equal, or the target is a
+			// prefix of the label, then it's likely this is indented to produce compact
+			// wikitext, e.g. [[redirect]] or [[redirect]]s
+			return !labelTitle.getPrefixedText().startsWith( title.getPrefixedText() );
+		} )
 		.map( ( annRange ) => checkRedirect( annRange.annotation )
 			.then( ( isRedirect ) => isRedirect ?
 				this.buildActionFromLinkRange( annRange.range, surfaceModel ) : null
