@@ -1055,6 +1055,8 @@
 				"visualeditor-languageinspector-title",
 				"visualeditor-languageinspector-widget-changelang",
 				"visualeditor-languageinspector-widget-label-direction",
+				"visualeditor-languageinspector-widget-label-direction-ltr",
+				"visualeditor-languageinspector-widget-label-direction-rtl",
 				"visualeditor-languageinspector-widget-label-langcode",
 				"visualeditor-languageinspector-widget-label-language",
 				"visualeditor-linkcontext-label-change",
