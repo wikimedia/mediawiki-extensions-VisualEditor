@@ -209,6 +209,34 @@
 			}
 		}
 
+		&:hover {
+			&.oo-ui-flaggedElement-progressive {
+				border-color: @border-color-progressive--hover;
+			}
+
+			&.oo-ui-flaggedElement-warning {
+				border-color: @border-color-warning--hover;
+			}
+
+			&.oo-ui-flaggedElement-error {
+				border-color: @border-color-error--hover;
+			}
+		}
+
+		&:active {
+			&.oo-ui-flaggedElement-progressive {
+				border-color: @border-color-progressive--active;
+			}
+
+			&.oo-ui-flaggedElement-warning {
+				border-color: @border-color-warning--active;
+			}
+
+			&.oo-ui-flaggedElement-error {
+				border-color: @border-color-error--active;
+			}
+		}
+
 		&.ve-ui-editCheckActionWidget-collapsed {
 			&:not( :hover ) {
 				background: @background-color-base;
