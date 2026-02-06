@@ -5,11 +5,11 @@ mw.editcheck.FakeHeadingsEditCheck = function MWFakeHeadingsEditCheck() {
 
 OO.inheritClass( mw.editcheck.FakeHeadingsEditCheck, mw.editcheck.BaseEditCheck );
 
-mw.editcheck.FakeHeadingsEditCheck.static.title = 'Heading formatting';
+mw.editcheck.FakeHeadingsEditCheck.static.title = 'Use real headings';
 
 mw.editcheck.FakeHeadingsEditCheck.static.name = 'fakeHeadings';
 
-mw.editcheck.FakeHeadingsEditCheck.static.description = 'Real headings should be used, not bold text';
+mw.editcheck.FakeHeadingsEditCheck.static.description = 'Real headings should be used, not bold text.';
 
 mw.editcheck.FakeHeadingsEditCheck.static.choices = [
 	{
@@ -63,8 +63,8 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.act = function ( choice, action, su
 			// normal mediawiki css; 3 is where it starts to look like bold text.
 			const level = heading ? Math.max( heading.getAttribute( 'level' ), 3 ) : 3;
 			fragment
-				.convertNodes( 'mwHeading', { level } )
-				.annotateContent( 'clear', 'textStyle/bold' );
+				.annotateContent( 'clear', 'textStyle/bold' )
+				.convertNodes( 'mwHeading', { level } );
 		} );
 		action.select( surface, true );
 		return;
