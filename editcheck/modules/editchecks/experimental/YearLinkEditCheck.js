@@ -99,7 +99,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 				text.replace( /\b\d{3,4}\b/, targetYear ),
 				true
 			);
-			this.selectAnnotation( fragment, surface );
+			action.select( surface, true );
 			return;
 		}
 
@@ -118,7 +118,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 				fragment.annotateContent( 'clear', linkClass.static.name );
 			}
 			fragment.annotateContent( 'set', link );
-			this.selectAnnotation( fragment, surface );
+			action.select( surface, true );
 			return;
 		}
 	}
