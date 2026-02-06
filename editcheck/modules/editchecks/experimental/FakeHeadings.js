@@ -14,12 +14,11 @@ mw.editcheck.FakeHeadingsEditCheck.static.description = 'Real headings should be
 mw.editcheck.FakeHeadingsEditCheck.static.choices = [
 	{
 		action: 'fix',
-		label: 'Fix',
-		icon: 'edit'
+		label: 'Adjust heading'
 	},
 	{
 		action: 'dismiss',
-		label: 'Dismiss' // TODO: i18n
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
 
@@ -29,6 +28,9 @@ mw.editcheck.FakeHeadingsEditCheck.static.defaultConfig = ve.extendObject( {}, m
 
 mw.editcheck.FakeHeadingsEditCheck.static.onlyCoveredNodes = true;
 
+/**
+ * @inheritdoc
+ */
 mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	// We need to cover complete new nodes, and also existing nodes that have been bolded
 	const documentModel = surfaceModel.getDocument();
@@ -45,27 +47,30 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfa
 		} ) );
 };
 
+/**
+ * @inheritdoc
+ */
 mw.editcheck.FakeHeadingsEditCheck.prototype.act = function ( choice, action, surface ) {
-	switch ( choice ) {
-		case 'dismiss':
-			this.dismiss( action );
-			break;
-		case 'fix': {
+	if ( choice === 'fix' ) {
+		action.fragments.forEach( ( fragment ) => {
 			const heading = surface.getModel().documentModel.getNearestNodeMatching(
 				( nodeType ) => nodeType === 'mwHeading',
 				// Note: we set a limit of 1 here because otherwise this will turn around
 				// to keep looking when it hits the document boundary:
-				action.fragments[ 0 ].getSelection().getCoveringRange().start - 1, -1, 1
+				fragment.getSelection().getCoveringRange().start - 1, -1, 1
 			);
 			// A bolded heading doesn't look like the level 1 or 2 headings on
 			// normal mediawiki css; 3 is where it starts to look like bold text.
 			const level = heading ? Math.max( heading.getAttribute( 'level' ), 3 ) : 3;
-			action.fragments[ 0 ]
+			fragment
 				.convertNodes( 'mwHeading', { level } )
 				.annotateContent( 'clear', 'textStyle/bold' );
-			break;
-		}
+		} );
+		action.select( surface, true );
+		return;
 	}
+	// Parent method
+	return mw.editcheck.FakeHeadingsEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.FakeHeadingsEditCheck );
