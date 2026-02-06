@@ -60,7 +60,7 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, s
 	if ( choice === 'fix' ) {
 		action.fragments.forEach( ( fragment ) => {
 			const heading = surface.getModel().documentModel.getNearestNodeMatching(
-				( nodeType ) => nodeType === 'mwHeading',
+				'mwHeading',
 				// Note: we set a limit of 1 here because otherwise this will turn around
 				// to keep looking when it hits the document boundary:
 				fragment.getSelection().getCoveringRange().start - 1, -1, 1
