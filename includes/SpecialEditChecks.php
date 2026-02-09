@@ -183,48 +183,85 @@ class SpecialEditChecks extends SpecialPage {
 				$this->msg( 'editcheck-specialeditchecks-config-summary' )->text() )
 		);
 		foreach ( $checks as $checkData ) {
-			// Filter by enabled value if requested
-			if ( $onlyWithEnabledValue !== null ) {
-				$enabled = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'enabled' ) ?? true;
-				if ( $enabled !== $onlyWithEnabledValue ) {
-					continue;
+			$html .= $this->buildRowHtml( $checkData, $onWikiConfig, $onlyWithEnabledValue, $suggestions );
+			if ( $checkData['name'] === 'textMatch' ) {
+				$matchItems = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' ) ?? [];
+				foreach ( $matchItems as $name => $item ) {
+					$matchCheckData = [
+						'file' => '',
+						'name' => $checkData['name'] . " ($name)",
+						'title' => $item['title'] ?? '',
+						'description' => $item['message'] ?? '',
+						'prompt' => $item['prompt'] ?? '',
+						'footer' => $item['footer'] ?? '',
+						'choices' => $checkData['choices'],
+						'defaultConfig' => json_encode( $item['config'] ?? '' ),
+						'matchItem' => $item,
+					];
+					$html .= $this->buildRowHtml( $matchCheckData, $onWikiConfig, $onlyWithEnabledValue, $suggestions );
 				}
 			}
-			$override = '';
-			if ( isset( $onWikiConfig[$checkData['name']] ) ) {
-				$override = $this->jsonTable( $onWikiConfig[$checkData['name']] );
-			}
-			$defaultConfig = '';
-			if ( $checkData['defaultConfig'] ) {
-				$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
-			}
-
-			if ( empty( $checkData['title'] ) && empty( $checkData['description'] ) ) {
-				$widget = '';
-			} else {
-				$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
-			}
-
-			$html .= Html::rawElement( 'tr', [],
-				Html::rawElement( 'td', [],
-					Html::element( 'strong', [], $checkData['name'] ) .
-					Html::element( 'div', [], basename( $checkData['file'] ) )
-				) .
-				Html::rawElement( 'td', [],
-					Html::rawElement(
-						'div',
-						[ 'class' => 've-ui-editCheckDialog' ],
-						$widget
-					)
-				) .
-				Html::rawElement( 'td', [],
-					( $defaultConfig !== '' || $override !== '' ?
-						$this->configDetails( $defaultConfig, $override ) : ''
-					)
-				)
-			);
 		}
 		$html .= Html::closeElement( 'table' );
+		return $html;
+	}
+
+	/**
+	 * Build HTML for a single edit check row.
+	 *
+	 * @param array $checkData Edit check data
+	 * @param array $onWikiConfig On-wiki configuration overrides
+	 * @param bool|null $onlyWithEnabledValue If a boolean, only checks whose 'enabled' value matches this
+	 * @param bool $suggestions
+	 * @return string Row HTML or empty string if filtered out
+	 */
+	private function buildRowHtml(
+		array $checkData, array $onWikiConfig, ?bool $onlyWithEnabledValue = null, bool $suggestions = false
+	): string {
+		$html = '';
+		// Filter by enabled value if requested
+		if ( $onlyWithEnabledValue !== null ) {
+			$enabled = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'enabled' ) ?? true;
+			if ( $enabled !== $onlyWithEnabledValue ) {
+				return '';
+			}
+		}
+		$override = '';
+		if ( isset( $onWikiConfig[$checkData['name']] ) ) {
+			$override = $this->jsonTable( $onWikiConfig[$checkData['name']] );
+		}
+		$defaultConfig = '';
+		if ( $checkData['defaultConfig'] ) {
+			$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
+		}
+
+		if ( empty( $checkData['title'] ) && empty( $checkData['description'] ) ) {
+			$widget = '';
+		} else {
+			$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
+		}
+
+		$html .= Html::rawElement( 'tr', [],
+			Html::rawElement( 'td', [],
+				Html::element( 'strong', [], $checkData['name'] ) .
+				Html::element( 'div', [], basename( $checkData['file'] ) )
+			) .
+			Html::rawElement( 'td', [],
+				Html::rawElement(
+					'div',
+					[ 'class' => 've-ui-editCheckDialog' ],
+					$widget
+				)
+			) .
+			Html::rawElement( 'td', [],
+				( $defaultConfig !== '' || $override !== '' ?
+					$this->configDetails( $defaultConfig, $override ) : ''
+				) .
+				( !empty( $checkData['matchItem'] ) ?
+					$this->matchItemDetails( $checkData['matchItem'] ) : ''
+				)
+			)
+		);
 		return $html;
 	}
 
@@ -270,7 +307,7 @@ class SpecialEditChecks extends SpecialPage {
 			);
 		}
 
-		if ( $checkData['choices'] ) {
+		if ( !empty( $checkData['choices'] ) ) {
 			foreach ( $checkData['choices'] as $choice ) {
 				$actionButton = new \OOUI\ButtonWidget( [
 					'label' => $choice[ 'label' ],
@@ -331,6 +368,31 @@ class SpecialEditChecks extends SpecialPage {
 				$override
 			)
 			: ''
+		);
+	}
+
+	/**
+	 * Build the details element showing a textMatch matchItem configuration.
+	 *
+	 * @param array $matchItem Match item data
+	 * @return string
+	 */
+	private function matchItemDetails( array $matchItem ): string {
+		// Skip already displayed fields
+		$matchItemFiltered = array_filter(
+			$matchItem,
+			static function ( $key ) {
+				return !in_array( $key, [ 'config', 'title', 'message', 'prompt', 'footer' ], true );
+			},
+			ARRAY_FILTER_USE_KEY
+		);
+
+		return Html::rawElement( 'details', [],
+			Html::rawElement( 'summary', [],
+				Html::element( 'strong', [ 'class' => 'mw-editchecks-config-header' ],
+					$this->msg( 'editcheck-specialeditchecks-config-matchitem' )->text() )
+			) .
+			$this->jsonTable( $matchItemFiltered )
 		);
 	}
 
