@@ -23,7 +23,9 @@ mw.editcheck = {
 	forceEnable: !!ecenable,
 	experimental: !!( suggestionsPref || mw.config.get( 'wgVisualEditorConfig' ).editCheckLoadExperimental || ecenable === '2' ),
 	suggestions: suggestionsPref,
-	checksShown: {}
+	checksShown: {},
+	checksSeen: {},
+	suggestionsSeen: {}
 };
 
 if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
@@ -164,6 +166,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 				}
 				if ( mw.editcheck.checksShown.paste ) {
 					tags.push( 'editcheck-paste-shown' );
+				}
+				if ( Object.keys( mw.editcheck.suggestionsSeen ).length > 0 ) {
+					tags.push( 'editsuggestion-visible' );
 				}
 				if ( hasFailingToneCheck ) {
 					tags.push( 'editcheck-tone' );
