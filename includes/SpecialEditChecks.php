@@ -10,8 +10,10 @@ use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Content\JsonContent;
 use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
+use MediaWiki\Language\RawMessage;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Title\Title;
 use OOUI\MessageWidget;
 
 class SpecialEditChecks extends SpecialPage {
@@ -187,14 +189,26 @@ class SpecialEditChecks extends SpecialPage {
 			if ( $checkData['name'] === 'textMatch' ) {
 				$matchItems = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' ) ?? [];
 				foreach ( $matchItems as $name => $item ) {
+					if ( isset( $item['import'] ) ) {
+						$importTitle = Title::newFromText( $item['import'] );
+						$item = json_decode( $this->msg( $importTitle->getText() )->inContentLanguage()->text(), true );
+					}
+					$mode = $item['mode'] ?? '';
+					// Filter choices to ones containing the mode if requested
+					$choices = array_filter(
+						$checkData['choices'] ?? [],
+						static function ( $choice ) use ( $mode ) {
+							return in_array( $mode, $choice['modes'], true );
+						}
+					);
 					$matchCheckData = [
 						'file' => '',
 						'name' => $checkData['name'] . " ($name)",
 						'title' => $item['title'] ?? '',
-						'description' => $item['message'] ?? '',
+						'description' => new \OOUI\HtmlSnippet( ( new RawMessage( $item['message'] ?? '' ) )->parse() ),
 						'prompt' => $item['prompt'] ?? '',
 						'footer' => $item['footer'] ?? '',
-						'choices' => $checkData['choices'],
+						'choices' => $choices,
 						'defaultConfig' => json_encode( $item['config'] ?? '' ),
 						'matchItem' => $item,
 					];
