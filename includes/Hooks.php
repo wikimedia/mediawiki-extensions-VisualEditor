@@ -104,7 +104,6 @@ class Hooks implements
 		'editcheck-tone',
 		'editcheck-tone-shown',
 		'editcheck-paste-shown',
-		'editsuggestion-visible',
 		// No longer in active use:
 		'editcheck-references-activated',
 		'editcheck-reference-decline-common-knowledge',
