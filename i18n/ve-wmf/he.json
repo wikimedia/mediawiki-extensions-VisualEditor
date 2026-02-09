@@ -29,6 +29,8 @@
 	"tag-editcheck-tone-shown-description": "מערכת בדיקת עריכה חושבת שאולי היה נחוץ תיקון בנימה של חלק מהתוכן והוצג ממשק המשתמש של זה",
 	"tag-editcheck-paste-shown": "הוצגהה הודעה של מערכת בדיקת עריכה (הדבקה)",
 	"tag-editcheck-paste-shown-description": "מערכת בדיקת עריכה בקישה הבהרה על תוכן שהעורך הדביק, שלאחר מכן הוסר או אושר בתור קביל",
+	"tag-editsuggestion-visible": "נראתה בדיקת עריכה",
+	"tag-editsuggestion-visible-description": "בדיקת עריכה או הצעה אחת לפחות כנראה נראתה על־ידי המשתמש",
 	"tag-visualeditor": "עריכה חזותית",
 	"tag-visualeditor-description": "עריכה שנעשתה באמצעות [[{{MediaWiki:visualeditor-descriptionpagelink}}|העורך החזותי]]",
 	"tag-visualeditor-needcheck": "עריכה חזותית: נא לבדוק",
