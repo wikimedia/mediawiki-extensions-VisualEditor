@@ -1433,6 +1433,11 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 		return;
 	}
 
+	// saveDeferred is being used to coordinate with the saveDialog's
+	// actionProcess; if it's resolved the process continues, if it's
+	// rejected the dialog's error state is shown. Which of these is used
+	// depends on the desired experience. If gentle in-form feedback is the
+	// goal, saveDeferred should not be rejected.
 	this.saveDeferred = saveDeferred;
 
 	this.saveOptionsProcess.execute().then(
@@ -1448,19 +1453,24 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogSave = function ( saveDeferred ) 
 					'missingsummary',
 					new OO.ui.HtmlSnippet( ve.init.platform.getParsedMessage( 'missingsummary' ) )
 				);
-				this.saveDialog.popPending();
-				this.saveDeferred.reject();
+				// Resolve saveDeferred so that the dialog will no longer be pending.
+				this.saveDeferred.resolve();
 			} else {
 				this.emit( 'saveInitiated' );
+				// startSave will eventually resolve saveDeferred once the
+				// save is complete.
 				this.startSave( saveOptions );
 			}
 		},
 		() => {
 			// Indicate that the save has stopped. The code that rejected the
 			// execution of the Process should have added an error to the save
-			// dialog
-			this.saveDialog.popPending();
-			this.saveDeferred.reject();
+			// dialog via showMessage (which doesn't reject the deferred) or
+			// via showSaveError (which does).
+			if ( this.saveDeferred.state() === 'pending' ) {
+				// saveDeferred wasn't rejected, so resolve it to tidy up.
+				this.saveDeferred.resolve();
+			}
 		}
 	);
 };
