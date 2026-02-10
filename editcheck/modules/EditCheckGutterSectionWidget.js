@@ -88,14 +88,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 		this.actionButton.toggle( true );
 	} else {
 		this.icon.setIcon( mw.editcheck.EditCheckActionWidget.static.iconMap[ action.getType() ] || 'notice' );
+		this.icon.setFlags( action.getType() );
 		this.icon.toggle( true );
 		this.iconLabel.toggle( true );
 		this.actionButton.toggle( false );
-		if ( this.actions.includes( this.controller.focusedAction ) ) {
-			this.icon.setFlags( this.controller.focusedAction.getType() );
-		} else {
-			this.icon.clearFlags();
-		}
 	}
 };
 
