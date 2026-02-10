@@ -34,7 +34,7 @@
 	"apihelp-visualeditoredit-param-cachekey": "Gebruik het resultaat van een eerder \"serializeforcache\"-verzoek met deze sleutel. Heeft voorrang boven $1html.",
 	"apihelp-visualeditoredit-param-captchaid": "Captcha-ID (bij het opslaan met een captcha-antwoord).",
 	"apihelp-visualeditoredit-param-captchaword": "Antwoord op de captcha (bij het opslaan met een captcha-antwoord).",
-	"apihelp-visualeditoredit-param-nocontent": "Laat de HTML-inhoud van de nieuwe revisie weg in het antwoord.",
+	"apihelp-visualeditoredit-param-nocontent": "Laat de HTML-inhoud van de nieuwe versie weg in het antwoord.",
 	"apihelp-visualeditoredit-param-plugins": "Plug-ins die zijn gekoppeld aan het API-verzoek.",
 	"apihelp-visualeditoredit-param-data-{plugin}": "Willekeurige gegevens verzonden door een plug-in met het API-verzoek.",
 	"apihelp-visualeditoredit-param-etag": "Te sturen ETag.",
