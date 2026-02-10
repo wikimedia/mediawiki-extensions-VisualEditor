@@ -18,6 +18,7 @@
 	MWDummyTarget.prototype.createSurface = ve.init.mw.Target.prototype.createSurface;
 	MWDummyTarget.prototype.getSurfaceConfig = ve.init.mw.Target.prototype.getSurfaceConfig;
 	MWDummyTarget.prototype.getSurfaceClasses = ve.init.mw.Target.prototype.getSurfaceClasses;
+	MWDummyTarget.prototype.isInterwikiUrl = () => ve.createDeferred().resolve( false ).promise();
 	// Copy import rules from mw target, for paste tests.
 	MWDummyTarget.static.importRules = ve.init.mw.Target.static.importRules;
 

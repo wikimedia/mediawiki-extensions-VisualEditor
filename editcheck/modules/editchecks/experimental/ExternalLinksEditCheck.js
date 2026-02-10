@@ -28,51 +28,17 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 
 mw.editcheck.ExternalLinksEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAnnotation ];
 
-let interwikiUrlPatternsPromise = null;
-
-/**
- * Get a promise for interwiki URL patterns.
- *
- * TODO: De-duplicate with similar code in mw.TitleWidget.
- *
- * @return {Promise<RegExp[]>} Promise resolving to array of regexes for interwiki URL patterns
- */
-mw.editcheck.ExternalLinksEditCheck.prototype.getInterwikiUrlPatternsPromise = function () {
-	const api = this.controller.target.getContentApi();
-
-	if ( !interwikiUrlPatternsPromise ) {
-		// Cache client-side for a day since this info is mostly static
-		const oneDay = 60 * 60 * 24;
-		interwikiUrlPatternsPromise = api.get( {
-			action: 'query',
-			meta: 'siteinfo',
-			siprop: 'interwikimap',
-			maxage: oneDay,
-			smaxage: oneDay,
-			// Workaround T97096 by setting uselang=content
-			uselang: 'content'
-		} ).then( ( data ) => data.query.interwikimap.map(
-			( iw ) => mw.libs.ve.getRegexFromUrlPattern( iw.url ) )
-		);
-		// Do not cache errors
-		interwikiUrlPatternsPromise.catch( () => {
-			interwikiUrlPatternsPromise = null;
-		} );
-	}
-	return interwikiUrlPatternsPromise;
-};
-
 mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	return this.getModifiedLinkRanges( surfaceModel ).map(
-		( annRange ) => this.getInterwikiUrlPatternsPromise().then( ( interwikiUrlPatterns ) => {
-			const href = annRange.annotation.getAttribute( 'href' );
-			if ( interwikiUrlPatterns.some( ( regex ) => regex.test( href ) ) ) {
+	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
+		const href = annRange.annotation.getAttribute( 'href' );
+		return this.controller.target.isInterwikiUrl( href ).then( ( isInterwiki ) => {
+			if ( isInterwiki ) {
 				// Ignore interwiki links
 				return null;
 			}
 			return this.buildActionFromLinkRange( annRange.range, surfaceModel );
-		} )
-	);
+		} );
+	} );
 };
 
 mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, surface ) {
