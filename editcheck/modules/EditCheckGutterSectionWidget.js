@@ -58,6 +58,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.getPrimaryAction = function 
 	if ( this.controller.focusedAction && this.actions.includes( this.controller.focusedAction ) ) {
 		return this.controller.focusedAction;
 	}
+	const check = this.actions.find( ( action ) => !action.isSuggestion() );
+	if ( check ) {
+		return check;
+	}
 	return this.actions[ 0 ];
 };
 
