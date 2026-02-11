@@ -8,8 +8,8 @@ OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCh
 mw.editcheck.ConvertReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	// strict can be, in descending order of strictness:
 	// * 'url-only': the reference must entirely consist of only a single URL
-	// * 'covers': the reference must be entirely covered by a single link annotation
-	// * anything-else: anything that the context item triggers for counts
+	// * 'covered': the reference must be entirely covered by a single link annotation
+	// * 'any': anything that the context item triggers for counts
 	strict: 'url-only'
 } );
 
