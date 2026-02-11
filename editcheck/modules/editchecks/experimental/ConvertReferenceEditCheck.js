@@ -81,7 +81,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 			}
 		}
 		return null;
-	} ).filter( ( obj ) => obj ).filter( ( range ) => !this.isDismissedRange( range ) ).map( ( range ) => (
+	} ).filter( ( range ) => range && !this.isDismissedRange( range ) ).map( ( range ) => (
 		new mw.editcheck.EditCheckAction( {
 			fragments: [ surfaceModel.getLinearFragment( range ) ],
 			check: this
