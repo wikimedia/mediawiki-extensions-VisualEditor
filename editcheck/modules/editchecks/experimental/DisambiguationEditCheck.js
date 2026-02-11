@@ -33,8 +33,10 @@ mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( sur
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
 
-	return this.getModifiedLinkRanges( surfaceModel ).map(
-		( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
+	return this.getModifiedLinkRanges( surfaceModel )
+		// Links to sections of disambiguation pages are deliberately specific, so ignore them
+		.filter( ( annRange ) => !annRange.annotation.getFragment() )
+		.map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
 			this.buildActionFromLinkRange( annRange.range, surfaceModel ) : null
 		) );
 };
