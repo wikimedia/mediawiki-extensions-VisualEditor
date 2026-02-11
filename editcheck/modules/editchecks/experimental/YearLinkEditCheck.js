@@ -44,7 +44,7 @@ mw.editcheck.YearLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnota
  * @return {string|null} The year found, or null if there isn't exactly one valid year
  */
 mw.editcheck.YearLinkEditCheck.prototype.matchSingleYear = function ( text ) {
-	const matches = text.match( /\b\d{3,4}\b/ );
+	const matches = text.match( /\b\d{3,4}\b/g );
 	return matches && matches.length === 1 ? matches[ 0 ] : null;
 };
 
