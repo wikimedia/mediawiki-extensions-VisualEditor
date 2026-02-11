@@ -398,7 +398,7 @@ mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusR
 		surfaceView.selectAnnotation( this.focusAnnotation );
 	} else {
 		const checkRange = this.getFocusSelection().getCoveringRange();
-		if ( selectFocusRange ) {
+		if ( selectFocusRange || surfaceView.findFocusedNode( checkRange ) ) {
 			surfaceModel.setLinearSelection( checkRange );
 		} else {
 			const surfaceRange = surfaceModel.getSelection().getCoveringRange();
