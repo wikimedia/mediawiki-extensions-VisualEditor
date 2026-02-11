@@ -350,10 +350,12 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( do
 	const modified = this.getModifiedContentRanges( documentModel );
 
 	return documentModel.getDocumentNode().getAnnotationRanges().filter(
-		( annRange ) => this.isRangeInValidSection( annRange.range, documentModel ) &&
+		// Try to apply fastest filters first
+		( annRange ) => modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
+			( !names || names.includes( annRange.annotation.name ) ) &&
 			!this.isDismissedRange( annRange.range ) &&
-			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
-			( !names || names.includes( annRange.annotation.name ) )
+			// isRangeInValidSection is relatively expensive, so check last
+			this.isRangeInValidSection( annRange.range, documentModel )
 	);
 };
 
