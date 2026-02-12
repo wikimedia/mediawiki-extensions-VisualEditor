@@ -277,9 +277,6 @@ Controller.prototype.toggleSuggestionsMode = function () {
  * @fires EditCheckController#actionsUpdated
  */
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
-	// Get the existing actions for this listener
-	const existing = this.getActions( listener );
-
 	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
 	// Create all actions for this listener
 	if ( this.suggestionsMode && !this.inBeforeSave ) {
@@ -295,6 +292,9 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	}
 	return actionsPromise
 		.then( ( actionsFromListener ) => {
+			// Get the existing actions for this listener
+			const existing = this.getActions( listener );
+
 			// Try to match each new action to an existing one (to preserve state)
 			const actions = actionsFromListener.map( ( action ) => {
 				const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
