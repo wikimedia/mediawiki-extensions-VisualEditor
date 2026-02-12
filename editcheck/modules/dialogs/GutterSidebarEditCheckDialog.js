@@ -184,7 +184,13 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
 };
 
-ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( action ) {
+/**
+ * Show the edit check dialog with a specific widget's actions and a specific action focused
+ *
+ * @param {mw.editcheck.EditCheckAction} action Action to focus
+ * @param {boolean} [alignToTop] Align the selection to the top of the viewport
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( action, alignToTop ) {
 	// The focus changing will also trigger onPosition after this, so we don't
 	// need to update the state of anything. We do need to trigger the drawer
 	// showing if this is an action that takesFocus, however. We can assume
@@ -193,7 +199,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( a
 	if ( action ) {
 		for ( const widget of this.widgets ) {
 			if ( widget.actions.includes( action ) ) {
-				widget.showDialogWithAction( action, false );
+				widget.showDialogWithAction( action, alignToTop );
 				return;
 			}
 		}

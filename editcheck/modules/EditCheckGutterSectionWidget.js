@@ -121,11 +121,11 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		return;
 	}
 	const action = this.getPrimaryAction();
-	this.controller.focusAction( action, true );
 	// Should we trigger the popup? By default yes, unless
 	// we're in the onBeforeSave mode where we can assume
 	// something else is handling it.
 	if ( this.controller.inBeforeSave ) {
+		this.controller.focusAction( action, true );
 		return;
 	}
 	// mid-edit
@@ -153,6 +153,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		this.actions.every( ( sact ) => currentWindow.hasAction( sact ) )
 	) {
 		// Second click: defocus and close
+		this.controller.focusAction( null );
 		this.controller.closeDialog( 'gutter-toggle' );
 		return;
 	} else {
@@ -161,11 +162,12 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 };
 
 /**
- * Show the edit check dialog with a specific action focused
+ * Show the edit check dialog with this widget's actions and with a specific action focused
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
+ * @param {boolean} [alignToTop] Align the selection to the top of the viewport
  */
-mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action ) {
+mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action, alignToTop ) {
 	const controller = this.controller;
 	const surface = controller.surface;
 	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
@@ -182,9 +184,13 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 				// just filter out any discarded actions from the allowed set
 				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
 			}
-		);
-		this.controller.focusAction( action, true );
+		).then( () => {
+			// This is delayed to here because we need the scroll-position to
+			// account for this window being open.
+			this.controller.focusAction( action, true, alignToTop );
+		} );
 	} else {
+		this.controller.focusAction( action, true, alignToTop );
 		currentWindow.showActions( this.actions, [ action ] );
 		currentWindow.footer.toggle( this.actions.length !== 1 );
 	}

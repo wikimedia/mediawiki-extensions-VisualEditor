@@ -397,6 +397,14 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 	this.updatePositionsDebounced();
 };
 
+/**
+ * Make sure an action is visible to the user
+ *
+ * This will scroll the action into view and make sure its widget is expanded
+ * so the contents can be seen.
+ *
+ * @param {mw.editcheck.EditCheckAction} action Action to focus
+ */
 Controller.prototype.ensureActionIsShown = function ( action ) {
 	if ( OO.ui.isMobile() ) {
 		const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
@@ -404,7 +412,7 @@ Controller.prototype.ensureActionIsShown = function ( action ) {
 			return;
 		}
 		// This will ultimately focus the action and scroll it into view as well:
-		currentWindow.showDialogWithAction( action );
+		currentWindow.showDialogWithAction( action, true );
 	} else {
 		this.focusAction( action, true );
 	}

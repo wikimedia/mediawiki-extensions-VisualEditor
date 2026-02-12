@@ -347,7 +347,12 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		}
 		this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.singleAction );
 
-		this.surface.context.hide();
+		if ( this.surface.context.isVisible() ) {
+			// Don't unconditionally do this, because the mobile context
+			// triggers a setTimeout'd resize event that scrolls the
+			// selection into view, potentially overriding our own scrolling.
+			this.surface.context.hide();
+		}
 
 		this.showActions( actions, data.newActions || [] );
 		if ( this.onPosition ) {
