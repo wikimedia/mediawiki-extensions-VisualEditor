@@ -15,14 +15,6 @@ mw.editcheck.ExternalLinksEditCheck.static.description = '<a href="//en.wikipedi
 const description = mw.editcheck.ExternalLinksEditCheck.static.description;
 mw.editcheck.ExternalLinksEditCheck.static.description = () => $( $.parseHTML( description ) );
 
-mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.LinkEditCheck.static.defaultConfig, {
-	ignoreSections: [
-		'External links',
-		'References',
-		'Further reading'
-	]
-} );
-
 mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	{
 		action: 'remove',
