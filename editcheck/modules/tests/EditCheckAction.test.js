@@ -3,8 +3,8 @@ QUnit.module( 'mw.editcheck.EditCheckAction', ve.test.utils.newMwEnvironment() )
 QUnit.test( 'equals', ( assert ) => {
 	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdef', { type: '/paragraph' } ] ),
 		surface = new ve.dm.Surface( doc ),
-		check1 = new mw.editcheck.BaseEditCheck( {}, {}, false ),
-		check2 = new mw.editcheck.BaseEditCheck( {}, {}, false );
+		check1 = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyController, {}, false ),
+		check2 = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyController, {}, false );
 
 	const cases = [
 		{

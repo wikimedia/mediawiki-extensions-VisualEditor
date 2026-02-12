@@ -89,8 +89,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 
 	cases.forEach( ( caseItem ) => {
 		const surface = createSurfaceWithInternalLink( caseItem.targetTitle, caseItem.labelText );
-        const dummyController = { taggedFragments: {} };
-		const check = new mw.editcheck.YearLinkEditCheck( dummyController, {}, true );
+		const check = new mw.editcheck.YearLinkEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
 		const actions = check.onDocumentChange( surface ).filter( Boolean );
 
         const wikilink = '[[' + caseItem.targetTitle + ( caseItem.labelText !== caseItem.targetTitle ? '|' + caseItem.labelText : '' ) + ']]';

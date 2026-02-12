@@ -2377,9 +2377,11 @@
 			"lib/ve/rebaser/src/dm/ve.dm.RebaseServer.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseClient.js",
 			"lib/ve/tests/dm/ve.dm.TestRebaseServer.js",
+			"editcheck/modules/tests/utils.js",
 			"editcheck/modules/tests/BaseEditCheck.test.js",
 			"editcheck/modules/tests/EditCheckAction.test.js",
-			"editcheck/modules/tests/YearLinkEditCheck.test.js"
+			"editcheck/modules/tests/YearLinkEditCheck.test.js",
+			"editcheck/modules/tests/DoubleBoldEditCheck.test.js"
 		],
 		"dependencies": [
 			"ext.visualEditor.core",

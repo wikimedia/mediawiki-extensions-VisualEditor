@@ -38,15 +38,15 @@ mw.editcheck.DoubleBoldEditCheck.prototype.onDocumentChange = function ( surface
 			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
 			(
 				(
-					( heading = documentModel.getNearestNodeMatching( 'mwHeading', annRange.range.start, -1, 1 ) ) &&
+					( heading = documentModel.getNearestNodeMatching( 'mwHeading', annRange.range.start, -1, 0 ) ) &&
 					heading.getAttribute( 'level' ) >= 3
 				) ||
 				(
-					( cell = documentModel.getNearestNodeMatching( 'tableCell', annRange.range.start, -1, 1 ) ) &&
+					( cell = documentModel.getNearestNodeMatching( 'tableCell', annRange.range.start, -1, 0 ) ) &&
 					cell.getAttribute( 'style' ) === 'header'
 				) ||
 				(
-					( listItem = documentModel.getNearestNodeMatching( 'definitionListItem', annRange.range.start, -1, 1 ) ) &&
+					( listItem = documentModel.getNearestNodeMatching( 'definitionListItem', annRange.range.start, -1, 0 ) ) &&
 					listItem.getAttribute( 'style' ) === 'term'
 				)
 			)
