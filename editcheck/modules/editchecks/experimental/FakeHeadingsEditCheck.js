@@ -36,10 +36,17 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfa
 	const documentModel = surfaceModel.getDocument();
 	// Get fully covered nodes only, and only their content ranges
 	return this.getModifiedRanges( documentModel, true, true, false )
-		.filter( ( range ) => !this.isDismissedRange( range ) )
 		.filter( ( range ) => {
+			if ( this.isDismissedRange( range ) ) {
+				return false;
+			}
 			const annotations = documentModel.data.getAnnotationsFromRange( range );
-			return annotations.hasAnnotationWithName( 'textStyle/bold' );
+			if ( !( annotations.hasAnnotationWithName( 'textStyle/bold' ) ) ) {
+				return false;
+			}
+			// Check we're in a root paragraph
+			const node = documentModel.getBranchNodeFromOffset( range.start );
+			return node && node.getType() === 'paragraph' && node.getParent() === documentModel.attachedRoot;
 		} )
 		.map( ( range ) => new mw.editcheck.EditCheckAction( {
 			check: this,
