@@ -49,7 +49,11 @@ ve.ui.MWPopupTool.prototype.onPopupOpened = function () {
  * Handle to call when popup is closing
  */
 ve.ui.MWPopupTool.prototype.onPopupClosing = function () {
-	this.$link.trigger( 'focus' );
+	// Giving focus to the sticky toolbar causes scroll to jump:
+	// https://issues.chromium.org/issues/40749247
+	// this.$link.trigger( 'focus' );
+	// This could be restored if we only trigger focus when the
+	// close button is pressed, not when the popup is autoclosed.
 };
 
 /**
