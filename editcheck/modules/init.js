@@ -168,7 +168,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 					tags.push( 'editcheck-paste-shown' );
 				}
 				if ( Object.keys( mw.editcheck.suggestionsSeen ).length > 0 ) {
-					tags.push( 'editsuggestion-visible' );
+					tags.push( 'editsuggestion-seen' );
 				}
 				if ( hasFailingToneCheck ) {
 					tags.push( 'editcheck-tone' );
