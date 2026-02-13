@@ -240,10 +240,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 	ve.track( 'trace.setupToolbar.exit', { mode } );
 	if ( !wasSetup ) {
 		toolbar.$element
-			.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' );
-		if ( !toolbar.isFloating() ) {
-			toolbar.$element.css( 'height', '' );
-		}
+			.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
+			.css( 'height', '' );
 		this.toolbarSetupDeferred.resolve();
 
 		this.toolbarSetupDeferred.then( () => {

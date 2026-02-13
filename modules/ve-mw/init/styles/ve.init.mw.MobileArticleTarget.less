@@ -83,11 +83,19 @@
 	position: fixed;
 }
 
-.ve-init-mw-mobileArticleTarget-toolbar.ve-ui-targetToolbar-mobile .oo-ui-toolbar-tools > {
-	.ve-ui-toolbar-group-back,
-	.ve-ui-toolbar-group-save {
-		flex: 0;
-		min-width: 2.75em;
+.ve-init-mw-mobileArticleTarget-toolbar.ve-ui-targetToolbar-mobile {
+	// The toolbar is marked as 'floatable' for calculating
+	// surface padding, but actual floating is handled by
+	// the MobileFrontend overlay.
+	position: static;
+	border-top: 0;
+
+	.oo-ui-toolbar-tools > {
+		.ve-ui-toolbar-group-back,
+		.ve-ui-toolbar-group-save {
+			flex: 0;
+			min-width: 2.75em;
+		}
 	}
 }
 
