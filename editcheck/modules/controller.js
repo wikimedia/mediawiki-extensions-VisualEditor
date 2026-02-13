@@ -327,6 +327,9 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 
 			// If the actions list changed, update
 			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+				if ( !this.inBeforeSave ) {
+					this.updateShownStats( newActions, 'midedit' );
+				}
 				if ( this.inSetup ) {
 					// Any actions that are present during initial setup
 					// shouldn't be treated as being "new". They're either
@@ -601,7 +604,6 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		shownPromise = ve.createDeferred().resolve().promise();
 	}
 	shownPromise.then( () => {
-		this.updateShownStats( newActions, 'midedit' );
 
 		if ( newActions.length ) {
 			// Check if any new actions are relevant to our current selection:
