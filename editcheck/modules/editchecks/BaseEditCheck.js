@@ -438,7 +438,7 @@ mw.editcheck.BaseEditCheck.prototype.getAddedRanges = function ( documentModel, 
  * @return {ve.Range[]}
  */
 mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentModel, coveredNodesOnly, onlyContentRanges, onlyPureInsertions ) {
-	if ( !documentModel.completeHistory.getLength() ) {
+	if ( !this.includeSuggestions && !documentModel.completeHistory.getLength() ) {
 		return [];
 	}
 	return documentModel.getOrInsertCachedData( () => {
