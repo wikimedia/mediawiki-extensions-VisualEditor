@@ -473,7 +473,8 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 					page = href ? mw.libs.ve.normalizeParsoidResourceName( href ) : null;
 				this.partsList.push( {
 					template: part.template.target.wt,
-					templatePage: page
+					templatePage: page,
+					params: part.template.params
 				} );
 			} else {
 				// Raw wikitext as serialized by {@link ve.dm.MWTransclusionContentModel#serialize}
