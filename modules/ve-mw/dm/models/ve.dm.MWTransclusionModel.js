@@ -37,15 +37,11 @@
 		/**
 		 * @property {ve.dm.MWTransclusionPartModel[]} parts
 		 * @property {number} uid
-		 * @property {jQuery.Promise[]} templateDataApiRequests Currently running API requests. The only
-		 *  reason to keep these around is to be able to abort them earlier when the template dialog
-		 *  closes or resets.
 		 * @property {Object[]} changeQueue
 		 */
 		this.doc = doc;
 		this.parts = [];
 		this.uid = 0;
-		this.templateDataApiRequests = [];
 		this.changeQueue = [];
 	};
 
@@ -333,7 +329,7 @@
 			return;
 		}
 
-		this.templateDataApiRequests.push( this.callTemplateDataApi( titles, queue ) );
+		this.callTemplateDataApi( titles, queue );
 	};
 
 	/**
@@ -343,85 +339,36 @@
 	 * @return {jQuery.Promise}
 	 */
 	ve.dm.MWTransclusionModel.prototype.callTemplateDataApi = function ( titles, queue ) {
-		const xhr = ve.init.target.getContentApi( this.doc ).get( {
-			action: 'templatedata',
-			titles,
-			lang: mw.config.get( 'wgUserLanguage' ),
-			includeMissingTitles: '1',
-			redirects: '1'
-		} );
-
-		xhr.then( this.cacheTemplateDataApiResponse.bind( this ) ).always(
-			this.markRequestAsDone.bind( this, xhr ),
-			this.resolveChangeQueue.bind( this, queue )
-		);
-		return xhr;
+		return Promise.all( titles.map( ( title ) => ve.init.platform.templateDataCache.get( title ) ) )
+			.then( this.cacheTemplateDataApiResponse.bind( this ) )
+			.then(
+				this.resolveChangeQueue.bind( this, queue ),
+				this.resolveChangeQueue.bind( this, queue )
+			);
 	};
 
 	/**
 	 * @private
-	 * @param {Object} [data]
-	 * @param {Object.<number,ve.dm.MWTemplatePageMetadata>} [data.pages]
+	 * @param {ve.dm.MWTemplatePageMetadata[]} pages
 	 */
-	ve.dm.MWTransclusionModel.prototype.cacheTemplateDataApiResponse = function ( data ) {
-		if ( !data || !data.pages ) {
-			return;
-		}
+	ve.dm.MWTransclusionModel.prototype.cacheTemplateDataApiResponse = function ( pages ) {
+		pages.forEach( ( page ) => {
+			const title = page.title;
 
-		// Keep spec data on hand for future use
-		for ( const id in data.pages ) {
-			const title = data.pages[ id ].title;
-
-			if ( data.pages[ id ].missing ) {
+			if ( page.missing ) {
 				// Remember templates that don't exist in the link cache
 				// { title: { missing: true|false }
 				const missingTitle = {};
 				missingTitle[ title ] = { missing: true };
 				ve.init.platform.linkCache.setMissing( missingTitle );
-			} else if ( data.pages[ id ].notemplatedata && !OO.isPlainObject( data.pages[ id ].params ) ) {
+			} else if ( page.notemplatedata && !OO.isPlainObject( page.params ) ) {
 				// (T243868) Prevent asking again for templates that have neither user-provided specs
 				// nor automatically detected params
 				specCache[ title ] = {};
-				specCache[ title ].pageId = id;
 			} else {
-				specCache[ title ] = data.pages[ id ];
-				specCache[ title ].pageId = id;
+				specCache[ title ] = page;
 			}
-		}
-
-		// Follow redirects
-		const aliasMap = data.redirects || [];
-		// Follow MW's normalisation
-		if ( data.normalized ) {
-			ve.batchPush( aliasMap, data.normalized );
-		}
-		// Cross-reference aliased titles.
-		for ( let i = 0; i < aliasMap.length; i++ ) {
-			// Only define the alias if the target exists, otherwise
-			// we create a new property with an invalid "undefined" value.
-			if ( hasOwn.call( specCache, aliasMap[ i ].to ) ) {
-				specCache[ aliasMap[ i ].from ] = specCache[ aliasMap[ i ].to ];
-			}
-		}
-	};
-
-	/**
-	 * @private
-	 * @param {jQuery.Promise} apiPromise
-	 */
-	ve.dm.MWTransclusionModel.prototype.markRequestAsDone = function ( apiPromise ) {
-		// Prune completed request
-		const index = this.templateDataApiRequests.indexOf( apiPromise );
-		if ( index !== -1 ) {
-			this.templateDataApiRequests.splice( index, 1 );
-		}
-	};
-
-	ve.dm.MWTransclusionModel.prototype.abortAllApiRequests = function () {
-		for ( let i = 0; i < this.templateDataApiRequests.length; i++ ) {
-			this.templateDataApiRequests[ i ].abort();
-		}
-		this.templateDataApiRequests.length = 0;
+		} );
 	};
 
 	/**
@@ -617,11 +564,7 @@
 		this.changeQueue = [];
 	};
 
-	// Temporary compatibility for https://github.com/femiwiki/Sanctions/pull/118. Remove when not
-	// needed any more.
-	mw.log.deprecate( ve.dm.MWTransclusionModel.prototype, 'abortRequests',
-		ve.dm.MWTransclusionModel.prototype.abortAllApiRequests,
-		'Use "abortAllApiRequests" instead.'
-	);
+	mw.log.deprecate( ve.dm.MWTransclusionModel.prototype, 'abortAllApiRequests', () => {}, 'This method is not longer necessary' );
+	mw.log.deprecate( ve.dm.MWTransclusionModel.prototype, 'markRequestAsDone', () => {}, 'This method is not longer necessary' );
 
 }() );
