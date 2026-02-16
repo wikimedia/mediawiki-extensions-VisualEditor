@@ -49,15 +49,39 @@
 	{
 		const setEditorPreference = mw.libs.ve.setEditorPreference,
 			dummySetEditorPreference = () => ve.createDeferred().resolve().promise(),
-			overrides = [
+			modelOverrides = [
 				ve.dm.MWHeadingNode,
 				ve.dm.MWPreformattedNode,
 				ve.dm.MWTableNode,
-				ve.dm.MWExternalLinkAnnotation
+				ve.dm.MWExternalLinkAnnotation,
+				ve.dm.MWInternalLinkAnnotation
 			],
-			overridden = [
+			modelOverridden = [
 				ve.dm.InlineImageNode,
 				ve.dm.BlockImageNode
+			],
+			viewOverrides = [
+				ve.ce.MWHeadingNode,
+				ve.ce.MWPreformattedNode,
+				ve.ce.MWTableNode,
+				ve.ce.MWExternalLinkAnnotation,
+				ve.ce.MWInternalLinkAnnotation
+			],
+			viewOverridden = [
+				ve.ce.InlineImageNode,
+				ve.ce.BlockImageNode
+			],
+			windowOverrides = [
+				ve.ui.MWLinkAnnotationInspector
+			],
+			windowOverridden = [
+				ve.ui.LinkAnnotationInspector
+			],
+			actionOverrides = [
+				ve.ui.MWLinkAction
+			],
+			actionOverridden = [
+				ve.ui.LinkAction
 			];
 
 		const corePlatform = ve.init.platform,
@@ -70,15 +94,20 @@
 		// Unregister mwTarget
 		ve.init.target = coreTarget;
 
+		const getViewFactory = ( view ) => view.prototype instanceof ve.ce.Node ? ve.ce.nodeFactory : ve.ce.annotationFactory;
+		const getModelFactory = ( model ) => model.prototype instanceof ve.dm.Node ? ve.dm.nodeFactory : ve.dm.annotationFactory;
+
+		const applyOverrides = ( factory, registers, unregisters ) => {
+			unregisters.forEach( ( item ) => ( typeof factory === 'function' ? factory( item ) : factory ).unregister( item ) );
+			registers.forEach( ( item ) => ( typeof factory === 'function' ? factory( item ) : factory ).register( item ) );
+		};
+
 		const setupOverrides = function () {
-			for ( let i = 0; i < overrides.length; i++ ) {
-				ve.dm.modelRegistry.register( overrides[ i ] );
-			}
-			for ( let i = 0; i < overridden.length; i++ ) {
-				ve.dm.modelRegistry.unregister( overridden[ i ] );
-			}
-			ve.ui.windowFactory.unregister( ve.ui.LinkAnnotationInspector );
-			ve.ui.windowFactory.register( ve.ui.MWLinkAnnotationInspector );
+			applyOverrides( ve.dm.modelRegistry, modelOverrides, modelOverridden );
+			applyOverrides( getModelFactory, modelOverrides, modelOverridden );
+			applyOverrides( getViewFactory, viewOverrides, viewOverridden );
+			applyOverrides( ve.ui.actionFactory, actionOverrides, actionOverridden );
+			applyOverrides( ve.ui.windowFactory, windowOverrides, windowOverridden );
 
 			ve.init.platform = mwPlatform;
 			ve.init.target = mwTarget;
@@ -89,12 +118,12 @@
 		};
 
 		const teardownOverrides = function () {
-			for ( let i = 0; i < overrides.length; i++ ) {
-				ve.dm.modelRegistry.unregister( overrides[ i ] );
-			}
-			for ( let i = 0; i < overridden.length; i++ ) {
-				ve.dm.modelRegistry.register( overridden[ i ] );
-			}
+			applyOverrides( ve.dm.modelRegistry, modelOverridden, modelOverrides );
+			applyOverrides( getModelFactory, modelOverridden, modelOverrides );
+			applyOverrides( getViewFactory, viewOverridden, viewOverrides );
+			applyOverrides( ve.ui.actionFactory, actionOverridden, actionOverrides );
+			applyOverrides( ve.ui.windowFactory, windowOverridden, windowOverrides );
+
 			ve.ui.windowFactory.unregister( ve.ui.MWLinkAnnotationInspector );
 			ve.ui.windowFactory.register( ve.ui.LinkAnnotationInspector );
 
