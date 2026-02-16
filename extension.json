@@ -2383,7 +2383,8 @@
 			"editcheck/modules/tests/YearLinkEditCheck.test.js",
 			"editcheck/modules/tests/HeadingLevelsEditCheck.test.js",
 			"editcheck/modules/tests/DoubleBoldEditCheck.test.js",
-			"editcheck/modules/tests/FakeHeadingsEditCheck.test.js"
+			"editcheck/modules/tests/FakeHeadingsEditCheck.test.js",
+			"editcheck/modules/tests/ImageCaptionEditCheck.test.js"
 		],
 		"dependencies": [
 			"ext.visualEditor.core",
