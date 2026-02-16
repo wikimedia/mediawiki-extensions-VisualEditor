@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.ui.MWLinkAction' );
+QUnit.module( 've.ui.MWLinkAction', ve.test.utils.newMwEnvironment() );
 
 /* Tests */
 
