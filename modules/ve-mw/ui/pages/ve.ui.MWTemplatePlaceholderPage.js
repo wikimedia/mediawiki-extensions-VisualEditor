@@ -98,6 +98,14 @@ ve.ui.MWTemplatePlaceholderPage = function VeUiMWTemplatePlaceholderPage( placeh
 
 OO.inheritClass( ve.ui.MWTemplatePlaceholderPage, OO.ui.PageLayout );
 
+/* Events */
+
+/**
+ * A template has been chosen and the placeholder has been replaced with a real template part.
+ *
+ * @event ve.ui.MWTemplatePlaceholderPage#templateChosen
+ */
+
 /* Methods */
 
 /**
@@ -116,6 +124,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
  * @private
  * @param {Object|undefined} templateData The chosen template's data (if TemplateDiscovery is
  *  enabled). The optional substPrefix property holds a {{subst:...}} magic word the user typed.
+ * @fires ve.ui.MWTemplatePlaceholderPage#templateChosen
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function ( templateData ) {
 	const transclusion = this.placeholder.getTransclusion();
@@ -165,9 +174,10 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function ( templateDat
 		// The magic word makes the name longer, so the title can get too long.
 		return;
 	}
-	transclusion.replacePart( this.placeholder, part ).then(
-		transclusion.addPromptedParameters.bind( transclusion )
-	);
+	transclusion.replacePart( this.placeholder, part ).then( () => {
+		transclusion.addPromptedParameters();
+		this.emit( 'templateChosen' );
+	} );
 	if ( !this.usingTemplateDiscovery ) {
 		this.addTemplateInput.pushPending();
 		// abort pending lookups, also, so the menu can't appear after we've left the page

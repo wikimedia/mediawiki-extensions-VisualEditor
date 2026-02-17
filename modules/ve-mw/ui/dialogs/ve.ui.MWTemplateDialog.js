@@ -67,10 +67,7 @@ ve.ui.MWTemplateDialog.static.bookletLayoutConfig = {};
 ve.ui.MWTemplateDialog.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.MWTemplateDialog.super.prototype.getReadyProcess.call( this, data )
 		.next( () => {
-			if ( this.transclusionModel.isEmpty() ) {
-				// Focus the template placeholder input field.
-				this.bookletLayout.focus();
-			}
+			this.bookletLayout.focus();
 
 			this.bookletLayout.getPagesOrdered().forEach( ( page ) => {
 				if ( page instanceof ve.ui.MWParameterPage ) {
@@ -240,11 +237,13 @@ ve.ui.MWTemplateDialog.prototype.getPageFromPart = function ( part ) {
 	if ( part instanceof ve.dm.MWTemplateModel ) {
 		return new ve.ui.MWTemplatePage( part, part.getId(), { $overlay: this.$overlay, isReadOnly: this.isReadOnly() } );
 	} else if ( part instanceof ve.dm.MWTemplatePlaceholderModel ) {
-		return new ve.ui.MWTemplatePlaceholderPage(
+		return ( new ve.ui.MWTemplatePlaceholderPage(
 			part,
 			part.getId(),
 			{ $overlay: this.$overlay }
-		);
+		) ).on( 'templateChosen', () => {
+			this.bookletLayout.focus();
+		} );
 	}
 	return null;
 };

@@ -119,7 +119,18 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onStackLayoutFocus = function 
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focus = function () {
 	const page = this.pages[ this.currentPageName ];
-	if ( !page ) {
+	if (
+		!page ||
+		// Don't auto-focus the template header page, find the first
+		// parameter page instead.
+		page instanceof ve.ui.MWTemplatePage
+	) {
+		for ( const p of this.getPagesOrdered() ) {
+			if ( p instanceof ve.ui.MWParameterPage ) {
+				p.focus();
+				return;
+			}
+		}
 		return;
 	}
 
