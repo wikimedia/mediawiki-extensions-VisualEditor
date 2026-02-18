@@ -63,7 +63,8 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 		for ( let i = range.start; i < range.end; i++ ) {
 			if ( documentModel.data.isElementData( i ) ) {
 				if ( documentModel.data.getType( i ) === 'mwReference' ) {
-					return true;
+					// Ignore placeholder refs (T417718)
+					return !ve.getProp( documentModel.data.data[ i ], 'attributes', 'placeholder' );
 				}
 
 				// Exclude references generated from sfn template (T407849)
