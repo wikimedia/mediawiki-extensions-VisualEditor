@@ -7,7 +7,8 @@ OO.inheritClass( mw.editcheck.PasteCheck, mw.editcheck.BaseEditCheck );
 
 mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	enabled: false,
-	minimumCharacters: 50
+	minimumCharacters: 50,
+	ignoreQuotedContent: true
 } );
 
 mw.editcheck.PasteCheck.static.title = OO.ui.deferMsg( 'editcheck-copyvio-title' );
@@ -35,11 +36,15 @@ mw.editcheck.PasteCheck.static.takesFocus = true;
 
 mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const pastesById = {};
-	surfaceModel.documentModel.documentNode.getAnnotationRanges().forEach( ( annRange ) => {
+	const doc = surfaceModel.getDocument();
+	doc.getDocumentNode().getAnnotationRanges().forEach( ( annRange ) => {
 		const annotation = annRange.annotation;
 		if ( annotation instanceof ve.dm.ImportedDataAnnotation && !annotation.getAttribute( 'source' ) ) {
 			const id = annotation.getAttribute( 'eventId' );
 			if ( this.isDismissedId( id ) ) {
+				return;
+			}
+			if ( !this.isRangeValid( annRange.range, doc ) ) {
 				return;
 			}
 			if ( annRange.range.getLength() < this.config.minimumCharacters ) {
