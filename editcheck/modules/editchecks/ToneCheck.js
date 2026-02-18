@@ -43,7 +43,8 @@ mw.editcheck.ToneCheck.static.choices = [
 ];
 
 mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	predictionThreshold: 0.8
+	predictionThreshold: 0.8,
+	ignoreQuotedContent: true
 } );
 
 mw.editcheck.AsyncTextCheck.static.queue = [];
