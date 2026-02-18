@@ -277,6 +277,9 @@ Controller.prototype.toggleSuggestionsMode = function () {
  * @fires EditCheckController#actionsUpdated
  */
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
+	if ( this.surface.getModel().isStaging() ) {
+		return this.getActions( listener );
+	}
 	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
 	// Create all actions for this listener
 	if ( this.suggestionsMode && !this.inBeforeSave ) {
