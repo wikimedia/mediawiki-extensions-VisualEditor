@@ -696,7 +696,7 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 		// You'd need a really weird range to manage this, but just in case
 		return false;
 	}
-	if ( closestBlockNode instanceof ve.dm.BlockquoteNode ) {
+	if ( closestBlockNode.hasMatchingAncestor( 'blockquote' ) ) {
 		return true;
 	}
 	// This is going to ignore template content, which might be non-ideal in

@@ -361,9 +361,13 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 		{ type: '/paragraph' },
 		//  26 - Beginning of blockquote
 		{ type: 'blockquote' },
-		//  27-37 - mixed quoted text
+		//  27 - Beginning of blockquote's internal paragraph
+		{ type: 'paragraph' },
+		//  28-38 - mixed quoted text
 		...mixedQuotedText,
-		//  38 - End of blockquote
+		//  38 - End of blockquote's internal paragraph
+		{ type: '/paragraph' },
+		//  39 - End of blockquote
 		{ type: '/blockquote' }
 	];
 	const cases = [
@@ -421,8 +425,8 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 			name: 'Blockquote',
 			config: { ignoreQuotedContent: true },
 			range: new ve.Range( 29, 30 ),
-			expectedState: false,
-			expectedValid: true
+			expectedState: true,
+			expectedValid: false
 		},
 		{
 			name: '"Smart" quotes',
