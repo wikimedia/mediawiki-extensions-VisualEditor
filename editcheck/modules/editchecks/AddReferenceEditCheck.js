@@ -91,10 +91,15 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 			return false;
 		}
 
-		// 6. If a paragraph is followed by a list, consider it to be part of this paragraph
-		//    for the purpose of this check, and exclude if it contains a reference (T405092)
+		// 6. If a paragraph is followed by a list, blockquote, or table, consider it to be part
+		//    of this paragraphfor the purpose of this check, and exclude if it contains
+		//    a reference (T405092)
 		const nextSibling = branchNode.parent.children[ branchNode.parent.indexOf( branchNode ) + 1 ];
-		if ( nextSibling instanceof ve.dm.ListNode ) {
+		if (
+			nextSibling instanceof ve.dm.ListNode ||
+			nextSibling instanceof ve.dm.BlockquoteNode ||
+			nextSibling instanceof ve.dm.TableNode
+		) {
 			const siblingRange = nextSibling.getRange();
 			if ( containsReference( siblingRange ) ) {
 				return false;
