@@ -13,7 +13,7 @@ describe( 'Content Editable', () => {
 		await LoginPage.loginAdmin();
 
 		await EditPage.openForEditing( name );
-		await EditPage.toolbar.waitForDisplayed( { timeout: 20000 } );
+		await EditPage.activationComplete();
 	} );
 
 	afterEach( async () => {
@@ -45,28 +45,24 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should insert a table', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '{|' );
 
 		await expect( await EditPage.insertedTable ).toBeDisplayed();
 	} );
 
 	it( 'should insert Bullet list', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '* ' );
 
 		await expect( await EditPage.insertedBulletList ).toBeDisplayed();
 	} );
 
 	it( 'should insert Numbered list', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '1. ' );
 
 		await expect( await EditPage.insertedNumberedList ).toBeDisplayed();
 	} );
 
 	it( 'should insert and indent Bullet list', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '* ' );
 
 		await expect( await EditPage.insertedBulletList ).toBeDisplayed();
@@ -77,7 +73,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should insert and indent Numbered list', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '1. ' );
 
 		await expect( await EditPage.insertedNumberedList ).toBeDisplayed();
@@ -88,7 +83,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should insert an internal link', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '[[' );
 
 		await expect( await EditPage.linkMenu ).toBeDisplayed();
@@ -100,7 +94,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should insert an external link', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '[[' );
 
 		await expect( await EditPage.linkMenu ).toBeDisplayed();
@@ -112,7 +105,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Page title', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Page title' );
 
 		await browser.keys( [ Key.Control, '1' ] );
@@ -120,7 +112,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Heading', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Heading' );
 
 		await browser.keys( [ Key.Control, '2' ] );
@@ -128,7 +119,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Sub-heading 1', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Sub-heading 1' );
 
 		await browser.keys( [ Key.Control, '3' ] );
@@ -136,7 +126,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Sub-heading 2', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Sub-heading 2' );
 
 		await browser.keys( [ Key.Control, '4' ] );
@@ -144,7 +133,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Sub-heading 3', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Sub-heading 3' );
 
 		await browser.keys( [ Key.Control, '5' ] );
@@ -152,7 +140,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Sub-heading 4', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Sub-heading 4' );
 
 		await browser.keys( [ Key.Control, '6' ] );
@@ -160,7 +147,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Preformatted', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Preformatted' );
 
 		await browser.keys( [ Key.Control, '7' ] );
@@ -168,7 +154,6 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change text to Block quote', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( 'Block quote' );
 
 		await browser.keys( [ Key.Control, '8' ] );
@@ -176,56 +161,48 @@ describe( 'Content Editable', () => {
 	} );
 
 	it( 'should change formatting to Bold', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, 'b' ] );
 
 		await expect( await EditPage.bold ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Italic', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, 'i' ] );
 
 		await expect( await EditPage.italic ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Superscript', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, '.' ] );
 
 		await expect( await EditPage.superscript ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Subscript', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, ',' ] );
 
 		await expect( await EditPage.subscript ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Computer code', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, Key.Shift, '6' ] );
 
 		await expect( await EditPage.code ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Strikethrough', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, Key.Shift, '5' ] );
 
 		await expect( await EditPage.strikethrough ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Underline', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await browser.keys( [ Key.Control, 'u' ] );
 
 		await expect( await EditPage.underline ).toBeDisplayed();
 	} );
 
 	it( 'should insert a comment', async () => {
-		await EditPage.veRootNode.waitForClickable( { timeout: 20000 } );
 		await EditPage.veRootNode.setValue( '<!--' );
 
 		await expect( await EditPage.commentMenu ).toBeDisplayed();
