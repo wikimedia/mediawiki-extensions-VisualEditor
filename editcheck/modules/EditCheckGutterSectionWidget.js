@@ -170,6 +170,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action, alignToTop ) {
 	const controller = this.controller;
 	const surface = controller.surface;
+	action.select( surface, false, false );
 	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
 	if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
@@ -185,9 +186,11 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
 			}
 		).then( () => {
-			// This is delayed to here because we need the scroll-position to
-			// account for this window being open.
-			this.controller.focusAction( action, true, alignToTop );
+			// Wait for window to open and new surface padding to be applied
+			// before trying to focus and scroll.
+			setTimeout( () => {
+				this.controller.focusAction( action, true, alignToTop );
+			}, OO.ui.theme.getDialogTransitionDuration() );
 		} );
 	} else {
 		this.controller.focusAction( action, true, alignToTop );

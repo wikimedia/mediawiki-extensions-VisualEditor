@@ -388,14 +388,19 @@ mw.editcheck.EditCheckAction.prototype.getTagName = function () {
  * @param {ve.ui.Surface} surface
  * @param {boolean} selectFocusRange Whether to select the focus range of the check,
  *  or just move the cursor to the nearest point in the selection if outside the check range
+ * @param {boolean} [focus=true] Activate and focus the surface
  */
-mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusRange ) {
+mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusRange, focus = true ) {
 	const surfaceModel = surface.getModel();
 	const surfaceView = surface.getView();
-	surfaceView.activate();
+	if ( focus ) {
+		surfaceView.activate();
+	}
 	if ( this.focusAnnotation ) {
 		surfaceModel.setSelection( this.getFocusSelection() );
-		surfaceView.selectAnnotation( this.focusAnnotation );
+		if ( focus ) {
+			surfaceView.selectAnnotation( this.focusAnnotation );
+		}
 	} else {
 		const checkRange = this.getFocusSelection().getCoveringRange();
 		if ( selectFocusRange || surfaceView.findFocusedNode( checkRange ) ) {
@@ -410,6 +415,8 @@ mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusR
 				surfaceModel.setLinearSelection( new ve.Range( checkRange.end ) );
 			}
 		}
-		surfaceView.focus();
+		if ( focus ) {
+			surfaceView.focus();
+		}
 	}
 };
