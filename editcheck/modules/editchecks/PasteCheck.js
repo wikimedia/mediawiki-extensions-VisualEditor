@@ -6,7 +6,6 @@ mw.editcheck.PasteCheck = function MWPasteCheck() {
 OO.inheritClass( mw.editcheck.PasteCheck, mw.editcheck.BaseEditCheck );
 
 mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	enabled: false,
 	minimumCharacters: 50,
 	ignoreQuotedContent: true
 } );
