@@ -47,8 +47,6 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.pageExists = mw.config.get( 'wgRelevantArticleId', 0 ) !== 0;
 	const enableVisualSectionEditing = mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing;
 	this.enableVisualSectionEditing = enableVisualSectionEditing === true || enableVisualSectionEditing === this.constructor.static.trackingName;
-	this.enableSectionEditingFullPageButtons = !!mw.config.get( 'wgVisualEditorConfig' ).enableSectionEditingFullPageButtons ||
-		mw.libs.ve.initialUrl.searchParams.has( 'vefullpagebuttons' );
 	this.toolbarScrollOffset = mw.config.get( 'wgVisualEditorToolbarScrollOffset', 0 );
 	this.currentUrl = new URL( location.href );
 	this.section = null;
@@ -392,14 +390,11 @@ ve.init.mw.ArticleTarget.prototype.setSurface = function ( surface ) {
 			const attachedRootRange = surfaceModel.getAttachedRoot().getOuterRange();
 			const documentRange = surfaceModel.getDocument().getDocumentRange();
 
-			if ( this.enableSectionEditingFullPageButtons ) {
-				if ( attachedRootRange.start !== 0 && OO.ui.isMobile() ) {
-					surface.getView().$element.prepend( this.$switchToFullPageContainerTop );
-				}
-
-				if ( attachedRootRange.end < documentRange.end ) {
-					surface.getView().$element.append( this.$switchToFullPageContainerBottom );
-				}
+			if ( attachedRootRange.start !== 0 && OO.ui.isMobile() ) {
+				surface.getView().$element.prepend( this.$switchToFullPageContainerTop );
+			}
+			if ( attachedRootRange.end < documentRange.end ) {
+				surface.getView().$element.append( this.$switchToFullPageContainerBottom );
 			}
 		} else {
 			this.$switchToFullPageContainerTop.detach();

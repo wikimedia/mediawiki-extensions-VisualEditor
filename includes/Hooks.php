@@ -1119,7 +1119,6 @@ class Hooks implements
 			'VisualEditorTabPosition',
 			'VisualEditorTabMessages',
 			'VisualEditorUseSingleEditTab',
-			'VisualEditorEnableSectionEditingFullPageButtons',
 			'VisualEditorEnableVisualSectionEditing',
 			'VisualEditorShowBetaWelcome',
 			'VisualEditorAllowExternalLinkPaste',
