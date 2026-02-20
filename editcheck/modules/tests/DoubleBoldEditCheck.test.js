@@ -58,6 +58,21 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/definitionList' }
 			],
 			expectedActions: 1
+		},
+		{
+			msg: 'Bold text either side of plain heading level 3',
+			data: [
+				{ type: 'paragraph' },
+				...ve.dm.example.annotateText( 'Bold text', ve.dm.example.bold ),
+				{ type: '/paragraph' },
+				{ type: 'mwHeading', attributes: { level: 3 } },
+				...'Heading',
+				{ type: '/mwHeading' },
+				{ type: 'paragraph' },
+				...ve.dm.example.annotateText( 'Bold text', ve.dm.example.bold ),
+				{ type: '/paragraph' }
+			],
+			expectedActions: 0
 		}
 	];
 

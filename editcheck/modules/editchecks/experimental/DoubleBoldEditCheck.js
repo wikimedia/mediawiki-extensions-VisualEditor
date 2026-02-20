@@ -28,7 +28,7 @@ mw.editcheck.DoubleBoldEditCheck.static.defaultConfig = ve.extendObject( {}, mw.
 
 mw.editcheck.DoubleBoldEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const documentModel = surfaceModel.getDocument();
-	let heading, cell, listItem;
+	let node, heading, cell, listItem;
 
 	const modified = this.getModifiedContentRanges( documentModel );
 	return documentModel.getDocumentNode().getAnnotationRanges()
@@ -36,17 +36,18 @@ mw.editcheck.DoubleBoldEditCheck.prototype.onDocumentChange = function ( surface
 			!this.isDismissedRange( annRange.range ) &&
 			this.isRangeInValidSection( annRange.range, documentModel ) &&
 			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
+			( node = documentModel.getBranchNodeFromOffset( annRange.range.start ) ) &&
 			(
 				(
-					( heading = documentModel.getNearestNodeMatching( 'mwHeading', annRange.range.start, -1, 0 ) ) &&
+					( heading = node.findParent( ve.dm.MWHeadingNode ) ) &&
 					heading.getAttribute( 'level' ) >= 3
 				) ||
 				(
-					( cell = documentModel.getNearestNodeMatching( 'tableCell', annRange.range.start, -1, 0 ) ) &&
+					( cell = node.findParent( ve.dm.TableCellNode ) ) &&
 					cell.getAttribute( 'style' ) === 'header'
 				) ||
 				(
-					( listItem = documentModel.getNearestNodeMatching( 'definitionListItem', annRange.range.start, -1, 0 ) ) &&
+					( listItem = node.findParent( ve.dm.DefinitionListItemNode ) ) &&
 					listItem.getAttribute( 'style' ) === 'term'
 				)
 			)
