@@ -55,7 +55,7 @@ class SpecialCollabPad extends SpecialPage {
 	public function getShortDescription( string $path = '' ): string {
 		switch ( $path ) {
 			case 'CollabPad':
-				return $this->msg( 'collabpad' );
+				return $this->msg( 'collabpad' )->text();
 			default:
 				return implode( '/', array_slice( explode( '/', $path ), 1 ) );
 		}
