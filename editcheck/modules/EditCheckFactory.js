@@ -130,7 +130,18 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 			ve.batchPush( actionOrPromiseList, actionsOrPromises );
 		}
 	} );
-	return Promise.all( actionOrPromiseList )
+	return mw.editcheck.allSettled( actionOrPromiseList )
+		.then( ( results ) => {
+			const actions = [];
+			for ( const result of results ) {
+				if ( result.status === 'fulfilled' ) {
+					actions.push( result.value );
+				} else {
+					mw.log.warn( 'Failed to check', result.reason );
+				}
+			}
+			return actions;
+		} )
 		.then( ( actions ) => (
 			// TODO: replace with `actions.flat()` when that's allowed
 			actions.reduce( ( acc, action ) => {

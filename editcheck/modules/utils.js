@@ -45,3 +45,21 @@ mw.editcheck.trackActionLinks = function ( $element, name, action ) {
 		ve.track( 'activity.editCheck-' + name, { action } );
 	} );
 };
+
+mw.editcheck.allSettled = function ( promises ) {
+	/* eslint-disable es-x/no-promise-all-settled */
+	if ( Promise.allSettled ) {
+		return Promise.allSettled( promises );
+	}
+	/* eslint-enable es-x/no-promise-all-settled */
+	return Promise.all( promises.map( ( promise ) => Promise.resolve( promise ).then(
+		( value ) => ( {
+			status: 'fulfilled',
+			value
+		} ),
+		( reason ) => ( {
+			status: 'rejected',
+			reason
+		} )
+	) ) );
+};

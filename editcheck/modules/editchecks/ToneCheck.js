@@ -103,7 +103,6 @@ mw.editcheck.ToneCheck.static.doCheckRequests = function () {
 			) ) } )
 		} )
 			.then( ( response ) => response.json() )
-			.catch( () => null )
 			.then( ( data ) => {
 				if ( data && data.predictions && subqueue.length === data.predictions.length ) {
 					subqueue.forEach( ( item, index ) => {
@@ -111,10 +110,13 @@ mw.editcheck.ToneCheck.static.doCheckRequests = function () {
 						item.deferred.resolve( prediction );
 					} );
 				} else {
-					subqueue.forEach( ( item ) => {
-						item.deferred.reject();
-					} );
+					throw new Error( 'Invalid response from edit-check:predict' );
 				}
+			} )
+			.catch( ( error ) => {
+				subqueue.forEach( ( item ) => {
+					item.deferred.reject( error );
+				} );
 			} );
 	}
 	this.queue = [];
