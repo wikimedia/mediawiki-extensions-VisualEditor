@@ -31,31 +31,34 @@
 				display: block;
 				overflow: hidden;
 				padding: 8px 0 8px 36px;
+				// Remove border radius. Border is removed in hover/active states.
+				border-radius: 0;
 				text-overflow: ellipsis;
-
-				&:hover,
-				&:focus {
-					background-color: @background-color-button-quiet--active;
-				}
-
-				/* click */
-				&:active {
-					background-color: @background-color-progressive-subtle;
-					color: @color-progressive;
-				}
 
 				> .oo-ui-iconElement-icon {
 					left: 10px;
 				}
 			}
 
-			/* selected */
-			&.oo-ui-optionWidget-selected > .oo-ui-buttonElement-button {
-				background-color: @background-color-progressive-subtle;
+			// Color styles copied from OO.ui.OutlineOptionWidget with some adjustments:
+			// - .oo-ui-optionWidget-highlighted is replaced with :hover
+			// - border color is removed
+			&:hover {
+				> .oo-ui-buttonElement-button {
+					background-color: @background-color-interactive;
+					color: @color-emphasized;
+					border-color: transparent;
+				}
+			}
 
-				&:hover {
-					background-color: @background-color-button-quiet--active;
+			// Color styles copied from OO.ui.OutlineOptionWidget with some adjustments:
+			// - .oo-ui-optionWidget-pressed is replaced with .oo-ui-buttonElement-pressed
+			&.oo-ui-optionWidget-selected,
+			&.oo-ui-buttonElement-pressed {
+				> .oo-ui-buttonElement-button {
+					background-color: @background-color-progressive-subtle;
 					color: @color-progressive;
+					border-color: transparent;
 				}
 			}
 		}
@@ -116,25 +119,23 @@
 		padding-top: 8px;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		transition-property: background-color, color;
+		transition-duration: @transition-duration-base;
 
-		/* click */
-		&:active {
+		// Color styles copied from OO.ui.OutlineOptionWidget:
+		&.oo-ui-optionWidget-highlighted {
+			background-color: @background-color-interactive;
+			color: @color-emphasized;
+		}
+
+		// Color styles copied from OO.ui.OutlineOptionWidget with some adjustments:
+		// - .oo-ui-optionWidget-selected is replaced with
+		//   .ve-ui-mwTransclusionOutlineParameterWidget-activePage so
+		//   that only the active page is highlighted, not all used parameters.
+		&.ve-ui-mwTransclusionOutlineParameterWidget-activePage,
+		&.oo-ui-optionWidget-pressed {
 			background-color: @background-color-progressive-subtle;
 			color: @color-progressive;
-		}
-
-		&.ve-ui-mwTransclusionOutlineParameterWidget-activePage {
-			background-color: @background-color-progressive-subtle;
-
-			&,
-			&.oo-ui-optionWidget-highlighted {
-				color: @color-progressive;
-			}
-		}
-
-		&.oo-ui-optionWidget-highlighted {
-			background-color: @background-color-button-quiet--active;
-			color: @color-emphasized;
 		}
 
 		&-hasValue {
