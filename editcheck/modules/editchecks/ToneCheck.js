@@ -103,6 +103,7 @@ mw.editcheck.ToneCheck.static.doCheckRequests = function () {
 			) ) } )
 		} )
 			.then( ( response ) => response.json() )
+			.catch( () => null )
 			.then( ( data ) => {
 				if ( data && data.predictions && subqueue.length === data.predictions.length ) {
 					subqueue.forEach( ( item, index ) => {

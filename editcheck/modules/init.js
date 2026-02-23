@@ -112,7 +112,8 @@ mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 		return ve.createDeferred().resolve( false ).promise();
 	}
 	return Promise.all( check.handleListener( 'onCheckAll', surfaceModel ) )
-		.then( ( results ) => results.some( ( result ) => result !== null ) );
+		.then( ( results ) => results.some( ( result ) => result !== null ) )
+		.catch( () => {} );
 };
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
