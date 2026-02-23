@@ -345,6 +345,9 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			}
 			// Return the updated actions
 			return actions;
+		} ).catch( ( error ) => {
+			mw.log.error( 'Could not update for listener: ' + listener, error );
+			return [];
 		} );
 };
 
