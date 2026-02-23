@@ -115,7 +115,7 @@ ve.dm.MWInlineImageNode.static.toDataElement = function ( domElements, converter
 
 	// Vertical alignment
 	attributes.valign = 'default';
-	for ( const valign of [ 'midde', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' ] ) {
+	for ( const valign of [ 'middle', 'baseline', 'sub', 'super', 'top', 'text-top', 'bottom', 'text-bottom' ] ) {
 		const className = 'mw-valign-' + valign;
 		if ( classes.includes( className ) ) {
 			attributes.valign = valign;
