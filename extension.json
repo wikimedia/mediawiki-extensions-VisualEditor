@@ -2377,6 +2377,7 @@
 			"editcheck/modules/tests/utils.js",
 			"editcheck/modules/tests/BaseEditCheck.test.js",
 			"editcheck/modules/tests/EditCheckAction.test.js",
+			"editcheck/modules/tests/EditCheckFactory.test.js",
 			"editcheck/modules/tests/YearLinkEditCheck.test.js",
 			"editcheck/modules/tests/HeadingLevelsEditCheck.test.js",
 			"editcheck/modules/tests/DoubleBoldEditCheck.test.js",
