@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"GrogeXaKaba",
+			"Letra.berdi",
 			"Quintino Lopes Castro Tavares",
 			"Waldir",
 			"Waldyrious"
 		]
 	},
-	"tooltip-ca-ve-edit": "Muda es pájina li",
-	"visualeditor-ca-editsource": "Muda kódigu",
-	"visualeditor-ca-editsource-section": "muda kódigu",
-	"visualeditor-descriptionpagelink": "Project:Editor Vizual"
+	"tooltip-ca-ve-edit": "Idita es pájina li",
+	"visualeditor-ca-editsource": "Idita kódi-fonti",
+	"visualeditor-ca-editsource-section": "idita kódi",
+	"visualeditor-descriptionpagelink": "Project:Iditor Vizual",
+	"visualeditor-section-title-placeholder": "Asuntu"
 }

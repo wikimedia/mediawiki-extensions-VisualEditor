@@ -285,6 +285,7 @@
 	"visualeditor-educationpopup-dismiss": "C’est bon, allons-y",
 	"visualeditor-expandable-less": "Moins",
 	"visualeditor-expandable-more": "Plus",
+	"visualeditor-expandableerror-toggle": "Modifier la visibilité",
 	"visualeditor-feedback-defaultmessage": "URL : $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Titre de la page",
 	"visualeditor-formatdropdown-format-mw-heading2": "Titre de section",

@@ -6,6 +6,7 @@
 		]
 	},
 	"tooltip-ca-ve-edit": "Воа̄йхэ тэнн лыст",
+	"tooltip-ca-editsource": "Воа̄йхэ тэнн лыст ка̄йв текст",
 	"visualeditor-advancedsettings-tool": "Лашшь оа̄ссмуж",
 	"visualeditor-autosave-modified-prompt-accept": "Ю̄ттҍкэ воа̄йхэмуж",
 	"visualeditor-autosave-recovered-title": "Воа̄йхэз ле̄в моа̄ст ма̄цьха",
@@ -34,6 +35,7 @@
 	"visualeditor-dialog-meta-categories-input-newcategorylabel": "О̄дт категорья",
 	"visualeditor-dialog-meta-categories-input-placeholder": "Лажьхэ категорья",
 	"visualeditor-dialog-meta-categories-section": "Категорья",
+	"visualeditor-dialog-meta-categories-sortkey-label": "Со̄рртлаһтӭ тэнн лыст нэ̄м мӣлльтэ",
 	"visualeditor-dialog-meta-languages-code-label": "Кӣл ко̄дт",
 	"visualeditor-dialog-meta-languages-label": "Кӣл",
 	"visualeditor-dialog-meta-languages-link-label": "Ко̄рръя лысст",
@@ -100,6 +102,7 @@
 	"visualeditor-mwgallerydialog-classes-field-label": "CSS кла̄сс",
 	"visualeditor-mwgallerydialog-empty-gallery-message": "Галерея лӣ курас.",
 	"visualeditor-mwgallerydialog-heights-field-label": "Ка̄вь э̄ллвудт",
+	"visualeditor-mwgallerydialog-mode-field-label": "Вуэзхэллэм на̄лль",
 	"visualeditor-mwgallerydialog-search-button-label": "Лажьхэ о̄дт ка̄вь",
 	"visualeditor-mwgallerydialog-show-filename-field-label": "Вӯзьхэ фа̄йлэ нэ̄мэтҍ",
 	"visualeditor-mwgallerydialog-styles-field-label": "CSS стӣль",

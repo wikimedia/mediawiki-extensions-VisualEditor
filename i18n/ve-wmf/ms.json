@@ -22,8 +22,6 @@
 	"tag-editcheck-tone-shown-description": "Penyemak Suntingan berpendapat pelarasan pada nada dalam sesetengah kandungan mungkin diperlukan, dan UI telah ditunjukkan",
 	"tag-editcheck-paste-shown": "Penyemak Suntingan (tampal) ditunjukkan",
 	"tag-editcheck-paste-shown-description": "Penyemak Suntingan meminta penjelasan berkenaan kandungan yang disalin tampal oleh penyunting, yang kemudiannya sama ada perlu dibuang atau boleh dibenarkan",
-	"tag-editsuggestion-visible": "Semakan Suntingan telah dilihat",
-	"tag-editsuggestion-visible-description": "Sekurang-kurangnya satu semakan atau cadangan suntingan mungkin telah dilihat oleh pengguna",
 	"tag-visualeditor": "Suntingan visual",
 	"tag-visualeditor-description": "Disunting menggunakan [[{{MediaWiki:visualeditor-descriptionpagelink}}|alat sunting visual]]",
 	"tag-visualeditor-needcheck": "Suntingan visual: Semak",

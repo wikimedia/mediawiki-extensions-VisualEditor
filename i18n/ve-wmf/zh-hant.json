@@ -40,8 +40,6 @@
 	"tag-editcheck-tone-shown-description": "編輯檢查認為編輯內容的語調可能需要調整，並顯示了UI",
 	"tag-editcheck-paste-shown": "編輯檢查（貼上）已顯示",
 	"tag-editcheck-paste-shown-description": "編輯檢查要求編輯者澄清所貼上的內容，其接下來不是被移除、就是被確認為允許的內容。",
-	"tag-editsuggestion-visible": "編輯檢查已看到",
-	"tag-editsuggestion-visible-description": "使用者很可能至少有看到過一次編輯檢查或建議事項",
 	"tag-visualeditor": "視覺化編輯",
 	"tag-visualeditor-description": "使用[[{{MediaWiki:visualeditor-descriptionpagelink}}|視覺化編輯器]]完成的編輯",
 	"tag-visualeditor-needcheck": "視覺化編輯器：需要檢查",
