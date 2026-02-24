@@ -44,7 +44,10 @@ mw.editcheck.RequiredTemplateParamsEditCheck.prototype.onDocumentChange = functi
 					return ve.createDeferred().resolve( false ).promise();
 				}
 				return ve.init.platform.templateDataCache.get( title.getPrefixedText() ).then(
-					( spec ) => Object.entries( spec.params ).some(
+					// Check if any of the params in the template spec are required
+					// and missing from the transclusion.
+					// spec.params can be unset for missing templates
+					( spec ) => !!spec.params && Object.entries( spec.params ).some(
 						( [ name, value ] ) => value.required && !(
 							part.params && part.params[ name ] && part.params[ name ].wt.trim()
 						)
