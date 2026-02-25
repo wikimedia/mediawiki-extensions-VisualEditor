@@ -29,7 +29,16 @@ mw.editcheck.ImageCaptionEditCheck.static.choices = [
 mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.getAddedNodes( surfaceModel.getDocument(), 'mwBlockImage' )
 		.filter( ( image ) => !this.isDismissedRange( image.getOuterRange() ) )
-		.filter( ( image ) => image.children[ 0 ] && image.children[ 0 ].getType() === 'mwImageCaption' && image.children[ 0 ].length === 2 )
+		.filter( ( image ) => (
+			// The image contains a caption
+			image.children[ 0 ] && image.children[ 0 ].getType() === 'mwImageCaption' &&
+			// There's no content inside the caption node (it'll always contain at least an empty paragraph)
+			image.children[ 0 ].length === 2 &&
+			// But make sure the node inside the caption *could* contain
+			// content; if not, it's probably a template or similar, and
+			// should count as a caption being set
+			image.children[ 0 ].children[ 0 ].canContainContent()
+		) )
 		.map( ( image ) => new mw.editcheck.EditCheckAction( {
 			check: this,
 			fragments: [ surfaceModel.getLinearFragment( image.getOuterRange() ) ]

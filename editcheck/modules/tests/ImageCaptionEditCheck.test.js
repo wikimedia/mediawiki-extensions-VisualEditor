@@ -18,6 +18,18 @@ QUnit.test( 'onBranchNodeChange', ( assert ) => {
 			msg: 'Non-empty caption',
 			data: ve.copy( ve.dm.mwExample.MWBlockImage.data ),
 			expectedActions: 0
+		},
+		{
+			msg: 'Non-empty caption, contents are a block transclusion',
+			data: [
+				ve.copy( ve.dm.mwExample.MWBlockImage.data[ 0 ] ),
+				{ type: 'mwImageCaption' },
+				ve.copy( ve.dm.mwExample.MWTransclusion.blockData ),
+				{ type: '/mwTransclusionBlock' },
+				{ type: '/mwImageCaption' },
+				{ type: '/mwBlockImage' }
+			],
+			expectedActions: 0
 		}
 	];
 
