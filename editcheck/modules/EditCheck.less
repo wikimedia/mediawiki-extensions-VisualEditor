@@ -445,10 +445,6 @@
 	&-active,
 	&-inactive {
 		.ve-ce-surface-selection {
-			&-rects {
-				opacity: 0.2;
-			}
-
 			&-rect {
 				border-radius: 2px;
 				padding: 2px;
@@ -516,26 +512,30 @@
 	&-active .ve-ce-surface-selection-editCheck,
 	&-inactive .ve-ce-surface-selection-editCheck-highlighted.ve-ce-surface-selection-editCheck {
 		&-warning .ve-ce-surface-selection-rect {
-			// Adjust target colours to account for 50% opacity
-			// @background-color-warning-subtle
-			background: ( ( #fdf2d5 - 0.7 * ( #fff ) ) / 0.3 );
+			background: @background-color-warning-subtle;
 		}
 
 		&-error .ve-ce-surface-selection-rect {
-			// @background-color-error-subtle
-			background: ( ( #ffe9e5 - 0.7 * ( #fff ) ) / 0.3 );
+			background: @background-color-error-subtle;
 		}
 
 		&-progressive .ve-ce-surface-selection-rect {
-			// @background-color-progressive-subtle
-			background: ( ( #e8eeff - 0.7 * ( #fff ) ) / 0.3 );
+			background: @background-color-progressive-subtle;
 		}
 	}
 
 	&-inactive {
+		.ve-ce-surface-selection {
+			transition: opacity @transition-duration-base;
+			opacity: @opacity-medium;
+		}
+
+		.ve-ce-surface-selection-editCheck-highlighted {
+			opacity: @opacity-base;
+		}
+
 		.ve-ce-surface-selection-rect {
-			// @background-color-interactive-subtle
-			background: ( ( #f8f9fa - 0.9 * ( #fff ) ) / 0.1 );
+			background: @background-color-interactive;
 		}
 	}
 }
