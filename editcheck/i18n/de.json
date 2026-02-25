@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Brettchenweber"
+			"Brettchenweber",
+			"Volvox"
 		]
 	},
 	"editchecks": "Bearbeitungprüfungen",
@@ -47,7 +48,7 @@
 	"editcheck-tone-thank": "Danke, dass du den Tonfall überarbeitet hast!",
 	"editcheck-reject-description": "Andere Benutzer würden es schätzen, zu erfahren, warum du diese Wahl getroffen hast.",
 	"editcheck-review-title": "Änderungen überprüfen",
-	"editcheck-specialeditchecks-info": "Bearbeitungsprüfungen werden unter [[MediaWiki:Editcheck-config.json]] konfiguriert. Die Dokumentation steht auf [https://www.mediawiki\n.org/wiki/Edit_check/Configuration Bearbeitungsprüfung/Konfiguration].",
+	"editcheck-specialeditchecks-info": "Bearbeitungsprüfungen werden unter [[MediaWiki:Editcheck-config.json]] konfiguriert. Die Dokumentation steht auf [https://www.mediawiki.org/wiki/Edit_check/Configuration Bearbeitungsprüfung/Konfiguration].",
 	"editcheck-specialeditchecks-header-abtest": "A/B-Test-Prüfungen",
 	"editcheck-specialeditchecks-header-base": "Grundkonfiguration",
 	"editcheck-specialeditchecks-header-betafeatures": "Beta-Funktionen",
