@@ -1124,6 +1124,7 @@ class Hooks implements
 			'VisualEditorEnableWikitext',
 			'VisualEditorRebaserURL',
 			'VisualEditorFeedbackAPIURL',
+			'VisualEditorSuggestionFeedbackAPIURL',
 			'VisualEditorUseChangeTagging',
 			'VisualEditorEditCheckTagging',
 			'VisualEditorEditCheck',
@@ -1131,6 +1132,7 @@ class Hooks implements
 			'VisualEditorEditCheckLoadExperimental',
 			'VisualEditorFeedbackTitle',
 			'VisualEditorSourceFeedbackTitle',
+			'VisualEditorSuggestionFeedbackTitle',
 			'VisualEditorMobileInsertMenu',
 		];
 

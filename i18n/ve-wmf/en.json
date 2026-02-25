@@ -54,6 +54,7 @@
 	"tag-visualeditor-switched-helppage": "{{MediaWiki:visualeditor-descriptionpagelink}}",
 	"visualeditor-feedback-link": "Project:VisualEditor/Feedback",
 	"visualeditor-feedback-source-link": "{{int:visualeditor-feedback-link}}",
+	"visualeditor-suggestionfeedback-link": "Talk:VisualEditor/Suggestion_Mode/Feedback",
 	"visualeditor-feedback-tool": "Leave feedback about this software",
 	"visualeditor-help-label": "Read the user guide",
 	"visualeditor-help-link": "//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide",

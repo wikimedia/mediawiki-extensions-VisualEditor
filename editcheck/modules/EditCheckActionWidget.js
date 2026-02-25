@@ -78,8 +78,6 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	if ( this.suggestion ) {
 		this.$element.addClass( 've-ui-editCheckActionWidget-suggestion' );
 
-		const wikiID = mw.config.get( 'wgWikiID' ),
-			pageName = mw.config.get( 'wgRelevantPageName' );
 		const suggestionFeedbackMenuSelect = new OO.ui.ButtonMenuSelectWidget( {
 			label: ve.msg( 'visualeditor-feedback-tool' ),
 			icon: 'ellipsis',
@@ -96,20 +94,21 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 						label: 'About Suggestions'
 					} ),
 					new OO.ui.MenuOptionWidget( {
-						data: '//www.mediawiki.org/wiki/Talk:VisualEditor/Suggestion_Mode/Feedback' +
-							'?action=edit&section=new&dtpreload=1&preloadtitle=' +
-							encodeURIComponent( `${ this.name } on ${ pageName } at ${ wikiID }` ),
+						data: 'feedback',
 						label: 'Report a problem'
 					} )
 				]
 			}
 		} );
 		suggestionFeedbackMenuSelect.getMenu().on( 'choose', ( menuOption ) => {
-			const url = menuOption.getData();
-			if ( !url ) {
+			const choice = menuOption.getData();
+			if ( choice === 'feedback' ) {
+				this.onFeedbackSelect();
+			} else if ( !choice ) {
 				return;
+			} else {
+				window.open( choice );
 			}
-			window.open( url );
 		} );
 		this.$actions.append( suggestionFeedbackMenuSelect.$element );
 	}
@@ -150,6 +149,38 @@ mw.editcheck.EditCheckActionWidget.static.iconMap.progressive = 'lightbulb';
 mw.editcheck.EditCheckActionWidget.prototype.setMode = function ( mode ) {
 	this.mode = mode;
 	this.actions.setMode( mode );
+};
+
+/**
+ * Open suggestion mode feedback dialog
+ */
+mw.editcheck.EditCheckActionWidget.prototype.onFeedbackSelect = function () {
+	const wikiID = mw.config.get( 'wgWikiID' ),
+		pageName = mw.config.get( 'wgRelevantPageName' );
+	const contents = {
+		subject: `${ this.name } on ${ pageName } at ${ wikiID }`
+	};
+	if ( !this.feedbackPromise ) {
+		this.feedbackPromise = mw.loader.using( 'mediawiki.feedback' ).then( () => {
+
+			const feedbackConfig = {
+				bugsLink: 'https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?project=PHID-PROJ-g4joo7tiwslypfpk5lkv'
+			};
+
+			const veConfig = mw.config.get( 'wgVisualEditorConfig' );
+			if ( veConfig.suggestionFeedbackAPIURL ) {
+				feedbackConfig.apiUrl = veConfig.suggestionFeedbackAPIURL;
+				feedbackConfig.title = new mw.Title( veConfig.suggestionFeedbackTitle );
+			} else {
+				feedbackConfig.title = new mw.Title( ve.msg( 'visualeditor-suggestionfeedback-link' ) );
+			}
+
+			return new mw.Feedback( feedbackConfig );
+		} );
+	}
+	this.feedbackPromise.then( ( feedback ) => {
+		feedback.launch( contents );
+	} );
 };
 
 /**
