@@ -24,7 +24,7 @@
 	"tag-editcheck-references-description": "EditCheck thinks a reference might have been needed",
 	"tag-editcheck-references-activated": "Edit Check (references) activated",
 	"tag-editcheck-references-activated-description": "EditCheck thinks a reference might have been needed, and the UI was shown",
-	"tag-editcheck-references-activated-helppage": "mediawikiwiki:Special:MyLanguage/Edit check/False positives",
+	"tag-editcheck-references-activated-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#ref",
 	"tag-editcheck-references-shown": "Edit Check (references) shown",
 	"tag-editcheck-references-shown-description": "EditCheck thinks a reference might have been needed, and the UI was shown",
 	"tag-editcheck-references-shown-helppage": "mediawikiwiki:Special:MyLanguage/Edit check/False positives",
