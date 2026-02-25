@@ -147,7 +147,9 @@ Controller.prototype.setup = function () {
 			// Track checks that are not just triggered (shown) but expanded (seen),
 			// based on the definitions decided on in T412334
 			mw.editcheck.checksSeen = {};
+			mw.editcheck.checksUsed = {};
 			mw.editcheck.suggestionsSeen = {};
+			mw.editcheck.suggestionsUsed = {};
 
 			$( document.documentElement ).removeClass( 've-editcheck-available' );
 			window.dispatchEvent( new Event( 'resize' ) );
@@ -326,6 +328,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 
 			newActions.forEach( ( action ) => {
 				action.once( 'seen', this.onActionSeen.bind( this, action ) );
+				action.on( 'act', this.onActionAct, [ action ], this );
 			} );
 
 			// If the actions list changed, update
@@ -960,6 +963,30 @@ Controller.prototype.onActionSeen = function ( action ) {
 	} else {
 		mw.editcheck.checksSeen[ action.getName() ] = true;
 		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-seen-' + moment } );
+	}
+};
+
+/**
+ * Handle instrumentation and tracking when an action is used
+ *
+ * @param {mw.editcheck.EditCheckAction} action that was used
+ * @param {Promise|jQuery.Promise} promise that will resolve when the action finishes
+ * @param {string} actionTaken name of the action taken
+ */
+Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
+	ve.track( 'activity.editCheck-' + action.getName(), {
+		action: ( action.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionTaken || 'unknown' )
+	} );
+	const dismissalActions = [ 'dismiss', 'reject', 'keep' ];
+	if ( dismissalActions.includes( actionTaken ) ) {
+		// These are actions that represent "don't change anything", and so
+		// don't count as the check having been used
+		return;
+	}
+	if ( action.isSuggestion() ) {
+		mw.editcheck.suggestionsUsed[ action.getName() ] = true;
+	} else {
+		mw.editcheck.checksUsed[ action.getName() ] = true;
 	}
 };
 

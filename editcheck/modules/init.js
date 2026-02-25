@@ -25,7 +25,9 @@ mw.editcheck = {
 	suggestions: suggestionsPref,
 	checksShown: {},
 	checksSeen: {},
-	suggestionsSeen: {}
+	checksUsed: {},
+	suggestionsSeen: {},
+	suggestionsUsed: {}
 };
 
 if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
@@ -170,6 +172,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 				}
 				if ( Object.keys( mw.editcheck.suggestionsSeen ).length > 0 ) {
 					tags.push( 'editsuggestion-seen' );
+				}
+				if ( Object.keys( mw.editcheck.suggestionsUsed ).length > 0 ) {
+					tags.push( 'editsuggestion-used' );
 				}
 				if ( hasFailingToneCheck ) {
 					tags.push( 'editcheck-tone' );

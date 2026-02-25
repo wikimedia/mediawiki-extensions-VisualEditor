@@ -38,6 +38,8 @@
 	"tag-editcheck-paste-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#Paste_check",
 	"tag-editsuggestion-seen": "Edit Suggestion seen",
 	"tag-editsuggestion-seen-description": "At least one edit suggestion was likely seen by the user",
+	"tag-editsuggestion-used": "Edit Suggestion used",
+	"tag-editsuggestion-used-description": "At least one edit suggestion was acted upon by the user",
 	"tag-visualeditor": "Visual edit",
 	"tag-visualeditor-description": "Edit made using the [[{{MediaWiki:visualeditor-descriptionpagelink}}|visual editor]]",
 	"tag-visualeditor-helppage": "{{MediaWiki:visualeditor-descriptionpagelink}}",

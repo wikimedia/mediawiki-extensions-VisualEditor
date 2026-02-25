@@ -242,10 +242,7 @@ mw.editcheck.EditCheckAction.prototype.setMode = function ( mode ) {
  */
 mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actionWidget ) {
 	const promise = this.check.act( actionWidget.action, this, surface );
-	this.emit( 'act', promise || ve.createDeferred().resolve().promise() );
-	ve.track( 'activity.editCheck-' + this.getName(), {
-		action: ( this.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionWidget.getAction() || 'unknown' )
-	} );
+	this.emit( 'act', promise || ve.createDeferred().resolve().promise(), actionWidget.action );
 };
 
 /**
