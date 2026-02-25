@@ -5,12 +5,24 @@
  * link label text is a different year. This often happens when
  * users update years in the article text but forget to update
  * the link target.
+ *
+ * @class
+ * @extends mw.editcheck.LinkEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
  */
 mw.editcheck.YearLinkEditCheck = function MWYearLinkEditCheck() {
 	mw.editcheck.YearLinkEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.LinkEditCheck );
+
+/* Static properties */
 
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
 
@@ -36,6 +48,8 @@ mw.editcheck.YearLinkEditCheck.static.choices = [
 ];
 
 mw.editcheck.YearLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
+/* Methods */
 
 /**
  * Extract a single year from the given text.
@@ -125,5 +139,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 	// Parent method
 	return mw.editcheck.YearLinkEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.YearLinkEditCheck );

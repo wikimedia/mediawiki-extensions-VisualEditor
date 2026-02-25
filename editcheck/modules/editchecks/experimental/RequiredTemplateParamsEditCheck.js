@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect missing required template parameters
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.RequiredTemplateParamsEditCheck = function MWRequiredTemplateParamsEditCheck() {
 	// Parent constructor
 	mw.editcheck.RequiredTemplateParamsEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.RequiredTemplateParamsEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.RequiredTemplateParamsEditCheck.static.title = 'Template has missing parameters';
 
@@ -29,6 +44,8 @@ mw.editcheck.RequiredTemplateParamsEditCheck.static.choices = [
 mw.editcheck.RequiredTemplateParamsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	enabled: false
 } );
+
+/* Methods */
 
 mw.editcheck.RequiredTemplateParamsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const doc = surfaceModel.getDocument();
@@ -78,5 +95,7 @@ mw.editcheck.RequiredTemplateParamsEditCheck.prototype.act = function ( choice, 
 	// Parent method
 	return mw.editcheck.RequiredTemplateParamsEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.RequiredTemplateParamsEditCheck );

@@ -1,3 +1,15 @@
+/**
+ * Edit check to detect issues with the tone of an edit, e.g. promotional or non-neutral language.
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {number} [config.predictionThreshold=0.8] Threshold for the prediction value, between 0.5 and 1
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Parent constructor
 	mw.editcheck.ToneCheck.super.apply( this, arguments );
@@ -5,6 +17,8 @@ mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Bind with no arguments so it can be used as an event listener
 	this.showSuccessHandler = this.showSuccess.bind( this );
 };
+
+/* Inheritance */
 
 OO.inheritClass( mw.editcheck.ToneCheck, mw.editcheck.AsyncTextCheck );
 
@@ -124,7 +138,7 @@ mw.editcheck.ToneCheck.static.doCheckRequests = function () {
 
 mw.editcheck.ToneCheck.static.doCheckRequestsDebounced = ve.debounce( mw.editcheck.ToneCheck.static.doCheckRequests, 1 );
 
-/* Instance methods */
+/* Methods */
 
 /**
  * @inheritdoc
@@ -260,5 +274,7 @@ mw.editcheck.ToneCheck.prototype.onSuccess = function ( action ) {
 	this.showSuccess();
 	this.controller.removeAction( 'onBranchNodeChange', action, false );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ToneCheck );

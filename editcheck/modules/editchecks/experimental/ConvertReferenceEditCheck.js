@@ -1,15 +1,30 @@
+/**
+ * Edit check to detect references that can be converted to use a citation template
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {string} [config.strict='url-only'] How strict to be in determining whether a reference is convertible:
+ * - 'url-only': the reference must entirely consist of only a single URL
+ * - 'covered': the reference must be entirely covered by a single link annotation
+ * - 'any': anything that the context item triggers for counts
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.ConvertReferenceEditCheck = function MWConvertReferenceEditCheck() {
 	// Parent constructor
 	mw.editcheck.ConvertReferenceEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCheck );
 
+/* Static properties */
+
 mw.editcheck.ConvertReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	// strict can be, in descending order of strictness:
-	// * 'url-only': the reference must entirely consist of only a single URL
-	// * 'covered': the reference must be entirely covered by a single link annotation
-	// * 'any': anything that the context item triggers for counts
 	strict: 'url-only'
 } );
 
@@ -29,6 +44,8 @@ mw.editcheck.ConvertReferenceEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
+
+/* Methods */
 
 mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const seenIndexes = {};
@@ -102,5 +119,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.act = function ( choice, action
 	// Parent method
 	return mw.editcheck.ConvertReferenceEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ConvertReferenceEditCheck );

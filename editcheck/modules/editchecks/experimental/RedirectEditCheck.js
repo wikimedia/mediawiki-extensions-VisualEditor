@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect links to redirect pages
+ *
+ * @class
+ * @extends mw.editcheck.LinkEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.RedirectEditCheck = function MWRedirectEditCheck() {
 	// Parent constructor
 	mw.editcheck.RedirectEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.RedirectEditCheck, mw.editcheck.LinkEditCheck );
+
+/* Static properties */
 
 mw.editcheck.RedirectEditCheck.static.title = 'Link to the final page';
 
@@ -31,6 +46,8 @@ mw.editcheck.RedirectEditCheck.static.defaultConfig = ve.extendObject( {}, mw.ed
 } );
 
 mw.editcheck.RedirectEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
+/* Methods */
 
 mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const checkRedirect = ( annotation ) => ve.init.platform.linkCache.get(
@@ -88,5 +105,7 @@ mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surfac
 	// Parent method
 	return mw.editcheck.RedirectEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.RedirectEditCheck );

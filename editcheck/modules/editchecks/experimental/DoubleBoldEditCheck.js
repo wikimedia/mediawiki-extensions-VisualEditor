@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect unnecessary bold formatting
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.DoubleBoldEditCheck = function MWDoubleBoldEditCheck() {
 	// Parent constructor
 	mw.editcheck.DoubleBoldEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.DoubleBoldEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.DoubleBoldEditCheck.static.title = 'Remove unnecessary bold formatting';
 
@@ -25,6 +40,8 @@ mw.editcheck.DoubleBoldEditCheck.static.choices = [
 mw.editcheck.DoubleBoldEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	enabled: false
 } );
+
+/* Methods */
 
 mw.editcheck.DoubleBoldEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const documentModel = surfaceModel.getDocument();
@@ -66,5 +83,7 @@ mw.editcheck.DoubleBoldEditCheck.prototype.act = function ( choice, action, surf
 	// Parent method
 	mw.editcheck.DoubleBoldEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.DoubleBoldEditCheck );

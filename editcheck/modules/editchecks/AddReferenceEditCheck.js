@@ -1,9 +1,25 @@
+/**
+ * Edit check to prompt users to add a reference if they have added a large enough paragraph without adding any references.
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [config.beforePunctuation=false] Insert the reference before any trailing punctuation
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.AddReferenceEditCheck = function MWAddReferenceEditCheck() {
 	// Parent constructor
 	mw.editcheck.AddReferenceEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.AddReferenceEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.AddReferenceEditCheck.static.name = 'addReference';
 
@@ -34,6 +50,8 @@ mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, m
 
 mw.editcheck.AddReferenceEditCheck.static.onlyCoveredNodes = true;
 
+/* Methods */
+
 mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.findAddedContent( surfaceModel.getDocument() ).filter( ( range ) => !this.isDismissedRange( range ) )
 		.map(
@@ -43,8 +61,9 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 			} )
 		);
 };
-// Only show these before save (for now)
+
 mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
+	// Show mid-edit in suggestion mode only (for now)
 	if ( this.includeSuggestions || mw.editcheck.suggestions ) {
 		return mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave.apply( this, arguments );
 	}
@@ -78,12 +97,12 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 	// Broken out so a helper for tagging can call it
 	const ranges = this.getAddedContentRanges( documentModel ).filter( ( range ) => {
 		if ( !includeReferencedContent ) {
-			// 4. Exclude any ranges that already contain references
+			// Exclude any ranges that already contain references
 			if ( containsReference( range ) ) {
 				return false;
 			}
 		}
-		// 5. Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
+		// Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
 		const branchNode = documentModel.getBranchNodeFromOffset( range.start );
 		if ( branchNode.getParent() !== documentModel.attachedRoot ) {
 			return false;
@@ -91,9 +110,9 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 			return false;
 		}
 
-		// 6. If a paragraph is followed by a list, blockquote, or table, consider it to be part
-		//    of this paragraphfor the purpose of this check, and exclude if it contains
-		//    a reference (T405092)
+		// If a paragraph is followed by a list, blockquote, or table, consider it to be part
+		// of this paragraphfor the purpose of this check, and exclude if it contains
+		// a reference (T405092)
 		const nextSibling = branchNode.parent.children[ branchNode.parent.indexOf( branchNode ) + 1 ];
 		if (
 			nextSibling instanceof ve.dm.ListNode ||
@@ -218,6 +237,6 @@ mw.editcheck.AddReferenceEditCheck.prototype.adjustForPunctuation = function ( i
 	return insertionPointFragment;
 };
 
-// Register
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.AddReferenceEditCheck );

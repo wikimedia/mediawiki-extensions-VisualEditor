@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect images without captions
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.ImageCaptionEditCheck = function () {
 	// Parent constructor
 	mw.editcheck.ImageCaptionEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.ImageCaptionEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.ImageCaptionEditCheck.static.name = 'imageCaption';
 
@@ -21,6 +36,8 @@ mw.editcheck.ImageCaptionEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
+
+/* Methods */
 
 mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
 	return this.getAddedNodes( surfaceModel.getDocument(), 'mwBlockImage' )
@@ -52,5 +69,7 @@ mw.editcheck.ImageCaptionEditCheck.prototype.act = function ( choice, action, su
 	// Parent method
 	return mw.editcheck.ImageCaptionEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ImageCaptionEditCheck );

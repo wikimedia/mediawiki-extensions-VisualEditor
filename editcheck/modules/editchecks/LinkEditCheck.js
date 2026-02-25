@@ -1,9 +1,17 @@
-/*
+/**
  * LinkEditCheck
  *
+ * @class
  * @abstract
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
  */
 mw.editcheck.LinkEditCheck = function MWLinkEditCheck() {
+	// Parent constructor
 	mw.editcheck.LinkEditCheck.super.apply( this, arguments );
 
 	this.matchAnnotationByView = ( annView ) => {
@@ -12,13 +20,20 @@ mw.editcheck.LinkEditCheck = function MWLinkEditCheck() {
 	};
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.LinkEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
+
 /**
  * @static
  * @property {Function[]} linkClasses List of link types to check for,
  *  e.g. `[ ve.dm.MWInternalLinkAnnotation ]`
  */
 mw.editcheck.LinkEditCheck.static.linkClasses = null;
+
+/* Methods */
 
 /**
  * Get modified link annotation ranges in the document

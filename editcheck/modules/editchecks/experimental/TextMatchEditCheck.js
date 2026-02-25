@@ -1,3 +1,14 @@
+/**
+ * Edit check to detect generic text matches/replacements
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	// Parent constructor
 	mw.editcheck.TextMatchEditCheck.super.apply( this, arguments );
@@ -14,7 +25,11 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.TextMatchEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
 
@@ -185,6 +200,8 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchItemsLoaded = function () {
 		} );
 	return this.matchItemsPromise;
 };
+
+/* Methods */
 
 /**
  * Create a matchItem instance for each matchItem and populate lookup maps
@@ -417,6 +434,8 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action, surfa
 	return mw.editcheck.TextMatchEditCheck.super.prototype.act.apply( this, arguments );
 };
 
+/* Registration */
+
 mw.editcheck.editCheckFactory.register( mw.editcheck.TextMatchEditCheck );
 
 /**
@@ -426,10 +445,12 @@ mw.editcheck.editCheckFactory.register( mw.editcheck.TextMatchEditCheck );
  * about the matchItem associated with this action
  *
  * @class
+ * @extends mw.editcheck.EditCheckAction
  *
+ * @constructor
  * @param {Object} config Configuration options
- * @param {Object} config.matchItem the associated matchItem for this action
- * @param {string} config.term term that prompted the action
+ * @param {Object} config.matchItem The associated matchItem for this action
+ * @param {string} config.term Term that prompted the action
  */
 mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( config ) {
 	mw.editcheck.TextMatchEditCheckAction.super.call( this, config );
@@ -497,6 +518,7 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
  *
  * @class
  *
+ * @constructor
  * @param {Object} item Match item
  * @param {string} id ID of matchitem in config
  * @param {Intl.Collator} collator Collator to use for comparisons

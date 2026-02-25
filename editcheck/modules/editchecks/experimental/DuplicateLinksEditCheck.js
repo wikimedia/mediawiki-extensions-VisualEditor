@@ -1,9 +1,25 @@
+/**
+ * Edit check to detect duplicate links within a section or paragraph
+ *
+ * @class
+ * @extends mw.editcheck.LinkEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {string} [config.scope='paragraph'] Scope to check for duplicates: 'paragraph' or 'section'
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.DuplicateLinksEditCheck = function MWDuplicateLinksEditCheck() {
 	// Parent constructor
 	mw.editcheck.DuplicateLinksEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.LinkEditCheck );
+
+/* Static properties */
 
 mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
 
@@ -12,7 +28,7 @@ mw.editcheck.DuplicateLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-d
 mw.editcheck.DuplicateLinksEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-duplicate-link-description' );
 
 mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	scope: 'paragraph' // 'section'
+	scope: 'paragraph'
 } );
 
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
@@ -27,6 +43,8 @@ mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 ];
 
 mw.editcheck.DuplicateLinksEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
+/* Methods */
 
 /*
  * Break down the document into sections
@@ -140,5 +158,7 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.act = function ( choice, action, 
 	// Parent method
 	return mw.editcheck.DuplicateLinksEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.DuplicateLinksEditCheck );

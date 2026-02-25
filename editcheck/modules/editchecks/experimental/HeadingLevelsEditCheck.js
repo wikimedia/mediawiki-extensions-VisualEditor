@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect headings that skip levels
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.HeadingLevelsEditCheck = function MWHeadingLevelsEditCheck() {
 	// Parent constructor
 	mw.editcheck.HeadingLevelsEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.HeadingLevelsEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.HeadingLevelsEditCheck.static.name = 'headingLevels';
 
@@ -22,6 +37,8 @@ mw.editcheck.HeadingLevelsEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
+
+/* Methods */
 
 mw.editcheck.HeadingLevelsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
@@ -74,5 +91,7 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, s
 	// Parent method
 	return mw.editcheck.HeadingLevelsEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.HeadingLevelsEditCheck );

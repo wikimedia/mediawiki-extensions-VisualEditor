@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect pasted content, which is often a sign of copyright violation/plagiarism.
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.PasteCheck = function MWPasteCheck() {
 	// Parent constructor
 	mw.editcheck.PasteCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.PasteCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	minimumCharacters: 50,
@@ -46,6 +61,8 @@ mw.editcheck.PasteCheck.static.trustedPasteCategories = [
 	'wordProcessor', // Word, Google Docs, etc.
 	'plain' // Plain text sources, e.g. Notepad, or copied as plain text
 ];
+
+/* Methods */
 
 mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const pastesById = {};
@@ -135,5 +152,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 		}
 	}
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.PasteCheck );

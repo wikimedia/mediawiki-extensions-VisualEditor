@@ -1,9 +1,3 @@
-/*!
- * EditCheck ContentBranchNode check class
- *
- * @copyright See AUTHORS.txt
- */
-
 /**
  * Abstract class for async checks that run on the plain text of a ContentBranchNode.
  *

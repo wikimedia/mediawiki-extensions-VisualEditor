@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect external links in the article body
+ *
+ * @class
+ * @extends mw.editcheck.LinkEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.ExternalLinksEditCheck = function MWExternalLinksEditCheck() {
 	// Parent constructor
 	mw.editcheck.ExternalLinksEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.ExternalLinksEditCheck, mw.editcheck.LinkEditCheck );
+
+/* Static properties */
 
 mw.editcheck.ExternalLinksEditCheck.static.name = 'externalLink';
 
@@ -23,6 +38,8 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 ];
 
 mw.editcheck.ExternalLinksEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAnnotation ];
+
+/* Methods */
 
 mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
@@ -48,5 +65,7 @@ mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, s
 	// Parent method
 	return mw.editcheck.ExternalLinksEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ExternalLinksEditCheck );

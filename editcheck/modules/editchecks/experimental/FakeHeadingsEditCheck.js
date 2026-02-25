@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect bold text used as headings
+ *
+ * @class
+ * @extends mw.editcheck.BaseEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.FakeHeadingsEditCheck = function MWFakeHeadingsEditCheck() {
 	// Parent constructor
 	mw.editcheck.FakeHeadingsEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.FakeHeadingsEditCheck, mw.editcheck.BaseEditCheck );
+
+/* Static properties */
 
 mw.editcheck.FakeHeadingsEditCheck.static.title = 'Use real headings';
 
@@ -28,9 +43,8 @@ mw.editcheck.FakeHeadingsEditCheck.static.defaultConfig = ve.extendObject( {}, m
 
 mw.editcheck.FakeHeadingsEditCheck.static.onlyCoveredNodes = true;
 
-/**
- * @inheritdoc
- */
+/* Methods */
+
 mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	// We need to cover complete new nodes, and also existing nodes that have been bolded
 	const documentModel = surfaceModel.getDocument();
@@ -54,9 +68,6 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfa
 		} ) );
 };
 
-/**
- * @inheritdoc
- */
 mw.editcheck.FakeHeadingsEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'fix' ) {
 		action.fragments.forEach( ( fragment ) => {
@@ -79,5 +90,7 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.act = function ( choice, action, su
 	// Parent method
 	return mw.editcheck.FakeHeadingsEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.FakeHeadingsEditCheck );

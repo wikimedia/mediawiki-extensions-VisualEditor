@@ -1,9 +1,24 @@
+/**
+ * Edit check to detect links to disambiguation pages
+ *
+ * @class
+ * @extends mw.editcheck.LinkEditCheck
+ *
+ * @constructor
+ * @param {mw.editcheck.Controller} controller
+ * @param {Object} [config]
+ * @param {boolean} [includeSuggestions=false]
+ */
 mw.editcheck.DisambiguationEditCheck = function MWDisambiguationEditCheck() {
 	// Parent constructor
 	mw.editcheck.DisambiguationEditCheck.super.apply( this, arguments );
 };
 
+/* Inheritance */
+
 OO.inheritClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.LinkEditCheck );
+
+/* Static properties */
 
 mw.editcheck.DisambiguationEditCheck.static.name = 'disambiguation';
 
@@ -23,6 +38,8 @@ mw.editcheck.DisambiguationEditCheck.static.choices = [
 ];
 
 mw.editcheck.DisambiguationEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+
+/* Methods */
 
 mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const checkDisambig = ( annotation ) => ve.init.platform.linkCache.get(
@@ -46,5 +63,7 @@ mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, 
 	// Parent method
 	return mw.editcheck.DisambiguationEditCheck.super.prototype.act.apply( this, arguments );
 };
+
+/* Registration */
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.DisambiguationEditCheck );
