@@ -5,15 +5,7 @@
  */
 
 {
-	QUnit.module( 've.ui.MWTransclusionDialog', ve.test.utils.newMwEnvironment( {
-		config: {
-			// Set config variable to activate new sidebar feature
-			// TODO: remove this when sidebar feature will be default
-			wgVisualEditorConfig: ve.extendObject( {}, mw.config.get( 'wgVisualEditorConfig' ), {
-				transclusionDialogNewSidebar: true
-			} )
-		}
-	} ) );
+	QUnit.module( 've.ui.MWTransclusionDialog', ve.test.utils.newMwEnvironment() );
 
 	const createFragmentFromDoc = function ( doc ) {
 		// convert doc to something ui magical

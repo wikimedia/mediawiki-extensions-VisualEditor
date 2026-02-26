@@ -1103,8 +1103,6 @@ class Hooks implements
 			'editCheckReliabilityAvailable' => ApiEditCheckReferenceUrl::isAvailable(),
 			'namespacesWithSubpages' => $namespacesWithSubpagesEnabled,
 			'specialBooksources' => urldecode( SpecialPage::getTitleFor( 'Booksources' )->getPrefixedURL() ),
-			// TODO: Remove when all usages in .js files are removed
-			'transclusionDialogNewSidebar' => true,
 			'cirrusSearchLookup' => $this->extensionRegistry->isLoaded( 'CirrusSearch' ),
 			'defaultSortPrefix' => $defaultSortPrefix,
 			'displayTitlePrefix' => $displayTitlePrefix,
