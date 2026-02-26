@@ -18,20 +18,10 @@ function Controller( target, config ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
-	this.actionsByListener = {};
-
 	this.target = target;
-
-	this.surface = null;
-	this.inBeforeSave = false;
-	this.branchNode = null;
-	this.focusedAction = null;
 	this.suggestionsMode = config.suggestions;
-	this.inSetup = null;
-	this.ignoreNextSelectionChange = null;
 
-	this.taggedFragments = {};
-	this.taggedIds = {};
+	this.clearState();
 
 	const teardownCheck = () => !!this.surface;
 
@@ -76,6 +66,23 @@ OO.mixinClass( Controller, OO.EventEmitter );
  *
  * @event EditCheckController#position
  */
+
+/* Methods */
+
+/**
+ * Reset controller state (on init or teardown)
+ */
+Controller.prototype.clearState = function () {
+	this.actionsByListener = {};
+	this.surface = null;
+	this.inBeforeSave = false;
+	this.branchNode = null;
+	this.focusedAction = null;
+	this.inSetup = null;
+	this.ignoreNextSelectionChange = null;
+	this.taggedFragments = {};
+	this.taggedIds = {};
+};
 
 /**
  * Set up controller
@@ -134,14 +141,7 @@ Controller.prototype.setup = function () {
 				win.close();
 			}
 
-			this.surface = null;
-			this.actionsByListener = {};
-			this.focusedAction = null;
-			this.inSetup = null;
-			this.ignoreNextSelectionChange = null;
-
-			this.taggedFragments = {};
-			this.taggedIds = {};
+			this.clearState();
 
 			mw.editcheck.checksShown = {};
 			// Track checks that are not just triggered (shown) but expanded (seen),
