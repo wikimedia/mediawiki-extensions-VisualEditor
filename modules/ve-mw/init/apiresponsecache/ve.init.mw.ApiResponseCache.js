@@ -133,7 +133,7 @@ ve.init.mw.ApiResponseCache.prototype.set = function ( entries ) {
  *
  * @abstract
  * @param subqueue
- * @return {jQuery.Promise}
+ * @return {mw.Api~AbortablePromise}
  */
 ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
 
@@ -144,9 +144,9 @@ ve.init.mw.ApiResponseCache.prototype.getRequestPromise = null;
  * @fires ve.init.mw.ApiResponseCache#add
  */
 ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
-	const rejectSubqueue = ( rejectQueue ) => {
+	const rejectSubqueue = ( rejectQueue, reason ) => {
 		for ( let i = 0, len = rejectQueue.length; i < len; i++ ) {
-			this.deferreds[ rejectQueue[ i ] ].reject();
+			this.deferreds[ rejectQueue[ i ] ].reject( reason );
 		}
 	};
 
@@ -191,7 +191,12 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 
 			// Reject everything in subqueue; this will only reject the ones
 			// that weren't already resolved above, because .reject() on an
-			// already resolved Deferred is a no-op.
-			.then( rejectSubqueue.bind( null, subqueue ) );
+			// already resolved Deferred is a no-op. We override the reason
+			// parameter because passing the successful request data wouldn't
+			// be particularly helpful.
+			.then( rejectSubqueue.bind( null, subqueue, 'missing' ) )
+			// If the API request failed, the promise will have been rejected,
+			// and we need to pass that rejection on to this batch.
+			.catch( rejectSubqueue.bind( null, subqueue ) );
 	}
 };
