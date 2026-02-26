@@ -59,7 +59,7 @@
 					}
 				}
 			};
-			transclusion.cacheTemplateDataApiResponse( { pages: [ templateData ] } );
+			transclusion.cacheTemplateDataApiResponse( [ templateData ] );
 
 			// add a template with an undocumented parameter to the dialog
 			const data = {
