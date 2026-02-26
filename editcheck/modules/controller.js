@@ -82,6 +82,7 @@ Controller.prototype.clearState = function () {
 	this.ignoreNextSelectionChange = null;
 	this.taggedFragments = {};
 	this.taggedIds = {};
+	this.lastBranchNodeChangeHistoryPointer = null;
 };
 
 /**
@@ -570,7 +571,15 @@ Controller.prototype.onBranchNodeChange = function () {
 		return;
 	}
 	if ( !this.inBeforeSave ) {
-		this.updateForListener( 'onBranchNodeChange' );
+		const historyPointer = this.surface.getModel().getDocument().getCompleteHistoryLength();
+		if ( this.lastBranchNodeChangeHistoryPointer === historyPointer ) {
+			return;
+		}
+		this.updateForListener( 'onBranchNodeChange' ).then( () => {
+			if ( this.surface ) {
+				this.lastBranchNodeChangeHistoryPointer = historyPointer;
+			}
+		} );
 	}
 };
 
