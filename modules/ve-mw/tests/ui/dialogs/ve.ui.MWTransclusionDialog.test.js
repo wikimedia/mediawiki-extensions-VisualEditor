@@ -17,9 +17,10 @@
 		return { fragment };
 	};
 
-	QUnit.test.skip( 'onReplacePart', ( assert ) => {
+	QUnit.test( 'onReplacePart', ( assert ) => {
 		// don't kill test until this promise is resolved, to allow the async workflow to complete
-		const finishTest = assert.async();
+		const done = assert.async();
+		const resolved = ve.createDeferred().resolve().promise();
 
 		// new wiki page and fragment
 		const doc = ve.dm.Document.static.newBlankDocument();
@@ -31,7 +32,11 @@
 		windowManager.addWindows( [ dialog ] );
 		const windowInstance = windowManager.openWindow( dialog, fragment );
 
-		windowInstance.opened.then( () => {
+		const promises = [];
+
+		let opened = false;
+		promises.push( windowInstance.opened.then( () => {
+			opened = true;
 			const transclusion = dialog.transclusionModel;
 			// mock api call with template data for Test
 			const templateData = {
@@ -69,25 +74,26 @@
 			const template = ve.dm.MWTemplateModel.newFromData( transclusion, data );
 
 			// change transclusion model (onReplacePart happens automatically)
-			const promise = transclusion.addPart( template );
-
-			promise.then( () => {
+			transclusion.addPart( template ).then( () => {
 				// checking for parameter checkboxes
-				// (should be 3 because of 2 predefined and 1 undocumented)
+				// (should be 3: 2 predefined and 1 undocumented)
 				assert.strictEqual(
-					dialog.$element.find( '.ve-ui-mwTransclusionOutlineParameterWidget' ).length, 3
+					dialog.$element.find( '.ve-ui-mwTransclusionOutlineParameterWidget' ).length, 3,
+					'Parameter widgets rendered'
 				);
 				dialog.close();
 			} );
+		}, () => resolved ) );
 
-		}, () => {
-			assert.true( false );
-			finishTest();
-		} );
+		let closed = false;
+		promises.push( windowInstance.closed.then( () => {
+			closed = true;
+		}, () => resolved ) );
 
-		windowInstance.closed.then( () => {
-			assert.true( true );
-			finishTest();
+		ve.promiseAll( promises ).then( () => {
+			assert.true( opened, 'Dialog opened' );
+			assert.true( closed, 'Dialog closed' );
+			done();
 		} );
 	} );
 }
