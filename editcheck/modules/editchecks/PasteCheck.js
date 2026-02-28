@@ -35,12 +35,31 @@ mw.editcheck.PasteCheck.static.takesFocus = true;
 
 mw.editcheck.PasteCheck.static.originalPasteLengths = {};
 
+/**
+ * Categories of paste sources that have a lower plagiarism risk
+ *
+ * @static
+ * @property {string[]}
+ */
+mw.editcheck.PasteCheck.static.trustedPasteCategories = [
+	'internal', // Another VE instance
+	'wordProcessor', // Word, Google Docs, etc.
+	'plain' // Plain text sources, e.g. Notepad, or copied as plain text
+];
+
 mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const pastesById = {};
 	const doc = surfaceModel.getDocument();
 	doc.getDocumentNode().getAnnotationRanges().forEach( ( annRange ) => {
 		const annotation = annRange.annotation;
-		if ( annotation instanceof ve.dm.ImportedDataAnnotation && !annotation.getAttribute( 'source' ) ) {
+		if (
+			annotation instanceof ve.dm.ImportedDataAnnotation && !(
+				annotation.getAttribute( 'source' ) &&
+				this.constructor.static.trustedPasteCategories.some(
+					( category ) => annotation.getAttribute( 'source' ).categories.includes( category )
+				)
+			)
+		) {
 			const id = annotation.getAttribute( 'eventId' );
 			if ( this.isDismissedId( id ) ) {
 				return;

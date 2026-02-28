@@ -80,10 +80,14 @@
 				ve.ce.BlockImageNode
 			],
 			windowOverrides = [
-				ve.ui.MWLinkAnnotationInspector
+				ve.ui.MWLinkAnnotationInspector,
+				ve.ui.MWCommandHelpDialog,
+				ve.ui.MWTableDialog
 			],
 			windowOverridden = [
-				ve.ui.LinkAnnotationInspector
+				ve.ui.LinkAnnotationInspector,
+				ve.ui.CommandHelpDialog,
+				ve.ui.TableDialog
 			],
 			actionOverrides = [
 				ve.ui.MWLinkAction
