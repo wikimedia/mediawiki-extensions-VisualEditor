@@ -32,6 +32,8 @@
 	"tag-editcheck-paste-shown-description": "Muokkaustarkistin kysyi selvennystä muokkaajan liittämästä sisällöstä. Sisältö joko postettiin tai vahvistettiin sallituksi",
 	"tag-editsuggestion-seen": "Muokkausehdotus nähty",
 	"tag-editsuggestion-seen-description": "Käyttäjä näki todennäköisesti ainakin yhden muokkausehdotuksen",
+	"tag-editsuggestion-used": "Muokkausehdotusta käytetty",
+	"tag-editsuggestion-used-description": "Käyttäjä reagoi ainakin yhteen muokkausehdotukseen",
 	"tag-visualeditor": "Visuaalinen muokkaus",
 	"tag-visualeditor-description": "Muutos tehtiin [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuaalisella muokkaimella]]",
 	"tag-visualeditor-needcheck": "Visuaalinen muokkaus: Tarkista",

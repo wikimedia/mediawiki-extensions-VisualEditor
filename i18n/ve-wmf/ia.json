@@ -18,6 +18,8 @@
 	"tag-editcheck-paste-shown-description": "EditCheck ha demandate un clarification sur contento que le redactor ha collate, le qual ha posteriormente essite o removite o affirmate como admissibile",
 	"tag-editsuggestion-seen": "Suggestion de modification vidite",
 	"tag-editsuggestion-seen-description": "Al minus un suggestion de modification ha probabilemente essite vidite per le usator",
+	"tag-editsuggestion-used": "Suggestion de modification usate",
+	"tag-editsuggestion-used-description": "Al minus un suggestion de modification ha essite realisate per le usator",
 	"tag-visualeditor": "Modification visual",
 	"tag-visualeditor-description": "Modification facite con le [[{{MediaWiki:visualeditor-descriptionpagelink}}|editor visual]]",
 	"tag-visualeditor-needcheck": "Editor visual: a verificar",
