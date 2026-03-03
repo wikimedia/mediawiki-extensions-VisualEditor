@@ -62,7 +62,7 @@
 	"editcheck-action-add-citation": "Add citation",
 	"editcheck-action-convert-reference": "Convert",
 	"editcheck-external-link-title": "Remove external link",
-	"editcheck-external-link-description": "This link points to an [{{int:editcheck-external-link-descriptionlink}} external website]. Help readers stay focused on the content by either removing this link, moving it to an “External links” section, or by converting it into a [{{int:editcheck-external-link-convertlink}} citation] if appropriate.",
+	"editcheck-external-link-description": "This link points to an [{{int:editcheck-external-link-descriptionlink}} external website]. Help readers stay focused on the content by removing this link, moving it to the “External links” section, or converting it into a [{{int:editcheck-external-link-convertlink}} citation] if appropriate.",
 	"editcheck-external-link-descriptionlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode",
 	"editcheck-external-link-convertlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode",
 	"editcheck-duplicate-link-title": "Remove duplicated link",
