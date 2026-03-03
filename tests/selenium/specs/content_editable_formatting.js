@@ -8,18 +8,13 @@ describe( 'Content Editable Formatting', () => {
 	let name;
 
 	beforeEach( async () => {
+		await EditPage.clearBeforeUnload();
 		name = Util.getTestString();
 		await LoginPage.loginAdmin();
 
 		await EditPage.openForEditing( name );
 		await EditPage.activationComplete();
-	} );
-
-	afterEach( async () => {
-		// T269566: Popup with text
-		// 'Leave site? Changes that you made may not be saved. Cancel/Leave'
-		// appears after the browser tries to leave the page with the preview.
-		await browser.reloadSession();
+		await EditPage.focusRootNode();
 	} );
 
 	it( 'should change text to Page title', async () => {

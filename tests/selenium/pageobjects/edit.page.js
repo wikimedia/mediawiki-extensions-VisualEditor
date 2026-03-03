@@ -230,6 +230,22 @@ class EditPage extends Page {
 		} );
 	}
 
+	clearBeforeUnload() {
+		// T269566: Clear VE's beforeunload handler before navigating to avoid the
+		// 'Leave site? Changes that you made may not be saved.' popup.
+		return browser.execute( () => {
+			// eslint-disable-next-line no-undef
+			window.onbeforeunload = null;
+		} );
+	}
+
+	focusRootNode() {
+		return browser.execute( () => {
+			// eslint-disable-next-line no-undef
+			document.querySelector( '.ve-ce-rootNode[role="textbox"]' ).focus();
+		} );
+	}
+
 	async insertTable() {
 		await this.insert.click();
 		await this.insertTableElement.click();
