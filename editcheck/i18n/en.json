@@ -66,7 +66,7 @@
 	"editcheck-external-link-descriptionlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode",
 	"editcheck-external-link-convertlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode",
 	"editcheck-duplicate-link-title": "Remove duplicated link",
-	"editcheck-duplicate-link-description": "This link appears more than once in this section. Help readers navigate the article more easily by removing [{{int:editcheck-duplicate-link-descriptionlink}} repeated links].",
+	"editcheck-duplicate-link-description": "This link appears more than once in this section. Help readers navigate more easily by removing [{{int:editcheck-duplicate-link-descriptionlink}} repeated links].",
 	"editcheck-duplicate-link-descriptionlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode",
 	"editcheck-disambiguation-title": "Link to a more specific page",
 	"editcheck-disambiguation-description": "This link points to a [{{int:editcheck-disambiguation-descriptionlink}} disambiguation page]. Help readers find the right topic by linking to a more specific page.",
