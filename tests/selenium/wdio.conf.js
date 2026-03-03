@@ -14,7 +14,8 @@ export const config = { ...wdioDefaults,
 	// screenshotsOnFailureOnly: false,
 	suites: {
 		daily: [
-			'specs/content_editable.js'
+			'specs/content_editable.js',
+			'specs/content_editable_formatting.js'
 		]
 	}
 };
