@@ -428,6 +428,9 @@ ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
  */
 ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
 	this.close();
+	if ( OO.ui.isMobile() ) {
+		this.controller.focusAction( null );
+	}
 };
 
 /**

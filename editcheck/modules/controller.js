@@ -518,7 +518,9 @@ Controller.prototype.onSelect = function () {
 		this.ignoreNextSelectionChange = null;
 		return;
 	}
-	this.focusActionForSelection();
+	if ( !OO.ui.isMobile() ) {
+		this.focusActionForSelection();
+	}
 };
 
 /**
