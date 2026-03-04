@@ -46,22 +46,23 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 			if ( !this.isRangeValid( annRange.range, doc ) ) {
 				return;
 			}
-			if ( annRange.range.getLength() < this.config.minimumCharacters ) {
-				return;
-			}
 			pastesById[ id ] = pastesById[ id ] || [];
 			pastesById[ id ].push( annRange.range );
 		}
 	} );
 	return Object.keys( pastesById ).map( ( id ) => {
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
+		const combinedLength = pastesById[ id ].reduce( ( sum, range ) => sum + range.getLength(), 0 );
+		if ( combinedLength < this.config.minimumCharacters ) {
+			return null;
+		}
 
 		return new mw.editcheck.EditCheckAction( {
 			fragments,
 			id,
 			check: this
 		} );
-	} );
+	} ).filter( Boolean );
 };
 
 // TODO: enable this once issues editing content from pre-save are resolved (T407543)

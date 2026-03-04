@@ -32,11 +32,14 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 					{ type: '/paragraph' }
 				];
 			},
-			expectedData: noChange,
+			expectedData: ( data ) => {
+				data.splice( 33, 30 );
+				data.splice( 1, 30 );
+			},
 			// Each annotation range is 30 chars, but combined is 60
 			config: { minimumCharacters: 50 },
-			// TODO: The length of the lines should be combined and trigger the check
-			expectedActions: 0
+			expectedActions: 1,
+			expectedFragments: 2
 		},
 		{
 			msg: 'Pastes with different IDs are treated separately',
