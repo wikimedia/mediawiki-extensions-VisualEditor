@@ -408,7 +408,7 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action, surfa
 				ve.log( `mw.editcheck.TextMatchEditCheck.prototype.act(): did not find replacement for ${ oldWord }` );
 				return;
 			}
-			fragment.removeContent().insertContent( newWord );
+			fragment.insertContent( newWord, true );
 			action.select( surface, true );
 			return;
 		}
