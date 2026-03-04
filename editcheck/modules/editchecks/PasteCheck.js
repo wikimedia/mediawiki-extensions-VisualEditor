@@ -90,6 +90,13 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 		case 'remove': {
 			action.fragments.forEach( ( fragment ) => {
 				fragment.removeContent();
+
+				// If removal leaves an empty content branch node, then remove it too
+				const range = fragment.getSelection().getCoveringRange();
+				const node = surface.getModel().getDocument().getBranchNodeFromOffset( range.start );
+				if ( node && node.canContainContent() && node.getRange().isCollapsed() ) {
+					surface.getModel().getLinearFragment( node.getOuterRange() ).removeContent();
+				}
 			} );
 			// If in pre-save mode, close the check dialog
 			const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();

@@ -12,7 +12,25 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedData: ( data ) => {
+				// Only paragraph in the doc is not removed, just content
 				data.splice( 1, 60 );
+			},
+			config: { minimumCharacters: 50 },
+			expectedActions: 1,
+			expectedFragments: 1
+		},
+		{
+			msg: 'Whole paragraph removed after paste',
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60 ),
+				{ type: '/paragraph' },
+				{ type: 'paragraph' },
+				...'Foo',
+				{ type: '/paragraph' }
+			],
+			expectedData: ( data ) => {
+				data.splice( 0, 62 );
 			},
 			config: { minimumCharacters: 50 },
 			expectedActions: 1,
@@ -33,8 +51,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				];
 			},
 			expectedData: ( data ) => {
-				data.splice( 33, 30 );
-				data.splice( 1, 30 );
+				data.splice( 1, 62 );
 			},
 			// Each annotation range is 30 chars, but combined is 60
 			config: { minimumCharacters: 50 },
