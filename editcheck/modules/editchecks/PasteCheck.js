@@ -33,6 +33,8 @@ mw.editcheck.PasteCheck.static.choices = [
 
 mw.editcheck.PasteCheck.static.takesFocus = true;
 
+mw.editcheck.PasteCheck.static.originalPasteLengths = {};
+
 mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const pastesById = {};
 	const doc = surfaceModel.getDocument();
@@ -52,8 +54,11 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	} );
 	return Object.keys( pastesById ).map( ( id ) => {
 		const fragments = pastesById[ id ].map( ( range ) => surfaceModel.getLinearFragment( range ) );
-		const combinedLength = pastesById[ id ].reduce( ( sum, range ) => sum + range.getLength(), 0 );
-		if ( combinedLength < this.config.minimumCharacters ) {
+		if ( !( id in mw.editcheck.PasteCheck.static.originalPasteLengths ) ) {
+			const combinedLength = pastesById[ id ].reduce( ( sum, range ) => sum + range.getLength(), 0 );
+			mw.editcheck.PasteCheck.static.originalPasteLengths[ id ] = combinedLength;
+		}
+		if ( mw.editcheck.PasteCheck.static.originalPasteLengths[ id ] < this.config.minimumCharacters ) {
 			return null;
 		}
 
