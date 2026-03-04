@@ -20,6 +20,8 @@ function Controller( target, config ) {
 
 	this.target = target;
 	this.suggestionsMode = config.suggestions;
+	// flag that, if enabled, hides suggestions but continues to generate them in the background
+	this.suppressSuggestions = false;
 
 	this.clearState();
 
@@ -281,6 +283,22 @@ Controller.prototype.toggleSuggestionsMode = function () {
 };
 
 /**
+ * Controls whether suggestions are displayed to the user.
+ *
+ * When suppressed, suggestions will still continue to be generated and cached, just not displayed.
+ * For use by external tools.
+ *
+ * @param {boolean} suppress if true, does not display any suggestions
+ */
+Controller.prototype.suppressSuggestionDisplay = function ( suppress ) {
+	if ( this.suppressSuggestions === suppress ) {
+		return;
+	}
+	this.suppressSuggestions = suppress;
+	this.refresh();
+};
+
+/**
  * Fires all edit checks associated with a given listener.
  *
  * Actions are created anew for every run, but we want continuity for certain state changes. We therefore match them up
@@ -458,10 +476,17 @@ Controller.prototype.ensureActionIsShown = function ( action ) {
  */
 Controller.prototype.getActions = function ( listener ) {
 	if ( listener ) {
-		return this.actionsByListener[ listener ] || [];
+		let lsActions = this.actionsByListener[ listener ] || [];
+		if ( this.suppressSuggestions ) {
+			lsActions = lsActions.filter( ( action ) => !action.isSuggestion() );
+		}
+		return lsActions;
 	}
 	const listeners = this.inBeforeSave ? [ 'onBeforeSave' ] : midEditListeners;
-	const actions = [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
+	let actions = [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
+	if ( this.suppressSuggestions ) {
+		actions = actions.filter( ( action ) => !action.isSuggestion() );
+	}
 	actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
 	return actions;
 };
