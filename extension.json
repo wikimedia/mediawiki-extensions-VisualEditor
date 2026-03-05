@@ -2420,6 +2420,7 @@
 			"editcheck/modules/tests/DoubleBoldEditCheck.test.js",
 			"editcheck/modules/tests/DuplicateLinksEditCheck.test.js",
 			"editcheck/modules/tests/FakeHeadingsEditCheck.test.js",
+			"editcheck/modules/tests/TextMatchEditCheck.test.js",
 			"editcheck/modules/tests/ImageCaptionEditCheck.test.js"
 		],
 		"dependencies": [
