@@ -59,7 +59,7 @@
 	"editcheck-external-link-title": "Poista ulkoinen linkki",
 	"editcheck-duplicate-link-title": "Poista kaksoislinkki",
 	"editcheck-disambiguation-title": "Linkitä tarkemmalle sivulle",
-	"editcheck-disambiguation-description": "Tämä linkki johtaa [{{int:editcheck-disambiguation-descriptionlink}}|täsmennyssivulle]. Auta lukijoita löytämään oikea aihe linkittämällä tarkemmalle sivulle.",
+	"editcheck-disambiguation-description": "Tämä linkki johtaa [{{int:editcheck-disambiguation-descriptionlink}} täsmennyssivulle]. Auta lukijoita löytämään oikea aihe linkittämällä tarkemmalle sivulle.",
 	"editcheck-headinglevels-title": "Säädä väliotsikon tasoa",
 	"editcheck-headinglevels-action-adjust": "Säädä väliotsikkoa",
 	"editcheck-image-caption-title": "Lisää kuvateksti",

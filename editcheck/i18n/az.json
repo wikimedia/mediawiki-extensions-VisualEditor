@@ -58,7 +58,7 @@
 	"editcheck-external-link-title": "Xarici keçidi sil",
 	"editcheck-external-link-description": "Bu link [{{int:editcheck-external-link-descriptionlink}} xarici veb-sayta] keçid edir. Oxucuların diqqətini məzmuna yönəltmək üçün bu linki silməyi, onu \"Xarici linklər\" bölməsinə köçürməyi və ya lazım gələrsə, onu [{{int:editcheck-external-link-convertlink}} istinada] çevirməyi nəzərdən keçirin.",
 	"editcheck-duplicate-link-title": "Təkrarlanan keçidi sil",
-	"editcheck-duplicate-link-description": "Bu keçid bu bölmədə bir neçə dəfə əlavə edilib. [{{int:editcheck-duplicate-link-descriptionlink}} Təkrarlanan keçidləri] silməklə oxucuların məqalədə daha asan naviqasiya etməsinə kömək edin.",
+	"editcheck-duplicate-link-description": "Bu keçid bu bölmədə bir neçə dəfə əlavə edilib. [{{int:editcheck-duplicate-link-descriptionlink}} Təkrarlanan keçidləri] silməklə oxucuların daha asan naviqasiya etməsinə kömək edin.",
 	"editcheck-disambiguation-title": "Daha spesifik səhifəyə keçid et",
 	"editcheck-disambiguation-description": "Bu link [{{int:editcheck-disambiguation-descriptionlink}} dəqiqləşdirmə səhifəsinə] keçid edir. Daha spesifik bir səhifəyə keçid verərək oxucuların düzgün mövzunu tapmasına kömək edin.",
 	"editcheck-headinglevels-title": "Başlıq səviyyəsini tənzimlə",

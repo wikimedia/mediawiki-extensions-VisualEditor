@@ -3,6 +3,7 @@
 		"authors": [
 			"CeciMagi",
 			"Dbsnp",
+			"Monicapozo03",
 			"ZebaX2010"
 		]
 	},
@@ -17,5 +18,8 @@
 	"editcheck-dialog-addref-reject-other": "Otro",
 	"editcheck-dialog-addref-success-notify": "¡Gracias por añadir una cita!",
 	"editcheck-dialog-addref-title": "Añade una cita",
-	"editcheck-dialog-title": "Antes de publicar"
+	"editcheck-dialog-title": "Antes de publicar",
+	"editcheck-external-link-description": "Este enlace dirige a un sitio web externo [{{int:editcheck-external-link-descriptionlink}}]. Ayuda a los lectores a centrarse en el contenido, eliminando este enlace, muévalo a la sección \"Enlaces externos\" o conviértalo en una cita [{{int:editcheck-external-link-convertlink}}], si corresponde.",
+	"editcheck-duplicate-link-description": "Este enlace aparece más de una vez en esta sección. Facilita la navegación eliminando [{{int:editcheck-duplicate-link-descriptionlink}} enlaces repetidos].",
+	"editcheck-disambiguation-description": "Este enlace lleva a una página de desambiguación [{{int:editcheck-disambiguation-descriptionlink}}]. Ayuda a los lectores a encontrar el tema correcto enlazándolo a una página más específica."
 }
