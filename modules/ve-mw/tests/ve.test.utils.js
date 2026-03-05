@@ -45,6 +45,13 @@
 		$wrapper[ 0 ].normalize();
 		return $wrapper.contents().toArray();
 	};
+	let nextUniqueId = 1;
+	MWDummyPlatform.prototype.generateUniqueId = function () {
+		return 'test' + ( nextUniqueId++ );
+	};
+	MWDummyPlatform.prototype.resetUniqueIdCounter = function () {
+		nextUniqueId = 1;
+	};
 	ve.test.utils.MWDummyPlatform = MWDummyPlatform;
 
 	{
@@ -111,6 +118,7 @@
 			applyOverrides( ve.ui.windowFactory, windowOverrides, windowOverridden );
 
 			ve.init.platform = mwPlatform;
+			ve.init.platform.resetUniqueIdCounter();
 			ve.init.target = mwTarget;
 			mw.libs.ve.setEditorPreference = dummySetEditorPreference;
 			// Ensure the current target is appended to the current fixture
