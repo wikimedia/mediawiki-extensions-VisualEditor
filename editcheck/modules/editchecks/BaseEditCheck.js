@@ -742,7 +742,7 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 			}
 		}
 	}
-	return quotes.values().some( ( count ) => count % 2 === 1 );
+	return Array.from( quotes.values() ).some( ( count ) => count % 2 === 1 );
 };
 
 /**
