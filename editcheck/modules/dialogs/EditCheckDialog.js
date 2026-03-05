@@ -97,21 +97,6 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 
 	this.$actions = $( '<div>' );
 	this.$body.append( this.closeButton.$element, this.collapseExpandButton.$element, this.$actions, this.footer.$element );
-	if ( mw.editcheck.experimental ) {
-		const $warning = new OO.ui.MessageWidget( {
-			type: 'error',
-			label: 'Currently using experimental edit checks. For testing purposes only.',
-			inline: true
-		} ).$element.css( {
-			'white-space': 'normal',
-			margin: '0.5em 1em'
-		} );
-		if ( OO.ui.isMobile() ) {
-			this.footer.$element.before( $warning );
-		} else {
-			this.$body.append( $warning );
-		}
-	}
 };
 
 /**

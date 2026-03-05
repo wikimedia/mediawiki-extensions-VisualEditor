@@ -210,7 +210,8 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		choices: this.getChoices(),
 		mode: this.mode,
 		singleAction,
-		suggestion: this.suggestion
+		suggestion: this.suggestion,
+		experimental: !this.check.config.enabled
 	} );
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]

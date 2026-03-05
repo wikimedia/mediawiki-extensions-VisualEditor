@@ -14,6 +14,7 @@
  * @param {Object[]} [config.choices] User choices
  * @param {string} [config.mode] Mode for the action set widget
  * @param {boolean} [config.suggestion] This is a suggestion
+ * @param {boolean} [config.experimental] This is an experimental check (not enabled by default)
  */
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
 	this.singleAction = config.singleAction;
@@ -111,6 +112,18 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 			}
 		} );
 		this.$actions.append( suggestionFeedbackMenuSelect.$element );
+	}
+
+	if ( config.experimental ) {
+		const $warning = new OO.ui.MessageWidget( {
+			type: 'error',
+			label: 'Experimental edit check. For testing purposes only.',
+			inline: true
+		} ).$element.css( {
+			'white-space': 'normal',
+			margin: '0.5em 0'
+		} );
+		this.$actions.append( $warning );
 	}
 
 	this.$element
