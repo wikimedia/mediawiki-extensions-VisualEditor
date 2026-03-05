@@ -250,11 +250,15 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 
 			progress.$element.remove();
 			if ( !result ) {
-				this.showSuccess();
-				this.controller.removeAction( 'onBranchNodeChange', action, false );
+				this.onSuccess( action );
 			}
 		} );
 	}
+};
+
+mw.editcheck.ToneCheck.prototype.onSuccess = function ( action ) {
+	this.showSuccess();
+	this.controller.removeAction( 'onBranchNodeChange', action, false );
 };
 
 mw.editcheck.editCheckFactory.register( mw.editcheck.ToneCheck );
