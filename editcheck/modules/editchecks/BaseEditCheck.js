@@ -103,7 +103,7 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
  *
  * @param {Object} config Configuration options
  * @param {ve.dm.Document} [documentModel] if attached to a known document
- * @param {boolean} [suggestion=false] Whether we are checking for suggestions mode
+ * @param {boolean} [suggestion=false] Whether we are checking for suggestion mode
  * @return {boolean} Whether the config matches
  */
 mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentModel = undefined, suggestion = false ) {
@@ -307,7 +307,7 @@ mw.editcheck.BaseEditCheck.prototype.takesFocus = function () {
  * checks before any maybe-expensive content analysis happens.
  *
  * @param {ve.dm.Document} [documentModel] if attached to a known document
- * @param {boolean} [suggestion=false] Whether we are checking for suggestions mode
+ * @param {boolean} [suggestion=false] Whether we are checking for suggestion mode
  * @return {boolean} Whether the check should be shown
  */
 mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel = undefined, suggestion = false ) {
@@ -429,7 +429,7 @@ mw.editcheck.BaseEditCheck.prototype.getAddedRanges = function ( documentModel, 
 /**
  * Get content ranges which have been modified
  *
- * In suggestions mode, this will return all content ranges.
+ * In suggestion mode, this will return all content ranges.
  *
  * @param {ve.dm.Document} documentModel
  * @param {boolean} coveredNodesOnly Only include ranges which cover the whole of their node
