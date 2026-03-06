@@ -103,19 +103,36 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
 	// Check might not be registered so we can't use the factory.
 	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { enabled: true } ) );
-	return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
+	try {
+		return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
+	} catch ( e ) {
+		mw.log.error( 'Error checking hasAddedContentNeedingReference', e );
+		return false;
+	}
 };
 
 mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 	// Check might not be registered so we can't use the factory.
 	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone', { enabled: true } ) );
 	// Run actual check eligibility before calling API
-	if ( !check.canBeShown( surfaceModel.getDocument(), false ) ) {
+	let canBeShown;
+	try {
+		canBeShown = check.canBeShown( surfaceModel.getDocument(), false );
+	} catch ( e ) {
+		mw.log.error( 'Error checking hasFailingToneCheck', e );
+		return Promise.resolve( false );
+	}
+	if ( !canBeShown ) {
 		return ve.createDeferred().resolve( false ).promise();
 	}
-	return Promise.all( check.handleListener( 'onCheckAll', surfaceModel ) )
-		.then( ( results ) => results.some( ( result ) => result !== null ) )
-		.catch( () => {} );
+	try {
+		return Promise.all( check.handleListener( 'onCheckAll', surfaceModel ) )
+			.then( ( results ) => results.some( ( result ) => result !== null ) )
+			.catch( () => {} );
+	} catch ( e ) {
+		mw.log.error( 'Error checking hasFailingToneCheck', e );
+		return Promise.resolve( false );
+	}
 };
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
