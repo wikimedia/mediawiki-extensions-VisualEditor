@@ -63,60 +63,62 @@ function orderedCollectBy( iterable, keyFunction ) {
 }
 
 mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	const field = 'normalizedTitle';
+	const normalizedTitleKey = 'normalizedTitle';
 
 	const documentModel = surfaceModel.getDocument();
 
 	// Each section of the document that we want to detect duplicates within
-	let sections;
+	let sectionRanges;
 	if ( this.config.scope === 'section' ) {
-		sections = getSectionRanges( documentModel );
+		sectionRanges = getSectionRanges( documentModel );
 	} else if ( this.config.scope === 'paragraph' ) {
-		sections = documentModel.getNodesByType( 'paragraph' ).map( ( node ) => node.getOuterRange() );
+		sectionRanges = documentModel.getNodesByType( 'paragraph' ).map( ( node ) => node.getOuterRange() );
 	}
 
 	// Traverse the tree once to find internal links, and build a map
-	const allInternalLinks = documentModel.getDocumentNode().getAnnotationRanges().filter( ( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name );
-	const internalLinkMap = orderedCollectBy( allInternalLinks, ( annRef ) => annRef.annotation.getAttribute( field ) );
+	const allLinks = documentModel.getDocumentNode().getAnnotationRanges().filter( ( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name );
+	const allLinksByTitle = orderedCollectBy( allLinks, ( annRef ) => annRef.annotation.getAttribute( normalizedTitleKey ) );
 
 	// Traverse again for links we want to show a Check on. This could be a small set, or all links.
 	// Filter out any links that appear only once in the document.
 	// getModifiedLinkRanges handles filtering sections and dismissed actions.
-	const candidateModifiedLinks = this.getModifiedLinkRanges( surfaceModel ).filter( ( annRange ) => internalLinkMap.get( annRange.annotation.getAttribute( field ) ).length > 1 );
+	const candidateModifiedLinks = this.getModifiedLinkRanges( surfaceModel ).filter( ( annRange ) => allLinksByTitle.get( annRange.annotation.getAttribute( normalizedTitleKey ) ).length > 1 );
 
 	// Now we have a list of modified links which, if they're root links and duplicated in the same section by another root link, are duplicates.
 	let i = 0; // Index into candidate links
 	const actions = [];
-	for ( const section of sections ) {
-		const rootCache = new Map();
-		for ( ; i < candidateModifiedLinks.length && candidateModifiedLinks[ i ].range.end <= section.end; i++ ) {
+	for ( const sectionRange of sectionRanges ) {
+		const duplicateLinksByTitle = new Map();
+		for ( ; i < candidateModifiedLinks.length && candidateModifiedLinks[ i ].range.end <= sectionRange.end; i++ ) {
 			const annRange = candidateModifiedLinks[ i ];
-			const title = annRange.annotation.getAttribute( field );
-			if ( !rootCache.has( title ) ) {
-				const sectionLinks = internalLinkMap.get( title ).filter( ( ar ) => section.containsRange( ar.range ) );
-				if ( sectionLinks.length > 1 ) {
-					// Only validate we're in a root paragraph when we're forced to
-					rootCache.set( title, sectionLinks.filter( ( ar ) => ( documentModel.getBranchNodeFromOffset( ar.range.start ).getParent() === documentModel.attachedRoot ) ) );
+			const title = annRange.annotation.getAttribute( normalizedTitleKey );
+			if ( !duplicateLinksByTitle.has( title ) ) {
+				const sectionLinksForTitle = allLinksByTitle.get( title ).filter( ( ar ) => sectionRange.containsRange( ar.range ) );
+				if ( sectionLinksForTitle.length > 1 ) {
+					// Only validate we're in a root paragraph after confirming there's a duplicate in the section
+					const rootSectionLinksForTitle = sectionLinksForTitle.filter( ( ar ) => documentModel.getBranchNodeFromOffset( ar.range.start ).getParent() === documentModel.attachedRoot );
+					if ( rootSectionLinksForTitle.length > 1 ) {
+						duplicateLinksByTitle.set( title, rootSectionLinksForTitle );
+					} else {
+						duplicateLinksByTitle.set( title, [] );
+					}
 				} else {
-					rootCache.set( title, [] );
+					duplicateLinksByTitle.set( title, [] );
 				}
 			}
-			const duplicateRanges = rootCache.get( title );
-			if ( duplicateRanges.length < 2 ) {
+			const duplicateLinks = duplicateLinksByTitle.get( title );
+			if ( duplicateLinks.length < 2 ) {
 				continue;
 			}
 
-			const index = duplicateRanges.findIndex( ( ar ) => annRange.range.equalsSelection( ar.range ) );
-			if ( index < 0 ) {
-				// Not in a root node
-				continue;
-			} else if ( index === 0 ) {
-				// Resolve the fight over who is the clone and who is the original in favour of the first link.
+			const index = duplicateLinks.findIndex( ( ar ) => annRange.range.equalsSelection( ar.range ) );
+			if ( index === 0 ) {
+				// Don't mark the first link as a duplicate.
 				continue;
 			}
 
 			// Highlight all duplicates with the one being acted on first
-			const highlights = Array.from( duplicateRanges );
+			const highlights = duplicateLinks.slice();
 			highlights.splice( index, 1 );
 			highlights.unshift( annRange );
 
