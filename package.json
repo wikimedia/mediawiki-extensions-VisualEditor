@@ -37,7 +37,7 @@
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
 		"stylelint-config-wikimedia": "0.18.0",
-		"svgo": "4.0.0",
+		"svgo": "4.0.1",
 		"wdio-mediawiki": "5.1.0"
 	}
 }
