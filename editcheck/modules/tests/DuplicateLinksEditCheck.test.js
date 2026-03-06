@@ -63,19 +63,20 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			expectedHighlights: 2
 		},
 		{
-			msg: 'Three identical links in the same paragraph (paragraph scope)',
+			msg: 'Four identical links in the same paragraph (paragraph scope)',
 			scope: 'paragraph',
 			data: [
 				{ type: 'paragraph' },
 				...getLinksData( [
 					{ targetTitle: 'Foo', labelText: 'alpha' },
 					{ targetTitle: 'Foo', labelText: 'beta' },
-					{ targetTitle: 'Foo', labelText: 'gamma' }
+					{ targetTitle: 'Foo', labelText: 'gamma' },
+					{ targetTitle: 'Foo', labelText: 'delta' }
 				] ),
 				{ type: '/paragraph' }
 			],
-			expectedActions: 2,
-			expectedHighlights: 3
+			expectedActions: 3,
+			expectedHighlights: 4
 		}
 	];
 
@@ -94,6 +95,14 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		if ( actions.length > 0 ) {
 			assert.strictEqual( actions[ 0 ].getName(), 'duplicateLink', 'Action name' );
 			assert.strictEqual( actions[ 0 ].fragments.length, caseItem.expectedHighlights, 'Highlight' );
+		}
+		if ( actions.length > 1 ) {
+			// Assert that all pairs of actions are inequal
+			for ( let i = 0; i < actions.length; i++ ) {
+				for ( let j = i + 1; j < actions.length; j++ ) {
+					assert.false( actions[ i ].equals( actions[ j ] ), 'Actions are not equal to each other, despite having the same fragments (but in different orders)' );
+				}
+			}
 		}
 	} );
 } );

@@ -275,15 +275,15 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps 
 	if ( this.fragments.length !== other.fragments.length ) {
 		return false;
 	}
-	return this.fragments.every( ( fragment ) => {
-		const selection = fragment.getSelection();
-		return other.fragments.some( ( otherFragment ) => {
-			if ( otherFragment.getSelection().equals( selection ) ) {
-				// A perfect match always counts, and also covers the case of
-				// zero-width ranges on the same point which don't "overlap"
-				return true;
-			}
-			if ( allowOverlaps ) {
+	return this.fragments.every( ( fragment, i ) => {
+		if ( allowOverlaps ) {
+			const selection = fragment.getSelection();
+			return other.fragments.some( ( otherFragment ) => {
+				if ( otherFragment.getSelection().equals( selection ) ) {
+					// A perfect match always counts, and also covers the case of
+					// zero-width ranges on the same point which don't "overlap"
+					return true;
+				}
 				// This case is meant to catch suggestions which were generated on
 				// the same content but which don't perfectly match up because the
 				// modified range is different.
@@ -294,9 +294,10 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps 
 				return ( range.isCollapsed() || otherRange.isCollapsed() ) ?
 					otherRange.touchesRange( range ) :
 					otherRange.overlapsRange( range );
-			}
-			return false;
-		} );
+			} );
+		} else {
+			return fragment.getSelection().equals( other.fragments[ i ].getSelection() );
+		}
 	} );
 };
 
