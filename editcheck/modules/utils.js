@@ -28,7 +28,9 @@ mw.editcheck.fetchTimeout = function ( resource, options = {} ) {
 		return response;
 	} ).catch( ( error ) => {
 		clearTimeout( timeoutID );
-		// If we want to specifically handle the abort case, check for an AbortError here
+		if ( error instanceof DOMException && error.name === 'AbortError' ) {
+			throw new Error( `fetch failed: ${ resource }` );
+		}
 		throw error;
 	} );
 };
