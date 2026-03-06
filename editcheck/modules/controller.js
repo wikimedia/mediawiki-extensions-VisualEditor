@@ -536,17 +536,31 @@ Controller.prototype.focusActionForSelection = function () {
 		this.emit( 'branchNodeChange', this.branchNode );
 	}
 
-	if ( this.getActions().length === 0 || selection.isNull() ) {
+	const actions = this.getActions();
+
+	if ( actions.length === 0 || selection.isNull() ) {
 		// Nothing to do
 		return;
 	}
-	const actions = this.getActions().filter(
-		( check ) => check.getHighlightSelections().some(
+
+	// First check if the selection matches any action's #getFocusSelection as this
+	// is more specific than highlights.
+	const focusSelectionActions = actions.filter(
+		( action ) => action.getFocusSelection().getCoveringRange().containsRange( selection.getCoveringRange() )
+	);
+	if ( focusSelectionActions.length > 0 ) {
+		// Focus the last action returned, because it should be the most-specific
+		this.focusAction( focusSelectionActions[ focusSelectionActions.length - 1 ], false );
+		return;
+	}
+
+	const highlightSelectionsActions = actions.filter(
+		( action ) => action.getHighlightSelections().some(
 			( highlight ) => highlight.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
 
-	if ( actions.length > 0 ) {
-		// Focus the last action returned, because it should be the most-specific
-		this.focusAction( actions[ actions.length - 1 ], false );
+	if ( highlightSelectionsActions.length > 0 ) {
+		this.focusAction( highlightSelectionsActions[ highlightSelectionsActions.length - 1 ], false );
+		return;
 	}
 };
 
