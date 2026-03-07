@@ -16,9 +16,6 @@
  */
 
 ( function () {
-	const hasOwn = Object.hasOwnProperty,
-		specCache = {};
-
 	/**
 	 * Represents a MediaWiki transclusion, i.e. a sequence of one or more template invocations that
 	 * strictly belong to each other (e.g. because they are unbalanced), possibly mixed with raw
@@ -235,8 +232,8 @@
 
 			if ( item.add instanceof ve.dm.MWTemplateModel ) {
 				const title = item.add.getTemplateDataQueryTitle();
-				if ( hasOwn.call( specCache, title ) && specCache[ title ] ) {
-					item.add.getSpec().setTemplateData( specCache[ title ] );
+				if ( ve.init.platform.templateDataCache.getCached( title ) ) {
+					item.add.getSpec().setTemplateData( ve.init.platform.templateDataCache.getCached( title ) );
 				}
 			}
 
@@ -314,7 +311,7 @@
 					// Skip titles that don't have a resolvable href
 					mwTitle &&
 					// Skip already cached data
-					!hasOwn.call( specCache, title ) &&
+					!ve.init.platform.templateDataCache.getCached( title ) &&
 					// Skip duplicate titles in the same batch
 					!titles.includes( title )
 				) {
@@ -340,35 +337,7 @@
 	 */
 	ve.dm.MWTransclusionModel.prototype.callTemplateDataApi = function ( titles, queue ) {
 		return Promise.all( titles.map( ( title ) => ve.init.platform.templateDataCache.get( title ) ) )
-			.then( this.cacheTemplateDataApiResponse.bind( this ) )
-			.then(
-				this.resolveChangeQueue.bind( this, queue ),
-				this.resolveChangeQueue.bind( this, queue )
-			);
-	};
-
-	/**
-	 * @private
-	 * @param {ve.dm.MWTemplatePageMetadata[]} pages
-	 */
-	ve.dm.MWTransclusionModel.prototype.cacheTemplateDataApiResponse = function ( pages ) {
-		pages.forEach( ( page ) => {
-			const title = page.title;
-
-			if ( page.missing ) {
-				// Remember templates that don't exist in the link cache
-				// { title: { missing: true|false }
-				const missingTitle = {};
-				missingTitle[ title ] = { missing: true };
-				ve.init.platform.linkCache.setMissing( missingTitle );
-			} else if ( page.notemplatedata && !OO.isPlainObject( page.params ) ) {
-				// (T243868) Prevent asking again for templates that have neither user-provided specs
-				// nor automatically detected params
-				specCache[ title ] = {};
-			} else {
-				specCache[ title ] = page;
-			}
-		} );
+			.then( this.resolveChangeQueue.bind( this, queue ) );
 	};
 
 	/**

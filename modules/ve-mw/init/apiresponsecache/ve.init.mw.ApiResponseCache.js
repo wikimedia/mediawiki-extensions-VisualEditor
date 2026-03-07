@@ -165,7 +165,7 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 
 		const mappedTitles = [];
 		[ 'redirects', 'normalized', 'converted' ].forEach( ( map ) => {
-			ve.batchPush( mappedTitles, ( data.query && data.query[ map ] ) || [] );
+			ve.batchPush( mappedTitles, ( data.query && data.query[ map ] ) || data[ map ] || [] );
 		} );
 
 		if ( pages ) {

@@ -56,7 +56,7 @@
 					}
 				}
 			};
-			transclusion.cacheTemplateDataApiResponse( [ templateData ] );
+			ve.init.platform.templateDataCache.set( { 'Template:Test': templateData } );
 
 			// add a template with an undocumented parameter to the dialog
 			const data = {
