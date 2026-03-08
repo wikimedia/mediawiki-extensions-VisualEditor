@@ -175,6 +175,9 @@
 				"IntroMessageBuilder",
 				"PreloadedContentBuilder",
 				"SpecialPageFactory",
+				"LinkRenderer",
+				"LinkBatchFactory",
+				"RestrictionStore",
 				"VisualEditor.ParsoidClientFactory"
 			]
 		},

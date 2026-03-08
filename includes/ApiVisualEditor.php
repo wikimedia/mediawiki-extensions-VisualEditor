@@ -23,14 +23,19 @@ use MediaWiki\Context\RequestContext;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\EditPage\IntroMessageBuilder;
 use MediaWiki\EditPage\PreloadedContentBuilder;
+use MediaWiki\EditPage\TemplatesOnThisPageFormatter;
 use MediaWiki\EditPage\TextboxBuilder;
+use MediaWiki\Html\Html;
 use MediaWiki\Language\RawMessage;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Article;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageReference;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Permissions\RestrictionStore;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Request\DerivativeRequest;
 use MediaWiki\Revision\RevisionLookup;
@@ -65,6 +70,9 @@ class ApiVisualEditor extends ApiBase {
 		private readonly IntroMessageBuilder $introMessageBuilder,
 		private readonly PreloadedContentBuilder $preloadedContentBuilder,
 		private readonly SpecialPageFactory $specialPageFactory,
+		private readonly LinkRenderer $linkRenderer,
+		private readonly LinkBatchFactory $linkBatchFactory,
+		private readonly RestrictionStore $restrictionStore,
 		private readonly VisualEditorParsoidClientFactory $parsoidClientFactory
 	) {
 		parent::__construct( $main, $name );
@@ -457,11 +465,17 @@ class ApiVisualEditor extends ApiBase {
 				break;
 
 			case 'templatesused':
-				// HACK: Build a fake EditPage so we can get checkboxes from it
-				// Deliberately omitting ,0 so oldid comes from request
-				$article = new Article( $title );
-				$editPage = new EditPage( $article );
-				$result = $editPage->makeTemplatesOnThisPageList( $editPage->getTemplates() );
+				$templateListFormatter = new TemplatesOnThisPageFormatter(
+					$this->getContext(),
+					$this->linkRenderer,
+					$this->linkBatchFactory,
+					$this->restrictionStore,
+				);
+				$result = Html::rawElement(
+					'div',
+					[ 'class' => 'templatesUsed' ],
+					$templateListFormatter->format( $title->getTemplateLinksFrom() )
+				);
 				break;
 
 			case 'parsefragment':
