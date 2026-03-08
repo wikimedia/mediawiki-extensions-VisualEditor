@@ -51,48 +51,25 @@ class ApiVisualEditor extends ApiBase {
 	use ApiBlockInfoTrait;
 	use ApiParsoidTrait;
 
-	private RevisionLookup $revisionLookup;
-	private TempUserCreator $tempUserCreator;
-	private UserFactory $userFactory;
-	private UserOptionsLookup $userOptionsLookup;
-	private WatchlistManager $watchlistManager;
-	private ContentTransformer $contentTransformer;
-	private WikiPageFactory $wikiPageFactory;
-	private IntroMessageBuilder $introMessageBuilder;
-	private PreloadedContentBuilder $preloadedContentBuilder;
-	private SpecialPageFactory $specialPageFactory;
-	private VisualEditorParsoidClientFactory $parsoidClientFactory;
-
 	public function __construct(
 		ApiMain $main,
 		string $name,
-		RevisionLookup $revisionLookup,
-		TempUserCreator $tempUserCreator,
-		UserFactory $userFactory,
-		UserOptionsLookup $userOptionsLookup,
-		WatchlistManager $watchlistManager,
-		ContentTransformer $contentTransformer,
-		StatsFactory $statsFactory,
-		WikiPageFactory $wikiPageFactory,
-		IntroMessageBuilder $introMessageBuilder,
-		PreloadedContentBuilder $preloadedContentBuilder,
-		SpecialPageFactory $specialPageFactory,
-		VisualEditorParsoidClientFactory $parsoidClientFactory
+		private readonly RevisionLookup $revisionLookup,
+		private readonly TempUserCreator $tempUserCreator,
+		private readonly UserFactory $userFactory,
+		private readonly UserOptionsLookup $userOptionsLookup,
+		private readonly WatchlistManager $watchlistManager,
+		private readonly ContentTransformer $contentTransformer,
+		private readonly StatsFactory $statsFactory,
+		private readonly WikiPageFactory $wikiPageFactory,
+		private readonly IntroMessageBuilder $introMessageBuilder,
+		private readonly PreloadedContentBuilder $preloadedContentBuilder,
+		private readonly SpecialPageFactory $specialPageFactory,
+		private readonly VisualEditorParsoidClientFactory $parsoidClientFactory
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
 		$this->setStatsFactory( $statsFactory );
-		$this->revisionLookup = $revisionLookup;
-		$this->tempUserCreator = $tempUserCreator;
-		$this->userFactory = $userFactory;
-		$this->userOptionsLookup = $userOptionsLookup;
-		$this->watchlistManager = $watchlistManager;
-		$this->contentTransformer = $contentTransformer;
-		$this->wikiPageFactory = $wikiPageFactory;
-		$this->introMessageBuilder = $introMessageBuilder;
-		$this->preloadedContentBuilder = $preloadedContentBuilder;
-		$this->specialPageFactory = $specialPageFactory;
-		$this->parsoidClientFactory = $parsoidClientFactory;
 	}
 
 	/**
