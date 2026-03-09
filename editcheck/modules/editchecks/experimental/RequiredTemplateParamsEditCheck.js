@@ -7,7 +7,7 @@ OO.inheritClass( mw.editcheck.RequiredTemplateParamsEditCheck, mw.editcheck.Base
 
 mw.editcheck.RequiredTemplateParamsEditCheck.static.title = 'Template has missing parameters';
 
-mw.editcheck.RequiredTemplateParamsEditCheck.static.name = 'requireTemplateParams';
+mw.editcheck.RequiredTemplateParamsEditCheck.static.name = 'requiredTemplateParams';
 
 mw.editcheck.RequiredTemplateParamsEditCheck.static.description = 'The template is missing some required parameters.';
 
