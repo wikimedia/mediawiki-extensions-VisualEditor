@@ -76,7 +76,7 @@
 	"editcheck-headinglevels-descriptionlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode#Heading_levels",
 	"editcheck-headinglevels-action-adjust": "Adjust heading",
 	"editcheck-image-caption-title": "Add image caption",
-	"editcheck-image-caption-description": "This image does not have a description. Help readers understand why the image is relevant by adding a [{{int:editcheck-image-caption-descriptionlink}} short caption].",
+	"editcheck-image-caption-description": "This image does not have a caption. Help readers understand why the image is relevant by adding a [{{int:editcheck-image-caption-descriptionlink}} short caption].",
 	"editcheck-image-caption-descriptionlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode#Image_caption_missing",
 	"editcheck-convertreference-title": "Convert reference",
 	"editcheck-convertreference-description": "This reference is missing details. Help readers understand where the information is coming from by converting this into a formatted [{{int:editcheck-convertreference-descriptionlink}} reference]. After converting it, check the accuracy of the details that the tool has added, and remove anything that is wrong or confusing.",
