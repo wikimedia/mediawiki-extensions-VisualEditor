@@ -123,6 +123,12 @@
 
 			ve.init.platform = mwPlatform;
 			ve.init.platform.resetUniqueIdCounter();
+			// Reset caches
+			[ 'linkCache', 'imageInfoCache', 'galleryImageInfoCache', 'templateDataCache' ].forEach( ( cache ) => {
+				if ( ve.init.platform[ cache ] ) {
+					ve.init.platform[ cache ].init();
+				}
+			} );
 			ve.init.target = mwTarget;
 			mw.libs.ve.setEditorPreference = dummySetEditorPreference;
 			// Ensure the current target is appended to the current fixture

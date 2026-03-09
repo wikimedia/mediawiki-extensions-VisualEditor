@@ -22,15 +22,7 @@ ve.init.mw.ApiResponseCache = function VeInitMwApiResponseCache( api ) {
 
 	this.api = api || new mw.Api();
 
-	// Keys are titles, values are deferreds
-	this.deferreds = {};
-
-	// Keys are page names, values are link data objects
-	// This is kept for synchronous retrieval of cached values via #getCached
-	this.cacheValues = {};
-
-	// Array of page titles queued to be looked up
-	this.queue = [];
+	this.init();
 
 	this.schedule = ve.debounce( this.processQueue.bind( this ), 0 );
 };
@@ -64,6 +56,23 @@ ve.init.mw.ApiResponseCache.static.normalizeTitle = function ( title ) {
 };
 
 /* Methods */
+
+/**
+ * Initialize the caches.
+ *
+ * Can be called again to reset the cache, e.g. by tests
+ */
+ve.init.mw.ApiResponseCache.prototype.init = function () {
+	// Keys are titles, values are deferreds
+	this.deferreds = {};
+
+	// Keys are page names, values are link data objects
+	// This is kept for synchronous retrieval of cached values via #getCached
+	this.cacheValues = {};
+
+	// Array of page titles queued to be looked up
+	this.queue = [];
+};
 
 /**
  * Look up data about a title. If the data about this title is already in the cache, this
