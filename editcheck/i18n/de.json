@@ -60,7 +60,7 @@
 	"editcheck-duplicate-link-title": "Doppelten Link entfernen",
 	"editcheck-duplicate-link-description": "Dieser Link erscheint in diesem Abschnitt mehrfach. Vereinfache den Lesern die Navigation, indem du [{{int:editcheck-duplicate-link-descriptionlink}} sich wiederholende Links entfernst].",
 	"editcheck-disambiguation-title": "Link zu einer spezifischeren Seite",
-	"editcheck-disambiguation-description": "Dieser Link führt zu einer [{{int:editcheck-disambiguation-descriptionlink}}|Begriffsklärungsseite]. Hilf den Lesern, das richtige Thema zu finden, indem du auf eine spezifischere Seite verlinkst.",
+	"editcheck-disambiguation-description": "Dieser Link führt zu einer [{{int:editcheck-disambiguation-descriptionlink}} Begriffsklärungsseite]. Hilf den Lesern, das richtige Thema zu finden, indem du auf eine spezifischere Seite verlinkst.",
 	"editcheck-headinglevels-title": "Level der Überschrift anpassen",
 	"editcheck-headinglevels-description": "Diese Überschriftenebene entspricht möglicherweise nicht der korrekten sequenziellen Struktur. Erleichtere den Lesern die Navigation durch den Inhalt, indem du die korrekte Überschriftenebene [{{int:editcheck-headinglevels-descriptionlink}} verwendest].",
 	"editcheck-headinglevels-action-adjust": "Überschrift anpassen",

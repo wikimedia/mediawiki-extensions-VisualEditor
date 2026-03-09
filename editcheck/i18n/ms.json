@@ -60,7 +60,7 @@
 	"editcheck-duplicate-link-title": "Buang pautan berganda",
 	"editcheck-duplicate-link-description": "Pautan ini muncul lebih daripada sekali dalam bahagian ini. Bantulah pembaca memandu arah dengan lebih mudah melalui pembuang [{{int:editcheck-duplicate-link-descriptionlink}} pautan yang berulang].",
 	"editcheck-disambiguation-title": "Pautan ke laman yang lebih khusus",
-	"editcheck-disambiguation-description": "Pautan ini menuju kepada [{{int:editcheck-disambiguation-descriptionlink}}|laman penyahtaksaan]. Bantulah pembaca mencari topik yang betul dengan memautkannya ke laman yang lebih khusus.",
+	"editcheck-disambiguation-description": "Pautan ini menuju kepada [{{int:editcheck-disambiguation-descriptionlink}} laman penyahtaksaan]. Bantulah pembaca mencari topik yang betul dengan memautkannya ke laman yang lebih khusus.",
 	"editcheck-headinglevels-title": "Laraskan aras tajuk",
 	"editcheck-headinglevels-description": "Aras tajuk ini mungkin tidak mengikut struktur berjujukan yang betul. Bantulah pembaca memandu arah kandungan tersebut dengan lebih mudah melalui penggunaan [{{int:editcheck-headinglevels-descriptionlink}} aras tajuk] yang betul.",
 	"editcheck-headinglevels-action-adjust": "Laraskan tajuk",

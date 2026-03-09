@@ -59,7 +59,7 @@
 	"editcheck-external-link-title": "הסרת קישור חיצוני",
 	"editcheck-external-link-description": "הקישור הזה מפנה ל[{{int:editcheck-external-link-descriptionlink}} אתר חיצוני]. {{GENDER:|עזור|עזרי}} לקוראים להישאר ממוקדים בתוכן על־ידי הסרת הקישור הזה, העברתו לפרק \"קישורים חיצוניים\" או המרתו ל[{{int:editcheck-external-link-convertlink}} הערת שוליים], אם זה מתאים.",
 	"editcheck-duplicate-link-title": "הסרת קישור כפול",
-	"editcheck-duplicate-link-description": "הקישור הזה מופיע יותר מפעם אחת בפרק הזה. {{GENDER:|עזור|עזרי}} לקוראים לנווט בערך ביתר קלות על־ידי הסרת [{{int:editcheck-duplicate-link-descriptionlink}} קישורים חוזרים].",
+	"editcheck-duplicate-link-description": "הקישור הזה מופיע יותר מפעם אחת בפרק הזה. {{GENDER:|עזור|עזרי}} לקוראים לנווט ביתר קלות על־ידי הסרת [{{int:editcheck-duplicate-link-descriptionlink}} קישורים חוזרים].",
 	"editcheck-disambiguation-title": "קישור לדף ממוקד יותר",
 	"editcheck-disambiguation-description": "הקישור הזה מפנה ל[{{int:editcheck-disambiguation-descriptionlink}} דף פירושונים]. {{GENDER:|עזור|עזרי}} לקוראים למצוא את הנושא הנכון על־ידי קישור לדף ממוקד יותר.",
 	"editcheck-headinglevels-title": "התאמת רמת הכותרת",
