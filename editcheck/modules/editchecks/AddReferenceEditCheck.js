@@ -97,6 +97,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 		const nextSibling = branchNode.parent.children[ branchNode.parent.indexOf( branchNode ) + 1 ];
 		if (
 			nextSibling instanceof ve.dm.ListNode ||
+			nextSibling instanceof ve.dm.DefinitionListNode ||
 			nextSibling instanceof ve.dm.BlockquoteNode ||
 			nextSibling instanceof ve.dm.TableNode
 		) {
