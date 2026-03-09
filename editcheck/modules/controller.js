@@ -239,11 +239,7 @@ Controller.prototype.updatePositions = function () {
  *  fired.
  */
 Controller.prototype.refresh = function ( useCache ) {
-	if ( !useCache && this.refreshDeferred ) {
-		// this will reset this.refreshDeferred as well
-		this.refreshDeferred.reject();
-	}
-	if ( this.refreshDeferred ) {
+	if ( this.refreshDeferred && useCache ) {
 		return this.refreshDeferred.promise();
 	}
 	const deferred = ve.createDeferred();
