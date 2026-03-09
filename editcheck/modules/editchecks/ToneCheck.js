@@ -185,20 +185,36 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
-		action.updateStale( true );
 		// Once revising has started the user will either make enough of an
 		// edit that this action is discarded, or will `act` again and this
 		// event-handler will be removed above:
-		action.once( 'discard', this.showSuccessHandler );
 		// If in pre-save mode, close the check dialog
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
 			const fragment = action.fragments[ action.fragments.length - 1 ].collapseToEnd();
 			// prevent triggering branch node change listeners and thus clearing staleness immediately:
 			this.controller.updateCurrentBranchNodeFromSelection( fragment.getSelection() );
-			fragment.select();
-			// select won't have refocused the article if it didn't change:
-			surface.getView().focus();
+			// If we transitioned from the pre-save mode to mid-edit we need
+			// to switch to the new action-object. If we didn't, this will just
+			// find `action` again.
+			const newAction = this.controller.getActions().find( ( cAct ) => cAct.equals( action ) );
+			if ( newAction ) {
+				newAction.updateStale( true );
+				newAction.once( 'discard', this.showSuccessHandler );
+				// If we transitioned, this will result in us waiting until
+				// the sidebar is open:
+				this.controller.refresh( true ).then( () => {
+					this.controller.ensureActionIsShown( newAction );
+					// select won't have refocused the article if it didn't change:
+					surface.getView().focus();
+				} );
+			} else {
+				// This is unlikely, but if configuration means there's *not*
+				// an equivalent action in the mid-edit, go ahead and focus the fragment
+				fragment.select();
+				// select won't have refocused the article if it didn't change:
+				surface.getView().focus();
+			}
 		} );
 	} else if ( choice === 'recheck' ) {
 		const recheckDeferred = ve.createDeferred();
