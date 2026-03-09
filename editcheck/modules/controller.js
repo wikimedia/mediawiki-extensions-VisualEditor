@@ -233,12 +233,26 @@ Controller.prototype.updatePositions = function () {
  * Update edit check list
  *
  * @fires EditCheckController#actionsUpdated
+ * @param {boolean} useCache Whether to piggyback onto an existing refresh if one is ongoing
  * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of
  *  actions. This promise will resolve *after* any actionsUpdated events are
  *  fired.
  */
-Controller.prototype.refresh = function () {
+Controller.prototype.refresh = function ( useCache ) {
+	if ( !useCache && this.refreshDeferred ) {
+		// this will reset this.refreshDeferred as well
+		this.refreshDeferred.reject();
+	}
+	if ( this.refreshDeferred ) {
+		return this.refreshDeferred.promise();
+	}
 	const deferred = ve.createDeferred();
+	deferred.always( () => {
+		if ( this.refreshDeferred === deferred ) {
+			this.refreshDeferred = null;
+		}
+	} );
+	this.refreshDeferred = deferred;
 	if ( this.target.deactivating || !this.target.active ) {
 		return deferred.reject().promise();
 	}
