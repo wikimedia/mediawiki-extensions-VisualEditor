@@ -18,6 +18,8 @@ mw.editcheck.ExternalLinkEditCheck = function MWExternalLinkEditCheck() {
 
 OO.inheritClass( mw.editcheck.ExternalLinkEditCheck, mw.editcheck.LinkEditCheck );
 
+OO.mixinClass( mw.editcheck.ExternalLinkEditCheck, mw.editcheck.ContentBranchNodeCheck );
+
 /* Static properties */
 
 mw.editcheck.ExternalLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ExternalLinkEditCheck.super.static.defaultConfig, {
@@ -45,8 +47,11 @@ mw.editcheck.ExternalLinkEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAn
 
 /* Methods */
 
-mw.editcheck.ExternalLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
+mw.editcheck.ExternalLinkEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
+	const ranges = node.getAnnotationRanges().filter(
+		( annRange ) => annRange.annotation.name === ve.dm.MWExternalLinkAnnotation.static.name
+	);
+	const actionPromises = ranges.map( ( annRange ) => {
 		const href = annRange.annotation.getAttribute( 'href' );
 		return this.controller.target.isInterwikiUrl( href ).then( ( isInterwiki ) => {
 			if ( isInterwiki ) {
@@ -56,6 +61,7 @@ mw.editcheck.ExternalLinkEditCheck.prototype.onDocumentChange = function ( surfa
 			return this.buildActionFromLinkRange( annRange.range, surfaceModel );
 		} );
 	} );
+	return actionPromises;
 };
 
 mw.editcheck.ExternalLinkEditCheck.prototype.act = function ( choice, action, surface ) {
