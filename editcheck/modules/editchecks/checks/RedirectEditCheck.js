@@ -20,6 +20,11 @@ OO.inheritClass( mw.editcheck.RedirectEditCheck, mw.editcheck.LinkEditCheck );
 
 /* Static properties */
 
+mw.editcheck.RedirectEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.RedirectEditCheck.super.static.defaultConfig, {
+	showAsCheck: false,
+	showAsSuggestion: false
+} );
+
 mw.editcheck.RedirectEditCheck.static.title = 'Link to the final page';
 
 mw.editcheck.RedirectEditCheck.static.name = 'redirect';
@@ -40,10 +45,6 @@ mw.editcheck.RedirectEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
-
-mw.editcheck.RedirectEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	enabled: false
-} );
 
 mw.editcheck.RedirectEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
 

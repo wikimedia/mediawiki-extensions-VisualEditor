@@ -38,7 +38,8 @@ mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
  * So we make TextMatch’s defaults nonrestrictive,
  * and let the finer limitations be handled by individual matchItems.
  */
-mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.TextMatchEditCheck.super.static.defaultConfig, {
+	showAsCheck: false,
 	maximumEditcount: null,
 	minimumEditcount: null
 } );
@@ -545,7 +546,8 @@ OO.initClass( mw.editcheck.TextMatchItem );
 /* Static properties */
 
 mw.editcheck.TextMatchItem.static.defaultConfig = {
-	enabled: true
+	showAsCheck: true,
+	showAsSuggestion: true
 };
 
 /* Methods */

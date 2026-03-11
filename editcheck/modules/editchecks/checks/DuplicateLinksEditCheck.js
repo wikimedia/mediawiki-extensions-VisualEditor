@@ -21,15 +21,16 @@ OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.LinkEditChec
 
 /* Static properties */
 
+mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DuplicateLinksEditCheck.super.static.defaultConfig, {
+	showAsCheck: false,
+	scope: 'paragraph'
+} );
+
 mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
 
 mw.editcheck.DuplicateLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-duplicate-link-title' );
 
 mw.editcheck.DuplicateLinksEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-duplicate-link-description' );
-
-mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	scope: 'paragraph'
-} );
 
 mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	{

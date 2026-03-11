@@ -1130,7 +1130,8 @@ class Hooks implements
 			'VisualEditorEditCheckTagging',
 			'VisualEditorEditCheck',
 			'VisualEditorEditCheckABTest',
-			'VisualEditorEditCheckLoadExperimental',
+			'VisualEditorEnableEditCheckExperimental',
+			'VisualEditorEnableEditCheckSuggestionsBeta',
 			'VisualEditorFeedbackTitle',
 			'VisualEditorSourceFeedbackTitle',
 			'VisualEditorSuggestionFeedbackTitle',
@@ -1140,9 +1141,6 @@ class Hooks implements
 		foreach ( $veConfigKeys as $key ) {
 			$jsKey = lcfirst( preg_replace( '/^VisualEditor/', '', $key ) );
 			$value = $veConfig->get( $key );
-			if ( $key === 'VisualEditorEditCheckLoadExperimental' ) {
-				$value = (bool)$value;
-			}
 			if ( $key === 'VisualEditorTabMessages' ) {
 				$value = array_filter( $value );
 			}

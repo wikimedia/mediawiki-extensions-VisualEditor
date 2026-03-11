@@ -20,6 +20,10 @@ OO.inheritClass( mw.editcheck.ExternalLinksEditCheck, mw.editcheck.LinkEditCheck
 
 /* Static properties */
 
+mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ExternalLinksEditCheck.super.static.defaultConfig, {
+	showAsCheck: false
+} );
+
 mw.editcheck.ExternalLinksEditCheck.static.name = 'externalLink';
 
 mw.editcheck.ExternalLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-external-link-title' );

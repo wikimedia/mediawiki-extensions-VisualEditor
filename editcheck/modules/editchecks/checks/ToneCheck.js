@@ -24,6 +24,12 @@ OO.inheritClass( mw.editcheck.ToneCheck, mw.editcheck.AsyncTextCheck );
 
 /* Static properties */
 
+mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ToneCheck.super.static.defaultConfig, {
+	showAsCheck: false,
+	predictionThreshold: 0.8,
+	ignoreQuotedContent: true
+} );
+
 mw.editcheck.ToneCheck.static.name = 'tone';
 
 mw.editcheck.ToneCheck.static.allowedContentLanguages = [ 'en', 'es', 'fr', 'ja', 'pt' ];
@@ -55,12 +61,6 @@ mw.editcheck.ToneCheck.static.choices = [
 		modes: [ '', 'revising' ]
 	}
 ];
-
-mw.editcheck.ToneCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	enabled: false,
-	predictionThreshold: 0.8,
-	ignoreQuotedContent: true
-} );
 
 mw.editcheck.AsyncTextCheck.static.queue = [];
 

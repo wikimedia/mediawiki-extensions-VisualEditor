@@ -20,6 +20,11 @@ OO.inheritClass( mw.editcheck.RequiredTemplateParamsEditCheck, mw.editcheck.Base
 
 /* Static properties */
 
+mw.editcheck.RequiredTemplateParamsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.RequiredTemplateParamsEditCheck.super.static.defaultConfig, {
+	showAsCheck: false,
+	showAsSuggestion: false
+} );
+
 mw.editcheck.RequiredTemplateParamsEditCheck.static.title = 'Template has missing parameters';
 
 mw.editcheck.RequiredTemplateParamsEditCheck.static.name = 'requiredTemplateParams';
@@ -40,10 +45,6 @@ mw.editcheck.RequiredTemplateParamsEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
-
-mw.editcheck.RequiredTemplateParamsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	enabled: false
-} );
 
 /* Methods */
 

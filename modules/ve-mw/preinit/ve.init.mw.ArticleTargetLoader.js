@@ -77,16 +77,10 @@
 	}
 	const editCheck = conf.editCheck || !!ecenable;
 	if ( conf.editCheckTagging || editCheck ) {
-		modules.push( 'ext.visualEditor.editCheck' );
-
-		if (
-			mw.user.options.get( 'visualeditor-editcheck-suggestions' ) ||
-			conf.editCheckLoadExperimental ||
-			ecenable === '2' ||
-			( ecenable && ecenable.split( ',' ).includes( 'experimental' ) )
-		) {
-			modules.push( 'ext.visualEditor.editCheck.experimental' );
-		}
+		modules.push(
+			'ext.visualEditor.editCheck',
+			'ext.visualEditor.editCheck.checks'
+		);
 	}
 
 	const namespaces = mw.config.get( 'wgNamespaceIds' );

@@ -21,19 +21,16 @@ class Hooks implements
 	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
 		$services = MediaWikiServices::getInstance();
 		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-		$experimentalConfig = $veConfig->get( 'VisualEditorEditCheckLoadExperimental' );
 
-		$experimentalDir = dirname( __DIR__ ) . '/modules/editchecks/experimental';
-		$files = array_diff( scandir( $experimentalDir ), [ '..', '.' ] );
-		if ( is_array( $experimentalConfig ) ) {
-			$files = array_intersect( $files, $experimentalConfig );
-		}
+		$checksDir = dirname( __DIR__ ) . '/modules/editchecks/checks';
+		$files = array_diff( scandir( $checksDir ), [ '..', '.' ] );
+
 		$veResourceTemplate = [
-			'localBasePath' => $experimentalDir,
+			'localBasePath' => $checksDir,
 			'remoteExtPath' => 'VisualEditor',
 		];
 		$resourceLoader->register( [
-			'ext.visualEditor.editCheck.experimental' => $veResourceTemplate + [
+			'ext.visualEditor.editCheck.checks' => $veResourceTemplate + [
 				'group' => 'visualEditorA',
 				'packageFiles' => $files + [
 					[

@@ -20,6 +20,11 @@ OO.inheritClass( mw.editcheck.FakeHeadingsEditCheck, mw.editcheck.BaseEditCheck 
 
 /* Static properties */
 
+mw.editcheck.FakeHeadingsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.FakeHeadingsEditCheck.super.static.defaultConfig, {
+	showAsCheck: false,
+	showAsSuggestion: false
+} );
+
 mw.editcheck.FakeHeadingsEditCheck.static.title = 'Use real headings';
 
 mw.editcheck.FakeHeadingsEditCheck.static.name = 'fakeHeadings';
@@ -36,10 +41,6 @@ mw.editcheck.FakeHeadingsEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
-
-mw.editcheck.FakeHeadingsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	enabled: false
-} );
 
 mw.editcheck.FakeHeadingsEditCheck.static.onlyCoveredNodes = true;
 

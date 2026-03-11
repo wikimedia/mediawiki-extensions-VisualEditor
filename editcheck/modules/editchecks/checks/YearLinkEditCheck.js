@@ -24,6 +24,10 @@ OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.LinkEditCheck );
 
 /* Static properties */
 
+mw.editcheck.YearLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.YearLinkEditCheck.super.static.defaultConfig, {
+	showAsCheck: false
+} );
+
 mw.editcheck.YearLinkEditCheck.static.name = 'yearLink';
 
 mw.editcheck.YearLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-yearlink-title' );

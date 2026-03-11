@@ -40,7 +40,6 @@ mw.editcheck.BaseEditCheck.static.choices = [
 ];
 
 mw.editcheck.BaseEditCheck.static.defaultConfig = {
-	enabled: true,
 	account: false, // 'loggedin', 'loggedout', anything non-truthy means allow either
 	maximumEditcount: 100,
 	minimumEditcount: 0,
@@ -49,7 +48,8 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	includeSections: true, // any non-array means to include all; array of names means to include only those
 	ignoreDisambiguationPages: false,
 	ignoreQuotedContent: false,
-	context: [ 'suggestion', 'check' ]
+	showAsCheck: true,
+	showAsSuggestion: true
 };
 
 mw.editcheck.BaseEditCheck.static.title = null;
@@ -107,12 +107,11 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
  * @return {boolean} Whether the config matches
  */
 mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentModel = undefined, suggestion = false ) {
-	if ( !config.enabled ) {
+	const show = suggestion ? config.showAsSuggestion : config.showAsCheck;
+	if ( !show && !mw.editcheck.experimental ) {
 		return false;
 	}
-	if ( config.context && !config.context.includes( suggestion ? 'suggestion' : 'check' ) ) {
-		return false;
-	}
+
 	// Skip account status checks when in suggestion mode
 	if ( !suggestion ) {
 		// account status:

@@ -611,7 +611,10 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 		mw.config.values.wgCategories = caseItem.categories;
 		assert.strictEqual(
 			mw.editcheck.BaseEditCheck.static.doesConfigMatch(
-				{ enabled: true, inCategory: caseItem.inCategory, notInCategory: caseItem.notInCategory },
+				ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+					inCategory: caseItem.inCategory,
+					notInCategory: caseItem.notInCategory
+				} ),
 				doc
 			),
 			caseItem.matches,

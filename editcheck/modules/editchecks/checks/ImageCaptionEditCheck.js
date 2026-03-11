@@ -20,6 +20,10 @@ OO.inheritClass( mw.editcheck.ImageCaptionEditCheck, mw.editcheck.BaseEditCheck 
 
 /* Static properties */
 
+mw.editcheck.ImageCaptionEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ImageCaptionEditCheck.super.static.defaultConfig, {
+	showAsCheck: false
+} );
+
 mw.editcheck.ImageCaptionEditCheck.static.name = 'imageCaption';
 
 mw.editcheck.ImageCaptionEditCheck.static.title = OO.ui.deferMsg( 'editcheck-image-caption-title' );

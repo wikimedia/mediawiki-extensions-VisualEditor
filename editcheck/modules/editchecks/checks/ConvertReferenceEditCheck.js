@@ -24,7 +24,8 @@ OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCh
 
 /* Static properties */
 
-mw.editcheck.ConvertReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+mw.editcheck.ConvertReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ConvertReferenceEditCheck.super.static.defaultConfig, {
+	showAsCheck: false,
 	strict: 'url-only'
 } );
 

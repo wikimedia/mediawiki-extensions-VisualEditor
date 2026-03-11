@@ -21,7 +21,7 @@ const suggestionsPref = !!mw.user.options.get( 'visualeditor-editcheck-suggestio
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
-	experimental: !!( suggestionsPref || mw.config.get( 'wgVisualEditorConfig' ).editCheckLoadExperimental || ecenable === '2' ),
+	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || ecenable === '2' ),
 	suggestions: suggestionsPref,
 	checksShown: {},
 	checksSeen: {},
@@ -56,9 +56,6 @@ require( './dialogs/GutterSidebarEditCheckDialog.js' );
 require( './editchecks/BaseEditCheck.js' );
 require( './editchecks/LinkEditCheck.js' );
 require( './editchecks/AsyncTextCheck.js' );
-require( './editchecks/AddReferenceEditCheck.js' );
-require( './editchecks/ToneCheck.js' );
-require( './editchecks/PasteCheck.js' );
 
 if ( mw.editcheck.experimental ) {
 	// ext.visualEditor.editCheck.experimental already loaded by ve.init.mw.ArticleTargetLoader
@@ -78,7 +75,7 @@ for ( const check of nonDefaultChecks ) {
 
 if ( abCheck === 'paste' ) {
 	// In the a/b test, force-enable/disable the check
-	mw.editcheck.config.paste = ve.extendObject( mw.editcheck.config.paste || {}, { enabled: enableAbCheck } );
+	mw.editcheck.config.paste = ve.extendObject( mw.editcheck.config.paste || {}, { showAsCheck: enableAbCheck } );
 }
 
 const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];
@@ -100,7 +97,7 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	}
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { enabled: true } ) );
+	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference' ) );
 	try {
 		return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 	} catch ( e ) {
@@ -111,7 +108,7 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 
 mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone', { enabled: true } ) );
+	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone' ) );
 	// Run actual check eligibility before calling API
 	let canBeShown;
 	try {
@@ -246,13 +243,13 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			target.getSurface().getView().on( 'paste', ( data ) => {
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
 				// Check might not be registered so we can't use the factory.
-				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { enabled: true } ) );
+				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste' ) );
 				if ( check.canBeShown( target.getSurface().getModel().getDocument(), false ) && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 					// The check would be shown for the current viewer, and there's enough content that we care about it:
 					if ( data.source ) {
 						// Known-source pastes that we're not showing regardless of the check being enabled/disabled
 						ve.track( 'activity.editCheck-paste', { action: 'ignored-paste-' + data.source } );
-					} else if ( !defaults.enabled ) {
+					} else if ( !defaults.showAsCheck ) {
 						// The check is disabled, and there's no source so we would have shown the check otherwise
 						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
 					}

@@ -51,9 +51,9 @@ class SpecialEditChecks extends SpecialPage {
 			'mediawiki.content.json'
 		] );
 
-		$baseDir = dirname( __DIR__ );
-		$checksDir = $baseDir . '/editcheck/modules/editchecks';
-		$experimentalDir = $checksDir . '/experimental';
+		$dir = dirname( __DIR__ );
+		$baseDir = $dir . '/editcheck/modules/editchecks';
+		$checksDir = $baseDir . '/checks';
 		$abstractClasses = [
 			'BaseEditCheck.js',
 			'AsyncTextCheck.js',
@@ -63,8 +63,12 @@ class SpecialEditChecks extends SpecialPage {
 		$out->addHtml( $this->msg( 'editcheck-specialeditchecks-info' )->parseAsBlock() );
 
 		$abChecks = [];
-		$defaultChecks = $this->collectChecks( $checksDir . '/*.js', $abstractClasses, false, true, $onWikiConfig );
-		$disabledChecks = $this->collectChecks( $checksDir . '/*.js', $abstractClasses, false, false, $onWikiConfig );
+		$defaultChecks = $this->collectChecks(
+			$checksDir . '/*.js', $abstractClasses, false, true, null, $onWikiConfig
+		);
+		$disabledChecks = $this->collectChecks(
+			$checksDir . '/*.js', $abstractClasses, false, false, false, $onWikiConfig
+		);
 		$abTest = MediaWikiServices::getInstance()->getMainConfig()->get( 'VisualEditorEditCheckABTest' );
 		if ( $abTest !== null ) {
 			// Extract AB test check
@@ -91,14 +95,10 @@ class SpecialEditChecks extends SpecialPage {
 			$out->addHTML( $this->buildTableHtml( $abChecks, $onWikiConfig ) );
 		}
 
-		if ( is_dir( $experimentalDir ) ) {
-			$experimentalDisabledChecks = $this->collectChecks(
-				$experimentalDir . '/*.js', [], false, false, $onWikiConfig
-			);
+		if ( is_dir( $checksDir ) ) {
 			$experimentalEnabledChecks = $this->collectChecks(
-				$experimentalDir . '/*.js', [], false, true, $onWikiConfig
+				$checksDir . '/*.js', [], false, false, true, $onWikiConfig
 			);
-			$allDisabledChecks = array_merge( $disabledChecks, $experimentalDisabledChecks );
 
 			if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
 				// Split beta and experimental checks based on if they are enabled by default
@@ -112,9 +112,9 @@ class SpecialEditChecks extends SpecialPage {
 
 				$out->addHTML( Html::element( 'h2', [],
 					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
-				$out->addHTML( $this->buildTableHtml( $allDisabledChecks, $onWikiConfig, true ) );
+				$out->addHTML( $this->buildTableHtml( $disabledChecks, $onWikiConfig, true ) );
 			} else {
-				$allExperimentalChecks = array_merge( $experimentalEnabledChecks, $allDisabledChecks );
+				$allExperimentalChecks = array_merge( $experimentalEnabledChecks, $disabledChecks );
 				// Sort checks by 'name' property
 				usort( $allExperimentalChecks, static function ( $a, $b ) {
 					return strcmp( $a['name'], $b['name'] );
@@ -125,7 +125,7 @@ class SpecialEditChecks extends SpecialPage {
 			}
 		}
 
-		$baseCheck = $this->collectChecks( $checksDir . '/BaseEditCheck.js', [], true );
+		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
 			$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-base' )->text() ) );
 			$out->addHTML( $this->configDetails(
@@ -141,12 +141,13 @@ class SpecialEditChecks extends SpecialPage {
 	 * @param string $glob Glob pattern for files
 	 * @param array $excludeFiles List of filenames to exclude
 	 * @param bool $includeAbstract Whether to include abstract classes
-	 * @param bool|null $onlyWithEnabledValue If a boolean, only checks whose 'enabled' value matches this
+	 * @param bool|null $showAsCheck If a boolean, only checks whose 'showAsCheck' value matches this
+	 * @param bool|null $showAsSuggestion If a boolean, only checks whose 'showAsSuggestion' value matches this
 	 * @return array List of edit checks with metadata
 	 */
 	private function collectChecks(
 		string $glob, array $excludeFiles = [], bool $includeAbstract = false,
-		?bool $onlyWithEnabledValue = null, array $onWikiConfig = []
+		?bool $showAsCheck = null, ?bool $showAsSuggestion = null, array $onWikiConfig = []
 	): array {
 		$checks = [];
 		$files = glob( $glob ) ?: [];
@@ -177,10 +178,19 @@ class SpecialEditChecks extends SpecialPage {
 				'defaultConfig' => $this->extractDefaultConfig( $src ),
 			];
 
-			// Filter by enabled value if requested
-			if ( $onlyWithEnabledValue !== null ) {
-				$enabled = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'enabled' ) ?? true;
-				if ( $enabled !== $onlyWithEnabledValue ) {
+			// Filter by showAsCheck value if requested
+			if ( $showAsCheck !== null ) {
+				$showAsCheckValue = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'showAsCheck' ) ?? true;
+				if ( $showAsCheckValue !== $showAsCheck ) {
+					continue;
+				}
+			}
+
+			// Filter by showAsSuggestion value if requested
+			if ( $showAsSuggestion !== null ) {
+				$showAsSuggestionValue =
+					$this->getConfigValueFromData( $checkData, $onWikiConfig, 'showAsSuggestion' ) ?? true;
+				if ( $showAsSuggestionValue !== $showAsSuggestion ) {
 					continue;
 				}
 			}

@@ -199,6 +199,8 @@ mw.editcheck.EditCheckAction.prototype.isSuggestion = function () {
  * @return {mw.editcheck.EditCheckActionWidget}
  */
 mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface ) {
+	const enabledByDefault = ( !this.suggestion && this.check.config.showAsCheck ) ||
+		( this.suggestion && this.check.config.showAsSuggestion );
 	this.widget = new mw.editcheck.EditCheckActionWidget( {
 		type: this.getType(),
 		icon: this.icon,
@@ -211,7 +213,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		mode: this.mode,
 		singleAction,
 		suggestion: this.suggestion,
-		experimental: !this.check.config.enabled
+		experimental: !enabledByDefault
 	} );
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]

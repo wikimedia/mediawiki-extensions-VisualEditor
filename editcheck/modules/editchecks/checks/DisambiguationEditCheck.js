@@ -20,6 +20,10 @@ OO.inheritClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.LinkEditChec
 
 /* Static properties */
 
+mw.editcheck.DisambiguationEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DisambiguationEditCheck.super.static.defaultConfig, {
+	showAsCheck: false
+} );
+
 mw.editcheck.DisambiguationEditCheck.static.name = 'disambiguation';
 
 mw.editcheck.DisambiguationEditCheck.static.title = OO.ui.deferMsg( 'editcheck-disambiguation-title' );

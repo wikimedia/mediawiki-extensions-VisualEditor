@@ -142,11 +142,11 @@
 		},
 		"VisualEditorEditCheck": {
 			"value": false,
-			"description": "Enable experimental Edit Check feature. Can also be enabled using ?ecenable=1."
+			"description": "Enable Edit Check feature. Can also be enabled using ?ecenable=1."
 		},
-		"VisualEditorEditCheckLoadExperimental": {
+		"VisualEditorEnableEditCheckExperimental": {
 			"value": false,
-			"description": "Load experimental edit checks from the `editchecks/experimental` directory. Can be `false` to not load anything, `true` to load everything, or an array of filenames to load only those checks"
+			"description": "Enable all experimental edit checks."
 		},
 		"VisualEditorEditCheckABTest": {
 			"value": false,
@@ -651,9 +651,6 @@
 				"editcheck/modules/editchecks/BaseEditCheck.js",
 				"editcheck/modules/editchecks/LinkEditCheck.js",
 				"editcheck/modules/editchecks/AsyncTextCheck.js",
-				"editcheck/modules/editchecks/AddReferenceEditCheck.js",
-				"editcheck/modules/editchecks/ToneCheck.js",
-				"editcheck/modules/editchecks/PasteCheck.js",
 				{
 					"name": "editcheck/modules/config.json",
 					"callback": "\\MediaWiki\\Extension\\VisualEditor\\EditCheck\\ResourceLoaderData::getConfig"
@@ -2445,7 +2442,7 @@
 			"ext.visualEditor.desktopArticleTarget",
 			"ext.visualEditor.core.mobile",
 			"ext.visualEditor.editCheck",
-			"ext.visualEditor.editCheck.experimental",
+			"ext.visualEditor.editCheck.checks",
 			"ext.visualEditor.rebase"
 		]
 	},

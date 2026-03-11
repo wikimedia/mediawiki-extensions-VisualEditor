@@ -20,6 +20,10 @@ OO.inheritClass( mw.editcheck.DoubleBoldEditCheck, mw.editcheck.BaseEditCheck );
 
 /* Static properties */
 
+mw.editcheck.DoubleBoldEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DoubleBoldEditCheck.super.static.defaultConfig, {
+	showAsCheck: false
+} );
+
 mw.editcheck.DoubleBoldEditCheck.static.title = 'Remove unnecessary bold formatting';
 
 mw.editcheck.DoubleBoldEditCheck.static.name = 'doubleBold';
@@ -36,10 +40,6 @@ mw.editcheck.DoubleBoldEditCheck.static.choices = [
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
 	}
 ];
-
-mw.editcheck.DoubleBoldEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	enabled: false
-} );
 
 /* Methods */
 

@@ -20,7 +20,8 @@ OO.inheritClass( mw.editcheck.PasteCheck, mw.editcheck.BaseEditCheck );
 
 /* Static properties */
 
-mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+mw.editcheck.PasteCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.PasteCheck.super.static.defaultConfig, {
+	showAsSuggestion: false,
 	minimumCharacters: 50,
 	ignoreQuotedContent: true
 } );

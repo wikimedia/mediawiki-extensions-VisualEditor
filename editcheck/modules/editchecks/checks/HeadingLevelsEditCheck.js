@@ -20,6 +20,10 @@ OO.inheritClass( mw.editcheck.HeadingLevelsEditCheck, mw.editcheck.BaseEditCheck
 
 /* Static properties */
 
+mw.editcheck.HeadingLevelsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.HeadingLevelsEditCheck.super.static.defaultConfig, {
+	showAsCheck: false
+} );
+
 mw.editcheck.HeadingLevelsEditCheck.static.name = 'headingLevels';
 
 mw.editcheck.HeadingLevelsEditCheck.static.title = OO.ui.deferMsg( 'editcheck-headinglevels-title' );

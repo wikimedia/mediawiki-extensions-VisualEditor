@@ -42,7 +42,7 @@ mw.editcheck.AddReferenceEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+mw.editcheck.AddReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.AddReferenceEditCheck.super.static.defaultConfig, {
 	minimumCharacters: 50,
 	beforePunctuation: false,
 	ignoreDisambiguationPages: true
