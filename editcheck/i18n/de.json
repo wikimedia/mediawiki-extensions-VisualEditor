@@ -65,7 +65,7 @@
 	"editcheck-headinglevels-description": "Diese Überschriftenebene entspricht möglicherweise nicht der korrekten sequenziellen Struktur. Erleichtere den Lesern die Navigation durch den Inhalt, indem du die korrekte Überschriftenebene [{{int:editcheck-headinglevels-descriptionlink}} verwendest].",
 	"editcheck-headinglevels-action-adjust": "Überschrift anpassen",
 	"editcheck-image-caption-title": "Bildunterschrift hinzufügen",
-	"editcheck-image-caption-description": "Dieses Bild hat keine Beschreibung. Hilf den Lesern zu verstehen, warum das Bild relevant ist, indem du eine [{{int:editcheck-image-caption-descriptionlink}} kurze Bildunterschrift] hinzufügst.",
+	"editcheck-image-caption-description": "Dieses Bild hat keine Bildunterschrift. Hilf den Lesern zu verstehen, warum das Bild relevant ist, indem du eine [{{int:editcheck-image-caption-descriptionlink}} kurze Bildunterschrift] hinzufügst.",
 	"editcheck-convertreference-title": "Einzelnachweis konvertieren",
 	"editcheck-convertreference-description": "Dieser Einzelnachweis ist unvollständig. Erleichtere den Lesern das Verständnis der Informationsquelle, indem du sie in einen formatierten [{{int:editcheck-convertreference-descriptionlink}} Einzelnachweis] umwandelst. Überprüfe nach der Umwandlung die Richtigkeit der hinzugefügten Informationen und entferne alle fehlerhaften oder unklaren Angaben.",
 	"editcheck-reject-description": "Andere Benutzer würden es schätzen, zu erfahren, warum du diese Wahl getroffen hast.",

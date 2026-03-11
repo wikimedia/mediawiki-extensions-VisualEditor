@@ -84,7 +84,7 @@
 	"visualeditor-dialog-meta-categories-data-label": "Катэгорыі",
 	"visualeditor-dialog-meta-categories-defaultsort-help": "Вы можаце перапрызначыць сартаваньне гэтай старонкі ў катэгорыі, задаўшы іншы індэкс для сартаваньня. Звычайна гэта робіцца ў старонках пра асобаў, якія мусяць быць адсартаваныя паводле прозьвішчаў, але пачынацца зь імені.",
 	"visualeditor-dialog-meta-categories-defaultsort-label": "Сартаваць гэтую старонку перадвызначана як",
-	"visualeditor-dialog-meta-categories-hidden": "Гэтая катэгорыя не адлюстроўваецца на старонках, на якія дададзеная.",
+	"visualeditor-dialog-meta-categories-hidden": "Гэтая катэґорыя не паказваецца на старонках, на якія дададзеная.",
 	"visualeditor-dialog-meta-categories-input-hiddencategorieslabel": "Схаваныя катэгорыі",
 	"visualeditor-dialog-meta-categories-input-matchingcategorieslabel": "Пасуючыя катэгорыі",
 	"visualeditor-dialog-meta-categories-input-movecategorylabel": "Перасунуць гэтую катэгорыю сюды",
