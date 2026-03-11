@@ -16,6 +16,8 @@
 	"editcheck-dialog-addref-success-notify": "Hvala što ste dodali izvor!",
 	"editcheck-dialog-addref-title": "Dodavanje izvora",
 	"editcheck-dialog-title": "Prije objave",
+	"editcheck-copyvio-title": "Zalijepljen sadržaj",
+	"editcheck-review-title": "Pregled promjena",
 	"tag-editcheck-reference-decline-common-knowledge": "EditCheck: referencija odbijena, općepoznato",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: dodavanje referencije odbijeno je zato što je tvrdnja svima poznata",
 	"tag-editcheck-reference-decline-irrelevant": "EditCheck: referencija odbijena, nevažno",
