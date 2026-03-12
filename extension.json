@@ -703,6 +703,7 @@
 				"editcheck-double-bold-description",
 				"editcheck-double-bold-descriptionlink",
 				"editcheck-double-bold-action-remove",
+				"editcheck-textmatch-replace",
 				"editcheck-tone-title",
 				"editcheck-tone-title-acted",
 				"editcheck-tone-description",

@@ -33,6 +33,10 @@ OO.inheritClass( mw.editcheck.TextMatchEditCheck, mw.editcheck.BaseEditCheck );
 
 mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
 
+// Only show replacement preview if found text and replacement
+// are below a certain length, to avoid UI issues with long text.
+const replaceTextLengthLimit = 25;
+
 /**
  * The configs of TextMatchEditCheck take priority over individual matchItem configs.
  * So we make TextMatch’s defaults nonrestrictive,
@@ -366,11 +370,24 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 							( choice ) => choice.modes.includes( matchItem.mode )
 						);
 						const mode = isValidMode ? matchItem.mode : '';
+						let prompt;
+						if ( mode === 'replace' ) {
+							const foundText = fragment.getText();
+							const replacement = matchItem.getReplacement( foundText );
+							if (
+								replacement &&
+								foundText.length <= replaceTextLengthLimit &&
+								replacement.length <= replaceTextLengthLimit
+							) {
+								prompt = ve.msg( 'editcheck-textmatch-replace', foundText, replacement );
+							}
+						}
 						actions.push(
 							new mw.editcheck.TextMatchEditCheckAction( {
 								fragments: [ fragment ],
 								title: matchItem.title,
 								message: matchItem.message,
+								prompt,
 								check: this,
 								mode,
 								matchItem,

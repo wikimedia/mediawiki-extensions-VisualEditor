@@ -46,6 +46,7 @@
 	"editcheck-preference-suggestions-description": "Community-configured edit suggestions for improving articles. Available in [[:mw:Special:MyLanguage/VisualEditor|visual editor]].",
 	"editcheck-preference-suggestions-info-link": "//mediawiki.org/wiki/Special:MyLanguage/Edit_check/Suggestions",
 	"editcheck-preference-suggestions-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/Talk:Edit_check/Suggestions",
+	"editcheck-textmatch-replace": "Replace \"$1\" with \"$2\"?",
 	"editcheck-tone-title": "Revise Tone?",
 	"editcheck-tone-description": "Other users often revise this kind of wording, saying the tone is unbalanced. [{{int:editcheck-tone-descriptionlink}} Learn more]",
 	"editcheck-tone-descriptionlink": "//meta.wikimedia.org/wiki/Special:MyLanguage/Neutral_point_of_view",
