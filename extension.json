@@ -156,6 +156,10 @@
 			"value": false,
 			"description": "Enable the Edit Check Suggestions beta feature."
 		},
+		"VisualEditorEditCheckDefaultConfig": {
+			"value": {},
+			"description": "Override default Edit Check config. Same as editing [[MediaWiki:Editcheck-config.json]]."
+		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
