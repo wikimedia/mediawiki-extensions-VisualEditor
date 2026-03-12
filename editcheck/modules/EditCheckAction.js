@@ -39,7 +39,6 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.suggestion = config.suggestion;
 	this.widget = null;
 	this.stale = false;
-	this.hasBeenSeen = false;
 };
 
 /* Inheritance */
@@ -60,6 +59,13 @@ OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
  *
  * @event mw.editcheck.EditCheckAction#stale
  * @param {boolean} stale The check is stale
+ */
+
+/**
+ * Fired when the action is shown to the user
+ *
+ * @event mw.editcheck.EditCheckAction#shown
+ * @param {boolean} shown The check is shown
  */
 
 /**
@@ -218,6 +224,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]
 	} );
+	this.emit( 'shown' );
 	this.widget.once( 'actionSeen', this.onActionSeen.bind( this ) );
 	this.widget.toggleCollapse( collapsed );
 
@@ -254,10 +261,7 @@ mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actio
  * @fires mw.editcheck.EditCheckAction#seen
  */
 mw.editcheck.EditCheckAction.prototype.onActionSeen = function () {
-	if ( !this.hasBeenSeen ) {
-		this.hasBeenSeen = true;
-		this.emit( 'seen' );
-	}
+	this.emit( 'seen' );
 };
 
 /**

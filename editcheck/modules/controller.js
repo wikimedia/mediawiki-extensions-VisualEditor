@@ -361,15 +361,13 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 
 			newActions.forEach( ( action ) => {
+				action.once( 'shown', this.onActionShown.bind( this, action ) );
 				action.once( 'seen', this.onActionSeen.bind( this, action ) );
 				action.on( 'act', this.onActionAct, [ action ], this );
 			} );
 
 			// If the actions list changed, update
 			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
-				if ( !this.inBeforeSave ) {
-					this.updateShownStats( newActions, 'midedit' );
-				}
 				if ( this.inSetup ) {
 					// Any actions that are present during initial setup
 					// shouldn't be treated as being "new". They're either
@@ -734,8 +732,6 @@ Controller.prototype.setupPreSaveProcess = function () {
 					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions, controller: this } )
 						.then( ( instance ) => {
 							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
-							this.updateShownStats( actions, 'presave' );
-
 							this.scrollActionIntoViewDebounced( this.focusedAction, true );
 
 							instance.closed.then( () => {}, () => {} ).then( () => {
@@ -1013,6 +1009,20 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 };
 
 /**
+ * Handle instrumentation and tracking when an action is shown
+ *
+ * @param {mw.editcheck.EditCheckAction} action that was shown
+ */
+Controller.prototype.onActionShown = function ( action ) {
+	const moment = this.inBeforeSave ? 'presave' : 'midedit';
+	if ( action.isSuggestion() ) {
+		ve.track( 'activity.editCheck-' + action.getName(), { action: 'suggestion-shown-' + moment } );
+	} else {
+		mw.editcheck.checksShown[ action.getName() ] = true;
+		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-' + moment } );
+	}
+};
+/**
  * Handle instrumentation and tracking when an action is marked as seen
  *
  * @param {mw.editcheck.EditCheckAction} action that was seen
@@ -1050,23 +1060,6 @@ Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 	} else {
 		mw.editcheck.checksUsed[ action.getName() ] = true;
 	}
-};
-
-/**
- * Track some actions as having been shown
- *
- * @param {mw.editcheck.EditCheckAction[]} actions
- * @param {string} moment 'midedit' or 'presave'
- */
-Controller.prototype.updateShownStats = function ( actions, moment ) {
-	actions.forEach( ( action ) => {
-		if ( action.isSuggestion() ) {
-			ve.track( 'activity.editCheck-' + action.getName(), { action: 'suggestion-shown-' + moment } );
-		} else {
-			mw.editcheck.checksShown[ action.getName() ] = true;
-			ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-' + moment } );
-		}
-	} );
 };
 
 module.exports = {
