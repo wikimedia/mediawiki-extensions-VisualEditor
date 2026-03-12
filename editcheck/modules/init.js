@@ -60,8 +60,6 @@ require( './editchecks/AddReferenceEditCheck.js' );
 require( './editchecks/ToneCheck.js' );
 require( './editchecks/PasteCheck.js' );
 
-nonDefaultChecks.add( 'tone' );
-
 if ( mw.editcheck.experimental ) {
 	// ext.visualEditor.editCheck.experimental already loaded by ve.init.mw.ArticleTargetLoader
 	nonDefaultChecks.clear();
