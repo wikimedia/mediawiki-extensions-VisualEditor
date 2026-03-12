@@ -376,6 +376,10 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 					// user just caused them.
 					newActions = [];
 				}
+
+				if ( this.suppressSuggestions ) {
+					newActions = newActions.filter( ( action ) => !action.isSuggestion() );
+				}
 				// TODO: We need to consider a consistency check here as the document state may have changed since the
 				// action within the promise was created
 				// Notify listeners that actions have been updated
