@@ -67,7 +67,7 @@
 	"editcheck-headinglevels-description": "ייתכן שרמת הכותרת הזאת אינה פועלת לפי המבנה הרציף הנכון. {{GENDER:|עזור|עזרי}} לקוראים לנווט בתוכן ביתר קלות על־ידי שימוש ב[{{int:editcheck-headinglevels-descriptionlink}} רמת הכותרת הנכונה].",
 	"editcheck-headinglevels-action-adjust": "התאמת הכותרת",
 	"editcheck-image-caption-title": "הוספת כיתוב תמונה",
-	"editcheck-image-caption-description": "לתמונה הזאת אין תיאור. {{GENDER:|עזור|עזרי}} לקוראים להבין למה התמונה רלוונטית על־ידי הוספת [{{int:editcheck-image-caption-descriptionlink}} כיתוב קצר].",
+	"editcheck-image-caption-description": "לתמונה הזאת אין כיתוב. {{GENDER:|עזור|עזרי}} לקוראים להבין למה התמונה רלוונטית על־ידי הוספת [{{int:editcheck-image-caption-descriptionlink}} כיתוב קצר].",
 	"editcheck-convertreference-title": "המרת הערת שוליים",
 	"editcheck-convertreference-description": "בהערת השוליים הזאת חסרים פרטים. {{GENDER:|עזור|עזרי}} לקוראים להבין מאין מגיע המידע על־ידי המרתה ל[{{int:editcheck-convertreference-descriptionlink}} הערת שוליים] מעוצבת. לאחר ההמרה, יש לבדוק את דיוק הפרטים שהכלי הוסיף, ולהסיר כל דבר שגוי או מבלבל.",
 	"editcheck-reject-description": "עורכים אחרים ישמחו לדעת למה בחרת בזה.",

@@ -35,6 +35,7 @@
 	"editcheck-tone-thank": "Grazie per aver preso in considerazione il tono!",
 	"editcheck-duplicate-link-description": "Questo collegamento appare più di una volta in questa sezione. Aiuta i lettori a navigare più facilmente rimuovendo [{{int:editcheck-duplicate-link-descriptionlink}} collegamenti ripetuti].",
 	"editcheck-disambiguation-description": "Questo collegamento rimanda a una [{{int:editcheck-disambiguation-descriptionlink}} pagina di disambiguazione]. Aiuta i lettori a trovare l'argomento giusto collegandosi a una pagina più specifica.",
+	"editcheck-image-caption-description": "Questa immagine non ha una didascalia. Aiuta i lettori a capire perché l'immagine è rilevante aggiungendo una [{{int:editcheck-image-caption-descriptionlink}} breve didascalia].",
 	"editcheck-review-title": "Rivedi modifiche",
 	"editcheck-specialeditchecks-header-betafeatures": "Funzionalità sperimentali",
 	"editcheck-specialeditchecks-header-default": "Controlli predefiniti",

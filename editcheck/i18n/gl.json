@@ -64,7 +64,7 @@
 	"editcheck-headinglevels-description": "Se cadra este nivel de cabeceira non segue a estrutura secuencial correcta. Axuda aos lectores a navegar polo contido máis facilmente usando o [{{int:editcheck-headinglevels-descriptionlink}} nivel de cabeceira] correcto.",
 	"editcheck-headinglevels-action-adjust": "Axustar a cabeceira",
 	"editcheck-image-caption-title": "Engadir un pé de foto",
-	"editcheck-image-caption-description": "Esta imaxe non ten descrición. Axuda aos lectores a comprender por que a imaxe é relevante engadindo un [{{int:editcheck-image-caption-descriptionlink}} pé de foto breve].",
+	"editcheck-image-caption-description": "Esta imaxe non ten pé de foto. Axuda aos lectores a comprender por que a imaxe é relevante engadindo un [{{int:editcheck-image-caption-descriptionlink}} pé de foto breve].",
 	"editcheck-convertreference-title": "Converter a referencia",
 	"editcheck-convertreference-description": "Nesta referencia faltan detalles. Axuda aos lectores a comprender de onde provén a información converténdoa nunha [{{int:editcheck-convertreference-descriptionlink}} referencia] con formato. Despois de convertela, comproba a exactitude dos detalles que engadiu a ferramenta e elimina calquera cousa que sexa incorrecta ou confusa.",
 	"editcheck-reject-description": "Outros editores apreciarán saber por que tomaches esta decisión.",

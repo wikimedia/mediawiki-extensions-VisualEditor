@@ -67,7 +67,7 @@
 	"editcheck-headinglevels-description": "قد لا يتبع مستوى العنوان هذا البنية التسلسلية الصحيحة. ساعدوا القراء على تصفح المحتوى بسهولة أكبر باستخدام [{{int:editcheck-headinglevels-descriptionlink}} مستوى العنوان] الصحيح.",
 	"editcheck-headinglevels-action-adjust": "ضبط العنوان",
 	"editcheck-image-caption-title": "إضافة شرح الصورة",
-	"editcheck-image-caption-description": "لا تحتوي هذه الصورة على وصف. ساعدوا القراء على فهم أهمية الصورة بإضافة تعليق قصير.",
+	"editcheck-image-caption-description": "لا تحتوي هذه الصورة على شرح. ساعدوا القراء على العلم بأهمية الصورة عن طريق إضافة [{{int:editcheck-image-caption-descriptionlink}} شرح قصير].",
 	"editcheck-convertreference-title": "تحويل المرجع",
 	"editcheck-convertreference-description": "هذا المرجع يفتقر إلى بعض التفاصيل. ساعدوا القراء على فهم مصدر المعلومات بتحويله إلى [{{int:editcheck-convertreference-descriptionlink}} مرجع] منسق. بعد التحويل، تحققوا من دقة التفاصيل التي أضافتها الأداة، واحذفوا أي شيء خاطئ أو مُبهم.",
 	"editcheck-reject-description": "سيكون من المفيد للمحررين الآخرين معرفة سبب اختيارك لهذا.",

@@ -65,7 +65,7 @@
 	"editcheck-headinglevels-description": "Aras tajuk ini mungkin tidak mengikut struktur berjujukan yang betul. Bantulah pembaca memandu arah kandungan tersebut dengan lebih mudah melalui penggunaan [{{int:editcheck-headinglevels-descriptionlink}} aras tajuk] yang betul.",
 	"editcheck-headinglevels-action-adjust": "Laraskan tajuk",
 	"editcheck-image-caption-title": "Tambah kapsyen gambar",
-	"editcheck-image-caption-description": "Imej ini tidak mempunyai penerangan. Bantulah pembaca memahami mengapa imej tersebut relevan dengan menambah kapsyen pendek [{{int:editcheck-image-caption-descriptionlink}}].",
+	"editcheck-image-caption-description": "Imej ini tidak mempunyai kapsyen. Bantulah pembaca memahami mengapa imej tersebut relevan dengan menambah kapsyen pendek [{{int:editcheck-image-caption-descriptionlink}}].",
 	"editcheck-convertreference-title": "Ubah suai rujukan",
 	"editcheck-convertreference-description": "Rujukan ini kehilangan butiran lanjut. Bantulah pembaca memahami asal usul maklumat ini dengan mengubahsuaikannya menjadi bentuk [{{int:editcheck-convertreference-descriptionlink}} rujukan] yang diformatkan. Selepas mengubah suai, sila semak ketepatan butiran yang telah ditambah oleh alat tersebut dan buang mana-mana maklumat yang salah atau mengelirukan.",
 	"editcheck-reject-description": "Penyunting lain akan belajar dan menilai mengapa anda melakukan pilihan sedemikian",

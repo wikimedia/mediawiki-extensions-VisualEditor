@@ -70,7 +70,7 @@
 	"editcheck-headinglevels-description": "Dit kopniveau volgt mogelijk niet de juiste volgorde. Help lezers gemakkelijker door de inhoud te navigeren door het juiste kopniveau te gebruiken.",
 	"editcheck-headinglevels-action-adjust": "Koptekst aanpassen",
 	"editcheck-image-caption-title": "Afbeeldingsbijschrift toevoegen",
-	"editcheck-image-caption-description": "Deze afbeelding heeft geen beschrijving. Help lezers te begrijpen waarom de afbeelding relevant is door een [{{int:editcheck-image-caption-descriptionlink}} korte beschrijving toe te voegen].",
+	"editcheck-image-caption-description": "Deze afbeelding heeft geen bijschrift. Help lezers te begrijpen waarom de afbeelding relevant is door een [{{int:editcheck-image-caption-descriptionlink}} kort bijschrift toe te voegen].",
 	"editcheck-convertreference-title": "Bronvermelding invoegen",
 	"editcheck-convertreference-description": "Deze bronvermelding mist details. Help lezers te begrijpen waar de informatie vandaan komt door dit om te zetten naar een opgemaakte [{{int:editcheck-convertreference-descriptionlink}} bronvermelding]. Controleer na de conversie de juistheid van de door het hulpprogramma toegevoegde details en verwijder alles wat onjuist of verwarrend is.",
 	"editcheck-reject-description": "Andere redacteuren willen graag weten waarom u deze keuze hebt gemaakt.",
