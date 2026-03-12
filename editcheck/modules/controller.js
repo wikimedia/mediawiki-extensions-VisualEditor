@@ -400,16 +400,15 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
  * @fires EditCheckController#actionsUpdated
  */
 Controller.prototype.removeAction = function ( listener, action, rejected ) {
-	const actions = this.getActions( listener );
+	const actions = this.actionsByListener[ listener ];
+	if ( !actions || actions.length === 0 ) {
+		return;
+	}
 	const index = actions.indexOf( action );
 	if ( index === -1 ) {
 		return;
 	}
 	const removed = actions.splice( index, 1 );
-
-	if ( action === this.focusedAction ) {
-		this.focusedAction = null;
-	}
 
 	this.emit( 'actionsUpdated', listener, this.getActions(), [], removed, rejected );
 };
