@@ -7,12 +7,14 @@ describe( 'Content Editable', () => {
 
 	let name, content;
 
+	before( async () => {
+		await LoginPage.loginAdmin();
+	} );
+
 	beforeEach( async () => {
 		await EditPage.clearBeforeUnload();
 		content = Util.getTestString();
 		name = Util.getTestString();
-		await LoginPage.loginAdmin();
-
 		await EditPage.openForEditing( name );
 		await EditPage.activationComplete();
 		await EditPage.focusRootNode();

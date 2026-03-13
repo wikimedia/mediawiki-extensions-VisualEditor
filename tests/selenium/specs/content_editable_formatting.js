@@ -7,11 +7,13 @@ describe( 'Content Editable Formatting', () => {
 
 	let name;
 
+	before( async () => {
+		await LoginPage.loginAdmin();
+	} );
+
 	beforeEach( async () => {
 		await EditPage.clearBeforeUnload();
 		name = Util.getTestString();
-		await LoginPage.loginAdmin();
-
 		await EditPage.openForEditing( name );
 		await EditPage.activationComplete();
 		await EditPage.focusRootNode();
