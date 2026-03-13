@@ -71,7 +71,7 @@
 	"editcheck-headinglevels-description": "此标题级别可能不符合正确的顺序结构。请使用正确的[{{int:editcheck-headinglevels-descriptionlink}} 标题级别]，以帮助读者更轻松地浏览内容。",
 	"editcheck-headinglevels-action-adjust": "调整标题",
 	"editcheck-image-caption-title": "添加图像说明",
-	"editcheck-image-caption-description": "此图像缺少描述。请添加一个[{{int:editcheck-image-caption-descriptionlink}} 简短的标题]，以帮助读者理解此图像为何相关。",
+	"editcheck-image-caption-description": "此图像缺少标题。请添加一个[{{int:editcheck-image-caption-descriptionlink}} 简短的标题]，以帮助读者理解此图像为何相关。",
 	"editcheck-convertreference-title": "转换参考资料",
 	"editcheck-convertreference-description": "此参考资料缺少详细信息。请将其转换为格式化的[{{int:editcheck-convertreference-descriptionlink}} 参考资料]，以帮助读者了解信息的来源。转换后，请检查工具添加的详细信息是否准确，并删除任何错误或容易引起混淆的信息。",
 	"editcheck-reject-description": "其他编者会希望了解您做出此选择的原因。",

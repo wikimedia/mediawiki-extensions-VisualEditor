@@ -64,7 +64,7 @@
 	"editcheck-headinglevels-description": "Iste nivello de titulo pote non sequer le structura sequential correcte. Pro adjutar le lectores a navigar per le contento plus facilemente, usa le [{{int:editcheck-headinglevels-descriptionlink}} nivello de titulo] correcte.",
 	"editcheck-headinglevels-action-adjust": "Adjustar titulo",
 	"editcheck-image-caption-title": "Adder legenda al imagine",
-	"editcheck-image-caption-description": "Iste imagine non ha description. Pro adjutar le lectores a comprender le relevantia del imagine, adde un [{{int:editcheck-image-caption-descriptionlink}} curte legenda].",
+	"editcheck-image-caption-description": "Iste imagine non ha legenda. Pro adjutar le lectores a comprender le relevantia del imagine, adde un [{{int:editcheck-image-caption-descriptionlink}} curte legenda].",
 	"editcheck-convertreference-title": "Converter referentia",
 	"editcheck-convertreference-description": "Iste referentia care de detalios. Pro adjutar le lectores a comprender le origine del information, converte lo in un [{{int:editcheck-convertreference-descriptionlink}} referentia] formatate. Post le conversion, verifica le exactitude del detalios que le instrumento ha addite, e remove omne cosa que es incorrecte o confuse.",
 	"editcheck-reject-description": "Altere redactores appreciarea saper proque tu ha optate pro isto.",
