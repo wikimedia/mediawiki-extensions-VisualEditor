@@ -43,6 +43,8 @@ mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceMo
 	return this.getAddedNodes( surfaceModel.getDocument(), 'mwBlockImage' )
 		.filter( ( image ) => !this.isDismissedRange( image.getOuterRange() ) )
 		.filter( ( image ) => (
+			// Only thumbnail style images require a caption
+			image.getAttribute( 'type' ) === 'thumb' &&
 			// The image contains a caption
 			image.children[ 0 ] && image.children[ 0 ].getType() === 'mwImageCaption' &&
 			// There's no content inside the caption node (it'll always contain at least an empty paragraph)

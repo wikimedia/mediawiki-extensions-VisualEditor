@@ -1,6 +1,10 @@
 QUnit.module( 'mw.editcheck.ImageCaptionEditCheck', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'onBranchNodeChange', ( assert ) => {
+	const typeFrameImage = ve.copy( ve.dm.mwExample.MWBlockImage.data[ 0 ] );
+	typeFrameImage.attributes.type = 'frame';
+	const noFrameImage = ve.copy( ve.dm.mwExample.MWBlockImage.data[ 0 ] );
+	noFrameImage.attributes.type = 'none';
 	const cases = [
 		{
 			msg: 'Empty caption',
@@ -14,6 +18,22 @@ QUnit.test( 'onBranchNodeChange', ( assert ) => {
 			],
 			expectedActions: 1
 		},
+		...[ 'frame', 'none', 'frameless' ].map( ( type ) => {
+			const image = ve.copy( ve.dm.mwExample.MWBlockImage.data[ 0 ] );
+			image.attributes.type = type;
+			return {
+				msg: `Empty caption, type=${ type }`,
+				data: [
+					image,
+					{ type: 'mwImageCaption' },
+					{ type: 'paragraph', internal: { generated: 'wrapper' } },
+					{ type: '/paragraph' },
+					{ type: '/mwImageCaption' },
+					{ type: '/mwBlockImage' }
+				],
+				expectedActions: 0
+			};
+		} ),
 		{
 			msg: 'Non-empty caption',
 			data: ve.copy( ve.dm.mwExample.MWBlockImage.data ),
