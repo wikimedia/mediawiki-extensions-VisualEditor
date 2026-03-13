@@ -456,8 +456,9 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
  * so the contents can be seen.
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
+ * @param {boolean} [alignToTop] Align selection to top of page when scrolling
  */
-Controller.prototype.ensureActionIsShown = function ( action ) {
+Controller.prototype.ensureActionIsShown = function ( action, alignToTop ) {
 	if ( OO.ui.isMobile() ) {
 		const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 		if ( !currentWindow || currentWindow.constructor.static.name !== 'gutterSidebarEditCheckDialog' ) {
@@ -466,7 +467,7 @@ Controller.prototype.ensureActionIsShown = function ( action ) {
 		// This will ultimately focus the action and scroll it into view as well:
 		currentWindow.showDialogWithAction( action, true );
 	} else {
-		this.focusAction( action, true );
+		this.focusAction( action, true, alignToTop );
 	}
 };
 
