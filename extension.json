@@ -1508,6 +1508,7 @@
 			],
 			"dependencies": [
 				"ext.visualEditor.mwimage.core",
+				"mediawiki.util",
 				"mediawiki.widgets.MediaSearch",
 				"oojs-ui.styles.icons-media",
 				"ext.visualEditor.icons-licenses",

@@ -806,7 +806,7 @@ ve.ui.MWMediaDialog.prototype.getFileType = function ( url ) {
 	// WEBM, OGV, OGX;
 	// APNG;
 	// PDF, DJVU
-	return url.split( '.' ).pop().toUpperCase();
+	return mw.util.parseImageUrl( url ).name.split( '.' ).pop().toUpperCase();
 };
 
 /**
