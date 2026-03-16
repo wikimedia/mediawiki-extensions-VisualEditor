@@ -279,7 +279,12 @@ Controller.prototype.refresh = function ( useCache ) {
 Controller.prototype.toggleSuggestionsMode = function () {
 	this.suggestionsMode = !this.suggestionsMode;
 	this.actionsByListener = {};
-	this.refresh();
+	// Treat this refresh as being as if we were in initial setup -- we don't
+	// want the "new" suggestions to be focused.
+	this.inSetup = true;
+	this.refresh().always( () => {
+		this.inSetup = null;
+	} );
 };
 
 /**

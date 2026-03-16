@@ -9,6 +9,7 @@
 	},
 	"editchecks": "{{doc-special|EditChecks}}",
 	"editcheck-config.json": "{{notranslate}}\n{{ignored}}\nJSON object configuring some edit check behavior.",
+	"editcheck-toolbar-suggestions-title": "Title for the toolbar button that toggles suggestion mode",
 	"editcheck-dialog-action-no": "Label for the no option when asking users if they want to act on a check.\n\n{{Identical|No}}",
 	"editcheck-dialog-action-yes": "Label for the yes option when asking users if they want to act on a check.\n\n{{Identical|Yes}}",
 	"editcheck-dialog-action-decline": "Label for the decline option when asking users if they want to act on a check.\n\n{{Identical|Decline}}",

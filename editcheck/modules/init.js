@@ -57,6 +57,10 @@ require( './editchecks/BaseEditCheck.js' );
 require( './editchecks/LinkEditCheck.js' );
 require( './editchecks/AsyncTextCheck.js' );
 
+if ( mw.editcheck.suggestions ) {
+	require( './EditCheckSuggestionsTool.js' );
+}
+
 if ( mw.editcheck.experimental ) {
 	// ext.visualEditor.editCheck.experimental already loaded by ve.init.mw.ArticleTargetLoader
 	nonDefaultChecks.clear();
