@@ -41,9 +41,20 @@ class SpecialEditChecks extends SpecialPage {
 	/**
 	 * @inheritDoc
 	 */
+	public function isListed() {
+		return (bool)$this->getConfig()->get( 'VisualEditorEditCheck' );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
 	public function execute( $par ) {
 		$this->setHeaders();
 		$out = $this->getOutput();
+		if ( !$this->getConfig()->get( 'VisualEditorEditCheck' ) ) {
+			$out->addHTML( Html::element( 'p', [], $this->msg( 'editcheck-specialeditchecks-disabled' )->text() ) );
+			return;
+		}
 		$out->enableOOUI();
 		$out->addModuleStyles( [
 			'oojs-ui.styles.icons-interactions',
