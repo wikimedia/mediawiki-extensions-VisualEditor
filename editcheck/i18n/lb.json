@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"GilPe",
+			"Robby",
 			"Volvox"
 		]
 	},
@@ -67,7 +68,7 @@
 	"editcheck-image-caption-title": "Bildbeschrëftung derbäisetzen",
 	"editcheck-image-caption-description": "Dëst Bild huet keng Beschreiwung. Hëlleft de Lieser ze verstoen, firwat d'Bild relevant ass, andeems Dir eng [{{int:editcheck-image-caption-descriptionlink}} kuerz Beschreiwung] derbäisetzt.",
 	"editcheck-convertreference-title": "Referenz ëmwandelen",
-	"editcheck-convertreference-description": "An dëser Referenz feelen Detailer. Hëlleft de Lieser ze verstoen, wou d'Informatioun hierkënnt, andeems Dir dës an eng formatéiert [{{int:editcheck-convertreference-descriptionlink}} Referenz ëmwandelt. Nodeems Dir s'ëmgewandelt hutt, kontrolléiert d'Genauegkeet vun den Detailer, déi den Tool bäigefüügt huet, a läscht alles, wat falsch oder onkloer ass.",
+	"editcheck-convertreference-description": "An dëser Referenz feelen Detailer. Hëlleft de Lieser ze verstoen, wou d'Informatioun hierkënnt, andeems Dir dës an eng formatéiert [{{int:editcheck-convertreference-descriptionlink}} Referenz] ëmwandelt. Nodeems Dir s'ëmgewandelt hutt, kontrolléiert d'Genauegkeet vun den Detailer, déi den Tool bäigefüügt huet, a läscht alles, wat falsch oder onkloer ass.",
 	"editcheck-reject-description": "Aner Editeure géifen et appreciéiere fir gewuer ze ginn, firwat Dir dëse Choix gemaach hutt.",
 	"editcheck-review-title": "Ännerungen nokucken",
 	"editcheck-specialeditchecks-info": "Ännerungsiwwerpréiwunge ginn ënner [[MediaWiki:Editcheck-config.json]] konfiguréiert. Kuckt [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration] fir d'Dokumentatioun.",
@@ -82,6 +83,7 @@
 	"editcheck-specialeditchecks-abtest": "(A/B-Test)",
 	"editcheck-specialeditchecks-config-summary": "Konfiguratioun",
 	"editcheck-specialeditchecks-config-default": "Standardkonfiguratioun",
+	"editcheck-specialeditchecks-config-onwiki": "On-wiki iwwerschreiwen",
 	"editcheck-specialeditchecks-config-matchitem": "Konfiguratioun vum Iwwereneestëmme vum Text",
 	"tag-editcheck-reference-decline-common-knowledge": "Ännerungsiwwerpréiwung (Referenzen) ofgeleent (Allgemengwëssen)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Referenz ofgeleent, well Allgemengwëssen",

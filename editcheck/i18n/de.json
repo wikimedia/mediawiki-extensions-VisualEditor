@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Brettchenweber",
+			"Johannnes89",
 			"Volvox"
 		]
 	},
@@ -56,7 +57,7 @@
 	"editcheck-action-add-citation": "Beleg hinzufügen",
 	"editcheck-action-convert-reference": "Konvertieren",
 	"editcheck-external-link-title": "Externen Link entfernen",
-	"editcheck-external-link-description": "Dieser Link führt zu einer externen Website. Hilf den Lesern, sich auf den Inhalt zu konzentrieren, indem du diesen Link entfernst, ihn in den Abschnitt „Weblinks“ verschiebst oder ihn gegebenenfalls in einen Einzelnachweis umwandelst.",
+	"editcheck-external-link-description": "Dieser Link führt zu einer [{{int:editcheck-external-link-descriptionlink}} externen Website]. Hilf den Lesern, sich auf den Inhalt zu konzentrieren, indem du diesen Link entfernst, ihn in den Abschnitt „Weblinks“ verschiebst oder ihn gegebenenfalls in einen [{{int:editcheck-external-link-convertlink}} Einzelnachweis] umwandelst.",
 	"editcheck-duplicate-link-title": "Doppelten Link entfernen",
 	"editcheck-duplicate-link-description": "Dieser Link erscheint in diesem Abschnitt mehrfach. Vereinfache den Lesern die Navigation, indem du [{{int:editcheck-duplicate-link-descriptionlink}} sich wiederholende Links entfernst].",
 	"editcheck-disambiguation-title": "Link zu einer spezifischeren Seite",
