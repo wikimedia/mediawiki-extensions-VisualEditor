@@ -25,6 +25,7 @@
 	"accesskey-ca-editsource-local": "e",
 	"accesskey-ca-createsource": "e",
 	"accesskey-ca-createsource-local": "e",
+	"collabpad-disabled": "CollabPad is not enabled on this wiki.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Imported from $1",
 	"collabpad": "CollabPad",

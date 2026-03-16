@@ -10,9 +10,9 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\Html\Html;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWiki\Widget\TitleInputWidget;
 use OOUI\ActionFieldLayout;
 use OOUI\ButtonWidget;
@@ -32,14 +32,6 @@ class SpecialCollabPad extends SpecialPage {
 	 */
 	protected function getGroupName() {
 		return 'wiki';
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function userCanExecute( User $user ) {
-		return $this->getConfig()->get( 'VisualEditorRebaserURL' ) &&
-			parent::userCanExecute( $user );
 	}
 
 	/**
@@ -81,6 +73,11 @@ class SpecialCollabPad extends SpecialPage {
 		$this->setHeaders();
 
 		$output = $this->getOutput();
+
+		if ( !$this->getConfig()->get( 'VisualEditorRebaserURL' ) ) {
+			$output->addHTML( Html::element( 'p', [], $this->msg( 'collabpad-disabled' )->text() ) );
+			return;
+		}
 
 		$output->addJsConfigVars( 'collabPadPageName', $subPage );
 		$output->addModuleStyles( 'ext.visualEditor.collabTarget.init.styles' );
