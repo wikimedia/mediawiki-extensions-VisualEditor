@@ -319,7 +319,7 @@ Controller.prototype.suppressSuggestionDisplay = function ( suppress ) {
  */
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	if ( this.surface.getModel().isStaging() ) {
-		return this.getActions( listener );
+		return Promise.resolve( this.getActions( listener ) );
 	}
 	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
 	// Create all actions for this listener
