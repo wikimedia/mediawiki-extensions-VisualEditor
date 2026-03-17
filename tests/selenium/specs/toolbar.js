@@ -10,7 +10,8 @@ describe( 'Toolbar', () => {
 
 		name = Util.getTestString();
 		await EditPage.openForEditing( name );
-		await EditPage.toolbar.waitForDisplayed( { timeout: 20000 } );
+		await EditPage.activationComplete();
+		await EditPage.focusRootNode();
 	} );
 
 	it( 'should open notices popup as soon as it loads', async () => {
