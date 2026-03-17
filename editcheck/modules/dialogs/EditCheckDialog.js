@@ -188,7 +188,7 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 	this.currentActions.forEach( ( action, index ) => {
 		const widget = action.render( action !== this.currentAction, this.singleAction, this.surface );
 		widget.on( 'togglecollapse', this.onToggleCollapse, [ action, index ], this );
-		action.off( 'act', this.onAct ).on( 'act', this.onAct, [ action, widget ], this );
+		action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
 
 		this.$actions.append( widget.$element );
 	} );
