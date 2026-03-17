@@ -16,12 +16,20 @@ ve.ui.EditCheckSuggestionsTool.static.title = OO.ui.deferMsg( 'editcheck-toolbar
 ve.ui.EditCheckSuggestionsTool.static.autoAddToCatchall = false;
 
 ve.ui.EditCheckSuggestionsTool.prototype.onUpdateState = function () {
+	const controller = this.toolbar.getSurface().target.editcheckController;
+	if ( !controller ) {
+		this.setDisabled( true );
+		return;
+	}
 	this.setDisabled( !mw.editcheck.suggestions );
-	this.setActive( this.toolbar.getSurface().target.editcheckController.suggestionsMode );
+	this.setActive( controller.suggestionsMode );
 };
 
 ve.ui.EditCheckSuggestionsTool.prototype.onSelect = function () {
 	const controller = this.toolbar.getSurface().target.editcheckController;
+	if ( !controller ) {
+		return;
+	}
 	controller.toggleSuggestionsMode();
 	this.setActive( controller.suggestionsMode );
 	ve.track( 'activity.' + this.getName(), { action: `toggled-${ controller.suggestionMode ? 'on' : 'off' }` } );

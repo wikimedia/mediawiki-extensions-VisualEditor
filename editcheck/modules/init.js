@@ -57,10 +57,6 @@ require( './editchecks/BaseEditCheck.js' );
 require( './editchecks/LinkEditCheck.js' );
 require( './editchecks/AsyncTextCheck.js' );
 
-if ( mw.editcheck.suggestions ) {
-	require( './EditCheckSuggestionsTool.js' );
-}
-
 if ( mw.editcheck.experimental ) {
 	// ext.visualEditor.editCheck.experimental already loaded by ve.init.mw.ArticleTargetLoader
 	nonDefaultChecks.clear();
@@ -208,6 +204,10 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 }
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnable ) {
+	if ( mw.editcheck.suggestions ) {
+		require( './EditCheckSuggestionsTool.js' );
+	}
+
 	const Controller = require( './controller.js' ).Controller;
 	mw.hook( 've.newTarget' ).add( ( target ) => {
 		if ( target.constructor.static.name !== 'article' ) {
