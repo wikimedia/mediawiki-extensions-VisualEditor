@@ -2420,7 +2420,6 @@
 			"editcheck/modules/tests/BaseEditCheck.test.js",
 			"editcheck/modules/tests/EditCheckAction.test.js",
 			"editcheck/modules/tests/EditCheckFactory.test.js",
-			"editcheck/modules/tests/AddReferenceEditCheck.test.js",
 			"editcheck/modules/tests/PasteCheck.test.js",
 			"editcheck/modules/tests/YearLinkEditCheck.test.js",
 			"editcheck/modules/tests/HeadingLevelsEditCheck.test.js",
@@ -2447,7 +2446,18 @@
 			"ext.visualEditor.editCheck",
 			"ext.visualEditor.editCheck.checks",
 			"ext.visualEditor.rebase"
-		]
+		],
+		"factory": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDataModule::addOptional",
+		"optional": {
+			"Cite": {
+				"scripts": [
+					"editcheck/modules/tests/AddReferenceEditCheck.test.js"
+				]
+			},
+			"dependencies": [
+				"ext.cite.visualEditor"
+			]
+		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
