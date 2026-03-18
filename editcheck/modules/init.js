@@ -24,12 +24,15 @@ mw.editcheck = {
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || ecenable === '2' ),
 	suggestions: suggestionsPref,
-	checksShown: {},
-	checksSeen: {},
-	checksUsed: {},
-	suggestionsSeen: {},
-	suggestionsUsed: {}
+	resetSessionState: function () {
+		this.checksShown = {};
+		this.checksSeen = {};
+		this.checksUsed = {};
+		this.suggestionsSeen = {};
+		this.suggestionsUsed = {};
+	}
 };
+mw.editcheck.resetSessionState();
 
 if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
 	const ecenableFlags = ecenable.split( ',' );
@@ -243,8 +246,11 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		if ( mw.editcheck.suggestions ) {
 			ve.track( 'activity.editCheck', { action: 'session-initialized-with-suggestions' } );
 		}
-		// Temporary logging for T402460
 		target.on( 'surfaceReady', () => {
+			target.getSurface().on( 'destroy', () => {
+				mw.editcheck.resetSessionState();
+			} );
+			// Temporary logging for T402460
 			target.getSurface().getView().on( 'paste', ( data ) => {
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
 				// Check might not be registered so we can't use the factory.

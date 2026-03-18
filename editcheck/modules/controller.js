@@ -146,14 +146,6 @@ Controller.prototype.setup = function () {
 
 			this.clearState();
 
-			mw.editcheck.checksShown = {};
-			// Track checks that are not just triggered (shown) but expanded (seen),
-			// based on the definitions decided on in T412334
-			mw.editcheck.checksSeen = {};
-			mw.editcheck.checksUsed = {};
-			mw.editcheck.suggestionsSeen = {};
-			mw.editcheck.suggestionsUsed = {};
-
 			$( document.documentElement ).removeClass( 've-editcheck-available' );
 			window.dispatchEvent( new Event( 'resize' ) );
 		} );
