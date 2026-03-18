@@ -24,16 +24,16 @@ mw.editcheck.DoubleBoldEditCheck.static.defaultConfig = ve.extendObject( {}, mw.
 	showAsCheck: false
 } );
 
-mw.editcheck.DoubleBoldEditCheck.static.title = 'Remove unnecessary bold formatting';
-
 mw.editcheck.DoubleBoldEditCheck.static.name = 'doubleBold';
 
-mw.editcheck.DoubleBoldEditCheck.static.description = 'Bold is applied automatically to subheadings, definition list terms and table headers. Help readers by removing unnecessary bold formatting from these elements.';
+mw.editcheck.DoubleBoldEditCheck.static.title = OO.ui.deferMsg( 'editcheck-double-bold-title' );
+
+mw.editcheck.DoubleBoldEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-double-bold-description' );
 
 mw.editcheck.DoubleBoldEditCheck.static.choices = [
 	{
 		action: 'remove',
-		label: 'Remove bold' // TODO: i18n
+		label: OO.ui.deferMsg( 'editcheck-double-bold-action-remove' )
 	},
 	{
 		action: 'dismiss',
