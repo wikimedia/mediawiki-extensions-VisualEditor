@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Volvox"
+			"Volvox",
+			"GilPe",
+			"Robby"
 		]
 	},
 	"editcheck-dialog-action-no": "Nee",
 	"editcheck-dialog-action-yes": "Jo",
-	"editcheck-dialog-addref-description": "Hëlleft de Lieser ze verstoen, wouhier dës Informatioune kommen, andeems Dir eng Referenz derbäisetzt.",
+	"editcheck-dialog-addref-description": "Hëlleft de Lieser ze verstoen, wou dës Informatioun hierkënnt, andeems Dir eng Referenz derbäisetzt.",
 	"editcheck-dialog-addref-reject-question": "Firwat setzt Dir keng Referenz derbäi?",
 	"editcheck-dialog-addref-reject-irrelevant": "Menger Meenung no si Referenze fir d'Ännerung, déi ech maachen, net relevant",
 	"editcheck-dialog-addref-reject-common-knowledge": "D'Informatiounen, déi ech derbäisetzen, sinn allgemeng bekannt",
