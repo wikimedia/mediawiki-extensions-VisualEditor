@@ -9,6 +9,7 @@
 		]
 	},
 	"editchecks": "Comprobar edición",
+	"editcheck-toolbar-suggestions-title": "Alternar sugerencias",
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Sí",
 	"editcheck-dialog-action-decline": "Declinar",
@@ -73,6 +74,8 @@
 	"editcheck-convertreference-description": "Esta referencia carece de detalles. Ayuda a quienes leen la wiki a comprender de dónde proviene la información convirtiéndola en una referencia con formato [{{int:editcheck-convertreference-descriptionlink}}]. Después de convertirla, comprueba la exactitud de los detalles que ha añadido la herramienta y elimina cualquier cosa que sea incorrecta o confusa.",
 	"editcheck-reject-description": "Otros editores apreciarán saber por qué has tomado esta decisión.",
 	"editcheck-review-title": "Revisar cambios",
+	"editcheck-specialeditchecks-info": "Las comprobaciones de edición se configuran en [[MediaWiki:Editcheck-config.json]]. Para obtener más información, consulta [https://www.mediawiki.org/wiki/Edit_check/Configuration Comprobación de edición/Configuración].",
+	"editcheck-specialeditchecks-disabled": "Las revisiones de edición no están habilitadas en esta wiki.",
 	"editcheck-specialeditchecks-header-abtest": "Comprobaciones test A/B",
 	"editcheck-specialeditchecks-header-base": "Configuración base",
 	"editcheck-specialeditchecks-header-betafeatures": "Funcionalidades beta",
@@ -92,5 +95,6 @@
 	"tag-editcheck-reference-decline-irrelevant-description": "La referencia EditCheck fue rechazada por irrelevante.",
 	"tag-editcheck-reference-decline-other": "Revisión de edición (referencias) rechazada (otros)",
 	"tag-editcheck-reference-decline-other-description": "La referencia EditCheck fue rechazada por un motivo no especificado.",
-	"tag-editcheck-reference-decline-uncertain": "Revisión de edición (referencias) rechazada (incierta)"
+	"tag-editcheck-reference-decline-uncertain": "Revisión de edición (referencias) rechazada (incierta)",
+	"tag-editcheck-reference-decline-uncertain-description": "La referencia de EditCheck fue rechazada por considerarse poco clara"
 }

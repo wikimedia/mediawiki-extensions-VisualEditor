@@ -50,6 +50,7 @@
 			"ZandDev"
 		]
 	},
+	"collabpad-disabled": "CollabPad non è abilitato su questo wiki.",
 	"collabpad-import-subtitle": "Importato da $1",
 	"tooltip-ca-ve-edit": "Modifica questa pagina",
 	"tooltip-ca-ve-create": "Crea questa pagina",

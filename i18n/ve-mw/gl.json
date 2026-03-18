@@ -17,6 +17,7 @@
 			"Vivaelcelta"
 		]
 	},
+	"collabpad-disabled": "CollabPad non está activado neste wiki.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Importado de $1",
 	"collabpad": "CollabPad",

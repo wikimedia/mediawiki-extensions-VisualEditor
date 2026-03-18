@@ -8,6 +8,7 @@
 		]
 	},
 	"editchecks": " فحص التحرير",
+	"editcheck-toolbar-suggestions-title": "إظهار/إخفاء الاقتراحات",
 	"editcheck-dialog-action-no": "لا",
 	"editcheck-dialog-action-yes": "نعم",
 	"editcheck-dialog-action-decline": "رفض",
@@ -73,6 +74,7 @@
 	"editcheck-reject-description": "سيكون من المفيد للمحررين الآخرين معرفة سبب اختيارك لهذا.",
 	"editcheck-review-title": "مراجعة التغييرات",
 	"editcheck-specialeditchecks-info": "يتم ضبط إعدادات فحص التحرير في [[MediaWiki:Editcheck-config.json]]. للاطلاع على التوثيق، يُرجى زيارة [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
+	"editcheck-specialeditchecks-disabled": "لم يتم تفعيل ميزة فحص التحرير في هذه الويكي.",
 	"editcheck-specialeditchecks-header-abtest": "اختبارات A/B",
 	"editcheck-specialeditchecks-header-base": "الإعداد الأساسي",
 	"editcheck-specialeditchecks-header-betafeatures": "مزايا تجريبية",

@@ -7,6 +7,7 @@
 		]
 	},
 	"editchecks": "Muokkaustarkistimet",
+	"editcheck-toolbar-suggestions-title": "Näytä/piilota ehdotukset",
 	"editcheck-dialog-action-no": "Ei",
 	"editcheck-dialog-action-yes": "Kyllä",
 	"editcheck-dialog-action-decline": "Hylkää",
@@ -68,6 +69,7 @@
 	"editcheck-reject-description": "Muut muokkaajat arvostaisivat kuulla, miksi teit tämän valinnan.",
 	"editcheck-review-title": "Tarkasta muutokset",
 	"editcheck-specialeditchecks-info": "Muokkaustarkistimien asetukset määritellään sivulla [[MediaWiki:Editcheck-config.json]]. Dokumentaatio löytyy sivulta [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
+	"editcheck-specialeditchecks-disabled": "Muokkaustarkistimet eivät ole käytössä tässä wikissä.",
 	"editcheck-specialeditchecks-header-abtest": "A/B-testauksessa olevat tarkistimet",
 	"editcheck-specialeditchecks-header-base": "Perusasetukset",
 	"editcheck-specialeditchecks-header-betafeatures": "Beetaominaisuudet",
