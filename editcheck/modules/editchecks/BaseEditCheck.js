@@ -112,8 +112,9 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 		return false;
 	}
 
-	// Skip account status checks when in suggestion mode
-	if ( !suggestion ) {
+	// Skip account status checks when in suggestion mode or when forceEnable is set
+	// (forceEnable should only bypass account configs, not ones that are integral to the check working as intended, such as category)
+	if ( !suggestion && !mw.editcheck.forceEnable ) {
 		// account status:
 		// loggedin, loggedout, or any-other-value meaning 'both'
 		// we'll count temporary users as "logged out" by using isNamed here
@@ -317,10 +318,6 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel = und
 	// Disambiguation page check
 	if ( this.config.ignoreDisambiguationPages && mw.config.get( 'wgVisualEditorPageIsDisambiguation' ) ) {
 		return false;
-	}
-	// Some checks are configured to only be for logged in / out users
-	if ( mw.editcheck.forceEnable ) {
-		return true;
 	}
 	if ( !this.constructor.static.doesConfigMatch( this.config, documentModel, suggestion ) ) {
 		return false;

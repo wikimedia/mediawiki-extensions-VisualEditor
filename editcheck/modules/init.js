@@ -18,6 +18,7 @@ if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 
 const suggestionsPref = !!mw.user.options.get( 'visualeditor-editcheck-suggestions' );
 
+// any setting for forceEnable will bypass account-specific configs, though it will still honor the other configs
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
