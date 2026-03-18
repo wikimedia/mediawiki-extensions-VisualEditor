@@ -9,28 +9,28 @@
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.HeadingLevelsEditCheck = function MWHeadingLevelsEditCheck() {
+mw.editcheck.HeadingLevelEditCheck = function MWHeadingLevelEditCheck() {
 	// Parent constructor
-	mw.editcheck.HeadingLevelsEditCheck.super.apply( this, arguments );
+	mw.editcheck.HeadingLevelEditCheck.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( mw.editcheck.HeadingLevelsEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.HeadingLevelEditCheck, mw.editcheck.BaseEditCheck );
 
 /* Static properties */
 
-mw.editcheck.HeadingLevelsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.HeadingLevelsEditCheck.super.static.defaultConfig, {
+mw.editcheck.HeadingLevelEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.HeadingLevelEditCheck.super.static.defaultConfig, {
 	showAsCheck: false
 } );
 
-mw.editcheck.HeadingLevelsEditCheck.static.name = 'headingLevels';
+mw.editcheck.HeadingLevelEditCheck.static.name = 'headingLevel';
 
-mw.editcheck.HeadingLevelsEditCheck.static.title = OO.ui.deferMsg( 'editcheck-headinglevels-title' );
+mw.editcheck.HeadingLevelEditCheck.static.title = OO.ui.deferMsg( 'editcheck-headinglevels-title' );
 
-mw.editcheck.HeadingLevelsEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-headinglevels-description' );
+mw.editcheck.HeadingLevelEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-headinglevels-description' );
 
-mw.editcheck.HeadingLevelsEditCheck.static.choices = [
+mw.editcheck.HeadingLevelEditCheck.static.choices = [
 	{
 		action: 'fix',
 		label: OO.ui.deferMsg( 'editcheck-headinglevels-action-adjust' ),
@@ -44,7 +44,7 @@ mw.editcheck.HeadingLevelsEditCheck.static.choices = [
 
 /* Methods */
 
-mw.editcheck.HeadingLevelsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.HeadingLevelEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const modified = this.getModifiedContentRanges( surfaceModel.getDocument() );
 	let previousLevel = null;
 	const actions = [];
@@ -74,7 +74,7 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.onDocumentChange = function ( surf
 	return actions;
 };
 
-mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.HeadingLevelEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'fix' ) {
 		action.fragments.forEach( ( fragment ) => {
 			const heading = surface.getModel().documentModel.getNearestNodeMatching(
@@ -93,9 +93,9 @@ mw.editcheck.HeadingLevelsEditCheck.prototype.act = function ( choice, action, s
 		return;
 	}
 	// Parent method
-	return mw.editcheck.HeadingLevelsEditCheck.super.prototype.act.apply( this, arguments );
+	return mw.editcheck.HeadingLevelEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 /* Registration */
 
-mw.editcheck.editCheckFactory.register( mw.editcheck.HeadingLevelsEditCheck );
+mw.editcheck.editCheckFactory.register( mw.editcheck.HeadingLevelEditCheck );

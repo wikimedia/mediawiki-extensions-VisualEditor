@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.HeadingLevelsEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.HeadingLevelEditCheck', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
 	const cases = [
@@ -31,12 +31,12 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 		const surface = new ve.dm.Surface( doc );
 
-		const check = new mw.editcheck.HeadingLevelsEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.HeadingLevelEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
 		const actions = check.onDocumentChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
 		if ( actions.length > 0 ) {
-			assert.strictEqual( actions[ 0 ].getName(), 'headingLevels', 'Action name' );
+			assert.strictEqual( actions[ 0 ].getName(), 'headingLevel', 'Action name' );
 		}
 	} );
 } );

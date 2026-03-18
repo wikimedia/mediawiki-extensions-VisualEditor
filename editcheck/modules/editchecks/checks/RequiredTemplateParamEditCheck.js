@@ -9,33 +9,33 @@
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.RequiredTemplateParamsEditCheck = function MWRequiredTemplateParamsEditCheck() {
+mw.editcheck.RequiredTemplateParamEditCheck = function MWRequiredTemplateParamEditCheck() {
 	// Parent constructor
-	mw.editcheck.RequiredTemplateParamsEditCheck.super.apply( this, arguments );
+	mw.editcheck.RequiredTemplateParamEditCheck.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( mw.editcheck.RequiredTemplateParamsEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.RequiredTemplateParamEditCheck, mw.editcheck.BaseEditCheck );
 
 /* Static properties */
 
-mw.editcheck.RequiredTemplateParamsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.RequiredTemplateParamsEditCheck.super.static.defaultConfig, {
+mw.editcheck.RequiredTemplateParamEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.RequiredTemplateParamEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
 	showAsSuggestion: false
 } );
 
-mw.editcheck.RequiredTemplateParamsEditCheck.static.title = 'Template has missing parameters';
+mw.editcheck.RequiredTemplateParamEditCheck.static.title = 'Template has missing parameters';
 
-mw.editcheck.RequiredTemplateParamsEditCheck.static.name = 'requiredTemplateParams';
+mw.editcheck.RequiredTemplateParamEditCheck.static.name = 'requiredTemplateParam';
 
-mw.editcheck.RequiredTemplateParamsEditCheck.static.description = 'The template is missing some required parameters.';
+mw.editcheck.RequiredTemplateParamEditCheck.static.description = 'The template is missing some required parameters.';
 
 // HACK: Use plain string above so Special:EditChecks can parse.
-const description = mw.editcheck.RequiredTemplateParamsEditCheck.static.description;
-mw.editcheck.RequiredTemplateParamsEditCheck.static.description = () => $( $.parseHTML( description ) );
+const description = mw.editcheck.RequiredTemplateParamEditCheck.static.description;
+mw.editcheck.RequiredTemplateParamEditCheck.static.description = () => $( $.parseHTML( description ) );
 
-mw.editcheck.RequiredTemplateParamsEditCheck.static.choices = [
+mw.editcheck.RequiredTemplateParamEditCheck.static.choices = [
 	{
 		action: 'edit',
 		label: 'Edit'
@@ -48,7 +48,7 @@ mw.editcheck.RequiredTemplateParamsEditCheck.static.choices = [
 
 /* Methods */
 
-mw.editcheck.RequiredTemplateParamsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.RequiredTemplateParamEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const doc = surfaceModel.getDocument();
 	const modified = this.getModifiedRanges( doc );
 
@@ -87,16 +87,16 @@ mw.editcheck.RequiredTemplateParamsEditCheck.prototype.onDocumentChange = functi
 	} );
 };
 
-mw.editcheck.RequiredTemplateParamsEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.RequiredTemplateParamEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'edit' ) {
 		action.fragments[ 0 ].select();
 		surface.executeCommand( 'transclusion' );
 		return;
 	}
 	// Parent method
-	return mw.editcheck.RequiredTemplateParamsEditCheck.super.prototype.act.apply( this, arguments );
+	return mw.editcheck.RequiredTemplateParamEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 /* Registration */
 
-mw.editcheck.editCheckFactory.register( mw.editcheck.RequiredTemplateParamsEditCheck );
+mw.editcheck.editCheckFactory.register( mw.editcheck.RequiredTemplateParamEditCheck );

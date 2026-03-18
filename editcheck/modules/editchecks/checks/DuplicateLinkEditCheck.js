@@ -10,29 +10,29 @@
  * @param {string} [config.scope='paragraph'] Scope to check for duplicates: 'paragraph' or 'section'
  * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.DuplicateLinksEditCheck = function MWDuplicateLinksEditCheck() {
+mw.editcheck.DuplicateLinkEditCheck = function MWDuplicateLinkEditCheck() {
 	// Parent constructor
-	mw.editcheck.DuplicateLinksEditCheck.super.apply( this, arguments );
+	mw.editcheck.DuplicateLinkEditCheck.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( mw.editcheck.DuplicateLinksEditCheck, mw.editcheck.LinkEditCheck );
+OO.inheritClass( mw.editcheck.DuplicateLinkEditCheck, mw.editcheck.LinkEditCheck );
 
 /* Static properties */
 
-mw.editcheck.DuplicateLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DuplicateLinksEditCheck.super.static.defaultConfig, {
+mw.editcheck.DuplicateLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DuplicateLinkEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
 	scope: 'paragraph'
 } );
 
-mw.editcheck.DuplicateLinksEditCheck.static.name = 'duplicateLink';
+mw.editcheck.DuplicateLinkEditCheck.static.name = 'duplicateLink';
 
-mw.editcheck.DuplicateLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-duplicate-link-title' );
+mw.editcheck.DuplicateLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-duplicate-link-title' );
 
-mw.editcheck.DuplicateLinksEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-duplicate-link-description' );
+mw.editcheck.DuplicateLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-duplicate-link-description' );
 
-mw.editcheck.DuplicateLinksEditCheck.static.choices = [
+mw.editcheck.DuplicateLinkEditCheck.static.choices = [
 	{
 		action: 'remove',
 		label: OO.ui.deferMsg( 'editcheck-action-remove-link' )
@@ -43,7 +43,7 @@ mw.editcheck.DuplicateLinksEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.DuplicateLinksEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
+mw.editcheck.DuplicateLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
 
 /* Methods */
 
@@ -81,7 +81,7 @@ function orderedCollectBy( iterable, keyFunction ) {
 	return result;
 }
 
-mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const normalizedTitleKey = 'normalizedTitle';
 
 	const documentModel = surfaceModel.getDocument();
@@ -150,16 +150,16 @@ mw.editcheck.DuplicateLinksEditCheck.prototype.onDocumentChange = function ( sur
 	return actions;
 };
 
-mw.editcheck.DuplicateLinksEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.DuplicateLinkEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
 		action.select( surface, true );
 		return;
 	}
 	// Parent method
-	return mw.editcheck.DuplicateLinksEditCheck.super.prototype.act.apply( this, arguments );
+	return mw.editcheck.DuplicateLinkEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 /* Registration */
 
-mw.editcheck.editCheckFactory.register( mw.editcheck.DuplicateLinksEditCheck );
+mw.editcheck.editCheckFactory.register( mw.editcheck.DuplicateLinkEditCheck );

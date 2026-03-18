@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.FakeHeadingsEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.FakeHeadingEditCheck', ve.test.utils.newMwEnvironment() );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
 	const cases = [
@@ -58,12 +58,12 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 
 		const surface = new ve.dm.Surface( doc );
-		const check = new mw.editcheck.FakeHeadingsEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.FakeHeadingEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
 		const actions = check.onDocumentChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
 		if ( caseItem.expectedActions > 0 ) {
-			assert.strictEqual( actions[ 0 ].getName(), 'fakeHeadings', caseItem.msg + ': Action name' );
+			assert.strictEqual( actions[ 0 ].getName(), 'fakeHeading', caseItem.msg + ': Action name' );
 		}
 	} );
 } );

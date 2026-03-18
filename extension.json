@@ -2426,10 +2426,10 @@
 			"editcheck/modules/tests/EditCheckFactory.test.js",
 			"editcheck/modules/tests/PasteCheck.test.js",
 			"editcheck/modules/tests/YearLinkEditCheck.test.js",
-			"editcheck/modules/tests/HeadingLevelsEditCheck.test.js",
+			"editcheck/modules/tests/HeadingLevelEditCheck.test.js",
 			"editcheck/modules/tests/DoubleBoldEditCheck.test.js",
-			"editcheck/modules/tests/DuplicateLinksEditCheck.test.js",
-			"editcheck/modules/tests/FakeHeadingsEditCheck.test.js",
+			"editcheck/modules/tests/DuplicateLinkEditCheck.test.js",
+			"editcheck/modules/tests/FakeHeadingEditCheck.test.js",
 			"editcheck/modules/tests/TextMatchEditCheck.test.js",
 			"editcheck/modules/tests/ImageCaptionEditCheck.test.js"
 		],

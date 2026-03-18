@@ -9,28 +9,28 @@
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.ExternalLinksEditCheck = function MWExternalLinksEditCheck() {
+mw.editcheck.ExternalLinkEditCheck = function MWExternalLinkEditCheck() {
 	// Parent constructor
-	mw.editcheck.ExternalLinksEditCheck.super.apply( this, arguments );
+	mw.editcheck.ExternalLinkEditCheck.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( mw.editcheck.ExternalLinksEditCheck, mw.editcheck.LinkEditCheck );
+OO.inheritClass( mw.editcheck.ExternalLinkEditCheck, mw.editcheck.LinkEditCheck );
 
 /* Static properties */
 
-mw.editcheck.ExternalLinksEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ExternalLinksEditCheck.super.static.defaultConfig, {
+mw.editcheck.ExternalLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ExternalLinkEditCheck.super.static.defaultConfig, {
 	showAsCheck: false
 } );
 
-mw.editcheck.ExternalLinksEditCheck.static.name = 'externalLink';
+mw.editcheck.ExternalLinkEditCheck.static.name = 'externalLink';
 
-mw.editcheck.ExternalLinksEditCheck.static.title = OO.ui.deferMsg( 'editcheck-external-link-title' );
+mw.editcheck.ExternalLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-external-link-title' );
 
-mw.editcheck.ExternalLinksEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-external-link-description' );
+mw.editcheck.ExternalLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-external-link-description' );
 
-mw.editcheck.ExternalLinksEditCheck.static.choices = [
+mw.editcheck.ExternalLinkEditCheck.static.choices = [
 	{
 		action: 'remove',
 		label: OO.ui.deferMsg( 'editcheck-action-remove-link' )
@@ -41,11 +41,11 @@ mw.editcheck.ExternalLinksEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.ExternalLinksEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAnnotation ];
+mw.editcheck.ExternalLinkEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAnnotation ];
 
 /* Methods */
 
-mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.ExternalLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
 		const href = annRange.annotation.getAttribute( 'href' );
 		return this.controller.target.isInterwikiUrl( href ).then( ( isInterwiki ) => {
@@ -58,7 +58,7 @@ mw.editcheck.ExternalLinksEditCheck.prototype.onDocumentChange = function ( surf
 	} );
 };
 
-mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.ExternalLinkEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'remove' ) {
 		action.fragments.forEach( ( fragment ) => {
 			fragment.annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
@@ -67,9 +67,9 @@ mw.editcheck.ExternalLinksEditCheck.prototype.act = function ( choice, action, s
 		return;
 	}
 	// Parent method
-	return mw.editcheck.ExternalLinksEditCheck.super.prototype.act.apply( this, arguments );
+	return mw.editcheck.ExternalLinkEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 /* Registration */
 
-mw.editcheck.editCheckFactory.register( mw.editcheck.ExternalLinksEditCheck );
+mw.editcheck.editCheckFactory.register( mw.editcheck.ExternalLinkEditCheck );

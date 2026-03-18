@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.DuplicateLinksEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.DuplicateLinkEditCheck', ve.test.utils.newMwEnvironment() );
 
 function getLinksData( links ) {
 	// eslint-disable-next-line es-x/no-array-prototype-flat
@@ -88,7 +88,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 		const surface = new ve.dm.Surface( doc );
 
-		const check = new mw.editcheck.DuplicateLinksEditCheck( ve.test.utils.EditCheck.dummyController, { scope: caseItem.scope }, true );
+		const check = new mw.editcheck.DuplicateLinkEditCheck( ve.test.utils.EditCheck.dummyController, { scope: caseItem.scope }, true );
 		const actions = check.onDocumentChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );

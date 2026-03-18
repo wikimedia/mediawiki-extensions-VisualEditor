@@ -9,29 +9,29 @@
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.FakeHeadingsEditCheck = function MWFakeHeadingsEditCheck() {
+mw.editcheck.FakeHeadingEditCheck = function MWFakeHeadingEditCheck() {
 	// Parent constructor
-	mw.editcheck.FakeHeadingsEditCheck.super.apply( this, arguments );
+	mw.editcheck.FakeHeadingEditCheck.super.apply( this, arguments );
 };
 
 /* Inheritance */
 
-OO.inheritClass( mw.editcheck.FakeHeadingsEditCheck, mw.editcheck.BaseEditCheck );
+OO.inheritClass( mw.editcheck.FakeHeadingEditCheck, mw.editcheck.BaseEditCheck );
 
 /* Static properties */
 
-mw.editcheck.FakeHeadingsEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.FakeHeadingsEditCheck.super.static.defaultConfig, {
+mw.editcheck.FakeHeadingEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.FakeHeadingEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
 	showAsSuggestion: false
 } );
 
-mw.editcheck.FakeHeadingsEditCheck.static.title = 'Use real headings';
+mw.editcheck.FakeHeadingEditCheck.static.title = 'Use real headings';
 
-mw.editcheck.FakeHeadingsEditCheck.static.name = 'fakeHeadings';
+mw.editcheck.FakeHeadingEditCheck.static.name = 'fakeHeading';
 
-mw.editcheck.FakeHeadingsEditCheck.static.description = 'Real headings should be used, not bold text.';
+mw.editcheck.FakeHeadingEditCheck.static.description = 'Real headings should be used, not bold text.';
 
-mw.editcheck.FakeHeadingsEditCheck.static.choices = [
+mw.editcheck.FakeHeadingEditCheck.static.choices = [
 	{
 		action: 'fix',
 		label: 'Adjust heading'
@@ -42,11 +42,11 @@ mw.editcheck.FakeHeadingsEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.FakeHeadingsEditCheck.static.onlyCoveredNodes = true;
+mw.editcheck.FakeHeadingEditCheck.static.onlyCoveredNodes = true;
 
 /* Methods */
 
-mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.FakeHeadingEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	// We need to cover complete new nodes, and also existing nodes that have been bolded
 	const documentModel = surfaceModel.getDocument();
 	// Get fully covered nodes only, and only their content ranges
@@ -69,7 +69,7 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.onDocumentChange = function ( surfa
 		} ) );
 };
 
-mw.editcheck.FakeHeadingsEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.FakeHeadingEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'fix' ) {
 		action.fragments.forEach( ( fragment ) => {
 			const heading = surface.getModel().documentModel.getNearestNodeMatching(
@@ -89,9 +89,9 @@ mw.editcheck.FakeHeadingsEditCheck.prototype.act = function ( choice, action, su
 		return;
 	}
 	// Parent method
-	return mw.editcheck.FakeHeadingsEditCheck.super.prototype.act.apply( this, arguments );
+	return mw.editcheck.FakeHeadingEditCheck.super.prototype.act.apply( this, arguments );
 };
 
 /* Registration */
 
-mw.editcheck.editCheckFactory.register( mw.editcheck.FakeHeadingsEditCheck );
+mw.editcheck.editCheckFactory.register( mw.editcheck.FakeHeadingEditCheck );
