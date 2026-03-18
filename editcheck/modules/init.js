@@ -30,6 +30,7 @@ mw.editcheck = {
 		this.checksUsed = {};
 		this.suggestionsSeen = {};
 		this.suggestionsUsed = {};
+		this.erroredChecks = {};
 	}
 };
 mw.editcheck.resetSessionState();

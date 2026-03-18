@@ -135,6 +135,16 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 		}
 		if ( actionsOrPromises ) {
 			ve.batchPush( actionOrPromiseList, actionsOrPromises );
+			actionsOrPromises.forEach( ( actionOrPromise ) => {
+				Promise.resolve( actionOrPromise ).catch( ( reason ) => {
+					mw.log.warn( `Failed to check ${ checkName }`, reason );
+					if ( !mw.editcheck.erroredChecks[ checkName ] ) {
+						// Log this once per-session
+						ve.track( 'stats.mediawiki_editcheck_errors_total', 1, { kind: checkName } );
+						mw.editcheck.erroredChecks[ checkName ] = true;
+					}
+				} );
+			} );
 		}
 	} );
 	return mw.editcheck.allSettled( actionOrPromiseList )
@@ -143,8 +153,6 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 			for ( const result of results ) {
 				if ( result.status === 'fulfilled' ) {
 					actions.push( result.value );
-				} else {
-					mw.log.warn( 'Failed to check', result.reason );
 				}
 			}
 			return actions;
