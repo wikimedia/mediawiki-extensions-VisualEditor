@@ -26,14 +26,14 @@ mw.editcheck.HeadingLevelEditCheck.static.defaultConfig = ve.extendObject( {}, m
 
 mw.editcheck.HeadingLevelEditCheck.static.name = 'headingLevel';
 
-mw.editcheck.HeadingLevelEditCheck.static.title = OO.ui.deferMsg( 'editcheck-headinglevels-title' );
+mw.editcheck.HeadingLevelEditCheck.static.title = OO.ui.deferMsg( 'editcheck-headinglevel-title' );
 
-mw.editcheck.HeadingLevelEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-headinglevels-description' );
+mw.editcheck.HeadingLevelEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-headinglevel-description' );
 
 mw.editcheck.HeadingLevelEditCheck.static.choices = [
 	{
 		action: 'fix',
-		label: OO.ui.deferMsg( 'editcheck-headinglevels-action-adjust' ),
+		label: OO.ui.deferMsg( 'editcheck-headinglevel-action-adjust' ),
 		icon: 'edit'
 	},
 	{
