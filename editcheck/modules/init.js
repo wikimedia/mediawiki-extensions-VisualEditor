@@ -101,7 +101,7 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	}
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference' ) );
+	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { showAsCheck: true } ) );
 	try {
 		return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 	} catch ( e ) {
@@ -112,7 +112,7 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 
 mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone' ) );
+	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone', { showAsCheck: true } ) );
 	// Run actual check eligibility before calling API
 	let canBeShown;
 	try {
@@ -247,7 +247,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			target.getSurface().getView().on( 'paste', ( data ) => {
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
 				// Check might not be registered so we can't use the factory.
-				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste' ) );
+				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { showAsCheck: true } ) );
 				if ( check.canBeShown( target.getSurface().getModel().getDocument(), false ) && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 					// The check would be shown for the current viewer, and there's enough content that we care about it:
 					if ( data.source ) {
