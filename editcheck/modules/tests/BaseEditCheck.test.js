@@ -333,18 +333,19 @@ QUnit.test( 'isRangeInValidSection', ( assert ) => {
 	} );
 } );
 
-QUnit.test( 'isRangeQuoted', ( assert ) => {
+QUnit.test( 'isOffsetQuoted', ( assert ) => {
 	const mixedQuotedText = [
-		//  1-3 - unquoted text
+		//  1 - unquoted text
 		...'abc',
 		//  4 - quote
 		'"',
-		//  5-7 - quoted text
+		//  5 - quoted text
 		...'def',
 		//  8 - quote
 		'"',
-		//  9-11 - unquoted text
+		//  9 - unquoted text
 		...'ghi'
+		// 12
 	];
 	const quoteData = [
 		//  0 - Beginning of heading
@@ -375,145 +376,152 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 			name: 'No quoted text present',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ...'abc', { type: '/paragraph' } ],
-			range: new ve.Range( 2, 2 ),
-			expectedState: false,
+			offset: 2,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Inside quoted text',
 			config: { ignoreQuotedContent: true },
-			range: new ve.Range( 5, 6 ),
-			expectedState: true,
+			offset: 5,
+			expectedQuoted: true,
+			expectedValid: false
+		},
+		{
+			name: 'Just before quoted text',
+			config: { ignoreQuotedContent: true },
+			offset: 4,
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: 'Outside quoted text',
 			config: { ignoreQuotedContent: true },
-			range: new ve.Range( 2, 3 ),
-			expectedState: false,
+			offset: 3,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Inside quoted text, without quotes ignored',
 			config: { ignoreQuotedContent: false },
-			range: new ve.Range( 5, 6 ),
-			expectedState: true,
+			offset: 5,
+			expectedQuoted: true,
 			expectedValid: true
 		},
 		{
 			name: 'Outside quoted text, without quotes ignored',
 			config: { ignoreQuotedContent: false },
-			range: new ve.Range( 2, 3 ),
-			expectedState: false,
+			offset: 2,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Referencing specifically the opening quote character',
 			config: { ignoreQuotedContent: true },
-			range: new ve.Range( 4 ),
-			expectedState: true,
+			offset: 4,
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: 'Referencing specifically the closing quote character',
 			config: { ignoreQuotedContent: true },
-			range: new ve.Range( 8 ),
-			expectedState: false,
+			offset: 8,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Blockquote',
 			config: { ignoreQuotedContent: true },
-			range: new ve.Range( 29, 30 ),
-			expectedState: true,
+			offset: 29,
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: '"Smart" quotes',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ...'“abc”def“ghi”', { type: '/paragraph' } ],
-			range: new ve.Range( 2 ),
-			expectedState: true,
+			offset: 2,
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: '"Smart" quotes, outside quotes',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ...'“abc”def“ghi”', { type: '/paragraph' } ],
-			range: new ve.Range( 7 ),
-			expectedState: false,
+			offset: 7,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Chinese quotes',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ...'「abc」def「ghi」', { type: '/paragraph' } ],
-			range: new ve.Range( 2 ),
-			expectedState: true,
+			offset: 2,
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: 'Chinese quotes, outside quotes',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ...'「abc」def「ghi」', { type: '/paragraph' } ],
-			range: new ve.Range( 7 ),
-			expectedState: false,
+			offset: 7,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Apostrophes are not quotes',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."Don't 'be' quoted", { type: '/paragraph' } ],
-			range: new ve.Range( 5 ), // 't'
-			expectedState: false,
+			offset: 5, // 't'
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Apostrophes are not quotes, but single-quotes are',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."Don't 'be' quoted", { type: '/paragraph' } ],
-			range: new ve.Range( 8 ), // 'b'
-			expectedState: true,
+			offset: 8, // 'b'
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: 'Apostrophes are not quotes, but single-quotes are, even close to the start',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."G'kar", { type: '/paragraph' } ],
-			range: new ve.Range( 3 ), // 'k'
-			expectedState: false,
+			offset: 3, // 'k'
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'Apostrophes are not quotes, but single-quotes are, even close to the start with whitespace',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..." 'a", { type: '/paragraph' } ],
-			range: new ve.Range( 3 ), // 'a'
-			expectedState: true,
+			offset: 3, // 'a'
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: 'A single-quote at the beginning is not an apostrophe',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."'abc'", { type: '/paragraph' } ],
-			range: new ve.Range( 2 ),
-			expectedState: true,
+			offset: 2,
+			expectedQuoted: true,
 			expectedValid: false
 		},
 		{
 			name: 'A possessive apostrophe after an s is not an opening single-quote',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."the bees' knees", { type: '/paragraph' } ],
-			range: new ve.Range( 12 ),
-			expectedState: false,
+			offset: 12,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
 			name: 'A possessive apostrophe after an s is, unfortunately, a closing single-quote',
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."'the bees' knees'", { type: '/paragraph' } ],
-			range: new ve.Range( 12 ),
-			expectedState: false,
+			offset: 12,
+			expectedQuoted: false,
 			expectedValid: true
 		},
 		{
@@ -521,8 +529,8 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 			config: { ignoreQuotedContent: true },
 			data: [ { type: 'paragraph' }, ..."A \"B 'c' D\" E", { type: '/paragraph' } ],
 			// the 'c' that has two quotation marks before it but is still in a quote:
-			range: new ve.Range( 6 ),
-			expectedState: true,
+			offset: 6,
+			expectedQuoted: true,
 			expectedValid: false
 		}
 	];
@@ -532,12 +540,12 @@ QUnit.test( 'isRangeQuoted', ( assert ) => {
 
 		const doc = ve.dm.example.createExampleDocumentFromData( caseItem.data || quoteData );
 		assert.strictEqual(
-			check.isOffsetQuoted( caseItem.range.start, doc ),
-			caseItem.expectedState,
+			check.isOffsetQuoted( caseItem.offset, doc ),
+			caseItem.expectedQuoted,
 			caseItem.name + ': quoted'
 		);
 		assert.strictEqual(
-			check.isRangeValid( caseItem.range, doc ),
+			check.isRangeValid( new ve.Range( caseItem.offset ), doc ),
 			caseItem.expectedValid,
 			caseItem.name + ': validity'
 		);
