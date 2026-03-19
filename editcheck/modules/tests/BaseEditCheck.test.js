@@ -532,6 +532,22 @@ QUnit.test( 'isOffsetQuoted', ( assert ) => {
 			offset: 6,
 			expectedQuoted: true,
 			expectedValid: false
+		},
+		{
+			name: 'Annotated text, inside quotes',
+			config: { ignoreQuotedContent: true },
+			data: [ { type: 'paragraph' }, ...ve.dm.example.annotateText( 'foo "bar" baz', ve.dm.example.bold ), { type: '/paragraph' } ],
+			offset: 6, // 'b' in "bar"
+			expectedQuoted: true,
+			expectedValid: false
+		},
+		{
+			name: 'Annotated text, outside quotes',
+			config: { ignoreQuotedContent: true },
+			data: [ { type: 'paragraph' }, ...ve.dm.example.annotateText( 'foo "bar" baz', ve.dm.example.bold ), { type: '/paragraph' } ],
+			offset: 1, // 'f' in "foo"
+			expectedQuoted: false,
+			expectedValid: true
 		}
 	];
 

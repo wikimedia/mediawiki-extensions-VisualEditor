@@ -699,27 +699,28 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 	// some edge cases. A future enhancement could be to allow configuration
 	// of templates that count as unbalanced quotes.
 	// Fetch to offset+1 because we want inclusive.
-	const data = documentModel.getData( new ve.Range( closestBlockNode.getRange().start, offset + 1 ) );
+	const data = documentModel.data;
 	const quotes = new Map();
-	for ( const [ index, item ] of data.entries() ) {
-		if ( typeof item === 'string' ) {
+	for ( let i = closestBlockNode.getRange().start; i < offset + 1; i++ ) {
+		if ( !data.isElementData( i ) ) {
 			let quote = false;
-			if ( item === '\'' ) {
+			const character = data.getCharacterData( i );
+			if ( character === '\'' ) {
 				// The single non-curly quote requires extra work to be distinguished from an apostrophe
-				const previous = data[ index - 1 ];
 				if (
 					// If it's at the beginning it must be a quote
-					!previous || ve.dm.LinearData.static.isElementData( previous ) ||
+					data.isOpenElementData( i - 1 ) ||
 					// Otherwise, check whether it looks like a break compared
 					// to the previous character. Note: unicodeJS does
 					// somewhat-complicated things here to look back and
 					// decide whether this is a break, so it actually does
 					// need the entire data -- just [previous,item] would not work.
-					unicodeJS.wordbreak.isBreak( new ve.dm.DataString( data ), index )
+					unicodeJS.wordbreak.isBreak( new ve.dm.DataString( data.getData() ), i )
 				) {
+					const previousCharacter = data.getCharacterData( i - 1 );
 					if (
-						previous && mw.config.get( 'wgContentLanguage' ) === 'en' &&
-						previous === 's' && ( quotes.get( '\'' ) || 0 ) % 2 === 0
+						previousCharacter && mw.config.get( 'wgContentLanguage' ) === 'en' &&
+						previousCharacter === 's' && ( quotes.get( '\'' ) || 0 ) % 2 === 0
 					) {
 						// One extra check to rule out English's possessive
 						// apostrophes following a `s`. There's no way to
@@ -731,7 +732,7 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 					quote = '\'';
 				}
 			} else {
-				quote = this.constructor.static.quoteGroupings.get( item );
+				quote = this.constructor.static.quoteGroupings.get( character );
 			}
 			if ( quote ) {
 				quotes.set( quote, ( quotes.get( quote ) || 0 ) + 1 );
