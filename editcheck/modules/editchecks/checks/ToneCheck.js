@@ -177,6 +177,9 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 	action.off( 'discard', this.showSuccessHandler );
+	// The 'interacted' tag was previously used for not showing the user
+	// the tone check again in pre-save if they had already interacted with it.
+	// Per T409991 this is no longer the behavior we want. Keeping the tag for future use.
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
 		return action.widget.showFeedback( {
