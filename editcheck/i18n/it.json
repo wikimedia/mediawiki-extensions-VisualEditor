@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
+			"FL2226",
 			"McDutchie",
 			"Pierpao"
 		]
@@ -38,6 +39,7 @@
 	"editcheck-disambiguation-description": "Questo collegamento rimanda a una [{{int:editcheck-disambiguation-descriptionlink}} pagina di disambiguazione]. Aiuta i lettori a trovare l'argomento giusto collegandosi a una pagina più specifica.",
 	"editcheck-image-caption-description": "Questa immagine non ha una didascalia. Aiuta i lettori a capire perché l'immagine è rilevante aggiungendo una [{{int:editcheck-image-caption-descriptionlink}} breve didascalia].",
 	"editcheck-review-title": "Rivedi modifiche",
+	"editcheck-specialeditchecks-disabled": "Su questa wiki non sono abilitati i controlli di modifica.",
 	"editcheck-specialeditchecks-header-betafeatures": "Funzionalità sperimentali",
 	"editcheck-specialeditchecks-header-default": "Controlli predefiniti",
 	"editcheck-specialeditchecks-header-experimental": "Controlli sperimentali",

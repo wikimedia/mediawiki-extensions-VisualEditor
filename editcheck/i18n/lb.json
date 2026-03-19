@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ed g2s",
 			"GilPe",
 			"Robby",
 			"Volvox"
@@ -57,7 +58,7 @@
 	"editcheck-action-add-citation": "Eng Referenz derbäisetzen",
 	"editcheck-action-convert-reference": "Ëmwandelen",
 	"editcheck-external-link-title": "Externe Link ewechhuelen",
-	"editcheck-external-link-description": "Dëse Link weist op eng extern Websäit [{{int:editcheck-external-link-descriptionlink}}] hin. Hëlleft de Lieser sech op den Inhalt ze konzentréieren andeems Dir dëse Link ewechhuelt, en an d'Sektioun \"Um Spaweck\" réckelt oder an eng [{{int:editcheck-external-link-convertlink}} Referenz] ëmwandelt, wann néideg.",
+	"editcheck-external-link-description": "Dëse Link weist op eng [{{int:editcheck-external-link-descriptionlink}} extern Websäit] hin. Hëlleft de Lieser sech op den Inhalt ze konzentréieren andeems Dir dëse Link ewechhuelt, en an d'Sektioun \"Um Spaweck\" réckelt oder an eng [{{int:editcheck-external-link-convertlink}} Referenz] ëmwandelt, wann néideg.",
 	"editcheck-duplicate-link-title": "Duebele Link ewechhuelen",
 	"editcheck-duplicate-link-description": "Dëse Link gëtt et méi wéi eemol an dësem Kapitel. Hëlleft de Lieser méi einfach ze navigéieren andeems Dir [{{int:editcheck-duplicate-link-descriptionlink}} duebel Linken] ewechhuelt.",
 	"editcheck-disambiguation-title": "Link op eng méi spezifesch Säit",

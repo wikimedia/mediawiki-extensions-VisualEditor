@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ed g2s",
 			"Hakimi97",
 			"Tofeiku"
 		]
@@ -39,7 +40,7 @@
 	"editcheck-preference-suggestions-description": "Cadangan suntingan tetapan komuniti untuk menambah baik rencana. Tersedia pada [[:mw:Special:MyLanguage/VisualEditor|alat sunting visual]].",
 	"editcheck-tone-title": "Semak Nada?",
 	"editcheck-tone-description": "Pengguna lain sering menyemak semula perkataan seperti ini, dengan mengatakan nadanya tidak seimbang. [{{int:editcheck-tone-descriptionlink}} Ketahui lebih lanjut]",
-	"editcheck-tone-footer": "Dikenal pasti menggunakan model BERT [{{int:editcheck-tone-footerlink}}]",
+	"editcheck-tone-footer": "Dikenal pasti menggunakan [{{int:editcheck-tone-footerlink}} model BERT]",
 	"editcheck-tone-title-acted": "Menyemak Nada",
 	"editcheck-tone-description-acted": "Perhatikan ungkapan kata yang bersifat mengampu, memperkecil, kabur, klise atau terlalu menyokong sudut pandangan tertentu.",
 	"editcheck-tone-reject-appropriate": "Nada suntingan ini sesuai",
@@ -56,7 +57,7 @@
 	"editcheck-action-add-citation": "Tambah petikan",
 	"editcheck-action-convert-reference": "Tukar",
 	"editcheck-external-link-title": "Buang pautan luar",
-	"editcheck-external-link-description": "Pautan ini menghala ke laman web luaran [{{int:editcheck-external-link-descriptionlink}}]. Bantulah pembaca agar kekal fokus pada kandungan dengan membuang pautan ini, atau mengalihnya ke bahagian \"Pautan luar\", atau menukarkannya kepada bentuk petikan [{{int:editcheck-external-link-convertlink}}] jika sesuai.",
+	"editcheck-external-link-description": "Pautan ini menghala ke [{{int:editcheck-external-link-descriptionlink}} laman web luaran]. Bantulah pembaca agar kekal fokus pada kandungan dengan membuang pautan ini, atau mengalihnya ke bahagian \"Pautan luar\", atau menukarkannya [{{int:editcheck-external-link-convertlink}} kepada bentuk petikan] jika sesuai.",
 	"editcheck-duplicate-link-title": "Buang pautan berganda",
 	"editcheck-duplicate-link-description": "Pautan ini muncul lebih daripada sekali dalam bahagian ini. Bantulah pembaca memandu arah dengan lebih mudah melalui pembuang [{{int:editcheck-duplicate-link-descriptionlink}} pautan yang berulang].",
 	"editcheck-disambiguation-title": "Pautan ke laman yang lebih khusus",
@@ -65,7 +66,7 @@
 	"editcheck-headinglevels-description": "Aras tajuk ini mungkin tidak mengikut struktur berjujukan yang betul. Bantulah pembaca memandu arah kandungan tersebut dengan lebih mudah melalui penggunaan [{{int:editcheck-headinglevels-descriptionlink}} aras tajuk] yang betul.",
 	"editcheck-headinglevels-action-adjust": "Laraskan tajuk",
 	"editcheck-image-caption-title": "Tambah kapsyen gambar",
-	"editcheck-image-caption-description": "Imej ini tidak mempunyai kapsyen. Bantulah pembaca memahami mengapa imej tersebut relevan dengan menambah kapsyen pendek [{{int:editcheck-image-caption-descriptionlink}}].",
+	"editcheck-image-caption-description": "Imej ini tidak mempunyai kapsyen. Bantulah pembaca memahami mengapa imej tersebut relevan dengan menambah [{{int:editcheck-image-caption-descriptionlink}} kapsyen pendek].",
 	"editcheck-convertreference-title": "Ubah suai rujukan",
 	"editcheck-convertreference-description": "Rujukan ini kehilangan butiran lanjut. Bantulah pembaca memahami asal usul maklumat ini dengan mengubahsuaikannya menjadi bentuk [{{int:editcheck-convertreference-descriptionlink}} rujukan] yang diformatkan. Selepas mengubah suai, sila semak ketepatan butiran yang telah ditambah oleh alat tersebut dan buang mana-mana maklumat yang salah atau mengelirukan.",
 	"editcheck-reject-description": "Penyunting lain akan belajar dan menilai mengapa anda melakukan pilihan sedemikian",
