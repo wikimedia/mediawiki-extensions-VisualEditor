@@ -908,6 +908,16 @@ Controller.prototype.drawSelections = function () {
 		} );
 	} );
 
+	if ( isStale && activeSelections.length ) {
+		// When in reviewing a check (stale), suppress all inactive selections that overlap with the active selection (T420712).
+		const activeRange = activeSelections[ 0 ].getModel().getCoveringRange();
+		for ( let i = inactiveSelections.length - 1; i >= 0; i-- ) {
+			if ( activeRange.overlapsRange( inactiveSelections[ i ].getModel().getCoveringRange() ) ) {
+				inactiveSelections.splice( i, 1 );
+			}
+		}
+	}
+
 	// The following classes are used here:
 	// * ve-ce-surface-selections-editCheck-active
 	// * ve-ce-surface-selections-editCheck-inactive
