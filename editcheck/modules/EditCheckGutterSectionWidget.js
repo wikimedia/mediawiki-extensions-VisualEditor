@@ -177,7 +177,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 		windowAction.open(
 			'fixedEditCheckDialog',
 			{
-				controller: this.controller,
+				controller,
 				inBeforeSave: false,
 				actions: this.actions,
 				newActions: [ action ],
@@ -189,11 +189,11 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 			// Wait for window to open and new surface padding to be applied
 			// before trying to focus and scroll.
 			setTimeout( () => {
-				this.controller.focusAction( action, true, alignToTop );
+				controller.focusAction( action, true, alignToTop );
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		} );
 	} else {
-		this.controller.focusAction( action, true, alignToTop );
+		controller.focusAction( action, true, alignToTop );
 		currentWindow.showActions( this.actions, [ action ] );
 		currentWindow.footer.toggle( this.actions.length !== 1 );
 	}
