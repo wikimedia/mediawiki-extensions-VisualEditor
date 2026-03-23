@@ -218,7 +218,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			const newAction = this.controller.getActions().find( ( cAct ) => cAct.equals( action ) );
 			if ( newAction ) {
 				newAction.updateStale( true );
-				newAction.once( 'discard', this.showSuccessHandler );
+				newAction.once( 'discard', newAction.check.showSuccessHandler );
 				// If we transitioned, this will result in us waiting until
 				// the sidebar is open:
 				this.controller.refresh( true ).then( () => {
