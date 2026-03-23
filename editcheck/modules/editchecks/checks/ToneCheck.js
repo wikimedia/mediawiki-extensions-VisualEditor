@@ -62,7 +62,7 @@ mw.editcheck.ToneCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.AsyncTextCheck.static.queue = [];
+mw.editcheck.ToneCheck.static.queue = [];
 
 /* Static methods */
 
