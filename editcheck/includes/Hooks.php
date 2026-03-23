@@ -11,11 +11,14 @@
 namespace MediaWiki\Extension\VisualEditor\EditCheck;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\User\User;
 
 class Hooks implements
-	ResourceLoaderRegisterModulesHook
+	ResourceLoaderRegisterModulesHook,
+	GetPreferencesHook
 {
 
 	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
@@ -43,5 +46,16 @@ class Hooks implements
 				],
 				"dependencies" => [ 'ext.visualEditor.editCheck' ],
 			] ] );
+	}
+
+	/**
+	 * Handler for the GetPreferences hook, to add and hide user preferences as configured
+	 *
+	 * @param User $user
+	 * @param array &$preferences Their preferences object
+	 */
+	public function onGetPreferences( $user, &$preferences ) {
+		$api = [ 'type' => 'api' ];
+		$preferences['visualeditor-editcheck-suggestions-toggle'] = $api;
 	}
 }

@@ -64,7 +64,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 
 mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
 	// Show mid-edit in suggestion mode only (for now)
-	if ( this.includeSuggestions || mw.editcheck.suggestions ) {
+	if ( this.includeSuggestions || this.controller.suggestionsVisible ) {
 		return mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave.apply( this, arguments );
 	}
 	return [];

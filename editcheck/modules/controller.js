@@ -12,15 +12,18 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  * @mixes OO.EventEmitter
  * @param {ve.init.mw.Target} target The VisualEditor target
  * @param {Object} config
- * @param {boolean} config.suggestions Enable suggestion mode
+ * @param {boolean} config.suggestionsModeAvailable Suggestions mode is available
  */
 function Controller( target, config ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
 	this.target = target;
-	this.suggestionsMode = config.suggestions;
-	// flag that, if enabled, hides suggestions but continues to generate them in the background
+	// Suggestion mode is available, and the suggestion mode toggle is visible in the toolbar
+	this.suggestionsModeAvailable = config.suggestionsModeAvailable;
+	// Suggestions are currently visible, toggled by the toolbar tool
+	this.suggestionsVisible = !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' );
+	// Suppress suggestions without affecting user config or toolbar state, used by external tools
 	this.suppressSuggestions = false;
 
 	this.clearState();
@@ -193,7 +196,7 @@ Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingO
  * @return {boolean}
  */
 Controller.prototype.editChecksArePossible = function () {
-	if ( mw.editcheck.suggestions ) {
+	if ( mw.editcheck.suggestionsModeAvailable ) {
 		// Suggestions override user checks so assume something can be shown
 		return true;
 	}
@@ -268,8 +271,15 @@ Controller.prototype.refresh = function ( useCache ) {
 	}
 };
 
-Controller.prototype.toggleSuggestionsMode = function () {
-	this.suggestionsMode = !this.suggestionsMode;
+/**
+ * Toggle whether suggestions are shown to the user.
+ */
+Controller.prototype.toggleSuggestionsVisible = function () {
+	this.suggestionsVisible = !this.suggestionsVisible;
+	if ( !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' ) !== this.suggestionsVisible ) {
+		ve.userConfig( 'visualeditor-editcheck-suggestions-toggle', this.suggestionsVisible );
+	}
+
 	this.actionsByListener = {};
 	// Treat this refresh as being as if we were in initial setup -- we don't
 	// want the "new" suggestions to be focused.
@@ -280,9 +290,9 @@ Controller.prototype.toggleSuggestionsMode = function () {
 };
 
 /**
- * Controls whether suggestions are displayed to the user.
+ * Suppress suggestions without affecting user preferences
  *
- * When suppressed, suggestions will still continue to be generated and cached, just not displayed.
+ * Suggestions will still continue to be generated and cached, just not displayed.
  * For use by external tools.
  *
  * @param {boolean} suppress if true, does not display any suggestions
@@ -315,7 +325,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	}
 	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
 	// Create all actions for this listener
-	if ( this.suggestionsMode && !this.inBeforeSave ) {
+	if ( this.suggestionsVisible && !this.inBeforeSave ) {
 		// eslint-disable-next-line no-jquery/no-when
 		actionsPromise = $.when(
 			actionsPromise,

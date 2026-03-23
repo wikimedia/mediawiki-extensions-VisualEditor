@@ -16,14 +16,12 @@ if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 	ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 }
 
-const suggestionsPref = !!mw.user.options.get( 'visualeditor-editcheck-suggestions' );
-
 // any setting for forceEnable will bypass account-specific configs, though it will still honor the other configs
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || ecenable === '2' ),
-	suggestions: suggestionsPref,
+	suggestionsModeAvailable: !!mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
 	resetSessionState: function () {
 		this.checksShown = {};
 		this.checksSeen = {};
@@ -38,7 +36,7 @@ mw.editcheck.resetSessionState();
 if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
 	const ecenableFlags = ecenable.split( ',' );
 	mw.editcheck.experimental = mw.editcheck.experimental || ecenableFlags.includes( 'experimental' );
-	mw.editcheck.suggestions = mw.editcheck.suggestions || ecenableFlags.includes( 'suggestions' );
+	mw.editcheck.suggestionsModeAvailable = mw.editcheck.suggestionsModeAvailable || ecenableFlags.includes( 'suggestions' );
 }
 
 const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
@@ -209,7 +207,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 }
 
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnable ) {
-	if ( mw.editcheck.suggestions ) {
+	if ( mw.editcheck.suggestionsModeAvailable ) {
 		require( './EditCheckSuggestionsTool.js' );
 	}
 
@@ -219,7 +217,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			return;
 		}
 		const controller = new Controller( target, {
-			suggestions: mw.editcheck.suggestions
+			suggestionsModeAvailable: mw.editcheck.suggestionsModeAvailable
 		} );
 		controller.setup();
 
@@ -244,7 +242,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		if ( mw.editcheck.experimental ) {
 			ve.track( 'activity.editCheck', { action: 'session-initialized-with-experimental' } );
 		}
-		if ( mw.editcheck.suggestions ) {
+		if ( mw.editcheck.suggestionsModeAvailable ) {
 			ve.track( 'activity.editCheck', { action: 'session-initialized-with-suggestions' } );
 		}
 		target.on( 'surfaceReady', () => {

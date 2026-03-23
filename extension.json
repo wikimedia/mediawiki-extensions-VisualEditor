@@ -223,7 +223,10 @@
 		"DifferenceEngineViewHeader": "VisualEditorHooks",
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
 		"EditPage::showEditForm:fields": "VisualEditorHooks",
-		"GetPreferences": "VisualEditorHooks",
+		"GetPreferences": [
+			"VisualEditorHooks",
+			"EditCheckHooks"
+		],
 		"GetBetaFeaturePreferences": [
 			"betapreferences",
 			"EditCheckBetaPreferences"
@@ -2482,7 +2485,8 @@
 		"visualeditor-hidebetawelcome": 0,
 		"visualeditor-hidetabdialog": 0,
 		"visualeditor-newwikitext": 0,
-		"visualeditor-tabs": "remember-last"
+		"visualeditor-tabs": "remember-last",
+		"visualeditor-editcheck-suggestions-toggle": 1
 	},
 	"SpecialPages": {
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad",

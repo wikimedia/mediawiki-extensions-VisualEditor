@@ -16,23 +16,23 @@ ve.ui.EditCheckSuggestionsTool.static.title = OO.ui.deferMsg( 'editcheck-toolbar
 ve.ui.EditCheckSuggestionsTool.static.autoAddToCatchall = false;
 
 ve.ui.EditCheckSuggestionsTool.prototype.onUpdateState = function () {
-	const controller = this.toolbar.getSurface().target.editcheckController;
+	const controller = this.toolbar.getSurface().getTarget().editcheckController;
 	if ( !controller ) {
 		this.setDisabled( true );
 		return;
 	}
-	this.setDisabled( !mw.editcheck.suggestions );
-	this.setActive( controller.suggestionsMode );
+	this.setDisabled( !controller.suggestionsModeAvailable );
+	this.setActive( controller.suggestionsVisible );
 };
 
 ve.ui.EditCheckSuggestionsTool.prototype.onSelect = function () {
-	const controller = this.toolbar.getSurface().target.editcheckController;
+	const controller = this.toolbar.getSurface().getTarget().editcheckController;
 	if ( !controller ) {
 		return;
 	}
-	controller.toggleSuggestionsMode();
-	this.setActive( controller.suggestionsMode );
-	ve.track( 'activity.' + this.getName(), { action: `toggled-${ controller.suggestionMode ? 'on' : 'off' }` } );
+	controller.toggleSuggestionsVisible();
+	this.setActive( controller.suggestionsVisible );
+	ve.track( 'activity.' + this.getName(), { action: `toggled-${ controller.suggestionsVisible ? 'on' : 'off' }` } );
 	// This would be done by the parent, but we're overriding it:
 	ve.track( 'activity.' + this.getName(), { action: 'tool-used' } );
 };
