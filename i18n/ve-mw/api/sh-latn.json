@@ -5,10 +5,10 @@
 			"Winston Sung"
 		]
 	},
-	"apierror-visualeditor-badcachekey": "Nisam našao međuspremljenu serijalizaciju za taj ključ",
+	"apierror-visualeditor-badcachekey": "Nije pronađena serijalizacija u predmemoriji s tim ključem",
 	"apierror-visualeditor-difffailed": "Prikaz razlike nije uspjeo",
 	"apihelp-visualeditor-param-basetimestamp": "Kada snimate, postavite ovo za vremenski pečat revizije koja je bila uređena. Koristi se za otkrivanje sukoba uređivanja.",
-	"apihelp-visualeditor-param-badetag": "Ako je RESTBase upit vratio naizgled nevažeći ETag, proslijedi ga ovdje za potrebe zapisivanja.",
+	"apihelp-visualeditor-param-badetag": "Ako je RESTBase upit vratio naizgled neispravan ETag, proslijedite ga ovdje za potrebe zapisivanja.",
 	"apihelp-visualeditor-param-cachekey": "Za serialize ili diff, koristite rezultat prethodnog serializeforcache zahtjeva sa ovim ključem. Premošćuje $1html.",
 	"apihelp-visualeditor-param-editintro": "Izmijenite uvod da biste dodali obavještenja.",
 	"apihelp-visualeditor-param-etag": "ETag za slanje.",
@@ -22,7 +22,7 @@
 	"apihelp-visualeditor-param-pst": "Transformirani wikitekst prije snimanja odnosno slanja na Parsoid (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Na kome podnaslovu treba djelovati.",
 	"apihelp-visualeditor-param-starttimestamp": "Kada snimate, postavite ovo za vremenski pečat trenutka kada je revizija učitana. Koristi se za otkrivanje sukoba uređivanja.",
-	"apihelp-visualeditor-param-stash": "Prilikom spremanja, zadajte mu točno (istinito) ako želite koristiti skladišni priložnik.",
+	"apihelp-visualeditor-param-stash": "Pri čuvanju postavite na tačno ako želite koristiti skladišni API.",
 	"apihelp-visualeditor-param-wikitext": "Wikitekst za poslati Parsoidu radi konverzije u HTML (paction=parsefragment).",
 	"apihelp-visualeditor-summary": "Vraća HTML5 za stranicu sa servisa Parsoid.",
 	"apihelp-visualeditoredit-param-basetimestamp": "Kada snimate, postavite ovo za vremenski pečat revizije koja je bila uređena. Koristi se za otkrivanje sukoba uređivanja.",

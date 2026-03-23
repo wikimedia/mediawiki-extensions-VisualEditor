@@ -63,6 +63,7 @@
 			"Zetud"
 		]
 	},
+	"collabpad-disabled": "CollabPad n'est pas activé sur ce wiki.",
 	"collabpad-doctitle": "CollabPad : $1",
 	"collabpad-import-subtitle": "Importé depuis $1",
 	"collabpad": "CollabPad",

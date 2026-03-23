@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"IOIOI",
+			"MarMi wiki",
 			"Msz2001",
 			"Rail",
 			"Tufor2",
@@ -9,6 +10,7 @@
 		]
 	},
 	"editchecks": "Kontrole edycji",
+	"editcheck-toolbar-suggestions-title": "Widoczność sugestii",
 	"editcheck-dialog-action-no": "Nie",
 	"editcheck-dialog-action-yes": "Tak",
 	"editcheck-dialog-action-decline": "Odrzuć",
@@ -16,6 +18,7 @@
 	"editcheck-dialog-action-recheck": "Sprawdź ponownie",
 	"editcheck-dialog-action-back": "Cofnij",
 	"editcheck-dialog-action-submit": "Wyślij",
+	"editcheck-dialog-toggle": "Zmieniono widoczność",
 	"editcheck-dialog-addref-description": "Pomóż czytelnikom, dodając przypis, mówiący skąd pochodzą te informacje.",
 	"editcheck-dialog-addref-reject-question": "Dlaczego nie dodajesz przypisu?",
 	"editcheck-dialog-addref-reject-description": "Inni edytorzy docenią informację o tym, dlaczego decydujesz się nie dodawać przypisu.",
@@ -47,6 +50,12 @@
 	"editcheck-tone-reject-uncertain": "Nie wiem jak mogę poprawić brzmienie",
 	"editcheck-tone-reject-other": "Inny",
 	"editcheck-tone-thank": "Dziękujemy za przyjrzenie się brzmieniu!",
+	"editcheck-action-remove-link": "Usuń link",
+	"editcheck-action-convert-reference": "Konwertuj",
+	"editcheck-external-link-title": "Usuń link zewnętrzny",
+	"editcheck-external-link-description": "Ten link prowadzi do [{{int:editcheck-external-link-descriptionlink}} zewnętrznej strony]. Pomóż czytelnikom skupić się na treści, usuwając ten link, przenosząc go do sekcji „Linki zewnętrzne” lub, w razie potrzeby, przekształcając go w [{{int:editcheck-external-link-convertlink}} przypis].",
+	"editcheck-convertreference-title": "Konwertuj przypis",
+	"editcheck-convertreference-description": "W tym przypisie brakuje szczegółów. Pomóż czytelnikom zrozumieć, skąd pochodzą informacje, konwertując je do sformatowanego [{{int:editcheck-convertreference-descriptionlink}} przypisu]. Po konwersji sprawdź poprawność szczegółów dodanych przez narzędzie i usuń błędne lub mylące.",
 	"editcheck-reject-description": "Inni redaktorzy chcieliby dowiedzieć się, dlaczego dokonałeś takiego wyboru.",
 	"editcheck-review-title": "Przejrzyj zmiany",
 	"editcheck-specialeditchecks-info": "Kontrole edycji są konfigurowane w [[MediaWiki:Editcheck-config.json]]. Dokumentację znajdziesz w [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
