@@ -43,6 +43,47 @@ ve.ui.GutterSidebarEditCheckDialog.static.activeSurface = true;
 ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.GutterSidebarEditCheckDialog.super.prototype.initialize.call( this );
+
+	this.sections = [];
+
+	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
+	this.scrollIntoView.connect( this, {
+		showClick: 'onScrollIntoViewShowClick',
+		closeClick: 'onScrollIntoViewCloseClick'
+	} );
+
+	this.$element.append( this.scrollIntoView.$element );
+};
+
+/**
+ * Handle click events from scroll-into-view's show button.
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
+	if ( this.sections.length ) {
+		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], true, true );
+	}
+};
+
+/**
+ * Handle click events from scroll-into-view's close button.
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewCloseClick = function () {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.$element.remove();
+		this.scrollIntoView.clear();
+		this.scrollIntoView = null;
+	}
+};
+
+/**
+ * Handle focusAction events from the controller
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @param {number} index
+ * @param {boolean} scrollTo
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onFocusAction = function () {
+	this.onScrollIntoViewCloseClick();
 };
 
 /**
@@ -61,6 +102,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
+		this.controller.on( 'focusAction', this.onFocusAction, null, this );
 
 		this.renderActions( data.actions || this.controller.getActions(), data.newActions || [] );
 	}, this );
@@ -113,13 +155,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
  * @param {mw.editcheck.EditCheckAction[]} newActions Newly found actions, which could takeFocus
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions, newActions = [] ) {
+	this.sections = [];
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.clear();
+	}
+
 	if ( actions.length === 0 ) {
 		this.close( 'complete' );
 		return;
 	}
 
 	const surfaceView = this.surface.getView();
-	const sections = [];
 
 	// First join overlapping actions into "sections"
 	actions.forEach( ( action ) => {
@@ -134,7 +180,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 
 		// Look for any other section that the new one overlaps with
 		// TODO: join when two other sections are joined by the new one?
-		const prev = sections.find( ( p ) => !( p.rect.bottom < boundingRect.top || boundingRect.bottom < p.rect.top ) );
+		const prev = this.sections.find( ( p ) => !( p.rect.bottom < boundingRect.top || boundingRect.bottom < p.rect.top ) );
 		if ( prev ) {
 			// overlap, so merge
 			prev.actions.push( action );
@@ -144,14 +190,14 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 			prev.rect.height = prev.rect.bottom - prev.rect.top;
 			return;
 		}
-		sections.push( { actions: [ action ], rect: boundingRect } );
+		this.sections.push( { actions: [ action ], rect: boundingRect } );
 	} );
 
 	// Now try to reuse old widgets if possible, to avoid icons flickering
 	const oldWidgets = this.widgets || [];
 	let shown = newActions.length === 0; // Skip this entirely if there are no new actions
 	this.widgets = [];
-	sections.forEach( ( section ) => {
+	this.sections.forEach( ( section ) => {
 		let widget;
 		const index = oldWidgets.findIndex(
 			( owidget ) => owidget.actions.length === section.actions.length &&
@@ -168,6 +214,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 		}
 		widget.setPosition( section.rect );
 		this.widgets.push( widget );
+		if ( this.scrollIntoView && widget.actions.some( ( action ) => action.isSuggestion() ) ) {
+			this.scrollIntoView.observe( widget.$element[ 0 ] );
+		}
 
 		// See if one of these should be autofocused; it's simplest to check
 		// here rather than doing a separate loop because we need to call this

@@ -673,6 +673,26 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	if ( listener === 'onBeforeSave' ) {
 		return;
 	}
+	const target = this.target;
+	if ( target.enableVisualSectionEditing && target.section !== null ) {
+		if ( !this.editFullPageIndicatorTop ) {
+			this.editFullPageIndicatorTop = new OO.ui.IconWidget( {
+				icon: 'lightbulb',
+				classes: [ 've-ui-editCheck-editFullPage-indicator' ]
+			} );
+			this.editFullPageIndicatorBottom = new OO.ui.IconWidget( {
+				icon: 'lightbulb',
+				classes: [ 've-ui-editCheck-editFullPage-indicator' ]
+			} );
+			target.switchToFullPageButtonTop.$label.append( this.editFullPageIndicatorTop.$element );
+			target.switchToFullPageButtonBottom.$label.append( this.editFullPageIndicatorBottom.$element );
+		}
+		const attachedRootRange = this.surface.getModel().getDocument().getAttachedRoot().getOuterRange();
+		const hasActionsAbove = actions.some( ( action ) => action.getFocusSelection().getCoveringRange().end < attachedRootRange.start );
+		const hasActionsBelow = actions.some( ( action ) => action.getFocusSelection().getCoveringRange().start > attachedRootRange.end );
+		this.editFullPageIndicatorTop.toggle( hasActionsAbove );
+		this.editFullPageIndicatorBottom.toggle( hasActionsBelow );
+	}
 	if ( !actions.length ) {
 		return;
 	}
@@ -680,7 +700,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	let shownPromise;
 	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 	if ( !currentWindow || currentWindow.constructor.static.name !== windowName ) {
-		this.target.$element.addClass( 've-ui-editCheck-sidebar-active' );
+		target.$element.addClass( 've-ui-editCheck-sidebar-active' );
 		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 		shownPromise = windowAction.open(
 			windowName,
@@ -688,7 +708,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		).then( ( instance ) => {
 			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
 			instance.closed.then( () => {
-				this.target.$element.removeClass( 've-ui-editCheck-sidebar-active' );
+				target.$element.removeClass( 've-ui-editCheck-sidebar-active' );
 			} );
 		} );
 	} else {

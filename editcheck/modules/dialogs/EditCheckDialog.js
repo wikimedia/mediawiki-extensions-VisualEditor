@@ -53,6 +53,12 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 		click: 'onCloseButtonClick'
 	} );
 
+	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
+	this.scrollIntoView.connect( this, {
+		showClick: 'onScrollIntoViewShowClick',
+		closeClick: 'onScrollIntoViewCloseClick'
+	} );
+
 	this.collapseExpandButton = new OO.ui.ButtonWidget( {
 		classes: [ 've-ui-editCheckDialog-collapseExpand' ],
 		framed: false,
@@ -96,7 +102,31 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
 	} );
 
 	this.$actions = $( '<div>' );
-	this.$body.append( this.closeButton.$element, this.collapseExpandButton.$element, this.$actions, this.footer.$element );
+	this.$body.append(
+		this.closeButton.$element,
+		this.collapseExpandButton.$element,
+		this.$actions,
+		this.scrollIntoView.$element,
+		this.footer.$element
+	);
+};
+
+/**
+ * Handle click events from scroll-into-view's show button.
+ */
+ve.ui.EditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
+	this.controller.focusAction( this.currentActions[ 0 ], true, true );
+};
+
+/**
+ * Handle click events from scroll-into-view's close button.
+ */
+ve.ui.EditCheckDialog.prototype.onScrollIntoViewCloseClick = function () {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.$element.remove();
+		this.scrollIntoView.clear();
+		this.scrollIntoView = null;
+	}
 };
 
 /**
@@ -183,6 +213,10 @@ ve.ui.EditCheckDialog.prototype.hasAction = function ( action ) {
  * Refresh the action list
  */
 ve.ui.EditCheckDialog.prototype.refresh = function () {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.clear();
+	}
+
 	this.$actions.empty();
 
 	this.currentActions.forEach( ( action, index ) => {
@@ -191,7 +225,14 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 		action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
 
 		this.$actions.append( widget.$element );
+		if ( this.scrollIntoView && action.isSuggestion() ) {
+			this.scrollIntoView.observe( widget.$element[ 0 ] );
+		}
 	} );
+
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.update();
+	}
 
 	// Update positions immediately to prevent flicker
 	this.controller.updatePositions();
@@ -295,6 +336,7 @@ ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
  */
 ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
 	this.setCurrentAction( action, scrollTo, true );
+	this.onScrollIntoViewCloseClick();
 };
 
 /**

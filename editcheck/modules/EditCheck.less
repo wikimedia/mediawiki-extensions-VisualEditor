@@ -70,9 +70,85 @@
 	}
 }
 
+/* Switch to full page buttons */
+.ve-ui-editCheck-editFullPage-indicator {
+	margin: 0 -@spacing-25 0 10px;
+	border-left: @spacing-25 solid transparent;
+	box-shadow: -1px 0 0 @border-color-base;
+	position: relative;
+
+	&::after {
+		content: '';
+		display: block;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		position: absolute;
+		right: 0;
+		background: @background-color-progressive;
+		border: 1px solid @border-color-inverted;
+	}
+}
+
 /* Actions */
 
+.ve-ui-editCheck-scrollIntoView {
+	position: fixed;
+	box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.2 );
+	opacity: 0;
+	transition-property: opacity, transform;
+	transition-duration: @transition-duration-base;
+	white-space: nowrap;
+
+	&-top {
+		top: @spacing-200;
+		transform: translateX( -50% ) translateY( calc( -100% - @spacing-200 ) );
+
+		&.ve-ui-editCheck-scrollIntoView-visible {
+			opacity: @opacity-base;
+			transform: translateX( -50% ) translateY( 0 );
+		}
+	}
+
+	&-bottom {
+		bottom: @spacing-200;
+		transform: translateX( -50% ) translateY( calc( 100% + @spacing-200 ) );
+
+		&.ve-ui-editCheck-scrollIntoView-visible {
+			opacity: @opacity-base;
+			transform: translateX( -50% ) translateY( 0 );
+		}
+	}
+
+	.oo-ui-buttonElement-button {
+		/* Fix height rounding error in Minerva, could be upstreamed to OOUI */
+		min-height: 2.25em;
+	}
+
+	/**
+	 * Same border-radius is applied to all these elements to ensure that the trimmed-off corner
+	 * areas don't capture clicks
+	 */
+	&,
+	.oo-ui-buttonElement-framed:first-child,
+	.oo-ui-buttonElement-framed:first-child .oo-ui-buttonElement-button {
+		border-bottom-left-radius: 1.1em;
+		border-top-left-radius: 1.1em;
+	}
+
+	&,
+	.oo-ui-buttonElement-framed:last-child,
+	.oo-ui-buttonElement-framed:last-child .oo-ui-buttonElement-button {
+		border-bottom-right-radius: 1.1em;
+		border-top-right-radius: 1.1em;
+	}
+}
+
 .ve-ui-editCheckDialog {
+	.ve-ui-editCheck-scrollIntoView {
+		margin-left: 150px;
+	}
+
 	&-footer {
 		display: flex;
 		justify-content: flex-end;
@@ -90,7 +166,8 @@
 	}
 
 	.ve-ui-editCheckActionWidget {
-		transition: background @transition-duration-base, border-color @transition-duration-base;
+		transition-property: background, border-color;
+		transition-duration: @transition-duration-base;
 
 		/**
 		 * Increase specificity over core styles in case they are
@@ -320,7 +397,7 @@
 			padding: 0.5em 1em;
 			border-width: 0;
 			box-shadow: none;
-			background-color: transparent !important;  /* stylelint-disable-line declaration-no-important */
+			background-color: transparent !important; /* stylelint-disable-line declaration-no-important */
 
 			/* Matches .ve-ui-mobileContext .ve-ui-linearContextItem-body */
 			&-body {
@@ -344,6 +421,11 @@
 .ve-ui-editCheck-gutter-active {
 	div.ve-ui-gutterSidebarEditCheckDialog {
 		background-color: @background-color-interactive-subtle;
+
+		.ve-ui-editCheck-scrollIntoView {
+			left: 50%;
+			margin-top: 48px;
+		}
 
 		.ve-ui-editCheck-gutter-action {
 			position: absolute;
