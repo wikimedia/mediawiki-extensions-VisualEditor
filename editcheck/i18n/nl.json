@@ -71,7 +71,7 @@
 	"editcheck-disambiguation-title": "Koppeling naar een meer specifieke pagina",
 	"editcheck-disambiguation-description": "Deze koppeling verwijst naar een [{{int:editcheck-disambiguation-descriptionlink}} doorverwijspagina]. Help lezers het juiste onderwerp te vinden door te koppelen naar een meer specifieke pagina.",
 	"editcheck-headinglevel-title": "Kopniveau aanpassen",
-	"editcheck-headinglevel-description": "Dit kopniveau volgt mogelijk niet de juiste volgorde. Help lezers gemakkelijker door de inhoud te navigeren door het juiste kopniveau te gebruiken.",
+	"editcheck-headinglevel-description": "Dit kopniveau volgt mogelijk niet de juiste volgorde. Help lezers gemakkelijker door de inhoud te navigeren door het juiste [{{int:editcheck-headinglevel-descriptionlink}} kopniveau] te gebruiken.",
 	"editcheck-headinglevel-action-adjust": "Koptekst aanpassen",
 	"editcheck-image-caption-title": "Afbeeldingsbijschrift toevoegen",
 	"editcheck-image-caption-description": "Deze afbeelding heeft geen bijschrift. Help lezers te begrijpen waarom de afbeelding relevant is door een [{{int:editcheck-image-caption-descriptionlink}} kort bijschrift toe te voegen].",

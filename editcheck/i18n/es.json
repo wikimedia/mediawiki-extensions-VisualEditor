@@ -5,12 +5,13 @@
 			"Dbsnp",
 			"Ed g2s",
 			"IZapico (WMF)",
+			"Kookoriko",
 			"Monicapozo03",
 			"ZebaX2010"
 		]
 	},
 	"editchecks": "Comprobar edición",
-	"editcheck-toolbar-suggestions-title": "Alternar sugerencias",
+	"editcheck-toolbar-suggestions-title": "Sugerencias (mostrar u ocultar)",
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Sí",
 	"editcheck-dialog-action-decline": "Declinar",
@@ -61,11 +62,11 @@
 	"editcheck-action-add-citation": "Añadir cita",
 	"editcheck-action-convert-reference": "Convertir",
 	"editcheck-external-link-title": "Eliminar enlace externo",
-	"editcheck-external-link-description": "Este enlace dirige a un [{{int:editcheck-external-link-descriptionlink}} sitio web externo]. Ayuda a los lectores a centrarse en el contenido, eliminando este enlace, muévalo a la sección \"Enlaces externos\" o conviértalo en una [{{int:editcheck-external-link-convertlink}} cita], si corresponde.",
+	"editcheck-external-link-description": "Este enlace dirige a un [{{int:editcheck-external-link-descriptionlink}} sitio web externo]. Ayude a los lectores a centrarse en el contenido eliminando este enlace, moviéndolo a la sección \"Enlaces externos\" o convirtiéndolo en una [{{int:editcheck-external-link-convertlink}} cita], si corresponde.",
 	"editcheck-duplicate-link-title": "Eliminar enlace duplicado",
 	"editcheck-duplicate-link-description": "Este enlace aparece más de una vez en esta sección. Facilita la navegación eliminando [{{int:editcheck-duplicate-link-descriptionlink}} enlaces repetidos].",
 	"editcheck-disambiguation-title": "Enlace a una página más específica",
-	"editcheck-disambiguation-description": "Este enlace lleva a una [{{int:editcheck-disambiguation-descriptionlink}} página de desambiguación]. Ayuda a los lectores a encontrar el tema correcto enlazándolo a una página más específica.",
+	"editcheck-disambiguation-description": "Este enlace lleva a una [{{int:editcheck-disambiguation-descriptionlink}} página de desambiguación]. Ayude a los lectores a encontrar el tema correcto enlazando a una página más específica.",
 	"editcheck-headinglevel-title": "Ajustar la jerarquía del título",
 	"editcheck-headinglevel-description": "Es posible que este nivel de encabezado no siga la estructura secuencial correcta. Ayude a quienes leen a navegar por el contenido más fácilmente utilizando el [{{int:editcheck-headinglevel-descriptionlink}} nivel de encabezado] correcto.",
 	"editcheck-headinglevel-action-adjust": "Ajustar encabezado",
@@ -97,5 +98,5 @@
 	"tag-editcheck-reference-decline-other": "Revisión de edición (referencias) rechazada (otros)",
 	"tag-editcheck-reference-decline-other-description": "La referencia EditCheck fue rechazada por un motivo no especificado.",
 	"tag-editcheck-reference-decline-uncertain": "Revisión de edición (referencias) rechazada (incierta)",
-	"tag-editcheck-reference-decline-uncertain-description": "La referencia de EditCheck fue rechazada por considerarse poco clara"
+	"tag-editcheck-reference-decline-uncertain-description": "La referencia EditCheck fue rechazada por irrelevante."
 }
