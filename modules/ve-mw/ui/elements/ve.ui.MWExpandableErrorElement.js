@@ -34,7 +34,7 @@ ve.ui.MWExpandableErrorElement = function VeUiMWExpandableErrorElement( config )
 	this.button = new OO.ui.ButtonWidget( {
 		framed: false,
 		classes: [ 've-ui-mwExpandableErrorElement-button' ],
-		label: ve.msg( 'editcheck-dialog-toggle' ),
+		label: ve.msg( 'visualeditor-expandableerror-toggle' ),
 		invisibleLabel: true,
 		icon: 'expand'
 	} ).toggle( false );
