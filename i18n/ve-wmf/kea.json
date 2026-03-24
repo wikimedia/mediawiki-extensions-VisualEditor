@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"GrogeXaKaba"
+		]
+	},
+	"tag-editcheck-newcontent-description": "Birifikador di Idison ta kardita ma kuntiúdu nobu foi kirsentadu na pájina",
+	"tag-editcheck-newreference-description": "Un rafirénsa foi kirsentadu na pájina",
+	"tag-editcheck-references-description": "Birifikador di Idison ta kardita ma un rafirénsa podi ser nisisári",
+	"tag-editcheck-references-activated-description": "Birifikador di Idison ta kardita ma un rafirénsa podi ser nisisári; i es abizu foi izibidu pa uzuári",
+	"tag-visualeditor-description": "Idison fasedu ku uzu di [[{{MediaWiki:visualeditor-descriptionpagelink}}|Iditor Vizual]]",
+	"tag-visualeditor-needcheck-description": "Idison fasedu ku uzu di [[{{MediaWiki:visualeditor-descriptionpagelink}}|Iditor Vizual]] na kal sistéma diteta ma testu uiki sufri alterasons non ntensonal.",
+	"tag-visualeditor-wikitext": "iditor di kódi-fonti 2017",
+	"tag-visualeditor-wikitext-description": "Idison fasedu ku iditor di testu uiki 2017",
+	"tag-visualeditor-switched-description": "Uzuári kunsa idison ku Iditor Vizual, antan, el pasa ta uza iditor di testu uiki.",
+	"visualeditor-feedback-link": "Project:Iditor Vizual/Valiason",
+	"visualeditor-feedback-tool": "Txa bu valiason sobri es pugrama nfurmátiku",
+	"visualeditor-help-label": "Le gia di uzuári",
+	"visualeditor-welcomedialog-action": "Kunsa idison",
+	"visualeditor-welcomedialog-content": "Tudu argen podi idita, i kada midjoria ta djuda.",
+	"visualeditor-welcomedialog-content-thanks": "Nu ta gardise-bu! Bu idison ta djuda txeu argen na diskubérta di kusas nobu!",
+	"visualeditor-welcomedialog-switch": "Alterna pa iditor di kódi-fonti",
+	"visualeditor-welcomedialog-switch-ve": "Alterna pa iditor vizual",
+	"visualeditor-welcomedialog-title": "{{GENDER:$1|Ben-bindu}} na $2"
+}
