@@ -41,6 +41,8 @@
 	"editcheck-copyvio-keep-other": "Ninguna de las anteriores",
 	"editcheck-copyvio-keep-notify": "¡Gracias por compartir tu motivo para conservar el texto pegado!",
 	"editcheck-copyvio-remove-notify": "¡Gracias por ayudar a que el conocimiento sea libre y accesible!",
+	"editcheck-double-bold-title": "Eliminar las negritas innecesarias",
+	"editcheck-double-bold-description": "Las negritas se aplican automáticamente a los subtítulos, los términos de las listas de definiciones y los encabezados de las tablas. Ayuda a los lectores eliminando las negritas innecesarias de estos elementos.",
 	"editcheck-preference-suggestions-label": "Modo sugerencia",
 	"editcheck-preference-suggestions-description": "Sugerencias de edición configuradas por la comunidad para mejorar los artículos. Disponible en [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
 	"editcheck-tone-title": "¿Revisar el tono?",

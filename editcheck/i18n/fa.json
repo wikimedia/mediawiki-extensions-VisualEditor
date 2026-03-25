@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Darafsh",
 			"Jeeputer",
 			"LordProfo"
 		]
 	},
+	"editchecks": "بررسی‌های ویرایش",
 	"editcheck-dialog-action-no": "خیر",
 	"editcheck-dialog-action-yes": "بله",
 	"editcheck-dialog-action-recheck": "بررسی دوباره",
@@ -29,6 +31,8 @@
 	"editcheck-copyvio-keep-other": "سایر",
 	"editcheck-copyvio-keep-notify": "از این که دلیل نگه داشتن متن چسبانده‌شده را به اشتراک گذاشتید ممنونیم!",
 	"editcheck-copyvio-remove-notify": "از این که این متن را حذف کردید ممنونیم!",
+	"editcheck-preference-suggestions-label": "حالت پیشنهاد",
+	"editcheck-preference-suggestions-description": "پیشنهادهای ویرایشی پیکربندی‌شده توسط جامعه برای بهبود مقاله‌ها. در [[:mw:Special:MyLanguage/VisualEditor|ویرایشگر دیداری]] در دسترس است.",
 	"editcheck-tone-description": "کاربران دیگر معمولاً چنین جمله‌بندی‌هایی را اصلاح می‌کنند، زیرا معتقدند که لحن آن نامتعادل است. [{{int:editcheck-tone-descriptionlink}} بیشتر بدانید]",
 	"editcheck-tone-thank": "از این که این لحن را بازبینی کردید ممنونیم!",
 	"editcheck-review-title": "بازبینی تغییرات",
