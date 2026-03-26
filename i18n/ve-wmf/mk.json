@@ -22,6 +22,8 @@
 	"tag-editcheck-paste-shown-description": "Проверката на уредувања побарала појаснување за содржината што ја прекопирал уредникот, која потоа е отстранета или потврдена како дозволена",
 	"tag-editsuggestion-seen": "Уреди екран за Предлози",
 	"tag-editsuggestion-seen-description": "Веројатно е дека корисникот видел барем еден предлог за уредување",
+	"tag-editsuggestion-used": "Користени Предлози за уредување",
+	"tag-editsuggestion-used-description": "Корисникот постапил по барем еден предлог за уредување",
 	"tag-visualeditor": "Нагледно уредување",
 	"tag-visualeditor-description": "Уредување направено со [[{{MediaWiki:visualeditor-descriptionpagelink}}|нагледниот уредник]]",
 	"tag-visualeditor-needcheck": "Нагледен уредник: Проверка",
