@@ -102,9 +102,13 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 				return false;
 			}
 		}
-		// Exclude any ranges that aren't at the document root (i.e. image captions, table cells)
+		// Exclude any ranges that aren't at a document root (i.e. image captions, table cells)
 		const branchNode = documentModel.getBranchNodeFromOffset( range.start );
-		if ( branchNode.getParent() !== documentModel.attachedRoot ) {
+		if (
+			branchNode.getParent() !== documentModel.getAttachedRoot() &&
+			// In section-edit mode, issues outside the attached root can also be matched
+			branchNode.getParent() !== documentModel.getDocumentNode()
+		) {
 			return false;
 		} else if ( branchNode instanceof ve.dm.HeadingNode ) {
 			return false;
