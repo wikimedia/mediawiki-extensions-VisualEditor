@@ -321,6 +321,12 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.currentOffset = null;
 		this.currentAction = null;
 
+		this.toggle( !this.surface.getTarget().isVirtualKeyboardOpen() );
+		this.surface.getTarget().off( 'virtualKeyboardChange' );
+		this.surface.getTarget().on( 'virtualKeyboardChange', ( isOpen ) => {
+			this.toggle( !isOpen );
+		} );
+
 		this.closeButton.toggle( OO.ui.isMobile() && !this.inBeforeSave );
 		this.collapseExpandButton.toggle( OO.ui.isMobile() && this.inBeforeSave );
 
