@@ -506,7 +506,7 @@ Controller.prototype.getActions = function ( listener ) {
 Controller.prototype.onSurfaceFocus = function () {
 	// On mobile we want to close the drawer if the keyboard is shown
 	// A native cursor selection means the keyboard will be visible
-	if ( OO.ui.isMobile() && !this.inBeforeSave && this.surface.isVirtualKeyboardOpen() ) {
+	if ( OO.ui.isMobile() && !this.inBeforeSave && this.target.isVirtualKeyboardOpen() ) {
 		this.closeDialog( 'mobile-keyboard' );
 	}
 };
