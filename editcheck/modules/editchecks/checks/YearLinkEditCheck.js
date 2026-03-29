@@ -22,6 +22,8 @@ mw.editcheck.YearLinkEditCheck = function MWYearLinkEditCheck() {
 
 OO.inheritClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.LinkEditCheck );
 
+OO.mixinClass( mw.editcheck.YearLinkEditCheck, mw.editcheck.ContentBranchNodeCheck );
+
 /* Static properties */
 
 mw.editcheck.YearLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.YearLinkEditCheck.super.static.defaultConfig, {
@@ -69,8 +71,11 @@ mw.editcheck.YearLinkEditCheck.prototype.matchSingleYear = function ( text, disa
 	return matches && matches.length === 1 ? matches[ 0 ] : null;
 };
 
-mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	return this.getModifiedLinkRanges( surfaceModel ).map( ( annRange ) => {
+mw.editcheck.YearLinkEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
+	const ranges = node.getAnnotationRanges().filter(
+		( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name
+	);
+	const actions = ranges.map( ( annRange ) => {
 		const title = mw.Title.newFromText( annRange.annotation.getDisplayTitle() );
 		if ( !title ) {
 			return null;
@@ -102,6 +107,7 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 
 		return this.buildActionFromLinkRange( annRange.range, surfaceModel, { choices } );
 	} );
+	return actions;
 };
 
 mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surface ) {

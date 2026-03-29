@@ -25,7 +25,7 @@ function createSurfaceWithInternalLink( targetTitle, labelText ) {
 	return surface;
 }
 
-QUnit.test( 'onDocumentChange', ( assert ) => {
+QUnit.test( 'checkNode', ( assert ) => {
 	const cases = [
 		{
 			name: 'Simple mismatched year',
@@ -108,8 +108,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 
 	cases.forEach( ( caseItem ) => {
 		const surfaceModel = createSurfaceWithInternalLink( caseItem.targetTitle, caseItem.labelText );
+		const node = surfaceModel.getDocument().getDocumentNode().children[ 0 ];
 		const check = new mw.editcheck.YearLinkEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
-		const actions = check.onDocumentChange( surfaceModel ).filter( Boolean );
+		const actions = check.checkNode( node, surfaceModel ).filter( Boolean );
 
         const wikilink = '[[' + caseItem.targetTitle + ( caseItem.labelText !== caseItem.targetTitle ? '|' + caseItem.labelText : '' ) + ']]';
         const msg = caseItem.name + ' (' + wikilink + ')';
