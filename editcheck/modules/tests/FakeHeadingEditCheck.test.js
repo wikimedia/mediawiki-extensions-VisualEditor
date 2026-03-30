@@ -51,6 +51,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 	];
 
 	cases.forEach( ( caseItem ) => {
+		const done = assert.async();
 		const doc = ve.dm.example.createExampleDocumentFromData( [
 			...caseItem.data,
 			{ type: 'internalList' },
@@ -59,11 +60,13 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 
 		const surface = new ve.dm.Surface( doc );
 		const check = new mw.editcheck.FakeHeadingEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
-		const actions = check.onDocumentChange( surface );
-
-		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
-		if ( caseItem.expectedActions > 0 ) {
-			assert.strictEqual( actions[ 0 ].getName(), 'fakeHeading', caseItem.msg + ': Action name' );
-		}
+		const actionPromises = check.onDocumentChange( surface );
+		Promise.all( actionPromises ).then( ( actions ) => {
+			actions = actions.filter( ( action ) => action );
+			assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
+			if ( caseItem.expectedActions > 0 ) {
+				assert.strictEqual( actions[ 0 ].getName(), 'fakeHeading', caseItem.msg + ': Action name' );
+			}
+		} ).finally( () => done() );
 	} );
 } );

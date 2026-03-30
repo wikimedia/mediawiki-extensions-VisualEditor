@@ -18,6 +18,8 @@ mw.editcheck.FakeHeadingEditCheck = function MWFakeHeadingEditCheck() {
 
 OO.inheritClass( mw.editcheck.FakeHeadingEditCheck, mw.editcheck.BaseEditCheck );
 
+OO.mixinClass( mw.editcheck.FakeHeadingEditCheck, mw.editcheck.ContentBranchNodeCheck );
+
 /* Static properties */
 
 mw.editcheck.FakeHeadingEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.FakeHeadingEditCheck.super.static.defaultConfig, {
@@ -46,27 +48,28 @@ mw.editcheck.FakeHeadingEditCheck.static.onlyCoveredNodes = true;
 
 /* Methods */
 
-mw.editcheck.FakeHeadingEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.FakeHeadingEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
+	if ( node.subroot !== node || node.getType() !== 'paragraph' ) {
+		// Technically the node's position in the tree is not per-node cachable. But it
+		// doesn't matter much in this case, because the position is only being used as
+		// a heuristic to guess whether the node is semantically intended as a heading.
+		return [];
+	}
+
 	// We need to cover complete new nodes, and also existing nodes that have been bolded
 	const documentModel = surfaceModel.getDocument();
-	// Get fully covered nodes only, and only their content ranges
-	return this.getModifiedRanges( documentModel, true, true, false )
-		.filter( ( range ) => {
-			if ( this.isDismissedRange( range ) ) {
-				return false;
-			}
-			const annotations = documentModel.data.getAnnotationsFromRange( range );
-			if ( !( annotations.hasAnnotationWithName( 'textStyle/bold' ) ) ) {
-				return false;
-			}
-			// Check we're in a root paragraph
-			const node = documentModel.getBranchNodeFromOffset( range.start );
-			return node && node.getType() === 'paragraph' && node.getParent() === documentModel.attachedRoot;
-		} )
-		.map( ( range ) => new mw.editcheck.EditCheckAction( {
-			check: this,
-			fragments: [ surfaceModel.getFragment( new ve.dm.LinearSelection( range ) ) ]
-		} ) );
+	const range = node.getRange();
+
+	const annotations = documentModel.data.getAnnotationsFromRange( range );
+	if ( !( annotations.hasAnnotationWithName( 'textStyle/bold' ) ) ) {
+		return [];
+	}
+
+	const action = new mw.editcheck.EditCheckAction( {
+		check: this,
+		fragments: [ surfaceModel.getFragment( new ve.dm.LinearSelection( range ) ) ]
+	} );
+	return [ action ];
 };
 
 mw.editcheck.FakeHeadingEditCheck.prototype.act = function ( choice, action, surface ) {
