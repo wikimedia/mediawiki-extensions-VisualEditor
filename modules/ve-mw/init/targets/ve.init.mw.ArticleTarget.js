@@ -2287,7 +2287,7 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 		this.$scrollContainer.scrollTop( surface.getView().attachedRoot.$element.position().top );
 	}
 
-	if ( section === null || section === 'new' || section === '0' || section === 'T-0' ) {
+	if ( section === null || section === 'new' ) {
 		return;
 	}
 
@@ -2328,7 +2328,10 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 			// Cheap HTML removal
 			.replace( /<[^>]+?>/g, '' );
 	}
-	if ( headingText ) {
+	// TODO: The 'T-0' case may be impossible. Verify and maybe remove this part of the check
+	if ( section === '0' || section === 'T-0' ) {
+		this.initialEditSummary = '/* */ ';
+	} else if ( headingText ) {
 		this.initialEditSummary =
 			'/* ' +
 			ve.graphemeSafeSubstring( headingText, 0, 244 ) +
