@@ -51,7 +51,7 @@ mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.e
 mw.editcheck.TextMatchEditCheck.static.choices = [
 	{
 		action: 'accept',
-		label: OO.ui.deferMsg( 'ooui-dialog-message-accept' ),
+		label: OO.ui.deferMsg( 'editcheck-dialog-action-replace' ),
 		modes: [ 'replace' ]
 	},
 	{
@@ -61,7 +61,7 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 	},
 	{
 		action: 'dismiss',
-		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' ),
+		label: OO.ui.deferMsg( 'editcheck-action-dismiss' ),
 		modes: [ '', 'info', 'replace', 'delete' ]
 	}
 ];

@@ -676,11 +676,13 @@
 				"oojs-ui.styles.icons-interactions"
 			],
 			"messages": [
+				"editcheck-action-dismiss",
 				"editcheck-dialog-action-no",
 				"editcheck-dialog-action-yes",
 				"editcheck-dialog-action-decline",
 				"editcheck-dialog-action-revise",
 				"editcheck-dialog-action-recheck",
+				"editcheck-dialog-action-replace",
 				"editcheck-dialog-action-back",
 				"editcheck-dialog-action-submit",
 				"editcheck-dialog-scroll-into-view",
