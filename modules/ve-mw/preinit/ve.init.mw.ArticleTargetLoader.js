@@ -147,7 +147,7 @@
 		 * @param {Object[]} checkboxesDef Checkbox definitions from the API
 		 * @param {Object} [widgetConfig] Additional widget config
 		 * @return {Object} Result object with checkboxFields (OO.ui.FieldLayout[]) and
-		 *  checkboxesByName (keyed object of OO.ui.CheckboxInputWidget).
+		 *  checkboxesByName (keyed object of OO.ui.InputWidget).
 		 */
 		createCheckboxFields: function ( checkboxesDef, widgetConfig ) {
 			const checkboxFields = [],
@@ -187,6 +187,7 @@
 						// * ve-ui-mwSaveDialog-checkbox-wpMinoredit
 						// * ve-ui-mwSaveDialog-checkbox-wpWatchthis
 						// * ve-ui-mwSaveDialog-checkbox-wpWatchlistExpiry
+						// * ve-ui-mwSaveDialog-checkbox-wpWatchlistLabels
 						classes: [ 've-ui-mwSaveDialog-checkbox-' + name ]
 					}, widgetConfig );
 
@@ -199,6 +200,18 @@
 							} ) );
 							break;
 
+						case 'MediaWiki\\Widget\\MenuTagMultiselectWidget':
+							checkbox = new mw.widgets.MenuTagMultiselectWidget( $.extend( config, {
+								name,
+								options: options.options || {},
+								selected: options.default || [],
+								allowReordering: !!options.allowReordering,
+								allowArbitrary: false,
+								inputPosition: options.inputPosition || 'outline',
+								placeholder: options[ 'placeholder-message' ] ? mw.message( options[ 'placeholder-message' ] ).text() : undefined
+							} ) );
+							break;
+
 						default:
 							checkbox = new OO.ui.CheckboxInputWidget( $.extend( config, {
 								selected: options.default
@@ -206,17 +219,24 @@
 							break;
 					}
 
+					const fieldConfig = {
+						align: options.align || 'inline',
+						label: $label,
+						title,
+						invisibleLabel: !!options.invisibleLabel,
+						// * ve-ui-mwSaveDialog-field-wpMinoredit
+						// * ve-ui-mwSaveDialog-field-wpWatchthis
+						// * ve-ui-mwSaveDialog-field-wpWatchlistExpiry
+						// * ve-ui-mwSaveDialog-field-wpWatchlistLabels
+						classes: [ 've-ui-mwSaveDialog-field-' + name ]
+					};
+					if ( options[ 'help-message' ] ) {
+						fieldConfig.help = mw.message( options[ 'help-message' ] ).parseDom();
+						fieldConfig.helpInline = true;
+					}
+
 					checkboxFields.push(
-						new OO.ui.FieldLayout( checkbox, {
-							align: 'inline',
-							label: $label,
-							title,
-							invisibleLabel: !!options.invisibleLabel,
-							// * ve-ui-mwSaveDialog-field-wpMinoredit
-							// * ve-ui-mwSaveDialog-field-wpWatchthis
-							// * ve-ui-mwSaveDialog-field-wpWatchlistExpiry
-							classes: [ 've-ui-mwSaveDialog-field-' + name ]
-						} )
+						new OO.ui.FieldLayout( checkbox, fieldConfig )
 					);
 					checkboxesByName[ name ] = checkbox;
 				} );

@@ -169,6 +169,8 @@
 				"UserFactory",
 				"UserOptionsLookup",
 				"WatchlistManager",
+				"WatchlistLabelStore",
+				"WatchedItemStore",
 				"ContentTransformer",
 				"StatsFactory",
 				"WikiPageFactory",

@@ -56,9 +56,10 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.editSummaryValue = null;
 	this.initialEditSummary = null;
 	this.initialCheckboxes = {};
+	this.deferredCheckboxesDef = null;
+	this.loadDeferredCheckboxesPromise = null;
 	this.preSaveProcess = new OO.ui.Process();
 	this.saveOptionsProcess = new OO.ui.Process();
-
 	this.viewUrl = new URL( mw.util.getUrl( this.getPageName() ), location.href );
 	this.isViewPage = (
 		mw.config.get( 'wgAction' ) === 'view' &&
@@ -481,7 +482,20 @@ ve.init.mw.ArticleTarget.prototype.parseMetadata = function ( response ) {
 	// Save dialog doesn't exist yet, so create an overlay for the widgets, and
 	// append it to the save dialog later.
 	this.$saveDialogOverlay = $( '<div>' ).addClass( 'oo-ui-window-overlay' );
-	const checkboxes = mw.libs.ve.targetLoader.createCheckboxFields( this.checkboxesDef, { $overlay: this.$saveDialogOverlay } );
+	const immediateCheckboxesDef = {};
+	this.deferredCheckboxesDef = {};
+	for ( const name in this.checkboxesDef ) {
+		const options = this.checkboxesDef[ name ];
+		if ( options.class === 'MediaWiki\\Widget\\MenuTagMultiselectWidget' ) {
+			this.deferredCheckboxesDef[ name ] = options;
+		} else {
+			immediateCheckboxesDef[ name ] = options;
+		}
+	}
+	if ( !Object.keys( this.deferredCheckboxesDef ).length ) {
+		this.deferredCheckboxesDef = null;
+	}
+	const checkboxes = mw.libs.ve.targetLoader.createCheckboxFields( immediateCheckboxesDef, { $overlay: this.$saveDialogOverlay } );
 	this.checkboxFields = checkboxes.checkboxFields;
 	this.checkboxesByName = checkboxes.checkboxesByName;
 
@@ -1219,7 +1233,50 @@ ve.init.mw.ArticleTarget.prototype.clearState = function () {
 	this.remoteNotices = [];
 	this.localNoticeMessages = [];
 	this.recovered = false;
+	this.deferredCheckboxesDef = null;
+	this.loadDeferredCheckboxesPromise = null;
 	this.teardownPromise = null;
+};
+
+/**
+ * Load deferred checkbox widgets and create their fields.
+ *
+ * @return {jQuery.Promise}
+ */
+ve.init.mw.ArticleTarget.prototype.loadDeferredCheckboxes = function () {
+	if ( !this.deferredCheckboxesDef || !Object.keys( this.deferredCheckboxesDef ).length ) {
+		return Promise.resolve();
+	}
+
+	if ( this.loadDeferredCheckboxesPromise ) {
+		return this.loadDeferredCheckboxesPromise;
+	}
+
+	this.loadDeferredCheckboxesPromise = mw.loader.using( [
+		'mediawiki.widgets.MenuTagMultiselectWidget',
+		'mediawiki.widgets.TagMultiselectWidget.styles'
+	] ).then( () => {
+		if ( !this.deferredCheckboxesDef || !Object.keys( this.deferredCheckboxesDef ).length ) {
+			return;
+		}
+
+		const checkboxes = mw.libs.ve.targetLoader.createCheckboxFields( this.deferredCheckboxesDef, {
+			$overlay: this.$saveDialogOverlay
+		} );
+
+		this.checkboxFields = this.checkboxFields.concat( checkboxes.checkboxFields );
+		this.checkboxesByName = ve.extendObject( this.checkboxesByName, checkboxes.checkboxesByName );
+
+		checkboxes.checkboxFields.forEach( ( field ) => {
+			// TODO: This method should be upstreamed or moved so that targetLoader
+			// can use it safely.
+			ve.targetLinksToNewWindow( field.$label[ 0 ] );
+		} );
+
+		this.deferredCheckboxesDef = null;
+	} );
+
+	return this.loadDeferredCheckboxesPromise;
 };
 
 /**
@@ -1512,7 +1569,12 @@ ve.init.mw.ArticleTarget.prototype.getSaveFields = function () {
 	for ( name in this.checkboxesByName ) {
 		// DropdownInputWidget or CheckboxInputWidget
 		if ( !this.checkboxesByName[ name ].isSelected || this.checkboxesByName[ name ].isSelected() ) {
-			fields[ name ] = this.checkboxesByName[ name ].getValue();
+			const value = this.checkboxesByName[ name ].getValue();
+			if ( name === 'wpWatchlistLabels' && Array.isArray( value ) ) {
+				fields[ name ] = value.join( '|' );
+			} else {
+				fields[ name ] = value;
+			}
 		}
 	}
 
@@ -2095,69 +2157,73 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 		// Preload the serialization
 		this.prepareCacheKey( this.getDocToSave() );
 
-		// Get the save dialog
-		this.getSurface().getDialogs().getWindow( 'mwSave' ).then( ( win ) => {
-			const windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
+		this.loadDeferredCheckboxes().then( () => {
+			// Get the save dialog
+			this.getSurface().getDialogs().getWindow( 'mwSave' ).then( ( win ) => {
+				const windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
-			if ( !this.saveDialog ) {
-				this.saveDialog = win;
-				firstLoad = true;
+				if ( !this.saveDialog ) {
+					this.saveDialog = win;
+					firstLoad = true;
 
-				// Connect to save dialog
-				this.saveDialog.connect( this, {
-					save: 'onSaveDialogSave',
-					review: 'onSaveDialogReview',
-					preview: 'onSaveDialogPreview',
-					resolve: 'onSaveDialogResolveConflict',
-					retry: 'onSaveDialogRetry',
-					// The array syntax is a way to call `this.emit( 'saveWorkflowEnd' )`.
-					close: [ 'emit', 'saveWorkflowEnd' ],
-					changePanel: [ 'emit', 'saveWorkflowChangePanel' ]
-				} );
+					// Connect to save dialog
+					this.saveDialog.connect( this, {
+						save: 'onSaveDialogSave',
+						review: 'onSaveDialogReview',
+						preview: 'onSaveDialogPreview',
+						resolve: 'onSaveDialogResolveConflict',
+						retry: 'onSaveDialogRetry',
+						// The array syntax is a way to call `this.emit( 'saveWorkflowEnd' )`.
+						close: [ 'emit', 'saveWorkflowEnd' ],
+						changePanel: [ 'emit', 'saveWorkflowChangePanel' ]
+					} );
 
-				// Attach custom overlay
-				this.saveDialog.$element.append( this.$saveDialogOverlay );
-			}
+					// Attach custom overlay
+					this.saveDialog.$element.append( this.$saveDialogOverlay );
+				}
 
-			const data = this.getSaveDialogOpeningData();
+				const data = this.getSaveDialogOpeningData();
 
-			if (
-				( action === 'review' && !data.canReview ) ||
-				( action === 'preview' && !data.canPreview )
-			) {
-				this.saveDialogIsOpening = false;
-				return;
-			}
+				if (
+					( action === 'review' && !data.canReview ) ||
+					( action === 'preview' && !data.canPreview )
+				) {
+					this.saveDialogIsOpening = false;
+					return;
+				}
 
-			if ( firstLoad ) {
-				for ( const name in this.checkboxesByName ) {
-					if ( this.initialCheckboxes[ name ] !== undefined ) {
-						this.checkboxesByName[ name ].setSelected( this.initialCheckboxes[ name ] );
+				if ( firstLoad ) {
+					for ( const name in this.checkboxesByName ) {
+						if ( this.initialCheckboxes[ name ] !== undefined ) {
+							this.checkboxesByName[ name ].setSelected( this.initialCheckboxes[ name ] );
+						}
 					}
 				}
-			}
 
-			let checkbox;
-			if ( checkboxName && ( checkbox = this.checkboxesByName[ checkboxName ] ) ) {
-				const isSelected = !checkbox.isSelected();
-				// Wait for native access key change to happen
-				setTimeout( () => {
-					checkbox.setSelected( isSelected );
-				} );
-			}
+				let checkbox;
+				if ( checkboxName && ( checkbox = this.checkboxesByName[ checkboxName ] ) ) {
+					const isSelected = !checkbox.isSelected();
+					// Wait for native access key change to happen
+					setTimeout( () => {
+						checkbox.setSelected( isSelected );
+					} );
+				}
 
-			// When calling review/preview action, switch to those panels immediately
-			if ( action === 'review' || action === 'preview' ) {
-				data.initialPanel = action;
-			}
+				// When calling review/preview action, switch to those panels immediately
+				if ( action === 'review' || action === 'preview' ) {
+					data.initialPanel = action;
+				}
 
-			// Open the dialog
-			const openPromise = windowAction.open( 'mwSave', data, action );
-			if ( openPromise ) {
-				openPromise.always( () => {
-					this.saveDialogIsOpening = false;
-				} );
-			}
+				// Open the dialog
+				const openPromise = windowAction.open( 'mwSave', data, action );
+				if ( openPromise ) {
+					openPromise.always( () => {
+						this.saveDialogIsOpening = false;
+					} );
+				}
+			} );
+		}, () => {
+			this.saveDialogIsOpening = false;
 		} );
 	}, () => {
 		this.saveDialogIsOpening = false;

@@ -29,6 +29,7 @@ use MediaWiki\Html\Html;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\LinkBatchFactory;
@@ -46,6 +47,9 @@ use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserIdentity;
+use MediaWiki\Watchlist\WatchedItem;
+use MediaWiki\Watchlist\WatchedItemStoreInterface;
+use MediaWiki\Watchlist\WatchlistLabelStore;
 use MediaWiki\Watchlist\WatchlistManager;
 use MessageLocalizer;
 use Wikimedia\Assert\Assert;
@@ -64,6 +68,8 @@ class ApiVisualEditor extends ApiBase {
 		private readonly UserFactory $userFactory,
 		private readonly UserOptionsLookup $userOptionsLookup,
 		private readonly WatchlistManager $watchlistManager,
+		private readonly WatchlistLabelStore $watchlistLabelStore,
+		private readonly WatchedItemStoreInterface $watchedItemStore,
 		private readonly ContentTransformer $contentTransformer,
 		private readonly StatsFactory $statsFactory,
 		private readonly WikiPageFactory $wikiPageFactory,
@@ -113,6 +119,63 @@ class ApiVisualEditor extends ApiBase {
 			);
 		}
 		return $user;
+	}
+
+	/**
+	 * Add a watchlist labels MenuTagMultiselectWidget definition for VE's publish dialog.
+	 *
+	 * @param array[] &$checkboxesDef
+	 * @param User $user
+	 * @param Title $title
+	 */
+	private function addWatchlistLabelsDefinition( array &$checkboxesDef, User $user, Title $title ): void {
+		if ( !$this->getConfig()->get( MainConfigNames::EnableWatchlistLabels ) || !$user->isNamed() ) {
+			return;
+		}
+
+		$userLabels = $this->watchlistLabelStore->loadAllForUser( $user );
+		if ( !$userLabels ) {
+			return;
+		}
+
+		$options = [];
+		foreach ( $userLabels as $label ) {
+			$labelId = $label->getId();
+			if ( $labelId !== null ) {
+				$options[] = [ 'data' => (string)$labelId, 'label' => $label->getName() ];
+			}
+		}
+		if ( !$options ) {
+			return;
+		}
+
+		$selectedLabelIds = [];
+		$requestLabels = $this->getRequest()->getIntArray( 'wpWatchlistLabels', [] );
+		if ( $requestLabels ) {
+			$selectedLabelIds = $requestLabels;
+		} else {
+			$watchedItem = $this->watchedItemStore->getWatchedItem( $user, $title );
+			if ( $watchedItem instanceof WatchedItem ) {
+				foreach ( $watchedItem->getLabels() as $label ) {
+					$labelId = $label->getId();
+					if ( $labelId !== null ) {
+						$selectedLabelIds[] = $labelId;
+					}
+				}
+			}
+		}
+
+		$checkboxesDef['wpWatchlistLabels'] = [
+			'id' => 'wpWatchlistLabelsWidget',
+			'label-message' => 'watchlistlabels-editpage-label',
+			'help-message' => 'watchlistlabels-editpage-help',
+			'placeholder-message' => 'watchlistlabels-editpage-placeholder',
+			'class' => 'MediaWiki\\Widget\\MenuTagMultiselectWidget',
+			'options' => [ '' => $options ],
+			'default' => array_map( strval( ... ), $selectedLabelIds ),
+			'allowReordering' => false,
+			'align' => 'top',
+		];
 	}
 
 	/**
@@ -371,6 +434,7 @@ class ApiVisualEditor extends ApiBase {
 						$this->watchlistManager->isWatched( $user, $title ),
 				];
 				$checkboxesDef = $editPage->getCheckboxesDefinition( $states );
+				$this->addWatchlistLabelsDefinition( $checkboxesDef, $user, $title );
 				$checkboxesMessagesList = [];
 				foreach ( $checkboxesDef as &$options ) {
 					if ( isset( $options['tooltip'] ) ) {
@@ -390,6 +454,18 @@ class ApiVisualEditor extends ApiBase {
 						// Extract only the key. Any parameters are included in the fake message definition
 						// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)
 						$options['label-message'] = $this->msg( $options['label-message'] )->getKey();
+					}
+					if ( isset( $options['help-message'] ) ) {
+						$checkboxesMessagesList[] = $options['help-message'];
+						if ( !is_string( $options['help-message'] ) ) {
+							$options['help-message'] = $this->msg( $options['help-message'] )->getKey();
+						}
+					}
+					if ( isset( $options['placeholder-message'] ) ) {
+						$checkboxesMessagesList[] = $options['placeholder-message'];
+						if ( !is_string( $options['placeholder-message'] ) ) {
+							$options['placeholder-message'] = $this->msg( $options['placeholder-message'] )->getKey();
+						}
 					}
 				}
 				$checkboxesMessages = [];
