@@ -454,6 +454,14 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 				return [];
 			}
 
+			const opIsNoOp = ( op ) => (
+				// This is a no-op operation that added-and-removed
+				// identical content. TransactionSquasher will
+				// generate these operations when undo/redo have been used.
+				op.insert.length === op.remove.length &&
+				ve.compare( op.insert, op.remove )
+			);
+
 			let offset = 0;
 			const endOffset = documentModel.getDocumentRange().end;
 			operations.every( ( op ) => {
@@ -466,10 +474,12 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 					// adjacent content removed (T340088), or if we're allowing
 					// non-pure insertions. Either way, a pure removal won't be included.
 					if (
-						( !onlyPureInsertions && op.insert.length > 0 ) ||
-						// Only removals of content count, not element open/closes.
-						// TODO: this could be extended so removals of inline elements do count
-						!op.remove.some( ( item ) => !ve.dm.LinearData.static.isElementData( item ) )
+						!opIsNoOp( op ) && (
+							( !onlyPureInsertions && op.insert.length > 0 ) ||
+							// Only removals of content count, not element open/closes.
+							// TODO: this could be extended so removals of inline elements do count
+							!op.remove.some( ( item ) => !ve.dm.LinearData.static.isElementData( item ) )
+						)
 					) {
 						candidates.push( insertedRange );
 					}
