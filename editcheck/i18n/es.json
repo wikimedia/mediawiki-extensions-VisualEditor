@@ -6,7 +6,8 @@
 			"CeciMagi",
 			"Monicapozo03",
 			"IZapico (WMF)",
-			"Ed g2s"
+			"Ed g2s",
+			"Kookoriko"
 		]
 	},
 	"editcheck-dialog-action-no": "No",
@@ -28,5 +29,5 @@
 	"tag-editcheck-reference-decline-other": "Revisión de edición (referencias) rechazada (otros)",
 	"tag-editcheck-reference-decline-other-description": "La referencia EditCheck fue rechazada por un motivo no especificado.",
 	"tag-editcheck-reference-decline-uncertain": "Revisión de edición (referencias) rechazada (incierta)",
-	"tag-editcheck-reference-decline-uncertain-description": "La referencia de EditCheck fue rechazada por considerarse poco clara"
+	"tag-editcheck-reference-decline-uncertain-description": "La referencia EditCheck fue rechazada por irrelevante."
 }
