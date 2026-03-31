@@ -756,6 +756,8 @@
 				"editcheck-reject-description",
 				"editcheck-review-title",
 				"editcheck-toolbar-suggestions-title",
+				"editcheck-suggestionfeedback-label-about",
+				"editcheck-suggestionfeedback-label-report",
 				"visualeditor-backbutton-tooltip",
 				"visualeditor-contextitemwidget-label-close",
 				"next",

@@ -92,11 +92,11 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 				items: [
 					new OO.ui.MenuOptionWidget( {
 						data: '//www.mediawiki.org/wiki/VisualEditor/Suggestion_Mode',
-						label: 'About Suggestions'
+						label: ve.msg( 'editcheck-suggestionfeedback-label-about' )
 					} ),
 					new OO.ui.MenuOptionWidget( {
 						data: 'feedback',
-						label: 'Report a problem'
+						label: ve.msg( 'editcheck-suggestionfeedback-label-report' )
 					} )
 				]
 			}

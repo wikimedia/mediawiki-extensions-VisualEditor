@@ -106,6 +106,8 @@
 	"editcheck-specialeditchecks-config-default": "Default configuration",
 	"editcheck-specialeditchecks-config-onwiki": "On-wiki override",
 	"editcheck-specialeditchecks-config-matchitem": "Text match configuration",
+	"editcheck-suggestionfeedback-label-about": "About suggestions",
+	"editcheck-suggestionfeedback-label-report": "Report a problem",
 	"tag-editcheck-reference-decline-common-knowledge": "Edit Check (references) declined (common knowledge)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck reference was declined as common knowledge",
 	"tag-editcheck-reference-decline-irrelevant": "Edit Check (references) declined (irrelevant)",
