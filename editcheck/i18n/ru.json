@@ -4,7 +4,8 @@
 			"Stjn",
 			"Okras",
 			"Kareyac",
-			"Vonavy"
+			"Vonavy",
+			"Mitte27"
 		]
 	},
 	"editcheck-dialog-action-no": "Нет",
@@ -19,6 +20,7 @@
 	"editcheck-dialog-addref-success-notify": "Спасибо за добавление источника!",
 	"editcheck-dialog-addref-title": "Добавить источник",
 	"editcheck-dialog-title": "До публикации",
+	"editcheck-review-title": "Проверить изменения",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",
 	"tag-editcheck-reference-decline-irrelevant": "Проверка правок (источники) отклонена (неуместно)",
 	"tag-editcheck-reference-decline-other": "Проверка правок (источники) отклонена (другое)",
