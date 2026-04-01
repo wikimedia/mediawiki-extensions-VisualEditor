@@ -109,6 +109,37 @@ body:not( .skin-monobook ) .oo-ui-tool-name-editCheckSuggestions {
 		background-size: 100%;
 		opacity: 1;
 	}
+
+	& > .oo-ui-tool-link > .oo-ui-iconElement-icon::after {
+		content: attr( data-count );
+		display: block;
+		position: absolute;
+		text-align: center;
+		padding: 1px;
+		min-width: 11px;
+		left: 12px;
+		bottom: 1px;
+		border: 1px solid @border-color-inverted;
+		border-radius: @border-radius-base;
+		background-color: @background-color-progressive;
+		color: @color-inverted;
+		font-size: @font-size-x-small;
+		font-weight: bold;
+		transition-property: background-color, border-color, color;
+		transition-duration: @transition-duration-base;
+	}
+
+	&.oo-ui-tool-active > .oo-ui-tool-link > .oo-ui-iconElement-icon::after {
+		background-color: @background-color-progressive-subtle;
+		border-color: @border-color-progressive;
+		color: @color-progressive;
+	}
+
+	/* Hide when no count set yet, or count is 0 and tool isn't active */
+	& > .oo-ui-tool-link > .oo-ui-iconElement-icon:not( [ data-count ] )::after,
+	&:not( .oo-ui-tool-active ) > .oo-ui-tool-link > .oo-ui-iconElement-icon[ data-count='0' ]::after {
+		display: none;
+	}
 }
 
 /* Actions */

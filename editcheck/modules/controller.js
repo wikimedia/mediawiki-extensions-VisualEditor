@@ -676,6 +676,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	if ( listener === 'onBeforeSave' ) {
 		return;
 	}
+	const suggestionActions = actions.filter( ( action ) => action.isSuggestion() );
 	const target = this.target;
 	if ( target.enableVisualSectionEditing && target.section !== null ) {
 		if ( !this.editFullPageIndicatorTop ) {
@@ -691,10 +692,22 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 			target.switchToFullPageButtonBottom.$label.append( this.editFullPageIndicatorBottom.$element );
 		}
 		const attachedRootRange = this.surface.getModel().getDocument().getAttachedRoot().getOuterRange();
-		const hasActionsAbove = actions.some( ( action ) => action.getFocusSelection().getCoveringRange().end < attachedRootRange.start );
-		const hasActionsBelow = actions.some( ( action ) => action.getFocusSelection().getCoveringRange().start > attachedRootRange.end );
+		const hasActionsAbove = suggestionActions.some( ( action ) => action.getFocusSelection().getCoveringRange().end < attachedRootRange.start );
+		const hasActionsBelow = suggestionActions.some( ( action ) => action.getFocusSelection().getCoveringRange().start > attachedRootRange.end );
 		this.editFullPageIndicatorTop.toggle( hasActionsAbove );
 		this.editFullPageIndicatorBottom.toggle( hasActionsBelow );
+	}
+
+	const suggestionsModeTool = target.getToolbar().tools.editCheckSuggestions;
+	if (
+		suggestionsModeTool &&
+		// Ignore a count of 0 during initial setup
+		!( this.inSetup && suggestionActions.length === 0 )
+	) {
+		suggestionsModeTool.$icon.attr(
+			'data-count',
+			ve.msg( 'editcheck-toolbar-suggestions-count', Math.min( 10, suggestionActions.length ) )
+		);
 	}
 	if ( !actions.length ) {
 		return;
