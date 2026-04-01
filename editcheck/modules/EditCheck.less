@@ -90,6 +90,27 @@
 	}
 }
 
+body:not( .skin-monobook ) .oo-ui-tool-name-editCheckSuggestions {
+	& > .oo-ui-tool-link > .oo-ui-iconElement-icon::before {
+		content: '';
+		display: block;
+		height: 100%;
+		/* Difference between icon width (20) and overlay width (26) divided by 2 to center */
+		margin: 0 -3px;
+		background: url( ../images/lightbulb-rays.svg ) 50% 50% no-repeat;
+		/* Animation */
+		background-size: 50%;
+		opacity: 0;
+		transition-property: background-size, opacity;
+		transition-duration: @transition-duration-medium;
+	}
+
+	&.oo-ui-tool-active > .oo-ui-tool-link > .oo-ui-iconElement-icon::before {
+		background-size: 100%;
+		opacity: 1;
+	}
+}
+
 /* Actions */
 
 .ve-ui-editCheck-scrollIntoView {
