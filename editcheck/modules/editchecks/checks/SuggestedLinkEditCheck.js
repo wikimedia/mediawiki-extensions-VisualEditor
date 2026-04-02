@@ -52,16 +52,18 @@ mw.editcheck.SuggestedLinkEditCheck.static.cachedPromises = new Map();
 
 mw.editcheck.SuggestedLinkEditCheck.static.fetchSuggestions = function ( surfaceModel ) {
 	if ( !this.cachedPromises.has( surfaceModel ) ) {
+		const deferred = ve.createDeferred();
 		// TODO: build this URL in some more robust manner, maybe by
 		// persuading the model-owner to use a present-in-mw.config identifier
 		const parts = window.location.hostname.split( '.' );
 		if ( ve.getProp( parts, 1 ) !== 'wikipedia' ) {
-			return ve.createDeferred().resolve( [] ).promise();
+			return deferred.resolve( [] ).promise();
 		}
-		this.cachedPromises.set( surfaceModel, mw.editcheck.fetchTimeout( `https://api.wikimedia.org/service/linkrecommendation/v1/linkrecommendations/${ parts[ 1 ] }/${ parts[ 0 ] }/${ mw.config.get( 'wgRelevantPageName' ) }` )
+		mw.editcheck.fetchTimeout( `https://api.wikimedia.org/service/linkrecommendation/v1/linkrecommendations/${ parts[ 1 ] }/${ parts[ 0 ] }/${ mw.config.get( 'wgRelevantPageName' ) }` )
 			.then( ( response ) => response.json() )
 			.then( ( results ) => {
 				if ( !ve.getProp( results, 'links' ) ) {
+					deferred.reject( results );
 					return;
 				}
 				const linkData = [];
@@ -77,8 +79,12 @@ mw.editcheck.SuggestedLinkEditCheck.static.fetchSuggestions = function ( surface
 					result.fragment = surfaceModel.getLinearFragment( new ve.Range( range.start + result.context_before.length, range.end - result.context_after.length ) );
 					linkData.push( result );
 				} );
+				deferred.resolve( linkData );
 				return linkData;
-			} ) );
+			}, ( reason ) => {
+				deferred.reject( reason );
+			} );
+		this.cachedPromises.set( surfaceModel, deferred.promise() );
 	}
 	return this.cachedPromises.get( surfaceModel );
 };
