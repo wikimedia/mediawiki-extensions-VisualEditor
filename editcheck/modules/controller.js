@@ -22,7 +22,7 @@ function Controller( target, config ) {
 	// Suggestion mode is available, and the suggestion mode toggle is visible in the toolbar
 	this.suggestionsModeAvailable = config.suggestionsModeAvailable;
 	// Suggestions are currently visible, toggled by the toolbar tool
-	this.suggestionsVisible = !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' );
+	this.suggestionsVisible = this.suggestionsModeAvailable && !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' );
 	// Suppress suggestions without affecting user config or toolbar state, used by external tools
 	this.suppressSuggestions = false;
 
@@ -275,6 +275,9 @@ Controller.prototype.refresh = function ( useCache ) {
  * Toggle whether suggestions are shown to the user.
  */
 Controller.prototype.toggleSuggestionsVisible = function () {
+	if ( !this.suggestionsModeAvailable ) {
+		return;
+	}
 	this.suggestionsVisible = !this.suggestionsVisible;
 	if ( !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' ) !== this.suggestionsVisible ) {
 		ve.userConfig( 'visualeditor-editcheck-suggestions-toggle', this.suggestionsVisible );
