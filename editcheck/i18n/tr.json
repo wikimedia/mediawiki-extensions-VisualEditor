@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Hedda",
+			"Jelican9",
 			"Joseph",
 			"Leo"
 		]
@@ -47,6 +48,9 @@
 	"editcheck-tone-reject-uncertain": "Tonu nasıl düzelteceğimden emin değilim",
 	"editcheck-tone-reject-other": "Diğer",
 	"editcheck-tone-thank": "Tonlamayı dikkate aldığınız için teşekkürler!",
+	"editcheck-action-remove-link": "Bağlantıyı kaldır",
+	"editcheck-duplicate-link-title": "Tekrar eden bağlantıyı kaldır",
+	"editcheck-duplicate-link-description": "Bu bağlantı bu bölümde birden fazla kez yer alıyor. [{{int:editcheck-duplicate-link-descriptionlink}} tekrarlanan bağlantıları] kaldırarak okuyucuların sayfada daha kolay gezinmesine yardımcı olun.",
 	"editcheck-reject-description": "Diğer düzenleyiciler neden bu seçimi yaptığınızı öğrenmeyi değerli bulacaktır.",
 	"editcheck-review-title": "Değişiklikleri gözden geçir",
 	"editcheck-specialeditchecks-info": "Düzenleme denetimleri [[MediaWiki:Editcheck-config.json]] adresinde yapılandırılır. Belgelendirme için [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration] adresine bakın.",
