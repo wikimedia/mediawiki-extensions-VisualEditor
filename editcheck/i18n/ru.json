@@ -4,7 +4,8 @@
 			"Kareyac",
 			"Okras",
 			"Stjn",
-			"Vonavy"
+			"Vonavy",
+			"Mitte27"
 		]
 	},
 	"editcheck-dialog-action-no": "Нет",
@@ -20,9 +21,18 @@
 	"editcheck-dialog-addref-success-notify": "Спасибо за добавление источника!",
 	"editcheck-dialog-addref-title": "Добавить источник",
 	"editcheck-dialog-title": "До публикации",
+	"editcheck-copyvio-prompt": "Вы написали этот текст?",
 	"editcheck-copyvio-action-keep": "Да, сохранить",
 	"editcheck-copyvio-action-remove": "Нет, удалить",
+	"editcheck-copyvio-keep-description": "Пожалуйста, помогите другим редакторам этой статьи понять причину, по которой вы решили оставить скопированный текст.",
+	"editcheck-copyvio-keep-wrote": "Этот текст написан мной, и он нигде больше не опубликован",
+	"editcheck-copyvio-keep-permission": "Этот материал доступен по свободной лицензии",
+	"editcheck-copyvio-keep-other": "Ничего из перечисленного не подходит",
+	"editcheck-copyvio-keep-notify": "Спасибо, что поделились причиной, по которой решили сохранить скопированный текст!",
+	"editcheck-copyvio-remove-notify": "Спасибо за помощь в сохранении свободного доступа к знаниям!",
 	"editcheck-tone-reject-other": "Другое",
+	"editcheck-reject-description": "Другим редакторам было бы важно узнать, почему вы сделали именно такой выбор.",
+	"editcheck-review-title": "Проверить изменения",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",
 	"tag-editcheck-reference-decline-irrelevant": "Проверка правок (источники) отклонена (неуместно)",
 	"tag-editcheck-reference-decline-other": "Проверка правок (источники) отклонена (другое)",

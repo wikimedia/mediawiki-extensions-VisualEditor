@@ -40,7 +40,8 @@
 			"Wladek92",
 			"Wyz",
 			"아라",
-			"Sik666"
+			"Sik666",
+			"SleaY"
 		]
 	},
 	"tag-editcheck-newcontent-description": "EditCheck pense que du nouveau contenu a été ajouté à la page",
@@ -54,7 +55,7 @@
 	"tag-editcheck-tone-shown": "Modifier la vérification (tonalité) affichée",
 	"tag-editcheck-tone-shown-description": "EditCheck pense qu'un ajustement du ton de certains contenus aurait pu être nécessaire, et l'interface utilisateur a été affichée",
 	"tag-editcheck-paste-shown": "Vérification des modifications (copier-coller) affichée",
-	"tag-editcheck-paste-shown-description": "La vérification des modifications a demandé des éclaircissements sur le contenu collé par l'éditeur, que celui-ci a supprimé ou jugé comme étant autorisé.",
+	"tag-editcheck-paste-shown-description": "La vérification des modifications a demandé des éclaircissements sur le contenu collé par le contributeur, que celui-ci a supprimé ou jugé comme étant autorisé.",
 	"tag-visualeditor": "Éditeur visuel",
 	"tag-visualeditor-description": "Modification effectuée avec l'[[{{MediaWiki:visualeditor-descriptionpagelink}}|éditeur visuel]]",
 	"tag-visualeditor-needcheck": "Éditeur visuel : à vérifier",
