@@ -55,5 +55,7 @@
 	"editcheck-specialeditchecks-col-appearance": "Aspetto",
 	"editcheck-specialeditchecks-config-summary": "Configurazione",
 	"editcheck-specialeditchecks-config-default": "Configurazione predefinita",
+	"editcheck-suggestionfeedback-label-about": "Informazioni sui suggerimenti",
+	"editcheck-suggestionfeedback-label-report": "Segnala un problema",
 	"tag-editcheck-reference-decline-other": "Edit Check (citazioni) rifiutato (altro)"
 }
