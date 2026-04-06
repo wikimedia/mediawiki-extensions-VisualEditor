@@ -647,6 +647,7 @@
 			"packageFiles": [
 				"editcheck/modules/init.js",
 				"editcheck/modules/utils.js",
+				"editcheck/modules/EditCheckPerformance.js",
 				"editcheck/modules/controller.js",
 				"editcheck/modules/EditCheckPreSaveToolbarTools.js",
 				"editcheck/modules/EditCheckSuggestionsTool.js",

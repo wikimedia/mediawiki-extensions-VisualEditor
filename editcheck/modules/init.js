@@ -22,6 +22,8 @@ mw.editcheck = {
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || ecenable === '2' ),
 	suggestionsModeAvailable: !!mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
+	// runtime performance logging config that we can adjust from the console
+	sessionPerfConfig: { checksMax: 5000, typingMaxSamples: 5000 },
 	resetSessionState: function () {
 		this.checksShown = {};
 		this.checksSeen = {};
@@ -47,6 +49,7 @@ const enableAbCheck = abGroup === 'test' || mw.editcheck.forceEnable;
 const nonDefaultChecks = new Set();
 
 require( './utils.js' );
+require( './EditCheckPerformance.js' );
 require( './EditCheckPreSaveToolbarTools.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );

@@ -38,6 +38,8 @@ function Controller( target, config ) {
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
 	this.scrollActionIntoViewDebounced = ve.debounceWithTest( teardownCheck, this.scrollActionIntoView.bind( this ), 200, true );
+
+	this.perf = new mw.editcheck.EditCheckPerformance( this );
 }
 
 /* Inheritance */

@@ -103,6 +103,7 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
 mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel, includeSuggestions ) {
+	const run = {};
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
 		const check = this.create( checkName, controller, {}, includeSuggestions );
@@ -119,7 +120,9 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 		const checkListener = check[ listenerName ];
 		let actionsOrPromises;
 		try {
+			this.emit( 'beforeActionsGenerated', checkName, listenerName, includeSuggestions, run );
 			actionsOrPromises = checkListener.call( check, surfaceModel );
+			this.emit( 'afterActionsGeneratedSync', checkName, run );
 			// This will have returned either an array of EditCheckActions, an
 			// array of Promises which will each resolve to a single
 			// EditCheckAction, a single EditCheckAction, or a single Promise
@@ -127,6 +130,9 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 			if ( !Array.isArray( actionsOrPromises ) ) {
 				actionsOrPromises = [ actionsOrPromises ];
 			}
+			mw.editcheck.allSettled( actionsOrPromises ).then( () => {
+				this.emit( 'afterActionsGeneratedAsync', checkName, run );
+			} );
 		} catch ( ex ) {
 			// HACK: ensure that synchronous exceptions are returned as rejected promises.
 			// TODO: Consider making all checks return promises. This would unify exception
