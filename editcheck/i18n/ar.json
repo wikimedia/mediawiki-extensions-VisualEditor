@@ -94,6 +94,8 @@
 	"editcheck-specialeditchecks-config-default": "الإعدادات الافتراضية",
 	"editcheck-specialeditchecks-config-onwiki": "تجاوز على ويكي",
 	"editcheck-specialeditchecks-config-matchitem": "إعدادات مطابقة النص",
+	"editcheck-suggestionfeedback-label-about": "حول الاقتراحات",
+	"editcheck-suggestionfeedback-label-report": "الإبلاغ عن مشكلة",
 	"tag-editcheck-reference-decline-common-knowledge": "تم رفض (ثقافة عامة) التحقّق من التحرير (مراجع)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "تم رفض مرجع EditCheck (أداة التحقّق) باعتباره ثقافةً عامة",
 	"tag-editcheck-reference-decline-irrelevant": "تم رفض (غير ذي صلة) التحقّق من التحرير (مراجع)",

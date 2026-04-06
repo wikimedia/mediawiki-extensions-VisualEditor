@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ant176",
+			"Cookie4782",
 			"JNakayama-WMF",
 			"Omotecho",
 			"Shirayuki",
@@ -9,6 +10,7 @@
 			"YeBoy371"
 		]
 	},
+	"editchecks": "編集チェック",
 	"editcheck-dialog-action-no": "いいえ",
 	"editcheck-dialog-action-yes": "はい",
 	"editcheck-dialog-addref-description": "出典を追加することで、読者がこの情報の典拠を理解できるようにします。",

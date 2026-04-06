@@ -92,6 +92,8 @@
 	"editcheck-specialeditchecks-config-default": "Defolt konfiqurasiya",
 	"editcheck-specialeditchecks-config-onwiki": "Vikidəki əvəzetmə",
 	"editcheck-specialeditchecks-config-matchitem": "Mətn uyğunluğu konfiqurasiyası",
+	"editcheck-suggestionfeedback-label-about": "Təkliflər haqqında",
+	"editcheck-suggestionfeedback-label-report": "Xətanı bildir",
 	"tag-editcheck-reference-decline-common-knowledge": "Redaktə Yoxlanışı (istinadlar) rədd edildi (hamının bildiyi)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck istinadı hamının bildiyi məlumat kimi rədd edildi",
 	"tag-editcheck-reference-decline-irrelevant": "Redaktə yoxlanışı (istinadlar) rədd edildi (aidiyyatsız)",

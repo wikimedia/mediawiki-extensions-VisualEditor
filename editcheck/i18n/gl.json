@@ -91,6 +91,8 @@
 	"editcheck-specialeditchecks-config-default": "Configuración predeterminada",
 	"editcheck-specialeditchecks-config-onwiki": "Anulación no wiki",
 	"editcheck-specialeditchecks-config-matchitem": "Configuración das coincidencias de texto",
+	"editcheck-suggestionfeedback-label-about": "Acerca das suxestións",
+	"editcheck-suggestionfeedback-label-report": "Informar sobre un problema",
 	"tag-editcheck-reference-decline-common-knowledge": "Verificación de edición (referencias) rexeitada (coñecemento común)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "A referencia da verificación de edición rexeitouse por ser un coñecemento común",
 	"tag-editcheck-reference-decline-irrelevant": "Verificación de edición (referencias) rexeitada (irrelevante)",
