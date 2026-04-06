@@ -173,6 +173,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 	action.select( surface, false, false );
 	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
 	if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
+		if ( alignToTop ) {
+			// Scroll immediately, because we don't need to wait for the padding to settle
+			controller.focusAction( action, true, alignToTop );
+		}
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
 		windowAction.open(
 			'fixedEditCheckDialog',
@@ -186,6 +190,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
 			}
 		).then( () => {
+			if ( alignToTop ) {
+				// We already focused and scrolled because it was safe to do so
+				return;
+			}
 			// Wait for window to open and new surface padding to be applied
 			// before trying to focus and scroll.
 			setTimeout( () => {
