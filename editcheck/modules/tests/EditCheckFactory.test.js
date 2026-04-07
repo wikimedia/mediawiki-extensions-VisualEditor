@@ -153,17 +153,20 @@ QUnit.test( 'createAllActionsByListener', ( assert ) => {
 			factory.register( checkClass );
 		} );
 		const done = assert.async();
+		let progressEvents = 0;
 		factory.createAllActionsByListener(
 			ve.test.utils.EditCheck.dummyController,
 			caseItem.listener || 'onDocumentChange',
 			surface,
-			caseItem.includeSuggestions
+			caseItem.includeSuggestions,
+			() => progressEvents++
 		).then( ( actions ) => {
 			assert.deepEqual(
 				actions.map( ( action ) => `${ action.getName() }-${ action.getHighlightSelections()[ 0 ].getRange().start }` ),
 				caseItem.expectedActions,
 				caseItem.msg
 			);
+			assert.strictEqual( progressEvents, caseItem.expectedActions.length, caseItem.msg + ': expected progress count' );
 			done();
 		} );
 		Promise.allSettled = allSettled;

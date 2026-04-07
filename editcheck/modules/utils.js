@@ -81,6 +81,12 @@ mw.editcheck.trackActionLinks = function ( $element, name, action ) {
 	} );
 };
 
+/**
+ * Polyfill for Promise.allSettled
+ *
+ * @param {Promise[]} promises
+ * @return {Promise}
+ */
 mw.editcheck.allSettled = function ( promises ) {
 	/* eslint-disable es-x/no-promise-all-settled */
 	if ( Promise.allSettled ) {
@@ -97,4 +103,50 @@ mw.editcheck.allSettled = function ( promises ) {
 			reason
 		} )
 	) ) );
+};
+
+/**
+ * Once all promises are settled, return only the results of resolved promises
+ *
+ * @param {Array} promises
+ * @return {Promise}
+ */
+mw.editcheck.allSettledFulfilledOnly = function ( promises ) {
+	return mw.editcheck.allSettled( promises ).then( ( results ) => {
+		const fulfilled = [];
+		for ( const result of results ) {
+			if ( result.status === 'fulfilled' ) {
+				fulfilled.push( result.value );
+			}
+		}
+		return fulfilled;
+	} );
+};
+
+/**
+ * Polyfill for Array.prototype.flat
+ *
+ * @param {Array} arr
+ * @param {number} [depth = 1]
+ * @return {Array}
+ */
+mw.editcheck.flattenArray = function ( arr, depth = 1 ) {
+	const result = [];
+	// Stack entries are [ array, currentDepth ]
+	const stack = [ [ arr, 0 ] ];
+
+	while ( stack.length > 0 ) {
+		const [ current, d ] = stack.pop();
+
+		for ( let i = current.length - 1; i >= 0; i-- ) {
+			const item = current[ i ];
+			if ( Array.isArray( item ) && d < depth ) {
+				stack.push( [ item, d + 1 ] );
+			} else {
+				result.push( item );
+			}
+		}
+	}
+
+	return result;
 };

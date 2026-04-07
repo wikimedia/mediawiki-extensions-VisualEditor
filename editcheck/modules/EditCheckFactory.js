@@ -100,9 +100,10 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
  * @param {boolean} [includeSuggestions=false]
+ * @param {function(mw.editcheck.EditCheckAction)} [onProgress]
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
-mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel, includeSuggestions ) {
+mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel, includeSuggestions, onProgress ) {
 	const run = {};
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
@@ -140,45 +141,35 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 			actionsOrPromises = [ Promise.reject( ex ) ];
 		}
 		if ( actionsOrPromises ) {
-			ve.batchPush( actionOrPromiseList, actionsOrPromises );
-			actionsOrPromises.forEach( ( actionOrPromise ) => {
-				Promise.resolve( actionOrPromise ).catch( ( reason ) => {
+			ve.batchPush( actionOrPromiseList, actionsOrPromises.map( ( actionOrPromise ) => (
+				Promise.resolve( actionOrPromise ).then( ( result ) => {
+					let actions = result;
+					if ( !Array.isArray( actions ) ) {
+						actions = [ actions ];
+					}
+					actions = actions.filter( ( action ) => action !== null );
+					for ( const action of actions ) {
+						action.suggestion = includeSuggestions;
+						if ( onProgress ) {
+							onProgress( action );
+						}
+					}
+					return actions;
+				}, ( reason ) => {
 					mw.log.warn( `Failed to check ${ checkName }`, reason );
 					if ( !mw.editcheck.erroredChecks[ checkName ] ) {
 						// Log this once per-session
 						ve.track( 'stats.mediawiki_editcheck_errors_total', 1, { kind: checkName } );
 						mw.editcheck.erroredChecks[ checkName ] = true;
 					}
-				} );
-			} );
+					throw reason;
+				} )
+			) ) );
 		}
 	} );
-	return mw.editcheck.allSettled( actionOrPromiseList )
-		.then( ( results ) => {
-			const actions = [];
-			for ( const result of results ) {
-				if ( result.status === 'fulfilled' ) {
-					actions.push( result.value );
-				}
-			}
-			return actions;
-		} )
-		.then( ( actions ) => (
-			// TODO: replace with `actions.flat()` when that's allowed
-			actions.reduce( ( acc, action ) => {
-				if ( Array.isArray( action ) ) {
-					ve.batchPush( acc, action );
-				} else {
-					acc.push( action );
-				}
-				return acc;
-			}, [] )
-		) )
-		.then( ( actions ) => actions.filter( ( action ) => action !== null ) )
+	return mw.editcheck.allSettledFulfilledOnly( actionOrPromiseList )
 		.then( ( actions ) => {
-			actions.forEach( ( action ) => {
-				action.suggestion = includeSuggestions;
-			} );
+			actions = mw.editcheck.flattenArray( actions, Infinity );
 			actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
 			return actions;
 		} );

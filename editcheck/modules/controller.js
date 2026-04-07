@@ -69,6 +69,15 @@ OO.mixinClass( Controller, OO.EventEmitter );
  */
 
 /**
+ * Progress while actions for a given listener are being updated
+ *
+ * @event EditCheckController#actionsUpdatedProgress
+ * @param {string} listener The listener type (e.g. 'onBeforeSave')
+ * @param {mw.editcheck.EditCheckAction} action
+ * @param {mw.editcheck.EditCheckAction} oldAction previously present equivalent action
+ */
+
+/**
  * An action is focused
  *
  * @event EditCheckController#focusAction
@@ -367,23 +376,35 @@ Controller.prototype.updateSuggestionCount = function ( count ) {
  * @param {boolean} fromRefresh Update comes from a manual refresh, not a real event
  * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of actions.
  * @fires EditCheckController#actionsUpdated
+ * @fires EditCheckController#actionsUpdatedProgress
  */
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	if ( this.surface.getModel().isStaging() ) {
 		return Promise.resolve( this.getActions( listener ) );
 	}
-	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
+	const onProgress = ( action ) => {
+		const existing = this.getActions( listener );
+		const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
+		if ( oldAction && !( oldAction.isSuggestion() && !action.isSuggestion() ) ) {
+			// Let a new non-suggestion take over from an old suggestion
+			action = oldAction;
+		}
+		this.emit( 'actionsUpdatedProgress', listener, action, oldAction );
+	};
+	let actionsPromise;
 	// Create all actions for this listener
 	if ( this.suggestionsModeAvailable && !this.inBeforeSave ) {
 		// eslint-disable-next-line no-jquery/no-when
 		actionsPromise = $.when(
-			actionsPromise,
-			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), true )
-		).then( ( checkActions, suggestionActions ) => [
+			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), true, onProgress ),
+			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false, onProgress )
+		).then( ( suggestionActions, checkActions ) => [
 			...checkActions,
 			// Discard any suggestions that have an equivalent non-suggestion
 			...suggestionActions.filter( ( suggestion ) => !checkActions.find( ( action ) => action.equals( suggestion, true ) ) )
 		] );
+	} else {
+		actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false, onProgress );
 	}
 	return actionsPromise
 		.then( ( actionsFromListener ) => {

@@ -19,6 +19,8 @@ ve.ui.EditCheckDialog = function VeUiEditCheckDialog() {
 	this.$element.addClass( 've-ui-editCheckDialog' );
 
 	this.acting = false;
+
+	this.afterRefreshDebounced = ve.debounce( this.afterRefresh.bind( this ) );
 };
 
 /* Inheritance */
@@ -153,6 +155,26 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
 	);
 };
 
+ve.ui.EditCheckDialog.prototype.onActionsUpdatedProgress = function ( listener, action, oldAction ) {
+	if ( this.inBeforeSave !== ( listener === 'onBeforeSave' ) ) {
+		return;
+	}
+	if ( oldAction ) {
+		// This can settle out in onActionsUpdated
+		return;
+	}
+	let actions = ve.copy( this.currentActions );
+	actions.push( action );
+	actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
+	if ( this.updateFilter ) {
+		actions = this.updateFilter( actions, [ action ], [], this.currentActions );
+	}
+	if ( actions.includes( action ) ) {
+		this.renderAction( action );
+		this.afterRefreshDebounced();
+	}
+};
+
 /**
  * Show the actions list
  *
@@ -224,23 +246,31 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 
 	this.$actions.empty();
 
-	this.currentActions.forEach( ( action, index ) => {
-		const widget = action.render( action !== this.currentAction, this.singleAction, this.surface );
-		widget.on( 'togglecollapse', this.onToggleCollapse, [ action, index ], this );
-		action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
-
-		this.$actions.append( widget.$element );
-		if ( this.scrollIntoView && action.isSuggestion() ) {
-			this.scrollIntoView.observe( widget.$element[ 0 ] );
-		}
+	this.currentActions.forEach( ( action ) => {
+		this.renderAction( action );
 	} );
 
+	this.afterRefresh();
+};
+
+ve.ui.EditCheckDialog.prototype.afterRefresh = function () {
 	if ( this.scrollIntoView ) {
 		this.scrollIntoView.update();
 	}
 
 	// Update positions immediately to prevent flicker
 	this.controller.updatePositions();
+};
+
+ve.ui.EditCheckDialog.prototype.renderAction = function ( action ) {
+	const widget = action.render( action !== this.currentAction, this.singleAction, this.surface );
+	widget.on( 'togglecollapse', this.onToggleCollapse, [ action ], this );
+	action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
+
+	this.$actions.append( widget.$element );
+	if ( this.scrollIntoView && action.isSuggestion() ) {
+		this.scrollIntoView.observe( widget.$element[ 0 ] );
+	}
 };
 
 /**
@@ -351,6 +381,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 	return process.first( () => {
 		this.controller = data.controller;
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
+		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, false, this );
 		this.controller.on( 'focusAction', this.onFocusAction, false, this );
 
 		const actions = data.actions || this.controller.getActions();
@@ -407,6 +438,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) {
 	return process.next( () => {
 		this.controller.off( 'actionsUpdated', this.onActionsUpdated, this );
+		this.controller.off( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, this );
 		this.controller.off( 'focusAction', this.onFocusAction, this );
 		this.$actions.empty();
 	}, this );
@@ -461,7 +493,6 @@ ve.ui.EditCheckDialog.prototype.onAct = function ( action, widget, promise ) {
  * Handle 'togglecollapse' events from the mw.widget.EditCheckActionWidget.
  *
  * @param {mw.editcheck.EditCheckAction} action Action being expanded/collapsed
- * @param {number} index Index of action in list
  */
 ve.ui.EditCheckDialog.prototype.onToggleCollapse = function ( action ) {
 	if ( action.widget.collapsed ) {
