@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Neronno"
+			"Neronno",
+			"WikiFayo95"
 		]
 	},
-	"tooltip-ca-ve-edit": "Bīräid disser sīd",
-	"visualeditor-ca-editsource": "Bīräiden kumof",
+	"tooltip-ca-ve-edit": "Disser siid mit däi VisualEditor beaarbaiden",
+	"visualeditor-ca-editsource": "Weltekst beaarbaiden",
 	"visualeditor-ca-editsource-section": "Weltekst beaarbaiden",
-	"visualeditor-descriptionpagelink": "Project:Fertööner"
+	"visualeditor-descriptionpagelink": "Project:VisualEditor"
 }
