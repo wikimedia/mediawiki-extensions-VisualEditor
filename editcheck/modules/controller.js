@@ -142,6 +142,7 @@ Controller.prototype.setup = function () {
 		} ), 100 );
 
 		this.surface.on( 'destroy', () => {
+			this.perf.recordTypingLagSummary();
 			this.off( 'actionsUpdated' );
 
 			const win = this.surface.getSidebarDialogs().getCurrentWindow();

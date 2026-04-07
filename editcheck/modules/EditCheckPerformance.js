@@ -1,3 +1,5 @@
+const maxCheckMetrics = 1000; // TODO this should live elsewhere
+
 /**
  * Performance tracking handler for Edit Check.
  *
@@ -10,18 +12,17 @@ mw.editcheck.EditCheckPerformance = function EditCheckPerformance( controller ) 
 	this.controller = controller;
 	this.timings = {
 		typingLag: {
-			count: 0,
-			p50Ms: null,
-			p95Ms: null,
 			minMs: null,
 			maxMs: null,
-			avgMs: null,
 			rawLags: []
 		},
 		allChecks: []
 	};
 	this.pendingChecks = new WeakMap();
 	this.checksSeen = {};
+	// Randomly select 1% of sessions in which to instrument action generation
+	this.trackChecks = Math.random() < 0.01;
+	this.checkMetricsCount = 0;
 
 	this.controller.target.connect( this, {
 		surfaceReady: 'onSurfaceReady'
@@ -115,6 +116,7 @@ mw.editcheck.EditCheckPerformance.prototype.onAfterActionsGeneratedAsync = funct
 
 /**
  * Store metrics for one instance of actions being generated for a check
+ * and send them off (up to a limit) if this session has been selected for sampling
  *
  * @param {number} asyncMs
  * @param {number} syncMs
@@ -134,6 +136,18 @@ mw.editcheck.EditCheckPerformance.prototype.recordActionStats = function ( async
 			listener
 		};
 		this.timings.allChecks.push( snapshot );
+
+		if ( this.trackChecks && this.checkMetricsCount < maxCheckMetrics ) {
+			const labels = {
+				kind: checkName,
+				platform: ( OO.ui.isMobile() ? 'mobile' : 'desktop' ),
+				firstRun: firstRun ? '1' : '0',
+				listener
+			};
+			this.trackTiming( 'editcheck_actiongeneration_async', asyncMs, labels );
+			this.trackTiming( 'editcheck_actiongeneration_sync', syncMs, labels );
+			this.checkMetricsCount += 2;
+		}
 	}
 };
 
@@ -145,22 +159,21 @@ mw.editcheck.EditCheckPerformance.prototype.onInput = function () {
 	const t0 = ve.now();
 	requestAnimationFrame( () => {
 		const store = this.timings.typingLag;
-		if ( store.count >= maxSamples ) {
+		if ( store.rawLags.length >= maxSamples ) {
 			return;
 		}
 
 		const lag = ve.now() - t0;
 		store.rawLags.push( lag );
-		store.count++;
 		store.minMs = store.minMs === null ? lag : Math.min( store.minMs, lag );
 		store.maxMs = store.maxMs === null ? lag : Math.max( store.maxMs, lag );
 	} );
 };
 
 /**
- * Compute aggregate typing lag stats from the raw samples and add to the timings store
+ * Compute aggregate typing lag stats from the raw samples and send them off as metrics
  */
-mw.editcheck.EditCheckPerformance.prototype.computeTypingLagSummary = function () {
+mw.editcheck.EditCheckPerformance.prototype.recordTypingLagSummary = function () {
 	// get percentile from sorted array
 	const percentile = ( arr, p ) => {
 		if ( !arr.length ) {
@@ -179,7 +192,12 @@ mw.editcheck.EditCheckPerformance.prototype.computeTypingLagSummary = function (
 	}
 	const sorted = store.rawLags.slice().sort( ( a, b ) => a - b );
 
-	store.avgMs = store.count ? store.rawLags.reduce( ( sum, x ) => sum + x, 0 ) / store.count : null;
-	store.p50Ms = percentile( sorted, 50 );
-	store.p95Ms = percentile( sorted, 95 );
+	const label = { platform: ( OO.ui.isMobile() ? 'mobile' : 'desktop' ) };
+	const count = store.rawLags.length;
+	const avg = count ? store.rawLags.reduce( ( sum, x ) => sum + x, 0 ) / count : null;
+
+	this.trackTiming( 'editcheck_typinglag_avg', avg, label );
+	this.trackTiming( 'editcheck_typinglag_p95', percentile( sorted, 95 ), label );
+	this.trackTiming( 'editcheck_typinglag_p50', percentile( sorted, 50 ), label );
+	this.trackTiming( 'editcheck_typinglag_max', store.maxMs, label );
 };
