@@ -24,7 +24,8 @@ OO.inheritClass( mw.editcheck.SuggestedLinkEditCheck, mw.editcheck.LinkEditCheck
 mw.editcheck.SuggestedLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	showAsCheck: false, // This would never make sense to enable
 	showAsSuggestion: false,
-	predictionThreshold: 0.8
+	predictionThreshold: 0.8,
+	importGrowthExperimentConfig: true
 } );
 
 mw.editcheck.SuggestedLinkEditCheck.static.name = 'suggestedLink';
@@ -92,24 +93,38 @@ mw.editcheck.SuggestedLinkEditCheck.static.fetchSuggestions = function ( surface
 /* Methods */
 
 mw.editcheck.SuggestedLinkEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
-	const documentModel = surfaceModel.getDocument();
-	const modified = this.getModifiedRanges( documentModel );
-	return this.constructor.static.fetchSuggestions( surfaceModel ).then( ( linkData ) => linkData.map( ( link ) => {
-		const range = link.fragment.getSelection().getRange();
-		if (
-			link.score >= this.config.predictionThreshold &&
-			!range.isCollapsed() && // deleted fragment
-			link.fragment.getText() === link.link_text && // modified text might no longer apply
-			!this.isDismissedRange( range ) &&
-			!this.getLinkFromFragment( link.fragment ) &&
-			modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
-		) {
-			return this.buildActionFromLinkRange( range, surfaceModel, {
-				prompt: ve.deferJQueryMsg( 'editcheck-suggestedlink-prompt', link.link_text, link.link_target )
-			} );
+	return Promise.all( [
+		this.constructor.static.fetchSuggestions( surfaceModel ),
+		this.getGrowthConfig()
+	] ).then( ( [ linkData, extraConfig ] ) => {
+		const documentModel = surfaceModel.getDocument();
+		if ( extraConfig ) {
+			// Growth config can change the category/template checks which ran earlier
+			if ( !this.constructor.static.doesConfigMatch( extraConfig, documentModel, this.includeSuggestions ) ) {
+				return null;
+			}
+			// This will affect the output of getModifiedRanges (and is okay
+			// to modify in-place because a new this.config is created on every run):
+			this.config.ignoreSections = [ ...( this.config.ignoreSections || [] ), ...extraConfig.ignoreSections ];
 		}
-		return null;
-	} ) );
+		const modified = this.getModifiedRanges( documentModel );
+		return linkData.map( ( link ) => {
+			const range = link.fragment.getSelection().getRange();
+			if (
+				link.score >= this.config.predictionThreshold &&
+				!range.isCollapsed() && // deleted fragment
+				link.fragment.getText() === link.link_text && // modified text might no longer apply
+				!this.isDismissedRange( range ) &&
+				!this.getLinkFromFragment( link.fragment ) &&
+				modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
+			) {
+				return this.buildActionFromLinkRange( range, surfaceModel, {
+					prompt: ve.deferJQueryMsg( 'editcheck-suggestedlink-prompt', link.link_text, link.link_target )
+				} );
+			}
+			return null;
+		} );
+	} );
 };
 
 mw.editcheck.SuggestedLinkEditCheck.prototype.act = function ( choice, action, surface ) {
@@ -127,6 +142,39 @@ mw.editcheck.SuggestedLinkEditCheck.prototype.act = function ( choice, action, s
 	}
 	// Parent method
 	return mw.editcheck.SuggestedLinkEditCheck.super.prototype.act.apply( this, arguments );
+};
+
+mw.editcheck.SuggestedLinkEditCheck.prototype.getGrowthConfig = function () {
+	if ( !this.config.importGrowthExperimentConfig ) {
+		return ve.createDeferred().resolve( false ).promise();
+	}
+	if ( !this.constructor.static.configPromise ) {
+		// This is stopping us from repeatedly fetching the data
+		const configPageName = 'MediaWiki:GrowthExperimentsSuggestedEdits.json';
+		this.constructor.static.configPromise = mw.editcheck.getMediaWikiJSON( [ configPageName ] )
+			.then( ( result ) => {
+				if ( !result || !result.has( configPageName ) ) {
+					return false;
+				}
+				return result.get( configPageName ).link_recommendation;
+			}, () => ( false ) )
+			.then( ( config ) => {
+				if ( !config ) {
+					return false;
+				}
+				return {
+					showAsCheck: false,
+					showAsSuggestion: !config.disabled,
+					// predictionThreshold: config.minimumLinkScore,
+					// maximumLinksToShow: config.maximumLinksToShowPerTask,
+					// maximumEditCount: config.maximumEditsTaskIsAvailable,
+					ignoreSections: config.excludedSections.map( ( section ) => section === '0' ? '' : section ),
+					notInCategory: config.excludedCategories,
+					lacksTemplate: config.excludedTemplates
+				};
+			} );
+	}
+	return this.constructor.static.configPromise;
 };
 
 /* Registration */
