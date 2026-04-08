@@ -6,7 +6,8 @@
 			"Omotecho",
 			"Shirayuki",
 			"Shulmj",
-			"YeBoy371"
+			"YeBoy371",
+			"Cookie4782"
 		]
 	},
 	"editcheck-dialog-action-no": "いいえ",
@@ -18,7 +19,7 @@
 	"editcheck-dialog-addref-reject-common-knowledge": "私が付け加えた情報は、既に広く知られています",
 	"editcheck-dialog-addref-reject-uncertain": "どのような出典を追加すればよいか、わかりません",
 	"editcheck-dialog-addref-reject-other": "その他",
-	"editcheck-dialog-addref-success-notify": "出典を追加していただき、ありがとうございます！",
+	"editcheck-dialog-addref-success-notify": "出典を追加していただき、ありがとうございます!",
 	"editcheck-dialog-addref-title": "出典を追加する",
 	"editcheck-dialog-title": "公開前",
 	"editcheck-copyvio-title": "貼り付けられたコンテンツ",
