@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Geraki"
+			"Geraki",
+			"Jimkats"
 		]
 	},
 	"editchecks": "Έλεγχοι επεξεργασιών",
@@ -12,6 +13,7 @@
 	"editcheck-dialog-action-recheck": "Επανέλεγχος",
 	"editcheck-dialog-action-back": "Πίσω",
 	"editcheck-dialog-action-submit": "Υποβολή",
+	"editcheck-dialog-scroll-into-view": "Προβολή προτάσεων",
 	"editcheck-dialog-toggle": "Εναλλαγή ορατότητας",
 	"editcheck-dialog-addref-description": "Βοηθήστε τους αναγνώστες να κατανοήσουν από πού προέρχονται αυτές οι πληροφορίες προσθέτοντας μια παραπομπή.",
 	"editcheck-dialog-addref-reject-question": "Γιατί δεν προσθέτεις μια παραπομπή;",
@@ -36,6 +38,7 @@
 	"editcheck-copyvio-remove-notify": "Σας ευχαριστούμε που βοηθάτε να διατηρείται η γνώση ελεύθερα διαθέσιμη!",
 	"editcheck-preference-suggestions-label": "Λειτουργία προτάσεων",
 	"editcheck-preference-suggestions-description": "Προτάσεις επεξεργασίας που έχουν διαμορφωθεί από την κοινότητα για τη βελτίωση λημμάτων. Διαθέσιμες στον [[:mw:Special:MyLanguage/VisualEditor|οπτικό επεξεργαστή]].",
+	"editcheck-textmatch-replace": "Αντικατάσταση \"$1\" με \"$2\";",
 	"editcheck-tone-title": "Αναθεώρηση Τόνου;",
 	"editcheck-tone-description": "Άλλοι χρήστες συχνά αναθεωρούν αυτό το είδος διατύπωσης, λέγοντας ότι ο τόνος είναι ανισορροπημένος. [{{int:editcheck-tone-descriptionlink}} Μάθετε περισσότερα]",
 	"editcheck-tone-footer": "Προσδιορίστηκε χρησιμοποιώντας ένα [{{int:editcheck-tone-footerlink}} μοντέλο BERT]",
