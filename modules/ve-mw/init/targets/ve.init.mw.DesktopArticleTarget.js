@@ -943,7 +943,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 		this.toolbar.$element
 			.css( 'height', '0' )
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar-close' );
-		this.toolbar.$element.one( 'transitionend', () => {
+		ve.waitForTransition( this.toolbar.$element, () => {
 			// Parent method
 			ve.init.mw.DesktopArticleTarget.super.prototype.teardownToolbar.call( this );
 			deferred.resolve();
