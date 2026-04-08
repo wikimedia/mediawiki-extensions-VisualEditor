@@ -36,6 +36,42 @@ mw.editcheck.fetchTimeout = function ( resource, options = {} ) {
 };
 
 /**
+ * Fetch pages that are expected to be JSON from the mediawiki API
+ *
+ * @param {string[]} pagenames
+ * @return {mw.Api~AbortablePromise} Resolves to a Map of pagename to parsed JSON
+ */
+mw.editcheck.getMediaWikiJSON = function ( pagenames ) {
+	// TODO: we *could* enforce that these be `MediaWiki:*.json`
+	return new mw.Api().get( {
+		action: 'query',
+		format: 'json',
+		prop: 'revisions',
+		titles: pagenames.join( '|' ),
+		formatversion: '2',
+		rvprop: 'content'
+	} ).then( ( response ) => {
+		const pageMap = new Map();
+		const pages = response.query.pages || [];
+		pages.forEach( ( page ) => {
+			if ( !page || !page.revisions ) {
+				mw.log.warn( ' Could not fetch imported config: ' + page.title );
+				return;
+			}
+			try {
+				pageMap.set( page.title, JSON.parse( page.revisions[ 0 ].content ) );
+			} catch ( err ) {
+				mw.log.error( ' Failed to parse imported config: ' + page.title, err );
+			}
+		} );
+		return pageMap;
+	} ).catch( ( err ) => {
+		mw.log.error( ' Failed to import configs', err );
+		return;
+	} );
+};
+
+/**
  * Add click tracking to all links in an element
  *
  * @param {jQuery} $element Element containing links

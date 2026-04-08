@@ -94,42 +94,6 @@ mw.editcheck.TextMatchEditCheck.static.matchCache = {
 };
 
 /**
- * Fetch matchItem config from a MediaWiki json file
- *
- * @param {string[]} filenames to fetch
- * @return {jQuery.Promise} Promise which resolves to a map of filename/imported matchItem object
- */
-mw.editcheck.TextMatchEditCheck.static.getImportedConfig = function ( filenames ) {
-	// TODO to what extent should we dictate the format of the filename; require MW namespace?
-	return new mw.Api().get( {
-		action: 'query',
-		format: 'json',
-		prop: 'revisions',
-		titles: filenames.join( '|' ),
-		formatversion: '2',
-		rvprop: 'content'
-	} ).then( ( response ) => {
-		const pageMap = {};
-		const pages = response.query.pages || [];
-		pages.forEach( ( page ) => {
-			if ( !page || !page.revisions ) {
-				mw.log.warn( ' Could not fetch imported config: ' + page.title );
-				return;
-			}
-			try {
-				pageMap[ page.title ] = JSON.parse( page.revisions[ 0 ].content );
-			} catch ( err ) {
-				mw.log.error( ' Failed to parse imported config: ' + page.title, err );
-			}
-		} );
-		return pageMap;
-	} ).catch( ( err ) => {
-		mw.log.error( ' Failed to import configs', err );
-		return;
-	} );
-};
-
-/**
  * Fetch corresponding MW file for any matchItems with the "import" property
  * and leave all other matchItems unchanged
  *
@@ -161,11 +125,11 @@ mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchIt
 	if ( filenames.length === 0 ) {
 		return Promise.resolve( processed );
 	}
-	return mw.editcheck.TextMatchEditCheck.static.getImportedConfig( filenames )
+	return mw.editcheck.getMediaWikiJSON( filenames )
 		.then( ( imported ) => {
 			Object.entries( pageMap ).forEach( ( [ id, filename ] ) => {
-				if ( imported[ filename ] ) {
-					processed[ id ] = imported[ filename ];
+				if ( imported.has( filename ) ) {
+					processed[ id ] = imported.get( filename );
 				}
 			} );
 			return processed;
