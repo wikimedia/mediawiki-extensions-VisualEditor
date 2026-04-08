@@ -190,9 +190,26 @@
 				"lacksTemplate": {
 					"description": "Suppress the check when the edited document includes any of these templates.",
 					"$ref": "#/definitions/optionalStringArray"
+				},
+				"extraNamespaces": {
+					"$ref": "#/definitions/namespaceConfig"
 				}
 			},
 			"additionalProperties": true
+		},
+		"namespaceConfig": {
+			"description": "Per-namespace configuration overrides, keyed by namespace name (case- and space-insensitive)",
+			"type": "object",
+			"additionalProperties": {
+				"if": { "type": "object" },
+				"then": {
+					"allOf": [
+						{ "$ref": "#/definitions/baseEditCheckConfig" },
+						{ "properties": { "extraNamespaces": false } }
+					]
+				},
+				"else": { "type": "boolean" }
+			}
 		},
 		"textMatchRuleConfig": {
 			"description": "Per-rule config for TextMatch rules. This extends the shared edit check config. caseSensitive and minOccurrences are still accepted here for backwards compatibility, but new configs should set them on the rule itself.",

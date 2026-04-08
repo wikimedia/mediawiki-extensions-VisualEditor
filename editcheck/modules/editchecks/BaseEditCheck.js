@@ -49,7 +49,8 @@ mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	ignoreDisambiguationPages: false,
 	ignoreQuotedContent: false,
 	showAsCheck: true,
-	showAsSuggestion: true
+	showAsSuggestion: true,
+	extraNamespaces: {} // keyed with namespace names, value is whether they're enabled
 };
 
 mw.editcheck.BaseEditCheck.static.title = null;
@@ -379,8 +380,7 @@ mw.editcheck.BaseEditCheck.prototype.takesFocus = function () {
  * @return {boolean} Whether the check should be shown
  */
 mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel = undefined, suggestion = false ) {
-	// All checks are only in the main namespace for now
-	if ( mw.config.get( 'wgNamespaceNumber' ) !== mw.config.get( 'wgNamespaceIds' )[ '' ] ) {
+	if ( !this.inAllowedNamespace() ) {
 		return false;
 	}
 	// Disambiguation page check
@@ -391,6 +391,30 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel = und
 		return false;
 	}
 	return true;
+};
+
+/**
+ * Check whether the current page is in an allowed namespace
+ *
+ * "Allowed" means the main namespace, or any namespace whose name is listed
+ * in config.extraNamespaces.
+ *
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.inAllowedNamespace = function () {
+	const namespaces = mw.config.get( 'wgNamespaceIds' ); // { "name": id }
+	// Checks are always allowed in the main namespace
+	if ( mw.config.get( 'wgNamespaceNumber' ) === namespaces[ '' ] ) {
+		return true;
+	}
+	if ( this.config.extraNamespaces ) {
+		for ( const [ namespaceName, enabled ] of Object.entries( this.config.extraNamespaces ) ) {
+			if ( enabled && namespaces[ namespaceName.toLowerCase().replace( / /g, ' ' ) ] ) {
+				return true;
+			}
+		}
+	}
+	return false;
 };
 
 /**

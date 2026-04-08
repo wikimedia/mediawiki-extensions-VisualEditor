@@ -43,8 +43,7 @@ mw.editcheck = {
 			},
 			errored: {}
 		};
-	},
-	namespaceEnabled: mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ]
+	}
 };
 mw.editcheck.resetSessionState();
 
@@ -112,13 +111,13 @@ if ( abCheck === 'paste' ) {
  * @return {boolean}
  */
 mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
-	// Tag anything in the main namespace, regardless of other eligibility checks
-	if ( !mw.editcheck.namespaceEnabled ) {
-		return false;
-	}
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
 	// Check might not be registered so we can't use the factory.
 	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { showAsCheck: true } ) );
+	// Tag anything in the allowed namespaces, regardless of other eligibility checks
+	if ( !check.inAllowedNamespace() ) {
+		return false;
+	}
 	try {
 		return check.findAddedContent( documentModel, includeReferencedContent ).length > 0;
 	} catch ( e ) {
@@ -244,6 +243,11 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			suggestionsModeAvailable: mw.editcheck.suggestionsModeAvailable
 		} );
 		controller.setup();
+
+		if ( ve.ui.EditCheckSuggestionsTool && !controller.editChecksArePossible( true ) ) {
+			// This is mostly to stop the suggestion toolbar item from appearing outside enabled namespaces
+			ve.ui.toolFactory.unregister( ve.ui.EditCheckSuggestionsTool );
+		}
 
 		target.editcheckController = controller;
 

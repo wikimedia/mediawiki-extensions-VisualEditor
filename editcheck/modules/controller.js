@@ -246,7 +246,7 @@ Controller.prototype.editChecksArePossible = function () {
 		// Suggestions override user checks so assume something can be shown
 		return true;
 	}
-	return [ 'onBeforeSave', 'onDocumentChange' ].some(
+	return [ 'onBeforeSave', 'onDocumentChange', 'onBranchNodeChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
 			( checkName ) => this.canBeShown( checkName )
 		)
