@@ -52,7 +52,7 @@
 	"editcheck-duplicate-link-title": "Удалить повторяющуюся ссылку",
 	"editcheck-duplicate-link-description": "Эта вики-ссылка встречается в этом разделе более одного раза. Помогите читателям легче ориентироваться — удалите [{{int:editcheck-duplicate-link-descriptionlink}} повторяющиеся ссылки].",
 	"editcheck-disambiguation-title": "Неточная вики-ссылка",
-	"editcheck-disambiguation-description": "Эта ссылка ведёт на [{{int:editcheck-disambiguation-descriptionlink}} страницу значений]. Помогите читателям найти нужную тему — укажите более точную страницу.",
+	"editcheck-disambiguation-description": "Эта ссылка ведёт на [{{int:editcheck-disambiguation-descriptionlink}} страницу значений]. Помогите читателям найти нужную тему — укажите наиболее точную статью.",
 	"editcheck-headinglevel-title": "Исправьте уровни заголовков",
 	"editcheck-headinglevel-description": "Данный уровень заголовка может не соответствовать правильной последовательной структуре. Помогите читателям легче ориентироваться в содержании, используя правильный [{{int:editcheck-headinglevel-descriptionlink}} уровень заголовка].",
 	"editcheck-headinglevel-action-adjust": "Изменить заголовок",

@@ -55,6 +55,7 @@
 	"editcheck-specialeditchecks-abtest": "(А/Б тест)",
 	"editcheck-specialeditchecks-config-summary": "Конфигурација",
 	"editcheck-specialeditchecks-config-default": "Подразумевана конфигурација",
+	"editcheck-suggestionfeedback-label-report": "Пријавите проблем",
 	"tag-editcheck-reference-decline-common-knowledge": "Edit Check референцирање одбачено (опште знање)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Референцирање је одбачено зато што је у питању опште знање",
 	"tag-editcheck-reference-decline-irrelevant": "Edit Check референцирање одбачено (нерелевантно)",
