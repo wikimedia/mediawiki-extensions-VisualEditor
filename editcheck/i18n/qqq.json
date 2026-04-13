@@ -10,7 +10,7 @@
 	"editchecks": "{{doc-special|EditChecks}}",
 	"editcheck-config.json": "{{notranslate}}\n{{ignored}}\nJSON object configuring some edit check behavior.",
 	"editcheck-toolbar-suggestions-title": "Title for the toolbar button that toggles suggestion mode",
-	"editcheck-toolbar-suggestions-count": "{{optional}}\nBadge showing the number of suggestions.\nParameters:\n* $1 - Number of suggestions. For 10 or greater, 10 will be passed.",
+	"editcheck-toolbar-suggestions-count": "{{optional}}\nBadge showing the number of suggestions.\nParameters:\n* $1 - Number of suggestions. For 100 or greater, 100 will be passed.",
 	"editcheck-suggestions-turned-on": "Auto-dismiss notification shown when the user turns on suggestions using the toolbar button.",
 	"editcheck-suggestions-turned-off": "Auto-dismiss notification shown when the user turns off suggestions using the toolbar button.",
 	"editcheck-suggestions-more-available": "Auto-dismiss notification shown on mobile after switching from section editing to full-page editing, when additional suggestions become available.",

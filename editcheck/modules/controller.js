@@ -335,12 +335,17 @@ Controller.prototype.suppressSuggestionDisplay = function ( suppress ) {
 	this.refresh();
 };
 
+/**
+ * Update the suggestion count shown on the toolbar tool
+ *
+ * @param {number} count The number of suggestions
+ */
 Controller.prototype.updateSuggestionCount = function ( count ) {
 	const suggestionsModeTool = this.target.getToolbar().tools.editCheckSuggestions;
 	if ( suggestionsModeTool ) {
 		suggestionsModeTool.$icon.attr(
 			'data-count',
-			ve.msg( 'editcheck-toolbar-suggestions-count', Math.min( 10, count ) )
+			ve.msg( 'editcheck-toolbar-suggestions-count', Math.min( 100, count ) )
 		);
 	}
 };

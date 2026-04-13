@@ -8,7 +8,7 @@
 	"editchecks": "Edit checks",
 	"editcheck-config.json": "null",
 	"editcheck-toolbar-suggestions-title": "Toggle suggestions",
-	"editcheck-toolbar-suggestions-count": "{{PLURAL:$1|$1|10={{formatnum:9}}+}}",
+	"editcheck-toolbar-suggestions-count": "{{PLURAL:$1|$1|100={{formatnum:99}}+}}",
 	"editcheck-suggestions-turned-on": "Suggestions turned on",
 	"editcheck-suggestions-turned-off": "Suggestions turned off",
 	"editcheck-suggestions-more-available": "More suggestions are now available",
