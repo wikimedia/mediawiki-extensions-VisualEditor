@@ -35,6 +35,7 @@ function Controller( target, config ) {
 	this.onSelectDebounced = ve.debounceWithTest( teardownCheck, this.onSelect.bind( this ), 100 );
 	this.onContextChangeDebounced = ve.debounceWithTest( teardownCheck, this.onContextChange.bind( this ), 100 );
 	this.updatePositionsDebounced = ve.debounceWithTest( teardownCheck, this.updatePositions.bind( this ) );
+	this.updateSuggestionCountDebounced = ve.debounceWithTest( teardownCheck, this.updateSuggestionCount.bind( this ), 500 );
 
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
 	this.scrollActionIntoViewDebounced = ve.debounceWithTest( teardownCheck, this.scrollActionIntoView.bind( this ), 200, true );
@@ -309,6 +310,16 @@ Controller.prototype.suppressSuggestionDisplay = function ( suppress ) {
 	}
 	this.suppressSuggestions = suppress;
 	this.refresh();
+};
+
+Controller.prototype.updateSuggestionCount = function ( count ) {
+	const suggestionsModeTool = this.target.getToolbar().tools.editCheckSuggestions;
+	if ( suggestionsModeTool ) {
+		suggestionsModeTool.$icon.attr(
+			'data-count',
+			ve.msg( 'editcheck-toolbar-suggestions-count', Math.min( 10, count ) )
+		);
+	}
 };
 
 /**
@@ -701,17 +712,11 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		this.editFullPageIndicatorBottom.toggle( hasActionsBelow );
 	}
 
-	const suggestionsModeTool = target.getToolbar().tools.editCheckSuggestions;
-	if (
-		suggestionsModeTool &&
-		// Ignore a count of 0 during initial setup
-		!( this.inSetup && suggestionActions.length === 0 )
-	) {
-		suggestionsModeTool.$icon.attr(
-			'data-count',
-			ve.msg( 'editcheck-toolbar-suggestions-count', Math.min( 10, suggestionActions.length ) )
-		);
+	// Ignore a count of 0 during initial setup
+	if ( !( this.inSetup && suggestionActions.length === 0 ) ) {
+		this.updateSuggestionCountDebounced( suggestionActions.length );
 	}
+
 	if ( !actions.length ) {
 		return;
 	}
