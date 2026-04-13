@@ -98,6 +98,8 @@ mw.editcheck.SuggestedLinkEditCheck.prototype.onDocumentChange = function ( surf
 		const range = link.fragment.getSelection().getRange();
 		if (
 			link.score >= this.config.predictionThreshold &&
+			!range.isCollapsed() && // deleted fragment
+			link.fragment.getText() === link.link_text && // modified text might no longer apply
 			!this.isDismissedRange( range ) &&
 			!this.getLinkFromFragment( link.fragment ) &&
 			modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
