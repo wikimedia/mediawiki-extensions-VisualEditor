@@ -176,15 +176,15 @@ ve.init.mw.ApiResponseCache.prototype.processQueue = function () {
 				if ( processedPage !== undefined ) {
 					processed[ page.title ] = processedPage;
 				}
-			}
-			for ( let i = 0; i < mappedTitles.length; i++ ) {
-				// Locate the title in mapped titles, if any.
-				if ( mappedTitles[ i ].to === page.title ) {
-					const from = mappedTitles[ i ].fromencoded === '' ?
-						decodeURIComponent( mappedTitles[ i ].from ) :
-						mappedTitles[ i ].from;
-					processed[ from ] = processedPage;
-					break;
+				for ( let i = 0; i < mappedTitles.length; i++ ) {
+					// Locate the title in mapped titles, if any.
+					if ( mappedTitles[ i ].to === page.title ) {
+						const from = mappedTitles[ i ].fromencoded === '' ?
+							decodeURIComponent( mappedTitles[ i ].from ) :
+							mappedTitles[ i ].from;
+						processed[ from ] = processedPage;
+						break;
+					}
 				}
 			}
 			this.set( processed );
