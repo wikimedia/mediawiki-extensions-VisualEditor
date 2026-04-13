@@ -127,11 +127,19 @@ mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchIt
 	}
 	return mw.editcheck.getMediaWikiJSON( filenames )
 		.then( ( imported ) => {
-			Object.entries( pageMap ).forEach( ( [ id, filename ] ) => {
-				if ( imported.has( filename ) ) {
-					processed[ id ] = imported.get( filename );
-				}
-			} );
+			if ( imported ) {
+				Object.entries( pageMap ).forEach( ( [ id, filename ] ) => {
+					if ( imported.has( filename ) ) {
+						processed[ id ] = imported.get( filename );
+					}
+				} );
+			}
+			return processed;
+		} )
+		.catch( ( err ) => {
+			// If the api request fails entirely,
+			// we'll log it but continue with the non-imported configs
+			mw.log.error( ' Failed to import configs', err );
 			return processed;
 		} );
 };

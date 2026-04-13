@@ -65,9 +65,6 @@ mw.editcheck.getMediaWikiJSON = function ( pagenames ) {
 			}
 		} );
 		return pageMap;
-	} ).catch( ( err ) => {
-		mw.log.error( ' Failed to import configs', err );
-		return;
 	} );
 };
 
