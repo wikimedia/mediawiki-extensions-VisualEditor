@@ -17,9 +17,6 @@
 ve.ce.MWHeadingNode = function VeCeMWHeadingNode() {
 	// Parent constructor
 	ve.ce.MWHeadingNode.super.apply( this, arguments );
-
-	// Events
-	this.model.connect( this, { update: 'onUpdate' } );
 };
 
 /* Inheritance */
