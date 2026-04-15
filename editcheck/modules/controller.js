@@ -26,6 +26,10 @@ function Controller( target, config ) {
 	// Suppress suggestions without affecting user config or toolbar state, used by external tools
 	this.suppressSuggestions = false;
 
+	// These are not in clearState as we want them to persist when switching sections (surface reload)
+	this.lastAvailableSuggestionCount = 0;
+	this.lastTargetSection = null;
+
 	this.clearState();
 
 	const teardownCheck = () => !!this.surface;
@@ -91,6 +95,7 @@ Controller.prototype.clearState = function () {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 	this.lastBranchNodeChangeHistoryPointer = null;
+	this.notifySwitchedToFullPage = false;
 };
 
 /**
@@ -135,6 +140,20 @@ Controller.prototype.setup = function () {
 
 		this.on( 'branchNodeChange', this.onBranchNodeChange, null, this );
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
+
+		if (
+			target.section === null &&
+			this.lastTargetSection !== null
+		) {
+			this.notifySwitchedToFullPage = true;
+			this.surface.getModel().getDocument().once( 'transact', () => {
+				// We only show the notification if the number of suggestions changes
+				// due to switching to full page, so clear this after the user starts editing.
+				this.notifySwitchedToFullPage = false;
+			} );
+		}
+
+		this.lastTargetSection = target.section;
 
 		// Run on load (e.g. recovering from auto-save)
 		this.inSetup = true;
@@ -286,6 +305,10 @@ Controller.prototype.toggleSuggestionsVisible = function () {
 	if ( !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' ) !== this.suggestionsVisible ) {
 		ve.userConfig( 'visualeditor-editcheck-suggestions-toggle', this.suggestionsVisible );
 	}
+	mw.notify(
+		ve.msg( this.suggestionsVisible ? 'editcheck-suggestions-turned-on' : 'editcheck-suggestions-turned-off' ),
+		{ tag: 'editcheck-suggestions-toggle', type: 'notice' }
+	);
 
 	this.actionsByListener = {};
 	// Treat this refresh as being as if we were in initial setup -- we don't
@@ -690,7 +713,9 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	if ( listener === 'onBeforeSave' ) {
 		return;
 	}
-	const suggestionActions = actions.filter( ( action ) => action.isSuggestion() );
+	const suggestionRanges = actions.filter( ( action ) => action.isSuggestion() ).map( ( action ) => action.getFocusSelection().getCoveringRange() );
+	const suggestionCount = suggestionRanges.length;
+	let availableSuggestionCount = suggestionCount;
 	const target = this.target;
 	if ( target.enableVisualSectionEditing && target.section !== null ) {
 		if ( !this.editFullPageIndicatorTop ) {
@@ -706,16 +731,39 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 			target.switchToFullPageButtonBottom.$label.append( this.editFullPageIndicatorBottom.$element );
 		}
 		const attachedRootRange = this.surface.getModel().getDocument().getAttachedRoot().getOuterRange();
-		const hasActionsAbove = suggestionActions.some( ( action ) => action.getFocusSelection().getCoveringRange().end < attachedRootRange.start );
-		const hasActionsBelow = suggestionActions.some( ( action ) => action.getFocusSelection().getCoveringRange().start > attachedRootRange.end );
+		availableSuggestionCount = suggestionRanges.filter( ( range ) => attachedRootRange.containsRange( range ) ).length;
+		const hasActionsAbove = suggestionRanges.some( ( range ) => range.end < attachedRootRange.start );
+		const hasActionsBelow = suggestionRanges.some( ( range ) => range.start > attachedRootRange.end );
 		this.editFullPageIndicatorTop.toggle( hasActionsAbove );
 		this.editFullPageIndicatorBottom.toggle( hasActionsBelow );
 	}
 
 	// Ignore a count of 0 during initial setup
-	if ( !( this.inSetup && suggestionActions.length === 0 ) ) {
-		this.updateSuggestionCountDebounced( suggestionActions.length );
+	if ( !( this.inSetup && suggestionCount === 0 ) ) {
+		this.updateSuggestionCountDebounced( suggestionCount );
 	}
+
+	if ( this.suggestionsVisible && !this.suppressSuggestions ) {
+		// Notify once when the user has completed/declined all suggestions.
+		if ( this.lastAvailableSuggestionCount > 0 && availableSuggestionCount === 0 ) {
+			mw.notify( ve.msg( 'editcheck-suggestions-none-left' ), {
+				tag: 'editcheck-suggestions-none-left',
+				type: 'notice'
+			} );
+		}
+		// After switching to full-page, notify if more suggestions become available.
+		if ( this.notifySwitchedToFullPage ) {
+			if ( availableSuggestionCount > this.lastAvailableSuggestionCount ) {
+				mw.notify( ve.msg( 'editcheck-suggestions-more-available' ), {
+					tag: 'editcheck-suggestions-more-available',
+					type: 'notice'
+				} );
+			}
+			this.notifySwitchedToFullPage = false;
+		}
+	}
+
+	this.lastAvailableSuggestionCount = availableSuggestionCount;
 
 	if ( !actions.length ) {
 		return;
