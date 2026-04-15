@@ -186,8 +186,8 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 				actions: this.actions,
 				newActions: [ action ],
 				footer: this.actions.length !== 1,
-				// just filter out any discarded actions from the allowed set
-				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( pact ) => !discardedActions.includes( pact ) )
+				// Just filter out any discarded actions from the allowed set
+				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( a ) => !discardedActions.includes( a ) )
 			}
 		).then( () => {
 			if ( alignToTop ) {

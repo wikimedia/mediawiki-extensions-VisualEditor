@@ -145,7 +145,12 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
 	if ( this.updateFilter ) {
 		actions = this.updateFilter( actions, newActions, discardedActions, this.currentActions );
 	}
-	this.showActions( actions, newActions, rejected );
+
+	this.showActions(
+		this.controller.filterActionsForDisplay( actions ),
+		this.controller.filterActionsForDisplay( newActions ),
+		rejected
+	);
 };
 
 /**

@@ -138,7 +138,10 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( liste
 	if ( ( this.inBeforeSave && listener !== 'onBeforeSave' ) || ( !this.inBeforeSave && listener === 'onBeforeSave' ) ) {
 		return;
 	}
-	this.renderActions( actions, newActions );
+	this.renderActions(
+		this.controller.filterActionsForDisplay( actions ),
+		this.controller.filterActionsForDisplay( newActions )
+	);
 };
 
 /**

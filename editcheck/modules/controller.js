@@ -365,7 +365,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	}
 	let actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false );
 	// Create all actions for this listener
-	if ( this.suggestionsVisible && !this.inBeforeSave ) {
+	if ( this.suggestionsModeAvailable && !this.inBeforeSave ) {
 		// eslint-disable-next-line no-jquery/no-when
 		actionsPromise = $.when(
 			actionsPromise,
@@ -438,6 +438,19 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			mw.log.error( 'Could not update for listener: ' + listener, error );
 			return [];
 		} );
+};
+
+/**
+ * Filter actions for display based on current settings
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions Actions to filter
+ * @return {mw.editcheck.EditCheckAction[]} Filtered actions
+ */
+Controller.prototype.filterActionsForDisplay = function ( actions ) {
+	if ( !this.suggestionsVisible || this.suppressSuggestions ) {
+		return actions.filter( ( action ) => !action.isSuggestion() );
+	}
+	return actions;
 };
 
 /**
@@ -696,7 +709,7 @@ Controller.prototype.onBranchNodeChange = function () {
  * @param {mw.editcheck.EditCheckAction[]} discardedActions
  */
 Controller.prototype.onActionsUpdated = function ( listener, actions, newActions, discardedActions ) {
-	// do we need to redraw anything?
+	// Do we need to redraw anything?
 	if ( newActions.length || discardedActions.length ) {
 		if ( this.focusedAction && discardedActions.includes( this.focusedAction ) ) {
 			this.focusedAction = null;
@@ -709,7 +722,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		action.discarded();
 	}
 
-	// do we need to show mid-edit actions?
+	// Do we need to show mid-edit actions?
 	if ( listener === 'onBeforeSave' ) {
 		return;
 	}
@@ -765,7 +778,10 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 
 	this.lastAvailableSuggestionCount = availableSuggestionCount;
 
-	if ( !actions.length ) {
+	const visibleActions = this.filterActionsForDisplay( actions );
+	const visibleNewActions = this.filterActionsForDisplay( newActions );
+
+	if ( !visibleActions.length ) {
 		return;
 	}
 	const windowName = OO.ui.isMobile() ? 'gutterSidebarEditCheckDialog' : 'sidebarEditCheckDialog';
@@ -776,7 +792,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 		shownPromise = windowAction.open(
 			windowName,
-			{ inBeforeSave: this.inBeforeSave, actions, newActions, controller: this }
+			{ inBeforeSave: this.inBeforeSave, visibleActions, visibleNewActions, controller: this }
 		).then( ( instance ) => {
 			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
 			instance.closed.then( () => {
@@ -787,8 +803,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		shownPromise = ve.createDeferred().resolve().promise();
 	}
 	shownPromise.then( () => {
-
-		if ( newActions.length ) {
+		if ( visibleNewActions.length ) {
 			// Check if any new actions are relevant to our current selection:
 			this.focusActionForSelection();
 		}
@@ -952,6 +967,7 @@ Controller.prototype.restoreToolbar = function ( target ) {
  * Redraw selection highlights
  */
 Controller.prototype.drawSelections = function () {
+	const actions = this.filterActionsForDisplay( this.getActions() );
 	const surfaceView = this.surface.getView();
 	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
 		( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
@@ -966,7 +982,7 @@ Controller.prototype.drawSelections = function () {
 	if ( this.inBeforeSave ) {
 		// Review mode grays out everything that's not highlighted:
 		const highlightNodes = [];
-		this.getActions().forEach( ( action ) => {
+		actions.forEach( ( action ) => {
 			action.getHighlightSelections().forEach( ( selection ) => {
 				highlightNodes.push( ...surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
 			} );
@@ -978,7 +994,6 @@ Controller.prototype.drawSelections = function () {
 		return;
 	}
 
-	const actions = this.getActions();
 	if ( actions.length === 0 ) {
 		// Clear any previously drawn selections
 		surfaceView.getSelectionManager().drawSelections( 'editCheck-active', [] );
