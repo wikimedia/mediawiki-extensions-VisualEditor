@@ -5,12 +5,17 @@
 			"Okras",
 			"Stjn",
 			"Vonavy",
-			"Mitte27"
+			"Mitte27",
+			"Vlad5250"
 		]
 	},
 	"editcheck-dialog-action-no": "Нет",
 	"editcheck-dialog-action-yes": "Да",
+	"editcheck-dialog-action-decline": "Отклонить",
+	"editcheck-dialog-action-revise": "Пересмотреть",
+	"editcheck-dialog-action-recheck": "Перепроверить",
 	"editcheck-dialog-action-back": "Назад",
+	"editcheck-dialog-action-submit": "Отправить",
 	"editcheck-dialog-addref-description": "Добавьте источник, чтобы помочь читателям понять, откуда взята эта информация.",
 	"editcheck-dialog-addref-reject-question": "Почему вы не добавили источник?",
 	"editcheck-dialog-addref-reject-description": "Другим редакторам будет полезно узнать, почему вы решили не добавлять источник.",
@@ -19,7 +24,7 @@
 	"editcheck-dialog-addref-reject-uncertain": "Не знаю точно, какой источник добавить",
 	"editcheck-dialog-addref-reject-other": "Другое",
 	"editcheck-dialog-addref-success-notify": "Спасибо за добавление источника!",
-	"editcheck-dialog-addref-title": "Добавить",
+	"editcheck-dialog-addref-title": "Добавить источник",
 	"editcheck-dialog-title": "До публикации",
 	"editcheck-copyvio-prompt": "Вы написали этот текст?",
 	"editcheck-copyvio-action-keep": "Да, сохранить",
