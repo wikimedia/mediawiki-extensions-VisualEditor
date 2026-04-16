@@ -232,7 +232,10 @@
 					formatversion: 2,
 					errorformat: 'html',
 					errorlang: mw.config.get( 'wgUserLanguage' ),
-					errorsuselocal: true
+					errorsuselocal: true,
+					// Pass through variant/uselang from the original URL
+					variant: mw.config.get( 'wgUserVariant' ),
+					uselang: mw.config.get( 'wgUserLanguage' )
 				},
 				data
 			);

@@ -1044,6 +1044,7 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogPreview = function () {
 			uselang: mw.config.get( 'wgUserLanguage' ),
 			useskin: mw.config.get( 'skin' ),
 			mobileformat: OO.ui.isMobile(),
+			usearticle: true,
 			parser: mw.config.get( 'wgParsoidHtmlVersion' ) ? 'parsoid' : 'legacy',
 			prop: [ 'text', 'categorieshtml', 'displaytitle', 'subtitle', 'modules', 'jsconfigvars' ]
 		} ) ) ).then( ( response ) => {
