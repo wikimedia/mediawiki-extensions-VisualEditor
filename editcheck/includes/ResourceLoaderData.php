@@ -9,8 +9,8 @@
 
 namespace MediaWiki\Extension\VisualEditor\EditCheck;
 
+use MediaWiki\Language\MessageLocalizer;
 use MediaWiki\MediaWikiServices;
-use MessageLocalizer;
 
 class ResourceLoaderData {
 
