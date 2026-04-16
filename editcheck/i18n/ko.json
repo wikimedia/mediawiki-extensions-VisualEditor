@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Markingdots",
+			"Tensama0415",
 			"YeBoy371",
 			"Ykhwong",
 			"밥풀떼기"
@@ -86,6 +87,8 @@
 	"editcheck-specialeditchecks-config-default": "기본 구성",
 	"editcheck-specialeditchecks-config-onwiki": "위키에서 재정의",
 	"editcheck-specialeditchecks-config-matchitem": "텍스트 일치 구성",
+	"editcheck-suggestionfeedback-label-about": "제안에 대해",
+	"editcheck-suggestionfeedback-label-report": "문제점 보고",
 	"tag-editcheck-reference-decline-common-knowledge": "편집 검사(출처)를 거부함 (상식)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck 출처가 상식을 이유로 거부되었습니다",
 	"tag-editcheck-reference-decline-irrelevant": "편집 검사(출처)를 거부함 (부적절)",
