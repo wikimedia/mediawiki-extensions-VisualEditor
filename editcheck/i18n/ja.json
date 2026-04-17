@@ -11,7 +11,7 @@
 		]
 	},
 	"editchecks": "編集チェック",
-	"editcheck-toolbar-suggestions-title": "おすすめを表示",
+	"editcheck-toolbar-suggestions-title": "おすすめの編集を表示",
 	"editcheck-dialog-action-no": "いいえ",
 	"editcheck-dialog-action-yes": "はい",
 	"editcheck-dialog-action-decline": "そのまま公開する",
@@ -20,7 +20,7 @@
 	"editcheck-dialog-action-replace": "置き換える",
 	"editcheck-dialog-action-back": "戻る",
 	"editcheck-dialog-action-submit": "送信",
-	"editcheck-dialog-scroll-into-view": "おすすめを見る",
+	"editcheck-dialog-scroll-into-view": "おすすめの編集を見る",
 	"editcheck-dialog-addref-description": "出典を追加することで、読者がこの情報の典拠を理解できるようにします。",
 	"editcheck-dialog-addref-reject-question": "出典を追加しない理由はなんですか。",
 	"editcheck-dialog-addref-reject-description": "出典を追加しなくてもよいと判断した理由を、さらに詳しく教えてください。",
