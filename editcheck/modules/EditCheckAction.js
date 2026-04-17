@@ -224,7 +224,11 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]
 	} );
-	this.emit( 'shown' );
+	// On mobile, 'shown' is already emitted by the GutterSidebarEditCheckDialog, so skip emitting here
+	// (though technically the controller should dedupe anyway)
+	if ( !OO.ui.isMobile() ) {
+		this.emit( 'shown' );
+	}
 	this.widget.once( 'actionSeen', this.onActionSeen.bind( this ) );
 	this.widget.toggleCollapse( collapsed );
 

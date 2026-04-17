@@ -228,6 +228,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 			widget.showDialogWithAction( actionToShow );
 			shown = true;
 		}
+		section.actions.forEach( ( action ) => {
+			action.emit( 'shown' );
+		} );
 	} );
 
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
