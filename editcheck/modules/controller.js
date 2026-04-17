@@ -585,7 +585,7 @@ Controller.prototype.focusActionForSelection = function () {
 
 	const highlightSelectionsActions = actions.filter(
 		( action ) => action.getHighlightSelections().some(
-			( highlight ) => highlight.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
+			( highlightSelection ) => highlightSelection.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
 
 	if ( highlightSelectionsActions.length > 0 ) {
 		this.focusAction( highlightSelectionsActions[ highlightSelectionsActions.length - 1 ], false );
