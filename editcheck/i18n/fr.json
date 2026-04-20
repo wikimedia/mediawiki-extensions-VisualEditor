@@ -26,6 +26,7 @@
 	"editcheck-dialog-action-recheck": "Revérifier",
 	"editcheck-dialog-action-back": "Retour",
 	"editcheck-dialog-action-submit": "Soumettre",
+	"editcheck-dialog-scroll-into-view": "Voir les suggestions",
 	"editcheck-dialog-toggle": "Modifier la visibilité",
 	"editcheck-dialog-addref-description": "Aidez les lecteurs et lectrices à comprendre d'où proviennent ces informations en ajoutant une source.",
 	"editcheck-dialog-addref-reject-question": "Pourquoi n'ajoutez-vous pas une source ?",

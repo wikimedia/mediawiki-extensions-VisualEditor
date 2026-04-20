@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Muhamad Izzul Fiqih",
 			"Pitchrigi"
 		]
 	},
+	"visualeditor-ca-createlocaldescriptionsource": "Tambah sumber deskripsi lokal",
+	"visualeditor-ca-createsource": "Bikin (teks wiki)",
 	"visualeditor-ca-editsource": "Sunting sumber",
 	"visualeditor-ca-editsource-section": "sunting sumber"
 }
