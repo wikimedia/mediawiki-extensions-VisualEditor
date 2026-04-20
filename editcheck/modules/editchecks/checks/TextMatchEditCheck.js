@@ -305,6 +305,9 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 						if ( matchItem.listener && matchItem.listener !== listener ) {
 							continue;
 						}
+						if ( matchItem.inNode && !matchItem.isRangeInNode( range, surfaceModel ) ) {
+							continue;
+						}
 						// Above we checked for the overall textmatch config, but now
 						// we need to know if this rule is more-specific:
 						if ( !(
@@ -510,6 +513,14 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
  *
  * @constructor
  * @param {Object} item Match item
+ * @param {string} item.title Title of the match item, used in the action prompt
+ * @param {string} item.message Message to show in the action description
+ * @param {Object.<string,string>|string[]|string} item.query Terms to match, string, array or object mapping terms to their replacements.
+ * @param {string} [item.mode] 'info', 'replace', or 'delete', to determine the type of action to show for this matchItem.
+ * @param {Object} [item.config] Configuration options.
+ * @param {string} [item.expand] Expansions mode 'sentence', 'paragraph', 'word', 'siblings', or 'parent'
+ * @param {string} [item.inNode] Node type that a match must be inside of
+ * @param {string} [item.listener] Listener that this matchItem applies to, if not all
  * @param {string} id ID of matchitem in config
  * @param {Intl.Collator} collator Collator to use for comparisons
  */
@@ -519,6 +530,7 @@ mw.editcheck.TextMatchItem = function MWTextMatchItem( item, id, collator ) {
 	this.message = item.message;
 	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, item.config );
 	this.expand = item.expand;
+	this.inNode = item.inNode || null;
 	this.listener = item.listener || null;
 
 	this.id = id;
@@ -567,6 +579,22 @@ mw.editcheck.TextMatchItem.prototype.normalizeQuery = function ( query ) {
  */
 mw.editcheck.TextMatchItem.prototype.isCaseSensitive = function () {
 	return this.config && this.config.caseSensitive;
+};
+
+/**
+ * Check if a range is inside the required inNode type.
+ *
+ * @param {ve.Range} range
+ * @param {ve.dm.Surface} surfaceModel
+ * @return {boolean}
+ */
+mw.editcheck.TextMatchItem.prototype.isRangeInNode = function ( range, surfaceModel ) {
+	if ( !this.inNode ) {
+		return true;
+	}
+
+	const fragment = surfaceModel.getLinearFragment( range );
+	return fragment.hasMatchingAncestor( this.inNode );
 };
 
 /**

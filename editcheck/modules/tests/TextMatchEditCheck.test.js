@@ -169,6 +169,48 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			expectedActions: 1,
 			dismissAndRerun: true,
 			expectedActionsAfterDismiss: 0
+		},
+		{
+			msg: 'inNode filters (outside heading ignored)',
+			matchItems: {
+				'standard-headings': {
+					title: 'Non-standard heading',
+					message: 'Use standard headings',
+					query: {
+						Life: 'Biography'
+					},
+					inNode: 'mwHeading'
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'Life',
+				{ type: '/paragraph' }
+			],
+			expectedActions: 0
+		},
+		{
+			msg: 'inNode filters (inside heading matches)',
+			matchItems: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					query: {
+						Life: 'Biography'
+					},
+					inNode: 'mwHeading'
+				}
+			},
+			data: [
+				{ type: 'mwHeading', attributes: { level: 2 } },
+				...'Life',
+				{ type: '/mwHeading' }
+			],
+			expectedActions: 1,
+			expectedTerms: [ 'Life' ],
+			expectedData: ( data ) => {
+				data.splice( 1, 4, ...'Biography' );
+			}
 		}
 	];
 
