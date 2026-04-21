@@ -38,6 +38,7 @@
 			"콩가루"
 		]
 	},
+	"collabpad-disabled": "이 위키에서는 CollabPad가 활성화되어 있지 않습니다.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "$1에서 가져옴",
 	"collabpad": "CollabPad",
@@ -363,7 +364,7 @@
 	"visualeditor-special-characters-group-other": "자주 사용됨",
 	"visualeditor-templatesused-tool": "사용된 틀",
 	"visualeditor-title-error": "제목이 잘못되었습니다.",
-	"visualeditor-toload": "편집기가 지금 로드됩니다. 몇 초 후에도 이 메시지가 여전히 보이면, [$1 문서를 다시 로드]해 주십시오.",
+	"visualeditor-toload": "편집기가 지금 로드됩니다. 몇 초 후에도 이 메시지가 여전히 보이면, [$1 문서를 새로고침]해 주십시오.",
 	"visualeditor-tooltip-non-breaking-space": "줄 바꿈 없는 공백",
 	"visualeditor-version-label": "버전",
 	"visualeditor-wikitext-progress": "위키텍스트로 변환 중",
