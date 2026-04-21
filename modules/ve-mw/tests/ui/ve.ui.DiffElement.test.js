@@ -11,15 +11,15 @@ QUnit.test.each( 'Diffing',
 		{
 			msg: 'Change template param',
 			oldDoc: ve.test.utils.addBaseTag(
-				ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
+				ve.dm.mwExample.MWTransclusion.block + ve.dm.mwExample.MWTransclusion.blockContent,
 				ve.dm.example.baseUri
 			),
 			newDoc: ve.test.utils.addBaseTag(
-				ve.dm.mwExample.MWTransclusion.blockOpenModified + ve.dm.mwExample.MWTransclusion.blockContent,
+				ve.dm.mwExample.MWTransclusion.blockModified + ve.dm.mwExample.MWTransclusion.blockContent,
 				ve.dm.example.baseUri
 			),
 			expected:
-				( ve.dm.mwExample.MWTransclusion.blockOpenModified + ve.dm.mwExample.MWTransclusion.blockContent )
+				( ve.dm.mwExample.MWTransclusion.blockModified + ve.dm.mwExample.MWTransclusion.blockContent )
 					// FIXME: Use DOM modification instead of string replaces
 					.replace( /#mwt1"/g, '#mwt1" data-diff-action="structural-change" data-diff-id="0"' ),
 			expectedDescriptions: [

@@ -19,34 +19,34 @@ ve.dm.mwExample.createExampleDocument = ( name, store, base ) => ve.dm.example.c
 ve.dm.mwExample.createExampleDocumentFromData = ( data, store, base ) => ve.dm.example.createExampleDocumentFromData( data, store, base || ve.dm.mwExample.baseUri );
 
 ve.dm.mwExample.MWTransclusion = {
-	blockOpen: ve.dm.example.singleLine`
+	block: ve.dm.example.singleLine`
 		<div about="#mwt1" typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, world!"}},"i":0}}]}'>
 		</div>
 	`,
-	blockOpenModified: ve.dm.example.singleLine`
+	blockModified: ve.dm.example.singleLine`
 		<div about="#mwt1" typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, globe!"}},"i":0}}]}'>
 		</div>
 	`,
-	blockOpenFromData: ve.dm.example.singleLine`
+	blockFromData: ve.dm.example.singleLine`
 		<span typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, world!"}},"i":0}}]}'>
 		</span>
 	`,
-	blockOpenClipboard: ve.dm.example.singleLine`
+	blockClipboard: ve.dm.example.singleLine`
 		<div about="#mwt1" typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, world!"}},"i":0}}]}'
 			 data-ve-no-generated-contents="true">
 			&nbsp;
 		</div>
 	`,
-	blockOpenFromDataModified: ve.dm.example.singleLine`
+	blockFromDataModified: ve.dm.example.singleLine`
 		<span typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, globe!"}},"i":0}}]}'>
 		</span>
 	`,
-	blockOpenModifiedClipboard: ve.dm.example.singleLine`
+	blockModifiedClipboard: ve.dm.example.singleLine`
 		<span typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{"1":{"wt":"Hello, globe!"}},"i":0}}]}'
 			 data-ve-no-generated-contents="true">
@@ -76,7 +76,7 @@ ve.dm.mwExample.MWTransclusion = {
 		<span typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"5,678"}},"i":0}}]}'>
 	`,
-	inlineOpenModifiedClipboard: ve.dm.example.singleLine`
+	inlineModifiedClipboard: ve.dm.example.singleLine`
 		<span typeof="mw:Transclusion"
 			 data-mw='{"parts":[{"template":{"target":{"wt":"Inline","href":"./Template:Inline"},"params":{"1":{"wt":"5,678"}},"i":0}}]}'
 			 data-ve-no-generated-contents="true">
@@ -225,7 +225,7 @@ ve.dm.mwExample.MWTransclusion.mixedDataClose = { type: '/mwTransclusionInline' 
 ve.dm.mwExample.MWTransclusion.blockParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.blockData ), undefined ] );
 ve.dm.mwExample.MWTransclusion.blockStoreItems = {};
 ve.dm.mwExample.MWTransclusion.blockStoreItems[ ve.dm.HashValueStore.prototype.hashOfValue( null, ve.dm.mwExample.MWTransclusion.blockParamsHash ) ] =
-	$.parseHTML( ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent );
+	$.parseHTML( ve.dm.mwExample.MWTransclusion.block + ve.dm.mwExample.MWTransclusion.blockContent );
 
 ve.dm.mwExample.MWTransclusion.inlineParamsHash = OO.getHash( [ ve.dm.MWTransclusionNode.static.getHashObject( ve.dm.mwExample.MWTransclusion.inlineData ), undefined ] );
 ve.dm.mwExample.MWTransclusion.inlineStoreItems = {};
@@ -622,7 +622,7 @@ ve.dm.mwExample.withMetaMetaData = [
 	undefined
 ];
 
-ve.dm.mwExample.alienExtLinkHtml = '<a typeof="mw:ExpandedAttrs" about="#mwt4" rel="mw:ExtLink nofollow" href="https://www.example.com/" class="external text" id="mwBQ" data-mw="{&quot;attribs&quot;:[[{&quot;txt&quot;:&quot;href&quot;},{&quot;html&quot;:&quot;<a rel=\\&quot;mw:ExtLink nofollow\\&quot; href=\\&quot;https://www.example.com/\\&quot; about=\\&quot;#mwt3\\&quot; typeof=\\&quot;mw:Transclusion\\&quot; class=\\&quot;external free\\&quot; data-parsoid=\'{\\&quot;stx\\&quot;:\\&quot;url\\&quot;,\\&quot;pi\\&quot;:[[{\\&quot;k\\&quot;:\\&quot;1\\&quot;}]],\\&quot;dsr\\&quot;:[36,67,null,null]}\' data-mw=\'{\\&quot;parts\\&quot;:[{\\&quot;template\\&quot;:{\\&quot;target\\&quot;:{\\&quot;wt\\&quot;:\\&quot;1x\\&quot;,\\&quot;href\\&quot;:\\&quot;./Template:1x\\&quot;},\\&quot;params\\&quot;:{\\&quot;1\\&quot;:{\\&quot;wt\\&quot;:\\&quot;https://www.example.com/\\&quot;}},\\&quot;i\\&quot;:0}}]}\'>https://www.example.com/</a>&quot;}]]}">x</a>';
+ve.dm.mwExample.alienExtLinkHtml = '<a typeof="mw:ExpandedAttrs" about="#mwt4" rel="mw:ExtLink nofollow" href="https://www.example.com/" class="external text" id="mwBQ" data-mw="{&quot;attribs&quot;:[[{&quot;txt&quot;:&quot;href&quot;}]]}">x</a>';
 
 ve.dm.mwExample.domToDataCases = {
 	'adjacent annotations (data-parsoid)': {
@@ -696,7 +696,7 @@ ve.dm.mwExample.domToDataCases = {
 			<b>a</b>
 			<b data-parsoid="1">bx</b>
 			<b data-parsoid="2">c</b>
-			 <b>dd</b
+			 <b>dd</b>
 		`
 	},
 	'adjacent annotations (RESTBase IDs)': {
@@ -1424,7 +1424,7 @@ ve.dm.mwExample.domToDataCases = {
 		`
 	},
 	'mw:Transclusion (block level)': {
-		body: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
+		body: ve.dm.mwExample.MWTransclusion.block + ve.dm.mwExample.MWTransclusion.blockContent,
 		data: [
 			ve.dm.mwExample.MWTransclusion.blockData,
 			{ type: '/mwTransclusionBlock' },
@@ -1432,13 +1432,13 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		storeItems: ve.dm.mwExample.MWTransclusion.blockStoreItems,
-		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
-		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromData,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenClipboard + ve.dm.mwExample.MWTransclusion.blockContentClipboard,
-		previewBody: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent
+		normalizedBody: ve.dm.mwExample.MWTransclusion.block + ve.dm.mwExample.MWTransclusion.blockContent,
+		fromDataBody: ve.dm.mwExample.MWTransclusion.blockFromData,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.blockClipboard + ve.dm.mwExample.MWTransclusion.blockContentClipboard,
+		previewBody: ve.dm.mwExample.MWTransclusion.block + ve.dm.mwExample.MWTransclusion.blockContent
 	},
 	'mw:Transclusion (block level - modified)': {
-		body: ve.dm.mwExample.MWTransclusion.blockOpen + ve.dm.mwExample.MWTransclusion.blockContent,
+		body: ve.dm.mwExample.MWTransclusion.block + ve.dm.mwExample.MWTransclusion.blockContent,
 		data: [
 			ve.dm.mwExample.MWTransclusion.blockData,
 			{ type: '/mwTransclusionBlock' },
@@ -1451,9 +1451,9 @@ ve.dm.mwExample.domToDataCases = {
 				item.attributes.mw.parts[ 0 ].template.params[ '1' ].wt = 'Hello, globe!';
 			} );
 		},
-		normalizedBody: ve.dm.mwExample.MWTransclusion.blockOpenModified.replace( /about="#mwt1"/, '' ),
-		fromDataBody: ve.dm.mwExample.MWTransclusion.blockOpenFromDataModified,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.blockOpenModifiedClipboard,
+		normalizedBody: ve.dm.mwExample.MWTransclusion.blockModified.replace( /about="#mwt1"/, '' ),
+		fromDataBody: ve.dm.mwExample.MWTransclusion.blockFromDataModified,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.blockModifiedClipboard,
 		previewBody: false
 	},
 	'mw:Transclusion (inline)': {
@@ -1490,7 +1490,7 @@ ve.dm.mwExample.domToDataCases = {
 		},
 		normalizedBody: ve.dm.mwExample.MWTransclusion.inlineOpenModified.replace( /about="#mwt1"/, '' ) + ve.dm.mwExample.MWTransclusion.inlineClose,
 		fromDataBody: ve.dm.mwExample.MWTransclusion.inlineOpenFromDataModified + ve.dm.mwExample.MWTransclusion.inlineClose,
-		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineOpenModifiedClipboard + ve.dm.mwExample.MWTransclusion.inlineClose,
+		clipboardBody: ve.dm.mwExample.MWTransclusion.inlineModifiedClipboard,
 		previewBody: false
 	},
 	'two mw:Transclusion nodes with identical params but different htmlAttributes': {
@@ -1811,7 +1811,7 @@ ve.dm.mwExample.domToDataCases = {
 		]
 	},
 	'internal link with template-generated href': {
-		body: '<p><a typeof="mw:ExpandedAttrs" about="#mwt2" rel="mw:WikiLink" href="./Test" title="Test" data-mw="{&quot;attribs&quot;:[[{&quot;txt&quot;:&quot;href&quot;},{&quot;html&quot;:&quot;<span about=\\&quot;#mwt1\\&quot; typeof=\\&quot;mw:Transclusion\\&quot; data-parsoid=\'{\\&quot;pi\\&quot;:[[{\\&quot;k\\&quot;:\\&quot;1\\&quot;}]],\\&quot;dsr\\&quot;:[2,14,null,null]}\' data-mw=\'{\\&quot;parts\\&quot;:[{\\&quot;template\\&quot;:{\\&quot;target\\&quot;:{\\&quot;wt\\&quot;:\\&quot;1x\\&quot;,\\&quot;href\\&quot;:\\&quot;./Template:1x\\&quot;},\\&quot;params\\&quot;:{\\&quot;1\\&quot;:{\\&quot;wt\\&quot;:\\&quot;test\\&quot;}},\\&quot;i\\&quot;:0}}]}\'>test</span>&quot;}]]}">x</a></p>',
+		body: '<p><a typeof="mw:ExpandedAttrs" about="#mwt2" rel="mw:WikiLink" href="./Test" title="Test" data-mw="{&quot;attribs&quot;:[[{&quot;txt&quot;:&quot;href&quot;}]]}">x</a></p>',
 		base: ve.dm.mwExample.baseUri,
 		data: [
 			{ type: 'paragraph' },
@@ -1834,7 +1834,7 @@ ve.dm.mwExample.domToDataCases = {
 		fromDataBody: '<p><a rel="mw:WikiLink" href="./Test">x</a></p>'
 	},
 	'internal link with extension-generated href': {
-		body: '<p><a typeof="mw:ExpandedAttrs mw:Annotation/tvar" about="#mwt2" rel="mw:WikiLink" href="./Test" title="Test" data-mw="{&quot;attribs&quot;:[[{&quot;txt&quot;:&quot;href&quot;},{&quot;html&quot;:&quot;<meta typeof=\\&quot;mw:Annotation/tvar\\&quot; data-parsoid=\'{\\&quot;dsr\\&quot;:[187,200,null,null]}\' data-mw=\'{\\&quot;attrs\\&quot;:{\\&quot;name\\&quot;:\\&quot;a\\&quot;},\\&quot;rangeId\\&quot;:\\&quot;mwa0\\&quot;,\\&quot;extendedRange\\&quot;:false,\\&quot;wtOffsets\\&quot;:[187,200]}\'/>test<meta typeof=\\&quot;mw:Annotation/tvar/End\\&quot; data-parsoid=\'{\\&quot;dsr\\&quot;:[203,210,null,null]}\' data-mw=\'{\\&quot;wtOffsets\\&quot;:[203,210]}\'/>&quot;}]]}">x</a></p>',
+		body: '<p><a typeof="mw:ExpandedAttrs mw:Annotation/tvar" about="#mwt2" rel="mw:WikiLink" href="./Test" title="Test" data-mw="{&quot;attribs&quot;:[[{&quot;txt&quot;:&quot;href&quot;}]]}">x</a></p>',
 		base: ve.dm.mwExample.baseUri,
 		data: [
 			{ type: 'paragraph' },
