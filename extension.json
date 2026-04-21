@@ -2480,11 +2480,11 @@
 			"Cite": {
 				"scripts": [
 					"editcheck/modules/tests/AddReferenceEditCheck.test.js"
+				],
+				"dependencies": [
+					"ext.cite.visualEditor"
 				]
-			},
-			"dependencies": [
-				"ext.cite.visualEditor"
-			]
+			}
 		}
 	},
 	"ResourceFileModulePaths": {
