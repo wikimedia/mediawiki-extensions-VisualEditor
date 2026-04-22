@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Bilykralik16",
+			"Jkjk",
 			"Martin Urbanec",
 			"Matěj Suchánek",
 			"Mormegil",
@@ -9,6 +10,11 @@
 		]
 	},
 	"editchecks": "Kontroly editací",
+	"editcheck-toolbar-suggestions-title": "Přepnout návrhy",
+	"editcheck-suggestions-turned-on": "Návrhy zapnuty",
+	"editcheck-suggestions-turned-off": "Návrhy vypnuty",
+	"editcheck-suggestions-more-available": "Nyní jsou k dispozici další návrhy",
+	"editcheck-suggestions-none-left": "Nejsou žádné další návrhy",
 	"editcheck-dialog-action-no": "Ne",
 	"editcheck-dialog-action-yes": "Ano",
 	"editcheck-dialog-action-decline": "Zamítnout",
@@ -17,6 +23,7 @@
 	"editcheck-dialog-action-replace": "Nahradit",
 	"editcheck-dialog-action-back": "Zpět",
 	"editcheck-dialog-action-submit": "Odeslat",
+	"editcheck-dialog-scroll-into-view": "Zobrazit návrhy",
 	"editcheck-dialog-toggle": "Přepnout viditelnost",
 	"editcheck-dialog-addref-description": "Pomozte čtenářům pochopit, odkud vámi přidaná informace pochází, tím, že přidáte referenci.",
 	"editcheck-dialog-addref-reject-question": "Z jakého důvodu nepřidáváte žádnou referenci?",
@@ -39,6 +46,7 @@
 	"editcheck-copyvio-keep-other": "Nic z výše uvedeného neplatí",
 	"editcheck-copyvio-keep-notify": "Děkujeme za sdílení důvodu, proč ponechat tento vložený text!",
 	"editcheck-copyvio-remove-notify": "Děkujeme, že pomáháte udržovat znalosti volně dostupné!",
+	"editcheck-double-bold-title": "Odstraňte nadbytečné tučné formátování",
 	"editcheck-preference-suggestions-label": "Režim návrhů",
 	"editcheck-preference-suggestions-description": "Návrhy editací pro vylepšení článků nastavené komunitou. Dostupné ve [[:mw:Special:MyLanguage/VisualEditor|vizuálním editoru]].",
 	"editcheck-textmatch-replace": "Nahradit „$1“ za „$2“?",

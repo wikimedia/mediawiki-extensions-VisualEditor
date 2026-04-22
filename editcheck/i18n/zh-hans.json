@@ -7,12 +7,18 @@
 			"LittlePaw365",
 			"Peterxy12",
 			"SCP-2000",
+			"Yfdyh000",
 			"人间百态",
 			"星海",
 			"沈澄心"
 		]
 	},
 	"editchecks": "编辑检查",
+	"editcheck-toolbar-suggestions-title": "切换建议",
+	"editcheck-suggestions-turned-on": "已开启建议",
+	"editcheck-suggestions-turned-off": "已关闭建议",
+	"editcheck-suggestions-more-available": "现在有更多建议。",
+	"editcheck-suggestions-none-left": "现在没有更多建议",
 	"editcheck-dialog-action-no": "否",
 	"editcheck-dialog-action-yes": "是",
 	"editcheck-dialog-action-decline": "拒绝",
