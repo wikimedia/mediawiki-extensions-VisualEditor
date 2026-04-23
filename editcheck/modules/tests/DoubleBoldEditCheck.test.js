@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.DoubleBoldEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.DoubleBoldEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
 	const cases = [

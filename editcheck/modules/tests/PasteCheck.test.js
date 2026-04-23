@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.PasteCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.PasteCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
 	const importedText = ( length ) => ve.dm.example.annotateText( 'x'.repeat( length ), ve.dm.example.getImportedAnnotation() );

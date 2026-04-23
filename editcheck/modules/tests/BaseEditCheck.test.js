@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.BaseEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.BaseEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'getModifiedRanges', ( assert ) => {
 	const cases = [

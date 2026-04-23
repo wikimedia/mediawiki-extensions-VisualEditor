@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.YearLinkEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.YearLinkEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 /**
  * Create a surface with an internal link whose label is the inserted text.

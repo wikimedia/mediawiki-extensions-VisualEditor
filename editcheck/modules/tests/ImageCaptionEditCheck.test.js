@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.ImageCaptionEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.ImageCaptionEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onBranchNodeChange', ( assert ) => {
 	const typeFrameImage = ve.copy( ve.dm.mwExample.MWBlockImage.data[ 0 ] );

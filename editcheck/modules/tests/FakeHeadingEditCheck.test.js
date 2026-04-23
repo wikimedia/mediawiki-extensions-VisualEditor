@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.FakeHeadingEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.FakeHeadingEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
 	const cases = [

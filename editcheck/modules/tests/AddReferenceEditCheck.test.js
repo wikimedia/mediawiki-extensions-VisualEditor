@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.AddReferenceEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.AddReferenceEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onBeforeSave', ( assert ) => {
 	const longText = 'a'.repeat( 60 );

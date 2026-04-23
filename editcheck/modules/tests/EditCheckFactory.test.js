@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.EditCheckFactory', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.EditCheckFactory', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'createAllActionsByListener', ( assert ) => {
 	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdef', { type: '/paragraph' } ] ),

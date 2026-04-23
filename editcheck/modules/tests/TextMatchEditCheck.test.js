@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.TextMatchEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.TextMatchEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 /**
  * @ignore

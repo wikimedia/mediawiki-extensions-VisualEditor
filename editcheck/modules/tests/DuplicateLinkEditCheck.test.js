@@ -1,4 +1,4 @@
-QUnit.module( 'mw.editcheck.DuplicateLinkEditCheck', ve.test.utils.newMwEnvironment() );
+QUnit.module( 'mw.editcheck.DuplicateLinkEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
 function getLinksData( links ) {
 	// eslint-disable-next-line es-x/no-array-prototype-flat
