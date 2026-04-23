@@ -62,6 +62,7 @@ class SpecialEditChecks extends SpecialPage {
 			'mediawiki.content.json'
 		] );
 
+		$contentLang = $this->getContext()->getLanguage()->getCode();
 		$dir = dirname( __DIR__ );
 		$baseDir = $dir . '/editcheck/modules/editchecks';
 		$checksDir = $baseDir . '/checks';
@@ -74,25 +75,32 @@ class SpecialEditChecks extends SpecialPage {
 		$out->addHtml( $this->msg( 'editcheck-specialeditchecks-info' )->parseAsBlock() );
 
 		$abChecks = [];
+		$unsupportedChecks = [];
 		$defaultChecks = $this->collectChecks(
 			$checksDir . '/*.js', $abstractClasses, false, true, null, $onWikiConfig
 		);
 		$disabledChecks = $this->collectChecks(
 			$checksDir . '/*.js', $abstractClasses, false, false, false, $onWikiConfig
 		);
+		$experimentalEnabledChecks = $this->collectChecks(
+			$checksDir . '/*.js', [], false, false, true, $onWikiConfig
+		);
 		$abTest = MediaWikiServices::getInstance()->getMainConfig()->get( 'VisualEditorEditCheckABTest' );
 		if ( $abTest !== null ) {
-			// Extract AB test check
-			foreach ( $defaultChecks as $i => $check ) {
-				if ( $check['name'] === (string)$abTest ) {
-					$abChecks[] = $check;
-					unset( $defaultChecks[$i] );
-				}
-			}
-			foreach ( $disabledChecks as $i => $check ) {
-				if ( $check['name'] === (string)$abTest ) {
-					$abChecks[] = $check;
-					unset( $disabledChecks[$i] );
+			foreach ( [ &$defaultChecks, &$disabledChecks, &$experimentalEnabledChecks ] as &$checks ) {
+				foreach ( $checks as $i => $check ) {
+					// Extract AB test check
+					if ( $check['name'] === (string)$abTest ) {
+						$abChecks[] = $check;
+						unset( $checks[$i] );
+					}
+					// Extract unsupported checks (not in allowedContentLanguages)
+					if ( $check['allowedContentLanguages'] ) {
+						if ( !in_array( $contentLang, $check['allowedContentLanguages'], true ) ) {
+							$unsupportedChecks[] = $check;
+							unset( $checks[$i] );
+						}
+					}
 				}
 			}
 		}
@@ -106,34 +114,34 @@ class SpecialEditChecks extends SpecialPage {
 			$out->addHTML( $this->buildTableHtml( $abChecks, $onWikiConfig ) );
 		}
 
-		if ( is_dir( $checksDir ) ) {
-			$experimentalEnabledChecks = $this->collectChecks(
-				$checksDir . '/*.js', [], false, false, true, $onWikiConfig
+		if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
+			// Split beta and experimental checks based on if they are enabled by default
+			$out->addHTML( Html::rawElement( 'h2', [],
+				Html::element( 'a', [
+					'href' => $this->getTitleFor( 'Preferences' )->getLocalURL() . '#mw-prefsection-betafeatures',
+				],
+				$this->msg( 'editcheck-specialeditchecks-header-betafeatures' )->text() ) )
 			);
+			$out->addHTML( $this->buildTableHtml( $experimentalEnabledChecks, $onWikiConfig, true ) );
 
-			if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
-				// Split beta and experimental checks based on if they are enabled by default
-				$out->addHTML( Html::rawElement( 'h2', [],
-					Html::element( 'a', [
-						'href' => $this->getTitleFor( 'Preferences' )->getLocalURL() . '#mw-prefsection-betafeatures',
-					],
-					$this->msg( 'editcheck-specialeditchecks-header-betafeatures' )->text() ) )
-				);
-				$out->addHTML( $this->buildTableHtml( $experimentalEnabledChecks, $onWikiConfig, true ) );
+			$out->addHTML( Html::element( 'h2', [],
+				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
+			$out->addHTML( $this->buildTableHtml( $disabledChecks, $onWikiConfig, true ) );
+		} else {
+			$allExperimentalChecks = array_merge( $experimentalEnabledChecks, $disabledChecks );
+			// Sort checks by 'name' property
+			usort( $allExperimentalChecks, static function ( $a, $b ) {
+				return strcmp( $a['name'], $b['name'] );
+			} );
+			$out->addHTML( Html::element( 'h2', [],
+				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
+			$out->addHTML( $this->buildTableHtml( $allExperimentalChecks, $onWikiConfig, true ) );
+		}
 
-				$out->addHTML( Html::element( 'h2', [],
-					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
-				$out->addHTML( $this->buildTableHtml( $disabledChecks, $onWikiConfig, true ) );
-			} else {
-				$allExperimentalChecks = array_merge( $experimentalEnabledChecks, $disabledChecks );
-				// Sort checks by 'name' property
-				usort( $allExperimentalChecks, static function ( $a, $b ) {
-					return strcmp( $a['name'], $b['name'] );
-				} );
-				$out->addHTML( Html::element( 'h2', [],
-					$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
-				$out->addHTML( $this->buildTableHtml( $allExperimentalChecks, $onWikiConfig, true ) );
-			}
+		if ( $unsupportedChecks ) {
+			$out->addHTML( Html::element( 'h2', [],
+				$this->msg( 'editcheck-specialeditchecks-header-unsupported' )->text() ) );
+			$out->addHTML( $this->buildTableHtml( $unsupportedChecks, $onWikiConfig ) );
 		}
 
 		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
@@ -186,6 +194,7 @@ class SpecialEditChecks extends SpecialPage {
 				'prompt' => $this->extractStaticValue( $src, 'prompt' ),
 				'footer' => $this->extractStaticValue( $src, 'footer' ),
 				'choices' => $this->extractStaticValue( $src, 'choices' ),
+				'allowedContentLanguages' => $this->extractStaticValue( $src, 'allowedContentLanguages' ),
 				'defaultConfig' => $this->extractDefaultConfig( $src ),
 			];
 
@@ -262,6 +271,7 @@ class SpecialEditChecks extends SpecialPage {
 						'prompt' => $item['prompt'] ?? '',
 						'footer' => $item['footer'] ?? '',
 						'choices' => $choices,
+						'allowedContentLanguages' => '',
 						'defaultConfig' => json_encode( $item['config'] ?? '' ),
 						'matchItem' => $item,
 					];
@@ -517,12 +527,12 @@ class SpecialEditChecks extends SpecialPage {
 	 *
 	 * @param string $src Source code
 	 * @param string $prop Property name
-	 * @return string|\OOUI\HtmlSnippet
+	 * @return string|array|null|\OOUI\HtmlSnippet
 	 */
 	private function extractStaticValue( string $src, string $prop ) {
 		$expr = $this->extractStaticAssignmentExpression( $src, $prop );
-		if ( $expr === '' ) {
-			return '';
+		if ( $expr === null ) {
+			return null;
 		}
 
 		// Literal
@@ -541,15 +551,11 @@ class SpecialEditChecks extends SpecialPage {
 
 		// For non-literal, non-message values, only expose data we explicitly care about.
 		// The common use-case here is extracting multi-line arrays/objects like `static.choices = [ ... ];`.
-		if ( $prop === 'choices' ) {
-			$decoded = $this->tryJsonDecodeObjectString( $expr );
-			if ( $decoded !== null ) {
-				return $decoded;
-			}
-			return '';
+		if ( $prop === 'choices' || $prop === 'allowedContentLanguages' ) {
+			return $this->tryJsonDecodeObjectString( $expr );
 		}
 
-		return '';
+		return null;
 	}
 
 	/**
@@ -557,12 +563,12 @@ class SpecialEditChecks extends SpecialPage {
 	 *
 	 * @param string $src Code
 	 * @param string $prop Property name
-	 * @return string RHS expression or empty string if not found
+	 * @return string|null RHS expression or null if not found
 	 */
-	private function extractStaticAssignmentExpression( string $src, string $prop ): string {
+	private function extractStaticAssignmentExpression( string $src, string $prop ): ?string {
 		$pattern = '/static\s*\.\s*' . preg_quote( $prop, '/' ) . '\s*=\s*/';
 		if ( !preg_match( $pattern, $src, $m, PREG_OFFSET_CAPTURE ) ) {
-			return '';
+			return null;
 		}
 		$start = $m[ 0 ][ 1 ] + strlen( $m[ 0 ][ 0 ] );
 		$end = strpos( $src, ';', $start );

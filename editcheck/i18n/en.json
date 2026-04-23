@@ -103,6 +103,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Beta features",
 	"editcheck-specialeditchecks-header-default": "Default checks",
 	"editcheck-specialeditchecks-header-experimental": "Experimental checks",
+	"editcheck-specialeditchecks-header-unsupported": "Unsupported checks",
 	"editcheck-specialeditchecks-col-title": "Title",
 	"editcheck-specialeditchecks-col-name": "Name",
 	"editcheck-specialeditchecks-col-appearance": "Appearance",

@@ -105,6 +105,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Section heading for beta feature checks.",
 	"editcheck-specialeditchecks-header-default": "Section heading for default checks (non-experimental).",
 	"editcheck-specialeditchecks-header-experimental": "Section heading for experimental checks.",
+	"editcheck-specialeditchecks-header-unsupported": "Section heading for unsupported checks.",
 	"editcheck-specialeditchecks-col-title": "Column header label for the check display title.",
 	"editcheck-specialeditchecks-col-name": "Column header label for the check symbolic name (and source file).",
 	"editcheck-specialeditchecks-col-appearance": "Column header label for the check appearance.",
