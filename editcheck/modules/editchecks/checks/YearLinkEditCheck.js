@@ -59,10 +59,13 @@ mw.editcheck.YearLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnota
  * Extract a single year from the given text.
  *
  * @param {string} text
+ * @param {boolean} [disallowExtraText=false] Disallow other text around the year, e.g. "1999" not "1999 in film"
  * @return {string|null} The year found, or null if there isn't exactly one valid year
  */
-mw.editcheck.YearLinkEditCheck.prototype.matchSingleYear = function ( text ) {
-	const matches = text.match( /\b\d{3,4}\b/g );
+mw.editcheck.YearLinkEditCheck.prototype.matchSingleYear = function ( text, disallowExtraText = false ) {
+	const matches = disallowExtraText ?
+		text.match( /^\d{3,4}$/g ) :
+		text.match( /\b\d{3,4}\b/g );
 	return matches && matches.length === 1 ? matches[ 0 ] : null;
 };
 
@@ -74,13 +77,14 @@ mw.editcheck.YearLinkEditCheck.prototype.onDocumentChange = function ( surfaceMo
 		}
 
 		const target = title.getMainText();
-		// Check target contains one 3 or 4-digit number (a year),
-		// e.g. "1999" or "2003 in film", but not "1999-2003"
-		const targetYear = this.matchSingleYear( target );
+		// Check target is a 3 or 4-digit number (a year)
+		const targetYear = this.matchSingleYear( target, true );
 		if ( !targetYear ) {
 			return null;
 		}
 
+		// Check label contains one 3 or 4-digit number (a year),
+		// e.g. "1999" or "2003 in film", but not "1999-2003"
 		const fragment = surfaceModel.getLinearFragment( annRange.range );
 		const labelYear = this.matchSingleYear( fragment.getText() );
 		if ( !labelYear ) {
@@ -111,7 +115,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 		case 'useTarget': {
 			// Replace the year in the link label with the year from the target page,
 			// e.g. [[1999|2003]] becomes [[1999]]
-			// or [[1999 in film|films of 2003]] becomes [[1999 in film|films of 1999]]
+			// or [[1999|films of 2003]] becomes [[1999|films of 1999]]
 			const targetYear = this.matchSingleYear( target );
 			fragment.insertContent(
 				text.replace( /\b\d{3,4}\b/, targetYear ),
@@ -124,7 +128,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 		case 'useLabel': {
 			// Replace the year in the link target with the year from the label,
 			// e.g. [[1999|2003]] becomes [[2003]]
-			// or [[1999 in film|films of 2003]] becomes [[2003 in film|films of 2003]]
+			// or [[1999|films of 2003]] becomes [[2003|films of 2003]]
 			const labelYear = this.matchSingleYear( text );
 			const link = ve.dm.MWInternalLinkAnnotation.static.newFromTitle(
 				mw.Title.newFromText(
