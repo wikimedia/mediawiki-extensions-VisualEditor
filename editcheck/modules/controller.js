@@ -22,7 +22,11 @@ function Controller( target, config ) {
 	// Suggestion mode is available, and the suggestion mode toggle is visible in the toolbar
 	this.suggestionsModeAvailable = config.suggestionsModeAvailable;
 	// Suggestions are currently visible, toggled by the toolbar tool
-	this.suggestionsVisible = this.suggestionsModeAvailable && !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' );
+	this.suggestionsVisible = this.suggestionsModeAvailable && (
+		!!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' ) ||
+		// Preference only applies to desktop for now
+		OO.ui.isMobile()
+	);
 	// Suppress suggestions without affecting user config or toolbar state, used by external tools
 	this.suppressSuggestions = false;
 
