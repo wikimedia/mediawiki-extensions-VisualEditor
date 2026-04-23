@@ -79,7 +79,8 @@ class ApiVisualEditor extends ApiBase {
 		private readonly LinkRenderer $linkRenderer,
 		private readonly LinkBatchFactory $linkBatchFactory,
 		private readonly RestrictionStore $restrictionStore,
-		private readonly VisualEditorParsoidClientFactory $parsoidClientFactory
+		private readonly TextboxBuilder $textboxBuilder,
+		private readonly VisualEditorParsoidClientFactory $parsoidClientFactory,
 	) {
 		parent::__construct( $main, $name );
 		$this->setLogger( LoggerFactory::getInstance( 'VisualEditor' ) );
@@ -367,8 +368,7 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// Look at protection status to set up notices + surface class(es)
-				$builder = new TextboxBuilder();
-				$protectedClasses = $builder->getTextboxProtectionCSSClasses( $title );
+				$protectedClasses = $this->textboxBuilder->getTextboxProtectionCSSClasses( $title );
 
 				// Simplified EditPage::getEditPermissionStatus()
 				// TODO: Use API
