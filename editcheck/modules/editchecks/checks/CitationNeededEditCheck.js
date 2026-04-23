@@ -27,7 +27,7 @@ mw.editcheck.CitationNeededEditCheck.static.defaultConfig = ve.extendObject( {},
 
 mw.editcheck.CitationNeededEditCheck.static.title = OO.ui.deferMsg( 'cite-ve-citationneeded-title' );
 
-mw.editcheck.CitationNeededEditCheck.static.description = OO.ui.deferMsg( 'cite-ve-citationneeded-description' );
+mw.editcheck.CitationNeededEditCheck.static.description = ve.deferJQueryMsg( 'cite-ve-citationneeded-description' );
 
 mw.editcheck.CitationNeededEditCheck.static.name = 'citationNeeded';
 

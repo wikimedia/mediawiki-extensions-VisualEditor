@@ -25,7 +25,7 @@ mw.editcheck.AddReferenceEditCheck.static.name = 'addReference';
 
 mw.editcheck.AddReferenceEditCheck.static.title = OO.ui.deferMsg( 'editcheck-dialog-addref-title' );
 
-mw.editcheck.AddReferenceEditCheck.static.description = OO.ui.deferMsg( 'editcheck-dialog-addref-description' );
+mw.editcheck.AddReferenceEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-dialog-addref-description' );
 
 mw.editcheck.AddReferenceEditCheck.static.success = OO.ui.deferMsg( 'editcheck-dialog-addref-success-notify' );
 
