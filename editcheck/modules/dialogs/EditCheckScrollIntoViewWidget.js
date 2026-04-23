@@ -11,6 +11,7 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 	this.showButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'editcheck-dialog-scroll-into-view' ),
 		flags: [ 'progressive' ],
+		size: 'large',
 		icon: 'arrowDown'
 	} );
 
@@ -18,6 +19,7 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 		icon: 'close',
 		flags: [ 'progressive' ],
 		label: mw.msg( 'ooui-popup-widget-close-button-aria-label' ),
+		size: 'large',
 		invisibleLabel: true
 	} );
 
