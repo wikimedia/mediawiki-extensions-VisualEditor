@@ -86,6 +86,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Beetaominaisuudet",
 	"editcheck-specialeditchecks-header-default": "Oletustarkistimet",
 	"editcheck-specialeditchecks-header-experimental": "Kokeelliset tarkistimet",
+	"editcheck-specialeditchecks-header-unsupported": "Ei-tuetut tarkistimet",
 	"editcheck-specialeditchecks-col-title": "Otsikko",
 	"editcheck-specialeditchecks-col-name": "Nimi",
 	"editcheck-specialeditchecks-col-appearance": "Ulkoasu",

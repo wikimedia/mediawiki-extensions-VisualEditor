@@ -89,6 +89,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Beta-Funktionen",
 	"editcheck-specialeditchecks-header-default": "Standardprüfungen",
 	"editcheck-specialeditchecks-header-experimental": "Experimentelle Prüfungen",
+	"editcheck-specialeditchecks-header-unsupported": "Nicht unterstützte Kontrollen",
 	"editcheck-specialeditchecks-col-title": "Titel",
 	"editcheck-specialeditchecks-col-name": "Name",
 	"editcheck-specialeditchecks-col-appearance": "Erscheinungsbild",

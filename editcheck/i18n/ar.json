@@ -90,6 +90,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "مزايا تجريبية",
 	"editcheck-specialeditchecks-header-default": "عمليات الفحص الافتراضية",
 	"editcheck-specialeditchecks-header-experimental": "الفحوصات التجريبية",
+	"editcheck-specialeditchecks-header-unsupported": "التحققات غير المدعومة",
 	"editcheck-specialeditchecks-col-title": "العنوان",
 	"editcheck-specialeditchecks-col-name": "الاسم",
 	"editcheck-specialeditchecks-col-appearance": "المظهر",

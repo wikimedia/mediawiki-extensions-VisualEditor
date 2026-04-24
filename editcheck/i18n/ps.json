@@ -6,7 +6,6 @@
 	},
 	"editchecks": "سمون سم‌کتنه",
 	"editcheck-toolbar-suggestions-title": "وړانديزونه بدلول",
-	"editcheck-toolbar-suggestions-count": "{{PLURAL:$1|$1|10={{formatnum:9}}+}}",
 	"editcheck-dialog-action-no": "نه",
 	"editcheck-dialog-action-yes": "هو",
 	"editcheck-dialog-action-decline": "ناگاره‌شوی",
