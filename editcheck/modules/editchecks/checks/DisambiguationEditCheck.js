@@ -18,6 +18,8 @@ mw.editcheck.DisambiguationEditCheck = function MWDisambiguationEditCheck() {
 
 OO.inheritClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.LinkEditCheck );
 
+OO.mixinClass( mw.editcheck.DisambiguationEditCheck, mw.editcheck.ContentBranchNodeCheck );
+
 /* Static properties */
 
 mw.editcheck.DisambiguationEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DisambiguationEditCheck.super.static.defaultConfig, {
@@ -45,12 +47,13 @@ mw.editcheck.DisambiguationEditCheck.static.linkClasses = [ ve.dm.MWInternalLink
 
 /* Methods */
 
-mw.editcheck.DisambiguationEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.DisambiguationEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
 	const checkDisambig = ( annotation ) => ve.init.platform.linkCache.get(
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
 
-	return this.getModifiedLinkRanges( surfaceModel )
+	return node.getAnnotationRanges()
+		.filter( ( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name )
 		// Links to sections of disambiguation pages are deliberately specific, so ignore them
 		.filter( ( annRange ) => !annRange.annotation.getFragment() )
 		.map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?
