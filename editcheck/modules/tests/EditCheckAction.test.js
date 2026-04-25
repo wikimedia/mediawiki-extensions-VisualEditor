@@ -185,3 +185,21 @@ QUnit.test( 'equals', ( assert ) => {
 		);
 	} );
 } );
+
+QUnit.test( 'overlapsRanges', ( assert ) => {
+	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdef', { type: '/paragraph' } ] ),
+		surface = new ve.dm.Surface( doc ),
+		fragments = [ surface.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ];
+
+	const action = new mw.editcheck.EditCheckAction( { fragments, choices: [] } );
+	assert.strictEqual(
+		action.overlapsRanges( [ new ve.Range( 5, 6 ), new ve.Range( 2, 3 ) ] ),
+		true,
+		'Overlapping ranges'
+	);
+	assert.strictEqual(
+		action.overlapsRanges( [ new ve.Range( 5, 6 ), new ve.Range( 5, 7 ) ] ),
+		false,
+		'Nonoverlapping ranges'
+	);
+} );
