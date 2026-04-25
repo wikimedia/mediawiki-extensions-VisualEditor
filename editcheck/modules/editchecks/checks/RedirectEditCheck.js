@@ -18,6 +18,8 @@ mw.editcheck.RedirectEditCheck = function MWRedirectEditCheck() {
 
 OO.inheritClass( mw.editcheck.RedirectEditCheck, mw.editcheck.LinkEditCheck );
 
+OO.mixinClass( mw.editcheck.RedirectEditCheck, mw.editcheck.ContentBranchNodeCheck );
+
 /* Static properties */
 
 mw.editcheck.RedirectEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.RedirectEditCheck.super.static.defaultConfig, {
@@ -50,14 +52,17 @@ mw.editcheck.RedirectEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnota
 
 /* Methods */
 
-mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
+mw.editcheck.RedirectEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
 	const checkRedirect = ( annotation ) => ve.init.platform.linkCache.get(
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.redirect ) );
 
-	return this.getModifiedLinkRanges( surfaceModel )
+	const ranges = node.getAnnotationRanges()
 		// exclude links where the link target matches the link text
 		.filter( ( annRange ) => {
+			if ( annRange.annotation.name !== ve.dm.MWInternalLinkAnnotation.static.name ) {
+				return false;
+			}
 			const labelTitle = mw.Title.newFromText( surfaceModel.getLinearFragment( annRange.range ).getText() );
 			if ( !labelTitle ) {
 				// Label isn't a valid title, so can't be equal to the target.
@@ -68,12 +73,13 @@ mw.editcheck.RedirectEditCheck.prototype.onDocumentChange = function ( surfaceMo
 			// prefix of the label, then it's likely this is indented to produce compact
 			// wikitext, e.g. [[redirect]] or [[redirect]]s
 			return !labelTitle.getPrefixedText().startsWith( title.getPrefixedText() );
-		} )
-		.map( ( annRange ) => checkRedirect( annRange.annotation )
-			.then( ( isRedirect ) => isRedirect ?
-				this.buildActionFromLinkRange( annRange.range, surfaceModel ) : null
-			)
-		);
+		} );
+	const actionsPromises = ranges.map( ( annRange ) => checkRedirect( annRange.annotation )
+		.then( ( isRedirect ) => isRedirect ?
+			this.buildActionFromLinkRange( annRange.range, surfaceModel ) : null
+		)
+	);
+	return actionsPromises;
 };
 
 mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surface ) {
