@@ -1403,7 +1403,10 @@ ve.init.mw.DesktopArticleTarget.prototype.switchToWikitextSection = function () 
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.switchToFallbackWikitextEditor = function ( modified ) {
-	const oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	let oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	if ( oldId !== undefined ) {
+		oldId = +oldId;
+	}
 	const prefPromise = mw.libs.ve.setEditorPreference( 'wikitext' );
 
 	if ( !modified ) {

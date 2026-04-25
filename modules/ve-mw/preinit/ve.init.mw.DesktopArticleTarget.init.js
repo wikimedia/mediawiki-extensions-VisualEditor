@@ -791,6 +791,9 @@
 	// T156998: Don't trust 'oldid' query parameter, it'll be wrong if 'diff' or 'direction'
 	// is set to 'next' or 'prev'.
 	oldId = mw.config.get( 'wgRevisionId' ) || $( 'input[name=parentRevId]' ).val();
+	if ( oldId !== undefined ) {
+		oldId = +oldId;
+	}
 	if ( oldId === mw.config.get( 'wgCurRevisionId' ) || mw.config.get( 'wgEditLatestRevision' ) ) {
 		// The page may have been edited by someone else after we loaded it, setting this to "undefined"
 		// indicates that we should load the actual latest revision.
