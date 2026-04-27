@@ -70,7 +70,7 @@
 	"editcheck-tone-reject-uncertain": "Je ne sais pas comment réviser le ton.",
 	"editcheck-tone-reject-other": "Autre",
 	"editcheck-tone-thank": "Merci d’avoir réfléchi au ton !",
-	"editcheck-yearlink-title": "Corriger l'année du lien",
+	"editcheck-yearlink-title": "Corriger l’année du lien",
 	"editcheck-yearlink-description": "Ce lien mène vers une année différente de celle affichée dans le texte. Aidez à améliorer l’exactitude de l’article en faisant correspondre la date affichée et la date vers laquelle mène le lien.",
 	"editcheck-yearlink-action-use": "Utiliser $1",
 	"editcheck-action-update-link": "Corriger le lien",

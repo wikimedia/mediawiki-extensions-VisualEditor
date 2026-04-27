@@ -87,6 +87,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Características en probas",
 	"editcheck-specialeditchecks-header-default": "Verificacións predeterminadas",
 	"editcheck-specialeditchecks-header-experimental": "Verificacións experimentais",
+	"editcheck-specialeditchecks-header-unsupported": "Verificacións non compatibles",
 	"editcheck-specialeditchecks-col-title": "Título",
 	"editcheck-specialeditchecks-col-name": "Nome",
 	"editcheck-specialeditchecks-col-appearance": "Aparencia",

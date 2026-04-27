@@ -93,6 +93,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Betafuncties",
 	"editcheck-specialeditchecks-header-default": "Standaardcontroles",
 	"editcheck-specialeditchecks-header-experimental": "Experimentele controles",
+	"editcheck-specialeditchecks-header-unsupported": "Niet-ondersteunde controles",
 	"editcheck-specialeditchecks-col-title": "Titel",
 	"editcheck-specialeditchecks-col-name": "Naam",
 	"editcheck-specialeditchecks-col-appearance": "Uiterlijk",

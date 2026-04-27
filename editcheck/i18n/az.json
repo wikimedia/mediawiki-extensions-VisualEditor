@@ -88,6 +88,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Beta funksiyalar",
 	"editcheck-specialeditchecks-header-default": "Standart yoxlanışlar",
 	"editcheck-specialeditchecks-header-experimental": "Eksperimental yoxlanışlar",
+	"editcheck-specialeditchecks-header-unsupported": "Dəstəklənməyən yoxlamalar",
 	"editcheck-specialeditchecks-col-title": "Başlıq",
 	"editcheck-specialeditchecks-col-name": "Ad",
 	"editcheck-specialeditchecks-col-appearance": "Görünüş",
