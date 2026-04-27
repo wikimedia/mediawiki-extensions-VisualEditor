@@ -131,7 +131,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedActions: 1,
-			expectedTerms: [ ' ' ]
+			expectedTerms: [ 'Foo' ]
 		},
 		{
 			msg: 'minOccurrences (paragraph) without enough occurrences',
