@@ -1,4 +1,4 @@
-import EditPage from '../pageobjects/edit.page.js';
+import EditPage, { PrimaryModifier } from '../pageobjects/edit.page.js';
 import LoginPage from 'wdio-mediawiki/LoginPage';
 import * as Util from 'wdio-mediawiki/Util';
 import { Key } from 'webdriverio';
@@ -107,7 +107,7 @@ describe( 'Content Editable', () => {
 		await expect( await EditPage.commentMenu ).toBeDisplayed();
 
 		await EditPage.commentInput.setValue( 'foobar' );
-		await browser.keys( [ Key.Control, Key.Enter ] );
+		await browser.keys( [ PrimaryModifier, Key.Enter ] );
 
 		await expect( await EditPage.insertedComment ).toBeDisplayed();
 	} );

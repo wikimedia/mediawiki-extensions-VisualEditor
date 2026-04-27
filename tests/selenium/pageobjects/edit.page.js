@@ -1,4 +1,9 @@
 import Page from 'wdio-mediawiki/Page';
+import { Key } from 'webdriverio';
+
+// VE's primary shortcut modifier is Cmd on Mac and Ctrl on Linux,
+// so tests must press the matching modifier for the host OS.
+export const PrimaryModifier = process.platform === 'darwin' ? Key.Command : Key.Control;
 
 class EditPage extends Page {
 

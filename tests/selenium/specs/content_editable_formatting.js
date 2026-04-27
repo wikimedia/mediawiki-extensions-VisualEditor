@@ -1,4 +1,4 @@
-import EditPage from '../pageobjects/edit.page.js';
+import EditPage, { PrimaryModifier } from '../pageobjects/edit.page.js';
 import LoginPage from 'wdio-mediawiki/LoginPage';
 import * as Util from 'wdio-mediawiki/Util';
 import { Key } from 'webdriverio';
@@ -76,43 +76,43 @@ describe( 'Content Editable Formatting', () => {
 	} );
 
 	it( 'should change formatting to Bold', async () => {
-		await browser.keys( [ Key.Control, 'b' ] );
+		await browser.keys( [ PrimaryModifier, 'b' ] );
 
 		await expect( await EditPage.bold ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Italic', async () => {
-		await browser.keys( [ Key.Control, 'i' ] );
+		await browser.keys( [ PrimaryModifier, 'i' ] );
 
 		await expect( await EditPage.italic ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Superscript', async () => {
-		await browser.keys( [ Key.Control, '.' ] );
+		await browser.keys( [ PrimaryModifier, '.' ] );
 
 		await expect( await EditPage.superscript ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Subscript', async () => {
-		await browser.keys( [ Key.Control, ',' ] );
+		await browser.keys( [ PrimaryModifier, ',' ] );
 
 		await expect( await EditPage.subscript ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Computer code', async () => {
-		await browser.keys( [ Key.Control, Key.Shift, '6' ] );
+		await browser.keys( [ PrimaryModifier, Key.Shift, '6' ] );
 
 		await expect( await EditPage.code ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Strikethrough', async () => {
-		await browser.keys( [ Key.Control, Key.Shift, '5' ] );
+		await browser.keys( [ PrimaryModifier, Key.Shift, '5' ] );
 
 		await expect( await EditPage.strikethrough ).toBeDisplayed();
 	} );
 
 	it( 'should change formatting to Underline', async () => {
-		await browser.keys( [ Key.Control, 'u' ] );
+		await browser.keys( [ PrimaryModifier, 'u' ] );
 
 		await expect( await EditPage.underline ).toBeDisplayed();
 	} );
