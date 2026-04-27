@@ -208,7 +208,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		}
 	} else if ( converter.isForPreview() ) {
 		const modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
-		modelNode.setDocument( converter.internalList.getDocument() );
+		modelNode.setDocument( converter.getInternalList().getDocument() );
 		const viewNode = ve.ce.nodeFactory.createFromModel( modelNode );
 		// HACK: Node must be attached to check for rendering
 		viewNode.$element.appendTo( 'body' );
