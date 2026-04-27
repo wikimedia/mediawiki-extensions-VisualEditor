@@ -248,13 +248,50 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 					return true;
 				};
 
+				// Replacements with regular expressions work a bit differently,
+				// since we need access to the original pattern to perform the replacement.
+				// So we'll need to search by individual query, instead of grouping all the query terms into a set.
+				if ( matchRule.isRegExp && matchRule.mode === 'replace' ) {
+					Object.entries( matchRule.query ).forEach( ( [ pattern, replacer ] ) => {
+						const regex = new RegExp( pattern, 'gi' );
+						const finder = new ve.dm.RegExpTextFinder( regex, { wholeWord: true } );
+						const regexRanges = document.findText( finder );
+						for ( const range of regexRanges ) {
+							const tagName = this.constructor.static.name + matchRule.getSubTag( pattern );
+							if ( !isUsableRange( range, tagName ) ) {
+								continue;
+							}
+							const term = surfaceModel.getLinearFragment( range ).getText();
+							const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
+							// To get the replacement using regex, we need to pass in the original pattern
+							let replacement = term.replace( regex, replacer );
+							if ( matchRule.preserveCase ) {
+								replacement = mw.editcheck.applyCase( replacement, term, this.lang );
+							}
+							actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
+						}
+					} );
+					continue;
+				}
+
 				// Create or retrieve the TextFinder for this match rule
 				if ( !finders[ matchRule.id ] ) {
-					const finder = new ve.dm.SetTextFinder( new Set( terms ),
-						{
-							caseSensitiveString: matchRule.isCaseSensitive(),
-							wholeWord: true
-						} );
+
+					let finder = null;
+					if ( matchRule.isRegExp ) {
+						const re = new RegExp( terms.join( '|' ), 'gi' );
+						finder = new ve.dm.RegExpTextFinder( re,
+							{
+								wholeWord: true
+							}
+						);
+					} else {
+						finder = new ve.dm.SetTextFinder( new Set( terms ),
+							{
+								caseSensitiveString: matchRule.isCaseSensitive(),
+								wholeWord: true
+							} );
+					}
 					finders[ matchRule.id ] = new ve.dm.MemoizedTextFinder( finder );
 				}
 
@@ -451,6 +488,7 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
  * @param {string} [rule.inNode] Node type that a match must be inside of
  * @param {string} [rule.listener] Listener that this matchRule applies to, if not all
  * @param {boolean} [rule.preserveCase] If the replacement should match the case of the found term
+ * @param {boolean} [rule.isRegExp] If the query should be treated as a regular expression
  * @param {string} id ID of matchRule in config
  * @param {Intl.Collator} collator Collator to use for comparisons
  */
@@ -463,6 +501,7 @@ mw.editcheck.TextMatchRule = function MWTextMatchRule( rule, id, collator ) {
 	this.inNode = rule.inNode || null;
 	this.listener = rule.listener || null;
 	this.preserveCase = rule.preserveCase;
+	this.isRegExp = rule.isRegExp;
 
 	// If the selection is meant to be expanded, then only one action should be created per expanded fragment range
 	if ( this.expand && !this.config.minOccurrences ) {

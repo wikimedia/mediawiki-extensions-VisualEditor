@@ -81,6 +81,30 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			}
 		},
 		{
+			msg: 'Text replacement preserves case',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					mode: 'replace',
+					preserveCase: true,
+					query: {
+						Foo: 'Bar'
+					}
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'FOO',
+				{ type: '/paragraph' }
+			],
+			expectedActions: 1,
+			expectedTerms: [ 'FOO' ],
+			expectedData: ( data ) => {
+				data.splice( 1, 3, ...'BAR' );
+			}
+		},
+		{
 			msg: 'Whole word only (substring ignored)',
 			matchRules: {
 				bad: {
@@ -150,6 +174,66 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedActions: 0
+		},
+		{
+			msg: 'Simple regular expression',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					query: 'foo.*bar',
+					isRegExp: true
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'foo some content bar',
+				{ type: '/paragraph' }
+			],
+			expectedTerms: [ 'foo some content bar' ],
+			expectedActions: 1
+		},
+		{
+			msg: 'Multiple regular expressions',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					query: [ '[fl]oo', '[bc]ar' ],
+					isRegExp: true
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'foo bar',
+				{ type: '/paragraph' }
+			],
+			expectedTerms: [ 'foo', 'bar' ],
+			expectedActions: 2
+		},
+		{
+			msg: 'Regex with replacements',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					query: {
+						'favour(ed|ite|ing)': 'favor$1'
+					},
+					mode: 'replace',
+					isRegExp: true
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'favourite',
+				{ type: '/paragraph' }
+			],
+			expectedTerms: [ 'favourite' ],
+			expectedActions: 1,
+			expectedData: ( data ) => {
+				data.splice( 5, 1 );
+			}
 		},
 		{
 			msg: 'Dismissed ranges ignored',
