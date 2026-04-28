@@ -49,11 +49,18 @@ mw.editcheck.ContentBranchNodeCheck.prototype.onDocumentChange = function ( surf
 		}
 		// Perform simple check on the whole node and cache the result
 		// The purpose of this approach is for checkNode to be simple to write and simple to cache
-		const nodeActions = doc.getOrInsertCachedData(
+		let nodeActions = doc.getOrInsertCachedData(
 			node,
 			( () => this.checkNode( node, surfaceModel ) ),
 			cacheKey
-		).map( ( actionOrPromise ) => Promise.resolve( actionOrPromise ).then( ( action ) => {
+		);
+		if ( !Array.isArray( nodeActions ) ) {
+			nodeActions = [ nodeActions ];
+		}
+		nodeActions.map( ( actionOrPromise ) => Promise.resolve( actionOrPromise ).then( ( action ) => {
+			if ( !action ) {
+				return null;
+			}
 			if ( action.isDismissed() ) {
 				return null;
 			}
