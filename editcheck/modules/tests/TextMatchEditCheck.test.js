@@ -3,11 +3,11 @@ QUnit.module( 'mw.editcheck.TextMatchEditCheck', ve.test.utils.newEditCheckEnvir
 /**
  * @ignore
  */
-function resetStaticState( matchItems ) {
-	mw.editcheck.TextMatchEditCheck.static.matchItems = matchItems;
-	mw.editcheck.TextMatchEditCheck.static.matchItemsPromise = null;
+function resetStaticState( matchRules ) {
+	mw.editcheck.TextMatchEditCheck.static.matchRules = matchRules;
+	mw.editcheck.TextMatchEditCheck.static.matchRulesPromise = null;
 	mw.editcheck.TextMatchEditCheck.static.matchCache = {
-		matchItems: null,
+		matchRules: null,
 		memoizedFinders: {}
 	};
 }
@@ -16,7 +16,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 	const cases = [
 		{
 			msg: 'Basic match',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -33,7 +33,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Basic replacement',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -56,7 +56,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Text replacement preserves formatting',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -82,7 +82,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Whole word only (substring ignored)',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -98,7 +98,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Case sensitive',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -116,7 +116,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'minOccurrences (paragraph) with enough occurrences',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -135,7 +135,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'minOccurrences (paragraph) without enough occurrences',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -154,7 +154,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		{
 			msg: 'Dismissed ranges ignored',
 			controller: { taggedFragments: {}, taggedIds: {} },
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -172,7 +172,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'inNode filters (outside heading ignored)',
-			matchItems: {
+			matchRules: {
 				'standard-headings': {
 					title: 'Non-standard heading',
 					message: 'Use standard headings',
@@ -191,7 +191,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'inNode filters (inside heading matches)',
-			matchItems: {
+			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
@@ -215,7 +215,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 	];
 
 	function runCase( caseItem ) {
-		resetStaticState( caseItem.matchItems );
+		resetStaticState( caseItem.matchRules );
 
 		const controller = caseItem.controller || ve.test.utils.EditCheck.dummyController;
 		const doc = ve.dm.example.createExampleDocumentFromData( [

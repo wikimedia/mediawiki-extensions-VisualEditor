@@ -18,7 +18,7 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	this.collator = new Intl.Collator( this.lang, { sensitivity: this.sensitivity } );
 
 	// Initialize lookup maps
-	this.matchItems = [];
+	this.matchRules = [];
 
 };
 
@@ -35,9 +35,9 @@ mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
 const replaceTextLengthLimit = 25;
 
 /**
- * The configs of TextMatchEditCheck take priority over individual matchItem configs.
+ * The configs of TextMatchEditCheck take priority over individual matchRule configs.
  * So we make TextMatch’s defaults nonrestrictive,
- * and let the finer limitations be handled by individual matchItems.
+ * and let the finer limitations be handled by individual matchRules.
  */
 mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.TextMatchEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
@@ -64,59 +64,59 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 ];
 
 /**
- * Object into which default matchItem configs can be placed
+ * Object into which default matchRule configs can be placed
  *
  * This is largely a place for scripts to interact with the check
  *
  * @type {Object}
  */
-mw.editcheck.TextMatchEditCheck.static.matchItems = {};
+mw.editcheck.TextMatchEditCheck.static.matchRules = {};
 
 /**
- * Promise which holds the loading and processing of matchItems
+ * Promise which holds the loading and processing of matchRules
  *
  * @type {Promise<Object>}
  */
-mw.editcheck.TextMatchEditCheck.static.matchItemsPromise = null;
+mw.editcheck.TextMatchEditCheck.static.matchRulesPromise = null;
 
 /**
- * Cache containing fully processed matchItems will all imports,
+ * Cache containing fully processed matchRules will all imports,
  * as well as any TextFinders created for them
  *
  * @type {Object}
  */
 mw.editcheck.TextMatchEditCheck.static.matchCache = {
-	rawMatchItems: null,
+	rawMatchRules: null,
 	memoizedFinders: {}
 };
 
 /**
- * Fetch corresponding MW file for any matchItems with the "import" property
- * and leave all other matchItems unchanged
+ * Fetch corresponding MW file for any matchRules with the "import" property
+ * and leave all other matchRules unchanged
  *
- * @param {Object} rawMatchItems map of matchItem IDs to raw config objects
- * @return {Promise<Object>} Promise which resolves to map of processed matchItems
+ * @param {Object} rawMatchRules map of matchRule IDs to raw config objects
+ * @return {Promise<Object>} Promise which resolves to map of processed matchRules
  */
-mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchItems ) {
+mw.editcheck.TextMatchEditCheck.static.processMatchRules = function ( rawMatchRules ) {
 	const processed = {};
 	const pageMap = {};
 	const filenames = [];
 
-	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
-		if ( item.import ) {
-			const filename = item.import;
+	Object.entries( rawMatchRules ).forEach( ( [ id, rule ] ) => {
+		if ( rule.import ) {
+			const filename = rule.import;
 			if ( !filename.startsWith( 'MediaWiki:' ) ) {
-				mw.log.warn( `Skipped import for matchItem id:${ id } (${ filename } must be in mediawiki namespace.)` );
+				mw.log.warn( `Skipped import for matchRule id:${ id } (${ filename } must be in mediawiki namespace.)` );
 				return;
 			}
 			if ( !filename.endsWith( '.json' ) ) {
-				mw.log.warn( `Skipped import for matchItem id:${ id } (${ filename } must be a json file.)` );
+				mw.log.warn( `Skipped import for matchRule id:${ id } (${ filename } must be a json file.)` );
 				return;
 			}
-			filenames.push( item.import );
-			pageMap[ id ] = item.import;
+			filenames.push( rule.import );
+			pageMap[ id ] = rule.import;
 		} else {
-			processed[ id ] = item;
+			processed[ id ] = rule;
 		}
 	} );
 	if ( filenames.length === 0 ) {
@@ -142,59 +142,60 @@ mw.editcheck.TextMatchEditCheck.static.processMatchItems = function ( rawMatchIt
 };
 
 /**
- * Ensure matchItems and any imported configs are loaded exactly once per edit session
+ * Ensure matchRules and any imported configs are loaded exactly once per edit session
  *
- * @return {Promise<Object>} Promise which resolves to processed matchItems
+ * @return {Promise<Object>} Promise which resolves to processed matchRules
  */
-mw.editcheck.TextMatchEditCheck.static.ensureMatchItemsLoaded = function () {
+mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded = function () {
 	// If we've already started loading config, then every caller waits on same promise.
-	if ( this.matchItemsPromise ) {
-		return this.matchItemsPromise;
+	if ( this.matchRulesPromise ) {
+		return this.matchRulesPromise;
 	}
-	const rawMatchItems = Object.assign(
+	const rawMatchRules = Object.assign(
 		{},
-		mw.editcheck.TextMatchEditCheck.static.matchItems || {},
-		ve.getProp( mw.editcheck.config, 'textMatch', 'matchItems' ) || {}
+		mw.editcheck.TextMatchEditCheck.static.matchRules || {},
+		// In T424678 we renamed matchItems to matchRules, but allow 'matchItems' for backwards compatibility temporarily
+		ve.getProp( mw.editcheck.config, 'textMatch', 'matchRules' ) || ve.getProp( mw.editcheck.config, 'textMatch', 'matchItems' ) || {}
 	);
 
 	// Begin async processing and cache promise
-	this.matchItemsPromise = this.processMatchItems( rawMatchItems )
+	this.matchRulesPromise = this.processMatchRules( rawMatchRules )
 		.then( ( processed ) => {
 			const cache = {
-				rawMatchItems: processed,
+				rawMatchRules: processed,
 				memoizedFinders: {}
 			};
-			// Reset the cache when we get new matchItems
+			// Reset the cache when we get new matchRules
 			this.matchCache = cache;
 			return cache;
 		} )
 		.catch( ( err ) => {
-			mw.log.error( 'Failed to process matchItems', err );
-			this.matchItemsPromise = null;
+			mw.log.error( 'Failed to process matchRules', err );
+			this.matchRulesPromise = null;
 		} );
-	return this.matchItemsPromise;
+	return this.matchRulesPromise;
 };
 
 /* Methods */
 
 /**
- * Create a matchItem instance for each matchItem
- * NOTE: rawMatchItems should never be anything but this.constructor.static.matchCache.rawMatchItems
+ * Create a matchRule instance for each matchRule
+ * NOTE: rawMatchRules should never be anything but this.constructor.static.matchCache.rawMatchRules
  *
- * @param {Object} rawMatchItems all matchitem objects from config
+ * @param {Object} rawMatchRules all matchRule objects from config
  */
-mw.editcheck.TextMatchEditCheck.prototype.instantiateMatchItems = function ( rawMatchItems ) {
-	// Create matchItem instances
-	Object.entries( rawMatchItems ).forEach( ( [ id, item ] ) => {
+mw.editcheck.TextMatchEditCheck.prototype.instantiateMatchRules = function ( rawMatchRules ) {
+	// Create matchRule instances
+	Object.entries( rawMatchRules ).forEach( ( [ id, rule ] ) => {
 		const isValidMode = this.constructor.static.choices.some(
-			( choice ) => choice.modes.includes( item.mode )
+			( choice ) => choice.modes.includes( rule.mode )
 		);
-		item.mode = isValidMode ? item.mode : '';
-		if ( !item.expand && ve.getProp( item, 'config', 'minOccurrences' ) ) {
-			mw.log.warn( 'MatchItem \'' + item.title + '\' sets minOccurrences but is missing expand value.' );
+		rule.mode = isValidMode ? rule.mode : '';
+		if ( !rule.expand && ve.getProp( rule, 'config', 'minOccurrences' ) ) {
+			mw.log.warn( 'MatchRule \'' + rule.title + '\' sets minOccurrences but is missing expand value.' );
 		}
-		const textMatchItem = new mw.editcheck.TextMatchItem( item, id, this.collator );
-		this.matchItems.push( textMatchItem );
+		const textMatchRule = new mw.editcheck.TextMatchRule( rule, id, this.collator );
+		this.matchRules.push( textMatchRule );
 	} );
 };
 
@@ -204,20 +205,20 @@ mw.editcheck.TextMatchEditCheck.prototype.instantiateMatchItems = function ( raw
  * @return {Promise<mw.editcheck.TextMatchEditCheckAction[]>}
  */
 mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceModel, listener ) {
-	// wait here until matchitems are guaraunteed to exist!
-	return this.constructor.static.ensureMatchItemsLoaded()
+	// wait here until matchRules are guaraunteed to exist!
+	return this.constructor.static.ensureMatchRulesLoaded()
 		.then( () => {
-			if ( !this.matchItems.length ) {
-				this.instantiateMatchItems( this.constructor.static.matchCache.rawMatchItems );
+			if ( !this.matchRules.length ) {
+				this.instantiateMatchRules( this.constructor.static.matchCache.rawMatchRules );
 			}
 			const finders = this.constructor.static.matchCache.memoizedFinders;
 			const actions = [];
 			const document = surfaceModel.getDocument();
 			const modified = this.getModifiedContentRanges( document );
 
-			for ( const matchItem of this.matchItems ) {
+			for ( const matchRule of this.matchRules ) {
 
-				const terms = Object.keys( matchItem.query );
+				const terms = Object.keys( matchRule.query );
 
 				// Check if action can be created for this range
 				const isUsableRange = ( range, tagName ) => {
@@ -230,47 +231,47 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 					if ( this.isDismissedRange( range, tagName ) ) {
 						return false;
 					}
-					if ( matchItem.listener && matchItem.listener !== listener ) {
+					if ( matchRule.listener && matchRule.listener !== listener ) {
 						return false;
 					}
-					if ( matchItem.inNode && !matchItem.isRangeInNode( range, surfaceModel ) ) {
+					if ( matchRule.inNode && !matchRule.isRangeInNode( range, surfaceModel ) ) {
 						return false;
 					}
 					// Above we checked for the overall textmatch config, but now
 					// we need to know if this rule is more-specific:
 					if ( !(
-						this.constructor.static.doesConfigMatch( matchItem.config, surfaceModel.documentModel, this.includeSuggestions ) &&
-						this.isRangeValid( range, surfaceModel.documentModel, matchItem.config )
+						this.constructor.static.doesConfigMatch( matchRule.config, surfaceModel.documentModel, this.includeSuggestions ) &&
+						this.isRangeValid( range, surfaceModel.documentModel, matchRule.config )
 					) ) {
 						return false;
 					}
 					return true;
 				};
 
-				// Create or retrieve the TextFinder for this match item
-				if ( !finders[ matchItem.id ] ) {
+				// Create or retrieve the TextFinder for this match rule
+				if ( !finders[ matchRule.id ] ) {
 					const finder = new ve.dm.SetTextFinder( new Set( terms ),
 						{
-							caseSensitiveString: matchItem.isCaseSensitive(),
+							caseSensitiveString: matchRule.isCaseSensitive(),
 							wholeWord: true
 						} );
-					finders[ matchItem.id ] = new ve.dm.MemoizedTextFinder( finder );
+					finders[ matchRule.id ] = new ve.dm.MemoizedTextFinder( finder );
 				}
 
-				// Find all ranges that match this item's search terms
-				const ranges = document.findText( finders[ matchItem.id ] );
+				// Find all ranges that match this rule's search terms
+				const ranges = document.findText( finders[ matchRule.id ] );
 				const fragMap = new Map();
 
 				for ( const range of ranges ) {
 					const term = surfaceModel.getLinearFragment( range ).getText();
-					const tagName = this.constructor.static.name + matchItem.getSubTag( term );
+					const tagName = this.constructor.static.name + matchRule.getSubTag( term );
 					if ( !isUsableRange( range, tagName ) ) {
 						continue;
 					}
 
-					const fragment = matchItem.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
-					const min = matchItem.config.minOccurrences;
-					// If this match item requires a certain number of occurrences, start keeping track of those
+					const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
+					const min = matchRule.config.minOccurrences;
+					// If this match rule requires a certain number of occurrences, start keeping track of those
 					if ( min ) {
 						const fragRange = fragment.getSelection().getRange();
 						const key = `${ fragRange.start }-${ fragRange.end }`;
@@ -282,11 +283,11 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 							continue;
 						}
 					}
-					let replacement = matchItem.getReplacement( term );
-					if ( matchItem.preserveCase ) {
+					let replacement = matchRule.getReplacement( term );
+					if ( matchRule.preserveCase ) {
 						replacement = mw.editcheck.applyCase( replacement, term, this.lang );
 					}
-					actions.push( this.buildAction( matchItem, fragment, term, replacement, tagName ) );
+					actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
 				}
 			}
 			return actions;
@@ -296,17 +297,17 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 /**
  * Build a TextMatchEditCheckAction
  *
- * @param {mw.editcheck.TextMatchEditCheck} matchItem
+ * @param {mw.editcheck.TextMatchEditCheck} matchRule
  * @param {ve.dm.LinearFragment} fragment fragment that the match covers, after optional expansion
  * @param {string} term individual term that triggered the match, before optional expansion
  * @param {string} replacement word or phrase to use as the replacement, if action allows
- * @param {string} tagName unique tag name for this matchItem+term pair
+ * @param {string} tagName unique tag name for this matchRule+term pair
  * @return {mw.editcheck.TextMatchEditCheckAction}
  */
-mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchItem, fragment, term, replacement, tagName ) {
+mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchRule, fragment, term, replacement, tagName ) {
 	let prompt;
 	const foundText = fragment.getText();
-	if ( matchItem.mode === 'replace' ) {
+	if ( matchRule.mode === 'replace' ) {
 		if (
 			replacement &&
 			foundText.length <= replaceTextLengthLimit &&
@@ -320,11 +321,11 @@ mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchItem, fr
 		prompt,
 		term,
 		replacement,
-		title: matchItem.title,
-		message: matchItem.message,
+		title: matchRule.title,
+		message: matchRule.message,
 		check: this,
-		mode: matchItem.mode,
-		matchItemId: matchItem.id,
+		mode: matchRule.mode,
+		matchRuleId: matchRule.id,
 		tagName
 	} );
 };
@@ -361,24 +362,24 @@ mw.editcheck.editCheckFactory.register( mw.editcheck.TextMatchEditCheck );
 /**
  * TextMatchEditCheckAction
  *
- * Subclass of EditCheckAction to include information about the matchItem associated with this action
+ * Subclass of EditCheckAction to include information about the matchRule associated with this action
  *
  * @class
  * @extends mw.editcheck.EditCheckAction
  *
  * @constructor
  * @param {Object} config Configuration options
- * @param {string} config.matchItemId ID of the matchitem that triggered the match
+ * @param {string} config.matchRuleId ID of the matchRule that triggered the match
  * @param {string} config.term Term that prompted the action
  * @param {string} config.message Message for the action dialog
  * @param {string} config.replacement Word or phrase to use as the replacement, if action allows
- * @param {string} config.tagName Unique tag name for this matchItem+term pair
+ * @param {string} config.tagName Unique tag name for this matchRule+term pair
  */
 mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( config ) {
 	mw.editcheck.TextMatchEditCheckAction.super.call( this, config );
-	this.matchItemId = config.matchItemId;
+	this.matchRuleId = config.matchRuleId;
 	this.term = config.term;
-	const msgkey = `editcheck-textmatch-${ config.matchItemId }-description`;
+	const msgkey = `editcheck-textmatch-${ config.matchRuleId }-description`;
 	ve.init.platform.addMessages( { [ msgkey ]: config.message } );
 	this.message = ve.deferJQueryMsg( msgkey );
 	this.replacement = config.replacement;
@@ -411,7 +412,7 @@ mw.editcheck.TextMatchEditCheckAction.prototype.equals = function ( other, ...ar
 	if ( !this.constructor.super.prototype.equals.call( this, other, ...args ) ) {
 		return false;
 	}
-	return this.matchItemId === other.matchItemId;
+	return this.matchRuleId === other.matchRuleId;
 };
 
 /**
@@ -429,39 +430,39 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getTagName = function () {
  * @return {string} Check type name
  */
 mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
-	return this.check.getName() + '-' + this.matchItemId;
+	return this.check.getName() + '-' + this.matchRuleId;
 };
 
 /**
- * TextMatchItem
+ * TextMatchRule
  *
- * Class to represent a single matchItem for TextMatchEditCheck
+ * Class to represent a single matchRule for TextMatchEditCheck
  *
  * @class
  *
  * @constructor
- * @param {Object} item Match item
- * @param {string} item.title Title of the match item, used in the action prompt
- * @param {string} item.message Message to show in the action description
- * @param {Object.<string,string>|string[]|string} item.query Terms to match, string, array or object mapping terms to their replacements.
- * @param {string} [item.mode] 'info', 'replace', or 'delete', to determine the type of action to show for this matchItem.
- * @param {Object} [item.config] Configuration options.
- * @param {string} [item.expand] Expansions mode 'sentence', 'paragraph', 'word', 'siblings', or 'parent'
- * @param {string} [item.inNode] Node type that a match must be inside of
- * @param {string} [item.listener] Listener that this matchItem applies to, if not all
- * @param {boolean} [item.preserveCase] If the replacement should match the case of the found term
- * @param {string} id ID of matchitem in config
+ * @param {Object} rule Match rule
+ * @param {string} rule.title Title of the match rule, used in the action prompt
+ * @param {string} rule.message Message to show in the action description
+ * @param {Object.<string,string>|string[]|string} rule.query Terms to match, string, array or object mapping terms to their replacements.
+ * @param {string} [rule.mode] 'info', 'replace', or 'delete', to determine the type of action to show for this matchRule.
+ * @param {Object} [rule.config] Configuration options.
+ * @param {string} [rule.expand] Expansions mode 'sentence', 'paragraph', 'word', 'siblings', or 'parent'
+ * @param {string} [rule.inNode] Node type that a match must be inside of
+ * @param {string} [rule.listener] Listener that this matchRule applies to, if not all
+ * @param {boolean} [rule.preserveCase] If the replacement should match the case of the found term
+ * @param {string} id ID of matchRule in config
  * @param {Intl.Collator} collator Collator to use for comparisons
  */
-mw.editcheck.TextMatchItem = function MWTextMatchItem( item, id, collator ) {
-	this.title = item.title;
-	this.mode = item.mode || '';
-	this.message = item.message;
-	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, item.config );
-	this.expand = item.expand;
-	this.inNode = item.inNode || null;
-	this.listener = item.listener || null;
-	this.preserveCase = item.preserveCase;
+mw.editcheck.TextMatchRule = function MWTextMatchRule( rule, id, collator ) {
+	this.title = rule.title;
+	this.mode = rule.mode || '';
+	this.message = rule.message;
+	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, rule.config );
+	this.expand = rule.expand;
+	this.inNode = rule.inNode || null;
+	this.listener = rule.listener || null;
+	this.preserveCase = rule.preserveCase;
 
 	// If the selection is meant to be expanded, then only one action should be created per expanded fragment range
 	if ( this.expand && !this.config.minOccurrences ) {
@@ -472,16 +473,16 @@ mw.editcheck.TextMatchItem = function MWTextMatchItem( item, id, collator ) {
 	this.collator = collator;
 
 	// Normalize queries to allow support for both objects and arrays
-	this.query = this.normalizeQuery( item.query );
+	this.query = this.normalizeQuery( rule.query );
 };
 
 /* Inheritance */
 
-OO.initClass( mw.editcheck.TextMatchItem );
+OO.initClass( mw.editcheck.TextMatchRule );
 
 /* Static properties */
 
-mw.editcheck.TextMatchItem.static.defaultConfig = {
+mw.editcheck.TextMatchRule.static.defaultConfig = {
 	showAsCheck: true,
 	showAsSuggestion: true
 };
@@ -495,7 +496,7 @@ mw.editcheck.TextMatchItem.static.defaultConfig = {
  * @param {Object.<string,string>|string[]|string} query
  * @return {Object.<string,string>} Dictionary of each term and its replacement
  */
-mw.editcheck.TextMatchItem.prototype.normalizeQuery = function ( query ) {
+mw.editcheck.TextMatchRule.prototype.normalizeQuery = function ( query ) {
 	if ( typeof query === 'string' ) {
 		query = [ query ];
 	}
@@ -510,9 +511,9 @@ mw.editcheck.TextMatchItem.prototype.normalizeQuery = function ( query ) {
 };
 
 /**
- * @return {boolean} if this matchItem is configured to be case sensitive
+ * @return {boolean} if this matchRule is configured to be case sensitive
  */
-mw.editcheck.TextMatchItem.prototype.isCaseSensitive = function () {
+mw.editcheck.TextMatchRule.prototype.isCaseSensitive = function () {
 	return this.config && this.config.caseSensitive;
 };
 
@@ -523,7 +524,7 @@ mw.editcheck.TextMatchItem.prototype.isCaseSensitive = function () {
  * @param {ve.dm.Surface} surfaceModel
  * @return {boolean}
  */
-mw.editcheck.TextMatchItem.prototype.isRangeInNode = function ( range, surfaceModel ) {
+mw.editcheck.TextMatchRule.prototype.isRangeInNode = function ( range, surfaceModel ) {
 	if ( !this.inNode ) {
 		return true;
 	}
@@ -534,12 +535,12 @@ mw.editcheck.TextMatchItem.prototype.isRangeInNode = function ( range, surfaceMo
 
 /**
  * Return the corresponding replacement word,
- * as defined for the given word in this matchItem's query
+ * as defined for the given word in this matchRule's query
  *
  * @param {string} term to get replacement for
  * @return {string} replacement term
  */
-mw.editcheck.TextMatchItem.prototype.getReplacement = function ( term ) {
+mw.editcheck.TextMatchRule.prototype.getReplacement = function ( term ) {
 	if ( this.isCaseSensitive() ) {
 		return this.query[ term ];
 	}
@@ -550,12 +551,12 @@ mw.editcheck.TextMatchItem.prototype.getReplacement = function ( term ) {
 };
 
 /**
- * Expand a fragment given the match item's config
+ * Expand a fragment given the match rule's config
  *
  * @param {ve.dm.SurfaceFragment} fragment
  * @return {ve.dm.SurfaceFragment} Expanded fragment
  */
-mw.editcheck.TextMatchItem.prototype.getExpandedFragment = function ( fragment ) {
+mw.editcheck.TextMatchRule.prototype.getExpandedFragment = function ( fragment ) {
 	switch ( this.expand ) {
 		case 'sentence':
 			// TODO: implement once unicodejs support is added
@@ -575,20 +576,20 @@ mw.editcheck.TextMatchItem.prototype.getExpandedFragment = function ( fragment )
 };
 
 /**
- * Get a unique subtag for this matchitem-term pair.
+ * Get a unique subtag for this matchRule-term pair.
  * Builds the subtag from:
- * - the index of the matchItem when created
- * - and, optionally, the index of the term in the list of keys from the matchItem's query
+ * - the index of the matchRule when created
+ * - and, optionally, the index of the term in the list of keys from the matchRule's query
  *
  * @param {string} term
  * @return {string} A subtag in the format '-{matchIndex}-{termIndex}'
  */
-mw.editcheck.TextMatchItem.prototype.getSubTag = function ( term ) {
+mw.editcheck.TextMatchRule.prototype.getSubTag = function ( term ) {
 	const queries = Object.keys( this.query );
 	let termIndex;
 	if ( this.expand ) {
 		// This operates under the assumption that, if the expand property is set,
-		// there can only be one action from this matchitem for any given fragment.
+		// there can only be one action from this matchRule for any given fragment.
 		return `-${ this.id }`;
 	}
 	if ( this.config.caseSensitive ) {
