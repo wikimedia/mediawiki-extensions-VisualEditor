@@ -91,6 +91,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "베타 기능",
 	"editcheck-specialeditchecks-header-default": "기본 검사",
 	"editcheck-specialeditchecks-header-experimental": "실험 기능 검사",
+	"editcheck-specialeditchecks-header-unsupported": "지원되지 않는 검사",
 	"editcheck-specialeditchecks-col-title": "제목",
 	"editcheck-specialeditchecks-col-name": "이름",
 	"editcheck-specialeditchecks-col-appearance": "보이기",
