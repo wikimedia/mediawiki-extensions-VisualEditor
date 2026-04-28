@@ -46,6 +46,13 @@ QUnit.module( 'collapseToMinimalPaths', () => {
 		);
 	} );
 
+	QUnit.test( 'does not descend below `query`', ( assert ) => {
+		assert.deepEqual(
+			collapseToMinimalPaths( [ 'textMatch/matchRules/foo/query/regex1', 'textMatch/matchRules/foo/query/regex2' ] ),
+			[ 'textMatch/matchRules/foo/query' ]
+		);
+	} );
+
 	QUnit.test( 'deduplicates identical paths', ( assert ) => {
 		assert.deepEqual( collapseToMinimalPaths( [ 'foo/bar', 'foo/bar' ] ), [ 'foo/bar' ] );
 	} );

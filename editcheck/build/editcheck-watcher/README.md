@@ -63,7 +63,7 @@ toolforge jobs list
 ### View logs
 
 ```bash
-toolforge jobs logs editcheckwatcher -f
+tail editcheckwatcher.err -f
 ```
 
 ### Stop service
@@ -88,6 +88,9 @@ If dependencies changed:
 
 ```bash
 toolforge webservice node20 shell
+```
+
+```bash
 cd $HOME/VisualEditor/editcheck/build/editcheck-watcher/
 npm install --omit=dev
 exit

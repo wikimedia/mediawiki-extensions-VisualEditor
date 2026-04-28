@@ -24,12 +24,20 @@ export async function fetchRevisionContent( serverUrl, revId, fetchFn = fetch ) 
 }
 
 export function collapseToMinimalPaths( rawPaths ) {
-	const normalize = ( p ) => p
-		.replace( /\[\]/g, '' )
-		.split( '/' )
-		// Ignore array indices
-		.filter( ( seg ) => seg !== '' && !/^\d+$/.test( seg ) )
-		.join( '/' );
+	// Don't iterate through arrays or `query` objects (TextMatch). Just mark them as edited.
+	const normalize = ( p ) => {
+		const parts = [];
+		for ( const seg of p.replace( /\[\]/g, '' ).split( '/' ) ) {
+			if ( seg === '' || /^\d+$/.test( seg ) ) {
+				continue;
+			}
+			parts.push( seg );
+			if ( seg === 'query' ) {
+				break;
+			}
+		}
+		return parts.join( '/' );
+	};
 	const paths = [ ...new Set( rawPaths.map( normalize ) ) ];
 	// Shorter paths first so we keep the shallowest unique prefixes
 	paths.sort( ( a, b ) => a.split( '/' ).length - b.split( '/' ).length || a.localeCompare( b ) );
@@ -103,15 +111,27 @@ export function formatJsonDiff( oldJson, newJson ) {
 	removed = [ ...removedSet ];
 	edited = [ ...editedSet ];
 
+	const formatKeyList = ( keys, label ) => {
+		const labelItem = '  - *' + label + ':*';
+		if ( keys.length === 1 ) {
+			return [ `${ labelItem } \`${ keys[ 0 ] }\`` ];
+		} else {
+			return [
+				labelItem,
+				...keys.map( ( k ) => `    - \`${ k }\`` )
+			];
+		}
+	};
+
 	const lines = [];
 	if ( added.length ) {
-		lines.push( `  - *Added:* ${ added.map( ( k ) => `\`${ k }\`` ).join( ', ' ) }` );
+		lines.push( ...formatKeyList( added, 'Added' ) );
 	}
 	if ( removed.length ) {
-		lines.push( `  - *Removed:* ${ removed.map( ( k ) => `\`${ k }\`` ).join( ', ' ) }` );
+		lines.push( ...formatKeyList( removed, 'Removed' ) );
 	}
 	if ( edited.length ) {
-		lines.push( `  - *Edited:* ${ edited.map( ( k ) => `\`${ k }\`` ).join( ', ' ) }` );
+		lines.push( ...formatKeyList( edited, 'Edited' ) );
 	}
 
 	return lines.length ? '\n' + lines.join( '\n' ) : '';
