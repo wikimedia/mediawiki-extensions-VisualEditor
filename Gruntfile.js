@@ -65,13 +65,13 @@ module.exports = function ( grunt ) {
 			},
 			src: [
 				'**/*.{js,json,less,css,txt,php,md,sh}',
-				'!package-lock.json',
+				'!**/package-lock.json',
 				'!build/typos.json',
 				'!**/i18n/**/*.json',
 				'**/i18n/**/en.json',
 				'**/i18n/**/qqq.json',
 				'!lib/**',
-				'!{docs,node_modules,vendor}/**',
+				'!**/{docs,node_modules,vendor}/**',
 				'!.git/**'
 			]
 		},

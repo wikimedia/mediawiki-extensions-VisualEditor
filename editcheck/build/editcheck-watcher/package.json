@@ -1,0 +1,22 @@
+{
+	"name": "editcheck-watcher",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"test": "eslint ."
+	},
+	"type": "module",
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"eventsource": "4.1.0",
+		"node-fetch": "3.3.2"
+	},
+	"devDependencies": {
+		"eslint": "^8.57.1",
+		"eslint-config-wikimedia": "0.32.3"
+	}
+}

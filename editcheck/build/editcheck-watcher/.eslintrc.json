@@ -1,0 +1,12 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/server"
+	],
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"rules": {
+		"n/no-missing-import": "off"
+	}
+}
