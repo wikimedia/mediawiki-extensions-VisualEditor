@@ -1,4 +1,8 @@
-QUnit.module( 'mw.editcheck.DuplicateLinkEditCheck', ve.test.utils.newEditCheckEnvironment() );
+QUnit.module( 'mw.editcheck.DuplicateLinkEditCheck', ve.test.utils.newEditCheckEnvironment( {
+	config: {
+		wgRelevantPageName: 'Test_page'
+	}
+} ) );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
 	const link = ( label, title ) => ve.dm.example.annotateText(
@@ -9,7 +13,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 	const cases = [
 		{
 			msg: 'Two identical links in separate paragraphs (paragraph scope)',
-			scope: 'paragraph',
+			config: {
+				scope: 'paragraph'
+			},
 			data: [
 				{ type: 'paragraph' },
 				...link( 'alpha', 'Foo' ),
@@ -22,7 +28,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Two identical links in separate paragraphs (section scope)',
-			scope: 'section',
+			config: {
+				scope: 'section'
+			},
 			data: [
 				{ type: 'paragraph' },
 				...link( 'alpha', 'Foo' ),
@@ -36,8 +44,44 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			expectedHighlights: 2
 		},
 		{
+			msg: 'Fragment self links are ignored when ignoreFragmentSelfLinks is set (T422190)',
+			config: {
+				scope: 'section',
+				ignoreFragmentSelfLinks: true
+			},
+			data: [
+				{ type: 'paragraph' },
+				...link( 'alpha', 'Test page#Foo' ),
+				{ type: '/paragraph' },
+				{ type: 'paragraph' },
+				...link( 'beta', 'Test page#Foo' ),
+				{ type: '/paragraph' }
+			],
+			expectedActions: 0
+		},
+		{
+			msg: 'Self links are detected when ignoreFragmentSelfLinks is set',
+			config: {
+				scope: 'section',
+				ignoreFragmentSelfLinks: true
+			},
+			data: [
+				{ type: 'paragraph' },
+				...link( 'alpha', 'Test page' ),
+				{ type: '/paragraph' },
+				{ type: 'paragraph' },
+				...link( 'beta', 'Test page' ),
+				{ type: '/paragraph' }
+			],
+			expectedActions: 1,
+			expectedModes: [ '' ],
+			expectedHighlights: 2
+		},
+		{
 			msg: 'Two identical links in the same paragraph (paragraph scope)',
-			scope: 'paragraph',
+			config: {
+				scope: 'paragraph'
+			},
 			data: [
 				{ type: 'paragraph' },
 				...link( 'alpha', 'Foo' ),
@@ -51,7 +95,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Adjacent identical links separated by whitespace',
-			scope: 'paragraph',
+			config: {
+				scope: 'paragraph'
+			},
 			data: [
 				{ type: 'paragraph' },
 				...link( 'alpha', 'Foo' ),
@@ -65,7 +111,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Four identical links in the same paragraph (paragraph scope)',
-			scope: 'paragraph',
+			config: {
+				scope: 'paragraph'
+			},
 			data: [
 				{ type: 'paragraph' },
 				...link( 'alpha', 'Foo' ),
@@ -91,7 +139,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 		const surface = new ve.dm.Surface( doc );
 
-		const check = new mw.editcheck.DuplicateLinkEditCheck( ve.test.utils.EditCheck.dummyController, { scope: caseItem.scope }, true );
+		const check = new mw.editcheck.DuplicateLinkEditCheck( ve.test.utils.EditCheck.dummyController, caseItem.config, true );
 		const actions = check.onDocumentChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );

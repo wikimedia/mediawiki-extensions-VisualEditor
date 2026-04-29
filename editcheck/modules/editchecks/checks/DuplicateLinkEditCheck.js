@@ -23,7 +23,8 @@ OO.inheritClass( mw.editcheck.DuplicateLinkEditCheck, mw.editcheck.LinkEditCheck
 
 mw.editcheck.DuplicateLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.DuplicateLinkEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
-	scope: 'paragraph'
+	scope: 'paragraph',
+	ignoreFragmentSelfLinks: false
 } );
 
 mw.editcheck.DuplicateLinkEditCheck.static.name = 'duplicateLink';
@@ -102,13 +103,22 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 	}
 
 	// Traverse the tree once to find internal links, and build a map
-	const allLinks = documentModel.getDocumentNode().getAnnotationRanges().filter( ( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name );
+	const allLinks = documentModel.getDocumentNode().getAnnotationRanges().filter(
+		( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name &&
+			// Ignore fragment self-links if configured (T422190)
+			!( this.config.ignoreFragmentSelfLinks && ve.init.platform.linkCache.constructor.static.isFragmentSelfLink(
+				annRange.annotation.getAttribute( 'lookupTitle' ),
+				!!annRange.annotation.getFragment()
+			) )
+	);
 	const allLinksByTitle = orderedCollectBy( allLinks, ( annRef ) => annRef.annotation.getAttribute( normalizedTitleKey ) );
 
 	// Traverse again for links we want to show a Check on. This could be a small set, or all links.
 	// Filter out any links that appear only once in the document.
 	// getModifiedLinkRanges handles filtering sections and dismissed actions.
-	const candidateModifiedLinks = this.getModifiedLinkRanges( surfaceModel ).filter( ( annRange ) => allLinksByTitle.get( annRange.annotation.getAttribute( normalizedTitleKey ) ).length > 1 );
+	const candidateModifiedLinks = this.getModifiedLinkRanges( surfaceModel ).filter(
+		( annRange ) => ( allLinksByTitle.get( annRange.annotation.getAttribute( normalizedTitleKey ) ) || [] ).length > 1
+	);
 
 	// Now we have a list of modified links which, if they're root links and duplicated in the same section by another root link, are duplicates.
 	let i = 0; // Index into candidate links
