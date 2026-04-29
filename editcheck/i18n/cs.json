@@ -5,7 +5,8 @@
 			"Matěj Suchánek",
 			"WikipedistaOndra",
 			"Bilykralik16",
-			"Mormegil"
+			"Mormegil",
+			"Jkjk"
 		]
 	},
 	"editcheck-dialog-action-no": "Ne",
@@ -21,6 +22,7 @@
 	"editcheck-dialog-addref-title": "Přidat referenci",
 	"editcheck-dialog-title": "Před zveřejněním",
 	"editcheck-copyvio-title": "Vložený obsah",
+	"editcheck-review-title": "Zkontrolovat změny",
 	"tag-editcheck-reference-decline-common-knowledge": "Kontrola editace (reference) odmítnuta (všeobecné znalosti)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Kontrola editace (reference) odmítnuta jako všeobecná znalost",
 	"tag-editcheck-reference-decline-irrelevant": "Kontrola editace (reference) odmítnuta (irelevantní)",
