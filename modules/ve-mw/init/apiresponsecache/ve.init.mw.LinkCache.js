@@ -59,12 +59,34 @@ ve.init.mw.LinkCache.static.processPage = function ( page ) {
 	};
 };
 
+/**
+ * Check if a title is a plain self link (link to the current page, no fragment)
+ *
+ * @param {string} title Link title (e.g. linkModel.getAttribute( 'lookupTitle' ) )
+ * @param {boolean} hasFragment The link has a fragment (e.g. !!linkModel.getFragment() )
+ * @return {boolean}
+ */
+ve.init.mw.LinkCache.static.isSelfLink = function ( title, hasFragment ) {
+	return !hasFragment && this.normalizeTitle( title ) === this.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) );
+};
+
+/**
+ * Check if a title is a fragment self link (link to the current page, with a fragment)
+ *
+ * @param {string} title Link title (e.g. linkModel.getAttribute( 'lookupTitle' ) )
+ * @param {boolean} hasFragment The link has a fragment (e.g. !!linkModel.getFragment() )
+ * @return {boolean}
+ */
+ve.init.mw.LinkCache.static.isFragmentSelfLink = function ( title, hasFragment ) {
+	return hasFragment && this.normalizeTitle( title ) === this.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) );
+};
+
 /* Methods */
 
 /**
  * Requests information about the title, then adds classes to the provided element as appropriate.
  *
- * @param {string} title
+ * @param {string} title Link title
  * @param {jQuery} $element Element to style
  * @param {boolean} [hasFragment=false] Whether the link goes to a fragment
  * @param {boolean} [useMissing=true] Use the "missing link" chache if available. Only applies the "new"
@@ -90,8 +112,12 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 			$element.addClass( 'new' );
 		} else {
 			// Provided by core MediaWiki, styled like a <strong> element by default.
-			if ( !hasFragment && this.constructor.static.normalizeTitle( title ) === this.constructor.static.normalizeTitle( mw.config.get( 'wgRelevantPageName' ) ) ) {
+			if ( this.constructor.static.isSelfLink( title, hasFragment ) ) {
 				$element.addClass( 'mw-selflink' );
+			}
+			// Provided by core MediaWiki, no styles by default.
+			if ( this.constructor.static.isFragmentSelfLink( title, hasFragment ) ) {
+				$element.addClass( 'mw-selflink-fragment' );
 			}
 			// Provided by core MediaWiki, no styles by default.
 			if ( data.redirect ) {
