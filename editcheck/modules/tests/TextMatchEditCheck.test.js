@@ -273,3 +273,30 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		done();
 	}() );
 } );
+
+QUnit.test( 'applyCase', ( assert ) => {
+	const tests = [
+		{ message: 'Latin upper', phrase: 'my Marty McFly SMS IDs', model: 'QUX QUUX', expected: 'MY MARTY MCFLY SMS IDS' },
+		{ message: 'Latin title', phrase: 'my Marty McFly SMS IDs', model: 'Qux Quux', expected: 'My Marty McFly SMS IDs' },
+		{ message: 'Latin lower', phrase: 'my Marty McFly SMS IDs', model: 'qux quux', expected: 'my Marty McFly SMS IDs' },
+		{ message: 'Latin mixed', phrase: 'my Marty McFly SMS IDs', model: 'Qux quux', expected: 'my Marty McFly SMS IDs' },
+		{ message: 'Latin uncased', phrase: 'my Marty McFly SMS IDs', model: '123 456', expected: 'my Marty McFly SMS IDs' },
+		{ message: 'Turkish upper', lang: 'tr', phrase: 'dün İstanbul’da bir BMW gördüm', model: 'DİYARI', expected: 'DÜN İSTANBUL’DA BİR BMW GÖRDÜM' },
+		{ message: 'Turkish title', lang: 'tr', phrase: 'dün İstanbul’da bir BMW gördüm', model: 'Diyarı', expected: 'Dün İstanbul’Da Bir BMW Gördüm' },
+		{ message: 'Turkish lower', lang: 'tr', phrase: 'dün İstanbul’da bir BMW gördüm', model: 'diyarı', expected: 'dün İstanbul’da bir BMW gördüm' },
+		{ message: 'Turkish mixed', lang: 'tr', phrase: 'dün İstanbul’da bir BMW gördüm', model: 'diYArı', expected: 'dün İstanbul’da bir BMW gördüm' },
+		{ message: 'Greek upper', phrase: 'εν Αρχη', model: 'ΜΗ', expected: 'ΕΝ ΑΡΧΗ' },
+		{ message: 'Greek title', phrase: 'εν Αρχη', model: 'Μη', expected: 'Εν Αρχη' },
+		{ message: 'Greek lower', phrase: 'εν Αρχη', model: 'μη', expected: 'εν Αρχη' },
+		{ message: 'Greek mixed', phrase: 'εν Αρχη', model: 'μΗ', expected: 'εν Αρχη' },
+		{ message: 'Han+Latin upper', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'QUX', expected: '你PARTNER最鐘意UNIQLO定GOD？' },
+		{ message: 'Han+Latin title', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'Qux', expected: '你Partner最鐘意Uniqlo定GOD？' },
+		{ message: 'Han+Latin lower', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'qux', expected: '你partner最鐘意Uniqlo定GOD？' },
+		{ message: 'Han+Latin mixed', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'qUX', expected: '你partner最鐘意Uniqlo定GOD？' },
+		{ message: 'Combining accents title', phrase: 'I like Caersw\u0302s cafe\u0301s', model: 'Qux', expected: 'I Like Caersw\u0302s Cafe\u0301s' }
+	];
+	tests.forEach( ( test ) => {
+		const observed = mw.editcheck.applyCase( test.phrase, test.model, test.lang );
+		assert.strictEqual( observed, test.expected, test.message );
+	} );
+} );

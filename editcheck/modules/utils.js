@@ -150,3 +150,46 @@ mw.editcheck.flattenArray = function ( arr, depth = 1 ) {
 
 	return result;
 };
+
+/**
+ * Apply uppercasing rules to a phrase, using another string as a model
+ *
+ * Either the phrase is fully uppercased, or just initial letters are uppercased, or no change,
+ * depending which best matches the model. Letters are never lowercased, so words like 'French'
+ * or 'USA' aren't turned into invalid forms.
+ *
+ * @param {string} phrase
+ * @param {string} model
+ * @param {string} lang BCP47 language code. Certain languages have special casing rules, e.g. tr, az, lt
+ * @return {string} The phrase, with uppercasing rules applied
+ */
+mw.editcheck.applyCase = function ( phrase, model, lang ) {
+	// Default to no language-specific casing rules, which is the same as en-US
+	lang = lang || 'en-US';
+
+	const toUpperFirst = ( s ) => s.replace( mw.editcheck.applyCase.lowerFirst,
+		( _, prefix, ch ) => prefix + ch.toLocaleUpperCase( lang )
+	);
+
+	const upperCase = model.toLocaleUpperCase( lang );
+	const lowerCase = model.toLocaleLowerCase( lang );
+	const titleCase = toUpperFirst( lowerCase );
+
+	if ( model === lowerCase ) {
+		// No case information in model, or lower case; return phrase unaltered
+		return phrase;
+	}
+	if ( model === upperCase ) {
+		return phrase.toLocaleUpperCase( lang );
+	}
+	if ( model === titleCase ) {
+		return toUpperFirst( phrase );
+	}
+	// Else model has mixed casing; return phrase unaltered
+	return phrase;
+};
+
+// Match any lowercase letter, unless preceded by a letter that can have case (or a combining mark)
+// We must compile the RegExp at runtime because eslint does not understand \p yet
+// eslint-disable-next-line prefer-regex-literals, es-x/no-regexp-unicode-property-escapes, no-useless-escape
+mw.editcheck.applyCase.lowerFirst = new RegExp( '(^|[^\\p{Lu}\\p{Ll}\p{Lt}\\p{M}])(\\p{Ll})', 'gu' );
