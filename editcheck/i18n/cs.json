@@ -87,7 +87,7 @@
 	"editcheck-review-title": "Zkontrolovat změny",
 	"editcheck-specialeditchecks-info": "Kontroly editací lze nakonfigurovat na [[MediaWiki:Editcheck-config.json]]. Dokumentaci najdete na [https://www.mediawiki.org/wiki/Special:MyLanguage/Edit_check/Configuration Edit check/Configuration].",
 	"editcheck-specialeditchecks-disabled": "Kontroly úprav nejsou na této wiki povoleny.",
-	"editcheck-specialeditchecks-header-abtest": "A/B testovací kontroly",
+	"editcheck-specialeditchecks-header-abtest": "Kontroly v A/B testování",
 	"editcheck-specialeditchecks-header-base": "Základní konfigurace",
 	"editcheck-specialeditchecks-header-betafeatures": "Beta verze",
 	"editcheck-specialeditchecks-header-default": "Výchozí kontroly",
