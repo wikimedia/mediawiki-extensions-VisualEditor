@@ -28,18 +28,18 @@ mw.editcheck.SuggestedLinkEditCheck.static.defaultConfig = ve.extendObject( {}, 
 } );
 
 mw.editcheck.SuggestedLinkEditCheck.static.name = 'suggestedLink';
-mw.editcheck.SuggestedLinkEditCheck.static.title = 'Suggested link';
-mw.editcheck.SuggestedLinkEditCheck.static.description = 'Do you want to link to this article?';
+mw.editcheck.SuggestedLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-suggestedlink-title' );
+mw.editcheck.SuggestedLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-suggestedlink-description' );
 
 mw.editcheck.SuggestedLinkEditCheck.static.choices = [
 	{
 		action: 'accept',
-		label: OO.ui.deferMsg( 'editcheck-dialog-action-yes' ),
+		label: OO.ui.deferMsg( 'editcheck-suggestedlink-action-add-link' ),
 		icon: 'check'
 	},
 	{
 		action: 'dismiss',
-		label: OO.ui.deferMsg( 'editcheck-dialog-action-no' ),
+		label: OO.ui.deferMsg( 'editcheck-action-dismiss' ),
 		icon: 'close'
 	}
 ];
@@ -104,11 +104,8 @@ mw.editcheck.SuggestedLinkEditCheck.prototype.onDocumentChange = function ( surf
 			!this.getLinkFromFragment( link.fragment ) &&
 			modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
 		) {
-			// TODO: this can be replaced with a normal message that takes params; this is just helpful for link formatting in experimental:
-			const msgkey = `editcheck-${ this.getName() }-${ link.match_index }-description`;
-			ve.init.platform.addMessages( { [ msgkey ]: 'Do you want to link <code>$1</code> to [[$2]]?' } );
 			return this.buildActionFromLinkRange( range, surfaceModel, {
-				message: ve.deferJQueryMsg( msgkey, link.link_text, link.link_target )
+				message: ve.deferJQueryMsg( 'editcheck-suggestedlink-prompt', link.link_text, link.link_target )
 			} );
 		}
 		return null;
