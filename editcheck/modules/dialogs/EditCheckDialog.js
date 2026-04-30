@@ -400,7 +400,6 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.currentAction = null;
 
 		this.toggle( !this.surface.getTarget().isVirtualKeyboardOpen() );
-		this.surface.getTarget().off( 'virtualKeyboardChange' );
 		this.surface.getTarget().on( 'virtualKeyboardChange', ( isOpen ) => {
 			this.toggle( !isOpen );
 		} );
@@ -440,6 +439,7 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 		this.controller.off( 'actionsUpdated', this.onActionsUpdated, this );
 		this.controller.off( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, this );
 		this.controller.off( 'focusAction', this.onFocusAction, this );
+		this.surface.getTarget().off( 'virtualKeyboardChange' );
 		this.$actions.empty();
 	}, this );
 };

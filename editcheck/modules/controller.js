@@ -45,6 +45,10 @@ function Controller( target, config ) {
 	this.updatePositionsDebounced = ve.debounceWithTest( teardownCheck, this.updatePositions.bind( this ) );
 	this.updateSuggestionCountDebounced = ve.debounceWithTest( teardownCheck, this.updateSuggestionCount.bind( this ), 500 );
 
+	this.target.connect( this, {
+		virtualKeyboardChange: 'onVirtualKeyboardChange'
+	} );
+
 	// Don't run a scroll if the previous animation is still running (which is jQuery 'fast' === 200ms)
 	this.scrollActionIntoViewDebounced = ve.debounceWithTest( teardownCheck, this.scrollActionIntoView.bind( this ), 200, true );
 
@@ -137,8 +141,7 @@ Controller.prototype.setup = function () {
 		window.dispatchEvent( new Event( 'resize' ) );
 
 		this.surface.getView().connect( this, {
-			position: 'onPositionDebounced',
-			focus: 'onSurfaceFocus'
+			position: 'onPositionDebounced'
 		} );
 		this.surface.getModel().connect( this, {
 			undoStackChange: 'onDocumentChangeDebounced',
@@ -584,12 +587,11 @@ Controller.prototype.getActions = function ( listener ) {
 };
 
 /**
- * Handle focus events from the surface view
+ * Handle virtual keyboard change events from the target
  */
-Controller.prototype.onSurfaceFocus = function () {
+Controller.prototype.onVirtualKeyboardChange = function () {
 	// On mobile we want to close the drawer if the keyboard is shown
-	// A native cursor selection means the keyboard will be visible
-	if ( OO.ui.isMobile() && !this.inBeforeSave && this.target.isVirtualKeyboardOpen() ) {
+	if ( this.surface && OO.ui.isMobile() && !this.inBeforeSave && this.target.isVirtualKeyboardOpen() ) {
 		this.closeDialog( 'mobile-keyboard' );
 	}
 };
