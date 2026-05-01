@@ -385,7 +385,7 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentBranchNodes = function ( 
  * Find nodes that were added during the edit session
  *
  * @param {ve.dm.Document} documentModel
- * @param {string} [type] Type of nodes to find, or all nodes if false
+ * @param {string|Function} [type] Node type name or node constructor to find, or all nodes if false
  * @return {ve.dm.Node[]}
  */
 mw.editcheck.BaseEditCheck.prototype.getAddedNodes = function ( documentModel, type ) {
@@ -403,6 +403,11 @@ mw.editcheck.BaseEditCheck.prototype.getAddedNodes = function ( documentModel, t
 			nodes.forEach( ( node ) => {
 				if ( !type || node.node.getType() === type ) {
 					matchedNodes.push( node.node );
+				} else if ( type instanceof Function ) {
+					const nodeType = node.node.constructor;
+					if ( nodeType === type || nodeType.prototype instanceof type ) {
+						matchedNodes.push( node.node );
+					}
 				}
 			} );
 		} );
