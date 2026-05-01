@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+@import 'mediawiki.skin.variables.less';
+
 .ve-init-mw-articleTarget-switchFull {
 	flex-basis: 100%;
 	text-align: center;
@@ -24,6 +26,7 @@
 			height: 20px;
 			margin-bottom: 4px;
 			border-radius: 2px;
+			background-color: @background-color-interactive;
 		}
 
 		> div:first-child {
@@ -40,19 +43,19 @@
 			top: -2.5em;
 
 			> div {
-				background: #fcfcfc;
+				opacity: 0.15;
 			}
 
 			> div + div {
-				background: #fafafa;
+				opacity: 0.3;
 			}
 
 			> div + div + div {
-				background: #f7f7f7;
+				opacity: 0.45;
 			}
 
 			> div + div + div + div {
-				background: #f4f4f4;
+				opacity: 0.6;
 			}
 		}
 	}
@@ -64,19 +67,19 @@
 			top: -1em;
 
 			> div {
-				background: #f4f4f4;
+				opacity: 0.6;
 			}
 
 			> div + div {
-				background: #f7f7f7;
+				opacity: 0.45;
 			}
 
 			> div + div + div {
-				background: #fafafa;
+				opacity: 0.3;
 			}
 
 			> div + div + div + div {
-				background: #fcfcfc;
+				opacity: 0.15;
 			}
 		}
 	}
