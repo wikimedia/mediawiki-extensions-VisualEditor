@@ -105,7 +105,7 @@ ve.ui.MWAceEditorWidget.prototype.setupEditor = function () {
 		// ACE uses web workers, which have importScripts, which don't like relative links.
 		basePath = window.location.protocol + basePath;
 	}
-	ace.config.set( 'basePath', basePath + '/CodeEditor/modules/ace' );
+	ace.config.set( 'basePath', basePath + '/CodeEditor/modules/lib/ace' );
 
 	this.$input.addClass( 'oo-ui-element-hidden' );
 	this.editor = ace.edit( this.$ace[ 0 ] );
