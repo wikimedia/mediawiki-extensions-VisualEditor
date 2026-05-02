@@ -130,7 +130,7 @@ class DirectParsoidClient implements ParsoidClient {
 		$helper = $this->getHtmlOutputRendererHelper( $page, $revision, $targetLanguage, true );
 		$parserOutput = $helper->getHtml();
 
-		return $this->fakeRESTbaseHTMLResponse( $parserOutput->getRawText(), $helper );
+		return $this->fakeRESTbaseHTMLResponse( $parserOutput->getContentHolderText(), $helper );
 	}
 
 	private function makeFakeRevision(
@@ -176,7 +176,7 @@ class DirectParsoidClient implements ParsoidClient {
 		}
 
 		$parserOutput = $helper->getHtml();
-		$html = $parserOutput->getRawText();
+		$html = $parserOutput->getContentHolderText();
 
 		return $this->fakeRESTbaseHTMLResponse( $html, $helper );
 	}
