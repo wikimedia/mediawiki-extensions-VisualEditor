@@ -173,7 +173,7 @@
 					}
 					if ( options[ 'title-message' ] ) {
 						// Not used in core
-						// eslint-disable-next-line mediawiki/msg-doc
+
 						title = mw.message( options[ 'title-message' ] ).text();
 					}
 					// The following messages are used here:
@@ -208,7 +208,7 @@
 								allowReordering: !!options.allowReordering,
 								allowArbitrary: false,
 								inputPosition: options.inputPosition || 'outline',
-								// eslint-disable-next-line mediawiki/msg-doc
+
 								placeholder: options[ 'placeholder-message' ] ? mw.message( options[ 'placeholder-message' ] ).text() : undefined
 							} ) );
 							break;
@@ -232,7 +232,7 @@
 						classes: [ 've-ui-mwSaveDialog-field-' + name ]
 					};
 					if ( options[ 'help-message' ] ) {
-						// eslint-disable-next-line mediawiki/msg-doc
+
 						fieldConfig.help = mw.message( options[ 'help-message' ] ).parseDom();
 						fieldConfig.helpInline = true;
 					}

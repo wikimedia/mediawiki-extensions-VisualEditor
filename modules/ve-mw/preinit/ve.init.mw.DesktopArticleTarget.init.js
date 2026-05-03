@@ -353,7 +353,7 @@
 				tabMsgKey = 'skin-view-' + key;
 			}
 		}
-		// eslint-disable-next-line mediawiki/msg-doc
+
 		const msg = mw.message( tabMsgKey );
 		if ( !msg.isParseable() ) {
 			mw.log.warn( 'VisualEditor: MediaWiki:' + tabMsgKey + ' contains unsupported syntax. ' +

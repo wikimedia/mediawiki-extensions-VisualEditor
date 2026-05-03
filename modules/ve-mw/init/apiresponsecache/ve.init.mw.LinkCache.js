@@ -106,7 +106,7 @@ ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFra
 	}
 
 	this.get( title ).then( ( data ) => {
-		// eslint-disable-next-line mediawiki/class-doc
+
 		$element.addClass( data.linkclasses );
 		if ( data.missing && !data.known ) {
 			$element.addClass( 'new' );

@@ -118,7 +118,7 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 	if ( oldAlign && oldAlign !== align ) {
 		// Remove previous alignment
 		// See static.cssClasses
-		// eslint-disable-next-line mediawiki/class-doc
+
 		this.$element
 			.removeClass( this.getCssClass( 'none', oldAlign ) )
 			.removeClass( this.getCssClass( 'default', oldAlign ) );
@@ -128,7 +128,7 @@ ve.ce.MWBlockImageNode.prototype.updateClasses = function ( oldAlign ) {
 	const framed = type !== 'none' && type !== 'frameless';
 	const alignClass = this.getCssClass( framed ? 'default' : 'none', align );
 	this.$image.toggleClass( 've-ce-mwBlockImageNode-thumbimage', framed );
-	// eslint-disable-next-line mediawiki/class-doc
+
 	this.$element.addClass( alignClass );
 
 	// Border

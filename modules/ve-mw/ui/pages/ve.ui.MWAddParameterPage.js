@@ -199,7 +199,7 @@ ve.ui.MWAddParameterPage.prototype.getValidationErrors = function ( name ) {
 	}
 
 	const label = spec.getParameterLabel( this.template.getOriginalParameterName( name ) ),
-		// eslint-disable-next-line mediawiki/msg-doc
+
 		$msg = mw.message( key, name, label ).parseDom();
 	ve.targetLinksToNewWindow( $( '<div>' ).append( $msg )[ 0 ] );
 	return [ $msg ];

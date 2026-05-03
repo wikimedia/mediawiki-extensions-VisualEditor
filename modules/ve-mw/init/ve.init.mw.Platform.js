@@ -106,7 +106,7 @@ ve.init.mw.Platform.prototype.formatNumber = function ( number ) {
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.getHtmlMessage = function ( key, ...args ) {
-	// eslint-disable-next-line mediawiki/msg-doc
+
 	return mw.message( key, ...args ).parseDom().toArray();
 };
 
@@ -210,7 +210,7 @@ ve.init.mw.Platform.prototype.getParsedMessage = function ( key ) {
 		return this.parsedMessages[ key ];
 	}
 	// Fallback to regular messages, with mw.message html escaping applied.
-	// eslint-disable-next-line mediawiki/msg-doc
+
 	return mw.message( key ).escaped();
 };
 

@@ -185,7 +185,7 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	}
 
 	if ( classAttr ) {
-		// eslint-disable-next-line mediawiki/class-doc
+
 		figure.className = classAttr;
 	}
 
@@ -194,12 +194,12 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	}
 
 	if ( attributes.imageClassAttr ) {
-		// eslint-disable-next-line mediawiki/class-doc
+
 		img.className = attributes.imageClassAttr;
 	}
 
 	if ( attributes.imgWrapperClassAttr ) {
-		// eslint-disable-next-line mediawiki/class-doc
+
 		imgWrapper.className = attributes.imgWrapperClassAttr;
 	}
 

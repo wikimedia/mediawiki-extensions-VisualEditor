@@ -116,7 +116,7 @@ ve.ce.MWGalleryNode.prototype.onAttributeChange = function ( key, from, to ) {
 	if ( from.attrs.class !== to.attrs.class ) {
 		// We can't overwrite the whole 'class' HTML attribute, because it also contains a class
 		// generated from the 'mode' MW attribute, and VE internal classes like 've-ce-focusableNode'
-		// eslint-disable-next-line mediawiki/class-doc
+
 		this.$element
 			.removeClass( from.attrs.class )
 			.addClass( to.attrs.class );

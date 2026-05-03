@@ -45,7 +45,7 @@ ve.ui.MWMediaInfoFieldWidget = function VeUiMWMediaInfoFieldWidget( content, con
 
 		if ( config.labelMsg ) {
 			// Messages defined in ve.ui.MWMediaDialog#buildMediaInfoPanel
-			// eslint-disable-next-line mediawiki/msg-doc
+
 			content = ve.msg( config.labelMsg, content );
 		}
 

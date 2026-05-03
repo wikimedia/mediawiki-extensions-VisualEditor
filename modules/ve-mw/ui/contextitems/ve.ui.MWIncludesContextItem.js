@@ -56,7 +56,7 @@ ve.ui.MWIncludesContextItem.prototype.getLabelMessage = function () {
 		'mw:Includes/OnlyInclude/End': 'visualeditor-includes-onlyinclude-end',
 		'mw:Includes/IncludeOnly': 'visualeditor-includes-includeonly'
 	}[ this.model.getAttribute( 'type' ) ];
-	// eslint-disable-next-line mediawiki/msg-doc
+
 	return key ? mw.message( key ).text() : '';
 };
 
@@ -69,7 +69,7 @@ ve.ui.MWIncludesContextItem.prototype.getDescriptionMessage = function () {
 		'mw:Includes/OnlyInclude': 'visualeditor-includes-onlyinclude-description',
 		'mw:Includes/IncludeOnly': 'visualeditor-includes-includeonly-description'
 	}[ this.model.getAttribute( 'type' ) ];
-	// eslint-disable-next-line mediawiki/msg-doc
+
 	return key ? mw.message( key ).parseDom() : $( [] );
 };
 
