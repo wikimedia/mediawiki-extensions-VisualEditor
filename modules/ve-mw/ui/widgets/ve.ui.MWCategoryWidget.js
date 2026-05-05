@@ -124,7 +124,7 @@ ve.ui.MWCategoryWidget.prototype.onInputChoose = function ( item ) {
 };
 
 /**
- * Hanle popup open event
+ * Handle popup open event
  *
  */
 ve.ui.MWCategoryWidget.prototype.onPopupOpened = function () {

@@ -1935,9 +1935,9 @@ ve.init.mw.ArticleTarget.prototype.getSurfaceConfig = function ( config ) {
 		nullSelectionOnBlur: this.section === 'new',
 		classes: this.getSurfaceClasses()
 			// The following classes are used here:
-			// * mw-textarea-proteced
-			// * mw-textarea-cproteced
-			// * mw-textarea-sproteced
+			// * mw-textarea-protected
+			// * mw-textarea-cprotected
+			// * mw-textarea-sprotected
 			.concat( this.protectedClasses )
 			// addClass doesn't like empty strings
 			.filter( ( c ) => c )
@@ -2024,7 +2024,7 @@ ve.init.mw.ArticleTarget.prototype.setupToolbar = function () {
  *
  * @param {boolean} [startProcess] Use version of the label for starting that process, i.e. with an ellipsis after it
  * @param {boolean} [forceShort] Force the short version of the label, always used on mobile
- * @return {Function|string} An i18n message or resolveable function
+ * @return {Function|string} An i18n message or resolvable function
  */
 ve.init.mw.ArticleTarget.prototype.getSaveButtonLabel = function ( startProcess, forceShort ) {
 	const suffix = startProcess ? '-start' : '';
@@ -2534,7 +2534,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualEditor = function () {
 ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, direction ) {
 	if ( section !== null ) {
 		// TODO: Switching to another section not yet required or supported
-		throw new Error( 'Swithing to a section other than full page (null) is not yet implemented' );
+		throw new Error( 'Switching to a section other than full page (null) is not yet implemented' );
 	}
 
 	const modified = this.fromEditedState || this.getSurface().getModel().hasBeenModified();

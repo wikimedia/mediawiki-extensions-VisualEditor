@@ -1,5 +1,5 @@
 /*!
- * VisualEditor MWLanuageVariantNodeContextItem class.
+ * VisualEditor MWLanguageVariantNodeContextItem class.
  *
  * @copyright See AUTHORS.txt
  */

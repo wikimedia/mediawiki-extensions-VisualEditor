@@ -140,7 +140,7 @@ ve.ce.MWGalleryNode.prototype.onAttributeChange = function ( key, from, to ) {
  * Get the focusable element
  *
  * As seen in ve.ce.GeneratedContentNode.
- * TODO: Consider making this a core ve.ce.FocsableNode feature.
+ * TODO: Consider making this a core ve.ce.FocusableNode feature.
  *
  * @return {jQuery} Focusable element
  */

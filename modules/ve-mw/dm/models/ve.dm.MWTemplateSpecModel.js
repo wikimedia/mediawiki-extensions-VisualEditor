@@ -15,7 +15,7 @@
  */
 
 /**
- * Object literal returned by the TemplataData API. Expected to be in formatversion=2,
+ * Object literal returned by the TemplateData API. Expected to be in formatversion=2,
  * guaranteed via ve.init.mw.Target#getContentApi.
  *
  * @typedef ve.dm.MWTemplatePageMetadata

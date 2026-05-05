@@ -89,7 +89,7 @@ ve.init.mw.LinkCache.static.isFragmentSelfLink = function ( title, hasFragment )
  * @param {string} title Link title
  * @param {jQuery} $element Element to style
  * @param {boolean} [hasFragment=false] Whether the link goes to a fragment
- * @param {boolean} [useMissing=true] Use the "missing link" chache if available. Only applies the "new"
+ * @param {boolean} [useMissing=true] Use the "missing link" cache if available. Only applies the "new"
  *  style but this cache is more likely to be populated. In the case of a cache miss the full cache is used.
  */
 ve.init.mw.LinkCache.prototype.styleElement = function ( title, $element, hasFragment, useMissing ) {

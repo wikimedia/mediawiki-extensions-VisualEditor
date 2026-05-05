@@ -846,7 +846,7 @@
 		 *
 		 * If it's a function, it will be invoked once the VisualEditor core modules and any
 		 * plugin modules registered through this function have been loaded, but before the editor
-		 * is intialized. The function can optionally return a jQuery.Promise . VisualEditor will
+		 * is initialized. The function can optionally return a jQuery.Promise . VisualEditor will
 		 * only be initialized once all promises returned by plugin functions have been resolved.
 		 *
 		 *     // Register ResourceLoader module
@@ -999,7 +999,7 @@
 				$editsections.find( '.mw-editsection-visualeditor' )
 					.off( '.ve-target' ).on( 'click.ve-target', init.onEditSectionLinkClick.bind( init, 'visual' ) );
 				if ( init.isWikitextAvailable() ) {
-					// TOOD: Make this less fragile
+					// TODO: Make this less fragile
 					$editsections.find( 'a:not( .mw-editsection-visualeditor )' )
 						.off( '.ve-target' ).on( 'click.ve-target', init.onEditSectionLinkClick.bind( init, 'source' ) );
 				}

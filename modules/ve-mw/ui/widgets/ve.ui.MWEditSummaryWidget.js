@@ -105,7 +105,7 @@ ve.ui.MWEditSummaryWidget.static.getMatchingSummaries = function ( summaries, qu
 ve.ui.MWEditSummaryWidget.prototype.adjustSize = function () {
 	// To autosize, the widget will render another element beneath the input
 	// with the same text for measuring. This extra element could cause scrollbars
-	// to appear, changing the available width, so if scrollbars are intially
+	// to appear, changing the available width, so if scrollbars are initially
 	// hidden, force them to stay hidden during the adjustment.
 	// TODO: Consider upstreaming this?
 	const scrollContainer = this.getClosestScrollableElementContainer();

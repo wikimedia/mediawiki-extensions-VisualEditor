@@ -238,7 +238,7 @@ ve.init.mw.MobileArticleTarget.prototype.onContainerScroll = function () {
 		$overlaySurface.css( 'transform', 'translateY( ' + viewportHeight + 'px )' );
 		window.scroll( scrollX, scrollY + viewportHeight );
 
-		// Prepate to animate toolbar sliding into view
+		// Prepare to animate toolbar sliding into view
 		$header.removeClass( 'toolbar-shown toolbar-shown-done' );
 		const headerHeight = $header[ 0 ].offsetHeight;
 		const headerTranslateY = Math.max( -headerHeight, pos );

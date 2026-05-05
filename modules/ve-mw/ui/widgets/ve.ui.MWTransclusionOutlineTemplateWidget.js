@@ -360,7 +360,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleFilters = function () 
 };
 
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.recalculateStickyHeaderHeight = function () {
-	// A template with no used parameters might have a sticky header, but no paramater list yet
+	// A template with no used parameters might have a sticky header, but no parameter list yet
 	if ( this.$stickyHeader && this.parameterList ) {
 		this.parameterList.stickyHeaderHeight = Math.floor( this.$stickyHeader.outerHeight() );
 	}

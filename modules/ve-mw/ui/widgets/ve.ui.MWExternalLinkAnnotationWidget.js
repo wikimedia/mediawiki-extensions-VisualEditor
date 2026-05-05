@@ -89,8 +89,8 @@ ve.ui.MWExternalLinkAnnotationWidget.prototype.getValidity = function () {
 					action: 'editcheckreferenceurl',
 					url,
 					formatversion: 2
-				} ) ).then( ( reliablityResults ) => {
-					if ( reliablityResults && reliablityResults.editcheckreferenceurl[ url ] === 'blocked' ) {
+				} ) ).then( ( reliabilityResults ) => {
+					if ( reliabilityResults && reliabilityResults.editcheckreferenceurl[ url ] === 'blocked' ) {
 						return ve.createDeferred().reject( 'invalid-blocked' );
 					}
 				} );

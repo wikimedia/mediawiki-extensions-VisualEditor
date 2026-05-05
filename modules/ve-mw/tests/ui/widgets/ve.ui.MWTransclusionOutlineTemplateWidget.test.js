@@ -69,7 +69,7 @@ QUnit.test( 'findCanonicalPosition()', ( assert ) => {
 	const widget = new ve.ui.MWTransclusionOutlineTemplateWidget( template );
 
 	// Expected order on construction time is:
-	// - Documented params in paramOrder (g, h, e), excluding unused deprected params (- h)
+	// - Documented params in paramOrder (g, h, e), excluding unused deprecated params (- h)
 	// - Undocumented params currently used in the template (+ b)
 	assertOrder( widget, [ 'g', 'e', 'b' ] );
 

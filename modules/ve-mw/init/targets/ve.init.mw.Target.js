@@ -426,7 +426,7 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 };
 
 /**
- * Intialise autosave, recovering changes if applicable
+ * Initialise autosave, recovering changes if applicable
  *
  * @param {Object} [config] Configuration options
  * @param {boolean} [config.suppressNotification=false] Don't notify the user if changes are recovered

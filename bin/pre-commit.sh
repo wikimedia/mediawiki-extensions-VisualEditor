@@ -13,11 +13,11 @@ if git diff --quiet --cached lib/ve; then
 
 fi
 
-# Stash any uncommited changes
+# Stash any uncommitted changes
 git stash -q --keep-index
 
 npm install || git stash pop -q && exit 1
 npm test && git add -u .docs/* || git stash pop -q && exit 1
 
-# Re-apply any uncommited changes
+# Re-apply any uncommitted changes
 git stash pop -q

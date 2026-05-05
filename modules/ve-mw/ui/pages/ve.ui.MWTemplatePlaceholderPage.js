@@ -114,7 +114,7 @@ ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
 
 /**
  * @private
- * @param {Object|undefined} templateData The choosen template's data (if TemplateDiscovery is enabled).
+ * @param {Object|undefined} templateData The chosen template's data (if TemplateDiscovery is enabled).
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function ( templateData ) {
 	const transclusion = this.placeholder.getTransclusion();

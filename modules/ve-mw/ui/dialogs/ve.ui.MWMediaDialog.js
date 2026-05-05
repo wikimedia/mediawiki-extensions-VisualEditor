@@ -441,7 +441,7 @@ ve.ui.MWMediaDialog.prototype.onSearchTabsSet = function ( tabPanel ) {
 
 		case 'upload':
 			// Initialize and reset the upload booklet if it hasn't
-			// been initiailized since setup.
+			// been initialized since setup.
 			if ( !this.mediaUploadBookletInit ) {
 				this.mediaUploadBookletInit = true;
 				this.mediaUploadBooklet.initialize();

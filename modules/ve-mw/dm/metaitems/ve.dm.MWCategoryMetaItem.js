@@ -71,7 +71,7 @@ ve.dm.MWCategoryMetaItem.static.toDomElements = function ( dataElement, doc, con
 
 ve.dm.MWCategoryMetaItem.static.isDiffComparable = function ( element, other ) {
 	// Don't try to compare different categories. Even fixing a typo in a category name
-	// results in one category being removed and another added, which we shoud show.
+	// results in one category being removed and another added, which we should show.
 	return element.type === other.type && element.attributes.category === other.attributes.category;
 };
 

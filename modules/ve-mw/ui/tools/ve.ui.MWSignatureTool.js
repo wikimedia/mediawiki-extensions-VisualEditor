@@ -63,7 +63,7 @@ if ( mw.Title.wantSignaturesNamespace( mw.config.get( 'wgNamespaceNumber' ) ) ) 
 		mw.loader.using( 'ext.visualEditor.mwwikitext' ).then( () => {
 			ve.ui.wikitextCommandRegistry.register(
 				new ve.ui.Command( 'mwSignature', 'content', 'insert', {
-					args: [ '~~~~', false, true /* collaseToEnd */ ],
+					args: [ '~~~~', false, true /* collapseToEnd */ ],
 					supportedSelections: [ 'linear' ]
 				} )
 			);

@@ -175,7 +175,7 @@ ve.ui.MWLinkAnnotationInspector.prototype.onInternalLinkChange = function () {
 };
 
 /**
- * Handle list change events ('add') from the interal link's result widget
+ * Handle list change events ('add') from the internal link's result widget
  *
  * @param {OO.ui.OptionWidget[]} items Added items
  * @param {number} index Index of insertion point

@@ -438,7 +438,7 @@ ve.ui.MWLanguageVariantFilterInspector.prototype.initialize = function () {
 	) );
 
 	this.langWidget = new OO.ui.TagMultiselectWidget( {
-		allowArbitary: false,
+		allowArbitrary: false,
 		allowDisplayInvalidTags: true,
 		allowedValues: ve.init.platform.getLanguageCodes().sort(),
 		placeholder: ve.msg(
