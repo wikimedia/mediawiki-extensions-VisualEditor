@@ -24,7 +24,7 @@ mw.editcheck.EditCheckPerformance = function EditCheckPerformance( controller ) 
 	this.trackChecks = Math.random() < 0.01;
 	this.checkMetricsCount = 0;
 
-	this.controller.target.connect( this, {
+	this.controller.getTarget().connect( this, {
 		surfaceReady: 'onSurfaceReady'
 	} );
 

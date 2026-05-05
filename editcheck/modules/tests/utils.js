@@ -1,6 +1,9 @@
 ve.test.utils.EditCheck = {};
 
-ve.test.utils.EditCheck.dummyController = { taggedFragments: {} };
+ve.test.utils.EditCheck.dummyController = {
+	taggedFragments: {},
+	getTarget: () => ve.init.target
+};
 
 // Edit check environment extends MW environment:
 ve.test.utils.newEditCheckEnvironment = function ( env = {} ) {

@@ -53,7 +53,7 @@ mw.editcheck.ExternalLinkEditCheck.prototype.checkNode = function ( node, surfac
 	);
 	const actionPromises = ranges.map( ( annRange ) => {
 		const href = annRange.annotation.getAttribute( 'href' );
-		return this.controller.target.isInterwikiUrl( href ).then( ( isInterwiki ) => {
+		return this.controller.getTarget().isInterwikiUrl( href ).then( ( isInterwiki ) => {
 			if ( isInterwiki ) {
 				// Ignore interwiki links
 				return null;

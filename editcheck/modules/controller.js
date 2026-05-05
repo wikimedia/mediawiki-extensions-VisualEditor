@@ -197,6 +197,15 @@ Controller.prototype.setup = function () {
 };
 
 /**
+ * Get the current VE target
+ *
+ * @return {ve.init.mw.Target}
+ */
+Controller.prototype.getTarget = function () {
+	return this.target;
+};
+
+/**
  * Handle sidebar dialog open/close events
  *
  * Transition skin/VE components around to make room for sidebar
