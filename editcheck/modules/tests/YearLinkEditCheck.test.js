@@ -125,10 +125,7 @@ QUnit.test( 'checkNode', ( assert ) => {
 			);
 
 			const fragment = action.fragments[ 0 ];
-			const dummySurface = {
-				getModel: () => surfaceModel,
-				getView: () => ( { focus: () => {}, activate: () => {}, selectAnnotation: () => {} } )
-			};
+			const dummySurface = ve.test.utils.createModelOnlySurface( surfaceModel );
 
 			surfaceModel.breakpoint();
 

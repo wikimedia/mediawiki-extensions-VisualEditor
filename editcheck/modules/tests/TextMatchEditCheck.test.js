@@ -327,13 +327,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			} else if ( caseItem.expectedData ) {
 				const data = ve.copy( surfaceModel.getDocument().getFullData() );
 				caseItem.expectedData( data );
-				const dummySurface = {
-					getModel: () => surfaceModel,
-					getView: () => ( {
-						focus: () => {},
-						activate: () => {}
-					} )
-				};
+				const dummySurface = ve.test.utils.createModelOnlySurface( surfaceModel );
 				actions.forEach( ( action ) => {
 					check.act( 'accept', action, dummySurface );
 				} );
