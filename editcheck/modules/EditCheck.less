@@ -541,21 +541,21 @@ body:not( .skin-monobook ) .oo-ui-tool-name-editCheckSuggestions {
 	.ve-editcheck-available .mw-mf {
 		.ve-init-mw-target-surface {
 			margin: 0 0 1em;
-		}
 
-		.ve-init-mw-target-surface .ve-ce-surface,
-		.ve-init-mw-target-surface.ve-ui-surface-placeholder {
-			// Stop reflow during the transition
-			max-width: calc( 100% - (44px + 16px + 16px) );
-			margin: 0 16px 0 32px;
-		}
-
-		.ve-ui-editCheck-sidebar-active .ve-ce-surface {
-			margin-left: 16px;
+			.ve-ce-surface,
+			&.ve-ui-surface-placeholder {
+				// Stop reflow during the transition
+				max-width: calc( 100% - (44px + 16px + 16px) );
+				margin: 0 16px 0 32px;
+			}
 		}
 
 		.ve-ui-editCheck-sidebar-active .ve-init-mw-target-surface {
 			margin: 0;
+
+			.ve-ce-surface {
+				margin-left: 16px;
+			}
 		}
 	}
 }
