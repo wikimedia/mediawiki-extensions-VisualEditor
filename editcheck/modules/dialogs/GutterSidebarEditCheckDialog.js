@@ -98,7 +98,6 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		}
 		this.inBeforeSave = data.inBeforeSave;
 		this.surface = data.controller.surface;
-		this.surface.getTarget().$element.addClass( 've-ui-editCheck-gutter-active' );
 
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );

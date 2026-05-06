@@ -671,7 +671,14 @@
 				}
 			],
 			"styles": [
-				"editcheck/modules/EditCheck.less"
+				"editcheck/modules/styles/init.less",
+				"editcheck/modules/styles/selections.less",
+				"editcheck/modules/styles/reviewmode.less",
+				"editcheck/modules/styles/EditCheckActionWidget.less",
+				"editcheck/modules/styles/EditCheckSuggestionsTool.less",
+				"editcheck/modules/dialogs/styles/EditCheckDialog.less",
+				"editcheck/modules/dialogs/styles/EditCheckScrollIntoViewWidget.less",
+				"editcheck/modules/dialogs/styles/GutterSidebarEditCheckDialog.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.core",
@@ -775,7 +782,7 @@
 		"ext.visualEditor.editCheck.special": {
 			"styles": [
 				"editcheck/modules/editCheck.special/editchecks.less",
-				"editcheck/modules/EditCheck.less"
+				"editcheck/modules/styles/EditCheckActionWidget.less"
 			]
 		},
 		"ext.visualEditor.core.utils": {

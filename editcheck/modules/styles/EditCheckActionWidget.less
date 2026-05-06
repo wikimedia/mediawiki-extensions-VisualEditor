@@ -1,0 +1,208 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ui-editCheckDialog .ve-ui-editCheckActionWidget {
+	transition-property: background, border-color;
+	transition-duration: @transition-duration-base;
+
+	/**
+	* Increase specificity over core styles in case they are
+	* loaded later, such as on Special:EditChecks where order
+	* can't be guaranteed.
+	*/
+	&.oo-ui-messageWidget {
+		box-sizing: border-box;
+		white-space: normal; // Minerva needs this
+		margin: @spacing-50 0;
+		padding: @spacing-50 @spacing-75;
+		cursor: pointer;
+		overflow: hidden;
+		border-radius: @border-radius-base;
+
+		.mw-mf & {
+			margin: 0;
+			padding: 0.5em 1em;
+			border-width: 0;
+			box-shadow: none;
+			background-color: transparent !important; /* stylelint-disable-line declaration-no-important */
+		}
+	}
+
+	> .oo-ui-iconElement-icon {
+		// Fixes icon placement in WMUI theme
+		top: -@spacing-50;
+	}
+
+	> .oo-ui-labelElement-label {
+		font-weight: @font-weight-semi-bold;
+	}
+
+	&-body {
+		cursor: auto;
+		background-color: @background-color-base;
+		margin: @spacing-50 -@spacing-75 -@spacing-50 -@spacing-75;
+		padding: @spacing-75;
+
+		/* Progress bar positioning within the margin and without causing layout changes */
+		position: relative;
+
+		> .oo-ui-progressBarWidget {
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+		}
+
+		/* Matches .ve-ui-mobileContext .ve-ui-linearContextItem-body */
+		.mw-mf & {
+			border-top: @border-subtle;
+			background-color: transparent;
+			margin: 0.5em -1em 0 -1em;
+			padding: 0.5em 1em;
+		}
+	}
+
+	&-prompt {
+		margin-bottom: @spacing-75;
+		font-weight: @font-weight-semi-bold;
+		display: block;
+	}
+
+	&-actions {
+		margin-top: @spacing-100;
+		/* for when buttons wrap to multiple lines */
+		margin-bottom: -@spacing-25;
+
+		.oo-ui-actionWidget {
+			/* for when buttons wrap to multiple lines */
+			margin-bottom: @spacing-25;
+		}
+
+		&-prompted {
+			margin-top: @spacing-75;
+		}
+	}
+
+	&-footer {
+		margin-top: @spacing-100;
+		color: @color-subtle;
+	}
+
+	&:not( .ve-ui-editCheckActionWidget-collapsed ) {
+		box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.2 );
+	}
+
+	&.oo-ui-flaggedElement-progressive {
+		border-color: @border-color-progressive;
+		background: @background-color-progressive-subtle;
+
+		> .oo-ui-labelElement-label {
+			font-weight: normal;
+		}
+	}
+
+	&:hover {
+		&.oo-ui-flaggedElement-progressive {
+			border-color: @border-color-progressive--hover;
+		}
+
+		&.oo-ui-flaggedElement-warning {
+			border-color: @border-color-warning--hover;
+		}
+
+		&.oo-ui-flaggedElement-error {
+			border-color: @border-color-error--hover;
+		}
+	}
+
+	&:active {
+		&.oo-ui-flaggedElement-progressive {
+			border-color: @border-color-progressive--active;
+		}
+
+		&.oo-ui-flaggedElement-warning {
+			border-color: @border-color-warning--active;
+		}
+
+		&.oo-ui-flaggedElement-error {
+			border-color: @border-color-error--active;
+		}
+	}
+
+	&.ve-ui-editCheckActionWidget-collapsed {
+		&:not( :hover ) {
+			background: @background-color-base;
+			border-color: @border-color-base;
+
+			&.oo-ui-flaggedElement-progressive {
+				border-color: @border-color-muted;
+			}
+		}
+
+		> .ve-ui-editCheckActionWidget-body {
+			display: none;
+		}
+	}
+
+	&.oo-ui-flaggedElement-warning {
+		border-color: @border-color-warning;
+
+		> .ve-ui-editCheckActionWidget-head {
+			background-color: @background-color-warning-subtle;
+		}
+	}
+
+	&.oo-ui-flaggedElement-error {
+		border-color: @border-color-error;
+
+		> .ve-ui-editCheckActionWidget-head {
+			background-color: @background-color-error-subtle;
+		}
+	}
+
+	&.oo-ui-flaggedElement-success {
+		border-color: @border-color-success;
+
+		> .ve-ui-editCheckActionWidget-head {
+			background-color: @background-color-success-subtle;
+		}
+	}
+
+	&.oo-ui-flaggedElement-notice {
+		border-color: @border-color-notice;
+
+		> .ve-ui-editCheckActionWidget-head {
+			background-color: @background-color-notice-subtle;
+		}
+	}
+
+	.ve-ui-editCheckActionWidget-feedback {
+		.oo-ui-fieldLayout-header,
+		.oo-ui-radioSelectWidget {
+			padding-bottom: @spacing-100;
+		}
+
+		.oo-ui-labelElement-label {
+			font-size: inherit;
+		}
+	}
+
+	.ve-ui-editCheckActionWidget-feedback ~ * {
+		display: none;
+	}
+
+	&-suggestion {
+		&-feedbackMenu {
+			position: absolute;
+			right: @spacing-75;
+			bottom: @spacing-75;
+		}
+
+		.ve-ui-editCheckActionWidget-actions {
+			margin-right: 2.2em;
+		}
+	}
+}
+
+.ve-ui-editCheckDialog-singleAction .ve-ui-editCheckActionWidget-collapsed {
+	display: none;
+}

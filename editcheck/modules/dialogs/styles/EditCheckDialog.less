@@ -1,0 +1,57 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ui-editCheckDialog {
+	/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+	&-footer {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0;
+
+		> .oo-ui-labelWidget {
+			align-content: center;
+			margin-right: @spacing-50;
+			color: @color-subtle;
+
+			&.oo-ui-widget-disabled {
+				color: @color-disabled;
+			}
+		}
+	}
+
+	// See: .ve-ui-mobileContext, which this is closely mimicking
+	.mw-mf & {
+		top: auto;
+		/* Match toolbar border & shadow */
+		border-top: @border-subtle;
+		box-shadow: 0 -1px 1px 0 rgba( 0, 0, 0, 0.1 );
+		/* Transition out faster, as keyboard may be coming up */
+		transition: transform 100ms;
+		transform: translateY( 0% );
+		// See: .ve-init-mw-target-surface in ve.init.mw.MobileArticleTarget.less
+		max-width: calc( 993.3px + (2 * 1em) );
+		margin: 0 auto;
+
+		&-close,
+		&-collapseExpand {
+			position: absolute;
+			right: 0;
+			top: 2px;
+			z-index: 1;
+		}
+
+		&-footer {
+			border-top: @border-subtle;
+			padding: @spacing-12 @spacing-100;
+		}
+
+		&.ve-ui-editCheckDialog-collapsed {
+			display: block;
+			transition: transform 250ms;
+			transform: translateY( calc( 100% - 2.5em ) );
+		}
+
+		.oo-ui-window-body {
+			padding: 0;
+		}
+	}
+}

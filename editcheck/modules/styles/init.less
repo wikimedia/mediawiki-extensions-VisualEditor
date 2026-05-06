@@ -1,0 +1,81 @@
+@import 'mediawiki.skin.variables.less';
+
+/* Vector 2022 sidebar */
+
+.skin-vector-2022 {
+	.ve-editcheck-available & {
+		.mw-page-container-inner {
+			transition: grid-template-columns 250ms, column-gap 250ms; /* stylelint-disable-line plugin/no-unsupported-browser-features */
+		}
+
+		.mw-body {
+			transition: padding 250ms;
+			padding-right: 0;
+
+			.vector-column-end {
+				transition: width 250ms;
+			}
+		}
+
+		.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-sidebarDialog {
+			// Sidebar fades in and slides in from the right side of the screen
+			margin-right: -300px;
+			overflow-x: visible;
+			opacity: 0;
+			left: 150px;
+			transition: opacity 250ms, left 250ms;
+		}
+	}
+
+	/* stylelint-disable-next-line selector-not-notation */
+	.ve-editcheck-enabled:not( .vector-feature-main-menu-pinned-disabled.vector-toc-not-available, .vector-feature-main-menu-pinned-disabled.vector-feature-toc-pinned-clientpref-0 ) & {
+		.mw-page-container-inner {
+			// At maximum width:
+			// 7rem is approximate half the difference between the maximum width
+			// of the main page container and VE + EditCheck, so this places VE
+			// in the center. Using a numeric value for centering allows the
+			// transition to animate correctly.
+			grid-template-columns: ~'7rem minmax( 0, 1fr )';
+			column-gap: 0;
+
+			@media screen and ( max-width: @max-width-breakpoint-desktop ) {
+				// Width constrained by viewport:
+				// Calculate centering value as ( 100vw - <VE+EC width> ) / 2
+				grid-template-columns: ~'calc(50vw - 44rem) minmax( 0, 1fr )';
+			}
+		}
+	}
+
+	.ve-editcheck-enabled & {
+		.mw-body {
+			// Padding to prevent EditCheck sidebar from going off screen
+			padding-right: 300px;
+		}
+
+		.ve-init-mw-desktopArticleTarget .ve-init-mw-target-surface .ve-ui-sidebarDialog {
+			opacity: 1;
+			left: 0;
+		}
+	}
+}
+
+/* Switch to full page buttons */
+
+.ve-ui-editCheck-editFullPage-indicator {
+	margin: 0 -@spacing-25 0 10px;
+	border-left: @spacing-25 solid transparent;
+	box-shadow: -1px 0 0 @border-color-base;
+	position: relative;
+
+	&::after {
+		content: '';
+		display: block;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		position: absolute;
+		right: 0;
+		background: @background-color-progressive;
+		border: 1px solid @border-color-inverted;
+	}
+}

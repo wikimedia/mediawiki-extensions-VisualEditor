@@ -1,0 +1,114 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ce-surface-selections-editCheck {
+	&-active,
+	&-inactive {
+		.ve-ce-surface-selection {
+			&-rect {
+				border-radius: 2px;
+				padding: 2px;
+				margin: -2px 0 0 -2px;
+				transition: background @transition-duration-base;
+			}
+		}
+	}
+
+	&-active {
+		.ve-ce-surface-selection {
+			&-bounding {
+				@padding: 3px;
+				@border: 2px;
+				@color: #36c;
+				padding: @padding;
+				margin: -( @padding + @border ) 0 0 -@padding;
+				border-style: solid;
+				border-color: @color;
+				border-width: @border 0;
+				@triangleSize: 5px;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					width: 0;
+					height: 0;
+				}
+
+				&::before {
+					left: 0;
+					top: 0;
+					border-left: @triangleSize solid @color;
+					border-bottom: @triangleSize solid transparent;
+				}
+
+				&::after {
+					right: 0;
+					bottom: 0;
+					border-right: @triangleSize solid @color;
+					border-top: @triangleSize solid transparent;
+				}
+			}
+
+			&-editCheck-pending .ve-ce-surface-selection-bounding {
+				border-color: @color-disabled;
+
+				&::before {
+					border-left-color: @color-disabled;
+				}
+
+				&::after {
+					border-right-color: @color-disabled;
+				}
+			}
+		}
+
+		.ve-ce-surface-selection-gutter {
+			background-color: @color-base;
+			z-index: 1;
+		}
+	}
+
+	&-active .ve-ce-surface-selection-editCheck,
+	&-inactive .ve-ce-surface-selection-editCheck-highlighted.ve-ce-surface-selection-editCheck {
+		&-warning .ve-ce-surface-selection-rect {
+			background: @background-color-warning-subtle;
+		}
+
+		&-error .ve-ce-surface-selection-rect {
+			background: @background-color-error-subtle;
+		}
+
+		&-progressive .ve-ce-surface-selection-rect {
+			background: @background-color-progressive-subtle;
+		}
+	}
+
+	&-inactive {
+		.ve-ce-surface-selection {
+			transition: opacity @transition-duration-base;
+			opacity: @opacity-medium;
+		}
+
+		.ve-ce-surface-selection-editCheck-highlighted {
+			opacity: @opacity-base;
+		}
+
+		.ve-ce-surface-selection-rect {
+			background: @background-color-interactive;
+		}
+	}
+}
+
+.ve-ce-surface-selection-editCheck {
+	&-warning .ve-ce-surface-selection-gutter {
+		background-color: @color-warning;
+	}
+
+	&-error .ve-ce-surface-selection-gutter {
+		background-color: @color-error;
+	}
+
+	&-progressive .ve-ce-surface-selection-gutter {
+		background-color: @color-progressive;
+	}
+}

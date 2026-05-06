@@ -1,0 +1,18 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ui-editCheck-toolbar-tools {
+	display: flex;
+
+	.ve-ui-toolbar-group-title {
+		font-weight: bold;
+		flex: 5 !important; /* stylelint-disable-line declaration-no-important */
+		line-height: 3em;
+		text-align: center;
+	}
+}
+
+.mw-mf .ve-ce-surface-reviewMode.ve-ce-surface-deactivated {
+	// Otherwise the content will be covered by the mobile context at the end
+	// of the document. (Upstream this?)
+	margin-bottom: 100%;
+}

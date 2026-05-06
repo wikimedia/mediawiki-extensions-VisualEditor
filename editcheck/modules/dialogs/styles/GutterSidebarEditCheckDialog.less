@@ -1,0 +1,97 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ui-gutterSidebarEditCheckDialog {
+	background-color: @background-color-interactive-subtle;
+
+	.ve-ui-editCheck-gutter-action {
+		position: absolute;
+		width: 42px;
+		text-align: center;
+		margin-top: -3px;
+		min-height: 24px;
+
+		> .oo-ui-iconElement-icon {
+			width: 20px;
+			height: 20px;
+			margin-top: -4px;
+		}
+
+		label {
+			position: absolute;
+			top: 16px;
+			right: 5px;
+			display: block;
+			border-radius: 3px;
+			background-color: @accent-color-base;
+			color: @color-inverted;
+			font-size: @font-size-x-small;
+			line-height: 0.9;
+			padding: 3px;
+		}
+
+		&-error {
+			border-left: 2px solid @color-error;
+		}
+
+		&-warning {
+			border-left: 2px solid @color-warning;
+		}
+
+		&-progressive {
+			border-left: 2px solid @color-progressive;
+		}
+
+		&-quickaction {
+			border-left: 0;
+
+			.oo-ui-buttonElement-button {
+				background: @background-color-progressive;
+				margin-top: -6px;
+			}
+
+			.oo-ui-widget-disabled .oo-ui-buttonElement-button {
+				background: @background-color-disabled;
+			}
+		}
+	}
+}
+
+.ve-editcheck-available .mw-mf .ve-ce-surface {
+	margin-right: 16px;
+}
+
+@media all and ( max-width: 993.4px ) {
+	.ve-editcheck-available .mw-mf {
+		.ve-init-mw-target-surface {
+			margin: 0 0 1em;
+
+			.ve-ce-surface,
+			&.ve-ui-surface-placeholder {
+				// Stop reflow during the transition
+				max-width: calc( 100% - (44px + 16px + 16px) );
+				margin: 0 16px 0 32px;
+			}
+		}
+
+		.ve-ui-editCheck-sidebar-active .ve-init-mw-target-surface {
+			margin: 0;
+
+			.ve-ce-surface {
+				margin-left: 16px;
+			}
+		}
+	}
+}
+
+@media all and ( min-width: 993.4px ) and ( max-width: @min-width-breakpoint-desktop ) {
+	.mw-mf .ve-ui-editCheck-sidebar-active .ve-ui-sidebarDialogWindowManager {
+		margin-right: -44px;
+	}
+}
+
+@media all and ( min-width: @min-width-breakpoint-desktop ) {
+	/* stylelint-disable-next-line selector-class-pattern */
+	.mw-mf .ve-ui-editCheck-sidebar-active .overlay-content {
+		width: auto;
+	}
+}
