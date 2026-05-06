@@ -57,7 +57,7 @@ mw.editcheck.ContentBranchNodeCheck.prototype.onDocumentChange = function ( surf
 		if ( !Array.isArray( nodeActions ) ) {
 			nodeActions = [ nodeActions ];
 		}
-		nodeActions.map( ( actionOrPromise ) => Promise.resolve( actionOrPromise ).then( ( action ) => {
+		nodeActions = nodeActions.map( ( actionOrPromise ) => Promise.resolve( actionOrPromise ).then( ( action ) => {
 			if ( !action ) {
 				return null;
 			}
