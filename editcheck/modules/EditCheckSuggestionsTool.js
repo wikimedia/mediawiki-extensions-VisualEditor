@@ -16,7 +16,12 @@ ve.ui.EditCheckSuggestionsTool.static.title = OO.ui.deferMsg( 'editcheck-toolbar
 ve.ui.EditCheckSuggestionsTool.static.autoAddToCatchall = false;
 
 ve.ui.EditCheckSuggestionsTool.prototype.onUpdateState = function () {
-	const controller = this.toolbar.getSurface().getTarget().editcheckController;
+	const target = this.toolbar.getSurface().getTarget();
+	if ( target.getDefaultMode() === 'source' ) {
+		this.setDisabled( true );
+		return;
+	}
+	const controller = target.editcheckController;
 	if ( !controller ) {
 		this.setDisabled( true );
 		return;
