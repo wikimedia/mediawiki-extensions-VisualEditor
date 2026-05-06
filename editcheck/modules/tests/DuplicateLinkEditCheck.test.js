@@ -1,31 +1,21 @@
 QUnit.module( 'mw.editcheck.DuplicateLinkEditCheck', ve.test.utils.newEditCheckEnvironment() );
 
-function getLinksData( links ) {
-	// eslint-disable-next-line es-x/no-array-prototype-flat
-	return links.flatMap( ( linkItem ) => [
-		...ve.dm.example.annotateText(
-			linkItem.labelText,
-			ve.dm.MWInternalLinkAnnotation.static.dataElementFromTitle( mw.Title.newFromText( linkItem.targetTitle ) )
-		),
-		'-'
-	] );
-}
-
 QUnit.test( 'onDocumentChange', ( assert ) => {
+	const link = ( label, title ) => ve.dm.example.annotateText(
+		label,
+		ve.dm.MWInternalLinkAnnotation.static.dataElementFromTitle( mw.Title.newFromText( title ) )
+	);
+
 	const cases = [
 		{
 			msg: 'Two identical links in separate paragraphs (paragraph scope)',
 			scope: 'paragraph',
 			data: [
 				{ type: 'paragraph' },
-				...getLinksData( [
-					{ targetTitle: 'Foo', labelText: 'alpha' }
-				] ),
+				...link( 'alpha', 'Foo' ),
 				{ type: '/paragraph' },
 				{ type: 'paragraph' },
-				...getLinksData( [
-					{ targetTitle: 'Foo', labelText: 'beta' }
-				] ),
+				...link( 'beta', 'Foo' ),
 				{ type: '/paragraph' }
 			],
 			expectedActions: 0
@@ -35,17 +25,14 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			scope: 'section',
 			data: [
 				{ type: 'paragraph' },
-				...getLinksData( [
-					{ targetTitle: 'Foo', labelText: 'alpha' }
-				] ),
+				...link( 'alpha', 'Foo' ),
 				{ type: '/paragraph' },
 				{ type: 'paragraph' },
-				...getLinksData( [
-					{ targetTitle: 'Foo', labelText: 'beta' }
-				] ),
+				...link( 'beta', 'Foo' ),
 				{ type: '/paragraph' }
 			],
 			expectedActions: 1,
+			expectedModes: [ 'duplicate' ],
 			expectedHighlights: 2
 		},
 		{
@@ -53,13 +40,27 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			scope: 'paragraph',
 			data: [
 				{ type: 'paragraph' },
-				...getLinksData( [
-					{ targetTitle: 'Foo', labelText: 'alpha' },
-					{ targetTitle: 'Foo', labelText: 'beta' }
-				] ),
+				...link( 'alpha', 'Foo' ),
+				'-',
+				...link( 'beta', 'Foo' ),
 				{ type: '/paragraph' }
 			],
 			expectedActions: 1,
+			expectedModes: [ 'duplicate' ],
+			expectedHighlights: 2
+		},
+		{
+			msg: 'Adjacent identical links separated by whitespace',
+			scope: 'paragraph',
+			data: [
+				{ type: 'paragraph' },
+				...link( 'alpha', 'Foo' ),
+				' ',
+				...link( 'beta', 'Foo' ),
+				{ type: '/paragraph' }
+			],
+			expectedActions: 1,
+			expectedModes: [ 'adjacent' ],
 			expectedHighlights: 2
 		},
 		{
@@ -67,15 +68,17 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			scope: 'paragraph',
 			data: [
 				{ type: 'paragraph' },
-				...getLinksData( [
-					{ targetTitle: 'Foo', labelText: 'alpha' },
-					{ targetTitle: 'Foo', labelText: 'beta' },
-					{ targetTitle: 'Foo', labelText: 'gamma' },
-					{ targetTitle: 'Foo', labelText: 'delta' }
-				] ),
+				...link( 'alpha', 'Foo' ),
+				'-',
+				...link( 'beta', 'Foo' ),
+				'-',
+				...link( 'gamma', 'Foo' ),
+				'-',
+				...link( 'delta', 'Foo' ),
 				{ type: '/paragraph' }
 			],
 			expectedActions: 3,
+			expectedModes: [ 'duplicate', 'duplicate', 'duplicate' ],
 			expectedHighlights: 4
 		}
 	];
@@ -93,14 +96,15 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
 		if ( actions.length > 0 ) {
-			assert.strictEqual( actions[ 0 ].getName(), 'duplicateLink', 'Action name' );
-			assert.strictEqual( actions[ 0 ].fragments.length, caseItem.expectedHighlights, 'Highlight' );
+			assert.strictEqual( actions[ 0 ].getName(), 'duplicateLink', caseItem.msg + ': Action name' );
+			assert.strictEqual( actions[ 0 ].fragments.length, caseItem.expectedHighlights, caseItem.msg + ': Highlight' );
+			assert.deepEqual( actions.map( ( action ) => action.mode ), caseItem.expectedModes, caseItem.msg + ': Action mode' );
 		}
 		if ( actions.length > 1 ) {
-			// Assert that all pairs of actions are inequal
+			// Assert that all pairs of actions are not equal
 			for ( let i = 0; i < actions.length; i++ ) {
 				for ( let j = i + 1; j < actions.length; j++ ) {
-					assert.false( actions[ i ].equals( actions[ j ] ), 'Actions are not equal to each other, despite having the same fragments (but in different orders)' );
+					assert.false( actions[ i ].equals( actions[ j ] ), caseItem.msg + ': Actions are not equal to each other, despite having the same fragments (but in different orders)' );
 				}
 			}
 		}

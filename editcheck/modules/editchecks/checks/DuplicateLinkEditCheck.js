@@ -35,11 +35,18 @@ mw.editcheck.DuplicateLinkEditCheck.static.description = ve.deferJQueryMsg( 'edi
 mw.editcheck.DuplicateLinkEditCheck.static.choices = [
 	{
 		action: 'remove',
-		label: OO.ui.deferMsg( 'editcheck-action-remove-link' )
+		label: OO.ui.deferMsg( 'editcheck-action-remove-link' ),
+		modes: [ 'duplicate' ]
+	},
+	{
+		action: 'merge',
+		label: OO.ui.deferMsg( 'editcheck-action-merge-links' ),
+		modes: [ 'adjacent' ]
 	},
 	{
 		action: 'dismiss',
-		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' )
+		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' ),
+		modes: [ 'duplicate', 'adjacent' ]
 	}
 ];
 
@@ -141,9 +148,31 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 			highlights.splice( index, 1 );
 			highlights.unshift( annRange );
 
-			actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
-				fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) )
-			} ) );
+			// Check if the links are adjacent, or separated by whitespace only:
+			const adjacent = duplicateLinks.every( ( link, j ) => {
+				if ( j === 0 ) {
+					return true;
+				}
+				const previousLink = duplicateLinks[ j - 1 ];
+				const betweenText = documentModel.data.getText( true, new ve.Range( previousLink.range.end, link.range.start ) );
+				return /^[\s]*$/.test( betweenText ) &&
+					// Newline indicates element data
+					!/\n/.test( betweenText );
+			} );
+
+			if ( adjacent ) {
+				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
+					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
+					mode: 'adjacent',
+					title: OO.ui.deferMsg( 'editcheck-adjacent-link-title' ),
+					message: ve.deferJQueryMsg( 'editcheck-adjacent-link-description' )
+				} ) );
+			} else {
+				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
+					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
+					mode: 'duplicate'
+				} ) );
+			}
 		}
 	}
 
@@ -154,6 +183,19 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.act = function ( choice, action, s
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
 		action.select( surface, true );
+		return;
+	} else if ( choice === 'merge' ) {
+		let coveringRange;
+		action.fragments.forEach( ( fragment ) => {
+			const r = fragment.getSelection().getCoveringRange();
+			coveringRange = coveringRange ? coveringRange.expand( r ) : r;
+		} );
+		const coveringFragment = surface.getModel().getLinearFragment( coveringRange );
+		const linkAnnotation = this.getLinkFromFragment( action.fragments[ 0 ] );
+		coveringFragment
+			.annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name )
+			.annotateContent( 'set', linkAnnotation );
+		this.selectAnnotation( coveringFragment, surface );
 		return;
 	}
 	// Parent method
