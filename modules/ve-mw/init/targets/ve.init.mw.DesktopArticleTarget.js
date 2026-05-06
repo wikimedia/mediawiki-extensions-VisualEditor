@@ -920,15 +920,6 @@ ve.init.mw.DesktopArticleTarget.prototype.setupSkinTabs = function () {
 /**
  * @inheritdoc
  */
-ve.init.mw.DesktopArticleTarget.prototype.getSaveDialogOpeningData = function () {
-	const data = ve.init.mw.DesktopArticleTarget.super.prototype.getSaveDialogOpeningData.apply( this, arguments );
-	data.editSummary = this.editSummaryValue || this.initialEditSummary;
-	return data;
-};
-
-/**
- * @inheritdoc
- */
 ve.init.mw.DesktopArticleTarget.prototype.teardownToolbar = function () {
 	const deferred = ve.createDeferred();
 

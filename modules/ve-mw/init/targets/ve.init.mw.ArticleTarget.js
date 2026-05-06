@@ -2242,6 +2242,7 @@ ve.init.mw.ArticleTarget.prototype.getSaveDialogOpeningData = function () {
 		canPreview: mode === 'source',
 		canReview: !( mode === 'source' && this.section === 'new' ),
 		sectionTitle: this.sectionTitle && this.sectionTitle.getValue(),
+		editSummary: this.editSummaryValue || this.initialEditSummary,
 		saveButtonLabel: this.getSaveButtonLabel(),
 		copyrightWarning: this.copyrightWarning,
 		checkboxFields: this.checkboxFields,
