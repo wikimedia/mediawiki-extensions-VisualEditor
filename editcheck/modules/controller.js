@@ -30,9 +30,8 @@ function Controller( target, config ) {
 	// Suppress suggestions without affecting user config or toolbar state, used by external tools
 	this.suppressSuggestions = false;
 
-	// These are not in clearState as we want them to persist when switching sections (surface reload)
+	// These are not in clearState as we may want them to persist when switching sections (surface reload)
 	this.lastAvailableSuggestionCount = 0;
-	this.lastTargetSection = null;
 
 	this.clearState();
 
@@ -112,7 +111,6 @@ Controller.prototype.clearState = function () {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 	this.lastBranchNodeChangeHistoryPointer = null;
-	this.notifySwitchedToFullPage = false;
 };
 
 /**
@@ -156,20 +154,6 @@ Controller.prototype.setup = function () {
 
 		this.on( 'branchNodeChange', this.onBranchNodeChange, null, this );
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
-
-		if (
-			target.section === null &&
-			this.lastTargetSection !== null
-		) {
-			this.notifySwitchedToFullPage = true;
-			this.surface.getModel().getDocument().once( 'transact', () => {
-				// We only show the notification if the number of suggestions changes
-				// due to switching to full page, so clear this after the user starts editing.
-				this.notifySwitchedToFullPage = false;
-			} );
-		}
-
-		this.lastTargetSection = target.section;
 
 		// Run on load (e.g. recovering from auto-save)
 		this.inSetup = true;
@@ -331,7 +315,10 @@ Controller.prototype.toggleSuggestionsVisible = function () {
 		ve.userConfig( 'visualeditor-editcheck-suggestions-toggle', this.suggestionsVisible );
 	}
 	mw.notify(
-		ve.msg( this.suggestionsVisible ? 'editcheck-suggestions-turned-on' : 'editcheck-suggestions-turned-off' ),
+		ve.msg( this.suggestionsVisible ?
+			( this.lastAvailableSuggestionCount > 0 ? 'editcheck-suggestions-turned-on' : 'editcheck-suggestions-none' ) :
+			'editcheck-suggestions-turned-off'
+		),
 		{ tag: 'editcheck-suggestions-toggle', type: 'notice' }
 	);
 
@@ -795,26 +782,6 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	// Ignore a count of 0 during initial setup
 	if ( !( this.inSetup && suggestionCount === 0 ) ) {
 		this.updateSuggestionCountDebounced( suggestionCount );
-	}
-
-	if ( this.suggestionsVisible && !this.suppressSuggestions ) {
-		// Notify once when the user has completed/declined all suggestions.
-		if ( this.lastAvailableSuggestionCount > 0 && availableSuggestionCount === 0 ) {
-			mw.notify( ve.msg( 'editcheck-suggestions-none-left' ), {
-				tag: 'editcheck-suggestions-none-left',
-				type: 'notice'
-			} );
-		}
-		// After switching to full-page, notify if more suggestions become available.
-		if ( this.notifySwitchedToFullPage ) {
-			if ( availableSuggestionCount > this.lastAvailableSuggestionCount ) {
-				mw.notify( ve.msg( 'editcheck-suggestions-more-available' ), {
-					tag: 'editcheck-suggestions-more-available',
-					type: 'notice'
-				} );
-			}
-			this.notifySwitchedToFullPage = false;
-		}
 	}
 
 	this.lastAvailableSuggestionCount = availableSuggestionCount;
