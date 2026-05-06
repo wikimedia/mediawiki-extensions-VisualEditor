@@ -60,6 +60,10 @@ mw.editcheck.FakeHeadingEditCheck.prototype.checkNode = function ( node, surface
 	const documentModel = surfaceModel.getDocument();
 	const range = node.getRange();
 
+	if ( this.isDismissedRange( range ) ) {
+		return [];
+	}
+
 	const annotations = documentModel.data.getAnnotationsFromRange( range );
 	if ( !( annotations.hasAnnotationWithName( 'textStyle/bold' ) ) ) {
 		return [];

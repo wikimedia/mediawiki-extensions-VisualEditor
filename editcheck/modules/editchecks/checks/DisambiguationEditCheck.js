@@ -52,8 +52,7 @@ mw.editcheck.DisambiguationEditCheck.prototype.checkNode = function ( node, surf
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
 
-	return node.getAnnotationRanges()
-		.filter( ( annRange ) => annRange.annotation.name === ve.dm.MWInternalLinkAnnotation.static.name )
+	return this.getModifiedLinkRanges( surfaceModel, node )
 		// Links to sections of disambiguation pages are deliberately specific, so ignore them
 		.filter( ( annRange ) => !annRange.annotation.getFragment() )
 		.map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?

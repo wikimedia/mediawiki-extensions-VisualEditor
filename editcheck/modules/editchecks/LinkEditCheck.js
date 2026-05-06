@@ -39,12 +39,14 @@ mw.editcheck.LinkEditCheck.static.linkClasses = null;
  * Get modified link annotation ranges in the document
  *
  * @param {ve.ui.SurfaceModel} surfaceModel
+ * @param {ve.dm.ContentBranchNode} scopeNode
  * @return {ve.dm.LinearData.AnnotationRange[]} Annotation ranges, containing a link annotation and its range
  */
-mw.editcheck.LinkEditCheck.prototype.getModifiedLinkRanges = function ( surfaceModel ) {
+mw.editcheck.LinkEditCheck.prototype.getModifiedLinkRanges = function ( surfaceModel, scopeNode ) {
 	return this.getModifiedAnnotationRanges(
 		surfaceModel.getDocument(),
-		this.constructor.static.linkClasses.map( ( linkClass ) => linkClass.static.name )
+		this.constructor.static.linkClasses.map( ( linkClass ) => linkClass.static.name ),
+		scopeNode
 	);
 };
 

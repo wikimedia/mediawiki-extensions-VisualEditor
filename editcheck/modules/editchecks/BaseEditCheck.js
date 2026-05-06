@@ -408,12 +408,13 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
  *
  * @param {ve.dm.Document} documentModel
  * @param {string[]} [names] Names of annotations to filter for
+ * @param {ve.dm.ContentBranchNode} [scopeNode] Node to check within
  * @return {ve.dm.LinearData.AnnotationRange[]} Annotation ranges, containing an annotation and its range
  */
-mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, names ) {
+mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, names, scopeNode ) {
 	const modified = this.getModifiedContentRanges( documentModel );
 
-	return documentModel.getDocumentNode().getAnnotationRanges().filter(
+	return ( scopeNode || documentModel.getDocumentNode() ).getAnnotationRanges().filter(
 		// Try to apply fastest filters first
 		( annRange ) => modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
 			( !names || names.includes( annRange.annotation.name ) ) &&
