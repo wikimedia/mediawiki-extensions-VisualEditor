@@ -10,7 +10,8 @@
 			"GuoPC",
 			"人间百态",
 			"沈澄心",
-			"Yfdyh000"
+			"Yfdyh000",
+			"PexEric"
 		]
 	},
 	"editcheck-dialog-action-no": "否",
@@ -29,11 +30,11 @@
 	"editcheck-copyvio-description": "一般来说，不要从其他来源复制文本。这样做通常既构成侵犯版权，也构成抄袭。",
 	"editcheck-review-title": "查看更改",
 	"tag-editcheck-reference-decline-common-knowledge": "拒绝（参考资料）编辑检查（常识）",
-	"tag-editcheck-reference-decline-common-knowledge-description": "参考资料编辑检查以常识作为原因而拒绝",
+	"tag-editcheck-reference-decline-common-knowledge-description": "参考资料编辑检查以常识为由被拒绝",
 	"tag-editcheck-reference-decline-irrelevant": "拒绝（参考资料）编辑检查（无关）",
-	"tag-editcheck-reference-decline-irrelevant-description": "参考资料编辑检查以无关作为原因而拒绝",
+	"tag-editcheck-reference-decline-irrelevant-description": "参考资料编辑检查以无关为由而被拒绝",
 	"tag-editcheck-reference-decline-other": "拒绝（参考资料）编辑检查（其他）",
-	"tag-editcheck-reference-decline-other-description": "参考资料编辑检查以未列出的原因拒绝",
+	"tag-editcheck-reference-decline-other-description": "参考资料编辑检查以其他原因被拒绝",
 	"tag-editcheck-reference-decline-uncertain": "拒绝（参考资料）编辑检查（不确定）",
-	"tag-editcheck-reference-decline-uncertain-description": "参考资料编辑检查以不确定作为原因而拒绝"
+	"tag-editcheck-reference-decline-uncertain-description": "参考资料编辑检查以不确定为由被拒绝"
 }
