@@ -461,24 +461,3 @@ mw.editcheck.EditCheckAction.prototype.overlapsRanges = function ( ranges ) {
 mw.editcheck.EditCheckAction.prototype.isDismissed = function () {
 	return this.isTagged( 'dismissed' );
 };
-
-/**
- * Check whether every range of this action has been tagged for this check
- *
- * @param {string} tag
- * @return {boolean}
- */
-mw.editcheck.EditCheckAction.prototype.isTagged = function ( tag ) {
-	return this.fragments.every( ( fragment ) => {
-		const sel = fragment.getSelection();
-		let fragmentRange;
-		if ( sel instanceof ve.dm.LinearSelection ) {
-			fragmentRange = sel.getRange();
-		} else if ( sel instanceof ve.dm.TableSelection ) {
-			fragmentRange = sel.getCoveringRange();
-		} else {
-			return false;
-		}
-		return this.check.isTaggedRange( fragmentRange, tag );
-	} );
-};
