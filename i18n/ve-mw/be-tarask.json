@@ -102,7 +102,7 @@
 	"visualeditor-dialog-meta-languages-section": "Мовы",
 	"visualeditor-dialog-meta-settings-displaytitle": "Загаловак для паказваньня",
 	"visualeditor-dialog-meta-settings-displaytitle-help": "Вы можаце перавызначыць паказ загалоўку гэтае старонкі, задаўшы іншую метку.",
-	"visualeditor-dialog-meta-settings-hiddencat-help": "Вы можаце прадухіліць адлюстраваньне гэтай катэгорыі ў сьпісе катэгорыяў на старонках, залічаных у яе. Гэта зручна для катэгорыяў, патрэбных рэдактарам, а не чытачам (напрыклад, старонкі, якім не стае выяваў).",
+	"visualeditor-dialog-meta-settings-hiddencat-help": "Вы можаце прадухіліць паказ гэтай катэгорыі ў сьпісе катэгорыяў на старонках, што належаць да яе. Гэта зручна для катэгорыяў, патрэбных рэдактарам, а не чытачам (напрыклад, старонкі, якім не стае выяваў).",
 	"visualeditor-dialog-meta-settings-hiddencat-label": "Схаваная катэгорыя",
 	"visualeditor-dialog-meta-settings-index-default": "Перадвызначана",
 	"visualeditor-dialog-meta-settings-index-disable": "Не",
