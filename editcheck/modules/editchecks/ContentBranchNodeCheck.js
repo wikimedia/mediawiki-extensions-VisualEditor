@@ -37,7 +37,6 @@ mw.editcheck.ContentBranchNodeCheck.prototype.checkNode = null;
 mw.editcheck.ContentBranchNodeCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 	const actions = [];
 	const doc = surfaceModel.getDocument();
-	const cacheKey = this.constructor.static.name + '#checkNode';
 
 	const modified = this.getModifiedRanges( doc, false, false, false );
 
@@ -52,7 +51,7 @@ mw.editcheck.ContentBranchNodeCheck.prototype.onDocumentChange = function ( surf
 		let nodeActions = doc.getOrInsertCachedData(
 			node,
 			( () => this.checkNode( node, surfaceModel ) ),
-			cacheKey
+			'editcheck-ContentBranchNodeCheck-checkNode', this.constructor.static.name
 		);
 		if ( !Array.isArray( nodeActions ) ) {
 			nodeActions = [ nodeActions ];
