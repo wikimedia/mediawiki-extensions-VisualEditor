@@ -19,7 +19,6 @@ use MediaWiki\Rest\Handler\Helper\HtmlOutputRendererHelper;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
-use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\User;
 use Wikimedia\Bcp47Code\Bcp47Code;
 
@@ -137,13 +136,9 @@ class DirectParsoidClient implements ParsoidClient {
 		PageIdentity $page,
 		string $wikitext
 	): RevisionRecord {
-		$rev = new MutableRevisionRecord( $page );
-		$rev->setId( 0 );
-		$rev->setPageId( $page->getId() );
-
-		$rev->setContent( SlotRecord::MAIN, new WikitextContent( $wikitext ) );
-
-		return $rev;
+		return MutableRevisionRecord::newFromContent( $page, new WikitextContent( $wikitext ) )
+			->setId( 0 )
+			->setPageId( $page->getId() );
 	}
 
 	/**
