@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Irus",
+			"Kallmemel",
 			"ObaTango"
 		]
 	},
 	"tooltip-ca-ve-edit": "Editá e página akí",
 	"visualeditor-ca-createlocaldescriptionsource": "Añadí deskripshon lokal",
-	"visualeditor-ca-createsource": "krea fuente",
+	"visualeditor-ca-createsource": "Krea fuente",
 	"visualeditor-ca-editsource": "Editá fuente",
 	"visualeditor-ca-editsource-section": "editá fuente",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
