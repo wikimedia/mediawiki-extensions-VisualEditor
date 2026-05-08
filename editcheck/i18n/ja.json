@@ -93,6 +93,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "ベータ版機能",
 	"editcheck-specialeditchecks-header-default": "デフォルトチェック",
 	"editcheck-specialeditchecks-header-experimental": "実験的チェック",
+	"editcheck-specialeditchecks-header-unsupported": "サポートされていないチェック",
 	"editcheck-specialeditchecks-col-title": "タイトル",
 	"editcheck-specialeditchecks-col-name": "名前",
 	"editcheck-specialeditchecks-col-appearance": "表示",

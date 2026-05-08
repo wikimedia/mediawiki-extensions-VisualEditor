@@ -15,7 +15,8 @@
 			"SleaY",
 			"Trizek (WMF)",
 			"Urhixidur",
-			"Wladek92"
+			"Wladek92",
+			"Jdforrester"
 		]
 	},
 	"editchecks": "Vérifications de modifications",
@@ -101,6 +102,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Fonctionnalités bêta",
 	"editcheck-specialeditchecks-header-default": "Vérifications par défaut",
 	"editcheck-specialeditchecks-header-experimental": "Vérifications expérimentales",
+	"editcheck-specialeditchecks-header-unsupported": "Vérifications indisponibles",
 	"editcheck-specialeditchecks-col-title": "Titre",
 	"editcheck-specialeditchecks-col-name": "Nom",
 	"editcheck-specialeditchecks-col-appearance": "Apparence",
