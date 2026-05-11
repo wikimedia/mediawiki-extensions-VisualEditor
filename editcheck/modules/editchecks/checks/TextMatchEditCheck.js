@@ -346,8 +346,10 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 							}
 						}
 						let replacement = matchRule.getReplacement( term );
-						if ( matchRule.preserveCase ) {
-							replacement = mw.editcheck.applyCase( replacement, term, this.lang );
+						if ( matchRule.mode === 'replace' ) {
+							if ( replacement !== null && matchRule.preserveCase ) {
+								replacement = mw.editcheck.applyCase( replacement, term, this.lang );
+							}
 						}
 						actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
 					}
@@ -543,7 +545,8 @@ mw.editcheck.TextMatchRule = function MWTextMatchRule( rule, id, collator ) {
 	}
 	this.caseSensitive = rule.caseSensitive;
 	this.minOccurrences = rule.minOccurrences;
-	this.preserveCase = rule.preserveCase;
+	// preserveCase defaults to true when caseSensitive is false or not set
+	this.preserveCase = ( rule.preserveCase !== null && rule.preserveCase !== undefined ) ? rule.preserveCase : !this.caseSensitive;
 	this.isRegExp = rule.isRegExp;
 
 	// If the selection is meant to be expanded, then only one action should be created per expanded fragment range

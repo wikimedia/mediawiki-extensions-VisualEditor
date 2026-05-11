@@ -81,13 +81,12 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			}
 		},
 		{
-			msg: 'Text replacement preserves case',
+			msg: 'Default to preserving case when case sensitive is not set',
 			matchRules: {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
 					mode: 'replace',
-					preserveCase: true,
 					query: {
 						Foo: 'Bar'
 					}
