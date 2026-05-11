@@ -5,6 +5,11 @@
 			"Milicevic01"
 		]
 	},
+	"editchecks": "Провере измена",
+	"editcheck-suggestions-turned-on": "Предлози су укључени",
+	"editcheck-suggestions-turned-off": "Предлози су искључени",
+	"editcheck-suggestions-more-available": "Више предлога је сада доступно",
+	"editcheck-suggestions-none-left": "Нема више предлога",
 	"editcheck-dialog-action-no": "Не",
 	"editcheck-dialog-action-yes": "Да",
 	"editcheck-dialog-action-decline": "Одбаци",
