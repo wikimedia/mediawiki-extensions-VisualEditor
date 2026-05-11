@@ -212,6 +212,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			if ( mw.editcheck.state.checks.shown.paste ) {
 				target.addSaveTag( 'editcheck-paste-shown' );
 			}
+			if ( mw.editcheck.state.checks.shown[ 'llm-paste' ] ) {
+				target.addSaveTag( 'editcheck-llm-paste-shown' );
+			}
 			if ( Object.keys( mw.editcheck.state.suggestions.seen ).length > 0 ) {
 				target.addSaveTag( 'editsuggestion-seen' );
 			}

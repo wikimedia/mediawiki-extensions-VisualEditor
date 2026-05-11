@@ -1,7 +1,8 @@
 QUnit.module( 'mw.editcheck.PasteCheck', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onDocumentChange', ( assert ) => {
-	const importedText = ( length ) => ve.dm.example.annotateText( 'x'.repeat( length ), ve.dm.example.getImportedAnnotation() );
+	const importedText = ( length, source ) => ve.dm.example.annotateText( 'x'.repeat( length ), ve.dm.example.getImportedAnnotation( source ) );
+	const aiSource = { name: 'chatGPT', categories: [ 'ai' ] };
 	const noChange = () => {};
 	const cases = [
 		{
@@ -107,6 +108,55 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			config: { minimumCharacters: 50 },
 			dismissedIds: [ 'test1' ],
 			expectedActions: 0
+		},
+		{
+			msg: 'Word processor paste is ignored',
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60, { name: 'googleDocs', categories: [ 'wordProcessor' ] } ),
+				{ type: '/paragraph' }
+			],
+			expectedData: noChange,
+			config: { minimumCharacters: 50 },
+			expectedActions: 0
+		},
+		{
+			msg: 'AI paste is left to LLMPasteCheck',
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60, aiSource ),
+				{ type: '/paragraph' }
+			],
+			expectedData: noChange,
+			config: { minimumCharacters: 50 },
+			expectedActions: 0
+		},
+		{
+			msg: 'LLMPasteCheck acts on an AI paste',
+			checkClass: mw.editcheck.LLMPasteCheck,
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60, aiSource ),
+				{ type: '/paragraph' }
+			],
+			expectedData: ( data ) => {
+				data.splice( 1, 60 );
+			},
+			config: { minimumCharacters: 50 },
+			expectedActions: 1,
+			expectedFragments: 1
+		},
+		{
+			msg: 'LLMPasteCheck ignores a paste from an unknown source',
+			checkClass: mw.editcheck.LLMPasteCheck,
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60 ),
+				{ type: '/paragraph' }
+			],
+			expectedData: noChange,
+			config: { minimumCharacters: 50 },
+			expectedActions: 0
 		}
 	];
 
@@ -114,6 +164,8 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		mw.editcheck.PasteCheck.static.originalPasteLengths = {};
 		ve.init.platform.resetUniqueIdCounter();
 
+		const CheckClass = caseItem.checkClass || mw.editcheck.PasteCheck;
+		const checkName = CheckClass.static.name;
 		const doc = ve.dm.example.createExampleDocumentFromData( [
 			...caseItem.getData(),
 			{ type: 'internalList' },
@@ -122,15 +174,15 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		const surfaceModel = new ve.dm.Surface( doc );
 		const dummyController = Object.assign( {}, ve.test.utils.EditCheck.dummyController, {
 			taggedIds: {
-				paste: {
+				[ checkName ]: {
 					dismissed: new Set( caseItem.dismissedIds || [] )
 				}
 			}
 		} );
-		const check = new mw.editcheck.PasteCheck( dummyController, caseItem.config, true );
-		const actions = check.onDocumentChange( surfaceModel ).filter( ( action ) => action.getName() === 'paste' );
+		const check = new CheckClass( dummyController, caseItem.config, true );
+		const actions = check.onDocumentChange( surfaceModel ).filter( ( action ) => action.getName() === checkName );
 
-		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.name );
+		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
 		if ( caseItem.expectedFragments !== undefined ) {
 			assert.strictEqual(
 				actions[ 0 ].fragments.length,
