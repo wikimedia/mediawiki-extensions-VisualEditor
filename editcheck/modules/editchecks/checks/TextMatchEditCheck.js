@@ -253,7 +253,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 				// So we'll need to search by individual query, instead of grouping all the query terms into a set.
 				if ( matchRule.isRegExp && matchRule.mode === 'replace' ) {
 					Object.entries( matchRule.query ).forEach( ( [ pattern, replacer ] ) => {
-						const regex = new RegExp( pattern, 'gi' );
+						const regex = new RegExp( pattern, 'g' + ( matchRule.isCaseSensitive() ? '' : 'i' ) );
 						const finder = new ve.dm.RegExpTextFinder( regex, { wholeWord: true } );
 						const regexRanges = document.findText( finder );
 						for ( const range of regexRanges ) {
@@ -279,7 +279,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 
 					let finder = null;
 					if ( matchRule.isRegExp ) {
-						const re = new RegExp( terms.join( '|' ), 'gi' );
+						const re = new RegExp( terms.join( '|' ), 'g' + ( matchRule.isCaseSensitive() ? '' : 'i' ) );
 						finder = new ve.dm.RegExpTextFinder( re,
 							{
 								wholeWord: true

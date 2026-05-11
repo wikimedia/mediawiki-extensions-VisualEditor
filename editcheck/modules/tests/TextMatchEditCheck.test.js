@@ -181,13 +181,37 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				bad: {
 					title: 'Bad',
 					message: 'Avoid this term',
-					query: 'foo.*bar',
-					isRegExp: true
+					query: 'foo.*?bar',
+					isRegExp: true,
+					caseSensitive: false
 				}
 			},
 			data: [
 				{ type: 'paragraph' },
 				...'foo some content bar',
+				' ',
+				...'FOO some content BAR',
+				{ type: '/paragraph' }
+			],
+			expectedTerms: [ 'foo some content bar', 'FOO some content BAR' ],
+			expectedActions: 2
+		},
+		{
+			msg: 'Case-sensitive regular expression',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					query: 'foo.*?bar',
+					isRegExp: true,
+					config: { caseSensitive: true }
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'foo some content bar',
+				' ',
+				...'FOO some content BAR',
 				{ type: '/paragraph' }
 			],
 			expectedTerms: [ 'foo some content bar' ],
