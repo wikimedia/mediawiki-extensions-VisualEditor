@@ -210,8 +210,10 @@ mw.editcheck.TextMatchEditCheck.prototype.instantiateMatchRules = function ( raw
 			( choice ) => choice.modes.includes( rule.mode )
 		);
 		rule.mode = isValidMode ? rule.mode : '';
-		if ( !rule.expand && ve.getProp( rule, 'config', 'minOccurrences' ) ) {
-			mw.log.warn( 'MatchRule \'' + rule.title + '\' sets minOccurrences but is missing expand value.' );
+		if ( !rule.expand ) {
+			if ( ve.getProp( rule, 'config', 'minOccurrences' ) || rule.minOccurrences ) {
+				mw.log.warn( 'MatchRule \'' + rule.title + '\' sets minOccurrences but is missing expand value.' );
+			}
 		}
 		const textMatchRule = new mw.editcheck.TextMatchRule( rule, id, this.collator );
 		this.matchRules.push( textMatchRule );
@@ -326,7 +328,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 					}
 
 					const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
-					const min = matchRule.config.minOccurrences;
+					const min = matchRule.minOccurrences;
 					// If this match rule requires a certain number of occurrences, start keeping track of those
 					if ( min ) {
 						const fragRange = fragment.getSelection().getRange();
@@ -508,6 +510,8 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
  * @param {string} [rule.listener] Listener that this matchRule applies to, if not all
  * @param {boolean} [rule.preserveCase] If the replacement should match the case of the found term
  * @param {boolean} [rule.isRegExp] If the query should be treated as a regular expression
+ * @param {boolean} [rule.caseSensitive] If search should be case sensitive
+ * @param {boolean} [rule.minOccurrences] Number of query instances that need to be found before it's declared a match
  * @param {string} id ID of matchRule in config
  * @param {Intl.Collator} collator Collator to use for comparisons
  */
@@ -519,12 +523,24 @@ mw.editcheck.TextMatchRule = function MWTextMatchRule( rule, id, collator ) {
 	this.expand = rule.expand;
 	this.inNode = rule.inNode || null;
 	this.listener = rule.listener || null;
+	// In T426004 we moved to defining caseSensitive and minOccurrences at the top-level of the matchItem config,
+	// but we'll support the previous way for backwards compatibility with any existing on-wiki configs
+	if ( rule.config ) {
+		if ( rule.config.caseSensitive ) {
+			rule.caseSensitive = rule.config.caseSensitive;
+		}
+		if ( rule.config.minOccurrences ) {
+			rule.minOccurrences = rule.config.minOccurrences;
+		}
+	}
+	this.caseSensitive = rule.caseSensitive;
+	this.minOccurrences = rule.minOccurrences;
 	this.preserveCase = rule.preserveCase;
 	this.isRegExp = rule.isRegExp;
 
 	// If the selection is meant to be expanded, then only one action should be created per expanded fragment range
-	if ( this.expand && !this.config.minOccurrences ) {
-		this.config.minOccurrences = 1;
+	if ( this.expand && !this.minOccurrences ) {
+		this.minOccurrences = 1;
 	}
 
 	this.id = id;
@@ -572,7 +588,7 @@ mw.editcheck.TextMatchRule.prototype.normalizeQuery = function ( query ) {
  * @return {boolean} if this matchRule is configured to be case sensitive
  */
 mw.editcheck.TextMatchRule.prototype.isCaseSensitive = function () {
-	return this.config && this.config.caseSensitive;
+	return this.caseSensitive;
 };
 
 /**
@@ -650,7 +666,7 @@ mw.editcheck.TextMatchRule.prototype.getSubTag = function ( term ) {
 		// there can only be one action from this matchRule for any given fragment.
 		return `-${ this.id }`;
 	}
-	if ( this.config.caseSensitive ) {
+	if ( this.isCaseSensitive() ) {
 		termIndex = queries.indexOf( term );
 	} else {
 		termIndex = queries.findIndex( ( q ) => this.collator.compare( q, term ) === 0 );

@@ -127,7 +127,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 					title: 'Bad',
 					message: 'Avoid this term',
 					query: 'Foo',
-					config: { caseSensitive: true }
+					caseSensitive: true
 				}
 			},
 			data: [
@@ -146,7 +146,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 					message: 'Avoid this term',
 					query: 'Foo',
 					expand: 'paragraph',
-					config: { minOccurrences: 2 }
+					minOccurrences: 2
 				}
 			},
 			data: [
@@ -165,7 +165,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 					message: 'Avoid this term',
 					query: 'Foo',
 					expand: 'paragraph',
-					config: { minOccurrences: 2 }
+					minOccurrences: 2
 				}
 			},
 			data: [
@@ -204,7 +204,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 					message: 'Avoid this term',
 					query: 'foo.*?bar',
 					isRegExp: true,
-					config: { caseSensitive: true }
+					caseSensitive: true
 				}
 			},
 			data: [
