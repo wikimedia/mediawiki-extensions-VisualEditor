@@ -10,6 +10,7 @@
 	},
 	"editchecks": "Controlli di modifica",
 	"editcheck-toolbar-suggestions-title": "Attiva/disattiva suggerimenti",
+	"editcheck-suggestions-none": "Nessun suggerimento disponibile",
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Sì",
 	"editcheck-dialog-action-decline": "Rifiuta",
