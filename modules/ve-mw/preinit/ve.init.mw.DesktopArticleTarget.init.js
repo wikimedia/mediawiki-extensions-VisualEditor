@@ -512,8 +512,9 @@
 	 *  the heading to prefix the edit summary.
 	 * @param {jQuery.Promise} [tPromise] Promise that will be resolved with a ve.init.mw.DesktopArticleTarget
 	 * @param {boolean} [modified=false] The page has been modified before loading (e.g. in source mode)
+	 * @param {string} [openDialog] Name of dialog to open after activation, (e.g. 'categories')
 	 */
-	function activateTarget( mode, section, tPromise, modified ) {
+	function activateTarget( mode, section, tPromise, modified, openDialog ) {
 		let dataPromise;
 
 		updateTabs( true, mode, section === 'new' );
@@ -587,6 +588,10 @@
 		incrementLoadingProgress();
 		active = true;
 
+		if ( openDialog === 'categories' ) {
+			init.disableWelcomeDialog();
+		}
+
 		tPromise = tPromise || getTarget( mode, section );
 		tPromise
 			.then( ( target ) => {
@@ -599,6 +604,18 @@
 				// syncTempWikitextEditor modified the result object in the dataPromise
 				if ( tempWikitextEditor ) {
 					syncTempWikitextEditor();
+				}
+
+				if ( openDialog === 'categories' ) {
+					target.once( 'surfaceReady', () => {
+						const windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
+						windowAction.open( 'meta', { page: 'categories' } );
+					} );
+					// veopendialog does not need to persist like section, as the dialog does not
+					// persist in the editor like a section does.
+					const url = new URL( location.href );
+					url.searchParams.delete( 'veopendialog' );
+					history.replaceState( { tag: 'visualeditor' }, '', url );
 				}
 
 				const deactivating = target.deactivatingDeferred || $.Deferred().resolve();
@@ -652,7 +669,9 @@
 			// Update URL instance
 			currentUrl = linkUrl || veEditUrl;
 
-			activateTarget( mode, section, undefined, modified );
+			const openDialog = currentUrl.searchParams.get( 'veopendialog' ) || null;
+
+			activateTarget( mode, section, undefined, modified, openDialog );
 		}
 	}
 
@@ -933,14 +952,19 @@
 				}
 
 				if ( !mw.user.isAnon() && pageCanLoadEditor && init.isVisualAvailable() && ( !init.isSingleEditTab || isOnlyTabVE() ) ) {
+					const veEditCategoriesUrl = new URL( veEditUrl );
+					veEditCategoriesUrl.searchParams.set( 'veopendialog', 'categories' );
 					// Show a category-edit link for logged in users who would be given VE if they clicked an "edit" link
 					$( '#catlinks' ).prepend(
 						$( '<span>' )
 							.addClass( 've-init-mw-desktopArticleTarget-categoryEdit mw-editsection-like' )
-							.on( 'click', init.onCategoryEditLinkClick )
+							.on( 'click', init.onEditSectionLinkClick.bind( init, 'visual' ) )
 							.append(
 								$( '<span>' ).addClass( 'mw-editsection-bracket' ).text( '[' ),
-								$( '<a>' ).text( mw.msg( 'editsection' ) ),
+								// eslint-disable-next-line local/no-unsanitized-href
+								$( '<a>' )
+									.attr( 'href', veEditCategoriesUrl )
+									.text( mw.msg( 'editsection' ) ),
 								$( '<span>' ).addClass( 'mw-editsection-bracket' ).text( ']' )
 							)
 					);
@@ -1165,42 +1189,10 @@
 				if ( section === undefined ) {
 					section = getSectionFromUrl( linkUrl );
 				}
+				const openDialog = linkUrl.searchParams.get( 'veopendialog' ) || null;
 				const tPromise = getTarget( mode, section );
-				activateTarget( mode, section, tPromise );
+				activateTarget( mode, section, tPromise, false, openDialog );
 			}
-		},
-
-		onCategoryEditLinkClick: function ( e ) {
-			if ( !init.isUnmodifiedLeftClick( e ) ) {
-				return;
-			}
-			e.preventDefault();
-			if ( isLoading ) {
-				return;
-			}
-			// should perhaps have a new 'type' for 'categories' added?
-			trackActivateStart( { type: 'page', mechanism: 'click', mode: 'visual' } );
-			if ( currentUrl.searchParams.get( 'action' ) !== 'edit' && !( currentUrl.searchParams.get( 'veaction' ) in veactionToMode ) ) {
-				if ( history.pushState ) {
-					// Replace the current state with one that is tagged as ours, to prevent the
-					// back button from breaking when used to exit VE. FIXME: there should be a better
-					// way to do this. See also similar code in the DesktopArticleTarget constructor.
-					history.replaceState( { tag: 'visualeditor' }, document.title, currentUrl );
-					// Set veaction to edit
-					history.pushState( { tag: 'visualeditor' }, document.title, veEditUrl );
-				}
-
-				// Update mw.Uri instance
-				currentUrl = veEditUrl;
-			}
-			init.disableWelcomeDialog();
-			activateTarget( 'visual', null, getTarget( 'visual', null ).then( ( target ) => {
-				target.once( 'surfaceReady', () => {
-					const windowAction = ve.ui.actionFactory.create( 'window', target.getSurface() );
-					windowAction.open( 'meta', { page: 'categories' } );
-				} );
-				return target;
-			} ) );
 		},
 
 		/**
@@ -1515,7 +1507,8 @@
 					mechanism: ( section === 'new' || !mw.config.get( 'wgArticleId' ) ) ? 'url-new' : 'url',
 					mode
 				} );
-				activateTarget( mode, section );
+				const openDialog = currentUrl.searchParams.get( 'veopendialog' ) || null;
+				activateTarget( mode, section, null, false, openDialog );
 			} else if (
 				init.isVisualAvailable() &&
 				pageCanLoadEditor &&
