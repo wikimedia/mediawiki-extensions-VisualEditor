@@ -894,47 +894,21 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
 		info = this.selectedImageInfo;
 
 	if ( info ) {
-		const imageTitleText = info.title || info.canonicaltitle;
-		// Run title through mw.Title so the File: prefix is localised
-		const title = mw.Title.newFromText( imageTitleText ).getPrefixedText();
+		const imageModel = ve.dm.MWImageModel.static.newFromImageInfo( info, this.getFragment().getDocument() );
 		if ( !this.imageModel ) {
-			// Create a new image model based on default attributes
-			this.imageModel = ve.dm.MWImageModel.static.newFromImageAttributes(
-				{
-					// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
-					href: './' + title,
-					src: info.url,
-					resource: './' + title,
-					width: info.thumbwidth,
-					height: info.thumbheight,
-					mediaType: info.mediatype,
-					type: 'thumb',
-					align: 'default',
-					defaultSize: true,
-					imageClassAttr: 'mw-file-element'
-				},
-				this.getFragment().getDocument()
-			);
+			this.imageModel = imageModel;
 			this.attachImageModel();
 			this.resetCaption();
 		} else {
 			// Update the current image model with the new image source
-			this.imageModel.changeImageSource(
-				{
-					mediaType: info.mediatype,
-					href: './' + title,
-					src: info.url,
-					resource: './' + title
-				},
-				info
-			);
+			this.imageModel.changeImageSource( imageModel, info );
 			this.updateFilenameFieldset();
 		}
 
 		// Cache
 		// We're trimming the stored data down to be consistent with what
 		// ImageInfoCache.getRequestPromise fetches.
-		obj[ imageTitleText ] = {
+		obj[ info.title || info.canonicaltitle ] = {
 			size: info.size,
 			width: info.width,
 			height: info.height,
@@ -955,7 +929,7 @@ ve.ui.MWMediaDialog.prototype.confirmSelectedImage = function () {
  * Update the filename fieldset (link to media page)
  */
 ve.ui.MWMediaDialog.prototype.updateFilenameFieldset = function () {
-	const title = mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.imageModel.getResourceName() ) );
+	const title = this.imageModel.getResourceTitle();
 	const $link = $( '<a>' )
 		.addClass( 've-ui-mwMediaDialog-description-link' )
 		.text( ve.msg( 'visualeditor-dialog-media-content-description-link' ) );

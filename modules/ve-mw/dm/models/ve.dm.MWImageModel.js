@@ -217,6 +217,38 @@ ve.dm.MWImageModel.static.newFromImageAttributes = function ( attrs, parentDoc )
 };
 
 /**
+ * Load from imageinfo query API output
+ *
+ * You need to have requested the `iiprop`s `url` and `dimensions`, and
+ * `mediatype` would be a good idea. If you've requested a thumb via
+ * `iiurlwidth`/`iiurlheight` this will use the `thumbwidth`/`thumbheight` as
+ * the image's width/height.
+ *
+ * @param {Object} info ImageInfo from mw.Api
+ * @param {ve.dm.Document} parentDoc Document that contains or will contain the image
+ * @return {ve.dm.MWImageModel} Image model
+ */
+ve.dm.MWImageModel.static.newFromImageInfo = function ( info, parentDoc ) {
+	// Run title through mw.Title so the File: prefix is localised
+	const title = mw.Title.newFromText( info.title || info.canonicaltitle ).getPrefixedText();
+	// Map imageinfo onto attributes
+	const attrs = {
+		// Per https://www.mediawiki.org/w/?diff=931265&oldid=prev
+		href: './' + title,
+		src: info.url,
+		resource: './' + title,
+		width: info.thumbwidth || info.width,
+		height: info.thumbheight || info.height,
+		mediaType: info.mediatype,
+		type: info.type || ( info.thumbwidth ? 'thumb' : 'none' ),
+		align: 'default',
+		defaultSize: true,
+		imageClassAttr: 'mw-file-element'
+	};
+	return ve.dm.MWImageModel.static.newFromImageAttributes( attrs, parentDoc );
+};
+
+/**
  * Load from existing image node.
  *
  * @param {ve.dm.MWImageNode} node Image node
@@ -272,11 +304,14 @@ ve.dm.MWImageModel.prototype.getNormalizedImageSource = function () {
 /**
  * Adjust the model parameters based on a new image
  *
- * @param {Object} attrs New image source attributes
+ * @param {Object|ve.dm.MWImageModel} attrs New image source attributes, or a model to copy attributes from
  * @param {Object} [APIinfo] The image's API info
  * @throws {Error} Image has insufficient details to compute the imageModel details.
  */
 ve.dm.MWImageModel.prototype.changeImageSource = function ( attrs, APIinfo ) {
+	if ( attrs instanceof ve.dm.MWImageModel ) {
+		attrs = attrs.getUpdatedAttributes();
+	}
 	this.changedImageSource = true;
 
 	if ( attrs.mediaType ) {
@@ -585,7 +620,7 @@ ve.dm.MWImageModel.prototype.getUpdatedAttributes = function () {
 	attrs.href = this.getImageHref();
 	attrs.imageClassAttr = this.getImageClassAttr();
 	attrs.imgWrapperClassAttr = this.getImgWrapperClassAttr();
-	attrs.resource = this.getImageResourceName();
+	attrs.resource = this.getResourceName();
 
 	return attrs;
 };
@@ -752,10 +787,23 @@ ve.dm.MWImageModel.prototype.isBorderable = function () {
 /**
  * Get the image file resource name
  *
+ * The resource name represents the filename without the full
+ * source url.
+ * For example, './File:Foo.jpg'
+ *
  * @return {string} resourceName The resource name of the given media file
  */
 ve.dm.MWImageModel.prototype.getResourceName = function () {
 	return this.imageResourceName;
+};
+
+/**
+ * Get a Title representing the image resource
+ *
+ * @return {mw.Title}
+ */
+ve.dm.MWImageModel.prototype.getResourceTitle = function () {
+	return mw.Title.newFromText( mw.libs.ve.normalizeParsoidResourceName( this.getResourceName() ) );
 };
 
 /**
@@ -1120,18 +1168,6 @@ ve.dm.MWImageModel.prototype.getDefaultDir = function ( imageNodeType ) {
  */
 ve.dm.MWImageModel.prototype.getImageSource = function () {
 	return this.imageSrc;
-};
-
-/**
- * Get the image file resource name.
- * The resource name represents the filename without the full
- * source url.
- * For example, './File:Foo.jpg'
- *
- * @return {string} The resource name of the given media file
- */
-ve.dm.MWImageModel.prototype.getImageResourceName = function () {
-	return this.imageResourceName;
 };
 
 /**
