@@ -24,7 +24,7 @@ OO.inheritClass( mw.editcheck.SuggestedLinkEditCheck, mw.editcheck.LinkEditCheck
 mw.editcheck.SuggestedLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	showAsCheck: false, // This would never make sense to enable
 	showAsSuggestion: false,
-	predictionThreshold: 0.6
+	predictionThreshold: 0.8
 } );
 
 mw.editcheck.SuggestedLinkEditCheck.static.name = 'suggestedLink';
