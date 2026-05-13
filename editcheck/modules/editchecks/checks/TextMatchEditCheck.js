@@ -13,7 +13,17 @@ mw.editcheck.TextMatchEditCheck = function MWTextMatchEditCheck() {
 	// Parent constructor
 	mw.editcheck.TextMatchEditCheck.super.apply( this, arguments );
 
-	this.lang = mw.config.get( 'wgContentLanguage' );
+	let lang = mw.config.get( 'wgContentLanguage' );
+	if ( this.constructor.static.languageFallbacks[ lang ] ) {
+		lang = this.constructor.static.languageFallbacks[ lang ];
+	}
+	try {
+		lang = Intl.getCanonicalLocales( lang )[ 0 ];
+	} catch ( e ) {
+		mw.log.error( `TextMatchEditCheck falling back from invalid language '${ lang }'`, e );
+		lang = navigator.language;
+	}
+	this.lang = lang;
 	this.sensitivity = 'accent'; // TODO figure out how to determine this on an editcheck level
 	this.collator = new Intl.Collator( this.lang, { sensitivity: this.sensitivity } );
 
@@ -62,6 +72,15 @@ mw.editcheck.TextMatchEditCheck.static.choices = [
 		modes: [ '', 'info', 'replace', 'delete' ]
 	}
 ];
+
+/**
+ * Map of known languages that might be in wgContentLanguage but aren't valid for Intl.Collator
+ *
+ * @type {Object}
+ */
+mw.editcheck.TextMatchEditCheck.static.languageFallbacks = {
+	'map-bms': 'jv-x-bms'
+};
 
 /**
  * Object into which default matchRule configs can be placed
