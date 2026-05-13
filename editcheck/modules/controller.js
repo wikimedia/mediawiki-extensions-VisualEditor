@@ -378,6 +378,12 @@ Controller.prototype.updateSuggestionCount = function ( count ) {
  * @fires EditCheckController#actionsUpdatedProgress
  */
 Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
+	if ( !this.surface ) {
+		// The controller has been destroyed while this was waiting to be called;
+		// just abandon early with a claim there were no checks found, in case any
+		// listeners try to do something.
+		return Promise.resolve( [] );
+	}
 	if ( this.surface.getModel().isStaging() ) {
 		return Promise.resolve( this.getActions( listener ) );
 	}
@@ -842,6 +848,11 @@ Controller.prototype.setupPreSaveProcess = function () {
 		const oldFocusedAction = this.focusedAction;
 		this.inBeforeSave = true;
 		return this.updateForListener( 'onBeforeSave' ).then( ( actions ) => {
+			if ( !this.surface ) {
+				// The user left the editing session during the time checks were being generated.
+				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Abandoned' } );
+				return ve.createDeferred().reject().promise();
+			}
 			if ( actions.length ) {
 				ve.track( 'stats.mediawiki_editcheck_preSaveChecks_total', 1, { kind: 'Shown' } );
 
