@@ -1122,21 +1122,10 @@ Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
 	// scrollSelectionIntoView scrolls to the focus of a selection, but we
 	// want the very beginning to be in view, so collapse it:
 	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
-	const padding = ve.copy( this.surface.getPadding() );
 
-	padding.top += 10;
-	padding.bottom += 10;
-
-	if ( ve.ui.FixedEditCheckDialog.static.position === 'below' ) {
-		// TODO: ui.surface getPadding should really be fixed for this
-		const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
-		if ( currentWindow ) {
-			padding.bottom += currentWindow.getContentHeight();
-		}
-	}
 	this.surface.scrollSelectionIntoView( selection, {
 		animate: true,
-		padding,
+		extraPadding: { top: 10, bottom: 10 },
 		alignToTop
 	} );
 };
