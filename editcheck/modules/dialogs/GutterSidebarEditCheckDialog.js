@@ -136,6 +136,11 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 
 		this.widgets.forEach( ( widget ) => widget.teardown() );
 		this.widgets = [];
+
+		if ( this.scrollIntoView ) {
+			this.scrollIntoView.clear();
+		}
+
 		this.fromSection = false;
 		this.surface = null;
 		this.controller = null;

@@ -441,6 +441,9 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 		this.controller.off( 'focusAction', this.onFocusAction, this );
 		this.surface.getTarget().off( 'virtualKeyboardChange' );
 		this.$actions.empty();
+		if ( this.scrollIntoView ) {
+			this.scrollIntoView.clear();
+		}
 	}, this );
 };
 
