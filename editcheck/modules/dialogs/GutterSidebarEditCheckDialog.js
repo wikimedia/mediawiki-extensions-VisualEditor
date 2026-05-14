@@ -61,7 +61,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
 	if ( this.sections.length ) {
-		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], { alignToTop: true } );
+		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], { alignToTop: true, duration: 'slow' } );
 		return;
 	}
 	// if no suggestions are available in this section, then a click should open the full page editor

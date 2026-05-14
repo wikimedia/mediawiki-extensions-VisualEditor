@@ -117,7 +117,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
  * Handle click events from scroll-into-view's show button.
  */
 ve.ui.EditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
-	this.controller.focusAction( this.currentActions[ 0 ], true, { alignToTop: true } );
+	this.controller.focusAction( this.currentActions[ 0 ], true, { alignToTop: true, duration: 'slow' } );
 };
 
 /**
