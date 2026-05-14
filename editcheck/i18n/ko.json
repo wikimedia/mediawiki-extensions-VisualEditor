@@ -12,6 +12,7 @@
 	"editcheck-toolbar-suggestions-title": "토글 기능 전환",
 	"editcheck-suggestions-turned-on": "제안 기능 켜짐",
 	"editcheck-suggestions-turned-off": "제안 기능 꺼짐",
+	"editcheck-suggestions-none": "제안이 없습니다",
 	"editcheck-dialog-action-no": "아니오",
 	"editcheck-dialog-action-yes": "예",
 	"editcheck-dialog-action-decline": "거부",

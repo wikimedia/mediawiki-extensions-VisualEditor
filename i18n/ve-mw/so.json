@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Abdullahi",
-			"Abshirdheere"
+			"Abshirdheere",
+			"AhmedG612"
 		]
 	},
+	"collabpad-disabled": "CollabPad kuma shaqaynayo wiki-gan.",
 	"tooltip-ca-ve-edit": "Wax ka badal boggaan",
 	"tooltip-ca-editsource": "Wax ka bedel xofta fura ee boggaan",
 	"tooltip-ca-createsource": "Sameey xogta furaha ee boggaan",
@@ -14,5 +16,6 @@
 	"visualeditor-categories-tool": "Qaybaha",
 	"visualeditor-desc": "Visual editor ee MediaWiki",
 	"visualeditor-descriptionpagelink": "Project:VisualEditor",
-	"visualeditor-editnotices-tool": "{{PLURAL:$1|ma jirto wargalin|hal wargalin|laba wargalinood|$1 wargalinno|$1 wargalin}}"
+	"visualeditor-editnotices-tool": "{{PLURAL:$1|ma jirto wargalin|hal wargalin|laba wargalinood|$1 wargalinno|$1 wargalin}}",
+	"visualeditor-savedialog-label-publish-short": "Daabac"
 }
