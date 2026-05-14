@@ -61,7 +61,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
 	if ( this.sections.length ) {
-		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], true, true );
+		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], { alignToTop: true } );
 		return;
 	}
 	// if no suggestions are available in this section, then a click should open the full page editor
@@ -186,7 +186,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestSuggestion = functio
 	// Default to scrolling to the suggestion above, to stay consistent with the button's arrow behavior
 	const suggestionToFocus = nearestSuggestions.above ? nearestSuggestions.above : nearestSuggestions.below;
 	if ( suggestionToFocus ) {
-		this.showDialogWithAction( suggestionToFocus, true );
+		this.showDialogWithAction( suggestionToFocus, { alignToTop: true } );
 	}
 };
 
@@ -309,9 +309,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
  * Show the edit check dialog with a specific widget's actions and a specific action focused
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
- * @param {boolean} [alignToTop] Align the selection to the top of the viewport
+ * @param {Object} [scrollConfig] Configuration for scrolling
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( action, alignToTop ) {
+ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( action, scrollConfig ) {
 	// The focus changing will also trigger onPosition after this, so we don't
 	// need to update the state of anything. We do need to trigger the drawer
 	// showing if this is an action that takesFocus, however. We can assume
@@ -320,7 +320,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( a
 	if ( action ) {
 		for ( const widget of this.widgets ) {
 			if ( widget.actions.includes( action ) ) {
-				widget.showDialogWithAction( action, alignToTop );
+				widget.showDialogWithAction( action, scrollConfig );
 				return;
 			}
 		}

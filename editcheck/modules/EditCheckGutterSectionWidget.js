@@ -165,17 +165,17 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
  * Show the edit check dialog with this widget's actions and with a specific action focused
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
- * @param {boolean} [alignToTop] Align the selection to the top of the viewport
+ * @param {Object} [scrollConfig] Configuration for scrolling
  */
-mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action, alignToTop ) {
+mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = function ( action, scrollConfig ) {
 	const controller = this.controller;
 	const surface = controller.surface;
 	action.select( surface, false, false );
 	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
 	if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
-		if ( alignToTop ) {
+		if ( scrollConfig && scrollConfig.alignToTop ) {
 			// Scroll immediately, because we don't need to wait for the padding to settle
-			controller.focusAction( action, true, alignToTop );
+			controller.focusAction( action, true, scrollConfig );
 		}
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
 		windowAction.open(
@@ -190,18 +190,18 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( a ) => !discardedActions.includes( a ) )
 			}
 		).then( () => {
-			if ( alignToTop ) {
+			if ( scrollConfig && scrollConfig.alignToTop ) {
 				// We already focused and scrolled because it was safe to do so
 				return;
 			}
 			// Wait for window to open and new surface padding to be applied
 			// before trying to focus and scroll.
 			setTimeout( () => {
-				controller.focusAction( action, true, alignToTop );
+				controller.focusAction( action, true, scrollConfig );
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		} );
 	} else {
-		controller.focusAction( action, true, alignToTop );
+		controller.focusAction( action, true, scrollConfig );
 		currentWindow.showActions( this.actions, [ action ] );
 		currentWindow.footer.toggle( this.actions.length !== 1 );
 	}

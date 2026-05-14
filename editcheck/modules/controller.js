@@ -549,11 +549,11 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
  * @param {boolean} [scrollTo] Scroll action's selection into view
- * @param {boolean} [alignToTop] Align selection to top of page when scrolling
+ * @param {Object} [scrollConfig] Configuration for scrolling
  * @fires EditCheckController#focusAction
  * @fires EditCheckController#position
  */
-Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
+Controller.prototype.focusAction = function ( action, scrollTo, scrollConfig ) {
 	if ( !scrollTo && action === this.focusedAction ) {
 		// Don't emit unnecessary events if there is no change or scroll
 		return;
@@ -562,7 +562,7 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
 	this.focusedAction = action;
 
 	if ( scrollTo ) {
-		this.scrollActionIntoViewDebounced( action, alignToTop );
+		this.scrollActionIntoViewDebounced( action, scrollConfig );
 	}
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
@@ -577,18 +577,21 @@ Controller.prototype.focusAction = function ( action, scrollTo, alignToTop ) {
  * so the contents can be seen.
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
- * @param {boolean} [alignToTop] Align selection to top of page when scrolling
+ * @param {Object|boolean} [scrollConfig] Configuration for scrolling or (deprecated) a boolean to set alignToTop
  */
-Controller.prototype.ensureActionIsShown = function ( action, alignToTop ) {
+Controller.prototype.ensureActionIsShown = function ( action, scrollConfig ) {
+	if ( scrollConfig === true ) {
+		scrollConfig = { alignToTop: true };
+	}
 	if ( OO.ui.isMobile() ) {
 		const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 		if ( !currentWindow || currentWindow.constructor.static.name !== 'gutterSidebarEditCheckDialog' ) {
 			return;
 		}
 		// This will ultimately focus the action and scroll it into view as well:
-		currentWindow.showDialogWithAction( action, true );
+		currentWindow.showDialogWithAction( action, ve.extendObject( { alignToTop: true }, scrollConfig ) );
 	} else {
-		this.focusAction( action, true, alignToTop );
+		this.focusAction( action, true, scrollConfig );
 	}
 };
 
@@ -727,7 +730,7 @@ Controller.prototype.onPosition = function ( passive ) {
 	this.updatePositionsDebounced();
 
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
-		this.scrollActionIntoViewDebounced( this.focusedAction, !OO.ui.isMobile() );
+		this.scrollActionIntoViewDebounced( this.focusedAction, { alignToTop: !OO.ui.isMobile() } );
 	}
 };
 
@@ -903,7 +906,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions, controller: this } )
 						.then( ( instance ) => {
 							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
-							this.scrollActionIntoViewDebounced( this.focusedAction, true );
+							this.scrollActionIntoViewDebounced( this.focusedAction, { alignToTop: true } );
 
 							instance.closed.then( () => {}, () => {} ).then( () => {
 								surface.getView().setReviewMode( false );
@@ -1116,18 +1119,17 @@ Controller.prototype.drawSelections = function () {
  * Scrolls an action's selection into view
  *
  * @param {mw.editcheck.EditCheckAction} action
- * @param {boolean} [alignToTop] Align the selection to the top of the viewport
+ * @param {Object} [scrollConfig] Configuration for scrolling
  */
-Controller.prototype.scrollActionIntoView = function ( action, alignToTop ) {
+Controller.prototype.scrollActionIntoView = function ( action, scrollConfig ) {
 	// scrollSelectionIntoView scrolls to the focus of a selection, but we
 	// want the very beginning to be in view, so collapse it:
 	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
 
-	this.surface.scrollSelectionIntoView( selection, {
+	this.surface.scrollSelectionIntoView( selection, ve.extendObject( {
 		animate: true,
-		extraPadding: { top: 10, bottom: 10 },
-		alignToTop
-	} );
+		extraPadding: { top: 10, bottom: 10 }
+	}, scrollConfig ) );
 };
 
 /**

@@ -117,7 +117,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
  * Handle click events from scroll-into-view's show button.
  */
 ve.ui.EditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
-	this.controller.focusAction( this.currentActions[ 0 ], true, true );
+	this.controller.focusAction( this.currentActions[ 0 ], true, { alignToTop: true } );
 };
 
 /**
@@ -321,7 +321,7 @@ ve.ui.EditCheckDialog.prototype.setCurrentAction = function ( action, fromUserAc
 			// Scroll selection into view if user interacted with dialog
 			fromUserAction,
 			// Scroll to top of page in desktop fixed dialog (pre-save)
-			this.constructor.static.name === 'fixedEditCheckDialog' && !OO.ui.isMobile()
+			{ alignToTop: this.constructor.static.name === 'fixedEditCheckDialog' && !OO.ui.isMobile() }
 		);
 	}
 };
