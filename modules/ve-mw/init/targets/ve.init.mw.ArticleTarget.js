@@ -2302,15 +2302,13 @@ ve.init.mw.ArticleTarget.prototype.restoreEditSection = function () {
 	let headingText;
 	if ( mode === 'visual' ) {
 		const headingNode = this.getSectionHeadingNode( section );
-		if ( headingNode ) {
-			if ( setEditSummary && !new URL( location.href ).searchParams.has( 'summary' ) ) {
-				headingText = headingNode.$element.text();
-			}
-			if ( setExactScrollOffset ) {
-				this.scrollToHeading( headingNode, this.visibleSectionOffset );
-			} else if ( goToStartOfHeading ) {
-				this.goToHeading( headingNode );
-			}
+		if ( headingNode && setEditSummary && !new URL( location.href ).searchParams.has( 'summary' ) ) {
+			headingText = headingNode.$element.text();
+		}
+		if ( setExactScrollOffset ) {
+			this.scrollToHeading( headingNode, this.visibleSectionOffset );
+		} else if ( headingNode && goToStartOfHeading ) {
+			this.goToHeading( headingNode );
 		}
 	} else if ( mode === 'source' && setEditSummary ) {
 		// With elements of extractSectionTitle + stripSectionName TODO:
@@ -2385,13 +2383,13 @@ ve.init.mw.ArticleTarget.prototype.goToHeading = function ( headingNode ) {
 /**
  * Scroll to a given heading in the document.
  *
- * @param {ve.ce.HeadingNode} headingNode Heading node to scroll to
+ * @param {ve.ce.HeadingNode|null} headingNode Heading node to scroll to, lede section if null
  * @param {number} [headingOffset=0] Set the top offset of the heading to a specific amount, relative
  *  to the surface viewport.
  */
 ve.init.mw.ArticleTarget.prototype.scrollToHeading = function ( headingNode, headingOffset ) {
 	this.$scrollContainer.scrollTop(
-		headingNode.$element.offset().top - parseInt( headingNode.$element.css( 'margin-top' ) ) -
+		( headingNode ? headingNode.$element.offset().top - parseInt( headingNode.$element.css( 'margin-top' ) ) : 0 ) -
 		( this.getSurface().padding.top + ( headingOffset || 0 ) ) );
 };
 
@@ -2559,7 +2557,6 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, d
 	const attachedRootRange = surfaceModel.getAttachedRoot().getOuterRange();
 	const documentRange = surfaceModel.getDocument().getDocumentRange();
 
-	const oldHeadingNode = this.getSectionHeadingNode( this.section );
 	const oldSectionRange = surfaceModel.getAttachedRoot().getOuterRange();
 
 	ve.track( 'activity.section-switch', { action: 'switch-' +
@@ -2575,8 +2572,7 @@ ve.init.mw.ArticleTarget.prototype.switchToVisualSection = function ( section, d
 		// TODO: this.section = section; this.enableVisualSectionEditing = true;
 	}
 
-	this.visibleSectionOffset = oldHeadingNode ?
-		oldHeadingNode.$element[ 0 ].getBoundingClientRect().top - this.getSurface().padding.top : 0;
+	this.visibleSectionOffset = this.getSurface().getView().$attachedRootNode[ 0 ].getBoundingClientRect().top - this.getSurface().padding.top;
 
 	this.reloadSurface( 'visual', dataPromise ).then( () => {
 		// oldSectionRange was based on the old attached root, which has no been
