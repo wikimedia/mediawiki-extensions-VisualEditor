@@ -799,7 +799,8 @@
 		"ext.visualEditor.editCheck.special": {
 			"styles": [
 				"editcheck/modules/editCheck.special/editchecks.less",
-				"editcheck/modules/styles/EditCheckActionWidget.less"
+				"editcheck/modules/styles/EditCheckActionWidget.less",
+				"editcheck/modules/dialogs/styles/EditCheckDialog.less"
 			]
 		},
 		"ext.visualEditor.editCheck.headless": {

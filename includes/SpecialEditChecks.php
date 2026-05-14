@@ -267,7 +267,7 @@ class SpecialEditChecks extends SpecialPage {
 			return Html::element( 'p', [], $this->msg( 'table_pager_empty' )->text() );
 		}
 		$html = Html::openElement( 'table', [ 'class' => 'wikitable mw-editchecks' ] );
-		$html .= Html::rawElement( 'tr', [],
+		$html .= Html::rawElement( 'tr', [ 'class' => 'mw-editchecks-header' ],
 			Html::element( 'th', [ 'class' => 'mw-editchecks-name' ],
 				$this->msg( 'editcheck-specialeditchecks-col-name' )->text() ) .
 			Html::element( 'th', [ 'class' => 'mw-editchecks-appearance' ],
@@ -350,13 +350,7 @@ class SpecialEditChecks extends SpecialPage {
 				], $checkData['name'] ) .
 				Html::element( 'div', [], basename( $checkData['file'] ) )
 			) .
-			Html::rawElement( 'td', [],
-				Html::rawElement(
-					'div',
-					[ 'class' => 've-ui-editCheckDialog' ],
-					$widget
-				)
-			) .
+			Html::rawElement( 'td', [], $widget ) .
 			Html::rawElement( 'td', [],
 				( isset( $checkData['importTitle'] ) ?
 					Html::rawElement( 'p', [],
@@ -382,7 +376,7 @@ class SpecialEditChecks extends SpecialPage {
 		return $html;
 	}
 
-	private function buildEditCheckActionWidget( array $checkData, bool $suggestion ): MessageWidget {
+	private function buildEditCheckActionWidget( array $checkData, bool $suggestion ): string {
 		$widget = new MessageWidget(
 			[
 				'type' => $suggestion ? 'progressive' : 'warning',
@@ -453,7 +447,11 @@ class SpecialEditChecks extends SpecialPage {
 				$actions->appendContent( $actionButton );
 			}
 		}
-		return $widget;
+		return Html::rawElement(
+			'div',
+			[ 'class' => 've-ui-editCheckDialog' ],
+			(string)$widget
+		);
 	}
 
 	/**

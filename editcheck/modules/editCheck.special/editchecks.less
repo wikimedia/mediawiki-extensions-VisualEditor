@@ -1,3 +1,5 @@
+@import 'mediawiki.skin.variables.less';
+
 /**
  * Styles for Special:Editchecks
  */
@@ -28,11 +30,41 @@
 	}
 
 	.ve-ui-editCheckDialog {
-		margin: 0 auto;
 		width: 300px;
 
 		.ve-ui-editCheckActionWidget.oo-ui-messageWidget {
 			margin: 4px 0;
+		}
+	}
+
+	.mw-mf & {
+		width: 100%;
+		background-color: transparent;
+		border: 0;
+
+		.mw-editchecks-header {
+			display: none;
+		}
+
+		> tbody,
+		> tbody > tr,
+		> tbody > tr > td {
+			width: 100%;
+			display: block;
+			border: 0;
+			box-sizing: border-box;
+		}
+
+		> tbody > tr {
+			margin-bottom: @spacing-50;
+			padding-bottom: @spacing-50;
+			border-bottom: @border-base;
+		}
+
+		.ve-ui-editCheckDialog {
+			width: 100%;
+			background: @background-color-base;
+			border: @border-subtle;
 		}
 	}
 }
