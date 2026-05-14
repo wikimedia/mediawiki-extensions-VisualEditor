@@ -45,6 +45,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	ve.ui.GutterSidebarEditCheckDialog.super.prototype.initialize.call( this );
 
 	this.sections = [];
+	this.hasSuggestionInSectionInitially = false;
 
 	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
 	this.scrollIntoView.connect( this, {
@@ -61,6 +62,13 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
 	if ( this.sections.length ) {
 		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], true, true );
+		return;
+	}
+	// if no suggestions are available in this section, then a click should open the full page editor
+	const target = this.controller.getTarget();
+	if ( target ) {
+		this.controller.originSection = target.section;
+		target.switchToVisualSection( null, 0 );
 	}
 };
 
@@ -98,12 +106,22 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		}
 		this.inBeforeSave = data.inBeforeSave;
 		this.surface = data.controller.surface;
-
+		this.fromSection = false;
+		this.scrollToNearestSuggestionDebounced = ve.debounce( this.scrollToNearestSuggestion.bind( this ), 500 );
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
 		this.controller.on( 'focusAction', this.onFocusAction, null, this );
 
+		this.fromSection = !!this.controller.originSection;
+		if ( this.fromSection ) {
+			this.scrollIntoView = null;
+		}
 		this.renderActions( data.actions || this.controller.getActions(), data.newActions || [] );
+
+		if ( this.scrollIntoView ) {
+			const fullPageButton = this.controller.getTarget().switchToFullPageButtonBottom;
+			this.scrollIntoView.observeFullPageButton( fullPageButton.$element[ 0 ] );
+		}
 	}, this );
 };
 
@@ -118,7 +136,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 
 		this.widgets.forEach( ( widget ) => widget.teardown() );
 		this.widgets = [];
-
+		this.fromSection = false;
 		this.surface = null;
 		this.controller = null;
 	}, this );
@@ -148,6 +166,41 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( liste
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
 	this.renderActions( this.controller.getActions(), [] );
+};
+
+/**
+ * Scroll to the suggestion nearest the user's current position, defaulting to above
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestSuggestion = function () {
+	if ( !this.fromSection ) {
+		return;
+	}
+	this.fromSection = false;
+	this.controller.originSection = null;
+	const nearestSuggestions = this.findNearestSurroundingSuggestions();
+	// Default to scrolling to the suggestion above, to stay consistent with the button's arrow behavior
+	const suggestionToFocus = nearestSuggestions.above ? nearestSuggestions.above : nearestSuggestions.below;
+	if ( suggestionToFocus ) {
+		this.showDialogWithAction( suggestionToFocus, true );
+	}
+};
+
+/**
+ * Notify the scroll-into-view widget of the state of suggestions around this section
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function () {
+	const target = this.controller.getTarget();
+	if ( !this.scrollIntoView || target.section === null ) {
+		return;
+	}
+	this.controller.whenActionsSettled().then( () => {
+		const outsideSectionState = {
+			enabled: !this.hasSuggestionInSectionInitially,
+			hasAbove: !!this.controller.editFullPageIndicatorTop.isVisible(),
+			hasBelow: !!this.controller.editFullPageIndicatorBottom.isVisible()
+		};
+		this.scrollIntoView.setOutsideSectionState( outsideSectionState );
+	} );
 };
 
 /**
@@ -217,6 +270,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 		widget.setPosition( section.rect );
 		this.widgets.push( widget );
 		if ( this.scrollIntoView && widget.actions.some( ( action ) => action.isSuggestion() ) ) {
+			this.hasSuggestionInSectionInitially = true;
 			this.scrollIntoView.observe( widget.$element[ 0 ] );
 		}
 
@@ -234,8 +288,11 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 			action.emit( 'shown' );
 		} );
 	} );
-
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
+	this.setOutsideSectionState();
+	if ( this.fromSection ) {
+		this.scrollToNearestSuggestionDebounced();
+	}
 };
 
 /**
@@ -258,6 +315,61 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( a
 			}
 		}
 	}
+};
+
+/**
+ * Find nearest suggestions above and below user's current position
+ *
+ * @return {{above: mw.editcheck.EditCheckAction|null, below: mw.editcheck.EditCheckAction|null}}
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.findNearestSurroundingSuggestions = function () {
+	if ( !this.surface ) {
+		return null;
+	}
+
+	const scrollContainer = this.controller.getTarget().$scrollContainer[ 0 ];
+	const anchorY = scrollContainer.scrollTop + ( scrollContainer.clientHeight / 2 );
+
+	let nearestSuggestionAbove = null;
+	let nearestSuggestionBelow = null;
+	let nearestDistanceAbove = Infinity;
+	let nearestDistanceBelow = Infinity;
+
+	this.sections.forEach( ( section ) => {
+		const suggestions = section.actions.filter( ( action ) => action.isSuggestion() );
+		if ( !suggestions.length ) {
+			return;
+		}
+
+		const rect = section.rect;
+
+		// Get distance from viewport center to this suggestion's rect
+		let distance = 0;
+		let isAbove = false;
+		if ( rect.bottom < anchorY ) {
+			distance = anchorY - rect.bottom;
+			isAbove = true;
+		} else if ( rect.top > anchorY ) {
+			distance = rect.top - anchorY;
+		} else {
+			// Already intersects viewport center
+			distance = 0;
+			isAbove = true;
+		}
+
+		if ( isAbove ) {
+			if ( distance < nearestDistanceAbove ) {
+				nearestDistanceAbove = distance;
+				nearestSuggestionAbove = suggestions[ 0 ];
+			}
+		} else {
+			if ( distance < nearestDistanceBelow ) {
+				nearestDistanceBelow = distance;
+				nearestSuggestionBelow = suggestions[ 0 ];
+			}
+		}
+	} );
+	return { above: nearestSuggestionAbove, below: nearestSuggestionBelow };
 };
 
 /* Registration */
