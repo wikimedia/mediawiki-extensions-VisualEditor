@@ -420,13 +420,15 @@ class ApiVisualEditor extends ApiBase {
 				}
 
 				// HACK: Build a fake EditPage so we can get checkboxes from it
+				$context = new DerivativeContext( $this->getContext() );
 				// Deliberately omitting ,0 so oldid comes from request
 				$article = new Article( $title );
+				$article->setContext( $context );
 				$editPage = new EditPage( $article );
 				$req = $this->getRequest();
 				$req->setVal( 'format', $editPage->contentFormat );
-				// By reference for some reason (T54466)
-				$editPage->importFormData( $req );
+				$context->setRequest( $req );
+				$editPage->importFormData();
 				$states = [
 					'minor' => $this->userOptionsLookup->getOption( $user, 'minordefault' ) && $title->exists(),
 					'watch' => $this->userOptionsLookup->getOption( $user, 'watchdefault' ) ||
