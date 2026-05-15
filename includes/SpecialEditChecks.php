@@ -249,8 +249,12 @@ class SpecialEditChecks extends SpecialPage {
 		foreach ( $checks as $checkData ) {
 			$html .= $this->buildRowHtml( $checkData, $onWikiConfig, $suggestions );
 			if ( $checkData['name'] === 'textMatch' ) {
-				$matchItems = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' ) ?? [];
-				foreach ( $matchItems as $name => $item ) {
+				$matchRules = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchRules' )
+					// In T424678 we renamed matchItems to matchRules, but allow 'matchItems'
+					// for backwards compatibility temporarily
+					?? $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' )
+					?? [];
+				foreach ( $matchRules as $name => $item ) {
 					if ( isset( $item['import'] ) ) {
 						$importTitle = Title::newFromText( $item['import'] );
 						$item = json_decode( $this->msg( $importTitle->getText() )->inContentLanguage()->text(), true );
