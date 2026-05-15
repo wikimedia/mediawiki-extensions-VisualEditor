@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"editcheck-toolbar-suggestions-title": "Dami ama daar talooyinka",
+	"editcheck-dialog-scroll-into-view": "Eeg talooyinka",
+	"editcheck-double-bold-title": "Ka saar qaabeynta qoraalka culus ee aan loo baahnayn",
+	"editcheck-double-bold-description": "Qoraalka culus si toos ah ayaa loo mariyaa cinwaannada hoose, erayada liiska qeexidda iyo madaxyada jadwalka. Ka caawi akhristayaasha adigoo ka saaraya [{{int:editcheck-double-bold-descriptionlink}} qaabeynta qoraalka culus ee aan loo baahnayn] qaybahan.",
+	"editcheck-double-bold-action-remove": "Ka saar qoraalka culus",
+	"editcheck-yearlink-action-use": "Isticmaal $1"
+}

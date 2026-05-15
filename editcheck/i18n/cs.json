@@ -92,6 +92,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Beta verze",
 	"editcheck-specialeditchecks-header-default": "Výchozí kontroly",
 	"editcheck-specialeditchecks-header-experimental": "Experimentální kontroly",
+	"editcheck-specialeditchecks-header-unsupported": "Nepodporované kontroly",
 	"editcheck-specialeditchecks-col-title": "Název",
 	"editcheck-specialeditchecks-col-name": "Název",
 	"editcheck-specialeditchecks-col-appearance": "Vzhled",
