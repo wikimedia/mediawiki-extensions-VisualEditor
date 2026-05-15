@@ -9,5 +9,10 @@
 	"editcheck-double-bold-title": "Ka saar qaabeynta qoraalka culus ee aan loo baahnayn",
 	"editcheck-double-bold-description": "Qoraalka culus si toos ah ayaa loo mariyaa cinwaannada hoose, erayada liiska qeexidda iyo madaxyada jadwalka. Ka caawi akhristayaasha adigoo ka saaraya [{{int:editcheck-double-bold-descriptionlink}} qaabeynta qoraalka culus ee aan loo baahnayn] qaybahan.",
 	"editcheck-double-bold-action-remove": "Ka saar qoraalka culus",
-	"editcheck-yearlink-action-use": "Isticmaal $1"
+	"editcheck-yearlink-action-use": "Isticmaal $1",
+	"editcheck-suggestedlink-title": "Ku dar xiriiriye",
+	"editcheck-suggestedlink-description": "Qoraalkan kuma xirna maqaal kale. Ku dar xiriiriye si akhristayaashu wax badan uga bartaan mowduucan.",
+	"editcheck-suggestedlink-prompt": "Ku xiro \"$1\" ilaa $2?",
+	"editcheck-suggestedlink-action-add-link": "Ku dar xiriiriye",
+	"editcheck-specialeditchecks-header-unsupported": "Hubinno aan la taageerin"
 }
