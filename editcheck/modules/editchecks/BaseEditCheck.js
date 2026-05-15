@@ -715,11 +715,12 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 	// of templates that count as unbalanced quotes.
 	// Fetch to offset+1 because we want inclusive.
 	const data = documentModel.data;
+	const dataString = new ve.dm.DataString( data.getData() );
 	const quotes = new Map();
 	for ( let i = closestBlockNode.getRange().start; i < offset + 1; i++ ) {
-		if ( !data.isElementData( i ) ) {
+		const character = dataString.read( i );
+		if ( character ) {
 			let quote = false;
-			const character = data.getCharacterData( i );
 			if ( character === '\'' ) {
 				// The single non-curly quote requires extra work to be distinguished from an apostrophe
 				if (
@@ -730,9 +731,9 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
 					// somewhat-complicated things here to look back and
 					// decide whether this is a break, so it actually does
 					// need the entire data -- just [previous,item] would not work.
-					unicodeJS.wordbreak.isBreak( new ve.dm.DataString( data.getData() ), i )
+					unicodeJS.wordbreak.isBreak( dataString, i )
 				) {
-					const previousCharacter = data.getCharacterData( i - 1 );
+					const previousCharacter = dataString.read( i - 1 );
 					if (
 						previousCharacter && mw.config.get( 'wgContentLanguage' ) === 'en' &&
 						previousCharacter === 's' && ( quotes.get( '\'' ) || 0 ) % 2 === 0
