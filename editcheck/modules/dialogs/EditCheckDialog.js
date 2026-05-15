@@ -514,6 +514,8 @@ ve.ui.EditCheckDialog.prototype.onCloseButtonClick = function () {
 	this.close();
 	if ( OO.ui.isMobile() ) {
 		this.controller.focusAction( null );
+		// Don't let the window manager restore focus after closing (T426237)
+		this.surface.getView().deactivate();
 	}
 };
 
