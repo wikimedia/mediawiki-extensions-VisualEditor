@@ -123,13 +123,13 @@ mw.editcheck.TextMatchEditCheck.static.processMatchRules = function ( rawMatchRu
 
 	Object.entries( rawMatchRules ).forEach( ( [ id, rule ] ) => {
 		if ( rule.import ) {
-			const filename = rule.import;
-			if ( !filename.startsWith( 'MediaWiki:' ) ) {
-				mw.log.warn( `Skipped import for matchRule id:${ id } (${ filename } must be in mediawiki namespace.)` );
+			const importTitle = mw.Title.newFromText( rule.import );
+			if ( !importTitle || importTitle.getNamespaceId() !== mw.config.get( 'wgNamespaceIds' ).mediawiki ) {
+				mw.log.warn( `Skipped import for matchRule id:${ id } (${ rule.import } must be in mediawiki namespace.)` );
 				return;
 			}
-			if ( !filename.endsWith( '.json' ) ) {
-				mw.log.warn( `Skipped import for matchRule id:${ id } (${ filename } must be a json file.)` );
+			if ( !rule.import.endsWith( '.json' ) ) {
+				mw.log.warn( `Skipped import for matchRule id:${ id } (${ rule.import } must be a json file.)` );
 				return;
 			}
 			filenames.push( rule.import );
