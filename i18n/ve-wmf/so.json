@@ -8,9 +8,16 @@
 	},
 	"tag-editsuggestion-seen": "Talo tafatir oo la arkay",
 	"tag-visualeditor": "wax ka badalka muuqaalka ah",
+	"tag-visualeditor-needcheck": "Tafatirka muuqaalka: Hubi",
+	"tag-visualeditor-needcheck-description": "Tafatir lagu sameeyay iyadoo la adeegsanayo [[{{MediaWiki:visualeditor-descriptionpagelink}}|tifaftiraha muuqaalka]] halkaas oo nidaamku ogaaday in wikitext-ku uu yeelan karo isbeddello aan la doonayn.",
+	"tag-visualeditor-wikitext": "2017 tafatirka koodhka",
+	"tag-visualeditor-wikitext-description": "Tafatir lagu sameeyay iyadoo la adeegsanayo tifaftiraha wikitext ee 2017",
+	"tag-visualeditor-switched": "Tafatirka muuqaalka: Waa la beddelay",
+	"tag-visualeditor-switched-description": "Isticmaaluhu wuxuu ku bilaabay tafatirka tifaftiraha muuqaalka, ka dibna wuxuu u beddelay tifaftiraha wikitext.",
 	"visualeditor-welcomedialog-action": "Biloow bedelidda",
 	"visualeditor-welcomedialog-content": "Qof kasta wuu ka qayb qaadan karaa, habayn kasta waa kaalmo.",
 	"visualeditor-welcomedialog-content-thanks": "Waad ku mahadsantahay kaalmada aad adduunyada ku caawisay helitaan dheeraad ah!",
+	"visualeditor-welcomedialog-switch": "U beddel tafatiraha koodhka",
 	"visualeditor-welcomedialog-switch-ve": "Ku bedel wax bedelaha la arki karo",
 	"visualeditor-welcomedialog-title": "{{GENDER:$1|Ku}} soo dhawoow $2"
 }
