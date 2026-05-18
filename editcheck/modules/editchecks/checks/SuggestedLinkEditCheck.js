@@ -35,13 +35,11 @@ mw.editcheck.SuggestedLinkEditCheck.static.footer = ve.deferJQueryMsg( 'editchec
 mw.editcheck.SuggestedLinkEditCheck.static.choices = [
 	{
 		action: 'accept',
-		label: OO.ui.deferMsg( 'editcheck-suggestedlink-action-add-link' ),
-		icon: 'check'
+		label: OO.ui.deferMsg( 'editcheck-suggestedlink-action-add-link' )
 	},
 	{
 		action: 'dismiss',
-		label: OO.ui.deferMsg( 'editcheck-action-dismiss' ),
-		icon: 'close'
+		label: OO.ui.deferMsg( 'editcheck-action-dismiss' )
 	}
 ];
 
