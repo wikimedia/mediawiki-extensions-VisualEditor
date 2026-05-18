@@ -1,0 +1,330 @@
+{
+	"externalLink": {
+		"ignoreSections": [
+			"Reference",
+			"Literatura",
+			"Externí odkazy"
+		]
+	},
+	"disambiguation": {
+		"ignoreDisambiguationPages": true,
+		"ignoreSections": [
+			"Související články"
+		]
+	},
+	"citationNeeded": {
+		"showAsSuggestion": true
+	},
+	"suggestedLink": {
+		"showAsSuggestion": true,
+		"ignoreQuotedContent": true,
+		"account": "loggedin",
+		"minimumEditcount": 1000,
+		"maximumEditcount": 1000000
+	},
+	"textMatch": {
+		"showAsSuggestion": true,
+		"ignoreQuotedContent": true,
+		"matchRules": {
+			"spelling": {
+				"query": {
+					"(jest|nebo|zda)-li": "$1li",
+					"([1-9][0-9]*)-krát": "$1krát",
+					"([1-9][0-9]*)-?[mt]i": "$1",
+					"([1-9][0-9]*)-?[mt]?(á|é(ho|mu?)?|í(ho|ch|m[iu]?)?|ou|ý(ch|mi?)?)": "$1.",
+					"([1-9][0-9]*)[ \\-]let([áí]|é(ho|mu?)?|ou|ý(ch|mi?)?)": "$1let$2",
+					"([1-9][0-9]*)(?:[ \\-]|-?[mt]i ?)členn(á|é(ho|mu?)?|ou|ý(ch|mi?)?)": "$1členn$2",
+					"([1-9][0-9]?)[.]stol(etím?|[.])": "$1. stol$2",
+					"([1-9][0-9]?)(?: ?[\\-–] ?|[.] ?- ?)([1-9][0-9]?)[.][  ]stol(etím?|[.])": "$1.–$2. stol$3",
+					"([1-9]|[12][0-9]|3[01])[ .]((červe|prosi)n(cem?|ci|ec)|únor([au]|em)?|zářím?|listopad(em|u)?|(led|břez|dub|květ|červ|srp|říj)(en|n[au]|nem))": "$1. $2",
+					"([1-9][0-9]*)[ .\\-]*let(?:é|ého|ému?|ým) výročí(m?)": "$1. výročí$2",
+					"(?:(st)o|((?:sto)?(?:pa|še|sedm|osm|deva)desát)i)let(é|ého|ému?|ým) výročí(m?)": "$1$2$3 výročí$4",
+					"cca[.]": "cca",
+					"([mt])[ .]*([ .]j[.,]|j,)": "$1j.",
+					"m([.] ?n[ .]+| n[ .])m[.]": "m n. m.",
+					"př([ .]n[ .]*|[.] n[ .])l[.]": "př. n. l.",
+					"t[k .][ .]*zv[.]": "tzv.",
+					"Atlantick(ého|ému?|ým) oceán(u|em)?": "Atlantsk$1 oceán$2",
+					"budhis((mu|t)[a-záčďéěíňóřšťúůýž]*)": "buddhis$1",
+					"dollar([uy]|ech|em|ům?)": "dolar$1",
+					"dvěm[iy]": "dvěma",
+					"him[aá]láj([a-záčďéěíňóřšťúůýž]*)": "himálaj$1",
+					"(pra)?lesech": "$1lesích",
+					"([bm])illion([uy]|ech|em|ům?)": "$1ilion$2",
+					"obětmi": "oběťmi",
+					"ráž([eií]) ([0-9]+(?:,[0-9]+))mm": "ráž$1 $2 mm",
+					"scén[aá]rist([aéiuy]|ech|(ov)?ou|ov[aěiuy]|ů[mv]?|ce|k([uy]|a(mi)?|ách|ám|ou))": "scenárist$1",
+					"(nad|ne)?standartn(ě|í(ho|ch|m[iu]?)?)": "$1standardn$2",
+					"ši('?)[ií]t([éy]|ech|sk(á|é(ho|mu?)?|ou|ý(ch|mi?)?)|ští|ům?)": "ší$1it$2",
+					"tamn[eě]jší(ho|ch|m[iu]?)?": "tamější$1",
+					"témati(ce|ck([áy]|é(ho|mu?)?|ou|ý(ch|mi?)?)|čtí|k([uy]|a(mi)?|ách|ám|ou))": "temati$1",
+					"(spolu)?vězenky(n[ěi]|ní(ch|m)?|ň)": "$1vězeňky$2",
+					"(nej?)?výkonější(ho|ch|m[iu]?)?": "$1výkonnější$2",
+					"(nej?)?významější(ho|ch|m[iu]?)?": "$1významnější$2",
+					"shlédnutí(ch|mi?)?": "zhlédnutí$1",
+					"(nej?)?zn[aá]mnější(ho|ch|m[iu]?)?": "$1známější$2",
+					"([ks]|díky|kvůli|nad|pod|pro|(na|o)?proti|pře[ds]|skrze?|vůči) jejích": "$1 jejich",
+					"(díky|k|(na|o)?proti|vůči) nímž": "$1 nimž",
+					"([kusz]|bez|během|díky|do|kolem|kromě?|kvůli|(?:na)?místo|od|okolo|pod(?:él|le)|pomocí|(?:na|o)?proti|při|vedle|vinou|vůči|zpoza)e? ni(ž?)": "$1 ní$2",
+					"(beze?|během|díky|do|ke?|kolem|kromě?|kvůli|(na)?místo|od|okolo|pod(él|le)|pomocí|(na|o)?proti|při|u|vedle|vinou|vůči|ze|zpoza) svoji": "$1 svojí",
+					"(mimo|pro|přes|skrze?) ní(ž?)": "$1 ni$2",
+					"(mimo|pro|přes|skrze?) svojí": "$1 svoji"
+				},
+				"title": "Nesprávný tvar",
+				"isRegExp": true,
+				"preserveCase": true,
+				"mode": "replace",
+				"message": "Tento výraz není ve správném tvaru.",
+				"config": {
+					"caseSensitive": false
+				}
+			},
+			"spelling-sensitive": {
+				"query": {
+					"([1-9]|[12][0-9]|3[01])[.] ?Led(en|n[au]|nem)": "$1. led$2",
+					"([1-9]|[12][0-9])[.] ?Únor([au]|em)?": "$1. únor$2",
+					"([1-9]|[12][0-9]|3[01])[.] ?Břez(en|n[au]|nem)": "$1. břez$2",
+					"([1-9]|[12][0-9]|30)[.] ?Dub(en|n[au]|nem)": "$1. dub$2",
+					"([1-9]|[12][0-9]|3[01])[.] ?Květ(en|n[au]|nem)": "$1. květ$2",
+					"([1-9]|[12][0-9]|30)[.] ?Červ(en|n[au]|nem)": "$1. červ$2",
+					"([1-9]|[12][0-9]|3[01])[.] ?Červen(cem?|ci|ec)": "$1. červen$2",
+					"([1-9]|[12][0-9]|3[01])[.] ?Srp(en|n[au]|nem)": "$1. srp$2",
+					"([1-9]|[12][0-9]|30)[.] ?Září(m?)": "$1. září$2",
+					"([1-9]|[12][0-9]|3[01])[.] ?Říj(en|n[au]|nem)": "$1. říj$2",
+					"([1-9]|[12][0-9]|30)[.] ?Listopad([au]|em)?": "$1. listopad$2",
+					"([1-9]|[12][0-9]|3[01])[.] ?Prosin(cem?|ci|ec)": "$1. prosin$2",
+					"a[.]j[.]": "aj.",
+					"(aj|apod|at[dp])([,)]|$)": "$1.$2",
+					"Česk([áé]|ou) Republi(ce|k[auy]|kou)": "Česk$1 republi$2",
+					"Evropsk([áé]|ou) Uni([eií])": "Evropsk$1 uni$2",
+					"([Ii])kdy(by|ž)": "$1 kdy$2",
+					"k ([KkQq][a-záčďéěíňóřšťúůýž]{2,})": "ke $1",
+					"Karpatami": "Karpaty",
+					"kč": "Kč",
+					"K[Mm]/[Hh]": "km/h",
+					"([Nn])arozdíl": "$1a rozdíl",
+					"([Pp])andemi([eií]) (COVIDu?|Covidu?|covid)-19": "$1andemi$2 covidu-19",
+					"Playstation(u|em)?": "PlayStation$1",
+					"Spojen(ého|ému?|ým) Království(m?)": "Spojen$1 království$2",
+					"v ([FfVvWw][a-záčďéěíňóřšťúůýž]{2,})": "ve $1",
+					"[Yy]ou-?tub[eu]": "YouTube",
+					"z ([Zz][a-yáčďéěíňóřšťúůýž]{2,})": "ze $1"
+				},
+				"title": "Nesprávný tvar",
+				"isRegExp": true,
+				"preserveCase": false,
+				"mode": "replace",
+				"message": "Tento výraz není ve správném tvaru.",
+				"config": {
+					"caseSensitive": true
+				}
+			},
+			"typography": {
+				"query": {
+					"([cdkm]?)m2": "$1m²",
+					"([cdkm]?)m3": "$1m³",
+					"(^|[ (])\"(?! )([^„“”\"]+)(?\u003C! )\"([ .,:)]|$)": "$1„$2“$3",
+					"(^|[ (])(?:,,|„)(?! )([^„“”\"'`‘’]+)(?\u003C! )(?:''|``|‘‘|’’|\")([ .,:)]|$)": "$1„$2“$3",
+					"[ ], *": ", ",
+					"[(]([*†])(([3-9]|[12][0-9]?)[0-9]{2})[)]": "($1 $2)",
+					"(letech|lety|roky) ([12]?[0-9]{3}) ?- ?([12]?[0-9]{3})": "$1 $2–$3",
+					"[(]([12]?[0-9]{3}) ?- ?([12]?[0-9]{3})[)]": "($1–$2)",
+					"[ ][\\-–]([0-9]+(?:,[0-9]+)?[  ])°([CF])": " −$1°$2",
+					"([0-9]+)˚": "$1°",
+					"([0-9]+[  ])˚([CF])": "$1°$2",
+					"([Rr])ozlišení(ch|mi?)? ([0-9]{3,4}) ?x ?([0-9]{3,4})": "$1ozlišení$2 $3×$4",
+					"([0-9]{3,4}) ?x ?([0-9]{3,4}) (pixelů|px)": "$1×$2 $3",
+					"[─━]": "–",
+					"d´": "d'",
+					"´s": "'s"
+				},
+				"title": "Nesprávná typografie",
+				"isRegExp": true,
+				"mode": "replace",
+				"message": "Výraz používá [[Wikipedie:Typografické rady|nevhodnou typografii]].",
+				"config": {
+					"caseSensitive": true
+				}
+			},
+			"fake-ref": {
+				"query": [
+					"[ .,]\\[[1-9][0-9]{0,2}\\]"
+				],
+				"title": "Nezformátovaná citace",
+				"isRegExp": true,
+				"message": "Tato citace není zformátovaná podle [[Nápověda:Reference ve Vizuálním editoru|doporučení]]. Správně zformátované citace, které jsou číslovány automaticky a umožňují čtenáři navigaci mezi textem článku a zdrojem informace, se vkládají pomocí nástroje „Citace“. Obdobně lze vložit i citaci, která už je v článku použitá jinde.",
+				"config": {
+					"caseSensitive": true
+				}
+			},
+			"fake-lists": {
+				"query": [
+					"^ *[●•·]\\s"
+				],
+				"title": "Nezformátovaný seznam",
+				"isRegExp": true,
+				"message": "Tento odrážkový seznam není zformátovaný správně. Pomozte Wikipedii udržet jednotný styl a přístupnost obsahu tím, že jej zformátujete pomocí volby formátování „[[Nápověda:Editace ve Vizuálním editoru#Seznamy|Seznam s odrážkami]]“.",
+				"config": {
+					"caseSensitive": true
+				}
+			},
+			"style": {
+				"query": {
+					"brzo": "brzy",
+					"se (ne)?d(á|ají)": "$1lze",
+					"dneska": "dnes",
+					"(nej)?radši": "$1raději",
+					"taky": "také",
+					"t([aéiouy]|en|ím|ou)hle": "t$1to",
+					"teda": "tedy",
+					"víc(e?) jak": "víc$1 než",
+					"zas": "zase",
+					"([a-záčďéěíňóřšťúůýž]+)ujou": "$1ují"
+				},
+				"title": "Hovorový styl",
+				"isRegExp": true,
+				"preserveCase": true,
+				"mode": "replace",
+				"message": "Text Wikipedie by měl být psán [[Wikipedie:Encyklopedický styl|spisovným jazykem]]. Doslovné citace jsou v pořádku.",
+				"config": {
+					"caseSensitive": false
+				}
+			},
+			"relative-time-ref": {
+				"query": [
+					"dodnes",
+					"donedávna",
+					"nedávno",
+					"zanedlouho",
+					"aktuálně",
+					"momentálně",
+					"letošní(ho|ch|m[iu]?)?",
+					"v[  ]minulosti",
+					"v[  ]současnosti",
+					"v[  ]budoucnu",
+					"v[  ]budoucnosti",
+					"poslední dobou",
+					"v[  ](dnešní|nedávné|poslední|současné) době",
+					"(před)?minulé(m?|ho|mu) století",
+					"(před)?minul(ého|ému?|ý) ro(ce|ku?)",
+					"(přes)?příští(m?|ho|mu) ro(ce|ku?)",
+					"nově (otevře|postave|z?rekonstruov[aá]|zprovozně)n[aácéhiímouyý]*"
+				],
+				"isRegExp": true,
+				"title": "Relativní časový údaj",
+				"message": "Tato formulace je neurčitá, může časem zastarat nebo změnit význam. Pomozte Wikipedii tím, že ji upřesníte uvedením konkrétního (absolutního) časového údaje. Doslovné citace jsou v pořádku.",
+				"config": {
+					"caseSensitive": false
+				}
+			},
+			"NPOV": {
+				"query": [
+					"bezesporu",
+					"bohudík",
+					"bohužel",
+					"kupodivu",
+					"na(ne)?štěstí",
+					"(nádhern|neodmysliteln|nezaměniteln|nezapomenuteln|obdivuhodn|pozoruhodn|prvotřídn|půvabn|světoznám|špičkov|úctyhodn|úchvatn|věhlasn|výtečn|znamenit)([áěí]|é(ho|mu?)?|ou|ý(ch|mi?)?)",
+					"(dechberouc|fascinujíc|legendárn|ohromujíc|prestižn|strhujíc|vynikajíc)í(ho|ch|m[iu]?)?"
+				],
+				"isRegExp": true,
+				"title": "Subjektivní výraz",
+				"mode": "delete",
+				"message": "Tento výraz je subjektivní. Obsah Wikipedie musí dodržovat pravidlo o [[Wikipedie:Nezaujatý úhel pohledu|nezaujatém úhlu pohledu]]. Doslovné citace jsou v pořádku.",
+				"config": {
+					"caseSensitive": false
+				}
+			},
+			"cliché": {
+				"query": [
+					"(bez|nes)počet",
+					"byl[aioy]? ve znamení",
+					"celou řadu",
+					"((ne)?dá se|se (ne)?dá) říc[it]",
+					"nedílnou součástí?",
+					"nedožitých [1-9][0-9]{0,2}[  ]let(ech)?",
+					"nechyb(ěj)?í (ani|dokonce)",
+					"nelze ((si )?ne(po)?všimnout|opomenout)",
+					"neotřel([áeí]|é(ho|mu?)?|ou|ý(ch|mi?)?)",
+					"v[  ]neposlední řadě",
+					"nepřebern([éý]m?|é(ho|mu)) množstvím?",
+					"neskutečn([áěí]|é(ho|mu?)?|ou|ý(ch|mi?)?)",
+					"(nesmazatelně (se )?zapsal[aioy]?|zapsal[aioy]? (se )?nesmazatelně)",
+					"si nezadal[aioy]?",
+					"podle všeho",
+					"(samozřejmostí|zajímavostí) (je|jsou|byl[aioy]?)",
+					"za (pozornost|zmínku) st(ál[aioy]?|ojí)"
+				],
+				"isRegExp": true,
+				"title": "Nevhodná formulace",
+				"mode": "delete",
+				"message": "Tato formulace se často používá v propagačních materiálech, beletrii a/nebo jde o klišé. Text Wikipedie by měl být maximálně věcný a držet se zásad [[Wikipedie:Nezaujatý úhel pohledu|neutrálního, encyklopedického stylu]]. Doslovné citace jsou v pořádku.",
+				"config": {
+					"caseSensitive": false
+				}
+			},
+			"first-or-second-person": {
+				"query": [
+					"[nv]á[ms]",
+					"(a|kdy)?byste",
+					"(ne)?bude[mt]e(-li)?",
+					"(ne)?([dp]o|na|od|pro|vy)chází[mt]e(-li)?",
+					"(ne)?([dp]o|[nz]a|od|pro|vy)razí[mt]e(-li)?",
+					"(ne)?(do|vy)?hledá[mt]e(-li)?",
+					"(ne)?(do|pro|vy|za)?hraje[mt]e(-li)?",
+					"(ne)?chce[mt]e(-li)?",
+					"(ne)?(na|pů)?jde[mt]e(-li)?",
+					"(ne)?js[mt]e(-li)?",
+					"(ne)?(do|u|za)?končí[mt]e(-li)?",
+					"(ne)?má[mt]e(-li)?",
+					"(ne)?musí[mt]e(-li)?",
+					"(ne)?může[mt]e(-li)?",
+					"(ne)?nalezne[mt]e(-li)?",
+					"(ne)?nazývá[mt]e(-li)?",
+					"(ne)?(po|se)tká[mt]e(-li)?",
+					"(ne)?(do)?stane[mt]e(-li)?",
+					"(ne)?(po|vy)?užívá[mt]e(-li)?",
+					"(ne)?([dp]o|z)?volí[mt]e(-li)?",
+					"(ne)?u?vidí[mt]e(-li)?",
+					"(ne)?(doz?)?ví[mt]e(-li)?",
+					"(ne)?(po|vy)?zná[mt]e(-li)?",
+					"[a-záčďéěíňóřšťúůýž]+(ává|uje)[mt]e(-li)?",
+					"[a-záčďéěíňóřšťúůýž]+[áeí][mt]e-li",
+					"[a-záčďéěíňóřšťúůýž]+([ďť]|uj|ávej)[mt]e"
+				],
+				"isRegExp": true,
+				"title": "Promluva ke čtenáři",
+				"mode": "info",
+				"message": "Podobné formulace nejsou v souladu s [[Wikipedie:Encyklopedický styl|encyklopedickým stylem]]. Wikipedie [[Wikipedie:Co Wikipedie není#Wikipedie není návodem, průvodcem ani učebnicí|není průvodcem, rádcem ani návodem]]. Doslovné citace jsou v pořádku.",
+				"config": {
+					"caseSensitive": false
+				}
+			},
+			"LLM": {
+				"query": [
+					"autenticit([aěuy]|ou)",
+					"(^|[.] )Díky sv(é(mu)?|ým)",
+					"důraz(em)? na",
+					"etabloval[aioy]?",
+					"jako jsou",
+					"z?kombin(oval[aioy]?|uj[eí]) prvky",
+					"nejen [^.]+, ale (i|také)",
+					"(není|nejsou) (jen|pouze) [^.]+, ale také",
+					"od [^.]+ až po",
+					"profiluje",
+					"—",
+					"[*][^ .*]+( [^ .*]+)?[*]"
+				],
+				"isRegExp": true,
+				"title": "Možný vygenerovaný obsah",
+				"mode": "delete",
+				"expand": "paragraph",
+				"message": "Vložený obsah vykazuje známky generování umělou inteligencí. Takový obsah je na Wikipedii problematický, neboť obvykle nedodržuje nezaujatý, encyklopedický styl a může porušovat autorská práva nebo obsahovat nepravdivé informace (halucinace). [[WP:LLM|Generované texty lze publikovat teprve po jejich důkladném ověření a podložení věrohodnými zdroji, v opačném případě jsou posuzovány jako neozdrojovaná tvrzení a mohou být smazány.]]",
+				"config": {
+					"minOccurrences": 3,
+					"caseSensitive": false
+				}
+			}
+		}
+	}
+}

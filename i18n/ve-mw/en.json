@@ -58,6 +58,7 @@
 	"visualeditor-ca-editsource-section": "edit source",
 	"visualeditor-ca-editsource-section-hint": "Edit section's source code: $1",
 	"visualeditor-categories-tool": "Categories",
+	"visualeditor-config-save-invalid-schema": "The configuration is invalid: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Sort key changed from $1 to $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Sort key set to $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Sort key unset from $1",

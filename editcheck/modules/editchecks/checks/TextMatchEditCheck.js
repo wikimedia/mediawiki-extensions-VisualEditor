@@ -113,7 +113,7 @@ mw.editcheck.TextMatchEditCheck.static.matchCache = {
  * Fetch corresponding MW file for any matchRules with the "import" property
  * and leave all other matchRules unchanged
  *
- * @param {Object} rawMatchRules map of matchRule IDs to raw config objects
+ * @param {Object|Array} rawMatchRules Map of matchRule IDs to raw config objects, or array (deprecated)
  * @return {Promise<Object>} Promise which resolves to map of processed matchRules
  */
 mw.editcheck.TextMatchEditCheck.static.processMatchRules = function ( rawMatchRules ) {

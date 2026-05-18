@@ -40,7 +40,7 @@ mw.editcheck.BaseEditCheck.static.choices = [
 ];
 
 mw.editcheck.BaseEditCheck.static.defaultConfig = {
-	account: false, // 'loggedin', 'loggedout', anything non-truthy means allow either
+	account: false, // 'loggedin', 'loggedout', false means allow either
 	maximumEditcount: 100,
 	minimumEditcount: 0,
 	ignoreSections: [],

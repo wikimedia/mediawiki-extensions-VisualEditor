@@ -241,6 +241,7 @@
 		],
 		"ListDefinedTags": "VisualEditorHooks",
 		"MakeGlobalVariablesScript": "VisualEditorHooks",
+		"MultiContentSave": "EditCheckHooks",
 		"OutputPageBodyAttributes": "VisualEditorHooks",
 		"ParserOptionsDefaults": "VisualEditorHooks",
 		"ParserTestGlobals": "VisualEditorHooks",

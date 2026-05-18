@@ -625,6 +625,13 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 			notInCategory: [ 'bar' ],
 			matches: false,
 			description: 'does not match when forbidden category present (with title normalization)'
+		},
+		{
+			categories: [ 'Bar' ],
+			inCategory: false,
+			notInCategory: false,
+			matches: true,
+			description: 'matches when category filters are explicitly unset with false'
 		}
 	];
 
@@ -651,4 +658,23 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 			caseItem.description
 		);
 	} );
+} );
+
+QUnit.test( 'doesConfigMatch treats hasTemplate and lacksTemplate false as unset', ( assert ) => {
+	// TODO: Test hasTemplate/lacksTemplate properly
+	const doc = {
+		getOrInsertCachedData: ( fn ) => fn()
+	};
+
+	assert.strictEqual(
+		mw.editcheck.BaseEditCheck.static.doesConfigMatch(
+			ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+				hasTemplate: false,
+				lacksTemplate: false
+			} ),
+			doc
+		),
+		true,
+		'matches when template filters are explicitly unset with false'
+	);
 } );

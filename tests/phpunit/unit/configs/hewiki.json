@@ -1,0 +1,49 @@
+{
+	"addReference": {
+		"ignoreSections": [
+			"גלריה",
+			"תמונות",
+			"ביבליוגרפיה",
+			"ראו גם",
+			"לקריאה נוספת",
+			"קישורים חיצוניים",
+			"ביאורים",
+			"הערות שוליים",
+			"הערות",
+			"מקורות"
+		]
+	},
+	"externalLink": {
+		"ignoreSections": [
+			"לקריאה נוספת",
+			"קישורים חיצוניים"
+		]
+	},
+	"textMatch": {
+		"enabled": true,
+		"showAsCheck": true,
+		"matchItems": [
+			{
+				"query": [
+					"במידה ו"
+				],
+				"title": "במידה ו",
+				"message": "אם זהו משפט תנאי, יש לכתוב במקומו את המילה אם",
+				"config": {
+					"account": false,
+					"enabled": true,
+					"showAsCheck": true,
+					"ignoreQuotedContent": true
+				}
+			},
+			{
+				"query": {
+					"מאד": "מאוד"
+				},
+				"title": "מאד",
+				"mode": "replace",
+				"message": "בכתיב מלא יש לכתוב \"מאוד\" ולא \"מאד\""
+			}
+		]
+	}
+}

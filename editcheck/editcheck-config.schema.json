@@ -1,0 +1,330 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "MediaWiki:Editcheck-config.json",
+	"description": "Schema for on-wiki EditCheck configuration.",
+	"type": "object",
+	"properties": {
+		"textMatch": {
+			"description": "Configuration for the TextMatch edit check.",
+			"$ref": "#/definitions/textMatchEditCheckConfig"
+		}
+	},
+	"additionalProperties": {
+		"$ref": "#/definitions/baseEditCheckConfig"
+	},
+	"definitions": {
+		"stringArray": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"optionalStringArray": {
+			"description": "Optional list of strings. Use false to unset/override an inherited array value.",
+			"oneOf": [
+				{
+					"type": "boolean",
+					"enum": [
+						false
+					]
+				},
+				{
+					"$ref": "#/definitions/stringArray"
+				}
+			]
+		},
+		"account": {
+			"description": "Limits a check to logged-in users, logged-out users, or allows both when set to false.",
+			"oneOf": [
+				{
+					"type": "string",
+					"enum": [
+						"loggedin",
+						"loggedout"
+					]
+				},
+				{
+					"type": "boolean",
+					"enum": [
+						false
+					]
+				}
+			]
+		},
+		"editCount": {
+			"description": "An edit-count threshold. Use false to remove the threshold.",
+			"oneOf": [
+				{
+					"type": "integer",
+					"minimum": 0
+				},
+				{
+					"type": "boolean",
+					"enum": [
+						false
+					]
+				}
+			]
+		},
+		"baseEditCheckConfig": {
+			"description": "Shared config supported by BaseEditCheck and inherited by individual edit checks.",
+			"type": "object",
+			"properties": {
+				"account": {
+					"description": "Show the check only for logged-in users, logged-out users, or everyone (false).",
+					"$ref": "#/definitions/account"
+				},
+				"maximumEditcount": {
+					"description": "Maximum user edit count for which this check is shown.",
+					"$ref": "#/definitions/editCount"
+				},
+				"minimumEditcount": {
+					"description": "Minimum user edit count required before this check is shown.",
+					"$ref": "#/definitions/editCount"
+				},
+				"ignoreSections": {
+					"description": "Section headings where the check should not run. Headings are matched case-insensitively. An empty string refers to the lead section.",
+					"$ref": "#/definitions/optionalStringArray"
+				},
+				"ignoreLeadSection": {
+					"description": "Legacy shortcut for ignoring the lead section. Add an empty string to ignoreSections instead.",
+					"type": "boolean"
+				},
+				"includeSections": {
+					"description": "Section headings where the check should not run. Headings are matched case-insensitively. An empty string refers to the lead section. Use false to allow any section.",
+					"$ref": "#/definitions/optionalStringArray"
+				},
+				"ignoreDisambiguationPages": {
+					"description": "Skip the check on pages marked as disambiguation pages.",
+					"type": "boolean"
+				},
+				"ignoreQuotedContent": {
+					"description": "Skip matches inside quoted content when the edit check supports that behavior.",
+					"type": "boolean"
+				},
+				"showAsCheck": {
+					"description": "Whether this feature is shown in check mode.",
+					"type": "boolean"
+				},
+				"showAsSuggestion": {
+					"description": "Whether this feature is shown in suggestion mode.",
+					"type": "boolean"
+				},
+				"inCategory": {
+					"description": "Require the page to belong to at least one of these categories.",
+					"$ref": "#/definitions/optionalStringArray"
+				},
+				"notInCategory": {
+					"description": "Suppress the check when the page belongs to any of these categories.",
+					"$ref": "#/definitions/optionalStringArray"
+				},
+				"hasTemplate": {
+					"description": "Require the edited document to include at least one of these templates.",
+					"$ref": "#/definitions/optionalStringArray"
+				},
+				"lacksTemplate": {
+					"description": "Suppress the check when the edited document includes any of these templates.",
+					"$ref": "#/definitions/optionalStringArray"
+				}
+			},
+			"additionalProperties": true
+		},
+		"textMatchRuleConfig": {
+			"description": "Per-rule config for TextMatch rules. This extends the shared edit check config. caseSensitive and minOccurrences are still accepted here for backwards compatibility, but new configs should set them on the rule itself.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/baseEditCheckConfig"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"caseSensitive": {
+							"description": "Legacy location for whether term matching should respect case. Prefer the top-level rule.caseSensitive field.",
+							"type": "boolean",
+							"deprecated": true
+						},
+						"minOccurrences": {
+							"description": "Legacy location for the minimum number of matches required within the expanded fragment before an action is created. Prefer the top-level rule.minOccurrences field.",
+							"type": "integer",
+							"minimum": 1,
+							"deprecated": true
+						}
+					},
+					"additionalProperties": true
+				}
+			]
+		},
+		"textMatchQuery": {
+			"description": "Terms to match, as a single string, a list of strings, or a map from matched text to replacement text.",
+			"oneOf": [
+				{
+					"type": "string"
+				},
+				{
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				{
+					"type": "object",
+					"propertyNames": {
+						"type": "string"
+					},
+					"additionalProperties": {
+						"type": [
+							"string",
+							"null"
+						]
+					}
+				}
+			]
+		},
+		"textMatchRuleImport": {
+			"description": "Loads a TextMatch rule from an on-wiki JSON page.",
+			"type": "object",
+			"properties": {
+				"import": {
+					"description": "JSON page to import, e.g. MediaWiki:Editcheck-config-myrule.json. We can't validate the namespace as it could be localised.",
+					"type": "string",
+					"pattern": ":Editcheck-config-.+\\.json$"
+				}
+			},
+			"required": [
+				"import"
+			],
+			"additionalProperties": false
+		},
+		"textMatchRuleInline": {
+			"description": "An inline TextMatch rule definition.",
+			"type": "object",
+			"properties": {
+				"title": {
+					"description": "Title shown for the resulting edit check action.",
+					"type": "string"
+				},
+				"message": {
+					"description": "Description shown in the edit check action dialog.",
+					"type": "string"
+				},
+				"query": {
+					"description": "Text or patterns to match, optionally with replacement strings.",
+					"$ref": "#/definitions/textMatchQuery"
+				},
+				"mode": {
+					"description": "How the action is presented: informational only, replacement, deletion, or the default neutral mode.",
+					"type": "string",
+					"enum": [
+						"",
+						"info",
+						"replace",
+						"delete"
+					]
+				},
+				"config": {
+					"description": "Extra conditions that apply only to this match rule. For backwards compatibility, this may also contain legacy caseSensitive and minOccurrences values.",
+					"$ref": "#/definitions/textMatchRuleConfig"
+				},
+				"expand": {
+					"description": "Expands the matched fragment before building the action.",
+					"type": "string",
+					"enum": [
+						"sentence",
+						"paragraph",
+						"word",
+						"siblings",
+						"parent"
+					]
+				},
+				"inNode": {
+					"description": "Require the match to appear inside a node of this type.",
+					"type": "string"
+				},
+				"listener": {
+					"description": "Limit the rule to a specific listener, such as onDocumentChange.",
+					"type": "string"
+				},
+				"preserveCase": {
+					"description": "When replacing text, adapt the replacement to the matched text's casing.",
+					"type": "boolean"
+				},
+				"isRegExp": {
+					"description": "Interpret query values as regular expressions instead of literal text.",
+					"type": "boolean"
+				},
+				"caseSensitive": {
+					"description": "Whether term matching should respect case. This is the preferred location for new configs.",
+					"type": "boolean"
+				},
+				"minOccurrences": {
+					"description": "Minimum number of matches required within the expanded fragment before an action is created. This is the preferred location for new configs.",
+					"type": "integer",
+					"minimum": 1
+				}
+			},
+			"required": [
+				"query"
+			],
+			"additionalProperties": false
+		},
+		"textMatchRule": {
+			"description": "A TextMatch rule, either defined inline or imported from a MediaWiki JSON page.",
+			"oneOf": [
+				{
+					"$ref": "#/definitions/textMatchRuleImport"
+				},
+				{
+					"$ref": "#/definitions/textMatchRuleInline"
+				}
+			]
+		},
+		"textMatchRules": {
+			"description": "Map of TextMatch rule IDs to rule definitions.",
+			"type": "object",
+			"propertyNames": {
+				"type": "string"
+			},
+			"additionalProperties": {
+				"$ref": "#/definitions/textMatchRule"
+			}
+		},
+		"textMatchRuleList": {
+			"description": "Legacy list of TextMatch rule definitions without explicit rule IDs.",
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/textMatchRule"
+			},
+			"deprecated": true
+		},
+		"textMatchEditCheckConfig": {
+			"description": "Configuration for the textMatch check, combining shared BaseEditCheck options with text matching rules.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/baseEditCheckConfig"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"matchRules": {
+							"description": "Preferred map of TextMatch rule IDs to definitions.",
+							"$ref": "#/definitions/textMatchRules"
+						},
+						"matchItems": {
+							"description": "Legacy alias for matchRules kept for backwards compatibility. Older configs may also store this as an array of rule definitions.",
+							"oneOf": [
+								{
+									"$ref": "#/definitions/textMatchRules"
+								},
+								{
+									"$ref": "#/definitions/textMatchRuleList"
+								}
+							],
+							"deprecated": true
+						}
+					},
+					"additionalProperties": true
+				}
+			]
+		}
+	}
+}

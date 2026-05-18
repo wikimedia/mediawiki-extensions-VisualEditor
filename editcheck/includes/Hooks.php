@@ -10,15 +10,22 @@
 
 namespace MediaWiki\Extension\VisualEditor\EditCheck;
 
+use MediaWiki\CommentStore\CommentStoreComment;
+use MediaWiki\Extension\VisualEditor\MediaWikiJsonSchemaValidator;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\Revision\RenderedRevision;
+use MediaWiki\Status\Status;
+use MediaWiki\Storage\Hook\MultiContentSaveHook;
 use MediaWiki\User\User;
+use MediaWiki\User\UserIdentity;
 
 class Hooks implements
 	ResourceLoaderRegisterModulesHook,
-	GetPreferencesHook
+	GetPreferencesHook,
+	MultiContentSaveHook
 {
 
 	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
@@ -57,5 +64,24 @@ class Hooks implements
 	public function onGetPreferences( $user, &$preferences ) {
 		$api = [ 'type' => 'api' ];
 		$preferences['visualeditor-editcheck-suggestions-toggle'] = $api;
+	}
+
+	/**
+	 * Validate on-wiki edit check config updates against the bundled JSON schema.
+	 *
+	 * @param RenderedRevision $renderedRevision
+	 * @param UserIdentity $user
+	 * @param CommentStoreComment $summary
+	 * @param int $flags
+	 * @param Status $status
+	 * @return bool|void
+	 */
+	public function onMultiContentSave( $renderedRevision, $user, $summary, $flags, $status ) {
+		return MediaWikiJsonSchemaValidator::validateOnSave(
+			$renderedRevision,
+			$status,
+			'editcheck-config.json',
+			dirname( __DIR__ ) . '/editcheck-config.schema.json'
+		);
 	}
 }
