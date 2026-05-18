@@ -30,6 +30,7 @@ mw.editcheck.SuggestedLinkEditCheck.static.defaultConfig = ve.extendObject( {}, 
 mw.editcheck.SuggestedLinkEditCheck.static.name = 'suggestedLink';
 mw.editcheck.SuggestedLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-suggestedlink-title' );
 mw.editcheck.SuggestedLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-suggestedlink-description' );
+mw.editcheck.SuggestedLinkEditCheck.static.footer = ve.deferJQueryMsg( 'editcheck-suggestedlink-footer' );
 
 mw.editcheck.SuggestedLinkEditCheck.static.choices = [
 	{
@@ -105,7 +106,7 @@ mw.editcheck.SuggestedLinkEditCheck.prototype.onDocumentChange = function ( surf
 			modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
 		) {
 			return this.buildActionFromLinkRange( range, surfaceModel, {
-				message: ve.deferJQueryMsg( 'editcheck-suggestedlink-prompt', link.link_text, link.link_target )
+				prompt: ve.deferJQueryMsg( 'editcheck-suggestedlink-prompt', link.link_text, link.link_target )
 			} );
 		}
 		return null;
