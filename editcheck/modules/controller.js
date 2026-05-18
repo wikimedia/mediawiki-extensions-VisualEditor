@@ -111,6 +111,8 @@ Controller.prototype.clearState = function () {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 	this.lastBranchNodeChangeHistoryPointer = null;
+	this.currentListenerPromise = null;
+	this.refreshDeferred = null;
 };
 
 /**
@@ -304,6 +306,27 @@ Controller.prototype.refresh = function ( useCache ) {
 };
 
 /**
+ * Wait for any current action generation to finish
+ *
+ * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of
+ *  actions. This promise will resolve *after* any actionsUpdated events are
+ *  fired.
+ */
+Controller.prototype.whenActionsSettled = function () {
+	if ( this.refreshDeferred ) {
+		// A refresh is happening, which may mean multiple listeners being run
+		// in sequence, so return the promise that will summarize that:
+		return this.refreshDeferred.promise();
+	}
+	if ( this.currentListenerPromise ) {
+		// updateForListener is running, so wait for it to be done:
+		return this.currentListenerPromise;
+	}
+	// Nothing is currently being done, so just return the current known actions:
+	return ve.createDeferred().resolve( this.getActions() ).promise();
+};
+
+/**
  * Toggle whether suggestions are shown to the user.
  */
 Controller.prototype.toggleSuggestionsVisible = function () {
@@ -411,7 +434,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	} else {
 		actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false, onProgress );
 	}
-	return actionsPromise
+	actionsPromise = actionsPromise
 		.then( ( actionsFromListener ) => {
 			// Get the existing actions for this listener
 			const existing = this.getActions( listener );
@@ -473,6 +496,14 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			mw.log.error( 'Could not update for listener: ' + listener, error );
 			return [];
 		} );
+	this.currentListenerPromise = actionsPromise;
+	const resetPromise = () => {
+		if ( this.currentListenerPromise === actionsPromise ) {
+			this.currentListenerPromise = null;
+		}
+	};
+	actionsPromise.then( resetPromise, resetPromise );
+	return actionsPromise;
 };
 
 /**
