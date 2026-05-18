@@ -128,8 +128,8 @@ mw.editcheck.TextMatchEditCheck.static.processMatchRules = function ( rawMatchRu
 				mw.log.warn( `Skipped import for matchRule id:${ id } (${ rule.import } must be in mediawiki namespace.)` );
 				return;
 			}
-			if ( !rule.import.endsWith( '.json' ) ) {
-				mw.log.warn( `Skipped import for matchRule id:${ id } (${ rule.import } must be a json file.)` );
+			if ( !importTitle.getMainText().match( /^Editcheck-config-.+\.json$/ ) ) {
+				mw.log.warn( `Skipped import for matchRule id:${ id } (${ rule.import } must be of the form Editcheck-config-<name>.json)` );
 				return;
 			}
 			filenames.push( rule.import );
