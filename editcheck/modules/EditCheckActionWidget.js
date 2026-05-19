@@ -123,7 +123,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 			'white-space': 'normal',
 			margin: '0.5em 0'
 		} );
-		this.$actions.append( $warning );
+		this.$body.append( $warning );
 	}
 
 	this.$element
