@@ -43,10 +43,6 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 		label: config.prompt,
 		classes: [ 've-ui-editCheckActionWidget-prompt' ]
 	} );
-	this.footer = config.footer && new OO.ui.LabelWidget( {
-		label: config.footer,
-		classes: [ 've-ui-editCheckActionWidget-footer' ]
-	} );
 	this.$actions = $( '<div>' ).addClass( 've-ui-editCheckActionWidget-actions oo-ui-element-hidden' );
 	if ( this.prompt ) {
 		this.$actions.addClass( 've-ui-editCheckActionWidget-actions-prompted' )
@@ -69,7 +65,20 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 		.append( this.message.$element, this.$actions )
 		.addClass( 've-ui-editCheckActionWidget-body' );
 
-	if ( this.footer ) {
+	if ( config.footer ) {
+		if ( config.footerIcon ) {
+			this.footer = new OO.ui.MessageWidget( {
+				icon: config.footerIcon,
+				label: config.footer,
+				inline: true,
+				classes: [ 've-ui-editCheckActionWidget-footer' ]
+			} );
+		} else {
+			this.footer = new OO.ui.LabelWidget( {
+				label: config.footer,
+				classes: [ 've-ui-editCheckActionWidget-footer' ]
+			} );
+		}
 		this.$body.append( this.footer.$element );
 		// TODO: Give this action a more generic event name
 		mw.editcheck.trackActionLinks( this.footer.$element, this.name, 'click-model-card' );

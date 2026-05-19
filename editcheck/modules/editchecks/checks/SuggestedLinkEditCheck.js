@@ -31,6 +31,7 @@ mw.editcheck.SuggestedLinkEditCheck.static.name = 'suggestedLink';
 mw.editcheck.SuggestedLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-suggestedlink-title' );
 mw.editcheck.SuggestedLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-suggestedlink-description' );
 mw.editcheck.SuggestedLinkEditCheck.static.footer = ve.deferJQueryMsg( 'editcheck-suggestedlink-footer' );
+mw.editcheck.SuggestedLinkEditCheck.static.footerIcon = 'robot';
 
 mw.editcheck.SuggestedLinkEditCheck.static.choices = [
 	{

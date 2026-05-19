@@ -69,6 +69,13 @@ mw.editcheck.BaseEditCheck.static.description = null;
 mw.editcheck.BaseEditCheck.static.footer = null;
 
 /**
+ * Footer icon of the edit check
+ *
+ * @type {string}
+ */
+mw.editcheck.BaseEditCheck.static.footerIcon = null;
+
+/**
  * Prompt message of the edit check
  *
  * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
@@ -282,6 +289,16 @@ mw.editcheck.BaseEditCheck.prototype.getPrompt = function () {
  */
 mw.editcheck.BaseEditCheck.prototype.getFooter = function () {
 	return this.constructor.static.footer || undefined;
+};
+
+/**
+ * Get the footer icon of the check, if any
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {string|undefined}
+ */
+mw.editcheck.BaseEditCheck.prototype.getFooterIcon = function () {
+	return this.constructor.static.footerIcon || undefined;
 };
 
 /**

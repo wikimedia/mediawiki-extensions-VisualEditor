@@ -12,6 +12,8 @@
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.title] Title
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.message] Body message
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.prompt] Prompt to show before choices
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.footer] Footer to show after choices
+ * @param {string} [config.footerIcon] Icon to show next to footer
  * @param {string} [config.id] Optional unique identifier
  * @param {string} [config.icon] Optional icon name
  * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
@@ -31,6 +33,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.message = config.message;
 	this.prompt = config.prompt;
 	this.footer = config.footer;
+	this.footerIcon = config.footerIcon;
 	this.id = config.id;
 	this.title = config.title;
 	this.icon = config.icon;
@@ -118,6 +121,15 @@ mw.editcheck.EditCheckAction.prototype.getTitle = function () {
  */
 mw.editcheck.EditCheckAction.prototype.getFooter = function () {
 	return this.footer || this.check.getFooter( this );
+};
+
+/**
+ * Get the action's footerIcon, if any
+ *
+ * @return {string|undefined}
+ */
+mw.editcheck.EditCheckAction.prototype.getFooterIcon = function () {
+	return this.footerIcon || this.check.getFooterIcon( this );
 };
 
 /**
@@ -214,6 +226,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		label: this.getTitle(),
 		message: this.getDescription(),
 		footer: this.getFooter(),
+		footerIcon: this.getFooterIcon(),
 		prompt: this.getPrompt(),
 		choices: this.getChoices(),
 		mode: this.mode,

@@ -40,6 +40,8 @@ mw.editcheck.ToneCheck.static.description = ve.deferJQueryMsg( 'editcheck-tone-d
 
 mw.editcheck.ToneCheck.static.footer = ve.deferJQueryMsg( 'editcheck-tone-footer' );
 
+mw.editcheck.ToneCheck.static.footerIcon = 'robot';
+
 mw.editcheck.ToneCheck.static.success = OO.ui.deferMsg( 'editcheck-tone-thank' );
 
 mw.editcheck.ToneCheck.static.choices = [
