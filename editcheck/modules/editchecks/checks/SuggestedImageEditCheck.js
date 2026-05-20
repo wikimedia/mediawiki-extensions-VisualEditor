@@ -57,6 +57,9 @@ mw.editcheck.SuggestedImageEditCheck.static.fetchSuggestions = function ( surfac
 		} )
 			.then( ( response ) => ve.getProp( response, 'query', 'pages', 0, 'growthimagesuggestiondata', 0, 'images' ) )
 			.then( ( suggestions ) => {
+				if ( !suggestions ) {
+					return null;
+				}
 				// See: AddSectionImageArticleTarget.prototype.getInsertRange in GrowthExperiments
 				const documentModel = surfaceModel.getDocument();
 				const headings = documentModel.getNodesByType( 'mwHeading', true )
