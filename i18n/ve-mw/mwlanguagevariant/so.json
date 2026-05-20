@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"visualeditor-mwlanguagevariant-disabled": "Beddelka noocyada waa la damiyay",
+	"visualeditor-mwlanguagevariant-filter": "Noocyada la shaandheeyay ilaa $1",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-from-label": "Isha",
+	"visualeditor-mwlanguagevariantcontextitem-rule-text-twoway-label": "Qoraal",
+	"visualeditor-mwlanguagevariantinspector-filter-langs-label": "Luqadaha",
+	"visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder": "Qoraalka asalka ah",
+	"visualeditor-mwlanguagevariantinspector-title-name": "Magaca luqadda",
+	"visualeditor-mwlanguagevariantinspector-title-oneway": "Xeerka beddelka hal dhinac",
+	"visualeditor-mwlanguagevariantinspector-title-twoway": "Xeerka beddelka luqadda",
+	"visualeditor-mwlanguagevariantinspector-twoway-add-button": "Ku dar xaalad cusub",
+	"visualeditor-mwlanguagevariantinspector-twoway-clear-button": "Ka saar xaaladda",
+	"visualeditor-mwlanguagevariantinspector-twoway-text-placeholder": "Nooc qoraal"
+}

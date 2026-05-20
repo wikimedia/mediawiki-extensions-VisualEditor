@@ -5,7 +5,8 @@
 			"Pierpao",
 			"McDutchie",
 			"FL2226",
-			"Daimona Eaytoy"
+			"Daimona Eaytoy",
+			"Valepert"
 		]
 	},
 	"editcheck-dialog-action-no": "No",
@@ -20,6 +21,7 @@
 	"editcheck-dialog-addref-success-notify": "Grazie per aver aggiunto una fonte!",
 	"editcheck-dialog-addref-title": "Aggiungi una fonte",
 	"editcheck-dialog-title": "Prima della pubblicazione",
+	"editcheck-copyvio-title": "Contenuto incollato",
 	"editcheck-review-title": "Rivedi modifiche",
 	"tag-editcheck-reference-decline-other": "Edit Check (citazioni) rifiutato (altro)"
 }
