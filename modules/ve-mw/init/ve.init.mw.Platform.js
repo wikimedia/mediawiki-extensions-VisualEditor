@@ -103,6 +103,19 @@ ve.init.mw.Platform.prototype.formatNumber = function ( number ) {
 };
 
 /**
+ * @method
+ * @inheritdoc
+ */
+ve.init.mw.Platform.prototype.formatNumberWithoutSeparators = function ( number ) {
+	const digitTransformTable = mw.config.get( 'wgTranslateNumerals' ) && mw.language.getDigitTransformTable();
+	const numString = String( number );
+	if ( !digitTransformTable || !digitTransformTable.length ) {
+		return numString;
+	}
+	return numString.split( '' ).map( ( numChar ) => digitTransformTable[ numChar ] ).join( '' );
+};
+
+/**
  * @inheritdoc
  */
 ve.init.mw.Platform.prototype.getHtmlMessage = function ( key, ...args ) {
