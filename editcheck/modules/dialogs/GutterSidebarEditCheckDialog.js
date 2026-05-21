@@ -190,7 +190,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestSuggestion = functio
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function () {
 	const target = this.controller.getTarget();
-	if ( !this.scrollIntoView || target.section === null ) {
+	const scrollIntoView = this.scrollIntoView;
+	if ( !scrollIntoView || target.section === null ) {
 		return;
 	}
 	this.controller.whenActionsSettled().then( () => {
@@ -199,6 +200,10 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function (
 			hasAbove: !!this.controller.editFullPageIndicatorTop.isVisible(),
 			hasBelow: !!this.controller.editFullPageIndicatorBottom.isVisible()
 		};
+		// do nothing if button has been nulled out or replaced
+		if ( !this.scrollIntoView || this.scrollIntoView !== scrollIntoView ) {
+			return;
+		}
 		this.scrollIntoView.setOutsideSectionState( outsideSectionState );
 	} );
 };
