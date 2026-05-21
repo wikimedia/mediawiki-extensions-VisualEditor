@@ -14,6 +14,23 @@ use MediaWikiIntegrationTestCase;
  */
 class HooksTest extends MediaWikiIntegrationTestCase {
 
+	public function newHooks( array $overrides = [] ): Hooks {
+		$services = $this->getServiceContainer();
+		return new Hooks(
+			$overrides['ExtensionRegistry'] ??
+				ExtensionRegistry::getInstance(),
+			$overrides[VisualEditorAvailabilityLookup::SERVICE_NAME] ??
+				$services->get( VisualEditorAvailabilityLookup::SERVICE_NAME ),
+			$overrides['UserOptionsLookup'] ??
+				$services->getUserOptionsLookup(),
+			$overrides['HookContainer'] ??
+				$services->getHookContainer(),
+			$overrides['ConfigFactory'] ??
+				$services->getConfigFactory(),
+			$overrides['MobileFrontend.Context'] ?? null,
+		);
+	}
+
 	/**
 	 * @dataProvider provideOnResourceLoaderGetConfigVars
 	 */
@@ -21,10 +38,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$this->overrideConfigValues( $config );
 
 		$vars = [];
-		$hooks = new Hooks(
-			ExtensionRegistry::getInstance(),
-			$this->getServiceContainer()->get( VisualEditorAvailabilityLookup::SERVICE_NAME )
-		);
+		$hooks = $this->newHooks();
 		$hooks->onResourceLoaderGetConfigVars( $vars, '', new HashConfig() );
 
 		$this->assertArrayHasKey( 'wgVisualEditorConfig', $vars );
@@ -56,10 +70,9 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$this->overrideConfigValues( [ 'TemplateDataEnableDiscovery' => $featureFlagEnabled ] );
 
 		$vars = [];
-		$hooks = new Hooks(
-			$extensionRegistry,
-			$this->getServiceContainer()->get( VisualEditorAvailabilityLookup::SERVICE_NAME )
-		);
+		$hooks = $this->newHooks( [
+			'ExtensionRegistry' => $extensionRegistry,
+		] );
 		$hooks->onResourceLoaderGetConfigVars( $vars, '', new HashConfig() );
 
 		$this->assertArrayHasKey( 'wgVisualEditorConfig', $vars );

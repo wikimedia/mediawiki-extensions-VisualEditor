@@ -259,7 +259,13 @@
 			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks",
 			"services": [
 				"ExtensionRegistry",
-				"VisualEditor.VisualEditorAvailabilityLookup"
+				"VisualEditor.VisualEditorAvailabilityLookup",
+				"UserOptionsLookup",
+				"HookContainer",
+				"ConfigFactory"
+			],
+			"optional_services": [
+				"MobileFrontend.Context"
 			]
 		},
 		"EditCheckHooks": {
