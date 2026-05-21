@@ -68,7 +68,7 @@
 	"editcheck-action-dismiss": "Zavřít",
 	"editcheck-suggestedlink-title": "Přidat odkaz",
 	"editcheck-suggestedlink-description": "Tento text neodkazuje na jiný článek. Přidejte odkaz, který čtenářům pomůže dozvědět se o tomto tématu více.",
-	"editcheck-suggestedlink-prompt": "Odkázat z „$1“ na $2?",
+	"editcheck-suggestedlink-prompt": "Odkázat z „$1“ na [[$2]]?",
 	"editcheck-suggestedlink-action-add-link": "Přidat odkaz",
 	"editcheck-action-add-caption": "Přidat popisek",
 	"editcheck-action-add-citation": "Přidat referenci",

@@ -4,6 +4,7 @@
 			"Amire80",
 			"David Lynch",
 			"Ed Sanders",
+			"Raymond",
 			"Stjn"
 		]
 	},
@@ -76,7 +77,7 @@
 	"editcheck-suggestedlink-title": "Title of the suggested link edit check.",
 	"editcheck-suggestedlink-description": "Description of the suggested link edit check.",
 	"editcheck-suggestedlink-descriptionlink": "{{notranslate}}\nLink to a policy page on suggested links",
-	"editcheck-suggestedlink-prompt": "Prompt asking whether the selected text should be linked to the suggested article.\nParameters:\n* $1 - The selected text that would become a link.\n* $2 - The suggested article title.",
+	"editcheck-suggestedlink-prompt": "Prompt asking whether the selected text should be linked to the suggested article.\nParameters:\n* $1 - The selected text that would become a link.\n* [[$2]] - The suggested article title.",
 	"editcheck-suggestedlink-action-add-link": "Label for the action that accepts a suggested link and inserts it.",
 	"editcheck-suggestedlink-footer": "Footer explaining the suggested link model",
 	"editcheck-action-add-caption": "Label for an action that adds a caption.",
