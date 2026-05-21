@@ -223,6 +223,7 @@
 		"VisualEditorAlias": "VisualEditor.i18n.alias.php"
 	},
 	"Hooks": {
+		"ArticleParserOptions": "VisualEditorHooks",
 		"BeforeInitialize": "VisualEditorHooks",
 		"BeforePageDisplay": "VisualEditorHooks",
 		"ChangeTagsListActive": "VisualEditorHooks",
@@ -241,6 +242,7 @@
 		"ListDefinedTags": "VisualEditorHooks",
 		"MakeGlobalVariablesScript": "VisualEditorHooks",
 		"OutputPageBodyAttributes": "VisualEditorHooks",
+		"ParserOptionsDefaults": "VisualEditorHooks",
 		"ParserTestGlobals": "VisualEditorHooks",
 		"PreferencesFormPreSave": "VisualEditorHooks",
 		"RecentChange_save": "VisualEditorHooks",

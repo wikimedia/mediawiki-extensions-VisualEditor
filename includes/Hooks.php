@@ -39,6 +39,9 @@ use MediaWiki\Output\Hook\MakeGlobalVariablesScriptHook;
 use MediaWiki\Output\Hook\OutputPageBodyAttributesHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Article;
+use MediaWiki\Page\Hook\ArticleParserOptionsHook;
+use MediaWiki\Parser\Hook\ParserOptionsDefaultsHook;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
 use MediaWiki\RecentChanges\Hook\RecentChange_saveHook;
@@ -74,7 +77,9 @@ class Hooks implements
 	ListDefinedTagsHook,
 	MakeGlobalVariablesScriptHook,
 	OutputPageBodyAttributesHook,
+	ParserOptionsDefaultsHook,
 	ParserTestGlobalsHook,
+	ArticleParserOptionsHook,
 	PreferencesFormPreSaveHook,
 	RecentChange_saveHook,
 	RedirectSpecialArticleRedirectParamsHook,
@@ -781,15 +786,9 @@ class Hooks implements
 			return;
 		}
 
-		$editor = self::getLastEditor( $user, $skin->getRequest() );
-		if (
-			!$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
-			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab' ||
-			(
-				$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
-				$editor === 'wikitext'
-			)
-		) {
+		$linkBehaviour = $skin->getParserOptions()?->getOption( 'visibleLinks' ) ?? SectionLinkBehaviour::LINK_BOTH;
+
+		if ( $linkBehaviour === SectionLinkBehaviour::LINK_WT || $linkBehaviour === SectionLinkBehaviour::LINK_BOTH ) {
 			// Don't add ve-edit, but do update the edit tab (e.g. "Edit source").
 			$tabMessages = $this->veConfig->get( 'VisualEditorTabMessages' );
 			// The following messages can be used here:
@@ -805,10 +804,7 @@ class Hooks implements
 		}
 
 		// Exit if we're using the single edit tab.
-		if (
-			$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
-			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) !== 'multi-tab'
-		) {
+		if ( $linkBehaviour !== SectionLinkBehaviour::LINK_BOTH ) {
 			return;
 		}
 
@@ -857,6 +853,32 @@ class Hooks implements
 				// TODO: This will probably cause weird ordering if any other extensions added something
 				// already.
 				// ... wfArrayInsertBefore?
+			}
+		}
+	}
+
+	public function onArticleParserOptions( Article $article, ParserOptions $popts ) {
+		$popts->setOption( 'visibleLinks', SectionLinkBehaviour::LINK_SINGLE );
+
+		$user = $article->getContext()->getUser();
+		$request = $article->getContext()->getRequest();
+
+		$editor = self::getLastEditor( $user, $request );
+		if (
+				$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
+				$editor === 'wikitext'
+		) {
+			$popts->setOption( 'visibleLinks', SectionLinkBehaviour::LINK_WT );
+		}
+
+		if (
+			!$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
+			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab'
+		) {
+			if ( $this->visualEditorAvailabilityLookup->isAvailable( $article->getTitle(), $request, $user ) ) {
+				$popts->setOption( 'visibleLinks', SectionLinkBehaviour::LINK_BOTH );
+			} else {
+				$popts->setOption( 'visibleLinks', SectionLinkBehaviour::LINK_WT );
 			}
 		}
 	}
@@ -1213,5 +1235,16 @@ class Hooks implements
 		if ( $user->isNamed() && ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) ) {
 			self::deferredSetUserOption( $user, 'visualeditor-editor', $cookie );
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 *
+	 * @param array $postprocOpts array of options that are only for post-processing
+	 */
+	public function onParserOptionsDefaults( &$defaults, &$inCacheKey, &$lazyLoad, &$postprocOpts = [] ) {
+		$defaults[ 'visibleLinks'] = SectionLinkBehaviour::LINK_BOTH;
+		$inCacheKey[ 'visibleLinks' ] = true;
+		$postprocOpts[] = 'visibleLinks';
 	}
 }
