@@ -94,7 +94,7 @@
 	"editcheck-specialeditchecks-header-unsupported": "지원되지 않는 검사",
 	"editcheck-specialeditchecks-col-title": "제목",
 	"editcheck-specialeditchecks-col-name": "이름",
-	"editcheck-specialeditchecks-col-appearance": "보이기",
+	"editcheck-specialeditchecks-col-appearance": "외관",
 	"editcheck-specialeditchecks-abtest": "(A/B 테스트)",
 	"editcheck-specialeditchecks-config-summary": "구성",
 	"editcheck-specialeditchecks-config-default": "기본 구성",

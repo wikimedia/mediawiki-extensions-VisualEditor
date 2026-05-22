@@ -4,7 +4,8 @@
 			"BraunOBruno",
 			"Eduardoaddad",
 			"Erol",
-			"Fúlvio"
+			"Fúlvio",
+			"Albertoleoncio"
 		]
 	},
 	"editchecks": "Editar verificações",
@@ -26,7 +27,7 @@
 	"editcheck-dialog-addref-success-notify": "Agradecemos por adicionar uma citação!",
 	"editcheck-dialog-addref-title": "Adicionar uma citação",
 	"editcheck-dialog-title": "Antes de publicar",
-	"editcheck-copyvio-title": "Conteúdo promovido",
+	"editcheck-copyvio-title": "Conteúdo copiado",
 	"editcheck-copyvio-description": "Evite copiar texto de outras fontes, mesmo que reformulado ou citado. Isso pode ser considerado [{{int:editcheck-copyvio-descriptionlink}} violação de direitos autorais ou plágio] e pode resultar na remoção do seu conteúdo ou no bloqueio da sua conta.",
 	"editcheck-copyvio-prompt": "Você escreveu este texto?",
 	"editcheck-copyvio-action-keep": "Sim, manter",
@@ -41,7 +42,7 @@
 	"editcheck-preference-suggestions-label": "Modo sugestão",
 	"editcheck-preference-suggestions-description": "Sugestões de edição configuradas pela comunidade para melhorar os artigos. Disponível no [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
 	"editcheck-tone-title": "Revisar tom?",
-	"editcheck-tone-description": "Outros usuários frequentemente revisam esse tipo de redação, dizendo que o tom é desequilibrado. [{{int:editcheck-tone-descriptionlink}} Saiba mais]",
+	"editcheck-tone-description": "Outros usuários frequentemente corrigem esse tipo de redação, dizendo que o tom é desequilibrado. [{{int:editcheck-tone-descriptionlink}} Saiba mais]",
 	"editcheck-tone-footer": "Identificado usando um [{{int:editcheck-tone-footerlink}} modelo BERT]",
 	"editcheck-tone-title-acted": "Revisando tom",
 	"editcheck-tone-description-acted": "Fique atento a expressões que sejam lisonjeiras, depreciativas, vagas, clichês ou que endossem um ponto de vista específico.",
