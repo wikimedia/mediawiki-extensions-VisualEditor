@@ -6,6 +6,10 @@
 			"AhmedG612"
 		]
 	},
+	"tag-editcheck-references-description": "EditCheck waxa uu u malaynayaa in tixraac loo baahnaa",
+	"tag-editcheck-references-activated": "EditCheck (tixraacyo) waa la hawlgeliyay",
+	"tag-editcheck-references-shown": "EditCheck (tixraacyo) waa la muujiyay",
+	"tag-editcheck-references-shown-description": "EditCheck waxa uu u malaynayaa in tixraac loo baahnaa, waxaana la muujiyay UI-ga",
 	"tag-editsuggestion-seen": "Talo tafatir oo la arkay",
 	"tag-visualeditor": "wax ka badalka muuqaalka ah",
 	"tag-visualeditor-needcheck": "Tafatirka muuqaalka: Hubi",

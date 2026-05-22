@@ -42,5 +42,6 @@
 	"editcheck-specialeditchecks-header-unsupported": "Hubinno aan la taageerin",
 	"editcheck-specialeditchecks-col-appearance": "Muuqaal",
 	"editcheck-suggestionfeedback-label-report": "Soo sheeg dhibaato",
-	"tag-editcheck-reference-decline-irrelevant-description": "Tixraaca EditCheck waa la diiday maadaama uusan khusayn."
+	"tag-editcheck-reference-decline-irrelevant-description": "Tixraaca EditCheck waa la diiday maadaama uusan khusayn.",
+	"tag-editcheck-reference-decline-uncertain": "EditCheck (tixraacyo) waa la diiday (aan la hubin)"
 }

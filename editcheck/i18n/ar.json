@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Dyolf77 (WMF)",
+			"Kopmil",
 			"Meno25",
 			"Mohammed Qays",
 			"محمد أحمد عبد الفتاح"
@@ -11,7 +12,7 @@
 	"editcheck-toolbar-suggestions-title": "إظهار/إخفاء الاقتراحات",
 	"editcheck-suggestions-turned-on": "تم تفعيل الاقتراحات",
 	"editcheck-suggestions-turned-off": "تم إيقاف الاقتراحات",
-	"editcheck-suggestions-none": "لا تتوفر اقتراحات",
+	"editcheck-suggestions-none": "لا توجد اقتراحات متاحة",
 	"editcheck-dialog-action-no": "لا",
 	"editcheck-dialog-action-yes": "نعم",
 	"editcheck-dialog-action-decline": "رفض",
@@ -65,9 +66,9 @@
 	"editcheck-action-remove-link": "إزالة الرابط",
 	"editcheck-action-dismiss": "رفض",
 	"editcheck-suggestedlink-title": "إضافة رابط",
-	"editcheck-suggestedlink-description": "لا يحتوي هذا النص على رابط لمقال آخر. أضف رابطًا لمساعدة القراء على معرفة المزيد حول هذا الموضوع.",
-	"editcheck-suggestedlink-prompt": "ربط «$1» بـ [[$2]]؟",
-	"editcheck-suggestedlink-action-add-link": "إضافة الرابط",
+	"editcheck-suggestedlink-description": "لا يحتوي هذا النص على رابط لمقال آخر. أضف رابطًا إلى [{{int:editcheck-suggestedlink-descriptionlink}} لمساعدة القراء على معرفة المزيد] حول هذا الموضوع.",
+	"editcheck-suggestedlink-prompt": "هل تريد ربط \"$1\" بـ[[$2]]؟",
+	"editcheck-suggestedlink-action-add-link": "إضافة رابط",
 	"editcheck-action-add-caption": "إضافة شرح",
 	"editcheck-action-add-citation": "إضافة استشهاد",
 	"editcheck-action-convert-reference": "تحويل",
