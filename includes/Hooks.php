@@ -577,11 +577,9 @@ class Hooks implements
 
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
+				$shadowPage = $services->getShadowPageLoader()->get( $title );
 				// Build the VisualEditor tab
-				$existing = $title->exists() || (
-					$title->inNamespace( NS_MEDIAWIKI ) &&
-					$title->getDefaultMessageText() !== false
-				);
+				$existing = $title->exists() || $shadowPage?->existsForEdit();
 				$action = $existing ? 'edit' : 'create';
 				$veParams = $skin->editUrlOptions();
 				// Remove action=edit
