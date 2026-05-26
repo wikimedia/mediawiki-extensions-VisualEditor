@@ -10,6 +10,7 @@ use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Content\JsonContent;
 use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
+use MediaWiki\Html\TocGeneratorTrait;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
@@ -17,6 +18,8 @@ use MediaWiki\Title\Title;
 use OOUI\MessageWidget;
 
 class SpecialEditChecks extends SpecialPage {
+	use TocGeneratorTrait;
+
 	private readonly Config $config;
 
 	/**
@@ -105,12 +108,11 @@ class SpecialEditChecks extends SpecialPage {
 			}
 		}
 
-		$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-default' )->text() ) );
+		$this->outputSection( 'default-checks', $this->msg( 'editcheck-specialeditchecks-header-default' )->text() );
 		$out->addHTML( $this->buildTableHtml( $defaultChecks, $onWikiConfig ) );
 
 		if ( $abChecks ) {
-			$out->addHTML( Html::element( 'h2', [],
-				$this->msg( 'editcheck-specialeditchecks-header-abtest' )->text() ) );
+			$this->outputSection( 'abtest-checks', $this->msg( 'editcheck-specialeditchecks-header-abtest' )->text() );
 			$out->addHTML( $this->buildTableHtml( $abChecks, $onWikiConfig ) );
 		}
 
@@ -124,8 +126,10 @@ class SpecialEditChecks extends SpecialPage {
 			);
 			$out->addHTML( $this->buildTableHtml( $experimentalEnabledChecks, $onWikiConfig, true ) );
 
-			$out->addHTML( Html::element( 'h2', [],
-				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
+			$this->outputSection(
+				'experimental-checks',
+				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text()
+			);
 			$out->addHTML( $this->buildTableHtml( $disabledChecks, $onWikiConfig, true ) );
 		} else {
 			$allExperimentalChecks = array_merge( $experimentalEnabledChecks, $disabledChecks );
@@ -133,25 +137,43 @@ class SpecialEditChecks extends SpecialPage {
 			usort( $allExperimentalChecks, static function ( $a, $b ) {
 				return strcmp( $a['name'], $b['name'] );
 			} );
-			$out->addHTML( Html::element( 'h2', [],
-				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text() ) );
+			$this->outputSection(
+				'experimental-checks',
+				$this->msg( 'editcheck-specialeditchecks-header-experimental' )->text()
+			);
 			$out->addHTML( $this->buildTableHtml( $allExperimentalChecks, $onWikiConfig, true ) );
 		}
 
 		if ( $unsupportedChecks ) {
-			$out->addHTML( Html::element( 'h2', [],
-				$this->msg( 'editcheck-specialeditchecks-header-unsupported' )->text() ) );
+			$this->outputSection(
+				'unsupported-checks',
+				$this->msg( 'editcheck-specialeditchecks-header-unsupported' )->text()
+			);
 			$out->addHTML( $this->buildTableHtml( $unsupportedChecks, $onWikiConfig ) );
 		}
 
 		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
-			$out->addHTML( Html::element( 'h2', [], $this->msg( 'editcheck-specialeditchecks-header-base' )->text() ) );
+			$this->outputSection( 'base-check', $this->msg( 'editcheck-specialeditchecks-header-base' )->text() );
 			$out->addHTML( $this->configDetails(
 				$this->jsonTableFromObjectString( $baseCheck[ 0 ]['defaultConfig'] ),
 				isset( $onWikiConfig['*'] ) ? $this->jsonTable( $onWikiConfig['*'] ) : ''
 			) );
 		}
+
+		$out->addTOCPlaceholder( $this->getTocData() );
+	}
+
+	/**
+	 * Output a section header and add it to the TOC.
+	 *
+	 * @param string $id Section ID
+	 * @param string $label Section label
+	 */
+	private function outputSection( string $id, string $label ): void {
+		$out = $this->getOutput();
+		$out->addHTML( Html::element( 'h2', [ 'id' => $id ], $label ) );
+		$this->addTocSection( $id, 'rawmessage', $label );
 	}
 
 	/**
@@ -314,9 +336,11 @@ class SpecialEditChecks extends SpecialPage {
 			$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
 		}
 
+		$this->addTocSubSection( $checkData['name'], 'rawmessage', $checkData['name'] );
+
 		$html .= Html::rawElement( 'tr', [],
 			Html::rawElement( 'td', [],
-				Html::element( 'strong', [], $checkData['name'] ) .
+				Html::element( 'strong', [ 'id' => $checkData['name'] ], $checkData['name'] ) .
 				Html::element( 'div', [], basename( $checkData['file'] ) )
 			) .
 			Html::rawElement( 'td', [],
