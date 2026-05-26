@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"editcheck-dialog-action-no": "Maya",
+	"editcheck-dialog-addref-description": "Ka caawi akhristayaasha inay fahmaan halka macluumaadkani ka yimid adigoo ku daraya tixraac.",
+	"editcheck-dialog-addref-reject-question": "Maxaad u ku darin tixraac?",
+	"editcheck-dialog-addref-reject-irrelevant": "Uma malaynayo in tixraacyadu khuseeyaan isbeddelka aan samaynayo",
+	"editcheck-dialog-addref-reject-common-knowledge": "Macluumaadka aan ku darayo waa mid si ballaaran loo yaqaan",
+	"editcheck-dialog-addref-reject-uncertain": "Ma hubo tixraaca aan ku darayo",
+	"editcheck-dialog-addref-reject-other": "Kale",
+	"editcheck-dialog-addref-success-notify": "Waad ku mahadsan tahay inaad ku dartay xigasho!",
+	"editcheck-dialog-addref-title": "Ku dar xigasho",
+	"editcheck-dialog-title": "Ka hor inta aan la daabicin",
+	"tag-editcheck-reference-decline-irrelevant-description": "Tixraaca EditCheck waa la diiday maadaama uusan khusayn.",
+	"tag-editcheck-reference-decline-uncertain": "EditCheck (tixraacyo) waa la diiday (aan la hubin)"
+}
