@@ -42,4 +42,6 @@ ve.ui.EditCheckSuggestionsTool.prototype.onSelect = function () {
 	ve.track( 'activity.' + this.getName(), { action: 'tool-used' } );
 };
 
-ve.ui.toolFactory.register( ve.ui.EditCheckSuggestionsTool );
+if ( mw.editcheck.namespaceEnabled ) {
+	ve.ui.toolFactory.register( ve.ui.EditCheckSuggestionsTool );
+}

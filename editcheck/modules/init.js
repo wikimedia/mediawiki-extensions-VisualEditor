@@ -38,7 +38,8 @@ mw.editcheck = {
 			},
 			errored: {}
 		};
-	}
+	},
+	namespaceEnabled: mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ]
 };
 mw.editcheck.resetSessionState();
 
@@ -93,8 +94,6 @@ if ( abCheck === 'paste' ) {
 	mw.editcheck.config.paste = ve.extendObject( mw.editcheck.config.paste || {}, { showAsCheck: enableAbCheck } );
 }
 
-const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 'wgNamespaceIds' )[ '' ];
-
 // Helper functions for ve.init.mw.ArticleTarget save-tagging, keep logic
 // in-sync with AddReferenceEditCheck and ToneCheck.
 
@@ -107,7 +106,7 @@ const isMainNamespace = mw.config.get( 'wgNamespaceNumber' ) === mw.config.get( 
  */
 mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
 	// Tag anything in the main namespace, regardless of other eligibility checks
-	if ( !isMainNamespace ) {
+	if ( !mw.editcheck.namespaceEnabled ) {
 		return false;
 	}
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
