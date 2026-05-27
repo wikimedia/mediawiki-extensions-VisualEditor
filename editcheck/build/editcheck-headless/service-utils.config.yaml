@@ -1,0 +1,8 @@
+service_name: visualeditor-editcheck-headless
+logging:
+  level: info
+  format: ecs
+  stacktrace: true
+  transports:
+    - transport: Console
+metrics: false

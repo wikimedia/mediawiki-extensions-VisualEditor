@@ -16,6 +16,7 @@ $specialPageAliases = [];
 $specialPageAliases['en'] = [
 	'CollabPad' => [ 'CollabPad', 'Collab Pad' ],
 	'EditChecks' => [ 'EditChecks', 'Edit checks' ],
+	'EditCheckHeadless' => [ 'EditCheckHeadless', 'Edit check headless' ],
 ];
 
 /** Arabic

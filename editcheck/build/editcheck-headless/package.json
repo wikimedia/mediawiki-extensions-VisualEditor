@@ -1,0 +1,13 @@
+{
+	"name": "visualeditor-editcheck-headless",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Headless VE for generating EditCheck suggestions",
+	"scripts": {
+		"start": "node editcheck-headless-server.js"
+	},
+	"dependencies": {
+		"@wikimedia/service-utils": "2.0.0",
+		"selenium-webdriver": "4.45.0"
+	}
+}

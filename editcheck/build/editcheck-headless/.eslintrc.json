@@ -1,0 +1,14 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/selenium"
+	],
+	"settings": {
+		"jsdoc": {
+			"preferredTypes": {
+				"HeadlessBrowserSession": "HeadlessBrowserSession",
+				"WebDriver": "WebDriver"
+			}
+		}
+	}
+}

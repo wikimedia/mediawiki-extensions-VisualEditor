@@ -169,6 +169,13 @@ class Hooks implements
 			$output->addJsConfigVars( 'wgVisualEditorDisabledByHook', true );
 			return;
 		}
+
+		if ( $output->getTitle() && $output->getTitle()->isSpecial( 'EditCheckHeadless' ) ) {
+			// Special:EditCheckHeadless is intentionally minimal and self-contained.
+			// TODO: Shortcut on all special pages except allowed ones (e.g. Special:CollabPad)
+			return;
+		}
+
 		if ( !(
 			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
 			$services->getService( 'MobileFrontend.Context' )

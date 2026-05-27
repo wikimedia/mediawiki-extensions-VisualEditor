@@ -801,6 +801,16 @@
 				"editcheck/modules/styles/EditCheckActionWidget.less"
 			]
 		},
+		"ext.visualEditor.editCheck.headless": {
+			"group": "visualEditorA",
+			"scripts": [
+				"editcheck/modules/preinit/ve.editcheck.headlessLoader.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.targetLoader",
+				"ext.visualEditor.editCheck"
+			]
+		},
 		"ext.visualEditor.core.utils": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorFileModule",
 			"veModules": [
@@ -2536,6 +2546,7 @@
 	},
 	"SpecialPages": {
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad",
+		"EditCheckHeadless": "MediaWiki\\Extension\\VisualEditor\\SpecialEditCheckHeadless",
 		"EditChecks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\SpecialEditChecks",
 			"services": [
