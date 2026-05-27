@@ -33,7 +33,7 @@ Antoine Musso <hashar@free.fr>
 Arlo Breault <abreault@wikimedia.org>
 Audrey Tang <audreyt@audreyt.org>
 Brad Jorsch <bjorsch@wikimedia.org>
-Brion Vibber <brion@wikimedia.org>
+Brooke Vibber <bvibber@pobox.com>
 Carl Fürstenberg <azatoth@gmail.com>
 cenarium <cenarium.sysop@gmail.com>
 Chad Horohoe <chadh@wikimedia.org>
