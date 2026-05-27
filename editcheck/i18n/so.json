@@ -16,5 +16,6 @@
 	"editcheck-dialog-title": "Ka hor inta aan la daabicin",
 	"editcheck-copyvio-title": "Nuxur la dhejiyay",
 	"editcheck-review-title": "Dib u eeg isbeddellada",
-	"tag-editcheck-reference-decline-irrelevant-description": "Tixraaca EditCheck waa la diiday maadaama uusan khusayn."
+	"tag-editcheck-reference-decline-irrelevant-description": "Tixraaca EditCheck waa la diiday maadaama uusan khusayn.",
+	"tag-editcheck-reference-decline-uncertain": "EditCheck (tixraacyo) waa la diiday (aan la hubin)"
 }
