@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"apihelp-visualeditor-param-basetimestamp": "Marka la kaydinayo, u dhig wakhtiga dib u eegista la tafatiray. Waxaa loo adeegsadaa in lagu ogaado isku dhacyada wax ka beddelka.",
+	"apihelp-visualeditoredit-param-captchaword": "Jawaabta captcha (marka la kaydinayo iyadoo la adeegsanayo jawaab captcha).",
+	"apihelp-visualeditoredit-param-data-{plugin}": "Xog aan xadidnayn oo uu plugin-ku ku soo diro codsiga API-ga.",
+	"apihelp-visualeditoredit-param-etag": "ETag la dirayo.",
+	"apihelp-visualeditoredit-param-minor": "Calaamad wax ka beddel yar.",
+	"apihelp-visualeditoredit-param-oldid": "Lambarka dib u eegista la adeegsanayo. Haddii aan la cayimin, waxaa la isticmaalayaa dib u eegista ugu dambeysa.",
+	"apihelp-visualeditoredit-param-paction": "Falka la fulinayo.",
+	"apihelp-visualeditoredit-param-page": "Bogga lagu fulinayo falalka.",
+	"apihelp-visualeditoredit-param-section": "Qaybta lagu shaqaynayo.",
+	"apihelp-visualeditoredit-param-sectiontitle": "Cinwaanka qaybta cusub.",
+	"apihelp-visualeditoredit-param-starttimestamp": "Marka la kaydinayo, u dhig wakhtiga boggu la raray. Waxaa loo isticmaalaa in lagu ogaado isku dhacyada wax ka beddelka.",
+	"apihelp-visualeditoredit-param-summary": "Soo koobida wax ka beddel",
+	"apihelp-visualeditoredit-param-tags": "Beddel calaamadaha lagu dabaqayo wax ka beddelka.",
+	"apihelp-visualeditoredit-param-wikitext": "Wikitext-ka lagu shaqaynayo.",
+	"apihelp-visualeditoredit-summary": "Ku keydi bog HTML5 ah MediaWiki (loogu beddelay wikitext iyadoo la adeegsanayo adeegga Parsoid)."
+}
