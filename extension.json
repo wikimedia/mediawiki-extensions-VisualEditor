@@ -687,8 +687,7 @@
 				"editcheck/modules/dialogs/styles/GutterSidebarEditCheckDialog.less"
 			],
 			"dependencies": [
-				"ext.visualEditor.core",
-				"ext.visualEditor.mwsave",
+				"ext.visualEditor.articleTarget",
 				"oojs-ui.styles.icons-interactions"
 			],
 			"messages": [
