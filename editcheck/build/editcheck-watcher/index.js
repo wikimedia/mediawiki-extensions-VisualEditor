@@ -1,5 +1,6 @@
 import { EventSource } from 'eventsource';
 import fetch from 'node-fetch';
+import { fetchRevisionContent, formatJsonDiff } from './lib.js';
 
 const STREAM_URL = 'https://stream.wikimedia.org/v2/stream/recentchange';
 
@@ -30,11 +31,26 @@ es.onmessage = async ( event ) => {
 	const summary = data.comment || '(no summary)';
 	const diffUrl = `${ data.server_url }/w/index.php?title=${ encodeURIComponent( data.title ) }&diff=${ data.revision.new }`;
 
+	let jsonDiffText = '';
+	if ( !isTalk && data.type === 'edit' ) {
+		try {
+			const [ oldRev, newRev ] = await Promise.all( [
+				fetchRevisionContent( data.server_url, data.revision.old ),
+				fetchRevisionContent( data.server_url, data.revision.new )
+			] );
+			if ( oldRev !== null && newRev !== null ) {
+				jsonDiffText = formatJsonDiff( oldRev, newRev );
+			}
+		} catch ( e ) {
+			// Diff failed - continue without it
+		}
+	}
+
 	const text = `
 ${ isTalk ? '💬 *Talk page edited*' : '⚙️ *Config page edited*' }: ${ data.wiki } : ${ data.title }
 - *User:* ${ data.user }
 - *Summary:* ${ summary }
-- *<${ diffUrl }|View diff>*
+- *<${ diffUrl }|View diff>*${ jsonDiffText }
 `;
 
 	if ( process.env.SLACK_WEBHOOK_URL ) {
