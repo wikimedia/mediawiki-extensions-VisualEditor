@@ -25,11 +25,13 @@
 			"Yury Katkov",
 			"Александр Сигачёв",
 			"Умар",
-			"아라"
+			"아라",
+			"Shabe"
 		]
 	},
 	"tag-editcheck-newcontent-description": "EditCheck считает, что на страницу было добавлено новое содержимое",
 	"tag-editcheck-newreference-description": "На страницу добавлена ссылка",
+	"tag-editcheck-tone-shown-description": "EditCheck считает, что, возможно, следовало скорректировать тон некоторых фрагментов текста, и был показан интерфейс пользователя",
 	"tag-editsuggestion-seen": "предложенное изменение просмотрено",
 	"tag-editsuggestion-seen-description": "По крайней мере одна предложенная правка, вероятно, была просмотрена редактором.",
 	"tag-editsuggestion-used": "выполнена предложенная правка",
