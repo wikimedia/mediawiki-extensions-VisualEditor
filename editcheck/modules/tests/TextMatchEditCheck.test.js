@@ -260,6 +260,30 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			}
 		},
 		{
+			msg: 'Multiple rules, one invalid',
+			matchRules: {
+				bad: {
+					title: 'Invalid',
+					message: 'This will SyntaxError',
+					query: '(foo',
+					isRegExp: true
+				},
+				good: {
+					title: 'Valid',
+					message: 'This is fine',
+					query: 'foo.bar',
+					isRegExp: true
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'foo bar',
+				{ type: '/paragraph' }
+			],
+			expectedTerms: [ 'foo bar' ],
+			expectedActions: 1
+		},
+		{
 			msg: 'Dismissed ranges ignored',
 			controller: { taggedFragments: {}, taggedIds: {} },
 			matchRules: {

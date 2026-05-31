@@ -206,17 +206,21 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded = function () {
 mw.editcheck.TextMatchEditCheck.prototype.instantiateMatchRules = function ( rawMatchRules ) {
 	// Create matchRule instances
 	Object.entries( rawMatchRules ).forEach( ( [ id, rule ] ) => {
-		const isValidMode = this.constructor.static.choices.some(
-			( choice ) => choice.modes.includes( rule.mode )
-		);
-		rule.mode = isValidMode ? rule.mode : '';
-		if ( !rule.expand ) {
-			if ( ve.getProp( rule, 'config', 'minOccurrences' ) || rule.minOccurrences ) {
-				mw.log.warn( 'MatchRule \'' + rule.title + '\' sets minOccurrences but is missing expand value.' );
+		try {
+			const isValidMode = this.constructor.static.choices.some(
+				( choice ) => choice.modes.includes( rule.mode )
+			);
+			rule.mode = isValidMode ? rule.mode : '';
+			if ( !rule.expand ) {
+				if ( ve.getProp( rule, 'config', 'minOccurrences' ) || rule.minOccurrences ) {
+					mw.log.warn( 'MatchRule \'' + rule.title + '\' sets minOccurrences but is missing expand value.' );
+				}
 			}
+			const textMatchRule = new mw.editcheck.TextMatchRule( rule, id, this.collator );
+			this.matchRules.push( textMatchRule );
+		} catch ( e ) {
+			mw.log.error( `TextMatchEditCheck failed to instantiate rule '${ id }'`, e );
 		}
-		const textMatchRule = new mw.editcheck.TextMatchRule( rule, id, this.collator );
-		this.matchRules.push( textMatchRule );
 	} );
 };
 
@@ -238,114 +242,118 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 			const modified = this.getModifiedContentRanges( document );
 
 			for ( const matchRule of this.matchRules ) {
+				try {
+					const terms = Object.keys( matchRule.query );
 
-				const terms = Object.keys( matchRule.query );
-
-				// Check if action can be created for this range
-				const isUsableRange = ( range, tagName ) => {
-					if ( !modified.some( ( modRange ) => range.touchesRange( modRange ) ) ) {
-						return false;
-					}
-					if ( !this.isRangeValid( range, surfaceModel.documentModel ) ) {
-						return false;
-					}
-					if ( this.isDismissedRange( range, tagName ) ) {
-						return false;
-					}
-					if ( matchRule.listener && matchRule.listener !== listener ) {
-						return false;
-					}
-					if ( matchRule.inNode && !matchRule.isRangeInNode( range, surfaceModel ) ) {
-						return false;
-					}
-					// Above we checked for the overall textmatch config, but now
-					// we need to know if this rule is more-specific:
-					if ( !(
-						this.constructor.static.doesConfigMatch( matchRule.config, surfaceModel.documentModel, this.includeSuggestions ) &&
-						this.isRangeValid( range, surfaceModel.documentModel, matchRule.config )
-					) ) {
-						return false;
-					}
-					return true;
-				};
-
-				// Replacements with regular expressions work a bit differently,
-				// since we need access to the original pattern to perform the replacement.
-				// So we'll need to search by individual query, instead of grouping all the query terms into a set.
-				if ( matchRule.isRegExp && matchRule.mode === 'replace' ) {
-					Object.entries( matchRule.query ).forEach( ( [ pattern, replacer ] ) => {
-						const regex = new RegExp( pattern, 'g' + ( matchRule.isCaseSensitive() ? '' : 'i' ) );
-						const finder = new ve.dm.RegExpTextFinder( regex, { wholeWord: true } );
-						const regexRanges = document.findText( finder );
-						for ( const range of regexRanges ) {
-							const tagName = this.constructor.static.name + matchRule.getSubTag( pattern );
-							if ( !isUsableRange( range, tagName ) ) {
-								continue;
-							}
-							const term = surfaceModel.getLinearFragment( range ).getText();
-							const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
-							// To get the replacement using regex, we need to pass in the original pattern
-							let replacement = term.replace( regex, replacer );
-							if ( matchRule.preserveCase ) {
-								replacement = mw.editcheck.applyCase( replacement, term, this.lang );
-							}
-							actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
+					// Check if action can be created for this range
+					const isUsableRange = ( range, tagName ) => {
+						if ( !modified.some( ( modRange ) => range.touchesRange( modRange ) ) ) {
+							return false;
 						}
-					} );
-					continue;
-				}
+						if ( !this.isRangeValid( range, surfaceModel.documentModel ) ) {
+							return false;
+						}
+						if ( this.isDismissedRange( range, tagName ) ) {
+							return false;
+						}
+						if ( matchRule.listener && matchRule.listener !== listener ) {
+							return false;
+						}
+						if ( matchRule.inNode && !matchRule.isRangeInNode( range, surfaceModel ) ) {
+							return false;
+						}
+						// Above we checked for the overall textmatch config, but now
+						// we need to know if this rule is more-specific:
+						if ( !(
+							this.constructor.static.doesConfigMatch( matchRule.config, surfaceModel.documentModel, this.includeSuggestions ) &&
+							this.isRangeValid( range, surfaceModel.documentModel, matchRule.config )
+						) ) {
+							return false;
+						}
+						return true;
+					};
 
-				// Create or retrieve the TextFinder for this match rule
-				if ( !finders[ matchRule.id ] ) {
-
-					let finder = null;
-					if ( matchRule.isRegExp ) {
-						const re = new RegExp( terms.join( '|' ), 'g' + ( matchRule.isCaseSensitive() ? '' : 'i' ) );
-						finder = new ve.dm.RegExpTextFinder( re,
-							{
-								wholeWord: true
+					// Replacements with regular expressions work a bit differently,
+					// since we need access to the original pattern to perform the replacement.
+					// So we'll need to search by individual query, instead of grouping all the query terms into a set.
+					if ( matchRule.isRegExp && matchRule.mode === 'replace' ) {
+						Object.entries( matchRule.query ).forEach( ( [ pattern, replacer ] ) => {
+							const regex = new RegExp( pattern, 'g' + ( matchRule.isCaseSensitive() ? '' : 'i' ) );
+							const finder = new ve.dm.RegExpTextFinder( regex, { wholeWord: true } );
+							const regexRanges = document.findText( finder );
+							for ( const range of regexRanges ) {
+								const tagName = this.constructor.static.name + matchRule.getSubTag( pattern );
+								if ( !isUsableRange( range, tagName ) ) {
+									continue;
+								}
+								const term = surfaceModel.getLinearFragment( range ).getText();
+								const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
+								// To get the replacement using regex, we need to pass in the original pattern
+								let replacement = term.replace( regex, replacer );
+								if ( matchRule.preserveCase ) {
+									replacement = mw.editcheck.applyCase( replacement, term, this.lang );
+								}
+								actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
 							}
-						);
-					} else {
-						finder = new ve.dm.SetTextFinder( new Set( terms ),
-							{
-								caseSensitiveString: matchRule.isCaseSensitive(),
-								wholeWord: true
-							} );
-					}
-					finders[ matchRule.id ] = new ve.dm.MemoizedTextFinder( finder );
-				}
-
-				// Find all ranges that match this rule's search terms
-				const ranges = document.findText( finders[ matchRule.id ] );
-				const fragMap = new Map();
-
-				for ( const range of ranges ) {
-					const term = surfaceModel.getLinearFragment( range ).getText();
-					const tagName = this.constructor.static.name + matchRule.getSubTag( term );
-					if ( !isUsableRange( range, tagName ) ) {
+						} );
 						continue;
 					}
 
-					const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
-					const min = matchRule.minOccurrences;
-					// If this match rule requires a certain number of occurrences, start keeping track of those
-					if ( min ) {
-						const fragRange = fragment.getSelection().getRange();
-						const key = `${ fragRange.start }-${ fragRange.end }`;
-						const count = ( fragMap.get( key ) || 0 ) + 1;
-						fragMap.set( key, count );
-						// Use strict equality so that we can keep adding to the occurrences
-						// in this fragment while only creating an action once
-						if ( count !== min ) {
+					// Create or retrieve the TextFinder for this match rule
+					if ( !finders[ matchRule.id ] ) {
+
+						let finder = null;
+						if ( matchRule.isRegExp ) {
+							const re = new RegExp( terms.join( '|' ), 'g' + ( matchRule.isCaseSensitive() ? '' : 'i' ) );
+							finder = new ve.dm.RegExpTextFinder( re,
+								{
+									wholeWord: true
+								}
+							);
+						} else {
+							finder = new ve.dm.SetTextFinder( new Set( terms ),
+								{
+									caseSensitiveString: matchRule.isCaseSensitive(),
+									wholeWord: true
+								} );
+						}
+						finders[ matchRule.id ] = new ve.dm.MemoizedTextFinder( finder );
+					}
+
+					// Find all ranges that match this rule's search terms
+					const ranges = document.findText( finders[ matchRule.id ] );
+					const fragMap = new Map();
+
+					for ( const range of ranges ) {
+						const term = surfaceModel.getLinearFragment( range ).getText();
+						const tagName = this.constructor.static.name + matchRule.getSubTag( term );
+						if ( !isUsableRange( range, tagName ) ) {
 							continue;
 						}
+
+						const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
+						const min = matchRule.minOccurrences;
+						// If this match rule requires a certain number of occurrences, start keeping track of those
+						if ( min ) {
+							const fragRange = fragment.getSelection().getRange();
+							const key = `${ fragRange.start }-${ fragRange.end }`;
+							const count = ( fragMap.get( key ) || 0 ) + 1;
+							fragMap.set( key, count );
+							// Use strict equality so that we can keep adding to the occurrences
+							// in this fragment while only creating an action once
+							if ( count !== min ) {
+								continue;
+							}
+						}
+						let replacement = matchRule.getReplacement( term );
+						if ( matchRule.preserveCase ) {
+							replacement = mw.editcheck.applyCase( replacement, term, this.lang );
+						}
+						actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
 					}
-					let replacement = matchRule.getReplacement( term );
-					if ( matchRule.preserveCase ) {
-						replacement = mw.editcheck.applyCase( replacement, term, this.lang );
-					}
-					actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
+				} catch ( e ) {
+					// Probably a regexp creation issue
+					mw.log.error( `TextMatchEditCheck failed to apply rule '${ matchRule.id }'`, e );
 				}
 			}
 			return actions;
