@@ -49,6 +49,11 @@ $specialPageAliases['mr'] = [
 	'CollabPad' => [ 'सहसंपादनपत्र' ],
 ];
 
+/** Ukrainian (українська) */
+$specialPageAliases['uk'] = [
+	'EditChecks' => [ 'Перевірки_редагувань' ],
+];
+
 /** Urdu
  */
 $specialPageAliases['ur'] = [
