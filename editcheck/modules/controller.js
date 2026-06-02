@@ -1101,10 +1101,9 @@ Controller.prototype.drawSelections = function () {
 			}
 			if ( selectionElements ) {
 				// The following classes are used here:
-				// * ve-ce-surface-selection-editCheck-error
 				// * ve-ce-surface-selection-editCheck-warning
-				// * ve-ce-surface-selection-editCheck-notice
-				// * ve-ce-surface-selection-editCheck-success
+				// * ve-ce-surface-selection-editCheck-error
+				// * ve-ce-surface-selection-editCheck-progressive
 				selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-' + type );
 				if ( isPending ) {
 					selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-pending' );

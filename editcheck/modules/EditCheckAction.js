@@ -179,7 +179,7 @@ mw.editcheck.EditCheckAction.prototype.getDescription = function () {
 };
 
 /**
- * Get the type of this action (e.g., 'warning', 'error')
+ * Get the type of this action ('warning', 'error', 'progressive')
  *
  * @return {string}
  */
