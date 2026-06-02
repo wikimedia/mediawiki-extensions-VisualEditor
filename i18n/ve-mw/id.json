@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ahdan",
+			"AhmedG612",
 			"Beeyan",
 			"Bennylin",
 			"Chinamoonroll",
@@ -32,10 +33,14 @@
 			"WillsonEP09"
 		]
 	},
+	"collabpad-disabled": "CollabPad tidak diaktifkan di wiki ini.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Diimpor dari $1",
 	"collabpad": "CollabPad",
 	"tooltip-ca-ve-edit": "Sunting halaman ini",
+	"tooltip-ca-ve-edit-local": "Sunting halaman deskripsi lokal",
+	"tooltip-ca-ve-create": "Buat halaman ini",
+	"tooltip-ca-ve-create-local": "Buat halaman deskripsi lokal",
 	"tooltip-ca-editsource": "Sunting kode sumber halaman ini",
 	"tooltip-ca-createsource": "Buat kode sumber halaman ini",
 	"visualeditor-advancedsettings-tool": "Pengaturan lanjut",
