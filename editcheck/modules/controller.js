@@ -1021,6 +1021,7 @@ Controller.prototype.restoreToolbar = function ( target ) {
 Controller.prototype.drawSelections = function () {
 	const actions = this.filterActionsForDisplay( this.getActions() );
 	const surfaceView = this.surface.getView();
+	const selectionManager = surfaceView.getSelectionManager();
 	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
 		( selection ) => ve.ce.Selection.static.newFromModel( selection, surfaceView )
 	) : [];
@@ -1042,14 +1043,14 @@ Controller.prototype.drawSelections = function () {
 		surfaceView.setReviewMode( true, highlightNodes );
 		// The following classes are used here:
 		// * ve-ce-surface-selections-editCheck-active
-		surfaceView.getSelectionManager().drawSelections( 'editCheck-active', activeSelections, activeOptions );
+		selectionManager.drawSelections( 'editCheck-active', activeSelections, activeOptions );
 		return;
 	}
 
 	if ( actions.length === 0 ) {
 		// Clear any previously drawn selections
-		surfaceView.getSelectionManager().drawSelections( 'editCheck-active', [] );
-		surfaceView.getSelectionManager().drawSelections( 'editCheck-inactive', [] );
+		selectionManager.drawSelections( 'editCheck-active', [] );
+		selectionManager.drawSelections( 'editCheck-inactive', [] );
 		return;
 	}
 	const inactiveOptions = { showGutter, showRects: true };
@@ -1080,8 +1081,8 @@ Controller.prototype.drawSelections = function () {
 	// The following classes are used here:
 	// * ve-ce-surface-selections-editCheck-active
 	// * ve-ce-surface-selections-editCheck-inactive
-	surfaceView.getSelectionManager().drawSelections( 'editCheck-active', activeSelections, activeOptions );
-	surfaceView.getSelectionManager().drawSelections( 'editCheck-inactive', inactiveSelections, inactiveOptions );
+	selectionManager.drawSelections( 'editCheck-active', activeSelections, activeOptions );
+	selectionManager.drawSelections( 'editCheck-inactive', inactiveSelections, inactiveOptions );
 
 	// Add 'type' classes
 	actions.forEach( ( action ) => {
@@ -1093,7 +1094,7 @@ Controller.prototype.drawSelections = function () {
 				// Optimization: When showGutter is false inactive selections currently render nothing
 				return;
 			}
-			const selectionElements = surfaceView.getSelectionManager().getCachedSelectionElements(
+			const selectionElements = selectionManager.getCachedSelectionElements(
 				isActive ? 'editCheck-active' : 'editCheck-inactive', selection, isActive ? activeOptions : inactiveOptions
 			);
 			if ( !isActive && action.widget ) {
