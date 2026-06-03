@@ -41,7 +41,7 @@ function Controller( target, config ) {
 	this.onPositionDebounced = ve.debounceWithTest( teardownCheck, this.onPosition.bind( this ), 100 );
 	this.onSelectDebounced = ve.debounceWithTest( teardownCheck, this.onSelect.bind( this ), 100 );
 	this.onContextChangeDebounced = ve.debounceWithTest( teardownCheck, this.onContextChange.bind( this ), 100 );
-	this.updatePositionsDebounced = ve.debounceWithTest( teardownCheck, this.updatePositions.bind( this ) );
+	this.updatePositionsDebounced = ve.debounceWithTest( teardownCheck, this.updatePositions.bind( this ), 50 );
 	this.updateSuggestionCountDebounced = ve.debounceWithTest( teardownCheck, this.updateSuggestionCount.bind( this ), 500 );
 
 	this.target.connect( this, {
@@ -143,7 +143,10 @@ Controller.prototype.setup = function () {
 			position: 'onPositionDebounced'
 		} );
 		this.surface.getModel().connect( this, {
+			// The less-frequent undoStackChange is used for updating actions
 			undoStackChange: 'onUndoStackChangeDebounced',
+			// documentUpdate is used for updating highlights
+			documentUpdate: 'onDocumentUpdate',
 			select: 'onSelectDebounced',
 			contextChange: 'onContextChangeDebounced'
 		} );
@@ -726,8 +729,6 @@ Controller.prototype.onContextChange = function () {
  * @param {boolean} passive Event is passive (don't scroll)
  */
 Controller.prototype.onPosition = function ( passive ) {
-	this.updatePositionsDebounced();
-
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
 		this.scrollActionIntoViewDebounced( this.focusedAction, { alignToTop: !OO.ui.isMobile() } );
 	}
@@ -735,11 +736,22 @@ Controller.prototype.onPosition = function ( passive ) {
 
 /**
  * Handle changes to the model's undo stack
+ *
+ * This less-frequent event is used for updating actions.
  */
 Controller.prototype.onUndoStackChange = function () {
 	if ( !this.inBeforeSave ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
+};
+
+/**
+ * Handle changes to the document model
+ *
+ * This event is only used for updating highlights.
+ */
+Controller.prototype.onDocumentUpdate = function () {
+	this.updatePositionsDebounced();
 };
 
 /**
@@ -1019,7 +1031,7 @@ Controller.prototype.restoreToolbar = function ( target ) {
  * Redraw selection highlights
  */
 Controller.prototype.drawSelections = function () {
-	const actions = this.filterActionsForDisplay( this.getActions() );
+	const allActions = this.filterActionsForDisplay( this.getActions() );
 	const surfaceView = this.surface.getView();
 	const selectionManager = surfaceView.getSelectionManager();
 	const activeSelections = this.focusedAction ? this.focusedAction.getHighlightSelections().map(
@@ -1030,85 +1042,84 @@ Controller.prototype.drawSelections = function () {
 	}
 	const isStale = !!this.focusedAction && this.focusedAction.isStale();
 	const showGutter = !isStale && !OO.ui.isMobile();
-	const activeOptions = { showGutter, showRects: !isStale, showBounding: isStale };
+	const activeOptions = {
+		showGutter,
+		showRects: !isStale,
+		showBounding: isStale,
+		wrapperClass: 've-ce-surface-selections-editCheck-active' +
+			( isStale ? ' ve-ce-surface-selections-editCheck-stale' : '' )
+	};
+	const inactiveOptions = {
+		showGutter,
+		showRects: true,
+		wrapperClass: 've-ce-surface-selections-editCheck-inactive'
+	};
 
 	if ( this.inBeforeSave ) {
 		// Review mode grays out everything that's not highlighted:
 		const highlightNodes = [];
-		actions.forEach( ( action ) => {
+		allActions.forEach( ( action ) => {
 			action.getHighlightSelections().forEach( ( selection ) => {
 				highlightNodes.push( ...surfaceView.getDocument().selectNodes( selection.getCoveringRange(), 'branches' ).map( ( spec ) => spec.node ) );
 			} );
 		} );
 		surfaceView.setReviewMode( true, highlightNodes );
-		// The following classes are used here:
-		// * ve-ce-surface-selections-editCheck-active
-		selectionManager.drawSelections( 'editCheck-active', activeSelections, activeOptions );
+		selectionManager.drawSelections( 'editCheck-active-' + this.focusedAction.getType(), activeSelections, activeOptions );
 		return;
 	}
+	[ 'warning', 'error', 'progressive' ].forEach( ( type ) => {
+		const actions = allActions.filter( ( action ) => action.getType() === type );
 
-	if ( actions.length === 0 ) {
-		// Clear any previously drawn selections
-		selectionManager.drawSelections( 'editCheck-active', [] );
-		selectionManager.drawSelections( 'editCheck-inactive', [] );
-		return;
-	}
-	const inactiveOptions = { showGutter, showRects: true };
-
-	const inactiveSelections = [];
-	actions.forEach( ( action ) => {
-		if ( action === this.focusedAction ) {
+		if ( actions.length === 0 ) {
+			// Clear any previously drawn selections
+			selectionManager.drawSelections( 'editCheck-active-' + type, [] );
+			selectionManager.drawSelections( 'editCheck-inactive-' + type, [] );
 			return;
 		}
-		action.getHighlightSelections().forEach( ( selection ) => {
-			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
-			inactiveSelections.push( selectionView );
-		} );
-	} );
 
-	if ( isStale && activeSelections.length ) {
-		// When in reviewing a check (stale), suppress all inactive selections that overlap with the active selection (T420712).
-		const activeRange = activeSelections[ 0 ].getModel().getCoveringRange();
-		for ( let i = inactiveSelections.length - 1; i >= 0; i-- ) {
-			if ( activeRange.overlapsRange( inactiveSelections[ i ].getModel().getCoveringRange() ) ) {
-				inactiveSelections.splice( i, 1 );
-			}
-		}
-	}
-
-	// The following classes are used here:
-	// * ve-ce-surface-selections-editCheck-active
-	// * ve-ce-surface-selections-editCheck-inactive
-	selectionManager.drawSelections( 'editCheck-active', activeSelections, activeOptions );
-	selectionManager.drawSelections( 'editCheck-inactive', inactiveSelections, inactiveOptions );
-
-	// Add 'type' classes
-	actions.forEach( ( action ) => {
-		const type = action.getType();
-		const isActive = action === this.focusedAction;
-		const isPending = action.isTagged( 'pending' );
-		action.getHighlightSelections().forEach( ( selection ) => {
-			if ( !isActive && !showGutter ) {
-				// Optimization: When showGutter is false inactive selections currently render nothing
+		const inactiveSelections = [];
+		actions.forEach( ( action ) => {
+			if ( action === this.focusedAction ) {
 				return;
 			}
-			const selectionElements = selectionManager.getCachedSelectionElements(
-				isActive ? 'editCheck-active' : 'editCheck-inactive', selection, isActive ? activeOptions : inactiveOptions
-			);
-			if ( !isActive && action.widget ) {
-				action.widget.setInactiveSelectionElements( selectionElements );
-			}
-			if ( selectionElements ) {
-				// The following classes are used here:
-				// * ve-ce-surface-selection-editCheck-warning
-				// * ve-ce-surface-selection-editCheck-error
-				// * ve-ce-surface-selection-editCheck-progressive
-				selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-' + type );
-				if ( isPending ) {
-					selectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-pending' );
-				}
+			action.getHighlightSelections().forEach( ( selection ) => {
+				const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
+				inactiveSelections.push( selectionView );
+			} );
+			if ( action.widget ) {
+				action.widget.setFetchSelectionElements( () => {
+					const selectionElements = [];
+					action.getHighlightSelections().forEach( ( selection ) => {
+						const element = selectionManager.getCachedSelectionElements( 'editCheck-inactive-' + type, selection, inactiveOptions );
+						if ( element ) {
+							selectionElements.push( element );
+						}
+					} );
+					return selectionElements;
+				} );
 			}
 		} );
+
+		if ( isStale && activeSelections.length ) {
+			// When in reviewing a check (stale), suppress all inactive selections that overlap with the active selection (T420712).
+			const activeRange = activeSelections[ 0 ].getModel().getCoveringRange();
+			for ( let i = inactiveSelections.length - 1; i >= 0; i-- ) {
+				if ( activeRange.overlapsRange( inactiveSelections[ i ].getModel().getCoveringRange() ) ) {
+					inactiveSelections.splice( i, 1 );
+				}
+			}
+		}
+
+		// The following classes are used here:
+		// * ve-ce-surface-selections-editCheck-active-warning
+		// * ve-ce-surface-selections-editCheck-active-error
+		// * ve-ce-surface-selections-editCheck-active-progressive
+		// * ve-ce-surface-selections-editCheck-inactive-warning
+		// * ve-ce-surface-selections-editCheck-inactive-error
+		// * ve-ce-surface-selections-editCheck-inactive-progressive
+		selectionManager.drawSelections( 'editCheck-inactive-' + type, inactiveSelections, inactiveOptions );
+		const activeSelectionsForType = this.focusedAction && this.focusedAction.getType() === type ? activeSelections : [];
+		selectionManager.drawSelections( 'editCheck-active-' + type, activeSelectionsForType, activeOptions );
 	} );
 };
 

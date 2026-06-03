@@ -254,8 +254,13 @@ mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
  * Handle mouse enter events on the widget
  */
 mw.editcheck.EditCheckActionWidget.prototype.onMouseEnter = function () {
-	if ( this.inactiveSelectionElements ) {
-		this.inactiveSelectionElements.$selection.addClass( 've-ce-surface-selection-editCheck-highlighted' );
+	if ( this.fetchSelectionElements ) {
+		const selectionElements = this.fetchSelectionElements();
+		if ( selectionElements ) {
+			selectionElements.forEach( ( element ) => {
+				element.$selection.addClass( 've-ce-surface-selection-editCheck-highlighted' );
+			} );
+		}
 	}
 };
 
@@ -263,18 +268,23 @@ mw.editcheck.EditCheckActionWidget.prototype.onMouseEnter = function () {
  * Handle mouse leave events on the widget
  */
 mw.editcheck.EditCheckActionWidget.prototype.onMouseLeave = function () {
-	if ( this.inactiveSelectionElements ) {
-		this.inactiveSelectionElements.$selection.removeClass( 've-ce-surface-selection-editCheck-highlighted' );
+	if ( this.fetchSelectionElements ) {
+		const selectionElements = this.fetchSelectionElements();
+		if ( selectionElements ) {
+			selectionElements.forEach( ( element ) => {
+				element.$selection.removeClass( 've-ce-surface-selection-editCheck-highlighted' );
+			} );
+		}
 	}
 };
 
 /**
  * Set the selection elements for this action
  *
- * @param {ve.ce.SelectionManager.SelectionElements} selectionElements
+ * @param {Function} fetchSelectionElements Function that returns an array of selection elements (ve.ce.SelectionManager.SelectionElements[])
  */
-mw.editcheck.EditCheckActionWidget.prototype.setInactiveSelectionElements = function ( selectionElements ) {
-	this.inactiveSelectionElements = selectionElements;
+mw.editcheck.EditCheckActionWidget.prototype.setFetchSelectionElements = function ( fetchSelectionElements ) {
+	this.fetchSelectionElements = fetchSelectionElements;
 };
 
 /**
