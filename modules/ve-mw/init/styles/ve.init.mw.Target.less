@@ -23,6 +23,14 @@
 .client-js {
 	.ve-ce-surface,
 	.ve-ui-diffElement {
+		// Support legacy classes without mw- prefixes as these are widely
+		// used on-wiki. Increase specificity of root selector to override
+		// some common rules.
+		// Wikis using these legacy classes migrate them with a wikipage.content
+		// hook (makeCollapsibleMwCollapsible) however we don't run the wikipage.content
+		// hook on VE content.
+		// (T428001)
+		.collapsible.collapsed:not( @{exclude} ),
 		.mw-collapsed:not( @{exclude} ) {
 			> p {
 				display: block;
