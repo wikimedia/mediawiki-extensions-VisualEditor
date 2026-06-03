@@ -99,12 +99,9 @@ class DirectParsoidClient implements ParsoidClient {
 		}
 
 		$helper = $this->helperFactory->newHtmlInputTransformHelper(
-			/* envOptions: */ [],
-			$page,
-			$body,
-			/* parameters: */ [],
-			/* originalRevision: */ null,
-			$pageLanguage
+			page: $page,
+			body: $body,
+			pageLanguage: $pageLanguage
 		);
 
 		$statsFactory = MediaWikiServices::getInstance()->getParsoidSiteConfig()->prefixedStatsFactory();

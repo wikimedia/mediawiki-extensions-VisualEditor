@@ -134,13 +134,10 @@ class ApiVisualEditorEdit extends ApiBase {
 			new DerivativeRequest(
 				$context->getRequest(),
 				$apiParams + $allParams,
-				/* was posted? */ true
+				wasPosted: true
 			)
 		);
-		$api = new ApiMain(
-			$context,
-			/* enable write? */ true
-		);
+		$api = new ApiMain( $context, enableWrite: true );
 
 		$api->execute();
 
@@ -173,13 +170,10 @@ class ApiVisualEditorEdit extends ApiBase {
 			new DerivativeRequest(
 				$context->getRequest(),
 				$apiParams,
-				/* was posted? */ true
+				wasPosted: true
 			)
 		);
-		$api = new ApiMain(
-			$context,
-			/* enable write? */ true
-		);
+		$api = new ApiMain( $context, enableWrite: true );
 
 		$api->execute();
 		$result = $api->getResult()->getResultData( null, [
@@ -363,13 +357,10 @@ class ApiVisualEditorEdit extends ApiBase {
 			new DerivativeRequest(
 				$context->getRequest(),
 				$apiParams,
-				/* was posted? */ true
+				wasPosted: true
 			)
 		);
-		$api = new ApiMain(
-			$context,
-			/* enable write? */ false
-		);
+		$api = new ApiMain( $context, enableWrite: false );
 		$api->execute();
 		$result = $api->getResult()->getResultData();
 

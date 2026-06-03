@@ -296,13 +296,10 @@ class ApiVisualEditor extends ApiBase {
 							new DerivativeRequest(
 								$context->getRequest(),
 								$apiParams,
-								/* was posted? */ true
+								wasPosted: true
 							)
 						);
-						$api = new ApiMain(
-							$context,
-							/* enable write? */ true
-						);
+						$api = new ApiMain( $context, enableWrite: true );
 						$api->execute();
 						$result = $api->getResult()->getResultData();
 						$pid = $title->getArticleID();
