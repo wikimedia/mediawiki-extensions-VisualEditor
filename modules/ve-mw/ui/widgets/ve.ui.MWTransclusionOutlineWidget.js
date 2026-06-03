@@ -37,7 +37,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineWidget, OO.ui.Widget );
  * @event ve.ui.MWTransclusionOutlineWidget#sidebarItemSelected
  * @param {string} pageName Unique id of the {@link OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
- * @param {boolean} [soft] If true, don't focus the content pane.  Defaults to false.
+ * @param {boolean} [soft=false] If true, don't focus the content pane.
  */
 
 /* Methods */

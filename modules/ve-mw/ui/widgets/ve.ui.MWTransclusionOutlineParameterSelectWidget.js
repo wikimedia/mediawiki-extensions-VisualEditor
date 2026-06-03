@@ -54,7 +54,7 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, ve.ui.MWAriaDes
  *
  * @event ve.ui.MWTransclusionOutlineParameterSelectWidget#templateParameterSpaceDown
  * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
- * @param {boolean} selected
+ * @param {boolean} selected Current state of the checkbox; same as in the {@event choose} event
  */
 
 /* Static Methods */
@@ -104,6 +104,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.ensureVisibilityOfFir
  */
 ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setActiveParameter = function ( paramName ) {
 	// Note: We know unnamed parameter placeholders never have an item here
+	/** @type {ve.ui.MWTransclusionOutlineParameterWidget|null} */
 	const newItem = paramName ? this.findItemFromData( paramName ) : null;
 	// Unhighlight when called with no parameter name
 	this.highlightItem( newItem );
@@ -113,6 +114,7 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.setActiveParameter = 
 		return;
 	}
 
+	/** @type {ve.ui.MWTransclusionOutlineParameterWidget|null} */
 	const currentItem = this.activeParameter ? this.findItemFromData( this.activeParameter ) : null;
 	this.activeParameter = paramName;
 

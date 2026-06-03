@@ -88,7 +88,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlinePartWidget, OO.ui.Widget );
  * @event ve.ui.MWTransclusionOutlinePartWidget#transclusionOutlineItemSelected
  * @param {string} pageName Unique id of the {@link OO.ui.BookletLayout} page, e.g. something like
  *  "part_1" or "part_1/param1".
- * @param {boolean} [soft] If true, focus should stay in the sidebar. Defaults to false.
+ * @param {boolean} [soft=false] If true, focus should stay in the sidebar.
  */
 
 /* Methods */

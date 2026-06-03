@@ -70,7 +70,7 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineTemplateWidget, ve.ui.MWTransclusion
 /**
  * @event ve.ui.MWTransclusionOutlineTemplateWidget#transclusionOutlineItemSelected
  * @param {string} id Item ID
- * @param {boolean} soft If true, focus should stay in the sidebar.
+ * @param {boolean} [soft=false] If true, focus should stay in the sidebar.
  */
 
 /* Static Properties */
@@ -303,7 +303,7 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.onTemplateParameterSpaceDown
  * @private
  * @param {OO.ui.OptionWidget} item
  * @param {boolean} selected
- * @param {boolean} soft If true, focus should stay in the sidebar.
+ * @param {boolean} [soft=false] If true, focus should stay in the sidebar.
  * @fires ve.ui.MWTransclusionOutlineTemplateWidget#transclusionOutlineItemSelected
  */
 ve.ui.MWTransclusionOutlineTemplateWidget.prototype.toggleParameter = function ( item, selected, soft ) {

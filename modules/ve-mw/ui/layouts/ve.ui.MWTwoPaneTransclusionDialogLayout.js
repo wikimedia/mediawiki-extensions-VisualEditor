@@ -143,7 +143,7 @@ ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.focusPart = function ( pageNam
  * Parts and parameters can be soft-selected, or selected and focused.
  *
  * @param {string|null} pageName Full, unique name of part or parameter, or null to deselect
- * @param {boolean} [soft] If true, suppress content pane focus.
+ * @param {boolean} [soft=false] If true, suppress content pane focus.
  */
 ve.ui.MWTwoPaneTransclusionDialogLayout.prototype.onSidebarItemSelected = function ( pageName, soft ) {
 	this.setPage( pageName );
