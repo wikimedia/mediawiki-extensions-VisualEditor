@@ -154,8 +154,7 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		originalClasses = attributes.originalClasses;
 
 	ve.setDomAttributes( img, attributes, [ 'resource' ] );
-	const width = attributes.width;
-	const height = attributes.height;
+	const { width, height } = attributes;
 	if ( width !== null ) {
 		img.setAttribute( attributes.isError ? 'data-width' : 'width', width );
 	}

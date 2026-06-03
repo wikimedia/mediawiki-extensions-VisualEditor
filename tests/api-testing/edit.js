@@ -130,8 +130,6 @@ describe( 'Visual Editor API', () => {
 			assert.equal( result.visualeditor.result, 'success' );
 
 			let html = result.visualeditor.content;
-			const etag = result.visualeditor.etag;
-			const oldid = result.visualeditor.oldid;
 
 			// Append to HTML
 			html = html.replace( '</body>', '<p>More Text</p></body>' );
@@ -142,8 +140,8 @@ describe( 'Visual Editor API', () => {
 					paction: 'save',
 					token,
 					html,
-					etag,
-					oldid,
+					etag: result.visualeditor.etag,
+					oldid: result.visualeditor.oldid,
 					summary: 'appending html'
 				},
 				'post'
@@ -204,7 +202,6 @@ describe( 'Visual Editor API', () => {
 
 			// Append to HTML and save, using the etag produced when switching to HTML
 			const html = result.visualeditor.content;
-			const etag = result.visualeditor.etag;
 			const modifiedHtml = html.replace( '</body>', '<p>second addition</p></body>' );
 
 			result = await alice.action(
@@ -214,7 +211,7 @@ describe( 'Visual Editor API', () => {
 					paction: 'save',
 					token,
 					html: modifiedHtml,
-					etag,
+					etag: result.visualeditor.etag,
 					summary: 'appending html'
 				},
 				'post'

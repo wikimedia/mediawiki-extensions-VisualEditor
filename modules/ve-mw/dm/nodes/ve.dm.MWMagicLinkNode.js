@@ -128,8 +128,7 @@ ve.dm.MWMagicLinkNode.static.annotationFromContent = function ( content ) {
  * @inheritdoc
  */
 ve.dm.MWMagicLinkNode.static.toDataElement = function ( domElements ) {
-	const textContent = domElements[ 0 ].textContent,
-		htmlContent = domElements[ 0 ].innerHTML;
+	const textContent = domElements[ 0 ].textContent;
 	return {
 		type: this.name,
 		attributes: {
@@ -138,7 +137,7 @@ ve.dm.MWMagicLinkNode.static.toDataElement = function ( domElements ) {
 			// if the original wikitext contained html entities like
 			// &nbsp;
 			origText: textContent,
-			origHtml: htmlContent
+			origHtml: domElements[ 0 ].innerHTML
 		}
 	};
 };

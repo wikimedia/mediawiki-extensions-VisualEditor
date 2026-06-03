@@ -185,7 +185,6 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	}
 
 	if ( classAttr ) {
-
 		figure.className = classAttr;
 	}
 
@@ -194,17 +193,14 @@ ve.dm.MWBlockImageNode.static.toDomElements = function ( data, doc, converter ) 
 	}
 
 	if ( attributes.imageClassAttr ) {
-
 		img.className = attributes.imageClassAttr;
 	}
 
 	if ( attributes.imgWrapperClassAttr ) {
-
 		imgWrapper.className = attributes.imgWrapperClassAttr;
 	}
 
-	let width = attributes.width;
-	let height = attributes.height;
+	let { width, height } = attributes;
 	// If defaultSize is set, and was set on the way in, use the original width and height
 	// we got on the way in.
 	if ( attributes.defaultSize ) {
