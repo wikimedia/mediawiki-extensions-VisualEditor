@@ -37,7 +37,7 @@ function Controller( target, config ) {
 
 	const teardownCheck = () => !!this.surface;
 
-	this.onDocumentChangeDebounced = ve.debounceWithTest( teardownCheck, this.onDocumentChange.bind( this ), 100 );
+	this.onUndoStackChangeDebounced = ve.debounceWithTest( teardownCheck, this.onUndoStackChange.bind( this ), 100 );
 	this.onPositionDebounced = ve.debounceWithTest( teardownCheck, this.onPosition.bind( this ), 100 );
 	this.onSelectDebounced = ve.debounceWithTest( teardownCheck, this.onSelect.bind( this ), 100 );
 	this.onContextChangeDebounced = ve.debounceWithTest( teardownCheck, this.onContextChange.bind( this ), 100 );
@@ -143,7 +143,7 @@ Controller.prototype.setup = function () {
 			position: 'onPositionDebounced'
 		} );
 		this.surface.getModel().connect( this, {
-			undoStackChange: 'onDocumentChangeDebounced',
+			undoStackChange: 'onUndoStackChangeDebounced',
 			select: 'onSelectDebounced',
 			contextChange: 'onContextChangeDebounced'
 		} );
@@ -734,9 +734,9 @@ Controller.prototype.onPosition = function ( passive ) {
 };
 
 /**
- * Handle changes to the document model (undoStackChange)
+ * Handle changes to the model's undo stack
  */
-Controller.prototype.onDocumentChange = function () {
+Controller.prototype.onUndoStackChange = function () {
 	if ( !this.inBeforeSave ) {
 		this.updateForListener( 'onDocumentChange' );
 	}
