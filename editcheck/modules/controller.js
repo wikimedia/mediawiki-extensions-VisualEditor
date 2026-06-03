@@ -1057,14 +1057,12 @@ Controller.prototype.drawSelections = function () {
 
 	const inactiveSelections = [];
 	actions.forEach( ( action ) => {
-		const isActive = ( action === this.focusedAction );
+		if ( action === this.focusedAction ) {
+			return;
+		}
 		action.getHighlightSelections().forEach( ( selection ) => {
 			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
-			if ( isActive ) {
-				activeSelections.push( selectionView );
-			} else {
-				inactiveSelections.push( selectionView );
-			}
+			inactiveSelections.push( selectionView );
 		} );
 	} );
 
