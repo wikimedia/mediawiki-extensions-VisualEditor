@@ -108,6 +108,7 @@
 	"editcheck-reject-description": "Other editors would value learning more about your decision to skip this check.",
 	"editcheck-review-title": "Title shown in the sidebar / drawer while checks are displayed",
 	"editcheck-specialeditchecks-info": "Information line on Special:Editchecks pointing to the on-wiki configuration page.",
+	"editcheck-specialeditchecks-imported-configs": "Message shown on Special:EditChecks when a check's configuration is imported from another message.\nParameters:\n* $1 - Linked title of the message the configuration is imported from.",
 	"editcheck-specialeditchecks-disabled": "Message shown on Special:EditChecks when the whole edit check feature is disabled.",
 	"editcheck-specialeditchecks-header-abtest": "Section heading for A/B test checks.",
 	"editcheck-specialeditchecks-header-base": "Section heading for base configuration.",

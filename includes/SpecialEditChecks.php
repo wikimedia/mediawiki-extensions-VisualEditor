@@ -283,6 +283,7 @@ class SpecialEditChecks extends SpecialPage {
 					?? $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' )
 					?? [];
 				foreach ( $matchRules as $name => $item ) {
+					$importTitle = null;
 					if ( isset( $item['import'] ) ) {
 						$importTitle = Title::newFromText( $item['import'] );
 						$item = json_decode( $this->msg( $importTitle->getText() )->inContentLanguage()->text(), true );
@@ -299,6 +300,7 @@ class SpecialEditChecks extends SpecialPage {
 						'allowedContentLanguages' => '',
 						'defaultConfig' => json_encode( $item['config'] ?? '' ),
 						'matchItem' => $item,
+						'importTitle' => $importTitle,
 					];
 					$html .= $this->buildRowHtml( $matchCheckData, $onWikiConfig, $suggestions );
 				}
@@ -353,6 +355,19 @@ class SpecialEditChecks extends SpecialPage {
 				)
 			) .
 			Html::rawElement( 'td', [],
+				( isset( $checkData['importTitle'] ) ?
+					Html::rawElement( 'p', [],
+						$this->msg( 'editcheck-specialeditchecks-imported-configs' )
+							->rawParams(
+								Html::element(
+									'a',
+									[ 'href' => $checkData['importTitle']->getLocalURL() ],
+									$checkData['importTitle']->getPrefixedText()
+								)
+							)
+							->parse()
+					) : ''
+				) .
 				( $defaultConfig !== '' || $override !== '' ?
 					$this->configDetails( $defaultConfig, $override ) : ''
 				) .
