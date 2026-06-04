@@ -162,8 +162,7 @@ ve.dm.MWTransclusionNode.static.toDomElements = function ( dataElement, doc, con
 		let value;
 		if (
 			converter.doesModeNeedRendering() &&
-			// Use getHashObjectForRendering to get the rendering from the store
-			( value = store.value( store.hashOfValue( null, OO.getHash( [ this.getHashObjectForRendering( dataElement ), undefined ] ) ) ) )
+			( value = this.fetchGeneratedContents( dataElement, store ) )
 		) {
 			// For the clipboard use the current DOM contents so the user has something
 			// meaningful to paste into external applications
