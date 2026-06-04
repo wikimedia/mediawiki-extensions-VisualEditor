@@ -628,11 +628,17 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 		}
 	];
 
-	const doc = new ve.dm.Document( [ { type: 'paragraph' }, { type: '/paragraph' } ] );
-	const originalCategories = mw.config.values.wgCategories;
-
 	cases.forEach( ( caseItem ) => {
-		mw.config.values.wgCategories = caseItem.categories;
+		const doc = new ve.dm.Document( [
+			{ type: 'paragraph' },
+			{ type: '/paragraph' },
+			// eslint-disable-next-line es-x/no-array-prototype-flat
+			...caseItem.categories.flatMap( ( category ) => ( [
+				{ type: 'mwCategory', attributes: { category: 'Category:' + category, sortkey: '' } },
+				{ type: '/mwCategory' }
+			] ) )
+			// TODO: Test template-generated categories
+		] );
 		assert.strictEqual(
 			mw.editcheck.BaseEditCheck.static.doesConfigMatch(
 				ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
@@ -645,6 +651,4 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 			caseItem.description
 		);
 	} );
-
-	mw.config.values.wgCategories = originalCategories;
 } );

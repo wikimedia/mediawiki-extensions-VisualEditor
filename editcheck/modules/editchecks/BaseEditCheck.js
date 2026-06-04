@@ -142,10 +142,36 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 	}
 	if ( documentModel ) {
 		if ( config.inCategory || config.notInCategory ) {
-			// wgCategories is populated at load time, so won't reflect
-			// changes during the edit session but it does include
-			// categories added by templates.
-			const categories = mw.config.get( 'wgCategories' ) || [];
+			const categories = documentModel.getOrInsertCachedData( () => {
+				// Find inline categories
+				const categoryTitles = documentModel.getMetaList().getItemsInGroup( 'mwCategory' )
+					.map( ( metaItem ) => metaItem.element.attributes.category );
+
+				// Also check for template-generated categories
+				const candidateElements = [];
+				documentModel.getNodesByType( 'mwTransclusionInline' ).concat(
+					documentModel.getNodesByType( 'mwTransclusionBlock' )
+				).forEach( ( node ) => {
+					const domElements = node.fetchGeneratedContents() || [];
+					domElements.forEach( ( domElement ) => {
+						if ( ve.dm.MWCategoryMetaItem.static.matchTagNames.includes( domElement.tagName.toLowerCase() ) ) {
+							candidateElements.push( domElement );
+						}
+						candidateElements.push( ...domElement.querySelectorAll( ve.dm.MWCategoryMetaItem.static.matchTagNames.join( ',' ) ) );
+					} );
+				} );
+				candidateElements.forEach( ( domElement ) => {
+					if ( ve.dm.modelRegistry.matchElement( domElement ) === 'mwCategory' ) {
+						const category = ve.dm.MWCategoryMetaItem.static.toDataElement( [ domElement ] );
+						categoryTitles.push( category.attributes.category );
+					}
+				} );
+
+				return categoryTitles.map( ( category ) => {
+					const title = mw.Title.newFromText( category );
+					return title ? title.getMainText() : category;
+				} );
+			}, 'editcheck-categories' );
 
 			const normalizeTitle = ( title ) => {
 				const mwTitle = mw.Title.newFromText( title );
