@@ -60,6 +60,7 @@ class SpecialEditChecks extends SpecialPage {
 		}
 		$out->enableOOUI();
 		$out->addModuleStyles( [
+			'oojs-ui.styles.icons-content',
 			'oojs-ui.styles.icons-interactions',
 			'ext.visualEditor.editCheck.special',
 			'mediawiki.content.json'
@@ -215,6 +216,7 @@ class SpecialEditChecks extends SpecialPage {
 				'description' => $this->extractStaticValue( $src, 'description' ),
 				'prompt' => $this->extractStaticValue( $src, 'prompt' ),
 				'footer' => $this->extractStaticValue( $src, 'footer' ),
+				'footerIcon' => $this->extractStaticValue( $src, 'footerIcon' ),
 				'choices' => $this->extractStaticValue( $src, 'choices' ),
 				'allowedContentLanguages' => $this->extractStaticValue( $src, 'allowedContentLanguages' ),
 				'defaultConfig' => $this->extractDefaultConfig( $src ),
@@ -396,12 +398,23 @@ class SpecialEditChecks extends SpecialPage {
 				->appendContent( $actions )
 		);
 		if ( $checkData['footer'] ) {
-			$body->appendContent(
-				new \OOUI\LabelWidget( [
-					'label' => $checkData['footer'],
-					'classes' => [ 've-ui-editCheckActionWidget-footer' ]
-				] ),
-			);
+			if ( $checkData['footerIcon'] ) {
+				$body->appendContent(
+					new \OOUI\MessageWidget( [
+						'icon' => $checkData['footerIcon'],
+						'label' => $checkData['footer'],
+						'inline' => true,
+						'classes' => [ 've-ui-editCheckActionWidget-footer' ]
+					] )
+				);
+			} else {
+				$body->appendContent(
+					new \OOUI\LabelWidget( [
+						'label' => $checkData['footer'],
+						'classes' => [ 've-ui-editCheckActionWidget-footer' ]
+					] ),
+				);
+			}
 		}
 
 		if ( !empty( $checkData['choices'] ) ) {
