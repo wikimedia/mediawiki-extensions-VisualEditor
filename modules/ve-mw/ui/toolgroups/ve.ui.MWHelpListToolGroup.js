@@ -125,14 +125,7 @@ ve.ui.MWUserGuideTool.prototype.onUpdateState = function () {};
 ve.ui.MWUserGuideTool.prototype.onSelect = function () {
 	this.setActive( false );
 	const urlOrTitle = ve.msg( 'visualeditor-help-link' );
-	if ( urlOrTitle.includes( '//' ) ) {
-		window.open( urlOrTitle );
-	} else {
-		// This link used to be internal link to mw:, but that doesn't work
-		// on 3rd party installations (T367267). Keep support for internal
-		// links as many wikis have local overrides which are internal.
-		window.open( new mw.Title( urlOrTitle ).getUrl() );
-	}
+	window.open( mw.libs.ve.resolveUrlOrTitle( urlOrTitle ) );
 };
 
 ve.ui.toolFactory.register( ve.ui.MWUserGuideTool );

@@ -100,7 +100,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 				horizontalPosition: 'end',
 				items: [
 					new OO.ui.MenuOptionWidget( {
-						data: '//www.mediawiki.org/wiki/VisualEditor/Suggestion_Mode',
+						data: ve.msg( 'visualeditor-suggestion-link' ),
 						label: ve.msg( 'editcheck-suggestionfeedback-label-about' )
 					} ),
 					new OO.ui.MenuOptionWidget( {
@@ -117,7 +117,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 			} else if ( !choice ) {
 				return;
 			} else {
-				window.open( choice );
+				window.open( mw.libs.ve.resolveUrlOrTitle( choice ) );
 			}
 		} );
 		this.$actions.append( suggestionFeedbackMenuSelect.$element );
