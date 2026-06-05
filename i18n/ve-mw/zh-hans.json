@@ -57,9 +57,11 @@
 			"沈澄心",
 			"神樂坂秀吉",
 			"铁桶",
-			"飞舞回堂前"
+			"飞舞回堂前",
+			"Peterxy"
 		]
 	},
+	"collabpad-disabled": "CollabPad未在此wiki启用。",
 	"collabpad-doctitle": "协作板：$1",
 	"collabpad-import-subtitle": "导入自$1",
 	"collabpad": "协作板",
