@@ -51,6 +51,30 @@
 				}
 			]
 		},
+		"accountByMode": {
+			"description": "Either an account limit (applies in check mode only) or per-mode account limits.",
+			"oneOf": [
+				{
+					"$ref": "#/definitions/account"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"checkMode": {
+							"$ref": "#/definitions/account"
+						},
+						"suggestionMode": {
+							"$ref": "#/definitions/account"
+						}
+					},
+					"required": [
+						"checkMode",
+						"suggestionMode"
+					],
+					"additionalProperties": false
+				}
+			]
+		},
 		"editCount": {
 			"description": "An edit-count threshold. Use false to remove the threshold.",
 			"oneOf": [
@@ -66,21 +90,45 @@
 				}
 			]
 		},
+		"editCountByMode": {
+			"description": "Either an edit-count threshold (applies in check mode only) or per-mode thresholds.",
+			"oneOf": [
+				{
+					"$ref": "#/definitions/editCount"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"checkMode": {
+							"$ref": "#/definitions/editCount"
+						},
+						"suggestionMode": {
+							"$ref": "#/definitions/editCount"
+						}
+					},
+					"required": [
+						"checkMode",
+						"suggestionMode"
+					],
+					"additionalProperties": false
+				}
+			]
+		},
 		"baseEditCheckConfig": {
 			"description": "Shared config supported by BaseEditCheck and inherited by individual edit checks.",
 			"type": "object",
 			"properties": {
 				"account": {
-					"description": "Show the check only for logged-in users, logged-out users, or everyone (false).",
-					"$ref": "#/definitions/account"
+					"description": "Show the check only for logged-in users, logged-out users, or everyone (false). Scalar values apply in check mode only; use { checkMode, suggestionMode } to configure both modes.",
+					"$ref": "#/definitions/accountByMode"
 				},
 				"maximumEditcount": {
-					"description": "Maximum user edit count for which this check is shown.",
-					"$ref": "#/definitions/editCount"
+					"description": "Maximum user edit count for which this check is shown. Scalar values apply in check mode only; use { checkMode, suggestionMode } to configure both modes.",
+					"$ref": "#/definitions/editCountByMode"
 				},
 				"minimumEditcount": {
-					"description": "Minimum user edit count required before this check is shown.",
-					"$ref": "#/definitions/editCount"
+					"description": "Minimum user edit count required before this check is shown. Scalar values apply in check mode only; use { checkMode, suggestionMode } to configure both modes.",
+					"$ref": "#/definitions/editCountByMode"
 				},
 				"ignoreSections": {
 					"description": "Section headings where the check should not run. Headings are matched case-insensitively. An empty string refers to the lead section.",

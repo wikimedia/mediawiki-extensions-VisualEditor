@@ -119,24 +119,43 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 		return false;
 	}
 
-	// Skip account status checks when in suggestion mode or when forceEnable is set
+	/**
+	 * @param {string|number|Object} value Config value which might be a scalar or an object with checkMode/suggestionMode
+	 * @return {string|number|boolean} The value for the current mode, or false if not set
+	 */
+	const getModeConfigValue = ( value ) => {
+		// Schema requires checkMode and suggestionMode be set if using an object, so we only need to check one
+		if ( typeof value === 'object' && Object.prototype.hasOwnProperty.call( value, 'checkMode' ) ) {
+			return suggestion ? value.suggestionMode : value.checkMode;
+		}
+
+		// Legacy scalar values only apply in check mode.
+		return suggestion ? false : value;
+	};
+
+	// Skip account status checks when forceEnable is set
 	// (forceEnable should only bypass account configs, not ones that are integral to the check working as intended, such as category)
-	if ( !suggestion && !mw.editcheck.forceEnable ) {
+	if ( !mw.editcheck.forceEnable ) {
+		const account = getModeConfigValue( config.account );
+		const maximumEditcount = getModeConfigValue( config.maximumEditcount );
+		const minimumEditcount = getModeConfigValue( config.minimumEditcount );
+
 		// account status:
 		// loggedin, loggedout, or any-other-value meaning 'both'
 		// we'll count temporary users as "logged out" by using isNamed here
-		if ( config.account === 'loggedout' && mw.user.isNamed() ) {
+		if ( account === 'loggedout' && mw.user.isNamed() ) {
 			return false;
 		}
-		if ( config.account === 'loggedin' && !mw.user.isNamed() ) {
+		if ( account === 'loggedin' && !mw.user.isNamed() ) {
 			return false;
 		}
+		const userEditCount = mw.config.get( 'wgUserEditCount', 0 );
 		// some checks are only shown for newer users
-		if ( config.maximumEditcount && mw.config.get( 'wgUserEditCount', 0 ) > config.maximumEditcount ) {
+		if ( maximumEditcount !== false && userEditCount > maximumEditcount ) {
 			return false;
 		}
 		// and some checks are only shown for more experienced users
-		if ( config.minimumEditcount && mw.config.get( 'wgUserEditCount', 0 ) < config.minimumEditcount ) {
+		if ( minimumEditcount !== false && userEditCount < minimumEditcount ) {
 			return false;
 		}
 	}

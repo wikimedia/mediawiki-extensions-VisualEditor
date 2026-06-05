@@ -678,3 +678,101 @@ QUnit.test( 'doesConfigMatch treats hasTemplate and lacksTemplate false as unset
 		'matches when template filters are explicitly unset with false'
 	);
 } );
+
+QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert ) => {
+	const baseConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
+		showAsCheck: true,
+		showAsSuggestion: true
+	} );
+
+	const cases = [
+		{
+			description: 'Legacy scalar account',
+			config: { account: 'loggedout' },
+			isNamed: true,
+			editCount: 5,
+			expected: {
+				checkMode: false,
+				suggestionMode: true
+			}
+		},
+		{
+			description: 'Mode object account',
+			config: {
+				account: {
+					checkMode: false,
+					suggestionMode: 'loggedout'
+				}
+			},
+			isNamed: true,
+			editCount: 5,
+			expected: {
+				checkMode: true,
+				suggestionMode: false
+			}
+		},
+		{
+			description: 'Legacy scalar maximumEditcount',
+			config: { maximumEditcount: 10 },
+			isNamed: false,
+			editCount: 100,
+			expected: {
+				checkMode: false,
+				suggestionMode: true
+			}
+		},
+		{
+			description: 'Mode object maximumEditcount',
+			config: {
+				maximumEditcount: {
+					checkMode: false,
+					suggestionMode: 10
+				}
+			},
+			isNamed: false,
+			editCount: 100,
+			expected: {
+				checkMode: true,
+				suggestionMode: false
+			}
+		},
+		{
+			description: 'Mode object minimumEditcount',
+			config: {
+				minimumEditcount: {
+					checkMode: false,
+					suggestionMode: 100
+				}
+			},
+			isNamed: false,
+			editCount: 10,
+			expected: {
+				checkMode: true,
+				suggestionMode: false
+			}
+		}
+	];
+
+	const originalIsNamed = mw.user.isNamed;
+	const originalEditCount = mw.config.values.wgUserEditCount;
+
+	cases.forEach( ( caseItem ) => {
+		mw.user.isNamed = () => caseItem.isNamed;
+		mw.config.values.wgUserEditCount = caseItem.editCount;
+
+		[ false, true ].forEach( ( suggestion ) => {
+			assert.strictEqual(
+				mw.editcheck.BaseEditCheck.static.doesConfigMatch(
+					ve.extendObject( {}, baseConfig, caseItem.config ),
+					undefined,
+					suggestion
+				),
+				caseItem.expected[ suggestion ? 'suggestionMode' : 'checkMode' ],
+				caseItem.description + ': ' + ( suggestion ? 'suggestion mode' : 'check mode' )
+			);
+		} );
+	} );
+
+	mw.user.isNamed = originalIsNamed;
+	mw.config.values.wgUserEditCount = originalEditCount;
+} );
