@@ -49,7 +49,7 @@
 	"editcheck-double-bold-descriptionlink": "//www.mediawiki.org/wiki/Help:Suggestion_mode#Double_bold",
 	"editcheck-double-bold-action-remove": "Remove bold",
 	"editcheck-preference-suggestions-label": "Suggestion mode",
-	"editcheck-preference-suggestions-description": "Community-configured edit suggestions for improving articles. Available in [[:mw:Special:MyLanguage/VisualEditor|visual editor]].",
+	"editcheck-preference-suggestions-description": "Community-configured edit suggestions for improving articles. Available in [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visual editor]].",
 	"editcheck-preference-suggestions-info-link": "//mediawiki.org/wiki/Special:MyLanguage/Edit_check/Suggestions",
 	"editcheck-preference-suggestions-discussion-link": "//mediawiki.org/wiki/Special:MyLanguage/Talk:Edit_check/Suggestions",
 	"editcheck-textmatch-replace": "Replace \"$1\" with \"$2\"?",
