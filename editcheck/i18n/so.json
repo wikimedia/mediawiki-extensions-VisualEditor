@@ -5,6 +5,7 @@
 		]
 	},
 	"editcheck-dialog-action-no": "Maya",
+	"editcheck-dialog-action-yes": "Haa",
 	"editcheck-dialog-addref-description": "Ka caawi akhristayaasha inay fahmaan halka macluumaadkani ka yimid adigoo ku daraya tixraac.",
 	"editcheck-dialog-addref-reject-question": "Maxaad u ku darin tixraac?",
 	"editcheck-dialog-addref-reject-irrelevant": "Uma malaynayo in tixraacyadu khuseeyaan isbeddelka aan samaynayo",
@@ -14,6 +15,12 @@
 	"editcheck-dialog-addref-success-notify": "Waad ku mahadsan tahay inaad ku dartay xigasho!",
 	"editcheck-dialog-addref-title": "Ku dar xigasho",
 	"editcheck-dialog-title": "Ka hor inta aan la daabicin",
+	"tag-editcheck-reference-decline-common-knowledge": "Hubinta tafatirka (tixraacyada) waa la diiday (aqoon guud)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Tixraaca EditCheck waxaa loo diiday inuu yahay aqoon guud",
+	"tag-editcheck-reference-decline-irrelevant": "Hubinta tafatirka (tixraacyada) waa la diiday (aan khusayn)",
 	"tag-editcheck-reference-decline-irrelevant-description": "Tixraaca EditCheck waa la diiday maadaama uusan khusayn.",
-	"tag-editcheck-reference-decline-uncertain": "EditCheck (tixraacyo) waa la diiday (aan la hubin)"
+	"tag-editcheck-reference-decline-other": "Hubinta tafatirka (tixraacyada) waa la diiday (sabab kale)",
+	"tag-editcheck-reference-decline-other-description": "Tixraaca EditCheck waxaa loo diiday sabab aan ku jirin liiska",
+	"tag-editcheck-reference-decline-uncertain": "EditCheck (tixraacyo) waa la diiday (aan la hubin)",
+	"tag-editcheck-reference-decline-uncertain-description": "Tixraaca EditCheck waxaa loo diiday sababo la xiriira hubanti la'aan"
 }
