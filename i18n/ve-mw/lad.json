@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Maor X",
 			"Universal Life",
 			"WikiiiTranslator"
 		]
 	},
 	"visualeditor-ca-createlocaldescriptionsource": "Agregar deskripsión local",
 	"visualeditor-ca-createsource": "Criar fuente",
-	"visualeditor-ca-editsource": "Trocar el manadero",
-	"visualeditor-ca-editsource-section": "trocar el manadero",
+	"visualeditor-ca-editsource": "Trokar el manadero",
+	"visualeditor-ca-editsource-section": "trokar el manadero",
 	"visualeditor-descriptionpagelink": "Project:Editor visual"
 }
