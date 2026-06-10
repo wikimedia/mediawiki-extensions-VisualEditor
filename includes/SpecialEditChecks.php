@@ -240,12 +240,151 @@ class SpecialEditChecks extends SpecialPage {
 				}
 			}
 
+			$checkData['extraModes'] = $this->findExtraActionModes( $src, $checkData );
 			$checks[] = $checkData;
 		}
 		usort( $checks, static function ( $a, $b ) {
 			return strcmp( basename( $a['file'] ), basename( $b['file'] ) );
 		} );
 		return $checks;
+	}
+
+	/**
+	 * Find additional action modes by parsing EditCheckAction constructor calls.
+	 *
+	 * @param string $src Source code
+	 * @param array $checkData Base check data
+	 * @return array Derived check entries
+	 */
+	private function findExtraActionModes( string $src, array $checkData ): array {
+		$entries = [];
+		$objectBodies = [];
+		$patterns = [
+			'/new\s+mw\.editcheck\.EditCheckAction\s*\(\s*\{([\s\S]*?)\}\s*\)/',
+			'/buildActionFromLinkRange\s*\([\s\S]*?,\s*\{([\s\S]*?)\}\s*\)/',
+		];
+		foreach ( $patterns as $pattern ) {
+			if ( preg_match_all( $pattern, $src, $matches, PREG_SET_ORDER ) ) {
+				foreach ( $matches as $match ) {
+					$objectBodies[] = $match[1];
+				}
+			}
+		}
+
+		if ( !$objectBodies ) {
+			return $entries;
+		}
+
+		foreach ( $objectBodies as $index => $objectBody ) {
+			$modeExpr = $this->extractObjectPropertyExpression( $objectBody, 'mode' );
+			if ( $modeExpr === null || !preg_match( '/^(["\'])(.*?)\1$/', trim( $modeExpr ), $modeMatch ) ) {
+				continue;
+			}
+			$mode = $modeMatch[2];
+
+			$footerIconExpr = $this->extractObjectPropertyExpression( $objectBody, 'footerIcon' );
+
+			$entryCheckData = $checkData;
+			$entryCheckData['name'] = $checkData['name'] . ' (' . $mode . ')';
+			$entryCheckData['mode'] = $mode;
+			$parsedMessageFields = [
+				'title' => 'title',
+				'message' => 'description',
+				'prompt' => 'prompt',
+				'footer' => 'footer',
+			];
+			foreach ( $parsedMessageFields as $prop => $targetKey ) {
+				$expr = $this->extractObjectPropertyExpression( $objectBody, $prop );
+				if ( !$expr ) {
+					continue;
+				}
+				$parsedValue = $this->parseMessage( $expr );
+				if ( $parsedValue !== '' ) {
+					$entryCheckData[$targetKey] = $parsedValue;
+				}
+			}
+			if ( $footerIconExpr !== null && preg_match( '/^(["\'])(.*?)\1$/', trim( $footerIconExpr ), $iconMatch ) ) {
+				$entryCheckData['footerIcon'] = $iconMatch[2];
+			}
+			$entries[] = $entryCheckData;
+		}
+
+		return $entries;
+	}
+
+	/**
+	 * Extract a top-level object property expression from a JS object literal body.
+	 *
+	 * @param string $objectBody Object literal content without surrounding braces
+	 * @param string $prop Property name
+	 * @return string|null
+	 */
+	private function extractObjectPropertyExpression( string $objectBody, string $prop ): ?string {
+		$pattern = '/(^|,)\s*' . preg_quote( $prop, '/' ) . '\s*:\s*/m';
+		if ( !preg_match( $pattern, $objectBody, $m, PREG_OFFSET_CAPTURE ) ) {
+			return null;
+		}
+
+		$start = $m[0][1] + strlen( $m[0][0] );
+		$len = strlen( $objectBody );
+		$depthParen = 0;
+		$depthBracket = 0;
+		$depthBrace = 0;
+		$inSingle = false;
+		$inDouble = false;
+		$escape = false;
+
+		for ( $i = $start; $i < $len; $i++ ) {
+			$ch = $objectBody[$i];
+
+			if ( $escape ) {
+				$escape = false;
+				continue;
+			}
+			if ( $ch === '\\' ) {
+				$escape = true;
+				continue;
+			}
+			if ( !$inDouble && $ch === '\'' ) {
+				$inSingle = !$inSingle;
+				continue;
+			}
+			if ( !$inSingle && $ch === '"' ) {
+				$inDouble = !$inDouble;
+				continue;
+			}
+			if ( $inSingle || $inDouble ) {
+				continue;
+			}
+
+			switch ( $ch ) {
+				case '(':
+					$depthParen++;
+					break;
+				case ')':
+					$depthParen = max( 0, $depthParen - 1 );
+					break;
+				case '[':
+					$depthBracket++;
+					break;
+				case ']':
+					$depthBracket = max( 0, $depthBracket - 1 );
+					break;
+				case '{':
+					$depthBrace++;
+					break;
+				case '}':
+					$depthBrace = max( 0, $depthBrace - 1 );
+					break;
+				case ',':
+					if ( $depthParen === 0 && $depthBracket === 0 && $depthBrace === 0 ) {
+						return trim( substr( $objectBody, $start, $i - $start ) );
+					}
+					break;
+			}
+		}
+
+		return trim( substr( $objectBody, $start ) );
 	}
 
 	/**
@@ -331,8 +470,11 @@ class SpecialEditChecks extends SpecialPage {
 		} else {
 			$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
 		}
-
 		$this->addTocSubSection( $checkData['name'], 'rawmessage', $checkData['name'] );
+
+		foreach ( $checkData['extraModes'] ?? [] as $modeCheckData ) {
+			$widget .= $this->buildEditCheckActionWidget( $modeCheckData, $suggestions );
+		}
 
 		$html .= Html::rawElement( 'tr', [],
 			Html::rawElement( 'td', [],
