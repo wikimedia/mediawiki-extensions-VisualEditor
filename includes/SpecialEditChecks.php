@@ -212,6 +212,7 @@ class SpecialEditChecks extends SpecialPage {
 			$checkData = [
 				'file' => $file,
 				'name' => $name,
+				'mode' => '',
 				'title' => $this->extractStaticValue( $src, 'title' ),
 				'description' => $this->extractStaticValue( $src, 'description' ),
 				'prompt' => $this->extractStaticValue( $src, 'prompt' ),
@@ -283,22 +284,15 @@ class SpecialEditChecks extends SpecialPage {
 						$importTitle = Title::newFromText( $item['import'] );
 						$item = json_decode( $this->msg( $importTitle->getText() )->inContentLanguage()->text(), true );
 					}
-					$mode = $item['mode'] ?? '';
-					// Filter choices to ones containing the mode if requested
-					$choices = array_filter(
-						$checkData['choices'] ?? [],
-						static function ( $choice ) use ( $mode ) {
-							return in_array( $mode, $choice['modes'], true );
-						}
-					);
 					$matchCheckData = [
 						'file' => '',
 						'name' => $checkData['name'] . " ($name)",
+						'mode' => $item['mode'] ?? '',
 						'title' => $item['title'] ?? '',
 						'description' => new \OOUI\HtmlSnippet( ( new RawMessage( $item['message'] ?? '' ) )->parse() ),
 						'prompt' => $item['prompt'] ?? '',
 						'footer' => $item['footer'] ?? '',
-						'choices' => $choices,
+						'choices' => $checkData['choices'] ?? [],
 						'allowedContentLanguages' => '',
 						'defaultConfig' => json_encode( $item['config'] ?? '' ),
 						'matchItem' => $item,
@@ -419,6 +413,13 @@ class SpecialEditChecks extends SpecialPage {
 
 		if ( !empty( $checkData['choices'] ) ) {
 			foreach ( $checkData['choices'] as $choice ) {
+				// Filter by mode
+				if (
+					isset( $choice['modes'] ) && is_array( $choice['modes'] ) &&
+					!in_array( $checkData['mode'], $choice['modes'], true )
+				) {
+					continue;
+				}
 				$actionButton = new \OOUI\ButtonWidget( [
 					'label' => $choice[ 'label' ],
 					'flags' => $choice['flags'] ?? [],

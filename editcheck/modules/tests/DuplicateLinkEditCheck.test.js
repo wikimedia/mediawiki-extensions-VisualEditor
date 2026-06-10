@@ -32,7 +32,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedActions: 1,
-			expectedModes: [ 'duplicate' ],
+			expectedModes: [ '' ],
 			expectedHighlights: 2
 		},
 		{
@@ -46,7 +46,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedActions: 1,
-			expectedModes: [ 'duplicate' ],
+			expectedModes: [ '' ],
 			expectedHighlights: 2
 		},
 		{
@@ -78,7 +78,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedActions: 3,
-			expectedModes: [ 'duplicate', 'duplicate', 'duplicate' ],
+			expectedModes: [ '', '', '' ],
 			expectedHighlights: 4
 		}
 	];

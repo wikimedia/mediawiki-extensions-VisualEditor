@@ -36,7 +36,7 @@ mw.editcheck.DuplicateLinkEditCheck.static.choices = [
 	{
 		action: 'remove',
 		label: OO.ui.deferMsg( 'editcheck-action-remove-link' ),
-		modes: [ 'duplicate' ]
+		modes: [ '' ]
 	},
 	{
 		action: 'merge',
@@ -46,7 +46,7 @@ mw.editcheck.DuplicateLinkEditCheck.static.choices = [
 	{
 		action: 'dismiss',
 		label: OO.ui.deferMsg( 'ooui-dialog-process-dismiss' ),
-		modes: [ 'duplicate', 'adjacent' ]
+		modes: [ '', 'adjacent' ]
 	}
 ];
 
@@ -169,8 +169,7 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 				} ) );
 			} else {
 				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
-					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
-					mode: 'duplicate'
+					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) )
 				} ) );
 			}
 		}
