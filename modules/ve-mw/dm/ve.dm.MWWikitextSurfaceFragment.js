@@ -14,7 +14,7 @@
  * @param {ve.dm.Document} doc
  */
 ve.dm.MWWikitextSurfaceFragment = function VeDmMwWikitextSurfaceFragment() {
-	// Parent constructors
+	// Parent constructor
 	ve.dm.MWWikitextSurfaceFragment.super.apply( this, arguments );
 };
 

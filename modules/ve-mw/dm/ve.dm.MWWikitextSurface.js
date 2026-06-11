@@ -15,7 +15,7 @@
  * @param {Object} [config]
  */
 ve.dm.MWWikitextSurface = function VeDmMwWikitextSurface( doc, config ) {
-	// Parent constructors
+	// Parent constructor
 	ve.dm.MWWikitextSurface.super.call( this, doc, null, ve.extendObject( config, { sourceMode: true } ) );
 };
 

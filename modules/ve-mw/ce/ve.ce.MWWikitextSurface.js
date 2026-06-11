@@ -14,7 +14,7 @@
  * @param {Object} [config]
  */
 ve.ce.MWWikitextSurface = function VeCeMwWikitextSurface() {
-	// Parent constructors
+	// Parent constructor
 	ve.ce.MWWikitextSurface.super.apply( this, arguments );
 };
 
