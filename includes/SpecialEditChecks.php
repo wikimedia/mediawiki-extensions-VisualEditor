@@ -21,6 +21,7 @@ class SpecialEditChecks extends SpecialPage {
 	use TocGeneratorTrait;
 
 	private readonly Config $config;
+	private readonly EditCheckFileParser $parser;
 
 	/**
 	 * @inheritDoc
@@ -32,6 +33,7 @@ class SpecialEditChecks extends SpecialPage {
 		parent::__construct( 'EditChecks' );
 
 		$this->config = $configFactory->makeConfig( 'visualeditor' );
+		$this->parser = new EditCheckFileParser( $this->getContext() );
 	}
 
 	/**
@@ -202,7 +204,7 @@ class SpecialEditChecks extends SpecialPage {
 				continue;
 			}
 
-			$name = $this->extractStaticValue( $src, 'name' );
+			$name = $this->parser->extractStaticValue( $src, 'name' );
 
 			// Skip abstract classes (those without a name)
 			if ( !$includeAbstract && $name === '' ) {
@@ -213,14 +215,14 @@ class SpecialEditChecks extends SpecialPage {
 				'file' => $file,
 				'name' => $name,
 				'mode' => '',
-				'title' => $this->extractStaticValue( $src, 'title' ),
-				'description' => $this->extractStaticValue( $src, 'description' ),
-				'prompt' => $this->extractStaticValue( $src, 'prompt' ),
-				'footer' => $this->extractStaticValue( $src, 'footer' ),
-				'footerIcon' => $this->extractStaticValue( $src, 'footerIcon' ),
-				'choices' => $this->extractStaticValue( $src, 'choices' ),
-				'allowedContentLanguages' => $this->extractStaticValue( $src, 'allowedContentLanguages' ),
-				'defaultConfig' => $this->extractDefaultConfig( $src ),
+				'title' => $this->parser->extractStaticValue( $src, 'title' ),
+				'description' => $this->parser->extractStaticValue( $src, 'description' ),
+				'prompt' => $this->parser->extractStaticValue( $src, 'prompt' ),
+				'footer' => $this->parser->extractStaticValue( $src, 'footer' ),
+				'footerIcon' => $this->parser->extractStaticValue( $src, 'footerIcon' ),
+				'choices' => $this->parser->extractStaticValue( $src, 'choices' ),
+				'allowedContentLanguages' => $this->parser->extractStaticValue( $src, 'allowedContentLanguages' ),
+				'defaultConfig' => $this->parser->extractDefaultConfig( $src ),
 			];
 
 			// Filter by showAsCheck value if requested
@@ -240,151 +242,13 @@ class SpecialEditChecks extends SpecialPage {
 				}
 			}
 
-			$checkData['extraModes'] = $this->findExtraActionModes( $src, $checkData );
+			$checkData['extraModes'] = $this->parser->findExtraActionModes( $src, $checkData );
 			$checks[] = $checkData;
 		}
 		usort( $checks, static function ( $a, $b ) {
 			return strcmp( basename( $a['file'] ), basename( $b['file'] ) );
 		} );
 		return $checks;
-	}
-
-	/**
-	 * Find additional action modes by parsing EditCheckAction constructor calls.
-	 *
-	 * @param string $src Source code
-	 * @param array $checkData Base check data
-	 * @return array Derived check entries
-	 */
-	private function findExtraActionModes( string $src, array $checkData ): array {
-		$entries = [];
-		$objectBodies = [];
-		$patterns = [
-			'/new\s+mw\.editcheck\.EditCheckAction\s*\(\s*\{([\s\S]*?)\}\s*\)/',
-			'/buildActionFromLinkRange\s*\([\s\S]*?,\s*\{([\s\S]*?)\}\s*\)/',
-		];
-		foreach ( $patterns as $pattern ) {
-			if ( preg_match_all( $pattern, $src, $matches, PREG_SET_ORDER ) ) {
-				foreach ( $matches as $match ) {
-					$objectBodies[] = $match[1];
-				}
-			}
-		}
-
-		if ( !$objectBodies ) {
-			return $entries;
-		}
-
-		foreach ( $objectBodies as $index => $objectBody ) {
-			$modeExpr = $this->extractObjectPropertyExpression( $objectBody, 'mode' );
-			if ( $modeExpr === null || !preg_match( '/^(["\'])(.*?)\1$/', trim( $modeExpr ), $modeMatch ) ) {
-				continue;
-			}
-			$mode = $modeMatch[2];
-
-			$footerIconExpr = $this->extractObjectPropertyExpression( $objectBody, 'footerIcon' );
-
-			$entryCheckData = $checkData;
-			$entryCheckData['name'] = $checkData['name'] . ' (' . $mode . ')';
-			$entryCheckData['mode'] = $mode;
-			$parsedMessageFields = [
-				'title' => 'title',
-				'message' => 'description',
-				'prompt' => 'prompt',
-				'footer' => 'footer',
-			];
-			foreach ( $parsedMessageFields as $prop => $targetKey ) {
-				$expr = $this->extractObjectPropertyExpression( $objectBody, $prop );
-				if ( !$expr ) {
-					continue;
-				}
-				$parsedValue = $this->parseMessage( $expr );
-				if ( $parsedValue !== '' ) {
-					$entryCheckData[$targetKey] = $parsedValue;
-				}
-			}
-			if ( $footerIconExpr !== null && preg_match( '/^(["\'])(.*?)\1$/', trim( $footerIconExpr ), $iconMatch ) ) {
-				$entryCheckData['footerIcon'] = $iconMatch[2];
-			}
-			$entries[] = $entryCheckData;
-		}
-
-		return $entries;
-	}
-
-	/**
-	 * Extract a top-level object property expression from a JS object literal body.
-	 *
-	 * @param string $objectBody Object literal content without surrounding braces
-	 * @param string $prop Property name
-	 * @return string|null
-	 */
-	private function extractObjectPropertyExpression( string $objectBody, string $prop ): ?string {
-		$pattern = '/(^|,)\s*' . preg_quote( $prop, '/' ) . '\s*:\s*/m';
-		if ( !preg_match( $pattern, $objectBody, $m, PREG_OFFSET_CAPTURE ) ) {
-			return null;
-		}
-
-		$start = $m[0][1] + strlen( $m[0][0] );
-		$len = strlen( $objectBody );
-		$depthParen = 0;
-		$depthBracket = 0;
-		$depthBrace = 0;
-		$inSingle = false;
-		$inDouble = false;
-		$escape = false;
-
-		for ( $i = $start; $i < $len; $i++ ) {
-			$ch = $objectBody[$i];
-
-			if ( $escape ) {
-				$escape = false;
-				continue;
-			}
-			if ( $ch === '\\' ) {
-				$escape = true;
-				continue;
-			}
-			if ( !$inDouble && $ch === '\'' ) {
-				$inSingle = !$inSingle;
-				continue;
-			}
-			if ( !$inSingle && $ch === '"' ) {
-				$inDouble = !$inDouble;
-				continue;
-			}
-			if ( $inSingle || $inDouble ) {
-				continue;
-			}
-
-			switch ( $ch ) {
-				case '(':
-					$depthParen++;
-					break;
-				case ')':
-					$depthParen = max( 0, $depthParen - 1 );
-					break;
-				case '[':
-					$depthBracket++;
-					break;
-				case ']':
-					$depthBracket = max( 0, $depthBracket - 1 );
-					break;
-				case '{':
-					$depthBrace++;
-					break;
-				case '}':
-					$depthBrace = max( 0, $depthBrace - 1 );
-					break;
-				case ',':
-					if ( $depthParen === 0 && $depthBracket === 0 && $depthBrace === 0 ) {
-						return trim( substr( $objectBody, $start, $i - $start ) );
-					}
-					break;
-			}
-		}
-
-		return trim( substr( $objectBody, $start ) );
 	}
 
 	/**
@@ -591,7 +455,7 @@ class SpecialEditChecks extends SpecialPage {
 			return $onWikiConfig[$checkData['name']][$key];
 		} elseif ( $checkData['defaultConfig'] !== '' ) {
 			// Fallback to default config
-			$defaultConfig = $this->tryJsonDecodeObjectString( $checkData['defaultConfig'] );
+			$defaultConfig = $this->parser->tryJsonDecodeObjectString( $checkData['defaultConfig'] );
 			if ( is_array( $defaultConfig ) && array_key_exists( $key, $defaultConfig ) ) {
 				return $defaultConfig[$key];
 			}
@@ -650,176 +514,6 @@ class SpecialEditChecks extends SpecialPage {
 	}
 
 	/**
-	 * Build a regex for matching supported message-call expressions.
-	 *
-	 * @param bool $anchored Whether to anchor the pattern to the whole string
-	 * @return string
-	 */
-	private function getMessageExpressionPattern( bool $anchored ): string {
-		$start = $anchored ? '^' : '\b';
-		$end = $anchored ? '$' : '';
-		$pattern =
-			'/' .
-			$start .
-			'(ve\.msg|ve\.htmlMsg|ve\.deferHtmlMsg|ve\.deferJQueryMsg|mw\.msg|OO\.ui\.deferMsg)' .
-			"\\s*\\(\\s*(\"|')" .
-			"([^\"']+)" .
-			"\\2(.*?)\\)" .
-			$end .
-			'/s';
-		return $pattern;
-	}
-
-	/**
-	 * Parse a JS message expression and return the rendered message.
-	 *
-	 * @param string $expr
-	 * @return string|\OOUI\HtmlSnippet Empty string if the expression doesn't match.
-	 */
-	private function parseMessage( string $expr ) {
-		// Message calls:
-		// - ve.msg(...)
-		// - ve.htmlMsg(...)
-		// - ve.deferHtmlMsg(...)
-		// - ve.deferJQueryMsg(...)
-		// - mw.msg(...)
-		// - OO.ui.deferMsg(...)
-		if ( preg_match( $this->getMessageExpressionPattern( true ), $expr, $mm ) ) {
-			$argsStr = $mm[4];
-			$args = [];
-			if ( preg_match_all( '/,\s*([\"\\\'])(.*?)\1/', $argsStr, $am, PREG_SET_ORDER ) ) {
-				foreach ( $am as $a ) {
-					$args[] = $a[2];
-				}
-			}
-			$msg = $this->getContext()->msg( $mm[3], ...$args );
-			switch ( $mm[1] ) {
-				case 've.htmlMsg':
-				case 've.deferHtmlMsg':
-				case 've.deferJQueryMsg':
-					return new \OOUI\HtmlSnippet( $msg->parse() );
-				default:
-					return $msg->text();
-			}
-		}
-
-		return '';
-	}
-
-	/**
-	 * Extract a static property value.
-	 *
-	 * @param string $src Source code
-	 * @param string $prop Property name
-	 * @return string|array|null|\OOUI\HtmlSnippet
-	 */
-	private function extractStaticValue( string $src, string $prop ) {
-		$expr = $this->extractStaticAssignmentExpression( $src, $prop );
-		if ( $expr === null ) {
-			return null;
-		}
-
-		// Literal
-		if ( preg_match( '/^([\"\\\'])(.*?)\1$/', $expr, $mm ) ) {
-			if ( $prop === 'name' ) {
-				return $mm[2];
-			} else {
-				return new \OOUI\HtmlSnippet( $mm[2] );
-			}
-		}
-
-		$message = $this->parseMessage( $expr );
-		if ( $message !== '' ) {
-			return $message;
-		}
-
-		// For non-literal, non-message values, only expose data we explicitly care about.
-		// The common use-case here is extracting multi-line arrays/objects like `static.choices = [ ... ];`.
-		if ( $prop === 'choices' || $prop === 'allowedContentLanguages' ) {
-			return $this->tryJsonDecodeObjectString( $expr );
-		}
-
-		return null;
-	}
-
-	/**
-	 * Extract the full RHS expression of a `static.<prop> = ...;` assignment.
-	 *
-	 * @param string $src Code
-	 * @param string $prop Property name
-	 * @return string|null RHS expression or null if not found
-	 */
-	private function extractStaticAssignmentExpression( string $src, string $prop ): ?string {
-		$pattern = '/static\s*\.\s*' . preg_quote( $prop, '/' ) . '\s*=\s*/';
-		if ( !preg_match( $pattern, $src, $m, PREG_OFFSET_CAPTURE ) ) {
-			return null;
-		}
-		$start = $m[ 0 ][ 1 ] + strlen( $m[ 0 ][ 0 ] );
-		$end = strpos( $src, ';', $start );
-		if ( $end === false ) {
-			return trim( substr( $src, $start ) );
-		}
-		return trim( substr( $src, $start, $end - $start ) );
-	}
-
-	/**
-	 * Extract the defaultConfig object literal from the source code.
-	 */
-	private function extractDefaultConfig( string $src ): string {
-		// Capture object literal used as overrides in ve.extendObject(..., {...}) or a direct object.
-		if (
-			preg_match(
-				'/static\s*\.\s*defaultConfig\s*=' .
-				'\s*ve\.extendObject\s*\(\s*\{.*?\}\s*,\s*[^,]+,\s*(\{[\s\S]*?\})\s*\)\s*;/',
-				$src, $m )
-		) {
-			return $m[ 1 ];
-		}
-		if ( preg_match( '/static\s*\.\s*defaultConfig\s*=\s*(\{[\s\S]*?\})\s*;/', $src, $m ) ) {
-			return $m[ 1 ];
-		}
-		return '';
-	}
-
-	/**
-	 * Attempt to convert a JS object literal to valid JSON for display.
-	 * Returns pretty-printed JSON string or null on failure.
-	 *
-	 * @param string $js JS object literal
-	 * @return mixed|null JSON decoded data or null on failure
-	 */
-	private function tryJsonDecodeObjectString( string $js ) {
-		$src = trim( $js );
-		// Remove comments
-		$src = preg_replace( '/\/\/.*?(?=\n|$)/', '', $src );
-		$src = preg_replace( '/\/\*[\s\S]*?\*\//', '', $src );
-		// Remove trailing commas before } or ]
-		$src = preg_replace( '/,\s*(\}|\])/', '$1', $src );
-		// Replace undefined with null
-		$src = preg_replace( '/\bundefined\b/', 'null', $src );
-		// Quote unquoted keys: { key: ... } or , key: ...
-		$src = preg_replace( '/([\{,]\s*)([A-Za-z_$][A-Za-z0-9_$]*)\s*:/', '$1"$2":', $src );
-		// Message expressions, e.g. ve.msg('...'), OO.ui.deferMsg('...'), mw.msg('...')
-		$messageExprPattern = $this->getMessageExpressionPattern( false );
-		$src = preg_replace_callback(
-			$messageExprPattern,
-			function ( $mm ) {
-				return json_encode( (string)$this->parseMessage( $mm[0] ) );
-			},
-			$src
-		);
-
-		$src = $this->convertSingleQuotedToDoubleQuoted( $src );
-
-		// Try decode
-		$data = json_decode( $src, true );
-		if ( json_last_error() !== JSON_ERROR_NONE ) {
-			return null;
-		}
-		return $data;
-	}
-
-	/**
 	 * Attempt to convert a JS object literal to valid JSON for display.
 	 * Returns pretty-printed JSON string or null on failure.
 	 *
@@ -827,57 +521,9 @@ class SpecialEditChecks extends SpecialPage {
 	 * @return string
 	 */
 	private function jsonTableFromObjectString( string $js ): string {
-		$data = $this->tryJsonDecodeObjectString( $js );
+		$data = $this->parser->tryJsonDecodeObjectString( $js );
 
 		return $data === null ? $js : $this->jsonTable( $data );
-	}
-
-	/**
-	 * Convert all JS single-quoted string literals to double-quoted, handling escapes.
-	 */
-	private function convertSingleQuotedToDoubleQuoted( string $code ): string {
-		$out = '';
-		$len = strlen( $code );
-		$inSingle = false;
-		$inDouble = false;
-		$escape = false;
-		for ( $i = 0; $i < $len; $i++ ) {
-			$ch = $code[$i];
-			if ( $escape ) {
-				// Preserve escaped char, but if we are in a single-quoted string
-				// and the escaped char is a single quote, drop the escape
-				if ( $inSingle && $ch === '\'' ) {
-					$out .= '\'';
-				} else {
-					$out .= '\\' . $ch;
-				}
-				$escape = false;
-				continue;
-			}
-			if ( $ch === '\\' ) {
-				$escape = true;
-				continue;
-			}
-			if ( !$inDouble && $ch === '\'' ) {
-				// Toggle single-quoted string; replace quote with double quote
-				$inSingle = !$inSingle;
-				$out .= '"';
-				continue;
-			}
-			if ( !$inSingle && $ch === '"' ) {
-				// Track double quotes to avoid interfering while inside
-				$inDouble = !$inDouble;
-				$out .= '"';
-				continue;
-			}
-			// Inside single-quoted string: ensure double quotes are escaped
-			if ( $inSingle && $ch === '"' ) {
-				$out .= '\\"';
-				continue;
-			}
-			$out .= $ch;
-		}
-		return $out;
 	}
 
 	/**
