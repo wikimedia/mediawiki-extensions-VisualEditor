@@ -45,7 +45,7 @@
 	"editcheck-double-bold-title": "Poista tarpeeton lihavointi",
 	"editcheck-double-bold-action-remove": "Poista lihavointi",
 	"editcheck-preference-suggestions-label": "Ehdotustila",
-	"editcheck-preference-suggestions-description": "Yhteisön määriteltävissä olevia muokkausehdotuksia artikkelien parantamiseksi. Saatavilla  [[:mw:Special:MyLanguage/VisualEditor|visuaalisessa muokkaimessa]].",
+	"editcheck-preference-suggestions-description": "Yhteisön määriteltävissä olevia muokkausehdotuksia artikkelien parantamiseksi. Saatavilla  [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuaalisessa muokkaimessa]].",
 	"editcheck-textmatch-replace": "Korvaa ”$1” → ”$2”?",
 	"editcheck-tone-title": "Korjaa sävyä?",
 	"editcheck-tone-description": "Muut käyttäjät korjaavat usein tämänkaltaisia ilmauksia, koska niitä pidetään sävyltään epäneutraaleina. [{{int:editcheck-tone-descriptionlink}} Lisätietoja]",

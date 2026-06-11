@@ -44,7 +44,7 @@
 	"editcheck-double-bold-description": "Qoraalka culus si toos ah ayaa loo mariyaa cinwaannada hoose, erayada liiska qeexidda iyo madaxyada jadwalka. Ka caawi akhristayaasha adigoo ka saaraya [{{int:editcheck-double-bold-descriptionlink}} qaabeynta qoraalka culus ee aan loo baahnayn] qaybahan.",
 	"editcheck-double-bold-action-remove": "Ka saar qoraalka culus",
 	"editcheck-preference-suggestions-label": "Habka talo bixinta",
-	"editcheck-preference-suggestions-description": "Talooyin wax ka beddel oo ay bulshadu dejisay si loo hagaajiyo maqaalada. Waxa laga heli karaa [[:mw:Special:MyLanguage/VisualEditor|tifaftiraha muuqaalka]].",
+	"editcheck-preference-suggestions-description": "Talooyin wax ka beddel oo ay bulshadu dejisay si loo hagaajiyo maqaalada. Waxa laga heli karaa [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|tifaftiraha muuqaalka]].",
 	"editcheck-textmatch-replace": "Ma ku beddelaa \"$1\" \"$2\"?",
 	"editcheck-tone-title": "Ma dib u habeynayaa codka?",
 	"editcheck-tone-description": "Isticmaalayaasha kale badanaa way dib u eegaan noocan eray-bixinta, iyagoo sheegaya in codka uusan dheellitirnayn. [{{int:editcheck-tone-descriptionlink}} Wax badan baro]",

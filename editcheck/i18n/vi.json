@@ -46,7 +46,7 @@
 	"editcheck-double-bold-description": "Chữ in đậm được tự động áp dụng cho các tiêu đề phụ, thuật ngữ trong danh sách định nghĩa và tiêu đề bảng. Hãy giúp người đọc bằng cách loại bỏ định dạng in đậm không cần thiết khỏi các yếu tố này.",
 	"editcheck-double-bold-action-remove": "Loại bỏ in đậm",
 	"editcheck-preference-suggestions-label": "Chế độ gợi ý",
-	"editcheck-preference-suggestions-description": "Các sửa đổi gợi ý do cộng đồng cấu hình nhằm cải thiện bài viết. Có sẵn trong [[:mw:Special:MyLanguage/VisualEditor|trình soạn thảo trực quan]].",
+	"editcheck-preference-suggestions-description": "Các sửa đổi gợi ý do cộng đồng cấu hình nhằm cải thiện bài viết. Có sẵn trong [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|trình soạn thảo trực quan]].",
 	"editcheck-textmatch-replace": "Thay thế \"$1\" bằng \"$2\"?",
 	"editcheck-tone-title": "Sửa lại giọng điệu?",
 	"editcheck-tone-description": "Những thành viên khác thường sửa lại cách diễn đạt này vì cho rằng giọng điệu không được cân bằng lắm. [{{int:editcheck-tone-descriptionlink}} Tìm hiểu thêm]",

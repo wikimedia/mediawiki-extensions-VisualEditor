@@ -36,7 +36,7 @@
 	"editcheck-copyvio-keep-notify": "Trugarez deoc'h da vezañ roet hoc’h abeg evit mirout an destenn peget !",
 	"editcheck-copyvio-remove-notify": "Trugarez deoc'h da sikouriñ da virout ar ouiziegezh frank !",
 	"editcheck-preference-suggestions-label": "Mod kinnigoù",
-	"editcheck-preference-suggestions-description": "Kinnigoù kemmañ kefluniet gant ar gumuniezh evit gwellaat ar pennadoù. Er [[:mw:Special:MyLanguage/VisualEditor|gwelaozer]] e vo kavet.",
+	"editcheck-preference-suggestions-description": "Kinnigoù kemmañ kefluniet gant ar gumuniezh evit gwellaat ar pennadoù. Er [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|gwelaozer]] e vo kavet.",
 	"editcheck-tone-title": "Adwelet an ton?",
 	"editcheck-tone-description": "Alies e vez adwelet ar seurt gerioù-se gant implijerien all, a lavar ez eo digempouez an ton. [{{int:editcheck-tone-descriptionlink}} Gouzout hiroc'h]",
 	"editcheck-tone-footer": "Anavezet en ur ober gant ur [{{int:editcheck-tone-footerlink}} patrom BERT]",

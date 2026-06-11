@@ -46,7 +46,7 @@
 	"editcheck-double-bold-description": "Tebal digunakan secara automatik pada subpengepala, istilah senarai pentakrifan dan pengepala jadual. Bantu pembaca dengan mengalih keluar [{{int:editcheck-double-bold-descriptionlink}} pemformatan tebal yang tidak perlu] daripada unsur tersebut.",
 	"editcheck-double-bold-action-remove": "Nyahtebal",
 	"editcheck-preference-suggestions-label": "Mod cadangan",
-	"editcheck-preference-suggestions-description": "Cadangan suntingan tetapan komuniti untuk menambah baik rencana. Tersedia pada [[:mw:Special:MyLanguage/VisualEditor|alat sunting visual]].",
+	"editcheck-preference-suggestions-description": "Cadangan suntingan tetapan komuniti untuk menambah baik rencana. Tersedia pada [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|alat sunting visual]].",
 	"editcheck-textmatch-replace": "Gantikan \"$1\" dengan \"$2\"?",
 	"editcheck-tone-title": "Semak Nada?",
 	"editcheck-tone-description": "Pengguna lain sering menyemak semula perkataan seperti ini, dengan mengatakan nadanya tidak seimbang. [{{int:editcheck-tone-descriptionlink}} Ketahui lebih lanjut]",

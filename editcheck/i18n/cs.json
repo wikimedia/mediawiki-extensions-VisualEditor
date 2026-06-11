@@ -49,7 +49,7 @@
 	"editcheck-double-bold-description": "Tučné písmo se automaticky používá u podnadpisů, definic a záhlaví tabulek. Pomozte čtenářům odstraněním [{{int:editcheck-double-bold-descriptionlink}} zbytečného tučného textu] z těchto prvků.",
 	"editcheck-double-bold-action-remove": "Odebrat tučné písmo",
 	"editcheck-preference-suggestions-label": "Režim návrhů",
-	"editcheck-preference-suggestions-description": "Návrhy editací pro vylepšení článků nastavené komunitou. Dostupné ve [[:mw:Special:MyLanguage/VisualEditor|vizuálním editoru]].",
+	"editcheck-preference-suggestions-description": "Návrhy editací pro vylepšení článků nastavené komunitou. Dostupné ve [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|vizuálním editoru]].",
 	"editcheck-textmatch-replace": "Nahradit „$1“ za „$2“?",
 	"editcheck-tone-title": "Upravit tón?",
 	"editcheck-tone-description": "Ostatní uživatelé často podobné formulace upravují s tím, že vyznění není vyvážené. [{{int:editcheck-tone-descriptionlink}} Více informací]",

@@ -16,7 +16,7 @@
 	"editcheck-copyvio-action-keep": "ХӀаъ, Ӏалашйе",
 	"editcheck-copyvio-action-remove": "ХӀан-хӀа, дӀадаккха",
 	"editcheck-preference-suggestions-label": "Хьехарийн раж",
-	"editcheck-preference-suggestions-description": "Йаззамаш тобан йукъараллин агӀор кечдина нисдаран хьехарш. Хьан йиш йу уьш [[:mw:Special:MyLanguage/VisualEditor|бӀаьран редактор]] чохь лело.",
+	"editcheck-preference-suggestions-description": "Йаззамаш тобан йукъараллин агӀор кечдина нисдаран хьехарш. Хьан йиш йу уьш [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|бӀаьран редактор]] чохь лело.",
 	"editcheck-tone-title": "Тон карлайаккхар?",
 	"editcheck-tone-title-acted": "Тон хийцар",
 	"editcheck-tone-reject-other": "Кхийерг"

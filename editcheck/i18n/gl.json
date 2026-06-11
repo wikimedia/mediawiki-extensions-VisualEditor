@@ -44,7 +44,7 @@
 	"editcheck-double-bold-description": "A grosa aplícase automaticamente ás subcabeceiras, aos termos de listas de definicións e ás cabeceiras das táboas. Axuda aos lectores eliminando o [{{int:editcheck-double-bold-descriptionlink}} formato de grosa innecesario] destes elementos.",
 	"editcheck-double-bold-action-remove": "Eliminar a grosa",
 	"editcheck-preference-suggestions-label": "Modo de suxestión",
-	"editcheck-preference-suggestions-description": "Suxestións de edición configuradas pola comunidade para mellorar os artigos. Dispoñibles no [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
+	"editcheck-preference-suggestions-description": "Suxestións de edición configuradas pola comunidade para mellorar os artigos. Dispoñibles no [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|editor visual]].",
 	"editcheck-textmatch-replace": "Queres substituír «$1» por «$2»?",
 	"editcheck-tone-title": "Revisar o ton?",
 	"editcheck-tone-description": "Outros usuarios adoitan revisar este tipo de redacción, porque consideran que o ton non é axeitado. [{{int:editcheck-tone-descriptionlink}} Máis información]",

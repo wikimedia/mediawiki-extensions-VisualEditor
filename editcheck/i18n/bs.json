@@ -43,7 +43,7 @@
 	"editcheck-double-bold-description": "Podebljanje se automatski dodaje podnaslovima, pojmovima s definicijskog spiska i zaglavljima tabela. Pomozite čitaocima tako što ćete ukloniti [{{int:editcheck-double-bold-descriptionlink}} nepotrebno podebljanje] s ovih elemenata.",
 	"editcheck-double-bold-action-remove": "Ukloni podebljanje",
 	"editcheck-preference-suggestions-label": "Režim prijedloga",
-	"editcheck-preference-suggestions-description": "Prijedlozi za poboljšanje članaka koje je konfigurirala zajednica. Dostupno u [[:mw:Special:MyLanguage/VisualEditor|vizualnom uređivaču]].",
+	"editcheck-preference-suggestions-description": "Prijedlozi za poboljšanje članaka koje je konfigurirala zajednica. Dostupno u [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|vizualnom uređivaču]].",
 	"editcheck-textmatch-replace": "Zamijeni \"$1\" sa \"$2\"?",
 	"editcheck-tone-title": "Prepravi ton?",
 	"editcheck-tone-description": "Drugi korisnici često mijenjaju ovakvu vrstu formulacije zbog neuravnoteženog tona. [{{int:editcheck-tone-descriptionlink}} Detaljnije]",

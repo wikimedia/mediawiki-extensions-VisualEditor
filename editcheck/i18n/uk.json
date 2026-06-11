@@ -46,7 +46,7 @@
 	"editcheck-double-bold-description": "Жирний шрифт застосовується автоматично до підзаголовків, термінів списку визначень та заголовків таблиць. Допоможіть читачам, вилучивши [{{int:editcheck-double-bold-descriptionlink}} зайве форматування жирним шрифтом] з цих елементів.",
 	"editcheck-double-bold-action-remove": "Вилучити жирний шрифт",
 	"editcheck-preference-suggestions-label": "Режим пропозицій",
-	"editcheck-preference-suggestions-description": "Пропозиції редагувань, налаштованих спільнотою, для покращення статей. Доступні у [[:mw:Special:MyLanguage/VisualEditor|візуальному редакторі]].",
+	"editcheck-preference-suggestions-description": "Пропозиції редагувань, налаштованих спільнотою, для покращення статей. Доступні у [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|візуальному редакторі]].",
 	"editcheck-textmatch-replace": "Замінити «$1» на «$2»?",
 	"editcheck-tone-title": "Переглянути тон?",
 	"editcheck-tone-description": "Інші користувачі часто переписують подібні формулювання, кажучи, що тон незбалансований. [{{int:editcheck-tone-descriptionlink}} Дізнатися більше]",

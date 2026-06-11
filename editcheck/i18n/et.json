@@ -42,7 +42,7 @@
 	"editcheck-double-bold-description": "Alapealkirjad, definitsiooniloendi terminid ja tabeli päised on vaikimisi paksus vormingus. Aita lugejaid, eemaldades [{{int:editcheck-double-bold-descriptionlink}} tarbetu paks vorming] neilt elementidelt.",
 	"editcheck-double-bold-action-remove": "Eemalda paks vorming",
 	"editcheck-preference-suggestions-label": "Soovituste režiim",
-	"editcheck-preference-suggestions-description": "Kohalikus vikis häälestatavad soovitused artiklite parandamise kohta. Saadaval [[:mw:Special:MyLanguage/VisualEditor|visuaaltoimetis]].",
+	"editcheck-preference-suggestions-description": "Kohalikus vikis häälestatavad soovitused artiklite parandamise kohta. Saadaval [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuaaltoimetis]].",
 	"editcheck-tone-title": "Kas kohendada tooni?",
 	"editcheck-tone-description": "Teised kasutajad kohendavad sageli sellist sõnastust, öeldes et toon ei ole tasakaalukas. [{{int:editcheck-tone-descriptionlink}} Loe veel]",
 	"editcheck-tone-footer": "Tuvastatud kasutades mudelit [{{int:editcheck-tone-footerlink}} BERT]",

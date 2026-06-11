@@ -48,7 +48,7 @@
 	"editcheck-double-bold-description": "Pogrubienie jest stosowane automatycznie do podtytułów, terminów w listach definicji i nagłówków tabel. Ułatw czytanie poprzez usuwanie [{{int:editcheck-double-bold-descriptionlink}} niepotrzebnego pogrubienia] z tych elementów.",
 	"editcheck-double-bold-action-remove": "Usuń pogrubienie",
 	"editcheck-preference-suggestions-label": "Tryb sugestii",
-	"editcheck-preference-suggestions-description": "Konfigurowane przez społeczność podpowiedzi podczas edytowania, służące ulepszaniu artykułów. Dostępne w [[:mw:Special:MyLanguage/VisualEditor|edytorze wizualnym]].",
+	"editcheck-preference-suggestions-description": "Konfigurowane przez społeczność podpowiedzi podczas edytowania, służące ulepszaniu artykułów. Dostępne w [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|edytorze wizualnym]].",
 	"editcheck-textmatch-replace": "Zamienić \"$1\" na \"$2\"?",
 	"editcheck-tone-title": "Brzmienie do poprawy?",
 	"editcheck-tone-description": "Inni użytkownicy często poprawiają sformułowania tego rodzaju, twierdząc, że wydźwięk nie jest neutralny. [{{int:editcheck-tone-descriptionlink}} Dowiedz się więcej]",

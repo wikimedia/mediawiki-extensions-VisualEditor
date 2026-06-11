@@ -48,7 +48,7 @@
 	"editcheck-double-bold-description": "Alt başlıklara, tanım listesi terimlerine ve tablo başlıklarına kalın yazı tipi otomatik olarak uygulanır. Okuyuculara yardımcı olmak için bu ögelerden [{{int:editcheck-double-bold-descriptionlink}} gereksiz kalın biçimlendirmeyi] kaldırın.",
 	"editcheck-double-bold-action-remove": "Kalınlaştırmayı kaldır",
 	"editcheck-preference-suggestions-label": "Öneri kipi",
-	"editcheck-preference-suggestions-description": "Maddeleri iyileştirmek için topluluk tarafından yapılandırılmış düzenleme önerileri. [[:mw:Special:MyLanguage/VisualEditor|Görsel düzenleyici]]de mevcuttur.",
+	"editcheck-preference-suggestions-description": "Maddeleri iyileştirmek için topluluk tarafından yapılandırılmış düzenleme önerileri. [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|Görsel düzenleyici]]de mevcuttur.",
 	"editcheck-textmatch-replace": "\"$1\" metnini \"$2\" ile değiştir?",
 	"editcheck-tone-title": "Tonu Gözden Geçir?",
 	"editcheck-tone-description": "Diğer kullanıcılar bu tür ifadeleri sık sık gözden geçirip tonun dengesiz olduğunu söylüyorlar. [{{int:editcheck-tone-descriptionlink}} Daha fazlasını öğrenin]",

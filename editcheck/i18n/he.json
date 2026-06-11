@@ -47,7 +47,7 @@
 	"editcheck-double-bold-description": "הדגשה מוחלת אוטומטית על כותרות־משנה, המונחים ברשימת הגדרות ובכותרות טבלה. באפשרותך לעזור לקוראים על־ידי הסרת [{{int:editcheck-double-bold-descriptionlink}} עיצוב מודגש מיותר] מהרכיבים האלה.",
 	"editcheck-double-bold-action-remove": "הסרת גופן מודגש",
 	"editcheck-preference-suggestions-label": "מצב הצעות",
-	"editcheck-preference-suggestions-description": "הצעות עריכה מוגדרות על־ידי הקהילה לשיפור הערכים. זמין ב[[:mw:Special:MyLanguage/VisualEditor|עורך החזותי]].",
+	"editcheck-preference-suggestions-description": "הצעות עריכה מוגדרות על־ידי הקהילה לשיפור הערכים. זמין ב[[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|עורך החזותי]].",
 	"editcheck-textmatch-replace": "להחליף את \"$1\" ב\"$2\"?",
 	"editcheck-tone-title": "לתקן את הנימה?",
 	"editcheck-tone-description": "משתמשים אחרים נוטים לתקן ניסוח מסוג כזה, ואומרים שהנימה אינה מאוזנת. [{{int:editcheck-tone-descriptionlink}} למידע נוסף]",

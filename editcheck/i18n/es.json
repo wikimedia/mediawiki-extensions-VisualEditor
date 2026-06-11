@@ -53,7 +53,7 @@
 	"editcheck-double-bold-description": "Las negritas se aplican automáticamente a los subtítulos, los términos de las listas de definiciones y los encabezados de las tablas. Ayuda a los lectores eliminando las negritas innecesarias de estos elementos.",
 	"editcheck-double-bold-action-remove": "Eliminar negritas",
 	"editcheck-preference-suggestions-label": "Modo sugerencia",
-	"editcheck-preference-suggestions-description": "Sugerencias de edición configuradas por la comunidad para mejorar los artículos. Disponible en [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
+	"editcheck-preference-suggestions-description": "Sugerencias de edición configuradas por la comunidad para mejorar los artículos. Disponible en [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|editor visual]].",
 	"editcheck-textmatch-replace": "¿Reemplazar \"$1\" por \"$2\"?",
 	"editcheck-tone-title": "¿Revisar el tono?",
 	"editcheck-tone-description": "Otras personas usuarias suelen revisar este tipo de redacción, alegando que el tono es desequilibrado. [{{int:editcheck-tone-descriptionlink}} Más información]",

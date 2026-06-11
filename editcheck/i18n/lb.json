@@ -47,7 +47,7 @@
 	"editcheck-double-bold-description": "Ënneriwwerschrëften, Begrëffer op Definitiounslëschten an Tabelleniwwerschrëfte ginn automatesch fett geschriwwen. Hëlleft de Lieser, andeems Dir bei dësen Elementer déi [{{int:editcheck-double-bold-descriptionlink}} onnéideg Fettformatéierung ewechhuelt].",
 	"editcheck-double-bold-action-remove": "Fettdrock ewechhuelen",
 	"editcheck-preference-suggestions-label": "Virschlagsmodus",
-	"editcheck-preference-suggestions-description": "Vun der Communautéit konfiguréiert Ännerungsvirschléi fir Artikelen ze verbesseren. Disponibel am [[:mw:Special:MyLanguage/VisualEditor|visuellen Editor]].",
+	"editcheck-preference-suggestions-description": "Vun der Communautéit konfiguréiert Ännerungsvirschléi fir Artikelen ze verbesseren. Disponibel am [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuellen Editor]].",
 	"editcheck-textmatch-replace": "„$1“ duerch „$2“ ersetzen?",
 	"editcheck-tone-title": "Tounfall iwwerschaffen?",
 	"editcheck-tone-description": "Aner Benotzer iwwerschaffen dës Zort vun Ausdrocksweis dacks, well se fannen, datt den Tounfall net equilibréiert ass. [{{int:editcheck-tone-descriptionlink}} Méi gewuer ginn]",

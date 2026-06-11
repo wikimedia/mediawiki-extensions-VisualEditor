@@ -48,7 +48,7 @@
 	"editcheck-double-bold-description": "يُطبَّق التنسيق الغليظ تلقائيًا على العناوين الفرعية ومصطلحات قوائم التعريف وعناوين الجداول. ساعدوا القراء بإزالة التنسيق الغليظ غير الضروري من هذه العناصر.",
 	"editcheck-double-bold-action-remove": "إزالة التنسيق الغليظ",
 	"editcheck-preference-suggestions-label": "وضع الاقتراحات",
-	"editcheck-preference-suggestions-description": "اقتراحات تحرير مخصصة من المجتمع لتحسين المقالات. متوفرة في [[:mw:Special:MyLanguage/VisualEditor|المحرر المرئي]].",
+	"editcheck-preference-suggestions-description": "اقتراحات تحرير مخصصة من المجتمع لتحسين المقالات. متوفرة في [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|المحرر المرئي]].",
 	"editcheck-textmatch-replace": "استبدال \"$1\" بـ \"$2\"؟",
 	"editcheck-tone-title": "إعادة النظر في الأسلوب؟",
 	"editcheck-tone-description": "غالبًا ما يقوم المستخدمون الآخرون بمراجعة هذا النوع من العبارات، استنادًا على أنّ الأسلوب غير متّزن. [{{int:editcheck-tone-descriptionlink}} التعرف على المزيد]",

@@ -45,7 +45,7 @@
 	"editcheck-double-bold-description": "Fet stil tillämpas automatiskt på underrubriker, definitionslistor och tabellrubriker. Hjälp läsarna genom att ta bort [{{int:editcheck-double-bold-descriptionlink}} onödig fetstil] från dessa element.",
 	"editcheck-double-bold-action-remove": "Ta bort fetstil",
 	"editcheck-preference-suggestions-label": "Förslagsläge",
-	"editcheck-preference-suggestions-description": "Redigeringsförslag konfigurerade av gemenskapen för att förbättra artiklar. Tillgängliga i [[:mw:Special:MyLanguage/VisualEditor|visuell redigerare]].",
+	"editcheck-preference-suggestions-description": "Redigeringsförslag konfigurerade av gemenskapen för att förbättra artiklar. Tillgängliga i [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuell redigerare]].",
 	"editcheck-textmatch-replace": "Ersätt \"$1\" med \"$2\"?",
 	"editcheck-tone-title": "Revidera tonen?",
 	"editcheck-tone-description": "Andra användare reviderar ofta den här typen av formuleringar och säger att tonen är obalanserad. [{{int:editcheck-tone-descriptionlink}} Läs mer]",

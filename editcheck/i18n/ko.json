@@ -48,7 +48,7 @@
 	"editcheck-double-bold-description": "굵은 글씨는 부제목, 정의 목록 용어 및 표 머리글에 자동으로 적용됩니다. 독자의 이해를 돕기 위해 이러한 요소에서 [{{int:editcheck-double-bold-descriptionlink}} 불필요한 굵은 글씨체]를 제거하세요.",
 	"editcheck-double-bold-action-remove": "굵은 글씨체 제거",
 	"editcheck-preference-suggestions-label": "제안 모드",
-	"editcheck-preference-suggestions-description": "공동체에서 구성한 문서 개선을 위한 편집 제안입니다. [[:mw:Special:MyLanguage/VisualEditor|시각편집기]]에서 사용할 수 있습니다.",
+	"editcheck-preference-suggestions-description": "공동체에서 구성한 문서 개선을 위한 편집 제안입니다. [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|시각편집기]]에서 사용할 수 있습니다.",
 	"editcheck-textmatch-replace": "\"$1\" 텍스트를 \"$2\" 텍스트로 바꾸시겠습니까?",
 	"editcheck-tone-title": "어조를 수정하시겠습니까?",
 	"editcheck-tone-description": "다른 사용자들은 대체로 어조의 불균형을 이유로 이러한 표현을 수정합니다. [{{int:editcheck-tone-descriptionlink}} 더 알아보기]",

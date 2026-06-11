@@ -35,7 +35,7 @@
 	"editcheck-copyvio-keep-notify": "Hvala što ste podijelili razloge zadržavanja kopiranog i zalijepljenog teksta!",
 	"editcheck-copyvio-remove-notify": "Hvala vam što ste pomogli da znanje ostane slobodno dostupno!",
 	"editcheck-preference-suggestions-label": "Prijedlozi uređivanja",
-	"editcheck-preference-suggestions-description": "Prijedlozi za poboljšanje članaka koje je konfigurirala zajednica. Dostupni su u [[:mw:Special:MyLanguage/VisualEditor|vizualnom uređivaču]].",
+	"editcheck-preference-suggestions-description": "Prijedlozi za poboljšanje članaka koje je konfigurirala zajednica. Dostupni su u [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|vizualnom uređivaču]].",
 	"editcheck-tone-title": "Preispitivanje tona",
 	"editcheck-tone-description": "Drugi suradnici često mijenjaju ovakav izričaj, smatrajući ga neuravnoteženim, pristranim ili neenciklopedijskim. [{{int:editcheck-tone-descriptionlink}} Saznajte više]",
 	"editcheck-tone-footer": "Pronađeno pomoću [{{int:editcheck-tone-footerlink}} modela umjetne inteligencije BERT]",

@@ -47,7 +47,7 @@
 	"editcheck-double-bold-title": "Remover formatação em negrito desnecessária",
 	"editcheck-double-bold-action-remove": "Remover negrito",
 	"editcheck-preference-suggestions-label": "Modo sugestão",
-	"editcheck-preference-suggestions-description": "Sugestões de edição configuradas pela comunidade para melhorar os artigos. Disponível no [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
+	"editcheck-preference-suggestions-description": "Sugestões de edição configuradas pela comunidade para melhorar os artigos. Disponível no [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|editor visual]].",
 	"editcheck-textmatch-replace": "Substituir \"$1\" por \"$2\"?",
 	"editcheck-tone-title": "Revisar tom?",
 	"editcheck-tone-description": "Outros usuários frequentemente corrigem esse tipo de redação, dizendo que o tom é desequilibrado. [{{int:editcheck-tone-descriptionlink}} Saiba mais]",

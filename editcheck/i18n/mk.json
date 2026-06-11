@@ -44,7 +44,7 @@
 	"editcheck-double-bold-description": "Задебелувањето автоматски се применува на поднаслови, поими во списоци на дефиниции и заглавија на табели. Помогнете им да читателите со тоа што ќе отстраните [{{int:editcheck-double-bold-descriptionlink}} непотребно задебелено форматирање] од овие елементи.",
 	"editcheck-double-bold-action-remove": "Отстрани задебеленост",
 	"editcheck-preference-suggestions-label": "Режим на предлози",
-	"editcheck-preference-suggestions-description": "Предлози за уредување поставени од заедницата со цел подобрување на статиите. Достапно во [[:mw:Special:MyLanguage/VisualEditor|нагледниот уредник]].",
+	"editcheck-preference-suggestions-description": "Предлози за уредување поставени од заедницата со цел подобрување на статиите. Достапно во [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|нагледниот уредник]].",
 	"editcheck-textmatch-replace": "Да го заменам „$1“ со „$2“?",
 	"editcheck-tone-title": "Да се преработи тонот?",
 	"editcheck-tone-description": "Други корисници често преработуваат вакви срочувања велејќи дека тонот не е урамнотежен. [{{int:editcheck-tone-descriptionlink}} Дознајте повеќе]",

@@ -45,7 +45,7 @@
 	"editcheck-double-bold-description": "Η έντονη γραφή εφαρμόζεται αυτόματα σε υποεπικεφαλίδες, όρους λίστας ορισμών και κεφαλίδες πίνακα. Βοηθήστε τους αναγνώστες αφαιρώντας την [{{int:editcheck-double-bold-descriptionlink}} περιττή μορφοποίηση έντονης γραφής] από αυτά τα στοιχεία.",
 	"editcheck-double-bold-action-remove": "Αφαίρεση έντονης γραφής",
 	"editcheck-preference-suggestions-label": "Λειτουργία προτάσεων",
-	"editcheck-preference-suggestions-description": "Προτάσεις επεξεργασίας που έχουν διαμορφωθεί από την κοινότητα για τη βελτίωση λημμάτων. Διαθέσιμες στον [[:mw:Special:MyLanguage/VisualEditor|οπτικό επεξεργαστή]].",
+	"editcheck-preference-suggestions-description": "Προτάσεις επεξεργασίας που έχουν διαμορφωθεί από την κοινότητα για τη βελτίωση λημμάτων. Διαθέσιμες στον [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|οπτικό επεξεργαστή]].",
 	"editcheck-textmatch-replace": "Αντικατάσταση \"$1\" με \"$2\";",
 	"editcheck-tone-title": "Αναθεώρηση Τόνου;",
 	"editcheck-tone-description": "Άλλοι χρήστες συχνά αναθεωρούν αυτό το είδος διατύπωσης, λέγοντας ότι ο τόνος είναι ανισορροπημένος. [{{int:editcheck-tone-descriptionlink}} Μάθετε περισσότερα]",

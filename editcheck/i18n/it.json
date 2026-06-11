@@ -46,7 +46,7 @@
 	"editcheck-double-bold-description": "Il grassetto viene applicato automaticamente ai sottotitoli, ai termini degli elenchi di definizioni e alle intestazioni di tabella. Aiuta i lettori rimuovendo la [{{int:editcheck-double-bold-descriptionlink}} formattazione in grassetto non necessaria] da questi elementi.",
 	"editcheck-double-bold-action-remove": "Rimuovi il grassetto",
 	"editcheck-preference-suggestions-label": "Modalità suggerimento",
-	"editcheck-preference-suggestions-description": "Suggerimenti di modifica configurati dalla comunità per migliorare le voci. Disponibili nell'[[:mw:Special:MyLanguage/VisualEditor|editor visuale]].",
+	"editcheck-preference-suggestions-description": "Suggerimenti di modifica configurati dalla comunità per migliorare le voci. Disponibili nell'[[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|editor visuale]].",
 	"editcheck-textmatch-replace": "Sostituire \"$1\" con \"$2\"?",
 	"editcheck-tone-title": "Rivedere il tono?",
 	"editcheck-tone-description": "Altri utenti spesso modificano questo tipo di formulazione, dicendo che il tono è sbilanciato. [{{int:editcheck-tone-descriptionlink}} Ulteriori informazioni]",

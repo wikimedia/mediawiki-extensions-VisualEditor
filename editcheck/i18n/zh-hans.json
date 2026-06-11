@@ -55,7 +55,7 @@
 	"editcheck-double-bold-description": "粗体会自动应用于子标题、定义列表中的术语和表格标题。请移除这些元素中[{{int:editcheck-double-bold-descriptionlink}} 不必要的粗体格式]，以帮助读者阅读。",
 	"editcheck-double-bold-action-remove": "移除粗体格式",
 	"editcheck-preference-suggestions-label": "建议模式",
-	"editcheck-preference-suggestions-description": "社群为改善条目而配置的编辑建议。在[[:mw:Special:MyLanguage/VisualEditor|可视化编辑器]]中可用。",
+	"editcheck-preference-suggestions-description": "社群为改善条目而配置的编辑建议。在[[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|可视化编辑器]]中可用。",
 	"editcheck-textmatch-replace": "将“$1”替换为“$2”？",
 	"editcheck-tone-title": "修改语气？",
 	"editcheck-tone-description": "其他用户经常会修改这种措辞，认为其语气不平衡。[{{int:editcheck-tone-descriptionlink}} 了解更多]",

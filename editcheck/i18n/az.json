@@ -45,7 +45,7 @@
 	"editcheck-double-bold-description": "Qalın şrift avtomatik olaraq alt başlıqlara, tərif siyahısı terminlərinə və cədvəl başlıqlarına tətbiq olunur. Bu elementlərdən [{{int:editcheck-double-bold-descriptionlink}} lazımsız qalın formatlaşdırmanı] silməklə oxuculara kömək edin.",
 	"editcheck-double-bold-action-remove": "Qalın şrifti sil",
 	"editcheck-preference-suggestions-label": "Tövsiyyələr rejimi",
-	"editcheck-preference-suggestions-description": "Məqalələri təkmilləşdirmək üçün icma tərəfindən konfiqurasiya edilmiş redaktə təklifləri. [[:mw:Special:MyLanguage/VisualEditor|Vizual redaktor]] bölməsində mövcuddur.",
+	"editcheck-preference-suggestions-description": "Məqalələri təkmilləşdirmək üçün icma tərəfindən konfiqurasiya edilmiş redaktə təklifləri. [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|Vizual redaktor]] bölməsində mövcuddur.",
 	"editcheck-textmatch-replace": "\"$1\"  \"$2\" ilə əvəz edilsin?",
 	"editcheck-tone-title": "Tona yenidən baxılsın?",
 	"editcheck-tone-description": "Digər istifadəçilər tez-tez tonun balanssız olduğunu söyləyərək bu cür ifadələri başdan yazırlar. [{{int:editcheck-tone-descriptionlink}} Ətraflı məlumat]",

@@ -44,7 +44,7 @@
 	"editcheck-double-bold-description": "زغرد په خپلکاري ډول په څنگ‌ليکونو، پېژندون لړليک گړنو او لښتيال سرليکونو باندې پلی کېږي. د دې عناصرو څخه د  [{{int:editcheck-double-bold-descriptionlink}} ناړينه زغرد بڼې] په لرې کولو له لوستونکو سره مرسته وکړئ.",
 	"editcheck-double-bold-action-remove": "زغرد لرې‌کول",
 	"editcheck-preference-suggestions-label": "وړانديز دريځ",
-	"editcheck-preference-suggestions-description": "د ليکنو ښه‌والي لپاره د ټولنې ترتيب‌شوي سمون وړانديزونه.\nپه [[:mw:Special:MyLanguage/VisualEditor|ليدنيز سمونگر]] کې  شتون لري.",
+	"editcheck-preference-suggestions-description": "د ليکنو ښه‌والي لپاره د ټولنې ترتيب‌شوي سمون وړانديزونه.\nپه [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|ليدنيز سمونگر]] کې  شتون لري.",
 	"editcheck-textmatch-replace": "\"$1\" په \"$2\" سره ځايناستی ‌کړي؟",
 	"editcheck-tone-title": "د تگلارې بياکتنه وکړي؟",
 	"editcheck-tone-description": "نور کارنان ډېری وخت د دا ډول ويوکو بياکتنه کوي، او وايي چې وينگ يې نامتوازن دی. [{{int:editcheck-tone-descriptionlink}} نور ولولئ]",

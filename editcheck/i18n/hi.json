@@ -42,7 +42,7 @@
 	"editcheck-double-bold-description": "सबहेडिंग्स, परिभाषा सूची के शब्दों और टेबल शीर्षकों पर बोल्ड स्वतः लागू हो जाता है। पाठकों की सहायता करने के लिए इन तत्वों से [{{int:editcheck-double-bold-descriptionlink}} अनावश्यक बोल्ड प्रारूपण] हटा दें।",
 	"editcheck-double-bold-action-remove": "बोल्ड हटाएँ",
 	"editcheck-preference-suggestions-label": "सुझाव मोड",
-	"editcheck-preference-suggestions-description": "लेखों को बेहतर बनाने के लिए समुदाय द्वारा कॉन्फ़िगर किए गए सम्पादन सुझाव। [[:mw:Special:MyLanguage/VisualEditor|यथादृश्य सम्पादिका]] में उपलब्ध।",
+	"editcheck-preference-suggestions-description": "लेखों को बेहतर बनाने के लिए समुदाय द्वारा कॉन्फ़िगर किए गए सम्पादन सुझाव। [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|यथादृश्य सम्पादिका]] में उपलब्ध।",
 	"editcheck-textmatch-replace": "\"$1\" को \"$2\" से बदलें?",
 	"editcheck-tone-title": "लहजा संशोधित करें?",
 	"editcheck-tone-description": "दूसरे सदस्य अक्सर इस प्रकार के शब्दों के प्रयोग को संशोधित करते हैं, यह कहते हुए कि लहजा असंतुलित है। [{{int:editcheck-tone-descriptionlink}} अधिक जानें]",

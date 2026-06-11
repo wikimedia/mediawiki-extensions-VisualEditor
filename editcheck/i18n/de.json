@@ -46,7 +46,7 @@
 	"editcheck-double-bold-description": "Unterüberschriften, Begriffe in Definitionslisten und Tabellenüberschriften werden automatisch fett formatiert. Erleichtere deine Lesern die Lesbarkeit, indem du unnötige Fettdruckformatierungen aus diesen Elementen entfernst.",
 	"editcheck-double-bold-action-remove": "Fettdruck entfernen",
 	"editcheck-preference-suggestions-label": "Vorschlags-Modus",
-	"editcheck-preference-suggestions-description": "Von der Community konfigurierte Bearbeitungsvorschläge zur Verbesserung von Artikeln. Verfügbar im [[:mw:Special:MyLanguage/VisualEditor|visuellen Editor]].",
+	"editcheck-preference-suggestions-description": "Von der Community konfigurierte Bearbeitungsvorschläge zur Verbesserung von Artikeln. Verfügbar im [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuellen Editor]].",
 	"editcheck-textmatch-replace": "Ersetzen von „$1“ durch „$2“?",
 	"editcheck-tone-title": "Tonfall überarbeiten?",
 	"editcheck-tone-description": "Andere Benutzer überarbeiteten diese Art der Formulierung häufig, weil sie den Tonfall als unausgewogen ansehen. [{{int:editcheck-tone-descriptionlink}} Mehr erfahren]",

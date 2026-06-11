@@ -35,7 +35,7 @@
 	"editcheck-copyvio-keep-notify": "Terima kasih telah membagikan alasan Anda menyimpan teks yang ditempel!",
 	"editcheck-copyvio-remove-notify": "Terima kasih telah membantu menjaga agar pengetahuan ini tersedia dengan bebas!",
 	"editcheck-preference-suggestions-label": "Mode saran",
-	"editcheck-preference-suggestions-description": "Saran penyuntingan yang dikonfigurasikan oleh komunitas untuk meningkatkan artikel. Tersedia di [[:mw:Special:MyLanguage/VisualEditor|penyuntingan visual]].",
+	"editcheck-preference-suggestions-description": "Saran penyuntingan yang dikonfigurasikan oleh komunitas untuk meningkatkan artikel. Tersedia di [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|penyuntingan visual]].",
 	"editcheck-tone-title": "Revisi gaya penulisan?",
 	"editcheck-tone-description": "Pengguna lain sering merevisi bentuk kalimat seperti ini, dengan menyatakan bahwa gaya penulisan yang tidak seimbang. [{{int:editcheck-tone-descriptionlink}} Pelajari lebih lanjut]",
 	"editcheck-tone-footer": "Identifikasikan menggunakan [{{int:editcheck-tone-footerlink}} Model BERT]",

@@ -59,7 +59,7 @@
 	"editcheck-double-bold-description": "Le gras est automatiquement appliqué aux sous-titres, aux termes des listes de définitions et aux en-têtes de tableau. Pour faciliter la lecture, supprimez les mises en gras inutiles de ces éléments.",
 	"editcheck-double-bold-action-remove": "Supprimer la mise en gras faite en double",
 	"editcheck-preference-suggestions-label": "Mode de suggestions",
-	"editcheck-preference-suggestions-description": "Suggestions de modification des articles configurées par la communauté. Disponible dans l’[[:mw:Special:MyLanguage/VisualEditor|éditeur visuel]].",
+	"editcheck-preference-suggestions-description": "Suggestions de modification des articles configurées par la communauté. Disponible dans l’[[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|éditeur visuel]].",
 	"editcheck-textmatch-replace": "Remplacer « $1 » par « $2 » ?",
 	"editcheck-tone-title": "Réviser le ton ?",
 	"editcheck-tone-description": "D'autres utilisateurs et utilisatrices révisent souvent ce genre de formulation, disant que le ton est déséquilibré. [{{int:editcheck-tone-descriptionlink}} En savoir plus]",

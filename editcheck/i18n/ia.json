@@ -44,7 +44,7 @@
 	"editcheck-double-bold-description": "Le formatation in litteras grasse se applica automaticamente al subtitulos, terminos de listas de definitiones e titulos de tabellas. Pro adjutar le lectores, remove le [{{int:editcheck-double-bold-descriptionlink}} formatation superflue in litteras grasse] de iste elementos.",
 	"editcheck-double-bold-action-remove": "Remover grasse",
 	"editcheck-preference-suggestions-label": "Modo de suggestiones",
-	"editcheck-preference-suggestions-description": "Suggestiones de modification configurate per le communitate pro meliorar articulos. Disponibile in le [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
+	"editcheck-preference-suggestions-description": "Suggestiones de modification configurate per le communitate pro meliorar articulos. Disponibile in le [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|editor visual]].",
 	"editcheck-textmatch-replace": "Reimplaciar “$1” per “$2”?",
 	"editcheck-tone-title": "Revisar le tono?",
 	"editcheck-tone-description": "Altere usatores sovente corrige iste genere de formulation perque le tono non se considera como equilibrate. [{{int:editcheck-tone-descriptionlink}} Leger plus]",
