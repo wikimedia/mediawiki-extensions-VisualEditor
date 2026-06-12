@@ -163,10 +163,10 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 					return actions;
 				}, ( reason ) => {
 					mw.log.warn( `Failed to check ${ checkName }`, reason );
-					if ( !mw.editcheck.erroredChecks[ checkName ] ) {
+					if ( !mw.editcheck.state.errored[ checkName ] ) {
 						// Log this once per-session
 						ve.track( 'stats.mediawiki_editcheck_errors_total', 1, { kind: checkName } );
-						mw.editcheck.erroredChecks[ checkName ] = true;
+						mw.editcheck.state.errored[ checkName ] = true;
 					}
 					throw reason;
 				} )

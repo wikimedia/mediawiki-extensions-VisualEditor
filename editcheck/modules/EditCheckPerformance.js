@@ -19,7 +19,7 @@ mw.editcheck.EditCheckPerformance = function EditCheckPerformance( controller ) 
 		allChecks: []
 	};
 	this.pendingChecks = new WeakMap();
-	this.checksSeen = {};
+	this.checksRun = {};
 	// Randomly select 1% of sessions in which to instrument action generation
 	this.trackChecks = Math.random() < 0.01;
 	this.checkMetricsCount = 0;
@@ -72,12 +72,12 @@ mw.editcheck.EditCheckPerformance.prototype.onSurfaceReady = function () {
  */
 mw.editcheck.EditCheckPerformance.prototype.onBeforeActionsGenerated = function ( checkName, listener, includeSuggestions, run ) {
 	const key = listener + ':' + checkName + ':' + ( includeSuggestions ? '1' : '0' );
-	const firstRun = !this.checksSeen[ key ];
+	const firstRun = !this.checksRun[ key ];
 	if ( !this.pendingChecks.has( run ) ) {
 		this.pendingChecks.set( run, new Map() );
 	}
 	this.pendingChecks.get( run ).set( checkName, { start: ve.now(), firstRun, listener } );
-	this.checksSeen[ key ] = true;
+	this.checksRun[ key ] = true;
 };
 
 /**
