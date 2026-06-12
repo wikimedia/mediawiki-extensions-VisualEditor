@@ -468,8 +468,8 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 
 			newActions.forEach( ( action ) => {
-				action.once( 'shown', this.onActionShown.bind( this, action ) );
-				action.once( 'seen', this.onActionSeen.bind( this, action ) );
+				action.once( 'shown', this.onActionSeenOrShown.bind( this, action, 'shown' ) );
+				action.once( 'seen', this.onActionSeenOrShown.bind( this, action, 'seen' ) );
 				action.on( 'act', this.onActionAct, [ action ], this );
 			} );
 
@@ -1189,33 +1189,23 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 };
 
 /**
- * Handle instrumentation and tracking when an action is shown
+ * Handle instrumentation and tracking when an action is shown or marked as seen
  *
- * @param {mw.editcheck.EditCheckAction} action that was shown
+ * @param {mw.editcheck.EditCheckAction} action Action that was seen or shown
+ * @param {string} seenOrShown Whether the action was 'seen' or 'shown'
  */
-Controller.prototype.onActionShown = function ( action ) {
+Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
 	const moment = this.inBeforeSave ? 'presave' : 'midedit';
+	const name = action.getName();
+	const data = {};
 	if ( action.isSuggestion() ) {
-		ve.track( 'activity.editCheck-' + action.getName(), { action: 'suggestion-shown-' + moment } );
+		mw.editcheck[ seenOrShown === 'seen' ? 'suggestionsSeen' : 'suggestionsShown' ][ name ] = true;
+		data.action = `suggestion-${ seenOrShown }-${ moment }`;
 	} else {
-		mw.editcheck.checksShown[ action.getName() ] = true;
-		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-shown-' + moment } );
+		mw.editcheck[ seenOrShown === 'seen' ? 'checksSeen' : 'checksShown' ][ name ] = true;
+		data.action = `check-${ seenOrShown }-${ moment }`;
 	}
-};
-/**
- * Handle instrumentation and tracking when an action is marked as seen
- *
- * @param {mw.editcheck.EditCheckAction} action that was seen
- */
-Controller.prototype.onActionSeen = function ( action ) {
-	const moment = this.inBeforeSave ? 'presave' : 'midedit';
-	if ( action.isSuggestion() ) {
-		mw.editcheck.suggestionsSeen[ action.getName() ] = true;
-		ve.track( 'activity.editCheck-' + action.getName(), { action: 'suggestion-seen-' + moment } );
-	} else {
-		mw.editcheck.checksSeen[ action.getName() ] = true;
-		ve.track( 'activity.editCheck-' + action.getName(), { action: 'check-seen-' + moment } );
-	}
+	ve.track( `activity.editCheck-${ name }`, data );
 };
 
 /**
@@ -1226,9 +1216,11 @@ Controller.prototype.onActionSeen = function ( action ) {
  * @param {string} actionTaken name of the action taken
  */
 Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
-	ve.track( 'activity.editCheck-' + action.getName(), {
+	const name = action.getName();
+	const data = {
 		action: ( action.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionTaken || 'unknown' )
-	} );
+	};
+	ve.track( `activity.editCheck-${ name }`, data );
 	const dismissalActions = [ 'dismiss', 'reject', 'keep' ];
 	if ( dismissalActions.includes( actionTaken ) ) {
 		// These are actions that represent "don't change anything", and so
@@ -1236,9 +1228,9 @@ Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 		return;
 	}
 	if ( action.isSuggestion() ) {
-		mw.editcheck.suggestionsUsed[ action.getName() ] = true;
+		mw.editcheck.suggestionsUsed[ name ] = true;
 	} else {
-		mw.editcheck.checksUsed[ action.getName() ] = true;
+		mw.editcheck.checksUsed[ name ] = true;
 	}
 };
 
