@@ -15,6 +15,8 @@
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [config.footer] Footer to show after choices
  * @param {string} [config.footerIcon] Icon to show next to footer
  * @param {string} [config.id] Optional unique identifier
+ * @param {string} [config.name] Name to report this action as, if it should be
+ *  distinguished from other actions of the same check
  * @param {string} [config.icon] Optional icon name
  * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
  * @param {boolean} [config.suggestion] Whether this is a suggestion
@@ -35,6 +37,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.footer = config.footer;
 	this.footerIcon = config.footerIcon;
 	this.id = config.id;
+	this.name = config.name;
 	this.title = config.title;
 	this.icon = config.icon;
 	this.type = config.type || 'warning';
@@ -196,7 +199,7 @@ mw.editcheck.EditCheckAction.prototype.getType = function () {
  * @return {string} Check type name
  */
 mw.editcheck.EditCheckAction.prototype.getName = function () {
-	return this.check.getName();
+	return this.name || this.check.getName();
 };
 
 /**

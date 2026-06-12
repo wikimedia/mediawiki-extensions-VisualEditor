@@ -106,6 +106,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 				{ type: '/paragraph' }
 			],
 			expectedActions: 1,
+			expectedActionName: 'duplicateLink-adjacent',
 			expectedModes: [ 'adjacent' ],
 			expectedHighlights: 2
 		},
@@ -144,7 +145,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
 		if ( actions.length > 0 ) {
-			assert.strictEqual( actions[ 0 ].getName(), 'duplicateLink', caseItem.msg + ': Action name' );
+			assert.strictEqual( actions[ 0 ].getName(), caseItem.expectedActionName || 'duplicateLink', caseItem.msg + ': Action name' );
 			assert.strictEqual( actions[ 0 ].fragments.length, caseItem.expectedHighlights, caseItem.msg + ': Highlight' );
 			assert.deepEqual( actions.map( ( action ) => action.mode ), caseItem.expectedModes, caseItem.msg + ': Action mode' );
 		}

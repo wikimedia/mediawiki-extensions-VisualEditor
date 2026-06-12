@@ -183,6 +183,7 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
 					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
 					mode: 'adjacent',
+					name: 'duplicateLink-adjacent',
 					title: OO.ui.deferMsg( 'editcheck-adjacent-link-title' ),
 					message: ve.deferJQueryMsg( 'editcheck-adjacent-link-description' )
 				} ) );
