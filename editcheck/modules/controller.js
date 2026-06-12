@@ -1199,10 +1199,10 @@ Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
 	const name = action.getName();
 	const data = {};
 	if ( action.isSuggestion() ) {
-		mw.editcheck[ seenOrShown === 'seen' ? 'suggestionsSeen' : 'suggestionsShown' ][ name ] = true;
+		mw.editcheck.state.suggestions[ seenOrShown ][ name ] = true;
 		data.action = `suggestion-${ seenOrShown }-${ moment }`;
 	} else {
-		mw.editcheck[ seenOrShown === 'seen' ? 'checksSeen' : 'checksShown' ][ name ] = true;
+		mw.editcheck.state.checks[ seenOrShown ][ name ] = true;
 		data.action = `check-${ seenOrShown }-${ moment }`;
 	}
 	ve.track( `activity.editCheck-${ name }`, data );
@@ -1228,9 +1228,9 @@ Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 		return;
 	}
 	if ( action.isSuggestion() ) {
-		mw.editcheck.suggestionsUsed[ name ] = true;
+		mw.editcheck.state.suggestions.used[ name ] = true;
 	} else {
-		mw.editcheck.checksUsed[ name ] = true;
+		mw.editcheck.state.checks.used[ name ] = true;
 	}
 };
 

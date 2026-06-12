@@ -25,12 +25,19 @@ mw.editcheck = {
 	// runtime performance logging config that we can adjust from the console
 	sessionPerfConfig: { checksMax: 5000, typingMaxSamples: 5000 },
 	resetSessionState: function () {
-		this.checksShown = {};
-		this.checksSeen = {};
-		this.checksUsed = {};
-		this.suggestionsSeen = {};
-		this.suggestionsUsed = {};
-		this.erroredChecks = {};
+		this.state = {
+			checks: {
+				shown: {},
+				seen: {},
+				used: {}
+			},
+			suggestions: {
+				shown: {},
+				seen: {},
+				used: {}
+			},
+			errored: {}
+		};
 	}
 };
 mw.editcheck.resetSessionState();
@@ -181,19 +188,19 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 				if ( newNodesInDoc ) {
 					tags.push( 'editcheck-newreference' );
 				}
-				if ( mw.editcheck.checksShown.addReference ) {
+				if ( mw.editcheck.state.checks.shown.addReference ) {
 					tags.push( 'editcheck-references-shown' );
 				}
-				if ( mw.editcheck.checksShown.tone ) {
+				if ( mw.editcheck.state.checks.shown.tone ) {
 					tags.push( 'editcheck-tone-shown' );
 				}
-				if ( mw.editcheck.checksShown.paste ) {
+				if ( mw.editcheck.state.checks.shown.paste ) {
 					tags.push( 'editcheck-paste-shown' );
 				}
-				if ( Object.keys( mw.editcheck.suggestionsSeen ).length > 0 ) {
+				if ( Object.keys( mw.editcheck.state.suggestions.seen ).length > 0 ) {
 					tags.push( 'editsuggestion-seen' );
 				}
-				if ( Object.keys( mw.editcheck.suggestionsUsed ).length > 0 ) {
+				if ( Object.keys( mw.editcheck.state.suggestions.used ).length > 0 ) {
 					tags.push( 'editsuggestion-used' );
 				}
 				if ( hasFailingToneCheck ) {
