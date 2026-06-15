@@ -50,7 +50,7 @@
 	"editcheck-double-bold-description": "見出し、定義リストの用語、表のヘッダーには太字が自動的に適用されます。これらの要素から不要な太字装飾を除去して、読者にとってわかりやすい記事にしてください。",
 	"editcheck-double-bold-action-remove": "太字装飾を除去する",
 	"editcheck-preference-suggestions-label": "おすすめモード",
-	"editcheck-preference-suggestions-description": "記事を改善するための、コミュニティ設定済みの編集提案機能。[[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|ビジュアルエディター]]で利用できます。",
+	"editcheck-preference-suggestions-description": "記事の改善に役立つ編集おすすめ機能で、コミュニティごとに設定します。[[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|ビジュアルエディター]]で利用できます。",
 	"editcheck-textmatch-replace": "「$1」を「$2」に置き換えますか?",
 	"editcheck-tone-title": "語調を修正する",
 	"editcheck-tone-description": "このような表現は、中立的でないとして他の利用者に修正を依頼されることがよくあります。[{{int:editcheck-tone-descriptionlink}} 詳細はこちら]\n\n表現を修正しますか?",
