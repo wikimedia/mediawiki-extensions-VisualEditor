@@ -1,0 +1,61 @@
+@import 'mediawiki.skin.variables.less';
+
+// The element that would be `position: sticky`; the states below emulate it.
+// See mw.editcheck.EditCheckGutterSectionIconWidget.
+.ve-ui-editCheck-gutter-action-sticky {
+	position: relative;
+
+	> .oo-ui-iconElement-icon {
+		width: 20px;
+		height: 20px;
+		margin-top: -4px;
+	}
+
+	// Badge counting the actions in this section
+	label {
+		position: absolute;
+		top: 16px;
+		right: 5px;
+		display: block;
+		border-radius: 3px;
+		background-color: @accent-color-base;
+		color: @color-inverted;
+		font-size: @font-size-x-small;
+		line-height: 0.9;
+		padding: 3px;
+	}
+
+	// Quick-action button, shown in place of the icon when a check offers one
+	.oo-ui-buttonElement-button {
+		background: @background-color-progressive;
+		margin-top: -6px;
+	}
+
+	.oo-ui-widget-disabled .oo-ui-buttonElement-button {
+		background: @background-color-disabled;
+	}
+}
+
+// Pinned at the sticky line. `top`, `width` and `inset-inline-end` are set in JS,
+// since position: fixed drops both the width and the horizontal position.
+.ve-ui-editCheck-gutter-action-sticky-stuck {
+	position: fixed;
+	z-index: 1;
+}
+
+// Released to the section bottom, riding it out of the viewport.
+.ve-ui-editCheck-gutter-action-sticky-bottom {
+	position: absolute;
+	inset-block-end: 0;
+	inset-inline: 0;
+}
+
+// Hidden band at the section bottom, one icon tall (height set in JS). The
+// observer watches it to know when the bottom reaches a pinned icon.
+.ve-ui-editCheck-gutter-action-sticky-sentinel {
+	position: absolute;
+	inset-block-end: 0;
+	inset-inline: 0;
+	visibility: hidden;
+	pointer-events: none;
+}

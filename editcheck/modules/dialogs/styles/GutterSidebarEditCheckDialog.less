@@ -1,33 +1,18 @@
 @import 'mediawiki.skin.variables.less';
 
+@gutter-action-width: 42px;
+
 .ve-ui-gutterSidebarEditCheckDialog {
 	background-color: @background-color-interactive-subtle;
 
 	.ve-ui-editCheck-gutter-action {
 		position: absolute;
-		width: 42px;
+		width: @gutter-action-width;
 		text-align: center;
 		margin-top: -3px;
 		min-height: 24px;
 
-		> .oo-ui-iconElement-icon {
-			width: 20px;
-			height: 20px;
-			margin-top: -4px;
-		}
-
-		label {
-			position: absolute;
-			top: 16px;
-			right: 5px;
-			display: block;
-			border-radius: 3px;
-			background-color: @accent-color-base;
-			color: @color-inverted;
-			font-size: @font-size-x-small;
-			line-height: 0.9;
-			padding: 3px;
-		}
+		// The icon is in EditCheckGutterSectionIconWidget.less
 
 		&-error {
 			border-left: 2px solid @color-error;
@@ -43,15 +28,6 @@
 
 		&-quickaction {
 			border-left: 0;
-
-			.oo-ui-buttonElement-button {
-				background: @background-color-progressive;
-				margin-top: -6px;
-			}
-
-			.oo-ui-widget-disabled .oo-ui-buttonElement-button {
-				background: @background-color-disabled;
-			}
 		}
 	}
 }

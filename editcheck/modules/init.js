@@ -67,6 +67,7 @@ require( './EditCheckPreSaveToolbarTools.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './EditCheckActionWidget.js' );
+require( './EditCheckGutterSectionIconWidget.js' );
 require( './EditCheckGutterSectionWidget.js' );
 require( './dialogs/EditCheckScrollIntoViewWidget.js' );
 require( './dialogs/EditCheckDialog.js' );

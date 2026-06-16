@@ -12,25 +12,19 @@ mw.editcheck.EditCheckGutterSectionWidget = function MWEditCheckGutterSectionWid
 	this.actions = config.actions;
 	this.navigableActions = config.navigableActions;
 
-	this.icon = new OO.ui.IconWidget();
-	this.iconLabel = new OO.ui.LabelWidget( {
-		label: this.actions.length.toString(),
-		invisibleLabel: this.actions.length === 1
-	} );
-
-	this.actionButton = new OO.ui.ButtonWidget( {
-		icon: 'check',
-		flags: [ 'invert' ],
-		label: 'act',
-		invisibleLabel: true,
-		framed: false
-	} );
-	this.actionButton.toggle( false );
-
 	this.$element = $( '<div>' )
 		.addClass( 've-ui-editCheck-gutter-action' )
-		.append( this.icon.$element, this.iconLabel.$element, this.actionButton.$element )
 		.on( 'click', this.onClick.bind( this ) );
+
+	// The icon keeps itself in view while a tall section scrolls past
+	this.iconWidget = new mw.editcheck.EditCheckGutterSectionIconWidget( {
+		$section: this.$element
+	} );
+	this.$element.append( this.iconWidget.$element );
+
+	// Its metrics are viewport-derived, so refresh on resize. Rare, so debounced.
+	this.updateStickyDebounced = ve.debounce( this.updateSticky.bind( this ), 100 );
+	$( window ).on( 'resize', this.updateStickyDebounced );
 
 	if ( config.rect ) {
 		this.setPosition( config.rect );
@@ -84,20 +78,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 		.addClass( 've-ui-editCheck-gutter-action-' + action.getType() )
 		.toggleClass( 've-ui-editCheck-gutter-action-inactive', !this.isFocused() )
 		.toggleClass( 've-ui-editCheck-gutter-action-stale', action.isStale() )
-		.toggleClass( 've-ui-editCheck-gutter-action-suggestion', action.isSuggestion() );
+		.toggleClass( 've-ui-editCheck-gutter-action-suggestion', action.isSuggestion() )
+		.toggleClass( 've-ui-editCheck-gutter-action-quickaction', !!action.gutterQuickAction );
 
-	if ( action.gutterQuickAction ) {
-		this.$element.addClass( 've-ui-editCheck-gutter-action-quickaction' );
-		this.icon.toggle( false );
-		this.iconLabel.toggle( false );
-		this.actionButton.toggle( true );
-	} else {
-		this.icon.setIcon( mw.editcheck.EditCheckActionWidget.static.iconMap[ action.getType() ] || 'notice' );
-		this.icon.setFlags( action.getType() );
-		this.icon.toggle( true );
-		this.iconLabel.toggle( true );
-		this.actionButton.toggle( false );
-	}
+	this.iconWidget.setAction( action, this.actions.length );
 };
 
 /**
@@ -112,6 +96,22 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.setPosition = function ( rec
 	} );
 
 	this.update();
+};
+
+/**
+ * Keep this section's icon in view as the section scrolls past. Call after moving
+ * the section, or when the viewport has changed.
+ */
+mw.editcheck.EditCheckGutterSectionWidget.prototype.updateSticky = function () {
+	// A debounced resize can still land after teardown
+	if ( !this.controller ) {
+		return;
+	}
+	this.iconWidget.setStickyMetrics(
+		mw.editcheck.EditCheckGutterSectionIconWidget.static.getStickyMetrics(
+			this.controller.getTarget()
+		)
+	);
 };
 
 /**
@@ -135,10 +135,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 	if ( action.gutterQuickAction ) {
 		// This is an abridged set of what ve.ui.EditCheckDialog.prototype.onAct does
 		const promise = action.check.act( action.gutterQuickAction, action, surface );
-		this.actionButton.setDisabled( true );
+		this.iconWidget.setActing( true );
 		this.acting = true;
 		( promise || ve.createDeferred().resolve().promise() ).always( () => {
-			this.actionButton.setDisabled( false );
+			this.iconWidget.setActing( false );
 			this.acting = false;
 			controller.updatePositionsDebounced();
 			if ( controller.getActions().includes( action ) ) {
@@ -213,6 +213,8 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
  * Teardown the widget
  */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.teardown = function () {
+	$( window ).off( 'resize', this.updateStickyDebounced );
+	this.iconWidget.teardown();
 	this.$element.remove();
 
 	this.controller = null;

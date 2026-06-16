@@ -307,6 +307,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 		} );
 	} );
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
+	// After the loop, so the icons' measurements don't interleave with its writes
+	this.widgets.forEach( ( widget ) => widget.updateSticky() );
 	this.setOutsideSectionState();
 	if ( this.fromSection ) {
 		this.scrollToNearestSuggestionDebounced();
