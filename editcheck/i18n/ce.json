@@ -6,7 +6,13 @@
 	},
 	"editcheck-dialog-action-no": "ХӀан-хӀа",
 	"editcheck-dialog-action-yes": "ХӀаъ",
+	"editcheck-dialog-addref-description": "Википеди тӀехь йолу информаци авторитетан хьосташца тӀечӀагӀйина хила йеза. Дехар ду, арахьара хьажорг тӀетоха гӀо де, хӀунда аьлча тӀечӀагӀйаза йолу информаци йаззаман йукъара дӀайаккха тарло. ТӀетовжам санна Википедин шен хьажоргах (ингалсан йа кхин мел йолчу маттахь) лело мегар дац.",
+	"editcheck-dialog-addref-reject-question": "Хьост хӀунда ца тӀетоьхна ахьа?",
+	"editcheck-dialog-addref-reject-irrelevant": "Суна ца хета ас бинчу хийцамашна хьосташ оьшуш ду аьлла.",
+	"editcheck-dialog-addref-reject-common-knowledge": "Ас тӀетоьхна информаци массарна а йевзаш йу",
+	"editcheck-dialog-addref-reject-uncertain": "Суна нийса ца хаьа, муьлха хьост тӀетоха йеза",
 	"editcheck-dialog-addref-reject-other": "Кхийерг",
+	"editcheck-dialog-addref-success-notify": "Хьост тӀетохарна баркалла!",
 	"editcheck-dialog-addref-title": "Хьост тӀетоха",
 	"editcheck-dialog-title": "Публикаци йале"
 }
