@@ -90,6 +90,7 @@
 	"editcheck-reject-description": "Іншим редакторам буде цінно дізнатися, чому ви зробили такий вибір.",
 	"editcheck-review-title": "Переглянути зміни",
 	"editcheck-specialeditchecks-info": "Перевірки редагувань налаштовуються в [[MediaWiki:Editcheck-config.json]]. Щодо документації див. [https://www.mediawiki.org/wiki/Edit_check/Configuration Перевірки редагувань/Конфігурація].",
+	"editcheck-specialeditchecks-imported-configs": "Імпортовано з $1",
 	"editcheck-specialeditchecks-disabled": "Перевірки редагувань не увімкнені у цій вікі.",
 	"editcheck-specialeditchecks-header-abtest": "Перевірки в A/B-тестуванні",
 	"editcheck-specialeditchecks-header-base": "Основна конфігурація",

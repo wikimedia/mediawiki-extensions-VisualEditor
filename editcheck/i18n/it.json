@@ -77,6 +77,7 @@
 	"editcheck-image-caption-title": "Aggiungi didascalia immagine",
 	"editcheck-image-caption-description": "Questa immagine non ha una didascalia. Aiuta i lettori a capire perché l'immagine è rilevante aggiungendo una [{{int:editcheck-image-caption-descriptionlink}} breve didascalia].",
 	"editcheck-review-title": "Rivedi modifiche",
+	"editcheck-specialeditchecks-imported-configs": "Importato da $1",
 	"editcheck-specialeditchecks-disabled": "Su questa wiki non sono abilitati i controlli di modifica.",
 	"editcheck-specialeditchecks-header-base": "Configurazione di base",
 	"editcheck-specialeditchecks-header-betafeatures": "Funzionalità sperimentali",
