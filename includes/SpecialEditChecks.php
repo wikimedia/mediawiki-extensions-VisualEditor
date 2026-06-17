@@ -13,6 +13,7 @@ use MediaWiki\Html\Html;
 use MediaWiki\Html\TocGeneratorTrait;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Sanitizer;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
 use OOUI\MessageWidget;
@@ -175,7 +176,7 @@ class SpecialEditChecks extends SpecialPage {
 	 */
 	private function outputSection( string $id, string $label ): void {
 		$out = $this->getOutput();
-		$out->addHTML( Html::element( 'h2', [ 'id' => $id ], $label ) );
+		$out->addHTML( Html::element( 'h2', [ 'id' => Sanitizer::escapeIdForLink( $id ) ], $label ) );
 		$this->addTocSection( $id, 'rawmessage', $label );
 	}
 
@@ -344,7 +345,9 @@ class SpecialEditChecks extends SpecialPage {
 
 		$html .= Html::rawElement( 'tr', [],
 			Html::rawElement( 'td', [],
-				Html::element( 'strong', [ 'id' => $checkData['name'] ], $checkData['name'] ) .
+				Html::element( 'strong', [
+					'id' => Sanitizer::escapeIdForLink( $checkData['name'] )
+				], $checkData['name'] ) .
 				Html::element( 'div', [], basename( $checkData['file'] ) )
 			) .
 			Html::rawElement( 'td', [],
