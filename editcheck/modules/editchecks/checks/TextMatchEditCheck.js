@@ -42,7 +42,7 @@ mw.editcheck.TextMatchEditCheck.static.name = 'textMatch';
 
 // Only show replacement preview if found text and replacement
 // are below a certain length, to avoid UI issues with long text.
-const replaceTextLengthLimit = 25;
+const replaceTextLengthLimit = 100;
 
 /**
  * The configs of TextMatchEditCheck take priority over individual matchRule configs.
