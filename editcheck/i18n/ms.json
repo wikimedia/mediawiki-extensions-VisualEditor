@@ -90,6 +90,7 @@
 	"editcheck-reject-description": "Penyunting lain akan belajar dan menilai mengapa anda melakukan pilihan sedemikian",
 	"editcheck-review-title": "Semak perubahan",
 	"editcheck-specialeditchecks-info": "Semakan suntingan ditetapkan di [[MediaWiki:Editcheck-config.json]]. Untuk tujuan pendokumenan, sila lihat [https://www.mediawiki.org/wiki/Edit_check/Configuration Semakan suntingan/Konfigurasi].",
+	"editcheck-specialeditchecks-imported-configs": "Diimport daripada $1",
 	"editcheck-specialeditchecks-disabled": "Semakan suntingan tidak diaktifkan pada wiki ini.",
 	"editcheck-specialeditchecks-header-abtest": "Pemeriksaan ujian A/B",
 	"editcheck-specialeditchecks-header-base": "Konfigurasi asas",

@@ -92,6 +92,7 @@
 	"editcheck-reject-description": "다른 편집자들은 당신이 왜 그런 선택을 했는지 아는 것을 중요하게 생각할 것입니다.",
 	"editcheck-review-title": "변경사항 검토",
 	"editcheck-specialeditchecks-info": "편집 검사는 [[MediaWiki:Editcheck-config.json]]에서 구성됩니다. 자세한 내용은 [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration]을 참조하세요.",
+	"editcheck-specialeditchecks-imported-configs": "$1에서 가져옴",
 	"editcheck-specialeditchecks-disabled": "이 위키에서는 편집 검사 기능이 활성화되어 있지 않습니다.",
 	"editcheck-specialeditchecks-header-abtest": "A/B 테스트 확인",
 	"editcheck-specialeditchecks-header-base": "기초 구성",

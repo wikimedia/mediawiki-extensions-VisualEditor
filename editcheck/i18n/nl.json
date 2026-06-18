@@ -94,6 +94,7 @@
 	"editcheck-reject-description": "Andere bewerkers willen graag weten waarom u deze keuze hebt gemaakt.",
 	"editcheck-review-title": "Wijzigingen controleren",
 	"editcheck-specialeditchecks-info": "Bewerkingscontroles worden ingesteld in [[MediaWiki:Editcheck-config.json]]. Zie [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration] voor de handleiding.",
+	"editcheck-specialeditchecks-imported-configs": "Geïmporteerd van $1",
 	"editcheck-specialeditchecks-disabled": "Bewerkingscontroles zijn niet ingeschakeld op deze wiki.",
 	"editcheck-specialeditchecks-header-abtest": "A/B-testcontroles",
 	"editcheck-specialeditchecks-header-base": "Basisinstellingen",

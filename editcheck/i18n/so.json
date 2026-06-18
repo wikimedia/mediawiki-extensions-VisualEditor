@@ -88,6 +88,7 @@
 	"editcheck-reject-description": "Tifaftirayaal kale waxay jeclaan lahaayeen inay bartaan sababta aad u samaysay doorashadan.",
 	"editcheck-review-title": "Dib u eeg isbeddellada",
 	"editcheck-specialeditchecks-info": "Hubinta wax ka beddelka waxaa lagu habeeyaa [[MediaWiki:Editcheck-config.json]]. Si aad u hesho dukumeenti, eeg [https://www.mediawiki.org/wiki/Edit_check/Configuration Habaynta Edit check].",
+	"editcheck-specialeditchecks-imported-configs": "Laga soo dhoofiyay $1",
 	"editcheck-specialeditchecks-disabled": "Hubinta wax ka beddelka laguma shaqaysiinin wiki-kan.",
 	"editcheck-specialeditchecks-header-abtest": "Hubinnada tijaabada A/B",
 	"editcheck-specialeditchecks-header-base": "Qaabeynta aasaasiga ah",
