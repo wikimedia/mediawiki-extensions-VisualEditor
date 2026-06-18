@@ -146,7 +146,7 @@
 	"visualeditor-dialog-transclusion-required-parameter-dialog-title": "{{PLURAL:$1|1=Бракуе абавязковага парамэтру|Бракуе абавязковых парамэтраў}}",
 	"visualeditor-dialogbutton-media-tooltip": "Выявы і мультымэдыі",
 	"visualeditor-dialogbutton-template-tooltip": "Шаблён",
-	"visualeditor-editconflict": "Не атрымалася захаваць вашыя зьмены з-за канфлікту рэдагаваньняў. Ці {{GENDER:|не жадаеце}} разьвязаць канфлікт уласнаруч?",
+	"visualeditor-editconflict": "Не ўдалося захаваць вашыя зьмены праз канфлікт рэдагаваньняў. Ці {{GENDER:|не жадаеце}} разьвязаць канфлікт уласнаруч?",
 	"visualeditor-editnotices-tool": "$1 {{PLURAL:$1|заўвага|заўвагі|заўваг}}",
 	"visualeditor-editnotices-tooltip": "Заўвагі да рэдагаваньня",
 	"visualeditor-editsummary": "Апішыце вашыя зьмены",
