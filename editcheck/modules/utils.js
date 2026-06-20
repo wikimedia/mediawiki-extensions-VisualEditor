@@ -198,8 +198,12 @@ mw.editcheck.findNearestByRect = function ( itemRects, surface ) {
  * Apply uppercasing rules to a phrase, using another string as a model
  *
  * Either the phrase is fully uppercased, or just initial letters are uppercased, or no change,
- * depending which best matches the model. Letters are never lowercased, so words like 'French'
- * or 'USA' aren't turned into invalid forms.
+ * depending which best matches the model. The phrase will never be lowercased.
+ *
+ * For TextMatch, this means that the dictionary form is the lowest case that will ever be offered
+ * as a replacement. Words like 'French' or 'USA' are never turned into invalid forms, even if
+ * replacing something fully lowercased. So TextMatch replacements should be configured in
+ * lowercase unless the term requires specific casing.
  *
  * @param {string} phrase
  * @param {string} model
@@ -219,7 +223,7 @@ mw.editcheck.applyCase = function ( phrase, model, lang ) {
 	const titleCase = toUpperFirst( lowerCase );
 
 	if ( model === lowerCase ) {
-		// No case information in model, or lower case; return phrase unaltered
+		// return unaltered phrase if there is no case information
 		return phrase;
 	}
 	if ( model === upperCase ) {
