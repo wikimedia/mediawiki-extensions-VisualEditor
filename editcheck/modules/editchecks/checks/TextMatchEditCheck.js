@@ -51,8 +51,8 @@ const replaceTextLengthLimit = 25;
  */
 mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.TextMatchEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
-	maximumEditcount: null,
-	minimumEditcount: null
+	maximumEditcount: false,
+	minimumEditcount: false
 } );
 
 mw.editcheck.TextMatchEditCheck.static.choices = [
