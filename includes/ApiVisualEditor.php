@@ -440,32 +440,10 @@ class ApiVisualEditor extends ApiBase {
 						$checkboxesMessagesList[] = "accesskey-{$options['tooltip']}";
 						$checkboxesMessagesList[] = "tooltip-{$options['tooltip']}";
 					}
-					if ( isset( $options['title-message'] ) ) {
-						$checkboxesMessagesList[] = $options['title-message'];
-						if ( !is_string( $options['title-message'] ) ) {
-							// Extract only the key. Any parameters are included in the fake message definition
-							// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)
-							$options['title-message'] = $this->msg( $options['title-message'] )->getKey();
-						}
-					}
-					$checkboxesMessagesList[] = $options['label-message'];
-					if ( !is_string( $options['label-message'] ) ) {
-						// Extract only the key. Any parameters are included in the fake message definition
-						// passed via $checkboxesMessages. (This changes $checkboxesDef by reference.)
-						$options['label-message'] = $this->msg( $options['label-message'] )->getKey();
-					}
-					if ( isset( $options['help-message'] ) ) {
-						$checkboxesMessagesList[] = $options['help-message'];
-						if ( !is_string( $options['help-message'] ) ) {
-							$options['help-message'] = $this->msg( $options['help-message'] )->getKey();
-						}
-					}
-					if ( isset( $options['placeholder-message'] ) ) {
-						$checkboxesMessagesList[] = $options['placeholder-message'];
-						if ( !is_string( $options['placeholder-message'] ) ) {
-							$options['placeholder-message'] = $this->msg( $options['placeholder-message'] )->getKey();
-						}
-					}
+					$this->updateCheckboxOptionsMessage( 'title-message', $options, $checkboxesMessagesList );
+					$this->updateCheckboxOptionsMessage( 'label-message', $options, $checkboxesMessagesList );
+					$this->updateCheckboxOptionsMessage( 'help-message', $options, $checkboxesMessagesList );
+					$this->updateCheckboxOptionsMessage( 'placeholder-message', $options, $checkboxesMessagesList );
 				}
 				$checkboxesMessages = [];
 				foreach ( $checkboxesMessagesList as $messageSpecifier ) {
@@ -584,6 +562,34 @@ class ApiVisualEditor extends ApiBase {
 		}
 
 		$this->getResult()->addValue( null, $this->getModuleName(), $result );
+	}
+
+	/**
+	 * Update a checkbox's messages (label, placeholder, help, etc.) based on
+	 * the structure of the config and whether the message is disabled or not.
+	 *
+	 * @param string $optionKey
+	 * @param array &$options
+	 * @param array &$checkboxesMessagesList
+	 */
+	private function updateCheckboxOptionsMessage(
+		string $optionKey,
+		array &$options,
+		array &$checkboxesMessagesList
+	): void {
+		if ( !isset( $options[$optionKey] ) ) {
+			return;
+		}
+		if ( !is_string( $options[$optionKey] ) ) {
+			$options[$optionKey] = $this->msg( $options[$optionKey] )->getKey();
+		}
+		if ( $this->msg( $options[$optionKey] )->isDisabled() ) {
+			// Remove the message if it's disabled, so it isn't sent to the frontend unnecessarily.
+			unset( $options[$optionKey] );
+		} else {
+			// Otherwise, add it to the list of messages in use.
+			$checkboxesMessagesList[] = $options[$optionKey];
+		}
 	}
 
 	/**
