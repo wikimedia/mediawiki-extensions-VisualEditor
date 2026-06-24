@@ -60,6 +60,15 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 		const referenceNode = node.getInternalItem();
 		const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( referenceNode );
 		if ( href ) {
+			// A bare numbered external link (<ref>[https://example.com]</ref>) is just a
+			// single link with no other content to lose, so it's safe to convert under
+			// any strictness level. It turns into
+			// `{paragraph}{mwNumberedExternalLink}{/mwNumberedExternalLink}{/paragraph}`.
+			if ( referenceNode.getRange().getLength() === 4 &&
+				ve.getProp( referenceNode, 'children', 0, 'children', 0 ) instanceof ve.dm.MWNumberedExternalLinkNode
+			) {
+				return node.getOuterRange();
+			}
 			switch ( this.config.strict ) {
 				case 'url-only': {
 					// Restrict this further than the context item does: require that the contents
@@ -71,14 +80,6 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 					const text = documentModel.data.getText( false, referenceRange );
 					if ( urlPattern.test( text ) ) {
 						return node.getOuterRange();
-					}
-					// Also catch <ref>[https:///example.com]</ref>
-					// This turns into `{ref}{paragraph}{mwnumberedexternallink}{/}{/}{/}`
-					if ( referenceRange.getLength() === 4 ) {
-						const contentNode = ve.getProp( referenceNode, 'children', 0, 'children', 0 );
-						if ( contentNode instanceof ve.dm.MWNumberedExternalLinkNode ) {
-							return node.getOuterRange();
-						}
 					}
 					break;
 				}

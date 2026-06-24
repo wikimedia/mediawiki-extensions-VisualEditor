@@ -42,15 +42,15 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 			expected: { 'url-only': 1, covered: 1, any: 1 }
 		},
 		{
-			// A label-less [https://google.com] is a node, not an annotation, so
-			// url-only catches it (length-4 special case) but covered does not.
+			// A label-less [https://google.com] is a single bare link with nothing
+			// else to lose, so it triggers under every mode.
 			name: 'numbered external link only',
 			body: [
 				{ type: 'link/mwNumberedExternal', attributes: { href: 'https://google.com' } },
 				{ type: '/link/mwNumberedExternal' }
 			],
 			convertible: true,
-			expected: { 'url-only': 1, covered: 0, any: 1 }
+			expected: { 'url-only': 1, covered: 1, any: 1 }
 		},
 		{
 			name: 'single link annotation covering whole content',
