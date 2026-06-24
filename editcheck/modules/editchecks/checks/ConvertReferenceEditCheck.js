@@ -67,7 +67,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 					// i.e. <ref>https://example.com</ref>
 					const referenceRange = referenceNode.getRange();
 					const protocols = ve.init.platform.getUnanchoredExternalLinkUrlProtocolsRegExp().source;
-					const urlPattern = new RegExp( protocols + '\\S+', 'ig' );
+					const urlPattern = new RegExp( `^${ protocols }\\S+$`, 'i' );
 					const text = documentModel.data.getText( false, referenceRange );
 					if ( urlPattern.test( text ) ) {
 						return node.getOuterRange();
