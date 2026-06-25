@@ -90,15 +90,13 @@
 
 		.oo-ui-iconElement-icon {
 			opacity: 0.5;
-			/* This should be @size-icon-small but that reacts to content
-			   font-size changes and this widget is isolated from those */
-			width: @size-100;
-			min-width: @size-100;
-			margin: @spacing-0 @spacing-6;
+			width: @min-size-icon-small;
+			min-width: @min-size-icon-small;
+			background-size: @min-size-icon-small @min-size-icon-small;
 		}
 
 		.oo-ui-labelElement-label {
-			margin-left: @spacing-125;
+			margin-left: @min-size-icon-small;
 		}
 	}
 
