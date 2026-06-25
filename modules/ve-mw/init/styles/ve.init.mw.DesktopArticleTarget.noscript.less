@@ -15,7 +15,11 @@
 .client-nojs,
 .ve-not-available {
 	#ca-ve-edit,
+	/* Account for optional .mw-editsection-divider, to be removed in the future (T268900) */
 	.mw-editsection-visualeditor + .mw-editsection-divider,
+	.mw-editsection-visualeditor + .mw-editsection-divider + a::before,
+	/* Redundant ':not(:first-of-type)' to increase specificity and override core rules */
+	.mw-editsection-visualeditor + a:not( :first-of-type )::before,
 	.mw-editsection-visualeditor {
 		display: none;
 	}
