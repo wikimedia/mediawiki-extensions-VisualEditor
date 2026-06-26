@@ -2492,8 +2492,7 @@
 			"editcheck/modules/tests/DuplicateLinkEditCheck.test.js",
 			"editcheck/modules/tests/FakeHeadingEditCheck.test.js",
 			"editcheck/modules/tests/TextMatchEditCheck.test.js",
-			"editcheck/modules/tests/ImageCaptionEditCheck.test.js",
-			"editcheck/modules/tests/ConvertReferenceEditCheck.test.js"
+			"editcheck/modules/tests/ImageCaptionEditCheck.test.js"
 		],
 		"dependencies": [
 			"ext.visualEditor.core",
@@ -2517,7 +2516,8 @@
 		"optional": {
 			"Cite": {
 				"scripts": [
-					"editcheck/modules/tests/AddReferenceEditCheck.test.js"
+					"editcheck/modules/tests/AddReferenceEditCheck.test.js",
+					"editcheck/modules/tests/ConvertReferenceEditCheck.test.js"
 				],
 				"dependencies": [
 					"ext.cite.visualEditor"
