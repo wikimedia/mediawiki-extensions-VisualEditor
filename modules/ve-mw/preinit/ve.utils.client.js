@@ -38,13 +38,13 @@ mw.libs.ve.smoothScrollTo = function ( scrollTop ) {
 };
 
 /**
- * Open either a URL or a page title
+ * Take a string that might be a URL or a page title and return a URL
  *
  * @param {string} urlOrTitle
+ * @return {string} url
  */
 mw.libs.ve.resolveUrlOrTitle = function ( urlOrTitle ) {
-	window.open( urlOrTitle.includes( '//' ) ?
+	return urlOrTitle.includes( '//' ) ?
 		urlOrTitle :
-		new mw.Title( urlOrTitle ).getUrl()
-	);
+		new mw.Title( urlOrTitle ).getUrl();
 };
