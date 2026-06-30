@@ -1064,7 +1064,9 @@ Controller.prototype.drawSelections = function () {
 			} );
 		} );
 		surfaceView.setReviewMode( true, highlightNodes );
-		selectionManager.drawSelections( 'editCheck-active-' + this.focusedAction.getType(), activeSelections, activeOptions );
+		if ( this.focusedAction ) {
+			selectionManager.drawSelections( 'editCheck-active-' + this.focusedAction.getType(), activeSelections, activeOptions );
+		}
 		return;
 	}
 	[ 'warning', 'error', 'progressive' ].forEach( ( type ) => {
