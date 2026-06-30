@@ -1,16 +1,24 @@
 {
 	"addReference": {
 		"account": {
-			"checkMode": "loggedin",
 			"suggestionMode": "loggedout"
 		},
 		"maximumEditcount": {
-			"checkMode": 10,
 			"suggestionMode": 0
 		},
 		"minimumEditcount": {
 			"checkMode": 5,
 			"suggestionMode": 1
+		}
+	},
+	"tone": {
+		"account": {
+			"checkMode": "loggedin",
+			"suggestionMode": "loggedout"
+		},
+		"maximumEditcount": {
+			"checkMode": 5,
+			"suggestionMode": 0
 		}
 	}
 }

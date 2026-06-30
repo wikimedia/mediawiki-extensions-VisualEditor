@@ -120,13 +120,16 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 	}
 
 	/**
-	 * @param {string|number|Object} value Config value which might be a scalar or an object with checkMode/suggestionMode
+	 * @param {string|number|Object} value Config value which might be a scalar or an object with checkMode and/or suggestionMode
 	 * @return {string|number|boolean} The value for the current mode, or false if not set
 	 */
 	const getModeConfigValue = ( value ) => {
-		// Schema requires checkMode and suggestionMode be set if using an object, so we only need to check one
-		if ( typeof value === 'object' && Object.prototype.hasOwnProperty.call( value, 'checkMode' ) ) {
-			return suggestion ? value.suggestionMode : value.checkMode;
+		if ( typeof value === 'object' ) {
+			if ( suggestion ) {
+				return Object.prototype.hasOwnProperty.call( value, 'suggestionMode' ) ? value.suggestionMode : false;
+			} else {
+				return Object.prototype.hasOwnProperty.call( value, 'checkMode' ) ? value.checkMode : false;
+			}
 		}
 
 		// Legacy scalar values only apply in check mode.

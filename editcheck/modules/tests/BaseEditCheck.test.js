@@ -750,6 +750,20 @@ QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert
 				checkMode: true,
 				suggestionMode: false
 			}
+		},
+		{
+			description: 'Partial mode object',
+			config: {
+				minimumEditcount: {
+					suggestionMode: 100
+				}
+			},
+			isNamed: false,
+			editCount: 10,
+			expected: {
+				checkMode: true,
+				suggestionMode: false
+			}
 		}
 	];
 

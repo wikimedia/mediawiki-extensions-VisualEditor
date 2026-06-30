@@ -19,6 +19,21 @@
 				"type": "string"
 			}
 		},
+		"requireCheckOrSuggestionMode": {
+			"description": "Requires at least one of checkMode or suggestionMode to be set.",
+			"anyOf": [
+				{
+					"required": [
+						"checkMode"
+					]
+				},
+				{
+					"required": [
+						"suggestionMode"
+					]
+				}
+			]
+		},
 		"optionalStringArray": {
 			"description": "Optional list of strings. Use false to unset/override an inherited array value.",
 			"oneOf": [
@@ -67,9 +82,10 @@
 							"$ref": "#/definitions/account"
 						}
 					},
-					"required": [
-						"checkMode",
-						"suggestionMode"
+					"allOf": [
+						{
+							"$ref": "#/definitions/requireCheckOrSuggestionMode"
+						}
 					],
 					"additionalProperties": false
 				}
@@ -106,9 +122,10 @@
 							"$ref": "#/definitions/editCount"
 						}
 					},
-					"required": [
-						"checkMode",
-						"suggestionMode"
+					"allOf": [
+						{
+							"$ref": "#/definitions/requireCheckOrSuggestionMode"
+						}
 					],
 					"additionalProperties": false
 				}
