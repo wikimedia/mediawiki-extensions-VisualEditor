@@ -16,6 +16,8 @@
 	"editcheck-dialog-addref-success-notify": "Tak fordi du tilføjede en reference!",
 	"editcheck-dialog-addref-title": "Tilføj en reference",
 	"editcheck-dialog-title": "Før offentliggørelse",
+	"editcheck-copyvio-title": "Indsat indhold",
+	"editcheck-review-title": "Gennemgå ændringer",
 	"tag-editcheck-reference-decline-common-knowledge": "Redigeringstjek (referencer) afvist (almindelig viden)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Redigeringstjek-reference blev afvist som almindelig viden",
 	"tag-editcheck-reference-decline-irrelevant": "Redigeringstjek (referencer) afvist (irrelevant)",
