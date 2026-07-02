@@ -21,8 +21,9 @@ OO.inheritClass( mw.editcheck.CitationNeededEditCheck, mw.editcheck.BaseEditChec
 /* Static properties */
 
 mw.editcheck.CitationNeededEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
-	showAsCheck: false,
-	showAsSuggestion: false
+	// We just never show this as a check, as a just-inserted citation-needed template
+	// means the user deliberately chose to insert that rather than a citation.
+	showAsCheck: false
 } );
 
 mw.editcheck.CitationNeededEditCheck.static.title = OO.ui.deferMsg( 'cite-ve-citationneeded-title' );

@@ -76,7 +76,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
  * @return {ve.Range[]}
  */
 mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( documentModel, includeReferencedContent ) {
-	// Cache a list of ranges which will trigger the experimental "citation needed" check.
+	// Cache a list of ranges which will trigger the "citation needed" check.
 	// If they appear in the range detected by this check then that check takes precedence
 	// as it is more specific.
 	// TODO: More generic de-conflicting logic could be added at the controller level.
