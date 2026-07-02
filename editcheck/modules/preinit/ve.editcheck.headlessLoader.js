@@ -186,6 +186,64 @@ function loadConfig( pageName, requestId ) {
 }
 
 /**
+ * Get the resolved per-check config, keyed by check name.
+ *
+ * This is independent of any particular page: it is derived from the global
+ * edit check configuration, so it does not require a document to be loaded.
+ * The edit check modules must be loaded before calling this.
+ *
+ * The textMatch check additionally supports per-matchRule (matchItem) config,
+ * which is exposed keyed as "textMatch/<matchItemId>".
+ *
+ * @return {Promise<Object>} Map of check name to a summary of its resolved config
+ */
+function getCheckConfigs() {
+	const configs = {};
+	const getModeConfigValue = mw.editcheck.BaseEditCheck.static.getModeConfigValue;
+	const summarize = ( config ) => ( {
+		account: getModeConfigValue( config.account, true ),
+		minimumEditCount: getModeConfigValue( config.minimumEditCount, true ),
+		maximumEditCount: getModeConfigValue( config.maximumEditCount, true )
+	} );
+
+	const checkNames = [];
+	[ 'onDocumentChange', 'onBranchNodeChange', 'onBeforeSave' ].forEach( ( listener ) => {
+		mw.editcheck.editCheckFactory.getNamesByListener( listener ).forEach( ( checkName ) => {
+			if ( !checkNames.includes( checkName ) ) {
+				checkNames.push( checkName );
+			}
+		} );
+	} );
+
+	const promises = [];
+	checkNames.forEach( ( checkName ) => {
+		let check;
+		try {
+			check = mw.editcheck.editCheckFactory.create( checkName, null, {}, true );
+		} catch ( e ) {
+			// Ignore checks that fail to construct
+			configs[ checkName ] = summarize( {} );
+			return;
+		}
+		configs[ checkName ] = summarize( check.config );
+
+		// textMatch matchRules
+		if ( check instanceof mw.editcheck.TextMatchEditCheck ) {
+			promises.push(
+				check.constructor.static.ensureMatchRulesLoaded().then( ( cache ) => {
+					check.instantiateMatchRules( cache.rawMatchRules );
+					for ( const matchRule of check.matchRules ) {
+						configs[ `${ checkName }/${ matchRule.id }` ] = summarize( matchRule.config );
+					}
+				} )
+			);
+		}
+	} );
+
+	return Promise.all( promises ).then( () => configs );
+}
+
+/**
  * Run the headless VisualEditor for a page.
  *
  * @param {string} pageNameRaw The page name from user input.
@@ -301,6 +359,10 @@ window.veEditCheckHeadlessStart = function ( pageName, parsoidHtml ) {
 	const runPromise = runQueue.then( () => runHeadlessForPage( pageName, requestId, parsoidHtml ) );
 	runQueue = runPromise.catch( () => {} );
 	return requestId;
+};
+
+window.veEditCheckHeadlessGetConfigs = function () {
+	return loadModules().then( () => getCheckConfigs() );
 };
 
 // Start loading modules immediately

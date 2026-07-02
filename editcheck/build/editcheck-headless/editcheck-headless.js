@@ -16,6 +16,26 @@ async function readHeadlessResult( driver ) {
 }
 
 /**
+ * Read the resolved per-check edit check configs from the browser.
+ *
+ * @param {WebDriver} driver Selenium WebDriver instance
+ * @return {Promise<Object>} Object with either { configs } or { error }
+ */
+async function readCheckConfigs( driver ) {
+	return driver.executeAsyncScript(
+		`const callback = arguments[ arguments.length - 1 ];
+		if ( typeof window.veEditCheckHeadlessGetConfigs !== 'function' ) {
+			callback( { error: 'veEditCheckHeadlessGetConfigs is not available' } );
+			return;
+		}
+		window.veEditCheckHeadlessGetConfigs().then(
+			( configs ) => callback( { configs } ),
+			( e ) => callback( { error: String( e ) } )
+		);`
+	);
+}
+
+/**
  * Inject progress hooks into the browser.
  *
  * @param {WebDriver} driver Selenium WebDriver instance
@@ -231,6 +251,33 @@ class HeadlessBrowserSession {
 			}
 
 			return resultData;
+		};
+
+		const runPromise = this.runQueue.then( task );
+		this.runQueue = runPromise.catch( () => {} );
+		return runPromise;
+	}
+
+	/**
+	 * Read the resolved per-check edit check configs.
+	 *
+	 * These are independent of any particular page, so no title is required.
+	 *
+	 * @param {Function} [onProgress] Progress callback
+	 * @return {Promise<Object>} Map of check name to config
+	 */
+	async getConfigs( onProgress ) {
+		const progress = onProgress || ( () => {} );
+		const task = async () => {
+			if ( !this.driver ) {
+				throw new Error( 'Browser session is not initialized' );
+			}
+			progress( 'Reading edit check configs' );
+			const result = await readCheckConfigs( this.driver );
+			if ( result && result.error ) {
+				throw new Error( result.error );
+			}
+			return result && result.configs;
 		};
 
 		const runPromise = this.runQueue.then( task );

@@ -106,6 +106,26 @@ mw.editcheck.BaseEditCheck.static.takesFocus = false;
 /* Static methods */
 
 /**
+ * Get the value of a config option for the current mode (check or suggestion)
+ *
+ * @param {string|number|boolean|Object} configValue Config value which might be a scalar or an object with checkMode and/or suggestionMode
+ * @param {boolean} suggestion Whether we are checking for suggestion mode
+ * @return {string|number|boolean} Config value for the current mode, or false if not set
+ */
+mw.editcheck.BaseEditCheck.static.getModeConfigValue = function ( configValue, suggestion ) {
+	if ( typeof configValue === 'object' ) {
+		if ( suggestion ) {
+			return Object.prototype.hasOwnProperty.call( configValue, 'suggestionMode' ) ? configValue.suggestionMode : false;
+		} else {
+			return Object.prototype.hasOwnProperty.call( configValue, 'checkMode' ) ? configValue.checkMode : false;
+		}
+	}
+
+	// Legacy scalar values only apply in check mode.
+	return suggestion ? false : configValue;
+};
+
+/**
  * Find out if any conditions in the provided config are met
  *
  * @param {Object} config Configuration options
@@ -118,23 +138,6 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 	if ( !show && !mw.editcheck.experimental ) {
 		return false;
 	}
-
-	/**
-	 * @param {string|number|Object} value Config value which might be a scalar or an object with checkMode and/or suggestionMode
-	 * @return {string|number|boolean} The value for the current mode, or false if not set
-	 */
-	const getModeConfigValue = ( value ) => {
-		if ( typeof value === 'object' ) {
-			if ( suggestion ) {
-				return Object.prototype.hasOwnProperty.call( value, 'suggestionMode' ) ? value.suggestionMode : false;
-			} else {
-				return Object.prototype.hasOwnProperty.call( value, 'checkMode' ) ? value.checkMode : false;
-			}
-		}
-
-		// Legacy scalar values only apply in check mode.
-		return suggestion ? false : value;
-	};
 
 	// Skip account status checks when forceEnable is set
 	// (forceEnable should only bypass account configs, not ones that are integral to the check working as intended, such as category)
@@ -149,9 +152,9 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 			delete config.minimumEditcount;
 		}
 
-		const account = getModeConfigValue( config.account );
-		const maximumEditCount = getModeConfigValue( config.maximumEditCount );
-		const minimumEditCount = getModeConfigValue( config.minimumEditCount );
+		const account = this.getModeConfigValue( config.account, suggestion );
+		const maximumEditCount = this.getModeConfigValue( config.maximumEditCount, suggestion );
+		const minimumEditCount = this.getModeConfigValue( config.minimumEditCount, suggestion );
 
 		// account status:
 		// loggedin, loggedout, or any-other-value meaning 'both'

@@ -23,8 +23,8 @@ function printUsage() {
 	console.error( 'API:' );
 	console.error( '  GET  /check?title=<title>' );
 	console.error( '  POST /check  body: { "title": "<title>", "parsoidHtml": "<html...>" }' );
+	console.error( '  GET  /config' );
 	console.error( '' );
-	console.error( 'Response: the veEditCheckHeadlessResult JSON object.' );
 }
 
 /**
@@ -205,9 +205,31 @@ function makeHandler( session, serviceLogger ) {
 		const parsedUrl = new URL( req.url, `http://${ req.headers.host || 'localhost' }` );
 		serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname }${ parsedUrl.search }` );
 
+		if ( parsedUrl.pathname === '/config' ) {
+			if ( req.method !== 'GET' && req.method !== 'HEAD' ) {
+				serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname } -> 405` );
+				res.writeHead( 405, { Allow: 'GET, HEAD' } );
+				res.end();
+				return;
+			}
+			const configLog = createTimedLogger( 'config', serviceLogger );
+			try {
+				configLog( 'Reading edit check configs' );
+				const configs = await session.getConfigs( ( msg, timestamp ) => {
+					configLog( msg, timestamp );
+				} );
+				configLog( 'Sending response' );
+				sendJson( res, 200, configs );
+			} catch ( e ) {
+				serviceLogger.error( `[error "config"] ${ e && e.stack ? e.stack : String( e ) }` );
+				sendError( res, 500, e.message || 'Internal error reading configs' );
+			}
+			return;
+		}
+
 		if ( parsedUrl.pathname !== '/check' ) {
 			serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname } -> 404` );
-			sendError( res, 404, 'Not found. Use GET /check?title=... or POST /check.' );
+			sendError( res, 404, 'Not found. Use GET /check?title=..., POST /check, or GET /config.' );
 			return;
 		}
 
