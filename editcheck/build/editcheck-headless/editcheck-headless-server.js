@@ -147,6 +147,18 @@ function readJsonBody( req ) {
 }
 
 /**
+ * Set permissive CORS headers on a response.
+ *
+ * @param {http.ServerResponse} res
+ */
+function setCorsHeaders( res ) {
+	res.setHeader( 'Access-Control-Allow-Origin', '*' );
+	res.setHeader( 'Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS' );
+	res.setHeader( 'Access-Control-Allow-Headers', 'Content-Type' );
+	res.setHeader( 'Access-Control-Max-Age', '86400' );
+}
+
+/**
  * Send a JSON response.
  *
  * @param {http.ServerResponse} res
@@ -155,6 +167,7 @@ function readJsonBody( req ) {
  */
 function sendJson( res, statusCode, data ) {
 	const body = JSON.stringify( data, null, '\t' );
+	setCorsHeaders( res );
 	res.writeHead( statusCode, {
 		'Content-Type': 'application/json; charset=utf-8',
 		'Content-Length': Buffer.byteLength( body )
@@ -205,9 +218,18 @@ function makeHandler( session, serviceLogger ) {
 		const parsedUrl = new URL( req.url, `http://${ req.headers.host || 'localhost' }` );
 		serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname }${ parsedUrl.search }` );
 
+		// Answer CORS preflight requests before any routing.
+		if ( req.method === 'OPTIONS' ) {
+			setCorsHeaders( res );
+			res.writeHead( 204 );
+			res.end();
+			return;
+		}
+
 		if ( parsedUrl.pathname === '/config' ) {
 			if ( req.method !== 'GET' && req.method !== 'HEAD' ) {
 				serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname } -> 405` );
+				setCorsHeaders( res );
 				res.writeHead( 405, { Allow: 'GET, HEAD' } );
 				res.end();
 				return;
@@ -260,6 +282,7 @@ function makeHandler( session, serviceLogger ) {
 			}
 		} else {
 			serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname } -> 405` );
+			setCorsHeaders( res );
 			res.writeHead( 405, { Allow: 'GET, HEAD, POST' } );
 			res.end();
 			return;
