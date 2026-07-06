@@ -451,6 +451,10 @@ ve.init.mw.MobileArticleTarget.prototype.saveComplete = function ( data ) {
 	// This is set in this.overlay.onSaveComplete, but we can't call that until we have
 	// computed the fragment.
 	this.overlay.saved = true;
+	// Likewise expose the revision id before teardown, which reads it
+	// synchronously for the returntoapp redirect (onSaveComplete also sets
+	// this, but too late).
+	this.overlay.savedRevId = data.newrevid;
 
 	// Parent method
 	ve.init.mw.MobileArticleTarget.super.prototype.saveComplete.apply( this, arguments );
