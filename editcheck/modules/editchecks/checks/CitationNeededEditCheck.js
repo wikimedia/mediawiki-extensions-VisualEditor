@@ -46,7 +46,11 @@ mw.editcheck.CitationNeededEditCheck.static.choices = [
 
 mw.editcheck.CitationNeededEditCheck.prototype.getCitationNeededRanges = function ( documentModel ) {
 	return this.getAddedNodes( documentModel, 'mwTransclusionInline' )
-		.filter( ( node ) => ve.ui.MWCitationNeededContextItem.static.isCompatibleWith( node ) )
+		.filter(
+			// MWCitationNeededContextItem.isCompatibleWith returns false when this check is available,
+			// so check getMatchedTool directly instead.
+			( node ) => ve.ui.MWCitationNeededContextItem.static.getMatchedTool( node )
+		)
 		.map( ( node ) => node.getOuterRange() );
 };
 
