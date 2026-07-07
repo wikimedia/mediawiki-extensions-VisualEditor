@@ -238,17 +238,25 @@ Controller.prototype.editChecksArePossible = function () {
 	}
 	return [ 'onBeforeSave', 'onDocumentChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
-			( checkName ) => {
-				const check = mw.editcheck.editCheckFactory.create( checkName, this );
-				try {
-					return check.canBeShown( this.surface.getModel().getDocument() );
-				} catch ( e ) {
-					mw.log.error( `Error checking canBeShown for ${ checkName }`, e );
-					return false;
-				}
-			}
+			( checkName ) => this.canBeShown( checkName )
 		)
 	);
+};
+
+/**
+ * Check if a given edit check could be run for the current user/context
+ *
+ * @param {string} checkName Check name
+ * @return {boolean}
+ */
+Controller.prototype.canBeShown = function ( checkName ) {
+	const check = mw.editcheck.editCheckFactory.create( checkName, this );
+	try {
+		return check.canBeShown( this.surface.getModel().getDocument() );
+	} catch ( e ) {
+		mw.log.error( `Error checking canBeShown for ${ checkName }`, e );
+		return false;
+	}
 };
 
 /**
