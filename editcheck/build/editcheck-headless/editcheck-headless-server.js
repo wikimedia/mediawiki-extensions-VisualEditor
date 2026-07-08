@@ -4,7 +4,7 @@
 const http = require( 'http' );
 // eslint-disable-next-line n/no-missing-require
 const { getInstance, teardown } = require( '@wikimedia/service-utils' );
-const { parseArgs, createSession } = require( './editcheck-headless' );
+const { createSession } = require( './editcheck-headless' );
 
 function printUsage() {
 	console.error( 'Usage:' );
@@ -25,6 +25,90 @@ function printUsage() {
 	console.error( '  POST /check  body: { "title": "<title>", "parsoidHtml": "<html...>" }' );
 	console.error( '' );
 	console.error( 'Response: the veEditCheckHeadlessResult JSON object.' );
+}
+
+/**
+ * Parse CLI arguments
+ *
+ * Recognised flags: --base-url, --script-path, --timeout-ms,
+ * --headed, --chrome-binary, --restart-every-requests, --port, --host.
+ *
+ * @param {string[]} argv Arguments (typically process.argv.slice( 2 )).
+ * @return {Object} Parsed options.
+ */
+function parseArgs( argv ) {
+	const opts = {
+		baseUrl: process.env.MW_SERVER || '',
+		scriptPath: process.env.MW_SCRIPT_PATH || '/w',
+		timeoutMs: 90000,
+		headless: true,
+		chromeBinary: '',
+		restartEveryRequests: 100,
+		port: 3000,
+		host: '127.0.0.1'
+	};
+
+	for ( let i = 0; i < argv.length; i++ ) {
+		const arg = argv[ i ];
+
+		if ( arg === '--headed' ) {
+			opts.headless = false;
+			continue;
+		}
+
+		if ( !arg.startsWith( '--' ) ) {
+			throw new Error( `Unexpected argument: ${ arg }` );
+		}
+
+		const [ key, inlineValue ] = arg.split( '=', 2 );
+		const value = inlineValue !== undefined ? inlineValue : argv[ ++i ];
+
+		if ( value === undefined || value.startsWith( '--' ) ) {
+			throw new Error( `Missing value for ${ key }` );
+		}
+
+		switch ( key ) {
+			case '--base-url':
+				opts.baseUrl = value;
+				break;
+			case '--script-path':
+				opts.scriptPath = value;
+				break;
+			case '--timeout-ms':
+				opts.timeoutMs = Number( value );
+				break;
+			case '--chrome-binary':
+				opts.chromeBinary = value;
+				break;
+			case '--restart-every-requests':
+				opts.restartEveryRequests = Number( value );
+				break;
+			case '--port':
+				opts.port = Number( value );
+				break;
+			case '--host':
+				opts.host = value;
+				break;
+			default:
+				throw new Error( `Unknown option: ${ key }` );
+		}
+	}
+
+	if ( !opts.baseUrl ) {
+		throw new Error( '--base-url is required' );
+	}
+	if ( Number.isNaN( opts.timeoutMs ) || opts.timeoutMs < 1 ) {
+		throw new Error( '--timeout-ms must be a positive number' );
+	}
+	if ( Number.isNaN( opts.restartEveryRequests ) || opts.restartEveryRequests < 0 ||
+		!Number.isInteger( opts.restartEveryRequests ) ) {
+		throw new Error( '--restart-every-requests must be a non-negative integer' );
+	}
+	if ( Number.isNaN( opts.port ) || opts.port < 1 || opts.port > 65535 ) {
+		throw new Error( '--port must be a valid port number (1-65535)' );
+	}
+
+	return opts;
 }
 
 /**
