@@ -94,6 +94,7 @@
 	"visualeditor-ca-editsource-section": "编辑源代码",
 	"visualeditor-ca-editsource-section-hint": "编辑章节的源代码： $1",
 	"visualeditor-categories-tool": "分类",
+	"visualeditor-config-save-invalid-schema": "配置无效：$1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "排序键从$1更改为$2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "排序键设置为$1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "排序键取消设置为$1",

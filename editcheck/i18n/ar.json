@@ -92,6 +92,7 @@
 	"editcheck-reject-description": "سيكون من المفيد للمحررين الآخرين معرفة سبب اختيارك لهذا.",
 	"editcheck-review-title": "مراجعة التغييرات",
 	"editcheck-specialeditchecks-info": "يتم ضبط إعدادات فحص التحرير في [[MediaWiki:Editcheck-config.json]]. للاطلاع على التوثيق، يُرجى زيارة [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
+	"editcheck-specialeditchecks-imported-configs": "مستورد من $1",
 	"editcheck-specialeditchecks-disabled": "لم يتم تفعيل ميزة فحص التحرير في هذه الويكي.",
 	"editcheck-specialeditchecks-header-abtest": "اختبارات A/B",
 	"editcheck-specialeditchecks-header-base": "الإعداد الأساسي",

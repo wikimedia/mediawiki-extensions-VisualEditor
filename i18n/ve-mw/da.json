@@ -59,6 +59,7 @@
 	"visualeditor-ca-editsource-section": "rediger kildetekst",
 	"visualeditor-ca-editsource-section-hint": "Rediger sektionens kildekode: $1",
 	"visualeditor-categories-tool": "Kategorier",
+	"visualeditor-config-save-invalid-schema": "Konfigurationen er ugyldig: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Sorteringsnøgle ændret fra $1 til $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Sorteringsnøgle sat til $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Sorteringsnøgle fjernet fra $1",

@@ -51,6 +51,7 @@
 	"visualeditor-ca-editsource-section": "vikimətni redaktə et",
 	"visualeditor-ca-editsource-section-hint": "Bölmənin mənbə kodunu redaktə et: $1",
 	"visualeditor-categories-tool": "Kateqoriyalar",
+	"visualeditor-config-save-invalid-schema": "Konfiqurasiya etibarsızdır: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Sıralama açarı dəyişdirildi: $1 -> $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Sıralama açarı $1 olaraq təyin edildi",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "$1 sıralama açarı ləğv edildi",

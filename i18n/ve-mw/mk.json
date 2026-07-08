@@ -41,6 +41,7 @@
 	"visualeditor-ca-editsource-section": "уреди извор",
 	"visualeditor-ca-editsource-section-hint": "Уреди изворен код на одделот: $1",
 	"visualeditor-categories-tool": "Категории",
+	"visualeditor-config-save-invalid-schema": "Поставеноста е неважечка: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Променет клучот на подредување од $1 на $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Клучот на подредување зададен како $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Клучот на подредување е отстранет од $1",

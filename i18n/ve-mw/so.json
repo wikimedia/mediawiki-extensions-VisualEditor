@@ -39,6 +39,7 @@
 	"visualeditor-ca-editsource-section": "wax ka badal xogta",
 	"visualeditor-ca-editsource-section-hint": "Tafatir koodhka isha ee qaybta: $1",
 	"visualeditor-categories-tool": "Qaybaha",
+	"visualeditor-config-save-invalid-schema": "Qaabaynta waa khalad: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Furaha kala soocidda waxaa laga beddelay $1 oo loo beddelay $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Furaha kala soocidda waxaa loo dejiyay $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Furaha kala soocidda waa laga qaaday $1",

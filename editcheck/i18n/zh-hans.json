@@ -99,6 +99,7 @@
 	"editcheck-reject-description": "其他编者会希望了解您做出此选择的原因。",
 	"editcheck-review-title": "查看更改",
 	"editcheck-specialeditchecks-info": "编辑检查已在[[MediaWiki:Editcheck-config.json]]配置。更多相关文件请参考[https://www.mediawiki.org/wiki/Edit_check/Configuration 编辑检查/配置]。",
+	"editcheck-specialeditchecks-imported-configs": "导入自$1",
 	"editcheck-specialeditchecks-disabled": "本wiki未启用编辑检查。",
 	"editcheck-specialeditchecks-header-abtest": "A/B测试检查",
 	"editcheck-specialeditchecks-header-base": "基本配置",

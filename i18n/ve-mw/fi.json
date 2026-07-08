@@ -68,6 +68,7 @@
 	"visualeditor-ca-editsource-section": "muokkaa wikitekstiä",
 	"visualeditor-ca-editsource-section-hint": "Muokkaa osion wikitekstiä: $1",
 	"visualeditor-categories-tool": "Luokat",
+	"visualeditor-config-save-invalid-schema": "Määritys on virheellinen: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Luokitusavain vaihdettu: $1 → $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Luokitusavaimeksi asetettu $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Luokitusavain $1 poistettu",

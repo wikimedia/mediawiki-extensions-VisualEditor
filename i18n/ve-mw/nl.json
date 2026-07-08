@@ -82,6 +82,7 @@
 	"visualeditor-ca-editsource-section": "brontekst bewerken",
 	"visualeditor-ca-editsource-section-hint": "De broncode bewerken van de sectie: $1",
 	"visualeditor-categories-tool": "Categorieën",
+	"visualeditor-config-save-invalid-schema": "De configuratie is onjuist: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Sorteersleutel gewijzigd van $1 in $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Sorteersleutel ingesteld op $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Sorteersleutel $1 verwijderd",

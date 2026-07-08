@@ -74,6 +74,7 @@
 	"visualeditor-ca-editsource-section": "عدل المصدر",
 	"visualeditor-ca-editsource-section-hint": "تعديل النص المصدري للقسم: $1",
 	"visualeditor-categories-tool": "التصنيفات",
+	"visualeditor-config-save-invalid-schema": "التكوين غير صالح: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "تم تغيير مفتاح التصنيف من $1 إلى $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "تم تعيين مفتاح الفرز على $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "لم يتم ضبط مفتاح الفرز من $1",

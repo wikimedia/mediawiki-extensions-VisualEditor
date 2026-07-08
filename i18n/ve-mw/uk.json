@@ -62,6 +62,7 @@
 	"visualeditor-ca-editsource-section": "ред. код",
 	"visualeditor-ca-editsource-section-hint": "Редагувати вихідний код розділу: $1",
 	"visualeditor-categories-tool": "Категорії",
+	"visualeditor-config-save-invalid-schema": "Конфігурація недійсна: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Ключ сортування змінено з $1 на $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Ключ сортування встановлено як $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Ключ сортування перестав бути $1",

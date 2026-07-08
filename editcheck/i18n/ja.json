@@ -94,6 +94,7 @@
 	"editcheck-reject-description": "他の編集者のために、なぜあなたが提案をスキップをしたのかを教えてください。",
 	"editcheck-review-title": "変更をレビュー",
 	"editcheck-specialeditchecks-info": "編集チェック（Edit checks）は[[MediaWiki:Editcheck-config.json]]で設定します。詳細については、[https://www.mediawiki.org/wiki/Edit_check/Configuration 編集チェック/設定]を参照してください。",
+	"editcheck-specialeditchecks-imported-configs": "$1から取り込み",
 	"editcheck-specialeditchecks-disabled": "このウィキでは編集チェックは有効になっていません。",
 	"editcheck-specialeditchecks-header-abtest": "A/Bテストのチェック",
 	"editcheck-specialeditchecks-header-base": "基本設定",

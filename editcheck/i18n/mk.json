@@ -88,6 +88,7 @@
 	"editcheck-reject-description": "Другите корисници би ценеле да дознаат зошто го направивте овој избор.",
 	"editcheck-review-title": "Прегледај промени",
 	"editcheck-specialeditchecks-info": "Проверките на уредувањата се поставаат на [[MediaWiki:Editcheck-config.json]]. За документација, погл. [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration].",
+	"editcheck-specialeditchecks-imported-configs": "Увезено од $1",
 	"editcheck-specialeditchecks-disabled": "Проверките на уредувањата не се овозможени на ова вики.",
 	"editcheck-specialeditchecks-header-abtest": "Проверки на А/Б-проба",
 	"editcheck-specialeditchecks-header-base": "Основна поставеност",

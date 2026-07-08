@@ -91,6 +91,7 @@
 	"editcheck-reject-description": "Aner Editeure géifen et appreciéiere fir gewuer ze ginn, firwat Dir dëse Choix gemaach hutt.",
 	"editcheck-review-title": "Ännerungen nokucken",
 	"editcheck-specialeditchecks-info": "Ännerungsiwwerpréiwunge ginn ënner [[MediaWiki:Editcheck-config.json]] konfiguréiert. Kuckt [https://www.mediawiki.org/wiki/Edit_check/Configuration Edit check/Configuration] fir d'Dokumentatioun.",
+	"editcheck-specialeditchecks-imported-configs": "Importéiert vu(n) $1",
 	"editcheck-specialeditchecks-disabled": "Ännerungsiwwerpréiwunge sinn op dëser Wiki net aktivéiert.",
 	"editcheck-specialeditchecks-header-abtest": "A/B-Test-Iwwerpréiwungen",
 	"editcheck-specialeditchecks-header-base": "Beta-Konfiguratioun",

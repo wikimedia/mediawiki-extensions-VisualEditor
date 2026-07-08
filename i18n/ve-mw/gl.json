@@ -50,6 +50,7 @@
 	"visualeditor-ca-editsource-section": "editar a fonte",
 	"visualeditor-ca-editsource-section-hint": "Editar o código fonte da sección: $1",
 	"visualeditor-categories-tool": "Categorías",
+	"visualeditor-config-save-invalid-schema": "A configuración non é válida: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "A clave de ordenación cambiou de $1 a $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Clave de ordenación definida como $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Clave de ordenación $1 eliminada",
