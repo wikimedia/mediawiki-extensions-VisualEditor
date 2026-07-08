@@ -142,12 +142,15 @@ async function waitForResult( driver, requestId, timeoutMs, progress ) {
  */
 class HeadlessBrowserSession {
 	/**
-	 * @param {Object} opts Options: baseUrl, scriptPath, timeoutMs, headless,
+	 * @param {Object} opts Options: scriptPath, timeoutMs, headless,
 	 * chromeBinary, restartEveryRequests.
 	 */
 	constructor( opts ) {
 		this.opts = opts;
 		this.driver = null;
+		// Base URL the persistent page is currently loaded for, or null if no
+		// page is loaded yet. Requests re-navigate only when this differs.
+		this.currentBaseUrl = null;
 		this.runQueue = Promise.resolve();
 		this.completedRequests = 0;
 	}
@@ -170,7 +173,8 @@ class HeadlessBrowserSession {
 	}
 
 	/**
-	 * Initialize the browser session.
+	 * Launch the browser. Does not navigate to any wiki; use navigateTo() or
+	 * ensureReady() to load a wiki's headless page.
 	 *
 	 * @param {Function} [onProgress] Progress callback
 	 * @return {Promise<void>}
@@ -181,42 +185,86 @@ class HeadlessBrowserSession {
 			return;
 		}
 
+		progress( 'Launching browser' );
 		this.driver = await new Builder()
 			.forBrowser( 'chrome' )
 			.setChromeOptions( this.buildChromeOptions() )
 			.build();
+		progress( 'Browser launched' );
+	}
 
-		const initialUrl = `${ this.opts.baseUrl }/${ this.opts.scriptPath }/index.php?title=Special:EditCheckHeadless`;
-		progress( `Opening persistent headless page: ${ initialUrl }` );
-		await this.driver.get( initialUrl );
+	/**
+	 * Build the persistent headless page URL for a base URL.
+	 *
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
+	 * @return {string} Full URL of Special:EditCheckHeadless
+	 */
+	buildPageUrl( baseUrl ) {
+		const scriptPath = this.opts.scriptPath.replace( /^\/+|\/+$/g, '' );
+		const prefix = scriptPath ? `${ baseUrl }/${ scriptPath }` : baseUrl;
+		return `${ prefix }/index.php?title=Special:EditCheckHeadless`;
+	}
+
+	/**
+	 * Navigate the persistent page to the given wiki, if not already there.
+	 *
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
+	 * @param {Function} [onProgress] Progress callback
+	 * @return {Promise<void>}
+	 */
+	async navigateTo( baseUrl, onProgress ) {
+		const progress = onProgress || ( () => {} );
+		if ( !this.driver ) {
+			throw new Error( 'Browser session is not initialized' );
+		}
+		if ( this.currentBaseUrl === baseUrl ) {
+			return;
+		}
+
+		const url = this.buildPageUrl( baseUrl );
+		progress( `Opening persistent headless page: ${ url }` );
+		// Clear first so a failed navigation doesn't leave a stale base URL.
+		this.currentBaseUrl = null;
+		await this.driver.get( url );
 		await injectProgressHooks( this.driver );
 
 		await this.driver.wait( async () => this.driver.executeScript(
 			'return typeof window.veEditCheckHeadlessStart === "function";'
 		), this.opts.timeoutMs );
 
-		progress( 'Persistent browser session is ready' );
+		this.currentBaseUrl = baseUrl;
+		progress( `Persistent browser session is ready for ${ baseUrl }` );
+	}
+
+	/**
+	 * Ensure the browser is launched and the page is loaded for the given wiki.
+	 *
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
+	 * @param {Function} [onProgress] Progress callback
+	 * @return {Promise<void>}
+	 */
+	async ensureReady( baseUrl, onProgress ) {
+		await this.init( onProgress );
+		await this.navigateTo( baseUrl, onProgress );
 	}
 
 	/**
 	 * Run a single editcheck headless check for the given title.
 	 *
 	 * @param {string} title The title to check
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
 	 * @param {Function} [onProgress] Progress callback
 	 * @param {string} [parsoidHtml] Optional Parsoid HTML
 	 * @return {Promise<Object>} The result data
 	 */
-	async runCheck( title, onProgress, parsoidHtml ) {
+	async runCheck( title, baseUrl, onProgress, parsoidHtml ) {
 		const progress = onProgress || ( () => {} );
 		const task = async () => {
 			let resultData;
 			let originalError = null;
 
-			if ( !this.driver ) {
-				throw new Error( 'Browser session is not initialized' );
-			}
-
 			try {
+				await this.ensureReady( baseUrl, progress );
 				progress( `Submitting headless request for title "${ title }"` );
 				const requestId = await startBrowserRun( this.driver, title, parsoidHtml );
 				progress( `Waiting for request ${ requestId }` );
@@ -237,7 +285,9 @@ class HeadlessBrowserSession {
 				progress( `Restarting browser after ${ this.completedRequests } processed requests` );
 				try {
 					await this.close( progress );
-					await this.init( progress );
+					// Re-launch and re-warm the page for the wiki we just used, so
+					// the next request against the same wiki stays fast.
+					await this.ensureReady( baseUrl, progress );
 				} catch ( restartError ) {
 					if ( !originalError ) {
 						throw restartError;
@@ -261,17 +311,17 @@ class HeadlessBrowserSession {
 	/**
 	 * Read the resolved per-check edit check configs.
 	 *
-	 * These are independent of any particular page, so no title is required.
+	 * These are independent of any particular page, but do depend on the wiki,
+	 * so a base URL is required to load the relevant configuration.
 	 *
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
 	 * @param {Function} [onProgress] Progress callback
 	 * @return {Promise<Object>} Map of check name to config
 	 */
-	async getConfigs( onProgress ) {
+	async getConfigs( baseUrl, onProgress ) {
 		const progress = onProgress || ( () => {} );
 		const task = async () => {
-			if ( !this.driver ) {
-				throw new Error( 'Browser session is not initialized' );
-			}
+			await this.ensureReady( baseUrl, progress );
 			progress( 'Reading edit check configs' );
 			const result = await readCheckConfigs( this.driver );
 			if ( result && result.error ) {
@@ -299,22 +349,119 @@ class HeadlessBrowserSession {
 		progress( 'Closing browser session' );
 		await this.driver.quit();
 		this.driver = null;
+		this.currentBaseUrl = null;
 	}
 }
 
 /**
- * Create a new headless browser session.
+ * Manages a pool of headless browser sessions.
  *
- * @param {Object} opts Options for the session.
- * @param {Function} [onProgress] Progress callback
- * @return {Promise<HeadlessBrowserSession>} The created session.
+ * Each "pinned" base URL (from opts.pinnedBaseUrls) gets its own persistent
+ * session, pre-loaded at startup and never navigated elsewhere. Any other base
+ * URL is served by a single shared fallback session that navigates on demand.
  */
-async function createSession( opts, onProgress ) {
-	const session = new HeadlessBrowserSession( opts );
-	await session.init( onProgress );
-	return session;
+class HeadlessSessionManager {
+	/**
+	 * @param {Object} opts Session options (scriptPath, timeoutMs, headless,
+	 *   chromeBinary, restartEveryRequests) plus `pinnedBaseUrls` (string[]).
+	 */
+	constructor( opts ) {
+		this.opts = opts;
+		// baseUrl -> persistent HeadlessBrowserSession
+		this.pinned = new Map();
+		// Shared session for non-pinned wikis; created lazily on first use.
+		this.fallback = null;
+	}
+
+	/**
+	 * Launch and pre-load a persistent session for each pinned base URL.
+	 *
+	 * @param {Function} [onProgress] Progress callback
+	 * @return {Promise<void>}
+	 */
+	async init( onProgress ) {
+		for ( const baseUrl of this.opts.pinnedBaseUrls || [] ) {
+			if ( this.pinned.has( baseUrl ) ) {
+				continue;
+			}
+			const session = new HeadlessBrowserSession( this.opts );
+			await session.init( onProgress );
+			await session.navigateTo( baseUrl, onProgress );
+			this.pinned.set( baseUrl, session );
+		}
+	}
+
+	/**
+	 * Get the session responsible for a base URL: its dedicated pinned session
+	 * if one exists, otherwise the shared on-demand fallback session.
+	 *
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
+	 * @return {HeadlessBrowserSession}
+	 */
+	getSession( baseUrl ) {
+		if ( this.pinned.has( baseUrl ) ) {
+			return this.pinned.get( baseUrl );
+		}
+		if ( !this.fallback ) {
+			this.fallback = new HeadlessBrowserSession( this.opts );
+		}
+		return this.fallback;
+	}
+
+	/**
+	 * Run an editcheck headless check for the given title on the given wiki.
+	 *
+	 * @param {string} title The title to check
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
+	 * @param {Function} [onProgress] Progress callback
+	 * @param {string} [parsoidHtml] Optional Parsoid HTML
+	 * @return {Promise<Object>} The result data
+	 */
+	async runCheck( title, baseUrl, onProgress, parsoidHtml ) {
+		return this.getSession( baseUrl ).runCheck( title, baseUrl, onProgress, parsoidHtml );
+	}
+
+	/**
+	 * Read the resolved per-check edit check configs for the given wiki.
+	 *
+	 * @param {string} baseUrl Wiki base URL (no trailing slash)
+	 * @param {Function} [onProgress] Progress callback
+	 * @return {Promise<Object>} Map of check name to config
+	 */
+	async getConfigs( baseUrl, onProgress ) {
+		return this.getSession( baseUrl ).getConfigs( baseUrl, onProgress );
+	}
+
+	/**
+	 * Close all sessions.
+	 *
+	 * @param {Function} [onProgress] Progress callback
+	 * @return {Promise<void>}
+	 */
+	async close( onProgress ) {
+		const sessions = [ ...this.pinned.values() ];
+		if ( this.fallback ) {
+			sessions.push( this.fallback );
+		}
+		for ( const session of sessions ) {
+			await session.close( onProgress );
+		}
+	}
+}
+
+/**
+ * Create and initialize a headless session manager.
+ *
+ * @param {Object} opts Options for the manager (see HeadlessSessionManager).
+ * @param {Function} [onProgress] Progress callback
+ * @return {Promise<HeadlessSessionManager>} The initialized manager.
+ */
+async function createSessionManager( opts, onProgress ) {
+	const manager = new HeadlessSessionManager( opts );
+	await manager.init( onProgress );
+	return manager;
 }
 
 module.exports = {
-	createSession
+	createSessionManager
 };

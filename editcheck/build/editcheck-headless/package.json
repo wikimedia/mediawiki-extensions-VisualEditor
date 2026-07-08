@@ -6,6 +6,9 @@
 	"scripts": {
 		"start": "node editcheck-headless-server.js"
 	},
+	"engines": {
+		"node": ">=21.0.0"
+	},
 	"dependencies": {
 		"@wikimedia/service-utils": "2.0.0",
 		"selenium-webdriver": "4.45.0"

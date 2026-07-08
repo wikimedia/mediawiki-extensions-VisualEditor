@@ -4,15 +4,25 @@
 const http = require( 'http' );
 // eslint-disable-next-line n/no-missing-require
 const { getInstance, teardown } = require( '@wikimedia/service-utils' );
-const { createSession } = require( './editcheck-headless' );
+const { createSessionManager } = require( './editcheck-headless' );
+const {
+	fetchDbnameMap,
+	resolveWiki
+} = require( './editcheck-headless-sitematrix' );
 
 function printUsage() {
 	console.error( 'Usage:' );
-	console.error( '  node editcheck/build/editcheck-headless/editcheck-headless-server.js --base-url <url> [options]' );
+	console.error( '  node editcheck/build/editcheck-headless/editcheck-headless-server.js [options]' );
 	console.error( '' );
 	console.error( 'Server options:' );
-	console.error( '  --base-url <url>       MediaWiki base URL (required)' );
+	console.error( '  --wikis <list>         Comma-separated list of wikis to give a' );
+	console.error( '                         dedicated persistent session; each is a' );
+	console.error( '                         base URL (https://…) or dbname (e.g. enwiki).' );
+	console.error( '                         Requests for any other wiki are served by a' );
+	console.error( '                         single shared on-demand session. Optional.' );
 	console.error( '  --script-path <path>   Script path (default: /w)' );
+	console.error( '  --sitematrix-url <url> MediaWiki API endpoint for dbname resolution' );
+	console.error( '                         (default: metawiki api.php)' );
 	console.error( '  --timeout-ms <ms>      Max wait per request (default: 90000)' );
 	console.error( '  --restart-every-requests <n> Restart Chrome after every N processed requests (default: 100, 0 = disabled)' );
 	console.error( '  --headed               Run Chrome with a visible window (default: headless)' );
@@ -20,17 +30,17 @@ function printUsage() {
 	console.error( '  --port <port>          HTTP port to listen on (default: 3000)' );
 	console.error( '  --host <host>          Host/address to bind to (default: 127.0.0.1)' );
 	console.error( '' );
-	console.error( 'API:' );
-	console.error( '  GET  /check?title=<title>' );
-	console.error( '  POST /check  body: { "title": "<title>", "parsoidHtml": "<html...>" }' );
-	console.error( '  GET  /config' );
+	console.error( 'API ("wiki" is a base URL or dbname, and is always required):' );
+	console.error( '  GET  /check?title=<title>&wiki=<url|dbname>' );
+	console.error( '  POST /check  body: { "title": "<title>", "wiki": "<url|dbname>", "parsoidHtml": "<html...>" }' );
+	console.error( '  GET  /config?wiki=<url|dbname>' );
 	console.error( '' );
 }
 
 /**
  * Parse CLI arguments
  *
- * Recognised flags: --base-url, --script-path, --timeout-ms,
+ * Recognised flags: --wikis, --script-path, --sitematrix-url, --timeout-ms,
  * --headed, --chrome-binary, --restart-every-requests, --port, --host.
  *
  * @param {string[]} argv Arguments (typically process.argv.slice( 2 )).
@@ -38,8 +48,9 @@ function printUsage() {
  */
 function parseArgs( argv ) {
 	const opts = {
-		baseUrl: process.env.MW_SERVER || '',
+		wikis: process.env.MW_WIKIS || '',
 		scriptPath: process.env.MW_SCRIPT_PATH || '/w',
+		sitematrixUrl: process.env.MW_SITEMATRIX_URL,
 		timeoutMs: 90000,
 		headless: true,
 		chromeBinary: '',
@@ -68,11 +79,14 @@ function parseArgs( argv ) {
 		}
 
 		switch ( key ) {
-			case '--base-url':
-				opts.baseUrl = value;
+			case '--wikis':
+				opts.wikis = value;
 				break;
 			case '--script-path':
 				opts.scriptPath = value;
+				break;
+			case '--sitematrix-url':
+				opts.sitematrixUrl = value;
 				break;
 			case '--timeout-ms':
 				opts.timeoutMs = Number( value );
@@ -94,9 +108,6 @@ function parseArgs( argv ) {
 		}
 	}
 
-	if ( !opts.baseUrl ) {
-		throw new Error( '--base-url is required' );
-	}
 	if ( Number.isNaN( opts.timeoutMs ) || opts.timeoutMs < 1 ) {
 		throw new Error( '--timeout-ms must be a positive number' );
 	}
@@ -207,13 +218,23 @@ function createTimedLogger( prefix, serviceLogger ) {
 }
 
 /**
- * Create a request handler for the headless session.
+ * Create a request handler for the headless session manager.
  *
- * @param {HeadlessBrowserSession} session
+ * @param {HeadlessSessionManager} sessionManager
  * @param {Object} serviceLogger
+ * @param {Object} dbnameMap Map of wiki dbname to base URL
  * @return {Function} request handler
  */
-function makeHandler( session, serviceLogger ) {
+function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
+	/**
+	 * Resolve the wiki for a request to a base URL. Throws (→ 400) if "wiki" is
+	 * missing or a dbname cannot be resolved.
+	 *
+	 * @param {string|null|undefined} wiki Per-request wiki (URL or dbname)
+	 * @return {string} Base URL
+	 */
+	const resolveRequestWiki = ( wiki ) => resolveWiki( wiki, dbnameMap );
+
 	return async function handler( req, res ) {
 		const parsedUrl = new URL( req.url, `http://${ req.headers.host || 'localhost' }` );
 		serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname }${ parsedUrl.search }` );
@@ -234,12 +255,23 @@ function makeHandler( session, serviceLogger ) {
 				res.end();
 				return;
 			}
+			let configBaseUrl;
+			try {
+				configBaseUrl = resolveRequestWiki( parsedUrl.searchParams.get( 'wiki' ) );
+			} catch ( e ) {
+				serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname } -> 400 ${ e.message }` );
+				sendError( res, 400, e.message );
+				return;
+			}
 			const configLog = createTimedLogger( 'config', serviceLogger );
 			try {
-				configLog( 'Reading edit check configs' );
-				const configs = await session.getConfigs( ( msg, timestamp ) => {
-					configLog( msg, timestamp );
-				} );
+				configLog( `Reading edit check configs for ${ configBaseUrl }` );
+				const configs = await sessionManager.getConfigs(
+					configBaseUrl,
+					( msg, timestamp ) => {
+						configLog( msg, timestamp );
+					}
+				);
 				configLog( 'Sending response' );
 				sendJson( res, 200, configs );
 			} catch ( e ) {
@@ -256,10 +288,12 @@ function makeHandler( session, serviceLogger ) {
 		}
 
 		let title;
+		let wiki;
 		let parsoidHtml = null;
 
 		if ( req.method === 'GET' || req.method === 'HEAD' ) {
 			title = parsedUrl.searchParams.get( 'title' );
+			wiki = parsedUrl.searchParams.get( 'wiki' );
 		} else if ( req.method === 'POST' ) {
 			let body;
 			try {
@@ -273,6 +307,7 @@ function makeHandler( session, serviceLogger ) {
 				return;
 			}
 			title = body.title;
+			wiki = body.wiki !== undefined ? body.wiki : parsedUrl.searchParams.get( 'wiki' );
 			if ( body.parsoidHtml !== undefined ) {
 				if ( typeof body.parsoidHtml !== 'string' || body.parsoidHtml.trim() === '' ) {
 					sendError( res, 400, '"parsoidHtml" must be a non-empty string when provided' );
@@ -294,18 +329,32 @@ function makeHandler( session, serviceLogger ) {
 			return;
 		}
 
+		let baseUrl;
+		try {
+			baseUrl = resolveRequestWiki( wiki );
+		} catch ( e ) {
+			serviceLogger.info( `[request] ${ req.method } ${ parsedUrl.pathname } -> 400 ${ e.message }` );
+			sendError( res, 400, e.message );
+			return;
+		}
+
 		const normalizedTitle = title.trim();
 		const log = createTimedLogger( normalizedTitle, serviceLogger );
-		log( 'Request accepted' );
+		log( `Request accepted for ${ baseUrl }` );
 		if ( parsoidHtml ) {
 			log( `Using posted Parsoid HTML (${ parsoidHtml.length } chars)` );
 		}
 
 		try {
 			log( 'Dispatching headless check' );
-			const result = await session.runCheck( normalizedTitle, ( msg, timestamp ) => {
-				log( msg, timestamp );
-			}, parsoidHtml );
+			const result = await sessionManager.runCheck(
+				normalizedTitle,
+				baseUrl,
+				( msg, timestamp ) => {
+					log( msg, timestamp );
+				},
+				parsoidHtml
+			);
 			log( 'Sending response' );
 			sendJson( res, 200, result );
 		} catch ( e ) {
@@ -331,15 +380,42 @@ function makeHandler( session, serviceLogger ) {
 	( async () => {
 		const serviceUtils = await getInstance();
 		const serviceLogger = serviceUtils.logger;
-		const session = await createSession( opts, ( msg ) => {
-			serviceLogger.info( `[startup] ${ msg }` );
-		} );
 
-		const server = http.createServer( makeHandler( session, serviceLogger ) );
+		// Pre-fetch the dbname -> base URL mapping so requests can name a wiki
+		// by dbname. A failure here is non-fatal: base URL requests still work,
+		// and dbname requests will report the wiki as unknown.
+		let dbnameMap = Object.create( null );
+		try {
+			serviceLogger.info( '[startup] Fetching sitematrix' );
+			dbnameMap = await fetchDbnameMap( opts.sitematrixUrl );
+			serviceLogger.info( `[startup] Loaded ${ Object.keys( dbnameMap ).length } wiki dbnames` );
+		} catch ( e ) {
+			serviceLogger.error( `[startup] Failed to fetch sitematrix: ${ e.message }. dbname resolution unavailable.` );
+		}
+
+		// Resolve the list of wikis that each get a dedicated persistent
+		// session, pre-loaded and kept warm. All other wikis are served by a
+		// single shared on-demand session.
+		const pinnedBaseUrls = opts.wikis
+			.split( ',' )
+			.map( ( w ) => w.trim() )
+			.filter( ( w ) => w !== '' )
+			.map( ( w ) => resolveWiki( w, dbnameMap ) );
+
+		const sessionManager = await createSessionManager(
+			Object.assign( {}, opts, { pinnedBaseUrls } ),
+			( msg ) => {
+				serviceLogger.info( `[startup] ${ msg }` );
+			}
+		);
+
+		const server = http.createServer(
+			makeHandler( sessionManager, serviceLogger, dbnameMap )
+		);
 
 		const shutdown = async () => {
 			server.close();
-			await session.close( ( msg ) => {
+			await sessionManager.close( ( msg ) => {
 				serviceLogger.info( `[shutdown] ${ msg }` );
 			} );
 			// eslint-disable-next-line mocha/no-top-level-hooks
@@ -365,8 +441,11 @@ function makeHandler( session, serviceLogger ) {
 
 		server.listen( opts.port, opts.host, () => {
 			const addr = server.address();
+			const pinnedSummary = pinnedBaseUrls.length ?
+				pinnedBaseUrls.join( ', ' ) :
+				'(none; all wikis served on demand)';
 			serviceLogger.info( `editcheck-headless-server listening on http://${ addr.address }:${ addr.port }` );
-			serviceLogger.info( `  base-url:      ${ opts.baseUrl }` );
+			serviceLogger.info( `  pinned wikis:  ${ pinnedSummary }` );
 			serviceLogger.info( `  script-path:   ${ opts.scriptPath }` );
 			serviceLogger.info( `  timeout-ms:    ${ opts.timeoutMs }` );
 			serviceLogger.info( `  restart-every-requests: ${ opts.restartEveryRequests }` );
