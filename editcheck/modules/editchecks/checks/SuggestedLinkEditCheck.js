@@ -24,11 +24,11 @@ OO.inheritClass( mw.editcheck.SuggestedLinkEditCheck, mw.editcheck.LinkEditCheck
 mw.editcheck.SuggestedLinkEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	showAsCheck: false, // This would never make sense to enable
 	showAsSuggestion: true,
-	minimumEditCount: {
+	minimumEditcount: {
 		suggestionMode: 1000,
 		checkMode: 1000 // this shouldn't ever be checked but is here for completeness
 	},
-	maximumEditCount: false,
+	maximumEditcount: false,
 	predictionThreshold: 0.8,
 	importGrowthExperimentConfig: true
 } );
