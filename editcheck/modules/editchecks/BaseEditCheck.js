@@ -41,8 +41,8 @@ mw.editcheck.BaseEditCheck.static.choices = [
 
 mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	account: false, // 'loggedin', 'loggedout', false means allow either
-	maximumEditcount: 100,
-	minimumEditcount: 0,
+	maximumEditCount: 100,
+	minimumEditCount: 0,
 	ignoreSections: [],
 	ignoreLeadSection: false,
 	includeSections: true, // any non-array means to include all; array of names means to include only those
@@ -136,9 +136,19 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 	// Skip account status checks when forceEnable is set
 	// (forceEnable should only bypass account configs, not ones that are integral to the check working as intended, such as category)
 	if ( !mw.editcheck.forceEnable ) {
+		// backwards-compatibility:
+		if ( Object.prototype.hasOwnProperty.call( config, 'maximumEditcount' ) ) {
+			config.maximumEditCount = config.maximumEditcount;
+			delete config.maximumEditcount;
+		}
+		if ( Object.prototype.hasOwnProperty.call( config, 'minimumEditcount' ) ) {
+			config.minimumEditCount = config.minimumEditcount;
+			delete config.minimumEditcount;
+		}
+
 		const account = getModeConfigValue( config.account );
-		const maximumEditcount = getModeConfigValue( config.maximumEditcount );
-		const minimumEditcount = getModeConfigValue( config.minimumEditcount );
+		const maximumEditCount = getModeConfigValue( config.maximumEditCount );
+		const minimumEditCount = getModeConfigValue( config.minimumEditCount );
 
 		// account status:
 		// loggedin, loggedout, or any-other-value meaning 'both'
@@ -151,11 +161,11 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 		}
 		const userEditCount = mw.config.get( 'wgUserEditCount', 0 );
 		// some checks are only shown for newer users
-		if ( maximumEditcount !== false && userEditCount > maximumEditcount ) {
+		if ( maximumEditCount !== false && userEditCount > maximumEditCount ) {
 			return false;
 		}
 		// and some checks are only shown for more experienced users
-		if ( minimumEditcount !== false && userEditCount < minimumEditcount ) {
+		if ( minimumEditCount !== false && userEditCount < minimumEditCount ) {
 			return false;
 		}
 	}

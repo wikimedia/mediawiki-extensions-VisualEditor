@@ -225,6 +225,6 @@
 		}
 	},
 	"paste": {
-		"maximumEditcount": 500
+		"maximumEditCount": 500
 	}
 }
