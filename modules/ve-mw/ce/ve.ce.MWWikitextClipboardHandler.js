@@ -101,7 +101,16 @@ ve.ce.MWWikitextClipboardHandler.prototype.afterPasteInsertExternalData = functi
 	// need to exclude the internal list, and since we're
 	// from a paste we also have to exclude the
 	// opening/closing paragraph.)
-	const plainContextRange = new ve.Range( plainPastedDocumentModel.getDocumentRange().from + 1, plainPastedDocumentModel.getDocumentRange().to - 1 );
+	const plainDocumentRange = plainPastedDocumentModel.getDocumentRange();
+	if ( plainDocumentRange.isCollapsed() ) {
+		// No plain text so convert wikitext immediately.
+		// Duplicated from ve.ui.MWWikitextPasteContextItem
+		return targetFragment.insertDocument( pastedDocumentModel, contextRange ).getPending().then( () => {
+			targetFragment.collapseToEnd().select();
+		} );
+	}
+	// plainPastedDocumentModel.getDocumentRange() is empty?
+	const plainContextRange = new ve.Range( plainDocumentRange.from + 1, plainDocumentRange.to - 1 );
 	this.prepareForPasteSpecial();
 
 	// isPlainText is true but we still need sanitize (e.g. remove lists)
