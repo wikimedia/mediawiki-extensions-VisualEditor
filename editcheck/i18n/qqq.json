@@ -34,6 +34,7 @@
 	"editcheck-dialog-addref-reject-other": "Answer option in response to {{msg-mw|editcheck-dialog-addref-reject-question}}",
 	"editcheck-dialog-addref-success-notify": "Notification messages shown after a citation is added successfully.",
 	"editcheck-dialog-addref-title": "Title for the edit check context asking user to add a citation.",
+	"editcheck-citationneeded-footer": "Footer text shown in the citation needed check, indicating that the template was added by an editor.",
 	"editcheck-dialog-title": "Title shown in the toolbar while the user is in the add a citation workflow.",
 	"editcheck-copyvio-title": "Title of pasted content / copyvio check",
 	"editcheck-copyvio-description": "Description of pasted content / copyvio check",

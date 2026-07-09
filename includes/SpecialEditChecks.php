@@ -65,6 +65,7 @@ class SpecialEditChecks extends SpecialPage {
 		$out->addModuleStyles( [
 			'oojs-ui.styles.icons-content',
 			'oojs-ui.styles.icons-interactions',
+			'oojs-ui.styles.icons-user',
 			'ext.visualEditor.editCheck.special',
 			'mediawiki.content.json'
 		] );

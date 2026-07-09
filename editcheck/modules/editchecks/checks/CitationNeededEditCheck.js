@@ -26,16 +26,22 @@ mw.editcheck.CitationNeededEditCheck.static.defaultConfig = ve.extendObject( {},
 	showAsCheck: false
 } );
 
-mw.editcheck.CitationNeededEditCheck.static.title = OO.ui.deferMsg( 'cite-ve-citationneeded-title' );
+mw.editcheck.CitationNeededEditCheck.static.title = OO.ui.deferMsg( 'editcheck-dialog-addref-title' );
 
-mw.editcheck.CitationNeededEditCheck.static.description = ve.deferJQueryMsg( 'cite-ve-citationneeded-description' );
+mw.editcheck.CitationNeededEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-dialog-addref-description' );
+
+mw.editcheck.CitationNeededEditCheck.static.success = OO.ui.deferMsg( 'editcheck-dialog-addref-success-notify' );
+
+mw.editcheck.CitationNeededEditCheck.static.footer = OO.ui.deferMsg( 'editcheck-citationneeded-footer' );
+
+mw.editcheck.CitationNeededEditCheck.static.footerIcon = 'userAvatar';
 
 mw.editcheck.CitationNeededEditCheck.static.name = 'citationNeeded';
 
 mw.editcheck.CitationNeededEditCheck.static.choices = [
 	{
 		action: 'add',
-		label: OO.ui.deferMsg( 'cite-ve-citationneeded-button' )
+		label: OO.ui.deferMsg( 'editcheck-action-add-citation' )
 	},
 	{
 		action: 'dismiss',
