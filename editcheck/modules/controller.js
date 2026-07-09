@@ -129,6 +129,7 @@ Controller.prototype.setup = function () {
 			// has references added. As such, disable in source mode for now.
 			return;
 		}
+		// TODO: Consider if suggestions are possible as well
 		if ( !this.editChecksArePossible() ) {
 			return;
 		}
@@ -247,12 +248,13 @@ Controller.prototype.editChecksArePossible = function () {
  * Check if a given edit check could be run for the current user/context
  *
  * @param {string} checkName Check name
+ * @param {boolean} [suggestion=false] Whether we are checking for suggestion mode
  * @return {boolean}
  */
-Controller.prototype.canBeShown = function ( checkName ) {
+Controller.prototype.canBeShown = function ( checkName, suggestion = false ) {
 	const check = mw.editcheck.editCheckFactory.create( checkName, this );
 	try {
-		return check.canBeShown( this.surface.getModel().getDocument() );
+		return check.canBeShown( this.surface.getModel().getDocument(), suggestion );
 	} catch ( e ) {
 		mw.log.error( `Error checking canBeShown for ${ checkName }`, e );
 		return false;
