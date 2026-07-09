@@ -83,38 +83,47 @@ ve.ce.MWWikitextClipboardHandler.prototype.onCopy = function ( e ) {
 /**
  * @inheritdoc
  */
-ve.ce.MWWikitextClipboardHandler.prototype.afterPasteInsertExternalData = function ( targetFragment, pastedDocumentModel, contextRange ) {
+ve.ce.MWWikitextClipboardHandler.prototype.afterPasteInsertExternalData = function ( targetFragment, pastedDocumentModel, contextRange, clipboardPlaintext ) {
 	const wasSpecial = this.isPasteSpecial(),
 		// TODO: This check returns true if the paste contains meaningful structure (tables, lists etc.)
-		// but no annotations (bold, links etc.).
+		// or block content nodes (mwBlockExtension) but no annotations (bold, links etc.).
 		wasPlain = wasSpecial || pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true );
 
-	const plainPastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
-	plainPastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
-	// We just turned this into plaintext, which probably
-	// affected the content-length. Luckily, because of
-	// the earlier clone, we know we just want the whole
-	// document, and because of the major change to
-	// plaintext, the difference between originalRange and
-	// balancedRange don't really apply. As such, clear
-	// out newDocRange. (Can't just make it undefined;
-	// need to exclude the internal list, and since we're
-	// from a paste we also have to exclude the
-	// opening/closing paragraph.)
-	const plainDocumentRange = plainPastedDocumentModel.getDocumentRange();
-	if ( plainDocumentRange.isCollapsed() ) {
-		// No plain text so convert wikitext immediately.
-		// Duplicated from ve.ui.MWWikitextPasteContextItem
-		return targetFragment.insertDocument( pastedDocumentModel, contextRange ).getPending().then( () => {
-			targetFragment.collapseToEnd().select();
-		} );
+	let promise;
+	if ( clipboardPlaintext ) {
+		// The model path replaces pasted non-breaking spaces, in #sanitize (T183647)
+		// and again in ve.dm.SourceSurfaceFragment#insertDocument (T154382), as they
+		// usually come from the copied HTML and are invisible in source.
+		targetFragment.insertContent( clipboardPlaintext.replace( /\u00a0/g, ' ' ) );
+		promise = ve.createDeferred().resolve().promise();
+	} else {
+		const plainPastedDocumentModel = pastedDocumentModel.shallowCloneFromRange( contextRange );
+		plainPastedDocumentModel.data.sanitize( { plainText: true, keepEmptyContentBranches: true } );
+		// We just turned this into plaintext, which probably
+		// affected the content-length. Luckily, because of
+		// the earlier clone, we know we just want the whole
+		// document, and because of the major change to
+		// plaintext, the difference between originalRange and
+		// balancedRange don't really apply. As such, clear
+		// out newDocRange. (Can't just make it undefined;
+		// need to exclude the internal list, and since we're
+		// from a paste we also have to exclude the
+		// opening/closing paragraph.)
+		const plainDocumentRange = plainPastedDocumentModel.getDocumentRange();
+		if ( plainDocumentRange.isCollapsed() ) {
+			// No plain text so convert wikitext immediately.
+			// Duplicated from ve.ui.MWWikitextPasteContextItem
+			return targetFragment.insertDocument( pastedDocumentModel, contextRange ).getPending().then( () => {
+				targetFragment.collapseToEnd().select();
+			} );
+		}
+		// plainPastedDocumentModel.getDocumentRange() is empty?
+		const plainContextRange = new ve.Range( plainDocumentRange.from + 1, plainDocumentRange.to - 1 );
+		this.prepareForPasteSpecial();
+		// isPlainText is true but we still need sanitize (e.g. remove lists)
+		promise = ve.ce.MWWikitextClipboardHandler.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
 	}
-	// plainPastedDocumentModel.getDocumentRange() is empty?
-	const plainContextRange = new ve.Range( plainDocumentRange.from + 1, plainDocumentRange.to - 1 );
-	this.prepareForPasteSpecial();
 
-	// isPlainText is true but we still need sanitize (e.g. remove lists)
-	const promise = ve.ce.MWWikitextClipboardHandler.super.prototype.afterPasteInsertExternalData.call( this, targetFragment, plainPastedDocumentModel, plainContextRange );
 	if ( !wasPlain ) {
 		promise.then( () => {
 			// We need to wait for the selection change after paste as that triggers
