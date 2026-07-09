@@ -19,8 +19,8 @@
 		"showAsSuggestion": true,
 		"ignoreQuotedContent": true,
 		"account": "loggedin",
-		"minimumEditcount": 1000,
-		"maximumEditcount": 1000000
+		"minimumEditCount": 1000,
+		"maximumEditCount": 1000000
 	},
 	"textMatch": {
 		"showAsSuggestion": true,

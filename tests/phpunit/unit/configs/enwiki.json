@@ -82,7 +82,7 @@
 				"message": "This text may include [[Wikipedia:Writing articles with large language models|AI-generated content]]. Help readers trust the article by removing any AI content or rewriting any inaccurate, unverifiable, or unencyclopedic information.",
 				"config": {
 					"caseSensitive": false,
-					"minimumEditcount": 10,
+					"minimumEditCount": 10,
 					"enabled": true
 				},
 				"expand": "paragraph"
@@ -131,7 +131,7 @@
 				"message": "This text may include [[Wikipedia:Writing articles with large language models|AI-generated content]]. Help readers trust the article by removing any AI content or rewriting any inaccurate, unverifiable, or unencyclopedic information.",
 				"config": {
 					"caseSensitive": false,
-					"minimumEditcount": 10,
+					"minimumEditCount": 10,
 					"enabled": true
 				},
 				"expand": "paragraph"
@@ -216,7 +216,7 @@
 				"message": "This text may include [[Wikipedia:Writing articles with large language models|AI-generated content]]. Help readers trust the article by removing any AI content or rewriting any inaccurate, unverifiable, or unencyclopedic information.",
 				"config": {
 					"caseSensitive": false,
-					"minimumEditcount": 10,
+					"minimumEditCount": 10,
 					"enabled": true,
 					"minOccurrences": 3
 				},

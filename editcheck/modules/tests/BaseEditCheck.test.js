@@ -712,8 +712,8 @@ QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert
 			}
 		},
 		{
-			description: 'Legacy scalar maximumEditcount',
-			config: { maximumEditcount: 10 },
+			description: 'Legacy scalar maximumEditCount',
+			config: { maximumEditCount: 10 },
 			isNamed: false,
 			editCount: 100,
 			expected: {
@@ -722,9 +722,9 @@ QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert
 			}
 		},
 		{
-			description: 'Mode object maximumEditcount',
+			description: 'Mode object maximumEditCount',
 			config: {
-				maximumEditcount: {
+				maximumEditCount: {
 					checkMode: false,
 					suggestionMode: 10
 				}
@@ -737,9 +737,9 @@ QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert
 			}
 		},
 		{
-			description: 'Mode object minimumEditcount',
+			description: 'Mode object minimumEditCount',
 			config: {
-				minimumEditcount: {
+				minimumEditCount: {
 					checkMode: false,
 					suggestionMode: 100
 				}
@@ -754,7 +754,7 @@ QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert
 		{
 			description: 'Partial mode object',
 			config: {
-				minimumEditcount: {
+				minimumEditCount: {
 					suggestionMode: 100
 				}
 			},

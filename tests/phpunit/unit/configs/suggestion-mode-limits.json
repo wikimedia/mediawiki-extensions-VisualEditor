@@ -3,10 +3,10 @@
 		"account": {
 			"suggestionMode": "loggedout"
 		},
-		"maximumEditcount": {
+		"maximumEditCount": {
 			"suggestionMode": 0
 		},
-		"minimumEditcount": {
+		"minimumEditCount": {
 			"checkMode": 5,
 			"suggestionMode": 1
 		}
@@ -16,7 +16,7 @@
 			"checkMode": "loggedin",
 			"suggestionMode": "loggedout"
 		},
-		"maximumEditcount": {
+		"maximumEditCount": {
 			"checkMode": 5,
 			"suggestionMode": 0
 		}

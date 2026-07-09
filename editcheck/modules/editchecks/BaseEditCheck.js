@@ -142,16 +142,6 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 	// Skip account status checks when forceEnable is set
 	// (forceEnable should only bypass account configs, not ones that are integral to the check working as intended, such as category)
 	if ( !mw.editcheck.forceEnable ) {
-		// backwards-compatibility:
-		if ( Object.prototype.hasOwnProperty.call( config, 'maximumEditcount' ) ) {
-			config.maximumEditCount = config.maximumEditcount;
-			delete config.maximumEditcount;
-		}
-		if ( Object.prototype.hasOwnProperty.call( config, 'minimumEditcount' ) ) {
-			config.minimumEditCount = config.minimumEditcount;
-			delete config.minimumEditcount;
-		}
-
 		const account = this.getModeConfigValue( config.account, suggestion );
 		const maximumEditCount = this.getModeConfigValue( config.maximumEditCount, suggestion );
 		const minimumEditCount = this.getModeConfigValue( config.minimumEditCount, suggestion );

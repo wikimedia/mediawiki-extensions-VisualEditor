@@ -147,16 +147,6 @@
 					"description": "Minimum user edit count required before this check is shown. Scalar values apply in check mode only; use { checkMode, suggestionMode } to configure both modes.",
 					"$ref": "#/definitions/editCountByMode"
 				},
-				"maximumEditcount": {
-					"description": "Legacy capitalization of maximumEditCount.",
-					"$ref": "#/definitions/editCountByMode",
-					"deprecated": true
-				},
-				"minimumEditcount": {
-					"description": "Legacy capitalization of minimumEditCount.",
-					"$ref": "#/definitions/editCountByMode",
-					"deprecated": true
-				},
 				"ignoreSections": {
 					"description": "Section headings where the check should not run. Headings are matched case-insensitively. An empty string refers to the lead section.",
 					"$ref": "#/definitions/optionalStringArray"
