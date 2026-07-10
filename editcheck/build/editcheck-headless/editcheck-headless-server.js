@@ -2,6 +2,8 @@
 'use strict';
 
 const http = require( 'http' );
+const fs = require( 'fs' );
+const { execSync } = require( 'child_process' );
 // eslint-disable-next-line n/no-missing-require
 const { getInstance, teardown } = require( '@wikimedia/service-utils' );
 const { createSessionManager } = require( './editcheck-headless' );
@@ -197,24 +199,227 @@ function sendError( res, statusCode, message ) {
 	sendJson( res, statusCode, { error: message } );
 }
 
+// Linux /proc uses clock ticks for CPU times and pages for memory. Resolve the
+// conversion factors once at startup; fall back to the usual Linux defaults.
+const CLOCK_TICKS_PER_SEC = ( () => {
+	try {
+		return parseInt( execSync( 'getconf CLK_TCK' ).toString().trim(), 10 ) || 100;
+	} catch ( e ) {
+		return 100;
+	}
+} )();
+const PAGE_SIZE = ( () => {
+	try {
+		return parseInt( execSync( 'getconf PAGESIZE' ).toString().trim(), 10 ) || 4096;
+	} catch ( e ) {
+		return 4096;
+	}
+} )();
+
+/**
+ * Sample OS-level CPU and memory usage of every child process of this Node
+ * process. The heavy work runs in a Chrome browser launched (via chromedriver)
+ * as a child of this process, and Chrome is multi-process (browser, renderers,
+ * GPU, zygotes), so this walks the whole process subtree rooted at our own PID
+ * and aggregates it — excluding the Node process itself.
+ *
+ * Linux-only (reads /proc); returns null on other platforms or on error.
+ *
+ * Note: rss is summed across processes and therefore counts shared pages (e.g.
+ * shared libraries) once per process, so it slightly over-reports true unique
+ * memory. It is a useful upper bound, not an exact figure. cpuSeconds is
+ * cumulative since each child started, so diff two samples for a per-window cost.
+ *
+ * @return {{ processCount: number, rssBytes: number, cpuSeconds: number }|null}
+ */
+function sampleChildProcesses() {
+	if ( process.platform !== 'linux' ) {
+		return null;
+	}
+	let entries;
+	try {
+		entries = fs.readdirSync( '/proc' );
+	} catch ( e ) {
+		return null;
+	}
+
+	// pid -> { ppid, cpuTicks, rssPages }
+	const info = new Map();
+	for ( const entry of entries ) {
+		if ( !/^\d+$/.test( entry ) ) {
+			continue;
+		}
+		let stat;
+		try {
+			// eslint-disable-next-line security/detect-non-literal-fs-filename
+			stat = fs.readFileSync( `/proc/${ entry }/stat`, 'utf8' );
+		} catch ( e ) {
+			// Process may have exited between readdir and read; skip it.
+			continue;
+		}
+		// comm (field 2) is wrapped in parens and may itself contain spaces and
+		// parens, so parse everything after the final ')'. The remaining
+		// space-separated fields begin at "state" (stat field 3).
+		const rparen = stat.lastIndexOf( ')' );
+		if ( rparen === -1 ) {
+			continue;
+		}
+		const rest = stat.slice( rparen + 2 ).split( ' ' );
+		// Indexes into `rest` (0 = state = stat field 3):
+		//   ppid = 1, utime = 11, stime = 12, rss (pages) = 21
+		const ppid = parseInt( rest[ 1 ], 10 );
+		const cpuTicks = parseInt( rest[ 11 ], 10 ) + parseInt( rest[ 12 ], 10 );
+		const rssPages = parseInt( rest[ 21 ], 10 );
+		if ( Number.isNaN( ppid ) ) {
+			continue;
+		}
+		info.set( parseInt( entry, 10 ), { ppid, cpuTicks, rssPages } );
+	}
+
+	// Index children by parent, then collect all descendants of our own PID.
+	const childrenByParent = new Map();
+	for ( const [ pid, { ppid } ] of info ) {
+		if ( !childrenByParent.has( ppid ) ) {
+			childrenByParent.set( ppid, [] );
+		}
+		childrenByParent.get( ppid ).push( pid );
+	}
+
+	let processCount = 0;
+	let totalCpuTicks = 0;
+	let totalRssPages = 0;
+	const seen = new Set();
+	const stack = [ process.pid ];
+	while ( stack.length ) {
+		const current = stack.pop();
+		for ( const child of childrenByParent.get( current ) || [] ) {
+			if ( seen.has( child ) ) {
+				continue;
+			}
+			seen.add( child );
+			stack.push( child );
+			const d = info.get( child );
+			if ( d ) {
+				processCount++;
+				totalCpuTicks += d.cpuTicks;
+				totalRssPages += d.rssPages;
+			}
+		}
+	}
+
+	return {
+		processCount,
+		rssBytes: totalRssPages * PAGE_SIZE,
+		cpuSeconds: totalCpuTicks / CLOCK_TICKS_PER_SEC
+	};
+}
+
+/**
+ * Format a child-process sample as a compact string, or note it's unavailable.
+ *
+ * @param {{ processCount: number, rssBytes: number, cpuSeconds: number }|null} sample
+ * @param {number} [cpuDeltaSeconds] CPU seconds since a prior sample, if known
+ * @return {string}
+ */
+function formatChildProcesses( sample, cpuDeltaSeconds ) {
+	if ( !sample ) {
+		return 'child processes: n/a';
+	}
+	const mib = ( sample.rssBytes / 1024 / 1024 ).toFixed( 1 );
+	const cpu = typeof cpuDeltaSeconds === 'number' ?
+		`cpu ${ ( cpuDeltaSeconds * 1000 ).toFixed( 0 ) }ms` :
+		`cpu (cumulative) ${ ( sample.cpuSeconds * 1000 ).toFixed( 0 ) }ms`;
+	return `child processes: ${ sample.processCount } procs, rss ${ mib } MiB, ${ cpu }`;
+}
+
+/**
+ * Format process.memoryUsage() as a compact human-readable string (MiB).
+ *
+ * @param {Object} [mem] Reading to format (default: current usage)
+ * @return {string}
+ */
+function formatMemoryUsage( mem ) {
+	mem = mem || process.memoryUsage();
+	const mib = ( bytes ) => ( bytes / 1024 / 1024 ).toFixed( 1 );
+	return `rss ${ mib( mem.rss ) } MiB, ` +
+		`heap ${ mib( mem.heapUsed ) }/${ mib( mem.heapTotal ) } MiB, ` +
+		`external ${ mib( mem.external ) } MiB`;
+}
+
+/**
+ * Format a process.cpuUsage() reading (microseconds) as milliseconds of CPU
+ * time. Accepts either an absolute reading or a delta.
+ *
+ * @param {Object} cpu Result of process.cpuUsage()
+ * @return {string}
+ */
+function formatCpuUsage( cpu ) {
+	const ms = ( micros ) => ( micros / 1000 ).toFixed( 0 );
+	return `user ${ ms( cpu.user ) }ms, system ${ ms( cpu.system ) }ms`;
+}
+
+/**
+ * Log a one-off snapshot of resource usage: cumulative CPU time consumed by the
+ * process so far, and current memory. Used at startup milestones.
+ *
+ * @param {Object} serviceLogger
+ * @param {string} prefix
+ */
+function logResourceUsage( serviceLogger, prefix ) {
+	serviceLogger.info(
+		`[${ prefix }] [resources] node: cpu (cumulative) ${ formatCpuUsage( process.cpuUsage() ) }, ` +
+		`memory ${ formatMemoryUsage() }; ${ formatChildProcesses( sampleChildProcesses() ) }`
+	);
+}
+
 /**
  * Create a timed logger.
  *
+ * The returned function also carries a `logResources()` method, which reports
+ * the CPU time consumed and the change in heap usage since this logger was
+ * created, plus current memory. Call it when a request completes to see how
+ * much CPU/memory that specific request cost.
+ *
  * @param {string} prefix
  * @param {Object} serviceLogger
- * @return {Function} log function
+ * @return {Function} log function (with a `logResources` method)
  */
 function createTimedLogger( prefix, serviceLogger ) {
 	const startTime = Date.now();
+	const startCpu = process.cpuUsage();
+	const startMem = process.memoryUsage();
+	const startChild = sampleChildProcesses();
 	let lastTime = startTime;
 
-	return function log( message, timestamp ) {
+	function log( message, timestamp ) {
 		const now = typeof timestamp === 'number' ? Math.max( timestamp, lastTime ) : Date.now();
 		const sinceStart = now - startTime;
 		const delta = now - lastTime;
 		lastTime = now;
 		serviceLogger.info( `[${ prefix }] [progress ${ sinceStart }ms (+${ delta }ms)] ${ message }` );
+	}
+
+	log.logResources = function () {
+		// Passing startCpu makes cpuUsage() return the delta since it was taken.
+		const cpu = process.cpuUsage( startCpu );
+		const mem = process.memoryUsage();
+		const heapDelta = ( ( mem.heapUsed - startMem.heapUsed ) / 1024 / 1024 ).toFixed( 1 );
+
+		// The child processes (Chrome) do the heavy lifting; report the CPU they
+		// consumed during this request as the difference between two samples.
+		const endChild = sampleChildProcesses();
+		const childCpuDelta = startChild && endChild ?
+			endChild.cpuSeconds - startChild.cpuSeconds :
+			undefined;
+
+		serviceLogger.info(
+			`[${ prefix }] [resources] node: cpu ${ formatCpuUsage( cpu ) }, ` +
+			`heap delta ${ heapDelta } MiB, memory ${ formatMemoryUsage( mem ) }; ` +
+			`${ formatChildProcesses( endChild, childCpuDelta ) }`
+		);
 	};
+
+	return log;
 }
 
 /**
@@ -273,6 +478,7 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 					}
 				);
 				configLog( 'Sending response' );
+				configLog.logResources();
 				sendJson( res, 200, configs );
 			} catch ( e ) {
 				serviceLogger.error( `[error "config"] ${ e && e.stack ? e.stack : String( e ) }` );
@@ -356,6 +562,7 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 				parsoidHtml
 			);
 			log( 'Sending response' );
+			log.logResources();
 			sendJson( res, 200, result );
 		} catch ( e ) {
 			serviceLogger.error( `[error "${ normalizedTitle }"] ${ e && e.stack ? e.stack : String( e ) }` );
@@ -408,6 +615,7 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 				serviceLogger.info( `[startup] ${ msg }` );
 			}
 		);
+		logResourceUsage( serviceLogger, 'startup' );
 
 		const server = http.createServer(
 			makeHandler( sessionManager, serviceLogger, dbnameMap )
@@ -450,6 +658,7 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 			serviceLogger.info( `  timeout-ms:    ${ opts.timeoutMs }` );
 			serviceLogger.info( `  restart-every-requests: ${ opts.restartEveryRequests }` );
 			serviceLogger.info( `  headless:      ${ opts.headless }` );
+			logResourceUsage( serviceLogger, 'listening' );
 		} );
 
 		server.on( 'error', ( err ) => {
