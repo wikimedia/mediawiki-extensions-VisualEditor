@@ -9,11 +9,44 @@ const net = require( 'net' );
 // eslint-disable-next-line n/no-missing-require
 const puppeteer = require( 'puppeteer-core' );
 
+// Chrome launch flags for headless, rendering-free operation. The edit checks
+// run against a detached ve.dm document model, so Chrome never needs to paint,
+// use the GPU, decode images, or spin up extra renderer processes.
 const CHROME_ARGS = [
 	// Sandboxing/shm: required when running as root and to avoid the small
 	// /dev/shm found in many containers.
 	'--no-sandbox',
-	'--disable-dev-shm-usage'
+	'--disable-dev-shm-usage',
+	// Nothing renders, so disable the GPU stack entirely.
+	'--disable-gpu',
+	'--disable-software-rasterizer',
+	'--disable-accelerated-2d-canvas',
+	// Suppress image loading/decoding at the Blink level.
+	'--blink-settings=imagesEnabled=false',
+	// Single same-origin page + its own API requests; collapse to one renderer.
+	'--disable-site-isolation-trials',
+	'--renderer-process-limit=1',
+	// Keep the sole tab running at full speed (headless would throttle it).
+	'--disable-background-timer-throttling',
+	'--disable-backgrounding-occluded-windows',
+	'--disable-renderer-backgrounding',
+	// Turn off background chatter, telemetry, crash reporting, auto-updates.
+	'--disable-background-networking',
+	'--disable-component-update',
+	'--disable-domain-reliability',
+	'--disable-breakpad',
+	'--disable-client-side-phishing-detection',
+	'--metrics-recording-only',
+	'--no-first-run',
+	'--no-default-browser-check',
+	'--mute-audio',
+	'--disable-extensions',
+	'--disable-default-apps',
+	'--disable-sync',
+	'--disable-hang-monitor',
+	'--disable-ipc-flooding-protection',
+	'--disable-features=IsolateOrigins,site-per-process,Translate,' +
+		'BackForwardCache,MediaRouter,OptimizationHints,AcceptCHFrame'
 ];
 
 // Nothing renders in the headless page, so resources that only affect
