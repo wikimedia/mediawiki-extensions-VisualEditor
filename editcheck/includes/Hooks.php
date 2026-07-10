@@ -11,6 +11,7 @@
 namespace MediaWiki\Extension\VisualEditor\EditCheck;
 
 use MediaWiki\CommentStore\CommentStoreComment;
+use MediaWiki\Content\TextContent;
 use MediaWiki\Extension\VisualEditor\MediaWikiJsonSchemaValidator;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
@@ -69,6 +70,11 @@ class Hooks implements
 	/**
 	 * Validate on-wiki edit check config updates against the bundled JSON schema.
 	 *
+	 * The main MediaWiki:Editcheck-config.json page is validated against the whole
+	 * schema. Pages imported by a TextMatch rule via the "import" key
+	 * (MediaWiki:Editcheck-config-<name>.json) hold a single inline rule, so they are
+	 * validated against just the textMatchRuleInline part of the schema.
+	 *
 	 * @param RenderedRevision $renderedRevision
 	 * @param UserIdentity $user
 	 * @param CommentStoreComment $summary
@@ -77,11 +83,34 @@ class Hooks implements
 	 * @return bool|void
 	 */
 	public function onMultiContentSave( $renderedRevision, $user, $summary, $flags, $status ) {
-		return MediaWikiJsonSchemaValidator::validateOnSave(
+		$schemaPath = dirname( __DIR__ ) . '/editcheck-config.schema.json';
+		$result = MediaWikiJsonSchemaValidator::validateOnSave(
 			$renderedRevision,
 			$status,
 			'editcheck-config.json',
-			dirname( __DIR__ ) . '/editcheck-config.schema.json'
+			$schemaPath
 		);
+
+		if ( $result === false ) {
+			return false;
+		}
+
+		$page = $renderedRevision->getRevision()->getPageAsLinkTarget();
+		if ( $page->getNamespace() !== NS_MEDIAWIKI ) {
+			return;
+		}
+
+		$dbKey = strtolower( $page->getDBkey() );
+		if ( preg_match( '/^editcheck-config-.+\.json$/', $dbKey ) ) {
+			$content = $renderedRevision->getRevision()->getMainContentRaw();
+			if ( $content instanceof TextContent ) {
+				return MediaWikiJsonSchemaValidator::validate(
+					$content,
+					$status,
+					$schemaPath,
+					'textMatchRuleInline'
+				);
+			}
+		}
 	}
 }

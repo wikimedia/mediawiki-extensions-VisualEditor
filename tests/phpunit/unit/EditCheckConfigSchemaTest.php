@@ -44,6 +44,22 @@ class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 		) );
 	}
 
+	/**
+	 * Wrap a single named definition as a standalone schema, keeping the other
+	 * definitions available for internal $ref resolution. Mirrors
+	 * MediaWikiJsonSchemaValidator::validateOnSave().
+	 *
+	 * @param string $definition
+	 * @return \stdClass
+	 */
+	private function loadDefinitionSchema( string $definition ) {
+		$schema = $this->loadSchema();
+		return (object)[
+			'$ref' => '#/definitions/' . $definition,
+			'definitions' => $schema->definitions,
+		];
+	}
+
 	private function assertMatchesSchema( array $config ): void {
 		$validator = new Validator();
 		$jsonConfig = $this->toJsonObject( $config );
@@ -58,6 +74,22 @@ class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 		$validator->validate( $jsonConfig, $this->loadSchema() );
 
 		$this->assertFalse( $validator->isValid(), 'Config unexpectedly matched schema' );
+	}
+
+	private function assertMatchesDefinition( array $config, string $definition ): void {
+		$validator = new Validator();
+		$jsonConfig = $this->toJsonObject( $config );
+		$validator->validate( $jsonConfig, $this->loadDefinitionSchema( $definition ) );
+
+		$this->assertTrue( $validator->isValid(), $this->formatErrors( $validator->getErrors() ) );
+	}
+
+	private function assertDoesNotMatchDefinition( array $config, string $definition ): void {
+		$validator = new Validator();
+		$jsonConfig = $this->toJsonObject( $config );
+		$validator->validate( $jsonConfig, $this->loadDefinitionSchema( $definition ) );
+
+		$this->assertFalse( $validator->isValid(), 'Config unexpectedly matched definition' );
 	}
 
 	public function testSchemaIsValidJson(): void {
@@ -81,10 +113,57 @@ class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 		$this->assertDoesNotMatchSchema( $config );
 	}
 
+	/**
+	 * @dataProvider provideValidImports
+	 */
+	public function testSchemaAcceptsValidImport( array $config ): void {
+		$this->assertMatchesDefinition( $config, 'textMatchRuleInline' );
+	}
+
+	/**
+	 * @dataProvider provideInvalidImports
+	 */
+	public function testSchemaRejectsInvalidImport( array $config ): void {
+		$this->assertDoesNotMatchDefinition( $config, 'textMatchRuleInline' );
+	}
+
 	public static function provideValidConfigs(): iterable {
 		foreach ( glob( __DIR__ . '/configs/*.json' ) as $fixturePath ) {
 			yield basename( $fixturePath ) => [ self::loadFixtureData( basename( $fixturePath ) ) ];
 		}
+	}
+
+	public static function provideValidImports(): iterable {
+		foreach ( glob( __DIR__ . '/configs/textmatch-import/*.json' ) as $fixturePath ) {
+			$name = basename( $fixturePath );
+			yield $name => [ self::loadFixtureData( 'textmatch-import/' . $name ) ];
+		}
+	}
+
+	public static function provideInvalidImports(): iterable {
+		yield 'missing required query' => [ [
+			'title' => 'Bad',
+			'message' => 'No query here'
+		] ];
+
+		yield 'invalid mode' => [ [
+			'query' => 'Foo',
+			'mode' => 'rename'
+		] ];
+
+		yield 'minOccurrences below minimum' => [ [
+			'query' => 'Foo',
+			'minOccurrences' => 0
+		] ];
+
+		yield 'unknown property' => [ [
+			'query' => 'Foo',
+			'bogus' => true
+		] ];
+
+		yield 'is not itself an import' => [ [
+			'import' => 'MediaWiki:Editcheck-config-other.json'
+		] ];
 	}
 
 	public static function provideInvalidConfigs(): iterable {

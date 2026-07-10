@@ -32,13 +32,18 @@ class MediaWikiJsonSchemaValidator {
 	 * @param string $pageDBkey Lower-cased DB key of the MediaWiki: page to validate,
 	 *   e.g. 'editcheck-config.json'
 	 * @param string $schemaPath Absolute path to the JSON schema file to validate against
+	 * @param string|null $definition Name of an entry within the schema's "definitions" to
+	 *   validate against instead of the whole schema, e.g. 'textMatchRuleInline'. This is
+	 *   used to validate files that hold just one part of the config (such as a TextMatch
+	 *   rule imported via the "import" key). When null, the full schema is used.
 	 * @return bool|null False to abort the save when validation fails, null otherwise
 	 */
 	public static function validateOnSave(
 		RenderedRevision $renderedRevision,
 		Status $status,
 		string $pageDBkey,
-		string $schemaPath
+		string $schemaPath,
+		?string $definition = null
 	): ?bool {
 		$page = $renderedRevision->getRevision()->getPageAsLinkTarget();
 		if (
@@ -47,21 +52,47 @@ class MediaWikiJsonSchemaValidator {
 		) {
 			return null;
 		}
-
 		$content = $renderedRevision->getRevision()->getMainContentRaw();
 		if ( !( $content instanceof TextContent ) ) {
 			// If for some reason the content isn't text, we can't validate it
 			return null;
 		}
 
+		return self::validate( $content, $status, $schemaPath, $definition );
+	}
+
+	/**
+	 * Validate specific JSON content against a JSON schema.
+	 *
+	 * @param TextContent $content The content being saved
+	 * @param Status $status See validateOnSave()
+	 * @param string $schemaPath See validateOnSave()
+	 * @param string|null $definition See validateOnSave()
+	 * @return bool|null See validateOnSave()
+	 */
+	public static function validate(
+		TextContent $content,
+		Status $status,
+		string $schemaPath,
+		?string $definition = null
+	): ?bool {
 		$config = json_decode( $content->getText() );
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
 			$status->fatal( 'visualeditor-config-save-invalid-schema', json_last_error_msg() );
 			return false;
 		}
 
-		$validator = new Validator();
 		$schema = json_decode( file_get_contents( $schemaPath ) );
+		if ( $definition !== null ) {
+			// Validate against a single named definition, while keeping the schema's other
+			// definitions in the document so internal $ref pointers still resolve.
+			$schema = (object)[
+				'$ref' => '#/definitions/' . $definition,
+				'definitions' => $schema->definitions,
+			];
+		}
+
+		$validator = new Validator();
 		$validator->validate( $config, $schema );
 		if ( $validator->isValid() ) {
 			return null;
