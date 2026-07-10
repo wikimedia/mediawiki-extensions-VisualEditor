@@ -30,9 +30,11 @@
 			"Vuh",
 			"WTM",
 			"Woytecr",
-			"Wpedzich"
+			"Wpedzich",
+			"PanWor"
 		]
 	},
+	"collabpad-disabled": "W tej wiki funkcja CollabPad nie jest włączona.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Zaimportowano z $1",
 	"collabpad": "CollabPad",
@@ -254,6 +256,7 @@
 	"visualeditor-educationpopup-dismiss": "Ok, rozumiem",
 	"visualeditor-expandable-less": "Mniej",
 	"visualeditor-expandable-more": "Więcej",
+	"visualeditor-expandableerror-toggle": "Zmień widoczność",
 	"visualeditor-feedback-defaultmessage": "URL: $1",
 	"visualeditor-formatdropdown-format-mw-heading1": "Tytuł strony",
 	"visualeditor-formatdropdown-format-mw-heading2": "Nagłówek rozdziału",
@@ -356,7 +359,7 @@
 	"visualeditor-savedialog-identify-user": "Jesteś teraz {{GENDER:$1|zalogowany|zalogowana}} jako <strong>[[User:$1|$1]]</strong>. Jeśli kontynuujesz, ta edycja będzie przypisana do tego konta.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "Możesz nacisnąć $1, aby zapisać swoją edycję.",
 	"visualeditor-savedialog-label-publish-short": "Opublikuj",
-	"visualeditor-savedialog-label-publish-short-start": "Opublikuj...",
+	"visualeditor-savedialog-label-publish-short-start": "Opublikuj…",
 	"visualeditor-savedialog-label-resolve-conflict": "Rozwiąż konflikt",
 	"visualeditor-savedialog-label-resume-editing": "Kontynuuj edycję",
 	"visualeditor-savedialog-label-review": "Skontroluj swoje zmiany",
