@@ -8,7 +8,7 @@
 			"preferredTypes": {
 				"HeadlessBrowserSession": "HeadlessBrowserSession",
 				"HeadlessSessionManager": "HeadlessSessionManager",
-				"WebDriver": "WebDriver"
+				"Page": "Page"
 			}
 		}
 	}

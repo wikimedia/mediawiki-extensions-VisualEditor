@@ -11,6 +11,6 @@
 	},
 	"dependencies": {
 		"@wikimedia/service-utils": "2.0.0",
-		"selenium-webdriver": "4.45.0"
+		"puppeteer-core": "25.3.0"
 	}
 }

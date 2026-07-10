@@ -17,6 +17,7 @@ function printUsage() {
 	console.error( '  node editcheck/build/editcheck-headless/editcheck-headless-server.js [options]' );
 	console.error( '' );
 	console.error( 'Server options:' );
+	console.error( '  --engine <name>        Browser engine: "chrome" or "lightpanda" (default: chrome)' );
 	console.error( '  --wikis <list>         Comma-separated list of wikis to give a' );
 	console.error( '                         dedicated persistent session; each is a' );
 	console.error( '                         base URL (https://…) or dbname (e.g. enwiki).' );
@@ -26,9 +27,10 @@ function printUsage() {
 	console.error( '  --sitematrix-url <url> MediaWiki API endpoint for dbname resolution' );
 	console.error( '                         (default: metawiki api.php)' );
 	console.error( '  --timeout-ms <ms>      Max wait per request (default: 90000)' );
-	console.error( '  --restart-every-requests <n> Restart Chrome after every N processed requests (default: 100, 0 = disabled)' );
-	console.error( '  --headed               Run Chrome with a visible window (default: headless)' );
-	console.error( '  --chrome-binary <path> Optional Chrome/Chromium binary path' );
+	console.error( '  --restart-every-requests <n> Restart the browser after every N processed requests (default: 100, 0 = disabled)' );
+	console.error( '  --lightpanda-binary <path> Lightpanda binary to spawn (engine=lightpanda; default: "lightpanda" on PATH)' );
+	console.error( '  --lightpanda-host <host> Host Lightpanda binds its CDP endpoint to (engine=lightpanda; default: 127.0.0.1)' );
+	console.error( '  --chrome-binary <path> Chrome/Chromium binary (engine=chrome; default: auto-detected installed Chrome)' );
 	console.error( '  --port <port>          HTTP port to listen on (default: 3000)' );
 	console.error( '  --host <host>          Host/address to bind to (default: 127.0.0.1)' );
 	console.error( '' );
@@ -42,20 +44,23 @@ function printUsage() {
 /**
  * Parse CLI arguments
  *
- * Recognised flags: --wikis, --script-path, --sitematrix-url, --timeout-ms,
- * --headed, --chrome-binary, --restart-every-requests, --port, --host.
+ * Recognised flags: --engine, --wikis, --script-path, --sitematrix-url,
+ * --timeout-ms, --lightpanda-binary, --lightpanda-host, --chrome-binary,
+ * --restart-every-requests, --port, --host.
  *
  * @param {string[]} argv Arguments (typically process.argv.slice( 2 )).
  * @return {Object} Parsed options.
  */
 function parseArgs( argv ) {
 	const opts = {
+		engine: process.env.MW_BROWSER_ENGINE || 'chrome',
 		wikis: process.env.MW_WIKIS || '',
 		scriptPath: process.env.MW_SCRIPT_PATH || '/w',
 		sitematrixUrl: process.env.MW_SITEMATRIX_URL,
 		timeoutMs: 90000,
-		headless: true,
-		chromeBinary: '',
+		lightpandaBinary: process.env.LIGHTPANDA_BINARY || 'lightpanda',
+		lightpandaHost: '127.0.0.1',
+		chromeBinary: process.env.CHROME_BINARY || '',
 		restartEveryRequests: 100,
 		port: 3000,
 		host: '127.0.0.1'
@@ -63,11 +68,6 @@ function parseArgs( argv ) {
 
 	for ( let i = 0; i < argv.length; i++ ) {
 		const arg = argv[ i ];
-
-		if ( arg === '--headed' ) {
-			opts.headless = false;
-			continue;
-		}
 
 		if ( !arg.startsWith( '--' ) ) {
 			throw new Error( `Unexpected argument: ${ arg }` );
@@ -81,6 +81,9 @@ function parseArgs( argv ) {
 		}
 
 		switch ( key ) {
+			case '--engine':
+				opts.engine = value;
+				break;
 			case '--wikis':
 				opts.wikis = value;
 				break;
@@ -92,6 +95,12 @@ function parseArgs( argv ) {
 				break;
 			case '--timeout-ms':
 				opts.timeoutMs = Number( value );
+				break;
+			case '--lightpanda-binary':
+				opts.lightpandaBinary = value;
+				break;
+			case '--lightpanda-host':
+				opts.lightpandaHost = value;
 				break;
 			case '--chrome-binary':
 				opts.chromeBinary = value;
@@ -110,6 +119,9 @@ function parseArgs( argv ) {
 		}
 	}
 
+	if ( opts.engine !== 'lightpanda' && opts.engine !== 'chrome' ) {
+		throw new Error( '--engine must be "chrome" or "lightpanda"' );
+	}
 	if ( Number.isNaN( opts.timeoutMs ) || opts.timeoutMs < 1 ) {
 		throw new Error( '--timeout-ms must be a positive number' );
 	}
@@ -218,10 +230,10 @@ const PAGE_SIZE = ( () => {
 
 /**
  * Sample OS-level CPU and memory usage of every child process of this Node
- * process. The heavy work runs in a Chrome browser launched (via chromedriver)
- * as a child of this process, and Chrome is multi-process (browser, renderers,
- * GPU, zygotes), so this walks the whole process subtree rooted at our own PID
- * and aggregates it — excluding the Node process itself.
+ * process. The heavy work runs in browser processes spawned as children of
+ * this process; this walks the whole process subtree rooted at our own PID and
+ * aggregates it — excluding the Node process itself — so it stays correct if a
+ * browser ever spawns helper processes of its own.
  *
  * Linux-only (reads /proc); returns null on other platforms or on error.
  *
@@ -657,7 +669,12 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 			serviceLogger.info( `  script-path:   ${ opts.scriptPath }` );
 			serviceLogger.info( `  timeout-ms:    ${ opts.timeoutMs }` );
 			serviceLogger.info( `  restart-every-requests: ${ opts.restartEveryRequests }` );
-			serviceLogger.info( `  headless:      ${ opts.headless }` );
+			serviceLogger.info( `  engine:        ${ opts.engine }` );
+			if ( opts.engine === 'chrome' ) {
+				serviceLogger.info( `  chrome:        ${ opts.chromeBinary || 'auto-detected' }` );
+			} else {
+				serviceLogger.info( `  lightpanda:    ${ opts.lightpandaBinary } (host ${ opts.lightpandaHost })` );
+			}
 			logResourceUsage( serviceLogger, 'listening' );
 		} );
 

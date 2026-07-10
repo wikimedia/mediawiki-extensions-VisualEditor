@@ -286,6 +286,29 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 
 		publishHeadlessProgress( `Request ${ requestId } parsing document`, requestId );
 		const htmlDoc = targetClass.static.parseDocument( html, 'visual', null );
+		// Parsoid links are relative (e.g. href="./Foo") and rely on the document's
+		// <base href> to resolve. VE's getTargetDataFromHref() resolves them against
+		// document.baseURI to recognise internal links. Some headless engines (e.g.
+		// Lightpanda) don't apply the (VE-inserted) <base> element to either
+		// document.baseURI or anchor.href, so internal links go unrecognised and
+		// link-based checks (duplicateLink, disambiguation, yearLink) silently
+		// produce nothing. Resolve each relative href against the <base> element's
+		// href explicitly and store the absolute form, which makes link resolution
+		// base-independent. This is a no-op in engines that honour <base> (the
+		// resolved value is unchanged).
+		const baseElement = htmlDoc.querySelector( 'base[href]' );
+		if ( baseElement ) {
+			const baseHref = new URL( baseElement.getAttribute( 'href' ), htmlDoc.baseURI ).href;
+			Array.prototype.forEach.call( htmlDoc.querySelectorAll( 'a[href]' ), ( a ) => {
+				let resolved;
+				try {
+					resolved = new URL( a.getAttribute( 'href' ), baseHref ).href;
+				} catch ( e ) {
+					return;
+				}
+				ve.setAttributeSafe( a, 'href', resolved, a.getAttribute( 'href' ) );
+			} );
+		}
 		const dmDoc = targetClass.static.createModelFromDom( htmlDoc, 'visual' );
 		const surfaceModel = new ve.dm.Surface( dmDoc );
 		publishHeadlessProgress( `Request ${ requestId } running edit checks`, requestId );

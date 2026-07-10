@@ -1,48 +1,129 @@
 'use strict';
 
-const { Builder } = require( 'selenium-webdriver' );
-const chrome = require( 'selenium-webdriver/chrome' );
+/* global window, mw */
+// window and mw are referenced only inside page.evaluate() callbacks, whose
+// bodies are serialised and executed in the browser, not in this Node process.
+
+const { spawn } = require( 'child_process' );
+const net = require( 'net' );
+// eslint-disable-next-line n/no-missing-require
+const puppeteer = require( 'puppeteer-core' );
+
+const CHROME_ARGS = [
+	// Sandboxing/shm: required when running as root and to avoid the small
+	// /dev/shm found in many containers.
+	'--no-sandbox',
+	'--disable-dev-shm-usage'
+];
+
+/**
+ * Find a free TCP port on the loopback interface.
+ *
+ * @return {Promise<number>} An available port number
+ */
+function getFreePort() {
+	return new Promise( ( resolve, reject ) => {
+		const srv = net.createServer();
+		srv.once( 'error', reject );
+		srv.listen( 0, '127.0.0.1', () => {
+			const { port } = srv.address();
+			srv.close( () => resolve( port ) );
+		} );
+	} );
+}
+
+/**
+ * Poll until a TCP port accepts connections, or reject on timeout.
+ *
+ * @param {string} host Host to connect to
+ * @param {number} port Port to connect to
+ * @param {number} timeoutMs Maximum time to wait
+ * @return {Promise<void>}
+ */
+function waitForPort( host, port, timeoutMs ) {
+	const deadline = Date.now() + timeoutMs;
+	return new Promise( ( resolve, reject ) => {
+		const attempt = () => {
+			const sock = net.connect( port, host );
+			sock.once( 'connect', () => {
+				sock.destroy();
+				resolve();
+			} );
+			sock.once( 'error', () => {
+				sock.destroy();
+				if ( Date.now() >= deadline ) {
+					reject( new Error( `Timed out waiting for ${ host }:${ port } to accept connections` ) );
+				} else {
+					setTimeout( attempt, 50 );
+				}
+			} );
+		};
+		attempt();
+	} );
+}
+
+/**
+ * Poll an async predicate until it returns a truthy value, or reject on timeout.
+ *
+ * @param {Function} fn Predicate returning a promise
+ * @param {number} timeoutMs Maximum time to wait
+ * @param {string} description Included in the timeout error message
+ * @param {number} [intervalMs] Delay between attempts (default: 100)
+ * @return {Promise<*>} The first truthy value returned by fn
+ */
+async function pollUntil( fn, timeoutMs, description, intervalMs = 100 ) {
+	const deadline = Date.now() + timeoutMs;
+	while ( true ) {
+		const result = await fn();
+		if ( result ) {
+			return result;
+		}
+		if ( Date.now() >= deadline ) {
+			throw new Error( `Timed out waiting for ${ description }` );
+		}
+		await new Promise( ( resolve ) => {
+			setTimeout( resolve, intervalMs );
+		} );
+	}
+}
 
 /**
  * Read the headless result object from the browser.
  *
- * @param {WebDriver} driver Selenium WebDriver instance
+ * @param {Page} page Puppeteer page
  * @return {Promise<Object|null>} The veEditCheckHeadlessResult object, or null if not yet available
  */
-async function readHeadlessResult( driver ) {
-	return driver.executeScript(
-		'return window.veEditCheckHeadlessResult || null;'
-	);
+async function readHeadlessResult( page ) {
+	return page.evaluate( () => window.veEditCheckHeadlessResult || null );
 }
 
 /**
  * Read the resolved per-check edit check configs from the browser.
  *
- * @param {WebDriver} driver Selenium WebDriver instance
+ * @param {Page} page Puppeteer page
  * @return {Promise<Object>} Object with either { configs } or { error }
  */
-async function readCheckConfigs( driver ) {
-	return driver.executeAsyncScript( `
-		const callback = arguments[ arguments.length - 1 ];
+async function readCheckConfigs( page ) {
+	return page.evaluate( async () => {
 		if ( typeof window.veEditCheckHeadlessGetConfigs !== 'function' ) {
-			callback( { error: 'veEditCheckHeadlessGetConfigs is not available' } );
-			return;
+			return { error: 'veEditCheckHeadlessGetConfigs is not available' };
 		}
-		window.veEditCheckHeadlessGetConfigs().then(
-			( configs ) => callback( { configs } ),
-			( e ) => callback( { error: String( e ) } )
-		);
-	` );
+		try {
+			return { configs: await window.veEditCheckHeadlessGetConfigs() };
+		} catch ( e ) {
+			return { error: String( e ) };
+		}
+	} );
 }
 
 /**
  * Inject progress hooks into the browser.
  *
- * @param {WebDriver} driver Selenium WebDriver instance
+ * @param {Page} page Puppeteer page
  * @return {Promise<void>}
  */
-async function injectProgressHooks( driver ) {
-	return driver.executeScript( `
+async function injectProgressHooks( page ) {
+	return page.evaluate( () => {
 		if ( window.veProgressInstalled ) {
 			return;
 		}
@@ -78,93 +159,115 @@ async function injectProgressHooks( driver ) {
 			.catch( () => {
 				progress( 'ext.visualEditor.editCheck.headless failed' );
 			} );
-	` );
+	} );
 }
 
 /**
  * Drain the client-side progress events.
  *
- * @param {WebDriver} driver Selenium WebDriver instance
+ * @param {Page} page Puppeteer page
  * @return {Promise<Array>} Array of progress events
  */
-async function drainClientProgress( driver ) {
-	return driver.executeScript( `
-		return window.veHeadlessProgress ? window.veHeadlessProgress.splice( 0 ) : [];
-	` );
+async function drainClientProgress( page ) {
+	return page.evaluate(
+		() => ( window.veHeadlessProgress ? window.veHeadlessProgress.splice( 0 ) : [] )
+	);
 }
 
 /**
  * Start a headless run in the browser.
  *
- * @param {WebDriver} driver Selenium WebDriver instance
+ * @param {Page} page Puppeteer page
  * @param {string} title Page title to check
  * @param {string|null} parsoidHtml Optional Parsoid HTML to use instead of fetching from the server
  * @return {Promise<string>} Request ID for the headless run
  */
-async function startBrowserRun( driver, title, parsoidHtml ) {
-	return driver.executeScript( `
+async function startBrowserRun( page, title, parsoidHtml ) {
+	return page.evaluate( ( t, html ) => {
 		if ( typeof window.veEditCheckHeadlessStart !== 'function' ) {
 			throw new Error( 'veEditCheckHeadlessStart is not available' );
 		}
-		return window.veEditCheckHeadlessStart( arguments[0], arguments[1] || null );
-	`,
-	title,
-	parsoidHtml || null );
+		return window.veEditCheckHeadlessStart( t, html || null );
+	}, title, parsoidHtml || null );
 }
 
 /**
  * Wait for a headless run to complete.
  *
- * @param {WebDriver} driver Selenium WebDriver instance
+ * @param {Page} page Puppeteer page
  * @param {string} requestId Request ID for the headless run
  * @param {number} timeoutMs Timeout in milliseconds
  * @param {Function} progress Progress callback
  * @return {Promise<Object>} Headless result object
  */
-async function waitForResult( driver, requestId, timeoutMs, progress ) {
+async function waitForResult( page, requestId, timeoutMs, progress ) {
 	let lastStatus = null;
 	let sawAnyResult = false;
+	const deadline = Date.now() + timeoutMs;
 
-	return driver.wait( async () => {
-		const events = await drainClientProgress( driver );
+	while ( true ) {
+		const events = await drainClientProgress( page );
 		for ( const event of events ) {
 			progress( `[browser] ${ event.msg }`, event.t );
 		}
 
-		const result = await readHeadlessResult( driver );
-		if ( !result || result.requestId !== requestId ) {
-			return false;
+		const result = await readHeadlessResult( page );
+		if ( result && result.requestId === requestId ) {
+			if ( !sawAnyResult ) {
+				sawAnyResult = true;
+				progress( `Headless result object published for request ${ requestId }` );
+			}
+
+			if ( result.status !== lastStatus ) {
+				lastStatus = result.status;
+				progress( `Headless status [${ requestId }]: ${ result.status }` );
+			}
+
+			if ( result.status === 'error' ) {
+				throw new Error( result.error || `Headless run failed for request ${ requestId }` );
+			}
+
+			if ( result.status === 'ready' ) {
+				return result;
+			}
 		}
 
-		if ( !sawAnyResult ) {
-			sawAnyResult = true;
-			progress( `Headless result object published for request ${ requestId }` );
+		if ( Date.now() >= deadline ) {
+			throw new Error( `Timed out waiting for request ${ requestId }` );
 		}
-
-		if ( result.status !== lastStatus ) {
-			lastStatus = result.status;
-			progress( `Headless status [${ requestId }]: ${ result.status }` );
-		}
-
-		if ( result.status === 'error' ) {
-			throw new Error( result.error || `Headless run failed for request ${ requestId }` );
-		}
-
-		return result.status === 'ready' ? result : false;
-	}, timeoutMs );
+		await new Promise( ( resolve ) => {
+			setTimeout( resolve, 100 );
+		} );
+	}
 }
 
 /**
  * Headless browser session for running edit checks.
+ *
+ * A session drives a headless browser over CDP with puppeteer-core. Two engines
+ * are supported: Chrome (the default), launched directly by puppeteer, and
+ * Lightpanda, a lightweight rendering-free browser spawned as a dedicated
+ * `lightpanda serve` child process. Neither ever needs to paint: the edit checks
+ * run against a detached ve.dm document model, which only requires the
+ * JavaScript engine and resource loading.
  */
 class HeadlessBrowserSession {
 	/**
-	 * @param {Object} opts Options: scriptPath, timeoutMs, headless,
-	 * chromeBinary, restartEveryRequests.
+	 * @param {Object} opts Options: engine ('chrome' or 'lightpanda'), scriptPath,
+	 *   timeoutMs, restartEveryRequests, lightpandaBinary, lightpandaHost,
+	 *   chromeBinary.
 	 */
 	constructor( opts ) {
 		this.opts = opts;
-		this.driver = null;
+		this.engine = opts.engine || 'chrome';
+		// The spawned `lightpanda serve` child process, or null (Chrome, or not
+		// running). Chrome is launched directly by puppeteer, so has no such handle.
+		this.serverProc = null;
+		// The puppeteer Browser/BrowserContext/Page connected to it, or null when
+		// not connected.
+		this.browser = null;
+		this.context = null;
+		this.page = null;
 		// Base URL the persistent page is currently loaded for, or null if no
 		// page is loaded yet. Requests re-navigate only when this differs.
 		this.currentBaseUrl = null;
@@ -173,20 +276,60 @@ class HeadlessBrowserSession {
 	}
 
 	/**
-	 * Build Chrome options for the WebDriver.
+	 * Spawn Lightpanda and wait for its CDP endpoint to become reachable.
 	 *
-	 * @return {chrome.Options} Chrome options
+	 * @param {Function} progress Progress callback
+	 * @return {Promise<string>} The CDP WebSocket endpoint URL
 	 */
-	buildChromeOptions() {
-		const chromeOptions = new chrome.Options();
-		chromeOptions.addArguments( '--no-sandbox', '--disable-dev-shm-usage' );
-		if ( this.opts.headless ) {
-			chromeOptions.addArguments( '--headless=new' );
+	async launchLightpanda( progress ) {
+		const host = this.opts.lightpandaHost || '127.0.0.1';
+		const port = await getFreePort();
+		const binary = this.opts.lightpandaBinary || 'lightpanda';
+
+		progress( `Launching Lightpanda (${ binary }) on ${ host }:${ port }` );
+		const proc = spawn(
+			binary,
+			[ 'serve', '--host', host, '--port', String( port ) ],
+			{ stdio: [ 'ignore', 'pipe', 'pipe' ] }
+		);
+		this.serverProc = proc;
+
+		// Keep the tail of stderr so a startup failure can be reported usefully.
+		let stderrTail = '';
+		proc.stderr.on( 'data', ( chunk ) => {
+			stderrTail = ( stderrTail + chunk ).slice( -2000 );
+		} );
+
+		// Race "port is listening" against "process died during startup". The
+		// failure listeners are removed once we're up so they don't fire on a
+		// later, expected exit during close().
+		let onError, onExit;
+		const startupFailed = new Promise( ( resolve, reject ) => {
+			onError = ( err ) => reject(
+				new Error( `Failed to launch Lightpanda '${ binary }': ${ err.message }` )
+			);
+			onExit = ( code, signal ) => reject( new Error(
+				`Lightpanda exited during startup (code=${ code }, signal=${ signal })` +
+				( stderrTail.trim() ? `: ${ stderrTail.trim() }` : '' )
+			) );
+			proc.once( 'error', onError );
+			proc.once( 'exit', onExit );
+		} );
+		// startupFailed only ever rejects; swallow it if the race is won by the
+		// ready promise so it doesn't surface as an unhandled rejection.
+		startupFailed.catch( () => {} );
+
+		try {
+			await Promise.race( [
+				waitForPort( host, port, this.opts.timeoutMs ),
+				startupFailed
+			] );
+		} finally {
+			proc.removeListener( 'error', onError );
+			proc.removeListener( 'exit', onExit );
 		}
-		if ( this.opts.chromeBinary ) {
-			chromeOptions.setChromeBinaryPath( this.opts.chromeBinary );
-		}
-		return chromeOptions;
+
+		return `ws://${ host }:${ port }`;
 	}
 
 	/**
@@ -198,15 +341,35 @@ class HeadlessBrowserSession {
 	 */
 	async init( onProgress ) {
 		const progress = onProgress || ( () => {} );
-		if ( this.driver ) {
+		if ( this.browser ) {
 			return;
 		}
 
-		progress( 'Launching browser' );
-		this.driver = await new Builder()
-			.forBrowser( 'chrome' )
-			.setChromeOptions( this.buildChromeOptions() )
-			.build();
+		if ( this.engine === 'chrome' ) {
+			progress( `Launching Chrome (${ this.opts.chromeBinary || 'system channel' })` );
+			this.browser = await puppeteer.launch( {
+				executablePath: this.opts.chromeBinary || undefined,
+				// Let puppeteer locate an installed Chrome when no path is given.
+				channel: this.opts.chromeBinary ? undefined : 'chrome',
+				headless: true,
+				// No viewport is needed; nothing renders.
+				defaultViewport: null,
+				args: CHROME_ARGS
+			} );
+		} else {
+			const wsEndpoint = await this.launchLightpanda( progress );
+			this.browser = await puppeteer.connect( {
+				browserWSEndpoint: wsEndpoint,
+				// No viewport is needed; nothing renders.
+				defaultViewport: null
+			} );
+		}
+
+		// Both engines serve pages from an explicit browser context. For Lightpanda
+		// this is required: reusing the default page (browser.pages()[0]) fails with
+		// "BrowserContextNotLoaded" and leaves navigation hanging.
+		this.context = await this.browser.createBrowserContext();
+		this.page = await this.context.newPage();
 		progress( 'Browser launched' );
 	}
 
@@ -231,7 +394,7 @@ class HeadlessBrowserSession {
 	 */
 	async navigateTo( baseUrl, onProgress ) {
 		const progress = onProgress || ( () => {} );
-		if ( !this.driver ) {
+		if ( !this.page ) {
 			throw new Error( 'Browser session is not initialized' );
 		}
 		if ( this.currentBaseUrl === baseUrl ) {
@@ -242,12 +405,19 @@ class HeadlessBrowserSession {
 		progress( `Opening persistent headless page: ${ url }` );
 		// Clear first so a failed navigation doesn't leave a stale base URL.
 		this.currentBaseUrl = null;
-		await this.driver.get( url );
-		await injectProgressHooks( this.driver );
+		await this.page.goto( url, {
+			waitUntil: 'domcontentloaded',
+			timeout: this.opts.timeoutMs
+		} );
+		await injectProgressHooks( this.page );
 
-		await this.driver.wait( async () => this.driver.executeScript(
-			'return typeof window.veEditCheckHeadlessStart === "function";'
-		), this.opts.timeoutMs );
+		await pollUntil(
+			() => this.page.evaluate(
+				() => typeof window.veEditCheckHeadlessStart === 'function'
+			),
+			this.opts.timeoutMs,
+			'the headless loader to initialise'
+		);
 
 		this.currentBaseUrl = baseUrl;
 		progress( `Persistent browser session is ready for ${ baseUrl }` );
@@ -283,10 +453,10 @@ class HeadlessBrowserSession {
 			try {
 				await this.ensureReady( baseUrl, progress );
 				progress( `Submitting headless request for title "${ title }"` );
-				const requestId = await startBrowserRun( this.driver, title, parsoidHtml );
+				const requestId = await startBrowserRun( this.page, title, parsoidHtml );
 				progress( `Waiting for request ${ requestId }` );
 				const finalResult = await waitForResult(
-					this.driver, requestId, this.opts.timeoutMs, progress
+					this.page, requestId, this.opts.timeoutMs, progress
 				);
 				progress( `Done [${ requestId }]: ${ finalResult.data.suggestionCounts[ '*' ] } suggestions` );
 				resultData = finalResult.data;
@@ -340,7 +510,7 @@ class HeadlessBrowserSession {
 		const task = async () => {
 			await this.ensureReady( baseUrl, progress );
 			progress( 'Reading edit check configs' );
-			const result = await readCheckConfigs( this.driver );
+			const result = await readCheckConfigs( this.page );
 			if ( result && result.error ) {
 				throw new Error( result.error );
 			}
@@ -353,19 +523,70 @@ class HeadlessBrowserSession {
 	}
 
 	/**
-	 * Close the browser session.
+	 * Close the browser session. For Chrome this closes the launched browser
+	 * process; for Lightpanda it disconnects the CDP client and terminates the
+	 * spawned `lightpanda serve` process.
 	 *
 	 * @param {Function} [onProgress] Progress callback
 	 * @return {Promise<void>}
 	 */
 	async close( onProgress ) {
 		const progress = onProgress || ( () => {} );
-		if ( !this.driver ) {
+		if ( !this.browser && !this.serverProc ) {
 			return;
 		}
 		progress( 'Closing browser session' );
-		await this.driver.quit();
-		this.driver = null;
+
+		try {
+			if ( this.page ) {
+				await this.page.close();
+			}
+			if ( this.context ) {
+				await this.context.close();
+			}
+		} catch ( e ) {
+			// Ignore: we are tearing down anyway.
+		}
+
+		if ( this.serverProc ) {
+			// Lightpanda: disconnect the CDP client, then stop the process we
+			// spawned (disconnect() alone leaves it running).
+			try {
+				if ( this.browser ) {
+					await this.browser.disconnect();
+				}
+			} catch ( e ) {
+				// Ignore.
+			}
+			const proc = this.serverProc;
+			this.serverProc = null;
+			// Check the process hasn't crashed already (otherwise there will
+			// be no exit event to wait for).
+			if ( proc.exitCode === null && proc.signalCode === null ) {
+				await new Promise( ( resolve ) => {
+					const killTimer = setTimeout( () => {
+						proc.kill( 'SIGKILL' );
+					}, 2000 );
+					killTimer.unref();
+					proc.once( 'exit', () => {
+						clearTimeout( killTimer );
+						resolve();
+					} );
+					proc.kill( 'SIGTERM' );
+				} );
+			}
+		} else if ( this.browser ) {
+			// Chrome: close() terminates the browser process puppeteer launched.
+			try {
+				await this.browser.close();
+			} catch ( e ) {
+				// Ignore.
+			}
+		}
+
+		this.browser = null;
+		this.context = null;
+		this.page = null;
 		this.currentBaseUrl = null;
 	}
 }
@@ -379,8 +600,9 @@ class HeadlessBrowserSession {
  */
 class HeadlessSessionManager {
 	/**
-	 * @param {Object} opts Session options (scriptPath, timeoutMs, headless,
-	 *   chromeBinary, restartEveryRequests) plus `pinnedBaseUrls` (string[]).
+	 * @param {Object} opts Session options (scriptPath, timeoutMs,
+	 *   restartEveryRequests, lightpandaBinary, lightpandaHost) plus
+	 *   `pinnedBaseUrls` (string[]).
 	 */
 	constructor( opts ) {
 		this.opts = opts;
