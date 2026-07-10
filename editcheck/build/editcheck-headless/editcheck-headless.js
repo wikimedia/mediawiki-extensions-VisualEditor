@@ -16,6 +16,11 @@ const CHROME_ARGS = [
 	'--disable-dev-shm-usage'
 ];
 
+// Nothing renders in the headless page, so resources that only affect
+// presentation are pure overhead. Blocking them avoids fetching and decoding
+// images, CSS, fonts and media that the edit checks never look at.
+const BLOCKED_RESOURCE_TYPES = new Set( [ 'image', 'stylesheet', 'font', 'media' ] );
+
 /**
  * Find a free TCP port on the loopback interface.
  *
@@ -159,6 +164,25 @@ async function injectProgressHooks( page ) {
 			.catch( () => {
 				progress( 'ext.visualEditor.editCheck.headless failed' );
 			} );
+	} );
+}
+
+/**
+ * Abort requests for resources that only affect presentation (images, CSS,
+ * fonts, media), leaving the document, scripts and API/XHR traffic that the
+ * edit checks actually depend on.
+ *
+ * @param {Page} page Puppeteer page
+ * @return {Promise<void>}
+ */
+async function blockNonScriptResources( page ) {
+	await page.setRequestInterception( true );
+	page.on( 'request', ( req ) => {
+		if ( BLOCKED_RESOURCE_TYPES.has( req.resourceType() ) ) {
+			req.abort();
+		} else {
+			req.continue();
+		}
 	} );
 }
 
@@ -370,6 +394,11 @@ class HeadlessBrowserSession {
 		// "BrowserContextNotLoaded" and leaves navigation hanging.
 		this.context = await this.browser.createBrowserContext();
 		this.page = await this.context.newPage();
+
+		if ( this.engine === 'chrome' ) {
+			await blockNonScriptResources( this.page );
+		}
+
 		progress( 'Browser launched' );
 	}
 
