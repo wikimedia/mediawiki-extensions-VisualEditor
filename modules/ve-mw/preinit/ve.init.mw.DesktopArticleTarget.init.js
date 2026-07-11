@@ -472,7 +472,7 @@
 		}
 
 		let $heading;
-		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )' ).each( ( i, el ) => {
+		$( '#mw-content-text .mw-editsection a:not( .mw-editsection-visualeditor )[href]' ).each( ( i, el ) => {
 			const linkUrl = new URL( el.href );
 			if ( section === getSectionFromUrl( linkUrl ) ) {
 				$heading = $( el ).closest( '.mw-heading' );
@@ -901,7 +901,7 @@
 			if ( init.isWikitextAvailable() && !isOnlyTabVE() ) {
 				$(
 					// Edit section links, except VE ones when both editors visible
-					'.mw-editsection a:not( .mw-editsection-visualeditor ),' +
+					'.mw-editsection a:not( .mw-editsection-visualeditor )[href],' +
 					// Edit tab
 					'#ca-edit a,' +
 					// Add section is currently a wikitext-only feature
@@ -941,7 +941,7 @@
 				) {
 					// … on single-edit-tab wikis, where VE or NWE is the user's preferred editor
 					// Handle section edit link clicks
-					$( '.mw-editsection a' ).off( '.ve-target' ).on( 'click.ve-target', ( e ) => {
+					$( '.mw-editsection a[href]' ).off( '.ve-target' ).on( 'click.ve-target', ( e ) => {
 						// isOnlyTabVE is computed on click as it may have changed since load
 						init.onEditSectionLinkClick( isOnlyTabVE() ? 'visual' : 'source', e );
 					} );
