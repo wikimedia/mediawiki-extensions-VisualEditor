@@ -6,6 +6,7 @@
  *
  * @param {Object} config Configuration options
  * @param {string} config.type Type of message (e.g., 'warning', 'error')
+ * @param {string} config.name Unique name of the action
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.label Title
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.message Body message
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} [config.footer] Footer message
@@ -189,10 +190,19 @@ mw.editcheck.EditCheckActionWidget.prototype.onFeedbackSelect = function () {
 				bugsLink: 'https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?project=PHID-PROJ-g4joo7tiwslypfpk5lkv'
 			};
 
+			// TextMatch suggestions are configured on-wiki so their feedback can be directed
+			// to a separate wiki-specific page from other suggestions (T426271).
 			const veConfig = mw.config.get( 'wgVisualEditorConfig' );
-			if ( veConfig.suggestionFeedbackAPIURL ) {
-				feedbackConfig.apiUrl = veConfig.suggestionFeedbackAPIURL;
-				feedbackConfig.title = new mw.Title( veConfig.suggestionFeedbackTitle );
+			const isTextMatch = this.name.indexOf( 'textMatch-' ) === 0;
+			const apiUrl = isTextMatch && veConfig.textMatchFeedbackAPIURL ?
+				veConfig.textMatchFeedbackAPIURL :
+				veConfig.suggestionFeedbackAPIURL;
+			const feedbackTitle = isTextMatch && veConfig.textMatchFeedbackTitle ?
+				veConfig.textMatchFeedbackTitle :
+				veConfig.suggestionFeedbackTitle;
+			if ( apiUrl ) {
+				feedbackConfig.apiUrl = apiUrl;
+				feedbackConfig.title = new mw.Title( feedbackTitle );
 			} else {
 				feedbackConfig.title = new mw.Title( ve.msg( 'visualeditor-suggestionfeedback-link' ) );
 			}

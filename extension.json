@@ -78,6 +78,12 @@
 		"VisualEditorSuggestionFeedbackTitle": {
 			"value": false
 		},
+		"VisualEditorTextMatchFeedbackAPIURL": {
+			"value": false
+		},
+		"VisualEditorTextMatchFeedbackTitle": {
+			"value": false
+		},
 		"VisualEditorPluginModules": {
 			"value": []
 		},
