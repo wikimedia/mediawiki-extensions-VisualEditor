@@ -192,7 +192,7 @@ OO.inheritClass( mw.editcheck.SuggestedImageEditCheckAction, mw.editcheck.EditCh
 mw.editcheck.SuggestedImageEditCheckAction.prototype.render = function () {
 	const widget = mw.editcheck.SuggestedImageEditCheckAction.super.prototype.render.apply( this, arguments );
 
-	const imageMetadata = ve.getProp( this, 'image', 'metadata' );
+	const imageMetadata = ve.getProp( this, 'imageData', 'metadata' );
 	if ( imageMetadata ) {
 		const $link = $( '<a>' ).append(
 			$( '<img>' )
