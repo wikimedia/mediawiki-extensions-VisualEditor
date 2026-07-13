@@ -22,8 +22,8 @@ async function readHeadlessResult( driver ) {
  * @return {Promise<Object>} Object with either { configs } or { error }
  */
 async function readCheckConfigs( driver ) {
-	return driver.executeAsyncScript(
-		`const callback = arguments[ arguments.length - 1 ];
+	return driver.executeAsyncScript( `
+		const callback = arguments[ arguments.length - 1 ];
 		if ( typeof window.veEditCheckHeadlessGetConfigs !== 'function' ) {
 			callback( { error: 'veEditCheckHeadlessGetConfigs is not available' } );
 			return;
@@ -31,8 +31,8 @@ async function readCheckConfigs( driver ) {
 		window.veEditCheckHeadlessGetConfigs().then(
 			( configs ) => callback( { configs } ),
 			( e ) => callback( { error: String( e ) } )
-		);`
-	);
+		);
+	` );
 }
 
 /**
@@ -43,24 +43,41 @@ async function readCheckConfigs( driver ) {
  */
 async function injectProgressHooks( driver ) {
 	return driver.executeScript( `
-		if ( window._veProgressInstalled ) { return; }
-		window._veProgressInstalled = true;
+		if ( window.veProgressInstalled ) {
+			return;
+		}
+		window.veProgressInstalled = true;
 		window.veHeadlessProgress = window.veHeadlessProgress || [];
 		const progress = ( msg ) => {
 			window.veHeadlessProgress.push( { t: Date.now(), msg: msg } );
 		};
-		if ( typeof mw === 'undefined' ) { progress( 'mw not available' ); return; }
+		if ( typeof mw === 'undefined' ) {
+			progress( 'mw not available' );
+			return;
+		}
 		progress( 'mw available' );
 		// Track when the headless loader module begins loading VE modules
 		mw.loader.using( 'ext.visualEditor.targetLoader' )
-			.then( () => { progress( 'ext.visualEditor.targetLoader loaded' ); } )
-			.catch( () => { progress( 'ext.visualEditor.targetLoader failed' ); } );
+			.then( () => {
+				progress( 'ext.visualEditor.targetLoader loaded' );
+			} )
+			.catch( () => {
+				progress( 'ext.visualEditor.targetLoader failed' );
+			} );
 		mw.loader.using( 'ext.visualEditor.editCheck' )
-			.then( () => { progress( 'ext.visualEditor.editCheck loaded' ); } )
-			.catch( () => { progress( 'ext.visualEditor.editCheck failed' ); } );
+			.then( () => {
+				progress( 'ext.visualEditor.editCheck loaded' );
+			} )
+			.catch( () => {
+				progress( 'ext.visualEditor.editCheck failed' );
+			} );
 		mw.loader.using( 'ext.visualEditor.editCheck.headless' )
-			.then( () => { progress( 'ext.visualEditor.editCheck.headless loaded' ); } )
-			.catch( () => { progress( 'ext.visualEditor.editCheck.headless failed' ); } );
+			.then( () => {
+				progress( 'ext.visualEditor.editCheck.headless loaded' );
+			} )
+			.catch( () => {
+				progress( 'ext.visualEditor.editCheck.headless failed' );
+			} );
 	` );
 }
 
@@ -71,9 +88,9 @@ async function injectProgressHooks( driver ) {
  * @return {Promise<Array>} Array of progress events
  */
 async function drainClientProgress( driver ) {
-	return driver.executeScript(
-		'return window.veHeadlessProgress ? window.veHeadlessProgress.splice( 0 ) : [];'
-	);
+	return driver.executeScript( `
+		return window.veHeadlessProgress ? window.veHeadlessProgress.splice( 0 ) : [];
+	` );
 }
 
 /**
@@ -85,14 +102,14 @@ async function drainClientProgress( driver ) {
  * @return {Promise<string>} Request ID for the headless run
  */
 async function startBrowserRun( driver, title, parsoidHtml ) {
-	return driver.executeScript(
-		`if ( typeof window.veEditCheckHeadlessStart !== 'function' ) {
+	return driver.executeScript( `
+		if ( typeof window.veEditCheckHeadlessStart !== 'function' ) {
 			throw new Error( 'veEditCheckHeadlessStart is not available' );
 		}
-		return window.veEditCheckHeadlessStart( arguments[0], arguments[1] || null );`,
-		title,
-		parsoidHtml || null
-	);
+		return window.veEditCheckHeadlessStart( arguments[0], arguments[1] || null );
+	`,
+	title,
+	parsoidHtml || null );
 }
 
 /**
