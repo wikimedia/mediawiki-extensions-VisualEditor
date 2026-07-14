@@ -109,6 +109,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		// TODO: This doesn't exclude params from the formatter
 		$allParams = $this->getRequest()->getValues();
 		if ( isset( $allParams['wpWatchlistLabels'] ) ) {
+			$allParams['wpWatchlistLabelsSubmitted'] = '1';
 			if ( is_array( $allParams['wpWatchlistLabels'] ) ) {
 				$allParams['wpWatchlistLabels'] = array_values( array_filter(
 					array_map( static fn ( $id ) => (int)$id, $allParams['wpWatchlistLabels'] ),
