@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abdul-Rauf Moshie",
+			"DaSupremo"
+		]
+	},
+	"editcheck-dialog-action-no": "Nah",
+	"editcheck-dialog-action-yes": "Yh",
+	"editcheck-dialog-addref-description": "Help readers make dem barb wer dis information dey cam from by adding a citation.",
+	"editcheck-dialog-addref-reject-question": "Why you no dey add citation?",
+	"editcheck-dialog-addref-reject-irrelevant": "I no dey think say citations be relevant to de change wey adey make",
+	"editcheck-dialog-addref-reject-common-knowledge": "De information wey adey add be widely known",
+	"editcheck-dialog-addref-reject-uncertain": "Ano sure wey citation ago add",
+	"editcheck-dialog-addref-reject-other": "Oda",
+	"editcheck-dialog-addref-success-notify": "Thanks say you add citation!",
+	"editcheck-dialog-addref-title": "Add a citation",
+	"editcheck-dialog-title": "Before dem publish",
+	"tag-editcheck-reference-decline-common-knowledge": "Edit Check (references) decline (common knowledge)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Dem decline EditCheck reference as common knowledge",
+	"tag-editcheck-reference-decline-irrelevant": "Edit Check (references) decline (irrelevant)",
+	"tag-editcheck-reference-decline-irrelevant-description": "Dem decline EditCheck reference as irrelevant",
+	"tag-editcheck-reference-decline-other": "Edit Check (references) decline (oda)",
+	"tag-editcheck-reference-decline-other-description": "Dem decline editCheck reference for reason wey dem no list",
+	"tag-editcheck-reference-decline-uncertain": "Edit Check (references) decline (uncertain)",
+	"tag-editcheck-reference-decline-uncertain-description": "Dem dey decline editCheck reference sekof eno certain"
+}

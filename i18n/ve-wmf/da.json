@@ -19,7 +19,11 @@
 			"Steenth"
 		]
 	},
+	"tag-editcheck-newcontent-description": "EditCheck mener, at der er blevet tilføjet nyt indhold til siden",
+	"tag-editcheck-newreference-description": "En reference blev tilføjet til siden",
+	"tag-editcheck-references-description": "EditCheck mener, at en reference muligvis har været nødvendig",
 	"tag-editcheck-references-activated": "[[{{MediaWiki:editcheck-falsepositives-link}}|Redigeringstjek (referencer) aktiveret]]",
+	"tag-editcheck-references-activated-description": "EditCheck mener, at en reference muligvis har været nødvendig, og brugergrænsefladen blev vist",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering]]",
 	"tag-visualeditor-description": "Redigeret ved hjælp af [[{{MediaWiki:visualeditor-descriptionpagelink}}|visuel redigering]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuel redigering: Tjek]]",
