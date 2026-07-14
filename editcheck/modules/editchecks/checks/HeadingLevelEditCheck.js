@@ -59,11 +59,12 @@ mw.editcheck.HeadingLevelEditCheck.prototype.onDocumentChange = function ( surfa
 				// the paragraph with a mwHeading, so it's outside the node's
 				// range, and the modification will be two ranges replacing
 				// the opening/closing tags.
-				const range = heading.getOuterRange();
-				if ( !this.isDismissedRange( range ) && modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) ) ) {
+				const outerRange = heading.getOuterRange();
+				const range = heading.getRange();
+				if ( !this.isDismissedRange( range ) && modified.some( ( modifiedRange ) => modifiedRange.touchesRange( outerRange ) ) ) {
 					actions.push( new mw.editcheck.EditCheckAction( {
 						// But the better range for display is the content range:
-						fragments: [ surfaceModel.getLinearFragment( heading.getRange() ) ],
+						fragments: [ surfaceModel.getLinearFragment( range ) ],
 						check: this
 					} ) );
 				}
