@@ -10,6 +10,8 @@
 		"node": ">=21.0.0"
 	},
 	"dependencies": {
+		"@grpc/grpc-js": "^1.14.4",
+		"@grpc/proto-loader": "^0.7.15",
 		"@wikimedia/service-utils": "2.0.0",
 		"puppeteer-core": "25.3.0"
 	}

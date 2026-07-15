@@ -4,8 +4,10 @@
 const http = require( 'http' );
 const fs = require( 'fs' );
 const { execSync } = require( 'child_process' );
+const grpc = require( '@grpc/grpc-js' );
 const { getInstance, teardown } = require( '@wikimedia/service-utils' );
 const { createSessionManager } = require( './editcheck-headless' );
+const { createGrpcServer } = require( './editcheck-headless-grpc' );
 const {
 	fetchDbnameMap,
 	resolveWiki
@@ -32,11 +34,16 @@ function printUsage() {
 	console.error( '  --chrome-binary <path> Chrome/Chromium binary (engine=chrome; default: auto-detected installed Chrome)' );
 	console.error( '  --port <port>          HTTP port to listen on (default: 3000)' );
 	console.error( '  --host <host>          Host/address to bind to (default: 127.0.0.1)' );
+	console.error( '  --grpc-port <port>     gRPC (LAC lambda) port to listen on, 0 to disable (default: 50051)' );
+	console.error( '  --grpc-host <host>     Host/address for the gRPC server (default: 127.0.0.1)' );
 	console.error( '' );
-	console.error( 'API ("wiki" is a base URL or dbname, and is always required):' );
+	console.error( 'HTTP API ("wiki" is a base URL or dbname, and is always required):' );
 	console.error( '  GET  /check?title=<title>&wiki=<url|dbname>' );
 	console.error( '  POST /check  body: { "title": "<title>", "wiki": "<url|dbname>", "parsoidHtml": "<html...>" }' );
 	console.error( '  GET  /config?wiki=<url|dbname>' );
+	console.error( '' );
+	console.error( 'gRPC API (Linked Artifact Cache lambda contract, see lambda.proto):' );
+	console.error( '  lambda.LambdaService/GetRevisionArtifact { wiki_id, page_id, revision_id } -> { content, metadata }' );
 	console.error( '' );
 }
 
@@ -62,7 +69,9 @@ function parseArgs( argv ) {
 		chromeBinary: process.env.CHROME_BINARY || '',
 		restartEveryRequests: 100,
 		port: 3000,
-		host: '127.0.0.1'
+		host: '127.0.0.1',
+		grpcPort: 50051,
+		grpcHost: '127.0.0.1'
 	};
 
 	for ( let i = 0; i < argv.length; i++ ) {
@@ -113,6 +122,12 @@ function parseArgs( argv ) {
 			case '--host':
 				opts.host = value;
 				break;
+			case '--grpc-port':
+				opts.grpcPort = Number( value );
+				break;
+			case '--grpc-host':
+				opts.grpcHost = value;
+				break;
 			default:
 				throw new Error( `Unknown option: ${ key }` );
 		}
@@ -130,6 +145,11 @@ function parseArgs( argv ) {
 	}
 	if ( Number.isNaN( opts.port ) || opts.port < 1 || opts.port > 65535 ) {
 		throw new Error( '--port must be a valid port number (1-65535)' );
+	}
+	// 0 disables the gRPC server.
+	if ( Number.isNaN( opts.grpcPort ) || opts.grpcPort < 0 || opts.grpcPort > 65535 ||
+		!Number.isInteger( opts.grpcPort ) ) {
+		throw new Error( '--grpc-port must be 0 (disabled) or a valid port number (1-65535)' );
 	}
 
 	return opts;
@@ -632,8 +652,24 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 			makeHandler( sessionManager, serviceLogger, dbnameMap )
 		);
 
+		// The gRPC "lambda" server (Linked Artifact Cache contract) shares the
+		// same browser session pool as the HTTP server. Disabled when port is 0.
+		const grpcServer = opts.grpcPort > 0 ?
+			createGrpcServer( {
+				sessionManager,
+				serviceLogger,
+				dbnameMap,
+				scriptPath: opts.scriptPath
+			} ) :
+			null;
+
 		const shutdown = async () => {
 			server.close();
+			if ( grpcServer ) {
+				await new Promise( ( resolve ) => {
+					grpcServer.tryShutdown( () => resolve() );
+				} );
+			}
 			await sessionManager.close( ( msg ) => {
 				serviceLogger.info( `[shutdown] ${ msg }` );
 			} );
@@ -674,8 +710,26 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 			} else {
 				serviceLogger.info( `  lightpanda:    ${ opts.lightpandaBinary } (host ${ opts.lightpandaHost })` );
 			}
+			serviceLogger.info( `  grpc:          ${ grpcServer ? `${ opts.grpcHost }:${ opts.grpcPort }` : 'disabled' }` );
 			logResourceUsage( serviceLogger, 'listening' );
 		} );
+
+		if ( grpcServer ) {
+			grpcServer.bindAsync(
+				`${ opts.grpcHost }:${ opts.grpcPort }`,
+				grpc.ServerCredentials.createInsecure(),
+				( err, boundPort ) => {
+					if ( err ) {
+						serviceLogger.error( `gRPC bind error: ${ err.message }` );
+						// eslint-disable-next-line n/no-process-exit
+						process.exit( 1 );
+						return;
+					}
+					// bindAsync starts the server automatically in grpc-js >= 1.10.
+					serviceLogger.info( `editcheck-headless gRPC LambdaService listening on ${ opts.grpcHost }:${ boundPort }` );
+				}
+			);
+		}
 
 		server.on( 'error', ( err ) => {
 			serviceLogger.error( `Server error: ${ err.message }` );
