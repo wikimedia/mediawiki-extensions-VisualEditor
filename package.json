@@ -36,7 +36,7 @@
 		"mocha": "11.1.0",
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
-		"stylelint-config-wikimedia": "0.19.2",
+		"stylelint-config-wikimedia": "0.19.3",
 		"svgo": "4.0.1",
 		"wdio-mediawiki": "6.3.0"
 	}
