@@ -75,7 +75,7 @@
 	if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 		ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 	}
-	const editCheck = conf.editCheck || !!ecenable;
+	const editCheck = ( conf.editCheck || !!ecenable ) && ecenable !== '0';
 	if ( conf.editCheckTagging || editCheck ) {
 		modules.push(
 			'ext.visualEditor.editCheck',

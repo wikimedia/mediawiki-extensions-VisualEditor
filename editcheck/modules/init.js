@@ -1,5 +1,6 @@
 /*
  * `ecenable` query string:
+ *   0: editcheck is completely disabled
  *   1: override user eligibility criteria for all checks
  *   2: also load experimental checks
  * Can also be a comma-separated series of flags:
@@ -14,6 +15,10 @@ let ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
 if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 	// if edit check isn't forcibly disabled, override from this global
 	ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+}
+
+if ( ecenable === '0' ) {
+	return;
 }
 
 // any setting for forceEnable will bypass account-specific configs, though it will still honor the other configs
