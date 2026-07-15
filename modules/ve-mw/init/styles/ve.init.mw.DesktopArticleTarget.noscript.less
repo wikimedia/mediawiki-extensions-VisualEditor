@@ -17,11 +17,30 @@
 	#ca-ve-edit,
 	/* Account for optional .mw-editsection-divider, to be removed in the future (T268900) */
 	.mw-editsection-visualeditor + .mw-editsection-divider,
-	.mw-editsection-visualeditor + .mw-editsection-divider + a::before,
-	/* Redundant ':not(:first-of-type)' to increase specificity and override core rules */
-	.mw-editsection-visualeditor + a:not( :first-of-type )::before,
 	.mw-editsection-visualeditor {
 		display: none;
+	}
+
+	// (wgVisualEditorTabPosition === 'before')
+	// If the hidden item was first, give the next item the opening bracket
+	a.mw-editsection-visualeditor:first-of-type + .mw-editsection-divider + a::before,
+	a.mw-editsection-visualeditor:first-of-type + a::before {
+		content: '[';
+		// For browsers supporting alt text in 'content', make it empty
+		content: '[' / '';
+		margin-right: 0.25em;
+		margin-inline: 0 0.25em;
+	}
+
+	// (wgVisualEditorTabPosition === 'after')
+	// If the hidden item was last, give the previous item the closing bracket (instead of the separator)
+	a:has( + .mw-editsection-divider + a.mw-editsection-visualeditor:last-of-type )::after,
+	a:has( + a.mw-editsection-visualeditor:last-of-type )::after {
+		content: ']';
+		// For browsers supporting alt text in 'content', make it empty
+		content: ']' / '';
+		margin-left: 0.25em;
+		margin-inline: 0.25em 0;
 	}
 }
 
