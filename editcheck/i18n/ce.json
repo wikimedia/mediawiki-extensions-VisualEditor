@@ -26,6 +26,10 @@
 	"editcheck-copyvio-action-remove": "ХӀан-хӀа, дӀадаккха",
 	"editcheck-copyvio-keep-description": "Дехар ду, хӀокху йаззаман кхечу редакторшна а кхетийта гӀо дар, аша кхуза копийина текст йита сацам хӀунда бина.",
 	"editcheck-copyvio-keep-wrote": "ХӀара текст ас йазйина йу, иза кхин цхьанхьа а йац",
+	"editcheck-copyvio-keep-permission": "ХӀара материал маьршачу лицензица тӀекхочуш йу",
+	"editcheck-copyvio-keep-other": "Дагардинчух цхьа а мегаш дац",
+	"editcheck-copyvio-keep-notify": "Баркалла, копи йаьккхина текст Ӏалашйан сацам баран бахьана довзийтарна!",
+	"editcheck-copyvio-remove-notify": "Баркалла хааршна маьрша тӀекхочийла Ӏалашйарехь гӀо дарна!",
 	"editcheck-tone-title": "Тон карлайаккхар?",
 	"editcheck-tone-title-acted": "Тон хийцар",
 	"editcheck-tone-reject-other": "Кхийерг"
