@@ -2159,6 +2159,9 @@
 				"modules/ve-mw/ui/ve.ui.MWWikitextDataTransferHandlerFactory.js",
 				"modules/ve-mw/ui/ve.ui.MWWikitextSurface.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWWikitextAction.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWTitleCompletionAction.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWLinkCompletionAction.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWTemplateCompletionAction.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWWikitextPasteContextItem.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWWikitextLinkAnnotationInspector.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextPlainTextStringTransferHandler.js"
@@ -2168,6 +2171,8 @@
 			],
 			"dependencies": [
 				"mediawiki.editfont.styles",
+				"mediawiki.api",
+				"mediawiki.Title",
 				"ext.visualEditor.mwlink",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mediawiki"
@@ -2175,8 +2180,10 @@
 			"messages": [
 				"visualeditor-dialog-table-caption",
 				"visualeditor-generating-wikitext-progress",
+				"visualeditor-linkcompletion-header",
 				"visualeditor-table-format-data",
 				"visualeditor-table-format-header",
+				"visualeditor-templatecompletion-header",
 				"visualeditor-wikitextconvert-convert",
 				"visualeditor-wikitextconvert-message",
 				"visualeditor-wikitextconvert-title"
@@ -2411,6 +2418,7 @@
 			"lib/ve/tests/ui/actions/ve.ui.IndentationAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.LinkAction.test.js",
 			"modules/ve-mw/tests/ui/actions/ve.ui.MWLinkAction.test.js",
+			"modules/ve-mw/tests/ui/actions/ve.ui.MWTitleCompletionAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.ListAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.TableAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.WindowAction.test.js",
