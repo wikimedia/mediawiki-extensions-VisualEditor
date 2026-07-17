@@ -13,6 +13,7 @@
 			"Tofeiku"
 		]
 	},
+	"collabpad-disabled": "CollabPad tidak didayakan pada wiki ini.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Diimport daripada $1",
 	"collabpad": "CollabPad",
@@ -45,6 +46,7 @@
 	"visualeditor-ca-editsource-section": "sunting sumber",
 	"visualeditor-ca-editsource-section-hint": "Sunting kod sumber bahagian: $1",
 	"visualeditor-categories-tool": "Kategori",
+	"visualeditor-config-save-invalid-schema": "Konfigurasi tidak sah: $1",
 	"visualeditor-changedesc-mwcategory-sortkey-changed": "Kunci isihan ditukar daripada $1 kepada $2",
 	"visualeditor-changedesc-mwcategory-sortkey-set": "Kunci isih ditetapkan kepada $1",
 	"visualeditor-changedesc-mwcategory-sortkey-unset": "Kunci isih dinyahtetap daripada $1",
