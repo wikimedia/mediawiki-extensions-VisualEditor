@@ -2162,6 +2162,7 @@
 				"modules/ve-mw/ui/actions/ve.ui.MWTitleCompletionAction.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWLinkCompletionAction.js",
 				"modules/ve-mw/ui/actions/ve.ui.MWTemplateCompletionAction.js",
+				"modules/ve-mw/ui/actions/ve.ui.MWTagCompletionAction.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWWikitextPasteContextItem.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWWikitextLinkAnnotationInspector.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextPlainTextStringTransferHandler.js"
@@ -2418,6 +2419,7 @@
 			"lib/ve/tests/ui/actions/ve.ui.IndentationAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.LinkAction.test.js",
 			"modules/ve-mw/tests/ui/actions/ve.ui.MWLinkAction.test.js",
+			"modules/ve-mw/tests/ui/actions/ve.ui.MWTagCompletionAction.test.js",
 			"modules/ve-mw/tests/ui/actions/ve.ui.MWTitleCompletionAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.ListAction.test.js",
 			"lib/ve/tests/ui/actions/ve.ui.TableAction.test.js",
