@@ -32,6 +32,7 @@ use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Message\Message;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageReference;
@@ -569,8 +570,10 @@ class ApiVisualEditor extends ApiBase {
 	 * the structure of the config and whether the message is disabled or not.
 	 *
 	 * @param string $optionKey
-	 * @param array &$options
-	 * @param array &$checkboxesMessagesList
+	 * @param array<string,string|Message> &$options Map from internal keys to messages, which may
+	 *   be string message keys or Message objects. The latter will be converted to the former.
+	 * @param list<string|Message> &$checkboxesMessagesList List of messages that are actually used,
+	 *   as string message keys or Message objects
 	 */
 	private function updateCheckboxOptionsMessage(
 		string $optionKey,
@@ -580,15 +583,17 @@ class ApiVisualEditor extends ApiBase {
 		if ( !isset( $options[$optionKey] ) ) {
 			return;
 		}
+		// $options[$optionKey] may be a string or a Message object; convert to string
+		$message = $this->msg( $options[$optionKey] );
 		if ( !is_string( $options[$optionKey] ) ) {
-			$options[$optionKey] = $this->msg( $options[$optionKey] )->getKey();
+			$options[$optionKey] = $message->getKey();
 		}
-		if ( $this->msg( $options[$optionKey] )->isDisabled() ) {
+		if ( $message->isDisabled() ) {
 			// Remove the message if it's disabled, so it isn't sent to the frontend unnecessarily.
 			unset( $options[$optionKey] );
 		} else {
 			// Otherwise, add it to the list of messages in use.
-			$checkboxesMessagesList[] = $options[$optionKey];
+			$checkboxesMessagesList[] = $message;
 		}
 	}
 
