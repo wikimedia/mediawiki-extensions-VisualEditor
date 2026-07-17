@@ -58,7 +58,14 @@ const unusedIgnores = new Set( ignored );
  */
 function addFilesToSet( files, set, basePath = '' ) {
 	if ( Array.isArray( files ) ) {
-		files.forEach( ( file ) => set.add( path.join( basePath, file.file || file ) ) );
+		files.forEach( ( file ) => {
+			// Entries may be a path string or an object; skip generated entries
+			// (e.g. callback-backed files) which have no source file to check.
+			const filePath = typeof file === 'string' ? file : file.file;
+			if ( filePath ) {
+				set.add( path.join( basePath, filePath ) );
+			}
+		} );
 	} else if ( typeof files === 'string' ) {
 		set.add( path.join( basePath, files ) );
 	}
