@@ -92,6 +92,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Rozwojowe",
 	"editcheck-specialeditchecks-header-default": "Domyślne kontrole",
 	"editcheck-specialeditchecks-header-experimental": "Kontrole eksperymentalne",
+	"editcheck-specialeditchecks-header-unsupported": "Kontrole nieobsługiwane",
 	"editcheck-specialeditchecks-col-title": "Tytuł",
 	"editcheck-specialeditchecks-col-name": "Nazwa",
 	"editcheck-specialeditchecks-col-appearance": "Wygląd",

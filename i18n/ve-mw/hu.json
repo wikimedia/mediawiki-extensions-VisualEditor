@@ -18,6 +18,7 @@
 			"ViDam"
 		]
 	},
+	"collabpad-disabled": "A CollabPad nincs engedélyezve ezen a wikin.",
 	"collabpad-doctitle": "CollabPad: $1",
 	"collabpad-import-subtitle": "Importálva innen: $1",
 	"collabpad": "CollabPad",
@@ -320,6 +321,8 @@
 	"visualeditor-preference-tabs-prefer-ve": "Mindig a vizuálisat",
 	"visualeditor-preference-tabs-prefer-wt": "Mindig a forráskódot",
 	"visualeditor-preference-tabs-remember-last": "Emlékezzen, melyiket használtam legutóbb",
+	"visualeditor-preference-collab-label": "Közös szerkesztés",
+	"visualeditor-preference-collab-description": "Hívj meg más felhasználókat, hogy csatlakozzanak a szerkesztési munkamenetedhez a vizuális szerkesztőben.",
 	"visualeditor-rebase-client-export": "Exportálás",
 	"visualeditor-rebase-client-export-start": "Exportálás…",
 	"visualeditor-rebase-client-import": "Importálás",

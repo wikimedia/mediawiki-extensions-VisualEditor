@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"شاه زمان پټان"
 		]
 	},
 	"apihelp-visualeditor-param-paction": "د ترسره کولو کړنه.",
 	"apihelp-visualeditor-param-page": "هغه مخ چې کړنې پرې ترسره کېږي.",
 	"apihelp-visualeditoredit-param-minor": "د وړوکي سمون رپی.",
+	"apihelp-visualeditoredit-param-sectiontitle": "نوې برخې لپاره سرليک.",
 	"apihelp-visualeditoredit-param-summary": "لنډيز سمول."
 }

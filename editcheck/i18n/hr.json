@@ -68,7 +68,7 @@
 	"editcheck-external-link-description": "Ova poveznica upućuje na [{{int:editcheck-external-link-descriptionlink}} vanjsko mrežno mjesto]. Ako je to prikladno, njenim uklanjanjem, premještanjem u „Vanjske poveznice” ili pretvaranjem u [{{int:editcheck-external-link-convertlink}} izvor] pomozite čitateljima da ostanu usredotočeni na sadržaj.",
 	"editcheck-duplicate-link-title": "Ukloni dupliciranu poveznicu",
 	"editcheck-duplicate-link-description": "Ova se poveznica pojavljuje više puta u ovom odlomku. Uklanjanjem poveznica [{{int:editcheck-duplicate-link-descriptionlink}} koje se ponavljaju] omogućite čitateljima lakše snalaženje.",
-	"editcheck-disambiguation-title": "Poveži na precizniju stranicu",
+	"editcheck-disambiguation-title": "Povezivanje na određeniju stranicu",
 	"editcheck-disambiguation-description": "Ova poveznica upućuje na [{{int:editcheck-disambiguation-descriptionlink}} razdvojbenu stranicu]. Povezivanjem na precizniju stranicu pomažete čitateljima u pronalaženju prave teme.",
 	"editcheck-image-caption-title": "Dodaj opis slike",
 	"editcheck-image-caption-description": "Ova slika nema opis. Dodavanjem [{{int:editcheck-image-caption-descriptionlink}} kratkog opisa] pomozite čitateljima da shvate važnost ove slike.",
