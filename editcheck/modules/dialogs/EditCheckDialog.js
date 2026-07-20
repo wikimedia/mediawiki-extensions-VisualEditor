@@ -327,23 +327,6 @@ ve.ui.EditCheckDialog.prototype.setCurrentAction = function ( action, fromUserAc
 };
 
 /**
- * Set the offset of the current check, within the list of all checks.
- *
- * @param {number|null} offset New offset
- * @param {boolean} fromUserAction The change was triggered by a user action
- * @param {boolean} [internal] Change was triggered internally
- */
-ve.ui.EditCheckDialog.prototype.setCurrentOffset = function ( offset, fromUserAction, internal ) {
-	if ( offset === null || offset === -1 ) {
-		/* That's valid, carry on */
-		offset = null;
-	} else if ( !Number.isSafeInteger( offset ) || ( offset < 0 || offset > ( this.currentActions.length - 1 ) ) ) {
-		throw new Error( `Bad offset ${ offset }, expected an integer between 0 and ${ this.currentActions.length - 1 }` );
-	}
-	this.setCurrentAction( this.currentActions[ offset ] || null, fromUserAction, internal );
-};
-
-/**
  * Update the disabled state of the navigation buttons
  */
 ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
@@ -536,14 +519,40 @@ ve.ui.EditCheckDialog.prototype.onCollapseExpandButtonClick = function () {
  * Handle click events from the next button.
  */
 ve.ui.EditCheckDialog.prototype.onNextButtonClick = function () {
-	this.setCurrentOffset( this.currentOffset === null ? 0 : this.currentOffset + 1, true );
+	this.navigateToAdjacentAction( true );
 };
 
 /**
  * Handle click events from the previous button.
  */
 ve.ui.EditCheckDialog.prototype.onPreviousButtonClick = function () {
-	this.setCurrentOffset( this.currentOffset === null ? this.currentActions.length - 1 : this.currentOffset - 1, true );
+	this.navigateToAdjacentAction( false );
+};
+
+/**
+ * Find adjacent suggestion/check and navigate to it.
+ *
+ * @param {boolean} next If true, navigates to the next suggestion, otherwise to previous.
+ */
+ve.ui.EditCheckDialog.prototype.navigateToAdjacentAction = function ( next ) {
+	let offset = 0;
+	if ( next ) {
+		offset = this.currentOffset === null ? 0 : this.currentOffset + 1;
+	} else {
+		offset = this.currentOffset === null ? this.currentActions.length - 1 : this.currentOffset - 1;
+	}
+	if ( offset === null || offset === -1 ) {
+		/* That's valid, carry on */
+		offset = null;
+	} else if ( !Number.isSafeInteger( offset ) || ( offset < 0 || offset > ( this.currentActions.length - 1 ) ) ) {
+		throw new Error( `Bad offset ${ offset }, expected an integer between 0 and ${ this.currentActions.length - 1 }` );
+	}
+	const action = this.currentActions[ offset ];
+	this.setCurrentAction( action || null, true );
+	if ( action ) {
+		this.controller.setIgnoreNextSelectionChange();
+		action.select( this.surface, false, false );
+	}
 };
 
 /* Command registration */
