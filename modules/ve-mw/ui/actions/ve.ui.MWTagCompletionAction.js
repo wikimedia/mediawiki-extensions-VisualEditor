@@ -21,6 +21,8 @@
 ve.ui.MWTagCompletionAction = function VeUiMWTagCompletionAction() {
 	// Parent constructor
 	ve.ui.MWTagCompletionAction.super.apply( this, arguments );
+
+	this.tags = null;
 };
 
 /* Inheritance */
@@ -33,6 +35,8 @@ ve.ui.MWTagCompletionAction.static.name = 'mwTagCompletion';
 
 // Only known tags are offered, so don't suggest whatever the user typed.
 ve.ui.MWTagCompletionAction.static.alwaysIncludeInput = false;
+
+ve.ui.MWTagCompletionAction.static.defaultLimit = 30;
 
 /**
  * Plain HTML tags to offer: the set of HTML tags permitted by the MediaWiki
@@ -138,18 +142,23 @@ ve.ui.MWTagCompletionAction.static.extensionTags = [
  * @return {Object[]} Available tag descriptors, in preference order
  */
 ve.ui.MWTagCompletionAction.prototype.getTags = function () {
-	const voidTags = this.constructor.static.voidHtmlTags;
-	const htmlTags = this.constructor.static.htmlTags.map(
-		( name ) => ( { name, selfClosing: voidTags.includes( name ) } )
-	);
-	return this.constructor.static.parserTags
-		.concat( this.constructor.static.extensionTags )
-		.map( ( tag ) => ( typeof tag === 'string' ? { name: tag } : tag ) )
-		.concat( htmlTags )
-		.filter( ( tag ) => (
-			( !tag.node || !!ve.dm[ tag.node ] ) &&
-			( !tag.module || !!mw.loader.getState( tag.module ) )
-		) );
+	if ( !this.tags ) {
+		const voidTags = this.constructor.static.voidHtmlTags;
+		const htmlTags = this.constructor.static.htmlTags.map(
+			( name ) => ( { name, selfClosing: voidTags.includes( name ) } )
+		);
+		this.tags = this.constructor.static.parserTags
+			.concat( this.constructor.static.extensionTags )
+			.map( ( tag ) => ( typeof tag === 'string' ? { name: tag } : tag ) )
+			.concat( htmlTags )
+			.filter( ( tag ) => (
+				( !tag.node || !!ve.dm[ tag.node ] ) &&
+				( !tag.module || !!mw.loader.getState( tag.module ) )
+			) )
+			.sort( ( a, b ) => a.name.localeCompare( b.name ) );
+	}
+
+	return this.tags;
 };
 
 /**
@@ -157,7 +166,7 @@ ve.ui.MWTagCompletionAction.prototype.getTags = function () {
  */
 ve.ui.MWTagCompletionAction.prototype.getSuggestions = function ( input ) {
 	return ve.createDeferred().resolve(
-		this.filterSuggestionsForInput( this.getTags(), input )
+		input.length ? this.filterSuggestionsForInput( this.getTags(), input ) : []
 	).promise();
 };
 

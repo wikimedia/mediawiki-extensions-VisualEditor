@@ -24,9 +24,12 @@ QUnit.test( 'getTags gates entries on ve.dm node availability', ( assert ) => {
 	const original = ve.dm.MWSyntaxHighlightNode;
 	try {
 		delete ve.dm.MWSyntaxHighlightNode;
+		// Clear tag cache
+		action.tags = null;
 		assert.false( names().includes( 'syntaxhighlight' ), 'gated tag hidden when its node class is absent' );
 
 		ve.dm.MWSyntaxHighlightNode = function () {};
+		action.tags = null;
 		assert.true( names().includes( 'syntaxhighlight' ), 'gated tag offered when its node class is registered' );
 	} finally {
 		if ( had ) {
@@ -46,8 +49,11 @@ QUnit.test( 'getTags gates entries on ResourceLoader module availability', ( ass
 
 	const stub = sinon.stub( mw.loader, 'getState' ).returns( null );
 	try {
+		// Clear tag cache
+		action.tags = null;
 		assert.false( names().includes( 'timeline' ), 'module-gated tag hidden when its module is unregistered' );
 		stub.withArgs( 'ext.timeline.styles' ).returns( 'registered' );
+		action.tags = null;
 		assert.true( names().includes( 'timeline' ), 'module-gated tag offered when its module is registered' );
 	} finally {
 		stub.restore();
