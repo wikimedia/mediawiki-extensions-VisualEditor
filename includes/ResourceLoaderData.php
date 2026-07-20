@@ -35,6 +35,7 @@ class ResourceLoaderData {
 				$words[ $synonym ] = true;
 			}
 		}
+		ksort( $words );
 		return 've.ui.MWMagicWordCompletionAction.static.magicWords = '
 			. $context->encodeJson( array_keys( $words ) ) . ';';
 	}

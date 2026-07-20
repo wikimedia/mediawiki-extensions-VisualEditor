@@ -35,6 +35,8 @@ ve.ui.MWMagicWordCompletionAction.static.sequenceLength = 2;
 // Only known words are offered, so don't suggest whatever the user typed.
 ve.ui.MWMagicWordCompletionAction.static.alwaysIncludeInput = false;
 
+ve.ui.MWMagicWordCompletionAction.static.defaultLimit = 30;
+
 /**
  * The double-underscore behaviour switches to offer, as complete "__WORD__"
  * forms (e.g. __TOC__). Populated at load time from the wiki's magic words by a
