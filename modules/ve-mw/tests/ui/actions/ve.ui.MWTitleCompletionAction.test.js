@@ -21,91 +21,14 @@ QUnit.test( 'getInsertionText wraps the suggestion in the right markup', ( asser
 	surface.destroy();
 } );
 
-QUnit.test( 'getSuggestionFromTitle', ( assert ) => {
-	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
-
-	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
-	const cases = [
-		{
-			title: 'Template:Citation needed',
-			expected: 'Citation needed',
-			msg: 'strips the Template: prefix'
-		},
-		{
-			title: 'Template:Foo/doc',
-			expected: 'Foo/doc',
-			msg: 'strips the Template: prefix but keeps subpage'
-		},
-		{
-			title: 'User:Example',
-			expected: 'User:Example',
-			msg: 'keeps prefix for a different namespace'
-		},
-		{
-			title: 'Foo',
-			expected: 'Foo',
-			msg: 'leaves a bare (main namespace) title unchanged'
-		}
-	];
-	cases.forEach( ( caseItem ) => {
-		assert.strictEqual(
-			templateAction.getSuggestionFromTitle( caseItem.title ),
-			caseItem.expected,
-			'template action ' + caseItem.msg
-		);
-	} );
-
-	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
-	assert.strictEqual(
-		linkAction.getSuggestionFromTitle( 'Foo' ),
-		'Foo',
-		'link action inherits identity getSuggestionFromTitle'
-	);
-	assert.strictEqual(
-		linkAction.getSuggestionFromTitle( 'Template:Citation needed' ),
-		'Template:Citation needed',
-		'link action does not strip any prefix'
-	);
-
-	surface.destroy();
-} );
-
-QUnit.test( 'getSuggestions queries opensearch and filters the result', ( assert ) => {
-	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
-
-	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
-	const getStub = sinon.stub().returns(
-		ve.createDeferred().resolve( [ 'ham', [ 'Hamburg', 'Hammer' ], [], [] ] ).promise()
-	);
-	const abortSpy = sinon.spy();
-	linkAction.api = { abort: abortSpy, get: getStub };
-
-	return linkAction.getSuggestions( '  ham  ' ).then( ( suggestions ) => {
-		assert.true( abortSpy.calledOnce, 'previous requests aborted' );
-		assert.deepEqual(
-			getStub.firstCall.args[ 0 ],
-			{
-				action: 'opensearch',
-				namespace: 0,
-				search: 'ham',
-				limit: ve.ui.MWLinkCompletionAction.static.defaultLimit * 2
-			},
-			'opensearch queried with the main namespace and trimmed input'
-		);
-		assert.true( suggestions.includes( 'Hamburg' ), 'Hamburg suggested' );
-		assert.true( suggestions.includes( 'Hammer' ), 'Hammer suggested' );
-	} ).always( () => {
-		surface.destroy();
-	} );
-} );
-
 QUnit.test( 'getSuggestions returns nothing for empty input without querying', ( assert ) => {
 	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
 
 	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
 	const getStub = sinon.stub().throws( new Error( 'API should not be queried for empty input' ) );
-	const abortSpy = sinon.spy();
-	linkAction.api = { abort: abortSpy, get: getStub };
+	// Stub only `get`, so the widget's own abort plumbing still works. getContentApi
+	// hands out a new mw.Api per action, so this can't leak into other tests.
+	linkAction.titleWidget.api.get = getStub;
 
 	return ve.promiseAll( [
 		linkAction.getSuggestions( '' ).then( ( suggestions ) => {
@@ -115,7 +38,30 @@ QUnit.test( 'getSuggestions returns nothing for empty input without querying', (
 			assert.deepEqual( suggestions, [], 'whitespace-only input resolves to no suggestions' );
 		} )
 	] ).then( () => {
-		assert.true( getStub.notCalled, 'opensearch is never queried for empty input' );
+		assert.true( getStub.notCalled, 'API is never queried for empty input' );
+	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
+QUnit.test( 'getSuggestions caps the list at defaultLimit', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
+	const limit = ve.ui.MWLinkCompletionAction.static.defaultLimit;
+	// The API limit bounds the prefix search only. TitleWidget adds the source of each
+	// resolved redirect as its own suggestion, so an uncapped list would be twice as long.
+	const pages = [];
+	const redirects = [];
+	for ( let i = 0; i < limit; i++ ) {
+		pages.push( { title: 'Ham ' + i, ns: 0, index: i + 1 } );
+		redirects.push( { from: 'Hamr ' + i, to: 'Ham ' + i, index: i + 1 } );
+	}
+	linkAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred()
+		.resolve( { query: { pages, redirects } } ).promise();
+
+	return linkAction.getSuggestions( 'ham' ).then( ( suggestions ) => {
+		assert.strictEqual( suggestions.length, limit, 'suggestion count capped at defaultLimit' );
 	} ).always( () => {
 		surface.destroy();
 	} );
@@ -181,46 +127,4 @@ QUnit.test( 'shouldAbandon when input moves on from the link markup', ( assert )
 	);
 
 	surface.destroy();
-} );
-
-QUnit.test( 'getSuggestions strips the Template: prefix from opensearch results', ( assert ) => {
-	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
-
-	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
-	const templateNamespace = mw.config.get( 'wgNamespaceIds' ).template;
-	const getStub = sinon.stub().returns(
-		ve.createDeferred().resolve(
-			[ 'cit', [ 'Template:Citation needed', 'Template:Cite web' ], [], [] ]
-		).promise()
-	);
-	const abortSpy = sinon.spy();
-	templateAction.api = { abort: abortSpy, get: getStub };
-
-	return templateAction.getSuggestions( 'cit' ).then( ( suggestions ) => {
-		assert.true( abortSpy.calledOnce, 'previous requests aborted' );
-		assert.deepEqual(
-			getStub.firstCall.args[ 0 ],
-			{
-				action: 'opensearch',
-				namespace: templateNamespace,
-				search: 'cit',
-				limit: ve.ui.MWTemplateCompletionAction.static.defaultLimit * 2
-			},
-			'opensearch queried with the template namespace'
-		);
-		assert.true(
-			suggestions.includes( 'Citation needed' ),
-			'Citation needed suggested with prefix stripped'
-		);
-		assert.true(
-			suggestions.includes( 'Cite web' ),
-			'Cite web suggested with prefix stripped'
-		);
-		assert.false(
-			suggestions.includes( 'Template:Citation needed' ),
-			'prefixed title is not present in the suggestions'
-		);
-	} ).always( () => {
-		surface.destroy();
-	} );
 } );

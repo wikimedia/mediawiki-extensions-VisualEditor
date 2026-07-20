@@ -6,7 +6,7 @@
 
 /**
  * Base class for source-mode completion actions that suggest page titles from
- * an opensearch query, e.g. wikilinks and template transclusions.
+ * a search query, e.g. wikilinks and template transclusions.
  *
  * @class
  * @abstract
@@ -20,8 +20,18 @@ ve.ui.MWTitleCompletionAction = function VeUiMWTitleCompletionAction() {
 	// Parent constructor
 	ve.ui.MWTitleCompletionAction.super.apply( this, arguments );
 
-	// Shared API object so previous requests can be aborted
-	this.api = this.surface.getTarget().getContentApi();
+	// Create a dummy input widget
+	// TODO: Abstract methods in TitleInputWidget enough that this isn't necessary.
+	this.titleWidget = new mw.widgets.TitleInputWidget( {
+		showDisambigsLast: true,
+		showInterwikis: true,
+		searchFragments: true,
+		showMissing: true,
+		namespace: this.constructor.static.namespace,
+		limit: this.constructor.static.defaultLimit,
+		api: this.surface.getTarget().getContentApi()
+	} );
+	this.suggestionsPromise = null;
 };
 
 /* Inheritance */
@@ -33,12 +43,17 @@ OO.inheritClass( ve.ui.MWTitleCompletionAction, ve.ui.CompletionAction );
 // Strip the two-character trigger ('[[' or '{{') from the searched input.
 ve.ui.MWTitleCompletionAction.static.sequenceLength = 2;
 
+// This action does not call filterSuggestionsForInput, so nothing adds the input to
+// the list. Leaving this true would make CompletionWidget subtract a suggestion that
+// is not there when it counts the matches for shouldAbandon.
+ve.ui.MWTitleCompletionAction.static.alwaysIncludeInput = false;
+
 /**
- * @property {number} Namespace to search, as understood by the opensearch API
+ * @property {number|undefined} Namespace to prepend to queries - undefined if none
  * @static
  * @inheritable
  */
-ve.ui.MWTitleCompletionAction.static.namespace = null;
+ve.ui.MWTitleCompletionAction.static.namespace = undefined;
 
 /**
  * @property {string|null} Message key for the completion menu header
@@ -53,43 +68,29 @@ ve.ui.MWTitleCompletionAction.static.headerMessage = null;
  * @inheritdoc
  */
 ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
-	this.api.abort(); // Abort all unfinished API requests
-	const search = input.trim();
-	if ( !search ) {
-		// opensearch errors on an empty search term, and there are no useful
-		// suggestions for an empty prefix anyway. Resolve to nothing so the menu
-		// clears, rather than firing a request that rejects and leaves the
-		// previous invocation's results on screen.
-		return ve.createDeferred().resolve( [] ).promise();
+	if ( this.suggestionsPromise ) {
+		this.suggestionsPromise.abort();
 	}
-	return this.api.get( {
-		action: 'opensearch',
-		namespace: this.constructor.static.namespace,
-		search,
-		// The menu only ever shows defaultLimit suggestions, so there's no point
-		// fetching the opensearch maximum (up to 500) on every keystroke.
-		limit: this.constructor.static.defaultLimit * 2
-	} ).then(
-		// opensearch returns [ searchTerm, titles[], descriptions[], urls[] ]
-		( response ) => this.filterSuggestionsForInput(
-			( response[ 1 ] || [] ).map( ( title ) => this.getSuggestionFromTitle( title ) ),
-			input
-		)
-	);
-};
 
-/**
- * Convert a title returned by the API into a suggestion string
- *
- * This string is used both for matching against the input and, once chosen, as
- * the argument to #getInsertionText.
- *
- * @protected
- * @param {string} title Title as returned by opensearch
- * @return {string} Suggestion string
- */
-ve.ui.MWTitleCompletionAction.prototype.getSuggestionFromTitle = function ( title ) {
-	return title;
+	this.titleWidget.setValue( input );
+	const hasColonPrefix = input.startsWith( ':' );
+
+	this.suggestionsPromise = this.titleWidget.getSuggestionsPromise();
+	return this.suggestionsPromise.then( ( response ) => {
+		if ( !response || !response.query ) {
+			return [];
+		}
+		return this.titleWidget.getOptionsFromData( response.query )
+			// The API limit only limits the prefix search. TitleWidget adds the sources
+			// of resolved redirects and the missing-page result on top of that, so cap
+			// the list here as filterSuggestionsForInput used to.
+			.slice( 0, this.constructor.static.defaultLimit )
+			.map(
+				// Hack: Colon prefix gets normalised away.
+				// TODO: Find a way to extract the "isInterwiki" flag from the response.
+				( option ) => ( hasColonPrefix ? ':' : '' ) + option.data
+			);
+	} );
 };
 
 /**

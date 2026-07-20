@@ -27,8 +27,6 @@ OO.inheritClass( ve.ui.MWLinkCompletionAction, ve.ui.MWTitleCompletionAction );
 
 ve.ui.MWLinkCompletionAction.static.name = 'mwLinkCompletion';
 
-ve.ui.MWLinkCompletionAction.static.namespace = 0;
-
 ve.ui.MWLinkCompletionAction.static.headerMessage = 'visualeditor-linkcompletion-header';
 
 /* Methods */

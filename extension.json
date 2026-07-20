@@ -2195,6 +2195,7 @@
 				"mediawiki.editfont.styles",
 				"mediawiki.api",
 				"mediawiki.Title",
+				"mediawiki.widgets",
 				"ext.visualEditor.mwlink",
 				"ext.visualEditor.mwcore",
 				"ext.visualEditor.mediawiki"

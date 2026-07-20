@@ -36,19 +36,6 @@ ve.ui.MWTemplateCompletionAction.static.headerMessage = 'visualeditor-templateco
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplateCompletionAction.prototype.getSuggestionFromTitle = function ( title ) {
-	const mwTitle = mw.Title.newFromText( title );
-	// Drop the "Template:" prefix so {{Foo}} is emitted rather than
-	// {{Template:Foo}}, but keep an explicit prefix for other namespaces.
-	if ( mwTitle && mwTitle.getNamespaceId() === this.constructor.static.namespace ) {
-		return mwTitle.getMainText();
-	}
-	return title;
-};
-
-/**
- * @inheritdoc
- */
 ve.ui.MWTemplateCompletionAction.prototype.getInsertionText = function ( suggestion ) {
 	return '{{' + suggestion + '}}';
 };
