@@ -1,8 +1,8 @@
 /**
  * FixedEditCheckDialog constructor.
  *
- * This dialog displays edit checks in the pre-save moment, and shows single edit checks at the bottom of the display
- * while on mobile.
+ * This dialog displays edit checks in a fixed-position panel
+ * (side panel on desktop or at the bottom on mobile)
  *
  * @class
  * @extends ve.ui.ToolbarDialog
@@ -63,18 +63,6 @@ ve.ui.FixedEditCheckDialog.prototype.getTeardownProcess = function ( data ) {
 	const process = ve.ui.FixedEditCheckDialog.super.prototype.getTeardownProcess.call( this, data );
 	// Mixin method
 	return ve.ui.EditCheckDialog.prototype.getTeardownProcess.call( this, data, process );
-};
-
-/**
- * @inheritdoc ve.ui.EditCheckDialog
- */
-ve.ui.FixedEditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
-	if ( this.singleAction && action === null ) {
-		// Can't unset the offset in single-action mode, because it hides the sidebar contents
-		return;
-	}
-	// Mixin method
-	return ve.ui.EditCheckDialog.prototype.onFocusAction.call( this, action, index, scrollTo );
 };
 
 /* Registration */

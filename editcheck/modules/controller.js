@@ -1148,7 +1148,7 @@ Controller.prototype.scrollActionIntoView = function ( action, scrollConfig ) {
 
 	this.surface.scrollSelectionIntoView( selection, ve.extendObject( {
 		animate: true,
-		extraPadding: { top: 10, bottom: 10 }
+		extraPadding: { top: 10, bottom: OO.ui.isMobile() ? 200 : 10 }
 	}, scrollConfig ) );
 };
 
@@ -1160,7 +1160,7 @@ Controller.prototype.scrollActionIntoView = function ( action, scrollConfig ) {
  */
 Controller.prototype.closeDialog = function ( action ) {
 	const currentWindow = this.surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
-	if ( currentWindow && currentWindow.constructor.static.name === 'fixedEditCheckDialog' ) {
+	if ( currentWindow && ( currentWindow.constructor.static.name === 'mobileEditCheckDialog' || currentWindow.constructor.static.name === 'fixedEditCheckDialog' ) ) {
 		// .always is not chainable
 		return currentWindow.close( action ? { action } : undefined ).closed.then( () => {}, () => {} );
 	}

@@ -10,6 +10,7 @@
 mw.editcheck.EditCheckGutterSectionWidget = function MWEditCheckGutterSectionWidget( config ) {
 	this.controller = config.controller;
 	this.actions = config.actions;
+	this.navigableActions = config.navigableActions;
 
 	this.icon = new OO.ui.IconWidget();
 	this.iconLabel = new OO.ui.LabelWidget( {
@@ -147,10 +148,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		} );
 		return;
 	}
-	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
+	const currentWindow = surface.getToolbarDialogs( ve.ui.MobileEditCheckDialog.static.position ).getCurrentWindow();
 	if (
-		currentWindow && currentWindow.constructor.static.name === 'fixedEditCheckDialog' &&
-		this.actions.every( ( sact ) => currentWindow.hasAction( sact ) )
+		currentWindow && currentWindow.constructor.static.name === 'mobileEditCheckDialog' &&
+		this.actions.every( ( sact ) => currentWindow.hasActionInSection( sact ) )
 	) {
 		// Second click: defocus and close
 		this.controller.focusAction( null );
@@ -171,21 +172,22 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 	const controller = this.controller;
 	const surface = controller.surface;
 	action.select( surface, false, false );
-	const currentWindow = surface.getToolbarDialogs( ve.ui.FixedEditCheckDialog.static.position ).getCurrentWindow();
-	if ( !currentWindow || currentWindow.constructor.static.name !== 'fixedEditCheckDialog' ) {
+	const currentWindow = surface.getToolbarDialogs( ve.ui.MobileEditCheckDialog.static.position ).getCurrentWindow();
+	if ( !currentWindow || currentWindow.constructor.static.name !== 'mobileEditCheckDialog' ) {
 		if ( scrollConfig && scrollConfig.alignToTop ) {
 			// Scroll immediately, because we don't need to wait for the padding to settle
 			controller.focusAction( action, true, scrollConfig );
 		}
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
 		windowAction.open(
-			'fixedEditCheckDialog',
+			'mobileEditCheckDialog',
 			{
 				controller,
 				inBeforeSave: false,
-				actions: this.actions,
+				actions: this.navigableActions,
 				newActions: [ action ],
-				footer: this.actions.length !== 1,
+				sectionActions: this.actions,
+				footer: true,
 				// Just filter out any discarded actions from the allowed set
 				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( a ) => !discardedActions.includes( a ) )
 			}
@@ -202,8 +204,8 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 		} );
 	} else {
 		controller.focusAction( action, true, scrollConfig );
-		currentWindow.showActions( this.actions, [ action ] );
-		currentWindow.footer.toggle( this.actions.length !== 1 );
+		currentWindow.showActions( this.navigableActions, [ action ] );
+		currentWindow.sectionActions = this.actions;
 	}
 };
 

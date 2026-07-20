@@ -71,6 +71,7 @@ require( './EditCheckGutterSectionWidget.js' );
 require( './dialogs/EditCheckScrollIntoViewWidget.js' );
 require( './dialogs/EditCheckDialog.js' );
 require( './dialogs/FixedEditCheckDialog.js' );
+require( './dialogs/MobileEditCheckDialog.js' );
 require( './dialogs/SidebarEditCheckDialog.js' );
 require( './dialogs/GutterSidebarEditCheckDialog.js' );
 require( './editchecks/BaseEditCheck.js' );

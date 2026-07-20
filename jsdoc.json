@@ -36,6 +36,7 @@
 				"ve.ui.MW": true,
 				"mw.libs.ve": true,
 				"ve.ui.EditCheck": true,
+				"ve.ui.FixedEditCheck": true,
 				"mw.editcheck.": true
 			},
 			"linkMap": {

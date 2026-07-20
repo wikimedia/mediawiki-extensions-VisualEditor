@@ -227,16 +227,6 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 };
 
 /**
- * Check if an action exists in the current actions.
- *
- * @param {Object} action Action
- * @return {boolean}
- */
-ve.ui.EditCheckDialog.prototype.hasAction = function ( action ) {
-	return this.currentActions.some( ( a ) => action.equals( a ) );
-};
-
-/**
  * Refresh the action list
  */
 ve.ui.EditCheckDialog.prototype.refresh = function () {
@@ -353,6 +343,10 @@ ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
  * @param {boolean} scrollTo Scroll the action's selection into view
  */
 ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
+	if ( this.singleAction && action === null ) {
+		// Can't unset the offset in single-action mode, because it hides the sidebar contents
+		return;
+	}
 	this.setCurrentAction( action, scrollTo, true );
 	this.onScrollIntoViewCloseClick();
 };

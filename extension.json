@@ -674,6 +674,7 @@
 				"editcheck/modules/dialogs/EditCheckScrollIntoViewWidget.js",
 				"editcheck/modules/dialogs/EditCheckDialog.js",
 				"editcheck/modules/dialogs/FixedEditCheckDialog.js",
+				"editcheck/modules/dialogs/MobileEditCheckDialog.js",
 				"editcheck/modules/dialogs/SidebarEditCheckDialog.js",
 				"editcheck/modules/dialogs/GutterSidebarEditCheckDialog.js",
 				"editcheck/modules/editchecks/BaseEditCheck.js",

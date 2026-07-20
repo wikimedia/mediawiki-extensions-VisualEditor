@@ -45,6 +45,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	ve.ui.GutterSidebarEditCheckDialog.super.prototype.initialize.call( this );
 
 	this.sections = [];
+	this.navigableActions = [];
 	this.hasSuggestionInSectionInitially = false;
 
 	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
@@ -221,6 +222,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function (
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions, newActions = [] ) {
 	this.sections = [];
+	this.navigableActions = [];
 	if ( this.scrollIntoView ) {
 		this.scrollIntoView.clear();
 	}
@@ -239,10 +241,12 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 			return selectionView.getSelectionBoundingRect();
 		} ).filter( ( rect ) => rect );
 		const boundingRect = ve.getBoundingRect( rects );
+		// Filter out actions from outside this section
 		if ( !boundingRect ) {
 			return;
 		}
 
+		this.navigableActions.push( action );
 		// Look for any other section that the new one overlaps with
 		// TODO: join when two other sections are joined by the new one?
 		const prev = this.sections.find( ( p ) => !( p.rect.bottom < boundingRect.top || boundingRect.bottom < p.rect.top ) );
@@ -269,10 +273,14 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 				owidget.actions.every( ( oact ) => section.actions.includes( oact ) )
 		);
 		if ( index !== -1 ) {
+			// A widget already exists that contains all of this section's actions
 			widget = oldWidgets.splice( index, 1 )[ 0 ];
+			widget.navigableActions = this.navigableActions;
+			widget.actions = section.actions;
 		} else {
 			widget = new mw.editcheck.EditCheckGutterSectionWidget( {
 				actions: section.actions,
+				navigableActions: this.navigableActions,
 				controller: this.controller
 			} );
 			this.$body.append( widget.$element );
