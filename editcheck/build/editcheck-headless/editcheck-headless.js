@@ -7,6 +7,11 @@
 const { spawn } = require( 'child_process' );
 const net = require( 'net' );
 const puppeteer = require( 'puppeteer-core' );
+const {
+	withSpan, startSpan,
+	ATTR_WIKI_BASE_URL, ATTR_ENGINE, ATTR_TITLE, ATTR_SESSION_WARM,
+	ATTR_COMPLETED_REQUESTS
+} = require( './editcheck-headless-tracing' );
 
 // Chrome launch flags for headless, rendering-free operation. The edit checks
 // run against a detached ve.dm document model, so Chrome never needs to paint,
@@ -487,13 +492,25 @@ class HeadlessBrowserSession {
 	/**
 	 * Ensure the browser is launched and the page is loaded for the given wiki.
 	 *
+	 * Traced separately because the cost varies by orders of magnitude: a warm
+	 * session is a no-op, while a cold one launches a browser and loads a page.
+	 * Without its own span a cold start is indistinguishable from a slow check.
+	 *
 	 * @param {string} baseUrl Wiki base URL (no trailing slash)
 	 * @param {Function} [onProgress] Progress callback
 	 * @return {Promise<void>}
 	 */
 	async ensureReady( baseUrl, onProgress ) {
-		await this.init( onProgress );
-		await this.navigateTo( baseUrl, onProgress );
+		return withSpan( 'ensureReady', async () => {
+			await this.init( onProgress );
+			await this.navigateTo( baseUrl, onProgress );
+		}, {
+			[ ATTR_WIKI_BASE_URL ]: baseUrl,
+			[ ATTR_ENGINE ]: this.engine,
+			// True when both init() and navigateTo() will return early, i.e. the
+			// span covers no work. Mirrors their guards.
+			[ ATTR_SESSION_WARM ]: this.browser !== null && this.currentBaseUrl === baseUrl
+		} );
 	}
 
 	/**
@@ -532,10 +549,19 @@ class HeadlessBrowserSession {
 			) {
 				progress( `Restarting browser after ${ this.completedRequests } processed requests` );
 				try {
-					await this.close( progress );
-					// Re-launch and re-warm the page for the wiki we just used, so
-					// the next request against the same wiki stays fast.
-					await this.ensureReady( baseUrl, progress );
+					// Own span: this cost lands on whichever request trips the
+					// modulo, so without it that request looks like an
+					// unexplained periodic outlier.
+					await withSpan( 'browserRestart', async () => {
+						await this.close( progress );
+						// Re-launch and re-warm the page for the wiki we just used, so
+						// the next request against the same wiki stays fast.
+						await this.ensureReady( baseUrl, progress );
+					}, {
+						[ ATTR_WIKI_BASE_URL ]: baseUrl,
+						[ ATTR_ENGINE ]: this.engine,
+						[ ATTR_COMPLETED_REQUESTS ]: this.completedRequests
+					} );
 				} catch ( restartError ) {
 					if ( !originalError ) {
 						throw restartError;
@@ -551,9 +577,11 @@ class HeadlessBrowserSession {
 			return resultData;
 		};
 
-		const runPromise = this.runQueue.then( task );
-		this.runQueue = runPromise.catch( () => {} );
-		return runPromise;
+		return this.enqueue( 'runCheck', task, {
+			[ ATTR_WIKI_BASE_URL ]: baseUrl,
+			[ ATTR_ENGINE ]: this.engine,
+			[ ATTR_TITLE ]: title
+		} );
 	}
 
 	/**
@@ -578,7 +606,33 @@ class HeadlessBrowserSession {
 			return result && result.configs;
 		};
 
-		const runPromise = this.runQueue.then( task );
+		return this.enqueue( 'getConfigs', task, {
+			[ ATTR_WIKI_BASE_URL ]: baseUrl,
+			[ ATTR_ENGINE ]: this.engine
+		} );
+	}
+
+	/**
+	 * Queue a task to run exclusively on this session's single browser page.
+	 *
+	 * Tasks run one at a time, in the order they were queued, so a request that
+	 * arrives while the page is busy waits for the tasks ahead of it. That wait
+	 * is recorded as its own `<name>.queueWait` span, sibling to the `<name>`
+	 * span covering the run itself, so a slow request caused by an overloaded
+	 * server is distinguishable from a genuinely slow check.
+	 *
+	 * @private
+	 * @param {string} name Span name for the task
+	 * @param {Function} task Async function to run once the session is free
+	 * @param {Object} [attributes] Attributes for both spans
+	 * @return {Promise<*>} task's return value
+	 */
+	enqueue( name, task, attributes ) {
+		const queueSpan = startSpan( `${ name }.queueWait`, attributes );
+		const runPromise = this.runQueue.then( () => {
+			queueSpan.end();
+			return withSpan( name, task, attributes );
+		} );
 		this.runQueue = runPromise.catch( () => {} );
 		return runPromise;
 	}

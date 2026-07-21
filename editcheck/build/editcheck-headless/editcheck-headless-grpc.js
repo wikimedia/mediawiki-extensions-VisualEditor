@@ -26,9 +26,7 @@
  */
 
 const path = require( 'path' );
-// eslint-disable-next-line n/no-missing-require
 const grpc = require( '@grpc/grpc-js' );
-// eslint-disable-next-line n/no-missing-require
 const protoLoader = require( '@grpc/proto-loader' );
 const { resolveWiki } = require( './editcheck-headless-sitematrix' );
 

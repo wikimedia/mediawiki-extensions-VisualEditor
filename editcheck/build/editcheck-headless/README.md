@@ -173,6 +173,49 @@ not match the current revision), but honouring an exact historical revision —
 fetching that `oldid`'s Parsoid HTML — is deferred future work. LAC still keys
 the cached artifact by the requested revision.
 
+## Tracing
+
+Requests are traced with OpenTelemetry ([T431495](https://phabricator.wikimedia.org/T431495)), so that in
+production a request to this service — whether over HTTP or via the gRPC
+lambda API — shows up as part of a distributed trace at
+[trace.wikimedia.org](https://trace.wikimedia.org/). Both entrypoints
+automatically extract the incoming `traceparent` header, so a trace started by
+an upstream caller (e.g. LAC/Hoarde calling `GetRevisionArtifact`) continues
+into this service, with nested spans around the actual browser-driven check
+work. WMF's `x-request-id` header is also extracted, but into baggage only —
+it correlates a request with its log entries and is passed on to outbound
+requests; it does not itself continue a trace.
+
+A slow request has several possible causes, so each is given its own span
+rather than being absorbed into the overall `runCheck` time:
+
+| Span | Covers |
+| :--- | :--- |
+| `runCheck` / `getConfigs` | The run itself, once the session is free. |
+| `runCheck.queueWait` | Waiting for a turn: a session runs one check at a time, so this is the queue delay. Sibling to `runCheck`, not a child. |
+| `ensureReady` | Launching the browser and loading the page. A no-op on a warm session (see the `editcheck.session.warm` attribute), seconds on a cold one. |
+| `browserRestart` | The periodic restart from `--restart-every-requests`, which is billed to whichever request happens to trip it. |
+
+Spans carry the wiki (`editcheck.wiki.base_url`) and engine
+(`editcheck.engine`) as attributes, since sessions — and therefore run queues —
+are per-wiki, so queue saturation is only attributable with the wiki recorded.
+`runCheck` also carries `editcheck.title`. High-cardinality values stay in
+attributes and out of span names.
+
+Configuration is entirely via standard OpenTelemetry environment variables —
+there are no service-specific CLI flags:
+
+| Variable | Purpose |
+| :--- | :--- |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | Collector endpoint (e.g. the in-cluster collector in production). |
+| `OTEL_SERVICE_NAME` | Service name shown in traces; defaults to `visualeditor-editcheck-headless` (matching `service_name` in [`service-utils.config.yaml`](./service-utils.config.yaml)) if unset. |
+| `OTEL_TRACES_SAMPLER` | Set to `parentbased_always_off` in production so the Envoy mesh sidecar makes the root sampling decision (see [Distributed tracing](https://wikitech.wikimedia.org/wiki/Distributed_tracing)). |
+| `OTEL_SDK_DISABLED` | Set to `true` to turn tracing off entirely. Use this rather than `OTEL_TRACES_EXPORTER=none`, which the explicit exporter in `editcheck-headless-tracing.js` overrides. Without a collector the exporter retries a local connection and fails quietly (set `OTEL_LOG_LEVEL=debug` to see it). |
+
+Note that the Parsoid HTML fetch performed *inside* the headless browser
+(driven over CDP, not by this Node process) is not part of the trace — it's a
+same-process, in-page fetch outside this service's instrumentation.
+
 ## Configuration
 
 Logging and service metadata are read from

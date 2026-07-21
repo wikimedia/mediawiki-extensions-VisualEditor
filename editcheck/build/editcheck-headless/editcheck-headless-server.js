@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
+// Must be required (and started) before anything below requires 'http' or
+// '@grpc/grpc-js', so the OTel instrumentation's require hook is installed
+// before those modules are first loaded in this process.
+const { startTracing, shutdownTracing } = require( './editcheck-headless-tracing' );
+const otelSdk = startTracing();
+
 const http = require( 'http' );
 const fs = require( 'fs' );
 const { execSync } = require( 'child_process' );
@@ -675,6 +681,22 @@ function makeHandler( sessionManager, serviceLogger, dbnameMap ) {
 			} );
 			// eslint-disable-next-line mocha/no-top-level-hooks
 			await teardown();
+			// Don't let a slow/unreachable trace collector stall a clean
+			// shutdown: cap the final flush and proceed regardless.
+			await Promise.race( [
+				shutdownTracing( otelSdk ),
+				new Promise( ( resolve ) => {
+					setTimeout( resolve, 2000 ).unref();
+				} )
+			] ).catch( ( err ) => {
+				// An unreachable collector rejects with an AggregateError whose
+				// own message is empty — the reason is only in .errors, so
+				// report those or the log line says just "AggregateError".
+				const reason = Array.isArray( err && err.errors ) ?
+					err.errors.map( ( e ) => e && e.message || String( e ) ).join( '; ' ) :
+					err && err.message || String( err );
+				serviceLogger.warn( `[shutdown] tracing flush failed: ${ reason }` );
+			} );
 			// eslint-disable-next-line n/no-process-exit
 			process.exit( 0 );
 		};
