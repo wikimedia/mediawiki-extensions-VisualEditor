@@ -852,14 +852,33 @@ mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
 		taggedIds[ name ][ tag ] = taggedIds[ name ][ tag ] || new Set();
 		taggedIds[ name ][ tag ].add( action.id );
 	} else {
-		const taggedFragments = this.controller.taggedFragments;
-		taggedFragments[ name ] = taggedFragments[ name ] || {};
-		taggedFragments[ name ][ tag ] = taggedFragments[ name ][ tag ] || [];
-		taggedFragments[ name ][ tag ].push(
-			// Exclude insertions so we don't accidentally block unrelated changes:
-			...action.fragments.map( ( fragment ) => fragment.clone().setExcludeInsertions( true ) )
-		);
+		this.tagFragments( tag, action.fragments, false, name );
 	}
+};
+
+/**
+ * Tag a set of fragments
+ *
+ * @param {string} tag
+ * @param {ve.dm.SurfaceFragment[]} fragments
+ * @param {boolean} [ephemeral] Clear the tag once the selection leaves the tagged range
+ * @param {string} [name] Tag namespace; defaults to this check's name
+ */
+mw.editcheck.BaseEditCheck.prototype.tagFragments = function ( tag, fragments, ephemeral, name ) {
+	if ( !name ) {
+		name = this.constructor.static.name;
+	}
+	const taggedFragments = this.controller.taggedFragments;
+	taggedFragments[ name ] = taggedFragments[ name ] || {};
+	taggedFragments[ name ][ tag ] = taggedFragments[ name ][ tag ] || [];
+	fragments.forEach( ( fragment ) => {
+		// Exclude insertions so we don't accidentally block unrelated changes:
+		const clone = fragment.clone().setExcludeInsertions( true );
+		taggedFragments[ name ][ tag ].push( clone );
+		if ( ephemeral ) {
+			this.controller.registerEphemeralTag( name, tag, clone );
+		}
+	} );
 };
 
 /**

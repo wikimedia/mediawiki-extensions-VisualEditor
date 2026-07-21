@@ -109,6 +109,7 @@ Controller.prototype.clearState = function () {
 	this.ignoreNextSelectionChange = null;
 	this.taggedFragments = {};
 	this.taggedIds = {};
+	this.ephemeralTags = [];
 	this.lastBranchNodeChangeHistoryPointer = null;
 	this.currentListenerPromise = null;
 	this.refreshDeferred = null;
@@ -654,8 +655,48 @@ Controller.prototype.onSelect = function () {
 		this.ignoreNextSelectionChange = null;
 		return;
 	}
+	this.clearEphemeralTagsForSelection();
 	if ( !OO.ui.isMobile() ) {
 		this.focusActionForSelection();
+	}
+};
+
+/**
+ * Register an ephemeral tag, to be cleared once the selection leaves its range
+ *
+ * @param {string} name Tag namespace (check name)
+ * @param {string} tag Tag
+ * @param {ve.dm.SurfaceFragment} fragment The tagged fragment, as stored in taggedFragments
+ */
+Controller.prototype.registerEphemeralTag = function ( name, tag, fragment ) {
+	this.ephemeralTags.push( { name, tag, fragment } );
+};
+
+/**
+ * Clear any ephemeral tags whose range the selection has left, and refresh if so
+ */
+Controller.prototype.clearEphemeralTagsForSelection = function () {
+	// Debounced via onSelect; may fire after teardown.
+	if ( !this.surface || !this.ephemeralTags.length ) {
+		return;
+	}
+	const covering = this.surface.getModel().getSelection().getCoveringRange();
+	let cleared = false;
+	this.ephemeralTags = this.ephemeralTags.filter( ( entry ) => {
+		const range = entry.fragment.getSelection().getCoveringRange();
+		if ( range && covering && range.containsRange( covering ) ) {
+			return true;
+		}
+		const tagged = this.taggedFragments[ entry.name ] && this.taggedFragments[ entry.name ][ entry.tag ];
+		const index = tagged ? tagged.indexOf( entry.fragment ) : -1;
+		if ( index !== -1 ) {
+			tagged.splice( index, 1 );
+		}
+		cleared = true;
+		return false;
+	} );
+	if ( cleared ) {
+		this.refresh();
 	}
 };
 

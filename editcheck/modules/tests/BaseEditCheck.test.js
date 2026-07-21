@@ -790,3 +790,63 @@ QUnit.test( 'doesConfigMatch applies account/editcount config by mode', ( assert
 	mw.user.isNamed = originalIsNamed;
 	mw.config.values.wgUserEditCount = originalEditCount;
 } );
+
+QUnit.test( 'tagFragments', ( assert ) => {
+	const doc = ve.dm.example.createExampleDocumentFromData( [
+		{ type: 'paragraph' }, ...'abc', { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	const surface = new ve.dm.Surface( doc );
+	const fragment = surface.getLinearFragment( new ve.Range( 1, 3 ) );
+
+	const ephemeralCalls = [];
+	const controller = {
+		taggedFragments: {},
+		registerEphemeralTag: function ( name, tag, frag ) {
+			ephemeralCalls.push( { name, tag, frag } );
+		}
+	};
+	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	const name = check.constructor.static.name;
+
+	check.tagFragments( 'plain', [ fragment ] );
+	assert.strictEqual( controller.taggedFragments[ name ].plain.length, 1, 'Fragment stored under the check name' );
+	assert.strictEqual( ephemeralCalls.length, 0, 'Non-ephemeral tag is not registered for auto-clearing' );
+
+	check.tagFragments( 'temporary', [ fragment ], true );
+	assert.strictEqual( controller.taggedFragments[ name ].temporary.length, 1, 'Ephemeral fragment stored' );
+	assert.strictEqual( ephemeralCalls.length, 1, 'Ephemeral tag is registered for auto-clearing' );
+	assert.strictEqual( ephemeralCalls[ 0 ].tag, 'temporary', 'Registered under the right tag' );
+	assert.strictEqual(
+		ephemeralCalls[ 0 ].frag, controller.taggedFragments[ name ].temporary[ 0 ],
+		'Registered the same clone that was stored'
+	);
+} );
+
+QUnit.test( 'tag stores under the action tag name', ( assert ) => {
+	const doc = ve.dm.example.createExampleDocumentFromData( [
+		{ type: 'paragraph' }, ...'abc', { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	const surface = new ve.dm.Surface( doc );
+	const range = new ve.Range( 1, 3 );
+	const controller = { taggedFragments: {}, taggedIds: {} };
+	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+
+	// An action whose getTagName differs from the check's own name, as
+	// TextMatchEditCheckAction does. The tag must land under that name, not the check's.
+	const action = {
+		getTagName: () => 'customNamespace',
+		fragments: [ surface.getLinearFragment( range ) ]
+	};
+	check.tag( 'dismissed', action );
+
+	assert.strictEqual(
+		check.isTaggedRange( 'dismissed', range, 'customNamespace' ), true,
+		'Tag stored under the action tag name'
+	);
+	assert.strictEqual(
+		check.isTaggedRange( 'dismissed', range ), false,
+		'Tag not stored under the check name'
+	);
+} );

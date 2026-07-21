@@ -2,6 +2,11 @@ ve.test.utils.EditCheck = {};
 
 ve.test.utils.EditCheck.dummyController = {
 	taggedFragments: {},
+	taggedIds: {},
+	ephemeralTags: [],
+	registerEphemeralTag: function ( name, tag, fragment ) {
+		this.ephemeralTags.push( { name, tag, fragment } );
+	},
 	getTarget: () => ve.init.target
 };
 
