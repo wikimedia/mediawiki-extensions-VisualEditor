@@ -70,3 +70,40 @@ QUnit.test( 'onBranchNodeChange', ( assert ) => {
 		}
 	} );
 } );
+
+QUnit.test( 'onBranchNodeChange skips images tagged as freshly-added', ( assert ) => {
+	const doc = ve.dm.mwExample.createExampleDocumentFromData( [
+		ve.copy( ve.dm.mwExample.MWBlockImage.data[ 0 ] ),
+		{ type: 'mwImageCaption' },
+		{ type: 'paragraph', internal: { generated: 'wrapper' } },
+		{ type: '/paragraph' },
+		{ type: '/mwImageCaption' },
+		{ type: '/mwBlockImage' },
+		{ type: 'internalList' },
+		{ type: '/internalList' }
+	] );
+	const surface = new ve.dm.Surface( doc );
+	const image = doc.getDocumentNode().children[ 0 ];
+
+	const controller = { taggedFragments: {}, getTarget: () => ve.init.target };
+	const check = new mw.editcheck.ImageCaptionEditCheck( controller, {}, true );
+
+	assert.strictEqual(
+		check.onBranchNodeChange( surface ).length, 1,
+		'Untagged empty-caption image is flagged'
+	);
+
+	// Simulate SuggestedImageEditCheck having ephemerally tagged the just-added image.
+	controller.taggedFragments[ mw.editcheck.SuggestedImageEditCheck.static.name ] = {
+		newImage: [ surface.getLinearFragment( image.getOuterRange() ) ]
+	};
+
+	assert.strictEqual(
+		check.onBranchNodeChange( surface ).length, 0,
+		'Tagged image is skipped on branch-node change'
+	);
+	assert.strictEqual(
+		check.onBeforeSave( surface ).length, 1,
+		'onBeforeSave ignores the tag (pre-save safety net still fires)'
+	);
+} );

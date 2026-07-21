@@ -167,6 +167,8 @@ mw.editcheck.SuggestedImageEditCheck.prototype.act = function ( choice, action, 
 					}
 				}
 			}
+			// Let ImageCaptionEditCheck ignore this until the selection moves:
+			this.tagFragments( 'newImage', [ insertionFragment ], true );
 			action.select( surface, true );
 		} );
 	}

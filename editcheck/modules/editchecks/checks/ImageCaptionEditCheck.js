@@ -43,7 +43,7 @@ mw.editcheck.ImageCaptionEditCheck.static.choices = [
 
 /* Methods */
 
-mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
+mw.editcheck.ImageCaptionEditCheck.prototype.getEmptyCaptionImages = function ( surfaceModel ) {
 	return this.getAddedNodes( surfaceModel.getDocument(), 'mwBlockImage' )
 		.filter( ( image ) => !this.isDismissedRange( image.getOuterRange() ) )
 		.filter( ( image ) => (
@@ -57,14 +57,28 @@ mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceMo
 			// content; if not, it's probably a template or similar, and
 			// should count as a caption being set
 			image.children[ 0 ].children[ 0 ].canContainContent()
-		) )
-		.map( ( image ) => new mw.editcheck.EditCheckAction( {
-			check: this,
-			fragments: [ surfaceModel.getLinearFragment( image.getOuterRange() ) ]
-		} ) );
+		) );
 };
 
-mw.editcheck.ImageCaptionEditCheck.prototype.onBranchNodeChange = mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave;
+mw.editcheck.ImageCaptionEditCheck.prototype.newAction = function ( surfaceModel, image ) {
+	return new mw.editcheck.EditCheckAction( {
+		check: this,
+		fragments: [ surfaceModel.getLinearFragment( image.getOuterRange() ) ]
+	} );
+};
+
+mw.editcheck.ImageCaptionEditCheck.prototype.onBeforeSave = function ( surfaceModel ) {
+	return this.getEmptyCaptionImages( surfaceModel )
+		.map( ( image ) => this.newAction( surfaceModel, image ) );
+};
+
+mw.editcheck.ImageCaptionEditCheck.prototype.onBranchNodeChange = function ( surfaceModel ) {
+	const suggestedImageName = mw.editcheck.SuggestedImageEditCheck.static.name;
+	return this.getEmptyCaptionImages( surfaceModel )
+		// Skip an image the suggested-image check just added, until the cursor leaves it.
+		.filter( ( image ) => !this.isTaggedRange( 'newImage', image.getOuterRange(), suggestedImageName ) )
+		.map( ( image ) => this.newAction( surfaceModel, image ) );
+};
 
 mw.editcheck.ImageCaptionEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'edit' ) {
