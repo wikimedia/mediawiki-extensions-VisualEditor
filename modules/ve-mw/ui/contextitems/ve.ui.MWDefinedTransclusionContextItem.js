@@ -126,21 +126,38 @@ ve.ui.MWDefinedTransclusionContextItem.static.getMatchedTool = function ( model 
 /**
  * Get a template param using its canonical name
  *
+ * @param {ve.dm.MWTransclusionNode} model Node model
  * @param {string} name Canonical parameter name
  * @return {string|null} Param wikitext, null if not found
  */
-ve.ui.MWDefinedTransclusionContextItem.prototype.getCanonicalParam = function ( name ) {
-	const params = this.tool.params || {};
+ve.ui.MWDefinedTransclusionContextItem.static.getCanonicalParam = function ( model, name ) {
+	const tool = this.getMatchedTool( model );
+	if ( !tool ) {
+		return null;
+	}
+	const params = tool.params || {};
 
 	if ( Object.prototype.hasOwnProperty.call( params, name ) ) {
 		const aliases = Array.isArray( params[ name ] ) ? params[ name ] : [ params[ name ] ];
 		// Find the first non-empty value from the alias list
 		for ( let i = 0; i < aliases.length; i++ ) {
-			const value = ve.getProp( this.model.getAttribute( 'mw' ), 'parts', 0, 'template', 'params', aliases[ i ], 'wt' );
+			const value = ve.getProp( model.getAttribute( 'mw' ), 'parts', 0, 'template', 'params', aliases[ i ], 'wt' );
 			if ( value ) {
 				return value;
 			}
 		}
 	}
 	return null;
+};
+
+/* Methods */
+
+/**
+ * Get a template param using its canonical name
+ *
+ * @param {string} name Canonical parameter name
+ * @return {string|null} Param wikitext, null if not found
+ */
+ve.ui.MWDefinedTransclusionContextItem.prototype.getCanonicalParam = function ( name ) {
+	return this.constructor.static.getCanonicalParam( this.model, name );
 };
