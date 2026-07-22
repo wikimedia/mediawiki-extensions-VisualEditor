@@ -36,6 +36,14 @@ class VisualEditorFileModule extends FileModule {
 			}
 		);
 
+		// Files (relative to lib/ve) to exclude from the veModules listings, e.g. tests that
+		// only apply to the standalone distribution.
+		$excludeFiles = [];
+		if ( isset( $options['veExcludeFiles'] ) && is_array( $options['veExcludeFiles'] ) ) {
+			// Convert to keys for faster lookup
+			$excludeFiles = array_fill_keys( $options['veExcludeFiles'], true );
+		}
+
 		// Prepend scripts/styles from $options['veModules'] to $options['scripts']/$options['styles']
 		$scripts = [];
 		$debugScripts = [];
@@ -48,6 +56,9 @@ class VisualEditorFileModule extends FileModule {
 			if ( isset( $module['scripts'] ) ) {
 				foreach ( $module['scripts'] as $item ) {
 					$path = is_array( $item ) ? $item['file'] : $item;
+					if ( isset( $excludeFiles[$path] ) ) {
+						continue;
+					}
 					$fullPath = 'lib/ve/' . $path;
 					if ( is_array( $item ) && !empty( $item['debug'] ) ) {
 						$debugScripts[] = $fullPath;
@@ -59,6 +70,9 @@ class VisualEditorFileModule extends FileModule {
 			if ( isset( $module['styles'] ) ) {
 				foreach ( $module['styles'] as $item ) {
 					$path = is_array( $item ) ? $item['file'] : $item;
+					if ( isset( $excludeFiles[$path] ) ) {
+						continue;
+					}
 					$styles[] = 'lib/ve/' . $path;
 				}
 			}

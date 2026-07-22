@@ -17,6 +17,9 @@ const modulesJson = require( '../lib/ve/build/modules.json' );
 /**
  * List of file/directory patterns to ignore.
  *
+ * Standalone-only test files that live inside a veModules listing (e.g. visualEditor.test)
+ * are not listed here; they are declared via "veExcludeFiles" in extension.json instead.
+ *
  * @type {string[]}
  */
 const ignored = [
@@ -24,22 +27,10 @@ const ignored = [
 	'lib/',
 	'dist/',
 	'src/ve.track.js', // Re-implemented in MW
-	'tests/ve.qunit.local.js',
 	// Standalone / Demos
 	'demos/',
 	'src/init/sa/',
-	'tests/init/ve.init.sa.Platform.test.js',
-	'src/ui/dialogs/ve.ui.DiffDialog.js',
-	// Rebaser
-	'rebaser/',
-	// TODO: Put these is a folder
-	'tests/ve.FakePeer.test.js',
-	'tests/dm/ve.dm.TransactionSquasher.test.js',
-	'tests/dm/ve.dm.RebaseServer.test.js',
-	'tests/dm/ve.dm.FakeMongo.js',
-	'tests/dm/ve.dm.FakeSocket.js',
-	'tests/dm/ve.dm.DocumentStore.test.js',
-	'tests/dm/ve.dm.TransportServer.test.js'
+	'src/ui/dialogs/ve.ui.DiffDialog.js'
 ];
 
 /**
@@ -120,11 +111,17 @@ const extensionFiles = new Set();
 addModulesToSet( extensionJson.ResourceModules, extensionFiles );
 addModulesToSet( { QUnitTestModule: extensionJson.QUnitTestModule }, extensionFiles );
 
+// Both ResourceModules and QUnitTestModule may pull file lists from modules.json via veModules.
+const modulesWithVeModules = {
+	...extensionJson.ResourceModules,
+	QUnitTestModule: extensionJson.QUnitTestModule
+};
 const veModuleToResourceModules = {};
-Object.entries( extensionJson.ResourceModules ).forEach( ( [ rlName, rlModule ] ) => {
+const excludedFiles = new Set();
+Object.entries( modulesWithVeModules ).forEach( ( [ rlName, rlModule ] ) => {
 	if ( rlModule.veModules ) {
 		rlModule.veModules.forEach( ( veModule ) => {
-			// Modules listed in veModules of ResourceModules are loaded automatically.
+			// Modules listed in veModules are loaded automatically.
 			addModulesToSet( { [ veModule ]: modulesJson[ veModule ] || {} }, extensionFiles, 'lib/ve' );
 			// Track which veModules are included by which ResourceModules
 			if ( !veModuleToResourceModules[ veModule ] ) {
@@ -133,11 +130,33 @@ Object.entries( extensionJson.ResourceModules ).forEach( ( [ rlName, rlModule ] 
 			veModuleToResourceModules[ veModule ].push( rlName );
 		} );
 	}
+	// Files excluded from the veModules listings (e.g. standalone-only tests) aren't actually
+	// loaded, so track them and drop them again from the loaded set.
+	if ( rlModule.veExcludeFiles ) {
+		rlModule.veExcludeFiles.forEach( ( file ) => {
+			const filePath = path.join( 'lib/ve', file );
+			excludedFiles.add( filePath );
+			extensionFiles.delete( filePath );
+		} );
+	}
 } );
 
 const modulesFiles = new Set();
 addModulesToSet( modulesJson, modulesFiles, 'lib/ve' );
-const missingFiles = Array.from( modulesFiles ).filter( ( file ) => !extensionFiles.has( file ) && !isIgnored( file ) );
+// A file listed in veExcludeFiles is intentionally not loaded, so it isn't "missing".
+const missingFiles = Array.from( modulesFiles ).filter(
+	( file ) => !extensionFiles.has( file ) && !excludedFiles.has( file ) && !isIgnored( file )
+);
+
+// Warn about veExcludeFiles entries that don't match any file in modules.json (likely stale).
+const staleExcludes = Array.from( excludedFiles ).filter( ( file ) => !modulesFiles.has( file ) );
+if ( staleExcludes.length ) {
+	console.warn(
+		'Unused veExcludeFiles entr(y/ies) in extension.json:\n' +
+		staleExcludes.map( ( file ) => `* ${ file }\n` ).join( '' ) +
+		'\n'
+	);
+}
 
 if ( unusedIgnores.size ) {
 	console.warn(
