@@ -12,6 +12,8 @@
 		]
 	},
 	"tag-editcheck-newreference-description": "Et gouf eng Referenz op d'Säit derbäigesat",
+	"tag-editcheck-references-activated": "Ännerungsiwwerpréiwung (Referenzen) aktivéiert",
+	"tag-editcheck-references-shown": "Ännerungsiwwerpréiwung (Referenzen) ugewisen",
 	"tag-visualeditor": "Visuell Ännerung",
 	"tag-visualeditor-description": "Ännerung, déi mam [[{{MediaWiki:visualeditor-descriptionpagelink}}|Visuellen Editeur]] gemaach gouf",
 	"tag-visualeditor-needcheck": "Visuell änneren: Nokucken",
