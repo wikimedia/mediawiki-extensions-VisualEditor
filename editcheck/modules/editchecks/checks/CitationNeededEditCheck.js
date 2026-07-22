@@ -52,6 +52,10 @@ mw.editcheck.CitationNeededEditCheck.static.choices = [
 /* Methods */
 
 mw.editcheck.CitationNeededEditCheck.prototype.getCitationNeededRanges = function ( documentModel ) {
+	if ( !ve.ui.MWCitationNeededContextItem ) {
+		return [];
+	}
+
 	return this.getAddedNodes( documentModel, 'mwTransclusionInline' )
 		.filter(
 			// MWCitationNeededContextItem.isCompatibleWith returns false when this check is available,
@@ -67,14 +71,25 @@ mw.editcheck.CitationNeededEditCheck.prototype.onDocumentChange = function ( sur
 		if ( this.isDismissedRange( range ) ) {
 			return null;
 		}
-		// TODO: The context has a more complex description that includes the
-		// date and reason parameters if they are available, but pulling that
-		// in would require refactoring of ve.ui.MWCitationNeededContextItem.
+
 		return new mw.editcheck.EditCheckAction( {
 			fragments: [ surfaceModel.getLinearFragment( range ) ],
 			check: this
 		} );
 	} );
+};
+
+/**
+ * @inheritdoc
+ */
+mw.editcheck.CitationNeededEditCheck.prototype.getDescription = function ( action ) {
+	const node = action.fragments[ 0 ].getSelectedNode();
+
+	if ( !node ) {
+		return this.constructor.static.description;
+	}
+
+	return ve.ui.MWCitationNeededContextItem.static.getDescription( node );
 };
 
 mw.editcheck.CitationNeededEditCheck.prototype.act = function ( choice, action, surface ) {
