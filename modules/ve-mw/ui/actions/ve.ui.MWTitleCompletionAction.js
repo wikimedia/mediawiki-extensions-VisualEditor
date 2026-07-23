@@ -123,3 +123,13 @@ ve.ui.MWTitleCompletionAction.prototype.insertCompletion = function ( data, rang
 	const text = this.getInsertionText( data );
 	return ve.ui.MWTitleCompletionAction.super.prototype.insertCompletion.call( this, text, range );
 };
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MWTitleCompletionAction.prototype.shouldAbandon = function ( input ) {
+	// TODO: consider whether pending loads from server are happening here?
+	return ve.ui.MWTitleCompletionAction.super.prototype.shouldAbandon.apply( this, arguments ) ||
+		// Abandon if a character that suggests we're moving on from the link-markup has been entered
+		/[\]}|]$/.test( input );
+};
