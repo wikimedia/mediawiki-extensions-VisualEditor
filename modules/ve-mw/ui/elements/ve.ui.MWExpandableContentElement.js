@@ -110,6 +110,11 @@ ve.ui.MWExpandableContentElement.prototype.reset = function () {
  * @private
  */
 ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
+	// T430672
+	ve.track( 'activity.transclusion', {
+		action: this.collapsed ? 'parameter-expand' : 'parameter-collapse'
+	} );
+
 	this.collapsed = !this.collapsed;
 	this.recalculateVisuals();
 };

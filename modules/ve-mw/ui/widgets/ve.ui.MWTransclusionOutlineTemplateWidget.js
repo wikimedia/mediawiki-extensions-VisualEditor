@@ -418,6 +418,15 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	let nothingFound = true;
 
 	query = query.trim().toLowerCase();
+
+	// T430672
+	if ( query === '' ) {
+		this.hasInput = false;
+	} else if ( !this.hasInput ) {
+		ve.track( 'activity.transclusion', { action: 'search-input' } );
+		this.hasInput = true;
+	}
+
 	this.createAllParameterCheckboxes();
 
 	// Note: We can't really cache this because the list of know parameters can change any time

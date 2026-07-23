@@ -45,6 +45,10 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineToggleUnusedWidget, OO.ui.ButtonWidg
  * @fires ve.ui.MWTransclusionOutlineToggleUnusedWidget#toggleUnusedFields
  */
 ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.onClick = function () {
+	// T430672
+	ve.track( 'activity.transclusion', {
+		action: !this.showUnusedFields ? 'hide-unused-parameters' : 'show-all-parameters'
+	} );
 	this.toggleUnusedParameters( !this.showUnusedFields, true );
 };
 

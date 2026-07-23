@@ -162,6 +162,10 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 	// This extra check shouldn't be necessary, but better be safe than sorry
 	if ( item.isSelected() !== value ) {
 		// Note: This should have been named `toggle…` as it toggles the item's selection
+		// T430672
+		ve.track( 'activity.transclusion', {
+			action: value ? 'parameter-check' : 'parameter-uncheck'
+		} );
 		this.chooseItem( item );
 	}
 };

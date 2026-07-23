@@ -327,6 +327,12 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 		}
 	} );
 	if ( blankRequired.length ) {
+		// T430672
+		ve.track( 'activity.transclusion', {
+			action: 'required-field-warning-shown',
+			missingCount: blankRequired.length
+		} );
+
 		this.confirmDialogs.openWindow( 'requiredparamblankconfirm', {
 			message: mw.msg(
 				'visualeditor-dialog-transclusion-required-parameter-is-blank',
@@ -339,8 +345,16 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 			)
 		} ).closed.then( ( data ) => {
 			if ( data && data.action === 'ok' ) {
+				// T430672
+				ve.track( 'activity.transclusion', {
+					action: 'required-field-continue'
+				} );
 				deferred.resolve();
 			} else {
+				// T430672
+				ve.track( 'activity.transclusion', {
+					action: 'required-field-go-back'
+				} );
 				deferred.reject();
 			}
 		} );

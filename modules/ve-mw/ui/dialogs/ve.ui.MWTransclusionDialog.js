@@ -642,6 +642,12 @@ ve.ui.MWTemplateDialog.prototype.getMessageButton = function ( message, icon ) {
 			framed: false
 		} );
 	button.$button.attr( 'role', 'link' );
+	// T430672
+	button.$button.on( 'click', () => {
+		ve.track( 'activity.transclusion', {
+			action: icon === 'keyboard' ? 'link-click-keyboard-shortcuts' : 'link-click-edit-templates'
+		} );
+	} );
 	return button;
 };
 
