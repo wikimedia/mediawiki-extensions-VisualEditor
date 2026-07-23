@@ -4,7 +4,6 @@
 const http = require( 'http' );
 const fs = require( 'fs' );
 const { execSync } = require( 'child_process' );
-// eslint-disable-next-line n/no-missing-require
 const { getInstance, teardown } = require( '@wikimedia/service-utils' );
 const { createSessionManager } = require( './editcheck-headless' );
 const {

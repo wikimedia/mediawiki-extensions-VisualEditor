@@ -3,6 +3,9 @@
 	"extends": [
 		"wikimedia/selenium"
 	],
+	"rules": {
+		"n/no-missing-require": "off"
+	},
 	"settings": {
 		"jsdoc": {
 			"preferredTypes": {

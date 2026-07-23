@@ -6,7 +6,6 @@
 
 const { spawn } = require( 'child_process' );
 const net = require( 'net' );
-// eslint-disable-next-line n/no-missing-require
 const puppeteer = require( 'puppeteer-core' );
 
 // Chrome launch flags for headless, rendering-free operation. The edit checks
