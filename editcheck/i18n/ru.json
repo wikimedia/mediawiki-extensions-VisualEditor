@@ -113,6 +113,7 @@
 	"editcheck-suggestionfeedback-label-about": "О предложениях",
 	"editcheck-suggestionfeedback-label-report": "Сообщить о проблеме",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Источник EditCheck был отклонён как общеизвестный факт",
 	"tag-editcheck-reference-decline-irrelevant": "Проверка правок (источники) отклонена (неуместно)",
 	"tag-editcheck-reference-decline-other": "Проверка правок (источники) отклонена (другое)",
 	"tag-editcheck-reference-decline-uncertain": "Проверка правок (источники) отклонена (неясно)"
