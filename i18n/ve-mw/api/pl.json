@@ -9,7 +9,8 @@
 			"Sutan",
 			"Tar Lócesilion",
 			"The Polish",
-			"Woytecr"
+			"Woytecr",
+			"PanWor"
 		]
 	},
 	"apierror-visualeditor-badcachekey": "Nie znaleziono seryjnej pamięci podręcznej dla tego klucza",
@@ -26,7 +27,7 @@
 	"apihelp-visualeditor-param-page": "Strona, na której wykonuje się działania.",
 	"apihelp-visualeditor-param-preload": "Strona, z której treści można korzystać, jeśli pobrana strona nie zawiera jeszcze żadnej treści.",
 	"apihelp-visualeditor-param-preloadparams": "Parametry do zastąpienia na stronie wstępnego ładowania, jeśli są obecne.",
-	"apihelp-visualeditor-param-pst": "Wstępna transformacja wikitekstu przed zapisem, zanim zostanie wysłany do Parsoida (paction=parsefragment).",
+	"apihelp-visualeditor-param-pst": "Wstępna transformacja wikikodu przed zapisem, zanim zostanie wysłany do Parsoida (paction=parsefragment).",
 	"apihelp-visualeditor-param-section": "Sekcja, na której działać.",
 	"apihelp-visualeditor-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditor-param-stash": "Podczas zapisywania ustaw tę wartość na true, jeśli chcesz korzystać z interfejsu API do przechowywania.",

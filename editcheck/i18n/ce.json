@@ -32,5 +32,10 @@
 	"editcheck-copyvio-remove-notify": "Баркалла хааршна маьрша тӀекхочийла Ӏалашйарехь гӀо дарна!",
 	"editcheck-tone-title": "Тон карлайаккхар?",
 	"editcheck-tone-title-acted": "Тон хийцар",
-	"editcheck-tone-reject-other": "Кхийерг"
+	"editcheck-tone-description-acted": "Тергаме хила: хастаме, сий доцу, билгал боцу, маьӀна доцу йа цхьа агӀо хьехош долу дешнаш ма леладелаш.",
+	"editcheck-tone-reject-appropriate": "Тон мегаш йу.",
+	"editcheck-tone-reject-uncertain": "Тон хийца хаац суна",
+	"editcheck-tone-reject-other": "Кхийерг",
+	"editcheck-tone-thank": "Баркалла, тон тидаме эцарна!",
+	"editcheck-review-title": "Хийцамаш талла"
 }
