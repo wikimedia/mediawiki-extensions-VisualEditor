@@ -21,6 +21,11 @@
 ( function () {
 	mw.libs.ve = mw.libs.ve || {};
 
+	// Version of the autosave state. Bump when the representation changes
+	// incompatibly (e.g. the HashValueStore hashing algorithm); stale
+	// sessions are discarded rather than causing errors.
+	mw.libs.ve.autosaveDocStateVersion = 1;
+
 	const conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
 		modules = [
@@ -281,6 +286,12 @@
 					// ve.init.platform.getSessionObject is not available yet
 					sessionState = JSON.parse( mw.storage.session.get( 've-docstate' ) );
 				} catch ( e ) {}
+
+				if ( sessionState && sessionState.formatVersion !== mw.libs.ve.autosaveDocStateVersion ) {
+					// State is incompatible (e.g. different hash algorithm); discard to avoid errors
+					mw.storage.session.remove( 've-docstate' );
+					sessionState = null;
+				}
 
 				if ( sessionState ) {
 					const request = sessionState.request || {};

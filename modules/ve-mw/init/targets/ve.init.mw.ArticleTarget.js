@@ -600,6 +600,7 @@ ve.init.mw.ArticleTarget.prototype.afterSurfaceReady = function () {
 ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
 	const mode = this.getSurface().getMode();
 	this.getSurface().getModel().storeDocState( {
+		formatVersion: mw.libs.ve.autosaveDocStateVersion,
 		request: {
 			pageName: this.getPageName(),
 			mode,
