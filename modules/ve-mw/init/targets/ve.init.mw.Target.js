@@ -491,7 +491,12 @@ ve.init.mw.Target.prototype.initAutosave = function ( config = {} ) {
  */
 ve.init.mw.Target.prototype.storeDocState = function ( html ) {
 	const mode = this.getSurface().getMode();
-	this.getSurface().getModel().storeDocState( { mode }, html );
+	// Stamp the format version so recovery can detect stale sessions (e.g. after a
+	// hash-algorithm change). ArticleTarget adds this via its own richer override.
+	this.getSurface().getModel().storeDocState( {
+		mode,
+		formatVersion: mw.libs.ve.autosaveDocStateVersion
+	}, html );
 };
 
 /**
