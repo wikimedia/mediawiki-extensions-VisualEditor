@@ -44,6 +44,7 @@
 	"editcheck-copyvio-keep-notify": "Obrigado por compartilhar o motivo pelo qual você deseja manter o texto colado!",
 	"editcheck-copyvio-remove-notify": "Obrigado por ajudar a manter o conhecimento disponível gratuitamente!",
 	"editcheck-double-bold-title": "Remover formatação em negrito desnecessária",
+	"editcheck-double-bold-description": "O negrito é aplicado automaticamente aos subtítulos, aos termos das listas de definições e aos cabeçalhos das tabelas. Ajude os leitores eliminando os negritos desnecessários destes elementos.",
 	"editcheck-double-bold-action-remove": "Remover negrito",
 	"editcheck-preference-suggestions-label": "Modo sugestão",
 	"editcheck-preference-suggestions-description": "Sugestões de edição configuradas pela comunidade para melhorar os artigos. Disponível no [[:mw:Special:MyLanguage/VisualEditor|editor visual]].",
