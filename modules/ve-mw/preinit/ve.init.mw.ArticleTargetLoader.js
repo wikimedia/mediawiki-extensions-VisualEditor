@@ -24,7 +24,7 @@
 	// Version of the autosave state. Bump when the representation changes
 	// incompatibly (e.g. the HashValueStore hashing algorithm); stale
 	// sessions are discarded rather than causing errors.
-	mw.libs.ve.autosaveDocStateVersion = 1;
+	mw.libs.ve.autosaveDocStateVersion = 2;
 
 	const conf = mw.config.get( 'wgVisualEditorConfig' ),
 		pluginCallbacks = [],
@@ -287,11 +287,10 @@
 					sessionState = JSON.parse( mw.storage.session.get( 've-docstate' ) );
 				} catch ( e ) {}
 
-				if ( sessionState && sessionState.formatVersion !== mw.libs.ve.autosaveDocStateVersion ) {
-					// State is incompatible (e.g. different hash algorithm); discard to avoid errors
-					mw.storage.session.remove( 've-docstate' );
-					sessionState = null;
-				}
+				// Old-format (pre-cyrb64) sessions are migrated on restore rather than
+				// discarded (see ve.init.mw.Target#initAutosave). TEMPORARY (T433034).
+				const hashMigration = !!sessionState &&
+					sessionState.formatVersion !== mw.libs.ve.autosaveDocStateVersion;
 
 				if ( sessionState ) {
 					const request = sessionState.request || {};
@@ -311,7 +310,7 @@
 							visualeditor: $.extend(
 								{ content: mw.storage.session.get( 've-dochtml' ) },
 								sessionState.response,
-								{ recovered: true }
+								{ recovered: true, hashMigration }
 							)
 						} ).promise();
 						// If the document hasn't been edited since the user first loaded it, recover

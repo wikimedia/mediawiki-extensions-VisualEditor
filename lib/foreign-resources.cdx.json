@@ -172,27 +172,6 @@
         },
         {
             "type": "library",
-            "name": "spark-md5",
-            "version": "3.0.0",
-            "licenses": [
-                {
-                    "expression": "WTFPL OR MIT"
-                }
-            ],
-            "authors": [
-                {
-                    "name": "André Cruz"
-                }
-            ],
-            "externalReferences": [
-                {
-                    "url": "https://github.com/satazor/js-spark-md5",
-                    "type": "website"
-                }
-            ]
-        },
-        {
-            "type": "library",
             "name": "Tree Differ",
             "version": "1.0.2",
             "licenses": [

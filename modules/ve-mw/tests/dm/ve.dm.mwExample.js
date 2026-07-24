@@ -305,7 +305,7 @@ ve.dm.mwExample.MWBlockImage = {
 		{ type: '/mwBlockImage' }
 	],
 	storeItems: {
-		h1d9b405cfd633576: ve.ce.minImgDataUri
+		h0112dac2cb632721: ve.ce.minImgDataUri
 	}
 };
 
@@ -340,7 +340,7 @@ ve.dm.mwExample.MWInlineImage = {
 		}
 	},
 	storeItems: {
-		hbb0aeb2b8e907b74: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
+		h7a14a7af1814be08: 'http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png'
 	}
 };
 
@@ -1553,7 +1553,7 @@ ve.dm.mwExample.domToDataCases = {
 			{ type: '/internalList' }
 		],
 		storeItems: {
-			hd2ff771ac84b229d: $.parseHTML( ve.dm.example.singleLine`
+			h19af9a423c20e427: $.parseHTML( ve.dm.example.singleLine`
 				<p about="#mwt1" typeof="mw:Transclusion"
 					 data-mw='{"parts":[{"template":{"target":{"wt":"echo","href":"./Template:Echo"},"params":{"1":{"wt":"foo"}},"i":0}}]}' data-parsoid="1">
 					foo

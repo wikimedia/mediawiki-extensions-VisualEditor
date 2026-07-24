@@ -24,6 +24,8 @@ ve.init.mw.Target = function VeInitMwTarget( config ) {
 	this.active = false;
 	this.pageName = mw.config.get( 'wgRelevantPageName' );
 	this.recovered = false;
+	// TEMPORARY (T433034): recovered session needs an old-hash migration on restore
+	this.hashMigration = false;
 	this.fromEditedState = false;
 	this.originalHtml = null;
 
@@ -426,6 +428,115 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 };
 
 /**
+ * Minimal MD5 (UTF-8 input, hex output), matching the spark-md5 library's output.
+ *
+ * TEMPORARY (T433034): only exists to reproduce pre-cyrb64 autosave hashes; remove
+ * with #migrateAutosaveHashStore.
+ *
+ * @param {string} str String to hash
+ * @return {string} 32-digit hex MD5
+ */
+ve.init.mw.Target.static.legacyMd5 = function ( str ) {
+	/* eslint-disable no-bitwise, max-statements-per-line */
+	const bytes = Array.from( new TextEncoder().encode( str ) );
+	const bitLen = bytes.length * 8;
+	bytes.push( 0x80 );
+	while ( bytes.length % 64 !== 56 ) {
+		bytes.push( 0 );
+	}
+	for ( let i = 0; i < 8; i++ ) {
+		bytes.push( Math.floor( bitLen / Math.pow( 2, 8 * i ) ) & 0xFF );
+	}
+	const shift = [
+		7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+		5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
+		4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+		6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
+	];
+	const sines = [];
+	for ( let i = 0; i < 64; i++ ) {
+		sines[ i ] = Math.floor( Math.abs( Math.sin( i + 1 ) ) * 4294967296 ) | 0;
+	}
+	let a0 = 0x67452301, b0 = 0xEFCDAB89, c0 = 0x98BADCFE, d0 = 0x10325476;
+	for ( let chunk = 0; chunk < bytes.length; chunk += 64 ) {
+		const words = [];
+		for ( let i = 0; i < 16; i++ ) {
+			const j = chunk + i * 4;
+			words[ i ] = bytes[ j ] | ( bytes[ j + 1 ] << 8 ) | ( bytes[ j + 2 ] << 16 ) | ( bytes[ j + 3 ] << 24 );
+		}
+		let a = a0, b = b0, c = c0, d = d0;
+		for ( let i = 0; i < 64; i++ ) {
+			let f, g;
+			if ( i < 16 ) {
+				f = ( b & c ) | ( ~b & d ); g = i;
+			} else if ( i < 32 ) {
+				f = ( d & b ) | ( ~d & c ); g = ( 5 * i + 1 ) % 16;
+			} else if ( i < 48 ) {
+				f = b ^ c ^ d; g = ( 3 * i + 5 ) % 16;
+			} else {
+				f = c ^ ( b | ~d ); g = ( 7 * i ) % 16;
+			}
+			f = ( f + a + sines[ i ] + words[ g ] ) | 0;
+			a = d; d = c; c = b;
+			b = ( b + ( ( f << shift[ i ] ) | ( f >>> ( 32 - shift[ i ] ) ) ) ) | 0;
+		}
+		a0 = ( a0 + a ) | 0; b0 = ( b0 + b ) | 0; c0 = ( c0 + c ) | 0; d0 = ( d0 + d ) | 0;
+	}
+	const hex = ( x ) => {
+		let out = '';
+		for ( let i = 0; i < 4; i++ ) {
+			out += ( ( x >>> ( i * 8 ) ) & 0xFF ).toString( 16 ).padStart( 2, '0' );
+		}
+		return out;
+	};
+	return hex( a0 ) + hex( b0 ) + hex( c0 ) + hex( d0 );
+	/* eslint-enable no-bitwise, max-statements-per-line */
+};
+
+/**
+ * Alias every store value under the key it had with the previous (MD5) hashing
+ * algorithm, so autosave changes serialized before the cyrb64 switch still resolve.
+ *
+ * TEMPORARY (T433034): remove once no old-format sessions remain.
+ *
+ * @param {ve.dm.HashValueStore} store Store to add legacy hash aliases to
+ */
+ve.init.mw.Target.static.migrateAutosaveHashStore = function ( store ) {
+	const legacyHash = ( stringified ) => 'h' + ve.init.mw.Target.static.legacyMd5( stringified ).slice( 0, 16 );
+	const alias = ( legacyKey, value ) => {
+		if ( !Object.prototype.hasOwnProperty.call( store.hashStore, legacyKey ) ) {
+			store.hashStore[ legacyKey ] = value;
+			store.hashes.push( legacyKey );
+		}
+	};
+	// Nodes hashed their full serialization, annotations a shallow clone; cover both
+	const domLegacyKeys = ( dom ) => [
+		legacyHash( dom.map( ve.getNodeHtml ).join( '' ) ),
+		legacyHash( dom.map( ( node ) => node.cloneNode( false ).outerHTML ).join( '' ) )
+	];
+	// Snapshot, as we push new keys onto store.hashes
+	store.hashes.slice().forEach( ( hash ) => {
+		const value = store.value( hash );
+		const element = ( value && value.element ) || value;
+		if ( Array.isArray( value ) && value[ 0 ] && value[ 0 ].nodeType !== undefined ) {
+			domLegacyKeys( value ).forEach( ( key ) => alias( key, value ) );
+		} else if ( element && element.originalDomElementsHash !== undefined ) {
+			// The key embeds originalDomElementsHash, itself remapped, so rebuild it
+			const origDom = store.value( element.originalDomElementsHash );
+			if ( Array.isArray( origDom ) ) {
+				domLegacyKeys( origDom ).forEach( ( origKey ) => {
+					const legacyElement = ve.copy( element );
+					legacyElement.originalDomElementsHash = origKey;
+					alias( legacyHash( OO.getHash( legacyElement ) ), value );
+				} );
+			}
+		} else {
+			alias( legacyHash( OO.getHash( element ) ), value );
+		}
+	} );
+};
+
+/**
  * Initialise autosave, recovering changes if applicable
  *
  * @param {Object} [config] Configuration options
@@ -448,7 +559,15 @@ ve.init.mw.Target.prototype.initAutosave = function ( config = {} ) {
 	if ( this.recovered ) {
 		// Restore auto-saved transactions if document state was recovered
 		try {
+			if ( this.hashMigration ) {
+				// Old-format (MD5) session: alias the store so its references resolve
+				this.constructor.static.migrateAutosaveHashStore( surfaceModel.getDocument().getStore() );
+			}
 			surfaceModel.restoreChanges();
+			if ( this.hashMigration ) {
+				// Re-snapshot at the current format so we don't migrate again
+				this.storeDocState();
+			}
 			if ( !config.suppressNotification ) {
 				ve.init.platform.notify(
 					ve.msg( 'visualeditor-autosave-recovered-text' ),

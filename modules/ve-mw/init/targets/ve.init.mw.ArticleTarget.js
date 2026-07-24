@@ -355,6 +355,8 @@ ve.init.mw.ArticleTarget.prototype.loadSuccess = function ( response ) {
 		// Properties that don't come from the API
 		this.initialSourceRange = data.initialSourceRange;
 		this.recovered = data.recovered;
+		// TEMPORARY (T433034): recovered session needs an old-hash migration on restore
+		this.hashMigration = data.hashMigration;
 		this.isRedirect = false;
 
 		// Parse data this not available in RESTBase

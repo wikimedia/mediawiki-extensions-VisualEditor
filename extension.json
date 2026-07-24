@@ -309,10 +309,6 @@
 			"@todo": "Used outside of VE (DiscussionTools init) so could be upstreamed.",
 			"scripts": "lib/ve/lib/rangefix/rangefix.js"
 		},
-		"spark-md5": {
-			"@todo": "Used outside of VE (NotifyMe) so could be upstreamed.",
-			"scripts": "lib/ve/lib/spark-md5/spark-md5.js"
-		},
 		"ext.visualEditor.supportCheck": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\VisualEditorFileModule",
 			"veModules": [
@@ -1031,7 +1027,6 @@
 			},
 			"dependencies": [
 				"rangefix",
-				"spark-md5",
 				"jquery.client",
 				"ext.visualEditor.base",
 				"ext.visualEditor.supportCheck",
