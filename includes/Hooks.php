@@ -307,6 +307,12 @@ class Hooks implements
 			return false;
 		}
 
+		// Suppress the takeover for this page view only.
+		// Duplicated in ve.init.mw.DesktopArticleTarget.init.js#getEditModeFromUrl
+		if ( $req->getCheck( 'venoautoload' ) ) {
+			return false;
+		}
+
 		foreach ( self::UNSUPPORTED_EDIT_PARAMS as $param ) {
 			if ( $req->getVal( $param ) !== null ) {
 				return false;

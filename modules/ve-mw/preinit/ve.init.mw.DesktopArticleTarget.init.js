@@ -1449,6 +1449,11 @@
 		}
 		// Edit pages
 		if ( isEditPage && isSupportedEditPage( url ) ) {
+			// Suppress the takeover for this page view only; veaction is handled above.
+			// Duplicated in Hooks.php#isSupportedEditPage
+			if ( url.searchParams.has( 'venoautoload' ) ) {
+				return null;
+			}
 			// User has disabled VE, or we are in view source only mode, or we have landed here with posted data
 			if ( !enabledForUser || $( '#ca-viewsource' ).length || mw.config.get( 'wgAction' ) === 'submit' ) {
 				return null;
@@ -1605,8 +1610,11 @@
 					} );
 				} );
 
-				// Remember that the user wanted wikitext, at least this time
-				mw.libs.ve.setEditorPreference( 'wikitext' );
+				// Remember that the user wanted wikitext, at least this time. Not when
+				// venoautoload suppressed us, which expresses no choice (T246259)
+				if ( !currentUrl.searchParams.has( 'venoautoload' ) ) {
+					mw.libs.ve.setEditorPreference( 'wikitext' );
+				}
 
 				// If the user has loaded WikiEditor, clear any auto-save state they
 				// may have from a previous VE session
