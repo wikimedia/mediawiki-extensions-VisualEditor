@@ -40,6 +40,12 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage() {
 
 OO.inheritClass( ve.ui.MWLanguagesPage, OO.ui.PageLayout );
 
+/* Static Properties */
+
+ve.ui.MWLanguagesPage.static.name = 'languages';
+
+ve.ui.MWLanguagesPage.static.modes = [ 'visual' ];
+
 /* Methods */
 
 /**
@@ -149,3 +155,7 @@ ve.ui.MWLanguagesPage.prototype.getFieldsets = function () {
 		this.languagesFieldset
 	];
 };
+
+/* Registration */
+
+ve.ui.mwMetaDialogPageFactory.register( ve.ui.MWLanguagesPage );

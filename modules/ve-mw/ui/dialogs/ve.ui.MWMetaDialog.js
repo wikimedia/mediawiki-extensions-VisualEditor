@@ -51,22 +51,24 @@ ve.ui.MWMetaDialog.prototype.initialize = function () {
 	// Properties
 	this.panels = new OO.ui.StackLayout();
 	this.bookletLayout = new OO.ui.BookletLayout( { outlined: true } );
-	this.categoriesPage = new ve.ui.MWCategoriesPage( 'categories', { $overlay: this.$overlay } );
-	this.settingsPage = new ve.ui.MWSettingsPage( 'settings', { $overlay: this.$overlay } );
-	this.advancedSettingsPage = new ve.ui.MWAdvancedSettingsPage( 'advancedSettings', { $overlay: this.$overlay } );
-	this.languagesPage = new ve.ui.MWLanguagesPage( 'languages', { $overlay: this.$overlay } );
-	this.templatesUsedPage = new ve.ui.MWTemplatesUsedPage( 'templatesUsed', { $overlay: this.$overlay } );
+	this.pages = Object.keys( ve.ui.mwMetaDialogPageFactory.registry ).map(
+		( name ) => ve.ui.mwMetaDialogPageFactory.create( name, name, { $overlay: this.$overlay } )
+	);
 
 	// Initialization
 	this.$body.append( this.panels.$element );
 	this.panels.addItems( [ this.bookletLayout ] );
-	this.bookletLayout.addPages( [
-		this.categoriesPage,
-		this.settingsPage,
-		this.advancedSettingsPage,
-		this.languagesPage,
-		this.templatesUsedPage
-	] );
+	this.bookletLayout.addPages( this.pages );
+
+	// Extensions reached for these to add their own fields to a built-in page. Deprecated,
+	// and never extended to pages added since.
+	[ 'categories', 'settings', 'advancedSettings', 'languages', 'templatesUsed' ].forEach( ( name ) => {
+		mw.log.deprecate(
+			this, name + 'Page', this.bookletLayout.getPage( name ),
+			'Use bookletLayout.getPage() instead',
+			've.ui.MWMetaDialog.' + name + 'Page'
+		);
+	} );
 
 	this.bookletLayout.$menu.find( '[role=listbox]' ).first().attr( 'aria-label', OO.ui.deferMsg( 'visualeditor-dialog-meta-title' ) );
 	this.oldSettings = null;
@@ -94,7 +96,7 @@ ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
 
 	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( this.bookletLayout.pages, ( pageName, page ) => {
-		const fieldsets = page.getFieldsets();
+		const fieldsets = page.getFieldsets ? page.getFieldsets() : [];
 		fieldsets.forEach( ( fieldset, fieldsetIndex ) => {
 			fieldset.items.forEach( ( item, itemIndex ) => {
 				const widget = item.fieldWidget;
@@ -118,6 +120,8 @@ ve.ui.MWMetaDialog.prototype.assignEvents = function () {
 	const widgetList = this.getAllWidgets();
 
 	widgetList.forEach( ( value ) => {
+		// This runs on every setup.
+		value.widget.disconnect( this );
 		value.widget.connect( this, {
 			change: 'updateActions',
 			select: 'updateActions'
@@ -140,6 +144,9 @@ ve.ui.MWMetaDialog.prototype.extractValue = function ( field ) {
 		return {
 			value: field.value,
 			sortKey: field.sortKey };
+	} else if ( typeof field.getValue === 'function' ) {
+		// Widget types the built-in pages don't use, e.g. dropdowns.
+		return field.getValue();
 	} else {
 		throw new Error( 'Unhandled widget type', field );
 	}
@@ -175,11 +182,29 @@ ve.ui.MWMetaDialog.prototype.extractSettings = function () {
 };
 
 /**
+ * @return {string} Name of the page shown when the dialog is opened without one
+ */
+ve.ui.MWMetaDialog.prototype.getDefaultPageName = function () {
+	return this.pages[ 0 ].getName();
+};
+
+/**
  * Compares oldSetting with new settings and toggles the apply button accordingly.
  */
 ve.ui.MWMetaDialog.prototype.updateActions = function () {
-	this.actions.setAbilities( {
-		done: this.settingsPage.checkValidRedirect() && this.compareSettings()
+	// Validation may be asynchronous, so ignore any check the user has already superseded.
+	const token = {};
+	this.validationToken = token;
+
+	ve.promiseAll(
+		this.pages.map( ( page ) => page.isValid ? page.isValid() : true )
+	).then( ( ...validities ) => {
+		if ( this.validationToken !== token ) {
+			return;
+		}
+		this.actions.setAbilities( {
+			done: validities.every( Boolean ) && this.compareSettings()
+		} );
 	} );
 };
 
@@ -219,15 +244,20 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data = {} ) {
 			const surfaceModel = this.getFragment().getSurface(),
 				promises = [],
 				selectWidget = this.bookletLayout.outlineSelectWidget,
-				visualOnlyPages = [ 'categories', 'settings', 'advancedSettings', 'languages' ],
-				isSource = ve.init.target.getSurface().getMode() === 'source';
+				mode = ve.init.target.getSurface().getMode(),
+				availablePages = [];
 
-			visualOnlyPages.forEach( ( page ) => {
-				selectWidget.findItemFromData( page ).setDisabled( isSource );
+			this.pages.forEach( ( page ) => {
+				const modes = page.constructor.static.modes;
+				const available = !modes || modes.includes( mode );
+				selectWidget.findItemFromData( page.getName() ).setDisabled( !available );
+				if ( available ) {
+					availablePages.push( page.getName() );
+				}
 			} );
 
-			if ( isSource && visualOnlyPages.includes( data.page || 'categories' ) ) {
-				data.page = 'templatesUsed';
+			if ( !availablePages.includes( data.page || this.getDefaultPageName() ) ) {
+				data.page = availablePages[ 0 ];
 			}
 
 			// Force all previous transactions to be separate from this history state
@@ -238,10 +268,12 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data = {} ) {
 				isReadOnly: this.isReadOnly()
 			};
 
-			// Let each page set itself up ('languages' page doesn't need this yet)
-			promises.push( this.categoriesPage.setup( surfaceModel.getFragment(), config ) );
-			promises.push( this.settingsPage.setup( surfaceModel.getFragment(), config ) );
-			promises.push( this.advancedSettingsPage.setup( surfaceModel.getFragment(), config ) );
+			// Let each page set itself up (not every page needs this)
+			this.pages.forEach( ( page ) => {
+				if ( page.setup ) {
+					promises.push( page.setup( surfaceModel.getFragment(), config ) );
+				}
+			} );
 			return ve.promiseAll( promises );
 		} )
 		.next( () => {
@@ -256,9 +288,9 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data = {} ) {
 				this.bookletLayout.autoFocus = true;
 			}
 
-			if ( this.oldSettings === null ) {
-				this.assignEvents();
-			}
+			// Not in initialize(): a page may only build its fields during setup.
+			this.widgetList = this.getAllWidgets();
+			this.assignEvents();
 			this.oldSettings = this.extractSettings(); // setting that were just loaded
 
 			this.actions.setAbilities( { done: false } );
@@ -283,12 +315,14 @@ ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data = {} ) {
 ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data = {} ) {
 	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
-			// Let each page tear itself down ('languages' page doesn't need this yet)
-			this.categoriesPage.teardown( { action: data.action } );
-			this.settingsPage.teardown( { action: data.action } );
-			this.advancedSettingsPage.teardown( { action: data.action } );
+			// Let each page tear itself down (not every page needs this)
+			this.pages.forEach( ( page ) => {
+				if ( page.teardown ) {
+					page.teardown( { action: data.action } );
+				}
+			} );
 
-			this.bookletLayout.setPage( 'categories' );
+			this.bookletLayout.setPage( this.getDefaultPageName() );
 			this.bookletLayout.resetScroll();
 		} );
 };

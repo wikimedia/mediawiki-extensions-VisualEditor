@@ -136,6 +136,12 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 OO.inheritClass( ve.ui.MWAdvancedSettingsPage, OO.ui.PageLayout );
 
+/* Static Properties */
+
+ve.ui.MWAdvancedSettingsPage.static.name = 'advancedSettings';
+
+ve.ui.MWAdvancedSettingsPage.static.modes = [ 'visual' ];
+
 /* Methods */
 
 /**
@@ -348,3 +354,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.getFieldsets = function () {
 		this.advancedSettingsFieldset
 	];
 };
+
+/* Registration */
+
+ve.ui.mwMetaDialogPageFactory.register( ve.ui.MWAdvancedSettingsPage );

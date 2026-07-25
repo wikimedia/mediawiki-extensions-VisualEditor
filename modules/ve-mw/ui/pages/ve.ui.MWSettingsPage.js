@@ -155,6 +155,12 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 
 OO.inheritClass( ve.ui.MWSettingsPage, OO.ui.PageLayout );
 
+/* Static Properties */
+
+ve.ui.MWSettingsPage.static.name = 'settings';
+
+ve.ui.MWSettingsPage.static.modes = [ 'visual' ];
+
 /* Allow extra meta item checkboxes to be added by extensions etc. */
 ve.ui.MWSettingsPage.static.extraMetaCheckboxes = [];
 
@@ -221,9 +227,9 @@ ve.ui.MWSettingsPage.prototype.onEnableRedirectChange = function ( value ) {
 };
 
 /**
- * @return {boolean} Whether redirect link is valid.
+ * @return {boolean} Whether the redirect link is valid.
  */
-ve.ui.MWSettingsPage.prototype.checkValidRedirect = function () {
+ve.ui.MWSettingsPage.prototype.isValid = function () {
 	if ( this.enableRedirectInput.isSelected() ) {
 		const title = this.redirectTargetInput.getValue();
 
@@ -415,3 +421,7 @@ ve.ui.MWSettingsPage.prototype.getFieldsets = function () {
 		this.settingsFieldset
 	];
 };
+
+/* Registration */
+
+ve.ui.mwMetaDialogPageFactory.register( ve.ui.MWSettingsPage );

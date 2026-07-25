@@ -82,6 +82,12 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config = {} ) {
 
 OO.inheritClass( ve.ui.MWCategoriesPage, OO.ui.PageLayout );
 
+/* Static Properties */
+
+ve.ui.MWCategoriesPage.static.name = 'categories';
+
+ve.ui.MWCategoriesPage.static.modes = [ 'visual' ];
+
 /* Methods */
 
 /**
@@ -312,3 +318,7 @@ ve.ui.MWCategoriesPage.prototype.getFieldsets = function () {
 		this.categoryOptionsFieldset
 	];
 };
+
+/* Registration */
+
+ve.ui.mwMetaDialogPageFactory.register( ve.ui.MWCategoriesPage );

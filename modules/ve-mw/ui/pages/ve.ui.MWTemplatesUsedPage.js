@@ -63,6 +63,12 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 
 OO.inheritClass( ve.ui.MWTemplatesUsedPage, OO.ui.PageLayout );
 
+/* Static Properties */
+
+ve.ui.MWTemplatesUsedPage.static.name = 'templatesUsed';
+
+ve.ui.MWTemplatesUsedPage.static.modes = [ 'visual', 'source' ];
+
 /* Methods */
 
 /**
@@ -87,3 +93,7 @@ ve.ui.MWTemplatesUsedPage.prototype.getFieldsets = function () {
 		this.templatesUsedFieldset
 	];
 };
+
+/* Registration */
+
+ve.ui.mwMetaDialogPageFactory.register( ve.ui.MWTemplatesUsedPage );
