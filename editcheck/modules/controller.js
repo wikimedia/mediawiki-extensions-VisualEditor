@@ -739,6 +739,11 @@ Controller.prototype.onContextChange = function () {
  * @param {boolean} passive Event is passive (don't scroll)
  */
 Controller.prototype.onPosition = function ( passive ) {
+	// Layout changed, so rects are stale; core's SelectionManager redraws on this event for the
+	// same reason. Without this, actions found while the surface had no layout box are never
+	// drawn. (E.g. while the mobile anonwarning was covering the surface.)
+	this.updatePositionsDebounced();
+
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
 		this.scrollActionIntoViewDebounced( this.focusedAction, { alignToTop: !OO.ui.isMobile() } );
 	}
