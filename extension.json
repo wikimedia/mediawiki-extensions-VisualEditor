@@ -168,6 +168,16 @@
 		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
+		},
+		"VisualEditorEditSuggestionCounts": {
+			"description": "PoC (T432733): Server Side Edit Suggestion Counts config. Lives in VisualEditor only for now; the generic LAC cache-warming approach will move to a proper home (TBD) later. URL template placeholders: {wiki_id}/{page_id}/{revision_id}.",
+			"value": {
+				"enabled": false,
+				"linked_artifact_url_template": "https://linked-artifacts.discovery.wmnet:30443/v1/edit-suggestion-counts/{wiki_id}/{page_id}/{revision_id}",
+				"linked_artifact_precompute_timeout": 5,
+				"namespaces_enabled": [ 0 ],
+				"page_sample_proportion": 1.0
+			}
 		}
 	},
 	"APIModules": {
@@ -2585,6 +2595,28 @@
 			"services": [
 				"MainConfig",
 				"ConfigFactory"
+			]
+		}
+	},
+	"DomainEventIngresses": [
+		{
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\EditSuggestionCounts\\EditSuggestionCountsPrecomputeIngress",
+			"services": [
+				"JobQueueGroup",
+				"VisualEditor.EditSuggestionCountsConfig"
+			],
+			"events": [
+				"PageLatestRevisionChanged"
+			]
+		}
+	],
+	"JobClasses": {
+		"editSuggestionCountsPrecompute": {
+			"needsPage": false,
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\EditSuggestionCounts\\Job\\EditSuggestionCountsPrecomputeJob",
+			"services": [
+				"VisualEditor.EditSuggestionCountsConfig",
+				"HttpRequestFactory"
 			]
 		}
 	},

@@ -12,6 +12,7 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionCountsConfig;
 use MediaWiki\Extension\VisualEditor\Services\VisualEditorAvailabilityLookup;
 use MediaWiki\MediaWikiServices;
 
@@ -37,6 +38,17 @@ return [
 			$services->getNamespaceInfo(),
 			$services->getExtensionRegistry(),
 			$services->getUserOptionsLookup()
+		);
+	},
+
+	// PoC: edit-suggestions-specific LAC precompute. Lives in VisualEditor for now; the
+	// generic LAC cache-warming approach will move to a proper home (TBD) later. See
+	// https://phabricator.wikimedia.org/T432733.
+	EditSuggestionCountsConfig::SERVICE_NAME => static function (
+		MediaWikiServices $services
+	): EditSuggestionCountsConfig {
+		return new EditSuggestionCountsConfig(
+			$services->getMainConfig()->get( 'VisualEditorEditSuggestionCounts' )
 		);
 	},
 ];
