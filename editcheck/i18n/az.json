@@ -29,6 +29,7 @@
 	"editcheck-dialog-addref-reject-other": "Digər",
 	"editcheck-dialog-addref-success-notify": "İstinad əlavə etdiyiniz üçün təşəkkür edirik!",
 	"editcheck-dialog-addref-title": "İstinad əlavə et",
+	"editcheck-citationneeded-footer": "Redaktor tərəfindən bildirilib",
 	"editcheck-dialog-title": "Yayımlamadan əvvəl",
 	"editcheck-copyvio-title": "Yapışdırılmış məzmun",
 	"editcheck-copyvio-description": "Zəhmət olmasa, mətni başqa mənbələrdən kopiyalamaqdan çəkinin, hətta cümlələr sıfırdan yazılsa və ya istinad edilsə belə. Bu [{{int:editcheck-copyvio-descriptionlink}} müəllif hüquqları pozuntusu və ya plagiat] hesab edilə bilər və məzmununuzun silinməsi və ya hesabınızın bloklanması ilə nəticələnə bilər.",

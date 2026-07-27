@@ -28,6 +28,7 @@
 	"editcheck-dialog-addref-reject-other": "Andet",
 	"editcheck-dialog-addref-success-notify": "Tak fordi du tilføjede en reference!",
 	"editcheck-dialog-addref-title": "Tilføj en reference",
+	"editcheck-citationneeded-footer": "Rapporteret af en bidragsyder",
 	"editcheck-dialog-title": "Før offentliggørelse",
 	"editcheck-copyvio-title": "Indsat indhold",
 	"editcheck-copyvio-description": "Undgå venligst at kopiere tekst fra andre kilder, selvom det er omformuleret eller citeret. Dette kan betragtes som [{{int:editcheck-copyvio-descriptionlink}} krænkelse af ophavsretten eller plagiat] og kan resultere i, at dit indhold fjernes, eller at din konto blokeres.",

@@ -10,6 +10,7 @@
 	},
 	"apierror-visualeditor-difffailed": "Feeler beim Ënnerscheed",
 	"apihelp-visualeditor-param-editintro": "Intro ännere fir se bei d'Notizen derbäizesetzen.",
+	"apihelp-visualeditor-param-format": "D'Format vum Output.",
 	"apihelp-visualeditor-param-oldid": "D'Versiounsnummer fir ze benotzen (Standard:déi aktuell Versioun).",
 	"apihelp-visualeditor-param-paction": "Aktioun fir ze maachen.",
 	"apihelp-visualeditor-param-page": "D'Säit op där Aktioune gemaach soll ginn.",

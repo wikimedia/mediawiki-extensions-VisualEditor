@@ -30,6 +30,7 @@
 	"editcheck-dialog-addref-reject-other": "Muu syy",
 	"editcheck-dialog-addref-success-notify": "Kiitos lähdeviitteen lisäämisestä!",
 	"editcheck-dialog-addref-title": "Lisää lähdeviite",
+	"editcheck-citationneeded-footer": "Muokkaajan ilmoittama",
 	"editcheck-dialog-title": "Ennen julkaisemista",
 	"editcheck-copyvio-title": "Liitetty sisältö",
 	"editcheck-copyvio-description": "Vältä tekstin kopiointia muista lähteistä, vaikka muotoilisit sen uudelleen tai lisäisit lähdeviitteen. Kopiointia pidetään [{{int:editcheck-copyvio-descriptionlink}} tekijänoikeusrikkomuksena tai plagiarismia], ja se voi johtaa lisäämäsi sisällön poistamiseen tai tunnuksesi estoon.",

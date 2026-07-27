@@ -32,6 +32,7 @@
 	"editcheck-dialog-addref-reject-other": "غير ذلك",
 	"editcheck-dialog-addref-success-notify": "شكرًا لكم على إضافة استشهاد!",
 	"editcheck-dialog-addref-title": "إضافة استشهاد",
+	"editcheck-citationneeded-footer": "تقرير من أحد المحررين",
 	"editcheck-dialog-title": "قبل النشر",
 	"editcheck-copyvio-title": "محتوى ملصوق",
 	"editcheck-copyvio-description": "يرجى تجنب نسخ النصوص من مصادر أخرى، حتى لو أُعيدت صياغتها أو استُشهد بها. قد يُعدّ هذا [{{int:editcheck-copyvio-descriptionlink}} انتهاكًا لحقوق الطبع والنشر أو انتحالًا]، وقد يؤدي إلى إزالة محتواك أو حظر حسابك.",

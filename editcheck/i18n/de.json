@@ -30,6 +30,7 @@
 	"editcheck-dialog-addref-reject-other": "Andere",
 	"editcheck-dialog-addref-success-notify": "Vielen Dank für das Hinzufügen eines Belegs!",
 	"editcheck-dialog-addref-title": "Einen Beleg hinzufügen",
+	"editcheck-citationneeded-footer": "Berichtet von einem Benutzer",
 	"editcheck-dialog-title": "Vor der Veröffentlichung",
 	"editcheck-copyvio-title": "Eingefügter Inhalt",
 	"editcheck-copyvio-description": "Bitte vermeide das Kopieren von Texten aus anderen Quellen, auch wenn diese umformuliert oder zitiert werden. Dies könnte als [{{int:editcheck-copyvio-descriptionlink}} Urheberrechtsverletzung oder Plagiat] angesehen werden und zur Entfernung deiner Inhalte oder zur Sperrung deines Kontos führen.",

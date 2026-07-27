@@ -30,6 +30,7 @@
 	"editcheck-dialog-addref-reject-other": "Інше",
 	"editcheck-dialog-addref-success-notify": "Дякуємо, що вказали джерело!",
 	"editcheck-dialog-addref-title": "Додати джерело",
+	"editcheck-citationneeded-footer": "Вказано редактором",
 	"editcheck-dialog-title": "Перед публікацією",
 	"editcheck-copyvio-title": "Вставлений вміст",
 	"editcheck-copyvio-description": "Будь ласка, не копіюйте текст з інших джерел, навіть якщо ви його переклали чи поставили примітку. Це може вважатися [{{int:editcheck-copyvio-descriptionlink}} порушенням авторських прав чи плагіатом] і в результаті доданий вами текст можуть вилучити, а ваш обліковий запис — заблокувати.",
