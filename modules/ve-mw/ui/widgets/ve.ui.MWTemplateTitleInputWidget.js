@@ -69,7 +69,7 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 		// Adding the asterisk to emulate a prefix search behavior. It does not make sense in all
 		// cases though. We're limiting it to be add only of the term ends with a letter or numeric
 		// character.
-		// eslint-disable-next-line es-x/no-regexp-unicode-property-escapes, prefer-regex-literals
+		// eslint-disable-next-line prefer-regex-literals
 		const endsWithAlpha = new RegExp( '[\\p{L}\\p{N}]$', 'u' );
 		if ( endsWithAlpha.test( params.gsrsearch ) ) {
 			params.gsrsearch += '*';

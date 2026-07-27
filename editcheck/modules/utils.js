@@ -17,7 +17,6 @@ mw.editcheck.memoize = function ( handler ) {
 };
 
 mw.editcheck.fetchTimeout = function ( resource, options = {} ) {
-	// eslint-disable-next-line compat/compat
 	const abortController = window.AbortController ? new AbortController() :
 		{ signal: undefined, abort: () => {} };
 	const timeoutID = setTimeout( () => abortController.abort(), options.timeout || 6000 );
@@ -191,5 +190,5 @@ mw.editcheck.applyCase = function ( phrase, model, lang ) {
 
 // Match any lowercase letter, unless preceded by a letter that can have case (or a combining mark)
 // We must compile the RegExp at runtime because eslint does not understand \p yet
-// eslint-disable-next-line prefer-regex-literals, es-x/no-regexp-unicode-property-escapes, no-useless-escape
+// eslint-disable-next-line prefer-regex-literals, no-useless-escape
 mw.editcheck.applyCase.lowerFirst = new RegExp( '(^|[^\\p{Lu}\\p{Ll}\p{Lt}\\p{M}])(\\p{Ll})', 'gu' );

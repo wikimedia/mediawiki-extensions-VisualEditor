@@ -45,7 +45,6 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 
 	ve.init.target.on( 'virtualKeyboardChange', this.update.bind( this ) );
 
-	// eslint-disable-next-line compat/compat
 	this.observer = window.IntersectionObserver ? new IntersectionObserver(
 		( entries ) => {
 			entries.forEach( ( entry ) => {

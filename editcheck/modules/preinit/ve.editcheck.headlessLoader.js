@@ -340,7 +340,6 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 				true // includeSuggestions
 			)
 		) ).then( ( actionsByListener ) => {
-			// eslint-disable-next-line es-x/no-array-prototype-flat
 			const suggestions = actionsByListener.flat().map( ( action ) => serializeHeadlessAction( action, dmDoc ) );
 			const suggestionCounts = {};
 			for ( const s of suggestions ) {

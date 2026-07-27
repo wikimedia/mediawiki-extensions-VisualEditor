@@ -4,8 +4,6 @@
  * @copyright See AUTHORS.txt
  */
 
-/* eslint-disable mediawiki/no-storage */
-
 QUnit.module( 've.init.mw.Platform' );
 
 QUnit.test( 'formatNumber methods', ( assert ) => {

@@ -1131,6 +1131,7 @@
 
 			// Close any open jQuery.UI dialogs (e.g. WikiEditor's find and replace)
 			if ( $.fn.dialog ) {
+				// eslint-disable-next-line no-jquery/no-jquery-ui
 				$( '.ui-dialog-content' ).dialog( 'close' );
 			}
 
