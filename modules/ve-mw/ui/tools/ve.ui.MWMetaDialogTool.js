@@ -53,6 +53,18 @@ ve.ui.commandRegistry.register(
 		{ args: [ 'meta' ] }
 	)
 );
+// Not cmd+, / ctrl+, : that is 'subscript', and browsers reserve the unshifted
+// combination for their own preferences.
+ve.ui.triggerRegistry.register(
+	'meta', {
+		mac: new ve.ui.Trigger( 'cmd+shift+,' ),
+		pc: new ve.ui.Trigger( 'ctrl+shift+,' )
+	}
+);
+ve.ui.commandHelpRegistry.register( 'other', 'meta', {
+	trigger: 'meta',
+	label: OO.ui.deferMsg( 'visualeditor-meta-tool' )
+} );
 
 /**
  * MediaWiki UserInterface categories tool.
